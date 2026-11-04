@@ -5,9 +5,11 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
+#include "work/area_spad.h"
 #define SCRATCH_ROW_STRIDE 0x1C
 #define SCRATCH_ROW_OFFSET 0x00
 
+void             func_801F3C3C(s32 arg0);
 extern s8        D_80144EC0;
 extern u32       D_801F6C00;
 extern Callback  D_801FDD3C[];

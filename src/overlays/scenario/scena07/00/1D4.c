@@ -45,7 +45,13 @@ MATCH void func_801F6F8C(void) {
     FIELD(u8, temp_v0_5, 0x2u)   = (u8)(FIELD(u8, temp_v0_5, 0x2u) + 1);
 }
 
-INCLUDE_ASM(func_801F6FB0);
+MATCH void func_801F6FB0(void) {
+    func_801F3C3C(g_SpadWork->unk_10);
+    g_SpadWork->unk_10 += (g_FrameCount & 0xF) == 0;
+    if (g_SpadWork->unk_10 == 0) {
+        Actor_Clear();
+    }
+}
 
 MATCH void func_801F700C(void) {
     SYS_DISPATCH_TASK(D_801FDD50, 2, g_SpadWork);
