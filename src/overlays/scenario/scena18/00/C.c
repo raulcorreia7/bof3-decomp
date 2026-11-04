@@ -48,13 +48,7 @@ MATCH s32 func_801F6CFC(void) {
     return 0;
 }
 
-MATCH void func_801F6D04(void) {
-    EMI_LoaderStreamFamily(0, 3, 4, 0);
-    g_PartySize = 0;
-    func_801C187C(0);
-    func_801C187C(3);
-    func_801C187C(4);
-}
+#include "overlays/scenario/Scene_SetPartyRyuTeepoRei.h"
 
 MATCH void func_801F6D50(void) {
 }
