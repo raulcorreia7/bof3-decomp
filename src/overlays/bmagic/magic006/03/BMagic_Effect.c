@@ -79,7 +79,18 @@ MATCH void func_801F0064(void) {
 
 INCLUDE_ASM(func_801F0100);
 
-INCLUDE_ASM(func_801F020C);
+MATCH void func_801F020C(void) {
+    u8 counter;
+
+    if (g_FrameCount & 1) {
+        g_SpadWork->word_08.byte.timer_0A += 1;
+    }
+    counter                         = g_SpadWork->word_08.byte.unk_09 + 0x10;
+    g_SpadWork->word_08.byte.unk_09 = counter;
+    if ((counter & 0xFF) == 0x80) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountDownTimer.h"
 
