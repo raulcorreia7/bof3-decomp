@@ -12,7 +12,7 @@ segments:
       - [0x60, c, func_801F2C60]
       - [0xDC, c, func_801F2CDC]
       - [0x210, c, func_801F2E10]
-      - [0x230, c, func_801F2E30]
+      - [0x230, c, Area_DrawSpinTriangle]
       - [0x4D0, c, Area_InitSpin]
       - [0x5E8, c, func_801F31E8]
       - [0x62C, c, func_801F322C]

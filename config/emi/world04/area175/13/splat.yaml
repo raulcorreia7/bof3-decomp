@@ -21,7 +21,7 @@ segments:
       - [0x5C, c, func_801F2C5C]
       - [0xD8, c, func_801F2CD8]
       - [0x20C, c, func_801F2E0C]
-      - [0x22C, c, func_801F2E2C]
+      - [0x22C, c, Area_DrawSpinTriangle]
       - [0x4CC, c, Area_InitSpin]
       - [0x5E4, c, func_801F31E4]
       - [0x628, c, func_801F3228]
