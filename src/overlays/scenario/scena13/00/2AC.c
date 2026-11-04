@@ -38,7 +38,24 @@ MATCH void func_801F6FD0(void) {
 
 INCLUDE_ASM(func_801F6FF8);
 
-INCLUDE_ASM(func_801F70DC);
+MATCH void func_801F70DC(void) {
+    Actor* temp_s1;
+    Actor* temp_v1;
+    s32    var_s0;
+
+    temp_s1 = g_SpadWork;
+    var_s0  = 0;
+    do {
+        temp_v1    = &g_Actors[var_s0 & 0xFF];
+        g_SpadWork = temp_v1;
+        if ((temp_v1->flags_00 & 1) && (temp_v1->unk_06 == 6)) {
+            temp_v1->unk_29 = 5;
+            func_8014D290();
+        }
+        var_s0 += 1;
+    } while ((u32)(var_s0 & 0xFF) < 0x1EU);
+    g_SpadWork = temp_s1;
+}
 
 MATCH void func_801F7198(void) {
     SYS_DISPATCH_TASK(D_801FBEFC, 1, g_SpadWork);
