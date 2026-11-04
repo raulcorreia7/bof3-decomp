@@ -1,0 +1,20 @@
+/* Ends a turning step: begins the next one while the direction differs from
+ * the stored direction D_80145E98 and is within two steps of it or of its
+ * opposite, else stores the direction. One definition shared by the world
+ * area overlays; every change here must verify every member. */
+/* func_801F58E8 (area104), func_801F5E2C (area121) */
+MATCH void Area_FinishTurnStep(void) {
+    u8* heading;
+
+    heading = &D_80145E98;
+    if (g_SpadWork->direction_08 != *heading) {
+        if ((u8)Area_BeginTurnStep(g_SpadWork->direction_08, *heading) != 0) {
+            return;
+        }
+        if ((u8)Area_BeginTurnStep(g_SpadWork->direction_08 ^ 4, *heading) != 0) {
+            return;
+        }
+        *heading = g_SpadWork->direction_08;
+    }
+    AREA_TURN_SYNC();
+}

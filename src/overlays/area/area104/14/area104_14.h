@@ -29,14 +29,14 @@ void func_801F4E3C(void);
 void func_801F5254(void);
 void func_801F564C(void);
 void func_801F5738(void);
-s32  func_801F5988(s32 direction, s32 previous);
-void Area_CommitHeading(void);
+/* func_801F5988 */
+s32  Area_BeginTurnStep(s32 direction, s32 previous);
+void Area_FinishTurnStep(void);
 
-#define AREA_HEADING_BLOCKED func_801F5988
-#define AREA_HEADING_STEP    func_801F5738
+#define AREA_TURN_SYNC   func_801F5738
 
 /* The value of area update step in the shared Area_Update body. */
-#define AREA_UPDATE_STEP     Area_DrawHud
+#define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F6AF8[6];
 extern u16            g_GameAreaId;
