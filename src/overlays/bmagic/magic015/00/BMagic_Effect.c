@@ -12,7 +12,14 @@ MATCH void func_801EECA0(void) {
 
 INCLUDE_ASM(func_801EED0C);
 
-INCLUDE_ASM(func_801EF150);
+MATCH void func_801EF150(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        func_800AFC54();
+        func_800AEF98(4, 0);
+        BATTLE_ACTIVE_WORK->flags_00 &= 0xBF;
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 #include "shared/Effect_StartPlaying.h"
 
@@ -26,7 +33,14 @@ MATCH void func_801EF248(void) {
 
 INCLUDE_ASM(func_801EF2B4);
 
-INCLUDE_ASM(func_801EF594);
+MATCH void func_801EF594(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        func_800AFC54();
+        func_800AEF98(4, 0);
+        BATTLE_ACTIVE_WORK->flags_00 &= 0xBF;
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void Effect_StartPlaying_801EF610(void) {
     u16* flags;
@@ -42,7 +56,14 @@ MATCH void func_801EF644(void) {
 
 INCLUDE_ASM(func_801EF6B0);
 
-INCLUDE_ASM(func_801EF93C);
+MATCH void func_801EF93C(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        func_800AFC54();
+        BATTLE_ACTIVE_WORK->flags_00 &= 0xBF;
+        func_800AEF98(4, 0);
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void Effect_StartPlaying_801EF9B0(void) {
     u16* flags;
@@ -116,11 +137,26 @@ INCLUDE_ASM(func_801F0864);
 
 INCLUDE_ASM(func_801F0A94);
 
-INCLUDE_ASM(func_801F0B8C);
+MATCH void func_801F0B8C(void) {
+    g_SpadWork->unk_5D += 0x10;
+    g_SpadWork->unk_5E += 0x10;
+    g_SpadWork->unk_5F += 0x10;
+    if ((s8)g_SpadWork->unk_5D == -0x40) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801F0C30);
 
-INCLUDE_ASM(func_801F0D48);
+MATCH void func_801F0D48(void) {
+    g_SpadWork->unk_14                = 0x80;
+    g_SpadWork->unk_20                = -0x10;
+    g_SpadWork->unk_27                = BATTLE_ACTIVE_WORK->unk_27;
+    g_SpadWork->word_08.byte.unk_09   = 0x14;
+    g_SpadWork->word_08.byte.timer_0A = 7;
+    g_SpadWork->unk_02 += 1;
+}
 
 INCLUDE_ASM(func_801F0DB4);
 
