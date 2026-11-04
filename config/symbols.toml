@@ -326,6 +326,8 @@ Actor_Clear = { addr = 0x801F04F4, type = "func", source = "clears the five lead
 g_BMagicEffectFuncs = { addr = 0x801F066C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic060/00"]
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_TickOnTimerZero = { addr = 0x801F00D0, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
 g_BMagicEffectFuncs = { addr = 0x801F0BB0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
