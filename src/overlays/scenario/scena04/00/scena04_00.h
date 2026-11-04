@@ -25,11 +25,11 @@ extern Callback D_801FA180[];
 extern s32 D_80146954;
 extern s32 D_80146958;
 extern s32 D_8014695C;
-void func_801F7EC0();
-u8*  func_801F7FF8(void);
-void func_801F7FCC(void);
-void func_801F7084(s32* step);
-s8   func_801F9DF4();
+void       func_801F7EC0();
+u8*        func_801F7FF8(void);
+void       func_801F7FCC(void);
+void       func_801F7084(s32* step);
+s8         func_801F9DF4();
 
 extern u8 D_80144F5A;
 extern u8 D_80144F5B;

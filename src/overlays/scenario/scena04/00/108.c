@@ -98,9 +98,9 @@ MATCH void func_801F7B00(void) {
 }
 
 MATCH void func_801F7BC0(void) {
-    u8* row;
-    u8  i;
-    s32 angle;
+    u8*  row;
+    u8   i;
+    s32  angle;
     s32* spot;
 
     i    = 0;
