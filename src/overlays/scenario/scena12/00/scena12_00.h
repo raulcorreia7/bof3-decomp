@@ -17,5 +17,9 @@ extern SceneFunc D_801FD1EC[];
 extern Callback D_801FD178[];
 extern u8       D_80146874;
 extern u8       D_80146875;
+extern u8 D_801FD288[4];
+extern char D_801F6C04[];
+
+void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 
 #endif
