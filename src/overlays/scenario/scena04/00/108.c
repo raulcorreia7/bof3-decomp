@@ -97,7 +97,32 @@ MATCH void func_801F7B00(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7BC0);
+MATCH void func_801F7BC0(void) {
+    u8* row;
+    u8  i;
+    s32 angle;
+    s32* spot;
+
+    i    = 0;
+    spot = &D_80146954;
+    for (; i < 16; i++) {
+        row = func_801F7FF8();
+        if (row != NULL) {
+            FIELD(s32, row, 0x00) = spot[0];
+            angle                 = i << 8;
+            FIELD(s32, row, 0x04) = spot[1];
+            FIELD(s32, row, 0x08) = spot[2] >> 8;
+            FIELD(s32, row, 0x10) = rsin(angle) >> 2;
+            FIELD(s32, row, 0x14) = rcos(angle) >> 2;
+            FIELD(s32, row, 0x18) = 0;
+            FIELD(s8, row, 0x24)  = 0x40;
+            FIELD(s32, row, 0x20) = 0x800;
+            FIELD(s8, row, 0x25)  = 0x40;
+        }
+    }
+    func_801F7EC0();
+    FIELD(s32, SP_REF(u8*, 0x44), 0x0C) = 0x40;
+}
 
 INCLUDE_ASM(func_801F7CA8);
 
