@@ -41,7 +41,11 @@ ASSERT_SIZE(WorldMapPoint, 4);
 
 extern u8       D_80143F06;
 extern u16      D_801448EE;
+extern u8       D_80146865;
+extern u8       D_80146866;
 extern s8       D_80146867;
+extern u8       D_80146874;
+extern u8       D_80146875;
 /* D_801D4285 */
 extern u8       g_MasterStep;
 void            func_801F2C14(void);
