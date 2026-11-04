@@ -270,6 +270,9 @@ INCLUDE_ASM(func_801FDA6C);
 
 INCLUDE_ASM(func_801FE03C);
 
+/* Returns -1 unless scene flag 3 is set and flag 4 clear, else sets the script active, D_80146874 = 5 and returns 1.
+ * Three shapes (early returns, nested ifs, one result local) fail: retail loads the return 1 into the delay slot of
+ * Game_SetScriptActive, the C puts li v1,5 there (first differing instruction, +0x40: li v0,1). */
 INCLUDE_ASM(func_801FE0A4);
 
 MATCH void func_801FE10C(void) {

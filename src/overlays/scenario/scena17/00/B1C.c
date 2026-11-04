@@ -48,7 +48,20 @@ INCLUDE_ASM(func_801F7D08);
 
 INCLUDE_ASM(func_801F7DF4);
 
-INCLUDE_ASM(func_801F7E9C);
+MATCH void func_801F7E9C(void) {
+    u8* step;
+
+    if (g_AreaCameraMoving == 0) {
+        step            = &D_80146874;
+        g_AreaSceneMode = 2;
+        *step           = *step + 1;
+    } else {
+        g_AreaCameraHeight += 2;
+        if ((u32)g_AreaCameraHeight >= 0x541) {
+            g_AreaCameraHeight = 0x540;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801F7F04);
 
