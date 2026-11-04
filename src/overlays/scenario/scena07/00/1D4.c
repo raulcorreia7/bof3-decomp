@@ -65,7 +65,9 @@ INCLUDE_ASM(func_801F71C0);
 
 INCLUDE_ASM(func_801F724C);
 
-INCLUDE_ASM(func_801F72E0);
+MATCH void func_801F72E0(void) {
+    SCENA07_PANEL_FADE_STEP();
+}
 
 MATCH void func_801F7364(void) {
     Scene_AdvanceActorState();
@@ -155,7 +157,9 @@ INCLUDE_ASM(func_801F7FA4);
 
 INCLUDE_ASM(func_801F805C);
 
-INCLUDE_ASM(func_801F80F0);
+MATCH void func_801F80F0(void) {
+    SCENA07_PANEL_FADE_STEP();
+}
 
 MATCH void func_801F8174(void) {
     Scene_AdvanceActorState();
