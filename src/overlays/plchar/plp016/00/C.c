@@ -99,12 +99,7 @@ MATCH void func_801D001C(void) {
     SYS_DISPATCH_TASK(D_801D0684, 3, g_SpadWork);
 }
 
-MATCH void func_801D0060(void) {
-    func_801D0444();
-    Actor_RequestScript((g_SpadWork->direction_08 - 1) / 2 + 0x42);
-    g_SpadWork->unk_0A = 0xB;
-    g_SpadWork->unk_03 = 1;
-}
+INCLUDE_ASM(func_801D0060);
 
 INCLUDE_ASM(func_801D00CC);
 
