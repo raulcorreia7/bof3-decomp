@@ -41,7 +41,7 @@ segments:
       - [0x1960, c, Actor_MoveByVelocity]
       - [0x1A04, c, func_801F4604]
       - [0x1A48, c, func_801F4648]
-      - [0x1B78, c, func_801F4778]
+      - [0x1B78, c, Area_StepStreamSetDrawMode]
       - [0x1BA0, c, func_801F47A0]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data

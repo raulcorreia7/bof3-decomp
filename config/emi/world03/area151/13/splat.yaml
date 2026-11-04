@@ -40,7 +40,7 @@ segments:
       - [0x1894, c, func_801F4494]
       - [0x1938, c, func_801F4538]
       - [0x197C, c, func_801F457C]
-      - [0x1AAC, c, func_801F46AC]
+      - [0x1AAC, c, Area_StepStreamSetDrawMode]
       - [0x1AD4, c, func_801F46D4]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
