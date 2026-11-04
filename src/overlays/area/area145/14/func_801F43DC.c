@@ -15,10 +15,8 @@ MATCH s32 func_801F43DC(s32 arg0, s32 arg1) {
                 func_801BE1B0(3U);
                 return 1;
             }
-            /* Duplicate return node #13. Try simplifying control flow for better match */
             return 0;
         }
-        /* Duplicate return node #13. Try simplifying control flow for better match */
         return 0;
     }
     return 0;

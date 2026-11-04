@@ -1,12 +1,12 @@
 #include "area174_13.h"
 
 MATCH void func_801F2D68(void) {
-    s32 temp_v0;
+    s32 result;
 
     if (!(g_SpadWork->unk_09 & 7)) {
-        temp_v0 = func_801F2E88();
-        if (temp_v0 != 0) {
-            func_801F3378(temp_v0);
+        result = func_801F2E88();
+        if (result != 0) {
+            func_801F3378(result);
         }
     }
     g_SpadWork->unk_09 += 1;
