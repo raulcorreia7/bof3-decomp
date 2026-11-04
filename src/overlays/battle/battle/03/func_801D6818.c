@@ -15,15 +15,15 @@ MATCH void func_801D6818(void) {
                     ((g_BattlePartyBattlers[((u8*)&D_80140000)[0x62E5]].flags_128.value & 2u) != 0u)) {
                     g_BattlePartyBattlers[((u8*)&D_80140000)[0x62E5]].flags_124.value |= 0x2000u;
                     if (g_BattlePartyBattlers[((u8*)&D_80140000)[0x62E5]].stats.character_id == 4u) {
-                        slot                                = (u8)Battle_AllocEffect(0u, 0xBu);
-                        g_BattleEffects[slot].work_74.party = &g_BattlePartyBattlers[((u8*)&D_80140000)[0x62E5]];
+                        slot                               = (u8)Battle_AllocEffect(0u, 0xBu);
+                        g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[((u8*)&D_80140000)[0x62E5]];
                     } else {
                         for (index = 0u; index < BATTLE_PARTY_SLOT_COUNT; index++) {
                             offset = (u32)index * BATTLE_PARTY_STRIDE;
                             *(u32*)((s_BattleBattlerTemplateTails + offset)) &= ~1u;
                         }
-                        slot                                = (u8)Battle_AllocEffect(0u, 0xCu);
-                        g_BattleEffects[slot].work_74.party = &g_BattlePartyBattlers[((u8*)&D_80140000)[0x62E5]];
+                        slot                               = (u8)Battle_AllocEffect(0u, 0xCu);
+                        g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[((u8*)&D_80140000)[0x62E5]];
                     }
                     ((u8*)&D_80140000)[0x62E5] += 1u;
                     ((u8*)&D_80140000)[0x62E2] += 1u;

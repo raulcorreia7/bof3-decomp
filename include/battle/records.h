@@ -166,14 +166,14 @@ typedef union BattleWorkWord3C {
     } half;
 } BattleWorkWord3C;
 
-/* The record a queued slot points at: a party or enemy battler, another slot, or a payload address. */
-typedef union BattleWorkRef {
+/* What a queued effect acts on: a party or enemy battler, another effect, or a payload address. */
+typedef union BattleEffectTarget {
     struct PartyBattler* party;
     struct EnemyBattler* enemy;
     struct BattleEffect* effect;
     u8*                  bytes;
     u32                  address;
-} BattleWorkRef;
+} BattleEffectTarget;
 
 /* One queued action slot of the table at 0x801EC330 (stride 0x78).
  *
@@ -182,46 +182,46 @@ typedef union BattleWorkRef {
  * battle/battle/03 names the head fields, battle/battle/15 the tail, and the merged record
  * names the union of both. */
 typedef struct BattleEffect {
-    u8                unk_00;
-    u8                unk_01;
-    u8                unk_02;
-    u8                unk_03;
-    u8                unk_04;
-    u8                handler_index; /* +0x05 indexes a mode's handler table; Battle_AllocEffect stores it */
-    u8                unk_06;
-    u8                unk_07;
-    u8                unk_08;
-    u8                unk_09;
-    u8                unk_0A;
-    u8                unk_0B;
-    s32               unk_0C;
-    s32               unk_10;
-    u8                pad_14[4];
-    s32               unk_18;
-    s32               unk_1C;
-    u8                pad_20[7];
-    u8                unk_27;
-    u8                unk_28;
-    u8                unk_29; /* +0x29 func_801DE1D4 stores an action step here */
-    u8                pad_2A[4];
-    s16               unk_2E;
-    s16               unk_30;
-    u16               unk_32;
-    BattleFix32       unk_34;
-    BattleFix32       unk_38;
-    BattleWorkWord3C  word_3C; /* +0x3C the work record's word; bmagic stores its span halfword (+0x3E) */
-    u8                pad_40[8];
-    u8                unk_48;
-    u8                pad_49[2];
-    u8                unk_4B; /* +0x4B the panel cell index battle/battle/15 stores */
-    u8                pad_4C[0x10];
-    u8                unk_5C; /* +0x5C func_801DE1D4 clears it with the byte row below */
-    u8                unk_5D;
-    u8                unk_5E;
-    u8                unk_5F;
-    BattleTargetIndex word_60; /* +0x60 the target index: a word, a low halfword */
-    u8                pad_64[0x10];
-    BattleWorkRef     work_74; /* +0x74 the work record the slot points at */
+    u8                 unk_00;
+    u8                 unk_01;
+    u8                 unk_02;
+    u8                 unk_03;
+    u8                 unk_04;
+    u8                 handler_index; /* +0x05 indexes a mode's handler table; Battle_AllocEffect stores it */
+    u8                 unk_06;
+    u8                 unk_07;
+    u8                 unk_08;
+    u8                 unk_09;
+    u8                 unk_0A;
+    u8                 unk_0B;
+    s32                unk_0C;
+    s32                unk_10;
+    u8                 pad_14[4];
+    s32                unk_18;
+    s32                unk_1C;
+    u8                 pad_20[7];
+    u8                 unk_27;
+    u8                 unk_28;
+    u8                 unk_29; /* +0x29 func_801DE1D4 stores an action step here */
+    u8                 pad_2A[4];
+    s16                unk_2E;
+    s16                unk_30;
+    u16                unk_32;
+    BattleFix32        unk_34;
+    BattleFix32        unk_38;
+    BattleWorkWord3C   word_3C; /* +0x3C the work record's word; bmagic stores its span halfword (+0x3E) */
+    u8                 pad_40[8];
+    u8                 unk_48;
+    u8                 pad_49[2];
+    u8                 unk_4B; /* +0x4B the panel cell index battle/battle/15 stores */
+    u8                 pad_4C[0x10];
+    u8                 unk_5C; /* +0x5C func_801DE1D4 clears it with the byte row below */
+    u8                 unk_5D;
+    u8                 unk_5E;
+    u8                 unk_5F;
+    BattleTargetIndex  word_60; /* +0x60 the target index: a word, a low halfword */
+    u8                 pad_64[0x10];
+    BattleEffectTarget target; /* +0x74 the battler the effect acts on */
 } BattleEffect;
 
 ASSERT_SIZE(BattleEffect, 0x78);
@@ -236,7 +236,7 @@ ASSERT_OFFSET(BattleEffect, unk_29, 0x29);
 ASSERT_OFFSET(BattleEffect, unk_4B, 0x4B);
 ASSERT_OFFSET(BattleEffect, unk_5C, 0x5C);
 ASSERT_OFFSET(BattleEffect, word_60, 0x60);
-ASSERT_OFFSET(BattleEffect, work_74, 0x74);
+ASSERT_OFFSET(BattleEffect, target, 0x74);
 
 /* A flag word of a battle work record. The overlays test and set bits through
  * `value`; the ones that race the other overlay's tasks read `volatile_value`. */

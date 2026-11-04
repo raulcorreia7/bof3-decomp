@@ -16,10 +16,10 @@ MATCH void func_801E05EC(void) {
         if (battle->unk_120 & 0x10) {
             func_800AAC88((s16)battle->hp_change, work->slot);
         } else {
-            slot                                = Battle_AllocEffect(0U, 1U) & BYTE_MASK;
-            g_BattleEffects[slot].work_74.party = g_SpadWork;
-            g_BattleEffects[slot].unk_07        = 3;
-            g_BattleEffects[slot].unk_27        = 0;
+            slot                               = Battle_AllocEffect(0U, 1U) & BYTE_MASK;
+            g_BattleEffects[slot].target.party = g_SpadWork;
+            g_BattleEffects[slot].unk_07       = 3;
+            g_BattleEffects[slot].unk_27       = 0;
         }
         increment_work         = g_SpadWork;
         increment_work->unk_03 = increment_work->unk_03 + 1;

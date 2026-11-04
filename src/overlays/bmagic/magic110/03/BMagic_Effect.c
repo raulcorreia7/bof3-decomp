@@ -16,7 +16,7 @@ INCLUDE_ASM(func_801EEE68);
 
 INCLUDE_ASM(func_801EEEDC);
 
-/* Spawns six queued effects (Battle_AllocEffect(1, 0x10); unk_01 2, unk_0B the loop index, work_74 the work record) after func_801EF148 when unk_0B is 0, then steps. Tried do-while and for loops, s8 and u8 counters and a work local: matches up to
+/* Spawns six queued effects (Battle_AllocEffect(1, 0x10); unk_01 2, unk_0B the loop index, target the work record) after func_801EF148 when unk_0B is 0, then steps. Tried do-while and for loops, s8 and u8 counters and a work local: matches up to
  * the loop; first differing instruction lui a0,0x8014 retail against move s0,zero (retail schedules the counter clear after the selector load, before func_800A9610). */
 INCLUDE_ASM(func_801EEF80);
 

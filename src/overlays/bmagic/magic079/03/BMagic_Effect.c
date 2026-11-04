@@ -17,13 +17,13 @@ MATCH void func_801EEC5C(void) {
 
     g_SpadWork->word_08.byte.unk_0B = 0;
     for (i = 0; i < 4; i++) {
-        slot                                = Battle_AllocEffect(1, 0x2B) & BYTE_MASK;
-        work                                = g_SpadWork;
-        g_BattleEffects[slot].unk_01        = i;
-        g_BattleEffects[slot].unk_02        = 0;
-        g_BattleEffects[slot].unk_09        = 0x10;
-        g_BattleEffects[slot].work_74.party = work;
-        g_SpadWork->word_08.byte.unk_0B     = g_SpadWork->word_08.byte.unk_0B + 1;
+        slot                               = Battle_AllocEffect(1, 0x2B) & BYTE_MASK;
+        work                               = g_SpadWork;
+        g_BattleEffects[slot].unk_01       = i;
+        g_BattleEffects[slot].unk_02       = 0;
+        g_BattleEffects[slot].unk_09       = 0x10;
+        g_BattleEffects[slot].target.party = work;
+        g_SpadWork->word_08.byte.unk_0B    = g_SpadWork->word_08.byte.unk_0B + 1;
     }
     SND_QueueSelectionFx(0x100);
     g_SpadWork->step_01 = g_SpadWork->step_01 + 1;

@@ -17,16 +17,16 @@ NON_MATCHING void func_801E5E2C(void) {
     s8            offset;
 
     slot   = D_801EC2E0;
-    source = slot->work_74.party;
+    source = slot->target.party;
     kind   = source->slot;
     if (kind < 3) {
         slot->unk_34.half.hi =
             source->unk_2E.half + (s8)g_BattlePanelOffsets[(source->unk_08 * 2) + (source->unk_2C.half * 8)];
-        source = slot->work_74.party;
+        source = slot->target.party;
         offset = (g_BattlePanelOffsets + 1)[(source->unk_08 * 2) + (source->unk_2C.half * 8)];
     } else {
         slot->unk_34.half.hi = source->unk_2E.half + (s8)D_801EB712[(kind - 3) * 0x118];
-        source               = slot->work_74.party;
+        source               = slot->target.party;
         offset               = D_801EB713[(source->slot - 3) * 0x118];
     }
     slot->unk_38.half.hi = source->unk_30.half + offset;
@@ -44,7 +44,7 @@ loop:
             goto loop; /* back to the shorter divisor */
         }
     }
-    kind = slot->work_74.party->slot;
+    kind = slot->target.party->slot;
     if (kind < 3) {
         g_BattlePartyBattlers[kind].flags_124.value |= COMBATANT_FLAG_DAMAGE_NUMBER;
     } else {

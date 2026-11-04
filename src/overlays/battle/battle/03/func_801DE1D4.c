@@ -22,7 +22,7 @@ NON_MATCHING void func_801DE1D4(void) {
             }
             slot = Battle_AllocEffect(0, 7);
             memcpy(&g_BattleEffects[(u8)slot], &g_BattlePartyBattlers[index], 0x74);
-            g_BattleEffects[(u8)slot].work_74.party = &g_BattlePartyBattlers[index];
+            g_BattleEffects[(u8)slot].target.party  = &g_BattlePartyBattlers[index];
             g_SpadWork                              = &g_BattlePartyBattlers[index];
             g_BattleEffects[(u8)slot].handler_index = 7;
             g_BattleEffects[(u8)slot].unk_06        = 0;
@@ -42,7 +42,7 @@ NON_MATCHING void func_801DE1D4(void) {
             }
             slot = Battle_AllocEffect(0, 7);
             memcpy(&g_BattleEffects[(u8)slot], &ENEMY_COMBATANT(index), 0x74);
-            g_BattleEffects[(u8)slot].work_74.enemy = (EnemyBattler*)g_BattleEnemies + index;
+            g_BattleEffects[(u8)slot].target.enemy  = (EnemyBattler*)g_BattleEnemies + index;
             g_SpadWork                              = (PartyBattler*)(g_BattleEnemies + index * 0x118);
             g_BattleEffects[(u8)slot].handler_index = 7;
             g_BattleEffects[(u8)slot].unk_06        = 0;

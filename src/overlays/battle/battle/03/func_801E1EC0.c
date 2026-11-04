@@ -32,7 +32,7 @@ MATCH void func_801E1EC0(void) {
     g_BattleEffects[slot_id & BYTE_MASK].unk_03        = 0;
     g_BattleEffects[slot_id & BYTE_MASK].unk_04        = 0;
     g_BattleEffects[slot_id & BYTE_MASK].unk_0B        = (s8)slot_id;
-    g_BattleEffects[slot_id & BYTE_MASK].work_74.party = g_SpadWork;
+    g_BattleEffects[slot_id & BYTE_MASK].target.party  = g_SpadWork;
     g_SpadWork->flags_00 |= ACTOR_FLAG_HIDDEN;
     g_SpadWork->word_08.byte.unk_09   = 0x10;
     g_SpadWork->word_08.byte.timer_0A = 0x10;

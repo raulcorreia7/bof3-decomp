@@ -23,7 +23,7 @@ MATCH void func_801E12DC(void) {
     } else {
         slot = Battle_AllocEffect(0, 0xC) & BYTE_MASK;
     }
-    slot_work                           = g_SpadWork;
-    g_BattleEffects[slot].work_74.party = slot_work;
+    slot_work                          = g_SpadWork;
+    g_BattleEffects[slot].target.party = slot_work;
     slot_work->unk_04++;
 }
