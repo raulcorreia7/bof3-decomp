@@ -13,4 +13,6 @@ extern u8 D_801F43B8[];
 s32  func_801F36B0(void);
 void func_801F35B8(void);
 
+extern u16 D_801F4FD4;
+
 #endif
