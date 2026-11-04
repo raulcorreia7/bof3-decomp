@@ -24,7 +24,10 @@ MATCH void func_801F789C(void) {
 MATCH void func_801F78D8(void) {
 }
 
-INCLUDE_ASM(func_801F78E0);
+MATCH void func_801F78E0(void) {
+    SYS_DISPATCH_BYTE(D_801F9758, (s8)D_80146874);
+    func_801F8EF0();
+}
 
 INCLUDE_ASM(func_801F7924);
 
@@ -130,7 +133,10 @@ MATCH void func_801F7FF0(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8088);
+MATCH void func_801F8088(void) {
+    SYS_DISPATCH_BYTE(D_801F9798, (s8)D_80146874);
+    func_801F8EF0();
+}
 
 INCLUDE_ASM(func_801F80CC);
 
