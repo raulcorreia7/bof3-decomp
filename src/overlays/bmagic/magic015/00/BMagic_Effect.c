@@ -166,7 +166,15 @@ INCLUDE_ASM(func_801F0F2C);
 
 INCLUDE_ASM(func_801F1088);
 
-INCLUDE_ASM(func_801F1180);
+MATCH void func_801F1180(void) {
+    g_SpadWork->unk_5D += 0x10;
+    g_SpadWork->unk_5E += 0x10;
+    g_SpadWork->unk_5F += 0x10;
+    if ((s8)g_SpadWork->unk_5D == -0x40) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F1230(void) {
     func_801E5988();
