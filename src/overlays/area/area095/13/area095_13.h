@@ -9,4 +9,6 @@
 
 extern u8 D_801F3684[];
 
+void func_801F3450(Actor* actor);
+
 #endif
