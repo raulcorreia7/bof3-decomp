@@ -40,4 +40,6 @@ void                  Area_DrawGradientDiamond(s16 x, s16 y);
 
 void func_8015A944(void);
 
+void func_801F656C(void);
+
 #endif
