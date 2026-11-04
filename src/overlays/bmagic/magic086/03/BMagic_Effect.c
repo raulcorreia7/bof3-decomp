@@ -105,15 +105,7 @@ MATCH void func_801EF850(void) {
     }
 }
 
-MATCH void func_801EF8A0(void) {
-    u8 timer;
-
-    timer                           = g_SpadWork->word_08.byte.unk_0B - 1;
-    g_SpadWork->word_08.byte.unk_0B = timer;
-    if (timer == 0) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
-    }
-}
+#include "overlays/bmagic/Effect_CountDownTickerAndStep.h"
 
 INCLUDE_ASM(func_801EF8EC);
 
