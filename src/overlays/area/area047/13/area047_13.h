@@ -15,4 +15,10 @@ extern u8 D_801F39C8[];
 #define AREA_ROW_STRIDE      0x18
 #define AREA_ROW_FLAG_OFFSET 0x14
 
+void func_801F31F4(s32);
+
+void func_801F330C(void);
+
+void func_801F32C4(void);
+
 #endif
