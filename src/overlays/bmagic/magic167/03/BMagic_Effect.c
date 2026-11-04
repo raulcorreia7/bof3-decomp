@@ -8,7 +8,17 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC94);
 
-INCLUDE_ASM(func_801EEE88);
+MATCH void func_801EEE88(void) {
+    PartyBattler** selected;
+
+    if (--g_SpadWork->unk_09 == 0) {
+        selected           = &g_BattleSelectedActor;
+        GFX_FreePaletteFadeTarget(*selected);
+        g_SpadWork->unk_0A = GFX_AllocPaletteFade((u8*)*selected, 0, 0, 0, 1);
+        g_SpadWork->unk_09 = 8;
+        g_SpadWork->step_01++;
+    }
+}
 
 INCLUDE_ASM(func_801EEF38);
 
