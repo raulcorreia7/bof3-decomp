@@ -124,7 +124,13 @@ MATCH void func_801F7BC0(void) {
     FIELD(s32, SP_REF(u8*, 0x44), 0x0C) = 0x40;
 }
 
-INCLUDE_ASM(func_801F7CA8);
+MATCH void func_801F7CA8(void) {
+    func_801F7EC0();
+    g_SpadWork->unk_0C = g_SpadWork->unk_0C - 1;
+    if (g_SpadWork->unk_0C == 0) {
+        func_80196070();
+    }
+}
 
 INCLUDE_ASM(func_801F7CF0);
 

@@ -37,4 +37,6 @@ extern u8 D_80144F5C;
 extern u8 D_80144F5E;
 extern u8 D_80144F5F;
 
+void func_80196070(void);
+
 #endif
