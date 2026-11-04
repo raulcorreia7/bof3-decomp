@@ -266,7 +266,21 @@ MATCH void func_801FBB78(void) {
     Party_JoinMember(5);
 }
 
-INCLUDE_ASM(func_801FBBC4);
+MATCH void func_801FBBC4(void) {
+    u8 slot;
+
+    for (slot = 0; slot < 3; slot++) {
+        D_80144908[slot] = D_80144F5A[slot];
+        D_8014490B[slot] = D_80144F5D[slot];
+    }
+    for (slot = 0; slot < 3; slot++) {
+        func_801C1ABC(D_80144908[slot]);
+    }
+    EMI_LoaderStreamFamily(7, 4, 8, 0);
+    g_PartySize = 0;
+    Party_JoinMember(7);
+    func_801C1630();
+}
 
 MATCH void func_801FBC88(void) {
     EMI_LoaderStreamFamily(7U, 5U, 8U, 0U);
@@ -274,7 +288,22 @@ MATCH void func_801FBC88(void) {
     Party_JoinMember(7);
 }
 
-INCLUDE_ASM(func_801FBCC4);
+MATCH void func_801FBCC4(void) {
+    u8 ids[3];
+    u8 slot;
+
+    for (slot = 0; slot < 3; slot++) {
+        ids[slot] = D_80144908[slot];
+    }
+    EMI_LoaderStreamFamily(ids[0], ids[1], ids[2], 0);
+    g_PartySize = 0;
+    Party_JoinMember(ids[0]);
+    Party_JoinMember(ids[1]);
+    Party_JoinMember(ids[2]);
+    for (slot = 3; slot < 6; slot++) {
+        D_80144F5A[slot] = D_80144908[slot];
+    }
+}
 
 MATCH void func_801FBD84(void) {
     EMI_LoaderStreamFamily(7, 5, 8, 0);
@@ -285,7 +314,21 @@ MATCH void func_801FBD84(void) {
     func_801C1630();
 }
 
-INCLUDE_ASM(func_801FBDD8);
+MATCH void func_801FBDD8(void) {
+    u8 ids[3];
+    u8 slot;
+
+    for (slot = 0; slot < 3; slot++) {
+        ids[slot] = g_BattlePartyBattlers[slot].stats.character_id;
+    }
+    for (slot = 0; slot < 3; slot++) {
+        func_801C1ABC(ids[slot]);
+    }
+    EMI_LoaderStreamFamily(7, 4, 2, 0);
+    g_PartySize = 0;
+    Party_JoinMember(7);
+    func_801C1630();
+}
 
 MATCH void func_801FBE98(void) {
     Party_JoinMember(4);
