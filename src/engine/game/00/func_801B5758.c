@@ -10,8 +10,6 @@ MATCH s32 func_801B5758(void) {
             g_SpadWork->state_02 = 0;
             return 1;
         }
-        /* Duplicate return node #4. Try simplifying control flow for better match */
-        return 0;
     }
     return 0;
 }
