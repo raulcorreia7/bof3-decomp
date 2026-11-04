@@ -2261,6 +2261,7 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4674, type = "func", source = "calls
 
 ["emi/world00/area036/13"]
 Actor_RunAreaStep = { addr = 0x801F2C30, type = "func", source = "clears the work reset flag and hands the work pointer to the area step" }
+Area_CheckStepTrigger = { addr = 0x801F2C64, type = "func", source = "the per-game-area step-trigger check func_801A8728 dispatches in Area_IsStepBlocked's path; the scenario entry Scene_CheckStepTrigger fills the same slot" }
 Actor_SnapToGround = { addr = 0x801F2D5C, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
 
 ["emi/world00/area037/13"]
@@ -2505,6 +2506,7 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "calls func_8014D978,
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 Actor_RunAreaStep = { addr = 0x801F2D80, type = "func", source = "byte-identical to Actor_RunAreaStep at emi/world03/area143/13@0x801F3C40" }
+Area_CheckStepTrigger = { addr = 0x801F2DB4, type = "func", source = "the per-game-area step-trigger check func_801A8728 dispatches in Area_IsStepBlocked's path; the scenario entry Scene_CheckStepTrigger fills the same slot" }
 Actor_SnapToGround = { addr = 0x801F2EE4, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
 
 ["emi/world03/area117/13"]
