@@ -62,4 +62,6 @@ void func_801F55F0(s32);
 
 void Area_ProjectPoint(s32* pos, long* screen_xy);
 
+u8 func_8019601C();
+
 #endif
