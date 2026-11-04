@@ -7,11 +7,13 @@
 #include "overlays/scenario/scenario.h"
 
 extern u32       D_801F6C00;
+extern ScratchPad D_1F800000;
 extern Callback  D_801FE820[];
 extern Callback  D_801FE8F4[];
 extern Callback  D_801FE900[];
 extern SceneFunc D_801FE97C[];
 
 extern Callback D_801FE80C[];
+extern u8       D_801FE938[];
 
 #endif

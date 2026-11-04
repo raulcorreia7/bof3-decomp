@@ -69,7 +69,12 @@ INCLUDE_ASM(func_801F8C00);
 
 INCLUDE_ASM(func_801F95B8);
 
-INCLUDE_ASM(func_801F9FC4);
+MATCH void func_801F9FC4(void) {
+    D_1F800000.view.area.entity_counter = Actor_FindFree();
+    if (D_1F800000.view.area.entity_counter != 0xFF) {
+        func_801A4D54(D_801FE938);
+    }
+}
 
 INCLUDE_ASM(func_801FA010);
 
