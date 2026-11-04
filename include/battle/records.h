@@ -377,7 +377,9 @@ typedef struct EnemyBattler {
     u8                           unk_48; /* +0x48 cleared when the slot is armed */
     u8                           pad_49[0x2];
     u8                           unk_4B; /* +0x4B set to 0xFF when the slot is armed */
-    u8                           pad_4C[0x10];
+    u8                           pad_4C[0xC];
+    u16                          unk_58; /* +0x58 the halfword the boss end-of-battle setup copies to the spad record */
+    u16                          unk_5A; /* +0x5A the halfword the boss end-of-battle setup copies to the spad record */
     u8                           unk_5C; /* +0x5C cleared when the slot is armed */
     u8                           unk_5D; /* +0x5D cleared when the slot is armed */
     u8                           unk_5E; /* +0x5E cleared when the slot is armed */
@@ -448,6 +450,8 @@ ASSERT_OFFSET(EnemyBattler, unk_32, 0x32);
 ASSERT_OFFSET(EnemyBattler, word_3C, 0x3C);
 ASSERT_OFFSET(EnemyBattler, unk_48, 0x48);
 ASSERT_OFFSET(EnemyBattler, unk_4B, 0x4B);
+ASSERT_OFFSET(EnemyBattler, unk_58, 0x58);
+ASSERT_OFFSET(EnemyBattler, unk_5A, 0x5A);
 ASSERT_OFFSET(EnemyBattler, unk_5C, 0x5C);
 ASSERT_OFFSET(EnemyBattler, unk_5F, 0x5F);
 ASSERT_OFFSET(EnemyBattler, status_82, 0x82);
