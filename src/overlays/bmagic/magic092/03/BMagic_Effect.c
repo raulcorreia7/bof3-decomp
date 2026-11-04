@@ -27,14 +27,7 @@ INCLUDE_ASM(func_801EF0CC);
 
 INCLUDE_ASM(func_801EF1F0);
 
-MATCH void func_801EF350(void) {
-    PartyBattler* work;
-
-    work = g_SpadWork;
-    if (work->word_08.byte.unk_0B & 0x80) {
-        work->unk_02++;
-    }
-}
+#include "overlays/bmagic/Effect_StepOnOwnTickFlag.h"
 
 INCLUDE_ASM(func_801EF388);
 
