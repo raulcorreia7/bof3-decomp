@@ -804,6 +804,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFC2C, source = "the module dispatcher index
 ["emi/bmagic/magic225/03"]
 Effect_PlayOnZeroTick = { addr = 0x801EF278, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_CountUpAndStep = { addr = 0x801EF5D8, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
+BMagic_AllocEffect = { addr = 0x801F02D4, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801F0338, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
 g_BMagicEffectFuncs = { addr = 0x801F0388, source = "the module dispatcher indexes it with the shared spad step byte" }
 
