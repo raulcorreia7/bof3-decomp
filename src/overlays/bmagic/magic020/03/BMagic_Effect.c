@@ -41,7 +41,17 @@ INCLUDE_ASM(func_801EF3DC);
 
 INCLUDE_ASM(func_801EF498);
 
-INCLUDE_ASM(func_801EF518);
+MATCH void func_801EF518(void) {
+    PartyBattler** selected;
+
+    selected = &g_BattleSelectedActor;
+    func_800AF2B4(*selected, 0x60);
+    if (func_800AF66C(*selected, 0x20000)) {
+        g_SpadWork->unk_09 = func_800AFF98();
+        D_801EB4E0->unk_0B = 0xFF;
+        g_SpadWork->unk_02++;
+    }
+}
 
 MATCH void func_801EF5A4(void) {
     u8 timer;
