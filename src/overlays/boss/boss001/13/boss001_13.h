@@ -24,6 +24,8 @@ extern Callback     D_800C2270[];
  * include/battle/ram.h, which does not name this halfword yet. */
 extern volatile u16 D_801463BE;
 extern u8           D_800C2188;
+extern EnemyBattler D_801EB630[];
+void                func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode);
 extern u8           D_800C21A0;
 
 /* The three battle hooks the image installs; the addresses are in
