@@ -12,6 +12,7 @@ void Area_SetCellCode(s16 column, s16 row, u8 code);
 /* The game-overlay state bytes the cancel path resets. */
 
 extern u8 D_80144EA8[];
+extern u8 D_80144EA9;
 s32       func_801F2E78(void);
 
 extern u8 D_801F4970[];
