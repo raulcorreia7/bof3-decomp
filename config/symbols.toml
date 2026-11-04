@@ -2001,11 +2001,13 @@ Actor_FreePaletteFades = { addr = 0x801F7334, type = "func", source = "frees the
 Actor_FreePaletteFades_801F7A14 = { addr = 0x801F7A14, type = "func", source = "byte-identical to Actor_FreePaletteFades at emi/scenario/scena03/00@0x801F7334" }
 GFX_DrawShadedDisc = { addr = 0x801F8C04, type = "func", source = "fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade" }
 Scene_ShowMessage = { addr = 0x801FCC9C, type = "func", source = "starts the area message of the given index, switches the game state to 2 and sets the script-active flag; byte-equal to func_801F9FD0 of scena04" }
+Scene_RemoveNina = { addr = 0x801FCEFC, type = "func", source = "removes character 1 (CHAR_ID_NINA_YOUNG) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena04/00"]
 Scene_ShowMessage = { addr = 0x801F9FD0, type = "func", source = "starts the area message of the given index, switches the game state to 2 and sets the script-active flag; byte-equal to func_801FCC9C of scena03" }
 
 ["emi/scenario/scena05/00"]
+Scene_RemoveNina = { addr = 0x801FD508, type = "func", source = "removes character 1 (CHAR_ID_NINA_YOUNG) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveMomo = { addr = 0x801FD530, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemovePeco = { addr = 0x801FD558, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 

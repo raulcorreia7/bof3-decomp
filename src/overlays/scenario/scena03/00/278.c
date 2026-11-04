@@ -546,7 +546,4 @@ MATCH void func_801FCEDC(void) {
     Party_JoinMember(1);
 }
 
-MATCH void func_801FCEFC(void) {
-    func_801C1ABC(1);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_RemoveNina.h"
