@@ -8,7 +8,7 @@ MATCH void func_801F3CDC(void) {
     if (!(value & 3)) {
         Area_ClaimSpawnSlot();
     }
-    func_801F5308();
+    Area_StepSpawnSlots();
     func_801F5940();
     func_801F48E8(&g_SpadWork->unk_18, &g_SpadWork->x, 0x40);
     if (*g_ScriptVars == 0x18) {

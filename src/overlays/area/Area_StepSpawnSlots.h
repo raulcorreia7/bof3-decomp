@@ -1,6 +1,10 @@
-#include "area098_13.h"
-
-MATCH s32 func_801F5308(void) {
+/* Ages every active slot of the eight-slot spawn table at the work window:
+ * counts the life byte down, frees the slot at zero and draws it through the
+ * image's AREA_SPAWN_SLOT_DRAW. Returns whether any slot was active. One
+ * definition shared by the world area overlays; every change here must verify
+ * every member. */
+/* func_801F5308 (area098), func_801F3E7C (area188) */
+MATCH s32 Area_StepSpawnSlots(void) {
     MATRIX         camera;
     AreaSpawnSlot* slot;
     s32            active;
@@ -19,7 +23,7 @@ MATCH s32 func_801F5308(void) {
             if (life == 0) {
                 slot->active = 0;
             }
-            func_801F53BC(slot);
+            AREA_SPAWN_SLOT_DRAW(slot);
         }
         slot++;
     }

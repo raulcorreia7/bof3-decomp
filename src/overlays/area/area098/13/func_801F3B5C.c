@@ -9,7 +9,7 @@ MATCH void func_801F3B5C(void) {
         Area_ClaimSpawnSlot();
     }
     func_801F5940();
-    func_801F5308();
+    Area_StepSpawnSlots();
     g_SpadWork->unk_09 = 0x20;
     g_SpadWork->unk_01 += 1;
 }

@@ -39,7 +39,11 @@ extern u8       D_801F68A0;
 void Area_SetCellCode(s16 column, s16 row, u8 code);
 void Area_ProjectPoint(s32* pos, long* screen_xy);
 
-void func_801F3E7C(void);
+/* func_801F3E7C */
+s32  Area_StepSpawnSlots(void);
+void func_801F3F30(AreaSpawnSlot* slot);
+
+#define AREA_SPAWN_SLOT_DRAW func_801F3F30
 /* func_801F3DE0 */
 void Area_ClaimSpawnSlot(void);
 void func_801F44B4(void);

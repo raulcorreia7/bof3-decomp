@@ -36,8 +36,11 @@ extern u8       D_801F6514;
 void        Area_ProjectPoint(s32* pos, long* screen_xy);
 /* func_801F526C */
 extern void Area_ClaimSpawnSlot(void);
-extern s32  func_801F5308(void);
+/* func_801F5308 */
+extern s32  Area_StepSpawnSlots(void);
 extern void func_801F53BC(AreaSpawnSlot* slot);
+
+#define AREA_SPAWN_SLOT_DRAW func_801F53BC
 extern void func_801F5940(void);
 void        func_801F4D44(void);
 void        func_801F5050(u8 level);
