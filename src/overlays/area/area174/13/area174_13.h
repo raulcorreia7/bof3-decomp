@@ -23,4 +23,6 @@ extern u8   func_801F2EC4(void);
 extern void func_801F4B0C(void);
 extern void func_801F4C68(void);
 
+u8* func_801F2E88(void);
+
 #endif
