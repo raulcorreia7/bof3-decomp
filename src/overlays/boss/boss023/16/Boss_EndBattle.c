@@ -1,7 +1,3 @@
 #include "boss023_16.h"
 
-MATCH void Boss_EndBattle(void) {
-    func_800AC934(0);
-    func_800AC934(1);
-    func_800AC934(2);
-}
+#include "overlays/boss/Boss_EndBattle2.h"
