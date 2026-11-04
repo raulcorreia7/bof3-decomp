@@ -194,7 +194,24 @@ MATCH void func_801F8664(void) {
     func_801F8FAC(0xE0, 0xBE, 0x80, 1);
 }
 
-INCLUDE_ASM(func_801F8710);
+MATCH void func_801F8710(void) {
+    u8* state;
+    u8* bgm;
+
+    if (g_UiWindowEffectBusy == 0) {
+        bgm = &g_SndBgmId;
+        SND_StopSequence(g_SelectionCues[*bgm * 4], D_80181EBB[*bgm * 4]);
+        *bgm = GAME_NONE;
+        SND_SetBankLayout(0);
+        g_AreaDrawFlags = 0;
+        Message_StartAreaMessage(1);
+        g_GameStateIndex = 2;
+        state            = &D_80146874;
+        (*state)++;
+    }
+    func_801F8B10(0x4B0, 0x80);
+    func_801F8FAC(0xE0, 0xBE, 0x80, 1);
+}
 
 INCLUDE_ASM(func_801F87D0);
 
