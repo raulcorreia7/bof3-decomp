@@ -414,17 +414,17 @@ INCLUDE_ASM(func_801FD524);
 INCLUDE_ASM(func_801FD5A0);
 
 MATCH ActorSlot* func_801FD610(u8 arg0) {
-    ActorSlot* temp_a0;
-    s32        temp_v0;
+    ActorSlot* slot;
+    s32        index;
 
-    temp_v0 = func_8019601C() & 0xFF;
-    temp_a0 = &g_ActorSlots[temp_v0];
-    if (temp_v0 != 0xFF) {
-        temp_a0->flags_00 = 1;
-        temp_a0->type     = 0x49;
-        temp_a0->unk_01   = arg0;
+    index = func_8019601C() & 0xFF;
+    slot  = &g_ActorSlots[index];
+    if (index != 0xFF) {
+        slot->flags_00 = 1;
+        slot->type     = 0x49;
+        slot->unk_01   = arg0;
     }
-    return temp_a0;
+    return slot;
 }
 
 INCLUDE_ASM(func_801FD67C);
