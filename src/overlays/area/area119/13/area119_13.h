@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "work/actor.h"
+#include "world/area.h"
 #include "overlays/area/world03.h"
 #include "work/area_spad.h"
 #include <rand.h>
