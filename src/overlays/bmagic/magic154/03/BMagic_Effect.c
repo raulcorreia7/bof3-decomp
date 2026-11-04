@@ -22,7 +22,19 @@ INCLUDE_ASM(func_801EF104);
 
 INCLUDE_ASM(func_801EF1EC);
 
-INCLUDE_ASM(func_801EF380);
+MATCH void func_801EF380(void) {
+    PartyBattler* work;
+    u8            count;
+
+    work = g_SpadWork;
+    work->unk_40 += 0x4000;
+    count = work->unk_09 + 1;
+    work->unk_09 = count;
+    work->unk_44 = work->unk_44 + 0x8000;
+    if (count == 4) {
+        g_SpadWork->unk_02++;
+    }
+}
 
 INCLUDE_ASM(func_801EF3E4);
 
