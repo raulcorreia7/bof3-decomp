@@ -212,7 +212,7 @@ MATCH void func_801FE418(void) {
 
 INCLUDE_ASM(func_801FE438);
 
-#include "overlays/scenario/Scene_RebuildTrioParty.h"
+#include "overlays/scenario/Scene_RebuildRyuGarrParty.h"
 
 INCLUDE_ASM(func_801FE5B0);
 
@@ -220,4 +220,4 @@ INCLUDE_ASM(func_801FE5B0);
 
 INCLUDE_ASM(func_801FE63C);
 
-#include "overlays/scenario/Scene_StashPartyExceptSeven.h"
+#include "overlays/scenario/Scene_StashPartyExceptRyuAdult.h"

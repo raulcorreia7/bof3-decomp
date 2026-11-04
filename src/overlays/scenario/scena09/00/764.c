@@ -260,7 +260,7 @@ MATCH void func_801FDF10(void) {
     func_801C1630();
 }
 
-#include "overlays/scenario/Scene_RebuildTrioParty.h"
+#include "overlays/scenario/Scene_RebuildRyuGarrParty.h"
 
 MATCH void func_801FE014(void) {
     EMI_LoaderStreamFamily(7U, 4U, 8U, 0U);
@@ -315,7 +315,7 @@ MATCH void func_801FE1DC(void) {
 
 #include "overlays/scenario/Scene_RemoveAdultNina.h"
 
-#include "overlays/scenario/Scene_StashPartyExceptSeven.h"
+#include "overlays/scenario/Scene_StashPartyExceptRyuAdult.h"
 
 #include "overlays/scenario/Scene_RemoveMomo.h"
 
