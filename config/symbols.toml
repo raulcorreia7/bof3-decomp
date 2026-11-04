@@ -1931,6 +1931,7 @@ GFX_DrawShadedDisc = { addr = 0x801F8C04, type = "func", source = "fans 32 POLY_
 Scene_ShowMessage = { addr = 0x801FCC9C, type = "func", source = "starts the area message of the given index, switches the game state to 2 and sets the script-active flag; byte-equal to func_801F9FD0 of scena04" }
 
 ["emi/scenario/scena04/00"]
+Area_FindFreeWorkRow = { addr = 0x801F7FF8, type = "func", source = "returns the first row of 128 rows of 0x28 bytes in the area work window whose byte at +0x25 is zero, or NULL; the same scan as Area_FindFreeWorkRow in the area overlays" }
 Scene_ShowMessage = { addr = 0x801F9FD0, type = "func", source = "starts the area message of the given index, switches the game state to 2 and sets the script-active flag; byte-equal to func_801FCC9C of scena03" }
 
 ["emi/scenario/scena07/00"]
