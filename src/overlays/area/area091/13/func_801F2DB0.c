@@ -1,3 +1,20 @@
 #include "area091_13.h"
 
-INCLUDE_ASM(func_801F2DB0);
+MATCH void func_801F2DB0(void) {
+    if (*D_80144F5A != 6) {
+        if (*D_80144F5A != 3) {
+            g_CurrentActor->flags_74 &= 0xFE;
+            return;
+        }
+        goto block_4;
+    }
+block_4:
+    if (Party_CountItem(0, 0x57, 0) == 0) {
+        g_AreaSceneMode = 1;
+        g_CurrentActor->flags_74 &= 0xFE;
+        SND_PlayCue(0x201U);
+        return;
+    }
+    Game_SetScriptActive();
+    ((Actor*)g_SpadWork)->unk_04 += 1;
+}
