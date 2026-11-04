@@ -30,7 +30,19 @@ MATCH void func_801EEF80(void) {
 
 INCLUDE_ASM(func_801EF06C);
 
-INCLUDE_ASM(func_801EF0E8);
+MATCH void func_801EF0E8(void) {
+    u8 temp_a0;
+
+    temp_a0 = g_SpadWork->word_08.byte.unk_09;
+    if ((temp_a0 & 0xFF) == 0x10) {
+        SND_QueueSelectionFx(0x100);
+        g_SpadWork->unk_02 += 1;
+    } else {
+        g_SpadWork->word_08.byte.unk_09 = temp_a0 + 4;
+    }
+    func_801EF1DC();
+    func_8014DAEC();
+}
 
 #include "overlays/bmagic/Effect_LowerTickerStepOnReady.h"
 
