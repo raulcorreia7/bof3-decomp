@@ -63,7 +63,7 @@ MATCH void func_801CF488(void) {
 
 INCLUDE_ASM(func_801CF4CC);
 
-INCLUDE_ASM(func_801CF5E4);
+#include "overlays/plchar/Char_ClearModeIfSlotFree.h"
 
 MATCH void func_801CF650(void) {
     D_801CF710[g_SpadWork->unk_2C]();

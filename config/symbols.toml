@@ -1867,6 +1867,7 @@ Char_SpawnActor = { addr = 0x801CF640, type = "func", source = "claims a D_80143
 Char_ProbeFacingCell = { addr = 0x801CF724, type = "func", source = "the route-step obstacle probe func_801CF090 calls, two route vectors ahead and the 0xF2 map cells" }
 Char_StartTurn = { addr = 0x801CF89C, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript_801CF968 = { addr = 0x801CF968, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
+Char_ClearModeIfSlotFree = { addr = 0x801CFBC0, type = "func", source = "clears the panel mode byte once the actor slot at work byte +0x0B is free, then runs func_8014D978" }
 
 ["emi/plchar/plp27a/00"]
 Char_StartTurn = { addr = 0x801CE448, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
@@ -1918,6 +1919,7 @@ Char_SpawnActor = { addr = 0x801CF064, type = "func", source = "claims a D_80143
 Char_ProbeFacingCell = { addr = 0x801CF148, type = "func", source = "the route-step obstacle probe func_801CF090 calls, two route vectors ahead and the 0xF2 map cells" }
 Char_StartTurn_801CF2C0 = { addr = 0x801CF2C0, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CF38C = { addr = 0x801CF38C, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
+Char_ClearModeIfSlotFree = { addr = 0x801CF5E4, type = "func", source = "clears the panel mode byte once the actor slot at work byte +0x0B is free, then runs func_8014D978" }
 
 ["emi/plchar/plp567/00"]
 Char_StartTurn = { addr = 0x801CE448, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
@@ -1943,6 +1945,7 @@ Char_SpawnActor = { addr = 0x801CF444, type = "func", source = "claims a D_80143
 Char_ProbeFacingCell = { addr = 0x801CF528, type = "func", source = "the route-step obstacle probe func_801CF090 calls, two route vectors ahead and the 0xF2 map cells" }
 Char_StartTurn = { addr = 0x801CF6A0, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript_801CF76C = { addr = 0x801CF76C, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
+Char_ClearModeIfSlotFree = { addr = 0x801CF9C4, type = "func", source = "clears the panel mode byte once the actor slot at work byte +0x0B is free, then runs func_8014D978" }
 
 ["emi/plchar/plp678/00"]
 Char_StartTurn = { addr = 0x801CE448, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
@@ -1955,6 +1958,7 @@ Char_SpawnActor = { addr = 0x801CFEF0, type = "func", source = "claims a D_80143
 Char_ProbeFacingCell = { addr = 0x801CFFD4, type = "func", source = "the route-step obstacle probe func_801CF090 calls, two route vectors ahead and the 0xF2 map cells" }
 Char_StartTurn_801D014C = { addr = 0x801D014C, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801D0218 = { addr = 0x801D0218, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
+Char_ClearModeIfSlotFree = { addr = 0x801D0470, type = "func", source = "clears the panel mode byte once the actor slot at work byte +0x0B is free, then runs func_8014D978" }
 
 ["emi/scenario/sce10eff/00"]
 Scene_RunEffect = { addr = 0x801D0C10, type = "func", source = "SCE10EFF.EMI entry, runs the effect handler selected by the work byte" }
