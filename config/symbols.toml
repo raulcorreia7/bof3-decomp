@@ -2222,6 +2222,7 @@ Area_DrawHud = { addr = 0x801F3B00, type = "func", source = "queues the area scr
 Area_DrawGradientDiamond = { addr = 0x801F3ECC, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
 Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "moves the actor by the projected velocity when the tile is classified" }
+Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 
 ["emi/world00/area021/13"]
 Message_SetAnswerMessage = { addr = 0x801F2C6C, type = "func", source = "stores the message id the answer table D_801F33B4 holds for the menu choice D_801490C7 in g_MessageRequest" }
@@ -2297,6 +2298,7 @@ Area_DrawHud = { addr = 0x801F3B00, type = "func", source = "queues the area scr
 Area_DrawGradientDiamond = { addr = 0x801F3ECC, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
 Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "moves the actor by the projected velocity when the tile is classified" }
+Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 
 ["emi/world01/area049/13"]
 Area_FindFreeWorkRow = { addr = 0x801178C4, type = "func", source = "finds the first work-window row whose byte is zero or returns NULL" }
@@ -2497,6 +2499,7 @@ Area_DrawGradientDiamond = { addr = 0x801F3ED0, type = "func", source = "builds 
 Area_DrawHudBanner = { addr = 0x801F40C8, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
 Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
 Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "moves the actor by the projected velocity when the tile is classified" }
+Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 
 ["emi/world03/area116/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }

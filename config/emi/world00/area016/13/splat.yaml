@@ -48,7 +48,7 @@ segments:
       - [0x1928, c, Actor_MoveByVelocity]
       - [0x19CC, c, func_801F45CC]
       - [0x1A10, c, func_801F4610]
-      - [0x1B40, c, func_801F4740]
+      - [0x1B40, c, Area_StepStreamSetDrawMode]
       - [0x1B68, c, func_801F4768]
       - [0x217C, .data, D_801F4D7C]
       - [0x21A0, .data, D_801F4DA0_Data]
