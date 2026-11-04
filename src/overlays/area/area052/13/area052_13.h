@@ -16,4 +16,6 @@ extern u8 D_801F44B8[];
 s32       func_801F31C0();
 void      func_801F431C(void);
 
+void func_801F3C4C(s32 x, s32 y);
+
 #endif
