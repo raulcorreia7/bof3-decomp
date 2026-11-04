@@ -32,6 +32,7 @@ extern s8  D_801FE6E8[];
 void       func_801F81D8(s16 x, s16 y);
 void       func_801F83AC(s16* out);
 extern u8  D_80146865;
+extern u8  D_80146875;
 s16        func_801F326C(s32 message);
 s16        func_801F37AC(s32 message);
 

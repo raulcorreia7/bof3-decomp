@@ -106,7 +106,22 @@ MATCH void func_801F7900(void) {
     func_801F79C4();
 }
 
-INCLUDE_ASM(func_801F7920);
+MATCH void func_801F7920(void) {
+    Actor* work;
+    u8*    counter;
+
+    work = g_SpadWork;
+    if (work->tint.signed_bytes.unk_5D != 0) {
+        work->tint.signed_bytes.unk_5D -= 2;
+        g_SpadWork->tint.bytes.unk_5E -= 2;
+        g_SpadWork->tint.bytes.unk_5F -= 2;
+    } else {
+        counter  = &D_80146875;
+        *counter = *counter + 1;
+        work->unk_01 = 3;
+    }
+    func_801F79C4();
+}
 
 MATCH void func_801F79BC(void) {
 }
@@ -170,7 +185,23 @@ MATCH void func_801F84CC(void) {
     SCENA15_PARTY_SETUP();
 }
 
-INCLUDE_ASM(func_801F8548);
+MATCH void func_801F8548(void) {
+    Actor* work;
+    u8*    counter;
+
+    work = g_SpadWork;
+    if (work->tint.signed_bytes.unk_5D < 0x7C) {
+        work->tint.signed_bytes.unk_5D += 4;
+        g_SpadWork->tint.bytes.unk_5E += 4;
+        g_SpadWork->tint.bytes.unk_5F += 4;
+    } else {
+        counter  = g_ScriptVars;
+        *counter = *counter + 1;
+        work->unk_01 = 2;
+    }
+    func_801F79C4();
+    func_801F8704();
+}
 
 MATCH void func_801F85F0(void) {
     func_801F79C4();
