@@ -20,7 +20,16 @@ INCLUDE_ASM(func_801F6EA4);
 
 INCLUDE_ASM(func_801F6F2C);
 
-INCLUDE_ASM(func_801F6FF8);
+MATCH void func_801F6FF8(void) {
+    Actor* actor;
+
+    func_801F7084(&((Actor*)g_SpadWork)->unk_0C);
+    actor = (Actor*)g_SpadWork;
+    actor->unk_09--;
+    if (actor->unk_09 == 0) {
+        ((Actor*)g_SpadWork)->unk_01++;
+    }
+}
 
 MATCH void func_801F7064(void) {
     Actor_Clear();
