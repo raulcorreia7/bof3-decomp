@@ -38,6 +38,7 @@ extern void func_801F526C(void);
 extern void func_801F5308(void);
 extern void func_801F5940(void);
 void        func_801F4D44(void);
+void        func_801F5050(u8 level);
 void        Area_SetCellCode(s16 column, s16 row, u8 code);
 
 extern u8 D_80146865;

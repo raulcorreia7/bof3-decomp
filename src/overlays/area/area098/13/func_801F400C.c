@@ -1,4 +1,20 @@
 #include "area098_13.h"
 
-/* first differing instruction: lui v1,0x1f80 (retail) against lui v0 (candidate); the body is the s16 counter at +0x30 ramped to a fade level and the u16 counter at +0x2E that calls Actor_Clear at zero, but retail reads +0x30 with lhu and compares the incremented value as s16, a width the Actor.unk_30 member lacks (needs: type). Pre-increment, locals and a clamp local tried. */
-INCLUDE_ASM(func_801F400C);
+MATCH void func_801F400C(void) {
+    u16 level;
+    s32 fade;
+
+    level              = g_SpadWork->unk_30;
+    g_SpadWork->unk_30 = level + 1;
+    if ((s16)(level + 1) >= 0x5B) {
+        fade = (level - 0x59) * 4;
+        if ((s16)fade >= 0x100) {
+            fade = 0xFF;
+        }
+        func_801F5050(fade);
+    }
+    g_SpadWork->unk_2E -= 1;
+    if (g_SpadWork->unk_2E == 0) {
+        func_80196070();
+    }
+}
