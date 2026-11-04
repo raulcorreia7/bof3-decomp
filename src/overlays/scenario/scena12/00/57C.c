@@ -20,7 +20,21 @@ INCLUDE_ASM(func_801F71FC);
 
 INCLUDE_ASM(func_801F7240);
 
-INCLUDE_ASM(func_801F7348);
+/* The statements of func_801F7348 and func_801F7518, byte-identical twins: unless a message is pending, the entry state
+ * is 4 or scene flag 0x2E is set, queue script step 5 with D_80146875 = 0x19, raise the script-active flag and clear
+ * the work. Every change here must verify both members. */
+#define SCENA12_START_SCRIPT()                                                                  \
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE && g_GameEntryState != 4                       \
+        && SYS_TestFlag(g_SceneFlags, 0x2E) == 0) {                                             \
+        D_80146875 = 0x19;                                                                      \
+        D_80146874 = 5;                                                                         \
+        g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;                                                 \
+        Actor_Clear();                                                                          \
+    }
+
+MATCH void func_801F7348(void) {
+    SCENA12_START_SCRIPT();
+}
 
 MATCH void func_801F73CC(void) {
     SYS_DISPATCH_TASK(D_801FD190, 2, g_SpadWork);
@@ -28,7 +42,9 @@ MATCH void func_801F73CC(void) {
 
 INCLUDE_ASM(func_801F7410);
 
-INCLUDE_ASM(func_801F7518);
+MATCH void func_801F7518(void) {
+    SCENA12_START_SCRIPT();
+}
 
 INCLUDE_ASM(func_801F759C);
 
