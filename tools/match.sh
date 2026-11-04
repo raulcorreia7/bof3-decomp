@@ -10,6 +10,7 @@
 # instruction prints for retail and for the candidate. Exit 2: nothing was compared (the
 # message says why and the next step).
 #
+# MATCH_CAND_OUT=FILE also writes the candidate's bytes there (try_body.py counts differences).
 # Only .text is compared; `check-<image>` stays the acceptance gate. Method and limits:
 # docs/toolchain.md#matchsh.
 set -eu
@@ -221,6 +222,7 @@ fi
 take() { tail -c "+$(($2 + 1))" "$1" | head -c "$3"; }
 take "$payload" $((0x$foff)) "$size" >"$tmp/retail.bin"
 take "$tmp/text.bin" $((coff)) "$csize" >"$tmp/cand.bin"
+[ -z "${MATCH_CAND_OUT:-}" ] || cp "$tmp/cand.bin" "$MATCH_CAND_OUT"
 
 dis() { # <file> <address of byte 0>: one line per instruction
 	"$BIN/objdump" -D -b binary -m mips:3000 -EL --adjust-vma="$2" "$1" |

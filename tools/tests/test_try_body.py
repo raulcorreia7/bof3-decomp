@@ -89,3 +89,35 @@ def test_attempt_skips_what_it_cannot_replace(root: Path) -> None:
     assert try_body.attempt(root, func("C"), "x")[0] == "SKIP"
     (root / "src/a/b.c").write_text("int func_8001(void) { return 0; }\n")
     assert try_body.attempt(root, func(), "x") == ("SKIP", "already has a body")
+
+
+def test_a_failed_body_is_not_compiled_twice(
+    root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    calls = []
+
+    def fake(ref: str, r: Path) -> tuple[bool, str]:
+        calls.append(ref)
+        return False, "differs"
+
+    monkeypatch.setattr(try_body, "match", fake)
+    text = "void func_8001(void) {}\n"
+    first = try_body.trial(root, func(), text)
+    again = try_body.trial(root, func(), text + "\n  \n")
+    assert first[0] == "FAIL" and again[0] == "REPEAT" and len(calls) == 1
+    assert try_body.trial(root, func(), text, force=True)[0] == "FAIL"
+    assert len(calls) == 2
+    assert try_body.trial(root, func(), "void func_8001(void) { }\n")[0] == "FAIL"
+
+
+def test_the_differing_count_comes_from_the_candidate_bytes(
+    root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def fake(ref: str, r: Path) -> tuple[bool, str]:
+        (r / try_body.CAND).parent.mkdir(exist_ok=True)
+        (r / try_body.CAND).write_bytes((1).to_bytes(4, "little") * 2)
+        return False, "differs"
+
+    monkeypatch.setattr(try_body, "match", fake)
+    status, detail, diff = try_body.trial(root, func(), "void func_8001(void) {}\n")
+    assert (status, diff) == ("FAIL", 2) and detail.startswith("2 differing; ")
