@@ -1981,6 +1981,7 @@ g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the h
 Message_OpenAnswerMenu = { addr = 0x801F2C04, type = "func", source = "arms the selected or idle area request and the shop panel step" }
 
 ["emi/world00/area007/13"]
+Area_SubViewOffsetY10 = { addr = 0x801F2F20, type = "func", source = "subtracts 0xA from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_AddViewOffsetY10 = { addr = 0x801F2F48, type = "func", source = "adds 0xA to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetViewOffsetY = { addr = 0x801F2F70, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 
@@ -4003,6 +4004,7 @@ _svm_okof2 = { addr = 0x80190C5A, alias = true }
 
 ["emi/world03/area131/13"]
 Message_ClearOnCancel = { addr = 0x801F2C0C, type = "func", source = "byte-identical to Message_ClearOnCancel at emi/world03/area151/13@0x801F2C04" }
+Area_SubViewOffsetY10 = { addr = 0x801F2D78, type = "func", source = "subtracts 0xA from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_AddViewOffsetY10 = { addr = 0x801F2DA0, type = "func", source = "adds 0xA to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_SubViewOffsetY20 = { addr = 0x801F2DC8, type = "func", source = "subtracts 0x14 from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_AddViewOffsetY20 = { addr = 0x801F2DF0, type = "func", source = "adds 0x14 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
