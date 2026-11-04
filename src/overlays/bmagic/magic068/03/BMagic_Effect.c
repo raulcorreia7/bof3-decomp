@@ -21,7 +21,12 @@ MATCH void func_801EF44C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4A8);
+MATCH void func_801EF4A8(void) {
+    func_801EF55C();
+    if (g_InputPressed != 0) {
+        g_SpadWork->step_01 = 4;
+    }
+}
 
 INCLUDE_ASM(func_801EF4EC);
 
