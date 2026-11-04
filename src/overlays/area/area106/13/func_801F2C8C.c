@@ -1,9 +1,9 @@
 #include "area106_13.h"
 
 MATCH void func_801F2C8C(void) {
-    void* state;
+    Actor* actor;
 
-    state           = SP_REF(void*, 0x44);
+    actor           = g_SpadWork;
     g_AreaSceneMode = 2;
-    FIELD(u8, state, 0x2u)++;
+    actor->state_02++;
 }

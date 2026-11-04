@@ -56,11 +56,11 @@ MATCH void func_801F7BA8(void) {
 }
 
 MATCH void func_801F7BEC(void) {
-    void* temp_v1_5;
+    Actor* actor;
 
-    temp_v1_5                    = SP_REF(void*, 0x44);
-    FIELD(s16, temp_v1_5, 0x2Eu) = 0;
-    FIELD(u8, temp_v1_5, 0x1u)   = (u8)(FIELD(u8, temp_v1_5, 0x1u) + 1);
+    actor         = g_SpadWork;
+    actor->unk_2E = 0;
+    actor->unk_01 = actor->unk_01 + 1;
     SND_PlayCue(EMI_CUE_ID(2, 21));
 }
 

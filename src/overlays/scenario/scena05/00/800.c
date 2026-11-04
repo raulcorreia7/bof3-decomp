@@ -13,11 +13,11 @@ MATCH void func_801F7400(void) {
 }
 
 MATCH void func_801F743C(void) {
-    void* temp_v1_5;
+    Actor* actor;
 
-    temp_v1_5                   = SP_REF(void*, 0x44);
-    FIELD(s32, temp_v1_5, 0xCu) = 0;
-    FIELD(u8, temp_v1_5, 0x1u)  = (u8)(FIELD(u8, temp_v1_5, 0x1u) + 1);
+    actor         = g_SpadWork;
+    actor->unk_0C = 0;
+    actor->unk_01 = actor->unk_01 + 1;
 }
 
 INCLUDE_ASM(func_801F745C);
@@ -31,11 +31,11 @@ MATCH void func_801F74EC(void) {
 }
 
 MATCH void func_801F7530(void) {
-    void* temp_v0_5;
+    Actor* actor;
 
-    temp_v0_5                   = SP_REF(void*, 0x44);
-    FIELD(s32, temp_v0_5, 0xCu) = 0x1000;
-    FIELD(u8, temp_v0_5, 0x1u)  = (u8)(FIELD(u8, temp_v0_5, 0x1u) + 1);
+    actor         = g_SpadWork;
+    actor->unk_0C = 0x1000;
+    actor->unk_01 = actor->unk_01 + 1;
 }
 
 INCLUDE_ASM(func_801F7554);
