@@ -8,8 +8,9 @@
 #include "overlays/battle/battle.h"
 
 /* The ten script ids a phase starts, picked by the word at D_801463BE. */
-typedef struct Boss055Scripts {
+typedef union Boss055Scripts {
     s8 id[10];
+    u8 byte[10];
 } Boss055Scripts;
 
 ASSERT_SIZE(Boss055Scripts, 10);
