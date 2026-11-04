@@ -88,7 +88,11 @@ MATCH void func_801D13DC(void) {
     SYS_DISPATCH_TASK(D_801D2800, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801D1420);
+MATCH void func_801D1420(void) {
+    ((Actor*)g_SpadWork)->unk_09 = 0;
+    ((Actor*)g_SpadWork)->unk_06 = 0x10;
+    ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+}
 
 INCLUDE_ASM(func_801D1460);
 
