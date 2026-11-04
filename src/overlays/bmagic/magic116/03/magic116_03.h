@@ -12,4 +12,6 @@ extern u8             D_801EF2A8[];
  * request hand-off that follows. */
 u8 func_801EF118(void);
 
+extern BattleEffect* D_801EC2E0;
+
 #endif
