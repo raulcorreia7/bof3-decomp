@@ -306,10 +306,7 @@ MATCH void func_801FE2B4(void) {
     func_801C1630();
 }
 
-MATCH void func_801FE2E4(void) {
-    func_801C1ABC(2);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_RemoveGarr.h"
 
 #include "overlays/scenario/Scene_RemovePeco.h"
 

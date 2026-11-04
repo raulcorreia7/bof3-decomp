@@ -252,10 +252,7 @@ MATCH void func_801FADAC(void) {
 
 #include "overlays/scenario/Scene_RemoveRei.h"
 
-MATCH void func_801FAE20(void) {
-    func_801C1ABC(2);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_RemoveGarr.h"
 
 #include "overlays/scenario/Scene_RemovePeco.h"
 
