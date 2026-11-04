@@ -20,11 +20,26 @@ INCLUDE_ASM(func_801EEF18);
 
 INCLUDE_ASM(func_801EEFB4);
 
-INCLUDE_ASM(func_801EF10C);
+MATCH void func_801EF10C(void) {
+    g_SpadWork->unk_5D += 8;
+    g_SpadWork->unk_5E += 8;
+    g_SpadWork->unk_5F += 8;
+    if ((s8)g_SpadWork->unk_5D == 0) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
-INCLUDE_ASM(func_801EF1E0);
+MATCH void func_801EF1E0(void) {
+    g_SpadWork->unk_5D -= 8;
+    g_SpadWork->unk_5E -= 8;
+    g_SpadWork->unk_5F -= 8;
+    if ((s8)g_SpadWork->unk_5D == -0x80) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF284);
 
