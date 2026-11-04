@@ -1189,7 +1189,7 @@ void        func_80159A00(void);
 void        func_80159A20(void);
 void        func_80159A90(void);
 void        func_80159B38(void);
-extern void func_80159B9C(s32 x, s32 y, u8 w, u8 h);
+extern void func_80159B9C(s32 x, s32 y, u16 w, u16 h);
 void        func_80159FA0(s32 x, s32 y, u8 width, u8 height);
 extern void func_8015A098(void);
 extern void func_8015A170(void);

@@ -18,8 +18,7 @@ MATCH void func_80159510(void) {
     MenuPanelDrawTask* task;
     task = (MenuPanelDrawTask*)g_MenuPanelTaskCurrent;
     if (!(task->unk_0D & 1)) {
-        func_80159B9C((s16)task->x >> 4, (s16)task->unk_06 >> 4, (task->unk_10 >> 4) & BYTE_MASK,
-                      (task->unk_12 >> 4) & BYTE_MASK);
+        func_80159B9C((s16)task->x >> 4, (s16)task->unk_06 >> 4, (u8)(task->unk_10 >> 4), (u8)(task->unk_12 >> 4));
     }
     UI_UpdateLayout();
 }
