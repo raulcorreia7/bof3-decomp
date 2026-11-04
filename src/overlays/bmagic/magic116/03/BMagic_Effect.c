@@ -53,4 +53,14 @@ INCLUDE_ASM(func_801EF020);
 
 INCLUDE_ASM(func_801EF118);
 
-INCLUDE_ASM(func_801EF258);
+MATCH void func_801EF258(void) {
+    s32 result;
+    u8  i;
+
+    for (i = 0; i < 8; i++) {
+        result = func_801EEFB8();
+        if (result != 0) {
+            func_801EF020(result);
+        }
+    }
+}
