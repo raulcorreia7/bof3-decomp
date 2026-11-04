@@ -281,7 +281,13 @@ INCLUDE_ASM(func_801FD178);
 
 INCLUDE_ASM(func_801FD208);
 
-INCLUDE_ASM(func_801FD298);
+MATCH void func_801FD298(void) {
+    g_Characters[g_CharSlot[6]].unk_07 |= 1;
+    Party_BuildBattlers(0);
+    Party_JoinMember(5);
+    Party_JoinMember(1);
+    Party_JoinMember(6);
+}
 
 MATCH void func_801FD30C(void) {
     Party_JoinMember(1);
