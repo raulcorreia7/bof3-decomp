@@ -49,6 +49,22 @@ VARIANTS = {
 DEFINITION = re.compile(r"^\w[^;]*\)\s*\{\s*$")
 UNKNOWN_TYPE = re.compile(r"(?:^[ \t]*|[(,][ \t]*)\?(?=[\s*,)])", re.M)
 COMMENT = re.compile(r"\s*/\*.*?\*/\s*$")
+# The work cell at 0x1F800044 holds a pointer to the mode's work record (include/sys/scratchpad.h).
+SPAD_CELL = "g_SpadWork"
+SPAD_VIEW_NAME = (
+    "g_SpadView"  # the typed twin of the cell that the context declares for m2c
+)
+SPAD_HI = re.compile(r"\(0x1F800044 >> 16\)")
+SPAD_LO = re.compile(r"\(0x1F800044 & 0xFFFF\)")
+SPAD_CAST = re.compile(r"\(\(?(?:volatile\s+)?(\w+)\s*\*\)\s*g_SpadWork\b")
+SPAD_TYPES = (  # image prefix -> work record, for a context that never casts the cell
+    ("emi/battle/", "PartyBattler"),
+    ("emi/bmagic/", "PartyBattler"),
+    ("emi/boss/", "PartyBattler"),
+    ("emi/scenario/", "SceneBandEffect"),
+    ("emi/etc/commu", "CommunicationTaskSlot"),
+    ("emi/", "Actor"),
+)
 
 
 def asm_path(root: Path, func: Func) -> Path | None:
@@ -87,6 +103,50 @@ def to_body(draft: str, name: str) -> str | None:
     return "\n".join([*decls, "MATCH " + body]) + "\n"
 
 
+def spad_type(text: str, image: str) -> str | None:
+    """Return the work record type of the scratchpad cell for a context, or None.
+
+    The type is the one the context itself casts the cell to most often, else the image family's
+    record; a type the context does not define as a complete struct gives None.
+    """
+    views = SPAD_CAST.findall(text)
+    name = max(set(views), key=views.count) if views else None
+    name = name or next((t for p, t in SPAD_TYPES if image.startswith(p)), None)
+    if name and re.search(r"\}\s*" + name + r"\s*;", text):
+        return name
+    return None
+
+
+def typed_cell(text: str, image: str) -> str:
+    """Return the context with ``g_SpadView``, a pointer to the work record, declared last.
+
+    The cell itself stays `u8 *g_SpadWork`: the record may be defined after that declaration.
+    """
+    name = spad_type(text, image)
+    if name is None:
+        return text
+    return text.rstrip("\n") + f"\nextern {name} *{SPAD_VIEW_NAME};\n"
+
+
+def typed_asm(text: str) -> str:
+    """Return the assembly with the 0x1F800044 cell read as the symbol ``g_SpadView``."""
+    return SPAD_LO.sub(
+        f"%lo({SPAD_VIEW_NAME})", SPAD_HI.sub(f"%hi({SPAD_VIEW_NAME})", text)
+    )
+
+
+def wrap_cell(body: str, name: str, root: Path, func: Func) -> str:
+    """Spell the cell as `((T *)g_SpadWork)` in a body, unless the unit defines a view macro."""
+    macro = re.compile(rf"^[ \t]*#[ \t]*define[ \t]+{SPAD_CELL}\b", re.M)
+    files = try_body.closure(root, func.src or "", 6, True)
+    head, sep, rest = body.partition("MATCH ")
+    if any(macro.search(try_body.read(root, f)) for f in files):
+        return head + sep + re.sub(rf"\b{SPAD_VIEW_NAME}\b", SPAD_CELL, rest)
+    return (
+        head + sep + re.sub(rf"\b{SPAD_VIEW_NAME}\b", f"(({name} *){SPAD_CELL})", rest)
+    )
+
+
 def context(root: Path, func: Func, cache: dict[str, Path]) -> Path:
     """Return the preprocessed context of the function's image header, made once."""
     header = try_body.image_header(root, func.src or "") or func.src or ""
@@ -94,7 +154,8 @@ def context(root: Path, func: Func, cache: dict[str, Path]) -> Path:
         path = root / WORK / "ctx" / (header.replace("/", "+") + ".c")
         if not path.is_file():
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(m2ctx.preprocess(root / header, m2ctx.PSX_GCC), "utf-8")
+            text = m2ctx.preprocess(root / header, m2ctx.PSX_GCC)
+            path.write_text(typed_cell(text, func.image), "utf-8")
         cache[header] = path
     return cache[header]
 
@@ -104,6 +165,11 @@ def drafts(root: Path, func: Func, ctx: Path) -> dict[str, str]:
     asm = asm_path(root, func)
     out: dict[str, str] = {}
     seen: set[str] = set()
+    work = spad_type(ctx.read_text(encoding="utf-8"), func.image)
+    if work and asm:
+        asm = root / WORK / "asm" / func.image.replace("/", "+") / asm.name
+        asm.parent.mkdir(parents=True, exist_ok=True)
+        asm.write_text(typed_asm(asm_path(root, func).read_text("utf-8")), "utf-8")
     for variant, flags in VARIANTS.items():
         run = subprocess.run(
             [
@@ -124,6 +190,8 @@ def drafts(root: Path, func: Func, ctx: Path) -> dict[str, str]:
             check=False,
         )
         body = to_body(run.stdout, func.name) if run.returncode == 0 else None
+        if body and work and SPAD_VIEW_NAME in body:
+            body = wrap_cell(body, work, root, func)
         if body and (key := try_body.body_key(body)) not in seen:
             seen.add(key)
             out[variant] = body

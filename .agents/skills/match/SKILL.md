@@ -15,8 +15,9 @@ Input: `TARGET@0xADDRESS` from the task. Only `check-<image>` exit 0 accepts a c
    `bin/coddog match <target> <func>` ([coddog](../../../docs/toolchain.md#coddog)): a matched twin
    is reused and shared ([shared bodies](../../../docs/conventions.md#shared-bodies)), not lifted
    again; a twin in the same image is `<Name>_<ADDR>` with the group's statement macro as its body.
-2. Seed: read `asm/<target>/func_<ADDR>.s`, its callers and its prototypes
-   ([loop](../../../docs/matching.md#the-loop)). Draft in `work/<image>/<ADDR>/`.
+2. Seed: `tools/seed.py <target>@<func>` writes `work/<image>/<ADDR>/` (assembly, context, the best
+   m2c draft, twins, callees, callers; [tools](../../../tools/README.md#m2c-sweep)). Read it with
+   the function's prototypes ([loop](../../../docs/matching.md#the-loop)) and draft there.
 3. Measure: put the draft in the unit's `.c` and run `tools/match.sh <target> <func>`
    ([match.sh](../../../docs/toolchain.md#matchsh)): `match` or the first differing instruction in
    about 0.1 s. A refusal (exit 2) names the reason; for a function with a jump table or data use

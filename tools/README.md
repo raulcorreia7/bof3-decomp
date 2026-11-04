@@ -79,6 +79,10 @@ A line `@decl <declaration>` in the body file (an `extern`, a prototype or a `#d
 the body and added to the image header, the first include of the C file, unless an include of that
 file already declares the name. Output: `EXACT`, `FAIL` with the first difference, or `SKIP`.
 
+## m2c sweep
+
+`tools/m2c_sweep.py` drafts open functions with m2c, runs each draft through `tools/try_body.py` and keeps the exact ones; `tools/seed.py <target>@<func>` writes the same drafts, the twins, callers and callees into `work/<image>/<ADDR>/` for one function. Both give m2c a typed work cell: the context declares `g_SpadView`, a pointer to the mode's work record (the type the unit casts `g_SpadWork` to, else the image family's record), and the assembly reads `0x1F800044` through it, so drafts name members instead of `->unkN`. The draft spells the cell `g_SpadWork`, or `((T *)g_SpadWork)` where the unit defines no view macro. A context without a complete record keeps the raw cell. The `--help` text lists the options.
+
 ## Body generators
 
 `gen_body.py` lifts the assembly of a branch-free function into calls and stores and writes C from

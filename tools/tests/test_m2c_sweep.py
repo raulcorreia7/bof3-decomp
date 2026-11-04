@@ -51,3 +51,48 @@ def test_residual_lists_the_unmatched_fewest_differing_first(tmp_path: Path) -> 
         "a@0x1\t12",
         "d@0x4\tnone",
     ]
+
+
+CONTEXT = """extern u8* g_SpadWork;
+typedef struct PartyBattler { u8 flags_00; } PartyBattler;
+"""
+
+
+def test_spad_type_takes_the_context_cast_then_the_image_family() -> None:
+    cast = (
+        CONTEXT
+        + "void f(void) { ((Actor*)g_SpadWork)->x = 0; ((Actor*)g_SpadWork)->y = 0; }\n"
+    )
+    cast += "typedef struct Actor { int x; } Actor;\n"
+    assert m2c_sweep.spad_type(cast, "emi/world01/area001/13") == "Actor"
+    assert m2c_sweep.spad_type(CONTEXT, "emi/bmagic/magic001/00") == "PartyBattler"
+    assert m2c_sweep.spad_type(CONTEXT, "emi/scenario/scena01/00") is None
+    assert (
+        m2c_sweep.spad_type("extern u8* g_SpadWork;\n", "emi/bmagic/magic001/00")
+        is None
+    )
+
+
+def test_typed_cell_and_asm_name_the_cell_symbol() -> None:
+    text = m2c_sweep.typed_cell(CONTEXT, "emi/bmagic/magic001/00")
+    assert text.rstrip().endswith("extern PartyBattler *g_SpadView;")
+    assert m2c_sweep.typed_cell(CONTEXT, "emi/scenario/x") == CONTEXT
+    asm = "lui $a0, (0x1F800044 >> 16)\nlw $a0, (0x1F800044 & 0xFFFF)($a0)\n"
+    assert m2c_sweep.typed_asm(asm) == (
+        "lui $a0, %hi(g_SpadView)\nlw $a0, %lo(g_SpadView)($a0)\n"
+    )
+
+
+def test_wrap_cell_spells_the_view_unless_the_unit_defines_it(tmp_path: Path) -> None:
+    func = m2c_sweep.Func("i", "f", 0, 0, (), "", "ASM", "src/u.c")
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src/u.c").write_text('#include "u.h"\n', encoding="utf-8")
+    (tmp_path / "src/u.h").write_text("int x;\n", encoding="utf-8")
+    body = "@decl int a;\nMATCH void f(void) {\n    g_SpadView->flags_00 = 0;\n}\n"
+    out = m2c_sweep.wrap_cell(body, "PartyBattler", tmp_path, func)
+    assert "((PartyBattler *)g_SpadWork)->flags_00 = 0;" in out
+    (tmp_path / "src/u.h").write_text(
+        "#define g_SpadWork ((T*)g_SpadWork)\n", encoding="utf-8"
+    )
+    out = m2c_sweep.wrap_cell(body, "PartyBattler", tmp_path, func)
+    assert "    g_SpadWork->flags_00 = 0;" in out
