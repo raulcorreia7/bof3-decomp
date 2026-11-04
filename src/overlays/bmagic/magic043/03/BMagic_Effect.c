@@ -8,7 +8,20 @@ INCLUDE_ASM(func_801EEC18);
 
 INCLUDE_ASM(func_801EED30);
 
-INCLUDE_ASM(func_801EEEF0);
+MATCH void func_801EEEF0(void) {
+    PartyBattler* temp_s0;
+    u8            temp_v0;
+
+    temp_s0            = g_BattleSelectedActor;
+    temp_v0            = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        func_80196718(temp_s0);
+        g_SpadWork->unk_0A = func_8019651C(temp_s0, 0, 0, 0, 1);
+        g_SpadWork->unk_09 = 4;
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EEF98);
 
