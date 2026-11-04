@@ -21,6 +21,7 @@ extern SceneFunc D_801FE9C0[];
 
 s32  func_801F7E14(void);
 s32  func_801F8BF8(void);
+void func_801F8AE8(void);
 void func_801FE800(void);
 
 extern Callback D_801FE894[];
