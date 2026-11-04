@@ -146,7 +146,19 @@ INCLUDE_ASM(func_801FB868);
 
 INCLUDE_ASM(func_801FBC6C);
 
-INCLUDE_ASM(func_801FBF24);
+MATCH void func_801FBF24(void) {
+    u8* state;
+
+    state = &D_80146866;
+    if (*state == 3) {
+        Game_SetScriptActive();
+        return;
+    }
+    Game_ClearScriptActive();
+    D_80146867 = 0;
+    D_80146875 = 8;
+    *state += 1;
+}
 
 MATCH void func_801FBF94(u8 actor_id) {
     SCENA02_TRIGGER_NEAR_Y(actor_id, 0x18000, 0x50000);
