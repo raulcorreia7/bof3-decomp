@@ -1,4 +1,5 @@
 #include "magic062_03.h"
+#include "menu/clock.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -16,7 +17,16 @@ INCLUDE_ASM(func_801EEF68);
 
 INCLUDE_ASM(func_801EF0C0);
 
-INCLUDE_ASM(func_801EF2A0);
+MATCH void func_801EF2A0(void) {
+    u16* flags;
+
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        flags                        = &g_BattleState;
+        g_GameCelerityTimer.hours_00 = 5;
+        *flags |= BATTLE_STATE_EFFECT_PLAYING;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF2F0);
 
