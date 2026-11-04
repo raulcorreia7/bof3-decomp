@@ -83,13 +83,20 @@ def strength(params: str) -> int:
 
 
 def scan(rev: str) -> tuple[dict[str, set[tuple[str, str]]], dict[str, set[str]]]:
-    """Return the prototypes and externs of ``rev`` by name."""
+    """Return the prototypes and externs of ``rev`` by name.
+
+    An address name is unique only per image, so ``func_<ADDR>`` is keyed by its folder: the same
+    address in another image is another function, and a rename must not read as a lost type.
+    """
     protos: dict[str, set[tuple[str, str]]] = collections.defaultdict(set)
     externs: dict[str, set[str]] = collections.defaultdict(set)
-    for _path, text in sources(rev):
+    for path, text in sources(rev):
         for m in PROTO.finditer(text):
             if m.group(1).strip() not in ("return", "else"):
-                protos[m.group(2)].add((squash(m.group(1)), squash(m.group(3))))
+                name = m.group(2)
+                if name.startswith("func_"):
+                    name = f"{name}@{path.rpartition('/')[0]}"
+                protos[name].add((squash(m.group(1)), squash(m.group(3))))
         for m in EXTERN.finditer(text):
             externs[m.group(2)].add(squash(m.group(1)))
     return protos, externs

@@ -112,7 +112,8 @@ one function. Every edit is a lead: run `check` afterwards.
 ## Type loss
 
 `typeloss.py OLD NEW` lists prototypes and externs that carry fewer named types in `NEW` than in `OLD`
-(`WORK` is the working tree). Run it before a pull request that renames, moves or retypes.
+(`WORK` is the working tree). Run it before a pull request that renames, moves or retypes. An address
+name counts per folder, because the same `func_<ADDR>` in another image is another function.
 
 ## Quality
 

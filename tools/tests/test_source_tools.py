@@ -3,6 +3,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import pytest
+
 from bof3.source import ctext, decls, index
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -43,6 +45,22 @@ def test_type_loss_measures_how_much_type_a_prototype_names() -> None:
     assert typeloss.strength("void") == 0
     assert typeloss.lost_extern({"Unit *"}, {"void *"})
     assert not typeloss.lost_extern({"Unit *"}, {"Unit *"})
+
+
+def test_type_loss_keys_address_names_by_folder(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    old = {
+        "src/a/x.h": "void func_80000000(Unit* u);",
+        "src/b/y.h": "void func_80000000(void);",
+    }
+    new = {"src/b/y.h": "void func_80000000(void);"}
+    monkeypatch.setattr(
+        typeloss, "sources", lambda rev: iter((old if rev == "old" else new).items())
+    )
+    before, after = typeloss.scan("old")[0], typeloss.scan("new")[0]
+    assert set(before) == {"func_80000000@src/a", "func_80000000@src/b"}
+    assert set(after) == {"func_80000000@src/b"}
 
 
 def test_hex_literals_become_decimal_unless_they_are_bit_operands() -> None:
