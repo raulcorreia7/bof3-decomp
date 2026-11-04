@@ -153,6 +153,7 @@ BMagic_RunStep = { addr = 0x801EEC18, type = "func", source = "runs the callback
 Effect_StartPlaying = { addr = 0x801EEE30, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic001/00@0x801EEFA4" }
 
 ["emi/bmagic/magic003/03"]
+BMagic_AllocEffect = { addr = 0x801F09C4, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801F0A28, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
 g_BMagicEffectFuncs = { addr = 0x801F0B00, source = "the module dispatcher indexes it with the shared spad step byte" }
 
