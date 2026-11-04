@@ -42,9 +42,21 @@ INCLUDE_ASM(func_801EF4EC);
 
 INCLUDE_ASM(func_801EFA34);
 
-INCLUDE_ASM(func_801F02B0);
+MATCH void func_801F02B0(void) {
+    s32 i;
 
-INCLUDE_ASM(func_801F03A0);
+    BMAGIC_SHIFT_TRAIL(D_801F09B0)
+    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->unk_0B].x = g_SpadWork->unk_2E.half;
+    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->unk_0B].y = g_SpadWork->unk_30.half;
+}
+
+MATCH void func_801F03A0(void) {
+    s32 i;
+
+    BMAGIC_SHIFT_TRAIL(D_801F09B0)
+    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->unk_0B].x = -1;
+    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->unk_0B].y = -1;
+}
 
 INCLUDE_ASM(func_801F0488);
 

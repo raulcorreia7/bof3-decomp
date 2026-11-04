@@ -99,6 +99,26 @@
         func_801E5988();                                    \
     }
 
+/* One remembered position of an effect's trail; each trail holds
+ * BMAGIC_TRAIL_LENGTH of them, one trail per work byte unk_04. */
+typedef struct BmagicTrailPoint {
+    s16 x;
+    s16 y;
+} BmagicTrailPoint;
+
+#define BMAGIC_TRAIL_LENGTH 32
+
+/* Shift the points of the trail TRAIL[unk_04] from unk_0B up to unk_0A - 1 one
+ * place toward the end, freeing the point at unk_0B. A statement macro: the
+ * member declares s32 i. */
+#define BMAGIC_SHIFT_TRAIL(TRAIL)                                                \
+    i = g_SpadWork->unk_0A - 1;                                                  \
+    while (i >= g_SpadWork->unk_0B) {                                            \
+        (TRAIL)[g_SpadWork->unk_04][i + 1].x = (TRAIL)[g_SpadWork->unk_04][i].x; \
+        (TRAIL)[g_SpadWork->unk_04][i + 1].y = (TRAIL)[g_SpadWork->unk_04][i].y; \
+        i -= 1;                                                                  \
+    }
+
 /* Decrement the active effect ticker. */
 #define BMAGIC_TICK_EFFECT_WORK() (BATTLE_ACTIVE_WORK->unk_0B--)
 
