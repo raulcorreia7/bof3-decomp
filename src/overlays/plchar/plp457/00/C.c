@@ -41,17 +41,7 @@ INCLUDE_ASM(func_801CE870);
 
 INCLUDE_ASM(func_801CEA3C);
 
-MATCH void func_801CEB48(void) {
-    if (g_SpadWork->unk_07 != 0) {
-        if (func_8014DAEC() & 0xFF) {
-            Actor_RequestScript(g_SpadWork->direction_08);
-            g_SpadWork->unk_07 = 0;
-        }
-    } else if ((func_8014DAEC() & 0xFF) && (g_ActorSlots[g_SpadWork->unk_0B].flags_00 == 0)) {
-        g_SpadWork->unk_2B             = 0;
-        g_GameState->mode_12B.s8_value = 0;
-    }
-}
+#include "overlays/plchar/Char_PollScriptRequest.h"
 
 MATCH void func_801CEC1C(void) {
     SYS_DISPATCH_TASK(D_801CF924, 2, g_SpadWork);

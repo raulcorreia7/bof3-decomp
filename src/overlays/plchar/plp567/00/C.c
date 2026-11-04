@@ -27,7 +27,7 @@ INCLUDE_ASM(func_801CE654);
 
 INCLUDE_ASM(func_801CE820);
 
-INCLUDE_ASM(func_801CE92C);
+#include "overlays/plchar/Char_PollScriptRequest.h"
 
 MATCH void func_801CEA00(void) {
     SYS_DISPATCH_TASK(D_801D07A4, 2, g_SpadWork);
