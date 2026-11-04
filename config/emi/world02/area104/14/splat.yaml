@@ -56,7 +56,7 @@ segments:
       - [0x2A4C, c, func_801F564C]
       - [0x2B38, c, func_801F5738]
       - [0x2B8C, c, func_801F578C]
-      - [0x2CE8, c, func_801F58E8]
+      - [0x2CE8, c, Area_CommitHeading]
       - [0x2D88, c, func_801F5988]
       - [0x2EB4, c, func_801F5AB4]
       - [0x2F24, c, func_801F5B24]
