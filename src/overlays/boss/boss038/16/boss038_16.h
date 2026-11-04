@@ -15,7 +15,6 @@ extern Callback D_800C1C24[];
 extern Callback D_800C1C54[];
 extern Callback D_800C1C60[];
 extern Callback D_800C1C90[];
-extern s8 D_80146875;
 
 void func_800C19E4(s32 mode);
 
