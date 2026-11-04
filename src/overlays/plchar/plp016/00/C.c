@@ -78,7 +78,15 @@ INCLUDE_ASM(func_801CFB00);
 
 #include "overlays/plchar/Char_SelectScriptAndStep.h"
 
-INCLUDE_ASM(func_801CFC90);
+MATCH void func_801CFC90(void) {
+    Actor* work = g_SpadWork;
+
+    if ((g_ActorSlots[work->unk_06].flags_00 == 0 || g_ActorSlots[work->unk_06].unk_01 == 1) &&
+        g_AreaCameraMoving == 0) {
+        work->unk_06 = 0;
+        g_SpadWork->unk_03 -= 2;
+    }
+}
 
 INCLUDE_ASM(func_801CFD24);
 
@@ -95,7 +103,16 @@ INCLUDE_ASM(func_801D0060);
 
 INCLUDE_ASM(func_801D00CC);
 
-INCLUDE_ASM(func_801D0204);
+MATCH void func_801D0204(void) {
+    Actor* work = g_SpadWork;
+
+    if ((g_ActorSlots[work->unk_0B].flags_00 == 0 || g_ActorSlots[work->unk_0B].unk_01 == 1) &&
+        g_AreaCameraMoving == 0) {
+        work->unk_2B                   = 0;
+        g_GameState->mode_12B.s8_value = 0;
+    }
+    func_8014D978();
+}
 
 INCLUDE_ASM(func_801D02A0);
 
