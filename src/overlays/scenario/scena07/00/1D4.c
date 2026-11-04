@@ -288,7 +288,19 @@ MATCH void func_801F9DA8(void) {
     } while ((u32)(var_v1_6 & BYTE_MASK) < 0x40U);
 }
 
-INCLUDE_ASM(func_801F9DD4);
+MATCH u8* func_801F9DD4(void) {
+    u8* row;
+    u8  i;
+
+    row = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS + 0x95C);
+    for (i = 0; i < 64; i++) {
+        if (row[0] == 0) {
+            return row;
+        }
+        row += 0x20;
+    }
+    return NULL;
+}
 
 INCLUDE_ASM(func_801F9E10);
 
