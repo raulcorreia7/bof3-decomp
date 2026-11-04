@@ -105,12 +105,24 @@ addiu $sp, $sp, 0x18
 """.splitlines()
 
 
-def test_a_call_result_gets_a_local_and_a_table_element_reads_by_index() -> None:
+def test_a_call_result_read_once_by_the_next_statement_is_inlined() -> None:
     lifted = gen_body.lift(RESULT)
     assert gen_body.rets_used(lifted.events) == {0}
+    assert gen_body.rets_used(lifted.events, inline=True) == set()
+    assert gen_body.statements(lifted, ctx()) == ["g_Pick = g_Table[rand() & 15];"]
+
+
+def test_a_call_result_read_twice_gets_a_local() -> None:
+    lines = RESULT[:-3] + [
+        "lui $at, %hi(g_Other)",
+        "sb $v0, %lo(g_Other)($at)",
+    ]
+    lifted = gen_body.lift(lines)
+    assert gen_body.rets_used(lifted.events, inline=True) == {0}
     assert gen_body.statements(lifted, ctx()) == [
         "r0 = rand();",
         "g_Pick = g_Table[r0 & 15];",
+        "g_Other = r0 & 15;",
     ]
 
 

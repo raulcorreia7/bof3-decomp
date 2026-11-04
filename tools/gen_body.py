@@ -573,7 +573,7 @@ def render(e: tuple, ctx: dict) -> str:
     if kind == "m":
         return member(e[1], e[2], ctx)
     if kind == "ret":
-        return f"r{e[1]}"
+        return ctx.get("inline", {}).get(e[1], f"r{e[1]}")
     if kind == "gi":
         return element(e[1], e[2], e[3], ctx)
     if kind == "add":
@@ -679,22 +679,41 @@ def member(offset: int, width: int, ctx: dict) -> str:
 WIDTH = {"u8": 1, "u16": 2, "u32": 4}
 
 
-def rets_used(events: list[tuple]) -> set[int]:
-    """Return the ids of the calls whose result an event reads."""
-    found = set()
-    stack = [x for e in events for x in (e[2] if e[0] == "call" else e[2:])]
-    while stack:
-        e = stack.pop()
-        if isinstance(e, tuple) and e:
-            if e[0] == "ret":
-                found.add(e[1])
-            stack.extend(e[1:])
+def rets_used(events: list[tuple], inline: bool = False) -> set[int]:
+    """Return the ids of the calls whose result an event reads.
+
+    With ``inline`` the ones read once, by the next event, are left out: they need no local.
+    """
+    counts: collections.Counter = collections.Counter()
+    first: dict[int, int] = {}
+    for i, event in enumerate(events):
+        stack = list(event[2] if event[0] == "call" else event[2:])
+        while stack:
+            e = stack.pop()
+            if isinstance(e, tuple) and e:
+                if e[0] == "ret":
+                    counts[e[1]] += 1
+                    first.setdefault(e[1], i)
+                stack.extend(e[1:])
+    found = set(counts)
+    if inline:
+        found -= {
+            k
+            for k, n in counts.items()
+            if n == 1 and first[k] == call_at(events, k) + 1
+        }
     return found
+
+
+def call_at(events: list[tuple], ident: int) -> int:
+    """Return the position of the call with this id."""
+    return next(i for i, e in enumerate(events) if e[0] == "call" and e[3] == ident)
 
 
 def statements(lifted: Lift, ctx: dict) -> list[str]:
     """Write the events of a straight-line function as C statements."""
-    out, used = [], rets_used(lifted.events)
+    out, used = [], rets_used(lifted.events, inline=True)
+    ctx = {**ctx, "inline": {}}
     for e in lifted.events:
         if e[0] == "call":
             args = []
@@ -705,7 +724,12 @@ def statements(lifted: Lift, ctx: dict) -> list[str]:
                     break
                 args.append(render(a, ctx))
             call = f"{e[1]}({', '.join(args)});"
-            out.append(f"r{e[3]} = {call}" if e[3] in used else call)
+            if e[3] in used:
+                out.append(f"r{e[3]} = {call}")
+            elif e[3] in rets_used(lifted.events):
+                ctx["inline"][e[3]] = call.removesuffix(";")
+            else:
+                out.append(call)
             continue
         _, kind, target, value = e
         left = (
@@ -800,7 +824,7 @@ def body_for(f: Func, tree: Tree, names: Names) -> tuple[str, list[tuple[str, in
     if lifted.ret:
         kind = "s32"
         lines.append(f"return {render(lifted.ret, ctx)};")
-    used = sorted(rets_used(lifted.events))
+    used = sorted(rets_used(lifted.events, inline=True))
     lines = [f"s32 r{i};" for i in used] + ([""] if used else []) + lines
     body = "\n".join(f"    {x}" if x else "" for x in lines)
     return f"MATCH {kind} {f.name}(void) {{\n{body}\n}}", externs
