@@ -29,7 +29,14 @@ MATCH void func_801EF208(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF260);
+MATCH void func_801EF260(void) {
+    if ((u8) g_SpadWork->word_08.byte.unk_09 < 0xCU) {
+        func_801EF348();
+        g_SpadWork->word_08.byte.unk_09 += 4;
+        return;
+    }
+    g_SpadWork->unk_02 += 1;
+}
 
 INCLUDE_ASM(func_801EF2CC);
 
