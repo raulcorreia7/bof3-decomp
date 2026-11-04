@@ -289,6 +289,7 @@ BMagic_RunStep = { addr = 0x801EEC1C, type = "func", source = "runs the callback
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF9C, type = "func", source = "counts the effect timer down; at zero requests the target selector and advances the step" }
 Effect_PlayOnZeroTick = { addr = 0x801EF004, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_SetActorMatrix = { addr = 0x801F0110, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
+BMagic_AllocEffect = { addr = 0x801F0494, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801F04F8, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
 g_BMagicEffectFuncs = { addr = 0x801F0550, source = "the module dispatcher indexes it with the shared spad step byte" }
 
