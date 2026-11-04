@@ -1,3 +1,7 @@
 #include "area174_13.h"
 
-INCLUDE_ASM(func_801F4F28);
+MATCH void func_801F4F28(void) {
+    if (!EMI_LoaderIsReady()) {
+        g_ScriptState->cursor -= 2;
+    }
+}
