@@ -34,16 +34,16 @@ INCLUDE_ASM(func_801EF43C);
 INCLUDE_ASM(func_801EF4A8);
 
 MATCH void func_801EF534(void) {
-    u8 temp_v0;
-    u8 temp_v1;
+    u8 value;
+    u8 value2;
 
     if (func_8014DAEC() & 0xFF) {
         if (g_BattleTargetSelector & 0x40) {
-            temp_v1                    = g_SpadWork->unk_0B;
-            D_801EB630[temp_v1].unk_00 = D_801EB630[temp_v1].unk_00 & 0xBF;
+            value2                    = g_SpadWork->unk_0B;
+            D_801EB630[value2].unk_00 = D_801EB630[value2].unk_00 & 0xBF;
         } else {
-            temp_v0                                 = g_SpadWork->unk_0B;
-            g_BattlePartyBattlers[temp_v0].flags_00 = g_BattlePartyBattlers[temp_v0].flags_00 & 0xBF;
+            value                                 = g_SpadWork->unk_0B;
+            g_BattlePartyBattlers[value].flags_00 = g_BattlePartyBattlers[value].flags_00 & 0xBF;
         }
         g_SpadWork->unk_02 += 1;
     }

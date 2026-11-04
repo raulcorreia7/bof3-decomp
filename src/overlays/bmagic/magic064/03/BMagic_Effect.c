@@ -21,17 +21,17 @@ MATCH void func_801EECFC(void) {
 INCLUDE_ASM(func_801EED7C);
 
 MATCH void func_801EEE1C(void) {
-    PartyBattler* temp_s0;
+    PartyBattler* battler;
 
-    temp_s0    = g_SpadWork;
+    battler    = g_SpadWork;
     g_SpadWork = &g_BattlePartyBattlers[g_BattleActingBattler];
     if (!(func_8014DAEC() & 0xFF)) {
-        g_SpadWork      = temp_s0;
-        temp_s0->unk_09 = 0x10;
+        g_SpadWork      = battler;
+        battler->unk_09 = 0x10;
         return;
     }
-    g_SpadWork = temp_s0;
-    temp_s0->unk_02 += 1;
+    g_SpadWork = battler;
+    battler->unk_02 += 1;
 }
 
 INCLUDE_ASM(func_801EEEA8);
@@ -49,44 +49,44 @@ MATCH void func_801EF29C(void) {
 }
 
 MATCH void func_801EF2A4(void) {
-    PartyBattler* temp_s1;
-    u32           var_a0;
+    PartyBattler* battler;
+    u32           value;
 
-    temp_s1    = g_SpadWork;
+    battler    = g_SpadWork;
     g_SpadWork = &g_BattlePartyBattlers[g_BattleActingBattler];
-    func_801F0EEC(1, 2, (0x80 - temp_s1->unk_09) & 0xFF);
-    func_801F0EEC(0, 1, (0x80 - temp_s1->unk_09) & 0xFF);
-    func_801F0EEC(3, 2, temp_s1->unk_09);
-    func_801F0EEC(2, 1, temp_s1->unk_09);
-    g_SpadWork = temp_s1;
+    func_801F0EEC(1, 2, (0x80 - battler->unk_09) & 0xFF);
+    func_801F0EEC(0, 1, (0x80 - battler->unk_09) & 0xFF);
+    func_801F0EEC(3, 2, battler->unk_09);
+    func_801F0EEC(2, 1, battler->unk_09);
+    g_SpadWork = battler;
     if (D_801EB4E0->unk_2C.half == 0) {
-        var_a0 = 0x242;
+        value = 0x242;
         if ((u8)D_801EB4E0->unk_08 < 2U) {
-            var_a0 = 0x240;
+            value = 0x240;
         }
     } else {
-        var_a0 = 0x243;
+        value = 0x243;
         if ((u8)D_801EB4E0->unk_08 < 2U) {
-            var_a0 = 0x241;
+            value = 0x241;
         }
     }
-    EMI_LoaderStreamInitSlot(var_a0);
+    EMI_LoaderStreamInitSlot(value);
     g_SpadWork->unk_02 += 1;
 }
 
 INCLUDE_ASM(func_801EF3C8);
 
 MATCH void func_801EF570(void) {
-    PartyBattler* temp_s0;
+    PartyBattler* battler;
 
-    temp_s0    = g_SpadWork;
+    battler    = g_SpadWork;
     g_SpadWork = &g_BattlePartyBattlers[g_BattleActingBattler];
     if (!(func_8014DAEC() & 0xFF)) {
-        g_SpadWork = temp_s0;
+        g_SpadWork = battler;
         return;
     }
-    g_SpadWork = temp_s0;
-    temp_s0->unk_02 += 1;
+    g_SpadWork = battler;
+    battler->unk_02 += 1;
 }
 
 INCLUDE_ASM(func_801EF5FC);

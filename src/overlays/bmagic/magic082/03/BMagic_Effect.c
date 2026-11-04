@@ -9,15 +9,15 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC94);
 
 MATCH void func_801EEF0C(void) {
-    PartyBattler* temp_s0;
-    u8            temp_v0;
+    PartyBattler* battler;
+    u8            value;
 
-    temp_s0            = g_BattleSelectedActor;
-    temp_v0            = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
-        func_80196718(temp_s0);
-        g_SpadWork->unk_0A = func_8019651C(temp_s0, 0, 0, 0, 1);
+    battler            = g_BattleSelectedActor;
+    value              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = value;
+    if (!(value & 0xFF)) {
+        func_80196718(battler);
+        g_SpadWork->unk_0A = func_8019651C(battler, 0, 0, 0, 1);
         g_SpadWork->unk_09 = 8;
         g_SpadWork->step_01 += 1;
     }
@@ -72,32 +72,32 @@ INCLUDE_ASM(func_801EFEF4);
 INCLUDE_ASM(func_801EFFE8);
 
 MATCH void func_801F00DC(void) {
-    s32 temp_v0;
-    s32 var_a0;
-    u8  temp_v0_2;
+    s32 value;
+    s32 value2;
+    u8  value3;
 
     func_800AF764();
     if ((g_SpadWork->unk_0C == 4) && ((u8)g_SpadWork->unk_0A < 5U)) {
-        var_a0 = (rand() & 3) | 0x40;
+        value2 = (rand() & 3) | 0x40;
     } else {
-        var_a0 = (rand() & 3) | 0x18;
+        value2 = (rand() & 3) | 0x18;
     }
-    func_801F0A84(var_a0);
+    func_801F0A84(value2);
     Effect_SetActorMatrix();
     func_801F03E0();
     PopMatrix();
     if (g_SpadWork->unk_0C < 4) {
-        temp_v0            = g_SpadWork->unk_10 + 1;
-        g_SpadWork->unk_10 = temp_v0;
-        if (!(temp_v0 & 7)) {
+        value              = g_SpadWork->unk_10 + 1;
+        g_SpadWork->unk_10 = value;
+        if (!(value & 7)) {
             g_SpadWork->unk_0C += 1;
         }
     }
     g_SpadWork->unk_09 += g_SpadWork->unk_0C;
     if (g_SpadWork->unk_0C == 4) {
-        temp_v0_2          = g_SpadWork->unk_0A - 1;
-        g_SpadWork->unk_0A = temp_v0_2;
-        if (!(temp_v0_2 & 0xFF)) {
+        value3             = g_SpadWork->unk_0A - 1;
+        g_SpadWork->unk_0A = value3;
+        if (!(value3 & 0xFF)) {
             if (g_SpadWork->unk_0B == 0) {
                 SND_QueueSelectionFx(0x101);
             }
