@@ -123,7 +123,7 @@ MATCH void func_801F05F4(void) {
 MATCH void Effect_TickOnTimerZero_801F0684(void) {
     PartyBattler* work;
 
-    BMAGIC_TICK_ON_TIMER_ZERO();
+    BMAGIC_TICK_ON_TIMER_ZERO(EFFECT_TIMER_TICK);
 }
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"

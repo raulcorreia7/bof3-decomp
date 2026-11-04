@@ -5,6 +5,9 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* The effect timer drops by 2 per tick. */
+#define EFFECT_TIMER_TICK 2
+
 void func_801EEDD8(void);
 
 #endif
