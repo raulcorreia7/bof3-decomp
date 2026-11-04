@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x0, .data, D_801F2C00]
-      - [0x4, .rodata, func_801F31FC]
+      - [0x4, .rodata, Message_SetAnswerMessage]
   # Placement: a source shared with the earlier segment must claim its sections first.
   - name: main
     type: code
@@ -44,7 +44,7 @@ segments:
       - [0x564, c, func_801F3164]
       - [0x588, c, func_801F3188]
       - [0x5D4, c, func_801F31D4]
-      - [0x5FC, c, func_801F31FC]
+      - [0x5FC, c, Message_SetAnswerMessage]
       - [0x660, c, func_801F3260]
       - [0x6D8, c, func_801F32D8]
       - [0x728, c, func_801F3328]
