@@ -49,7 +49,7 @@ segments:
       - [0x2574, c, func_801F5174]
       - [0x27F0, c, func_801F53F0]
       - [0x2A0C, c, func_801F560C]
-      - [0x2AB0, c, func_801F56B0]
+      - [0x2AB0, c, Area_FindTaggedPartySlot]
       - [0x2B38, c, func_801F5738]
       - [0x2B78, c, func_801F5778]
       - [0x2BB4, c, func_801F57B4]
