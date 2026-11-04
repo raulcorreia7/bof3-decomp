@@ -22,16 +22,7 @@ MATCH void func_801CE610(void) {
 
 INCLUDE_ASM(func_801CE654);
 
-MATCH void func_801CE83C(void) {
-    if (g_SpadWork->unk_09 == 0) {
-        g_GameState->mode_12B.s8_value = 0;
-        g_GameFlags &= ~0x1000;
-    } else {
-        g_SpadWork->unk_09--;
-        func_801B0DFC();
-    }
-    func_8014D978();
-}
+#include "overlays/plchar/Char_TickPauseTimer.h"
 
 INCLUDE_ASM(func_801CE8AC);
 
