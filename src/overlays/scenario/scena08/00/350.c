@@ -67,7 +67,14 @@ MATCH void func_801F796C(void) {
     SYS_DISPATCH_TASK(D_801FE8D8, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801F79B0);
+MATCH void func_801F79B0(void) {
+    Actor* work;
+
+    func_801F8AE8();
+    work           = (Actor*)g_SpadWork;
+    work->unk_5A   = 0x40;
+    work->state_02 = work->state_02 + 1;
+}
 
 INCLUDE_ASM(func_801F79EC);
 
@@ -87,7 +94,16 @@ INCLUDE_ASM(func_801F7C08);
 
 INCLUDE_ASM(func_801F7C98);
 
-INCLUDE_ASM(func_801F7CF8);
+MATCH void func_801F7CF8(void) {
+    u8 timer;
+
+    timer                        = ((Actor*)g_SpadWork)->unk_09 - 1;
+    ((Actor*)g_SpadWork)->unk_09 = timer;
+    if (timer == 0) {
+        ((Actor*)g_SpadWork)->unk_09   = 8;
+        ((Actor*)g_SpadWork)->state_02 = ((Actor*)g_SpadWork)->state_02 + 1;
+    }
+}
 
 INCLUDE_ASM(func_801F7D54);
 
