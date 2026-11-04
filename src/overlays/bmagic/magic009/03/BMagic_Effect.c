@@ -21,6 +21,7 @@ MATCH void func_801EF068(void) {
     }
 }
 
+/* Pointer and saved-target forms: first difference is lui v1 at 0x801EF0A0. */
 INCLUDE_ASM(func_801EF09C);
 
 MATCH void func_801EF0DC(void) {
