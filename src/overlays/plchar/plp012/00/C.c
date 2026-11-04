@@ -42,7 +42,12 @@ MATCH void func_801CF338(void) {
 
 INCLUDE_ASM(func_801CF37C);
 
-INCLUDE_ASM(func_801CF494);
+MATCH void func_801CF494(void) {
+    if (g_ActorSlots[g_SpadWork->unk_0B].flags_00 == 0) {
+        g_GameState->mode_12B.s8_value = 0;
+    }
+    func_8014D978();
+}
 
 MATCH void func_801CF500(void) {
     SYS_DISPATCH_TASK(D_801CFDAC, 2, g_SpadWork);
@@ -64,7 +69,16 @@ MATCH void func_801CF70C(void) {
 
 INCLUDE_ASM(func_801CF750);
 
-INCLUDE_ASM(func_801CF938);
+MATCH void func_801CF938(void) {
+    if (g_SpadWork->unk_09 == 0) {
+        g_GameState->mode_12B.s8_value = 0;
+        g_GameFlags &= ~0x1000;
+    } else {
+        g_SpadWork->unk_09--;
+        func_801B0DFC();
+    }
+    func_8014D978();
+}
 
 INCLUDE_ASM(func_801CF9A8);
 
