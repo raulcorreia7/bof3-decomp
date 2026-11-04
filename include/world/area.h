@@ -357,24 +357,27 @@ typedef struct AreaTrail {
 ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);
 ASSERT_OFFSET(AreaTrail, points, 0x18);
 
-/* One spawn slot of the table at `0x800E4800` (stride 0x18; world02/area098
- * `@0x801F526C` and world04/area172 `@0x801F38E8` hold eight): the claiming
- * code scans for `active == 0` and copies the actor position into it. */
+#define AREA_SPAWN_SLOT_COUNT 8
+
+/* One entry of the spawn table: a shrinking glow disc at an actor position. */
 typedef struct AreaSpawnSlot {
-    u8    active;    /* 0x00 - 0 marks a free slot */
-    u8    unk_01;    /* 0x01 */
-    u8    life_02;   /* 0x02 - frames left; the update pass counts it down and frees the slot at 0 */
-    u8    unk_03;    /* 0x03 */
-    Coord x;         /* 0x04 */
-    Coord y;         /* 0x08 */
-    Coord z;         /* 0x0C */
-    u8    unk_10[4]; /* 0x10 */
-    u16   unk_14;    /* 0x14 */
-    u8    unk_16;    /* 0x16 */
-    u8    unk_17;    /* 0x17 */
+    u8    active;        /* 0x00 - 0 marks a free slot */
+    u8    unk_01;        /* 0x01 */
+    u8    life_02;       /* 0x02 - frames left; counts down and frees the slot at 0 */
+    u8    unk_03;        /* 0x03 */
+    Coord x;             /* 0x04 */
+    Coord y;             /* 0x08 */
+    Coord z;             /* 0x0C */
+    u8    unk_10[4];     /* 0x10 */
+    u16   radius_14;     /* 0x14 - disc radius, shrinks every frame */
+    u8    core_shade_16; /* 0x16 - shade at the disc centre */
+    u8    rim_shade_17;  /* 0x17 - shade at the disc rim */
 } AreaSpawnSlot;
 
 ASSERT_SIZE(AreaSpawnSlot, 0x18);
+ASSERT_OFFSET(AreaSpawnSlot, radius_14, 0x14);
+ASSERT_OFFSET(AreaSpawnSlot, core_shade_16, 0x16);
+ASSERT_OFFSET(AreaSpawnSlot, rim_shade_17, 0x17);
 
 /* The AREA028 slot row: 0x10 bytes. The program keeps 32 of them at
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with

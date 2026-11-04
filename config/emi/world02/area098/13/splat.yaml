@@ -52,7 +52,7 @@ segments:
       - [0x2640, c, Area_ClearWorkColumn]
       - [0x266C, c, Area_ClaimSpawnSlot]
       - [0x2708, c, Area_StepSpawnSlots]
-      - [0x27BC, c, func_801F53BC]
+      - [0x27BC, c, Area_DrawSpawnSlot]
       - [0x2980, c, Area_DrawSpinTriangle]
       - [0x2C20, c, Area_InitSpin]
       - [0x2D40, c, func_801F5940]

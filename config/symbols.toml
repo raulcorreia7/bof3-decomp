@@ -2415,8 +2415,9 @@ g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApply
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 Area_FindFreeWorkRow = { addr = 0x801F4D80, type = "func", source = "finds the first work-window row whose byte is zero or returns NULL" }
 Area_ClearWorkColumn = { addr = 0x801F5240, type = "func", source = "clears one byte of each row in the actor window" }
-Area_ClaimSpawnSlot = { addr = 0x801F526C, type = "func", source = "claims the first free slot of the work-window spawn table: sets the active byte and copies the actor position" }
-Area_StepSpawnSlots = { addr = 0x801F5308, type = "func", source = "ages every active slot of the work-window spawn table: counts the life byte down, frees the slot at zero, draws it and returns whether any slot was active" }
+Area_ClaimSpawnSlot = { addr = 0x801F526C, type = "func", source = "claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots; one body shared with the other area overlays" }
+Area_StepSpawnSlots = { addr = 0x801F5308, type = "func", source = "ages every active spawn slot: counts the life byte down, shrinks the radius halfword the draw reads as the disc radius, frees the slot at zero and calls Area_DrawSpawnSlot; returns whether any slot was active, the scene steps ignore it; one body shared with the other area overlays" }
+Area_DrawSpawnSlot = { addr = 0x801F53BC, type = "func", source = "draws one spawn slot as a 32-segment fan of semi-transparent Gouraud triangles around the projected slot position (its +0x14 halfword is the radius, +0x16 the centre shade, +0x17 the rim shade); Area_StepSpawnSlots calls it for every active slot" }
 Area_DrawSpinTriangle = { addr = 0x801F5580, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
 Area_InitSpin = { addr = 0x801F5820, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 
@@ -2721,7 +2722,9 @@ Area_Update = { addr = 0x801F40F0, type = "func", source = "the area frame updat
 
 ["emi/world04/area172/13"]
 Area_ClearWorkColumn = { addr = 0x801F38BC, type = "func", source = "clears one byte of each row in the actor window" }
-Area_StepSpawnSlots = { addr = 0x801F3984, type = "func", source = "ages every active slot of the work-window spawn table: counts the life byte down, frees the slot at zero, draws it and returns whether any slot was active" }
+Area_ClaimSpawnSlot = { addr = 0x801F38E8, type = "func", source = "claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots; one body shared with the other area overlays" }
+Area_StepSpawnSlots = { addr = 0x801F3984, type = "func", source = "ages every active spawn slot: counts the life byte down, shrinks the radius halfword the draw reads as the disc radius, frees the slot at zero and calls Area_DrawSpawnSlot; returns whether any slot was active, the scene steps ignore it; one body shared with the other area overlays" }
+Area_DrawSpawnSlot = { addr = 0x801F3A38, type = "func", source = "draws one spawn slot as a 32-segment fan of semi-transparent Gouraud triangles around the projected slot position (its +0x14 halfword is the radius, +0x16 the centre shade, +0x17 the rim shade); Area_StepSpawnSlots calls it for every active slot" }
 Area_InitSpin = { addr = 0x801F3E90, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 
 ["emi/world04/area173/14"]
@@ -2786,8 +2789,9 @@ Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the
 
 ["emi/world04/area188/13"]
 Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "clears one byte of each row in the actor window" }
-Area_ClaimSpawnSlot = { addr = 0x801F3DE0, type = "func", source = "claims the first free slot of the work-window spawn table: sets the active byte and copies the actor position" }
-Area_StepSpawnSlots = { addr = 0x801F3E7C, type = "func", source = "ages every active slot of the work-window spawn table: counts the life byte down, frees the slot at zero, draws it and returns whether any slot was active" }
+Area_ClaimSpawnSlot = { addr = 0x801F3DE0, type = "func", source = "claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots; one body shared with the other area overlays" }
+Area_StepSpawnSlots = { addr = 0x801F3E7C, type = "func", source = "ages every active spawn slot: counts the life byte down, shrinks the radius halfword the draw reads as the disc radius, frees the slot at zero and calls Area_DrawSpawnSlot; returns whether any slot was active, the scene steps ignore it; one body shared with the other area overlays" }
+Area_DrawSpawnSlot = { addr = 0x801F3F30, type = "func", source = "draws one spawn slot as a 32-segment fan of semi-transparent Gouraud triangles around the projected slot position (its +0x14 halfword is the radius, +0x16 the centre shade, +0x17 the rim shade); Area_StepSpawnSlots calls it for every active slot" }
 Area_DrawSpinTriangle = { addr = 0x801F40F4, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
 Area_InitSpin = { addr = 0x801F4394, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 Actor_WalkWhileWithinLimit = { addr = 0x801F4840, type = "func", source = "walks the script actor one step along facing 5 and rewinds the script cursor while its y position plus the facing-5 y step is at most the per-scene limit table entry D_801448ED selects (func_801F2D68 in area136, func_801F4840 in area188)" }

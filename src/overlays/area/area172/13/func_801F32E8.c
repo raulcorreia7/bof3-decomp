@@ -5,7 +5,7 @@ MATCH void func_801F32E8(void) {
 
     g_SpadWork->unk_06 = phase + 1;
     if ((phase & 3) == 0) {
-        func_801F38E8();
+        Area_ClaimSpawnSlot();
     }
     func_801F3FAC();
     Area_StepSpawnSlots();

@@ -31,10 +31,15 @@ extern u8 D_80146875;
 
 extern u8 D_80144EF8[];
 
+/* func_801F38E8 */
+void Area_ClaimSpawnSlot(void);
 s32  Area_StepSpawnSlots(void);
-void func_801F3A38(AreaSpawnSlot* slot);
+/* func_801F3A38 */
+void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
 
-#define AREA_SPAWN_SLOT_DRAW func_801F3A38
-#define AREA_SPAWN_SLOT_STEP 0xC
+#define AREA_SPAWN_SLOT_LIFE        0x20
+#define AREA_SPAWN_SLOT_RADIUS      0x180
+#define AREA_SPAWN_SLOT_CORE_SHADE  g_SpadWork->tint.bytes.unk_5D
+#define AREA_SPAWN_SLOT_RADIUS_STEP 0xC
 
 #endif

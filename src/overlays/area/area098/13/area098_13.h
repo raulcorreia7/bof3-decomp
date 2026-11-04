@@ -38,10 +38,13 @@ void        Area_ProjectPoint(s32* pos, long* screen_xy);
 extern void Area_ClaimSpawnSlot(void);
 /* func_801F5308 */
 extern s32  Area_StepSpawnSlots(void);
-extern void func_801F53BC(AreaSpawnSlot* slot);
+/* func_801F53BC */
+extern void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
 
-#define AREA_SPAWN_SLOT_DRAW func_801F53BC
-#define AREA_SPAWN_SLOT_STEP 0x10
+#define AREA_SPAWN_SLOT_LIFE        0x10
+#define AREA_SPAWN_SLOT_RADIUS      0x100
+#define AREA_SPAWN_SLOT_CORE_SHADE  0x40
+#define AREA_SPAWN_SLOT_RADIUS_STEP 0x10
 extern void func_801F5940(void);
 void        func_801F4D44(void);
 void        func_801F5050(u8 level);
