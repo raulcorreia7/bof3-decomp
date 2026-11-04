@@ -11,7 +11,7 @@ MATCH void func_801F2C48(void) {
         work = g_SpadWork;
         step = 1;
     }
-    work->unk_01 = step;
-    work = g_SpadWork;
+    work->unk_01  = step;
+    work          = g_SpadWork;
     work->z.fixed = 0x1000000;
 }

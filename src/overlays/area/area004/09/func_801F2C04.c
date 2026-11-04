@@ -6,14 +6,14 @@ MATCH void func_801F2C04(void) {
 
     MESSAGE_REQUEST_CLEAR();
     switch (D_801490C7) {
-    case 0:
-        D_801448ED = 0;
-        break;
-    case 1:
-        D_801448ED = 1;
-        break;
-    default:
-        return;
+        case 0:
+            D_801448ED = 0;
+            break;
+        case 1:
+            D_801448ED = 1;
+            break;
+        default:
+            return;
     }
     step  = &D_801448EB;
     *step = 5;
