@@ -52,7 +52,12 @@ MATCH void func_801CEF20(void) {
     SYS_DISPATCH_TASK(D_801D058C, 3, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801CEF64);
+MATCH void func_801CEF64(void) {
+    func_801CF348();
+    Actor_RequestScript((g_SpadWork->direction_08 - 1) / 2 + 0x42);
+    g_SpadWork->unk_0A = 0xB;
+    g_SpadWork->unk_03 = 1;
+}
 
 INCLUDE_ASM(func_801CEFD0);
 
