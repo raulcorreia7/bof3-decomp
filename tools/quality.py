@@ -17,6 +17,9 @@ Metrics, counted inside ``MATCH`` function bodies unless noted:
               file of another image: one ``Name.h`` is the rule (docs/conventions.md, Shared bodies)
 - ``twins``   the same, under another name; sharing needs one evidence name first (trended)
 
+A body that is only local declarations and one statement-macro call is already the shared form, so
+its copies count in neither ``pasted`` nor ``twins``.
+
 The gate sums each metric over the touched files, so a body moved between them nets to zero.
 It covers ``casts``, ``harmful`` and ``pasted``. A new match may add a ``func_`` name or a ``D_``
 reference, so ``addr``, ``names``, ``notes`` and ``twins`` are trended, not gated (``--gate``
@@ -59,6 +62,13 @@ HARMFUL = re.compile(
     r"\b(?:MATCH_FAKE_PIN|MATCH_REG|MATCH_FAKE_OPAQUE|MATCH_FAKE_USE|CLOBBER_\w+)\b"
 )
 NOTE = re.compile(r"FAKE:")
+# A local declaration (`u8 i`, `Actor* actor = g_CurrentActor`) and a statement-macro call.
+DECL = re.compile(
+    r"(?!return\b|goto\b|case\b)(?:(?:const|volatile|static|register)\s+)*"
+    r"[A-Za-z_]\w*[\s*]+\w+(?:\[[^\]]*\])?(?:\s*=.*)?",
+    re.S,
+)
+MACRO_CALL = re.compile(r"[A-Z][A-Z0-9_]*\s*\(.*\)", re.S)
 
 
 def strip_comments(text: str) -> str:
@@ -74,6 +84,17 @@ def bodies(text: str) -> Iterator[tuple[str, str]]:
             depth += (text[end] == "{") - (text[end] == "}")
             end += 1
         yield found.group(1), text[found.end() : end - 1]
+
+
+def macro_body(body: str) -> bool:
+    """Return whether ``body`` is local declarations and one statement-macro call.
+
+    That is the shared form docs/conventions.md prescribes, so its copies are neither pasted nor
+    twins.
+    """
+    steps = [s.strip() for s in body.split(";") if s.strip()]
+    rest = [s for s in steps if not DECL.fullmatch(s)]
+    return len(rest) == 1 and bool(MACRO_CALL.fullmatch(rest[0]))
 
 
 def shape(name: str, body: str) -> str:
@@ -105,7 +126,7 @@ def scan(files: dict[str, str]) -> dict[str, dict[str, int]]:
                 bool(RAW_CAST.search(line)) for line in body.split("\n")
             )
             row["harmful"] += len(HARMFUL.findall(body))
-            if path.endswith(".c") and body.count(";") >= 2:
+            if path.endswith(".c") and body.count(";") >= 2 and not macro_body(body):
                 seen[shape(name, body)].append((path, name))
         rows[path] = row
     for members in seen.values():

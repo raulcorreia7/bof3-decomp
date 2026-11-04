@@ -52,6 +52,15 @@ def test_pasted_needs_two_images_and_a_shared_name() -> None:
     assert [rows[p]["twins"] for p in sorted(rows)] == [0, 0, 1, 0, 0]
 
 
+def test_a_statement_macro_body_is_not_a_paste() -> None:
+    body = (
+        "MATCH void Name(void) {\n    u8 i;\n    u8 j;\n\n    SHOW_PARTY(0, i, j);\n}\n"
+    )
+    files = {"src/o/a/1/x.c": body, "src/o/a/2/x.c": body}
+    rows = quality.scan(files).values()
+    assert sum(r["pasted"] + r["twins"] for r in rows) == 0
+
+
 def test_a_header_body_is_not_a_paste() -> None:
     files = {
         "src/o/a/Name.h": BODY.format(name="Name"),
