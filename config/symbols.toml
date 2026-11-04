@@ -321,6 +321,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFEEC, source = "the module dispatcher index
 
 ["emi/bmagic/magic059/03"]
 Effect_CountDownTimer = { addr = 0x801EF5C0, type = "func", source = "counts the effect timer down and finishes the effect at zero" }
+BMagic_AllocEffect = { addr = 0x801F0490, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801F04F4, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
 g_BMagicEffectFuncs = { addr = 0x801F066C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
