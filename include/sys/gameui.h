@@ -13,7 +13,7 @@ typedef struct ScriptState {
     u8  unk_04; /* 0x04 */
     u8  unk_05; /* 0x05 */
     u8  pad_06;
-    s8  unk_07;
+    u8  unk_07;
     s16 unk_08; /* 0x08 */
     u16 cursor;
 } ScriptState;
