@@ -36,7 +36,15 @@ INCLUDE_ASM(func_801EF4FC);
 
 INCLUDE_ASM(func_801EF688);
 
-INCLUDE_ASM(func_801EF7D0);
+MATCH void func_801EF7D0(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        if (func_801DB524(g_SpadWork->unk_04) & 0xFF) {
+            func_800A9820(g_SpadWork->unk_04);
+        }
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF860(void) {
     SYS_DISPATCH_TASK(D_801F0420, 1, g_SpadWork);
