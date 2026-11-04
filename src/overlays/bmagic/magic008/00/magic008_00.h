@@ -15,4 +15,6 @@ extern BattleHandlerTable3 D_801EEC40;
 extern BattleHandlerTable3 D_801EEC4C;
 extern MagicTaskFuncs      D_801EEC84;
 
+u8 func_800AFF98();
+
 #endif
