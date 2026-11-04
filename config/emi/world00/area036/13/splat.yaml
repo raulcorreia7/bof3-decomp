@@ -10,7 +10,7 @@ segments:
       - [0x0, .data, D_801F2C00]
       - [0x4, c, func_801F2C04]
       - [0x30, c, Actor_RunAreaStep]
-      - [0x64, c, func_801F2C64]
+      - [0x64, c, Area_CheckStepTrigger]
       - [0x118, c, func_801F2D18]
       - [0x15C, c, Actor_SnapToGround]
       - [0x1A8, c, func_801F2DA8]

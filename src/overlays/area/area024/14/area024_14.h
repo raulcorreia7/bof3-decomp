@@ -77,6 +77,7 @@ void Matrix_SetIdentity(MATRIX* matrix);
 void func_801F2C58(void);
 void func_801F2CB0(void);
 void func_801F2D5C(void);
+void func_801F2DB4(void);
 void func_801F2DD8(void);
 void func_801F2DF8(const void* sprite);
 void func_801F2FD4(void* sprite);
