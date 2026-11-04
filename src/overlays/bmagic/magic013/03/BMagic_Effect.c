@@ -8,16 +8,7 @@ INCLUDE_ASM(func_801EEC14);
 
 INCLUDE_ASM(func_801EED28);
 
-MATCH void func_801EEE68(void) {
-    PartyBattler* work;
-    u8            step;
-
-    work = SP_REF(PartyBattler*, 0x44u);
-    step = work->word_08.byte.unk_0B;
-    if (step < 2) {
-        work->step_01 = work->step_01 + 1;
-    }
-}
+#include "overlays/bmagic/Effect_NextStepWhileTickUnderTwo.h"
 
 MATCH void func_801EEEA0(void) {
     u8*           selector;
