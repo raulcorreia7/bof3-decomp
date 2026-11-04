@@ -31,4 +31,10 @@ extern u8 D_80146875;
 
 extern u8 D_80144EF8[];
 
+s32  Area_StepSpawnSlots(void);
+void func_801F3A38(AreaSpawnSlot* slot);
+
+#define AREA_SPAWN_SLOT_DRAW func_801F3A38
+#define AREA_SPAWN_SLOT_STEP 0xC
+
 #endif

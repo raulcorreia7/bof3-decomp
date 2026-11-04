@@ -2651,6 +2651,7 @@ Area_Update = { addr = 0x801F40F0, type = "func", source = "the area frame updat
 
 ["emi/world04/area172/13"]
 Area_ClearWorkColumn = { addr = 0x801F38BC, type = "func", source = "clears one byte of each row in the actor window" }
+Area_StepSpawnSlots = { addr = 0x801F3984, type = "func", source = "ages every active slot of the work-window spawn table: counts the life byte down, frees the slot at zero, draws it and returns whether any slot was active" }
 Area_InitSpin = { addr = 0x801F3E90, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 
 ["emi/world04/area173/14"]

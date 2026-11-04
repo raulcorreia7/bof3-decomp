@@ -31,7 +31,7 @@ segments:
       - [0xAC0, c, func_801F36C0]
       - [0xCBC, c, Area_ClearWorkColumn]
       - [0xCE8, c, func_801F38E8]
-      - [0xD84, c, func_801F3984]
+      - [0xD84, c, Area_StepSpawnSlots]
       - [0xE38, c, func_801F3A38]
       - [0xFFC, c, func_801F3BFC]
       - [0x1290, c, Area_InitSpin]
