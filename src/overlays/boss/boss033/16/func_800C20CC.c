@@ -24,7 +24,7 @@ MATCH void func_800C20CC(void) {
         g_BattleEffects[index & BYTE_MASK].unk_04        = 0;
         g_BattleEffects[index & BYTE_MASK].unk_00        = g_BattleEffects[index & BYTE_MASK].unk_00 & 0xBF;
         work                                             = g_SpadWork;
-        g_BattleEffects[index & BYTE_MASK].work_74       = (u32)work;
+        g_BattleEffects[index & BYTE_MASK].work_74.bytes = work;
         g_BattleEffects[index & BYTE_MASK].unk_0B        = work[0xB];
         work                                             = g_SpadWork;
         if (work[0xB] != 0) {

@@ -12,10 +12,10 @@ MATCH void func_801E45DC(void) {
         if ((g_BattleCurrentEnemy->target_flags_FC & 0x10) != 0) {
             func_800AAC88(g_BattleCurrentEnemy->damage_F8, g_SpadWork->slot);
         } else {
-            slot                          = Battle_AllocEffect(0, 1) & BYTE_MASK;
-            g_BattleEffects[slot].work_74 = (u32)g_SpadWork;
-            g_BattleEffects[slot].unk_07  = 3;
-            g_BattleEffects[slot].unk_27  = 0;
+            slot                                = Battle_AllocEffect(0, 1) & BYTE_MASK;
+            g_BattleEffects[slot].work_74.party = g_SpadWork;
+            g_BattleEffects[slot].unk_07        = 3;
+            g_BattleEffects[slot].unk_27        = 0;
         }
         g_SpadWork->unk_03 = g_SpadWork->unk_03 + 1;
     }
