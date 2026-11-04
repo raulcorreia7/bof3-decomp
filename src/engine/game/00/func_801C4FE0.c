@@ -13,7 +13,7 @@ MATCH s32 func_801C4FE0(void) {
     s32    moved;
 
     work    = g_SpadWork;
-    step    = work->speed_70 + 2;
+    step    = work->state_70.byte + 2;
     next_x  = work->x.fixed + g_FacingSteps[work->direction_08].x * step;
     x       = next_x;
     next_y  = work->y.fixed + g_FacingSteps[work->direction_08].y * step;

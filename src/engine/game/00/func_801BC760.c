@@ -141,7 +141,8 @@ NON_MATCHING s32 func_801BC760(void) {
             g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
             near_a      = (D_80145EC4 + (D_80145E9C * D_80145E99)) & ~0x7FFF;
             near_b      = (D_80145EC8 + (D_80145EA0 * D_80145E99)) & ~0x7FFF;
-            if (!(func_801C3E40(near_a, near_b, g_SpadWork->speed_70, Area_ReadHeight(near_a, near_b)) & BYTE_MASK)) {
+            if (!(func_801C3E40(near_a, near_b, g_SpadWork->state_70.byte, Area_ReadHeight(near_a, near_b)) &
+                  BYTE_MASK)) {
                 g_GameState = saved;
                 *(u8*)g_SpadWork |= ACTOR_FLAG_HIDDEN;
                 g_SpadWork->x.fixed = near_a;

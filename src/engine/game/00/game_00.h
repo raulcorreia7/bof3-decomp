@@ -92,17 +92,17 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 /* Run the gated cell test and arm the work record on a hit. Kept: it returns
  * from the member and takes the flag value after a branch; tested as an inline,
  * the bytes move. */
-#define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                                      \
-    if ((g_GameFlags & 0x400) == 0) {                                                                               \
-        if ((func_801C39D8(g_SpadWork->x.fixed, g_SpadWork->y.fixed, g_SpadWork->speed_70, code, 0) & BYTE_MASK) != \
-            0) {                                                                                                    \
-            g_SpadWork->unk_01   = 2;                                                                               \
-            g_SpadWork->state_02 = flags;                                                                           \
-            g_SpadWork->unk_03   = 0;                                                                               \
-            g_SpadWork->unk_04   = 0;                                                                               \
-            return 1;                                                                                               \
-        }                                                                                                           \
-    }                                                                                                               \
+#define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                             \
+    if ((g_GameFlags & 0x400) == 0) {                                                                      \
+        if ((func_801C39D8(g_SpadWork->x.fixed, g_SpadWork->y.fixed, g_SpadWork->state_70.byte, code, 0) & \
+             BYTE_MASK) != 0) {                                                                            \
+            g_SpadWork->unk_01   = 2;                                                                      \
+            g_SpadWork->state_02 = flags;                                                                  \
+            g_SpadWork->unk_03   = 0;                                                                      \
+            g_SpadWork->unk_04   = 0;                                                                      \
+            return 1;                                                                                      \
+        }                                                                                                  \
+    }                                                                                                      \
     return 0;
 
 /* Test the map cells around a 16.16 point for the wanted code. Kept: the two

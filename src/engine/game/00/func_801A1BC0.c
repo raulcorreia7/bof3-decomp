@@ -19,12 +19,12 @@ MATCH s32 func_801A1BC0(Actor* record) {
     route  = work->direction_08 & 7;
     xstep  = g_FacingSteps[route].x;
     ystep  = g_FacingSteps[route].y;
-    next_x = record->x.fixed + xstep * (steps = work->speed_70 + 1);
+    next_x = record->x.fixed + xstep * (steps = work->state_70.byte + 1);
     x      = next_x;
     next_y = record->y.fixed + ystep * steps;
     y      = next_y;
 
-    if (work->speed_70 == 0u) {
+    if (work->state_70.byte == 0u) {
         result = func_801A1ED8(x, y, route, route);
     } else {
         result = func_801A1C5C(x, y, route, route);

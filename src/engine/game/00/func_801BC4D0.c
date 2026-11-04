@@ -16,7 +16,7 @@ MATCH s32 func_801BC4D0(void) {
     }
     rate               = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
     g_SpadWork->unk_09 = (u8)(g_SpadWork->unk_09 / (u32)(rate & BYTE_MASK));
-    if (g_SpadWork->speed_70 == 0) {
+    if (g_SpadWork->state_70.byte == 0) {
         SP_REF(s32, 0x8) =
             g_SpadWork->x.fixed + g_FacingOffsets[g_SpadWork->direction_08].x * rate * g_SpadWork->unk_09;
         SP_REF(s32, 0xC) =

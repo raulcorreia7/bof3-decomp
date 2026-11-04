@@ -26,7 +26,7 @@ MATCH void func_801C5558(void) {
     work->z.part.integer = count;
 
     work   = g_SpadWork;
-    step   = work->speed_70 + 2;
+    step   = work->state_70.byte + 2;
     /* FAKE: non-const view of the step table on the first read keeps retail's store order. */
     offs_x = (*(FacingStep(*)[8])g_FacingSteps)[route].x * step;
     offs_y = g_FacingSteps[route].y * step;

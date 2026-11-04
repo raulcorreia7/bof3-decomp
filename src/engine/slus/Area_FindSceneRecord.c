@@ -33,10 +33,10 @@ MATCH bool Area_FindSceneRecord(s32 wanted_id) {
                 palette_offset     = id * 2;
                 g_SpadWork->unk_28 = D_801459F4[i * 8 + 6];
                 g_SpadWork->unk_2C = D_801459F4[i * 8 + 7];
-                *(u32*)&g_SpadWork->speed_70 &= mask;
+                g_SpadWork->state_70.word &= mask;
                 /* FAKE: non-const byte view of the flag table; a const read lets the address loads fold. */
-                *(u32*)&g_SpadWork->speed_70 = ((u8*)D_80181484)[palette_offset];
-                g_SpadWork->unk_2B           = ((u8*)D_80181484)[palette_offset + 1];
+                g_SpadWork->state_70.word = ((u8*)D_80181484)[palette_offset];
+                g_SpadWork->unk_2B        = ((u8*)D_80181484)[palette_offset + 1];
                 return false;
             }
             i++;

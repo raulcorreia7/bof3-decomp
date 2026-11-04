@@ -19,7 +19,7 @@ NON_MATCHING s32 func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* re
     if (dist_y < 0) {
         dist_y = -dist_y;
     }
-    range = reach + record->speed_70;
+    range = reach + record->state_70.byte;
     if (((range << 7) + 0x100) < dist_y) {
         hit = 0;
     } else {

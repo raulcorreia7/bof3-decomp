@@ -29,7 +29,7 @@ loop_top:
     pos_x  = work->x.fixed + g_FacingSteps[route].x * (steps = (word & BYTE_MASK) + 1);
     pos_y  = work->y.fixed + D_80181B98[offset] * steps;
     if ((func_801C3E40(pos_x, pos_y, (u8)word, g_SpadWork->z.part.integer) & BYTE_MASK) != 0u ||
-        (func_801C472C(pos_x, pos_y, g_SpadWork->speed_70, 0xD0, 0) & BYTE_MASK) == 0u) {
+        (func_801C472C(pos_x, pos_y, g_SpadWork->state_70.byte, 0xD0, 0) & BYTE_MASK) == 0u) {
         count++;
         if (count < 8) {
             /* Retry the probe from the next direction. */

@@ -33,7 +33,7 @@ MATCH s32 func_801BDF08(void) {
     for (i = 0, offset = 0; i < 34; i++, offset += ACTOR_SIZE) {
         if (((u8*)g_Actors)[offset] != 0 && !((&D_8014688F)[offset] & 0x80)) {
             rec = (Actor*)((u8*)g_Actors + offset);
-            if (func_801BDD58(pos_x, pos_y, dist, g_SpadWork->speed_70, rec) & BYTE_MASK) {
+            if (func_801BDD58(pos_x, pos_y, dist, g_SpadWork->state_70.byte, rec) & BYTE_MASK) {
                 found        = 1;
                 rec->roll_90 = FIELD(u16, D_80146918, offset) + 1;
             }

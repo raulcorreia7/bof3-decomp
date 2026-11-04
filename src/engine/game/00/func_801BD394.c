@@ -24,7 +24,7 @@ MATCH void func_801BD394(void) {
     x     = slot->x.fixed + slot->unk_0C * count;
     y     = slot->y.fixed + slot->unk_10 * count;
     range = 0x18000;
-    if (slot->speed_70 != 0) {
+    if (slot->state_70.byte != 0) {
         range = 0x20000;
     }
     dx = work->x.fixed - x;

@@ -28,14 +28,14 @@ MATCH s32 func_801B4150(void) {
         return (s8)func_801B43D0(g_SpadWork->x.fixed + g_FacingSteps[dir].x, g_SpadWork->y.fixed + g_FacingSteps[dir].y,
                                  dir);
     } else {
-        s32 step = g_SpadWork->speed_70 + 2;
+        s32 step = g_SpadWork->state_70.byte + 2;
         x        = g_SpadWork->x.fixed + g_FacingSteps[dir].x * step;
         y        = g_SpadWork->y.fixed + g_FacingSteps[dir].y * step;
         if ((Area_GetCellCode((s16)(x >> 16), (s16)(y >> 16)) & BYTE_MASK) != 0x30) {
             dir = g_SpadWork->direction_08;
             x   = g_SpadWork->x.fixed + g_FacingSteps[dir].x;
             y   = g_SpadWork->y.fixed + g_FacingSteps[dir].y;
-        } else if (g_SpadWork->speed_70 == 0) {
+        } else if (g_SpadWork->state_70.byte == 0) {
             dir = g_SpadWork->direction_08;
             x += g_FacingSteps[dir].x;
             y += g_FacingSteps[dir].y;

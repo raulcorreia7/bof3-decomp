@@ -71,7 +71,7 @@ MATCH void func_801B146C(void) {
             goto block_24; /* continue with the front request */
         }
         if ((state_flags & 2) &&
-            ((work_f = g_SpadWork, speed = work_f->speed_70, route_index2 = work_f->direction_08 * 2,
+            ((work_f = g_SpadWork, speed = work_f->state_70.byte, route_index2 = work_f->direction_08 * 2,
               pos_x = work_f->x.fixed + ((*(s32*)((u8*)g_FacingSteps + route_index2 * 4)) * speed),
               pos_y = work_f->y.fixed + (D_80181B98[route_index2] * speed),
               (pos_x == 0x20000) || (pos_y == 0x20000) || (pos_x == ((D_80104000 - 3) << 0x10)) ||
@@ -82,7 +82,7 @@ MATCH void func_801B146C(void) {
         }
     block_24:
         work_g = g_SpadWork;
-        if (func_801C39D8(work_g->x.fixed, work_g->y.fixed, work_g->speed_70, 0xA7, 0U) & BYTE_MASK) {
+        if (func_801C39D8(work_g->x.fixed, work_g->y.fixed, work_g->state_70.byte, 0xA7, 0U) & BYTE_MASK) {
             work_h = g_SpadWork;
             func_801A0048(work_h->x.part.integer, work_h->y.part.integer);
             g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
@@ -90,7 +90,7 @@ MATCH void func_801B146C(void) {
             goto block_46; /* re-arm the frame flags */
         }
         work_i = g_SpadWork;
-        if (!(func_801C472C(work_i->x.fixed, work_i->y.fixed, work_i->speed_70, 0xA6, 0U) & BYTE_MASK)) {
+        if (!(func_801C472C(work_i->x.fixed, work_i->y.fixed, work_i->state_70.byte, 0xA6, 0U) & BYTE_MASK)) {
             Actor_RequestScript(g_SpadWork->direction_08);
             D_8014504A = 0;
             Game_RequestAreaChange(D_80145048, (u32)D_80145040, (u32)D_80145044, 4U);

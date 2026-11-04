@@ -10,7 +10,7 @@ MATCH bool func_801B8D18(void) {
     s32 x;
     s32 y;
 
-    if (g_SpadWork->speed_70 == 0) {
+    if (g_SpadWork->state_70.byte == 0) {
         if (g_SpadWork->direction_08 == 3) {
             if (g_SpadWork->x.part.fraction != 0) {
                 return false;

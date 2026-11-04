@@ -102,7 +102,7 @@ NON_MATCHING void func_801B21E8(void) {
                     val8 = val3 & BYTE_MASK;
                     val9 = 0;
                     if (val8 != 0) {
-                        val9 = func_801B1C18(*(s32*)val0, FIELD(s32, val0, 0x4u), g_SpadWork->speed_70);
+                        val9 = func_801B1C18(*(s32*)val0, FIELD(s32, val0, 0x4u), g_SpadWork->state_70.byte);
                         val8 = val3 & BYTE_MASK;
                     }
                     if ((val8 == 0) || !(val9 & BYTE_MASK)) {
@@ -114,7 +114,7 @@ NON_MATCHING void func_801B21E8(void) {
                     val1 = FIELD(s32, val13, -0xF8);
                     val2 = FIELD(s32, val13, -0xF4);
                 block_26:
-                    func_801B1B2C(val1, val2, g_SpadWork->direction_08, g_SpadWork->speed_70);
+                    func_801B1B2C(val1, val2, g_SpadWork->direction_08, g_SpadWork->state_70.byte);
                 }
                 tmp7                    = g_SpadWork;
                 FIELD(s32, tmp7, 0x34u) = (s32) * (s32*)(&D_1F800008);

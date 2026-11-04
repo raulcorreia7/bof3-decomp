@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_801B8394(void) {
-    if (g_SpadWork->speed_70 != 0) {
+    if (g_SpadWork->state_70.byte != 0) {
         g_SpadWork->x.fixed -= g_FacingOffsets[g_SpadWork->direction_08].x * 0x60;
         g_SpadWork->y.fixed -= g_FacingOffsets[g_SpadWork->direction_08].y * 0x60;
         g_SpadWork->unk_0A = 7;

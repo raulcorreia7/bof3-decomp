@@ -27,7 +27,7 @@ MATCH void* func_801B5C54(void) {
         sub = cur->len - 1;
         run = cur;
         for (; sub >= 0; sub--) {
-            if (work->speed_70 == 0) {
+            if (work->state_70.byte == 0) {
                 limit = 1;
                 pos   = work->direction_08 * 2;
                 /* FAKE: volatile u8 reads keep retail's lbu + sll/sra pair; an s8 read folds to lb (63.57%). */

@@ -4,7 +4,7 @@ MATCH void func_801B87B8(void) {
     Actor* work;
 
     if (g_SpadWork->unk_09 == 0) {
-        if (func_801C472C(g_SpadWork->x.fixed, g_SpadWork->y.fixed, g_SpadWork->speed_70, 0xD0, 0) & BYTE_MASK) {
+        if (func_801C472C(g_SpadWork->x.fixed, g_SpadWork->y.fixed, g_SpadWork->state_70.byte, 0xD0, 0) & BYTE_MASK) {
             func_801B8A0C();
             return;
         }

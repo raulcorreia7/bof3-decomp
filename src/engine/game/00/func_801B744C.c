@@ -6,10 +6,10 @@ MATCH void func_801B744C(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         rate                = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
         g_SpadWork->unk_09  = 0x20 / rate;
-        g_SpadWork->unk_0C  = g_FacingOffsets[g_SpadWork->direction_08].x * rate * (g_SpadWork->speed_70 + 1);
-        g_SpadWork->unk_10  = g_FacingOffsets[g_SpadWork->direction_08].y * rate * (g_SpadWork->speed_70 + 1);
-        g_SpadWork->vz      = (g_SpadWork->speed_70 + 1) << 6;
-        g_SpadWork->gravity = -((g_SpadWork->speed_70 + 1) * 8);
+        g_SpadWork->unk_0C  = g_FacingOffsets[g_SpadWork->direction_08].x * rate * (g_SpadWork->state_70.byte + 1);
+        g_SpadWork->unk_10  = g_FacingOffsets[g_SpadWork->direction_08].y * rate * (g_SpadWork->state_70.byte + 1);
+        g_SpadWork->vz      = (g_SpadWork->state_70.byte + 1) << 6;
+        g_SpadWork->gravity = -((g_SpadWork->state_70.byte + 1) * 8);
         if (g_SpadWork->unk_05 == 0) {
             s32 dx;
             s32 dy;
