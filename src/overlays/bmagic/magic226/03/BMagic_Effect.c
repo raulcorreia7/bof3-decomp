@@ -26,7 +26,20 @@ INCLUDE_ASM(func_801EF310);
 #define BMAGIC_CAMERA_SWING_TICKS 0x3C
 #include "overlays/bmagic/Effect_SwingCameraAngle.h"
 
-INCLUDE_ASM(func_801EF5F0);
+MATCH void func_801EF5F0(void) {
+    u8 temp_v0;
+
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->flags_00 |= 0x20;
+        g_SpadWork->unk_5C = 1;
+        g_SpadWork->unk_5D = 0;
+        g_SpadWork->unk_5E = 0;
+        g_SpadWork->unk_5F = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF698);
 
