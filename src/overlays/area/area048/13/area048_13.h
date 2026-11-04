@@ -18,4 +18,8 @@ extern u8 D_801F4E54[];
 s32       func_801F3AE4(s32, s32, s32);
 void      SYS_ToggleFlag(void* bits, u8 bit_index);
 
+extern u8 D_80146874;
+
+extern u8 D_80146875;
+
 #endif
