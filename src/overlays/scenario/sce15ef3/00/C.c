@@ -93,7 +93,7 @@ INCLUDE_ASM(func_801D1420);
 INCLUDE_ASM(func_801D1460);
 
 MATCH void func_801D14DC(void) {
-    g_SpadWork->unk_09 = g_SpadWork->unk_09 - 0x10;
+    g_SpadWork->unk_09 -= 0x10;
     if (g_AreaDrawFlags != 0) {
         func_801D23AC(g_SpadWork->unk_09);
     }
@@ -101,7 +101,7 @@ MATCH void func_801D14DC(void) {
         if (g_AreaDrawFlags == 0) {
             Actor_Clear();
         } else {
-            g_SpadWork->unk_01 = g_SpadWork->unk_01 - 1;
+            g_SpadWork->unk_01--;
         }
     }
 }
