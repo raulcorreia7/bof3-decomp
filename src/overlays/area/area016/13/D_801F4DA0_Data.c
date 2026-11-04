@@ -221,7 +221,7 @@ u8 D_801F51C8[8] = {
 
 Callback D_801F51D0[2] = {
     func_801F4610,
-    func_801F4740,
+    Area_StepStreamSetDrawMode,
 };
 
 u8 D_801F51D8[4] = {

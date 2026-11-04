@@ -85,7 +85,7 @@ void      func_801F42F8(void);
 /* func_801F4528 */
 void      Actor_MoveByVelocity(void);
 void      func_801F4610(void);
-void      func_801F4740(void);
+void      Area_StepStreamSetDrawMode(void);
 
 /* The value of func 801f2eec table in the shared func_801F2EEC body. */
 #define FUNC_801F2EEC_TABLE D_801F5100
