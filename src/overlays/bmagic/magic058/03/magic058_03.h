@@ -8,5 +8,9 @@
 extern BattleHandlerTable3 D_801EEC1C;
 
 extern BattleHandlerTable3 D_801EEC10;
+/* The effect slot table BMagic_AllocEffect scans, and its row count. */
+extern BattleEffect D_801EFEF4[];
+#define BMAGIC_EFFECT_SLOTS D_801EFEF4
+#define BMAGIC_EFFECT_COUNT 36
 
 #endif

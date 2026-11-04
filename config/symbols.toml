@@ -315,6 +315,7 @@ BMagic_RunStep = { addr = 0x801EEC50, type = "func", source = "runs the callback
 
 ["emi/bmagic/magic058/03"]
 Effect_SetActorMatrix = { addr = 0x801EF69C, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
+BMagic_AllocEffect = { addr = 0x801EFE38, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801EFE9C, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
 g_BMagicEffectFuncs = { addr = 0x801EFEEC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
