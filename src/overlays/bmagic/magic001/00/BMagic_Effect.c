@@ -24,7 +24,23 @@ INCLUDE_ASM(func_801EF164);
 
 INCLUDE_ASM(func_801EF1CC);
 
-INCLUDE_ASM(func_801EF280);
+MATCH void func_801EF280(void) {
+    PartyBattler* work;
+    u8            timer;
+
+    work         = g_SpadWork;
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    work->unk_14 += work->unk_20;
+    work->word_3C.half.span_3E += work->unk_14;
+    if (timer == 0) {
+        SND_QueueSelectionFx(0x203);
+        func_801E257C(g_BattleActingBattler, 0xC);
+        func_800A9610(g_BattleTargetSelector, 0x10);
+        g_SpadWork->unk_09 = 3;
+        g_SpadWork->unk_02++;
+    }
+}
 
 MATCH void func_801EF324(void) {
     if (func_8014DAEC() != 0u) {
