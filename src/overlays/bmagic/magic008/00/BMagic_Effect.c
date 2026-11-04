@@ -56,7 +56,13 @@ MATCH void func_801EF75C(void) {
 
 INCLUDE_ASM(func_801EF7C8);
 
-INCLUDE_ASM(func_801EF9D4);
+MATCH void func_801EF9D4(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0xFF) {
+        D_801EB4E0->flags_00 &= 0xBF;
+        func_800AEF98(4, 0);
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void Effect_StartPlaying_801EFA40(void) {
     u16* flags;
@@ -73,7 +79,13 @@ MATCH void func_801EFA74(void) {
 
 INCLUDE_ASM(func_801EFAD4);
 
-INCLUDE_ASM(func_801EFC90);
+MATCH void func_801EFC90(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0xFF) {
+        D_801EB4E0->flags_00 &= 0xBF;
+        func_800AEF98(4, 0);
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void Effect_StartPlaying_801EFCFC(void) {
     u16* flags;
