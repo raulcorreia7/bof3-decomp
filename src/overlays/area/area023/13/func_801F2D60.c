@@ -1,6 +1,6 @@
 #include "area023_13.h"
 
 MATCH void func_801F2D60(void) {
-    g_AreaViewRefreshCount = 2;
-    g_AreaViewOffsetY      = (u16)g_AreaViewOffsetY + 0x12;
+    g_AreaCameraRefreshCount = 2;
+    g_AreaCameraOffsetY      = (u16)g_AreaCameraOffsetY + 0x12;
 }

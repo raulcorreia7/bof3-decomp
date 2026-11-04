@@ -91,7 +91,7 @@ NON_MATCHING void func_801576FC(u8* record) {
                 case 2: /* switch 1 */
                     FIELD(u32, val10, 0x30 + (tmp6 * 4) + (tmp1 * LOBU(g_AreaMapBundle.width_00) * 4)) =
                         FIELD(s32, (val2 + val9), 0x4u);
-                    g_AreaViewRefreshCount = 2;
+                    g_AreaCameraRefreshCount = 2;
                     val1 += 3;
                     break;
             }

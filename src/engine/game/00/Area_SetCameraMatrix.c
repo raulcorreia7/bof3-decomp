@@ -12,9 +12,9 @@ MATCH void* Area_SetCameraMatrix(void* out_matrix) {
     /* FAKE: retail reads g_AreaCameraHeight as u32. */
     scale.vz = (s16)((*(u32*)&g_AreaCameraHeight) >> 1);
     ApplyMatrix(&matrix, &scale, &projected);
-    matrix.t[0] = projected.vx + g_AreaViewOffsetX;
-    matrix.t[1] = projected.vy + g_AreaViewOffsetY;
-    matrix.t[2] = projected.vz + g_AreaViewOffsetZ + 0x1194;
+    matrix.t[0] = projected.vx + g_AreaCameraOffsetX;
+    matrix.t[1] = projected.vy + g_AreaCameraOffsetY;
+    matrix.t[2] = projected.vz + g_AreaCameraOffsetZ + 0x1194;
     RotMatrix(&g_AreaCameraAngle, &matrix);
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);

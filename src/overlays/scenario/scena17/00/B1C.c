@@ -76,7 +76,7 @@ MATCH void func_801F7DF4(void) {
         (*state)++;
     } else {
         g_AreaCameraAngle.vx--;
-        g_AreaViewOffsetZ -= 6;
+        g_AreaCameraOffsetZ -= 6;
     }
 }
 

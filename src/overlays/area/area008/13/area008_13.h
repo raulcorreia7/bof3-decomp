@@ -63,12 +63,12 @@ void func_801F437C(void);
 void func_801F43C8(void);
 void func_801F4424(void);
 /* func_801F450C */
-void Area_AddViewOffsetX20(void);
+void Area_AddCameraOffsetX20(void);
 /* func_801F4578 */
-void Area_AddViewOffsetY20(void);
+void Area_AddCameraOffsetY20(void);
 /* func_801F45A0 */
-void Area_SubViewOffsetY20(void);
-void Area_ResetViewOffsetY(void);
+void Area_SubCameraOffsetY20(void);
+void Area_ResetCameraOffsetY(void);
 void func_801F45E4(void);
 void func_801F4600(void);
 void func_801F461C(void);

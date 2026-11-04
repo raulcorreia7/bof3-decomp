@@ -1130,7 +1130,7 @@ MATCH void func_801F92DC(void) {
         g_AreaCameraAngle.vx = 256;
         g_AreaCameraAngle.vz = 0;
         g_AreaCameraAngle.vy = 0;
-        g_AreaViewOffsetZ    = 0x100;
+        g_AreaCameraOffsetZ  = 0x100;
         if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
             g_AreaDrawFlags = 0;
             SYS_SetFlag(g_SceneFlags, 1U);
@@ -1210,7 +1210,7 @@ MATCH void func_801F9868(void) {
                     g_ScriptVarsReq.word = 0;
                     SYS_SetFlag(g_SceneFlags, 3U);
                     Area_AdvanceScroll(0x480);
-                    g_AreaViewOffsetZ    = 0x480;
+                    g_AreaCameraOffsetZ  = 0x480;
                     g_AreaCameraAngle.vz = 848;
                     func_801BE1B0(0U);
                     func_801C601C(0);
@@ -1507,8 +1507,8 @@ MATCH void func_801FA27C(void) {
             count   = *counter;
             if (count != 0) {
                 count--;
-                *counter          = count;
-                g_AreaViewOffsetZ = (u16)(((u32)(0x130 - count) * 0x57943u) >> 16);
+                *counter            = count;
+                g_AreaCameraOffsetZ = (u16)(((u32)(0x130 - count) * 0x57943u) >> 16);
                 break;
             }
             g_SceneState.step_05 = 5;
@@ -1555,7 +1555,7 @@ MATCH void func_801FA27C(void) {
 
             counter = &g_SceneState.timer_06;
             if (*counter != 0) {
-                g_AreaViewOffsetZ = (u16)(((u32)*counter * 0xDu) >> 2);
+                g_AreaCameraOffsetZ = (u16)(((u32)*counter * 0xDu) >> 2);
                 (*counter)--;
                 break;
             }
@@ -1626,13 +1626,13 @@ MATCH void func_801FA7D8(void) {
 
             counter = &g_SceneState.timer_06;
             if (*counter != 0u) {
-                g_AreaViewOffsetZ = (u16)((u32)*counter << 0x13 >> 0x10);
+                g_AreaCameraOffsetZ = (u16)((u32)*counter << 0x13 >> 0x10);
                 (*counter)--;
                 return;
             }
-            g_AreaViewRefreshCount = 2u;
-            g_AreaViewOffsetZ      = 0u;
-            g_SceneState.step_05   = 3u;
+            g_AreaCameraRefreshCount = 2u;
+            g_AreaCameraOffsetZ      = 0u;
+            g_SceneState.step_05     = 3u;
             return;
         }
 
@@ -1998,7 +1998,7 @@ MATCH void func_801FB204(void) {
                 Area_AdvanceScroll(0x580);
                 g_AreaCameraAngle.vx  = -778;
                 g_AreaCameraAngle.vz  = 384;
-                g_AreaViewOffsetZ     = 0x480;
+                g_AreaCameraOffsetZ   = 0x480;
                 g_SceneState.timer_06 = 0x1E;
                 g_SceneState.step_05  = 5;
             }
@@ -2036,7 +2036,7 @@ MATCH void func_801FB204(void) {
             countdown = &g_SceneState.timer_06;
             if (*countdown != 0) {
                 (*countdown)--;
-                g_AreaViewOffsetZ -= 0x24;
+                g_AreaCameraOffsetZ -= 0x24;
             } else {
                 g_SceneState.step_05 = 7;
                 g_ScriptVarsReq.byte++;

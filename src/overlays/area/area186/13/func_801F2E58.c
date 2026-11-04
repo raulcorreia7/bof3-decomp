@@ -4,7 +4,7 @@ MATCH void func_801F2E58(s32 state) {
     s32 mode;
 
     g_AreaCameraAngle.vx = 256;
-    g_AreaViewOffsetZ    = 0x100;
+    g_AreaCameraOffsetZ  = 0x100;
     g_AreaCameraAngle.vz = 0;
     g_AreaCameraAngle.vy = 0;
     mode                 = 1;

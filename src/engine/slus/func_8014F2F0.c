@@ -13,12 +13,12 @@ MATCH void func_8014F2F0(void) {
     u16  second_coordinate;
     u16  timer;
 
-    result                 = 0;
-    iteration              = 0;
-    level                  = 0x7FFF;
-    g_AreaCameraAngle.vx   = -341;
-    g_AreaCameraAngle.vz   = 853;
-    g_AreaViewRefreshCount = 2;
+    result                   = 0;
+    iteration                = 0;
+    level                    = 0x7FFF;
+    g_AreaCameraAngle.vx     = -341;
+    g_AreaCameraAngle.vz     = 853;
+    g_AreaCameraRefreshCount = 2;
 
     do {
         GFX_StepScreenFade(&level, -0x400, 1, 0U, 2U);
@@ -34,18 +34,18 @@ MATCH void func_8014F2F0(void) {
             result = GFX_StepScreenFade(&level, -0x400, 1, 0U, 2U);
         }
 
-        first_coordinate       = *position;
-        second_coordinate      = position[2];
-        g_AreaViewRefreshCount = 2;
+        first_coordinate         = *position;
+        second_coordinate        = position[2];
+        g_AreaCameraRefreshCount = 2;
         first_coordinate -= 0xB;
         *position = first_coordinate;
         /* FAKE: keep timer load ordered. */
         MATCH_FAKE_BARRIER();
-        timer = g_AreaViewOffsetZ;
+        timer = g_AreaCameraOffsetZ;
         second_coordinate -= 0xB;
         position[2] = second_coordinate;
         timer += 0x32;
-        g_AreaViewOffsetZ = timer;
+        g_AreaCameraOffsetZ = timer;
         if ((s16)timer == 1500) {
             break;
         }
@@ -53,8 +53,8 @@ MATCH void func_8014F2F0(void) {
         active_result = result & BYTE_MASK;
     }
 
-    *(s16*)position        = -0x2AA;
-    *next_position         = 0x200;
-    g_AreaViewRefreshCount = 2;
+    *(s16*)position          = -0x2AA;
+    *next_position           = 0x200;
+    g_AreaCameraRefreshCount = 2;
     CallbackExit();
 }

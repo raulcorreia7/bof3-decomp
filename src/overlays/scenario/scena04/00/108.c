@@ -184,7 +184,7 @@ INCLUDE_ASM(func_801F8F98);
 MATCH void func_801F9CFC(void) {
     s32 offset = D_801FA220[(g_FrameCount >> 1) & 3];
 
-    g_AreaViewRefreshCount = 2;
+    g_AreaCameraRefreshCount = 2;
     g_AreaCameraHeight += offset * 4;
 }
 

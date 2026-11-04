@@ -39,11 +39,11 @@ MATCH void func_80197AA4(void) {
                 EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLD);
             }
         }
-        state                  = &g_GameEntrySubstate;
-        count                  = *state;
-        g_AreaDrawMode         = 4;
-        g_AreaViewRefreshCount = 2;
-        D_8014933F             = g_BattleScrollDir & 1;
+        state                    = &g_GameEntrySubstate;
+        count                    = *state;
+        g_AreaDrawMode           = 4;
+        g_AreaCameraRefreshCount = 2;
+        D_8014933F               = g_BattleScrollDir & 1;
         count++;
         *state = count;
     }

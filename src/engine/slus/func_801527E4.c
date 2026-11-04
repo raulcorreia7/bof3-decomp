@@ -52,35 +52,35 @@ MATCH void func_801527E4(void) {
         if (g_AreaMapBundle.scroll_1E == 0) {
             g_AreaTileRemainderY -= (s16)g_AreaCameraHeightStep * 2;
         }
-        g_AreaViewRefreshCount = 2;
-        dir                    = ((0x800000 - ((D_80149310 + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF)) |
-                                  (0x800000 - (D_80149314 << 8) - (g_AreaScrollTargetY & ~0x7FFF)));
+        g_AreaCameraRefreshCount = 2;
+        dir                      = ((0x800000 - ((D_80149310 + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF)) |
+                                    (0x800000 - (D_80149314 << 8) - (g_AreaScrollTargetY & ~0x7FFF)));
         if (dir == 0) {
             g_AreaCameraMoving = 0;
         }
     }
     if ((s16)D_80149336 >= 0x200) {
         func_80152D9C();
-        refilled               = 1;
-        g_AreaViewRefreshCount = 2;
+        refilled                 = 1;
+        g_AreaCameraRefreshCount = 2;
         D_80149336 -= 0x200;
     }
     if ((s16)D_80149336 < -0x1FF) {
         func_80152C9C();
-        refilled               = 1;
-        g_AreaViewRefreshCount = 2;
+        refilled                 = 1;
+        g_AreaCameraRefreshCount = 2;
         D_80149336 += 0x200;
     }
     if ((s16)g_AreaTileRemainderY >= 0x200) {
         func_80152FB0();
-        refilled               = 1;
-        g_AreaViewRefreshCount = 2;
+        refilled                 = 1;
+        g_AreaCameraRefreshCount = 2;
         g_AreaTileRemainderY -= 0x200;
     }
     if ((s16)g_AreaTileRemainderY < -0x1FF) {
         func_80152E94();
-        refilled               = 1;
-        g_AreaViewRefreshCount = 2;
+        refilled                 = 1;
+        g_AreaCameraRefreshCount = 2;
         g_AreaTileRemainderY += 0x200;
     }
     if (refilled != 0) {
@@ -88,21 +88,21 @@ MATCH void func_801527E4(void) {
     }
     if (g_AreaCameraAngle.vx != *(s16*)&D_801492E0 || g_AreaCameraAngle.vy != D_801492E2 ||
         g_AreaCameraAngle.vz != D_801492E4) {
-        g_AreaViewRefreshCount = 3;
-        *(SVECTOR*)&D_801492E0 = *&g_AreaCameraAngle;
+        g_AreaCameraRefreshCount = 3;
+        *(SVECTOR*)&D_801492E0   = *&g_AreaCameraAngle;
     }
     RotMatrix(&g_AreaCameraAngle, (MATRIX*)g_CameraMatrix);
     view.vx = (u32)D_80149310 >> 1;
     view.vy = (u32)D_80149314 >> 1;
     view.vz = (u32)g_AreaCameraHeight >> 1;
     ApplyMatrix((MATRIX*)g_CameraMatrix, &view, &trans);
-    D_801492FC = trans.vx + g_AreaViewOffsetX;
-    D_80149300 = trans.vy + g_AreaViewOffsetY;
-    D_80149304 = trans.vz + (s16)g_AreaViewOffsetZ + 0x1194;
+    D_801492FC = trans.vx + g_AreaCameraOffsetX;
+    D_80149300 = trans.vy + g_AreaCameraOffsetY;
+    D_80149304 = trans.vz + (s16)g_AreaCameraOffsetZ + 0x1194;
     SetRotMatrix((MATRIX*)g_CameraMatrix);
     SetTransMatrix((MATRIX*)g_CameraMatrix);
-    if (g_AreaViewRefreshCount != 0) {
+    if (g_AreaCameraRefreshCount != 0) {
         func_801530D0();
-        g_AreaViewRefreshCount -= 1;
+        g_AreaCameraRefreshCount -= 1;
     }
 }

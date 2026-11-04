@@ -9,7 +9,7 @@ segments:
     subsegments:
       - [0x0, .data, D_801F2C00]
       - [0x8, c, func_801F2C08]
-      - [0x24, c, Area_ResetViewOffsetZ]
+      - [0x24, c, Area_ResetCameraOffsetZ]
       - [0x40, c, func_801F2C40]
       - [0x168, c, func_801F2D68]
       - [0x1AC, c, func_801F2DAC]

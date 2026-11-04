@@ -5,5 +5,5 @@
 
 MATCH void func_8019A8B4(void) {
     D_801C80E0[WORK_PTR->unk_01]();
-    g_AreaViewRefreshCount = 2;
+    g_AreaCameraRefreshCount = 2;
 }

@@ -14,12 +14,12 @@ MATCH void func_8014F024(void) {
     u16  second_value;
     u16  countdown;
 
-    status                 = 0;
-    iterations             = 0;
-    level                  = 0x7FFF;
-    g_AreaCameraAngle.vx   = -341;
-    g_AreaCameraAngle.vz   = 853;
-    g_AreaViewRefreshCount = 2;
+    status                   = 0;
+    iterations               = 0;
+    level                    = 0x7FFF;
+    g_AreaCameraAngle.vx     = -341;
+    g_AreaCameraAngle.vz     = 853;
+    g_AreaCameraRefreshCount = 2;
 
     do {
         GFX_StepScreenFade(&level, -0x400, 1, 0U, 2U);
@@ -34,18 +34,18 @@ MATCH void func_8014F024(void) {
         if (masked_status == 0) {
             status = GFX_StepScreenFade(&level, -0x400, 1, 0U, 2U);
         }
-        first_value            = *coordinates;
-        second_value           = coordinates[2];
-        g_AreaViewRefreshCount = 2;
+        first_value              = *coordinates;
+        second_value             = coordinates[2];
+        g_AreaCameraRefreshCount = 2;
         first_value -= 0xB;
         *coordinates = first_value;
         /* FAKE: keep counter load ordered. */
         MATCH_FAKE_BARRIER();
-        countdown = g_AreaViewOffsetZ;
+        countdown = g_AreaCameraOffsetZ;
         second_value -= 0xB;
         coordinates[2] = second_value;
         countdown += 0x32;
-        g_AreaViewOffsetZ = countdown;
+        g_AreaCameraOffsetZ = countdown;
         if ((s16)countdown == 0x5DC) {
             break;
         }
@@ -53,8 +53,8 @@ MATCH void func_8014F024(void) {
         masked_status = status & BYTE_MASK;
     } while (1);
 
-    *(s16*)coordinates     = -0x2AA;
-    *second_coordinate     = 0x200;
-    g_AreaViewRefreshCount = 2;
+    *(s16*)coordinates       = -0x2AA;
+    *second_coordinate       = 0x200;
+    g_AreaCameraRefreshCount = 2;
     CallbackExit();
 }

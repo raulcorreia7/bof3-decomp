@@ -14,7 +14,7 @@ segments:
       - [0xE0, c, func_801F2CE0]
       - [0x138, c, func_801F2D38]
       - [0x160, c, func_801F2D60]
-      - [0x188, c, Area_ResetViewOffsetY]
+      - [0x188, c, Area_ResetCameraOffsetY]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

@@ -1,7 +1,7 @@
 #include "area149_13.h"
 
 MATCH void func_801F2FC4(void) {
-    if (g_AreaViewOffsetZ < 0x680) {
+    if (g_AreaCameraOffsetZ < 0x680) {
         *g_ScriptVars = 0xF;
         SND_PlayCue(0U);
         g_SpadWork->unk_04 += 1;

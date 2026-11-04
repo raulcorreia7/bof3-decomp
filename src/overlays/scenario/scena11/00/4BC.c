@@ -10,7 +10,7 @@ MATCH void func_801F70BC(void) {
     MATCH_REG(u8*, entity, "v0");
 
     D_801FAEC0[entity[1]]();
-    g_AreaViewRefreshCount = 2;
+    g_AreaCameraRefreshCount = 2;
 }
 
 INCLUDE_ASM(func_801F7104);

@@ -527,13 +527,13 @@ MATCH void func_801F31EC(void) {
     SYS_SetFlag(g_SceneFlags, 0x33u);
 }
 
-#include "overlays/area/Area_SubViewOffsetY20.h"
+#include "overlays/area/Area_SubCameraOffsetY20.h"
 
-#include "overlays/area/Area_AddViewOffsetY20.h"
+#include "overlays/area/Area_AddCameraOffsetY20.h"
 
 MATCH void func_801F3280(void) {
-    g_AreaViewOffsetY      = 0;
-    g_AreaViewRefreshCount = 2;
+    g_AreaCameraOffsetY      = 0;
+    g_AreaCameraRefreshCount = 2;
     SND_StopSequence(0u, 0);
 }
 

@@ -128,11 +128,11 @@ extern s32         g_AreaCameraHeight;
 /* D_80149320 */
 extern s16         g_AreaTileOriginX;
 /* D_80149328 */
-extern s16         g_AreaViewOffsetX;
+extern s16         g_AreaCameraOffsetX;
 /* D_8014932A */
-extern s16         g_AreaViewOffsetY;
+extern s16         g_AreaCameraOffsetY;
 /* D_8014932C */
-extern s16         g_AreaViewOffsetZ;
+extern s16         g_AreaCameraOffsetZ;
 /* D_8014932E */
 extern s16         g_AreaCameraStep;
 /* D_80149330 */
@@ -140,7 +140,7 @@ extern s16         g_AreaCameraHeightStep;
 /* D_80149332 */
 extern u8          g_AreaCameraMoving;
 /* D_80149333 */
-extern u8          g_AreaViewRefreshCount;
+extern u8          g_AreaCameraRefreshCount;
 extern u8          D_8014933A;
 /* D_8014933B */
 extern u8          g_AreaSceneMode;

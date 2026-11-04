@@ -329,9 +329,9 @@ MATCH void func_801FDC10(s32 shift) {
     s32 offset;
 
     if (D_801FE750 != 0) {
-        offset                 = D_801FE6E8[g_FrameCount & 3];
-        g_AreaViewRefreshCount = 2;
-        g_AreaViewOffsetY += offset << shift;
+        offset                   = D_801FE6E8[g_FrameCount & 3];
+        g_AreaCameraRefreshCount = 2;
+        g_AreaCameraOffsetY += offset << shift;
     }
 }
 

@@ -22,9 +22,9 @@ MATCH void func_8019DE54(void) {
     }
     SND_PlayCue(EMI_CUE_ID(1, 12));
     if (g_SpadWork->unk_0B != 0) {
-        g_AreaViewRefreshCount = 3;
-        g_AreaViewOffsetZ      = (s16)(g_AreaViewOffsetZ - 0x80);
-        g_SpadWork->state_02   = (u8)(g_SpadWork->state_02 + 1);
+        g_AreaCameraRefreshCount = 3;
+        g_AreaCameraOffsetZ      = (s16)(g_AreaCameraOffsetZ - 0x80);
+        g_SpadWork->state_02     = (u8)(g_SpadWork->state_02 + 1);
         return;
     }
     Actor_Clear();

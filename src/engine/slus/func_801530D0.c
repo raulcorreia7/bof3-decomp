@@ -60,7 +60,7 @@ NON_MATCHING s32 func_801530D0(void) {
         width = tmp - 1;
     }
     D_1F80000C = width;
-    cell       = g_AreaViewOffsetZ / 650;
+    cell       = g_AreaCameraOffsetZ / 650;
     tmp        = 0;
     if (width >= (s16)cell) {
         tmp = width - (s16)cell;

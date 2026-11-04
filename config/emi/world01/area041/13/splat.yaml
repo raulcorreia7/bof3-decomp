@@ -34,7 +34,7 @@ segments:
       - [0x1178, c, func_801F3D78]
       - [0x11BC, c, Message_Clear]
       - [0x1200, c, func_801F3E00]
-      - [0x1220, c, Area_ResetViewOffsetZ]
+      - [0x1220, c, Area_ResetCameraOffsetZ]
       - [0x123C, c, func_801F3E3C]
       - [0x1280, c, func_801F3E80]
       - [0x12E4, c, func_801F3EE4]

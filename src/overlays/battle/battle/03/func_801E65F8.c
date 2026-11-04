@@ -5,7 +5,7 @@ MATCH void func_801E65F8(void) {
     s32           value;
     u8            count;
 
-    g_AreaViewOffsetZ += D_801EC2E0->unk_0C;
+    g_AreaCameraOffsetZ += D_801EC2E0->unk_0C;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 960, 0), 0);
     GFX_AddPrim(1, 0xC);
     if (BATTLER_IS_PLAYER(g_BattleActingBattler)) {
@@ -16,8 +16,8 @@ MATCH void func_801E65F8(void) {
         /* Only the red channel of the scaled color is kept. */
         func_801D9DBC(0, 0, 0xB, (D_801EC2E0->unk_10 << 0xA) & 0xFC00, 1);
     }
-    slot                   = D_801EC2E0;
-    g_AreaViewRefreshCount = 2;
+    slot                     = D_801EC2E0;
+    g_AreaCameraRefreshCount = 2;
     slot->unk_10 -= 8;
     count = slot->unk_09;
     if (count != 0) {

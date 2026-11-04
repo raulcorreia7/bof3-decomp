@@ -18,14 +18,14 @@ MATCH void func_8014EF80(void) {
 
 loop:
     if ((GFX_StepScreenFade(&value, 0x400, 1, 0, flag) & BYTE_MASK) == 0) {
-        coordinate             = coordinates[0];
-        countdown              = g_AreaViewOffsetZ;
-        g_AreaViewRefreshCount = flag;
+        coordinate               = coordinates[0];
+        countdown                = g_AreaCameraOffsetZ;
+        g_AreaCameraRefreshCount = flag;
         coordinate += 0xB;
         coordinates[0] = coordinate;
         coordinate     = coordinates[2];
         countdown -= 0x32;
-        g_AreaViewOffsetZ = countdown;
+        g_AreaCameraOffsetZ = countdown;
         coordinate += 0xB;
         coordinates[2] = coordinate;
         CallbackWait(1);

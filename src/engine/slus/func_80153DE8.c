@@ -56,9 +56,9 @@ NON_MATCHING void func_80153DE8(void) {
     g_AreaCellPrims[0][1].y2       = 0;
     g_AreaCellPrims[0][1].x3       = 0;
     g_AreaCellPrims[0][1].y3       = 0;
-    g_AreaViewOffsetZ              = 0;
-    g_AreaViewOffsetY              = 0;
-    g_AreaViewOffsetX              = 0;
+    g_AreaCameraOffsetZ            = 0;
+    g_AreaCameraOffsetY            = 0;
+    g_AreaCameraOffsetX            = 0;
     D_80149310                     = 0x7FFF - ((s32)g_AreaScrollTargetX >> 8);
     D_80149314                     = 0x8000 - ((s32)g_AreaScrollTargetY >> 8);
     g_AreaTileOriginX              = ((s32)g_AreaScrollTargetX >> 0x10) - 0x18;
@@ -78,14 +78,14 @@ NON_MATCHING void func_80153DE8(void) {
     if (height == 0) {
         height = g_AreaCameraHeight * -2;
     }
-    g_AreaTileRemainderY   = height;
-    D_80149336             = 0;
-    g_AreaCameraStep       = 0;
-    g_AreaCameraHeightStep = 0;
-    D_80149340             = 0;
-    g_AreaSceneMode        = 0;
-    g_AreaViewRefreshCount = 3;
-    g_AreaCellCodes        = (g_AreaMapBundle.byte_code_off4_14 * 4) + (MAP_BUNDLE_BASE + 0x00);
+    g_AreaTileRemainderY     = height;
+    D_80149336               = 0;
+    g_AreaCameraStep         = 0;
+    g_AreaCameraHeightStep   = 0;
+    D_80149340               = 0;
+    g_AreaSceneMode          = 0;
+    g_AreaCameraRefreshCount = 3;
+    g_AreaCellCodes          = (g_AreaMapBundle.byte_code_off4_14 * 4) + (MAP_BUNDLE_BASE + 0x00);
     for (row = 0; row < 56; row++) {
         for (col = 0; col < 28; col++) {
             g_AreaCells[row][col].prim_id = 0;

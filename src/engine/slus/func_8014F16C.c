@@ -4,7 +4,7 @@
  * -0x800, semi-transparency 1 and order 0.
  */
 MATCH void func_8014F16C(void) {
-    g_AreaViewOffsetZ      = 0x5DC;
-    g_AreaViewRefreshCount = 2;
+    g_AreaCameraOffsetZ      = 0x5DC;
+    g_AreaCameraRefreshCount = 2;
     GFX_RunBlackFade(-0x800, 1, 0);
 }
