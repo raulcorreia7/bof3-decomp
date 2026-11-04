@@ -12,6 +12,9 @@ void            func_800AF764(void);
 void            func_801EF818(void);
 
 extern Callback D_801F04D4[];
+/* The effect slot table BMagic_AllocEffect scans. */
+extern BattleEffect D_801F050C[];
+#define BMAGIC_EFFECT_SLOTS D_801F050C
 void            func_801EF294(void);
 
 #endif
