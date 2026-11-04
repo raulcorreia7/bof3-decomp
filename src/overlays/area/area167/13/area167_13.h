@@ -24,7 +24,7 @@ extern s32 g_AreaFocusY;
 /* The overlay's flag word. */
 /* The payload includes per-state handler tables. */
 extern u8  D_801F4A68[];
-extern s8 D_80146866;
+extern s8  D_80146866;
 
 void SYS_ToggleFlag(void* bits, u8 bit_index);
 

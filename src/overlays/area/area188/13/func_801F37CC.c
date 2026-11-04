@@ -4,7 +4,7 @@ MATCH void func_801F37CC(void) {
     u8 mode;
     u8 count;
 
-    count = g_SpadWork->unk_06;
+    count              = g_SpadWork->unk_06;
     g_SpadWork->unk_06 = count + 1;
     if (!(count & 3)) {
         Area_ClaimSpawnSlot();
@@ -16,7 +16,7 @@ MATCH void func_801F37CC(void) {
         if (g_SpadWork->unk_09 == 0x10) {
             SND_PlayCue(EMI_CUE_ID(2, 0x16));
         }
-        mode = g_SpadWork->unk_09 - 1;
+        mode               = g_SpadWork->unk_09 - 1;
         g_SpadWork->unk_09 = mode;
         if (!(mode & 0xFF)) {
             g_SpadWork->unk_03 = 0x80;

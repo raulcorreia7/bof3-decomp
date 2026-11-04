@@ -8,7 +8,7 @@ MATCH void func_801F3264(void) {
         g_SpadWork->tint.bytes.unk_5F += 6;
     } else {
         Message_StartAreaMessage(0x1F);
-        g_GameStateIndex = 2;
+        g_GameStateIndex   = 2;
         g_SpadWork->unk_01 = 2;
     }
     func_801F3438();
