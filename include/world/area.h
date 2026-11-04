@@ -363,7 +363,7 @@ ASSERT_OFFSET(AreaTrail, points, 0x18);
 typedef struct AreaSpawnSlot {
     u8    active;    /* 0x00 - 0 marks a free slot */
     u8    unk_01;    /* 0x01 */
-    u8    unk_02;    /* 0x02 */
+    u8    life_02;   /* 0x02 - frames left; the update pass counts it down and frees the slot at 0 */
     u8    unk_03;    /* 0x03 */
     Coord x;         /* 0x04 */
     Coord y;         /* 0x08 */
