@@ -33,11 +33,18 @@ void func_801F564C(void);
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F6AF8[6];
+extern u16            g_GameAreaId;
+extern u16            D_80143F22;
+extern s8             g_GameRequestKind;
 /* func_801F3A9C */
 void                  Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 /* func_801F3F90 */
 void                  Area_DrawGradientDiamond(s16 x, s16 y);
 
 void func_8015A944(void);
+
+s32 func_801F4AE4(s32, s32, s32);
+
+s32 func_801A79A4(s32, s32);
 
 #endif
