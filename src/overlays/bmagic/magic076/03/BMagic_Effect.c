@@ -19,6 +19,7 @@ INCLUDE_ASM(func_801EF160);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
+/* Switch and comparisons: first difference is lui v1 at 0x801EF2E8. */
 INCLUDE_ASM(func_801EF2E8);
 
 MATCH void func_801EF330(void) {
