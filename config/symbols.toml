@@ -353,6 +353,7 @@ g_BMagicEffectFuncs = { addr = 0x801F1394, source = "the module dispatcher index
 
 ["emi/bmagic/magic065/00"]
 Effect_ReloadTimerAndStep = { addr = 0x801EF2E0, type = "func", source = "reloads the effect timer with the value func_800AFF98 returns and advances the effect step" }
+BMagic_SetTextItemName = { addr = 0x801EF428, type = "func", source = "copies the 12-byte name of the equipment record (category, id) into text variable 0, like Battle_SetTextPartyName does for a party member; func_801EF134 calls it with the two bytes of work +0x2C" }
 g_BMagicEffectFuncs = { addr = 0x801EF510, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic066/03"]

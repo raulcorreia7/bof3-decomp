@@ -40,4 +40,21 @@ MATCH void func_801EF408(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801EF428);
+/* func_801EF428 */
+MATCH void BMagic_SetTextItemName(u8 item_id, u8 category) {
+    switch (category) {
+        case ITEM_CAT_ITEM:
+        default:
+            SYS_CopyString(g_TextVariables[0], g_Items[item_id].name, ITEM_NAME_LENGTH);
+            break;
+        case ITEM_CAT_WEAPON:
+            SYS_CopyString(g_TextVariables[0], g_Weapons[item_id].name, ITEM_NAME_LENGTH);
+            break;
+        case ITEM_CAT_ARMOR:
+            SYS_CopyString(g_TextVariables[0], g_Armors[item_id].name, ITEM_NAME_LENGTH);
+            break;
+        case ITEM_CAT_ACCESSORY:
+            SYS_CopyString(g_TextVariables[0], g_Accessories[item_id].name, ITEM_NAME_LENGTH);
+            break;
+    }
+}
