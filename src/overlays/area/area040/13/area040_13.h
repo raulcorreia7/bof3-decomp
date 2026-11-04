@@ -16,4 +16,6 @@ s32       func_801F2E78(void);
 
 extern u8 D_801F4970[];
 
+extern u8 D_80146875;
+
 #endif
