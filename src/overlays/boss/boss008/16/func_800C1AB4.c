@@ -1,19 +1,19 @@
 #include "boss008_16.h"
 
 MATCH void func_800C1AB4(void) {
-    u8* work;
-    u8* spad;
+    PartyBattler* work;
+    PartyBattler* spad;
 
-    func_800C236C(g_SpadWork[9]);
+    func_800C236C(g_SpadWork->word_08.byte.unk_09);
     work = g_SpadWork;
-    if (work[9] == 0x30) {
-        work[0x48]             = 2;
-        spad                   = g_SpadWork;
-        FIELD(u32, spad, 0x40) = 0x10000;
-        FIELD(u32, spad, 0x44) = 0x10000;
+    if (work->word_08.byte.unk_09 == 0x30) {
+        work->unk_48 = 2;
+        spad         = g_SpadWork;
+        spad->unk_40 = 0x10000;
+        spad->unk_44 = 0x10000;
         SND_PlayCue(EMI_CUE_ID(6, 2));
-        g_SpadWork[4]++;
+        g_SpadWork->unk_04++;
     } else {
-        work[9] += 4;
+        work->word_08.byte.unk_09 += 4;
     }
 }
