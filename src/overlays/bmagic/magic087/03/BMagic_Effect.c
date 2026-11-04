@@ -44,7 +44,25 @@ MATCH void func_801EF958(void) {
 
 INCLUDE_ASM(func_801EF99C);
 
-INCLUDE_ASM(func_801EFA2C);
+MATCH void func_801EFA2C(void) {
+    u8 temp_v0;
+
+    temp_v0            = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->unk_0C = 0x100;
+        g_SpadWork->unk_18 = 4;
+        if (g_SpadWork->step_01 != 0) {
+            g_SpadWork->unk_0B = 0;
+            g_SpadWork->unk_09 = 0;
+        } else {
+            g_SpadWork->unk_0B = 8;
+            g_SpadWork->unk_09 = 0x1F;
+        }
+        g_SpadWork->unk_0A = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EFAD4);
 
