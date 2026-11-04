@@ -194,7 +194,17 @@ MATCH void func_801FDD80(void* entity) {
     handler(entity, g_SceneFlags);
 }
 
-INCLUDE_ASM(func_801FDDC0);
+MATCH void func_801FDDC0(void* entity) {
+    u8 message;
+
+    message = D_801FE71C[((Actor*)entity)->callback_index];
+    if (g_GameAreaId == 0xC0) {
+        Message_StartAreaMessage(func_801F326C(message));
+    } else {
+        Message_StartAreaMessage(func_801F37AC(message));
+    }
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+}
 
 MATCH void func_801FDE2C(void) {
     Game_SetScriptActive();

@@ -20,6 +20,10 @@ s32  func_801F7748(void);
 void func_801F79C4(void);
 void func_801F8704(void);
 void func_801F8958(void);
+extern u16 g_GameAreaId;
+extern u8  D_801FE71C[];
+s16        func_801F326C(s32 message);
+s16        func_801F37AC(s32 message);
 
 extern Callback D_801FE57C[];
 
