@@ -28,6 +28,8 @@ void Area_DrawHudBanner(s16 x, s16 y);
 void func_801F4E3C(void);
 void func_801F5254(void);
 void func_801F564C(void);
+void func_801F5738(void);
+s32  func_801F5988(s32 direction, s32 previous);
 
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud
