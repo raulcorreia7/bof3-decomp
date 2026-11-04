@@ -22,7 +22,20 @@ INCLUDE_ASM(func_801EF14C);
 
 INCLUDE_ASM(func_801EF28C);
 
-INCLUDE_ASM(func_801EF4AC);
+MATCH void func_801EF4AC(void) {
+    u8 timer;
+
+    g_SpadWork->word_08.byte.unk_0B += 1;
+    g_SpadWork->word_08.byte.unk_09 += 1;
+    timer                             = g_SpadWork->word_08.byte.timer_0A - 1;
+    g_SpadWork->word_08.byte.timer_0A = timer;
+    if (!(timer & 0xFF)) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        Actor_Clear();
+        return;
+    }
+    func_801EF9E0();
+}
 
 MATCH void func_801EF550(void) {
     BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
