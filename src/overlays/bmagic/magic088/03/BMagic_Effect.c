@@ -53,7 +53,37 @@ INCLUDE_ASM(func_801EF1AC);
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
-INCLUDE_ASM(func_801EF34C);
+MATCH s32 func_801EF34C(void) {
+    s32 result;
+
+    if (LOBU(g_BattleActionType) == 4) {
+        switch (LOHU(g_BattleActionId)) {
+            case 0x5A:
+            case 0xC0:
+                result = 0;
+                break;
+            case 0x1E:
+            case 0x58:
+            case 0xBE:
+                result = 1;
+                break;
+            case 0x1F:
+            case 0x59:
+            case 0xBF:
+                result = 2;
+                break;
+            default:
+                result = 3;
+                break;
+        }
+    } else if (LOHU(g_BattleActionId) == 0x112) {
+        g_BattleActionId = 0x5A;
+        result           = 0;
+    } else {
+        result = 3;
+    }
+    return result;
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
