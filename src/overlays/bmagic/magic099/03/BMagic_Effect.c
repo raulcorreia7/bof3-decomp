@@ -65,20 +65,7 @@ MATCH void func_801EF374(void) {
     BattleEffectTimerStep();
 }
 
-MATCH void func_801EF3E4(void) {
-    PartyBattler* work;
-
-    /* A store through the pointer may alias the cell, so each step reloads
-     * it. */
-    work = g_SpadWork;
-    work->word_08.byte.unk_0B++;
-    work = g_SpadWork;
-    work->word_08.byte.unk_09--;
-    if (work->word_08.byte.unk_09 == 0) {
-        work = g_SpadWork;
-        work->unk_02++;
-    }
-}
+#include "overlays/bmagic/Effect_CountDownTimerRaiseTicker.h"
 
 MATCH void func_801EF44C(void) {
     PartyBattler* work;

@@ -1,0 +1,19 @@
+/* Raises the effect ticker (work byte 0x0B) and counts the effect timer (work
+ * byte 0x09) down; at zero it advances the effect step (work byte 0x02). One
+ * definition shared by the bmagic effect modules; every change here must
+ * verify every member. */
+/* func_801EF3E4 (magic099), func_801F1318 (magic151) */
+MATCH void Effect_CountDownTimerRaiseTicker(void) {
+    PartyBattler* work;
+
+    /* A store through the pointer may alias the cell, so each step reloads
+     * it. */
+    work = g_SpadWork;
+    work->word_08.byte.unk_0B++;
+    work = g_SpadWork;
+    work->word_08.byte.unk_09--;
+    if (work->word_08.byte.unk_09 == 0) {
+        work = g_SpadWork;
+        work->unk_02++;
+    }
+}

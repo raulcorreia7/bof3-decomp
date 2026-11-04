@@ -141,18 +141,7 @@ INCLUDE_ASM(func_801F11E0);
 
 INCLUDE_ASM(func_801F129C);
 
-MATCH void func_801F1318(void) {
-    PartyBattler* work;
-
-    work = g_SpadWork;
-    work->word_08.byte.unk_0B++;
-    work = g_SpadWork;
-    work->word_08.byte.unk_09--;
-    if (work->word_08.byte.unk_09 == 0) {
-        work = g_SpadWork;
-        work->unk_02++;
-    }
-}
+#include "overlays/bmagic/Effect_CountDownTimerRaiseTicker.h"
 
 #include "overlays/bmagic/Effect_CountDownByTwoAndFinish.h"
 
