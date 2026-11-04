@@ -41,7 +41,23 @@ INCLUDE_ASM(func_801EF890);
 
 INCLUDE_ASM(func_801EF960);
 
-INCLUDE_ASM(func_801EFAB0);
+MATCH void func_801EFAB0(void) {
+    s32 temp_v1;
+    u8  counter;
+
+    temp_v1 = g_SpadWork->unk_14;
+    if (temp_v1 >= 9) {
+        g_SpadWork->unk_14 = temp_v1 - 1;
+    }
+    if (g_FrameCount & 1) {
+        counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
+        g_SpadWork->word_08.byte.unk_09 = counter;
+        if (!(counter & 0xFF)) {
+            BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+            func_801E5988();
+        }
+    }
+}
 
 MATCH void func_801EFB48(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 8), 1, g_SpadWork);
