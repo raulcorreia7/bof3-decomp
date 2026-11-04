@@ -57,7 +57,7 @@ MATCH void func_801D8908(void) {
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             cursor = Party_GetAbilities(rec->party_slot, rec->ability_group, 0) + rec->swap_cursor;
-            func_801D933C(cursor, Party_GetAbilities(rec->party_slot, rec->ability_group, 0) + rec->cursor);
+            Menu_SwapBytes_801D933C(cursor, Party_GetAbilities(rec->party_slot, rec->ability_group, 0) + rec->cursor);
             rec->swap_cursor = 0xFF;
         }
     } else if (g_InputPressed & D_80145AC4) {

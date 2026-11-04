@@ -24,8 +24,8 @@ MATCH void func_801D4B44(void) {
                 if (c0 != 0) {
                     c1 = *nxt;
                     if ((c1 != 0) && !(g_Items[c0].flags & 1) && (g_Items[c1].flags & 1)) {
-                        func_801D4A30(row, nxt);
-                        func_801D4A30(mirror, mirror + 1);
+                        Menu_SwapBytes(row, nxt);
+                        Menu_SwapBytes(mirror, mirror + 1);
                     }
                 }
                 nxt++;

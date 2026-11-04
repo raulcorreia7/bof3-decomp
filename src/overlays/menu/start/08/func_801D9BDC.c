@@ -89,7 +89,7 @@ NON_MATCHING void func_801D9BDC(void) {
             D_801ED67C = (s8)D_801ED66C;
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 4));
-            func_801DAC08(&D_80144F5D[(s8)D_801ED66C], &D_80144F5D[D_801ED67C]);
+            Menu_SwapBytes_801DAC08(&D_80144F5D[(s8)D_801ED66C], &D_80144F5D[D_801ED67C]);
             if ((s8)D_801ED66C != D_801ED67C) {
                 D_801ED660 = (u8)(s8)D_801ED66C;
                 D_801ED664 = (u8)D_801ED67C;

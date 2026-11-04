@@ -1562,6 +1562,7 @@ Shop_GetSellPrice = { addr = 0x801D3688, type = "func", source = "reads the item
 SAVE_DispatchState = { addr = 0x801D46A4, type = "func", source = "its body is SYS_DISPATCH_BYTE over the 21-entry table D_801E530C, indexed by D_80148652" }
 SAVE_DrawSlots = { addr = 0x801D67B0, type = "func", source = "draws the visible stock rows and the panel header, one body shared with the start overlay" }
 SAVE_BuildSlotImage = { addr = 0x801D69E0, type = "func", source = "func_801D51B8 and func_801D5894 call it; its body copies g_SceneState, the party order and the five-byte name into the image at D_801448D8, sums the image and stores the sum in D_800C1A70" }
+Menu_SwapBytes = { addr = 0x801D7E08, type = "func", source = "swaps the bytes two pointers address; the shop callers pass entries of the party order bytes D_80144F5A and of D_801E6244 and the start callers entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs; one body shared with the other menu overlay" }
 Menu_DrawCharacterWindow = { addr = 0x801D826C, type = "func", source = "draws one party member's window from g_Characters[character_slot]: portrait of the character id, name, level, poison and confusion labels, current and max HP and AP, exp bar; the shop and start panel tasks pass the slot found through g_CharSlot" }
 Menu_DrawStatPanel = { addr = 0x801D86D4, type = "func", source = "draws the four stat labels, their values and the glyph rows, one body shared with the start, Bate and Shisu overlays" }
 Shop_DrawEquipment = { addr = 0x801D8A0C, type = "func", source = "draws the six-row equipment list with each object's icon and name for one party member" }
@@ -1588,6 +1589,8 @@ Menu_DrawWindowFrame = { addr = 0x801DC1F4, type = "func", source = "draws a win
 Shop_DrawAbilities = { addr = 0x801DCE5C, type = "func", source = "draws the shop's ten-row ability list with level, count, cursor tabs and window frame" }
 Menu_DrawPanelFrame = { addr = 0x801DD350, type = "func", source = "draws the tiled border of a menu panel, called by Shop_DrawItems in emi/etc/shop/00" }
 SAVE_DrawSlot = { addr = 0x801DDCB0, type = "func", source = "draws one stock row window, icons, name and formatted values, shared name with the start overlay" }
+Menu_SwapBytes_801DF464 = { addr = 0x801DF464, type = "func", source = "byte-identical to Menu_SwapBytes at emi/etc/shop/00@0x801D7E08" }
+Menu_SwapBytes_801E1BB8 = { addr = 0x801E1BB8, type = "func", source = "byte-identical to Menu_SwapBytes at emi/etc/shop/00@0x801D7E08" }
 Menu_DrawPanelCursor = { addr = 0x801E2B94, type = "func", source = "draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite" }
 Shop_DrawItems = { addr = 0x801E2F04, type = "func", source = "draws the shop's item rows with price, icon, name and the affordable/selected shading" }
 Party_HasSkill = { addr = 0x801E4D4C, type = "func", source = "searches the seven character item rows and the 128-entry item list for item_id" }
@@ -1646,6 +1649,10 @@ s_RowCaptionTags = { addr = 0x801D0EB0, source = "func_801E30FC copies these eig
 g_SaveFileNameFormat = { addr = 0x801D0EC8, source = "SAVE_RunLoadVerify formats the slot into it for the card file name; func_801E54A4 filters the card directory with it and func_801E7348 compares directory names against it" }
 Party_InitDefaults = { addr = 0x801D15C0, type = "func", source = "its body copies D_801EB514 into g_Characters and sets each willpower" }
 Menu_DispatchStep = { addr = 0x801D1740, type = "func", source = "the body runs D_801EC35C[D_80148650]" }
+Menu_SwapBytes = { addr = 0x801D4A30, type = "func", source = "swaps the bytes two pointers address; the shop callers pass entries of the party order bytes D_80144F5A and of D_801E6244 and the start callers entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs; one body shared with the other menu overlay" }
+Menu_SwapBytes_801D6668 = { addr = 0x801D6668, type = "func", source = "byte-identical to Menu_SwapBytes at emi/etc/start/08@0x801D4A30" }
+Menu_SwapBytes_801D933C = { addr = 0x801D933C, type = "func", source = "byte-identical to Menu_SwapBytes at emi/etc/start/08@0x801D4A30" }
+Menu_SwapBytes_801DAC08 = { addr = 0x801DAC08, type = "func", source = "byte-identical to Menu_SwapBytes at emi/etc/start/08@0x801D4A30" }
 Menu_DrawCharacterWindow = { addr = 0x801DB764, type = "func", source = "draws one party member's window from g_Characters[character_slot]: portrait of the character id, name, level, poison and confusion labels, current and max HP and AP, exp bar; the shop and start panel tasks pass the slot found through g_CharSlot" }
 Menu_DrawStatPanel = { addr = 0x801DBBCC, type = "func", source = "draws the four stat labels, their values and the glyph rows, one body shared with the shop, Bate and Shisu overlays" }
 Menu_DrawCursorFrame = { addr = 0x801DC324, type = "func", source = "draws the menu cursor frame with the corner bits selected by the frame mode" }

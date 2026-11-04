@@ -21,8 +21,8 @@ MATCH void func_801D5114(void) {
         for (j = 0; j < 127 - i; j++) {
             if (left[0] != 0 && left[1] != 0 && (u8)(mask & Item_GetEquipability(kind, left[0])) == 0 &&
                 (u8)(mask & Item_GetEquipability(kind, left[1])) != 0) {
-                func_801D4A30(left, left + 1);
-                func_801D4A30(right, right + 1);
+                Menu_SwapBytes(left, left + 1);
+                Menu_SwapBytes(right, right + 1);
             }
             left++;
             right++;

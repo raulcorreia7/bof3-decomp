@@ -361,7 +361,8 @@ void        func_801D42F0(void);
 void        func_801D455C(void);
 void        func_801D4564(void);
 void        func_801D485C(void);
-extern void func_801D4A30(u8* first, u8* second);
+/* func_801D4A30 */
+extern void Menu_SwapBytes(u8* first, u8* second);
 void        func_801D4A44(void);
 void        func_801D4B44(void);
 void        func_801D4C68(void);
@@ -380,7 +381,8 @@ void        func_801D8DC8(void);
 void        func_801D902C(void);
 void        func_801D90A8(void);
 void        func_801D9110(void);
-extern void func_801D933C(u8* first, u8* second);
+/* func_801D933C */
+extern void Menu_SwapBytes_801D933C(u8* first, u8* second);
 extern void func_801D9350(void);
 void        func_801D970C(void);
 void        func_801D9748(void);
@@ -392,7 +394,8 @@ void        func_801DA27C(void);
 void        func_801DA320(void);
 void        func_801DA984(void);
 void        func_801DAA68(void);
-void        func_801DAC08(u8* first, u8* second);
+/* func_801DAC08 */
+void        Menu_SwapBytes_801DAC08(u8* first, u8* second);
 extern void func_801DB510(void);
 void        func_801DB550(void);
 void        func_801DB5AC(void);

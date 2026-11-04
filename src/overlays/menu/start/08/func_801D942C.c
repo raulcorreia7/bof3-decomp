@@ -33,7 +33,7 @@ MATCH void func_801D942C(void) {
                 if (cur != 0) {
                     nxt = next[0];
                     if ((nxt != 0) && (D_801CA71A[cur].unk_00 < D_801CA71A[nxt].unk_00)) {
-                        func_801D933C(list, next);
+                        Menu_SwapBytes_801D933C(list, next);
                     }
                 }
                 next++;

@@ -16,7 +16,7 @@ MATCH void func_801E1D84(void) {
         for (j = 0; j < 127 - i; j++) {
             cur = *row;
             if ((cur != 0) && (*(row + 1) != 0) && (D_801CA71A[cur].unk_00 > D_801CA71A[*(row + 1)].unk_00)) {
-                func_801E1BB8(row, row + 1);
+                Menu_SwapBytes_801E1BB8(row, row + 1);
             }
             row++;
         }

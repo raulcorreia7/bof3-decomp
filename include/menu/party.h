@@ -24,6 +24,14 @@
  * meanings stay separate.
  */
 
+/* The statements of Menu_SwapBytes: swap the bytes two pointers address, as the
+ * menu overlays swap two entries of a party order array or of the standby list.
+ * The member declares `u8 temp`. */
+#define MENU_SWAP_BYTES(first, second) \
+    temp      = *(first);              \
+    *(first)  = *(second);             \
+    *(second) = temp
+
 /* D_80144F50 */
 extern u32 g_Zenny;
 /* Stored character id -> character-record slot (Observed:

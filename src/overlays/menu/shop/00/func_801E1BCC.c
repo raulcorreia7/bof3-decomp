@@ -9,7 +9,7 @@ MATCH void func_801E1BCC(void) {
         row = D_8014546C;
         for (j = 0; j < 127 - i; j++) {
             if (*row == 0 && *(row + 1) != 0) {
-                func_801E1BB8(row, row + 1);
+                Menu_SwapBytes_801E1BB8(row, row + 1);
             }
             row++;
         }

@@ -470,7 +470,8 @@ void func_801D7AE4(void);
 void func_801D7B74(void);
 void func_801D7CC8(void);
 void func_801D7D48(void);
-void func_801D7E08(u8* first, u8* second);
+/* func_801D7E08 */
+void Menu_SwapBytes(u8* first, u8* second);
 void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor);
 void func_801D8050(s32 panel_x);
 s32  func_801D81B4(u8* cursor_byte, s32 palette_index);
@@ -521,7 +522,8 @@ void func_801DE944(void);
 void func_801DEE20(void);
 void func_801DEE64(void);
 void func_801DF00C(s32 panel_x, s32 panel_y);
-void func_801DF464(u8* first, u8* second);
+/* func_801DF464 */
+void Menu_SwapBytes_801DF464(u8* first, u8* second);
 s32  func_801DF478(void);
 void func_801DF6A8(void);
 void func_801DF90C(void);
@@ -543,7 +545,8 @@ void func_801E0F78(void);
 void func_801E112C(MenuPanelTask* task);
 void func_801E1710(MenuPanelTask* task);
 void func_801E1B80(s32 handler_index);
-void func_801E1BB8(u8* first, u8* second);
+/* func_801E1BB8 */
+void Menu_SwapBytes_801E1BB8(u8* first, u8* second);
 void func_801E1BCC(void);
 void func_801E1C88(void);
 void func_801E1D84(void);

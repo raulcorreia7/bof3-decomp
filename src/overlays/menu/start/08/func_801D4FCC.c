@@ -16,8 +16,8 @@ MATCH void func_801D4FCC(void) {
         for (j = 0; j < 127 - i; ids++, mirror++, j++) {
             if (ids[0] != 0 && ids[1] != 0) {
                 if ((u8)Item_GetKind(group, ids[0]) > (u8)Item_GetKind(group, ids[1])) {
-                    func_801D4A30(ids, ids + 1);
-                    func_801D4A30(mirror, mirror + 1);
+                    Menu_SwapBytes(ids, ids + 1);
+                    Menu_SwapBytes(mirror, mirror + 1);
                 }
             }
         }

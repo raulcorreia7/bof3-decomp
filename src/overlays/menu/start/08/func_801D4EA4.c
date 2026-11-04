@@ -20,8 +20,8 @@ MATCH void func_801D4EA4(void) {
             if (cur != 0) {
                 nxt = *(ids + 1);
                 if ((nxt != 0) && (g_Armors[cur].power < g_Armors[nxt].power)) {
-                    func_801D4A30(ids, ids + 1);
-                    func_801D4A30(qtys, qtys + 1);
+                    Menu_SwapBytes(ids, ids + 1);
+                    Menu_SwapBytes(qtys, qtys + 1);
                 }
             }
             ids++;

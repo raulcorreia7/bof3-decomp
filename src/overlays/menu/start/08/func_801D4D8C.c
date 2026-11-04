@@ -30,8 +30,8 @@ MATCH void func_801D4D8C(void) {
                         left_off  = (left_id * 3) * 0x8;
                         right_off = (right_id * 3) * 0x8;
                         if (D_801C90EE[left_off] < D_801C90EE[right_off]) {
-                            func_801D4A30(left, right);
-                            func_801D4A30(out, out + 1);
+                            Menu_SwapBytes(left, right);
+                            Menu_SwapBytes(out, out + 1);
                         }
                     }
                 }

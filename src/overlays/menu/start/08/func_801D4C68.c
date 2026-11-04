@@ -27,8 +27,8 @@ MATCH void func_801D4C68(void) {
                     if (y != 0) {
                         if (!(g_Items[x].flags & ITEM_TARGET_SELECTABLE)) {
                             if (g_Items[y].flags & ITEM_TARGET_SELECTABLE) {
-                                func_801D4A30(a, b);
-                                func_801D4A30(c, c + 1);
+                                Menu_SwapBytes(a, b);
+                                Menu_SwapBytes(c, c + 1);
                             }
                         }
                     }

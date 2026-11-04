@@ -11,8 +11,8 @@ MATCH void func_801D4A44(void) {
         pair = D_801C8950[D_8014850E];
         for (j = 0; j < 127 - i; j++) {
             if (row[0] == 0 && row[1] != 0) {
-                func_801D4A30(row, row + 1);
-                func_801D4A30(pair, pair + 1);
+                Menu_SwapBytes(row, row + 1);
+                Menu_SwapBytes(pair, pair + 1);
             }
             row++;
             pair++;
