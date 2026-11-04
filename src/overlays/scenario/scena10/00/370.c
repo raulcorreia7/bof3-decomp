@@ -101,11 +101,47 @@ INCLUDE_ASM(func_801FC900);
 
 INCLUDE_ASM(func_801FCD80);
 
-INCLUDE_ASM(func_801FD278);
+MATCH u16 func_801FD278(void) {
+    u8 slot;
+    u8 member;
 
-INCLUDE_ASM(func_801FD31C);
+    for (slot = 0; slot < 4; slot++) {
+        for (member = 0; member < g_PartySize; member++) {
+            if (g_BattlePartyBattlers[member].stats.character_id == D_801FE950[slot]) {
+                return D_801FE954[slot];
+            }
+        }
+    }
+    return 0;
+}
 
-INCLUDE_ASM(func_801FD3C0);
+MATCH u16 func_801FD31C(void) {
+    u8 slot;
+    u8 member;
+
+    for (slot = 0; slot < 5; slot++) {
+        for (member = 0; member < g_PartySize; member++) {
+            if (g_BattlePartyBattlers[member].stats.character_id == D_801FE95C[slot]) {
+                return D_801FE964[slot];
+            }
+        }
+    }
+    return 0;
+}
+
+MATCH u16 func_801FD3C0(void) {
+    u8 slot;
+    u8 member;
+
+    for (slot = 0; slot < 3; slot++) {
+        for (member = 0; member < g_PartySize; member++) {
+            if (g_BattlePartyBattlers[member].stats.character_id == D_801FE970[slot]) {
+                return D_801FE974[slot];
+            }
+        }
+    }
+    return 0xFFFF;
+}
 
 MATCH void func_801FD464(void* entity) {
     SceneFunc handler;
