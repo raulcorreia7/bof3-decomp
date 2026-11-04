@@ -12,7 +12,7 @@ segments:
       - [0x94, c, func_801F2C94]
       - [0xF0, c, func_801F2CF0]
       - [0x12C, c, func_801F2D2C]
-      - [0x168, c, func_801F2D68]
+      - [0x168, c, Actor_WalkWhileWithinLimit]
       - [0x208, c, func_801F2E08]
       - [0x250, c, func_801F2E50]
       - [0x2D0, c, func_801F2ED0]

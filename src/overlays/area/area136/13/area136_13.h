@@ -8,6 +8,8 @@
 #include "menu/party.h"
 #include "work/area_spad.h"
 
+/* The per-scene y limit bytes the walk step reads, in 16.16 units. */
+#define AREA_WALK_LIMIT_TABLE D_801F4400
 extern u8 D_801F4400[];
 
 /* The field step bytes the palette path tests. */

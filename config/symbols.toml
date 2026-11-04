@@ -2271,6 +2271,10 @@ D_801F4A88 = { addr = 0x801F4A88, source = "func_801F3800 and func_801F385C use 
 Area_ClearWorkColumn = { addr = 0x801F4974, type = "func", source = "clears one byte of each row in the actor window" }
 Area_ResetViewOffsetY = { addr = 0x801F53D0, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 
+["emi/world03/area136/13"]
+Actor_WalkWhileWithinLimit = { addr = 0x801F2D68, type = "func", source = "walks the script actor one step along facing 5 and rewinds the script cursor while its y position plus the facing-5 y step is at most the per-scene limit table entry D_801448ED selects (func_801F2D68 in area136, func_801F4840 in area188)" }
+
+
 ["emi/world03/area139/13"]
 Actor_AdvanceWhenPartyNear = { addr = 0x801F3C68, type = "func", source = "advances the work state when the party position is inside the work cell" }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F3E04, type = "func", source = "advances the work state when the party position is outside the work cell" }
@@ -2500,6 +2504,7 @@ Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the
 ["emi/world04/area188/13"]
 Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "clears one byte of each row in the actor window" }
 Area_InitSpin = { addr = 0x801F4394, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
+Actor_WalkWhileWithinLimit = { addr = 0x801F4840, type = "func", source = "walks the script actor one step along facing 5 and rewinds the script cursor while its y position plus the facing-5 y step is at most the per-scene limit table entry D_801448ED selects (func_801F2D68 in area136, func_801F4840 in area188)" }
 Area_ResetViewOffsetY = { addr = 0x801F4930, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 
 ["emi/world04/area193/13"]
