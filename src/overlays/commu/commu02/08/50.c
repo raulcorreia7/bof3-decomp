@@ -15,7 +15,13 @@ MATCH void func_801D0C8C(void) {
 
 INCLUDE_ASM(func_801D0CC8);
 
-INCLUDE_ASM(func_801D0D54);
+MATCH void func_801D0D54(void) {
+    if (EMI_LoaderIsReady() != 0) {
+        SND_PlayBgm(0x94, 0x64, 8);
+        D_801F294D = 0;
+        D_801F294C += 1;
+    }
+}
 
 MATCH void func_801D0DA4(void) {
     SYS_DISPATCH_BYTE(D_801DABE0, D_801F294D);
@@ -23,7 +29,13 @@ MATCH void func_801D0DA4(void) {
 
 INCLUDE_ASM(func_801D0DE0);
 
-INCLUDE_ASM(func_801D0EEC);
+MATCH void func_801D0EEC(void) {
+    func_801D3184(0x6E, 0x48);
+    func_801D32A0(0x6E, 0x74, 1);
+    if (g_GameStateIndex != 2) {
+        D_801F294D += 1;
+    }
+}
 
 MATCH void func_801D0F4C(void) {
     SYS_DISPATCH_BYTE(D_801DAC14, D_801F294E);
