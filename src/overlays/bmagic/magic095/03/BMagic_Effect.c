@@ -10,7 +10,21 @@ INCLUDE_ASM(func_801EEC9C);
 
 INCLUDE_ASM(func_801EEE60);
 
-INCLUDE_ASM(func_801EEF64);
+MATCH void func_801EEF64(void) {
+    u8 counter;
+
+    func_801EF1FC();
+    func_801EF804();
+    func_801EFDDC();
+    counter                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = counter;
+    if ((counter & 0xFF) == 0x40) {
+        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionFx(0x102);
+        g_SpadWork->word_08.byte.unk_09 = 0x30;
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void func_801EEFFC(void) {
     u8 timer;
@@ -49,7 +63,17 @@ INCLUDE_ASM(func_801EFDDC);
 
 INCLUDE_ASM(func_801F0018);
 
-INCLUDE_ASM(func_801F0070);
+MATCH void func_801F0070(void) {
+    u8 counter;
+
+    if (BATTLE_ACTIVE_WORK->step_01 == 3) {
+        counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
+        g_SpadWork->word_08.byte.unk_09 = counter;
+        if (!(counter & 0xFF)) {
+            g_SpadWork->step_01 += 1;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801F00D8);
 
