@@ -7,6 +7,8 @@
 #include "shared/etc.h"
 #include <stdio.h>
 
+extern u8 D_80148654;
+
 #define g_SceneState (*(struct SceneState*)&g_SceneState)
 
 /* The ability-list record. @source: read:func_801D73B4 */
