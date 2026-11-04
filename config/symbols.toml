@@ -391,6 +391,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0064, source = "the module dispatcher index
 ["emi/bmagic/magic067/03"]
 Effect_CountDownTimerCallSelector = { addr = 0x801EEF3C, type = "func", source = "counts the effect timer at +0x09 down and, at zero, calls func_800A9610 with g_BattleTargetSelector and 0x20 and advances the step byte at +0x01; one body shared with the other bmagic overlays" }
 Effect_StartOnZeroTick = { addr = 0x801EF284, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+Effect_DriftStep = { addr = 0x801EF59C, type = "func", source = "one drift step: raises the effect ticker at +0x0B by one plus the timer at +0x09 / 64, drops the effect counter at +0x0A every second frame, moves the actor by +0x0C and +0x10 and, once the timer falls to 0x30, lowers the active ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
 Effect_ArmCounterNextStep = { addr = 0x801EFF8C, type = "func", source = "zeroes the effect timer at +0x09, loads the effect counter at +0x0A with 0x88 and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
 Effect_CountUpAndStep = { addr = 0x801EFFCC, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
 Effect_CountDownAndStep = { addr = 0x801F001C, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
@@ -727,6 +728,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFD58, source = "the module dispatcher index
 ["emi/bmagic/magic137/03"]
 BMagic_RunStep = { addr = 0x801EEC1C, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 Effect_CountDownTimerCallSelector = { addr = 0x801EEEFC, type = "func", source = "counts the effect timer at +0x09 down and, at zero, calls func_800A9610 with g_BattleTargetSelector and 0x20 and advances the step byte at +0x01; one body shared with the other bmagic overlays" }
+Effect_DriftStep = { addr = 0x801EF2C4, type = "func", source = "one drift step: raises the effect ticker at +0x0B by one plus the timer at +0x09 / 64, drops the effect counter at +0x0A every second frame, moves the actor by +0x0C and +0x10 and, once the timer falls to 0x30, lowers the active ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
 Effect_ArmCounterNextStep = { addr = 0x801EFCC0, type = "func", source = "zeroes the effect timer at +0x09, loads the effect counter at +0x0A with 0x88 and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
 Effect_CountUpAndStep = { addr = 0x801EFD00, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
 Effect_CountDownAndStep = { addr = 0x801EFD50, type = "func", source = "counts the effect counter down and advances the effect step at zero" }

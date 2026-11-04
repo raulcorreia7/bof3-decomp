@@ -38,13 +38,7 @@ INCLUDE_ASM(func_801EF174);
 
 INCLUDE_ASM(func_801EF21C);
 
-MATCH void func_801EF2C4(void) {
-    PartyBattler* work;
-    u8            timer;
-    u8            ticks;
-
-    BMAGIC_DRIFT_EFFECT_STEP()
-}
+#include "overlays/bmagic/Effect_DriftStep.h"
 
 INCLUDE_ASM(func_801EF3B0);
 
