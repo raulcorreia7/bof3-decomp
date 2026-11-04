@@ -10,6 +10,10 @@
 
 extern u8 D_801F43B8[];
 
+/* The width and height halves of the RECT at the start of D_801F43B8. */
+extern u16 D_801F43BC;
+extern u16 D_801F43BE;
+
 s32  func_801F36B0(void);
 void func_801F35B8(void);
 
