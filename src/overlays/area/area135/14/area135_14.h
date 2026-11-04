@@ -36,8 +36,16 @@ extern Callback D_801F6B40[];
 extern Callback D_801F6B48[];
 extern Callback D_801F6B6C[];
 
+/* The panel box words func_80159B9C draws: x, y, width and height. */
+extern u16 D_801F6210;
+extern u16 D_801F6212;
+extern u16 D_801F6214;
+extern u16 D_801F6216;
+
 /* The camera and view steps the handlers enter. */
 void func_801F32A0(s32 value);
+void func_801F37C4(void);
+void func_801F3830(s32 arg0, s32 arg1);
 void func_801F3CA8(void);
 s32  func_801F5BCC(s32);
 /* The overlay's companion steps the wrappers enter. */

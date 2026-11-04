@@ -1,4 +1,10 @@
 #include "area135_14.h"
 
-/* needs: type - retail loads the u16 words D_801F6214 and D_801F6216 for func_80159B9C with lhu; its prototype takes u8 w and h and narrows them to lbu (first difference lhu a2 against lbu); u16 or s32 params break exe/slus_004_22 */
-INCLUDE_ASM(func_801F3604);
+MATCH void func_801F3604(void) {
+    if (g_SpadWork->unk_06 != 0) {
+        func_80159B9C(D_801F6210, D_801F6212, D_801F6214, D_801F6216);
+        func_801F37C4();
+    }
+    func_801F3830(1, 0);
+    func_801F3830(2, 2);
+}
