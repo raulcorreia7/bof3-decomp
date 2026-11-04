@@ -44,7 +44,16 @@ MATCH void func_801CF338(void) {
 
 INCLUDE_ASM(func_801CF37C);
 
-INCLUDE_ASM(func_801CF564);
+MATCH void func_801CF564(void) {
+    if (g_SpadWork->unk_09 == 0) {
+        g_GameState->mode_12B.s8_value = 0;
+        g_GameFlags &= ~0x1000;
+    } else {
+        g_SpadWork->unk_09--;
+        func_801B0DFC();
+    }
+    func_8014D978();
+}
 
 INCLUDE_ASM(func_801CF5D4);
 
@@ -82,7 +91,15 @@ INCLUDE_ASM(func_801CFF24);
 
 #include "overlays/plchar/Char_SelectScriptAndStep.h"
 
-INCLUDE_ASM(func_801D00B4);
+MATCH void func_801D00B4(void) {
+    Actor* work = g_SpadWork;
+
+    if ((g_ActorSlots[work->unk_06].flags_00 == 0 || g_ActorSlots[work->unk_06].unk_01 == 1) &&
+        g_AreaCameraMoving == 0) {
+        work->unk_06 = 0;
+        g_SpadWork->unk_03 -= 2;
+    }
+}
 
 INCLUDE_ASM(func_801D0148);
 
@@ -99,7 +116,16 @@ INCLUDE_ASM(func_801D0484);
 
 INCLUDE_ASM(func_801D04F0);
 
-INCLUDE_ASM(func_801D0628);
+MATCH void func_801D0628(void) {
+    Actor* work = g_SpadWork;
+
+    if ((g_ActorSlots[work->unk_0B].flags_00 == 0 || g_ActorSlots[work->unk_0B].unk_01 == 1) &&
+        g_AreaCameraMoving == 0) {
+        work->unk_2B                   = 0;
+        g_GameState->mode_12B.s8_value = 0;
+    }
+    func_8014D978();
+}
 
 INCLUDE_ASM(func_801D06C4);
 
