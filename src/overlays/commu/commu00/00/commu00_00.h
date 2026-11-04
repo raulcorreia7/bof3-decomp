@@ -13,8 +13,7 @@
 #include <string.h>
 
 /* The fairy-village roster this overlay owns: the 60 stat rows at 0x801F2700
- * and the 60 job rows that pair with them at 0x801455C8
- * (reversals.md on the archive branch#reversal-faerie-mechanics-verified-facts). */
+ * and the 60 job rows that pair with them at 0x801455C8. */
 #define FAIRY_VILLAGE_COUNT                   60
 
 /* The village culture levels, 0 to 6 (D_801455C4, gated by `sltiu 7`). */

@@ -1,7 +1,6 @@
 #include "commu00_00.h"
 
-/* room `subtype` (+1 of the 8-byte room rows based at g_FairyRooms;
- * reversals.md on the archive branch#reversal-faerie-mechanics). */
+/* room `subtype` (+1 of the 8-byte room rows based at g_FairyRooms). */
 
 MATCH void func_801F0C6C(u8 task_index, u8 record_kind_index) {
     g_SpadWork->unk_06 = 1;

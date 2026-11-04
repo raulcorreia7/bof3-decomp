@@ -100,7 +100,7 @@ A new header, a `NON_MATCHING` marker or an `asm/<target>/hand/` file needs
 ## Before you open a pull request
 
 ```sh
-meson compile -C build/meson formatmeson compile -C build/meson pre-push    # or tools/pre_push.sh [BASE_REF]
+meson compile -C build/meson format pre-push    # or tools/pre_push.sh [BASE_REF]
 ```
 
 `pre-push` runs every check below, one line each, and writes a log per check to
