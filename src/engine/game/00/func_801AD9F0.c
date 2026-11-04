@@ -8,7 +8,7 @@ MATCH void func_801AD9F0(void) {
     work  = g_SpadWork;
     count = work->tint.signed_bytes.unk_5D;
     if (count == 0) {
-        if ((work->unk_07 & ACTOR_OPT_ROUTE_LOCKED) == 0) {
+        if ((work->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
             func_8015BAC4(work->direction_08);
         }
         area = (Actor*)GAME_WORK_AREA_PTR;

@@ -11,7 +11,7 @@ MATCH void Game_LoadShopOverlay(void) {
             g_GameEntryState    = 2u;
             g_GameEntrySubstate = 0u;
             g_GameStateIndex    = GAME_REQUEST_IDLE;
-            if (!(work->unk_07 & ACTOR_OPT_ROUTE_LOCKED)) {
+            if (!(work->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                 work->direction_08 = work->unk_79;
                 func_8015BAC4(g_SpadWork->direction_08);
                 work->flags_74 = (u8)(work->flags_74 | ACTOR_FLAG_MOVING);

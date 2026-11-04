@@ -8,7 +8,7 @@ MATCH void func_801F32B8(void) {
     if (g_GameEntryState != 1) {
         work = g_SpadWork;
         step = work->unk_0B;
-        if (step == work->unk_07 && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
+        if (step == work->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
                 goto tail; /* no arming stores: run the step only */
             }

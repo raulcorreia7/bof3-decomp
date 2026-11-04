@@ -13,7 +13,7 @@ MATCH void func_8019B1E8(void) {
         }
     }
     work = g_SpadWork;
-    flag = work->unk_07;
+    flag = work->option_flags;
     if ((flag != 0) && (flag == FIELD(u8, work, 0x58u))) {
         work->unk_01 = 2;
     }

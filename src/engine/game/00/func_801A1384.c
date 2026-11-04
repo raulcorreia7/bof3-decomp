@@ -37,7 +37,8 @@ MATCH void func_801A1384(void* entity) {
                 Actor* spad;
                 g_SpadWork->unk_0A = (u8)(0x10 / (s32)rate);
                 rec[0x7B]--;
-                if (((g_SpadWork->unk_07 & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
+                if (((g_SpadWork->option_flags & ACTOR_OPT_NO_TARGET) == 0) &&
+                    ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
                     g_SpadWork->direction_08 &= 7;
                     rec[0x76] = savedFlag;
                     rec[0x7B] = 0;
@@ -65,7 +66,7 @@ MATCH void func_801A1384(void* entity) {
             }
         }
     } else {
-        if (((g_SpadWork->unk_07 & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
+        if (((g_SpadWork->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
             g_SpadWork->direction_08 &= 7;
             rec[0x74]          = rec[0x74] | ACTOR_FLAG_MOVING | ACTOR_FLAG_SCRIPT_REQUEST;
             g_SpadWork->unk_09 = 0;

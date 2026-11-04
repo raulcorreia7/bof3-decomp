@@ -73,7 +73,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     ORDER_LOCK(rec->unk_18 = (data[9] << 8) | ((const u8*)data)[0xA]);
     g_SpadWork->unk_05 = data[8];
     g_SpadWork->unk_0B = data[0xC];
-    g_SpadWork->unk_2A = (g_SpadWork->unk_07 >> 4) & 1;
+    g_SpadWork->unk_2A = (g_SpadWork->option_flags >> 4) & 1;
 
     mode = g_SpadWork->unk_05;
     if ((D_80144FC4[mode >> 3] >> (mode & 7)) & 1) {

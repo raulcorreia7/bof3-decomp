@@ -15,9 +15,9 @@ MATCH void func_801B036C(void) {
             !(func_801B5758() & BYTE_MASK) && !(func_801B5EBC() & BYTE_MASK) && !(func_801B5884() & BYTE_MASK) &&
             !(func_801B5910() & BYTE_MASK) && (D_8014625C != 0)) {
             func_801B59B4();
-            g_SpadWork->unk_07 = 0;
-            g_SpadWork->unk_0A = 2;
-            g_SpadWork->unk_0B = 0;
+            g_SpadWork->option_flags = 0;
+            g_SpadWork->unk_0A       = 2;
+            g_SpadWork->unk_0B       = 0;
             func_801B5BDC(g_SpadWork->direction_08);
             g_SpadWork->state_02 = 1;
         }

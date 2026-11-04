@@ -42,7 +42,7 @@ MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
             break;
     }
     FIELD(u8, sub, 0x0u) |= 0x40;
-    g_SpadWork->unk_07 |= ACTOR_OPT_ROUTE_LOCKED;
+    g_SpadWork->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     Actor_SelectScript(result);
     return g_SpadWork->direction_08;
 }

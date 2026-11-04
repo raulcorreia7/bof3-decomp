@@ -5,7 +5,7 @@ MATCH void func_801A3B7C(Actor* entity) {
     u8  current;
     s32 sel;
 
-    if (g_SpadWork->unk_07 & ACTOR_OPT_ROUTE_LOCKED) {
+    if (g_SpadWork->option_flags & ACTOR_OPT_ROUTE_LOCKED) {
         g_SpadWork->direction_08 = entity->unk_79;
     }
 
@@ -18,7 +18,7 @@ MATCH void func_801A3B7C(Actor* entity) {
     current = g_SpadWork->direction_08;
     if (target == current) {
         g_SpadWork->unk_01 = g_SpadWork->unk_03;
-        if (!(g_SpadWork->unk_07 & ACTOR_OPT_NO_TARGET)) {
+        if (!(g_SpadWork->option_flags & ACTOR_OPT_NO_TARGET)) {
             if ((func_801A1AE4(entity) & BYTE_MASK) != 0u) {
                 g_SpadWork->direction_08 &= 7u;
                 g_SpadWork->unk_0A = 0u;

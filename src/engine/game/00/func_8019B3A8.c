@@ -28,7 +28,7 @@ MATCH void func_8019B3A8(void) {
     g_SpadWork->tint.bytes.unk_5E = 0;
     g_SpadWork->tint.bytes.unk_5F = 0;
     work                          = g_SpadWork;
-    work->unk_07                  = 0;
+    work->option_flags            = 0;
     motion                        = (GameMotionFields*)work;
     motion->unk_0C                = 0;
     motion->unk_10                = 0;

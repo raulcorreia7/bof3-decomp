@@ -9,13 +9,13 @@ MATCH void func_801BBE98(void) {
 
     Actor_ClearVelocity();
 
-    work          = g_SpadWork;
-    work->unk_06  = work->unk_05 - 1;
-    work2         = g_SpadWork;
-    work->unk_18  = 0;
-    work->unk_1C  = 0;
-    work->gravity = 0;
-    work2->unk_07 = 0;
+    work                = g_SpadWork;
+    work->unk_06        = work->unk_05 - 1;
+    work2               = g_SpadWork;
+    work->unk_18        = 0;
+    work->unk_1C        = 0;
+    work->gravity       = 0;
+    work2->option_flags = 0;
 
     work2 = g_SpadWork;
     ret   = Area_ReadHeight(work2->x.fixed, work2->y.fixed);

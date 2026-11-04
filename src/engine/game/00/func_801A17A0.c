@@ -32,7 +32,7 @@ MATCH s32 func_801A17A0(u8* entry_record) {
 stored:
     work                         = g_SpadWork;
     FIELD(u16, entry_record, 8u) = flags;
-    if (work->unk_07 & ACTOR_OPT_NO_SCRIPT_START) {
+    if (work->option_flags & ACTOR_OPT_NO_SCRIPT_START) {
         entry_record[0] &= 0xDF;
         result = 1;
     } else {

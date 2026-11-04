@@ -13,8 +13,8 @@ MATCH void func_801F3124(void) {
     u32 window;
     u32 window_span;
 
-    scratch         = g_SpadWork;
-    scratch->unk_07 = scratch->unk_0B;
+    scratch               = g_SpadWork;
+    scratch->option_flags = scratch->unk_0B;
 
     check = g_SpadWork;
     if (check->unk_0B == 1) {

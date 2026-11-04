@@ -69,7 +69,7 @@ typedef enum ActorInteractionFlags {
     ACTOR_FLAG_SCRIPT_PENDING      = 1 << 5,
 } ActorInteractionFlags;
 
-/* `unk_07`, the spawn record's option byte. Bit 0 hides the row at spawn; bit 1
+/* `option_flags`, the spawn record's option byte. Bit 0 hides the row at spawn; bit 1
  * keeps its own route instead of the opposite facing; bit 2 drops the script
  * arm; bit 3 skips re-applying the route; bit 5 skips the animation-stream
  * advance; bit 7 skips the walkability/target test and entity lookup. */
@@ -136,7 +136,7 @@ typedef struct Actor {
                                 *        scales its staging offset by it; cleared at scene init */
     u8             unk_06;         /* 0x06 - commu00 calls it the live flag; 9 gates the draw-mode
                                 *        stamp, 10 calls func_8015A944 (func_80167E00) */
-    u8             unk_07;         /* 0x07 - spawn options; ActorOptionFlags */
+    u8             option_flags;   /* 0x07 - ActorOptionFlags */
     u8             direction_08;   /* 0x08 - commu00 calls it the cue resource */
     u8             unk_09;         /* 0x09 - area032 calls it the marker mode byte */
     u8             unk_0A;         /* 0x0A */

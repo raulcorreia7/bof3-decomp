@@ -24,7 +24,7 @@ MATCH void func_801A253C(Actor* entity) {
                 entity->timer_75 = (mode & 3) * 0x1E;
                 if ((entity->timer_75 & 0xFE) != 0) {
                     func_801A275C(&entity->flags_74);
-                    if (!(g_SpadWork->unk_07 & ACTOR_OPT_ROUTE_LOCKED)) {
+                    if (!(g_SpadWork->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                         g_SpadWork->direction_08 &= 7;
                         entity->flags_74 |= ACTOR_FLAG_MOVING;
                     }

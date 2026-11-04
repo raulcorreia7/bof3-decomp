@@ -12,7 +12,7 @@ MATCH void Char_ClaimLinkSlot(void) {
         }
         /* FAKE: retail reads SND_PlayCue as void(s32). */
         ((void (*)(s32))SND_PlayCue)(g_SpadWork->unk_2C + 0x100);
-        g_SpadWork->unk_07 = 0;
+        g_SpadWork->option_flags = 0;
         g_SpadWork->state_02++;
     }
 }

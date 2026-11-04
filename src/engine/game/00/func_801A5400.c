@@ -53,7 +53,7 @@ MATCH void func_801A5400(u8* script) {
         g_SpadWork->tint.bytes.unk_5E = 0;
         g_SpadWork->tint.bytes.flags  = data[0x3] & 0xF;
         bits_record                   = g_SpadWork;
-        bits_record->unk_2A           = (bits_record->unk_07 >> 4) & 1;
+        bits_record->unk_2A           = (bits_record->option_flags >> 4) & 1;
         Actor_SelectScript(g_SpadWork->direction_08);
         cell_record_a = g_SpadWork;
         Area_SetCellCode(cell_record_a->x.part.integer, cell_record_a->y.part.integer, 0x10);

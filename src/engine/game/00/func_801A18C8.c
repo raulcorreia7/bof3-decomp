@@ -21,7 +21,7 @@ MATCH void func_801A18C8(Actor* record) {
                 return;
             }
             if ((D_80146871 & 0x40) == 0) {
-                if ((g_SpadWork->unk_07 & ACTOR_OPT_ROUTE_LOCKED) == 0) {
+                if ((g_SpadWork->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
                     g_SpadWork->direction_08 = work->unk_79;
                     work->flags_74 |= ACTOR_FLAG_MOVING;
                 }

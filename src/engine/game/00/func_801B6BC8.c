@@ -24,15 +24,15 @@ MATCH void func_801B6BC8(void) {
             func_801C3204();
             g_SpadWork->unk_01 = 1;
             ACTOR_CLEAR_STATE();
-            g_SpadWork->unk_03 = 0;
-            g_SpadWork->unk_04 = 0;
-            g_SpadWork->unk_07 = 0;
-            g_SpadWork->unk_06 = 0;
+            g_SpadWork->unk_03       = 0;
+            g_SpadWork->unk_04       = 0;
+            g_SpadWork->option_flags = 0;
+            g_SpadWork->unk_06       = 0;
             return;
         }
         if (flags & 0x20) {
-            if (!(g_SpadWork->unk_07 & ACTOR_OPT_NO_SCRIPT_START)) {
-                if (!(g_SpadWork->unk_07 & ACTOR_OPT_ROUTE_LOCKED)) {
+            if (!(g_SpadWork->option_flags & ACTOR_OPT_NO_SCRIPT_START)) {
+                if (!(g_SpadWork->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                     g_SpadWork->direction_08 = sel;
                     Actor_RequestScript(g_SpadWork->direction_08);
                 }

@@ -29,12 +29,12 @@ MATCH void func_801B146C(void) {
 
     if (g_GameState->counter_11C.u8_value == 4) {
         work_a     = g_SpadWork;
-        work_count = work_a->unk_07;
+        work_count = work_a->option_flags;
         if (work_count < 0x11U) {
-            work_a->unk_07 = (u8)(work_count + 1);
+            work_a->option_flags = (u8)(work_count + 1);
         }
     } else {
-        g_SpadWork->unk_07 = 0U;
+        g_SpadWork->option_flags = 0U;
     }
     level_flag = g_GameState->counter_11C.u8_value;
     if (!(g_GameRequestFlags & 1)) {

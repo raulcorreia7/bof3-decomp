@@ -69,8 +69,8 @@ MATCH void func_8019BBA4(void) {
                 } else if ((func_8019C4F0(g_SpadWork->x.part.integer, g_SpadWork->y.part.integer) & BYTE_MASK) != 0) {
                     g_SpadWork->unk_01 = 4;
                 } else {
-                    g_SpadWork->unk_07 = 0;
-                    g_SpadWork->unk_0A = 0;
+                    g_SpadWork->option_flags = 0;
+                    g_SpadWork->unk_0A       = 0;
                     func_8019BF78();
                     Actor_SelectScript(0);
                     g_SpadWork->unk_01 = 5;

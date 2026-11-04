@@ -20,9 +20,10 @@ MATCH u32 func_801A06D8(void) {
             SP_REF(s8, 0x3) = 0;
             if (row->unk_09 == 0 && (g_Actors[i].flags_74 & ACTOR_FLAG_SCRIPT_PENDING)) {
                 if (g_Actors[i].flags_74 & ACTOR_FLAG_SCRIPT_REQUEST) {
-                    if ((s8)func_801A17A0(&g_Actors[i].flags_74) && !(g_SpadWork->unk_07 & ACTOR_OPT_ROUTE_LOCKED)) {
+                    if ((s8)func_801A17A0(&g_Actors[i].flags_74) &&
+                        !(g_SpadWork->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                         g_Actors[i].unk_79 = g_SpadWork->direction_08 & 7;
-                        if (!(g_SpadWork->unk_07 & ACTOR_OPT_KEEP_FACING)) {
+                        if (!(g_SpadWork->option_flags & ACTOR_OPT_KEEP_FACING)) {
                             g_SpadWork->direction_08 = (D_80145E98 ^ 4) & 7;
                             func_8015BAC4(g_SpadWork->direction_08);
                         } else {
@@ -51,7 +52,7 @@ MATCH u32 func_801A06D8(void) {
                 if (flags & ACTOR_FLAG_MOVING) {
                     func_8015BAC4(g_SpadWork->direction_08);
                     g_Actors[i].flags_74 &= ~ACTOR_FLAG_MOVING;
-                } else if (!(g_SpadWork->unk_07 & ACTOR_OPT_WAIT_STREAM)) {
+                } else if (!(g_SpadWork->option_flags & ACTOR_OPT_WAIT_STREAM)) {
                     n = g_Actors[i].unk_78 - 2 < 0 ? 0 : g_Actors[i].unk_78 - 2;
                     j = 0;
                     do {
@@ -59,7 +60,7 @@ MATCH u32 func_801A06D8(void) {
                         func_8014D978();
                     } while (j <= n);
                 }
-            } else if (!(g_SpadWork->unk_07 & ACTOR_OPT_WAIT_STREAM)) {
+            } else if (!(g_SpadWork->option_flags & ACTOR_OPT_WAIT_STREAM)) {
                 if (g_SpadWork->flags_00 & ACTOR_FLAG_STEP_MOVE) {
                     func_8014D978();
                 } else {

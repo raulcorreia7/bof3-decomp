@@ -6,7 +6,7 @@ MATCH void func_801A4914(void) {
 
     g_SpadWork->unk_4B = 0xFF;
     work               = g_SpadWork;
-    flags              = work->unk_07;
+    flags              = work->option_flags;
     if (flags & ACTOR_OPT_ROUTE_LOCKED) {
         work->unk_2A = (flags >> 4) & 1;
         Actor_SelectScript(g_SpadWork->direction_08);

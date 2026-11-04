@@ -57,7 +57,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             state_flags    = state->flag_00;
             updated_flags  = state_flags & ~ACTOR_FLAG_SCRIPT_REQUEST;
             state->flag_00 = updated_flags;
-            if (g_SpadWork->unk_07 & ACTOR_OPT_NO_SCRIPT_START) {
+            if (g_SpadWork->option_flags & ACTOR_OPT_NO_SCRIPT_START) {
                 state->flag_00 = (u8)(state_flags & ~(ACTOR_FLAG_SCRIPT_REQUEST | ACTOR_FLAG_SCRIPT_PENDING));
             } else {
                 state->flag_00 = (u8)(updated_flags | ACTOR_FLAG_SCRIPT_PENDING);
@@ -108,16 +108,16 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             spad_work_eb->flags_00 ^= ACTOR_FLAG_HIDDEN;
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xEC:
-            spad_work_ec         = g_SpadWork;
-            spad_work_ec->unk_07 = (u8)(spad_work_ec->unk_07 ^ ACTOR_OPT_NO_SCRIPT_START);
+            spad_work_ec               = g_SpadWork;
+            spad_work_ec->option_flags = (u8)(spad_work_ec->option_flags ^ ACTOR_OPT_NO_SCRIPT_START);
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xED:
-            spad_work_ed         = g_SpadWork;
-            spad_work_ed->unk_07 = (u8)(spad_work_ed->unk_07 ^ ACTOR_OPT_ROUTE_LOCKED);
+            spad_work_ed               = g_SpadWork;
+            spad_work_ed->option_flags = (u8)(spad_work_ed->option_flags ^ ACTOR_OPT_ROUTE_LOCKED);
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xEE:
-            spad_work_ee         = g_SpadWork;
-            spad_work_ee->unk_07 = (u8)(spad_work_ee->unk_07 ^ ACTOR_OPT_WAIT_STREAM);
+            spad_work_ee               = g_SpadWork;
+            spad_work_ee->option_flags = (u8)(spad_work_ee->option_flags ^ ACTOR_OPT_WAIT_STREAM);
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE8:
             next_cursor_e8 = state->cursor + 1;
@@ -132,10 +132,10 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             state->flag_00 = (u8)(state->flag_00 | ACTOR_FLAG_MOVING);
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE4:
-            spad_work_e4         = g_SpadWork;
-            SP_REF(u8, 0x3)      = 0xFF;
-            spad_work_e4->unk_07 = (u8)(spad_work_e4->unk_07 & 0xD7);
-            state->flag_00       = (u8)(state->flag_00 & 0xBF);
+            spad_work_e4               = g_SpadWork;
+            SP_REF(u8, 0x3)            = 0xFF;
+            spad_work_e4->option_flags = (u8)(spad_work_e4->option_flags & 0xD7);
+            state->flag_00             = (u8)(state->flag_00 & 0xBF);
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xEA:
             spad_work_ea = g_SpadWork;

@@ -28,12 +28,12 @@ MATCH void func_801B0568(void) {
             g_GameState->counter_11C.u8_value = 3U;
             g_GameState->mode_12B.s8_value    = 0;
             Actor_ClearVelocity();
-            g_SpadWork->unk_07     = 0;
-            g_SpadWork->unk_09     = 0U;
-            g_SpadWork->unk_0B     = 0;
-            g_AreaCameraStep       = 0;
-            g_AreaCameraHeightStep = 0;
-            g_SpadWork->state_02   = 0;
+            g_SpadWork->option_flags = 0;
+            g_SpadWork->unk_09       = 0U;
+            g_SpadWork->unk_0B       = 0;
+            g_AreaCameraStep         = 0;
+            g_AreaCameraHeightStep   = 0;
+            g_SpadWork->state_02     = 0;
             return;
         }
         tmp0 = func_801B0E44() & BYTE_MASK;

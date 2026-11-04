@@ -8,7 +8,7 @@ MATCH void func_801AD218(void) {
     if (ACTOR_IN_USE(g_ActorSlots[work->unk_0B])) {
         return;
     }
-    if ((work->unk_07 & ACTOR_OPT_ROUTE_LOCKED) == 0) {
+    if ((work->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
         func_8015BAC4(work->direction_08);
     }
     area = GAME_WORK_AREA_PTR;

@@ -14,9 +14,9 @@ MATCH void func_801B016C(void) {
     work->gravity = 0;
     work2->unk_0A = 0;
 
-    g_SpadWork->unk_06 = 0;
-    g_SpadWork->unk_07 = 0;
-    g_SpadWork->unk_0B = 0;
+    g_SpadWork->unk_06       = 0;
+    g_SpadWork->option_flags = 0;
+    g_SpadWork->unk_0B       = 0;
 
     pos                               = g_SpadWork;
     g_SpadWork->z.part.integer        = Area_ReadHeight(pos->x.fixed, pos->y.fixed);

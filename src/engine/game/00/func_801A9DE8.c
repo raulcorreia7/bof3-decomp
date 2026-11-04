@@ -120,7 +120,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
         case 0xFD:
             if (func_8014DAEC() != 0)
                 return value;
-            g_SpadWork->unk_07 |= ACTOR_OPT_WAIT_STREAM;
+            g_SpadWork->option_flags |= ACTOR_OPT_WAIT_STREAM;
             state->index_0A--;
             break;
         case 0xFE: {

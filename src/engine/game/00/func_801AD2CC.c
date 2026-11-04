@@ -5,7 +5,7 @@ MATCH void func_801AD2CC(void) {
 
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         work = g_SpadWork;
-        if (!(work->unk_07 & ACTOR_OPT_ROUTE_LOCKED)) {
+        if (!(work->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
             func_8015BAC4(work->direction_08);
         }
         g_CurrentActor->flags_74 = (u8)(g_CurrentActor->flags_74 & ~ACTOR_FLAG_INTERACTION_PENDING);

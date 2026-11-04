@@ -6,7 +6,7 @@ MATCH void func_801AD734(void) {
     s8     value;
 
     choice = (u32)(RANDOM_MASK(0xF));
-    if ((g_SpadWork->unk_07 & ACTOR_OPT_ROUTE_LOCKED) == 0) {
+    if ((g_SpadWork->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
         func_8015BAC4((u8)((D_80145E98 ^ 4) & 7));
     }
     g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;

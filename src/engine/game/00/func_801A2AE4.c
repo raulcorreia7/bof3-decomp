@@ -8,7 +8,7 @@ MATCH void func_801A2AE4(Actor* entity, u8 route_flag) {
             func_801A3080(entity, g_SpadWork->direction_08 & 7);
             entity->flags_74 &= ~ACTOR_FLAG_MOVING;
         }
-    } else if ((g_SpadWork->unk_07 & ACTOR_OPT_ROUTE_LOCKED) != 0) {
+    } else if ((g_SpadWork->option_flags & ACTOR_OPT_ROUTE_LOCKED) != 0) {
         entity->flags_74 &= ~ACTOR_FLAG_MOVING;
     } else {
         entity->flags_74 |= ACTOR_FLAG_MOVING;
