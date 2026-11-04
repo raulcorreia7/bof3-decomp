@@ -4,7 +4,7 @@
 MATCH void func_801F2C6C(void) {
     s32 remaining;
 
-    remaining = g_SpadWork->unk_0C - 1;
+    remaining          = g_SpadWork->unk_0C - 1;
     g_SpadWork->unk_0C = remaining;
     if (remaining == 0) {
         g_SpadWork->unk_0C = 0x230;
