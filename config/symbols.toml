@@ -202,6 +202,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFBB0, source = "the module dispatcher index
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
+Effect_NextStepWhileTickUnderTwo = { addr = 0x801EEE68, type = "func", source = "advances the step byte at +0x01 while the effect ticker byte at +0x0B is under 2; one body shared with the other bmagic overlays" }
 Effect_StartOnZeroTick = { addr = 0x801EEF84, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 BMagic_AllocEffect = { addr = 0x801F0358, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 g_BMagicEffectFuncs = { addr = 0x801F03BC, source = "the module dispatcher indexes it with the shared spad step byte" }
