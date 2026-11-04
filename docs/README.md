@@ -38,4 +38,4 @@ Each fact lives on one page. Start from the task.
 | [reproduce](reproduce.md)     | `bof3` commands that reproduce the facts of each wiki page                      |
 
 The root files: [README](../README.md), [CONTRIBUTING](../CONTRIBUTING.md), and
-[AGENTS](../AGENTS.md) with the task skills in [`.agents/skills`](../.agents/skills) for coding agents.
+[AGENTS](../AGENTS.md) with the [`decomp` skill](../.agents/skills/decomp/SKILL.md) for coding agents.

@@ -13,7 +13,7 @@ the disc only the disc-free checks run ([toolchain](docs/toolchain.md#without-a-
 ## The path
 
 1. Find work: `tools/worklist.py -n 10` (cheapest route first; `--image` filters).
-2. Match in route order: generator, template, draft ([route](docs/matching.md#route), [`match` skill](.agents/skills/match/SKILL.md)).
+2. Match in route order: generator, template, draft ([route](docs/matching.md#route), [`decomp` match](.agents/skills/decomp/references/match.md)).
 3. Prove the image: `meson compile -C build/meson check-<image>`.
 4. Check everything: `meson compile -C build/meson format pre-push`.
 5. Rebase on `main`, push ([parallel work](#parallel-work)).
@@ -55,18 +55,18 @@ the disc only the disc-free checks run ([toolchain](docs/toolchain.md#without-a-
 
 ## Task routing
 
-| Task                                      | Read                                                                                                                                                |
-| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Match or polish one function              | [matching](docs/matching.md), [`match` skill](.agents/skills/match/SKILL.md)                                                                        |
-| Type, share a twin, restructure, helpers  | [types](docs/conventions.md#types-and-values), [files](docs/conventions.md#files-and-headers), [`refactor` skill](.agents/skills/refactor/SKILL.md) |
-| Name a function, global, type or constant | [names](docs/conventions.md#names), [`name` skill](.agents/skills/name/SKILL.md)                                                                    |
-| Tools, build files, docs, prompts         | [toolchain](docs/toolchain.md), [`tool` skill](.agents/skills/tool/SKILL.md)                                                                        |
-| Bytes, callers, strings, a question       | [toolchain](docs/toolchain.md#native-tools), [`research` skill](.agents/skills/research/SKILL.md)                                                   |
-| Review a diff or a landed range           | [`review` skill](.agents/skills/review/SKILL.md)                                                                                                    |
-| Target, compiler, PsyQ, any command       | [toolchain](docs/toolchain.md)                                                                                                                      |
+| Task                                      | Read                                                                                                                                                             |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Match or polish one function              | [matching](docs/matching.md), [`decomp` match](.agents/skills/decomp/references/match.md)                                                                        |
+| Type, share a twin, restructure, helpers  | [types](docs/conventions.md#types-and-values), [files](docs/conventions.md#files-and-headers), [`decomp` refactor](.agents/skills/decomp/references/refactor.md) |
+| Name a function, global, type or constant | [names](docs/conventions.md#names), [`decomp` name](.agents/skills/decomp/references/name.md)                                                                    |
+| Tools, build files, docs, prompts         | [toolchain](docs/toolchain.md), [`decomp` tool](.agents/skills/decomp/references/tool.md)                                                                        |
+| Bytes, callers, strings, a question       | [toolchain](docs/toolchain.md#native-tools), [`decomp` research](.agents/skills/decomp/references/research.md)                                                   |
+| Review a diff or a landed range           | [`decomp` review](.agents/skills/decomp/references/review.md)                                                                                                    |
+| Target, compiler, PsyQ, any command       | [toolchain](docs/toolchain.md)                                                                                                                                   |
 
 Every page: [docs/README.md](docs/README.md). Run the quality pass
-([review](.agents/skills/review/SKILL.md#quality-pass)) on your diff before every report.
+([review](.agents/skills/decomp/references/review.md#quality-pass)) on your diff before every report.
 
 ## Writing
 

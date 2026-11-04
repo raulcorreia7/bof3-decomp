@@ -142,7 +142,7 @@ security or conduct problem privately: [SECURITY.md](SECURITY.md),
 
 ## Coding agents
 
-[AGENTS.md](AGENTS.md) and `.agents/skills/` are optional guidance for coding agents. You do not
+[AGENTS.md](AGENTS.md) and `.agents/skills/decomp/` are optional guidance for coding agents. You do not
 need them. In them, "maintainer" is the repository owner, and `READY` and `BLOCKED` are the words an
 agent ends its report with.
 
