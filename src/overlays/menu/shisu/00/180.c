@@ -70,7 +70,12 @@ INCLUDE_ASM(func_801D1A20);
 
 INCLUDE_ASM(func_801D1B58);
 
-INCLUDE_ASM(func_801D1CA4);
+MATCH void func_801D1CA4(void) {
+    D_801DA028 = Party_CountItem(0, 77, 0);
+    D_801DA029 = Party_CountItem(0, 35, 0);
+    D_801DA02A = Party_CountItem(0, 36, 0);
+    D_801DA02B = Party_CountItem(0, 86, 0);
+}
 
 INCLUDE_ASM(func_801D1D1C);
 
