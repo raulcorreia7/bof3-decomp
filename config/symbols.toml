@@ -546,14 +546,17 @@ g_BMagicEffectFuncs = { addr = 0x801F04A8, source = "the module dispatcher index
 ["emi/bmagic/magic097/03"]
 Effect_StartOnZeroTick = { addr = 0x801EEF38, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 Effect_CountDownByTwoAndFinish = { addr = 0x801EF488, type = "func", source = "raises the active ticker byte at +0x0B, counts the effect counter at +0x0A down by two and, at zero, lowers the active battler's ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
+Effect_SetActorMatrixRolled = { addr = 0x801EF510, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera, with the rotation rolled by 512 about z (rot.vz); one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F0AC0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic098/03"]
 Effect_StartOnZeroTick = { addr = 0x801EEF38, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 Effect_CountDownByTwoAndFinish = { addr = 0x801EF498, type = "func", source = "raises the active ticker byte at +0x0B, counts the effect counter at +0x0A down by two and, at zero, lowers the active battler's ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
+Effect_SetActorMatrixRolled = { addr = 0x801EF520, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera, with the rotation rolled by 512 about z (rot.vz); one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F0340, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic099/03"]
+Effect_SetActorMatrixRolled = { addr = 0x801EF1B0, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera, with the rotation rolled by 512 about z (rot.vz); one body shared with the other bmagic overlays" }
 Effect_CountDownTimerRaiseTicker = { addr = 0x801EF3E4, type = "func", source = "raises the effect ticker byte at +0x0B, counts the effect timer at +0x09 down and advances the effect step byte at +0x02 at zero; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F0994, source = "the module dispatcher indexes it with the shared spad step byte" }
 
@@ -738,6 +741,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF72C, source = "the module dispatcher index
 ["emi/bmagic/magic143/03"]
 Effect_StartOnZeroTick = { addr = 0x801EED24, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 Effect_CountDownByTwoAndFinish = { addr = 0x801EF100, type = "func", source = "raises the active ticker byte at +0x0B, counts the effect counter at +0x0A down by two and, at zero, lowers the active battler's ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
+Effect_SetActorMatrixRolled = { addr = 0x801EF188, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera, with the rotation rolled by 512 about z (rot.vz); one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801EFEE8, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic144/03"]

@@ -29,31 +29,13 @@ MATCH void func_801EF16C(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
 }
 
-MATCH void func_801EF1B0(void) {
-    SVECTOR pos;
-    SVECTOR rot;
-    MATRIX  matrix;
-    long    flags;
-
-    PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = 512;
-    pos.vx = (g_SpadWork->coord_x_34.raw >> 9) - 0x4000;
-    pos.vy = (g_SpadWork->coord_y_38.raw >> 9) - 0x4000;
-    pos.vz = -g_SpadWork->word_3C.half.span_3E / 2;
-    RotTrans(&pos, &matrix.t, &flags);
-    RotMatrix(&rot, &matrix);
-    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
-    SetRotMatrix(&matrix);
-    SetTransMatrix(&matrix);
-}
+#include "overlays/bmagic/Effect_SetActorMatrixRolled.h"
 
 MATCH void func_801EF264(void) {
     D_801F09A0[g_SpadWork->unk_02]();
     func_800AF764();
     if (g_SpadWork->unk_02 != 0) {
-        func_801EF1B0();
+        Effect_SetActorMatrixRolled();
         func_801EF8F0(0x60, 0x20, 7);
         PopMatrix();
     }
@@ -91,7 +73,7 @@ MATCH void func_801EF4C4(void) {
     D_801F09B0[work->unk_02]();
     func_800AF764();
     if (g_SpadWork->flags_00 != 0) {
-        func_801EF1B0();
+        Effect_SetActorMatrixRolled();
         func_801EF8F0(0x20, 0x50, 0xF);
         func_801F070C();
         PopMatrix();
@@ -144,7 +126,7 @@ MATCH void func_801F0008(void) {
     D_801F09C0[g_SpadWork->unk_02]();
     func_800AF764();
     if (g_SpadWork->unk_02 != 0) {
-        func_801EF1B0();
+        Effect_SetActorMatrixRolled();
         func_801F043C();
         func_801F070C();
         PopMatrix();
