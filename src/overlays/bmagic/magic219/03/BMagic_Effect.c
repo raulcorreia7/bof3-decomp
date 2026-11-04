@@ -13,8 +13,8 @@ INCLUDE_ASM(func_801EEE50);
 MATCH void func_801EEF54(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         SND_QueueSelectionFx(0x101);
         func_800A9610(g_BattleTargetSelector, 0x10);

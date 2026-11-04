@@ -36,12 +36,12 @@ MATCH void func_801EF138(void) {
     u8            count;
 
     work = g_SpadWork;
-    work->unk_0A++;
-    work         = g_SpadWork;
-    count        = work->unk_09 - 1;
-    work->unk_09 = count;
+    work->word_08.byte.unk_0A++;
+    work                      = g_SpadWork;
+    count                     = work->word_08.byte.unk_09 - 1;
+    work->word_08.byte.unk_09 = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
         func_801E5988();
     }
 }

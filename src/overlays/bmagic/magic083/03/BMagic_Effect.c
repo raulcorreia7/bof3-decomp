@@ -39,7 +39,7 @@ MATCH void func_801EF528(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    if (work->unk_0B == 0) {
+    if (work->word_08.byte.unk_0B == 0) {
         work->unk_02++;
     }
 }
@@ -76,7 +76,7 @@ MATCH void func_801F01F8(void) {
     u8  value5;
 
     func_800AF764();
-    if ((g_SpadWork->unk_0C == 4) && ((u8)g_SpadWork->unk_0A < 5U)) {
+    if ((g_SpadWork->unk_0C == 4) && ((u8)g_SpadWork->word_08.byte.unk_0A < 5U)) {
         value2 = (rand() & 3) | 0x40;
     } else {
         value2 = (rand() & 3) | 0x18;
@@ -92,10 +92,10 @@ MATCH void func_801F01F8(void) {
             g_SpadWork->unk_0C += 1;
         }
     }
-    g_SpadWork->unk_09 += g_SpadWork->unk_0C;
+    g_SpadWork->word_08.byte.unk_09 += g_SpadWork->unk_0C;
     if (g_SpadWork->unk_0C == 4) {
-        value4             = g_SpadWork->unk_0A - 1;
-        g_SpadWork->unk_0A = value4;
+        value4                          = g_SpadWork->word_08.byte.unk_0A - 1;
+        g_SpadWork->word_08.byte.unk_0A = value4;
         if (!(value4 & 0xFF)) {
             value5 = g_SpadWork->unk_03;
             if (!(value5 & 0xF0)) {

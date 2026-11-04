@@ -998,10 +998,10 @@ static inline void BattleAdvanceCoords(u8 (*tail_update)(void)) {
     PartyBattler* work;
     u8            timer;
 
-    timer              = g_SpadWork->unk_0A - 1;
-    g_SpadWork->unk_0A = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_0A - 1;
+    g_SpadWork->word_08.byte.unk_0A = timer;
     if (timer == 0) {
-        g_SpadWork->unk_0A = 4;
+        g_SpadWork->word_08.byte.unk_0A = 4;
         g_SpadWork->unk_03 += 1;
     }
     work = g_SpadWork;
@@ -1016,7 +1016,7 @@ static inline void BattleRotateWorkPair(PartyBattler* work, s32 offset_a, s32 of
     s32 new_b;
     s32 mode;
 
-    mode = work->unk_08;
+    mode = work->word_08.byte.unk_08;
     if (mode == 1) {
         goto mode_1; /* swap and negate: (a, b) -> (-b, a) */
     }

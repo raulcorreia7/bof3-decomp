@@ -31,7 +31,7 @@ MATCH void func_801EF350(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    if (work->unk_0B & 0x80) {
+    if (work->word_08.byte.unk_0B & 0x80) {
         work->unk_02++;
     }
 }

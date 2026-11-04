@@ -63,11 +63,11 @@ INCLUDE_ASM(func_801EFC68);
 MATCH void func_801EFD24(void) {
     u8 count;
 
-    count              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = count;
+    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B = 1;
-        g_SpadWork->unk_02         = g_SpadWork->unk_02 + 1;
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B = 1;
+        g_SpadWork->unk_02                      = g_SpadWork->unk_02 + 1;
     }
 }
 
@@ -99,8 +99,8 @@ INCLUDE_ASM(func_801EFE90);
 MATCH void func_801EFF44(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 + 2;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 2;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 32) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -112,7 +112,7 @@ MATCH void func_801F00B4(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    if (work->unk_0B == 0) {
+    if (work->word_08.byte.unk_0B == 0) {
         work->unk_02++;
     }
 }
@@ -147,10 +147,10 @@ MATCH void func_801F1318(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->unk_0B++;
+    work->word_08.byte.unk_0B++;
     work = g_SpadWork;
-    work->unk_09--;
-    if (work->unk_09 == 0) {
+    work->word_08.byte.unk_09--;
+    if (work->word_08.byte.unk_09 == 0) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -159,11 +159,11 @@ MATCH void func_801F1318(void) {
 MATCH void func_801F1380(void) {
     PartyBattler* active;
 
-    g_SpadWork->unk_0B = g_SpadWork->unk_0B + 1;
-    g_SpadWork->unk_0A = g_SpadWork->unk_0A - 2;
-    if (g_SpadWork->unk_0A == 0) {
-        active         = BATTLE_ACTIVE_WORK;
-        active->unk_0B = active->unk_0B - 1;
+    g_SpadWork->word_08.byte.unk_0B = g_SpadWork->word_08.byte.unk_0B + 1;
+    g_SpadWork->word_08.byte.unk_0A = g_SpadWork->word_08.byte.unk_0A - 2;
+    if (g_SpadWork->word_08.byte.unk_0A == 0) {
+        active                      = BATTLE_ACTIVE_WORK;
+        active->word_08.byte.unk_0B = active->word_08.byte.unk_0B - 1;
         func_801E5988();
     }
 }
@@ -178,7 +178,7 @@ MATCH void func_801F1408(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    if (g_SpadWork->unk_08 & 1) {
+    if (g_SpadWork->word_08.byte.unk_08 & 1) {
         rot.vz = ONE / 4;
     }
     BMAGIC_PROJECT_ACTOR_MATRIX(g_SpadWork);

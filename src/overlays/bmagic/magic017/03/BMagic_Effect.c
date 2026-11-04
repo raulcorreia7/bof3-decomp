@@ -36,8 +36,8 @@ INCLUDE_ASM(func_801EF5FC);
 
 MATCH void func_801EF694(void) {
     if (func_8014DAEC() != 0u) {
-        g_SpadWork->unk_09 = 8;
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_SpadWork->word_08.byte.unk_09 = 8;
+        g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
     }
 }
 

@@ -16,11 +16,11 @@ MATCH void func_800ADB74(void) {
         return;
     }
     work              = BATTLE_WORK;
-    work->unk_2E.half = g_MenuPanelTasks[18].x + (work->unk_0A * 0x16 + 0x44);
-    work->unk_30.half = g_MenuPanelTasks[18].y + (work->unk_09 * 0x20 + 0x22);
+    work->unk_2E.half = g_MenuPanelTasks[18].x + (work->word_08.byte.unk_0A * 0x16 + 0x44);
+    work->unk_30.half = g_MenuPanelTasks[18].y + (work->word_08.byte.unk_09 * 0x20 + 0x22);
     rows              = g_BattleTargetRows;
-    row               = &rows[(s16)g_MenuPanelTasks[18].unk_12 + work->unk_09];
-    slot              = (&row->slot_00)[work->unk_0A];
+    row               = &rows[(s16)g_MenuPanelTasks[18].unk_12 + work->word_08.byte.unk_09];
+    slot              = (&row->slot_00)[work->word_08.byte.unk_0A];
     if (slot != GAME_NONE) {
         Actor_RequestScript(slot);
         /* Retail threads the first test to the exit and keeps the second;

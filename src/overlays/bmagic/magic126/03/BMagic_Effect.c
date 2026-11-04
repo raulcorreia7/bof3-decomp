@@ -19,9 +19,9 @@ INCLUDE_ASM(func_801EEF14);
 #include "overlays/bmagic/Effect_CopyBattlerCoords.h"
 
 MATCH void func_801EF00C(void) {
-    g_SpadWork->unk_09 += 2;
-    g_SpadWork->unk_0A += 24;
-    if (g_SpadWork->unk_09 == 0x10) {
+    g_SpadWork->word_08.byte.unk_09 += 2;
+    g_SpadWork->word_08.byte.unk_0A += 24;
+    if (g_SpadWork->word_08.byte.unk_09 == 0x10) {
         Bmagic_NextStep();
     }
 }
@@ -52,10 +52,10 @@ MATCH void func_801EFC28(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->unk_09++;
+    work->word_08.byte.unk_09++;
     work = g_SpadWork;
-    work->unk_0A++;
-    if (work->unk_0A == 16) {
+    work->word_08.byte.unk_0A++;
+    if (work->word_08.byte.unk_0A == 16) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -64,8 +64,8 @@ MATCH void func_801EFC28(void) {
 MATCH void func_801EFC94(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 + 2;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 2;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 150) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }

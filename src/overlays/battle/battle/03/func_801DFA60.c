@@ -7,9 +7,9 @@ MATCH void func_801DFA60(void) {
     u8            chance;
 
     func_801DEE4C();
-    work         = g_SpadWork;
-    count        = work->unk_09 - 1;
-    work->unk_09 = count;
+    work                      = g_SpadWork;
+    count                     = work->word_08.byte.unk_09 - 1;
+    work->word_08.byte.unk_09 = count;
     if (count == 0) {
         if ((func_800A8F58() & BYTE_MASK) == 0) {
             chance = g_GameState->stats.critical_chance;

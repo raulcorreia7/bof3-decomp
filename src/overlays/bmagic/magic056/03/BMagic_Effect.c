@@ -54,10 +54,10 @@ MATCH void func_801EFB38(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->unk_0A += 2;
+    work->word_08.byte.unk_0A += 2;
     work = g_SpadWork;
-    work->unk_09++;
-    if (work->unk_09 == 12) {
+    work->word_08.byte.unk_09++;
+    if (work->word_08.byte.unk_09 == 12) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -66,8 +66,8 @@ MATCH void func_801EFB38(void) {
 MATCH void func_801EFBA4(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 + 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 30) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }

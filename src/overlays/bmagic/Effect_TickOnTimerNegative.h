@@ -7,12 +7,12 @@ MATCH void Effect_TickOnTimerNegative(void) {
     PartyBattler* work;
     s8            timer;
 
-    work         = g_SpadWork;
-    timer        = work->unk_09 - 2;
-    work->unk_09 = timer;
+    work                      = g_SpadWork;
+    timer                     = work->word_08.byte.unk_09 - 2;
+    work->word_08.byte.unk_09 = timer;
     if (timer < 0) {
-        work         = D_801EB4E0;
-        work->unk_0B = work->unk_0B - 1;
+        work                      = D_801EB4E0;
+        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
         func_801E5988();
     }
 }

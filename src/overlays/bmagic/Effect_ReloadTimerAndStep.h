@@ -8,9 +8,9 @@
 #define EFFECT_TIMER_RELOAD func_800AFF98
 #endif
 /* The statements of Effect_ReloadTimerAndStep; each member has no locals. */
-#define BMAGIC_RELOAD_TIMER_AND_STEP()          \
-    g_SpadWork->unk_09 = EFFECT_TIMER_RELOAD(); \
-    g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1
+#define BMAGIC_RELOAD_TIMER_AND_STEP()                       \
+    g_SpadWork->word_08.byte.unk_09 = EFFECT_TIMER_RELOAD(); \
+    g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1
 
 MATCH void Effect_ReloadTimerAndStep(void) {
     BMAGIC_RELOAD_TIMER_AND_STEP();

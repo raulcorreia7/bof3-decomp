@@ -13,11 +13,11 @@ INCLUDE_ASM(func_801EED50);
 MATCH void func_801EF44C(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_0A - 1;
-    g_SpadWork->unk_0A = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_0A - 1;
+    g_SpadWork->word_08.byte.unk_0A = timer;
     if (timer == 0) {
-        g_SpadWork->unk_0A  = 0x3E;
-        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+        g_SpadWork->word_08.byte.unk_0A = 0x3E;
+        g_SpadWork->step_01             = g_SpadWork->step_01 + 1;
     }
 }
 
@@ -47,8 +47,8 @@ MATCH void func_801EF9D0(void) {
     Effect_SetActorMatrix();
     func_801EFA48();
     PopMatrix();
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         BMAGIC_TICK_EFFECT_WORK();
         func_801E5988();

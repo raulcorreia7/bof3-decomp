@@ -18,8 +18,8 @@ MATCH void func_801EEFFC(void) {
     func_801EF1FC();
     func_801EF804();
     func_801EFDDC();
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
     }
@@ -32,8 +32,8 @@ MATCH void func_801EF070(void) {
     PartyBattler* battler;
 
     func_801EFDDC();
-    timer              = g_SpadWork->unk_0A - 1;
-    g_SpadWork->unk_0A = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_0A - 1;
+    g_SpadWork->word_08.byte.unk_0A = timer;
     if (timer == 0) {
         BMAGIC_RELEASE_TARGET_AND_PLAY();
     }

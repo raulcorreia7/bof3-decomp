@@ -31,16 +31,16 @@ MATCH void func_801EF280(void) {
     PartyBattler* work;
     u8            timer;
 
-    work         = g_SpadWork;
-    timer        = work->unk_09 - 1;
-    work->unk_09 = timer;
+    work                      = g_SpadWork;
+    timer                     = work->word_08.byte.unk_09 - 1;
+    work->word_08.byte.unk_09 = timer;
     work->unk_14 += work->unk_20;
     work->word_3C.half.span_3E += work->unk_14;
     if (timer == 0) {
         SND_QueueSelectionFx(0x203);
         func_801E257C(g_BattleActingBattler, 0xC);
         func_800A9610(g_BattleTargetSelector, 0x10);
-        g_SpadWork->unk_09 = 3;
+        g_SpadWork->word_08.byte.unk_09 = 3;
         g_SpadWork->unk_02++;
     }
 }
@@ -60,10 +60,10 @@ MATCH void func_801EF37C(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         func_800AFC98(2, 0);
         func_801E257C(g_BattleActingBattler, 0xB);
-        work         = g_SpadWork;
-        work->unk_14 = 0x140;
-        work->unk_0A = 9;
-        work->unk_20 = -0x40;
+        work                      = g_SpadWork;
+        work->unk_14              = 0x140;
+        work->word_08.byte.unk_0A = 9;
+        work->unk_20              = -0x40;
         g_SpadWork->unk_02++;
     }
 }
@@ -78,8 +78,8 @@ MATCH void func_801EF468(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         SND_QueueSelectionFx(0x203);
         func_801E257C(g_BattleActingBattler, 0xC);
-        timer              = g_SpadWork->unk_09 - 1;
-        g_SpadWork->unk_09 = timer;
+        timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+        g_SpadWork->word_08.byte.unk_09 = timer;
         if (timer != 0) {
             g_SpadWork->unk_02 -= 3;
         } else {
@@ -136,14 +136,14 @@ MATCH void func_801EFE38(void) {
     value                            = g_SpadWork->unk_14 + g_SpadWork->unk_20;
     g_SpadWork->unk_14               = value;
     g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E + value;
-    if ((u8)g_SpadWork->unk_09 < 8U) {
-        value3 = g_SpadWork->unk_0A;
+    if ((u8)g_SpadWork->word_08.byte.unk_09 < 8U) {
+        value3 = g_SpadWork->word_08.byte.unk_0A;
         if (value3 < 0x10U) {
-            g_SpadWork->unk_0A = value3 + 1;
+            g_SpadWork->word_08.byte.unk_0A = value3 + 1;
         }
     }
-    value2             = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = value2;
+    value2                          = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = value2;
     if (!(value2 & 0xFF)) {
         g_SpadWork->unk_02 += 1;
     }

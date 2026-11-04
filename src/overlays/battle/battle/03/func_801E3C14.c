@@ -75,7 +75,7 @@ MATCH void func_801E3C14(void) {
     tail_work = g_BattleCurrentEnemy;
     if (tail_work->damage_F8 > 0) {
         if (tail_work->hp_94 == 0) {
-            g_SpadWork->unk_09 = 0;
+            g_SpadWork->word_08.byte.unk_09 = 0;
             if (g_BattleState & BATTLE_STATE_CRITICAL) {
                 GFX_AllocPaletteFade(g_SpadWork, 0x10, 0x10, 0x10, 0);
             }

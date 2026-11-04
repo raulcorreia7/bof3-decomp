@@ -13,7 +13,7 @@ MATCH u8 func_801E8FA8(void) {
         mask = ENEMY_COMBATANT(*field).status_82;
     }
 
-    start_index = g_SpadWork->unk_0B;
+    start_index = g_SpadWork->word_08.byte.unk_0B;
     mask &= 0x58u;
     index = (start_index + 1u) & 0xFu;
     while (index != start_index) {
@@ -23,5 +23,5 @@ MATCH u8 func_801E8FA8(void) {
         index = (index + 1u) & 0xFu;
     }
 
-    return g_SpadWork->unk_0B;
+    return g_SpadWork->word_08.byte.unk_0B;
 }

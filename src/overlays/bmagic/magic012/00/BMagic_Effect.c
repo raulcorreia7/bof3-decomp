@@ -23,19 +23,19 @@ MATCH void func_801EF03C(void) {
 MATCH void func_801EF080(void) {
     u8 value;
 
-    value              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = value;
+    value                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = value;
     if (!(value & 0xFF)) {
-        g_SpadWork->unk_08 = D_801EB4E0->unk_08;
-        g_SpadWork->unk_0C = 0x20000;
-        g_SpadWork->unk_10 = 0;
+        g_SpadWork->word_08.byte.unk_08 = D_801EB4E0->word_08.byte.unk_08;
+        g_SpadWork->unk_0C              = 0x20000;
+        g_SpadWork->unk_10              = 0;
         func_801DD350(g_SpadWork);
         g_SpadWork->coord_x_34.raw       = D_801EB4E0->coord_x_34.raw + g_SpadWork->unk_0C;
         g_SpadWork->coord_y_38.raw       = D_801EB4E0->coord_y_38.raw + g_SpadWork->unk_10;
         g_SpadWork->word_3C.half.span_3E = (u16)D_801EB4E0->word_3C.half.span_3E + 0x100;
-        g_SpadWork->unk_0B               = rand() & 7;
-        g_SpadWork->unk_09               = 0x10;
-        g_SpadWork->unk_0A               = 0;
+        g_SpadWork->word_08.byte.unk_0B  = rand() & 7;
+        g_SpadWork->word_08.byte.unk_09  = 0x10;
+        g_SpadWork->word_08.byte.unk_0A  = 0;
         g_SpadWork->unk_02 += 1;
     }
 }

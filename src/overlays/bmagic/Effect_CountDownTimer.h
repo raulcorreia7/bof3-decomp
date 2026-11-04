@@ -8,13 +8,13 @@ MATCH void Effect_CountDownTimer(void) {
     u8            count;
 
     work = g_SpadWork;
-    work->unk_09 += EFFECT_TIMER_STEP;
-    work         = g_SpadWork;
-    count        = work->unk_0A - 1;
-    work->unk_0A = count;
+    work->word_08.byte.unk_09 += EFFECT_TIMER_STEP;
+    work                      = g_SpadWork;
+    count                     = work->word_08.byte.unk_0A - 1;
+    work->word_08.byte.unk_0A = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->unk_0B--;
+        active->word_08.byte.unk_0B--;
         func_801E5988();
     }
 }

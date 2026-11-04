@@ -14,12 +14,12 @@ MATCH void func_801EF000(void) {
     PartyBattler* work;
     u8            facing;
 
-    if (g_SpadWork->unk_0B == 3) {
+    if (g_SpadWork->word_08.byte.unk_0B == 3) {
         slot                                       = Battle_AllocEffect(1, 3) & BYTE_MASK;
         work                                       = g_SpadWork;
         g_BattleEffects[slot].unk_01               = 1;
         g_BattleEffects[slot].work_74.party        = work;
-        facing                                     = D_801EB4E0->unk_08;
+        facing                                     = D_801EB4E0->word_08.byte.unk_08;
         g_BattleEffects[slot].unk_09               = 0;
         g_BattleEffects[slot].unk_0A               = 0;
         g_BattleEffects[slot].unk_08               = (facing + 2) & 3;
@@ -40,7 +40,7 @@ MATCH void func_801EF3A0(void) {
     PartyBattler* work;
 
     work = SP_REF(PartyBattler*, 0x44u);
-    if (work->unk_0B == 0x80) {
+    if (work->word_08.byte.unk_0B == 0x80) {
         work->step_01 = (u8)(work->step_01 + 1);
     }
 }
@@ -64,7 +64,7 @@ MATCH void func_801EF8A4(void) {
     PartyBattler* work;
 
     active = BATTLE_ACTIVE_WORK;
-    if (active->unk_0B == 132) {
+    if (active->word_08.byte.unk_0B == 132) {
         work         = SP_REF(PartyBattler*, 0x44u);
         work->unk_02 = work->unk_02 + 1;
     }
@@ -92,7 +92,7 @@ MATCH void func_801EFD00(void) {
     PartyBattler* work;
 
     active = BATTLE_ACTIVE_WORK;
-    if (active->unk_0B == 132) {
+    if (active->word_08.byte.unk_0B == 132) {
         work         = SP_REF(PartyBattler*, 0x44u);
         work->unk_02 = work->unk_02 + 1;
     }
@@ -121,11 +121,11 @@ MATCH void func_801F026C(void) {
     PartyBattler* work;
     u8            next;
 
-    work         = g_SpadWork;
-    next         = work->unk_0A + 1;
-    work->unk_0A = next;
+    work                      = g_SpadWork;
+    next                      = work->word_08.byte.unk_0A + 1;
+    work->word_08.byte.unk_0A = next;
     if (next == 0x10) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
         func_801E5988();
     }
 }
@@ -142,18 +142,18 @@ MATCH void func_801F0A80(void) {
     u8 value;
 
     if (func_8014DAEC() & 0xFF) {
-        value              = g_SpadWork->unk_09 + 1;
-        g_SpadWork->unk_09 = value;
+        value                           = g_SpadWork->word_08.byte.unk_09 + 1;
+        g_SpadWork->word_08.byte.unk_09 = value;
         if ((u32)(value & 0xFF) >= 3U) {
-            D_801EB4E0->unk_0B += 1;
+            D_801EB4E0->word_08.byte.unk_0B += 1;
             func_801E5988();
             return;
         }
         g_SpadWork->unk_2A = ((u8)g_SpadWork->unk_2A + 1) & 1;
-        Actor_SelectScript(g_SpadWork->unk_0B);
+        Actor_SelectScript(g_SpadWork->word_08.byte.unk_0B);
         func_8014D290();
-        if (g_SpadWork->unk_0B == 0) {
-            if (g_SpadWork->unk_09 == 1) {
+        if (g_SpadWork->word_08.byte.unk_0B == 0) {
+            if (g_SpadWork->word_08.byte.unk_09 == 1) {
                 SND_PlayCue(0x104U);
                 return;
             }

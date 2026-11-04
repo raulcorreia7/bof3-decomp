@@ -13,8 +13,8 @@ MATCH void func_801EEDB8(void) {
     u32           slot;
     PartyBattler* work;
 
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         slot                                = Battle_AllocEffect(1, 0x11) & BYTE_MASK;
         work                                = g_SpadWork;
@@ -35,7 +35,7 @@ MATCH void func_801EEEBC(void) {
 
 MATCH void func_801EEF00(void) {
     SYS_DISPATCH_BYTE(D_801F006C, g_SpadWork->unk_02);
-    if (BATTLE_ACTIVE_WORK->unk_0B != 0xFF) {
+    if (BATTLE_ACTIVE_WORK->word_08.byte.unk_0B != 0xFF) {
         Effect_SetActorMatrix();
         func_801EF158();
         PopMatrix();
@@ -49,7 +49,7 @@ INCLUDE_ASM(func_801EEFF8);
 INCLUDE_ASM(func_801EF04C);
 
 MATCH void func_801EF0A4(void) {
-    g_SpadWork->unk_0B = (g_SpadWork->unk_0B - 1) & 0x1F;
+    g_SpadWork->word_08.byte.unk_0B = (g_SpadWork->word_08.byte.unk_0B - 1) & 0x1F;
     g_SpadWork->unk_14 -= 2;
     g_SpadWork->unk_10 -= 2;
     if (g_SpadWork->unk_10 == 0x20) {
@@ -73,8 +73,8 @@ MATCH void func_801EF8C8(void) {
     u8 timer;
 
     func_801EF984();
-    timer              = g_SpadWork->unk_09 + 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0x60) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }

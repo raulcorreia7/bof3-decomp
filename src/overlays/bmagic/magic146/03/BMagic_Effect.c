@@ -12,7 +12,7 @@ MATCH void func_801EEFD0(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    if (work->unk_0B == 0) {
+    if (work->word_08.byte.unk_0B == 0) {
         work->step_01++;
     }
 }
@@ -45,9 +45,9 @@ MATCH void func_801EF340(void) {
 INCLUDE_ASM(func_801EF3B8);
 
 MATCH void func_801EF520(void) {
-    g_SpadWork->unk_09 += 2;
-    g_SpadWork->unk_0A += 2;
-    if (g_SpadWork->unk_09 == 0x10) {
+    g_SpadWork->word_08.byte.unk_09 += 2;
+    g_SpadWork->word_08.byte.unk_0A += 2;
+    if (g_SpadWork->word_08.byte.unk_09 == 0x10) {
         Bmagic_NextStep();
     }
 }
@@ -58,13 +58,13 @@ MATCH void func_801EF58C(void) {
     u8            count;
 
     work = g_SpadWork;
-    work->unk_09++;
-    work         = g_SpadWork;
-    count        = work->unk_0A - 1;
-    work->unk_0A = count;
+    work->word_08.byte.unk_09++;
+    work                      = g_SpadWork;
+    count                     = work->word_08.byte.unk_0A - 1;
+    work->word_08.byte.unk_0A = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->unk_0B--;
+        active->word_08.byte.unk_0B--;
         Actor_Clear();
     }
 }

@@ -26,7 +26,7 @@ INCLUDE_ASM(func_801EEFE4);
 INCLUDE_ASM(func_801EF110);
 
 MATCH void func_801EF190(void) {
-    if (g_SpadWork->unk_0B == 0) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
         func_801E5988();
     }
 }

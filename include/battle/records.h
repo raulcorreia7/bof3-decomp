@@ -470,6 +470,19 @@ typedef struct BattleOwnerKind {
 
 ASSERT_SIZE(BattleOwnerKind, 0x24);
 
+/* The word at +0x08 of a work record: its four bytes, which the overlays read one at a time, and the
+ * whole word they mask and test at once. */
+typedef union BattleWorkWord08 {
+    u32 word;
+
+    struct {
+        u8 unk_08;
+        u8 unk_09;
+        u8 unk_0A;
+        u8 unk_0B;
+    } byte;
+} BattleWorkWord08;
+
 typedef enum PartyBattlerFlags {
     PARTY_BATTLER_FLAG_OCCUPIED     = 1 << 0,
     PARTY_BATTLER_FLAG_HANDLER_BUSY = 1 << 6,
@@ -485,10 +498,7 @@ typedef struct PartyBattler {
     u8                slot; /* +0x05 battler slot; func_801DC044 passes it to func_800A36F0 */
     u8                pad_06;
     u8                unk_07;
-    u8                unk_08;
-    u8                unk_09;
-    u8                unk_0A;
-    u8                unk_0B;
+    BattleWorkWord08  word_08;
     s32               unk_0C;
     s32               unk_10;
     s32               unk_14; /* +0x14 the 32-bit cell both overlays read */
@@ -556,6 +566,7 @@ typedef struct PartyBattler {
 
 ASSERT_SIZE(PartyBattler, 0x140);
 ASSERT_OFFSET(PartyBattler, slot, 0x05);
+ASSERT_OFFSET(PartyBattler, word_08, 0x08);
 ASSERT_OFFSET(PartyBattler, unk_14, 0x14);
 ASSERT_OFFSET(PartyBattler, unk_20, 0x20);
 ASSERT_OFFSET(PartyBattler, unk_60, 0x60);

@@ -22,8 +22,8 @@ INCLUDE_ASM(func_801EECD4);
 MATCH void func_801EEE20(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 + 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 16) {
         func_800A9610(g_BattleTargetSelector, 0x10);
         g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
@@ -34,7 +34,7 @@ MATCH void func_801EEE8C(void) {
     PartyBattler* work;
 
     work = SP_REF(PartyBattler*, 0x44u);
-    if (work->unk_0B == 1) {
+    if (work->word_08.byte.unk_0B == 1) {
         work->step_01 = work->step_01 + 1;
     }
 }

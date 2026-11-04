@@ -25,11 +25,11 @@ INCLUDE_ASM(func_801EF12C);
 MATCH void func_801EF1CC(void) {
     u8 count;
 
-    count              = g_SpadWork->unk_0A - 1;
-    g_SpadWork->unk_0A = count;
+    count                           = g_SpadWork->word_08.byte.unk_0A - 1;
+    g_SpadWork->word_08.byte.unk_0A = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B = 1;
-        g_SpadWork->unk_02         = g_SpadWork->unk_02 + 1;
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B = 1;
+        g_SpadWork->unk_02                      = g_SpadWork->unk_02 + 1;
     }
 }
 
@@ -81,9 +81,9 @@ INCLUDE_ASM(func_801F014C);
 MATCH void func_801F01D0(void) {
     PartyBattler* work;
 
-    work         = g_SpadWork;
-    work->unk_0A = work->unk_0A - 1;
-    if (work->unk_0A == 0) {
+    work                      = g_SpadWork;
+    work->word_08.byte.unk_0A = work->word_08.byte.unk_0A - 1;
+    if (work->word_08.byte.unk_0A == 0) {
         SND_QueueSelectionFx(0x102);
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -94,8 +94,8 @@ INCLUDE_ASM(func_801F0230);
 MATCH void func_801F02B4(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_0A + 1;
-    g_SpadWork->unk_0A = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_0A + 1;
+    g_SpadWork->word_08.byte.unk_0A = timer;
     if (timer == 8) {
         func_801E5988();
     }

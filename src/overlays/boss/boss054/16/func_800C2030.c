@@ -2,6 +2,6 @@
 
 MATCH void func_800C2030(void) {
     func_800A9820(g_BattleTargetSelector);
-    D_801EB4E0->unk_0A--;
+    D_801EB4E0->word_08.byte.unk_0A--;
     func_801E5988();
 }

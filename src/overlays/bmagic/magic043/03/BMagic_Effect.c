@@ -12,13 +12,13 @@ MATCH void func_801EEEF0(void) {
     PartyBattler* battler;
     u8            value;
 
-    battler            = g_BattleSelectedActor;
-    value              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = value;
+    battler                         = g_BattleSelectedActor;
+    value                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = value;
     if (!(value & 0xFF)) {
         func_80196718(battler);
-        g_SpadWork->unk_0A = func_8019651C(battler, 0, 0, 0, 1);
-        g_SpadWork->unk_09 = 4;
+        g_SpadWork->word_08.byte.unk_0A = func_8019651C(battler, 0, 0, 0, 1);
+        g_SpadWork->word_08.byte.unk_09 = 4;
         g_SpadWork->step_01 += 1;
     }
 }
@@ -60,7 +60,7 @@ MATCH void func_801EF72C(void) {
 
     PushMatrix();
     rot.vx = 0x400;
-    rot.vy = D_801EFC9C[g_SpadWork->unk_08];
+    rot.vy = D_801EFC9C[g_SpadWork->word_08.byte.unk_08];
     rot.vz = 0;
     pos.vx = (g_SpadWork->coord_x_34.raw >> 9) - 0x4000;
     pos.vy = (g_SpadWork->coord_y_38.raw >> 9) - 0x4000;

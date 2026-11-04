@@ -5,7 +5,7 @@
 MATCH void Effect_StartOnZeroTick(void) {
     u16* flags;
 
-    if (g_SpadWork->unk_0B == 0) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         func_801E5988();
     }

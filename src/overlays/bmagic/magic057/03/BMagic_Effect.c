@@ -42,8 +42,8 @@ INCLUDE_ASM(func_801EF3C4);
 MATCH void func_801EF528(void) {
     PartyBattler* work;
 
-    work         = (PartyBattler*)D_801EB4E0;
-    work->unk_0A = work->unk_0A + 1;
+    work                      = (PartyBattler*)D_801EB4E0;
+    work->word_08.byte.unk_0A = work->word_08.byte.unk_0A + 1;
     func_801E5988();
 }
 
@@ -55,8 +55,8 @@ MATCH void func_801EF55C(void) {
 }
 
 MATCH void func_801EF5BC(void) {
-    g_SpadWork->unk_09 = 0;
-    g_SpadWork->unk_0A = D_801EFADC[g_SpadWork->unk_09];
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->word_08.byte.unk_0A = D_801EFADC[g_SpadWork->word_08.byte.unk_09];
     SND_QueueSelectionFx(256);
     g_SpadWork->unk_10 = 0;
     g_SpadWork->unk_02++;

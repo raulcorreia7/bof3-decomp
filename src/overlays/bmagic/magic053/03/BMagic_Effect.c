@@ -30,8 +30,8 @@ MATCH void func_801EF6D8(void) {
     PartyBattler* work;
 
     if (g_SpadWork->unk_04 == 0) {
-        work         = (PartyBattler*)D_801EB4E0;
-        work->unk_0B = work->unk_0B - 1;
+        work                      = (PartyBattler*)D_801EB4E0;
+        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
         func_801E5988();
     }
 }

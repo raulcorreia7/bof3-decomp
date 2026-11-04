@@ -7,9 +7,9 @@ MATCH void Effect_NextStep(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    if (work->unk_0B < EFFECT_STEP_LIMIT) {
-        work->unk_09  = 8;
-        work          = g_SpadWork;
-        work->step_01 = work->step_01 + 1;
+    if (work->word_08.byte.unk_0B < EFFECT_STEP_LIMIT) {
+        work->word_08.byte.unk_09 = 8;
+        work                      = g_SpadWork;
+        work->step_01             = work->step_01 + 1;
     }
 }

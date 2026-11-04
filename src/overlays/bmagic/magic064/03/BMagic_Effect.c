@@ -26,8 +26,8 @@ MATCH void func_801EEE1C(void) {
     battler    = g_SpadWork;
     g_SpadWork = &g_BattlePartyBattlers[g_BattleActingBattler];
     if (!(func_8014DAEC() & 0xFF)) {
-        g_SpadWork      = battler;
-        battler->unk_09 = 0x10;
+        g_SpadWork                   = battler;
+        battler->word_08.byte.unk_09 = 0x10;
         return;
     }
     g_SpadWork = battler;
@@ -54,19 +54,19 @@ MATCH void func_801EF2A4(void) {
 
     battler    = g_SpadWork;
     g_SpadWork = &g_BattlePartyBattlers[g_BattleActingBattler];
-    func_801F0EEC(1, 2, (0x80 - battler->unk_09) & 0xFF);
-    func_801F0EEC(0, 1, (0x80 - battler->unk_09) & 0xFF);
-    func_801F0EEC(3, 2, battler->unk_09);
-    func_801F0EEC(2, 1, battler->unk_09);
+    func_801F0EEC(1, 2, (0x80 - battler->word_08.byte.unk_09) & 0xFF);
+    func_801F0EEC(0, 1, (0x80 - battler->word_08.byte.unk_09) & 0xFF);
+    func_801F0EEC(3, 2, battler->word_08.byte.unk_09);
+    func_801F0EEC(2, 1, battler->word_08.byte.unk_09);
     g_SpadWork = battler;
     if (D_801EB4E0->unk_2C.half == 0) {
         value = 0x242;
-        if ((u8)D_801EB4E0->unk_08 < 2U) {
+        if ((u8)D_801EB4E0->word_08.byte.unk_08 < 2U) {
             value = 0x240;
         }
     } else {
         value = 0x243;
-        if ((u8)D_801EB4E0->unk_08 < 2U) {
+        if ((u8)D_801EB4E0->word_08.byte.unk_08 < 2U) {
             value = 0x241;
         }
     }
@@ -131,8 +131,8 @@ MATCH void func_801F007C(void) {
 INCLUDE_ASM(func_801F009C);
 
 MATCH void func_801F01C4(void) {
-    g_SpadWork->unk_0B = 0;
-    g_SpadWork->unk_09 = 64;
+    g_SpadWork->word_08.byte.unk_0B = 0;
+    g_SpadWork->word_08.byte.unk_09 = 64;
     func_801F03D8();
     g_SpadWork->unk_02++;
 }
@@ -141,8 +141,8 @@ MATCH void func_801F0214(void) {
     u8 timer;
 
     func_801F03D8();
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -199,13 +199,13 @@ MATCH void func_801F0DD8(void) {
     PartyBattler* work;
     s8            counter;
 
-    work         = g_SpadWork;
-    counter      = work->unk_09 - 1;
-    work->unk_09 = counter;
+    work                      = g_SpadWork;
+    counter                   = work->word_08.byte.unk_09 - 1;
+    work->word_08.byte.unk_09 = counter;
     if (counter == -6) {
         g_SpadWork->unk_02++;
     }
-    Area_UpdatePaletteTint((s8)g_SpadWork->unk_09);
+    Area_UpdatePaletteTint((s8)g_SpadWork->word_08.byte.unk_09);
 }
 
 MATCH void func_801F0E50(void) {
@@ -223,11 +223,11 @@ MATCH void func_801F0E90(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->unk_09++;
-    if (work->unk_09 == 0) {
+    work->word_08.byte.unk_09++;
+    if (work->word_08.byte.unk_09 == 0) {
         func_801E5988();
     }
-    Area_UpdatePaletteTint((s8)g_SpadWork->unk_09);
+    Area_UpdatePaletteTint((s8)g_SpadWork->word_08.byte.unk_09);
 }
 
 INCLUDE_ASM(func_801F0EEC);

@@ -5,7 +5,7 @@ MATCH void func_801E4C7C(void) {
     u8            count;
 
     work  = g_SpadWork;
-    count = work->unk_09;
+    count = work->word_08.byte.unk_09;
     if (count == 0) {
         if (g_BattleEncounter != 0) {
             func_801E52F0(g_BattleCurrentEnemy->unk_E8[1]);
@@ -15,7 +15,7 @@ MATCH void func_801E4C7C(void) {
         work         = g_SpadWork;
         work->unk_02 = work->unk_02 + 1;
     } else {
-        work->unk_09 = count - 1;
+        work->word_08.byte.unk_09 = count - 1;
     }
     func_801E3160();
 }

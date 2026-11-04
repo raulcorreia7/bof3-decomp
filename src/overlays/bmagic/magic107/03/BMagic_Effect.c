@@ -17,16 +17,16 @@ INCLUDE_ASM(func_801EEC5C);
 INCLUDE_ASM(func_801EEDA0);
 
 MATCH void func_801EEE50(void) {
-    g_SpadWork->unk_0B = 0;
-    g_SpadWork->unk_09 = 0;
-    g_SpadWork->unk_0A = 0;
+    g_SpadWork->word_08.byte.unk_0B = 0;
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->word_08.byte.unk_0A = 0;
     g_SpadWork->step_01++;
 }
 
 MATCH void func_801EEEA0(void) {
-    g_SpadWork->unk_09 += 1;
-    g_SpadWork->unk_0A += 1;
-    if (g_SpadWork->unk_09 == 0x20) {
+    g_SpadWork->word_08.byte.unk_09 += 1;
+    g_SpadWork->word_08.byte.unk_0A += 1;
+    if (g_SpadWork->word_08.byte.unk_09 == 0x20) {
         g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
     }
 }
@@ -36,11 +36,11 @@ INCLUDE_ASM(func_801EEF0C);
 MATCH void func_801EEF5C(void) {
     PartyBattler* active;
 
-    g_SpadWork->unk_09 = g_SpadWork->unk_09 + 1;
-    g_SpadWork->unk_0A = g_SpadWork->unk_0A - 1;
-    if (g_SpadWork->unk_0A == 0) {
-        active         = BATTLE_ACTIVE_WORK;
-        active->unk_0B = 255;
+    g_SpadWork->word_08.byte.unk_09 = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_0A = g_SpadWork->word_08.byte.unk_0A - 1;
+    if (g_SpadWork->word_08.byte.unk_0A == 0) {
+        active                      = BATTLE_ACTIVE_WORK;
+        active->word_08.byte.unk_0B = 255;
         func_801E5988();
     }
 }
@@ -63,7 +63,7 @@ MATCH void func_801EFA18(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    if ((g_SpadWork->unk_08 & 1) != 0) {
+    if ((g_SpadWork->word_08.byte.unk_08 & 1) != 0) {
         rot.vz = 1024;
     }
     pos.vx = (g_SpadWork->coord_x_34.raw >> 9) - 0x4000;

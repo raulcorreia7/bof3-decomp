@@ -30,8 +30,8 @@ MATCH void func_801EF484(void) {
     u8 timer;
 
     func_801F03A0();
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         BMAGIC_TICK_EFFECT_WORK();
         func_801E5988();
@@ -46,16 +46,16 @@ MATCH void func_801F02B0(void) {
     s32 i;
 
     BMAGIC_SHIFT_TRAIL(D_801F09B0)
-    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->unk_0B].x = g_SpadWork->unk_2E.half;
-    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->unk_0B].y = g_SpadWork->unk_30.half;
+    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->word_08.byte.unk_0B].x = g_SpadWork->unk_2E.half;
+    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->word_08.byte.unk_0B].y = g_SpadWork->unk_30.half;
 }
 
 MATCH void func_801F03A0(void) {
     s32 i;
 
     BMAGIC_SHIFT_TRAIL(D_801F09B0)
-    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->unk_0B].x = -1;
-    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->unk_0B].y = -1;
+    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->word_08.byte.unk_0B].x = -1;
+    D_801F09B0[g_SpadWork->unk_04][g_SpadWork->word_08.byte.unk_0B].y = -1;
 }
 
 INCLUDE_ASM(func_801F0488);
@@ -66,8 +66,8 @@ MATCH void func_801F0648(void) {
     u8 timer;
 
     func_8014DAEC();
-    timer              = g_SpadWork->unk_09 + 4;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 4;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0x10) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }

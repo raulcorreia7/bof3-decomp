@@ -10,13 +10,13 @@
 #endif
 /* The statements of Effect_TickOnTimerZero; each member declares work and
  * passes the amount the effect timer drops per tick. */
-#define BMAGIC_TICK_ON_TIMER_ZERO(step)           \
-    work         = g_SpadWork;                    \
-    work->unk_09 = work->unk_09 - (step);         \
-    if (work->unk_09 == 0) {                      \
-        work         = (PartyBattler*)D_801EB4E0; \
-        work->unk_0B = work->unk_0B - 1;          \
-        func_801E5988();                          \
+#define BMAGIC_TICK_ON_TIMER_ZERO(step)                             \
+    work                      = g_SpadWork;                         \
+    work->word_08.byte.unk_09 = work->word_08.byte.unk_09 - (step); \
+    if (work->word_08.byte.unk_09 == 0) {                           \
+        work                      = (PartyBattler*)D_801EB4E0;      \
+        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;  \
+        func_801E5988();                                            \
     }
 
 MATCH void Effect_TickOnTimerZero(void) {

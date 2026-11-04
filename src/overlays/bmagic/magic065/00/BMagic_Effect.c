@@ -14,11 +14,11 @@ MATCH void func_801EF134(void) {
     u16 item;
 
     if (D_801EC2E4 == 0) {
-        if (g_SpadWork->unk_0A == 0x38) {
+        if (g_SpadWork->word_08.byte.unk_0A == 0x38) {
             item = g_SpadWork->unk_2C.half;
             BMagic_SetTextItemName(item & 0xFF, item >> 8);
         }
-        func_801DE8C0(1, 0x1E, Resource_GetText((u32)g_SpadWork->unk_0A));
+        func_801DE8C0(1, 0x1E, Resource_GetText((u32)g_SpadWork->word_08.byte.unk_0A));
         g_SpadWork->step_01 += 1;
     }
 }
@@ -37,8 +37,8 @@ MATCH void func_801EF328(void) {
     u8 timer;
 
     func_8014DAEC();
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         func_800AFC98(0, 4);
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;

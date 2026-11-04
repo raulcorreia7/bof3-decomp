@@ -24,10 +24,10 @@ MATCH void func_801EEFB8(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->unk_0B++;
+    work->word_08.byte.unk_0B++;
     work = g_SpadWork;
-    work->unk_0A++;
-    if (work->unk_0A == 4) {
+    work->word_08.byte.unk_0A++;
+    if (work->word_08.byte.unk_0A == 4) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -37,10 +37,10 @@ MATCH void func_801EF024(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->unk_0B++;
+    work->word_08.byte.unk_0B++;
     work = g_SpadWork;
-    work->unk_09 += 8;
-    if (work->unk_09 == 80) {
+    work->word_08.byte.unk_09 += 8;
+    if (work->word_08.byte.unk_09 == 80) {
         work = g_SpadWork;
         work->unk_02++;
     }

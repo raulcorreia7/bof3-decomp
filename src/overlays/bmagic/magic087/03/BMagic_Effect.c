@@ -29,9 +29,9 @@ INCLUDE_ASM(func_801EF4A0);
 MATCH void func_801EF530(void) {
     PartyBattler* work;
 
-    if (g_SpadWork->unk_0B == 0x80) {
-        work         = (PartyBattler*)D_801EB4E0;
-        work->unk_0B = work->unk_0B - 1;
+    if (g_SpadWork->word_08.byte.unk_0B == 0x80) {
+        work                      = (PartyBattler*)D_801EB4E0;
+        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
         func_801E5988();
     }
 }
@@ -47,19 +47,19 @@ INCLUDE_ASM(func_801EF99C);
 MATCH void func_801EFA2C(void) {
     u8 value;
 
-    value              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = value;
+    value                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = value;
     if (!(value & 0xFF)) {
         g_SpadWork->unk_0C = 0x100;
         g_SpadWork->unk_18 = 4;
         if (g_SpadWork->step_01 != 0) {
-            g_SpadWork->unk_0B = 0;
-            g_SpadWork->unk_09 = 0;
+            g_SpadWork->word_08.byte.unk_0B = 0;
+            g_SpadWork->word_08.byte.unk_09 = 0;
         } else {
-            g_SpadWork->unk_0B = 8;
-            g_SpadWork->unk_09 = 0x1F;
+            g_SpadWork->word_08.byte.unk_0B = 8;
+            g_SpadWork->word_08.byte.unk_09 = 0x1F;
         }
-        g_SpadWork->unk_0A = 0;
+        g_SpadWork->word_08.byte.unk_0A = 0;
         g_SpadWork->unk_02 += 1;
     }
 }
@@ -71,7 +71,7 @@ MATCH void func_801EFCA0(void) {
     PartyBattler* work;
 
     active = BATTLE_ACTIVE_WORK;
-    if (active->unk_0B == 130) {
+    if (active->word_08.byte.unk_0B == 130) {
         work         = SP_REF(PartyBattler*, 0x44u);
         work->unk_02 = work->unk_02 + 1;
     }
@@ -102,7 +102,7 @@ MATCH void func_801EFF50(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    rot.vz = (g_SpadWork->unk_0B & 0x3f) << 6;
+    rot.vz = (g_SpadWork->word_08.byte.unk_0B & 0x3f) << 6;
     pos.vx = (g_SpadWork->coord_x_34.raw >> 9) - 0x4000;
     pos.vy = (g_SpadWork->coord_y_38.raw >> 9) - 0x4000;
     pos.vz = -(g_SpadWork->word_3C.half.span_3E + 0x200) / 2;

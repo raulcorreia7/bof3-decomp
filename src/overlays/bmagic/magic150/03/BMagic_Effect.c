@@ -13,8 +13,8 @@ MATCH void func_801EED60(void) {
 
     func_801EF6F8();
     func_801EF8EC();
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
     }
@@ -22,8 +22,8 @@ MATCH void func_801EED60(void) {
 
 MATCH void func_801EEDCC(void) {
     if (func_801EF8EC() == 0) {
-        g_SpadWork->unk_09  = 4;
-        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+        g_SpadWork->word_08.byte.unk_09 = 4;
+        g_SpadWork->step_01             = g_SpadWork->step_01 + 1;
     }
 }
 
