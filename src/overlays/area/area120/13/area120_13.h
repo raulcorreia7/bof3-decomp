@@ -15,4 +15,10 @@ void func_801F35B8(void);
 
 extern u16 D_801F4FD4;
 
+extern u8 D_801F43E4;
+
+/* The work window's rows: a byte table of 0x1C-byte rows. */
+#define AREA_ROW_COUNT  0x100
+#define AREA_ROW_STRIDE 0x1C
+
 #endif
