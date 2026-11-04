@@ -125,7 +125,18 @@ INCLUDE_ASM(func_801FB0F0);
 MATCH void func_801FB2F8(void) {
 }
 
-INCLUDE_ASM(func_801FB300);
+MATCH void func_801FB300(void) {
+    u8* step = &g_SceneState.step_05;
+
+    if (*step == 0) {
+        Party_AddZenny(0x32, 0);
+        SYS_SetFlag(g_SceneFlags, 0x23);
+        SND_PlayCue(0x106);
+        Game_ClearScriptActive();
+        *step                 = 0;
+        g_SceneState.state_04 = 0;
+    }
+}
 
 INCLUDE_ASM(func_801FB36C);
 
