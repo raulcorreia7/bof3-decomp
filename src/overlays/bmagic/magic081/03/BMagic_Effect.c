@@ -21,7 +21,19 @@ MATCH void func_801EEE74(void) {
 
 INCLUDE_ASM(func_801EEEDC);
 
-INCLUDE_ASM(func_801EEF88);
+MATCH void func_801EEF88(void) {
+    PartyBattler* temp_s0;
+
+    temp_s0    = g_SpadWork;
+    g_SpadWork = D_801EC2E0->target.party;
+    func_8014DAEC();
+    g_SpadWork = temp_s0;
+    if (temp_s0->word_08.byte.unk_0B == 0) {
+        func_800A9820(g_BattleTargetSelector);
+        g_BattleState |= 4;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF014(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
@@ -61,7 +73,16 @@ INCLUDE_ASM(func_801EF44C);
 
 INCLUDE_ASM(func_801EF57C);
 
-INCLUDE_ASM(func_801EF614);
+MATCH void func_801EF614(void) {
+    func_800AF764();
+    func_801EF6A0();
+    BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+    g_SpadWork->flags_00 = 0;
+    g_SpadWork->step_01  = 0;
+    g_SpadWork->unk_02   = 0;
+    g_SpadWork->unk_03   = 0;
+    g_SpadWork->unk_04   = 0;
+}
 
 INCLUDE_ASM(func_801EF6A0);
 
