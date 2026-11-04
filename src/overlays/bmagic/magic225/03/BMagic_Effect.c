@@ -42,7 +42,23 @@ INCLUDE_ASM(func_801EFE50);
 
 INCLUDE_ASM(func_801EFEE8);
 
-INCLUDE_ASM(func_801F0140);
+MATCH void func_801F0140(void) {
+    s32 temp_v1;
+
+    func_8014D978();
+    g_SpadWork->unk_40 += 0x800;
+    g_SpadWork->unk_44 += 0x800;
+    g_SpadWork->coord_x_34.raw += rsin(g_SpadWork->unk_14) * g_SpadWork->unk_0C;
+    g_SpadWork->coord_y_38.raw += rcos(g_SpadWork->unk_14) * g_SpadWork->unk_0C;
+    if (g_FrameCount & 1) {
+        temp_v1 = g_SpadWork->unk_0C;
+        if (temp_v1 == 4) {
+            g_SpadWork->unk_02 += 1;
+            return;
+        }
+        g_SpadWork->unk_0C = temp_v1 - 1;
+    }
+}
 
 INCLUDE_ASM(func_801F021C);
 
