@@ -95,10 +95,10 @@ extern u8                           D_801EC324;
 extern u8                           D_801EC328;
 /* Queued-slot records at g_BattleEffects (stride 0x78). */
 #define BATTLE_EFFECT_COUNT 48
-extern BattleEffect                 g_BattleEffects[];
-extern u8                           D_801EC339[];
-extern u8                           D_801EC3A4[];
-extern PanelOwner                   D_801ED9B0[];
+extern BattleEffect g_BattleEffects[];
+extern u8           D_801EC339[];
+extern u8           D_801EC3A4[];
+extern PanelOwner   D_801ED9B0[];
 
 void        func_800975D4(void);
 u8          func_80097EB8(void);
