@@ -166,6 +166,15 @@ typedef union BattleWorkWord3C {
     } half;
 } BattleWorkWord3C;
 
+/* The record a queued slot points at: a PartyBattler, an enemy record (g_BattleEnemies, stride 0x118), the
+ * scratchpad work area behind g_SpadWork, or another slot. A few callers pass the address as a word. */
+typedef union BattleWorkRef {
+    struct PartyBattler* party;
+    struct BattleEffect* effect;
+    u8*                  bytes;
+    u32                  address;
+} BattleWorkRef;
+
 /* One queued action slot of the table at 0x801EC330 (stride 0x78).
  *
  * Both overlays declare g_BattleEffects as BattleEffect and read the same
@@ -212,7 +221,7 @@ typedef struct BattleEffect {
     u8                unk_5F;
     BattleTargetIndex word_60; /* +0x60 the target index: a word, a low halfword */
     u8                pad_64[0x10];
-    u32               work_74; /* +0x74 the work record address the slot points at */
+    BattleWorkRef     work_74; /* +0x74 the work record the slot points at */
 } BattleEffect;
 
 ASSERT_SIZE(BattleEffect, 0x78);

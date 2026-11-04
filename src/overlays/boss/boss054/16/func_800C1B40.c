@@ -4,7 +4,7 @@ MATCH void func_800C1B40(void) {
     PartyBattler* saved;
 
     saved      = (PartyBattler*)g_SpadWork;
-    g_SpadWork = (u8*)D_801EC2E0->work_74;
+    g_SpadWork = D_801EC2E0->work_74.bytes;
     if (func_8014DAEC() & BYTE_MASK) {
         saved->unk_0A = 0;
         saved->step_01++;

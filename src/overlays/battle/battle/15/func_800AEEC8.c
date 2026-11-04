@@ -19,11 +19,11 @@ NON_MATCHING s32 func_800AEEC8(s32 arg0, u8 arg1, s32 arg2) {
     if ((u8)status == 0) {
         mode = 8;
     }
-    slot                          = Battle_AllocEffect(1, 0x48);
-    g_BattleEffects[slot].unk_04  = mode;
-    g_BattleEffects[slot].unk_09  = 1;
-    g_BattleEffects[slot].unk_0A  = 0;
-    g_BattleEffects[slot].work_74 = (u32)g_SpadWork;
+    slot                                = Battle_AllocEffect(1, 0x48);
+    g_BattleEffects[slot].unk_04        = mode;
+    g_BattleEffects[slot].unk_09        = 1;
+    g_BattleEffects[slot].unk_0A        = 0;
+    g_BattleEffects[slot].work_74.party = g_SpadWork;
     return 1;
 }
 #else

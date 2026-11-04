@@ -12,7 +12,7 @@ MATCH void func_801EEE74(void) {
     PartyBattler* saved;
 
     saved      = g_SpadWork;
-    g_SpadWork = (PartyBattler*)D_801EC2E0->work_74;
+    g_SpadWork = D_801EC2E0->work_74.party;
     if (func_8014DAEC() & BYTE_MASK) {
         saved->step_01++;
     }

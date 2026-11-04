@@ -23,14 +23,14 @@ MATCH void func_801E10C8(void) {
         }
         current = g_GameState;
         current->stats.status &= ~STATUS_KO;
-        current->stats.current_hp        = current->stats.max_hp;
-        current->stats.current_willpower = current->stats.willpower;
-        slot                             = Battle_AllocEffect(0, 1) & BYTE_MASK;
-        owner                            = g_SpadWork;
-        g_BattleEffects[slot].unk_07     = 2;
-        g_BattleEffects[slot].unk_27     = 6;
-        work                             = g_SpadWork;
-        g_BattleEffects[slot].work_74    = (u32)owner;
+        current->stats.current_hp           = current->stats.max_hp;
+        current->stats.current_willpower    = current->stats.willpower;
+        slot                                = Battle_AllocEffect(0, 1) & BYTE_MASK;
+        owner                               = g_SpadWork;
+        g_BattleEffects[slot].unk_07        = 2;
+        g_BattleEffects[slot].unk_27        = 6;
+        work                                = g_SpadWork;
+        g_BattleEffects[slot].work_74.party = owner;
         Actor_SelectScript((work->unk_08 + 4) & BYTE_MASK);
         SND_QueueSelectionFx(0x206);
         if (g_BattleEventFlags == 0) {

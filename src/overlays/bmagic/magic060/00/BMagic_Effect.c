@@ -18,12 +18,12 @@ MATCH void func_801EED68(void) {
     PartyBattler* work;
 
     if (g_SpadWork->unk_0B == 2) {
-        slot                          = Battle_AllocEffect(1, 0x12) & BYTE_MASK;
-        work                          = g_SpadWork;
-        g_BattleEffects[slot].unk_01  = 2;
-        g_BattleEffects[slot].work_74 = (u32)work;
-        g_SpadWork->unk_09            = 0x10;
-        g_SpadWork->step_01           = g_SpadWork->step_01 + 1;
+        slot                                = Battle_AllocEffect(1, 0x12) & BYTE_MASK;
+        work                                = g_SpadWork;
+        g_BattleEffects[slot].unk_01        = 2;
+        g_BattleEffects[slot].work_74.party = work;
+        g_SpadWork->unk_09                  = 0x10;
+        g_SpadWork->step_01                 = g_SpadWork->step_01 + 1;
     }
 }
 
