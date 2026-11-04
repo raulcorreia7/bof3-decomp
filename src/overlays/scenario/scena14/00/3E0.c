@@ -114,7 +114,15 @@ MATCH void func_801FBDC4(void) {
 
 INCLUDE_ASM(func_801FBE10);
 
-INCLUDE_ASM(func_801FBF18);
+MATCH void func_801FBF18(void) {
+    g_Characters[g_CharSlot[10]].unk_07 &= 254;
+    EMI_LoaderStreamFamily(7, 4, 8, 0);
+    g_PartySize = 0;
+    Party_JoinMember(7);
+    Party_JoinMember(4);
+    Party_JoinMember(8);
+    func_801C1630();
+}
 
 MATCH void func_801FBFA8(void) {
     EMI_LoaderStreamFamily(0, 1, 5, 0);
