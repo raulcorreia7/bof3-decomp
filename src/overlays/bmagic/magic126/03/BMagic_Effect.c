@@ -117,7 +117,12 @@ INCLUDE_ASM(func_801F0ED0);
 
 INCLUDE_ASM(func_801F1110);
 
-INCLUDE_ASM(func_801F116C);
+MATCH void func_801F116C(void) {
+    D_801F22BC->flags_00 = 0;
+    D_801F22BC->step_01  = 0;
+    D_801F22BC->unk_02   = 0;
+    D_801F22BC->unk_03   = 0;
+}
 
 MATCH void func_801F11AC(void) {
     PartyBattler* work;
