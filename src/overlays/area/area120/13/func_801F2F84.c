@@ -2,7 +2,7 @@
 
 MATCH void func_801F2F84(void) {
     Actor* actor = g_SpadWork;
-    RECT rect;
+    RECT   rect;
 
     actor->unk_09--;
     if (actor->unk_09 == 0) {
