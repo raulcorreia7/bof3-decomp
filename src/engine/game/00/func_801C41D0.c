@@ -32,6 +32,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
             if (SP_REF(u8, 0x0) == 0) {
                 goto block_4; /* retail branch */
             }
+            /* Duplicate return node #46. Try simplifying control flow for better match */
             return val7;
         }
     block_4:
@@ -43,6 +44,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
             if (SP_REF(void*, 0x0) == 0) {
                 goto block_7; /* retail branch */
             }
+            /* Duplicate return node #46. Try simplifying control flow for better match */
             return val7;
         }
     block_7:
@@ -56,6 +58,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
                 val9 = val3 & HALF_MASK;
                 goto block_10; /* retail branch */
             }
+            /* Duplicate return node #46. Try simplifying control flow for better match */
             return val7;
         }
     block_10:
@@ -79,6 +82,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
                         val5 = val3 >> 0x10;
                         goto block_18; /* retail branch */
                     }
+                    /* Duplicate return node #46. Try simplifying control flow for better match */
                     return val7;
                 }
             block_18:
@@ -95,12 +99,15 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
                             val10 = val4 & HALF_MASK;
                             goto block_23; /* retail branch */
                         }
+                        /* Duplicate return node #46. Try simplifying control flow for better match */
                         return val7;
                     }
                     goto block_23; /* retail branch */
                 }
+                /* Duplicate return node #46. Try simplifying control flow for better match */
                 return val7;
             }
+            /* Duplicate return node #46. Try simplifying control flow for better match */
             return val7;
         }
     block_23:
@@ -124,6 +131,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
                         val11 = (u32)val3 >> 0x10;
                         goto block_31; /* retail branch */
                     }
+                    /* Duplicate return node #46. Try simplifying control flow for better match */
                     return val7;
                 }
             block_31:
@@ -140,12 +148,15 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
                             val6 = val3 & HALF_MASK;
                             goto block_36; /* retail branch */
                         }
+                        /* Duplicate return node #46. Try simplifying control flow for better match */
                         return val7;
                     }
                     goto block_36; /* retail branch */
                 }
+                /* Duplicate return node #46. Try simplifying control flow for better match */
                 return val7;
             }
+            /* Duplicate return node #46. Try simplifying control flow for better match */
             return val7;
         }
     block_36:
@@ -157,6 +168,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
                 if (SP_REF(void*, 0x0) == 0) {
                     goto block_41; /* retail branch */
                 }
+                /* Duplicate return node #46. Try simplifying control flow for better match */
                 return val7;
             }
         }
@@ -173,6 +185,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
         FIELD(u16, tmp0, 0x3Eu)       = (u16)val0;
         val7                          = ~func_801BDE14(val3, val4, 1) != 0;
         FIELD(u16, g_SpadWork, 0x3Eu) = (u16)val1;
+        /* Duplicate return node #46. Try simplifying control flow for better match */
         return val7;
     }
     return val7;

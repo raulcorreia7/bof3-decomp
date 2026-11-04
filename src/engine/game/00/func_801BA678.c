@@ -130,6 +130,7 @@ NON_MATCHING s32 func_801BA678(void) {
                         }
                         goto block_109; /* retail branch */
                     }
+                    /* Duplicate return node #115. Try simplifying control flow for better match */
                     return 0;
                 }
                 goto block_95; /* retail branch */
@@ -168,8 +169,10 @@ NON_MATCHING s32 func_801BA678(void) {
                             }
                             goto block_114; /* retail branch */
                         }
+                        /* Duplicate return node #115. Try simplifying control flow for better match */
                         return 3;
                     }
+                    /* Duplicate return node #115. Try simplifying control flow for better match */
                     return 3;
             }
         } else {
@@ -207,8 +210,10 @@ NON_MATCHING s32 func_801BA678(void) {
                             }
                             goto block_114; /* retail branch */
                         }
+                        /* Duplicate return node #115. Try simplifying control flow for better match */
                         return 3;
                     }
+                    /* Duplicate return node #115. Try simplifying control flow for better match */
                     return 3;
             }
         }
@@ -248,6 +253,7 @@ NON_MATCHING s32 func_801BA678(void) {
                         if (func_801BB86C(val1, val2, val3, val5, collision_axis) & BYTE_MASK) {
                             goto block_74; /* retail branch */
                         }
+                        /* Duplicate return node #115. Try simplifying control flow for better match */
                         return 3;
                     }
                     goto block_108; /* retail branch */
@@ -289,12 +295,15 @@ NON_MATCHING s32 func_801BA678(void) {
                                             }
                                             goto block_109; /* retail branch */
                                     }
+                                    /* Duplicate return node #115. Try simplifying control flow for better match */
                                     return 0;
                                 }
+                                /* Duplicate return node #115. Try simplifying control flow for better match */
                                 return 0;
                             }
                             goto block_74; /* retail branch */
                     }
+                    /* Duplicate return node #115. Try simplifying control flow for better match */
                     return 0;
             }
         } else {
@@ -349,13 +358,16 @@ NON_MATCHING s32 func_801BA678(void) {
                                              */
                                             return 3;
                                     }
+                                    /* Duplicate return node #115. Try simplifying control flow for better match */
                                     return 0;
                                 }
+                                /* Duplicate return node #115. Try simplifying control flow for better match */
                                 return 0;
                             }
                         block_74:
                             return 0;
                     }
+                    /* Duplicate return node #115. Try simplifying control flow for better match */
                     return 0;
             }
         } else {
