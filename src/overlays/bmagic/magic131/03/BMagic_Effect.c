@@ -137,7 +137,16 @@ MATCH void func_801F0B44(void) {
 
 INCLUDE_ASM(func_801F0BCC);
 
-INCLUDE_ASM(func_801F0C4C);
+MATCH void func_801F0C4C(void) {
+    s32 value;
+
+    value              = g_SpadWork->unk_14 + 0x20;
+    g_SpadWork->unk_14 = value;
+    if (value == 0x200) {
+        g_SpadWork->word_08.byte.unk_0B = 1;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void Effect_CountDownAndStep_801F0C98(void) {
     u8 count;
