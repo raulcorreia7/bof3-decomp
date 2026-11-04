@@ -7,7 +7,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 /* func_801EEC50 */
 #include "overlays/bmagic/BMagic_RunStep.h"
 
-INCLUDE_ASM(func_801EECB0);
+MATCH void func_801EECB0(void) {
+    g_SpadWork->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw;
+    g_SpadWork->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw;
+    g_SpadWork->word_3C.word   = BATTLE_ACTIVE_WORK->word_3C.word;
+    GFX_CopyPalette(0x1A);
+    g_GfxPalettePending += 1;
+    g_SpadWork->step_01 += 1;
+}
 
 MATCH void func_801EED2C(void) {
     BattleResultRings table;
