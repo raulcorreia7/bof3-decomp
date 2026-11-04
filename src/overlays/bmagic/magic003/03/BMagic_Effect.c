@@ -61,14 +61,14 @@ MATCH void func_801EF324(void) {
 INCLUDE_ASM(func_801EF3C8);
 
 MATCH void func_801EF478(void) {
-    s32 temp_v1;
-    u8  temp_a0;
+    s32 value;
+    u8  value2;
 
-    temp_a0 = g_SpadWork->unk_09;
-    temp_v1 = temp_a0 & 0xFF;
-    if (temp_v1 != 0) {
-        if (temp_v1 != 0xFF) {
-            g_SpadWork->unk_09 = temp_a0 - 1;
+    value2 = g_SpadWork->unk_09;
+    value  = value2 & 0xFF;
+    if (value != 0) {
+        if (value != 0xFF) {
+            g_SpadWork->unk_09 = value2 - 1;
         }
     } else {
         SND_QueueSelectionFx(0x101);
@@ -88,14 +88,14 @@ MATCH void func_801EF478(void) {
 }
 
 MATCH void func_801EF578(void) {
-    s32 temp_v1;
-    u8  temp_a0;
+    s32 value;
+    u8  value2;
 
-    temp_a0 = g_SpadWork->unk_09;
-    temp_v1 = temp_a0 & 0xFF;
-    if (temp_v1 != 0) {
-        if (temp_v1 != 0xFF) {
-            g_SpadWork->unk_09 = temp_a0 - 1;
+    value2 = g_SpadWork->unk_09;
+    value  = value2 & 0xFF;
+    if (value != 0) {
+        if (value != 0xFF) {
+            g_SpadWork->unk_09 = value2 - 1;
         }
     } else {
         SND_QueueSelectionFx(0x101);

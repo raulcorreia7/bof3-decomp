@@ -21,11 +21,11 @@ MATCH void func_801EF03C(void) {
 }
 
 MATCH void func_801EF080(void) {
-    u8 temp_v0;
+    u8 value;
 
-    temp_v0            = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    value              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = value;
+    if (!(value & 0xFF)) {
         g_SpadWork->unk_08 = D_801EB4E0->unk_08;
         g_SpadWork->unk_0C = 0x20000;
         g_SpadWork->unk_10 = 0;

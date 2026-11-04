@@ -144,19 +144,17 @@ MATCH void func_801F09D0(void) {
 }
 
 MATCH void func_801F0A20(void) {
-    u8 temp_v0;
+    u8 value;
 
-    temp_v0            = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    value              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = value;
+    if (!(value & 0xFF)) {
         func_8014DAEC();
         func_800AFC98(2, 4);
-        goto block_4;
-    }
-    if (func_8014DAEC() & 0xFF) {
+        g_SpadWork->unk_02 += 1;
+    } else if (func_8014DAEC() & 0xFF) {
         func_800AFC98(2, 4);
         g_SpadWork->unk_09 = 0;
-    block_4:
         g_SpadWork->unk_02 += 1;
     }
     func_8014D290();
@@ -181,15 +179,15 @@ MATCH void func_801F0DA8(void) {
 INCLUDE_ASM(func_801F0E54);
 
 MATCH void func_801F0FA4(void) {
-    u8 temp_v0;
+    u8 value;
 
     if (g_FrameCount & 1) {
         g_SpadWork->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
         g_SpadWork->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
         func_8014DAEC();
-        temp_v0            = g_SpadWork->unk_09 - 1;
-        g_SpadWork->unk_09 = temp_v0;
-        if (!(temp_v0 & 0xFF)) {
+        value              = g_SpadWork->unk_09 - 1;
+        g_SpadWork->unk_09 = value;
+        if (!(value & 0xFF)) {
             g_SpadWork->unk_09 = g_SpadWork->unk_0B + 4;
             g_SpadWork->unk_02 += 1;
         }
