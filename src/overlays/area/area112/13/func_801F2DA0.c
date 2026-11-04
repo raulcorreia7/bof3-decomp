@@ -1,9 +1,9 @@
 #include "area112_13.h"
 
 MATCH void func_801F2DA0(void) {
-    Actor* work = g_SpadWork;
-    u8 timer = work->unk_09 + 1;
-    u16 y = work->y.part.integer;
+    Actor* work  = g_SpadWork;
+    u8     timer = work->unk_09 + 1;
+    u16    y     = work->y.part.integer;
 
     work->unk_09 = timer;
     work->z.part.integer += y;

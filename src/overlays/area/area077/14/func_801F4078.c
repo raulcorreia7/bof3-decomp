@@ -8,6 +8,6 @@ MATCH void func_801F4078(void) {
     g_SpadWork->x.fixed = 0x740000;
     g_SpadWork->y.fixed = 0x60000;
     g_SpadWork->z.fixed = Area_SampleHeight(g_SpadWork->x.fixed, g_SpadWork->y.fixed) << 16;
-    g_SpadWork->unk_0C = 300;
+    g_SpadWork->unk_0C  = 300;
     g_SpadWork->unk_01++;
 }
