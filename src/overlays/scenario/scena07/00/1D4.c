@@ -175,7 +175,13 @@ MATCH void func_801F7D28(void) {
 
 INCLUDE_ASM(func_801F7D6C);
 
-INCLUDE_ASM(func_801F7DDC);
+MATCH void func_801F7DDC(void) {
+    func_801FA38C();
+    g_SpadWork->unk_0C = g_SpadWork->unk_0C - 1;
+    if (g_SpadWork->unk_0C == 0) {
+        Actor_Clear();
+    }
+}
 
 MATCH void func_801F7E24(void) {
     SYS_DISPATCH_TASK(D_801FDDD0, 2, g_SpadWork);
@@ -377,7 +383,16 @@ INCLUDE_ASM(func_801FD000);
 
 INCLUDE_ASM(func_801FD0DC);
 
-INCLUDE_ASM(func_801FD35C);
+MATCH void func_801FD35C(void) {
+    u8* timer;
+
+    timer = &D_80146875;
+    if (*timer == 0 && g_GameStateIndex != 2) {
+        Game_ClearScriptActive();
+        D_80146874 = 0;
+        *timer     = 0;
+    }
+}
 
 MATCH void func_801FD3BC(void* entity) {
     SceneFunc handler;

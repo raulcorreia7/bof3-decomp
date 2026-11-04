@@ -10,6 +10,7 @@
 #define SCRATCH_ROW_OFFSET 0x00
 
 void             func_801F3C3C(s32 arg0);
+void             func_801FA38C(void);
 extern s8        D_80144EC0;
 extern u32       D_801F6C00;
 extern Callback  D_801FDD3C[];
@@ -48,7 +49,7 @@ s32 func_801F9EFC(void);
 
 extern Callback D_801FDD14[];
 extern s8       D_80146874;
-extern s8       D_80146875;
+extern u8       D_80146875;
 extern u16      g_GameAreaId;
 
 #endif
