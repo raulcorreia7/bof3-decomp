@@ -1,10 +1,7 @@
 name: ci
 
-# Every push to main and every pull request runs the checks that need no disc. The byte-exact
-# `check` target needs the game and runs on the maintainer's machine before merge.
-# A pull request that changes only docs (Markdown, docs/, .agents/, licence and issue templates)
-# runs the format check, the shell checks and the SDK-object check; the `changes` step gates the
-# toolchain steps. The job always runs and reports, because the main ruleset requires `disc-free`.
+# Disc-free checks: format, shell lint, headers, tree and tool tests. The byte-exact `check` runs locally.
+
 on:
   push:
     branches: [main]
@@ -27,7 +24,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      # Lists the files of this pull request (the checkout is the merge commit). Only docs: code=false.
+      # Docs-only pull requests skip the build steps.
       - id: changes
         name: Changes
         shell: bash
