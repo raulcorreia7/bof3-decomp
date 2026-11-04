@@ -13,6 +13,9 @@ extern Callback D_801F47E8[];
 extern Callback D_801F4DC4[];
 extern Callback D_801F4DCC[];
 
+extern u8 D_801F4DBC[];
+void      func_801F4300(u8* table, s32 arg);
+
 /* The game-overlay state bytes the cancel path resets. */
 extern u8 D_801F4E50[];
 
