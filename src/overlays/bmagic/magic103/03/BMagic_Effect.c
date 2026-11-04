@@ -37,7 +37,19 @@ MATCH void func_801EEF94(void) {
     g_SpadWork->unk_02                = g_SpadWork->unk_02 + 1;
 }
 
-INCLUDE_ASM(func_801EEFF4);
+MATCH void func_801EEFF4(void) {
+    u8 counter;
+
+    if (g_SpadWork->word_08.byte.unk_09 == 4) {
+        func_800A9610(g_BattleTargetSelector, 0x10U);
+    }
+    SP_REF(s16, 0)                  = g_SpadWork->word_08.byte.unk_09 * 0x1C;
+    counter                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = counter;
+    if ((counter & 0xFF) == 0x8) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF094);
 
