@@ -24,8 +24,19 @@ INCLUDE_ASM(func_801EF38C);
 
 INCLUDE_ASM(func_801EF3DC);
 
-/* needs: type. Effect_TickOnTimerZero shape on work byte 0x5D with a signed zero test (sll 24, bnez) where PartyBattler.unk_5D is u8; first differing instruction is andi v0,v0,0xff against sll v0,v0,24. */
-INCLUDE_ASM(func_801EF4F0);
+MATCH void func_801EF4F0(void) {
+    PartyBattler* work;
+    s8            timer;
+
+    work         = g_SpadWork;
+    timer        = work->unk_5D - 1;
+    work->unk_5D = timer;
+    if (timer == 0) {
+        work         = D_801EB4E0;
+        work->unk_0B = work->unk_0B - 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF54C);
 
