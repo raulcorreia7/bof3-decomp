@@ -33,7 +33,21 @@ MATCH void func_801EF324(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF37C);
+MATCH void func_801EF37C(void) {
+    PartyBattler* work;
+
+    func_8014DAEC();
+    func_8014DAEC();
+    if (func_8014DAEC() & BYTE_MASK) {
+        func_800AFC98(2, 0);
+        func_801E257C(g_BattleActingBattler, 0xB);
+        work         = g_SpadWork;
+        work->unk_14 = 0x140;
+        work->unk_0A = 9;
+        work->unk_20 = -0x40;
+        g_SpadWork->unk_02++;
+    }
+}
 
 INCLUDE_ASM(func_801EF408);
 
