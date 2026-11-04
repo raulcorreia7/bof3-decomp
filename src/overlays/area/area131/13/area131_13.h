@@ -5,6 +5,9 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world03.h"
+#define g_ScriptWorkRecord ((Actor*)g_ScriptWorkRecord)
+extern u8 D_80146874;
+extern u8 D_80146875;
 
 /* The scenario state byte the copy writes. */
 #endif
