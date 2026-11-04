@@ -8,7 +8,7 @@
 # public/main and origin/main. Each log is build/pre-push/<check>.log. Format first with
 # `meson compile -C build/meson format`.
 set -u
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 2
 bld=${BUILD_DIR:-build/meson}
 logs=build/pre-push
 mkdir -p "$logs"

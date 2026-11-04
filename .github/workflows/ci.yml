@@ -58,8 +58,9 @@ jobs:
       # check-headers, check-tree, include-asm, format-check (ruff included), meson test, typeloss.
       - run: meson setup build/meson
       - run: tools/pre_push.sh refs/remotes/origin/main
+      # A failure before pre-push (for example shell lint) leaves no logs to print.
       - name: Failed check logs
-        if: failure()
+        if: failure() && hashFiles('build/pre-push/*.log') != ''
         run: tail -n 40 build/pre-push/*.log
       - name: No SDK object in the tree
         run: test -z "$(find . -path ./.venv -prune -o \( -iname '*.obj' -o -iname '*.lib' \) -print)"
