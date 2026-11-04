@@ -18,7 +18,7 @@ MATCH void func_801DF914(void) {
         g_SpadWork->word_08.byte.unk_09   = *(u8*)((u8*)&s_BattleCharacterSprites + current->stats.character_id);
         g_SpadWork->word_08.byte.timer_0A = *(u8*)((u8*)&s_BattleCharacterSprites + g_GameState->stats.character_id);
     }
-    Actor_RequestScript((g_SpadWork->word_08.byte.unk_08 + 0xC) & BYTE_MASK);
+    Actor_RequestScript((g_SpadWork->word_08.byte.facing_08 + 0xC) & BYTE_MASK);
     func_801DEDE4();
     work          = g_SpadWork;
     work->step_01 = work->step_01 + 1;

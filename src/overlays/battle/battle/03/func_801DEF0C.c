@@ -18,7 +18,7 @@ MATCH void func_801DEF0C(void) {
     work->unk_18                     = 0;
     work->unk_1C                     = 0;
     work->unk_20                     = 0;
-    out->word_08.byte.unk_08         = g_BattleScrollDir;
+    out->word_08.byte.facing_08      = g_BattleScrollDir;
     g_SpadWork->unk_48               = 0;
     tail                             = g_SpadWork;
     g_SpadWork->word_3C.half.span_3E = Area_SampleHeight(tail->coord_x_34.raw, tail->coord_y_38.raw);

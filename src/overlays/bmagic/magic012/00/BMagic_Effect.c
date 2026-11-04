@@ -26,9 +26,9 @@ MATCH void func_801EF080(void) {
     value                           = g_SpadWork->word_08.byte.unk_09 - 1;
     g_SpadWork->word_08.byte.unk_09 = value;
     if (!(value & 0xFF)) {
-        g_SpadWork->word_08.byte.unk_08 = D_801EB4E0->word_08.byte.unk_08;
-        g_SpadWork->unk_0C              = 0x20000;
-        g_SpadWork->unk_10              = 0;
+        g_SpadWork->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
+        g_SpadWork->unk_0C                 = 0x20000;
+        g_SpadWork->unk_10                 = 0;
         func_801DD350(g_SpadWork);
         g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw + g_SpadWork->unk_0C;
         g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw + g_SpadWork->unk_10;

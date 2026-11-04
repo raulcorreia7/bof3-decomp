@@ -60,7 +60,7 @@ MATCH void func_801EF72C(void) {
 
     PushMatrix();
     rot.vx = 0x400;
-    rot.vy = D_801EFC9C[g_SpadWork->word_08.byte.unk_08];
+    rot.vy = D_801EFC9C[g_SpadWork->word_08.byte.facing_08];
     rot.vz = 0;
     pos.vx = (g_SpadWork->coord_x_34.raw >> 9) - 0x4000;
     pos.vy = (g_SpadWork->coord_y_38.raw >> 9) - 0x4000;

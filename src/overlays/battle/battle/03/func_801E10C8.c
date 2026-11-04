@@ -31,7 +31,7 @@ MATCH void func_801E10C8(void) {
         g_BattleEffects[slot].unk_27        = 6;
         work                                = g_SpadWork;
         g_BattleEffects[slot].work_74.party = owner;
-        Actor_SelectScript((work->word_08.byte.unk_08 + 4) & BYTE_MASK);
+        Actor_SelectScript((work->word_08.byte.facing_08 + 4) & BYTE_MASK);
         SND_QueueSelectionFx(0x206);
         if (g_BattleEventFlags == 0) {
             func_801D9484();

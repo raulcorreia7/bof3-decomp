@@ -5,7 +5,7 @@ MATCH void func_800AF014(void) {
 
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
-    if (D_801EB4E0->word_08.byte.unk_08 & 1) {
+    if (D_801EB4E0->word_08.byte.facing_08 & 1) {
         setXY4(prim, 0, 0, 319, 0, 0, 239, 319, 239);
     } else {
         prim->x2 = 319;

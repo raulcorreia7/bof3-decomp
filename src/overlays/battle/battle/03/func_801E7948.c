@@ -14,38 +14,38 @@ MATCH void func_801E7948(void) {
         if (func_801E7B34() & BYTE_MASK) {
             if (g_EmiLoadedCharacterIndex == 7) {
                 slot = 0x205;
-                if (D_801EB4E0->word_08.byte.unk_08 < 2) {
+                if (D_801EB4E0->word_08.byte.facing_08 < 2) {
                     slot = 0x201;
                 }
                 EMI_LoaderStreamInitSlot(slot);
             }
             if (g_EmiLoadedCharacterIndex == 0xD) {
                 slot = 0x206;
-                if (D_801EB4E0->word_08.byte.unk_08 < 2) {
+                if (D_801EB4E0->word_08.byte.facing_08 < 2) {
                     slot = 0x202;
                 }
                 EMI_LoaderStreamInitSlot(slot);
             }
             if (g_EmiLoadedCharacterIndex == 0xE) {
                 slot = 0x207;
-                if (D_801EB4E0->word_08.byte.unk_08 < 2) {
+                if (D_801EB4E0->word_08.byte.facing_08 < 2) {
                     slot = 0x203;
                 }
                 EMI_LoaderStreamInitSlot(slot);
             }
             if (g_EmiLoadedCharacterIndex == 0xF) {
                 slot = 0x208;
-                if (D_801EB4E0->word_08.byte.unk_08 < 2) {
+                if (D_801EB4E0->word_08.byte.facing_08 < 2) {
                     slot = 0x204;
                 }
                 EMI_LoaderStreamInitSlot(slot);
             }
-        } else if (D_801EB4E0->word_08.byte.unk_08 < 2) {
+        } else if (D_801EB4E0->word_08.byte.facing_08 < 2) {
             EMI_LoaderStreamInitSlot(g_EmiLoadedCharacterIndex + EMI_SLOT_BPLD);
         } else {
             EMI_LoaderStreamInitSlot(g_EmiLoadedCharacterIndex + EMI_SLOT_BPLU);
         }
-    } else if (D_801EB4E0->word_08.byte.unk_08 < 2) {
+    } else if (D_801EB4E0->word_08.byte.facing_08 < 2) {
         EMI_LoaderStreamInitSlot(D_800B4A64[g_EmiLoadedCharacterIndex]);
     } else {
         EMI_LoaderStreamInitSlot(D_800B4A68[g_EmiLoadedCharacterIndex]);

@@ -19,7 +19,7 @@ MATCH void func_801EF000(void) {
         work                                       = g_SpadWork;
         g_BattleEffects[slot].unk_01               = 1;
         g_BattleEffects[slot].work_74.party        = work;
-        facing                                     = D_801EB4E0->word_08.byte.unk_08;
+        facing                                     = D_801EB4E0->word_08.byte.facing_08;
         g_BattleEffects[slot].unk_09               = 0;
         g_BattleEffects[slot].unk_0A               = 0;
         g_BattleEffects[slot].unk_08               = (facing + 2) & 3;

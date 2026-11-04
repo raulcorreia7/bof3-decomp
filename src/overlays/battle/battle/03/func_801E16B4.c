@@ -31,7 +31,7 @@ MATCH void func_801E16B4(void) {
             } else {
                 g_SpadWork->word_08.byte.unk_09 = s_BattleCharacterStepIds[work->stats.character_id];
             }
-            Actor_RequestScript((g_SpadWork->word_08.byte.unk_08 + 0x2C) & BYTE_MASK);
+            Actor_RequestScript((g_SpadWork->word_08.byte.facing_08 + 0x2C) & BYTE_MASK);
             g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
         } else {
             g_SpadWork->step_01 = g_SpadWork->step_01 + 1;

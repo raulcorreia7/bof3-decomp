@@ -7,7 +7,7 @@ MATCH void func_801E4FA8(void) {
     g_SpadWork->unk_1C = 0;
     func_801DD3CC((s32)g_SpadWork);
     work                              = g_SpadWork;
-    work->word_08.byte.unk_08         = work->word_08.byte.unk_08 ^ 2;
+    work->word_08.byte.facing_08      = work->word_08.byte.facing_08 ^ 2;
     work                              = g_SpadWork;
     work->unk_0C                      = 0;
     work->unk_10                      = 0;

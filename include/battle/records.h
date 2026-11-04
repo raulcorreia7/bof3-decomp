@@ -481,12 +481,28 @@ ASSERT_SIZE(BattleOwnerKind, 0x24);
  * and count it down to 0 (magic097, magic110) or up to a limit (magic001, magic009, magic099) before
  * they step the program; battle/battle/03 waits on it the same way. The battle/battle/15 slot menu
  * programs keep a column index in it, and two bmagic effects (magic162, magic168) keep a palette fade
- * index. Each program writes it before it reads it. */
+ * index. Each program writes it before it reads it.
+ *
+ * facing_08 (+0x08) is the battler's facing, 0..3. func_801DEF0C seeds it from g_BattleScrollDir;
+ * battle/battle/03 and battle/battle/15 add it to a script base for Actor_RequestScript and
+ * Actor_SelectScript, and flip it with `^ 2` to turn the battler around (func_801E4FA8, func_8009B488).
+ * bmagic reads it to pick a roll angle (magic043 D_801EFC9C) or a quarter turn (magic113, the shared
+ * Effect_SetActorMatrixQuarterRoll).
+ *
+ * unk_09 (+0x09) and unk_0B (+0x0B) keep their address names because their users disagree on a role.
+ * unk_09 is a frame counter in most bmagic, boss and battle/battle/03 programs (set, then `--` to 0), a
+ * fade level in magic064 and the Area_UpdatePaletteTint callers, a menu row index in battle/battle/15
+ * (func_800ADE6C, func_800ADA4C), and a sprite or step id looked up from a table in battle/battle/03
+ * (func_801DF914, func_801E16B4, func_801E3980). unk_0B is a step ticker that `--` ends in bmagic
+ * (magic079, magic093, Effect_TickOnTimerNegative), a count-up (magic099, magic121), a battler slot
+ * index in battle/battle/03 and battle/battle/15 (func_801E6E54, func_800AE82C), a shake amplitude
+ * (Effect_ShakeScreen), a bit-0x80 flag (Effect_StepOnTickFlag), and a result byte in the area
+ * overlays. */
 typedef union BattleWorkWord08 {
     u32 word;
 
     struct {
-        u8 unk_08;
+        u8 facing_08;
         u8 unk_09;
         u8 timer_0A;
         u8 unk_0B;

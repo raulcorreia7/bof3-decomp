@@ -1016,7 +1016,7 @@ static inline void BattleRotateWorkPair(PartyBattler* work, s32 offset_a, s32 of
     s32 new_b;
     s32 mode;
 
-    mode = work->word_08.byte.unk_08;
+    mode = work->word_08.byte.facing_08;
     if (mode == 1) {
         goto mode_1; /* swap and negate: (a, b) -> (-b, a) */
     }
