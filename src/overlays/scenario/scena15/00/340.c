@@ -244,7 +244,24 @@ INCLUDE_ASM(func_801F8C78);
 
 INCLUDE_ASM(func_801F8D30);
 
-INCLUDE_ASM(func_801F8EA8);
+MATCH void func_801F8EA8(void) {
+    MATRIX matrix;
+    Actor* work;
+    s32    cue;
+
+    Area_SetCameraMatrix(&matrix);
+    work = g_SpadWork;
+    func_801F92F0(&work->x, &work->unk_0C);
+    g_SpadWork->unk_09 = 8;
+    g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
+    if (!(g_SpadWork->unk_0B & 2)) {
+        cue = 0x203;
+        if (!(g_SpadWork->unk_06 & 4)) {
+            cue = 0x208;
+        }
+        SND_PlayCue(cue);
+    }
+}
 
 INCLUDE_ASM(func_801F8F4C);
 
