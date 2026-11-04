@@ -333,24 +333,20 @@ INCLUDE_ASM(func_801FD610);
 INCLUDE_ASM(func_801FD67C);
 
 MATCH s32 func_801FD960(s32 arg0, s32 arg1) {
-    s32 temp_v0;
+    s32 value;
 
     if (g_GameAreaId == 0x67) {
         if ((SYS_TestFlag(g_SceneFlags, 3) == 0) && (arg1 <= 0x200000)) {
             if ((u32)((arg0 >> 0x10) - 0x4A) < 2U) {
                 Game_SetScriptActive();
-                temp_v0 = g_SndBgmId * 4;
-                SND_StartDecrescendo((s32) * (g_SelectionCues + temp_v0), (s16) * (D_80181EBB + temp_v0), 0x64, 0x20);
+                value = g_SndBgmId * 4;
+                SND_StartDecrescendo((s32) * (g_SelectionCues + value), (s16) * (D_80181EBB + value), 0x64, 0x20);
                 D_80146874 = 4;
                 D_80146875 = 0;
                 return 1;
             }
-            goto block_5;
         }
-        /* Duplicate return node #6. Try simplifying control flow for better match */
-        return 0;
     }
-block_5:
     return 0;
 }
 
