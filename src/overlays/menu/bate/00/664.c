@@ -25,7 +25,17 @@ MATCH void func_801D1578(void) {
     }
 }
 
-INCLUDE_ASM(func_801D15E4);
+MATCH void func_801D15E4(void) {
+    if (g_UiWindowEffectBusy == 0) {
+        D_80148654 = 0;
+        D_80148650 = 1;
+        D_80148651 = 0;
+        D_80148652 = 0;
+        strncpy(&D_80144DE4, &D_801D86F0, 5);
+        return;
+    }
+    Menu_DrawClutStrip(D_80144953);
+}
 
 INCLUDE_ASM(func_801D165C);
 
@@ -35,7 +45,23 @@ INCLUDE_ASM(func_801D1C90);
 
 INCLUDE_ASM(func_801D1E8C);
 
-INCLUDE_ASM(func_801D1FA0);
+MATCH void func_801D1FA0(void) {
+    u8 temp_s0;
+
+    temp_s0 = D_8014833D;
+    if (Item_GetEquipability(D_80148338, temp_s0) & 1) {
+        D_80148511 = 0;
+    } else {
+        D_80148511 = 1;
+    }
+    D_801D8EE0                = D_80144DF2;
+    D_801D8EE1                = D_80144DF3;
+    D_801D8EE2                = D_80144DF4;
+    D_801D8EE3                = D_80144DF5;
+    D_801D8EE4                = D_80144DF6;
+    D_801D8EE4                = D_80144DF7;
+    (&D_801D8EE0)[D_8014835E] = temp_s0;
+}
 
 MATCH void func_801D2070(void) {
     SYS_DISPATCH_BYTE(D_801D8764, D_80148651);
@@ -53,11 +79,30 @@ MATCH void func_801D20E8(void) {
     *count += 1;
 }
 
-INCLUDE_ASM(func_801D211C);
+MATCH void func_801D211C(void) {
+    Menu_DrawClutStrip(D_80144953);
+    func_801D2304(0x37, 0x37);
+    if (g_UiWindowEffectBusy == 0) {
+        func_801D259C();
+        D_80148658 = 0;
+        D_80148652 = 0;
+        D_80148651 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D2190);
 
-INCLUDE_ASM(func_801D2298);
+MATCH void func_801D2298(void) {
+    if (g_UiWindowEffectBusy == 0) {
+        D_80148654 = 0;
+        D_80148650 = 1;
+        D_80148651 = 0;
+        D_80148652 = 0;
+        return;
+    }
+    Menu_DrawClutStrip(D_80144953);
+    func_801D2304(0x37, 0x37);
+}
 
 INCLUDE_ASM(func_801D2304);
 
