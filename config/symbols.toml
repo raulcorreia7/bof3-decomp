@@ -490,6 +490,7 @@ BMagic_AllocEffect = { addr = 0x801F04A4, type = "func", source = "claims the fi
 g_BMagicEffectFuncs = { addr = 0x801F0508, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic088/03"]
+Effect_NextStepWhileTickUnderTwo = { addr = 0x801EF070, type = "func", source = "advances the step byte at +0x01 while the effect ticker byte at +0x0B is under 2; one body shared with the other bmagic overlays" }
 Effect_StartOnZeroTick = { addr = 0x801EF300, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 Effect_SetActorMatrix = { addr = 0x801EF430, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 Effect_CountUpAndStep = { addr = 0x801EF59C, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
@@ -785,6 +786,7 @@ BMagic_AllocEffect = { addr = 0x801EF69C, type = "func", source = "claims the fi
 g_BMagicEffectFuncs = { addr = 0x801EF718, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic167/03"]
+Effect_NextStepWhileTickUnderTwo = { addr = 0x801EF048, type = "func", source = "advances the step byte at +0x01 while the effect ticker byte at +0x0B is under 2; one body shared with the other bmagic overlays" }
 Effect_PlayOnZeroTick = { addr = 0x801EF1C8, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_SetActorMatrix = { addr = 0x801EF228, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 Effect_CountUpAndStep = { addr = 0x801EF3C0, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }

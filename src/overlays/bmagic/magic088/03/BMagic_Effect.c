@@ -38,14 +38,7 @@ MATCH void func_801EEFA0(void) {
     }
 }
 
-MATCH void func_801EF070(void) {
-    PartyBattler* work;
-
-    work = g_SpadWork;
-    if (work->word_08.byte.unk_0B < 2) {
-        work->step_01++;
-    }
-}
+#include "overlays/bmagic/Effect_NextStepWhileTickUnderTwo.h"
 
 INCLUDE_ASM(func_801EF0A8);
 

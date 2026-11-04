@@ -22,14 +22,7 @@ MATCH void func_801EEE88(void) {
 
 INCLUDE_ASM(func_801EEF38);
 
-MATCH void func_801EF048(void) {
-    PartyBattler* work;
-
-    work = g_SpadWork;
-    if (work->word_08.byte.unk_0B < 2) {
-        work->step_01++;
-    }
-}
+#include "overlays/bmagic/Effect_NextStepWhileTickUnderTwo.h"
 
 INCLUDE_ASM(func_801EF080);
 
