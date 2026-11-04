@@ -30,7 +30,18 @@ MATCH void func_801D0D00(void) {
     }
 }
 
-INCLUDE_ASM(func_801D0D5C);
+MATCH void func_801D0D5C(void) {
+    Actor* work;
+    u8     timer;
+
+    work         = g_SpadWork;
+    timer        = work->unk_09 - 1;
+    work->unk_0C = work->unk_0C - 0x10;
+    work->unk_09 = timer;
+    if (timer == 0) {
+        Actor_Clear();
+    }
+}
 
 MATCH void func_801D0DA4(void) {
     SYS_DISPATCH_TASK(D_801D1B2C, 1, g_SpadWork);
@@ -68,7 +79,12 @@ MATCH void func_801D0F68(void) {
 
 INCLUDE_ASM(func_801D0F9C);
 
-INCLUDE_ASM(func_801D1008);
+MATCH void func_801D1008(void) {
+    if (g_ScriptVars[0] == 9) {
+        g_SpadWork->unk_09 = 0x1E;
+        g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
+    }
+}
 
 INCLUDE_ASM(func_801D1050);
 
@@ -106,7 +122,22 @@ MATCH void func_801D15B0(void) {
     } while ((u32)(index & BYTE_MASK) < 0x10U);
 }
 
-INCLUDE_ASM(func_801D15DC);
+MATCH void func_801D15DC(void) {
+    s32 index;
+    u8* slot;
+
+    slot  = (u8*)AREA_WORK_WINDOW;
+    index = 0;
+    do {
+        if (*slot == 0) {
+            *slot   = 1;
+            slot[2] = 0;
+            return;
+        }
+        index += 1;
+        slot += 6;
+    } while ((u32)(index & BYTE_MASK) < 0x10U);
+}
 
 /* Walks the 16 six-byte slots at 0x800E4800 and returns 1 when one is active. A slot in state 0 takes `countdown` into its
  * halfword at +2; in state 2 that halfword drops by 8 per call and the slot is released once it goes negative. */
