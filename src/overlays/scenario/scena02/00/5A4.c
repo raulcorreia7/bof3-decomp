@@ -106,12 +106,7 @@ INCLUDE_ASM(func_801FBC6C);
 INCLUDE_ASM(func_801FBF24);
 
 MATCH void func_801FBF94(u8 actor_id) {
-    if (D_80143F03 == 0) {
-        if (g_Actors[actor_id].y.fixed + 0x18000 >= D_80145EC8 && D_80145EC8 >= g_Actors[actor_id].y.fixed - 0x18000 &&
-            D_80145EC4 >= g_Actors[actor_id].x.fixed && g_Actors[actor_id].x.fixed + 0x50000 >= D_80145EC4) {
-            func_801FCB54();
-        }
-    }
+    SCENA02_TRIGGER_NEAR_Y(actor_id, 0x18000, 0x50000);
 }
 
 MATCH void func_801FC044(u8 actor_id) {
@@ -142,12 +137,7 @@ MATCH void func_801FC1A4(u8 actor_id) {
 }
 
 MATCH void func_801FC25C(u8 actor_id) {
-    if (D_80143F03 == 0) {
-        if (g_Actors[actor_id].y.fixed + 0x20000 >= D_80145EC8 && D_80145EC8 >= g_Actors[actor_id].y.fixed - 0x20000 &&
-            D_80145EC4 >= g_Actors[actor_id].x.fixed && g_Actors[actor_id].x.fixed + 0x60000 >= D_80145EC4) {
-            func_801FCB54();
-        }
-    }
+    SCENA02_TRIGGER_NEAR_Y(actor_id, 0x20000, 0x60000);
 }
 
 MATCH void func_801FC308(u8 actor_id) {
@@ -171,52 +161,23 @@ MATCH void func_801FC3B4(s32 actor_id) {
 }
 
 MATCH void func_801FC46C(u8 actor_id) {
-    if (D_80143F03 == 0) {
-        if (g_Actors[actor_id].y.fixed + 0x10000 >= D_80145EC8 && D_80145EC8 >= g_Actors[actor_id].y.fixed - 0x10000 &&
-            D_80145EC4 >= g_Actors[actor_id].x.fixed && g_Actors[actor_id].x.fixed + 0x40000 >= D_80145EC4) {
-            func_801FCB54();
-        }
-    }
+    SCENA02_TRIGGER_NEAR_Y(actor_id, 0x10000, 0x40000);
 }
 
 MATCH void func_801FC518(s32 actor_id) {
-    if (D_80143F03 == 0) {
-        if (g_Actors[actor_id & 0xFF].y.fixed + 0x28000 >= D_80145EC8 &&
-            D_80145EC8 >= g_Actors[actor_id & 0xFF].y.fixed - 0x20000 &&
-            D_80145EC4 >= g_Actors[actor_id & 0xFF].x.fixed &&
-            g_Actors[actor_id & 0xFF].x.fixed + 0x40000 >= D_80145EC4) {
-            func_801FCB54();
-        }
-    }
+    SCENA02_TRIGGER_BAND_Y(actor_id & 0xFF, 0x28000, 0x20000, 0x40000);
 }
 
 MATCH void func_801FC5D0(s32 actor_id) {
-    if (D_80143F03 == 0) {
-        if (g_Actors[actor_id & 0xFF].y.fixed + 0x18000 >= D_80145EC8 &&
-            D_80145EC8 >= g_Actors[actor_id & 0xFF].y.fixed - 0x10000 &&
-            D_80145EC4 >= g_Actors[actor_id & 0xFF].x.fixed &&
-            g_Actors[actor_id & 0xFF].x.fixed + 0x30000 >= D_80145EC4) {
-            func_801FCB54();
-        }
-    }
+    SCENA02_TRIGGER_BAND_Y(actor_id & 0xFF, 0x18000, 0x10000, 0x30000);
 }
 
 MATCH void func_801FC688(u8 actor_id) {
-    if (D_80143F03 == 0) {
-        if (g_Actors[actor_id].x.fixed + 0x10000 >= D_80145EC4 && D_80145EC4 >= g_Actors[actor_id].x.fixed - 0x10000 &&
-            D_80145EC8 >= g_Actors[actor_id].y.fixed && g_Actors[actor_id].y.fixed + 0x50000 >= D_80145EC8) {
-            func_801FCB54();
-        }
-    }
+    SCENA02_TRIGGER_NEAR_X(actor_id, 0x10000, 0x50000);
 }
 
 MATCH void func_801FC734(u8 actor_id) {
-    if (D_80143F03 == 0) {
-        if (g_Actors[actor_id].x.fixed + 0x18000 >= D_80145EC4 && D_80145EC4 >= g_Actors[actor_id].x.fixed - 0x18000 &&
-            D_80145EC8 >= g_Actors[actor_id].y.fixed && g_Actors[actor_id].y.fixed + 0x40000 >= D_80145EC8) {
-            func_801FCB54();
-        }
-    }
+    SCENA02_TRIGGER_NEAR_X(actor_id, 0x18000, 0x40000);
 }
 
 INCLUDE_ASM(func_801FC7E4);

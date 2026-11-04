@@ -101,49 +101,13 @@ INCLUDE_ASM(func_801FC900);
 
 INCLUDE_ASM(func_801FCD80);
 
-MATCH u16 func_801FD278(void) {
-    u8 slot;
-    u8 member;
+MATCH u16 func_801FD278(void) SCENA10_PARTY_LOOKUP(4, D_801FE950, D_801FE954, 0)
 
-    for (slot = 0; slot < 4; slot++) {
-        for (member = 0; member < g_PartySize; member++) {
-            if (g_BattlePartyBattlers[member].stats.character_id == D_801FE950[slot]) {
-                return D_801FE954[slot];
-            }
-        }
-    }
-    return 0;
-}
+    MATCH u16 func_801FD31C(void) SCENA10_PARTY_LOOKUP(5, D_801FE95C, D_801FE964, 0)
 
-MATCH u16 func_801FD31C(void) {
-    u8 slot;
-    u8 member;
+        MATCH u16 func_801FD3C0(void) SCENA10_PARTY_LOOKUP(3, D_801FE970, D_801FE974, 0xFFFF)
 
-    for (slot = 0; slot < 5; slot++) {
-        for (member = 0; member < g_PartySize; member++) {
-            if (g_BattlePartyBattlers[member].stats.character_id == D_801FE95C[slot]) {
-                return D_801FE964[slot];
-            }
-        }
-    }
-    return 0;
-}
-
-MATCH u16 func_801FD3C0(void) {
-    u8 slot;
-    u8 member;
-
-    for (slot = 0; slot < 3; slot++) {
-        for (member = 0; member < g_PartySize; member++) {
-            if (g_BattlePartyBattlers[member].stats.character_id == D_801FE970[slot]) {
-                return D_801FE974[slot];
-            }
-        }
-    }
-    return 0xFFFF;
-}
-
-MATCH void func_801FD464(void* entity) {
+            MATCH void func_801FD464(void* entity) {
     SceneFunc handler;
     u8        index;
 

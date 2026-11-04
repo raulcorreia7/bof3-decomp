@@ -23,4 +23,21 @@ extern u16 D_801FE964[5];
 extern u8  D_801FE970[3];
 extern u16 D_801FE974[3];
 
+/* The party lookups of 370.c: return the value paired with the first id in `ids` that a party member
+ * holds, else `none`. The members differ only in table and count. Every change must verify every member. */
+#define SCENA10_PARTY_LOOKUP(count, ids, values, none)                                 \
+    {                                                                                  \
+        u8 slot;                                                                       \
+        u8 member;                                                                     \
+                                                                                       \
+        for (slot = 0; slot < (count); slot++) {                                       \
+            for (member = 0; member < g_PartySize; member++) {                         \
+                if (g_BattlePartyBattlers[member].stats.character_id == (ids)[slot]) { \
+                    return (values)[slot];                                             \
+                }                                                                      \
+            }                                                                          \
+        }                                                                              \
+        return (none);                                                                 \
+    }
+
 #endif
