@@ -17,7 +17,19 @@ MATCH void func_801D0C70(void) {
     step[1]++;
 }
 
-INCLUDE_ASM(func_801D0CA0);
+MATCH void func_801D0CA0(void) {
+    Actor* work;
+    u8     timer;
+
+    work         = g_SpadWork;
+    timer        = work->unk_09 - 1;
+    work->unk_0C = work->unk_0C + 0x10;
+    work->unk_09 = timer;
+    if (timer == 0) {
+        g_SpadWork->unk_09 = 0x20;
+        g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
+    }
+}
 
 MATCH void func_801D0D00(void) {
     u8 timer;
@@ -77,7 +89,20 @@ MATCH void func_801D0F68(void) {
     g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
 }
 
-INCLUDE_ASM(func_801D0F9C);
+MATCH void func_801D0F9C(void) {
+    Actor* work;
+    u8     timer;
+
+    work         = g_SpadWork;
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    work->unk_2E = (u16)(work->unk_2E + 0x15);
+    work->unk_30 = (u16)(work->unk_30 + 9);
+    if (timer == 0) {
+        g_SpadWork->unk_09 = 0x5A;
+        g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
+    }
+}
 
 MATCH void func_801D1008(void) {
     if (g_ScriptVars[0] == 9) {
@@ -86,7 +111,19 @@ MATCH void func_801D1008(void) {
     }
 }
 
-INCLUDE_ASM(func_801D1050);
+MATCH void func_801D1050(void) {
+    Actor* work;
+    u8     timer;
+
+    work         = g_SpadWork;
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    work->unk_2E = (u16)(work->unk_2E - 7);
+    work->unk_30 = (u16)(work->unk_30 - 3);
+    if (timer == 0) {
+        Actor_Clear();
+    }
+}
 
 MATCH void func_801D10A4(void) {
     SYS_DISPATCH_TASK(D_801D1B48, 1, g_SpadWork);
