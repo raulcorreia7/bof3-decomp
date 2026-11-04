@@ -83,4 +83,5 @@ MATCH void func_801EFB90(void) {
 
 INCLUDE_ASM(func_801EFC48);
 
-INCLUDE_ASM(func_801EFED0);
+/* func_801EFED0 */
+#include "overlays/bmagic/BMagic_AllocEffect.h"
