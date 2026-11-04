@@ -39,7 +39,7 @@ MATCH void func_801CE82C(void) {
 
 INCLUDE_ASM(func_801CE870);
 
-INCLUDE_ASM(func_801CEA3C);
+#include "overlays/plchar/Char_ClaimLinkSlot.h"
 
 #include "overlays/plchar/Char_PollScriptRequest.h"
 
