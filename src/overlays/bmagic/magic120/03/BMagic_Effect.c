@@ -23,21 +23,7 @@ INCLUDE_ASM(func_801EF0D8);
 /* Template: bmagic/magic040 func_801EF114; size 0x6C against retail 0x7C, first difference lbu v0,9(v1) at +0x0C. */
 INCLUDE_ASM(func_801EF270);
 
-MATCH void func_801EF2EC(void) {
-    PartyBattler* work;
-    u8            timer;
-
-    work                      = g_SpadWork;
-    work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
-    work                      = g_SpadWork;
-    timer                     = work->word_08.byte.unk_09 + 1;
-    work->word_08.byte.unk_09 = timer;
-    if (timer == 24) {
-        func_800A9610(g_BattleTargetSelector, 0x10);
-        work         = g_SpadWork;
-        work->unk_02 = work->unk_02 + 1;
-    }
-}
+#include "overlays/bmagic/Effect_CountUpTimerCallSelector.h"
 
 MATCH void func_801EF374(void) {
     u8 timer;
