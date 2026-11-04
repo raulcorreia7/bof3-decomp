@@ -29,4 +29,6 @@ void func_801F559C(void);
 void func_801F5600(void);
 void func_801F5F20(void);
 
+extern u16 D_801492DC;
+
 #endif
