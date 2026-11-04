@@ -9,7 +9,26 @@ INCLUDE_ASM(func_801EECE0);
 
 INCLUDE_ASM(func_801EEE24);
 
-INCLUDE_ASM(func_801EF000);
+MATCH void func_801EF000(void) {
+    u32           slot;
+    PartyBattler* work;
+    u8            facing;
+
+    if (g_SpadWork->unk_0B == 3) {
+        slot                                       = Battle_AllocEffect(1, 3) & BYTE_MASK;
+        work                                       = g_SpadWork;
+        g_BattleEffects[slot].unk_01               = 1;
+        g_BattleEffects[slot].work_74              = (u32)work;
+        facing                                     = D_801EB4E0->unk_08;
+        g_BattleEffects[slot].unk_09               = 0;
+        g_BattleEffects[slot].unk_0A               = 0;
+        g_BattleEffects[slot].unk_08               = (facing + 2) & 3;
+        g_BattleEffects[slot].unk_34               = g_SpadWork->coord_x_34;
+        g_BattleEffects[slot].unk_38               = g_SpadWork->coord_y_38;
+        g_BattleEffects[slot].word_3C.half.span_3E = g_SpadWork->word_3C.half.span_3E;
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF0F0);
 

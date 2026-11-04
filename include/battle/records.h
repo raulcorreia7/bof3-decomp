@@ -153,6 +153,19 @@ typedef union BattleTargetIndex {
     u16 capture_count; /* the low halfword, as battle/battle/03 draws it */
 } BattleTargetIndex;
 
+/* The word at +0x3C of a local work record. It is copied whole by
+ * func_801E72F4 and func_801DDAF0, and its high halfword is the vertical span
+ * written by func_801DEF0C and func_801E352C. The two overlays read that
+ * halfword with opposite signs. */
+typedef union BattleWorkWord3C {
+    u32 word;
+
+    struct {
+        u8  pad_00[2];
+        s16 span_3E; /* the vertical span; func_800AF764 projects it negated */
+    } half;
+} BattleWorkWord3C;
+
 /* One queued action slot of the table at 0x801EC330 (stride 0x78).
  *
  * Both overlays declare g_BattleEffects as BattleEffect and read the same
@@ -187,7 +200,7 @@ typedef struct BattleEffect {
     u16               unk_32;
     BattleFix32       unk_34;
     BattleFix32       unk_38;
-    u32               unk_3C;
+    BattleWorkWord3C  word_3C; /* +0x3C the work record's word; bmagic stores its span halfword (+0x3E) */
     u8                pad_40[8];
     u8                unk_48;
     u8                pad_49[2];
@@ -238,19 +251,6 @@ typedef union BattleWorkHalfOrByte90 {
     u16 half;
     u8  value;
 } BattleWorkHalfOrByte90;
-
-/* The word at +0x3C of a local work record. It is copied whole by
- * func_801E72F4 and func_801DDAF0, and its high halfword is the vertical span
- * written by func_801DEF0C and func_801E352C. The two overlays read that
- * halfword with opposite signs. */
-typedef union BattleWorkWord3C {
-    u32 word;
-
-    struct {
-        u8  pad_00[2];
-        s16 span_3E; /* the vertical span; func_800AF764 projects it negated */
-    } half;
-} BattleWorkWord3C;
 
 /* The cell at +0xA0 of an enemy work record. battle/battle/03 reads the halfword as
  * the enemy's capture cap (func_801E496C) and battle/battle/15 reads the low byte
