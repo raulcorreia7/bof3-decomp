@@ -27,7 +27,17 @@ INCLUDE_ASM(func_801EF19C);
 
 INCLUDE_ASM(func_801EF238);
 
-INCLUDE_ASM(func_801EF3A4);
+MATCH void func_801EF3A4(void) {
+    func_8014D978();
+    g_SpadWork->unk_0C += g_SpadWork->unk_18;
+    g_SpadWork->unk_10 += g_SpadWork->unk_1C;
+    g_SpadWork->unk_40 += g_SpadWork->unk_0C;
+    g_SpadWork->unk_44 += g_SpadWork->unk_10;
+    if (g_SpadWork->unk_0C == 0) {
+        g_SpadWork->word_08.byte.unk_09 = 0x10;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF43C);
 
