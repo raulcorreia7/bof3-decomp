@@ -2050,6 +2050,10 @@ Actor_SnapToGround = { addr = 0x801F2D5C, type = "func", source = "snaps the act
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 
+["emi/world01/area039/13"]
+Area_ResetViewOffsetZ = { addr = 0x801F2D38, type = "func", source = "zeroes g_AreaViewOffsetZ, the Z term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
+
+
 ["emi/world01/area040/13"]
 Message_ClearRequest = { addr = 0x801F3034, type = "func", source = "clears the area request slot and resets the game-overlay state bytes when the selection byte is clear" }
 Message_Clear = { addr = 0x801F3074, type = "func", source = "clears the message request and sets the game overlay state bytes when the menu choice is zero" }
@@ -2059,6 +2063,7 @@ g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApply
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 Message_ClearRequest = { addr = 0x801F3B08, type = "func", source = "clears the area request slot and resets the game-overlay state bytes when the selection byte is clear" }
 Message_Clear = { addr = 0x801F3DBC, type = "func", source = "clears the message request and sets the game overlay state bytes when the menu choice is zero" }
+Area_ResetViewOffsetZ = { addr = 0x801F3E20, type = "func", source = "zeroes g_AreaViewOffsetZ, the Z term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 
 ["emi/world01/area042/13"]
 Message_SetAnswerMessage = { addr = 0x801F3D90, type = "func", source = "stores the message id the answer table D_801F56C4 holds for the menu choice D_801490C7 in g_MessageRequest" }
@@ -2206,6 +2211,10 @@ Area_FindFreeWorkRow = { addr = 0x801F4D80, type = "func", source = "finds the f
 Area_ClearWorkColumn = { addr = 0x801F5240, type = "func", source = "clears one byte of each row in the actor window" }
 Area_DrawSpinTriangle = { addr = 0x801F5580, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
 Area_InitSpin = { addr = 0x801F5820, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
+
+["emi/world02/area099/13"]
+Area_ResetViewOffsetZ = { addr = 0x801F2C24, type = "func", source = "zeroes g_AreaViewOffsetZ, the Z term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
+
 
 ["emi/world02/area100/13"]
 Actor_RunAreaStep = { addr = 0x801F35D4, type = "func", source = "clears the work reset flag and hands the work pointer to the area step" }
