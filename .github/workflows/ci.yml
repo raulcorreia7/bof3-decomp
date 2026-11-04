@@ -2,6 +2,9 @@ name: ci
 
 # Every push to main and every pull request runs the checks that need no disc. The byte-exact
 # `check` target needs the game and runs on the maintainer's machine before merge.
+# A pull request that changes only docs (Markdown, docs/, .agents/, licence and issue templates)
+# runs the format check, the shell checks and the SDK-object check; the `changes` step gates the
+# toolchain steps. The job always runs and reports, because the main ruleset requires `disc-free`.
 on:
   push:
     branches: [main]
@@ -13,7 +16,7 @@ permissions:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   disc-free:
@@ -24,6 +27,19 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      # Lists the files of this pull request (the checkout is the merge commit). Only docs: code=false.
+      - id: changes
+        name: Changes
+        shell: bash
+        run: |
+          code=true
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            files=$(git diff --name-only HEAD^1 HEAD) || files=unknown
+            code=false
+            if printf '%s\n' "$files" | grep -qvE '^(.*\.md|docs/.*|LICENSE[^/]*|NOTICE|\.github/ISSUE_TEMPLATE/.*|\.agents/.*)$'; then code=true; fi
+            if printf '%s\n' "$files" | grep -qE '^\.github/workflows/'; then code=true; fi
+          fi
+          echo "code=$code" >> "$GITHUB_OUTPUT"
       - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
         with:
           enable-cache: true
@@ -31,7 +47,8 @@ jobs:
         with:
           dprint-version: 0.64.3
           cache: true
-      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      - if: steps.changes.outputs.code == 'true'
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             toolchains/gcc-2.7.2-psx
@@ -39,12 +56,17 @@ jobs:
             toolchains/psn00b_toolchain
           key: toolchain-${{ runner.os }}-${{ hashFiles('tools/setup.sh') }}
       # The compiler and tracked headers only: no SDK object is downloaded or built.
-      - run: tools/setup.sh --dev --no-payloads --no-sdk
-      - run: uv tool install clang-format==23.1.3
-      - run: uv tool install meson==1.12.1
-      - run: uv tool install ninja==1.13.0
+      - if: steps.changes.outputs.code == 'true'
+        run: tools/setup.sh --dev --no-payloads --no-sdk
+      - if: steps.changes.outputs.code == 'true'
+        run: uv tool install clang-format==23.1.3
+      - if: steps.changes.outputs.code == 'true'
+        run: uv tool install meson==1.12.1
+      - if: steps.changes.outputs.code == 'true'
+        run: uv tool install ninja==1.13.0
       - run: uv tool install shellcheck-py==0.11.0.1
       - name: Compare with main
+        if: steps.changes.outputs.code == 'true'
         run: |
           git fetch --no-tags origin +main:refs/remotes/origin/main
           git update-ref refs/heads/main refs/remotes/origin/main
@@ -56,11 +78,13 @@ jobs:
       # dprint/check above covers Markdown, TOML and JSON; DPRINT=true skips the second run.
       # format.sh --check also runs `ruff check` on tools/ (ruff is pinned in pyproject.toml).
       # check-headers, check-tree, include-asm, format-check (ruff included), meson test, typeloss.
-      - run: meson setup build/meson
-      - run: tools/pre_push.sh refs/remotes/origin/main
+      - if: steps.changes.outputs.code == 'true'
+        run: meson setup build/meson
+      - if: steps.changes.outputs.code == 'true'
+        run: tools/pre_push.sh refs/remotes/origin/main
       # A failure before pre-push (for example shell lint) leaves no logs to print.
       - name: Failed check logs
-        if: failure() && hashFiles('build/pre-push/*.log') != ''
+        if: failure() && steps.changes.outputs.code == 'true' && hashFiles('build/pre-push/*.log') != ''
         run: tail -n 40 build/pre-push/*.log
       - name: No SDK object in the tree
         run: test -z "$(find . -path ./.venv -prune -o \( -iname '*.obj' -o -iname '*.lib' \) -print)"
