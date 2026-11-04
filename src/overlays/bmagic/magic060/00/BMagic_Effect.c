@@ -107,7 +107,12 @@ MATCH void func_801F0254(void) {
     }
 }
 
-INCLUDE_ASM(func_801F02CC);
+MATCH void func_801F02CC(void) {
+    if (D_801EB4E0->word_08.byte.unk_0B == 1) {
+        g_SpadWork->word_08.byte.unk_09 = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F031C);
 
