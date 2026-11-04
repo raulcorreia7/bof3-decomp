@@ -21,4 +21,6 @@ extern Callback D_801CF930[];
 extern Callback D_801CF93C[];
 extern Callback D_801CF948[];
 
+s32 func_801B2D00(s32 selector);
+
 #endif
