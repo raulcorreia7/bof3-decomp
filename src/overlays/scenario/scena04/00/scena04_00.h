@@ -6,6 +6,9 @@
 
 #include "overlays/scenario/scenario.h"
 
+#define SCRATCH_ROW_STRIDE 0x28
+#define SCRATCH_ROW_OFFSET 0x25
+
 extern u16       g_GameAreaId;
 extern s8        D_80144EA8;
 extern u32       D_801F6C00;
