@@ -37,7 +37,8 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | `/* FAKE: <reason>. */` beside every fake-match helper                | A bare `register ... asm()`, `__asm__` or `.word` in C        |
 | One `extern` in the owning header                                     | `extern` in a `.c`, or a second name for one address          |
 | [Header layout](#header-layout): one block per record, in table order | Enums after their users, or an ID enum sorted by name         |
-| `/* */` comments that say what the code cannot                        | A comment that restates the name, or one that tells history   |
+| One-line `/* */` comments that say what a name cannot                 | A comment that restates the name, tells history or evidence   |
+| Adjacent globals as one struct, array or union, members by role       | Loose globals at one base or stride                           |
 
 ## Language and formatting
 
@@ -96,8 +97,19 @@ while (i < 3) { Party_ResetMember(i); i++; }
 | local, parameter, member                 | `snake_case`                | `item_id`, `party_slot`, `hp`            |
 | SDK, BIOS, hardware                      | unchanged                   | `CdControl`, `PADLup`, `GPU_GP0`         |
 
-Whole words, one spelling per concept across every image. A name states what the thing is in the
-game, in the game's own words; it never says how it is stored.
+Whole words, one spelling per concept across every image. A name is a game or engine name, as a game
+programmer of the era would write it: `BattleEffect`, `EncounterTable`, `g_Party`, `timer`. It never
+describes storage, offsets, widths or how the thing was found. A member keeps its `_XX` offset suffix
+only while its role is unknown.
+
+**Don't**
+
+```c
+typedef struct { u8 b; } Word08;         /* a width */
+extern PartyRef g_PartyView;             /* how it was found */
+#define MAP_TABLE_OFFSET 0x40            /* an offset */
+#define SCRATCH_ADDRESS  0x1F800000      /* an address */
+```
 
 **Do**
 
@@ -298,8 +310,9 @@ typedef struct { u16 x; u16 y; } ScreenPointData;   /* a second layout, a filler
 
 #### Storage words
 
-A name says what a thing is, never how it is stored. Drop the storage word; what is left is usually
-the name.
+A name says what a thing is, never how it is stored or found. Drop the storage word; what is left is
+usually the name. The same holds for `Ref`, `View`, `Window`, `Row`, `Scratch`, `_ADDRESS` and
+`_OFFSET` in a new name.
 
 | The word leaks | Words                                                    | Write instead                                                                                              |
 | -------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -534,6 +547,25 @@ matching layout use the shared type and member names. PsyQ types stay at SDK cal
 `VECTOR`, `SVECTOR`, `DVECTOR`, `CVECTOR` and `RECT` are reused where the pad is real. A record that
 holds a position declares the member that matches its access width. `FIELD()` reads become members
 when touched.
+
+### Globals are records
+
+Adjacent globals that callers read through one base, step with one stride or clear together are one
+struct, array of structs or union, with members named by role. Declare it once in the owning header
+([globals](#globals)). A lone address stays a plain global.
+
+**Do**
+
+```c
+extern PartySlot g_Party[PARTY_SLOT_COUNT];   /* one array, one stride */
+```
+
+**Don't**
+
+```c
+extern u8 g_PartyHp0;                         /* loose globals at one base and stride */
+extern u8 g_PartyHp1;
+```
 
 ### Widths and asserts
 
@@ -1315,6 +1347,8 @@ covers its users ([lowest scope wins](#lowest-scope-wins)); one that several fam
 `include/slus/data.h` or `include/slus/functions.h`, in address order. The change that names one moves
 its `extern` to the owner.
 
+Adjacent globals that form one record are [one struct or array](#globals-are-records).
+
 One name per address per image. A second name for one address (a width or `volatile` view) is a cast
 macro, not a second `extern`. A cast macro that names the object itself keeps the bytes
 (`#define g_SpadWork ((T *)g_SpadWork)`); an address-taking view hoists the address and changes them.
@@ -1385,24 +1419,27 @@ back the moment one diverges. The macro forms: [helpers and macros](#helpers-and
 
 ## Comments
 
-A comment says what the code cannot: what a thing is in the game, the evidence, and the rules a
-reader needs. Comments are `/* */` blocks in plain present-tense sentences. Delete a comment that
-restates a name or a type. Legal text and `FAKE:` reasons stay.
+A comment says what, never how. It is minimal and high signal: one line, only where a name or a type
+cannot carry the meaning. A comment never retells the code, its history, the evidence or the tools.
+Evidence for a name goes in the commit body and in the `source` of its `config/symbols.toml` row.
+Comments are `/* */` blocks in plain present-tense sentences. Delete a comment that restates a name
+or a type.
 
-Source comments state specs and matching evidence, without naming a tool: a format or behavior
-spec, `@source: wiki:<page>#<anchor>`, what the compiled code needs, what was tried and the match
-percentage. A `FAKE:` or `nonmatching` note keeps its reason and drops the name of the program
-that measured it. Directives that tools read (`clang-format off`, the `M2CTX` and `PERMUTER`
-guards) stay. `docs/` and the skills may name tools where they explain how to use them.
+These stay:
 
-| Where                              | Says                                                                                                                                             |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| above a type or table              | what it is in the game, where the evidence is (reader addresses, a count over all entries), units, ranges, accessors instead of bitfields        |
-| above a shared-header function     | what it does in game terms, one sentence; its inputs and result when the name does not say them                                                  |
-| beside a member                    | its offset, then its role when the name does not say it                                                                                          |
-| at a fake-match helper             | `/* FAKE: <reason>. */`, the only marker form ([fake-match helpers](#fake-match-helpers))                                                        |
-| at a retail bug kept for the match | `/* @bug <what goes wrong and when>. */`                                                                                                         |
-| above an `INCLUDE_ASM` line        | what the next lift needs: the template or twin it follows and how it differs, the missing type or declaration, the blocker; one or two sentences |
+- a `FAKE:` note on a matching aid;
+- `@bug`;
+- legal text and tool directives (`clang-format off`, the `M2CTX` and `PERMUTER` guards);
+- one line above an unfinished `INCLUDE_ASM`: the blocker and the first differing instruction.
+
+| Where                              | Says                                                                                      |
+| ---------------------------------- | ----------------------------------------------------------------------------------------- |
+| above a type or table              | what it is in the game, units or ranges, when the name cannot say them                    |
+| above a shared-header function     | what it does in game terms, one line, when the name does not say it                       |
+| beside a member                    | its offset, then its role when the name does not say it                                   |
+| at a fake-match helper             | `/* FAKE: <reason>. */`, the only marker form ([fake-match helpers](#fake-match-helpers)) |
+| at a retail bug kept for the match | `/* @bug <what goes wrong and when>. */`                                                  |
+| above an `INCLUDE_ASM` line        | the blocker and the first differing instruction, one line                                 |
 
 **Do**
 
@@ -1412,7 +1449,7 @@ void Party_AddItem(u16 item_id, u8 item_count);
 
 /* @bug reads one row past g_ShopStock when shop_index is SHOP_COUNT. */
 
-/* Effect_PlayOnce, except the span read reloads the effect pointer first. */
+/* blocker: effect pointer reload; first diff: lw v0, 0x10(s0). */
 INCLUDE_ASM(func_801F1408);
 ```
 
@@ -1421,6 +1458,7 @@ INCLUDE_ASM(func_801F1408);
 ```c
 /* Adds an item. */                         /* restates the name */
 // renamed from func_80123456 in the prefixes change
+/* matched at 98% after trying three orders */   /* history and evidence */
 /* func_801F30D4 */                         /* restates the INCLUDE_ASM name */
 /* TODO fix */
 ```
