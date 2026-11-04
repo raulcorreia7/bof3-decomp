@@ -2276,6 +2276,7 @@ Message_Clear = { addr = 0x801F40CC, type = "func", source = "clears the message
 ["emi/world03/area119/13"]
 D_80146920 = { addr = 0x80146920, source = "func_801F2C88 and func_801F2D6C use this four-row field-work base" }
 Area_AddViewOffsetY2 = { addr = 0x801F41B8, type = "func", source = "adds 2 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
+Area_SubViewOffsetY2 = { addr = 0x801F41E0, type = "func", source = "subtracts 2 from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetViewOffsetY = { addr = 0x801F4208, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 
 ["emi/world03/area121/14"]
@@ -2561,6 +2562,7 @@ Area_DrawSpinTriangle = { addr = 0x801F40F4, type = "func", source = "draws one 
 Area_InitSpin = { addr = 0x801F4394, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 Actor_WalkWhileWithinLimit = { addr = 0x801F4840, type = "func", source = "walks the script actor one step along facing 5 and rewinds the script cursor while its y position plus the facing-5 y step is at most the per-scene limit table entry D_801448ED selects (func_801F2D68 in area136, func_801F4840 in area188)" }
 Area_AddViewOffsetY2 = { addr = 0x801F48E0, type = "func", source = "adds 2 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
+Area_SubViewOffsetY2 = { addr = 0x801F4908, type = "func", source = "subtracts 2 from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetViewOffsetY = { addr = 0x801F4930, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 
 ["emi/world04/area189/13"]
@@ -4002,6 +4004,7 @@ _svm_okof2 = { addr = 0x80190C5A, alias = true }
 Message_ClearOnCancel = { addr = 0x801F2C0C, type = "func", source = "byte-identical to Message_ClearOnCancel at emi/world03/area151/13@0x801F2C04" }
 Area_SubViewOffsetY20 = { addr = 0x801F2DC8, type = "func", source = "subtracts 0x14 from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_AddViewOffsetY20 = { addr = 0x801F2DF0, type = "func", source = "adds 0x14 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
+Area_SubViewOffsetY2 = { addr = 0x801F2E68, type = "func", source = "subtracts 2 from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_AddViewOffsetY2 = { addr = 0x801F2E90, type = "func", source = "adds 2 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 
 ["emi/battle/batl_end/00"]

@@ -43,7 +43,7 @@ segments:
       - [0x1B7C, c, func_801F477C]
       - [0x1C40, c, Actor_WalkWhileWithinLimit]
       - [0x1CE0, c, Area_AddViewOffsetY2]
-      - [0x1D08, c, func_801F4908]
+      - [0x1D08, c, Area_SubViewOffsetY2]
       - [0x1D30, c, Area_ResetViewOffsetY]
       - [0x1D4C, c, func_801F494C]
       - [0x1DA4, c, func_801F49A4]
