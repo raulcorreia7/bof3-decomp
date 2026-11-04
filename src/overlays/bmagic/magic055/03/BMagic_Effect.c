@@ -17,11 +17,11 @@ INCLUDE_ASM(func_801EECCC);
 /* func_801EEFFC */
 #include "overlays/bmagic/Effect_CopyBattlerCoordsOnTimerZero.h"
 
-INCLUDE_ASM(func_801EF09C);
+#include "overlays/bmagic/func_801EF09C.h"
 
 INCLUDE_ASM(func_801EF124);
 
-INCLUDE_ASM(func_801EF1B8);
+#include "overlays/bmagic/func_801EF1B8.h"
 
 INCLUDE_ASM(func_801EF240);
 
