@@ -183,6 +183,7 @@ MATCH void func_801FC778(void) {
     }
 }
 
+/* nonmatching: two 3-row loops over D_80144F5A (stores 1 for id 5, 2 for id 6 into D_80146865); retail keeps the store in the delay slot of the bne and hoists &D_80146865 and the compared id into a1 and a2 (first differing instruction: li a2,5 against li a1,5, candidate 8 bytes short). */
 INCLUDE_ASM(func_801FC808);
 
 INCLUDE_ASM(func_801FC8A0);
@@ -277,9 +278,13 @@ INCLUDE_ASM(func_801FCD68);
 
 INCLUDE_ASM(func_801FD110);
 
-INCLUDE_ASM(func_801FD178);
+MATCH s32 func_801FD178(void) {
+    SCENA05_START_SCENE(0x26, 1);
+}
 
-INCLUDE_ASM(func_801FD208);
+MATCH s32 func_801FD208(void) {
+    SCENA05_START_SCENE(0x25, 0x19);
+}
 
 MATCH void func_801FD298(void) {
     g_Characters[g_CharSlot[6]].unk_07 |= 1;
