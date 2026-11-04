@@ -77,7 +77,15 @@ MATCH void func_801EF834(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EF878);
+MATCH void func_801EF878(void) {
+    u32 i;
+
+    for (i = 0; i < 4; i++) {
+        D_801F00B0[i] = 0;
+    }
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF8C8(void) {
     u8 timer;
