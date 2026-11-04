@@ -3,7 +3,7 @@
 MATCH void func_801F36B4(void) {
     u16 count;
 
-    count = g_SpadWork->unk_30 + 0x20;
+    count              = g_SpadWork->unk_30 + 0x20;
     g_SpadWork->unk_30 = count;
     if ((s16)count >= 0) {
         func_801F33A4();
