@@ -1,13 +1,22 @@
 sha1: cd15f44ed8ec60028121b7a48be3cafb659e13fe
 segments:
-  - name: main
+  - name: head
     type: code
     start: 0x0
     vram: 0x801F2C00
     align: 4
-    section_order: [.data, .text, .rodata, .bss]
+    section_order: [.data, .rodata]
     subsegments:
       - [0x0, .data, D_801F2C00]
+      - [0x4, .rodata, func_801F3E50]
+  # Placement: a source shared with the earlier segment must claim its sections first.
+  - name: main
+    type: code
+    start: 0x18
+    vram: 0x801F2C18
+    align: 4
+    section_order: [.text, .data, .rodata, .bss]
+    subsegments:
       - [0x18, c, func_801F2C18]
       - [0x5C, c, func_801F2C5C]
       - [0xD8, c, func_801F2CD8]
