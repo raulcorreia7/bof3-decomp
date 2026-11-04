@@ -15,6 +15,8 @@ extern volatile u16 D_801463B0;
 extern char         D_80149118[];
 extern u8*          D_801EB4F4;
 u8                  func_801DB524(u32 slot);
+u8                  func_801DD7AC(s32 selector);
+u16                 func_801EF928(u8 id, u8 flag);
 u8                  func_801EEDA8(void);
 extern const char   D_801EEC04[];
 extern const char   D_801EEC4C[];
