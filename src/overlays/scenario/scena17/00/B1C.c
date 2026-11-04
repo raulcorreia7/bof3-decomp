@@ -63,7 +63,21 @@ INCLUDE_ASM(func_801F7C6C);
 
 INCLUDE_ASM(func_801F7D08);
 
-INCLUDE_ASM(func_801F7DF4);
+MATCH void func_801F7DF4(void) {
+    u8* state;
+
+    if (g_AreaCameraMoving == 0) {
+        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        state                  = &D_80146874;
+        g_AreaCameraStep       = 0x10;
+        g_AreaScrollTargetX    = 0x190000;
+        g_AreaCameraHeightStep = 0;
+        (*state)++;
+    } else {
+        g_AreaCameraAngle.vx--;
+        g_AreaViewOffsetZ -= 6;
+    }
+}
 
 MATCH void func_801F7E9C(void) {
     u8* step;
