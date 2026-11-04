@@ -1,7 +1,4 @@
-/* Sets the GTE rotation and translation like Effect_SetActorMatrix, with the
- * rotation rolled a quarter turn about the z axis when bit 0 of the effect
- * flag byte (work byte 0x08) is set. One definition shared by the bmagic effect
- * modules; every change here must verify every member. */
+/* Sets the actor matrix like Effect_SetActorMatrix, rolled a quarter turn when the effect flag is set. Every change here must verify every member. */
 /* func_801EFA18 (magic107), func_801F1408 (magic151) */
 MATCH void Effect_SetActorMatrixQuarterRoll(void) {
     SVECTOR pos;

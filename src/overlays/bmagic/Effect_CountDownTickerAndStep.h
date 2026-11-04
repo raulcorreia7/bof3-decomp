@@ -1,6 +1,4 @@
-/* Counts the effect ticker (work byte 0x0B) down; at zero it advances the
- * effect step (work byte 0x02). One definition shared by the bmagic effect
- * modules; every change here must verify every member. */
+/* Counts the ticker down and advances the step at zero. Every change here must verify every member. */
 /* func_801EF8A0 (magic086), func_801EF348 (magic096) */
 MATCH void Effect_CountDownTickerAndStep(void) {
     u8 timer;

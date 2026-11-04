@@ -1,7 +1,4 @@
-/* Ages every active slot of the spawn table: counts its life down, shrinks its
- * radius by the image's AREA_SPAWN_SLOT_RADIUS_STEP, frees it at zero and
- * draws it. Returns whether any slot was active. One definition shared by the
- * world area overlays; every change here must verify every member. */
+/* Ages and draws the spawn discs and frees the spent ones; returns whether any was active. Every change here must verify every member. */
 /* func_801F5308 (area098), func_801F3E7C (area188), func_801F3984 (area172) */
 MATCH s32 Area_StepSpawnSlots(void) {
     MATRIX         camera;

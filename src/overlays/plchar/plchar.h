@@ -64,7 +64,6 @@
     g_SpadWork->unk_09 = 2;                                                                          \
     g_SpadWork->state_02++
 
-/* The script position at which the character launches its linked actor. */
 #define CHAR_LAUNCH_SCRIPT_PC 10
 
 extern u32      D_801CE400;

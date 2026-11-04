@@ -1,10 +1,4 @@
-/* One drift step of the effect: the ticker (work byte 0x0B) grows by one plus
- * the timer (0x09) / 64, the effect counter (0x0A) drops every second frame,
- * the actor moves by unk_0C and unk_10 (set to 0x2000 and 0 before
- * func_801DD350 reads them), and the timer drops by two until it reaches 0x30,
- * where the effect releases its ticker and runs func_801E5988. One definition
- * shared by the bmagic effect modules; every change here must verify every
- * member. */
+/* Moves the effect's actor one drift step and releases the ticker when the timer runs out. Every change here must verify every member. */
 /* func_801EF59C (magic067), func_801EF2C4 (magic137) */
 MATCH void Effect_DriftStep(void) {
     PartyBattler* work;

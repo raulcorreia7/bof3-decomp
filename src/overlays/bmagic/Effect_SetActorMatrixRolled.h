@@ -1,6 +1,4 @@
-/* Sets the GTE rotation and translation like Effect_SetActorMatrix, with the
- * rotation rolled by 512 about the z axis. One definition shared by the bmagic
- * effect modules; every change here must verify every member. */
+/* Sets the actor matrix like Effect_SetActorMatrix, rolled by 512. Every change here must verify every member. */
 /* func_801EF510 (magic097), func_801EF520 (magic098), func_801EF1B0 (magic099), func_801EF188 (magic143) */
 MATCH void Effect_SetActorMatrixRolled(void) {
     SVECTOR pos;

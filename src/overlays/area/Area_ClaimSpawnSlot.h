@@ -1,7 +1,4 @@
-/* Claims the first free slot of the spawn table: sets it active and starts it
- * at the actor position with the image's AREA_SPAWN_SLOT_LIFE,
- * AREA_SPAWN_SLOT_RADIUS and AREA_SPAWN_SLOT_CORE_SHADE. One definition shared
- * by the world area overlays; every change here must verify every member. */
+/* Starts the first free spawn slot as a glow disc at the actor position. Every change here must verify every member. */
 /* func_801F526C (area098), func_801F3DE0 (area188), func_801F38E8 (area172) */
 MATCH void Area_ClaimSpawnSlot(void) {
     AreaSpawnSlot* slot;

@@ -166,27 +166,7 @@ typedef union BattleWorkWord3C {
     } half;
 } BattleWorkWord3C;
 
-/* The record a queued slot points at (BattleEffect +0x74). Battle_RunEffects loads it into D_801EB4E0 for every
- * active slot, so a handler reads it as the acting battler; func_801E5E2C and func_801E61F0 read its slot byte.
- *
- * It holds one of four things, chosen where the slot is queued:
- * - party: a PartyBattler. Every bmagic store (magic013, magic060, magic066, magic079, magic113) and most
- *   battle/battle/03 and battle/battle/15 stores, which pass a g_BattlePartyBattlers row, g_SpadWork or
- *   BATTLE_WORK.
- * - enemy: an EnemyBattler. Three writers store one by index (func_801DE1D4, mode 0 handler 7, one slot per live
- *   battler; func_800AAC88 and func_800AAEBC, mode 0 handler 1, an amount queued for a battler). Each takes the enemy
- *   side when the battler index is 3 or more and stores (EnemyBattler*)g_BattleEnemies + index, the record at
- *   stride 0x118. func_801DE1D4 is not built yet (INCLUDE_ASM); its stores follow the same shape. A reader tells
- *   the sides apart by the slot byte at +0x05, which both records carry (below 3 is a party row, else an enemy):
- *   func_801E5E2C indexes g_BattlePartyBattlers or the enemy rows with it, and reads it through the party view.
- * - effect: another BattleEffect, the link func_800AE108 stores (mode 1, handler 0x43).
- * - address: a raw payload address in the battle/battle/15 slot menu programs (func_800AE108, func_800AE260,
- *   mode 2), read back as a word.
- *
- * Open: g_SpadWork stores (func_801E05EC, func_801E45DC, func_801E1EC0, func_800AEEC8) and the whole-record
- * copies (func_800A87D4, boss033's func_800C20CC, stored as bytes) take whichever record the spad points at, and
- * func_801DE1D4 points the spad at an enemy row during an enemy turn, so those slots can hold an enemy too. Their
- * callers have not been traced to a side, so those stores keep the party and bytes views. */
+/* The record a queued slot points at: a party or enemy battler, another slot, or a payload address. */
 typedef union BattleWorkRef {
     struct PartyBattler* party;
     struct EnemyBattler* enemy;
@@ -495,29 +475,7 @@ typedef struct BattleOwnerKind {
 ASSERT_SIZE(BattleOwnerKind, 0x24);
 
 /* The word at +0x08 of a work record: its four bytes, which the overlays read one at a time, and the
- * whole word they mask and test at once.
- *
- * timer_0A (+0x0A) is the effect program's wait counter. The bmagic modules set it to a frame count
- * and count it down to 0 (magic097, magic110) or up to a limit (magic001, magic009, magic099) before
- * they step the program; battle/battle/03 waits on it the same way. The battle/battle/15 slot menu
- * programs keep a column index in it, and two bmagic effects (magic162, magic168) keep a palette fade
- * index. Each program writes it before it reads it.
- *
- * facing_08 (+0x08) is the battler's facing, 0..3. func_801DEF0C seeds it from g_BattleScrollDir;
- * battle/battle/03 and battle/battle/15 add it to a script base for Actor_RequestScript and
- * Actor_SelectScript, and flip it with `^ 2` to turn the battler around (func_801E4FA8, func_8009B488).
- * bmagic reads it to pick a roll angle (magic043 D_801EFC9C) or a quarter turn (magic113, the shared
- * Effect_SetActorMatrixQuarterRoll).
- *
- * unk_09 (+0x09) and unk_0B (+0x0B) keep their address names because their users disagree on a role.
- * unk_09 is a frame counter in most bmagic, boss and battle/battle/03 programs (set, then `--` to 0), a
- * fade level in magic064 and the Area_UpdatePaletteTint callers, a menu row index in battle/battle/15
- * (func_800ADE6C, func_800ADA4C), and a sprite or step id looked up from a table in battle/battle/03
- * (func_801DF914, func_801E16B4, func_801E3980). unk_0B is a step ticker that `--` ends in bmagic
- * (magic079, magic093, Effect_TickOnTimerNegative), a count-up (magic099, magic121), a battler slot
- * index in battle/battle/03 and battle/battle/15 (func_801E6E54, func_800AE82C), a shake amplitude
- * (Effect_ShakeScreen), a bit-0x80 flag (Effect_StepOnTickFlag), and a result byte in the area
- * overlays. */
+ * whole word they mask and test at once. */
 typedef union BattleWorkWord08 {
     u32 word;
 

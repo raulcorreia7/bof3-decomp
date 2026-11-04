@@ -1,7 +1,4 @@
-/* Counts the effect timer (work byte 0x09) and the effect counter (0x0A) up by
- * one; at counter 16 it advances the effect step (work byte 0x02). One
- * definition shared by the bmagic effect modules; every change here must verify
- * every member. */
+/* Counts the timer and the wait up; advances the step when the wait reaches 16. Every change here must verify every member. */
 /* func_801EF114 (magic040), func_801EFC28 (magic126) */
 MATCH void Effect_CountUpTimersAndStep(void) {
     PartyBattler* work;

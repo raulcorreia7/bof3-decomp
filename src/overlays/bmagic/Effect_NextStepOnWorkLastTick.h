@@ -1,7 +1,4 @@
-/* Advances the step byte (work byte 0x01) when the effect ticker (work byte
- * 0x0B) of the work-area record the scratchpad points to (offset 0x44) is one.
- * One definition shared by the bmagic effect modules; every change here must
- * verify every member. */
+/* Advances the step when the work record's ticker is one. Every change here must verify every member. */
 /* func_801EEFC4 (magic041), func_801EEE8C (magic118) */
 MATCH void Effect_NextStepOnWorkLastTick(void) {
     PartyBattler* work;

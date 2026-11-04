@@ -1,5 +1,4 @@
-/* Clears every scan bar. Shared by the two scenario effect overlays; each image
- * header places g_ScanBars. Every change here must verify every member. */
+/* Clears every scan bar. Every change here must verify every member. */
 /* func_801D15B0 (sce15ef2), func_801D25C0 (sce15ef3) */
 MATCH void Scene_ClearScanBars(void) {
     s32      index;

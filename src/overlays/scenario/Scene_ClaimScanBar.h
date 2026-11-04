@@ -1,6 +1,4 @@
-/* Starts the first free scan bar. Shared by the two scenario effect overlays;
- * each image header places g_ScanBars. Every change here must verify every
- * member. */
+/* Starts the first free scan bar. Every change here must verify every member. */
 /* func_801D15DC (sce15ef2), func_801D25EC (sce15ef3) */
 MATCH void Scene_ClaimScanBar(void) {
     s32      index;

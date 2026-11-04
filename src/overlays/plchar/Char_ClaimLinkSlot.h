@@ -1,7 +1,4 @@
-/* Launches the facing probe once the character's script reaches
- * CHAR_LAUNCH_SCRIPT_PC: claims a free actor slot for it, plays the cue, clears
- * the options and advances the task state. One definition shared by the plchar
- * character programs; every change here must verify every member. */
+/* Launches the facing probe from a free actor slot once the script reaches CHAR_LAUNCH_SCRIPT_PC. Every change here must verify every member. */
 MATCH void Char_ClaimLinkSlot(void) {
     func_8014D978();
     if (g_SpadWork->script_pc == CHAR_LAUNCH_SCRIPT_PC) {
