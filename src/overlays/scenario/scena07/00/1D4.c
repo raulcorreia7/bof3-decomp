@@ -25,7 +25,20 @@ MATCH void func_801F6E54(void) {
     FIELD(u8, temp_v0_9, 0x2u)  = (u8)(FIELD(u8, temp_v0_9, 0x2u) + 1);
 }
 
-INCLUDE_ASM(func_801F6E90);
+MATCH void func_801F6E90(void) {
+    u8* row;
+
+    if ((g_SpadWork->unk_0C & 7) == 0) {
+        row = func_801F8394();
+        if (row != NULL) {
+            func_801F83D0(row);
+        }
+    }
+    func_801F85D8();
+    if (--g_SpadWork->unk_0C == 0) {
+        g_SpadWork->state_02++;
+    }
+}
 
 MATCH void func_801F6F14(void) {
     if (!(func_801F85D8() & BYTE_MASK)) {

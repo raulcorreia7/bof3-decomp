@@ -29,6 +29,7 @@ extern u8        D_801FDFC4;
 extern u8        D_801FDFC8;
 
 void func_801F8358(void);
+void func_801F83D0(u8* row);
 void func_801F88B8(void* table);
 void func_801F8BE8(void* table);
 extern u16 D_800E4C1E;
