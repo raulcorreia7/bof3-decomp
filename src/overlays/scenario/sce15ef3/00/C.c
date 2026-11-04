@@ -92,7 +92,19 @@ INCLUDE_ASM(func_801D1420);
 
 INCLUDE_ASM(func_801D1460);
 
-INCLUDE_ASM(func_801D14DC);
+MATCH void func_801D14DC(void) {
+    g_SpadWork->unk_09 = g_SpadWork->unk_09 - 0x10;
+    if (g_AreaDrawFlags != 0) {
+        func_801D23AC(g_SpadWork->unk_09);
+    }
+    if (g_SpadWork->unk_09 == 0) {
+        if (g_AreaDrawFlags == 0) {
+            Actor_Clear();
+        } else {
+            g_SpadWork->unk_01 = g_SpadWork->unk_01 - 1;
+        }
+    }
+}
 
 MATCH void func_801D1588(void) {
     SYS_DISPATCH_TASK(D_801D280C, 1, g_SpadWork);
@@ -148,6 +160,9 @@ MATCH u8* func_801D171C(void) {
 
 INCLUDE_ASM(func_801D1758);
 
+/* Steps the 256 slots at 0x800E4800 (stride 0x18): speed += 0x20000, position += speed, flip ^= 1, func_801D1758(slot),
+ * --life frees at zero, returns 1 when a slot was live. Every form of the speed update hoists the 0x20000 into s4 (frame
+ * 0x4C, first differing instruction +0x10: sw ra,64(sp) against 68); retail keeps the lui inside the loop. */
 INCLUDE_ASM(func_801D18CC);
 
 INCLUDE_ASM(func_801D19A0);

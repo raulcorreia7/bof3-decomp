@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
+#include "work/area_spad.h"
 
 extern u32      D_80145EC4;
 extern u32      D_801D0C00;
@@ -15,5 +16,7 @@ extern Callback D_801D2800[];
 extern Callback D_801D280C[];
 
 extern Callback D_801D27C0[];
+
+extern void func_801D23AC(u8 arg);
 
 #endif
