@@ -61,6 +61,7 @@ INCLUDE_ASM(func_801F7C14);
 
 INCLUDE_ASM(func_801F7C6C);
 
+/* needs: type. While the camera is idle: Area_AdvanceScroll(Area_SampleHeight(x, y)), g_AreaScrollTargetX = 0x260000, g_AreaCameraHeightStep = (Area_SampleHeight(x, y) - g_AreaCameraHeight) / 128, g_AreaSceneMode = 1, D_80146874++ (through a pointer local); otherwise g_AreaCameraHeight += 2, or 3 every fourth frame. Exact except retail reloads g_AreaScrollTargetX after the 0x260000 store (lui a0 / lw a0 where the candidate folds lui a0,0x26; first differing instruction +0x30), which needs `g_AreaScrollTargetX` volatile in slus/data.h with the exe kept exact. */
 INCLUDE_ASM(func_801F7D08);
 
 MATCH void func_801F7DF4(void) {
@@ -179,6 +180,7 @@ INCLUDE_ASM(func_801F8480);
 /* nonmatching: timer D_80146875 counts up; at 0x80 it sets D_80146867 = 0x3C, the timer to 0x1E, D_801F9DD8 = 0, steps D_80146874, starts EMI_LoaderStreamInitSlot(0x260), then calls func_801F8FAC(0xE0, 0xBE, shade, 1) and func_801F8B10(0x4B0, 0x80). Candidate is 8 bytes short (first differing instruction: bnez at +0x28 targets +0x78 against +0x70): retail sets a0, a1 and a2 inside the branch and ends it with j, and sets only a1 on the other path. */
 INCLUDE_ASM(func_801F84F4);
 
+/* Counts D_80146875 down and, at zero, D_80146867; both zero steps D_80146874, else D_80146875 = 0x1E, then func_801F8B10 and func_801F8FAC. The pointer-local draft is 4 to 8 bytes short whichever branch order: retail ends the step branch with `j` and the 0x4B0 argument load in its delay slot, and falls into a second copy of that load from the else branch (first differing instruction +0x30: beqz targets +0x78 against +0x70). */
 INCLUDE_ASM(func_801F8594);
 
 MATCH void func_801F8664(void) {
