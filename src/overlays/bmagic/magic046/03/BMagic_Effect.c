@@ -36,13 +36,7 @@ MATCH void func_801EF1F0(void) {
 
 INCLUDE_ASM(func_801EF250);
 
-MATCH void func_801EF2A8(void) {
-    func_8014D978();
-    Area_AddActor();
-    if (g_BattleState & BATTLE_STATE_EFFECT_PLAYING) {
-        g_SpadWork->unk_02++;
-    }
-}
+#include "overlays/bmagic/Effect_AddActorStepOnPlaying.h"
 
 MATCH void func_801EF304(void) {
     func_801E5988();
