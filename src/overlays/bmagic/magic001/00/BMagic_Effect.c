@@ -89,24 +89,24 @@ INCLUDE_ASM(func_801EFC54);
 INCLUDE_ASM(func_801EFD28);
 
 MATCH void func_801EFE38(void) {
-    s32 temp_a0;
-    u8  temp_v0;
-    u8  temp_v1;
+    s32 value;
+    u8  value2;
+    u8  value3;
 
     g_SpadWork->coord_x_34.raw += (s32)(rsin(g_SpadWork->unk_0C) << 0xD) >> 0xC;
     g_SpadWork->coord_y_38.raw += (s32)(rcos(g_SpadWork->unk_0C) << 0xD) >> 0xC;
-    temp_a0                          = g_SpadWork->unk_14 + g_SpadWork->unk_20;
-    g_SpadWork->unk_14               = temp_a0;
-    g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E + temp_a0;
+    value                            = g_SpadWork->unk_14 + g_SpadWork->unk_20;
+    g_SpadWork->unk_14               = value;
+    g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E + value;
     if ((u8)g_SpadWork->unk_09 < 8U) {
-        temp_v1 = g_SpadWork->unk_0A;
-        if (temp_v1 < 0x10U) {
-            g_SpadWork->unk_0A = temp_v1 + 1;
+        value3 = g_SpadWork->unk_0A;
+        if (value3 < 0x10U) {
+            g_SpadWork->unk_0A = value3 + 1;
         }
     }
-    temp_v0            = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    value2             = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = value2;
+    if (!(value2 & 0xFF)) {
         g_SpadWork->unk_02 += 1;
     }
 }

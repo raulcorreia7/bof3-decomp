@@ -67,15 +67,15 @@ INCLUDE_ASM(func_801EFDD8);
 INCLUDE_ASM(func_801EFE70);
 
 MATCH void func_801EFF1C(void) {
-    s32 temp_v0;
+    s32 value;
 
     g_SpadWork->unk_20 -= 5;
     if (g_SpadWork->unk_14 == 0x30) {
         func_800A9610(g_BattleTargetSelector, 0x10U);
     }
-    temp_v0            = g_SpadWork->unk_14 + 2;
-    g_SpadWork->unk_14 = temp_v0;
-    if (temp_v0 == 0xC0) {
+    value              = g_SpadWork->unk_14 + 2;
+    g_SpadWork->unk_14 = value;
+    if (value == 0xC0) {
         g_SpadWork->unk_0B = 1;
         g_SpadWork->unk_02 += 1;
     }
