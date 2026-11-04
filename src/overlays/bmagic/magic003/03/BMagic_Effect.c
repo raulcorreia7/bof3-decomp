@@ -96,7 +96,16 @@ MATCH void func_801EF708(void) {
 
 INCLUDE_ASM(func_801EF7A8);
 
-INCLUDE_ASM(func_801EF918);
+MATCH void func_801EF918(void) {
+    g_SpadWork->coord_x_34.raw += g_SpadWork->unk_0C;
+    g_SpadWork->coord_y_38.raw += g_SpadWork->unk_10;
+    g_SpadWork->word_3C.word += g_SpadWork->unk_14;
+    g_SpadWork->unk_14 += g_SpadWork->unk_20;
+    func_8014DAEC();
+    if (g_SpadWork->word_3C.word == g_SpadWork->unk_44) {
+        g_SpadWork->unk_02++;
+    }
+}
 
 INCLUDE_ASM(func_801EF9AC);
 
