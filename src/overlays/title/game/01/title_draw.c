@@ -199,33 +199,6 @@ MATCH void GFX_SetPrimitiveAlpha(u8* primitive, u8 alpha) { /* func_801D18E8 */
     primitive[6] = alpha;
 }
 
-/* The handler advances the four-panel frontend banner fade and draws each
- * visible panel with its current alpha.
- *
- * RESIDUAL (pin-free, 128/130 insn = 98.46% at canonical -O2, 520 bytes = +0):
- * every instruction matches except the two-slot pre-loop scheduling pair:
- * the original fills the `beqz *phase_addr` delay slot with `move s1,zero`
- * (i = 0) and then emits addiu s0 / li s5,1 / addiu s4 / li s2,320; cc1 here
- * fills the slot with `addiu s0,v1,-15` (state) and orders li s2,320 / move s1
- * last. Register allocation, hoists (only `1` in s5), the loop body, the phase
- * dispatch, and the draw calls all match.
- * Falsified so far: the register swap that used to accompany this (i/marker)
- * is fixed by initializing `marker` after the scroll update (breaks the 320
- * CSE, matching the original's separate `li v1,320` temp) and by moving
- * `i = 0` after `marker = 320` (shortens i's live range so i wins s1); all
- * 120 pre-loop statement orders were searched: 20 reproduce the register
- * signature, none also puts i = 0 in the beqz delay slot, because an earlier
- * `i = 0` lengthens i's live range and returns the swap. The residual is the
- * reorg/dbr delay-slot fill (fill_simple_delay_slots picks the first
- * resource-safe insn after the branch), not a C-level choice.
- * Tried and rejected (each regresses to 120-125/130): 16-bit `marker` (fixes
- * the delay slot + register order but turns the `>> 6` into `srl` and hoists
- * `li s2,320` above the frame saves); `x = -sc + 320` (breaks the 320 CSE but
- * emits negu+addiu); gt-local + shared mask (2 andi but 3 sra, +12 bytes).
- * Next falsifiable experiment: a source shape that keeps i's live range at 98
- * insns while making `i = 0` the first insn after the branch (e.g. an outer
- * scope whose only pre-loop statement is the counter clear).
- */
 /* func_801D18F8 */
 MATCH void UI_UpdateBannerFade(void) { /* func_801D18F8 */
     volatile GameUIBannerState* state;
