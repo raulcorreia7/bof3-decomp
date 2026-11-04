@@ -147,7 +147,19 @@ MATCH void func_801F8AE8(void) {
     } while ((u32)(var_v1_6 & BYTE_MASK) < 8U);
 }
 
-INCLUDE_ASM(func_801F8B14);
+MATCH u8* func_801F8B14(void) {
+    u8* p;
+    u8  i;
+
+    p = MEM_PTR(u8, AREA_WORK_WINDOW);
+    for (i = 0; i < 8; i++) {
+        if (*p == 0) {
+            return p;
+        }
+        p += 0x1C;
+    }
+    return NULL;
+}
 
 INCLUDE_ASM(func_801F8B50);
 
