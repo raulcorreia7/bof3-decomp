@@ -474,7 +474,7 @@ Environment variables the tools read:
 
 The Python build chain is the scripts in `tools/`, `tools/bof3/` (layout, manifests, link inputs,
 source scans) and `tools/psxdecomp/dmpsx.py` (the DMPSX rewrite). [`tools/README.md`](../tools/README.md)
-lists every tool by task. `tools/tests/` guards the split, DMPSX, splat text and the source tools.
+lists every tool by task. `tools/tests/` guards the build steps (split, link, symbols, layout, DMPSX), the gates (`check_asm`, `quality`, `typeloss`) and the report data; a matching helper needs no test, because `tools/match.sh` and `check` verify its output.
 `ruff` owns Python format.
 
 ## Sources
