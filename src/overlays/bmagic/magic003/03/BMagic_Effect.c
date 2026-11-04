@@ -59,9 +59,58 @@ MATCH void func_801EF324(void) {
 
 INCLUDE_ASM(func_801EF3C8);
 
-INCLUDE_ASM(func_801EF478);
+MATCH void func_801EF478(void) {
+    s32 temp_v1;
+    u8  temp_a0;
 
-INCLUDE_ASM(func_801EF578);
+    temp_a0 = g_SpadWork->unk_09;
+    temp_v1 = temp_a0 & 0xFF;
+    if (temp_v1 != 0) {
+        if (temp_v1 != 0xFF) {
+            g_SpadWork->unk_09 = temp_a0 - 1;
+        }
+    } else {
+        SND_QueueSelectionFx(0x101);
+        func_800AFC98(2, 0);
+        func_801F0078();
+        func_800A9610(g_BattleTargetSelector, 0x10U);
+        g_SpadWork->unk_09 = 0xFF;
+    }
+    g_SpadWork->coord_x_34.raw += g_SpadWork->unk_0C;
+    g_SpadWork->coord_y_38.raw += g_SpadWork->unk_10;
+    g_SpadWork->word_3C.word += g_SpadWork->unk_14;
+    g_SpadWork->unk_14 += g_SpadWork->unk_20;
+    func_8014DAEC();
+    if (g_SpadWork->word_3C.word == g_SpadWork->unk_44) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
+
+MATCH void func_801EF578(void) {
+    s32 temp_v1;
+    u8  temp_a0;
+
+    temp_a0 = g_SpadWork->unk_09;
+    temp_v1 = temp_a0 & 0xFF;
+    if (temp_v1 != 0) {
+        if (temp_v1 != 0xFF) {
+            g_SpadWork->unk_09 = temp_a0 - 1;
+        }
+    } else {
+        SND_QueueSelectionFx(0x101);
+        func_800AFC98(2, 0);
+        func_801F0078();
+        func_800A9610(g_BattleTargetSelector, 0x10U);
+        g_SpadWork->unk_09 = 0xFF;
+    }
+    func_8014DAEC();
+    if (g_SpadWork->unk_09 == 0xFF) {
+        g_SpadWork->unk_0C = -0x2000;
+        g_SpadWork->unk_10 = 0;
+        func_801DD350(g_SpadWork);
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF644);
 
