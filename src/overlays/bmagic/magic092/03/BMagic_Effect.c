@@ -62,7 +62,20 @@ MATCH void func_801EF990(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFA24);
+MATCH void func_801EFA24(void) {
+    g_SpadWork->word_08.byte.unk_09 -= 2;
+    if (g_FrameCount & 1) {
+        g_SpadWork->word_08.byte.timer_0A += 1;
+    }
+    if (g_SpadWork->word_08.byte.unk_09 == 1) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        g_SpadWork->flags_00 = 0;
+        g_SpadWork->step_01  = 0;
+        g_SpadWork->unk_02   = 0;
+        g_SpadWork->unk_03   = 0;
+        g_SpadWork->unk_04   = 0;
+    }
+}
 
 INCLUDE_ASM(func_801EFB04);
 
