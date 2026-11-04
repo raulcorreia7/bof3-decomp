@@ -84,11 +84,14 @@ STORE = {"sb": "u8", "sh": "u16", "sw": "u32"}
 class Lift:
     """What one function does, in program order.
 
-    ``events`` are ``("call", name, args)`` and ``("store", width, target, value)``. A target is
-    ``("g", symbol)`` or ``("m", offset)`` (a member of the work pointer's pointee). Values and
-    arguments are expressions: ``("c", n)``, ``("sym", name)``, ``("g", symbol, width, signed)``,
-    ``("m", offset, width, signed)``, ``("add", expr, n)``, ``("arg", reg)``. ``flags`` holds
-    ``branch``, ``jalr``, ``spad``, ``load`` and ``other`` (an instruction the lifter cannot express).
+    ``events`` are ``("call", name, args, id)`` and ``("store", width, target, value)``. A target
+    is ``("g", symbol)``, ``("gi", symbol, index)`` (a table element) or ``("m", offset)`` (a member
+    of the work pointer's pointee). Values and arguments are expressions: ``("c", n)``,
+    ``("sym", name)``, ``("g", symbol, width, signed)``, ``("gi", symbol, index, width, signed)``,
+    ``("m", offset, width, signed)``, ``("add", expr, n)``, ``("bin", op, expr, expr or n)``,
+    ``("arg", reg)`` and ``("ret", call id)`` (the value a call returned). A call carries its
+    arguments in order, the fifth on from the stack. ``flags`` holds ``branch``, ``jalr``,
+    ``spad``, ``load`` and ``other`` (an instruction the lifter cannot express).
     """
 
     events: list[tuple] = field(default_factory=list)
@@ -115,8 +118,16 @@ def symbol(operand: str, pattern: re.Pattern) -> str | None:
     return (m.group(1) or m.group(2)) if m else None
 
 
-VALUE = ("c", "g", "m", "add", "bin")
-ALU_IMM = {"andi": "&", "sll": "<<", "srl": ">>", "sra": ">>", "ori": "|"}
+VALUE = ("c", "g", "m", "add", "bin", "ret", "gi")
+ALU_IMM = {
+    "andi": "&",
+    "sll": "<<",
+    "srl": ">>",
+    "sra": ">>",
+    "ori": "|",
+    "xori": "^",
+}
+ALU_REG = {"addu": "+", "subu": "-", "or": "|", "and": "&", "xor": "^"}
 LOAD = {
     "lw": (4, True),
     "lh": (2, True),
@@ -135,14 +146,24 @@ def address(regs: dict, operand: str):
     sym = symbol(off, LO)
     if sym and base == ("hi", sym):
         return ("spadcell",) if sym == SPAD else ("g", sym)
+    if sym and base and base[0] == "hiidx" and base[1] == sym:
+        return ("gi", sym, base[2])
     if base == ("spad",) and re.fullmatch(r"-?(0x[0-9A-Fa-f]+|\d+)", off):
         return ("m", int(off, 0))
     return None
 
 
+def halve(op: str, src: tuple, n: int) -> tuple:
+    """Return the ALU expression; ``x + (x >>u 31)`` shifted right by n reads as ``x / 2^n``."""
+    if op == "sra" and src[:2] == ("bin", "+") and src[3] == ("bin", ">>", src[2], 31):
+        return ("bin", "/", src[2], 1 << n)
+    return ("bin", ALU_IMM[op], src, n)
+
+
 def lift(lines: list[str]) -> Lift:
     """Run the instructions through a symbolic register file."""
     out, regs, pending, v0_at = Lift(), {}, None, -1
+    stack: dict[int, tuple] = {}
     for line in lines:
         if line.endswith(":"):
             out.flags.add("branch")
@@ -188,7 +209,20 @@ def lift(lines: list[str]) -> Lift:
             and regs.get(o[1], ("unk",))[0] in VALUE
             and re.fullmatch(r"-?(0x[0-9A-Fa-f]+|\d+)", o[2])
         ):
-            regs[o[0]] = ("bin", ALU_IMM[op], regs[o[1]], int(o[2], 0))
+            regs[o[0]] = halve(op, regs[o[1]], int(o[2], 0))
+        elif (
+            op == "addu"
+            and regs.get(o[1], ("",))[0] == "hi"
+            and o[0] == o[1]
+            and regs.get(o[2], ("unk",))[0] in VALUE
+        ):
+            regs[o[0]] = ("hiidx", regs[o[1]][1], regs[o[2]])
+        elif (
+            op in ALU_REG
+            and regs.get(o[1], ("unk",))[0] in VALUE
+            and regs.get(o[2], ("unk",))[0] in VALUE
+        ):
+            regs[o[0]] = ("bin", ALU_REG[op], regs[o[1]], regs[o[2]])
         elif op == "addu" and o[1] == "zero" and o[2] == "zero":
             regs[o[0]] = ("c", 0)
         elif op == "addu" and o[2] == "zero":
@@ -199,10 +233,18 @@ def lift(lines: list[str]) -> Lift:
             and (o[0] == "ra" or o[0][0] == "s")
         ):
             pass
+        elif op == "sw" and (m := re.fullmatch(r"(0x[0-9A-Fa-f]+|\d+)\(\$sp\)", o[1])):
+            # An argument beyond the fourth, stored for the next call.
+            val = ("c", 0) if o[0] == "zero" else regs.get(o[0], ("arg", o[0]))
+            if val[0] == "unk" or int(m.group(1), 0) < 0x10:
+                out.flags.add("other")
+                out.why.append(line)
+            else:
+                stack[int(m.group(1), 0)] = val
         elif op in STORE:
             target = address(regs, o[1])
             val = ("c", 0) if o[0] == "zero" else regs.get(o[0], ("arg", o[0]))
-            if target and target[0] in ("g", "m") and val[0] != "unk":
+            if target and target[0] in ("g", "m", "gi") and val[0] != "unk":
                 out.events.append(("store", STORE[op], target, val))
                 if target[0] == "m":
                     out.flags.add("spad")
@@ -215,6 +257,8 @@ def lift(lines: list[str]) -> Lift:
             out.flags.add("load")
             if target and target[0] == "spadcell":
                 regs[o[0]] = ("spad",)
+            elif target and target[0] == "gi":
+                regs[o[0]] = ("gi", target[1], target[2], width, signed)
             elif target and target[0] in ("g", "m"):
                 regs[o[0]] = (target[0], target[1], width, signed)
                 if target[0] == "m":
@@ -232,11 +276,18 @@ def lift(lines: list[str]) -> Lift:
             v0_at = len(out.events)
         if pending and op != "jal":
             # The delay slot ran before the call, so the arguments are final now.
-            out.events.append(
-                ("call", pending, tuple(regs.get(r, ("arg", r)) for r in ARGS))
-            )
+            args = tuple(regs.get(r, ("arg", r)) for r in ARGS)
+            if stack:
+                if sorted(stack) != list(range(0x10, 0x10 + 4 * len(stack), 4)):
+                    out.flags.add("other")
+                    out.why.append("sw: stack arguments with a gap")
+                args += tuple(stack[k] for k in sorted(stack))
+                stack = {}
+            calls = sum(e[0] == "call" for e in out.events)
+            out.events.append(("call", pending, args, calls))
             for r in CLOBBER:
                 regs.pop(r, None)
+            regs["v0"] = ("ret", calls)
             pending = None
     return out
 
@@ -364,6 +415,49 @@ class Tree:
                 return self.SCALAR[m.group(1)]
         return None
 
+    def count(self, text: str) -> int | None:
+        """Return an array length written as a number or as a ``#define`` of one."""
+        if re.fullmatch(r"0x[0-9A-Fa-f]+|\d+", text):
+            return int(text, 0)
+        for name in tracked_headers(self.root):
+            m = re.search(
+                r"^\s*#\s*define\s+" + re.escape(text) + r"\s+(0x[0-9A-Fa-f]+|\d+)\b",
+                self.read(name),
+                re.M,
+            )
+            if m:
+                return int(m.group(1), 0)
+        return None
+
+    def layout(
+        self, type_name: str, files: list[str]
+    ) -> tuple[int, list[tuple[int, str, int, int]]] | None:
+        """Return ``(size, [(offset, member, width, count)])`` of a struct of scalars and scalar arrays."""
+        for name in files + [n for n in tracked_headers(self.root) if n not in files]:
+            m = re.search(
+                r"typedef struct \w*\s*\{(.*?)\}\s*" + type_name + r"\s*;",
+                self.read(name),
+                re.S,
+            )
+            if not m:
+                continue
+            body = re.sub(r"/\*.*?\*/|//[^\n]*", "", m.group(1), flags=re.S)
+            off, rows, biggest = 0, [], 1
+            for decl in filter(None, (x.strip() for x in body.split(";"))):
+                d = re.fullmatch(r"(\w+)\s+(\w+)\s*(?:\[(\w+)\])?", decl)
+                width = d and (
+                    self.SCALAR.get(d.group(1)) or self.alias(d.group(1), files)
+                )
+                n = 1 if not d or not d.group(3) else self.count(d.group(3))
+                if not d or not width or not n:
+                    return None
+                off = -(-off // width) * width
+                rows.append((off, d.group(2), width, n))
+                off += width * n
+                biggest = max(biggest, width)
+            return -(-off // biggest) * biggest, rows
+        return None
+
     def declared(self, files: list[str], name: str) -> str | None:
         """Return ``array``, ``func`` or ``object`` when a header of ``files`` declares ``name``."""
         for f in files:
@@ -402,7 +496,13 @@ class Names:
             (root / "config/symbols.toml").read_text(encoding="utf-8")
         )
         self.by_image: dict[str, dict[int, str]] = {}
+        self.spans: dict[str, list[tuple[int, int, str]]] = {}
         for image, rows in table.items():
+            self.spans[image] = sorted(
+                (r["addr"], r["size"], n)
+                for n, r in rows.items()
+                if "addr" in r and r.get("size")
+            )
             self.by_image[image] = {
                 r["addr"]: n
                 for n, r in rows.items()
@@ -421,6 +521,14 @@ class Names:
         found = {t[addr] for t in self.by_image.values() if addr in t}
         return found.pop() if len(found) == 1 else name
 
+    def container(self, image: str, addr: int) -> tuple[int, int, str] | None:
+        """Return the sized symbol that holds ``addr`` strictly inside it."""
+        for table in (image, "exe/slus_004_22"):
+            for base, size, name in self.spans.get(table, []):
+                if base < addr < base + size:
+                    return base, size, name
+        return None
+
 
 def rename(e, names: Names, image: str):
     """Return the expression or event with every symbol replaced by its game name."""
@@ -428,11 +536,14 @@ def rename(e, names: Names, image: str):
         return e
     if e[0] in ("sym", "g") and isinstance(e[1], str):
         return (e[0], names.of(image, e[1]), *e[2:])
+    if e[0] == "gi":
+        return ("gi", names.of(image, e[1]), rename(e[2], names, image), *e[3:])
     if e[0] == "call":
         return (
             "call",
             names.of(image, e[1]),
             tuple(rename(a, names, image) for a in e[2]),
+            e[3],
         )
     return tuple(rename(x, names, image) if isinstance(x, tuple) else x for x in e)
 
@@ -461,6 +572,10 @@ def render(e: tuple, ctx: dict) -> str:
         return global_text(e[1], ctx)
     if kind == "m":
         return member(e[1], e[2], ctx)
+    if kind == "ret":
+        return f"r{e[1]}"
+    if kind == "gi":
+        return element(e[1], e[2], e[3], ctx)
     if kind == "add":
         return (
             f"{render(e[1], ctx)} + {e[2]}"
@@ -468,15 +583,74 @@ def render(e: tuple, ctx: dict) -> str:
             else f"{render(e[1], ctx)} - {-e[2]}"
         )
     if kind == "bin":
-        inner = render(e[2], ctx)
-        if e[2][0] in ("add", "bin"):
-            inner = f"({inner})"
-        return f"{inner} {e[1]} {number(e[3])}"
+        left, right = e[2], e[3] if isinstance(e[3], tuple) else ("c", e[3])
+        text = [render(x, ctx) for x in (left, right)]
+        text = [
+            f"({t})" if x[0] in ("add", "bin") else t
+            for t, x in zip(text, (left, right), strict=True)
+        ]
+        return f"{text[0]} {e[1]} {text[1]}"
     raise Unsupported(f"expression {kind}")
 
 
 def global_text(name: str, ctx: dict) -> str:
     return name + "[0]" if ctx["tree"].declared(ctx["files"], name) == "array" else name
+
+
+def linear(e: tuple) -> tuple[int, tuple]:
+    """Return ``(k, x)`` when ``e`` is ``k * x`` built from shifts, sums and differences of ``x``."""
+    if e[0] == "bin" and e[1] == "<<" and isinstance(e[3], int):
+        k, x = linear(e[2])
+        return k << e[3], x
+    if e[0] == "bin" and e[1] in "+-" and isinstance(e[3], tuple):
+        (k, x), (j, y) = linear(e[2]), linear(e[3])
+        if x == y:
+            return (k + j if e[1] == "+" else k - j), x
+    return 1, e
+
+
+def struct_element(name: str, index: tuple, width: int, ctx: dict) -> str | None:
+    """Write ``Array[x].member`` for a table symbol that sits inside a sized array of structs."""
+    m = re.fullmatch(r"D_([0-9A-F]{8})", name)
+    found = m and ctx["names"].container(ctx["image"], int(m.group(1), 16))
+    if not found:
+        return None
+    base, _, holder = found
+    decl = re.compile(r"\b(\w+)\s+" + re.escape(holder) + r"\s*\[")
+    kind = next(
+        (d.group(1) for f in ctx["files"] if (d := decl.search(ctx["tree"].read(f)))),
+        None,
+    )
+    lay = kind and ctx["tree"].layout(kind, ctx["files"])
+    if not lay:
+        raise Unsupported(
+            f"{name} lies inside {holder}, which is not a typed struct array"
+        )
+    stride, rows = lay
+    k, x = linear(index)
+    rel = int(m.group(1), 16) - base
+    if k != stride:
+        raise Unsupported(f"index of {name} is not a stride of {holder}")
+    for off, member_name, w, n in rows:
+        if w == width and off <= rel < off + w * n and (rel - off) % w == 0:
+            tail = f"[{(rel - off) // w}]" if n > 1 else ""
+            return f"{holder}[{render(x, ctx)}].{member_name}{tail}"
+    raise Unsupported(f"no {width}-byte member at 0x{rel:X} of {kind}")
+
+
+def element(name: str, index: tuple, width: int, ctx: dict) -> str:
+    """Write ``name[index]``; the register held the byte offset, so undo the scaling."""
+    typed = struct_element(name, index, width, ctx)
+    if typed:
+        return typed
+    if ctx["tree"].declared(ctx["files"], name) not in (None, "array"):
+        raise Unsupported(f"{name} is declared as a scalar, not a table")
+    shift = {1: 0, 2: 1, 4: 2}[width]
+    if re.search(r"'bin', '[+-]'", str(index)):
+        raise Unsupported(f"index of {name} is a stride of an untyped table")
+    if shift and not (index[0] == "bin" and index[1] == "<<" and index[3] == shift):
+        raise Unsupported(f"table index of {name} is not scaled by {width}")
+    return f"{name}[{render(index[2] if shift else index, ctx)}]"
 
 
 def member(offset: int, width: int, ctx: dict) -> str:
@@ -489,24 +663,40 @@ def member(offset: int, width: int, ctx: dict) -> str:
 WIDTH = {"u8": 1, "u16": 2, "u32": 4}
 
 
+def rets_used(events: list[tuple]) -> set[int]:
+    """Return the ids of the calls whose result an event reads."""
+    found = set()
+    stack = [x for e in events for x in (e[2] if e[0] == "call" else e[2:])]
+    while stack:
+        e = stack.pop()
+        if isinstance(e, tuple) and e:
+            if e[0] == "ret":
+                found.add(e[1])
+            stack.extend(e[1:])
+    return found
+
+
 def statements(lifted: Lift, ctx: dict) -> list[str]:
     """Write the events of a straight-line function as C statements."""
-    out = []
+    out, used = [], rets_used(lifted.events)
     for e in lifted.events:
         if e[0] == "call":
             args = []
             for i, a in enumerate(e[2]):
-                if a == ("arg", ARGS[i]):
+                if i < 4 and a == ("arg", ARGS[i]):
                     if any(b != ("arg", ARGS[j]) for j, b in enumerate(e[2]) if j > i):
                         raise Unsupported("argument registers skip one")
                     break
                 args.append(render(a, ctx))
-            out.append(f"{e[1]}({', '.join(args)});")
+            call = f"{e[1]}({', '.join(args)});"
+            out.append(f"r{e[3]} = {call}" if e[3] in used else call)
             continue
         _, kind, target, value = e
         left = (
             global_text(target[1], ctx)
             if target[0] == "g"
+            else element(target[1], target[2], WIDTH[kind], ctx)
+            if target[0] == "gi"
             else member(target[1], WIDTH[kind], ctx)
         )
         if value[0] == "add" and value[1][0] == target[0] and value[1][1] == target[1]:
@@ -518,6 +708,13 @@ def statements(lifted: Lift, ctx: dict) -> list[str]:
                 if step == -1
                 else f"{left} += {step};"
             )
+        elif (
+            value[0] == "bin"
+            and value[1] in ("&", "|", "^", "<<", ">>")
+            and isinstance(value[3], int)
+            and render(value[2], ctx) == left
+        ):
+            out.append(f"{left} {value[1]}= {number(value[3])};")
         else:
             out.append(f"{left} = {render(value, ctx)};")
     return out
@@ -532,9 +729,15 @@ def names_used(event: tuple):
             continue
         if e[0] == "g":
             yield e[1], e[2]
+        elif e[0] == "gi":
+            yield e[1] + "[]", e[3]
+            stack.append(e[2])
         elif e[0] == "store":
             if e[2][0] == "g":
                 yield e[2][1], WIDTH[e[1]]
+            elif e[2][0] == "gi":
+                yield e[2][1] + "[]", WIDTH[e[1]]
+                stack.append(e[2][2])
             stack.append(e[3])
         elif e[0] == "call":
             stack.extend(e[2])
@@ -555,7 +758,13 @@ def body_for(f: Func, tree: Tree, names: Names) -> tuple[str, list[tuple[str, in
             lifted.why[0] if "other" in lifted.flags else "not straight-line"
         )
     files = tree.closure(f.src)
-    ctx = {"tree": tree, "files": files, "members": {}}
+    ctx = {
+        "tree": tree,
+        "files": files,
+        "members": {},
+        "names": names,
+        "image": f.image,
+    }
     if "spad" in lifted.flags:
         work = tree.work_type(files)
         if not work:
@@ -566,13 +775,18 @@ def body_for(f: Func, tree: Tree, names: Names) -> tuple[str, list[tuple[str, in
         (s, w)
         for e in lifted.events
         for s, w in names_used(e)
-        if not tree.declared(files, s)
+        if not tree.declared(files, s.removesuffix("[]"))
+        and not names.container(
+            f.image, int(s[2:10], 16) if re.match(r"D_[0-9A-F]{8}", s) else 0
+        )
     ]
     kind = "void"
     if lifted.ret:
         kind = "s32"
         lines.append(f"return {render(lifted.ret, ctx)};")
-    body = "\n".join(f"    {x}" for x in lines)
+    used = sorted(rets_used(lifted.events))
+    lines = [f"s32 r{i};" for i in used] + ([""] if used else []) + lines
+    body = "\n".join(f"    {x}" if x else "" for x in lines)
     return f"MATCH {kind} {f.name}(void) {{\n{body}\n}}", externs
 
 
