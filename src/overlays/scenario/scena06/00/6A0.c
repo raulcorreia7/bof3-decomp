@@ -101,7 +101,17 @@ MATCH void func_801FCE6C(void) {
     g_SceneState.state_04 = 2;
 }
 
-INCLUDE_ASM(func_801FCEC0);
+MATCH void func_801FCEC0(void) {
+    if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
+        Game_SetScriptActive();
+        D_80146875    = 0xA;
+        *g_ScriptVars = 0;
+        D_80146865    = 0;
+        D_80146866    = 0;
+        D_80146867    = 0;
+        D_80146874    = 2;
+    }
+}
 
 MATCH void func_801FCF30(void) {
     Game_SetScriptActive();
@@ -178,7 +188,17 @@ MATCH void func_801FD170(void) {
     g_SceneState.state_04 = 14;
 }
 
-INCLUDE_ASM(func_801FD1C8);
+MATCH void func_801FD1C8(void) {
+    Game_SetScriptActive();
+    *g_ScriptVars = 0;
+    D_80146865    = 0;
+    if (SYS_TestFlag(g_SceneFlags, 0x22) == 0) {
+        D_80146875 = 0;
+    } else {
+        D_80146875 = 0x14;
+    }
+    D_80146874 = 0x10;
+}
 
 INCLUDE_ASM(func_801FD234);
 
