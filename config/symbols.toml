@@ -1912,6 +1912,7 @@ Char_ProbeFacingCell = { addr = 0x801CF940, type = "func", source = "the route-s
 ["emi/plchar/plp257/00"]
 Char_StartTurn_801CE448 = { addr = 0x801CE448, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CE514 = { addr = 0x801CE514, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
+Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "counts the pause timer down and ends the pause at zero" }
 Char_StartTurn = { addr = 0x801CEC40, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_ClaimLinkSlot = { addr = 0x801CF018, type = "func", source = "launches the facing probe once script_pc reaches CHAR_LAUNCH_SCRIPT_PC (script_pc is the position func_8014D978 and func_8014DAEC read the script stream at): claims a free actor slot of ACTOR_TYPE_FACING_PROBE, links it through the work byte +0x0B, plays the cue and advances the task state" }
 Char_PollScriptRequest = { addr = 0x801CF124, type = "func", source = "answers the character script request once func_8014DAEC reports ready: with option_flags set it requests the script of direction_08 and clears the options, otherwise a free actor slot at the link byte +0x0B (claimed by Char_ClaimLinkSlot) clears the +0x2B marker and the panel mode byte" }
@@ -1924,6 +1925,7 @@ Char_ProbeFacingCell = { addr = 0x801CFD20, type = "func", source = "the route-s
 ["emi/plchar/plp267/00"]
 Char_StartTurn_801CE448 = { addr = 0x801CE448, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CE514 = { addr = 0x801CE514, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
+Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "counts the work byte +0x09 down and calls func_801B0DFC each tick; at zero it clears the panel mode byte and game flag 0x1000, then runs func_8014D978" }
 Char_StartTurn = { addr = 0x801CEC40, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript = { addr = 0x801CED0C, type = "func", source = "byte-identical to Char_RunStepScript at emi/plchar/plp247/00@0x801CED0C" }
 Char_SelectScriptAndStep = { addr = 0x801CF32C, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
