@@ -19,7 +19,23 @@ MATCH void func_801EEE68(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEEA0);
+MATCH void func_801EEEA0(void) {
+    u8*           selector;
+    u32           slot;
+    PartyBattler* work;
+
+    selector = (u8*)&g_BattleTargetSelector;
+    if (!(Battle_SlotIsBlocked(*selector) & 0xFF) && (func_800AED5C(1, *selector) & 0xFF)) {
+        slot                          = Battle_AllocEffect(1, 0x48) & BYTE_MASK;
+        work                          = g_SpadWork;
+        g_BattleEffects[slot].unk_04  = 4;
+        g_BattleEffects[slot].unk_09  = 0x18;
+        g_BattleEffects[slot].unk_0A  = 4;
+        g_BattleEffects[slot].work_74 = (u32)work;
+        g_SpadWork->unk_0B += 1;
+    }
+    g_SpadWork->step_01 += 1;
+}
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 

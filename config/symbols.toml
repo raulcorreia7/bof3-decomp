@@ -196,6 +196,9 @@ Effect_TickDownAndClear = { addr = 0x801EF670, type = "func", source = "decremen
 g_BMagicEffectFuncs = { addr = 0x801EFBB0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic013/03"]
+Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_StartOnZeroTick = { addr = 0x801EEF84, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 BMagic_AllocEffect = { addr = 0x801F0358, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 g_BMagicEffectFuncs = { addr = 0x801F03BC, source = "the module dispatcher indexes it with the shared spad step byte" }

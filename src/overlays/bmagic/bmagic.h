@@ -185,6 +185,10 @@ void func_801EEC5C(void);
 void func_801EEEC8(void);
 void func_801EEF38(void);
 void func_801F006C(void);
+
+/* Whether the battler slot cannot be targeted (defined by the battle overlay). */
+u8   Battle_SlotIsBlocked(u32 slot);
+s32  func_800AED5C(s32 arg0, u32 battler_index);
 void func_801F0068(void);
 
 void func_800A9610(u8 selector, u16 flags);
