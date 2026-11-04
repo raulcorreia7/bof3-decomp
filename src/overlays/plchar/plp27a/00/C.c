@@ -22,7 +22,7 @@ MATCH void func_801CE610(void) {
 
 INCLUDE_ASM(func_801CE654);
 
-INCLUDE_ASM(func_801CE83C);
+#include "overlays/plchar/Char_TickPauseTimer.h"
 
 INCLUDE_ASM(func_801CE8AC);
 
