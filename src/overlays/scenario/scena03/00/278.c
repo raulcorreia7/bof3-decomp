@@ -414,13 +414,21 @@ MATCH void func_801FC4AC(void* entity, void* bits) {
     g_SceneState.step_05  = 0;
 }
 
-INCLUDE_ASM(func_801FC4F4);
+MATCH void func_801FC4F4(void* entity, void* flags) {
+    Scene_SetFlagThenContinue(flags, 0x10);
+}
 
-INCLUDE_ASM(func_801FC520);
+MATCH void func_801FC520(void* entity, void* flags) {
+    Scene_SetFlagThenContinue(flags, 0x11);
+}
 
-INCLUDE_ASM(func_801FC54C);
+MATCH void func_801FC54C(void* entity, void* flags) {
+    Scene_SetFlagThenContinue(flags, 0x12);
+}
 
-INCLUDE_ASM(func_801FC578);
+MATCH void func_801FC578(void* entity, void* flags) {
+    Scene_SetFlagThenContinue(flags, 0x13);
+}
 
 INCLUDE_ASM(func_801FC5A4);
 
