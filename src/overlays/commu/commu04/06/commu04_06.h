@@ -13,6 +13,7 @@ extern OverlayHeader D_801D0C00;
  * still zero. */
 extern Callback      D_801D1750[];
 extern Callback      D_801D1758[];
+extern u8            D_801D1774;
 
 /* The overlay's state byte the guarded step advances. */
 #endif
