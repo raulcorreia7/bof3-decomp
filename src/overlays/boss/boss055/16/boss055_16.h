@@ -7,6 +7,16 @@
 #include "overlays/boss/boss.h"
 #include "overlays/battle/battle.h"
 
+/* The ten script ids a phase starts, picked by the word at D_801463BE. */
+typedef struct Boss055Scripts {
+    s8 id[10];
+} Boss055Scripts;
+
+ASSERT_SIZE(Boss055Scripts, 10);
+
+extern Boss055Scripts               D_800C1804;
+extern Boss055Scripts               D_800C1810;
+extern Boss055Scripts               D_800C181C;
 extern Callback                     D_800C184C[];
 extern Callback                     D_800C356C[];
 extern Callback                     D_800C359C[];
