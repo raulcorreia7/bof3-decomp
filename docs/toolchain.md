@@ -16,6 +16,7 @@ checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 | Meson 1.3 or later, Ninja                                    | Build and check the images                         | system package or `uv tool install meson ninja`                  | every build            |
 | `clang-format`                                               | Formats C; CI pins 23.1.3                          | system package or `uv tool install clang-format`                 | `format`               |
 | [`dprint`](https://github.com/dprint/dprint/releases/latest) | Formats Markdown, JSON and TOML                    | release binary on `PATH`; it needs no Node runtime               | `format`               |
+| `shellcheck`                                                 | Lints the shell scripts; CI pins 0.11.0.1          | system package or `uv tool install shellcheck-py`                | CI shell lint          |
 | Ruff, pytest                                                 | Lint Python; run the tool tests                    | `tools/setup.sh --dev`                                           | `format`, `meson test` |
 | `splat64[mips]`, `spimdisasm`                                | Split and disassembly                              | `tools/setup.sh`                                                 | game build             |
 | `maspsx`                                                     | ASPSX emulation                                    | `third_party/` submodule, set up by `tools/setup.sh`             | game build             |

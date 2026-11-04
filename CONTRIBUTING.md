@@ -119,7 +119,8 @@ Meson has no `check`; `pre-push` skips it. Each check:
 
 The disc-free checks run in CI on every push and pull request through the same entry. A match score,
 an analyzer opinion or a decompiler draft is a lead; only `check` proves bytes. For parallel work,
-rebase and push, see [AGENTS.md](AGENTS.md#parallel-work). A pull request that changes only docs runs the format checks only.
+rebase and push, see [AGENTS.md](AGENTS.md#parallel-work). A pull request that changes only docs
+runs the format checks only.
 
 ## Pull requests
 
