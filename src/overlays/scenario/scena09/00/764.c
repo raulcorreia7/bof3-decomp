@@ -315,7 +315,7 @@ MATCH void func_801FE1DC(void) {
 
 #include "overlays/scenario/Scene_RemoveAdultNina.h"
 
-INCLUDE_ASM(func_801FE234);
+#include "overlays/scenario/Scene_StashPartyExceptSeven.h"
 
 #include "overlays/scenario/Scene_RemoveMomo.h"
 

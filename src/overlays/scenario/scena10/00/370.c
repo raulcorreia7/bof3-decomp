@@ -220,5 +220,4 @@ INCLUDE_ASM(func_801FE5B0);
 
 INCLUDE_ASM(func_801FE63C);
 
-/* Copies the first g_PartySize character ids into D_80144908 and a local ids[3], then func_801C1ABC on every id except 7, then func_801C1630. The C is exact except retail's frame is 0x28 (ids at sp+0x10, s0 at 0x18) against 0x30 here, whatever the ids size or declaration order (first differing instruction +0x8: addiu sp,sp,-40). */
-INCLUDE_ASM(func_801FE6F4);
+#include "overlays/scenario/Scene_StashPartyExceptSeven.h"
