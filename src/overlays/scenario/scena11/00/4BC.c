@@ -230,12 +230,7 @@ MATCH void func_801FACD8(void) {
 
 INCLUDE_ASM(func_801FAD1C);
 
-MATCH void func_801FAD68(void) {
-    EMI_LoaderStreamFamily(7U, 6U, 5U, 0U);
-    Party_BuildBattlers(0);
-    Party_JoinMember(6);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_JoinPeco.h"
 
 MATCH void func_801FADAC(void) {
     EMI_LoaderStreamFamily(7, 4, 2, 0);
