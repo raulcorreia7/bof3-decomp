@@ -34,7 +34,6 @@
     (((id) >> 12) & 0xC)                           /* byte offset of the group base word: id bits 14 and 15 times 4 */
 #define RESOURCE_ID_INDEX(id) ((id) & 0x3FFF)      /* index into the group's u16 offset table */
 #define SLUS_LOAD_ADDRESS     0x80010000u          /* the main executable's link address */
-#define AREA_WORK_WINDOW      0x800E4800u          /* the per-area work window (AreaHandlerRecord.work_08) */
 #define AREA_CODE_BASE        0x800F5000u          /* the area code base (AreaHandlerRecord.code_base_0C) */
 #define WORD_SIGN_BIT         0x80000000u          /* the sign bit of a word */
 #define COPY_KERNEL_ENTRY     ((u32) & D_8016432C) /* resume entry of the stream copy kernel */

@@ -7,7 +7,7 @@ MATCH void Area_ClearWorkColumn(void) {
     u8* p;
     u8  i;
 
-    p = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS);
+    p = MEM_PTR(u8, AREA_WORK);
     i = 0;
     do {
         p[SCRATCH_COLUMN_OFFSET] = 0;

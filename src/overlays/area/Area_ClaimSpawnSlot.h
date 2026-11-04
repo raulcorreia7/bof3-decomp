@@ -4,7 +4,7 @@ MATCH void Area_ClaimSpawnSlot(void) {
     AreaSpawnSlot* slot;
     u8             i;
 
-    slot = MEM_PTR(AreaSpawnSlot, AREA_WORK_WINDOW_ADDRESS);
+    slot = MEM_PTR(AreaSpawnSlot, AREA_WORK);
     for (i = 0; i < AREA_SPAWN_SLOT_COUNT; i++) {
         if (slot->active == 0) {
             slot->active        = 1;

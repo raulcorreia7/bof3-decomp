@@ -16,7 +16,6 @@
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT       0xFF
 
-#define AREA_WORK_WINDOW         0x800E4800u /* the per-area work window (AreaHandlerRecord.work_08) */
 /* The shop panel step the request sets. */
 #define g_MasterSubStep          (*(s8*)&g_MasterSubStep)
 #define g_CurrentActor           ((void*)g_CurrentActor)

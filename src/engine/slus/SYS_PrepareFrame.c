@@ -41,6 +41,6 @@ MATCH void SYS_PrepareFrame(void) {
         index++;
     } while (index < 56);
 
-    D_801459F8 = (void*)AREA_WORK_WINDOW;
+    D_801459F8 = (void*)AREA_WORK;
     D_801459FC = AREA_CODE_BASE;
 }

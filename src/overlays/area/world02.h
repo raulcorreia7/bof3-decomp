@@ -13,8 +13,6 @@
 #define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0x10
 
-#define AREA_WORK_WINDOW         0x800E4800u /* the per-area work window (AreaHandlerRecord.work_08) */
-
 /* The selection byte that arms the area request. */
 extern s8       D_801490C7;
 extern Callback D_801F5750[];

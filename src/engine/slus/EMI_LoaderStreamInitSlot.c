@@ -13,7 +13,7 @@ MATCH void EMI_LoaderStreamInitSlot(u32 slot_id) {
     u32 new_lba;
     u8  slot;
 
-    cd_base              = AREA_WORK_WINDOW;
+    cd_base              = AREA_WORK;
     slot_index           = 0;
     g_EmiRequestedSlotId = slot_id;
     g_EmiNextSlot        = 0;

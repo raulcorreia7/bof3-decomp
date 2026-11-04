@@ -4,7 +4,7 @@ MATCH void func_801F3298(void) {
     s32   index;
     void* cell;
 
-    cell  = (void*)AREA_WORK_WINDOW;
+    cell  = (void*)AREA_WORK;
     index = 0;
     do {
         FIELD(s8, cell, 0x14u) = 0;

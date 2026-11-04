@@ -5,7 +5,7 @@ MATCH void Area_ClearWorkColumn(void) {
     s32 index;
     s8* cell;
 
-    cell  = (s8*)AREA_WORK_WINDOW;
+    cell  = (s8*)AREA_WORK;
     index = 0;
     do {
         *cell = 0;

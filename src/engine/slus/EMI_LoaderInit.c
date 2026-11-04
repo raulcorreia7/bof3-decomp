@@ -16,7 +16,7 @@ MATCH void EMI_LoaderInit(void) {
 
     VSync(3);
 
-    bootstrap_address = AREA_WORK_WINDOW;
+    bootstrap_address = AREA_WORK;
     empty_state       = 0xFF;
     i                 = 0x17;
     loader_state      = &g_EmiRingBase;

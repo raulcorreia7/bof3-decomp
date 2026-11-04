@@ -238,7 +238,7 @@ MATCH void func_801F8358(void) {
     u8* p;
     u8  i;
 
-    p = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS);
+    p = MEM_PTR(u8, AREA_WORK);
     i = 0;
     do {
         p[0] = 0;
@@ -253,7 +253,7 @@ MATCH u8* func_801F8394(void) {
     u8* p;
     u8  i;
 
-    p = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS);
+    p = MEM_PTR(u8, AREA_WORK);
     for (i = 0; i < 8; i++) {
         if (p[SCRATCH_ROW_OFFSET] == 0) {
             return p;
@@ -314,7 +314,7 @@ MATCH void func_801F9DA8(void) {
     s32 var_v1_6;
     s8* var_a0_5;
 
-    var_a0_5 = (s8*)(AREA_WORK_WINDOW + 0x95C);
+    var_a0_5 = (s8*)(AREA_WORK + 0x95C);
     var_v1_6 = 0;
     do {
         *var_a0_5 = 0;
@@ -327,7 +327,7 @@ MATCH u8* func_801F9DD4(void) {
     u8* row;
     u8  i;
 
-    row = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS + 0x95C);
+    row = MEM_PTR(u8, AREA_WORK + 0x95C);
     for (i = 0; i < 64; i++) {
         if (row[0] == 0) {
             return row;

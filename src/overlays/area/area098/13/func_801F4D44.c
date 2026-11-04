@@ -4,7 +4,7 @@ MATCH void func_801F4D44(void) {
     u8* p;
     u8  i;
 
-    p = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS);
+    p = MEM_PTR(u8, AREA_WORK);
     i = 0;
     do {
         p[0] = 0;

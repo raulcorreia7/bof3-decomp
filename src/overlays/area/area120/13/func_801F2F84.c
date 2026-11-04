@@ -10,7 +10,7 @@ MATCH void func_801F2F84(void) {
         rect.y = 0x100;
         rect.w = D_801F43BC;
         rect.h = D_801F43BE;
-        StoreImage(&rect, (u32*)AREA_WORK_WINDOW_ADDRESS);
+        StoreImage(&rect, (u32*)AREA_WORK);
         g_SpadWork->unk_01++;
     }
 }

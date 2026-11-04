@@ -14,7 +14,6 @@
 #include "scenario/runtime.h"
 #include "sys/cd.h"
 
-#define AREA_WORK_WINDOW      0x800E4800u /* the per-area work window (AreaHandlerRecord.work_08) */
 #define SCRATCH_COLUMN_COUNT  0x80
 #define SCRATCH_COLUMN_OFFSET 0
 #define SCRATCH_COLUMN_STRIDE 0x14

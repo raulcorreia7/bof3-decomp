@@ -101,8 +101,8 @@
 #define AREA_AUX_ID_FIRST          0xFCu
 #define AREA_AUX_ID_LAST           0x104u
 
-/* The window base, for the overlays that clear or walk their own byte table. */
-#define AREA_WORK_WINDOW_ADDRESS   0x800E4800u
+/* The area program's work memory (AreaWorkPointers.work_08). */
+#define AREA_WORK                  0x800E4800u
 
 #define WORLD_POINT_SIZE           0x06
 

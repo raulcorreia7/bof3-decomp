@@ -3,7 +3,7 @@
 MATCH void* func_801F3B98(void) {
     u8 i;
 
-    D_801F44A4 = (s8*)(AREA_WORK_WINDOW + 0x6C);
+    D_801F44A4 = (s8*)(AREA_WORK + 0x6C);
     i          = 0u;
     do {
         if (((u8*)D_801F44A4)[0] != 0u) {

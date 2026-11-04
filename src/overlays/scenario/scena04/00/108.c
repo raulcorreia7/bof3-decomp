@@ -134,7 +134,7 @@ MATCH void func_801F7FCC(void) {
     s32   index;
     void* cell;
 
-    cell  = (void*)AREA_WORK_WINDOW;
+    cell  = (void*)AREA_WORK;
     index = 0;
     do {
         FIELD(s8, cell, 0x25u) = 0;
@@ -147,7 +147,7 @@ MATCH u8* func_801F7FF8(void) {
     u8* p;
     u8  i;
 
-    p = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS);
+    p = MEM_PTR(u8, AREA_WORK);
     for (i = 0; i < 128; i++) {
         if (p[SCRATCH_ROW_OFFSET] == 0) {
             return p;

@@ -5,9 +5,9 @@ MATCH void func_801F2D3C(void) {
     s8* row;
     u8* tail;
 
-    row   = (s8*)AREA_WORK_WINDOW_ADDRESS;
+    row   = (s8*)AREA_WORK;
     index = 0;
-    tail  = (u8*)(AREA_WORK_WINDOW_ADDRESS + 2);
+    tail  = (u8*)(AREA_WORK + 2);
     do {
         *row             = 0;
         *(s8*)(tail - 1) = 0;

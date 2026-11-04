@@ -7,7 +7,7 @@ MATCH u8* Area_FindFreeWorkRow(void) {
     u8* p;
     u8  i;
 
-    p = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS);
+    p = MEM_PTR(u8, AREA_WORK);
     for (i = 0; i < 16; i++) {
         if (p[SCRATCH_ROW_OFFSET] == 0) {
             return p;

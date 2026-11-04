@@ -7,7 +7,7 @@ MATCH void func_801F2E5C(void) {
     u8* p;
     u16 i;
 
-    p = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS);
+    p = MEM_PTR(u8, AREA_WORK);
     i = 0;
     do {
         p[3] = 0;

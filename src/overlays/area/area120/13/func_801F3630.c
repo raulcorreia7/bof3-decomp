@@ -4,7 +4,7 @@ MATCH void func_801F3630(void) {
     u8* p;
     u16 i;
 
-    p = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS);
+    p = MEM_PTR(u8, AREA_WORK);
     for (i = 0; i < AREA_ROW_COUNT; i++) {
         if (p[0] == 0) {
             p[0] = 1;

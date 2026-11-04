@@ -7,7 +7,7 @@
 #include "overlays/scenario/scenario.h"
 #include "work/area_spad.h"
 
-#define g_ScanBars ((ScanBar*)AREA_WORK_WINDOW)
+#define g_ScanBars ((ScanBar*)AREA_WORK)
 
 extern u32      D_801D0C00;
 extern Callback D_801D1B2C[];

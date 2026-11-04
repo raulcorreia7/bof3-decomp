@@ -9,7 +9,7 @@ MATCH s32 Area_StepSpawnSlots(void) {
 
     active = 0;
     Area_SetCameraMatrix(&camera);
-    slot = MEM_PTR(AreaSpawnSlot, AREA_WORK_WINDOW_ADDRESS);
+    slot = MEM_PTR(AreaSpawnSlot, AREA_WORK);
     for (i = 0; i < AREA_SPAWN_SLOT_COUNT; i++) {
         if (slot->active != 0) {
             active = 1;

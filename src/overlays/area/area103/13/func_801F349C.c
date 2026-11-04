@@ -1,7 +1,7 @@
 #include "area103_13.h"
 
 MATCH void func_801F349C(void) {
-    AreaEffectRow* row = (AreaEffectRow*)AREA_WORK_WINDOW_ADDRESS;
+    AreaEffectRow* row = (AreaEffectRow*)AREA_WORK;
     u8             i;
     /* FAKE: retail reserves 0x10 frame bytes nothing in the body uses. */
     STACK_PADS(u8, 16);

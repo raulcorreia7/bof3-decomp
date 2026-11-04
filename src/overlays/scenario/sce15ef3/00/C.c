@@ -155,9 +155,9 @@ MATCH void func_801D16DC(void) {
     s8*   row;
     void* tail;
 
-    row   = (s8*)AREA_WORK_WINDOW;
+    row   = (s8*)AREA_WORK;
     index = 0;
-    tail  = (void*)(AREA_WORK_WINDOW + 2);
+    tail  = (void*)(AREA_WORK + 2);
     do {
         *row                     = 0;
         *(s8*)((u8*)(tail) + -1) = 0;
