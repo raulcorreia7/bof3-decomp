@@ -27,7 +27,14 @@ MATCH void func_801D0C48(void) {
     work[1]++;
 }
 
-INCLUDE_ASM(func_801D0CC4);
+MATCH void func_801D0CC4(void) {
+    if (g_AreaDrawFlags == 0) {
+        g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
+    } else {
+        func_801D1A60();
+        func_801D18CC();
+    }
+}
 
 MATCH void func_801D0D18(void) {
     Actor_Clear();
@@ -82,7 +89,20 @@ INCLUDE_ASM(func_801D1250);
 
 INCLUDE_ASM(func_801D12E0);
 
-INCLUDE_ASM(func_801D1370);
+MATCH void func_801D1370(void) {
+    Actor* work;
+    u8     timer;
+
+    work         = g_SpadWork;
+    work->unk_2E = (u16)(work->unk_2E - 0x10);
+    work->unk_30 = (u16)(work->unk_30 - 0x10);
+    func_801D230C();
+    timer              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = timer;
+    if (timer == 0) {
+        Actor_Clear();
+    }
+}
 
 MATCH void func_801D13DC(void) {
     SYS_DISPATCH_TASK(D_801D2800, 1, g_SpadWork);

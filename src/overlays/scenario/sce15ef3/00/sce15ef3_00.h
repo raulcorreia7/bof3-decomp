@@ -21,5 +21,8 @@ extern Callback D_801D280C[];
 extern Callback D_801D27C0[];
 
 extern void func_801D23AC(u8 arg);
+void        func_801D230C(void);
+void        func_801D18CC(void);
+void        func_801D1A60(void);
 
 #endif
