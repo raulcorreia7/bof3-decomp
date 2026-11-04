@@ -56,10 +56,7 @@ MATCH void func_801F0100(void) {
     }
 }
 
-MATCH void func_801F0178(void) {
-    g_SpadWork->unk_09 = 0;
-    Bmagic_NextStep();
-}
+#include "overlays/bmagic/Effect_ClearTimerNextStep.h"
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
 

@@ -330,6 +330,7 @@ g_BMagicEffectFuncs = { addr = 0x801F066C, source = "the module dispatcher index
 ["emi/bmagic/magic060/00"]
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
+Effect_ClearTimerNextStep = { addr = 0x801F0000, type = "func", source = "zeroes the effect timer byte at +0x09 of the scratchpad record, the byte Effect_CountDownTimerNextStep counts down, and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
 Effect_TickOnTimerZero = { addr = 0x801F00D0, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
 g_BMagicEffectFuncs = { addr = 0x801F0BB0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
@@ -350,6 +351,7 @@ D_801F1054 = { addr = 0x801F1054, source = "func_801EF340 loads this word as the
 ["emi/bmagic/magic064/03"]
 D_801EEC50 = { addr = 0x801EEC50, type = "BattleHandlerTable3", size = 0x0c, source = "copied to the stack by func_801EF7F8, which indexes it with the spad step byte at offset 2" }
 BMagic_RunStep = { addr = 0x801EEC7C, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
+Effect_ClearTimerNextStep = { addr = 0x801F0DA8, type = "func", source = "zeroes the effect timer byte at +0x09 of the scratchpad record, the byte Effect_CountDownTimerNextStep counts down, and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F1394, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic065/00"]
@@ -653,6 +655,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFA44, source = "the module dispatcher index
 
 ["emi/bmagic/magic131/03"]
 Effect_StartOnZeroTick = { addr = 0x801EF61C, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+Effect_ClearTimerNextStep = { addr = 0x801F0178, type = "func", source = "zeroes the effect timer byte at +0x09 of the scratchpad record, the byte Effect_CountDownTimerNextStep counts down, and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
 Effect_CountUpByTwoAndStep = { addr = 0x801F01A8, type = "func", source = "counts the effect timer up by two and advances the effect step at 0x10" }
 Effect_CountDownAndStep = { addr = 0x801F0264, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
 Effect_TickOnTimerZero = { addr = 0x801F02B0, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }

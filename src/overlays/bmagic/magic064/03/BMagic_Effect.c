@@ -193,10 +193,7 @@ MATCH void func_801F0D64(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectFuncs, 2, g_SpadWork);
 }
 
-MATCH void func_801F0DA8(void) {
-    g_SpadWork->unk_09 = 0;
-    Bmagic_NextStep();
-}
+#include "overlays/bmagic/Effect_ClearTimerNextStep.h"
 
 MATCH void func_801F0DD8(void) {
     PartyBattler* work;
