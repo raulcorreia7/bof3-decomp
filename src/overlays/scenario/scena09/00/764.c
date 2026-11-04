@@ -211,6 +211,10 @@ INCLUDE_ASM(func_801FDBA8);
 
 INCLUDE_ASM(func_801FDC1C);
 
+/* Returns -1 when scene flag 0x33 is set; else sets the script active, D_80146875 = 0x32 (0x34 unless D_80145F09 == 4),
+ * D_80146874 = 0xF and returns 1. The early-return shape is 4 bytes short: retail puts li v0,1 in the delay slot of each
+ * Game_SetScriptActive call (first differing instruction: bnez at +0x18 targets +0x74 against +0x70). Same signature as
+ * scena01 func_801FE0A4. */
 INCLUDE_ASM(func_801FDC70);
 
 MATCH void func_801FDCF4(void) {
