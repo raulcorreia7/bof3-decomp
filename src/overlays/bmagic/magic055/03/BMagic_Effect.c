@@ -10,7 +10,7 @@ INCLUDE_ASM(func_801EECCC);
 
 #include "overlays/bmagic/func_801EEE3C.h"
 
-INCLUDE_ASM(func_801EEEA8);
+#include "overlays/bmagic/Effect_DecayTimersAndPlay.h"
 
 #include "overlays/bmagic/func_801EEF74.h"
 
