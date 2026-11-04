@@ -331,7 +331,19 @@ MATCH s32 func_801FD6F4(void) {
     return 0;
 }
 
-INCLUDE_ASM(func_801FD6FC);
+MATCH void func_801FD6FC(u8 character) {
+    u8* ability;
+    u8  i;
+
+    ability = g_Characters[character].skill_abilities;
+    for (i = 0; i < 10; i++) {
+        if (*ability != 0) {
+            Char_AddAbility(*ability, 0, 1, 0);
+            *ability = 0;
+        }
+        ability++;
+    }
+}
 
 INCLUDE_ASM(func_801FD780);
 
