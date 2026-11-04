@@ -42,12 +42,7 @@ MATCH void func_801CF338(void) {
 
 INCLUDE_ASM(func_801CF37C);
 
-MATCH void func_801CF494(void) {
-    if (g_ActorSlots[g_SpadWork->unk_0B].flags_00 == 0) {
-        g_GameState->mode_12B.s8_value = 0;
-    }
-    func_8014D978();
-}
+#include "overlays/plchar/Char_ClearModeIfSlotFree.h"
 
 MATCH void func_801CF500(void) {
     SYS_DISPATCH_TASK(D_801CFDAC, 2, g_SpadWork);

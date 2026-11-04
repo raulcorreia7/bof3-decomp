@@ -1832,6 +1832,7 @@ Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "claims a g_Actor
 Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "builds the 16.16 route position and probes the record table and map kind 0xF2 at the cell and its +1 neighbours" }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
+Char_ClearModeIfSlotFree = { addr = 0x801CF494, type = "func", source = "clears the panel mode byte once the actor slot at work byte +0x0B is free, then runs func_8014D978" }
 Char_StartTurn_801CF544 = { addr = 0x801CF544, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CF610 = { addr = 0x801CF610, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
 
@@ -1841,6 +1842,7 @@ Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "claims a g_Actor
 Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "builds the 16.16 route position and probes the record table and map kind 0xF2 at the cell and its +1 neighbours" }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
+Char_ClearModeIfSlotFree = { addr = 0x801CF494, type = "func", source = "clears the panel mode byte once the actor slot at work byte +0x0B is free, then runs func_8014D978" }
 Char_StartTurn_801CF544 = { addr = 0x801CF544, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_ClaimLinkSlot = { addr = 0x801CF91C, type = "func", source = "launches the facing probe once script_pc reaches CHAR_LAUNCH_SCRIPT_PC (script_pc is the position func_8014D978 and func_8014DAEC read the script stream at): claims a free actor slot of ACTOR_TYPE_FACING_PROBE, links it through the work byte +0x0B, plays the cue and advances the task state" }
 Char_PollScriptRequest = { addr = 0x801CFA28, type = "func", source = "answers the character script request once func_8014DAEC reports ready: with option_flags set it requests the script of direction_08 and clears the options, otherwise a free actor slot at the link byte +0x0B (claimed by Char_ClaimLinkSlot) clears the +0x2B marker and the panel mode byte" }
@@ -1851,6 +1853,7 @@ Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "claims a g_Actor
 Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "builds the 16.16 route position and probes the record table and map kind 0xF2 at the cell and its +1 neighbours" }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
+Char_ClearModeIfSlotFree = { addr = 0x801CF494, type = "func", source = "clears the panel mode byte once the actor slot at work byte +0x0B is free, then runs func_8014D978" }
 Char_StartTurn_801CF544 = { addr = 0x801CF544, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CF610 = { addr = 0x801CF610, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
 Char_SelectScriptAndStep = { addr = 0x801CFC30, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
