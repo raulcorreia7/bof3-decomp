@@ -129,6 +129,9 @@ MATCH void func_801EFE00(void) {
     }
 }
 
+/* Counts unk_09 down; at 0 copies coord_x_34, coord_y_38 and word_3C from D_8014637C, sets unk_09 = 4 and steps.
+ * Three shapes leave the code 4 bytes short: retail loads the source in v1 and the work in a0, then reloads g_SpadWork
+ * for the step (first differing instruction: bnez at +0x20 targets +0x78 against +0x74). */
 INCLUDE_ASM(func_801EFE88);
 
 MATCH void Effect_CountUpAndStep_801EFF08(void) {
