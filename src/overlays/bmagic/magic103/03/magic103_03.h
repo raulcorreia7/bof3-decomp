@@ -5,8 +5,18 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Callback D_801F07C4[];
-void            func_801EFE20(void);
+/* One offset row the effect adds to the selected actor's position (x, y, z). */
+typedef struct BmagicOffset {
+    s32 x;
+    s32 y;
+    s32 z;
+} BmagicOffset;
+
+ASSERT_SIZE(BmagicOffset, 0xC);
+
+extern BmagicOffset D_801F07AC[];
+extern Callback     D_801F07C4[];
+void                func_801EFE20(void);
 
 extern Callback D_801F07D4[];
 void            func_801F04E0(void);
