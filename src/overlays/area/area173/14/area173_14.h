@@ -23,4 +23,6 @@ extern PartyMemberMessages g_PartyMemberMessages[2];
 
 /* The mode byte the request handler writes. */
 
+void func_801F3954(s32 arg0);
+
 #endif
