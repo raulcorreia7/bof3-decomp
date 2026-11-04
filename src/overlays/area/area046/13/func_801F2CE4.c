@@ -13,7 +13,6 @@ MATCH s32 func_801F2CE4(s32 arg0, s32 arg1) {
             D_801448EC = 0xA;
             return 1;
         }
-        /* Duplicate return node #7. Try simplifying control flow for better match */
         return 0;
     }
     return 0;

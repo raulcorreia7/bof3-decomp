@@ -8,7 +8,6 @@ MATCH s32 func_801F3944(s32 arg0, s32 arg1) {
             func_801BE1B0(0U);
             return 1;
         }
-        /* Duplicate return node #9. Try simplifying control flow for better match */
         return 0;
     }
     return 0;

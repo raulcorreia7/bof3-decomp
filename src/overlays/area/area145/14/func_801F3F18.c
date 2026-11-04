@@ -1,13 +1,13 @@
 #include "area145_14.h"
 
 MATCH void func_801F3F18(void) {
-    s16 temp_v0;
+    s16 result;
 
     g_SpadWork->vz += g_SpadWork->gravity;
     func_801B0DFC();
-    temp_v0 = Area_ReadHeight(g_SpadWork->x.fixed, g_SpadWork->y.fixed);
-    if (g_SpadWork->z.part.integer < temp_v0) {
-        g_SpadWork->z.part.integer = temp_v0;
+    result = Area_ReadHeight(g_SpadWork->x.fixed, g_SpadWork->y.fixed);
+    if (g_SpadWork->z.part.integer < result) {
+        g_SpadWork->z.part.integer = result;
         g_SpadWork->vz             = 0;
         g_SpadWork->gravity        = 0;
         g_SpadWork->unk_04         = 2;
