@@ -10,7 +10,18 @@ INCLUDE_ASM(func_801EEC90);
 
 INCLUDE_ASM(func_801EF08C);
 
-INCLUDE_ASM(func_801EF134);
+MATCH void func_801EF134(void) {
+    u16 item;
+
+    if (D_801EC2E4 == 0) {
+        if (g_SpadWork->unk_0A == 0x38) {
+            item = g_SpadWork->unk_2C.half;
+            BMagic_SetTextItemName(item & 0xFF, item >> 8);
+        }
+        func_801DE8C0(1, 0x1E, Resource_GetText((u32)g_SpadWork->unk_0A));
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF1CC);
 

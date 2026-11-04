@@ -6,5 +6,6 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern BattleResultRings D_801EEC04;
+extern u8                D_801EC2E4;
 
 #endif
