@@ -54,4 +54,10 @@ extern u8  D_801F6170[12];
 extern u8  D_801F6171[];
 extern u8  D_801F6194[]; /* the "Manillo" text at +0x10 */
 
+void func_801F2F28(u8* window);
+
+void func_801F3258(u8* window);
+
+extern u16 D_800E4B3E;
+
 #endif
