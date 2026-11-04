@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
+#include "work/area_spad.h"
 
 extern u8 D_80146874;
 

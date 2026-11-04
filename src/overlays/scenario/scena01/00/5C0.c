@@ -18,7 +18,14 @@ INCLUDE_ASM(func_801F7480);
 
 INCLUDE_ASM(func_801F752C);
 
-INCLUDE_ASM(func_801F75C8);
+MATCH void func_801F75C8(void) {
+    func_801F7678(g_SpadWork->unk_09);
+    func_801F7C54();
+    g_SpadWork->unk_09 = ((Actor*)g_SpadWork)->unk_09 - 4;
+    if (g_SpadWork->unk_09 == 0) {
+        g_SpadWork->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    }
+}
 
 MATCH void func_801F7644(void) {
     if (!(func_801F7C54() & BYTE_MASK)) {
