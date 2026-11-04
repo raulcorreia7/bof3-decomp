@@ -29,6 +29,8 @@ extern u8       D_801F58D2;
 extern u8       D_801F58D3;
 extern u16      D_801F58CA;
 extern u16      D_801F58CC;
+extern u8       D_801F58CE;
+extern u8       D_801F58CF;
 
 extern void func_801F4874(void);
 
