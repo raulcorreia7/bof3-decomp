@@ -162,7 +162,18 @@ MATCH void func_801F7E24(void) {
     SYS_DISPATCH_TASK(D_801FDDD0, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801F7E68);
+MATCH void func_801F7E68(void) {
+    u8 i;
+
+    D_800E4C1E = 0xC0;
+    for (i = 0; i < 32; i++) {
+        func_801F88B8(MEM_PTR(void, 0x800E48E0u));
+    }
+    if (g_SpadWork->unk_06 != 0) {
+        SND_PlayCue(0x203);
+    }
+    g_SpadWork->state_02++;
+}
 
 INCLUDE_ASM(func_801F7EF8);
 
