@@ -74,7 +74,24 @@ MATCH void func_801F03A0(void) {
 
 INCLUDE_ASM(func_801F0488);
 
-INCLUDE_ASM(func_801F0540);
+MATCH void func_801F0540(void) {
+    g_SpadWork->unk_25      = 0x1D;
+    g_SpadWork->unk_26      = 0;
+    g_SpadWork->unk_27      = 0xA0;
+    g_SpadWork->unk_28      = 0;
+    g_SpadWork->unk_24      = 4;
+    g_SpadWork->unk_5D      = 0;
+    g_SpadWork->unk_5E      = 0;
+    g_SpadWork->unk_5F      = 0;
+    g_SpadWork->unk_5C      = 0;
+    g_SpadWork->unk_2A      = 0;
+    g_SpadWork->unk_29      = 3;
+    g_SpadWork->unk_2C.half = 0;
+    g_SpadWork->unk_2B      = 1;
+    Actor_SelectScript(0U);
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801F0648(void) {
     u8 timer;
