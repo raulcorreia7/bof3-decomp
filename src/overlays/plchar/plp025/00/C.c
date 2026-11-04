@@ -44,16 +44,7 @@ MATCH void func_801CF338(void) {
 
 INCLUDE_ASM(func_801CF37C);
 
-MATCH void func_801CF564(void) {
-    if (g_SpadWork->unk_09 == 0) {
-        g_GameState->mode_12B.s8_value = 0;
-        g_GameFlags &= ~0x1000;
-    } else {
-        g_SpadWork->unk_09--;
-        func_801B0DFC();
-    }
-    func_8014D978();
-}
+INCLUDE_ASM(func_801CF564);
 
 INCLUDE_ASM(func_801CF5D4);
 
