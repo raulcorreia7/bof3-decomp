@@ -6,7 +6,7 @@ MATCH void func_801F431C(void) {
 
     index = func_8019601C() & 0xFF;
     if (index != 0xFF) {
-        slot         = &g_ActorSlots[index];
+        slot           = &g_ActorSlots[index];
         slot->flags_00 = 1;
         slot->type     = 0x39;
         slot->unk_2E   = (s16)g_SpadWork->unk_2E;
