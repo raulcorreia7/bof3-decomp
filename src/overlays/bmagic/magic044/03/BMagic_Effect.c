@@ -63,7 +63,16 @@ MATCH void func_801F0478(void) {
     }
 }
 
-INCLUDE_ASM(func_801F04F0);
+MATCH void func_801F04F0(void) {
+    func_800AF764();
+    g_SpadWork->unk_30.half += 8;
+    g_SpadWork->unk_5D                = (rand() & 3) + 1;
+    g_SpadWork->unk_5E                = (rand() & 3) + 1;
+    g_SpadWork->unk_5F                = (rand() & 3) + 1;
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0x10;
+    g_SpadWork->unk_02 += 1;
+}
 
 INCLUDE_ASM(func_801F05AC);
 
