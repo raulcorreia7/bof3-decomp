@@ -25,7 +25,30 @@ MATCH void func_801EEFFC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF070);
+MATCH void func_801EF070(void) {
+    u8            timer;
+    u32           slot;
+    u8*           selector;
+    PartyBattler* battler;
+
+    func_801EFDDC();
+    timer              = g_SpadWork->unk_0A - 1;
+    g_SpadWork->unk_0A = timer;
+    if (timer == 0) {
+        slot = LOBU(g_BattleTargetSelector);
+        if (slot < BATTLE_PARTY_SLOT_COUNT) {
+            battler = &g_BattlePartyBattlers[slot];
+        } else {
+            battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
+        }
+        func_80196718(battler);
+        selector = (u8*)&g_BattleTargetSelector;
+        func_800AF814(*selector);
+        func_800A9820(*selector);
+        g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
+        func_801E5988();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
