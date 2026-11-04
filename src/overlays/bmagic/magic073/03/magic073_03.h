@@ -6,7 +6,9 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern BmagicEffectFuncs D_801EEC04;
-extern PartyBattler*     D_801F21F0;
+extern BmagicEffectWork* D_801F21F0;
+
+void func_801F0454(void);
 
 u8 func_801F04A4(void);
 

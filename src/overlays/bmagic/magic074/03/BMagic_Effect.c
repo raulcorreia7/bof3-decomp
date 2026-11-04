@@ -43,7 +43,12 @@ INCLUDE_ASM(func_801EF850);
 
 INCLUDE_ASM(func_801EFA50);
 
-INCLUDE_ASM(func_801EFB00);
+MATCH void func_801EFB00(void) {
+    u16 phase;
+    u8  timer;
+
+    BMAGIC_SWAY_EFFECT_WORK(D_801F20DC, func_801F0440)
+}
 
 INCLUDE_ASM(func_801EFBE4);
 

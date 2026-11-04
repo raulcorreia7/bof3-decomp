@@ -126,7 +126,7 @@ ASSERT_OFFSET(BmagicEffectFuncs, handlers, 0x00);
 /* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
  * func_801EF33C dispatches on step_01. */
 typedef struct BmagicEffectWork {
-    /* 0x00 */ u8  unk_00;
+    /* 0x00 */ u8  flags_00;
     /* 0x01 */ u8  step_01;
     /* 0x02 */ u8  unk_02;
     /* 0x03 */ u8  unk_03;
