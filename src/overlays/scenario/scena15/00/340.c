@@ -24,15 +24,15 @@ MATCH void func_801F6F7C(void) {
 }
 
 MATCH void func_801F6FCC(void) {
-    func_801F71B0(((Actor*)g_SpadWork)->unk_09);
+    func_801F71B0(g_SpadWork->unk_09);
     if (g_FrameCount & 1) {
         func_801F75D8();
     }
     func_801F7748();
-    ((Actor*)g_SpadWork)->unk_09 = ((Actor*)g_SpadWork)->unk_09 + 4;
-    if (((Actor*)g_SpadWork)->unk_09 == 0) {
-        ((Actor*)g_SpadWork)->unk_09 = 0x20;
-        ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    g_SpadWork->unk_09 = ((Actor*)g_SpadWork)->unk_09 + 4;
+    if (g_SpadWork->unk_09 == 0) {
+        g_SpadWork->unk_09 = 0x20;
+        g_SpadWork->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
     }
 }
 
@@ -43,17 +43,17 @@ MATCH void func_801F7078(void) {
     }
     func_801F7748();
     if (g_ScriptVars[0] == 0x1F) {
-        ((Actor*)g_SpadWork)->unk_09 = 0xFC;
-        ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+        g_SpadWork->unk_09 = 0xFC;
+        g_SpadWork->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
     }
 }
 
 MATCH void func_801F7100(void) {
-    func_801F71B0(((Actor*)g_SpadWork)->unk_09);
+    func_801F71B0(g_SpadWork->unk_09);
     func_801F7748();
-    ((Actor*)g_SpadWork)->unk_09 = ((Actor*)g_SpadWork)->unk_09 - 4;
-    if (((Actor*)g_SpadWork)->unk_09 == 0) {
-        ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    g_SpadWork->unk_09 = ((Actor*)g_SpadWork)->unk_09 - 4;
+    if (g_SpadWork->unk_09 == 0) {
+        g_SpadWork->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
     }
 }
 
@@ -371,7 +371,7 @@ MATCH void func_801FDE64(void* entity) {
     Game_SetScriptActive();
     SYS_SetFlag(g_SceneFlags, 0xD);
     func_801BE1B0(11);
-    actor->unk_7E = (u16)(actor->unk_7E + 1);
+    actor->unk_7E = actor->unk_7E + 1;
 }
 
 MATCH void func_801FDEB4(void* entity) {
@@ -381,7 +381,7 @@ MATCH void func_801FDEB4(void* entity) {
     Game_SetScriptActive();
     SYS_SetFlag(g_SceneFlags, 0xE);
     func_801BE1B0(12);
-    actor->unk_7E = (u16)(actor->unk_7E + 1);
+    actor->unk_7E = actor->unk_7E + 1;
 }
 
 MATCH void func_801FDF04(void* entity) {
@@ -390,7 +390,7 @@ MATCH void func_801FDF04(void* entity) {
     actor = entity;
     Game_SetScriptActive();
     SYS_SetFlag(g_SceneFlags, 0xC);
-    actor->unk_7E = (u16)(actor->unk_7E + 1);
+    actor->unk_7E = actor->unk_7E + 1;
 }
 
 MATCH void func_801FDF4C(void* entity) {
@@ -400,7 +400,7 @@ MATCH void func_801FDF4C(void* entity) {
     Game_SetScriptActive();
     SYS_SetFlag(g_SceneFlags, 0x10);
     func_801BE1B0(14);
-    actor->unk_7E = (u16)(actor->unk_7E + 1);
+    actor->unk_7E = actor->unk_7E + 1;
 }
 
 MATCH void func_801FDF9C(void* entity) {
@@ -410,7 +410,7 @@ MATCH void func_801FDF9C(void* entity) {
     Game_SetScriptActive();
     SYS_SetFlag(g_SceneFlags, 0xF);
     func_801BE1B0(13);
-    actor->unk_7E = (u16)(actor->unk_7E + 1);
+    actor->unk_7E = actor->unk_7E + 1;
 }
 
 MATCH void func_801FDFEC(void* entity) {
@@ -418,7 +418,7 @@ MATCH void func_801FDFEC(void* entity) {
 
     actor = entity;
     Game_SetScriptActive();
-    actor->unk_7E = (u16)(actor->unk_7E + 1);
+    actor->unk_7E = actor->unk_7E + 1;
 }
 
 INCLUDE_ASM(func_801FE024);

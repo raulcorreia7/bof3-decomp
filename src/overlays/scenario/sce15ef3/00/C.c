@@ -94,8 +94,8 @@ MATCH void func_801D1370(void) {
     u8     timer;
 
     work         = g_SpadWork;
-    work->unk_2E = (u16)(work->unk_2E - 0x10);
-    work->unk_30 = (u16)(work->unk_30 - 0x10);
+    work->unk_2E = work->unk_2E - 0x10;
+    work->unk_30 = work->unk_30 - 0x10;
     func_801D230C();
     timer              = g_SpadWork->unk_09 - 1;
     g_SpadWork->unk_09 = timer;

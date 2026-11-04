@@ -96,8 +96,8 @@ MATCH void func_801D0F9C(void) {
     work         = g_SpadWork;
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
-    work->unk_2E = (u16)(work->unk_2E + 0x15);
-    work->unk_30 = (u16)(work->unk_30 + 9);
+    work->unk_2E = work->unk_2E + 0x15;
+    work->unk_30 = work->unk_30 + 9;
     if (timer == 0) {
         g_SpadWork->unk_09 = 0x5A;
         g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
@@ -118,8 +118,8 @@ MATCH void func_801D1050(void) {
     work         = g_SpadWork;
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
-    work->unk_2E = (u16)(work->unk_2E - 7);
-    work->unk_30 = (u16)(work->unk_30 - 3);
+    work->unk_2E = work->unk_2E - 7;
+    work->unk_30 = work->unk_30 - 3;
     if (timer == 0) {
         Actor_Clear();
     }
