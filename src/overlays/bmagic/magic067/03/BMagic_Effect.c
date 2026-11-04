@@ -13,16 +13,7 @@ MATCH void func_801EEC24(void) {
 
 INCLUDE_ASM(func_801EEC94);
 
-MATCH void func_801EEF3C(void) {
-    u8 timer;
-
-    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
-    if (timer == 0) {
-        func_800A9610(g_BattleTargetSelector, 0x20);
-        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
-    }
-}
+#include "overlays/bmagic/Effect_CountDownTimerCallSelector.h"
 
 INCLUDE_ASM(func_801EEFA4);
 
