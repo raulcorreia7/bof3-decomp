@@ -5,5 +5,5 @@ MATCH void func_801F5194(void) {
 
     count_                 = g_AreaViewOffsetX;
     g_AreaViewRefreshCount = 2;
-    g_AreaViewOffsetX             = (u16)(count_ + 2);
+    g_AreaViewOffsetX      = (u16)(count_ + 2);
 }

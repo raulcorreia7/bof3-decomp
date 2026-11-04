@@ -89,7 +89,7 @@ segments:
       - [0x2514, c, func_801F5114]
       - [0x2594, c, func_801F5194]
       - [0x25BC, c, func_801F51BC]
-      - [0x25E4, c, func_801F51E4]
+      - [0x25E4, c, Area_ResetViewOffsetX]
       - [0x2600, c, func_801F5200]
       - [0x2680, c, func_801F5280]
       - [0x26A8, c, func_801F52A8]

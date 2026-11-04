@@ -50,7 +50,7 @@ segments:
       - [0x1824, c, func_801F4424]
       - [0x190C, c, func_801F450C]
       - [0x1934, c, func_801F4534]
-      - [0x195C, c, func_801F455C]
+      - [0x195C, c, Area_ResetViewOffsetX]
       - [0x1978, c, func_801F4578]
       - [0x19A0, c, func_801F45A0]
       - [0x19C8, c, Area_ResetViewOffsetY]

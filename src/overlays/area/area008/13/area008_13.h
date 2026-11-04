@@ -13,25 +13,25 @@
 
 /* The world overlay's reading of the shared field work row. */
 
-extern u8           D_8014601A;
-extern u16          D_80146028;
-extern volatile u8  D_801460E8;
-extern u16          D_80146876[];
-extern s32          D_80146C4C;
-extern char         D_801F2C14[3];
-extern u8           D_801F4674[12];
-extern u8           D_801F4680[8];
-extern Callback     D_801F46B0[15];
-extern Callback     D_801F46EC[3];
-extern u8           D_801F46F8[3320];
-extern u16          D_801F53F0[2];
-extern volatile u8  D_801F53F4;
-extern u8           D_801F53F5;
-extern u8           D_801F53F6;
-extern u8           D_801F53F7;
-extern char         WORLD00_AREA008_D_801F2C04[];
-extern char         WORLD00_AREA008_D_801F2C10[];
-extern Callback     g_AreaWorkStates[10];
+extern u8          D_8014601A;
+extern u16         D_80146028;
+extern volatile u8 D_801460E8;
+extern u16         D_80146876[];
+extern s32         D_80146C4C;
+extern char        D_801F2C14[3];
+extern u8          D_801F4674[12];
+extern u8          D_801F4680[8];
+extern Callback    D_801F46B0[15];
+extern Callback    D_801F46EC[3];
+extern u8          D_801F46F8[3320];
+extern u16         D_801F53F0[2];
+extern volatile u8 D_801F53F4;
+extern u8          D_801F53F5;
+extern u8          D_801F53F6;
+extern u8          D_801F53F7;
+extern char        WORLD00_AREA008_D_801F2C04[];
+extern char        WORLD00_AREA008_D_801F2C10[];
+extern Callback    g_AreaWorkStates[10];
 
 void func_801F2D24(void);
 void func_801F2F78(void);
