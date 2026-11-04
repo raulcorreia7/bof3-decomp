@@ -1,3 +1,17 @@
 #include "area103_13.h"
 
-INCLUDE_ASM(func_801F43EC);
+MATCH void func_801F43EC(void) {
+    s32 beat;
+
+    if (*g_ScriptVars == 0xF && (g_FrameCount / 5) % 4 == 3) {
+        func_801F4E70(4);
+        Area_SetCellPalette(0x43, 0x1A);
+        g_SpadWork->state_02++;
+        return;
+    }
+    beat = g_FrameCount / 5;
+    if (g_FrameCount == beat * 5) {
+        func_801F4E70(beat & 3);
+    }
+    func_801F49A0(2);
+}
