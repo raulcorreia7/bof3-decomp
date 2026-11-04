@@ -33,6 +33,25 @@
 
 #define BMAGIC_SET_ACTOR_MATRIX() BMAGIC_SET_ACTOR_MATRIX_SPAN(g_SpadWork)
 
+/* Free the palette fade of the battler the target selector names (a party row
+ * below BATTLE_PARTY_SLOT_COUNT, else an enemy row), tell the battle UI and
+ * the effect player about the selector, then raise the effect-playing state.
+ * A statement macro: the member declares u32 slot, u8* selector and
+ * PartyBattler* battler. */
+#define BMAGIC_RELEASE_TARGET_AND_PLAY()                                         \
+    slot = LOBU(g_BattleTargetSelector);                                         \
+    if (slot < BATTLE_PARTY_SLOT_COUNT) {                                        \
+        battler = &g_BattlePartyBattlers[slot];                                  \
+    } else {                                                                     \
+        battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE); \
+    }                                                                            \
+    func_80196718(battler);                                                      \
+    selector = (u8*)&g_BattleTargetSelector;                                     \
+    func_800AF814(*selector);                                                    \
+    func_800A9820(*selector);                                                    \
+    g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;                                \
+    func_801E5988()
+
 /* Decrement the active effect ticker. */
 #define BMAGIC_TICK_EFFECT_WORK() (BATTLE_ACTIVE_WORK->unk_0B--)
 

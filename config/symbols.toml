@@ -502,6 +502,9 @@ BMagic_AllocEffect = { addr = 0x801F05BC, type = "func", source = "claims the fi
 Actor_Clear = { addr = 0x801F0620, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
 g_BMagicEffectFuncs = { addr = 0x801F089C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
+["emi/bmagic/magic094/03"]
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
+
 ["emi/bmagic/magic095/03"]
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 Effect_SetActorMatrix = { addr = 0x801EF14C, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }

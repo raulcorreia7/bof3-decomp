@@ -12,15 +12,18 @@ MATCH void func_801EEC04(void) {
 
 INCLUDE_ASM(func_801EEC5C);
 
-/* Copies unk_2E and unk_30 - 0x10 from g_BattleSelectedActor; at unk_0B 0xFF frees the palette
- * fade of the target (party row below 3, else g_BattleEnemies + selector * 0x118) with
- * GFX_FreePaletteFadeTarget, then func_800AF814(selector), func_800A9820(selector),
- * BATTLE_RAISE_STATE and func_801E5988. Tried the selector read directly, through a volatile u8
- * pointer local and through a u8 slot local: first differing instruction sw ra,20(sp) retail
- * against sw ra,16(sp) (retail keeps the selector address in s0, frame 0x18 with s0 saved;
- * candidate saves no s0 and is 8 bytes shorter). Needs a g_BattleEnemies row in the magic094 table
- * and a func_800AF814(u32) prototype. */
-INCLUDE_ASM(func_801EED60);
+/* Copies the selected actor's unk_2E and unk_30 - 0x10; at unk_0B 0xFF releases the target and plays. */
+MATCH void func_801EED60(void) {
+    u32           slot;
+    u8*           selector;
+    PartyBattler* battler;
+
+    g_SpadWork->unk_2E.half = g_BattleSelectedActor->unk_2E.half;
+    g_SpadWork->unk_30.half = g_BattleSelectedActor->unk_30.half - 0x10;
+    if (g_SpadWork->unk_0B == 0xFF) {
+        BMAGIC_RELEASE_TARGET_AND_PLAY();
+    }
+}
 
 INCLUDE_ASM(func_801EEE4C);
 
