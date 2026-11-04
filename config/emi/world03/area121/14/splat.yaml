@@ -49,7 +49,7 @@ segments:
       - [0x1B7C, c, func_801F477C]
       - [0x1F00, c, func_801F4B00]
       - [0x1F4C, c, func_801F4B4C]
-      - [0x2378, c, func_801F4F78]
+      - [0x2378, c, Actor_FacingToward]
       - [0x2428, c, func_801F5028]
       - [0x24F4, c, func_801F50F4]
       - [0x2668, c, func_801F5268]
