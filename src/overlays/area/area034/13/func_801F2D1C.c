@@ -4,8 +4,8 @@ MATCH void func_801F2D1C(void) {
     ActorSlot* slot;
     u8         value;
 
-    ((Actor*)g_SpadWork)->unk_0B = Actor_FindFreeSlot();
-    value                        = ((Actor*)g_SpadWork)->unk_0B;
+    g_SpadWork->unk_0B = Actor_FindFreeSlot();
+    value              = g_SpadWork->unk_0B;
     if (value != 0xFF) {
         slot           = &g_ActorSlots[value];
         slot->flags_00 = 1;

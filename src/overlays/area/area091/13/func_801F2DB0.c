@@ -12,5 +12,5 @@ MATCH void func_801F2DB0(void) {
         return;
     }
     Game_SetScriptActive();
-    ((Actor*)g_SpadWork)->unk_04 += 1;
+    g_SpadWork->unk_04 += 1;
 }
