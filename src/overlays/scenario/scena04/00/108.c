@@ -67,7 +67,35 @@ MATCH void func_801F7AC8(void) {
     work->unk_01 += 1;
 }
 
-INCLUDE_ASM(func_801F7B00);
+MATCH void func_801F7B00(void) {
+    /* FAKE: unused frame, 16 bytes; `row` and `shade` also stay uninitialized
+       when the frame count skips the spawn, as in retail. */
+    STACK_PADS(u8, 16);
+    u8* row;
+    s32 shade;
+    s32 height;
+
+    if ((g_FrameCount & 7) == 0) {
+        row   = func_801F7FF8();
+        shade = 0x80;
+        if (row != NULL) {
+            FIELD(s32, row, 0x00) = D_80146954;
+            FIELD(s32, row, 0x04) = D_80146958;
+            height                = D_8014695C;
+            FIELD(s32, row, 0x10) = 0;
+            FIELD(s32, row, 0x14) = 0;
+            FIELD(s32, row, 0x18) = 0;
+            FIELD(s8, row, 0x24)  = shade;
+            FIELD(s32, row, 0x20) = 0x800;
+            FIELD(s8, row, 0x25)  = shade;
+            FIELD(s32, row, 0x08) = height >> 8;
+        }
+    }
+    func_801F7EC0(shade, row);
+    if (g_ScriptVarsReq.byte == 3) {
+        Scene_AdvanceActorStep();
+    }
+}
 
 INCLUDE_ASM(func_801F7BC0);
 
