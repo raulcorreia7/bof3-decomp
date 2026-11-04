@@ -1,4 +1,10 @@
 #include "area051_13.h"
 
-/* needs: type - retail reads the +0x70 word with lw; Actor.state_70.byte is u8, first difference lw a2,0x70(v0) against lbu */
-INCLUDE_ASM(func_801F2C04);
+MATCH void func_801F2C04(void) {
+    u8 code;
+
+    code = func_801BE0C0(g_SpadWork->x.fixed, g_SpadWork->y.fixed, g_SpadWork->state_70.word);
+    if (code != 0xFF && !(g_AreaWalkFlags & 0x1000) && g_GameStateIndex == 0) {
+        func_8015C214(code, 1);
+    }
+}

@@ -173,6 +173,7 @@ extern void  Game_SetScriptActive(void);
 extern void  Party_HideBattlers(void);
 /* func_8015C148 */
 s32          Actor_GetType(void);
+void         func_8015C214(s32 slot, u8 value);
 /* func_8015C2D4 */
 s8           Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, s32 flags);
 /* func_8015C540 */

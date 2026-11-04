@@ -1106,7 +1106,6 @@ void    func_801BDBC4(void);
 s16     func_801BDCF8(s32 x, s32 y);
 s32     func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
 s32     func_801BDF08(void);
-s8      func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode);
 void    func_801BE574(s32 count, u8* ids);
 void    func_801BE710(GameResetRecord* record);
 /* func_801BE738 */

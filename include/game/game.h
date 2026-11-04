@@ -328,6 +328,7 @@ void        func_801B5E58(s32 cue_value);
 s32         func_801B6610(s16 map_x, s16 map_y);
 void        func_801BDAB8(void);
 s8          func_801BDE14(s32 pos_x, s32 pos_y, s32 range_mode);
+s8          func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode);
 /* func_800B254C (battle), func_8019973C (game), func_801EA070 (start) */
 void        Menu_SlidePanelLeft(void);
 void        func_801C2438(void);
