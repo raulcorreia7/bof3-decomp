@@ -34,7 +34,14 @@ MATCH void func_801EF1F0(void) {
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EF250);
+MATCH void func_801EF250(void) {
+    g_SpadWork                              = D_801EB4E0;
+    BATTLE_ACTIVE_WORK->word_08.byte.unk_0B = 0;
+    g_SpadWork->word_08.byte.unk_09         = 0;
+    Actor_SelectScript(2U);
+    g_SpadWork->step_01 = 1;
+    g_SpadWork->unk_02  = 1;
+}
 
 #include "overlays/bmagic/Effect_AddActorStepOnPlaying.h"
 
