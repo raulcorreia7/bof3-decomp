@@ -10,7 +10,14 @@ INCLUDE_ASM(func_801EEC90);
 
 INCLUDE_ASM(func_801EEE94);
 
-INCLUDE_ASM(func_801EEFE0);
+MATCH void func_801EEFE0(void) {
+    if (g_SpadWork->word_08.byte.unk_09 == 0) {
+        func_800AEF98(4, 0);
+        BATTLE_ACTIVE_WORK->flags_00 &= 0xBF;
+        func_800A9610(g_BattleTargetSelector, 0x10U);
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
