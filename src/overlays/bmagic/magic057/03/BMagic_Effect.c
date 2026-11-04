@@ -24,6 +24,7 @@ INCLUDE_ASM(func_801EEEB0);
 
 INCLUDE_ASM(func_801EEFA4);
 
+/* State macro form: first difference is lui v1 at 0x801EEFF0. */
 INCLUDE_ASM(func_801EEFEC);
 
 MATCH void func_801EF02C(void) {
