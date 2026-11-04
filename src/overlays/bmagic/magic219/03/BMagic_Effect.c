@@ -10,7 +10,17 @@ INCLUDE_ASM(func_801EED28);
 
 INCLUDE_ASM(func_801EEE50);
 
-INCLUDE_ASM(func_801EEF54);
+MATCH void func_801EEF54(void) {
+    u8 timer;
+
+    timer              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = timer;
+    if (timer == 0) {
+        SND_QueueSelectionFx(0x101);
+        func_800A9610(g_BattleTargetSelector, 0x10);
+        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
