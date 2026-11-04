@@ -342,7 +342,20 @@ MATCH void func_801FE0E0(void) {
     SYS_SetFlag(g_SceneFlags, 19);
 }
 
-INCLUDE_ASM(func_801FE12C);
+MATCH void func_801FE12C(void) {
+    s32 var_a0;
+    u8* var_v1;
+
+    var_v1 = &g_VitalItemIds;
+    var_a0 = 0;
+    do {
+        if (*var_v1 == 4) {
+            *var_v1 = 0xE;
+        }
+        var_a0 += 1;
+        var_v1 += 1;
+    } while ((u32)(var_a0 & 0xFF) < 0x20U);
+}
 
 INCLUDE_ASM(func_801FE170);
 
