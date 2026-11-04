@@ -212,12 +212,6 @@ typedef struct RoutePoint {
     s16 pad_06;
 } RoutePoint;
 
-typedef struct AreaPartyMode {
-    u8 mode;
-    u8 flags;
-    u8 pad_02[0x13E];
-} AreaPartyMode;
-
 /* Signed byte view of the three palette-offset counters in a 12-byte palette
  * entry, at the D_80145BD6 label. */
 typedef struct GamePaletteOffset {
@@ -345,7 +339,6 @@ extern u8                       D_80145FA8; /* 0x80145FA8 */
 extern u8                       D_80145FAC;
 extern u8                       D_80145FB4[];
 extern u16                      D_80145FB8;   /* 0x80145FB8 */
-extern AreaPartyMode            D_80145FBB[]; /* 0x80145FBB */
 extern u8                       D_80145FD1;
 extern u8                       D_80145FD6;
 extern u8                       D_80145FDB;

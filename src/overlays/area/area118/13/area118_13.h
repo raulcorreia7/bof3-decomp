@@ -14,6 +14,4 @@ extern u8  D_801F59E8;
 extern u8  D_801F59EC;
 void       func_801F381C(s32 arg0);
 
-extern u8 D_80145FBB;
-
 #endif

@@ -73,9 +73,21 @@ ASSERT_OFFSET(GameStateRecord, slot_12D, 0x12D);
 ASSERT_OFFSET(GameStateRecord, slot_13C, 0x13C);
 ASSERT_OFFSET(GameStateRecord, unk_13D, 0x13D);
 
+/* The mode and flag bytes (GameStateRecord +0x12B and +0x12C) of each mode work
+ * record, addressed from the first record's mode byte at a 0x140 stride. */
+typedef struct AreaPartyMode {
+    u8 mode;
+    u8 flags;
+    u8 pad_02[0x13E];
+} AreaPartyMode;
+
+ASSERT_SIZE(AreaPartyMode, 0x140);
+
 /* The current mode work record; battle points it at a g_BattlePartyBattlers row. */
 /* D_80146250 */
 extern GameStateRecord* g_GameState; /* 0x80146250 */
+/* D_80145FBB */
+extern AreaPartyMode D_80145FBB[]; /* 0x80145FBB */
 /* The scenario record the overlays switch on. */
 /* D_80146870 */
 extern SceneState       g_SceneState; /* 0x80146870 */
