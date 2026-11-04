@@ -54,6 +54,8 @@ MATCH void func_801EEF6C(void) {
 
 INCLUDE_ASM(func_801EEFF4);
 
+/* Same body shape as the magic066 twin of this address: unk_20 += unk_0A, unk_09 -= 2, unk_14 += unk_20, then the step at 0x10.
+ * Six C orders leave the first difference at lw a0,0x20($v1) (retail) against lw v0,0x20($v1): the sum lands in v0, not a0. */
 INCLUDE_ASM(func_801EF0A4);
 
 INCLUDE_ASM(func_801EF108);
