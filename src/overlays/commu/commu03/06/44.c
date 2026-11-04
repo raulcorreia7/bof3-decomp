@@ -33,7 +33,18 @@ INCLUDE_ASM(func_801D1094);
 
 INCLUDE_ASM(func_801D1124);
 
-INCLUDE_ASM(func_801D1184);
+MATCH void func_801D1184(void) {
+    u8 count;
+
+    count      = D_801D1948 + 1;
+    D_801D1948 = count;
+    func_801D1250(0x32, (s16)(0x28 - count * 0x32));
+    if (D_801D1948 == 4) {
+        Message_StartAreaMessage(0x5A);
+        g_GameStateIndex = 2;
+        D_801F294D += 1;
+    }
+}
 
 /* func_801D121C */
 #include "overlays/commu/Commu_AdvanceStep.h"

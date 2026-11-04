@@ -183,7 +183,15 @@ MATCH void func_801D5DF4(void) {
     SYS_DISPATCH_BYTE(D_801DAE00, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D5E30);
+MATCH void func_801D5E30(void) {
+    if (g_GameStateIndex != 2) {
+        SND_PlayCue(0x102);
+        D_801DB0C4 = 4;
+        D_801DB0B4 = 0;
+        D_801DB0C8 = 0xF0;
+        D_801F294D += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D5E94);
 
