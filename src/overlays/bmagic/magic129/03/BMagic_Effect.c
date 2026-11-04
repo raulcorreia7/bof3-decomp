@@ -24,6 +24,7 @@ INCLUDE_ASM(func_801EF38C);
 
 INCLUDE_ASM(func_801EF3DC);
 
+/* needs: type. Effect_TickOnTimerZero shape on work byte 0x5D with a signed zero test (sll 24, bnez) where PartyBattler.unk_5D is u8; first differing instruction is andi v0,v0,0xff against sll v0,v0,24. */
 INCLUDE_ASM(func_801EF4F0);
 
 INCLUDE_ASM(func_801EF54C);
