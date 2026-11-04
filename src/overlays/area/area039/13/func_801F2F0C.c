@@ -1,18 +1,18 @@
 #include "area039_13.h"
 
 MATCH void func_801F2F0C(void) {
-    s32 var_a0;
-    u8* var_v1;
+    s32 index;
+    u8* item;
 
-    var_v1 = g_VitalItemIds;
-    var_a0 = 0;
+    item  = g_VitalItemIds;
+    index = 0;
     do {
-        if (*var_v1 == 0xE) {
-            *var_v1 = 4;
+        if (*item == 0xE) {
+            *item = 4;
             return;
         }
-        var_a0 += 1;
-        var_v1 += 1;
-    } while ((u32)(var_a0 & BYTE_MASK) < 0x20U);
+        index += 1;
+        item += 1;
+    } while ((u32)(index & BYTE_MASK) < 0x20U);
     Party_AddVitalItem(4);
 }
