@@ -8,7 +8,16 @@ INCLUDE_ASM(CardAccessFile);
 
 INCLUDE_ASM(func_801EED44);
 
-INCLUDE_ASM(func_801EEE74);
+MATCH void func_801EEE74(void) {
+    PartyBattler* saved;
+
+    saved      = g_SpadWork;
+    g_SpadWork = (PartyBattler*)D_801EC2E0->work_74;
+    if (func_8014DAEC() & BYTE_MASK) {
+        saved->step_01++;
+    }
+    g_SpadWork = saved;
+}
 
 INCLUDE_ASM(func_801EEEDC);
 

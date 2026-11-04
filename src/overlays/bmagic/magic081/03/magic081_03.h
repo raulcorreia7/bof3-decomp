@@ -7,5 +7,6 @@
 
 extern BattleHandlerTable3 D_801EEC14;
 extern MagicTaskFuncs      D_801EEC20;
+extern BattleEffect*       D_801EC2E0;
 
 #endif
