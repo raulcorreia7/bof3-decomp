@@ -99,4 +99,9 @@ s32  Party_CountItem(u8 category, u8 item, u8 mode);
 void func_801D3320(MenuPanelTask* task);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 
+extern u8 D_801DA028;
+extern u8 D_801DA029;
+extern u8 D_801DA02A;
+extern u8 D_801DA02B;
+
 #endif
