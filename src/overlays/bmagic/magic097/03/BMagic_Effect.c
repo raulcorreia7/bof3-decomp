@@ -24,17 +24,7 @@ INCLUDE_ASM(func_801EF1A4);
 
 INCLUDE_ASM(func_801EF324);
 
-MATCH void func_801EF488(void) {
-    PartyBattler* active;
-
-    g_SpadWork->word_08.byte.unk_0B   = g_SpadWork->word_08.byte.unk_0B + 1;
-    g_SpadWork->word_08.byte.timer_0A = g_SpadWork->word_08.byte.timer_0A - 2;
-    if (g_SpadWork->word_08.byte.timer_0A == 0) {
-        active                      = BATTLE_ACTIVE_WORK;
-        active->word_08.byte.unk_0B = active->word_08.byte.unk_0B - 1;
-        func_801E5988();
-    }
-}
+#include "overlays/bmagic/Effect_CountDownByTwoAndFinish.h"
 
 MATCH void func_801EF510(void) {
     SVECTOR pos;

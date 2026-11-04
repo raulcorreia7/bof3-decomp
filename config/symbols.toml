@@ -523,10 +523,12 @@ g_BMagicEffectFuncs = { addr = 0x801F04A8, source = "the module dispatcher index
 
 ["emi/bmagic/magic097/03"]
 Effect_StartOnZeroTick = { addr = 0x801EEF38, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+Effect_CountDownByTwoAndFinish = { addr = 0x801EF488, type = "func", source = "raises the active ticker byte at +0x0B, counts the effect counter at +0x0A down by two and, at zero, lowers the active battler's ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F0AC0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic098/03"]
 Effect_StartOnZeroTick = { addr = 0x801EEF38, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+Effect_CountDownByTwoAndFinish = { addr = 0x801EF498, type = "func", source = "raises the active ticker byte at +0x0B, counts the effect counter at +0x0A down by two and, at zero, lowers the active battler's ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F0340, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic099/03"]
@@ -701,6 +703,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF72C, source = "the module dispatcher index
 
 ["emi/bmagic/magic143/03"]
 Effect_StartOnZeroTick = { addr = 0x801EED24, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+Effect_CountDownByTwoAndFinish = { addr = 0x801EF100, type = "func", source = "raises the active ticker byte at +0x0B, counts the effect counter at +0x0A down by two and, at zero, lowers the active battler's ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801EFEE8, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic144/03"]
@@ -728,6 +731,7 @@ Effect_StartPlaying = { addr = 0x801EF00C, type = "func", source = "byte-identic
 ["emi/bmagic/magic151/03"]
 BMagic_RunStep = { addr = 0x801EEC50, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 Effect_SetActorMatrix = { addr = 0x801F01BC, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
+Effect_CountDownByTwoAndFinish = { addr = 0x801F1380, type = "func", source = "raises the active ticker byte at +0x0B, counts the effect counter at +0x0A down by two and, at zero, lowers the active battler's ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix_801F1DC0 = { addr = 0x801F1DC0, type = "func", source = "byte-identical to Effect_SetActorMatrix at emi/bmagic/magic151/03@0x801F01BC" }
 g_BMagicEffectFuncs = { addr = 0x801F24A4, source = "the module dispatcher indexes it with the shared spad step byte" }
 
