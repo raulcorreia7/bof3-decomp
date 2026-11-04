@@ -25,7 +25,19 @@ MATCH void func_801F6C68(void) {
     SYS_DISPATCH_BYTE(D_801F6DDC, g_SceneState.state_04);
 }
 
-INCLUDE_ASM(func_801F6CA4);
+MATCH void func_801F6CA4(void) {
+    ActorSlot* slot;
+    s32        index;
+
+    if (g_InputPressed & PADR1) {
+        index = Actor_FindFreeSlot();
+        if (index != GAME_NONE) {
+            slot           = &g_ActorSlots[index];
+            slot->flags_00 = 1;
+            slot->type     = 0x2F;
+        }
+    }
+}
 
 MATCH void func_801F6D10(void* entity) {
     SceneFunc handler;
