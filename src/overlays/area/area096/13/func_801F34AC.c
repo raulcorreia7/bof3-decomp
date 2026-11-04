@@ -1,3 +1,19 @@
 #include "area096_13.h"
 
-INCLUDE_ASM(func_801F34AC);
+MATCH void func_801F34AC(void) {
+    Actor* actor = g_SpadWork;
+
+    if (actor->y.part.integer == 0x3A) {
+        switch ((u16)(actor->x.part.integer - 0x40)) {
+        case 0:
+            actor->direction_08 = 3;
+            func_801F33E0(actor);
+            return;
+        case 2:
+            actor->direction_08 = 7;
+            func_801F33E0(actor);
+            return;
+        }
+    }
+    g_ScriptState->cursor += 2;
+}
