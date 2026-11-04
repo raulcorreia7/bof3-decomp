@@ -1,11 +1,11 @@
 #include "area082_13.h"
 
 MATCH void func_801F336C(void) {
-    void* temp_a0_14;
+    Actor* actor;
 
-    temp_a0_14                    = SP_REF(void*, 0x44);
-    FIELD(s16, temp_a0_14, 0x2Eu) = 0x100;
-    FIELD(s16, temp_a0_14, 0x30u) = 0;
-    FIELD(s16, temp_a0_14, 0x32u) = 0x18;
-    FIELD(u8, temp_a0_14, 0x1u)   = (u8)(FIELD(u8, temp_a0_14, 0x1u) + 1);
+    actor         = g_SpadWork;
+    actor->unk_2E = 0x100;
+    actor->unk_30 = 0;
+    actor->unk_32 = 24;
+    actor->unk_01 = actor->unk_01 + 1;
 }
