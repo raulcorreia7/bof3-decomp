@@ -740,6 +740,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2D8, type = "func", source = "plays the 
 ["emi/bmagic/magic169/03"]
 Effect_StartPlaying = { addr = 0x801EF03C, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic001/00@0x801EEFA4" }
 Effect_NextStepUnderTickLimit = { addr = 0x801EF640, type = "func", source = "reloads the effect timer and advances the effect step while the effect ticker is under 5" }
+BMagic_AllocEffect = { addr = 0x801F0368, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801F03CC, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
 g_BMagicEffectFuncs = { addr = 0x801F041C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
