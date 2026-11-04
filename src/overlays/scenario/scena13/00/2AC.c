@@ -63,7 +63,14 @@ MATCH void func_801F7198(void) {
 
 INCLUDE_ASM(func_801F71DC);
 
-INCLUDE_ASM(func_801F7248);
+MATCH void func_801F7248(void) {
+    if (g_GameStateIndex != 2) {
+        g_SpadWork->unk_09 = 0x1E;
+        g_SpadWork->unk_01 = 2;
+    }
+    func_801F7484();
+    func_801F7568();
+}
 
 INCLUDE_ASM(func_801F72A0);
 
