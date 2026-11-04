@@ -19,4 +19,6 @@ s16        func_801F37AC(s32 message);
 extern u8 D_80144F5E;
 extern u8 D_80144F5F;
 
+extern u8 D_80144908[];
+
 #endif

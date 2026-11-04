@@ -194,6 +194,22 @@ MATCH void func_801FC22C(void) {
     func_801C1630();
 }
 
-INCLUDE_ASM(func_801FC280);
+MATCH void func_801FC280(void) {
+    u8 slot;
+    u8 character;
+
+    for (slot = 0; slot < 3; slot++) {
+        character = D_80144908[slot];
+        if (character != 7 && character != 4) {
+            break;
+        }
+    }
+    EMI_LoaderStreamFamily(7, 4, character, 0);
+    g_PartySize = 0;
+    Party_JoinMember(7);
+    Party_JoinMember(4);
+    Party_JoinMember(character);
+    func_801C1630();
+}
 
 INCLUDE_ASM(func_801FC328);
