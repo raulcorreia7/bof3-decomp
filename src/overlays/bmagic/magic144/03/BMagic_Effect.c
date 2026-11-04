@@ -29,7 +29,20 @@ INCLUDE_ASM(func_801EF078);
 
 #include "overlays/bmagic/Effect_StepOnOwnTickFlag.h"
 
-INCLUDE_ASM(func_801EF154);
+MATCH void func_801EF154(void) {
+    u8 temp_v0;
+
+    temp_v0 = g_SpadWork->word_08.byte.unk_09;
+    if (temp_v0 != 0) {
+        g_SpadWork->word_08.byte.unk_09 = temp_v0 - 1;
+    }
+    if (g_SpadWork->word_08.byte.unk_0B == 0x80) {
+        func_80196718(g_BattleSelectedActor);
+        func_800AF814(g_BattleTargetSelector);
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
@@ -65,7 +78,20 @@ INCLUDE_ASM(func_801F00A0);
 
 #include "overlays/bmagic/Effect_StepOnTickFlag.h"
 
-INCLUDE_ASM(func_801F0134);
+MATCH void func_801F0134(void) {
+    u8 counter;
+
+    counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = counter;
+    if (!(counter & 0xFF)) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        g_SpadWork->flags_00 = 0;
+        g_SpadWork->step_01  = 0;
+        g_SpadWork->unk_02   = 0;
+        g_SpadWork->unk_03   = 0;
+        g_SpadWork->unk_04   = 0;
+    }
+}
 
 INCLUDE_ASM(func_801F01D0);
 
