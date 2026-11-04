@@ -306,6 +306,7 @@ BMagic_RunStep = { addr = 0x801EEC1C, type = "func", source = "runs the callback
 ["emi/bmagic/magic053/03"]
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF9C, type = "func", source = "counts the effect timer down; at zero requests the target selector and advances the step" }
 Effect_PlayOnZeroTick = { addr = 0x801EF004, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+Effect_SetActiveActorMatrix = { addr = 0x801EF728, type = "func", source = "sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler's work record, times the camera; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix = { addr = 0x801F0110, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801F0494, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801F04F8, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
@@ -862,6 +863,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF770, source = "the module dispatcher index
 
 ["emi/bmagic/magic219/03"]
 Effect_PlayOnZeroTick = { addr = 0x801EEFC4, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+Effect_SetActiveActorMatrix = { addr = 0x801EF664, type = "func", source = "sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler's work record, times the camera; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801EF934, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801EF998, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
 g_BMagicEffectFuncs = { addr = 0x801EFA00, source = "the module dispatcher indexes it with the shared spad step byte" }
@@ -870,6 +872,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFA00, source = "the module dispatcher index
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEEB0, type = "func", source = "counts the effect timer down; at zero requests the target selector and advances the step" }
 Effect_PlayOnZeroTick = { addr = 0x801EEF18, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_StepWhileTickUnderThree = { addr = 0x801EF888, type = "func", source = "advances the effect step while the other battler's effect ticker is under 3" }
+Effect_SetActiveActorMatrix = { addr = 0x801EF938, type = "func", source = "sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler's work record, times the camera; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix = { addr = 0x801F0284, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801F0628, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801F068C, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
@@ -908,6 +911,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0388, source = "the module dispatcher index
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF3C, type = "func", source = "counts the effect timer down; at zero requests the target selector and advances the step" }
 Effect_PlayOnZeroTick = { addr = 0x801EEFA4, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_SwingCameraAngle = { addr = 0x801EF540, type = "func", source = "swings the area camera pitch by 20 each tick through g_AreaCameraAngle.vx, resets it to -0x2AA when the effect timer reaches zero, reloads the timer and advances the effect step" }
+Effect_SetActiveActorMatrix = { addr = 0x801EF75C, type = "func", source = "sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler's work record, times the camera; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix = { addr = 0x801F0724, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801F0B8C, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801F0BF0, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }

@@ -38,14 +38,7 @@ INCLUDE_ASM(func_801EF530);
 
 INCLUDE_ASM(func_801EF5DC);
 
-MATCH void func_801EF664(void) {
-    SVECTOR pos;
-    SVECTOR rot;
-    MATRIX  matrix;
-    long    flags;
-
-    BMAGIC_SET_ACTOR_MATRIX_SPAN(BATTLE_ACTIVE_WORK);
-}
+#include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
 
 INCLUDE_ASM(func_801EF71C);
 
