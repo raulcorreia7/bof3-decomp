@@ -19,6 +19,10 @@ MATCH void func_801F7014(void) {
 
 INCLUDE_ASM(func_801F7028);
 
+/* Greys the 32 palettes of 256 u16 at 0x80037800 (stride 0x200): each channel becomes (r + g + b) / 3 as an unsigned
+ * divide, bit 15 kept, then g_GfxPalettePending = 1. Closest form hoists the row (row = base + (palette << 9)) and indexes
+ * row[index]; it stays 4 bytes short and puts the color in a0 where retail uses a1 (first differing instruction +0x30:
+ * lhu a1,0(a2)). */
 INCLUDE_ASM(func_801F7960);
 
 INCLUDE_ASM(func_801F7A18);
