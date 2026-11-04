@@ -10,7 +10,20 @@ MATCH void func_801D153C(void) {
     SYS_DISPATCH_BYTE(D_801D8720, D_80148652);
 }
 
-INCLUDE_ASM(func_801D1578);
+MATCH void func_801D1578(void) {
+    /* Pointer form: retail keeps one base register across the count load and
+     * the store, which a symbol access would re-materialize. */
+    u8* timer = &D_80148654;
+    u8  count;
+
+    Menu_DrawClutStrip(D_80144953);
+    count  = *timer - 1;
+    *timer = count;
+    if (count == 0) {
+        UI_SetMode(2);
+        D_80148652 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D15E4);
 
@@ -205,7 +218,7 @@ INCLUDE_ASM(func_801D5634);
 /* Same body in the shop, start, Bate and Shisu overlays; the shop draft differs from retail in frame size (0x58 against 0x50) and save order, and the retail parameter locals sit in s6, s3, s0 and s4. */
 INCLUDE_ASM(Menu_DrawEquipStatWindow);
 
-INCLUDE_ASM(func_801D627C);
+INCLUDE_ASM(Menu_DrawClutStrip);
 
 #include "overlays/menu/Menu_DrawFilledPanel.h"
 
