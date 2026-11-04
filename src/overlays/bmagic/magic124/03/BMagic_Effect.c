@@ -37,7 +37,13 @@ MATCH void func_801EF588(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF5D8);
+MATCH void func_801EF5D8(void) {
+    g_SpadWork->unk_0A = 0x10 + (rsin((g_SpadWork->unk_0B & 0x3F) << 6) * 4 >> 12);
+    g_SpadWork->unk_0C++;
+    if (g_SpadWork->unk_0C == 0x10) {
+        g_SpadWork->unk_02++;
+    }
+}
 
 INCLUDE_ASM(func_801EF654);
 
