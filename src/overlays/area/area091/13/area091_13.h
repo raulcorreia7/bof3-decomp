@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world02.h"
+#include "work/area_spad.h"
 
 extern Callback D_801F3B44[];
 

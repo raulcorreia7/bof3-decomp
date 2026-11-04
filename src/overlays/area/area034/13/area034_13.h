@@ -5,5 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world00.h"
+#include "work/area_spad.h"
 
 #endif
