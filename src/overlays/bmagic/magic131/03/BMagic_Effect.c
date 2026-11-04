@@ -45,7 +45,31 @@ MATCH void func_801EFEF0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFF48);
+MATCH void func_801EFF48(void) {
+    u32 direction;
+    u8  timer;
+
+    timer              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = timer;
+    if (timer == 0) {
+        func_800A9820(g_BattleTargetSelector);
+        direction = LOBU(g_BattleScrollDir);
+        if (direction == 0 || direction == 3) {
+            g_SpadWork->unk_0C = 8;
+            g_SpadWork->unk_10 = -1;
+            g_SpadWork->unk_18 = 1;
+            g_SpadWork->unk_1C = -1;
+        } else {
+            g_SpadWork->unk_0C = -8;
+            g_SpadWork->unk_10 = -1;
+            g_SpadWork->unk_18 = -1;
+            g_SpadWork->unk_1C = -1;
+        }
+        g_SpadWork->unk_09 = 0;
+        g_SpadWork->unk_0A = 0x1E;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F0034);
 

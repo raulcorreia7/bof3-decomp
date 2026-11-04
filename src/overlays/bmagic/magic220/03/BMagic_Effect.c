@@ -24,6 +24,8 @@ INCLUDE_ASM(func_801EF1F4);
 
 INCLUDE_ASM(func_801EF294);
 
+/* Orbit step: on odd frames the effect sits at the caster (D_801EB4E0) plus (+unk_0C, -unk_0C), otherwise minus (+unk_0C), then unk_09 counts down and reloads 8 while unk_02 steps back. Tried the m2c
+ * merged y local (s32/u32/s16/u8), a work pointer set in each branch and a caster local: first differing instruction lw v0,56(a1) retail against lw v1,56(a1) (retail merges y into v0 and stores through a0; the candidate is 4 bytes shorter). */
 INCLUDE_ASM(func_801EF40C);
 
 INCLUDE_ASM(func_801EF4EC);
