@@ -130,8 +130,9 @@ MATCH void func_801EFE00(void) {
 }
 
 /* Counts unk_09 down; at 0 copies coord_x_34, coord_y_38 and word_3C from D_8014637C, sets unk_09 = 4 and steps.
- * Three shapes leave the code 4 bytes short: retail loads the source in v1 and the work in a0, then reloads g_SpadWork
- * for the step (first differing instruction: bnez at +0x20 targets +0x78 against +0x74). */
+ * The Effect_CopyBattlerCoords shape with a work local and a reloaded g_SpadWork for the step matches the bytes with
+ * (PartyBattler*)D_8014637C; needs: type D_8014637C PartyBattler* (it is u8* in slus/data.h; battle/battle/03 indexes it
+ * as bytes at 5 sites and casts it at 4). */
 INCLUDE_ASM(func_801EFE88);
 
 MATCH void Effect_CountUpAndStep_801EFF08(void) {
