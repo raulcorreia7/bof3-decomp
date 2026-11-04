@@ -15,6 +15,22 @@
 #include "common/handler.h"
 #include "types.h"
 
+/* One 0xC-byte row of the palette fade table at D_80145BD4. */
+typedef struct PaletteFade {
+    u8  flags;
+    u8  unk_01;
+    u8  red_offset;
+    u8  green_offset;
+    u8  blue_offset;
+    u8  table_index;
+    u8  step;
+    u8  unk_07;
+    u8* target;
+} PaletteFade;
+
+ASSERT_OFFSET(PaletteFade, target, 0x08);
+ASSERT_SIZE(PaletteFade, 0x0C);
+
 /* GAME.EMI#0 exports: the frontend's data and entry points, in address order. */
 
 /* D_80143F14 */
