@@ -113,15 +113,7 @@ MATCH void func_801F03A4(void) {
     }
 }
 
-MATCH void func_801F0410(void) {
-    u8 timer;
-
-    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
-    if (timer == 30) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
-    }
-}
+#include "overlays/bmagic/Effect_CountUpAndStepAt30.h"
 
 #include "overlays/bmagic/Effect_CountDownTimerCapped.h"
 
