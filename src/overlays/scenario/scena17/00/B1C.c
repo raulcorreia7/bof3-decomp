@@ -97,7 +97,23 @@ MATCH void func_801F7F94(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7FF0);
+MATCH void func_801F7FF0(void) {
+    u8* bgm;
+    s8* stage;
+    u32 row;
+
+    if (g_UiWindowEffectBusy == 0) {
+        bgm = &g_SndBgmId;
+        row = *bgm * 4;
+        SND_StopSequence(g_SelectionCues[row], D_80181EBB[row]);
+        stage           = &D_80146873;
+        *bgm            = 0xFF;
+        g_AreaDrawFlags = 0;
+        g_AreaSceneMode = 6;
+        D_80146874      = 0;
+        *stage          = *stage + 1;
+    }
+}
 
 INCLUDE_ASM(func_801F8088);
 
