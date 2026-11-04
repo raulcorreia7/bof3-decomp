@@ -4,7 +4,7 @@ MATCH void func_801F3298(void) {
     if (SYS_TestFlag(&g_SceneFlagWords[0x48], 0xF) != 0) {
         g_AreaCellCodes[((AreaMapBundle*)MAP_BUNDLE_BASE)->width_00 * 0x3E + 0x41] = 0xA1;
         g_AreaCellCodes[((AreaMapBundle*)MAP_BUNDLE_BASE)->width_00 * 0x3F + 0x41] = 0xA1;
-        g_SpadWork->state_02 = 1;
+        g_SpadWork->state_02                                                       = 1;
     }
     func_801F3324();
 }
