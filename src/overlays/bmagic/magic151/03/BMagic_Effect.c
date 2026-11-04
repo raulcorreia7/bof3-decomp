@@ -131,7 +131,19 @@ INCLUDE_ASM(func_801F0BA8);
 
 INCLUDE_ASM(func_801F0C50);
 
-INCLUDE_ASM(func_801F0CB0);
+MATCH void func_801F0CB0(void) {
+    PartyBattler* work;
+    s8            timer;
+
+    work         = g_SpadWork;
+    timer        = work->unk_5D - 2;
+    work->unk_5D = timer;
+    if (timer == 0) {
+        work                      = D_801EB4E0;
+        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801F0D0C);
 
