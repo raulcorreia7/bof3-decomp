@@ -2081,6 +2081,8 @@ Area_ResetViewOffsetY = { addr = 0x801F2F70, type = "func", source = "zeroes g_A
 
 ["emi/world00/area008/13"]
 Menu_DrawHeaderBar = { addr = 0x801F3D88, type = "func", source = "draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952); byte-equal copy in the start, sisyou, Bate, Shisu, shop, commu02, scena12 and area008 images" }
+Area_AddViewOffsetX20 = { addr = 0x801F450C, type = "func", source = "adds 0x14 to g_AreaViewOffsetX, the X term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
+Area_SubViewOffsetX20 = { addr = 0x801F4534, type = "func", source = "subtracts 0x14 from g_AreaViewOffsetX, the X term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 Area_ResetViewOffsetX = { addr = 0x801F455C, type = "func", source = "zeroes g_AreaViewOffsetX, the X term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetViewOffsetY = { addr = 0x801F45C8, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 
@@ -2423,6 +2425,8 @@ Area_AddViewOffsetY4 = { addr = 0x801F2D94, type = "func", source = "adds 4 to g
 
 ["emi/world03/area134/13"]
 Area_ClearWorkColumn = { addr = 0x801F4974, type = "func", source = "clears one byte of each row in the actor window" }
+Area_AddViewOffsetX2 = { addr = 0x801F5194, type = "func", source = "adds 2 to g_AreaViewOffsetX, the X term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
+Area_SubViewOffsetX2 = { addr = 0x801F51BC, type = "func", source = "subtracts 2 from g_AreaViewOffsetX, the X term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 Area_ResetViewOffsetX = { addr = 0x801F51E4, type = "func", source = "zeroes g_AreaViewOffsetX, the X term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetViewOffsetY = { addr = 0x801F53D0, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 

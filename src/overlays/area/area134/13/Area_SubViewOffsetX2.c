@@ -1,6 +1,7 @@
 #include "area134_13.h"
 
-MATCH void func_801F51BC(void) {
+/* func_801F51BC */
+MATCH void Area_SubViewOffsetX2(void) {
     u16 count_;
 
     count_                 = g_AreaViewOffsetX;

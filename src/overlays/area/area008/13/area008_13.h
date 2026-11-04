@@ -62,7 +62,8 @@ void func_801F4334(void);
 void func_801F437C(void);
 void func_801F43C8(void);
 void func_801F4424(void);
-void func_801F450C(void);
+/* func_801F450C */
+void Area_AddViewOffsetX20(void);
 void func_801F4578(void);
 void func_801F45A0(void);
 void Area_ResetViewOffsetY(void);
