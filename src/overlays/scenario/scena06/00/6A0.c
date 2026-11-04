@@ -322,10 +322,7 @@ MATCH void func_801FE334(void) {
     func_801C1630();
 }
 
-MATCH void func_801FE364(void) {
-    func_801C1ABC(5);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_RemoveMomo.h"
 
 MATCH void func_801FE38C(void) {
     func_801C1ABC(5);

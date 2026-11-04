@@ -216,10 +216,7 @@ INCLUDE_ASM(func_801FE4F0);
 
 INCLUDE_ASM(func_801FE5B0);
 
-MATCH void func_801FE614(void) {
-    func_801C1ABC(5);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_RemoveMomo.h"
 
 INCLUDE_ASM(func_801FE63C);
 
