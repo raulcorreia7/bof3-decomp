@@ -797,6 +797,7 @@ Effect_RequestTargetOnTimerZero = { addr = 0x801EEF4C, type = "func", source = "
 Effect_CountUpAndStep = { addr = 0x801EF0F8, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
 Effect_StepWhileTickUnderTwo = { addr = 0x801EF148, type = "func", source = "advances the effect step while the other battler's effect ticker is under 2" }
 Effect_TickOnTimerZero = { addr = 0x801EF18C, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
+BMagic_AllocEffect = { addr = 0x801EFB78, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801EFBDC, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
 g_BMagicEffectFuncs = { addr = 0x801EFC2C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
