@@ -10,6 +10,10 @@ INCLUDE_ASM(func_801EECCC);
 
 #include "overlays/bmagic/func_801EEE3C.h"
 
+/* Matches (204 bytes) with a u32 view of +0x08 tested against 0xFFFF0000 after two guarded byte
+ * decrements (unk_09 under unk_0B < 4, unk_0A under unk_0B < 3) and the Effect_CountDownAndPlay
+ * play statements; the view is a cast. Same bytes as magic055 func_801EEEA8. needs: type
+ * PartyBattler+0x08 4 (2 sites). */
 INCLUDE_ASM(func_801EEEA8);
 
 #include "overlays/bmagic/func_801EEF74.h"
