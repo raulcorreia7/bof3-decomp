@@ -288,6 +288,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFF34, source = "the module dispatcher index
 
 ["emi/bmagic/magic048/03"]
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
+Effect_CountDownTimerQueueFx = { addr = 0x801EEDB0, type = "func", source = "counts the effect timer at +0x09 down and, at zero, queues SND_QueueSelectionFx(0x100) and advances the step byte at +0x01; one body shared with the other bmagic overlays" }
 Effect_PlayOnZeroTick = { addr = 0x801EEE10, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 g_BMagicEffectFuncs = { addr = 0x801EF818, source = "the module dispatcher indexes it with the shared spad step byte" }
 
@@ -851,6 +852,7 @@ g_BMagicEffectFuncs = { addr = 0x801F06DC, source = "the module dispatcher index
 
 ["emi/bmagic/magic222/03"]
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
+Effect_CountDownTimerQueueFx = { addr = 0x801EEE20, type = "func", source = "counts the effect timer at +0x09 down and, at zero, queues SND_QueueSelectionFx(0x100) and advances the step byte at +0x01; one body shared with the other bmagic overlays" }
 Effect_PlayOnZeroTick = { addr = 0x801EEE80, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_SwingCameraAngle = { addr = 0x801EF274, type = "func", source = "swings the area camera pitch by 20 each tick through g_AreaCameraAngle.vx, resets it to -0x2AA when the effect timer reaches zero, reloads the timer and advances the effect step" }
 Effect_CountDownAndStep = { addr = 0x801EF724, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
