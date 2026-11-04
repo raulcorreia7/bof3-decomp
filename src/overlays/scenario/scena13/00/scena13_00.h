@@ -24,4 +24,7 @@ void func_801F7568(void);
 
 extern Callback D_801FBEF0[];
 
+extern u8 D_80144908[];
+extern u8 D_8014490B[];
+
 #endif
