@@ -49,7 +49,30 @@ MATCH void func_801F77F8(void) {
     SYS_DISPATCH_TASK(D_801FE590, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801F783C);
+MATCH void func_801F783C(void) {
+    Actor*        work;
+    PartyBattler* battler;
+    s32           i;
+    s8            tint;
+
+    work = g_SpadWork;
+    i    = 0;
+    if (g_PartySize != 0) {
+        do {
+            battler         = &g_BattlePartyBattlers[i & BYTE_MASK];
+            g_SpadWork      = (Actor*)battler;
+            battler->unk_29 = 3;
+            func_8014D290();
+            i += 1;
+        } while ((u32)(i & BYTE_MASK) < g_PartySize);
+    }
+    g_SpadWork              = work;
+    tint                    = -0x80;
+    work->tint.bytes.unk_5F = tint;
+    work->tint.bytes.unk_5E = tint;
+    work->tint.bytes.unk_5D = tint;
+    g_SpadWork->unk_01      = 1;
+}
 
 MATCH void func_801F7900(void) {
     func_801F79C4();
