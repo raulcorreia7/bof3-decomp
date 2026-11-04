@@ -21,7 +21,7 @@ segments:
       - [0x7A0, c, func_801F33A0]
       - [0x7C4, c, func_801F33C4]
       - [0x7E8, c, Area_AddViewOffsetY20]
-      - [0x810, c, func_801F3410]
+      - [0x810, c, Area_SubViewOffsetY20]
       - [0x838, c, func_801F3438]
       - [0x854, c, func_801F3454]
       - [0x8D4, c, func_801F34D4]

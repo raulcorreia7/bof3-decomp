@@ -11,7 +11,7 @@ segments:
       - [0x4, c, func_801F2C04]
       - [0xB8, c, Message_SelectAnswerValue]
       - [0xF8, c, func_801F2CF8]
-      - [0x10C, c, func_801F2D0C]
+      - [0x10C, c, Area_SubViewOffsetY20]
       - [0x134, c, Area_AddViewOffsetY20]
       - [0x15C, c, Area_ResetViewOffsetY]
       - [0x178, c, func_801F2D78]

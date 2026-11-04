@@ -26,7 +26,7 @@ segments:
       - [0xFF4, c, func_801F3BF4]
       - [0x1044, c, func_801F3C44]
       - [0x1094, c, func_801F3C94]
-      - [0x10E4, c, func_801F3CE4]
+      - [0x10E4, c, Area_SubViewOffsetY20]
       - [0x110C, c, Area_AddViewOffsetY20]
       - [0x1134, c, Area_ResetViewOffsetY]
       - [0x1150, c, Actor_Spawn]
