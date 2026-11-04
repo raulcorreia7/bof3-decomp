@@ -22,7 +22,12 @@ INCLUDE_ASM(func_801EEE50);
 
 INCLUDE_ASM(func_801EEEB0);
 
-INCLUDE_ASM(func_801EEFA4);
+MATCH void func_801EEFA4(void) {
+    if (g_SpadWork->word_08.byte.unk_09 == g_SpadWork->word_08.byte.unk_0A) {
+        g_SpadWork->step_01 += 1;
+        g_SpadWork->unk_02 = 0;
+    }
+}
 
 /* State macro form: first difference is lui v1 at 0x801EEFF0. */
 INCLUDE_ASM(func_801EEFEC);
