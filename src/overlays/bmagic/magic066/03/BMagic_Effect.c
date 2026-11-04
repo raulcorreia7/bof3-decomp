@@ -8,7 +8,24 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC70);
 
-INCLUDE_ASM(func_801EEDB8);
+MATCH void func_801EEDB8(void) {
+    u8            timer;
+    u32           slot;
+    PartyBattler* work;
+
+    timer              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = timer;
+    if (timer == 0) {
+        slot                          = Battle_AllocEffect(1, 0x11) & BYTE_MASK;
+        work                          = g_SpadWork;
+        g_BattleEffects[slot].unk_01  = 1;
+        g_BattleEffects[slot].work_74 = (u32)work;
+        /* FAKE: keeps the target selector read after the slot stores, as retail orders it. */
+        MATCH_FAKE_BARRIER();
+        func_800A9610(g_BattleTargetSelector, 0x20);
+        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
