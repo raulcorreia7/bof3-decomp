@@ -40,8 +40,8 @@ INCLUDE_ASM(func_801EFC74);
 
 MATCH void func_801EFEF0(void) {
     if (func_8014DAEC() != 0u) {
-        g_SpadWork->unk_09 = 0xF;
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_SpadWork->word_08.byte.unk_09 = 0xF;
+        g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
     }
 }
 
@@ -49,8 +49,8 @@ MATCH void func_801EFF48(void) {
     u32 direction;
     u8  timer;
 
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         func_800A9820(g_BattleTargetSelector);
         direction = LOBU(g_BattleScrollDir);
@@ -65,8 +65,8 @@ MATCH void func_801EFF48(void) {
             g_SpadWork->unk_18 = -1;
             g_SpadWork->unk_1C = -1;
         }
-        g_SpadWork->unk_09 = 0;
-        g_SpadWork->unk_0A = 0x1E;
+        g_SpadWork->word_08.byte.unk_09 = 0;
+        g_SpadWork->word_08.byte.unk_0A = 0x1E;
         g_SpadWork->unk_02 += 1;
     }
 }
@@ -111,13 +111,13 @@ MATCH void func_801F058C(void) {
     s8            count;
 
     work = g_SpadWork;
-    work->unk_09 += 2;
+    work->word_08.byte.unk_09 += 2;
     work         = g_SpadWork;
     count        = work->unk_5D - 4;
     work->unk_5D = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->unk_0B--;
+        active->word_08.byte.unk_0B--;
         func_801E5988();
     }
 }

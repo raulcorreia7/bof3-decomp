@@ -5,8 +5,8 @@ MATCH void func_800C1B48(void) {
     u32 value2;
     u8  value3;
 
-    func_800C236C(((PartyBattler*)g_SpadWork)->unk_09);
-    value3 = ((PartyBattler*)g_SpadWork)->unk_09;
+    func_800C236C(((PartyBattler*)g_SpadWork)->word_08.byte.unk_09);
+    value3 = ((PartyBattler*)g_SpadWork)->word_08.byte.unk_09;
     if (value3 == 0) {
         ((PartyBattler*)g_SpadWork)->unk_48 = 0;
         Area_FindSceneRecord(0x83);
@@ -19,8 +19,8 @@ MATCH void func_800C1B48(void) {
         ((PartyBattler*)g_SpadWork)->unk_04 = 0;
         return;
     }
-    ((PartyBattler*)g_SpadWork)->unk_09 = value3 - 4;
-    value                               = ((PartyBattler*)g_SpadWork)->unk_40;
+    ((PartyBattler*)g_SpadWork)->word_08.byte.unk_09 = value3 - 4;
+    value                                            = ((PartyBattler*)g_SpadWork)->unk_40;
     if ((s32)value > 0) {
         ((PartyBattler*)g_SpadWork)->unk_40 = value - 0x2000;
     } else {

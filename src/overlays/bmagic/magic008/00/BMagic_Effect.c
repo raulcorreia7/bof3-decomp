@@ -138,23 +138,23 @@ MATCH void func_801F0964(void) {
 }
 
 MATCH void func_801F09D0(void) {
-    g_SpadWork->unk_09 = func_800AFF98();
-    g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+    g_SpadWork->word_08.byte.unk_09 = func_800AFF98();
+    g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
     func_8014D290();
 }
 
 MATCH void func_801F0A20(void) {
     u8 value;
 
-    value              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = value;
+    value                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = value;
     if (!(value & 0xFF)) {
         func_8014DAEC();
         func_800AFC98(2, 4);
         g_SpadWork->unk_02 += 1;
     } else if (func_8014DAEC() & 0xFF) {
         func_800AFC98(2, 4);
-        g_SpadWork->unk_09 = 0;
+        g_SpadWork->word_08.byte.unk_09 = 0;
         g_SpadWork->unk_02 += 1;
     }
     func_8014D290();
@@ -185,10 +185,10 @@ MATCH void func_801F0FA4(void) {
         g_SpadWork->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
         g_SpadWork->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
         func_8014DAEC();
-        value              = g_SpadWork->unk_09 - 1;
-        g_SpadWork->unk_09 = value;
+        value                           = g_SpadWork->word_08.byte.unk_09 - 1;
+        g_SpadWork->word_08.byte.unk_09 = value;
         if (!(value & 0xFF)) {
-            g_SpadWork->unk_09 = g_SpadWork->unk_0B + 4;
+            g_SpadWork->word_08.byte.unk_09 = g_SpadWork->word_08.byte.unk_0B + 4;
             g_SpadWork->unk_02 += 1;
         }
     } else {

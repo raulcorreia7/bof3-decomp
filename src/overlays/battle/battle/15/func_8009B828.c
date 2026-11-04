@@ -16,9 +16,9 @@ MATCH void func_8009B828(void) {
         MATCH_BARRIER();
         while (i < g_BattlePartyCount) {
             if (!Battle_SlotIsBlocked(i)) {
-                flags                            = g_BattlePartyBattlers[i].unk_08;
-                g_BattlePartyBattlers[i].step_01 = 2;
-                g_BattlePartyBattlers[i].unk_08  = flags ^ 2;
+                flags                                        = g_BattlePartyBattlers[i].word_08.byte.unk_08;
+                g_BattlePartyBattlers[i].step_01             = 2;
+                g_BattlePartyBattlers[i].word_08.byte.unk_08 = flags ^ 2;
                 /* FAKE: keeps the slot argument move in the jal delay slot;
                  * pure-C best 91.25%, without this barrier 93.75%. */
                 MATCH_BARRIER();

@@ -27,11 +27,11 @@ MATCH void func_801EF2EC(void) {
     PartyBattler* work;
     u8            timer;
 
-    work         = g_SpadWork;
-    work->unk_0B = work->unk_0B - 1;
-    work         = g_SpadWork;
-    timer        = work->unk_09 + 1;
-    work->unk_09 = timer;
+    work                      = g_SpadWork;
+    work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
+    work                      = g_SpadWork;
+    timer                     = work->word_08.byte.unk_09 + 1;
+    work->word_08.byte.unk_09 = timer;
     if (timer == 24) {
         func_800A9610(g_BattleTargetSelector, 0x10);
         work         = g_SpadWork;
@@ -42,8 +42,8 @@ MATCH void func_801EF2EC(void) {
 MATCH void func_801EF374(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 + 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 120) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -70,8 +70,8 @@ MATCH void func_801F009C(void) {
     u8 timer;
 
     func_801F0274();
-    timer              = g_SpadWork->unk_09 + 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0x60) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -83,8 +83,8 @@ MATCH void func_801F0158(void) {
     u8 timer;
 
     func_801F08AC();
-    timer              = g_SpadWork->unk_09 + 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0x10) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -94,8 +94,8 @@ MATCH void func_801F01C0(void) {
     u8 count;
 
     func_801F08AC();
-    count              = g_SpadWork->unk_0A - 1;
-    g_SpadWork->unk_0A = count;
+    count                           = g_SpadWork->word_08.byte.unk_0A - 1;
+    g_SpadWork->word_08.byte.unk_0A = count;
     if (count == 0) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }

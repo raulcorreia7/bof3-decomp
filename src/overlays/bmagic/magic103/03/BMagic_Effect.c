@@ -32,8 +32,8 @@ MATCH void func_801EEF94(void) {
     g_SpadWork->coord_x_34           = src->coord_x_34;
     g_SpadWork->coord_y_38           = src->coord_y_38;
     g_SpadWork->word_3C.half.span_3E = src->word_3C.half.span_3E;
-    g_SpadWork->unk_09               = 0;
-    g_SpadWork->unk_0A               = 0;
+    g_SpadWork->word_08.byte.unk_09  = 0;
+    g_SpadWork->word_08.byte.unk_0A  = 0;
     g_SpadWork->unk_02               = g_SpadWork->unk_02 + 1;
 }
 
@@ -58,15 +58,15 @@ MATCH void func_801EFB88(void) {
     PartyBattler* work;
     u8            timer;
 
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
-        work                 = g_SpadWork;
-        work->coord_x_34.raw = g_BattleSelectedActor->coord_x_34.raw + D_801F07AC[work->unk_0B].x;
-        work->coord_y_38.raw = g_BattleSelectedActor->coord_y_38.raw + D_801F07AC[work->unk_0B].y;
-        work->word_3C.word   = g_BattleSelectedActor->word_3C.word + D_801F07AC[work->unk_0B].z;
-        work->unk_09         = 0;
-        g_SpadWork->unk_0A   = 0;
+        work                      = g_SpadWork;
+        work->coord_x_34.raw      = g_BattleSelectedActor->coord_x_34.raw + D_801F07AC[work->word_08.byte.unk_0B].x;
+        work->coord_y_38.raw      = g_BattleSelectedActor->coord_y_38.raw + D_801F07AC[work->word_08.byte.unk_0B].y;
+        work->word_3C.word        = g_BattleSelectedActor->word_3C.word + D_801F07AC[work->word_08.byte.unk_0B].z;
+        work->word_08.byte.unk_09 = 0;
+        g_SpadWork->word_08.byte.unk_0A = 0;
         g_SpadWork->unk_02 += 1;
     }
 }
@@ -91,23 +91,23 @@ MATCH void func_801F02BC(void) {
 MATCH void func_801F0344(void) {
     PartyBattler* src;
 
-    src                    = g_BattleSelectedActor;
-    g_SpadWork->coord_x_34 = src->coord_x_34;
-    g_SpadWork->coord_y_38 = src->coord_y_38;
-    g_SpadWork->word_3C    = src->word_3C;
-    g_SpadWork->unk_09     = 0;
-    g_SpadWork->unk_0A     = 0;
-    g_SpadWork->unk_02     = g_SpadWork->unk_02 + 1;
+    src                             = g_BattleSelectedActor;
+    g_SpadWork->coord_x_34          = src->coord_x_34;
+    g_SpadWork->coord_y_38          = src->coord_y_38;
+    g_SpadWork->word_3C             = src->word_3C;
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->word_08.byte.unk_0A = 0;
+    g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
 }
 
 MATCH void func_801F03A4(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->unk_0A += 2;
+    work->word_08.byte.unk_0A += 2;
     work = g_SpadWork;
-    work->unk_09++;
-    if (work->unk_09 == 8) {
+    work->word_08.byte.unk_09++;
+    if (work->word_08.byte.unk_09 == 8) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -116,8 +116,8 @@ MATCH void func_801F03A4(void) {
 MATCH void func_801F0410(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 + 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 30) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }

@@ -28,9 +28,9 @@ MATCH void func_801EF380(void) {
 
     work = g_SpadWork;
     work->unk_40 += 0x4000;
-    count        = work->unk_09 + 1;
-    work->unk_09 = count;
-    work->unk_44 = work->unk_44 + 0x8000;
+    count                     = work->word_08.byte.unk_09 + 1;
+    work->word_08.byte.unk_09 = count;
+    work->unk_44              = work->unk_44 + 0x8000;
     if (count == 4) {
         g_SpadWork->unk_02++;
     }
@@ -48,7 +48,7 @@ INCLUDE_ASM(func_801EF58C);
 
 MATCH void func_801EF648(void) {
     if (func_8014DAEC() & BYTE_MASK) {
-        BATTLE_ACTIVE_WORK->unk_09--;
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_09--;
         g_SpadWork->unk_02++;
     }
 }

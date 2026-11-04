@@ -20,7 +20,7 @@ MATCH void func_801EEFC4(void) {
     PartyBattler* work;
 
     work = SP_REF(PartyBattler*, 0x44u);
-    if (work->unk_0B == 1) {
+    if (work->word_08.byte.unk_0B == 1) {
         work->step_01 = work->step_01 + 1;
     }
 }
@@ -50,8 +50,8 @@ INCLUDE_ASM(func_801EF27C);
 MATCH void func_801EF308(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_0A + 4;
-    g_SpadWork->unk_0A = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_0A + 4;
+    g_SpadWork->word_08.byte.unk_0A = timer;
     if (timer == 32) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -63,13 +63,13 @@ MATCH void func_801EF358(void) {
     u8            count;
 
     work = g_SpadWork;
-    work->unk_09 += 4;
-    work         = g_SpadWork;
-    count        = work->unk_0A - 1;
-    work->unk_0A = count;
+    work->word_08.byte.unk_09 += 4;
+    work                      = g_SpadWork;
+    count                     = work->word_08.byte.unk_0A - 1;
+    work->word_08.byte.unk_0A = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->unk_0B--;
+        active->word_08.byte.unk_0B--;
         func_801E5988();
     }
 }
@@ -89,12 +89,12 @@ MATCH void func_801EF3D0(void) {
 MATCH void func_801EF484(void) {
     PartyBattler* src;
 
-    src                    = (PartyBattler*)D_801EB4E0;
-    g_SpadWork->coord_x_34 = src->coord_x_34;
-    g_SpadWork->coord_y_38 = src->coord_y_38;
-    g_SpadWork->word_3C    = src->word_3C;
-    g_SpadWork->unk_09     = 0;
-    g_SpadWork->unk_02     = g_SpadWork->unk_02 + 1;
+    src                             = (PartyBattler*)D_801EB4E0;
+    g_SpadWork->coord_x_34          = src->coord_x_34;
+    g_SpadWork->coord_y_38          = src->coord_y_38;
+    g_SpadWork->word_3C             = src->word_3C;
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
 }
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"

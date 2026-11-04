@@ -36,7 +36,7 @@ MATCH void func_801EF338(void) {
     PartyBattler* work;
 
     work = (PartyBattler*)D_801EB4E0;
-    work->unk_0B--;
+    work->word_08.byte.unk_0B--;
     func_801E5988();
 }
 

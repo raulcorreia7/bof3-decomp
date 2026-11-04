@@ -5,9 +5,9 @@ MATCH void func_801E45DC(void) {
     u32           slot;
     u8            count;
 
-    work         = g_SpadWork;
-    count        = work->unk_0A - 1;
-    work->unk_0A = count;
+    work                      = g_SpadWork;
+    count                     = work->word_08.byte.unk_0A - 1;
+    work->word_08.byte.unk_0A = count;
     if (count == 0) {
         if ((g_BattleCurrentEnemy->target_flags_FC & 0x10) != 0) {
             func_800AAC88(g_BattleCurrentEnemy->damage_F8, g_SpadWork->slot);

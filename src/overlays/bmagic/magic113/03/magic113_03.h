@@ -10,11 +10,11 @@ static inline void Effect_CountUpTimer(void) {
     PartyBattler* work;
     u8            next;
 
-    work         = g_SpadWork;
-    next         = work->unk_0A + 1;
-    work->unk_0A = next;
+    work                      = g_SpadWork;
+    next                      = work->word_08.byte.unk_0A + 1;
+    work->word_08.byte.unk_0A = next;
     if (next == 0xC) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
         func_801E5988();
     }
 }

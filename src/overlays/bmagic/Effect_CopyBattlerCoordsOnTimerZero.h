@@ -9,17 +9,17 @@ MATCH void Effect_CopyBattlerCoordsOnTimerZero(void) {
     PartyBattler* src;
     PartyBattler* work;
 
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
-        src                 = BATTLE_ACTIVE_WORK;
-        work                = g_SpadWork;
-        work->coord_x_34    = src->coord_x_34;
-        work->coord_y_38    = src->coord_y_38;
-        work->word_3C       = src->word_3C;
-        work->unk_09        = 0x40;
-        g_SpadWork->unk_0A  = 0;
-        g_SpadWork->unk_0B  = 0;
-        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+        src                             = BATTLE_ACTIVE_WORK;
+        work                            = g_SpadWork;
+        work->coord_x_34                = src->coord_x_34;
+        work->coord_y_38                = src->coord_y_38;
+        work->word_3C                   = src->word_3C;
+        work->word_08.byte.unk_09       = 0x40;
+        g_SpadWork->word_08.byte.unk_0A = 0;
+        g_SpadWork->word_08.byte.unk_0B = 0;
+        g_SpadWork->step_01             = g_SpadWork->step_01 + 1;
     }
 }

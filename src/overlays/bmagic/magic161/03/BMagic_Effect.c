@@ -34,7 +34,7 @@ INCLUDE_ASM(func_801EF0E8);
 
 MATCH void func_801EF158(void) {
     if (func_8014DAEC() & BYTE_MASK) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
         g_SpadWork->unk_02++;
     }
 }

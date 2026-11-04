@@ -24,14 +24,14 @@ MATCH void func_801EF034(void) {
     PartyBattler* src;
     PartyBattler* dst;
 
-    if (--g_SpadWork->unk_09 == 0) {
-        dst                = g_SpadWork;
-        src                = D_801EB4E0;
-        dst->unk_0C        = 0xB;
-        dst->unk_2E.half   = src->unk_2E.half + 0x37;
-        dst->unk_30.half   = src->unk_30.half - 0x10;
-        dst->unk_09        = 0;
-        g_SpadWork->unk_0A = 0x20;
+    if (--g_SpadWork->word_08.byte.unk_09 == 0) {
+        dst                             = g_SpadWork;
+        src                             = D_801EB4E0;
+        dst->unk_0C                     = 0xB;
+        dst->unk_2E.half                = src->unk_2E.half + 0x37;
+        dst->unk_30.half                = src->unk_30.half - 0x10;
+        dst->word_08.byte.unk_09        = 0;
+        g_SpadWork->word_08.byte.unk_0A = 0x20;
         g_SpadWork->unk_02++;
     }
 }
@@ -44,22 +44,22 @@ MATCH void func_801EF1D0(void) {
     u8 value;
     u8 value2;
 
-    if (g_SpadWork->unk_0B != 0) {
-        value              = g_SpadWork->unk_09 + 4;
-        g_SpadWork->unk_09 = value;
+    if (g_SpadWork->word_08.byte.unk_0B != 0) {
+        value                           = g_SpadWork->word_08.byte.unk_09 + 4;
+        g_SpadWork->word_08.byte.unk_09 = value;
         if ((value & 0xFF) == 0x10) {
-            g_SpadWork->unk_0B = 0;
+            g_SpadWork->word_08.byte.unk_0B = 0;
         }
     } else {
-        value2             = g_SpadWork->unk_09 - 2;
-        g_SpadWork->unk_09 = value2;
+        value2                          = g_SpadWork->word_08.byte.unk_09 - 2;
+        g_SpadWork->word_08.byte.unk_09 = value2;
         if (!(value2 & 0xFF)) {
-            g_SpadWork->unk_0B = 1;
+            g_SpadWork->word_08.byte.unk_0B = 1;
         }
     }
-    if (D_801EB4E0->unk_0B == 1) {
+    if (D_801EB4E0->word_08.byte.unk_0B == 1) {
         SND_QueueSelectionFx(0x101);
-        g_SpadWork->unk_09 = 0x10;
+        g_SpadWork->word_08.byte.unk_09 = 0x10;
         g_SpadWork->unk_02 += 1;
     }
 }
@@ -68,11 +68,11 @@ MATCH void func_801EF2AC(void) {
     PartyBattler* work;
     u8            next;
 
-    work         = g_SpadWork;
-    next         = work->unk_0A - 2;
-    work->unk_0A = next;
+    work                      = g_SpadWork;
+    next                      = work->word_08.byte.unk_0A - 2;
+    work->word_08.byte.unk_0A = next;
     if (next == 8) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
         func_801E5988();
     }
 }
@@ -83,14 +83,14 @@ MATCH void func_801EF430(void) {
     PartyBattler* src;
     PartyBattler* dst;
 
-    if (--g_SpadWork->unk_09 == 0) {
-        dst                = g_SpadWork;
-        src                = D_801EB4E0;
-        dst->unk_0C        = 0xB;
-        dst->unk_2E.half   = src->unk_2E.half - 0x37;
-        dst->unk_30.half   = src->unk_30.half - 0x10;
-        dst->unk_09        = 0;
-        g_SpadWork->unk_0A = 0x20;
+    if (--g_SpadWork->word_08.byte.unk_09 == 0) {
+        dst                             = g_SpadWork;
+        src                             = D_801EB4E0;
+        dst->unk_0C                     = 0xB;
+        dst->unk_2E.half                = src->unk_2E.half - 0x37;
+        dst->unk_30.half                = src->unk_30.half - 0x10;
+        dst->word_08.byte.unk_09        = 0;
+        g_SpadWork->word_08.byte.unk_0A = 0x20;
         g_SpadWork->unk_02++;
     }
 }
@@ -110,7 +110,7 @@ INCLUDE_ASM(func_801EF834);
 INCLUDE_ASM(func_801EF9C4);
 
 MATCH void func_801EFA50(void) {
-    BATTLE_ACTIVE_WORK->unk_0B--;
+    BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
     func_801E5988();
 }
 

@@ -12,7 +12,7 @@ MATCH void func_801EEDB0(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    if (work->unk_0B == 0) {
+    if (work->word_08.byte.unk_0B == 0) {
         work->step_01++;
     }
 }
@@ -33,9 +33,9 @@ MATCH void func_801EEE70(void) {
 INCLUDE_ASM(func_801EEEE8);
 
 MATCH void func_801EF034(void) {
-    g_SpadWork->unk_09 += 2;
-    g_SpadWork->unk_0A += 2;
-    if (g_SpadWork->unk_09 == 0x10) {
+    g_SpadWork->word_08.byte.unk_09 += 2;
+    g_SpadWork->word_08.byte.unk_0A += 2;
+    if (g_SpadWork->word_08.byte.unk_09 == 0x10) {
         Bmagic_NextStep();
     }
 }

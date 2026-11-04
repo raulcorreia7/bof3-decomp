@@ -8,8 +8,8 @@ MATCH void func_801E10C8(void) {
     PartyBattler* owner;
     PartyBattler* work;
 
-    count              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = count;
+    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = count;
     if (count == 0) {
         if (g_SpadWork->unk_03 == 3) {
             g_GameState->stats.accessories[0] = ACCESSORY_NOTHING;
@@ -31,7 +31,7 @@ MATCH void func_801E10C8(void) {
         g_BattleEffects[slot].unk_27        = 6;
         work                                = g_SpadWork;
         g_BattleEffects[slot].work_74.party = owner;
-        Actor_SelectScript((work->unk_08 + 4) & BYTE_MASK);
+        Actor_SelectScript((work->word_08.byte.unk_08 + 4) & BYTE_MASK);
         SND_QueueSelectionFx(0x206);
         if (g_BattleEventFlags == 0) {
             func_801D9484();

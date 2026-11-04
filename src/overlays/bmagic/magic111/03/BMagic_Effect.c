@@ -40,10 +40,10 @@ MATCH void func_801EF0F0(void) {
     PartyBattler* work;
 
     work = (PartyBattler*)D_801EB4E0;
-    step = work->unk_0B;
+    step = work->word_08.byte.unk_0B;
     if (step < 2) {
-        work->unk_0B       = step - 1;
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        work->word_08.byte.unk_0B = step - 1;
+        g_SpadWork->unk_02        = g_SpadWork->unk_02 + 1;
     }
 }
 

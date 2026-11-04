@@ -15,7 +15,7 @@ MATCH void func_801F3DC0(void) {
     selection  = D_801F406C[index];
     result     = func_8015CB18(1, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        work         = (PartyBattler*)g_SpadWork;
-        work->unk_0B = (u8)result;
+        work                      = (PartyBattler*)g_SpadWork;
+        work->word_08.byte.unk_0B = (u8)result;
     }
 }

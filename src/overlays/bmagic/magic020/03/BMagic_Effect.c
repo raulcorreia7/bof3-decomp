@@ -18,9 +18,9 @@ MATCH void func_801EF234(void) {
     u8 timer;
 
     func_801EFD88();
-    if (g_SpadWork->unk_0B == 0) {
-        timer              = g_SpadWork->unk_09 - 1;
-        g_SpadWork->unk_09 = timer;
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+        g_SpadWork->word_08.byte.unk_09 = timer;
         if (timer == 0) {
             g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
         }
@@ -47,8 +47,8 @@ MATCH void func_801EF518(void) {
     selected = &g_BattleSelectedActor;
     func_800AF2B4(*selected, 0x60);
     if (func_800AF66C(*selected, 0x20000)) {
-        g_SpadWork->unk_09 = func_800AFF98();
-        D_801EB4E0->unk_0B = 0xFF;
+        g_SpadWork->word_08.byte.unk_09 = func_800AFF98();
+        D_801EB4E0->word_08.byte.unk_0B = 0xFF;
         g_SpadWork->unk_02++;
     }
 }
@@ -57,8 +57,8 @@ MATCH void func_801EF5A4(void) {
     u8 timer;
 
     func_8014DAEC();
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }

@@ -16,8 +16,8 @@ INCLUDE_ASM(func_801EEC94);
 MATCH void func_801EEF3C(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         func_800A9610(g_BattleTargetSelector, 0x20);
         g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
@@ -69,8 +69,8 @@ MATCH void func_801EFF24(void) {
 }
 
 MATCH void func_801EFF8C(void) {
-    g_SpadWork->unk_09 = 0;
-    g_SpadWork->unk_0A = 0x88;
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->word_08.byte.unk_0A = 0x88;
     Bmagic_NextStep();
 }
 
@@ -98,8 +98,8 @@ MATCH void func_801F038C(void) {
 }
 
 MATCH void func_801F03EC(void) {
-    g_SpadWork->unk_0B = 0;
-    g_SpadWork->unk_09 = 0;
+    g_SpadWork->word_08.byte.unk_0B = 0;
+    g_SpadWork->word_08.byte.unk_09 = 0;
     Actor_SelectScript(3);
     g_SpadWork->unk_02++;
 }

@@ -9,8 +9,8 @@ MATCH void func_800AD4D4(void) {
     u8                     index;
 
     work              = (PartyBattler*)g_SpadWork;
-    first             = work->unk_0B;
-    second            = work->unk_0B;
+    first             = work->word_08.byte.unk_0B;
+    second            = work->word_08.byte.unk_0B;
     remainder         = (u8)first % 6;
     work->unk_2E.half = D_80148628 + (remainder * 0x1E + 0x13);
     work->unk_30.half = (second / 3 * 16 & 0x1FE0) + (0x30 + D_8014862A);
@@ -18,7 +18,7 @@ MATCH void func_800AD4D4(void) {
     if (g_BattleGeneCount[0] != 0) {
         do {
             ptr = (PartyBattler*)g_SpadWork;
-            if (D_801463C4[index] == ptr->unk_0B) {
+            if (D_801463C4[index] == ptr->word_08.byte.unk_0B) {
                 ptr->unk_02 += 1;
             }
             index++;

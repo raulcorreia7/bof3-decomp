@@ -22,8 +22,8 @@ MATCH void func_801EEF28(void) {
     PartyBattler* battler;
     u8            value;
 
-    value              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = value;
+    value                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = value;
     if (!(value & 0xFF)) {
         g_SpadWork->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
         g_SpadWork->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
@@ -38,7 +38,7 @@ MATCH void func_801EEF28(void) {
                               0x200) &
                              0xFFF;
         SND_QueueSelectionFx(0x100);
-        g_SpadWork->unk_09 = 0x20;
+        g_SpadWork->word_08.byte.unk_09 = 0x20;
         g_SpadWork->unk_02 += 1;
     }
 }
@@ -48,9 +48,9 @@ INCLUDE_ASM(func_801EF04C);
 MATCH void func_801EF0B8(void) {
     PartyBattler* work;
 
-    work         = g_SpadWork;
-    work->unk_09 = work->unk_09 - 1;
-    if (work->unk_09 == 0) {
+    work                      = g_SpadWork;
+    work->word_08.byte.unk_09 = work->word_08.byte.unk_09 - 1;
+    if (work->word_08.byte.unk_09 == 0) {
         SND_QueueSelectionFx(0x101);
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -100,19 +100,19 @@ MATCH void func_801F04F4(void) {
 MATCH void func_801F05A4(void) {
     PartyBattler* src;
 
-    src                    = g_BattleSelectedActor;
-    g_SpadWork->coord_x_34 = src->coord_x_34;
-    g_SpadWork->coord_y_38 = src->coord_y_38;
-    g_SpadWork->word_3C    = src->word_3C;
-    g_SpadWork->unk_09     = 0;
-    g_SpadWork->unk_02     = g_SpadWork->unk_02 + 1;
+    src                             = g_BattleSelectedActor;
+    g_SpadWork->coord_x_34          = src->coord_x_34;
+    g_SpadWork->coord_y_38          = src->coord_y_38;
+    g_SpadWork->word_3C             = src->word_3C;
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
 }
 
 MATCH void func_801F05F4(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 + 4;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 4;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 16) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }

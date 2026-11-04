@@ -6,8 +6,8 @@
 MATCH void Effect_RequestTargetOnTimerZero(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         func_800A9610(g_BattleTargetSelector, 0x10);
         g_SpadWork->step_01 = g_SpadWork->step_01 + 1;

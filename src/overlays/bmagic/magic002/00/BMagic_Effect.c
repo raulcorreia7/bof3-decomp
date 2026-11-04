@@ -24,12 +24,12 @@ MATCH void func_801EEEBC(void) {
     work->unk_14 += 0x100;
     work->unk_18 += 4;
     work->unk_0C += work->unk_1C;
-    work->unk_09++;
+    work->word_08.byte.unk_09++;
     work->unk_10 += work->unk_20;
     draw = g_SpadWork;
     func_801EF1FC(draw->unk_0C >> 16, draw->unk_10 >> 16, (draw->unk_18 << 15) >> 16, (s16)draw->unk_14,
                   (s16)draw->unk_60, (s16)draw->unk_58);
-    if (g_SpadWork->unk_09 >= 0xB) {
+    if (g_SpadWork->word_08.byte.unk_09 >= 0xB) {
         g_SpadWork->step_01++;
     }
 }

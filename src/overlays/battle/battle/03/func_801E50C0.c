@@ -7,12 +7,12 @@ MATCH void func_801E50C0(void) {
         PartyBattler* work;
 
         work      = g_SpadWork;
-        countdown = work->unk_09;
+        countdown = work->word_08.byte.unk_09;
         if (countdown != 0) {
-            work->unk_09 = countdown - 1;
+            work->word_08.byte.unk_09 = countdown - 1;
         } else {
-            countdown    = work->unk_0A - 1;
-            work->unk_0A = countdown;
+            countdown                 = work->word_08.byte.unk_0A - 1;
+            work->word_08.byte.unk_0A = countdown;
             if (countdown != 0) {
                 g_SpadWork->unk_5D -= 0x10;
                 g_SpadWork->unk_5E -= 0x10;

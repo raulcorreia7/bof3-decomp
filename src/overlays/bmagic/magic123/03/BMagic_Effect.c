@@ -25,7 +25,7 @@ INCLUDE_ASM(func_801EF28C);
 INCLUDE_ASM(func_801EF4AC);
 
 MATCH void func_801EF550(void) {
-    BATTLE_ACTIVE_WORK->unk_0B--;
+    BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
     Actor_Clear();
 }
 

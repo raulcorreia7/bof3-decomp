@@ -14,10 +14,10 @@ MATCH void func_801EEF98(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    if (work->unk_0B != 0) {
-        work->unk_09  = 8;
-        work          = g_SpadWork;
-        work->step_01 = work->step_01 + 1;
+    if (work->word_08.byte.unk_0B != 0) {
+        work->word_08.byte.unk_09 = 8;
+        work                      = g_SpadWork;
+        work->step_01             = work->step_01 + 1;
     }
 }
 
@@ -71,10 +71,10 @@ MATCH void func_801EF3E4(void) {
     /* A store through the pointer may alias the cell, so each step reloads
      * it. */
     work = g_SpadWork;
-    work->unk_0B++;
+    work->word_08.byte.unk_0B++;
     work = g_SpadWork;
-    work->unk_09--;
-    if (work->unk_09 == 0) {
+    work->word_08.byte.unk_09--;
+    if (work->word_08.byte.unk_09 == 0) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -86,13 +86,13 @@ MATCH void func_801EF44C(void) {
     u8            count;
 
     work = g_SpadWork;
-    work->unk_0B++;
-    work         = g_SpadWork;
-    count        = work->unk_0A - 1;
-    work->unk_0A = count;
+    work->word_08.byte.unk_0B++;
+    work                      = g_SpadWork;
+    count                     = work->word_08.byte.unk_0A - 1;
+    work->word_08.byte.unk_0A = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->unk_0B++;
+        active->word_08.byte.unk_0B++;
         func_801E5988();
     }
 }
@@ -128,7 +128,7 @@ MATCH void func_801EF7D8(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_SpadWork->unk_0B++;
+    g_SpadWork->word_08.byte.unk_0B++;
 
     work                   = g_SpadWork;
     counter                = work->unk_0C + 1;
@@ -145,8 +145,8 @@ MATCH void func_801EF7D8(void) {
     velocity                   = rsin(*angle_cell) * D_1F800000;
     g_SpadWork->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
 
-    if (--g_SpadWork->unk_0A == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B++;
+    if (--g_SpadWork->word_08.byte.unk_0A == 0) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B++;
         func_801E5988();
     }
 }
@@ -171,9 +171,9 @@ MATCH void func_801F0090(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_SpadWork->unk_0B = (u8)(RANDOM_MASK(0xF));
-    g_SpadWork->unk_09 = 0;
-    g_SpadWork->unk_0A = 0;
+    g_SpadWork->word_08.byte.unk_0B = (u8)(RANDOM_MASK(0xF));
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->word_08.byte.unk_0A = 0;
 
     work                   = g_SpadWork;
     counter                = (work->unk_03 << 5) + 0x10;
@@ -197,11 +197,11 @@ MATCH void func_801F01AC(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    if (work->unk_0A < 16) {
-        work->unk_0A += 2;
+    if (work->word_08.byte.unk_0A < 16) {
+        work->word_08.byte.unk_0A += 2;
     } else {
-        work->unk_09 = 60;
-        work         = g_SpadWork;
+        work->word_08.byte.unk_09 = 60;
+        work                      = g_SpadWork;
         work->unk_02++;
     }
 }
@@ -218,7 +218,7 @@ MATCH void func_801F0314(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_SpadWork->unk_0B++;
+    g_SpadWork->word_08.byte.unk_0B++;
 
     work                   = g_SpadWork;
     counter                = work->unk_0C + 1;
@@ -235,10 +235,10 @@ MATCH void func_801F0314(void) {
     velocity                = rsin(*angle_cell) * D_1F800000;
     scratch                 = g_SpadWork;
     scratch->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
-    scratch->unk_0A -= 2;
+    scratch->word_08.byte.unk_0A -= 2;
 
-    if (g_SpadWork->unk_0A == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B++;
+    if (g_SpadWork->word_08.byte.unk_0A == 0) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B++;
         func_801E5988();
     }
 }

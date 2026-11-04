@@ -29,10 +29,10 @@ MATCH void func_801EF504(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->unk_09++;
+    work->word_08.byte.unk_09++;
     work = g_SpadWork;
-    work->unk_0A += 2;
-    if (work->unk_0A == 32) {
+    work->word_08.byte.unk_0A += 2;
+    if (work->word_08.byte.unk_0A == 32) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -41,8 +41,8 @@ MATCH void func_801EF504(void) {
 MATCH void func_801EF570(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 + 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0xA0) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -91,10 +91,10 @@ MATCH void func_801F0070(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->unk_09++;
+    work->word_08.byte.unk_09++;
     work = g_SpadWork;
-    work->unk_0A++;
-    if (work->unk_0A == 32) {
+    work->word_08.byte.unk_0A++;
+    if (work->word_08.byte.unk_0A == 32) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -103,8 +103,8 @@ MATCH void func_801F0070(void) {
 MATCH void func_801F00DC(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 + 1;
-    g_SpadWork->unk_09 = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 160) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -115,12 +115,12 @@ MATCH void func_801F012C(void) {
     u8            count;
 
     work = g_SpadWork;
-    work->unk_09++;
-    work         = g_SpadWork;
-    count        = work->unk_0A - 1;
-    work->unk_0A = count;
+    work->word_08.byte.unk_09++;
+    work                      = g_SpadWork;
+    count                     = work->word_08.byte.unk_0A - 1;
+    work->word_08.byte.unk_0A = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
         Actor_Clear();
     }
 }

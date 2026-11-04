@@ -51,10 +51,10 @@ MATCH void func_801EF534(void) {
 
     if (func_8014DAEC() & 0xFF) {
         if (g_BattleTargetSelector & 0x40) {
-            value2                    = g_SpadWork->unk_0B;
+            value2                    = g_SpadWork->word_08.byte.unk_0B;
             D_801EB630[value2].unk_00 = D_801EB630[value2].unk_00 & 0xBF;
         } else {
-            value                                 = g_SpadWork->unk_0B;
+            value                                 = g_SpadWork->word_08.byte.unk_0B;
             g_BattlePartyBattlers[value].flags_00 = g_BattlePartyBattlers[value].flags_00 & 0xBF;
         }
         g_SpadWork->unk_02 += 1;

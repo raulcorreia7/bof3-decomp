@@ -12,9 +12,9 @@ MATCH void func_801E0788(void) {
     func_801DD14C(g_SpadWork->slot);
     w = g_GameState;
     if (w->flags_124.value & 4) {
-        g_SpadWork->unk_09 = 30;
-        g_SpadWork->unk_03 = 1;
-        g_SpadWork->unk_04 = 0;
+        g_SpadWork->word_08.byte.unk_09 = 30;
+        g_SpadWork->unk_03              = 1;
+        g_SpadWork->unk_04              = 0;
     } else if (w->flags_128.value & 2) {
         half = &g_BattleState;
         if ((*half & 0x4000) && (D_801463CA == g_SpadWork->slot)) {
@@ -23,15 +23,15 @@ MATCH void func_801E0788(void) {
         g_SpadWork->unk_03 = 4;
     } else if (w->stats.accessories[0] == ACCESSORY_SOUL_GEM) {
         g_Characters[w->unk_13A[2]].accessories[0] = ACCESSORY_NOTHING;
-        g_SpadWork->unk_09                         = 30;
+        g_SpadWork->word_08.byte.unk_09            = 30;
         g_SpadWork->unk_03                         = 3;
     } else if (w->stats.accessories[1] == ACCESSORY_SOUL_GEM) {
         g_Characters[w->unk_13A[2]].accessories[1] = ACCESSORY_NOTHING;
-        g_SpadWork->unk_09                         = 30;
+        g_SpadWork->word_08.byte.unk_09            = 30;
         g_SpadWork->unk_03                         = 6;
     } else if (w->stats.armor == ARMOR_MANLY_CLOTHES) {
         g_Characters[w->unk_13A[2]].armor = ARMOR_NOTHING;
-        g_SpadWork->unk_09                = 30;
+        g_SpadWork->word_08.byte.unk_09   = 30;
         g_SpadWork->unk_03                = 5;
     } else {
         VOL(u8, g_BattleLivingPartyCount) -= 1;

@@ -24,8 +24,8 @@ INCLUDE_ASM(func_801EF03C);
 MATCH void func_801EF218(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_0A + 8;
-    g_SpadWork->unk_0A = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_0A + 8;
+    g_SpadWork->word_08.byte.unk_0A = timer;
     if (timer == 32) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -34,8 +34,8 @@ MATCH void func_801EF218(void) {
 MATCH void func_801EF268(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_0B + 1;
-    g_SpadWork->unk_0B = timer;
+    timer                           = g_SpadWork->word_08.byte.unk_0B + 1;
+    g_SpadWork->word_08.byte.unk_0B = timer;
     if (timer == 8) {
         func_800A9610(g_BattleTargetSelector, 0x10);
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
