@@ -6,6 +6,9 @@
 
 #include "overlays/area/world03.h"
 #include "menu/party.h"
+#include "work/area_spad.h"
+
+extern u8 D_801F4400[];
 
 /* The field step bytes the palette path tests. */
 /* The request value blob the selection handlers index. */
