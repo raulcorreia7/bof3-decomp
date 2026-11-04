@@ -17,7 +17,17 @@ INCLUDE_ASM(func_801EED68);
 
 INCLUDE_ASM(func_801EEE00);
 
-INCLUDE_ASM(func_801EEE84);
+MATCH void func_801EEE84(void) {
+    if (g_BattleTargetSelector < 3) {
+        func_801EF174();
+    } else {
+        func_801EF2DC();
+    }
+    if (g_InputPressed != 0) {
+        g_SpadWork->unk_0B = 0x83;
+        g_SpadWork->step_01++;
+    }
+}
 
 MATCH void func_801EEF04(void) {
     u16* flags;
