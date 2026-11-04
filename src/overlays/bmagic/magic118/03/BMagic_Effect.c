@@ -30,14 +30,7 @@ MATCH void func_801EEE20(void) {
     }
 }
 
-MATCH void func_801EEE8C(void) {
-    PartyBattler* work;
-
-    work = SP_REF(PartyBattler*, 0x44u);
-    if (work->word_08.byte.unk_0B == 1) {
-        work->step_01 = work->step_01 + 1;
-    }
-}
+#include "overlays/bmagic/Effect_NextStepOnWorkLastTick.h"
 
 #include "overlays/bmagic/Effect_CountDownTimerNextStep.h"
 

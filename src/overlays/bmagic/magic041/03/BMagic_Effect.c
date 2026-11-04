@@ -16,14 +16,7 @@ INCLUDE_ASM(func_801EEE14);
 
 INCLUDE_ASM(func_801EEEB4);
 
-MATCH void func_801EEFC4(void) {
-    PartyBattler* work;
-
-    work = SP_REF(PartyBattler*, 0x44u);
-    if (work->word_08.byte.unk_0B == 1) {
-        work->step_01 = work->step_01 + 1;
-    }
-}
+#include "overlays/bmagic/Effect_NextStepOnWorkLastTick.h"
 
 INCLUDE_ASM(func_801EEFF8);
 
