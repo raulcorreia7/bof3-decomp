@@ -2562,6 +2562,7 @@ Area_ResetCameraOffsetY = { addr = 0x801F53D0, type = "func", source = "zeroes g
 
 ["emi/world03/area136/13"]
 Actor_WalkWhileWithinLimit = { addr = 0x801F2D68, type = "func", source = "walks the script actor one step along facing 5 and rewinds the script cursor while its y position plus the facing-5 y step is at most the per-scene limit table entry D_801448ED selects (func_801F2D68 in area136, func_801F4840 in area188)" }
+Area_SubCameraOffsetY2 = { addr = 0x801F3148, source = "subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_AddCameraOffsetY2 = { addr = 0x801F3170, source = "adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 
 ["emi/world03/area139/13"]
