@@ -195,6 +195,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFBB0, source = "the module dispatcher index
 
 ["emi/bmagic/magic013/03"]
 Effect_StartOnZeroTick = { addr = 0x801EEF84, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+BMagic_AllocEffect = { addr = 0x801F0358, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 g_BMagicEffectFuncs = { addr = 0x801F03BC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic015/00"]
