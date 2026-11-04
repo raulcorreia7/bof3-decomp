@@ -32,12 +32,12 @@ MATCH void func_801EEEE4(void) {
     PartyBattler* dst;
 
     if (--g_SpadWork->unk_09 == 0) {
-        src             = BATTLE_ACTIVE_WORK;
-        dst             = g_SpadWork;
-        dst->coord_x_34 = src->coord_x_34;
-        dst->coord_y_38 = src->coord_y_38;
-        dst->word_3C    = src->word_3C;
-        dst->unk_5D     = 0x10;
+        src                = BATTLE_ACTIVE_WORK;
+        dst                = g_SpadWork;
+        dst->coord_x_34    = src->coord_x_34;
+        dst->coord_y_38    = src->coord_y_38;
+        dst->word_3C       = src->word_3C;
+        dst->unk_5D        = 0x10;
         g_SpadWork->unk_09 = 0x10;
         g_SpadWork->unk_0A = 4;
         g_SpadWork->unk_02++;
