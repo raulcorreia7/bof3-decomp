@@ -14,6 +14,7 @@ extern Callback      D_801D18D4[];
 extern Callback      D_801D18DC[];
 extern Callback      D_801D18E4[];
 extern u8            D_801D1948;
+extern u8            D_801D1944;
 
 /* The overlay's state byte the guarded step advances. */
 #endif
