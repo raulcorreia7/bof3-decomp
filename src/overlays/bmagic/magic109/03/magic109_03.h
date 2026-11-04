@@ -7,4 +7,6 @@
 
 extern MagicTaskFuncs D_801EEC04;
 
+void func_801EF0F8(s32 offset);
+
 #endif

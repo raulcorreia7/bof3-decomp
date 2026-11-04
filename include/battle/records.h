@@ -517,7 +517,8 @@ typedef struct PartyBattler {
     u8                unk_5E;
     u8                unk_5F;
     s32          unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
-    u8           pad_64[0xC];
+    s32          unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
+    u8           pad_68[8];
     u8           unk_70;
     u8           pad_71[3];
     /* +0x74..+0x117 is a Character copy: func_801DD08C copies a
