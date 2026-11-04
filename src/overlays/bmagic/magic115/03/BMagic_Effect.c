@@ -30,7 +30,26 @@ INCLUDE_ASM(func_801EF49C);
 
 INCLUDE_ASM(func_801EF5F8);
 
-INCLUDE_ASM(func_801EF690);
+MATCH void func_801EF690(void) {
+    g_SpadWork->unk_25      = 0x1D;
+    g_SpadWork->unk_26      = 0;
+    g_SpadWork->unk_40      = 0x10000;
+    g_SpadWork->unk_44      = 0x10000;
+    g_SpadWork->unk_48      = 1;
+    g_SpadWork->unk_27      = 0xA0;
+    g_SpadWork->unk_28      = 0;
+    g_SpadWork->unk_24      = 4;
+    g_SpadWork->unk_5D      = 0;
+    g_SpadWork->unk_5E      = 0;
+    g_SpadWork->unk_5F      = 0;
+    g_SpadWork->unk_5C      = 0;
+    g_SpadWork->unk_2A      = 0;
+    g_SpadWork->unk_29      = 4;
+    g_SpadWork->unk_2C.half = 0;
+    g_SpadWork->unk_2B      = 0;
+    Actor_SelectScript(1U);
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF7A4(void) {
     func_8014DAEC();
