@@ -8,8 +8,8 @@ MATCH void func_801F2F84(void) {
     if (actor->unk_09 == 0) {
         rect.x = 0x340;
         rect.y = 0x100;
-        rect.w = *(u16*)(D_801F43B8 + 4);
-        rect.h = *(u16*)(D_801F43B8 + 6);
+        rect.w = D_801F43BC;
+        rect.h = D_801F43BE;
         StoreImage(&rect, (u32*)AREA_WORK_WINDOW_ADDRESS);
         g_SpadWork->unk_01++;
     }
