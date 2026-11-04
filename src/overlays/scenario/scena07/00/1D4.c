@@ -70,7 +70,26 @@ MATCH void func_801F700C(void) {
     SYS_DISPATCH_TASK(D_801FDD50, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801F7050);
+MATCH void func_801F7050(void) {
+    Actor* work;
+    Actor* actor;
+    u8     i;
+
+    /* FAKE: the second pointer reproduces retail's copy of the scratch pointer (move into a2). */
+    work       = g_SpadWork;
+    D_800E4C1E = 0xC0;
+    actor      = work;
+    actor->vz  = 0;
+    for (i = 0; i < 16; i++) {
+        actor->vz += 0x800000;
+        actor->x.fixed += 0x10000;
+        actor->y.fixed += 0;
+        actor->z.fixed += actor->vz;
+    }
+    SND_PlayCue(0x202);
+    g_SpadWork->vz = -g_SpadWork->vz;
+    g_SpadWork->state_02++;
+}
 
 INCLUDE_ASM(func_801F70F8);
 
@@ -175,7 +194,17 @@ MATCH void func_801F7E68(void) {
     g_SpadWork->state_02++;
 }
 
-INCLUDE_ASM(func_801F7EF8);
+MATCH void func_801F7EF8(void) {
+    func_801F88B8(MEM_PTR(void, 0x800E48E0u));
+    func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
+    g_SpadWork->x.fixed += g_SpadWork->unk_0C;
+    g_SpadWork->y.fixed += g_SpadWork->unk_10;
+    g_SpadWork->z.fixed += g_SpadWork->vz;
+    if (g_SpadWork->x.fixed == g_SpadWork->unk_18 && g_SpadWork->y.fixed == g_SpadWork->unk_1C) {
+        g_SpadWork->unk_09 = 0x2F;
+        g_SpadWork->state_02++;
+    }
+}
 
 INCLUDE_ASM(func_801F7FA4);
 
