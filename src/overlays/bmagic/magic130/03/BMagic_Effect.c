@@ -46,17 +46,7 @@ MATCH void Effect_CountDownTimerStep_801EF42C(void) {
     BMAGIC_COUNT_DOWN_TIMER_STEP();
 }
 
-MATCH void func_801EF478(void) {
-    PartyBattler* work;
-
-    work                        = g_SpadWork;
-    work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
-    if (work->word_08.byte.timer_0A == 0) {
-        work                      = (PartyBattler*)D_801EB4E0;
-        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
-        func_801E5988();
-    }
-}
+#include "overlays/bmagic/Effect_CountDownAndFinish.h"
 
 INCLUDE_ASM(func_801EF4D4);
 
