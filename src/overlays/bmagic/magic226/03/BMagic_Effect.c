@@ -1,4 +1,5 @@
 #include "magic226_03.h"
+#include "sys/scene.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -22,7 +23,18 @@ INCLUDE_ASM(func_801EF10C);
 
 INCLUDE_ASM(func_801EF310);
 
-INCLUDE_ASM(func_801EF540);
+MATCH void func_801EF540(void) {
+    if ((g_SpadWork->unk_09 & 1) != 0) {
+        g_AreaCameraAngle.vx += 20;
+    } else {
+        g_AreaCameraAngle.vx -= 20;
+    }
+    if (--g_SpadWork->unk_09 == 0) {
+        g_AreaCameraAngle.vx = -0x2AA;
+        g_SpadWork->unk_09   = 0x3C;
+        g_SpadWork->unk_02++;
+    }
+}
 
 INCLUDE_ASM(func_801EF5F0);
 
