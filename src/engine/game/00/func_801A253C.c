@@ -29,7 +29,7 @@ MATCH void func_801A253C(Actor* entity) {
                         entity->flags_74 |= ACTOR_FLAG_MOVING;
                     }
                     if (!(entity->flags_74 & 0x40)) {
-                        state = (g_SpadWork->unk_58 < 8) ? 6 : 0;
+                        state = (g_SpadWork->script_pc < 8) ? 6 : 0;
                     } else {
                         state = 0xFF;
                     }

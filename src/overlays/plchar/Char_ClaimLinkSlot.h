@@ -1,11 +1,10 @@
-/* Waits for the work counter at +0x58 to reach 10, then claims a free actor
- * slot as the linked one (work byte +0x0B, type 0x3A), plays the walk cue,
- * clears the option byte and advances the task state. One definition shared by
- * the plchar character programs; each program includes it where the function
- * sits, and a change must keep every member matching. */
+/* Launches the facing probe once the character's script reaches
+ * CHAR_LAUNCH_SCRIPT_PC: claims a free actor slot for it, plays the cue, clears
+ * the options and advances the task state. One definition shared by the plchar
+ * character programs; every change here must verify every member. */
 MATCH void Char_ClaimLinkSlot(void) {
     func_8014D978();
-    if (g_SpadWork->unk_58 == 10) {
+    if (g_SpadWork->script_pc == CHAR_LAUNCH_SCRIPT_PC) {
         g_SpadWork->unk_0B = Actor_FindFreeSlot();
         if (g_SpadWork->unk_0B != 0xFF) {
             g_ActorSlots[g_SpadWork->unk_0B].flags_00 = 1;

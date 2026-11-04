@@ -29,7 +29,7 @@ MATCH s32 func_8015B870(u32 kind) {
         case 9:
             return D_80146871 & 1;
         case 10:
-            return g_SpadWork->unk_58;
+            return g_SpadWork->script_pc;
         case 11:
             return D_80145F09;
         case 12:

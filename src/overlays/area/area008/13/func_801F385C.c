@@ -11,7 +11,7 @@ MATCH void func_801F385C(void) {
     g_SpadWork = (Actor*)e;
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
         s->unk_01 = 0x0E;
-    } else if ((e->unk_58 == 2) && (e->unk_4A == 1)) {
+    } else if ((e->script_pc == 2) && (e->unk_4A == 1)) {
         s->unk_01 = 12;
     }
     g_SpadWork = s;

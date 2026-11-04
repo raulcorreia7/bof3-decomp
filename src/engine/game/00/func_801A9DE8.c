@@ -133,7 +133,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                 GAME_ENTITY_COUNTER = mode;
                 /* FAKE: counter store before work read. */
                 MATCH_BARRIER();
-                if ((work->unk_58 != mode) && (mode == *(table + state->index_0A + 2)))
+                if ((work->script_pc != mode) && (mode == *(table + state->index_0A + 2)))
                     SND_PlayCue((u16)(0x200u | *(table + state->index_0A + 1)));
             }
             state->index_0A += 2;

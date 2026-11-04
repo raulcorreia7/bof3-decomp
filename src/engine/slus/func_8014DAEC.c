@@ -13,14 +13,14 @@ MATCH u8 func_8014DAEC(void) {
     count              = g_SpadWork->unk_4A - 1;
     g_SpadWork->unk_4A = count;
     if ((count & BYTE_MASK) == 0) {
-        index = g_SpadWork->unk_58;
+        index = g_SpadWork->script_pc;
         if ((index >> 1) == g_SpadWork->unk_49) {
             g_SpadWork->unk_4A = 1;
             return 1;
         }
         if (*(u8*)((u32)g_SpadWork->source_50 + index) >= 0x80) {
-            g_SpadWork->unk_58 = *(u8*)((u32)g_SpadWork->source_50 + index + 1) << 1;
-            result             = 1;
+            g_SpadWork->script_pc = *(u8*)((u32)g_SpadWork->source_50 + index + 1) << 1;
+            result                = 1;
         }
         func_8014DB98();
     }

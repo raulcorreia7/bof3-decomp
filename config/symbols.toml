@@ -1839,7 +1839,7 @@ Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "builds the 
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
 Char_StartTurn_801CF544 = { addr = 0x801CF544, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
-Char_ClaimLinkSlot = { addr = 0x801CF91C, type = "func", source = "claims a free actor slot as the linked one (work byte +0x0B, type 0x3A) once the counter at +0x58 reaches 10, plays the walk cue and advances the task state" }
+Char_ClaimLinkSlot = { addr = 0x801CF91C, type = "func", source = "launches the facing probe once script_pc reaches CHAR_LAUNCH_SCRIPT_PC (script_pc is the position func_8014D978 and func_8014DAEC read the script stream at): claims a free actor slot of ACTOR_TYPE_FACING_PROBE, links it through the work byte +0x0B, plays the cue and advances the task state" }
 Char_PollScriptRequest = { addr = 0x801CFA28, type = "func", source = "polls the character script request once func_8014DAEC reports ready: a pending request starts its script and clears itself, otherwise a free actor slot at the work byte +0x0B clears the +0x2B marker and the panel mode byte" }
 
 ["emi/plchar/plp016/00"]
@@ -1859,7 +1859,7 @@ Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "builds the 
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
 Char_StartTurn_801CF968 = { addr = 0x801CF968, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
-Char_ClaimLinkSlot = { addr = 0x801CFD40, type = "func", source = "claims a free actor slot as the linked one (work byte +0x0B, type 0x3A) once the counter at +0x58 reaches 10, plays the walk cue and advances the task state" }
+Char_ClaimLinkSlot = { addr = 0x801CFD40, type = "func", source = "launches the facing probe once script_pc reaches CHAR_LAUNCH_SCRIPT_PC (script_pc is the position func_8014D978 and func_8014DAEC read the script stream at): claims a free actor slot of ACTOR_TYPE_FACING_PROBE, links it through the work byte +0x0B, plays the cue and advances the task state" }
 Char_PollScriptRequest = { addr = 0x801CFE4C, type = "func", source = "polls the character script request once func_8014DAEC reports ready: a pending request starts its script and clears itself, otherwise a free actor slot at the work byte +0x0B clears the +0x2B marker and the panel mode byte" }
 
 ["emi/plchar/plp026/00"]
@@ -1887,7 +1887,7 @@ Char_AdvanceScript = { addr = 0x801CEC30, type = "func", source = "advances the 
 Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "claims a g_ActorSlots field record and writes its kind, position and projected distance for the character proximity path" }
 Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "builds the 16.16 route position and probes the record table and map kind 0xF2 at the cell and its +1 neighbours" }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
-Char_ClaimLinkSlot = { addr = 0x801CF548, type = "func", source = "claims a free actor slot as the linked one (work byte +0x0B, type 0x3A) once the counter at +0x58 reaches 10, plays the walk cue and advances the task state" }
+Char_ClaimLinkSlot = { addr = 0x801CF548, type = "func", source = "launches the facing probe once script_pc reaches CHAR_LAUNCH_SCRIPT_PC (script_pc is the position func_8014D978 and func_8014DAEC read the script stream at): claims a free actor slot of ACTOR_TYPE_FACING_PROBE, links it through the work byte +0x0B, plays the cue and advances the task state" }
 Char_PollScriptRequest = { addr = 0x801CF654, type = "func", source = "polls the character script request once func_8014DAEC reports ready: a pending request starts its script and clears itself, otherwise a free actor slot at the work byte +0x0B clears the +0x2B marker and the panel mode byte" }
 Char_StartTurn_801CF76C = { addr = 0x801CF76C, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript = { addr = 0x801CF838, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
@@ -1910,7 +1910,7 @@ Char_ProbeFacingCell = { addr = 0x801CF940, type = "func", source = "the route-s
 Char_StartTurn_801CE448 = { addr = 0x801CE448, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CE514 = { addr = 0x801CE514, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
 Char_StartTurn = { addr = 0x801CEC40, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
-Char_ClaimLinkSlot = { addr = 0x801CF018, type = "func", source = "claims a free actor slot as the linked one (work byte +0x0B, type 0x3A) once the counter at +0x58 reaches 10, plays the walk cue and advances the task state" }
+Char_ClaimLinkSlot = { addr = 0x801CF018, type = "func", source = "launches the facing probe once script_pc reaches CHAR_LAUNCH_SCRIPT_PC (script_pc is the position func_8014D978 and func_8014DAEC read the script stream at): claims a free actor slot of ACTOR_TYPE_FACING_PROBE, links it through the work byte +0x0B, plays the cue and advances the task state" }
 Char_PollScriptRequest = { addr = 0x801CF124, type = "func", source = "polls the character script request once func_8014DAEC reports ready: a pending request starts its script and clears itself, otherwise a free actor slot at the work byte +0x0B clears the +0x2B marker and the panel mode byte" }
 Char_RunStepScript = { addr = 0x801CF330, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
 Char_WalkStep = { addr = 0x801CF470, type = "func", source = "runs one field-character route step, turning and probing then playing the walk or blocked animation" }
@@ -1967,7 +1967,7 @@ Char_StartTurn = { addr = 0x801CE448, type = "func", source = "starts the charac
 Char_RunStepScript = { addr = 0x801CE514, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
 Char_StartTurn_801CE664 = { addr = 0x801CE664, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CE730 = { addr = 0x801CE730, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
-Char_ClaimLinkSlot = { addr = 0x801CEA3C, type = "func", source = "claims a free actor slot as the linked one (work byte +0x0B, type 0x3A) once the counter at +0x58 reaches 10, plays the walk cue and advances the task state" }
+Char_ClaimLinkSlot = { addr = 0x801CEA3C, type = "func", source = "launches the facing probe once script_pc reaches CHAR_LAUNCH_SCRIPT_PC (script_pc is the position func_8014D978 and func_8014DAEC read the script stream at): claims a free actor slot of ACTOR_TYPE_FACING_PROBE, links it through the work byte +0x0B, plays the cue and advances the task state" }
 Char_PollScriptRequest = { addr = 0x801CEB48, type = "func", source = "polls the character script request once func_8014DAEC reports ready: a pending request starts its script and clears itself, otherwise a free actor slot at the work byte +0x0B clears the +0x2B marker and the panel mode byte" }
 Char_RunStepScript_801CED54 = { addr = 0x801CED54, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
 Char_WalkStep = { addr = 0x801CEE94, type = "func", source = "runs one field-character route step, turning and probing then playing the walk or blocked animation" }
@@ -2003,7 +2003,7 @@ Char_ClearModeIfSlotFree = { addr = 0x801CF5E4, type = "func", source = "clears 
 ["emi/plchar/plp567/00"]
 Char_StartTurn = { addr = 0x801CE448, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript_801CE514 = { addr = 0x801CE514, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
-Char_ClaimLinkSlot = { addr = 0x801CE820, type = "func", source = "claims a free actor slot as the linked one (work byte +0x0B, type 0x3A) once the counter at +0x58 reaches 10, plays the walk cue and advances the task state" }
+Char_ClaimLinkSlot = { addr = 0x801CE820, type = "func", source = "launches the facing probe once script_pc reaches CHAR_LAUNCH_SCRIPT_PC (script_pc is the position func_8014D978 and func_8014DAEC read the script stream at): claims a free actor slot of ACTOR_TYPE_FACING_PROBE, links it through the work byte +0x0B, plays the cue and advances the task state" }
 Char_PollScriptRequest = { addr = 0x801CE92C, type = "func", source = "polls the character script request once func_8014DAEC reports ready: a pending request starts its script and clears itself, otherwise a free actor slot at the work byte +0x0B clears the +0x2B marker and the panel mode byte" }
 Char_StartTurn_801CEA44 = { addr = 0x801CEA44, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript = { addr = 0x801CEB10, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
@@ -2017,7 +2017,7 @@ Char_ProbeFacingCell = { addr = 0x801D05D0, type = "func", source = "the route-s
 ["emi/plchar/plp578/00"]
 Char_StartTurn_801CE448 = { addr = 0x801CE448, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CE514 = { addr = 0x801CE514, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
-Char_ClaimLinkSlot = { addr = 0x801CE820, type = "func", source = "claims a free actor slot as the linked one (work byte +0x0B, type 0x3A) once the counter at +0x58 reaches 10, plays the walk cue and advances the task state" }
+Char_ClaimLinkSlot = { addr = 0x801CE820, type = "func", source = "launches the facing probe once script_pc reaches CHAR_LAUNCH_SCRIPT_PC (script_pc is the position func_8014D978 and func_8014DAEC read the script stream at): claims a free actor slot of ACTOR_TYPE_FACING_PROBE, links it through the work byte +0x0B, plays the cue and advances the task state" }
 Char_PollScriptRequest = { addr = 0x801CE92C, type = "func", source = "polls the character script request once func_8014DAEC reports ready: a pending request starts its script and clears itself, otherwise a free actor slot at the work byte +0x0B clears the +0x2B marker and the panel mode byte" }
 Char_StartFacingTurn = { addr = 0x801CEA44, type = "func", source = "starts the turn to the nearer of facings 3 and 5: stores that facing and its Actor_GetTurnStep sign, sets the timer byte to 2 and advances the task state; on scenario 15 it only clears the panel mode byte" }
 Char_RunStepScript = { addr = 0x801CEB38, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }

@@ -15,15 +15,15 @@ MATCH u8 func_8014D978(void) {
     result     = 0;
     if (--first_work->unk_4A == 0) {
         work  = g_SpadWork;
-        index = work->unk_58;
+        index = work->script_pc;
         if ((index >> 1) == work->unk_49) {
-            work->unk_58 = 0;
-            result       = 1;
+            work->script_pc = 0;
+            result          = 1;
         } else {
             entry = work->source_50 + index;
             if (entry[0] >= 0x80U) {
-                work->unk_58 = (u16)(entry[1] * 2);
-                result       = 1;
+                work->script_pc = (u16)(entry[1] * 2);
+                result          = 1;
             }
         }
         func_8014DB98();

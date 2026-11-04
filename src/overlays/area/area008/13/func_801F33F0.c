@@ -19,12 +19,12 @@ MATCH void func_801F33F0(void) {
         g_ScriptVars[1] = 2;
         *flag           = next;
         SND_PlayCue(EMI_CUE_ID(2, 13));
-        if (((Actor*)g_SpadWork)->unk_58 < 5u) {
+        if (((Actor*)g_SpadWork)->script_pc < 5u) {
             D_80146876[0] = 0xFF;
         }
         Actor_SelectScript(2);
         s->unk_01 = 7;
-    } else if (e->unk_58 == 8 && e->unk_4A == 1) {
+    } else if (e->script_pc == 8 && e->unk_4A == 1) {
         Actor_SelectScript(4);
         s->unk_01 = 4;
     }

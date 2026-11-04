@@ -190,7 +190,7 @@ MATCH void func_801F7BB0(void) {
     ptr   = &actor->unk_0C;
     func_801F7FFC(ptr);
     func_801F8170(ptr);
-    actor->unk_58 += 4;
+    actor->script_pc += 4;
     value              = g_SpadWork->unk_09 - 1;
     g_SpadWork->unk_09 = value;
     if (!(value & 0xFF)) {

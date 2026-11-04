@@ -172,7 +172,7 @@ typedef struct Actor {
     u8*            source_50;      /* 0x50 - cursor into the area script stream (Actor_CopyScriptEntry,
                                 *        Actor_SeekScript) */
     ActorRange     range_54;       /* 0x54 - range record; +2 range, +3 bit 0x10 */
-    u16            unk_58;         /* 0x58 - per-slot counter */
+    u16            script_pc;      /* 0x58 - byte position in the script stream at source_50; command n is at 2n */
     u16            unk_5A;         /* 0x5A */
     ActorTint      tint;           /* 0x5C */
     s32            unk_60;         /* 0x60 */
