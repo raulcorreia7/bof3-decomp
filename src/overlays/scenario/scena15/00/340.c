@@ -72,7 +72,21 @@ INCLUDE_ASM(func_801F7D1C);
 
 INCLUDE_ASM(func_801F7E2C);
 
-INCLUDE_ASM(func_801F7F5C);
+MATCH void func_801F7F5C(void) {
+    s16 pos[2];
+
+    func_801F83AC(pos);
+    if (g_SpadWork->tint.signed_bytes.unk_5D != 0) {
+        g_SpadWork->tint.signed_bytes.unk_5D -= 2;
+    }
+    if (g_SpadWork->tint.signed_bytes.unk_5E != 0) {
+        g_SpadWork->tint.signed_bytes.unk_5E -= 1;
+    }
+    func_801F81D8(pos[0], pos[1]);
+    if ((g_SpadWork->tint.word & 0xFFFF00) == 0) {
+        Actor_Clear();
+    }
+}
 
 INCLUDE_ASM(func_801F7FFC);
 
