@@ -26,10 +26,7 @@ INCLUDE_ASM(func_801EF27C);
 
 INCLUDE_ASM(func_801EF49C);
 
-MATCH void func_801EF5C4(void) {
-    BMAGIC_TICK_EFFECT_WORK();
-    func_801E5988();
-}
+#include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 INCLUDE_ASM(func_801EF5F8);
 
@@ -44,7 +41,6 @@ MATCH void func_801EF7A4(void) {
 
 INCLUDE_ASM(func_801EF7F4);
 
-MATCH void func_801EF888(void) {
-    BMAGIC_TICK_EFFECT_WORK();
-    func_801E5988();
+MATCH void Effect_TickDownAndClear_801EF888(void) {
+    EFFECT_TICK_DOWN_AND_CLEAR();
 }

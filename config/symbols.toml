@@ -192,6 +192,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF89C, source = "the module dispatcher index
 Effect_PlayOnce = { addr = 0x801EEF58, type = "func", source = "plays the effect the target selector chose and clears it" }
 
 ["emi/bmagic/magic012/00"]
+Effect_TickDownAndClear = { addr = 0x801EF670, type = "func", source = "decrements the active battler's effect ticker byte at +0x0B and runs func_801E5988, which clears the effect work record D_801EC2E0 (the call Effect_StartPlaying makes); one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801EFBB0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic013/03"]
@@ -204,6 +205,7 @@ Effect_StartPlaying = { addr = 0x801EF1CC, type = "func", source = "byte-identic
 Effect_PlayOnce = { addr = 0x801EF200, type = "func", source = "plays the effect the target selector chose and clears it" }
 Effect_StartPlaying_801EF610 = { addr = 0x801EF610, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic015/00@0x801EF1CC" }
 Effect_StartPlaying_801EF9B0 = { addr = 0x801EF9B0, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic015/00@0x801EF1CC" }
+Effect_TickDownAndClear = { addr = 0x801F0300, type = "func", source = "decrements the active battler's effect ticker byte at +0x0B and runs func_801E5988, which clears the effect work record D_801EC2E0 (the call Effect_StartPlaying makes); one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F1630, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic017/03"]
@@ -226,6 +228,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFE00, source = "the module dispatcher index
 ["emi/bmagic/magic038/03"]
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 Effect_StartOnZeroTick = { addr = 0x801EF084, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+Effect_TickDownAndClear = { addr = 0x801EF884, type = "func", source = "decrements the active battler's effect ticker byte at +0x0B and runs func_801E5988, which clears the effect work record D_801EC2E0 (the call Effect_StartPlaying makes); one body shared with the other bmagic overlays" }
 Effect_TickOnZeroTick = { addr = 0x801EF954, type = "func", source = "when the effect ticker is zero, ticks the other battler's ticker down and runs the effect step" }
 g_BMagicEffectFuncs = { addr = 0x801EF9A4, source = "the module dispatcher indexes it with the shared spad step byte" }
 
@@ -265,6 +268,8 @@ g_BMagicEffectFuncs = { addr = 0x801F0A14, source = "the module dispatcher index
 
 ["emi/bmagic/magic045/00"]
 Effect_StartOnZeroTick = { addr = 0x801EEE58, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+Effect_TickDownAndClear = { addr = 0x801EF3D8, type = "func", source = "decrements the active battler's effect ticker byte at +0x0B and runs func_801E5988, which clears the effect work record D_801EC2E0 (the call Effect_StartPlaying makes); one body shared with the other bmagic overlays" }
+Effect_TickDownAndClear_801EF8A4 = { addr = 0x801EF8A4, type = "func", source = "byte-identical to Effect_TickDownAndClear at emi/bmagic/magic045/00@0x801EF3D8" }
 g_BMagicEffectFuncs = { addr = 0x801EF8D8, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic046/03"]
@@ -297,6 +302,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0550, source = "the module dispatcher index
 ["emi/bmagic/magic054/03"]
 Effect_StartPlaying = { addr = 0x801EF0B8, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic001/00@0x801EEFA4" }
 Effect_CountDownAndPlay = { addr = 0x801EF0EC, type = "func", source = "counts the effect timer down; at zero plays the effect the target selector chose" }
+Effect_TickDownAndClear = { addr = 0x801EF624, type = "func", source = "decrements the active battler's effect ticker byte at +0x0B and runs func_801E5988, which clears the effect work record D_801EC2E0 (the call Effect_StartPlaying makes); one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801EF658, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic055/03"]
@@ -584,6 +590,8 @@ g_BMagicEffectFuncs = { addr = 0x801F121C, source = "the module dispatcher index
 
 ["emi/bmagic/magic115/03"]
 Effect_PlayOnZeroTick = { addr = 0x801EEFF4, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+Effect_TickDownAndClear = { addr = 0x801EF5C4, type = "func", source = "decrements the active battler's effect ticker byte at +0x0B and runs func_801E5988, which clears the effect work record D_801EC2E0 (the call Effect_StartPlaying makes); one body shared with the other bmagic overlays" }
+Effect_TickDownAndClear_801EF888 = { addr = 0x801EF888, type = "func", source = "byte-identical to Effect_TickDownAndClear at emi/bmagic/magic115/03@0x801EF5C4" }
 g_BMagicEffectFuncs = { addr = 0x801EF8BC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic117/00"]

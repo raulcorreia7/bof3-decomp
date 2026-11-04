@@ -61,7 +61,4 @@ MATCH void func_801EF534(void) {
     }
 }
 
-MATCH void func_801EF624(void) {
-    BMAGIC_TICK_EFFECT_WORK();
-    func_801E5988();
-}
+#include "overlays/bmagic/Effect_TickDownAndClear.h"

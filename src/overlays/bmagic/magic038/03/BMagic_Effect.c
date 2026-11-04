@@ -26,10 +26,7 @@ INCLUDE_ASM(func_801EF590);
 
 INCLUDE_ASM(func_801EF710);
 
-MATCH void func_801EF884(void) {
-    BMAGIC_TICK_EFFECT_WORK();
-    func_801E5988();
-}
+#include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF8B8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 11), 2, g_SpadWork);

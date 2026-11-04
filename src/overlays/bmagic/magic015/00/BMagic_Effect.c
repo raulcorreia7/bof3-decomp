@@ -100,10 +100,7 @@ INCLUDE_ASM(func_801F0194);
 
 INCLUDE_ASM(func_801F0248);
 
-MATCH void func_801F0300(void) {
-    BMAGIC_TICK_EFFECT_WORK();
-    func_801E5988();
-}
+#include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 INCLUDE_ASM(func_801F0334);
 
