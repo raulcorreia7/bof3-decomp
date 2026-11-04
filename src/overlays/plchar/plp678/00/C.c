@@ -56,7 +56,16 @@ INCLUDE_ASM(func_801CEF64);
 
 INCLUDE_ASM(func_801CEFD0);
 
-INCLUDE_ASM(func_801CF108);
+MATCH void func_801CF108(void) {
+    Actor* work = g_SpadWork;
+
+    if ((g_ActorSlots[work->unk_0B].flags_00 == 0 || g_ActorSlots[work->unk_0B].unk_01 == 1) &&
+        g_AreaCameraMoving == 0) {
+        work->unk_2B                   = 0;
+        g_GameState->mode_12B.s8_value = 0;
+    }
+    func_8014D978();
+}
 
 INCLUDE_ASM(func_801CF1A4);
 
