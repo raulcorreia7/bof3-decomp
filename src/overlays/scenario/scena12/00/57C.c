@@ -45,7 +45,12 @@ MATCH void func_801F7518(void) {
     SCENA12_START_SCRIPT();
 }
 
-INCLUDE_ASM(func_801F759C);
+MATCH void func_801F759C(void) {
+    func_801F75EC();
+    if ((g_GameStateIndex != 2) && (g_GameEntryState != 4)) {
+        func_80196070();
+    }
+}
 
 MATCH void func_801F75EC(void) {
     char* buffer;
