@@ -44,6 +44,7 @@ s32  Area_StepSpawnSlots(void);
 void func_801F3F30(AreaSpawnSlot* slot);
 
 #define AREA_SPAWN_SLOT_DRAW func_801F3F30
+#define AREA_SPAWN_SLOT_STEP 0x10
 /* func_801F3DE0 */
 void Area_ClaimSpawnSlot(void);
 void func_801F44B4(void);

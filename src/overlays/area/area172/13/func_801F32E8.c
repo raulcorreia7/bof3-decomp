@@ -8,7 +8,7 @@ MATCH void func_801F32E8(void) {
         func_801F38E8();
     }
     func_801F3FAC();
-    func_801F3984();
+    Area_StepSpawnSlots();
     if (g_UiWindowEffectBusy == 0) {
         UI_SetMode(9);
         g_AreaDrawFlags = 0;

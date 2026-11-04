@@ -41,6 +41,7 @@ extern s32  Area_StepSpawnSlots(void);
 extern void func_801F53BC(AreaSpawnSlot* slot);
 
 #define AREA_SPAWN_SLOT_DRAW func_801F53BC
+#define AREA_SPAWN_SLOT_STEP 0x10
 extern void func_801F5940(void);
 void        func_801F4D44(void);
 void        func_801F5050(u8 level);
