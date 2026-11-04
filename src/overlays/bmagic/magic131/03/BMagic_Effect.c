@@ -84,7 +84,12 @@ MATCH void func_801F0100(void) {
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
 
-INCLUDE_ASM(func_801F01F8);
+MATCH void func_801F01F8(void) {
+    if ((BATTLE_ACTIVE_WORK->word_08.byte.unk_09 == 0) && (EMI_LoaderIsReady() != 0)) {
+        g_SpadWork->word_08.byte.timer_0A = 8;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountDownAndStep.h"
 
