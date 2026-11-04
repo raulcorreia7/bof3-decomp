@@ -22,7 +22,16 @@ MATCH void func_801CE610(void) {
 
 INCLUDE_ASM(func_801CE654);
 
-INCLUDE_ASM(func_801CE83C);
+MATCH void func_801CE83C(void) {
+    if (g_SpadWork->unk_09 == 0) {
+        g_GameState->mode_12B.s8_value = 0;
+        g_GameFlags &= ~0x1000;
+    } else {
+        g_SpadWork->unk_09--;
+        func_801B0DFC();
+    }
+    func_8014D978();
+}
 
 INCLUDE_ASM(func_801CE8AC);
 
@@ -60,7 +69,15 @@ INCLUDE_ASM(func_801CF1FC);
 
 #include "overlays/plchar/Char_SelectScriptAndStep.h"
 
-INCLUDE_ASM(func_801CF38C);
+MATCH void func_801CF38C(void) {
+    Actor* work = g_SpadWork;
+
+    if ((g_ActorSlots[work->unk_06].flags_00 == 0 || g_ActorSlots[work->unk_06].unk_01 == 1) &&
+        g_AreaCameraMoving == 0) {
+        work->unk_06 = 0;
+        g_SpadWork->unk_03 -= 2;
+    }
+}
 
 INCLUDE_ASM(func_801CF420);
 
@@ -77,7 +94,16 @@ INCLUDE_ASM(func_801CF75C);
 
 INCLUDE_ASM(func_801CF7C8);
 
-INCLUDE_ASM(func_801CF900);
+MATCH void func_801CF900(void) {
+    Actor* work = g_SpadWork;
+
+    if ((g_ActorSlots[work->unk_0B].flags_00 == 0 || g_ActorSlots[work->unk_0B].unk_01 == 1) &&
+        g_AreaCameraMoving == 0) {
+        work->unk_2B                   = 0;
+        g_GameState->mode_12B.s8_value = 0;
+    }
+    func_8014D978();
+}
 
 INCLUDE_ASM(func_801CF99C);
 
@@ -87,7 +113,28 @@ MATCH void func_801CFCA4(void) {
     SYS_DISPATCH_TASK(D_801D09D0, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801CFCE8);
+MATCH void func_801CFCE8(void) {
+    s32 to_back;
+    s32 to_away;
+
+    if (g_SceneState.scenario_id == 15) {
+        g_GameState->mode_12B.s8_value = 0;
+    } else {
+        to_back = g_SpadWork->direction_08 - 3;
+        to_back = ABS(to_back);
+        to_away = g_SpadWork->direction_08 - 5;
+        to_away = ABS(to_away);
+        if (to_away < to_back) {
+            g_SpadWork->unk_0B = func_801B2D00(5);
+            g_SpadWork->unk_03 = 5;
+        } else {
+            g_SpadWork->unk_0B = func_801B2D00(3);
+            g_SpadWork->unk_03 = 3;
+        }
+        g_SpadWork->unk_09 = 2;
+        g_SpadWork->state_02++;
+    }
+}
 
 MATCH void Char_RunStepScript_801CFDDC(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
