@@ -2468,36 +2468,47 @@ Area_Update = { addr = 0x801F3958, type = "func", source = "the area frame updat
 
 ["emi/world04/area175/13"]
 Area_InitSpin = { addr = 0x801F30CC, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
+Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area176/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area177/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area178/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area179/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area180/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area181/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area182/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area183/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area184/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area185/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area187/13"]
 Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
