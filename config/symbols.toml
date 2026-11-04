@@ -159,6 +159,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0B00, source = "the module dispatcher index
 
 ["emi/bmagic/magic004/03"]
 Effect_ReloadTimerAndStep = { addr = 0x801EF9A0, type = "func", source = "reloads the effect timer with the value func_800AFF98 returns and advances the effect step" }
+Effect_LowerTickerStepOnReady = { addr = 0x801EFA70, type = "func", source = "lowers the active battler's ticker byte at +0x0B and advances the effect step byte at +0x02 once the low byte of func_8014DAEC is set; one body shared with the other bmagic overlays" }
 Effect_StepWhileTickUnderTwo = { addr = 0x801EFBA8, type = "func", source = "advances the effect step while the other battler's effect ticker is under 2" }
 g_BMagicEffectFuncs = { addr = 0x801EFE58, source = "the module dispatcher indexes it with the shared spad step byte" }
 
@@ -793,6 +794,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF420, source = "the module dispatcher index
 BMagic_RunStep = { addr = 0x801EEC24, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 Effect_StartPlaying = { addr = 0x801EEF08, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic001/00@0x801EEFA4" }
 Effect_ReloadTimerAndStep = { addr = 0x801EF024, type = "func", source = "reloads the effect timer with the value func_800AFF98 returns and advances the effect step" }
+Effect_LowerTickerStepOnReady = { addr = 0x801EF158, type = "func", source = "lowers the active battler's ticker byte at +0x0B and advances the effect step byte at +0x02 once the low byte of func_8014DAEC is set; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801EF3E8, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic162/03"]
