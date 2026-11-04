@@ -59,7 +59,15 @@ INCLUDE_ASM(func_801CF000);
 
 #include "overlays/plchar/Char_SelectScriptAndStep.h"
 
-INCLUDE_ASM(func_801CF190);
+MATCH void func_801CF190(void) {
+    Actor* work = g_SpadWork;
+
+    if ((g_ActorSlots[work->unk_06].flags_00 == 0 || g_ActorSlots[work->unk_06].unk_01 == 1) &&
+        g_AreaCameraMoving == 0) {
+        work->unk_06 = 0;
+        g_SpadWork->unk_03 -= 2;
+    }
+}
 
 INCLUDE_ASM(func_801CF224);
 
@@ -76,7 +84,16 @@ INCLUDE_ASM(func_801CF560);
 
 INCLUDE_ASM(func_801CF5CC);
 
-INCLUDE_ASM(func_801CF704);
+MATCH void func_801CF704(void) {
+    Actor* work = g_SpadWork;
+
+    if ((g_ActorSlots[work->unk_0B].flags_00 == 0 || g_ActorSlots[work->unk_0B].unk_01 == 1) &&
+        g_AreaCameraMoving == 0) {
+        work->unk_2B                   = 0;
+        g_GameState->mode_12B.s8_value = 0;
+    }
+    func_8014D978();
+}
 
 INCLUDE_ASM(func_801CF7A0);
 
@@ -86,7 +103,28 @@ MATCH void func_801CFAA8(void) {
     SYS_DISPATCH_TASK(D_801D07D8, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801CFAEC);
+MATCH void func_801CFAEC(void) {
+    s32 to_back;
+    s32 to_away;
+
+    if (g_SceneState.scenario_id == 15) {
+        g_GameState->mode_12B.s8_value = 0;
+    } else {
+        to_back = g_SpadWork->direction_08 - 3;
+        to_back = ABS(to_back);
+        to_away = g_SpadWork->direction_08 - 5;
+        to_away = ABS(to_away);
+        if (to_away < to_back) {
+            g_SpadWork->unk_0B = func_801B2D00(5);
+            g_SpadWork->unk_03 = 5;
+        } else {
+            g_SpadWork->unk_0B = func_801B2D00(3);
+            g_SpadWork->unk_03 = 3;
+        }
+        g_SpadWork->unk_09 = 2;
+        g_SpadWork->state_02++;
+    }
+}
 
 MATCH void Char_RunStepScript_801CFBE0(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
