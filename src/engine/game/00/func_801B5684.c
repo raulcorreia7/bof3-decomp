@@ -12,6 +12,7 @@ MATCH s32 func_801B5684(void) {
             }
             goto block_5; /* the step did not start */
         }
+        /* Duplicate return node #6. Try simplifying control flow for better match */
         return 0;
     }
 block_5:

@@ -152,6 +152,7 @@ block_20:
             block_42:
                 return 0x10U;
             }
+            /* Duplicate return node #62. Try simplifying control flow for better match */
             return val15;
         }
         if ((buffer[0] == 0xA3) && (buffer[1] == buffer[0])) {
@@ -162,6 +163,7 @@ block_20:
         if ((tmp1 == 0xA0) && ((buffer[1] & 0xF0) == tmp1)) {
             return 0xA1U;
         }
+        /* Duplicate return node #62. Try simplifying control flow for better match */
         return val15;
     }
 block_50:
