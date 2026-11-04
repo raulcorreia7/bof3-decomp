@@ -59,9 +59,28 @@ MATCH void func_801EFA70(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFACC);
+MATCH void func_801EFACC(void) {
+    u8 temp_v1;
 
-INCLUDE_ASM(func_801EFB5C);
+    g_SpadWork->word_08.byte.unk_0B += 2;
+    g_SpadWork->word_08.byte.unk_09 += 1;
+    temp_v1 = g_SpadWork->word_08.byte.timer_0A;
+    if (temp_v1 < 0x10U) {
+        g_SpadWork->word_08.byte.timer_0A = temp_v1 + 1;
+    }
+    if (g_SpadWork->word_08.byte.unk_09 == 0x18) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
+
+MATCH void func_801EFB5C(void) {
+    g_SpadWork->word_08.byte.unk_0B += 2;
+    g_SpadWork->word_08.byte.unk_09 += 1;
+    g_SpadWork->word_08.byte.timer_0A -= 1;
+    if (g_SpadWork->word_08.byte.unk_09 == 0x28) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EFBE4(void) {
     PartyBattler* work;
