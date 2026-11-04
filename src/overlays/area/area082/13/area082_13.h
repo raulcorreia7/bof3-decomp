@@ -16,4 +16,6 @@ void func_801F3500(void);
 void func_801F5388(s32 arg0);
 void func_801F5428(s32 arg0);
 
+void func_801F4430(void);
+
 #endif
