@@ -38,7 +38,29 @@ MATCH void func_801F7530(void) {
     actor->unk_01 = actor->unk_01 + 1;
 }
 
-INCLUDE_ASM(func_801F7554);
+MATCH void func_801F7554(void) {
+    ActorSlot* spawned;
+    Actor*     actor;
+    u8         slot;
+
+    if ((SP_REF(Actor*, 0x44)->unk_0C & 0xF) == 0) {
+        slot = Actor_FindFreeSlot();
+        if (slot != GAME_NONE) {
+            spawned           = &g_ActorSlots[slot];
+            spawned->flags_00 = 1;
+            spawned->type     = 0x26;
+            actor             = g_SpadWork;
+            spawned->x.fixed  = actor->x.fixed;
+            spawned->y.fixed  = actor->y.fixed;
+            spawned->z.fixed  = Area_SampleHeight(actor->x.fixed, actor->y.fixed) << 16;
+        }
+    }
+    actor = g_SpadWork;
+    actor->unk_0C -= 1;
+    if (actor->unk_0C == 0) {
+        actor->unk_01 += 1;
+    }
+}
 
 MATCH void func_801F7640(void) {
     Actor_Clear();
