@@ -40,7 +40,18 @@ MATCH void func_801EF780(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 1, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EF7C4);
+MATCH void func_801EF7C4(void) {
+    g_SpadWork->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
+    g_SpadWork->coord_x_34.raw         = D_801EB4E0->coord_x_34.raw;
+    g_SpadWork->coord_y_38.raw         = D_801EB4E0->coord_y_38.raw;
+    g_SpadWork->word_3C.word           = D_801EB4E0->word_3C.word + 0x02000000;
+    func_800AF764(g_SpadWork);
+    SND_QueueSelectionFx(0x100);
+    g_SpadWork->word_08.byte.unk_0B   = 0;
+    g_SpadWork->word_08.byte.unk_09   = 0xF;
+    g_SpadWork->word_08.byte.timer_0A = 3;
+    g_SpadWork->unk_02 += 1;
+}
 
 INCLUDE_ASM(func_801EF884);
 
