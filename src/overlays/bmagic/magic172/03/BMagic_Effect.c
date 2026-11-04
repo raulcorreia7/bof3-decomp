@@ -28,18 +28,7 @@ INCLUDE_ASM(func_801EF3A4);
 
 INCLUDE_ASM(func_801EF430);
 
-MATCH void func_801EF4BC(void) {
-    PartyBattler* work;
-
-    work = g_SpadWork;
-    work->unk_09 -= 2;
-    if (work->unk_09 == 0) {
-        work = (PartyBattler*)D_801EB4E0;
-        work->unk_0B--;
-        func_801E5988();
-    }
-}
-
+#include "overlays/bmagic/Effect_TickOnTimerZero.h"
 INCLUDE_ASM(func_801EF518);
 
 INCLUDE_ASM(func_801EF590);

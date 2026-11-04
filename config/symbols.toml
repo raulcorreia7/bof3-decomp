@@ -185,6 +185,7 @@ g_BMagicEffectFuncs = { addr = 0x801F1BEC, source = "the module dispatcher index
 ["emi/bmagic/magic009/03"]
 Effect_CountDownTimerNextStep = { addr = 0x801EF01C, type = "func", source = "counts the effect timer down and advances the step byte at zero" }
 Effect_CountDownTimer = { addr = 0x801EF340, type = "func", source = "counts the effect timer down and finishes the effect at zero" }
+Effect_ReloadTimerAndStep = { addr = 0x801EF740, type = "func", source = "reloads the effect timer with the value func_800B0058 returns and advances the effect step" }
 g_BMagicEffectFuncs = { addr = 0x801EF89C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic010/00"]
@@ -557,6 +558,7 @@ Effect_CountUpAndStep = { addr = 0x801EF238, type = "func", source = "counts the
 Effect_CountDownAndStep = { addr = 0x801EF288, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
 Effect_TickOnTimerZero = { addr = 0x801EF2D4, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
 Effect_CountUpByTwoAndStep = { addr = 0x801EF8C4, type = "func", source = "counts the effect timer up by two and advances the effect step at 0x10" }
+Effect_TickOnTimerZero_801EF914 = { addr = 0x801EF914, type = "func", source = "counts the effect timer down by 2 and ticks the effect ticker of D_801EB4E0 at zero; the second member of the image" }
 g_BMagicEffectFuncs = { addr = 0x801EFA9C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic113/03"]
@@ -747,10 +749,12 @@ g_BMagicEffectFuncs = { addr = 0x801F041C, source = "the module dispatcher index
 
 ["emi/bmagic/magic172/03"]
 Effect_PlayOnZeroTick = { addr = 0x801EEDD8, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+Effect_TickOnTimerZero = { addr = 0x801EF4BC, type = "func", source = "counts the effect timer down by 2 and ticks the effect ticker of D_801EB4E0 at zero" }
 g_BMagicEffectFuncs = { addr = 0x801F0B74, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic173/03"]
 Effect_PlayOnZeroTick = { addr = 0x801EED90, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+Effect_TickOnTimerZero = { addr = 0x801F0700, type = "func", source = "counts the effect timer down by 4 and ticks the effect ticker of D_801EB4E0 at zero" }
 g_BMagicEffectFuncs = { addr = 0x801F0988, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic213/03"]
