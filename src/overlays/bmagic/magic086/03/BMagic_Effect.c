@@ -8,7 +8,17 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC94);
 
-INCLUDE_ASM(func_801EEE44);
+MATCH void func_801EEE44(void) {
+    PartyBattler* temp_s0;
+
+    temp_s0 = g_BattleSelectedActor;
+    if (g_SpadWork->unk_0B == 1) {
+        func_80196718(temp_s0);
+        g_SpadWork->unk_0A = func_8019651C(temp_s0, 1, 1, 1, 0);
+        g_SpadWork->unk_09 = 0x10;
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EEEE0);
 
