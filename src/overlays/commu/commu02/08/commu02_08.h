@@ -36,5 +36,12 @@ extern u8            g_MenuPortraitAtlas[];
 extern u8  D_801DB0B4;
 extern s8  D_801DB0C4;
 extern s16 D_801DB0C8;
+extern s8  D_801DB0B8;
+extern u8  D_801F2944;
+extern u8  D_801F2945;
+
+s32 func_801D7EA0(u8);
+
+s32 func_801D92F4(u8);
 
 #endif
