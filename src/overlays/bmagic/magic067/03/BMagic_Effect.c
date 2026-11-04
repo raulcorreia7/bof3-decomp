@@ -68,11 +68,7 @@ MATCH void func_801EFF24(void) {
     }
 }
 
-MATCH void func_801EFF8C(void) {
-    g_SpadWork->word_08.byte.unk_09   = 0;
-    g_SpadWork->word_08.byte.timer_0A = 0x88;
-    Bmagic_NextStep();
-}
+#include "overlays/bmagic/Effect_ArmCounterNextStep.h"
 
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
 
