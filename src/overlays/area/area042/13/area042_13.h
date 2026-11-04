@@ -15,4 +15,8 @@ extern u8  D_801F52E8[];
 extern u8  D_801F5334[];
 extern u16 D_801F56C4[];
 
+void func_801F3D18(s32);
+
+extern u8 D_801F532C[];
+
 #endif
