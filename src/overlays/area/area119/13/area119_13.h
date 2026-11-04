@@ -15,6 +15,7 @@ extern u8 D_80146920[];
 extern u8 D_801F45C4[];
 
 void func_801F3324(void);
+void func_801F369C(s32 level);
 void func_801F3F04(s32 arg0);
 
 #endif
