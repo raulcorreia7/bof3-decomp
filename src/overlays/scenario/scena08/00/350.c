@@ -88,11 +88,35 @@ INCLUDE_ASM(func_801F7AD0);
 
 INCLUDE_ASM(func_801F7B2C);
 
-INCLUDE_ASM(func_801F7BA8);
+MATCH void func_801F7BA8(void) {
+    Actor* work;
+    u8     timer;
+
+    work           = g_SpadWork;
+    timer          = work->unk_09 - 1;
+    work->y.fixed  = work->y.fixed + 0x10000;
+    work->unk_09   = timer;
+    if (timer == 0) {
+        g_SpadWork->unk_09   = 0x10;
+        g_SpadWork->state_02 = g_SpadWork->state_02 + 1;
+    }
+}
 
 INCLUDE_ASM(func_801F7C08);
 
-INCLUDE_ASM(func_801F7C98);
+MATCH void func_801F7C98(void) {
+    Actor* work;
+    u8     timer;
+
+    work           = g_SpadWork;
+    timer          = work->unk_09 - 1;
+    work->y.fixed  = work->y.fixed - 0x10000;
+    work->unk_09   = timer;
+    if (timer == 0) {
+        g_SpadWork->unk_09   = 0x80;
+        g_SpadWork->state_02 = g_SpadWork->state_02 + 1;
+    }
+}
 
 MATCH void func_801F7CF8(void) {
     u8 timer;
