@@ -63,4 +63,11 @@ s32 func_801F5028(s32, s32, s32);
 
 s32 func_801A79A4(s32, s32);
 
+s32  func_801F5ECC(s32 direction, s32 previous);
+void func_801F5C7C(void);
+void Area_CommitHeading(void);
+
+#define AREA_HEADING_BLOCKED func_801F5ECC
+#define AREA_HEADING_STEP    func_801F5C7C
+
 #endif

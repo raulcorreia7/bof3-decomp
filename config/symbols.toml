@@ -2369,6 +2369,7 @@ Area_DrawGradientDiamond = { addr = 0x801F3F90, type = "func", source = "builds 
 Area_DrawHudBanner = { addr = 0x801F4188, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
 Actor_FacingToward = { addr = 0x801F4A34, type = "func", source = "returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)" }
 Actor_StopMoving = { addr = 0x801F5108, type = "func", source = "clears the actor velocity words and sets the game overlay byte to 3" }
+Area_CommitHeading = { addr = 0x801F58E8, type = "func", source = "stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step" }
 
 ["emi/world02/area108/14"]
 GFX_DrawShadedDisc = { addr = 0x801F3D90, type = "func", source = "fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade" }
@@ -2437,6 +2438,7 @@ Actor_MoveByVelocity = { addr = 0x801F453C, type = "func", source = "moves the a
 Area_StepStreamSetDrawMode = { addr = 0x801F4754, type = "func", source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 Actor_FacingToward = { addr = 0x801F4F78, type = "func", source = "returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)" }
 Actor_StopMoving = { addr = 0x801F564C, type = "func", source = "clears the actor velocity words and sets the game overlay byte to 3" }
+Area_CommitHeading = { addr = 0x801F5E2C, type = "func", source = "stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step" }
 
 ["emi/world03/area125/13"]
 Area_FindFreeWorkRow = { addr = 0x801F3348, type = "func", source = "finds the first work-window row whose byte is zero or returns NULL" }
