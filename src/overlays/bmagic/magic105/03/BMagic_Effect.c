@@ -72,7 +72,18 @@ INCLUDE_ASM(func_801EF8C4);
 
 INCLUDE_ASM(func_801EF930);
 
-INCLUDE_ASM(func_801EFB68);
+MATCH void func_801EFB68(void) {
+    g_SpadWork->unk_0A += 1;
+    g_SpadWork->coord_x_34.raw += (s32)(rsin((g_SpadWork->unk_0A & 0x3F) << 8) * 8) >> 3;
+    g_SpadWork->coord_y_38.raw += (s32)(rcos((g_SpadWork->unk_0A & 0x3F) << 8) * 8) >> 3;
+    g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E - 8;
+    if ((func_8014DAEC() & 0xFF) || (g_SpadWork->word_3C.half.span_3E < g_SpadWork->unk_14)) {
+        D_801EB4E0->unk_0B -= 1;
+        g_SpadWork->flags_00 = 0;
+        g_SpadWork->step_01  = 0;
+        g_SpadWork->unk_02   = 0;
+    }
+}
 
 /* func_801EFC8C */
 #include "overlays/bmagic/BMagic_AllocEffect.h"
