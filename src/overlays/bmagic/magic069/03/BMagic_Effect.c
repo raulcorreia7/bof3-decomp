@@ -95,7 +95,17 @@ MATCH void func_801EF430(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4C0);
+MATCH void func_801EF4C0(void) {
+    s32 temp_v1;
+
+    temp_v1            = g_SpadWork->unk_0C - 1;
+    g_SpadWork->unk_0C = temp_v1;
+    g_SpadWork->unk_2E.half += temp_v1;
+    if (g_SpadWork->unk_0C == 0) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF520(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 10, 2, g_SpadWork);
@@ -107,7 +117,21 @@ INCLUDE_ASM(func_801EF724);
 
 INCLUDE_ASM(func_801EF834);
 
-INCLUDE_ASM(func_801EF9C4);
+MATCH void func_801EF9C4(void) {
+    u8 temp_a0;
+    u8 counter;
+
+    func_801EFA84();
+    temp_a0 = g_SpadWork->word_08.byte.timer_0A;
+    if ((temp_a0 & 0xFF) != 0x18) {
+        g_SpadWork->word_08.byte.timer_0A = temp_a0 + 4;
+    }
+    counter                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = counter;
+    if ((counter & 0xFF) == 0x14) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EFA50(void) {
     BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
