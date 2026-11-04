@@ -23,11 +23,39 @@ MATCH void func_801F6F7C(void) {
     ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
 }
 
-INCLUDE_ASM(func_801F6FCC);
+MATCH void func_801F6FCC(void) {
+    func_801F71B0(((Actor*)g_SpadWork)->unk_09);
+    if (g_FrameCount & 1) {
+        func_801F75D8();
+    }
+    func_801F7748();
+    ((Actor*)g_SpadWork)->unk_09 = ((Actor*)g_SpadWork)->unk_09 + 4;
+    if (((Actor*)g_SpadWork)->unk_09 == 0) {
+        ((Actor*)g_SpadWork)->unk_09 = 0x20;
+        ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    }
+}
 
-INCLUDE_ASM(func_801F7078);
+MATCH void func_801F7078(void) {
+    func_801F71B0(0xFF);
+    if (g_FrameCount & 1) {
+        func_801F75D8();
+    }
+    func_801F7748();
+    if (g_ScriptVars[0] == 0x1F) {
+        ((Actor*)g_SpadWork)->unk_09 = 0xFC;
+        ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    }
+}
 
-INCLUDE_ASM(func_801F7100);
+MATCH void func_801F7100(void) {
+    func_801F71B0(((Actor*)g_SpadWork)->unk_09);
+    func_801F7748();
+    ((Actor*)g_SpadWork)->unk_09 = ((Actor*)g_SpadWork)->unk_09 - 4;
+    if (((Actor*)g_SpadWork)->unk_09 == 0) {
+        ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    }
+}
 
 MATCH void func_801F717C(void) {
     if (!(func_801F7748() & BYTE_MASK)) {
