@@ -417,6 +417,7 @@ g_BMagicEffectFuncs = { addr = 0x801F02A4, source = "the module dispatcher index
 ["emi/bmagic/magic081/03"]
 CardAccessFile = { addr = 0x801EEC30, type = "func", source = "byte-equal copy of the card access function of emi/etc/start/09" }
 Effect_TickOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "when the effect ticker is zero, ticks the other battler's ticker down and runs the effect step" }
+BMagic_AllocEffect = { addr = 0x801EFA20, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 g_BMagicEffectFuncs = { addr = 0x801EFA84, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic082/03"]
