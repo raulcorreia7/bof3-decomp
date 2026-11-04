@@ -64,15 +64,35 @@ MATCH void func_801FB37C(void* entity) {
     handler(entity, g_SceneFlags);
 }
 
-INCLUDE_ASM(func_801FB3BC);
+/* Starts the area message `message`: the area overlay's own lookup (func_801F326C
+ * for area 0xC0, func_801F37AC otherwise) maps it to a message index. */
+#define SCENA14_START_AREA_MESSAGE(message)                  \
+    if (g_GameAreaId == 0xC0) {                              \
+        Message_StartAreaMessage(func_801F326C(message));    \
+    } else {                                                 \
+        Message_StartAreaMessage(func_801F37AC(message));    \
+    }                                                        \
+    g_GameStateIndex = GAME_REQUEST_MESSAGE
 
-INCLUDE_ASM(func_801FB414);
+MATCH void func_801FB3BC(void) {
+    SCENA14_START_AREA_MESSAGE(8);
+}
 
-INCLUDE_ASM(func_801FB46C);
+MATCH void func_801FB414(void) {
+    SCENA14_START_AREA_MESSAGE(4);
+}
 
-INCLUDE_ASM(func_801FB4C4);
+MATCH void func_801FB46C(void) {
+    SCENA14_START_AREA_MESSAGE(2);
+}
 
-INCLUDE_ASM(func_801FB51C);
+MATCH void func_801FB4C4(void) {
+    SCENA14_START_AREA_MESSAGE(5);
+}
+
+MATCH void func_801FB51C(void) {
+    SCENA14_START_AREA_MESSAGE(6);
+}
 
 MATCH void func_801FB574(void) {
     Game_SetScriptActive();
