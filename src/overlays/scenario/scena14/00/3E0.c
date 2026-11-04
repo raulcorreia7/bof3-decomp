@@ -104,9 +104,29 @@ MATCH void func_801FB574(void) {
     g_SceneState.step_05  = 5;
 }
 
-INCLUDE_ASM(func_801FB5A8);
+MATCH void func_801FB5A8(void* entity) {
+    Actor* actor;
 
-INCLUDE_ASM(func_801FB5F8);
+    actor = entity;
+    Game_SetScriptActive();
+    D_80146874 = 5;
+    D_80146875 = 30;
+    /* FAKE: preserve the store order. */
+    MATCH_FAKE_BARRIER();
+    actor->unk_7E = actor->unk_7E + 1;
+}
+
+MATCH void func_801FB5F8(void* entity) {
+    Actor* actor;
+
+    actor = entity;
+    Game_SetScriptActive();
+    D_80146874 = 7;
+    D_80146875 = 30;
+    /* FAKE: preserve the store order. */
+    MATCH_FAKE_BARRIER();
+    actor->unk_7E = actor->unk_7E + 1;
+}
 
 INCLUDE_ASM(func_801FB648);
 
