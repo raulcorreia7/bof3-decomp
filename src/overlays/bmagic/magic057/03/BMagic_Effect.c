@@ -54,7 +54,13 @@ MATCH void func_801EF55C(void) {
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EF5BC);
+MATCH void func_801EF5BC(void) {
+    g_SpadWork->unk_09 = 0;
+    g_SpadWork->unk_0A = D_801EFADC[g_SpadWork->unk_09];
+    SND_QueueSelectionFx(256);
+    g_SpadWork->unk_10 = 0;
+    g_SpadWork->unk_02++;
+}
 
 INCLUDE_ASM(func_801EF620);
 

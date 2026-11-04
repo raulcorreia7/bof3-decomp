@@ -9,4 +9,6 @@ extern BattleResultRings   D_801EEC10;
 extern BattleHandlerTable3 D_801EEC20;
 extern BattleHandlerTable3 D_801EEC38;
 
+extern u8 D_801EFADC[];
+
 #endif
