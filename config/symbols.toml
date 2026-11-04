@@ -797,6 +797,7 @@ g_BMagicEffectFuncs = { addr = 0x801F06DC, source = "the module dispatcher index
 ["emi/bmagic/magic222/03"]
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 Effect_PlayOnZeroTick = { addr = 0x801EEE80, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+Effect_SwingCameraAngle = { addr = 0x801EF274, type = "func", source = "swings the area camera pitch by 20 each tick through g_AreaCameraAngle.vx, resets it to -0x2AA when the effect timer reaches zero, reloads the timer and advances the effect step" }
 Effect_CountDownAndStep = { addr = 0x801EF724, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
 Effect_TickOnTimerZero = { addr = 0x801EF770, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
 Effect_SetActorMatrix = { addr = 0x801EF7CC, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
@@ -823,6 +824,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0388, source = "the module dispatcher index
 ["emi/bmagic/magic226/03"]
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF3C, type = "func", source = "counts the effect timer down; at zero requests the target selector and advances the step" }
 Effect_PlayOnZeroTick = { addr = 0x801EEFA4, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+Effect_SwingCameraAngle = { addr = 0x801EF540, type = "func", source = "swings the area camera pitch by 20 each tick through g_AreaCameraAngle.vx, resets it to -0x2AA when the effect timer reaches zero, reloads the timer and advances the effect step" }
 Effect_SetActorMatrix = { addr = 0x801F0724, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801F0B8C, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801F0BF0, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
