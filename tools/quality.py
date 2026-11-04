@@ -20,10 +20,14 @@ Metrics, counted inside ``MATCH`` function bodies unless noted:
 A body that is only local declarations and one statement-macro call is already the shared form, so
 its copies count in neither ``pasted`` nor ``twins``.
 
-The gate sums each metric over the touched files, so a body moved between them nets to zero.
-It covers ``casts``, ``harmful`` and ``pasted``. A new match may add a ``func_`` name or a ``D_``
-reference, so ``addr``, ``names``, ``notes`` and ``twins`` are trended, not gated (``--gate``
-changes the set). A file the change did not touch never counts, so old debt never blocks.
+The gate sums ``casts``, ``harmful`` and ``pasted`` over the touched files, so a body moved
+between them nets to zero. ``addr`` and ``names`` compare functions, not totals, over the touched
+files: ``names`` fails when a function present before and after (same name) holds more
+placeholder tokens; ``addr`` fails when a body that was named before is now named ``func_<ADDR>``.
+A new ``MATCH`` body is exempt from both, since its first name and globals are the lane's start.
+``notes`` and ``twins`` are trended, not gated (``--gate`` changes the set). A file the change did
+not touch never counts, so old debt never blocks. ``BASE`` is compared at its merge-base with
+``--to``, so work that landed on ``BASE`` since the branch point never counts as a regression.
 """
 
 from __future__ import annotations
@@ -37,7 +41,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 METRICS = ("addr", "names", "casts", "harmful", "notes", "twins", "pasted")
-GATED = ("casts", "harmful", "pasted")
+GATED = ("casts", "harmful", "pasted", "addr", "names")
+PER_FUNCTION = ("addr", "names")
+TOTALS = ("casts", "harmful", "pasted")
 WEIGHT = {
     "addr": 1,
     "names": 1,
@@ -170,6 +176,15 @@ def rev_files(rev: str) -> dict[str, str]:
     return files
 
 
+def merge_base(base: str, to: str) -> str:
+    """Return the commit ``to`` branched from ``base`` at, or ``base`` when there is none."""
+    out = subprocess.run(
+        ["git", "merge-base", base, "HEAD" if to == "WORK" else to],
+        cwd=ROOT, capture_output=True, text=True,
+    )  # fmt: skip
+    return out.stdout.strip() if out.returncode == 0 and out.stdout.strip() else base
+
+
 def touched(base: str, to: str) -> set[str]:
     """Return the paths that differ between ``base`` and ``to``."""
     cmd = ["git", "diff", "--name-only", base] + ([] if to == "WORK" else [to])
@@ -181,7 +196,7 @@ def worse(
     old: dict[str, dict[str, int]],
     new: dict[str, dict[str, int]],
     changed: Iterable[str],
-    gate: Iterable[str] = GATED,
+    gate: Iterable[str] = TOTALS,
 ) -> list[str]:
     """Return one line per touched file whose gated metric rose, for each metric whose total
     over the touched files rose; a body moved between touched files nets to zero."""
@@ -196,6 +211,47 @@ def worse(
                 for p in paths
                 if after[p] > before[p]
             ]
+    return lines
+
+
+def functions(
+    files: dict[str, str], paths: Iterable[str]
+) -> dict[str, tuple[int, str, bool]]:
+    """Return ``name -> (most placeholder tokens in one copy, body shape, is func_<ADDR>)`` for the
+    ``MATCH`` functions in ``paths``; copies of one name (a body pasted into images) keep the worst."""
+    out: dict[str, tuple[int, str, bool]] = {}
+    for path in sorted(set(paths) & files.keys()):
+        for name, body in bodies(strip_comments(files[path])):
+            tokens = len(PLACEHOLDER.findall(body))
+            prior = out.get(name, (0, "", False))
+            out[name] = (
+                max(tokens, prior[0]),
+                shape(name, body),
+                bool(ADDR_NAME.fullmatch(name)),
+            )
+    return out
+
+
+def ratchet(
+    old: dict[str, str],
+    new: dict[str, str],
+    changed: Iterable[str],
+    gate: Iterable[str] = PER_FUNCTION,
+) -> list[str]:
+    """Return one line per function that got worse in the touched files, by name.
+
+    ``names`` compares a function present in both revisions. ``addr`` flags a ``func_<ADDR>``
+    function whose body was matched under a real name before. A new ``MATCH`` body is exempt.
+    """
+    changed = list(changed)
+    before, after = functions(old, changed), functions(new, changed)
+    named = {sh for _, sh, addr in before.values() if not addr}
+    lines = []
+    for name, (tokens, sh, addr) in sorted(after.items()):
+        if "names" in gate and name in before and tokens > before[name][0]:
+            lines.append(f"{name}: names {before[name][0]} -> {tokens}")
+        if "addr" in gate and addr and name not in before and sh in named:
+            lines.append(f"{name}: addr named -> func_<ADDR>")
     return lines
 
 
@@ -255,8 +311,14 @@ def main(argv: list[str] | None = None) -> int:
         bad = [m for m in gate if m not in METRICS]
         if bad:
             parser.error(f"unknown metric: {', '.join(bad)}")
-        old, new = scan(rev_files(args.diff)), scan(rev_files(args.to))
-        found = worse(old, new, touched(args.diff, args.to), gate)
+        base = merge_base(args.diff, args.to)
+        old_files, new_files = rev_files(base), rev_files(args.to)
+        changed = touched(base, args.to)
+        found = worse(
+            scan(old_files), scan(new_files), changed,
+            [m for m in gate if m not in PER_FUNCTION],
+        )  # fmt: skip
+        found += ratchet(old_files, new_files, changed, gate)
         for line in found:
             print(line)
         if found:

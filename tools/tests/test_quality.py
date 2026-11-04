@@ -96,3 +96,28 @@ def test_a_body_moved_between_touched_files_nets_to_zero() -> None:
     assert quality.worse(old, new, {"a.c", "b.h"}, ("casts",)) == []
     new = {"b.h": {"casts": 3}}
     assert quality.worse(old, new, {"a.c", "b.h"}, ("casts",)) == ["b.h: casts 0 -> 3"]
+
+
+def test_a_function_that_gains_placeholders_fails_the_names_ratchet() -> None:
+    old = {"src/a/x.c": "MATCH void F(void) { a = D_801EF000; }\n"}
+    new = {"src/a/x.c": "MATCH void F(void) { a = D_801EF000; b = unk_1C; }\n"}
+    assert quality.ratchet(old, new, {"src/a/x.c"}) == ["F: names 1 -> 2"]
+    assert quality.ratchet(new, old, {"src/a/x.c"}) == []
+
+
+def test_a_new_match_is_exempt_from_addr_and_names() -> None:
+    old = {"src/a/x.c": "MATCH void F(void) { a = 1; }\nINCLUDE_ASM(func_801EEC20);\n"}
+    new = {
+        "src/a/x.c": "MATCH void F(void) { a = 1; }\n"
+        "MATCH void func_801EEC20(void) { b = D_801EF000; c = 2; }\n"
+    }
+    assert quality.ratchet(old, new, {"src/a/x.c"}) == []
+
+
+def test_a_named_body_renamed_back_to_an_address_fails_the_addr_ratchet() -> None:
+    old = {"src/a/x.c": "MATCH void Actor_Wake(void) { a = 1; b = 2; }\n"}
+    new = {"src/a/x.c": "MATCH void func_801EEC20(void) { a = 1; b = 2; }\n"}
+    assert quality.ratchet(old, new, {"src/a/x.c"}) == [
+        "func_801EEC20: addr named -> func_<ADDR>"
+    ]
+    assert quality.ratchet(old, new, set()) == []
