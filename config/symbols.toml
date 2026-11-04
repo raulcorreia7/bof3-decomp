@@ -3806,7 +3806,7 @@ g_MenuPanelOrigins = { addr = 0x8017F90C, source = "func_80159050, func_8015920C
 g_AreaLoads = { addr = 0x8017F974, type = "AreaLoad", source = "src/engine/slus/D_8017F974.c defines the 200 row pointers; func_8019FAA0 and func_801ACE10 index it by g_GameAreaId" }
 g_AreaEncounterZones = { addr = 0x8017FC94, source = "the zone table behind the index list in src/engine/slus/D_80181164.c, walked by Area_GetCellCode as zones of 0x28 bytes" }
 g_FacingOffsets = { addr = 0x80181AC0, type = "FacingStep", source = "8 facing offsets of two words each, added to a position by the plchar route walkers" }
-g_CharSlot = { addr = 0x80181B10, source = "the 12-byte character-slot map the plchar and field code index" }
+g_CharSlot = { addr = 0x80181B10, size = 12, source = "the 12-byte character-slot map the plchar and field code index" }
 g_FacingSteps = { addr = 0x80181B94, type = "FacingStep", source = "8 facing steps, Char_ProbeFacingCell adds step x and y to a position" }
 g_RouteSpeedScale = { addr = 0x80181BD4, source = "8 speed scales the route walkers multiply a step by" }
 s_LoaderRecordBytes = { addr = 0x80181D98, source = "record list bytes the D_80181E40 list and count entries point into" }
