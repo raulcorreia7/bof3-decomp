@@ -727,6 +727,7 @@ Effect_ReloadTimerAndStep = { addr = 0x801EF024, type = "func", source = "reload
 g_BMagicEffectFuncs = { addr = 0x801EF3E8, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic162/03"]
+Effect_ReplacePaletteFade = { addr = 0x801EEFA0, type = "func", source = "frees the selected actor's palette fade, allocates a new one and restarts the effect timer and step" }
 Effect_NextStep = { addr = 0x801EF158, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
 Effect_PlayOnZeroTick = { addr = 0x801EF2D8, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 
@@ -744,6 +745,7 @@ Effect_TickOnTimerZero = { addr = 0x801EF454, type = "func", source = "counts th
 g_BMagicEffectFuncs = { addr = 0x801F08B0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic168/03"]
+Effect_ReplacePaletteFade = { addr = 0x801EEFA0, type = "func", source = "frees the selected actor's palette fade, allocates a new one and restarts the effect timer and step" }
 Effect_NextStep = { addr = 0x801EF158, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
 Effect_PlayOnZeroTick = { addr = 0x801EF2D8, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 
