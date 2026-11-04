@@ -2,7 +2,7 @@
 
 MATCH void func_801F3108(void) {
     Actor* actor = g_SpadWork;
-    Vec3i pos;
+    Vec3i  pos;
 
     actor->gravity += 0x100000;
     actor->vz += actor->gravity;

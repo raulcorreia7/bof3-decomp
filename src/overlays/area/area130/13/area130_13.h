@@ -27,10 +27,10 @@ extern s16 D_8014613E;
 extern s16 D_80146140;
 extern s16 D_801469EA;
 extern u8  D_801F3ED8[];
-extern s8 D_80146865;
-extern s8 D_80146866;
-extern s8 D_80146874;
-extern s8 D_80146875;
+extern s8  D_80146865;
+extern s8  D_80146866;
+extern s8  D_80146874;
+extern s8  D_80146875;
 extern u16 D_801F5058[];
 
 s32  Party_AddVitalItem(u8 item_id);

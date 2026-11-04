@@ -2,7 +2,7 @@
 
 MATCH s32 func_801F3980(s32* x, s32* y) {
     Actor* actor = g_SpadWork;
-    s32 y_half;
+    s32    y_half;
 
     *x     = actor->x.fixed - 0x8000;
     y_half = actor->y.fixed - 0x8000;
