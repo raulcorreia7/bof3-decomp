@@ -180,7 +180,7 @@ def merge_base(base: str, to: str) -> str:
     """Return the commit ``to`` branched from ``base`` at, or ``base`` when there is none."""
     out = subprocess.run(
         ["git", "merge-base", base, "HEAD" if to == "WORK" else to],
-        cwd=ROOT, capture_output=True, text=True,
+        cwd=ROOT, capture_output=True, text=True, check=False,
     )  # fmt: skip
     return out.stdout.strip() if out.returncode == 0 and out.stdout.strip() else base
 
