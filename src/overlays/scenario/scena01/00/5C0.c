@@ -275,7 +275,7 @@ INCLUDE_ASM(func_801FE0A4);
 MATCH void func_801FE10C(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 254;
     EMI_LoaderStreamFamily(9, 3, 4, 0);
-    g_PartySize = 0;
+    g_PartySize                              = 0;
     g_Characters[g_CharSlot[9]].character_id = 9;
     Party_JoinMember(9);
 }
