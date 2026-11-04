@@ -21,7 +21,17 @@ MATCH void func_801EEE38(void) {
     SYS_DISPATCH_TASK(handlers.handlers, 3, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EEEA8);
+MATCH void func_801EEEA8(void) {
+    PartyBattler* temp_s0;
+    PartyBattler* temp_v0;
+
+    temp_s0    = g_SpadWork;
+    temp_v0    = &g_BattlePartyBattlers[g_BattleActingBattler];
+    g_SpadWork = temp_v0;
+    Actor_RequestScript((temp_v0->word_08.byte.facing_08 + 0x3C) & 0xFF);
+    g_SpadWork = temp_s0;
+    temp_s0->unk_03 += 1;
+}
 
 INCLUDE_ASM(func_801EEF24);
 
@@ -29,7 +39,19 @@ INCLUDE_ASM(func_801EF070);
 
 INCLUDE_ASM(func_801EF138);
 
-INCLUDE_ASM(func_801EF2A0);
+MATCH void func_801EF2A0(void) {
+    PartyBattler* temp_a0;
+    PartyBattler* temp_v1;
+
+    temp_a0    = g_SpadWork;
+    temp_v1    = &g_BattlePartyBattlers[g_BattleActingBattler];
+    g_SpadWork = temp_v1;
+    temp_v1->flags_00 &= 0xBF;
+    g_SpadWork = temp_a0;
+    temp_a0->step_01 += 1;
+    g_SpadWork->unk_02 = 0;
+    g_SpadWork->unk_03 = 0;
+}
 
 MATCH void func_801EF318(void) {
     BattleHandlerTable5 handlers;
@@ -131,7 +153,19 @@ INCLUDE_ASM(func_801F0BA8);
 
 INCLUDE_ASM(func_801F0C50);
 
-INCLUDE_ASM(func_801F0CB0);
+MATCH void func_801F0CB0(void) {
+    PartyBattler* work;
+    s8            timer;
+
+    work         = g_SpadWork;
+    timer        = work->unk_5D - 2;
+    work->unk_5D = timer;
+    if (timer == 0) {
+        work                      = D_801EB4E0;
+        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801F0D0C);
 
@@ -139,7 +173,14 @@ INCLUDE_ASM(func_801F10E8);
 
 INCLUDE_ASM(func_801F11E0);
 
-INCLUDE_ASM(func_801F129C);
+MATCH void func_801F129C(void) {
+    g_SpadWork->word_08.byte.unk_0B += 1;
+    g_SpadWork->word_08.byte.timer_0A += 4;
+    if (g_SpadWork->word_08.byte.timer_0A == 0x10) {
+        g_SpadWork->word_08.byte.unk_09 = 8;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountDownTimerRaiseTicker.h"
 
