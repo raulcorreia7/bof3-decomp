@@ -20,4 +20,6 @@ u8   func_800C1F30(u32 mode);
 void func_800C20A8(void);
 void func_800C22D0(void);
 
+s32 EMI_LoaderIsReady();
+
 #endif
