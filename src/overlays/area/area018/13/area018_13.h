@@ -6,4 +6,7 @@
 
 #include "overlays/area/world00.h"
 
+extern u16 g_GameAreaId;
+extern u8* D_80181164[];
+
 #endif
