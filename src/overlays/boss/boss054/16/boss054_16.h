@@ -6,6 +6,7 @@
 
 #include "overlays/boss/boss.h"
 #include "overlays/battle/battle.h"
+#include "battle/ram.h"
 
 typedef struct Boss054Funcs {
     Callback handlers[10];
@@ -24,5 +25,7 @@ extern Callback     D_800C20C0[];
 
 void func_800C18E0(s32 mode);
 void func_800C1D7C(void);
+
+extern BattleEffect* D_801EC2E0;
 
 #endif
