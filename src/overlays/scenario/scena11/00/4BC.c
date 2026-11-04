@@ -203,12 +203,7 @@ MATCH s32 func_801FAB6C(void) {
 
 INCLUDE_ASM(func_801FAB74);
 
-MATCH void func_801FABC0(void) {
-    EMI_LoaderStreamFamily(7U, 8U, 5U, 0U);
-    Party_BuildBattlers(0);
-    Party_JoinMember(8);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_JoinAdultNina.h"
 
 MATCH void func_801FAC04(void) {
     EMI_LoaderStreamFamily(7U, 8U, 5U, 0U);
