@@ -25,15 +25,7 @@ INCLUDE_ASM(func_801EF270);
 
 #include "overlays/bmagic/Effect_CountUpTimerCallSelector.h"
 
-MATCH void func_801EF374(void) {
-    u8 timer;
-
-    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
-    if (timer == 120) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
-    }
-}
+#include "overlays/bmagic/Effect_CountUpAndStepAt120.h"
 
 INCLUDE_ASM(func_801EF3C4);
 
