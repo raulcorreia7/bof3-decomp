@@ -24,7 +24,19 @@ MATCH void func_801EEEF4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFA0);
+MATCH void func_801EEFA0(void) {
+    /* FAKE: retail keeps an 8-byte frame that no statement explains. */
+    STACK_PADS(u8, 8);
+    u8 timer;
+
+    D_80145BD4[g_SpadWork->unk_0A].red_offset -= 1;
+    D_80145BD4[g_SpadWork->unk_0A].green_offset -= 1;
+    timer              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = timer;
+    if (timer == 0) {
+        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+    }
+}
 
 MATCH void func_801EF070(void) {
     PartyBattler* work;
