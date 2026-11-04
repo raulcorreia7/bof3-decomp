@@ -2182,7 +2182,6 @@ Actor_SnapToGround = { addr = 0x801F3CDC, type = "func", source = "snaps the act
 ["emi/world02/area103/13"]
 Area_FindTaggedPartySlot = { addr = 0x801F56B0, type = "func", source = "returns the first index 0 to 2 of D_801F5D64 whose tag equals byte 0 of a battle party row, 0xFF when none match; func_801F560C calls it" }
 
-
 ["emi/world02/area104/14"]
 Message_RunAreaMessage = { addr = 0x801F2F0C, type = "func", source = "starts message 4 with Message_StartAreaMessage, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the D_801448EB state" }
 Actor_CenterOnScreen = { addr = 0x801F34C4, type = "func", source = "byte-identical to Actor_CenterOnScreen at emi/world02/area087/13@0x801F3434" }
@@ -2277,7 +2276,6 @@ Area_ResetViewOffsetY = { addr = 0x801F53D0, type = "func", source = "zeroes g_A
 
 ["emi/world03/area136/13"]
 Actor_WalkWhileWithinLimit = { addr = 0x801F2D68, type = "func", source = "walks the script actor one step along facing 5 and rewinds the script cursor while its y position plus the facing-5 y step is at most the per-scene limit table entry D_801448ED selects (func_801F2D68 in area136, func_801F4840 in area188)" }
-
 
 ["emi/world03/area139/13"]
 Actor_AdvanceWhenPartyNear = { addr = 0x801F3C68, type = "func", source = "advances the work state when the party position is inside the work cell" }

@@ -7,8 +7,8 @@
 #include "overlays/area/world02.h"
 #include "work/area_spad.h"
 
-void func_801F49A0(s32 arg);
-void func_801F4E70(s32 arg);
+void      func_801F49A0(s32 arg);
+void      func_801F4E70(s32 arg);
 extern u8 D_801F5934[];
 extern u8 D_801F5D64[];
 extern u8 D_80145F09[][BATTLE_PARTY_STRIDE];

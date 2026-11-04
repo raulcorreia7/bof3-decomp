@@ -6,8 +6,8 @@ MATCH void func_801F3A38(void) {
         Game_SetScriptActive();
         func_801C601C(3);
         func_801F4300(D_801F4DBC, 0);
-        D_801448EB = 0x34;
-        D_801448EC = 0x32;
+        D_801448EB       = 0x34;
+        D_801448EC       = 0x32;
         g_MessageRequest = 5;
     } else {
         g_MessageRequest = 6;
