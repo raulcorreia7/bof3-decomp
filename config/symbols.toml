@@ -309,6 +309,7 @@ Effect_TickDownAndClear = { addr = 0x801EF624, type = "func", source = "decremen
 g_BMagicEffectFuncs = { addr = 0x801EF658, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic055/03"]
+Effect_DecayTimersAndPlay = { addr = 0x801EEEA8, type = "func", source = "counts the timer bytes at +0x09 and +0x0A down under the +0x0B limits; once the halfword at +0x0A is zero plays the effect the target selector chose" }
 Effect_CopyBattlerCoordsOnTimerZero = { addr = 0x801EEFFC, type = "func", source = "counts the effect timer down and, at zero, copies the coordinates and span of D_801EB4E0 into the effect work like Effect_CopyBattlerCoords, reloads the timer with 0x40 and advances the effect step" }
 Effect_SetActorMatrix = { addr = 0x801EF700, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 
@@ -489,6 +490,7 @@ Effect_CountDownTimerStep = { addr = 0x801EF990, type = "func", source = "counts
 g_BMagicEffectFuncs = { addr = 0x801F0028, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic091/03"]
+Effect_DecayTimersAndPlay = { addr = 0x801EEEA8, type = "func", source = "counts the timer bytes at +0x09 and +0x0A down under the +0x0B limits; once the halfword at +0x0A is zero plays the effect the target selector chose" }
 Effect_CopyBattlerCoordsOnTimerZero = { addr = 0x801EEFFC, type = "func", source = "counts the effect timer down and, at zero, copies the coordinates and span of D_801EB4E0 into the effect work like Effect_CopyBattlerCoords, reloads the timer with 0x40 and advances the effect step" }
 Effect_SetActorMatrix = { addr = 0x801EF700, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 
