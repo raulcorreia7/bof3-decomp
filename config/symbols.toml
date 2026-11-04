@@ -1980,6 +1980,14 @@ Scene_DrawBands = { addr = 0x801D165C, type = "func", source = "draws 17 depth s
 ["emi/scenario/sce15ef1/00"]
 Area_InitSpin = { addr = 0x801D1F68, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 
+["emi/scenario/sce15ef2/00"]
+Scene_ClearSlots = { addr = 0x801D15B0, type = "func", source = "clears the state byte of 16 six-byte slots; byte-equal to func_801D25C0 of sce15ef3 with another slot base" }
+Scene_ClaimSlot = { addr = 0x801D15DC, type = "func", source = "sets the state byte of the first free of 16 six-byte slots to 1 and clears its halfword at +2; byte-equal to func_801D25EC of sce15ef3 with another slot base" }
+
+["emi/scenario/sce15ef3/00"]
+Scene_ClearSlots = { addr = 0x801D25C0, type = "func", source = "clears the state byte of 16 six-byte slots; byte-equal to func_801D15B0 of sce15ef2 with another slot base" }
+Scene_ClaimSlot = { addr = 0x801D25EC, type = "func", source = "sets the state byte of the first free of 16 six-byte slots to 1 and clears its halfword at +2; byte-equal to func_801D15DC of sce15ef2 with another slot base" }
+
 ["emi/scenario/scena00/00"]
 Scene_DispatchActor = { addr = 0x801FC7D0, type = "func", source = "entry_04 of the scena00 handler block, dispatches the entity through D_801FCA84 by byte 0x7A of the entity record" }
 Scene_CheckStepTrigger = { addr = 0x801FC818, type = "func", source = "entry_08 of the scena00 handler block: Area_IsStepBlocked passes its handler_x and a nonzero result blocks the step; it starts scripted scenes by g_SceneState.state_04 at x 0x2B in area 2 and x 0x14 in area 24" }

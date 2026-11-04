@@ -116,8 +116,8 @@ MATCH void func_801F7920(void) {
         g_SpadWork->tint.bytes.unk_5E -= 2;
         g_SpadWork->tint.bytes.unk_5F -= 2;
     } else {
-        counter  = &D_80146875;
-        *counter = *counter + 1;
+        counter      = &D_80146875;
+        *counter     = *counter + 1;
         work->unk_01 = 3;
     }
     func_801F79C4();
@@ -195,8 +195,8 @@ MATCH void func_801F8548(void) {
         g_SpadWork->tint.bytes.unk_5E += 4;
         g_SpadWork->tint.bytes.unk_5F += 4;
     } else {
-        counter  = g_ScriptVars;
-        *counter = *counter + 1;
+        counter      = g_ScriptVars;
+        *counter     = *counter + 1;
         work->unk_01 = 2;
     }
     func_801F79C4();
@@ -329,7 +329,7 @@ MATCH void func_801FDC10(s32 shift) {
     s32 offset;
 
     if (D_801FE750 != 0) {
-        offset = D_801FE6E8[g_FrameCount & 3];
+        offset                 = D_801FE6E8[g_FrameCount & 3];
         g_AreaViewRefreshCount = 2;
         g_AreaViewOffsetY += offset << shift;
     }

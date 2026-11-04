@@ -120,7 +120,7 @@ MATCH void func_801D15CC(void) {
     work         = g_SpadWork;
     work->unk_2E = 300;
     work->unk_09 = 0;
-    func_801D25C0();
+    Scene_ClearSlots();
     g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
 }
 
@@ -188,19 +188,8 @@ INCLUDE_ASM(func_801D23AC);
 
 INCLUDE_ASM(func_801D2424);
 
-MATCH void func_801D25C0(void) {
-    s32 index;
-    s8* cell;
+#include "overlays/scenario/Scene_ClearSlots.h"
 
-    cell  = (s8*)(AREA_WORK_WINDOW + 0x18A0);
-    index = 0;
-    do {
-        *cell = 0;
-        index += 1;
-        cell += 6;
-    } while ((u32)(index & BYTE_MASK) < 0x10U);
-}
-
-INCLUDE_ASM(func_801D25EC);
+#include "overlays/scenario/Scene_ClaimSlot.h"
 
 INCLUDE_ASM(func_801D2634);

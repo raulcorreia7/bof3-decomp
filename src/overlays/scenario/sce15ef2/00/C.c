@@ -65,7 +65,7 @@ MATCH void func_801D0DE8(void) {
     work         = g_SpadWork;
     work->unk_2E = 300;
     work->unk_09 = 0;
-    func_801D15B0();
+    Scene_ClearSlots();
     g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
 }
 
@@ -146,35 +146,9 @@ INCLUDE_ASM(func_801D1218);
 
 INCLUDE_ASM(func_801D1414);
 
-MATCH void func_801D15B0(void) {
-    s32 index;
-    s8* cell;
+#include "overlays/scenario/Scene_ClearSlots.h"
 
-    cell  = (s8*)AREA_WORK_WINDOW;
-    index = 0;
-    do {
-        *cell = 0;
-        index += 1;
-        cell += 6;
-    } while ((u32)(index & BYTE_MASK) < 0x10U);
-}
-
-MATCH void func_801D15DC(void) {
-    s32 index;
-    u8* slot;
-
-    slot  = (u8*)AREA_WORK_WINDOW;
-    index = 0;
-    do {
-        if (*slot == 0) {
-            *slot   = 1;
-            slot[2] = 0;
-            return;
-        }
-        index += 1;
-        slot += 6;
-    } while ((u32)(index & BYTE_MASK) < 0x10U);
-}
+#include "overlays/scenario/Scene_ClaimSlot.h"
 
 /* Walks the 16 six-byte slots at 0x800E4800 and returns 1 when one is active. A slot in state 0 takes `countdown` into its
  * halfword at +2; in state 2 that halfword drops by 8 per call and the slot is released once it goes negative. */

@@ -7,6 +7,9 @@
 #include "overlays/scenario/scenario.h"
 #include "work/area_spad.h"
 
+/* The 16 six-byte effect slots. */
+#define SCENE_SLOT_BASE AREA_WORK_WINDOW
+
 extern u32      D_801D0C00;
 extern Callback D_801D1B2C[];
 extern Callback D_801D1B48[];
