@@ -86,6 +86,16 @@ MATCH void func_801EFA94(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFAE8);
+MATCH void func_801EFAE8(void) {
+    s32 i;
+
+    for (i = 0; i < 6; i++) {
+        if (i & 1) {
+            D_801F003C[i] = D_801F003C[i] - 1;
+        } else {
+            D_801F003C[i] = D_801F003C[i] + 1;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EFB34);
