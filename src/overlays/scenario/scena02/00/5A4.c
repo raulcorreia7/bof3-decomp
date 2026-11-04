@@ -265,9 +265,27 @@ MATCH void func_801FD114(void) {
 MATCH void func_801FD15C(void) {
 }
 
-INCLUDE_ASM(func_801FD164);
+MATCH void func_801FD164(void) {
+    if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
+        g_GameFlags ^= 0x36;
+        Game_SetScriptActive();
+        D_80146875 = 5;
+        D_80146865 = 0;
+        D_80146866 = 0;
+        D_80146874 = 4;
+    }
+}
 
-INCLUDE_ASM(func_801FD1DC);
+MATCH void func_801FD1DC(void) {
+    if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
+        g_GameFlags ^= 0x36;
+        Game_SetScriptActive();
+        D_80146875 = 7;
+        D_80146865 = 0;
+        D_80146866 = 0;
+        D_80146874 = 4;
+    }
+}
 
 MATCH void func_801FD254(void) {
     g_ScriptVars[1] = 1;
