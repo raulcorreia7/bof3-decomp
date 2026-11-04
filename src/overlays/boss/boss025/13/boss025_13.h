@@ -29,6 +29,9 @@ extern u8          D_801FE4EC[];
 extern u32         D_801FE4E8;
 extern u8          D_801FE4EF;
 extern u32         D_801FE4F0;
+/* The word at g_BattleScrollDir: its bytes are the scroll direction, g_BattleBossFlags, D_801462EE and
+ * g_BattleSelectionLatch. func_800C1E34 tests the boss flag bits 3 and 5 together through it. */
+extern u32         D_801462EC;
 
 void func_800C20F0(s32 mode);
 
