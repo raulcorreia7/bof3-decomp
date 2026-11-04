@@ -47,7 +47,18 @@ MATCH void func_801F7518(void) {
 
 INCLUDE_ASM(func_801F759C);
 
-INCLUDE_ASM(func_801F75EC);
+MATCH void func_801F75EC(void) {
+    char* buffer;
+    char* fmt;
+    u8    value;
+
+    buffer = (char*)g_UiFormatBuffer;
+    Menu_DrawHeaderBar(0x8A, 0x1E, 0x2D, 0x14, 1u);
+    value = D_801FD288[0];
+    fmt   = D_801F6C04;
+    sprintf(buffer, fmt, value);
+    UI_DrawAsciiString(0x95, 0x22, 0, buffer);
+}
 
 INCLUDE_ASM(Menu_DrawHeaderBar);
 
