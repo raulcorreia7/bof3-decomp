@@ -132,9 +132,9 @@ MATCH void func_801F7CF8(void) {
 MATCH void func_801F7D54(void) {
     u8 timer;
 
-    D_800E4C1E          -= 0x18;
-    timer               = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09  = timer;
+    D_800E4C1E -= 0x18;
+    timer              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = timer;
     if (timer == 0) {
         Actor_Clear();
     }
