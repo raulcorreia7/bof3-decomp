@@ -19,8 +19,9 @@ extern Callback D_801FE294[];
 extern Callback  D_801FE288[];
 extern SceneFunc D_801FE304[66];
 
-extern u8 D_80146865;
-extern u8 D_80146866;
-extern u8 D_80146867;
+extern u8  D_80146865;
+extern u8  D_80146866;
+extern u8  D_80146867;
+extern u16 g_GameAreaId;
 
 #endif
