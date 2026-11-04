@@ -301,10 +301,7 @@ MATCH void func_801FE0E8(void) {
     func_801C1630();
 }
 
-MATCH void func_801FE12C(void) {
-    func_801C1ABC(4);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_RemoveRei.h"
 
 MATCH void func_801FE154(void) {
     func_801C1ABC(4);

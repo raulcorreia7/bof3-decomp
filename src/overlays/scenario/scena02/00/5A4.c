@@ -422,9 +422,6 @@ MATCH void func_801FE178(void) {
     Party_JoinMember(4);
 }
 
-MATCH void func_801FE198(void) {
-    func_801C1ABC(4);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_RemoveRei.h"
 
 INCLUDE_ASM(func_801FE1C0);
