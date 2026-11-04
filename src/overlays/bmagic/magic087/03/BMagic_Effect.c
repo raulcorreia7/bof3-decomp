@@ -20,11 +20,31 @@ MATCH void func_801EF0EC(void) {
 
 INCLUDE_ASM(func_801EF130);
 
-INCLUDE_ASM(func_801EF2C0);
+MATCH void func_801EF2C0(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 2) {
+        g_SpadWork->unk_04                = 0;
+        g_SpadWork->word_08.byte.unk_09   = 8;
+        g_SpadWork->word_08.byte.timer_0A = 0x10;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF324);
 
-INCLUDE_ASM(func_801EF4A0);
+MATCH void func_801EF4A0(void) {
+    u8 counter;
+
+    counter                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = counter;
+    if ((counter & 0xFF) == 0x10) {
+        g_SpadWork->unk_02 += 1;
+        return;
+    }
+    g_SpadWork->unk_04 += 1;
+    func_800AF764();
+    func_801EF580(0);
+    func_801EF580(0xF);
+}
 
 MATCH void func_801EF530(void) {
     PartyBattler* work;
@@ -77,7 +97,20 @@ MATCH void func_801EFCA0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFCE0);
+MATCH void func_801EFCE0(void) {
+    u8 timer;
+
+    timer                             = g_SpadWork->word_08.byte.timer_0A - 1;
+    g_SpadWork->word_08.byte.timer_0A = timer;
+    if (!(timer & 0xFF)) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        g_SpadWork->flags_00 = 0;
+        g_SpadWork->step_01  = 0;
+        g_SpadWork->unk_02   = 0;
+        g_SpadWork->unk_03   = 0;
+        g_SpadWork->unk_04   = 0;
+    }
+}
 
 MATCH void func_801EFD7C(void) {
     SYS_DISPATCH_BYTE(D_801F0540, g_SpadWork->unk_02);
@@ -88,7 +121,19 @@ MATCH void func_801EFD7C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFE04);
+MATCH void func_801EFE04(void) {
+    g_SpadWork->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw;
+    g_SpadWork->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw;
+    g_SpadWork->word_3C.word   = BATTLE_ACTIVE_WORK->word_3C.word;
+    if (g_SpadWork->step_01 == 2) {
+        g_SpadWork->word_08.byte.unk_0B = 0;
+    } else {
+        g_SpadWork->word_08.byte.unk_0B = 8;
+    }
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0x20;
+    g_SpadWork->unk_02 += 1;
+}
 
 INCLUDE_ASM(func_801EFE90);
 
