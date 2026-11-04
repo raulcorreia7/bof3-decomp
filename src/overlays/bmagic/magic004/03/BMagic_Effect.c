@@ -10,7 +10,19 @@ INCLUDE_ASM(func_801EEC98);
 
 INCLUDE_ASM(func_801EEF8C);
 
-INCLUDE_ASM(func_801EF158);
+MATCH void func_801EF158(void) {
+    u16 cue;
+
+    if (g_SpadWork->unk_0B == 0) {
+        cue = D_801EFE40[g_SpadWork->unk_04];
+        if (cue != 0) {
+            SND_QueueSelectionFx(cue);
+        }
+        func_800A9820(g_BattleTargetSelector);
+        g_SpadWork->unk_09 = 0;
+        g_SpadWork->step_01++;
+    }
+}
 
 INCLUDE_ASM(func_801EF1F0);
 
