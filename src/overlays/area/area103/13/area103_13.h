@@ -7,6 +7,7 @@
 #include "overlays/area/world02.h"
 #include "work/area_spad.h"
 
+void      func_801F482C(void);
 void      func_801F49A0(s32 arg);
 void      func_801F4E70(s32 arg);
 extern u8 D_801F5934[];
@@ -29,5 +30,18 @@ typedef struct AreaEffectRow {
     s16 unk_14; /* 0x14 */
     u8  pad_16[0x4BC - 0x16];
 } AreaEffectRow;
+
+/* The shared frame tail of the scripted scene steps: every fifth frame it
+ * advances the cell palette cycle, then draws both cell layers and the overlay. */
+static inline void Area_StepSceneFrame(void) {
+    s32 beat = g_FrameCount / 5;
+
+    if (g_FrameCount == beat * 5) {
+        func_801F4E70(beat & 3);
+    }
+    func_801F49A0(0);
+    func_801F49A0(1);
+    func_801F482C();
+}
 
 #endif
