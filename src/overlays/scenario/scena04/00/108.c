@@ -90,19 +90,7 @@ MATCH void func_801F7FCC(void) {
     } while ((u32)(index & BYTE_MASK) < 0x80U);
 }
 
-MATCH u8* func_801F7FF8(void) {
-    u8* p;
-    u8  i;
-
-    p = MEM_PTR(u8, AREA_WORK_WINDOW_ADDRESS);
-    for (i = 0; i < 128; i++) {
-        if (p[SCRATCH_ROW_OFFSET] == 0) {
-            return p;
-        }
-        p += SCRATCH_ROW_STRIDE;
-    }
-    return NULL;
-}
+#include "overlays/area/Area_FindFreeWorkRow.h"
 
 INCLUDE_ASM(func_801F8034);
 
