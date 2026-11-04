@@ -271,7 +271,15 @@ MATCH void func_801F117C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F11C4);
+MATCH void func_801F11C4(void) {
+    g_SpadWork->unk_5D -= 3;
+    g_SpadWork->unk_5E -= 3;
+    g_SpadWork->unk_5F -= 3;
+    if ((s8)g_SpadWork->unk_5D == -0x80) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F1274(void) {
     func_801E5988();
