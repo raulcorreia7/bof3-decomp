@@ -19,7 +19,6 @@
 #define AREA_WORK_WINDOW         0x800E4800u /* the per-area work window (AreaHandlerRecord.work_08) */
 /* The shop panel step the request sets. */
 #define g_MasterSubStep          (*(s8*)&g_MasterSubStep)
-#define g_CurrentActor           ((void*)g_CurrentActor)
 
 /* The selection byte that arms the area request. */
 extern s8 D_801490C7;
