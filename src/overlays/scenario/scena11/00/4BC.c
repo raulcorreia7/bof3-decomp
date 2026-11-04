@@ -205,12 +205,7 @@ INCLUDE_ASM(func_801FAB74);
 
 #include "overlays/scenario/Scene_JoinAdultNina.h"
 
-MATCH void func_801FAC04(void) {
-    EMI_LoaderStreamFamily(7U, 8U, 5U, 0U);
-    Party_BuildBattlers(0);
-    Party_JoinMember(5);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_JoinMomo.h"
 
 INCLUDE_ASM(func_801FAC48);
 
@@ -221,11 +216,8 @@ MATCH void func_801FAC94(void) {
     func_801C1630();
 }
 
-MATCH void func_801FACD8(void) {
-    EMI_LoaderStreamFamily(7U, 8U, 5U, 0U);
-    Party_BuildBattlers(0);
-    Party_JoinMember(5);
-    func_801C1630();
+MATCH void Scene_JoinMomo_801FACD8(void) {
+    SCENE_JOIN_MOMO();
 }
 
 INCLUDE_ASM(func_801FAD1C);
