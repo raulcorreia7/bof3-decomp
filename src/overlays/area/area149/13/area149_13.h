@@ -27,5 +27,4 @@ void func_801F2DE0(void);
 /* The sprite-span step the handler enters. */
 void func_801F3140(s32 span);
 
-
 #endif
