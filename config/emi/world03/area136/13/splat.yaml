@@ -22,7 +22,7 @@ segments:
       - [0x448, c, func_801F3048]
       - [0x4C8, c, func_801F30C8]
       - [0x548, c, func_801F3148]
-      - [0x570, c, func_801F3170]
+      - [0x570, c, Area_AddCameraOffsetY2]
       - [0x598, c, func_801F3198]
       - [0x7BC, c, func_801F33BC]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
