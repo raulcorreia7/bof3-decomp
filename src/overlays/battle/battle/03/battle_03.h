@@ -23,9 +23,6 @@
  * width g_BattlePanelWidths plus this margin, or this margin alone for an empty row. */
 #define BATTLE_PANEL_SLOT_COUNT        5
 #define BATTLE_PANEL_SIZE              0x10
-/* Queued-slot records at g_BattleEffects: Battle_AllocEffect scans and allocates one,
- * func_801E5A38 clears all of them. */
-#define BATTLE_EFFECT_COUNT            48
 #define BATTLE_GLOBAL_BYTE_630C(index) MEM(volatile u8, 0x8014630Cu + (u32)(index))
 /* Current enemy-work pointer cell (fixed RAM, not scratchpad). */
 #define BATTLE_CURRENT_ENEMY_PTR       (*(volatile EnemyBattler**)&g_BattleCurrentEnemy)
