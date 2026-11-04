@@ -60,7 +60,16 @@ INCLUDE_ASM(func_801EFBAC);
 
 INCLUDE_ASM(func_801EFC68);
 
-INCLUDE_ASM(func_801EFD24);
+MATCH void func_801EFD24(void) {
+    u8 count;
+
+    count              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = count;
+    if (count == 0) {
+        BATTLE_ACTIVE_WORK->unk_0B = 1;
+        g_SpadWork->unk_02         = g_SpadWork->unk_02 + 1;
+    }
+}
 
 MATCH void func_801EFD80(void) {
     PartyBattler* active;
