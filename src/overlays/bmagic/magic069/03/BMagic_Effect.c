@@ -25,13 +25,13 @@ MATCH void func_801EF034(void) {
     PartyBattler* dst;
 
     if (--g_SpadWork->word_08.byte.unk_09 == 0) {
-        dst                             = g_SpadWork;
-        src                             = D_801EB4E0;
-        dst->unk_0C                     = 0xB;
-        dst->unk_2E.half                = src->unk_2E.half + 0x37;
-        dst->unk_30.half                = src->unk_30.half - 0x10;
-        dst->word_08.byte.unk_09        = 0;
-        g_SpadWork->word_08.byte.unk_0A = 0x20;
+        dst                               = g_SpadWork;
+        src                               = D_801EB4E0;
+        dst->unk_0C                       = 0xB;
+        dst->unk_2E.half                  = src->unk_2E.half + 0x37;
+        dst->unk_30.half                  = src->unk_30.half - 0x10;
+        dst->word_08.byte.unk_09          = 0;
+        g_SpadWork->word_08.byte.timer_0A = 0x20;
         g_SpadWork->unk_02++;
     }
 }
@@ -68,9 +68,9 @@ MATCH void func_801EF2AC(void) {
     PartyBattler* work;
     u8            next;
 
-    work                      = g_SpadWork;
-    next                      = work->word_08.byte.unk_0A - 2;
-    work->word_08.byte.unk_0A = next;
+    work                        = g_SpadWork;
+    next                        = work->word_08.byte.timer_0A - 2;
+    work->word_08.byte.timer_0A = next;
     if (next == 8) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
         func_801E5988();
@@ -84,13 +84,13 @@ MATCH void func_801EF430(void) {
     PartyBattler* dst;
 
     if (--g_SpadWork->word_08.byte.unk_09 == 0) {
-        dst                             = g_SpadWork;
-        src                             = D_801EB4E0;
-        dst->unk_0C                     = 0xB;
-        dst->unk_2E.half                = src->unk_2E.half - 0x37;
-        dst->unk_30.half                = src->unk_30.half - 0x10;
-        dst->word_08.byte.unk_09        = 0;
-        g_SpadWork->word_08.byte.unk_0A = 0x20;
+        dst                               = g_SpadWork;
+        src                               = D_801EB4E0;
+        dst->unk_0C                       = 0xB;
+        dst->unk_2E.half                  = src->unk_2E.half - 0x37;
+        dst->unk_30.half                  = src->unk_30.half - 0x10;
+        dst->word_08.byte.unk_09          = 0;
+        g_SpadWork->word_08.byte.timer_0A = 0x20;
         g_SpadWork->unk_02++;
     }
 }

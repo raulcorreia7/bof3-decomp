@@ -30,15 +30,15 @@ INCLUDE_ASM(func_801EF3FC);
 MATCH void func_801EF588(void) {
     u8 timer;
 
-    timer                           = g_SpadWork->word_08.byte.unk_0A + 4;
-    g_SpadWork->word_08.byte.unk_0A = timer;
+    timer                             = g_SpadWork->word_08.byte.timer_0A + 4;
+    g_SpadWork->word_08.byte.timer_0A = timer;
     if (timer == 16) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
 }
 
 MATCH void func_801EF5D8(void) {
-    g_SpadWork->word_08.byte.unk_0A = 0x10 + (rsin((g_SpadWork->word_08.byte.unk_0B & 0x3F) << 6) * 4 >> 12);
+    g_SpadWork->word_08.byte.timer_0A = 0x10 + (rsin((g_SpadWork->word_08.byte.unk_0B & 0x3F) << 6) * 4 >> 12);
     g_SpadWork->unk_0C++;
     if (g_SpadWork->unk_0C == 0x10) {
         g_SpadWork->unk_02++;
@@ -58,11 +58,11 @@ MATCH void func_801F020C(void) {
 }
 
 MATCH void func_801F028C(void) {
-    g_SpadWork->unk_5D              = 8;
-    g_SpadWork->unk_5E              = 6;
-    g_SpadWork->unk_5F              = 15;
-    g_SpadWork->word_08.byte.unk_09 = 0;
-    g_SpadWork->word_08.byte.unk_0A = 2;
+    g_SpadWork->unk_5D                = 8;
+    g_SpadWork->unk_5E                = 6;
+    g_SpadWork->unk_5F                = 15;
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 2;
     g_SpadWork->unk_02++;
 }
 
@@ -70,7 +70,7 @@ MATCH void func_801F02FC(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->word_08.byte.unk_0A += 2;
+    work->word_08.byte.timer_0A += 2;
     work = g_SpadWork;
     work->word_08.byte.unk_09 += 4;
     if (work->word_08.byte.unk_09 == 16) {
@@ -84,7 +84,7 @@ MATCH void func_801F0368(void) {
     u8            count;
 
     work = g_SpadWork;
-    work->word_08.byte.unk_0A++;
+    work->word_08.byte.timer_0A++;
     work                      = g_SpadWork;
     count                     = work->word_08.byte.unk_09 - 4;
     work->word_08.byte.unk_09 = count;

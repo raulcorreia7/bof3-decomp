@@ -97,11 +97,11 @@ INCLUDE_ASM(func_801F0040);
 MATCH void func_801F00D8(void) {
     PartyBattler* work;
 
-    work                      = g_SpadWork;
-    work->word_08.byte.unk_09 = work->word_08.byte.unk_09 + 2;
-    work                      = g_SpadWork;
-    work->word_08.byte.unk_0A = work->word_08.byte.unk_0A - 1;
-    if (work->word_08.byte.unk_0A == 0) {
+    work                        = g_SpadWork;
+    work->word_08.byte.unk_09   = work->word_08.byte.unk_09 + 2;
+    work                        = g_SpadWork;
+    work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
+    if (work->word_08.byte.timer_0A == 0) {
         func_801E5988();
     }
 }

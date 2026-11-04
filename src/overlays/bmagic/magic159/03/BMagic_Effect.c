@@ -25,13 +25,13 @@ MATCH void func_801EEEC8(void) {
     PartyBattler* dst;
 
     if (--g_SpadWork->word_08.byte.unk_09 == 0) {
-        src                             = D_801EB4E0;
-        dst                             = g_SpadWork;
-        dst->coord_x_34                 = src->coord_x_34;
-        dst->coord_y_38                 = src->coord_y_38;
-        dst->word_3C                    = src->word_3C;
-        dst->word_08.byte.unk_09        = 0x10;
-        g_SpadWork->word_08.byte.unk_0A = 0;
+        src                               = D_801EB4E0;
+        dst                               = g_SpadWork;
+        dst->coord_x_34                   = src->coord_x_34;
+        dst->coord_y_38                   = src->coord_y_38;
+        dst->word_3C                      = src->word_3C;
+        dst->word_08.byte.unk_09          = 0x10;
+        g_SpadWork->word_08.byte.timer_0A = 0;
         g_SpadWork->unk_02++;
     }
 }
@@ -42,8 +42,8 @@ MATCH void func_801EEF58(void) {
     work = g_SpadWork;
     work->word_08.byte.unk_09++;
     work = g_SpadWork;
-    work->word_08.byte.unk_0A += 2;
-    if (work->word_08.byte.unk_0A == 16) {
+    work->word_08.byte.timer_0A += 2;
+    if (work->word_08.byte.timer_0A == 16) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -66,9 +66,9 @@ MATCH void func_801EF014(void) {
 
     work = g_SpadWork;
     work->word_08.byte.unk_09++;
-    work                      = g_SpadWork;
-    count                     = work->word_08.byte.unk_0A - 2;
-    work->word_08.byte.unk_0A = count;
+    work                        = g_SpadWork;
+    count                       = work->word_08.byte.timer_0A - 2;
+    work->word_08.byte.timer_0A = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
         active->word_08.byte.unk_0B--;

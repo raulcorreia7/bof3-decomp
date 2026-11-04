@@ -11,7 +11,7 @@ MATCH void func_801E05EC(void) {
     PartyBattler* battle;
 
     work = g_SpadWork;
-    if (work->word_08.byte.unk_0A == 0) {
+    if (work->word_08.byte.timer_0A == 0) {
         battle = g_GameState;
         if (battle->unk_120 & 0x10) {
             func_800AAC88((s16)battle->hp_change, work->slot);
@@ -37,17 +37,17 @@ MATCH void func_801E05EC(void) {
 
         /* FAKE: volatile byte view keeps the reload separate from the branch
          * test load. */
-        countdown                 = VOL(u8, work->word_08.byte.unk_0A);
-        position_x                = work->coord_x_34.raw;
-        delta_x                   = work->unk_0C;
-        position_y                = work->coord_y_38.raw;
-        delta_y                   = work->unk_10;
-        countdown                 = countdown - 1;
-        position_x                = position_x - delta_x;
-        position_y                = position_y - delta_y;
-        work->coord_x_34.raw      = position_x;
-        work->coord_y_38.raw      = position_y;
-        work->word_08.byte.unk_0A = countdown;
+        countdown                   = VOL(u8, work->word_08.byte.timer_0A);
+        position_x                  = work->coord_x_34.raw;
+        delta_x                     = work->unk_0C;
+        position_y                  = work->coord_y_38.raw;
+        delta_y                     = work->unk_10;
+        countdown                   = countdown - 1;
+        position_x                  = position_x - delta_x;
+        position_y                  = position_y - delta_y;
+        work->coord_x_34.raw        = position_x;
+        work->coord_y_38.raw        = position_y;
+        work->word_08.byte.timer_0A = countdown;
     }
     func_801DEE4C();
 }

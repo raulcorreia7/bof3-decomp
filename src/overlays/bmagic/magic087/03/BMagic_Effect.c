@@ -59,7 +59,7 @@ MATCH void func_801EFA2C(void) {
             g_SpadWork->word_08.byte.unk_0B = 8;
             g_SpadWork->word_08.byte.unk_09 = 0x1F;
         }
-        g_SpadWork->word_08.byte.unk_0A = 0;
+        g_SpadWork->word_08.byte.timer_0A = 0;
         g_SpadWork->unk_02 += 1;
     }
 }

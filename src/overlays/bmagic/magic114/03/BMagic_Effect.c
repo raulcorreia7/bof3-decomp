@@ -36,7 +36,7 @@ MATCH void func_801EF6A8(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    rot.vz = ((g_SpadWork->word_08.byte.unk_0A & 0x1F) - 2) << 7;
+    rot.vz = ((g_SpadWork->word_08.byte.timer_0A & 0x1F) - 2) << 7;
     src    = (PartyBattler*)D_801EB4E0;
     pos.vx = (src->coord_x_34.raw >> 9) - 0x4000;
     pos.vy = (src->coord_y_38.raw >> 9) - 0x4000;

@@ -13,20 +13,20 @@ MATCH void func_801E6FB0(void) {
         g_SpadWork->step_01 += 1;
         return;
     }
-    if (g_SpadWork->word_08.byte.unk_0A == 0) {
+    if (g_SpadWork->word_08.byte.timer_0A == 0) {
         id = func_801E8FA8();
         if (id == GAME_NONE) {
             func_801E5988();
             return;
         }
-        g_SpadWork->unk_27              = 0xFF;
-        g_SpadWork->word_08.byte.unk_0A = 0x3C;
+        g_SpadWork->unk_27                = 0xFF;
+        g_SpadWork->word_08.byte.timer_0A = 0x3C;
         if (g_SpadWork->word_08.byte.unk_0B != id) {
             Actor_SelectScript(s_BattleBattlerStepIds[id]);
             g_SpadWork->word_08.byte.unk_0B = id;
         }
     } else {
-        g_SpadWork->word_08.byte.unk_0A -= 1;
+        g_SpadWork->word_08.byte.timer_0A -= 1;
     }
     slot = LOBU(D_801EB4E0->slot);
     if (BATTLER_IS_PLAYER(slot)) {

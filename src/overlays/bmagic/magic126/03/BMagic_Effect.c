@@ -20,7 +20,7 @@ INCLUDE_ASM(func_801EEF14);
 
 MATCH void func_801EF00C(void) {
     g_SpadWork->word_08.byte.unk_09 += 2;
-    g_SpadWork->word_08.byte.unk_0A += 24;
+    g_SpadWork->word_08.byte.timer_0A += 24;
     if (g_SpadWork->word_08.byte.unk_09 == 0x10) {
         Bmagic_NextStep();
     }
@@ -54,8 +54,8 @@ MATCH void func_801EFC28(void) {
     work = g_SpadWork;
     work->word_08.byte.unk_09++;
     work = g_SpadWork;
-    work->word_08.byte.unk_0A++;
-    if (work->word_08.byte.unk_0A == 16) {
+    work->word_08.byte.timer_0A++;
+    if (work->word_08.byte.timer_0A == 16) {
         work = g_SpadWork;
         work->unk_02++;
     }

@@ -67,8 +67,8 @@ MATCH void func_801EFC58(void) {
 }
 
 MATCH void func_801EFCC0(void) {
-    g_SpadWork->word_08.byte.unk_09 = 0;
-    g_SpadWork->word_08.byte.unk_0A = 0x88;
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0x88;
     Bmagic_NextStep();
 }
 

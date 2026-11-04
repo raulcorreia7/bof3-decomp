@@ -9,9 +9,9 @@ MATCH void Effect_CountDownTimer(void) {
 
     work = g_SpadWork;
     work->word_08.byte.unk_09 += EFFECT_TIMER_STEP;
-    work                      = g_SpadWork;
-    count                     = work->word_08.byte.unk_0A - 1;
-    work->word_08.byte.unk_0A = count;
+    work                        = g_SpadWork;
+    count                       = work->word_08.byte.timer_0A - 1;
+    work->word_08.byte.timer_0A = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
         active->word_08.byte.unk_0B--;

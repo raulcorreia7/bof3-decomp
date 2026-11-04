@@ -26,8 +26,8 @@ MATCH void func_801EF114(void) {
     work = g_SpadWork;
     work->word_08.byte.unk_09++;
     work = g_SpadWork;
-    work->word_08.byte.unk_0A++;
-    if (work->word_08.byte.unk_0A == 16) {
+    work->word_08.byte.timer_0A++;
+    if (work->word_08.byte.timer_0A == 16) {
         work = g_SpadWork;
         work->unk_02++;
     }

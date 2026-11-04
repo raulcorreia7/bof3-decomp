@@ -46,9 +46,9 @@ MATCH void func_801EF348(void) {
 MATCH void func_801EF3E0(void) {
     PartyBattler* work;
 
-    work                      = g_SpadWork;
-    work->word_08.byte.unk_0A = work->word_08.byte.unk_0A - 1;
-    if (work->word_08.byte.unk_0A == 0) {
+    work                        = g_SpadWork;
+    work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
+    if (work->word_08.byte.timer_0A == 0) {
         work                      = (PartyBattler*)D_801EB4E0;
         work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
         func_801E5988();

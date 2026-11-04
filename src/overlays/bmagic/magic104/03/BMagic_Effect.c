@@ -37,10 +37,10 @@ MATCH void func_801EF2F8(void) {
     PartyBattler* work;
     PartyBattler* active;
 
-    work                      = g_SpadWork;
-    work->word_08.byte.unk_0A = work->word_08.byte.unk_0A + 1;
-    work                      = g_SpadWork;
-    work->word_08.byte.unk_09 = work->word_08.byte.unk_09 + 1;
+    work                        = g_SpadWork;
+    work->word_08.byte.timer_0A = work->word_08.byte.timer_0A + 1;
+    work                        = g_SpadWork;
+    work->word_08.byte.unk_09   = work->word_08.byte.unk_09 + 1;
     if (work->word_08.byte.unk_09 == 0x18) {
         active                      = BATTLE_ACTIVE_WORK;
         active->word_08.byte.unk_0B = g_SpadWork->word_08.byte.unk_0B;

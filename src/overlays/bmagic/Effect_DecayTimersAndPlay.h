@@ -10,8 +10,8 @@ MATCH void Effect_DecayTimersAndPlay(void) {
         }
     }
     if (g_SpadWork->word_08.byte.unk_0B < 3u) {
-        if (g_SpadWork->word_08.byte.unk_0A != 0) {
-            g_SpadWork->word_08.byte.unk_0A--;
+        if (g_SpadWork->word_08.byte.timer_0A != 0) {
+            g_SpadWork->word_08.byte.timer_0A--;
         }
     }
     if ((g_SpadWork->word_08.word & 0xFFFF0000u) == 0) {

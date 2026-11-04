@@ -60,10 +60,10 @@ MATCH void func_801EF37C(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         func_800AFC98(2, 0);
         func_801E257C(g_BattleActingBattler, 0xB);
-        work                      = g_SpadWork;
-        work->unk_14              = 0x140;
-        work->word_08.byte.unk_0A = 9;
-        work->unk_20              = -0x40;
+        work                        = g_SpadWork;
+        work->unk_14                = 0x140;
+        work->word_08.byte.timer_0A = 9;
+        work->unk_20                = -0x40;
         g_SpadWork->unk_02++;
     }
 }
@@ -137,9 +137,9 @@ MATCH void func_801EFE38(void) {
     g_SpadWork->unk_14               = value;
     g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E + value;
     if ((u8)g_SpadWork->word_08.byte.unk_09 < 8U) {
-        value3 = g_SpadWork->word_08.byte.unk_0A;
+        value3 = g_SpadWork->word_08.byte.timer_0A;
         if (value3 < 0x10U) {
-            g_SpadWork->word_08.byte.unk_0A = value3 + 1;
+            g_SpadWork->word_08.byte.timer_0A = value3 + 1;
         }
     }
     value2                          = g_SpadWork->word_08.byte.unk_09 - 1;

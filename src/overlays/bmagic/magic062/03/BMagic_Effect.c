@@ -17,8 +17,8 @@ MATCH void func_801EEEC0(void) {
     g_SpadWork->word_08.byte.unk_09 = value;
     if (!(value & 0xFF)) {
         func_80196718(battler);
-        g_SpadWork->word_08.byte.unk_0A = func_8019651C(battler, 0, 0, 0, 1);
-        g_SpadWork->word_08.byte.unk_09 = 8;
+        g_SpadWork->word_08.byte.timer_0A = func_8019651C(battler, 0, 0, 0, 1);
+        g_SpadWork->word_08.byte.unk_09   = 8;
         g_SpadWork->step_01 += 1;
     }
 }
@@ -77,7 +77,7 @@ MATCH void func_801EFF68(void) {
     u8  value3;
 
     func_800AF764();
-    if ((g_SpadWork->unk_0C == 4) && ((u8)g_SpadWork->word_08.byte.unk_0A < 5U)) {
+    if ((g_SpadWork->unk_0C == 4) && ((u8)g_SpadWork->word_08.byte.timer_0A < 5U)) {
         value2 = (rand() & 3) | 0x40;
     } else {
         value2 = (rand() & 3) | 0x18;
@@ -95,8 +95,8 @@ MATCH void func_801EFF68(void) {
     }
     g_SpadWork->word_08.byte.unk_09 += g_SpadWork->unk_0C;
     if (g_SpadWork->unk_0C == 4) {
-        value3                          = g_SpadWork->word_08.byte.unk_0A - 1;
-        g_SpadWork->word_08.byte.unk_0A = value3;
+        value3                            = g_SpadWork->word_08.byte.timer_0A - 1;
+        g_SpadWork->word_08.byte.timer_0A = value3;
         if (!(value3 & 0xFF)) {
             if (g_SpadWork->word_08.byte.unk_0B == 0) {
                 SND_QueueSelectionFx(0x101);

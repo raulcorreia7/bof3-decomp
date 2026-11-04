@@ -50,8 +50,8 @@ INCLUDE_ASM(func_801EF27C);
 MATCH void func_801EF308(void) {
     u8 timer;
 
-    timer                           = g_SpadWork->word_08.byte.unk_0A + 4;
-    g_SpadWork->word_08.byte.unk_0A = timer;
+    timer                             = g_SpadWork->word_08.byte.timer_0A + 4;
+    g_SpadWork->word_08.byte.timer_0A = timer;
     if (timer == 32) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
@@ -64,9 +64,9 @@ MATCH void func_801EF358(void) {
 
     work = g_SpadWork;
     work->word_08.byte.unk_09 += 4;
-    work                      = g_SpadWork;
-    count                     = work->word_08.byte.unk_0A - 1;
-    work->word_08.byte.unk_0A = count;
+    work                        = g_SpadWork;
+    count                       = work->word_08.byte.timer_0A - 1;
+    work->word_08.byte.timer_0A = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
         active->word_08.byte.unk_0B--;

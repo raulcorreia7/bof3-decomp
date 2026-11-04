@@ -14,8 +14,8 @@ MATCH void func_801EEE44(void) {
     battler = g_BattleSelectedActor;
     if (g_SpadWork->word_08.byte.unk_0B == 1) {
         func_80196718(battler);
-        g_SpadWork->word_08.byte.unk_0A = func_8019651C(battler, 1, 1, 1, 0);
-        g_SpadWork->word_08.byte.unk_09 = 0x10;
+        g_SpadWork->word_08.byte.timer_0A = func_8019651C(battler, 1, 1, 1, 0);
+        g_SpadWork->word_08.byte.unk_09   = 0x10;
         g_SpadWork->step_01 += 1;
     }
 }
@@ -52,7 +52,7 @@ MATCH void func_801EF2BC(void) {
 
 MATCH void func_801EF334(void) {
     g_SpadWork->word_08.byte.unk_09 += 1;
-    g_SpadWork->word_08.byte.unk_0A += 1;
+    g_SpadWork->word_08.byte.timer_0A += 1;
     if (g_SpadWork->word_08.byte.unk_09 == 0x10) {
         Bmagic_NextStep();
     }
@@ -98,8 +98,8 @@ INCLUDE_ASM(func_801EF7D4);
 MATCH void func_801EF850(void) {
     u8 timer;
 
-    timer                           = g_SpadWork->word_08.byte.unk_0A + 1;
-    g_SpadWork->word_08.byte.unk_0A = timer;
+    timer                             = g_SpadWork->word_08.byte.timer_0A + 1;
+    g_SpadWork->word_08.byte.timer_0A = timer;
     if (timer == 22) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }

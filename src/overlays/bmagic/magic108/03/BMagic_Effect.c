@@ -26,8 +26,8 @@ INCLUDE_ASM(func_801EF090);
 MATCH void func_801EF0E0(void) {
     u8 timer;
 
-    timer                           = g_SpadWork->word_08.byte.unk_0A + 1;
-    g_SpadWork->word_08.byte.unk_0A = timer;
+    timer                             = g_SpadWork->word_08.byte.timer_0A + 1;
+    g_SpadWork->word_08.byte.timer_0A = timer;
     if (timer == 96) {
         g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
     }

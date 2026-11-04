@@ -14,8 +14,8 @@ MATCH void func_801EEE88(void) {
     if (--g_SpadWork->word_08.byte.unk_09 == 0) {
         selected = &g_BattleSelectedActor;
         GFX_FreePaletteFadeTarget(*selected);
-        g_SpadWork->word_08.byte.unk_0A = GFX_AllocPaletteFade((u8*)*selected, 0, 0, 0, 1);
-        g_SpadWork->word_08.byte.unk_09 = 8;
+        g_SpadWork->word_08.byte.timer_0A = GFX_AllocPaletteFade((u8*)*selected, 0, 0, 0, 1);
+        g_SpadWork->word_08.byte.unk_09   = 8;
         g_SpadWork->step_01++;
     }
 }
@@ -61,8 +61,8 @@ MATCH void func_801EFA70(void) {
     timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
     g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {
-        g_SpadWork->word_08.byte.unk_0A = 0x1;
-        g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
+        g_SpadWork->word_08.byte.timer_0A = 0x1;
+        g_SpadWork->unk_02                = g_SpadWork->unk_02 + 1;
     }
 }
 
@@ -74,9 +74,9 @@ MATCH void func_801EFBE4(void) {
     PartyBattler* work;
     u8            next;
 
-    work                      = g_SpadWork;
-    next                      = work->word_08.byte.unk_0A + 1;
-    work->word_08.byte.unk_0A = next;
+    work                        = g_SpadWork;
+    next                        = work->word_08.byte.timer_0A + 1;
+    work->word_08.byte.timer_0A = next;
     if (next == 0x18) {
         D_801EB4E0->word_08.byte.unk_0B--;
         func_801E5988();

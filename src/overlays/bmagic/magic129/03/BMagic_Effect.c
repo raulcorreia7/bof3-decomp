@@ -54,18 +54,18 @@ MATCH void func_801F00D4(void) {
     value3                          = g_SpadWork->word_08.byte.unk_09 - 1;
     g_SpadWork->word_08.byte.unk_09 = value3;
     if (!(value3 & 0xFF)) {
-        g_SpadWork->unk_14              = 0x40000;
-        g_SpadWork->unk_20              = 0x20000;
-        value2                          = (rand() & 0xF) + 0x1C;
-        value                           = (g_SpadWork->word_08.byte.unk_0B & 0x1F) << 7;
-        g_SpadWork->coord_x_34.raw      = D_801EB4E0->coord_x_34.raw + (rsin(value) * value2);
-        g_SpadWork->coord_y_38.raw      = D_801EB4E0->coord_y_38.raw + (rcos(value) * value2);
-        g_SpadWork->word_3C.word        = D_801EB4E0->word_3C.word;
-        g_SpadWork->unk_5D              = (rand() & 7) + 5;
-        g_SpadWork->unk_5E              = (rand() & 7) + 5;
-        g_SpadWork->unk_5F              = (rand() & 7) + 5;
-        g_SpadWork->word_08.byte.unk_09 = 0x10;
-        g_SpadWork->word_08.byte.unk_0A = 0x10;
+        g_SpadWork->unk_14                = 0x40000;
+        g_SpadWork->unk_20                = 0x20000;
+        value2                            = (rand() & 0xF) + 0x1C;
+        value                             = (g_SpadWork->word_08.byte.unk_0B & 0x1F) << 7;
+        g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw + (rsin(value) * value2);
+        g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw + (rcos(value) * value2);
+        g_SpadWork->word_3C.word          = D_801EB4E0->word_3C.word;
+        g_SpadWork->unk_5D                = (rand() & 7) + 5;
+        g_SpadWork->unk_5E                = (rand() & 7) + 5;
+        g_SpadWork->unk_5F                = (rand() & 7) + 5;
+        g_SpadWork->word_08.byte.unk_09   = 0x10;
+        g_SpadWork->word_08.byte.timer_0A = 0x10;
         g_SpadWork->unk_02 += 1;
     }
 }

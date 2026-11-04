@@ -30,13 +30,13 @@ INCLUDE_ASM(func_801EEFA8);
 MATCH void func_801EF070(void) {
     PartyBattler* src;
 
-    src                             = (PartyBattler*)D_801EB4E0;
-    g_SpadWork->coord_x_34          = src->coord_x_34;
-    g_SpadWork->coord_y_38          = src->coord_y_38;
-    g_SpadWork->word_3C             = src->word_3C;
-    g_SpadWork->word_08.byte.unk_09 = 0;
-    g_SpadWork->word_08.byte.unk_0A = 1;
-    g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
+    src                               = (PartyBattler*)D_801EB4E0;
+    g_SpadWork->coord_x_34            = src->coord_x_34;
+    g_SpadWork->coord_y_38            = src->coord_y_38;
+    g_SpadWork->word_3C               = src->word_3C;
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 1;
+    g_SpadWork->unk_02                = g_SpadWork->unk_02 + 1;
 }
 
 INCLUDE_ASM(func_801EF0D4);

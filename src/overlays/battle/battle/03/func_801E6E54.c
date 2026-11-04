@@ -28,7 +28,7 @@ MATCH void func_801E6E54(void) {
         work->unk_40                    = 0x10000;
         work->unk_18                    = 0x666;
         work->unk_0C                    = 0;
-        work->word_08.byte.unk_0A       = 0x3C;
+        work->word_08.byte.timer_0A     = 0x3C;
         func_801E8DD8();
         Actor_SelectScript(s_BattleBattlerStepIds[index]);
         work          = g_SpadWork;

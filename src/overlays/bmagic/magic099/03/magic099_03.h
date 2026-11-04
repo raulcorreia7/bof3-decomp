@@ -24,8 +24,8 @@ static inline void BattleEffectTimerStep(void) {
      * it. */
     g_SpadWork->word_08.byte.unk_0B++;
     work = g_SpadWork;
-    if (work->word_08.byte.unk_0A < 16) {
-        work->word_08.byte.unk_0A += 2;
+    if (work->word_08.byte.timer_0A < 16) {
+        work->word_08.byte.timer_0A += 2;
     } else {
         work->word_08.byte.unk_09 = 60;
         work                      = g_SpadWork;

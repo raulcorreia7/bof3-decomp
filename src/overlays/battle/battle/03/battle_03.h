@@ -998,10 +998,10 @@ static inline void BattleAdvanceCoords(u8 (*tail_update)(void)) {
     PartyBattler* work;
     u8            timer;
 
-    timer                           = g_SpadWork->word_08.byte.unk_0A - 1;
-    g_SpadWork->word_08.byte.unk_0A = timer;
+    timer                             = g_SpadWork->word_08.byte.timer_0A - 1;
+    g_SpadWork->word_08.byte.timer_0A = timer;
     if (timer == 0) {
-        g_SpadWork->word_08.byte.unk_0A = 4;
+        g_SpadWork->word_08.byte.timer_0A = 4;
         g_SpadWork->unk_03 += 1;
     }
     work = g_SpadWork;

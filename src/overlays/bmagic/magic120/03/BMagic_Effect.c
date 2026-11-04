@@ -94,8 +94,8 @@ MATCH void func_801F01C0(void) {
     u8 count;
 
     func_801F08AC();
-    count                           = g_SpadWork->word_08.byte.unk_0A - 1;
-    g_SpadWork->word_08.byte.unk_0A = count;
+    count                             = g_SpadWork->word_08.byte.timer_0A - 1;
+    g_SpadWork->word_08.byte.timer_0A = count;
     if (count == 0) {
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }

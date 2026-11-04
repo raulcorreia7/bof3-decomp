@@ -32,8 +32,8 @@ MATCH void func_801EF070(void) {
     PartyBattler* battler;
 
     func_801EFDDC();
-    timer                           = g_SpadWork->word_08.byte.unk_0A - 1;
-    g_SpadWork->word_08.byte.unk_0A = timer;
+    timer                             = g_SpadWork->word_08.byte.timer_0A - 1;
+    g_SpadWork->word_08.byte.timer_0A = timer;
     if (timer == 0) {
         BMAGIC_RELEASE_TARGET_AND_PLAY();
     }

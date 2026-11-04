@@ -36,7 +36,7 @@ INCLUDE_ASM(func_801EF1FC);
 
 MATCH void func_801EF268(void) {
     SND_QueueSelectionFx(258);
-    D_801463D6 = g_SpadWork->word_08.byte.unk_0A;
+    D_801463D6 = g_SpadWork->word_08.byte.timer_0A;
     func_800A9820(g_BattleTargetSelector);
     g_BattleState = g_BattleState | 4;
     func_801E5988();

@@ -17,8 +17,8 @@ MATCH void func_801EEEF0(void) {
     g_SpadWork->word_08.byte.unk_09 = value;
     if (!(value & 0xFF)) {
         func_80196718(battler);
-        g_SpadWork->word_08.byte.unk_0A = func_8019651C(battler, 0, 0, 0, 1);
-        g_SpadWork->word_08.byte.unk_09 = 4;
+        g_SpadWork->word_08.byte.timer_0A = func_8019651C(battler, 0, 0, 0, 1);
+        g_SpadWork->word_08.byte.unk_09   = 4;
         g_SpadWork->step_01 += 1;
     }
 }

@@ -17,15 +17,15 @@ INCLUDE_ASM(func_801EEC5C);
 INCLUDE_ASM(func_801EEDA0);
 
 MATCH void func_801EEE50(void) {
-    g_SpadWork->word_08.byte.unk_0B = 0;
-    g_SpadWork->word_08.byte.unk_09 = 0;
-    g_SpadWork->word_08.byte.unk_0A = 0;
+    g_SpadWork->word_08.byte.unk_0B   = 0;
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
     g_SpadWork->step_01++;
 }
 
 MATCH void func_801EEEA0(void) {
     g_SpadWork->word_08.byte.unk_09 += 1;
-    g_SpadWork->word_08.byte.unk_0A += 1;
+    g_SpadWork->word_08.byte.timer_0A += 1;
     if (g_SpadWork->word_08.byte.unk_09 == 0x20) {
         g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
     }
@@ -36,9 +36,9 @@ INCLUDE_ASM(func_801EEF0C);
 MATCH void func_801EEF5C(void) {
     PartyBattler* active;
 
-    g_SpadWork->word_08.byte.unk_09 = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_0A = g_SpadWork->word_08.byte.unk_0A - 1;
-    if (g_SpadWork->word_08.byte.unk_0A == 0) {
+    g_SpadWork->word_08.byte.unk_09   = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.timer_0A = g_SpadWork->word_08.byte.timer_0A - 1;
+    if (g_SpadWork->word_08.byte.timer_0A == 0) {
         active                      = BATTLE_ACTIVE_WORK;
         active->word_08.byte.unk_0B = 255;
         func_801E5988();

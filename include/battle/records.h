@@ -475,14 +475,20 @@ typedef struct BattleOwnerKind {
 ASSERT_SIZE(BattleOwnerKind, 0x24);
 
 /* The word at +0x08 of a work record: its four bytes, which the overlays read one at a time, and the
- * whole word they mask and test at once. */
+ * whole word they mask and test at once.
+ *
+ * timer_0A (+0x0A) is the effect program's wait counter. The bmagic modules set it to a frame count
+ * and count it down to 0 (magic097, magic110) or up to a limit (magic001, magic009, magic099) before
+ * they step the program; battle/battle/03 waits on it the same way. The battle/battle/15 slot menu
+ * programs keep a column index in it, and two bmagic effects (magic162, magic168) keep a palette fade
+ * index. Each program writes it before it reads it. */
 typedef union BattleWorkWord08 {
     u32 word;
 
     struct {
         u8 unk_08;
         u8 unk_09;
-        u8 unk_0A;
+        u8 timer_0A;
         u8 unk_0B;
     } byte;
 } BattleWorkWord08;

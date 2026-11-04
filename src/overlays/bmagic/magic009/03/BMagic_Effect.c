@@ -39,7 +39,7 @@ INCLUDE_ASM(func_801EF198);
 
 MATCH void func_801EF2D4(void) {
     g_SpadWork->word_08.byte.unk_09 += 2;
-    g_SpadWork->word_08.byte.unk_0A += 2;
+    g_SpadWork->word_08.byte.timer_0A += 2;
     if (g_SpadWork->word_08.byte.unk_09 == 0x10) {
         Bmagic_NextStep();
     }

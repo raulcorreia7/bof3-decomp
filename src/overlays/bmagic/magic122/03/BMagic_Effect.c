@@ -25,7 +25,7 @@ MATCH void func_801EF158(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    work->word_08.byte.unk_0A += 3;
+    work->word_08.byte.timer_0A += 3;
     work = g_SpadWork;
     work->word_08.byte.unk_09++;
     if (work->word_08.byte.unk_09 == 8) {

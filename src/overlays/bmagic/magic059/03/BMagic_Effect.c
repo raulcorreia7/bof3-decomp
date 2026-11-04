@@ -31,8 +31,8 @@ MATCH void func_801EF504(void) {
     work = g_SpadWork;
     work->word_08.byte.unk_09++;
     work = g_SpadWork;
-    work->word_08.byte.unk_0A += 2;
-    if (work->word_08.byte.unk_0A == 32) {
+    work->word_08.byte.timer_0A += 2;
+    if (work->word_08.byte.timer_0A == 32) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -93,8 +93,8 @@ MATCH void func_801F0070(void) {
     work = g_SpadWork;
     work->word_08.byte.unk_09++;
     work = g_SpadWork;
-    work->word_08.byte.unk_0A++;
-    if (work->word_08.byte.unk_0A == 32) {
+    work->word_08.byte.timer_0A++;
+    if (work->word_08.byte.timer_0A == 32) {
         work = g_SpadWork;
         work->unk_02++;
     }
@@ -116,9 +116,9 @@ MATCH void func_801F012C(void) {
 
     work = g_SpadWork;
     work->word_08.byte.unk_09++;
-    work                      = g_SpadWork;
-    count                     = work->word_08.byte.unk_0A - 1;
-    work->word_08.byte.unk_0A = count;
+    work                        = g_SpadWork;
+    count                       = work->word_08.byte.timer_0A - 1;
+    work->word_08.byte.timer_0A = count;
     if (count == 0) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
         Actor_Clear();

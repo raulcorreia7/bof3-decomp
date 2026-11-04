@@ -126,9 +126,9 @@ MATCH void func_801F026C(void) {
     PartyBattler* work;
     u8            next;
 
-    work                      = g_SpadWork;
-    next                      = work->word_08.byte.unk_0A + 1;
-    work->word_08.byte.unk_0A = next;
+    work                        = g_SpadWork;
+    next                        = work->word_08.byte.timer_0A + 1;
+    work->word_08.byte.timer_0A = next;
     if (next == 0x10) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
         func_801E5988();

@@ -87,9 +87,9 @@ MATCH void func_801EF44C(void) {
 
     work = g_SpadWork;
     work->word_08.byte.unk_0B++;
-    work                      = g_SpadWork;
-    count                     = work->word_08.byte.unk_0A - 1;
-    work->word_08.byte.unk_0A = count;
+    work                        = g_SpadWork;
+    count                       = work->word_08.byte.timer_0A - 1;
+    work->word_08.byte.timer_0A = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
         active->word_08.byte.unk_0B++;
@@ -145,7 +145,7 @@ MATCH void func_801EF7D8(void) {
     velocity                   = rsin(*angle_cell) * D_1F800000;
     g_SpadWork->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
 
-    if (--g_SpadWork->word_08.byte.unk_0A == 0) {
+    if (--g_SpadWork->word_08.byte.timer_0A == 0) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B++;
         func_801E5988();
     }
@@ -171,9 +171,9 @@ MATCH void func_801F0090(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_SpadWork->word_08.byte.unk_0B = (u8)(RANDOM_MASK(0xF));
-    g_SpadWork->word_08.byte.unk_09 = 0;
-    g_SpadWork->word_08.byte.unk_0A = 0;
+    g_SpadWork->word_08.byte.unk_0B   = (u8)(RANDOM_MASK(0xF));
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
 
     work                   = g_SpadWork;
     counter                = (work->unk_03 << 5) + 0x10;
@@ -197,8 +197,8 @@ MATCH void func_801F01AC(void) {
     PartyBattler* work;
 
     work = g_SpadWork;
-    if (work->word_08.byte.unk_0A < 16) {
-        work->word_08.byte.unk_0A += 2;
+    if (work->word_08.byte.timer_0A < 16) {
+        work->word_08.byte.timer_0A += 2;
     } else {
         work->word_08.byte.unk_09 = 60;
         work                      = g_SpadWork;
@@ -235,9 +235,9 @@ MATCH void func_801F0314(void) {
     velocity                = rsin(*angle_cell) * D_1F800000;
     scratch                 = g_SpadWork;
     scratch->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
-    scratch->word_08.byte.unk_0A -= 2;
+    scratch->word_08.byte.timer_0A -= 2;
 
-    if (g_SpadWork->word_08.byte.unk_0A == 0) {
+    if (g_SpadWork->word_08.byte.timer_0A == 0) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B++;
         func_801E5988();
     }

@@ -18,8 +18,8 @@ MATCH void func_801EEEF4(void) {
     if (!(value & 0xFF)) {
         battler->unk_5C = 1;
         func_80196718(battler);
-        g_SpadWork->word_08.byte.unk_0A = func_8019651C(battler, 0, 0, 0, 1);
-        g_SpadWork->word_08.byte.unk_09 = 8;
+        g_SpadWork->word_08.byte.timer_0A = func_8019651C(battler, 0, 0, 0, 1);
+        g_SpadWork->word_08.byte.unk_09   = 8;
         g_SpadWork->step_01 += 1;
     }
 }
@@ -29,8 +29,8 @@ MATCH void func_801EEFA0(void) {
     STACK_PADS(u8, 8);
     u8 timer;
 
-    D_80145BD4[g_SpadWork->word_08.byte.unk_0A].red_offset -= 1;
-    D_80145BD4[g_SpadWork->word_08.byte.unk_0A].green_offset -= 1;
+    D_80145BD4[g_SpadWork->word_08.byte.timer_0A].red_offset -= 1;
+    D_80145BD4[g_SpadWork->word_08.byte.timer_0A].green_offset -= 1;
     timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
     g_SpadWork->word_08.byte.unk_09 = timer;
     if (timer == 0) {

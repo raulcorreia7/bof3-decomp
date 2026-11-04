@@ -20,7 +20,7 @@ MATCH void func_800C1BF0(void) {
             battler->word_08.byte.unk_09 = value2 - 1;
         }
     }
-    value3 = g_SpadWork->word_08.byte.unk_0A;
+    value3 = g_SpadWork->word_08.byte.timer_0A;
     if (value3 == 0) {
         D_801EB4E0->step_01 = 5;
         D_801EB4E0->unk_02  = 0;
@@ -28,5 +28,5 @@ MATCH void func_800C1BF0(void) {
         g_SpadWork->step_01 += 1;
         return;
     }
-    g_SpadWork->word_08.byte.unk_0A = value3 - 1;
+    g_SpadWork->word_08.byte.timer_0A = value3 - 1;
 }

@@ -36,7 +36,7 @@ MATCH void func_801EF138(void) {
     u8            count;
 
     work = g_SpadWork;
-    work->word_08.byte.unk_0A++;
+    work->word_08.byte.timer_0A++;
     work                      = g_SpadWork;
     count                     = work->word_08.byte.unk_09 - 1;
     work->word_08.byte.unk_09 = count;

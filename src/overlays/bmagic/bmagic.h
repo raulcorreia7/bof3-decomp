@@ -84,7 +84,7 @@
     ticks                           = g_SpadWork->word_08.byte.unk_0B + 1;            \
     g_SpadWork->word_08.byte.unk_0B = ticks + (g_SpadWork->word_08.byte.unk_09 >> 6); \
     if (g_FrameCount & 1) {                                                           \
-        g_SpadWork->word_08.byte.unk_0A -= 1;                                         \
+        g_SpadWork->word_08.byte.timer_0A -= 1;                                       \
     }                                                                                 \
     g_SpadWork->unk_0C = 0x2000;                                                      \
     g_SpadWork->unk_10 = 0;                                                           \
@@ -116,7 +116,7 @@ ASSERT_OFFSET(BmagicTrailPoint, y, 0x02);
  * place toward the end, freeing the point at unk_0B. A statement macro: the
  * member declares s32 i. */
 #define BMAGIC_SHIFT_TRAIL(TRAIL)                                                \
-    i = g_SpadWork->word_08.byte.unk_0A - 1;                                     \
+    i = g_SpadWork->word_08.byte.timer_0A - 1;                                   \
     while (i >= g_SpadWork->word_08.byte.unk_0B) {                               \
         (TRAIL)[g_SpadWork->unk_04][i + 1].x = (TRAIL)[g_SpadWork->unk_04][i].x; \
         (TRAIL)[g_SpadWork->unk_04][i + 1].y = (TRAIL)[g_SpadWork->unk_04][i].y; \

@@ -28,7 +28,7 @@ MATCH void func_800ADD44(void) {
     pair                     = &D_801485EE;
     base                     = (u8*)D_80145518;
     row                      = base + ((*pair + slotp->word_08.byte.unk_09) * 4);
-    slot                     = row[slotp->word_08.byte.unk_0A];
+    slot                     = row[slotp->word_08.byte.timer_0A];
     if (slot != GAME_NONE) {
         Actor_SelectScript(slot);
     }
