@@ -35,16 +35,16 @@ INCLUDE_ASM(func_801D147C);
 INCLUDE_ASM(func_801D1678);
 
 MATCH void func_801D199C(void) {
-    s32 var_v1_6;
-    s8* var_a0_5;
+    s32 index;
+    s8* cell;
 
-    var_a0_5 = &D_801D39A8;
-    var_v1_6 = 0;
+    cell  = &D_801D39A8;
+    index = 0;
     do {
-        *var_a0_5 = 0;
-        var_v1_6 += 1;
-        var_a0_5 += 0x18;
-    } while ((u32)(var_v1_6 & BYTE_MASK) < 0x10U);
+        *cell = 0;
+        index += 1;
+        cell += 0x18;
+    } while ((u32)(index & BYTE_MASK) < 0x10U);
 }
 
 INCLUDE_ASM(func_801D19C8);
@@ -60,14 +60,14 @@ INCLUDE_ASM(func_801D1CD4);
 INCLUDE_ASM(func_801D2088);
 
 MATCH void func_801D2138(s32* first, s32* second) {
-    s32 temp_v0_7;
-    s32 temp_v1_11;
+    s32 folded;
+    s32 swapped;
 
-    temp_v0_7  = *first ^ *second;
-    *first     = temp_v0_7;
-    temp_v1_11 = *second ^ temp_v0_7;
-    *second    = temp_v1_11;
-    *first ^= temp_v1_11;
+    folded  = *first ^ *second;
+    *first  = folded;
+    swapped = *second ^ folded;
+    *second = swapped;
+    *first ^= swapped;
 }
 
 MATCH void func_801D2170(void) {

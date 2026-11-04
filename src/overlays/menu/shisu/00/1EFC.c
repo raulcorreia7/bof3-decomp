@@ -79,11 +79,11 @@ MATCH void func_801D30E4(void) {
 }
 
 MATCH void func_801D3124(void) {
-    u16 temp_v0_9;
+    u16 next_pos;
 
-    temp_v0_9                 = g_MenuPanelTaskCurrent->y + 0x10;
-    g_MenuPanelTaskCurrent->y = temp_v0_9;
-    if ((s16)temp_v0_9 >= 0x11) {
+    next_pos                  = g_MenuPanelTaskCurrent->y + 0x10;
+    g_MenuPanelTaskCurrent->y = next_pos;
+    if ((s16)next_pos >= 0x11) {
         g_MenuPanelTaskCurrent->y     = 16U;
         g_MenuPanelTaskCurrent->state = 0;
     }
@@ -100,11 +100,11 @@ MATCH void func_801D31CC(void) {
 }
 
 MATCH void func_801D320C(void) {
-    u16 temp_v0_9;
+    u16 next_pos;
 
-    temp_v0_9                 = g_MenuPanelTaskCurrent->y + 0x10;
-    g_MenuPanelTaskCurrent->y = temp_v0_9;
-    if ((s16)temp_v0_9 >= 0x27) {
+    next_pos                  = g_MenuPanelTaskCurrent->y + 0x10;
+    g_MenuPanelTaskCurrent->y = next_pos;
+    if ((s16)next_pos >= 0x27) {
         g_MenuPanelTaskCurrent->y     = 38U;
         g_MenuPanelTaskCurrent->state = 0;
     }
@@ -127,11 +127,11 @@ MATCH void func_801D32A0(void) {
 }
 
 MATCH void func_801D32E0(void) {
-    u16 temp_v0_9;
+    u16 next_pos;
 
-    temp_v0_9                 = g_MenuPanelTaskCurrent->x + 0x20;
-    g_MenuPanelTaskCurrent->x = temp_v0_9;
-    if ((s16)temp_v0_9 >= 0x12) {
+    next_pos                  = g_MenuPanelTaskCurrent->x + 0x20;
+    g_MenuPanelTaskCurrent->x = next_pos;
+    if ((s16)next_pos >= 0x12) {
         g_MenuPanelTaskCurrent->x     = 17U;
         g_MenuPanelTaskCurrent->state = 0;
     }

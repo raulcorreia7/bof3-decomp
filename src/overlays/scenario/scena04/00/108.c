@@ -69,16 +69,16 @@ INCLUDE_ASM(func_801F7CF0);
 INCLUDE_ASM(func_801F7EC0);
 
 MATCH void func_801F7FCC(void) {
-    s32   var_v1_6;
-    void* var_a0_5;
+    s32   index;
+    void* cell;
 
-    var_a0_5 = (void*)AREA_WORK_WINDOW;
-    var_v1_6 = 0;
+    cell  = (void*)AREA_WORK_WINDOW;
+    index = 0;
     do {
-        FIELD(s8, var_a0_5, 0x25u) = 0;
-        var_v1_6 += 1;
-        var_a0_5 += 0x28;
-    } while ((u32)(var_v1_6 & BYTE_MASK) < 0x80U);
+        FIELD(s8, cell, 0x25u) = 0;
+        index += 1;
+        cell += 0x28;
+    } while ((u32)(index & BYTE_MASK) < 0x80U);
 }
 
 INCLUDE_ASM(func_801F7FF8);

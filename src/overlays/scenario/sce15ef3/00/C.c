@@ -115,21 +115,21 @@ MATCH void func_801D16BC(void) {
 }
 
 MATCH void func_801D16DC(void) {
-    s32   var_a0_6;
-    s8*   var_a1_5;
-    void* var_v1_8;
+    s32   index;
+    s8*   row;
+    void* tail;
 
-    var_a1_5 = (s8*)AREA_WORK_WINDOW;
-    var_a0_6 = 0;
-    var_v1_8 = (void*)(AREA_WORK_WINDOW + 2);
+    row   = (s8*)AREA_WORK_WINDOW;
+    index = 0;
+    tail  = (void*)(AREA_WORK_WINDOW + 2);
     do {
-        *var_a1_5                    = 0;
-        *(s8*)((u8*)(var_v1_8) + -1) = 0;
-        *(s8*)(var_v1_8)             = 0;
-        var_v1_8 += 0x18;
-        var_a0_6 += 1;
-        var_a1_5 += 0x18;
-    } while ((u32)(var_a0_6 & HALF_MASK) < 0x100U);
+        *row                     = 0;
+        *(s8*)((u8*)(tail) + -1) = 0;
+        *(s8*)(tail)             = 0;
+        tail += 0x18;
+        index += 1;
+        row += 0x18;
+    } while ((u32)(index & HALF_MASK) < 0x100U);
 }
 
 MATCH u8* func_801D171C(void) {
@@ -167,16 +167,16 @@ INCLUDE_ASM(func_801D23AC);
 INCLUDE_ASM(func_801D2424);
 
 MATCH void func_801D25C0(void) {
-    s32 var_v1_6;
-    s8* var_a0_5;
+    s32 index;
+    s8* cell;
 
-    var_a0_5 = (s8*)(AREA_WORK_WINDOW + 0x18A0);
-    var_v1_6 = 0;
+    cell  = (s8*)(AREA_WORK_WINDOW + 0x18A0);
+    index = 0;
     do {
-        *var_a0_5 = 0;
-        var_v1_6 += 1;
-        var_a0_5 += 6;
-    } while ((u32)(var_v1_6 & BYTE_MASK) < 0x10U);
+        *cell = 0;
+        index += 1;
+        cell += 6;
+    } while ((u32)(index & BYTE_MASK) < 0x10U);
 }
 
 INCLUDE_ASM(func_801D25EC);

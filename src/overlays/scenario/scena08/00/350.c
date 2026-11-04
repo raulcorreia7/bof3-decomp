@@ -106,16 +106,16 @@ MATCH u8* func_801F7DAC(void) {
 }
 
 MATCH void func_801F7DE8(void) {
-    s32 var_v1_6;
-    s8* var_a0_5;
+    s32 index;
+    s8* cell;
 
-    var_a0_5 = (s8*)AREA_WORK_WINDOW;
-    var_v1_6 = 0;
+    cell  = (s8*)AREA_WORK_WINDOW;
+    index = 0;
     do {
-        *var_a0_5 = 0;
-        var_v1_6 += 1;
-        var_a0_5 += 0x28;
-    } while ((u32)(var_v1_6 & BYTE_MASK) < 0x40U);
+        *cell = 0;
+        index += 1;
+        cell += 0x28;
+    } while ((u32)(index & BYTE_MASK) < 0x40U);
 }
 
 INCLUDE_ASM(func_801F7E14);
@@ -135,16 +135,16 @@ INCLUDE_ASM(func_801F85F0);
 INCLUDE_ASM(func_801F8964);
 
 MATCH void func_801F8AE8(void) {
-    s32 var_v1_6;
-    s8* var_a0_5;
+    s32 index;
+    s8* cell;
 
-    var_a0_5 = (s8*)AREA_WORK_WINDOW;
-    var_v1_6 = 0;
+    cell  = (s8*)AREA_WORK_WINDOW;
+    index = 0;
     do {
-        *var_a0_5 = 0;
-        var_v1_6 += 1;
-        var_a0_5 += 0x1C;
-    } while ((u32)(var_v1_6 & BYTE_MASK) < 8U);
+        *cell = 0;
+        index += 1;
+        cell += 0x1C;
+    } while ((u32)(index & BYTE_MASK) < 8U);
 }
 
 MATCH u8* func_801F8B14(void) {
