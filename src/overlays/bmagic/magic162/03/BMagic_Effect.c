@@ -26,7 +26,7 @@ INCLUDE_ASM(func_801EF478);
 
 INCLUDE_ASM(func_801EF678);
 
-INCLUDE_ASM(func_801EF728);
+#include "overlays/bmagic/func_801EF728.h"
 
 INCLUDE_ASM(func_801EF80C);
 

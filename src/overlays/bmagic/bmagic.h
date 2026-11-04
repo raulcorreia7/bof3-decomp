@@ -52,6 +52,29 @@
     g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;                                \
     func_801E5988()
 
+/* The sway step of the effect work record WORK points to: phase_0C advances and
+ * its low six bits set the wave (also stored in the scratchpad halfword at
+ * 0x1F800006), which moves unk_20 around unk_08 by 0x18 * sin; unk_22 grows by
+ * unk_0A; unk_06 drops every fourth frame; at timer_05 zero the effect steps
+ * and CLEAR (the image's work-clearing function) runs. A statement macro: the
+ * member declares u16 phase and u8 timer. */
+#define BMAGIC_SWAY_EFFECT_WORK(WORK, CLEAR)                                \
+    phase            = (WORK)->phase_0C + 1;                                \
+    (WORK)->phase_0C = phase;                                               \
+    phase            = phase & 0x3F;                                        \
+    SP_REF(s16, 6)   = phase << 6;                                          \
+    (WORK)->unk_20   = (WORK)->unk_08 + ((rsin(phase << 6) * 0x18) >> 0xC); \
+    (WORK)->unk_22   = (WORK)->unk_22 + (WORK)->unk_0A;                     \
+    if ((g_FrameCount & 3) == 0) {                                          \
+        (WORK)->unk_06 = (WORK)->unk_06 - 1;                                \
+    }                                                                       \
+    timer            = (WORK)->timer_05 - 1;                                \
+    (WORK)->timer_05 = timer;                                               \
+    if (timer == 0) {                                                       \
+        D_801EB4E0->unk_0B -= 1;                                            \
+        CLEAR();                                                            \
+    }
+
 /* Decrement the active effect ticker. */
 #define BMAGIC_TICK_EFFECT_WORK() (BATTLE_ACTIVE_WORK->unk_0B--)
 
@@ -129,7 +152,7 @@ extern PaletteFade       D_80145BD4[];
 extern MagicModule       D_801EEC00;
 /* D_801EF3E8 (magic161), D_801EF414 (magic145), D_801EF420 (magic159), D_801EF510 (magic065), D_801EF658 (magic054), D_801EF6CC (magic154), D_801EF718 (magic166), D_801EF72C (magic138), D_801EF770 (magic218), D_801EF784 (magic158), D_801EF7A0 (magic075), D_801EF818 (magic048), D_801EF89C (magic009), D_801EF8A0 (magic213), D_801EF8BC (magic115), D_801EF8D8 (magic045), D_801EF990 (magic017), D_801EF9A4 (magic038), D_801EF9B4 (magic146), D_801EFA00 (magic219), D_801EFA44 (magic130), D_801EFA84 (magic081), D_801EFA9C (magic050), D_801EFA9C (magic111), D_801EFB70 (magic042), D_801EFBB0 (magic012), D_801EFC2C (magic223), D_801EFC6C (magic040), D_801EFC88 (magic043), D_801EFCBC (magic101), D_801EFCC8 (magic068), D_801EFD54 (magic123), D_801EFD58 (magic132), D_801EFD8C (magic041), D_801EFDCC (magic100), D_801EFE00 (magic021), D_801EFE58 (magic004), D_801EFEB8 (magic020), D_801EFEE8 (magic143), D_801EFEEC (magic058), D_801EFF34 (magic046), D_801F0028 (magic088), D_801F0048 (magic105), D_801F0064 (magic066), D_801F00F8 (magic137), D_801F02A4 (magic079), D_801F02CC (magic122), D_801F0340 (magic098), D_801F0354 (magic086), D_801F0388 (magic225), D_801F03BC (magic013), D_801F0400 (magic063), D_801F041C (magic169), D_801F0424 (magic039), D_801F046C (magic110), D_801F0488 (magic076), D_801F04A8 (magic096), D_801F04B4 (magic001), D_801F04B8 (magic067), D_801F04D0 (magic144), D_801F04F8 (magic069), D_801F0508 (magic087), D_801F0550 (magic053), D_801F0554 (magic074), D_801F05B4 (magic129), D_801F05D8 (magic125), D_801F0668 (magic073), D_801F066C (magic059), D_801F06DC (magic220), D_801F0744 (magic056), D_801F0794 (magic103), D_801F07BC (magic092), D_801F0878 (magic078), D_801F089C (magic093), D_801F08B0 (magic167), D_801F08DC (magic124), D_801F08E8 (magic104), D_801F0988 (magic173), D_801F0994 (magic099), D_801F0A14 (magic044), D_801F0A24 (magic006), D_801F0AC0 (magic097), D_801F0B00 (magic003), D_801F0B74 (magic172), D_801F0B94 (magic113), D_801F0BB0 (magic060), D_801F0C10 (magic062), D_801F0C38 (magic121), D_801F0C40 (magic226), D_801F0CA8 (magic120), D_801F0D14 (magic082), D_801F0D54 (magic222), D_801F0EEC (magic083), D_801F121C (magic114), D_801F125C (magic126), D_801F1394 (magic064), D_801F1630 (magic015), D_801F1BC4 (magic131), D_801F1BEC (magic008), D_801F24A4 (magic151) */
 extern Callback          g_BMagicEffectFuncs[];
-extern u8*               D_801F17B0;
+extern BmagicEffectWork* D_801F17B0;
 extern BmagicEffectWork* D_801F17B4;
 
 /* Per-image effect entry points whose name is a different symbol in another
@@ -138,6 +161,7 @@ void func_801EEC5C(void);
 void func_801EEEC8(void);
 void func_801EEF38(void);
 void func_801F006C(void);
+void func_801F0068(void);
 
 void func_800A9610(u8 selector, u16 flags);
 

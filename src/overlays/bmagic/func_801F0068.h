@@ -3,9 +3,9 @@
  * every member. */
 /* func_801F0068 (magic162), func_801F0068 (magic168) */
 MATCH void func_801F0068(void) {
-    D_801F17B0[0] = 0;
-    D_801F17B0[1] = 0;
-    D_801F17B0[2] = 0;
-    D_801F17B0[3] = 0;
-    D_801F17B0[4] = 0;
+    D_801F17B0->unk_00  = 0;
+    D_801F17B0->step_01 = 0;
+    D_801F17B0->unk_02  = 0;
+    D_801F17B0->unk_03  = 0;
+    D_801F17B0->unk_04  = 0;
 }
