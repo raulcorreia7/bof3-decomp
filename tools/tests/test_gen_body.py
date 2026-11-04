@@ -183,3 +183,17 @@ def test_a_struct_layout_follows_natural_alignment(tmp_path: Path) -> None:
         )
     finally:
         gen_body._HEADERS.clear()
+
+
+class FakeNames:
+    def container(self, image: str, addr: int):
+        return (0x80181B10, 12, "g_Slots") if 0x80181B10 < addr < 0x80181B1C else None
+
+
+def test_a_global_inside_a_sized_array_reads_as_its_element(tmp_path: Path) -> None:
+    (tmp_path / "d.h").write_text("extern const u8 g_Slots[];\n", encoding="utf-8")
+    tree = gen_body.Tree(tmp_path)
+    c = {"tree": tree, "files": ["d.h"], "names": FakeNames(), "image": "emi/test"}
+    assert gen_body.global_text("D_80181B1A", c, 1) == "g_Slots[10]"
+    assert gen_body.global_text("D_80181B1A", c, 2) == "D_80181B1A"
+    assert gen_body.global_text("D_80181B20", c, 1) == "D_80181B20"

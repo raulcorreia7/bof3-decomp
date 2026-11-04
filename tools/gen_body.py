@@ -569,7 +569,7 @@ def render(e: tuple, ctx: dict) -> str:
             else "&" + e[1]
         )
     if kind == "g":
-        return global_text(e[1], ctx)
+        return global_text(e[1], ctx, e[2])
     if kind == "m":
         return member(e[1], e[2], ctx)
     if kind == "ret":
@@ -593,7 +593,23 @@ def render(e: tuple, ctx: dict) -> str:
     raise Unsupported(f"expression {kind}")
 
 
-def global_text(name: str, ctx: dict) -> str:
+def global_text(name: str, ctx: dict, width: int) -> str:
+    """Write a global; one that sits inside a sized array of scalars is an element of it."""
+    m = re.fullmatch(r"D_([0-9A-F]{8})", name)
+    found = (
+        m and ctx["names"] and ctx["names"].container(ctx["image"], int(m.group(1), 16))
+    )
+    if found:
+        base, _, holder = found
+        decl = re.compile(r"\b(\w+)\s+" + re.escape(holder) + r"\s*\[")
+        files, tree = ctx["files"], ctx["tree"]
+        kind = next(
+            (d.group(1) for f in files if (d := decl.search(tree.read(f)))), None
+        )
+        if kind and (tree.SCALAR.get(kind) or tree.alias(kind, files)) == width:
+            rel = int(m.group(1), 16) - base
+            if rel % width == 0:
+                return f"{holder}[{rel // width}]"
     return name + "[0]" if ctx["tree"].declared(ctx["files"], name) == "array" else name
 
 
@@ -693,7 +709,7 @@ def statements(lifted: Lift, ctx: dict) -> list[str]:
             continue
         _, kind, target, value = e
         left = (
-            global_text(target[1], ctx)
+            global_text(target[1], ctx, WIDTH[kind])
             if target[0] == "g"
             else element(target[1], target[2], WIDTH[kind], ctx)
             if target[0] == "gi"
