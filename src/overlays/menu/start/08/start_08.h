@@ -682,7 +682,8 @@ void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 
-void func_801DC604(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
+/* func_801DC604 */
+void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 
 void func_80164D2C(u8 idx, u8 sel, u8 val, u8* flags, u16* dst);
 

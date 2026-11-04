@@ -166,7 +166,7 @@ segments:
       - [0xB550, c, func_801DC150]
       - [0xB724, c, Menu_DrawCursorFrame]
       - [0xB8B8, c, Menu_DrawPortrait]
-      - [0xBA04, c, func_801DC604]
+      - [0xBA04, c, Menu_DrawCharacterPortrait]
       - [0xBA58, c, Menu_DrawTintedLine]
       - [0xBB4C, c, Menu_DrawItemRow]
       - [0xBEEC, c, Menu_DrawEquipment]

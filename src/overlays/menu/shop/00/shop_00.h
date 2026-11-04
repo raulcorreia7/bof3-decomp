@@ -484,7 +484,8 @@ void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);
 void func_801D8C58(s16 x, s16 y, u8 index, u8 flag);
 /* func_801D8FC0 */
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
-void func_801D910C(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
+/* func_801D910C */
+void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 /* func_801D9160 */
 void Menu_DrawTintedLine(s16 line_x0, s16 line_y0, s16 line_x1, s16 line_y1, u8 color_r, u8 color_g, u8 color_b,
                          u8 tpage);

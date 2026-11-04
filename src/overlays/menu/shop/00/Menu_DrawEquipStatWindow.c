@@ -54,7 +54,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_slot, s32 
         sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->agility);
         UI_DrawGlyphString(x + 44, y + 38, 7, (void*)g_UiFormatBuffer);
     }
-    func_801D910C((x + 0x46) & HALF_MASK, (y + 2) & HALF_MASK, stats->character_id, present);
+    Menu_DrawCharacterPortrait((x + 0x46) & HALF_MASK, (y + 2) & HALF_MASK, stats->character_id, present);
     for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
         UI_DrawText(x + 5, y + i * 15 + 6, clut, 0xFF, &D_801E5A10[i * 6]);
     }

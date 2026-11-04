@@ -41,7 +41,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 s
         val11 = 1;
     }
     val5 = val9 & BYTE_MASK;
-    func_801DC604(tmp1, val1 & HALF_MASK, character->character_id, val11);
+    Menu_DrawCharacterPortrait(tmp1, val1 & HALF_MASK, character->character_id, val11);
     UI_DrawText((s16)(val7 + 20), (s16)(val2 + 3), val5, 5U, (u8*)character);
     val10 = g_UiFormatBuffer;
     val10 = g_UiFormatBuffer;

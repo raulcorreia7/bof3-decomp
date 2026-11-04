@@ -37,7 +37,7 @@ NON_MATCHING void func_801DF00C(s32 panel_x, s32 panel_y) {
                 shade = (u8)((record->status >> 6) & 2);
             }
             index = (u8)(clut & BYTE_MASK);
-            func_801D910C((u16)sprite_x, (u16)row_y, record->character_index, shade);
+            Menu_DrawCharacterPortrait((u16)sprite_x, (u16)row_y, record->character_index, shade);
             UI_DrawText((s16)(base_x + 20), (s16)(base_y + 1), (s32)index, 5U, record);
             Menu_DrawIcon((base_x + 2) & HALF_MASK, (s16)(base_y + 0x15) & HALF_MASK, 3U, D_801D0E78);
             sprintf((s8*)g_UiFormatBuffer, &D_801D0E64, record->level);

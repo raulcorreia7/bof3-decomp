@@ -61,7 +61,7 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
                 val9 = 1;
             }
             val3 = val7 & BYTE_MASK;
-            func_801DC604((u16)stack_30, val6, FIELD(u8, val11, 0x5u), val9);
+            Menu_DrawCharacterPortrait((u16)stack_30, val6, FIELD(u8, val11, 0x5u), val9);
             UI_DrawText((s16)(val5 + 20), (s16)(val4 + 1), val3, 5U, val11);
             val6 = val4 + 0x15;
             Menu_DrawIcon((val5 + 2) & HALF_MASK, val6 & HALF_MASK, 3U, val10);

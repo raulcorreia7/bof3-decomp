@@ -101,12 +101,7 @@ INCLUDE_ASM(func_801D31B0);
 
 #include "shared/Menu_DrawPortrait.h"
 
-MATCH void func_801D3664(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode) {
-    if (((atlas_index & BYTE_MASK) == 4) && (FIELD(s8, &g_SceneState, 0) >= 8)) {
-        atlas_index = 0xB;
-    }
-    Menu_DrawPortrait(sprite_x & HALF_MASK, sprite_y & HALF_MASK, atlas_index & BYTE_MASK, shade_mode & BYTE_MASK);
-}
+#include "shared/Menu_DrawCharacterPortrait.h"
 
 #include "overlays/menu/Menu_DrawTintedLine.h"
 

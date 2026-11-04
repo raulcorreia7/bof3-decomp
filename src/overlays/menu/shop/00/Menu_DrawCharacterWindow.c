@@ -22,8 +22,8 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s3
         py += 2;
         stats     = &g_Characters[character_slot];
         text_clut = px;
-        func_801D910C(text_clut & HALF_MASK, py & HALF_MASK, stats->character_id,
-                      (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
+        Menu_DrawCharacterPortrait(text_clut & HALF_MASK, py & HALF_MASK, stats->character_id,
+                                   (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
         text_clut = clut & BYTE_MASK;
         UI_DrawText((s16)(x + 20), (s16)(y + 3), text_clut, 5, stats);
     } while (0);

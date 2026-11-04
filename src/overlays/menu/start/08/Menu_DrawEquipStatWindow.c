@@ -94,7 +94,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_slot, s32
         val2 = val1 + 0x46;
     }
     val10 = 0;
-    func_801DC604(val2 & HALF_MASK, (val0 + 2) & HALF_MASK, character->character_id, stack_28);
+    Menu_DrawCharacterPortrait(val2 & HALF_MASK, (val0 + 2) & HALF_MASK, character->character_id, stack_28);
     tmp1 = val1 + 5;
     val9 = tmp1 << 0x10;
     val3 = 0 & BYTE_MASK;
