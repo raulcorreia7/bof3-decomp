@@ -39,22 +39,22 @@ MATCH void func_801F6FD0(void) {
 INCLUDE_ASM(func_801F6FF8);
 
 MATCH void func_801F70DC(void) {
-    Actor* temp_s1;
-    Actor* temp_v1;
-    s32    var_s0;
+    Actor* actor;
+    Actor* actor2;
+    s32    i;
 
-    temp_s1 = g_SpadWork;
-    var_s0  = 0;
+    actor = g_SpadWork;
+    i     = 0;
     do {
-        temp_v1    = &g_Actors[var_s0 & 0xFF];
-        g_SpadWork = temp_v1;
-        if ((temp_v1->flags_00 & 1) && (temp_v1->unk_06 == 6)) {
-            temp_v1->unk_29 = 5;
+        actor2     = &g_Actors[i & 0xFF];
+        g_SpadWork = actor2;
+        if ((actor2->flags_00 & 1) && (actor2->unk_06 == 6)) {
+            actor2->unk_29 = 5;
             func_8014D290();
         }
-        var_s0 += 1;
-    } while ((u32)(var_s0 & 0xFF) < 0x1EU);
-    g_SpadWork = temp_s1;
+        i += 1;
+    } while ((u32)(i & 0xFF) < 0x1EU);
+    g_SpadWork = actor;
 }
 
 MATCH void func_801F7198(void) {

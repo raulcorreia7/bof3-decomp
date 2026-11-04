@@ -182,18 +182,18 @@ MATCH void func_801F7AE0(void) {
 INCLUDE_ASM(func_801F7B10);
 
 MATCH void func_801F7BB0(void) {
-    Actor* temp_s1;
-    s32*   temp_s0;
-    u8     temp_v0;
+    Actor* actor;
+    s32*   ptr;
+    u8     value;
 
-    temp_s1 = g_SpadWork;
-    temp_s0 = &temp_s1->unk_0C;
-    func_801F7FFC(temp_s0);
-    func_801F8170(temp_s0);
-    temp_s1->unk_58 += 4;
-    temp_v0            = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    actor = g_SpadWork;
+    ptr   = &actor->unk_0C;
+    func_801F7FFC(ptr);
+    func_801F8170(ptr);
+    actor->unk_58 += 4;
+    value              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = value;
+    if (!(value & 0xFF)) {
         g_SpadWork->unk_09 = 8;
         g_SpadWork->unk_01 += 1;
     }
@@ -430,11 +430,9 @@ MATCH void func_801FC5FC(void) {
     g_GameStateIndex = 2;
     SND_PauseBgm((s32)g_SndBgmId);
     SND_StartXaStream(2, 1);
-loop_1:
-    if (!(SND_IsXaIdle() & 0xFF)) {
+    while (!(SND_IsXaIdle() & 0xFF)) {
         func_801992B8();
         CallbackWait(1U);
-        goto loop_1;
     }
     SND_ResumeBgm((s32)g_SndBgmId);
 }
@@ -468,10 +466,8 @@ MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
                 D_80146875 = 0xA;
                 return 1;
             }
-            /* Duplicate return node #5. Try simplifying control flow for better match */
             return 0;
         }
-        /* Duplicate return node #5. Try simplifying control flow for better match */
         return 0;
     }
     return 0;
@@ -485,10 +481,8 @@ MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
                 D_80146875 = 5;
                 return Scene_ShowMessage(0x33);
             }
-            /* Duplicate return node #5. Try simplifying control flow for better match */
             return 0;
         }
-        /* Duplicate return node #5. Try simplifying control flow for better match */
         return 0;
     }
     return 0;
@@ -504,12 +498,8 @@ MATCH s8 func_801FCAB8(s32 arg0, s32 arg1) {
                 D_80146875 = 0x10;
                 return Scene_ShowMessage(0x1F);
             }
-            goto block_4;
         }
-        /* Duplicate return node #5. Try simplifying control flow for better match */
-        return 0;
     }
-block_4:
     return 0;
 }
 
