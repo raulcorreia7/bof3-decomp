@@ -57,7 +57,17 @@ MATCH void func_801EF0A4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF108);
+MATCH void func_801EF108(void) {
+    s32 count;
+
+    count = g_SpadWork->unk_10 - 1;
+    g_SpadWork->unk_14 -= 2;
+    g_SpadWork->unk_10 = count;
+    if (count == 0) {
+        D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF158);
 
