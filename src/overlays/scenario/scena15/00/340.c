@@ -203,7 +203,14 @@ INCLUDE_ASM(func_801FCA3C);
 
 INCLUDE_ASM(func_801FCBAC);
 
-INCLUDE_ASM(func_801FDB84);
+MATCH void func_801FDB84(void) {
+    if (D_801FE74C == 0) {
+        D_80146865  = 1;
+        D_801FE74C = (rand() % 38 + 42) / 2;
+    } else {
+        D_801FE74C--;
+    }
+}
 
 INCLUDE_ASM(func_801FDC10);
 

@@ -24,6 +24,8 @@ void       func_801F8704(void);
 void       func_801F8958(void);
 extern u16 g_GameAreaId;
 extern u8  D_801FE71C[];
+extern u8  D_801FE74C;
+extern u8  D_80146865;
 s16        func_801F326C(s32 message);
 s16        func_801F37AC(s32 message);
 
