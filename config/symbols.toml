@@ -2054,7 +2054,6 @@ g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the h
 ["emi/world01/area039/13"]
 Area_ResetViewOffsetZ = { addr = 0x801F2D38, type = "func", source = "zeroes g_AreaViewOffsetZ, the Z term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 
-
 ["emi/world01/area040/13"]
 Message_ClearRequest = { addr = 0x801F3034, type = "func", source = "clears the area request slot and resets the game-overlay state bytes when the selection byte is clear" }
 Message_Clear = { addr = 0x801F3074, type = "func", source = "clears the message request and sets the game overlay state bytes when the menu choice is zero" }
@@ -2219,7 +2218,6 @@ Area_InitSpin = { addr = 0x801F5820, type = "func", source = "starts one spin-ef
 ["emi/world02/area099/13"]
 Area_ResetViewOffsetZ = { addr = 0x801F2C24, type = "func", source = "zeroes g_AreaViewOffsetZ, the Z term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 
-
 ["emi/world02/area100/13"]
 Actor_RunAreaStep = { addr = 0x801F35D4, type = "func", source = "clears the work reset flag and hands the work pointer to the area step" }
 Area_AddViewOffsetY4 = { addr = 0x801F3630, type = "func", source = "adds 4 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
@@ -2325,7 +2323,6 @@ D_801F4A88 = { addr = 0x801F4A88, source = "func_801F3800 and func_801F385C use 
 ["emi/world03/area133/13"]
 Area_SubViewOffsetY4 = { addr = 0x801F2D6C, type = "func", source = "subtracts 4 from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_AddViewOffsetY4 = { addr = 0x801F2D94, type = "func", source = "adds 4 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
-
 
 ["emi/world03/area134/13"]
 Area_ClearWorkColumn = { addr = 0x801F4974, type = "func", source = "clears one byte of each row in the actor window" }
