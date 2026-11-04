@@ -29,7 +29,7 @@ segments:
       - [0x9D4, c, func_801F35D4]
       - [0xA0C, c, func_801F360C]
       - [0xAF8, c, func_801F36F8]
-      - [0xB00, c, func_801F3700]
+      - [0xB00, c, Area_SubViewOffsetY4]
       - [0xB28, c, Area_AddViewOffsetY4]
       - [0xB50, c, func_801F3750]
       - [0xB6C, c, func_801F376C]
