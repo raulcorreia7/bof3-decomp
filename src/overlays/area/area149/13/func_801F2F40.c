@@ -2,7 +2,7 @@
 
 MATCH void func_801F2F40(void) {
     if (g_AreaViewOffsetZ < 0x880) {
-        D_80147AD0     = 1;
+        D_80147AD0      = 1;
         g_ScriptVars[0] = 10;
         SND_PlayCue(1);
         g_SpadWork->unk_04++;
