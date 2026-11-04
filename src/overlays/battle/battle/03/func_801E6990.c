@@ -5,5 +5,5 @@ MATCH void func_801E6990(void) {
 
     g_SpadWork->word_08.byte.unk_09 = 0;
     work                            = g_SpadWork;
-    work->step_01                   = (u8)(work->step_01 + 1);
+    work->step_01++;
 }
