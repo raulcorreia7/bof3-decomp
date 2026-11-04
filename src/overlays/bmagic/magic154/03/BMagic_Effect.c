@@ -28,7 +28,7 @@ MATCH void func_801EF380(void) {
 
     work = g_SpadWork;
     work->unk_40 += 0x4000;
-    count = work->unk_09 + 1;
+    count        = work->unk_09 + 1;
     work->unk_09 = count;
     work->unk_44 = work->unk_44 + 0x8000;
     if (count == 4) {

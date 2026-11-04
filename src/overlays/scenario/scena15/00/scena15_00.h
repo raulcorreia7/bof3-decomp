@@ -18,10 +18,10 @@ extern Callback  D_801FE66C[];
 extern Callback  D_801FE678[];
 extern SceneFunc D_801FE6EC[];
 
-s32  func_801F7748(void);
-void func_801F79C4(void);
-void func_801F8704(void);
-void func_801F8958(void);
+s32        func_801F7748(void);
+void       func_801F79C4(void);
+void       func_801F8704(void);
+void       func_801F8958(void);
 extern u16 g_GameAreaId;
 extern u8  D_801FE71C[];
 s16        func_801F326C(s32 message);

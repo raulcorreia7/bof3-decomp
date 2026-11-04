@@ -14,8 +14,8 @@ MATCH void func_801EED2C(void) {
     saved      = g_SpadWork;
     g_SpadWork = (PartyBattler*)D_801EC2E0->work_74;
     if (func_8014DAEC() & BYTE_MASK) {
-        g_SpadWork     = saved;
-        saved->unk_09  = 0x78;
+        g_SpadWork    = saved;
+        saved->unk_09 = 0x78;
         g_SpadWork->step_01++;
         SND_PlayCue(0x100);
     }

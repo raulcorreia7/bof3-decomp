@@ -13,7 +13,7 @@ extern u16      D_800C1B40[];
 extern Callback D_800C1B4C[];
 extern Callback D_800C1B7C[];
 
-void func_800C18B8(s32 mode);
+void                 func_800C18B8(s32 mode);
 extern BattleEffect* D_801EC2E0;
 
 #endif

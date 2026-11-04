@@ -87,15 +87,15 @@ MATCH void func_801F8488(void) {
 /* The statements of func_801F84CC and func_801F87F8, byte-identical twins: set +0x29 of every party battler row to 3,
  * clear the three tint bytes of the current work and move it to step 1. Each member declares work and i. Every change
  * here must verify both members. */
-#define SCENA15_PARTY_SETUP()                               \
-    work = g_SpadWork;                                      \
-    for (i = 0; i < g_PartySize; i++) {                     \
-        g_BattlePartyBattlers[i].unk_29 = 3;                \
-    }                                                       \
-    g_SpadWork              = work;                         \
-    work->tint.bytes.unk_5F = 0;                            \
-    work->tint.bytes.unk_5E = 0;                            \
-    work->tint.bytes.unk_5D = 0;                            \
+#define SCENA15_PARTY_SETUP()                \
+    work = g_SpadWork;                       \
+    for (i = 0; i < g_PartySize; i++) {      \
+        g_BattlePartyBattlers[i].unk_29 = 3; \
+    }                                        \
+    g_SpadWork              = work;          \
+    work->tint.bytes.unk_5F = 0;             \
+    work->tint.bytes.unk_5E = 0;             \
+    work->tint.bytes.unk_5D = 0;             \
     g_SpadWork->unk_01      = 1
 
 MATCH void func_801F84CC(void) {
