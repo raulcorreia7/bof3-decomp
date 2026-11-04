@@ -5,6 +5,9 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+#define EFFECT_TICK_INCREMENT 1
+#define EFFECT_TICK_LIMIT     0xC0
+
 void func_801EED40(void);
 
 #endif

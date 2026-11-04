@@ -21,7 +21,7 @@ INCLUDE_ASM(func_801EEF48);
 
 INCLUDE_ASM(func_801EF020);
 
-INCLUDE_ASM(func_801EF090);
+#include "overlays/bmagic/Effect_AdvanceOnTick.h"
 
 MATCH void func_801EF0E0(void) {
     u8 timer;

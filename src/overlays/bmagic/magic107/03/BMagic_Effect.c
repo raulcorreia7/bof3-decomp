@@ -31,12 +31,7 @@ MATCH void func_801EEEA0(void) {
     }
 }
 
-MATCH void func_801EEF0C(void) {
-    g_SpadWork->word_08.byte.unk_09 += 1;
-    if (g_SpadWork->word_08.byte.unk_09 == 0xC0) {
-        g_SpadWork->step_01 += 1;
-    }
-}
+#include "overlays/bmagic/Effect_AdvanceOnTick.h"
 
 MATCH void func_801EEF5C(void) {
     PartyBattler* active;
