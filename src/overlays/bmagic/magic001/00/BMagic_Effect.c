@@ -121,7 +121,7 @@ INCLUDE_ASM(func_801EFBEC);
 
 /* needs: type g_BattleSelectedActor. Retail rereads it before the second coordinate copy, as a member of an aggregate
  * would (the BattleAction block at 0x80146380 +0x0C); a plain global keeps it in a register. Exact in a scratch build with
- * the pointer declared as an array element; as a plain global the candidate is 8 bytes short. */
+ * the pointer declared as an array element; as a plain global the first differing instruction is the bnez target at +0x4C. */
 INCLUDE_ASM(func_801EFC54);
 
 INCLUDE_ASM(func_801EFD28);
