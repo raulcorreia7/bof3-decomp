@@ -7,5 +7,9 @@
 
 extern BmagicEffectFuncs D_801EEC14;
 extern Callback          D_801F0420[];
+/* The effect slot table BMagic_AllocEffect scans, and its row count. */
+extern BattleEffect D_801F0424[];
+#define BMAGIC_EFFECT_SLOTS D_801F0424
+#define BMAGIC_EFFECT_COUNT 80
 
 #endif
