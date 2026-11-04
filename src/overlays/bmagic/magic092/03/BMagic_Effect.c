@@ -53,7 +53,14 @@ MATCH void func_801EF940(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x11);
 }
 
-INCLUDE_ASM(func_801EF990);
+MATCH void func_801EF990(void) {
+    g_SpadWork->word_08.byte.unk_09 += 1;
+    g_SpadWork->word_08.byte.timer_0A += 1;
+    if (g_SpadWork->word_08.byte.unk_09 == 0x19) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B |= 0x80;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EFA24);
 
@@ -69,7 +76,20 @@ MATCH void func_801F038C(void) {
 
 #include "overlays/bmagic/Effect_StepOnTickFlag.h"
 
-INCLUDE_ASM(func_801F0420);
+MATCH void func_801F0420(void) {
+    u8 counter;
+
+    counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = counter;
+    if (!(counter & 0xFF)) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        g_SpadWork->flags_00 = 0;
+        g_SpadWork->step_01  = 0;
+        g_SpadWork->unk_02   = 0;
+        g_SpadWork->unk_03   = 0;
+        g_SpadWork->unk_04   = 0;
+    }
+}
 
 INCLUDE_ASM(func_801F04BC);
 
