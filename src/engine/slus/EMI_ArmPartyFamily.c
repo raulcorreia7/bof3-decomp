@@ -5,7 +5,6 @@
  * func_8016728C stages (index | 0x80); other families compare the plain index, and a match takes the shared exit
  * untouched.
  */
-/* func_80166F84 */
 MATCH void EMI_ArmPartyFamily(u8 member_a, u8 member_b, u8 member_c, u8 family) {
     u8  slot;
     s32 hint;

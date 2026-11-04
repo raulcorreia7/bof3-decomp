@@ -15,7 +15,6 @@ extern Callback  D_801F9748[];
 extern Callback  D_801F97A4[];
 extern SceneFunc D_801F97D8[];
 
-/* func_801D0EA0 */
 void      Shop_DispatchStep(void);
 void      func_801F9490(void);
 void      func_801F88CC(s32 arg0, s32 arg1);

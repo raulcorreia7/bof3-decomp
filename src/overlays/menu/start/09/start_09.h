@@ -211,20 +211,13 @@ extern u8              D_801F0014[]; /* icon 2 image.data */
 
 /* SDK and cross-unit functions used by this image. */
 extern s32  func_801EEEC8(void);
-/* func_801EEF40 */
 extern s32  CardTestHardwareEvents(void);
-/* func_801EEFA0 */
 extern void CardPollSoftwareEvents(void);
-/* func_801EEFF8 */
 extern void CardPollHardwareEvents(void);
-/* func_801EF040 */
 extern void CardPollInfo(void);
-/* func_801EF0B4 */
 extern void CardPollLoad(void);
 extern void func_801EF148(void);
-/* func_801EF96C */
 extern s32  CardOpenFile(u8 port, char* name, s32 mode);
-/* func_801EFB44 */
 extern s32  CardTransferFile(s32 fd, s32 mode, s32 size, s32 offset);
 
 #endif

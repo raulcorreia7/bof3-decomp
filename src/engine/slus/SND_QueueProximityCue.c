@@ -28,7 +28,6 @@
  * distance from the target point, testing the six nested radii from widest to
  * tightest and only the first matching band fires.
  */
-/* func_8015DC08 */
 MATCH void SND_QueueProximityCue(s32 cue_id) {
     Actor* work;
     /* FAKE: the axis value stays in a0 across both range tests. */

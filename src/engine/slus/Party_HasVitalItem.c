@@ -3,7 +3,6 @@
 /* scans the 0x20-byte table g_VitalItemIds for (item_id & 0xFF), returning
  * 1 on a hit and 0 otherwise.
  */
-/* func_80166140 */
 MATCH bool Party_HasVitalItem(s32 item_id) {
     u8* entry;
     s32 index;

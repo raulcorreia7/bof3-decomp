@@ -3,7 +3,6 @@
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 70.90%. resume: a lever or header fix that
  * closes the first mismatch. */
 #ifdef NON_MATCHING
-/* func_801DB764 */
 NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 shaded, s32 unused) {
     s16        val0;
     s16        val1;

@@ -3,7 +3,6 @@
 /* links the active frame's eight ordering-table heads to their
  * packet chains with the PsyQ AddPrims helper.
  */
-/* func_8014B0F0 */
 MATCH void SYS_SubmitFrame(void) {
     s32   index;
     u32** ordering_table;

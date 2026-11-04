@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801A7CF0 */
 MATCH void Master_RunSceneEvent(void) {
     switch (D_801448EC) {
         case 0:

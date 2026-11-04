@@ -5,7 +5,6 @@
  * spell the comparison with the masked accumulator on the left; reordering an arm changes the operand and register
  * order.
  */
-/* func_8015BC14 */
 MATCH s32 Area_StepCameraX(s16 target, s8 step) {
     s32  value;
     u16* angle;

@@ -6,7 +6,6 @@
  *   zero delta:     set counter to 7 (special max)
  * Returns 1 if the counter value changed, 0 otherwise.
  */
-/* func_801655F4 */
 MATCH s32 Char_AddResistance(u8* counter, s32 delta) {
     s32 signed_delta;
 

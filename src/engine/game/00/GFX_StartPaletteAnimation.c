@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196CF0 */
 MATCH u8 GFX_StartPaletteAnimation(u8* owner, u8* source_table) {
     u8 slot_index;
 

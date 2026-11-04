@@ -3,7 +3,6 @@
 /* pops the g_AreaCellPrims row id at the free ring index g_AreaCellPrimFreeIndex and advances it, returning
  * 0 when the ring is empty.
  */
-/* func_8015456C */
 MATCH u16 Area_AllocCellPrimRow(void) {
     u16 index;
     u16 row_id;

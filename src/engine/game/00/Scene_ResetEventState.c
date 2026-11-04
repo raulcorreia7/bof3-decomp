@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801A7C2C */
 MATCH void Scene_ResetEventState(void) {
     s32 i;
     s32 index;

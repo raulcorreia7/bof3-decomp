@@ -9,7 +9,6 @@ typedef union PaletteTint {
  * halves at +4 and the three signed colour deltas at +8 to func_8015822C; an unresolved tag sends the same masks with
  * zero deltas.
  */
-/* func_801581B4 */
 MATCH void Area_ReadTintRecord(u8* record) {
     PaletteTint value;
     u32         masks;

@@ -3,7 +3,6 @@
 /* expands packed RGB555 pixel pairs into RGB24 bytes, then uploads
  * the result and advances the shared image cursor past the aligned block.
  */
-/* func_8014E7F8 */
 MATCH void GFX_ExpandRgb555(u32* pixels, RECT rect) {
     u8* dst;
     u32 color;

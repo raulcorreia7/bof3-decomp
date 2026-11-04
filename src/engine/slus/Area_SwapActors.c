@@ -2,7 +2,6 @@
 
 /* swaps the two indexed words of the D_80148214 table.
  */
-/* func_8014BAEC */
 MATCH void Area_SwapActors(s32 first, s32 second) {
     Actor** table;
     Actor** a;

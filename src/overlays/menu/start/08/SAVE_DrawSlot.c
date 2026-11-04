@@ -2,7 +2,6 @@
 
 /* Draws one shop row: the window, the row icon and up to three slot icons, the name, two formatted number lines and
  * the value bar; a NULL entry draws only the window. */
-/* func_801E11A8 */
 MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry) {
     s16 x;
     s16 y;

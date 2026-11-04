@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196C8C */
 MATCH void GFX_UpdatePaletteAnimations(void) {
     u8 slot_index;
 

@@ -5,7 +5,6 @@
  * scheduler critical section, and the scheduler is forced to switch away from
  * the current callback.
  */
-/* func_8014B954 */
 MATCH void CallbackReplace(Callback entry) {
     g_CallbackSlot->state    = CALLBACK_SLOT_OPEN;
     g_CallbackSlot->callback = entry;

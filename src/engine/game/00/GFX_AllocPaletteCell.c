@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801968BC */
 MATCH u8 GFX_AllocPaletteCell(u8 mode) {
     u8  row;
     u8* map;

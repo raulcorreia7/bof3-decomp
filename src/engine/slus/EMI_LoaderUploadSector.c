@@ -3,7 +3,6 @@
 /* programs the sprite rectangle for the current stream slot from
  * its record entry and uploads the slot's image when it fits the screen.
  */
-/* func_80163378 */
 MATCH void EMI_LoaderUploadSector(void) {
     s8*   idxp;
     s8    index;

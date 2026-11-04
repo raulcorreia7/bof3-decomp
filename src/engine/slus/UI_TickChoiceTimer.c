@@ -2,7 +2,6 @@
 
 /* decrements D_801490A6 and clears D_801490A0 when it reaches zero.
  */
-/* func_80150E14 */
 MATCH void UI_TickChoiceTimer(void) {
     u8 value;
 

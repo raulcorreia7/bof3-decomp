@@ -2,7 +2,6 @@
 
 extern u8 g_SndMono;
 
-/* func_801E5A00 */
 MATCH void SAVE_RunLoadVerify(void) {
     u32* clear;
     u8*  src;

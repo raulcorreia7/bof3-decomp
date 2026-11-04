@@ -103,10 +103,8 @@ typedef struct ShopSelection {
 
 ASSERT_OFFSET(ShopSelection, unk_34, 0x34);
 
-/* D_800C1A00 */
 extern u8          g_SaveBuffer[];
 extern u8          D_80143BB4;
-/* D_80143F00 */
 extern u16         g_GameAreaId;
 extern u16         g_InputRepeatDelay;
 extern u16         g_InputRepeatButtons;
@@ -164,7 +162,6 @@ extern u8*         D_8018E7CC;
 extern u8          D_8018E990[];
 extern u8*         D_801C893C[];
 extern u8*         D_801C8950[];
-/* D_801CA28C */
 extern ShopStock   g_GameShopStock[SHOP_COUNT];
 extern char        D_801D0C1C[];
 extern char        D_801D0C20[];
@@ -172,13 +169,11 @@ extern char        D_801D0C68[];
 extern char        D_801D0C94[];
 extern char        D_801D0C98[];
 extern char        D_801D0CDC[];
-/* D_801D0CE4 */
 extern char        g_MenuStatFormat[];
 extern char        D_801D0CE8[];
 extern char        D_801D0CF0[];
 extern char        D_801D0CF8[];
 extern char        D_801D0CFC[];
-/* D_801D0D08 */
 extern char        g_MenuZennyFormat[];
 extern char        D_801D0D0C[];
 extern char        g_MenuClockFormat[];
@@ -217,7 +212,6 @@ extern s32         D_801E5384[];
 extern const char* D_801E5434[];
 extern Callback    D_801E545C[];
 extern u8          D_801E547C[];
-/* D_801E5574 */
 extern u8          MENU_CAPTION_GLYPH_2[];
 extern u8          MENU_CLOCK_CAPTION[];
 extern u8          MENU_COMMAND_FRAME[];
@@ -231,22 +225,18 @@ extern u8          D_801E56DC[];
 extern u8          D_801E5738[];
 extern u8          D_801E5814[];
 extern u8          D_801E581C[];
-/* D_801E5830 */
 extern u8          g_MenuLabelAgility[];
 extern u8          D_801E5834[];
 extern u8          D_801E583C[];
 extern u8          D_801E5844[];
 extern u8          D_801E5848[];
-/* D_801E5850 */
 extern u8          g_MenuPortraitAtlas[];
 extern u8          D_801E5880[];
-/* D_801E58B0 */
 extern u8          MENU_CAPTION_ICON[];
 extern u8          MENU_CLOCK_COLON[];
 extern u8*         g_MenuCommandLabels[];
 extern u8          g_MenuCommandRows[][5];
 extern u8          D_801E5A10[];
-/* D_801E5A24 */
 extern const char* D_801E5B7C[4];
 extern u8          D_801E5BC8[];
 extern Callback    D_801E5BEC[];
@@ -343,18 +333,13 @@ extern u8          D_801E625C;
 extern volatile u8 D_801E6260;
 extern u8          D_801E6264[];
 
-/* func_8014FF0C */
 void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 void func_80164D2C(u8 idx, u8 sel, u8 val, u8* flags, u16* dst);
-/* func_801650B4 */
 bool Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
 u32  Char_ClearStatus(u8 index, u16 mask, u8 mode);
-/* func_8016628C */
 s32  Party_CountItem(u8 category, u8 item, u8 mode);
-/* func_80166A10 */
 s32  Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void Area_RunSetupStream(s32 cursor);
-/* func_801AED54 */
 void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
@@ -363,10 +348,8 @@ s32  func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 s32  func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
-/* func_801BDB7C */
 u8   Party_CountOrder(u8 mode);
 void func_801C1254(u8 ability_id, u8 slot_index);
-/* func_801D0EA0 */
 void Shop_DispatchStep(void);
 void func_801D0EDC(void);
 void func_801D1000(void);
@@ -396,9 +379,7 @@ void func_801D349C(void);
 void func_801D34F0(void);
 void func_801D352C(void);
 void func_801D3560(u16* result_code);
-/* func_801D3654 */
 s32  Shop_ApplyPercent(s32 value, s32 percent);
-/* func_801D3688 */
 u32  Shop_GetSellPrice(s32 item_kind, s32 quantity, s32 discount_flag);
 void func_801D3710(void);
 void func_801D3828(u8 record, u8 row, u8 color);
@@ -419,7 +400,6 @@ void func_801D43F0(void);
 void func_801D446C(void);
 void func_801D456C(void);
 void func_801D4614(void);
-/* func_801D46A4 */
 void SAVE_DispatchState(void);
 void func_801D46E0(void);
 void func_801D472C(void);
@@ -453,7 +433,6 @@ void func_801D66AC(void);
 void func_801D66C8(void);
 s32  func_801D66F8(u8* cursor_byte, s32 palette_index);
 void func_801D68D0(s32 reset_slots);
-/* func_801D69E0 */
 void SAVE_BuildSlotImage(void);
 void func_801D6CE4(u8 row_index, u8* source_record);
 void func_801D6D6C(s32 strip_x, s32 strip_y);
@@ -470,43 +449,29 @@ void func_801D7AE4(void);
 void func_801D7B74(void);
 void func_801D7CC8(void);
 void func_801D7D48(void);
-/* func_801D7E08 */
 void Menu_SwapBytes(u8* first, u8* second);
 void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor);
 void func_801D8050(s32 panel_x);
 s32  func_801D81B4(u8* cursor_byte, s32 palette_index);
-/* func_801D826C */
 void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s32 shaded, s32 unused);
-/* func_801D86D4 */
 void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index);
-/* func_801D8A0C */
 void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);
 void func_801D8C58(s16 x, s16 y, u8 index, u8 flag);
-/* func_801D8FC0 */
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
-/* func_801D910C */
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
-/* func_801D9160 */
 void Menu_DrawTintedLine(s16 line_x0, s16 line_y0, s16 line_x1, s16 line_y1, u8 color_r, u8 color_g, u8 color_b,
                          u8 tpage);
-/* func_801DA00C */
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 void func_801DA120(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 void Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
 void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
-/* func_801DA9C4 */
 u16  Item_GetPrice(s32 category, s32 item_id);
-/* func_801DAA78 */
 s32  Char_GetExpForLevel(s32 character, s32 level);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style);
-/* func_801DB938 */
 void Menu_DrawRowIcons(u8* row_record, s32 palette_index);
-/* func_801DB9F0 */
 void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_slot, s32 equip_slot, u8 item_id);
-/* func_801DC1F4 */
 void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height);
 void func_801DC6FC(MenuPanelTask* arg0);
-/* func_801DDCB0 */
 void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);
 void func_801DDFB0(s16 x, s16 y, u32 flags, u8 row, u8 variant);
 void func_801DE188(void);
@@ -523,7 +488,6 @@ void func_801DE944(void);
 void func_801DEE20(void);
 void func_801DEE64(void);
 void func_801DF00C(s32 panel_x, s32 panel_y);
-/* func_801DF464 */
 void Menu_SwapBytes_801DF464(u8* first, u8* second);
 s32  func_801DF478(void);
 void func_801DF6A8(void);
@@ -546,7 +510,6 @@ void func_801E0F78(void);
 void func_801E112C(MenuPanelTask* task);
 void func_801E1710(MenuPanelTask* task);
 void func_801E1B80(s32 handler_index);
-/* func_801E1BB8 */
 void Menu_SwapBytes_801E1BB8(u8* first, u8* second);
 void func_801E1BCC(void);
 void func_801E1C88(void);
@@ -587,7 +550,6 @@ void func_801E2DB4(void);
 void func_801E2E30(void);
 void func_801E2E70(void);
 void func_801E2EB0(void);
-/* func_801E2F04 */
 void Shop_DrawItems(ShopPanel* panel);
 void func_801E31C4(void);
 void func_801E3204(void);
@@ -629,7 +591,6 @@ void func_801E4540(void);
 void func_801E4580(void);
 void func_801E45C0(MenuPanelTask* arg0);
 s32  func_801E4C2C(s32 item_class);
-/* func_801E4D4C */
 s32  Party_HasSkill(s32 item_id);
 void func_801E4DF4(MenuPanelTask* panel_task);
 void func_801E4E9C(MenuPanelTask* panel_task);

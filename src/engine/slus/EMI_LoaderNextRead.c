@@ -4,7 +4,6 @@
  * first word and type into the active loader state; returns 0 when the slot is past the entry count or a
  * stream flag skips a type below 6.
  */
-/* func_80162B08 */
 MATCH s32 EMI_LoaderNextRead(u8 slot) {
     volatile EmiTocEntry* slot_table;
     s32                   result;

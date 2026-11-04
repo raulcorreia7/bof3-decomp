@@ -4,7 +4,6 @@
  * group_index selects (strides 0x12 for 0 and others, 0x18, 0x16, 0x14, 0x10 for 1-4), indexed by the low byte of
  * choice_entry.
  */
-/* func_801666C8 */
 MATCH s32 Item_GetDescription(s32 group_index, s32 choice_entry) {
     switch (group_index & BYTE_MASK) {
         case 0:

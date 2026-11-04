@@ -3,7 +3,6 @@
 /* runs the active state handler, then advances the timer and
  * steps the state machine forward on expiry.
  */
-/* func_801638B0 */
 MATCH void SND_ServiceXa(void) {
     s32 temp;
     s8* mode;

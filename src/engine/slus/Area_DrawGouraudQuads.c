@@ -5,7 +5,6 @@
  * projected origin, four packed RGBA colours, and a draw mode selected from
  * the first colour's tpage bits.
  */
-/* func_8015707C */
 MATCH void Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
     SVECTOR    verts[4];
     SVECTOR*   v;

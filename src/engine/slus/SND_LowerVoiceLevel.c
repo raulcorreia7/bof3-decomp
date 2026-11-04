@@ -3,7 +3,6 @@
 /* subtracts amount from the D_80149070 accumulator of the voice at
  * voice and derives the clamped D_80149040 level from it.
  */
-/* func_8015D148 */
 MATCH void SND_LowerVoiceLevel(s32 voice, s32 amount) {
     u32  index;
     u16* level_ptr;

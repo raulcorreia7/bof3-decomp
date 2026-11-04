@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801AF2A0 */
 MATCH void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags) {
     u8*   rect;
     SPRT* sprt;

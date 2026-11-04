@@ -3,7 +3,6 @@
 /* closes the front-end panel: clears the panel index, arms panel 1
  * with mode 0, marks the panel state, and advances the front-end step.
  */
-/* func_801515A8 */
 MATCH void UI_ClosePanel(void) {
     u8 count;
 

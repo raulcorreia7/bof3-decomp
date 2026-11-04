@@ -5,7 +5,6 @@
  * matrix, rotates the part, emits a POLY_FT4 with four packed texture
  * coordinates and appends it with the part's draw mode.
  */
-/* func_80157358 */
 MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
     SVECTOR   pos;
     SVECTOR   rot;

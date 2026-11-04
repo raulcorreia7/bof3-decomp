@@ -2,7 +2,6 @@
 
 /* syncs the CD reader and stores the pending result word.
  */
-/* func_80163E3C */
 MATCH void SND_XaStateWaitSync(void) {
     s16* base;
 

@@ -5,7 +5,6 @@
  * tables the paired accessors Item_GetEquipability/Item_GetKind/Item_GetFlags read.
  * Kind 0 and every other category return 0.
  */
-/* func_80166034 */
 MATCH u8 Item_GetPower(u8 category, u8 item) {
     switch (category) {
         case 0:

@@ -152,11 +152,7 @@ u8 D_801D4270[MASTER_MENU_VALUE_COUNT] = {
 };
 
 /* Shop panel state. */
-/* D_801D4284 */
 u8 g_MasterBannerLock = 0;
-/* D_801D4285 */
 u8 g_MasterStep       = 0;
-/* D_801D4286 */
 u8 g_MasterSubStep    = 0;
-/* D_801D4287 */
 u8 g_MasterPanelLock  = 0;

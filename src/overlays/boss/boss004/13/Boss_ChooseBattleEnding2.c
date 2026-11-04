@@ -1,6 +1,5 @@
 #include "boss004_13.h"
 
-/* func_800C2188 */
 MATCH void Boss_ChooseBattleEnding2(void) {
     if (g_BattleResult & BATTLE_RESULT_DEFEAT) {
         g_BattlePartyOrder = 8;

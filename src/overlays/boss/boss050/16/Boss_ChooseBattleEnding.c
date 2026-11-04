@@ -1,6 +1,5 @@
 #include "boss050_16.h"
 
-/* func_800C1948 */
 MATCH void Boss_ChooseBattleEnding(void) {
     if BATTLE_IS_VICTORY () {
         g_SceneState.step_05 = 0x10;

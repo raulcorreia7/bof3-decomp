@@ -1,6 +1,5 @@
 #include "shop_00.h"
 
-/* func_801E2F04 */
 MATCH void Shop_DrawItems(ShopPanel* panel) {
     u8* names;
     u8* entry;

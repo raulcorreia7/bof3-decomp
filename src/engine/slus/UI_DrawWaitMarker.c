@@ -4,7 +4,6 @@
  * TPage, then the sprite primitive with CLUT, RGB, position, size and semi-transparency, appended to the output
  * table.
  */
-/* func_801526F4 */
 MATCH void UI_DrawWaitMarker(s16 x, s16 y) {
     SPRT* prim;
 

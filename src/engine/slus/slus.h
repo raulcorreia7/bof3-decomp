@@ -390,9 +390,7 @@ extern AreaCell                    g_AreaCells[AREA_CELL_GRID_ROWS][AREA_CELL_GR
  * (g_FrameBufferIndex). In a row's second record, pad1 and pad2 hold the rows of the two linked
  * cells (0 = none); in its first, pad1 holds the pending upload request. */
 extern POLY_FT4                    g_AreaCellPrims[][2];
-/* D_80141880 */
 extern u16                         g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
-/* D_801424C0 */
 extern u16                         g_AreaCellPrimFreeIds[0x400];
 extern u8                          D_80142CC0[];
 extern u8                          D_80142CE0[];
@@ -411,12 +409,9 @@ extern u32                         D_80143E70[];
 extern s32                         D_80143E8C;
 extern u32                         D_80143EA0;
 extern u32                         D_80143EA4;
-/* D_80143F00 */
 extern u16                         g_GameAreaId;
 extern u8                          D_80143F48[];
-/* D_80143F86 */
 extern s16                         g_ScrollHeight[]; /* low half (+2) of the big-endian 0x80143F84 scroll word */
-/* D_80144951 */
 extern volatile u8                 g_SndMono;
 extern s32                         D_80144967;
 /* Retail data D_80145000-D_80146FFF (one declaration each). */
@@ -451,7 +446,6 @@ extern volatile u32                g_EmiBytesLeft;
 extern volatile u32                g_EmiLoadArg;
 extern volatile u32                g_EmiFirstWord;
 extern volatile u16                g_EmiEntryType;
-/* D_80146464 */
 extern volatile u32                g_EmiRingBase;
 extern u32                         g_EmiStep;
 extern s32                         D_80146474;
@@ -470,7 +464,6 @@ extern s8                          D_8014648B;
 extern s32                         D_8014648C;
 extern u16                         D_80146490;
 extern u16                         D_80146492;
-/* D_80146494 */
 extern u8                          g_EmiStreamState;
 extern u8                          D_80146498[];
 extern volatile u8                 g_EmiRingStates[];
@@ -524,14 +517,11 @@ extern u8                          D_80146824[];
 extern s8                          D_8014682C;
 extern s8                          D_8014682E;
 extern s8                          D_8014682F;
-/* D_80146830 */
 extern u8                          g_SndCdVolume;
 extern s8                          D_80146832;
 extern u8                          D_80146834;
 extern u8                          D_80146835;
-/* D_8014683C */
 extern CdlATV                      g_SndCdMix;
-/* D_80146840 */
 extern u8                          g_EmiServiceMode;
 extern OverlaySlotCursor           D_80146844;
 extern u32*                        D_80146848;
@@ -610,13 +600,9 @@ extern s16                         D_801492E4;
 extern s32                         D_801492FC;
 extern s32                         D_80149300;
 extern s32                         D_80149304;
-/* D_80149322 */
 extern s16                         g_AreaTileOriginY;
-/* D_80149324 */
 extern s16                         g_AreaGridColCursor;
-/* D_80149326 */
 extern s16                         g_AreaGridRowCursor;
-/* D_80149334 */
 extern u16                         g_AreaCellPrimFreeIndex;
 extern u16                         D_80149336;
 extern u8                          D_8014933D;
@@ -636,9 +622,7 @@ extern const struct CallbackTable5 D_80149B3C;
 extern const struct CallbackTable5 D_80149B50;
 extern const struct CallbackTable5 D_80149B64;
 extern const VECTOR                D_80149BF0;
-/* D_80149C3C */
 extern const u32                   g_EmiCdSteps[];
-/* D_80149C60 */
 extern const SystemDispatchFuncs   g_EmiSlotDrainFuncs;
 extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];
@@ -669,7 +653,6 @@ extern const WindowTextRow        D_8017F960[3];
 extern PanelRowWindow             D_8017F962[];
 extern s16                        D_8017F964;
 extern const u16                  D_8017F972;
-/* D_8017FC94 */
 extern const EncounterZone        g_AreaEncounterZones[MAP_ZONE_COUNT];
 extern const EncounterZone* const D_80181164[MAP_ZONE_LIST_COUNT];
 extern const SceneFlagPair        D_80181484[SCENE_FLAG_COUNT];
@@ -688,11 +671,8 @@ extern const BgmTrack             D_80181EB8[BGM_TRACK_COUNT];
  * slot is not `512 * program`. The quirk affects 1,248 entries, all bank 6
  * programs 3-7 in the 200 `BIN/BENEMY` banks. It is shipped-engine behavior, not
  * the record's meaning. */
-/* D_801821E0 */
 extern u16                        g_VabProgramOffsets[4];
-/* D_801821E8 */
 extern u16                        g_VabToneOffsets[80];
-/* D_80182444 */
 extern DiscLba                    g_EmiSlotLbas[];
 extern u8                         D_80182174;
 extern u8                         D_80182175;
@@ -711,9 +691,7 @@ extern u32                        D_8018239C[3][7];
 extern u32                        D_801823F0[3][7];
 extern u32                        D_80183230[3];
 extern u32                        D_8018323C[3];
-/* D_80183248 */
 extern u32                        g_EmiEntryHandlers[11];
-/* D_80183274 */
 extern u32                        g_XaStateFuncs[55];
 extern u32                        D_80183A1C[17];
 extern u32                        D_80183A60[4];
@@ -1042,16 +1020,12 @@ extern const MenuPanelFuncs  g_MenuPanels;
 
 extern void func_8014BC70(void);
 void        func_8014C47C(struct Vec3W* a, struct Vec3W* b);
-/* func_8014CF9C */
 extern void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
-/* func_8014D6DC */
 extern void Actor_BeginScript(s32 raw_selector, s32 raw_code);
 extern void func_8014DB98(void);
 /* Retail function prototypes (one declaration each). */
 s8          func_8014DE78(void);
-/* func_8014E7F8 */
 extern void GFX_ExpandRgb555(u32* pixels, RECT rect);
-/* func_8014E8FC */
 extern void GFX_DecodeLzss(u32* packed, RECT rect);
 void        func_8014EDF0(void);
 void        func_8014EE18(void);
@@ -1087,11 +1061,9 @@ void        func_801510DC(void);
 void        func_8015115C(void);
 void        func_801511C8(void);
 void        func_80151334(void);
-/* func_8015136C */
 void        Message_DispatchAnswerStep(void);
 void        func_8015142C(void);
 void        func_80151480(void);
-/* func_801514D0 */
 void        Message_StartRequest(void);
 void        func_80151538(void);
 void        func_801515F4(void);
@@ -1110,36 +1082,23 @@ extern void func_80151B50(void);
 void        func_80151D3C(void);
 void        func_80151D8C(void);
 void        func_80151DCC(void);
-/* func_80151E24 */
 void        UI_DrawGlyph(s32 color, u8* text);
-/* func_801522F8 */
 void        Message_DispatchBankStep(void);
 void        func_80152370(void);
 void        func_801523D0(void);
 void        func_80152420(void);
 void        func_80152470(void);
 void        func_801524C0(void);
-/* func_80152510 */
 void        Message_SetAnswerMessage5(void);
-/* func_8015253C */
 void        Message_SetAnswerMessage6(void);
-/* func_80152568 */
 void        Message_SetAnswerMessage7(void);
-/* func_80152594 */
 void        Message_SetAnswerMessage8(void);
-/* func_801525C0 */
 void        Message_SetAnswerMessage9(void);
-/* func_801525EC */
 void        Message_SetAnswerMessage10(void);
-/* func_80152618 */
 void        Message_SetAnswerMessage11(void);
-/* func_80152644 */
 void        Message_SetAnswerMessage12(void);
-/* func_80152670 */
 void        Message_SetAnswerMessage13(void);
-/* func_8015269C */
 void        Message_SetAnswerMessage14(void);
-/* func_801526C8 */
 void        Message_SetAnswerMessage15(void);
 void        func_80152C9C(void);
 void        func_80152D9C(void);
@@ -1148,23 +1107,18 @@ void        func_80152FB0(void);
 extern s32  func_801530D0(void);
 extern void func_80153CC4(u32 unused);
 extern void func_80153D34(void);
-/* func_8015456C */
 extern u16  Area_AllocCellPrimRow(void);
-/* func_80154664 */
 extern void Area_FreeCellPrimRow(u16 row_id);
 extern void Area_ProbeCell(s32 px, s32 py, AreaCell* out);
 extern void Area_RequestCellRows(AreaCell* entry);
 extern s32  Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);
 extern s16  func_80154ABC(s32 x, s32 y, u8 mode);
-/* func_80156000 */
 void        Area_DrawPartQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
 void        func_8015642C(u8* obj, s32 x, s32 y);
 void        func_8015684C(u8* record, s32 cell_x, s32 cell_y);
 void        func_801569B8(u8* record, s32 cell_x, s32 cell_y);
-/* func_80156C18 */
 void        Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y);
 void        func_80156E00(u8* unit, s32 x, s32 y);
-/* func_8015707C */
 void        Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
 void        func_8015763C(void);
 void        func_80157644(u32* record);
@@ -1195,44 +1149,30 @@ extern void func_8015A170(void);
 extern void func_8015A1D8(void);
 extern void func_8015A264(void);
 void        func_8015A2B0(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray);
-/* func_8015A344 */
 extern u8*  UI_DrawTextAt(s32 x, s32 y, u8* text);
 void        func_8015A554(void);
 extern void func_8015A944(void);
 extern void func_8015A9A4(void);
 s8          func_8015AD00(PanelSortItem* sort_list);
 void        func_8015B2AC(s16* out, s32* in);
-/* func_8015B61C */
 s32         Game_IsScenarioEqual(u8** cursor);
-/* func_8015B644 */
 s32         Game_IsAreaEqual(u8** cursor);
-/* func_8015B66C */
 s32         Game_TestSceneFlag(u8** cursor);
 s32         func_8015B6A8(u8** cursor);
 s32         func_8015B6D0(u8** cursor);
 s32         func_8015B6F8(u8** cursor);
 s32         func_8015B73C(u8** cursor);
-/* func_8015B764 */
 s32         Game_TestEventFlag(u8** cursor);
-/* func_8015B798 */
 s32         Game_HasVitalItem(u8** cursor);
-/* func_8015B7C4 */
 s32         Game_IsScenarioAtLeast(u8** cursor);
 s32         func_8015B7F0(u8** cursor);
 s32         func_8015B83C(u8** cursor);
-/* func_8015B98C */
 s32         Game_IsScriptVar0Equal(u8** cursor);
-/* func_8015B9B4 */
 s32         Game_IsScriptVar1Equal(u8** cursor);
-/* func_8015B9DC */
 s32         Game_IsScriptVar2Equal(u8** cursor);
-/* func_8015BA04 */
 s32         Game_IsScriptVar3Equal(u8** cursor);
-/* func_8015BA2C */
 s32         Game_SetScriptVar(u8* operand);
-/* func_8015BA50 */
 s32         Game_IsScriptVarEqual(u8* record);
-/* func_8015BA84 */
 s32         Game_IncScriptVar(u8* operand);
 s32         func_8015BABC(void);
 void        func_8015E994(void);
@@ -1246,26 +1186,16 @@ extern void func_80161454(u32 index);
 void        func_80163230(void);
 void        func_80163698(void);
 u8*         func_801642F4(u8* dst, const u8* src, u32 count);
-/* func_801648A0 */
 void        Char_ApplyMaster(u8* arg);
-/* func_801654F4 */
 extern s16  Char_AddStat(u16* value, s16 delta);
 /* Retail calls this executable makes into its own units and the overlays. */
-/* func_80165694 */
 u32         Char_AddPercent(u8* value, u8 delta);
-/* func_801656EC */
 u32         Char_ClearStatus(u8 index, u16 mask, u8 mode);
-/* func_80165760 */
 void        Char_ApplyWeapon(void* character);
-/* func_801658DC */
 void        Char_ApplyArmor(void* character);
-/* func_80165B3C */
 void        Char_ApplyAccessories(void* param);
-/* func_80166F3C */
 void        EMI_ArmPartyPlp(u8 member_a, u8 member_b, u8 member_c);
-/* func_80166F84 */
 void        EMI_ArmPartyFamily(u8 member_a, u8 member_b, u8 member_c, u8 family);
-/* func_80166FF8 */
 u8          EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);
 extern void func_80167428(void);
 void        func_8016BA04(void);
@@ -1290,70 +1220,48 @@ static inline void Slus_DrawPanelBox(void) {
     func_80159B9C((s16)panel->x >> 4, (s16)panel->y >> 4, (u8)(panel->unk_10 >> 4), (u8)(panel->unk_12 >> 4));
 }
 
-/* func_8014AAC8 */
 void SYS_Main(void);
 
-/* func_8014ACA0 */
 void SYS_InitRuntime(void);
 
-/* func_8014AD28 */
 void SYS_InitHardware(void);
 
-/* func_8014AE08 */
 void SYS_InitDisplay(void);
 
-/* func_8014AE9C */
 void SYS_ResetDisplayFrame(u8* work);
 
-/* func_8014E0FC */
 s32 SYS_LoadExec(const char* path);
 
-/* func_8014E22C */
 void GFX_UploadPalette(void);
 
-/* func_8014ED6C */
 void UI_DispatchLocalMode(void);
 
-/* func_8014F514 */
 void GFX_RunBlackFade(s32 delta, s32 semi_trans, s32 order);
 
-/* func_8014F5F0 */
 void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order);
 
-/* func_8015D044 */
 void SND_UpdateVoiceStatus(void);
 
-/* func_80162500 */
 void EMI_LoaderReadToc(void);
 
-/* func_801625E4 */
 void EMI_LoaderCopyPayload(void);
 
-/* func_80162618 */
 void EMI_LoaderQueuePayload(void);
 
-/* func_80162698 */
 void EMI_LoaderLoadGraphics(void);
 
-/* func_80162790 */
 void EMI_LoaderLoadVabHeader(void);
 
-/* func_80162898 */
 void EMI_LoaderLoadVabBody(void);
 
-/* func_801629F0 */
 void EMI_LoaderLoadVabCues(void);
 
-/* func_80162A6C */
 void EMI_LoaderLoadSequence(void);
 
-/* func_80162B08 */
 s32 EMI_LoaderNextRead(u8 slot);
 
-/* func_80163010 */
 void EMI_LoaderService(void);
 
-/* func_801655F4 */
 s32 Char_AddResistance(u8* counter, s32 delta);
 
 extern u32 g_SndCueReaders[7];

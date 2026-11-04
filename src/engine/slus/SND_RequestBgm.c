@@ -3,7 +3,6 @@
 /* starts the sound entry when the requested selection disagrees with the
  * active one, or when no selection is active.
  */
-/* func_80161BBC */
 MATCH s32 SND_RequestBgm(s32 requested) {
     u8  current;
     u16 value;

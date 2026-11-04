@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80197A24 */
 MATCH void Game_RunBattleState(void) {
     Callback* handlers;
     u16       state;

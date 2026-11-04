@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_8019A194 */
 MATCH u8 Game_FindAreaHandler(void) {
     s32 count;
     s32 offset;

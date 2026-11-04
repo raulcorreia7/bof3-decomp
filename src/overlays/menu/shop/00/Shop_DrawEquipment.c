@@ -1,6 +1,5 @@
 #include "shop_00.h"
 
-/* func_801D8A0C */
 MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
     const volatile void* objects[6];
     Character*           record;

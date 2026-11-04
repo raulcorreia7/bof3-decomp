@@ -3,7 +3,6 @@
 /* hands every slot index 0..7 of the D_80145DA0 table to
  * func_8014E484 (refresh-all).
  */
-/* func_8014E528 */
 MATCH void GFX_FreeAllPaletteSlots(void) {
     s32 index;
 

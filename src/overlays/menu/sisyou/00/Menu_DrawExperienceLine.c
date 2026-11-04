@@ -10,7 +10,6 @@ s32 Char_GetExpForLevel(s32 char_id, u8 level);
  * character in the level-growth table (0x318-byte character stride); -1 when
  * `level` is 100 or more. */
 
-/* func_801D1B28 */
 MATCH void Menu_DrawExperienceLine(u16 x, u16 y, u8 char_id, u8 level, u32 exp) {
     LINE_F2* line;
     s16      x0;

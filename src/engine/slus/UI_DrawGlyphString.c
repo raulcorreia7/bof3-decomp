@@ -3,7 +3,6 @@
 /* emits one 8x8 glyph sprite per non-space byte in the string,
  * advancing eight pixels per byte and wrapping to the next row on newline.
  */
-/* func_80150098 */
 MATCH void UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text) {
     s16 start_x;
     /* FAKE: retail keeps the CLUT argument in s0 across the calls. */

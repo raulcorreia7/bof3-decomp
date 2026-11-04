@@ -4,7 +4,6 @@
  * bound sep id whose four seq slots report end-of-sequence is written back as
  * (entry index, seq); returns 0 on a claim and 1 when none is free.
  */
-/* func_8015D660 */
 MATCH s32 SND_FindFreeFxVoice(u8* out_index, u8* out_seq) {
     s32 i;
     s32 j;

@@ -3,7 +3,6 @@
 /* Initializes the game runtime, then runs the permanent frame loop,
  * including the guarded EMI service/reset path.
  */
-/* func_8014AAC8 */
 MATCH void SYS_Main(void) {
     u8* work;
 

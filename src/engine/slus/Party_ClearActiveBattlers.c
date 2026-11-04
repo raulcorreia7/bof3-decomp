@@ -3,7 +3,6 @@
 /* clears the record fields of the three 0x140-stride slots whose mode flag
  * is set.
  */
-/* func_80166D8C */
 MATCH void Party_ClearActiveBattlers(void) {
     s32 index;
 

@@ -3,7 +3,6 @@
 /* polls the key-on status of every SPU voice 0..0x17 through
  * SpuGetKeyStatus and stores each result in the D_8018E140 table.
  */
-/* func_8015D044 */
 MATCH void SND_UpdateVoiceStatus(void) {
     u8 i;
 

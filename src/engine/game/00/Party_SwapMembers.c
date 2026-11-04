@@ -5,7 +5,6 @@
  * this function copies the full 0xA4-byte character record there. Byte 0x79
  * indexes g_CharSlot; byte 0x13C stores the mapped record id.
  */
-/* func_801BE738 */
 MATCH void Party_SwapMembers(u32 slot_a, u32 slot_b, u32 skip_state) {
     Party_SwapBattlerRows(slot_a & BYTE_MASK, slot_b & BYTE_MASK, skip_state & BYTE_MASK);
 

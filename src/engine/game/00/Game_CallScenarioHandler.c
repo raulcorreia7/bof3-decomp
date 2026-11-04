@@ -4,7 +4,6 @@
  * belongs to (offsets +0x08/+0x0C carry its siblings, declared in
  * Area_IsStepBlocked.c and func_801A79A4.c). */
 
-/* func_801A7A34 */
 MATCH s8 Game_CallScenarioHandler(u16 handler_arg0, u16 handler_arg1) {
     Actor* saved;
     s8 (*handler)(s32 handler_arg0, s32 handler_arg1);

@@ -3,7 +3,6 @@
 /* Latch the CD level and write the CD attenuator: stereo (g_SndMono == 0) routes the level to val0 and val2,
  * mono sends half the level to all four.
  */
-/* func_80163EB0 */
 MATCH void SND_SetCdVolume(u8 volume) {
     /* FAKE: volatile pointee keeps one materialized level address. */
     volatile u8* level = &g_SndCdVolume;

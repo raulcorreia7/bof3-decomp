@@ -5,7 +5,6 @@
  * GAME.EMI starter. It resets the graphics and sound pipeline for the overlay
  * start, clearing the work buffer.
  */
-/* func_8014EA80 */
 MATCH void SYS_StartFrontend(void) {
     u16*       dst;
     const u16* src;

@@ -3,7 +3,6 @@
 /* services the active EMI CD-ready callback, validates the sector
  * source, dispatches the current loader phase, and advances the streaming ring.
  */
-/* func_80162230 */
 MATCH void EMI_OnCdReady(u8 status, u8* result) {
     u8*           read_progress;
     CdlLOC*       current_pos;

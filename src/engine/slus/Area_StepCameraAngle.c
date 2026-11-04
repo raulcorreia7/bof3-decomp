@@ -5,7 +5,6 @@
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best
  * score 53.64%. resume: a lever or header fix that closes the first mismatch. */
 #ifdef NON_MATCHING
-/* func_8015BEA0 */
 NON_MATCHING s32 Area_StepCameraAngle(s32 degrees, s8 duration) {
     s32 tmp0;
     s32 tmp1;

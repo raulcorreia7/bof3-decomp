@@ -4,7 +4,6 @@
  * D_80148334/D_80148336, runs the layout and selection passes, and reports
  * whether the shared word's confirm bit is clear.
  */
-/* func_801503E0 */
 MATCH s32 UI_UpdateLayout(void) {
     u16 confirm;
 

@@ -4,7 +4,6 @@
  * five effect groups whose g_SelectionFxVoices entry is not the -1 sentinel, stops all
  * four of its voices through SND_StopSequence.
  */
-/* func_8015D5D8 */
 MATCH void SND_StopAllSequences(void) {
     u8 i;
     u8 j;

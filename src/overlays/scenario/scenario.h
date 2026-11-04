@@ -54,7 +54,6 @@ ASSERT_OFFSET(SceneRequest, byte, 0x00);
 void func_801F7484(void);
 void func_801F74EC(void);
 void func_801F7A18(void);
-/* func_801FC8FC */
 void Scene_ClearParty(void);
 
 /* Scene dispatch table indexed by the mode byte at D_80146872. */

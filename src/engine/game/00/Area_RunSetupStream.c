@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801A3E50 */
 MATCH void Area_RunSetupStream(u8* cursor) {
     s16 index;
     s16 slot;

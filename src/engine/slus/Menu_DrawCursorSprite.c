@@ -3,7 +3,6 @@
 /* draws the front-end panel cursor at (x - 0x16, y + 2) as a 0x18 x 0xC textured sprite with the
  * 0x7802 CLUT: the draw mode and a 12-byte primitive first, then the Sprt and its 0x14-byte slot.
  */
-/* func_801647C4 */
 MATCH void Menu_DrawCursorSprite(u16 x, u16 y, s32 unused) {
     SPRT* sprite;
 

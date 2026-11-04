@@ -1,6 +1,5 @@
 #include "commu00_00.h"
 
-/* func_801F0534 */
 MATCH void Fairy_VillageBuildJobs(void) {
     s32 record;
     s32 task;

@@ -189,7 +189,6 @@ ASSERT_OFFSET(FairyVillageData, variant_counter, 0x42C);
 ASSERT_OFFSET(FairyVillageData, labels, 0x434);
 
 /* Retail-address data symbols, in address order. */
-/* D_80143F00 */
 extern u16      g_GameAreaId;
 extern u8       D_801448F2;
 extern u32      D_80145030;
@@ -214,11 +213,9 @@ extern u8  D_80145E44;
 extern u8  D_80145E48[];
 extern u8  D_80145E60[];
 extern u16 D_80146904[1];
-/* D_801CA28C */
 extern ShopStock      g_GameShopStock[SHOP_COUNT];
 extern s8             D_801EEC08[];
 extern char           D_801EEC44[];
-/* D_801EEC48 */
 extern u8             g_FairyGifts[];
 extern u8             D_801EEC98[];
 extern u8             D_801F2458[];
@@ -234,7 +231,6 @@ extern u8             D_801F25A4[][3][3];
 extern Callback       D_801F25EC[];
 extern Callback       D_801F2604[];
 extern Callback       D_801F2610[1];
-/* D_801F2618 */
 extern u8             g_FairyExploreRewards[];
 extern u8             D_801F2619[];
 extern Callback       D_801F2678[];
@@ -258,14 +254,11 @@ extern FairyVillageData D_801F24FC_Data;
 
 /* The scratchpad work pointer; each overlay types the pointee for its mode. */
 
-/* func_801650B4 */
 bool Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
 void func_801D3568(void);
 void func_801D5034(void);
 void func_801D5D5C(void);
-/* func_801EECA4 */
 void Fairy_VillageInit(void);
-/* func_801EEDF8 */
 void Fairy_VillageQueueRooms(void);
 void func_801EEEF0(u32 row_index);
 void func_801EF110(s32 battle_count);
@@ -274,11 +267,9 @@ void func_801EF52C(void);
 s32  func_801EF784(void);
 s32  func_801EFA50(void);
 s32  func_801EFEA8(void);
-/* func_801F00D4 */
 void Fairy_JoinVillage(void);
 void func_801F01F4(void);
 void func_801F0320(void);
-/* func_801F0534 */
 void Fairy_VillageBuildJobs(void);
 void func_801F0718(u8 source_index, u8 task_index);
 void func_801F08D8(u8 source_index, u8 task_index);
@@ -295,7 +286,6 @@ void func_801F1204(u8 task_index, u8 record_kind_index);
 void func_801F1254(u8 task_index);
 s32  func_801F1294(u8* active_ui);
 s32  func_801F12C8(volatile Actor* slot);
-/* func_801F1318 */
 s32  Fairy_ShowPlayRecordMessage(void);
 s32  func_801F13B8(void);
 s32  func_801F1444(u8* active_ui);
@@ -313,11 +303,9 @@ void func_801F1770(void);
 void func_801F17A4(void);
 void func_801F1824(void);
 void func_801F1874(void);
-/* func_801F18F8 */
 void Fairy_GrantGift(void);
 void func_801F1AFC(void);
 void func_801F1B30(void);
-/* func_801F1BC8 */
 void Fairy_RollExploreReward(void);
 void func_801F1EB0(void);
 void func_801F1F10(void);

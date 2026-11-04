@@ -1,6 +1,5 @@
 #include "boss021_16.h"
 
-/* func_800C1C64 */
 MATCH void Boss_EndBattle(void) {
     u8* work;
 

@@ -2,7 +2,6 @@
 
 /* 51.52%; branch@+0x000C: pointer setup and the 3-byte search loop diverge. */
 #ifdef NON_MATCHING
-/* func_80166FF8 */
 NON_MATCHING u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     s32       i;
     u8        c;

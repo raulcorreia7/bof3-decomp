@@ -1,6 +1,5 @@
 #include "sisyou_00.h"
 
-/* func_801D177C */
 MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     Character* record;
     u8*        base;

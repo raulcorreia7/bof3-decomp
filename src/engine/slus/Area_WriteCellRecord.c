@@ -4,7 +4,6 @@
  * the record id, and the record is copied from cell+4 (cell+8 while D_8014933C is zero) to the scaled slot after the
  * 4bpp cell image.
  */
-/* func_80158400 */
 MATCH void Area_WriteCellRecord(u8* cell) {
     u32  map;
     u32  scratch[2];

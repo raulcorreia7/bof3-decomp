@@ -94,7 +94,6 @@ INCLUDE_ASM(func_801CFA44);
 
 #include "overlays/plchar/Char_SpawnActor.h"
 
-/* func_801CFD20 */
 #include "overlays/plchar/Char_ProbeFacingCell.h"
 
 MATCH void func_801CFE54(void) {

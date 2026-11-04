@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801984AC */
 MATCH void Game_RunFishingState(void) {
     Callback* handlers;
     u16       state;

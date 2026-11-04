@@ -16,7 +16,6 @@ typedef struct GameUITextState {
 /* walks the message script at D_801490AC, drawing each glyph
  * through func_8014F800 until D_801490B9 characters were drawn.
  */
-/* func_80150470 */
 MATCH void UI_DrawMessageScript(void) {
     u8*              p;
     u8*              saved;

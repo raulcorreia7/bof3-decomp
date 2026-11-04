@@ -9,7 +9,6 @@ typedef struct {
  * the stack and dispatches the entry selected by the current game-UI local
  * mode. UI_SetMode arms this loop through CbRegister.
  */
-/* func_8014ED6C */
 MATCH void UI_DispatchLocalMode(void) {
     GameUICallbackGroup*       dst;
     const GameUICallbackGroup* src;

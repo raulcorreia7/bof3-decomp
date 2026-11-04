@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801971E8 */
 MATCH void Game_RunAreaLoadState(void) {
     u16 context_seed;
     u32 context_a;

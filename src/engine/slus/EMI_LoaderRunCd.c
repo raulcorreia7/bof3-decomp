@@ -7,7 +7,6 @@ typedef struct OverlayCallbackGroup {
 /* snapshots the target-local EMI callback table and invokes the
  * callback selected by the current loader mode.
  */
-/* func_80162D18 */
 MATCH void EMI_LoaderRunCd(void) {
     OverlayCallbackGroup*       dst;
     const OverlayCallbackGroup* src;

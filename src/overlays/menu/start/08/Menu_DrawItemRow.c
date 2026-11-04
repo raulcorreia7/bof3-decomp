@@ -1,6 +1,5 @@
 #include "start_08.h"
 
-/* func_801DC74C */
 MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     u8* cell;
     s32 row_off;

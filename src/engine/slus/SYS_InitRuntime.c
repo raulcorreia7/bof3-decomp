@@ -3,7 +3,6 @@
 /* Initializes the runtime work buffers and subsystem state used by
  * the executable's boot loop.
  */
-/* func_8014ACA0 */
 MATCH void SYS_InitRuntime(void) {
     u8* work;
 

@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801AE3F0 */
 MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u8 window_style) {
     RECT*     texture_window;
     POLY_FT4* primitive;

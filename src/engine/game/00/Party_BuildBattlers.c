@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801C1400 */
 MATCH void Party_BuildBattlers(u32 mode) {
     s32        i;
     u8         kind;

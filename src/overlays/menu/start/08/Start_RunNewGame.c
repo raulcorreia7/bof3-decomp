@@ -3,7 +3,6 @@
 extern void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height,
                                u8 window_style); /* local: void read; a sibling copy is s32 */
 
-/* func_801E2584 */
 MATCH void Start_RunNewGame(void) {
     u32* p;
     u8*  counter;

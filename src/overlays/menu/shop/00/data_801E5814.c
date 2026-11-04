@@ -4,16 +4,12 @@ u8 D_801E5814[8] = "Pois" T_END;
 
 u8 D_801E581C[8] = "Conf" T_END;
 
-/* D_801E5824 */
 u8 g_MenuLabelPower[4] = "Pwr" T_END;
 
-/* D_801E5828 */
 u8 g_MenuLabelDefense[4] = "Def" T_END;
 
-/* D_801E582C */
 u8 g_MenuLabelIntellect[4] = "Int" T_END;
 
-/* D_801E5830 */
 u8 g_MenuLabelAgility[4] = "Agl" T_END;
 
 u8 D_801E5834[8] = {0x08, 0x0A, 0x09, 0x0B, 0x0C, 0x0C, 0x00, 0x00};
@@ -24,7 +20,6 @@ u8 D_801E5844[4] = "EXP" T_END;
 
 u8 D_801E5848[8] = "NEXT" T_END;
 
-/* D_801E5850 */
 u8 g_MenuPortraitAtlas[48] = {
     0x78, 0x00, 0xB0, 0x02, 0x28, 0x30, 0xF0, 0x02, 0x50, 0x00, 0x20, 0x02,
     0xA0, 0x00, 0xC0, 0x02, 0xC8, 0x00, 0xD0, 0x02, 0x28, 0x00, 0x00, 0x02,
@@ -38,7 +33,6 @@ u32 D_801E5898 = 0;
 
 s32 D_801E589C[5] = {-12, -4, 12, 4, 12};
 
-/* D_801E58B0 */
 u8 MENU_CAPTION_ICON[4] = "`" T_END;
 
 u8 MENU_CLOCK_COLON[4] = ">" T_END;

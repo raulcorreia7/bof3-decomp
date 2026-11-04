@@ -3,7 +3,6 @@
 /* for the three kind bytes at +0x0F..+0x11, sets the 16-bit fields at record +6 and +8 from the
  * 0x16-stride table at D_801C98B4/D_801C98B3, then nudges the kind's 16-bit and byte counters in the +0x1C record body.
  */
-/* func_801658DC */
 MATCH void Char_ApplyArmor(void* character) {
     u8  kind_bytes[3];
     u8* kind;

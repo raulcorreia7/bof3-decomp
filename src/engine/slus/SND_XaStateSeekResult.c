@@ -3,7 +3,6 @@
 /* steps the pending dispatch timer, else arms the next mode.
  */
 
-/* func_80163A54 */
 MATCH void SND_XaStateSeekResult(void) {
     if (D_8014682E < 0) {
         g_EmiServiceState = 1;

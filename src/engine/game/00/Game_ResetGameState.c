@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801970EC */
 MATCH void Game_ResetGameState(void) {
     u16 selection_seed;
     u16 world_flags;

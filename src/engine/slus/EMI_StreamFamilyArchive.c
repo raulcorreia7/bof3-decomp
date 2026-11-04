@@ -4,7 +4,6 @@
  * maps a BOF3 content family plus index into the slot id used by the
  * EXE loader path.
  */
-/* func_8016728C */
 MATCH void EMI_StreamFamilyArchive(u8 index, u8 family) {
     /* FAKE: retail holds the switch index in a0. */
     MATCH_REG(u8, slot_index, "a0");

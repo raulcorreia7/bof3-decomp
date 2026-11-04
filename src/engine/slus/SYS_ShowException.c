@@ -7,7 +7,6 @@ typedef struct {
 /* displays the boot exception register dump and loops forever
  * updating the double-buffered debug screen.
  */
-/* func_8014B3C4 */
 MATCH void SYS_ShowException(void) {
     const u32*     exception_frame;
     ExceptionQuad* src;

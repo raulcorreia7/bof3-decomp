@@ -3,7 +3,6 @@
 /* rebuilds the active boot-frame ordering-table and packet-pointer
  * tables, then restores the two fixed packet arena bounds.
  */
-/* func_8014B020 */
 MATCH void SYS_PrepareFrame(void) {
     u8*  packet;
     u32* ordering;

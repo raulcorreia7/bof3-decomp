@@ -3,7 +3,6 @@
 /* initializes the EMI/CD bootstrap state before the first active
  * entry is installed.
  */
-/* func_80161F58 */
 MATCH void EMI_LoaderInit(void) {
     s32           i;
     u8*           slot_state;

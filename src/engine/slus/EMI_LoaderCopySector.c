@@ -3,7 +3,6 @@
 /* copies the next EMI transfer chunk from the CD sector buffer,
  * wrapping into the active slot's sector when a partial sector remains.
  */
-/* func_80162C14 */
 MATCH void EMI_LoaderCopySector(void) {
     u32  transfer_words;
     u32  transfer_size;

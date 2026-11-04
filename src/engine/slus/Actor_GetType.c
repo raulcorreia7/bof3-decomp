@@ -2,7 +2,6 @@
 
 /* classifies the active scratchpad work area.
  */
-/* func_8015C148 */
 MATCH s32 Actor_GetType(void) {
     u8* work;
 

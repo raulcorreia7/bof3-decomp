@@ -4,7 +4,6 @@
  * the remaining byte count, and re-arms the slot state machine.
  */
 #ifdef NON_MATCHING
-/* func_80163418 */
 NON_MATCHING void EMI_LoaderTransferVabBody(void) {
     u8*  vab;
     s32* slot;
@@ -60,6 +59,5 @@ NON_MATCHING void EMI_LoaderTransferVabBody(void) {
     }
 }
 #else
-/* func_80163418 */
 INCLUDE_ASM(EMI_LoaderTransferVabBody);
 #endif

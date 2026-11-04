@@ -4,7 +4,6 @@
  * D_8017F8F0 handlers (opcode = low six bits of byte +3, byte +2 the stride), marks the palette dirty via
  * func_801580A4, then walks g_AreaMapBundle.object_list_28 through func_801576FC; both stop at a zero terminator.
  */
-/* func_80157F98 */
 MATCH void Area_RunBundleOpcodes(void) {
     u8* record;
 

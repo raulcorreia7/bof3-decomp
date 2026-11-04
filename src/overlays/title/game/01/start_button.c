@@ -2,7 +2,6 @@
 
 /* Runs before the main GAME.EMI entry-1 state handler each frame and redirects
  * early start-button transitions into either state 2 or state 7. */
-/* func_801D104C */
 MATCH void UI_HandleStartButton(void) {
     /* The original keeps &g_UiTitleInputGate in s0 and reaches the nearby
      * front-state fields as negative byte offsets off that single base, not as

@@ -3,7 +3,6 @@
 /* streams BIN/ETC/GAME.EMI (slot 0x262) and calls its entry once the loader is
  * ready.
  */
-/* func_8014EC64 */
 MATCH void SYS_EnterFrontend(void) {
     EMI_LoaderStreamInitSlot(EMI_SLOT_GAME);
     while (EMI_LoaderIsReady() == 0) {

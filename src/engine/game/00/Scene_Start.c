@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801A7704 */
 MATCH void Scene_Start(u8 scenario_index) {
     SceneState* state;
     u8*         base;

@@ -3,7 +3,6 @@
 /* clears the 56-by-28 halfword lookup table, then maps each record in
  * the g_AreaMapBundle.record_region_24 area-map record region to a wrapped lookup-table cell.
  */
-/* func_80158B24 */
 MATCH void Area_IndexCells(void) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);

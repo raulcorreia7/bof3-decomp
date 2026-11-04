@@ -5,7 +5,6 @@
  * 0x20-byte row, STRING_NUM selects a glyph from the 21-column sheet, and ordinary bytes use the 31-column sheet;
  * glyphs are 8 wide with height from D_8017F580. The second argument budgets the bytes consumed.
  */
-/* func_8014F84C */
 MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
     u8* str;
     u8  palette;

@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196D84 */
 MATCH void GFX_StepPaletteAnimation(u8 slot_index) {
     GraphicsPaletteAnimation* slot;
     u8*                       entry;

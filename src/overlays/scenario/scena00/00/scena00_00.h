@@ -209,9 +209,7 @@ ASSERT_SIZE(SceneFxCells, 0x30);
 /* One row of the per-slot effect arrays. */
 
 extern s16* volatile D_1F800010;
-/* D_80143F00 */
 extern u16            g_GameAreaId;
-/* D_80143F1D */
 extern u8             g_GameRequestKind;
 extern AreaScroll     D_80143F84;
 extern volatile u16   D_801448FC;
@@ -227,7 +225,6 @@ extern s32            D_801468A4;
 extern s32            D_801469EC;
 extern s32            D_801469F0;
 extern u8             D_80147A58[];
-/* D_80147A90 */
 /* One s32; the array form is kept because the scalar form changes the bytes of 8.c. */
 extern s32            g_AreaFocusY[];
 extern u16            D_80147A86;
@@ -247,7 +244,6 @@ extern s32            D_80147C38;
 extern s32            D_80147C3C;
 extern s32            D_80147C54;
 extern s32            D_80147C58;
-/* D_80149322 */
 extern s16            g_AreaTileOriginY;
 extern SceneLineColor D_801F6C04;
 extern Callback       D_801FC980[];
@@ -358,10 +354,8 @@ void func_801FB67C(void);
 void func_801FB744(void);
 void func_801FB924(void);
 void func_801FBE88(void);
-/* func_801FC7D0 */
 void Scene_DispatchActor(void* entity);
 void func_801FC810(void);
-/* func_801FC818 */
 s32  Scene_CheckStepTrigger(s32 x);
 s32  func_801FC8F4(void);
 

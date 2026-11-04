@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801AF390 */
 MATCH void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags) {
     s16       x;
     s16       y;

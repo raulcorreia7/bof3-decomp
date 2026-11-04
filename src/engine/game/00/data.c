@@ -5,95 +5,68 @@
  * world/scenario overlays stay literal addresses because those modules load
  * at fixed RAM addresses and no target symbol names them. */
 
-/* D_801C7AC0 */
 u8 s_PaletteFadeCounts[8] = {0x01, 0x10, 0x02, 0x04, 0x08, 0x00, 0x00, 0x00};
 
-/* D_801C7AC8 */
 u8 s_PaletteFadeDivisors[8] = {0x10, 0x01, 0x08, 0x04, 0x02, 0x00, 0x00, 0x00};
 
-/* D_801C7AD0 */
 u8 s_PaletteFadeScales[8] = {0x10, 0x00, 0x20, 0x40, 0x80, 0x00, 0x00, 0x00};
 
-/* D_801C7AD8 */
 u8 s_PaletteFadeColorCounts[8] = {0x01, 0x10, 0x02, 0x04, 0x08, 0x00, 0x00, 0x00};
 
-/* D_801C7AE0 */
 u8 s_PaletteFadeRowDivisors[8] = {0x10, 0x01, 0x08, 0x04, 0x02, 0x00, 0x00, 0x00};
 
-/* D_801C7AE8 */
 u8 s_PaletteFadeStrides[16] = {0x10, 0x00, 0x20, 0x40, 0x80, 0x00, 0x00, 0x00,
                                0x01, 0x10, 0x02, 0x04, 0x08, 0x00, 0x00, 0x00};
 
-/* D_801C7AF8 */
 u8 s_PaletteSlotDivisors[8] = {0x10, 0x01, 0x08, 0x04, 0x02, 0x00, 0x00, 0x00};
 
-/* D_801C7B00 */
 u8 s_PaletteSlotStrides[8] = {0x10, 0x00, 0x20, 0x40, 0x80, 0xCC, 0xCC, 0xCC};
 
-/* D_801C7B08 */
 Callback g_GameCampMenuLoad[3] = {(Callback)Game_LoadCampMenu, (Callback)func_801E3E88, (Callback)func_801E1680};
 
-/* D_801C7B14 */
 Callback g_GameStates[12] = {
     (Callback)Game_ResetGameState, (Callback)Game_RunAreaLoadState, (Callback)Game_RunFieldState, (Callback)Game_RunMenuState,
     (Callback)func_801979D4,      (Callback)Game_RunBattleState, (Callback)Game_RunCameraLookState, (Callback)Game_RunShopState,
     (Callback)Game_RunFishingState,      (Callback)Game_RunAbilityMenuState, (Callback)Game_RunStatusMenuState, (Callback)Game_RunSceneCameraState};
 
-/* D_801C7B44 */
 Callback g_GameEntryHandlers[3] = {(Callback)func_80197620, (Callback)func_80199368, (Callback)func_801976EC};
 
-/* D_801C7B50 */
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
-/* D_801C7B54 */
 Callback g_GameModeHandlers[8] = {(Callback)func_80197A60, (Callback)func_80197AA4, (Callback)func_80197C1C,
                           (Callback)func_80197C94, (Callback)func_80197E54, (Callback)func_801D1014,
                           (Callback)func_80197EFC, (Callback)func_80197F48};
 
 GameDelta D_801C7B74[4] = {GAME_DELTA(4, 0), GAME_DELTA(0, 4), GAME_DELTA(-4, 0), GAME_DELTA(0, -4)};
 
-/* D_801C7B7C */
 Callback g_GameStateHandlers[3] = {(Callback)Game_LoadShopOverlay, (Callback)func_80199398, (Callback)func_801983D8};
 
-/* D_801C7B88 */
 Callback g_GameSubstateHandlers[4] = {(Callback)func_801984E8, (Callback)func_801E0BD0, (Callback)func_801985C8,
                           (Callback)func_801E0C20};
 
-/* D_801C7B98 */
 Callback g_MenuAbilityOpen[3] = {(Callback)func_80198780, (Callback)func_801993F0, (Callback)func_8019883C};
 
-/* D_801C7BA4 */
 Callback g_MenuStatusOpen[3] = {(Callback)func_80198940, (Callback)func_80199418, (Callback)func_801989FC};
 
-/* D_801C7BB0 */
 Callback g_GameFlowHandlers[3] = {(Callback)func_80198B00, (Callback)func_80198B44, (Callback)func_80198B6C};
 
-/* D_801C7BBC */
 u8 s_MenuLine1Run[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x14, 0x02, 0x00, 0x0C, 0x00, 0x00, 0xFF};
 
-/* D_801C7BC8 */
 u8 s_MenuLine2Run[12] = {0x0F, 0x00, 0x09, 0x11, 0x00, 0x0A, 0x12, 0x00, 0x15, 0x00, 0x00, 0xFF};
 
-/* D_801C7BD4 */
 u8 s_MenuLine1FlagRun[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x2D, 0x02, 0x00, 0x0C, 0x00, 0x00, 0xFF};
 
-/* D_801C7BE0 */
 u8 s_MenuLine2FlagRun[12] = {0x0F, 0x00, 0x09, 0x11, 0x00, 0x0A, 0x12, 0x00, 0x2E, 0x00, 0x00, 0xFF};
 
-/* D_801C7BEC */
 Callback g_MenuPanelHandlers[5] = {(Callback)func_801995A4, (Callback)Menu_DrawPanelCursor, (Callback)func_801996A8,
                           (Callback)func_8019977C, (Callback)func_8019986C};
 
-/* D_801C7C00 */
 Callback g_MenuPanelStateHandlers[3] = {(Callback)func_8019959C, (Callback)func_801995F8, (Callback)func_80199638};
 
-/* D_801C7C0C */
 Callback g_MenuOptionHandlers[3] = {(Callback)func_8019959C, (Callback)func_801996FC, (Callback)Menu_SlidePanelLeft};
 
-/* D_801C7C18 */
 Callback g_MenuActionHandlers[3] = {(Callback)func_8019959C, (Callback)func_801997EC, (Callback)func_8019982C};
 
-/* D_801C7C24 */
 Callback g_MenuTaskHandlers[4] = {(Callback)func_8019959C, (Callback)func_80199938, (Callback)func_80199978,
                           (Callback)func_801999B8};
 
@@ -103,7 +76,6 @@ char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "
 u8 *D_801C7C5C[5] = {(u8 *)&D_801C7C34[0][0], (u8 *)&D_801C7C34[1][0], (u8 *)&D_801C7C34[2][0], (u8 *)&D_801C7C34[3][0],
                      (u8 *)&D_801C7C34[4][0]};
 
-/* D_801C7C70 */
 Callback g_ActorHandlers[187] = {
     (Callback)func_8019A210, (Callback)func_801F6DC0, (Callback)func_801D0C98, (Callback)func_801D1B10,
     (Callback)func_8019AB5C, (Callback)func_801D20C8, (Callback)func_8019A3B8, (Callback)func_801F70F0,
@@ -180,7 +152,6 @@ AreaHandler D_801C7F5C[11] = {
 
 Callback D_801C8090[3] = {(Callback)func_8019A3FC, (Callback)func_8019A53C, (Callback)func_8019A7D4};
 
-/* D_801C809C */
 u8 s_SceneHandlerIds[8] = {0x00, 0x00, 0x02, 0x01, 0x03, 0x04, 0x00, 0x00};
 
 Callback D_801C80A4[6] = {(Callback)func_8019A580, (Callback)func_8019A580, (Callback)func_8019A580,
@@ -221,7 +192,6 @@ Callback D_801C8164[6] = {(Callback)func_8019DE10, (Callback)func_8019E264, (Cal
 Callback D_801C817C[4] = {(Callback)func_8019DE54, (Callback)func_8019DF8C, (Callback)func_8019DFB4,
                           (Callback)func_8019E1A0};
 
-/* D_801C818C */
 u8 s_AreaCueIds[12] = {0x07, 0x08, 0x09, 0x0A, 0x0E, 0x11, 0x13, 0x1D, 0x60, 0x00, 0x00, 0x00};
 
 Callback D_801C8198[2] = {(Callback)func_8019E2A8, (Callback)func_8019E36C};
@@ -267,7 +237,6 @@ Callback D_801C81DC[105] = {
     (Callback)func_801F3A38, (Callback)func_801F2C04, (Callback)func_801F38C0, (Callback)func_801F3474,
     (Callback)func_801F31B0};
 
-/* D_801C8380 */
 u8 s_EntityModes[4] = {0x00, 0x03, 0x02, 0x06};
 
 u16 D_801C8384[28] = {0x0010, 0x0021, 0x002D, 0x0041, 0x0057, 0x0058, 0x0068, 0x0073, 0x0079, 0x0097,
@@ -284,7 +253,6 @@ ObjectFunc D_801C83D8[11] = {
     (ObjectFunc)func_801A1A24, (ObjectFunc)func_801A3410, (ObjectFunc)func_801A3594,
     (ObjectFunc)func_801A37D4, (ObjectFunc)func_801A3B7C};
 
-/* D_801C8404 */
 u8 s_EntityRouteIndices[8][4] = {{0x03, 0x05, 0x07, 0x01}, {0x05, 0x01, 0x07, 0x03}, {0x07, 0x05, 0x03, 0x01},
                                  {0x01, 0x07, 0x05, 0x03}, {0x07, 0x01, 0x03, 0x05}, {0x03, 0x01, 0x07, 0x05},
                                  {0x01, 0x03, 0x05, 0x07}, {0x05, 0x03, 0x01, 0x07}};
@@ -297,11 +265,9 @@ Callback D_801C8434[2] = {(Callback)func_801A35D8, (Callback)func_801A3648};
 
 Callback D_801C843C[2] = {(Callback)func_801A3818, (Callback)func_801A386C};
 
-/* D_801C8444 */
 u8 s_ScriptOpcodeLengths[16] = {0x11, 0x10, 0x13, 0x12, 0x11, 0x12, 0x10, 0x11,
                                 0x0C, 0x0D, 0x0E, 0x0E, 0x02, 0x04, 0x07, 0x00};
 
-/* D_801C8454 */
 SceneSlots *g_SceneScenes[20] = {
     (SceneSlots *)&D_801FC9FC, (SceneSlots *)&D_801FE288, (SceneSlots *)&D_801FE274,
     (SceneSlots *)&D_801FCFC0, (SceneSlots *)&D_801FA1F0, (SceneSlots *)&D_801FD5C8,
@@ -311,14 +277,11 @@ SceneSlots *g_SceneScenes[20] = {
     (SceneSlots *)&D_801FE5F4, (SceneSlots *)&D_801F8538, (SceneSlots *)&D_801F9728,
     (SceneSlots *)&D_801F6D58, (SceneSlots *)&D_801F6DBC};
 
-/* D_801C84A4 */
 Callback g_SceneStates[2] = {(Callback)Scene_ResetEventState, (Callback)Scene_RunEventHandler};
 
-/* D_801C84AC */
 u8 s_EventFlagsReset[16] = {0x08, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00,
                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-/* D_801C84BC */
 Callback g_SceneEvents[64] = {
     (Callback)func_801A7CE8, (Callback)func_801F37E4, (Callback)func_801F394C, (Callback)func_801F4B60,
     (Callback)Master_RunSceneEvent, (Callback)func_801A7E54, (Callback)Message_RunAreaMessage, (Callback)func_801F4378,
@@ -337,7 +300,6 @@ Callback g_SceneEvents[64] = {
     (Callback)func_801F30BC, (Callback)func_801F2EA0, (Callback)func_801F2D0C, (Callback)func_801F4A0C,
     (Callback)func_801F23A4, (Callback)func_801F3180, (Callback)func_801F2CF0, (Callback)func_801F3CD0};
 
-/* D_801C85BC */
 u8 s_SceneStateStepArgs[8] = {0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00};
 
 Callback D_801C85C4[11] = {(Callback)Fish_LocationMessage, (Callback)func_801F2D18, (Callback)Fish_LocationMessage,
@@ -345,7 +307,6 @@ Callback D_801C85C4[11] = {(Callback)Fish_LocationMessage, (Callback)func_801F2D
                            (Callback)func_801F2F0C, (Callback)Fish_LocationMessage, (Callback)func_801F2E1C,
                            (Callback)Fish_LocationMessage, (Callback)func_801F2CA8};
 
-/* D_801C85F0 */
 SceneFunc g_SceneObjects[66] = {
     (SceneFunc)&D_801F2D28,   (SceneFunc)func_801A8714, (SceneFunc)&D_801F1294,
     (SceneFunc)&D_801F1318,   (SceneFunc)&D_801F13B8,   (SceneFunc)&D_801F1444,
@@ -385,12 +346,10 @@ AreaHooks D_801C86F8 = {{MAP_HOOK(44, (Callback)func_801F33A8),  MAP_HOOK(108, (
                                 MAP_HOOK(148, (Callback)func_801F41A0), MAP_HOOK(141, (Callback)func_801F4158),
                                 MAP_HOOK(117, (Callback)func_801F4534), MAP_HOOK(118, (Callback)func_801F502C)}};
 
-/* D_801C87D8 */
 u8 s_TalkMessageIds[36] = {0x53, 0x00, 0x00, 0x5B, 0x6C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x54,
                            0x00, 0x00, 0x5C, 0x6D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x00,
                            0x00, 0x5D, 0x6E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-/* D_801C87FC */
 u8 s_ScriptOpcodeOffsets[256] = {
     0x00, 0x03, 0x03, 0x02, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x02, 0x01, 0x02, 0x05, 0x04, 0x04, 0x01, 0x01, 0x01,
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
@@ -416,14 +375,12 @@ ActorWorkFunc D_801C890C[11] = {(ActorWorkFunc)func_801ACEBC, (ActorWorkFunc)fun
                                (ActorWorkFunc)func_801AD46C, (ActorWorkFunc)func_801ACEBC, (ActorWorkFunc)func_801AD35C,
                                (ActorWorkFunc)func_801ACEBC, (ActorWorkFunc)func_801AD69C};
 
-/* D_801C8938 */
 u8 s_SceneMessages[4] = {0x00, 0x00, 0x01, 0x0A};
 
 u8 *D_801C893C[5] = {g_InventoryIds[0], g_InventoryIds[1], g_InventoryIds[2], g_InventoryIds[3], g_VitalItemIds};
 
 u8 *D_801C8950[5] = {g_InventoryCounts[0], g_InventoryCounts[1], g_InventoryCounts[2], g_InventoryCounts[3], (u8 *)0};
 
-/* D_801C8964 */
 volatile Item g_Items[ITEM_COUNT] = {
     ITEM_OBJECT("Nothing", 0, 0x4000, 0),
     ITEM_OBJECT("Green" T_SP "Apple",
@@ -648,7 +605,6 @@ volatile Item g_Items[ITEM_COUNT] = {
                 0x4003, 50),
     ITEM_OBJECT("Water" T_SP "Jug", ITEM_STORY_ITEM | ITEM_TARGET_ALL | ITEM_TARGET_BOTH, 0x40CD, 5)};
 
-/* D_801C8FDC */
 volatile VitalItem g_VitalItems[VITAL_ITEM_COUNT] = {VITAL_ITEM_OBJECT("Nothing", 0x4000),
                                                            VITAL_ITEM_OBJECT("Flier", 0x41B5),
                                                            VITAL_ITEM_OBJECT("Wallet", 0x41B6),
@@ -666,7 +622,6 @@ volatile VitalItem g_VitalItems[VITAL_ITEM_COUNT] = {VITAL_ITEM_OBJECT("Nothing"
                                                            VITAL_ITEM_OBJECT("Old" T_SP "Passport", 0x41C2),
                                                            VITAL_ITEM_OBJECT("Fountain" T_SP "Pen", 0x41C5)};
 
-/* D_801C90DC */
 volatile Weapon g_Weapons[WEAPON_COUNT] = {
     WEAPON_OBJECT("Nothing", 0, 0x00, 0, 0, 0, 0, 0, 0x4000, 0),
     WEAPON_OBJECT("Dagger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00, 1, 0, 1, 1, 4, 0x4033, 50),
@@ -758,7 +713,6 @@ volatile Weapon g_Weapons[WEAPON_COUNT] = {
     WEAPON_OBJECT("Ghostbuster", EQUIP_MOMO, 0x00, 1, ELEM_HOLY, 1, 5, 155, 0x40C4, 22000),
     WEAPON_OBJECT("Beast" T_SP "Spear", EQUIP_GARR, 0x00, 1, 0, 15, 6, 150, 0x40C5, 20000)};
 
-/* D_801C98A4 */
 volatile Armor g_Armors[ARMOR_COUNT] = {
     ARMOR_OBJECT("Nothing", 0, 0x00, ARMOR_TYPE_NOTHING, 0, 0, 0x4000, 0),
     ARMOR_OBJECT("Clothing", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00,
@@ -885,7 +839,6 @@ volatile Armor g_Armors[ARMOR_COUNT] = {
     ARMOR_OBJECT("ManlyClothes", EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_RYU, 0x00, ARMOR_TYPE_BODY, 3, 10, 0x41C4,
                  1000)};
 
-/* D_801C9E7C */
 volatile Accessory g_Accessories[ACCESSORY_COUNT] = {
     ACCESSORY_OBJECT("Nothing", 0, 0x00, 0, 0, 0x4000, 0),
     ACCESSORY_OBJECT("Titan" T_SP "Belt",
@@ -993,7 +946,6 @@ volatile Accessory g_Accessories[ACCESSORY_COUNT] = {
     ACCESSORY_OBJECT("Spanner", 0, 0x08, 11, 0, 0x4032, 4000),
     ACCESSORY_OBJECT("Master" T_APOS "s" T_SP "Rod", 0, 0x08, 11, 0, 0x4032, 20000)};
 
-/* D_801CA28C */
 ShopStock g_GameShopStock[SHOP_COUNT] = {
     {7,
      {SHOP_ITEM_REF(ITEM_CAT_WEAPON, 2), SHOP_ITEM_REF(ITEM_CAT_WEAPON, 3), SHOP_ITEM_REF(ITEM_CAT_ARMOR, 2),
@@ -1208,7 +1160,6 @@ u8 D_801CA624[232] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-/* D_801CA70C */
 volatile Ability g_Abilities[ABILITY_COUNT] = {
     ABILITY_OBJECT("", 0x00, ABILITY_SKILL(0, ABILITY_TYPE_HEAL), 0, 0, 0, 0x00, 0x4000),
     ABILITY_OBJECT("Nue" T_SP "Stomp", ABILITY_TARGET_SINGLE_ENEMY_6A, ABILITY_SKILL(1, ABILITY_TYPE_SKILL), 0, 0,
@@ -1649,7 +1600,6 @@ volatile Ability g_Abilities[ABILITY_COUNT] = {
     ABILITY_OBJECT("MeteorStrike", ABILITY_TARGET_ALL_ENEMY_3A, ABILITY_SKILL(0, ABILITY_TYPE_ATTACK), 0, 0, 0, 0x10,
                    0x419E)};
 
-/* D_801CB8DC */
 LevelGrowth g_LevelGrowth[LEVEL_GROWTH_CHARACTER_COUNT][LEVEL_GROWTH_LEVEL_COUNT] = {
     {LEVEL_OBJECT(0, 0, 0, 0, 0, 0, 0, ABILITY_HEAL, ABILITY_NONE),
      LEVEL_OBJECT(10, 2, 0, 1, 0, 1, 1, ABILITY_NONE, ABILITY_NONE),
@@ -2379,19 +2329,15 @@ UvRect D_801CCF7C[53] = {
     UV_RECT(40, 168, 48, 24),  UV_RECT(88, 168, 48, 24),  UV_RECT(136, 168, 8, 24),  UV_RECT(144, 168, 16, 24),
     UV_RECT(160, 168, 16, 24)};
 
-/* D_801CD050 */
 u8 s_ItemSpriteIds[16] = {0x06, 0x08, 0x0A, 0x09, 0x0B, 0x0C, 0x06, 0x06,
                           0x06, 0x06, 0x14, 0x15, 0x16, 0x00, 0x00, 0x00};
 
-/* D_801CD060 */
 u8 s_ItemIconIds[12] = {0x06, 0x00, 0x01, 0x02, 0x04, 0x03, 0x05, 0x0F, 0x10, 0x0E, 0x00, 0x00};
 
-/* D_801CD06C */
 u8 s_RouteStepScratch[32] = {0x04, 0x00, 0x03, 0x00, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01,
                              0x01, 0x02, 0x01, 0x03, 0x01, 0x09, 0x00, 0x08, 0x00, 0x07, 0x00,
                              0x06, 0x00, 0x05, 0x00, 0x06, 0x01, 0x07, 0x01, 0x08, 0x01};
 
-/* D_801CD08C */
 /* Read as s8 [index] by func_801B1E24 and as an s32 at [index * 4] by func_801B21E8: eight 4-byte rows.
  * needs: type, the row width (s8 or s32). */
 s8 s_EntityPlacementOffsets[32] = {
@@ -2437,15 +2383,12 @@ Callback D_801CD164[19] = {
 
 Callback D_801CD1B0[2] = {(Callback)func_801B3768, (Callback)func_801B3A3C};
 
-/* D_801CD1B8 */
 u8 s_EncounterStepThresholds[16] = {
     0x00, 0x00, 0x78, 0x3C, 0x60, 0x30, 0x48, 0x24, 0x18, 0x0C, 0x10, 0x08, 0x08, 0x04, 0x00, 0x00,
 };
 
-/* D_801CD1C8 */
 u8 s_MenuBattlerKinds[4] = {0x03, 0x06, 0x08, 0x00};
 
-/* D_801CD1CC */
 u8 s_RouteSlotAlternates[12] = {0x00, 0x00, 0x01, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00};
 
 Callback D_801CD1D8[19] = {
@@ -2465,12 +2408,10 @@ WorldMapDestination D_801CD24C[10] = {
     {0x97, 0x99, 0x13, 0x16}, {0x98, 0x9A, 0x13, 0x16},
 };
 
-/* D_801CD29C */
 u8 s_AreaScenePositions[8] = {
     0xC0, 0x13, 0x16, 0xBF, 0x1E, 0x16, 0x00, 0x00,
 };
 
-/* D_801CD2A4 */
 u8 s_AreaCellKinds[12] = {0xC0, 0xA0, 0xA1, 0xAE, 0xAF, 0x91, 0x26, 0x27, 0x28, 0x29, 0x2C, 0xFF};
 
 Callback D_801CD2B0[9] = {(Callback)func_801B6A04, (Callback)func_801B70D4, (Callback)func_801B726C,
@@ -2535,20 +2476,17 @@ Callback D_801CD440[2] = {(Callback)func_801BC000, (Callback)Area_StepSceneTimer
 Callback D_801CD448[4] = {(Callback)func_801B32A4, (Callback)func_801B32D0, (Callback)func_801BD83C,
                           (Callback)func_801B3540};
 
-/* D_801CD458 */
 /* Stride 2: the x and y scroll step of a direction, read as [dir * 2] and [dir * 2 + 1] by func_801BF11C
  * and func_801BF5A8. needs: type. */
 s8 s_CameraScrollDeltas[8] = {
     0xFC, 0x00, 0x00, 0xFC, 0x04, 0x00, 0x00, 0x04,
 };
 
-/* D_801CD460 */
 u8 s_BattleStartOffsets[12][2] = {
     {0x00, 0x1E}, {0x00, 0x1E}, {0x00, 0x32}, {0x00, 0x1E}, {0x00, 0x32}, {0x00, 0x32},
     {0x00, 0x1A}, {0x00, 0x2C}, {0x00, 0x2C}, {0x00, 0x1E}, {0x00, 0x1E}, {0x00, 0x00},
 };
 
-/* D_801CD478 */
 u8 s_RouteIndexByMode[4] = {0x03, 0x05, 0x07, 0x01};
 
 s32 D_801CD47C[8] = {0, -32768, (s32)0x00008000u, 0, 0, (s32)0x00008000u, -32768, 0};
@@ -2576,7 +2514,6 @@ Callback *D_801CD510[20] = {
     (Callback *)&D_801FD274, (Callback *)&D_801FBFE8, (Callback *)&D_801FC4BC, (Callback *)&D_801FE734,
     (Callback *)&D_801F8574, (Callback *)&D_801F9DCC, (Callback *)&D_801F6D84, (Callback *)&D_801F6DE8};
 
-/* D_801CD560 */
 u8 s_AreaProbeCellCodes[8] = {0x30, 0x40, 0x50, 0x80, 0x90, 0xE0, 0xF0, 0xFF};
 
 Callback D_801CD568[2] = {(Callback)func_801C5830, (Callback)func_801C5838};
@@ -2589,7 +2526,6 @@ u8 D_801CD584[56] = {0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00, 0x02, 0x01,
                      0x02, 0x03, 0x00, 0x00, 0x03, 0x02, 0x02, 0x03, 0x03, 0x03, 0x00, 0x00, 0x04, 0x03,
                      0x00, 0x00, 0x03, 0x04, 0x00, 0x00, 0x04, 0x03, 0x03, 0x04, 0x04, 0x04, 0x00, 0x00};
 
-/* D_801CD5BC */
 s8 s_EntitySpawnOffsets[100] = {
     0,  0,  -1, -1, 0,  -1, 1, -1, 1, 0,  1, 1,  0, 1,  -1, 1,  -1, 0,  -2, -2, -1, -2, 0,  -2, 1,
     -2, 2,  -2, 2,  -1, 2,  0, 2,  1, 2,  2, 1,  2, 0,  2,  -1, 2,  -2, 2,  -2, 1,  -2, 0,  -2, -1,
@@ -2612,7 +2548,6 @@ PositionOffset D_801CD620[36] = {
 PositionOffset D_801CD740[6] = {POS_OFF(0, 0),     POS_OFF(65536, 0),  POS_OFF(-65536, 0),
                                 POS_OFF(0, 65536), POS_OFF(0, -65536), POS_OFF(0, 0)};
 
-/* D_801CD770 */
 u8 s_EntitySpawnChances[8] = {0x10, 0x10, 0x10, 0x0A, 0x08, 0x06, 0x04, 0x02};
 
 /* Camera offsets per mode: x, y pairs. */
@@ -2620,7 +2555,6 @@ CameraAngleOffset D_801CD778[5] = {
     {4, 0}, {0, 4}, {-4, 0}, {0, -4}, {0, 0},
 };
 
-/* D_801CD78C */
 /* Stride 4: Battle_StartScripted reads byte 0 of the row [mode * 4] as the battle seed; bytes 1 to 3 have
  * no reader. needs: type. */
 u8 s_BattleModeRecords[224] = {
@@ -2677,7 +2611,6 @@ PartySlot D_801CD944[3] = {
     PARTY_SLOT(0, 0),
 };
 
-/* D_801CD950 */
 u8 s_PartySlotOrder[4] = {0x00, 0x00, 0x00, 0x00};
 
 s32 D_801CD954 = 0;

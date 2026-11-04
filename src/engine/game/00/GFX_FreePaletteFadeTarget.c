@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196718 */
 MATCH void GFX_FreePaletteFadeTarget(void* target) {
     s32 index;
 

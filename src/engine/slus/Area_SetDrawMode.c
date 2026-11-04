@@ -3,7 +3,6 @@
 /* stages the shared mode byte g_AreaDrawMode into the work-area state
  * byte at +0x29, then runs the work-area update at func_8014D290.
  */
-/* func_8014D260 */
 MATCH void Area_SetDrawMode(void) {
     Actor* work;
 

@@ -5,7 +5,6 @@
  * halfword D_801490AA down unless it is 0xFFFF, and clears D_801490A2 when the
  * count reaches zero.
  */
-/* func_8015196C */
 MATCH void UI_RunChoiceStep(void) {
     Table2 table = {{func_801519F8, func_80151A48}};
 

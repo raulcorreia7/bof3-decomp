@@ -1,6 +1,5 @@
 #include "boss030_16.h"
 
-/* func_800C1A1C */
 MATCH void Boss_ChooseBattleEnding(void) {
     u8* visit_count;
 

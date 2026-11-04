@@ -2,7 +2,6 @@
 
 /* clears bit bit_index in the byte array at bits.
  */
-/* func_8015B5A8 */
 MATCH void SYS_ClearFlag(void* bits, u8 bit_index) {
     u8* p;
 

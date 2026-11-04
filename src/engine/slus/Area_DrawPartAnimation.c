@@ -4,7 +4,6 @@
  * around the origin), projects the quad, picks one of the run's animation frames from g_FrameCount modulo the run
  * length and queues it.
  */
-/* func_80156C18 */
 MATCH void Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y) {
     SVECTOR    verts[4];
     ScenePart* run;

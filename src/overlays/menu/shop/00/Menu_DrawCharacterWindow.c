@@ -2,7 +2,6 @@
 
 /* nonmatching unmeasured: tried do-while(0) AID scope, a search over source rewrites: text_clut reused for the px copy (95.74), y/px/py
  * update orders. resume: py in s2 and the shaded byte in s3. */
-/* func_801D826C */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s32 shaded, s32 unused) {
     Character* stats;

@@ -9,7 +9,6 @@ typedef struct {
 /* copies the base block over the live block, refreshes derived
  * state, then retunes per-slot values against the matching table entry.
  */
-/* func_80164A44 */
 MATCH void Char_RebuildStats(Character* record) {
     s32 prod;
     s32 quot;

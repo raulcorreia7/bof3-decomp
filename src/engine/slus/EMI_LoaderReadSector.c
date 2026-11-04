@@ -5,7 +5,6 @@
  * The subtract-of-negated-offset form is load-bearing: retail's
  * `addu v1,v1,v0` needs the pointer as the first operand after folding.
  */
-/* func_80163238 */
 MATCH void EMI_LoaderReadSector(void) {
     s8* rec;
 

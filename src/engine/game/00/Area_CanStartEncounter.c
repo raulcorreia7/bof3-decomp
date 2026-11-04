@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801B3EB0 */
 MATCH s32 Area_CanStartEncounter(void) {
     Actor* rec;
     Actor* work;

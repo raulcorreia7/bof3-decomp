@@ -3,7 +3,6 @@
 /* syncs the CD reader, sets double-speed mode, and latches ready
  * state 2 when both commands succeed.
  */
-/* func_80162DA4 */
 MATCH void EMI_LoaderSetCdSpeed(void) {
     u8  param[8];
     u8* result;

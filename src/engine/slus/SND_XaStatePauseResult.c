@@ -2,7 +2,6 @@
 
 /* steps the status counter and issues the pending CD command.
  */
-/* func_80163D80 */
 MATCH void SND_XaStatePauseResult(void) {
     s8* flag;
 

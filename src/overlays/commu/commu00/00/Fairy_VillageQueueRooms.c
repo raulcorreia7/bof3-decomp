@@ -1,6 +1,5 @@
 #include "commu00_00.h"
 
-/* func_801EEDF8 */
 MATCH void Fairy_VillageQueueRooms(void) {
     s32 flags;
     s32 index;

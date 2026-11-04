@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801A82F8 */
 MATCH void Message_RunAreaMessage(void) {
     s8* state;
 

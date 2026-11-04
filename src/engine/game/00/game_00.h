@@ -289,14 +289,12 @@ extern u16                      D_1F80000E; /* 0x1F80000E */
 extern s8                       D_800E4D40; /* 0x800E4D40 */
 extern s16                      D_800E4D42; /* 0x800E4D42 */
 extern u8                       D_80143BB1;
-/* D_80143F00 */
 extern volatile u16             g_GameAreaId;
 extern volatile u8              D_80143F06; /* 0x80143F06 */
 extern volatile u32             D_80143F08; /* 0x80143F08 */
 extern volatile u32             D_80143F0C; /* 0x80143F0C */
 extern s16                      D_80143F16; /* 0x80143F16; signed high halfword of the context bundle */
 extern s16                      D_80143F1A; /* 0x80143F1A */
-/* D_80143F1D */
 extern volatile u8              g_GameRequestKind;
 extern s16                      D_80143F22;
 /* Scene step byte, countdown halfword and the slot index cached in the
@@ -315,7 +313,6 @@ extern s8                       D_80143F4E; /* 0x80143F4E */
 extern u8                       D_80143F51;
 extern s32                      D_80143F5C;
 extern s32                      D_80143F84;
-/* D_80143F86 */
 extern s16                      g_ScrollHeight;
 extern u8                       D_80143FBC;
 extern u8                       D_80143FBD;
@@ -371,13 +368,9 @@ extern u8                       D_8014626C;
 extern u8                       D_8014626E;
 extern u8                       D_8014626F;
 extern u8                       D_80146270;
-/* D_801462E3 */
 extern u8                       g_BattleUiStep;
-/* D_801462E4 */
 extern u8                       g_BattleUiState;
-/* D_801462EC */
 extern u8                       g_BattleScrollDir;
-/* D_801462F0 */
 extern u8                       g_BattlePartyCount;
 extern u8                       D_80146855;
 extern u8                       D_80146856;
@@ -416,7 +409,6 @@ extern s8                       D_80148656;   /* 0x80148656 */
 extern s8                       D_801490E0;   /* 0x801490E0 */
 extern u8                       D_801581E0[]; /* 0x801581E0 */
 extern u8*                      D_80181164[];
-/* D_80181AC0 */
 extern FacingStep               g_FacingOffsets[]; /* 0x80181AC0 */
 extern s8                       D_80181B00[];
 extern s8                       D_80181B01[];
@@ -573,25 +565,19 @@ void func_80117004(void);
 void func_80117610(void);
 void func_80117A30(void);
 void func_80117BF4(void);
-/* func_8014D6DC */
 void Actor_BeginScript(u8 raw_selector, u8 raw_code);
 s16  func_80154ABC();
 void func_8015A7E8(void);
 void func_8015A944();
 s32  func_8015AC8C(s32);
 s32  func_8015B870(u8 value);
-/* func_8015C0B8 */
 void Party_ShowBattlers(void);
-/* func_8015C264 */
 s8   Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, u8 flags);
 s32  func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 void func_8015D820(u16 cue_id, u8 index);
 void func_80164020(u32 arg0, u32 arg1);
-/* func_801650B4 */
 bool Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
-/* func_8016628C */
 s32  Party_CountItem(u8 category, u8 item, u8 mode);
-/* func_80166A10 */
 u8   Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void GFX_StagePalette(u8* dst, s32 field);
 void Party_ResetBattlers(void);
@@ -599,22 +585,15 @@ void Party_ClearActiveBattlers(void);
 void func_80167910(void);
 void func_80167E00(void);
 
-/* func_8019651C */
 s32     GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
-/* func_80196718 */
 void    GFX_FreePaletteFadeTarget(void* target);
-/* func_80196E74 */
 void    GFX_CopyPaletteAnimationColors(GraphicsPaletteAnimation* slot);
-/* func_801971E8 */
 void    Game_RunAreaLoadState(void);
-/* func_80197378 */
 void    Game_RunFieldState(void);
-/* func_801975E4 */
 void    Game_RunMenuState(void);
 void    func_80197620(void);
 void    func_801976EC(void);
 void    func_801979D4(void);
-/* func_80197A24 */
 void    Game_RunBattleState(void);
 void    func_80197A60(void);
 void    func_80197AA4(void);
@@ -623,28 +602,21 @@ void    func_80197C94(void);
 void    func_80197E54(void);
 void    func_80197EFC(void);
 void    func_80197F48(void);
-/* func_80198170 */
 void    Game_RunCameraLookState(void);
 void    func_801981B4(void);
 void    func_801981D4(void);
-/* func_80198234 */
 void    Game_RunShopState(void);
-/* func_80198270 */
 void    Game_LoadShopOverlay(void);
 void    func_801983D8(void);
-/* func_801984AC */
 void    Game_RunFishingState(void);
 void    func_801984E8(void);
 void    func_801985C8(void);
-/* func_80198744 */
 void    Game_RunAbilityMenuState(void);
 void    func_80198780(void);
 void    func_8019883C(void);
-/* func_80198904 */
 void    Game_RunStatusMenuState(void);
 void    func_80198940(void);
 void    func_801989FC(void);
-/* func_80198AC4 */
 void    Game_RunSceneCameraState(void);
 void    func_80198B00(void);
 void    func_80198B44(void);
@@ -654,7 +626,6 @@ void    func_80198C38(u8 wait_steps);
 void    func_80198CAC(void);
 void    func_80198F1C(void);
 void    func_801990D0(void);
-/* func_801991B8 */
 void    Area_RunFrame(void);
 void    func_80199230(void);
 void    func_801992B8(void);
@@ -677,7 +648,6 @@ void    func_80199938(void);
 void    func_80199978(void);
 void    func_801999B8(void);
 void    func_801999F8(MenuPanelTask* task);
-/* func_8019A194 */
 u8      Game_FindAreaHandler(void);
 u8*     func_8019A1D4(void);
 void    func_8019A210(void);
@@ -835,7 +805,6 @@ void    func_801A3818(void);
 void    func_801A386C(void);
 s32     func_801A3AC8(Actor* record);
 void    func_801A3B7C(Actor* entity);
-/* func_801A3E50 */
 void    Area_RunSetupStream(u8* cursor);
 void    func_801A3F3C(u8* script);
 void    func_801A3FC0(u8* cursor);
@@ -853,7 +822,6 @@ void    func_801A4914(void);
 void    func_801A4990(u8* script);
 void    func_801A4AA8(void);
 void    func_801A4B80(s32 slot_index);
-/* func_801A4BC0 */
 void    Area_SetCellCode(s16 column, s16 row, u8 code);
 u8*     func_801A4BF8(u8* script);
 void    func_801A50C0(u8* script);
@@ -871,12 +839,9 @@ void    func_801A72E8(void* selector);
 void    func_801A7330(const volatile u8* data);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 void    func_801A7CE8(void);
-/* func_801A7CF0 */
 void    Master_RunSceneEvent(void);
 void    func_801A7E54(void);
-/* func_801A802C */
 void    Scene_RunShopSaveEvent(void);
-/* func_801A82F8 */
 void    Message_RunAreaMessage(void);
 void    func_801A839C(void);
 void    func_801A83DC(void);
@@ -930,21 +895,16 @@ void    func_801AD9F0(void);
 void    func_801ADAC0(s8 slot_index);
 s8      func_801ADC98(void);
 void    func_801ADCF4(u8 slot_index);
-/* func_801AF0F4 */
 void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend);
 u8*     func_801AF270(u8 sprite_id, u8 flags);
-/* func_801AF2A0 */
 void    UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
-/* func_801AF390 */
 void    UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool    func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
 void    func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
                       s32 sprite_flag);
 void    func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 s32     func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
-/* func_801AFF04 */
 void    Area_ProjectPoint(s32* pos, long* screen_xy);
-/* func_801AFF64 */
 void    Matrix_SetIdentity(MATRIX* matrix);
 void    func_801B00F8(void);
 void    func_801B016C(void);
@@ -992,9 +952,7 @@ void    func_801B3768(void);
 void    func_801B3A3C(void);
 void    func_801B3BFC(void);
 u8*     func_801B3C3C(s32 bounds_x, s32 bounds_y);
-/* func_801B3CCC */
 void    Area_RollEncounterThreshold(u32 keep_armed);
-/* func_801B3EB0 */
 s32     Area_CanStartEncounter(void);
 s32     func_801B4150(void);
 s32     func_801B43D0(s32 x, s32 y, s32 dir);
@@ -1100,7 +1058,6 @@ void    func_801BD5A4(void);
 void    func_801BD7F8(void);
 void    func_801BD83C(void);
 s32     func_801BD938(void);
-/* func_801BDB7C */
 u8      Party_CountOrder(u8 mode);
 void    func_801BDBC4(void);
 s16     func_801BDCF8(s32 x, s32 y);
@@ -1108,9 +1065,7 @@ s32     func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
 s32     func_801BDF08(void);
 void    func_801BE574(s32 count, u8* ids);
 void    func_801BE710(GameResetRecord* record);
-/* func_801BE738 */
 void    Party_SwapMembers(u32 slot_a, u32 slot_b, u32 skip_state);
-/* func_801BE920 */
 void    Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state);
 void    func_801BEBB0(void);
 void    func_801BEDD0(void);
@@ -1183,7 +1138,6 @@ s32     func_801C5474(void);
 void    func_801C5558(void);
 void    func_801C5620(void);
 void    func_801C56E4(void);
-/* func_801C5798 */
 void    Actor_ClearVelocity(void);
 void    func_801C57B4(void);
 void    func_801C57F4(void);
@@ -1254,7 +1208,6 @@ s32     func_801D0C18();
 void    func_801D0C98(void);
 void    func_801D0D38(void);
 void    func_801D0DA4(void);
-/* func_801D0EA0 */
 void    Shop_DispatchStep(void);
 void    func_801D0EAC(void);
 void    func_801D0EF8(void);
@@ -1263,7 +1216,6 @@ void    func_801D1068(void);
 void    func_801D10A4(void);
 void    func_801D13DC(void);
 void    func_801D1588(void);
-/* func_801D1740 */
 void    Menu_DispatchStep(void);
 void    func_801D1B10(void);
 void    func_801D20C8(void);
@@ -1290,7 +1242,6 @@ void    func_801F2C18(void);
 void    func_801F2C1C(void);
 void    func_801F2C30(void);
 void    func_801F2C34(void);
-/* func_801F2C38 */
 void    Fish_LocationMessage(void);
 void    func_801F2C3C(void);
 void    func_801F2C40(void);
@@ -1607,7 +1558,6 @@ void    func_801F8D70(void);
 void    func_801F95D4(void);
 void    func_801F986C(void);
 void    func_801F9DBC(void);
-/* func_801A7914 */
 s8      Area_IsStepBlocked(s32 handler_x, s32 handler_y);
 void    func_801B13BC(void);
 void    func_801BBBC8(s16 from_x, s16 from_y);

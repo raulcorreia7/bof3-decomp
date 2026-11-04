@@ -4,7 +4,6 @@
  * quarter units no longer covers the gauge, raises bit 0x2000 on the record's flags and the work area's +0x80;
  * returns the clamped mode as 16 bits.
  */
-/* func_8016813C */
 MATCH s32 Char_LoseHp(s32 mode, s32 index) {
     PartyBattler* block;
     u16           count;

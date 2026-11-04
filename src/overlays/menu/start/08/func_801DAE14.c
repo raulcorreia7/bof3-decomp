@@ -2,7 +2,6 @@
 #include "shared/etc.h"
 
 /* start_08.h declares Party_CountOrder as u8(u8); this unit reads the count as a full register. */
-/* func_801BDB7C */
 u8 Party_CountOrder(u8 mode);
 
 extern s8  D_801484E1;

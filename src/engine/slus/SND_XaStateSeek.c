@@ -2,7 +2,6 @@
 
 /* syncs the CD reader, sets the read mode, then seeks while idle.
  */
-/* func_801639D0 */
 MATCH void SND_XaStateSeek(void) {
     u8 mode;
 

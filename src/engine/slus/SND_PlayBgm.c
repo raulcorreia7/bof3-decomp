@@ -3,7 +3,6 @@
 /* sets the active selection cue: resolves the selection's two cue
  * bytes, starts and stops the cue, stores the level, and publishes the id.
  */
-/* func_80161C20 */
 MATCH void SND_PlayBgm(s32 selection_id, s32 cue_level, s32 cue_shape) {
     u32 index;
 

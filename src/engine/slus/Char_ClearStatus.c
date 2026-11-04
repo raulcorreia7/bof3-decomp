@@ -4,7 +4,6 @@
  * field records (0x80144968, stride 0xA4) or their battle copies (0x80145F04,
  * stride 0x140); returns true when a bit was cleared.
  */
-/* func_801656EC */
 MATCH u32 Char_ClearStatus(u8 index, u16 mask, u8 mode) {
     Character* record;
     u16        status;

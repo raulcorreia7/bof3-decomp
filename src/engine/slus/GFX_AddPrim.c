@@ -4,7 +4,6 @@
  * shared primitive cursor when the requested byte count still fits in the
  * active buffer.
  */
-/* func_8014E5A0 */
 MATCH void GFX_AddPrim(u32 ot_index, u32 primitive_size) {
     u8* primitive;
     u8  size;

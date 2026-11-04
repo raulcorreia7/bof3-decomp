@@ -4,7 +4,6 @@
  * serial modulo the low byte selects and copies its eight palette words to g_GraphicsPaletteDst, raising the palette
  * stage serial; each record advances by its +2 size byte.
  */
-/* func_801580A4 */
 MATCH void Area_CyclePalette(void) {
     u32* record;
     u32* dst;

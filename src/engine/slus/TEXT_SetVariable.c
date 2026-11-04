@@ -9,7 +9,6 @@
  * `slot` and NUL-terminates the copy; a length of 32 or more is clamped to 31
  * so the terminator still fits the slot.
  */
-/* func_8016620C */
 MATCH void TEXT_SetVariable(u8 slot, u8 length, const u8* text) {
     u8 i;
 

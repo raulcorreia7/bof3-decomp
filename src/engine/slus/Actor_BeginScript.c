@@ -4,7 +4,6 @@
  * entry from the current hint's mode row, otherwise it is kept as the entry
  * index; then points unk_50 at that entry's script unless bit 0 of unk_24
  * hands it to func_8014DC08. */
-/* func_8014D6DC */
 MATCH void Actor_BeginScript(s32 raw_selector, s32 raw_code) {
     u8(*modes)[3];
     u8* table;

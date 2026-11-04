@@ -4,7 +4,6 @@
  * front-end frame steps, clears the gameui bytes D_8014832C and D_8014832D, then
  * restores the interrupted stack pointer.
  */
-/* func_8014BA54 */
 MATCH void Area_DrawScene(void) {
     unsigned long stack;
 

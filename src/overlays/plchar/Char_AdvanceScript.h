@@ -4,7 +4,6 @@
  * panel mode byte in the game state record. One definition shared by the
  * plchar character programs; each program includes it where the function sits.
  */
-/* func_801CEC30 */
 MATCH void Char_AdvanceScript(void) {
     u8 done;
 

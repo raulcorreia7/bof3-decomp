@@ -3,7 +3,6 @@
 /* records the current EMI dispatch handler for the active ring slot,
  * marks that slot active, and advances the loader step.
  */
-/* func_80162618 */
 MATCH void EMI_LoaderQueuePayload(void) {
     s8*           flag;
     volatile u32* handlers;

@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801A7878 */
 MATCH void Game_DispatchScenarioRecord(void* object) {
     Actor* record;
 

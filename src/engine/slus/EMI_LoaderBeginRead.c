@@ -3,7 +3,6 @@
 /* resets EMI transfer counters, converts the current LBA to CdlLOC,
  * and arms the next loader phase.
  */
-/* func_80162178 */
 MATCH void EMI_LoaderBeginRead(void) {
     volatile u8* read_progress;
     s8           state;

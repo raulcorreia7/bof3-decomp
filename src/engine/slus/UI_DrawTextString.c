@@ -6,7 +6,6 @@
  * 31-column sheet; glyphs are 8 wide. The fourth argument budgets the bytes
  * drawn; returns the byte after the terminator.
  */
-/* func_8014FC90 */
 MATCH const u8* UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* text) {
     u8* str;
     s16 left;

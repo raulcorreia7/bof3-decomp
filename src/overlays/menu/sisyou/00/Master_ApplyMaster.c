@@ -4,7 +4,6 @@
 
 /* Work-entry stock list, its selector, and the per-entry stock table. */
 
-/* func_801D3ED0 */
 MATCH void Master_ApplyMaster(void) {
     u8 value;
 

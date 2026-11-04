@@ -1,7 +1,6 @@
 /* Installs the enemy work script, mode and table pointers D_800C1990, func_800C18AC and D_800C199C, raises its 0x8 flag
  * and moves the task work to mode 2. One definition shared by the boss overlays; each includes this file where the
  * function sits. */
-/* func_800C1848 */
 MATCH void Boss_InitEnemy(void) {
     EnemyBattler* work;
 

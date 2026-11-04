@@ -2,7 +2,6 @@
 
 /* clears the 22 front-end slots field by field and the trailing flag byte g_MenuPanelMode.
  */
-/* func_80158E50 */
 MATCH void Menu_ResetPanelTasks(void) {
     s32 i;
 

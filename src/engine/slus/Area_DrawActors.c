@@ -4,7 +4,6 @@
  * descending bubble pass, then points the scratchpad work slot at each record
  * in order and runs the per-record update.
  */
-/* func_8014BB20 */
 MATCH void Area_DrawActors(void) {
     MATCH_REG(s32, count, "a0"); /* FAKE: retail keeps the record count in a0. */
     s32 i;

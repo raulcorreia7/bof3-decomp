@@ -4,7 +4,6 @@
  * record (ids below 0x80) or Message_DispatchBankStep, then sets owner mode 3: a pending area request latches mode 1 and
  * advances g_UiWindowStep, a cleared one latches 7; clears D_801490B8.
  */
-/* func_8015136C */
 MATCH void Message_DispatchAnswerStep(void) {
     u8 id;
 

@@ -2,7 +2,6 @@
 
 /* latches the active mode's sub-state flag into D_80149340.
  */
-/* func_80154ED0 */
 MATCH void Area_EnableHeightOffset(void) {
     s32 flag;
 

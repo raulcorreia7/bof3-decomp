@@ -2,7 +2,6 @@
 
 /* 4-byte weighted-roll entry: a value followed by three weight bytes. */
 
-/* func_801F1BC8 */
 MATCH void Fairy_RollExploreReward(void) {
     FairyRewardRoll buf[3];
     u8*             edp;

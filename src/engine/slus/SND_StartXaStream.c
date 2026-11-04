@@ -4,7 +4,6 @@
  * the request, runs the entry lookup, converts the target LBA, and installs
  * the CD sync callback.
  */
-/* func_801636A0 */
 MATCH void SND_StartXaStream(s32 key, s32 unused) {
     s16* req;
 

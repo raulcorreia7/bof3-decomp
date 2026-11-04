@@ -3,7 +3,6 @@
 /* selects the CD-read completion mode from the latched sync status
  * and clears the retry flag on failure.
  */
-/* func_80162F04 */
 MATCH void EMI_LoaderFinishRead(void) {
     u8 mode;
 

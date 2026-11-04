@@ -4,7 +4,6 @@
  * opcode +0x0, frame 0x50 versus 0x58 and save order; the reviewed jump-table placement also differs while the text
  * differs. resume: parameter locals in the retail s6/s3/s0/s4 order plus the present stack slot, then re-check the
  * jump-table placement. */
-/* func_801DB9F0 */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_slot, s32 equip_slot, u8 item_id) {
     Character* stats;

@@ -4,7 +4,6 @@
  * (category 2), 20-byte D_801C9E88 (category 3); other kinds return 0xFF. Item_GetFlags and Item_GetKind read bytes 1 and 2
  * of the same tables.
  */
-/* func_80165EC0 */
 MATCH u8 Item_GetEquipability(u8 category, u8 item) {
     switch (category) {
         case 1:

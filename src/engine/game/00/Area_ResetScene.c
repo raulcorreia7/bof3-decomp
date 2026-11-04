@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801BC400 */
 MATCH void Area_ResetScene(void) {
     Actor* work;
 

@@ -3,7 +3,6 @@
 /* advances the count halfword at 0x16 of the g_Characters record by the
  * caller's step, clamping back to the stored limit when it would overshoot.
  */
-/* func_801680CC */
 MATCH void Char_AddAp(s32 amount, s32 char_id) {
     Character* rec;
     u16        cur;

@@ -3,7 +3,6 @@
 /* Draws the shop's ability list panel: ten rows with each ability, its level
  * and its func_80166A10 count, the list name, the two cursor tabs and the
  * window frame. */
-/* func_801DCE5C */
 MATCH void Shop_DrawAbilities(ShopPanel* panel) {
     Ability* ability;
     u8*      list;

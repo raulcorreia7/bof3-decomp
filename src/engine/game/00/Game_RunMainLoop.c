@@ -8,7 +8,6 @@ struct GameSelState {
 
 #define GAME_SEL_STATE ((volatile struct GameSelState*)&D_80140000)
 
-/* func_80197068 */
 MATCH void Game_RunMainLoop(void) {
     const Callback* callbacks;
 

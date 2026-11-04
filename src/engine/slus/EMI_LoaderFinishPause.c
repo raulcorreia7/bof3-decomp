@@ -2,7 +2,6 @@
 
 /* selects the CD-read dispatch mode from the latched sync status.
  */
-/* func_80162F88 */
 MATCH void EMI_LoaderFinishPause(void) {
     if (D_8014648C < 0) {
         D_8014648A = 6;

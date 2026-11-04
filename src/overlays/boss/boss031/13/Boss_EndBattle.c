@@ -1,6 +1,5 @@
 #include "boss031_13.h"
 
-/* func_800C1A6C */
 MATCH void Boss_EndBattle(void) {
     volatile u8* entry;
 

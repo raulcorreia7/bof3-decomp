@@ -1,6 +1,5 @@
 #include "boss002_16.h"
 
-/* func_800C1E7C */
 MATCH void Boss_ChooseBattleEnding2(void) {
     if (FIELD(u32, &g_BattleResult, 0) & 6) {
         func_800AC870(0, (PartyBattler*)D_801EB630, 0);

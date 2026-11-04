@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801BDB7C */
 MATCH u8 Party_CountOrder(u8 mode) {
     s32 index                     = 0;
     /* FAKE: pin holds 0xFF sentinel in a2. */

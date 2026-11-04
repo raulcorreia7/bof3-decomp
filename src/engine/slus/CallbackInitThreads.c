@@ -9,7 +9,6 @@
 /* seeds the four callback scheduler slots: each starts empty with work block i + 1 of the kernel run at
  * +0x0C (its +0x94 word pinned to 0x40000404) and the thread stack 0x801FF400 + 0x200 * (i + 1) at +0x10.
  */
-/* func_8014B6B4 */
 MATCH void CallbackInitThreads(void) {
     s32 i;
     s32 slot_offset;

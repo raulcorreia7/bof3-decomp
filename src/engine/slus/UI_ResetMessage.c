@@ -4,7 +4,6 @@
  * the flags word, consumes one byte from a type-12 resource stream, then requests menu 0 mode 0 and arms the
  * front-end entry.
  */
-/* func_80150304 */
 MATCH void UI_ResetMessage(void) {
     u8* base;
     u8* cursor;

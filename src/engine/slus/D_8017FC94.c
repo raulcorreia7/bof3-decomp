@@ -5,7 +5,6 @@
  * kind, seed and picker flag the field code reads once the rectangle covers the party; D_80181164 selects
  * the first record of each list and the scan ends at the rectangle that covers the point.
  */
-/* D_8017FC94 */
 const EncounterZone g_AreaEncounterZones[MAP_ZONE_COUNT] = {
     /* list 0 */
     ENCOUNTER_ZONE(2, 2, 39, 38, 2, 0, 1, 1),

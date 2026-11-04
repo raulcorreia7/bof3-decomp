@@ -5,7 +5,6 @@
  * 23) and sets bit 3 of its flag byte.
  */
 /* FAKE: retail accesses the word at +0x70 whole; the member is the byte the entity rows use. */
-/* func_8015D71C */
 MATCH void SND_QueueSelectionFx(s32 cue_id) {
     u32    packed;
     Actor* work;

@@ -6,7 +6,6 @@
  * word result (`move` before the explicit & 0xFF) as retail does. */
 extern s32 Fairy_VillageCountFairies(void);
 
-/* func_801EECA4 */
 MATCH void Fairy_VillageInit(void) {
     s32 active_count;
     s32 i;

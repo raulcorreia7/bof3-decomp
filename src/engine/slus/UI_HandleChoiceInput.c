@@ -4,7 +4,6 @@
  * area request and steps once; the D_80145AC2 cue steps twice; otherwise repeat-decoded input moves the choice
  * cursor, wrapping at zero through D_801490C6.
  */
-/* func_80151210 */
 MATCH void UI_HandleChoiceInput(void) {
     s32 action;
 

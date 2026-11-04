@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801C60E0 */
 MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
     s32 result;
     /* FAKE: both loops' counter; retail keeps it in s2 while the record

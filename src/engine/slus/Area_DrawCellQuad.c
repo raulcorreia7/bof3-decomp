@@ -4,7 +4,6 @@
  * pad1 links) into one flat quad, shades it from the palette halfword that mask >> 3 selects and appends it to the
  * ordering table.
  */
-/* func_80156ED4 */
 MATCH void Area_DrawCellQuad(s32 mask, s32 index) {
     POLY_F4*  primitive;
     u16*      color;

@@ -2,7 +2,6 @@
 
 /* copies two 0x400-byte halves of the active CD sector to scratchpad.
  */
-/* func_8016327C */
 MATCH void EMI_LoaderStageSector(void) {
     /* FAKE: retail keeps the CD-sector base in a0. */
     MATCH_REG(u32, base, "a0");

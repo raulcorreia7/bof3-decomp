@@ -3,7 +3,6 @@
 /* initializes EMI streaming state, refreshes the active LBA, and
  * installs CD callbacks.
  */
-/* func_80161FDC */
 MATCH void EMI_LoaderStreamInitSlot(u32 slot_id) {
     u32 cd_base;
     u32 active_lba;

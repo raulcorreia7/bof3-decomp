@@ -193,7 +193,6 @@ INCLUDE_ASM(func_801D5978);
 
 INCLUDE_ASM(func_801D5A48);
 
-/* func_801D5A9C */
 #include "overlays/commu/Commu_AdvanceStep.h"
 
 INCLUDE_ASM(func_801D5AD0);
@@ -415,7 +414,6 @@ INCLUDE_ASM(func_801D94D0);
 
 INCLUDE_ASM(func_801D97C8);
 
-/* func_801D9AC8 */
 MATCH void Menu_DrawIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color) {
     MenuDrawPanelIcon(x, y, u, v, clut, color);
 }

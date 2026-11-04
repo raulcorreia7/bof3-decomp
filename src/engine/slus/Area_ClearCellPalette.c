@@ -4,7 +4,6 @@
  * 0), rotated by the cursor offsets g_AreaGridRowCursor/g_AreaGridColCursor, reads the cell halfword at g_AreaCellGrid and rewrites every
  * 0x23 command of its primitive list to 0x24, clearing the low flag bit of its palette record.
  */
-/* func_80155218 */
 MATCH s32 Area_ClearCellPalette(s32 x, s32 y) {
     u8*  map;
     u8*  entry;

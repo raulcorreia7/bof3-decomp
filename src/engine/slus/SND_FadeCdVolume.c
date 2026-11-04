@@ -4,7 +4,6 @@
  * address flows through two pointer locals before the loop pointer; the allocator only keeps retail's second live
  * copy (a2) in that shape.
  */
-/* func_80163F50 */
 MATCH void SND_FadeCdVolume(s32 level) {
     u8  target;
     u8* base;

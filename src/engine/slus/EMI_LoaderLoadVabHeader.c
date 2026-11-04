@@ -3,7 +3,6 @@
 /* selects the next EMI entry, transfers its dispatch metadata into
  * loader state, releases any prior owner, and advances the loader step.
  */
-/* func_80162790 */
 MATCH void EMI_LoaderLoadVabHeader(void) {
     /* FAKE: unused frame, 64 bytes. */
     STACK_PADS(u8, 64);

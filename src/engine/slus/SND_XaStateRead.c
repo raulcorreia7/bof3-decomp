@@ -2,7 +2,6 @@
 
 /* polls CD sync, then issues the filter/read commands.
  */
-/* func_80163AF0 */
 MATCH void SND_XaStateRead(void) {
     if ((CdSync(1, NULL) != CdlNoIntr) && (CdControl(CdlSetfilter, &D_80146834, NULL) != 0)) {
         D_8014682E = 0;

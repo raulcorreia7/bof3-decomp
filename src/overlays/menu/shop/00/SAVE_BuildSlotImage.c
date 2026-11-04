@@ -40,7 +40,6 @@ typedef struct ShopWork {
  * t0/t1/a0-a3, the candidate homes them in s0 and v1. resume: a source shape that gives the work base the s2 home and
  * the loop constants their own registers, without keeping the work-text pointer alive past the row loop. */
 #ifdef NON_MATCHING
-/* func_801D69E0 */
 NON_MATCHING void SAVE_BuildSlotImage(void) {
     s32 mode;
     s32 slot;
@@ -134,6 +133,5 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     func_801D6CE4(g_SaveSlotFirst, &D_801448D8);
 }
 #else
-/* func_801D69E0 */
 INCLUDE_ASM(SAVE_BuildSlotImage);
 #endif

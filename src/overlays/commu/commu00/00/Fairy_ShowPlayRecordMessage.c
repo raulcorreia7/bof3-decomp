@@ -1,6 +1,5 @@
 #include "commu00_00.h"
 
-/* func_801F1318 */
 MATCH s32 Fairy_ShowPlayRecordMessage(void) {
     char* dest;
     char* fmt;

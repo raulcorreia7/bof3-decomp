@@ -4,7 +4,6 @@
  * to the g_AreaCellPrims row context for display buffer slot; presence bits of the uploaded words fold into the
  * returned mask and an empty pad1 link is released.
  */
-/* func_80154294 */
 MATCH s32 Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot) {
     AreaMapBundle* map;
     u8*            entry;

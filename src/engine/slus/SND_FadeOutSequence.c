@@ -4,7 +4,6 @@
  * voice entry of the effect group (g_SelectionFxVoices) to SsSepSetDecrescendo with the effect id and cue level, then
  * stops the voice through SsSepStop.
  */
-/* func_8015D554 */
 MATCH void SND_FadeOutSequence(u32 effect_group, s32 effect_id, s32 cue_level, s32 cue_shape) {
     if (D_80144954 == 0) {
         D_8018B418 = 0x1F;

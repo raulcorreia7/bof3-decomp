@@ -14,7 +14,6 @@ const u32 D_80181CA8[60] = {
     0xFFFE8000, 0x00000000, 0x00000000, 0x00008000, 0x00010000, 0xFFFF0000,
 };
 
-/* D_80181D98 */
 /* Stride 2 at [character_id * 2] in func_801E1BA8, and byte runs at fixed offsets from 0x18 in the same
  * function. needs: type, the run table. */
 const u8 s_LoaderRecordBytes[168] = {

@@ -1,6 +1,5 @@
 #include "boss023_16.h"
 
-/* func_800C19C4 */
 MATCH void Boss_ChooseBattleEnding(void) {
     if BATTLE_IS_VICTORY () {
         g_ScriptVars[0] = 0x0A;

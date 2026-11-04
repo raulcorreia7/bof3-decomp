@@ -4,7 +4,6 @@
  * (0xA4-byte g_Characters rows, or 0x140-byte D_80145F04 rows with mode): flag 0x1A in +0x12/+0x13 halves it (rounded
  * up), flag 0x19 scales it by three rounded up to a quarter, else unchanged.
  */
-/* func_80166A10 */
 MATCH u8 Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode) {
     Character* record;
     u16        value;

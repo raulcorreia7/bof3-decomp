@@ -4,7 +4,6 @@
  * cursors from g_AreaGridRowCursor/g_AreaGridColCursor with wraparound at 0x37/0x1B and passing
  * each rotated cell of g_AreaCells to func_801541C0, then calls func_80158B24.
  */
-/* func_80154698 */
 MATCH void Area_RefreshCellGrid(void) {
     s32 row;
     s32 col;

@@ -1,6 +1,5 @@
 #include "engine/slus/slus.h"
 
-/* func_8014ECEC */
 MATCH void UI_SetModeWait(u16 local_mode) {
     u16* busy;
 

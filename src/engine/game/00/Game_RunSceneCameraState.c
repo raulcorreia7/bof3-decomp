@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80198AC4 */
 MATCH void Game_RunSceneCameraState(void) {
     const Callback* entry;
     Callback        handler;

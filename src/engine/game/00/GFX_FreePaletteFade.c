@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196670 */
 MATCH void GFX_FreePaletteFade(u8 index) {
     u8* target;
     u8  saved;

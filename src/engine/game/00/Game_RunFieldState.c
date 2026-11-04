@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80197378 */
 MATCH void Game_RunFieldState(void) {
     u32* counter;
 

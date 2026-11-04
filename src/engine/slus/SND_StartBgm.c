@@ -3,7 +3,6 @@
 /* waits for the overlay loader, then starts the selection cue of the
  * requested selection unless it is already the active one.
  */
-/* func_80161B24 */
 MATCH void SND_StartBgm(u8 bgm_id, u8 cue_level, u8 cue_shape) {
     if (bgm_id != GAME_NONE) {
         if ((SND_RequestBgm(bgm_id) & BYTE_MASK) != 0) {

@@ -2,7 +2,6 @@
 
 /* returns 1 when the first byte of the record at cursor is >= g_SceneState.
  */
-/* func_8015B7C4 */
 MATCH s32 Game_IsScenarioAtLeast(u8** cursor) {
     u32 result;
 

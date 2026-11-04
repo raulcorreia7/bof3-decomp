@@ -16,7 +16,6 @@ extern s16 D_80148598;
 extern s16 D_8014859A;
 extern s8  D_80148656;
 
-/* func_801BDB7C */
 u8 Party_CountOrder(u8 mode);
 
 MATCH void func_801D2AC8(void) {

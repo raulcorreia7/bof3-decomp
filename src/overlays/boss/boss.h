@@ -32,7 +32,6 @@ extern Callback            D_800C1D5C[];
 extern Callback            D_800C21BC[];
 extern Callback            D_800C26CC[];
 extern Callback            D_800C26FC[];
-/* D_801463AC */
 extern BossBattleEventFunc g_BossBattleEventHook;
 
 void func_800C1978(s32 mode);

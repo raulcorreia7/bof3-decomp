@@ -3,7 +3,6 @@
 /* validates the active EMI header tag and builds cumulative sector
  * offsets for its entries; invalid tags disable the active load.
  */
-/* func_80162500 */
 MATCH void EMI_LoaderReadToc(void) {
     u8*           header;
     u8*           tag;

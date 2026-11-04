@@ -10,7 +10,6 @@ typedef struct {
 /* reads one EXE file into RAM in two sector-sized steps and copies
  * the first staged header block into the boot scratch area.
  */
-/* func_8014E0FC */
 MATCH s32 SYS_LoadExec(const char* path) {
     const char* current_path;
     s32         sectors;

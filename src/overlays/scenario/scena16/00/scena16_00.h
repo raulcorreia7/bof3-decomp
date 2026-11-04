@@ -11,15 +11,12 @@
 #define SCENA16_PALETTE_SRC MEM_PTR(const volatile u16, 0x80033800u)
 #define SCENA16_VRAM_BASE   (0x80010000u)
 
-/* D_80143C30 */
 extern volatile u32 g_UiPopupRequest;
-/* D_80143F00 */
 extern u16          g_GameAreaId;
 extern u16          D_801448FC;
 extern u8           D_801448FF;
 extern u32          D_80144900;
 extern u32          D_80144904;
-/* D_80147A90 */
 extern s32          g_AreaFocusY;
 /* Retail-address data symbols, in address order. */
 extern volatile u16 SCENA16_D_80010004;

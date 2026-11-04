@@ -2,7 +2,6 @@
 
 /* Retries the pending read, then converts the stored position.
  */
-/* func_80163C58 */
 MATCH void SND_XaStateReadResult(void) {
     s32  value;
     u16  count;

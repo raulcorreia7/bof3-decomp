@@ -3,7 +3,6 @@
 /* nonmatching unmeasured: tried volatile FIELD(T,&sym,off) byte-offset swaps (63.25%); retail order is load A, load B /
  * load B, load A, store A, store B per pair with off_a=a0 and off_b=v1 kept in the arg regs; mine copies the offsets
  * (move t0,a0) and orders loads differently. */
-/* func_801BE920 */
 #ifdef NON_MATCHING
 NON_MATCHING void Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state) {
     s32 off_a;

@@ -3,7 +3,6 @@
 /* adjusts the record's 16-bit fields at +0x20 and +0x24 by the kind-selected bytes of the 0x18-stride table
  * D_801C90EE/D_801C90EC, then by kind - 0xD nudges the counters in the +0x1C record body.
  */
-/* func_80165760 */
 MATCH void Char_ApplyWeapon(void* character) {
     /* FAKE: record base pinned to s1; the retail allocation keeps kind in s2. */
     MATCH_REG(u8*, record, "s1");

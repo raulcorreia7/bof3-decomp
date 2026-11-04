@@ -4,7 +4,6 @@
  * (+0x58) matches the filter byte (+0x49), else the length of the indexed stream entry at +0x50; otherwise the raw
  * index halfword.
  */
-/* func_8015CA9C */
 MATCH u16 Actor_ReadState(void) {
     Actor* record;
     u8*    entry;

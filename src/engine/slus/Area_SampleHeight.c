@@ -8,7 +8,6 @@
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best
  * score 82.69%. resume: a lever or header fix that closes the first mismatch. */
 #ifdef NON_MATCHING
-/* func_8015477C */
 NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     s8   v[4];
     s32  tmp0;
@@ -96,6 +95,5 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     return v[2] << 5;
 }
 #else
-/* func_8015477C */
 INCLUDE_ASM(Area_SampleHeight);
 #endif

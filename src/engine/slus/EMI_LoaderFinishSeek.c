@@ -3,7 +3,6 @@
 /* latches the loader status, selecting the error status when the
  * recorded state is negative.
  */
-/* func_80162E70 */
 MATCH void EMI_LoaderFinishSeek(void) {
     s32 state;
 

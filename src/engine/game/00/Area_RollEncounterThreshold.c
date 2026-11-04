@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801B3CCC */
 MATCH void Area_RollEncounterThreshold(u32 keep_armed) {
     u8* entry;
     u32 total;

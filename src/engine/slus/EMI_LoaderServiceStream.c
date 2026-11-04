@@ -3,7 +3,6 @@
 /* runs pending slot handlers, advances the slot cursor, and
  * rearms the loader when the frame counter expires.
  */
-/* func_8016305C */
 MATCH void EMI_LoaderServiceStream(void) {
     SystemDispatchFuncs callbacks;
     u8*                 head;

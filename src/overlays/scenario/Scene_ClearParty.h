@@ -3,7 +3,6 @@
  * shared by the scena00 and scena16 programs; each program includes this file
  * where the function sits.
  */
-/* func_801FC8FC */
 MATCH void Scene_ClearParty(void) {
     u8 flags;
 

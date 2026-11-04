@@ -4,7 +4,6 @@
  * +0x0C..+0x14 of the work area, sets byte +0x11C of the mode work area to 3, then runs func_80167428 (when the 0xF000
  * field of D_8014625C is set) or arms the work flag byte at +0x01.
  */
-/* func_8016788C */
 MATCH void Area_ResetScene(void) {
     Actor*        work;
     PartyBattler* mode_work;

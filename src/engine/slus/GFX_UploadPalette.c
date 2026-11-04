@@ -3,7 +3,6 @@
 /* refreshes the stage palette to VRAM when the stage serial is set,
  * then clears the serial.
  */
-/* func_8014E22C */
 MATCH void GFX_UploadPalette(void) {
     RECT rect;
 

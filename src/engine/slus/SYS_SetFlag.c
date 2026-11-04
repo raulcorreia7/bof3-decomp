@@ -2,7 +2,6 @@
 
 /* sets bit bit_index in the byte array at bits.
  */
-/* func_8015B580 */
 MATCH void SYS_SetFlag(void* bits, u8 bit_index) {
     u8* p;
 

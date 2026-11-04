@@ -4,7 +4,6 @@
  * opcode (low seven bits of +3) selects the handler in D_8017F8FC and the word count at +2 advances; stops at a zero
  * terminator.
  */
-/* func_801584A4 */
 MATCH void Area_RunBundleRecords(void) {
     u8* record;
 

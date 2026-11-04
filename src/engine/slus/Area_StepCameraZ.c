@@ -3,7 +3,6 @@
 /* advances the 12-bit rotation position g_AreaCameraAngle.vz by the signed step step toward target and reports 1 once
  * it has passed the target; otherwise it snaps to target and rebuilds D_801481DC from D_801481E4 - ANGLE_45.
  */
-/* func_8015BE10 */
 MATCH s32 Area_StepCameraZ(s16 target, s8 step) {
     s32  value;
     u16* angle;

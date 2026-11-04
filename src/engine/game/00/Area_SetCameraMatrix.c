@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801AFE18 */
 MATCH void* Area_SetCameraMatrix(void* out_matrix) {
     SVECTOR scale;
     VECTOR  projected;

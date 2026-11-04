@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801991B8 */
 MATCH void Area_RunFrame(void) {
     func_801C57F4();
     func_8015A7E8();

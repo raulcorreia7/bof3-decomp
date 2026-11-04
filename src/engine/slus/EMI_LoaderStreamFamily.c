@@ -4,7 +4,6 @@
  * the stream to become ready, then re-arms the four-byte key's family slot and
  * waits again.
  */
-/* func_80166E88 */
 MATCH void EMI_LoaderStreamFamily(u8 member_a, u8 member_b, u8 member_c, u8 family) {
     if (family == 0) {
         EMI_ArmPartyPlp(member_a, member_b, member_c);

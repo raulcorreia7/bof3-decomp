@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196F78 */
 MATCH void Game_RunCampMenuLoop(void) {
     const Callback* callbacks;
 

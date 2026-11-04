@@ -2,7 +2,6 @@
 
 /* K&R call keeps a0 undisturbed; the callee ignores its mode argument. */
 
-/* func_8019615C */
 MATCH void Actor_Create(u8* request) {
     u8 slot;
 

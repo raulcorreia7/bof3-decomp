@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_8019FA28 */
 MATCH void Game_RequestAreaChange(u16 selection_seed, u32 context_a, u32 context_b, u8 context_kind) {
     g_GameContextSeed = selection_seed;
     g_GameEntryPosX   = context_a;

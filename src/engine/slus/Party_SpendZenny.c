@@ -3,7 +3,6 @@
 /* subtracts amount from the g_Zenny counter when it is large enough,
  * reporting success. unused is unused; every caller passes 0.
  */
-/* func_8016663C */
 MATCH s32 Party_SpendZenny(u32 amount, s32 unused) {
     u32  value;
     s32  result;

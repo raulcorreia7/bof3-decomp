@@ -3,7 +3,6 @@
 /* starts one disc read sized from a byte count and waits until the
  * read finishes or returns a terminal status.
  */
-/* func_8014E0A8 */
 MATCH s32 SYS_ReadCd(s32 size, void* buffer, s32 sectors) {
     s32 sector_count;
     s32 status;

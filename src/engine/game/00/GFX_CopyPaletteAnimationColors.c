@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196E74 */
 MATCH void GFX_CopyPaletteAnimationColors(GraphicsPaletteAnimation* slot) {
     GraphicsPaletteAnimation* slot_copy;
     u8*                       owner;

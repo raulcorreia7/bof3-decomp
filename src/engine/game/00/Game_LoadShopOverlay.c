@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80198270 */
 MATCH void Game_LoadShopOverlay(void) {
     Actor* work;
 

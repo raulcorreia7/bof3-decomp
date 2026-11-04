@@ -1,6 +1,5 @@
 #include "boss022_13.h"
 
-/* func_800C1ABC */
 MATCH void Boss_EndBattle(void) {
     func_800AC844(0);
     g_SpadWork = (u8*)func_800AC754(0);

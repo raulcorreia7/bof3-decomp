@@ -56,7 +56,6 @@ MATCH void func_801D1184(void) {
     }
 }
 
-/* func_801D121C */
 #include "overlays/commu/Commu_AdvanceStep.h"
 
 INCLUDE_ASM(func_801D1250);

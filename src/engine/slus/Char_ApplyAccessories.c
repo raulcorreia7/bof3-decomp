@@ -4,7 +4,6 @@
  * a stat delta from the kind table, then the kind's own counter updates, until two
  * kinds have been handled.
  */
-/* func_80165B3C */
 MATCH void Char_ApplyAccessories(void* param) {
     u8*  base = param;
     u8   kinds[2];

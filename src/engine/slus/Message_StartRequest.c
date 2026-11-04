@@ -3,7 +3,6 @@
 /* initializes the record header bytes and resolves the halfword at
  * SLUS_LOAD_ADDRESS indexed by g_MessageRequest into the two record pointers.
  */
-/* func_801514D0 */
 MATCH void Message_StartRequest(void) {
     s32 entry;
 

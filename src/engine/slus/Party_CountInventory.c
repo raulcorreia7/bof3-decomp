@@ -2,7 +2,6 @@
 
 /* counts the non-zero bytes of the selected inventory record slot.
  */
-/* func_80166438 */
 MATCH s32 Party_CountInventory(u32 category) {
     u8* p;
     u8  count;

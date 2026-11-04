@@ -3,7 +3,6 @@
 /* fades the full-screen tint in a loop, then exits the callback
  * thread.
  */
-/* func_8014F5F0 */
 MATCH void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order) {
     s32 step;
     s16 delta16;

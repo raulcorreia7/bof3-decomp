@@ -5,7 +5,6 @@
  * scheduler switch through thread id `0xFF000000`.
  */
 
-/* func_8014B87C */
 MATCH void CallbackWait(u16 countdown) {
     CallbackSlot* slot;
 

@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196B20 */
 MATCH u8 GFX_FindPaletteCell(u8 value) {
     u8        row;
     u8        column;

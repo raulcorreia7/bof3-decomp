@@ -2,7 +2,6 @@
 
 /* TODO
  */
-/* func_80161DC8 */
 MATCH void SND_InstallSequenceFuncs(void) {
     D_8018DB58 = (s32)_SsNoteOn;
     D_8018DB5C = (s32)_SsSetProgramChange;

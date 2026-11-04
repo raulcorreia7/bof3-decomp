@@ -5,7 +5,6 @@
  * rotated g_AreaCells entry.
  */
 
-/* func_801558F0 */
 MATCH s32 Area_ProbeCellId(s32 x, s32 y) {
     s32 dx;
     s32 dy;

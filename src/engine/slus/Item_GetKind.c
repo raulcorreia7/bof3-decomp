@@ -3,7 +3,6 @@
 /* returns the low nibble of byte 2 of the record `kind`/`index` selects: 18-byte rows of D_801C8971 (kind 0
  * and others), 24-byte D_801C90EA (kind 1), 22-byte D_801C98B2 (kind 2), 20-byte D_801C9E8A (kind 3).
  */
-/* func_80165E04 */
 MATCH s32 Item_GetKind(s32 kind, s32 index) {
     switch (kind & BYTE_MASK) {
         case 0:

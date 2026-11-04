@@ -12,9 +12,7 @@
 extern u8            D_80145FCC[][BATTLE_PARTY_STRIDE];
 extern u8            D_80148656;
 extern OverlayHeader D_801D0C00;
-/* D_801D0C04 */
 extern char          g_MenuStatFormat[];
-/* D_801D0C28 */
 extern char          g_MenuZennyFormat[];
 extern u8            D_801D0C2C[];
 extern char          g_MenuClockFormat[];
@@ -31,11 +29,9 @@ extern Callback      D_801D96F8[];
 extern Callback      D_801D970C[];
 extern Callback      D_801D9720[];
 extern Callback      D_801D9734[];
-/* D_801D974C */
 extern Callback      g_MenuStatusTaskFuncs[];
 extern Callback      D_801D9768[];
 extern Callback      D_801D9774[];
-/* D_801D989C */
 extern u8            MENU_CAPTION_GLYPH_2[];
 extern u8            MENU_CLOCK_CAPTION[];
 extern u8            MENU_COMMAND_FRAME[];
@@ -45,14 +41,11 @@ extern u8            D_801D9978[];
 extern u8            D_801D9990[];
 extern u8            D_801D999C[];
 extern u8            D_801D9A60[];
-/* D_801D9B58 */
 extern u8            g_MenuLabelAgility[];
 extern u8            D_801D9B5C[];
 extern u8            D_801D9B64[];
-/* D_801D9B78 */
 extern u8            g_MenuPortraitAtlas[];
 extern u8            D_801D9BA8[];
-/* D_801D9BD8 */
 extern u8            MENU_CAPTION_ICON[];
 extern u8            MENU_CLOCK_COLON[];
 extern u8*           g_MenuCommandLabels[];
@@ -71,7 +64,6 @@ extern s32  func_801D2978(void);
 extern s32  func_801D2ADC(void);
 extern void func_801D2C0C(void);
 extern void func_801D2DA8(void);
-/* func_801D550C */
 extern void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 extern void Menu_DrawFilledPanel(s16 x, s16 y, s16 width, s32 height);
@@ -92,7 +84,6 @@ static inline void Menu_SlidePanelUp(void) {
 
 void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 
-/* func_801AED54 */
 void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 
 s32  Party_CountItem(u8 category, u8 item, u8 mode);

@@ -3,7 +3,6 @@
 /* 4-byte gift-shop row: the battle count, the item index and the item type;
  * the handlers take the type first. */
 
-/* func_801F18F8 */
 MATCH void Fairy_GrantGift(void) {
     FairyGift buf[0x14];
     u8*       src;

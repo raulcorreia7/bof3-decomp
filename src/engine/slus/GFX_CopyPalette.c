@@ -3,7 +3,6 @@
 /* copies 0x100 halfwords from the 0x80033800 bank into the 0x80037800 bank
  * for the 0x200-stride slot selected by slot, then marks the copy complete.
  */
-/* func_8014E3A0 */
 MATCH void GFX_CopyPalette(s32 slot) {
     u32        count;
     u16*       dst;

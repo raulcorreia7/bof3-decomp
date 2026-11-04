@@ -73,7 +73,6 @@ typedef union CampMenuStepCounter {
 ASSERT_SIZE(CampMenuStepCounter, 2);
 ASSERT_OFFSET(CampMenuStepCounter, rows, 0);
 
-/* D_80143F00 */
 extern u16             g_GameAreaId;
 extern u8              D_80144F57;
 extern u16             D_80145594[];
@@ -162,9 +161,7 @@ extern u8              D_80148694;
 extern u8              D_8018E990[];
 extern u8*             D_801C893C[];
 extern u8*             D_801C8950[];
-/* D_801D0C4C */
 extern char            g_MenuStatFormat[4];
-/* D_801D0C70 */
 extern char            g_MenuZennyFormat[4];
 extern char            D_801D0C74[];
 extern char            D_801D0DAC[];
@@ -172,7 +169,6 @@ extern char            D_801D0DB0[];
 extern u8              D_801D0DBC[4];
 extern u8              D_801D0DC0[4];
 extern u8              D_801D0DC4[4];
-/* D_801D0EB0 */
 extern u8              s_RowCaptionTags[24];
 extern char            g_SaveFileNameFormat[];
 extern char            D_801D0F14[];
@@ -180,7 +176,6 @@ extern char            D_801D0F14[];
 extern Character       D_801EB514[7];
 extern Character       D_801EB990;
 extern u8              D_801EBA34[][2];
-/* D_801EC354 */
 extern u8              s_CampMenuPanelIds[8];
 extern Callback        D_801EC35C[9];
 extern Callback        D_801EC380[];
@@ -191,7 +186,6 @@ extern Callback        D_801EC3D4[];
 extern Callback        D_801EC400[7];
 extern Callback        D_801EC41C[];
 extern u16             D_801EC440[];
-/* D_801EC458 */
 extern u8              s_EquipSlotCategories[8];
 extern Callback        D_801EC460[];
 extern Callback        D_801EC498[];
@@ -210,37 +204,29 @@ extern Callback        D_801EC58C[];
  * arrays: a row's size includes alignment padding past its payload (44 bytes
  * for a 42-byte run, 688 for a 687-byte bank), and a typed record array would
  * need the split data to own that padding. */
-/* D_801EC690 */
 extern u8              MENU_CAPTION_GLYPH_2[688];
 extern u8              D_801EC754[];
 extern u8              D_801EC76C[];
 extern u8              D_801EC784[];
 extern u8              D_801EC790[];
 extern u8              D_801EC854[];
-/* D_801EC94C */
 extern u8              g_MenuLabelAgility[4];
 extern u8              g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:func_801DBF04 */
 extern u8              g_MenuLabelEquip[8];    /* the equipment panel caption. @source: read:func_801DBF04 */
-/* D_801EC96C */
 extern u8              g_MenuPortraitAtlas[96];
-/* D_801EC9CC */
 extern u8              MENU_CAPTION_ICON[792];
 extern s32             D_801ECC98[];
 extern Callback        D_801ECCF8[];
 extern Callback        D_801ECD1C[];
-/* D_801ED100 */
 extern u8              s_CampMenuState[8];
 extern Callback        D_801ED11C[7];
 extern Callback        D_801ED138[4];
 extern Callback        D_801ED148[17];
 extern u8              D_801ED18C;
-/* D_801ED1D8 */
 extern u8              s_PanelIconSelectors[24];
-/* D_801ED1F0 */
 extern u8              s_PanelIconValues[228];
 extern s32 (*D_801ED224[])(u8 caster_index, u8 target_index, u8 use_battle_record);
 extern s32 (*D_801ED24C[])(u8 slot_index, u8 record_value);
-/* D_801ED2D4 */
 extern u8       g_SaveRecordTypeCommands[92];
 extern Callback D_801ED330[21];
 extern Callback D_801ED384[11];
@@ -268,7 +254,6 @@ extern Callback D_801ED5A0[5];
 extern Callback D_801ED5B4[5];
 extern Callback D_801ED5C8[];
 extern Callback D_801ED5E4[];
-/* D_801ED610 */
 extern u8       s_PartyCharacterIds[3];
 extern u8       D_801ED613[];
 extern s8       D_801ED618;
@@ -304,28 +289,20 @@ extern u8       D_801ED86C;
 extern u8       D_801ED870;
 extern u8       D_801ED890;
 extern u8       D_801ED891;
-/* D_801ED894 */
 extern u8       s_ChoiceMenuValues[8];
-/* D_801ED89C */
 extern u8       s_ChoiceMenuCursors[12];
-/* D_801ED8A8 */
 extern u8       s_SkillOrderCursors[4][4];
-/* D_801ED8B8 */
 extern u8       s_SkillOrderGroups[4][6];
-/* D_801ED8D0 */
 extern u8       s_SkillOrderKinds[3][6];
 extern Callback g_MenuCampSubFuncs[5];
 extern Callback g_MenuCampFuncs[5];
 
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
-/* func_8014FF0C */
 void        UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
-/* func_801650B4 */
 extern bool Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
 extern bool Char_RestoreHp(s32 character_index, s32 amount, s32 use_battle_copy);
 extern s32  Char_RestoreAp(s32 character_index, s32 amount, s32 use_battle_copy);
-/* func_8016546C */
 extern s32  Char_AddCappedStat(u16* value, s32 delta);
 extern s16  Char_AddStat(u16* value, s16 delta);
 extern u32  Char_ClearStatus(u8 index, u16 mask, u8 mode);
@@ -333,7 +310,6 @@ extern u32  Char_ClearStatus(u8 index, u16 mask, u8 mode);
 void        UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 bool        func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
 s32         func_801B6470(u8 arg0);
-/* func_801BDB7C */
 extern u8   Party_CountOrder(u8 mode);
 void        func_801C1254(s32 ability_id, s32 slot_index);
 /* The start overlay's handler tables call these functions. */
@@ -361,7 +337,6 @@ void        func_801D42F0(void);
 void        func_801D455C(void);
 void        func_801D4564(void);
 void        func_801D485C(void);
-/* func_801D4A30 */
 extern void Menu_SwapBytes(u8* first, u8* second);
 void        func_801D4A44(void);
 void        func_801D4B44(void);
@@ -381,7 +356,6 @@ void        func_801D8DC8(void);
 void        func_801D902C(void);
 void        func_801D90A8(void);
 void        func_801D9110(void);
-/* func_801D933C */
 extern void Menu_SwapBytes_801D933C(u8* first, u8* second);
 extern void func_801D9350(void);
 void        func_801D970C(void);
@@ -394,7 +368,6 @@ void        func_801DA27C(void);
 void        func_801DA320(void);
 void        func_801DA984(void);
 void        func_801DAA68(void);
-/* func_801DAC08 */
 void        Menu_SwapBytes_801DAC08(u8* first, u8* second);
 extern void func_801DB510(void);
 void        func_801DB550(void);
@@ -403,20 +376,14 @@ extern void func_801DBF04(s16 x, s16 y, u8 record_index);
 extern void func_801DC150(s16 x, s16 y, u8 character_index, s32 layout);
 extern s32  func_801DCDB8(u16, u16, u8, u8, s32);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
-/* func_801DB764 */
 void        Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 shaded, s32 unused);
-/* func_801DEEE8 */
 void        Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_slot, s32 equip_slot, u8 item_id);
-/* func_801DF6EC */
 void        Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height);
-/* func_801E2898 */
 void        Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_step);
-/* func_801E33E8 */
 u8*         Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph_left, s32 glyph_right);
 extern void func_801DFBF4(MenuPanelTask* task);
 extern void func_801E0354(MenuPanelTask* task);
 extern void func_801E0A70(MenuPanelTask* task);
-/* func_801E11A8 */
 void        SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry);
 extern void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active);
 void        func_801E16BC(void);
@@ -451,15 +418,12 @@ void        func_801E54A4(void);
 void        func_801E55B8(void);
 void        func_801E5674(void);
 void        func_801E5738(void);
-/* func_801E5A00 */
 void        SAVE_RunLoadVerify(void);
 void        func_801E5BCC(void);
 void        func_801E5C68(void);
 void        func_801E5E30(void);
 void        func_801E5F34(void);
-/* func_801E5FD4 */
 void        SAVE_RunLoadRestore(void);
-/* func_801E62A8 */
 void        Camp_EnterMainLoop(void);
 extern void func_801E6388(s32 overlay_x, s32 overlay_y);
 extern void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y);
@@ -583,7 +547,6 @@ static inline void MenuAdvancePanelYField6(void) {
     }
 }
 
-/* func_801DDF70 */
 s32              Char_GetExpForLevel(s32 character, s32 level);
 extern s8        D_8014850C;
 extern s8        D_8014850D;
@@ -604,7 +567,6 @@ extern s32       D_801D0EA8;
 extern s8        D_801D0F18;
 extern s8        D_801D0F1C;
 extern s8        D_801D0F24;
-/* func_801D15C0 */
 void             Party_InitDefaults(void);
 void             func_801D29A4(void);
 extern void      func_801D2C7C(void);
@@ -677,12 +639,10 @@ static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_i
     }
 }
 
-/* func_801AED54 */
 void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 
-/* func_801DC604 */
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 
 void func_80164D2C(u8 idx, u8 sel, u8 val, u8* flags, u16* dst);

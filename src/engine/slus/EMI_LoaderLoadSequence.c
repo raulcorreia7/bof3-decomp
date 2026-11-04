@@ -3,7 +3,6 @@
 /* selects the current EMI entry's alternate destination, marks the
  * entry with flag 2, advances the loader state machine, and advances the step.
  */
-/* func_80162A6C */
 MATCH void EMI_LoaderLoadSequence(void) {
     u32 entry_offset;
 

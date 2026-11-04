@@ -28,7 +28,6 @@ extern RECT           D_801EB45C; /* MDEC output window (x, y, w, h) */
 extern s32            D_801EB464;
 extern s32            D_801EB468;
 extern volatile s32   D_801EB46C; /* polled move flag; SYSTEM_LogoDecodeSlice writes it from the DecDCTout callback */
-/* D_801EB470 */
 extern u8             s_LogoCdVolume[4];
 extern s8             D_801EB474;
 extern s8             D_801EB475;
@@ -42,27 +41,16 @@ extern InterruptHooks D_801EB654;
 extern s32            D_801EB678;
 
 /* Functions, in address order. */
-/* func_801CE760 */
 void Logo_Init(s32 work_base, u_long disc_lba);
-/* func_801CE7F4 */
 void Logo_InitDisplay(void);
-/* func_801CE8DC */
 void Logo_FlipDisplay(void);
-/* func_801CE930 */
 s32  Logo_StartStream(u_long disc_lba);
-/* func_801CEA98 */
 s32  Logo_DrawFrame(void);
-/* func_801CEBFC */
 void Logo_StopStream(void);
-/* func_801CEC88 */
 void Logo_WaitFrame(void);
-/* func_801CECA4 */
 void Logo_DecodeSlice(void);
-/* func_801CED48 */
 s32  Logo_FadeInAudio(void);
-/* func_801CEDA4 */
 void Logo_FadeOutAudio(void);
-/* func_801CEDFC */
 void Logo_Main(void);
 
 #endif

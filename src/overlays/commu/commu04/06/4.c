@@ -43,7 +43,6 @@ INCLUDE_ASM(func_801D1568);
 
 INCLUDE_ASM(func_801D1628);
 
-/* func_801D1670 */
 #include "overlays/commu/Commu_AdvanceStep.h"
 
 INCLUDE_ASM(func_801D16A4);

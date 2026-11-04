@@ -4,7 +4,6 @@
  * sets the hold counter and the two velocity dividers, and mode 2 instead
  * publishes the direction vector into the movement globals.
  */
-/* func_8015C2D4 */
 MATCH s8 Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, s32 flags) {
     u8  size;
     s32 absX;

@@ -3,7 +3,6 @@
 /* copies the current type-0 EMI payload to RAM, then advances the
  * loader's completed-entry count.
  */
-/* func_801625E4 */
 MATCH void EMI_LoaderCopyPayload(void) {
     s32* completed_entries;
 

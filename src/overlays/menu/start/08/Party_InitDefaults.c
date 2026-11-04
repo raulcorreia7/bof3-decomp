@@ -13,7 +13,6 @@ typedef struct StartPartyBlock {
 #define START_PARTY ((StartPartyBlock*)((u8*)g_Characters - 0x90))
 #define RECORDS     (g_Characters)
 
-/* func_801D15C0 */
 MATCH void Party_InitDefaults(void) {
     u8 index;
     u8 willpower;

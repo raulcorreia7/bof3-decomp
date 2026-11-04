@@ -4,7 +4,6 @@
  * ticker and reverb, opens the reserved voice and the seven SEP/VAB slots,
  * then seeds the reverb and voice parameter words.
  */
-/* func_8015CD00 */
 MATCH void SND_Init(void) {
     SsInit();
     SsSetTableSize((s8*)D_80148A50, 2, 4);

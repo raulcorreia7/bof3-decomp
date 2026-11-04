@@ -4,7 +4,6 @@
  * selects the item, weapon, armor, accessory or vital-item table, the item the
  * record inside it. Item and out-of-range categories read the item table.
  */
-/* func_80165D48 */
 MATCH u8* Item_GetRecord(s32 category, s32 item) {
     switch (category & BYTE_MASK) {
         case ITEM_CAT_ITEM:

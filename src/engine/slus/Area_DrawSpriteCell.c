@@ -8,7 +8,6 @@
  * mode by graph type, sets the texture from the cell record, offsets x by mirror,
  * selects the clut by clut and appends the primitive.
  */
-/* func_8014CF9C */
 MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     /* FAKE: keep the masked bit in a2. */
     MATCH_FAKE_PIN(s32, mode_bit, "a2");

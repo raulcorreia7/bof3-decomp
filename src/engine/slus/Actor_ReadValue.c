@@ -5,7 +5,6 @@
  * untouched.
  */
 /* FAKE: retail reads the key as the low byte (lbu) of the word member. */
-/* func_8014DFE8 */
 MATCH void Actor_ReadValue(void) {
     s8 index;
 

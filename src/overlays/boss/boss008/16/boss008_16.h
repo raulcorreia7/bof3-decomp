@@ -26,13 +26,10 @@ void                func_800C1C88(s32 mode);
 void                func_800C1D74(s32 mode);
 void                func_800C1E60(s32 mode);
 void                func_800C1F4C(s32 mode);
-/* func_800C22B8 */
 u8                  Boss_HandleBattleEvent4(u32 mode);
 /* The mode handler sets the image installs into the battle hooks; the
  * addresses are in [emi/boss/boss008/16] of config/symbols.toml. */
-/* func_800C22C0 */
 void                Boss_ChooseBattleEnding4(void);
-/* func_800C230C */
 void                Boss_EndBattle4(void);
 void                func_800C236C(u8 phase);
 extern EnemyBattler D_801EB630[];

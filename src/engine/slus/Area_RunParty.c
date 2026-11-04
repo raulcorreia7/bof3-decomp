@@ -3,7 +3,6 @@
 /* publishes each of the four field work records as the scratchpad
  * work pointer and steps the ones that are active and not yet flagged 0x40.
  */
-/* func_8015A758 */
 MATCH void Area_RunParty(void) {
     u8 index;
 

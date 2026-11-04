@@ -4,7 +4,6 @@
  * selected by the shared step byte D_801490BC.step_id, whose 0x80 base is rebased onto
  * the bank's 16 entries.
  */
-/* func_801522F8 */
 MATCH void Message_DispatchBankStep(void) {
     HandlerBank bank;
 

@@ -5,7 +5,6 @@
  * scheduler critical section, then forces a scheduler switch away from the
  * current callback.
  */
-/* func_8014B8B0 */
 MATCH void CallbackExit(void) {
     g_CallbackSlot->state = CALLBACK_SLOT_EMPTY;
     EnterCriticalSection();

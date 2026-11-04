@@ -1,14 +1,12 @@
 #include "start_08.h"
 
 /* The stat format strings the item, party and save panels print numbers with. */
-/* D_801D0C4C */
 char g_MenuStatFormat[4] = "%3d";
 char D_801D0C50[8] = "%3d/   ";
 char D_801D0C58[8] = "   /%3d";
 char D_801D0C60[4] = "%8d";
 char D_801D0C64[12] = "--------";
 
-/* D_801D0C70 */
 char g_MenuZennyFormat[4] = "%7d";
 char D_801D0C74[8] = "-------";
 

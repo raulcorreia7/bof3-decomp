@@ -262,7 +262,6 @@ MATCH void func_801D1544(void) {
     }
 }
 
-/* func_801D165C */
 #ifdef NON_MATCHING
 NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) {
     s16              new_var;

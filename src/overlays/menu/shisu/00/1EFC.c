@@ -67,7 +67,6 @@ MATCH void func_801D2F9C(void) {
 MATCH void func_801D2FE0(void) {
 }
 
-/* func_801D2FE8 */
 MATCH void Menu_DrawPanelCursor(void) {
     Menu_DrawCursorSprite(g_MenuPanelTaskCurrent->x, g_MenuPanelTaskCurrent->y, 0);
 }
@@ -179,7 +178,6 @@ INCLUDE_ASM(func_801D4158);
 
 #include "overlays/menu/Menu_DrawTintedLine.h"
 
-/* func_801D4754 */
 MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     u8* cell;
     s32 row_off;
@@ -238,7 +236,6 @@ MATCH void func_801D5620(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
     MenuDrawPanelIcon(x, y, u, v, clut, color);
 }
 
-/* func_801D56D8 */
 #include "overlays/menu/Menu_DrawExperienceLine.h"
 
 #include "overlays/menu/Menu_DrawZennyWindow.h"

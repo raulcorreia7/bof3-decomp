@@ -4,7 +4,6 @@
  * pins the SsSepVol pair to 0x3FF and forwards the group's s8 separator id with
  * the caller's cue arguments to SsSepSetDecrescendo.
  */
-/* func_8015D4F8 */
 MATCH void SND_StartDecrescendo(s32 group, s16 sequence, s16 volume, s32 time) {
     if (D_80144954 != 0) {
         return;

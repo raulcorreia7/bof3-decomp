@@ -7,7 +7,6 @@
  * part's four vertex offsets and packed colour word, appending it to the
  * ordering-table bucket its flag bits select.
  */
-/* func_80156000 */
 MATCH void Area_DrawPartQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
     SVECTOR    verts[4];
     ScenePart* p;

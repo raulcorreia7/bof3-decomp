@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801A802C */
 MATCH void Scene_RunShopSaveEvent(void) {
     u16 id;
 

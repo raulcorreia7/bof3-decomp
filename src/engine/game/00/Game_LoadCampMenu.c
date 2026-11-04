@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196FFC */
 MATCH void Game_LoadCampMenu(void) {
     u16* ent;
     u16  ev;

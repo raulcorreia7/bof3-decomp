@@ -5,7 +5,6 @@
 
 /* Panel atlas records: u, v, clut x, clut y (4-byte stride). */
 
-/* func_801D23A0 */
 MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
     SPRT*               sprt;
     MenuPortraitSprite* entry;

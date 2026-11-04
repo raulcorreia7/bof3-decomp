@@ -1,6 +1,5 @@
 #include "boss001_13.h"
 
-/* func_800C2060 */
 MATCH void Boss_EndBattle(void) {
     func_800AC844(6);
     func_800AC870(6, (PartyBattler*)D_801EB630, 1);

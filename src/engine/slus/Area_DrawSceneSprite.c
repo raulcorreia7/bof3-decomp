@@ -4,7 +4,6 @@
  * the screen margin, picks an animation frame from g_FrameCount modulo the frame count and sizes the quad from the
  * frame's byte offsets, scaled by the projected depth.
  */
-/* func_801579A8 */
 MATCH void Area_DrawSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     POLY_FT4* prim;
     u8*       frame;

@@ -2,7 +2,6 @@
 
 /* stores one frontend-local mode and installs the matching callback.
  */
-/* func_8014ECAC */
 MATCH void UI_SetMode(u16 local_mode) {
     if (WINDOW_EFFECT_BUSY()) {
         return;

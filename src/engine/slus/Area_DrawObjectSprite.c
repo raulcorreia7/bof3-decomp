@@ -9,7 +9,6 @@
  * (setting or clearing the hidden bit 0x80 of the first byte), then queues its sprite cells. Plain cells go to
  * func_8014CF9C; flipped or scaled cells become FT4 primitives here, with the size row from D_8017F53C.
  */
-/* func_8014C4D4 */
 MATCH void Area_DrawObjectSprite(void) {
     POLY_FT4*   prim;
     SpriteCell* cell;

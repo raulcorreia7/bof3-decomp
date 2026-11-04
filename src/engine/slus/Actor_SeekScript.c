@@ -3,7 +3,6 @@
 /* copies entry byte 1 to work offset 0x49, advances the entry base
  * by 2, then derives the paired-table pointer and processes the next entry.
  */
-/* func_8014D910 */
 MATCH void Actor_SeekScript(u16 position) {
     Actor* current_work;
     Actor* first_work;

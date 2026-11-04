@@ -1,6 +1,5 @@
 #include "engine/slus/slus.h"
 
-/* func_8014D4E0 */
 MATCH void Area_AddActor(void) {
     u8     byte;
     u32    index;

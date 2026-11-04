@@ -2,7 +2,6 @@
 
 /* clears the mode flag and record fields of the three 0x140-stride slots.
  */
-/* func_80166D34 */
 MATCH void Party_ResetBattlers(void) {
     s32 index;
 

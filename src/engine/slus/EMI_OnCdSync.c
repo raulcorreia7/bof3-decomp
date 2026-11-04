@@ -3,7 +3,6 @@
 /* latches the last CdSync callback result bytes and marks the async
  * sync status.
  */
-/* func_801621E8 */
 MATCH void EMI_OnCdSync(s32 status, u8* result) {
     s32 i;
 

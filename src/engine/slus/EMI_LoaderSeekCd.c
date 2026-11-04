@@ -2,7 +2,6 @@
 
 /* seeks the CD reader and flags completion.
  */
-/* func_80162E18 */
 MATCH void EMI_LoaderSeekCd(void) {
     u16* counter;
 

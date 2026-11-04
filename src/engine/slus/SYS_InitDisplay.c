@@ -3,7 +3,6 @@
 /* initializes both display/draw environment pairs used by the
  * boot-side double buffer.
  */
-/* func_8014AE08 */
 MATCH void SYS_InitDisplay(void) {
     u8* work;
 

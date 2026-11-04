@@ -4,7 +4,6 @@
  * it queues the palette pair and tile pointer in the next slot, then stores the record's draw offset and sub-table
  * pointer.
  */
-/* func_8014DC08 */
 MATCH void Actor_SelectScriptBank(u32 record_index) {
     /* FAKE: retail reserves 16 bytes of frame that no statement uses. */
     STACK_PADS(u8, 16);

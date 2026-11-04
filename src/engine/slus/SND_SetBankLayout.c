@@ -6,7 +6,6 @@
  * accumulated size) into the D_80148A1C..D_80148A4C globals, with the first
  * four bytes of each entry mirrored into D_8014677C..D_801467F8.
  */
-/* func_80161808 */
 MATCH void SND_SetBankLayout(u32 layout_bank) {
     s32 off;
     /* FAKE: pin keeps the accumulator in v1. */

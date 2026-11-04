@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801C187C */
 MATCH s32 Party_JoinMember(s32 char_id) {
     s32 id;
 

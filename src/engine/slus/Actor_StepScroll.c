@@ -4,7 +4,6 @@
  * switches the active stream record when the cursor expires and the limit
  * reaches the next script position.
  */
-/* func_8015C750 */
 MATCH s8 Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, s32 flags) {
     s16 limit;
 

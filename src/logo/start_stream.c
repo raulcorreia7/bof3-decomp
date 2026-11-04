@@ -1,6 +1,5 @@
 #include "logo/logo.h"
 
-/* func_801CE930 */
 MATCH s32 Logo_StartStream(u_long disc_lba) {
     u_long* vlc_data;
     u_long* frame;

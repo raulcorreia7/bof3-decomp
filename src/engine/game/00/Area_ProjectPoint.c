@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801AFF04 */
 MATCH void Area_ProjectPoint(s32* pos, long* screen_xy) {
     s16  vec[3];
     long p;

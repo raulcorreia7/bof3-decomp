@@ -4,7 +4,6 @@
  * sets byte 0x11C of the local-work block, stores D_80145EC4/8/C at +0x34/+0x38/+0x3C and advances the work byte at
  * 0x1.
  */
-/* func_801673AC */
 MATCH void Area_InitScene(void) {
     Actor* work;
 

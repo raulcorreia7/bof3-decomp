@@ -49,7 +49,6 @@ typedef enum DecoderState {
 /* Copy kernel: copies count bytes forward and returns the advanced
  * destination. The original takes count/src/dst in $s4/$s5/$t3. */
 
-/* func_80164064 */
 s32 EMI_DecodeStep(void) {
     EmiDecodeContext* ctx;
     u8*               dst;

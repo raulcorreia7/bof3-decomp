@@ -133,13 +133,11 @@ extern GameDelta            D_801C7B74[4];
 extern AreaHandler          D_801C7F5C[11];
 extern ActorActionFunc      D_801C83BC[7];
 extern ObjectFunc           D_801C83D8[11];
-/* D_801C8454 */
 extern SceneSlots*          g_SceneScenes[20];
 extern AreaHooks            D_801C86F8;
 extern ActorWorkFunc        D_801C890C[11];
 extern u8*                  D_801C893C[5];
 extern u8*                  D_801C8950[5];
-/* D_801CA28C */
 extern ShopStock            g_GameShopStock[SHOP_COUNT];
 extern UvRect               D_801CCE84[62];
 extern UvRect               D_801CCF7C[53];

@@ -4,7 +4,6 @@
  * g_AreaTileOriginY + px/2 - py) and, strictly inside the bundle's size, reads the 16-bit cell and reports a non-zero
  * one through out, else zeroes out.
  */
-/* func_801541C0 */
 MATCH void Area_ProbeCell(s32 px, s32 py, AreaCell* out) {
     AreaMapBundle* bundle;
     s32            width;

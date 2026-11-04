@@ -3,7 +3,6 @@
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 64.91%. resume: a lever or header fix that
  * closes the first mismatch. */
 #ifdef NON_MATCHING
-/* func_801DF6EC */
 NON_MATCHING void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height) {
     /* FAKE: retail reserves 32 bytes of frame that no statement uses. */
     STACK_PADS(u8, 0x20);

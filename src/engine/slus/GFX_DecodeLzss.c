@@ -5,7 +5,6 @@
  * copies) into the shared image cursor, then uploads the result and advances
  * the cursor past the aligned block.
  */
-/* func_8014E8FC */
 MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
     u8* src;
     u8* dst;

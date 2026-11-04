@@ -1,6 +1,5 @@
 #include "boss018_16.h"
 
-/* func_800C2378 */
 MATCH void Boss_EndBattle(void) {
     u8* row;
 

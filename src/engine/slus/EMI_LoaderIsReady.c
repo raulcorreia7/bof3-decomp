@@ -3,7 +3,6 @@
 /* returns true only when the EXE-side EMI loader reached ready
  * state 3.
  */
-/* func_80162D00 */
 MATCH s32 EMI_LoaderIsReady(void) {
     volatile const u8* emi_state_base;
 

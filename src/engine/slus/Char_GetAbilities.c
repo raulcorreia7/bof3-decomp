@@ -4,7 +4,6 @@
  * copy (0x80145F04, stride 0x140) and returns the panel selected by the low two
  * bits of its ability-kind record.
  */
-/* func_80166B94 */
 MATCH u8* Char_GetAbilities(u8 character_index, u8 ability_kind, u8 mode) {
     Character* record;
     u8         i;

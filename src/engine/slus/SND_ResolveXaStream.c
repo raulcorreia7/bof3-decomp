@@ -3,7 +3,6 @@
 /* resolves one loader entry from its packed key, skips flagged
  * slots, and latches the base and scaled entry bounds.
  */
-/* func_80163744 */
 MATCH void SND_ResolveXaStream(s32 stream_id) {
     s32  scale;
     u8*  counter;

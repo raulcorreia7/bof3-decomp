@@ -7,7 +7,6 @@
  * 0x10 divided by the byte from g_RouteSpeedScale into unk_0A, or calls
  * func_8015C9CC and sets unk_04 to 3.
  */
-/* func_8015C540 */
 MATCH s8 Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, u8 flags) {
     Actor* work;
     s32    speed;

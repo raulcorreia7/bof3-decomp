@@ -3,7 +3,6 @@
 /* copies the nine menu-panel handlers to the stack, then dispatches
  * active panel tasks whose mode is at or above the current menu mode.
  */
-/* func_80158C80 */
 MATCH void Menu_RunPanelTasks(void) {
     MenuPanelFuncs handlers;
     Callback*      funcs;

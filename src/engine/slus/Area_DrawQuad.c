@@ -6,7 +6,6 @@
  * parts: four vertices built from signed byte offsets around the projected
  * origin, and a primitive code chosen from the part texture word.
  */
-/* func_80156228 */
 MATCH void Area_DrawQuad(ScenePart* parts, s32 origin_x, s32 origin_y) {
     SVECTOR    verts[4];
     ScenePart* rec;

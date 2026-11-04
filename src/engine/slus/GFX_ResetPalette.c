@@ -4,7 +4,6 @@
  * work area, then copies all 0x20 rows of that area into the palette
  * destination at g_GraphicsPaletteDst.
  */
-/* func_8014E284 */
 MATCH void GFX_ResetPalette(void) {
     u16  row;
     u16  column;

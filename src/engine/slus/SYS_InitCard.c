@@ -3,7 +3,6 @@
 /* opens and enables the boot-side event set used after the logo path
  * hands back to the disc/runtime layer.
  */
-/* func_8014B1A4 */
 MATCH void SYS_InitCard(void) {
     EnterCriticalSection();
     g_SysCardSoftwareIoEvent      = OpenEvent(SwCARD, EvSpIOE, EvMdNOINTR, NULL);

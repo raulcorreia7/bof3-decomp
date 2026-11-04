@@ -4,7 +4,6 @@
 
 /* Stat glyph-row templates in this overlay. */
 
-/* func_801D1444 */
 MATCH void Menu_DrawStatPanel(s16 panel_x, s16 panel_y, u8 palette_index) {
     u8*        base;
     Character* entryp;

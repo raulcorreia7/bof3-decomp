@@ -1,6 +1,5 @@
 #include "shop_00.h"
 
-/* func_801D3654 */
 MATCH s32 Shop_ApplyPercent(s32 value, s32 percent) {
     u32 scaled;
 

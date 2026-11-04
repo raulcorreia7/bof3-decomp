@@ -24,13 +24,11 @@ char D_801D0C98[0x44] = {
 
 char D_801D0CDC[4] = "%3dZ";
 u8   D_801D0CE0[4] = {0x00, 0x94, 0x08, 0x00};
-/* D_801D0CE4 */
 char g_MenuStatFormat[4] = "%3d";
 char D_801D0CE8[8] = "%3d/   ";
 char D_801D0CF0[8] = "   /%3d";
 char D_801D0CF8[4] = "%8d";
 char D_801D0CFC[12] = "--------";
-/* D_801D0D08 */
 char g_MenuZennyFormat[4] = "%7d";
 char D_801D0D0C[8] = "-------";
 

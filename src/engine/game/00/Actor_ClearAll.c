@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_8019611C */
 MATCH void Actor_ClearAll(void) {
     u8 record_index;
 

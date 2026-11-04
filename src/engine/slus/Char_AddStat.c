@@ -3,7 +3,6 @@
 /* moves the 16-bit record value toward its 999/0 bounds by delta,
  * clamping at the crossed bound and returning the remaining distance.
  */
-/* func_801654F4 */
 MATCH s16 Char_AddStat(u16* value, s16 delta) {
     u16 cur;
     u16 next;

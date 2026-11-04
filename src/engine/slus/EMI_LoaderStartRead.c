@@ -3,7 +3,6 @@
 /* syncs the CD reader, retries the pending read, and latches progress
  * on success.
  */
-/* func_80162E98 */
 MATCH void EMI_LoaderStartRead(void) {
     u8* result;
 

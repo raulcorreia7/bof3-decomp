@@ -105,7 +105,6 @@ INCLUDE_ASM(func_801D31B0);
 
 #include "overlays/menu/Menu_DrawTintedLine.h"
 
-/* func_801D37AC */
 MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     u8* cell;
     s32 row_off;
@@ -164,7 +163,6 @@ MATCH void func_801D4678(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
     MenuDrawPanelIcon(x, y, u, v, clut, color);
 }
 
-/* func_801D4730 */
 #include "overlays/menu/Menu_DrawExperienceLine.h"
 
 #include "overlays/menu/Menu_DrawZennyWindow.h"

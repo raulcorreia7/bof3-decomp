@@ -4,7 +4,6 @@
  * D_80149010 to the target level in D_80149040, then records the target as the
  * current level.
  */
-/* func_8015D290 */
 MATCH void SND_StartPanSweep(s32 voice) {
     u16 index;
 

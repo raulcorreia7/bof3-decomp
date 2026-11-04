@@ -4,7 +4,6 @@
  * 0x1E0/0x1F0 (bit 0x04 of work byte 0x24) plus the page from byte 0x27 shifted up six, and the sub-page bits from
  * byte 0x28's kind.
  */
-/* func_8014CE78 */
 MATCH void Area_BuildClut(u16* dst) {
     s32 base;
     u32 sel;

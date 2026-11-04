@@ -141,40 +141,28 @@ extern Callback           D_801D421C[SISYOU_SUB3_HANDLER_COUNT];
 extern Callback           D_801D4240[SISYOU_SUB4_HANDLER_COUNT];
 extern Callback           D_801D4264[SISYOU_SUB5_HANDLER_COUNT];
 extern u8                 D_801D4270[MASTER_MENU_VALUE_COUNT];
-/* D_801D4284 */
 extern u8                 g_MasterBannerLock;
-/* D_801D4285 */
 extern u8                 g_MasterStep;
-/* D_801D4286 */
 extern u8                 g_MasterSubStep;
-/* D_801D4287 */
 extern u8                 g_MasterPanelLock;
 extern u8                 D_801D4288;
-/* D_801D4289 */
 extern u8                 g_MasterScrollOffset;
-/* D_801D428A */
 extern u8                 g_MasterMenuCursor;
 extern Callback           g_MasterMenuFuncs[MASTER_MENU_STEP_COUNT];
 extern Callback           g_MasterMenuSubFuncs[MASTER_MENU_SUBSTEP_COUNT];
 
 /* Functions, in address order. */
-/* func_801650B4 */
 bool Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
 void UI_DrawSpriteRun(s16 arg0, s16 arg1, const u8* arg2, u8 arg3);
-/* func_801D0C18 */
 void Master_ResetPanel(void);
 void func_801D0C48(void);
 void func_801D0C88(void);
 void func_801D0DD4(s32 message_id, s32 confirm);
 void func_801D10AC(u32 message_id);
-/* func_801D177C */
 void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
-/* func_801D23A0 */
 void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade);
-/* func_801D2520 */
 void Menu_DrawIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
-/* func_801D25D8 */
 void Master_DispatchMenu(void);
 void func_801D2614(void);
 void func_801D2688(void);
@@ -204,7 +192,6 @@ void func_801D3960(void);
 void func_801D39CC(u32 entry);
 void func_801D3A24(void);
 void func_801D3E70(void);
-/* func_801D3ED0 */
 void Master_ApplyMaster(void);
 void MenuDrawSelectionBox(s32 x, s32 y, s32 width, s32 height, u8 color, u8 mask);
 

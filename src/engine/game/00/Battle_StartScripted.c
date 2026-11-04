@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801C7A54 */
 MATCH void Battle_StartScripted(u8 mode_byte) {
     u8 seed;
 

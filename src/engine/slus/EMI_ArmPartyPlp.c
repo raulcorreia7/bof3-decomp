@@ -5,7 +5,6 @@
  * bits of g_EmiLoadedCharacterIndex, re-arms the loader with that index's family-3
  * slot through EMI_FamilySlot.
  */
-/* func_80166F3C */
 MATCH void EMI_ArmPartyPlp(u8 member_a, u8 member_b, u8 member_c) {
     u8 slot;
 

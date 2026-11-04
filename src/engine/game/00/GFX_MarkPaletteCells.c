@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196784 */
 MATCH u8 GFX_MarkPaletteCells(u8 mode, u8 value, u8 search) {
     u8 result;
     u8 row;

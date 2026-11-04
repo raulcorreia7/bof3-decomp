@@ -87,15 +87,10 @@ extern Callback         D_801D2724[];
 extern Callback         D_801D2734[];
 extern SceneBandEffect* D_801D2744;
 
-/* func_801D0C10 */
 void Scene_RunEffect(void);
-/* func_801D0C70 */
 void Scene_EffectBegin(void);
-/* func_801D0E64 */
 void Scene_EffectEnd(void);
-/* func_801D0E9C */
 void Scene_EffectRunState(void);
-/* func_801D0EE0 */
 void Scene_EffectSetMatrix(void);
 void func_801D0FAC(void);
 void func_801D1034(void);
@@ -107,7 +102,6 @@ void func_801D12A8(void);
 void func_801D13C0(void);
 void func_801D1430(void);
 void func_801D1544(void);
-/* func_801D165C */
 void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask);
 void func_801D1D58(void);
 void func_801D1DE0(void);

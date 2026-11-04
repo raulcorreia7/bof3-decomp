@@ -2,7 +2,6 @@
 
 /* returns 1 when the first byte of the record at cursor equals g_ScriptVars[2].
  */
-/* func_8015B9DC */
 MATCH s32 Game_IsScriptVar2Equal(u8** cursor) {
     u8 result; /* the record byte, then the verdict */
 

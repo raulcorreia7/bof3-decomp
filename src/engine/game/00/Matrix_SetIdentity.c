@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801AFF64 */
 MATCH void Matrix_SetIdentity(MATRIX* matrix) {
     matrix->m[0][0] = ONE;
     matrix->m[0][1] = 0;

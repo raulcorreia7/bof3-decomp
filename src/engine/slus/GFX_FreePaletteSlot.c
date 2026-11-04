@@ -2,7 +2,6 @@
 
 /* clears the 0x10-stride flag byte selected by slot when its bit 0 is set.
  */
-/* func_8014E484 */
 MATCH void GFX_FreePaletteSlot(s32 slot) {
     u32 offset;
 

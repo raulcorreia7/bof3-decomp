@@ -3,7 +3,6 @@
 /* draws a draw-mode primitive for blend_mode and a full-screen tint tile shaded by level >> 7, then
  * adds delta to level and returns bit 15 of the sum (the fade ran past 0 or 0x7FFF).
  */
-/* func_8014F704 */
 MATCH s32 GFX_StepScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode) {
     u8* sprite;
     u16 tpage;

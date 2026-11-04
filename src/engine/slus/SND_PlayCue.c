@@ -3,7 +3,6 @@
 /* dispatches a cue's bank and record, updates interpolated channel
  * values, and keys the requested SPU voices.
  */
-/* func_8015DF18 */
 MATCH void SND_PlayCue(u16 cue_id) {
     s32 scaled;
     s32 next;

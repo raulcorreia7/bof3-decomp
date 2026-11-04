@@ -3,7 +3,6 @@
 /* arms the 0x24-stride record selected by the menu id and reports
  * 0xFF when it is already armed, otherwise the menu id.
  */
-/* func_80158DB8 */
 MATCH s32 Menu_ArmPanelTask(u8 menu_id, u8 mode) {
     u32 offset;
     /* FAKE: retail holds the success status in $v0 from the branch target. */

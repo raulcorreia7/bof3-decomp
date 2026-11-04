@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_8019651C */
 MATCH s32 GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value) {
     s32 slot;   /* entry index 0-31 */
     s32 offset; /* byte offset into entry table, slot * 12 */

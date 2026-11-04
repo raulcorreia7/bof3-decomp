@@ -67,7 +67,6 @@ INCLUDE_ASM(func_801CF468);
 
 #include "overlays/plchar/Char_SpawnActor.h"
 
-/* func_801CF744 */
 #include "overlays/plchar/Char_ProbeFacingCell.h"
 
 MATCH void func_801CF878(void) {

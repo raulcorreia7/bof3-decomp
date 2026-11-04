@@ -1,6 +1,5 @@
 #include "start_08.h"
 
-/* func_801E62A8 */
 MATCH void Camp_EnterMainLoop(void) {
     u16* count;
     u8   i;

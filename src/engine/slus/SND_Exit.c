@@ -3,7 +3,6 @@
 /* releases the sound system: stops all keys, closes the seven VAB
  * banks and the seven SEP owners, then shuts down the reverb and the SPU.
  */
-/* func_8015CEBC */
 MATCH void SND_Exit(void) {
     SsUtAllKeyOff(0);
     SsVabClose(D_80148FB0);

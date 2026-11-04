@@ -1,6 +1,5 @@
 #include "shop_00.h"
 
-/* func_801D3688 */
 MATCH u32 Shop_GetSellPrice(s32 item_kind, s32 quantity, s32 discount_flag) {
     s32 kind;
     u32 value;

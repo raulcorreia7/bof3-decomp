@@ -3,7 +3,6 @@
 /* Polls the pending dispatch timer, else advances the retry counter. */
 /* polls the status flag and issues the pending CD command.
  */
-/* func_80163B74 */
 MATCH void SND_XaStateReadProgress(void) {
     s32 wrap;
     s8* flag;

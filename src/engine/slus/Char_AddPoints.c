@@ -3,7 +3,6 @@
 /* steps *value toward limit by delta, clamping upward at limit and
  * downward at zero.
  */
-/* func_80165570 */
 MATCH s16 Char_AddPoints(u16* value, u16 limit, s16 delta) {
     u16 cur;
     u16 next;

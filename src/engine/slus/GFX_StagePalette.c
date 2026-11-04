@@ -3,7 +3,6 @@
 /* copies 0x20 halfwords of the selected record field into dst and dst +
  * 0x4000, then marks the copy complete.
  */
-/* func_80166C48 */
 MATCH void GFX_StagePalette(u8* dst, s32 field) {
     u8* record;
     u8* table;

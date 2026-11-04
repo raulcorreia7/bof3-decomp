@@ -26,7 +26,6 @@ MATCH INCLUDE_ASM(EMI_DecodeBegin);
  * field through `ori` li-form addresses; C89 cannot hold a fixed address in a
  * register across the stores.
  */
-/* func_80164028 */
 void EMI_DecodeBegin(u8* dst) {
     EmiDecodeContext* ctx;
 

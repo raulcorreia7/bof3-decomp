@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_801A7914 */
 MATCH s8 Area_IsStepBlocked(s32 handler_x, s32 handler_y) {
     Actor* saved;
     s8     result;

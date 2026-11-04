@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* func_80196B9C */
 MATCH void GFX_UploadPaletteRows(void) {
     u8* work;
     u32 table_index;

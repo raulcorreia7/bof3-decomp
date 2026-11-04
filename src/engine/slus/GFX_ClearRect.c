@@ -2,7 +2,6 @@
 
 /* clears one rectangular display region.
  */
-/* func_8014E564 */
 MATCH void GFX_ClearRect(s16 x, s16 y, s16 width, s16 height) {
     RECT rect;
 

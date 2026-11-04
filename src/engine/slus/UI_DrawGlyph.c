@@ -1,7 +1,6 @@
 #include "engine/slus/slus.h"
 
 #ifdef NON_MATCHING
-/* func_80151E24 */
 NON_MATCHING void UI_DrawGlyph(s32 color, u8* text) {
     /* 73.14%; regalloc: the saved arguments are reversed. Pinning the text pointer to s1
      * (work/exe/slus_004_22/80151E24/best.c) reaches 77.99%, then the draw-mode constant is hoisted

@@ -6,7 +6,6 @@
  * timers, and switches into any slot whose timer expired or that requested a
  * forced switch.
  */
-/* func_8014B73C */
 MATCH void CallbackRun(void) {
     g_CallbackSlot = D_80143B40;
     {

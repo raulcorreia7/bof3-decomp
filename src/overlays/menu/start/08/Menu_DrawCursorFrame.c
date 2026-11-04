@@ -2,7 +2,6 @@
 
 /* Frame-state word owned by the main executable. */
 
-/* func_801DC324 */
 MATCH void Menu_DrawCursorFrame(u16 x, u16 y, s32 width, s32 height, u8 color, s32 mask) {
     u8       rgb[3];
     u8       base;

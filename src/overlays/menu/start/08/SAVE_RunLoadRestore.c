@@ -1,6 +1,5 @@
 #include "start_08.h"
 
-/* func_801E5FD4 */
 MATCH void SAVE_RunLoadRestore(void) {
     u8  countdown;
     s32 i;

@@ -3,7 +3,6 @@
 /* starts the current EMI entry transfer and records either its
  * active-slot state or a terminal loader error before advancing the step.
  */
-/* func_80162898 */
 MATCH void EMI_LoaderLoadVabBody(void) {
     u32 read_cursor;
     u8  entry_index;

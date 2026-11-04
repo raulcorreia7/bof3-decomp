@@ -1,6 +1,5 @@
 #include "commu00_00.h"
 
-/* func_801F00D4 */
 MATCH void Fairy_JoinVillage(void) {
     u32* count_ptr;
     /* FAKE: keeps the advanced destination pointer in v1. */

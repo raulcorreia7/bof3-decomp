@@ -4,7 +4,6 @@
  * neighbours for map kind 0xF2. Returns nonzero when any probe hits. One
  * definition shared by the plchar character programs; every change here must
  * verify every member image. */
-/* func_801CEFF8 */
 MATCH s32 Char_ProbeFacingCell(void) {
     MATCH_REG(s32, found, "v0");
     MATCH_REG(s32, hit, "s1");
