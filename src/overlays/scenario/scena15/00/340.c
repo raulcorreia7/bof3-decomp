@@ -280,15 +280,54 @@ MATCH void func_801FDE2C(void) {
     g_SceneState.step_05  = 0x32;
 }
 
-INCLUDE_ASM(func_801FDE64);
+MATCH void func_801FDE64(void* entity) {
+    Actor* actor;
 
-INCLUDE_ASM(func_801FDEB4);
+    actor = entity;
+    Game_SetScriptActive();
+    SYS_SetFlag(g_SceneFlags, 0xD);
+    func_801BE1B0(11);
+    actor->unk_7E = (u16)(actor->unk_7E + 1);
+}
 
-INCLUDE_ASM(func_801FDF04);
+MATCH void func_801FDEB4(void* entity) {
+    Actor* actor;
 
-INCLUDE_ASM(func_801FDF4C);
+    actor = entity;
+    Game_SetScriptActive();
+    SYS_SetFlag(g_SceneFlags, 0xE);
+    func_801BE1B0(12);
+    actor->unk_7E = (u16)(actor->unk_7E + 1);
+}
 
-INCLUDE_ASM(func_801FDF9C);
+MATCH void func_801FDF04(void* entity) {
+    Actor* actor;
+
+    actor = entity;
+    Game_SetScriptActive();
+    SYS_SetFlag(g_SceneFlags, 0xC);
+    actor->unk_7E = (u16)(actor->unk_7E + 1);
+}
+
+MATCH void func_801FDF4C(void* entity) {
+    Actor* actor;
+
+    actor = entity;
+    Game_SetScriptActive();
+    SYS_SetFlag(g_SceneFlags, 0x10);
+    func_801BE1B0(14);
+    actor->unk_7E = (u16)(actor->unk_7E + 1);
+}
+
+MATCH void func_801FDF9C(void* entity) {
+    Actor* actor;
+
+    actor = entity;
+    Game_SetScriptActive();
+    SYS_SetFlag(g_SceneFlags, 0xF);
+    func_801BE1B0(13);
+    actor->unk_7E = (u16)(actor->unk_7E + 1);
+}
 
 MATCH void func_801FDFEC(void* entity) {
     Actor* actor;
