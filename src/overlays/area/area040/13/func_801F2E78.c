@@ -1,31 +1,31 @@
 #include "area040_13.h"
 
 MATCH s32 func_801F2E78(void) {
-    s32 temp_s0;
-    s32 temp_s0_2;
-    s32 var_s1;
-    s32 var_s1_2;
+    s32 value;
+    s32 value2;
+    s32 i;
+    s32 j;
 
     if ((D_80144EA9 & 0xF) == 5) {
-        var_s1 = 0;
+        i = 0;
         do {
-            temp_s0 = (var_s1 & 0xFF) + 3;
-            func_801A4BC0(0x41, temp_s0, 0);
-            func_801A4BC0(0x42, temp_s0, 0);
-            func_801A4BC0(0x43, temp_s0, 0);
-            func_801A4BC0(0x44, temp_s0, 0);
-            var_s1 += 1;
-        } while ((u32)(var_s1 & 0xFF) < 7U);
+            value = (i & 0xFF) + 3;
+            func_801A4BC0(0x41, value, 0);
+            func_801A4BC0(0x42, value, 0);
+            func_801A4BC0(0x43, value, 0);
+            func_801A4BC0(0x44, value, 0);
+            i += 1;
+        } while ((u32)(i & 0xFF) < 7U);
         return 1;
     }
-    var_s1_2 = 0;
+    j = 0;
     do {
-        temp_s0_2 = (var_s1_2 & 0xFF) + 3;
-        func_801A4BC0(0x41, temp_s0_2, 0xA4);
-        func_801A4BC0(0x42, temp_s0_2, 0xA4);
-        func_801A4BC0(0x43, temp_s0_2, 0xA4);
-        func_801A4BC0(0x44, temp_s0_2, 0xA4);
-        var_s1_2 += 1;
-    } while ((u32)(var_s1_2 & 0xFF) < 7U);
+        value2 = (j & 0xFF) + 3;
+        func_801A4BC0(0x41, value2, 0xA4);
+        func_801A4BC0(0x42, value2, 0xA4);
+        func_801A4BC0(0x43, value2, 0xA4);
+        func_801A4BC0(0x44, value2, 0xA4);
+        j += 1;
+    } while ((u32)(j & 0xFF) < 7U);
     return 0;
 }

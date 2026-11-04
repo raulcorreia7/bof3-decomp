@@ -1,16 +1,16 @@
 #include "area149_13.h"
 
 MATCH void func_801F2CD4(void) {
-    s8 temp_v0_2;
-    u8 temp_v0;
+    s8 value;
+    u8 value2;
 
-    temp_v0            = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = temp_v0;
-    if (temp_v0 & 0xFF) {
+    value2             = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = value2;
+    if (value2 & 0xFF) {
         g_AreaViewOffsetZ = (u16)g_AreaViewOffsetZ - 0x2A;
-        temp_v0_2         = (s8)g_SpadWork->tint.bytes.unk_5D;
-        if (temp_v0_2 != 0) {
-            g_SpadWork->tint.bytes.unk_5D = temp_v0_2 - 1;
+        value             = (s8)g_SpadWork->tint.bytes.unk_5D;
+        if (value != 0) {
+            g_SpadWork->tint.bytes.unk_5D = value - 1;
             g_SpadWork->tint.bytes.unk_5E -= 1;
             g_SpadWork->tint.bytes.unk_5F -= 1;
         }

@@ -1,11 +1,11 @@
 #include "area098_13.h"
 
 MATCH void func_801F3CDC(void) {
-    u8 temp_v1;
+    u8 value;
 
-    temp_v1            = g_SpadWork->unk_06;
-    g_SpadWork->unk_06 = temp_v1 + 1;
-    if (!(temp_v1 & 3)) {
+    value              = g_SpadWork->unk_06;
+    g_SpadWork->unk_06 = value + 1;
+    if (!(value & 3)) {
         func_801F526C();
     }
     func_801F5308();
