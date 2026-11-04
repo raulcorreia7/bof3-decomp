@@ -2,7 +2,7 @@
 
 MATCH void func_801F2CE0(void) {
     Actor* actor = g_SpadWork;
-    s32 y        = actor->y.fixed;
+    s32    y     = actor->y.fixed;
 
     if (y > 0x100) {
         func_801F36DC();
