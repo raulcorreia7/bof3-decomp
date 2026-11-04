@@ -54,13 +54,13 @@ MATCH void func_801EF634(void) {
     PartyBattler* dst;
 
     if (--g_SpadWork->unk_09 == 0) {
-        src      = D_801EB4E0;
-        dst      = g_SpadWork;
-        dst->coord_x_34 = src->coord_x_34;
-        dst->coord_y_38 = src->coord_y_38;
-        dst->word_3C    = src->word_3C;
-        dst->unk_14     = 0;
-        dst->unk_09     = 0;
+        src                = D_801EB4E0;
+        dst                = g_SpadWork;
+        dst->coord_x_34    = src->coord_x_34;
+        dst->coord_y_38    = src->coord_y_38;
+        dst->word_3C       = src->word_3C;
+        dst->unk_14        = 0;
+        dst->unk_09        = 0;
         g_SpadWork->unk_0A = 0x26;
         g_SpadWork->unk_02++;
     }

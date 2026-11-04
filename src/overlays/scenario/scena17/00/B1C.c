@@ -40,13 +40,13 @@ MATCH void func_801F7A84(void) {
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
-        g_AreaScrollTargetX = 0x940000;
-        g_AreaCameraStep    = 0x20;
-        *timer              = 0x80;
+        g_AreaScrollTargetX  = 0x940000;
+        g_AreaCameraStep     = 0x20;
+        *timer               = 0x80;
         g_AreaCameraAngle.vx = -0x16A;
         g_AreaCameraAngle.vz = 0x200;
-        g_AreaDrawFlags     = 0x1F;
-        D_80146874          = D_80146874 + 1;
+        g_AreaDrawFlags      = 0x1F;
+        D_80146874           = D_80146874 + 1;
     }
     func_801F88CC(0, 0x80);
 }

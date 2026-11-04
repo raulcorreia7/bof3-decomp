@@ -28,23 +28,23 @@ extern SceneFunc D_801FDF8C[];
 extern u8        D_801FDFC4;
 extern u8        D_801FDFC8;
 
-void func_801F8358(void);
-void func_801F83D0(u8* row);
-void func_801F88B8(void* table);
-void func_801F8BE8(void* table);
+void       func_801F8358(void);
+void       func_801F83D0(u8* row);
+void       func_801F88B8(void* table);
+void       func_801F8BE8(void* table);
 extern u16 D_800E4C1E;
 
 /* The panel fade step func_801F72E0 and func_801F80F0 share: draw the panel table, dim it by 12 and
  * advance the actor when its countdown ends. Every change must keep both members matching. */
-#define SCENA07_PANEL_FADE_STEP()                         \
-    func_801F88B8(MEM_PTR(void, 0x800E48E0u));            \
-    func_801F8BE8(MEM_PTR(void, 0x800E48E0u));            \
-    D_800E4C1E -= 0xC;                                    \
-    if (--g_SpadWork->unk_09 == 0) {                      \
-        g_SpadWork->state_02++;                           \
+#define SCENA07_PANEL_FADE_STEP()              \
+    func_801F88B8(MEM_PTR(void, 0x800E48E0u)); \
+    func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \
+    D_800E4C1E -= 0xC;                         \
+    if (--g_SpadWork->unk_09 == 0) {           \
+        g_SpadWork->state_02++;                \
     }
-s32  func_801F85D8(void);
-s32  func_801F9EFC(void);
+s32 func_801F85D8(void);
+s32 func_801F9EFC(void);
 
 extern Callback D_801FDD14[];
 
