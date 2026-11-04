@@ -147,7 +147,20 @@ MATCH void func_801F03FC(void) {
 
 INCLUDE_ASM(func_801F047C);
 
-INCLUDE_ASM(func_801F04DC);
+MATCH void func_801F04DC(void) {
+    Actor* work;
+    u8     timer;
+
+    work         = g_SpadWork;
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    work->unk_40 = work->unk_40 - 0x800;
+    work->unk_44 = work->unk_44 - 0x1000;
+    if (timer == 0) {
+        D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F0548(void) {
     func_801E5988();
