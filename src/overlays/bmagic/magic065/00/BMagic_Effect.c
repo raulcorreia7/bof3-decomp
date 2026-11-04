@@ -8,7 +8,21 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC90);
 
-INCLUDE_ASM(func_801EF08C);
+MATCH void func_801EF08C(void) {
+    u8 counter;
+
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        if (g_SpadWork->word_08.byte.unk_09 == 0x1E) {
+            func_800AEF98(4, 0);
+            BATTLE_ACTIVE_WORK->flags_00 &= 0xBF;
+        }
+        counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
+        g_SpadWork->word_08.byte.unk_09 = counter;
+        if (!(counter & 0xFF)) {
+            g_SpadWork->step_01 += 1;
+        }
+    }
+}
 
 MATCH void func_801EF134(void) {
     u16 item;
