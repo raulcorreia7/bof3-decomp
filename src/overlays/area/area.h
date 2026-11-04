@@ -9,7 +9,6 @@
 #include "sys/exe.h"
 #include "sys/scene.h"
 #include "gfx/vram.h"
-#include "area/counter.h"
 #include "area/fishing.h"
 #include "work/actor.h"
 #include "menu/inventory.h"

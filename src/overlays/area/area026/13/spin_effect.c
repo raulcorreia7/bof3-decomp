@@ -527,17 +527,9 @@ MATCH void func_801F31EC(void) {
     SYS_SetFlag(g_SceneFlags, 0x33u);
 }
 
-MATCH void func_801F3230(void) {
-    u16 count_;
+#include "overlays/area/Area_SubViewOffsetY20.h"
 
-    COUNTER_STEP(g_AreaViewOffsetY, g_AreaViewRefreshCount, count_, -)
-}
-
-MATCH void func_801F3258(void) {
-    u16 count_;
-
-    COUNTER_STEP(g_AreaViewOffsetY, g_AreaViewRefreshCount, count_, +)
-}
+#include "overlays/area/Area_AddViewOffsetY20.h"
 
 MATCH void func_801F3280(void) {
     g_AreaViewOffsetY      = 0;

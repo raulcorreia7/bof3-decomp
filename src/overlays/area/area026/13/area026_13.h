@@ -22,8 +22,10 @@ void func_801F3124(void);
 void func_801F3174(void);
 void func_801F319C(void);
 void func_801F31C4(void);
-void func_801F3230(void);
-void func_801F3258(void);
+/* func_801F3230 */
+void Area_SubViewOffsetY20(void);
+/* func_801F3258 */
+void Area_AddViewOffsetY20(void);
 void func_801F3280(void);
 void func_801F32B8(void);
 void func_801F3338(void);

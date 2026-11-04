@@ -2084,6 +2084,8 @@ Menu_DrawHeaderBar = { addr = 0x801F3D88, type = "func", source = "draws the hea
 Area_AddViewOffsetX20 = { addr = 0x801F450C, type = "func", source = "adds 0x14 to g_AreaViewOffsetX, the X term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 Area_SubViewOffsetX20 = { addr = 0x801F4534, type = "func", source = "subtracts 0x14 from g_AreaViewOffsetX, the X term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 Area_ResetViewOffsetX = { addr = 0x801F455C, type = "func", source = "zeroes g_AreaViewOffsetX, the X term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
+Area_AddViewOffsetY20 = { addr = 0x801F4578, type = "func", source = "adds 0x14 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
+Area_SubViewOffsetY20 = { addr = 0x801F45A0, type = "func", source = "subtracts 0x14 from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetViewOffsetY = { addr = 0x801F45C8, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 
 ["emi/world00/area015/13"]
@@ -2117,6 +2119,8 @@ Area_ResetViewOffsetY = { addr = 0x801F2D88, type = "func", source = "zeroes g_A
 
 ["emi/world00/area026/13"]
 Message_SelectAnswerValue = { addr = 0x801F305C, type = "func", source = "resets the area request and stores the selection-selected state value" }
+Area_SubViewOffsetY20 = { addr = 0x801F3230, type = "func", source = "subtracts 0x14 from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
+Area_AddViewOffsetY20 = { addr = 0x801F3258, type = "func", source = "adds 0x14 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 
 ["emi/world00/area028/13"]
 g_RingScreenPoints = { addr = 0x800E4A04, source = "position_ring.c indexes the screen-point ring by byte offset 0x4A04 from base 0x800E0000" }
