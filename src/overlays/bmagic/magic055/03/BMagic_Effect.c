@@ -14,7 +14,25 @@ INCLUDE_ASM(func_801EEEA8);
 
 #include "overlays/bmagic/func_801EEF74.h"
 
-INCLUDE_ASM(func_801EEFFC);
+MATCH void func_801EEFFC(void) {
+    u8            timer;
+    PartyBattler* src;
+    PartyBattler* work;
+
+    timer              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = timer;
+    if (timer == 0) {
+        src                 = BATTLE_ACTIVE_WORK;
+        work                = g_SpadWork;
+        work->coord_x_34    = src->coord_x_34;
+        work->coord_y_38    = src->coord_y_38;
+        work->word_3C       = src->word_3C;
+        work->unk_09        = 0x40;
+        g_SpadWork->unk_0A  = 0;
+        g_SpadWork->unk_0B  = 0;
+        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF09C);
 
