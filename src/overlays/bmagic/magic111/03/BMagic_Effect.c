@@ -79,4 +79,5 @@ MATCH void Effect_TickOnTimerZero_801EF914(void) {
 
     BMAGIC_TICK_ON_TIMER_ZERO(2);
 }
+
 INCLUDE_ASM(func_801EF970);

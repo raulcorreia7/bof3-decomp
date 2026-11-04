@@ -9,7 +9,7 @@
 #endif
 /* The statements of Effect_ReloadTimerAndStep; each member has no locals. */
 #define BMAGIC_RELOAD_TIMER_AND_STEP()          \
-    g_SpadWork->unk_09 = EFFECT_TIMER_RELOAD();  \
+    g_SpadWork->unk_09 = EFFECT_TIMER_RELOAD(); \
     g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1
 
 MATCH void Effect_ReloadTimerAndStep(void) {
