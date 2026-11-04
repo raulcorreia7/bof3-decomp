@@ -1950,8 +1950,10 @@ Scene_ShowMessage = { addr = 0x801F9FD0, type = "func", source = "starts the are
 
 ["emi/scenario/scena05/00"]
 Scene_RemoveMomo = { addr = 0x801FD530, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_RemovePeco = { addr = 0x801FD558, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena06/00"]
+Scene_RemovePeco = { addr = 0x801FE30C, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveMomo = { addr = 0x801FE364, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena07/00"]
@@ -1964,15 +1966,18 @@ AngleAverage12 = { addr = 0x801F9420, type = "func", source = "averages two 12-b
 
 ["emi/scenario/scena09/00"]
 Scene_RemoveMomo = { addr = 0x801FE30C, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_RemovePeco = { addr = 0x801FE334, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena10/00"]
 Scene_RemoveMomo = { addr = 0x801FE614, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena11/00"]
+Scene_RemovePeco = { addr = 0x801FAE48, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveMomo = { addr = 0x801FAE70, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena12/00"]
 Menu_DrawHeaderBar = { addr = 0x801F765C, type = "func", source = "draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952); byte-equal copy in the start, sisyou, Bate, Shisu, shop, commu02, scena12 and area008 images" }
+Scene_RemovePeco = { addr = 0x801FD100, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveMomo = { addr = 0x801FD128, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena13/00"]

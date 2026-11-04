@@ -311,10 +311,7 @@ MATCH void func_801FE2E4(void) {
     func_801C1630();
 }
 
-MATCH void func_801FE30C(void) {
-    func_801C1ABC(6);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_RemovePeco.h"
 
 MATCH void func_801FE334(void) {
     func_801C1ABC(6);
