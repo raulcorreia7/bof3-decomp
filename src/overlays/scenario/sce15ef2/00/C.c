@@ -65,14 +65,14 @@ MATCH void func_801D0DE8(void) {
     work         = g_SpadWork;
     work->unk_2E = 300;
     work->unk_09 = 0;
-    Scene_ClearSlots();
+    Scene_ClearScanBars();
     g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
 }
 
 INCLUDE_ASM(func_801D0E30);
 
 MATCH void func_801D0EC4(void) {
-    if (!(func_801D1624(0xF0) & BYTE_MASK)) {
+    if (!(Scene_StepScanBars(0xF0) & BYTE_MASK)) {
         Actor_Clear();
     }
 }
@@ -144,15 +144,14 @@ INCLUDE_ASM(func_801D11A4);
 
 INCLUDE_ASM(func_801D1218);
 
-INCLUDE_ASM(func_801D1414);
+INCLUDE_ASM(Scene_DrawScanBar);
 
-#include "overlays/scenario/Scene_ClearSlots.h"
+#include "overlays/scenario/Scene_ClearScanBars.h"
 
-#include "overlays/scenario/Scene_ClaimSlot.h"
+#include "overlays/scenario/Scene_ClaimScanBar.h"
 
-/* Walks the 16 six-byte slots at 0x800E4800 and returns 1 when one is active. A slot in state 0 takes `countdown` into its
- * halfword at +2; in state 2 that halfword drops by 8 per call and the slot is released once it goes negative. */
-INCLUDE_ASM(func_801D1624);
+/* Not matched: retail keeps the case constant 1 in v0 apart from the in-use flag in s3; candidates share s3 (first byte difference +0x8C). */
+INCLUDE_ASM(Scene_StepScanBars);
 
 INCLUDE_ASM(func_801D17A0);
 

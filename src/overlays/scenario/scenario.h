@@ -18,9 +18,24 @@
 #define SCRATCH_COLUMN_COUNT  0x80
 #define SCRATCH_COLUMN_OFFSET 0
 #define SCRATCH_COLUMN_STRIDE 0x14
+#define SCAN_BAR_COUNT        16
+
+typedef struct ScanBar {
+    /* 0x00 */ u8  in_use;
+    /* 0x01 */ u8  unk_01;
+    /* 0x02 */ u8  state;
+    /* 0x03 */ u8  half_height;
+    /* 0x04 */ s16 y;
+} ScanBar;
+
+ASSERT_SIZE(ScanBar, 6);
+ASSERT_OFFSET(ScanBar, in_use, 0x00);
+ASSERT_OFFSET(ScanBar, state, 0x02);
+ASSERT_OFFSET(ScanBar, half_height, 0x03);
+ASSERT_OFFSET(ScanBar, y, 0x04);
 
 /* The scene context record the entity dispatchers pass to their handler. */
-#define g_SceneFlags          ((void*)g_SceneFlags)
+#define g_SceneFlags ((void*)g_SceneFlags)
 
 /* Advance the current actor's state byte. */
 static inline void Scene_AdvanceActorState(void) {

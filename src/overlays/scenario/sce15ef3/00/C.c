@@ -140,7 +140,7 @@ MATCH void func_801D15CC(void) {
     work         = g_SpadWork;
     work->unk_2E = 300;
     work->unk_09 = 0;
-    Scene_ClearSlots();
+    Scene_ClearScanBars();
     g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
 }
 
@@ -206,10 +206,11 @@ INCLUDE_ASM(func_801D230C);
 
 INCLUDE_ASM(func_801D23AC);
 
-INCLUDE_ASM(func_801D2424);
+INCLUDE_ASM(Scene_DrawScanBar);
 
-#include "overlays/scenario/Scene_ClearSlots.h"
+#include "overlays/scenario/Scene_ClearScanBars.h"
 
-#include "overlays/scenario/Scene_ClaimSlot.h"
+#include "overlays/scenario/Scene_ClaimScanBar.h"
 
-INCLUDE_ASM(func_801D2634);
+/* Not matched: retail keeps the case constant 1 in v0 apart from the in-use flag in s3; candidates share s3 (first byte difference +0x8C). */
+INCLUDE_ASM(Scene_StepScanBars);

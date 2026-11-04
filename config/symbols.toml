@@ -2055,12 +2055,16 @@ Scene_DrawBands = { addr = 0x801D165C, type = "func", source = "draws 17 depth s
 Area_InitSpin = { addr = 0x801D1F68, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 
 ["emi/scenario/sce15ef2/00"]
-Scene_ClearSlots = { addr = 0x801D15B0, type = "func", source = "clears the state byte of 16 six-byte slots; byte-equal to func_801D25C0 of sce15ef3 with another slot base" }
-Scene_ClaimSlot = { addr = 0x801D15DC, type = "func", source = "sets the state byte of the first free of 16 six-byte slots to 1 and clears its halfword at +2; byte-equal to func_801D25EC of sce15ef3 with another slot base" }
+Scene_DrawScanBar = { addr = 0x801D1414, type = "func", source = "draws one scan bar as two semi-transparent gradient quads across x 0..320 above and below y, each as tall as the half height plus the frame parity; byte-equal to the twin of the other image" }
+Scene_ClearScanBars = { addr = 0x801D15B0, type = "func", source = "clears the in-use byte of each of the 16 scan bars; byte-equal to Scene_ClearScanBars of sce15ef3 with another bar base" }
+Scene_ClaimScanBar = { addr = 0x801D15DC, type = "func", source = "marks the first free of the 16 scan bars in use and resets its state byte; byte-equal to Scene_ClaimScanBar of sce15ef3 with another bar base" }
+Scene_StepScanBars = { addr = 0x801D1624, type = "func", source = "steps and draws the 16 scan bars: state 0 sets half height 4 and y to the argument, state 1 waits, state 2 lowers y by 8 per call and frees the bar once y is negative; returns 1 when a bar is live; byte-equal to the twin of the other image with another bar base" }
 
 ["emi/scenario/sce15ef3/00"]
-Scene_ClearSlots = { addr = 0x801D25C0, type = "func", source = "clears the state byte of 16 six-byte slots; byte-equal to func_801D15B0 of sce15ef2 with another slot base" }
-Scene_ClaimSlot = { addr = 0x801D25EC, type = "func", source = "sets the state byte of the first free of 16 six-byte slots to 1 and clears its halfword at +2; byte-equal to func_801D15DC of sce15ef2 with another slot base" }
+Scene_DrawScanBar = { addr = 0x801D2424, type = "func", source = "draws one scan bar as two semi-transparent gradient quads across x 0..320 above and below y, each as tall as the half height plus the frame parity; byte-equal to the twin of the other image" }
+Scene_ClearScanBars = { addr = 0x801D25C0, type = "func", source = "clears the in-use byte of each of the 16 scan bars; byte-equal to Scene_ClearScanBars of sce15ef2 with another bar base" }
+Scene_ClaimScanBar = { addr = 0x801D25EC, type = "func", source = "marks the first free of the 16 scan bars in use and resets its state byte; byte-equal to Scene_ClaimScanBar of sce15ef2 with another bar base" }
+Scene_StepScanBars = { addr = 0x801D2634, type = "func", source = "steps and draws the 16 scan bars: state 0 sets half height 4 and y to the argument, state 1 waits, state 2 lowers y by 8 per call and frees the bar once y is negative; returns 1 when a bar is live; byte-equal to the twin of the other image with another bar base" }
 
 ["emi/scenario/scena00/00"]
 Scene_DispatchActor = { addr = 0x801FC7D0, type = "func", source = "entry_04 of the scena00 handler block, dispatches the entity through D_801FCA84 by byte 0x7A of the entity record" }
