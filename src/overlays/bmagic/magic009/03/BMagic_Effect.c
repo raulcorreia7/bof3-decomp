@@ -50,7 +50,10 @@ INCLUDE_ASM(func_801EF3B8);
 
 INCLUDE_ASM(func_801EF6B0);
 
-INCLUDE_ASM(func_801EF740);
+MATCH void func_801EF740(void) {
+    g_SpadWork->unk_09 = func_800B0058();
+    g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+}
 
 INCLUDE_ASM(func_801EF788);
 
