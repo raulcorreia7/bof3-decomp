@@ -52,4 +52,6 @@ extern s8       D_80146874;
 extern u8       D_80146875;
 extern u16      g_GameAreaId;
 
+s32 func_8019601C();
+
 #endif
