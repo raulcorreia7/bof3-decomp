@@ -35,14 +35,7 @@ INCLUDE_ASM(func_801EF1DC);
 
 INCLUDE_ASM(func_801EF2F8);
 
-MATCH void func_801EF528(void) {
-    PartyBattler* work;
-
-    work = g_SpadWork;
-    if (work->word_08.byte.unk_0B == 0) {
-        work->unk_02++;
-    }
-}
+#include "overlays/bmagic/Effect_StepOnZeroTick.h"
 
 INCLUDE_ASM(func_801EF55C);
 
