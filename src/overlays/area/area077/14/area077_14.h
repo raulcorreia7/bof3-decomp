@@ -29,4 +29,6 @@ void        Area_ProjectPoint(s32* pos, long* screen_xy);
 extern void func_801F54B8(void);
 void        func_801F61F0(s32 type);
 
+void func_801F529C(s32, s32, s32, s32);
+
 #endif
