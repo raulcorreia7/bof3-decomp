@@ -63,7 +63,14 @@ INCLUDE_ASM(func_801EF478);
 
 INCLUDE_ASM(func_801EF578);
 
-INCLUDE_ASM(func_801EF644);
+MATCH void func_801EF644(void) {
+    g_SpadWork->coord_x_34.raw += g_SpadWork->unk_0C;
+    g_SpadWork->coord_y_38.raw += g_SpadWork->unk_10;
+    func_8014DAEC();
+    if (g_SpadWork->coord_x_34.raw == g_SpadWork->unk_18 && g_SpadWork->coord_y_38.raw == g_SpadWork->unk_1C) {
+        g_SpadWork->unk_02++;
+    }
+}
 
 MATCH void func_801EF6CC(void) {
     PartyBattler* work;
