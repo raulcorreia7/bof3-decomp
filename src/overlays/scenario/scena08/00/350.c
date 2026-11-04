@@ -16,7 +16,7 @@ MATCH void func_801F6F8C(void) {
     Actor* work;
 
     func_801F7DE8();
-    work         = (Actor*)g_SpadWork;
+    work         = g_SpadWork;
     work->unk_0C = 0;
     work->unk_01 += 1;
 }
@@ -71,7 +71,7 @@ MATCH void func_801F79B0(void) {
     Actor* work;
 
     func_801F8AE8();
-    work           = (Actor*)g_SpadWork;
+    work           = g_SpadWork;
     work->unk_5A   = 0x40;
     work->state_02 = work->state_02 + 1;
 }
@@ -97,11 +97,11 @@ INCLUDE_ASM(func_801F7C98);
 MATCH void func_801F7CF8(void) {
     u8 timer;
 
-    timer                        = ((Actor*)g_SpadWork)->unk_09 - 1;
-    ((Actor*)g_SpadWork)->unk_09 = timer;
+    timer              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = timer;
     if (timer == 0) {
-        ((Actor*)g_SpadWork)->unk_09   = 8;
-        ((Actor*)g_SpadWork)->state_02 = ((Actor*)g_SpadWork)->state_02 + 1;
+        g_SpadWork->unk_09   = 8;
+        g_SpadWork->state_02 = g_SpadWork->state_02 + 1;
     }
 }
 

@@ -22,11 +22,11 @@ INCLUDE_ASM(func_801D0CA0);
 MATCH void func_801D0D00(void) {
     u8 timer;
 
-    timer                        = ((Actor*)g_SpadWork)->unk_09 - 1;
-    ((Actor*)g_SpadWork)->unk_09 = timer;
+    timer              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = timer;
     if (timer == 0) {
-        ((Actor*)g_SpadWork)->unk_09 = 0x10;
-        ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+        g_SpadWork->unk_09 = 0x10;
+        g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
     }
 }
 
@@ -39,11 +39,11 @@ MATCH void func_801D0DA4(void) {
 MATCH void func_801D0DE8(void) {
     Actor* work;
 
-    work         = (Actor*)g_SpadWork;
+    work         = g_SpadWork;
     work->unk_2E = 300;
     work->unk_09 = 0;
     func_801D15B0();
-    ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
 }
 
 INCLUDE_ASM(func_801D0E30);
@@ -59,11 +59,11 @@ INCLUDE_ASM(func_801D0EF8);
 MATCH void func_801D0F68(void) {
     Actor* work;
 
-    work                         = (Actor*)g_SpadWork;
-    work->unk_09                 = 10;
-    work->unk_2E                 = 0;
-    work->unk_30                 = 0;
-    ((Actor*)g_SpadWork)->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    work               = g_SpadWork;
+    work->unk_09       = 10;
+    work->unk_2E       = 0;
+    work->unk_30       = 0;
+    g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
 }
 
 INCLUDE_ASM(func_801D0F9C);

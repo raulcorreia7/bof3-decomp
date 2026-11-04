@@ -21,13 +21,13 @@ INCLUDE_ASM(func_801F6EA4);
 INCLUDE_ASM(func_801F6F2C);
 
 MATCH void func_801F6FF8(void) {
-    Actor* actor;
+    Actor* work;
 
-    func_801F7084(&((Actor*)g_SpadWork)->unk_0C);
-    actor = (Actor*)g_SpadWork;
-    actor->unk_09--;
-    if (actor->unk_09 == 0) {
-        ((Actor*)g_SpadWork)->unk_01++;
+    func_801F7084(&g_SpadWork->unk_0C);
+    work = g_SpadWork;
+    work->unk_09--;
+    if (work->unk_09 == 0) {
+        g_SpadWork->unk_01++;
     }
 }
 
@@ -63,7 +63,7 @@ MATCH void func_801F7AC8(void) {
     Actor* work;
 
     func_801F7FCC();
-    work = (Actor*)g_SpadWork;
+    work = g_SpadWork;
     work->unk_01 += 1;
 }
 
