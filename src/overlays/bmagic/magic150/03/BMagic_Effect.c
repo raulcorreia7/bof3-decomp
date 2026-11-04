@@ -37,7 +37,13 @@ INCLUDE_ASM(func_801EEF80);
 
 INCLUDE_ASM(func_801EF040);
 
-INCLUDE_ASM(func_801EF254);
+MATCH void func_801EF254(void) {
+    SetDrawMode((DR_MODE *) g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 0x2C0, 0x100) & 0xFFFF, NULL);
+    GFX_AddPrim(1U, 0xCU);
+    func_801AFE18();
+    func_801EF040();
+    func_801EF4E0();
+}
 
 INCLUDE_ASM(func_801EF2C0);
 
