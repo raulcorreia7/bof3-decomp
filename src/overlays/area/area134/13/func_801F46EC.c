@@ -28,7 +28,6 @@ MATCH void func_801F46EC(const void* sprite) {
     primitive->clut  = GetClut(160, 483);
     primitive->tpage = GetTPage(0, 1, 704, 256);
     shade            = VOL(u8, work->flags_03);
-    /* NOTE: the stores run b, g, r; setRGB0 would run r, g, b. */
     primitive->b0    = shade;
     primitive->g0    = shade;
     primitive->r0    = shade;
