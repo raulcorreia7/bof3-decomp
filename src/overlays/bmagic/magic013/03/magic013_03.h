@@ -11,6 +11,9 @@ extern Callback     D_801F03DC[];
 extern BattleEffect D_801F03E4[];
 #define BMAGIC_EFFECT_SLOTS D_801F03E4
 #define BMAGIC_EFFECT_COUNT 64
+/* Defined by the battle overlay. */
+u8   Battle_SlotIsBlocked(u32 slot);
+s32  func_800AED5C(s32 arg0, u32 battler_index);
 void func_801EF4F0(void);
 void func_801F00A8(void);
 void func_801F0164(void);
