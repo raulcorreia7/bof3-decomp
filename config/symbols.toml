@@ -528,6 +528,7 @@ g_BMagicEffectFuncs = { addr = 0x801F08E8, source = "the module dispatcher index
 ["emi/bmagic/magic105/03"]
 Effect_PlayOnZeroTick = { addr = 0x801EEF18, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_TickOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "when the effect ticker is zero, ticks the other battler's ticker down and runs the effect step" }
+BMagic_AllocEffect = { addr = 0x801EFC8C, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 g_BMagicEffectFuncs = { addr = 0x801F0048, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic106/03"]
