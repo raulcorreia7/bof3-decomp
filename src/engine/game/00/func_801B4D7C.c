@@ -139,6 +139,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                                 goto block_32; /* retail branch */
                             }
                         }
+                        /* Duplicate return node #76. Try simplifying control flow for better match */
                         return val7;
                     }
                     goto loop_20; /* retail branch */
@@ -205,6 +206,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                                 FIELD(s16, (&D_1F800000), 0x2u) = (s16)(FIELD(s16, (&D_1F800000), 0x2u) + 1);
                                 val7                            = 0;
                                 if (val1 >= 3) {
+                                    /* Duplicate return node #76. Try simplifying control flow for better match */
                                     return val7;
                                 }
                                 goto loop_74; /* retail branch */
@@ -217,6 +219,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                     g_SpadWork->direction_08 = 7U;
                     return 1U;
                 }
+                /* Duplicate return node #76. Try simplifying control flow for better match */
                 return val7;
             }
             goto loop_58; /* retail branch */
@@ -292,6 +295,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                 g_SpadWork->direction_08 = 1U;
                 return 1U;
             }
+            /* Duplicate return node #76. Try simplifying control flow for better match */
             return val7;
         }
         goto loop_34; /* retail branch */
