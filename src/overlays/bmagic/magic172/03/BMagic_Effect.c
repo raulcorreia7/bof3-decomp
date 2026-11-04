@@ -28,7 +28,17 @@ INCLUDE_ASM(func_801EF3A4);
 
 INCLUDE_ASM(func_801EF430);
 
-INCLUDE_ASM(func_801EF4BC);
+MATCH void func_801EF4BC(void) {
+    PartyBattler* work;
+
+    work = g_SpadWork;
+    work->unk_09 -= 2;
+    if (work->unk_09 == 0) {
+        work = (PartyBattler*)D_801EB4E0;
+        work->unk_0B--;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF518);
 
@@ -36,6 +46,7 @@ INCLUDE_ASM(func_801EF590);
 
 INCLUDE_ASM(func_801EF650);
 
+/* needs: type. Effect_TickOnTimerZero shape; retail tests the work byte as signed (sll 24, bgez after a -2 step) where the unk_09 member is u8 in PartyBattler; first differing instruction is andi v0,v0,0xff against sll v0,v0,24. */
 INCLUDE_ASM(func_801EF770);
 
 INCLUDE_ASM(func_801EF7CC);
