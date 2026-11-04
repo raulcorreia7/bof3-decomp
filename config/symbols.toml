@@ -729,12 +729,14 @@ g_BMagicEffectFuncs = { addr = 0x801F04D0, source = "the module dispatcher index
 
 ["emi/bmagic/magic145/03"]
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
+Effect_NextStepOnZeroTick = { addr = 0x801EEDB0, type = "func", source = "advances the step byte at +0x01 when the effect ticker byte at +0x0B is zero; one body shared with the other bmagic overlays" }
 Effect_PlayOnce = { addr = 0x801EEDE4, type = "func", source = "plays the effect the target selector chose and clears it" }
 Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF034, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through Bmagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
 Effect_CountDownTimer = { addr = 0x801EF0A0, type = "func", source = "counts the effect timer down and finishes the effect at zero" }
 g_BMagicEffectFuncs = { addr = 0x801EF414, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic146/03"]
+Effect_NextStepOnZeroTick = { addr = 0x801EEFD0, type = "func", source = "advances the step byte at +0x01 when the effect ticker byte at +0x0B is zero; one body shared with the other bmagic overlays" }
 Effect_PlayOnce = { addr = 0x801EF004, type = "func", source = "plays the effect the target selector chose and clears it" }
 Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF520, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through Bmagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801EF900, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
