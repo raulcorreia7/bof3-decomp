@@ -15,7 +15,17 @@ MATCH void func_801D0C80(void) {
 
 INCLUDE_ASM(func_801D0CBC);
 
-INCLUDE_ASM(func_801D0D60);
+MATCH void func_801D0D60(void) {
+    u8 temp_v1;
+
+    temp_v1    = D_801D1948 - 1;
+    D_801D1948 = temp_v1;
+    func_801D1250(0x32, (s16)(0x28 - ((temp_v1 & 0xFF) * 0x32)));
+    if (D_801D1948 == 0) {
+        D_801F294D = 0;
+        D_801F294C += 1;
+    }
+}
 
 MATCH void func_801D0DEC(void) {
     SYS_DISPATCH_BYTE(D_801D18DC, D_801F294D);
