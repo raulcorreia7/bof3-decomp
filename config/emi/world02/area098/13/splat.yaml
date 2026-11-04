@@ -50,7 +50,7 @@ segments:
       - [0x23EC, c, func_801F4FEC]
       - [0x2450, c, func_801F5050]
       - [0x2640, c, Area_ClearWorkColumn]
-      - [0x266C, c, func_801F526C]
+      - [0x266C, c, Area_ClaimSpawnSlot]
       - [0x2708, c, func_801F5308]
       - [0x27BC, c, func_801F53BC]
       - [0x2980, c, Area_DrawSpinTriangle]

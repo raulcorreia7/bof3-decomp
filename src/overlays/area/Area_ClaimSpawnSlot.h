@@ -1,6 +1,9 @@
-#include "area098_13.h"
-
-MATCH void func_801F526C(void) {
+/* Claims the first free slot of the eight-slot spawn table at the work window:
+ * sets the active byte and copies the actor position into it. One definition
+ * shared by the world area overlays; every change here must verify every
+ * member. */
+/* func_801F526C (area098), func_801F3DE0 (area188) */
+MATCH void Area_ClaimSpawnSlot(void) {
     AreaSpawnSlot* slot;
     u8             i;
 

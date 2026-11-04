@@ -40,7 +40,8 @@ void Area_SetCellCode(s16 column, s16 row, u8 code);
 void Area_ProjectPoint(s32* pos, long* screen_xy);
 
 void func_801F3E7C(void);
-void func_801F3DE0(void);
+/* func_801F3DE0 */
+void Area_ClaimSpawnSlot(void);
 void func_801F44B4(void);
 
 #endif

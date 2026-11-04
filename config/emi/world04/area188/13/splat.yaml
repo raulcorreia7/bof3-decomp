@@ -30,7 +30,7 @@ segments:
       - [0xCE0, c, func_801F38E0]
       - [0xEDC, c, func_801F3ADC]
       - [0x11B4, c, Area_ClearWorkColumn]
-      - [0x11E0, c, func_801F3DE0]
+      - [0x11E0, c, Area_ClaimSpawnSlot]
       - [0x127C, c, func_801F3E7C]
       - [0x1330, c, func_801F3F30]
       - [0x14F4, c, Area_DrawSpinTriangle]
