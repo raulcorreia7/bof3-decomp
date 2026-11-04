@@ -76,9 +76,9 @@ MATCH void func_801D3D00(void) {
             }
             SND_PlayCue(EMI_CUE_ID(1, 3));
             Menu_SwapBytes(&D_801C893C[panel->group][panel->drawn_cursor],
-                          &D_801C893C[panel->group][panel->group_cursor]);
+                           &D_801C893C[panel->group][panel->group_cursor]);
             Menu_SwapBytes(&D_801C8950[panel->group][panel->drawn_cursor],
-                          &D_801C8950[panel->group][panel->group_cursor]);
+                           &D_801C8950[panel->group][panel->group_cursor]);
             panel->drawn_cursor = 0xFF;
         } else if (g_InputPressed & D_80145AC4) {
             SND_PlayCue(EMI_CUE_ID(1, 6));
