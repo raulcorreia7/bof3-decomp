@@ -1,3 +1,11 @@
 #include "area082_13.h"
 
-INCLUDE_ASM(func_801F3408);
+MATCH void func_801F3408(void) {
+    if (g_FrameCount & 1) {
+        func_801F393C();
+    }
+    func_801F3AAC();
+    if (*g_ScriptVars == 0x29) {
+        g_SpadWork->unk_01++;
+    }
+}
