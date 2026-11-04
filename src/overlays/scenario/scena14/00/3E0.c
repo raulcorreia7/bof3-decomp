@@ -22,7 +22,7 @@ INCLUDE_ASM(func_801F7028);
 /* Greys the 32 palettes of 256 u16 at 0x80037800 (stride 0x200): each channel becomes (r + g + b) / 3 as an unsigned
  * divide, bit 15 kept, then g_GfxPalettePending = 1. Closest form hoists the row (row = base + (palette << 9)) and indexes
  * row[index]; it stays 4 bytes short and puts the color in a0 where retail uses a1 (first differing instruction +0x30:
- * lhu a1,0(a2)). */
+ * lhu a1,0(a2)). Round 5: with a do-while inner loop, `entry = (u16*)(index * 2 + (u32)row)` and `grey | (grey << 5) | (grey << 10) | (color & 0x8000)` every instruction matches up to +0x68, where retail holds the grey in v0 and shifts through v1 while the candidate swaps them. */
 INCLUDE_ASM(func_801F7960);
 
 INCLUDE_ASM(func_801F7A18);
