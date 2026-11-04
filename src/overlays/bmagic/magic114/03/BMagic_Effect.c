@@ -62,7 +62,14 @@ INCLUDE_ASM(func_801EF8C0);
 
 INCLUDE_ASM(func_801EFA80);
 
-INCLUDE_ASM(func_801EFDD8);
+MATCH void func_801EFDD8(void) {
+    SYS_DISPATCH_BYTE(D_801F1230, g_SpadWork->unk_02);
+    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+        func_801F093C();
+        func_801F04D4(g_SpadWork->word_08.byte.unk_0B);
+        func_801F0004();
+    }
+}
 
 INCLUDE_ASM(func_801EFE70);
 
