@@ -12,4 +12,6 @@ extern Callback D_801F49A0[];
 
 extern s8 D_801F4990[];
 
+extern u8 D_80144EA0[];
+
 #endif
