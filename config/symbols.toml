@@ -595,6 +595,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EEE80, type = "func", source = "plays the 
 
 ["emi/bmagic/magic107/03"]
 Effect_PlayOnIdleTick = { addr = 0x801EED40, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
+Effect_SetActorMatrixQuarterRoll = { addr = 0x801EFA18, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera, with the rotation rolled by ONE / 4 about z (rot.vz) when bit 0 of work byte +0x08 is set; one body shared with the other bmagic overlays" }
 
 ["emi/bmagic/magic108/03"]
 Effect_PlayOnIdleTick = { addr = 0x801EED1C, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
@@ -780,6 +781,7 @@ Effect_StepOnZeroTick = { addr = 0x801F00B4, type = "func", source = "advances t
 Effect_SetActorMatrix = { addr = 0x801F01BC, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 Effect_CountDownTimerRaiseTicker = { addr = 0x801F1318, type = "func", source = "raises the effect ticker byte at +0x0B, counts the effect timer at +0x09 down and advances the effect step byte at +0x02 at zero; one body shared with the other bmagic overlays" }
 Effect_CountDownByTwoAndFinish = { addr = 0x801F1380, type = "func", source = "raises the active ticker byte at +0x0B, counts the effect counter at +0x0A down by two and, at zero, lowers the active battler's ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
+Effect_SetActorMatrixQuarterRoll = { addr = 0x801F1408, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera, with the rotation rolled by ONE / 4 about z (rot.vz) when bit 0 of work byte +0x08 is set; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix_801F1DC0 = { addr = 0x801F1DC0, type = "func", source = "byte-identical to Effect_SetActorMatrix at emi/bmagic/magic151/03@0x801F01BC" }
 g_BMagicEffectFuncs = { addr = 0x801F24A4, source = "the module dispatcher indexes it with the shared spad step byte" }
 

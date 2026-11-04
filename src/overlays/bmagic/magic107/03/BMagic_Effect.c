@@ -53,28 +53,7 @@ INCLUDE_ASM(func_801EF290);
 
 INCLUDE_ASM(func_801EF544);
 
-MATCH void func_801EFA18(void) {
-    SVECTOR pos;
-    SVECTOR rot;
-    MATRIX  matrix;
-    long    flags;
-
-    PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = 0;
-    if ((g_SpadWork->word_08.byte.unk_08 & 1) != 0) {
-        rot.vz = 1024;
-    }
-    pos.vx = (g_SpadWork->coord_x_34.raw >> 9) - 0x4000;
-    pos.vy = (g_SpadWork->coord_y_38.raw >> 9) - 0x4000;
-    pos.vz = -g_SpadWork->word_3C.half.span_3E / 2;
-    RotTrans(&pos, &matrix.t, &flags);
-    RotMatrix(&rot, &matrix);
-    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
-    SetRotMatrix(&matrix);
-    SetTransMatrix(&matrix);
-}
+#include "overlays/bmagic/Effect_SetActorMatrixQuarterRoll.h"
 
 INCLUDE_ASM(func_801EFAE0);
 

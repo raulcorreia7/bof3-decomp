@@ -145,21 +145,7 @@ INCLUDE_ASM(func_801F129C);
 
 #include "overlays/bmagic/Effect_CountDownByTwoAndFinish.h"
 
-MATCH void func_801F1408(void) {
-    SVECTOR pos;
-    SVECTOR rot;
-    MATRIX  matrix;
-    long    flags;
-
-    PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = 0;
-    if (g_SpadWork->word_08.byte.unk_08 & 1) {
-        rot.vz = ONE / 4;
-    }
-    BMAGIC_PROJECT_ACTOR_MATRIX(g_SpadWork);
-}
+#include "overlays/bmagic/Effect_SetActorMatrixQuarterRoll.h"
 
 INCLUDE_ASM(func_801F14D0);
 
