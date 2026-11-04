@@ -18,7 +18,30 @@ MATCH void func_801EEE04(void) {
 
 INCLUDE_ASM(func_801EEE48);
 
-INCLUDE_ASM(func_801EEF28);
+MATCH void func_801EEF28(void) {
+    PartyBattler* temp_s0;
+    u8            temp_v0;
+
+    temp_v0            = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
+        g_SpadWork->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
+        g_SpadWork->word_3C.word   = D_801EB4E0->word_3C.word + 0x800000;
+        func_800AF764(g_SpadWork);
+        temp_s0            = g_BattleSelectedActor;
+        g_SpadWork->unk_0C = ratan2(temp_s0->coord_x_34.raw - g_SpadWork->coord_x_34.raw,
+                                    temp_s0->coord_y_38.raw - g_SpadWork->coord_y_38.raw);
+        g_SpadWork->unk_10 = 0;
+        g_SpadWork->unk_14 = (ratan2((s16)temp_s0->unk_2E.half - (s16)g_SpadWork->unk_2E.half,
+                                     (s16)temp_s0->unk_30.half - (s16)g_SpadWork->unk_30.half) -
+                              0x200) &
+                             0xFFF;
+        SND_QueueSelectionFx(0x100);
+        g_SpadWork->unk_09 = 0x20;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF04C);
 
