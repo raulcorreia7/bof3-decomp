@@ -1,13 +1,13 @@
 #include "boss013_16.h"
 
 MATCH void func_800C1DF4(void) {
-    u8* work;
+    PartyBattler* work;
 
     work = g_SpadWork;
-    if (work[0] & 0x80) {
-        work[2]++;
+    if (work->flags_00 & 0x80) {
+        work->unk_02++;
     } else {
-        FIELD(u32, work, 0x34) += 0x8000;
+        work->coord_x_34.raw += 0x8000;
         func_8014D978();
         func_8014D978();
     }
