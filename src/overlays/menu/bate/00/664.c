@@ -11,8 +11,6 @@ MATCH void func_801D153C(void) {
 }
 
 MATCH void func_801D1578(void) {
-    /* Pointer form: retail keeps one base register across the count load and
-     * the store, which a symbol access would re-materialize. */
     u8* timer = &D_80148654;
     u8  count;
 

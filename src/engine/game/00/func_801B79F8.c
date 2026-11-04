@@ -11,7 +11,6 @@ MATCH void func_801B79F8(void) {
     }
     if (g_SpadWork->unk_05 != 0) {
         func_801C2438();
-        /* Signed view: retail stores -0x80, not the u8 members' 0x80. */
         g_SpadWork->tint.signed_bytes.unk_5D = -0x80;
         g_SpadWork->tint.signed_bytes.unk_5E = -0x80;
         g_SpadWork->tint.signed_bytes.unk_5F = -0x80;
