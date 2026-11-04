@@ -6,4 +6,6 @@
 
 #include "overlays/area/world00.h"
 
+u8 func_8019601C();
+
 #endif
