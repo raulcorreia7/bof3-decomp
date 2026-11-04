@@ -14,8 +14,8 @@ MATCH void func_801EEF5C(void) {
     if (--g_SpadWork->word_08.byte.unk_09 == 0) {
         selected = &g_BattleSelectedActor;
         func_80196718(*selected);
-        g_SpadWork->word_08.byte.unk_0A = func_8019651C((u8*)*selected, 0, 0, 0, 1);
-        g_SpadWork->word_08.byte.unk_09 = 8;
+        g_SpadWork->word_08.byte.timer_0A = func_8019651C((u8*)*selected, 0, 0, 0, 1);
+        g_SpadWork->word_08.byte.unk_09   = 8;
         g_SpadWork->step_01++;
     }
 }
