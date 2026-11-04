@@ -44,13 +44,7 @@ MATCH void func_801EF340(void) {
 
 INCLUDE_ASM(func_801EF3B8);
 
-MATCH void func_801EF520(void) {
-    g_SpadWork->word_08.byte.unk_09 += 2;
-    g_SpadWork->word_08.byte.timer_0A += 2;
-    if (g_SpadWork->word_08.byte.unk_09 == 0x10) {
-        Bmagic_NextStep();
-    }
-}
+#include "overlays/bmagic/Effect_CountUpTimersByTwoNextStep.h"
 
 MATCH void func_801EF58C(void) {
     PartyBattler* work;

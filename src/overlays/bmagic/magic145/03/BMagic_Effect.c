@@ -32,13 +32,7 @@ MATCH void func_801EEE70(void) {
 
 INCLUDE_ASM(func_801EEEE8);
 
-MATCH void func_801EF034(void) {
-    g_SpadWork->word_08.byte.unk_09 += 2;
-    g_SpadWork->word_08.byte.timer_0A += 2;
-    if (g_SpadWork->word_08.byte.unk_09 == 0x10) {
-        Bmagic_NextStep();
-    }
-}
+#include "overlays/bmagic/Effect_CountUpTimersByTwoNextStep.h"
 
 #include "overlays/bmagic/Effect_CountDownTimer.h"
 
