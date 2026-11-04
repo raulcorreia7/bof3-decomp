@@ -10,4 +10,6 @@
 extern void (*D_801F40F0[])(void);
 extern void (*D_801F40FC[])(void);
 
+extern u16 D_80146876;
+
 #endif
