@@ -1,10 +1,5 @@
 #include "game_00.h"
 
-/* candidate: the step_a pin removes the s5/s6 swap of the two step variables
- * (121 -> 123 of 140 locally). The residual is same-size register allocation
- * and scheduling: the (table_slot & 0xFF) * 8 temporary lands in a1 instead of
- * retail's v0, the D_80143F24/D_80143F28 loads and the inner `count = 0` are
- * ordered differently; resume with a search over source rewrites on the remaining mismatch. */
 MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 selection) {
     u8* entry;
     s32 arg2b;
