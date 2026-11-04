@@ -10,7 +10,16 @@ INCLUDE_ASM(func_801EEC88);
 
 INCLUDE_ASM(func_801EEE70);
 
-INCLUDE_ASM(func_801EEF98);
+MATCH void func_801EEF98(void) {
+    PartyBattler* work;
+
+    work = g_SpadWork;
+    if (work->unk_0B != 0) {
+        work->unk_09  = 8;
+        work          = g_SpadWork;
+        work->step_01 = work->step_01 + 1;
+    }
+}
 
 INCLUDE_ASM(func_801EEFDC);
 
