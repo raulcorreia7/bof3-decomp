@@ -197,7 +197,10 @@ MATCH void func_801F9D48(void* entity) {
     handler(entity, g_SceneFlags);
 }
 
-INCLUDE_ASM(func_801F9D88);
+MATCH s32 func_801F9D88(void* entity, void* flags) {
+    SYS_SetFlag(flags, 0);
+    return 0;
+}
 
 MATCH s32 func_801F9DAC(void) {
     return 0;
