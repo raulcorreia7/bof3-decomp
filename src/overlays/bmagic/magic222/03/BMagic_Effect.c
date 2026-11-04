@@ -59,7 +59,13 @@ MATCH void func_801EF634(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF6C8);
+MATCH void func_801EF6C8(void) {
+    g_SpadWork->word_08.byte.unk_09 += 1;
+    g_SpadWork->unk_14 += 6;
+    if (g_SpadWork->word_08.byte.unk_09 == 0x10) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountDownAndStep.h"
 
