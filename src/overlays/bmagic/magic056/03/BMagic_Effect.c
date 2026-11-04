@@ -101,15 +101,49 @@ MATCH void func_801F0024(void) {
 
 INCLUDE_ASM(func_801F00C8);
 
-INCLUDE_ASM(func_801F0178);
+MATCH void func_801F0178(void) {
+    g_SpadWork->unk_5D += 0x10;
+    g_SpadWork->unk_5E += 0x10;
+    g_SpadWork->unk_5F += 0x10;
+    if ((s8)g_SpadWork->unk_5D == 0) {
+        g_SpadWork->flags_00 &= 0xDF;
+        g_SpadWork->unk_5C              = 0;
+        g_SpadWork->word_08.byte.unk_09 = 8;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F023C);
 
-INCLUDE_ASM(func_801F042C);
+MATCH void func_801F042C(void) {
+    u8 temp_v0;
+
+    func_8014D978();
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->flags_00 |= 0x20;
+        g_SpadWork->unk_5C = 1;
+        g_SpadWork->unk_5D = 0;
+        g_SpadWork->unk_5E = 0;
+        g_SpadWork->unk_5F = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F04EC);
 
-INCLUDE_ASM(func_801F0658);
+MATCH void func_801F0658(void) {
+    if (D_801EB4E0->word_08.byte.unk_0B == 1) {
+        g_SpadWork->unk_5D += 0x10;
+        g_SpadWork->unk_5E += 0x10;
+        g_SpadWork->unk_5F += 0x10;
+        if ((s8)g_SpadWork->unk_5D == 0) {
+            D_801EB4E0->word_08.byte.unk_0B -= 1;
+            g_SpadWork->unk_02 += 1;
+        }
+    }
+}
 
 MATCH void func_801F0724(void) {
     func_801E5988();
