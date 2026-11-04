@@ -184,7 +184,17 @@ MATCH void func_801FE314(void) {
     Party_JoinMember(8);
 }
 
-INCLUDE_ASM(func_801FE360);
+MATCH void func_801FE360(void) {
+    u8 i;
+
+    for (i = 0; i < g_PartySize; i++) {
+        func_801C1ABC(g_BattlePartyBattlers[i].stats.character_id);
+    }
+    EMI_LoaderStreamFamily(7, 5, 8, 0);
+    g_PartySize = 0;
+    Party_JoinMember(7);
+    Party_JoinMember(5);
+}
 
 MATCH void func_801FE3F8(void) {
     Party_JoinMember(8);
