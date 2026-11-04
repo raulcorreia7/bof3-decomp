@@ -6,6 +6,7 @@
 
 #include "overlays/scenario/scenario.h"
 
+extern u16       g_GameAreaId;
 extern s8        D_80144EA8;
 extern u32       D_801F6C00;
 extern Callback  D_801FA198[];
@@ -18,6 +19,7 @@ extern SceneFunc D_801FA224[];
 extern Callback D_801FA180[];
 
 void func_801F7FCC(void);
+s8   func_801F9DF4();
 
 extern u8 D_80144F5A;
 extern u8 D_80144F5B;

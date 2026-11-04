@@ -129,7 +129,12 @@ MATCH s32 func_801F9DAC(void) {
     return 0;
 }
 
-INCLUDE_ASM(func_801F9DB4);
+MATCH s32 func_801F9DB4(void) {
+    if (g_GameAreaId == 40) {
+        return func_801F9DF4();
+    }
+    return 0;
+}
 
 INCLUDE_ASM(func_801F9DF4);
 
