@@ -96,7 +96,7 @@ MATCH void func_801527E4(void) {
     view.vy = (u32)D_80149314 >> 1;
     view.vz = (u32)g_AreaCameraHeight >> 1;
     ApplyMatrix((MATRIX*)g_CameraMatrix, &view, &trans);
-    D_801492FC = trans.vx + D_80149328;
+    D_801492FC = trans.vx + g_AreaViewOffsetX;
     D_80149300 = trans.vy + g_AreaViewOffsetY;
     D_80149304 = trans.vz + (s16)g_AreaViewOffsetZ + 0x1194;
     SetRotMatrix((MATRIX*)g_CameraMatrix);

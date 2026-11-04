@@ -3151,6 +3151,7 @@ g_AreaTileOriginX = { addr = 0x80149320, type = "s16", source = "func_80153DE8 s
 g_AreaTileOriginY = { addr = 0x80149322, type = "s16", source = "func_80153DE8 sets it to (D_8014930C >> 16) + 3 func_80152C9C/801558F0/801530D0 subtract it" }
 g_AreaGridColCursor = { addr = 0x80149324, type = "s16", source = "Area_ProbeCellId and Area_DrawCellLayer add it to a grid column; func_80152C9C and func_80152D9C step it with wrap at 27" }
 g_AreaGridRowCursor = { addr = 0x80149326, type = "s16", source = "Area_ProbeCellId and Area_DrawCellLayer add it to a grid row; func_80152E94 and func_80152FB0 step it with wrap at 55" }
+g_AreaViewOffsetX = { addr = 0x80149328, type = "s16", source = "0x80149328/2A/2C are the view translation added to the rotated camera: Area_SetCameraMatrix, func_801C7244 and func_801527E4 add it to the projected x of the translation as g_AreaViewOffsetY and g_AreaViewOffsetZ add y and z; func_80153DE8 clears it" }
 g_AreaViewOffsetY = { addr = 0x8014932A, type = "s16", source = "0x80149328/2A/2C are the view translation added to the rotated camera in func_801527E4 world02/area100 func_801F3630/801F3658 step it by 4" }
 g_AreaViewOffsetZ = { addr = 0x8014932C, type = "s16", source = "the same three-halfword view offset scenario/00 8.c 1516-1639 animates it" }
 g_AreaCameraStep = { addr = 0x8014932E, type = "s16", source = "func_801527E4 multiplies the direction by (s16)D_8014932E for both axes func_8015C2D4 clears it" }

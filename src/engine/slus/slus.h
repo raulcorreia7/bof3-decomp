@@ -616,7 +616,6 @@ extern s16                         g_AreaTileOriginY;
 extern s16                         g_AreaGridColCursor;
 /* D_80149326 */
 extern s16                         g_AreaGridRowCursor;
-extern s16                         D_80149328;
 /* D_80149334 */
 extern u16                         g_AreaCellPrimFreeIndex;
 extern u16                         D_80149336;

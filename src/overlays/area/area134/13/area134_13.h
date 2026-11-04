@@ -23,8 +23,6 @@ typedef struct AreaSprite {
 
 /* The game-overlay state bytes the area request paths write. */
 
-/* The world slot counters the area step helpers advance. */
-extern u16      D_80149328;
 extern u8       D_801F5724[];
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F5744[];

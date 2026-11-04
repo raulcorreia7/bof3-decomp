@@ -127,6 +127,8 @@ extern s32         D_80149310;
 extern s32         g_AreaCameraHeight;
 /* D_80149320 */
 extern s16         g_AreaTileOriginX;
+/* D_80149328 */
+extern s16         g_AreaViewOffsetX;
 /* D_8014932A */
 extern s16         g_AreaViewOffsetY;
 /* D_8014932C */

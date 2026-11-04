@@ -48,7 +48,7 @@ loop_5:
     angle.vx = 0x4000 - ((s32)(D_80143F24 + (offset_x << 0x10)) >> 9);
     angle.vy = 0x4000 - ((s32)(D_80143F28 + (offset_y << 0x10)) >> 9);
     ApplyMatrix(&matrix, &angle, &vec);
-    matrix.t[0] = vec.vx + D_80149328;
+    matrix.t[0] = vec.vx + g_AreaViewOffsetX;
     matrix.t[1] = vec.vy + g_AreaViewOffsetY;
     matrix.t[2] = vec.vz + g_AreaViewOffsetZ + 0x1194;
     RotMatrix(rot, &matrix);

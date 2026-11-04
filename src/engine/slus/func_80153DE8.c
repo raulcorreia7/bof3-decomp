@@ -58,7 +58,7 @@ NON_MATCHING void func_80153DE8(void) {
     g_AreaCellPrims[0][1].y3       = 0;
     g_AreaViewOffsetZ              = 0;
     g_AreaViewOffsetY              = 0;
-    D_80149328                     = 0;
+    g_AreaViewOffsetX                     = 0;
     D_80149310                     = 0x7FFF - ((s32)g_AreaScrollTargetX >> 8);
     D_80149314                     = 0x8000 - ((s32)g_AreaScrollTargetY >> 8);
     g_AreaTileOriginX              = ((s32)g_AreaScrollTargetX >> 0x10) - 0x18;
