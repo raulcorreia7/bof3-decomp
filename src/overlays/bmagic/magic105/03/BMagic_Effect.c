@@ -74,6 +74,7 @@ INCLUDE_ASM(func_801EF930);
 
 INCLUDE_ASM(func_801EFB68);
 
-INCLUDE_ASM(func_801EFC8C);
+/* func_801EFC8C */
+#include "overlays/bmagic/BMagic_AllocEffect.h"
 
 INCLUDE_ASM(func_801EFCF0);
