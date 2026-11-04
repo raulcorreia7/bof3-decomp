@@ -142,12 +142,7 @@ MATCH void func_801FBF94(u8 actor_id) {
 }
 
 MATCH void func_801FC044(u8 actor_id) {
-    if (D_80143F03 == 0) {
-        if (D_80145EC4 >= g_Actors[actor_id].x.fixed - 0x40000 && g_Actors[actor_id].x.fixed >= D_80145EC4 &&
-            D_80145EC8 >= g_Actors[actor_id].y.fixed - 0x18000 && g_Actors[actor_id].y.fixed + 0x18000 >= D_80145EC8) {
-            func_801FCB54();
-        }
-    }
+    SCENA02_TRIGGER_BEHIND_X(actor_id, 0x40000, 0x18000);
 }
 
 MATCH void func_801FC0F4(u8 actor_id) {
@@ -182,14 +177,7 @@ MATCH void func_801FC308(u8 actor_id) {
 }
 
 MATCH void func_801FC3B4(s32 actor_id) {
-    if (D_80143F03 == 0) {
-        if (D_80145EC4 >= g_Actors[actor_id & 0xFF].x.fixed - 0x48000 &&
-            g_Actors[actor_id & 0xFF].x.fixed >= D_80145EC4 &&
-            D_80145EC8 >= g_Actors[actor_id & 0xFF].y.fixed - 0x18000 &&
-            g_Actors[actor_id & 0xFF].y.fixed + 0x18000 >= D_80145EC8) {
-            func_801FCB54();
-        }
-    }
+    SCENA02_TRIGGER_BEHIND_X(actor_id & 0xFF, 0x48000, 0x18000);
 }
 
 MATCH void func_801FC46C(u8 actor_id) {
