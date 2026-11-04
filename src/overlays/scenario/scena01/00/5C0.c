@@ -179,7 +179,15 @@ MATCH void func_801FD444(void* record) {
 MATCH void func_801FD484(void) {
 }
 
-INCLUDE_ASM(func_801FD48C);
+MATCH void func_801FD48C(void) {
+    if (SYS_TestFlag(g_SceneFlags, 0x14) == 0) {
+        *g_ScriptVars = 0;
+        Game_SetScriptActive();
+        D_80146875 = 0;
+        D_80146874 = 0x12;
+        SYS_SetFlag(g_SceneFlags, 0x14U);
+    }
+}
 
 MATCH void func_801FD4F0(void) {
     Game_SetScriptActive();
