@@ -8,6 +8,7 @@
 
 extern s8        D_80146873;
 extern u8        D_80146874;
+u8               func_801F938C(void);
 extern u8        D_80146875;
 extern u32       D_801F6C00;
 extern Callback  D_801F9748[];

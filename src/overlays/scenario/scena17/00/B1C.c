@@ -73,7 +73,17 @@ INCLUDE_ASM(func_801F8088);
 
 INCLUDE_ASM(func_801F80CC);
 
-INCLUDE_ASM(func_801F8110);
+MATCH void func_801F8110(void) {
+    u8  ready;
+    u8* step;
+
+    ready = func_801F938C();
+    if ((u8)SND_IsXaIdle() && ready) {
+        UI_SetMode(0xD);
+        step  = &D_80146874;
+        *step = *step + 1;
+    }
+}
 
 INCLUDE_ASM(func_801F8170);
 
