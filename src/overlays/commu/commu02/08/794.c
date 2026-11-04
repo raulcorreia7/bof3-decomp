@@ -7,11 +7,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801D1394);
 
 MATCH void func_801D143C(void) {
-    s8 temp_v1;
+    s8 value;
 
-    temp_v1    = (u8)D_801DB0C4 + 1;
-    D_801DB0C4 = temp_v1;
-    func_801D3184(0x6E - ((temp_v1 & 0xFF) * 0x28), 0x48);
+    value      = (u8)D_801DB0C4 + 1;
+    D_801DB0C4 = value;
+    func_801D3184(0x6E - ((value & 0xFF) * 0x28), 0x48);
     func_801D32A0(0x6E - ((u8)D_801DB0C4 * 0x28), 0x74, 1);
     if ((u8)D_801DB0C4 == 4) {
         func_801D2E10();
@@ -55,16 +55,12 @@ INCLUDE_ASM(func_801D25CC);
 INCLUDE_ASM(func_801D269C);
 
 MATCH s32 func_801D2750(s32 arg0) {
-    s32 temp_v1;
+    s32 roll;
 
     do {
-    loop_1:
-        temp_v1 = rand() & 0xF;
-        if (temp_v1 == 0) {
-            goto loop_1;
-        }
-    } while (temp_v1 >= ((arg0 & 0xFF) + 1));
-    return temp_v1;
+        roll = rand() & 0xF;
+    } while (roll == 0 || roll >= ((arg0 & 0xFF) + 1));
+    return roll;
 }
 
 INCLUDE_ASM(func_801D2794);
@@ -233,16 +229,16 @@ INCLUDE_ASM(func_801D6124);
 INCLUDE_ASM(func_801D62C8);
 
 MATCH void func_801D6390(void) {
-    u8 var_v0;
+    u8 value;
 
     if (g_GameStateIndex != 2) {
         if (D_801F2944 == 0) {
-            var_v0 = 6;
+            value = 6;
         } else {
             D_801DB0C4 = 5;
-            var_v0     = 7;
+            value      = 7;
         }
-        D_801F294D = var_v0;
+        D_801F294D = value;
     }
     func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
 }
@@ -289,12 +285,9 @@ INCLUDE_ASM(func_801D6AC8);
 MATCH void func_801D6B60(void) {
     D_801DB0C4 = (u8)D_801DB0C4 + 1;
     func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 1);
-    if ((u8)D_801DB0C4 != 4) {
-        goto block_2;
+    if ((u8)D_801DB0C4 == 4) {
+        func_801DA8E8();
     }
-    func_801DA8E8();
-block_2:
-    return;
 }
 
 INCLUDE_ASM(func_801D6BE4);
@@ -312,16 +305,16 @@ INCLUDE_ASM(func_801D708C);
 INCLUDE_ASM(func_801D7234);
 
 MATCH void func_801D73F8(void) {
-    u8 var_v0;
+    u8 value;
 
     if (g_GameStateIndex != 2) {
         if (D_801F2944 == 0) {
-            var_v0 = 6;
+            value = 6;
         } else {
             D_801DB0C4 = 4;
-            var_v0     = 7;
+            value      = 7;
         }
-        D_801F294D = var_v0;
+        D_801F294D = value;
     }
     func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & 0xFF, 0);
 }
