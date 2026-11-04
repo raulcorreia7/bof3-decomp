@@ -17,16 +17,16 @@ MATCH void func_80159A90(void) {
     x        = *(u16*)((u8*)&D_8017F944 + (VOL(u8, *mode) * 4));
     panel->x = (u16)((x + 35) << 4);
 
-    y                          = *(u16*)((u8*)&D_8017F946 + (VOL(u8, *mode) * 4));
-    *(u16*)((u8*)panel + 0x14) = 0xE3;
-    *(u16*)((u8*)panel + 0x16) = 0x66;
-    *(u16*)((u8*)panel + 0x10) = 0;
-    *(u16*)((u8*)panel + 0x12) = 0;
-    *(u8*)((u8*)panel + 0xA)   = 0x47;
-    panel->y                   = (u16)((y + 16) << 4);
+    y             = *(u16*)((u8*)&D_8017F946 + (VOL(u8, *mode) * 4));
+    panel->unk_14 = 0xE3;
+    panel->unk_16 = 0x66;
+    panel->unk_10 = 0;
+    panel->unk_12 = 0;
+    panel->unk_0A = 0x47;
+    panel->y      = (u16)((y + 16) << 4);
 
-    panel                    = g_MenuPanelTaskCurrent;
-    *(u8*)((u8*)panel + 0xB) = 0x20;
+    panel         = g_MenuPanelTaskCurrent;
+    panel->unk_0B = 0x20;
 
     panel = g_MenuPanelTaskCurrent;
     panel->state++;
