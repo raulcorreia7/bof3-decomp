@@ -28,9 +28,31 @@ INCLUDE_ASM(func_801EF148);
 
 INCLUDE_ASM(func_801EF324);
 
-INCLUDE_ASM(func_801EF448);
+MATCH void func_801EF448(void) {
+    u8 temp_v0;
 
-INCLUDE_ASM(func_801EF4F0);
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->flags_00 |= 0x20;
+        g_SpadWork->unk_5C = 1;
+        g_SpadWork->unk_5D = 0;
+        g_SpadWork->unk_5E = 0;
+        g_SpadWork->unk_5F = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
+
+MATCH void func_801EF4F0(void) {
+    g_SpadWork->unk_5D -= 0x10;
+    g_SpadWork->unk_5E -= 0x10;
+    g_SpadWork->unk_5F -= 0x10;
+    g_SpadWork->unk_40 += 0x1800;
+    if ((s8)g_SpadWork->unk_5D == -0x80) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF5A4(void) {
     SYS_DISPATCH_BYTE(D_801F0D7C, g_SpadWork->unk_02);
