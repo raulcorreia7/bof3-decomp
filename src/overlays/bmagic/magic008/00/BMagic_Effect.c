@@ -45,7 +45,14 @@ MATCH void func_801EF384(void) {
 
 INCLUDE_ASM(func_801EF3F0);
 
-INCLUDE_ASM(func_801EF6AC);
+MATCH void func_801EF6AC(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        func_800AFC54();
+        func_800AEF98(4, 0);
+        BATTLE_ACTIVE_WORK->flags_00 &= 0xBF;
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void Effect_StartPlaying_801EF728(void) {
     u16* flags;
