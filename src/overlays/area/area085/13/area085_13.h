@@ -9,9 +9,10 @@
 
 #define g_CurrentActor ((void*)g_CurrentActor)
 
-extern u8       D_801F3D2C[];
-extern u8       D_801F4330[];
-extern Callback D_801F3D40[];
+extern u8           D_801F3D2C[];
+extern u8           D_801F4330[];
+extern Callback     D_801F3D40[];
+extern PartyBattler D_801469B8;
 
 /* func_80196718 */
 void GFX_FreePaletteFadeTarget(void* target);
