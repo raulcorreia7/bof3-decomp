@@ -1,3 +1,3 @@
 #include "area121_14.h"
 
-INCLUDE_ASM(func_801F4F78);
+#include "overlays/area/Actor_FacingToward.h"
