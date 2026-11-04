@@ -47,6 +47,6 @@ void func_801F656C(void);
 
 s32 func_801F4AE4(s32, s32, s32);
 
-s32 func_801A79A4(s32, s32);
+s32 func_801A79A4(s32 handler_x, s32 handler_y);
 
 #endif
