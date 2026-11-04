@@ -18,24 +18,6 @@
 
 #include "shared/WorldSpin.h"
 
-/* One slot of the eight-slot table at the work window: the spawn point's
- * position copied from the scratch record when the slot is claimed. */
-typedef struct AreaSpawnSlot {
-    u8    active;    /* 0x00 - 0 marks a free slot */
-    u8    unk_01;    /* 0x01 */
-    u8    unk_02;    /* 0x02 */
-    u8    unk_03;    /* 0x03 */
-    Coord x;         /* 0x04 */
-    Coord y;         /* 0x08 */
-    Coord z;         /* 0x0C */
-    u8    unk_10[4]; /* 0x10 */
-    u16   unk_14;    /* 0x14 */
-    u8    unk_16;    /* 0x16 */
-    u8    unk_17;    /* 0x17 */
-} AreaSpawnSlot;
-
-ASSERT_SIZE(AreaSpawnSlot, 0x18);
-
 #define AREA_SPIN_PRIM_ORDER 2
 
 #define AREA_SPIN_RADIUS     16

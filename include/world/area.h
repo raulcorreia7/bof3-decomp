@@ -357,6 +357,25 @@ typedef struct AreaTrail {
 ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);
 ASSERT_OFFSET(AreaTrail, points, 0x18);
 
+/* One spawn slot of the table at `0x800E4800` (stride 0x18; world02/area098
+ * `@0x801F526C` and world04/area172 `@0x801F38E8` hold eight): the claiming
+ * code scans for `active == 0` and copies the actor position into it. */
+typedef struct AreaSpawnSlot {
+    u8    active;    /* 0x00 - 0 marks a free slot */
+    u8    unk_01;    /* 0x01 */
+    u8    unk_02;    /* 0x02 */
+    u8    unk_03;    /* 0x03 */
+    Coord x;         /* 0x04 */
+    Coord y;         /* 0x08 */
+    Coord z;         /* 0x0C */
+    u8    unk_10[4]; /* 0x10 */
+    u16   unk_14;    /* 0x14 */
+    u8    unk_16;    /* 0x16 */
+    u8    unk_17;    /* 0x17 */
+} AreaSpawnSlot;
+
+ASSERT_SIZE(AreaSpawnSlot, 0x18);
+
 /* The AREA028 slot row: 0x10 bytes. The program keeps 32 of them at
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with
  * that stride) and the ring projection reads the active one. */
