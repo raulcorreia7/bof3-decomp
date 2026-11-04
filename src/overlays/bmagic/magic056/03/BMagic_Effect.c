@@ -27,7 +27,19 @@ MATCH void func_801EF1F4(void) {
 
 #include "overlays/bmagic/Effect_CopyBattlerCoords.h"
 
-INCLUDE_ASM(func_801EF2DC);
+MATCH void func_801EF2DC(void) {
+    u8 counter;
+
+    if (g_SpadWork->word_08.byte.unk_09 == 4) {
+        func_800A9610(g_BattleTargetSelector, 0x10U);
+    }
+    SP_REF(s16, 0)                  = g_SpadWork->word_08.byte.unk_09 * 0x1C;
+    counter                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = counter;
+    if ((counter & 0xFF) == 0xC) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF37C);
 
@@ -76,7 +88,16 @@ MATCH void func_801EFFE8(void) {
     g_SpadWork->unk_02++;
 }
 
-INCLUDE_ASM(func_801F0024);
+MATCH void func_801F0024(void) {
+    if (func_8014DAEC() & 0xFF) {
+        g_SpadWork->flags_00 |= 0x20;
+        g_SpadWork->unk_5C = 1;
+        g_SpadWork->unk_5D = 0;
+        g_SpadWork->unk_5E = 0;
+        g_SpadWork->unk_5F = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F00C8);
 
