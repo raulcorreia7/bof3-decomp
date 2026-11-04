@@ -23,7 +23,19 @@ INCLUDE_ASM(func_801D0CF4);
 
 INCLUDE_ASM(func_801D0D4C);
 
-INCLUDE_ASM(func_801D11DC);
+MATCH void func_801D11DC(void) {
+    if ((u8)D_801D1774 < 4U) {
+        D_801D1774 += 1;
+    }
+    func_801AE3F0(0x14, (0x12 - (D_801D1774 * 0xC)) & 0xFFFE, 0x118, 0x13, 0xF2, (s32)D_80144952);
+    func_801AED54(0x16, 0x14 - (D_801D1774 * 0xC), 0x113, 0xF, 0);
+    if (*D_80148333 == 0) {
+        Menu_ResetPanelTasks();
+        Message_StartAreaMessage(0x5F);
+        g_GameStateIndex = 2;
+        D_801F294C += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D12C8);
 
