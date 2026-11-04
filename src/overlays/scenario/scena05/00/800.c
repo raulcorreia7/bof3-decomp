@@ -354,16 +354,10 @@ MATCH void func_801FD440(void) {
     Party_JoinMember(2);
 }
 
-MATCH void func_801FD460(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 2U, 0U);
-    Party_BuildBattlers(0);
-    Party_JoinMember(1);
-}
+#include "overlays/scenario/Scene_JoinNina.h"
 
-MATCH void func_801FD49C(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 2U, 0U);
-    Party_BuildBattlers(0);
-    Party_JoinMember(1);
+MATCH void Scene_JoinNina_801FD49C(void) {
+    SCENE_JOIN_NINA();
 }
 
 MATCH void func_801FD4D8(void) {
