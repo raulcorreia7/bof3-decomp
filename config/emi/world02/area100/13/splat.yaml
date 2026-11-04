@@ -22,7 +22,7 @@ segments:
       - [0x8FC, c, func_801F34FC]
       - [0x9D4, c, Actor_RunAreaStep]
       - [0xA08, c, func_801F3608]
-      - [0xA30, c, func_801F3630]
+      - [0xA30, c, Area_AddViewOffsetY4]
       - [0xA58, c, func_801F3658]
       - [0xA80, c, Area_ResetViewOffsetY]
       - [0xA9C, c, func_801F369C]

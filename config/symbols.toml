@@ -2083,6 +2083,7 @@ Area_FindFreeWorkRow = { addr = 0x801178C4, type = "func", source = "finds the f
 Message_SetAnswerMessage = { addr = 0x801F2C54, type = "func", source = "stores the message id D_801F5CD8 holds for the menu choice D_801490C7 in g_MessageRequest" }
 Area_AddViewOffsetY20 = { addr = 0x801F33E8, type = "func", source = "adds 0x14 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_SubViewOffsetY20 = { addr = 0x801F3410, type = "func", source = "subtracts 0x14 from g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
+Area_AddViewOffsetY4 = { addr = 0x801F3728, type = "func", source = "adds 4 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 
 ["emi/world01/area050/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
@@ -2205,6 +2206,7 @@ Area_InitSpin = { addr = 0x801F5820, type = "func", source = "starts one spin-ef
 
 ["emi/world02/area100/13"]
 Actor_RunAreaStep = { addr = 0x801F35D4, type = "func", source = "clears the work reset flag and hands the work pointer to the area step" }
+Area_AddViewOffsetY4 = { addr = 0x801F3630, type = "func", source = "adds 4 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetViewOffsetY = { addr = 0x801F3680, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 Actor_SnapToGround = { addr = 0x801F3CDC, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
 
@@ -2299,6 +2301,10 @@ Area_InitSpin = { addr = 0x801F30D0, type = "func", source = "starts one spin-ef
 
 ["emi/world03/area132/13"]
 D_801F4A88 = { addr = 0x801F4A88, source = "func_801F3800 and func_801F385C use this work-slot pointer" }
+
+["emi/world03/area133/13"]
+Area_AddViewOffsetY4 = { addr = 0x801F2D94, type = "func", source = "adds 4 to g_AreaViewOffsetY, the Y term Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames; one body shared with the other area overlays" }
+
 
 ["emi/world03/area134/13"]
 Area_ClearWorkColumn = { addr = 0x801F4974, type = "func", source = "clears one byte of each row in the actor window" }

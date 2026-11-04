@@ -30,7 +30,7 @@ segments:
       - [0xA0C, c, func_801F360C]
       - [0xAF8, c, func_801F36F8]
       - [0xB00, c, func_801F3700]
-      - [0xB28, c, func_801F3728]
+      - [0xB28, c, Area_AddViewOffsetY4]
       - [0xB50, c, func_801F3750]
       - [0xB6C, c, func_801F376C]
       - [0xBEC, c, func_801F37EC]
