@@ -323,10 +323,7 @@ MATCH void func_801FE1DC(void) {
     func_801C1630();
 }
 
-MATCH void func_801FE20C(void) {
-    func_801C1ABC(8);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_RemoveAdultNina.h"
 
 INCLUDE_ASM(func_801FE234);
 
