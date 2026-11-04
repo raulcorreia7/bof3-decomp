@@ -402,6 +402,7 @@ BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback
 g_BMagicEffectFuncs = { addr = 0x801EF7A0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic076/03"]
+Effect_NextStep = { addr = 0x801EF11C, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 1" }
 Effect_PlayOnZeroTick = { addr = 0x801EF288, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_CountDownAndStep = { addr = 0x801EF5F0, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
 Effect_TickOnTimerZero = { addr = 0x801EF63C, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }

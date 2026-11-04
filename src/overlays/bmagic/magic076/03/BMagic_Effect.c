@@ -12,7 +12,8 @@ INCLUDE_ASM(func_801EEF5C);
 
 INCLUDE_ASM(func_801EF00C);
 
-INCLUDE_ASM(func_801EF11C);
+/* func_801EF11C */
+#include "overlays/bmagic/Effect_NextStep.h"
 
 INCLUDE_ASM(func_801EF160);
 
