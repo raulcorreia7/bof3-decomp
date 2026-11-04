@@ -6,7 +6,7 @@ MATCH void func_801F3960(void) {
 
     scratch = g_SpadWork;
     scratch->unk_30 += 0xA;
-    if (scratch->unk_30 >= 0xF0) {
+    if ((s16)scratch->unk_30 >= 0xF0) {
         scratch->unk_03 = 0;
     }
     if (D_801454F2 == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE && GAME_SCRIPT_ACTIVE() == 0) {

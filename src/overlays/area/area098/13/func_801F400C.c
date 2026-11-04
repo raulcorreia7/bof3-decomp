@@ -14,7 +14,7 @@ MATCH void func_801F400C(void) {
         func_801F5050(fade);
     }
     g_SpadWork->unk_2E -= 1;
-    if (g_SpadWork->unk_2E == 0) {
+    if ((s16)g_SpadWork->unk_2E == 0) {
         func_80196070();
     }
 }
