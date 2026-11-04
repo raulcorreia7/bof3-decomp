@@ -72,6 +72,8 @@ MATCH void func_801F04D4(void) {
 
 INCLUDE_ASM(func_801F055C);
 
+/* Copies D_801EB4E0's coord_x_34 and coord_y_38 into the effect work, counts unk_09 up, subtracts unk_14 from word 0x3C and
+ * steps at 0x18. Three orders leave the first difference at lui a2 (retail) against lui a3: the source pointer takes a3. */
 INCLUDE_ASM(func_801F061C);
 
 INCLUDE_ASM(func_801F068C);
