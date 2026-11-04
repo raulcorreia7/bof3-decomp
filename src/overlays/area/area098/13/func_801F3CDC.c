@@ -6,7 +6,7 @@ MATCH void func_801F3CDC(void) {
     value              = g_SpadWork->unk_06;
     g_SpadWork->unk_06 = value + 1;
     if (!(value & 3)) {
-        func_801F526C();
+        Area_ClaimSpawnSlot();
     }
     func_801F5308();
     func_801F5940();
