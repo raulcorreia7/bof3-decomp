@@ -502,7 +502,7 @@ typedef struct PartyBattler {
     BattleFix32       coord_y_38;
     BattleWorkWord3C  word_3C;
     u32               unk_40; /* +0x40 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u32               unk_44; /* +0x44 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    s32               unk_44; /* +0x44 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u8                unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u8                unk_49;
     u8                unk_4A;

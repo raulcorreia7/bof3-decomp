@@ -34,7 +34,17 @@ INCLUDE_ASM(func_801EF43C);
 
 INCLUDE_ASM(func_801EF528);
 
-INCLUDE_ASM(func_801EF648);
+MATCH void func_801EF648(void) {
+    PartyBattler* work;
+
+    g_SpadWork->unk_2E.half = (rand() & 3) + 0x9F;
+    work = g_SpadWork;
+    work->unk_30.half -= 2;
+    work->unk_44 += 0x2000;
+    if (work->unk_44 > 0x17FFF) {
+        work->unk_02++;
+    }
+}
 
 INCLUDE_ASM(func_801EF6B4);
 
