@@ -68,7 +68,50 @@ INCLUDE_ASM(func_801F0010);
 
 INCLUDE_ASM(func_801F0104);
 
-INCLUDE_ASM(func_801F01F8);
+MATCH void func_801F01F8(void) {
+    s32 temp_v0;
+    s32 var_a0;
+    s32 var_a0_2;
+    u8  temp_v0_2;
+    u8  temp_v1;
+
+    func_800AF764();
+    if ((g_SpadWork->unk_0C == 4) && ((u8)g_SpadWork->unk_0A < 5U)) {
+        var_a0 = (rand() & 3) | 0x40;
+    } else {
+        var_a0 = (rand() & 3) | 0x18;
+    }
+    func_801F0BA8(var_a0);
+    Effect_SetActorMatrix();
+    func_801F050C();
+    PopMatrix();
+    if (g_SpadWork->unk_0C < 4) {
+        temp_v0            = g_SpadWork->unk_10 + 1;
+        g_SpadWork->unk_10 = temp_v0;
+        if (!(temp_v0 & 7)) {
+            g_SpadWork->unk_0C += 1;
+        }
+    }
+    g_SpadWork->unk_09 += g_SpadWork->unk_0C;
+    if (g_SpadWork->unk_0C == 4) {
+        temp_v0_2          = g_SpadWork->unk_0A - 1;
+        g_SpadWork->unk_0A = temp_v0_2;
+        if (!(temp_v0_2 & 0xFF)) {
+            temp_v1 = g_SpadWork->unk_03;
+            if (!(temp_v1 & 0xF0)) {
+                var_a0_2 = 0x102;
+                if (temp_v1 & 1) {
+                    var_a0_2 = 0x101;
+                }
+                SND_QueueSelectionFx(var_a0_2);
+            }
+            g_SpadWork->unk_10 = 8;
+            g_SpadWork->unk_14 = 8;
+            g_SpadWork->unk_20 = 8;
+            g_SpadWork->unk_02 += 1;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801F038C);
 
