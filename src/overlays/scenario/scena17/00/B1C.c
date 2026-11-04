@@ -181,7 +181,18 @@ INCLUDE_ASM(func_801F84F4);
 
 INCLUDE_ASM(func_801F8594);
 
-INCLUDE_ASM(func_801F8664);
+MATCH void func_801F8664(void) {
+    u8* state;
+
+    if ((g_InputPressed & 0x40) || D_801F9DD8 != 0) {
+        SND_StartDecrescendo(g_SelectionCues[g_SndBgmId * 4], D_80181EBB[g_SndBgmId * 4], 100, 16);
+        UI_SetMode(0xD);
+        state = &D_80146874;
+        (*state)++;
+    }
+    func_801F8B10(0x4B0, 0x80);
+    func_801F8FAC(0xE0, 0xBE, 0x80, 1);
+}
 
 INCLUDE_ASM(func_801F8710);
 
