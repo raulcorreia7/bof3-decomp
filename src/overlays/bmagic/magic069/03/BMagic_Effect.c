@@ -95,7 +95,17 @@ MATCH void func_801EF430(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4C0);
+MATCH void func_801EF4C0(void) {
+    s32 temp_v1;
+
+    temp_v1 = g_SpadWork->unk_0C - 1;
+    g_SpadWork->unk_0C = temp_v1;
+    g_SpadWork->unk_2E.half += temp_v1;
+    if (g_SpadWork->unk_0C == 0) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF520(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 10, 2, g_SpadWork);
