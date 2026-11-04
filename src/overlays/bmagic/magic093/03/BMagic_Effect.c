@@ -8,12 +8,15 @@ INCLUDE_ASM(func_801EEC04);
 
 INCLUDE_ASM(func_801EED04);
 
-/* Matches (84 bytes) as: if the u32 at +0x08 masked with 0xFF00FF00 is zero,
- * BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING) and func_801E5988(); the u32 view is a cast.
- * needs: type PartyBattler+0x08 4 (3 sites: magic091 func_801EEEA8 with mask 0xFFFF0000, magic055
- * func_801EEEA8, this one). A union over unk_08..unk_0B renames about 940 lines in 240 files of the battle,
- * bmagic and boss overlays, so it waits for a round where no lane edits them. */
-INCLUDE_ASM(func_801EF02C);
+/* Starts the effect once bytes 0x09 and 0x0B of the work record are both zero. */
+MATCH void func_801EF02C(void) {
+    u16* flags;
+
+    if ((g_SpadWork->word_08.word & 0xFF00FF00u) == 0) {
+        BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF080(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
