@@ -459,18 +459,7 @@ MATCH s32 func_801FC690(void) {
     return 0;
 }
 
-MATCH s32 func_801FC6C4(void) {
-    /* FAKE: retail materializes the action code in v1. */
-    MATCH_REG(s32, action, "v1");
-
-    Game_SetScriptActive();
-    action     = 30;
-    D_80146876 = action;
-    action     = 7;
-    D_80146874 = action;
-    D_80146875 = 0;
-    return 0;
-}
+INCLUDE_ASM(func_801FC6C4);
 
 INCLUDE_ASM(func_801FC704);
 
