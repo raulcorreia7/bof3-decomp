@@ -12,14 +12,7 @@ INCLUDE_ASM(func_801EEF08);
 
 #include "overlays/bmagic/Effect_CountDownTimerNextStep.h"
 
-MATCH void func_801EF068(void) {
-    PartyBattler* work;
-
-    work = SP_REF(PartyBattler*, 0x44u);
-    if (work->word_08.byte.unk_0B == 0) {
-        work->step_01 = work->step_01 + 1;
-    }
-}
+#include "overlays/bmagic/Effect_NextStepOnWorkZeroTick.h"
 
 /* Pointer and saved-target forms: first difference is lui v1 at 0x801EF0A0. */
 INCLUDE_ASM(func_801EF09C);

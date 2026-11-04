@@ -8,14 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC94);
 
-MATCH void func_801EEEA8(void) {
-    PartyBattler* work;
-
-    work = SP_REF(PartyBattler*, 0x44u);
-    if (work->word_08.byte.unk_0B == 0) {
-        work->step_01 = work->step_01 + 1;
-    }
-}
+#include "overlays/bmagic/Effect_NextStepOnWorkZeroTick.h"
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
