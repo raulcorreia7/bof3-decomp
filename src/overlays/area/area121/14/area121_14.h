@@ -34,7 +34,7 @@ extern Callback       D_801F6894[];
 extern Callback       D_801F689C[];
 extern s8             D_80146865;
 extern s8             D_80146866;
-extern s8             D_80146867;
+extern u8             D_80146867;
 extern s8             D_80146874;
 extern s8             D_80146875;
 extern u16            g_GameAreaId;
