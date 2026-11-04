@@ -4,6 +4,7 @@
 /* The bmagic/magic076/03 overlay. Only this image includes the file. */
 
 #include "overlays/bmagic/bmagic.h"
+#define EFFECT_STEP_LIMIT 1
 
 extern Callback D_801F048C[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
