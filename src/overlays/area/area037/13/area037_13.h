@@ -7,4 +7,5 @@
 #include "overlays/area/world00.h"
 
 /* The shop panel step the request sets. */
+extern s8 D_80146867;
 #endif
