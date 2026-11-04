@@ -35,7 +35,8 @@ INCLUDE_ASM(func_801EF750);
 
 INCLUDE_ASM(func_801EF9E0);
 
-INCLUDE_ASM(func_801EFCA0);
+/* func_801EFCA0 */
+#include "overlays/bmagic/BMagic_AllocEffect.h"
 
 /* func_801EFD04 */
 MATCH void Actor_Clear(void) {
