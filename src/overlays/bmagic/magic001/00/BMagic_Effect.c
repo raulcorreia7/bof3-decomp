@@ -67,7 +67,23 @@ MATCH void func_801EF37C(void) {
 
 INCLUDE_ASM(func_801EF408);
 
-INCLUDE_ASM(func_801EF468);
+MATCH void func_801EF468(void) {
+    u8 timer;
+
+    func_8014DAEC();
+    func_8014DAEC();
+    if (func_8014DAEC() & BYTE_MASK) {
+        SND_QueueSelectionFx(0x203);
+        func_801E257C(g_BattleActingBattler, 0xC);
+        timer              = g_SpadWork->unk_09 - 1;
+        g_SpadWork->unk_09 = timer;
+        if (timer != 0) {
+            g_SpadWork->unk_02 -= 3;
+        } else {
+            g_SpadWork->unk_02++;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EF518);
 
