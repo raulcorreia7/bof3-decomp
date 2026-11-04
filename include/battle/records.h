@@ -516,15 +516,16 @@ typedef struct PartyBattler {
     u8                unk_5D;
     u8                unk_5E;
     u8                unk_5F;
-    u8                pad_60[0x10];
-    u8                unk_70;
-    u8                pad_71[3];
+    s32          unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
+    u8           pad_64[0xC];
+    u8           unk_70;
+    u8           pad_71[3];
     /* +0x74..+0x117 is a Character copy: func_801DD08C copies a
      * 0xA4-byte character record to this offset. */
-    Character         stats;
-    u8                unk_118;
-    u8                mode_119;
-    u16               command;
+    Character    stats;
+    u8           unk_118;
+    u8           mode_119;
+    u16          command;
     u16          hp_change; /* +0x11C signed HP delta shown on the hit; func_801D527C seeds it from stats.current_hp,
                                func_801DFCB4 tests its sign (ram-map: hp_change) */
     u16          ap_change; /* +0x11E signed AP delta, as hp_change (ram-map: ap_change) */
@@ -547,6 +548,7 @@ ASSERT_SIZE(PartyBattler, 0x140);
 ASSERT_OFFSET(PartyBattler, slot, 0x05);
 ASSERT_OFFSET(PartyBattler, unk_14, 0x14);
 ASSERT_OFFSET(PartyBattler, unk_20, 0x20);
+ASSERT_OFFSET(PartyBattler, unk_60, 0x60);
 ASSERT_OFFSET(PartyBattler, unk_70, 0x70);
 ASSERT_OFFSET(PartyBattler, unk_29, 0x29);
 ASSERT_OFFSET(PartyBattler, unk_2C, 0x2C);
