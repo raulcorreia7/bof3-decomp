@@ -37,7 +37,17 @@ MATCH void func_801EF074(void) {
 
 INCLUDE_ASM(func_801EF248);
 
-INCLUDE_ASM(func_801EF2D8);
+MATCH void func_801EF2D8(void) {
+    g_SpadWork->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
+    g_SpadWork->coord_x_34.raw         = D_801EB4E0->coord_x_34.raw;
+    g_SpadWork->coord_y_38.raw         = D_801EB4E0->coord_y_38.raw;
+    g_SpadWork->word_3C.word           = D_801EB4E0->word_3C.word;
+    func_801EF430(g_SpadWork);
+    g_SpadWork->word_08.byte.unk_0B   = 0xB;
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0x80;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF388(void) {
     g_SpadWork->word_08.byte.unk_0B -= 1;
