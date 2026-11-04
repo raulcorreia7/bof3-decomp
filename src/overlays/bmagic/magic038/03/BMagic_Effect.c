@@ -32,6 +32,10 @@ MATCH void func_801EF8B8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 11), 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EF8FC);
+MATCH void func_801EF8FC(void) {
+    func_800AEEC8(g_SpadWork->unk_04, g_SpadWork->unk_03);
+    g_SpadWork->word_08.byte.unk_0B = 1;
+    g_SpadWork->unk_02 += 1;
+}
 
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
