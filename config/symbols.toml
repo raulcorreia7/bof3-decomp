@@ -2119,6 +2119,7 @@ g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApply
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 
 ["emi/world02/area077/14"]
+Area_DrawSpinTriangle = { addr = 0x801F47C8, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
 Area_InitSpin = { addr = 0x801F4A68, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 Message_SetAnswerMessage = { addr = 0x801F59DC, type = "func", source = "stores the message id the answer table D_801F6B1C holds for the menu choice D_801490C7 in g_MessageRequest" }
 Area_ResetViewOffsetY = { addr = 0x801F5DE8, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
@@ -2177,6 +2178,7 @@ g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApply
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 Area_FindFreeWorkRow = { addr = 0x801F4D80, type = "func", source = "finds the first work-window row whose byte is zero or returns NULL" }
 Area_ClearWorkColumn = { addr = 0x801F5240, type = "func", source = "clears one byte of each row in the actor window" }
+Area_DrawSpinTriangle = { addr = 0x801F5580, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
 Area_InitSpin = { addr = 0x801F5820, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 
 ["emi/world02/area100/13"]
@@ -2267,6 +2269,7 @@ Area_FindFreeWorkRow = { addr = 0x801F3348, type = "func", source = "finds the f
 Area_ClearWorkColumn = { addr = 0x801F3384, type = "func", source = "clears one byte of each row in the actor window" }
 
 ["emi/world03/area130/13"]
+Area_DrawSpinTriangle = { addr = 0x801F2E30, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
 Area_InitSpin = { addr = 0x801F30D0, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 
 ["emi/world03/area132/13"]
@@ -2467,6 +2470,7 @@ Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "advan
 Area_Update = { addr = 0x801F3958, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 
 ["emi/world04/area175/13"]
+Area_DrawSpinTriangle = { addr = 0x801F2E2C, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
 Area_InitSpin = { addr = 0x801F30CC, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
@@ -2515,6 +2519,7 @@ Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the
 
 ["emi/world04/area188/13"]
 Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "clears one byte of each row in the actor window" }
+Area_DrawSpinTriangle = { addr = 0x801F40F4, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
 Area_InitSpin = { addr = 0x801F4394, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 Area_ResetViewOffsetY = { addr = 0x801F4930, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
 

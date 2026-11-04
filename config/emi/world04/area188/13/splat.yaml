@@ -33,7 +33,7 @@ segments:
       - [0x11E0, c, func_801F3DE0]
       - [0x127C, c, func_801F3E7C]
       - [0x1330, c, func_801F3F30]
-      - [0x14F4, c, func_801F40F4]
+      - [0x14F4, c, Area_DrawSpinTriangle]
       - [0x1794, c, Area_InitSpin]
       - [0x18B4, c, func_801F44B4]
       - [0x1968, c, func_801F4568]
