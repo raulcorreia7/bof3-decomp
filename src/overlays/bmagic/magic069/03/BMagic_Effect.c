@@ -57,7 +57,21 @@ MATCH void func_801EF2AC(void) {
 
 INCLUDE_ASM(func_801EF30C);
 
-INCLUDE_ASM(func_801EF430);
+MATCH void func_801EF430(void) {
+    PartyBattler* src;
+    PartyBattler* dst;
+
+    if (--g_SpadWork->unk_09 == 0) {
+        dst                = g_SpadWork;
+        src                = D_801EB4E0;
+        dst->unk_0C        = 0xB;
+        dst->unk_2E.half   = src->unk_2E.half - 0x37;
+        dst->unk_30.half   = src->unk_30.half - 0x10;
+        dst->unk_09        = 0;
+        g_SpadWork->unk_0A = 0x20;
+        g_SpadWork->unk_02++;
+    }
+}
 
 INCLUDE_ASM(func_801EF4C0);
 
