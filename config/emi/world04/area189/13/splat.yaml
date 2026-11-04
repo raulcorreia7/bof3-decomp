@@ -37,7 +37,7 @@ segments:
       - [0x3120, c, func_801F5D20]
       - [0x316C, c, func_801F5D6C]
       - [0x32A8, c, func_801F5EA8]
-      - [0x3320, c, func_801F5F20]
+      - [0x3320, c, Actor_ClearVelocity]
       - [0x333C, c, func_801F5F3C]
       - [0x3424, c, func_801F6024]
       - [0x3488, c, func_801F6088]

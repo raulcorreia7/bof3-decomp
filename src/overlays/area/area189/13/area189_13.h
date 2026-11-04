@@ -27,7 +27,8 @@ void func_801F3514(void);
 void func_801F3800(void);
 void func_801F559C(void);
 void func_801F5600(void);
-void func_801F5F20(void);
+/* func_801F5F20 */
+void Actor_ClearVelocity(void);
 
 extern u16 D_801492DC;
 

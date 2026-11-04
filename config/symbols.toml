@@ -1123,6 +1123,7 @@ Menu_DrawTintedLine = { addr = 0x801D36B8, type = "func", source = "emits a semi
 Menu_DrawItemRow = { addr = 0x801D37AC, type = "func", source = "draws the item row stats and icons, shared name with the shop, start and Shisu overlays" }
 Menu_DrawEquipment = { addr = 0x801D3B4C, type = "func", source = "draws a party member's weapon, shield, helmet, armor and two accessories in the equipment slots, the same body as emi/etc/shop/00 0x801D95F4" }
 Menu_DrawIcon = { addr = 0x801D4564, type = "func", source = "draws one 16x8 icon cell from the fixed D8 atlas row, one body shared with the shop, start and Shisu overlays" }
+Menu_DrawExperienceLine = { addr = 0x801D4730, type = "func", source = "draws a character's experience progress line between the current and next level from the level-growth table, one body shared with the shop and Shisu overlays" }
 Menu_DrawZennyWindow = { addr = 0x801D484C, type = "func", source = "draws the caption string, its icon and the glyph rows, one body shared with the shop, start and Shisu overlays" }
 Menu_DrawPlayTimeWindow = { addr = 0x801D49D4, type = "func", source = "draws the play time window: hours and minutes of g_PlayClock with a colon that blinks on the clock's thirtieths count, one body shared with the start, Bate, Shisu and shop overlays" }
 Menu_ToggleOption = { addr = 0x801D4BD0, type = "func", source = "moves the selection cursor four rows per flag step and toggles the flag on cancel, one body shared with the shop, start and Shisu overlays" }
@@ -1485,6 +1486,7 @@ Menu_DrawTintedLine = { addr = 0x801D4660, type = "func", source = "emits a semi
 Menu_DrawItemRow = { addr = 0x801D4754, type = "func", source = "draws the item row stats and icons, shared name with the shop, start and Bate overlays" }
 Menu_DrawEquipment = { addr = 0x801D4AF4, type = "func", source = "draws a party member's weapon, shield, helmet, armor and two accessories in the equipment slots, the same body as emi/etc/shop/00 0x801D95F4" }
 Menu_DrawIcon = { addr = 0x801D550C, type = "func", source = "draws one 16x8 icon cell from the fixed D8 atlas row, one body shared with the shop, start and Bate overlays" }
+Menu_DrawExperienceLine = { addr = 0x801D56D8, type = "func", source = "draws a character's experience progress line between the current and next level from the level-growth table, one body shared with the shop and Bate overlays" }
 Menu_DrawZennyWindow = { addr = 0x801D57F4, type = "func", source = "draws the caption string, its icon and the glyph rows, one body shared with the shop, start and Bate overlays" }
 Menu_DrawPlayTimeWindow = { addr = 0x801D597C, type = "func", source = "draws the play time window: hours and minutes of g_PlayClock with a colon that blinks on the clock's thirtieths count, one body shared with the start, Bate, Shisu and shop overlays" }
 Menu_ToggleOption = { addr = 0x801D5B78, type = "func", source = "moves the selection cursor four rows per flag step and toggles the flag on cancel, one body shared with the shop, start and Bate overlays" }
@@ -1540,7 +1542,7 @@ Menu_DrawTintedLine = { addr = 0x801D9160, type = "func", source = "emits a semi
 Menu_DrawItemRow = { addr = 0x801D9254, type = "func", source = "draws the item row stats and icons, shared name with the start, Bate and Shisu overlays" }
 Menu_DrawEquipment = { addr = 0x801D95F4, type = "func", source = "draws a party member's weapon, shield, helmet, armor and two accessories in the equipment slots" }
 Menu_DrawIcon = { addr = 0x801DA00C, type = "func", source = "draws one 16x8 icon cell from the fixed D8 atlas row, one body shared with the start, Bate and Shisu overlays" }
-Menu_DrawExperienceLine = { addr = 0x801DA1D8, type = "func", source = "draws a character's experience progress line between the current and next level from the level-growth table" }
+Menu_DrawExperienceLine = { addr = 0x801DA1D8, type = "func", source = "draws a character's experience progress line between the current and next level from the level-growth table, one body shared with the Bate and Shisu overlays" }
 Menu_DrawZennyWindow = { addr = 0x801DA2F4, type = "func", source = "draws the caption string, its icon and the glyph rows, one body shared with the start, Bate and Shisu overlays" }
 Menu_DrawPlayTimeWindow = { addr = 0x801DA47C, type = "func", source = "draws the play time window: hours and minutes of g_PlayClock with a colon that blinks on the clock's thirtieths count, one body shared with the start, Bate, Shisu and shop overlays" }
 Menu_ToggleOption = { addr = 0x801DA678, type = "func", source = "moves the selection cursor four rows per flag step and toggles the flag on cancel, one body shared with the start, Bate and Shisu overlays" }
@@ -2501,6 +2503,10 @@ Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the
 Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "clears one byte of each row in the actor window" }
 Area_InitSpin = { addr = 0x801F4394, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
 Area_ResetViewOffsetY = { addr = 0x801F4930, type = "func", source = "zeroes g_AreaViewOffsetY, the Y term of the view translation added to the rotated camera, and sets g_AreaViewRefreshCount to 2 so the view refreshes for two frames" }
+
+["emi/world04/area189/13"]
+Actor_ClearVelocity = { addr = 0x801F5F20, type = "func", source = "byte-identical to Actor_ClearVelocity at emi/etc/game/00@0x801C5798; the caller func_801F5D20 clears the spad actor velocity members before it steps" }
+
 
 ["emi/world04/area193/13"]
 Message_SetAnswerMessage = { addr = 0x801F2C70, type = "func", source = "stores the message id the answer table D_801F39FC holds for the menu choice D_801490C7 in g_MessageRequest" }
