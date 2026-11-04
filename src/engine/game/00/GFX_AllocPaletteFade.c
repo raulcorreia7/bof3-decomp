@@ -6,29 +6,29 @@ MATCH s32 GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_cou
     s32 result; /* narrowed slot for the step call and return */
     s32 value;  /* flag value derived from flag_value, stored as a byte */
     s32 flagged;
-    u8  tmp_a;
-    u8  tmp_b;
+    u8  saved_a;
+    u8  palette_slot;
 
     slot    = 0;
     offset  = 0;
     value   = flag_value * 2 + 0x41;
     flagged = value | 0x80;
 loop_1:
-    if ((((u8*)D_80145BD4)[offset] & 1) == 0) {
-        ((u8*)D_80145BD4)[offset] = (u8)value;
+    if ((((PaletteFade*)((u8*)D_80145BD4 + offset))->flags & 1) == 0) {
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = (u8)value;
         if ((color_data[0x28] == 0) && ((color_data[0x24] & 4) == 0)) {
-            ((u8*)D_80145BD4)[offset] = (u8)flagged;
+            ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = (u8)flagged;
         }
-        result                                             = slot & BYTE_MASK;
-        ((u8*)D_80145BD4)[offset + 6]                      = GFX_MarkPaletteCells(color_data[0x28], (u8)result, 1);
-        tmp_a                                              = color_data[0x27];
-        ((u8*)D_80145BD4)[offset + 1]                      = tmp_a;
-        tmp_b                                              = color_data[0x28];
-        ((PaletteFade*)((u8*)D_80145BD4 + offset))->target = color_data;
-        ((u8*)D_80145BD4)[offset + 2]                      = palette_base;
-        ((u8*)D_80145BD4)[offset + 3]                      = palette_count;
-        ((u8*)D_80145BD4)[offset + 4]                      = palette_index;
-        ((u8*)D_80145BD4)[offset + 5]                      = tmp_b;
+        result                                                 = slot & BYTE_MASK;
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->step       = GFX_MarkPaletteCells(color_data[0x28], (u8)result, 1);
+        saved_a                                                = color_data[0x27];
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->unk_01     = saved_a;
+        palette_slot                                           = color_data[0x28];
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->target     = color_data;
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->red_offset = palette_base;
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->green_offset = palette_count;
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->blue_offset  = palette_index;
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->table_index  = palette_slot;
         return result;
     }
     slot += 1;
@@ -36,5 +36,5 @@ loop_1:
     if (slot >= 32) {
         return 0xFF;
     }
-    goto loop_1; /* try the next slot */
+    goto loop_1;
 }
