@@ -5,4 +5,9 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* The effect slot table BMagic_AllocEffect scans, and its row count. */
+extern BattleEffect D_801EFA14[];
+#define BMAGIC_EFFECT_SLOTS D_801EFA14
+#define BMAGIC_EFFECT_COUNT 32
+
 #endif
