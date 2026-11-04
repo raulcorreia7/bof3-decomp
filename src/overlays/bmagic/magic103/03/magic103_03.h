@@ -13,6 +13,9 @@ typedef struct BmagicOffset {
 } BmagicOffset;
 
 ASSERT_SIZE(BmagicOffset, 0xC);
+ASSERT_OFFSET(BmagicOffset, x, 0x0);
+ASSERT_OFFSET(BmagicOffset, y, 0x4);
+ASSERT_OFFSET(BmagicOffset, z, 0x8);
 
 extern BmagicOffset D_801F07AC[];
 extern Callback     D_801F07C4[];

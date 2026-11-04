@@ -106,6 +106,10 @@ typedef struct BmagicTrailPoint {
     s16 y;
 } BmagicTrailPoint;
 
+ASSERT_SIZE(BmagicTrailPoint, 0x4);
+ASSERT_OFFSET(BmagicTrailPoint, x, 0x00);
+ASSERT_OFFSET(BmagicTrailPoint, y, 0x02);
+
 #define BMAGIC_TRAIL_LENGTH 32
 
 /* Shift the points of the trail TRAIL[unk_04] from unk_0B up to unk_0A - 1 one
@@ -186,8 +190,15 @@ typedef struct BmagicEffectWork {
     /* 0x22 */ u16 unk_22;
 } BmagicEffectWork;
 
+ASSERT_OFFSET(BmagicEffectWork, flags_00, 0x00);
 ASSERT_OFFSET(BmagicEffectWork, step_01, 0x01);
+ASSERT_OFFSET(BmagicEffectWork, unk_02, 0x02);
+ASSERT_OFFSET(BmagicEffectWork, unk_03, 0x03);
+ASSERT_OFFSET(BmagicEffectWork, unk_04, 0x04);
 ASSERT_OFFSET(BmagicEffectWork, timer_05, 0x05);
+ASSERT_OFFSET(BmagicEffectWork, unk_06, 0x06);
+ASSERT_OFFSET(BmagicEffectWork, unk_08, 0x08);
+ASSERT_OFFSET(BmagicEffectWork, unk_0A, 0x0A);
 ASSERT_OFFSET(BmagicEffectWork, phase_0C, 0x0C);
 ASSERT_OFFSET(BmagicEffectWork, unk_20, 0x20);
 ASSERT_OFFSET(BmagicEffectWork, unk_22, 0x22);
