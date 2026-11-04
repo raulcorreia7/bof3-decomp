@@ -18,7 +18,7 @@ MATCH void func_800AAEBC(s16 target_index, u8 battler_index) {
         target_flags                               = g_BattlePartyBattlers[battler_index].unk_120;
     } else {
         enemy                                      = (s32)battler_index - 3;
-        g_BattleEffects[action_slot].work_74.bytes = &g_BattleEnemies[((u32)battler_index * BATTLE_ENEMY_STRIDE)];
+        g_BattleEffects[action_slot].work_74.enemy = (EnemyBattler*)g_BattleEnemies + battler_index;
         target_flags                               = D_801EB72C[((u32)enemy * BATTLE_ENEMY_STRIDE)];
     }
 

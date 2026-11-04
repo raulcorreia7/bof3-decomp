@@ -166,10 +166,30 @@ typedef union BattleWorkWord3C {
     } half;
 } BattleWorkWord3C;
 
-/* The record a queued slot points at: a PartyBattler, an enemy record (g_BattleEnemies, stride 0x118), the
- * scratchpad work area behind g_SpadWork, or another slot. A few callers pass the address as a word. */
+/* The record a queued slot points at (BattleEffect +0x74). Battle_RunEffects loads it into D_801EB4E0 for every
+ * active slot, so a handler reads it as the acting battler; func_801E5E2C and func_801E61F0 read its slot byte.
+ *
+ * It holds one of four things, chosen where the slot is queued:
+ * - party: a PartyBattler. Every bmagic store (magic013, magic060, magic066, magic079, magic113) and most
+ *   battle/battle/03 and battle/battle/15 stores, which pass a g_BattlePartyBattlers row, g_SpadWork or
+ *   BATTLE_WORK.
+ * - enemy: an EnemyBattler. Three writers store one by index (func_801DE1D4, mode 0 handler 7, one slot per live
+ *   battler; func_800AAC88 and func_800AAEBC, mode 0 handler 1, an amount queued for a battler). Each takes the enemy
+ *   side when the battler index is 3 or more and stores (EnemyBattler*)g_BattleEnemies + index, the record at
+ *   stride 0x118. func_801DE1D4 is not built yet (INCLUDE_ASM); its stores follow the same shape. A reader tells
+ *   the sides apart by the slot byte at +0x05, which both records carry (below 3 is a party row, else an enemy):
+ *   func_801E5E2C indexes g_BattlePartyBattlers or the enemy rows with it, and reads it through the party view.
+ * - effect: another BattleEffect, the link func_800AE108 stores (mode 1, handler 0x43).
+ * - address: a raw payload address in the battle/battle/15 slot menu programs (func_800AE108, func_800AE260,
+ *   mode 2), read back as a word.
+ *
+ * Open: g_SpadWork stores (func_801E05EC, func_801E45DC, func_801E1EC0, func_800AEEC8) and the whole-record
+ * copies (func_800A87D4, boss033's func_800C20CC, stored as bytes) take whichever record the spad points at, and
+ * func_801DE1D4 points the spad at an enemy row during an enemy turn, so those slots can hold an enemy too. Their
+ * callers have not been traced to a side, so those stores keep the party and bytes views. */
 typedef union BattleWorkRef {
     struct PartyBattler* party;
+    struct EnemyBattler* enemy;
     struct BattleEffect* effect;
     u8*                  bytes;
     u32                  address;
