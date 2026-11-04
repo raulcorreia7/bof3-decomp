@@ -1,3 +1,5 @@
 #include "area049_14.h"
 
-INCLUDE_ASM(func_801F3908);
+MATCH void func_801F3908(void) {
+    AREA_INTERACT_CONFIRM(6);
+}
