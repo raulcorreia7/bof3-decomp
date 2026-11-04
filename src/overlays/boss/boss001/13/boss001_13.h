@@ -20,6 +20,7 @@ extern Callback     D_800C2270[];
 /* Battle RAM cell cleared by the mode start; the block around it belongs to
  * include/battle/ram.h, which does not name this halfword yet. */
 extern volatile u16 D_801463BE;
+extern u8           D_800C2188;
 
 /* The three battle hooks the image installs; the addresses are in
  * [emi/boss/boss001/13] of config/symbols.toml. */
