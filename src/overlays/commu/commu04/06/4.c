@@ -19,7 +19,14 @@ MATCH void func_801D0C5C(void) {
 
 INCLUDE_ASM(func_801D0C98);
 
-INCLUDE_ASM(func_801D0CF4);
+MATCH void func_801D0CF4(void) {
+    if (g_GameStateIndex != 2) {
+        Menu_ResetPanelTasks();
+        func_801D16A4();
+        D_801D1774 = 4;
+        D_801F294D += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D0D4C);
 
