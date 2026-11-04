@@ -42,7 +42,7 @@ MATCH void func_801CF338(void) {
 
 INCLUDE_ASM(func_801CF37C);
 
-INCLUDE_ASM(func_801CF494);
+#include "overlays/plchar/Char_ClearModeIfSlotFree.h"
 
 MATCH void func_801CF500(void) {
     SYS_DISPATCH_TASK(D_801CFBB0, 2, g_SpadWork);
