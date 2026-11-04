@@ -7,19 +7,8 @@ MATCH s32 func_801B57F8(void) {
         return 0;
     }
     mode = g_PartySize;
-    if (mode <= 1u) {
-        goto ret_one; /* one or two slots are open, the gate allows */
-    }
-    if ((D_80145FD1 != 1) && (D_80145FD1 != 6)) {
-        goto ret_one; /* only modes 1 and 6 pass the gate */
-    }
-    if (mode != 3) {
-        goto ret_one; /* any mode but 3 fails the gate */
-    }
-    if ((D_80146111 == 1) || (D_80146111 == 6)) {
-        goto ret_one; /* the held direction pair is not one of 1 and 6 */
+    if (mode <= 1u || (D_80145FD1 != 1 && D_80145FD1 != 6) || mode != 3 || D_80146111 == 1 || D_80146111 == 6) {
+        return 1;
     }
     return 0;
-ret_one:
-    return 1;
 }

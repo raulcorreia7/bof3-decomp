@@ -9,16 +9,14 @@ MATCH s32 func_801BB6F0(s32 command) {
         if (value < 6U) {
             route = g_SpadWork->direction_08;
             if (value == route) {
-                goto accepted; /* the command's low nibble matches the route */
+                return 1;
             }
         } else if (value == 8) {
             route = g_SpadWork->direction_08;
             if ((route == 3) || (route == 5)) {
-                goto accepted; /* the route is one of the two scene indices */
+                return 1;
             }
         }
     }
     return 0;
-accepted:
-    return 1;
 }

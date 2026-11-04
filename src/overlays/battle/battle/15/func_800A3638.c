@@ -10,14 +10,9 @@ MATCH bool func_800A3638(s32 battler_index, s32 compare_value) {
     compare_byte = compare_value & BYTE_MASK;
     if ((u32)(battler_index & BYTE_MASK) < 3U) {
         entry = (u8*)(g_GameState);
-        if (*(entry + 0x86) != compare_byte) {
-            if (*(entry + 0x87) != compare_byte) {
-                /* neither selector byte matches */
-                goto ret1;
-            }
+        if (*(entry + 0x86) == compare_byte || *(entry + 0x87) == compare_byte) {
+            return false;
         }
-        return false;
     }
-ret1:
     return true;
 }
