@@ -165,6 +165,9 @@ INCLUDE_ASM(func_801D1758);
  * 0x4C, first differing instruction +0x10: sw ra,64(sp) against 68); retail keeps the lui inside the loop. */
 INCLUDE_ASM(func_801D18CC);
 
+/* Fills the eight 0x14-byte slots at 0x800E6000 (active = 1, two rand bytes, x and y from the s8 pair table at D_801D27B0
+ * shifted 16, z = Area_SampleHeight(x, y) << 16). The loop body matches, but retail's frame is 0x30 against 0x20: it
+ * reserves 16 bytes of locals no form of the body produces (first differing instruction +0x0: addiu sp,sp,-48). */
 INCLUDE_ASM(func_801D19A0);
 
 INCLUDE_ASM(func_801D1A60);
