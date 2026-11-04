@@ -67,6 +67,7 @@ INCLUDE_ASM(func_801F7248);
 
 INCLUDE_ASM(func_801F72A0);
 
+/* nonmatching: the draft with one `work = g_SpadWork` base for the three tint stores is exact except retail compares `andi v1,a1,0xFF` against 0x37 with the area message index in a1 (candidate omits the andi, 0xE4 against 0xE8 bytes); u8, s32, masked and volatile spellings of the index all fold the andi. */
 INCLUDE_ASM(func_801F735C);
 
 MATCH void func_801F7444(void) {
@@ -176,9 +177,13 @@ INCLUDE_ASM(func_801F84B8);
 
 INCLUDE_ASM(func_801F873C);
 
-INCLUDE_ASM(func_801F8C1C);
+MATCH void func_801F8C1C(void) {
+    SCENE_START_SCRIPT_PAIR(D_801FBF78);
+}
 
-INCLUDE_ASM(func_801F8D0C);
+MATCH void func_801F8D0C(void) {
+    SCENE_START_SCRIPT_PAIR(D_801FBF98);
+}
 
 INCLUDE_ASM(func_801F8DFC);
 
