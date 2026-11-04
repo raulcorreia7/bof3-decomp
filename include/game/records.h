@@ -89,6 +89,11 @@
 #define LEVEL_STRIDE                   0x08
 #define LEVEL_GROWTH_CHARACTER_STRIDE  (LEVEL_GROWTH_LEVEL_COUNT * LEVEL_STRIDE)
 
+/* The ActorSlot.type values that have a named handler in g_ActorHandlers. */
+typedef enum ActorType {
+    ACTOR_TYPE_FACING_PROBE = 0x3A,
+} ActorType;
+
 typedef struct ActorSlot {
     u8    flags_00;     /* 0x00 set to 1 when the slot is claimed */
     u8    unk_01;       /* 0x01 the kind the caller passes to Char_SpawnActor */

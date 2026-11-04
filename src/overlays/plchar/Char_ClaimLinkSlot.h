@@ -9,7 +9,7 @@ MATCH void Char_ClaimLinkSlot(void) {
         g_SpadWork->unk_0B = Actor_FindFreeSlot();
         if (g_SpadWork->unk_0B != 0xFF) {
             g_ActorSlots[g_SpadWork->unk_0B].flags_00 = 1;
-            g_ActorSlots[g_SpadWork->unk_0B].type     = 0x3A;
+            g_ActorSlots[g_SpadWork->unk_0B].type     = ACTOR_TYPE_FACING_PROBE;
         }
         /* FAKE: retail reads SND_PlayCue as void(s32). */
         ((void (*)(s32))SND_PlayCue)(g_SpadWork->unk_2C + 0x100);
