@@ -249,7 +249,15 @@ MATCH void func_801FDB84(void) {
     }
 }
 
-INCLUDE_ASM(func_801FDC10);
+MATCH void func_801FDC10(s32 shift) {
+    s32 offset;
+
+    if (D_801FE750 != 0) {
+        offset = D_801FE6E8[g_FrameCount & 3];
+        g_AreaViewRefreshCount = 2;
+        g_AreaViewOffsetY += offset << shift;
+    }
+}
 
 INCLUDE_ASM(func_801FDC6C);
 
