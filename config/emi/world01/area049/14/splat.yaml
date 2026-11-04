@@ -20,7 +20,7 @@ segments:
       - [0x728, c, func_801F3328]
       - [0x7A0, c, func_801F33A0]
       - [0x7C4, c, func_801F33C4]
-      - [0x7E8, c, func_801F33E8]
+      - [0x7E8, c, Area_AddViewOffsetY20]
       - [0x810, c, func_801F3410]
       - [0x838, c, func_801F3438]
       - [0x854, c, func_801F3454]

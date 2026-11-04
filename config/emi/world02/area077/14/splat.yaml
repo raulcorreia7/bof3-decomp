@@ -72,7 +72,7 @@ segments:
       - [0x3080, c, func_801F5C80]
       - [0x3100, c, func_801F5D00]
       - [0x3180, c, func_801F5D80]
-      - [0x31C0, c, func_801F5DC0]
+      - [0x31C0, c, Area_AddViewOffsetY20]
       - [0x31E8, c, Area_ResetViewOffsetY]
       - [0x3204, c, func_801F5E04]
       - [0x3284, c, func_801F5E84]
