@@ -98,6 +98,7 @@ INCLUDE_ASM(func_801D2C00);
 
 INCLUDE_ASM(func_801D2C94);
 
+/* nonmatching: step of the actor position (func_801D36BC(&x, unk_0C, unk_10)), then unk_0C += unk_18, unk_10 += unk_1C, unk_09--, unk_18 -= 0x100, unk_1C -= 0x200, Actor_Clear at zero. Three statement orders tried; best differs from retail at +0x2C (retail loads lbu a1,9(v1) first, candidate lw v0,12(v1)). */
 INCLUDE_ASM(func_801D2D5C);
 
 MATCH void func_801D2DEC(void) {

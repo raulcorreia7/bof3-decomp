@@ -185,6 +185,7 @@ MATCH s32 func_801FD278(void) {
 
 INCLUDE_ASM(func_801FD280);
 
+/* nonmatching: returns 1 through Game_SetScriptActive delay slots like func_801FDC70; the if/else with one tail is 12 bytes short (first differing instruction: bne at +0x10 targets +0x70 against +0x68): retail repeats li v1,6 in the delay slot of each branch to the shared D_80146874 store. */
 INCLUDE_ASM(func_801FD2E8);
 
 INCLUDE_ASM(func_801FD388);

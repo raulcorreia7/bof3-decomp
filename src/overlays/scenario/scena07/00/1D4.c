@@ -238,6 +238,7 @@ INCLUDE_ASM(func_801F86BC);
 
 #include "overlays/scenario/Actor_WaitAndStep.h"
 
+/* nonmatching: takes a slide row (ticks at +2, tint at +3, position +8, delta +0x14); every statement order tried is exact except retail keeps the 0x40000 constant in v0 (lui v0,4 first) where the candidate picks a0 or a1. */
 INCLUDE_ASM(func_801F8764);
 
 MATCH void func_801F8804(u8 shade) {

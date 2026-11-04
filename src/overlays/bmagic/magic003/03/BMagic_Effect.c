@@ -6,6 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC28);
 
+/* nonmatching: clears bytes +0, +1 and +2 of 32 rows (stride 0x78) at D_801F0B38, then sets the work cell (unk_2E 0xA0, unk_30 0x70, unk_0B 0, unk_09 0x1E, unk_0A 0) and steps. Struct rows, one u8 array and three u8 arrays all keep the row bases in registers (first differing instruction: retail move v1,zero at +4 against a lui base); retail indexes with one running offset in v1 and a lui/addu pair per store. */
 INCLUDE_ASM(func_801EED14);
 
 INCLUDE_ASM(func_801EEDAC);
