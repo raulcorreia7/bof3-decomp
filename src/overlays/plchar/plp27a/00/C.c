@@ -34,7 +34,7 @@ MATCH void func_801CEBFC(void) {
     SYS_DISPATCH_TASK(D_801CF914, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801CEC40);
+#include "overlays/plchar/Char_StartFacingTurn.h"
 
 #include "overlays/plchar/Char_RunStepScript.h"
 

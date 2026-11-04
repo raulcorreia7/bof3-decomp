@@ -75,7 +75,7 @@ MATCH void func_801CF4AC(void) {
     SYS_DISPATCH_TASK(D_801D0598, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801CF4F0);
+#include "overlays/plchar/Char_StartFacingTurn.h"
 
 MATCH void Char_RunStepScript_801CF5E4(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
