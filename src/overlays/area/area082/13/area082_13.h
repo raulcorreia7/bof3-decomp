@@ -18,4 +18,6 @@ void func_801F5428(s32 arg0);
 
 void func_801F4430(void);
 
+extern SVECTOR D_1F800014[];
+
 #endif
