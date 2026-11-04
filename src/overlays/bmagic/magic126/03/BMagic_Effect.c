@@ -89,8 +89,7 @@ INCLUDE_ASM(func_801F037C);
 
 INCLUDE_ASM(func_801F0494);
 
-/* needs: type. Effect_TickOnTimerZero shape; retail tests the work byte as signed (sll 24, bgez after a -2 step) where the unk_09 member is u8 in PartyBattler; first differing instruction is andi v0,v0,0xff against sll v0,v0,24. */
-INCLUDE_ASM(func_801F0650);
+#include "overlays/bmagic/Effect_TickOnTimerNegative.h"
 
 INCLUDE_ASM(func_801F06AC);
 
