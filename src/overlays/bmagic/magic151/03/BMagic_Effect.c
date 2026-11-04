@@ -82,7 +82,12 @@ MATCH void func_801EFD80(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFDC0);
+MATCH void func_801EFDC0(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        D_801EB4E0->word_08.byte.unk_0B = 2;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EFE00(void) {
     SYS_DISPATCH_BYTE(D_801F24B8, g_SpadWork->unk_02);
