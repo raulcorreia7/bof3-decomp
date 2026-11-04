@@ -339,7 +339,11 @@ MATCH void func_801FE698(void) {
     func_801C1630();
 }
 
-INCLUDE_ASM(func_801FE6DC);
+MATCH void func_801FE6DC(void) {
+    g_Characters[g_CharSlot[10]].unk_07 &= 254;
+    g_PartySize = 0;
+    Party_JoinMember(7);
+}
 
 MATCH void func_801FE740(void) {
     Party_JoinMember(2);
