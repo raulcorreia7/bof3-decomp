@@ -295,7 +295,7 @@ MATCH void func_801F8710(void) {
 
     slots = SP_PTR(u8*, 0u);
     work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc(work->unk_2E, work->unk_30, work->unk_09, 0x80, 0);
+    GFX_DrawShadedDisc((s16)work->unk_2E, (s16)work->unk_30, work->unk_09, 0x80, 0);
     slots = SP_PTR(u8*, 0u);
     slots[0x11][9] += 0x0F;
     slots = SP_PTR(u8*, 0u);
@@ -315,7 +315,7 @@ MATCH void func_801F87A4(void) {
 
     slots = SP_PTR(u8*, 0u);
     work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc(work->unk_2E, work->unk_30, (work->unk_09 & 1) | 0x3C, 0x80, 0);
+    GFX_DrawShadedDisc((s16)work->unk_2E, (s16)work->unk_30, (work->unk_09 & 1) | 0x3C, 0x80, 0);
     slots = SP_PTR(u8*, 0u);
     if (slots[0x11][9] == 0xD7) {
         SND_PlayCue(EMI_CUE_ID(2, 8));
@@ -339,7 +339,7 @@ MATCH void func_801F885C(void) {
 
     slots = SP_PTR(u8*, 0u);
     work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc(work->unk_2E, work->unk_30, work->unk_09, 0x80, 0);
+    GFX_DrawShadedDisc((s16)work->unk_2E, (s16)work->unk_30, work->unk_09, 0x80, 0);
     slots = SP_PTR(u8*, 0u);
     slots[0x11][9] -= 1;
     slots = SP_PTR(u8*, 0u);

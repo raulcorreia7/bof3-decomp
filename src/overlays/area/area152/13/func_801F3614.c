@@ -5,7 +5,7 @@ MATCH void func_801F3614(void) {
 
     scratch = g_SpadWork;
     scratch->unk_30 -= 0xA;
-    if (scratch->unk_30 < 0xC9) {
+    if ((s16)scratch->unk_30 < 0xC9) {
         scratch->unk_03++;
     }
 

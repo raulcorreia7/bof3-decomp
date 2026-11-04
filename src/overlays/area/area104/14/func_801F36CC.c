@@ -2,7 +2,7 @@
 
 MATCH void func_801F36CC(void) {
     g_SpadWork->unk_2E -= 0x10;
-    if (g_SpadWork->unk_2E < -0x2F) {
+    if ((s16)g_SpadWork->unk_2E < -0x2F) {
         g_SpadWork->state_02 = 0;
     }
 

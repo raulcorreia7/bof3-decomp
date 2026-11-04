@@ -13,7 +13,7 @@ MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
         case 0x95:
             g_SpadWork->unk_0B =
                 func_8015CB18(table[state->index_0A] - 0x90, (s8)table[state->index_0A + 1],
-                              (s8)table[state->index_0A + 2], (*(s16*)&g_SpadWork->unk_2E), g_SpadWork->unk_30);
+                              (s8)table[state->index_0A + 2], (s16)g_SpadWork->unk_2E, (s16)g_SpadWork->unk_30);
             state->index_0A += 2;
             break;
         case 0x98:

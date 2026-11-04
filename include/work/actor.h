@@ -156,8 +156,8 @@ typedef struct Actor {
     u8             unk_2A;         /* 0x2A */
     u8             unk_2B;         /* 0x2B */
     u16            unk_2C;         /* 0x2C */
-    s16            unk_2E;         /* 0x2E - area032 calls it the marker's screen x */
-    s16            unk_30;         /* 0x30 - area032 calls it the marker's screen y */
+    u16            unk_2E;         /* 0x2E - area032 calls it the marker's screen x */
+    u16            unk_30;         /* 0x30 - area032 calls it the marker's screen y */
     u16            unk_32;         /* 0x32 */
     Coord          x;              /* 0x34 */
     Coord          y;              /* 0x38 */

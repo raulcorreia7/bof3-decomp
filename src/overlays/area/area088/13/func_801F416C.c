@@ -4,7 +4,7 @@ MATCH void func_801F416C(void) {
     u8 mode;
 
     g_SpadWork->unk_2E -= 0x10;
-    if (g_SpadWork->unk_2E < -0x2F) {
+    if ((s16)g_SpadWork->unk_2E < -0x2F) {
         ACTOR_CLEAR_STATE();
     }
 

@@ -4,7 +4,7 @@ MATCH void func_801F30F8(void) {
     s32 i;
     s32 value;
 
-    func_801F36C0(&g_SpadWork->x, g_SpadWork->unk_2E, 7);
+    func_801F36C0(&g_SpadWork->x, (s16)g_SpadWork->unk_2E, 7);
     if (*g_ScriptVars == 0xA) {
         Area_ClearWorkColumn();
         value = 0x800E48C0;

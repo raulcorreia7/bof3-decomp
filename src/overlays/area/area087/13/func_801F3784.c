@@ -2,7 +2,7 @@
 
 MATCH void func_801F3784(void) {
     g_SpadWork->unk_30 -= 0xA;
-    if (g_SpadWork->unk_30 < 0xC9) {
+    if ((s16)g_SpadWork->unk_30 < 0xC9) {
         g_SpadWork->unk_03++;
     }
 

@@ -6,7 +6,7 @@ MATCH void func_801F353C(void) {
 
     scratch = g_SpadWork;
     scratch->unk_2E -= 0x10;
-    if (scratch->unk_2E < -0x2F) {
+    if ((s16)scratch->unk_2E < -0x2F) {
         scratch->state_02 = 0;
     }
 
