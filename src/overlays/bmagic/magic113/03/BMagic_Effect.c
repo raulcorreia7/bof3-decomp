@@ -34,7 +34,12 @@ INCLUDE_ASM(func_801EF0F0);
 
 INCLUDE_ASM(func_801EF1F8);
 
-INCLUDE_ASM(func_801EF35C);
+MATCH void func_801EF35C(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 6) {
+        g_SpadWork->word_08.byte.unk_0B = 0x84;
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void func_801EF3A0(void) {
     PartyBattler* work;
