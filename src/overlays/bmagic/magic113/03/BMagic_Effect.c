@@ -119,4 +119,28 @@ INCLUDE_ASM(func_801F0764);
 
 INCLUDE_ASM(func_801F08B4);
 
-INCLUDE_ASM(func_801F0A80);
+MATCH void func_801F0A80(void) {
+    u8 temp_v0;
+
+    if (func_8014DAEC() & 0xFF) {
+        temp_v0            = g_SpadWork->unk_09 + 1;
+        g_SpadWork->unk_09 = temp_v0;
+        if ((u32)(temp_v0 & 0xFF) >= 3U) {
+            D_801EB4E0->unk_0B += 1;
+            func_801E5988();
+            return;
+        }
+        g_SpadWork->unk_2A = ((u8)g_SpadWork->unk_2A + 1) & 1;
+        Actor_SelectScript(g_SpadWork->unk_0B);
+        func_8014D290();
+        if (g_SpadWork->unk_0B == 0) {
+            if (g_SpadWork->unk_09 == 1) {
+                SND_PlayCue(0x104U);
+                return;
+            }
+            SND_PlayCue(0x100U);
+        }
+    } else {
+        func_8014D290();
+    }
+}
