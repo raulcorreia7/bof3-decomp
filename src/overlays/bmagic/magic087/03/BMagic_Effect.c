@@ -20,7 +20,14 @@ MATCH void func_801EF0EC(void) {
 
 INCLUDE_ASM(func_801EF130);
 
-INCLUDE_ASM(func_801EF2C0);
+MATCH void func_801EF2C0(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 2) {
+        g_SpadWork->unk_04 = 0;
+        g_SpadWork->word_08.byte.unk_09 = 8;
+        g_SpadWork->word_08.byte.timer_0A = 0x10;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF324);
 
