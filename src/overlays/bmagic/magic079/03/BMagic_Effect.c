@@ -10,7 +10,24 @@ MATCH void func_801EEC04(void) {
     table[SP_REF(u8*, 0x44)[1]]();
 }
 
-INCLUDE_ASM(func_801EEC5C);
+MATCH void func_801EEC5C(void) {
+    u8            i;
+    u32           slot;
+    PartyBattler* work;
+
+    g_SpadWork->unk_0B = 0;
+    for (i = 0; i < 4; i++) {
+        slot                          = Battle_AllocEffect(1, 0x2B) & BYTE_MASK;
+        work                          = g_SpadWork;
+        g_BattleEffects[slot].unk_01  = i;
+        g_BattleEffects[slot].unk_02  = 0;
+        g_BattleEffects[slot].unk_09  = 0x10;
+        g_BattleEffects[slot].work_74 = (u32)work;
+        g_SpadWork->unk_0B            = g_SpadWork->unk_0B + 1;
+    }
+    SND_QueueSelectionFx(0x100);
+    g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
