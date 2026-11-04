@@ -27,5 +27,6 @@ extern u8 D_801F45EC[];
 
 /* Fairy_VillageInit in the commu overlay at the same address. */
 void func_801EECA4(void);
+void Area_ProjectPoint(s32* pos, long* screen_xy);
 
 #endif
