@@ -181,7 +181,23 @@ MATCH void func_801F7AE0(void) {
 
 INCLUDE_ASM(func_801F7B10);
 
-INCLUDE_ASM(func_801F7BB0);
+MATCH void func_801F7BB0(void) {
+    Actor* temp_s1;
+    s32*   temp_s0;
+    u8     temp_v0;
+
+    temp_s1 = g_SpadWork;
+    temp_s0 = &temp_s1->unk_0C;
+    func_801F7FFC(temp_s0);
+    func_801F8170(temp_s0);
+    temp_s1->unk_58 += 4;
+    temp_v0            = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->unk_09 = 8;
+        g_SpadWork->unk_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F7C50);
 
@@ -408,7 +424,20 @@ INCLUDE_ASM(func_801FC578);
 
 INCLUDE_ASM(func_801FC5A4);
 
-INCLUDE_ASM(func_801FC5FC);
+MATCH void func_801FC5FC(void) {
+    Party_AddVitalItem(1);
+    Message_StartAreaMessage(0x2F);
+    g_GameStateIndex = 2;
+    SND_PauseBgm((s32)g_SndBgmId);
+    SND_StartXaStream(2, 1);
+loop_1:
+    if (!(SND_IsXaIdle() & 0xFF)) {
+        func_801992B8();
+        CallbackWait(1U);
+        goto loop_1;
+    }
+    SND_ResumeBgm((s32)g_SndBgmId);
+}
 
 MATCH void func_801FC688(void) {
 }
@@ -430,13 +459,59 @@ INCLUDE_ASM(func_801FC704);
 
 INCLUDE_ASM(func_801FC7EC);
 
-INCLUDE_ASM(func_801FC8AC);
+MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
+    if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
+        if ((u32)((arg1 >> 0x10) - 7) < 2U) {
+            if (arg0 == 0x5C0000) {
+                SYS_SetFlag(g_SceneFlags, 7U);
+                D_80146874 = 3;
+                D_80146875 = 0xA;
+                return 1;
+            }
+            /* Duplicate return node #5. Try simplifying control flow for better match */
+            return 0;
+        }
+        /* Duplicate return node #5. Try simplifying control flow for better match */
+        return 0;
+    }
+    return 0;
+}
 
-INCLUDE_ASM(func_801FC944);
+MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
+    if (SYS_TestFlag(g_SceneFlags, 0x15) == 0) {
+        if (arg1 == 0x418000) {
+            if ((u32)((arg0 >> 0x10) - 0x20) < 4U) {
+                D_80146874 = 4;
+                D_80146875 = 5;
+                return Scene_ShowMessage(0x33);
+            }
+            /* Duplicate return node #5. Try simplifying control flow for better match */
+            return 0;
+        }
+        /* Duplicate return node #5. Try simplifying control flow for better match */
+        return 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM(func_801FC9DC);
 
-INCLUDE_ASM(func_801FCAB8);
+MATCH s8 func_801FCAB8(s32 arg0, s32 arg1) {
+    if (SYS_TestFlag(g_SceneFlags, 0x1A) != 0) {
+        if ((arg0 >> 0x10) == 0x15) {
+            if ((u32)((arg1 >> 0x10) - 0x34) < 2U) {
+                D_80146874 = 5;
+                D_80146875 = 0x10;
+                return Scene_ShowMessage(0x1F);
+            }
+            goto block_4;
+        }
+        /* Duplicate return node #5. Try simplifying control flow for better match */
+        return 0;
+    }
+block_4:
+    return 0;
+}
 
 INCLUDE_ASM(func_801FCB4C);
 
