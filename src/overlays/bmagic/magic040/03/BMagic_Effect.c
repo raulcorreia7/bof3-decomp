@@ -20,18 +20,7 @@ INCLUDE_ASM(func_801EEF8C);
 
 INCLUDE_ASM(func_801EF074);
 
-MATCH void func_801EF114(void) {
-    PartyBattler* work;
-
-    work = g_SpadWork;
-    work->word_08.byte.unk_09++;
-    work = g_SpadWork;
-    work->word_08.byte.timer_0A++;
-    if (work->word_08.byte.timer_0A == 16) {
-        work = g_SpadWork;
-        work->unk_02++;
-    }
-}
+#include "overlays/bmagic/Effect_CountUpTimersAndStep.h"
 
 MATCH void func_801EF180(void) {
     u8 timer;
