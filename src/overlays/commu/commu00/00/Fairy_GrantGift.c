@@ -25,7 +25,7 @@ MATCH void Fairy_GrantGift(void) {
         for (j = 0; j < 12; j++) {
             g_TextVariables[0][j] = src[j];
         }
-        D_801490E4 = 0;
+        D_801490E4[0] = 0;
         Message_StartAreaMessage(0x96);
         if (!(Party_AddItem(buf[i].item_type, buf[i].item_index, 1, 0) & BYTE_MASK)) {
             FAIRY_EVENT_STEP = FAIRY_EVENT_STEP + 1;

@@ -205,7 +205,7 @@ extern u8             g_UiWindowStep;
 /* D_801490D8 */
 extern u8             g_TextVariables[][0x20];
 extern u8             D_801490DD;
-extern u8             D_801490E4;
+extern u8             D_801490E4[];
 extern u8             D_801490F8[];
 extern u8             D_80149104;
 extern s16            D_8014930A;
