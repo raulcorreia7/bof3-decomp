@@ -10,7 +10,7 @@ MATCH void func_801D5CB0(void) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             g_SaveCardStatus = 7;
         } else {
-            g_SaveCardStatus = 9;
+            g_SaveCardStatus = SAVE_STATUS_FORMATTED;
         }
     }
     D_80148652 = 0xC;

@@ -20,7 +20,7 @@ MATCH void func_801D51B8(void) {
             sprintf((char*)g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);
             if (((SaveProbe)CardAccessFile)(1, (s32)g_UiFormatBuffer, 2, SAVE_FILE_SIZE, 0) != -1) {
                 func_801D6CE4(g_SaveSlotFirst, name - 0x7A);
-                g_SaveCardStatus = 8;
+                g_SaveCardStatus = SAVE_STATUS_SAVED;
                 D_80148652       = 0xC;
                 D_80148654       = 0x3C;
                 D_801E60F0       = 2;
