@@ -188,6 +188,22 @@
 #endif
 
 /*
+ * The same boundary around a run of statements. Write ORDER_LOCK_BEGIN on its
+ * own line and close it with `ORDER_LOCK_END;`. The pair opens and closes one
+ * block, so it must sit inside a single block of its own. Moving statements
+ * into or out of the pair moves the boundary; byte-check every change.
+ */
+#if defined(MATCHING)
+#define ORDER_LOCK_BEGIN do {
+#define ORDER_LOCK_END \
+    }                  \
+    while (0)
+#else
+#define ORDER_LOCK_BEGIN {
+#define ORDER_LOCK_END   }
+#endif
+
+/*
  * Unmatched code/data inclusion for C source. The assembler-side set for the
  * split path lives in `include/match/include_asm.h`; this header is the one
  * game source sees. `ASM_DIR` is the image's one asm folder, passed as

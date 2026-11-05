@@ -9,8 +9,14 @@ MATCH void func_800A8360(void) {
     work_base = g_BattleChoicePanel;
     one       = 1u;
     eight     = 8u;
-    /* FAKE: ORDER_LOCK keeps this statement in place; without it the match is 87.18%. */
-    ORDER_LOCK(work = work_base; work[0] = one; D_80148572 = one; g_BattleChoicePhase = 2u; D_8014857D = 0xFFu;);
+    /* FAKE: the order lock holds this run in place; without it the match is 87.18%. */
+    ORDER_LOCK_BEGIN
+        work                = work_base;
+        work[0]             = one;
+        D_80148572          = one;
+        g_BattleChoicePhase = 2u;
+        D_8014857D          = 0xFFu;
+    ORDER_LOCK_END;
     D_80148574 = -0xAA;
     D_80148571 = eight;
     D_8014857A = 0u;
