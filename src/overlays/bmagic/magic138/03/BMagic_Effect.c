@@ -28,7 +28,17 @@ MATCH void func_801EEF60(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
-INCLUDE_ASM(func_801EEFA4);
+MATCH void func_801EEFA4(void) {
+    BattleHandlerTable3 handlers;
+
+    handlers     = D_801EEC10;
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
+    if (g_SpadWork->flags_00 & 1) {
+        Area_AddActor();
+    }
+    g_ScriptBank = 0x800D3800;
+}
 
 INCLUDE_ASM(func_801EF04C);
 

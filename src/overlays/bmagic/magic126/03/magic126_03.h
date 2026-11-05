@@ -18,6 +18,8 @@ extern Callback D_801F1288[];
 void            func_801F06AC(void);
 
 extern Callback D_801F12AC[];
+extern Callback D_801F1268[];
+extern u8       D_801F12BC[];
 void            func_801F11AC(void);
 void            func_801F0ED0(void);
 
