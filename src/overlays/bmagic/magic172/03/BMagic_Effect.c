@@ -66,6 +66,7 @@ MATCH void func_801EF518(void) {
     }
 }
 
+/* First difference at 0x801EF5B8: constant loaded early; adjust coordinate and target load order. */
 INCLUDE_ASM(func_801EF590);
 
 INCLUDE_ASM(func_801EF650);

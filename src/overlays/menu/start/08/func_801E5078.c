@@ -38,10 +38,10 @@ MATCH void func_801E5078(void) {
     } else {
         SND_PlayCue(EMI_CUE_ID(1, 7));
         g_SaveCardStatus = 8;
-        D_801ED860       = 0xD;
+        g_MenuStartStep  = 0xD;
         D_801ED870       = 0;
         return;
     }
-    D_801ED7F0 = 4;
-    D_801ED860 += 1;
+    g_MenuStartTimer = 4;
+    g_MenuStartStep += 1;
 }

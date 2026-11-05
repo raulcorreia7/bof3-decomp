@@ -11,14 +11,14 @@ MATCH void func_801D0D80(void) {
 
 MATCH void func_801D0DBC(void) {
     func_801D1CA4();
-    D_801DA031 = 0;
-    D_801DA032 = 0;
-    D_801DA030 = 0;
-    D_801DA02C = 0;
-    D_801DA02D = 0;
-    D_801DA02E = 0;
-    D_801DA02F = 0;
-    D_801DA033 = func_801D1E60();
+    g_MenuStatusItems.unk_09  = 0;
+    g_MenuStatusItems.unk_0A  = 0;
+    g_MenuStatusItems.unk_08  = 0;
+    g_MenuStatusItems.used[0] = 0;
+    g_MenuStatusItems.used[1] = 0;
+    g_MenuStatusItems.used[2] = 0;
+    g_MenuStatusItems.used[3] = 0;
+    g_MenuStatusItems.unk_0B  = func_801D1E60();
     func_801D27BC();
     {
         u8* step = &D_80148650;
@@ -84,11 +84,11 @@ MATCH void func_801D0FAC(void) {
 }
 
 MATCH void func_801D1018(void) {
-    if (D_801DA030 != 0) {
-        Party_RemoveItem(ITEM_CAT_ITEM, 0x4DU, (s32)D_801DA02C, 0);
-        Party_RemoveItem(ITEM_CAT_ITEM, 0x23U, (s32)D_801DA02D, 0);
-        Party_RemoveItem(ITEM_CAT_ITEM, 0x24U, (s32)D_801DA02E, 0);
-        Party_RemoveItem(ITEM_CAT_ITEM, 0x56U, (s32)D_801DA02F, 0);
+    if (g_MenuStatusItems.unk_08 != 0) {
+        Party_RemoveItem(ITEM_CAT_ITEM, 0x4DU, g_MenuStatusItems.used[0], 0);
+        Party_RemoveItem(ITEM_CAT_ITEM, 0x23U, g_MenuStatusItems.used[1], 0);
+        Party_RemoveItem(ITEM_CAT_ITEM, 0x24U, g_MenuStatusItems.used[2], 0);
+        Party_RemoveItem(ITEM_CAT_ITEM, 0x56U, g_MenuStatusItems.used[3], 0);
         D_80146875 = 0x14;
         func_801D1EE8();
         if (D_801DA044 >= 0x33) {
@@ -169,10 +169,10 @@ INCLUDE_ASM(func_801D1A20);
 INCLUDE_ASM(func_801D1B58);
 
 MATCH void func_801D1CA4(void) {
-    D_801DA028 = Party_CountItem(ITEM_CAT_ITEM, 77, 0);
-    D_801DA029 = Party_CountItem(ITEM_CAT_ITEM, 35, 0);
-    D_801DA02A = Party_CountItem(ITEM_CAT_ITEM, 36, 0);
-    D_801DA02B = Party_CountItem(ITEM_CAT_ITEM, 86, 0);
+    g_MenuStatusItems.held[0] = Party_CountItem(ITEM_CAT_ITEM, 77, 0);
+    g_MenuStatusItems.held[1] = Party_CountItem(ITEM_CAT_ITEM, 35, 0);
+    g_MenuStatusItems.held[2] = Party_CountItem(ITEM_CAT_ITEM, 36, 0);
+    g_MenuStatusItems.held[3] = Party_CountItem(ITEM_CAT_ITEM, 86, 0);
 }
 
 /* Tried: store-seq body with the status block declared in shisu_00.h.

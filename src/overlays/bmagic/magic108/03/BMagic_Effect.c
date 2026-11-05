@@ -38,9 +38,49 @@ MATCH void func_801EED7C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEE0C);
+MATCH void func_801EEE0C(void) {
+    PartyBattler* battler;
+    u32           slot;
 
-INCLUDE_ASM(func_801EEF48);
+    g_SpadWork->unk_0C = 0x20000;
+    g_SpadWork->unk_10 = 0;
+    func_801DD350(g_SpadWork);
+    g_SpadWork->coord_x_34.raw += g_SpadWork->unk_0C;
+    g_SpadWork->coord_y_38.raw += g_SpadWork->unk_10;
+    g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E + 0xC0;
+    g_SpadWork->unk_18               = g_SpadWork->coord_x_34.raw;
+    g_SpadWork->unk_1C               = g_SpadWork->coord_y_38.raw;
+    g_SpadWork->unk_20               = g_SpadWork->word_3C.word;
+    MATCH_FAKE_BARRIER(); /* FAKE: keeps the g_BattleActingBattler read below the coord copy stores */
+    slot = g_BattleActingBattler;
+    if (slot < BATTLE_PARTY_SLOT_COUNT) {
+        battler = &g_BattlePartyBattlers[slot];
+    } else {
+        battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
+    }
+    g_SpadWork->coord_x_34.raw        = battler->coord_x_34.raw;
+    g_SpadWork->coord_y_38.raw        = battler->coord_y_38.raw;
+    g_SpadWork->word_3C.word          = battler->word_3C.word + 0xC00000;
+    g_SpadWork->word_08.byte.unk_0B   = 0;
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
+    g_SpadWork->step_01 += 1;
+    SND_QueueSelectionFx(0x100);
+}
+
+MATCH void func_801EEF48(void) {
+    s32 vec[4];
+
+    g_SpadWork->word_08.byte.timer_0A += 1;
+    vec[0] = ((s32)g_SpadWork->unk_18 >> 9) - 0x4000;
+    vec[1] = ((s32)g_SpadWork->unk_1C >> 9) - 0x4000;
+    vec[2] = (s32)g_SpadWork->unk_20 >> 0x11;
+    /* The retail build passes the never-written slot after the vector. */
+    func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x20);
+    if (func_800AF6B8(g_SpadWork->unk_18, g_SpadWork->unk_1C, g_SpadWork->unk_20, 0x8000) != 0) {
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void func_801EF020(void) {
     u8 temp_v0;
@@ -77,7 +117,46 @@ MATCH void func_801EF130(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF180(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+    u8      timer;
+
+    PushMatrix();
+    switch (g_SpadWork->word_08.byte.facing_08) {
+        case 0:
+            timer  = g_SpadWork->word_08.byte.timer_0A;
+            rot.vy = 0;
+            rot.vz = 0x800;
+            rot.vx = (~timer & 0x1F) << 7;
+            break;
+        case 1:
+            rot.vx = 0;
+            timer  = g_SpadWork->word_08.byte.timer_0A;
+            rot.vz = 0xC00;
+            rot.vy = (~timer & 0x1F) << 7;
+            break;
+        case 2:
+            timer  = g_SpadWork->word_08.byte.timer_0A;
+            rot.vy = 0;
+            rot.vz = 0;
+            rot.vx = (~timer & 0x1F) << 7;
+            break;
+        case 3:
+            rot.vx = 0;
+            timer  = g_SpadWork->word_08.byte.timer_0A;
+            rot.vz = 0x400;
+            rot.vy = (~timer & 0x1F) << 7;
+            break;
+    }
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_SpadWork);
+}
+#else
 INCLUDE_ASM(func_801EF180);
+#endif
 
 INCLUDE_ASM(func_801EF2D4);
 

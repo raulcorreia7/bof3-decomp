@@ -595,11 +595,13 @@ Effect_CountDownTimerRaiseTicker = { addr = 0x801EF3E4, type = "func", source = 
 g_BMagicEffectFuncs = { addr = 0x801F0994, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic100/03"]
+Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true }
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 Effect_PlayOnZeroTick = { addr = 0x801EEDF8, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 g_BMagicEffectFuncs = { addr = 0x801EFDCC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic101/03"]
+Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true }
 Effect_CountDownTimerNextStep = { addr = 0x801EEED4, type = "func", source = "counts the effect timer down and advances the step byte at zero" }
 Effect_PlayOnZeroTick = { addr = 0x801EEF6C, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_SetActorMatrix = { addr = 0x801EEFCC, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
@@ -634,6 +636,7 @@ Effect_SetActorMatrixQuarterRoll = { addr = 0x801EFA18, type = "func", source = 
 
 ["emi/bmagic/magic108/03"]
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_PlayOnIdleTick = { addr = 0x801EED1C, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
 Effect_AdvanceOnTick = { addr = 0x801EF090, type = "func", source = "increments the effect ticker and advances the step at the limit" }
@@ -1684,6 +1687,7 @@ MENU_CAPTION_ICON = { addr = 0x801D9BD8, source = "the caption icon record drawn
 MENU_CLOCK_COLON = { addr = 0x801D9BDC, source = "the colon string drawn twice between hours and minutes while the play clock's thirtieths count is below 15, by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 g_MenuCommandLabels = { addr = 0x801D9C8C, source = "label id -> button text, drawn on each button by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
 g_MenuCommandRows = { addr = 0x801D9CE8, source = "5-byte rows (button count, four label ids) indexed by the command row kind, read by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
+g_MenuStatusItems = { addr = 0x801DA028, type = "MenuStatusItems", size = 0xC, source = "read:func_801D1CA4@0x801D1CA4 counts four items into held[]; write:func_801D1018@0x801D1018 passes used[] to Party_RemoveItem" }
 D_801DA0B4 = { addr = 0x801DA0B4, source = "func_801D2C50 increments this word by 0x20" }
 D_801DA12C = { addr = 0x801DA12C, source = "func_801D2DEC decrements and func_801D2F68 increments this word by 0x20" }
 
@@ -1752,6 +1756,13 @@ g_MenuCommandRows = { addr = 0x801E59C0, source = "5-byte rows (button count, fo
 MENU_CLUT_STRIP_CELLS = { addr = 0x801E5A24, source = "the 4-byte sprite cells the CLUT strip body walks, shared name with emi/etc/start/08" }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801E5AD0, source = "the sprite-cell indices the CLUT strip body walks, shared name with emi/etc/start/08" }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801E5B1C, source = "the four per-clut entry offsets the CLUT strip body reads, shared name with emi/etc/start/08" }
+g_ShopStockIndex = { addr = 0x801E6044, source = "read:func_801D163C@0x801D163C indexes the shop stock rows at D_8018E7CC (count byte, then category and item pairs) with it and wraps it at the count" }
+g_ShopItemCategory = { addr = 0x801E6048, source = "read:func_801D1D60@0x801D1D60 passes it as the Party_AddItem and Item_GetKind category; func_801D163C@0x801D163C loads it from the shop stock row" }
+g_ShopItemId = { addr = 0x801E604C, source = "read:func_801D1D60@0x801D1D60 passes it as the Party_AddItem item; func_801D163C@0x801D163C loads it from the shop stock row" }
+g_ShopItemCount = { addr = 0x801E6050, source = "read:func_801D1D60@0x801D1D60 passes it as the Party_AddItem amount and multiplies it by the price; func_801D2D64@0x801D2D64 steps it by the arrows" }
+g_ShopItemCountMax = { addr = 0x801E605C, source = "write:func_801D163C@0x801D163C sets it to g_Zenny / price, capped to 99 minus the held count; func_801D2D64@0x801D2D64 clamps the count to it" }
+g_ShopItemPrice = { addr = 0x801E6060, source = "write:func_801D163C@0x801D163C sets it to Shop_ApplyPercent(Item_GetPrice(...)); func_801D1D60@0x801D1D60 subtracts price * count from g_Zenny" }
+g_ShopPricePercent = { addr = 0x801E6064, source = "read:func_801D163C@0x801D163C passes it as the percent argument of Shop_ApplyPercent" }
 g_SaveSlotFirst = { addr = 0x801E6074, source = "the first visible stock row, shared name with the start overlay" }
 g_SaveSlotCount = { addr = 0x801E6078, source = "the visible stock row count, shared name with the start overlay" }
 g_SaveSlots = { addr = 0x801E6098, size = 0x54, source = "the three stock rows, shared name with the start overlay" }
@@ -1770,6 +1781,13 @@ Menu_DrawPortrait = { addr = 0x801D23A0, type = "func", source = "draws a 40x48 
 Menu_DrawIcon = { addr = 0x801D2520, type = "func", source = "draws one MenuIconPrim from uv/clut" }
 Master_DispatchMenu = { addr = 0x801D25D8, type = "func", source = "dispatches g_MasterMenuFuncs by the panel step byte D_801D4285, etc/game/00 runs it each frame" }
 Master_ApplyMaster = { addr = 0x801D3ED0, type = "func", source = "writes the master value D_801D4270[D_801448ED] into the party record at D_80146889 + slot * 0x98 and closes the panel" }
+g_MenuLabelPower = { addr = 0x801D4038, source = "retail text Pwr, drawn beside the power stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
+g_MenuLabelDefense = { addr = 0x801D403C, source = "retail text Def, drawn beside the defense stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
+g_MenuLabelIntellect = { addr = 0x801D4040, source = "retail text Int, drawn beside the intellect stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
+g_MenuLabelAgility = { addr = 0x801D4044, source = "retail text Agl, drawn beside the agility stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
+g_MasterSkills = { addr = 0x801D4088, source = "read:func_801D3A24@0x801D3A24 compares the level of each row of the current master and teaches the row's ability" }
+g_MasterStats = { addr = 0x801D4154, source = "write:func_801D2CA4@0x801D2CA4 copies the row of the current master into the character's level_up_modifiers" }
+g_MasterMessageIds = { addr = 0x801D41BC, source = "read:func_801D2CA4@0x801D2CA4 adds an offset to the entry of the current master and passes it to Message_StartAreaMessage" }
 g_MasterBannerLock = { addr = 0x801D4284, source = "set when the info banner owns the panel" }
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
@@ -1855,9 +1873,12 @@ s_PanelIconSelectors = { addr = 0x801ED1D8, source = "func_801E7210 reads the th
 s_PanelIconValues = { addr = 0x801ED1F0, source = "func_801E7210 fills the panel icon bytes from this value table" }
 g_SaveRecordTypeCommands = { addr = 0x801ED2D4, source = "func_801E8C9C picks the record-kind handler through this table" }
 s_PartyCharacterIds = { addr = 0x801ED610, source = "func_801D177C and func_801D21F4 keep the three party character ids here" }
+g_MenuStartTimer = { addr = 0x801ED7F0, source = "read:func_801E5BCC@0x801E5BCC counts it up to 4 as the slide offset of SAVE_DrawSlots; func_801E5E30@0x801E5E30 counts it down to 0 and then restores the step" }
+g_MenuStartReturnStep = { addr = 0x801ED800, source = "write:func_801E4FFC@0x801E4FFC stores the step plus 1 before jumping to step 14; read:func_801E5E30@0x801E5E30 restores it as the step" }
 g_SaveSlotFirst = { addr = 0x801ED804, source = "the first visible stock row, shared name with the shop overlay" }
 g_SaveSlotCount = { addr = 0x801ED808, source = "the visible stock row count, shared name with the shop overlay" }
 g_SaveSlots = { addr = 0x801ED80C, size = 0x54, source = "the three stock rows, shared name with the shop overlay" }
+g_MenuStartStep = { addr = 0x801ED860, source = "read:func_801E4024@0x801E4024 and func_801E4ED4@0x801E4ED4 dispatch the D_801ED11C and D_801ED148 step tables by it; the step functions add 1 to advance" }
 s_ChoiceMenuValues = { addr = 0x801ED894, source = "func_801D3174 saves the choice-menu value per slot" }
 s_ChoiceMenuCursors = { addr = 0x801ED89C, source = "func_801D3174 saves the choice-menu cursor per slot" }
 s_SkillOrderCursors = { addr = 0x801ED8A8, source = "func_801D8908 saves the skill-order cursor of a party slot and column, func_801DB04C swaps the rows" }

@@ -3,6 +3,6 @@
 MATCH void func_801E46F8(void) {
     func_801E7000();
     if (WINDOW_EFFECT_IDLE()) {
-        D_801ED860 += 1;
+        g_MenuStartStep += 1;
     }
 }

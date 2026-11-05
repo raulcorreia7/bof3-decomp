@@ -6,7 +6,45 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_RunStep.h"
 
+/* Structurally complete; the candidate keeps the loop counter in t-regs and CSEs the work
+ * reload, retail keeps them in $s0/$s1 and reloads g_SpadWork each iteration (75 vs 67
+ * instructions). Permuter tried: best 2030, 23 errors (2400 iterations). */
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEC70(void) {
+    PartyBattler* src;
+    PartyBattler* work;
+    u32           offset;
+    u32           counter;
+    u32           value;
+    s32           span;
+
+    src                                = BATTLE_ACTIVE_WORK;
+    g_SpadWork->word_08.byte.facing_08 = src->word_08.byte.facing_08;
+    g_SpadWork->coord_x_34.raw         = src->coord_x_34.raw;
+    g_SpadWork->coord_y_38.raw         = src->coord_y_38.raw;
+    span                               = g_BattleSelectedActor->word_3C.word;
+    g_SpadWork->word_08.byte.unk_09    = 0;
+    g_SpadWork->word_3C.word           = span;
+    g_SpadWork->word_08.byte.unk_0B    = 0;
+    g_SpadWork->step_01 += 1;
+    offset  = (Battle_AllocEffect(1, 0xA) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+    counter = 0;
+    value   = 1;
+    do {
+        FIELD(u8, D_801EC331, offset)            = 0;
+        FIELD(u8, D_801EC33B, offset)            = (u8)counter;
+        FIELD(u8, D_801EC339, offset)            = (u8)value;
+        work                                     = g_SpadWork;
+        FIELD(PartyBattler*, D_801EC3A4, offset) = work;
+        work->word_08.byte.unk_0B += 1;
+        counter += 1;
+        value += 2;
+    } while (counter < 8);
+    SND_QueueSelectionFx(0x100);
+}
+#else
 INCLUDE_ASM(func_801EEC70);
+#endif
 
 MATCH void func_801EED9C(void) {
     if (g_SpadWork->word_08.byte.unk_09 != 0) {
@@ -66,6 +104,36 @@ MATCH void func_801EF434(void) {
 
 INCLUDE_ASM(func_801EF4E8);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF8E8(void) {
+    SVECTOR       pos;
+    SVECTOR       rot;
+    MATRIX        matrix;
+    long          flags;
+    s32           height;
+    PartyBattler* work;
+
+    PushMatrix();
+    work   = g_SpadWork;
+    rot.vx = 0;
+    rot.vy = 0;
+    rot.vz = 0;
+    pos.vx = (work->coord_x_34.raw >> 9) - 0x4000;
+    pos.vy = (work->coord_y_38.raw >> 9) - 0x4000;
+    if (work->unk_02 < 3) {
+        height = -work->word_3C.half.span_3E;
+    } else {
+        height = -(s16)Area_SampleHeight(work->coord_x_34.raw, work->coord_y_38.raw);
+    }
+    pos.vz = height / 2;
+    RotTrans(&pos, &matrix.t, &flags);
+    RotMatrix(&rot, &matrix);
+    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
+    SetRotMatrix(&matrix);
+    SetTransMatrix(&matrix);
+}
+#else
 INCLUDE_ASM(func_801EF8E8);
+#endif
 
 INCLUDE_ASM(func_801EF9D4);

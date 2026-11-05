@@ -14,5 +14,5 @@ MATCH void func_801E4288(void) {
     WinDrawCueText(70, 190, 0xA8);
     func_801E7720(0xBE, *state);
     func_801E6D88(1);
-    D_801ED860 += 1;
+    g_MenuStartStep += 1;
 }

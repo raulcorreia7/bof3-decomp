@@ -10,9 +10,9 @@ MATCH void func_801E54A4(void) {
         g_SaveSlotCount = func_801EFCA8(g_SaveFileNameFormat, 0x10);
         if (D_8018E990[0] != 0) {
             func_801E77F0();
-            g_SaveSlotCount = 3;
-            D_801ED7F0      = 0;
-            D_801ED860 += 1;
+            g_SaveSlotCount  = 3;
+            g_MenuStartTimer = 0;
+            g_MenuStartStep += 1;
             return;
         }
         g_SaveCardStatus = 6;
@@ -21,5 +21,5 @@ MATCH void func_801E54A4(void) {
     }
 queue_cue:
     SND_PlayCue(EMI_CUE_ID(1, 7));
-    D_801ED860 = 0xD;
+    g_MenuStartStep = 0xD;
 }

@@ -49,5 +49,5 @@ MATCH void SAVE_RunLoadVerify(void) {
             }
         }
     }
-    D_801ED860 = 0xD;
+    g_MenuStartStep = 0xD;
 }

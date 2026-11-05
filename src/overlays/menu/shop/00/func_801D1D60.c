@@ -5,7 +5,7 @@ MATCH void func_801D1D60(void) {
     s8*  toggle;
     u16* pad;
 
-    TEXT_SetVariable(0, 12, Item_GetRecord(D_801E6048, D_801E604C));
+    TEXT_SetVariable(0, 12, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
     toggle     = &D_8014865B;
     pad        = &g_InputPressed;
     D_80148340 = 0x49;
@@ -22,10 +22,10 @@ MATCH void func_801D1D60(void) {
 
             SND_PlayCue(EMI_CUE_ID(1, 4));
             zenny = &g_Zenny;
-            *zenny -= D_801E6060 * D_801E6050;
-            Party_AddItem(D_801E6048, D_801E604C, D_801E6050, 0);
-            stock = Item_GetKind(D_801E6048, D_801E604C);
-            if (D_801E6058 != 0 && D_801E6048 != 0 && ((u32)((stock - 0xA) & BYTE_MASK) >= 2)) {
+            *zenny -= g_ShopItemPrice * g_ShopItemCount;
+            Party_AddItem(g_ShopItemCategory, g_ShopItemId, g_ShopItemCount, 0);
+            stock = Item_GetKind(g_ShopItemCategory, g_ShopItemId);
+            if (D_801E6058 != 0 && g_ShopItemCategory != 0 && ((u32)((stock - 0xA) & BYTE_MASK) >= 2)) {
                 *toggle    = 1;
                 D_80148652 = D_80148652 + 1;
             } else {

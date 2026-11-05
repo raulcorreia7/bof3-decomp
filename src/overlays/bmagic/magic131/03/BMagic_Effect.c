@@ -96,7 +96,28 @@ MATCH void func_801EFF48(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0034);
+MATCH void func_801F0034(void) {
+    u8            timer;
+    u8            count;
+    PartyBattler* work;
+
+    if (g_FrameCount & 1) {
+        count = g_SpadWork->word_08.byte.unk_09;
+        if (count < 8U) {
+            g_SpadWork->word_08.byte.unk_09 = count + 1;
+            g_SpadWork->unk_10 += g_SpadWork->unk_1C;
+        }
+    }
+    work                        = g_SpadWork;
+    timer                       = work->word_08.byte.timer_0A - 1;
+    work->word_08.byte.timer_0A = timer;
+    work->unk_2E.half += work->unk_0C;
+    work->unk_30.half += work->unk_10;
+    if (!(timer & BYTE_MASK)) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801F0100(void) {
     SYS_DISPATCH_BYTE(D_801F1BF4, g_SpadWork->unk_02);

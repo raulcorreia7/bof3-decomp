@@ -17,5 +17,5 @@ MATCH void func_801D115C(void) {
             break;
         }
     }
-    func_801D3560(&D_801E6064);
+    func_801D3560(&g_ShopPricePercent);
 }
