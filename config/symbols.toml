@@ -2739,6 +2739,7 @@ Actor_AdvanceWhenPartyNear = { addr = 0x801F35F8, type = "func", source = "advan
 Actor_SlideScreenX = { addr = 0x801F3738, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F3794, type = "func", source = "advances the work state when the party position is outside the work cell" }
 Area_Update = { addr = 0x801F3914, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
+func_801F4158_area168 = { addr = 0x801F4158, type = "func", source = "mechanical disambiguation of the cross-image address-name collision with the area.h func_801F4158 edge_cross declaration (coordinator instruction)" }
 Message_ClearRequest = { addr = 0x801F4808, type = "func", source = "clears the area request slot and resets the game-overlay state bytes when the selection byte is clear" }
 
 ["emi/world04/area169/13"]
