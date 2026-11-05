@@ -36,8 +36,7 @@ MATCH void func_801E3284(MenuPanelTask* task) {
     sprintf((char*)text, D_801D0E98, Item_Count(group, key, 1U) & HALF_MASK);
     UI_DrawGlyphString((s16)(task->x + 137), (s16)(task->y + 48), 0U, text);
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 896, 256) & HALF_MASK, NULL);
-    GFX_AddPrim(1U, 0xCU);
+    GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & HALF_MASK);
 
     for (index = 0; index < 20; index++) {
         UI_DrawSprite((s16)(task->x + (index + 1) * 8), (s16)task->y, 0x29, 0);

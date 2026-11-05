@@ -3,8 +3,7 @@
 MATCH void func_801D9900(void) {
     TILE* tile;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 2, 960, 0), 0);
-    GFX_AddPrim(1, 0x0C);
+    GFX_AddDrawMode(GetTPage(0, 2, 960, 0));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     tile->w  = 960;

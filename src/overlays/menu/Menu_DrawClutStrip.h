@@ -18,8 +18,7 @@ MATCH void Menu_DrawClutStrip(u8 clut_index) {
     u8 row;
     u8 pair;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256), NULL);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(GetTPage(0, 0, 832, 256));
     cluts[0] = GetClut(48, 482);
     cluts[1] = GetClut(80, 482);
     cluts[2] = GetClut(64, 482);

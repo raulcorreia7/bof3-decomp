@@ -11,8 +11,7 @@ MATCH void Area_DrawHud(s16 x, s16 y) {
     }
 
     tpage = getTPage(1, 0, 768, 256);
-    GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(tpage);
     Area_DrawHudSprite((s16)x, (s16)y, 0);
 
     type = Area_GetCellCode(D_8014930A, D_8014930E);

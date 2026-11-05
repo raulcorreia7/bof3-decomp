@@ -9,8 +9,7 @@ MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mo
     s32   u;
 
     tpage = getTPage(0, 1, 960, 0);
-    GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(tpage);
     sprt       = (SPRT*)g_GfxPrimCursor;
     sprt->w    = 16;
     sprt->h    = 8;

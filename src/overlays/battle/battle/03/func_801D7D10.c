@@ -6,8 +6,7 @@ MATCH void func_801D7D10(u8 clut_index, u16 x, u16 y, u16 width, u8 height, u8 s
     s32              u0;
 
     clut_table = D_801D0C64;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 256, 256), 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(GetTPage(0, 0, 256, 256));
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     setRGB0(primitive, shade, shade, shade);
