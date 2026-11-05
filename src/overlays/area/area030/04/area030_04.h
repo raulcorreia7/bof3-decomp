@@ -41,20 +41,27 @@ typedef union FishingBounce {
     } half;
 } FishingBounce;
 
+/* The low cell of 0x38 is read as a byte and, by func_801E0044, as a
+ * halfword over 0x38-0x39: the low half of the fixed-point y, whose sign bit
+ * it keeps. */
+typedef union FishingStateSlotLow {
+    u8  unk_38; /* the byte at 0x38 */
+    s16 pos_low_38;
+} FishingStateSlotLow;
+
+typedef struct FishingStateSlot {
+    FishingStateSlotLow low_38;
+    s16                 slot_3A; /* the accessory slot of the selected row; func_801D8364 */
+} FishingStateSlot;
+
+ASSERT_SIZE(FishingStateSlot, 4);
+
 /* The cell at 0x38 is read as a word, as a byte and, at 0x3A, as a halfword
  * of its own.  The word holds the work record's y position in 16.16 fixed
  * point: func_801DE5EC writes 0x3E0000 - facing * 0xC0000, func_801DA638
  * writes 0x410000, func_801D23F4 subtracts 0x4000 and func_801E03F8 calls
  * it pos_y while calling 0x34 pos_x.  The accessory drawer func_801D8364
  * stores the accessory slot of the selected row in the 0x3A halfword. */
-typedef struct FishingStateSlot {
-    u8  unk_38; /* the byte at 0x38 */
-    u8  pad_39;
-    s16 slot_3A; /* the accessory slot of the selected row; func_801D8364 */
-} FishingStateSlot;
-
-ASSERT_SIZE(FishingStateSlot, 4);
-
 typedef union FishingStateY {
     s32              pos_y;
     FishingStateSlot half;
