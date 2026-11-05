@@ -18,7 +18,7 @@ MATCH void func_801EEE38(void) {
 #include "shared/Effect_StartPlaying.h"
 
 MATCH void func_801EEEC8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 MATCH void func_801EEF0C(void) {

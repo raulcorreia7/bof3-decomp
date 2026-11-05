@@ -13,8 +13,8 @@ MATCH void func_801F30E8(void) {
     *(s32*)(scratch + 0x40) += 0x2000;
 
     if (check[0x09] == 0) {
-        check[0x48]          = 0;
-        ((u8*)g_SpadWork)[1] = 3;
+        check[0x48]        = 0;
+        g_SpadWork->unk_01 = 3;
     }
 
     Area_AddActor();

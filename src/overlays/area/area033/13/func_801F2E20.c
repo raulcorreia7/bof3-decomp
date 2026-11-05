@@ -28,5 +28,5 @@ MATCH void func_801F2E20(void) {
         g_SpadWork->unk_0B = 0;
     }
 
-    D_801F4F64[((u8*)g_SpadWork)[1]]();
+    D_801F4F64[g_SpadWork->unk_01]();
 }

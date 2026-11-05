@@ -25,5 +25,5 @@ MATCH void func_801F44D0(void) {
     map_offset                                                     = D_801F4C3C[0xD + row_offset] * MEM(u8, 0x80104000);
     *(g_AreaCellCodes + map_offset + D_801F4C3C[0xC + row_offset]) = 0xA0;
     Actor_SelectScript(0);
-    ((u8*)g_SpadWork)[1] = 1;
+    g_SpadWork->unk_01 = 1;
 }

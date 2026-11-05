@@ -19,7 +19,7 @@ MATCH void func_801F3788(void) {
         goto done; /* skips the forced write: panel `0x5C` draws next */
     }
 force:
-    ((u8*)g_SpadWork)[3] = 3;
+    g_SpadWork->unk_03 = 3;
 done:
     func_801F40FC(0x5C, g_SpadWork->unk_30);
 }

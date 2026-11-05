@@ -22,7 +22,7 @@ MATCH void func_801F36EC(void) {
         goto done;
     }
 bump:
-    ((u8*)g_SpadWork)[3]++;
+    g_SpadWork->unk_03++;
 done:
     Area_DrawHudBanner(0x5C, g_SpadWork->unk_30);
 }

@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC1C(void) {
     BmagicEffectFuncs handlers = D_801EEC04;
 
-    handlers.handlers[((u8*)g_SpadWork)[1]]();
+    handlers.handlers[g_SpadWork->step_01]();
 }
 
 INCLUDE_ASM(func_801EEC94);
@@ -60,7 +60,7 @@ MATCH void func_801EF068(void) {
 INCLUDE_ASM(func_801EF148);
 
 MATCH void func_801EF3F8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 INCLUDE_ASM(func_801EF43C);
