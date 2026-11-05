@@ -12,7 +12,7 @@ MATCH void func_801F375C(void) {
         }
     }
 
-    if (D_801454F2 != 0 && ((u8*)g_Task)[0x0B] != 0) {
+    if (D_801454F2 != 0 && TASK_BYTES[0x0B] != 0) {
         goto bump;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -22,7 +22,7 @@ MATCH void func_801F375C(void) {
         goto done;
     }
 bump:
-    ((u8*)g_Task)[0x03]++;
+    TASK_BYTES[0x03]++;
 done:
     func_801F3FF8(0x5C, g_Task->unk_30);
 }

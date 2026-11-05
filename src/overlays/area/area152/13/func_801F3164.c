@@ -16,9 +16,9 @@ MATCH void func_801F3164(void) {
                 goto tail; /* skips the arming stores: run the step only */
             }
         }
-        ((u8*)g_Task)[0x48] = 2;
-        ((u8*)g_Task)[0x09] = 8;
-        ((u8*)g_Task)[0x01] = 4;
+        TASK_BYTES[0x48] = 2;
+        TASK_BYTES[0x09] = 8;
+        TASK_BYTES[0x01] = 4;
     }
 tail:
     Area_AddActor();

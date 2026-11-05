@@ -14,7 +14,7 @@ MATCH void Scene_RunEffect(void) { /* func_801D0C10 */
     BattleHandlerTable3 handlers;
 
     handlers = D_801D0C04;
-    handlers.handlers[((u8*)g_Task)[1]]();
+    handlers.handlers[TASK_BYTES[1]]();
 }
 
 /* func_801D0C70 */
