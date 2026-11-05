@@ -6,5 +6,5 @@
 MATCH void func_801E9AF0(void) {
     D_801ED414[g_MenuPanelTaskCurrent->state]();
     func_801DC150((s16)g_MenuPanelTaskCurrent->x, (s16)g_MenuPanelTaskCurrent->y,
-                  g_CharSlot[D_80144F5A[((u8*)g_MenuPanelTaskCurrent)[0xA]]], 1);
+                  g_CharSlot[D_80144F5A[g_MenuPanelTaskCurrent->unk_0A]], 1);
 }
