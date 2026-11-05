@@ -4,7 +4,7 @@
  */
 /* func_801F4100, func_801F2E5C */
 MATCH void Actor_BeginScriptFromAreaTable(void) {
-u8* bank;
+    u8* bank;
     u8* table;
     u8* row;
     u8  step;

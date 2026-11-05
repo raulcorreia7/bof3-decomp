@@ -3,7 +3,7 @@
  */
 /* func_801EF2D4, func_801EF1A0 */
 MATCH void Effect_CountUpWorkByteAndStep(void) {
-u8 timer;
+    u8 timer;
 
     timer              = g_SpadWork->unk_04 + 2;
     g_SpadWork->unk_04 = timer;

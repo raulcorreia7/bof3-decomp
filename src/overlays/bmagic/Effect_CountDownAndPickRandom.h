@@ -3,7 +3,7 @@
  */
 /* func_801EF114, func_801EF124 */
 MATCH void Effect_CountDownAndPickRandom(void) {
-u8 counter;
+    u8 counter;
 
     counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
     g_SpadWork->word_08.byte.unk_09 = counter;
