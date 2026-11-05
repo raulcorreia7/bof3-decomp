@@ -12,8 +12,7 @@ MATCH void func_801E8DB4(MenuPanelTask* task) {
     if (GetGraphType() != 1) {
         GetGraphType();
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, NULL);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(0xF);
     func_801DD618((task->x + 9) & HALF_MASK, (task->y + 5) & HALF_MASK, (FIELD(u8, task, 0xA) + 3) & BYTE_MASK, 0x1E,
                   (u16)(GetClut(16, 480) & HALF_MASK), 128);
 }

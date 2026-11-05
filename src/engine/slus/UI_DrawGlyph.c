@@ -11,8 +11,7 @@ NON_MATCHING void UI_DrawGlyph(s32 color, u8* text) {
 
     val0 = text;
     val1 = color;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 960, 1) & HALF_MASK, NULL);
-    GFX_AddPrim(1U, 0xCU);
+    GFX_AddDrawMode(GetTPage(0, 1, 960, 1) & HALF_MASK);
     val1 &= 0xF;
     FIELD(u16, g_GfxPrimCursor, 0xEu) = GetClut(val1 * 16, 480);
     val1                              = 8;

@@ -57,7 +57,6 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     if (GetGraphType() != 1) {
         GetGraphType();
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(0xF);
     Menu_DrawIcon((u16)(x + 9), (u16)(y + 5), (u8)(icon + 3), 0x1E, GetClut(16, 480), 128);
 }

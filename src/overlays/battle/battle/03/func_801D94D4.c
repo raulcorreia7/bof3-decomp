@@ -13,8 +13,7 @@ MATCH void func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value) {
     } else {
         sprintf(g_UiFormatBuffer, D_801D0C74, (u16)text_value);
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 960, 0), 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(GetTPage(0, 0, 960, 0));
 
     do {
         temp = g_UiFormatBuffer[index];

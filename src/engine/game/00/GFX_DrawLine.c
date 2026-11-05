@@ -5,8 +5,7 @@ MATCH void GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 bl
     s32      tpage;
 
     tpage = getTPage(0, blend, 896, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, NULL);
-    GFX_AddPrim(1U, 0xCU);
+    GFX_AddDrawMode(tpage);
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
     line->x0 = x0;

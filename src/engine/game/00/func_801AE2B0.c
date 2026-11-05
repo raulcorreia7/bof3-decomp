@@ -23,8 +23,7 @@ MATCH void func_801AE2B0(s16 quad_x, s16 quad_y, s32 quad_width, s32 quad_height
     if (GetGraphType() != 1) {
         GetGraphType();
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(0xF);
     prim = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);

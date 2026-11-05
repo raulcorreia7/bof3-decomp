@@ -792,8 +792,7 @@ MATCH void func_801F3D5C(void) {
     AreaSpin* work;
     u8        i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 896, 256), 0);
-    GFX_AddPrim(1u, 0x0Cu);
+    GFX_AddDrawMode(GetTPage(0, 1, 896, 256));
     Area_SetCameraMatrix(scratch);
 
     work = (AreaSpin*)WORLD00_AREA024_SPIN_WORK_BASE;
@@ -844,8 +843,7 @@ MATCH s32 func_801F3E48(u8 shade) {
     matrix2 = matrix;
     func_8015B4B0(&matrix2);
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 896, 256), 0);
-    GFX_AddPrim(1u, 0x0Cu);
+    GFX_AddDrawMode(GetTPage(0, 1, 896, 256));
 
     src = (u16*)WORLD00_AREA024_PTR_7AA8;
     i   = 0;
