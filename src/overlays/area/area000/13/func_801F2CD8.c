@@ -7,5 +7,5 @@ MATCH void func_801F2CD8(void) {
     spad = SP_REF(u8*, 0x44);
     func_801ABBA8((void*)g_ScriptState, spad[8]);
     value                   = 2;
-    g_ScriptState->unk_07 = value;
+    ((u8*)g_ScriptState)[7] = value;
 }
