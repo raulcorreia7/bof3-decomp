@@ -23,7 +23,15 @@ MATCH void func_801EEF98(void) {
 
 INCLUDE_ASM(func_801EEFDC);
 
-INCLUDE_ASM(func_801EF0EC);
+MATCH void func_801EF0EC(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 9) {
+        func_80196718(g_BattleSelectedActor);
+        func_800AF814(g_BattleTargetSelector);
+        func_800A9820(g_BattleTargetSelector);
+        g_BattleState |= 4;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF16C(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);

@@ -58,8 +58,6 @@ INCLUDE_ASM(func_801EF318);
 
 INCLUDE_ASM(func_801EFE14);
 
-/* Follows BMAGIC_PROJECT_ACTOR_MATRIX (bmagic.h), but the work pointer lives in $a1 and a
- * type-13 branch loads a word into the rotation before the projection. */
 MATCH void func_801EFEB8(void) {
     PartyBattler* work;
     SVECTOR       pos;

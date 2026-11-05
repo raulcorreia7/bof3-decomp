@@ -16,7 +16,8 @@ Input: `TARGET@0xADDRESS` from the task.
    the function's prototypes ([loop](../../../../docs/matching.md#the-loop)) and draft there.
 3. Measure: put the draft in the unit's `.c` and run `tools/match.sh <target> <func>`
    ([match.sh](../../../../docs/toolchain.md#matchsh)): `match` or the first differing instruction in
-   about 0.1 s. `match.sh` compares `.text` only. A refusal (exit 2) names the reason; for a function
+   about 0.1 s; `--diff` before the target prints the whole function side by side, `!` on differing
+   rows (positional, so an inserted instruction marks the rest). `match.sh` compares `.text` only. A refusal (exit 2) names the reason; for a function
    with a jump table or data use the `cc` wrapper and objdiff
    ([toolchain](../../../../docs/toolchain.md#compiler-wrapper)). Label the first hunk and fix it by
    label ([diagnose](../../../../docs/matching.md#diagnose)).

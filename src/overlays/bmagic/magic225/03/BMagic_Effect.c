@@ -22,11 +22,25 @@ INCLUDE_ASM(func_801EF31C);
 
 INCLUDE_ASM(func_801EF404);
 
-INCLUDE_ASM(func_801EF578);
+MATCH void func_801EF578(void) {
+    u8 temp_v1;
+
+    temp_v1                           = g_SpadWork->word_08.byte.timer_0A + 2;
+    g_SpadWork->word_08.byte.timer_0A = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x10) {
+        g_SpadWork->word_08.byte.unk_0B = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
 
-INCLUDE_ASM(func_801EF628);
+MATCH void func_801EF628(void) {
+    if ((u8)D_801EB4E0->word_08.byte.unk_0B < 2U) {
+        g_SpadWork->word_08.byte.unk_0B = 1;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF67C);
 
