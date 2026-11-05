@@ -329,23 +329,23 @@ INCLUDE_ASM(func_801FE0A4);
 
 MATCH void func_801FE10C(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
-    EMI_LoaderStreamFamily(9, 3, 4, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_PAJAMAS, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
     g_PartySize                              = 0;
     g_Characters[g_CharSlot[9]].character_id = 9;
-    Party_JoinMember(9);
+    Party_JoinMember(CHAR_ID_RYU_PAJAMAS);
 }
 
 MATCH void func_801FE1B0(void) {
     g_Characters[g_CharSlot[0]].character_id = 0;
-    EMI_LoaderStreamFamily(0, 3, 4, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
     g_PartySize = 0;
-    Party_JoinMember(0);
-    Party_JoinMember(3);
-    Party_JoinMember(4);
+    Party_JoinMember(CHAR_ID_RYU_YOUNG);
+    Party_JoinMember(CHAR_ID_TEEPO);
+    Party_JoinMember(CHAR_ID_REI);
 }
 
 MATCH void func_801FE224(void) {
-    Party_JoinMember(4);
+    Party_JoinMember(CHAR_ID_REI);
 }
 
 #include "overlays/scenario/Scene_RemoveRei.h"

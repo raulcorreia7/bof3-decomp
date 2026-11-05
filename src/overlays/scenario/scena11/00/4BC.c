@@ -244,7 +244,7 @@ MATCH s32 func_801FAB6C(void) {
 #include "overlays/scenario/Scene_JoinMomo.h"
 
 MATCH void func_801FAC48(void) {
-    EMI_LoaderStreamFamily(7U, 8U, 5U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(0);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
     Party_JoinMember(CHAR_ID_MOMO);
@@ -252,9 +252,9 @@ MATCH void func_801FAC48(void) {
 }
 
 MATCH void func_801FAC94(void) {
-    EMI_LoaderStreamFamily(7U, 2U, 5U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
 }
 
@@ -267,10 +267,10 @@ MATCH void Scene_JoinMomo_801FACD8(void) {
 #include "overlays/scenario/Scene_JoinPeco.h"
 
 MATCH void func_801FADAC(void) {
-    EMI_LoaderStreamFamily(7, 4, 2, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
     func_801C1400(0);
-    func_801C187C(4);
-    func_801C187C(2);
+    func_801C187C(CHAR_ID_REI);
+    func_801C187C(CHAR_ID_GARR);
     func_801C1630();
 }
 

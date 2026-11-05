@@ -471,7 +471,7 @@ MATCH void func_801FDBCC(void) {
     func_801C1ABC(D_80146189);
 }
 
-/* Tried: straight body (func_801C1ABC(2) then four
+/* Tried: straight body (func_801C1ABC(CHAR_ID_GARR) then four
  * g_Characters[...].unk_07 &= 254). GCC omits the nops retail emits
  * after each load in the slot/index sequences (same pattern as
  * func_801FE1C0). First diff: 0x801FDC30 nop vs lui a0.

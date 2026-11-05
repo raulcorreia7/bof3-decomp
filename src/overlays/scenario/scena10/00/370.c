@@ -207,18 +207,18 @@ MATCH void func_801FE360(void) {
     for (i = 0; i < g_PartySize; i++) {
         func_801C1ABC(g_BattlePartyBattlers[i].stats.character_id);
     }
-    EMI_LoaderStreamFamily(7, 5, 8, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0);
     g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_JoinMember(CHAR_ID_MOMO);
 }
 
 MATCH void func_801FE3F8(void) {
-    Party_JoinMember(8);
+    Party_JoinMember(CHAR_ID_NINA_ADULT);
 }
 
 MATCH void func_801FE418(void) {
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_MOMO);
 }
 
 INCLUDE_ASM(func_801FE438);
@@ -227,7 +227,7 @@ INCLUDE_ASM(func_801FE438);
 
 MATCH void func_801FE5B0(void) {
     g_Characters[g_CharSlot[5]].unk_07 &= 254;
-    func_801C1ABC(5);
+    func_801C1ABC(CHAR_ID_MOMO);
     func_801C1630();
 }
 

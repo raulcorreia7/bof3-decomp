@@ -322,47 +322,47 @@ MATCH s32 func_801FD208(void) {
 MATCH void func_801FD298(void) {
     g_Characters[g_CharSlot[6]].unk_07 |= 1;
     Party_BuildBattlers(0);
-    Party_JoinMember(5);
-    Party_JoinMember(1);
-    Party_JoinMember(6);
+    Party_JoinMember(CHAR_ID_MOMO);
+    Party_JoinMember(CHAR_ID_NINA_YOUNG);
+    Party_JoinMember(CHAR_ID_PECO);
 }
 
 MATCH void func_801FD30C(void) {
-    Party_JoinMember(1);
+    Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }
 
 MATCH void func_801FD32C(void) {
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_MOMO);
 }
 
 MATCH void func_801FD34C(void) {
-    Party_JoinMember(6);
+    Party_JoinMember(CHAR_ID_PECO);
 }
 
 MATCH void func_801FD36C(void) {
-    Party_JoinMember(0);
+    Party_JoinMember(CHAR_ID_RYU_YOUNG);
 }
 
 MATCH void func_801FD38C(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 5U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_MOMO);
 }
 
 MATCH void func_801FD3C8(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 5U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(1);
+    Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }
 
 MATCH void func_801FD404(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 6U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_PECO, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(6);
+    Party_JoinMember(CHAR_ID_PECO);
 }
 
 MATCH void func_801FD440(void) {
-    Party_JoinMember(2);
+    Party_JoinMember(CHAR_ID_GARR);
 }
 
 #include "overlays/scenario/Scene_JoinNina.h"
@@ -372,8 +372,8 @@ MATCH void Scene_JoinNina_801FD49C(void) {
 }
 
 MATCH void func_801FD4D8(void) {
-    func_801C1ABC(5);
-    func_801C1ABC(1);
+    func_801C1ABC(CHAR_ID_MOMO);
+    func_801C1ABC(CHAR_ID_NINA_YOUNG);
     func_801C1630();
 }
 
@@ -384,6 +384,6 @@ MATCH void func_801FD4D8(void) {
 #include "overlays/scenario/Scene_RemovePeco.h"
 
 MATCH void func_801FD580(void) {
-    func_801C1ABC(0);
+    func_801C1ABC(CHAR_ID_RYU_YOUNG);
     func_801C1630();
 }

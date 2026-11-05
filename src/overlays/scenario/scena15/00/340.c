@@ -428,8 +428,8 @@ INCLUDE_ASM(func_801FE18C);
 INCLUDE_ASM(func_801FE3C8);
 
 MATCH void func_801FE49C(void) {
-    Party_JoinMember(4);
-    Party_JoinMember(2);
+    Party_JoinMember(CHAR_ID_REI);
+    Party_JoinMember(CHAR_ID_GARR);
     func_801C1630();
 }
 
