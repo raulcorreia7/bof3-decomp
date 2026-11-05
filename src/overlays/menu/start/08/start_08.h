@@ -163,7 +163,8 @@ extern u8*             D_801C893C[];
 extern u8*             D_801C8950[];
 extern char            g_MenuStatFormat[4];
 extern char            g_MenuZennyFormat[4];
-extern char            D_801D0C74[];
+/* D_801D0C74 */
+extern char            g_MenuNextExpBlank[];
 extern char            D_801D0DAC[];
 extern char            D_801D0DB0[];
 extern u8              D_801D0DBC[4];

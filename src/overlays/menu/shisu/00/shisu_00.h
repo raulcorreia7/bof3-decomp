@@ -14,7 +14,8 @@ extern u8            D_80148656;
 extern OverlayHeader D_801D0C00;
 extern char          g_MenuStatFormat[];
 extern char          g_MenuZennyFormat[];
-extern u8            D_801D0C2C[];
+/* D_801D0C2C */
+extern char          g_MenuNextExpBlank[];
 extern char          g_MenuClockFormat[];
 extern char          D_801D0D64[];
 extern char          D_801D0D68[];
