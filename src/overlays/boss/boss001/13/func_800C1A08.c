@@ -4,9 +4,9 @@ MATCH void func_800C1A08(void) {
     s32 value;
 
     if (D_801463BE == 0) {
-        value                        = g_Task->coord_y_38.raw + 0x8000;
-        g_Task->coord_y_38.raw       = value;
-        g_Task->word_3C.half.span_3E = Area_SampleHeight(g_Task->coord_x_34.raw, value);
+        value             = g_Task->y.raw + 0x8000;
+        g_Task->y.raw     = value;
+        g_Task->z.half.hi = Area_SampleHeight(g_Task->x.raw, value);
         Area_FindSceneRecord(0x5F);
         g_BattleCurrentEnemy->script = &D_800C2188;
         g_Task->unk_2A               = 0;

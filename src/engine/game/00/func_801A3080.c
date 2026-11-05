@@ -33,7 +33,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
     dir = type & BYTE_MASK;
     if ((FIELD(s32, work, 0x0Cu) + FIELD(s32, work, 0x10u)) != 0) {
         value = (s16)(Area_SampleHeight(work->x.fixed + g_FacingSteps[dir].x, work->y.fixed + D_80181B98[dir * 2]) -
-                      g_Task->z.part.integer);
+                      g_Task->depth.part.integer);
         if (facing & 2) {
             g_Task->unk_64 = 0;
             if (dir != 3) {

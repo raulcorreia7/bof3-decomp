@@ -37,7 +37,7 @@ MATCH void func_801E5078(void) {
         D_801ED870     = 2;
     } else {
         SND_PlayCue(EMI_CUE_ID(1, 7));
-        g_SaveCardStatus = 8;
+        g_SaveCardStatus = SAVE_STATUS_NO_CARD;
         g_MenuStartStep  = 0xD;
         D_801ED870       = 0;
         return;

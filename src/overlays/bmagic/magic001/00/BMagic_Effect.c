@@ -51,7 +51,7 @@ MATCH void func_801EF280(void) {
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
     work->unk_14 += work->unk_20;
-    work->word_3C.half.span_3E += work->unk_14;
+    work->z.half.hi += work->unk_14;
     if (timer == 0) {
         SND_QueueSelectionFx(0x203);
         func_801E257C(g_BattleActiveBattler, 0xC);
@@ -90,7 +90,7 @@ MATCH void func_801EF408(void) {
     s32           value = work->unk_14 + work->unk_20;
     work->timer         = timer;
     work->unk_14        = value;
-    work->word_3C.half.span_3E += value;
+    work->z.half.hi += value;
     if (timer == 0) {
         g_Task->step += 1;
     }
@@ -178,10 +178,10 @@ MATCH void func_801EFD28(void) {
     u8  temp_a1;
     u8  temp_v0;
 
-    temp_a1                      = g_Task->timer;
-    temp_v1                      = g_Task->unk_14 + g_Task->unk_20;
-    g_Task->unk_14               = temp_v1;
-    g_Task->word_3C.half.span_3E = (u16)g_Task->word_3C.half.span_3E + temp_v1;
+    temp_a1           = g_Task->timer;
+    temp_v1           = g_Task->unk_14 + g_Task->unk_20;
+    g_Task->unk_14    = temp_v1;
+    g_Task->z.half.hi = (u16)g_Task->z.half.hi + temp_v1;
     if (temp_a1 < 8U) {
         g_Task->timer = temp_a1 + 1;
     }
@@ -192,8 +192,7 @@ MATCH void func_801EFD28(void) {
         SND_QueueSelectionFx(0x203);
         g_Task->unk_14 = 0x40;
         g_Task->unk_20 = -8;
-        g_Task->unk_0C = ratan2(D_801EB4E0->coord_x_34.raw - g_Task->coord_x_34.raw,
-                                D_801EB4E0->coord_y_38.raw - g_Task->coord_y_38.raw);
+        g_Task->unk_0C = ratan2(D_801EB4E0->x.raw - g_Task->x.raw, D_801EB4E0->y.raw - g_Task->y.raw);
         /* FAKE: Without the barrier, the scheduler sinks the angle store into the call's delay slot. */
         MATCH_FAKE_BARRIER();
         func_800A9820(g_BattleTargetSelector);
@@ -207,11 +206,11 @@ MATCH void func_801EFE38(void) {
     u8  value2;
     u8  value3;
 
-    g_Task->coord_x_34.raw += (s32)(rsin(g_Task->unk_0C) << 0xD) >> 0xC;
-    g_Task->coord_y_38.raw += (s32)(rcos(g_Task->unk_0C) << 0xD) >> 0xC;
-    value                        = g_Task->unk_14 + g_Task->unk_20;
-    g_Task->unk_14               = value;
-    g_Task->word_3C.half.span_3E = (u16)g_Task->word_3C.half.span_3E + value;
+    g_Task->x.raw += (s32)(rsin(g_Task->unk_0C) << 0xD) >> 0xC;
+    g_Task->y.raw += (s32)(rcos(g_Task->unk_0C) << 0xD) >> 0xC;
+    value             = g_Task->unk_14 + g_Task->unk_20;
+    g_Task->unk_14    = value;
+    g_Task->z.half.hi = (u16)g_Task->z.half.hi + value;
     if ((u8)g_Task->unk_09 < 8U) {
         value3 = g_Task->timer;
         if (value3 < 0x10U) {
@@ -244,11 +243,11 @@ MATCH void func_801EFFCC(void) {
         g_Task->timer = temp_v0_2 - 2;
     }
     if ((s8)g_Task->unk_5D == -0x80) {
-        work                 = g_Task;
-        source               = BATTLE_ACTIVE_WORK;
-        work->coord_x_34.raw = source->coord_x_34.raw;
-        work->coord_y_38.raw = source->coord_y_38.raw;
-        work->word_3C.word   = source->word_3C.word;
+        work        = g_Task;
+        source      = BATTLE_ACTIVE_WORK;
+        work->x.raw = source->x.raw;
+        work->y.raw = source->y.raw;
+        work->z.raw = source->z.raw;
         work->step += 1;
     }
 }

@@ -53,16 +53,16 @@ MATCH void func_801EF06C(void) {
     PartyBattler* work;
     STACK_PADS(u8, 8);
 
-    src              = BATTLE_ACTIVE_WORK;
-    work             = g_Task;
-    work->coord_x_34 = src->coord_x_34;
-    work->coord_y_38 = src->coord_y_38;
-    work->word_3C    = src->word_3C;
-    work->unk_0C     = src->unk_0C + D_801F004C[work->unk_04];
-    work->unk_10     = src->unk_0C + D_801F004E[work->unk_04];
-    work->unk_0B     = 0;
-    g_Task->unk_09   = 0;
-    g_Task->timer    = 0;
+    src            = BATTLE_ACTIVE_WORK;
+    work           = g_Task;
+    work->x        = src->x;
+    work->y        = src->y;
+    work->z        = src->z;
+    work->unk_0C   = src->unk_0C + D_801F004C[work->unk_04];
+    work->unk_10   = src->unk_0C + D_801F004E[work->unk_04];
+    work->unk_0B   = 0;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0;
     g_Task->step += 1;
 }
 
@@ -90,9 +90,9 @@ MATCH void func_801EF2F0(void) {
     rot.vz = 0;
     rot.vy = 0;
     rot.vx = 0;
-    pos.vx = (g_Task->coord_x_34.raw >> 9) - 0x4000;
-    pos.vy = (g_Task->coord_y_38.raw >> 9) - 0x4000;
-    pos.vz = -g_Task->word_3C.half.span_3E / 2;
+    pos.vx = (g_Task->x.raw >> 9) - 0x4000;
+    pos.vy = (g_Task->y.raw >> 9) - 0x4000;
+    pos.vz = -g_Task->z.half.hi / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
@@ -122,18 +122,16 @@ MATCH void func_801EF930(void) {
     cell                                = &D_1F800000.view.area.entry_data;
     *cell                               = (u16)((u32)(rsin(g_Task->unk_09 << 6) * 3) >> 4);
     D_1F800000.view.area.entity_counter = (g_Task->unk_09 << 6) + 0x40;
-    g_Task->coord_x_34.raw =
-        BATTLE_ACTIVE_WORK->coord_x_34.raw + ((rsin(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
-    g_Task->coord_y_38.raw =
-        BATTLE_ACTIVE_WORK->coord_y_38.raw + ((rcos(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
-    g_Task->word_3C.half.span_3E = (u16)((u16)BATTLE_ACTIVE_WORK->word_3C.half.span_3E + *cell) - 0x20;
-    height                       = Area_SampleHeight(g_Task->coord_x_34.raw, g_Task->coord_y_38.raw) << 16;
-    work                         = g_Task;
-    work->unk_25                 = 0x1D;
-    work->unk_14                 = height >> 16;
-    g_Task->unk_26               = 0;
-    g_Task->unk_27               = 0xA0;
-    g_Task->unk_28               = 0;
+    g_Task->x.raw     = BATTLE_ACTIVE_WORK->x.raw + ((rsin(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
+    g_Task->y.raw     = BATTLE_ACTIVE_WORK->y.raw + ((rcos(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
+    g_Task->z.half.hi = (u16)((u16)BATTLE_ACTIVE_WORK->z.half.hi + *cell) - 0x20;
+    height            = Area_SampleHeight(g_Task->x.raw, g_Task->y.raw) << 16;
+    work              = g_Task;
+    work->unk_25      = 0x1D;
+    work->unk_14      = height >> 16;
+    g_Task->unk_26    = 0;
+    g_Task->unk_27    = 0xA0;
+    g_Task->unk_28    = 0;
     g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     tint                = -0x40;
     g_Task->unk_5D      = tint;
@@ -152,10 +150,10 @@ MATCH void func_801EF930(void) {
 
 MATCH void func_801EFB68(void) {
     g_Task->timer += 1;
-    g_Task->coord_x_34.raw += (s32)(rsin((g_Task->timer & 0x3F) << 8) * 8) >> 3;
-    g_Task->coord_y_38.raw += (s32)(rcos((g_Task->timer & 0x3F) << 8) * 8) >> 3;
-    g_Task->word_3C.half.span_3E = (u16)g_Task->word_3C.half.span_3E - 8;
-    if ((func_8014DAEC() & 0xFF) || (g_Task->word_3C.half.span_3E < g_Task->unk_14)) {
+    g_Task->x.raw += (s32)(rsin((g_Task->timer & 0x3F) << 8) * 8) >> 3;
+    g_Task->y.raw += (s32)(rcos((g_Task->timer & 0x3F) << 8) * 8) >> 3;
+    g_Task->z.half.hi = (u16)g_Task->z.half.hi - 8;
+    if ((func_8014DAEC() & 0xFF) || (g_Task->z.half.hi < g_Task->unk_14)) {
         D_801EB4E0->unk_0B -= 1;
         g_Task->flags = 0;
         g_Task->mode  = 0;

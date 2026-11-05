@@ -6,8 +6,8 @@ typedef struct BattleWorkSlot {
     u8  mode;
     u8  step;
     u8  pad_03[0x31];
-    s32 coord_x_34;
-    s32 coord_y_38;
+    s32 x;
+    s32 y;
     u8  pad_3C[0x34];
     u8  speed_70;
     u8  pad_71[0xBB];
@@ -46,8 +46,8 @@ NON_MATCHING void func_801B1E24(void) {
             }
             if (!(rows->flags_12C & 1) && prev != 0) {
                 index  = (prev - 1) * 2 + (value & BYTE_MASK) * 4;
-                result = func_801B1B2C(rows->coord_x_34 + (s_EntityPlacementOffsets[index] << 15),
-                                       rows->coord_y_38 + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed_70);
+                result = func_801B1B2C(rows->x + (s_EntityPlacementOffsets[index] << 15),
+                                       rows->y + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed_70);
                 if (((result & BYTE_MASK) != 0) &&
                     ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), ((BattleWorkSlot*)g_Task)->speed_70) & 0xFF) !=
                      0)) {
@@ -57,8 +57,7 @@ NON_MATCHING void func_801B1E24(void) {
                       0xFF)) {
                     goto next; /* fallback position rejected: next row */
                 }
-            } else if (!(func_801B1B2C(rows->coord_x_34, rows->coord_y_38, value & BYTE_MASK, row->speed_70) &
-                         BYTE_MASK)) {
+            } else if (!(func_801B1B2C(rows->x, rows->y, value & BYTE_MASK, row->speed_70) & BYTE_MASK)) {
                 goto next; /* fallback position rejected: next row */
             }
         found:

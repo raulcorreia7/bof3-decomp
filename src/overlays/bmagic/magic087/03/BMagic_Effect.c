@@ -122,9 +122,9 @@ MATCH void func_801EFD7C(void) {
 }
 
 MATCH void func_801EFE04(void) {
-    g_Task->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw;
-    g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw;
-    g_Task->word_3C.word   = BATTLE_ACTIVE_WORK->word_3C.word;
+    g_Task->x.raw = BATTLE_ACTIVE_WORK->x.raw;
+    g_Task->y.raw = BATTLE_ACTIVE_WORK->y.raw;
+    g_Task->z.raw = BATTLE_ACTIVE_WORK->z.raw;
     if (g_Task->mode == 2) {
         g_Task->unk_0B = 0;
     } else {
@@ -148,9 +148,9 @@ MATCH void func_801EFF50(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = (g_Task->unk_0B & 0x3f) << 6;
-    pos.vx = (g_Task->coord_x_34.raw >> 9) - 0x4000;
-    pos.vy = (g_Task->coord_y_38.raw >> 9) - 0x4000;
-    pos.vz = -(g_Task->word_3C.half.span_3E + 0x200) / 2;
+    pos.vx = (g_Task->x.raw >> 9) - 0x4000;
+    pos.vy = (g_Task->y.raw >> 9) - 0x4000;
+    pos.vz = -(g_Task->z.half.hi + 0x200) / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);

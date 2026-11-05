@@ -24,7 +24,7 @@ MATCH void func_801D543C(void) {
         case CARD_EVENT_CAPACITY:
             resource = 6;
             break;
-        case 5:
+        case SAVE_STATUS_NO_FILE:
             Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
             panel_timer = 8;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_NO_SAVE_FILE));
@@ -43,7 +43,7 @@ MATCH void func_801D543C(void) {
         case 7:
             resource = 8;
             break;
-        case 8:
+        case SAVE_STATUS_SAVED:
             Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
             panel_timer = 0xB;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_SAVE_COMPLETE));
@@ -51,7 +51,7 @@ MATCH void func_801D543C(void) {
             D_801E6080 = 1;
             D_801E6110 = 1;
             break;
-        case 9:
+        case SAVE_STATUS_FORMATTED:
             Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
             panel_timer = 8;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_INIT_COMPLETE));
@@ -87,10 +87,10 @@ MATCH void func_801D543C(void) {
         UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(resource + 0x85));
     }
     if ((g_InputPressed != 0) ||
-        (((g_SaveCardStatus == 0xA) || (g_SaveCardStatus == 8)) &&
+        (((g_SaveCardStatus == 0xA) || (g_SaveCardStatus == SAVE_STATUS_SAVED)) &&
          (timer_p = &D_80148654, next = *timer_p - 1, *timer_p = next, ((next & BYTE_MASK) == 0)))) {
         D_80148654 = 0;
-        if ((g_SaveCardStatus != 8) && (g_SaveCardStatus != 0xA)) {
+        if ((g_SaveCardStatus != SAVE_STATUS_SAVED) && (g_SaveCardStatus != 0xA)) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
         }
         D_80148652 = panel_timer;

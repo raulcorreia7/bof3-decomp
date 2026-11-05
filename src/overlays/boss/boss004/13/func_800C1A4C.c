@@ -10,13 +10,13 @@ MATCH void func_800C1A4C(void) {
         Area_FindSceneRecord(0x5F);
         if (g_BattleEncounter == 5) {
             ((PartyBattler*)g_Task)->unk_2A = 0;
-            ((PartyBattler*)g_Task)->coord_y_38.raw += 0x18000;
+            ((PartyBattler*)g_Task)->y.raw += 0x18000;
         } else {
             ((PartyBattler*)g_Task)->unk_2A = 1;
-            ((PartyBattler*)g_Task)->coord_x_34.raw += 0x18000;
+            ((PartyBattler*)g_Task)->x.raw += 0x18000;
         }
-        ((PartyBattler*)g_Task)->word_3C.half.span_3E =
-            Area_SampleHeight(((PartyBattler*)g_Task)->coord_x_34.raw, ((PartyBattler*)g_Task)->coord_y_38.raw);
+        ((PartyBattler*)g_Task)->z.half.hi =
+            Area_SampleHeight(((PartyBattler*)g_Task)->x.raw, ((PartyBattler*)g_Task)->y.raw);
         g_BattleCurrentEnemy->script = &D_800C272C;
         Actor_SelectScript(1U);
         result = &g_BattleResult;

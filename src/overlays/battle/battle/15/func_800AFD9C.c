@@ -22,24 +22,24 @@ MATCH void func_800AFD9C(void) {
             for (i = 0; i < 8; i++) {
                 if (Battle_SlotIsBlocked((i + 3) & BYTE_MASK) == 0) {
                     count++;
-                    sum_x += D_801EB630[i].coord_x_34 >> 9;
-                    sum_y += D_801EB630[i].coord_y_38 >> 9;
-                    sum_span += D_801EB630[i].word_3C.half.span_3E;
+                    sum_x += D_801EB630[i].x >> 9;
+                    sum_y += D_801EB630[i].y >> 9;
+                    sum_span += D_801EB630[i].z.half.hi;
                 }
             }
         } else {
             for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
                 if (Battle_SlotIsBlocked(i & BYTE_MASK) == 0) {
                     count++;
-                    sum_x += g_BattlePartyBattlers[i].coord_x_34.raw >> 9;
-                    sum_y += g_BattlePartyBattlers[i].coord_y_38.raw >> 9;
-                    sum_span += g_BattlePartyBattlers[i].word_3C.half.span_3E;
+                    sum_x += g_BattlePartyBattlers[i].x.raw >> 9;
+                    sum_y += g_BattlePartyBattlers[i].y.raw >> 9;
+                    sum_span += g_BattlePartyBattlers[i].z.half.hi;
                 }
             }
         }
-        work                       = BATTLE_WORK;
-        work->coord_x_34.raw       = (sum_x / count) << 9;
-        work->coord_y_38.raw       = (sum_y / count) << 9;
-        work->word_3C.half.span_3E = sum_span / count;
+        work            = BATTLE_WORK;
+        work->x.raw     = (sum_x / count) << 9;
+        work->y.raw     = (sum_y / count) << 9;
+        work->z.half.hi = sum_span / count;
     }
 }

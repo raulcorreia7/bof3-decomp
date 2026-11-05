@@ -41,10 +41,10 @@ MATCH void func_801EF780(void) {
 }
 
 MATCH void func_801EF7C4(void) {
-    g_Task->facing         = D_801EB4E0->facing;
-    g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
-    g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
-    g_Task->word_3C.word   = D_801EB4E0->word_3C.word + 0x02000000;
+    g_Task->facing = D_801EB4E0->facing;
+    g_Task->x.raw  = D_801EB4E0->x.raw;
+    g_Task->y.raw  = D_801EB4E0->y.raw;
+    g_Task->z.raw  = D_801EB4E0->z.raw + 0x02000000;
     func_800AF764(g_Task);
     SND_QueueSelectionFx(0x100);
     g_Task->unk_0B = 0;
