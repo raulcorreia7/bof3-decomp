@@ -70,7 +70,7 @@ MATCH void func_801D1184(void) {
     func_801D1250(0x32, (s16)(0x28 - count * 0x32));
     if (D_801D1948 == 4) {
         Message_StartAreaMessage(0x5A);
-        g_GameStateIndex = 2;
+        g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
     }
 }

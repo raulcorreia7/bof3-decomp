@@ -1,10 +1,9 @@
-/* Dispatches the stored handler in slot 1 of the effect handler table for
- * the work battler. The local copy of the table is part of the matched
- * bytes, so each table width keeps its own body.
- */
-/* func_801EEC38, func_801EEC48 */
+/* Runs the step handler that the spad-work step_01 byte selects from the
+ * module head's six-handler table. One definition shared by the bmagic effect
+ * modules; every change here must verify every member. */
+/* func_801EEC38 (magic041), func_801EEC48 (magic020), func_801EEC1C (magic062, magic082, magic086, magic110, magic167) */
 MATCH void Effect_DispatchHandlerSlot1(void) {
-    BattleHandlerTable6 handlers = D_801EEC04;
+    BmagicEffectFuncs handlers;
 
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_SpadWork);
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, step_01);
 }

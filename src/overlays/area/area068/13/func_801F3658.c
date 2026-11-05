@@ -4,7 +4,7 @@ MATCH void func_801F3658(void) {
     Actor* work;
     u8     step;
 
-    if (g_InputPressed == 0x40) {
+    if (g_InputPressed == PADRdown) {
         D_801F4E04++;
     }
     D_801F4E0C++;

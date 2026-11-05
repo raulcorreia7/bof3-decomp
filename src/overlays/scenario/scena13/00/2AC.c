@@ -81,12 +81,12 @@ MATCH void func_801F71DC(void) {
     work->tint.bytes.unk_5D = 0;
     g_SpadWork->unk_0B      = 0x33;
     Message_StartAreaMessage(g_SpadWork->unk_0B);
-    g_GameStateIndex   = 2;
+    g_GameStateIndex   = GAME_REQUEST_MESSAGE;
     g_SpadWork->unk_01 = 1;
 }
 
 MATCH void func_801F7248(void) {
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         g_SpadWork->unk_09 = 0x1E;
         g_SpadWork->unk_01 = 2;
     }

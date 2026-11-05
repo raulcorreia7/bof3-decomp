@@ -391,7 +391,7 @@ MATCH void func_801FD35C(void) {
     u8* timer;
 
     timer = &D_80146875;
-    if (*timer == 0 && g_GameStateIndex != 2) {
+    if (*timer == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         Game_ClearScriptActive();
         D_80146874 = 0;
         *timer     = 0;

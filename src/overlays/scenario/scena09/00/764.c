@@ -78,7 +78,7 @@ MATCH void func_801FBD0C(void) {
     u8* timer;
 
     timer = &D_80146875;
-    if (*timer == 0 && g_GameStateIndex != 2) {
+    if (*timer == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         func_801BE1B0(1);
         D_80146874 = 0;
         *timer     = 0;

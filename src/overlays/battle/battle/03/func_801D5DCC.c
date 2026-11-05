@@ -17,11 +17,11 @@ MATCH u8 func_801D5DCC(void) {
             if (g_PartyFormation == 5) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
-            if (g_BattlePartyBattlers[slot].stats.character_id == 6) {
+            if (g_BattlePartyBattlers[slot].stats.character_id == CHAR_ID_PECO) {
                 g_BattlePartyBattlers[slot].hp_change -= (g_BattlePartyBattlers[slot].stats.max_hp + 10) / 20;
             }
-            if (g_BattlePartyBattlers[slot].stats.character_id == 7 ||
-                g_BattlePartyBattlers[slot].stats.character_id == 0) {
+            if (g_BattlePartyBattlers[slot].stats.character_id == CHAR_ID_RYU_ADULT ||
+                g_BattlePartyBattlers[slot].stats.character_id == CHAR_ID_RYU_YOUNG) {
                 if (g_BattlePartyBattlers[slot].flags_128.volatile_value & 2) {
                     if (g_DragonForm == 0x12) {
                         g_BattlePartyBattlers[slot].hp_change -= (g_BattlePartyBattlers[slot].stats.max_hp + 10) / 20;

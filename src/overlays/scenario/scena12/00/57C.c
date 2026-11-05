@@ -53,7 +53,7 @@ MATCH void func_801F7518(void) {
 
 MATCH void func_801F759C(void) {
     func_801F75EC();
-    if ((g_GameStateIndex != 2) && (g_GameEntryState != 4)) {
+    if ((g_GameStateIndex != GAME_REQUEST_MESSAGE) && (g_GameEntryState != 4)) {
         func_80196070();
     }
 }
