@@ -114,7 +114,32 @@ MATCH void func_801D1E34(void) {
     D_8014839F                     = 1;
 }
 
-INCLUDE_ASM(func_801D1E60);
+MATCH s32 func_801D1E60(void) {
+    u32 value = D_80144FF9;
+
+    if (value < 0x26) {
+        return 9;
+    }
+    if (value - 0x26 < 2) {
+        return 10;
+    }
+    if (value - 0x28 < 5) {
+        return 11;
+    }
+    if (value - 0x2D < 5) {
+        return 12;
+    }
+    if (value - 0x32 < 10) {
+        return 13;
+    }
+    if (value - 0x3C < 5) {
+        return 14;
+    }
+    if (value - 0x41 < 3) {
+        return 15;
+    }
+    return 16;
+}
 
 INCLUDE_ASM(func_801D1EE8);
 
