@@ -16,8 +16,8 @@ MATCH void func_801F771C(void) {
 
 MATCH void func_801F7750(void) {
     GFX_ResetPalette();
-    g_GfxPalettePending  = 1;
-    g_AreaDrawFlags      = 0x1F;
+    g_GfxPalettePending = 1;
+    g_AreaDrawFlags     = 0x1F;
     func_8019FA28(0xC7, 0xB60000, 0x128000, 7);
     g_ScriptVarsReq.word = 0;
     D_80146872           = 1;
@@ -74,9 +74,9 @@ MATCH void func_801F7B88(void) {
     u8* step;
 
     if (!g_AreaCameraMoving) {
-        step                  = &D_80146874;
-        g_AreaScrollTargetX   = 0x8C0000;
-        *step                += 1;
+        step                = &D_80146874;
+        g_AreaScrollTargetX = 0x8C0000;
+        *step += 1;
     }
 }
 
@@ -88,7 +88,7 @@ MATCH void func_801F7BC0(void) {
         step                = &D_80146874;
         g_AreaScrollTargetX = 0x540000;
         D_80146867          = 0xA;
-        *step              += 1;
+        *step += 1;
     }
 }
 
@@ -99,7 +99,7 @@ MATCH void func_801F7C14(void) {
         step                = &D_80146874;
         g_AreaCameraStep    = 0x10;
         g_AreaScrollTargetX = 0x3C0000;
-        *step              += 1;
+        *step += 1;
     }
 }
 
@@ -143,9 +143,9 @@ MATCH void func_801F7F04(void) {
     u8* step;
 
     if (D_80146867 == 0x64) {
-        step              = &D_80146874;
-        g_AreaSceneMode   = 3;
-        *step            += 1;
+        step            = &D_80146874;
+        g_AreaSceneMode = 3;
+        *step += 1;
     }
 }
 
@@ -204,7 +204,7 @@ MATCH void func_801F80CC(void) {
     step       = &D_80146874;
     D_801F9DD0 = 0;
     D_801F9DD4 = 0;
-    *step     += 1;
+    *step += 1;
 }
 
 MATCH void func_801F8110(void) {
@@ -223,9 +223,9 @@ MATCH void func_801F8170(void) {
     s8* stage;
 
     if (g_UiWindowEffectBusy == 0) {
-        stage          = &D_80146873;
-        D_80146874     = 0;
-        *stage         = *stage + 1;
+        stage      = &D_80146873;
+        D_80146874 = 0;
+        *stage     = *stage + 1;
     } else {
         func_801F938C();
     }

@@ -122,41 +122,41 @@ extern u8            g_CameraMatrix[];
 /* A unit that must re-read the target after storing it defines
  * AREA_SCROLL_TARGET_VOLATILE before its first include. */
 #ifdef AREA_SCROLL_TARGET_VOLATILE
-extern volatile s32  g_AreaScrollTargetX;
+extern volatile s32 g_AreaScrollTargetX;
 #else
-extern s32           g_AreaScrollTargetX;
+extern s32 g_AreaScrollTargetX;
 #endif
 /* D_8014930C */
-extern s32           g_AreaScrollTargetY; /* 0x8014930C */
-extern s32           D_80149310;
+extern s32         g_AreaScrollTargetY; /* 0x8014930C */
+extern s32         D_80149310;
 /* D_80149318 */
-extern s32           g_AreaCameraHeight;
+extern s32         g_AreaCameraHeight;
 /* D_80149320 */
-extern s16           g_AreaTileOriginX;
+extern s16         g_AreaTileOriginX;
 /* D_80149328 */
-extern s16           g_AreaCameraOffsetX;
+extern s16         g_AreaCameraOffsetX;
 /* D_8014932A */
-extern s16           g_AreaCameraOffsetY;
+extern s16         g_AreaCameraOffsetY;
 /* D_8014932C */
-extern s16           g_AreaCameraOffsetZ;
+extern s16         g_AreaCameraOffsetZ;
 /* D_8014932E */
-extern s16           g_AreaCameraStep;
+extern s16         g_AreaCameraStep;
 /* D_80149330 */
-extern s16           g_AreaCameraHeightStep;
+extern s16         g_AreaCameraHeightStep;
 /* D_80149332 */
-extern u8            g_AreaCameraMoving;
+extern u8          g_AreaCameraMoving;
 /* D_80149333 */
-extern u8            g_AreaCameraRefreshCount;
-extern u8            D_8014933A;
+extern u8          g_AreaCameraRefreshCount;
+extern u8          D_8014933A;
 /* D_8014933B */
-extern u8            g_AreaSceneMode;
+extern u8          g_AreaSceneMode;
 /* D_8017F974 */
-extern void* const   g_AreaLoads[200]; /* 0x8017F974 */
-extern u8            D_8014933C;
+extern void* const g_AreaLoads[200]; /* 0x8017F974 */
+extern u8          D_8014933C;
 /* D_80181B10 */
-extern const u8      g_CharSlot[];
+extern const u8    g_CharSlot[];
 /* D_80181BD4 */
-extern const u8      g_RouteSpeedScale[]; /* 0x80181BD4 */
+extern const u8    g_RouteSpeedScale[]; /* 0x80181BD4 */
 
 extern const u8 D_80181B34[20][3];
 extern const u8 D_80181B88[12];
