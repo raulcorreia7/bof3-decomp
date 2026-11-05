@@ -12,7 +12,18 @@ INCLUDE_ASM(func_801EEC94);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-INCLUDE_ASM(func_801EEF3C);
+MATCH s32 func_801EEF3C(void) {
+    u16* id;
+
+    id = (u16*)&g_BattleActionId;
+    switch (*id) {
+        case 0x27:
+        default:
+            return 2;
+        case 0xA3:
+            return 3;
+    }
+}
 
 MATCH void func_801EEF64(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);

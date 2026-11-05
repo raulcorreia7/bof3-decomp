@@ -28,7 +28,20 @@ MATCH void func_801EF0C4(void) {
 
 INCLUDE_ASM(func_801EF108);
 
-INCLUDE_ASM(func_801EF264);
+MATCH void func_801EF264(void) {
+    if ((u8)D_801EB4E0->word_08.byte.unk_0B < 8U) {
+        if (g_BattleTargetSelector & 0x40) {
+            func_800A9820((g_SpadWork->unk_03 + 3) & 0xFF);
+            func_80196718(&D_801EB630[g_SpadWork->unk_03]);
+            func_800AF814((g_SpadWork->unk_03 + 3) & 0xFF);
+        } else {
+            func_800A9820(g_SpadWork->unk_03);
+            func_80196718((EnemyBattler*)&g_BattlePartyBattlers[g_SpadWork->unk_03]);
+            func_800AF814(g_SpadWork->unk_03);
+        }
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF3A4(void) {
     BATTLE_ACTIVE_WORK->word_08.byte.unk_09--;

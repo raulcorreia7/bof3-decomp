@@ -51,7 +51,7 @@ void func_801EEEE0(void);
 void func_801EEEE4(void);
 void func_801EEF08(void);
 void func_801EEF30(void);
-void func_801EEF3C(void);
+s32  func_801EEF3C(void);
 void func_801EEF48(void);
 void func_801EEF60(void);
 void func_801EEF64(void);

@@ -201,7 +201,33 @@ MATCH void func_801FAA24(void) {
     g_SceneState.state_04 = 5;
 }
 
-INCLUDE_ASM(func_801FAA74);
+MATCH s32 func_801FAA74(s32 arg0) {
+    if (g_GameAreaId == 0x79) {
+        if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
+            if (arg0 <= 0x160000) {
+                if (((u32)(D_80145E98 - 6) < 2U) || (D_80145E98 == 0)) {
+                    Game_SetScriptActive();
+                    D_80146875 = 0;
+                    D_80146874 = 1;
+                    return 1;
+                }
+                Game_SetScriptActive();
+                D_80146875 = 0x32;
+                D_80146874 = 1;
+                return 1;
+            }
+            return 0;
+        }
+        if (arg0 <= 0x160000) {
+            Game_SetScriptActive();
+            D_80146875 = 0x3C;
+            D_80146874 = 1;
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
 
 MATCH s32 func_801FAB64(void) {
     return 0;
