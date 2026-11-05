@@ -113,7 +113,18 @@ MATCH void func_801F020C(void) {
     GFX_AddPrim(4, 0xC);
 }
 
-INCLUDE_ASM(func_801F02F4);
+MATCH void func_801F02F4(void) {
+    PartyBattler* work;
+
+    work = g_SpadWork;
+    if (work->word_08.byte.timer_0A == 0) {
+        work->word_08.byte.unk_09  = 8;
+        work->word_3C.half.span_3E = work->word_3C.half.span_3E + 0x200;
+        Bmagic_NextStep();
+    } else {
+        work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
+    }
+}
 
 #ifdef NON_MATCHING
 MATCH void func_801F034C(void) {
