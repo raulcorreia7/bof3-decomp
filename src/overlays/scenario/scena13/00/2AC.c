@@ -110,7 +110,20 @@ MATCH void func_801F7444(void) {
 
 INCLUDE_ASM(func_801F7484);
 
-INCLUDE_ASM(func_801F7568);
+MATCH void func_801F7568(void) {
+    Actor* work;
+    Actor* actor;
+
+    work           = g_SpadWork;
+    actor          = &g_Actors[work->unk_06];
+    g_SpadWork     = actor;
+    actor->unk_29  = 2;
+    func_8014D290();
+    g_SpadWork     = (Actor*)g_BattlePartyBattlers;
+    D_80145EB9     = 2;
+    func_8014D290();
+    g_SpadWork     = work;
+}
 
 MATCH void func_801F75F8(void) {
     SYS_DISPATCH_TASK(D_801FBF10, 1, g_SpadWork);
