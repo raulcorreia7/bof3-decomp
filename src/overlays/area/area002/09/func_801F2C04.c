@@ -1,10 +1,20 @@
 #include "area002_09.h"
 
-/* Selector + flag-pointer body. Best 6 differing (direct reads + a held
- * compare constant + the flag-pointer note reproduces everything but the
- * state/value rotation: state retail v1 against a0, value retail v0 against
- * v1 from 0x801F2C08). Alternate form: an s8 state local + the constant local
- * gets state v1 and value v0 right, but swaps the head (li before the state
- * load) and leaves the constant in a0. Next lever: permuter across the two
- * forms; same trap as world04 selector rows. */
-INCLUDE_ASM(func_801F2C04);
+MATCH void func_801F2C04(void) {
+    u8* step;
+
+    MESSAGE_REQUEST_CLEAR();
+    switch (D_801490C7) {
+        case 0:
+            D_801448ED = 5;
+            break;
+        case 1:
+            D_801448ED = 4;
+            break;
+        default:
+            return;
+    }
+    step  = &D_801448EB;
+    *step = 5;
+    SYS_SetFlag(step + 0x63D, 0x1E);
+}
