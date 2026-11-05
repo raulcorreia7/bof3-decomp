@@ -120,7 +120,15 @@ MATCH void func_801EF894(void) {
 
 INCLUDE_ASM(func_801EF928);
 
-INCLUDE_ASM(func_801EFA70);
+MATCH void func_801EFA70(void) {
+    PartyBattler** selected;
+
+    selected = &g_BattleSelectedActor;
+    func_800AF2B4(*selected, 0x60);
+    if (func_800AF66C(*selected, 0x20000)) {
+        g_SpadWork->unk_02++;
+    }
+}
 
 MATCH void func_801EFAD4(void) {
     func_801E5988();
