@@ -257,7 +257,22 @@ MATCH void func_801F7CE0(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7D80);
+MATCH void func_801F7D80(void) {
+    Actor* work;
+    s32*   pos;
+    s16    step;
+
+    work = g_SpadWork;
+    pos  = &work->unk_0C;
+    func_801F7FFC(pos);
+    func_801F8170(pos);
+    step            = work->script_pc - 8;
+    work->script_pc = step;
+    if (step < 0) {
+        g_SpadWork->unk_06 = 1;
+        func_80196070();
+    }
+}
 
 MATCH void func_801F7DF0(void) {
     SYS_DISPATCH_TASK(D_801FCF88, 1, g_SpadWork);
