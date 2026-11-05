@@ -443,55 +443,13 @@ matching = [
 requires-dist = [
     { name = "pyyaml", specifier = ">=6.0" },
     { name = "spimdisasm", specifier = "==1.42.4" },
-    { name = "splat64", extras = ["mips"], specifier = "==0.41.1" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=8.0" },
-    { name = "ruff", specifier = "==0.17.3" },
-]
-matching = [
-    { name = "colorama", specifier = ">=0.4.6" },
-    { name = "levenshtein", specifier = ">=0.27.0" },
-    { name = "toml", specifier = ">=0.10.2" },
-    { name = "watchdog", specifier = ">=6.0.0" },
-]
-
-[[package]]
-name = "rebof3"
-version = "0.1.0"
-source = { virtual = "." }
-default-groups = []
-dependencies = [
-    { name = "pyyaml" },
-    { name = "spimdisasm" },
-    { name = "splat64", extra = ["mips"] },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "pytest" },
-    { name = "ruff" },
-]
-matching = [
-    { name = "colorama" },
-    { name = "levenshtein" },
-    { name = "toml" },
-    { name = "watchdog" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "pyyaml", specifier = ">=6.0" },
-    { name = "spimdisasm", specifier = "==1.42.4" },
     { name = "splat64", extras = ["mips"], specifier = "==0.50.1" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "pytest", specifier = ">=8.0" },
-    { name = "ruff", specifier = "==0.15.11" },
+    { name = "ruff", specifier = "==0.17.3" },
 ]
 matching = [
     { name = "colorama", specifier = ">=0.4.6" },
