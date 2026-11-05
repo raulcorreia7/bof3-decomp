@@ -368,7 +368,25 @@ MATCH void func_801F8404(void) {
 INCLUDE_ASM(func_801F8480);
 
 /* nonmatching: timer D_80146875 counts up; at 0x80 it sets D_80146867 = 0x3C, the timer to 0x1E, D_801F9DD8 = 0, steps D_80146874, starts EMI_LoaderStreamInitSlot(0x260), then calls func_801F8FAC(0xE0, 0xBE, shade, 1) and func_801F8B10(0x4B0, 0x80). Candidate is 8 bytes short (first differing instruction: bnez at +0x28 targets +0x78 against +0x70): retail sets a0, a1 and a2 inside the branch and ends it with j, and sets only a1 on the other path. */
-INCLUDE_ASM(func_801F84F4);
+MATCH void func_801F84F4(void) {
+    u8* timer;
+    u8  value;
+
+    timer  = &D_80146875;
+    value  = *timer + 1;
+    *timer = value;
+    if (value >= 0x80) {
+        D_80146867 = 0x3C;
+        *timer     = 0x1E;
+        D_801F9DD8 = 0;
+        D_80146874 += 1;
+        EMI_LoaderStreamInitSlot(0x260);
+        func_801F8FAC(0xE0, 0xBE, 0x80, 1);
+    } else {
+        func_801F8FAC(0xE0, 0xBE, value, 1);
+    }
+    func_801F8B10(0x4B0, 0x80);
+}
 
 /* Counts D_80146875 down and, at zero, D_80146867; both zero steps D_80146874, else D_80146875 = 0x1E, then func_801F8B10 and func_801F8FAC. The pointer-local draft is 4 to 8 bytes short whichever branch order: retail ends the step branch with `j` and the 0x4B0 argument load in its delay slot, and falls into a second copy of that load from the else branch (first differing instruction +0x30: beqz targets +0x78 against +0x70). */
 INCLUDE_ASM(func_801F8594);
