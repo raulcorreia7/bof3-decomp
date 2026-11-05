@@ -22,15 +22,15 @@ MATCH void func_801EEE38(void) {
 }
 
 MATCH void func_801EEEA8(void) {
-    PartyBattler* temp_s0;
-    PartyBattler* temp_v0;
+    PartyBattler* saved_work;
+    PartyBattler* battler;
 
-    temp_s0    = g_SpadWork;
-    temp_v0    = &g_BattlePartyBattlers[g_BattleActingBattler];
-    g_SpadWork = temp_v0;
-    Actor_RequestScript((temp_v0->word_08.byte.facing_08 + 0x3C) & 0xFF);
-    g_SpadWork = temp_s0;
-    temp_s0->unk_03 += 1;
+    saved_work = g_SpadWork;
+    battler    = &g_BattlePartyBattlers[g_BattleActingBattler];
+    g_SpadWork = battler;
+    Actor_RequestScript((battler->word_08.byte.facing_08 + 0x3C) & 0xFF);
+    g_SpadWork = saved_work;
+    saved_work->unk_03 += 1;
 }
 
 INCLUDE_ASM(func_801EEF24);
@@ -40,15 +40,15 @@ INCLUDE_ASM(func_801EF070);
 INCLUDE_ASM(func_801EF138);
 
 MATCH void func_801EF2A0(void) {
-    PartyBattler* temp_a0;
-    PartyBattler* temp_v1;
+    PartyBattler* saved_work;
+    PartyBattler* battler;
 
-    temp_a0    = g_SpadWork;
-    temp_v1    = &g_BattlePartyBattlers[g_BattleActingBattler];
-    g_SpadWork = temp_v1;
-    temp_v1->flags_00 &= 0xBF;
-    g_SpadWork = temp_a0;
-    temp_a0->step_01 += 1;
+    saved_work = g_SpadWork;
+    battler    = &g_BattlePartyBattlers[g_BattleActingBattler];
+    g_SpadWork = battler;
+    battler->flags_00 &= 0xBF;
+    g_SpadWork = saved_work;
+    saved_work->step_01 += 1;
     g_SpadWork->unk_02 = 0;
     g_SpadWork->unk_03 = 0;
 }
