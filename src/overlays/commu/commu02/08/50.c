@@ -13,6 +13,7 @@ MATCH void func_801D0C8C(void) {
     SYS_DISPATCH_BYTE(D_801DABD8, D_801F294D);
 }
 
+/* m2c draft: 7 differing. First diff at 801D0CD0: retail hoists the 0xFF constant before the table address and sinks the D_801DB0CC store past the BGM id reload. Typing the table u8 and reusing D_801DB0CC for the index give the same schedule. Next lever: the loop as a counted for. */
 INCLUDE_ASM(func_801D0CC8);
 
 MATCH void func_801D0D54(void) {
