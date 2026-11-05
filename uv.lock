@@ -3,48 +3,6 @@ revision = 5
 requires-python = ">=3.12"
 
 [[package]]
-name = "rebof3"
-version = "0.1.0"
-source = { virtual = "." }
-default-groups = []
-dependencies = [
-    { name = "pyyaml" },
-    { name = "spimdisasm" },
-    { name = "splat64", extra = ["mips"] },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "pytest" },
-    { name = "ruff" },
-]
-matching = [
-    { name = "colorama" },
-    { name = "levenshtein" },
-    { name = "toml" },
-    { name = "watchdog" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "pyyaml", specifier = ">=6.0" },
-    { name = "spimdisasm", specifier = "==1.42.4" },
-    { name = "splat64", extras = ["mips"], specifier = "==0.41.1" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=8.0" },
-    { name = "ruff", specifier = "==0.15.11" },
-]
-matching = [
-    { name = "colorama", specifier = ">=0.4.6" },
-    { name = "levenshtein", specifier = ">=0.27.0" },
-    { name = "toml", specifier = ">=0.10.2" },
-    { name = "watchdog", specifier = ">=6.0.0" },
-]
-
-[[package]]
 name = "colorama"
 version = "0.4.6"
 source = { registry = "https://pypi.org/simple" }
@@ -421,6 +379,48 @@ wheels = [
 ]
 
 [[package]]
+name = "rebof3"
+version = "0.1.0"
+source = { virtual = "." }
+default-groups = []
+dependencies = [
+    { name = "pyyaml" },
+    { name = "spimdisasm" },
+    { name = "splat64", extra = ["mips"] },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "ruff" },
+]
+matching = [
+    { name = "colorama" },
+    { name = "levenshtein" },
+    { name = "toml" },
+    { name = "watchdog" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "pyyaml", specifier = ">=6.0" },
+    { name = "spimdisasm", specifier = "==1.42.4" },
+    { name = "splat64", extras = ["mips"], specifier = "==0.50.1" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pytest", specifier = ">=8.0" },
+    { name = "ruff", specifier = "==0.15.11" },
+]
+matching = [
+    { name = "colorama", specifier = ">=0.4.6" },
+    { name = "levenshtein", specifier = ">=0.27.0" },
+    { name = "toml", specifier = ">=0.10.2" },
+    { name = "watchdog", specifier = ">=6.0.0" },
+]
+
+[[package]]
 name = "ruff"
 version = "0.15.11"
 source = { registry = "https://pypi.org/simple" }
@@ -468,7 +468,7 @@ wheels = [
 
 [[package]]
 name = "splat64"
-version = "0.41.1"
+version = "0.50.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama" },
@@ -477,9 +477,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ce/11/d2cf8ee8ccb42437abd6a0393620253ccc79b882a894c10de9045ccfb817/splat64-0.41.1.tar.gz", hash = "sha256:d52380aed66d0527d7ea95028bba02e897e2c4a234cc6e445f1a9ffe3d4f908c", size = 157849, upload-time = "2026-07-18T15:21:25.469Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9b/3f/071ad30a5a9724a98441d7a7e21d04f8d857f054ba87d694fbcd1eb2c27f/splat64-0.50.1.tar.gz", hash = "sha256:c61ace12e1838b91c7cf8241c2fd765f12ed3e4783c5f1273a29419884fe9e4c", size = 167067, upload-time = "2026-10-10T13:03:50.965Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5d/8b/11713dce613c27abe153a664753a68121eb91fbdd85e68206944a72d9dc6/splat64-0.41.1-py3-none-any.whl", hash = "sha256:e11405343ab6d47370e14abeb4f377db2f0e6ada7138bf3660723157824fc4dd", size = 122077, upload-time = "2026-07-18T15:21:24.331Z" },
+    { url = "https://files.pythonhosted.org/packages/fc/45/c8a08b75dfaf7917ec861030233532126f9adfc60c16538c44f0b19c5c8c/splat64-0.50.1-py3-none-any.whl", hash = "sha256:0d9694b3534f3b1bd6b335ca9f9f34d5abea47fca4e86020727b9b24ad6e9de4", size = 131020, upload-time = "2026-10-10T13:03:49.47Z" },
 ]
 
 [package.optional-dependencies]
