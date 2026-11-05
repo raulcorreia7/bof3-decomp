@@ -92,6 +92,7 @@ MATCH void func_801D47C4(void) {
 
 INCLUDE_ASM(func_801D482C);
 
+/* Needs typed 18-byte lookup data and fairy room access; m2c cannot compile the draft. */
 INCLUDE_ASM(func_801D49C4);
 
 INCLUDE_ASM(func_801D4AAC);
