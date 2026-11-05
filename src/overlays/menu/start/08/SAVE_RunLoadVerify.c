@@ -15,7 +15,7 @@ MATCH void SAVE_RunLoadVerify(void) {
     Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
     SAVE_DrawSlots(0x20, 0x30, 0);
     CardAccessFile(0, 0, 0, 0, 0);
-    if (g_SaveCardStatus != 0) {
+    if (g_SaveCardStatus != CARD_EVENT_OK) {
         SND_PlayCue(EMI_CUE_ID(1, 7));
     } else {
         clear = MEM_PTR(u32, SAVE_IMAGE_ADDR);

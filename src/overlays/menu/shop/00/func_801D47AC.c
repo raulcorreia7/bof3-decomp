@@ -1,20 +1,20 @@
 #include "shop_00.h"
 
 MATCH void func_801D47AC(void) {
-    s32 old;
-    s32 new;
+    s32 first_status;
+    s32 second_status;
     u8  count;
 
     Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
     WinDrawCueText(28, 22, D_801E60EC + 0x85);
     g_SaveCardPort = 0;
     CardAccessFile(0, 0, 0, 0, 0);
-    old            = g_SaveCardStatus;
+    first_status   = g_SaveCardStatus;
     g_SaveCardPort = 1;
     CardAccessFile(0, 0, 0, 0, 0);
-    new = g_SaveCardStatus;
-    if (old == 0 || old == 2) {
-        if (new == 0 || new == 2) {
+    second_status = g_SaveCardStatus;
+    if (first_status == CARD_EVENT_OK || first_status == CARD_EVENT_NEW) {
+        if (second_status == CARD_EVENT_OK || second_status == CARD_EVENT_NEW) {
             D_801E608C     = 1;
             g_SaveCardPort = 0;
             D_801E6088     = 0;
@@ -25,7 +25,7 @@ MATCH void func_801D47AC(void) {
             D_801E608C     = 0;
             D_801E60F8     = 1;
         }
-    } else if (new == 0 || new == 2) {
+    } else if (second_status == CARD_EVENT_OK || second_status == CARD_EVENT_NEW) {
         D_801E6088     = 1;
         D_801E608C     = 1;
         g_SaveCardPort = 1;
