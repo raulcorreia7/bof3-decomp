@@ -30,7 +30,7 @@ MATCH s32 func_801E0770(void) {
         return result;
     }
     work = FISHING_STATE;
-    d    = -g_ActorSlots[0].x.fixed + work->motion_34.unk_34;
+    d    = -g_ActorSlots[0].x.fixed + *(s32*)((u8*)work + 0x34);
     if (d < 0) {
         d = -d;
     }
