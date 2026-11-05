@@ -19,7 +19,7 @@ MATCH void func_801F3614(void) {
         goto done;
     }
 force:
-    ((u8*)g_SpadWork)[3] = 3;
+    ((u8*)g_SpadWork)[0x03] = 3;
 done:
     Area_DrawHudBanner(0x5C, g_SpadWork->unk_30);
 }

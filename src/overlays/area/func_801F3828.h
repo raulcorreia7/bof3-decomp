@@ -25,7 +25,7 @@ MATCH void func_801F3828(void) {
         goto done; /* skips the advance: panel `0x5C` draws next */
     }
 bump:
-    ((u8*)g_SpadWork)[3]++;
+    ((u8*)g_SpadWork)[0x03]++;
 done:
     func_801F40C4(0x5C, g_SpadWork->unk_30);
 }
