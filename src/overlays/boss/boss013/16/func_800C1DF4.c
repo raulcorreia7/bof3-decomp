@@ -7,7 +7,7 @@ MATCH void func_800C1DF4(void) {
     if (work->flags & 0x80) {
         work->step++;
     } else {
-        work->coord_x_34.raw += 0x8000;
+        work->x.raw += 0x8000;
         func_8014D978();
         func_8014D978();
     }

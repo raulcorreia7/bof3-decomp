@@ -8,9 +8,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/BMagic_RunStep.h"
 
 MATCH void func_801EECB0(void) {
-    g_Task->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw;
-    g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw;
-    g_Task->word_3C.word   = BATTLE_ACTIVE_WORK->word_3C.word;
+    g_Task->x.raw = BATTLE_ACTIVE_WORK->x.raw;
+    g_Task->y.raw = BATTLE_ACTIVE_WORK->y.raw;
+    g_Task->z.raw = BATTLE_ACTIVE_WORK->z.raw;
     GFX_CopyPalette(0x1A);
     g_GfxPalettePending += 1;
     g_Task->mode += 1;
@@ -176,26 +176,26 @@ MATCH void func_801EF900(void) {
     s32           temp_a0;
     s8            tone;
 
-    g_Task->coord_x_34.raw     = D_801EB4E0->coord_x_34.raw - 1;
-    g_Task->coord_y_38.raw     = D_801EB4E0->coord_y_38.raw - 1;
-    temp_a0                    = g_Task->coord_x_34.raw;
-    temp_v0                    = Area_SampleHeight(temp_a0, temp_a0);
-    work                       = g_Task;
-    work->unk_25               = 0x1D;
-    work->word_3C.half.span_3E = temp_v0;
-    g_Task->unk_26             = 0;
-    g_Task->unk_48             = 1;
-    g_Task->unk_27             = 0xA0;
-    g_Task->unk_28             = 0;
-    g_Task->unk_24             = 4;
-    tone                       = -0x80;
-    g_Task->unk_5D             = tone;
-    g_Task->unk_5E             = tone;
-    g_Task->unk_5F             = tone;
-    g_Task->unk_5C             = 0;
-    g_Task->unk_2A             = 0;
-    g_Task->unk_29             = 4;
-    g_Task->unk_2C.half        = 0;
+    g_Task->x.raw       = D_801EB4E0->x.raw - 1;
+    g_Task->y.raw       = D_801EB4E0->y.raw - 1;
+    temp_a0             = g_Task->x.raw;
+    temp_v0             = Area_SampleHeight(temp_a0, temp_a0);
+    work                = g_Task;
+    work->unk_25        = 0x1D;
+    work->z.half.hi     = temp_v0;
+    g_Task->unk_26      = 0;
+    g_Task->unk_48      = 1;
+    g_Task->unk_27      = 0xA0;
+    g_Task->unk_28      = 0;
+    g_Task->unk_24      = 4;
+    tone                = -0x80;
+    g_Task->unk_5D      = tone;
+    g_Task->unk_5E      = tone;
+    g_Task->unk_5F      = tone;
+    g_Task->unk_5C      = 0;
+    g_Task->unk_2A      = 0;
+    g_Task->unk_29      = 4;
+    g_Task->unk_2C.half = 0;
     Actor_SelectScript(0U);
     g_Task->step += 1;
 }
@@ -203,10 +203,10 @@ MATCH void func_801EF900(void) {
 MATCH void func_801EFA38(void) {
     s32 temp_a0;
 
-    g_Task->coord_x_34.raw       = D_801EB4E0->coord_x_34.raw - 1;
-    g_Task->coord_y_38.raw       = D_801EB4E0->coord_y_38.raw - 1;
-    temp_a0                      = g_Task->coord_x_34.raw;
-    g_Task->word_3C.half.span_3E = Area_SampleHeight(temp_a0, temp_a0);
+    g_Task->x.raw     = D_801EB4E0->x.raw - 1;
+    g_Task->y.raw     = D_801EB4E0->y.raw - 1;
+    temp_a0           = g_Task->x.raw;
+    g_Task->z.half.hi = Area_SampleHeight(temp_a0, temp_a0);
     if (!(1 & D_801EB4E0->flags)) {
         g_Task->step += 1;
     }

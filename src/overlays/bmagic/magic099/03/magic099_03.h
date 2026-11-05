@@ -56,12 +56,12 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
     *angle_cell            = angle;
     D_1F800000             = depth;
 
-    velocity             = rcos(angle) * D_1F800000;
-    work                 = g_Task;
-    work->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw + velocity;
+    velocity    = rcos(angle) * D_1F800000;
+    work        = g_Task;
+    work->x.raw = BATTLE_ACTIVE_WORK->x.raw + velocity;
 
-    velocity               = rsin(*angle_cell) * D_1F800000;
-    g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
+    velocity      = rsin(*angle_cell) * D_1F800000;
+    g_Task->y.raw = BATTLE_ACTIVE_WORK->y.raw + velocity;
 
     if (--g_Task->unk_09 == 0) {
         g_Task->step++;

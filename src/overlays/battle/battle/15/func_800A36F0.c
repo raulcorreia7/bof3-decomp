@@ -49,13 +49,13 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
         status &= ~STATUS_CONFUSED;
         slot = (u32)battler_index;
         if (BATTLER_IS_PLAYER(battler_index)) {
-            g_BattlePartyBattlers[slot].coord_x_34.raw = g_BattleTemplateStats[slot].defence[0];
-            g_BattlePartyBattlers[slot].coord_y_38.raw = g_BattleTemplateStats[slot].defence[1];
-            g_BattlePartyBattlers[slot].word_3C.word   = g_BattleTemplateStats[slot].defence[2];
+            g_BattlePartyBattlers[slot].x.raw = g_BattleTemplateStats[slot].defence[0];
+            g_BattlePartyBattlers[slot].y.raw = g_BattleTemplateStats[slot].defence[1];
+            g_BattlePartyBattlers[slot].z.raw = g_BattleTemplateStats[slot].defence[2];
         } else {
-            ENEMY_COMBATANT(slot).coord_x_34   = g_BattleTemplateStats[slot].defence[0];
-            ENEMY_COMBATANT(slot).coord_y_38   = g_BattleTemplateStats[slot].defence[1];
-            ENEMY_COMBATANT(slot).word_3C.word = g_BattleTemplateStats[slot].defence[2];
+            ENEMY_COMBATANT(slot).x     = g_BattleTemplateStats[slot].defence[0];
+            ENEMY_COMBATANT(slot).y     = g_BattleTemplateStats[slot].defence[1];
+            ENEMY_COMBATANT(slot).z.raw = g_BattleTemplateStats[slot].defence[2];
         }
     }
 

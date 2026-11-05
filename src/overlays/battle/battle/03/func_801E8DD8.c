@@ -28,7 +28,7 @@ MATCH void func_801E8DD8(void) {
             offset_y = D_801EB109[(u32)D_80145F09[row][0] * 2u];
         }
         dst->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
-        g_Task->z        = *(u16*)(((u8*)D_801EB4E0 + 0x32u));
+        g_Task->depth    = *(u16*)(((u8*)D_801EB4E0 + 0x32u));
     } else {
         row = slot[5];
         row -= 3;
@@ -38,6 +38,6 @@ MATCH void func_801E8DD8(void) {
         row -= 3;
         offset_y            = ENCOUNTER_ENEMIES[D_801EB710[row * 0x118]].height;
         g_Task->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
-        g_Task->z           = *(u16*)((slot + 0x32u));
+        g_Task->depth       = *(u16*)((slot + 0x32u));
     }
 }

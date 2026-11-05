@@ -12,14 +12,14 @@ MATCH void Effect_CopyBattlerCoordsOnTimerZero(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        src              = BATTLE_ACTIVE_WORK;
-        work             = g_Task;
-        work->coord_x_34 = src->coord_x_34;
-        work->coord_y_38 = src->coord_y_38;
-        work->word_3C    = src->word_3C;
-        work->unk_09     = 0x40;
-        g_Task->timer    = 0;
-        g_Task->unk_0B   = 0;
-        g_Task->mode     = g_Task->mode + 1;
+        src            = BATTLE_ACTIVE_WORK;
+        work           = g_Task;
+        work->x        = src->x;
+        work->y        = src->y;
+        work->z        = src->z;
+        work->unk_09   = 0x40;
+        g_Task->timer  = 0;
+        g_Task->unk_0B = 0;
+        g_Task->mode   = g_Task->mode + 1;
     }
 }

@@ -50,12 +50,12 @@ MATCH void func_801EF264(void) {
 }
 
 MATCH void func_801EF2EC(void) {
-    g_Task->unk_0B         = rand() & 0xF;
-    g_Task->unk_09         = 0;
-    g_Task->timer          = 0;
-    g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
-    g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
-    g_Task->word_3C.word   = D_801EB4E0->word_3C.word;
+    g_Task->unk_0B = rand() & 0xF;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0;
+    g_Task->x.raw  = D_801EB4E0->x.raw;
+    g_Task->y.raw  = D_801EB4E0->y.raw;
+    g_Task->z.raw  = D_801EB4E0->z.raw;
     g_Task->step += 1;
 }
 
@@ -123,12 +123,12 @@ MATCH void func_801EF7D8(void) {
     *angle_cell            = angle;
     D_1F800000             = 0x28;
 
-    velocity             = rcos(angle) * D_1F800000;
-    work                 = g_Task;
-    work->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw + velocity;
+    velocity    = rcos(angle) * D_1F800000;
+    work        = g_Task;
+    work->x.raw = BATTLE_ACTIVE_WORK->x.raw + velocity;
 
-    velocity               = rsin(*angle_cell) * D_1F800000;
-    g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
+    velocity      = rsin(*angle_cell) * D_1F800000;
+    g_Task->y.raw = BATTLE_ACTIVE_WORK->y.raw + velocity;
 
     if (--g_Task->timer == 0) {
         BATTLE_ACTIVE_WORK->unk_0B++;
@@ -168,13 +168,13 @@ MATCH void func_801F0090(void) {
     *angle_cell            = angle;
     D_1F800000             = 0x18;
 
-    velocity               = rcos(angle) * D_1F800000;
-    g_Task->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw + velocity;
+    velocity      = rcos(angle) * D_1F800000;
+    g_Task->x.raw = BATTLE_ACTIVE_WORK->x.raw + velocity;
 
-    velocity               = rsin(*angle_cell) * D_1F800000;
-    g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
+    velocity      = rsin(*angle_cell) * D_1F800000;
+    g_Task->y.raw = BATTLE_ACTIVE_WORK->y.raw + velocity;
 
-    g_Task->word_3C.half.span_3E = (u16)BATTLE_ACTIVE_WORK->word_3C.half.span_3E;
+    g_Task->z.half.hi = (u16)BATTLE_ACTIVE_WORK->z.half.hi;
     g_Task->step++;
 }
 
@@ -213,13 +213,13 @@ MATCH void func_801F0314(void) {
     *angle_cell            = angle;
     D_1F800000             = 0x18;
 
-    velocity             = rcos(angle) * D_1F800000;
-    work                 = g_Task;
-    work->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw + velocity;
+    velocity    = rcos(angle) * D_1F800000;
+    work        = g_Task;
+    work->x.raw = BATTLE_ACTIVE_WORK->x.raw + velocity;
 
-    velocity                = rsin(*angle_cell) * D_1F800000;
-    scratch                 = g_Task;
-    scratch->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
+    velocity       = rsin(*angle_cell) * D_1F800000;
+    scratch        = g_Task;
+    scratch->y.raw = BATTLE_ACTIVE_WORK->y.raw + velocity;
     scratch->timer -= 2;
 
     if (g_Task->timer == 0) {

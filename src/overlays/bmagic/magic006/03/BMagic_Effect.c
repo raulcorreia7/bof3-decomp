@@ -25,13 +25,12 @@ MATCH void func_801EEF28(void) {
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
-        g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
-        g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
-        g_Task->word_3C.word   = D_801EB4E0->word_3C.word + 0x800000;
+        g_Task->x.raw = D_801EB4E0->x.raw;
+        g_Task->y.raw = D_801EB4E0->y.raw;
+        g_Task->z.raw = D_801EB4E0->z.raw + 0x800000;
         func_800AF764(g_Task);
-        battler = g_BattleSelectedActor;
-        g_Task->unk_0C =
-            ratan2(battler->coord_x_34.raw - g_Task->coord_x_34.raw, battler->coord_y_38.raw - g_Task->coord_y_38.raw);
+        battler        = g_BattleSelectedActor;
+        g_Task->unk_0C = ratan2(battler->x.raw - g_Task->x.raw, battler->y.raw - g_Task->y.raw);
         g_Task->unk_10 = 0;
         g_Task->unk_14 = (ratan2((s16)battler->unk_2E.half - (s16)g_Task->unk_2E.half,
                                  (s16)battler->unk_30.half - (s16)g_Task->unk_30.half) -
@@ -111,12 +110,12 @@ MATCH void func_801F04F4(void) {
 MATCH void func_801F05A4(void) {
     PartyBattler* src;
 
-    src                = g_BattleSelectedActor;
-    g_Task->coord_x_34 = src->coord_x_34;
-    g_Task->coord_y_38 = src->coord_y_38;
-    g_Task->word_3C    = src->word_3C;
-    g_Task->unk_09     = 0;
-    g_Task->step       = g_Task->step + 1;
+    src            = g_BattleSelectedActor;
+    g_Task->x      = src->x;
+    g_Task->y      = src->y;
+    g_Task->z      = src->z;
+    g_Task->unk_09 = 0;
+    g_Task->step   = g_Task->step + 1;
 }
 
 MATCH void func_801F05F4(void) {

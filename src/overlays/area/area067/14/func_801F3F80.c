@@ -10,10 +10,10 @@ MATCH void func_801F3F80(void) {
 
     TASK_SET(&g_BattlePartyBattlers[0]);
     index     = D_80144F5A[0];
-    y         = g_BattlePartyBattlers[0].coord_y_38.raw;
-    x         = g_BattlePartyBattlers[0].coord_x_34.raw;
+    y         = g_BattlePartyBattlers[0].y.raw;
+    x         = g_BattlePartyBattlers[0].x.raw;
     selection = D_801F4644[index];
-    result    = func_8015CC00(3, 0, selection, x, y, g_BattlePartyBattlers[0].word_3C.word);
+    result    = func_8015CC00(3, 0, selection, x, y, g_BattlePartyBattlers[0].z.raw);
     if ((u8)result != GAME_NONE) {
         work      = SP_REF(u8*, 0x44u);
         work[0xB] = (u8)result;

@@ -92,7 +92,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             g_Task->unk_44 += PACK24(code + CUR(sub), 3);
             g_Task->x.fixed += PACK24(code + CUR(sub), 5);
             g_Task->y.fixed += PACK24(code + CUR(sub), 7);
-            g_Task->z.fixed += PACK24(code + CUR(sub), 9);
+            g_Task->depth.fixed += PACK24(code + CUR(sub), 9);
             CUR(sub) += 0xA;
             break;
         case 0xC8:

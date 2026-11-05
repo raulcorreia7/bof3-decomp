@@ -69,8 +69,8 @@ MATCH void func_801F0140(void) {
     func_8014D978();
     g_Task->unk_40 += 0x800;
     g_Task->unk_44 += 0x800;
-    g_Task->coord_x_34.raw += rsin(g_Task->unk_14) * g_Task->unk_0C;
-    g_Task->coord_y_38.raw += rcos(g_Task->unk_14) * g_Task->unk_0C;
+    g_Task->x.raw += rsin(g_Task->unk_14) * g_Task->unk_0C;
+    g_Task->y.raw += rcos(g_Task->unk_14) * g_Task->unk_0C;
     if (g_FrameCount & 1) {
         value = g_Task->unk_0C;
         if (value == 4) {

@@ -14,9 +14,9 @@ MATCH void func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode) {
             dst->unk_07 |= 0x20;
             break;
         case 1:
-            dst->coord_x_34.raw = source_record->coord_x_34.raw;
-            dst->coord_y_38.raw = source_record->coord_y_38.raw;
-            dst->word_3C.word   = source_record->word_3C.word;
+            dst->x.raw = source_record->x.raw;
+            dst->y.raw = source_record->y.raw;
+            dst->z.raw = source_record->z.raw;
             break;
     }
 }

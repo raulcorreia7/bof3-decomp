@@ -64,9 +64,9 @@ NON_MATCHING s32 func_801BC760(void) {
     }
     row    = &g_BattlePartyBattlers[g_Task->unk_06];
     span   = 0x18000;
-    tgt_x  = row->coord_x_34.raw + (row->unk_0C * row->unk_09);
+    tgt_x  = row->x.raw + (row->unk_0C * row->unk_09);
     near_a = tgt_x - (g_FacingSteps[row->unk_08].x * 2);
-    tgt_y  = row->coord_y_38.raw + (row->unk_10 * row->unk_09);
+    tgt_y  = row->y.raw + (row->unk_10 * row->unk_09);
     near_b = tgt_y - (g_FacingSteps[row->unk_08].y * 2);
     if (row->unk_70 != 0) {
         span = 0x20000;
@@ -148,10 +148,10 @@ NON_MATCHING s32 func_801BC760(void) {
                 g_Task->y.fixed = near_b;
                 g_GameState->flags_12C.s8_value &= 0xFE;
                 g_GameState->flags_12C.s8_value |= (D_80145FBC & 1);
-                g_Task->z.part.integer  = Area_ReadHeight(near_a, near_b);
-                g_Task->unk_29          = D_80145EB9;
-                FIELD(s8, g_Task, 0x1u) = 2;
-                FIELD(s8, g_Task, 0x2u) = 2;
+                g_Task->depth.part.integer = Area_ReadHeight(near_a, near_b);
+                g_Task->unk_29             = D_80145EB9;
+                FIELD(s8, g_Task, 0x1u)    = 2;
+                FIELD(s8, g_Task, 0x2u)    = 2;
                 return 0xFF;
             }
             g_GameState = saved;

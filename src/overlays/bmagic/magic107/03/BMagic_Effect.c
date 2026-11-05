@@ -11,7 +11,7 @@ MATCH void func_801EEC04(void) {
 }
 
 /* The g_Task base for the span read must be fetched before the D_801EC364 store and the
- * word_3C member read kept in place; both inline reads or an early span local shift the reload. */
+ * z member read kept in place; both inline reads or an early span local shift the reload. */
 MATCH void func_801EEC5C(void) {
     PartyBattler* work;
     s32           scroll_x;
@@ -25,7 +25,7 @@ MATCH void func_801EEC5C(void) {
     work                                     = g_Task;
     FIELD(s32, D_801EC364, offset)           = scroll_x;
     FIELD(s32, D_801EC368, offset)           = g_AreaScrollTargetY;
-    FIELD(s32, D_801EC36C, offset)           = work->word_3C.word + 0x04000000;
+    FIELD(s32, D_801EC36C, offset)           = work->z.raw + 0x04000000;
     SND_QueueSelectionFx(0x100);
     g_Task->unk_0B = 0;
     g_Task->mode += 1;

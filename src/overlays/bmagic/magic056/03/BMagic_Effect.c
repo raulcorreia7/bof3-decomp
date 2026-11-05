@@ -109,11 +109,11 @@ MATCH void func_801F00C8(void) {
     g_Task->unk_5E -= 0x10;
     g_Task->unk_5F -= 0x10;
     if ((s8)g_Task->unk_5D == -0x80) {
-        work                 = g_Task;
-        source               = BATTLE_ACTIVE_WORK;
-        work->coord_x_34.raw = source->coord_x_34.raw;
-        work->coord_y_38.raw = source->coord_y_38.raw;
-        work->word_3C.word   = source->word_3C.word;
+        work        = g_Task;
+        source      = BATTLE_ACTIVE_WORK;
+        work->x.raw = source->x.raw;
+        work->y.raw = source->y.raw;
+        work->z.raw = source->z.raw;
         work->step += 1;
     }
 }
