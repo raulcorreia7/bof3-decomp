@@ -6,6 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801F71C0);
 
+/* 3 differing; first at +0x68: candidate li v0,100 against retail li v1,320 — the 0x140
+ * materialization must precede the 0x64 one (v1 holds the long-lived constant); permuter. */
 INCLUDE_ASM(func_801F729C);
 
 MATCH void func_801F73B8(void) {
