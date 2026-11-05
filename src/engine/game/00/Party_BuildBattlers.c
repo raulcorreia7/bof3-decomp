@@ -16,14 +16,14 @@ MATCH void Party_BuildBattlers(u32 mode) {
         entry_table                                   = D_80144F5A;
         g_Task->unk_05                                = i;
         ((void (*)(u8, u8))func_801C1254)(*((entry_table + ((mode & BYTE_MASK) * 3)) + i), i);
-        *((u8*)(((u8*)g_Task) + 0x48))      = 0;
-        *((u32*)(((u8*)g_Task) + 0x40))     = 0x10000;
-        *((u32*)(((u8*)g_Task) + 0x44))     = 0x10000;
-        kind                                = g_CharSlot[*((entry_table + ((mode & BYTE_MASK) * 3)) + i)];
-        D_80145FCC[i * BATTLE_PARTY_STRIDE] = kind;
-        slot_offset                         = i * BATTLE_PARTY_STRIDE;
+        *((u8*)(((u8*)g_Task) + 0x48))       = 0;
+        *((u32*)(((u8*)g_Task) + 0x40))      = 0x10000;
+        *((u32*)(((u8*)g_Task) + 0x44))      = 0x10000;
+        kind                                 = g_CharSlot[*((entry_table + ((mode & BYTE_MASK) * 3)) + i)];
+        g_BattlePartyBattlers[i].record_slot = kind;
+        slot_offset                          = i * BATTLE_PARTY_STRIDE;
         /* g_Characters is the 0xA4-byte character-record table; D_80144F5A is at +0x5F2. */
-        record_base                         = (Character*)(((u8*)D_80144F5A) - 0x5F2);
+        record_base                          = (Character*)(((u8*)D_80144F5A) - 0x5F2);
         *((Character*)((((u8*)g_BattlePartyBattlers) + 0x74) + slot_offset)) = record_base[kind];
         *((((u8*)g_BattlePartyBattlers) + 0x12C) + slot_offset) &= 0xFE;
         if ((mode & BYTE_MASK) != 0) {

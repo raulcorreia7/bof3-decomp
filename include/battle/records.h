@@ -521,9 +521,9 @@ typedef struct PartyBattler {
     u8           unk_118;
     u8           mode_119;
     u16          command;
-    u16          hp_change; /* +0x11C signed HP delta shown on the hit; func_801D527C seeds it from stats.hp,
+    s16          hp_change; /* +0x11C signed HP delta shown on the hit; func_801D527C seeds it from stats.hp,
                                func_801DFCB4 tests its sign (ram-map: hp_change) */
-    u16          ap_change; /* +0x11E signed AP delta, as hp_change (ram-map: ap_change) */
+    s16          ap_change; /* +0x11E signed AP delta, as hp_change (ram-map: ap_change) */
     u8           unk_120;
     u8           counter_121;
     u8           unk_122;
@@ -534,9 +534,11 @@ typedef struct PartyBattler {
     u16          unk_134;
     u8           counter_136;
     u8           counter_137;
-    u8           charge;
+    u8           charge; /* +0x138 the Focus counter, 0..2; Battle_CalcDamage spends it as a power bonus */
     u8           unk_139;
-    u8           unk_13A[6];
+    u8           unk_13A[2];
+    u8           record_slot; /* +0x13C the Character slot this battler was built from */
+    u8           pad_13D[3];
 } PartyBattler;
 
 ASSERT_SIZE(PartyBattler, 0x140);
@@ -564,6 +566,8 @@ ASSERT_OFFSET(PartyBattler, damage_flags, 0x124);
 ASSERT_OFFSET(PartyBattler, action_flags, 0x128);
 ASSERT_OFFSET(PartyBattler, unk_12C, 0x12C);
 ASSERT_OFFSET(PartyBattler, unk_13A, 0x13A);
+ASSERT_OFFSET(PartyBattler, charge, 0x138);
+ASSERT_OFFSET(PartyBattler, record_slot, 0x13C);
 
 /* The damage/status word: `damage_flags` of the enemy row, `damage_flags` of the
  * player row. Bit 6 marks a marked damage target; bit 7 runs the popup digits

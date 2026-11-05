@@ -42,7 +42,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         g_PartySize                                      = 1;
         D_80145E95                                       = 0;
         *(Character*)((u8*)g_BattlePartyBattlers + 0x74) = g_Characters[0];
-        D_80145FCC[0]                                    = 0;
+        g_BattlePartyBattlers[0].record_slot             = 0;
         VOL(u8, D_80145FBC) &= 0xFE;
         g_Task->unk_48 = 0;
         if (LOBU(g_GameRequestFlags) & 1) {

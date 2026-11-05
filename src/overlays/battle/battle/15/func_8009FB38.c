@@ -19,7 +19,7 @@ NON_MATCHING void func_8009FB38(void) {
     selected_battler_address = (u8*)(&g_BattleTarget);
     battler                  = *selected_battler_address;
     if (battler < 3U) {
-        template_index = D_80145FCC[battler * BATTLE_PARTY_STRIDE];
+        template_index = g_BattlePartyBattlers[battler].record_slot;
         stat_base      = g_Characters;
         Char_RebuildStats((u8*)(&stat_base[template_index]));
         row_index = 0;
