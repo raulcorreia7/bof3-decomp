@@ -2385,6 +2385,7 @@ g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the h
 
 ["emi/world01/area065/13"]
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
+Actor_GrowAndSetStep3 = { addr = 0x801F325C, type = "func", source = "grows the actor scale at offset 0x40 by 0x2000 each frame and sets the handler index at byte 0x01 to 3 when the timer at byte 0x09 expires (area065)" }
 Actor_ShrinkAndFinish = { addr = 0x801F3398, type = "func", source = "shrinks the actor scale by 0x2000 and finishes or resets the area when the timer expires (area065)" }
 Actor_CenterOnScreen = { addr = 0x801F3438, type = "func", source = "stores screen origin x 0xA0 and y 0x50 on the actor" }
 Actor_NextStep = { addr = 0x801F3498, type = "func", source = "resets the actor timer and tile class then advances the handler index" }
@@ -2437,6 +2438,7 @@ Actor_FreePaletteFades = { addr = 0x801F36B4, type = "func", source = "frees the
 
 ["emi/world02/area087/13"]
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
+Actor_GrowAndSetStep3 = { addr = 0x801F3258, type = "func", source = "grows the actor scale at offset 0x40 by 0x2000 each frame and sets the handler index at byte 0x01 to 3 when the timer at byte 0x09 expires (area087)" }
 Actor_ShrinkAndFinish = { addr = 0x801F3394, type = "func", source = "shrinks the actor scale by 0x2000 and finishes or resets the area when the timer expires (area087)" }
 Actor_CenterOnScreen = { addr = 0x801F3434, type = "func", source = "stores screen origin x 0xA0 and y 0x50 on the actor" }
 Actor_NextStep = { addr = 0x801F3494, type = "func", source = "byte-identical to Actor_NextStep at emi/world02/area104/14@0x801F3524" }
@@ -2455,6 +2457,7 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4770, type = "func", source = "calls
 ["emi/world02/area088/13"]
 AngleAverage12 = { addr = 0x801F35B0, type = "func", source = "averages two 12-bit angles along the shorter arc" }
 Message_ClearOnCancel = { addr = 0x801F3764, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
+Actor_GrowAndSetStep3 = { addr = 0x801F3D88, type = "func", source = "grows the actor scale at offset 0x40 by 0x2000 each frame and sets the handler index at byte 0x01 to 3 when the timer at byte 0x09 expires (area088)" }
 Actor_ShrinkAndFinish = { addr = 0x801F3EC4, type = "func", source = "shrinks the actor scale by 0x2000 and finishes or resets the area when the timer expires (area088)" }
 Actor_CenterOnScreen = { addr = 0x801F3F64, type = "func", source = "byte-identical to Actor_CenterOnScreen at emi/world02/area087/13@0x801F3434" }
 Actor_NextStep = { addr = 0x801F3FC4, type = "func", source = "byte-identical to Actor_NextStep at emi/world02/area104/14@0x801F3524" }
@@ -2507,6 +2510,7 @@ Area_FindTaggedPartySlot = { addr = 0x801F56B0, type = "func", source = "returns
 
 ["emi/world02/area104/14"]
 Message_RunAreaMessage = { addr = 0x801F2F0C, type = "func", source = "starts message 4 with Message_StartAreaMessage, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the D_801448EB state" }
+Actor_GrowAndSetStep3 = { addr = 0x801F32E8, type = "func", source = "grows the actor scale at offset 0x40 by 0x2000 each frame and sets the handler index at byte 0x01 to 3 when the timer at byte 0x09 expires (area104)" }
 Actor_ShrinkAndFinish = { addr = 0x801F3424, type = "func", source = "shrinks the actor scale by 0x2000 and finishes or resets the area when the timer expires (area104)" }
 Actor_CenterOnScreen = { addr = 0x801F34C4, type = "func", source = "byte-identical to Actor_CenterOnScreen at emi/world02/area087/13@0x801F3434" }
 Actor_NextStep = { addr = 0x801F3524, type = "func", source = "resets the actor timer and tile class then advances the handler index" }
