@@ -49,7 +49,14 @@ MATCH void func_801EF388(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF3E0);
+MATCH void func_801EF3E0(void) {
+    g_SpadWork->word_08.byte.unk_0B = (g_SpadWork->word_08.byte.unk_0B - 1) & 0x3F;
+    g_SpadWork->unk_1C -= 2;
+    g_SpadWork->unk_20 -= 2;
+    if (g_SpadWork->unk_1C == 0x20) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF44C(void) {
     g_SpadWork->unk_1C -= 1;
