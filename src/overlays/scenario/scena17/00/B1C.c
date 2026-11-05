@@ -255,7 +255,21 @@ MATCH void func_801F81BC(void) {
     SYS_DISPATCH_BYTE(D_801F97A4, g_SceneState.state_04);
 }
 
-INCLUDE_ASM(func_801F81F8);
+MATCH void func_801F81F8(void) {
+    /* FAKE: the two words size the frame like retail. */
+    s32 unused[2];
+    u8* step;
+
+    g_AreaScrollTargetX = 0x258000;
+    g_AreaScrollTargetY = 0x1B0000;
+    func_80153DE8();
+    UI_SetMode(1);
+    CallbackWait(1);
+    g_AreaDrawFlags = 0x1F;
+    SND_PlayBgm(0xA0, 0x64, 0x8);
+    step       = &D_80146874;
+    *step     += 1;
+}
 
 MATCH void func_801F8274(void) {
     if (g_UiWindowEffectBusy == 0) {
