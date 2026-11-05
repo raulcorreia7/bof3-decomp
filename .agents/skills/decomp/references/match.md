@@ -37,6 +37,9 @@ Input: `TARGET@0xADDRESS` from the task.
    `splat.yaml` is the target map, so the change needs the owner's grant (AGENTS.md rule 4);
    without it, report `needs: split <target> <offset> <reason>`. How to edit it:
    [split](../../../../docs/toolchain.md#split).
+7. Names: every name you write in the match (the function, its locals, parameters, members and
+   globals) passes the [natural-names test](name.md#natural-names). Without evidence, keep the address
+   name (`func_<ADDR>`, `unk_<OFF>`) and plain locals (`i`, `count`).
 
 Report: `exact` (candidate path, `check-<image>` result), `blocked` (cause, first diff, falsified
 hypotheses with measurements, best score, the one lever that would change it) or `needs`

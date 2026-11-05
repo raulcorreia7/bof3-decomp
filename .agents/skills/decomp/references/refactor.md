@@ -10,6 +10,8 @@
    - a twin group: `bin/coddog cluster <target>`, then
      [shared bodies](../../../../docs/conventions.md#shared-bodies);
    - a repeated operation: [helpers and macros](../../../../docs/conventions.md#helpers-and-macros).
+   - a new type, member, global or macro name: [globals, arrays, structs and unions](../../../../docs/conventions.md#globals-arrays-structs-and-unions)
+     and the [natural-names test](name.md#natural-names).
 3. Declare once at the lowest scope, add `ASSERT_SIZE` and an `ASSERT_OFFSET` per proven member,
    convert each consumer, and delete its cast or view. A cast that breaks the match stays as
    `kept: <reason>`.
