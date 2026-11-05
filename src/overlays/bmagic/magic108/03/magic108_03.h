@@ -10,4 +10,17 @@
 
 void func_801EED1C(void);
 
+extern Callback D_801EFC9C[];
+
+/* One-field views of the queued-slot record at g_BattleEffects (stride 0x78). */
+extern u8 D_801EC338[];
+extern u8 D_801EC364[];
+extern u8 D_801EC368[];
+extern u8 D_801EC36C[];
+
+void func_801EF180(void);
+void func_801EF2D4(void);
+void func_801EF5C0(void);
+void func_801EF6C0(void);
+
 #endif
