@@ -34,7 +34,23 @@ MATCH void func_801EF018(void) {
 
 INCLUDE_ASM(func_801EF090);
 
-INCLUDE_ASM(func_801EF174);
+MATCH void func_801EF174(void) {
+    PartyBattler* work = g_SpadWork;
+    u8            count;
+    u8            phase = work->word_08.byte.unk_0B;
+    u8            timer;
+    phase += 1;
+    timer                     = work->word_08.byte.unk_09;
+    work->word_08.byte.unk_0B = phase + (timer >> 6);
+    if (g_FrameCount & 1) {
+        g_SpadWork->word_08.byte.timer_0A += 1;
+    }
+    count                           = g_SpadWork->word_08.byte.unk_09 + 2;
+    g_SpadWork->word_08.byte.unk_09 = count;
+    if (count == 0xC0) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF21C);
 
