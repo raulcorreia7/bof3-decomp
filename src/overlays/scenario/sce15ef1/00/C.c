@@ -51,7 +51,19 @@ INCLUDE_ASM(func_801D106C);
 
 INCLUDE_ASM(func_801D12A0);
 
-INCLUDE_ASM(func_801D13F4);
+MATCH void func_801D13F4(void) {
+    u8 remaining;
+
+    g_SpadWork->unk_2E -= 0x10;
+    g_SpadWork->unk_03 -= 8;
+    func_801D1A60();
+    func_801D1678(&g_SpadWork->unk_18, &g_SpadWork->x, g_SpadWork->unk_03);
+    remaining          = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = remaining;
+    if (!(remaining & 0xFF)) {
+        func_80196070();
+    }
+}
 
 INCLUDE_ASM(func_801D147C);
 
