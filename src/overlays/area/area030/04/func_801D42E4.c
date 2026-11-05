@@ -10,8 +10,8 @@ MATCH void func_801D42E4(void) {
     g_SpadWork->direction_08 = 0;
     g_SpadWork->unk_06       = 0;
     g_SpadWork->option_flags = 0x80;
-    g_SpadWork->unk_09       = 4;
-    g_SpadWork->unk_0A       = 0;
+    ((u8*)g_SpadWork)[0x09]  = 4;
+    ((u8*)g_SpadWork)[0x0A]  = 0;
 
     work                 = FISHING_STATE;
     work->saved_index_0B = 0;

@@ -16,9 +16,9 @@ MATCH void func_801F3164(void) {
                 goto tail; /* skips the arming stores: run the step only */
             }
         }
-        g_SpadWork->unk_48 = 2;
-        g_SpadWork->unk_09 = 8;
-        g_SpadWork->unk_01 = 4;
+        ((u8*)g_SpadWork)[0x48] = 2;
+        ((u8*)g_SpadWork)[0x09] = 8;
+        ((u8*)g_SpadWork)[0x01] = 4;
     }
 tail:
     Area_AddActor();
