@@ -371,6 +371,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0C10, source = "the module dispatcher index
 
 ["emi/bmagic/magic063/03"]
 Effect_StartOnZeroTick = { addr = 0x801EEEE4, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+Effect_FinishOnZeroTick = { addr = 0x801EF2E4, type = "func", source = "finishes the effect once its ticker byte 0x0B is zero: the side mask at work byte 0x04 goes to func_800A9820, the active battler's effect ticker byte is lowered by one and the effect work is cleared (func_801EF2E4 in magic063, func_801EF2A0 in magic146)" }
 g_BMagicEffectFuncs = { addr = 0x801F0400, source = "the module dispatcher indexes it with the shared spad step byte" }
 D_801F1054 = { addr = 0x801F1054, source = "func_801EF340 loads this word as the task-work pointer" }
 
@@ -777,6 +778,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF414, source = "the module dispatcher index
 ["emi/bmagic/magic146/03"]
 Effect_NextStepOnZeroTick = { addr = 0x801EEFD0, type = "func", source = "advances the step byte at +0x01 when the effect ticker byte at +0x0B is zero; one body shared with the other bmagic overlays" }
 Effect_PlayOnce = { addr = 0x801EF004, type = "func", source = "plays the effect the target selector chose and clears it" }
+Effect_FinishOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "finishes the effect once its ticker byte 0x0B is zero: the side mask at work byte 0x04 goes to func_800A9820, the active battler's effect ticker byte is lowered by one and the effect work is cleared (func_801EF2E4 in magic063, func_801EF2A0 in magic146)" }
 Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF520, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through Bmagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801EF900, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801EF964, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }

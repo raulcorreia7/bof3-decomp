@@ -22,7 +22,7 @@ MATCH void func_801EF090(void) {
 
 INCLUDE_ASM(func_801EF0D4);
 
-INCLUDE_ASM(func_801EF2A0);
+#include "overlays/bmagic/Effect_FinishOnZeroTick.h"
 
 MATCH void func_801EF2FC(void) {
     SYS_DISPATCH_TASK(D_801EF9C0, 1, g_SpadWork);

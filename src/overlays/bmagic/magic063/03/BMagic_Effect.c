@@ -33,13 +33,7 @@ MATCH void func_801EF190(void) {
 
 INCLUDE_ASM(func_801EF1C8);
 
-MATCH void func_801EF2E4(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        func_800A9820(g_SpadWork->unk_04);
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
-        func_801E5988();
-    }
-}
+#include "overlays/bmagic/Effect_FinishOnZeroTick.h"
 
 MATCH void func_801EF340(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 1, 1, D_801F1054);
