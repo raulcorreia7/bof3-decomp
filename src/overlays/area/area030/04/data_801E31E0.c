@@ -28,7 +28,7 @@ u8 D_801E3204 __attribute__((aligned(4))) = 0;
 u8 D_801E3208 __attribute__((aligned(4))) = 0;
 
 /* 0x801E320C */
-u8 *D_801E320C = 0;
+FishingCharRow *D_801E320C = 0;
 
 /* 0x801E3210 */
 FishingTarget *D_801E3210 = 0;
