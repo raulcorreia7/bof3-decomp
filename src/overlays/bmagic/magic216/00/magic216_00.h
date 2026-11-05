@@ -5,4 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern u8 D_801EC2E4;
+
 #endif

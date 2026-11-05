@@ -35,8 +35,17 @@ MATCH void func_801EEFF8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF0F8);
+MATCH void func_801EF0F8(void) {
+    PartyBattler* work          = g_SpadWork;
+    u8            timer         = work->word_08.byte.timer_0A - 1;
+    work->word_08.byte.timer_0A = timer;
+    work->word_3C.word += 0xFF800000;
+    if (timer == 0) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
+/* Best 7 differences: lui a0 at 0x801EF148; adjust register allocation. */
 INCLUDE_ASM(func_801EF148);
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"

@@ -9,11 +9,34 @@ MATCH void func_801EEC04(void) {
     SYS_DISPATCH_TASK(handlers, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EEC5C);
+MATCH void func_801EEC5C(void) {
+    PartyBattler* src;
+    u32           offset;
+
+    src                                         = g_BattleSelectedActor;
+    offset                                      = (Battle_AllocEffect(1, 0x1A) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+    FIELD(PartyBattler*, D_801EC3A4, offset)    = g_SpadWork;
+    FIELD(u8, D_801EC338, offset)               = src->word_08.byte.facing_08;
+    FIELD(BattleFix32, D_801EC364, offset)      = src->coord_x_34;
+    FIELD(BattleFix32, D_801EC368, offset)      = src->coord_y_38;
+    FIELD(BattleWorkWord3C, D_801EC36C, offset) = src->word_3C;
+    g_SpadWork->word_08.byte.unk_0B             = 0;
+    g_SpadWork->step_01 += 1;
+}
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
-INCLUDE_ASM(func_801EED7C);
+MATCH void func_801EED7C(void) {
+    SYS_DISPATCH_BYTE(D_801EFC9C, g_SpadWork->step_01);
+    if (g_SpadWork->flags_00 != 0) {
+        func_801EF5C0();
+        func_801EF6C0();
+        PopMatrix();
+        func_801EF180();
+        func_801EF2D4();
+        PopMatrix();
+    }
+}
 
 INCLUDE_ASM(func_801EEE0C);
 

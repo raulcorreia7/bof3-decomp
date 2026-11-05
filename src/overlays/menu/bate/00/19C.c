@@ -41,7 +41,20 @@ MATCH void func_801D0EB0(void) {
 
 INCLUDE_ASM(func_801D0EE4);
 
-INCLUDE_ASM(func_801D0F70);
+MATCH void func_801D0F70(void) {
+    u8* timer;
+
+    Menu_DrawClutStrip(D_80144953);
+    timer = &D_80148654;
+    if (TIMER_EXPIRED(*timer)) {
+        D_801D8ED4.unk_00 = 0;
+        D_801D8ED4.unk_04 = 1;
+        D_801D8ED4.unk_08 = 0;
+        D_80148652        = 0;
+        D_80148659        = 0;
+        D_80148651 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D0FF8);
 

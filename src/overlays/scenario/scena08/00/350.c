@@ -225,10 +225,14 @@ INCLUDE_ASM(func_801F8B50);
 
 INCLUDE_ASM(func_801F8BF8);
 
+/* 8 differing, a pure v0/v1 swap of the two byte locals from +0x0 (retail lbu v1,2(a0) against
+ * candidate lbu v0,2(a0)); next lever: permuter to pin the state local in v1. */
 INCLUDE_ASM(func_801F8CDC);
 
 #include "overlays/scenario/Actor_WaitAndStep.h"
 
+/* 6 differing; first at +0x10: candidate lw v1,20(a2) against retail lbu v1,3(a2) — the row[3]
+ * read must stay the third load before the row[0x14] one; next lever: permuter on the schedules. */
 INCLUDE_ASM(func_801F8D4C);
 
 INCLUDE_ASM(func_801F8D98);
@@ -243,7 +247,12 @@ MATCH void func_801F95D4(void) {
     SYS_DISPATCH_TASK(D_801FE908, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801F9618);
+MATCH void func_801F9618(void) {
+    func_801F9688();
+    if (g_GameAreaId != 2) {
+        g_SpadWork->unk_01 += 1;
+    }
+}
 
 MATCH void func_801F9668(void) {
     Actor_Clear();
@@ -257,14 +266,12 @@ MATCH void func_801F986C(void) {
 
 /* Stores 60 in byte 9 and increments byte 1 of the scratchpad buffer at slots[0x11]. */
 MATCH void func_801F98B0(void) {
-    void** slots;
-    void*  sp_ptr;
+    u8** slots;
 
-    slots            = SP_PTR(void*, 0u);
-    sp_ptr           = slots[0x11];
-    ((u8*)sp_ptr)[9] = 0x3C;
-    sp_ptr           = slots[0x11];
-    ((u8*)sp_ptr)[1]++;
+    slots          = SP_PTR(u8*, 0u);
+    slots[0x11][9] = 0x3C;
+    slots          = SP_PTR(u8*, 0u);
+    slots[0x11][1]++;
 }
 
 INCLUDE_ASM(func_801F98E0);
@@ -310,6 +317,8 @@ MATCH void func_801F9DBC(void) {
     SYS_DISPATCH_TASK(D_801FE938, 1, g_SpadWork);
 }
 
+/* 3 differing; first at +4: candidate ori v1,v1,0x8000 against retail lui v0,0x1f80 — the
+ * 0x198000 low-half ori must fill the work load's delay slot; next lever: permuter. */
 INCLUDE_ASM(func_801F9E00);
 
 INCLUDE_ASM(func_801F9E50);
