@@ -2,8 +2,8 @@
  * by the shop, start, Bate and Shisu overlays; each overlay includes this file
  * where the function sits.
  */
-/* func_801D2520 (sisyou), func_801D4564 (bate), func_801D550C (shisu), func_801DA00C (shop), func_801DD504 (start) */
-MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode) {
+/* func_801D4564 (bate), func_801D550C (shisu), func_801DA00C (shop), func_801DD504 (start) */
+MATCH void Menu_DrawIconCell(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode) {
     SPRT* sprt;
     s32   tpage;
     s32   u;

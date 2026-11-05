@@ -18,7 +18,7 @@ MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry) {
         }
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, NULL);
         GFX_AddPrim(1, 0xC);
-        func_801DD618((u16)(left + 9), (u16)(top + 5), (u8)(index + 3), 0x1E, (u16)GetClut(16, 480), 128);
+        Menu_DrawIcon((u16)(left + 9), (u16)(top + 5), (u8)(index + 3), 0x1E, (u16)GetClut(16, 480), 128);
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
             icon = *(entry + i + 5);
             if (icon != GAME_NONE) {

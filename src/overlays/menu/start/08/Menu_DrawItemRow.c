@@ -35,10 +35,10 @@ MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     UI_DrawText((s16)(x0 + 75), (s16)(y0 + 16), (s32)palette, 4U, &g_MenuPortraitAtlas[0x42]);
     UI_DrawWindowOutline((s16)(x0 + 0x33), (s16)(y0 + 0x2E), 0x56, 0x14, 0xF1);
     icon_x = (x0 + 0x36) & HALF_MASK;
-    Menu_DrawIcon(icon_x, (y0 + 0x30) & HALF_MASK, 4U, mode);
+    Menu_DrawIconCell(icon_x, (y0 + 0x30) & HALF_MASK, 4U, mode);
     sprintf((char*)g_UiFormatBuffer, g_MenuZennyFormat, *(s32*)((u8*)&g_Characters[0].exp + row_off));
     UI_DrawGlyphString((s16)(x0 + 78), (s16)(y0 + 48), (u32)palette, g_UiFormatBuffer);
-    Menu_DrawIcon(icon_x, (y0 + 0x39) & HALF_MASK, 5U, mode);
+    Menu_DrawIconCell(icon_x, (y0 + 0x39) & HALF_MASK, 5U, mode);
     count = ((u8*)&g_Characters[0].level)[row_off];
     if (count < 0x63U) {
         count_y = y0;

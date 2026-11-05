@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-void func_801DD618(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
+void Menu_DrawIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 
 MATCH void func_801E30FC(u16 row_x, u16 row_y, s32 row_flags) {
     u8 data[0x18];
@@ -30,8 +30,8 @@ MATCH void func_801E30FC(u16 row_x, u16 row_y, s32 row_flags) {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, NULL);
         GFX_AddPrim(1, 0xC);
         y = (y + 3) & HALF_MASK;
-        func_801DD618(row_x + 1, y, 6, 2, GetClut(0, 480) & HALF_MASK, 128);
-        func_801DD618(row_x + 9, y, 7, 2, GetClut(0, 480) & HALF_MASK, 128);
-        func_801DD618(row_x + 0x11, y, 8, 2, GetClut(0, 480) & HALF_MASK, 128);
+        Menu_DrawIcon(row_x + 1, y, 6, 2, GetClut(0, 480) & HALF_MASK, 128);
+        Menu_DrawIcon(row_x + 9, y, 7, 2, GetClut(0, 480) & HALF_MASK, 128);
+        Menu_DrawIcon(row_x + 0x11, y, 8, 2, GetClut(0, 480) & HALF_MASK, 128);
     }
 }
