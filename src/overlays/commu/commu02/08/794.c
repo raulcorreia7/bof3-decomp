@@ -398,7 +398,15 @@ MATCH void func_801D5D5C(void) {
     SYS_DISPATCH_BYTE(D_801DADEC, D_801F294C);
 }
 
-INCLUDE_ASM(func_801D5D98);
+MATCH void func_801D5D98(void) {
+    u8* state = &g_GameStateIndex;
+
+    if (*state != 2) {
+        Message_StartAreaMessage(0xEE);
+        *state = 2;
+        D_801F294C += 1;
+    }
+}
 
 MATCH void func_801D5DF4(void) {
     SYS_DISPATCH_BYTE(D_801DAE00, D_801F294D);
