@@ -97,7 +97,30 @@ MATCH void func_801EF324(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF3C8);
+MATCH void func_801EF3C8(void) {
+    s32 temp_x;
+    s32 temp_a1;
+    u32 temp_a2;
+    u8  temp_v0;
+
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        temp_x             = g_SpadWork->coord_x_34.raw;
+        temp_a1            = g_SpadWork->coord_y_38.raw;
+        temp_a2            = g_SpadWork->word_3C.word;
+        g_SpadWork->unk_0C = 0x2000;
+        g_SpadWork->unk_14 = 0x300000;
+        g_SpadWork->unk_10 = 0;
+        g_SpadWork->unk_20 = -0x80000;
+        g_SpadWork->unk_18 = temp_x;
+        g_SpadWork->unk_1C = temp_a1;
+        g_SpadWork->unk_44 = (s32)temp_a2;
+        func_801DD350(g_SpadWork);
+        g_SpadWork->word_08.byte.unk_09 = func_800AFF98();
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF478(void) {
     s32 value;

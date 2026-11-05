@@ -1,3 +1,5 @@
+#include "work/area_spad.h"
+
 /* Clear the work reset flag, then hand the work pointer to the area step. One
  * definition shared by the world area overlays; every change here must verify
  * every member address. */

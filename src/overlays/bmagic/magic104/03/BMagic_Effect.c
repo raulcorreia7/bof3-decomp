@@ -26,7 +26,7 @@ MATCH void func_801EF03C(void) {
 }
 
 MATCH void func_801EF09C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 MATCH void func_801EF0E0(void) {
@@ -105,7 +105,13 @@ INCLUDE_ASM(func_801EFB2C);
 
 INCLUDE_ASM(func_801EFE34);
 
-INCLUDE_ASM(func_801F020C);
+MATCH void func_801F020C(void) {
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5, 0);
+    GFX_AddPrim(4, 0xC);
+    SYS_DISPATCH_BYTE(D_801F0900, g_SpadWork->unk_02);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5, 0);
+    GFX_AddPrim(4, 0xC);
+}
 
 INCLUDE_ASM(func_801F02F4);
 

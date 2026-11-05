@@ -16,9 +16,12 @@ void func_801F3064(void);
 
 extern u8 D_801F42DC[];
 extern u8 D_801F42EC[];
+extern u8 D_801F4308[];
 extern u8 D_801F5651[];
 extern u8 D_801F567C[];
 extern s8 D_80146865;
+
+void func_801F387C(s32);
 
 /* The game-overlay state bytes the cancel path resets. */
 

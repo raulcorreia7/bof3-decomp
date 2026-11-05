@@ -37,8 +37,8 @@ MATCH void func_801EEE20(void) {
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEF6C(void) {
-    SYS_DISPATCH_BYTE(D_801EFCD4, ((u8*)g_SpadWork)[1]);
-    if (g_SpadWork->flags_00 != 0 && ((u8*)g_SpadWork)[1] != 0) {
+    SYS_DISPATCH_BYTE(D_801EFCD4, g_SpadWork->step_01);
+    if (g_SpadWork->flags_00 != 0 && g_SpadWork->step_01 != 0) {
         Effect_SetActorMatrix();
         func_801EF194();
         PopMatrix();

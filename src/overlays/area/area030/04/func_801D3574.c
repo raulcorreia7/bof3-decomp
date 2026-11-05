@@ -4,16 +4,16 @@
  * resets the timer and the state byte, otherwise it runs the shared
  * state dispatcher. */
 MATCH void func_801D3574(void) {
-    u8* record;
-    s32 val;
+    FishingState* work;
+    s32           val;
 
-    record                    = (u8*)g_SpadWork;
-    val                       = *(u16*)((record + 0x2Eu)) - 0x1E;
-    *(u16*)((record + 0x2Eu)) = (u16)val;
+    work              = FISHING_STATE;
+    val               = work->origin_x_2E - 0x1E;
+    work->origin_x_2E = (u16)val;
 
     if ((s16)val < -0x45) {
-        *(u16*)((record + 0x2Eu)) = 0xA0;
-        record[1]                 = 0;
+        work->origin_x_2E      = 0xA0;
+        work->handler_index_01 = 0;
         return;
     }
 

@@ -25,7 +25,16 @@ MATCH void func_801EED2C(void) {
 
 INCLUDE_ASM(func_801EED98);
 
-INCLUDE_ASM(func_801EEE50);
+MATCH void func_801EEE50(void) {
+    PartyBattler* temp_s0;
+
+    temp_s0    = g_SpadWork;
+    g_SpadWork = D_801EC2E0->target.party;
+    func_8014DAEC();
+    g_SpadWork                        = temp_s0;
+    temp_s0->word_08.byte.unk_09      = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
+}
 
 INCLUDE_ASM(func_801EEEB0);
 
@@ -36,8 +45,14 @@ MATCH void func_801EEFA4(void) {
     }
 }
 
-/* State macro form: first difference is lui v1 at 0x801EEFF0. */
-INCLUDE_ASM(func_801EEFEC);
+MATCH void func_801EEFEC(void) {
+    u16* battle_flags;
+
+    battle_flags = &g_BattleState;
+    *battle_flags |= 4;
+    func_800A9820(*(battle_flags = &g_BattleTargetSelector));
+    func_801E5988();
+}
 
 MATCH void func_801EF02C(void) {
     BattleHandlerTable3 handlers;
@@ -46,7 +61,17 @@ MATCH void func_801EF02C(void) {
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EF08C);
+MATCH void func_801EF08C(void) {
+    BattleHandlerTable3 handlers;
+
+    handlers     = D_801EEC2C;
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
+    if (g_SpadWork->flags_00 & 1) {
+        func_8014D290();
+    }
+    g_ScriptBank = 0x800D3800;
+}
 
 INCLUDE_ASM(func_801EF134);
 
@@ -107,7 +132,17 @@ INCLUDE_ASM(func_801EF83C);
 
 INCLUDE_ASM(func_801EF900);
 
-INCLUDE_ASM(func_801EFA38);
+MATCH void func_801EFA38(void) {
+    s32 temp_a0;
+
+    g_SpadWork->coord_x_34.raw       = D_801EB4E0->coord_x_34.raw - 1;
+    g_SpadWork->coord_y_38.raw       = D_801EB4E0->coord_y_38.raw - 1;
+    temp_a0                          = g_SpadWork->coord_x_34.raw;
+    g_SpadWork->word_3C.half.span_3E = Area_SampleHeight(temp_a0, temp_a0);
+    if (!(1 & D_801EB4E0->flags_00)) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EFABC(void) {
     func_801E5988();

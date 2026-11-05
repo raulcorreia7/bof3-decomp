@@ -5,4 +5,12 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* The step handlers the module runner dispatches. */
+extern Callback D_801EFDD0[];
+
+void func_801EF434(void);
+void func_801EF4E8(void);
+void func_801EF8E8(void);
+void func_801EF9D4(void);
+
 #endif
