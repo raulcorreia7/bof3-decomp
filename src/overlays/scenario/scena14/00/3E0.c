@@ -46,7 +46,18 @@ MATCH void func_801F8800(u8 amount) {
     g_AreaCameraOffsetY += step;
 }
 
-INCLUDE_ASM(func_801F8850);
+MATCH void func_801F8850(void) {
+    u8* flags;
+
+    flags = &D_80145FF4;
+    *flags &= 0xFE;
+    D_80146134 &= 0xFE;
+    func_8019FA28(0xC4, 0x298000, 0x168000, 0x80);
+    Game_SetScriptActive();
+    D_80146874 = 2;
+    D_80146875 = 0;
+    D_80146871 &= 0xFE;
+}
 
 INCLUDE_ASM(func_801F88DC);
 

@@ -163,7 +163,34 @@ MATCH void func_801EFBEC(void) {
  * the pointer declared as an array element; as a plain global the first differing instruction is the bnez target at +0x4C. */
 INCLUDE_ASM(func_801EFC54);
 
-INCLUDE_ASM(func_801EFD28);
+MATCH void func_801EFD28(void) {
+    s32 temp_v1;
+    u8  temp_a1;
+    u8  temp_v0;
+
+    temp_a1                          = g_SpadWork->word_08.byte.timer_0A;
+    temp_v1                          = g_SpadWork->unk_14 + g_SpadWork->unk_20;
+    g_SpadWork->unk_14               = temp_v1;
+    g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E + temp_v1;
+    if (temp_a1 < 8U) {
+        g_SpadWork->word_08.byte.timer_0A = temp_a1 + 1;
+    }
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        func_800AFC98(2, 0);
+        SND_QueueSelectionFx(0x203);
+        g_SpadWork->unk_14 = 0x40;
+        g_SpadWork->unk_20 = -8;
+        g_SpadWork->unk_0C = ratan2(D_801EB4E0->coord_x_34.raw - g_SpadWork->coord_x_34.raw,
+                                    D_801EB4E0->coord_y_38.raw - g_SpadWork->coord_y_38.raw);
+        /* FAKE: Without the barrier, the scheduler sinks the angle store into the call's delay slot. */
+        MATCH_FAKE_BARRIER();
+        func_800A9820(g_BattleTargetSelector);
+        g_SpadWork->word_08.byte.unk_09 = 0x10;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EFE38(void) {
     s32 value;

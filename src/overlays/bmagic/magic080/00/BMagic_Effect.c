@@ -15,11 +15,28 @@ MATCH void func_801EEC04(void) {
  * 0x801EEC5C); plain, saved-target and hybrid target forms all give the same schedule. */
 INCLUDE_ASM(func_801EEC5C);
 
-/* Regalloc: the no-local form (inline cell reads, arg-less else call) differs only in the tie
- * where the spad pointer takes v1 and the half value v0 (first difference lui v1, 0x801EECF4); a
- * u8 local reproduces retail's v0/v1 roles but materializes andi a0,a0,0xff for the promoted call
- * argument (0x801EED0C), and an s32 or register local loses both. */
-INCLUDE_ASM(func_801EECE4);
+/* The two handlers read the variant byte already loaded in a0, so the calls pass no argument: a
+ * call with an argument adds a zero-extension the retail code folds away. */
+MATCH void func_801EECE4(void) {
+    u8 temp_a0;
+    u8 temp_v0;
+
+    func_800AF764();
+    temp_a0 = g_SpadWork->word_08.byte.unk_0B;
+    g_SpadWork->unk_2E.half -= 0x24;
+    if (temp_a0 != 0) {
+        func_801EEF5C();
+    } else {
+        func_801EED94();
+    }
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        func_800A9820(g_BattleTargetSelector);
+        g_BattleState |= 4;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EED94);
 
