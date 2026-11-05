@@ -141,6 +141,11 @@ image once first. Exit 0: equal. Exit 1: the first
 differing instruction prints for retail and candidate. Exit 2: nothing was compared; the message
 says why.
 
+`tools/match.sh --diff <target>@<address>` also prints the whole function as plain text, one row per
+instruction: retail on the left, candidate on the right, `!` in the first column where the two rows
+differ (an empty diff has no `!`). Rows pair by position, so one inserted instruction marks every row
+after it; read the first `!` rows, then use `objdiff` for alignment.
+
 It compares `.text` only. It refuses, and never passes, a function that reads its unit's own
 `.rodata`, `.data` or `.bss` (jump table, string, constant), is gp-relative, is still
 `INCLUDE_ASM`, or references a symbol that no map defines. Those and the final verdict need
