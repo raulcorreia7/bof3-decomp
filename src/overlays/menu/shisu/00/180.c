@@ -24,7 +24,16 @@ MATCH void func_801D0E88(void) {
     *counter += 1;
 }
 
-INCLUDE_ASM(func_801D0EC4);
+MATCH void func_801D0EC4(void) {
+    func_801D7224(D_80144953);
+    if (g_UiWindowEffectBusy == 0) {
+        u8* step = &D_80148650;
+
+        D_80148651 = 0;
+        D_80148364 = 0x2B;
+        *step += 1;
+    }
+}
 
 MATCH void func_801D0F24(void) {
     SYS_DISPATCH_BYTE(D_801D96F8, D_80148651);
