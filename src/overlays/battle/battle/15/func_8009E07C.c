@@ -22,7 +22,7 @@ MATCH void func_8009E07C(void) {
         if (*state < 3u) {
             g_BattleLivingPartyCount += 1;
         } else {
-            D_801462F3 += 1;
+            g_BattleLivingEnemyCount += 1;
         }
     } else {
         g_BattleTargetRecord[2] = 0;

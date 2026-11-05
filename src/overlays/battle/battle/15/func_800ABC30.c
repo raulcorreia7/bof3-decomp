@@ -17,5 +17,5 @@ MATCH void func_800ABC30(void) {
         }
         loop_count += 1;
     } while ((u32)(loop_count & BYTE_MASK) < 8u);
-    D_801462F3 = g_BattleEnemyCount;
+    g_BattleLivingEnemyCount = g_BattleEnemyCount;
 }

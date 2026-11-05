@@ -18,7 +18,7 @@ MATCH void func_800AD4D4(void) {
     if (g_BattleGeneCount[0] != 0) {
         do {
             ptr = (PartyBattler*)g_Task;
-            if (D_801463C4[index] == ptr->unk_0B) {
+            if (g_BattleGenes[index] == ptr->unk_0B) {
                 ptr->step += 1;
             }
             index++;
