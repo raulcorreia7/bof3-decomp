@@ -282,7 +282,7 @@ MATCH void func_801F0E50(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->step == 10) {
-        work       = SP_REF(PartyBattler*, 0x44u);
+        work       = g_Task;
         work->step = work->step + 1;
     }
 }

@@ -7,6 +7,6 @@ MATCH void func_801F2C48(void) {
     scratchpad            = SP_PTR(void*, 0u);
     work                  = scratchpad[0x44u / sizeof(void*)];
     FIELD(u8, work, 0x9u) = 0xB4;
-    work                  = SP_REF(void*, 0x44u);
+    work                  = g_Task;
     FIELD(u8, work, 0x1u) = 1;
 }

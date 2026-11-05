@@ -8,7 +8,7 @@ MATCH void Effect_NextStepOnLastTick(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->unk_0B == 1) {
-        work       = SP_REF(PartyBattler*, 0x44u);
+        work       = g_Task;
         work->step = work->step + 1;
     }
 }

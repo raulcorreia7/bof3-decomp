@@ -3,7 +3,7 @@
 MATCH void Effect_NextStepOnWorkLastTick(void) {
     PartyBattler* work;
 
-    work = SP_REF(PartyBattler*, 0x44u);
+    work = g_Task;
     if (work->unk_0B == 1) {
         work->mode = work->mode + 1;
     }
