@@ -153,6 +153,11 @@ MATCH void func_801D2B64(void) {
     SYS_DISPATCH_TASK(D_801D396C, 1, g_SpadWork);
 }
 
+/* Tried: spad body (five work stores, unk_01++, SND_PlayCue(520)), with
+ * direct and local-pointer variants. GCC reloads the work pointer into
+ * v0 and hoists the lbu before the zero stores; retail reloads into a0
+ * and keeps the first copy for the stores. First diff +0x08: lui v0,0x1f80.
+ */
 INCLUDE_ASM(func_801D2BA8);
 
 INCLUDE_ASM(func_801D2C00);
