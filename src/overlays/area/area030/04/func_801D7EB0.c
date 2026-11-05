@@ -36,7 +36,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
             slot_list++;
             continue;
         }
-        work = (FishingState*)(void*)g_SpadWork;
+        work = (FishingState*)(void*)g_Task;
         if (work->pos_x_0C == row) {
             FIELD(s16, work, 0x36u) = slot;
         }
@@ -61,7 +61,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
         row += 1;
         slot_list++;
     }
-    work                = (FishingState*)(void*)g_SpadWork;
+    work                = (FishingState*)(void*)g_Task;
     work->step_delta_18 = row;
     if (work->pos_x_0C >= row) {
         work->pos_x_0C = row == 0 ? 0 : row - 1;

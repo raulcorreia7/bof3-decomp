@@ -46,7 +46,7 @@
 #define BATTLE_ENTRANCE_STEP           (((u8*)&D_80140000)[0x62E2])
 #define BATTLE_GLOBAL_BYTE_62F3        (*(u8*)&D_801462F3)
 #define g_GameState                    ((PartyBattler* volatile)g_GameState)
-#define g_SpadWork                     ((PartyBattler*)g_SpadWork)
+#define g_Task                         ((PartyBattler*)g_Task)
 
 /* The fixed panel-task argument table preserves the caller's whole argument
  * block for the selected entry; no lifted caller names those seven words yet,
@@ -969,7 +969,7 @@ extern s32  D_801EB6AF;
 extern s32  D_801EBFA0;
 extern void Battle_ReserveStagePanels(void);
 
-/* Drain 0x2000 from the battle work counter; at zero set flags_00 bit 6 and
+/* Drain 0x2000 from the battle work counter; at zero set flags bit 6 and
  * advance the spad step. */
 static inline void BattleDrainWorkCounter(void) {
     PartyBattler* work;
@@ -978,8 +978,8 @@ static inline void BattleDrainWorkCounter(void) {
     if (work->unk_40 != 0) {
         work->unk_40 -= 0x2000;
     } else {
-        work->flags_00 |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
-        g_SpadWork->step_01++;
+        work->flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        g_Task->mode++;
     }
 }
 
@@ -988,13 +988,13 @@ static inline void BattleAdvanceCoords(u8 (*tail_update)(void)) {
     PartyBattler* work;
     u8            timer;
 
-    timer                             = g_SpadWork->word_08.byte.timer_0A - 1;
-    g_SpadWork->word_08.byte.timer_0A = timer;
+    timer                         = g_Task->word_08.byte.timer_0A - 1;
+    g_Task->word_08.byte.timer_0A = timer;
     if (timer == 0) {
-        g_SpadWork->word_08.byte.timer_0A = 4;
-        g_SpadWork->unk_03 += 1;
+        g_Task->word_08.byte.timer_0A = 4;
+        g_Task->unk_03 += 1;
     }
-    work = g_SpadWork;
+    work = g_Task;
     work->coord_x_34.raw += work->unk_0C;
     work->coord_y_38.raw += work->unk_10;
     tail_update();

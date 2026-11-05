@@ -27,15 +27,15 @@ MATCH void func_801E1EC0(void) {
     ORDER_LOCK(dst->w0 = src->w0);
     g_BattleEffects[slot_id & BYTE_MASK].unk_06        = 0;
     g_BattleEffects[slot_id & BYTE_MASK].handler_index = 0xF;
-    g_BattleEffects[slot_id & BYTE_MASK].unk_01        = 0;
-    g_BattleEffects[slot_id & BYTE_MASK].unk_02        = 0;
+    g_BattleEffects[slot_id & BYTE_MASK].mode          = 0;
+    g_BattleEffects[slot_id & BYTE_MASK].step          = 0;
     g_BattleEffects[slot_id & BYTE_MASK].unk_03        = 0;
     g_BattleEffects[slot_id & BYTE_MASK].unk_04        = 0;
     g_BattleEffects[slot_id & BYTE_MASK].unk_0B        = (s8)slot_id;
-    g_BattleEffects[slot_id & BYTE_MASK].target.party  = g_SpadWork;
-    g_SpadWork->flags_00 |= ACTOR_FLAG_HIDDEN;
-    g_SpadWork->word_08.byte.unk_09   = 0x10;
-    g_SpadWork->word_08.byte.timer_0A = 0x10;
-    work                              = g_SpadWork;
-    ((PartyBattler*)work)->unk_02     = (((PartyBattler*)work)->unk_02 + 1);
+    g_BattleEffects[slot_id & BYTE_MASK].target.party  = g_Task;
+    g_Task->flags |= ACTOR_FLAG_HIDDEN;
+    g_Task->word_08.byte.unk_09   = 0x10;
+    g_Task->word_08.byte.timer_0A = 0x10;
+    work                          = g_Task;
+    ((PartyBattler*)work)->step   = (((PartyBattler*)work)->step + 1);
 }

@@ -10,7 +10,7 @@ MATCH void Area_RequestRestartOnContextChange(void) {
 
     Actor_CenterOnScreen();
     if (g_GameEntryState != 1) {
-        work = g_SpadWork;
+        work = g_Task;
         step = work->unk_0B;
         if (step == work->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
@@ -20,9 +20,9 @@ MATCH void Area_RequestRestartOnContextChange(void) {
                 goto tail;
             }
         }
-        g_SpadWork->unk_48 = 2;
-        g_SpadWork->unk_09 = 8;
-        g_SpadWork->unk_01 = 4;
+        g_Task->unk_48 = 2;
+        g_Task->unk_09 = 8;
+        g_Task->mode   = 4;
     }
 tail:
     Area_AddActor();

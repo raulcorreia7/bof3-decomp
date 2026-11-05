@@ -11,12 +11,12 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EF000(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EF044(void) {
-    SYS_DISPATCH_BYTE(D_801F07C0, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F07C0, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801EF580();
         PopMatrix();
@@ -32,19 +32,19 @@ INCLUDE_ASM(func_801EF1F0);
 MATCH void func_801EF388(void) {
     u8 temp_v0;
 
-    temp_v0 = g_SpadWork->word_08.byte.unk_09;
+    temp_v0 = g_Task->word_08.byte.unk_09;
     if (temp_v0 != 0) {
-        g_SpadWork->word_08.byte.unk_09 = temp_v0 - 1;
+        g_Task->word_08.byte.unk_09 = temp_v0 - 1;
     }
-    if (g_SpadWork->word_08.byte.unk_0B == 0x80) {
+    if (g_Task->word_08.byte.unk_0B == 0x80) {
         if (g_BattleTargetSelector & 0x40) {
-            func_80196718(&D_801EB630[g_SpadWork->unk_03]);
-            func_800AF814((g_SpadWork->unk_03 + 3) & 0xFF);
-            func_800A9820((g_SpadWork->unk_03 + 3) & 0xFF);
+            func_80196718(&D_801EB630[g_Task->unk_03]);
+            func_800AF814((g_Task->unk_03 + 3) & 0xFF);
+            func_800A9820((g_Task->unk_03 + 3) & 0xFF);
         } else {
-            func_80196718((EnemyBattler*)&g_BattlePartyBattlers[g_SpadWork->unk_03]);
-            func_800AF814(g_SpadWork->unk_03);
-            func_800A9820(g_SpadWork->unk_03);
+            func_80196718((EnemyBattler*)&g_BattlePartyBattlers[g_Task->unk_03]);
+            func_800AF814(g_Task->unk_03);
+            func_800A9820(g_Task->unk_03);
         }
         D_801EB4E0->word_08.byte.unk_0B -= 1;
         func_801E5988();
@@ -56,12 +56,12 @@ MATCH void func_801EF388(void) {
 INCLUDE_ASM(func_801EF580);
 
 MATCH void func_801EF7FC(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 5), 1, g_SpadWork);
+    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 5), 1, g_Task);
 }
 
 MATCH void func_801EF840(void) {
-    SYS_DISPATCH_BYTE(D_801F07D8, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F07D8, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         func_800AF764();
         func_801EFB04();
     }

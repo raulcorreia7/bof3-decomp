@@ -23,20 +23,20 @@ MATCH void func_801D23F4(void) {
     } else {
         g_AreaScrollTargetY = (u32)height;
     }
-    work_a    = (FishingState*)g_SpadWork;
+    work_a    = (FishingState*)g_Task;
     current_y = work_a->y_38.pos_y;
     target_y  = work_a->cursor_10;
     if (current_y == target_y) {
         SND_PlayCue(EMI_CUE_ID(2, 1));
-        work_b                    = (FishingState*)g_SpadWork;
+        work_b                    = (FishingState*)g_Task;
         work_b->step_timer_09     = 0;
-        work_c                    = (FishingState*)g_SpadWork;
+        work_c                    = (FishingState*)g_Task;
         FIELD(s32, work_b, 0x3Cu) = 0;
         work_b->step_14           = 0;
         work_b->step_limit_20     = 0;
         work_c->step_index_0A     = 0;
         if (g_AreaCameraMoving == 0) {
-            work_c                   = (FishingState*)g_SpadWork;
+            work_c                   = (FishingState*)g_Task;
             g_AreaCameraStep         = 0;
             work_c->cursor_10        = 0;
             work_c->handler_index_01 = (u8)(work_c->handler_index_01 + 1);
@@ -47,14 +47,14 @@ MATCH void func_801D23F4(void) {
         if (current_y == (target_y + *(s32*)((u8*)&D_801E1D58 + row))) {
             work_a->step_limit_20 = (s32) * (s32*)((u8*)&D_801E1D5C + row);
         }
-        work_d          = (FishingState*)g_SpadWork;
+        work_d          = (FishingState*)g_Task;
         step            = work_d->step_14 + work_d->step_limit_20;
         work_d->step_14 = step;
         if (((work_d->cursor_10 + D_801E1D58[work_d->cue_index_06].offset_00) < work_d->y_38.pos_y) && (step < 0)) {
             work_d->step_14       = 0;
             work_d->step_limit_20 = 0;
         }
-        work_e                   = (FishingState*)g_SpadWork;
+        work_e                   = (FishingState*)g_Task;
         work_e->motion_34.unk_34 = (s32)(work_e->motion_34.unk_34 + work_e->pos_x_0C);
         work_e->y_38.pos_y       = (s32)(work_e->y_38.pos_y - 0x4000);
         work_e->bounce_3C.unk_3C = (s32)(work_e->bounce_3C.unk_3C + work_e->step_14);

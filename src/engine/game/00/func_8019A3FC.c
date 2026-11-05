@@ -14,44 +14,44 @@ MATCH void func_8019A3FC(void) {
 
     Area_FindSceneRecord(0x18);
 
-    ptr         = g_SpadWork;
+    ptr         = g_Task;
     ptr->unk_48 = 0;
 
-    work           = g_SpadWork;
+    work           = g_Task;
     delta          = work->vx;
     total          = (s32) * (u16*)&work->unk_2E + delta;
     delta          = work->vy;
     work->flags_24 = 0;
     work->unk_2E   = (u16)total;
     total          = (s32) * (u16*)&work->unk_30;
-    other          = g_SpadWork;
+    other          = g_Task;
     work->unk_30   = (u16)(total - delta);
     other->unk_2A  = 0;
 
-    work         = g_SpadWork;
+    work         = g_Task;
     work->unk_29 = 2;
 
-    if (g_SpadWork->unk_06 == 3) {
-        g_SpadWork->flags_00 |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        work                           = g_SpadWork;
+    if (g_Task->unk_06 == 3) {
+        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        work                           = g_Task;
         work->tint.bytes.flags         = 1;
-        work                           = g_SpadWork;
+        work                           = g_Task;
         work->tint.signed_bytes.unk_5F = -8;
         work->tint.signed_bytes.unk_5E = -8;
         work->tint.signed_bytes.unk_5D = -8;
-        work                           = g_SpadWork;
+        work                           = g_Task;
         work->unk_09                   = 0x14;
     } else {
-        g_SpadWork->tint.bytes.flags = 0;
-        ptr                          = g_SpadWork;
-        ptr->tint.bytes.unk_5F       = 0;
-        ptr->tint.bytes.unk_5E       = 0;
-        ptr->tint.bytes.unk_5D       = 0;
-        work                         = g_SpadWork;
-        work->unk_09                 = 0x10;
+        g_Task->tint.bytes.flags = 0;
+        ptr                      = g_Task;
+        ptr->tint.bytes.unk_5F   = 0;
+        ptr->tint.bytes.unk_5E   = 0;
+        ptr->tint.bytes.unk_5D   = 0;
+        work                     = g_Task;
+        work->unk_09             = 0x10;
     }
 
-    ((void (*)(u8, Actor*))Actor_SelectScript)(s_SceneHandlerIds[g_SpadWork->unk_06], other);
+    ((void (*)(u8, Actor*))Actor_SelectScript)(s_SceneHandlerIds[g_Task->unk_06], other);
 
-    g_SpadWork->unk_01 = 1;
+    g_Task->mode = 1;
 }

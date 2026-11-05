@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC04(void) {
     Callback handlers[2] = {func_801EEC5C, func_801EED24};
 
-    SYS_DISPATCH_TASK(handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EEC5C);
@@ -15,16 +15,16 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EED70(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 INCLUDE_ASM(func_801EEDB4);
 
 MATCH void func_801EEF10(void) {
-    g_SpadWork->word_08.byte.unk_0B   = rand() & 15;
-    g_SpadWork->word_08.byte.unk_09   = 0;
-    g_SpadWork->word_08.byte.timer_0A = 0;
-    g_SpadWork->unk_02++;
+    g_Task->word_08.byte.unk_0B   = rand() & 15;
+    g_Task->word_08.byte.unk_09   = 0;
+    g_Task->word_08.byte.timer_0A = 0;
+    g_Task->step++;
 }
 
 INCLUDE_ASM(func_801EEF78);

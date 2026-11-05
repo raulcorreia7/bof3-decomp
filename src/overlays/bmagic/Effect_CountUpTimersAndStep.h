@@ -3,12 +3,12 @@
 MATCH void Effect_CountUpTimersAndStep(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.unk_09++;
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.timer_0A++;
     if (work->word_08.byte.timer_0A == 16) {
-        work = g_SpadWork;
-        work->unk_02++;
+        work = g_Task;
+        work->step++;
     }
 }

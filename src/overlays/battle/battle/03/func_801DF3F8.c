@@ -16,12 +16,12 @@ MATCH void func_801DF3F8(void) {
     u8            slot;
 
     {
-        PartyBattler* work = g_SpadWork;
+        PartyBattler* work = g_Task;
 
-        D_801EB154[work->unk_02]();
+        D_801EB154[work->step]();
     }
     {
-        PartyBattler* work = g_SpadWork;
+        PartyBattler* work = g_Task;
 
         work->unk_5F = 0;
         work->unk_5E = 0;
@@ -32,11 +32,11 @@ MATCH void func_801DF3F8(void) {
 
         if (g_GameState->stats.character_id != D_80145F09[D_801462EE][0]) {
             offset       = -0x1E;
-            work         = g_SpadWork;
+            work         = g_Task;
             work->unk_5F = offset;
         } else {
             offset       = 0x78;
-            work         = g_SpadWork;
+            work         = g_Task;
             work->unk_5F = offset;
         }
         work->unk_5E = offset;
@@ -47,7 +47,7 @@ MATCH void func_801DF3F8(void) {
 
         if (HAS_STATUS(*battler, STATUS_CONFUSED)) {
             if (battler->flags_124.value & 0x800) {
-                PartyBattler* work = g_SpadWork;
+                PartyBattler* work = g_Task;
                 s32           slot_offset;
                 s8            level;
 
@@ -60,7 +60,7 @@ MATCH void func_801DF3F8(void) {
                     goto confuse_flip;
                 }
             } else {
-                PartyBattler* work = g_SpadWork;
+                PartyBattler* work = g_Task;
                 s32           slot_offset;
                 s8            level;
 
@@ -73,7 +73,7 @@ MATCH void func_801DF3F8(void) {
                     g_GameState->flags_124.value ^= 0x800;
                 }
             }
-            actor = g_SpadWork;
+            actor = g_Task;
             mode  = actor->word_08.byte.facing_08;
             if ((mode == 1) || (mode == 3)) {
                 s32 slot_offset = actor->slot * BATTLE_EFFECT_STRIDE;
@@ -88,12 +88,12 @@ MATCH void func_801DF3F8(void) {
             }
         }
     } else if ((g_BattleState & BATTLE_STATE_RELOAD_PARTY) && (g_GameState->flags_128.value & 2)) {
-        PartyBattler* work = g_SpadWork;
+        PartyBattler* work = g_Task;
 
         work->coord_x_34.raw = (s32)D_80143F24;
         work->coord_y_38.raw = (s32)D_80143F28;
     } else {
-        actor                 = g_SpadWork;
+        actor                 = g_Task;
         actor->coord_x_34.raw = (s32) * (s32*)(D_801EC364 + (actor->slot * BATTLE_EFFECT_STRIDE));
         y_pos                 = *(s32*)(D_801EC368 + (actor->slot * BATTLE_EFFECT_STRIDE));
     store_coord_y:

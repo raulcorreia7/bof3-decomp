@@ -3,15 +3,15 @@
 MATCH void func_8019BEFC(void) {
     Actor* work;
     u8     count;
-    work  = g_SpadWork;
+    work  = g_Task;
     count = work->unk_09;
     if (count != 0) {
         work->unk_09 = (u8)(count - 1);
     }
     if (g_AreaCameraMoving == 0) {
-        work = g_SpadWork;
+        work = g_Task;
         if (work->unk_09 == 0) {
-            work->unk_01 = 1;
+            work->mode = 1;
             func_8019BFD4();
         }
     }

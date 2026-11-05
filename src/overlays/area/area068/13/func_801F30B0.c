@@ -14,38 +14,38 @@ MATCH void func_801F30B0(void) {
         switch (*input) {
             case 0x1000:
             case 0x3000:
-                work        = g_SpadWork;
+                work        = g_Task;
                 g_GameState = (GameState*)g_BattlePartyBattlers;
-                g_SpadWork  = (Actor*)g_BattlePartyBattlers;
+                g_Task      = (Actor*)g_BattlePartyBattlers;
                 D_80145EC8 -= 0x800;
-                g_SpadWork = work;
+                g_Task = work;
                 break;
             case 0x2000:
             case 0x6000:
-                work        = g_SpadWork;
+                work        = g_Task;
                 g_GameState = (GameState*)g_BattlePartyBattlers;
-                g_SpadWork  = (Actor*)g_BattlePartyBattlers;
+                g_Task      = (Actor*)g_BattlePartyBattlers;
                 D_80145EC4 += 0x800;
-                g_SpadWork = work;
+                g_Task = work;
                 break;
             case 0x4000:
             case 0xC000:
-                work        = g_SpadWork;
+                work        = g_Task;
                 g_GameState = (GameState*)g_BattlePartyBattlers;
-                g_SpadWork  = (Actor*)g_BattlePartyBattlers;
+                g_Task      = (Actor*)g_BattlePartyBattlers;
                 D_80145EC8 += 0x800;
-                g_SpadWork = work;
+                g_Task = work;
                 break;
             case 0x8000:
             case 0x9000:
-                work        = g_SpadWork;
+                work        = g_Task;
                 g_GameState = (GameState*)g_BattlePartyBattlers;
-                g_SpadWork  = (Actor*)g_BattlePartyBattlers;
+                g_Task      = (Actor*)g_BattlePartyBattlers;
                 D_80145EC4 -= 0x800;
-                g_SpadWork = work;
+                g_Task = work;
                 break;
         }
-        g_SpadWork->unk_01 = 0xC;
-        g_SpadWork->unk_09 = 0xC;
+        g_Task->mode   = 0xC;
+        g_Task->unk_09 = 0xC;
     }
 }

@@ -12,7 +12,7 @@ MATCH void Area_InitSpin(void* spin) {
     s16        rot[3];
 
     work           = (WorldSpin*)spin;
-    scratch        = g_SpadWork;
+    scratch        = g_Task;
     work->origin_x = scratch->x.fixed;
     work->origin_y = scratch->y.fixed;
     work->origin_z = scratch->z.fixed;

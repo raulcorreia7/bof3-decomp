@@ -6,17 +6,17 @@ MATCH void Actor_MoveByVelocity(void) {
     Actor* work;
     Actor* scratch;
 
-    scratch = g_SpadWork;
+    scratch = g_Task;
     if (scratch->unk_0B != 0) {
-        if ((scratch->flags_00 & 0x80) != 0) {
+        if ((scratch->flags & 0x80) != 0) {
             Actor_Clear();
             return;
         }
-    } else if ((scratch->flags_00 & 0x80) == 0) {
+    } else if ((scratch->flags & 0x80) == 0) {
         scratch->unk_0B = 1;
     }
 
-    work = g_SpadWork;
+    work = g_Task;
     work->x.fixed += work->vx;
     work->y.fixed += work->vy;
     func_8014D978();

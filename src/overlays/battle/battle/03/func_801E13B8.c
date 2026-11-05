@@ -13,14 +13,14 @@ MATCH void func_801E13B8(void) {
     work  = g_GameState;
     flags = work->flags_124.value;
     if ((flags & 0x2000u) == 0u) {
-        cell   = g_SpadWork;
+        cell   = g_Task;
         masked = flags & ~0x70u;
         masked &= ~0x200u;
         work->flags_124.value = masked;
         Battle_ClearSlotPending(cell->slot);
-        g_SpadWork->step_01 = 2;
-        g_SpadWork->unk_02  = 0;
-        g_SpadWork->unk_03  = 0;
-        g_SpadWork->unk_04  = 0;
+        g_Task->mode   = 2;
+        g_Task->step   = 0;
+        g_Task->unk_03 = 0;
+        g_Task->unk_04 = 0;
     }
 }

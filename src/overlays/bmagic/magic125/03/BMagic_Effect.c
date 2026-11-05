@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEEC0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_Task)[1]);
 }
 
 INCLUDE_ASM(func_801EEF04);
@@ -19,29 +19,29 @@ INCLUDE_ASM(func_801EEF04);
 MATCH void func_801EEFF8(void) {
     u8 count;
 
-    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = count;
+    count                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = count;
     if (!(count & 0xFF)) {
-        g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
-        g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
-        g_SpadWork->word_3C.word          = D_801EB4E0->word_3C.word + 0x04000000;
-        g_SpadWork->unk_5D                = (rand() & 3) + 4;
-        g_SpadWork->unk_5E                = (rand() & 3) + 4;
-        g_SpadWork->unk_5F                = (rand() & 3) + 4;
-        g_SpadWork->unk_14                = 0x100;
-        g_SpadWork->word_08.byte.unk_09   = 0x10;
-        g_SpadWork->word_08.byte.timer_0A = 8;
-        g_SpadWork->unk_02 += 1;
+        g_Task->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
+        g_Task->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
+        g_Task->word_3C.word          = D_801EB4E0->word_3C.word + 0x04000000;
+        g_Task->unk_5D                = (rand() & 3) + 4;
+        g_Task->unk_5E                = (rand() & 3) + 4;
+        g_Task->unk_5F                = (rand() & 3) + 4;
+        g_Task->unk_14                = 0x100;
+        g_Task->word_08.byte.unk_09   = 0x10;
+        g_Task->word_08.byte.timer_0A = 8;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801EF0F8(void) {
-    PartyBattler* work          = g_SpadWork;
+    PartyBattler* work          = g_Task;
     u8            timer         = work->word_08.byte.timer_0A - 1;
     work->word_08.byte.timer_0A = timer;
     work->word_3C.word += 0xFF800000;
     if (timer == 0) {
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
@@ -56,8 +56,8 @@ INCLUDE_ASM(func_801EF258);
 INCLUDE_ASM(func_801EF508);
 
 MATCH void func_801EF808(void) {
-    SYS_DISPATCH_BYTE(D_801F05EC, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F05EC, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801EF508();
         PopMatrix();
@@ -67,20 +67,20 @@ MATCH void func_801EF808(void) {
 MATCH void func_801EF890(void) {
     u8 timer;
 
-    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
-        g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
-        g_SpadWork->word_3C.word          = D_801EB4E0->word_3C.word;
-        g_SpadWork->unk_5D                = 0xF;
-        g_SpadWork->unk_5E                = 0xF;
-        g_SpadWork->unk_5F                = 0xF;
-        g_SpadWork->unk_14                = 0x100;
-        g_SpadWork->unk_20                = 0x21;
-        g_SpadWork->word_08.byte.unk_09   = 0x10;
-        g_SpadWork->word_08.byte.timer_0A = 0x1E;
-        g_SpadWork->unk_02 += 1;
+        g_Task->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
+        g_Task->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
+        g_Task->word_3C.word          = D_801EB4E0->word_3C.word;
+        g_Task->unk_5D                = 0xF;
+        g_Task->unk_5E                = 0xF;
+        g_Task->unk_5F                = 0xF;
+        g_Task->unk_14                = 0x100;
+        g_Task->unk_20                = 0x21;
+        g_Task->word_08.byte.unk_09   = 0x10;
+        g_Task->word_08.byte.timer_0A = 0x1E;
+        g_Task->step += 1;
     }
 }
 
@@ -90,13 +90,13 @@ MATCH void func_801EFAB0(void) {
     s32 level;
     u8  counter;
 
-    level = g_SpadWork->unk_14;
+    level = g_Task->unk_14;
     if (level >= 9) {
-        g_SpadWork->unk_14 = level - 1;
+        g_Task->unk_14 = level - 1;
     }
     if (g_FrameCount & 1) {
-        counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
-        g_SpadWork->word_08.byte.unk_09 = counter;
+        counter                     = g_Task->word_08.byte.unk_09 - 1;
+        g_Task->word_08.byte.unk_09 = counter;
         if (!(counter & 0xFF)) {
             BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
             func_801E5988();
@@ -105,7 +105,7 @@ MATCH void func_801EFAB0(void) {
 }
 
 MATCH void func_801EFB48(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 8), 1, g_SpadWork);
+    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 8), 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EFB8C);

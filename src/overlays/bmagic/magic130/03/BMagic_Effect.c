@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEC70);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEED4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 INCLUDE_ASM(func_801EEF18);
@@ -22,21 +22,21 @@ INCLUDE_ASM(func_801EEF18);
 INCLUDE_ASM(func_801EEFB4);
 
 MATCH void func_801EF10C(void) {
-    g_SpadWork->unk_5D += 8;
-    g_SpadWork->unk_5E += 8;
-    g_SpadWork->unk_5F += 8;
-    if ((s8)g_SpadWork->unk_5D == 0) {
-        g_SpadWork->unk_02 += 1;
+    g_Task->unk_5D += 8;
+    g_Task->unk_5E += 8;
+    g_Task->unk_5F += 8;
+    if ((s8)g_Task->unk_5D == 0) {
+        g_Task->step += 1;
     }
 }
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
 MATCH void func_801EF1E0(void) {
-    g_SpadWork->unk_5D -= 8;
-    g_SpadWork->unk_5E -= 8;
-    g_SpadWork->unk_5F -= 8;
-    if ((s8)g_SpadWork->unk_5D == -0x80) {
+    g_Task->unk_5D -= 8;
+    g_Task->unk_5E -= 8;
+    g_Task->unk_5F -= 8;
+    if ((s8)g_Task->unk_5D == -0x80) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
         func_801E5988();
     }
@@ -49,10 +49,10 @@ INCLUDE_ASM(func_801EF354);
 MATCH void func_801EF3DC(void) {
     u8 timer;
 
-    timer                             = g_SpadWork->word_08.byte.timer_0A + 1;
-    g_SpadWork->word_08.byte.timer_0A = timer;
+    timer                         = g_Task->word_08.byte.timer_0A + 1;
+    g_Task->word_08.byte.timer_0A = timer;
     if (timer == 16) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     }
 }
 

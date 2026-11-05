@@ -6,7 +6,7 @@
 MATCH void func_801E47E0(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     if ((s32)work->unk_40 <= 0x13FFF) {
         work->unk_40 += work->unk_0C;
         work->unk_44 += work->unk_0C;

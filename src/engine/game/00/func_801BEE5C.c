@@ -46,22 +46,22 @@ found:
     do {
         rec         = (u8*)g_BattlePartyBattlers + off;
         g_GameState = (GameState*)rec;
-        g_SpadWork  = (Actor*)rec;
+        g_Task      = (Actor*)rec;
         kind        = rec[0x13C];
         flags       = g_Characters[kind].status;
         if ((flags & 0x4000) != 0) {
             Actor_StageScriptRecord(rec[0x4B], 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
-            g_SpadWork->unk_0B = 0;
+            g_Task->unk_0B = 0;
         } else {
             sel = rec[0x08];
             if ((sel & BYTE_MASK) == s_RouteIndexByMode[g_BattleScrollDir]) {
                 if (rec[0x0B] != 0) {
                     Actor_StageScriptRecord((u8)sel, 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
-                    g_SpadWork->unk_0B = 0;
+                    g_Task->unk_0B = 0;
                 }
             } else {
                 rec[0x08] = (sel + rec[0x0B]) & 7;
-                Actor_StageScriptRecord(g_SpadWork->direction_08, 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
+                Actor_StageScriptRecord(g_Task->direction_08, 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
             }
             func_8014D978();
         }
@@ -83,7 +83,7 @@ phase2:
         phase2_base = (u8*)g_BattlePartyBattlers + off;
         phase2_rec  = phase2_base;
         g_GameState = (GameState*)phase2_rec;
-        g_SpadWork  = (Actor*)phase2_rec;
+        g_Task      = (Actor*)phase2_rec;
         do {
             base                 = (u8*)((phase2_rec[0x05] << 6) + (u32)tbl);
             source_row           = (u16*)base;
@@ -93,11 +93,11 @@ phase2:
         } while (idx < 32);
         off += BATTLE_PARTY_STRIDE;
         func_801C2438();
-        g_SpadWork->unk_0B            = 0;
-        g_SpadWork->tint.bytes.unk_5D = neg;
-        g_SpadWork->tint.bytes.unk_5E = neg;
-        g_SpadWork->tint.bytes.unk_5F = neg;
-        g_SpadWork->tint.bytes.flags  = 1;
+        g_Task->unk_0B            = 0;
+        g_Task->tint.bytes.unk_5D = neg;
+        g_Task->tint.bytes.unk_5E = neg;
+        g_Task->tint.bytes.unk_5F = neg;
+        g_Task->tint.bytes.flags  = 1;
         slot++;
     } while (slot < g_PartySize);
     return 1;

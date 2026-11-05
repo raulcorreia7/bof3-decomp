@@ -23,14 +23,14 @@ NON_MATCHING void func_801DA9DC(void) {
         SND_PlayCue(EMI_CUE_ID(2, 3));
         FISHING_STATE->sub_index_03 = (u8)(FISHING_STATE->sub_index_03 + 1);
         D_801440B1                  = 0;
-        g_ActorSlots[0].unk_01      = 0;
+        g_ActorSlots[0].mode        = 0;
         D_80144125                  = 7;
         return;
     }
     if (g_ActorSlots[0].y.fixed > 0x3E7FFF) {
         SND_PlayCue(EMI_CUE_ID(2, 3));
         D_801440B1                   = 0;
-        g_ActorSlots[0].unk_01       = 0;
+        g_ActorSlots[0].mode         = 0;
         FISHING_STATE->mode_index_02 = 1;
         FISHING_STATE->sub_index_03  = 0U;
         return;
@@ -95,7 +95,7 @@ box_16:
                     g_ActorSlots[0].step_0C      = 0;
                     g_ActorSlots[0].selection_10 = 0;
                     limit                        = 3;
-                    g_ActorSlots[0].unk_14       = D_801E3210->unk_00;
+                    g_ActorSlots[0].unk_14       = D_801E3210->flags;
                     D_801E31F8                   = 0;
                 }
             }

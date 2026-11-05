@@ -21,27 +21,27 @@ MATCH void func_80167910(void) {
     s32       i;
     s32       mode;
 
-    g_SpadWork = (Actor*)D_8014626C;
+    g_Task = (Actor*)D_8014626C;
     if (D_8014626C[0] & 0x40) {
         return;
     }
-    pos.vx             = (s16)((D_801462A0 >> 9) - 0x4000);
-    pos.vy             = (s16)((D_801462A4 >> 9) - 0x4000);
-    pos.vz             = (s16)(-(D_801462AA + 0x80) / 2);
-    g_SpadWork->unk_60 = RotTransPers(&pos, (long*)&sxy, &p, &flag);
-    g_SpadWork->unk_2E = sxy.vx;
-    g_SpadWork->unk_30 = sxy.vy;
-    poly               = (POLY_FT4*)g_GfxPrimCursor;
+    pos.vx         = (s16)((D_801462A0 >> 9) - 0x4000);
+    pos.vy         = (s16)((D_801462A4 >> 9) - 0x4000);
+    pos.vz         = (s16)(-(D_801462AA + 0x80) / 2);
+    g_Task->unk_60 = RotTransPers(&pos, (long*)&sxy, &p, &flag);
+    g_Task->unk_2E = sxy.vx;
+    g_Task->unk_30 = sxy.vy;
+    poly           = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(poly);
-    sy       = g_SpadWork->unk_2E;
+    sy       = g_Task->unk_2E;
     poly->x0 = sy - 6;
     poly->x1 = sy + 7;
     poly->x2 = poly->x0;
     poly->x3 = poly->x1;
     if (g_FrameCount & 8) {
-        poly->y0 = g_SpadWork->unk_30 - 27 + (((u32)g_FrameCount >> 1) & 3);
+        poly->y0 = g_Task->unk_30 - 27 + (((u32)g_FrameCount >> 1) & 3);
     } else {
-        poly->y0 = g_SpadWork->unk_30 - 24 - (((u32)g_FrameCount >> 1) & 3);
+        poly->y0 = g_Task->unk_30 - 24 - (((u32)g_FrameCount >> 1) & 3);
     }
     poly->u0 = 204;
     poly->u1 = 204;
@@ -60,8 +60,8 @@ MATCH void func_80167910(void) {
     }
     poly->tpage = 0xF;
     poly->clut  = 0x7802;
-    if (!(g_SpadWork->unk_0B & 1)) {
-        Area_AddCellPrim(g_SpadWork->x.fixed, g_SpadWork->y.fixed, 1, 0x28);
+    if (!(g_Task->unk_0B & 1)) {
+        Area_AddCellPrim(g_Task->x.fixed, g_Task->y.fixed, 1, 0x28);
     } else {
         GFX_AddPrim(3, 0x28);
     }
@@ -69,9 +69,9 @@ MATCH void func_80167910(void) {
     axis.vx = 0;
     axis.vy = 0;
     axis.vz = 0;
-    rot.vx  = (s16)((g_SpadWork->x.fixed >> 9) - 0x4000);
-    rot.vy  = (s16)((g_SpadWork->y.fixed >> 9) - 0x4000);
-    rot.vz  = (s16)(-g_SpadWork->z.part.integer / 2);
+    rot.vx  = (s16)((g_Task->x.fixed >> 9) - 0x4000);
+    rot.vy  = (s16)((g_Task->y.fixed >> 9) - 0x4000);
+    rot.vz  = (s16)(-g_Task->z.part.integer / 2);
     RotTrans(&rot, (VECTOR*)mtx.t, &flag);
     RotMatrix(&axis, &mtx);
     MulMatrix2((MATRIX*)g_CameraMatrix, &mtx);
@@ -85,8 +85,8 @@ MATCH void func_80167910(void) {
         mode = 0x5E;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
-    if (!(g_SpadWork->unk_0B & 1)) {
-        Area_AddCellPrim(g_SpadWork->x.fixed, g_SpadWork->y.fixed, 1, 0xC);
+    if (!(g_Task->unk_0B & 1)) {
+        Area_AddCellPrim(g_Task->x.fixed, g_Task->y.fixed, 1, 0xC);
     } else {
         GFX_AddPrim(3, 0xC);
     }
@@ -121,8 +121,8 @@ MATCH void func_80167910(void) {
         prim[0x14] = 0;
         prim[0x15] = 0;
         prim[0x16] = 0;
-        if (!(g_SpadWork->unk_0B & 1)) {
-            Area_AddCellPrim(g_SpadWork->x.fixed, g_SpadWork->y.fixed, 1, 0x1C);
+        if (!(g_Task->unk_0B & 1)) {
+            Area_AddCellPrim(g_Task->x.fixed, g_Task->y.fixed, 1, 0x1C);
         } else {
             GFX_AddPrim(3, 0x1C);
         }

@@ -4,5 +4,5 @@
 #define WORK_PTR (*SP_PTR(Actor*, 0x44u))
 
 MATCH void func_8019F2CC(void) {
-    D_801C81CC[WORK_PTR->unk_01]();
+    D_801C81CC[WORK_PTR->mode]();
 }

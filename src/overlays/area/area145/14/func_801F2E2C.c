@@ -2,6 +2,6 @@
 
 MATCH void func_801F2E2C(void) {
     if (g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
-        g_SpadWork->state_02 = 1;
+        g_Task->step = 1;
     }
 }

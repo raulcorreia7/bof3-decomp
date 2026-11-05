@@ -3,7 +3,7 @@
 MATCH void func_801F3720(void) {
     u8* work;
 
-    work                   = SPAD_WORK_BYTES;
+    work                   = TASK_BYTES;
     FIELD(u16, work, 0x30) = (u16)(FIELD(u16, work, 0x30) + 8);
     if ((s16)FIELD(u16, work, 0x30) >= 0x80) {
         work[2]++;

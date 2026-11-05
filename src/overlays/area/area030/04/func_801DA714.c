@@ -8,7 +8,7 @@ MATCH void func_801DA714(void) {
     func_8014D978();
     record = FISHING_STATE;
     if (record->flags_58 == 6) {
-        g_ActorSlots[0].unk_01      = (u8)(g_ActorSlots[0].unk_01 + 1);
+        g_ActorSlots[0].mode        = (u8)(g_ActorSlots[0].mode + 1);
         record->saved_index_0B      = 0;
         FISHING_STATE->counter_07   = 0;
         FISHING_STATE->sub_index_03 = 3;

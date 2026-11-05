@@ -11,10 +11,10 @@ MATCH void func_801DA2A0(void) {
 
     FISHING_STATE->step_timer_09 = (u8)(FISHING_STATE->step_timer_09 + 1);
     func_801E1758((s16)(0x6C - (FISHING_STATE->step_timer_09 * 0x50)), 0x56);
-    work = (u8*)g_SpadWork;
+    work = (u8*)g_Task;
     if (work[9] == 5) {
         work[9] = 0;
-        work    = (u8*)g_SpadWork;
+        work    = (u8*)g_Task;
         if (work[6] == 0) {
             word_counter = &g_GameEntrySubstate;
             *word_counter += 1;

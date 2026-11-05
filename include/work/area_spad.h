@@ -9,6 +9,6 @@
 #include "psx/mem.h"
 #include "work/actor.h"
 
-#define g_SpadWork ((Actor*)g_SpadWork)
+#define g_Task ((Actor*)g_Task)
 
 #endif

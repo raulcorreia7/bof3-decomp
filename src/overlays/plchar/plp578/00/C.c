@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CFAB8[((u8*)g_SpadWork)[2]]();
+    D_801CFAB8[((u8*)g_Task)[2]]();
 }
 
 MATCH void Char_StartTurn_801CE448(void) {
@@ -17,7 +17,7 @@ MATCH void Char_RunStepScript_801CE514(void) {
 }
 
 MATCH void func_801CE610(void) {
-    SYS_DISPATCH_TASK(D_801CFAC4, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CFAC4, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801CE654);
@@ -27,7 +27,7 @@ INCLUDE_ASM(func_801CE654);
 #include "overlays/plchar/Char_PollScriptRequest.h"
 
 MATCH void func_801CEA00(void) {
-    SYS_DISPATCH_TASK(D_801CFAD0, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CFAD0, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_StartFacingTurn.h"
@@ -35,7 +35,7 @@ MATCH void func_801CEA00(void) {
 #include "overlays/plchar/Char_RunStepScript.h"
 
 MATCH void func_801CEC34(void) {
-    SYS_DISPATCH_TASK(D_801CFADC, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CFADC, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_WalkStep.h"
@@ -51,7 +51,7 @@ INCLUDE_ASM(func_801CF24C);
 #include "overlays/plchar/Char_ProbeFacingCell.h"
 
 MATCH void func_801CF65C(void) {
-    SYS_DISPATCH_TASK(D_801CFAE8, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CFAE8, 2, g_Task);
 }
 
 MATCH void Char_StartTurn(void) {
@@ -63,7 +63,7 @@ MATCH void Char_RunStepScript_801CF76C(void) {
 }
 
 MATCH void func_801CF868(void) {
-    SYS_DISPATCH_TASK(D_801CFAF4, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CFAF4, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801CF8AC);
@@ -71,9 +71,9 @@ INCLUDE_ASM(func_801CF8AC);
 #include "overlays/plchar/Char_ClearModeIfSlotFree.h"
 
 MATCH void func_801CFA30(void) {
-    D_801CFAFC[g_SpadWork->unk_2C]();
+    D_801CFAFC[g_Task->unk_2C]();
 }
 
 MATCH void func_801CFA74(void) {
-    D_801CFB08[g_SpadWork->unk_2C]();
+    D_801CFB08[g_Task->unk_2C]();
 }

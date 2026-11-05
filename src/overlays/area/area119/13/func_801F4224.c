@@ -15,7 +15,7 @@ MATCH void func_801F4224(void) {
     selection          = (D_801F45C4 + 0x80u)[index];
     result             = func_8015CB18(4, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        work       = (u8*)g_SpadWork;
+        work       = (u8*)g_Task;
         work[0x0B] = (s8)result;
     }
 }

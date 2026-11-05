@@ -13,11 +13,11 @@ INCLUDE_ASM(func_801EEEB0);
 MATCH void func_801EEFE0(void) {
     u8 timer;
 
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
-        g_SpadWork->word_08.byte.unk_09 = timer;
+    if (g_Task->word_08.byte.unk_0B == 0) {
+        timer                       = g_Task->word_08.byte.unk_09 - 1;
+        g_Task->word_08.byte.unk_09 = timer;
         if (!(timer & 0xFF)) {
-            g_SpadWork->step_01 += 1;
+            g_Task->mode += 1;
         }
     }
 }
@@ -27,13 +27,13 @@ MATCH void func_801EEFE0(void) {
 INCLUDE_ASM(func_801EF070);
 
 MATCH void func_801EF210(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_Task)[1]);
 }
 
 MATCH void func_801EF254(void) {
     BmagicEffectFuncs handlers;
 
-    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC14, unk_02);
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC14, step);
 }
 
 INCLUDE_ASM(func_801EF2CC);
@@ -43,15 +43,15 @@ MATCH void func_801EF444(void) {
     u8            timer;
     PartyBattler* work;
 
-    work                      = g_SpadWork;
+    work                      = g_Task;
     timer                     = work->word_08.byte.unk_09 - 1;
     work->word_08.byte.unk_09 = timer;
     battler                   = &g_BattlePartyBattlers[work->unk_04];
     if (!(timer & BYTE_MASK)) {
         func_80196718(battler);
-        g_SpadWork->word_08.byte.timer_0A = func_8019651C(battler, 0, 0, 0, 1);
-        g_SpadWork->word_08.byte.unk_09   = 8;
-        g_SpadWork->unk_02 += 1;
+        g_Task->word_08.byte.timer_0A = func_8019651C(battler, 0, 0, 0, 1);
+        g_Task->word_08.byte.unk_09   = 8;
+        g_Task->step += 1;
     }
 }
 
@@ -62,17 +62,17 @@ INCLUDE_ASM(func_801EF4FC);
 INCLUDE_ASM(func_801EF688);
 
 MATCH void func_801EF7D0(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+    if (g_Task->word_08.byte.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
-        if (func_801DB524(g_SpadWork->unk_04) & 0xFF) {
-            func_800A9820(g_SpadWork->unk_04);
+        if (func_801DB524(g_Task->unk_04) & 0xFF) {
+            func_800A9820(g_Task->unk_04);
         }
         func_801E5988();
     }
 }
 
 MATCH void func_801EF860(void) {
-    SYS_DISPATCH_TASK(D_801F0420, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801F0420, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EF8A4);

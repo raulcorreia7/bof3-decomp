@@ -5,11 +5,11 @@ MATCH void func_8019A630(void) {
     Actor* next;
 
     if (func_8014DAEC() != 0u) {
-        work = g_SpadWork;
-        work->unk_01++;
+        work = g_Task;
+        work->mode++;
     }
 
-    next = g_SpadWork;
+    next = g_Task;
     if (next->unk_05 == 6) {
         Area_AddActor();
         return;

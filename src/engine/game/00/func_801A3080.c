@@ -17,7 +17,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
     u16    angle;
 
     slot    = (s32)(-(((s32)actor - (s32)D_80147A58) * 0xD79435E5)) >> 3;
-    work    = g_SpadWork;
+    work    = g_Task;
     angle_x = FIELD(s32, work, 0x64u);
     angle_y = FIELD(s32, work, 0x68u);
     type    = facing;
@@ -33,9 +33,9 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
     dir = type & BYTE_MASK;
     if ((FIELD(s32, work, 0x0Cu) + FIELD(s32, work, 0x10u)) != 0) {
         value = (s16)(Area_SampleHeight(work->x.fixed + g_FacingSteps[dir].x, work->y.fixed + D_80181B98[dir * 2]) -
-                      g_SpadWork->z.part.integer);
+                      g_Task->z.part.integer);
         if (facing & 2) {
-            g_SpadWork->unk_64 = 0;
+            g_Task->unk_64 = 0;
             if (dir != 3) {
                 value = -value;
             }
@@ -44,16 +44,16 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
             if (dir != 1) {
                 value = -value;
             }
-            angle_x            = ratan2(value, 0x80);
-            g_SpadWork->unk_68 = 0;
+            angle_x        = ratan2(value, 0x80);
+            g_Task->unk_68 = 0;
         }
     }
 
-    work = g_SpadWork;
+    work = g_Task;
     if (FIELD(u8, work, 0x0Au) != 0) {
         D_80147CB9[n * 0x10]             = (s8)(FIELD(u8, work, 0x0Au) * 2);
-        D_80147CBA[n * 0x10]             = (s8)(g_SpadWork->unk_0A * 4);
-        work                             = g_SpadWork;
+        D_80147CBA[n * 0x10]             = (s8)(g_Task->unk_0A * 4);
+        work                             = g_Task;
         FIELD(s32, D_80147CBC, n * 0x10) = (angle_x - FIELD(s32, work, 0x64u)) / (FIELD(u8, work, 0x0Au) * 2);
         FIELD(s32, D_80147CC0, n * 0x10) = (angle_y - FIELD(s32, work, 0x68u)) / (FIELD(u8, work, 0x0Au) * 2);
         if ((((type - 5) & BYTE_MASK) < 2) && (D_801C842A[0] < (FIELD(s32, work, 0x6Cu) & ANGLE_MASK))) {
@@ -61,7 +61,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
         } else {
             angle = D_801C8424[type & BYTE_MASK];
         }
-        FIELD(s32, D_80147CC4, n * 0x10) = ((s16)angle - (g_SpadWork->unk_6C & ANGLE_MASK)) / (g_SpadWork->unk_0A * 4);
+        FIELD(s32, D_80147CC4, n * 0x10) = ((s16)angle - (g_Task->unk_6C & ANGLE_MASK)) / (g_Task->unk_0A * 4);
         return;
     }
 

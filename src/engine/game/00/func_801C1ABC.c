@@ -70,7 +70,7 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
         dst  = (u8*)g_BattlePartyBattlers;
         do {
             if ((&D_80144EE2)[code] == GAME_NONE) {
-                g_SpadWork              = (Actor*)dst;
+                g_Task                  = (Actor*)dst;
                 value                   = (&D_80144EE2)[code + 1];
                 (&D_80144EE2)[code + 1] = 0xFF;
                 (&D_80144EE2)[code]     = value;
@@ -85,11 +85,11 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
                     wsrc += 4;
                     wdst += 4;
                 } while (wsrc != wend);
-                g_SpadWork->unk_05 = (u8)slot;
-                g_SpadWork->unk_26 = (u8)frac;
-                g_SpadWork->unk_27 = (u8)code;
-                g_SpadWork->unk_4B = 0xFF;
-                D_80145FCC[off]    = g_CharSlot[(&D_80145F09)[off]];
+                g_Task->unk_05  = (u8)slot;
+                g_Task->unk_26  = (u8)frac;
+                g_Task->unk_27  = (u8)code;
+                g_Task->unk_4B  = 0xFF;
+                D_80145FCC[off] = g_CharSlot[(&D_80145F09)[off]];
             }
             off += BATTLE_PARTY_STRIDE;
             code++;

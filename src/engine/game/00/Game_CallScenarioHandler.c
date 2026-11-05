@@ -9,7 +9,7 @@ MATCH s8 Game_CallScenarioHandler(u16 handler_arg0, u16 handler_arg1) {
     s8 (*handler)(s32 handler_arg0, s32 handler_arg1);
     s8 result;
 
-    saved   = g_SpadWork;
+    saved   = g_Task;
     handler = g_SceneScenes[(s32)g_SceneState.scenario_id]->entry_10;
     result  = -1;
     if (handler != NULL) {
@@ -20,6 +20,6 @@ MATCH s8 Game_CallScenarioHandler(u16 handler_arg0, u16 handler_arg1) {
     } else {
         result = 1;
     }
-    g_SpadWork = saved;
+    g_Task = saved;
     return result;
 }

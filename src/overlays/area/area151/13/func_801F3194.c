@@ -7,15 +7,15 @@ MATCH void func_801F3194(void) {
 
     Actor_CenterOnScreen();
 
-    scratch         = (Actor*)g_SpadWork;
+    scratch         = (Actor*)g_Task;
     timer           = scratch->unk_09;
     scratch->unk_09 = timer - 1;
-    scratch2        = (Actor*)g_SpadWork;
+    scratch2        = (Actor*)g_Task;
     scratch->unk_40 += 0x2000;
 
     if (scratch2->unk_09 == 0) {
-        scratch2->unk_48   = 0;
-        g_SpadWork->unk_01 = 3;
+        scratch2->unk_48 = 0;
+        g_Task->mode     = 3;
     }
 
     Area_AddActor();

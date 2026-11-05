@@ -10,7 +10,7 @@ MATCH void func_801F3278(void) {
     s32    angle;
     s32    spin;
 
-    scratch          = g_SpadWork;
+    scratch          = g_Task;
     mode             = scratch->unk_0A - 1;
     x                = scratch->x.fixed;
     step             = scratch->vx;
@@ -19,7 +19,7 @@ MATCH void func_801F3278(void) {
     spin             = scratch->unk_44;
     scratch->unk_40  = angle + 0x2000;
     scratch->unk_0A  = mode;
-    check            = g_SpadWork;
+    check            = g_Task;
     scratch->unk_44  = spin + 0x2000;
 
     if ((check->unk_0A & 3) == 0) {
@@ -28,7 +28,7 @@ MATCH void func_801F3278(void) {
 
     /* FAKE: retail splits the last re-read across the copy so the row stays
      * in one register. */
-    work    = g_SpadWork;
+    work    = g_Task;
     scratch = work;
     if (scratch->unk_0A == 0) {
         work->unk_04 = 0;

@@ -10,5 +10,5 @@ MATCH void Effect_SetActorMatrixRolled(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 512;
-    BMAGIC_PROJECT_ACTOR_MATRIX(g_SpadWork);
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }

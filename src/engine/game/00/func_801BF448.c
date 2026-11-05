@@ -18,7 +18,7 @@ MATCH void func_801BF448(void) {
             i           = 0;
             rec         = (u8*)g_BattlePartyBattlers + rec_off;
             g_GameState = (GameState*)rec;
-            g_SpadWork  = (Actor*)rec;
+            g_Task      = (Actor*)rec;
             key         = rec[0x79];
             while (1) {
                 if (D_80144F5A[i & BYTE_MASK] == key)
@@ -27,10 +27,10 @@ MATCH void func_801BF448(void) {
                 if ((u32)(i & BYTE_MASK) >= 3U)
                     break;
             }
-            g_SpadWork->x.fixed = *(s32*)(D_80143F2C + tab);
-            val                 = Area_ReadHeight(g_SpadWork->x.fixed, g_SpadWork->y.fixed = *(s32*)(D_80143F30 + tab));
-            work                = g_SpadWork;
-            work->unk_0B        = 0;
+            g_Task->x.fixed      = *(s32*)(D_80143F2C + tab);
+            val                  = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed = *(s32*)(D_80143F30 + tab));
+            work                 = g_Task;
+            work->unk_0B         = 0;
             work->z.part.integer = val;
             if ((g_Characters[g_GameState->slot_13C].status & STATUS_KO) != 0)
                 Actor_SelectScript((u8)(g_BattleScrollDir + 0x1C));

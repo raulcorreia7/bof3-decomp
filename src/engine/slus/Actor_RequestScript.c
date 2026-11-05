@@ -5,7 +5,7 @@
  * func_8014D6B8 and reports 0.
  */
 MATCH u32 Actor_RequestScript(u8 selector) {
-    if (g_SpadWork->unk_4B == selector) {
+    if (g_Task->unk_4B == selector) {
         return 1;
     }
     Actor_SelectScript(selector);

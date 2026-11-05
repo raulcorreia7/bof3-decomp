@@ -28,7 +28,7 @@ MATCH void Battle_StreamEndOverlay(void) {
             do {
                 PartyBattler* work = &g_BattlePartyBattlers[i];
 
-                g_SpadWork = work;
+                g_Task = work;
                 if (HAS_STATUS(g_BattlePartyBattlers[i], 0x800u)) {
                     g_BattlePartyBattlers[i].stats.current_hp        = g_BattlePartyBattlers[i].stats.max_hp;
                     g_BattlePartyBattlers[i].stats.current_ap        = g_BattlePartyBattlers[i].stats.max_ap;

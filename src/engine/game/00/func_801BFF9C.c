@@ -38,13 +38,13 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                 break;
             }
         }
-        g_SpadWork                                       = (Actor*)g_BattlePartyBattlers;
+        g_Task                                           = (Actor*)g_BattlePartyBattlers;
         g_PartySize                                      = 1;
         D_80145E95                                       = 0;
         *(Character*)((u8*)g_BattlePartyBattlers + 0x74) = g_Characters[0];
         D_80145FCC[0]                                    = 0;
         VOL(u8, D_80145FBC) &= 0xFE;
-        g_SpadWork->unk_48 = 0;
+        g_Task->unk_48 = 0;
         if (LOBU(g_GameRequestFlags) & 1) {
             if (g_Characters[CHAR_SLOT_RYU].character_id == CHAR_ID_RYU_YOUNG) {
                 id = 0x52;
@@ -59,7 +59,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             set_mode:
                 Area_FindSceneRecord(id);
             }
-            g_SpadWork->flags_24 = 0;
+            g_Task->flags_24 = 0;
             g_GameFlags |= 0x1000;
         } else if (LOBU(g_GameRequestFlags) & 8) {
             id = 0x1FD;
@@ -67,8 +67,8 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                 id = 0x47;
             }
             Area_FindSceneRecord(id);
-            g_SpadWork->unk_2A   = 0;
-            g_SpadWork->flags_24 = 0;
+            g_Task->unk_2A   = 0;
+            g_Task->flags_24 = 0;
         } else if (LOBU(g_GameRequestFlags) & 0x40) {
             func_801C1254((s32)D_80145F09, 0);
         } else if (LOHU(g_GameAreaId) == 0xBD) {
@@ -89,29 +89,29 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                 work  = (u8*)addr;
                 off   = 0;
                 do {
-                    g_SpadWork = (Actor*)work;
+                    g_Task = (Actor*)work;
                     *work |= 1;
                     *mask &= 0xFE;
-                    g_SpadWork->x.fixed = 0;
-                    g_SpadWork->y.fixed = 0;
-                    g_SpadWork->z.fixed = 0;
-                    kind                = g_CharSlot[*order];
-                    feed                = D_80145F04;
-                    dst                 = feed + off;
-                    koff                = (kind & BYTE_MASK) * PARTY_RECORD_STRIDE;
-                    rec                 = (Character*)((u32)koff + (u32)base);
-                    D_80145FCC[off]     = kind;
-                    *(Character*)dst    = *rec;
-                    if (!(g_SpadWork->flags_24 & 1)) {
+                    g_Task->x.fixed  = 0;
+                    g_Task->y.fixed  = 0;
+                    g_Task->z.fixed  = 0;
+                    kind             = g_CharSlot[*order];
+                    feed             = D_80145F04;
+                    dst              = feed + off;
+                    koff             = (kind & BYTE_MASK) * PARTY_RECORD_STRIDE;
+                    rec              = (Character*)((u32)koff + (u32)base);
+                    D_80145FCC[off]  = kind;
+                    *(Character*)dst = *rec;
+                    if (!(g_Task->flags_24 & 1)) {
                         func_801C1254((s32)*order, i & BYTE_MASK);
                         MATCH_FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */
                         order++;
                     } else {
                         func_801C1254((s32)*order, i & BYTE_MASK);
                         order++;
-                        GFX_FreePaletteFadeTarget(g_SpadWork);
-                        g_SpadWork->unk_27 = (u8)(g_SpadWork->unk_05 + 0x78);
-                        GFX_StagePalette((u32)(g_SpadWork->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
+                        GFX_FreePaletteFadeTarget(g_Task);
+                        g_Task->unk_27 = (u8)(g_Task->unk_05 + 0x78);
+                        GFX_StagePalette((u32)(g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
                     }
                     mask += BATTLE_PARTY_STRIDE;
                     work += BATTLE_PARTY_STRIDE;

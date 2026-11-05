@@ -11,18 +11,18 @@ MATCH void func_801A0F24(Actor* record) {
     Actor* spad_a;
     Actor* spad_b;
 
-    spad_a = g_SpadWork;
+    spad_a = g_Task;
     saved  = spad_a->direction_08;
-    D_801C83BC[spad_a->state_02](record, 0, 1);
-    spad_b = g_SpadWork;
+    D_801C83BC[spad_a->step](record, 0, 1);
+    spad_b = g_Task;
     if (spad_b->unk_09 == 0) {
         mode  = record->unk_78;
         param = g_RouteSpeedScale[mode];
         if (record->unk_7B == 0) {
             if (mode != 0) {
-                if (D_801C83BC[spad_b->state_02](record, param, 2) & BYTE_MASK) {
+                if (D_801C83BC[spad_b->step](record, param, 2) & BYTE_MASK) {
                     result = func_801A2DB4(record);
-                    if (g_SpadWork->unk_09 != 0) {
+                    if (g_Task->unk_09 != 0) {
                         record->unk_7B = (RANDOM_MASK(3)) + 3;
                     }
                 } else {
@@ -32,28 +32,28 @@ MATCH void func_801A0F24(Actor* record) {
                 goto block_8;
             }
         } else {
-            D_801C83BC[spad_b->state_02](record, param, 2);
+            D_801C83BC[spad_b->step](record, param, 2);
             result = func_801A2ED4(record, 0U);
             record->unk_7B -= 1;
         block_8:
-            if (((result & BYTE_MASK) != GAME_NONE) && (spad_c = g_SpadWork, (spad_c->unk_09 != 0))) {
-                spad_c->unk_03           = (u8)spad_c->unk_01;
-                g_SpadWork->unk_01       = 0xAU;
-                record->unk_79           = result & 7;
-                g_SpadWork->direction_08 = (u8)(saved & 7);
-                spad_d                   = g_SpadWork;
-                spad_d->unk_0A           = 0;
-                spad_d->unk_09           = 0U;
+            if (((result & BYTE_MASK) != GAME_NONE) && (spad_c = g_Task, (spad_c->unk_09 != 0))) {
+                spad_c->unk_03       = (u8)spad_c->mode;
+                g_Task->mode         = 0xAU;
+                record->unk_79       = result & 7;
+                g_Task->direction_08 = (u8)(saved & 7);
+                spad_d               = g_Task;
+                spad_d->unk_0A       = 0;
+                spad_d->unk_09       = 0U;
                 func_801A3B7C(record);
-                spad_e = g_SpadWork;
-                if (spad_e->unk_01 != 0xA) {
+                spad_e = g_Task;
+                if (spad_e->mode != 0xA) {
                     spad_e->direction_08 = saved;
                     /* Shared tail: restore the route and run the step. */
                     goto block_13;
                 }
             } else {
-                g_SpadWork->unk_09       = 0U;
-                g_SpadWork->direction_08 = saved;
+                g_Task->unk_09       = 0U;
+                g_Task->direction_08 = saved;
             block_13:
                 func_801A2AE4(record, saved);
                 /* Both paths finish through the idle handler. */

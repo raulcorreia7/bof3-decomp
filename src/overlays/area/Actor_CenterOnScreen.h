@@ -4,7 +4,7 @@
 MATCH void Actor_CenterOnScreen(void) {
     Actor* actor;
 
-    actor         = g_SpadWork;
+    actor         = g_Task;
     actor->unk_2E = 0xA0;
     actor->unk_30 = 0x50;
 }

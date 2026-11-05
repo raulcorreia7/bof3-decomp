@@ -30,7 +30,7 @@ MATCH void func_801D6F28(void) {
             PartyBattler* work = &g_BattlePartyBattlers[i];
             u16           half = work->unk_58;
 
-            g_SpadWork = work;
+            g_Task = work;
             Actor_StageScriptRecord(work->unk_4B, (u16)(half - 2u), (u8*)0x800F0800u, 0x1800);
         }
     }

@@ -12,14 +12,14 @@ MATCH u8 func_801BF78C(void) {
     for (i = 0; i < g_PartySize; i++) {
         work        = (u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE;
         g_GameState = (GameState*)work;
-        g_SpadWork  = (Actor*)work;
+        g_Task      = (Actor*)work;
         for (j = 0; j < BATTLE_PARTY_SLOT_COUNT; j++) {
             if (D_80144F5A[j] == work[0x79]) {
                 break;
             }
         }
-        if (g_SpadWork->unk_0B == 0 && (func_8014DAEC() & BYTE_MASK) != 0) {
-            g_SpadWork->unk_0B = 1;
+        if (g_Task->unk_0B == 0 && (func_8014DAEC() & BYTE_MASK) != 0) {
+            g_Task->unk_0B = 1;
         }
     }
     for (i = 0; i < g_PartySize; i++) {

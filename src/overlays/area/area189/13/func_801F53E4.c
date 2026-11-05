@@ -4,7 +4,7 @@ MATCH void func_801F53E4(void) {
     Actor* work;
 
     g_GameState->mode_12B.u8_value = 1;
-    work                           = g_SpadWork;
+    work                           = g_Task;
     if (work->unk_09 == 0) {
         func_801F5600();
     } else {

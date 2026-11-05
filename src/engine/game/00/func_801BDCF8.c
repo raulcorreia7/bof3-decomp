@@ -6,7 +6,7 @@ MATCH s16 func_801BDCF8(s32 x, s32 y) {
     s32 delta;
 
     value = Area_SampleHeight(x, y);
-    limit = g_SpadWork->z.part.integer;
+    limit = g_Task->z.part.integer;
     delta = limit;
     delta -= value;
     if (delta < 0) {

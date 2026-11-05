@@ -17,14 +17,14 @@ MATCH void func_800ADA4C(void) {
     BATTLE_WORK->unk_24      = 0x80;
     BATTLE_WORK->unk_27      = 0x1B;
     BATTLE_WORK->unk_28      = 1;
-    work                     = (PartyBattler*)g_SpadWork;
+    work                     = (PartyBattler*)g_Task;
     work->unk_2B             = 0;
-    next                     = (PartyBattler*)g_SpadWork;
+    next                     = (PartyBattler*)g_Task;
     work->unk_2C.signed_half = 2;
     next->unk_2A             = 0;
-    work                     = (PartyBattler*)g_SpadWork;
+    work                     = (PartyBattler*)g_Task;
     work->unk_4B             = 0xFF;
-    slotp                    = (PartyBattler*)g_SpadWork;
+    slotp                    = (PartyBattler*)g_Task;
     work->word_3C.word       = 0;
     pair                     = &D_801485CA;
     base                     = (u8*)g_BattleTargetRows;
@@ -33,7 +33,7 @@ MATCH void func_800ADA4C(void) {
     if (slot != GAME_NONE) {
         Actor_SelectScript(slot);
     }
-    D_801485D6    = (u16)*pair;
-    work          = (PartyBattler*)g_SpadWork;
-    work->step_01 = work->step_01 + 1;
+    D_801485D6 = (u16)*pair;
+    work       = (PartyBattler*)g_Task;
+    work->mode = work->mode + 1;
 }

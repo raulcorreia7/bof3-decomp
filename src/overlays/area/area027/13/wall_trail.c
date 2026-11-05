@@ -282,8 +282,8 @@ MATCH void func_801F2C74(void) {
         i++;
     } while ((i & BYTE_MASK) < 3u);
     SND_PlayCue(EMI_CUE_ID(2, 6));
-    g_SpadWork->unk_09 = 0x40;
-    g_SpadWork->unk_01++;
+    g_Task->unk_09 = 0x40;
+    g_Task->mode++;
 }
 
 MATCH void func_801F2D5C(void) {
@@ -319,8 +319,8 @@ MATCH void func_801F2D5C(void) {
         outer++;
         arg += 0x26;
     } while ((outer & BYTE_MASK) < 3u);
-    v                  = (u8)(g_SpadWork->unk_09 - 1);
-    g_SpadWork->unk_09 = v;
+    v              = (u8)(g_Task->unk_09 - 1);
+    g_Task->unk_09 = v;
     if ((v & BYTE_MASK) == 0) {
         Actor_Clear();
     }
@@ -409,10 +409,10 @@ MATCH void func_801F3120(void) {
 
 MATCH void func_801F3164(void) {
     if (SYS_TestFlag(D_80144E98, 0x17) != 0) {
-        g_SpadWork->state_02 = 3u;
+        g_Task->step = 3u;
         func_801F33A8();
     } else {
-        g_SpadWork->state_02 += 1u;
+        g_Task->step += 1u;
         func_801F31CC();
     }
 }
@@ -421,8 +421,8 @@ MATCH void func_801F31CC(void) {
     s16 point[3];
 
     if (SYS_TestFlag(D_80144E98, 0x17) != 0) {
-        g_SpadWork->state_02 += 1u;
-        g_SpadWork->vx = 0u;
+        g_Task->step += 1u;
+        g_Task->vx = 0u;
     }
 
     point[0] = (s16)0xE340u;
@@ -442,21 +442,21 @@ MATCH void func_801F31CC(void) {
 MATCH void func_801F32B0(void) {
     s16 point[3];
 
-    if (g_SpadWork->vx >= ONE / 4) {
-        g_SpadWork->state_02 += 1u;
+    if (g_Task->vx >= ONE / 4) {
+        g_Task->step += 1u;
     }
-    g_SpadWork->vx += 32;
+    g_Task->vx += 32;
 
     point[0] = (s16)0xE340u;
     point[1] = (s16)0xE3C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, *(s16*)&g_SpadWork->vx, 0x13500126u);
+    func_801F3480((const AreaPoint*)point, *(s16*)&g_Task->vx, 0x13500126u);
     Area_AddCellPrim(0x468000, 0x478000, -1, 0x28);
 
     point[0] = (s16)0xE340u;
     point[1] = (s16)0xE4C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, (s16)(ONE / 2 - g_SpadWork->vx), 0x13510125u);
+    func_801F3480((const AreaPoint*)point, (s16)(ONE / 2 - g_Task->vx), 0x13510125u);
     Area_AddCellPrim(0x468000, 0x498000, -1, 0x28);
 }
 
@@ -606,9 +606,9 @@ MATCH void func_801F3710(void) {
     if (slot_index == GAME_NONE) {
         return;
     }
-    slot           = &g_ActorSlots[slot_index];
-    slot->flags_00 = 1;
-    slot->type     = 0x2F;
+    slot        = &g_ActorSlots[slot_index];
+    slot->flags = 1;
+    slot->type  = 0x2F;
 }
 
 MATCH void func_801F376C(void) {

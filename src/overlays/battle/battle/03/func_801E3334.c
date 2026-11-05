@@ -6,11 +6,11 @@
 MATCH void func_801E3334(void) {
     PartyBattler* work;
 
-    g_SpadWork->flags_00 &= ~ACTOR_FLAG_HIDDEN;
+    g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
     func_801E2314(0);
-    work         = g_SpadWork;
+    work         = g_Task;
     work->unk_48 = 2u;
-    work         = g_SpadWork;
+    work         = g_Task;
     work->unk_18 = 0x666u;
     work->unk_44 = 0u;
     work->unk_40 = 0u;

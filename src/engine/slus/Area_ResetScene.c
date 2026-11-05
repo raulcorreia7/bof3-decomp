@@ -8,7 +8,7 @@ MATCH void Area_ResetScene(void) {
     Actor*        work;
     PartyBattler* mode_work;
 
-    work                        = g_SpadWork;
+    work                        = g_Task;
     mode_work                   = g_GameState;
     g_AreaCameraStep            = 0;
     g_AreaCameraHeightStep      = 0;
@@ -19,6 +19,6 @@ MATCH void Area_ResetScene(void) {
     if (D_8014625C & INPUT_DIRECTIONAL) {
         func_80167428();
     } else {
-        g_SpadWork->unk_01 = 1;
+        g_Task->mode = 1;
     }
 }

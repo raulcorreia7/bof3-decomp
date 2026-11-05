@@ -7,7 +7,7 @@ MATCH void Area_StepSceneTimer(void) {
     Actor* work;
     u8     timer;
 
-    work  = g_SpadWork;
+    work  = g_Task;
     timer = work->unk_09;
     if (timer == 0) {
         Area_ResetScene();

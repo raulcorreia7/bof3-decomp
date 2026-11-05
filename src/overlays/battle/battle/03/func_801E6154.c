@@ -7,7 +7,7 @@ MATCH void func_801E6154(void) {
     work = D_801EC2E0;
     if ((work->unk_38.half.hi >= work->unk_1C) && (work->unk_18 != work->unk_34.half.hi)) {
         work->unk_09 = 10;
-        D_801EC2E0->unk_01++;
+        D_801EC2E0->mode++;
     } else {
         work = new_var = D_801EC2E0;
         work->unk_34.raw += work->unk_0C;

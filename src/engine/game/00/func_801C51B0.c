@@ -6,7 +6,7 @@ MATCH void func_801C51B0(void) {
     u32    route;
     s32    index;
 
-    work                                                  = g_SpadWork;
+    work                                                  = g_Task;
     field                                                 = work->unk_05;
     g_GfxPalettePending                                   = 1;
     *(u16*)(MEM_PTR(u8, 0x8003963Eu) + ((u32)field << 6)) = 0;

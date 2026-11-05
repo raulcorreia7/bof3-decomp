@@ -6,7 +6,7 @@ MATCH void func_801F3210(void) {
 
     Actor_CenterOnScreen();
     if (g_GameEntryState != 1) {
-        scratch = (Actor*)g_SpadWork;
+        scratch = (Actor*)g_Task;
         step    = scratch->unk_0B;
         if (step == scratch->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
@@ -16,9 +16,9 @@ MATCH void func_801F3210(void) {
                 goto tail;
             }
         }
-        ((Actor*)g_SpadWork)->unk_48 = 2;
-        ((Actor*)g_SpadWork)->unk_09 = 8;
-        ((Actor*)g_SpadWork)->unk_01 = 4;
+        ((Actor*)g_Task)->unk_48 = 2;
+        ((Actor*)g_Task)->unk_09 = 8;
+        ((Actor*)g_Task)->mode   = 4;
     }
 tail:
     Area_AddActor();

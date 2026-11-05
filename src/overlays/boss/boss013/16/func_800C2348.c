@@ -7,10 +7,10 @@ MATCH void func_800C2348(void) {
         func_801DDED8();
     } else {
         if (g_BattleBossFlags & 0x40) {
-            g_SpadWork = &D_801EB860;
+            g_Task = &D_801EB860;
             Area_FindSceneRecord(0xF9);
-            g_SpadWork->unk_24 &= 0xFE;
-            g_SpadWork->unk_2A = 1;
+            g_Task->unk_24 &= 0xFE;
+            g_Task->unk_2A = 1;
             Actor_SelectScript(1U);
         }
         *g_ScriptVars = 0x50;

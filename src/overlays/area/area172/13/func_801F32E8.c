@@ -1,9 +1,9 @@
 #include "area172_13.h"
 
 MATCH void func_801F32E8(void) {
-    u8 phase = g_SpadWork->unk_06;
+    u8 phase = g_Task->unk_06;
 
-    g_SpadWork->unk_06 = phase + 1;
+    g_Task->unk_06 = phase + 1;
     if ((phase & 3) == 0) {
         Area_ClaimSpawnSlot();
     }
@@ -12,6 +12,6 @@ MATCH void func_801F32E8(void) {
     if (g_UiWindowEffectBusy == 0) {
         UI_SetMode(9);
         g_AreaDrawFlags = 0;
-        g_SpadWork->unk_01++;
+        g_Task->mode++;
     }
 }

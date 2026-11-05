@@ -7,17 +7,17 @@ MATCH void func_8019F430(void) {
     Actor* slot;
     Actor* work;
 
-    record          = g_SpadWork;
+    record          = g_Task;
     step            = record->vy + 0x14000;
     record->y.fixed = (s32)(record->y.fixed + step);
     record->vy      = step;
     if (record->y.part.integer >= 0) {
         record->unk_09 = 6;
-        work           = g_SpadWork;
+        work           = g_Task;
         record->vy     = (s32)-record->vy;
-        work->unk_01   = (u8)(work->unk_01 + 1);
+        work->mode     = (u8)(work->mode + 1);
     }
-    slot         = g_SpadWork;
+    slot         = g_Task;
     heightOffset = slot->unk_0B * BATTLE_PARTY_STRIDE;
     func_8019F5B8(
         *(s16*)((u8*)((u8*)&g_BattlePartyBattlers[0].unk_2E) + heightOffset),

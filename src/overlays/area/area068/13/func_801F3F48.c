@@ -18,7 +18,7 @@ NON_MATCHING s32 func_801F3F48(void) {
     Game_SetScriptActive();
     record1         = g_ScriptWorkRecord;
     request         = 4;
-    record1->unk_01 = request;
+    record1->mode   = request;
     record2         = g_ScriptWorkRecord;
     record2->unk_77 = 5;
     record          = g_ScriptWorkRecord;

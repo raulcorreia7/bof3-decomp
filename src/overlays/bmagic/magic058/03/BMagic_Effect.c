@@ -9,9 +9,9 @@ INCLUDE_ASM(func_801EEC28);
 INCLUDE_ASM(func_801EED30);
 
 MATCH void func_801EEE78(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+    if (g_Task->word_08.byte.unk_0B == 0) {
         func_801DE8C0(1, 0x3C, Resource_GetText(0x14U));
-        g_SpadWork->step_01 += 1;
+        g_Task->mode += 1;
     }
 }
 
@@ -24,15 +24,15 @@ MATCH void func_801EEEDC(void) {
 }
 
 MATCH void func_801EEF30(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EEF74(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
+    if (g_Task->flags != 0) {
         Effect_SetActorMatrix();
         func_801EF74C();
         PopMatrix();
@@ -44,16 +44,16 @@ MATCH void func_801EF008(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_SpadWork->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
-    work                               = g_SpadWork;
-    actor                              = D_801EB4E0;
-    work->coord_x_34.raw               = actor->coord_x_34.raw;
-    work->coord_y_38.raw               = actor->coord_y_38.raw;
-    z                                  = actor->word_3C.word;
-    work->word_08.byte.timer_0A        = 0x10;
-    work->unk_0C                       = 8;
-    work->word_3C.word                 = z;
-    g_SpadWork->unk_02 += 1;
+    g_Task->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
+    work                           = g_Task;
+    actor                          = D_801EB4E0;
+    work->coord_x_34.raw           = actor->coord_x_34.raw;
+    work->coord_y_38.raw           = actor->coord_y_38.raw;
+    z                              = actor->word_3C.word;
+    work->word_08.byte.timer_0A    = 0x10;
+    work->unk_0C                   = 8;
+    work->word_3C.word             = z;
+    g_Task->step += 1;
 }
 
 INCLUDE_ASM(func_801EF080);
@@ -61,15 +61,15 @@ INCLUDE_ASM(func_801EF080);
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF36C(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, g_SpadWork);
+    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, g_Task);
 }
 
 MATCH void func_801EF3B0(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801EFA78();
         PopMatrix();
@@ -81,10 +81,10 @@ INCLUDE_ASM(func_801EF454);
 MATCH void func_801EF5D4(void) {
     PartyBattler* work;
 
-    work         = g_SpadWork;
+    work         = g_Task;
     work->unk_0C = work->unk_0C + work->unk_18;
     if (--work->unk_18 == 0x10) {
-        work->unk_02++;
+        work->step++;
     }
 }
 

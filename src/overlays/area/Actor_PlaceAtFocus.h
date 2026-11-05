@@ -5,7 +5,7 @@
 MATCH void Actor_PlaceAtFocus(void) {
     u8* work;
 
-    work                   = (u8*)g_SpadWork;
+    work                   = (u8*)g_Task;
     FIELD(s32, work, 0x34) = D_80147A8C;
     FIELD(s32, work, 0x38) = g_AreaFocusY;
     FIELD(s32, work, 0x3C) = D_80147A94;

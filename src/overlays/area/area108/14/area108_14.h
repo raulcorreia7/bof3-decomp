@@ -12,7 +12,7 @@
 #define AREA_RESET_VARIANT 0x04
 
 typedef struct AreaSprite {
-    u8     flags_00;
+    u8     flags;
     u8     flags_01;
     u8     flags_02;
     u8     flags_03;

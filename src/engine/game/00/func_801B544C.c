@@ -25,9 +25,9 @@ MATCH bool func_801B544C(void) {
     if (!(found & BYTE_MASK)) {
         if (RANDOM_MASK(1)) {
             g_GameState->mode_12B.u8_value = 9;
-            Actor_RequestScript(g_SpadWork->direction_08);
-            ((u8*)g_SpadWork)[0x9] = 2;
-            ((u8*)g_SpadWork)[0x1] = 6;
+            Actor_RequestScript(g_Task->direction_08);
+            ((u8*)g_Task)[0x9] = 2;
+            ((u8*)g_Task)[0x1] = 6;
             ACTOR_CLEAR_STATE();
             return true;
         }

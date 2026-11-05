@@ -11,18 +11,18 @@ INCLUDE_ASM(func_801EEC84);
 MATCH void func_801EEDD8(void) {
     u8 timer;
 
-    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         func_800A9610(g_BattleTargetSelector, 0x200);
-        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+        g_Task->mode = g_Task->mode + 1;
     }
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEEA0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 INCLUDE_ASM(func_801EEEE4);
@@ -44,10 +44,10 @@ MATCH void func_801EF43C(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = g_SpadWork->unk_18;
-    rot.vy = g_SpadWork->unk_1C;
+    rot.vx = g_Task->unk_18;
+    rot.vy = g_Task->unk_1C;
     rot.vz = 0;
-    BMAGIC_PROJECT_ACTOR_MATRIX(g_SpadWork);
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
 INCLUDE_ASM(func_801EF4FC);

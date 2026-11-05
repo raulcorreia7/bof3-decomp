@@ -14,14 +14,14 @@ MATCH void Actor_CopyScriptEntry(u32 entry, u8* staging, u32 length) {
 
     Actor_SelectScriptBank(entry & BYTE_MASK);
     count = length & HALF_MASK;
-    size  = count * g_SpadWork->unk_05;
+    size  = count * g_Task->unk_05;
     dst   = staging + size;
     i     = 0;
     if (count != 0) {
         do {
-            dst[i] = g_SpadWork->source_50[i];
+            dst[i] = g_Task->source_50[i];
             i++;
         } while (i < count);
     }
-    g_SpadWork->source_50 = dst;
+    g_Task->source_50 = dst;
 }

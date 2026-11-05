@@ -13,7 +13,7 @@ MATCH u32 func_800AF720(u32 start, u32 end, u32 value) {
 
     result     = 0;
     half_value = value >> 1;
-    work       = (BattleRange*)g_SpadWork;
+    work       = (BattleRange*)g_Task;
     first      = work->range_axis_34 + half_value - start;
     second     = work->range_axis_38 + half_value - end;
     if (value >= first) {

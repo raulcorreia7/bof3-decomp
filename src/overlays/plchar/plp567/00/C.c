@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801D078C[((u8*)g_SpadWork)[2]]();
+    D_801D078C[((u8*)g_Task)[2]]();
 }
 
 MATCH void Char_StartTurn(void) {
@@ -17,7 +17,7 @@ MATCH void Char_RunStepScript_801CE514(void) {
 }
 
 MATCH void func_801CE610(void) {
-    SYS_DISPATCH_TASK(D_801D0798, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D0798, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801CE654);
@@ -27,7 +27,7 @@ INCLUDE_ASM(func_801CE654);
 #include "overlays/plchar/Char_PollScriptRequest.h"
 
 MATCH void func_801CEA00(void) {
-    SYS_DISPATCH_TASK(D_801D07A4, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D07A4, 2, g_Task);
 }
 
 MATCH void Char_StartTurn_801CEA44(void) {
@@ -41,11 +41,11 @@ MATCH void func_801CEC0C(void) {
 }
 
 MATCH void func_801CEC2C(void) {
-    SYS_DISPATCH_TASK(D_801D07B0, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D07B0, 2, g_Task);
 }
 
 MATCH void func_801CEC70(void) {
-    SYS_DISPATCH_TASK(D_801D07B8, 3, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D07B8, 3, g_Task);
 }
 
 #include "overlays/plchar/Char_TurnAndRequestScript.h"
@@ -66,14 +66,14 @@ INCLUDE_ASM(func_801CF224);
 INCLUDE_ASM(func_801CF430);
 
 MATCH void func_801CF51C(void) {
-    SYS_DISPATCH_TASK(D_801D07CC, 3, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D07CC, 3, g_Task);
 }
 
 MATCH void func_801CF560(void) {
     func_801CF944();
-    Actor_RequestScript((g_SpadWork->direction_08 - 1) / 2 + 0x42);
-    g_SpadWork->unk_0A = 0xB;
-    g_SpadWork->unk_03 = 1;
+    Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42);
+    g_Task->unk_0A = 0xB;
+    g_Task->unk_03 = 1;
 }
 
 INCLUDE_ASM(func_801CF5CC);
@@ -85,7 +85,7 @@ INCLUDE_ASM(func_801CF7A0);
 INCLUDE_ASM(func_801CF944);
 
 MATCH void func_801CFAA8(void) {
-    SYS_DISPATCH_TASK(D_801D07D8, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D07D8, 2, g_Task);
 }
 
 #include "../../Char_StartNearestFacingTurn.h"
@@ -95,7 +95,7 @@ MATCH void Char_RunStepScript_801CFBE0(void) {
 }
 
 MATCH void func_801CFCDC(void) {
-    SYS_DISPATCH_TASK(D_801D07E4, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D07E4, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_WalkStep.h"
@@ -111,9 +111,9 @@ INCLUDE_ASM(func_801D02F4);
 #include "overlays/plchar/Char_ProbeFacingCell.h"
 
 MATCH void func_801D0704(void) {
-    D_801D07F0[g_SpadWork->unk_2C]();
+    D_801D07F0[g_Task->unk_2C]();
 }
 
 MATCH void func_801D0748(void) {
-    D_801D07FC[g_SpadWork->unk_2C]();
+    D_801D07FC[g_Task->unk_2C]();
 }

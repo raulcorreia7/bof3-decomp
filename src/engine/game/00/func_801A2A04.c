@@ -4,23 +4,23 @@ MATCH u8 func_801A2A04(Actor* entity) {
     u8 saved;
     u8 i;
 
-    saved = g_SpadWork->direction_08 & 7;
+    saved = g_Task->direction_08 & 7;
     i     = 0;
 
     while (i < 4u) {
         if ((func_801A1AE4(entity) & BYTE_MASK) == 0u) {
             break;
         }
-        g_SpadWork->direction_08 = (g_SpadWork->direction_08 + 2) & 7;
+        g_Task->direction_08 = (g_Task->direction_08 + 2) & 7;
         i++;
     }
 
-    if (saved != g_SpadWork->direction_08) {
+    if (saved != g_Task->direction_08) {
         entity->flags_74 |= ACTOR_FLAG_MOVING;
     }
 
     if (i < 4u) {
-        return g_SpadWork->direction_08 & 7;
+        return g_Task->direction_08 & 7;
     }
     return 0xFF;
 }

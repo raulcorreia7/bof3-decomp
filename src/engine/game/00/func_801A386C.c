@@ -16,7 +16,7 @@ MATCH void func_801A386C(void) {
     if ((D_80145BD4[index].blue_offset + D_80145BD4[index].green_offset + D_80145BD4[index].red_offset) == 0x5D) {
         GFX_FreePaletteFade(index);
         GAME_WORK_AREA_PTR->flags_74 = GAME_WORK_AREA_PTR->flags_74 & ~ACTOR_FLAG_FADE_BLACK;
-        g_SpadWork->unk_01           = g_SpadWork->unk_03;
-        g_SpadWork->unk_04           = 0;
+        g_Task->mode                 = g_Task->unk_03;
+        g_Task->unk_04               = 0;
     }
 }

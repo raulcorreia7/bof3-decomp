@@ -16,13 +16,13 @@ MATCH void func_801EEF64(void) {
     func_801EF1FC();
     func_801EF804();
     func_801EFDDC();
-    counter                         = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = counter;
+    counter                     = g_Task->word_08.byte.unk_09 + 1;
+    g_Task->word_08.byte.unk_09 = counter;
     if ((counter & 0xFF) == 0x40) {
         SND_QueueSelectionFx(0x101);
         SND_QueueSelectionFx(0x102);
-        g_SpadWork->word_08.byte.unk_09 = 0x30;
-        g_SpadWork->step_01 += 1;
+        g_Task->word_08.byte.unk_09 = 0x30;
+        g_Task->mode += 1;
     }
 }
 
@@ -32,10 +32,10 @@ MATCH void func_801EEFFC(void) {
     func_801EF1FC();
     func_801EF804();
     func_801EFDDC();
-    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = timer;
     if (timer == 0) {
-        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+        g_Task->mode = g_Task->mode + 1;
     }
 }
 
@@ -46,8 +46,8 @@ MATCH void func_801EF070(void) {
     PartyBattler* battler;
 
     func_801EFDDC();
-    timer                             = g_SpadWork->word_08.byte.timer_0A - 1;
-    g_SpadWork->word_08.byte.timer_0A = timer;
+    timer                         = g_Task->word_08.byte.timer_0A - 1;
+    g_Task->word_08.byte.timer_0A = timer;
     if (timer == 0) {
         BMAGIC_RELEASE_TARGET_AND_PLAY();
     }
@@ -65,18 +65,18 @@ extern Callback D_801F0654[];
 
 MATCH void func_801F0018(void) {
     Effect_SetActorMatrix();
-    D_801F0654[g_SpadWork->step_01]();
+    D_801F0654[g_Task->mode]();
     PopMatrix();
 }
 
 MATCH void func_801F0070(void) {
     u8 counter;
 
-    if (BATTLE_ACTIVE_WORK->step_01 == 3) {
-        counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
-        g_SpadWork->word_08.byte.unk_09 = counter;
+    if (BATTLE_ACTIVE_WORK->mode == 3) {
+        counter                     = g_Task->word_08.byte.unk_09 - 1;
+        g_Task->word_08.byte.unk_09 = counter;
         if (!(counter & 0xFF)) {
-            g_SpadWork->step_01 += 1;
+            g_Task->mode += 1;
         }
     }
 }
@@ -85,8 +85,8 @@ MATCH void func_801F00D8(void) {
     u8 temp_v1;
 
     func_801F012C();
-    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    temp_v1                     = g_Task->word_08.byte.unk_09 + 1;
+    g_Task->word_08.byte.unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x20) {
         func_801E5988();
     }

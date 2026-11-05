@@ -7,7 +7,7 @@
 #include "overlays/boss/boss.h"
 
 /* The scratchpad work area is a PartyBattler record in this image. */
-#define g_SpadWork ((PartyBattler*)g_SpadWork)
+#define g_Task ((PartyBattler*)g_Task)
 
 extern u8       D_800C264C[];
 extern u16      D_800C2658[];
@@ -37,14 +37,14 @@ extern EnemyBattler D_801EB630[];
 /* The end-of-battle setup of one enemy slot. It takes the slot's record into the scratchpad and finds scene
  * record 0x83; the finish plays script 0 and copies the halfwords at +0x58 and +0x5A of the first enemy record. A
  * member that marks the record writes that statement between the two. */
-#define BOSS008_END_BATTLE_BEGIN(slot)               \
-    func_800AC844(slot);                             \
-    g_SpadWork = (PartyBattler*)func_800AC754(slot); \
+#define BOSS008_END_BATTLE_BEGIN(slot)           \
+    func_800AC844(slot);                         \
+    g_Task = (PartyBattler*)func_800AC754(slot); \
     Area_FindSceneRecord(0x83)
 
-#define BOSS008_END_BATTLE_FINISH()            \
-    Actor_SelectScript(0);                     \
-    g_SpadWork->unk_58 = D_801EB630[0].unk_58; \
-    g_SpadWork->unk_5A = D_801EB630[0].unk_5A
+#define BOSS008_END_BATTLE_FINISH()        \
+    Actor_SelectScript(0);                 \
+    g_Task->unk_58 = D_801EB630[0].unk_58; \
+    g_Task->unk_5A = D_801EB630[0].unk_5A
 
 #endif

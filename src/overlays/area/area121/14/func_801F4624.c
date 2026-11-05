@@ -13,16 +13,16 @@ MATCH void func_801F4624(void) {
     Game_FindAreaHandler();
     Area_FindSceneRecord(0x205);
 
-    g_SpadWork->unk_48            = 0;
-    g_SpadWork->flags_24          = 0;
-    g_SpadWork->unk_2A            = 0;
-    g_SpadWork->tint.bytes.unk_5D = 0;
-    g_SpadWork->tint.bytes.unk_5E = 0;
-    g_SpadWork->tint.bytes.unk_5F = 0;
+    g_Task->unk_48            = 0;
+    g_Task->flags_24          = 0;
+    g_Task->unk_2A            = 0;
+    g_Task->tint.bytes.unk_5D = 0;
+    g_Task->tint.bytes.unk_5E = 0;
+    g_Task->tint.bytes.unk_5F = 0;
 
-    row_offset                                               = g_SpadWork->unk_0B * 4;
+    row_offset                                               = g_Task->unk_0B * 4;
     map_offset                                               = D_801F64E9[row_offset] * D_80104000;
     *(g_AreaCellCodes + map_offset + D_801F64E8[row_offset]) = 0xA0;
     Actor_SelectScript(0);
-    g_SpadWork->unk_01 = 1;
+    g_Task->mode = 1;
 }

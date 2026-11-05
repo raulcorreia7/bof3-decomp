@@ -12,7 +12,7 @@ MATCH void func_801DA78C(void) {
     s32           speed;
 
     record = g_ActorSlots;
-    if (g_ActorSlots[0].unk_01 == 3) {
+    if (g_ActorSlots[0].mode == 3) {
         FISHING_STATE->mode_index_02 = 3;
         FISHING_STATE->sub_index_03  = 0;
     } else {

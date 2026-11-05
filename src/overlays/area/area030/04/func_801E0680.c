@@ -12,9 +12,9 @@ MATCH bool func_801E0680(void) {
     u8             entry_byte;
     s32            range;
 
-    if (g_ActorSlots[0].unk_01 == 4) {
+    if (g_ActorSlots[0].mode == 4) {
         if (D_801E3208 == GAME_NONE && D_80145E92[0] == 3) {
-            if (FISHING_STATE->cue_index_06 == 0x16 && (D_801E3210->unk_0E & 0xF) == g_ActorSlots[0].unk_01) {
+            if (FISHING_STATE->cue_index_06 == 0x16 && (D_801E3210->unk_0E & 0xF) == g_ActorSlots[0].mode) {
                 return true;
             }
             row        = D_801E3210;

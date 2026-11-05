@@ -8,10 +8,9 @@
  */
 /* func_801D0204 (plp016), func_801D0628 (plp026), func_801D042C (plp056), func_801CF900 (plp267), func_801CF324 (plp467), func_801CF704 (plp567), func_801CF108 (plp678) */
 MATCH void Char_ClearModeIfUnused(void) {
-    Actor* work = g_SpadWork;
+    Actor* work = g_Task;
 
-    if ((g_ActorSlots[work->unk_0B].flags_00 == 0 || g_ActorSlots[work->unk_0B].unk_01 == 1) &&
-        g_AreaCameraMoving == 0) {
+    if ((g_ActorSlots[work->unk_0B].flags == 0 || g_ActorSlots[work->unk_0B].mode == 1) && g_AreaCameraMoving == 0) {
         work->unk_2B                   = 0;
         g_GameState->mode_12B.s8_value = 0;
     }

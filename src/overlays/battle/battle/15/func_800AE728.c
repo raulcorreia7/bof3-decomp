@@ -6,7 +6,7 @@ MATCH void func_800AE728(void) {
     PartyBattler* work;
     u8            next;
 
-    work                      = (PartyBattler*)g_SpadWork;
+    work                      = (PartyBattler*)g_Task;
     next                      = work->word_08.byte.unk_09 + 1;
     work->word_08.byte.unk_09 = next;
     if (next == 0x1C) {

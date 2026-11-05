@@ -6,8 +6,8 @@ MATCH void func_801F61F0(s32 type) {
 
     slot = (u8)Actor_FindFreeSlot();
     if (slot != 0xFF) {
-        record           = &g_ActorSlots[slot];
-        record->flags_00 = 1;
-        record->type     = type;
+        record        = &g_ActorSlots[slot];
+        record->flags = 1;
+        record->type  = type;
     }
 }

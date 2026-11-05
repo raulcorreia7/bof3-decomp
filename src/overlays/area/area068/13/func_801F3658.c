@@ -9,11 +9,11 @@ MATCH void func_801F3658(void) {
     }
     D_801F4E0C++;
     if (D_801F4E0C >= 0x1C) {
-        work = g_SpadWork;
+        work = g_Task;
         step = 0x16;
     } else {
-        work = g_SpadWork;
+        work = g_Task;
         step = 0x12;
     }
-    work->unk_01 = step;
+    work->mode = step;
 }

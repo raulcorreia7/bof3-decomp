@@ -7,16 +7,16 @@ MATCH void Battle_RunParty(void) {
 
     battle_work = g_BattlePartyBattlers;
     g_GameState = battle_work;
-    g_SpadWork  = battle_work;
+    g_Task      = battle_work;
     func_801DEEB4();
 
     next_battle_work = battle_work + 1;
     g_GameState      = next_battle_work;
-    g_SpadWork       = next_battle_work;
+    g_Task           = next_battle_work;
     func_801DEEB4();
     battle_work = next_battle_work + 1;
 
     g_GameState = battle_work;
-    g_SpadWork  = battle_work;
+    g_Task      = battle_work;
     func_801DEEB4();
 }

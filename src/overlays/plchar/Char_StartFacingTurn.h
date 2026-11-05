@@ -11,18 +11,18 @@ MATCH void Char_StartFacingTurn(void) {
     if (g_SceneState.scenario_id == 15) {
         g_GameState->mode_12B.s8_value = 0;
     } else {
-        to_back = g_SpadWork->direction_08 - 3;
+        to_back = g_Task->direction_08 - 3;
         to_back = ABS(to_back);
-        to_away = g_SpadWork->direction_08 - 5;
+        to_away = g_Task->direction_08 - 5;
         to_away = ABS(to_away);
         if (to_away < to_back) {
-            g_SpadWork->unk_0B = Actor_GetTurnStep(5);
-            g_SpadWork->unk_03 = 5;
+            g_Task->unk_0B = Actor_GetTurnStep(5);
+            g_Task->unk_03 = 5;
         } else {
-            g_SpadWork->unk_0B = Actor_GetTurnStep(3);
-            g_SpadWork->unk_03 = 3;
+            g_Task->unk_0B = Actor_GetTurnStep(3);
+            g_Task->unk_03 = 3;
         }
-        g_SpadWork->unk_09 = 2;
-        g_SpadWork->state_02++;
+        g_Task->unk_09 = 2;
+        g_Task->step++;
     }
 }

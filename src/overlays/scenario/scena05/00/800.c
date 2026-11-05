@@ -15,9 +15,9 @@ MATCH void func_801F7400(void) {
 MATCH void func_801F743C(void) {
     Actor* actor;
 
-    actor         = g_SpadWork;
-    actor->vx     = 0;
-    actor->unk_01 = actor->unk_01 + 1;
+    actor       = g_Task;
+    actor->vx   = 0;
+    actor->mode = actor->mode + 1;
 }
 
 INCLUDE_ASM(func_801F745C);
@@ -27,15 +27,15 @@ MATCH void func_801F74CC(void) {
 }
 
 MATCH void func_801F74EC(void) {
-    SYS_DISPATCH_TASK(D_801FD5B4, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FD5B4, 1, g_Task);
 }
 
 MATCH void func_801F7530(void) {
     Actor* actor;
 
-    actor         = g_SpadWork;
-    actor->vx     = 0x1000;
-    actor->unk_01 = actor->unk_01 + 1;
+    actor       = g_Task;
+    actor->vx   = 0x1000;
+    actor->mode = actor->mode + 1;
 }
 
 MATCH void func_801F7554(void) {
@@ -46,19 +46,19 @@ MATCH void func_801F7554(void) {
     if ((SP_REF(Actor*, 0x44)->vx & 0xF) == 0) {
         slot = Actor_FindFreeSlot();
         if (slot != GAME_NONE) {
-            spawned           = &g_ActorSlots[slot];
-            spawned->flags_00 = 1;
-            spawned->type     = 0x26;
-            actor             = g_SpadWork;
-            spawned->x.fixed  = actor->x.fixed;
-            spawned->y.fixed  = actor->y.fixed;
-            spawned->z.fixed  = Area_SampleHeight(actor->x.fixed, actor->y.fixed) << 16;
+            spawned          = &g_ActorSlots[slot];
+            spawned->flags   = 1;
+            spawned->type    = 0x26;
+            actor            = g_Task;
+            spawned->x.fixed = actor->x.fixed;
+            spawned->y.fixed = actor->y.fixed;
+            spawned->z.fixed = Area_SampleHeight(actor->x.fixed, actor->y.fixed) << 16;
         }
     }
-    actor = g_SpadWork;
+    actor = g_Task;
     actor->vx -= 1;
     if (actor->vx == 0) {
-        actor->unk_01 += 1;
+        actor->mode += 1;
     }
 }
 

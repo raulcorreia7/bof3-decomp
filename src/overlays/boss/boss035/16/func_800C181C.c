@@ -1,5 +1,5 @@
 #include "boss035_16.h"
 
 MATCH void func_800C181C(void) {
-    SYS_DISPATCH_TASK(D_800C1D2C, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_800C1D2C, 1, g_Task);
 }

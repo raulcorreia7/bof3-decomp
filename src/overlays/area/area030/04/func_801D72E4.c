@@ -3,7 +3,7 @@
 /* Draws the area-030 party bars: the actor's own bar row, the
  * member bars and the name text. */
 /* nonmatching unmeasured: the bar count is 10 with a live step index and 9 without it (the retail sets s3 to 10 and
- * 9 on the two paths) and the slot stores run flags_00, type, unk_01, unk_02; candidate 68.92%. resume: a source
+ * 9 on the two paths) and the slot stores run flags, type, unk_01, unk_02; candidate 68.92%. resume: a source
  * shape that homes the work pointer in a0 like the retail. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
@@ -42,13 +42,13 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
         if (FISHING_STATE->step_index_0A == 0) {
             health_step = FISHING_STATE->step_14;
             if (health_step == FISHING_STATE->step_limit_20) {
-                FISHING_STATE->step_timer_09        = 0U;
-                FISHING_STATE->counter_08           = 0U;
-                member                              = Actor_FindFreeSlot() & BYTE_MASK;
-                g_ActorSlots[member].flags_00       = 1;
-                g_ActorSlots[member].type           = 0x1A;
-                g_ActorSlots[member].unk_01         = 0x10;
-                *(s16*)&g_ActorSlots[member].unk_02 = (s16)FISHING_STATE->bounce_3C.half.key_3E;
+                FISHING_STATE->step_timer_09      = 0U;
+                FISHING_STATE->counter_08         = 0U;
+                member                            = Actor_FindFreeSlot() & BYTE_MASK;
+                g_ActorSlots[member].flags        = 1;
+                g_ActorSlots[member].type         = 0x1A;
+                g_ActorSlots[member].mode         = 0x10;
+                *(s16*)&g_ActorSlots[member].step = (s16)FISHING_STATE->bounce_3C.half.key_3E;
             } else {
                 health_step = health_step - 1;
                 if ((s8)FISHING_STATE->counter_08 > 0) {

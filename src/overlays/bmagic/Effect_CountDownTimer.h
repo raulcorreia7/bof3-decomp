@@ -7,9 +7,9 @@ MATCH void Effect_CountDownTimer(void) {
     PartyBattler* active;
     u8            count;
 
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.unk_09 += EFFECT_TIMER_STEP;
-    work                        = g_SpadWork;
+    work                        = g_Task;
     count                       = work->word_08.byte.timer_0A - 1;
     work->word_08.byte.timer_0A = count;
     if (count == 0) {

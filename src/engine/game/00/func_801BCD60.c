@@ -46,7 +46,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
     void* tmp23;
 
     stack_20 = target_y;
-    tmp8     = g_SpadWork;
+    tmp8     = g_Task;
     stack_18 = target_x;
     if ((*(u8*)(tmp8) & 0x80) && !((g_GameFlags | g_AreaWalkFlags) & AREA_WALK_BUSY(0)) && !(D_80145FBC & 1)) {
         val9  = FIELD(s32, tmp8, 0x34u);
@@ -69,7 +69,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         } else {
             val3 = 1;
         }
-        tmp15 = g_SpadWork;
+        tmp15 = g_Task;
         val0  = Area_ReadHeight(FIELD(s32, tmp15, 0x34u), FIELD(s32, tmp15, 0x38u));
         val0 <<= 0x10;
         val0 = (s16)(val0 >> 0x10);
@@ -89,31 +89,31 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         loop_18:
             func_801BD290(stack_18, stack_20, &stack_10);
             tmp0                     = (u8)stack_10 * 8;
-            tmp16                    = g_SpadWork;
+            tmp16                    = g_Task;
             FIELD(s32, tmp16, 0x34u) = (s32)(val9 + (((s32*)g_FacingSteps)[tmp0] * 2 * val6));
             tmp3                     = val2 + (*(D_80181B98 + tmp0) * 2 * val6);
             FIELD(s32, tmp16, 0x38u) = tmp3;
-            tmp17                    = g_SpadWork;
+            tmp17                    = g_Task;
             val0                     = 1;
             if (func_801C3E40(FIELD(s32, tmp17, 0x34u), FIELD(s32, tmp17, 0x38u), FIELD(u8, tmp17, 0x70u),
                               Area_ReadStepHeight(FIELD(s32, tmp16, 0x34u), tmp3, (u8)stack_10)) &
                 0xFF) {
                 tmp1 = val7 - 1;
-                val5 = g_SpadWork->x.fixed;
+                val5 = g_Task->x.fixed;
                 if (tmp1 > 1) {
                     val8 = tmp1;
                     val4 = val5 + 0xFFFF0000;
                     val3 = val5 + 0x10000;
                 loop_21:
-                    tmp10                    = g_SpadWork;
+                    tmp10                    = g_Task;
                     FIELD(s32, tmp10, 0x34u) = val3;
-                    tmp18                    = g_SpadWork;
+                    tmp18                    = g_Task;
                     if (func_801C3E40(FIELD(s32, tmp18, 0x34u), FIELD(s32, tmp18, 0x38u), FIELD(u8, tmp18, 0x70u),
                                       Area_ReadHeight(val3, FIELD(s32, tmp10, 0x38u))) &
                         0xFF) {
-                        tmp11                    = g_SpadWork;
+                        tmp11                    = g_Task;
                         FIELD(s32, tmp11, 0x34u) = val4;
-                        tmp19                    = g_SpadWork;
+                        tmp19                    = g_Task;
                         if (func_801C3E40(FIELD(s32, tmp19, 0x34u), FIELD(s32, tmp19, 0x38u), FIELD(u8, tmp19, 0x70u),
                                           Area_ReadHeight(val4, FIELD(s32, tmp11, 0x38u))) &
                             0xFF) {
@@ -131,7 +131,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                     }
                 } else {
                 block_25:
-                    tmp20                    = g_SpadWork;
+                    tmp20                    = g_Task;
                     tmp2                     = val7 - 1;
                     tmp4                     = FIELD(s32, tmp20, 0x38u);
                     FIELD(s32, tmp20, 0x34u) = val5;
@@ -140,15 +140,15 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                         val4 = tmp4 + 0xFFFF0000;
                         val3 = tmp4 + 0x10000;
                     loop_27:
-                        tmp12                    = g_SpadWork;
+                        tmp12                    = g_Task;
                         FIELD(s32, tmp12, 0x38u) = val3;
-                        tmp21                    = g_SpadWork;
+                        tmp21                    = g_Task;
                         if (func_801C3E40(FIELD(s32, tmp21, 0x34u), FIELD(s32, tmp21, 0x38u), FIELD(u8, tmp21, 0x70u),
                                           Area_ReadHeight(FIELD(s32, tmp12, 0x34u), val3)) &
                             0xFF) {
-                            tmp13                    = g_SpadWork;
+                            tmp13                    = g_Task;
                             FIELD(s32, tmp13, 0x38u) = val4;
-                            tmp22                    = g_SpadWork;
+                            tmp22                    = g_Task;
                             if (func_801C3E40(FIELD(s32, tmp22, 0x34u), FIELD(s32, tmp22, 0x38u),
                                               FIELD(u8, tmp22, 0x70u),
                                               Area_ReadHeight(FIELD(s32, tmp13, 0x34u), val4)) &
@@ -176,7 +176,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             }
         }
         if (val6 != 0) {
-            tmp9  = g_SpadWork;
+            tmp9  = g_Task;
             val10 = FIELD(s32, tmp9, 0x34u) - D_80145EC4;
             if (val10 < 0) {
                 val10 = -val10;
@@ -195,23 +195,23 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             block_39:
                 if (func_801C6FD4(FIELD(s16, tmp9, 0x36u), FIELD(s16, tmp9, 0x3Au)) & BYTE_MASK) {
                     g_GameState->flags_12C.u8_value = (u8)(g_GameState->flags_12C.u8_value & 0xFE);
-                    g_SpadWork->unk_29              = (u8)g_AreaDrawMode;
-                    g_SpadWork->direction_08        = (u8)stack_10;
+                    g_Task->unk_29                  = (u8)g_AreaDrawMode;
+                    g_Task->direction_08            = (u8)stack_10;
                 } else {
                     goto block_41; /* retail branch */
                 }
             }
         } else {
         block_41:
-            tmp14                    = g_SpadWork;
+            tmp14                    = g_Task;
             FIELD(s32, tmp14, 0x34u) = val9;
             FIELD(s32, tmp14, 0x38u) = val2;
         }
-        tmp23                      = g_SpadWork;
-        FIELD(s32, tmp23, 0x34u)   = (s32)(FIELD(s32, tmp23, 0x34u) & ~0x7FFF);
-        tmp5                       = FIELD(s32, tmp23, 0x38u) & ~0x7FFF;
-        FIELD(s32, tmp23, 0x38u)   = tmp5;
-        g_SpadWork->z.part.integer = Area_ReadHeight(FIELD(s32, tmp23, 0x34u), tmp5);
+        tmp23                    = g_Task;
+        FIELD(s32, tmp23, 0x34u) = (s32)(FIELD(s32, tmp23, 0x34u) & ~0x7FFF);
+        tmp5                     = FIELD(s32, tmp23, 0x38u) & ~0x7FFF;
+        FIELD(s32, tmp23, 0x38u) = tmp5;
+        g_Task->z.part.integer   = Area_ReadHeight(FIELD(s32, tmp23, 0x34u), tmp5);
     }
 }
 #else

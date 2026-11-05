@@ -14,30 +14,26 @@ NON_MATCHING s32 func_801B0E44(void) {
     /* FAKE: retail's frame is 16 bytes larger than the statements need. */
     STACK_PADS(s32, 16);
 
-    saved_dir = g_SpadWork->route_index_08;
+    saved_dir = g_Task->route_index_08;
     result    = func_801B9598();
-    if ((g_SpadWork->route_index_08 == 2) || (g_SpadWork->route_index_08 == 6)) {
-        g_SpadWork->unk_09 = 0x20;
+    if ((g_Task->route_index_08 == 2) || (g_Task->route_index_08 == 6)) {
+        g_Task->unk_09 = 0x20;
     } else {
-        g_SpadWork->unk_09 = 0x10;
+        g_Task->unk_09 = 0x10;
     }
-    divisor            = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
-    g_SpadWork->unk_09 = (u8)(g_SpadWork->unk_09 / (u32)(divisor & BYTE_MASK));
-    if (g_SpadWork->state_70.byte == 0) {
-        SP_REF(s32, 0x8) =
-            g_SpadWork->x.fixed + g_FacingOffsets[g_SpadWork->route_index_08].x * divisor * g_SpadWork->unk_09;
-        SP_REF(s32, 0xC) =
-            g_SpadWork->y.fixed + g_FacingOffsets[g_SpadWork->route_index_08].y * divisor * g_SpadWork->unk_09;
+    divisor        = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
+    g_Task->unk_09 = (u8)(g_Task->unk_09 / (u32)(divisor & BYTE_MASK));
+    if (g_Task->state_70.byte == 0) {
+        SP_REF(s32, 0x8) = g_Task->x.fixed + g_FacingOffsets[g_Task->route_index_08].x * divisor * g_Task->unk_09;
+        SP_REF(s32, 0xC) = g_Task->y.fixed + g_FacingOffsets[g_Task->route_index_08].y * divisor * g_Task->unk_09;
     } else {
-        SP_REF(s32, 0x8) =
-            g_SpadWork->x.fixed + g_FacingOffsets[g_SpadWork->route_index_08].x * divisor * g_SpadWork->unk_09 * 2;
-        SP_REF(s32, 0xC) =
-            g_SpadWork->y.fixed + g_FacingOffsets[g_SpadWork->route_index_08].y * divisor * g_SpadWork->unk_09 * 2;
+        SP_REF(s32, 0x8) = g_Task->x.fixed + g_FacingOffsets[g_Task->route_index_08].x * divisor * g_Task->unk_09 * 2;
+        SP_REF(s32, 0xC) = g_Task->y.fixed + g_FacingOffsets[g_Task->route_index_08].y * divisor * g_Task->unk_09 * 2;
     }
     if (g_GameStateIndex != GAME_REQUEST_SCENE_CAMERA) {
         if (Area_IsStepBlocked(SP_REF(s32, 0x8), SP_REF(s32, 0xC)) != 0) {
             result = 0;
-            if (g_SpadWork->unk_01 == 2) {
+            if (g_Task->mode == 2) {
                 return 0xFF;
             }
         }
@@ -45,17 +41,17 @@ NON_MATCHING s32 func_801B0E44(void) {
     switch (result & BYTE_MASK) {
         case 2:
             pos2   = (s32*)&D_1F800008;
-            result = Area_ReadStepHeight(*(s32*)&D_1F800008, SP_REF(s32, 0xC), g_SpadWork->route_index_08);
+            result = Area_ReadStepHeight(*(s32*)&D_1F800008, SP_REF(s32, 0xC), g_Task->route_index_08);
             func_801B13BC();
             if (((u8*)pos2)[-8] != 0) {
                 if ((s16)result >= 0x41) {
                     if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) &&
-                        (g_SpadWork == (void*)g_BattlePartyBattlers)) {
+                        (g_Task == (void*)g_BattlePartyBattlers)) {
                         if (Area_SetCellPalette(D_80145EC6, D_80145ECA) & BYTE_MASK) {
                             SND_PlayCue(D_801CD0F4[((u8*)pos2)[-7]]);
-                            Actor_RequestScript((g_SpadWork->route_index_08 >> 1) + 0x10);
+                            Actor_RequestScript((g_Task->route_index_08 >> 1) + 0x10);
                         } else {
-                            Actor_RequestScript(g_SpadWork->route_index_08);
+                            Actor_RequestScript(g_Task->route_index_08);
                         }
                         g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
                     }
@@ -65,7 +61,7 @@ NON_MATCHING s32 func_801B0E44(void) {
                 x = ((s16*)pos2)[-2];
                 y = ((s16*)pos2)[-1];
             } else {
-                diff = g_SpadWork->z.part.integer - (s16)result;
+                diff = g_Task->z.part.integer - (s16)result;
                 if (diff < 0) {
                     diff = -diff;
                 }
@@ -87,11 +83,11 @@ NON_MATCHING s32 func_801B0E44(void) {
             return 0;
         case 3:
             pos3   = (s32*)&D_1F800008;
-            result = Area_ReadStepHeight(pos3[0], pos3[1], g_SpadWork->route_index_08);
+            result = Area_ReadStepHeight(pos3[0], pos3[1], g_Task->route_index_08);
             if (SP_REF(u8, 0x0) != 0) {
                 if ((s16)result >= 0x41) {
-                    g_AreaCameraStep           = 0;
-                    g_SpadWork->route_index_08 = saved_dir;
+                    g_AreaCameraStep       = 0;
+                    g_Task->route_index_08 = saved_dir;
                     return 1;
                 }
                 Area_ReadHeight(pos3[0], pos3[1]);

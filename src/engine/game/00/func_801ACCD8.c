@@ -9,30 +9,30 @@ MATCH void func_801ACCD8(void) {
     Actor* spad3;
     Actor* spad4;
 
-    spad  = g_SpadWork;
+    spad  = g_Task;
     tuneA = spad->tint.signed_bytes.unk_5D;
     if (tuneA < -0x40) {
         spad->tint.signed_bytes.unk_5D = (s8)(tuneA + 4);
     }
-    spad2 = g_SpadWork;
+    spad2 = g_Task;
     tuneB = spad2->tint.signed_bytes.unk_5E;
     if (tuneB < -0x40) {
         spad2->tint.signed_bytes.unk_5E = (s8)(tuneB + 4);
     }
-    tuneC = g_SpadWork->tint.signed_bytes.unk_5F;
+    tuneC = g_Task->tint.signed_bytes.unk_5F;
     if (tuneC < -0x40) {
-        g_SpadWork->tint.signed_bytes.unk_5F = (s8)(tuneC + 4);
+        g_Task->tint.signed_bytes.unk_5F = (s8)(tuneC + 4);
     }
-    if ((g_SpadWork->tint.word & ~0xFF) == 0xC0C0C000) {
+    if ((g_Task->tint.word & ~0xFF) == 0xC0C0C000) {
         GFX_FreePaletteFade(g_CurrentActor->unk_93);
-        spad3                           = g_SpadWork;
+        spad3                           = g_Task;
         *(u8*)(spad3)                   = (u8)(*(u8*)(spad3) & 0xDF);
-        g_SpadWork->tint.bytes.flags    = 0;
-        spad4                           = g_SpadWork;
+        g_Task->tint.bytes.flags        = 0;
+        spad4                           = g_Task;
         spad4->tint.signed_bytes.unk_5F = 0;
         spad4->tint.signed_bytes.unk_5E = 0;
         spad4->tint.signed_bytes.unk_5D = 0;
-        g_SpadWork->unk_04              = 0;
+        g_Task->unk_04                  = 0;
         return;
     }
     g_CurrentActor->unk_7E = (u16)(g_CurrentActor->unk_7E - 1);

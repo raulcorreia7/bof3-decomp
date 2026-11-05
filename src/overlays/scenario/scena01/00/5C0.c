@@ -11,50 +11,50 @@ INCLUDE_ASM(func_801F71C0);
 INCLUDE_ASM(func_801F729C);
 
 MATCH void func_801F73B8(void) {
-    SYS_DISPATCH_TASK(D_801FE26C, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FE26C, 1, g_Task);
 }
 
 MATCH void func_801F73FC(void) {
     Actor* work;
     s32    height;
 
-    work          = g_SpadWork;
+    work          = g_Task;
     work->x.fixed = 0x600000;
     work->y.fixed = 0x110000;
     height        = Area_SampleHeight(work->x.fixed, work->y.fixed);
 
-    work          = g_SpadWork;
+    work          = g_Task;
     work->z.fixed = height << 16;
     work->unk_2E  = 0x180;
     work->unk_30  = 0x500;
     work->unk_09  = 0;
     Area_ClearWorkColumn();
 
-    g_SpadWork->unk_01 += 1;
+    g_Task->mode += 1;
     SND_PlayCue(0x202);
 }
 
 MATCH void func_801F7480(void) {
-    func_801F7678(g_SpadWork->unk_09);
+    func_801F7678(g_Task->unk_09);
     if ((g_FrameCount & 1) == 0) {
         func_801F7AE4();
     }
     func_801F7C54();
-    g_SpadWork->unk_09 = ((Actor*)g_SpadWork)->unk_09 + 4;
-    if (g_SpadWork->unk_09 == 0) {
-        g_SpadWork->unk_09 = 0x20;
-        g_SpadWork->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    g_Task->unk_09 = ((Actor*)g_Task)->unk_09 + 4;
+    if (g_Task->unk_09 == 0) {
+        g_Task->unk_09 = 0x20;
+        g_Task->mode   = ((Actor*)g_Task)->mode + 1;
     }
 }
 
 INCLUDE_ASM(func_801F752C);
 
 MATCH void func_801F75C8(void) {
-    func_801F7678(g_SpadWork->unk_09);
+    func_801F7678(g_Task->unk_09);
     func_801F7C54();
-    g_SpadWork->unk_09 = ((Actor*)g_SpadWork)->unk_09 - 4;
-    if (g_SpadWork->unk_09 == 0) {
-        g_SpadWork->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    g_Task->unk_09 = ((Actor*)g_Task)->unk_09 - 4;
+    if (g_Task->unk_09 == 0) {
+        g_Task->mode = ((Actor*)g_Task)->mode + 1;
     }
 }
 

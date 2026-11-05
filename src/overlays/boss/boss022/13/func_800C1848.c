@@ -9,6 +9,6 @@ MATCH void func_800C1848(void) {
     work->unk_E8 = D_800C1B24;
     ACTOR_SET_STEP(1);
     Area_FindSceneRecord(0x153);
-    SPAD_WORK_BYTES[0x2A] = 0;
+    TASK_BYTES[0x2A] = 0;
     Actor_SelectScript(0);
 }

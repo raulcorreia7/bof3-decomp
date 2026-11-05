@@ -28,8 +28,8 @@ MATCH void func_801D2648(void) {
             FISHING_STATE->step_limit_20 = -0x8000;
             slot                         = Actor_FindFreeSlot() & BYTE_MASK;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].flags_00 = 1;
-                g_ActorSlots[slot].type     = 0xA;
+                g_ActorSlots[slot].flags = 1;
+                g_ActorSlots[slot].type  = 0xA;
             }
         }
     } else {
@@ -46,10 +46,10 @@ MATCH void func_801D2648(void) {
     }
     FISHING_STATE->unk_5C = 0;
     if (FISHING_STATE->bounce_3C.half.key_3E > 0) {
-        FISHING_STATE->flags_00 &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+        FISHING_STATE->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
         FISHING_STATE->tint_5D = 0;
     } else {
-        FISHING_STATE->flags_00 |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        FISHING_STATE->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     }
     FISHING_STATE->tint_5E = FISHING_STATE->tint_5D;
     FISHING_STATE->tint_5F = FISHING_STATE->tint_5D;

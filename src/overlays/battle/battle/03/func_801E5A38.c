@@ -11,11 +11,11 @@ MATCH void func_801E5A38(void) {
 
         n = index;
         index += 1u;
-        g_BattleEffects[n].unk_00        = 0u;
+        g_BattleEffects[n].flags         = 0u;
         g_BattleEffects[n].handler_index = 0u;
         g_BattleEffects[n].unk_06        = 0u;
-        g_BattleEffects[n].unk_01        = 0u;
-        g_BattleEffects[n].unk_02        = 0u;
+        g_BattleEffects[n].mode          = 0u;
+        g_BattleEffects[n].step          = 0u;
         g_BattleEffects[n].unk_03        = 0u;
         g_BattleEffects[n].unk_04        = 0u;
         g_BattleEffects[n].unk_48        = 0u;

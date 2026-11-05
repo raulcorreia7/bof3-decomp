@@ -13,14 +13,14 @@ MATCH void func_801F4674(void) {
     first       = Actor_FindFree();
     first_index = first & BYTE_MASK;
     if (first_index != GAME_NONE) {
-        g_Actors[first_index].flags_00 = 1;
-        second                         = Actor_FindFree();
-        second_index                   = second & BYTE_MASK;
+        g_Actors[first_index].flags = 1;
+        second                      = Actor_FindFree();
+        second_index                = second & BYTE_MASK;
         if (second_index == GAME_NONE) {
-            g_Actors[first_index].flags_00 = 0;
+            g_Actors[first_index].flags = 0;
             return;
         }
-        g_Actors[second_index].flags_00     = 1;
+        g_Actors[second_index].flags        = 1;
         D_1F800000.view.area.entity_counter = (u8)first;
         func_801A4D54(D_801F4E2C);
         D_1F800000.view.area.entity_counter = (u8)second;

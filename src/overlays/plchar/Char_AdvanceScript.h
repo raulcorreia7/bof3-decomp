@@ -8,11 +8,11 @@ MATCH void Char_AdvanceScript(void) {
     u8 done;
 
     done = 0;
-    if (g_SpadWork->unk_0B != 0) {
-        if (g_SpadWork->unk_0B == 1) {
+    if (g_Task->unk_0B != 0) {
+        if (g_Task->unk_0B == 1) {
             if (func_8014DAEC() & BYTE_MASK) {
-                Actor_SelectScript(g_SpadWork->direction_08);
-                g_SpadWork->unk_0B = 2;
+                Actor_SelectScript(g_Task->direction_08);
+                g_Task->unk_0B = 2;
             }
         } else {
             func_8014D978();
@@ -26,7 +26,7 @@ MATCH void Char_AdvanceScript(void) {
         }
     }
     if (done & BYTE_MASK) {
-        g_SpadWork->unk_2B             = 0;
+        g_Task->unk_2B                 = 0;
         g_GameState->mode_12B.u8_value = 0;
     }
 }

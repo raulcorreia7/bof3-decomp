@@ -3,10 +3,10 @@
 MATCH void Effect_CountDownTimerQueueFx(void) {
     PartyBattler* work;
 
-    work                      = g_SpadWork;
+    work                      = g_Task;
     work->word_08.byte.unk_09 = work->word_08.byte.unk_09 - 1;
     if (work->word_08.byte.unk_09 == 0) {
         SND_QueueSelectionFx(0x100);
-        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+        g_Task->mode = g_Task->mode + 1;
     }
 }

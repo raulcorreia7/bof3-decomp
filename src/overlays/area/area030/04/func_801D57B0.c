@@ -10,18 +10,18 @@ MATCH void func_801D57B0(void) {
 
     index = Actor_FindFreeSlot() & BYTE_MASK;
     if (index != GAME_NONE) {
-        g_ActorSlots[index].flags_00 = 1;
-        g_ActorSlots[index].type     = 0x1A;
-        g_ActorSlots[index].unk_01   = 0x10;
-        g_ActorSlots[index].unk_03   = 2;
+        g_ActorSlots[index].flags  = 1;
+        g_ActorSlots[index].type   = 0x1A;
+        g_ActorSlots[index].mode   = 0x10;
+        g_ActorSlots[index].unk_03 = 2;
     }
 
     index = Actor_FindFreeSlot() & BYTE_MASK;
     if (index != GAME_NONE) {
-        g_ActorSlots[index].flags_00 = 1;
-        g_ActorSlots[index].type     = 0x1A;
-        g_ActorSlots[index].unk_01   = 0x10;
-        g_ActorSlots[index].unk_03   = 4;
+        g_ActorSlots[index].flags  = 1;
+        g_ActorSlots[index].type   = 0x1A;
+        g_ActorSlots[index].mode   = 0x10;
+        g_ActorSlots[index].unk_03 = 4;
     }
 
     Area_FindSceneRecord(0x47);

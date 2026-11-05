@@ -59,31 +59,31 @@ NON_MATCHING s32 func_801BA678(void) {
     void*  tmp28;
     void*  tmp29;
 
-    if ((0x400 & g_GameFlags) || ((tmp24 = g_SpadWork, val20 = tmp24->direction_08, (FIELD(u16, tmp24, 0x34u) == 0)) &&
+    if ((0x400 & g_GameFlags) || ((tmp24 = g_Task, val20 = tmp24->direction_08, (FIELD(u16, tmp24, 0x34u) == 0)) &&
                                   (FIELD(u16, tmp24, 0x38u) == 0))) {
         return 1;
     }
-    tmp12 = *(D_80181B00 + (g_SpadWork->direction_08 * 2));
+    tmp12 = *(D_80181B00 + (g_Task->direction_08 * 2));
     val12 = (tmp12 == 1) ? 2 : tmp12;
     val7  = val12;
-    tmp13 = *(D_80181B01 + (g_SpadWork->direction_08 * 2));
+    tmp13 = *(D_80181B01 + (g_Task->direction_08 * 2));
     val11 = (tmp13 == 1) ? 2 : tmp13;
-    tmp14 = FIELD(u16, g_SpadWork, 0x36u);
+    tmp14 = FIELD(u16, g_Task, 0x36u);
     val4  = (s16)tmp14;
     val7  = val4 + val12;
-    val8  = FIELD(u16, g_SpadWork, 0x3Au) + val11;
-    if ((*(D_80181B00 + (g_SpadWork->direction_08 * 2)) + 1) == 2) {
+    val8  = FIELD(u16, g_Task, 0x3Au) + val11;
+    if ((*(D_80181B00 + (g_Task->direction_08 * 2)) + 1) == 2) {
         val4 += 1;
     }
-    val6 = g_SpadWork->y.part.integer;
-    if ((*(D_80181B01 + (g_SpadWork->direction_08 * 2)) + 1) == 2) {
+    val6 = g_Task->y.part.integer;
+    if ((*(D_80181B01 + (g_Task->direction_08 * 2)) + 1) == 2) {
         val6 += 1;
     }
     func_801BBCCC(val7, val8, val4, val6);
-    tmp15 = g_SpadWork->direction_08;
+    tmp15 = g_Task->direction_08;
     if (!(tmp15 & 1)) {
-        if (g_SpadWork->x.part.fraction != 0) {
-            if (g_SpadWork->y.part.fraction != 0) {
+        if (g_Task->x.part.fraction != 0) {
+            if (g_Task->y.part.fraction != 0) {
                 val10   = 5;
                 spad    = SP_PTR(u8, 0x8u);
                 spad[0] = func_801BA278(1U, 2U, 3U, 4U, 5U);
@@ -107,17 +107,17 @@ NON_MATCHING s32 func_801BA678(void) {
                     }
                     if (!(func_801BB1B8(2) & BYTE_MASK)) {
                         if ((((spad[1] & 0xF0) != 0xA0) ||
-                             ((tmp19 = g_SpadWork->direction_08, val9 = 9, (tmp19 != 1)) && (tmp19 != 5))) &&
+                             ((tmp19 = g_Task->direction_08, val9 = 9, (tmp19 != 1)) && (tmp19 != 5))) &&
                             (((spad[2] & 0xF0) != 0xA0) ||
-                             ((tmp20 = g_SpadWork->direction_08, val9 = 0xA, (tmp20 != 3)) && (tmp20 != 7)))) {
+                             ((tmp20 = g_Task->direction_08, val9 = 0xA, (tmp20 != 3)) && (tmp20 != 7)))) {
                             if ((spad[1] & 0xF0) == 0xA0) {
-                                g_SpadWork->direction_08 = val20;
+                                g_Task->direction_08 = val20;
                                 func_801BB8E8(4U, 6U, 5U);
                                 val9 = 9;
                                 goto block_109; /* retail branch */
                             }
                             if ((spad[2] & 0xF0) == 0xA0) {
-                                g_SpadWork->direction_08 = val20;
+                                g_Task->direction_08 = val20;
                                 func_801BB8E8(2U, 4U, 3U);
                                 val9 = 0xA;
                                 goto block_109; /* retail branch */
@@ -142,13 +142,13 @@ NON_MATCHING s32 func_801BA678(void) {
                 default: /* switch 1 */
                     if ((SP_REF(u8, 0x8u) & 0xF0) == 0xA0) {
                         val9 = 8;
-                        if (!(1 & g_SpadWork->direction_08)) {
+                        if (!(1 & g_Task->direction_08)) {
                             func_801BB8E8(2U, 4U, 3U);
                             val9 = 8;
                         }
                         goto block_109; /* retail branch */
                     }
-                    tmp25 = g_SpadWork;
+                    tmp25 = g_Task;
                     if (!(1 & FIELD(u8, tmp25, 0x8u))) {
                         val0 = val7;
                         tmp4 = FIELD(u16, tmp25, 0x3Au);
@@ -156,7 +156,7 @@ NON_MATCHING s32 func_801BA678(void) {
                         if (func_801BB86C(val0, val0, tmp4, (s16)(tmp4 + 1), val7) & BYTE_MASK) {
                             func_801BB8E8(4U, 6U, 5U);
                         }
-                        tmp26 = g_SpadWork;
+                        tmp26 = g_Task;
                         if (!(1 & FIELD(u8, tmp26, 0x8u))) {
                             tmp5 = FIELD(u16, tmp26, 0x3Au);
                             if (func_801BB86C(val0, val0, tmp5, (s16)(tmp5 - 1), val7) & BYTE_MASK) {
@@ -181,13 +181,13 @@ NON_MATCHING s32 func_801BA678(void) {
                 default: /* switch 2 */
                     if ((SP_REF(u8, 0x8u) & 0xF0) == 0xA0) {
                         val9 = 8;
-                        if (!(1 & g_SpadWork->direction_08)) {
+                        if (!(1 & g_Task->direction_08)) {
                             func_801BB8E8(4U, 6U, 5U);
                             val9 = 8;
                         }
                         goto block_109; /* retail branch */
                     }
-                    tmp27 = g_SpadWork;
+                    tmp27 = g_Task;
                     if (!(1 & FIELD(u8, tmp27, 0x8u))) {
                         val0 = val8;
                         tmp0 = FIELD(u16, tmp27, 0x36u);
@@ -195,7 +195,7 @@ NON_MATCHING s32 func_801BA678(void) {
                         if (func_801BB86C(tmp0, (s16)(tmp0 + 1), val0, val0, val7) & BYTE_MASK) {
                             func_801BB8E8(2U, 4U, 3U);
                         }
-                        tmp28 = g_SpadWork;
+                        tmp28 = g_Task;
                         if (!(1 & FIELD(u8, tmp28, 0x8u))) {
                             tmp1 = FIELD(u16, tmp28, 0x36u);
                             if (func_801BB86C(tmp1, (s16)(tmp1 - 1), val0, val0, val7) & BYTE_MASK) {
@@ -209,9 +209,9 @@ NON_MATCHING s32 func_801BA678(void) {
                     return 3;
             }
         }
-    } else if (g_SpadWork->x.part.fraction != 0) {
+    } else if (g_Task->x.part.fraction != 0) {
         tmp9 = tmp15 & 2;
-        if (g_SpadWork->y.part.fraction != 0) {
+        if (g_Task->y.part.fraction != 0) {
             val16 = 2;
             if (tmp9 != 0) {
                 val18 = 3;
@@ -228,7 +228,7 @@ NON_MATCHING s32 func_801BA678(void) {
             switch (tmp8) { /* switch 3; irregular */
                 default:    /* switch 3 */
                     if ((tmp21 & 0xF0) != 0xA0) {
-                        tmp29 = g_SpadWork;
+                        tmp29 = g_Task;
                         if (2 & FIELD(u8, tmp29, 0x8u)) {
                             val1           = val7;
                             val2           = val1;
@@ -271,15 +271,15 @@ NON_MATCHING s32 func_801BA678(void) {
                                             val9 = 8;
                                             if ((SP_REF(u8, 0x8u) & 0xF0) != 0xA0) {
                                                 val0 = val7;
-                                                tmp6 = FIELD(u16, g_SpadWork, 0x3Au);
+                                                tmp6 = FIELD(u16, g_Task, 0x3Au);
                                                 val7 = 1;
                                                 if (func_801BB86C(val0, val0, tmp6, tmp6 + 1, val7) & BYTE_MASK) {
-                                                    g_SpadWork->direction_08 = 1U;
+                                                    g_Task->direction_08 = 1U;
                                                     return 1;
                                                 }
-                                                tmp7 = FIELD(u16, g_SpadWork, 0x3Au);
+                                                tmp7 = FIELD(u16, g_Task, 0x3Au);
                                                 if (func_801BB86C(val0, val0, tmp7, tmp7 + (-1), val7) & BYTE_MASK) {
-                                                    g_SpadWork->direction_08 = 5U;
+                                                    g_Task->direction_08 = 5U;
                                                     return 1;
                                                 }
                                                 goto block_114; /* retail branch */
@@ -331,14 +331,14 @@ NON_MATCHING s32 func_801BA678(void) {
                                                 return func_801BB7B0(val9) & BYTE_MASK;
                                             }
                                             val0 = val8;
-                                            tmp2 = FIELD(u16, g_SpadWork, 0x36u);
+                                            tmp2 = FIELD(u16, g_Task, 0x36u);
                                             if (func_801BB86C(tmp2, (s16)(tmp2 + 1), val0, val0, val7) & BYTE_MASK) {
-                                                g_SpadWork->direction_08 = 7U;
+                                                g_Task->direction_08 = 7U;
                                                 return 1;
                                             }
-                                            tmp3 = FIELD(u16, g_SpadWork, 0x36u);
+                                            tmp3 = FIELD(u16, g_Task, 0x36u);
                                             if (func_801BB86C(tmp3, (s16)(tmp3 - 1), val0, val0, val7) & BYTE_MASK) {
-                                                g_SpadWork->direction_08 = 3U;
+                                                g_Task->direction_08 = 3U;
                                                 return 1;
                                             }
                                         block_114:

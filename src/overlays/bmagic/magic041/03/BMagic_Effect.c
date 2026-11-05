@@ -12,13 +12,13 @@ MATCH void func_801EEE14(void) {
     u8             temp_v0;
     PartyBattler** selected;
 
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         selected = &g_BattleSelectedActor;
         func_80196718(*selected);
-        g_SpadWork->word_08.byte.unk_09 = func_8019651C(*selected, 0, 0, 0, 1);
-        g_SpadWork->step_01 += 1;
+        g_Task->word_08.byte.unk_09 = func_8019651C(*selected, 0, 0, 0, 1);
+        g_Task->mode += 1;
     }
 }
 
@@ -31,15 +31,15 @@ INCLUDE_ASM(func_801EEFF8);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF190(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EF1D4(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_SpadWork->unk_02);
-    if (ACTOR_IN_USE(*g_SpadWork) && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
+    if (ACTOR_IN_USE(*g_Task) && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801EF670();
         PopMatrix();
@@ -50,25 +50,25 @@ MATCH void func_801EF27C(void) {
     PartyBattler* src;
     PartyBattler* dst;
 
-    if (--g_SpadWork->word_08.byte.unk_09 == 0) {
-        src                               = D_801EB4E0;
-        dst                               = g_SpadWork;
-        dst->coord_x_34                   = src->coord_x_34;
-        dst->coord_y_38                   = src->coord_y_38;
-        dst->word_3C                      = src->word_3C;
-        dst->word_08.byte.unk_09          = 0;
-        g_SpadWork->word_08.byte.timer_0A = 0;
-        g_SpadWork->unk_02++;
+    if (--g_Task->word_08.byte.unk_09 == 0) {
+        src                           = D_801EB4E0;
+        dst                           = g_Task;
+        dst->coord_x_34               = src->coord_x_34;
+        dst->coord_y_38               = src->coord_y_38;
+        dst->word_3C                  = src->word_3C;
+        dst->word_08.byte.unk_09      = 0;
+        g_Task->word_08.byte.timer_0A = 0;
+        g_Task->step++;
     }
 }
 
 MATCH void func_801EF308(void) {
     u8 timer;
 
-    timer                             = g_SpadWork->word_08.byte.timer_0A + 4;
-    g_SpadWork->word_08.byte.timer_0A = timer;
+    timer                         = g_Task->word_08.byte.timer_0A + 4;
+    g_Task->word_08.byte.timer_0A = timer;
     if (timer == 32) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     }
 }
 
@@ -77,9 +77,9 @@ MATCH void func_801EF358(void) {
     PartyBattler* active;
     u8            count;
 
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.unk_09 += 4;
-    work                        = g_SpadWork;
+    work                        = g_Task;
     count                       = work->word_08.byte.timer_0A - 1;
     work->word_08.byte.timer_0A = count;
     if (count == 0) {
@@ -93,8 +93,8 @@ MATCH void func_801EF3D0(void) {
     MagicTaskFuncs handlers;
 
     handlers = D_801EEC28;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_SpadWork->unk_02);
-    if (ACTOR_IN_USE(*g_SpadWork) && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
+    if (ACTOR_IN_USE(*g_Task) && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801EFAB8();
         PopMatrix();
@@ -104,12 +104,12 @@ MATCH void func_801EF3D0(void) {
 MATCH void func_801EF484(void) {
     PartyBattler* src;
 
-    src                             = (PartyBattler*)D_801EB4E0;
-    g_SpadWork->coord_x_34          = src->coord_x_34;
-    g_SpadWork->coord_y_38          = src->coord_y_38;
-    g_SpadWork->word_3C             = src->word_3C;
-    g_SpadWork->word_08.byte.unk_09 = 0;
-    g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
+    src                         = (PartyBattler*)D_801EB4E0;
+    g_Task->coord_x_34          = src->coord_x_34;
+    g_Task->coord_y_38          = src->coord_y_38;
+    g_Task->word_3C             = src->word_3C;
+    g_Task->word_08.byte.unk_09 = 0;
+    g_Task->step                = g_Task->step + 1;
 }
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"

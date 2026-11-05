@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801D0858[((u8*)g_SpadWork)[2]]();
+    D_801D0858[((u8*)g_Task)[2]]();
 }
 
 INCLUDE_ASM(func_801CE448);
@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801CE448);
 #include "overlays/plchar/func_801CE628.h"
 
 MATCH void func_801CE72C(void) {
-    SYS_DISPATCH_TASK(D_801D0864, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D0864, 2, g_Task);
 }
 
 #include "overlays/plchar/func_801CE770.h"
@@ -29,7 +29,7 @@ INCLUDE_ASM(func_801CED1C);
 #include "overlays/plchar/Char_ProbeFacingCell.h"
 
 MATCH void func_801CF12C(void) {
-    SYS_DISPATCH_TASK(D_801D0870, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D0870, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_StartTurn.h"
@@ -39,7 +39,7 @@ MATCH void func_801CF12C(void) {
 #include "../../Char_AdvanceFacingTurn.h"
 
 MATCH void func_801CF338(void) {
-    SYS_DISPATCH_TASK(D_801D087C, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D087C, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801CF37C);
@@ -49,7 +49,7 @@ INCLUDE_ASM(func_801CF37C);
 #include "overlays/plchar/Char_PollScriptRequest.h"
 
 MATCH void func_801CF728(void) {
-    SYS_DISPATCH_TASK(D_801D0888, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D0888, 2, g_Task);
 }
 
 MATCH void Char_StartTurn_801CF76C(void) {
@@ -63,11 +63,11 @@ MATCH void func_801CF934(void) {
 }
 
 MATCH void func_801CF954(void) {
-    SYS_DISPATCH_TASK(D_801D0894, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D0894, 2, g_Task);
 }
 
 MATCH void func_801CF998(void) {
-    SYS_DISPATCH_TASK(D_801D089C, 3, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D089C, 3, g_Task);
 }
 
 #include "overlays/plchar/Char_TurnAndRequestScript.h"
@@ -88,14 +88,14 @@ INCLUDE_ASM(func_801CFF4C);
 INCLUDE_ASM(func_801D0158);
 
 MATCH void func_801D0244(void) {
-    SYS_DISPATCH_TASK(D_801D08B0, 3, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D08B0, 3, g_Task);
 }
 
 MATCH void func_801D0288(void) {
     func_801D066C();
-    Actor_RequestScript((g_SpadWork->direction_08 - 1) / 2 + 0x42);
-    g_SpadWork->unk_0A = 0xB;
-    g_SpadWork->unk_03 = 1;
+    Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42);
+    g_Task->unk_0A = 0xB;
+    g_Task->unk_03 = 1;
 }
 
 INCLUDE_ASM(func_801D02F4);
@@ -107,9 +107,9 @@ INCLUDE_ASM(func_801D04C8);
 INCLUDE_ASM(func_801D066C);
 
 MATCH void func_801D07D0(void) {
-    D_801D08BC[g_SpadWork->unk_2C]();
+    D_801D08BC[g_Task->unk_2C]();
 }
 
 MATCH void func_801D0814(void) {
-    D_801D08C8[g_SpadWork->unk_2C]();
+    D_801D08C8[g_Task->unk_2C]();
 }

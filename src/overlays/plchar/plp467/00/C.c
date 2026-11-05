@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801D03AC[((u8*)g_SpadWork)[2]]();
+    D_801D03AC[((u8*)g_Task)[2]]();
 }
 
 MATCH void Char_StartTurn(void) {
@@ -19,7 +19,7 @@ MATCH void func_801CE610(void) {
 }
 
 MATCH void func_801CE620(void) {
-    SYS_DISPATCH_TASK(D_801D03B8, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D03B8, 2, g_Task);
 }
 
 MATCH void Char_StartTurn_801CE664(void) {
@@ -35,11 +35,11 @@ MATCH void func_801CE82C(void) {
 }
 
 MATCH void func_801CE84C(void) {
-    SYS_DISPATCH_TASK(D_801D03C4, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D03C4, 2, g_Task);
 }
 
 MATCH void func_801CE890(void) {
-    SYS_DISPATCH_TASK(D_801D03CC, 3, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D03CC, 3, g_Task);
 }
 
 #include "overlays/plchar/Char_TurnAndRequestScript.h"
@@ -60,14 +60,14 @@ INCLUDE_ASM(func_801CEE44);
 INCLUDE_ASM(func_801CF050);
 
 MATCH void func_801CF13C(void) {
-    SYS_DISPATCH_TASK(D_801D03E0, 3, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D03E0, 3, g_Task);
 }
 
 MATCH void func_801CF180(void) {
     func_801CF564();
-    Actor_RequestScript((g_SpadWork->direction_08 - 1) / 2 + 0x42);
-    g_SpadWork->unk_0A = 0xB;
-    g_SpadWork->unk_03 = 1;
+    Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42);
+    g_Task->unk_0A = 0xB;
+    g_Task->unk_03 = 1;
 }
 
 INCLUDE_ASM(func_801CF1EC);
@@ -79,7 +79,7 @@ INCLUDE_ASM(func_801CF3C0);
 INCLUDE_ASM(func_801CF564);
 
 MATCH void func_801CF6C8(void) {
-    SYS_DISPATCH_TASK(D_801D03EC, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D03EC, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_StartFacingTurn.h"
@@ -89,7 +89,7 @@ MATCH void Char_RunStepScript_801CF800(void) {
 }
 
 MATCH void func_801CF8FC(void) {
-    SYS_DISPATCH_TASK(D_801D03F8, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D03F8, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_WalkStep.h"
@@ -105,9 +105,9 @@ INCLUDE_ASM(func_801CFF14);
 #include "overlays/plchar/Char_ProbeFacingCell.h"
 
 MATCH void func_801D0324(void) {
-    D_801D0404[g_SpadWork->unk_2C]();
+    D_801D0404[g_Task->unk_2C]();
 }
 
 MATCH void func_801D0368(void) {
-    D_801D0410[g_SpadWork->unk_2C]();
+    D_801D0410[g_Task->unk_2C]();
 }

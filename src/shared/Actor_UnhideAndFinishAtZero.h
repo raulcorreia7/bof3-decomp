@@ -8,14 +8,14 @@
 MATCH void Actor_UnhideAndFinishAtZero(void) {
     u8* work;
 
-    work = (u8*)g_SpadWork;
+    work = (u8*)g_Task;
     if (work[9] != 0) {
-        g_Actors[work[11]].flags_00 |= ACTOR_FLAG_HIDDEN;
-        g_SpadWork->unk_09 -= 1;
+        g_Actors[work[11]].flags |= ACTOR_FLAG_HIDDEN;
+        g_Task->unk_09 -= 1;
     } else {
-        g_Actors[work[11]].flags_00 &= ~ACTOR_FLAG_HIDDEN;
-        g_Actors[g_SpadWork->unk_03].flags_00 = 0;
-        g_Actors[g_SpadWork->unk_04].flags_00 = 0;
-        g_SpadWork->unk_01                    = 2;
+        g_Actors[work[11]].flags &= ~ACTOR_FLAG_HIDDEN;
+        g_Actors[g_Task->unk_03].flags = 0;
+        g_Actors[g_Task->unk_04].flags = 0;
+        g_Task->mode                   = 2;
     }
 }

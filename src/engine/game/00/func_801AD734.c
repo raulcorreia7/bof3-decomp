@@ -6,7 +6,7 @@ MATCH void func_801AD734(void) {
     s8     value;
 
     choice = (u32)(RANDOM_MASK(0xF));
-    if ((g_SpadWork->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
+    if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
         func_8015BAC4((u8)((D_80145E98 ^ 4) & 7));
     }
     g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
@@ -18,7 +18,7 @@ MATCH void func_801AD734(void) {
             case 2:
             case 3:
                 func_801ADAC0(1);
-                g_SpadWork->unk_04 = 1;
+                g_Task->unk_04 = 1;
                 break;
             case 4:
             case 5:
@@ -26,17 +26,17 @@ MATCH void func_801AD734(void) {
                 func_801ADAC0(1);
                 Party_AddZenny(1, 0);
                 func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
-                g_SpadWork->unk_04 = 2;
+                g_Task->unk_04 = 2;
                 break;
             case 7:
                 func_801ADAC0(1);
                 Party_AddZenny(10, 0);
                 func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
-                g_SpadWork->unk_04 = 3;
+                g_Task->unk_04 = 3;
                 break;
             default:
                 func_801ADAC0(3);
-                g_SpadWork->unk_04 = 1;
+                g_Task->unk_04 = 1;
                 break;
         }
     } else {
@@ -45,10 +45,10 @@ MATCH void func_801AD734(void) {
         } else {
             func_801ADAC0(3);
         }
-        g_SpadWork->unk_04 = 1;
+        g_Task->unk_04 = 1;
     }
     value                   = -0x50;
-    work                    = g_SpadWork;
+    work                    = g_Task;
     work->tint.bytes.unk_5E = value;
     work->tint.bytes.unk_5F = value;
     work->tint.bytes.unk_5D = value;

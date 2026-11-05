@@ -5,13 +5,13 @@ MATCH void func_801A4AA8(void) {
     Actor* motion;
     Actor* animation;
 
-    g_SpadWork->unk_04             = 0;
-    g_SpadWork->unk_03             = 0;
-    g_SpadWork->flags_24           = 0;
-    step                           = g_SpadWork;
+    g_Task->unk_04                 = 0;
+    g_Task->unk_03                 = 0;
+    g_Task->flags_24               = 0;
+    step                           = g_Task;
     step->unk_0A                   = 0;
     step->unk_09                   = 0;
-    motion                         = g_SpadWork;
+    motion                         = g_Task;
     animation                      = g_CurrentActor;
     motion->unk_44                 = 0x10000;
     motion->unk_40                 = 0x10000;

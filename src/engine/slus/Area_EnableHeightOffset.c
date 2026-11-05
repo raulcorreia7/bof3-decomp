@@ -5,7 +5,7 @@
 MATCH void Area_EnableHeightOffset(void) {
     s32 flag;
 
-    if ((u8*)g_SpadWork == D_8014626C) {
+    if ((u8*)g_Task == D_8014626C) {
         flag = D_80146277 & 1;
     } else {
         flag = g_GameState->unk_12C[0] & 1;

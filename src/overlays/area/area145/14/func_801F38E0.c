@@ -5,11 +5,11 @@ MATCH void func_801F38E0(void) {
     u8*    depth_target;
     s32    result;
 
-    work                           = g_SpadWork;
+    work                           = g_Task;
     work->x.fixed                  = 0xA0000;
     work->y.fixed                  = 0x630000;
     result                         = Area_SampleHeight(work->x.fixed, 0x630000);
-    depth_target                   = (u8*)g_SpadWork;
+    depth_target                   = (u8*)g_Task;
     FIELD(s32, depth_target, 0x3C) = result << 16;
     depth_target[1]++;
 }

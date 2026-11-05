@@ -12,42 +12,40 @@
 MATCH void func_801BB9B4(s16 probe_x, s16 probe_y) {
     u8 route;
 
-    if (g_SpadWork->direction_08 & 1) {
+    if (g_Task->direction_08 & 1) {
         return;
     }
-    if (func_801BB86C(probe_x, probe_x, g_SpadWork->y.part.integer, (s16)(g_SpadWork->y.part.integer + 1), 1) &
-        BYTE_MASK) {
+    if (func_801BB86C(probe_x, probe_x, g_Task->y.part.integer, (s16)(g_Task->y.part.integer + 1), 1) & BYTE_MASK) {
         func_801BB8E8(4, 6, 5);
     }
-    if (g_SpadWork->direction_08 & 1) {
+    if (g_Task->direction_08 & 1) {
         return;
     }
-    if (!(g_SpadWork->direction_08 & 4)) {
-        if (func_801BB86C(probe_x, probe_x, g_SpadWork->y.part.integer, probe_y, 1) & BYTE_MASK) {
+    if (!(g_Task->direction_08 & 4)) {
+        if (func_801BB86C(probe_x, probe_x, g_Task->y.part.integer, probe_y, 1) & BYTE_MASK) {
             func_801BB8E8(4, 6, 5);
         }
     } else {
-        if (func_801BB86C(probe_x, probe_x, probe_y, (s16)((u16)g_SpadWork->y.part.integer + 1), 1) & BYTE_MASK) {
+        if (func_801BB86C(probe_x, probe_x, probe_y, (s16)((u16)g_Task->y.part.integer + 1), 1) & BYTE_MASK) {
             func_801BB8E8(4, 6, 5);
         }
     }
-    if (g_SpadWork->direction_08 & 1) {
+    if (g_Task->direction_08 & 1) {
         return;
     }
-    if (func_801BB86C(g_SpadWork->x.part.integer, (s16)(g_SpadWork->x.part.integer + 1), probe_y, probe_y, 3) &
-        BYTE_MASK) {
+    if (func_801BB86C(g_Task->x.part.integer, (s16)(g_Task->x.part.integer + 1), probe_y, probe_y, 3) & BYTE_MASK) {
         func_801BB8E8(2, 4, 3);
     }
-    route = g_SpadWork->direction_08;
+    route = g_Task->direction_08;
     if (route & 1) {
         return;
     }
     if ((route == 0) || (route == 6)) {
-        if (func_801BB86C(g_SpadWork->x.part.integer, probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
+        if (func_801BB86C(g_Task->x.part.integer, probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
             func_801BB8E8(2, 4, 3);
         }
     } else {
-        if (func_801BB86C((s16)((u16)g_SpadWork->x.part.integer + 1), probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
+        if (func_801BB86C((s16)((u16)g_Task->x.part.integer + 1), probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
             func_801BB8E8(2, 4, 3);
         }
     }

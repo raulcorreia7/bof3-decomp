@@ -15,8 +15,8 @@ MATCH void func_801E0F0C(void) {
     /* FAKE: retail materializes the +0x124 mask in a3. */
     MATCH_REG(s32, mask, "a3");
 
-    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = count;
+    count                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = count;
     if ((count & BYTE_MASK) == 0) {
         work                   = g_GameState;
         one                    = 1;
@@ -26,19 +26,19 @@ MATCH void func_801E0F0C(void) {
         work->stats.current_willpower >>= 1;
         work->flags_124.value &= mask;
         offset                       = (Battle_AllocEffect(0, 1) & BYTE_MASK) * 0x78;
-        spad                         = g_SpadWork;
+        spad                         = g_Task;
         *(&D_801EC337 + offset)      = 1;
         *(&D_801EC357 + offset)      = 6;
-        spad2                        = g_SpadWork;
+        spad2                        = g_Task;
         *(u32*)(D_801EC3A4 + offset) = (u32)spad;
         Actor_SelectScript((spad2->word_08.byte.facing_08 + 4) & BYTE_MASK);
         SND_QueueSelectionFx(0x206);
         if (g_BattleEventFlags == 0) {
             func_801D9484();
-            Battle_SetTextPartyName(g_SpadWork->slot);
+            Battle_SetTextPartyName(g_Task->slot);
             func_801DEBC4(0, g_GameState->stats.character_id);
         }
-        g_SpadWork->unk_03 = 2;
+        g_Task->unk_03 = 2;
         func_801DEDE4();
     }
 }

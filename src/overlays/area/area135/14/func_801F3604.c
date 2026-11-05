@@ -1,7 +1,7 @@
 #include "area135_14.h"
 
 MATCH void func_801F3604(void) {
-    if (g_SpadWork->unk_06 != 0) {
+    if (g_Task->unk_06 != 0) {
         func_80159B9C(D_801F6210, D_801F6212, D_801F6214, D_801F6216);
         func_801F37C4();
     }

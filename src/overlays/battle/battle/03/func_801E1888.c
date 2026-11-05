@@ -7,7 +7,7 @@ MATCH void func_801E1888(void) {
     PartyBattler* work;
     u8            count;
 
-    work  = g_SpadWork;
+    work  = g_Task;
     count = work->word_08.byte.unk_09;
     if (count == 0) {
         func_801DD858(5);
@@ -15,9 +15,9 @@ MATCH void func_801E1888(void) {
             ((u32)((short)g_DragonForm - 7) >= 2)) {
             func_801DD858(3);
         }
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     } else {
-        g_SpadWork->word_08.byte.unk_09 = count - 1;
+        g_Task->word_08.byte.unk_09 = count - 1;
     }
     func_801DEE4C();
 }

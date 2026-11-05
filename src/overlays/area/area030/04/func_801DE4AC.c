@@ -2,7 +2,7 @@
 
 /* Walks the 30 state records (stride 0x98) at g_Actors; for every
  * live record it publishes the record pointer to the scratch work slot
- * g_SpadWork and to g_CurrentActor, dispatches through the handler table
+ * g_Task and to g_CurrentActor, dispatches through the handler table
  * D_801E2314 with the record's type byte, then rebuilds the record's blend byte
  * 0x5D from flag 0x20 and the signed halfword 0x3E and copies it to 0x5E and
  * 0x5F. */
@@ -27,12 +27,12 @@ MATCH void func_801DE4AC(void) {
 
         /* FAKE: retail reads g_Actors as u8[]. */
         cur            = &((u8*)g_Actors)[off];
-        g_SpadWork     = cur;
+        g_Task         = cur;
         g_CurrentActor = cur;
         table[cur[1]]();
 
         record = FISHING_STATE;
-        if ((record->flags_00 & ACTOR_FLAG_SEMI_TRANSPARENT) != 0) {
+        if ((record->flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0) {
             s16 value = record->bounce_3C.half.key_3E;
 
             if (value > 0) {

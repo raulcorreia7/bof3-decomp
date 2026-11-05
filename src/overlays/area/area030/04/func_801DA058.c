@@ -1,6 +1,6 @@
 #include "area030_04.h"
 
-/* Decrements the scratchpad byte at g_SpadWork+0x9 and passes the
+/* Decrements the scratchpad byte at g_Task+0x9 and passes the
  * 0x50-scaled row it selects to func_801E1758 with 0x56; when that byte reaches
  * zero it sets the byte at +0x6 to 1 and increments the byte at +0x3; the frame
  * then redraws through func_801E16DC, func_801D9534 and func_8014F800 (the

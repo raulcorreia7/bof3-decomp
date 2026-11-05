@@ -20,7 +20,7 @@ MATCH void func_800A3F28(void) {
         g_BattlePartyBattlers[battler_index].flags_124.volatile_value |= COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
         g_BattlePartyBattlers[g_BattleTarget].unk_120 &= ~0x1u;
     } else {
-        D_801EB730[battler_index - 3u].flags_00 |= COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
+        D_801EB730[battler_index - 3u].flags |= COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
         D_801EB72C_rows[g_BattleTarget - 3u].flag &= ~0x1u;
     }
 }

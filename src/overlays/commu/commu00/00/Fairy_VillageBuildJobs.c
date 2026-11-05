@@ -65,7 +65,7 @@ MATCH void Fairy_VillageBuildJobs(void) {
     }
 
     while (task < 20) {
-        g_Actors[task].flags_00 = 0;
+        g_Actors[task].flags = 0;
         task++;
     }
 }

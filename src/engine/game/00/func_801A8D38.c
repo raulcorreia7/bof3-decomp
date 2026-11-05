@@ -16,7 +16,7 @@ MATCH u8 func_801A8D38(void* sub, s32 target) {
     u8 value;
     u8 sel;
 
-    sel           = g_SpadWork->direction_08;
+    sel           = g_Task->direction_08;
     g_ScriptState = (void*)sub;
     sel           = func_801A8F94(sub, (u8*)target, sel);
     script        = ((u8*)target)[((GameScriptState*)sub)->cursor];

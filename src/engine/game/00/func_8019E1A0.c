@@ -6,12 +6,12 @@ MATCH void func_8019E1A0(void) {
     Actor* work;
     Actor* record;
 
-    work          = g_SpadWork;
+    work          = g_Task;
     work->x.fixed = (s32)(work->x.fixed + work->vx);
     work->y.fixed = (s32)(work->y.fixed + work->vy);
     work->z.fixed = (s32)(work->z.fixed + work->vz);
     func_8014D978();
-    record     = g_SpadWork;
+    record     = g_Task;
     sceneTimer = record->unk_09;
     if (sceneTimer != 0) {
         record->unk_09 = (u8)(sceneTimer - 1);

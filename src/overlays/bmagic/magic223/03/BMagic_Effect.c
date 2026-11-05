@@ -14,12 +14,12 @@ INCLUDE_ASM(func_801EED18);
 INCLUDE_ASM(func_801EEFB4);
 
 MATCH void func_801EF00C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_Task)[1]);
 }
 
 MATCH void func_801EF050(void) {
-    SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 1, 2, g_SpadWork);
-    if (g_SpadWork->flags_00 != 0) {
+    SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 1, 2, g_Task);
+    if (g_Task->flags != 0) {
         func_801EF1E8();
     }
 }
@@ -35,12 +35,12 @@ MATCH void func_801EF050(void) {
 INCLUDE_ASM(func_801EF1E8);
 
 MATCH void func_801EF3C0(void) {
-    SYS_DISPATCH_TASK(D_801EFC40, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801EFC40, 1, g_Task);
 }
 
 MATCH void func_801EF404(void) {
-    SYS_DISPATCH_BYTE(D_801EFC44, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801EFC44, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         func_801EF7A8();
     }
 }
@@ -51,25 +51,25 @@ MATCH void func_801EF628(void) {
     s32 offset;
     u8  timer;
 
-    g_SpadWork->unk_2E.half += (s32)(rsin(g_SpadWork->unk_14) * 8) >> 0xC;
-    offset = (s32)(rcos(g_SpadWork->unk_14) * 8) >> 0xC;
-    g_SpadWork->unk_30.half += offset;
-    g_SpadWork->word_08.byte.unk_09 += 1;
-    timer                             = g_SpadWork->word_08.byte.timer_0A + 4;
-    g_SpadWork->word_08.byte.timer_0A = timer;
+    g_Task->unk_2E.half += (s32)(rsin(g_Task->unk_14) * 8) >> 0xC;
+    offset = (s32)(rcos(g_Task->unk_14) * 8) >> 0xC;
+    g_Task->unk_30.half += offset;
+    g_Task->word_08.byte.unk_09 += 1;
+    timer                         = g_Task->word_08.byte.timer_0A + 4;
+    g_Task->word_08.byte.timer_0A = timer;
     if ((timer & BYTE_MASK) == 0x10) {
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801EF6E0(void) {
     s32 cosine;
 
-    g_SpadWork->unk_2E.half += (s32)(rsin(g_SpadWork->unk_14) * 0x18) >> 0xC;
-    cosine = rcos(g_SpadWork->unk_14);
-    g_SpadWork->unk_30.half += (s32)(cosine * 0x18) >> 0xC;
-    g_SpadWork->word_08.byte.unk_09 += 1;
-    if (g_SpadWork->word_08.byte.unk_09 == 0x14) {
+    g_Task->unk_2E.half += (s32)(rsin(g_Task->unk_14) * 0x18) >> 0xC;
+    cosine = rcos(g_Task->unk_14);
+    g_Task->unk_30.half += (s32)(cosine * 0x18) >> 0xC;
+    g_Task->word_08.byte.unk_09 += 1;
+    if (g_Task->word_08.byte.unk_09 == 0x14) {
         D_801EB4E0->word_08.byte.unk_0B -= 1;
         Actor_Clear();
     }

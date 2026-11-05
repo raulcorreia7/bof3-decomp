@@ -24,12 +24,12 @@ MATCH void func_801EF09C(void) {
 }
 
 MATCH void func_801EF0DC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EF120(void) {
-    SYS_DISPATCH_BYTE(D_801EF8A4, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801EF8A4, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         func_801EF3B8();
     }
 }
@@ -50,28 +50,28 @@ MATCH void func_801EF788(void) {
     u8 temp_a0;
     u8 temp_v0;
 
-    temp_a0 = g_SpadWork->word_08.byte.unk_09;
+    temp_a0 = g_Task->word_08.byte.unk_09;
     if ((temp_a0 & 0xFF) != 0xFF) {
-        temp_v0                         = temp_a0 - 1;
-        g_SpadWork->word_08.byte.unk_09 = temp_v0;
+        temp_v0                     = temp_a0 - 1;
+        g_Task->word_08.byte.unk_09 = temp_v0;
         if (!(temp_v0 & 0xFF)) {
             func_800AFC98(2, 5);
         }
     }
     if (func_8014DAEC() & 0xFF) {
-        g_SpadWork->word_08.byte.unk_09 = 8;
-        g_SpadWork->unk_02 += 1;
+        g_Task->word_08.byte.unk_09 = 8;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801EF814(void) {
     u8 temp_v0;
 
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         D_801EB4E0->word_08.byte.unk_0B -= 1;
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 

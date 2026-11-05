@@ -3,7 +3,7 @@
 MATCH void func_8019AD70(void) {
     Actor* work;
 
-    work                = g_SpadWork;
+    work                = g_Task;
     g_AreaCameraOffsetZ = work->vx;
     func_8019AAFC();
 }

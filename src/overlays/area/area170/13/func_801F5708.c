@@ -4,7 +4,7 @@ MATCH void func_801F5708(void) {
     Actor* work;
     s32    request;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (SYS_TestFlag(g_SceneEventFlags, 0x79) != 0) {
         request = 1;
     } else if (Party_AddItem(ITEM_CAT_WEAPON, 0x4B, 1, 0) == 0) {

@@ -3,8 +3,8 @@
 MATCH void func_801F1110(u8 task_index, u8 record_kind_index) {
     u32 variant;
 
-    g_SpadWork->unk_06 = 1;
-    variant            = ((u8*)D_801F24FC_Data.variant_counter)[record_kind_index];
+    g_Task->unk_06 = 1;
+    variant        = ((u8*)D_801F24FC_Data.variant_counter)[record_kind_index];
 
     if (variant == 0) {
         g_Actors[task_index].unk_7C = 0xC009;

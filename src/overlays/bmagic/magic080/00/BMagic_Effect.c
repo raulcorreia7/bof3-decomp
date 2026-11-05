@@ -22,15 +22,15 @@ MATCH void func_801EECE4(void) {
     u8 temp_v0;
 
     func_800AF764();
-    temp_a0 = g_SpadWork->word_08.byte.unk_0B;
-    g_SpadWork->unk_2E.half -= 0x24;
+    temp_a0 = g_Task->word_08.byte.unk_0B;
+    g_Task->unk_2E.half -= 0x24;
     if (temp_a0 != 0) {
         func_801EEF5C();
     } else {
         func_801EED94();
     }
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= 4;

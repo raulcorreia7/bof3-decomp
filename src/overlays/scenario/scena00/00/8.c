@@ -60,7 +60,7 @@ static Scene00Tables D_801FC980_Tables = {
 };
 
 MATCH void func_801F6DC0(void) {
-    D_801FC980[g_SpadWork->unk_01]();
+    D_801FC980[g_Task->mode]();
 }
 
 MATCH void func_801F6E04(void) {
@@ -90,7 +90,7 @@ MATCH void func_801F6E48(void) {
     u16          x2;
     u16          y;
 
-    work      = (u8*)g_SpadWork;
+    work      = (u8*)g_Task;
     prim      = g_GfxPrimCursor;
     work_cell = (SceneEffect*)work;
     adopted   = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
@@ -99,7 +99,7 @@ MATCH void func_801F6E48(void) {
     work_cell->pos_y         = adopted->y.fixed;
     work_cell->z.fixed_point = adopted->z.fixed;
     g_GfxPrimCursor          = prim + 8;
-    g_SpadWork               = (u8*)adopted;
+    g_Task                   = (u8*)adopted;
     ((RECT*)prim)->x         = 0;
     ((RECT*)prim)->y         = 240;
     ((RECT*)prim)->w         = 16;
@@ -122,7 +122,7 @@ MATCH void func_801F6E48(void) {
     x           = poly->x0;
     poly->y1    = 0;
     poly->y0    = 0;
-    g_SpadWork  = work;
+    g_Task      = work;
     x2          = poly->x0;
     poly->x1    = x + 8;
     poly->x3    = x + 8;
@@ -172,7 +172,7 @@ MATCH void func_801F7134(s32 chapter_id) {
 
     tpage = getTPage(1, 2, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(g_SpadWork->unk_29, 0xC);
+    GFX_AddPrim(g_Task->unk_29, 0xC);
 
     prim = (SPRT*)g_GfxPrimCursor;
     SetSprt(prim);
@@ -183,10 +183,10 @@ MATCH void func_801F7134(s32 chapter_id) {
     prim->w    = 256;
     prim->h    = 1768;
     prim->clut = 0x7A80;
-    setRGB0(prim, g_SpadWork->tint.bytes.unk_5D, g_SpadWork->tint.bytes.unk_5E, g_SpadWork->tint.bytes.unk_5F);
+    setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, chapter_id & BYTE_MASK);
-    GFX_AddPrim(g_SpadWork->unk_29, 0x14);
+    GFX_AddPrim(g_Task->unk_29, 0x14);
 }
 
 MATCH void func_801F7264(void) {
@@ -194,15 +194,15 @@ MATCH void func_801F7264(void) {
     u8* second;
     u8* third;
 
-    first       = (u8*)g_SpadWork;
+    first       = (u8*)g_Task;
     first[0x5F] = 0;
     first[0x5E] = 0;
     first[0x5D] = 0;
 
-    second    = (u8*)g_SpadWork;
+    second    = (u8*)g_Task;
     second[9] = 0xF0;
 
-    third    = (u8*)g_SpadWork;
+    third    = (u8*)g_Task;
     third[1] = 1;
 }
 
@@ -211,15 +211,15 @@ MATCH void func_801F72A0(void) {
 
     func_801F7134(1);
 
-    g_SpadWork->tint.bytes.unk_5D += 2;
-    g_SpadWork->tint.bytes.unk_5E += 2;
-    g_SpadWork->tint.bytes.unk_5F += 2;
+    g_Task->tint.bytes.unk_5D += 2;
+    g_Task->tint.bytes.unk_5E += 2;
+    g_Task->tint.bytes.unk_5F += 2;
 
     work = SCN_EFFECT;
     if (work->color_r == 0x80) {
         g_ScriptVarsReq.byte = 0x14;
         work->step           = 2;
-        g_SpadWork->unk_09   = 0xFF;
+        g_Task->unk_09       = 0xFF;
     }
 }
 
@@ -229,11 +229,11 @@ MATCH void func_801F7350(void) {
 
     func_801F7134(1);
 
-    work  = (u8*)g_SpadWork;
+    work  = (u8*)g_Task;
     timer = work[9];
     if (timer == 0) {
         work[1]++;
-        work = (u8*)g_SpadWork;
+        work = (u8*)g_Task;
     }
     work[9] = timer ? timer - 1 : 0xFF;
 }
@@ -600,7 +600,7 @@ MATCH void func_801F8140(void) {
 }
 
 MATCH void func_801F82B4(void) {
-    if (g_SpadWork->unk_09 != 0) {
+    if (g_Task->unk_09 != 0) {
         func_801F8360();
 
         if (SCN_EFFECT->counter_0C < 0x80) {
@@ -613,7 +613,7 @@ MATCH void func_801F82B4(void) {
             SCN_EFFECT->counter_10 = 0xB6;
         }
 
-        g_SpadWork->unk_09--;
+        g_Task->unk_09--;
     } else {
         Actor_Clear();
     }
@@ -681,8 +681,8 @@ MATCH void func_801F8360(void) {
         } else {
             RotTransPers3(&v3, &v4, &v5, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         }
-        shade = -(g_SpadWork->unk_09 << 1);
-        setRGB0(prim, g_SpadWork->tint.bytes.unk_5D, g_SpadWork->tint.bytes.unk_5E, g_SpadWork->tint.bytes.unk_5F);
+        shade = -(g_Task->unk_09 << 1);
+        setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
         prim->r1 = shade;
         prim->g1 = shade;
         prim->b1 = shade;
@@ -690,7 +690,7 @@ MATCH void func_801F8360(void) {
         prim->g2 = shade;
         prim->b2 = shade;
         PSX_SET_SEMI_TRANSPARENT(prim);
-        GFX_AddPrim(g_SpadWork->unk_29, sizeof(POLY_G3));
+        GFX_AddPrim(g_Task->unk_29, sizeof(POLY_G3));
         PopMatrix();
         i = i + 1;
         SCN_EFFECT->angle_z += 170;
@@ -729,7 +729,7 @@ MATCH void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     s32           v2x;
     s32           v2y;
 
-    saved         = *(SceneRotation*)&g_SpadWork->unk_64;
+    saved         = *(SceneRotation*)&g_Task->unk_64;
     work          = SCN_EFFECT;
     work->angle_x = angle_x;
     work->angle_y = angle_y;
@@ -763,10 +763,10 @@ MATCH void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     prim->g2 = SCN_TRI_SHADE_V2;
     prim->b2 = SCN_TRI_SHADE_V2;
     PSX_SET_SEMI_TRANSPARENT(prim);
-    GFX_AddPrim(g_SpadWork->unk_29, sizeof(POLY_G3));
+    GFX_AddPrim(g_Task->unk_29, sizeof(POLY_G3));
     PopMatrix();
 
-    *(SceneRotation*)&g_SpadWork->unk_64 = saved;
+    *(SceneRotation*)&g_Task->unk_64 = saved;
 }
 
 MATCH void func_801F8748(void) {
@@ -938,7 +938,7 @@ MATCH void func_801F8D90(void) {
     long         depth;
     long         flag;
 
-    work      = (u8*)g_SpadWork;
+    work      = (u8*)g_Task;
     prim      = g_GfxPrimCursor;
     work_cell = (SceneEffect*)work;
     first     = (Actor*)(D_80147A58 + work_cell->counter_0C * 0x98);
@@ -947,7 +947,7 @@ MATCH void func_801F8D90(void) {
     work_cell->pos_y         = first->y.fixed;
     work_cell->z.fixed_point = first->z.fixed;
     g_GfxPrimCursor          = prim + 8;
-    g_SpadWork               = (u8*)first;
+    g_Task                   = (u8*)first;
     ((RECT*)prim)->x         = 0;
     ((RECT*)prim)->y         = 240;
     ((RECT*)prim)->w         = 16;
@@ -970,8 +970,8 @@ MATCH void func_801F8D90(void) {
     poly->x0 = poly->x0 - 8;
     poly->y1 = poly->y0;
 
-    second     = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
-    g_SpadWork = (u8*)second;
+    second = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
+    g_Task = (u8*)second;
     func_801AC1DC(origin, work[0x1C]);
 
     projection.vx = ((origin[0] + SPAD_ROW->x.fixed) >> 9) - 0x4000;
@@ -980,10 +980,10 @@ MATCH void func_801F8D90(void) {
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x2, &depth, &flag);
 
-    poly->x3   = poly->x2 + 8;
-    poly->x2   = poly->x2 - 8;
-    poly->y3   = poly->y2;
-    g_SpadWork = work;
+    poly->x3 = poly->x2 + 8;
+    poly->x2 = poly->x2 - 8;
+    poly->y3 = poly->y2;
+    g_Task   = work;
 
     poly->clut  = GetClut(176, 483);
     poly->tpage = GetTPage(0, 0, 704, 256);
@@ -1070,7 +1070,7 @@ MATCH void func_801F92DC(void) {
             *D_1F800000 = slot;
             slot_index  = slot & BYTE_MASK;
             if (slot_index != GAME_NONE) {
-                g_ActorSlots[slot_index].flags_00      = 1;
+                g_ActorSlots[slot_index].flags         = 1;
                 g_ActorSlots[*D_1F800000].type         = 0x10;
                 g_ActorSlots[*D_1F800000].counter_18   = 2;
                 g_ActorSlots[*D_1F800000].counter_1C   = 2;
@@ -1156,7 +1156,7 @@ MATCH void func_801F9644(void) {
             slot        = id & BYTE_MASK;
             *D_1F800000 = id;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].flags_00          = 1;
+                g_ActorSlots[slot].flags             = 1;
                 g_ActorSlots[D_1F800000[0]].type     = 0x13;
                 g_ActorSlots[D_1F800000[0]].pos.x    = *timer - 170;
                 g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
@@ -1205,7 +1205,7 @@ MATCH void func_801F9868(void) {
                     slot        = slot_byte & BYTE_MASK;
                     *D_1F800000 = slot_byte;
                     if (slot != GAME_NONE) {
-                        g_ActorSlots[slot].flags_00          = 1;
+                        g_ActorSlots[slot].flags             = 1;
                         g_ActorSlots[D_1F800000[0]].type     = 0x13;
                         g_ActorSlots[D_1F800000[0]].pos.x    = g_AreaCameraAngle.vx;
                         g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
@@ -1348,7 +1348,7 @@ MATCH void func_801F9BE4(void) {
             }
             D_1F800000[0] = Actor_FindFreeSlot();
             if ((D_1F800000[0] & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[D_1F800000[0]].flags_00 = 1;
+                g_ActorSlots[D_1F800000[0]].flags    = 1;
                 g_ActorSlots[D_1F800000[0]].type     = 0x13;
                 g_ActorSlots[D_1F800000[0]].pos.x    = g_AreaCameraAngle.vx + 384;
                 g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
@@ -1384,7 +1384,7 @@ MATCH void func_801F9FB8(void) {
                 id            = Actor_FindFreeSlot();
                 D_1F800000[0] = id;
                 if ((id & BYTE_MASK) != GAME_NONE) {
-                    g_ActorSlots[id].flags_00            = 1;
+                    g_ActorSlots[id].flags               = 1;
                     g_ActorSlots[D_1F800000[0]].type     = 0x13;
                     g_ActorSlots[D_1F800000[0]].pos.x    = g_AreaCameraAngle.vx + 448;
                     g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
@@ -1485,7 +1485,7 @@ MATCH void func_801FA27C(void) {
             id            = Actor_FindFreeSlot();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].flags_00            = 1;
+                g_ActorSlots[id].flags               = 1;
                 g_ActorSlots[D_1F800000[0]].type     = 0x13;
                 g_ActorSlots[D_1F800000[0]].pos.x    = -842;
                 g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
@@ -1502,7 +1502,7 @@ MATCH void func_801FA27C(void) {
             id            = Actor_FindFreeSlot();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].flags_00            = 1;
+                g_ActorSlots[id].flags               = 1;
                 g_ActorSlots[D_1F800000[0]].type     = 0x13;
                 g_ActorSlots[D_1F800000[0]].pos.x    = -684;
                 g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
@@ -1675,15 +1675,15 @@ MATCH void func_801FA7D8(void) {
             id            = Actor_FindFreeSlot();
             D_1F800000[0] = id;
             if (id != 0xFFu) {
-                g_ActorSlots[(u32)D_1F800000[0]].flags_00 = 1;
-                g_ActorSlots[(u32)D_1F800000[0]].type     = 0x1Eu;
-                g_ActorSlots[(u32)D_1F800000[0]].x.fixed  = D_80145EC4;
-                g_ActorSlots[(u32)D_1F800000[0]].y.fixed  = D_80145EC8;
-                distance                                  = Area_SampleHeight(g_ActorSlots[(u32)D_1F800000[0]].x.fixed,
-                                                                              g_ActorSlots[(u32)D_1F800000[0]].y.fixed)
-                                                            << 16;
-                g_ActorSlots[(u32)D_1F800000[0]].z.fixed  = distance;
-                g_ActorSlots[(u32)D_1F800000[0]].unk_29   = 0;
+                g_ActorSlots[(u32)D_1F800000[0]].flags   = 1;
+                g_ActorSlots[(u32)D_1F800000[0]].type    = 0x1Eu;
+                g_ActorSlots[(u32)D_1F800000[0]].x.fixed = D_80145EC4;
+                g_ActorSlots[(u32)D_1F800000[0]].y.fixed = D_80145EC8;
+                distance                                 = Area_SampleHeight(g_ActorSlots[(u32)D_1F800000[0]].x.fixed,
+                                                                             g_ActorSlots[(u32)D_1F800000[0]].y.fixed)
+                                                           << 16;
+                g_ActorSlots[(u32)D_1F800000[0]].z.fixed = distance;
+                g_ActorSlots[(u32)D_1F800000[0]].unk_29  = 0;
             }
             *counter             = 0x84u;
             g_SceneState.step_05 = 7u;
@@ -1959,7 +1959,7 @@ MATCH void func_801FB204(void) {
                     slot          = Actor_FindFreeSlot();
                     D_1F800000[0] = slot;
                     if ((slot & BYTE_MASK) != GAME_NONE) {
-                        g_ActorSlots[slot].flags_00               = 1;
+                        g_ActorSlots[slot].flags                  = 1;
                         g_ActorSlots[(u32)D_1F800000[0]].type     = 0x13;
                         g_ActorSlots[(u32)D_1F800000[0]].pos.x    = -682;
                         g_ActorSlots[(u32)D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;

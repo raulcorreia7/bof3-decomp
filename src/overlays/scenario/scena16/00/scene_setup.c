@@ -149,7 +149,7 @@ MATCH void func_801F6F30(void) {
         D_1F800000[0] = object_index;
 
         if (object_index != 0xFFu) {
-            g_ActorSlots[object_index].flags_00  = 1u;
+            g_ActorSlots[object_index].flags     = 1u;
             g_ActorSlots[D_1F800000[0]].type     = 0x13u;
             g_ActorSlots[D_1F800000[0]].pos.x    = (s32)((s16)*base - 170);
             g_ActorSlots[D_1F800000[0]].pos.y    = (s32)g_AreaCameraAngle.vy;
@@ -348,7 +348,7 @@ MATCH void func_801F7230(void) {
             D_1F800000[0] = object_index;
 
             if (object_index != 0xFFu) {
-                g_ActorSlots[object_index].flags_00  = 1u;
+                g_ActorSlots[object_index].flags     = 1u;
                 g_ActorSlots[D_1F800000[0]].type     = 0x13u;
                 g_ActorSlots[D_1F800000[0]].pos.x    = (s32)(g_AreaCameraAngle.vx + 384);
                 g_ActorSlots[D_1F800000[0]].pos.y    = (s32)g_AreaCameraAngle.vy;
@@ -419,7 +419,7 @@ MATCH void func_801F7790(void) {
             D_1F800000[0]   = object_index;
 
             if (object_index != 0xFFu) {
-                g_ActorSlots[object_index].flags_00  = 1u;
+                g_ActorSlots[object_index].flags     = 1u;
                 g_ActorSlots[D_1F800000[0]].type     = 0x13u;
                 g_ActorSlots[D_1F800000[0]].pos.x    = (s32)(g_AreaCameraAngle.vx + 448);
                 g_ActorSlots[D_1F800000[0]].pos.y    = (s32)g_AreaCameraAngle.vy;
@@ -606,7 +606,7 @@ MATCH void func_801F7CC4(void) {
             object_index  = Actor_FindFreeSlot();
             D_1F800000[0] = object_index;
             if (object_index != 0xFFu) {
-                g_ActorSlots[object_index].flags_00  = 1u;
+                g_ActorSlots[object_index].flags     = 1u;
                 g_ActorSlots[D_1F800000[0]].type     = 0x13u;
                 g_ActorSlots[D_1F800000[0]].pos.x    = -842;
                 g_ActorSlots[D_1F800000[0]].pos.y    = (s32)g_AreaCameraAngle.vy;
@@ -624,7 +624,7 @@ MATCH void func_801F7CC4(void) {
             object_index  = Actor_FindFreeSlot();
             D_1F800000[0] = object_index;
             if (object_index != 0xFFu) {
-                g_ActorSlots[object_index].flags_00  = 1u;
+                g_ActorSlots[object_index].flags     = 1u;
                 g_ActorSlots[D_1F800000[0]].type     = 0x13u;
                 g_ActorSlots[D_1F800000[0]].pos.x    = -684;
                 g_ActorSlots[D_1F800000[0]].pos.y    = (s32)g_AreaCameraAngle.vy;

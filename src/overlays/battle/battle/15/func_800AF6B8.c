@@ -10,7 +10,7 @@ MATCH u32 func_800AF6B8(u32 axis_34_bound, u32 axis_38_bound, s32 packed_span, u
     u32          second;
 
     result     = 0;
-    work       = (BattleRange*)g_SpadWork;
+    work       = (BattleRange*)g_Task;
     span       = (work->unk3E + (extent >> 9)) - (packed_span >> 16);
     half_value = extent >> 1;
     first      = work->range_axis_34 + half_value - axis_34_bound;

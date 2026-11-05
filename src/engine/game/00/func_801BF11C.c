@@ -38,7 +38,7 @@ NON_MATCHING u8 func_801BF11C(void) {
         do {
             tmp6        = val3 + (u8*)g_BattlePartyBattlers;
             g_GameState = tmp6;
-            g_SpadWork  = tmp6;
+            g_Task      = tmp6;
             tmp9        = FIELD(u8, tmp6, 0xBu);
             if (tmp9 == 0) {
                 val0 = 0;
@@ -53,17 +53,17 @@ NON_MATCHING u8 func_801BF11C(void) {
                         }
                     }
                     g_GameState->flags_12C.u8_value = (u8)(g_GameState->flags_12C.u8_value & 0xFE);
-                    g_SpadWork->unk_29              = (u8)g_AreaDrawMode;
+                    g_Task->unk_29                  = (u8)g_AreaDrawMode;
                     tmp4                            = (val0 & BYTE_MASK) * 8;
-                    tmp5                            = g_SpadWork;
+                    tmp5                            = g_Task;
                     FIELD(s32, tmp5, 0x34u)         = (s32) * (D_80143F2C + tmp4);
                     tmp2                            = *(D_80143F30 + tmp4);
                     FIELD(s32, tmp5, 0x38u)         = tmp2;
                     tmp0                            = Area_ReadHeight(FIELD(s32, tmp5, 0x34u), tmp2);
-                    tmp7                            = g_SpadWork;
+                    tmp7                            = g_Task;
                     FIELD(s8, tmp7, 0x48u)          = 0;
                     FIELD(s16, tmp7, 0x3Eu)         = tmp0;
-                    FIELD(s8, g_SpadWork, 0xBu)     = 1;
+                    FIELD(s8, g_Task, 0xBu)         = 1;
                 }
             } else if (tmp9 == 1) {
                 val1 = 0;
@@ -71,19 +71,19 @@ NON_MATCHING u8 func_801BF11C(void) {
                     val8 = 0 * 2;
                     do {
                         val1 += 1;
-                        tmp3                                = g_SpadWork->unk_05 << 6;
+                        tmp3                                = g_Task->unk_05 << 6;
                         *(u16*)(val8 + (tmp3 + 0x80039600)) = FIELD(u16, (tmp3 + 0x80035600 + val8), 0xC0u);
                         val8                                = val1 * 2;
                     } while (val1 < 0x20);
-                    tmp8                                 = g_SpadWork;
-                    g_GfxPalettePending                  = 1;
-                    *(u8*)(tmp8)                         = (u8)(*(u8*)(tmp8) & 0xDF);
-                    FIELD(s8, g_SpadWork, 0xBu)          = 0;
-                    g_SpadWork->tint.signed_bytes.unk_5D = 0;
-                    g_SpadWork->tint.signed_bytes.unk_5E = 0;
-                    g_SpadWork->tint.signed_bytes.unk_5F = 0;
-                    g_SpadWork->tint.signed_bytes.flags  = 0;
-                    FIELD(s8, g_SpadWork, 0xBu)          = 2;
+                    tmp8                             = g_Task;
+                    g_GfxPalettePending              = 1;
+                    *(u8*)(tmp8)                     = (u8)(*(u8*)(tmp8) & 0xDF);
+                    FIELD(s8, g_Task, 0xBu)          = 0;
+                    g_Task->tint.signed_bytes.unk_5D = 0;
+                    g_Task->tint.signed_bytes.unk_5E = 0;
+                    g_Task->tint.signed_bytes.unk_5F = 0;
+                    g_Task->tint.signed_bytes.flags  = 0;
+                    FIELD(s8, g_Task, 0xBu)          = 2;
                 }
             }
             val3 += BATTLE_PARTY_STRIDE;

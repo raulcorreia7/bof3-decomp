@@ -9,7 +9,7 @@ MATCH void func_801F32A0(void) {
 
     Actor_CenterOnScreen();
     if (g_GameEntryState != 1) {
-        scratch = g_SpadWork;
+        scratch = g_Task;
         step    = scratch->unk_0B;
         if (step == scratch->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
@@ -19,9 +19,9 @@ MATCH void func_801F32A0(void) {
                 goto tail; /* skips the arming stores: run the step only */
             }
         }
-        g_SpadWork->unk_48 = 2;
-        g_SpadWork->unk_09 = 8;
-        g_SpadWork->unk_01 = 4;
+        g_Task->unk_48 = 2;
+        g_Task->unk_09 = 8;
+        g_Task->mode   = 4;
     }
 tail:
     Area_AddActor();

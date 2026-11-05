@@ -27,8 +27,8 @@
 /* The same step with the two switch cases written in the given order: a member whose
  * retail switch tests the 0x41 facing first passes the 0x41 case first. */
 #define CHAR_RUN_STEP_CASES(FIRST_FACING, FIRST_SCRIPT, SECOND_FACING, SECOND_SCRIPT) \
-    if (g_SpadWork->direction_08 == g_SpadWork->unk_03) {                             \
-        switch (g_SpadWork->direction_08) {                                           \
+    if (g_Task->direction_08 == g_Task->unk_03) {                                     \
+        switch (g_Task->direction_08) {                                               \
             case FIRST_FACING:                                                        \
                 Actor_RequestScript(FIRST_SCRIPT);                                    \
                 break;                                                                \
@@ -36,14 +36,14 @@
                 Actor_RequestScript(SECOND_SCRIPT);                                   \
                 break;                                                                \
         }                                                                             \
-        g_SpadWork->state_02++;                                                       \
+        g_Task->step++;                                                               \
     } else {                                                                          \
-        g_SpadWork->unk_09--;                                                         \
-        if (g_SpadWork->unk_09 == 0) {                                                \
-            g_SpadWork->unk_09       = 2;                                             \
-            g_SpadWork->direction_08 = g_SpadWork->direction_08 + g_SpadWork->unk_0B; \
-            g_SpadWork->direction_08 &= 7;                                            \
-            Actor_RequestScript(g_SpadWork->direction_08);                            \
+        g_Task->unk_09--;                                                             \
+        if (g_Task->unk_09 == 0) {                                                    \
+            g_Task->unk_09       = 2;                                                 \
+            g_Task->direction_08 = g_Task->direction_08 + g_Task->unk_0B;             \
+            g_Task->direction_08 &= 7;                                                \
+            Actor_RequestScript(g_Task->direction_08);                                \
         }                                                                             \
     }
 
@@ -53,16 +53,16 @@
  * advances the task state at +0x02. The body of every Char_StartTurn member;
  * each passes the two facing values it turns between. Every change here must
  * verify every member image. */
-#define CHAR_START_TURN(FACING_BACK, FACING_AWAY)                                                    \
-    if (abs(g_SpadWork->direction_08 - FACING_BACK) > abs(g_SpadWork->direction_08 - FACING_AWAY)) { \
-        g_SpadWork->unk_0B = Actor_GetTurnStep(FACING_AWAY);                                         \
-        g_SpadWork->unk_03 = FACING_AWAY;                                                            \
-    } else {                                                                                         \
-        g_SpadWork->unk_0B = Actor_GetTurnStep(FACING_BACK);                                         \
-        g_SpadWork->unk_03 = FACING_BACK;                                                            \
-    }                                                                                                \
-    g_SpadWork->unk_09 = 2;                                                                          \
-    g_SpadWork->state_02++
+#define CHAR_START_TURN(FACING_BACK, FACING_AWAY)                                            \
+    if (abs(g_Task->direction_08 - FACING_BACK) > abs(g_Task->direction_08 - FACING_AWAY)) { \
+        g_Task->unk_0B = Actor_GetTurnStep(FACING_AWAY);                                     \
+        g_Task->unk_03 = FACING_AWAY;                                                        \
+    } else {                                                                                 \
+        g_Task->unk_0B = Actor_GetTurnStep(FACING_BACK);                                     \
+        g_Task->unk_03 = FACING_BACK;                                                        \
+    }                                                                                        \
+    g_Task->unk_09 = 2;                                                                      \
+    g_Task->step++
 
 #define CHAR_LAUNCH_SCRIPT_PC 10
 

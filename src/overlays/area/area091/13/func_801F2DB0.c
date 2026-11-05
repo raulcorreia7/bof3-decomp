@@ -12,5 +12,5 @@ MATCH void func_801F2DB0(void) {
         return;
     }
     Game_SetScriptActive();
-    g_SpadWork->unk_04 += 1;
+    g_Task->unk_04 += 1;
 }

@@ -18,7 +18,7 @@ MATCH s32 func_801BB1B8(void) {
             func_801BB8E8(4, 6, 5);
             return 0;
         }
-        g_SpadWork->direction_08 = (g_SpadWork->direction_08 + 1) & 7;
+        g_Task->direction_08 = (g_Task->direction_08 + 1) & 7;
     }
     return 0;
 }

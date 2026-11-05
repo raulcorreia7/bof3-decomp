@@ -14,9 +14,9 @@ MATCH void func_801E1A14(void) {
     *battle_flags |= 0x800;
     g_GameState->mode_119 = 0;
     if ((D_801CA71C[g_BattleActionId].mask & 0x800u) != 0u) {
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     } else {
         func_801DEE4C();
-        g_SpadWork->unk_02 = 4;
+        g_Task->step = 4;
     }
 }

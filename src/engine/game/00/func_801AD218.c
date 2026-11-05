@@ -4,7 +4,7 @@ MATCH void func_801AD218(void) {
     Actor*          work;
     volatile Actor* area;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (ACTOR_IN_USE(g_ActorSlots[work->unk_0B])) {
         return;
     }
@@ -14,6 +14,6 @@ MATCH void func_801AD218(void) {
     area = GAME_WORK_AREA_PTR;
     area->flags_74 &= ~ACTOR_FLAG_INTERACTION_PENDING;
     g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
-    area         = g_SpadWork;
+    area         = g_Task;
     area->unk_04 = 0;
 }

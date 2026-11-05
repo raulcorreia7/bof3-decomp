@@ -5,12 +5,12 @@ MATCH void func_801B690C(void) {
     Actor* work;
     u16    value;
 
-    if ((Area_GetCellCode(g_SpadWork->x.part.integer, g_SpadWork->y.part.integer) & BYTE_MASK) != 0xA0) {
+    if ((Area_GetCellCode(g_Task->x.part.integer, g_Task->y.part.integer) & BYTE_MASK) != 0xA0) {
         return;
     }
 
     entry = func_8019A1D4();
-    work  = g_SpadWork;
+    work  = g_Task;
     for (;;) {
         if (work->x.part.integer != entry[0]) {
             entry += 4;

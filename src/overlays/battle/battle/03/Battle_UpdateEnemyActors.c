@@ -6,7 +6,7 @@ MATCH void Battle_UpdateEnemyActors(void) {
     u8                     i;
 
     for (i = 0; i < 8u; i++) {
-        if (D_801EB630[i].unk_00 != 0u) {
+        if (D_801EB630[i].flags != 0u) {
             enemy                                 = &D_801EB630[i];
             SP_REF(volatile PartyBattler*, 0x44u) = (PartyBattler*)enemy;
             BATTLE_CURRENT_ENEMY_PTR              = enemy;

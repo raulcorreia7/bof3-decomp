@@ -83,12 +83,12 @@ NON_MATCHING void func_801DC93C(void) {
                     D_80144281 = target_cmd;
                 }
             }
-            frame = g_SpadWork->unk_03 + 1;
+            frame = g_Task->unk_03 + 1;
         block_28:
-            FIELD(s8, g_SpadWork, 0x3u) = frame;
+            FIELD(s8, g_Task, 0x3u) = frame;
         }
     }
-    frame_now = g_SpadWork->unk_03;
+    frame_now = g_Task->unk_03;
     if (frame_now == 2) {
         row_mod = D_80144286 & 3;
         switch (row_mod) { /* irregular */

@@ -4,5 +4,5 @@
 #define WORK_PTR (*SP_PTR(Actor*, 0x44u))
 
 MATCH void func_8019E780(void) {
-    D_801C81B0[WORK_PTR->state_02]();
+    D_801C81B0[WORK_PTR->step]();
 }

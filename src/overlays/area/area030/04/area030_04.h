@@ -9,7 +9,7 @@
 #include "work/area_spad.h"
 #include <stdio.h>
 
-#define FISHING_STATE        ((FishingState*)g_SpadWork)
+#define FISHING_STATE        ((FishingState*)g_Task)
 #define FISHING_ROW          ((Actor*)g_CurrentActor)
 #define FISHING_ENTRY(index) (&((FishingSceneCue*)D_801E2AC8)[(index)])
 
@@ -118,9 +118,9 @@ typedef struct FishingAnimationStep {
 
 ASSERT_SIZE(FishingAnimationStep, 0x4);
 
-/* Scratchpad work area behind g_SpadWork; widths follow the retail accesses. */
+/* Scratchpad work area behind g_Task; widths follow the retail accesses. */
 typedef struct FishingState {
-    u8                            flags_00;
+    u8                            flags;
     u8                            handler_index_01;
     u8                            mode_index_02;
     u8                            sub_index_03;

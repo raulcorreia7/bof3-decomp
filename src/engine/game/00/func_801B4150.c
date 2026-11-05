@@ -7,39 +7,38 @@ MATCH s32 func_801B4150(void) {
     s32 first;
     u8  dir;
 
-    dir = g_SpadWork->direction_08;
+    dir = g_Task->direction_08;
     if (!(dir & 1)) {
-        first = func_801B43D0(g_SpadWork->x.fixed + g_FacingSteps[(u8)(dir - 1) & 7].x,
-                              g_SpadWork->y.fixed + g_FacingSteps[(u8)(dir - 1) & 7].y, (dir - 1) & 7);
+        first = func_801B43D0(g_Task->x.fixed + g_FacingSteps[(u8)(dir - 1) & 7].x,
+                              g_Task->y.fixed + g_FacingSteps[(u8)(dir - 1) & 7].y, (dir - 1) & 7);
         first = (s8)first;
         if (first != -1) {
-            g_SpadWork->direction_08 = (g_SpadWork->direction_08 - 1) & 7;
+            g_Task->direction_08 = (g_Task->direction_08 - 1) & 7;
             return first;
         }
-        slot = func_801B43D0(g_SpadWork->x.fixed + g_FacingSteps[(u8)(g_SpadWork->direction_08 + 1) & 7].x,
-                             g_SpadWork->y.fixed + g_FacingSteps[(u8)(g_SpadWork->direction_08 + 1) & 7].y,
-                             (g_SpadWork->direction_08 + 1) & 7);
+        slot = func_801B43D0(g_Task->x.fixed + g_FacingSteps[(u8)(g_Task->direction_08 + 1) & 7].x,
+                             g_Task->y.fixed + g_FacingSteps[(u8)(g_Task->direction_08 + 1) & 7].y,
+                             (g_Task->direction_08 + 1) & 7);
         slot = (s8)slot;
         if (slot != first) {
-            g_SpadWork->direction_08 = (g_SpadWork->direction_08 + 1) & 7;
+            g_Task->direction_08 = (g_Task->direction_08 + 1) & 7;
             return slot;
         }
-        dir = g_SpadWork->direction_08;
-        return (s8)func_801B43D0(g_SpadWork->x.fixed + g_FacingSteps[dir].x, g_SpadWork->y.fixed + g_FacingSteps[dir].y,
-                                 dir);
+        dir = g_Task->direction_08;
+        return (s8)func_801B43D0(g_Task->x.fixed + g_FacingSteps[dir].x, g_Task->y.fixed + g_FacingSteps[dir].y, dir);
     } else {
-        s32 step = g_SpadWork->state_70.byte + 2;
-        x        = g_SpadWork->x.fixed + g_FacingSteps[dir].x * step;
-        y        = g_SpadWork->y.fixed + g_FacingSteps[dir].y * step;
+        s32 step = g_Task->state_70.byte + 2;
+        x        = g_Task->x.fixed + g_FacingSteps[dir].x * step;
+        y        = g_Task->y.fixed + g_FacingSteps[dir].y * step;
         if ((Area_GetCellCode((s16)(x >> 16), (s16)(y >> 16)) & BYTE_MASK) != 0x30) {
-            dir = g_SpadWork->direction_08;
-            x   = g_SpadWork->x.fixed + g_FacingSteps[dir].x;
-            y   = g_SpadWork->y.fixed + g_FacingSteps[dir].y;
-        } else if (g_SpadWork->state_70.byte == 0) {
-            dir = g_SpadWork->direction_08;
+            dir = g_Task->direction_08;
+            x   = g_Task->x.fixed + g_FacingSteps[dir].x;
+            y   = g_Task->y.fixed + g_FacingSteps[dir].y;
+        } else if (g_Task->state_70.byte == 0) {
+            dir = g_Task->direction_08;
             x += g_FacingSteps[dir].x;
             y += g_FacingSteps[dir].y;
         }
     }
-    return (s8)func_801B43D0(x, y, g_SpadWork->direction_08);
+    return (s8)func_801B43D0(x, y, g_Task->direction_08);
 }

@@ -3,7 +3,7 @@
 MATCH void func_801F2ECC(void) {
     u8* work;
 
-    work = (u8*)g_SpadWork;
+    work = (u8*)g_Task;
     func_801F332C(work + 0xC, work + 0x18);
-    g_SpadWork->unk_01 += 1;
+    g_Task->mode += 1;
 }

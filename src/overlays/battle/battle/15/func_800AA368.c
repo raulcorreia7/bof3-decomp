@@ -24,7 +24,7 @@ NON_MATCHING s32 func_800AA368(void) {
     BattleAction* action;
 
     action = g_BattleAction;
-    mask   = (D_801CA71C[action->unk_02].mask >> 9) & 1;
+    mask   = (D_801CA71C[action->step].mask >> 9) & 1;
     active = g_BattleTargetSelector;
     if (active & 0xC0) {
         count = 0;

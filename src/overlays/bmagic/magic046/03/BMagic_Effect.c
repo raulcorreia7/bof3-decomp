@@ -11,14 +11,14 @@ INCLUDE_ASM(func_801EED28);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEF70(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EEFB4(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC00.steps;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
 }
 
 MATCH void func_801EF014(void) {
@@ -26,16 +26,16 @@ MATCH void func_801EF014(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_SpadWork->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
-    work                               = g_SpadWork;
-    actor                              = D_801EB4E0;
-    work->coord_x_34.raw               = actor->coord_x_34.raw;
-    work->coord_y_38.raw               = actor->coord_y_38.raw;
-    z                                  = actor->word_3C.word;
-    work->word_08.byte.unk_0B          = 0;
-    work->word_3C.word                 = z;
-    g_SpadWork->word_08.byte.unk_09    = 0;
-    g_SpadWork->unk_02 += 1;
+    g_Task->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
+    work                           = g_Task;
+    actor                          = D_801EB4E0;
+    work->coord_x_34.raw           = actor->coord_x_34.raw;
+    work->coord_y_38.raw           = actor->coord_y_38.raw;
+    z                              = actor->word_3C.word;
+    work->word_08.byte.unk_0B      = 0;
+    work->word_3C.word             = z;
+    g_Task->word_08.byte.unk_09    = 0;
+    g_Task->step += 1;
 }
 
 INCLUDE_ASM(func_801EF090);
@@ -45,12 +45,12 @@ INCLUDE_ASM(func_801EF090);
 #include "../../Effect_DispatchHandlerSlot2.h"
 
 MATCH void func_801EF250(void) {
-    g_SpadWork                              = D_801EB4E0;
+    g_Task                                  = D_801EB4E0;
     BATTLE_ACTIVE_WORK->word_08.byte.unk_0B = 0;
-    g_SpadWork->word_08.byte.unk_09         = 0;
+    g_Task->word_08.byte.unk_09             = 0;
     Actor_SelectScript(2U);
-    g_SpadWork->step_01 = 1;
-    g_SpadWork->unk_02  = 1;
+    g_Task->mode = 1;
+    g_Task->step = 1;
 }
 
 #include "overlays/bmagic/Effect_AddActorStepOnPlaying.h"
@@ -63,8 +63,8 @@ MATCH void func_801EF324(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
+    if (g_Task->flags != 0) {
         func_801EFB90();
         func_801EFC48();
         PopMatrix();
@@ -78,18 +78,18 @@ MATCH void func_801EF540(void) {
     s32 temp_v0;
     u8  temp_v0_2;
 
-    temp_v0            = (g_SpadWork->word_08.byte.unk_09 + g_SpadWork->word_08.byte.unk_0B) & 0x3F;
-    SP_REF(s16, 2)     = (s16)(temp_v0 << 6);
-    temp_a0            = g_SpadWork->unk_14 + ((s32)(rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
-    g_SpadWork->unk_0C = temp_a0;
-    g_SpadWork->coord_x_34.raw += (s32)(rsin(temp_a0) * 0x7000) >> 0xC;
-    g_SpadWork->coord_y_38.raw += (s32)(rcos(g_SpadWork->unk_0C) * 0x7000) >> 0xC;
-    func_800AF764(g_SpadWork);
+    temp_v0        = (g_Task->word_08.byte.unk_09 + g_Task->word_08.byte.unk_0B) & 0x3F;
+    SP_REF(s16, 2) = (s16)(temp_v0 << 6);
+    temp_a0        = g_Task->unk_14 + ((s32)(rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
+    g_Task->unk_0C = temp_a0;
+    g_Task->coord_x_34.raw += (s32)(rsin(temp_a0) * 0x7000) >> 0xC;
+    g_Task->coord_y_38.raw += (s32)(rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
+    func_800AF764(g_Task);
     func_801EF7E8();
-    temp_v0_2                       = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0_2;
+    temp_v0_2                   = g_Task->word_08.byte.unk_09 + 1;
+    g_Task->word_08.byte.unk_09 = temp_v0_2;
     if ((temp_v0_2 & 0xFF) == 0x10) {
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
@@ -98,24 +98,24 @@ MATCH void func_801EF660(void) {
     s32 temp_v0;
     u8  temp_v0_2;
 
-    temp_v0            = (g_SpadWork->word_08.byte.unk_09 + g_SpadWork->word_08.byte.unk_0B) & 0x3F;
-    SP_REF(s16, 2)     = (s16)(temp_v0 << 6);
-    temp_a0            = g_SpadWork->unk_14 + ((s32)(rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
-    g_SpadWork->unk_0C = temp_a0;
-    g_SpadWork->coord_x_34.raw += (s32)(rsin(temp_a0) * 0x7000) >> 0xC;
-    g_SpadWork->coord_y_38.raw += (s32)(rcos(g_SpadWork->unk_0C) * 0x7000) >> 0xC;
-    func_800AF764(g_SpadWork);
+    temp_v0        = (g_Task->word_08.byte.unk_09 + g_Task->word_08.byte.unk_0B) & 0x3F;
+    SP_REF(s16, 2) = (s16)(temp_v0 << 6);
+    temp_a0        = g_Task->unk_14 + ((s32)(rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
+    g_Task->unk_0C = temp_a0;
+    g_Task->coord_x_34.raw += (s32)(rsin(temp_a0) * 0x7000) >> 0xC;
+    g_Task->coord_y_38.raw += (s32)(rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
+    func_800AF764(g_Task);
     func_801EF7E8();
-    g_SpadWork->word_08.byte.unk_09 += 1;
-    temp_v0_2                         = g_SpadWork->word_08.byte.timer_0A - 1;
-    g_SpadWork->word_08.byte.timer_0A = temp_v0_2;
+    g_Task->word_08.byte.unk_09 += 1;
+    temp_v0_2                     = g_Task->word_08.byte.timer_0A - 1;
+    g_Task->word_08.byte.timer_0A = temp_v0_2;
     if (!(temp_v0_2 & 0xFF)) {
         D_801EB4E0->word_08.byte.unk_0B -= 1;
-        g_SpadWork->flags_00 = 0;
-        g_SpadWork->step_01  = 0;
-        g_SpadWork->unk_02   = 0;
-        g_SpadWork->unk_03   = 0;
-        g_SpadWork->unk_04   = 0;
+        g_Task->flags  = 0;
+        g_Task->mode   = 0;
+        g_Task->step   = 0;
+        g_Task->unk_03 = 0;
+        g_Task->unk_04 = 0;
     }
 }
 

@@ -11,15 +11,15 @@ MATCH void Actor_GrowAndSetStep3(void) {
 
     Actor_CenterOnScreen();
 
-    scratch         = g_SpadWork;
+    scratch         = g_Task;
     timer           = scratch->unk_09;
     scratch->unk_09 = timer - 1;
-    scratch2        = g_SpadWork;
+    scratch2        = g_Task;
     scratch->unk_40 += 0x2000;
 
     if (scratch2->unk_09 == 0) {
-        scratch2->unk_48   = 0;
-        g_SpadWork->unk_01 = 3;
+        scratch2->unk_48 = 0;
+        g_Task->mode     = 3;
     }
 
     Area_AddActor();

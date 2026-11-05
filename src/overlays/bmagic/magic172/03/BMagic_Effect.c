@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC04(void) {
     Callback handlers[2] = {func_801EEC5C, func_801EEDD8};
 
-    SYS_DISPATCH_TASK(handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EEC5C);
@@ -15,7 +15,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEE38(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 INCLUDE_ASM(func_801EEE7C);
@@ -29,28 +29,28 @@ MATCH void func_801EF3A4(void) {
     u8 counter;
     u8 timer;
 
-    g_SpadWork->word_08.byte.unk_0B += 2;
-    timer = g_SpadWork->word_08.byte.timer_0A;
+    g_Task->word_08.byte.unk_0B += 2;
+    timer = g_Task->word_08.byte.timer_0A;
     if (timer < 0x10U) {
-        g_SpadWork->word_08.byte.timer_0A = timer + 2;
+        g_Task->word_08.byte.timer_0A = timer + 2;
     }
-    counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = counter;
+    counter                     = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = counter;
     if (!(counter & 0xFF)) {
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801EF430(void) {
     u8 temp_v0;
 
-    g_SpadWork->word_08.byte.unk_0B += 4;
-    temp_v0                           = g_SpadWork->word_08.byte.timer_0A - 2;
-    g_SpadWork->word_08.byte.timer_0A = temp_v0;
+    g_Task->word_08.byte.unk_0B += 4;
+    temp_v0                       = g_Task->word_08.byte.timer_0A - 2;
+    g_Task->word_08.byte.timer_0A = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         SND_QueueSelectionFx(0x102);
-        g_SpadWork->word_08.byte.unk_09 = 0x10;
-        g_SpadWork->unk_02 += 1;
+        g_Task->word_08.byte.unk_09 = 0x10;
+        g_Task->step += 1;
     }
 }
 
@@ -59,8 +59,8 @@ extern Callback D_801F0B90[];
 void            func_801F0908(void);
 
 MATCH void func_801EF518(void) {
-    D_801F0B90[g_SpadWork->unk_02]();
-    if (g_SpadWork->flags_00 & g_SpadWork->unk_02) {
+    D_801F0B90[g_Task->step]();
+    if (g_Task->flags & g_Task->step) {
         func_800AF764();
         func_801F0908();
     }

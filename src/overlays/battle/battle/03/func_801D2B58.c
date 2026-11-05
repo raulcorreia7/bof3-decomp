@@ -85,7 +85,7 @@ NON_MATCHING void func_801D2B58(void) {
                 offset        = kind * BATTLE_PARTY_STRIDE;
                 row->state_08 = (void*)(fa8_118 + offset);
                 row->work_0C  = (void*)(fa8 + offset);
-                row->unk_02 =
+                row->step =
                     (s16)(actor->unk_2E + (s8)g_BattlePanelOffsets[(actor->unk_08 * 2) + (D_80145F09[kind][0] * 8)]);
                 row->unk_04 = (s16)(actor->unk_30 +
                                     (s8)(g_BattlePanelOffsets + 1)[(actor->unk_08 * 2) + (D_80145F09[kind][0] * 8)]);
@@ -96,7 +96,7 @@ NON_MATCHING void func_801D2B58(void) {
                 state_offset  = kind * 0x118;
                 row->work_0C  = (void*)(eb3dc + state_offset);
                 row->state_08 = (void*)(eb3dc - 0xF4 + state_offset);
-                row->unk_02   = (s16)(actor->unk_2E + (s8)D_801EB712[(kind - 3) * 0x118]);
+                row->step     = (s16)(actor->unk_2E + (s8)D_801EB712[(kind - 3) * 0x118]);
                 row->unk_04   = (s16)(actor->unk_30 + (s8)D_801EB713[(kind - 3) * 0x118]);
                 depth         = actor->unk_32;
                 state         = eb3dc_2f4 + (kind - 3) * 0x118;
@@ -116,7 +116,7 @@ NON_MATCHING void func_801D2B58(void) {
                 offset        = cursor[0] * BATTLE_PARTY_STRIDE;
                 row->state_08 = (void*)(fa8_118 + offset);
                 row->work_0C  = (void*)(fa8 + offset);
-                row->unk_02   = (s16)(actor->unk_2E +
+                row->step     = (s16)(actor->unk_2E +
                                       (s8)g_BattlePanelOffsets[(actor->unk_08 * 2) + (D_80145F09[cursor[0]][0] * 8)]);
                 value         = (g_BattlePanelOffsets + 1)[(actor->unk_08 * 2) + (D_80145F09[cursor[0]][0] * 8)];
             } else {
@@ -124,7 +124,7 @@ NON_MATCHING void func_801D2B58(void) {
                 row->state_08 = (void*)(g_BattleEnemies + state_offset);
                 row->work_0C  = (void*)(D_801EB3DC + state_offset);
                 state_offset  = (cursor[0] - 3) * 0x118;
-                row->unk_02   = (s16)(actor->unk_2E + (s8)D_801EB712[state_offset]);
+                row->step     = (s16)(actor->unk_2E + (s8)D_801EB712[state_offset]);
                 value         = D_801EB713[state_offset];
             }
             row->unk_04 = (s16)(actor->unk_30 + (s8)value);

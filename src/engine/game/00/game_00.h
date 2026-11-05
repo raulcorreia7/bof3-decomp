@@ -82,27 +82,26 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 
 /* Run the scenario dispatch entry. A bare statement macro: the member declares
  * `saved` and `result`, runs its fallback when `result` is 0 and restores
- * g_SpadWork. Kept: `entry` is a member name of the scene table record, so it
+ * g_Task. Kept: `entry` is a member name of the scene table record, so it
  * cannot be an argument without an indirect call; the do/while form moves
  * bytes. */
 #define GAME_RUN_SCENARIO_ENTRY(entry)                                                 \
-    saved  = g_SpadWork;                                                               \
+    saved  = g_Task;                                                                   \
     result = g_SceneScenes[(s32)g_SceneState.scenario_id]->entry(handler_x, handler_y)
 
 /* Run the gated cell test and arm the work record on a hit. Kept: it returns
  * from the member and takes the flag value after a branch; tested as an inline,
  * the bytes move. */
-#define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                             \
-    if ((g_GameFlags & 0x400) == 0) {                                                                      \
-        if ((func_801C39D8(g_SpadWork->x.fixed, g_SpadWork->y.fixed, g_SpadWork->state_70.byte, code, 0) & \
-             BYTE_MASK) != 0) {                                                                            \
-            g_SpadWork->unk_01   = 2;                                                                      \
-            g_SpadWork->state_02 = flags;                                                                  \
-            g_SpadWork->unk_03   = 0;                                                                      \
-            g_SpadWork->unk_04   = 0;                                                                      \
-            return 1;                                                                                      \
-        }                                                                                                  \
-    }                                                                                                      \
+#define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                                    \
+    if ((g_GameFlags & 0x400) == 0) {                                                                             \
+        if ((func_801C39D8(g_Task->x.fixed, g_Task->y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != 0) { \
+            g_Task->mode   = 2;                                                                                   \
+            g_Task->step   = flags;                                                                               \
+            g_Task->unk_03 = 0;                                                                                   \
+            g_Task->unk_04 = 0;                                                                                   \
+            return 1;                                                                                             \
+        }                                                                                                         \
+    }                                                                                                             \
     return 0;
 
 /* Test the map cells around a 16.16 point for the wanted code. Kept: the two
@@ -126,7 +125,7 @@ typedef enum TileRunFlags {
     TILE_RUN_VERTICAL = 1 << 7,
 } TileRunFlags;
 
-/* `GameCursorState.flags_00` bit 7 marks a cursor still moving between cells. */
+/* `GameCursorState.flags` bit 7 marks a cursor still moving between cells. */
 typedef enum GameCursorFlags {
     GAME_CURSOR_FLAG_MOVING = 1 << 7,
 } GameCursorFlags;
@@ -240,7 +239,7 @@ typedef struct GameSeed {
 } GameSeed;
 
 typedef struct GameCursorState {
-    u8  flags_00; /* GameCursorFlags */
+    u8  flags; /* GameCursorFlags */
     u8  pad_01[2];
     u8  unk_03;
     u8  unk_04;
@@ -1579,9 +1578,9 @@ static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 fla
     flags = flag_bits & 0x2;
     if (flags != 0) {
         if (actor->unk_7B != 0u) {
-            work      = (u8*)g_SpadWork;
+            work      = (u8*)g_Task;
             work[9]   = (u8)(0x20 / (s32)(value_b & BYTE_MASK));
-            work      = (u8*)g_SpadWork;
+            work      = (u8*)g_Task;
             work[0xA] = (u8)(work[9] >> 1);
         }
     }
@@ -1593,7 +1592,7 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
     u32 choice;
 
     choice = (u32)(RANDOM_MASK(0xF));
-    if ((g_SpadWork->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
+    if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
         func_8015BAC4((u8)((D_80145E98 ^ 4) & 7));
     }
     g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
@@ -1605,7 +1604,7 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
             case 2:
             case 3:
                 func_801ADAC0(1);
-                g_SpadWork->unk_04 = 3;
+                g_Task->unk_04 = 3;
                 break;
             case 4:
             case 5:
@@ -1613,17 +1612,17 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
                 func_801ADAC0(1);
                 Party_AddZenny(2, 0);
                 func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
-                g_SpadWork->unk_04 = 1;
+                g_Task->unk_04 = 1;
                 break;
             case 7:
                 func_801ADAC0(1);
                 Party_AddZenny(5, 0);
                 func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
-                g_SpadWork->unk_04 = 2;
+                g_Task->unk_04 = 2;
                 break;
             default:
                 func_801ADAC0(slot_index);
-                g_SpadWork->unk_04 = 3;
+                g_Task->unk_04 = 3;
                 break;
         }
     } else {
@@ -1632,7 +1631,7 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
         } else {
             func_801ADAC0(slot_index);
         }
-        g_SpadWork->unk_04 = 3;
+        g_Task->unk_04 = 3;
     }
 }
 

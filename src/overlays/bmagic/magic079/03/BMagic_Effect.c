@@ -15,29 +15,29 @@ MATCH void func_801EEC5C(void) {
     u32           slot;
     PartyBattler* work;
 
-    g_SpadWork->word_08.byte.unk_0B = 0;
+    g_Task->word_08.byte.unk_0B = 0;
     for (i = 0; i < 4; i++) {
         slot                               = Battle_AllocEffect(1, 0x2B) & BYTE_MASK;
-        work                               = g_SpadWork;
-        g_BattleEffects[slot].unk_01       = i;
-        g_BattleEffects[slot].unk_02       = 0;
+        work                               = g_Task;
+        g_BattleEffects[slot].mode         = i;
+        g_BattleEffects[slot].step         = 0;
         g_BattleEffects[slot].unk_09       = 0x10;
         g_BattleEffects[slot].target.party = work;
-        g_SpadWork->word_08.byte.unk_0B    = g_SpadWork->word_08.byte.unk_0B + 1;
+        g_Task->word_08.byte.unk_0B        = g_Task->word_08.byte.unk_0B + 1;
     }
     SND_QueueSelectionFx(0x100);
-    g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+    g_Task->mode = g_Task->mode + 1;
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EED98(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EEDDC(void) {
-    SYS_DISPATCH_BYTE(D_801F02B4, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F02B4, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801EF458();
         PopMatrix();
@@ -52,15 +52,15 @@ MATCH void func_801EEF34(void) {
     u8 temp_a0;
     u8 temp_v1;
 
-    temp_a0 = g_SpadWork->word_08.byte.unk_09;
+    temp_a0 = g_Task->word_08.byte.unk_09;
     if ((temp_a0 & 0xFF) != 0x20) {
-        g_SpadWork->word_08.byte.unk_09 = temp_a0 + 1;
+        g_Task->word_08.byte.unk_09 = temp_a0 + 1;
     }
-    temp_v1                           = g_SpadWork->word_08.byte.timer_0A - 1;
-    g_SpadWork->word_08.byte.timer_0A = temp_v1;
+    temp_v1                       = g_Task->word_08.byte.timer_0A - 1;
+    g_Task->word_08.byte.timer_0A = temp_v1;
     if ((temp_v1 & 0xFF) == 0x30) {
-        g_SpadWork->word_08.byte.unk_09 = 0;
-        g_SpadWork->unk_02 += 1;
+        g_Task->word_08.byte.unk_09 = 0;
+        g_Task->step += 1;
     }
 }
 
@@ -68,24 +68,24 @@ MATCH void func_801EEFB8(void) {
     u8 temp_a0;
     u8 temp_v1;
 
-    temp_a0 = g_SpadWork->word_08.byte.unk_09;
+    temp_a0 = g_Task->word_08.byte.unk_09;
     if ((temp_a0 & 0xFF) != 0x20) {
-        g_SpadWork->word_08.byte.unk_09 = temp_a0 + 1;
+        g_Task->word_08.byte.unk_09 = temp_a0 + 1;
     }
-    temp_v1                           = g_SpadWork->word_08.byte.timer_0A - 1;
-    g_SpadWork->word_08.byte.timer_0A = temp_v1;
+    temp_v1                       = g_Task->word_08.byte.timer_0A - 1;
+    g_Task->word_08.byte.timer_0A = temp_v1;
     if ((temp_v1 & 0xFF) == 0x10) {
         D_801EB4E0->word_08.byte.unk_0B -= 1;
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801EF048(void) {
     PartyBattler* work;
 
-    work                        = g_SpadWork;
+    work                        = g_Task;
     work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
-    work                        = g_SpadWork;
+    work                        = g_Task;
     work->word_08.byte.unk_0B   = work->word_08.byte.unk_0B - 1;
     if (work->word_08.byte.unk_0B == 0) {
         func_801E5988();
@@ -93,8 +93,8 @@ MATCH void func_801EF048(void) {
 }
 
 MATCH void func_801EF0A8(void) {
-    SYS_DISPATCH_BYTE(D_801F02C8, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F02C8, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801EF458();
         PopMatrix();
@@ -107,13 +107,13 @@ MATCH void func_801EF1DC(void) {
     PartyBattler* work;
     u8            timer;
 
-    work                       = g_SpadWork;
+    work                       = g_Task;
     timer                      = work->word_08.byte.unk_09 - 1;
     work->word_3C.half.span_3E = work->word_3C.half.span_3E - 0x40;
     work->word_08.byte.unk_09  = timer;
     if (timer == 0) {
-        g_SpadWork->word_08.byte.unk_09 = 0x20;
-        g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
+        g_Task->word_08.byte.unk_09 = 0x20;
+        g_Task->step                = g_Task->step + 1;
     }
 }
 
@@ -121,15 +121,15 @@ MATCH void func_801EF23C(void) {
     u8 temp_v0;
     u8 temp_v1;
 
-    temp_v0 = g_SpadWork->word_08.byte.unk_09;
+    temp_v0 = g_Task->word_08.byte.unk_09;
     if (temp_v0 != 0) {
-        g_SpadWork->word_08.byte.unk_09 = temp_v0 - 1;
+        g_Task->word_08.byte.unk_09 = temp_v0 - 1;
     }
-    temp_v1                           = g_SpadWork->word_08.byte.timer_0A + 1;
-    g_SpadWork->word_08.byte.timer_0A = temp_v1;
+    temp_v1                       = g_Task->word_08.byte.timer_0A + 1;
+    g_Task->word_08.byte.timer_0A = temp_v1;
     if ((temp_v1 & 0xFF) == 0x80) {
-        g_SpadWork->word_08.byte.unk_09 = 0x20;
-        g_SpadWork->unk_02 += 1;
+        g_Task->word_08.byte.unk_09 = 0x20;
+        g_Task->step += 1;
     }
 }
 
@@ -137,24 +137,24 @@ MATCH void func_801EF2BC(void) {
     u8 temp_v0;
     u8 temp_v1;
 
-    temp_v0 = g_SpadWork->word_08.byte.unk_09;
+    temp_v0 = g_Task->word_08.byte.unk_09;
     if (temp_v0 != 0) {
-        g_SpadWork->word_08.byte.unk_09 = temp_v0 - 1;
+        g_Task->word_08.byte.unk_09 = temp_v0 - 1;
     }
-    temp_v1                           = g_SpadWork->word_08.byte.timer_0A + 1;
-    g_SpadWork->word_08.byte.timer_0A = temp_v1;
+    temp_v1                       = g_Task->word_08.byte.timer_0A + 1;
+    g_Task->word_08.byte.timer_0A = temp_v1;
     if ((temp_v1 & 0xFF) == 0xA0) {
         D_801EB4E0->word_08.byte.unk_0B -= 1;
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801EF348(void) {
     PartyBattler* work;
 
-    work                        = g_SpadWork;
+    work                        = g_Task;
     work->word_08.byte.timer_0A = work->word_08.byte.timer_0A + 1;
-    work                        = g_SpadWork;
+    work                        = g_Task;
     work->word_08.byte.unk_0B   = work->word_08.byte.unk_0B - 1;
     if (work->word_08.byte.unk_0B == 0) {
         func_801E5988();
@@ -166,8 +166,8 @@ MATCH void func_801EF348(void) {
 INCLUDE_ASM(func_801EF458);
 
 MATCH void func_801EFBEC(void) {
-    SYS_DISPATCH_BYTE(D_801F035C, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F035C, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801F002C();
         PopMatrix();
@@ -177,21 +177,21 @@ MATCH void func_801EFBEC(void) {
 MATCH void func_801EFC74(void) {
     PartyBattler* src;
 
-    src                               = g_BattleSelectedActor;
-    g_SpadWork->coord_x_34            = src->coord_x_34;
-    g_SpadWork->coord_y_38            = src->coord_y_38;
-    g_SpadWork->word_3C               = src->word_3C;
-    g_SpadWork->word_08.byte.unk_09   = 4;
-    g_SpadWork->word_08.byte.timer_0A = 0xB0;
-    g_SpadWork->unk_02                = g_SpadWork->unk_02 + 1;
+    src                           = g_BattleSelectedActor;
+    g_Task->coord_x_34            = src->coord_x_34;
+    g_Task->coord_y_38            = src->coord_y_38;
+    g_Task->word_3C               = src->word_3C;
+    g_Task->word_08.byte.unk_09   = 4;
+    g_Task->word_08.byte.timer_0A = 0xB0;
+    g_Task->step                  = g_Task->step + 1;
 }
 
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
 
 MATCH void func_801EFD2C(void) {
-    g_SpadWork->word_08.byte.timer_0A -= 1;
-    if (D_801EB4E0->word_08.byte.unk_0B == g_SpadWork->step_01) {
-        g_SpadWork->unk_02 += 1;
+    g_Task->word_08.byte.timer_0A -= 1;
+    if (D_801EB4E0->word_08.byte.unk_0B == g_Task->mode) {
+        g_Task->step += 1;
     }
 }
 
@@ -199,9 +199,9 @@ MATCH void func_801EFD84(void) {
     PartyBattler* work;
     PartyBattler* active;
 
-    work                        = g_SpadWork;
+    work                        = g_Task;
     work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
-    work                        = g_SpadWork;
+    work                        = g_Task;
     work->word_08.byte.unk_09   = work->word_08.byte.unk_09 - 1;
     if (work->word_08.byte.unk_09 == 4) {
         active                      = BATTLE_ACTIVE_WORK;
@@ -211,8 +211,8 @@ MATCH void func_801EFD84(void) {
 }
 
 MATCH void func_801EFE00(void) {
-    SYS_DISPATCH_BYTE(D_801F036C, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F036C, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801F002C();
         PopMatrix();
@@ -223,15 +223,15 @@ MATCH void func_801EFE88(void) {
     PartyBattler* src;
     u8            timer;
 
-    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = timer;
     if (!(timer & 0xFF)) {
-        src                             = D_8014637C;
-        g_SpadWork->coord_x_34          = src->coord_x_34;
-        g_SpadWork->coord_y_38          = src->coord_y_38;
-        g_SpadWork->word_3C             = src->word_3C;
-        g_SpadWork->word_08.byte.unk_09 = 4;
-        g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
+        src                         = D_8014637C;
+        g_Task->coord_x_34          = src->coord_x_34;
+        g_Task->coord_y_38          = src->coord_y_38;
+        g_Task->word_3C             = src->word_3C;
+        g_Task->word_08.byte.unk_09 = 4;
+        g_Task->step                = g_Task->step + 1;
     }
 }
 
@@ -242,9 +242,9 @@ MATCH void Effect_CountUpAndStep_801EFF08(void) {
 }
 
 MATCH void func_801EFF58(void) {
-    g_SpadWork->word_08.byte.timer_0A += 1;
-    if (D_801EB4E0->word_08.byte.unk_0B == g_SpadWork->step_01) {
-        g_SpadWork->unk_02 += 1;
+    g_Task->word_08.byte.timer_0A += 1;
+    if (D_801EB4E0->word_08.byte.unk_0B == g_Task->mode) {
+        g_Task->step += 1;
     }
 }
 
@@ -252,9 +252,9 @@ MATCH void func_801EFFB0(void) {
     PartyBattler* work;
     PartyBattler* active;
 
-    work                        = g_SpadWork;
+    work                        = g_Task;
     work->word_08.byte.timer_0A = work->word_08.byte.timer_0A + 1;
-    work                        = g_SpadWork;
+    work                        = g_Task;
     work->word_08.byte.unk_09   = work->word_08.byte.unk_09 - 1;
     if (work->word_08.byte.unk_09 == 4) {
         active                      = BATTLE_ACTIVE_WORK;

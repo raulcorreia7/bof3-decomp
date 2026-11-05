@@ -50,6 +50,7 @@ game words, the purpose rather than the instructions. Before you keep a name, te
 | `Scene_SetPartyRyuAdultNinaAdultRei`                              | `Scene_SetPartyRyuNinaRei`                                        | the member list is the fact; ages only when two versions exist in one scene |
 | `Boss_EndBattleClearSlot0Flag`                                    | `Boss_Defeat`                                                     | a storage detail is not a meaning                                           |
 | `g_ShopItemCountMax`                                              | `g_ShopBuyLimit`                                                  | the rule the player meets                                                   |
+| `unk_01`, `state_02`, `step_01` (task header)                     | `mode`, `step`, with `flags` at 0x00                              | the era names for the first three bytes of every task record                |
 | `menu_state_byte_5`, `tmp2`, `val`                                | `cursor`, `page`, `count`, `price`                                | short game words for locals and members                                     |
 | `Struct_801E3C40`, `Record3`                                      | `ShopStock`, `MasterSkill`, `EncounterTable`                      | a type is a game noun                                                       |
 

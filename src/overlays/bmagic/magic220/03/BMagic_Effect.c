@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EED18);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEF78(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 INCLUDE_ASM(func_801EEFBC);
@@ -25,13 +25,13 @@ MATCH void func_801EF1F4(void) {
     u8 temp_v0;
 
     func_8014DAEC();
-    g_SpadWork->word_08.byte.unk_0B += 0xC;
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    g_Task->word_08.byte.unk_0B += 0xC;
+    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_SpadWork->word_08.byte.unk_09   = 0x1E;
-        g_SpadWork->word_08.byte.timer_0A = 3;
-        g_SpadWork->unk_02 += 1;
+        g_Task->word_08.byte.unk_09   = 0x1E;
+        g_Task->word_08.byte.timer_0A = 3;
+        g_Task->step += 1;
     }
 }
 
@@ -50,9 +50,9 @@ INCLUDE_ASM(func_801EF6B8);
 MATCH void func_801EF8CC(void) {
     s8 temp_v0;
 
-    temp_v0 = (s8)g_SpadWork->unk_5D;
+    temp_v0 = (s8)g_Task->unk_5D;
     if (temp_v0 != 0) {
-        g_SpadWork->unk_5D = temp_v0 - 2;
+        g_Task->unk_5D = temp_v0 - 2;
     }
     if (func_8014DAEC() & 0xFF) {
         D_801EB4E0->word_08.byte.unk_0B -= 1;
@@ -67,12 +67,12 @@ INCLUDE_ASM(func_801EF9F0);
 INCLUDE_ASM(func_801EFC40);
 
 MATCH void func_801EFF60(void) {
-    SYS_DISPATCH_TASK(D_801F0700, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801F0700, 1, g_Task);
 }
 
 MATCH void func_801EFFA4(void) {
-    SYS_DISPATCH_BYTE(D_801F0704, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F0704, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801F0334();
         PopMatrix();

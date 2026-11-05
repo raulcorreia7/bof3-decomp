@@ -7,9 +7,9 @@ MATCH void func_801A0CFC(Actor* entity) {
     u8  mode;
     u8  param;
 
-    saved = g_SpadWork->direction_08;
-    D_801C83BC[g_SpadWork->state_02](entity, 0, 1);
-    if (g_SpadWork->unk_09 != 0) {
+    saved = g_Task->direction_08;
+    D_801C83BC[g_Task->step](entity, 0, 1);
+    if (g_Task->unk_09 != 0) {
         func_801A253C(entity);
         return;
     }
@@ -19,35 +19,35 @@ MATCH void func_801A0CFC(Actor* entity) {
         if (mode == 0) {
             return;
         }
-        if (D_801C83BC[g_SpadWork->state_02](entity, param, 2) != 0) {
+        if (D_801C83BC[g_Task->step](entity, param, 2) != 0) {
             value = ((s32 (*)(Actor*))func_801A2C94)(entity);
-            if (g_SpadWork->unk_09 != 0) {
+            if (g_Task->unk_09 != 0) {
                 entity->unk_7B = (u8)((RANDOM_MASK(3)) + 3);
             }
         } else {
             value = 0xFF;
         }
     } else {
-        D_801C83BC[g_SpadWork->state_02](entity, param, 2);
+        D_801C83BC[g_Task->step](entity, param, 2);
         value = ((s32 (*)(Actor*, s32))func_801A2ED4)(entity, 1);
         entity->unk_7B -= 1;
     }
-    if (((value & BYTE_MASK) != GAME_NONE) && (g_SpadWork->unk_09 != 0)) {
-        g_SpadWork->unk_03       = g_SpadWork->unk_01;
-        g_SpadWork->unk_01       = 0x0A;
-        entity->unk_79           = (u8)(value & 7);
-        g_SpadWork->direction_08 = (u8)(saved & 7);
-        work                     = (u8*)g_SpadWork;
-        work[0x0A]               = 0;
-        work[9]                  = 0;
+    if (((value & BYTE_MASK) != GAME_NONE) && (g_Task->unk_09 != 0)) {
+        g_Task->unk_03       = g_Task->mode;
+        g_Task->mode         = 0x0A;
+        entity->unk_79       = (u8)(value & 7);
+        g_Task->direction_08 = (u8)(saved & 7);
+        work                 = (u8*)g_Task;
+        work[0x0A]           = 0;
+        work[9]              = 0;
         func_801A3B7C(entity);
-        if (g_SpadWork->unk_01 == 0x0A) {
+        if (g_Task->mode == 0x0A) {
             return;
         }
-        g_SpadWork->direction_08 = saved;
+        g_Task->direction_08 = saved;
     } else {
-        g_SpadWork->unk_09       = 0;
-        g_SpadWork->direction_08 = saved;
+        g_Task->unk_09       = 0;
+        g_Task->direction_08 = saved;
     }
     func_801A2AE4(entity, saved);
     func_801A253C(entity);

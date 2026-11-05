@@ -3,10 +3,10 @@
 MATCH s32 func_801B5910(void) {
     if (!(g_GameFlags & 0x2000)) {
         if (!(g_GameRequestFlags & 0x69) && (g_InputPressed & PADstart)) {
-            func_801B5BDC(g_SpadWork->direction_08);
-            g_GameStateIndex     = GAME_REQUEST_SCENE_CAMERA;
-            g_SpadWork->unk_01   = 0xE;
-            g_SpadWork->state_02 = 0;
+            func_801B5BDC(g_Task->direction_08);
+            g_GameStateIndex = GAME_REQUEST_SCENE_CAMERA;
+            g_Task->mode     = 0xE;
+            g_Task->step     = 0;
             return 1;
         }
         return 0;

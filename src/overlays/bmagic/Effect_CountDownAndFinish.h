@@ -3,7 +3,7 @@
 MATCH void Effect_CountDownAndFinish(void) {
     PartyBattler* work;
 
-    work                        = g_SpadWork;
+    work                        = g_Task;
     work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
     if (work->word_08.byte.timer_0A == 0) {
         work                      = BATTLE_ACTIVE_WORK;

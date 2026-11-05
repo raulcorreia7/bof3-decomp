@@ -113,7 +113,7 @@ block_20:
     if (val1 & 1) {
         val3 = 0;
         if (tmp0 != 0) {
-            flags = g_SpadWork->direction_08;
+            flags = g_Task->direction_08;
             val8  = buffer;
             for (;;) {
                 if (!(flags & 1) && (*val8 == 0xA2)) {
@@ -148,7 +148,7 @@ block_20:
         tmp4 = buffer[0] & BYTE_MASK;
         if ((tmp4 == 0xA2) && (buffer[1] == tmp4)) {
             val15 = 0xA2;
-            if (!(g_SpadWork->direction_08 & 1)) {
+            if (!(g_Task->direction_08 & 1)) {
             block_42:
                 return 0x10U;
             }

@@ -5,6 +5,6 @@ MATCH void func_801F533C(void) {
 
     work                 = SP_REF(Actor*, 0x44);
     work->z.part.integer = 0x320;
-    work->state_02 += 1;
+    work->step += 1;
     func_801F54B8();
 }

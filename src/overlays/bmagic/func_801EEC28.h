@@ -6,5 +6,5 @@ MATCH void func_801EEC28(void) {
     BattleHandlerTable5 handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
 }

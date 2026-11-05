@@ -7,7 +7,7 @@ MATCH void Effect_TickOnTimerNegative(void) {
     PartyBattler* work;
     s8            timer;
 
-    work                      = g_SpadWork;
+    work                      = g_Task;
     timer                     = work->word_08.byte.unk_09 - 2;
     work->word_08.byte.unk_09 = timer;
     if (timer < 0) {

@@ -8,30 +8,30 @@ MATCH void Area_BuildClut(u16* dst) {
     s32 base;
     u32 sel;
 
-    base = ((g_SpadWork->flags_24 & 4) != 0) ? 0x1F0 : 0x1E0;
-    switch (g_SpadWork->unk_28) {
+    base = ((g_Task->flags_24 & 4) != 0) ? 0x1F0 : 0x1E0;
+    switch (g_Task->unk_28) {
         case 0:
-            sel  = g_SpadWork->unk_27;
+            sel  = g_Task->unk_27;
             *dst = (u16)(((base + (sel >> 4)) << 6) | (sel & 0xF));
             break;
         case 1: {
             u32 n;
 
-            n    = g_SpadWork->unk_27;
+            n    = g_Task->unk_27;
             *dst = (u16)((base + n) << 6);
             break;
         }
         case 2:
-            sel  = g_SpadWork->unk_27;
+            sel  = g_Task->unk_27;
             *dst = (u16)(((base + (sel >> 3)) << 6) | ((sel & 7) * 2));
             break;
         case 3:
-            sel  = g_SpadWork->unk_27;
+            sel  = g_Task->unk_27;
             *dst = (u16)(((base + (sel >> 2)) << 6) | ((sel & 3) * 4));
             break;
         case 4:
         default:
-            sel  = g_SpadWork->unk_27;
+            sel  = g_Task->unk_27;
             *dst = (u16)(((base + (sel >> 1)) << 6) | ((sel & 1) * 8));
             break;
     }

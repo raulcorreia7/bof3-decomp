@@ -11,17 +11,17 @@ MATCH void func_801D52D4(void) {
 
     mask = 0;
     if (D_80145E93[0] >= 3) {
-        mask = (1u << g_SpadWork->unk_06) & BYTE_MASK;
+        mask = (1u << g_Task->unk_06) & BYTE_MASK;
     }
     func_801D7C10(0x58, 0x28, mask);
 
-    g_SpadWork->direction_08 = 0;
-    work                     = FISHING_STATE;
-    work->step_index_0A      = 0;
-    stepped                  = FISHING_STATE;
-    work->bounce_3C.unk_3C   = 0;
-    work->step_14            = 0;
-    work->step_limit_20      = 0;
-    stepped->step_timer_09   = 4;
-    ((u8*)g_SpadWork)[0x01]  = (u8)(((u8*)g_SpadWork)[0x01] + 1);
+    g_Task->direction_08   = 0;
+    work                   = FISHING_STATE;
+    work->step_index_0A    = 0;
+    stepped                = FISHING_STATE;
+    work->bounce_3C.unk_3C = 0;
+    work->step_14          = 0;
+    work->step_limit_20    = 0;
+    stepped->step_timer_09 = 4;
+    ((u8*)g_Task)[0x01]    = (u8)(((u8*)g_Task)[0x01] + 1);
 }

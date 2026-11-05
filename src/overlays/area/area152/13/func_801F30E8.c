@@ -6,15 +6,15 @@ MATCH void func_801F30E8(void) {
 
     Actor_CenterOnScreen();
 
-    scratch = (u8*)g_SpadWork;
+    scratch = (u8*)g_Task;
     scratch[0x09] -= 1;
 
-    check = (u8*)g_SpadWork;
+    check = (u8*)g_Task;
     *(s32*)(scratch + 0x40) += 0x2000;
 
     if (check[0x09] == 0) {
-        check[0x48]             = 0;
-        ((u8*)g_SpadWork)[0x01] = 3;
+        check[0x48]         = 0;
+        ((u8*)g_Task)[0x01] = 3;
     }
 
     Area_AddActor();

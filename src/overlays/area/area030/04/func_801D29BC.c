@@ -18,7 +18,7 @@ MATCH void func_801D29BC(void) {
     FISHING_STATE->saved_value_28 = world[0x3FF0u];
     FISHING_STATE->state_29       = 5;
 
-    work                     = (volatile u8*)g_SpadWork;
+    work                     = (volatile u8*)g_Task;
     work[0x48u]              = 0;
     ((u32*)work)[0x3Cu / 4u] = 0;
     FISHING_STATE->unk_5C    = 0;

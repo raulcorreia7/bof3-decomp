@@ -2,8 +2,8 @@
 
 MATCH void func_801F368C(void) {
     if (SYS_TestFlag(D_80144EF8, 0xE)) {
-        g_SpadWork->unk_09 = 0;
-        g_SpadWork->state_02 += 1;
+        g_Task->unk_09 = 0;
+        g_Task->step += 1;
     }
     func_801F3768(0x80, 0);
 }

@@ -4,7 +4,7 @@ MATCH void func_8019C124(s32 step_byte) {
     Actor* work;
     s32    vel;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (work->x.part.fraction != 0) {
         vel = work->vx;
         if (vel > 0) {
@@ -35,5 +35,5 @@ MATCH void func_8019C124(s32 step_byte) {
         return;
     }
 set_state:
-    g_SpadWork->unk_01 = 3;
+    g_Task->mode = 3;
 }

@@ -4,9 +4,9 @@ MATCH void Area_Update(void) {
     Actor* scratch;
 
     if (D_801454F2 == 2) {
-        g_SpadWork->state_02 = 3;
+        g_Task->step = 3;
     }
 
-    scratch = g_SpadWork;
+    scratch = g_Task;
     AREA_UPDATE_STEP(0x10, scratch->unk_2E);
 }

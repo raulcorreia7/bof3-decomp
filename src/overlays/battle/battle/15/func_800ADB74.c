@@ -7,12 +7,12 @@ MATCH void func_800ADB74(void) {
     s32           slot;
 
     if ((g_MenuPanelTasks[18].unk_00[0] & 1) == 0) {
-        BATTLE_WORK->step_01 = 2;
-        BATTLE_WORK->unk_02  = 0;
+        BATTLE_WORK->mode = 2;
+        BATTLE_WORK->step = 0;
         return;
     }
     if ((s16)g_MenuPanelTasks[18].unk_1E != (s16)g_MenuPanelTasks[18].unk_12) {
-        BATTLE_WORK->step_01 = 0;
+        BATTLE_WORK->mode = 0;
         return;
     }
     work              = BATTLE_WORK;

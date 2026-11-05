@@ -9,7 +9,7 @@ MATCH void func_801E8558(void) {
     PartyBattler* stage;
     u32           step;
 
-    D_801EB4E0->flags_00 &= ~ACTOR_FLAG_HIDDEN;
+    D_801EB4E0->flags &= ~ACTOR_FLAG_HIDDEN;
     stage = D_801EB4E0;
     step  = stage->unk_40;
     if (step != 0x10000) {

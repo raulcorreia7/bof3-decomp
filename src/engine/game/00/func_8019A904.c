@@ -6,7 +6,7 @@ MATCH void func_8019A904(void) {
     s32    pos_y;
     s32    pos_z;
 
-    work                     = g_SpadWork;
+    work                     = g_Task;
     pos_x                    = g_AreaCameraAngle.vx;
     pos_y                    = g_AreaCameraAngle.vy;
     pos_z                    = g_AreaCameraAngle.vz;
@@ -18,5 +18,5 @@ MATCH void func_8019A904(void) {
     D_801481F8.z             = ((work->unk_6C - pos_z) << 0x10) / work->unk_09;
     g_AreaCameraRefreshCount = work->unk_09;
     g_SceneState.flags_01 |= 0x20;
-    work->unk_01 = 1;
+    work->mode = 1;
 }

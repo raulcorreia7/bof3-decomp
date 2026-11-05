@@ -10,8 +10,8 @@ MATCH void func_801E0124(void) {
 
     Area_FindSceneRecord(*(u16*)(D_801E2ACA + FISHING_STATE->cue_index_06 * 36));
 
-    record           = FISHING_STATE;
-    record->flags_00 = (u8)(record->flags_00 & ~ACTOR_FLAG_SEMI_TRANSPARENT);
+    record        = FISHING_STATE;
+    record->flags = (u8)(record->flags & ~ACTOR_FLAG_SEMI_TRANSPARENT);
 
     FISHING_STATE->state_2A = 0;
 

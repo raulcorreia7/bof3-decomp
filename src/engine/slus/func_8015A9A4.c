@@ -28,7 +28,7 @@ NON_MATCHING void func_8015A9A4(void) {
     void* temp_v1_177;
     void* temp_v1_96;
 
-    temp_a2_15 = g_SpadWork;
+    temp_a2_15 = g_Task;
     x_part     = FIELD(s16, temp_a2_15, 0x36u) - g_AreaTileOriginX;
     var_v0_28  = FIELD(s16, temp_a2_15, 0x3Au) - g_AreaTileOriginY;
     if (FIELD(u16, temp_a2_15, 0x34u) != 0) {
@@ -36,10 +36,10 @@ NON_MATCHING void func_8015A9A4(void) {
     }
     temp_v1_31 = x_part + var_v0_28;
     var_v0_38  = temp_v1_31 + 1;
-    if (g_SpadWork->y.part.fraction == 0) {
+    if (g_Task->y.part.fraction == 0) {
         var_v0_38 = temp_v1_31;
     }
-    temp_a1_42                    = g_SpadWork;
+    temp_a1_42                    = g_Task;
     FIELD(u16, temp_a2_15, 0x32u) = var_v0_38;
     temp_a0_51 = (FIELD(u16, temp_a1_42, 0x32u) + (s8)FIELD(u8, (*(void**)((u8*)(temp_a1_42) + 0x54)), 0x1u)) << 8;
     FIELD(u16, temp_a1_42, 0x32u) = temp_a0_51;
@@ -53,25 +53,25 @@ NON_MATCHING void func_8015A9A4(void) {
         var_v0_66 = (((u16)FIELD(u16, temp_a1_42, 0x3Eu) >> 5) & BYTE_MASK) ^ 0x80;
     }
     FIELD(u16, temp_a1_42, 0x32u) = (u16)(temp_a0_51 | var_v0_66);
-    if (!(FIELD(u8, (*(void**)((u8*)(g_SpadWork) + 0x54)), 0x3u) & 0x10)) {
+    if (!(FIELD(u8, (*(void**)((u8*)(g_Task) + 0x54)), 0x3u) & 0x10)) {
         Actor_ReadValue();
     }
-    temp_v1_96 = g_SpadWork;
+    temp_v1_96 = g_Task;
     sp10       = ((s32)FIELD(u16, temp_v1_96, 0x34u) >> 9) - 0x4000;
     sp12       = ((s32)FIELD(u16, temp_v1_96, 0x38u) >> 9) - 0x4000;
     sp14       = (s16)((s16) - (s16)FIELD(u16, temp_v1_96, 0x3Eu) / 2);
     gte_ldv0(&sp10);
     gte_rtps();
     gte_stsxy(sp18);
-    gte_stszotz(&g_SpadWork->unk_60);
-    temp_a1_132                    = g_SpadWork;
+    gte_stszotz(&g_Task->unk_60);
+    temp_a1_132                    = g_Task;
     FIELD(u16, temp_a1_132, 0x2Eu) = sp18[0];
     FIELD(u16, temp_a1_132, 0x30u) = sp18[1];
     temp_a0_142                    = ((u8)FIELD(u8, (*(void**)((u8*)(temp_a1_132) + 0x54)), 0x3u) >> 1) & 4;
     temp_a2_146                    = (s16)FIELD(u16, temp_a1_132, 0x2Eu);
     if ((((&D_80182174)[temp_a0_142] + 0x140) < temp_a2_146) || (temp_a2_146 < -(s32)(&D_80182175)[temp_a0_142]) ||
         (((&D_80182176)[temp_a0_142] + 0xF0) < sp18[1]) || (sp18[1] < -(s32)(&D_80182177)[temp_a0_142])) {
-        temp_v1_177         = g_SpadWork;
+        temp_v1_177         = g_Task;
         *(u8*)(temp_v1_177) = (u8)(*(u8*)(temp_v1_177) | 0x80);
         return;
     }
@@ -79,7 +79,7 @@ NON_MATCHING void func_8015A9A4(void) {
     temp_a0_192         = D_8014832D & BYTE_MASK;
     if (temp_a0_192 < 0x28U) {
         D_8014832D += 1;
-        D_8014828C[temp_a0_192] = (s32)g_SpadWork;
+        D_8014828C[temp_a0_192] = (s32)g_Task;
     }
 }
 #else

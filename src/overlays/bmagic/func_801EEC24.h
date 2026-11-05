@@ -6,5 +6,5 @@ MATCH void func_801EEC24(void) {
     BattleResultRings table;
 
     table = D_801EEC04;
-    SYS_DISPATCH_TASK(table.handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(table.handlers, 1, g_Task);
 }

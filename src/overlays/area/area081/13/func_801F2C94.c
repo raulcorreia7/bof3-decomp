@@ -7,10 +7,10 @@ MATCH void func_801F2C94(void) {
 
     index = Actor_FindFreeSlot();
     if (index != GAME_NONE) {
-        slot           = &g_ActorSlots[index];
-        slot->flags_00 = 1;
-        slot->type     = 0x27;
-        slot->x.fixed  = g_SpadWork->x.fixed;
-        slot->y.fixed  = g_SpadWork->y.fixed;
+        slot          = &g_ActorSlots[index];
+        slot->flags   = 1;
+        slot->type    = 0x27;
+        slot->x.fixed = g_Task->x.fixed;
+        slot->y.fixed = g_Task->y.fixed;
     }
 }

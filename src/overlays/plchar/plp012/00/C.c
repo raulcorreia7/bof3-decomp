@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CFD80[((u8*)g_SpadWork)[2]]();
+    D_801CFD80[((u8*)g_Task)[2]]();
 }
 
 INCLUDE_ASM(func_801CE448);
@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801CE448);
 #include "overlays/plchar/func_801CE628.h"
 
 MATCH void func_801CE72C(void) {
-    SYS_DISPATCH_TASK(D_801CFD8C, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CFD8C, 2, g_Task);
 }
 
 #include "overlays/plchar/func_801CE770.h"
@@ -29,7 +29,7 @@ INCLUDE_ASM(func_801CED1C);
 #include "overlays/plchar/Char_ProbeFacingCell.h"
 
 MATCH void func_801CF12C(void) {
-    SYS_DISPATCH_TASK(D_801CFD98, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CFD98, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_StartTurn.h"
@@ -37,7 +37,7 @@ MATCH void func_801CF12C(void) {
 #include "overlays/plchar/Char_RunStepScript.h"
 
 MATCH void func_801CF338(void) {
-    SYS_DISPATCH_TASK(D_801CFDA4, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CFDA4, 2, g_Task);
 }
 
 /* Draft differs at +0xE8: SND_PlayCue argument narrows to u16; retail passes the full sum. */
@@ -46,7 +46,7 @@ INCLUDE_ASM(func_801CF37C);
 #include "overlays/plchar/Char_ClearModeIfSlotFree.h"
 
 MATCH void func_801CF500(void) {
-    SYS_DISPATCH_TASK(D_801CFDAC, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CFDAC, 2, g_Task);
 }
 
 /* This copy turns between facings 3 and 5; the image's own are the header's. */
@@ -60,17 +60,17 @@ MATCH void Char_RunStepScript_801CF610(void) {
 }
 
 MATCH void func_801CF70C(void) {
-    SYS_DISPATCH_TASK(D_801CFDB8, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CFDB8, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801CF750);
 
 MATCH void func_801CF938(void) {
-    if (g_SpadWork->unk_09 == 0) {
+    if (g_Task->unk_09 == 0) {
         g_GameState->mode_12B.s8_value = 0;
         g_GameFlags &= ~0x1000;
     } else {
-        g_SpadWork->unk_09--;
+        g_Task->unk_09--;
         func_801B0DFC();
     }
     func_8014D978();
@@ -83,9 +83,9 @@ INCLUDE_ASM(func_801CFB0C);
 INCLUDE_ASM(func_801CFBDC);
 
 MATCH void func_801CFCF8(void) {
-    D_801CFDC0[g_SpadWork->unk_2C]();
+    D_801CFDC0[g_Task->unk_2C]();
 }
 
 MATCH void func_801CFD3C(void) {
-    D_801CFDCC[g_SpadWork->unk_2C]();
+    D_801CFDCC[g_Task->unk_2C]();
 }

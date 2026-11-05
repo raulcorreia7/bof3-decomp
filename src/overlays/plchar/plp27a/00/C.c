@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CF900[((u8*)g_SpadWork)[2]]();
+    D_801CF900[((u8*)g_Task)[2]]();
 }
 
 MATCH void Char_StartTurn(void) {
@@ -17,7 +17,7 @@ MATCH void Char_RunStepScript_801CE514(void) {
 }
 
 MATCH void func_801CE610(void) {
-    SYS_DISPATCH_TASK(D_801CF90C, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CF90C, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801CE654);
@@ -31,7 +31,7 @@ INCLUDE_ASM(func_801CEA10);
 INCLUDE_ASM(func_801CEAE0);
 
 MATCH void func_801CEBFC(void) {
-    SYS_DISPATCH_TASK(D_801CF914, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CF914, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_StartFacingTurn.h"
@@ -39,7 +39,7 @@ MATCH void func_801CEBFC(void) {
 #include "overlays/plchar/Char_RunStepScript.h"
 
 MATCH void func_801CEE30(void) {
-    SYS_DISPATCH_TASK(D_801CF920, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CF920, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_WalkStep.h"
@@ -63,9 +63,9 @@ MATCH void func_801CF868(void) {
 }
 
 MATCH void func_801CF878(void) {
-    D_801CF92C[g_SpadWork->unk_2C]();
+    D_801CF92C[g_Task->unk_2C]();
 }
 
 MATCH void func_801CF8BC(void) {
-    D_801CF938[g_SpadWork->unk_2C]();
+    D_801CF938[g_Task->unk_2C]();
 }

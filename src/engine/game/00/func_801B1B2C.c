@@ -13,7 +13,7 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags) {
     py           = y;
     mode         = flags;
     value        = Area_ReadHeight(x, y);
-    work         = g_SpadWork;
+    work         = g_Task;
     saved        = work->unk_09;
     work->unk_09 = 0U;
     if (func_801C3E40(px, py, mode & BYTE_MASK, value) & BYTE_MASK) {
@@ -24,10 +24,10 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags) {
         distance = -distance;
     }
     if (distance < 0x41) {
-        SP_REF(s32, 0x8)   = px;
-        SP_REF(s32, 0xC)   = py;
-        SP_REF(s16, 0x2)   = Area_ReadHeight(px, py);
-        g_SpadWork->unk_09 = saved;
+        SP_REF(s32, 0x8) = px;
+        SP_REF(s32, 0xC) = py;
+        SP_REF(s16, 0x2) = Area_ReadHeight(px, py);
+        g_Task->unk_09   = saved;
         return 1;
     }
     return 0;

@@ -117,20 +117,20 @@ NON_MATCHING void func_801BFB34(void) {
         if ((s32)g_PartySize > 0) {
             val5 = 0;
         loop_25:
-            tmp5                         = (u8*)g_BattlePartyBattlers + val5;
-            g_GameState                  = tmp5;
-            g_SpadWork                   = tmp5;
-            FIELD(u8, tmp5, 0x8u)        = (u8)s_RouteIndexByMode[g_BattleScrollDir];
-            FIELD(s8, g_SpadWork, 0x29u) = 6;
+            tmp5                     = (u8*)g_BattlePartyBattlers + val5;
+            g_GameState              = tmp5;
+            g_Task                   = tmp5;
+            FIELD(u8, tmp5, 0x8u)    = (u8)s_RouteIndexByMode[g_BattleScrollDir];
+            FIELD(s8, g_Task, 0x29u) = 6;
             if (val4 != 0) {
-                FIELD(s8, g_SpadWork, 0x7u) = 0;
-                tmp6                        = g_SpadWork;
-                FIELD(s8, tmp6, 0x6u)       = (s8)(FIELD(u8, tmp6, 0x5u) - 1);
+                FIELD(s8, g_Task, 0x7u) = 0;
+                tmp6                    = g_Task;
+                FIELD(s8, tmp6, 0x6u)   = (s8)(FIELD(u8, tmp6, 0x5u) - 1);
             }
             val5 += BATTLE_PARTY_STRIDE;
             func_801C3204();
             val4 += 1;
-            Actor_SelectScript(g_SpadWork->direction_08);
+            Actor_SelectScript(g_Task->direction_08);
             if (val4 < (s32)g_PartySize) {
                 goto loop_25; /* retail branch */
             }

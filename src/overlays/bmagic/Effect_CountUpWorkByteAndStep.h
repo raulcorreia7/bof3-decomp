@@ -5,9 +5,9 @@
 MATCH void Effect_CountUpWorkByteAndStep(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_04 + 2;
-    g_SpadWork->unk_04 = timer;
+    timer          = g_Task->unk_04 + 2;
+    g_Task->unk_04 = timer;
     if (timer == 16) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     }
 }

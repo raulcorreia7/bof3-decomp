@@ -8,6 +8,6 @@ MATCH void func_801F42F4(void) {
     if (D_80145F09[0][0] == 5) {
         SYS_SetFlag(g_SceneEventFlags, 0x4D);
         Area_SetCellPalette(4, 0xD);
-        g_SpadWork->flags_00 = 0;
+        g_Task->flags = 0;
     }
 }

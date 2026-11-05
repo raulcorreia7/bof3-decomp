@@ -16,9 +16,9 @@ MATCH void func_801F6F8C(void) {
     Actor* work;
 
     func_801F7DE8();
-    work     = g_SpadWork;
+    work     = g_Task;
     work->vx = 0;
-    work->unk_01 += 1;
+    work->mode += 1;
 }
 
 INCLUDE_ASM(func_801F6FC4);
@@ -30,7 +30,7 @@ MATCH void func_801F7048(void) {
 }
 
 MATCH void func_801F707C(void) {
-    SYS_DISPATCH_TASK(D_801FE8A0, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FE8A0, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801F70C0);
@@ -60,20 +60,20 @@ INCLUDE_ASM(func_801F774C);
 INCLUDE_ASM(func_801F77B4);
 
 MATCH void func_801F7928(void) {
-    SYS_DISPATCH_TASK(D_801FE8D0, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FE8D0, 1, g_Task);
 }
 
 MATCH void func_801F796C(void) {
-    SYS_DISPATCH_TASK(D_801FE8D8, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FE8D8, 2, g_Task);
 }
 
 MATCH void func_801F79B0(void) {
     Actor* work;
 
     func_801F8AE8();
-    work           = g_SpadWork;
-    work->unk_5A   = 0x40;
-    work->state_02 = work->state_02 + 1;
+    work         = g_Task;
+    work->unk_5A = 0x40;
+    work->step   = work->step + 1;
 }
 
 INCLUDE_ASM(func_801F79EC);
@@ -92,13 +92,13 @@ MATCH void func_801F7BA8(void) {
     Actor* work;
     u8     timer;
 
-    work          = g_SpadWork;
+    work          = g_Task;
     timer         = work->unk_09 - 1;
     work->y.fixed = work->y.fixed + 0x10000;
     work->unk_09  = timer;
     if (timer == 0) {
-        g_SpadWork->unk_09   = 0x10;
-        g_SpadWork->state_02 = g_SpadWork->state_02 + 1;
+        g_Task->unk_09 = 0x10;
+        g_Task->step   = g_Task->step + 1;
     }
 }
 
@@ -108,24 +108,24 @@ MATCH void func_801F7C98(void) {
     Actor* work;
     u8     timer;
 
-    work          = g_SpadWork;
+    work          = g_Task;
     timer         = work->unk_09 - 1;
     work->y.fixed = work->y.fixed - 0x10000;
     work->unk_09  = timer;
     if (timer == 0) {
-        g_SpadWork->unk_09   = 0x80;
-        g_SpadWork->state_02 = g_SpadWork->state_02 + 1;
+        g_Task->unk_09 = 0x80;
+        g_Task->step   = g_Task->step + 1;
     }
 }
 
 MATCH void func_801F7CF8(void) {
     u8 timer;
 
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_SpadWork->unk_09   = 8;
-        g_SpadWork->state_02 = g_SpadWork->state_02 + 1;
+        g_Task->unk_09 = 8;
+        g_Task->step   = g_Task->step + 1;
     }
 }
 
@@ -133,8 +133,8 @@ MATCH void func_801F7D54(void) {
     u8 timer;
 
     D_800E4C1E -= 0x18;
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         Actor_Clear();
     }
@@ -247,12 +247,12 @@ MATCH s32 func_801F8BF8(void) {
 MATCH void func_801F8CDC(Actor* actor) {
     u8 state;
 
-    state = actor->state_02 - 1;
+    state = actor->step - 1;
     actor->unk_03 += 6;
-    actor->state_02 = state;
+    actor->step = state;
     if (state == 0) {
-        actor->state_02 = actor->unk_04;
-        actor->unk_01 += 1;
+        actor->step = actor->unk_04;
+        actor->mode += 1;
     }
 }
 
@@ -271,13 +271,13 @@ INCLUDE_ASM(func_801F90C8);
 INCLUDE_ASM(func_801F9470);
 
 MATCH void func_801F95D4(void) {
-    SYS_DISPATCH_TASK(D_801FE908, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FE908, 1, g_Task);
 }
 
 MATCH void func_801F9618(void) {
     func_801F9688();
     if (g_GameAreaId != 2) {
-        g_SpadWork->unk_01 += 1;
+        g_Task->mode += 1;
     }
 }
 
@@ -288,7 +288,7 @@ MATCH void func_801F9668(void) {
 INCLUDE_ASM(func_801F9688);
 
 MATCH void func_801F986C(void) {
-    SYS_DISPATCH_TASK(D_801FE910, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FE910, 1, g_Task);
 }
 
 /* Stores 60 in byte 9 and increments byte 1 of the scratchpad buffer at slots[0x11]. */
@@ -314,12 +314,12 @@ INCLUDE_ASM(func_801F9B68);
 MATCH void func_801F9C00(void) {
     Actor* work;
 
-    work          = g_SpadWork;
+    work          = g_Task;
     work->x.fixed = 0x270000;
     work->y.fixed = 0x80000;
     work->z.fixed = 0x8000000;
     work->vz      = 0;
-    work->unk_01 += 1;
+    work->mode += 1;
     SND_PlayCue(0x204);
     SND_PlayCue(0x205);
 }
@@ -329,19 +329,19 @@ INCLUDE_ASM(func_801F9C58);
 MATCH void func_801F9CE0(void) {
     Actor* work;
 
-    work          = g_SpadWork;
+    work          = g_Task;
     work->x.fixed = 0x190000;
     work->y.fixed = 0xF0000;
     work->z.fixed = 0x6000000;
     work->vz      = 0;
-    work->unk_01 += 1;
+    work->mode += 1;
     SND_PlayCue(0x20A);
 }
 
 INCLUDE_ASM(func_801F9D30);
 
 MATCH void func_801F9DBC(void) {
-    SYS_DISPATCH_TASK(D_801FE938, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FE938, 1, g_Task);
 }
 
 /* 3 differing; first at +4: candidate ori v1,v1,0x8000 against retail lui v0,0x1f80 — the

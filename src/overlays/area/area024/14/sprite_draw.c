@@ -356,19 +356,19 @@ MATCH void func_801F2C58(void) {
     func_801F3D0C();
     func_801F3080();
     func_801F3314();
-    ((Area024Scratch*)g_SpadWork)->step_count = 0;
-    ((Area024Scratch*)g_SpadWork)->dispatch++;
+    ((Area024Scratch*)g_Task)->step_count = 0;
+    ((Area024Scratch*)g_Task)->dispatch++;
 }
 
 MATCH void func_801F2CB0(void) {
-    func_801F3E48(((Area024Scratch*)g_SpadWork)->step_count);
-    ((Area024Scratch*)g_SpadWork)->step_count = (u8)(((Area024Scratch*)g_SpadWork)->step_count + 2u);
-    if (((Area024Scratch*)g_SpadWork)->step_count >= 0x80u) {
+    func_801F3E48(((Area024Scratch*)g_Task)->step_count);
+    ((Area024Scratch*)g_Task)->step_count = (u8)(((Area024Scratch*)g_Task)->step_count + 2u);
+    if (((Area024Scratch*)g_Task)->step_count >= 0x80u) {
         SND_PlayCue(EMI_CUE_ID(2, 6));
         SND_PlayCue(EMI_CUE_ID(2, 14));
         SND_PlayCue(EMI_CUE_ID(2, 3));
-        ((Area024Scratch*)g_SpadWork)->step_count = 0;
-        ((Area024Scratch*)g_SpadWork)->dispatch++;
+        ((Area024Scratch*)g_Task)->step_count = 0;
+        ((Area024Scratch*)g_Task)->dispatch++;
     }
 }
 
@@ -386,7 +386,7 @@ MATCH void func_801F2D5C(void) {
 MATCH void func_801F2DB4(void) {
     Area024Scratch* scratch;
 
-    scratch    = (Area024Scratch*)g_SpadWork;
+    scratch    = (Area024Scratch*)g_Task;
     D_80147A58 = 0;
     scratch->dispatch++;
 }
@@ -440,7 +440,7 @@ MATCH void func_801F2FD4(void* sprite) {
     work->normal.vy = (RANDOM_MASK(0xFF)) - 0x80;
     work->normal.vz = RANDOM_MASK(0x7F);
     VectorNormal(&work->normal, &work->normal);
-    work->flags_00  = 1u;
+    work->flags     = 1u;
     work->flags_03  = 0x40u;
     work->flags_01  = 0u;
     work->half_size = 0u;
@@ -473,7 +473,7 @@ MATCH s32 func_801F30EC(void) {
     i          = 0u;
 
     do {
-        if (D_801F5B00->flags_00 != 0u) {
+        if (D_801F5B00->flags != 0u) {
             D_801F4214[D_801F5B00->flags_01]();
             func_801F2DF8((void*)D_801F5B00);
             result = 1;
@@ -517,7 +517,7 @@ MATCH void func_801F3250(void) {
     count                               = (u8)(((AreaSprite*)D_801F5B00)->flags_02 - 1u);
     ((AreaSprite*)D_801F5B00)->flags_02 = count;
     if (!(count & BYTE_MASK)) {
-        ((AreaSprite*)D_801F5B00)->flags_00 = 0u;
+        ((AreaSprite*)D_801F5B00)->flags = 0u;
     }
 }
 
@@ -815,7 +815,7 @@ MATCH void func_801F3D5C(void) {
 }
 
 /* This function stores the cell; the typed view macro is not an assignable object. */
-#undef g_SpadWork
+#undef g_Task
 
 MATCH s32 func_801F3E48(u8 shade) {
     SVECTOR                  verts[4];
@@ -831,9 +831,9 @@ MATCH s32 func_801F3E48(u8 shade) {
     LINE_F4*                 prim;
     u16                      i;
 
-    vec        = D_801F2C04;
-    saved      = (volatile Area024Scratch*)g_SpadWork;
-    g_SpadWork = (struct Task*)&D_80147A58;
+    vec    = D_801F2C04;
+    saved  = (volatile Area024Scratch*)g_Task;
+    g_Task = (struct Task*)&D_80147A58;
     PushMatrix();
 
     mtxp  = &matrix;
@@ -883,5 +883,5 @@ MATCH s32 func_801F3E48(u8 shade) {
     }
 
     PopMatrix();
-    g_SpadWork = (struct Task*)saved;
+    g_Task = (struct Task*)saved;
 }

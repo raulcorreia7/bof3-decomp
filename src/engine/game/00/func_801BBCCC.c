@@ -2,14 +2,14 @@
 
 MATCH void func_801BBCCC(s16 from_x, s16 from_y, s16 to_x, s16 to_y) {
     SP_REF(u8, 0x1u) = func_801BB2B8(from_x, from_y, to_x, to_y);
-    SP_REF(u8, 0x2u) = func_801BB2B8(from_x, FIELD(s16, g_SpadWork, 0x3Au), to_x, g_SpadWork->y.part.integer);
+    SP_REF(u8, 0x2u) = func_801BB2B8(from_x, FIELD(s16, g_Task, 0x3Au), to_x, g_Task->y.part.integer);
     SP_REF(u8, 0x3u) =
-        func_801BB2B8(from_x, (s16)(FIELD(u16, g_SpadWork, 0x3Au) + 1), to_x, (s16)(FIELD(u16, g_SpadWork, 0x3Au) + 1));
-    SP_REF(u8, 0x4u) = func_801BB2B8(FIELD(s16, g_SpadWork, 0x36u), from_y, g_SpadWork->x.part.integer, to_y);
+        func_801BB2B8(from_x, (s16)(FIELD(u16, g_Task, 0x3Au) + 1), to_x, (s16)(FIELD(u16, g_Task, 0x3Au) + 1));
+    SP_REF(u8, 0x4u) = func_801BB2B8(FIELD(s16, g_Task, 0x36u), from_y, g_Task->x.part.integer, to_y);
     SP_REF(u8, 0x5u) =
-        func_801BB2B8((s16)(FIELD(u16, g_SpadWork, 0x36u) + 1), from_y, (s16)(FIELD(u16, g_SpadWork, 0x36u) + 1), to_y);
+        func_801BB2B8((s16)(FIELD(u16, g_Task, 0x36u) + 1), from_y, (s16)(FIELD(u16, g_Task, 0x36u) + 1), to_y);
     SP_REF(u8, 0x6u) =
-        func_801BB2B8(from_x, (s16)(FIELD(u16, g_SpadWork, 0x3Au) - 1), to_x, (s16)(FIELD(u16, g_SpadWork, 0x3Au) - 1));
+        func_801BB2B8(from_x, (s16)(FIELD(u16, g_Task, 0x3Au) - 1), to_x, (s16)(FIELD(u16, g_Task, 0x3Au) - 1));
     SP_REF(u8, 0x7u) =
-        func_801BB2B8((s16)(FIELD(u16, g_SpadWork, 0x36u) - 1), from_y, (s16)(FIELD(u16, g_SpadWork, 0x36u) - 1), to_y);
+        func_801BB2B8((s16)(FIELD(u16, g_Task, 0x36u) - 1), from_y, (s16)(FIELD(u16, g_Task, 0x36u) - 1), to_y);
 }

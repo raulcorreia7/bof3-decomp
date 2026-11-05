@@ -28,14 +28,14 @@ MATCH void func_801D6128(void) {
         Actor_SelectScript((u8)D_801E2024[BANNER_INDEX * 3]);
         BANNER_TIMER = D_801E2025[BANNER_INDEX * 3];
         if (D_801E2026[BANNER_INDEX * 3] == 0x50) {
-            entry                        = Actor_FindFreeSlot() & BYTE_MASK;
-            g_ActorSlots[entry].flags_00 = 1;
-            g_ActorSlots[entry].type     = 0x1A;
-            g_ActorSlots[entry].unk_01   = 0x10;
-            g_ActorSlots[entry].unk_02   = 2;
-            g_ActorSlots[entry].unk_03   = 2;
-            g_ActorSlots[entry].unk_2E   = 0xF0;
-            g_ActorSlots[entry].unk_30   = 0xA6;
+            entry                      = Actor_FindFreeSlot() & BYTE_MASK;
+            g_ActorSlots[entry].flags  = 1;
+            g_ActorSlots[entry].type   = 0x1A;
+            g_ActorSlots[entry].mode   = 0x10;
+            g_ActorSlots[entry].step   = 2;
+            g_ActorSlots[entry].unk_03 = 2;
+            g_ActorSlots[entry].unk_2E = 0xF0;
+            g_ActorSlots[entry].unk_30 = 0xA6;
         }
         BANNER_INDEX += 1;
     } else {

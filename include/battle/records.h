@@ -182,9 +182,9 @@ typedef union BattleEffectTarget {
  * battle/battle/03 names the head fields, battle/battle/15 the tail, and the merged record
  * names the union of both. */
 typedef struct BattleEffect {
-    u8                 unk_00;
-    u8                 unk_01;
-    u8                 unk_02;
+    u8                 flags;
+    u8                 mode;
+    u8                 step;
     u8                 unk_03;
     u8                 unk_04;
     u8                 handler_index; /* +0x05 indexes a mode's handler table; Battle_AllocEffect stores it */
@@ -345,9 +345,9 @@ typedef union BattleEnemyWord3C {
 } BattleEnemyWord3C;
 
 typedef struct EnemyBattler {
-    u8                           unk_00;
-    u8                           step_01;
-    u8                           unk_02;
+    u8                           flags;
+    u8                           mode;
+    u8                           step;
     u8                           unk_03;
     u8                           unk_04;
     u8                           slot;   /* +0x05 battler slot; func_800ABCE0 stores slot + 3 here */
@@ -494,9 +494,9 @@ typedef enum PartyBattlerFlags {
 
 /* Local battler work table (stride 0x140 at 0x80145E90), shared by the battle overlays. */
 typedef struct PartyBattler {
-    u8                flags_00;
-    u8                step_01;
-    u8                unk_02;
+    u8                flags;
+    u8                mode;
+    u8                step;
     u8                unk_03;
     u8                unk_04;
     u8                slot; /* +0x05 battler slot; func_801DC044 passes it to func_800A36F0 */

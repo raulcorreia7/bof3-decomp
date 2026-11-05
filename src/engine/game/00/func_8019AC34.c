@@ -4,6 +4,6 @@
 #define WORK_PTR (*SP_PTR(Actor*, 0x44u))
 
 MATCH void func_8019AC34(void) {
-    D_801C80EC[WORK_PTR->unk_01]();
+    D_801C80EC[WORK_PTR->mode]();
     g_AreaCameraRefreshCount = 2;
 }

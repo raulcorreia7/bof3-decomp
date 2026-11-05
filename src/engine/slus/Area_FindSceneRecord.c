@@ -26,16 +26,16 @@ MATCH bool Area_FindSceneRecord(s32 wanted_id) {
         do {
             id = *(u16*)(D_801459F4 + i * 8);
             if (id == wanted_id) {
-                g_SpadWork->unk_25 = D_801459F4[i * 8 + 4];
-                g_SpadWork->unk_26 = D_801459F4[i * 8 + 5];
-                g_SpadWork->unk_27 = *(u16*)(D_801459F4 + i * 8 + 2);
-                palette_offset     = id * 2;
-                g_SpadWork->unk_28 = D_801459F4[i * 8 + 6];
-                g_SpadWork->unk_2C = D_801459F4[i * 8 + 7];
-                g_SpadWork->state_70.word &= mask;
+                g_Task->unk_25 = D_801459F4[i * 8 + 4];
+                g_Task->unk_26 = D_801459F4[i * 8 + 5];
+                g_Task->unk_27 = *(u16*)(D_801459F4 + i * 8 + 2);
+                palette_offset = id * 2;
+                g_Task->unk_28 = D_801459F4[i * 8 + 6];
+                g_Task->unk_2C = D_801459F4[i * 8 + 7];
+                g_Task->state_70.word &= mask;
                 /* FAKE: non-const byte view of the flag table; a const read lets the address loads fold. */
-                g_SpadWork->state_70.word = ((u8*)D_80181484)[palette_offset];
-                g_SpadWork->unk_2B        = ((u8*)D_80181484)[palette_offset + 1];
+                g_Task->state_70.word = ((u8*)D_80181484)[palette_offset];
+                g_Task->unk_2B        = ((u8*)D_80181484)[palette_offset + 1];
                 return false;
             }
             i++;

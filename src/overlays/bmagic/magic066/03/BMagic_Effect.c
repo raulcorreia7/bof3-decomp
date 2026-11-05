@@ -13,28 +13,28 @@ MATCH void func_801EEDB8(void) {
     u32           slot;
     PartyBattler* work;
 
-    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         slot                               = Battle_AllocEffect(1, 0x11) & BYTE_MASK;
-        work                               = g_SpadWork;
-        g_BattleEffects[slot].unk_01       = 1;
+        work                               = g_Task;
+        g_BattleEffects[slot].mode         = 1;
         g_BattleEffects[slot].target.party = work;
         /* FAKE: keeps the target selector read after the slot stores, as retail orders it. */
         MATCH_FAKE_BARRIER();
         func_800A9610(g_BattleTargetSelector, 0x20);
-        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+        g_Task->mode = g_Task->mode + 1;
     }
 }
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EEEBC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EEF00(void) {
-    SYS_DISPATCH_BYTE(D_801F006C, g_SpadWork->unk_02);
+    SYS_DISPATCH_BYTE(D_801F006C, g_Task->step);
     if (BATTLE_ACTIVE_WORK->word_08.byte.unk_0B != 0xFF) {
         Effect_SetActorMatrix();
         func_801EF158();
@@ -49,29 +49,29 @@ INCLUDE_ASM(func_801EEFF8);
 MATCH void func_801EF04C(void) {
     s32 phase;
 
-    g_SpadWork->word_08.byte.unk_0B = (g_SpadWork->word_08.byte.unk_0B - 1) & 0x1F;
-    phase                           = g_SpadWork->unk_10 + 2;
-    g_SpadWork->unk_10              = phase;
+    g_Task->word_08.byte.unk_0B = (g_Task->word_08.byte.unk_0B - 1) & 0x1F;
+    phase                       = g_Task->unk_10 + 2;
+    g_Task->unk_10              = phase;
     if (phase == 0x80) {
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801EF0A4(void) {
-    g_SpadWork->word_08.byte.unk_0B = (g_SpadWork->word_08.byte.unk_0B - 1) & 0x1F;
-    g_SpadWork->unk_14 -= 2;
-    g_SpadWork->unk_10 -= 2;
-    if (g_SpadWork->unk_10 == 0x20) {
-        g_SpadWork->unk_02++;
+    g_Task->word_08.byte.unk_0B = (g_Task->word_08.byte.unk_0B - 1) & 0x1F;
+    g_Task->unk_14 -= 2;
+    g_Task->unk_10 -= 2;
+    if (g_Task->unk_10 == 0x20) {
+        g_Task->step++;
     }
 }
 
 MATCH void func_801EF108(void) {
     s32 count;
 
-    count = g_SpadWork->unk_10 - 1;
-    g_SpadWork->unk_14 -= 2;
-    g_SpadWork->unk_10 = count;
+    count = g_Task->unk_10 - 1;
+    g_Task->unk_14 -= 2;
+    g_Task->unk_10 = count;
     if (count == 0) {
         D_801EB4E0->word_08.byte.unk_0B = 0xFF;
         func_801E5988();
@@ -83,7 +83,7 @@ INCLUDE_ASM(func_801EF158);
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF834(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 2, g_SpadWork);
+    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 2, g_Task);
 }
 
 MATCH void func_801EF878(void) {
@@ -92,18 +92,18 @@ MATCH void func_801EF878(void) {
     for (i = 0; i < 4; i++) {
         D_801F00B0[i] = 0;
     }
-    g_SpadWork->word_08.byte.unk_09 = 0;
-    g_SpadWork->unk_02 += 1;
+    g_Task->word_08.byte.unk_09 = 0;
+    g_Task->step += 1;
 }
 
 MATCH void func_801EF8C8(void) {
     u8 timer;
 
     func_801EF984();
-    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 + 1;
+    g_Task->word_08.byte.unk_09 = timer;
     if (timer == 0x60) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     }
 }
 
@@ -111,8 +111,8 @@ MATCH void func_801EF930(void) {
     u8 temp_v1;
 
     func_801EF984();
-    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    temp_v1                     = g_Task->word_08.byte.unk_09 + 1;
+    g_Task->word_08.byte.unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x80) {
         func_801E5988();
     }
@@ -132,9 +132,9 @@ MATCH void func_801EFFB0(void) {
     rot.vx = 3072;
     rot.vy = 0;
     rot.vz = 0;
-    pos.vx = (g_SpadWork->coord_x_34.raw >> 9) - 0x4000;
-    pos.vy = (g_SpadWork->coord_y_38.raw >> 9) - 0x4000;
-    pos.vz = -g_SpadWork->word_3C.half.span_3E / 2;
+    pos.vx = (g_Task->coord_x_34.raw >> 9) - 0x4000;
+    pos.vy = (g_Task->coord_y_38.raw >> 9) - 0x4000;
+    pos.vz = -g_Task->word_3C.half.span_3E / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);

@@ -10,7 +10,7 @@ MATCH void func_801E7778(void) {
     u32           step;
     u32           value;
 
-    D_801EB4E0->flags_00 &= ~ACTOR_FLAG_HIDDEN;
+    D_801EB4E0->flags &= ~ACTOR_FLAG_HIDDEN;
     work = D_801EB4E0;
     step = work->unk_40;
     if (step != 0x10000) {

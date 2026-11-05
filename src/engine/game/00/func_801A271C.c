@@ -5,7 +5,7 @@ MATCH void func_801A271C(void* record) {
 
     timer = FIELD(u8, record, 0x75u);
     if (timer == 0) {
-        g_SpadWork->unk_01 = g_SpadWork->unk_03;
+        g_Task->mode = g_Task->unk_03;
         return;
     }
     FIELD(u8, record, 0x75u) = timer - 1;

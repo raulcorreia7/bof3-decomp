@@ -9,29 +9,29 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC80(void) {
     PartyBattler* saved_work;
 
-    g_SpadWork->coord_x_34.raw = D_801EC2E0->target.party->coord_x_34.raw;
-    g_SpadWork->coord_y_38.raw = D_801EC2E0->target.party->coord_y_38.raw;
-    g_SpadWork->word_3C.word   = D_801EC2E0->target.party->word_3C.word + 0x01000000;
+    g_Task->coord_x_34.raw = D_801EC2E0->target.party->coord_x_34.raw;
+    g_Task->coord_y_38.raw = D_801EC2E0->target.party->coord_y_38.raw;
+    g_Task->word_3C.word   = D_801EC2E0->target.party->word_3C.word + 0x01000000;
     func_801EEFF4();
-    saved_work = g_SpadWork;
-    g_SpadWork = D_801EC2E0->target.party;
+    saved_work = g_Task;
+    g_Task     = D_801EC2E0->target.party;
     Actor_SelectScript(1U);
-    g_SpadWork = saved_work;
-    saved_work->step_01 += 1;
+    g_Task = saved_work;
+    saved_work->mode += 1;
 }
 
 MATCH void func_801EED2C(void) {
     PartyBattler* saved;
 
-    saved      = g_SpadWork;
-    g_SpadWork = D_801EC2E0->target.party;
+    saved  = g_Task;
+    g_Task = D_801EC2E0->target.party;
     if (func_8014DAEC() & BYTE_MASK) {
-        g_SpadWork                 = saved;
+        g_Task                     = saved;
         saved->word_08.byte.unk_09 = 0x78;
-        g_SpadWork->step_01++;
+        g_Task->mode++;
         SND_PlayCue(0x100);
     }
-    g_SpadWork = saved;
+    g_Task = saved;
 }
 
 /* Best 5 differences: lui v1 at 0x801EEDF0; adjust register allocation. */

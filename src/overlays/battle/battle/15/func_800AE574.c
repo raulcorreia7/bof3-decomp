@@ -12,20 +12,20 @@ MATCH void func_800AE574(void) {
     u16           height;
     u16           base;
 
-    first = (PartyBattler*)g_SpadWork;
+    first = (PartyBattler*)g_Task;
     first->word_08.byte.unk_09--;
     if (first->word_08.byte.unk_09 != 0) {
         return;
     }
 
     source                 = D_801EB4E0;
-    second                 = (PartyBattler*)g_SpadWork;
+    second                 = (PartyBattler*)g_Task;
     second->coord_x_34.raw = source->coord_x_34.raw;
     second->coord_y_38.raw = source->coord_y_38.raw;
     second->word_3C.word   = source->word_3C.word;
     func_800AF764();
 
-    third                   = SPAD_WORK_BYTES;
+    third                   = TASK_BYTES;
     FIELD(u32, third, 0x10) = -0xE;
     /* FAKE: holds the work store ahead of the field reloads. */
     MATCH_FAKE_BARRIER();
@@ -37,11 +37,11 @@ MATCH void func_800AE574(void) {
     third[9] = 0;
     height -= 0x18;
     FIELD(u16, third, 0x2E) = height;
-    flag                    = (PartyBattler*)g_SpadWork;
+    flag                    = (PartyBattler*)g_Task;
     base -= next;
     FIELD(u16, third, 0x30)     = base;
     flag->word_08.byte.timer_0A = 1;
 
-    last          = (PartyBattler*)g_SpadWork;
-    last->step_01 = (u8)(last->step_01 + 1);
+    last       = (PartyBattler*)g_Task;
+    last->mode = (u8)(last->mode + 1);
 }

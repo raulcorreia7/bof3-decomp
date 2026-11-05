@@ -7,5 +7,5 @@ MATCH void func_801F1638(void) {
 
     SP_REF(u8*, 0x44u) = record;
     record[8]          = record[0x79];
-    func_8015BAC4(g_SpadWork->direction_08);
+    func_8015BAC4(g_Task->direction_08);
 }

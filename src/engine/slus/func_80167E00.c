@@ -2,7 +2,7 @@
 
 /* One 0x98-byte entity slot, viewed at the fields this routine steps. */
 typedef struct EntitySlot {
-    u8  flags_00;
+    u8  flags;
     u8  pad_01[5];
     u8  unk_06;
     u8  pad_07[0x1D];
@@ -43,9 +43,9 @@ NON_MATCHING void func_80167E00(void) {
     four  = 4;
     list  = D_80183A70;
     do {
-        slot       = index & BYTE_MASK;
-        entity     = (EntitySlot*)((u8*)g_Actors + slot * ACTOR_SIZE);
-        g_SpadWork = entity;
+        slot   = index & BYTE_MASK;
+        entity = (EntitySlot*)((u8*)g_Actors + slot * ACTOR_SIZE);
+        g_Task = entity;
         if (ACTOR_IN_USE(*entity)) {
             if (entity->unk_06 != 9) {
                 if (entity->flags_24 & 0x10) {
@@ -59,7 +59,7 @@ NON_MATCHING void func_80167E00(void) {
                 goto block_10; /* retail branch */
             }
         block_7:
-            entity = g_SpadWork;
+            entity = g_Task;
             if (entity->unk_06 == 0xA) {
                 index += 1;
                 func_8015A944();

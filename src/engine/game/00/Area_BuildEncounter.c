@@ -14,8 +14,8 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
     EncounterEnemy* entry;
     u8*             fields;
 
-    result     = 1;
-    g_SpadWork = (Actor*)D_801CD8D0;
+    result = 1;
+    g_Task = (Actor*)D_801CD8D0;
     if ((u32)(work_mode & BYTE_MASK) >= 4U) {
         D_801CD8C8 = (D_801CD8C8 + 1) & 3;
     } else {

@@ -15,7 +15,7 @@ MATCH void func_801E09B4(void) {
     for (; i < 30; i++) {
         /* FAKE: retail reads g_Actors as u8[]. */
         if (((u8*)g_Actors)[offset] != 0) {
-            g_SpadWork = p;
+            g_Task = p;
             func_801E084C();
         }
         p += 0x98;

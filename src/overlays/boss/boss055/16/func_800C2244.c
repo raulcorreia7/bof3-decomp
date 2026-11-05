@@ -3,5 +3,5 @@
 MATCH void func_800C2244(void) {
     func_801E567C();
     ACTOR_SET_STEP(2);
-    SPAD_WORK_BYTES[2] = 0;
+    TASK_BYTES[2] = 0;
 }

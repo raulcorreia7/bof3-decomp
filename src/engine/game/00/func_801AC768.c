@@ -6,12 +6,12 @@ MATCH void func_801AC768(GameCursorState* cursor_state, s32 mode_byte, s32 value
 
     status = Actor_GetType();
     if (status != 1) {
-        if (g_SpadWork->unk_01 == 7) {
+        if (g_Task->mode == 7) {
             func_801ABEE0();
         }
-        g_SpadWork->unk_01 = mode_byte;
-        slot               = g_SpadWork;
-        if (slot->unk_01 == 7) {
+        g_Task->mode = mode_byte;
+        slot         = g_Task;
+        if (slot->mode == 7) {
             slot->unk_18 = value_18 & BYTE_MASK;
             slot->unk_1C = value_1C & BYTE_MASK;
             if (cursor_state->unk_04 != 0) {
@@ -20,14 +20,14 @@ MATCH void func_801AC768(GameCursorState* cursor_state, s32 mode_byte, s32 value
             goto advance; /* share the caller step advance */
         }
     } else {
-        if (g_SpadWork->state_02 == status) {
+        if (g_Task->step == status) {
             func_801ABEE0();
         }
         if ((mode_byte & BYTE_MASK) == 7) {
-            g_SpadWork->state_02 = 1;
-            slot                 = g_SpadWork;
-            slot->unk_18         = value_18 & BYTE_MASK;
-            slot->unk_1C         = value_1C & BYTE_MASK;
+            g_Task->step = 1;
+            slot         = g_Task;
+            slot->unk_18 = value_18 & BYTE_MASK;
+            slot->unk_1C = value_1C & BYTE_MASK;
             if (cursor_state->unk_04 != 0) {
                 func_801AC0A0((s8)extra_value);
                 cursor_state->unk_07 = 1;

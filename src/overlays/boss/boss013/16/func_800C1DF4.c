@@ -3,9 +3,9 @@
 MATCH void func_800C1DF4(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
-    if (work->flags_00 & 0x80) {
-        work->unk_02++;
+    work = g_Task;
+    if (work->flags & 0x80) {
+        work->step++;
     } else {
         work->coord_x_34.raw += 0x8000;
         func_8014D978();

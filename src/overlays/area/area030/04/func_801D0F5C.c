@@ -40,7 +40,7 @@ MATCH void func_801D0F5C(void) {
         FISHING_STATE->sub_index_03  = 2;
     } else {
         FISHING_STATE->saved_index_0B = FISHING_STATE->saved_value_27;
-        FISHING_STATE->flags_00 |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        FISHING_STATE->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         FISHING_STATE->saved_value_27 = 0x7B;
         FISHING_STATE->tint_5D        = -0x80;
         FISHING_STATE->tint_5E        = -0x80;

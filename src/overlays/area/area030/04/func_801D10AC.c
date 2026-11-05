@@ -12,7 +12,7 @@ MATCH void func_801D10AC(void) {
         FISHING_STATE->tint_5D = 0;
         FISHING_STATE->tint_5E = 0;
         FISHING_STATE->tint_5F = 0;
-        FISHING_STATE->flags_00 &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+        FISHING_STATE->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
         FISHING_STATE->saved_value_27 = FISHING_STATE->saved_index_0B;
         FISHING_STATE->sub_index_03   = 0;
         FISHING_STATE->mode_index_02++;

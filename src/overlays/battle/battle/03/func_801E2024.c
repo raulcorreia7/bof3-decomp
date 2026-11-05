@@ -6,7 +6,7 @@ MATCH void func_801E2024(void) {
     u8            count;
     u8            chance;
 
-    work                      = g_SpadWork;
+    work                      = g_Task;
     count                     = work->word_08.byte.unk_09 - 1;
     work->word_08.byte.unk_09 = count;
     if (count == 0) {
@@ -23,6 +23,6 @@ MATCH void func_801E2024(void) {
             func_801DD858(3);
         }
         func_801DD858(4);
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     }
 }

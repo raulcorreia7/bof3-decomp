@@ -6,7 +6,7 @@ MATCH void func_800AE6C8(void) {
     u16         total;
     BattleWork* work;
 
-    work            = (BattleWork*)g_SpadWork;
+    work            = (BattleWork*)g_Task;
     counter         = work->unk_09[0] + 1;
     value           = work->unk_10 + 2;
     total           = work->unk_30 + value;
@@ -14,6 +14,6 @@ MATCH void func_800AE6C8(void) {
     work->unk_10    = value;
     work->unk_30    = total;
     if (counter == 16) {
-        BATTLE_WORK->step_01++;
+        BATTLE_WORK->mode++;
     }
 }

@@ -14,36 +14,36 @@ MATCH s8 Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     if (size == 0) {
         return 0;
     }
-    absY               = abs(dir_y);
-    g_SpadWork->unk_09 = 0;
-    span               = absY;
-    absX               = abs(dir_x);
+    absY           = abs(dir_y);
+    g_Task->unk_09 = 0;
+    span           = absY;
+    absX           = abs(dir_x);
     if (absX >= absY) {
         span = absX;
     }
     if (span != 0) {
-        g_SpadWork->unk_0B = span - 1;
+        g_Task->unk_0B = span - 1;
     } else {
-        g_SpadWork->unk_0B = 0;
+        g_Task->unk_0B = 0;
     }
-    g_SpadWork->unk_0A = 16 / size;
-    g_SpadWork->vz     = vz_start << 8;
+    g_Task->unk_0A = 16 / size;
+    g_Task->vz     = vz_start << 8;
 
     if ((u8)(Actor_GetType()) != 2) {
         if (span != 0) {
-            g_SpadWork->vx = (dir_x << 15) / (g_SpadWork->unk_0A * span);
-            g_SpadWork->vy = (dir_y << 15) / (g_SpadWork->unk_0A * span);
+            g_Task->vx = (dir_x << 15) / (g_Task->unk_0A * span);
+            g_Task->vy = (dir_y << 15) / (g_Task->unk_0A * span);
         } else {
-            g_SpadWork->vy = 0;
-            g_SpadWork->vx = 0;
+            g_Task->vy = 0;
+            g_Task->vx = 0;
         }
-        g_SpadWork->unk_04 = 1;
+        g_Task->unk_04 = 1;
     } else {
         g_AreaCameraStep       = size * 8;
         g_AreaCameraHeightStep = 0;
         g_AreaScrollTargetX    = g_PartyX + (dir_x << 15);
         g_AreaScrollTargetY    = g_PartyY + (dir_y << 15);
-        g_SpadWork->unk_04     = 2;
+        g_Task->unk_04         = 2;
     }
     return 1;
 }

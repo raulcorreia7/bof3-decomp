@@ -4,7 +4,7 @@ MATCH void func_801E4C7C(void) {
     PartyBattler* work;
     u8            count;
 
-    work  = g_SpadWork;
+    work  = g_Task;
     count = work->word_08.byte.unk_09;
     if (count == 0) {
         if (g_BattleEncounter != 0) {
@@ -12,8 +12,8 @@ MATCH void func_801E4C7C(void) {
         } else {
             SND_PlayCue((g_BattleCurrentEnemy->kind * 2) | 0x601);
         }
-        work         = g_SpadWork;
-        work->unk_02 = work->unk_02 + 1;
+        work       = g_Task;
+        work->step = work->step + 1;
     } else {
         work->word_08.byte.unk_09 = count - 1;
     }

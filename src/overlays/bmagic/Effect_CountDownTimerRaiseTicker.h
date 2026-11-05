@@ -3,12 +3,12 @@
 MATCH void Effect_CountDownTimerRaiseTicker(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.unk_0B++;
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.unk_09--;
     if (work->word_08.byte.unk_09 == 0) {
-        work = g_SpadWork;
-        work->unk_02++;
+        work = g_Task;
+        work->step++;
     }
 }

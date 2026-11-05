@@ -144,7 +144,7 @@ NON_MATCHING void func_8014BC70(void) {
                             }
                         } else {
                         block_41:
-                            g_SpadWork = (Actor*)obj;
+                            g_Task = (Actor*)obj;
                             if (obj[0x24] & 0x40) {
                                 var_s1 += func_8015AD00(&D_80147D08[(s8)var_s1]);
                             } else {
@@ -189,15 +189,15 @@ NON_MATCHING void func_8014BC70(void) {
                     do {
                         if (D_80147D0C[i].depth < 0) {
                             if (D_801483WORLD_WORK_LIST_DRAW_NEGATIVE_DEPTHE & AREA_DRAW_NEGATIVE_DEPTH) {
-                                g_SpadWork = (Actor*)D_80147D08[i].primitive;
+                                g_Task = (Actor*)D_80147D08[i].primitive;
                                 Area_DrawObjectSprite();
                             }
                         } else {
                             if (g_AreaDrawFlags & AREA_DRAW_APPEND_ACTOR_PRIMITIVES) {
-                                entry      = (u8*)D_80147D08[i].work;
-                                g_SpadWork = (Actor*)entry;
+                                entry  = (u8*)D_80147D08[i].work;
+                                g_Task = (Actor*)entry;
                                 CatPrim(D_801459D0[entry[0x29]], D_80147D08[i].primitive);
-                                D_801459D0[((u8*)g_SpadWork)[0x29]] = (u32*)D_80147D08[i].primitive;
+                                D_801459D0[((u8*)g_Task)[0x29]] = (u32*)D_80147D08[i].primitive;
                             }
                         }
                         i = (s8)(i + 1);

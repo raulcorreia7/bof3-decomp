@@ -28,9 +28,9 @@ MATCH void func_801D2064(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_SpadWork->ticker++;
+    g_Task->ticker++;
 
-    work                          = g_SpadWork;
+    work                          = g_Task;
     counter                       = work->orbit_counter + 1;
     VOL(s32, work->orbit_counter) = counter;
     angle                         = SCE10EFF_ORBIT_ANGLE(counter);
@@ -39,15 +39,15 @@ MATCH void func_801D2064(void) {
     D_1F800000                    = 0x18;
 
     velocity     = rcos(angle) * D_1F800000;
-    work         = g_SpadWork;
+    work         = g_Task;
     work->proj_x = D_801D2744->proj_x + velocity;
 
     velocity        = rsin(*angle_cell) * D_1F800000;
-    scratch         = g_SpadWork;
+    scratch         = g_Task;
     scratch->proj_y = D_801D2744->proj_y + velocity;
     scratch->band -= 2;
 
-    if (g_SpadWork->band == 0) {
+    if (g_Task->band == 0) {
         D_801D2744->ticker++;
         Actor_Clear();
     }
@@ -66,8 +66,8 @@ MATCH void func_801D218C(void) {
     d          = &D_1F800000;
     vec        = (s16*)D_1F800014;
     d[0]       = 0x40;
-    D_1F800004 = ((g_SpadWork->ticker + 2) & 0xF) << 8;
-    D_1F80000C = g_SpadWork->band;
+    D_1F800004 = ((g_Task->ticker + 2) & 0xF) << 8;
+    D_1F80000C = g_Task->band;
     i          = 1;
     D_1F800008 = RANDOM_MASK(0x3F);
     vec[0]     = 0;
@@ -87,7 +87,7 @@ MATCH void func_801D218C(void) {
             } else {
                 D_1F800000 = 0x80 - (RANDOM_MASK(0x3F));
             }
-            page    = ((g_SpadWork->ticker + i + 2) & 0xF) << 8;
+            page    = ((g_Task->ticker + i + 2) & 0xF) << 8;
             vec[0]  = 0;
             cell[0] = page;
             vec[1]  = FIXED_MUL(rsin(page), cell[-1]);
@@ -110,7 +110,7 @@ MATCH void func_801D240C(void) {
     s32      angle;
     s32      i;
 
-    D_1F800000 = (RANDOM_MASK(7)) + g_SpadWork->band * 3;
+    D_1F800000 = (RANDOM_MASK(7)) + g_Task->band * 3;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5, 0);
     i         = 0;
@@ -122,16 +122,16 @@ MATCH void func_801D240C(void) {
         SetPolyG3(primitive);
         PSX_SET_SEMI_TRANSPARENT(primitive);
 
-        primitive->x0 = g_SpadWork->origin_x;
-        primitive->y0 = g_SpadWork->origin_y;
+        primitive->x0 = g_Task->origin_x;
+        primitive->y0 = g_Task->origin_y;
         angle         = i << 9;
-        primitive->x1 = g_SpadWork->origin_x + FIXED_MUL(rsin(angle), *angle_ptr);
-        primitive->y1 = g_SpadWork->origin_y + FIXED_MUL(rcos(angle), *angle_ptr);
+        primitive->x1 = g_Task->origin_x + FIXED_MUL(rsin(angle), *angle_ptr);
+        primitive->y1 = g_Task->origin_y + FIXED_MUL(rcos(angle), *angle_ptr);
         i++;
         angle         = i << 9;
-        primitive->x2 = g_SpadWork->origin_x + FIXED_MUL(rsin(angle), *angle_ptr);
-        primitive->y2 = g_SpadWork->origin_y + FIXED_MUL(rcos(angle), *angle_ptr);
-        setRGB0(primitive, g_SpadWork->band * 8, g_SpadWork->band * 8, g_SpadWork->band * 6);
+        primitive->x2 = g_Task->origin_x + FIXED_MUL(rsin(angle), *angle_ptr);
+        primitive->y2 = g_Task->origin_y + FIXED_MUL(rcos(angle), *angle_ptr);
+        setRGB0(primitive, g_Task->band * 8, g_Task->band * 8, g_Task->band * 6);
         primitive->r1 = 1;
         primitive->g1 = 1;
         primitive->b1 = 1;
@@ -146,12 +146,12 @@ MATCH void func_801D2658(void) {
     s16     vec[3];
     TILE_1* primitive;
 
-    vec[0]    = (s16)(g_SpadWork->proj_x >> 9) - 0x4000;
+    vec[0]    = (s16)(g_Task->proj_x >> 9) - 0x4000;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = (s16)(g_SpadWork->proj_y >> 9) - 0x4000;
-    vec[2]    = -(g_SpadWork->proj_z / 2);
+    vec[1]    = (s16)(g_Task->proj_y >> 9) - 0x4000;
+    vec[2]    = -(g_Task->proj_z / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);
-    g_SpadWork->origin_x = primitive->x0;
-    g_SpadWork->origin_y = primitive->y0;
+    g_Task->origin_x = primitive->x0;
+    g_Task->origin_y = primitive->y0;
 }

@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 MATCH void func_801EEC04(void) {
     Callback handlers[2] = {func_801EEC5C, func_801EEDFC};
-    SYS_DISPATCH_TASK(handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EEC5C);
@@ -14,7 +14,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EEE5C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 INCLUDE_ASM(func_801EEEA0);
@@ -24,13 +24,13 @@ INCLUDE_ASM(func_801EEF2C);
 MATCH void func_801EF158(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.timer_0A += 3;
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.unk_09++;
     if (work->word_08.byte.unk_09 == 8) {
-        work = g_SpadWork;
-        work->unk_02++;
+        work = g_Task;
+        work->step++;
     }
 }
 

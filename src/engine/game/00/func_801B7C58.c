@@ -2,6 +2,6 @@
 
 MATCH void func_801B7C58(void) {
     if (func_801C539C() & BYTE_MASK) {
-        g_SpadWork->unk_04++;
+        g_Task->unk_04++;
     }
 }

@@ -14,7 +14,7 @@ MATCH void func_801D195C(s16 panel_x, s16 panel_y) {
 
     func_801D1744((s16)(panel_x + 0x58), (s16)(panel_y + 8), 4);
 
-    if (g_ActorSlots[0].unk_01 == 0) {
+    if (g_ActorSlots[0].mode == 0) {
         y = panel_y;
     } else {
         y = panel_y - Area_SampleHeight(g_ActorSlots[0].x.fixed, g_ActorSlots[0].y.fixed) / 32;
@@ -37,7 +37,7 @@ MATCH void func_801D195C(s16 panel_x, s16 panel_y) {
     primitive->x3 = primitive->x1;
     GFX_AddPrim(4, 0x18);
 
-    if (g_ActorSlots[0].unk_01 == 4) {
+    if (g_ActorSlots[0].mode == 4) {
         y = 0xB4;
         if (g_ActorSlots[0].z.part.integer <= 0) {
             y = 0xB4 - g_ActorSlots[0].z.part.integer / 32;

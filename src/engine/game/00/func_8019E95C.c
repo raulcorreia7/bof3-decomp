@@ -9,20 +9,20 @@ MATCH void func_8019E95C(void) {
         return;
     }
 
-    g_SpadWork->unk_29   = (u8)(g_SpadWork->unk_29 + 1);
-    g_SpadWork->unk_2A   = 0;
-    g_SpadWork->flags_24 = 0;
-    g_SpadWork->unk_2B   = (u8)(g_SpadWork->unk_2B + 1);
-    g_SpadWork->unk_48   = 1;
+    g_Task->unk_29   = (u8)(g_Task->unk_29 + 1);
+    g_Task->unk_2A   = 0;
+    g_Task->flags_24 = 0;
+    g_Task->unk_2B   = (u8)(g_Task->unk_2B + 1);
+    g_Task->unk_48   = 1;
 
-    work                          = g_SpadWork;
-    work->tint.bytes.unk_5D       = 0;
-    other                         = g_SpadWork;
-    work->vy                      = -0x2000;
-    work->vx                      = 0;
-    work->vz                      = 0x40;
-    other->tint.bytes.unk_5E      = 0;
-    g_SpadWork->tint.bytes.unk_5F = 0;
+    work                      = g_Task;
+    work->tint.bytes.unk_5D   = 0;
+    other                     = g_Task;
+    work->vy                  = -0x2000;
+    work->vx                  = 0;
+    work->vz                  = 0x40;
+    other->tint.bytes.unk_5E  = 0;
+    g_Task->tint.bytes.unk_5F = 0;
     Actor_SelectScript(0);
-    g_SpadWork->state_02 = (u8)(g_SpadWork->state_02 + 1);
+    g_Task->step = (u8)(g_Task->step + 1);
 }

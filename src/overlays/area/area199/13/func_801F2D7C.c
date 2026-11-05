@@ -4,7 +4,7 @@ MATCH void func_801F2D7C(void) {
     Actor* scratch;
 
     do {
-        scratch          = g_SpadWork;
+        scratch          = g_Task;
         g_AreaSceneMode  = 0;
         scratch->x.fixed = 0x54;
         scratch->y.fixed = 0;

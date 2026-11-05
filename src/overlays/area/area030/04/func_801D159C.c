@@ -13,7 +13,7 @@ MATCH void func_801D159C(s16 panel_x, s16 panel_y) {
     func_801E0DCC(0xE, 3, panel_x, panel_y);
     func_801E0DCC(0xF, 3, (s16)(panel_x + 0x100), panel_y);
 
-    if (g_ActorSlots[0].unk_01 == 0) {
+    if (g_ActorSlots[0].mode == 0) {
         value = 0;
     } else {
         /* FAKE: retail reads the low byte of the y integer half (lbu). */

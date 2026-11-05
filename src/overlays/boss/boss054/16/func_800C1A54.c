@@ -3,10 +3,10 @@
 MATCH void func_800C1A54(void) {
     PartyBattler* saved;
 
-    saved      = g_SpadWork;
-    g_SpadWork = D_801EC2E0->target.party;
+    saved  = g_Task;
+    g_Task = D_801EC2E0->target.party;
     Actor_SelectScript(2);
-    g_SpadWork    = saved;
+    g_Task        = saved;
     saved->unk_0C = 8;
-    saved->step_01++;
+    saved->mode++;
 }

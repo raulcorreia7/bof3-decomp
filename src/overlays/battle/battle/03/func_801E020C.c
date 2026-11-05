@@ -11,14 +11,14 @@ MATCH void func_801E020C(void) {
     PartyBattler* work;
 
     func_801DEE4C();
-    work = g_SpadWork;
-    if ((work->unk_02 != 3) && (HAS_STATUS(*g_GameState, STATUS_KO))) {
+    work = g_Task;
+    if ((work->step != 3) && (HAS_STATUS(*g_GameState, STATUS_KO))) {
         /* FAKE: half pointer; the direct global scores 97.37%. */
         u16* half;
         half = &g_BattleState;
         *half &= ~BATTLE_STATE_REPRISAL_PENDING;
-        g_SpadWork->step_01 = 6;
-        g_SpadWork->unk_02  = 4;
+        g_Task->mode = 6;
+        g_Task->step = 4;
     } else {
         /* FAKE: half pointer; the direct global scores 82.24%. */
         u16* half;
@@ -38,7 +38,7 @@ MATCH void func_801E020C(void) {
         } else {
             *half = (*half & ~BATTLE_STATE_REPRISAL_PENDING) | BATTLE_STATE_REPRISAL_DONE;
         }
-        Battle_ClearSlotPending(g_SpadWork->slot);
+        Battle_ClearSlotPending(g_Task->slot);
         g_GameState->flags_124.value &= ~0x70;
         if ((func_801E0E0C() & BYTE_MASK) != 0) {
             /* FAKE: flag pointer; the direct store scores 97.37%. */
@@ -47,8 +47,8 @@ MATCH void func_801E020C(void) {
             *flag |= 1;
         }
         g_GameState->flags_124.value &= ~0x200;
-        g_SpadWork->step_01 = 2;
-        g_SpadWork->unk_02  = 0;
+        g_Task->mode = 2;
+        g_Task->step = 0;
     }
-    g_SpadWork->unk_03 = 0;
+    g_Task->unk_03 = 0;
 }

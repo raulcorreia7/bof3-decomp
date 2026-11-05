@@ -77,7 +77,7 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
     if (g_BattleEncounter != 0) {
         enemy                = &D_801EB630[slot & BYTE_MASK];
         g_BattleCurrentEnemy = enemy;
-        g_SpadWork           = enemy;
+        g_Task               = enemy;
         enemy->unk_E4(0);
     }
     if (g_BattleTargetSelector == GAME_NONE) {

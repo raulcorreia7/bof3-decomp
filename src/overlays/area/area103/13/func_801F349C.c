@@ -7,9 +7,9 @@ MATCH void func_801F349C(void) {
     STACK_PADS(u8, 16);
 
     for (i = 0; i < 3; i++) {
-        row->x      = g_SpadWork->x.fixed;
-        row->y      = g_SpadWork->y.fixed;
-        row->z      = g_SpadWork->z.fixed + 0x03800000;
+        row->x      = g_Task->x.fixed;
+        row->y      = g_Task->y.fixed;
+        row->z      = g_Task->z.fixed + 0x03800000;
         row->angle  = (i << 12) / 3;
         row->scale  = 0xC00;
         row->unk_14 = 0;

@@ -12,7 +12,7 @@ MATCH s32 func_801C4FE0(void) {
     u8     slot;
     s32    moved;
 
-    work    = g_SpadWork;
+    work    = g_Task;
     step    = work->state_70.byte + 2;
     next_x  = work->x.fixed + g_FacingSteps[work->direction_08].x * step;
     x       = next_x;
@@ -24,10 +24,10 @@ MATCH s32 func_801C4FE0(void) {
     result = Area_ReadHeight(x, y);
     slot   = g_GameState->slot_index_79;
     if (result - D_80181B70[slot] < counter) {
-        g_SpadWork->z.part.integer = g_SpadWork->z.part.integer - D_80181B88[slot];
+        g_Task->z.part.integer = g_Task->z.part.integer - D_80181B88[slot];
     } else {
-        g_SpadWork->z.part.integer = Area_ReadHeight(x, y) - D_80181B70[FIELD(volatile u8, g_GameState, 0x79u)];
-        if (g_SpadWork->direction_08 == 7) {
+        g_Task->z.part.integer = Area_ReadHeight(x, y) - D_80181B70[FIELD(volatile u8, g_GameState, 0x79u)];
+        if (g_Task->direction_08 == 7) {
             Actor_RequestScript(0x3C);
         } else {
             Actor_RequestScript(0x3D);
@@ -35,9 +35,8 @@ MATCH s32 func_801C4FE0(void) {
         moved = 1;
     }
 
-    if (g_SpadWork->unk_05 == 0 &&
-        !((g_GameFlags | g_AreaWalkFlags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
-        Area_AdvanceScroll((s16)g_SpadWork->z.part.integer);
+    if (g_Task->unk_05 == 0 && !((g_GameFlags | g_AreaWalkFlags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
+        Area_AdvanceScroll((s16)g_Task->z.part.integer);
     }
     if (!(g_FrameCount & 3)) {
         func_8014DAEC();

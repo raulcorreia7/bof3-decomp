@@ -12,8 +12,8 @@
 #define SCN_TRI_SHADE_V0         0x28
 #define SCN_TRI_SHADE_V1         0x6E
 #define SCN_TRI_SHADE_V2         0x64
-#define SCN_EFFECT               ((SceneEffect*)g_SpadWork)
-#define SPAD_ROW                 ((Actor*)g_SpadWork)
+#define SCN_EFFECT               ((SceneEffect*)g_Task)
+#define SPAD_ROW                 ((Actor*)g_Task)
 
 /* Cell `k` of the slot whose byte offset is `slot` (slot index * 0x30). */
 #define SCENE_FX(table, slot, k) (((SceneFxCells*)((u8*)(table) + (slot)))->cell[k])

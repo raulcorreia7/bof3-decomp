@@ -32,9 +32,9 @@ MATCH void func_801F6CA4(void) {
     if (g_InputPressed & PADR1) {
         index = Actor_FindFreeSlot();
         if (index != GAME_NONE) {
-            slot           = &g_ActorSlots[index];
-            slot->flags_00 = 1;
-            slot->type     = 0x2F;
+            slot        = &g_ActorSlots[index];
+            slot->flags = 1;
+            slot->type  = 0x2F;
         }
     }
 }

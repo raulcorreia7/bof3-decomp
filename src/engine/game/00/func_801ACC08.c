@@ -6,15 +6,15 @@ MATCH void func_801ACC08(void) {
     Actor* tint;
 
     g_CurrentActor->unk_93 = GFX_AllocPaletteFade(SP_REF(u8*, 0x44), 0U, 0U, 0U, 1);
-    flags_set              = g_SpadWork;
+    flags_set              = g_Task;
     *(u8*)(flags_set) |= 0x20;
-    flags_clear = g_SpadWork;
+    flags_clear = g_Task;
     *(u8*)(flags_clear) &= 0xBF;
-    g_SpadWork->tint.signed_bytes.flags = 1;
-    tint                                = g_SpadWork;
-    tint->tint.signed_bytes.unk_5F      = -0x80;
-    tint->tint.signed_bytes.unk_5E      = -0x80;
-    tint->tint.signed_bytes.unk_5D      = -0x80;
-    g_SpadWork->unk_04                  = 1;
-    g_CurrentActor->unk_7E              = (u16)(g_CurrentActor->unk_7E - 1);
+    g_Task->tint.signed_bytes.flags = 1;
+    tint                            = g_Task;
+    tint->tint.signed_bytes.unk_5F  = -0x80;
+    tint->tint.signed_bytes.unk_5E  = -0x80;
+    tint->tint.signed_bytes.unk_5D  = -0x80;
+    g_Task->unk_04                  = 1;
+    g_CurrentActor->unk_7E          = (u16)(g_CurrentActor->unk_7E - 1);
 }

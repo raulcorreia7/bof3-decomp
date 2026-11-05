@@ -3,5 +3,5 @@
 /* Dispatches the AREA030 scratchpad state byte through the overlay's
  * jump table. */
 MATCH void func_801D3358(void) {
-    D_801E1D8C[g_SpadWork->unk_01]();
+    D_801E1D8C[g_Task->mode]();
 }

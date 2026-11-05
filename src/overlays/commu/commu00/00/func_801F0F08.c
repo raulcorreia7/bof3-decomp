@@ -4,7 +4,7 @@ MATCH void func_801F0F08(u8 source_index, u8 task_index, u8 record_kind_index) {
     u32 elapsed;
     u32 bucket;
 
-    g_SpadWork->unk_06 = 1;
+    g_Task->unk_06 = 1;
 
     elapsed = g_BattleCount - g_FairyJobs[source_index].progress_anchor;
     if (elapsed < 20) {

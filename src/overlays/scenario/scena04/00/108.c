@@ -15,7 +15,7 @@ MATCH void func_801F6D08(void) {
 MATCH void func_801F6D44(void) {
     Actor* work;
 
-    work                   = g_SpadWork;
+    work                   = g_Task;
     work->vz               = 0x1000000;
     FIELD(s32, work, 0x2C) = 0x1000000;
     work->vx               = 0x568000;
@@ -27,8 +27,8 @@ MATCH void func_801F6D44(void) {
     work->x.fixed          = 0x4000;
     work->y.fixed          = 0x2200000;
     func_801F747C();
-    g_SpadWork->unk_09 = 8;
-    g_SpadWork->unk_01 += 1;
+    g_Task->unk_09 = 8;
+    g_Task->mode += 1;
 }
 
 /* 16 differing; first at +4: retail hoists li a0,0x10 ahead of the s0 save and interleaves the
@@ -40,15 +40,15 @@ MATCH void func_801F6EA4(void) {
     Actor* actor;
     u8     mode;
 
-    work = g_SpadWork;
+    work = g_Task;
     func_801F7084(&work->vx);
     func_801F75BC(0x10, 0xFF);
-    actor         = g_SpadWork;
+    actor         = g_Task;
     mode          = actor->unk_09 - 1;
     actor->unk_09 = mode;
     if (mode == 0) {
-        g_SpadWork->unk_09 = 4;
-        g_SpadWork->unk_01 += 1;
+        g_Task->unk_09 = 4;
+        g_Task->mode += 1;
     }
 }
 
@@ -59,11 +59,11 @@ INCLUDE_ASM(func_801F6F2C);
 MATCH void func_801F6FF8(void) {
     Actor* work;
 
-    func_801F7084(&g_SpadWork->vx);
-    work = g_SpadWork;
+    func_801F7084(&g_Task->vx);
+    work = g_Task;
     work->unk_09--;
     if (work->unk_09 == 0) {
-        g_SpadWork->unk_01++;
+        g_Task->mode++;
     }
 }
 
@@ -80,7 +80,7 @@ INCLUDE_ASM(func_801F747C);
 INCLUDE_ASM(func_801F75BC);
 
 MATCH void func_801F77A8(void) {
-    SYS_DISPATCH_TASK(D_801FA198, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FA198, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801F77EC);
@@ -92,15 +92,15 @@ MATCH void func_801F7A64(void) {
 }
 
 MATCH void func_801F7A84(void) {
-    SYS_DISPATCH_TASK(D_801FA1E4, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FA1E4, 1, g_Task);
 }
 
 MATCH void func_801F7AC8(void) {
     Actor* work;
 
     func_801F7FCC();
-    work = g_SpadWork;
-    work->unk_01 += 1;
+    work = g_Task;
+    work->mode += 1;
 }
 
 MATCH void func_801F7B00(void) {
@@ -162,8 +162,8 @@ MATCH void func_801F7BC0(void) {
 
 MATCH void func_801F7CA8(void) {
     func_801F7EC0();
-    g_SpadWork->vx = g_SpadWork->vx - 1;
-    if (g_SpadWork->vx == 0) {
+    g_Task->vx = g_Task->vx - 1;
+    if (g_Task->vx == 0) {
         func_80196070();
     }
 }

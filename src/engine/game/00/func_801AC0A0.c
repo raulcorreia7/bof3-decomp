@@ -9,15 +9,15 @@ MATCH void func_801AC0A0(s8 tuning_delta) {
 
     arg  = tuning_delta;
     step = arg;
-    func_801ABF30((VECTOR*)buf, FIELD(u8, g_SpadWork, 0x18u), FIELD(u8, g_SpadWork, 0x1Cu));
+    func_801ABF30((VECTOR*)buf, FIELD(u8, g_Task, 0x18u), FIELD(u8, g_Task, 0x1Cu));
     next = step;
     if (arg == 0) {
         next = 1;
     }
-    step               = next;
-    g_SpadWork->unk_09 = step;
-    work               = g_SpadWork;
-    work->vx           = (buf[0] - work->x.fixed) / step;
-    work->vy           = (buf[1] - work->y.fixed) / step;
-    work->vz           = (buf[2] - work->z.part.integer) / step;
+    step           = next;
+    g_Task->unk_09 = step;
+    work           = g_Task;
+    work->vx       = (buf[0] - work->x.fixed) / step;
+    work->vy       = (buf[1] - work->y.fixed) / step;
+    work->vz       = (buf[2] - work->z.part.integer) / step;
 }

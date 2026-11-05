@@ -5,9 +5,9 @@
 MATCH void Scene_ClearScanBarsAndAdvance(void) {
     Actor* work;
 
-    work         = g_SpadWork;
+    work         = g_Task;
     work->unk_2E = 300;
     work->unk_09 = 0;
     Scene_ClearScanBars();
-    g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
+    g_Task->mode = g_Task->mode + 1;
 }

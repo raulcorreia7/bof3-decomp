@@ -3,7 +3,7 @@
 MATCH void func_800AE474(void) {
     PartyBattler* work;
 
-    work = (PartyBattler*)g_SpadWork;
+    work = (PartyBattler*)g_Task;
     work->word_08.byte.unk_09++;
     if (work->word_08.byte.unk_09 == 0) {
         func_801E5988();

@@ -5,7 +5,7 @@
  */
 MATCH void Char_SelectScriptAndStep(void) {
     if (func_8014DAEC() & BYTE_MASK) {
-        Actor_SelectScript(g_SpadWork->direction_08);
-        g_SpadWork->unk_03++;
+        Actor_SelectScript(g_Task->direction_08);
+        g_Task->unk_03++;
     }
 }

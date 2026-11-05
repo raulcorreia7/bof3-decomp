@@ -28,16 +28,16 @@
 
 /* Ask whether a work row is live: the update walks only rows with the in-use
  * bit set. Pass the row itself or, for a pointer, its dereference. */
-#define ACTOR_IN_USE(actor)  (((actor).flags_00 & ACTOR_FLAG_IN_USE) != 0)
+#define ACTOR_IN_USE(actor)  (((actor).flags & ACTOR_FLAG_IN_USE) != 0)
 
 /* The actor's state step in the scratchpad work cell: the byte
  * SYS_DISPATCH_TASK indexes and the battle step tables read and write. */
-#define ACTOR_SET_STEP(step) (SPAD_WORK_BYTES[1] = (step))
+#define ACTOR_SET_STEP(step) (TASK_BYTES[1] = (step))
 
 /* Clear the actor's state step: the record starts a new task at state 0. */
-#define ACTOR_CLEAR_STATE()  (g_SpadWork->state_02 = 0)
+#define ACTOR_CLEAR_STATE()  (g_Task->step = 0)
 
-/* `flags_00` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the
+/* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the
  * row's palette pair; bit 3 marks selection voices queued on the row
  * (@source: write:SND_QueueSelectionFx@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes the advance-stream tail after the step
  * deltas; bit 5 makes the row's primitives semi-transparent; bit 6 hides the
@@ -133,9 +133,9 @@ typedef union ActorStateWord {
 ASSERT_SIZE(ActorStateWord, 0x04);
 
 typedef struct Actor {
-    u8             flags_00;       /* 0x00 - entity flags; ActorFlags */
-    u8             unk_01;         /* 0x01 - commu00 calls it the task mode */
-    u8             state_02;       /* 0x02 - commu00 calls it the task state */
+    u8             flags;          /* 0x00 - entity flags; ActorFlags */
+    u8             mode;           /* 0x01 - commu00 calls it the task mode */
+    u8             step;           /* 0x02 - commu00 calls it the task state */
     u8             unk_03;         /* 0x03 */
     u8             unk_04;         /* 0x04 */
     u8             unk_05;         /* 0x05 - region/scene index; commu00 calls it the
@@ -216,7 +216,7 @@ typedef struct Actor {
 } Actor;
 
 ASSERT_SIZE(Actor, ACTOR_SIZE);
-ASSERT_OFFSET(Actor, flags_00, 0x00);
+ASSERT_OFFSET(Actor, flags, 0x00);
 ASSERT_OFFSET(Actor, direction_08, 0x08);
 ASSERT_OFFSET(Actor, vx, 0x0C);
 ASSERT_OFFSET(Actor, vy, 0x10);

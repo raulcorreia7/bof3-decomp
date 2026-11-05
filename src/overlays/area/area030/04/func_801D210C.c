@@ -32,13 +32,13 @@ NON_MATCHING void func_801D210C(void) {
     }
 
     g_AreaCameraStep              = 0;
-    SPAD_WORK_BYTES[0xC]          = 0;
+    TASK_BYTES[0xC]               = 0;
     FISHING_STATE->step_14        = *(u32*)(D_801E1D38 + FISHING_STATE->cue_index_06 * 8);
     FISHING_STATE->flags_24       = 0;
     FISHING_STATE->step_limit_20  = *(u32*)(D_801E1D3C + FISHING_STATE->cue_index_06 * 8);
     FISHING_STATE->state_29       = 5;
     FISHING_STATE->counter_48     = 1;
-    FISHING_STATE->flags_00       = (u8)(FISHING_STATE->flags_00 & ~ACTOR_FLAG_SEMI_TRANSPARENT);
+    FISHING_STATE->flags          = (u8)(FISHING_STATE->flags & ~ACTOR_FLAG_SEMI_TRANSPARENT);
     FISHING_STATE->saved_index_0B = 0;
     FISHING_STATE->tint_5D        = 0;
     FISHING_STATE->tint_5E        = 0;
@@ -54,8 +54,8 @@ NON_MATCHING void func_801D210C(void) {
     Actor_SelectScript(1);
     index = (u32)Actor_FindFreeSlot() & BYTE_MASK;
     if (index != GAME_NONE) {
-        g_ActorSlots[index].flags_00 = 1;
-        g_ActorSlots[index].type     = 10;
+        g_ActorSlots[index].flags = 1;
+        g_ActorSlots[index].type  = 10;
     }
     FISHING_STATE->counter_07       = D_801E3210->unk_0F;
     FISHING_STATE->handler_index_01 = (u8)(FISHING_STATE->handler_index_01 + 1);

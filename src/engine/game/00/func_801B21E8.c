@@ -62,12 +62,12 @@ NON_MATCHING void func_801B21E8(void) {
         do {
             if (D_80145E91[val5] == 3) {
                 tmp5        = (u8*)g_BattlePartyBattlers + val5;
-                g_SpadWork  = tmp5;
+                g_Task      = tmp5;
                 g_GameState = tmp5;
                 func_801C1254(FIELD(u8, tmp5, 0x79u), val4 & BYTE_MASK);
                 g_GameState->flags_12C.u8_value = val14;
                 if (g_GameState->flags_12C.u8_value & 1) {
-                    FIELD(s8, g_SpadWork, 0x29u) = 4;
+                    FIELD(s8, g_Task, 0x29u) = 4;
                 }
                 val11 = (u8*)g_Characters;
                 val12 = (u8*)g_GameState + 0x74;
@@ -86,13 +86,13 @@ NON_MATCHING void func_801B21E8(void) {
                 D_80144F5A[val4]      = g_GameState->slot_index_79;
                 if (val4 != 0) {
                     func_801C2438();
-                    tmp6                                = g_SpadWork;
-                    *(u8*)(tmp6)                        = (u8)(*(u8*)(tmp6) & 0xBF);
-                    g_SpadWork->tint.signed_bytes.flags = 1;
-                    g_SpadWork->direction_08            = (u8)(D_80145E98 ^ 4);
+                    tmp6                            = g_Task;
+                    *(u8*)(tmp6)                    = (u8)(*(u8*)(tmp6) & 0xBF);
+                    g_Task->tint.signed_bytes.flags = 1;
+                    g_Task->direction_08            = (u8)(D_80145E98 ^ 4);
                 }
                 if (!(*val13 & 1) && (val4 != 0)) {
-                    tmp4  = g_SpadWork;
+                    tmp4  = g_Task;
                     tmp10 = FIELD(u8, tmp4, 0x8u);
                     tmp1  = val6 + (tmp10 * 4);
                     val3 =
@@ -102,7 +102,7 @@ NON_MATCHING void func_801B21E8(void) {
                     val8 = val3 & BYTE_MASK;
                     val9 = 0;
                     if (val8 != 0) {
-                        val9 = func_801B1C18(*(s32*)val0, FIELD(s32, val0, 0x4u), g_SpadWork->state_70.byte);
+                        val9 = func_801B1C18(*(s32*)val0, FIELD(s32, val0, 0x4u), g_Task->state_70.byte);
                         val8 = val3 & BYTE_MASK;
                     }
                     if ((val8 == 0) || !(val9 & BYTE_MASK)) {
@@ -114,12 +114,12 @@ NON_MATCHING void func_801B21E8(void) {
                     val1 = FIELD(s32, val13, -0xF8);
                     val2 = FIELD(s32, val13, -0xF4);
                 block_26:
-                    func_801B1B2C(val1, val2, g_SpadWork->direction_08, g_SpadWork->state_70.byte);
+                    func_801B1B2C(val1, val2, g_Task->direction_08, g_Task->state_70.byte);
                 }
-                tmp7                    = g_SpadWork;
+                tmp7                    = g_Task;
                 FIELD(s32, tmp7, 0x34u) = (s32) * (s32*)(&D_1F800008);
                 FIELD(s32, tmp7, 0x38u) = FIELD(s32, val0, 0x4u);
-                tmp8                    = g_SpadWork;
+                tmp8                    = g_Task;
                 FIELD(s16, tmp8, 0x3Eu) = Area_ReadHeight(FIELD(s32, tmp7, 0x34u), FIELD(s32, val0, 0x4u));
                 Actor_SelectScript(FIELD(u8, tmp8, 0x8u));
             }
@@ -128,7 +128,7 @@ NON_MATCHING void func_801B21E8(void) {
             val5 += BATTLE_PARTY_STRIDE;
         } while (val4 < (s32)g_PartySize);
     }
-    g_SpadWork       = (Actor*)g_BattlePartyBattlers;
+    g_Task           = (Actor*)g_BattlePartyBattlers;
     g_GameState      = (GameState*)g_BattlePartyBattlers;
     g_AreaCameraStep = 0x20;
     tmp3             = g_AreaScrollTargetX - D_80145EC4;
@@ -152,9 +152,9 @@ NON_MATCHING void func_801B21E8(void) {
     } else {
         g_AreaCameraHeightStep = 0;
     }
-    FIELD(s8, g_SpadWork, 0x9u) = 4;
-    tmp9                        = g_SpadWork;
-    FIELD(u8, tmp9, 0x2u)       = (u8)(FIELD(u8, tmp9, 0x2u) + 1);
+    FIELD(s8, g_Task, 0x9u) = 4;
+    tmp9                    = g_Task;
+    FIELD(u8, tmp9, 0x2u)   = (u8)(FIELD(u8, tmp9, 0x2u) + 1);
 }
 #else
 INCLUDE_ASM(func_801B21E8);

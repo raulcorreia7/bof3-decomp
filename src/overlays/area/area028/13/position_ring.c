@@ -149,7 +149,7 @@ MATCH void func_801F2C48(void) {
 
     func_801F2F5C();
 
-    work = (u8*)g_SpadWork;
+    work = (u8*)g_Task;
 
     work[1] += 1u;
     FIELD(u16, work, 0x2Eu) = 0;
@@ -159,15 +159,15 @@ MATCH void func_801F2C80(void) {
     u16 next;
 
     if (g_ScriptVars[0] == 0x19) {
-        g_SpadWork->unk_01 += 1u;
+        g_Task->mode += 1u;
         return;
     }
-    func_801F318C(g_SpadWork->unk_2E);
+    func_801F318C(g_Task->unk_2E);
     func_801F3060();
-    next               = (u16)(g_SpadWork->unk_2E + 0x40u);
-    g_SpadWork->unk_2E = next;
+    next           = (u16)(g_Task->unk_2E + 0x40u);
+    g_Task->unk_2E = next;
     if ((s16)next >= 0x400) {
-        g_SpadWork->unk_2E = 0x400;
+        g_Task->unk_2E = 0x400;
     }
 }
 
@@ -318,16 +318,16 @@ MATCH void func_801F318C(s16 radius) {
     GFX_AddPrim(3u, 0x0Cu);
     Area_SetCameraMatrix(scratch);
 
-    pos[0] = g_SpadWork->x.fixed;
-    pos[1] = g_SpadWork->y.fixed;
-    pos[2] = g_SpadWork->z.fixed;
+    pos[0] = g_Task->x.fixed;
+    pos[1] = g_Task->y.fixed;
+    pos[2] = g_Task->z.fixed;
     Area_ProjectPoint(pos, &center);
     D_800E4A00 = center;
 
     ring   = MEM_PTR(ScreenPoint, 0x800E4A00u);
-    pos[0] = g_SpadWork->x.fixed + ((radius * rcos(65408)) >> 4);
-    pos[1] = g_SpadWork->y.fixed + ((radius * rsin(65408)) >> 4);
-    pos[2] = g_SpadWork->z.fixed;
+    pos[0] = g_Task->x.fixed + ((radius * rcos(65408)) >> 4);
+    pos[1] = g_Task->y.fixed + ((radius * rsin(65408)) >> 4);
+    pos[2] = g_Task->z.fixed;
     Area_ProjectPoint(pos, &point);
 
     do {
@@ -340,9 +340,9 @@ MATCH void func_801F318C(s16 radius) {
         primitive->y1 = point.y;
 
         angle += 128;
-        pos[0] = g_SpadWork->x.fixed + ((radius * rcos((u16)angle)) >> 4);
-        pos[1] = g_SpadWork->y.fixed + ((radius * rsin((u16)angle)) >> 4);
-        pos[2] = g_SpadWork->z.fixed;
+        pos[0] = g_Task->x.fixed + ((radius * rcos((u16)angle)) >> 4);
+        pos[1] = g_Task->y.fixed + ((radius * rsin((u16)angle)) >> 4);
+        pos[2] = g_Task->z.fixed;
         Area_ProjectPoint(pos, &point);
 
         primitive->x2 = point.x;
@@ -379,10 +379,10 @@ MATCH void func_801F3424(void) {
     if (slot_index == GAME_NONE) {
         return;
     }
-    slot           = &g_ActorSlots[slot_index];
-    slot->flags_00 = 1;
-    slot->type     = 0x40;
-    slot->x.fixed  = 0x150000;
-    slot->y.fixed  = 0x5B0000;
-    slot->z.fixed  = Area_SampleHeight(slot->x.fixed, 0x5B0000) << 16;
+    slot          = &g_ActorSlots[slot_index];
+    slot->flags   = 1;
+    slot->type    = 0x40;
+    slot->x.fixed = 0x150000;
+    slot->y.fixed = 0x5B0000;
+    slot->z.fixed = Area_SampleHeight(slot->x.fixed, 0x5B0000) << 16;
 }

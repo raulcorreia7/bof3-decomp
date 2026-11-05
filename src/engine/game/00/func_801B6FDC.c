@@ -5,5 +5,5 @@ MATCH void func_801B6FDC(void) {
         return;
     }
     g_GameState->flags_118 &= 0xDFu;
-    g_SpadWork->unk_03 = 0;
+    g_Task->unk_03 = 0;
 }

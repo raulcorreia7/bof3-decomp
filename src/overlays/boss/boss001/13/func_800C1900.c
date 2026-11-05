@@ -7,8 +7,8 @@ MATCH void func_800C1900(void) {
     func_801E54EC();
     work = g_BattleCurrentEnemy;
     work->flags_100 |= 0x1000;
-    g_SpadWork->flags_00 &= 0xBF;
-    g_SpadWork->step_01 = 3;
-    g_SpadWork->unk_02  = 0;
-    g_SpadWork->unk_03  = 0;
+    g_Task->flags &= 0xBF;
+    g_Task->mode   = 3;
+    g_Task->step   = 0;
+    g_Task->unk_03 = 0;
 }

@@ -13,18 +13,18 @@ INCLUDE_ASM(func_801EEE70);
 MATCH void func_801EEF98(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (work->word_08.byte.unk_0B != 0) {
         work->word_08.byte.unk_09 = 8;
-        work                      = g_SpadWork;
-        work->step_01             = work->step_01 + 1;
+        work                      = g_Task;
+        work->mode                = work->mode + 1;
     }
 }
 
 INCLUDE_ASM(func_801EEFDC);
 
 MATCH void func_801EF0EC(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 9) {
+    if (g_Task->word_08.byte.unk_0B == 9) {
         func_80196718(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
         func_800A9820(g_BattleTargetSelector);
@@ -34,15 +34,15 @@ MATCH void func_801EF0EC(void) {
 }
 
 MATCH void func_801EF16C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 #include "overlays/bmagic/Effect_SetActorMatrixRolled.h"
 
 MATCH void func_801EF264(void) {
-    D_801F09A0[g_SpadWork->unk_02]();
+    D_801F09A0[g_Task->step]();
     func_800AF764();
-    if (g_SpadWork->unk_02 != 0) {
+    if (g_Task->step != 0) {
         Effect_SetActorMatrixRolled();
         func_801EF8F0(0x60, 0x20, 7);
         PopMatrix();
@@ -50,13 +50,13 @@ MATCH void func_801EF264(void) {
 }
 
 MATCH void func_801EF2EC(void) {
-    g_SpadWork->word_08.byte.unk_0B   = rand() & 0xF;
-    g_SpadWork->word_08.byte.unk_09   = 0;
-    g_SpadWork->word_08.byte.timer_0A = 0;
-    g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
-    g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
-    g_SpadWork->word_3C.word          = D_801EB4E0->word_3C.word;
-    g_SpadWork->unk_02 += 1;
+    g_Task->word_08.byte.unk_0B   = rand() & 0xF;
+    g_Task->word_08.byte.unk_09   = 0;
+    g_Task->word_08.byte.timer_0A = 0;
+    g_Task->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
+    g_Task->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
+    g_Task->word_3C.word          = D_801EB4E0->word_3C.word;
+    g_Task->step += 1;
 }
 
 MATCH void func_801EF374(void) {
@@ -70,9 +70,9 @@ MATCH void func_801EF44C(void) {
     PartyBattler* active;
     u8            count;
 
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.unk_0B++;
-    work                        = g_SpadWork;
+    work                        = g_Task;
     count                       = work->word_08.byte.timer_0A - 1;
     work->word_08.byte.timer_0A = count;
     if (count == 0) {
@@ -85,10 +85,10 @@ MATCH void func_801EF44C(void) {
 MATCH void func_801EF4C4(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
-    D_801F09B0[work->unk_02]();
+    work = g_Task;
+    D_801F09B0[work->step]();
     func_800AF764();
-    if (g_SpadWork->flags_00 != 0) {
+    if (g_Task->flags != 0) {
         Effect_SetActorMatrixRolled();
         func_801EF8F0(0x20, 0x50, 0xF);
         func_801F070C();
@@ -113,9 +113,9 @@ MATCH void func_801EF7D8(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_SpadWork->word_08.byte.unk_0B++;
+    g_Task->word_08.byte.unk_0B++;
 
-    work                   = g_SpadWork;
+    work                   = g_Task;
     counter                = work->unk_0C + 1;
     VOL(s32, work->unk_0C) = counter;
     angle                  = (counter & 0x7F) << 5;
@@ -124,13 +124,13 @@ MATCH void func_801EF7D8(void) {
     D_1F800000             = 0x28;
 
     velocity             = rcos(angle) * D_1F800000;
-    work                 = g_SpadWork;
+    work                 = g_Task;
     work->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw + velocity;
 
-    velocity                   = rsin(*angle_cell) * D_1F800000;
-    g_SpadWork->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
+    velocity               = rsin(*angle_cell) * D_1F800000;
+    g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
 
-    if (--g_SpadWork->word_08.byte.timer_0A == 0) {
+    if (--g_Task->word_08.byte.timer_0A == 0) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B++;
         func_801E5988();
     }
@@ -139,9 +139,9 @@ MATCH void func_801EF7D8(void) {
 INCLUDE_ASM(func_801EF8F0);
 
 MATCH void func_801F0008(void) {
-    D_801F09C0[g_SpadWork->unk_02]();
+    D_801F09C0[g_Task->step]();
     func_800AF764();
-    if (g_SpadWork->unk_02 != 0) {
+    if (g_Task->step != 0) {
         Effect_SetActorMatrixRolled();
         func_801F043C();
         func_801F070C();
@@ -156,11 +156,11 @@ MATCH void func_801F0090(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_SpadWork->word_08.byte.unk_0B   = (u8)(RANDOM_MASK(0xF));
-    g_SpadWork->word_08.byte.unk_09   = 0;
-    g_SpadWork->word_08.byte.timer_0A = 0;
+    g_Task->word_08.byte.unk_0B   = (u8)(RANDOM_MASK(0xF));
+    g_Task->word_08.byte.unk_09   = 0;
+    g_Task->word_08.byte.timer_0A = 0;
 
-    work                   = g_SpadWork;
+    work                   = g_Task;
     counter                = (work->unk_03 << 5) + 0x10;
     angle                  = (counter & 0x7F) << 5;
     VOL(s32, work->unk_0C) = counter;
@@ -168,26 +168,26 @@ MATCH void func_801F0090(void) {
     *angle_cell            = angle;
     D_1F800000             = 0x18;
 
-    velocity                   = rcos(angle) * D_1F800000;
-    g_SpadWork->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw + velocity;
+    velocity               = rcos(angle) * D_1F800000;
+    g_Task->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw + velocity;
 
-    velocity                   = rsin(*angle_cell) * D_1F800000;
-    g_SpadWork->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
+    velocity               = rsin(*angle_cell) * D_1F800000;
+    g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
 
-    g_SpadWork->word_3C.half.span_3E = (u16)BATTLE_ACTIVE_WORK->word_3C.half.span_3E;
-    g_SpadWork->unk_02++;
+    g_Task->word_3C.half.span_3E = (u16)BATTLE_ACTIVE_WORK->word_3C.half.span_3E;
+    g_Task->step++;
 }
 
 MATCH void func_801F01AC(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (work->word_08.byte.timer_0A < 16) {
         work->word_08.byte.timer_0A += 2;
     } else {
         work->word_08.byte.unk_09 = 60;
-        work                      = g_SpadWork;
-        work->unk_02++;
+        work                      = g_Task;
+        work->step++;
     }
 }
 
@@ -203,9 +203,9 @@ MATCH void func_801F0314(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_SpadWork->word_08.byte.unk_0B++;
+    g_Task->word_08.byte.unk_0B++;
 
-    work                   = g_SpadWork;
+    work                   = g_Task;
     counter                = work->unk_0C + 1;
     VOL(s32, work->unk_0C) = counter;
     angle                  = (counter & 0x7F) << 5;
@@ -214,15 +214,15 @@ MATCH void func_801F0314(void) {
     D_1F800000             = 0x18;
 
     velocity             = rcos(angle) * D_1F800000;
-    work                 = g_SpadWork;
+    work                 = g_Task;
     work->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw + velocity;
 
     velocity                = rsin(*angle_cell) * D_1F800000;
-    scratch                 = g_SpadWork;
+    scratch                 = g_Task;
     scratch->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
     scratch->word_08.byte.timer_0A -= 2;
 
-    if (g_SpadWork->word_08.byte.timer_0A == 0) {
+    if (g_Task->word_08.byte.timer_0A == 0) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B++;
         func_801E5988();
     }
