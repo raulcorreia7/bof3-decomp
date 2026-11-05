@@ -25,7 +25,7 @@ MATCH void Menu_DrawTintedLine(s16 line_x0, s16 line_y0, s16 line_x1, s16 line_y
     y1     = line_y1;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, tpage, 960, 0), 0);
     GFX_AddPrim(1, 0xC);
-    primitive   = (LINE_F2*)g_GfxPrimCursor;
+    primitive = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(primitive);
     SetSemiTrans(primitive, 1);
     primitive->r0 = color0;

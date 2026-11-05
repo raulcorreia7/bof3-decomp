@@ -4,13 +4,13 @@
  * owns them (src/engine/game/00/game_00.h). */
 
 MATCH void func_801D0EDC(void) {
-    s32 index;
-    u8*       pond;
+    s32        index;
+    u8*        pond;
     Character* row;
-    u16       flags;
-    s32 count;
-    u32 have;
-    u32 need;
+    u16        flags;
+    s32        count;
+    u32        have;
+    u32        need;
 
     index = D_8014865C;
     if (index < 0) {
