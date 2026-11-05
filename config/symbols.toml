@@ -2299,6 +2299,7 @@ Actor_SetScreenBottom = { addr = 0x801F3604, type = "func", source = "scrolls th
 Area_DrawHudSprite = { addr = 0x801F390C, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
 Area_DrawHud = { addr = 0x801F3A34, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and D_80145AC0 pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
 Area_DrawGradientDiamond = { addr = 0x801F3E00, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
+Actor_SpawnRandomGroup = { addr = 0x801F40F0, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area033)" }
 Area_StepStreamSetDrawMode = { addr = 0x801F4674, type = "func", source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 
 ["emi/world00/area036/13"]
@@ -2465,6 +2466,7 @@ Area_DrawHudSprite = { addr = 0x801F453C, type = "func", source = "draws one spr
 Area_DrawHud = { addr = 0x801F4664, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and D_80145AC0 pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
 Area_DrawGradientDiamond = { addr = 0x801F4A30, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudBanner = { addr = 0x801F4C28, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
+Actor_SpawnRandomGroup = { addr = 0x801F4D1C, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area088)" }
 Actor_MoveByVelocity = { addr = 0x801F5088, type = "func", source = "moves the actor by the projected velocity when the tile is classified" }
 Area_StepStreamSetDrawMode = { addr = 0x801F52A0, type = "func", source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 
@@ -2686,6 +2688,7 @@ Area_DrawHudSprite = { addr = 0x801F3948, type = "func", source = "draws one spr
 Area_DrawHud = { addr = 0x801F3A70, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and D_80145AC0 pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
 Area_DrawGradientDiamond = { addr = 0x801F3E3C, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudBanner = { addr = 0x801F4034, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
+Actor_SpawnRandomGroup = { addr = 0x801F4128, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area151)" }
 Area_StepStreamSetDrawMode = { addr = 0x801F46AC, type = "func", source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 
 ["emi/world04/area152/13"]
@@ -2701,6 +2704,7 @@ Area_DrawHudSprite = { addr = 0x801F389C, type = "func", source = "draws one spr
 Area_DrawHud = { addr = 0x801F39C4, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and D_80145AC0 pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
 Area_DrawGradientDiamond = { addr = 0x801F3D90, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudBanner = { addr = 0x801F3F88, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
+Actor_SpawnRandomGroup = { addr = 0x801F407C, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area152)" }
 Area_StepStreamSetDrawMode = { addr = 0x801F4600, type = "func", source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 
 ["emi/world04/area153/13"]
