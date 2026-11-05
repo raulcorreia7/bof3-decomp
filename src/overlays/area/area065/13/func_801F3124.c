@@ -1,3 +1,4 @@
+/* Dropping the volatile cell changes the code: retail reloads it. */
 #define SPAD_WORK_VOLATILE
 #include "area065_13.h"
 

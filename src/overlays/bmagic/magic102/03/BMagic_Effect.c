@@ -1,5 +1,3 @@
-/* Every step re-reads the scratchpad cell. */
-#define SPAD_WORK_VOLATILE
 #include "magic102_03.h"
 
 #if BOF3_USE_ASM
