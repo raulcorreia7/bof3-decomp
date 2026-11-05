@@ -12,7 +12,24 @@ MATCH void func_801F6D08(void) {
     D_801FA180[entity[1]]();
 }
 
-INCLUDE_ASM(func_801F6D44);
+MATCH void func_801F6D44(void) {
+    Actor* work;
+
+    work                   = g_SpadWork;
+    work->vz               = 0x1000000;
+    FIELD(s32, work, 0x2C) = 0x1000000;
+    work->unk_0C           = 0x568000;
+    work->unk_10           = 0x128000;
+    work->unk_1C           = 0;
+    work->gravity          = 0x2200000;
+    FIELD(s32, work, 0x24) = 0x568000;
+    FIELD(s32, work, 0x28) = 0x128000;
+    work->x.fixed          = 0x4000;
+    work->y.fixed          = 0x2200000;
+    func_801F747C();
+    g_SpadWork->unk_09 = 8;
+    g_SpadWork->unk_01 += 1;
+}
 
 INCLUDE_ASM(func_801F6DD4);
 
