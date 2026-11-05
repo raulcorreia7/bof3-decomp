@@ -223,7 +223,26 @@ MATCH u8* func_801F8B14(void) {
 
 INCLUDE_ASM(func_801F8B50);
 
-INCLUDE_ASM(func_801F8BF8);
+MATCH s32 func_801F8BF8(void) {
+    u8  i;
+    s32 live;
+    u8* slot;
+    u8  buffer[0x20];
+
+    live = 0;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x3C0, 0), 0);
+    GFX_AddPrim(1, 0xC);
+    func_801AFE18(buffer);
+    slot = MEM_PTR(u8, 0x800E4800u);
+    for (i = 0; i < 8; i += 1, slot += 0x1C) {
+        if (slot[0] != 0) {
+            D_801FE8FC[slot[1]](slot);
+            live = 1;
+            func_801F8964(slot);
+        }
+    }
+    return live;
+}
 
 /* 8 differing, a pure v0/v1 swap of the two byte locals from +0x0 (retail lbu v1,2(a0) against
  * candidate lbu v0,2(a0)); next lever: permuter to pin the state local in v1. */
