@@ -20,23 +20,21 @@ MATCH void func_8019B3A8(void) {
 
     Area_FindSceneRecord(g_Task->unk_0B);
     func_8019BF78();
-    g_Task->unk_29            = 6;
-    g_Task->unk_48            = 1;
-    g_Task->flags_24          = 0;
-    g_Task->unk_2A            = 0;
-    g_Task->tint.bytes.unk_5D = 0;
-    g_Task->tint.bytes.unk_5E = 0;
-    g_Task->tint.bytes.unk_5F = 0;
-    work                      = g_Task;
-    work->option_flags        = 0;
-    motion                    = (GameMotionFields*)work;
-    motion->unk_0C            = 0;
-    motion->unk_10            = 0;
-    motion->unk_14            = 0;
-    motion->unk_18            = 0;
-    motion->unk_1C            = 0;
-    motion->unk_20            = 0;
-    g_Task->unk_0A            = 0;
+    g_Task->unk_29   = 6;
+    g_Task->unk_48   = 1;
+    g_Task->flags_24 = 0;
+    g_Task->unk_2A   = 0;
+    ACTOR_CLEAR_TINT();
+    work               = g_Task;
+    work->option_flags = 0;
+    motion             = (GameMotionFields*)work;
+    motion->unk_0C     = 0;
+    motion->unk_10     = 0;
+    motion->unk_14     = 0;
+    motion->unk_18     = 0;
+    motion->unk_1C     = 0;
+    motion->unk_20     = 0;
+    g_Task->unk_0A     = 0;
     Actor_SelectScript(0);
     g_Task->mode++;
 }

@@ -28,11 +28,9 @@ MATCH void func_801B26E0(void) {
             if (g_Task->mode == 3) {
                 GFX_StagePalette(GAME_PALETTE_STAGE + (g_Task->unk_05 << 6), 0);
                 g_Task->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
-                g_Task->tint.bytes.unk_5D = 0;
-                g_Task->tint.bytes.unk_5E = 0;
-                g_Task->tint.bytes.unk_5F = 0;
-                g_Task->tint.bytes.flags  = 0;
-                g_Task->unk_09            = 0;
+                ACTOR_CLEAR_TINT();
+                g_Task->tint.bytes.flags = 0;
+                g_Task->unk_09           = 0;
                 Actor_ClearVelocity();
                 g_Task->unk_18  = 0;
                 g_Task->unk_1C  = 0;

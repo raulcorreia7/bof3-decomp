@@ -66,11 +66,9 @@ loop_1: /* scan the world-id table down from index 8 */
         active = 0;
     }
     Actor_SelectScript(active);
-    g_Task->tint.bytes.unk_5D = 0;
-    g_Task->tint.bytes.unk_5E = 0;
-    g_Task->tint.bytes.unk_5F = 0;
-    g_Task->unk_09            = 0x10;
-    g_Task->unk_0A            = 8;
-    work_g                    = g_Task;
-    work_g->step              = (u8)(work_g->step + 1);
+    ACTOR_CLEAR_TINT();
+    g_Task->unk_09 = 0x10;
+    g_Task->unk_0A = 8;
+    work_g         = g_Task;
+    work_g->step   = (u8)(work_g->step + 1);
 }
