@@ -24,7 +24,10 @@ MATCH void func_801F789C(void) {
 MATCH void func_801F78D8(void) {
 }
 
-INCLUDE_ASM(func_801F78E0);
+MATCH void func_801F78E0(void) {
+    SYS_DISPATCH_BYTE(D_801F9758, (s8)D_80146874);
+    func_801F8EF0();
+}
 
 INCLUDE_ASM(func_801F7924);
 
@@ -51,7 +54,7 @@ MATCH void func_801F7A84(void) {
         *timer               = 0x80;
         g_AreaCameraAngle.vx = -0x16A;
         g_AreaCameraAngle.vz = 0x200;
-        g_AreaDrawFlags      = 0x1F;
+        g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
         D_80146874           = D_80146874 + 1;
     }
     func_801F88CC(0, 0x80);
@@ -104,11 +107,11 @@ MATCH void func_801F7E9C(void) {
 INCLUDE_ASM(func_801F7F04);
 
 MATCH void func_801F7F3C(void) {
-    s32 temp_v0;
+    s32 height;
 
-    temp_v0            = g_AreaCameraHeight + 0x10;
-    g_AreaCameraHeight = temp_v0;
-    if ((u32)temp_v0 >= 0xCC1U) {
+    height             = g_AreaCameraHeight + 0x10;
+    g_AreaCameraHeight = height;
+    if ((u32)height >= 0xCC1U) {
         D_80146875 = 0xF;
         D_80146874 += 1;
     }
@@ -146,7 +149,10 @@ MATCH void func_801F7FF0(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8088);
+MATCH void func_801F8088(void) {
+    SYS_DISPATCH_BYTE(D_801F9798, (s8)D_80146874);
+    func_801F8EF0();
+}
 
 INCLUDE_ASM(func_801F80CC);
 

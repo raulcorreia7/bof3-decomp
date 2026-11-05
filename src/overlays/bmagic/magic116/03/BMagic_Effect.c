@@ -7,17 +7,17 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/func_801EEC14.h"
 
 MATCH void func_801EEC80(void) {
-    PartyBattler* temp_s0;
+    PartyBattler* saved_work;
 
     g_SpadWork->coord_x_34.raw = D_801EC2E0->target.party->coord_x_34.raw;
     g_SpadWork->coord_y_38.raw = D_801EC2E0->target.party->coord_y_38.raw;
     g_SpadWork->word_3C.word   = D_801EC2E0->target.party->word_3C.word + 0x01000000;
     func_801EEFF4();
-    temp_s0    = g_SpadWork;
+    saved_work = g_SpadWork;
     g_SpadWork = D_801EC2E0->target.party;
     Actor_SelectScript(1U);
-    g_SpadWork = temp_s0;
-    temp_s0->step_01 += 1;
+    g_SpadWork = saved_work;
+    saved_work->step_01 += 1;
 }
 
 MATCH void func_801EED2C(void) {

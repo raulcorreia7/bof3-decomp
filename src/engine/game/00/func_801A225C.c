@@ -1,6 +1,5 @@
 #include "game_00.h"
 
-/* retail re-reads SPRACH the second store. */
 MATCH s32 func_801A225C(s32 unused, s32 divisor, s32 flag_bits) {
     u8* work;
 

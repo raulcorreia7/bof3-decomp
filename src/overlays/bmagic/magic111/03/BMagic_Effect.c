@@ -61,11 +61,11 @@ MATCH void func_801EF138(void) {
 INCLUDE_ASM(func_801EF158);
 
 MATCH void func_801EF1D4(void) {
-    s32 temp_v0;
+    s32 start;
 
-    temp_v0                           = rand() & 0x3F;
-    g_SpadWork->unk_0C                = temp_v0;
-    g_SpadWork->unk_10                = temp_v0 + 0x1F;
+    start                             = rand() & 0x3F;
+    g_SpadWork->unk_0C                = start;
+    g_SpadWork->unk_10                = start + 0x1F;
     g_SpadWork->word_08.byte.unk_09   = 0;
     g_SpadWork->word_08.byte.timer_0A = 0x3C;
     g_SpadWork->unk_02 += 1;

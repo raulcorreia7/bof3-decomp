@@ -30,14 +30,14 @@ MATCH void func_801EEDCC(void) {
 INCLUDE_ASM(func_801EEE24);
 
 MATCH void func_801EEEC4(void) {
-    u8 temp_v0;
+    u8 count;
 
     D_801EFAAC = ((g_FrameCount & 1) * 0x10) + 0x100;
     D_801EFAB0 -= 0x200;
     func_801EF254();
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = count;
+    if (!(count & 0xFF)) {
         g_SpadWork->word_08.byte.unk_09 = 4;
         g_SpadWork->step_01 += 1;
         func_800A9820(g_BattleTargetSelector);

@@ -47,12 +47,12 @@ INCLUDE_ASM(func_801EEF78);
 INCLUDE_ASM(func_801EEFF8);
 
 MATCH void func_801EF04C(void) {
-    s32 temp_v0;
+    s32 phase;
 
     g_SpadWork->word_08.byte.unk_0B = (g_SpadWork->word_08.byte.unk_0B - 1) & 0x1F;
-    temp_v0                         = g_SpadWork->unk_10 + 2;
-    g_SpadWork->unk_10              = temp_v0;
-    if (temp_v0 == 0x80) {
+    phase                           = g_SpadWork->unk_10 + 2;
+    g_SpadWork->unk_10              = phase;
+    if (phase == 0x80) {
         g_SpadWork->unk_02 += 1;
     }
 }

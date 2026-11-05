@@ -2,9 +2,6 @@
 
 /* TODO
  */
-/* The add that feeds the D_80142CC4 store stays in the consumer expression:
- * assigning it to v0 first made the exchange pick v0 as rs, which retail does
- * not do. */
 MATCH void func_80153CC4(u32 unused) {
     u32 base_t0;
     u32 level_t1;

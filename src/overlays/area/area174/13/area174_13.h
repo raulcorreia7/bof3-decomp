@@ -15,9 +15,11 @@
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The party position in 16.16 fixed point. */
-extern s32 D_80145EC4;
+extern s32      D_80145EC4;
 /* The payload's first words: the per-state handler pointers. */
-extern u8  D_801F4FAC[];
+extern u8       D_801F4FAC[];
+/* The palette callbacks this overlay animates. */
+extern Callback D_801F66D4[17];
 
 extern u8   func_801F2EC4(void);
 extern void func_801F4B0C(void);

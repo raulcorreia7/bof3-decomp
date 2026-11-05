@@ -1,8 +1,5 @@
 #include "commu00_00.h"
 
-/* The original reaches the scratch cell, the task-slot array and the two
- * tables through their symbolic addresses; the shared-header integer-cast
- * macros materialize a full address in a register instead. */
 /* Variant rows: 8 record indices, 3 variants each, 3 bytes per variant. */
 
 MATCH void func_801F08D8(u8 source_index, u8 task_index) {

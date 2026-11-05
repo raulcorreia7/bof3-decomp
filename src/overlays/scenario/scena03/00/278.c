@@ -159,7 +159,6 @@ MATCH void func_801F78E0(void) {
     }
 }
 
-/* @source: read:Actor_FreePaletteFades@0x801F7334 (byte-identical matched twin) */
 MATCH void Actor_FreePaletteFades_801F7A14(void) {
     u8** slots;
 
@@ -210,11 +209,11 @@ MATCH void func_801F7DF0(void) {
 }
 
 MATCH void func_801F7E34(void) {
-    void* temp_v1_9;
+    void* work;
 
     SND_PlayCue(EMI_CUE_ID(2, 9));
-    temp_v1_9                  = SP_REF(void*, 0x44);
-    FIELD(u8, temp_v1_9, 0x1u) = (u8)(FIELD(u8, temp_v1_9, 0x1u) + 1);
+    work                  = SP_REF(void*, 0x44);
+    FIELD(u8, work, 0x1u) = (u8)(FIELD(u8, work, 0x1u) + 1);
 }
 
 INCLUDE_ASM(func_801F7E6C);

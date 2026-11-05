@@ -7,14 +7,6 @@
 
 /* derives queued-slot position offsets from either the local or enemy
  * source tables and writes them into the current queued object.
- *
- * MATCHING fake-match helpers vs. the original (0x801E8DD8): the original's `s5 = slot[5]`
- * (slot = D_801EB4E0) is cached once in a register, yet re-read after each
- * volatile scratchpad store; gcc-2.7.2 expresses the same volatile read as a
- * separate `lbu` plus redundant `andi` mask, or loses the reloads if the row is
- * non-volatile. A non-volatile slot with direct reads plus the volatile
- * scratchpad stores as barriers reproduces the reload pattern with the mask
- * removed (80.7% vs 69% at assignment start).
  */
 MATCH void func_801E8DD8(void) {
     u8* slot = (u8*)D_801EB4E0;
