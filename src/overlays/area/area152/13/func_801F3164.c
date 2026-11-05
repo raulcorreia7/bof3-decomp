@@ -17,8 +17,8 @@ MATCH void func_801F3164(void) {
             }
         }
         ((u8*)g_SpadWork)[0x48] = 2;
-        ((u8*)g_SpadWork)[9]    = 8;
-        ((u8*)g_SpadWork)[1]    = 4;
+        ((u8*)g_SpadWork)[0x09] = 8;
+        ((u8*)g_SpadWork)[0x01] = 4;
     }
 tail:
     Area_AddActor();

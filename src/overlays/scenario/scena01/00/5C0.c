@@ -6,13 +6,33 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801F71C0);
 
+/* 3 differing; first at +0x68: candidate li v0,100 against retail li v1,320 — the 0x140
+ * materialization must precede the 0x64 one (v1 holds the long-lived constant); permuter. */
 INCLUDE_ASM(func_801F729C);
 
 MATCH void func_801F73B8(void) {
     SYS_DISPATCH_TASK(D_801FE26C, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801F73FC);
+MATCH void func_801F73FC(void) {
+    Actor* work;
+    s32    height;
+
+    work          = g_SpadWork;
+    work->x.fixed = 0x600000;
+    work->y.fixed = 0x110000;
+    height        = Area_SampleHeight(work->x.fixed, work->y.fixed);
+
+    work          = g_SpadWork;
+    work->z.fixed = height << 16;
+    work->unk_2E  = 0x180;
+    work->unk_30  = 0x500;
+    work->unk_09  = 0;
+    Area_ClearWorkColumn();
+
+    g_SpadWork->unk_01 += 1;
+    SND_PlayCue(0x202);
+}
 
 MATCH void func_801F7480(void) {
     func_801F7678(g_SpadWork->unk_09);

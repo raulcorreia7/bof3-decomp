@@ -48,7 +48,7 @@ MATCH void func_801EEF20(void) {
 INCLUDE_ASM(func_801EF07C);
 
 MATCH void func_801EF310(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 MATCH void func_801EF354(void) {
@@ -66,7 +66,19 @@ INCLUDE_ASM(func_801EF4DC);
 
 INCLUDE_ASM(func_801EF580);
 
-INCLUDE_ASM(func_801EF690);
+MATCH void func_801EF690(void) {
+    u8            counter;
+    PartyBattler* work;
+
+    g_SpadWork->word_08.byte.unk_0B += 4;
+    work = g_SpadWork;
+    work->unk_10 += work->unk_1C;
+    counter                   = work->word_08.byte.unk_09 - 1;
+    work->word_08.byte.unk_09 = counter;
+    if (!(counter & 0xFF)) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF700);
 

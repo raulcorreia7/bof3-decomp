@@ -1,4 +1,8 @@
 #include "area134_13.h"
 
-/* first differing instruction: lui v0 (retail) against lui v1 (candidate) at the g_Actors[0].x load. Body: save g_SpadWork, point it at g_Actors, compare g_Actors[0].x with D_80145EC4, g_GameState = g_BattlePartyBattlers, store the saved work pointer back three times (the middle one g_BattlePartyBattlers), then step 4 or (0xD and unk_09 = 0); the stores are kept by retail, plain and SP_REF forms drop or reorder them */
+/* Best 4 differing: a pointer local `flag = &D_80146865` reproduces the a0
+ * pointer, the stores and every reload. First ! row at 0x801F3CFC: the 0x17
+ * set block's reload and constant land in v1/v0 against retail's v0/v1, while
+ * the twin 0xD block at 0x801F3CBC matches. Next lever: permuter on the
+ * set-block register rotation. */
 INCLUDE_ASM(func_801F3C98);

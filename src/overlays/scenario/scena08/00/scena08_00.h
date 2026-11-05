@@ -9,10 +9,11 @@
 #define SCRATCH_ROW_STRIDE 0x28
 #define SCRATCH_ROW_OFFSET 0x00
 
-extern u32       D_801F6C00;
-extern Callback  D_801FE8A0[];
-extern Callback  D_801FE8D0[];
-extern Callback  D_801FE8D8[];
+extern u32      D_801F6C00;
+extern Callback D_801FE8A0[];
+extern Callback D_801FE8D0[];
+extern Callback D_801FE8D8[];
+extern void (*D_801FE8FC[])(void* slot);
 extern Callback  D_801FE908[];
 extern Callback  D_801FE910[];
 extern Callback  D_801FE938[];
