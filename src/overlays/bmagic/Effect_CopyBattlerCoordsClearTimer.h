@@ -4,7 +4,7 @@ MATCH void Effect_CopyBattlerCoordsClearTimer(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_Task->flags &= 0xBF;
+    g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
     work                      = g_Task;
     actor                     = D_801EB4E0;
     work->coord_x_34.raw      = actor->coord_x_34.raw;

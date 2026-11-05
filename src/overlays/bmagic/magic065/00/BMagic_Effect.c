@@ -14,7 +14,7 @@ MATCH void func_801EF08C(void) {
     if (g_Task->word_08.byte.unk_0B == 0) {
         if (g_Task->word_08.byte.unk_09 == 0x1E) {
             func_800AEF98(4, 0);
-            BATTLE_ACTIVE_WORK->flags &= 0xBF;
+            BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         }
         counter                     = g_Task->word_08.byte.unk_09 - 1;
         g_Task->word_08.byte.unk_09 = counter;

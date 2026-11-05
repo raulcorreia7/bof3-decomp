@@ -4,7 +4,7 @@ MATCH void func_801F32C8(void) {
     Actor* actor;
     s16    height;
 
-    g_Task->flags &= 0xBF;
+    g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
     height                = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
     actor                 = g_Task;
     actor->z.part.integer = height + 0x7D0;
