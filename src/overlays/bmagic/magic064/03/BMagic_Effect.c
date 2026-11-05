@@ -146,7 +146,12 @@ MATCH void func_801EF89C(void) {
 
 INCLUDE_ASM(func_801EF8F4);
 
-INCLUDE_ASM(func_801F001C);
+MATCH void func_801F001C(void) {
+    func_8014DAEC();
+    D_801EB4E0->unk_02 += 1;
+    g_SpadWork->unk_02 += 1;
+    g_SpadWork->unk_03 = 0;
+}
 
 MATCH void func_801F007C(void) {
     func_801E5988();
