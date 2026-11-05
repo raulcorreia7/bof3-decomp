@@ -14,16 +14,16 @@ MATCH void func_801F44D0(void) {
     Game_FindAreaHandler();
     Area_FindSceneRecord(0x205);
 
-    g_SpadWork->unk_48 = 0;
-    g_SpadWork->flags_24 = 0;
-    g_SpadWork->unk_2A = 0;
-    g_SpadWork->tint.bytes.unk_5D = 0;
-    g_SpadWork->tint.bytes.unk_5E = 0;
-    g_SpadWork->tint.bytes.unk_5F = 0;
+    ((u8*)g_SpadWork)[0x48] = 0;
+    g_SpadWork->flags_24    = 0;
+    ((u8*)g_SpadWork)[0x2A] = 0;
+    ((u8*)g_SpadWork)[0x5D] = 0;
+    ((u8*)g_SpadWork)[0x5E] = 0;
+    ((u8*)g_SpadWork)[0x5F] = 0;
 
-    row_offset = g_SpadWork->unk_0B * 4;
+    row_offset = ((u8*)g_SpadWork)[0x0B] * 4;
     map_offset = *((u8*)D_801F4C3C + 0xD + row_offset) * MEM(u8, 0x80104000);
     *(g_AreaCellCodes + map_offset + *((u8*)D_801F4C3C + 0xC + row_offset)) = 0xA0;
     Actor_SelectScript(0);
-    g_SpadWork->unk_01 = 1;
+    ((u8*)g_SpadWork)[1] = 1;
 }
