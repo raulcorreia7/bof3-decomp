@@ -195,14 +195,7 @@ MATCH void func_801FC020(void) {
     func_801C1630();
 }
 
-MATCH void func_801FC074(void) {
-    EMI_LoaderStreamFamily(7, 2, 8, 0);
-    g_PartySize = 0;
-    func_801C187C(7);
-    func_801C187C(2);
-    func_801C187C(8);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_SetPartyRyuAdultGarrNinaAdult.h"
 
 MATCH void func_801FC0C8(void) {
     EMI_LoaderStreamFamily(7U, 4U, *D_80144908, 0U);
