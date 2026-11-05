@@ -113,7 +113,7 @@ u8 D_801D41BA = 0x00;
 u8 D_801D41BB = 0x00;
 
 /* Message ids the panels queue. */
-u16 g_MasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT] = {
+s16 g_MasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT] = {
     64, 0, 32, 128, 128, 0, 0, 144, 0, 43, 96, 92, 112, 132, 152, 80, 3, 0,
 };
 

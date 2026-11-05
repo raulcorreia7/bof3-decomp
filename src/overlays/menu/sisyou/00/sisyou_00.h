@@ -118,7 +118,7 @@ extern MasterStats        g_MasterStats[MASTER_COUNT];
 extern u8                 D_801D41BA;
 extern u8                 D_801D41BB;
 /* D_801D41BC */
-extern u16                g_MasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT];
+extern s16                g_MasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT];
 extern Callback           D_801D4204[SISYOU_SUB2_HANDLER_COUNT];
 extern Callback           D_801D421C[SISYOU_SUB3_HANDLER_COUNT];
 extern Callback           D_801D4240[SISYOU_SUB4_HANDLER_COUNT];
