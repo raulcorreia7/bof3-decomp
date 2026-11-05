@@ -55,7 +55,17 @@ MATCH void func_801EF5D8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF654);
+MATCH void func_801EF654(void) {
+    u8 timer;
+
+    g_SpadWork->word_08.byte.timer_0A = ((s32)(rsin((g_SpadWork->word_08.byte.unk_0B & 0x3F) << 6) * 4) >> 0xC) + 0x10;
+    timer                             = g_SpadWork->word_08.byte.unk_09 - 2;
+    g_SpadWork->word_08.byte.unk_09   = timer;
+    if (!(timer & 0xFF)) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        Actor_Clear();
+    }
+}
 
 INCLUDE_ASM(func_801EF6E8);
 
