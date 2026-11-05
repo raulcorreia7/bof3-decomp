@@ -71,9 +71,9 @@ MATCH void func_801EF690(void) {
     PartyBattler* work;
 
     g_SpadWork->word_08.byte.unk_0B += 4;
-    work                             = g_SpadWork;
+    work = g_SpadWork;
     work->unk_10 += work->unk_1C;
-    counter                          = work->word_08.byte.unk_09 - 1;
+    counter                   = work->word_08.byte.unk_09 - 1;
     work->word_08.byte.unk_09 = counter;
     if (!(counter & 0xFF)) {
         g_SpadWork->unk_02 += 1;

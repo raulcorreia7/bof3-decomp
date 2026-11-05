@@ -117,10 +117,10 @@ MATCH void func_801EFCF4(void) {
     s32           drop;
 
     func_800AF764();
-    work                             = g_SpadWork;
-    counter                          = work->word_08.byte.unk_09 + 1;
-    drop                             = (VOL(u8, work->word_08.byte.unk_09) - 8) / 2;
-    work->word_08.byte.unk_09        = counter;
+    work                      = g_SpadWork;
+    counter                   = work->word_08.byte.unk_09 + 1;
+    drop                      = (VOL(u8, work->word_08.byte.unk_09) - 8) / 2;
+    work->word_08.byte.unk_09 = counter;
     work->unk_30.half -= drop;
     if ((counter & 0xFF) == 0x1C) {
         g_SpadWork->unk_02 += 1;
