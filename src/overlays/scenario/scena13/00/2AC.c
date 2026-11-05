@@ -191,7 +191,13 @@ INCLUDE_ASM(func_801F7958);
 
 INCLUDE_ASM(func_801F7A1C);
 
-INCLUDE_ASM(func_801F7C24);
+MATCH void func_801F7C24(void) {
+    g_Actors[g_SpadWork->unk_03].flags_00 = 0;
+    g_Actors[g_SpadWork->unk_04].flags_00 = 0;
+    func_80196718(&g_Actors[g_SpadWork->unk_03]);
+    func_80196718(&g_Actors[g_SpadWork->unk_04]);
+    func_80196070();
+}
 
 MATCH void func_801F7D14(void) {
     SYS_DISPATCH_BYTE(D_801FBF48, D_80146872);
