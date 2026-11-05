@@ -23,7 +23,6 @@ extern u16 D_801D4E0C;
 
 extern u8  D_801D4E10;
 extern u16 D_801D4E14;
-extern u16 D_801D4E0C;
 extern u8  D_801D4E18;
 
 #endif

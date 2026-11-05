@@ -11,7 +11,6 @@ MATCH void Area_InitScene(void) {
     g_SpadWork->unk_0B            = D_80145FBC;
     *(u8*)&g_GameState->hp_change = 3; /* FAKE: retail stores the byte. */
     work                          = g_SpadWork;
-    /* NOTE: member stores reorder the loads of these three words; the volatile FIELD form matches. */
     FIELD(u32, work, 0x34u)       = D_80145EC4;
     FIELD(u32, work, 0x38u)       = D_80145EC8;
     FIELD(u32, work, 0x3Cu)       = D_80145ECC;

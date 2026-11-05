@@ -23,9 +23,6 @@ MATCH void func_800ADB74(void) {
     slot              = (&row->slot_00)[work->word_08.byte.timer_0A];
     if (slot != GAME_NONE) {
         Actor_RequestScript(slot);
-        /* Retail threads the first test to the exit and keeps the second;
-         * pure C folds the second test (76.32%), so the slot stays opaque
-         * across the call. */
         /* FAKE: opaque slot so CSE cannot fold the second test. */
         MATCH_FAKE_OPAQUE(slot);
     }
