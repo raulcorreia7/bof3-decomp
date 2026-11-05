@@ -21,9 +21,18 @@ typedef struct AreaSprite {
     u8  unk_06[2];
     s32 origin_x; /* the camera x */
     s32 origin_y; /* the camera y */
+    s32 unk_10;
+    s32 unk_14;
+    s32 unk_18;
+    s32 unk_1C;
+    s32 unk_20;
+    s32 unk_24;
 } AreaSprite;
 
 extern u8 D_801F364C[];
+extern u8 D_801F364E[];
+extern u8 D_801F368C[];
+extern u8 D_801F368E[];
 
 /* func_801F3384 */
 void Area_ClearWorkColumn(void);

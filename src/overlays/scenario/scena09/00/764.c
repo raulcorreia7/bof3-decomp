@@ -74,14 +74,27 @@ INCLUDE_ASM(func_801FAE0C);
 
 INCLUDE_ASM(func_801FBC78);
 
-INCLUDE_ASM(func_801FBD0C);
+MATCH void func_801FBD0C(void) {
+    u8* timer;
+
+    timer = &D_80146875;
+    if (*timer == 0 && g_GameStateIndex != 2) {
+        func_801BE1B0(1);
+        D_80146874 = 0;
+        *timer     = 0;
+    }
+}
 
 INCLUDE_ASM(func_801FBD6C);
 
 MATCH void func_801FC588(void) {
 }
 
-INCLUDE_ASM(func_801FC590);
+MATCH void func_801FC590(void) {
+    u8 cam                   = D_801FE430[D_80146876 & 3];
+    g_AreaCameraRefreshCount = 2;
+    g_AreaCameraOffsetY      = g_AreaCameraOffsetY + ((cam << 24) >> 22);
+}
 
 MATCH void func_801FC5DC(void) {
 }

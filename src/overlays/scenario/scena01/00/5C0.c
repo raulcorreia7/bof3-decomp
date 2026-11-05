@@ -14,7 +14,18 @@ MATCH void func_801F73B8(void) {
 
 INCLUDE_ASM(func_801F73FC);
 
-INCLUDE_ASM(func_801F7480);
+MATCH void func_801F7480(void) {
+    func_801F7678(g_SpadWork->unk_09);
+    if ((g_FrameCount & 1) == 0) {
+        func_801F7AE4();
+    }
+    func_801F7C54();
+    g_SpadWork->unk_09 = ((Actor*)g_SpadWork)->unk_09 + 4;
+    if (g_SpadWork->unk_09 == 0) {
+        g_SpadWork->unk_09 = 0x20;
+        g_SpadWork->unk_01 = ((Actor*)g_SpadWork)->unk_01 + 1;
+    }
+}
 
 INCLUDE_ASM(func_801F752C);
 

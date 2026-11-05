@@ -17,7 +17,7 @@ segments:
       - [0x15C, c, Actor_RunAreaStep]
       - [0x190, c, func_801F2D90]
       - [0x208, c, func_801F2E08]
-      - [0x280, c, func_801F2E80]
+      - [0x280, c, Area_CheckStepTrigger]
       - [0x334, c, func_801F2F34]
       - [0x3D0, c, func_801F2FD0]
       - [0x414, c, Actor_SnapToGround]

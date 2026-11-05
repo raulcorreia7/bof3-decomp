@@ -44,7 +44,7 @@ MATCH void func_801CF338(void) {
 
 INCLUDE_ASM(func_801CF37C);
 
-INCLUDE_ASM(func_801CF564);
+#include "overlays/plchar/func_801CF564.h"
 
 INCLUDE_ASM(func_801CF5D4);
 

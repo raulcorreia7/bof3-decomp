@@ -1264,6 +1264,9 @@ MENU_CAPTION_ICON = { addr = 0x801D8BB4, source = "the caption icon record drawn
 MENU_CLOCK_COLON = { addr = 0x801D8BB8, source = "the colon string drawn twice between hours and minutes while the play clock's thirtieths count is below 15, by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 g_MenuCommandLabels = { addr = 0x801D8C68, source = "label id -> button text, drawn on each button by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
 g_MenuCommandRows = { addr = 0x801D8CC4, source = "5-byte rows (button count, four label ids) indexed by the command row kind, read by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
+MENU_CLUT_STRIP_CELLS = { addr = 0x801D8D28, source = "Menu_DrawClutStrip.h binds MENU_CLUT_STRIP_CELLS in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
+MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D8DD4, source = "Menu_DrawClutStrip.h binds MENU_CLUT_STRIP_ENTRIES in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
+MENU_CLUT_STRIP_PALETTES = { addr = 0x801D8E20, source = "Menu_DrawClutStrip.h binds MENU_CLUT_STRIP_PALETTES in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
 
 ["emi/etc/commu00/00"]
 # Fairy table extents; the types are in include/game/fairy.h.
@@ -2335,6 +2338,7 @@ g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApply
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 Message_OpenAnswerMenu = { addr = 0x801F2C04, type = "func", source = "arms the selected or idle area request and the shop panel step" }
 Actor_RunAreaStep = { addr = 0x801F2D5C, type = "func", source = "clears the work reset flag and hands the work pointer to the area step" }
+Area_CheckStepTrigger = { addr = 0x801F2E80, type = "func", source = "the per-game-area step-trigger check func_801A8728 dispatches in Area_IsStepBlocked's path; the scenario entry Scene_CheckStepTrigger fills the same slot" }
 Actor_SnapToGround = { addr = 0x801F3014, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
 
 ["emi/world01/area061/13"]

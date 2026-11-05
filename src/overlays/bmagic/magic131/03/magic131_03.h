@@ -5,6 +5,12 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+#define EFFECT_ADVANCE_AT_COUNT(increment, limit)     \
+    g_SpadWork->word_08.byte.unk_09 += (increment);   \
+    if (g_SpadWork->word_08.byte.unk_09 == (limit)) { \
+        g_SpadWork->unk_02 += 1;                      \
+    }
+
 extern PartyBattler* D_801F24E0;
 
 extern Callback D_801F1BF4[];

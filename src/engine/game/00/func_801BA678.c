@@ -2,8 +2,6 @@
 
 extern s32 func_801BB1B8(s32 arg0);
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 70.97%. resume: a lever or header fix that
- * closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BA678(void) {
     u8     buf[16];
@@ -362,5 +360,10 @@ NON_MATCHING s32 func_801BA678(void) {
     }
 }
 #else
+/* nonmatching best 70.97%: first difference +0x58 is a tail-jump target (body 0xAE4 against retail 0xB40). resume: restate
+ * the condition so the block_109 argument (val9) is assigned in each taken path after its call instead of in the comma
+ * expressions (scratch-measured: the 42-call skeleton becomes exact and val9 lives in a0); the per-call-segment
+ * instruction deltas then (retail minus draft, jal order) are seg1 +3, seg2 -2, seg3 +2, seg7 +2, seg8 +1, seg11 +2,
+ * seg18 +2, seg25 +5, seg30 +6, seg31 +2, seg38 -6, seg39 +2, tail -2; start with seg30/seg38. */
 INCLUDE_ASM(func_801BA678);
 #endif

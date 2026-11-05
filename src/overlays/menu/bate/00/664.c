@@ -231,7 +231,7 @@ INCLUDE_ASM(func_801D5634);
 /* Same body in the shop, start, Bate and Shisu overlays; the shop draft differs from retail in frame size (0x58 against 0x50) and save order, and the retail parameter locals sit in s6, s3, s0 and s4. */
 INCLUDE_ASM(Menu_DrawEquipStatWindow);
 
-INCLUDE_ASM(Menu_DrawClutStrip);
+#include "overlays/menu/Menu_DrawClutStrip.h"
 
 #include "overlays/menu/Menu_DrawFilledPanel.h"
 

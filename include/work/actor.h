@@ -110,6 +110,11 @@ typedef union ActorTint {
         s8 unk_5E;
         s8 unk_5F;
     } signed_bytes;
+
+    struct {
+        u16 unk_5C;
+        u16 unk_5E;
+    } halves;
 } ActorTint;
 
 ASSERT_SIZE(ActorTint, 0x04);
