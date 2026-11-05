@@ -7,7 +7,7 @@ MATCH void func_801D1B54(void) {
     u8            value;
 
     record                   = FISHING_STATE;
-    value                    = *D_801E320C;
+    value                    = D_801E320C->byte_00;
     record->pos_x_0C         = 0;
     record->cursor_10        = 0;
     record->unk_1C           = 0;

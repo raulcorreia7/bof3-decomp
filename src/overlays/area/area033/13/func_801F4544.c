@@ -13,7 +13,7 @@ MATCH void func_801F4544(void) {
     Area_FindSceneRecord(0x205);
 
     ((u8*)g_SpadWork)[0x48] = 0;
-    ((u8*)g_SpadWork)[0x24] = 0;
+    g_SpadWork->flags_24    = 0;
     ((u8*)g_SpadWork)[0x2A] = 0;
     ((u8*)g_SpadWork)[0x5D] = 0;
     ((u8*)g_SpadWork)[0x5E] = 0;
@@ -24,5 +24,5 @@ MATCH void func_801F4544(void) {
     map_offset                                                      = D_801F4CB0[0x19 + row_offset] * D_80104000;
     *(g_AreaCellCodes + map_offset + D_801F4CB0[0x18 + row_offset]) = 0xA0;
     Actor_SelectScript(0);
-    ((u8*)g_SpadWork)[0x01] = 1;
+    ((u8*)g_SpadWork)[1] = 1;
 }

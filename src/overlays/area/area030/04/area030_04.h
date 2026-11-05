@@ -41,26 +41,63 @@ typedef union FishingBounce {
     } half;
 } FishingBounce;
 
+/* The low cell of 0x38 is read as a byte and, by func_801E0044, as a
+ * halfword over 0x38-0x39: the low half of the fixed-point y, whose sign bit
+ * it keeps. */
+typedef union FishingStateSlotLow {
+    u8  unk_38; /* the byte at 0x38 */
+    s16 pos_low_38;
+} FishingStateSlotLow;
+
+typedef struct FishingStateSlot {
+    FishingStateSlotLow low_38;
+    s16                 slot_3A; /* the accessory slot of the selected row; func_801D8364 */
+} FishingStateSlot;
+
+ASSERT_SIZE(FishingStateSlot, 4);
+
 /* The cell at 0x38 is read as a word, as a byte and, at 0x3A, as a halfword
  * of its own.  The word holds the work record's y position in 16.16 fixed
  * point: func_801DE5EC writes 0x3E0000 - facing * 0xC0000, func_801DA638
  * writes 0x410000, func_801D23F4 subtracts 0x4000 and func_801E03F8 calls
  * it pos_y while calling 0x34 pos_x.  The accessory drawer func_801D8364
  * stores the accessory slot of the selected row in the 0x3A halfword. */
-typedef struct FishingStateSlot {
-    u8  unk_38; /* the byte at 0x38 */
-    u8  pad_39;
-    s16 slot_3A; /* the accessory slot of the selected row; func_801D8364 */
-} FishingStateSlot;
-
-ASSERT_SIZE(FishingStateSlot, 4);
-
 typedef union FishingStateY {
     s32              pos_y;
     FishingStateSlot half;
 } FishingStateY;
 
 ASSERT_SIZE(FishingStateY, 4);
+
+/* One cue row of D_801E1D58: the 16.16 fixed-point height offset and the
+ * per-step delta; four rows, indexed by cue_index_06 (func_801D23F4). */
+typedef struct FishingCueStep {
+    s32 offset_00;
+    s32 step_04;
+} FishingCueStep;
+
+ASSERT_SIZE(FishingCueStep, 0x08);
+
+/* One 10-byte character record row inside the PanelIcon table; D_801E320C is
+ * stepped to the selected row by func_801DDE2C. Bytes 0x04 through 0x07 are
+ * read as signed (func_801DB140). */
+typedef struct FishingCharRow {
+    u8 byte_00;   /* 0x00 */
+    u8 byte_01;   /* 0x01 */
+    u8 byte_02;   /* 0x02 */
+    u8 byte_03;   /* 0x03 */
+    s8 sbyte_04;  /* 0x04 */
+    s8 sbyte_05;  /* 0x05 */
+    s8 sbyte_06;  /* 0x06 */
+    s8 sbyte_07;  /* 0x07 */
+    u8 pad_08[2]; /* 0x08 */
+} FishingCharRow;
+
+ASSERT_SIZE(FishingCharRow, 0x0A);
+ASSERT_OFFSET(FishingCharRow, sbyte_04, 0x04);
+ASSERT_OFFSET(FishingCharRow, sbyte_05, 0x05);
+ASSERT_OFFSET(FishingCharRow, sbyte_06, 0x06);
+ASSERT_OFFSET(FishingCharRow, sbyte_07, 0x07);
 
 /* The item pointer at 0x50 and the message text pointer at 0x54 are stored as
  * words and dereferenced as bytes. */
@@ -340,7 +377,7 @@ extern Callback              D_801E1D10[];
 extern Callback              D_801E1D20[];
 extern u8                    D_801E1D38[];
 extern u8                    D_801E1D3C[];
-extern s32                   D_801E1D58[];
+extern FishingCueStep        D_801E1D58[];
 extern s32                   D_801E1D5C;
 extern Callback              D_801E1D78[];
 extern Callback              D_801E1D80[];
@@ -402,10 +439,10 @@ extern u8                    D_801E2331[];
 extern Callback              D_801E2340[];
 extern Callback              D_801E2348[];
 extern u16                   D_801E2354[];
-extern u8                    D_801E2384[];
-extern u8                    D_801E2388[];
-extern u8                    D_801E238C[];
-extern u8                    D_801E2390[];
+extern s32                   D_801E2384[];
+extern s32                   D_801E2388[];
+extern s32                   D_801E238C[];
+extern s32                   D_801E2390[];
 extern PanelIcon             D_801E2424[];
 extern u8                    D_801E2720[];
 extern u8                    D_801E2748[];
@@ -434,7 +471,7 @@ extern u8                    D_801E31FC;
 extern u8                    D_801E3200;
 extern u8                    D_801E3204;
 extern u8                    D_801E3208;
-extern u8*                   D_801E320C;
+extern FishingCharRow*       D_801E320C;
 extern FishingTarget*        D_801E3210;
 extern u8                    D_801E3214;
 

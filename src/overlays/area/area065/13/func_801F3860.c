@@ -12,7 +12,7 @@ MATCH void func_801F3860(void) {
         }
     }
 
-    if (D_801454F2 != 0 && ((u8*)g_SpadWork)[0xB] != 0) {
+    if (D_801454F2 != 0 && ((u8*)g_SpadWork)[0x0B] != 0) {
         goto bump; /* skips the 0x100 test: advance state byte 0x03 */
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
