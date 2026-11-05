@@ -218,4 +218,12 @@ void func_800A9610(u8 selector, u16 flags);
 /* Defined in Effect_SetActorMatrix.h, which a member includes after its first call. */
 void Effect_SetActorMatrix(void);
 
+#define EFFECT_ADVANCE_AT_COUNT(increment, limit) \
+    do {                                          \
+        g_Task->unk_09 += (increment);            \
+        if (g_Task->unk_09 == (limit)) {          \
+            g_Task->step += 1;                    \
+        }                                         \
+    } while (0)
+
 #endif

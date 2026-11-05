@@ -8,11 +8,8 @@
 
 /* A two-field row: a work step, a delta or a position offset. */
 #define GAME_PAIR(a, b)          {(a), (b)}
-#define GAME_WORK_STEP(dx, dy)   GAME_PAIR(dx, dy)
-#define GAME_DELTA(dx, dy)       GAME_PAIR(dx, dy)
 #define MAP_HOOK(map, handler)   {(map), {0, 0, 0}, (handler)}
 #define UV_RECT(u, v, w, h)      {(u), (v), (w), (h)}
-#define POS_OFF(x, y)            GAME_PAIR(x, y)
 #define GAME_MAP(world, context) {(world), (context)}
 #define PARTY_SLOT(active, key)  {(active), (key), 0, 0}
 /* Data-table row initializer: no function body, so not a fragment. */
