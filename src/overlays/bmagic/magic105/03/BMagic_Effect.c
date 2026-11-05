@@ -113,7 +113,45 @@ MATCH void func_801EF8C4(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
-INCLUDE_ASM(func_801EF930);
+MATCH void func_801EF930(void) {
+    u16*         cell;
+    s8           tint;
+    s32          height;
+    PartyBattler* work;
+
+    cell                      = &D_1F800000.view.area.entry_data;
+    *cell                     = (u16)((u32)(rsin(g_SpadWork->word_08.byte.unk_09 << 6) * 3) >> 4);
+    D_1F800000.view.area.entity_counter = (g_SpadWork->word_08.byte.unk_09 << 6) + 0x40;
+    g_SpadWork->coord_x_34.raw =
+        BATTLE_ACTIVE_WORK->coord_x_34.raw +
+        ((rsin(g_SpadWork->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
+    g_SpadWork->coord_y_38.raw =
+        BATTLE_ACTIVE_WORK->coord_y_38.raw +
+        ((rcos(g_SpadWork->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
+    g_SpadWork->word_3C.half.span_3E =
+        (u16)((u16)BATTLE_ACTIVE_WORK->word_3C.half.span_3E + *cell) - 0x20;
+    height                       = Area_SampleHeight(g_SpadWork->coord_x_34.raw, g_SpadWork->coord_y_38.raw) << 16;
+    work                         = g_SpadWork;
+    work->unk_25                 = 0x1D;
+    work->unk_14                 = height >> 16;
+    g_SpadWork->unk_26           = 0;
+    g_SpadWork->unk_27           = 0xA0;
+    g_SpadWork->unk_28           = 0;
+    g_SpadWork->flags_00 |= 0x20;
+    tint                      = -0x40;
+    g_SpadWork->unk_5D        = tint;
+    g_SpadWork->unk_5E        = tint;
+    g_SpadWork->unk_5F        = tint;
+    g_SpadWork->unk_5C        = 1;
+    g_SpadWork->unk_2A           = 0;
+    g_SpadWork->unk_29           = 3;
+    g_SpadWork->unk_24           = 4;
+    g_SpadWork->unk_2C.half      = 0;
+    g_SpadWork->unk_2B           = 0;
+    Actor_SelectScript((rand() & 1) + 1);
+    g_SpadWork->word_08.byte.timer_0A = rand() & 0x3F;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EFB68(void) {
     g_SpadWork->word_08.byte.timer_0A += 1;
