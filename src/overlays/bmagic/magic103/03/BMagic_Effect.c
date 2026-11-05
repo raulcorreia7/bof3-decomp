@@ -8,7 +8,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC70);
 
-INCLUDE_ASM(func_801EEE38);
+MATCH void func_801EEE38(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        func_800A9820(g_BattleTargetSelector);
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 #include "shared/Effect_StartPlaying.h"
 
@@ -83,7 +88,17 @@ MATCH void func_801EFB88(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFC70);
+MATCH void func_801EFC70(void) {
+    u8 temp_v0;
+
+    func_800AF764();
+    g_SpadWork->word_08.byte.timer_0A += 2;
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if ((temp_v0 & 0xFF) == 8) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EFCF4);
 

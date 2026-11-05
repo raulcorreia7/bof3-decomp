@@ -311,16 +311,16 @@ INCLUDE_ASM(func_801F9A80);
 INCLUDE_ASM(func_801F9BDC);
 
 MATCH void func_801F9DA8(void) {
-    s32 var_v1_6;
-    s8* var_a0_5;
+    s32 index;
+    s8* row;
 
-    var_a0_5 = (s8*)(AREA_WORK + 0x95C);
-    var_v1_6 = 0;
+    row   = (s8*)(AREA_WORK + 0x95C);
+    index = 0;
     do {
-        *var_a0_5 = 0;
-        var_v1_6 += 1;
-        var_a0_5 += 0x20;
-    } while ((u32)(var_v1_6 & BYTE_MASK) < 0x40U);
+        *row = 0;
+        index += 1;
+        row += 0x20;
+    } while ((u32)(index & BYTE_MASK) < 0x40U);
 }
 
 MATCH u8* func_801F9DD4(void) {

@@ -86,7 +86,12 @@ MATCH void func_801EF7F8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF870);
+MATCH void func_801EF870(void) {
+    if ((u8)D_801EB4E0->word_08.byte.unk_0B < 3U) {
+        g_SpadWork->word_08.byte.unk_09 = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
 

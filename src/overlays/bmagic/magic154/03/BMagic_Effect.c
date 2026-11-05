@@ -45,7 +45,13 @@ MATCH void func_801EF380(void) {
 
 INCLUDE_ASM(func_801EF3E4);
 
-INCLUDE_ASM(func_801EF454);
+MATCH void func_801EF454(void) {
+    g_SpadWork->unk_44 -= 0x1000;
+    if ((s8)g_SpadWork->unk_5F == -0x80) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF4B4);
 

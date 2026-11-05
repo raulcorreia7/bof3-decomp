@@ -40,7 +40,18 @@ MATCH void func_801EF3A4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF430);
+MATCH void func_801EF430(void) {
+    u8 temp_v0;
+
+    g_SpadWork->word_08.byte.unk_0B += 4;
+    temp_v0                           = g_SpadWork->word_08.byte.timer_0A - 2;
+    g_SpadWork->word_08.byte.timer_0A = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        SND_QueueSelectionFx(0x102);
+        g_SpadWork->word_08.byte.unk_09 = 0x10;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
 INCLUDE_ASM(func_801EF518);
