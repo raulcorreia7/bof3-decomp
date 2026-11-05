@@ -8,7 +8,7 @@ MATCH void func_801D25F0(void) {
     if (func_8014DAEC() != 0u) {
         Actor_SelectScript(3);
         record                   = FISHING_STATE;
-        record->handler_index_01 = (u8)(record->handler_index_01 + 1);
+        record->handler_index_01 = (record->handler_index_01 + 1);
     }
 
     func_8014D290();

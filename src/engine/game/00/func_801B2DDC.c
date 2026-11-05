@@ -17,7 +17,7 @@ MATCH void func_801B2DDC(void) {
         func_801B5BDC(g_Task->direction_08);
     } else {
         work = g_Task;
-        Actor_RequestScript((u8)((work->direction_08 >> 1) + 0x10));
+        Actor_RequestScript(((work->direction_08 >> 1) + 0x10));
     }
     value = FIELD(s16, sel, 4u);
     if (((value & 0x8000) != 0) && ((kind = FIELD(u8, sel, 6u)) != GAME_NONE)) {

@@ -10,7 +10,7 @@ MATCH void func_801A3D1C(void) {
 
     if (g_Task->unk_06 == 0x0A) {
         slot = (s32)(-(((s32)g_CurrentActor - (s32)D_80147A58) * 0xD79435E5)) >> 3;
-        n    = (s8)slot;
+        n    = slot;
         if (n < 0) {
             n = 4;
         }

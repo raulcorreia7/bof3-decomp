@@ -37,10 +37,10 @@ MATCH void func_801A0F24(Actor* record) {
             record->unk_7B -= 1;
         block_8:
             if (((result & BYTE_MASK) != GAME_NONE) && (spad_c = g_Task, (spad_c->unk_09 != 0))) {
-                spad_c->unk_03       = (u8)spad_c->mode;
+                spad_c->unk_03       = spad_c->mode;
                 g_Task->mode         = 0xAU;
                 record->unk_79       = result & 7;
-                g_Task->direction_08 = (u8)(saved & 7);
+                g_Task->direction_08 = (saved & 7);
                 spad_d               = g_Task;
                 spad_d->unk_0A       = 0;
                 spad_d->unk_09       = 0U;

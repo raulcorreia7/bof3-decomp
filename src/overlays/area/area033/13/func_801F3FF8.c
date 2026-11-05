@@ -7,5 +7,5 @@ MATCH void func_801F3FF8(s16 x, s16 y) {
     }
     ((void (*)(s16, s16, u32))Area_DrawHudSprite)(x, y, 4);
     ((void (*)(s16, s16, u32))Area_DrawHudSprite)(x + 0x80, y, 5);
-    UI_DrawText(x + 4, y + 4, 0, 0xFF, (u8*)((u16)D_80010008 + 0x80010000u));
+    UI_DrawText(x + 4, y + 4, 0, 0xFF, (u8*)(D_80010008 + 0x80010000u));
 }

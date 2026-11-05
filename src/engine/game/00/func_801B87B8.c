@@ -17,7 +17,7 @@ MATCH void func_801B87B8(void) {
         }
         if ((func_801B9598() & BYTE_MASK) == 0) {
             work               = g_Task;
-            work->direction_08 = (u8)(work->direction_08 + 1);
+            work->direction_08 = (work->direction_08 + 1);
             func_801B9598();
         }
         switch (g_InputHeld & INPUT_DIRECTIONAL) {

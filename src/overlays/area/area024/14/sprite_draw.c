@@ -362,7 +362,7 @@ MATCH void func_801F2C58(void) {
 
 MATCH void func_801F2CB0(void) {
     func_801F3E48(((Area024Scratch*)g_Task)->step_count);
-    ((Area024Scratch*)g_Task)->step_count = (u8)(((Area024Scratch*)g_Task)->step_count + 2u);
+    ((Area024Scratch*)g_Task)->step_count = (((Area024Scratch*)g_Task)->step_count + 2u);
     if (((Area024Scratch*)g_Task)->step_count >= 0x80u) {
         SND_PlayCue(EMI_CUE_ID(2, 6));
         SND_PlayCue(EMI_CUE_ID(2, 14));
@@ -416,9 +416,9 @@ MATCH void func_801F2DF8(const void* sprite) {
     func_801AFFD8(object, size, size);
 
     setXY4(primitive, screen[0] - ((s16)size[0] >> 1), screen[1] - ((s16)size[1] >> 1),
-           (screen[0] - ((s16)size[0] >> 1)) + (s16)size[0], screen[1] - ((s16)size[1] >> 1),
-           screen[0] - ((s16)size[0] >> 1), (screen[1] - ((s16)size[1] >> 1)) + (s16)size[1],
-           (screen[0] - ((s16)size[0] >> 1)) + (s16)size[0], (screen[1] - ((s16)size[1] >> 1)) + (s16)size[1]);
+           (screen[0] - ((s16)size[0] >> 1)) + size[0], screen[1] - ((s16)size[1] >> 1),
+           screen[0] - ((s16)size[0] >> 1), (screen[1] - ((s16)size[1] >> 1)) + size[1],
+           (screen[0] - ((s16)size[0] >> 1)) + size[0], (screen[1] - ((s16)size[1] >> 1)) + size[1]);
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     primitive->clut  = GetClut(160, 483);
     primitive->tpage = GetTPage(0, 1, 704, 256);
@@ -491,15 +491,15 @@ MATCH void func_801F31B4(void) {
     u8          count;
 
     work           = (AreaSprite*)D_801F5B00;
-    count          = (u8)(work->flags_02 - 1u);
+    count          = (work->flags_02 - 1u);
     work->flags_02 = count;
-    work->origin_x += (s32)(work->normal.vx * 2);
-    work->origin_y += (s32)(work->normal.vy * 2);
-    work->origin_z += (s32)(work->normal.vz * 2);
-    work->half_size = (u16)(work->half_size + 0x80u);
+    work->origin_x += (work->normal.vx * 2);
+    work->origin_y += (work->normal.vy * 2);
+    work->origin_z += (work->normal.vz * 2);
+    work->half_size = (work->half_size + 0x80u);
     if (!(count & BYTE_MASK)) {
         ((AreaSprite*)D_801F5B00)->flags_02 = 0x40u;
-        ((AreaSprite*)D_801F5B00)->flags_01 = (u8)(((AreaSprite*)D_801F5B00)->flags_01 + 1u);
+        ((AreaSprite*)D_801F5B00)->flags_01 = (((AreaSprite*)D_801F5B00)->flags_01 + 1u);
     }
 }
 
@@ -509,12 +509,12 @@ MATCH void func_801F3250(void) {
     u8          tick;
 
     work = (AreaSprite*)D_801F5B00;
-    tick = (u8)(work->flags_03 - 1u);
+    tick = (work->flags_03 - 1u);
     work->origin_x += work->normal.vx;
     work->origin_y += work->normal.vy;
     work->flags_03 = tick;
     work->origin_z += work->normal.vz;
-    count                               = (u8)(((AreaSprite*)D_801F5B00)->flags_02 - 1u);
+    count                               = (((AreaSprite*)D_801F5B00)->flags_02 - 1u);
     ((AreaSprite*)D_801F5B00)->flags_02 = count;
     if (!(count & BYTE_MASK)) {
         ((AreaSprite*)D_801F5B00)->flags = 0u;
@@ -543,38 +543,38 @@ MATCH void func_801F3314(void) {
     do {
         *dst = *in;
         state[0] =
-            (u16)(((s16)dst->points[0].x + (s16)dst->points[1].x + (s16)dst->points[2].x + (s16)dst->points[3].x) >> 2);
+            (((s16)dst->points[0].x + (s16)dst->points[1].x + (s16)dst->points[2].x + (s16)dst->points[3].x) >> 2);
         state[1] =
-            (u16)(((s16)dst->points[0].y + (s16)dst->points[1].y + (s16)dst->points[2].y + (s16)dst->points[3].y) >> 2);
+            (((s16)dst->points[0].y + (s16)dst->points[1].y + (s16)dst->points[2].y + (s16)dst->points[3].y) >> 2);
         state[2] =
-            (u16)(((s16)dst->points[0].z + (s16)dst->points[1].z + (s16)dst->points[2].z + (s16)dst->points[3].z) >> 2);
-        args[0] = (s32)(s16)state[0];
-        args[1] = (s32)(s16)state[1];
-        args[2] = (s32)(s16)state[2];
+            (((s16)dst->points[0].z + (s16)dst->points[1].z + (s16)dst->points[2].z + (s16)dst->points[3].z) >> 2);
+        args[0] = (s16)state[0];
+        args[1] = (s16)state[1];
+        args[2] = (s16)state[2];
         VectorNormalS((VECTOR*)args, (SVECTOR*)(state + 4));
         state[8]         = 0;
         state[9]         = 0;
         state[10]        = 0;
-        state[4]         = (u16)((s32)((u32)state[4] << 16) >> 24);
-        state[5]         = (u16)((s32)((u32)state[5] << 16) >> 24);
-        state[6]         = (u16)((s32)((u32)state[6] << 16) >> 24);
-        dst->points[0].x = (u16)(dst->points[0].x - state[0]);
-        dst->points[0].y = (u16)(dst->points[0].y - state[1]);
-        dst->points[0].z = (u16)(dst->points[0].z - state[2]);
-        dst->points[1].x = (u16)(dst->points[1].x - state[0]);
-        dst->points[1].y = (u16)(dst->points[1].y - state[1]);
-        dst->points[1].z = (u16)(dst->points[1].z - state[2]);
-        dst->points[2].x = (u16)(dst->points[2].x - state[0]);
-        dst->points[2].y = (u16)(dst->points[2].y - state[1]);
-        dst->points[2].z = (u16)(dst->points[2].z - state[2]);
-        dst->points[3].x = (u16)(dst->points[3].x - state[0]);
-        dst->points[3].y = (u16)(dst->points[3].y - state[1]);
-        dst->points[3].z = (u16)(dst->points[3].z - state[2]);
+        state[4]         = ((s32)(state[4] << 16) >> 24);
+        state[5]         = ((state[5] << 16) >> 24);
+        state[6]         = ((state[6] << 16) >> 24);
+        dst->points[0].x = (dst->points[0].x - state[0]);
+        dst->points[0].y = (dst->points[0].y - state[1]);
+        dst->points[0].z = (dst->points[0].z - state[2]);
+        dst->points[1].x = (dst->points[1].x - state[0]);
+        dst->points[1].y = (dst->points[1].y - state[1]);
+        dst->points[1].z = (dst->points[1].z - state[2]);
+        dst->points[2].x = (dst->points[2].x - state[0]);
+        dst->points[2].y = (dst->points[2].y - state[1]);
+        dst->points[2].z = (dst->points[2].z - state[2]);
+        dst->points[3].x = (dst->points[3].x - state[0]);
+        dst->points[3].y = (dst->points[3].y - state[1]);
+        dst->points[3].z = (dst->points[3].z - state[2]);
         state += 12;
         dst++;
         in++;
         count += 1;
-    } while (((u32)(count & BYTE_MASK)) < 27u);
+    } while (((count & BYTE_MASK)) < 27u);
 }
 
 MATCH void func_801F362C(void) {
@@ -595,21 +595,21 @@ MATCH void func_801F362C(void) {
     count = 0;
     work  = (u16*)(WORLD00_AREA024_STATE_OFFSET);
     for (;; work += 12) {
-        work[4]  = (u16)(work[4] + (g_FrameCount & 1));
-        state[0] = (u16)(state[0] + work[2]);
+        work[4]  = (work[4] + (g_FrameCount & 1));
+        state[0] = (state[0] + work[2]);
         t0       = work[-1];
         tmp      = work[3];
         t1       = work[0];
         t2       = work[4];
-        work[-1] = (u16)(t0 + tmp);
+        work[-1] = (t0 + tmp);
         base     = (u16*)work;
-        *base    = (u16)(t1 + t2);
+        *base    = (t1 + t2);
         func_801F3708(dst, src, (s16*)state);
         dst += 0x28;
         src += 0x28;
         state += 12;
         count += 1;
-        if (((u32)(count & BYTE_MASK)) >= 0x1Bu) {
+        if (((count & BYTE_MASK)) >= 0x1Bu) {
             break;
         }
     }
@@ -648,33 +648,33 @@ MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
     vec.vy = VOL(u16, src->points[0].y);
     vec.vz = VOL(u16, src->points[0].z);
     RotTrans(v, o, f);
-    dst->points[0].x = (u16)(state->base_x + out.vx);
-    dst->points[0].y = (u16)(state->base_y + out.vy);
-    dst->points[0].z = (u16)(state->base_z + out.vz);
+    dst->points[0].x = (state->base_x + out.vx);
+    dst->points[0].y = (state->base_y + out.vy);
+    dst->points[0].z = (state->base_z + out.vz);
 
     vec.vx = VOL(u16, src->points[1].x);
     vec.vy = VOL(u16, src->points[1].y);
     vec.vz = VOL(u16, src->points[1].z);
     RotTrans(v, o, f);
-    dst->points[1].x = (u16)(state->base_x + out.vx);
-    dst->points[1].y = (u16)(state->base_y + out.vy);
-    dst->points[1].z = (u16)(state->base_z + out.vz);
+    dst->points[1].x = (state->base_x + out.vx);
+    dst->points[1].y = (state->base_y + out.vy);
+    dst->points[1].z = (state->base_z + out.vz);
 
     vec.vx = VOL(u16, src->points[2].x);
     vec.vy = VOL(u16, src->points[2].y);
     vec.vz = VOL(u16, src->points[2].z);
     RotTrans(v, o, f);
-    dst->points[2].x = (u16)(state->base_x + out.vx);
-    dst->points[2].y = (u16)(state->base_y + out.vy);
-    dst->points[2].z = (u16)(state->base_z + out.vz);
+    dst->points[2].x = (state->base_x + out.vx);
+    dst->points[2].y = (state->base_y + out.vy);
+    dst->points[2].z = (state->base_z + out.vz);
 
     vec.vx = VOL(u16, src->points[3].x);
     vec.vy = VOL(u16, src->points[3].y);
     vec.vz = VOL(u16, src->points[3].z);
     RotTrans(v, o, f);
-    dst->points[3].x = (u16)(state->base_x + out.vx);
-    dst->points[3].y = (u16)(state->base_y + out.vy);
-    dst->points[3].z = (u16)(state->base_z + out.vz);
+    dst->points[3].x = (state->base_x + out.vx);
+    dst->points[3].y = (state->base_y + out.vy);
+    dst->points[3].z = (state->base_z + out.vz);
 }
 
 MATCH void func_801F3944(const void* spin) {
@@ -800,12 +800,12 @@ MATCH void func_801F3D5C(void) {
 
     do {
         func_801F3944(work);
-        work->spin_angle = (s16)(work->spin_angle + 16);
+        work->spin_angle = (work->spin_angle + 16);
 
         if (WORLD00_AREA024_SCRATCH_PTR->step_count < 4u) {
-            work->fade = (s16)(work->fade + 0x20);
+            work->fade = (work->fade + 0x20);
         } else {
-            work->fade = (s16)(work->fade - 2);
+            work->fade = (work->fade - 2);
         }
 
         work++;

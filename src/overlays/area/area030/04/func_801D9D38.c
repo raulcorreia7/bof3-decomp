@@ -28,5 +28,5 @@ MATCH void func_801D9D38(void) {
     }
 
     record    = (u8*)g_Task;
-    record[3] = (u8)(record[3] + 1);
+    record[3] = (record[3] + 1);
 }

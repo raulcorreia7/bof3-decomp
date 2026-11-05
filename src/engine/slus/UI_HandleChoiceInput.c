@@ -38,7 +38,7 @@ MATCH void UI_HandleChoiceInput(void) {
 
         index  = (u8*)&D_801490BC.selection_index;
         *index = *index + 1;
-        if ((s8)D_801490BC.last_row < (s8)*index) {
+        if (D_801490BC.last_row < (s8)*index) {
             *index = 0;
         }
     }

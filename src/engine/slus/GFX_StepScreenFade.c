@@ -17,7 +17,7 @@ MATCH s32 GFX_StepScreenFade(u16* level, s32 delta, char semi_trans, u32 order, 
     sprite = g_GfxPrimCursor;
     SetTile((TILE*)sprite);
     mask                  = semi_trans & BYTE_MASK;
-    shade                 = (u8)(*level >> 7);
+    shade                 = (*level >> 7);
     *(s16*)(sprite + 0xC) = 0x140;
     *(s16*)(sprite + 0x8) = 0;
     *(s16*)(sprite + 0xA) = 0;
@@ -27,10 +27,10 @@ MATCH s32 GFX_StepScreenFade(u16* level, s32 delta, char semi_trans, u32 order, 
     sprite[0x4]           = shade;
     SetSemiTrans(sprite, mask);
     GFX_AddPrim(order & BYTE_MASK, 0x10);
-    sum = (s32)*level + delta;
+    sum = *level + delta;
     {
-        s32 result = (s32)(((u32)sum << 16) >> 31);
-        *level     = (u16)sum;
+        s32 result = (((u32)sum << 16) >> 31);
+        *level     = sum;
         return result;
     }
 }

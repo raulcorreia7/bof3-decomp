@@ -9,13 +9,13 @@ MATCH void func_801DD7CC(void) {
         if (g_InputPressed & D_80145AC4) {
             SND_PlayCue(EMI_CUE_ID(1, 6));
             FISHING_STATE->flag_04      = 0;
-            FISHING_STATE->sub_index_03 = (u8)(FISHING_STATE->sub_index_03 - 1);
+            FISHING_STATE->sub_index_03 = (FISHING_STATE->sub_index_03 - 1);
             return;
         }
         if (g_InputPressed & PADLdown) {
             D_80144288 = 0xFF;
             D_801442BC = D_801442BC + 1;
-            if ((u32)(D_801442BC & HALF_MASK) >= 6U) {
+            if ((D_801442BC & HALF_MASK) >= 6U) {
                 D_801442BC = 0;
             }
         } else if (g_InputPressed & PADLup) {

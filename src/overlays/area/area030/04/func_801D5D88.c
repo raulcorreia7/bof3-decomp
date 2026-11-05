@@ -35,16 +35,16 @@ MATCH void func_801D5D88(void) {
     previous = work->step_index_0A - 1;
     mode     = D_801E200A[previous * 3];
     if (mode == 0) {
-        scroll         = work->pos_x_0C + (s32)work->step_delta_18;
+        scroll         = work->pos_x_0C + work->step_delta_18;
         work->pos_x_0C = scroll;
         if ((s32)work->step_delta_18 > 0) {
             if (scroll >= 97) {
                 work->pos_x_0C      = 0x60;
-                work->step_delta_18 = -(s32)work->step_delta_18;
+                work->step_delta_18 = -work->step_delta_18;
             }
         } else if (scroll < 0) {
             work->pos_x_0C      = 0;
-            work->step_delta_18 = -(s32)work->step_delta_18;
+            work->step_delta_18 = -work->step_delta_18;
         }
     } else if (mode == 1 && !(g_FrameCount & 1)) {
         work->cue_index_06 = work->cue_index_06 + 1;

@@ -22,6 +22,6 @@ MATCH void func_8019CBD8(void) {
     func_8019D270();
     g_Task->unk_0B = 0U;
     counter        = g_Task;
-    counter->mode  = (u8)(counter->mode + 1);
+    counter->mode  = (counter->mode + 1);
     func_8015A944();
 }

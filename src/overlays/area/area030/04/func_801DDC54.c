@@ -14,6 +14,6 @@ MATCH void func_801DDC54(void) {
         D_800F724F          = 0;
         g_AreaDrawFlags     = 0;
         g_GameEntrySubstate = 3;
-        spad->sub_index_03  = (u8)(spad->sub_index_03 + 1u);
+        spad->sub_index_03  = (spad->sub_index_03 + 1u);
     }
 }

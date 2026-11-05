@@ -8,7 +8,7 @@ MATCH void func_801AD2CC(void) {
         if (!(work->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
             func_8015BAC4(work->direction_08);
         }
-        g_CurrentActor->interaction_flags = (u8)(g_CurrentActor->interaction_flags & ~ACTOR_FLAG_INTERACTION_PENDING);
+        g_CurrentActor->interaction_flags = (g_CurrentActor->interaction_flags & ~ACTOR_FLAG_INTERACTION_PENDING);
         g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
         g_Task->unk_04 = 0;
     }

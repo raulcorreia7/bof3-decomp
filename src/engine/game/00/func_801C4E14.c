@@ -11,13 +11,13 @@ MATCH s32 func_801C4E14(void) {
     countdown = work->unk_09;
     inactive  = 0;
     if (countdown != 0) {
-        work->unk_09 = (u8)(countdown - 1);
+        work->unk_09 = (countdown - 1);
         func_801C57B4();
         state = g_Task;
         if (state->unk_09 == state->unk_0A) {
-            region                                                 = state->unk_05;
-            g_GfxPalettePending                                    = 1;
-            *(u16*)(MEM_PTR(u8, 0x8003963Eu) + ((u32)region << 6)) = 0;
+            region                                            = state->unk_05;
+            g_GfxPalettePending                               = 1;
+            *(u16*)(MEM_PTR(u8, 0x8003963Eu) + (region << 6)) = 0;
         }
     } else {
         inactive = 1;

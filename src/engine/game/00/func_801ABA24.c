@@ -24,13 +24,13 @@ MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
         case 0x65:
             work   = g_Task;
             mode   = work->direction_08;
-            result = (((u32)mode >> 1) & 3) | 0x34;
+            result = ((mode >> 1) & 3) | 0x34;
             /* 0x65 and 0x66 share the route update at set_route. */
             goto set_route;
         case 0x66:
             work   = g_Task;
             mode   = work->direction_08;
-            result = (((u32)mode >> 1) & 3) | 0x10;
+            result = ((mode >> 1) & 3) | 0x10;
         set_route:
             mode &= 6;
             mode += 1;

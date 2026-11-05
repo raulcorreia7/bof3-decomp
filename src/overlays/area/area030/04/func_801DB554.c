@@ -11,7 +11,7 @@ MATCH void func_801DB554(void) {
         value = g_Actors[D_801E3208].unk_06;
         limit = g_Actors[D_801E3208].roll_90;
         if (g_FishBestCatch[value] < limit) {
-            g_FishBestCatch[value] = (u8)limit;
+            g_FishBestCatch[value] = limit;
             D_801E3214             = 1;
         }
 
@@ -21,7 +21,7 @@ MATCH void func_801DB554(void) {
         record->step_timer_09 = 8;
 
         record               = FISHING_STATE;
-        record->sub_index_03 = (u8)(record->sub_index_03 + 1);
+        record->sub_index_03 = (record->sub_index_03 + 1);
     }
 
     func_8014D978();

@@ -32,7 +32,7 @@ MATCH void func_801DA78C(void) {
                     }
                     FISHING_STATE->counter_07 = 1;
                 }
-            } else if (!(g_InputHeld & work->pos_x_0C) || ((u32)(record->x.fixed + 0xFFF9FFFF) > 0xEFFFEU)) {
+            } else if (!(g_InputHeld & work->pos_x_0C) || ((record->x.fixed + 0xFFF9FFFF) > 0xEFFFEU)) {
                 record->scene_step   = 0;
                 work->saved_index_0B = 1;
             }

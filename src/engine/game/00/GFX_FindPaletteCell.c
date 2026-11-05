@@ -15,7 +15,7 @@ MATCH u8 GFX_FindPaletteCell(u8 value) {
                 return value;
             }
             column++;
-        } while ((u32)column < 16u);
+        } while (column < 16u);
     }
     return 0xFFu;
 }

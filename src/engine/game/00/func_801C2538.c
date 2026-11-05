@@ -12,12 +12,12 @@ MATCH void func_801C2538(void) {
     rate = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
     if ((g_Task->direction_08 == 2) || (g_Task->direction_08 == 6)) {
         step           = 0x20;
-        g_Task->unk_09 = (u8)step;
+        g_Task->unk_09 = step;
     } else {
         step           = 0x10;
-        g_Task->unk_09 = (u8)step;
+        g_Task->unk_09 = step;
     }
-    g_Task->unk_09 = (u8)(g_Task->unk_09 / (u32)(rate & BYTE_MASK));
+    g_Task->unk_09 = (g_Task->unk_09 / (rate & BYTE_MASK));
     if ((g_GameFlags & 0x1000) != 0) {
         g_Task->unk_09 *= 2;
     }

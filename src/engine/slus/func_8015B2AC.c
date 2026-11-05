@@ -24,14 +24,14 @@ MATCH void func_8015B2AC(s16* out, s32* in) {
     rot.vx = 0;
     rot.vz = D_801481E6;
     RotTrans(&rot, &vec, &flag);
-    rot.vx = (s16)in[0];
-    rot.vy = (s16)in[1];
-    rot.vz = (s16)in[2];
+    rot.vx = in[0];
+    rot.vy = in[1];
+    rot.vz = in[2];
     RotMatrix(&rot, &matrix);
     TransposeMatrix(&matrix, &matrix);
     ApplyMatrixLV(&matrix, &vec, &vec);
-    out[0] = (s16)vec.vx;
-    out[1] = (s16)vec.vy;
-    out[2] = (s16)vec.vz;
+    out[0] = vec.vx;
+    out[1] = vec.vy;
+    out[2] = vec.vz;
     PopMatrix();
 }

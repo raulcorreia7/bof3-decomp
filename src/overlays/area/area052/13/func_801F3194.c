@@ -10,5 +10,5 @@ MATCH void func_801F3194(void) {
         FIELD(s8, cell, 0x15u) = 0;
         index += 1;
         cell += 0x18;
-    } while ((u32)(index & BYTE_MASK) < 0x10U);
+    } while ((index & BYTE_MASK) < 0x10U);
 }

@@ -167,7 +167,7 @@ MATCH void func_800F550C(void) {
         if (s0 + (s8)s_ListItemId < 100) {
             break;
         }
-        s_ListItemId = (s8)s_ListItemId - 1;
+        s_ListItemId = s_ListItemId - 1;
     }
     if ((s8)s_ListItemId != (s8)s2) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
@@ -245,7 +245,7 @@ MATCH void func_800F5AD8(void) {
         s_ListCursor &= 0x7F;
         func_800F606C(0);
     } else {
-        UI_DrawText(0x18, 0x14, 0, 0xFF, (u8*)((u16)D_8001009A + 0x80010000u));
+        UI_DrawText(0x18, 0x14, 0, 0xFF, (u8*)(D_8001009A + 0x80010000u));
         func_800F606C(1);
         func_800F6C5C();
     }
@@ -291,7 +291,7 @@ MATCH void func_800F5BE0(void) {
         }
     }
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    UI_DrawText(0x18, 0x14, 0, 0xFF, (u8*)((u16)D_8001008A + 0x80010000u));
+    UI_DrawText(0x18, 0x14, 0, 0xFF, (u8*)(D_8001008A + 0x80010000u));
     Menu_DrawCursorSprite(D_800F7248 * 32 + 0xEE, 0x16, 0);
     func_800F606C(0);
     func_800F6730();
@@ -304,7 +304,7 @@ MATCH void func_800F5D98(void) {
         return;
     }
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    UI_DrawText(0x18, 0x14, 0, 0xFF, (u8*)((u16)D_8001008A + 0x80010000u));
+    UI_DrawText(0x18, 0x14, 0, 0xFF, (u8*)(D_8001008A + 0x80010000u));
     Menu_DrawCursorSprite(D_800F7248 * 32 + 0xEE, 0x16, 0);
     func_800F606C(0);
     func_800F6730();
@@ -375,27 +375,27 @@ MATCH void func_800F606C(s32 arg0) {
     u8  n;
     n = arg0 & BYTE_MASK;
     func_800F63CC(0x14, 0x38, n);
-    UI_DrawText(0x36, 0x3E, (u8)(n * 7), 0xFF, (u8*)(((u16)D_8001008E) + 0x80010000u));
+    UI_DrawText(0x36, 0x3E, (u8)(n * 7), 0xFF, (u8*)((D_8001008E) + 0x80010000u));
     for (i = 0; i < D_800F7240; i++) {
-        h = (u32)Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)],
-                                ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
+        h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)],
+                           ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
         w = func_800F65A8(i & BYTE_MASK, 1);
         if ((arg0 & BYTE_MASK) != 0) {
-            UI_DrawText(0x25, (s16)(0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+            UI_DrawText(0x25, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
             func_800F7094(0x1C, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
                           D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
         } else if (i == ((s8)s_ListCursor)) {
             if ((w & BYTE_MASK) == 0) {
-                UI_DrawText(0x25, (s16)(0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+                UI_DrawText(0x25, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
                 func_800F7094(0x1C, (s16)(0x54 + (i * 13)),
                               ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
                               D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
             }
-            UI_DrawText(0x25, (s16)(0x4F + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+            UI_DrawText(0x25, (0x4F + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
             func_800F7094(0x1C, (s16)(0x52 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
                           D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
         } else {
-            UI_DrawText(0x25, (s16)(0x51 + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+            UI_DrawText(0x25, (0x51 + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
             func_800F7094(0x1C, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
                           D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
         }
@@ -408,33 +408,33 @@ MATCH void func_800F63CC(u16 x, u16 y, u8 color) {
     s16 x2;
     s16 y2;
 
-    UI_DrawWindow((u16)x, (u16)(y + 1), 0x8C, 0xA0, (u8)(color | 0x80), D_80144952);
+    UI_DrawWindow(x, (y + 1), 0x8C, 0xA0, (color | 0x80), D_80144952);
     func_801E0C80(9, 1);
-    func_801E0DCC(0x25, 1, (s16)x, (s16)y);
+    func_801E0DCC(0x25, 1, x, y);
 
     for (i = 0; i < 10; i++) {
         offset = i * 8 + 0x20;
-        func_801E0DCC(0x26, 1, (s16)(x + offset), (s16)y);
+        func_801E0DCC(0x26, 1, (x + offset), y);
     }
 
-    func_801E0DCC(0x27, 1, (s16)(x + 0x70), (s16)y);
+    func_801E0DCC(0x27, 1, (x + 0x70), y);
 
     x2 = x + 0x88;
-    func_801E0DCC(0x28, 1, x2, (s16)y);
+    func_801E0DCC(0x28, 1, x2, y);
 
     y2 = y + 0x18;
     func_801D799C(x, y2, 0x84, 0);
     func_801D799C(x2, y2, 0x84, 1);
 
     y2 = y + 0x9C;
-    func_801E0DCC(0x30, 1, (s16)x, y2);
+    func_801E0DCC(0x30, 1, x, y2);
 
     for (i = 0; i < 16; i++) {
         offset = i * 8 + 0x8;
-        func_801E0DCC(0x31, 1, (s16)(x + offset), y2);
+        func_801E0DCC(0x31, 1, (x + offset), y2);
     }
 
-    func_801E0DCC(0x32, 1, (s16)(x + 0x88), (s16)(y + 0x9C));
+    func_801E0DCC(0x32, 1, (x + 0x88), (y + 0x9C));
 }
 
 MATCH u8 func_800F65A8(s32 slot, s32 amount) {
@@ -448,7 +448,7 @@ MATCH u8 func_800F65A8(s32 slot, s32 amount) {
             return false;
         }
         limit = (u8(*)[8]) & D_801E2F7E[0][3];
-        if ((Item_Count(ITEM_CAT_ITEM, (u8)(value + 0x38), 0) & HALF_MASK) <
+        if ((Item_Count(ITEM_CAT_ITEM, (value + 0x38), 0) & HALF_MASK) <
             limit[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i] * (amount & BYTE_MASK)) {
             return true;
         }
@@ -485,21 +485,21 @@ MATCH void func_800F6730(void) {
         if (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] == GAME_NONE) {
             break;
         }
-        value = (s32)Item_GetRecord(ITEM_CAT_ITEM,
-                                    (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
-        UI_DrawText(0xAD, (s16)(0x58 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+        value = Item_GetRecord(ITEM_CAT_ITEM,
+                               (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
+        UI_DrawText(0xAD, (0x58 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
         sprintf(g_UiFormatBuffer, D_800F5000.format,
                 D_801E2F81[D_801E3134[g_GameContextKind][slot]][i] * (s8)s_ListItemId);
-        UI_DrawGlyphString(0x110, (s16)(0x5C + i * 13), 0, g_UiFormatBuffer);
+        UI_DrawGlyphString(0x110, (0x5C + i * 13), 0, g_UiFormatBuffer);
         cost = Item_Count(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK, 0);
         if (cost < D_801E2F81[D_801E3134[g_GameContextKind][slot]][i]) {
-            UI_DrawText(0xAD, (s16)(0xA4 + i * 13), 7, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+            UI_DrawText(0xAD, (0xA4 + i * 13), 7, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
             sprintf(g_UiFormatBuffer, D_800F5000.format, cost);
-            UI_DrawGlyphString(0x110, (s16)(0xA8 + i * 13), 7, g_UiFormatBuffer);
+            UI_DrawGlyphString(0x110, (0xA8 + i * 13), 7, g_UiFormatBuffer);
         } else {
-            UI_DrawText(0xAD, (s16)(0xA4 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+            UI_DrawText(0xAD, (0xA4 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
             sprintf(g_UiFormatBuffer, D_800F5000.format, cost);
-            UI_DrawGlyphString(0x110, (s16)(0xA8 + i * 13), 0, g_UiFormatBuffer);
+            UI_DrawGlyphString(0x110, (0xA8 + i * 13), 0, g_UiFormatBuffer);
         }
     }
 }
@@ -510,37 +510,37 @@ MATCH void func_800F6A84(u16 x, u16 y) {
     s16 x2;
     s16 y2;
 
-    UI_DrawWindow((u16)x, (u16)(y + 1), 0x84, 0x42, 0x80, D_80144952);
+    UI_DrawWindow(x, (y + 1), 0x84, 0x42, 0x80, D_80144952);
 
     func_801E0C80(9, 1);
-    func_801E0DCC(0x25, 1, (s16)x, (s16)y);
+    func_801E0DCC(0x25, 1, x, y);
 
     for (i = 0; i < 9; i++) {
         offset = i * 8 + 0x20;
-        func_801E0DCC(0x26, 1, (s16)(x + offset), (s16)y);
+        func_801E0DCC(0x26, 1, (x + offset), y);
     }
 
-    func_801E0DCC(0x27, 1, (s16)(x + 0x68), (s16)y);
+    func_801E0DCC(0x27, 1, (x + 0x68), y);
 
     x2 = x + 0x80;
-    func_801E0DCC(0x28, 1, x2, (s16)y);
+    func_801E0DCC(0x28, 1, x2, y);
 
     y2 = y + 0x18;
     func_801D799C(x, y2, 0x28, 0);
     func_801D799C(x2, y2, 0x28, 1);
 
     y2 = y + 0x40;
-    func_801E0DCC(0x30, 1, (s16)x, y2);
+    func_801E0DCC(0x30, 1, x, y2);
 
     i      = 0;
     offset = 8;
     do {
-        func_801E0DCC(0x31, 1, (s16)(x + offset), y2);
+        func_801E0DCC(0x31, 1, (x + offset), y2);
         i += 1;
         offset += 8;
     } while (i < 15);
 
-    func_801E0DCC(0x32, 1, (s16)(x + 0x80), (s16)(y + 0x40));
+    func_801E0DCC(0x32, 1, (x + 0x80), (y + 0x40));
 }
 
 MATCH void func_800F6C5C(void) {
@@ -552,7 +552,7 @@ MATCH void func_800F6C5C(void) {
     func_800F6EE0(0x14, 0x64);
 
     entry = D_801E3134[g_GameContextKind][slot];
-    value = (s32)Item_GetRecord(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00);
+    value = Item_GetRecord(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00);
     UI_DrawText(0x21, 0x68, 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
 
     sprintf(g_UiFormatBuffer, D_800F5000.format, (s8)s_ListItemId);
@@ -583,27 +583,27 @@ MATCH void func_800F6EE0(u16 x, u16 y) {
 
     UI_DrawWindow(x, y, 0x88, 0x36, 0x80, D_80144952);
     func_801E0C80(8, 1);
-    func_801E0DCC(0x33, 1, (s16)x, (s16)y);
+    func_801E0DCC(0x33, 1, x, y);
 
     for (i = 0; i < 16; i++) {
         offset = i * 8 + 0x8;
-        func_801E0DCC(0x34, 1, (s16)(x + offset), (s16)y);
+        func_801E0DCC(0x34, 1, (x + offset), y);
     }
 
-    func_801E0DCC(0x35, 1, (s16)(x + 0x84), (s16)y);
+    func_801E0DCC(0x35, 1, (x + 0x84), y);
 
     y2 = y + 0x8;
-    func_801D799C((s16)x, y2, 0x2C, 2);
-    func_801D799C((s16)(x + 0x84), y2, 0x2C, 3);
+    func_801D799C(x, y2, 0x2C, 2);
+    func_801D799C((x + 0x84), y2, 0x2C, 3);
 
-    func_801E0DCC(0x36, 1, (s16)x, (s16)(y + 0x34));
+    func_801E0DCC(0x36, 1, x, (y + 0x34));
 
     for (i = 0; i < 16; i++) {
         offset = i * 8 + 0x8;
-        func_801E0DCC(0x37, 1, (s16)(x + offset), (s16)(y + 0x34));
+        func_801E0DCC(0x37, 1, (x + offset), (y + 0x34));
     }
 
-    func_801E0DCC(0x38, 1, (s16)(x + 0x84), (s16)(y + 0x34));
+    func_801E0DCC(0x38, 1, (x + 0x84), (y + 0x34));
 }
 
 MATCH void func_800F7094(s32 x, s32 y, s32 kind, s32 value, u8 selected) {

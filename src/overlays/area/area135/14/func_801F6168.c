@@ -5,7 +5,7 @@ MATCH void func_801F6168(s32 value) {
 
     seed = value;
     /* The shift keeps only the low half; the camera seed is that half. */
-    if ((((u32)value) << 16) != 0) {
+    if (((value) << 16) != 0) {
         g_AreaCameraStep = seed;
     }
     g_AreaScrollTargetX = D_80147A8C;

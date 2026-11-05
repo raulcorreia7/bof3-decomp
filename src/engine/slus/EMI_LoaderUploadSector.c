@@ -21,10 +21,10 @@ MATCH void EMI_LoaderUploadSector(void) {
     entry         = base;
     entry += index << 2;
     v              = entry[3];
-    D_80146850[-2] = (s16)(v << 5);
+    D_80146850[-2] = (v << 5);
     rect           = (RECT*)&D_80146850[-2];
-    h              = (u16)(*(u16*)(entry + 2) & 0x3F);
-    D_8014684E     = (s16)(h << 5);
+    h              = (*(u16*)(entry + 2) & 0x3F);
+    D_8014684E     = (h << 5);
     if (((v << 5) < 0x3E9) && ((h << 5) < 0x1F5)) {
         LoadImage(rect, (u_long*)(g_EmiRingBase + (index << 11)));
     }

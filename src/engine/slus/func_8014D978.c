@@ -22,7 +22,7 @@ MATCH u8 func_8014D978(void) {
         } else {
             entry = work->script + index;
             if (entry[0] >= 0x80U) {
-                work->script_pc = (u16)(entry[1] * 2);
+                work->script_pc = (entry[1] * 2);
                 result          = 1;
             }
         }

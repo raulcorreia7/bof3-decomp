@@ -16,5 +16,5 @@ MATCH void func_801F4B58(void) {
     tint->tint.signed_bytes.unk_5E = -0x80;
     tint->tint.signed_bytes.unk_5D = -0x80;
     g_Task->unk_04                 = 1;
-    g_CurrentActor->unk_7E         = (u16)(g_CurrentActor->unk_7E - 2);
+    g_CurrentActor->unk_7E         = (g_CurrentActor->unk_7E - 2);
 }

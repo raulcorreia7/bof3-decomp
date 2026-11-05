@@ -16,13 +16,13 @@ MATCH s32 func_801C7518(s32 pos_x, s32 pos_y, s32 reach) {
     xa    = off + xa;
     ya    = pos_y + 0x8000;
     ya    = off + ya;
-    px    = (u16)xa;
-    py    = (u16)ya;
+    px    = xa;
+    py    = ya;
     xa    = xa >> 0x10;
     ya    = ya >> 0x10;
     tile  = func_801C6FD4(xa, ya) & BYTE_MASK;
     index = ((reach << 2) | 1) & BYTE_MASK;
-    if ((u32)tile < (u32)index) {
+    if (tile < index) {
         return 0;
     }
     if (tile >= index + 4) {

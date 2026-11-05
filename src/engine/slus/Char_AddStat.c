@@ -11,9 +11,9 @@ MATCH s16 Char_AddStat(u16* value, s16 delta) {
     cur = *value;
     if (delta > 0) {
         if (cur != 0x3E7) {
-            next   = (u16)(cur + delta);
+            next   = (cur + delta);
             *value = next;
-            if ((u32)next >= 0x3E8U) {
+            if (next >= 0x3E8U) {
                 *value = 0x3E7;
                 result = 0x3E7 - cur;
                 return result;
@@ -23,7 +23,7 @@ MATCH s16 Char_AddStat(u16* value, s16 delta) {
     }
     if (delta < 0) {
         if (cur != 0) {
-            next   = (u16)(cur + delta);
+            next   = (cur + delta);
             *value = next;
             if ((s16)next >= 0) {
                 return 0;

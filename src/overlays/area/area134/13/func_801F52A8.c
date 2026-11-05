@@ -5,5 +5,5 @@ MATCH void func_801F52A8(void) {
 
     count_                   = g_AreaCameraOffsetY;
     g_AreaCameraRefreshCount = 2;
-    g_AreaCameraOffsetY      = (u16)(count_ - 8);
+    g_AreaCameraOffsetY      = (count_ - 8);
 }

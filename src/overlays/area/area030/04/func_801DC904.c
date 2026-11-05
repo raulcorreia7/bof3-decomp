@@ -9,6 +9,6 @@ MATCH void func_801DC904(void) {
     flag = D_80144281;
     if (flag == 3u) {
         scratch    = SP_REF(volatile u8*, 0x44u);
-        scratch[3] = (u8)(scratch[3] + 1u);
+        scratch[3] = (scratch[3] + 1u);
     }
 }

@@ -33,5 +33,5 @@ MATCH void func_801D339C(void) {
     }
 
     state                   = FISHING_STATE;
-    state->handler_index_01 = (u8)(state->handler_index_01 + 1);
+    state->handler_index_01 = (state->handler_index_01 + 1);
 }

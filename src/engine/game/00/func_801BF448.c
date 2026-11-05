@@ -24,7 +24,7 @@ MATCH void func_801BF448(void) {
                 if (D_80144F5A[i & BYTE_MASK] == key)
                     break;
                 i += 1;
-                if ((u32)(i & BYTE_MASK) >= 3U)
+                if ((i & BYTE_MASK) >= 3U)
                     break;
             }
             g_Task->x.fixed    = *(s32*)(D_80143F2C + tab);
@@ -33,7 +33,7 @@ MATCH void func_801BF448(void) {
             work->unk_0B       = 0;
             COORD_INT(work->z) = val;
             if ((g_Characters[g_GameState->slot_13C].status & STATUS_KO) != 0)
-                Actor_SelectScript((u8)(g_BattleScrollDir + 0x1C));
+                Actor_SelectScript((g_BattleScrollDir + 0x1C));
             else
                 Actor_SelectScript(g_BattleScrollDir);
             tab += 8;

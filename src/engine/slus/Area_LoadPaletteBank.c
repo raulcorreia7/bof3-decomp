@@ -16,14 +16,14 @@ MATCH void Area_LoadPaletteBank(u8* palette_list) {
     u8*  ptr;
 
     ptr = palette_list;
-    id  = (s32)((u32)g_FrameCount % *(u16*)ptr) + 1;
+    id  = (g_FrameCount % *(u16*)ptr) + 1;
     ptr += 4;
     if ((Area_TestCondition(*(s16*)ptr) << 24) != 0) {
         base = AREA_PALETTE_WORK;
         for (;;) {
             ptr += 4;
             entry = *(u32*)ptr;
-            if (id == (s32)(entry >> 24)) {
+            if (id == (entry >> 24)) {
                 count = 0;
                 dst   = (s32*)((((entry >> 4) & BYTE_MASK) << 9) + (((entry & 0xF) << 5) + base));
                 src   = (s32*)((((entry >> 16) & BYTE_MASK) << 9) + (((entry >> 7) & 0x1E0) + base));

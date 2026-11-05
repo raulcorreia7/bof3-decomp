@@ -84,7 +84,7 @@ MATCH void func_801BC000(void) {
                         Area_ReadHeight(tmp10->x.fixed + (tmp10->vx * tmp3), tmp10->y.fixed + (tmp10->vy * tmp3));
                     }
                     tmp11         = g_Task;
-                    tmp11->unk_09 = (u8)(tmp11->unk_09 - 1);
+                    tmp11->unk_09 = (tmp11->unk_09 - 1);
                     func_801B0DFC();
                     g_GameState->mode_12B.s8_value = 1;
                     tmp6                           = g_Task;

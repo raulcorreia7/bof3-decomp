@@ -12,8 +12,8 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
     s32 i;
     u8  cur;
 
-    key = (u8)(item & BYTE_MASK);
-    add = (u8)(amount & BYTE_MASK);
+    key = (item & BYTE_MASK);
+    add = (amount & BYTE_MASK);
     if (key == 0) {
         return false;
     }
@@ -28,8 +28,8 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
     do {
         if (*keys == key) {
             cur = *vals;
-            if ((s32)(cur + add) <= limit) {
-                *vals = (u8)(cur + amount);
+            if ((cur + add) <= limit) {
+                *vals = (cur + amount);
                 return true;
             }
             *vals = limit;
@@ -38,7 +38,7 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
         keys++;
         i++;
         vals++;
-    } while ((u32)(i & BYTE_MASK) < 128U);
+    } while ((i & BYTE_MASK) < 128U);
     i    = 0;
     keys = D_801C893C[category & BYTE_MASK];
     vals = D_801C8950[category & BYTE_MASK];
@@ -52,6 +52,6 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
         keys++;
         i++;
         vals++;
-    } while ((u32)(i & BYTE_MASK) < 128U);
+    } while ((i & BYTE_MASK) < 128U);
     return false;
 }

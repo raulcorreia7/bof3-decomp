@@ -14,7 +14,7 @@ MATCH void func_801F2F78(void) {
         halfword[0] = 0;
         D_801F53F4  = 2;
     }
-    tmp        = (u8)(D_801F53F4 - 1);
+    tmp        = (D_801F53F4 - 1);
     D_801F53F4 = tmp;
     if (tmp < 2) {
         g_ScriptVars[1] = 0;

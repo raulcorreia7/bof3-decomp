@@ -9,7 +9,7 @@ MATCH void func_801D41E4(void) {
     s32           index;
 
     work                = FISHING_STATE;
-    work->step_timer_09 = (u8)(work->step_timer_09 - 1);
+    work->step_timer_09 = (work->step_timer_09 - 1);
 
     state = FISHING_STATE;
     if (state->step_timer_09 != 0) {

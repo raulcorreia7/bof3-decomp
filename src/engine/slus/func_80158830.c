@@ -36,7 +36,7 @@ MATCH void func_80158830(void* obj) {
 
     base = obj;
     if ((Area_TestCondition(*(s16*)(base + 4)) << 0x18) != 0) {
-        dividend = (u32)g_FrameCount;
+        dividend = g_FrameCount;
         divisor  = base[0] + 1;
         rem      = dividend % divisor;
         index    = 2;

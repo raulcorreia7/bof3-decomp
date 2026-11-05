@@ -15,18 +15,18 @@ MATCH void func_80198F1C(void) {
     }
     if ((g_InputHeld & PADLdown) && (g_AreaCameraAngle.vx >= -0x2A9)) {
         g_AreaCameraAngle.vx -= AREA_CAMERA_STEP;
-        *MEM_PTR(u16, (u32)(void*)&D_801481D8) -= AREA_CAMERA_STEP;
+        *MEM_PTR(u16, (void*)&D_801481D8) -= AREA_CAMERA_STEP;
     }
     if ((g_InputHeld & PADLup) && (g_AreaCameraAngle.vx < -0x1C7)) {
         g_AreaCameraAngle.vx += AREA_CAMERA_STEP;
-        *MEM_PTR(u16, (u32)(void*)&D_801481D8) += AREA_CAMERA_STEP;
+        *MEM_PTR(u16, (void*)&D_801481D8) += AREA_CAMERA_STEP;
     }
     if ((g_InputHeld & PADLright) && (g_AreaCameraAngle.vz < 0x355)) {
         g_AreaCameraAngle.vz += AREA_CAMERA_STEP;
-        *MEM_PTR(u16, (u32)(void*)&D_801481DC) += AREA_CAMERA_STEP;
+        *MEM_PTR(u16, (void*)&D_801481DC) += AREA_CAMERA_STEP;
     }
     if ((g_InputHeld & PADLleft) && (g_AreaCameraAngle.vz >= 0xAB)) {
         g_AreaCameraAngle.vz -= AREA_CAMERA_STEP;
-        *MEM_PTR(u16, (u32)(void*)&D_801481DC) -= AREA_CAMERA_STEP;
+        *MEM_PTR(u16, (void*)&D_801481DC) -= AREA_CAMERA_STEP;
     }
 }

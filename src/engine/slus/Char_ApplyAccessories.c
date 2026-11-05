@@ -105,5 +105,5 @@ MATCH void Char_ApplyAccessories(void* param) {
         }
         n++;
         kind++;
-    } while ((u32)(n & BYTE_MASK) < 2U);
+    } while ((n & BYTE_MASK) < 2U);
 }

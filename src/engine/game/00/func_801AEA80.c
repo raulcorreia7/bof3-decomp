@@ -21,9 +21,9 @@ MATCH void func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shad
         sprite->b0 = 0x40;
     }
 
-    sprite->x0 = (u16)sprite_x;
-    sprite->y0 = (u16)sprite_y;
-    sprite->u0 = (u8)(((texture_index & BYTE_MASK) * 8) + 56);
+    sprite->x0 = sprite_x;
+    sprite->y0 = sprite_y;
+    sprite->u0 = (((texture_index & BYTE_MASK) * 8) + 56);
     sprite->v0 = 248;
     switch (texture_index & BYTE_MASK) {
         case 1:

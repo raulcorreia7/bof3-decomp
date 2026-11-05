@@ -6,7 +6,7 @@ MATCH void func_801C56E4(void) {
     Actor* state;
 
     work               = g_Task;
-    work->direction_08 = (u8)(work->direction_08 ^ 4);
+    work->direction_08 = (work->direction_08 ^ 4);
     index              = 0x3B;
     if (g_Task->direction_08 == 3) {
         index = 0x3A;

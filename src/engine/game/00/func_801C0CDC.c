@@ -10,5 +10,5 @@ MATCH void func_801C0CDC(void) {
     } else {
         mode = 3;
     }
-    func_801C0F9C((u8)mode);
+    func_801C0F9C(mode);
 }

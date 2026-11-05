@@ -116,7 +116,7 @@ main_loop:
     }
 
 match_offset:
-    match = dst + (s32)((((u32)(ctrl & LZ77_CONTROL_MATCH_DISTANCE_MASK) << 3) | *src++) - 0x800u);
+    match = dst + ((((ctrl & LZ77_CONTROL_MATCH_DISTANCE_MASK) << 3) | *src++) - 0x800u);
     len   = ctrl & LZ77_CONTROL_MATCH_LENGTH_MASK;
     if (len == 15) {
         if (src == limit) {
@@ -133,9 +133,9 @@ copy_match:
     goto window_check; /* shared window-end test */
 
 literal_run:
-    if (len > (u32)(limit - src)) {
-        ctx->pending = len - (u32)(limit - src);
-        len          = (u32)(limit - src);
+    if (len > (limit - src)) {
+        ctx->pending = len - (limit - src);
+        len          = (limit - src);
         if (src != limit) {
             dst = func_801642F4(dst, src, len);
         }

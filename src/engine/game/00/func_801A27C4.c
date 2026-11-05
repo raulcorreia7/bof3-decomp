@@ -8,7 +8,7 @@ MATCH void func_801A27C4(Actor* entity) {
     mode            = entity->unk_78;
     entity->roll_90 = 0;
     if (mode != 0 && g_Task->mode != 6 && g_Task->mode != 4 && g_Task->unk_03 != 4) {
-        func_801A225C((s32)entity, g_RouteSpeedScale[mode], 2);
+        func_801A225C(entity, g_RouteSpeedScale[mode], 2);
         saved = g_Task->direction_08;
         for (i = 0; i < 4; i++) {
             g_Task->direction_08 = s_EntityRouteIndices[D_80145E98 & 7][i];

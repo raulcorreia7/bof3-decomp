@@ -30,10 +30,10 @@ MATCH void func_801D3624(void) {
     D_8014637C[2] = 0;
     Battle_SetSlotPending(g_BattleActiveBattler);
     mode       = g_BattleActionId;
-    D_801463CD = (u8)mode;
+    D_801463CD = mode;
     if ((u16)(mode - 0x24) < 2 || mode == 0x8C) {
         kind                   = Battle_PickTarget();
-        kind_index             = (u8)kind;
+        kind_index             = kind;
         g_BattleTargetSelector = kind;
         if (kind_index < 3) {
             work                  = &g_BattlePartyBattlers[kind_index];

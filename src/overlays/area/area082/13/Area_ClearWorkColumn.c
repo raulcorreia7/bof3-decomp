@@ -11,5 +11,5 @@ MATCH void Area_ClearWorkColumn(void) {
         *cell = 0;
         index += 1;
         cell += 0x14;
-    } while ((u32)(index & BYTE_MASK) < 0x80U);
+    } while ((index & BYTE_MASK) < 0x80U);
 }

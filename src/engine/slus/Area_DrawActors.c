@@ -14,7 +14,7 @@ MATCH void Area_DrawActors(void) {
     if (g_AreaDrawFlags & AREA_DRAW_SORTED_RECORDS) {
         count = D_8014832C;
         i     = 0;
-        if ((s32)(count - 1) > 0) {
+        if ((count - 1) > 0) {
             do {
                 j     = count - 1;
                 index = j & BYTE_MASK;
@@ -30,7 +30,7 @@ MATCH void Area_DrawActors(void) {
                 }
                 i++;
                 count = D_8014832C;
-            } while ((s32)(i & BYTE_MASK) < (count - 1));
+            } while ((i & BYTE_MASK) < (count - 1));
         }
         if (D_8014832C != 0) {
             i = 0;

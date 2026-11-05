@@ -3,7 +3,7 @@
 MATCH void func_801F32FC(void) {
     g_Task->unk_09 += 1;
     g_Task->x.fixed = ((g_Task->unk_09 & 1) * 8) - 0x2B80;
-    if ((u8)g_Task->unk_09 >= 8U) {
+    if (g_Task->unk_09 >= 8U) {
         g_Task->unk_09  = 0;
         g_Task->x.fixed = -0x2B80;
         g_Task->step += 1;

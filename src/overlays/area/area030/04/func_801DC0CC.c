@@ -21,13 +21,13 @@ MATCH void func_801DC0CC(void) {
     if ((g_InputPressed & (PADLup | PADLdown)) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         work               = FISHING_STATE;
-        work->cue_index_06 = (u8)(work->cue_index_06 ^ 1);
+        work->cue_index_06 = (work->cue_index_06 ^ 1);
     } else if ((g_InputPressed & PADRdown) != 0) {
         cue = 0x103;
         SND_PlayCue(cue);
         SND_PlayCue(EMI_CUE_ID(1, 2));
         work               = FISHING_STATE;
-        work->sub_index_03 = (u8)(work->sub_index_03 + 1);
+        work->sub_index_03 = (work->sub_index_03 + 1);
     } else if ((g_InputPressed & PADRup) != 0) {
         cue                = 0x106;
         work               = FISHING_STATE;
@@ -35,7 +35,7 @@ MATCH void func_801DC0CC(void) {
         SND_PlayCue(cue);
         SND_PlayCue(EMI_CUE_ID(1, 2));
         work               = FISHING_STATE;
-        work->sub_index_03 = (u8)(work->sub_index_03 + 1);
+        work->sub_index_03 = (work->sub_index_03 + 1);
     }
     Menu_DrawCursorSprite(0x20, FISHING_STATE->cue_index_06 * 0xC + 0xB6, 0);
     func_8014D978();

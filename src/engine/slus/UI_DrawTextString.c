@@ -42,17 +42,17 @@ MATCH const u8* UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* t
                 break;
             case 0x15:
                 str++;
-                ((SPRT*)g_GfxPrimCursor)->u0 = (u8)(((*str + 64) % 32) * 8);
-                ((SPRT*)g_GfxPrimCursor)->v0 = (u8)(shade + ((*str + 64) / 32) * 8);
+                ((SPRT*)g_GfxPrimCursor)->u0 = (((*str + 64) % 32) * 8);
+                ((SPRT*)g_GfxPrimCursor)->v0 = (shade + ((*str + 64) / 32) * 8);
                 ((SPRT*)g_GfxPrimCursor)->w  = 8;
                 ((SPRT*)g_GfxPrimCursor)->h  = 8 - trim;
                 func_8014FB80(x, y, clut, shade);
                 x += 8;
                 break;
             default:
-                ((SPRT*)g_GfxPrimCursor)->u0 = (u8)(((*str - 48) % 31) * 8);
+                ((SPRT*)g_GfxPrimCursor)->u0 = (((*str - 48) % 31) * 8);
                 glyph_y                      = (((*str - 0x30) / 31) * 8) + 0x78;
-                ((SPRT*)g_GfxPrimCursor)->v0 = (u8)(shade + glyph_y);
+                ((SPRT*)g_GfxPrimCursor)->v0 = (shade + glyph_y);
                 ((SPRT*)g_GfxPrimCursor)->w  = 8;
                 ((SPRT*)g_GfxPrimCursor)->h  = 8 - trim;
                 func_8014FB80(x, y, clut, shade);

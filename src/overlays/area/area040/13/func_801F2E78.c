@@ -15,7 +15,7 @@ MATCH s32 func_801F2E78(void) {
             func_801A4BC0(0x43, value, 0);
             func_801A4BC0(0x44, value, 0);
             i += 1;
-        } while ((u32)(i & 0xFF) < 7U);
+        } while ((i & 0xFF) < 7U);
         return 1;
     }
     j = 0;
@@ -26,6 +26,6 @@ MATCH s32 func_801F2E78(void) {
         func_801A4BC0(0x43, value2, 0xA4);
         func_801A4BC0(0x44, value2, 0xA4);
         j += 1;
-    } while ((u32)(j & 0xFF) < 7U);
+    } while ((j & 0xFF) < 7U);
     return 0;
 }

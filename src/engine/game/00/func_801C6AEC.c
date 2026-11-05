@@ -17,7 +17,7 @@ MATCH s32 func_801C6AEC(s32 candidate_id) {
         id        = *(u8*)(id_table + slot);
         entry->id = id;
         if (id != GAME_NONE) {
-            if (((RANDOM_MASK(0xF)) + 1) <= (s32)s_EntitySpawnChances[slot]) {
+            if (((RANDOM_MASK(0xF)) + 1) <= s_EntitySpawnChances[slot]) {
                 entry->active = 1;
                 kept += 1;
             } else {
@@ -28,6 +28,6 @@ MATCH s32 func_801C6AEC(s32 candidate_id) {
         }
         index += 1;
         entry++;
-    } while ((u32)(index & BYTE_MASK) < 8U);
+    } while ((index & BYTE_MASK) < 8U);
     return kept & BYTE_MASK;
 }

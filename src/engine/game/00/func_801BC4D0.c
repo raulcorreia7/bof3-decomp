@@ -15,7 +15,7 @@ MATCH s32 func_801BC4D0(void) {
         g_Task->unk_09 = 0x10;
     }
     rate           = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
-    g_Task->unk_09 = (u8)(g_Task->unk_09 / (u32)(rate & BYTE_MASK));
+    g_Task->unk_09 = (g_Task->unk_09 / (rate & BYTE_MASK));
     if (g_Task->state_70.byte == 0) {
         SP_REF(s32, 0x8) = g_Task->x.fixed + g_FacingOffsets[g_Task->direction_08].x * rate * g_Task->unk_09;
         SP_REF(s32, 0xC) = g_Task->y.fixed + g_FacingOffsets[g_Task->direction_08].y * rate * g_Task->unk_09;

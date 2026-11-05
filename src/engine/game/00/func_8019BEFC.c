@@ -6,7 +6,7 @@ MATCH void func_8019BEFC(void) {
     work  = g_Task;
     count = work->unk_09;
     if (count != 0) {
-        work->unk_09 = (u8)(count - 1);
+        work->unk_09 = (count - 1);
     }
     if (g_AreaCameraMoving == 0) {
         work = g_Task;

@@ -35,7 +35,7 @@ MATCH void func_801A1384(void* entity) {
             }
             if (rec[0x7B] != 0) {
                 Actor* spad;
-                g_Task->unk_0A = (u8)(0x10 / (s32)rate);
+                g_Task->unk_0A = (0x10 / rate);
                 rec[0x7B]--;
                 if (((g_Task->option_flags & ACTOR_OPT_NO_TARGET) == 0) &&
                     ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
@@ -49,7 +49,7 @@ MATCH void func_801A1384(void* entity) {
                     return;
                 }
             } else if ((g_Task->unk_06 == 0x0A) && ((LOW(rec[0x74]) & 0x88) == 8)) {
-                g_Task->unk_0A    = (u8)(0x10 / (s32)rate);
+                g_Task->unk_0A    = (0x10 / rate);
                 ((s32*)g_Task)[3] = 0;
                 ((s32*)g_Task)[4] = 0;
                 ((s32*)g_Task)[5] = 0;
@@ -72,7 +72,7 @@ MATCH void func_801A1384(void* entity) {
             g_Task->unk_09 = 0;
             return;
         }
-        g_Task->unk_0A = (u8)(0x10 / (s32)rate);
+        g_Task->unk_0A = (0x10 / rate);
         rec[0x7B]--;
         func_801ABBA8(rec + 0x74, g_Task->direction_08 & 7);
         g_Task->direction_08 |= 8;

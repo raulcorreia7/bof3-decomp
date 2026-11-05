@@ -24,8 +24,8 @@ MATCH void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 f
     rec        = record_table + 2;
     for (;;) {
         shift = 0x15;
-        x     = base_x + (s16)((record_table[0] << 24) >> shift);
-        y     = base_y + (s16)((rec[-1] << 24) >> shift);
+        x     = base_x + ((record_table[0] << 24) >> shift);
+        y     = base_y + ((rec[-1] << 24) >> shift);
         UI_DrawSprite(x, y, id, flags);
         rec += 3;
         id = rec[0];

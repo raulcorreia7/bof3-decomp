@@ -21,17 +21,17 @@ MATCH bool func_8019D054(s32 point_x, s32 point_y) {
     x &= 0xFFFF0000;
     y &= 0xFFFF0000;
     xi = (s16)(x >> 16);
-    yi = (s16)(y >> 16);
+    yi = (y >> 16);
     if (func_8019D20C(xi, yi) & BYTE_MASK) {
         return true;
     }
     dist[0] = Area_SampleHeight(x, y);
-    xp      = (s16)(xi + 1);
+    xp      = (xi + 1);
     if (func_8019D20C(xp, yi) & BYTE_MASK) {
         return true;
     }
     dist[1] = Area_SampleHeight(x + 0x10000, y);
-    yp      = (s16)(yi + 1);
+    yp      = (yi + 1);
     if (func_8019D20C(xi, yp) & BYTE_MASK) {
         return true;
     }

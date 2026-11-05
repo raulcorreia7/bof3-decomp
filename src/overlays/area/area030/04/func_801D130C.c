@@ -39,6 +39,6 @@ MATCH void func_801D130C(void) {
     FISHING_STATE->tint_5F        = -0x40;
     state_work                    = FISHING_STATE;
     g_GfxPalettePending           = 1;
-    state_work->sub_index_03      = (u8)(state_work->sub_index_03 + 1);
+    state_work->sub_index_03      = (state_work->sub_index_03 + 1);
     Area_AddActor();
 }

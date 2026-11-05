@@ -18,6 +18,6 @@ MATCH s8 func_801B5AE4(s32 route_index, s32 route_flags) {
             }
         }
         index += 1;
-    } while ((u32)index < 20U);
+    } while (index < 20U);
     return -1;
 }

@@ -38,14 +38,14 @@ MATCH void Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
             }
             RotTransPers4(&verts[1], &verts[2], &verts[3], &verts[0], (long*)&prim->x1, (long*)&prim->x2,
                           (long*)&prim->x3, (long*)&prim->x0, &p, &flag);
-            SetSemiTrans(prim, (s32)(rec[0].raw >> 31));
-            setRGB0(prim, (u8)(rec[0].raw >> 16), (u8)(rec[0].raw >> 8), (u8)rec[0].raw);
+            SetSemiTrans(prim, (rec[0].raw >> 31));
+            setRGB0(prim, (rec[0].raw >> 16), (rec[0].raw >> 8), rec[0].raw);
             rec++;
-            setRGB1(prim, (u8)(rec[0].raw >> 16), (u8)(rec[0].raw >> 8), (u8)rec[0].raw);
+            setRGB1(prim, (rec[0].raw >> 16), (rec[0].raw >> 8), rec[0].raw);
             rec++;
-            setRGB2(prim, (u8)(rec[0].raw >> 16), (u8)(rec[0].raw >> 8), (u8)rec[0].raw);
+            setRGB2(prim, (rec[0].raw >> 16), (rec[0].raw >> 8), rec[0].raw);
             rec++;
-            setRGB3(prim, (u8)(rec[0].raw >> 16), (u8)(rec[0].raw >> 8), (u8)rec[0].raw);
+            setRGB3(prim, (rec[0].raw >> 16), (rec[0].raw >> 8), rec[0].raw);
             rec++;
             n += 4;
             GFX_AddPrim(g_AreaDrawMode, 0x24);

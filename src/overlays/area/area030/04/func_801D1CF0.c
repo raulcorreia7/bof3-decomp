@@ -11,19 +11,19 @@ MATCH void func_801D1CF0(void) {
     s32           speed;
 
     work  = (FishingState*)TASK_BYTES;
-    speed = (s32)work->step_delta_18;
+    speed = work->step_delta_18;
     if (speed != 0) {
         switch (D_801E320C->byte_01) {
             case 0:
                 work->pos_x_0C = work->pos_x_0C + speed;
                 if ((s32)work->step_delta_18 > 0 && work->pos_x_0C >= 0xFF) {
                     work->pos_x_0C      = 0xFF;
-                    work->step_delta_18 = (u32) - (s32)work->step_delta_18;
+                    work->step_delta_18 = -work->step_delta_18;
                 } else {
                     back = (FishingState*)TASK_BYTES;
                     if ((s32)back->step_delta_18 < 0 && back->pos_x_0C <= 0) {
                         back->pos_x_0C      = 0;
-                        back->step_delta_18 = (u32) - (s32)back->step_delta_18;
+                        back->step_delta_18 = -back->step_delta_18;
                     }
                 }
                 break;
@@ -38,7 +38,7 @@ MATCH void func_801D1CF0(void) {
                 }
                 break;
             case 2:
-                if ((s32)work->cursor_10 < 0) {
+                if (work->cursor_10 < 0) {
                     work->cursor_10 = work->cursor_10 + speed;
                     if (work->cursor_10 >= 0) {
                         work->cursor_10 = -1;
@@ -62,7 +62,7 @@ MATCH void func_801D1CF0(void) {
     }
     func_801E0C80(0, 2);
     func_801E0DCC(0x10, 2, 0x87, 0xB4);
-    func_801D1B88(0x88, 0xCB, (s16)((FISHING_STATE->pos_x_0C * 0x60) / 255), 2);
+    func_801D1B88(0x88, 0xCB, ((FISHING_STATE->pos_x_0C * 0x60) / 255), 2);
     if (D_80145E92[0] == 3) {
         FISHING_STATE->origin_x_2E = 0xB8;
         FISHING_STATE->origin_y_30 = 0xD1;

@@ -18,12 +18,12 @@ MATCH s32 Area_CanStartEncounter(void) {
     if (D_80145FB8 == 0) {
         return 0;
     }
-    if ((u8)D_80145FAC < 4) {
+    if (D_80145FAC < 4) {
         value = ((u16)D_80143F22 * 7) / 10;
     } else {
         value = (u16)D_80143F22;
     }
-    if (value < (u16)D_80145FB8) {
+    if (value < D_80145FB8) {
         return 0;
     }
     if (D_80145FBC & 1) {

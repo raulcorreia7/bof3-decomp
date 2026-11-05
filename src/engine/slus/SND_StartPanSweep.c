@@ -8,6 +8,6 @@ MATCH void SND_StartPanSweep(s32 voice) {
     u16 index;
 
     index = voice;
-    SsUtAutoPan((s16)index, (s16)D_80149010[index], (s16)D_80149040[index], 1);
+    SsUtAutoPan(index, D_80149010[index], D_80149040[index], 1);
     D_80149010[index] = D_80149040[index];
 }

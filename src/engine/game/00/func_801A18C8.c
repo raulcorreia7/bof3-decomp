@@ -14,7 +14,7 @@ MATCH void func_801A18C8(Actor* record) {
         }
         if (*game_state != state) {
             if (g_Task->unk_06 == 5) {
-                D_8014865C       = (s8)((s32)(-(((s32)work - (s32)g_Actors) * 0xD79435E5)) >> 3);
+                D_8014865C       = ((s32)(-(((s32)work - (s32)g_Actors) * 0xD79435E5)) >> 3);
                 D_80148650       = 0;
                 D_80148651       = 0;
                 g_GameEntryState = 7;

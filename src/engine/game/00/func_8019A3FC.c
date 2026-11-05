@@ -19,13 +19,13 @@ MATCH void func_8019A3FC(void) {
 
     work               = g_Task;
     delta              = work->vx;
-    total              = (s32) * (u16*)&work->unk_2E + delta;
+    total              = *(u16*)&work->unk_2E + delta;
     delta              = work->vy;
     work->active_flags = 0;
-    work->unk_2E       = (u16)total;
-    total              = (s32) * (u16*)&work->unk_30;
+    work->unk_2E       = total;
+    total              = *(u16*)&work->unk_30;
     other              = g_Task;
-    work->unk_30       = (u16)(total - delta);
+    work->unk_30       = (total - delta);
     other->unk_2A      = 0;
 
     work         = g_Task;

@@ -6,7 +6,7 @@ MATCH u8 Party_CountOrder(u8 mode) {
     MATCH_REG(u8, sentinel, "a2") = 0xFF;
     unsigned int masked           = mode & sentinel;
     u8*          base             = D_80144F5A;
-    s32          off              = (s32)masked * 3;
+    s32          off              = masked * 3;
     u8*          ptr              = base + off;
 
     while (index < 3) {

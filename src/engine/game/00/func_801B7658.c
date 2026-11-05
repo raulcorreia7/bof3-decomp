@@ -9,7 +9,7 @@ MATCH void func_801B7658(void) {
         g_Task->vy     = 0;
         g_Task->unk_03 = 3;
     } else {
-        g_Task->unk_09 = (u8)(count - 1);
+        g_Task->unk_09 = (count - 1);
     }
     g_Task->vz += g_Task->gravity;
     func_801B0DFC();

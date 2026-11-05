@@ -7,7 +7,7 @@ MATCH void func_801F51BC(void) {
     g_Task->unk_32 = (g_Task->unk_32 - (g_Task->vz / 10000)) & 0xFFD;
     func_801F4430();
     g_Task->unk_09 += 1;
-    if ((u8)g_Task->unk_09 >= 0x10U) {
+    if (g_Task->unk_09 >= 0x10U) {
         g_Task->step += 1;
     }
 }

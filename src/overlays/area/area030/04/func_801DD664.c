@@ -18,11 +18,11 @@ MATCH void func_801DD664(void) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
         index      = D_801442BE + 1;
         D_801442BC = index;
-        if ((u32)(index & HALF_MASK) >= 0x17) {
+        if ((index & HALF_MASK) >= 0x17) {
             D_801442BC = 0;
         }
         D_80144288 = 0;
-        *panel     = (u8)(*panel + 1);
+        *panel     = (*panel + 1);
         return;
     }
 
@@ -34,13 +34,13 @@ MATCH void func_801DD664(void) {
             D_801442BC = 0x16;
         }
         D_80144288 = 1;
-        *panel     = (u8)(*panel + 1);
+        *panel     = (*panel + 1);
         return;
     }
 
     if ((g_InputPressed & D_80145AC4) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         FISHING_STATE->flag_04      = 0;
-        FISHING_STATE->sub_index_03 = (u8)(FISHING_STATE->sub_index_03 - 1);
+        FISHING_STATE->sub_index_03 = (FISHING_STATE->sub_index_03 - 1);
     }
 }

@@ -17,7 +17,7 @@ MATCH void func_801ABBA8(void* sub, s32 route) {
     } else {
         g_Task->unk_09 = 0x10;
     }
-    g_Task->unk_09 = (u8)(g_Task->unk_09 / (u32)(rate & BYTE_MASK));
+    g_Task->unk_09 = (g_Task->unk_09 / (rate & BYTE_MASK));
     g_Task->vx     = g_FacingOffsets[slot].x * rate;
     high           = g_FacingOffsets[slot].y * rate;
     g_Task->vy     = high;

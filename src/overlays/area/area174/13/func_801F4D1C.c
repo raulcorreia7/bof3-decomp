@@ -2,6 +2,6 @@
 
 MATCH void func_801F4D1C(void) {
     if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
-        GFX_FreePaletteSlotOwner((s32)g_Task);
+        GFX_FreePaletteSlotOwner(g_Task);
     }
 }

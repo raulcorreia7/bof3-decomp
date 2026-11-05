@@ -9,7 +9,7 @@ MATCH void UI_RunChoiceStep(void) {
     Table2 table = {{func_801519F8, func_80151A48}};
 
     table.handlers[D_801490A3]();
-    if ((u16)D_801490AA != 0xFFFFu) {
+    if (D_801490AA != 0xFFFFu) {
         D_801490AA -= 1;
     }
     if (D_801490AA == 0) {

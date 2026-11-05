@@ -8,5 +8,5 @@ MATCH void func_801F3834(void) {
     do {
         index += 1;
         *D_801F44A4 = 0;
-    } while ((u32)(index & BYTE_MASK) < 8U);
+    } while ((index & BYTE_MASK) < 8U);
 }

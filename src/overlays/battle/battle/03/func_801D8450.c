@@ -21,12 +21,12 @@ MATCH void func_801D8450(u32 panel_index) {
     r     = PSX_COLOR_R(color) << 3;
     g     = PSX_COLOR_G(color) << 3;
     b     = PSX_COLOR_B(color) << 3;
-    func_801D9C80(x, (s16)(y + 2), 5, 1);
-    func_801D9AB4(x, (s16)y, 0xA, 1);
-    func_801D9AB4(x, (s16)(y + 0x11), 0xB, 1);
-    func_801DA5A8((s16)(x + 2), (s16)(y + 2), (s16)(x + 0x25), (s16)(y + 2), r, g, b);
-    func_801DA5A8((s16)(x + 2), (s16)(y + 3), (s16)(x + 2), (s16)(y + 0x10), r, g, b);
-    func_801DA4B4((s16)(x + 0x25), (s16)(y + 2), (s16)(x + 0x25), (s16)(y + 0x10), r, g, b);
-    func_801DA4B4((s16)(x + 2), (s16)(y + 0x10), (s16)(x + 0x25), (s16)(y + 0x10), r, g, b);
-    UI_DrawText((s16)(x + 8), (s16)(y + 3), 0, 8, (u8*)(D_801EAEB0 + index * 2u));
+    func_801D9C80(x, (y + 2), 5, 1);
+    func_801D9AB4(x, y, 0xA, 1);
+    func_801D9AB4(x, (y + 0x11), 0xB, 1);
+    func_801DA5A8((x + 2), (y + 2), (x + 0x25), (y + 2), r, g, b);
+    func_801DA5A8((x + 2), (y + 3), (x + 2), (y + 0x10), r, g, b);
+    func_801DA4B4((x + 0x25), (y + 2), (x + 0x25), (y + 0x10), r, g, b);
+    func_801DA4B4((x + 2), (y + 0x10), (x + 0x25), (y + 0x10), r, g, b);
+    UI_DrawText((x + 8), (y + 3), 0, 8, (u8*)(D_801EAEB0 + index * 2u));
 }

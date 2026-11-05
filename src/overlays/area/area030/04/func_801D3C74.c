@@ -33,9 +33,9 @@ MATCH void func_801D3C74(void) {
 
     work              = FISHING_STATE;
     count             = work->step_index_0A;
-    work->origin_x_2E = (u16)(work->origin_x_2E - 2);
+    work->origin_x_2E = (work->origin_x_2E - 2);
     if (count != 0) {
-        work->step_index_0A = (u8)(count - 1);
+        work->step_index_0A = (count - 1);
         anim                = FISHING_STATE;
         anim_count          = anim->step_index_0A;
         color_offset        = *(D_801E1E80 + (anim->row_4B * FISHING_PALETTE_ROW_STRIDE)) * FISHING_COLOR_ENTRY_SIZE;
@@ -43,10 +43,10 @@ MATCH void func_801D3C74(void) {
                       (FISHING_PALETTE_WIDTH - (anim_count * FISHING_EXPAND_STEP_STRIDE)) & BYTE_MASK,
                       0x125 - ((FISHING_EXPAND_STEP_COUNT - anim_count) * FISHING_EXPAND_STEP_STRIDE));
     } else {
-        work->step_timer_09 = (u8)(work->step_timer_09 - 1);
+        work->step_timer_09 = (work->step_timer_09 - 1);
         timer               = FISHING_STATE;
         if (timer->step_timer_09 == 0) {
-            timer->column_4A = (u8)(timer->column_4A + 1);
+            timer->column_4A = (timer->column_4A + 1);
             queue            = FISHING_STATE;
             queue_pos        = queue->column_4A;
             if ((queue_pos >= FISHING_QUEUE_COLUMN_COUNT) ||
@@ -65,16 +65,16 @@ MATCH void func_801D3C74(void) {
                 }
             }
             flag                   = FISHING_STATE;
-            flag->handler_index_01 = (u8)(flag->handler_index_01 + 1);
+            flag->handler_index_01 = (flag->handler_index_01 + 1);
         }
         palette = FISHING_STATE;
         color   = *(D_801E1E80 + (palette->row_4B * FISHING_PALETTE_ROW_STRIDE));
         if (color != GAME_NONE) {
             color_index = color * FISHING_COLOR_ENTRY_SIZE;
-            UI_DrawText((s16)(palette->origin_x_2E + (palette->counter_49 * FISHING_PALETTE_WIDTH)),
-                        (s16)(D_80144154 + 2), (s32) * (D_801E1F16 + color_index), 1U, (color_index + D_801E1F14));
+            UI_DrawText((palette->origin_x_2E + (palette->counter_49 * FISHING_PALETTE_WIDTH)), (D_80144154 + 2),
+                        *(D_801E1F16 + color_index), 1U, (color_index + D_801E1F14));
         }
     }
     draw = FISHING_STATE;
-    UI_DrawText((s16)draw->origin_x_2E, (s16)(D_80144154 + 2), 0, (u32)draw->counter_49, draw->item_50.pointer);
+    UI_DrawText(draw->origin_x_2E, (D_80144154 + 2), 0, draw->counter_49, draw->item_50.pointer);
 }

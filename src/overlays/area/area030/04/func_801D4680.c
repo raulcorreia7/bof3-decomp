@@ -31,11 +31,11 @@ MATCH void func_801D4680(void) {
         y = 0x28;
     }
     func_801D7C10(x, y, flags);
-    func_801D88E0((s16)(0x10 - (FISHING_STATE->step_timer_09 * 0x2D)), 0x40);
+    func_801D88E0((0x10 - (FISHING_STATE->step_timer_09 * 0x2D)), 0x40);
     if (!(FISHING_STATE->counter_07 & 1)) {
         func_801D7EB0((s16)((FISHING_STATE->step_timer_09 * 0x2D) + 0xA4), 0x40);
     } else {
-        func_801D8364((s16)((FISHING_STATE->step_timer_09 * 0x2D) + 0xA4), 0x40);
+        func_801D8364(((FISHING_STATE->step_timer_09 * 0x2D) + 0xA4), 0x40);
     }
     if (FISHING_STATE->step_timer_09 == 4) {
         if (FISHING_STATE->saved_index_0B == 0) {

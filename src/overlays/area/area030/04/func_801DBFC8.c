@@ -20,7 +20,7 @@ MATCH void func_801DBFC8(void) {
     if (g_InputPressed != 0) {
         FISHING_STATE->cue_index_06 = 0;
         work                        = FISHING_STATE;
-        work->sub_index_03          = (u8)(work->sub_index_03 + 1);
+        work->sub_index_03          = (work->sub_index_03 + 1);
     }
     func_8014D978();
     func_801E16DC();

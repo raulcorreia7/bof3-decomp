@@ -30,7 +30,7 @@ MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
     }
     pos.vx = ((x - 0x80) << 7) + FIELD(s8, part_list, 7) * 2;
     pos.vy = ((y - 0x80) << 7) + FIELD(s8, part_list, 6) * 2;
-    pos.vz = (s32)((ScenePart*)part_list)[1].raw;
+    pos.vz = ((ScenePart*)part_list)[1].raw;
     scale  = (g_FrameCount & 0xFFF) * 4;
     rot.vx = (((ScenePart*)part_list)[2].raw >> 0x14 & 0x3FF) * scale;
     rot.vy = (((ScenePart*)part_list)[2].raw >> 0xA & 0x3FF) * scale;
@@ -52,7 +52,7 @@ MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
         for (vertex_index = 0; vertex_index < 4; vertex_index++) {
             vertex     = &uv[vertex_index];
             packed_uv  = part_words[1 + vertex_index];
-            coordinate = (s32)(packed_uv >> 0x14);
+            coordinate = (packed_uv >> 0x14);
             vertex->vx = coordinate;
             if (coordinate & 0x200) {
                 signed_coordinate = coordinate | (~0x3FF);
@@ -60,14 +60,14 @@ MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
             }
             packed_uv  = part_words[1 + vertex_index];
             shifted_uv = packed_uv >> 0xA;
-            coordinate = (s32)(shifted_uv & 0x3FF);
+            coordinate = (shifted_uv & 0x3FF);
             vertex->vy = coordinate;
             if (shifted_uv & 0x200) {
                 signed_coordinate = coordinate | (~0x3FF);
                 vertex->vy        = signed_coordinate;
             }
             packed_uv  = part_words[1 + vertex_index];
-            coordinate = (s32)(packed_uv & 0x3FF);
+            coordinate = (packed_uv & 0x3FF);
             vertex->vz = coordinate;
             if (packed_uv & 0x200) {
                 signed_coordinate = coordinate | (~0x3FF);

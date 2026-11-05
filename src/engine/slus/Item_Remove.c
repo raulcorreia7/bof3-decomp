@@ -14,7 +14,7 @@ MATCH u8 Item_Remove(s32 category, u8 item, s32 amount, s32 unused) {
     ids   = D_801C893C[category & BYTE_MASK];
     qtys  = D_801C8950[category & BYTE_MASK];
     index = 0;
-    while ((u32)(index & BYTE_MASK) < INV_SLOTS_PER_CATEGORY) {
+    while ((index & BYTE_MASK) < INV_SLOTS_PER_CATEGORY) {
         if (*ids == item) {
             qty = *qtys;
             if (qty >= (u32)(amount & BYTE_MASK)) {

@@ -4,5 +4,5 @@ MATCH void func_801F4E24(void) {
     g_AreaCameraRefreshCount = 2;
     g_AreaCameraHeight -= 4;
     g_Task->unk_04++;
-    g_ScriptState->cursor = (u16)(g_ScriptState->cursor - 2);
+    g_ScriptState->cursor = (g_ScriptState->cursor - 2);
 }

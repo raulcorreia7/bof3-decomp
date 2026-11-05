@@ -9,7 +9,7 @@ MATCH void func_8019BE28(void) {
     work->unk_44   = work->unk_44 + 0x4000;
     if (work->unk_09 != 0) {
         if (g_AreaCameraMoving == 0) {
-            work->unk_09 = (u8)(work->unk_09 - 1);
+            work->unk_09 = (work->unk_09 - 1);
         }
     }
     if (g_Task->unk_40 > 0x1FFFF) {

@@ -8,6 +8,6 @@ MATCH s16 func_801AFF90(Vec2s* origin, Vec2s* first_point, Vec2s* second_point) 
 
     first_x = first_point->x;
     first_y = first_point->y;
-    return (s16)(((first_x - origin->x) * (second_point->y - first_y)) -
-                 ((first_y - origin->y) * (second_point->x - first_x)));
+    return (((first_x - origin->x) * (second_point->y - first_y)) -
+            ((first_y - origin->y) * (second_point->x - first_x)));
 }

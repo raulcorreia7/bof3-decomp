@@ -23,7 +23,7 @@ MATCH void func_801E1004(s32 item, s32 count, s32 column) {
             x              = pair[0] + ((column & BYTE_MASK) * 25);
             y              = pair[1];
         }
-        func_801E0DCC((i + 3) & BYTE_MASK, 1, (s16)x, (s16)y);
+        func_801E0DCC((i + 3) & BYTE_MASK, 1, x, y);
     }
 
     dst = g_UiFormatBuffer;

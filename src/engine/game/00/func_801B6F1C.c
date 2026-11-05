@@ -8,7 +8,7 @@ MATCH void func_801B6F1C(void) {
 
     count = g_Task->unk_09;
     if (count != 0) {
-        g_Task->unk_09 = (u8)(count - 1);
+        g_Task->unk_09 = (count - 1);
         func_801B0DFC();
         return;
     }
@@ -18,13 +18,13 @@ MATCH void func_801B6F1C(void) {
         return;
     }
     saved                 = g_Task->vz;
-    g_GameState->wait_11F = (u8)(wait - 1);
+    g_GameState->wait_11F = (wait - 1);
     func_801C24D0();
     flags = g_GameState->flags_118;
     if (flags & 0x80) {
         g_Task->vz = saved;
     }
     count          = g_Task->unk_09;
-    g_Task->unk_09 = (u8)(count - 1);
+    g_Task->unk_09 = (count - 1);
     func_801B0DFC();
 }

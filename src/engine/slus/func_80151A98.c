@@ -10,7 +10,7 @@ MATCH void func_80151A98(void) {
     Table2 table = {{func_80151B08, func_80151B50}};
 
     table.handlers[D_801490A3]();
-    if ((u16)D_801490AA != 0xFFFFu) {
+    if (D_801490AA != 0xFFFFu) {
         D_801490AA -= 1;
     }
 }

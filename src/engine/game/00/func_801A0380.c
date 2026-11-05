@@ -20,7 +20,7 @@ MATCH void func_801A0380(s16 x, s16 y, u16 kind) {
         if (record[7] == 0) {
             result = record[6];
         } else {
-            index = (s32)record[6] << 3;
+            index = record[6] << 3;
             count = D_80181E44[index];
             /* FAKE: statement boundary keeps the retail register order and schedule. */
             ORDER_LOCK(done = 0);

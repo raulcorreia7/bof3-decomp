@@ -21,9 +21,9 @@ MATCH void func_801F2D40(const void* sprite) {
     func_801AFFD8(object, size, size);
 
     setXY4(primitive, screen[0] - ((s16)size[0] >> 1), screen[1] - ((s16)size[1] >> 1),
-           (screen[0] - ((s16)size[0] >> 1)) + (s16)size[0], screen[1] - ((s16)size[1] >> 1),
-           screen[0] - ((s16)size[0] >> 1), (screen[1] - ((s16)size[1] >> 1)) + (s16)size[1],
-           (screen[0] - ((s16)size[0] >> 1)) + (s16)size[0], (screen[1] - ((s16)size[1] >> 1)) + (s16)size[1]);
+           (screen[0] - ((s16)size[0] >> 1)) + size[0], screen[1] - ((s16)size[1] >> 1),
+           screen[0] - ((s16)size[0] >> 1), (screen[1] - ((s16)size[1] >> 1)) + size[1],
+           (screen[0] - ((s16)size[0] >> 1)) + size[0], (screen[1] - ((s16)size[1] >> 1)) + size[1]);
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     primitive->clut  = GetClut(160, 483);
     primitive->tpage = GetTPage(0, 2, 704, 256);

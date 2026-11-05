@@ -26,7 +26,7 @@ MATCH void EMI_LoaderServiceStream(void) {
         do {
             ((Callback)callbacks.handlers[g_EmiRingStates[*slot] & 0x7F])();
             g_EmiRingStates[*slot] = 0xFF;
-            next                   = (u8)*slot + 1;
+            next                   = *slot + 1;
             *slot                  = next;
             if (next == EMI_CALLBACK_SLOT_COUNT) {
                 *slot = 1;

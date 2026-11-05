@@ -14,7 +14,7 @@ MATCH void SYS_SubmitFrame(void) {
     packet         = D_80145990;
     work_offset    = 0x70;
     do {
-        AddPrims(g_GfxCurrentDisplayFrame + work_offset, (void*)(((u32)g_FrameBufferIndex << 5) + (u32)packet),
+        AddPrims(g_GfxCurrentDisplayFrame + work_offset, (void*)((g_FrameBufferIndex << 5) + (u32)packet),
                  *ordering_table);
         ordering_table++;
         index++;

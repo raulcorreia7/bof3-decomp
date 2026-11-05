@@ -42,6 +42,6 @@ MATCH void func_80159050(void) {
     task->unk_10 = 0;
     task->unk_12 = 0;
     task->state += 1;
-    task->unk_14 = (u16)((task->unk_0A * 0x10) / 5);
-    task->unk_16 = (u16)((task->unk_0B * 0x10) / 5);
+    task->unk_14 = ((task->unk_0A * 0x10) / 5);
+    task->unk_16 = ((task->unk_0B * 0x10) / 5);
 }

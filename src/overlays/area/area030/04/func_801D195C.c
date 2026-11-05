@@ -12,7 +12,7 @@ MATCH void func_801D195C(s16 panel_x, s16 panel_y) {
     s16      y;
     s16      base;
 
-    func_801D1744((s16)(panel_x + 0x58), (s16)(panel_y + 8), 4);
+    func_801D1744((panel_x + 0x58), (panel_y + 8), 4);
 
     if (g_ActorSlots[0].mode == 0) {
         y = panel_y;
@@ -21,17 +21,17 @@ MATCH void func_801D195C(s16 panel_x, s16 panel_y) {
     }
     base = panel_y;
     CLAMP_MIN(y, base);
-    x = (s16)(panel_x + 0x59);
+    x = (panel_x + 0x59);
     func_801D1818(x, y, 4);
 
     primitive = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(primitive);
     primitive->x0 = x;
-    primitive->x1 = (s16)(panel_x + 105);
-    primitive->y0 = (s16)(y + 16);
-    primitive->y1 = (s16)(y + 16);
-    primitive->y2 = (s16)(base + 40);
-    primitive->y3 = (s16)(base + 40);
+    primitive->x1 = (panel_x + 105);
+    primitive->y0 = (y + 16);
+    primitive->y1 = (y + 16);
+    primitive->y2 = (base + 40);
+    primitive->y3 = (base + 40);
     setRGB0(primitive, 72, 32, 0);
     primitive->x2 = primitive->x0;
     primitive->x3 = primitive->x1;
@@ -42,6 +42,6 @@ MATCH void func_801D195C(s16 panel_x, s16 panel_y) {
         if (COORD_INT(g_ActorSlots[0].z) <= 0) {
             y = 0xB4 - COORD_INT(g_ActorSlots[0].z) / 32;
         }
-        func_801D18CC((s16)(panel_x + 0x69), y, 2);
+        func_801D18CC((panel_x + 0x69), y, 2);
     }
 }

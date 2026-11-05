@@ -275,7 +275,7 @@ MATCH void func_801F2C74(void) {
         dst[1]          = 0xC0000;
         dst[2]          = 0xB0000;
         dst[4]          = 0x20000;
-        angle           = (s16)(((i & BYTE_MASK) << 12) / 3);
+        angle           = (((i & BYTE_MASK) << 12) / 3);
         ((s16*)dst)[10] = angle;
         func_801F304C((AreaTrail*)dst);
         dst += 0x26;
@@ -309,7 +309,7 @@ MATCH void func_801F2D5C(void) {
             y                       = *(volatile u16*)fld;
             fld[-3]                 = x - 0x400;
             z                       = fld[-1];
-            *(u16*)(fld)            = (u16)(y + 0x40);
+            *(u16*)(fld)            = (y + 0x40);
             *(s32*)(void*)(fld - 1) = z - 0x200;
             func_801F2E3C((AreaTrail*)arg);
             inner++;
@@ -319,7 +319,7 @@ MATCH void func_801F2D5C(void) {
         outer++;
         arg += 0x26;
     } while ((outer & BYTE_MASK) < 3u);
-    v              = (u8)(g_Task->unk_09 - 1);
+    v              = (g_Task->unk_09 - 1);
     g_Task->unk_09 = v;
     if ((v & BYTE_MASK) == 0) {
         Actor_Clear();
@@ -357,26 +357,26 @@ MATCH void func_801F2F0C(const void* arg0) {
         primitive = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(primitive);
         PSX_SET_SEMI_TRANSPARENT(primitive);
-        idx = (u32)i & BYTE_MASK;
+        idx = i & BYTE_MASK;
 
         primitive->x0 = *(s16*)(((const u8*)work + (idx << 2) + 24));
         primitive->y0 = *(s16*)(((const u8*)work + (idx << 2) + 26));
         primitive->x1 = *(s16*)(((const u8*)work + ((idx + 1) << 2) + 24));
         primitive->y1 = *(s16*)(((const u8*)work + ((idx + 1) << 2) + 26));
 
-        red = (u16)((0x20u - idx) * 8u);
+        red = ((0x20u - idx) * 8u);
         if (red > 0xFFu) {
             red = 0xFFu;
         }
-        primitive->r0 = (u8)red;
+        primitive->r0 = red;
         primitive->g0 = 0u;
         primitive->b0 = 0u;
 
-        red = (u16)((0x1Fu - idx) * 8u);
+        red = ((0x1Fu - idx) * 8u);
         if (red > 0xFFu) {
             red = 0xFFu;
         }
-        primitive->r1 = (u8)red;
+        primitive->r1 = red;
         primitive->g1 = 0u;
         primitive->b1 = 0u;
 
@@ -424,14 +424,14 @@ MATCH void func_801F31CC(void) {
         g_Task->vx = 0u;
     }
 
-    point[0] = (s16)0xE340u;
-    point[1] = (s16)0xE3C0u;
+    point[0] = 0xE340u;
+    point[1] = 0xE3C0u;
     point[2] = 0;
     func_801F3480((const AreaPoint*)point, 0, 0x13500126u);
     Area_AddCellPrim(0x468000, 0x478000, 0, 0x28);
 
-    point[0] = (s16)0xE340u;
-    point[1] = (s16)0xE4C0u;
+    point[0] = 0xE340u;
+    point[1] = 0xE4C0u;
     point[2] = 0;
     func_801F3480((const AreaPoint*)point, ONE / 2, 0x13510125u);
     Area_AddCellPrim(0x468000, 0x498000, -1, 0x28);
@@ -446,14 +446,14 @@ MATCH void func_801F32B0(void) {
     }
     g_Task->vx += 32;
 
-    point[0] = (s16)0xE340u;
-    point[1] = (s16)0xE3C0u;
+    point[0] = 0xE340u;
+    point[1] = 0xE3C0u;
     point[2] = 0;
     func_801F3480((const AreaPoint*)point, *(s16*)&g_Task->vx, 0x13500126u);
     Area_AddCellPrim(0x468000, 0x478000, -1, 0x28);
 
-    point[0] = (s16)0xE340u;
-    point[1] = (s16)0xE4C0u;
+    point[0] = 0xE340u;
+    point[1] = 0xE4C0u;
     point[2] = 0;
     func_801F3480((const AreaPoint*)point, (s16)(ONE / 2 - g_Task->vx), 0x13510125u);
     Area_AddCellPrim(0x468000, 0x498000, -1, 0x28);
@@ -468,8 +468,8 @@ MATCH void func_801F33A8(void) {
     v = 0x478000;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 0, 320, 256), 0);
     Area_AddCellPrim(u, v, -1, 0xC);
-    point[0] = (s16)((u >> 9) - 0x4000);
-    point[1] = (s16)((v >> 9) - 0x4000);
+    point[0] = ((u >> 9) - 0x4000);
+    point[1] = ((v >> 9) - 0x4000);
     point[2] = 0;
     func_801F3480((const AreaPoint*)point, ONE / 4, 0x13500126u);
     Area_AddCellPrim(u, v, -1, 0x28);
@@ -487,7 +487,7 @@ MATCH POLY_FT4* func_801F3480(const AreaPoint* point, s32 angle, u32 texture) {
     SVECTOR*  q3;
     rotation.vy = 0;
     rotation.vx = 0;
-    rotation.vz = (s16)angle;
+    rotation.vz = angle;
 
     PushMatrix();
     RotTrans((SVECTOR*)point, (VECTOR*)&matrix.t, &flag);

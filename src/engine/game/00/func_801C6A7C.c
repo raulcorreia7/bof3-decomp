@@ -17,10 +17,10 @@ MATCH s32 func_801C6A7C(void) {
     masked = limit & BYTE_MASK;
 loop:
     sum += base[8];
-    if ((u32)(sum & BYTE_MASK) < (u32)masked) {
+    if ((sum & BYTE_MASK) < (u32)masked) {
         index += 1;
         base += 9;
-        if ((u32)(index & BYTE_MASK) < 8U) {
+        if ((index & BYTE_MASK) < 8U) {
             goto loop; /* try the next weight record */
         }
         return 0;

@@ -10,7 +10,7 @@ MATCH void func_80151B50(void) {
 
     if (D_801490AA == 0) {
         if (D_801490A2 == 2) {
-            value      = (u16)D_801490C8 - 2;
+            value      = D_801490C8 - 2;
             D_801490C8 = value;
             if ((value << 0x10) < 0) {
                 D_801490C8 = 0;
@@ -18,7 +18,7 @@ MATCH void func_80151B50(void) {
                 g_UiWindowChannel &= ~FRONTEND_FLAG_REQUEST_PENDING;
             }
         } else {
-            value      = (u16)D_801490C8 + 2;
+            value      = D_801490C8 + 2;
             D_801490C8 = value;
             if ((value << 0x10) > 0) {
                 D_801490C8 = 0;

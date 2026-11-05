@@ -22,15 +22,15 @@ MATCH void Battle_DrawRollingDigits(u8 palette) {
     s8               digit_index;
 
     view        = (BattleDigitRoll*)D_801EC2E0;
-    counter     = (s16)((u16)view->count + 1);
+    counter     = (view->count + 1);
     view->count = counter % 10;
 
     if ((digit_index = view->digit) >= 0) {
         do {
             loop_view     = (BattleDigitRoll*)D_801EC2E0;
             current_digit = loop_view->count;
-            Battle_DrawNumber((s16)(loop_view->x - digit_index * 8 - 12), loop_view->y, palette,
-                              (u16)((current_digit + digit_index) % 10));
+            Battle_DrawNumber((loop_view->x - digit_index * 8 - 12), loop_view->y, palette,
+                              ((current_digit + digit_index) % 10));
         } while (--digit_index >= 0);
     }
 }

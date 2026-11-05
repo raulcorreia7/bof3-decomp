@@ -7,13 +7,13 @@ MATCH void func_8019B150(void) {
     flag = 1;
     Area_FindSceneRecord(g_Task->unk_2C);
 
-    g_Task->unk_48 = (u8)flag;
+    g_Task->unk_48 = flag;
 
     g_Task->active_flags = 0;
 
     work         = g_Task;
-    work->unk_2A = (u8)(work->unk_06 >> 7);
+    work->unk_2A = (work->unk_06 >> 7);
 
-    Actor_SelectScript((u8)(g_Task->unk_06 & 0x7F));
-    g_Task->mode = (u8)flag;
+    Actor_SelectScript((g_Task->unk_06 & 0x7F));
+    g_Task->mode = flag;
 }

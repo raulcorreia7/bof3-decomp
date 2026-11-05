@@ -18,7 +18,7 @@ MATCH bool Area_FindSceneRecord(s32 wanted_id) {
 
     unused = scratch;
     i      = 0;
-    count  = (s32)D_800E3800;
+    count  = D_800E3800;
     if (count > 0) {
         wanted_id &= HALF_MASK;
         mask      = ~0xFF;
@@ -39,7 +39,7 @@ MATCH bool Area_FindSceneRecord(s32 wanted_id) {
                 return false;
             }
             i++;
-        } while (i < (s32)*count_ptr);
+        } while (i < *count_ptr);
     }
     return true;
 }

@@ -53,7 +53,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
     vec = D_80149BF0;
     PushMatrix();
-    count = (s8)g_Task->range_54.table[0];
+    count = g_Task->range_54.table[0];
     func_8015B410(&m);
     SetRotMatrix(&m);
     SetTransMatrix(&m);
@@ -143,7 +143,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             gte_rtps();
             gte_stsxy(&quad->ft4.x0);
             gte_stszotz(&z);
-            otz           = (u16)z;
+            otz           = z;
             sort_list->z  = otz;
             sort_list->z0 = otz;
 
@@ -197,5 +197,5 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     }
     g_GfxPrimCursor = prim + count * 0x28;
     PopMatrix();
-    return (s8)count;
+    return count;
 }

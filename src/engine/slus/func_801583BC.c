@@ -15,6 +15,6 @@ MATCH void func_801583BC(void* obj) {
         first  = *(s32*)((u8*)obj + 4);
         second = *(s32*)((u8*)obj + 8);
     }
-    g_AreaMapBundle.color_1A[0] = (u16)first;
-    g_AreaMapBundle.color_1A[1] = (u16)second;
+    g_AreaMapBundle.color_1A[0] = first;
+    g_AreaMapBundle.color_1A[1] = second;
 }

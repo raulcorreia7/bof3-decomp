@@ -30,7 +30,7 @@ MATCH s32 func_801B4150(void) {
         s32 step = g_Task->state_70.byte + 2;
         x        = g_Task->x.fixed + g_FacingSteps[dir].x * step;
         y        = g_Task->y.fixed + g_FacingSteps[dir].y * step;
-        if ((Area_GetCellCode((s16)(x >> 16), (s16)(y >> 16)) & BYTE_MASK) != 0x30) {
+        if ((Area_GetCellCode((x >> 16), (y >> 16)) & BYTE_MASK) != 0x30) {
             dir = g_Task->direction_08;
             x   = g_Task->x.fixed + g_FacingSteps[dir].x;
             y   = g_Task->y.fixed + g_FacingSteps[dir].y;

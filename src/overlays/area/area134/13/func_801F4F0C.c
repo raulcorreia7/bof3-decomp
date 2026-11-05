@@ -34,5 +34,5 @@ MATCH void func_801F4F0C(const s32* center, s32 radius, u16 angle, s32 offset_x,
         packet->y2 = screen1[1];
         setRGB0(packet, 128, 128, 128);
         Area_AddCellPrim(((s32*)center)[0] + offset_x, ((s32*)center)[1] + offset_y, 0, 0x18);
-    } while (((u32)(i & BYTE_MASK)) < 4u);
+    } while (((i & BYTE_MASK)) < 4u);
 }

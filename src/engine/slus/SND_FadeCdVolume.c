@@ -11,7 +11,7 @@ MATCH void SND_FadeCdVolume(s32 level) {
     u8* p;
     s32 i;
 
-    target = (u8)level;
+    target = level;
     base   = &g_SndCdVolume;
     alias  = base;
     p      = alias;
@@ -19,12 +19,12 @@ MATCH void SND_FadeCdVolume(s32 level) {
     if (p[i] < target) {
         do {
             SND_SetCdVolume(p[i]);
-            p[i] = (u8)(p[i] + 1);
+            p[i] = (p[i] + 1);
         } while (p[i] < target);
     } else if (target < p[i]) {
         do {
             SND_SetCdVolume(p[i]);
-            p[i] = (u8)(p[i] - 1);
+            p[i] = (p[i] - 1);
         } while (target < p[i]);
     }
     SND_SetCdVolume(g_SndCdVolume);

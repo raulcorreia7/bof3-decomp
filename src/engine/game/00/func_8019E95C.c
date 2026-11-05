@@ -9,10 +9,10 @@ MATCH void func_8019E95C(void) {
         return;
     }
 
-    g_Task->unk_29       = (u8)(g_Task->unk_29 + 1);
+    g_Task->unk_29       = (g_Task->unk_29 + 1);
     g_Task->unk_2A       = 0;
     g_Task->active_flags = 0;
-    g_Task->unk_2B       = (u8)(g_Task->unk_2B + 1);
+    g_Task->unk_2B       = (g_Task->unk_2B + 1);
     g_Task->unk_48       = 1;
 
     work                      = g_Task;
@@ -24,5 +24,5 @@ MATCH void func_8019E95C(void) {
     other->tint.bytes.unk_5E  = 0;
     g_Task->tint.bytes.unk_5F = 0;
     Actor_SelectScript(0);
-    g_Task->step = (u8)(g_Task->step + 1);
+    g_Task->step = (g_Task->step + 1);
 }

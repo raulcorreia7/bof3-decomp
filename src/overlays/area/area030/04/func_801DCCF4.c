@@ -8,11 +8,11 @@ MATCH void func_801DCCF4(void) {
 
     if ((u8)(D_80144281 - 3) < 2) {
         value      = D_80144287 & 0x7F;
-        D_80144287 = (u8)value;
-        Menu_DrawCursorSprite(0x1C, (u16)((value << 4) + 0x58), 0);
+        D_80144287 = value;
+        Menu_DrawCursorSprite(0x1C, ((value << 4) + 0x58), 0);
 
         record          = FISHING_STATE;
-        record->flag_04 = (u8)(record->flag_04 + 1);
+        record->flag_04 = (record->flag_04 + 1);
     }
 
     if ((D_80144287 & 1) == 0) {

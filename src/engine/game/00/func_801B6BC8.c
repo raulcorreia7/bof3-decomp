@@ -8,14 +8,14 @@ MATCH void func_801B6BC8(void) {
 
     delay = g_GameState->countdown_119;
     if (delay != 0) {
-        g_GameState->countdown_119 = (u8)(delay - 1);
+        g_GameState->countdown_119 = (delay - 1);
         return;
     }
     sel = func_801A8D38(&g_GameState->flags_118, g_GameState->index_124);
     if (sel != GAME_NONE) {
         flags = g_GameState->flags_118;
         if (flags & 8) {
-            g_GameState->flags_118 = (u8)(flags & 0xF7);
+            g_GameState->flags_118 = (flags & 0xF7);
             if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
                 g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             }
@@ -64,12 +64,12 @@ MATCH void func_801B6BC8(void) {
         if (work->unk_09 != 0) {
             delay = g_GameState->wait_11F;
             if (delay != 0) {
-                g_GameState->wait_11F = (u8)(delay - 1);
+                g_GameState->wait_11F = (delay - 1);
             }
             g_Task->direction_08 = sel;
             g_Task->unk_03       = 2;
             sel += 8;
-            g_Task->unk_09 = (u8)(g_Task->unk_09 - 1);
+            g_Task->unk_09 = (g_Task->unk_09 - 1);
             func_801B0DFC();
         } else {
             work->direction_08 = sel;

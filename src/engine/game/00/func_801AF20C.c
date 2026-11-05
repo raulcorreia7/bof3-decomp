@@ -17,14 +17,14 @@ loop:
     command = value & BYTE_MASK;
     if (command != 0) {
         count++;
-        if (((u32)(value - 0x12) < 2U) || (command == extended_command)) {
+        if (((value - 0x12) < 2U) || (command == extended_command)) {
             cursor += 2;
             index++;
         } else {
             cursor += 1;
         }
         index++;
-        if ((u32)(index & BYTE_MASK) < 0xCU) {
+        if ((index & BYTE_MASK) < 0xCU) {
             goto loop; /* read the next command */
         }
     }

@@ -26,7 +26,7 @@ MATCH void func_801B85C0(void) {
         }
         func_801C24D0();
     }
-    g_Task->unk_09 = (u8)(g_Task->unk_09 - 1);
+    g_Task->unk_09 = (g_Task->unk_09 - 1);
     func_801B0DFC();
     func_8014D978();
 }

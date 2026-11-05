@@ -39,7 +39,7 @@ MATCH void func_801A6C98(u8* record) {
 
     func_801A4AA8();
     func_801A4B80(script[0xB]);
-    func_8015AC8C((s32)src);
+    func_8015AC8C(src);
 
     x    = script[2] << 16;
     work = g_Task;
@@ -74,7 +74,7 @@ MATCH void func_801A6C98(u8* record) {
     D_80147A58[idx].unk_80          = 0;
     D_80147A58[data->unk_0B].unk_77 = data->unk_0A;
     D_80147A58[data->unk_0B].unk_78 = data->unk_06;
-    D_80147A58[data->unk_0B].unk_7C = (s16)(data->unk_0D | (data->unk_0C << 8));
+    D_80147A58[data->unk_0B].unk_7C = (data->unk_0D | (data->unk_0C << 8));
     D_80147A58[data->unk_0B].unk_94 = 0x7F;
 
     func_801A4990((u8*)data + 8);
