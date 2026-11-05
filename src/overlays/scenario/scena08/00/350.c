@@ -244,9 +244,17 @@ MATCH s32 func_801F8BF8(void) {
     return live;
 }
 
-/* 8 differing, a pure v0/v1 swap of the two byte locals from +0x0 (retail lbu v1,2(a0) against
- * candidate lbu v0,2(a0)); next lever: permuter to pin the state local in v1. */
-INCLUDE_ASM(func_801F8CDC);
+MATCH void func_801F8CDC(Actor* actor) {
+    u8 state;
+
+    state = actor->state_02 - 1;
+    actor->unk_03 += 6;
+    actor->state_02 = state;
+    if (state == 0) {
+        actor->state_02 = actor->unk_04;
+        actor->unk_01 += 1;
+    }
+}
 
 #include "overlays/scenario/Actor_WaitAndStep.h"
 
