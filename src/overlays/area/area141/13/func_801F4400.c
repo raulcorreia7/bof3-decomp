@@ -21,7 +21,7 @@ MATCH void func_801F4400(void) {
             g_Actors[first_index].flags_00 = 0;
             return;
         }
-        g_Actors[second_index].flags_00 = 1;
+        g_Actors[second_index].flags_00     = 1;
         D_1F800000.view.area.entity_counter = (u8)first;
         func_801A65A0(D_801F4DDC);
         Actor_BeginScript(107, 0);

@@ -20,7 +20,7 @@ MATCH void func_801F4674(void) {
             g_Actors[first_index].flags_00 = 0;
             return;
         }
-        g_Actors[second_index].flags_00 = 1;
+        g_Actors[second_index].flags_00     = 1;
         D_1F800000.view.area.entity_counter = (u8)first;
         func_801A4D54(D_801F4E2C);
         D_1F800000.view.area.entity_counter = (u8)second;
