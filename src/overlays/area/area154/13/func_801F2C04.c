@@ -3,7 +3,7 @@
 MATCH void func_801F2C04(void) {
     u8* record;
 
-    record                    = g_ScriptWorkRecord;
+    record                    = (u8*)g_ScriptWorkRecord;
     g_MessageRequest          = 0xFFFF;
     FIELD(s32, record, 0x18U) = D_801F31D0[D_801490C7 * 2];
     /* FAKE: retail reloads the selection after the 0x18 store. */
