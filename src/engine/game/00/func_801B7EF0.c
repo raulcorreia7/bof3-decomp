@@ -4,7 +4,7 @@ MATCH void func_801B7EF0(void) {
     s32 value;
 
     COORD_INT(g_Task->z) = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed) + 0x200;
-    value                  = 0x3D;
+    value                = 0x3D;
     if (g_Task->direction_08 == 3) {
         value = 0x3C;
     }

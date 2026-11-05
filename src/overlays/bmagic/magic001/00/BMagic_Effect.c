@@ -178,9 +178,9 @@ MATCH void func_801EFD28(void) {
     u8  temp_a1;
     u8  temp_v0;
 
-    temp_a1                    = g_Task->timer;
-    temp_v1                    = g_Task->unk_14 + g_Task->unk_20;
-    g_Task->unk_14             = temp_v1;
+    temp_a1                  = g_Task->timer;
+    temp_v1                  = g_Task->unk_14 + g_Task->unk_20;
+    g_Task->unk_14           = temp_v1;
     COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + temp_v1;
     if (temp_a1 < 8U) {
         g_Task->timer = temp_a1 + 1;
@@ -209,8 +209,8 @@ MATCH void func_801EFE38(void) {
 
     g_Task->pos.x.fixed += (s32)(rsin(g_Task->unk_0C) << 0xD) >> 0xC;
     g_Task->pos.y.fixed += (s32)(rcos(g_Task->unk_0C) << 0xD) >> 0xC;
-    value                      = g_Task->unk_14 + g_Task->unk_20;
-    g_Task->unk_14             = value;
+    value                    = g_Task->unk_14 + g_Task->unk_20;
+    g_Task->unk_14           = value;
     COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + value;
     if ((u8)g_Task->unk_09 < 8U) {
         value3 = g_Task->timer;

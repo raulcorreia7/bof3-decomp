@@ -20,9 +20,9 @@ MATCH void func_801C5558(void) {
     s32    result;
     s16    threshold;
 
-    work                 = g_Task;
-    count                = COORD_INT(work->z) + 16;
-    route                = work->direction_08;
+    work               = g_Task;
+    count              = COORD_INT(work->z) + 16;
+    route              = work->direction_08;
     COORD_INT(work->z) = count;
 
     work   = g_Task;

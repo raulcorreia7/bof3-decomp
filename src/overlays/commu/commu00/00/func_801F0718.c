@@ -34,10 +34,10 @@ MATCH void func_801F0718(u8 source_index, u8 task_index) {
     COORD_FRAC(g_Task->x) = 0;
     COORD_INT(g_Task->y)  = D_801F2568[task_index][1];
     COORD_FRAC(g_Task->y) = 0;
-    distance                = Area_SampleHeight(*((u32*)&D_801468BC[(task_index & BYTE_MASK) * ACTOR_SIZE]),
-                                                *((u32*)&D_801468C0[(task_index & BYTE_MASK) * ACTOR_SIZE]));
+    distance              = Area_SampleHeight(*((u32*)&D_801468BC[(task_index & BYTE_MASK) * ACTOR_SIZE]),
+                                              *((u32*)&D_801468C0[(task_index & BYTE_MASK) * ACTOR_SIZE]));
     COORD_INT(g_Task->z)  = distance;
-    g_Task->unk_05          = source_index;
+    g_Task->unk_05        = source_index;
     Area_FindSceneRecord(D_801F24FC[g_Task->unk_05 % 6]);
     func_8015BAC4(g_Task->direction_08);
 }

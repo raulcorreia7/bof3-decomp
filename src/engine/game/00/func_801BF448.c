@@ -27,10 +27,10 @@ MATCH void func_801BF448(void) {
                 if ((u32)(i & BYTE_MASK) >= 3U)
                     break;
             }
-            g_Task->x.fixed      = *(s32*)(D_80143F2C + tab);
-            val                  = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed = *(s32*)(D_80143F30 + tab));
-            work                 = g_Task;
-            work->unk_0B         = 0;
+            g_Task->x.fixed    = *(s32*)(D_80143F2C + tab);
+            val                = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed = *(s32*)(D_80143F30 + tab));
+            work               = g_Task;
+            work->unk_0B       = 0;
             COORD_INT(work->z) = val;
             if ((g_Characters[g_GameState->slot_13C].status & STATUS_KO) != 0)
                 Actor_SelectScript((u8)(g_BattleScrollDir + 0x1C));

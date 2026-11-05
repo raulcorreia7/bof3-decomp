@@ -13,7 +13,7 @@ MATCH void func_8019C664(void) {
     work                    = g_Task;
     FIELD(s32, work, 0x34u) = (s32)D_80145EC4;
     work->y.fixed           = (s32)D_80145EC8;
-    COORD_INT(work->z)    = (s16)((u16)D_80145ECE + 0xC0);
+    COORD_INT(work->z)      = (s16)((u16)D_80145ECE + 0xC0);
     work->vx                = (s32)(g_FacingOffsets[work->direction_08].x * 0x10);
     FIELD(s32, work, 0x10u) = (s32)(g_FacingOffsets[work->direction_08].y * 0x10);
     if (D_80145F09 == 1) {

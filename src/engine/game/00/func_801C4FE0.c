@@ -24,7 +24,7 @@ MATCH s32 func_801C4FE0(void) {
     result = Area_ReadHeight(x, y);
     slot   = g_GameState->slot_index_79;
     if (result - D_80181B70[slot] < counter) {
-        COORD_INT(g_Task->z) = COORD_INT(g_Task->z) - D_80181B88[slot];
+        COORD_INT(g_Task->z) -= D_80181B88[slot];
     } else {
         COORD_INT(g_Task->z) = Area_ReadHeight(x, y) - D_80181B70[FIELD(volatile u8, g_GameState, 0x79u)];
         if (g_Task->direction_08 == 7) {

@@ -22,9 +22,9 @@ MATCH void func_8019D270(void) {
     }
     if ((COORD_FRAC(WORK->x) != 0) && (COORD_FRAC(WORK->y) != 0)) {
         Area_StoreHeight((s32)(s16)((u16)COORD_INT(WORK->x) + 1), (s32)(s16)((u16)COORD_INT(WORK->y) + 1), 0x10U);
-        g_Task->vz = (s32)(g_Task->vz |
-                           (Area_GetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), (s16)((u16)COORD_INT(WORK->y) + 1))
-                            << 0x18));
+        g_Task->vz =
+            (s32)(g_Task->vz |
+                  (Area_GetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), (s16)((u16)COORD_INT(WORK->y) + 1)) << 0x18));
         Area_SetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), (s16)((u16)COORD_INT(WORK->y) + 1), 0x11);
     }
 }

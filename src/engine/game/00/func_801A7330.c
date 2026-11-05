@@ -42,8 +42,8 @@ MATCH void func_801A7330(const volatile u8* data) {
 
     dist = Area_SampleHeight(work->x.fixed, work->y.fixed);
 
-    w2                 = g_Task;
-    w2->mode           = 6;
+    w2               = g_Task;
+    w2->mode         = 6;
     COORD_INT(w2->z) = (u16)dist;
     ACTOR_CLEAR_STATE();
     /* FAKE: barrier pins the flags store before the route-index load. */

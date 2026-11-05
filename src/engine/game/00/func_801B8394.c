@@ -11,7 +11,7 @@ MATCH void func_801B8394(void) {
         g_Task->unk_0A = 5;
     }
     g_Task->unk_09                    = 0;
-    COORD_INT(g_Task->z)            = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
+    COORD_INT(g_Task->z)              = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
     g_GameState->counter_11C.u8_value = 2;
     Actor_RequestScript(g_Task->direction_08 + 8);
     if (g_Task->unk_05 != 0) {

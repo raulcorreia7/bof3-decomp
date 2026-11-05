@@ -111,8 +111,8 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                     state->flags |= 0x40;
                 }
             }
-            work                 = g_Task;
-            work->vz             = 0;
+            work               = g_Task;
+            work->vz           = 0;
             COORD_INT(work->z) = (u16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
             state->index_0A += 4;
             break;

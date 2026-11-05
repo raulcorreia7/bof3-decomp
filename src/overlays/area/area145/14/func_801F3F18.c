@@ -8,9 +8,9 @@ MATCH void func_801F3F18(void) {
     result = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
     if (COORD_INT(g_Task->z) < result) {
         COORD_INT(g_Task->z) = result;
-        g_Task->vz             = 0;
-        g_Task->gravity        = 0;
-        g_Task->unk_04         = 2;
+        g_Task->vz           = 0;
+        g_Task->gravity      = 0;
+        g_Task->unk_04       = 2;
         Actor_SelectScript(0x39U);
         g_ScriptState->unk_01 = 4;
         return;

@@ -41,8 +41,8 @@ MATCH u8 func_8019EEE4(void) {
         Area_ClearCell(COORD_INT(WORK->x), (s16)((u16)COORD_INT(WORK->y) + 1));
     }
     if ((COORD_FRAC(WORK->x) != 0) && (COORD_FRAC(WORK->y) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), (s16)((u16)COORD_INT(WORK->y) + 1)) &
-             BYTE_MASK) == 0xFD) {
+        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), (s16)((u16)COORD_INT(WORK->y) + 1)) & BYTE_MASK) ==
+            0xFD) {
             found = 1;
             Area_ClearCell((s16)((u16)COORD_INT(WORK->x) + 1), (s16)((u16)COORD_INT(WORK->y) + 1));
         }

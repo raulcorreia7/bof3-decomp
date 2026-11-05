@@ -28,13 +28,13 @@ MATCH void func_801EEF0C(void) {
 MATCH void func_801EEF94(void) {
     PartyBattler* src;
 
-    src                        = g_BattleSelectedActor;
-    g_Task->pos.x.fixed        = src->pos.x.fixed;
-    g_Task->pos.y.fixed        = src->pos.y.fixed;
+    src                      = g_BattleSelectedActor;
+    g_Task->pos.x.fixed      = src->pos.x.fixed;
+    g_Task->pos.y.fixed      = src->pos.y.fixed;
     COORD_INT(g_Task->pos.z) = COORD_INT(src->pos.z);
-    g_Task->unk_09             = 0;
-    g_Task->timer              = 0;
-    g_Task->step               = g_Task->step + 1;
+    g_Task->unk_09           = 0;
+    g_Task->timer            = 0;
+    g_Task->step             = g_Task->step + 1;
 }
 
 MATCH void func_801EEFF4(void) {

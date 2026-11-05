@@ -12,8 +12,8 @@ MATCH void func_801F3DB0(void) {
     scratch               = work;
     scratch->step++;
     COORD_INT(scratch->z) = 0;
-    scratch->gravity        = 0x28709126;
-    scratch->unk_30         = 0;
+    scratch->gravity      = 0x28709126;
+    scratch->unk_30       = 0;
     func_801F4158_area168(0, 1);
     func_801F4158_area168(1, 2);
 }

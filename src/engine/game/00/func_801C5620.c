@@ -6,11 +6,11 @@ MATCH void func_801C5620(void) {
     s32 y;
     s16 result;
 
-    x                      = g_Task->x.fixed;
-    count                  = COORD_INT(g_Task->z);
-    y                      = g_Task->y.fixed;
+    x                    = g_Task->x.fixed;
+    count                = COORD_INT(g_Task->z);
+    y                    = g_Task->y.fixed;
     COORD_INT(g_Task->z) = count - 16;
-    result                 = Area_ReadHeight(x, y);
+    result               = Area_ReadHeight(x, y);
 
     if ((s16)COORD_INT(g_Task->z) < result) {
         COORD_INT(g_Task->z) = (u16)result;

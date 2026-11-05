@@ -9,8 +9,8 @@ MATCH void func_801BBBC8(s16 from_x, s16 from_y) {
     SP_REF(u8, 0x1u) = func_801BB2B8(from_x, from_y, COORD_INT(g_Task->x), COORD_INT(g_Task->y));
     SP_REF(u8, 0x2u) = func_801BB2B8(COORD_INT(g_Task->x), from_y, COORD_INT(g_Task->x), COORD_INT(g_Task->y));
     SP_REF(u8, 0x3u) = func_801BB2B8(from_x, COORD_INT(g_Task->y), COORD_INT(g_Task->x), COORD_INT(g_Task->y));
-    SP_REF(u8, 0x4u) = func_801BB2B8((s16)((u16)COORD_INT(g_Task->x) + 1), from_y,
-                                     (s16)((u16)COORD_INT(g_Task->x) + 1), COORD_INT(g_Task->y));
+    SP_REF(u8, 0x4u) = func_801BB2B8((s16)((u16)COORD_INT(g_Task->x) + 1), from_y, (s16)((u16)COORD_INT(g_Task->x) + 1),
+                                     COORD_INT(g_Task->y));
     SP_REF(u8, 0x5u) = func_801BB2B8(from_x, (s16)((u16)COORD_INT(g_Task->y) + 1), COORD_INT(g_Task->x),
                                      (s16)((u16)COORD_INT(g_Task->y) + 1));
 }

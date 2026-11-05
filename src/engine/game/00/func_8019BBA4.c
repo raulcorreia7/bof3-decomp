@@ -49,8 +49,8 @@ MATCH void func_8019BBA4(void) {
     if ((func_8019C028() & BYTE_MASK) == 0) {
         if ((s16)COORD_INT(g_Task->z) < dist) {
             COORD_INT(g_Task->z) = (u16)Area_SampleHeight(x, y);
-            g_Task->vz             = 0;
-            g_Task->gravity        = 0;
+            g_Task->vz           = 0;
+            g_Task->gravity      = 0;
         }
         if ((g_Task->unk_18 == 0) && (g_Task->vz == 0)) {
             limit = g_Task->vx;

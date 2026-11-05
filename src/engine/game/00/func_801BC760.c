@@ -149,9 +149,9 @@ NON_MATCHING s32 func_801BC760(void) {
                 g_GameState->flags_12C.s8_value &= 0xFE;
                 g_GameState->flags_12C.s8_value |= (D_80145FBC & 1);
                 COORD_INT(g_Task->depth) = Area_ReadHeight(near_a, near_b);
-                g_Task->unk_29             = D_80145EB9;
-                FIELD(s8, g_Task, 0x1u)    = 2;
-                FIELD(s8, g_Task, 0x2u)    = 2;
+                g_Task->unk_29           = D_80145EB9;
+                FIELD(s8, g_Task, 0x1u)  = 2;
+                FIELD(s8, g_Task, 0x2u)  = 2;
                 return 0xFF;
             }
             g_GameState = saved;

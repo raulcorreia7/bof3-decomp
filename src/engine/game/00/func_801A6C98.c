@@ -52,9 +52,9 @@ MATCH void func_801A6C98(u8* record) {
     if (script[3] != 0) {
         y |= 0x8000;
     }
-    work->y.fixed          = y;
+    work->y.fixed        = y;
     COORD_INT(g_Task->z) = Area_SampleHeight(work->x.fixed, y);
-    data                   = (WorkScript*)script;
+    data                 = (WorkScript*)script;
 
     work                   = g_Task;
     work->mode             = data->unk_05;

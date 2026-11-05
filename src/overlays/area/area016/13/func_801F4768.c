@@ -24,17 +24,17 @@ NON_MATCHING void func_801F4768(void) {
 
     frame = g_Task;
     if (frame->flags_02 == 0) {
-        COORD_INT(frame->y) = (u16)(COORD_INT(frame->y) + (g_FrameCount & 0xF));
-        frame->flags_02       = (u8)(frame->flags_02 + 1);
+        COORD_INT(frame->y) += (g_FrameCount & 0xF);
+        frame->flags_02 = (u8)(frame->flags_02 + 1);
     }
 
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
     }
 
-    frame          = g_Task;
-    width          = frame->unk_0B - 2;
-    frame->y.fixed = frame->y.fixed + 0x800 + (width << 10);
+    frame = g_Task;
+    width = frame->unk_0B - 2;
+    frame->y.fixed += 0x800 + (width << 10);
     if ((D_80104001 + 8) < COORD_INT(frame->y)) {
         COORD_INT(frame->y) = -8;
     }

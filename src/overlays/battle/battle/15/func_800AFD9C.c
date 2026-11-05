@@ -37,9 +37,9 @@ MATCH void func_800AFD9C(void) {
                 }
             }
         }
-        work                     = BATTLE_WORK;
-        work->pos.x.fixed        = (sum_x / count) << 9;
-        work->pos.y.fixed        = (sum_y / count) << 9;
+        work                   = BATTLE_WORK;
+        work->pos.x.fixed      = (sum_x / count) << 9;
+        work->pos.y.fixed      = (sum_y / count) << 9;
         COORD_INT(work->pos.z) = sum_span / count;
     }
 }

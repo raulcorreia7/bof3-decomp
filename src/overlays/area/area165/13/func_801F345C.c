@@ -13,11 +13,11 @@ MATCH void func_801F345C(void) {
     index                 = COORD_INT(scratch->x) * 2;
     check                 = g_Task;
     next_x                = D_801F35C0[index];
-    COORD_INT(check->x) = next_x;
+    COORD_INT(check->x)   = next_x;
     next_y                = D_801F35C1[index];
     state                 = check->step;
-    COORD_INT(check->z) = -0x80;
+    COORD_INT(check->z)   = -0x80;
     check->unk_30         = 0x100;
-    COORD_INT(check->y) = next_y;
+    COORD_INT(check->y)   = next_y;
     check->step           = state + 1;
 }

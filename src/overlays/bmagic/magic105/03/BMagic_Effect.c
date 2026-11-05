@@ -127,13 +127,13 @@ MATCH void func_801EF930(void) {
     g_Task->pos.y.fixed =
         BATTLE_ACTIVE_WORK->pos.y.fixed + ((rcos(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
     COORD_INT(g_Task->pos.z) = (u16)((u16)COORD_INT(BATTLE_ACTIVE_WORK->pos.z) + *cell) - 0x20;
-    height                     = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
-    work                       = g_Task;
-    work->unk_25               = 0x1D;
-    work->unk_14               = height >> 16;
-    g_Task->unk_26             = 0;
-    g_Task->unk_27             = 0xA0;
-    g_Task->unk_28             = 0;
+    height                   = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    work                     = g_Task;
+    work->unk_25             = 0x1D;
+    work->unk_14             = height >> 16;
+    g_Task->unk_26           = 0;
+    g_Task->unk_27           = 0xA0;
+    g_Task->unk_28           = 0;
     g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     tint                = -0x40;
     g_Task->unk_5D      = tint;

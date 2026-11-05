@@ -47,9 +47,9 @@ NON_MATCHING void func_8019B704(void) {
         g_Task->unk_06 = 1;
         g_Task->unk_07 = 0;
     }
-    acc                        = g_Task->unk_14 + g_Task->unk_20;
-    g_Task->unk_14             = acc;
-    COORD_INT(g_Task->depth) = (u16)(COORD_INT(g_Task->depth) + acc);
+    acc            = g_Task->unk_14 + g_Task->unk_20;
+    g_Task->unk_14 = acc;
+    COORD_INT(g_Task->depth) += acc;
     if ((g_AreaCameraMoving == 0) && (delta > 0x40000) && (g_AreaScrollTargetX == D_80145EC4) &&
         (g_AreaScrollTargetY == D_80145EC8)) {
         if (g_Task->unk_0C > 0) {
@@ -73,8 +73,8 @@ NON_MATCHING void func_8019B704(void) {
     if (dist < (s16)COORD_INT(g_Task->depth)) {
         g_Task->unk_20 = -8;
     } else {
-        g_Task->unk_14             = 0;
-        g_Task->unk_20             = 0;
+        g_Task->unk_14           = 0;
+        g_Task->unk_20           = 0;
         COORD_INT(g_Task->depth) = (u16)dist;
     }
     if ((func_8019C028() & BYTE_MASK) == 0) {

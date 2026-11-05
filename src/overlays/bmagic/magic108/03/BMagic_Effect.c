@@ -48,9 +48,9 @@ MATCH void func_801EEE0C(void) {
     g_Task->pos.x.fixed += g_Task->unk_0C;
     g_Task->pos.y.fixed += g_Task->unk_10;
     COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + 0xC0;
-    g_Task->unk_18             = g_Task->pos.x.fixed;
-    g_Task->unk_1C             = g_Task->pos.y.fixed;
-    g_Task->unk_20             = g_Task->pos.z.fixed;
+    g_Task->unk_18           = g_Task->pos.x.fixed;
+    g_Task->unk_1C           = g_Task->pos.y.fixed;
+    g_Task->unk_20           = g_Task->pos.z.fixed;
     MATCH_FAKE_BARRIER(); /* FAKE: keeps the g_BattleActiveBattler read below the coord copy stores */
     slot = g_BattleActiveBattler;
     if (slot < BATTLE_PARTY_SLOT_COUNT) {

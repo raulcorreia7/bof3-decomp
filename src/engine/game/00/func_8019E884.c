@@ -5,9 +5,9 @@ MATCH void func_8019E884(void) {
     s32    add;
     s16    dist;
 
-    add                    = g_Task->vz + g_Task->gravity;
-    g_Task->vz             = add;
-    COORD_INT(g_Task->z) = (u16)(COORD_INT(g_Task->z) + add);
+    add        = g_Task->vz + g_Task->gravity;
+    g_Task->vz = add;
+    COORD_INT(g_Task->z) += add;
     func_8014D978();
     work = g_Task;
     dist = Area_SampleHeight(work->x.fixed, work->y.fixed);

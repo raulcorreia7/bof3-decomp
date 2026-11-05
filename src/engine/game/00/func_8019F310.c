@@ -3,7 +3,7 @@
 MATCH void func_8019F310(void) {
     u8 alt;
 
-    alt                     = g_GameRequestFlags & 1;
+    alt                   = g_GameRequestFlags & 1;
     COORD_FRAC(g_Task->y) = 0;
     if (alt) {
         COORD_INT(g_Task->y) = -0xA;

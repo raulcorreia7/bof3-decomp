@@ -29,7 +29,7 @@ MATCH void func_801EF140(void) {
     u8 count;
     u8 timer;
 
-    count                      = g_Task->unk_09;
+    count                    = g_Task->unk_09;
     COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) - 0x60;
     if ((count & 0xFF) != 0x10) {
         g_Task->unk_09 = count + 1;

@@ -30,15 +30,15 @@ MATCH void func_801A5400(u8* script) {
         D_8014690C[*counter][0] = coord_record->y.fixed = (data[0x7] << 0x10) | (data[0x6] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
         MATCH_BARRIER();
-        *D_80146910[*counter]       = 0;
-        dist                        = Area_SampleHeight(coord_record->x.fixed, coord_record->y.fixed);
-        dist_record                 = g_Task;
+        *D_80146910[*counter]     = 0;
+        dist                      = Area_SampleHeight(coord_record->x.fixed, coord_record->y.fixed);
+        dist_record               = g_Task;
         COORD_INT(dist_record->z) = dist;
-        dist_record->mode           = data[0x8];
-        g_Task->step                = data[0xA];
-        g_Task->direction_08        = data[0] & 0xF;
-        g_Task->unk_06              = data[0] >> 4;
-        D_80146904[*counter][0]     = 0xFFFF;
+        dist_record->mode         = data[0x8];
+        g_Task->step              = data[0xA];
+        g_Task->direction_08      = data[0] & 0xF;
+        g_Task->unk_06            = data[0] >> 4;
+        D_80146904[*counter][0]   = 0xFFFF;
         /* FAKE: forces the counter re-read before the next shadow store. */
         MATCH_BARRIER();
         *D_80146900[*counter] = data[0x9];
@@ -66,8 +66,8 @@ MATCH void func_801A5400(u8* script) {
         }
         cell_record_c = g_Task;
         if ((COORD_FRAC(cell_record_c->x) != 0) && (COORD_FRAC(cell_record_c->y) != 0)) {
-            Area_SetCellCode((s16)((u16)COORD_INT(cell_record_c->x) + 1),
-                             (s16)((u16)COORD_INT(cell_record_c->y) + 1), 0x10);
+            Area_SetCellCode((s16)((u16)COORD_INT(cell_record_c->x) + 1), (s16)((u16)COORD_INT(cell_record_c->y) + 1),
+                             0x10);
         }
         VOL(u16, D_1F800000) += 1;
     }

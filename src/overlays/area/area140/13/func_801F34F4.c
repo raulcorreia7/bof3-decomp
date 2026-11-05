@@ -3,7 +3,7 @@
 MATCH void func_801F34F4(void) {
     s16 height;
 
-    height                 = (u16)COORD_INT(g_Task->z) + 0x10;
+    height               = (u16)COORD_INT(g_Task->z) + 0x10;
     COORD_INT(g_Task->z) = height;
     if (height >= 0x80) {
         Area_SetCellPalette((s32)COORD_INT(g_Task->x), (s32)COORD_INT(g_Task->y));

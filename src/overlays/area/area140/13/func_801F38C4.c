@@ -3,7 +3,7 @@
 MATCH void func_801F38C4(void) {
     s16 temp_v0;
 
-    temp_v0                = (u16)COORD_INT(g_Task->z) - 0x10;
+    temp_v0              = (u16)COORD_INT(g_Task->z) - 0x10;
     COORD_INT(g_Task->z) = temp_v0;
     if ((temp_v0 << 0x10) <= 0) {
         Area_ClearCellPalette((s32)(s16)((u16)COORD_INT(g_Task->x) + 1), (s32)(s16)((u16)COORD_INT(g_Task->y) + 1));

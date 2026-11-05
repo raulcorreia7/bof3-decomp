@@ -23,7 +23,7 @@ MATCH s32 func_801C520C(void) {
         COORD_INT(g_Task->z) = (s16)((u16)COORD_INT(g_Task->z) + D_80181B88[g_GameState->slot_index_79]);
     } else {
         COORD_INT(g_Task->z) = Area_ReadHeight(targetX, targetY);
-        transitionId           = 0x3F;
+        transitionId         = 0x3F;
         if (g_Task->direction_08 == 7) {
             transitionId = 0x3E;
         }
