@@ -465,4 +465,8 @@ MATCH void func_801FE178(void) {
 
 #include "overlays/scenario/Scene_RemoveRei.h"
 
+/* Tried: straight body (two g_Characters[...].unk_07 &= 254 then three
+ * calls). GCC omits two nops that retail emits after each
+ * `lbu [v0]` before the `andi`. First diff: 0x801FE1F0 nop vs lui a0.
+ */
 INCLUDE_ASM(func_801FE1C0);

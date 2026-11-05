@@ -188,7 +188,23 @@ MATCH void func_801F7AE0(void) {
     work[1]++;
 }
 
-INCLUDE_ASM(func_801F7B10);
+MATCH void func_801F7B10(void) {
+    Actor* actor;
+    s32*   ptr;
+    u8     value;
+
+    actor = g_SpadWork;
+    ptr   = &actor->unk_0C;
+    func_801F7FFC(ptr);
+    func_801F8170(ptr);
+    actor->tint.halves.unk_5E += 1;
+    value              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = value;
+    if (!(value & 0xFF)) {
+        g_SpadWork->unk_09 = 8;
+        g_SpadWork->unk_01 += 1;
+    }
+}
 
 MATCH void func_801F7BB0(void) {
     Actor* actor;
@@ -499,8 +515,8 @@ MATCH s32 func_801FC690(void) {
     return 0;
 }
 
+/* li v1,30 at 0x801FC6D4: GCC picks v0 for the constants; MATCH_REG matches but fails quality. */
 INCLUDE_ASM(func_801FC6C4);
-
 INCLUDE_ASM(func_801FC704);
 
 MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
@@ -605,7 +621,12 @@ INCLUDE_ASM(func_801FCB4C);
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 
-INCLUDE_ASM(func_801FCCDC);
+MATCH s32 func_801FCCDC(void) {
+    if (MEM(u16, GAME_AREA_ID_ADDR) == 71) {
+        return func_801FCD1C();
+    }
+    return 0;
+}
 
 INCLUDE_ASM(func_801FCD1C);
 

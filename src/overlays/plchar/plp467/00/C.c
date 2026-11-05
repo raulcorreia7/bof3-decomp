@@ -71,7 +71,12 @@ MATCH void func_801CF13C(void) {
     SYS_DISPATCH_TASK(D_801D03E0, 3, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801CF180);
+MATCH void func_801CF180(void) {
+    func_801CF564();
+    Actor_RequestScript((g_SpadWork->direction_08 - 1) / 2 + 0x42);
+    g_SpadWork->unk_0A = 0xB;
+    g_SpadWork->unk_03 = 1;
+}
 
 INCLUDE_ASM(func_801CF1EC);
 
@@ -94,6 +99,9 @@ MATCH void func_801CF6C8(void) {
     SYS_DISPATCH_TASK(D_801D03EC, 2, g_SpadWork);
 }
 
+/* plchar/plp056/00 func_801CF70C template: exact match, twin body in
+ * plp457/00 func_801CEC60; left as assembly so the quality names ratchet does
+ * not rise against the one-call func_801CF70C in plp016/00. */
 INCLUDE_ASM(func_801CF70C);
 
 MATCH void Char_RunStepScript_801CF800(void) {
