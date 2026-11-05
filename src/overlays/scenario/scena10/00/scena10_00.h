@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
+#include "work/area_spad.h"
 
 extern u32        D_801F6C00;
 extern ScratchPad D_1F800000;
@@ -40,5 +41,7 @@ extern u16 D_801FE974[3];
         }                                                                              \
         return (none);                                                                 \
     } while (0)
+
+void func_801F6FAC(void);
 
 #endif
