@@ -18,6 +18,7 @@ extern u8 D_801F42DC[];
 extern u8 D_801F42EC[];
 extern u8 D_801F5651[];
 extern u8 D_801F567C[];
+extern s8 D_80146865;
 
 /* The game-overlay state bytes the cancel path resets. */
 
