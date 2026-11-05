@@ -44,4 +44,6 @@ extern void func_801D1B10(EffectSlot* slot);
 
 extern Callback D_801D3918[];
 
+void Area_ProjectPoint(s32* pos, long* screen_xy);
+
 #endif

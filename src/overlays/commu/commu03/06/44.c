@@ -39,7 +39,19 @@ MATCH void func_801D1058(void) {
     SYS_DISPATCH_BYTE(D_801D18E4, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D1094);
+MATCH void func_801D1094(void) {
+    s32 temp_v0;
+
+    if (g_SndBgmId != 0xFF) {
+        if (g_SndBgmId != D_801D1944) {
+            temp_v0 = g_SndBgmId * 4;
+            SND_StopSequence((s32) * (g_SelectionCues + temp_v0), (s16) * (D_80181EBB + temp_v0));
+        }
+    }
+    SND_RequestBgm((s32)D_801D1944);
+    func_801D1250(0x32, 0x28);
+    D_801F294D += 1;
+}
 
 MATCH void func_801D1124(void) {
     if (EMI_LoaderIsReady() != 0) {

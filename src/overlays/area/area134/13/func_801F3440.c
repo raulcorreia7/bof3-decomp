@@ -1,4 +1,6 @@
 #include "area134_13.h"
 
-/* first differing instruction: lui v0 (retail) against lui v1 (candidate) at the g_Actors[0].x load. Body: save g_SpadWork, point it at g_Actors, compare g_Actors[0].x with D_80145EC4, g_GameState = g_BattlePartyBattlers, store the saved work pointer back three times (the middle one g_BattlePartyBattlers), then step 4 or (0xD and unk_09 = 0); the stores are kept by retail, plain and SP_REF forms drop or reorder them */
+/* nonmatching 4 differing (body 0xA4 against 0x9C): D_80146865 is u8 (retail li v0,255/254, the s8 draft folds to -1/-2)
+ * and D_80146144 must live in a local used by both the compare and the call (retail keeps it in a0 from +0x40). resume:
+ * that local also has to keep the compare constant in v0 (a step local before it flips the order to v1 at +0x4). */
 INCLUDE_ASM(func_801F3440);
