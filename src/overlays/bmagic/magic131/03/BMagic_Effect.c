@@ -188,6 +188,7 @@ MATCH void Effect_CountDownAndStep_801F0C98(void) {
 }
 
 /* Best 7 differences: lui a0 at 0x801F0CE4; adjust register allocation. */
+/* First difference: lui v0 at entry; try register allocation for the work pointer and incremented value. */
 INCLUDE_ASM(func_801F0CE4);
 
 MATCH void Effect_SetActorMatrix_801F0D44(void) {
