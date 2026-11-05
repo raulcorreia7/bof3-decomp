@@ -9,7 +9,7 @@ MATCH void func_801F32AC(void) {
         return;
     }
     if (g_ScriptVars[2] == 1) {
-        idx = ((u8*)g_SpadWork)[0x0B];
+        idx = g_SpadWork->unk_0B;
         e   = &g_Actors[idx];
         e->flags_00 &= ~ACTOR_FLAG_HIDDEN;
         g_SpadWork->unk_01 = 2;
