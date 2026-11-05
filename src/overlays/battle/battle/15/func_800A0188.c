@@ -12,7 +12,7 @@ MATCH void func_800A0188(void) {
     if (mode < 3u) {
         base = g_BattlePartyBattlers[mode].stats.current_hp;
     } else {
-        base = ENEMY_COMBATANT(mode).hp_94;
+        base = ENEMY_COMBATANT(mode).hp;
     }
     record = *(s16**)&g_BattleTargetRecord;
     if (record[2] >= (s16)base) {

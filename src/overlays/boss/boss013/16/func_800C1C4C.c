@@ -5,12 +5,12 @@ MATCH void func_800C1C4C(void) {
 
     if ((g_BattleEncounter == 16) && (g_BattleActiveBattler == 8)) {
         work = g_BattleCurrentEnemy;
-        if (work->damage_F8 == 0) {
-            work->damage_F8 = 1;
+        if (work->damage == 0) {
+            work->damage = 1;
         }
     }
     work = g_BattleCurrentEnemy;
-    if (work->hp_94 == 0) {
-        work->hp_94 = 1;
+    if (work->hp == 0) {
+        work->hp = 1;
     }
 }

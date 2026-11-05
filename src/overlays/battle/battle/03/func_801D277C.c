@@ -27,11 +27,11 @@ MATCH void func_801D277C(void) {
         if ((rank >> 8) == 0) {
             continue;
         }
-        flags = g_BattlePartyBattlers[slot].flags_124.value;
+        flags = g_BattlePartyBattlers[slot].damage_flags.value;
         if (!(flags & 0x4000)) {
             func_801DDE7C(D_80145FB2[slot * BATTLE_PARTY_STRIDE], rank);
         } else {
-            g_BattlePartyBattlers[slot].flags_124.value = flags & ~0x4000;
+            g_BattlePartyBattlers[slot].damage_flags.value = flags & ~0x4000;
         }
     }
     half_flags = &g_BattleState;

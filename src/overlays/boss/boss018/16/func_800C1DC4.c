@@ -3,9 +3,9 @@
 MATCH void func_800C1DC4(void) {
     if ((SYS_TestFlag(g_SceneFlags, 0x1E) != 0) || (SYS_TestFlag(g_SceneFlags, 0x23) != 0)) {
         if (((PartyBattler*)g_Task)->slot == 4) {
-            g_BattleCurrentEnemy->hp_94 = D_801FD702;
+            g_BattleCurrentEnemy->hp = D_801FD702;
         } else {
-            g_BattleCurrentEnemy->hp_94 = D_801FD6FC;
+            g_BattleCurrentEnemy->hp = D_801FD6FC;
         }
     }
     if (((PartyBattler*)g_Task)->slot == 5) {

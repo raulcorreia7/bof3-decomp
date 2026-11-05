@@ -14,6 +14,6 @@ MATCH void Actor_Create(u8* request) {
         g_ActorSlots[slot].y.part.integer  = request[5];
         g_ActorSlots[slot].y.part.fraction = (request[4] != 0) << 0xF;
         g_ActorSlots[slot].z.part.integer  = Area_SampleHeight(g_ActorSlots[slot].x.fixed, g_ActorSlots[slot].y.fixed);
-        g_ActorSlots[slot].link_0B         = request[6];
+        g_ActorSlots[slot].link            = request[6];
     }
 }

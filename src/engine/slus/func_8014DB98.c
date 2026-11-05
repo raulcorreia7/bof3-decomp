@@ -12,10 +12,10 @@ MATCH void func_8014DB98(void) {
     u8     selected;
 
     first_work              = g_Task;
-    first_work->unk_4A      = (u8) * (u8*)(first_work->source_50 + first_work->script_pc);
+    first_work->unk_4A      = (u8) * (u8*)(first_work->script + first_work->script_pc);
     current_work            = g_Task;
     index                   = current_work->script_pc;
-    entries                 = current_work->source_50;
+    entries                 = current_work->script;
     next_index              = index + 1;
     current_work->script_pc = next_index;
     selected                = *(entries + (next_index & HALF_MASK));

@@ -10,7 +10,7 @@ MATCH void func_800A0B2C(void) {
         if (BATTLER_IS_PLAYER(battler)) {
             base = g_BattlePartyBattlers[battler].stats.current_hp;
         } else {
-            base = ENEMY_COMBATANT(battler).hp_94;
+            base = ENEMY_COMBATANT(battler).hp;
         }
         if (base == 1u) {
             ((s16*)g_BattleTargetRecord)[2] = 0;

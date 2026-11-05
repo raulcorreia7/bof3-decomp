@@ -9,7 +9,7 @@ MATCH void func_8019B150(void) {
 
     g_Task->unk_48 = (u8)flag;
 
-    g_Task->flags_24 = 0;
+    g_Task->active_flags = 0;
 
     work         = g_Task;
     work->unk_2A = (u8)(work->unk_06 >> 7);

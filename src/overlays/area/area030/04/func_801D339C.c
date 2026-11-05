@@ -12,12 +12,12 @@ MATCH void func_801D339C(void) {
 
     Area_FindSceneRecord(0x2B);
 
-    panel              = FISHING_STATE;
-    panel->origin_x_2E = 0x186;
-    panel->flags_24    = 0x80;
-    other              = FISHING_STATE;
-    panel->origin_y_30 = 0x6E;
-    other->counter_48  = 0;
+    panel               = FISHING_STATE;
+    panel->origin_x_2E  = 0x186;
+    panel->active_flags = 0x80;
+    other               = FISHING_STATE;
+    panel->origin_y_30  = 0x6E;
+    other->counter_48   = 0;
 
     FISHING_STATE->state_29 = 2;
     FISHING_STATE->tint_5D  = 0;

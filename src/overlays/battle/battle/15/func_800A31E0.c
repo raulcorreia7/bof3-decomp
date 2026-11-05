@@ -13,7 +13,7 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
     if (selection_kind < 3) {
         status = g_BattlePartyBattlers[selection_kind].stats.status;
     } else {
-        status = ENEMY_COMBATANT(selection_kind).status_82;
+        status = ENEMY_COMBATANT(selection_kind).status;
     }
     if ((input_mask & 0x80) && !(status & STATUS_POISONED)) {
         acc = &g_BattlePendingStatus;
@@ -85,8 +85,8 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
         g_BattlePartyBattlers[slot].stats.status = merged;
     } else {
         GFX_FreePaletteFadeTarget(((volatile BattleEnemyRecord*)g_BattleEnemies)[slot].unk_00);
-        merged                          = ENEMY_COMBATANT(slot).status_82 | g_BattlePendingStatus;
-        ENEMY_COMBATANT(slot).status_82 = merged;
+        merged                       = ENEMY_COMBATANT(slot).status | g_BattlePendingStatus;
+        ENEMY_COMBATANT(slot).status = merged;
     }
     func_801DDAB4(merged);
 }

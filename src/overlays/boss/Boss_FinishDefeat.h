@@ -8,7 +8,7 @@ MATCH void Boss_FinishDefeat(void) {
     func_8014DAEC();
     func_801E54EC();
     work = g_BattleCurrentEnemy;
-    work->flags_100 |= COMBATANT_FLAG_SKIP_ACTION_STEP;
+    work->damage_flags |= COMBATANT_FLAG_SKIP_ACTION_STEP;
     TASK_BYTES[0] &= 0xBF;
     ACTOR_SET_STEP(3);
     TASK_BYTES[2] = 0;

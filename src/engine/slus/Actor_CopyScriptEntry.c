@@ -19,9 +19,9 @@ MATCH void Actor_CopyScriptEntry(u32 entry, u8* staging, u32 length) {
     i     = 0;
     if (count != 0) {
         do {
-            dst[i] = g_Task->source_50[i];
+            dst[i] = g_Task->script[i];
             i++;
         } while (i < count);
     }
-    g_Task->source_50 = dst;
+    g_Task->script = dst;
 }

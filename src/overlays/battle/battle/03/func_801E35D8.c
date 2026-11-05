@@ -4,7 +4,7 @@ MATCH void func_801E35D8(void) {
     volatile EnemyBattler* enemy;
 
     enemy = g_BattleCurrentEnemy;
-    if ((enemy->flags_100 & 2u) != 0u) {
+    if ((enemy->damage_flags & 2u) != 0u) {
         func_801E2314(8);
     } else {
         func_801E2314(0);

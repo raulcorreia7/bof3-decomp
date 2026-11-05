@@ -9,8 +9,8 @@ MATCH void func_801E45DC(void) {
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {
-        if ((g_BattleCurrentEnemy->target_flags_FC & 0x10) != 0) {
-            func_800AAC88(g_BattleCurrentEnemy->damage_F8, g_Task->slot);
+        if ((g_BattleCurrentEnemy->target_flags & 0x10) != 0) {
+            func_800AAC88(g_BattleCurrentEnemy->damage, g_Task->slot);
         } else {
             slot                               = Battle_AllocEffect(0, 1) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_Task;

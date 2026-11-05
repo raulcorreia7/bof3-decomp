@@ -4,7 +4,7 @@ MATCH void func_8019EE10(void) {
     Actor* work;
     Actor* next;
 
-    g_Task->flags_24          = 1;
+    g_Task->active_flags      = 1;
     FIELD(u16, g_Task, 0x2Cu) = D_80145EBC;
     g_Task->unk_28            = 2;
     FIELD(u32, g_Task, 0x4Cu) = D_80145EDC;

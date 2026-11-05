@@ -13,7 +13,7 @@ MATCH u8 func_8019EEE4(void) {
     distance = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
     slot     = func_801BDE14(g_Task->x.fixed, g_Task->y.fixed, 0);
     if (slot != -1) {
-        g_Actors[slot].flags_74 |= ACTOR_FLAG_INTERACTION_PENDING;
+        g_Actors[slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
         return true;
     }
     if (D_80145ECE - distance >= 0x81) {
@@ -65,7 +65,7 @@ MATCH u8 func_8019EEE4(void) {
                 g_ActorSlots[index].y.fixed = g_Task->y.fixed;
                 g_ActorSlots[index].z.part.integer =
                     Area_SampleHeight(g_ActorSlots[index].x.fixed, g_ActorSlots[index].y.fixed) + 0x100;
-                g_ActorSlots[index].link_0B = 0;
+                g_ActorSlots[index].link = 0;
             }
             D_80145E97 = 1;
         } else {

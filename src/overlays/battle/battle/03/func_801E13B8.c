@@ -11,12 +11,12 @@ MATCH void func_801E13B8(void) {
     u32                    masked;
 
     work  = g_GameState;
-    flags = work->flags_124.value;
+    flags = work->damage_flags.value;
     if ((flags & 0x2000u) == 0u) {
         cell   = g_Task;
         masked = flags & ~0x70u;
         masked &= ~0x200u;
-        work->flags_124.value = masked;
+        work->damage_flags.value = masked;
         Battle_ClearSlotPending(cell->slot);
         g_Task->mode   = 2;
         g_Task->step   = 0;

@@ -24,7 +24,7 @@ NON_MATCHING void func_8014D290(void) {
     s32       rot;
     Actor*    work;
 
-    if (g_Task->flags_24 & 0x80) {
+    if (g_Task->active_flags & 0x80) {
         Area_AddActor();
         return;
     }

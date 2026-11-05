@@ -10,8 +10,8 @@ MATCH void func_8019ABB0(s32 mode) {
         g_ActorSlots[index].flags = 1;
         /* FAKE: block boundary holds the SYS_SetFlag address load between the stores. */
         ORDER_LOCK((void)0);
-        g_ActorSlots[index].type     = 4;
-        g_ActorSlots[index].layer_09 = mode;
+        g_ActorSlots[index].type  = 4;
+        g_ActorSlots[index].layer = mode;
         SYS_SetFlag(g_SceneEventFlags, 0x1C);
     }
 }

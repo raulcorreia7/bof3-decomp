@@ -17,7 +17,7 @@ NON_MATCHING void func_801DE5EC(void) {
     u8  count;
 
     Area_FindSceneRecord(FISHING_ENTRY(FISHING_STATE->cue_index_06)->value_00);
-    FISHING_STATE->flags_24       = 0;
+    FISHING_STATE->active_flags   = 0;
     FISHING_STATE->counter_48     = 2;
     FISHING_STATE->state_29       = 5;
     FISHING_STATE->step_timer_09  = 0;

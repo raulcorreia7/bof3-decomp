@@ -7,7 +7,7 @@ MATCH void Boss_InitEnemy(void) {
     work         = g_BattleCurrentEnemy;
     work->script = D_800C1990;
     work->unk_E4 = func_800C18AC;
-    work->flags_104 |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
+    work->action_flags |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
     work->unk_E8 = D_800C199C;
     ACTOR_SET_STEP(2);
     func_8014D978();

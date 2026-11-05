@@ -5,11 +5,11 @@ MATCH void func_800C1D14(void) {
     volatile u8*  flag;
     s32           remaining;
 
-    remaining = enemy->hp_94 - FIELD(s16, enemy, 0xF8);
+    remaining = enemy->hp - FIELD(s16, enemy, 0xF8);
     if ((s32)(enemy->cell_A0.max_hp >> 2) < remaining) {
         return;
     }
     flag = &g_BattleBossFlags;
     *flag |= 0x1;
-    enemy->hp_94 = 0xFFFF;
+    enemy->hp = 0xFFFF;
 }

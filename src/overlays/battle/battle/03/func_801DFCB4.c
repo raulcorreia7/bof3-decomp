@@ -38,7 +38,7 @@ MATCH void func_801DFCB4(void) {
     if (HAS_STATUS(*stats_work, 0x800)) {
         D_801EC2EE = 1;
     }
-    if (stats_work->flags_124.value & 1) {
+    if (stats_work->damage_flags.value & 1) {
         D_801EC303 = (D_801EC303 + 25 >= 100) ? 100 : D_801EC303 + 25;
     }
     switch (LOBU(g_BattleActionType)) {
@@ -55,7 +55,7 @@ MATCH void func_801DFCB4(void) {
         g_Task->step = 3;
         return;
     }
-    if (!(g_GameState->flags_124.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
+    if (!(g_GameState->damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
         switch (LOBU(g_BattleActionType)) {
             case BATTLE_ACTION_ITEM:
                 if (!(Item_GetFlags(LOHU(g_BattleActionId) >> 8, LOHU(g_BattleActionId) & BYTE_MASK) & 4)) {
@@ -86,12 +86,12 @@ MATCH void func_801DFCB4(void) {
     *pending = 0;
     if ((s16)tail_work->hp_change > 0) {
         if (tail_work->stats.current_hp == 0) {
-            if (tail_work->flags_128.value & 2) {
+            if (tail_work->action_flags.value & 2) {
                 tail_work->stats.status |= STATUS_KO;
             } else {
                 tail_work->stats.status = STATUS_KO;
             }
-            if (!(g_GameState->flags_128.value & 2)) {
+            if (!(g_GameState->action_flags.value & 2)) {
                 func_801DD858(1);
             }
             GFX_FreePaletteFadeTarget(g_Task);

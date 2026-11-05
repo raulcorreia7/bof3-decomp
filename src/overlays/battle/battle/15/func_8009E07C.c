@@ -13,7 +13,7 @@ MATCH void func_8009E07C(void) {
         status = g_BattlePartyBattlers[battler].stats.status & STATUS_KO;
     } else {
         battler -= 3;
-        status = D_801EB630[battler].status_82 & STATUS_KO;
+        status = D_801EB630[battler].status & STATUS_KO;
     }
     if (status != 0) {
         state                   = &g_BattleTarget;

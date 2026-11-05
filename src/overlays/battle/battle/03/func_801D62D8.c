@@ -15,7 +15,7 @@ MATCH s32 func_801D62D8(void) {
     index = 0;
     do {
         if (!(func_801D64C4(index) & BYTE_MASK)) {
-            flags = g_BattlePartyBattlers[index].flags_128.volatile_value;
+            flags = g_BattlePartyBattlers[index].action_flags.volatile_value;
             if (flags & 2) {
                 if (flags & 0x20) {
                     /* retail shares this clear block */
@@ -46,7 +46,7 @@ MATCH s32 func_801D62D8(void) {
                 }
             } else {
             clear:
-                g_BattlePartyBattlers[index].flags_128.volatile_value &= ~0x20;
+                g_BattlePartyBattlers[index].action_flags.volatile_value &= ~0x20;
             }
         }
         index += 1;

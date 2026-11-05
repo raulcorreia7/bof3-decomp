@@ -71,7 +71,7 @@ MATCH void func_801C329C(void) {
                 record                            = g_ActorSlots;
                 work                              = g_Task;
                 record[slot].y.part.integer       = value30;
-                g_ActorSlots[slot].link_0B        = work->unk_05;
+                g_ActorSlots[slot].link           = work->unk_05;
             }
         }
     }

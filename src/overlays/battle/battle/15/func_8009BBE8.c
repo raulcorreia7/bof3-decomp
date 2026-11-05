@@ -88,7 +88,7 @@ MATCH void func_8009BBE8(void) {
                 }
                 break;
             case 9:
-                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY && g_BattleCurrentEnemy->damage_F8 != 0) {
+                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY && g_BattleCurrentEnemy->damage != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -96,7 +96,7 @@ MATCH void func_8009BBE8(void) {
                 }
                 break;
             case 10:
-                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK && g_BattleCurrentEnemy->damage_F8 != 0) {
+                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK && g_BattleCurrentEnemy->damage != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -104,7 +104,7 @@ MATCH void func_8009BBE8(void) {
                 }
                 break;
             case 22:
-                if (g_BattleCurrentEnemy->status_82 & STATUS_BLIND) {
+                if (g_BattleCurrentEnemy->status & STATUS_BLIND) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -112,7 +112,7 @@ MATCH void func_8009BBE8(void) {
                 }
                 break;
             case 23:
-                if (g_BattleCurrentEnemy->status_82 & STATUS_POISONED) {
+                if (g_BattleCurrentEnemy->status & STATUS_POISONED) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -120,7 +120,7 @@ MATCH void func_8009BBE8(void) {
                 }
                 break;
             case 24:
-                if (g_BattleCurrentEnemy->drops_98[0].rate_02 == 0) {
+                if (g_BattleCurrentEnemy->drops[0].rate_02 == 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -143,12 +143,12 @@ MATCH void func_8009BBE8(void) {
                 }
                 break;
             case 36:
-                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK && g_BattleCurrentEnemy->damage_F8 != 0) {
+                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK && g_BattleCurrentEnemy->damage != 0) {
                     func_8009C994(g_BattleCurrentEnemy, packet);
                 }
                 break;
             case 37:
-                if ((s32)g_BattleCurrentEnemy->hp_94 <= (s32)g_BattleCurrentEnemy->damage_F8) {
+                if ((s32)g_BattleCurrentEnemy->hp <= (s32)g_BattleCurrentEnemy->damage) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);

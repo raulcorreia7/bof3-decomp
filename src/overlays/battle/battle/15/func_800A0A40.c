@@ -26,9 +26,9 @@ MATCH void func_800A0A40(void) {
     } else {
         u16 base;
 
-        base                                               = ENEMY_COMBATANT(battler_index).hp_94;
+        base                                               = ENEMY_COMBATANT(battler_index).hp;
         /* FAKE: volatile-drop keeps the original load and store order. */
         (MATCH_VOLATILE_PTR(s16, g_BattleTargetRecord))[2] = base - 1;
-        ENEMY_COMBATANT(g_BattleActiveBattler).hp_94       = 1;
+        ENEMY_COMBATANT(g_BattleActiveBattler).hp          = 1;
     }
 }

@@ -38,10 +38,10 @@ NON_MATCHING void func_801DA9DC(void) {
     if (Area_SampleHeight(g_ActorSlots[0].x.fixed, g_ActorSlots[0].y.fixed) >= g_ActorSlots[0].depth.part.integer) {
         chance = D_801E3210->unk_11;
         if (((RANDOM_MASK(0xF)) < chance) && !(g_FrameCount & 0xF)) {
-            g_ActorSlots[0].step_0C      = 0;
-            g_ActorSlots[0].selection_10 = 0;
-            g_ActorSlots[0].unk_14       = 0;
-            follow_ptr                   = &g_AreaScrollTargetY;
+            g_ActorSlots[0].scene_step = 0;
+            g_ActorSlots[0].selection  = 0;
+            g_ActorSlots[0].unk_14     = 0;
+            follow_ptr                 = &g_AreaScrollTargetY;
             if ((s32)*follow_ptr < g_ActorSlots[0].y.fixed) {
                 *follow_ptr = (u32)g_ActorSlots[0].y.fixed;
             }
@@ -57,46 +57,46 @@ box_16:
     func_801DDEEC();
     func_801DE018();
     D_801E31FC = D_801E31F8;
-    if (g_ActorSlots[0].link_0B == 0) {
+    if (g_ActorSlots[0].link == 0) {
         limit = 6;
         if (g_InputHeld & PADLleft) {
-            g_ActorSlots[0].step_0C      = -ONE;
-            g_ActorSlots[0].selection_10 = ONE;
-            g_ActorSlots[0].unk_14       = D_801E3210->unk_08;
-            D_801E31F8                   = 1;
+            g_ActorSlots[0].scene_step = -ONE;
+            g_ActorSlots[0].selection  = ONE;
+            g_ActorSlots[0].unk_14     = D_801E3210->unk_08;
+            D_801E31F8                 = 1;
         } else {
             limit = 5;
             if (g_InputHeld & PADLright) {
-                g_ActorSlots[0].step_0C      = ONE;
-                g_ActorSlots[0].selection_10 = ONE;
-                D_801E31F8                   = 1;
-                g_ActorSlots[0].unk_14       = D_801E3210->unk_08;
+                g_ActorSlots[0].scene_step = ONE;
+                g_ActorSlots[0].selection  = ONE;
+                D_801E31F8                 = 1;
+                g_ActorSlots[0].unk_14     = D_801E3210->unk_08;
             } else if (g_InputHeld & PADRdown) {
-                g_ActorSlots[0].step_0C = 0;
+                g_ActorSlots[0].scene_step = 0;
                 if (SP_REF(u8, 0x0) != 0) {
-                    limit                        = 4;
-                    g_ActorSlots[0].selection_10 = 0x2000;
-                    D_801E31F8                   = 2;
-                    g_ActorSlots[0].unk_14       = D_801E3210->unk_08;
+                    limit                     = 4;
+                    g_ActorSlots[0].selection = 0x2000;
+                    D_801E31F8                = 2;
+                    g_ActorSlots[0].unk_14    = D_801E3210->unk_08;
                 } else {
-                    limit                        = 3;
-                    g_ActorSlots[0].selection_10 = ONE;
-                    D_801E31F8                   = 1;
-                    g_ActorSlots[0].unk_14       = D_801E3210->unk_04;
+                    limit                     = 3;
+                    g_ActorSlots[0].selection = ONE;
+                    D_801E31F8                = 1;
+                    g_ActorSlots[0].unk_14    = D_801E3210->unk_04;
                 }
             } else {
                 limit = 4;
                 if (SP_REF(void*, 0x0) != 0) {
-                    g_ActorSlots[0].step_0C      = 0;
-                    g_ActorSlots[0].selection_10 = ONE;
-                    D_801E31F8                   = 2;
-                    g_ActorSlots[0].unk_14       = D_801E3210->unk_08;
+                    g_ActorSlots[0].scene_step = 0;
+                    g_ActorSlots[0].selection  = ONE;
+                    D_801E31F8                 = 2;
+                    g_ActorSlots[0].unk_14     = D_801E3210->unk_08;
                 } else {
-                    g_ActorSlots[0].step_0C      = 0;
-                    g_ActorSlots[0].selection_10 = 0;
-                    limit                        = 3;
-                    g_ActorSlots[0].unk_14       = D_801E3210->flags;
-                    D_801E31F8                   = 0;
+                    g_ActorSlots[0].scene_step = 0;
+                    g_ActorSlots[0].selection  = 0;
+                    limit                      = 3;
+                    g_ActorSlots[0].unk_14     = D_801E3210->flags;
+                    D_801E31F8                 = 0;
                 }
             }
         }
@@ -104,8 +104,8 @@ box_16:
     }
     func_801DDD4C();
     g_AreaScrollTargetY = (u32)g_ActorSlots[0].y.fixed;
-    follow              = g_ActorSlots[0].selection_10 >> 8;
-    if (g_ActorSlots[0].selection_10 == 0) {
+    follow              = g_ActorSlots[0].selection >> 8;
+    if (g_ActorSlots[0].selection == 0) {
         follow = 0x10;
     }
     g_AreaCameraStep = (u16)follow;
@@ -118,11 +118,11 @@ box_16:
         capped = 0x150000;
     }
     g_AreaScrollTargetY = capped;
-    if (((g_ActorSlots[0].x.fixed <= 0x80000) && (g_ActorSlots[0].step_0C < 0)) ||
-        ((g_ActorSlots[0].x.fixed > 0x11FFFF) && (g_ActorSlots[0].step_0C > 0))) {
-        g_ActorSlots[0].step_0C = 0;
+    if (((g_ActorSlots[0].x.fixed <= 0x80000) && (g_ActorSlots[0].scene_step < 0)) ||
+        ((g_ActorSlots[0].x.fixed > 0x11FFFF) && (g_ActorSlots[0].scene_step > 0))) {
+        g_ActorSlots[0].scene_step = 0;
     }
-    if (g_ActorSlots[0].selection_10 > 0) {
+    if (g_ActorSlots[0].selection > 0) {
         func_8014D978();
     }
 }

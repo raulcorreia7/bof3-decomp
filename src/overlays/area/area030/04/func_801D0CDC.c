@@ -12,7 +12,7 @@ MATCH void func_801D0CDC(void) {
     FISHING_STATE->saved_value_27 = D_80145EB7;
     FISHING_STATE->saved_value_28 = D_80145EB8;
     FISHING_STATE->state_29       = 2;
-    FISHING_STATE->flags_24       = 0x80;
+    FISHING_STATE->active_flags   = 0x80;
 
     panel                  = FISHING_STATE;
     panel->counter_48      = 0;

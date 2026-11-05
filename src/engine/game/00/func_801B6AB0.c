@@ -4,7 +4,7 @@ MATCH void func_801B6AB0(void) {
     s32 x;
 
     x = g_Task->x.fixed;
-    if ((((x & 0x7FFF) != 0) || ((g_Task->y.fixed & 0x7FFF) != 0)) && ((g_Task->flags_24 & 0x20) == 0)) {
+    if ((((x & 0x7FFF) != 0) || ((g_Task->y.fixed & 0x7FFF) != 0)) && ((g_Task->active_flags & 0x20) == 0)) {
         g_Task->x.fixed        = (x + 0x4800) & ~0x7FFF;
         g_Task->y.fixed        = (g_Task->y.fixed + 0x4800) & ~0x7FFF;
         g_Task->z.part.integer = Area_ReadStepHeight(g_Task->x.fixed, g_Task->y.fixed, g_Task->direction_08);

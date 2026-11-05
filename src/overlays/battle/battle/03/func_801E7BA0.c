@@ -81,7 +81,7 @@ NON_MATCHING void func_801E7BA0(void) {
             D_801EB4CC  = temp_a0_154;
             temp_v1_165 = *(&D_80145FB4 + (D_801EB4E0->slot * BATTLE_PARTY_STRIDE));
             D_801EB4D0  = temp_v1_165;
-            temp_v0_176 = g_BattlePartyBattlers[D_801EB4E0->slot].flags_128.volatile_value;
+            temp_v0_176 = g_BattlePartyBattlers[D_801EB4E0->slot].action_flags.volatile_value;
             D_801EB4CC  = temp_a0_154 & 0xBFFF;
             D_801EB4D0  = temp_v1_165 & 0xFFFE7FFF;
             D_801EB4D4  = temp_v0_176;
@@ -128,7 +128,7 @@ NON_MATCHING void func_801E7BA0(void) {
             temp_a0_409                                  = g_Task;
             var_s0                                       = 0;
             *(&D_80145FB4 + (temp_a0_409->slot * 0x140)) = D_801EB4D0;
-            g_BattlePartyBattlers[temp_a0_409->slot].flags_128.volatile_value = D_801EB4D4;
+            g_BattlePartyBattlers[temp_a0_409->slot].action_flags.volatile_value = D_801EB4D4;
             do {
                 temp_a0_435 = var_s0 & BYTE_MASK;
                 var_s0 += 1;

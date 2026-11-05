@@ -14,7 +14,7 @@ NON_MATCHING void func_801DAAE4(void) {
     index   = 0u;
     while ((u8)index < 3u) {
         if ((D_801463BA == 0u) ||
-            ((g_BattlePartyBattlers[(u8)index].flags_128.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
+            ((g_BattlePartyBattlers[(u8)index].action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
             if (func_801DB9E4((u8)index) != 0u) {
                 u16 value;
 
@@ -30,7 +30,7 @@ NON_MATCHING void func_801DAAE4(void) {
     index = 0u;
     while ((u8)index < 3u) {
         if ((D_801463BA == 0u) ||
-            ((g_BattlePartyBattlers[(u8)index].flags_128.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
+            ((g_BattlePartyBattlers[(u8)index].action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
             if (func_801DB9E4((u8)index) != 0u) {
                 s16 score;
                 s32 mode;
@@ -62,7 +62,7 @@ NON_MATCHING void func_801DAAE4(void) {
 
     index = 3u;
     while ((u8)index < 11u) {
-        if ((D_801463BA == 0u) || ((D_801EB630[(u8)index - 3u].flags_104 & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
+        if ((D_801463BA == 0u) || ((D_801EB630[(u8)index - 3u].action_flags & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
             if (func_801DB9E4((u8)index) != 0u) {
                 u32 slot;
                 u32 rank;

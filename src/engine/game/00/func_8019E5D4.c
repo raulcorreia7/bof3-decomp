@@ -6,8 +6,8 @@ MATCH void func_8019E5D4(void) {
 
     Area_FindSceneRecord(0x18);
 
-    g_Task->flags_24 = 0;
-    g_Task->unk_2A   = 0;
+    g_Task->active_flags = 0;
+    g_Task->unk_2A       = 0;
     g_Task->unk_2B++;
     g_Task->unk_48 = 0;
 

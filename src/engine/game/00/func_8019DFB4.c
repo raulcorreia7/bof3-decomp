@@ -38,7 +38,7 @@ loop_1: /* scan the world-id table down from index 8 */
     jitter                  = rand();
     work_a                  = g_Task;
     counter                 = work_a->z.part.integer;
-    work_a->flags_24        = 0;
+    work_a->active_flags    = 0;
     work_b                  = g_Task;
     work_a->z.part.fraction = 0;
     work_a->z.part.integer  = (u16)(counter + (jitter & 0x7F));

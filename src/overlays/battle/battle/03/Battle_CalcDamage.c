@@ -24,17 +24,17 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
         *(u16*)D_1F800000 = element;
     }
     if (BATTLER_IS_PLAYER(attacker)) {
-        if (g_BattlePartyBattlers[attacker].flags_128.value & COMBATANT_FLAG_POWER_BOOST) {
+        if (g_BattlePartyBattlers[attacker].action_flags.value & COMBATANT_FLAG_POWER_BOOST) {
             power = &D_801EC30C;
             *power += (*power * g_BattlePartyBattlers[attacker].charge) >> 1;
             g_BattlePartyBattlers[attacker].charge = 0;
-            g_BattlePartyBattlers[attacker].flags_128.value &= ~0x40;
+            g_BattlePartyBattlers[attacker].action_flags.value &= ~0x40;
         }
-    } else if (ENEMY_COMBATANT(attacker).flags_104 & COMBATANT_FLAG_POWER_BOOST) {
+    } else if (ENEMY_COMBATANT(attacker).action_flags & COMBATANT_FLAG_POWER_BOOST) {
         power                             = &D_801EC30C;
         *power                            = (*power * ENEMY_COMBATANT(attacker).unk_114) >> 1;
         ENEMY_COMBATANT(attacker).unk_114 = 0;
-        ENEMY_COMBATANT(attacker).flags_104 &= ~COMBATANT_FLAG_POWER_BOOST;
+        ENEMY_COMBATANT(attacker).action_flags &= ~COMBATANT_FLAG_POWER_BOOST;
     }
     damage = Battle_RollBaseDamage(attacker, target, 0);
     if (BATTLER_IS_PLAYER(attacker) && !BATTLER_IS_PLAYER(target)) {
@@ -53,10 +53,10 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     }
     if (BATTLER_IS_PLAYER(target)) {
         status = g_BattlePartyBattlers[target].stats.status;
-        flags  = g_BattlePartyBattlers[target].flags_124.value;
+        flags  = g_BattlePartyBattlers[target].damage_flags.value;
     } else {
-        status = ENEMY_COMBATANT(target).status_82;
-        flags  = ENEMY_COMBATANT(target).flags_100;
+        status = ENEMY_COMBATANT(target).status;
+        flags  = ENEMY_COMBATANT(target).damage_flags;
     }
     if (status & (STATUS_PARALYZED | STATUS_CONFUSED | STATUS_SLEEPING)) {
         if (status & STATUS_SLEEPING) {
@@ -112,10 +112,10 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
         damage = 1;
     }
     if (BATTLER_IS_PLAYER(target)) {
-        if (g_BattlePartyBattlers[target].flags_124.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (g_BattlePartyBattlers[target].damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             damage = 0;
         }
-    } else if (ENEMY_COMBATANT(target).flags_100 & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+    } else if (ENEMY_COMBATANT(target).damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
         damage = 0;
     }
     if (damage >= 10000) {

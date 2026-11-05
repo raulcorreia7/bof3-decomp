@@ -16,8 +16,8 @@ MATCH void func_801DA78C(void) {
         FISHING_STATE->mode_index_02 = 3;
         FISHING_STATE->sub_index_03  = 0;
     } else {
-        if ((g_ActorSlots[0].unk_14 == 0) && (g_InputPressed & PADRdown) && (g_ActorSlots[0].selection_10 > 0x110000)) {
-            g_ActorSlots[0].selection_10 -= 0x4000;
+        if ((g_ActorSlots[0].unk_14 == 0) && (g_InputPressed & PADRdown) && (g_ActorSlots[0].selection > 0x110000)) {
+            g_ActorSlots[0].selection -= 0x4000;
         }
         work = FISHING_STATE;
         if (work->saved_index_0B == 0) {
@@ -26,14 +26,14 @@ MATCH void func_801DA78C(void) {
                 if (direction != 0) {
                     work->pos_x_0C = direction;
                     if (direction == PADLleft) {
-                        record->step_0C = -0x800;
+                        record->scene_step = -0x800;
                     } else {
-                        record->step_0C = 0x800;
+                        record->scene_step = 0x800;
                     }
                     FISHING_STATE->counter_07 = 1;
                 }
             } else if (!(g_InputHeld & work->pos_x_0C) || ((u32)(record->x.fixed + 0xFFF9FFFF) > 0xEFFFEU)) {
-                record->step_0C      = 0;
+                record->scene_step   = 0;
                 work->saved_index_0B = 1;
             }
         }

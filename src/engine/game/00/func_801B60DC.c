@@ -5,7 +5,7 @@ MATCH void func_801B60DC(s32 actor_index) {
 
     idx = actor_index & BYTE_MASK;
     if (D_8014688E[idx * ACTOR_SIZE] != 9) {
-        g_Actors[idx].flags_74 |= ACTOR_FLAG_SCRIPT_PENDING;
+        g_Actors[idx].interaction_flags |= ACTOR_FLAG_SCRIPT_PENDING;
         func_801B5BDC(g_Task->direction_08);
         ACTOR_CLEAR_STATE();
         g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;

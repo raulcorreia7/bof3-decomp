@@ -15,7 +15,7 @@ MATCH void func_801D4D44(void) {
     local_table = g_BattlePartyBattlers;
     do {
         if (func_801D64C4(index) == 0u) {
-            if ((g_BattlePartyBattlers[index].flags_128.value & 1u) != 0u) {
+            if ((g_BattlePartyBattlers[index].action_flags.value & 1u) != 0u) {
                 u8 loaded = g_BattlePartyBattlers[index].counter_136;
                 u8 count  = loaded;
                 if (count < 6u) {
@@ -31,7 +31,7 @@ MATCH void func_801D4D44(void) {
                     local_table[index].counter_137 = count;
                 }
             }
-            if ((g_BattlePartyBattlers[index].flags_128.value & COMBATANT_FLAG_CHARGING) != 0u) {
+            if ((g_BattlePartyBattlers[index].action_flags.value & COMBATANT_FLAG_CHARGING) != 0u) {
                 u8 loaded = g_BattlePartyBattlers[index].counter_136;
                 u8 count  = loaded;
                 if (count < 3u) {
@@ -48,7 +48,7 @@ MATCH void func_801D4D44(void) {
     do {
         if (func_801D64C4(index) == 0u) {
             enemy_index = index - 3u;
-            if ((D_801EB630[enemy_index].flags_104 & COMBATANT_FLAG_CHARGING) != 0u) {
+            if ((D_801EB630[enemy_index].action_flags & COMBATANT_FLAG_CHARGING) != 0u) {
                 u8 loaded = D_801EB630[enemy_index].unk_112;
                 u8 count  = loaded;
                 if (count < 3u) {
@@ -73,7 +73,7 @@ MATCH void func_801D4D44(void) {
                 clr   = 0xFFFFFFEFu;
                 do {
                     if (Battle_SlotIsBlocked(index) == 0u) {
-                        g_BattlePartyBattlers[index].flags_128.value &= clr;
+                        g_BattlePartyBattlers[index].action_flags.value &= clr;
                     }
                     index += 1u;
                 } while (index < 3u);
@@ -82,7 +82,7 @@ MATCH void func_801D4D44(void) {
                 clr   = 0xFFFFFFEFu;
                 do {
                     if (Battle_SlotIsBlocked(index) == 0u) {
-                        ENEMY_COMBATANT(index).flags_104 &= clr;
+                        ENEMY_COMBATANT(index).action_flags &= clr;
                     }
                     index += 1u;
                 } while (index < 11u);

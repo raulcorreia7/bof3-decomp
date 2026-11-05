@@ -104,11 +104,11 @@ typedef struct ActorSlot {
     u8    unk_06;       /* 0x06 area id in area030; slot index in game00 */
     u8    unk_07;       /* 0x07 */
     u8    unk_08;       /* 0x08 */
-    u8    layer_09;     /* 0x09 layer: 0x20/0x40/0x60/0x90/0xFF */
+    u8    layer;        /* 0x09 layer: 0x20/0x40/0x60/0x90/0xFF */
     u8    unk_0A;       /* 0x0A */
-    u8    link_0B;      /* 0x0B index of the linked slot */
-    s32   step_0C;      /* 0x0C scenario step */
-    s32   selection_10; /* 0x10 frontend selection */
+    u8    link;         /* 0x0B index of the linked slot */
+    s32   scene_step;   /* 0x0C scenario step */
+    s32   selection;    /* 0x10 frontend selection */
     s32   unk_14;       /* 0x14 */
     s32   counter_18;   /* 0x18 */
     s32   counter_1C;   /* 0x1C */
@@ -133,9 +133,9 @@ typedef struct ActorSlot {
 ASSERT_SIZE(ActorSlot, ACTOR_SLOT_SIZE);
 ASSERT_OFFSET(ActorSlot, flags, 0x00);
 ASSERT_OFFSET(ActorSlot, type, 0x05);
-ASSERT_OFFSET(ActorSlot, layer_09, 0x09);
-ASSERT_OFFSET(ActorSlot, step_0C, 0x0C);
-ASSERT_OFFSET(ActorSlot, selection_10, 0x10);
+ASSERT_OFFSET(ActorSlot, layer, 0x09);
+ASSERT_OFFSET(ActorSlot, scene_step, 0x0C);
+ASSERT_OFFSET(ActorSlot, selection, 0x10);
 ASSERT_OFFSET(ActorSlot, x, 0x34);
 ASSERT_OFFSET(ActorSlot, y, 0x38);
 ASSERT_OFFSET(ActorSlot, z, 0x3C);

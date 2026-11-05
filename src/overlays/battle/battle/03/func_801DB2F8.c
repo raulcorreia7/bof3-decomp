@@ -20,7 +20,7 @@ MATCH u8 func_801DB2F8(u32 battler_index) {
         if ((D_801EB630[subindex].flags & 1u) == 0u) {
             return false;
         }
-        if ((D_801EB630[subindex].status_82 & 0x4144u) != 0u) {
+        if ((D_801EB630[subindex].status & 0x4144u) != 0u) {
             return false;
         }
     }

@@ -8,11 +8,11 @@ MATCH u8 func_801D57AC(void) {
     count      = 0u;
     last_index = 0u;
     for (index = 3u; index < 11u; index++) {
-        if ((func_801D64C4(index) == 0u) && ((ENEMY_COMBATANT(index).status_82 & STATUS_SLEEPING) != 0u)) {
+        if ((func_801D64C4(index) == 0u) && ((ENEMY_COMBATANT(index).status & STATUS_SLEEPING) != 0u)) {
             if (func_801DDCB4(index) != 0u) {
                 last_index                    = index;
                 ENEMY_COMBATANT(index).unk_FD = 0u;
-                ENEMY_COMBATANT(index).status_82 &= 0xFFBFu;
+                ENEMY_COMBATANT(index).status &= 0xFFBFu;
                 count += 1u;
             } else {
                 ENEMY_COMBATANT(index).unk_FD += 1u;

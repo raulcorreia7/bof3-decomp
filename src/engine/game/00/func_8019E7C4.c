@@ -6,10 +6,10 @@ MATCH void func_8019E7C4(void) {
 
     Area_FindSceneRecord(0x18);
 
-    g_Task->flags_24 = 0;
-    g_Task->unk_2A   = 0;
-    g_Task->unk_2B   = (u8)(g_Task->unk_2B + 1);
-    g_Task->unk_48   = 0;
+    g_Task->active_flags = 0;
+    g_Task->unk_2A       = 0;
+    g_Task->unk_2B       = (u8)(g_Task->unk_2B + 1);
+    g_Task->unk_48       = 0;
 
     work                     = g_Task;
     work->tint.bytes.unk_5D  = 0;

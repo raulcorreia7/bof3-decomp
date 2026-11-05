@@ -49,7 +49,7 @@ MATCH void func_801DEFE4(void) {
         }
         return;
     }
-    if (work->flags_124.value & 2) {
+    if (work->damage_flags.value & 2) {
         Actor_RequestScript(g_Task->facing + 0x14);
         return;
     }
@@ -71,7 +71,7 @@ MATCH void func_801DEFE4(void) {
             return;
         case 4:
             battler = g_GameState;
-            if (battler->flags_128.value & 4) {
+            if (battler->action_flags.value & 4) {
                 Actor_RequestScript(g_Task->facing + 0x38);
             } else if (D_801CA71C[battler->command].mask & 0x800) {
                 Actor_RequestScript(g_Task->facing + 0x8);

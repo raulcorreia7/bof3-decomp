@@ -4,5 +4,5 @@ MATCH void func_801AD44C(void) {
     Actor* work;
 
     work = (Actor*)GAME_WORK_AREA_PTR;
-    work->flags_74 &= ~ACTOR_FLAG_INTERACTION_PENDING;
+    work->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
 }

@@ -11,8 +11,8 @@ MATCH void func_800A0660(void) {
         saved = g_BattlePartyBattlers[slot].stats.status & STATUS_BLIND;
         g_BattlePartyBattlers[slot].stats.status &= ~STATUS_BLIND;
     } else {
-        saved = ENEMY_COMBATANT(slot).status_82 & STATUS_BLIND;
-        ENEMY_COMBATANT(slot).status_82 &= 0xFFF7;
+        saved = ENEMY_COMBATANT(slot).status & STATUS_BLIND;
+        ENEMY_COMBATANT(slot).status &= 0xFFF7;
     }
     battler                 = (u8*)&g_BattleActiveBattler;
     D_801EC324              = 0x64;
@@ -24,5 +24,5 @@ MATCH void func_800A0660(void) {
         g_BattlePartyBattlers[slot].stats.status |= saved;
         return;
     }
-    ENEMY_COMBATANT(slot).status_82 |= saved;
+    ENEMY_COMBATANT(slot).status |= saved;
 }

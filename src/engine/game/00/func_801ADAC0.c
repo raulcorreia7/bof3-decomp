@@ -8,14 +8,14 @@ MATCH void func_801ADAC0(s8 slot_index) {
 
     g_Task->unk_0B = Actor_FindFreeSlot();
     if (g_Task->unk_0B != GAME_NONE) {
-        g_ActorSlots[g_Task->unk_0B].flags        = 1;
-        g_ActorSlots[g_Task->unk_0B].type         = 0x19;
-        g_ActorSlots[g_Task->unk_0B].unk_06       = slot_index;
-        g_ActorSlots[g_Task->unk_0B].step_0C      = 0;
-        value                                     = func_801ADC98();
-        g_ActorSlots[g_Task->unk_0B].selection_10 = value + 0x28;
-        g_ActorSlots[g_Task->unk_0B].x.fixed      = g_Task->x.fixed;
-        g_ActorSlots[g_Task->unk_0B].y.fixed      = g_Task->y.fixed;
-        g_ActorSlots[g_Task->unk_0B].z.fixed      = g_Task->z.fixed;
+        g_ActorSlots[g_Task->unk_0B].flags      = 1;
+        g_ActorSlots[g_Task->unk_0B].type       = 0x19;
+        g_ActorSlots[g_Task->unk_0B].unk_06     = slot_index;
+        g_ActorSlots[g_Task->unk_0B].scene_step = 0;
+        value                                   = func_801ADC98();
+        g_ActorSlots[g_Task->unk_0B].selection  = value + 0x28;
+        g_ActorSlots[g_Task->unk_0B].x.fixed    = g_Task->x.fixed;
+        g_ActorSlots[g_Task->unk_0B].y.fixed    = g_Task->y.fixed;
+        g_ActorSlots[g_Task->unk_0B].z.fixed    = g_Task->z.fixed;
     }
 }

@@ -6,7 +6,7 @@ MATCH s32 func_8019C028(void) {
 
     slot = func_801BDE14(g_Task->x.fixed, g_Task->y.fixed, 0);
     if (slot != -1) {
-        g_Actors[slot].flags_74 |= ACTOR_FLAG_INTERACTION_PENDING;
+        g_Actors[slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
     } else {
         other = func_801BE0C0(g_Task->x.fixed, g_Task->y.fixed, 0);
         if (other == slot) {

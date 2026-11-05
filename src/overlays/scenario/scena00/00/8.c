@@ -1070,12 +1070,12 @@ MATCH void func_801F92DC(void) {
             *D_1F800000 = slot;
             slot_index  = slot & BYTE_MASK;
             if (slot_index != GAME_NONE) {
-                g_ActorSlots[slot_index].flags         = 1;
-                g_ActorSlots[*D_1F800000].type         = 0x10;
-                g_ActorSlots[*D_1F800000].counter_18   = 2;
-                g_ActorSlots[*D_1F800000].counter_1C   = 2;
-                g_ActorSlots[*D_1F800000].step_0C      = 3;
-                g_ActorSlots[*D_1F800000].selection_10 = selection;
+                g_ActorSlots[slot_index].flags       = 1;
+                g_ActorSlots[*D_1F800000].type       = 0x10;
+                g_ActorSlots[*D_1F800000].counter_18 = 2;
+                g_ActorSlots[*D_1F800000].counter_1C = 2;
+                g_ActorSlots[*D_1F800000].scene_step = 3;
+                g_ActorSlots[*D_1F800000].selection  = selection;
             }
             state0  = &g_AreaCameraAngle.vz;
             *state0 = *state0 - 0x155;
@@ -1156,12 +1156,12 @@ MATCH void func_801F9644(void) {
             slot        = id & BYTE_MASK;
             *D_1F800000 = id;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].flags             = 1;
-                g_ActorSlots[D_1F800000[0]].type     = 0x13;
-                g_ActorSlots[D_1F800000[0]].pos.x    = *timer - 170;
-                g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z    = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer_09 = 0x40;
+                g_ActorSlots[slot].flags          = 1;
+                g_ActorSlots[D_1F800000[0]].type  = 0x13;
+                g_ActorSlots[D_1F800000[0]].pos.x = *timer - 170;
+                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer = 0x40;
             }
             Party_HideBattlers();
             D_80145EC4 = 0x330000;
@@ -1205,12 +1205,12 @@ MATCH void func_801F9868(void) {
                     slot        = slot_byte & BYTE_MASK;
                     *D_1F800000 = slot_byte;
                     if (slot != GAME_NONE) {
-                        g_ActorSlots[slot].flags             = 1;
-                        g_ActorSlots[D_1F800000[0]].type     = 0x13;
-                        g_ActorSlots[D_1F800000[0]].pos.x    = g_AreaCameraAngle.vx;
-                        g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
-                        g_ActorSlots[D_1F800000[0]].pos.z    = 0x200;
-                        g_ActorSlots[D_1F800000[0]].layer_09 = 0x90;
+                        g_ActorSlots[slot].flags          = 1;
+                        g_ActorSlots[D_1F800000[0]].type  = 0x13;
+                        g_ActorSlots[D_1F800000[0]].pos.x = g_AreaCameraAngle.vx;
+                        g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                        g_ActorSlots[D_1F800000[0]].pos.z = 0x200;
+                        g_ActorSlots[D_1F800000[0]].layer = 0x90;
                         return;
                     }
                 } else {
@@ -1348,12 +1348,12 @@ MATCH void func_801F9BE4(void) {
             }
             D_1F800000[0] = Actor_FindFreeSlot();
             if ((D_1F800000[0] & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[D_1F800000[0]].flags    = 1;
-                g_ActorSlots[D_1F800000[0]].type     = 0x13;
-                g_ActorSlots[D_1F800000[0]].pos.x    = g_AreaCameraAngle.vx + 384;
-                g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z    = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer_09 = 0x60;
+                g_ActorSlots[D_1F800000[0]].flags = 1;
+                g_ActorSlots[D_1F800000[0]].type  = 0x13;
+                g_ActorSlots[D_1F800000[0]].pos.x = g_AreaCameraAngle.vx + 384;
+                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer = 0x60;
             }
             g_SceneState.step_05 = 7;
             break;
@@ -1384,12 +1384,12 @@ MATCH void func_801F9FB8(void) {
                 id            = Actor_FindFreeSlot();
                 D_1F800000[0] = id;
                 if ((id & BYTE_MASK) != GAME_NONE) {
-                    g_ActorSlots[id].flags               = 1;
-                    g_ActorSlots[D_1F800000[0]].type     = 0x13;
-                    g_ActorSlots[D_1F800000[0]].pos.x    = g_AreaCameraAngle.vx + 448;
-                    g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
-                    g_ActorSlots[D_1F800000[0]].pos.z    = g_AreaCameraAngle.vz;
-                    g_ActorSlots[D_1F800000[0]].layer_09 = 0xFF;
+                    g_ActorSlots[id].flags            = 1;
+                    g_ActorSlots[D_1F800000[0]].type  = 0x13;
+                    g_ActorSlots[D_1F800000[0]].pos.x = g_AreaCameraAngle.vx + 448;
+                    g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                    g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
+                    g_ActorSlots[D_1F800000[0]].layer = 0xFF;
                 }
                 *state = 1;
             }
@@ -1485,12 +1485,12 @@ MATCH void func_801FA27C(void) {
             id            = Actor_FindFreeSlot();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].flags               = 1;
-                g_ActorSlots[D_1F800000[0]].type     = 0x13;
-                g_ActorSlots[D_1F800000[0]].pos.x    = -842;
-                g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z    = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer_09 = 0x60;
+                g_ActorSlots[id].flags            = 1;
+                g_ActorSlots[D_1F800000[0]].type  = 0x13;
+                g_ActorSlots[D_1F800000[0]].pos.x = -842;
+                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer = 0x60;
             }
             g_SceneState.step_05 = 6;
             break;
@@ -1502,12 +1502,12 @@ MATCH void func_801FA27C(void) {
             id            = Actor_FindFreeSlot();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].flags               = 1;
-                g_ActorSlots[D_1F800000[0]].type     = 0x13;
-                g_ActorSlots[D_1F800000[0]].pos.x    = -684;
-                g_ActorSlots[D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z    = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer_09 = 0x20;
+                g_ActorSlots[id].flags            = 1;
+                g_ActorSlots[D_1F800000[0]].type  = 0x13;
+                g_ActorSlots[D_1F800000[0]].pos.x = -684;
+                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer = 0x20;
             }
             g_SceneState.timer_06 = 0x200;
             g_SceneState.step_05  = 7;
@@ -1959,12 +1959,12 @@ MATCH void func_801FB204(void) {
                     slot          = Actor_FindFreeSlot();
                     D_1F800000[0] = slot;
                     if ((slot & BYTE_MASK) != GAME_NONE) {
-                        g_ActorSlots[slot].flags                  = 1;
-                        g_ActorSlots[(u32)D_1F800000[0]].type     = 0x13;
-                        g_ActorSlots[(u32)D_1F800000[0]].pos.x    = -682;
-                        g_ActorSlots[(u32)D_1F800000[0]].pos.y    = g_AreaCameraAngle.vy;
-                        g_ActorSlots[(u32)D_1F800000[0]].pos.z    = 0x200;
-                        g_ActorSlots[(u32)D_1F800000[0]].layer_09 = 0x20;
+                        g_ActorSlots[slot].flags               = 1;
+                        g_ActorSlots[(u32)D_1F800000[0]].type  = 0x13;
+                        g_ActorSlots[(u32)D_1F800000[0]].pos.x = -682;
+                        g_ActorSlots[(u32)D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                        g_ActorSlots[(u32)D_1F800000[0]].pos.z = 0x200;
+                        g_ActorSlots[(u32)D_1F800000[0]].layer = 0x20;
                     }
                     *countdown           = 0x20;
                     g_SceneState.step_05 = 6;

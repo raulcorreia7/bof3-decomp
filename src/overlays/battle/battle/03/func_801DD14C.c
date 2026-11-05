@@ -7,13 +7,13 @@ MATCH void func_801DD14C(u8 battler_index) {
     u8 index;
 
     if (BATTLER_IS_PLAYER(battler_index)) {
-        g_BattlePartyBattlers[battler_index].flags_124.value &= ~2u;
+        g_BattlePartyBattlers[battler_index].damage_flags.value &= ~2u;
         g_BattlePartyBattlers[battler_index].mode_119 = 0u;
-        g_BattlePartyBattlers[battler_index].flags_128.value &= ~4u;
+        g_BattlePartyBattlers[battler_index].action_flags.value &= ~4u;
     } else {
-        u32 f                                    = ENEMY_COMBATANT(battler_index).flags_100;
-        ENEMY_COMBATANT(battler_index).unk_F5    = 0u;
-        ENEMY_COMBATANT(battler_index).flags_100 = f & ~2u;
+        u32 f                                       = ENEMY_COMBATANT(battler_index).damage_flags;
+        ENEMY_COMBATANT(battler_index).unk_F5       = 0u;
+        ENEMY_COMBATANT(battler_index).damage_flags = f & ~2u;
     }
 
     index = 0u;

@@ -7,7 +7,7 @@ MATCH void func_8019E2A8(void) {
     Actor* flags;
 
     Area_FindSceneRecord(0x18);
-    g_Task->flags_24                 = 0;
+    g_Task->active_flags             = 0;
     g_Task->unk_2A                   = 0;
     work                             = g_Task;
     work->unk_2B                     = (u8)(work->unk_2B + 1);

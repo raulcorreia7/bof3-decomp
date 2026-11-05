@@ -20,7 +20,7 @@ MATCH void func_80098450(void) {
         return;
     }
     slot = g_BattleMessageSlot[5];
-    g_BattlePartyBattlers[slot].flags_124.volatile_value &= 0xBFFFu;
+    g_BattlePartyBattlers[slot].damage_flags.volatile_value &= 0xBFFFu;
     if (*phase == 0u) {
         D_801485DC = 1u;
         D_801485E0 = (u16)(D_80148574 + 7);

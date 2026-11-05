@@ -2,7 +2,7 @@
  * by the two world area overlays; every change here must verify every member. */
 /* func_801F2F24 (area152), func_801F2FD0 (area151) */
 MATCH void WorldMap_StartScene(void) {
-    g_Task->flags_24 = 0x80;
+    g_Task->active_flags = 0x80;
     Area_FindSceneRecord(0x1D1);
     ((u8*)g_Task)[0x29] = 5;
     ((u8*)g_Task)[0x2A] = 0;

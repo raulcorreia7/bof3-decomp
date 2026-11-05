@@ -1,7 +1,7 @@
 #include "area087_13.h"
 
 MATCH void func_801F3094(void) {
-    g_Task->flags_24 = 0x80;
+    g_Task->active_flags = 0x80;
     Area_FindSceneRecord(0x156);
     g_Task->unk_29 = 5;
     g_Task->unk_2A = 0;

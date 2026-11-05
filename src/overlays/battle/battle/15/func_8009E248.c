@@ -17,14 +17,14 @@ NON_MATCHING void func_8009E248(void) {
     id = g_BattleActiveBattler;
     if (!(func_800A3A10(id, g_BattleTarget) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_BattleTarget)) {
-            if (!(g_BattlePartyBattlers[g_BattleTarget].flags_124.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE)) {
+            if (!(g_BattlePartyBattlers[g_BattleTarget].damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE)) {
                 hp = D_80145F18[g_BattleTarget][0];
             } else {
                 hp = 0;
             }
         } else {
             enemy = g_BattleTarget - 3;
-            if (D_801EB630[enemy].flags_100 & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+            if (D_801EB630[enemy].damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
                 hp = 0;
             } else {
                 hp = D_801EB6C4[enemy][0];

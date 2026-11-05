@@ -71,7 +71,7 @@ g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 s_BattlePartialPartyTargetWeights = { addr = 0x801EB394, source = "func_801E2E30 picks a target slot weighted by this row when two targets are live" }
 s_BattleFullPartyTargetWeights = { addr = 0x801EB39C, source = "func_801E2E30 picks a target slot weighted by this row when three targets are live" }
 s_BattleBattlerStepIds = { addr = 0x801EB494, source = "func_801E6E54 and func_801E6FB0 pass the slot's step id to func_8014D6B8" }
-g_BattleCurrentEnemy = { addr = 0x801EB4E8, size = 0x4, source = "battle/battle/03 func_801E496C subtracts damage_F8 from this enemy work record hp and func_801E3C14 reads status_82 and flags_100 of it - the battler whose script runs" }
+g_BattleCurrentEnemy = { addr = 0x801EB4E8, size = 0x4, source = "battle/battle/03 func_801E496C subtracts damage from this enemy work record hp and func_801E3C14 reads status and damage_flags of it - the battler whose script runs" }
 g_BattleEventSlots = { addr = 0x801EB4F0, source = "Battle_RunEvents scans the eight 12-byte event slots" }
 D_801EB4F0 = { addr = 0x801EB4F0, alias = true, source = "g_BattleEventSlots as 12-byte rows, the one use in func_801DE560 changes the bytes as a cast" }
 D_801EB4F1 = { addr = 0x801EB4F1, alias = true, source = "byte 1 of each g_BattleEventSlots row, 1 use in func_801DE560; the row cast there changes the bytes" }

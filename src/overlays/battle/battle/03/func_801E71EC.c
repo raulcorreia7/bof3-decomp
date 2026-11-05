@@ -11,7 +11,7 @@ MATCH void func_801E71EC(void) {
         if (index < 3) {
             flags = g_BattlePartyBattlers[index].stats.status & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
         } else {
-            flags = ENEMY_COMBATANT(index).status_82 & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
+            flags = ENEMY_COMBATANT(index).status & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
         }
         if (flags == 0) {
             g_Task->mode = 0;

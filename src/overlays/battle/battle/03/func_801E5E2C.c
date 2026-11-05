@@ -46,7 +46,7 @@ loop:
     }
     kind = slot->target.party->slot;
     if (kind < 3) {
-        g_BattlePartyBattlers[kind].flags_124.value |= COMBATANT_FLAG_DAMAGE_NUMBER;
+        g_BattlePartyBattlers[kind].damage_flags.value |= COMBATANT_FLAG_DAMAGE_NUMBER;
     } else {
         D_801EB730[(kind - 3) * 0x118] |= 0x80;
     }

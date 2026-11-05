@@ -66,7 +66,7 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
         }
     }
     row2 = actor * 0x118;
-    if ((*(D_801EB6B2 + row2) & 0x20) || (D_801EB630[actor].flags_104 & COMBATANT_FLAG_CHARGING)) {
+    if ((*(D_801EB6B2 + row2) & 0x20) || (D_801EB630[actor].action_flags & COMBATANT_FLAG_CHARGING)) {
         g_BattleActionType = 1;
         if (func_800A9304((slot + 3) & BYTE_MASK) & BYTE_MASK) {
             func_801E2948((s8)actor);

@@ -12,12 +12,12 @@ NON_MATCHING void func_8009E500(void) {
     u16 limit;
     if (!(func_800A3A10(g_BattleActiveBattler, g_BattleTarget) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_BattleTarget)) {
-            if (g_BattlePartyBattlers[g_BattleTarget].flags_124.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+            if (g_BattlePartyBattlers[g_BattleTarget].damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
                 g_BattleTargetRecord[3] = 0;
             } else {
                 g_BattleTargetRecord[3] = D_80145F1A[g_BattleTarget * 160] / 5;
             }
-        } else if (ENEMY_COMBATANT(g_BattleTarget).flags_100 & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        } else if (ENEMY_COMBATANT(g_BattleTarget).damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             g_BattleTargetRecord[3] = 0;
         } else {
             g_BattleTargetRecord[3] = D_801EB6C4[g_BattleTarget - 3][1] / 5;

@@ -5,7 +5,7 @@ MATCH void func_801F3504(void) {
     if (g_Task->unk_0A == 0) {
         D_80146867     = 1;
         g_Task->unk_04 = 0;
-        g_CurrentActor->flags_74 &= 0xFE;
+        g_CurrentActor->interaction_flags &= 0xFE;
         g_CurrentActor->unk_7E += 1;
         Game_ClearScriptActive();
     }

@@ -10,7 +10,7 @@ MATCH u8 func_801E8FA8(void) {
     if (*field < 3) {
         mask = g_BattlePartyBattlers[*field].stats.status;
     } else {
-        mask = ENEMY_COMBATANT(*field).status_82;
+        mask = ENEMY_COMBATANT(*field).status;
     }
 
     start_index = g_Task->unk_0B;

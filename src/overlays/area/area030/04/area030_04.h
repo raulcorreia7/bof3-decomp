@@ -138,7 +138,7 @@ typedef struct FishingState {
     u32                           step_delta_18;
     u32                           unk_1C;
     u32                           step_limit_20;
-    u8                            flags_24;
+    u8                            active_flags;
     u8                            saved_25; /* a value copied in from the entry table */
     u8                            saved_26; /* a value copied in from the entry table */
     u8                            saved_value_27;

@@ -15,9 +15,9 @@ MATCH void func_801E61F0(void) {
     if (count == 0) {
         index = D_801EC2E0->target.party->slot;
         if (index < 3) {
-            g_BattlePartyBattlers[index].flags_124.value &= ~0x80;
+            g_BattlePartyBattlers[index].damage_flags.value &= ~0x80;
         } else {
-            ENEMY_COMBATANT(index).flags_100 &= ~0x80;
+            ENEMY_COMBATANT(index).damage_flags &= ~0x80;
         }
         func_801E5988();
     }

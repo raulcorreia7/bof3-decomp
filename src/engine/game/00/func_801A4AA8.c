@@ -7,7 +7,7 @@ MATCH void func_801A4AA8(void) {
 
     g_Task->unk_04                 = 0;
     g_Task->unk_03                 = 0;
-    g_Task->flags_24               = 0;
+    g_Task->active_flags           = 0;
     step                           = g_Task;
     step->unk_0A                   = 0;
     step->unk_09                   = 0;
@@ -18,10 +18,10 @@ MATCH void func_801A4AA8(void) {
     motion->unk_6C                 = 0;
     motion->unk_68                 = 0;
     motion->unk_64                 = 0;
-    /* 0x74 is a flag byte and 0x75 a byte timer (Actor.flags_74 /
+    /* 0x74 is a flag byte and 0x75 a byte timer (Actor.interaction_flags /
      * timer_75); every access in the module is byte-wide, so both stores are
      * byte-wide. */
-    animation->flags_74            = 0;
+    animation->interaction_flags   = 0;
     g_CurrentActor->timer_75       = 0;
     g_CurrentActor->pad_76         = 0;
     g_CurrentActor->unk_79         = 0;

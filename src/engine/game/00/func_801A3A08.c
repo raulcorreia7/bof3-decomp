@@ -17,6 +17,6 @@ MATCH void func_801A3A08(void) {
     dispatch:
         func_801ACE10((s32)D_80145F09);
     } else {
-        GAME_WORK_AREA_PTR->flags_74 &= ~ACTOR_FLAG_INTERACTION_PENDING;
+        GAME_WORK_AREA_PTR->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
     }
 }

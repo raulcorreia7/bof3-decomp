@@ -4,9 +4,9 @@
  * scratch state byte `0x03`. */
 MATCH void func_801D6A2C(void) {
     Area_FindSceneRecord(0x47);
-    FISHING_STATE->flags_24 = 0x80;
-    FISHING_STATE->state_29 = 1;
-    FISHING_STATE->state_2A = 0;
+    FISHING_STATE->active_flags = 0x80;
+    FISHING_STATE->state_29     = 1;
+    FISHING_STATE->state_2A     = 0;
 
     {
         FishingState* record;

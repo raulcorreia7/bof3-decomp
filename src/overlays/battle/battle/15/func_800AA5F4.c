@@ -8,7 +8,7 @@ MATCH s32 func_800AA5F4(s32 slot) {
         return 0;
     }
     record = slot * BATTLE_PARTY_STRIDE;
-    if (!(g_BattlePartyBattlers[slot].flags_124.volatile_value & 1)) {
+    if (!(g_BattlePartyBattlers[slot].damage_flags.volatile_value & 1)) {
         return 0;
     }
     if (g_BattlePartyBattlers[slot].unk_118 != LOBU(g_BattleActiveBattler)) {

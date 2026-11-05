@@ -16,7 +16,7 @@ MATCH u16 Actor_ReadState(void) {
         if (((u16)value >> 1) == record->unk_49) {
             result = 2;
         } else {
-            entry = record->source_50 + (u16)value;
+            entry = record->script + (u16)value;
             if (*entry >= 0x80) {
                 result = (entry[1] << 1) + 2;
             } else {

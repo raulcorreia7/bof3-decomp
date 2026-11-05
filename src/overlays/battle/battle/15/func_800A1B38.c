@@ -8,7 +8,7 @@ MATCH void func_800A1B38(void) {
         if (BATTLER_IS_PLAYER(battler)) {
             ((s16*)g_BattleTargetRecord)[2] = (s16)g_BattlePartyBattlers[battler].stats.current_hp;
         } else {
-            ((s16*)g_BattleTargetRecord)[2] = (s16)ENEMY_COMBATANT(battler).hp_94;
+            ((s16*)g_BattleTargetRecord)[2] = (s16)ENEMY_COMBATANT(battler).hp;
         }
     }
 }

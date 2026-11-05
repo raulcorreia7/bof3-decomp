@@ -8,7 +8,7 @@ MATCH u8 func_8019CAB4(void) {
     work = g_Task;
     id   = func_801BDE14(work->x.fixed, work->y.fixed, 0);
     if (id != -1) {
-        g_Actors[id].flags_74 |= ACTOR_FLAG_INTERACTION_PENDING;
+        g_Actors[id].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
         return 1;
     }
     if (D_80145ECE + 64 < Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed)) {

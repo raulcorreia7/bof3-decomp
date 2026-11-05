@@ -16,7 +16,7 @@ MATCH bool func_8019D054(s32 point_x, s32 point_y) {
     y   = point_y;
     idx = func_801BDE14(x, y, 1) & BYTE_MASK;
     if (idx != GAME_NONE) {
-        g_Actors[idx].flags_74 |= ACTOR_FLAG_INTERACTION_PENDING;
+        g_Actors[idx].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
     }
     x &= 0xFFFF0000;
     y &= 0xFFFF0000;

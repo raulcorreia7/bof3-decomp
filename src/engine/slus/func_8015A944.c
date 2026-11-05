@@ -8,7 +8,7 @@ MATCH void func_8015A944(void) {
     u8     state;
 
     work = g_Task;
-    if ((work->flags_24 & 0x10) != 0) {
+    if ((work->active_flags & 0x10) != 0) {
         state = 4;
     } else if ((work->range_54.table[3] & 0x20) != 0) {
         state = 6;

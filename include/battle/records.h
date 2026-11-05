@@ -49,7 +49,7 @@ typedef struct EnemyBattlerDrop {
     u8  pad_03;
 } EnemyBattlerDrop;
 
-/* Two drops fill 0x98..0xA0 of an EnemyBattler: cell_A0 follows drops_98[2]. */
+/* Two drops fill 0x98..0xA0 of an EnemyBattler: cell_A0 follows drops[2]. */
 ASSERT_SIZE(EnemyBattlerDrop, 0x4);
 
 /* The mode handler an enemy record points at. */
@@ -305,7 +305,7 @@ typedef struct BattlePanelTask {
     u8                cursor;    /* +0x0D cleared on panel entry */
     u8                pad_0E[4]; /* +0x0E .. +0x11 */
     u16               row_base;  /* +0x12 the panel list's first row (func_800B1728) */
-    u16               hp;        /* +0x14 copied from EnemyBattler.hp_94; the HP bar's numerator */
+    u16               hp;        /* +0x14 copied from EnemyBattler.hp; the HP bar's numerator */
     u8                pad_16[6]; /* +0x16 .. +0x1B */
     u16               max_hp;    /* +0x1C copied from EnemyBattler.cell_A0.max_hp; the HP bar's divisor */
 } BattlePanelTask;
@@ -366,15 +366,15 @@ typedef struct EnemyBattler {
     u8                    unk_7E;      /* +0x7E battle/battle/03's cell; func_801E25E0 reads it as a byte */
     u8                    unk_7F;      /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
     u16                   event_flags; /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16                   status_82;   /* +0x82 StatusFlags; bit 0x4000 marks the slot blocked */
+    u16                   status;      /* +0x82 StatusFlags; bit 0x4000 marks the slot blocked */
     u16                   unk_84;      /* +0x84 damage; func_801E54EC clears it */
     u16                   unk_86;      /* +0x86 damage; func_801E54EC banks it in D_8014632C */
     u16                   power;       /* +0x88 read by the turn-order ranking */
     u8                    pad_8A[2];
     u8                    techniques[8]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
-    u16                   hp_94;
+    u16                   hp;
     u16                   ap; /* +0x96 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    EnemyBattlerDrop      drops_98[2];
+    EnemyBattlerDrop      drops[2];
     BattleEnemyCellA0     cell_A0; /* +0xA0 the cell both overlays read at their own width */
     u8                    pad_A2[0x2];
     u16                   attack;  /* +0xA4 battle/battle/15's cell; battle/battle/03 leaves it padded */
@@ -395,13 +395,13 @@ typedef struct EnemyBattler {
     u8                    pad_F1[ENEMY_COMBATANT_PAD_F1_SIZE];
     u8                    unk_F5;
     u16                   technique;
-    s16                   damage_F8; /* +0xF8 damage dealt this hit; negative heals (func_801E496C) */
+    s16                   damage; /* +0xF8 damage dealt this hit; negative heals (func_801E496C) */
     u16                   unk_FA;
-    u8                    target_flags_FC; /* +0xFC battle/battle/15 calls it target_flags */
+    u8                    target_flags; /* +0xFC battle/battle/15 calls it target_flags */
     u8                    unk_FD;
     u8                    pad_FE[0x2];
-    u32                   flags_100; /* BattleBattlerDamageFlags */
-    u32                   flags_104; /* BattleBattlerActionFlags */
+    u32                   damage_flags; /* BattleBattlerDamageFlags */
+    u32                   action_flags; /* BattleBattlerActionFlags */
     u8                    pad_108[0xA];
     u8                    unk_112;
     u8                    pad_113[0x1];
@@ -429,15 +429,15 @@ ASSERT_OFFSET(EnemyBattler, unk_58, 0x58);
 ASSERT_OFFSET(EnemyBattler, unk_5A, 0x5A);
 ASSERT_OFFSET(EnemyBattler, unk_5C, 0x5C);
 ASSERT_OFFSET(EnemyBattler, unk_5F, 0x5F);
-ASSERT_OFFSET(EnemyBattler, status_82, 0x82);
+ASSERT_OFFSET(EnemyBattler, status, 0x82);
 ASSERT_OFFSET(EnemyBattler, techniques, 0x8C);
-ASSERT_OFFSET(EnemyBattler, hp_94, 0x94);
+ASSERT_OFFSET(EnemyBattler, hp, 0x94);
 ASSERT_OFFSET(EnemyBattler, cell_A0, 0xA0);
 ASSERT_OFFSET(EnemyBattler, kind, 0xE0);
 ASSERT_OFFSET(EnemyBattler, unk_E8, 0xE8);
-ASSERT_OFFSET(EnemyBattler, target_flags_FC, 0xFC);
-ASSERT_OFFSET(EnemyBattler, flags_100, 0x100);
-ASSERT_OFFSET(EnemyBattler, flags_104, 0x104);
+ASSERT_OFFSET(EnemyBattler, target_flags, 0xFC);
+ASSERT_OFFSET(EnemyBattler, damage_flags, 0x100);
+ASSERT_OFFSET(EnemyBattler, action_flags, 0x104);
 
 /* The kind walk: `D_8014833A[i]` is the owner table's record `i` seen at +0x07
  * (0x8014833A = 0x80148333 + 7, stride 0x24). Kept as its own name because the
@@ -522,8 +522,8 @@ typedef struct PartyBattler {
     u8           counter_121;
     u8           unk_122;
     u8           unk_123;
-    BattlerFlags flags_124; /* BattleBattlerDamageFlags */
-    BattlerFlags flags_128; /* BattleBattlerActionFlags */
+    BattlerFlags damage_flags; /* BattleBattlerDamageFlags */
+    BattlerFlags action_flags; /* BattleBattlerActionFlags */
     u8           unk_12C[8];
     u16          unk_134;
     u8           counter_136;
@@ -553,12 +553,12 @@ ASSERT_OFFSET(PartyBattler, stats, 0x74);
 ASSERT_OFFSET(PartyBattler, hp_change, 0x11C);
 ASSERT_OFFSET(PartyBattler, ap_change, 0x11E);
 ASSERT_OFFSET(PartyBattler, unk_120, 0x120);
-ASSERT_OFFSET(PartyBattler, flags_124, 0x124);
-ASSERT_OFFSET(PartyBattler, flags_128, 0x128);
+ASSERT_OFFSET(PartyBattler, damage_flags, 0x124);
+ASSERT_OFFSET(PartyBattler, action_flags, 0x128);
 ASSERT_OFFSET(PartyBattler, unk_12C, 0x12C);
 ASSERT_OFFSET(PartyBattler, unk_13A, 0x13A);
 
-/* The damage/status word: `flags_100` of the enemy row, `flags_124` of the
+/* The damage/status word: `damage_flags` of the enemy row, `damage_flags` of the
  * player row. Bit 6 marks a marked damage target; bit 7 runs the popup digits
  * and countdown; bit 8 makes the hit lethal and queues the reaction cue; bit 9
  * marks a damage row present; bit 12 skips the action gate; bit 15 counters;
@@ -573,7 +573,7 @@ typedef enum BattleBattlerDamageFlags {
     COMBATANT_FLAG_DAMAGE_IMMUNE      = 1 << 16,
 } BattleBattlerDamageFlags;
 
-/* The action/pending word: `flags_104` of the enemy row, `flags_128` of the
+/* The action/pending word: `action_flags` of the enemy row, `action_flags` of the
  * player row. Bit 3 marks a mode handler action installed; bit 4 keeps the row
  * available during the suppression countdown; bit 6 applies the queued power
  * boost; bit 9 halves the damage; bits 11 and 13 zero the holy and fire

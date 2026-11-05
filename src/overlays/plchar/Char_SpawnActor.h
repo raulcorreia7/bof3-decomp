@@ -26,6 +26,6 @@ MATCH void Char_SpawnActor(s32 arg0, s32 arg1, s32 arg2) {
         g_ActorSlots[slot].mode           = kind;
         g_ActorSlots[slot].y.fixed        = y_word;
         g_ActorSlots[slot].z.part.integer = Area_SampleHeight(g_ActorSlots[slot].x.fixed, y_word) + 0x100;
-        g_ActorSlots[slot].link_0B        = 0;
+        g_ActorSlots[slot].link           = 0;
     }
 }
