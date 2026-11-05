@@ -83,7 +83,25 @@ MATCH void func_801F7B88(void) {
 MATCH void func_801F7BC0(void) {
     u8* step;
 
-INCLUDE_ASM(func_801F7C14);
+    g_AreaCameraAngle.vx -= 5;
+    if (g_AreaCameraMoving == 0) {
+        step                = &D_80146874;
+        g_AreaScrollTargetX = 0x540000;
+        D_80146867          = 0xA;
+        *step              += 1;
+    }
+}
+
+MATCH void func_801F7C14(void) {
+    u8* step;
+
+    if (g_AreaCameraMoving == 0 && D_80146867 == 0x14) {
+        step                = &D_80146874;
+        g_AreaCameraStep    = 0x10;
+        g_AreaScrollTargetX = 0x3C0000;
+        *step              += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F7C6C);
 
