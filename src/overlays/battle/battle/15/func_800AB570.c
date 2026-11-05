@@ -17,5 +17,5 @@ MATCH void func_800AB570(s32 battler_index) {
     }
     g_BattleTargetSelector                = result;
     g_BattlePartyBattlers[index].mode_119 = 1;
-    g_BattleActionType                    = 1;
+    g_BattleActionType                    = BATTLE_ACTION_ATTACK;
 }

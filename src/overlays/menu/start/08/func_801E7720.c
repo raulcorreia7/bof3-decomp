@@ -5,8 +5,7 @@ MATCH void func_801E7720(s16 tile_x, s8 tile_kind) {
     s32   tpage;
 
     tpage = getTPage(1, 2, 704, 256);
-    GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(tpage);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     PSX_SET_SEMI_TRANSPARENT(tile);

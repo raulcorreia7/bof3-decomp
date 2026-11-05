@@ -165,30 +165,7 @@ INCLUDE_ASM(Menu_DrawCharacterWindow);
 
 #include "overlays/menu/Menu_DrawStatPanel.h"
 
-MATCH void func_801D3F0C(s16 x, s16 y, u8 record_index) {
-    const volatile void* objects[6];
-    Character*           record;
-    u16                  row_y;
-    u8                   row;
-
-    Menu_DrawFilledPanel(x, y, 9, 0xA);
-    record = &g_Characters[record_index];
-    UI_DrawText((s16)(x + 46), (s16)(y + 7), 0, 0xFF, (u8*)&D_801D9B64);
-    func_801644D8(0, (s32)(u16)(x + 7), (s32)(u16)(y + 5), 0x10, 0x10, 0x80);
-
-    objects[0] = &g_Weapons[record->weapon];
-    objects[1] = &g_Armors[record->shield];
-    objects[2] = &g_Armors[record->helmet];
-    objects[3] = &g_Armors[record->armor];
-    objects[4] = &g_Accessories[record->accessories[0]];
-    objects[5] = &g_Accessories[record->accessories[1]];
-
-    for (row = 0; row < 6; row++) {
-        row_y = (u16)(y + (row * 0xD + 0x1A));
-        func_801AEA80((s32)(u16)(x + 5), (s32)(u16)(row_y + 2), D_801D9B5C[row], 0);
-        UI_DrawText((s16)(x + 17), (s16)row_y, 0, func_801AF20C((u8*)objects[row]) & BYTE_MASK, (u8*)objects[row]);
-    }
-}
+#include "overlays/menu/Shop_DrawEquipment.h"
 
 INCLUDE_ASM(func_801D4158);
 
@@ -200,53 +177,7 @@ INCLUDE_ASM(func_801D4158);
 
 #include "overlays/menu/Menu_DrawTintedLine.h"
 
-MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
-    u8* cell;
-    s32 row_off;
-    u8  count;
-    u8  mode;
-    u8  palette;
-    u8  item_index;
-    s16 tx;
-    s16 stat_x;
-    s16 stat_y;
-    s32 count_y;
-
-    mode       = selection & BYTE_MASK;
-    palette    = (u8)((0u - (u32)(mode != 0)) & 7);
-    item_index = item & BYTE_MASK;
-    UI_DrawWindowOutline((s16)(x0 + 2), (s16)(y0 + 2), 0x86, 0x2A, 0xF1);
-    row_off = item_index * 0xA4;
-    cell    = (u8*)&g_Characters[0].max_hp + row_off;
-    sprintf((s8*)g_UiFormatBuffer, g_MenuStatFormat, FIELD(u16, cell, 0x4u));
-    stat_x = (s16)(x0 + 0x29);
-    stat_y = (s16)(y0 + 5);
-    UI_DrawGlyphString(stat_x, stat_y, (u32)palette, g_UiFormatBuffer);
-    sprintf((s8*)g_UiFormatBuffer, g_MenuStatFormat, FIELD(u16, cell, 0x6u));
-    UI_DrawGlyphString(stat_x, (s16)(y0 + 18), (u32)palette, g_UiFormatBuffer);
-    sprintf((s8*)g_UiFormatBuffer, g_MenuStatFormat, FIELD(u16, cell, 0xAu));
-    UI_DrawGlyphString((s16)(x0 + 111), stat_y, (u32)palette, g_UiFormatBuffer);
-    sprintf((s8*)g_UiFormatBuffer, g_MenuStatFormat, FIELD(u16, cell, 0x8u));
-    UI_DrawGlyphString((s16)(x0 + 111), (s16)(y0 + 18), (u32)palette, g_UiFormatBuffer);
-    UI_DrawText((s16)(x0 + 5), (s16)(y0 + 3), (s32)palette, 4U, (u8*)&D_801D9BA8);
-    UI_DrawText((s16)(x0 + 5), (s16)(y0 + 16), (s32)palette, 4U, &D_801D9BA8[6]);
-    UI_DrawText((s16)(x0 + 75), (s16)(y0 + 3), (s32)palette, 4U, &D_801D9BA8[0xC]);
-    UI_DrawText((s16)(x0 + 75), (s16)(y0 + 16), (s32)palette, 4U, &D_801D9BA8[0x12]);
-    UI_DrawWindowOutline((s16)(x0 + 0x33), (s16)(y0 + 0x2E), 0x56, 0x14, 0xF1);
-    Menu_DrawIcon((u16)(x0 + 0x36), (u16)(y0 + 0x30), 4U, mode);
-    sprintf((s8*)g_UiFormatBuffer, g_MenuZennyFormat, g_Characters[item_index].exp);
-    UI_DrawGlyphString((s16)(x0 + 78), (s16)(y0 + 48), (u32)palette, g_UiFormatBuffer);
-    Menu_DrawIcon((u16)(x0 + 0x36), (u16)(y0 + 0x39), 5U, mode);
-    count = g_Characters[item_index].level;
-    if (count < 0x63U) {
-        count_y = y0;
-        sprintf((s8*)g_UiFormatBuffer, g_MenuZennyFormat, Char_GetExpForLevel(item_index, (count + 1) & BYTE_MASK));
-    } else {
-        count_y = y0;
-        sprintf((s8*)g_UiFormatBuffer, (s8*)D_801D0C2C);
-    }
-    UI_DrawGlyphString((s16)(x0 + 78), (s16)(count_y + 57), (u32)palette, g_UiFormatBuffer);
-}
+#include "overlays/menu/Menu_DrawItemRow.h"
 
 #include "overlays/menu/Menu_DrawEquipment.h"
 
@@ -383,8 +314,7 @@ MATCH void func_801D91B0(u8 index, s32 left, s32 top, MenuListRow* row) {
         if (GetGraphType() != 1) {
             GetGraphType();
         }
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, NULL);
-        GFX_AddPrim(1, 0xC);
+        GFX_AddDrawMode(0xF);
         func_801D5620((u16)(left + 9), (u16)(top + 5), (u8)(index + 3), 0x1E, (u16)GetClut(16, 480), 128);
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
             icon = *(row->unk_00 + i + 5);

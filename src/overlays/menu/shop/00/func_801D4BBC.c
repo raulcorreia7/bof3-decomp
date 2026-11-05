@@ -9,7 +9,7 @@ MATCH void func_801D4BBC(void) {
     WinDrawCueText(28, 22, D_801E60EC + 0x85);
     func_801DDFB0(0x62, 0x4C, D_801E60F8, LOBU(g_SaveCardPort), 1);
     CardAccessFile(0, 0, 0, 0, 0);
-    if (g_SaveCardStatus == 0) {
+    if (g_SaveCardStatus == CARD_EVENT_OK) {
         func_801D6F00();
         if (g_SaveSlotCount != 0) {
             func_801D7208();
@@ -21,7 +21,7 @@ MATCH void func_801D4BBC(void) {
             return;
         }
         flag             = D_801E60FC;
-        g_SaveCardStatus = flag ? 5 : 4;
+        g_SaveCardStatus = flag ? 5 : CARD_EVENT_CAPACITY;
     }
     SND_PlayCue(EMI_CUE_ID(1, 7));
     D_80148652 = 0xC;

@@ -50,7 +50,7 @@ INCLUDE_ASM(func_801EF1AC);
 MATCH s32 func_801EF34C(void) {
     s32 result;
 
-    if (LOBU(g_BattleActionType) == 4) {
+    if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) {
         switch (LOHU(g_BattleActionId)) {
             case 0x5A:
             case 0xC0:

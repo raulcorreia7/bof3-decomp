@@ -10,12 +10,12 @@ MATCH void func_801D3E80(void) {
         SsUtKeyOffV(voice & BYTE_MASK);
     }
 
-    if (LOBU(g_BattleActionType) == 4u) {
+    if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) {
         entry_index = D_800B6510[LOHU(g_BattleActionId)];
         /* mode 4 shares the stream-entry test below */
         goto check_entry;
     }
-    if (LOBU(g_BattleActionType) == 5u) {
+    if (LOBU(g_BattleActionType) == BATTLE_ACTION_ITEM) {
         selection   = g_BattleAction->unk_02;
         entry_index = D_800B6AB0[selection >> 8][selection & BYTE_MASK];
     check_entry:

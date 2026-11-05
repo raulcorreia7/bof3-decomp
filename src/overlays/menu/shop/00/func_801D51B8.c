@@ -11,7 +11,7 @@ MATCH void func_801D51B8(void) {
     WinDrawCueText(28, 22, D_801E60EC + 0x85);
     SAVE_DrawSlots(0x20, 0x30, 0);
     CardAccessFile(0, 0, 0, 0, 0);
-    if (g_SaveCardStatus == 0) {
+    if (g_SaveCardStatus == CARD_EVENT_OK) {
         sprintf((char*)g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);
         if (((SaveProbe)CardAccessFile)(1, (s32)g_UiFormatBuffer, 1, 1, 0) != -1) {
             sprintf((char*)g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);

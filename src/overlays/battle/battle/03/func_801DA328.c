@@ -4,8 +4,7 @@ MATCH void func_801DA328(s16 x, s16 y, u8 u, u8 v, u8 clut_x) {
     SPRT* sprite;
     u16   clut;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 960, 0), 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(GetTPage(0, 0, 960, 0));
 
     clut = clut_x;
     clut &= 0x3F;

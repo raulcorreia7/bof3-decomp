@@ -41,19 +41,6 @@
 #define CARD_ICON_FRAME_COUNT  3
 #define CARD_FILE_HEADER_SIZE  0x200
 
-/* Card event result codes, in event order: the software events
- * (EvSpIOE, EvSpTIMOUT, EvSpNEW, EvSpERROR) and the hardware events that
- * follow them. A poll starts at CARD_EVENT_PENDING, and a directory that would
- * outgrow the card returns CARD_EVENT_CAPACITY. */
-typedef enum CardEvent {
-    CARD_EVENT_PENDING  = -1,
-    CARD_EVENT_OK       = 0,
-    CARD_EVENT_TIMEOUT  = 1,
-    CARD_EVENT_NEW      = 2,
-    CARD_EVENT_ERROR    = 3,
-    CARD_EVENT_CAPACITY = 4,
-} CardEvent;
-
 typedef enum TimFlags {
     TIM_FLAG_CLUT = 1 << 3,
 } TimFlags;

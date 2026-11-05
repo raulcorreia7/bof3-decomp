@@ -117,7 +117,7 @@ MATCH void func_801EF468(void) {
 MATCH void func_801EF518(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800A9820(g_BattleTargetSelector);
-        g_Task->flags |= 0x20;
+        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
         g_Task->unk_5D = 0;
         g_Task->unk_5E = 0;

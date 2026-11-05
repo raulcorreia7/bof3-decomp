@@ -64,7 +64,7 @@ MATCH void func_801EF6EC(void) {
         if ((u8)g_BattleActiveBattler >= 3U) {
             func_801E257C(g_BattleActiveBattler, 0);
         }
-        g_Task->flags |= 0x20;
+        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
         g_Task->unk_2B = 1;
         tone           = -0x40;

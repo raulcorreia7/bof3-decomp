@@ -9,7 +9,7 @@ MATCH void func_801A852C(void) {
     switch (*state) {
         case 0:
             Game_SetScriptActive();
-            Message_StartAreaMessage((Item_Count(0, ITEM_FAERIE_TIARA, 0) & HALF_MASK) ? 0x21 : 0x20);
+            Message_StartAreaMessage((Item_Count(ITEM_CAT_ITEM, ITEM_FAERIE_TIARA, 0) & HALF_MASK) ? 0x21 : 0x20);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             (&D_801448EB)[1] += 1;
             break;

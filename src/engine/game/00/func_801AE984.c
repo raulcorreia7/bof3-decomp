@@ -7,8 +7,7 @@ MATCH void func_801AE984(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 dimm
     if (GetGraphType() != 1) {
         GetGraphType();
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, 0);
-    GFX_AddPrim(1U, 0xCU);
+    GFX_AddDrawMode(0xF);
     sprite = (SPRT_8*)g_GfxPrimCursor;
     SetSprt8(sprite);
     if ((dimmed & BYTE_MASK) == 0) {

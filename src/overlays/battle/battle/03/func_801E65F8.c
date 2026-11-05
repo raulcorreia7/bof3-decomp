@@ -6,8 +6,7 @@ MATCH void func_801E65F8(void) {
     u8            count;
 
     g_AreaCameraOffsetZ += D_801EC2E0->unk_0C;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 960, 0), 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(GetTPage(0, 0, 960, 0));
     if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
         /* Replicates the slot's +0x10 cell into all three 5-bit color channels. */
         value = D_801EC2E0->unk_10;

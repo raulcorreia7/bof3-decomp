@@ -12,7 +12,7 @@ MATCH void func_800C1B48(void) {
         Area_FindSceneRecord(0x83);
         Actor_SelectScript(0U);
         func_801E54EC();
-        g_Task->flags &= 0xBF;
+        g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
         g_Task->mode = 6;
         g_Task->step = 4;
         g_Task->unk_03 += 1;

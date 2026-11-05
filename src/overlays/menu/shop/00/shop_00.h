@@ -175,7 +175,8 @@ extern char        D_801D0CF0[];
 extern char        D_801D0CF8[];
 extern char        D_801D0CFC[];
 extern char        g_MenuZennyFormat[];
-extern char        D_801D0D0C[];
+/* D_801D0D0C */
+extern char        g_MenuNextExpBlank[];
 extern char        g_MenuClockFormat[];
 extern char        D_801D0E44[];
 extern char        D_801D0E48[];
@@ -226,8 +227,10 @@ extern u8          D_801E5738[];
 extern u8          D_801E5814[];
 extern u8          D_801E581C[];
 extern u8          g_MenuLabelAgility[];
-extern u8          D_801E5834[];
-extern u8          D_801E583C[];
+/* D_801E5834 */
+extern u8          g_MenuEquipRowIcons[];
+/* D_801E583C */
+extern u8          g_MenuLabelEquip[];
 extern u8          D_801E5844[];
 extern u8          D_801E5848[];
 extern u8          g_MenuPortraitAtlas[];
@@ -389,7 +392,8 @@ void func_801D3560(u16* result_code);
 s32  Shop_ApplyPercent(s32 value, s32 percent);
 u32  Shop_GetSellPrice(s32 item_kind, s32 quantity, s32 discount_flag);
 void func_801D3710(void);
-void func_801D3828(u8 record, u8 row, u8 color);
+/* func_801D3828 */
+void Shop_Equip(u8 character_id, u8 slot, u8 item_id);
 void func_801D39BC(void);
 void func_801D39F8(void);
 void func_801D3AA8(void);

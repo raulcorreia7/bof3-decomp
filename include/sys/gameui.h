@@ -248,7 +248,7 @@ void             SND_FadeOutBgm(u8 selection_id, s32 cue_level, s32 cue_shape);
 /* func_80164A44 */
 void             Char_RebuildStats(Character* record);
 /* func_801666C8 */
-s32              Item_GetDescription(s32 group_index, s32 choice_entry);
+s32              Item_GetDescription(s32 category, s32 item_id);
 /* func_80196070 */
 void             Actor_Clear(void);
 /* func_80196F78 */

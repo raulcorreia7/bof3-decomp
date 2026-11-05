@@ -12,16 +12,16 @@ MATCH void func_801E5C68(void) {
     Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
     g_MenuStartReturnStep = 2;
     switch (g_SaveCardStatus) {
-        case 1:
+        case CARD_EVENT_TIMEOUT:
             D_801ED7FC = 0xC;
             break;
-        case 2:
+        case CARD_EVENT_NEW:
             D_801ED7FC = 0xD;
             break;
-        case 3:
+        case CARD_EVENT_ERROR:
             D_801ED7FC = 0xE;
             break;
-        case 4:
+        case CARD_EVENT_CAPACITY:
             D_801ED7FC = 0xF;
             break;
         case 5:

@@ -9,19 +9,19 @@ MATCH void func_801D543C(void) {
     resource    = 0;
     panel_timer = 0x12;
     switch (g_SaveCardStatus) {
-        case 1:
+        case CARD_EVENT_TIMEOUT:
             resource = 3;
             break;
-        case 2:
+        case CARD_EVENT_NEW:
             resource    = 4;
             D_801E607C  = 0;
             D_8014865B  = 0;
             panel_timer = 0xF;
             break;
-        case 3:
+        case CARD_EVENT_ERROR:
             resource = 5;
             break;
-        case 4:
+        case CARD_EVENT_CAPACITY:
             resource = 6;
             break;
         case 5:

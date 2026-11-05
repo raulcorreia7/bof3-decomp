@@ -9,7 +9,8 @@ MATCH void func_801E6FB0(void) {
 
     if ((g_BattleState & BATTLE_STATE_EFFECT_LOADING) &&
         ((D_801EB4E0->slot == g_BattleActiveBattler) ||
-         ((LOBU(g_BattleActionType) == 4) && ((LOHU(g_BattleActionId) == 0x97) || (LOHU(g_BattleActionId) == 0xE1))))) {
+         ((LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) &&
+          ((LOHU(g_BattleActionId) == 0x97) || (LOHU(g_BattleActionId) == 0xE1))))) {
         g_Task->mode += 1;
         return;
     }

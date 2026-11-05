@@ -123,7 +123,7 @@ MATCH void func_801F0178(void) {
     g_Task->unk_5E += 0x10;
     g_Task->unk_5F += 0x10;
     if ((s8)g_Task->unk_5D == 0) {
-        g_Task->flags &= 0xDF;
+        g_Task->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 0;
         g_Task->unk_09 = 8;
         g_Task->step += 1;
@@ -139,7 +139,7 @@ MATCH void func_801F042C(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
-        g_Task->flags |= 0x20;
+        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
         g_Task->unk_5D = 0;
         g_Task->unk_5E = 0;

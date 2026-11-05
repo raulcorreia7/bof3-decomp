@@ -174,9 +174,18 @@ extern volatile u8 g_BattleCommandCount;
 extern u8 g_BattleCommandCount;
 #endif
 /* D_80146324 */
-extern u8            g_BattleSurprise;
-extern Spoils        D_80146326;
-extern s32           D_80146330;
+extern u8     g_BattleSurprise;
+extern Spoils D_80146326;
+extern s32    D_80146330;
+
+/* The kind of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
+enum {
+    BATTLE_ACTION_NONE    = 0,
+    BATTLE_ACTION_ATTACK  = 1, /* a plain attack: Battle_ApplyDamage */
+    BATTLE_ACTION_ABILITY = 4, /* g_BattleActionId indexes the ability table D_801CA71C */
+    BATTLE_ACTION_ITEM    = 5, /* g_BattleActionId is category << 8 | item id */
+};
+
 /* D_80146375 */
 extern volatile u8   g_BattleActionType;
 extern u16           D_80146386;

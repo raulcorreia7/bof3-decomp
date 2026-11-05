@@ -26,7 +26,7 @@ MATCH void func_801EF234(void) {
 MATCH void func_801EF2A8(void) {
     if (g_Task->unk_0B == 0xFF) {
         func_800AFC54();
-        BATTLE_ACTIVE_WORK->flags &= 0xBF;
+        BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
         g_Task->mode += 1;
     }
@@ -82,7 +82,7 @@ MATCH void func_801EF678(void) {
     if (!(temp_v0 & 0xFF)) {
         s8 tone;
 
-        g_Task->flags |= 0x20;
+        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
         tone           = -0x40;
         g_Task->unk_5D = tone;
@@ -141,7 +141,7 @@ MATCH void func_801EF928(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_Task->flags |= 0x20;
+        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C       = 1;
         g_Task->unk_5D       = (u8) - ((g_Task->unk_0B + 1) * 0x14);
         g_Task->unk_5E       = (u8) - ((g_Task->unk_0B + 1) * 0x14);

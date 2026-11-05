@@ -268,10 +268,24 @@ extern u8             D_80183A18;
 /* D_8018B300 */
 extern u8             g_SysHardwareInitialized;
 extern s32            D_8018E140[];
+
+/* Card event result codes, in event order: the software events
+ * (EvSpIOE, EvSpTIMOUT, EvSpNEW, EvSpERROR) and the hardware events that
+ * follow them. A poll starts at CARD_EVENT_PENDING, and a directory that would
+ * outgrow the card returns CARD_EVENT_CAPACITY. */
+typedef enum CardEvent {
+    CARD_EVENT_PENDING  = -1,
+    CARD_EVENT_OK       = 0,
+    CARD_EVENT_TIMEOUT  = 1,
+    CARD_EVENT_NEW      = 2,
+    CARD_EVENT_ERROR    = 3,
+    CARD_EVENT_CAPACITY = 4,
+} CardEvent;
+
 /* D_8018E228 */
-extern s32            g_SaveCardStatus; /* CardEvent */
+extern s32 g_SaveCardStatus; /* CardEvent */
 /* D_8018E260 */
-extern s32            g_SaveCardPort;
+extern s32 g_SaveCardPort;
 
 /* func_8017E3D4 */
 int rand(void); /* LIBC.LIB; no staged header declares it */

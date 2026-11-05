@@ -1070,8 +1070,7 @@ static inline void BattleDrawPanelFrame(s32 x, s32 y, s32 kind, s32 glyph0, s32 
     u8  g;
     u8  b;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 960, 0), 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(GetTPage(0, 0, 960, 0));
     /* FAKE: retail reads D_80144952 as s8. */
     color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + (((*(s8*)&D_80144952) << 6) | 0x20));
     r     = PSX_COLOR_R(color) << 3;

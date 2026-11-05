@@ -3,7 +3,7 @@
 MATCH void func_801E414C(void) {
     u16*          half;
     u16*          half2;
-    u8            kind;
+    u8            action_type;
     u32           flags;
     EnemyBattler* enemy;
 
@@ -19,14 +19,15 @@ MATCH void func_801E414C(void) {
         if ((*half2 & BATTLE_STATE_REPRISAL_PENDING) != 0) {
             *half2 = (*half2 & ~BATTLE_STATE_REPRISAL_PENDING) | BATTLE_STATE_REPRISAL_DONE;
         } else if ((g_BattleTargetSelector & BATTLE_TARGET_BOTH_SIDES) == 0) {
-            kind = *(u8*)&g_BattleActionType;
-            if (kind == 1) {
+            action_type = *(u8*)&g_BattleActionType;
+            if (action_type == BATTLE_ACTION_ATTACK) {
                 if ((func_801E4368() & BYTE_MASK) != 0) {
                     *half2 |= BATTLE_STATE_REPRISAL_PENDING;
                 }
             }
-            kind = *(u8*)&g_BattleActionType;
-            if ((kind == 4) && ((FIELD(u16, &D_801CA71C, g_BattleActionId * 0x14) & 0x800) != 0) &&
+            action_type = *(u8*)&g_BattleActionType;
+            if ((action_type == BATTLE_ACTION_ABILITY) &&
+                ((FIELD(u16, &D_801CA71C, g_BattleActionId * 0x14) & 0x800) != 0) &&
                 ((func_801E4368() & BYTE_MASK) != 0) &&
                 ((FIELD(u8, &D_801CA718, g_BattleActionId * 0x14) & 0x10) == 0)) {
                 g_BattleState |= BATTLE_STATE_REPRISAL_PENDING;

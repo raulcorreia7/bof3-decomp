@@ -56,7 +56,7 @@ NON_MATCHING void func_801D6AC4(s32 party_slot) {
         val9        = D_801C90EE[tmp3];
         val7        = D_801C90EC[tmp3];
         frame.value = (s32)val4;
-        if ((((s32)(Item_GetEquipability(1U, val6) & BYTE_MASK) >> val4) & 1) &&
+        if ((((s32)(Item_GetEquipability(ITEM_CAT_WEAPON, val6) & BYTE_MASK) >> val4) & 1) &&
             ((tmp7 = val10 & BYTE_MASK, (D_801ED63C == 0)) || (tmp11 = val7 & BYTE_MASK, ((tmp11 < tmp7) != 0)) ||
              ((tmp4 = val5 & HALF_MASK, (tmp7 == tmp11)) &&
               ((tmp8 = val9 & HALF_MASK, ((tmp4 < tmp8) != 0)) || ((tmp4 == tmp8) && (val6 < (u8)D_801ED63C)))))) {
@@ -85,7 +85,7 @@ NON_MATCHING void func_801D6AC4(s32 party_slot) {
         val7  = armor->weight;
         if ((armor->equip_type - 2) == (val2 - 1)) {
             frame.value = (s32)val4;
-            if ((((s32)(Item_GetEquipability(2U, val6) & BYTE_MASK) >> val4) & 1) &&
+            if ((((s32)(Item_GetEquipability(ITEM_CAT_ARMOR, val6) & BYTE_MASK) >> val4) & 1) &&
                 ((tmp5 = val10 & BYTE_MASK, ((&D_801ED63C)[val2] == 0)) ||
                  (tmp9 = val7 & BYTE_MASK, ((tmp9 < tmp5) != 0)) ||
                  ((tmp6 = val5 & HALF_MASK, (tmp5 == tmp9)) && ((tmp10 = val9 & HALF_MASK, ((tmp6 < tmp10) != 0)) ||

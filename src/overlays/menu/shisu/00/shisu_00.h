@@ -14,7 +14,8 @@ extern u8            D_80148656;
 extern OverlayHeader D_801D0C00;
 extern char          g_MenuStatFormat[];
 extern char          g_MenuZennyFormat[];
-extern u8            D_801D0C2C[];
+/* D_801D0C2C */
+extern char          g_MenuNextExpBlank[];
 extern char          g_MenuClockFormat[];
 extern char          D_801D0D64[];
 extern char          D_801D0D68[];
@@ -43,8 +44,10 @@ extern u8            D_801D9990[];
 extern u8            D_801D999C[];
 extern u8            D_801D9A60[];
 extern u8            g_MenuLabelAgility[];
-extern u8            D_801D9B5C[];
-extern u8            D_801D9B64[];
+/* D_801D9B5C */
+extern u8            g_MenuEquipRowIcons[];
+/* D_801D9B64 */
+extern u8            g_MenuLabelEquip[];
 extern u8            g_MenuPortraitAtlas[];
 extern u8            D_801D9BA8[];
 extern u8            MENU_CAPTION_ICON[];

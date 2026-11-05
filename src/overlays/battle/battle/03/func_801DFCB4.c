@@ -1,11 +1,11 @@
 #include "battle_03.h"
 
 /* FAKE: a second symbol forces the separate %hi/%lo load retail has. */
-/* FAKE: non-volatile alias of g_BattleActionType for the closing mode test;
+/* FAKE: non-volatile alias of g_BattleActionType for the closing action-type test;
  * LOBU keeps the byte's address live in s0 across the calls (82.97%). */
 
 /* resolves the active party record's step: clears its 0x118 result cells,
- * stages its stat block at D_801EC2E8, runs the step for the current kind,
+ * stages its stat block at D_801EC2E8, runs the step for the current action type,
  * applies the 0x11C and 0x11E cells, marks a knockout at zero hp, then
  * advances the step.
  */
@@ -17,7 +17,7 @@ MATCH void func_801DFCB4(void) {
     PartyBattler* tail_work;
     PartyBattler* check_work;
     u8            slot;
-    u8            mode;
+    u8            action_type;
     s16*          pending;
     u16*          flags;
 
@@ -42,11 +42,11 @@ MATCH void func_801DFCB4(void) {
         D_801EC303 = (D_801EC303 + 25 >= 100) ? 100 : D_801EC303 + 25;
     }
     switch (LOBU(g_BattleActionType)) {
-        case 1:
+        case BATTLE_ACTION_ATTACK:
             g_BattleTargetRecord[2] = Battle_ApplyDamage(g_BattleActiveBattler, g_BattleTarget);
             break;
-        case 4:
-        case 5:
+        case BATTLE_ACTION_ABILITY:
+        case BATTLE_ACTION_ITEM:
             func_8009D198();
             break;
     }
@@ -57,17 +57,17 @@ MATCH void func_801DFCB4(void) {
     }
     if (!(g_GameState->flags_124.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
         switch (LOBU(g_BattleActionType)) {
-            case 5:
+            case BATTLE_ACTION_ITEM:
                 if (!(Item_GetFlags(LOHU(g_BattleActionId) >> 8, LOHU(g_BattleActionId) & BYTE_MASK) & 4)) {
                     func_801DF34C();
                 }
                 break;
-            case 4:
+            case BATTLE_ACTION_ABILITY:
                 if (!(D_801CA718[LOHU(g_BattleActionId)][0] & 4)) {
                     func_801DF34C();
                 }
                 break;
-            case 1:
+            case BATTLE_ACTION_ATTACK:
                 func_801DF34C();
                 break;
         }
@@ -104,12 +104,12 @@ MATCH void func_801DFCB4(void) {
         SND_QueueSelectionFx(0x206);
     }
     if (!(g_BattleState & BATTLE_STATE_DAMAGE_APPLIED)) {
-        mode = g_BattleActionType_nv;
-        if (mode == 1) {
+        action_type = g_BattleActionType_nv;
+        if (action_type == BATTLE_ACTION_ATTACK) {
             func_800AB834();
             func_800AB910();
         }
-        if (g_BattleActionType_nv == 4 && (D_801CA71C[LOHU(g_BattleActionId)].mask & 0x800)) {
+        if (g_BattleActionType_nv == BATTLE_ACTION_ABILITY && (D_801CA71C[LOHU(g_BattleActionId)].mask & 0x800)) {
             func_800AB834();
             func_800AB910();
         }

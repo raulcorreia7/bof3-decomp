@@ -27,8 +27,7 @@ MATCH void func_801E30FC(u16 row_x, u16 row_y, s32 row_flags) {
         if (GetGraphType() != 1) {
             GetGraphType();
         }
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, NULL);
-        GFX_AddPrim(1, 0xC);
+        GFX_AddDrawMode(0xF);
         y = (y + 3) & HALF_MASK;
         func_801DD618(row_x + 1, y, 6, 2, GetClut(0, 480) & HALF_MASK, 128);
         func_801DD618(row_x + 9, y, 7, 2, GetClut(0, 480) & HALF_MASK, 128);

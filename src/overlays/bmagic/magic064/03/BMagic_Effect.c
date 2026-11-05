@@ -64,7 +64,7 @@ MATCH void func_801EF20C(void) {
         return;
     }
     func_80196718(D_801EB4E0);
-    D_801EB4E0->flags |= 0x40;
+    D_801EB4E0->flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
     g_Task->unk_09 = 0;
     g_Task->step += 1;
 }

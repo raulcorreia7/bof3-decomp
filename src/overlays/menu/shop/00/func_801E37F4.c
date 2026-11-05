@@ -40,8 +40,7 @@ MATCH void func_801E37F4(MenuPanelTask* task) {
     UI_DrawGlyphString(task->x + 105, task->y + 18, 0, buffer);
     sprintf(buffer, D_801D0E98, task->unk_0C);
     UI_DrawGlyphString(task->x + 14, task->y + 18, 0, buffer);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 896, 256) & HALF_MASK, NULL);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & HALF_MASK);
     for (i = 0; i < SHOP_DESC_BORDER_COLUMNS; i++) {
         offset = (i + 1) * SHOP_DESC_BORDER_STRIDE;
         UI_DrawSprite(task->x + offset, task->y, 0x29, 0);

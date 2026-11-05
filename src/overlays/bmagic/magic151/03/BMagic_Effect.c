@@ -46,7 +46,7 @@ MATCH void func_801EF2A0(void) {
     saved_work = g_Task;
     battler    = &g_BattlePartyBattlers[g_BattleActiveBattler];
     g_Task     = battler;
-    battler->flags &= 0xBF;
+    battler->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
     g_Task = saved_work;
     saved_work->mode += 1;
     g_Task->step   = 0;

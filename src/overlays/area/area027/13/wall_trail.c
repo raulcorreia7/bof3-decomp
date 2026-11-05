@@ -351,8 +351,7 @@ MATCH void func_801F2F0C(const void* arg0) {
     u32       idx;
 
     work = (const u8*)arg0;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 896, 256), 0);
-    GFX_AddPrim(1u, 0x0Cu);
+    GFX_AddDrawMode(GetTPage(0, 1, 896, 256));
     i = 0u;
     do {
         primitive = (LINE_G2*)g_GfxPrimCursor;

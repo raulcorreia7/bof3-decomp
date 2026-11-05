@@ -51,7 +51,7 @@ INCLUDE_ASM(func_801EF6B0);
 MATCH void func_801EF93C(void) {
     if (g_Task->unk_0B == 0) {
         func_800AFC54();
-        BATTLE_ACTIVE_WORK->flags &= 0xBF;
+        BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
         g_Task->mode += 1;
     }

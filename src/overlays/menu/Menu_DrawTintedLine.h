@@ -23,8 +23,7 @@ MATCH void Menu_DrawTintedLine(s16 line_x0, s16 line_y0, s16 line_x1, s16 line_y
     y0     = line_y0;
     x1     = line_x1;
     y1     = line_y1;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, tpage, 960, 0), 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(GetTPage(0, tpage, 960, 0));
     primitive = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(primitive);
     SetSemiTrans(primitive, 1);

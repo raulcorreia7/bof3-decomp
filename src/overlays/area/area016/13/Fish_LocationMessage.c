@@ -57,7 +57,7 @@ MATCH void Fish_LocationMessage(void) {
                         if ((id & BYTE_MASK) == 0x16) {
                             src = D_801F50F4;
                         } else {
-                            src = Item_GetRecord(0, (id + 0x38) & BYTE_MASK);
+                            src = Item_GetRecord(ITEM_CAT_ITEM, (id + 0x38) & BYTE_MASK);
                         }
                         for (i = 0; i < 12; i++) {
                             dst[i] = src[i];

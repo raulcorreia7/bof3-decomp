@@ -162,7 +162,7 @@ segments:
       - [0xAA7C, c, func_801DB67C]
       - [0xAB64, c, Menu_DrawCharacterWindow]
       - [0xAFCC, c, Menu_DrawStatPanel]
-      - [0xB304, c, func_801DBF04]
+      - [0xB304, c, Shop_DrawEquipment]
       - [0xB550, c, func_801DC150]
       - [0xB724, c, Menu_DrawCursorFrame]
       - [0xB8B8, c, Menu_DrawPortrait]

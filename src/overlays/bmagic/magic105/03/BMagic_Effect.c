@@ -134,7 +134,7 @@ MATCH void func_801EF930(void) {
     g_Task->unk_26               = 0;
     g_Task->unk_27               = 0xA0;
     g_Task->unk_28               = 0;
-    g_Task->flags |= 0x20;
+    g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     tint                = -0x40;
     g_Task->unk_5D      = tint;
     g_Task->unk_5E      = tint;
