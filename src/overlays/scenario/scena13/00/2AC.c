@@ -110,7 +110,20 @@ MATCH void func_801F7444(void) {
 
 INCLUDE_ASM(func_801F7484);
 
-INCLUDE_ASM(func_801F7568);
+MATCH void func_801F7568(void) {
+    Actor* work;
+    Actor* actor;
+
+    work          = g_SpadWork;
+    actor         = &g_Actors[work->unk_06];
+    g_SpadWork    = actor;
+    actor->unk_29 = 2;
+    func_8014D290();
+    g_SpadWork = (Actor*)g_BattlePartyBattlers;
+    D_80145EB9 = 2;
+    func_8014D290();
+    g_SpadWork = work;
+}
 
 MATCH void func_801F75F8(void) {
     SYS_DISPATCH_TASK(D_801FBF10, 1, g_SpadWork);
@@ -178,7 +191,13 @@ INCLUDE_ASM(func_801F7958);
 
 INCLUDE_ASM(func_801F7A1C);
 
-INCLUDE_ASM(func_801F7C24);
+MATCH void func_801F7C24(void) {
+    g_Actors[g_SpadWork->unk_03].flags_00 = 0;
+    g_Actors[g_SpadWork->unk_04].flags_00 = 0;
+    func_80196718(&g_Actors[g_SpadWork->unk_03]);
+    func_80196718(&g_Actors[g_SpadWork->unk_04]);
+    func_80196070();
+}
 
 MATCH void func_801F7D14(void) {
     SYS_DISPATCH_BYTE(D_801FBF48, D_80146872);
