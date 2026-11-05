@@ -8,7 +8,7 @@ MATCH void func_801E414C(void) {
     EnemyBattler* enemy;
 
     func_8014DAEC();
-    if ((g_BattleCurrentEnemy->status_82 & STATUS_KO) != 0) {
+    if ((g_BattleCurrentEnemy->status & STATUS_KO) != 0) {
         GFX_FreePaletteFadeTarget((void*)g_Task);
         half = &g_BattleState;
         *half &= ~BATTLE_STATE_REPRISAL_PENDING;
@@ -35,8 +35,8 @@ MATCH void func_801E414C(void) {
         }
         Battle_ClearSlotPending(FIELD(u8, g_Task, 0x05));
         enemy                   = g_BattleCurrentEnemy;
-        flags                   = enemy->flags_100 & ~0x70;
-        enemy->flags_100        = flags & ~0x200;
+        flags                   = enemy->damage_flags & ~0x70;
+        enemy->damage_flags     = flags & ~0x200;
         FIELD(s8, g_Task, 0x01) = 2;
         FIELD(s8, g_Task, 0x02) = 0;
     }

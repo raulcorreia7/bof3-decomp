@@ -28,7 +28,7 @@ MATCH void func_801DD978(void) {
         if (Battle_SlotIsBlocked(slot & BYTE_MASK) == 0u) {
             first = ENEMY_COMBATANT((slot & BYTE_MASK)).power;
             if (max == first) {
-                base = ENEMY_COMBATANT((slot & BYTE_MASK)).hp_94;
+                base = ENEMY_COMBATANT((slot & BYTE_MASK)).hp;
                 if (base <= min) {
                     min    = base;
                     result = slot;

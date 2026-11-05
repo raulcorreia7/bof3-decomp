@@ -8,7 +8,7 @@ MATCH void Area_BuildClut(u16* dst) {
     s32 base;
     u32 sel;
 
-    base = ((g_Task->flags_24 & 4) != 0) ? 0x1F0 : 0x1E0;
+    base = ((g_Task->active_flags & 4) != 0) ? 0x1F0 : 0x1E0;
     switch (g_Task->unk_28) {
         case 0:
             sel  = g_Task->unk_27;

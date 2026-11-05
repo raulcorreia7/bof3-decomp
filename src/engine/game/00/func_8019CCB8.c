@@ -33,13 +33,13 @@ MATCH void func_8019CCB8(void) {
                 copy_index = 0;
                 if (copy_count > 0) {
                     do {
-                        *copy_dst = *g_Task->source_50;
+                        *copy_dst = *g_Task->script;
                         copy_index += 1;
-                        g_Task->source_50 = (u8*)g_Task->source_50 + 1;
+                        g_Task->script = (u8*)g_Task->script + 1;
                         copy_dst += 1;
                     } while (copy_index < copy_count);
                 }
-                g_Task->source_50 = (u8*)BATTLE_SCRIPT_BANK; /* the same buffer */
+                g_Task->script = (u8*)BATTLE_SCRIPT_BANK; /* the same buffer */
                 func_8019D648();
                 func_8019D9C0();
                 SND_PlayCue(EMI_CUE_ID(1, 14));

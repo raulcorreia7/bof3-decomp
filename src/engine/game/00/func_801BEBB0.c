@@ -31,13 +31,13 @@ MATCH void func_801BEBB0(void) {
             if (g_Characters[g_CharSlot[D_80144F5A[slot]]].surprise_chance >= random) {
                 id = Actor_FindFreeSlot((s16)random) /* (s16): no re-mask of the roll; 99.26% with a plain u8 */;
                 if (id != GAME_NONE) {
-                    g_ActorSlots[id].flags        = one;
-                    g_ActorSlots[id].type         = 6;
-                    g_ActorSlots[id].unk_06       = one;
-                    g_ActorSlots[id].unk_2E       = *(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_2E) + offset);
-                    g_ActorSlots[id].unk_30       = *(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_2E) + offset + 2);
-                    g_ActorSlots[id].step_0C      = s_BattleStartOffsets[row[0]][0];
-                    g_ActorSlots[id].selection_10 = s_BattleStartOffsets[row[0]][1];
+                    g_ActorSlots[id].flags      = one;
+                    g_ActorSlots[id].type       = 6;
+                    g_ActorSlots[id].unk_06     = one;
+                    g_ActorSlots[id].unk_2E     = *(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_2E) + offset);
+                    g_ActorSlots[id].unk_30     = *(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_2E) + offset + 2);
+                    g_ActorSlots[id].scene_step = s_BattleStartOffsets[row[0]][0];
+                    g_ActorSlots[id].selection  = s_BattleStartOffsets[row[0]][1];
                     /* FAKE: keeps the selection store ahead of the work-row id store (retail order). */
                     MATCH_FAKE_BARRIER();
                     D_80145E9B = id;

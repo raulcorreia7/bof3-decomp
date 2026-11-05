@@ -7,7 +7,7 @@ MATCH void func_800C1CFC(void) {
     func_801E54EC();
     GFX_FreePaletteSlotOwner((s32)g_Task);
     work = g_BattleCurrentEnemy;
-    work->flags_100 |= COMBATANT_FLAG_SKIP_ACTION_STEP;
+    work->damage_flags |= COMBATANT_FLAG_SKIP_ACTION_STEP;
     TASK_BYTES[0] &= ~ACTOR_FLAG_HIDDEN;
     ACTOR_SET_STEP(2);
     TASK_BYTES[2] = 0;

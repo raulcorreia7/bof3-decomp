@@ -24,7 +24,7 @@ MATCH void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event) {
             TASK_SET(work);
             func_800A36F0(work->slot, 0xFFFF);
             func_800A31E0(((EnemyBattler*)(void*)g_Task)->slot,
-                          *(u8*)&((EnemyBattler*)(void*)work)->status_82 | event->selector);
+                          *(u8*)&((EnemyBattler*)(void*)work)->status | event->selector);
             TASK_SET(saved);
             break;
         case 3:
@@ -47,10 +47,10 @@ MATCH void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event) {
             break;
         case 5:
             if (event->selector & 2) {
-                work->drops_98[0].rate_02 = event->value;
+                work->drops[0].rate_02 = event->value;
             }
             if (event->selector & 1) {
-                work->drops_98[1].rate_02 = event->value;
+                work->drops[1].rate_02 = event->value;
             }
             break;
         case 6:
@@ -74,7 +74,7 @@ MATCH void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event) {
         work->techniques[i] = event->unk_08[i];
     }
     func_800A9BD8(work->slot);
-    if (work->hp_94 != 0 && event->panel_id != 0 && D_801EB5A8 < 8) {
+    if (work->hp != 0 && event->panel_id != 0 && D_801EB5A8 < 8) {
         D_801ED9B0[D_801EB5A8].owner_index = work->slot - 3;
         D_801ED9B0[D_801EB5A8].panel_id    = event->panel_id;
         D_801EB5A8++;

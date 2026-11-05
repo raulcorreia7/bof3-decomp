@@ -19,7 +19,7 @@ MATCH void func_800A14B4(void) {
     p    = &g_BattleActiveBattler;
     slot = LOBU(p[0]);
     if (BATTLER_IS_PLAYER(slot)) {
-        g_BattlePartyBattlers[slot].flags_128.volatile_value |= COMBATANT_FLAG_POWER_BOOST;
+        g_BattlePartyBattlers[slot].action_flags.volatile_value |= COMBATANT_FLAG_POWER_BOOST;
         index = *p * BATTLE_PARTY_STRIDE;
         count = (&D_80145FC8)[index];
         if (count < 2u) {
@@ -27,7 +27,7 @@ MATCH void func_800A14B4(void) {
             (&D_80145FC8)[index] = next;
         }
     } else {
-        ENEMY_COMBATANT(slot).flags_104 |= COMBATANT_FLAG_POWER_BOOST;
+        ENEMY_COMBATANT(slot).action_flags |= COMBATANT_FLAG_POWER_BOOST;
         index = (*p - 3u) * 0x118;
         count = D_801EB744[index];
         if (count < 2u) {

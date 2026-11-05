@@ -451,7 +451,7 @@ MATCH void func_801F3A78(void) {
     g_ActorSlots[(u32)item[0x0B]].x.fixed      = ((Actor*)item)->x.fixed;
     g_ActorSlots[(u32)item[0x0B]].y.fixed      = ((Actor*)item)->y.fixed + 0x4000;
     g_ActorSlots[(u32)item[0x0B]].z.fixed      = ((Actor*)item)->z.fixed + 0x01000000;
-    g_ActorSlots[(u32)item[0x0B]].layer_09     = 0x78;
+    g_ActorSlots[(u32)item[0x0B]].layer        = 0x78;
 }
 
 MATCH void func_801F3C18(void) {
@@ -468,7 +468,7 @@ MATCH void func_801F3C18(void) {
         slots                                      = SP_PTR(u8*, 0u);
         g_ActorSlots[(u32)slots[0x11][0x0B]].type  = 0x4F;
         slots                                      = SP_PTR(u8*, 0u);
-        g_ActorSlots[(u32)slots[0x11][0x0B]].link_0B =
+        g_ActorSlots[(u32)slots[0x11][0x0B]].link =
             (s8)((s32)(-(((s32)g_CurrentActor - (s32)g_Actors) * 0xD79435E5)) >> 3);
     }
 }
@@ -516,5 +516,5 @@ MATCH void func_801F3DCC(void) {
     g_ActorSlots[(u32)item[0x0B]].x.fixed      = ((Actor*)item)->x.fixed;
     g_ActorSlots[(u32)item[0x0B]].y.fixed      = ((Actor*)item)->y.fixed + 0x8000;
     g_ActorSlots[(u32)item[0x0B]].z.fixed      = ((Actor*)item)->z.fixed + 0x01000000;
-    g_ActorSlots[(u32)item[0x0B]].layer_09     = 0x3C;
+    g_ActorSlots[(u32)item[0x0B]].layer        = 0x3C;
 }

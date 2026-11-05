@@ -34,7 +34,7 @@ MATCH void func_801D3304(void) {
         flag = BATTLE_ACTIVE_PARTY.stats.status;
     } else {
         row  = ENEMY_COMBATANT(g_BattleActiveBattler).ap;
-        flag = ENEMY_COMBATANT(g_BattleActiveBattler).status_82;
+        flag = ENEMY_COMBATANT(g_BattleActiveBattler).status;
     }
     if ((flag & STATUS_SILENCED) != 0 && (D_801CA71C[*(u16*)&g_BattleActionId].mask & 0x400)) {
         func_801D9484();

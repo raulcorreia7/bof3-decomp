@@ -8,9 +8,9 @@ MATCH void func_801D6044(void) {
     FishingState* tail;
 
     Area_FindSceneRecord(0x47);
-    FISHING_STATE->flags_24 = 0x80;
-    FISHING_STATE->state_29 = 1;
-    FISHING_STATE->state_2A = 0;
+    FISHING_STATE->active_flags = 0x80;
+    FISHING_STATE->state_29     = 1;
+    FISHING_STATE->state_2A     = 0;
 
     record              = FISHING_STATE;
     record->counter_48  = 0;

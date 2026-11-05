@@ -76,19 +76,19 @@ NON_MATCHING void func_801D1228(void) {
             } else {
                 flags = (s16)(*(u16*)(D_80145F10 + row_offset) & 0xDFFF);
             }
-            *(u16*)(D_80145F10 + row_offset)                      = flags;
-            count                                                 = 0;
-            index                                                 = slot & BYTE_MASK;
-            src                                                   = work_row + 0x90 + index * BATTLE_PARTY_STRIDE;
-            g_BattlePartyBattlers[index].flags_124.value          = 0;
-            g_BattlePartyBattlers[index].flags_128.volatile_value = 0;
-            *(u8*)(&D_80145FA9 + index * 0x140)                   = 0;
-            *(u8*)(&D_80145FB1 + index * 0x140)                   = 0;
-            *(u8*)(&D_80145FC6 + index * 0x140)                   = 0;
-            *(u8*)(&D_80145FC7 + index * 0x140)                   = 0;
-            *(u8*)(&D_80145FC8 + index * 0x140)                   = 0;
-            *(u8*)(&D_80145FC9 + index * 0x140)                   = 0;
-            count                                                 = 0;
+            *(u16*)(D_80145F10 + row_offset)                         = flags;
+            count                                                    = 0;
+            index                                                    = slot & BYTE_MASK;
+            src                                                      = work_row + 0x90 + index * BATTLE_PARTY_STRIDE;
+            g_BattlePartyBattlers[index].damage_flags.value          = 0;
+            g_BattlePartyBattlers[index].action_flags.volatile_value = 0;
+            *(u8*)(&D_80145FA9 + index * 0x140)                      = 0;
+            *(u8*)(&D_80145FB1 + index * 0x140)                      = 0;
+            *(u8*)(&D_80145FC6 + index * 0x140)                      = 0;
+            *(u8*)(&D_80145FC7 + index * 0x140)                      = 0;
+            *(u8*)(&D_80145FC8 + index * 0x140)                      = 0;
+            *(u8*)(&D_80145FC9 + index * 0x140)                      = 0;
+            count                                                    = 0;
             do {
                 *(work_row + 0x12C + index * 0x140 + count) = 0;
                 count += 1;

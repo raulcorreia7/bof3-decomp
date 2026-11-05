@@ -34,7 +34,7 @@ MATCH void func_801E6FB0(void) {
         flags = g_BattlePartyBattlers[slot].stats.status;
     } else {
         row   = slot - 3;
-        flags = D_801EB630[row].status_82;
+        flags = D_801EB630[row].status;
     }
     if ((flags & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING)) == 0) {
         g_Task->mode = 0;

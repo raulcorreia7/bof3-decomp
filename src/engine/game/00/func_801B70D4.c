@@ -5,7 +5,7 @@ MATCH void func_801B70D4(void) {
     s32    delta[3];
 
     if (g_Task->unk_09 == 0) {
-        g_Task->flags_24 |= 0x20;
+        g_Task->active_flags |= 0x20;
         work          = g_Task;
         work->x.fixed = D_80147A58[work->unk_18].x.fixed;
         work->y.fixed = D_80147A58[work->unk_18].y.fixed;

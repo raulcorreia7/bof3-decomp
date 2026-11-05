@@ -10,7 +10,7 @@ MATCH void func_8015AC8C(u8* panel) {
     u8     index;
 
     g_Task->flags        = ACTOR_FLAG_IN_USE;
-    g_Task->flags_24     = ACTOR_FLAG_ACTIVE;
+    g_Task->active_flags = ACTOR_FLAG_ACTIVE;
     g_Task->unk_48       = 1;
     work                 = g_Task;
     work->unk_40         = ONE;
@@ -20,6 +20,6 @@ MATCH void func_8015AC8C(u8* panel) {
     work->range_54.table = panel;
     work->unk_68         = 0;
     work->unk_64         = 0;
-    work->source_50      = (u8*)value;
+    work->script         = (u8*)value;
     work->unk_6C         = D_801C8424[index];
 }

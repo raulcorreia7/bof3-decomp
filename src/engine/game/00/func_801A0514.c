@@ -17,7 +17,7 @@ MATCH void func_801A0514(void) {
 
         if (ACTOR_IN_USE(*entity)) {
             if (entity->unk_06 != 9) {
-                if (entity->flags_24 & 0x10) {
+                if (entity->active_flags & 0x10) {
                     entity->unk_29 = 4;
                 } else {
                     entity->unk_29 = g_AreaDrawMode;

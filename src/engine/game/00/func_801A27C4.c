@@ -29,10 +29,10 @@ MATCH void func_801A27C4(Actor* entity) {
                 entity->timer_75 = 0;
                 g_Task->mode     = g_Task->unk_03;
             }
-            func_801ABBA8(&entity->flags_74, g_Task->direction_08);
+            func_801ABBA8(&entity->interaction_flags, g_Task->direction_08);
             g_Task->direction_08 |= 8;
             if (!(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
-                entity->flags_74 |= ACTOR_FLAG_MOVING;
+                entity->interaction_flags |= ACTOR_FLAG_MOVING;
             }
         } else {
             g_Task->direction_08 = saved & 7;

@@ -12,7 +12,7 @@ MATCH void func_801F360C(void) {
             actor_slot->type  = 0x6C;
         }
         SND_PlayCue(0x209U);
-        g_CurrentActor->flags_74 &= ~ACTOR_FLAG_INTERACTION_PENDING;
+        g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
         func_801A4BC0(0xB, 0x55, 0xC0);
         func_801A4BC0(0xC, 0x55, 0xC0);
         D_80146874    = 4;
@@ -20,5 +20,5 @@ MATCH void func_801F360C(void) {
         D_80146875    = 0x1E;
         return;
     }
-    g_CurrentActor->flags_74 &= ~ACTOR_FLAG_INTERACTION_PENDING;
+    g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
 }

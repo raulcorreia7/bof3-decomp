@@ -10,7 +10,7 @@ MATCH u8 func_801E2CA4(void) {
     best   = 0xFFFFu;
     for (slot = 3u; slot < 11u; slot++) {
         if (Battle_SlotIsBlocked(slot) == 0u) {
-            value = ENEMY_COMBATANT(slot).hp_94;
+            value = ENEMY_COMBATANT(slot).hp;
             if (value < best) {
                 best   = value;
                 result = slot;

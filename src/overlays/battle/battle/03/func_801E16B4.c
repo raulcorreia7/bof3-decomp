@@ -8,7 +8,7 @@ MATCH void func_801E16B4(void) {
         work  = g_GameState;
         state = work->mode_119;
         if (state == 4) {
-            if (!(work->flags_128.value & 2)) {
+            if (!(work->action_flags.value & 2)) {
                 if (!(func_801DDF50((u16)work->stats.character_id, D_801463CD) & BYTE_MASK)) {
                     g_Task->unk_09 = 0x1E;
                 } else {
@@ -26,7 +26,7 @@ MATCH void func_801E16B4(void) {
         }
         if (!(D_801CA71C[g_BattleActionId].mask & 0x800)) {
             work = g_GameState;
-            if (work->flags_128.value & 2) {
+            if (work->action_flags.value & 2) {
                 g_Task->unk_09 = D_801EB23C[g_DragonForm];
             } else {
                 g_Task->unk_09 = s_BattleCharacterStepIds[work->stats.character_id];

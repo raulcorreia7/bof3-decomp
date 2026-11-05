@@ -9,11 +9,11 @@ MATCH void func_8019E95C(void) {
         return;
     }
 
-    g_Task->unk_29   = (u8)(g_Task->unk_29 + 1);
-    g_Task->unk_2A   = 0;
-    g_Task->flags_24 = 0;
-    g_Task->unk_2B   = (u8)(g_Task->unk_2B + 1);
-    g_Task->unk_48   = 1;
+    g_Task->unk_29       = (u8)(g_Task->unk_29 + 1);
+    g_Task->unk_2A       = 0;
+    g_Task->active_flags = 0;
+    g_Task->unk_2B       = (u8)(g_Task->unk_2B + 1);
+    g_Task->unk_48       = 1;
 
     work                      = g_Task;
     work->tint.bytes.unk_5D   = 0;

@@ -7,17 +7,17 @@ MATCH void func_8019C954(void) {
 
     index = D_80145E9B;
     g_Task->flags |= ACTOR_FLAG_SKIP_PALETTE_STAGE;
-    g_Task->flags_24 = 1;
-    record           = (Actor*)&g_ActorSlots[index];
-    g_Task->unk_2C   = record->unk_2C;
-    g_Task->unk_27   = 0x7B;
-    g_Task->unk_28   = 2;
-    g_Task->unk_25   = 0x1D;
-    g_Task->unk_26   = 0;
-    g_Task->unk_4C   = record->unk_4C;
-    g_Task->unk_2B   = 1;
-    g_Task->unk_29   = record->unk_29;
-    g_Task->unk_48   = 0;
+    g_Task->active_flags = 1;
+    record               = (Actor*)&g_ActorSlots[index];
+    g_Task->unk_2C       = record->unk_2C;
+    g_Task->unk_27       = 0x7B;
+    g_Task->unk_28       = 2;
+    g_Task->unk_25       = 0x1D;
+    g_Task->unk_26       = 0;
+    g_Task->unk_4C       = record->unk_4C;
+    g_Task->unk_2B       = 1;
+    g_Task->unk_29       = record->unk_29;
+    g_Task->unk_48       = 0;
     {
         u8* work;
         u8* next;

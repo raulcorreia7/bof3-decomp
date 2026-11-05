@@ -30,7 +30,7 @@ MATCH void Area_DrawObjectSprite(void) {
     if (g_Task->flags & ACTOR_FLAG_HIDDEN) {
         return;
     }
-    if (!(g_Task->flags_24 & 0x80) && g_Task->unk_48 == 1) {
+    if (!(g_Task->active_flags & 0x80) && g_Task->unk_48 == 1) {
         if (g_Task->unk_60 == 0) {
             g_Task->unk_40 = 0;
             g_Task->unk_44 = 0;
@@ -44,7 +44,7 @@ MATCH void Area_DrawObjectSprite(void) {
         return;
     }
     g_Task->flags &= ~ACTOR_FLAG_OFFSCREEN;
-    if (g_Task->flags_24 & 8) {
+    if (g_Task->active_flags & 8) {
         RECT* rect = (RECT*)g_GfxPrimCursor;
         g_GfxPrimCursor += sizeof(RECT);
         rect->x = 832;
@@ -161,7 +161,7 @@ MATCH void Area_DrawObjectSprite(void) {
             GFX_AddPrim(g_Task->unk_29, sizeof(POLY_FT4));
         }
     }
-    if (g_Task->flags_24 & 8) {
+    if (g_Task->active_flags & 8) {
         RECT* rect = (RECT*)g_GfxPrimCursor;
         g_GfxPrimCursor += sizeof(RECT);
         *rect = *(RECT*)(g_GfxCurrentDisplayFrame + 0x14);

@@ -31,6 +31,6 @@ MATCH void Actor_SelectScriptBank(u32 record_index) {
         (&D_80145A04)[D_80145A00] = (s32)(base0 + ((u32*)base0)[entry[0]]);
         D_80145A00++;
     }
-    g_Task->unk_2A    = entry[2];
-    g_Task->source_50 = base8 + ((u16*)base8)[entry[1]];
+    g_Task->unk_2A = entry[2];
+    g_Task->script = base8 + ((u16*)base8)[entry[1]];
 }

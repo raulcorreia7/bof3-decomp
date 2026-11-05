@@ -32,7 +32,7 @@ MATCH u8 func_801A2DB4(Actor* entity) {
                 /* FAKE: basic-block boundary pins handler status. */
                 /* FAKE: ORDER_LOCK keeps this statement in place; without it the match is 93.06%. */
                 ORDER_LOCK(g_Task->direction_08 = status);
-                entity->flags_74 |= ACTOR_FLAG_MOVING;
+                entity->interaction_flags |= ACTOR_FLAG_MOVING;
             }
             return g_Task->direction_08;
         }

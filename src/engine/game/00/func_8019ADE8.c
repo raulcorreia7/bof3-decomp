@@ -15,9 +15,9 @@ MATCH void func_8019ADE8(void) {
 
     g_Task->direction_08 = D_80145E98 & 7;
     Area_FindSceneRecord(0x18);
-    g_Task->unk_48   = 0;
-    g_Task->flags_24 = 0;
-    g_Task->unk_2A   = 0;
+    g_Task->unk_48       = 0;
+    g_Task->active_flags = 0;
+    g_Task->unk_2A       = 0;
     Actor_SelectScript(8);
     work                     = g_Task;
     work->x.fixed            = g_Actors[work->unk_06].x.fixed;

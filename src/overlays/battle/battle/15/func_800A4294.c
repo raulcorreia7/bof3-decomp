@@ -24,11 +24,11 @@ MATCH s16 func_800A4294(s32 input_kind) {
     battler = (*(u8*)&g_BattleTarget);
     base    = BATTLER_IS_PLAYER(battler);
     if (base) {
-        if (g_BattlePartyBattlers[battler].flags_124.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (g_BattlePartyBattlers[battler].damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             return 0;
         }
     } else {
-        if (ENEMY_COMBATANT(battler).flags_100 & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (ENEMY_COMBATANT(battler).damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             return 0;
         }
     }

@@ -16,7 +16,7 @@ MATCH void func_8009DBA4(void) {
     if (index < 3u) {
         base = g_BattlePartyBattlers[index].stats.current_hp;
     } else {
-        base = ENEMY_COMBATANT(index).hp_94;
+        base = ENEMY_COMBATANT(index).hp;
     }
     value = ((s16*)g_BattleTargetRecord)[2];
     if ((value < (s32)base) && (value != 0)) {

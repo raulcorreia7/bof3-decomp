@@ -11,7 +11,7 @@ MATCH s32 func_800AA7A0(u8 slot) {
     if (Battle_SlotIsBlocked(slot) != 0) {
         return 0;
     }
-    if ((g_BattlePartyBattlers[slot].flags_124.value & 1) == 0) {
+    if ((g_BattlePartyBattlers[slot].damage_flags.value & 1) == 0) {
         return 0;
     }
     if (g_BattlePartyBattlers[slot].unk_118 != *(u8*)&g_BattleActiveBattler) {

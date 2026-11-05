@@ -41,7 +41,7 @@ have_flags:
 
 enemy:
     enemy_index = battler_index - 3u;
-    flags       = D_801EB630[enemy_index].status_82;
+    flags       = D_801EB630[enemy_index].status;
     /* run the shared flag test */
     goto have_flags;
 

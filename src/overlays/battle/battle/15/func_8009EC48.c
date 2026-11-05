@@ -13,8 +13,8 @@ MATCH void func_8009EC48(void) {
         saved = g_BattlePartyBattlers[slot].stats.status & STATUS_BLIND;
         g_BattlePartyBattlers[slot].stats.status &= ~STATUS_BLIND;
     } else {
-        saved = ENEMY_COMBATANT(slot).status_82 & STATUS_BLIND;
-        ENEMY_COMBATANT(slot).status_82 &= ~STATUS_BLIND;
+        saved = ENEMY_COMBATANT(slot).status & STATUS_BLIND;
+        ENEMY_COMBATANT(slot).status &= ~STATUS_BLIND;
     }
     p_flag     = &g_BattleState;
     flag       = *p_flag;
@@ -31,5 +31,5 @@ MATCH void func_8009EC48(void) {
         g_BattlePartyBattlers[slot].stats.status |= saved;
         return;
     }
-    ENEMY_COMBATANT(slot).status_82 |= saved;
+    ENEMY_COMBATANT(slot).status |= saved;
 }

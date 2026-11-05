@@ -4,7 +4,7 @@ MATCH void func_800C1A00(void) {
     EnemyBattler* work;
 
     work = g_BattleCurrentEnemy;
-    if (work->hp_94 == 0xFFFF) {
+    if (work->hp == 0xFFFF) {
         g_BattleActionType = 3;
         TASK_BYTES[4]      = 0;
         SND_QueueSelectionFx(0x602);

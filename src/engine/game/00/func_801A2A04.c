@@ -16,7 +16,7 @@ MATCH u8 func_801A2A04(Actor* entity) {
     }
 
     if (saved != g_Task->direction_08) {
-        entity->flags_74 |= ACTOR_FLAG_MOVING;
+        entity->interaction_flags |= ACTOR_FLAG_MOVING;
     }
 
     if (i < 4u) {

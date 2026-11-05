@@ -14,7 +14,7 @@ MATCH void func_801A253C(Actor* entity) {
         g_Task->z.part.integer += g_Task->vz;
         g_Task->unk_09--;
         if (g_Task->unk_09 == 0) {
-            if (!(entity->flags_74 & 0x80)) {
+            if (!(entity->interaction_flags & 0x80)) {
                 g_Task->z.part.integer = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
             }
             work            = g_Task;
@@ -23,12 +23,12 @@ MATCH void func_801A253C(Actor* entity) {
             if (mode - 1 < 3) {
                 entity->timer_75 = (mode & 3) * 0x1E;
                 if ((entity->timer_75 & 0xFE) != 0) {
-                    func_801A275C(&entity->flags_74);
+                    func_801A275C(&entity->interaction_flags);
                     if (!(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                         g_Task->direction_08 &= 7;
-                        entity->flags_74 |= ACTOR_FLAG_MOVING;
+                        entity->interaction_flags |= ACTOR_FLAG_MOVING;
                     }
-                    if (!(entity->flags_74 & 0x40)) {
+                    if (!(entity->interaction_flags & 0x40)) {
                         state = (g_Task->script_pc < 8) ? 6 : 0;
                     } else {
                         state = 0xFF;
@@ -38,13 +38,13 @@ MATCH void func_801A253C(Actor* entity) {
             }
         }
     }
-    func_801A3D1C(&entity->flags_74);
+    func_801A3D1C(&entity->interaction_flags);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (g_Task->unk_09 <= g_Task->unk_0A) {
-            flags = entity->flags_74 | ACTOR_FLAG_SCRIPT_REQUEST;
+            flags = entity->interaction_flags | ACTOR_FLAG_SCRIPT_REQUEST;
         } else {
-            flags = entity->flags_74 & ~ACTOR_FLAG_SCRIPT_REQUEST;
+            flags = entity->interaction_flags & ~ACTOR_FLAG_SCRIPT_REQUEST;
         }
-        entity->flags_74 = flags;
+        entity->interaction_flags = flags;
     }
 }

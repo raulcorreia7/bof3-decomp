@@ -12,7 +12,7 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
     if (BATTLER_IS_PLAYER(battler_index)) {
         status = g_BattlePartyBattlers[(u32)battler_index].stats.status;
     } else {
-        status = ENEMY_COMBATANT((u32)battler_index).status_82;
+        status = ENEMY_COMBATANT((u32)battler_index).status;
     }
 
     if (flags & STATUS_KO) {
@@ -71,10 +71,10 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
         volatile u8* battler;
         battler = (u8*)(&((volatile BattleEnemyRecord*)g_BattleEnemies)[(u32)battler_index]);
         GFX_FreePaletteFadeTarget(battler);
-        saved_work                                    = g_BattleWorkCell;
-        ENEMY_COMBATANT((u32)battler_index).status_82 = status;
-        g_BattleWorkCell                              = (u32)battler;
-        func_801DDAB4(ENEMY_COMBATANT((u32)battler_index).status_82);
+        saved_work                                 = g_BattleWorkCell;
+        ENEMY_COMBATANT((u32)battler_index).status = status;
+        g_BattleWorkCell                           = (u32)battler;
+        func_801DDAB4(ENEMY_COMBATANT((u32)battler_index).status);
     }
 
     g_BattleWorkCell = saved_work;

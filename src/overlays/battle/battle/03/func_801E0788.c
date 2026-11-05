@@ -11,11 +11,11 @@ MATCH void func_801E0788(void) {
     func_801DDFEC(g_Task->slot);
     func_801DD14C(g_Task->slot);
     w = g_GameState;
-    if (w->flags_124.value & 4) {
+    if (w->damage_flags.value & 4) {
         g_Task->unk_09 = 30;
         g_Task->unk_03 = 1;
         g_Task->unk_04 = 0;
-    } else if (w->flags_128.value & 2) {
+    } else if (w->action_flags.value & 2) {
         half = &g_BattleState;
         if ((*half & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half &= 0xBFFF;
@@ -40,7 +40,7 @@ MATCH void func_801E0788(void) {
         }
         w2              = g_GameState;
         w2->counter_121 = 0;
-        w2->flags_128.value &= 0xFFFB84FF;
+        w2->action_flags.value &= 0xFFFB84FF;
         g_GameState->counter_136 = 0;
         g_GameState->counter_137 = 0;
         g_GameState->charge      = 0;
@@ -53,16 +53,16 @@ MATCH void func_801E0788(void) {
         if ((*half2 & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half2 &= 0xBFFF;
         }
-        if (g_GameState->flags_128.value & 1) {
+        if (g_GameState->action_flags.value & 1) {
             g_Task->unk_03 = 4;
         } else {
             Battle_ClearSlotPending(g_Task->slot);
-            w                  = g_GameState;
-            flags              = w->flags_124.value & ~0x70;
-            w->flags_124.value = flags & ~0x200;
-            g_Task->mode       = 3;
-            g_Task->step       = 0;
-            g_Task->unk_03     = 0;
+            w                     = g_GameState;
+            flags                 = w->damage_flags.value & ~0x70;
+            w->damage_flags.value = flags & ~0x200;
+            g_Task->mode          = 3;
+            g_Task->step          = 0;
+            g_Task->unk_03        = 0;
         }
     }
     func_801DEDE4();

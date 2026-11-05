@@ -8,7 +8,7 @@ MATCH void func_801A4990(u8* script) {
         g_Task->flags |= ACTOR_FLAG_HIDDEN;
     }
     if (script[0] & 4) {
-        g_CurrentActor->flags_74 &= ~ACTOR_FLAG_SCRIPT_PENDING;
+        g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_SCRIPT_PENDING;
     }
     if (script[0] & 0x40) {
         g_Task->unk_48 = 0;

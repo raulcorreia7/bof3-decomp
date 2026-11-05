@@ -4,5 +4,5 @@ MATCH void func_801F4E9C(void) {
     Actor* actor;
 
     actor = g_Task;
-    actor->flags_24 |= 0x10;
+    actor->active_flags |= 0x10;
 }

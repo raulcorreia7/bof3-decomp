@@ -11,7 +11,7 @@ MATCH void func_801D29BC(void) {
 
     world = D_80140000;
 
-    FISHING_STATE->flags_24       = world[0x3FECu];
+    FISHING_STATE->active_flags   = world[0x3FECu];
     FISHING_STATE->saved_25       = world[0x3FEDu];
     FISHING_STATE->saved_26       = world[0x3FEEu];
     FISHING_STATE->saved_value_27 = world[0x3FEFu];

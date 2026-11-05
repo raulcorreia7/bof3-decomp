@@ -10,9 +10,9 @@ MATCH void func_801DCEF8(u32 battler_index) {
             g_BattlePartyBattlers[battler_index].hp_change = value;
         }
     } else {
-        if ((ENEMY_COMBATANT(battler_index).status_82 & STATUS_POISONED) != 0u) {
-            value                                    = (ENEMY_COMBATANT(battler_index).hp_94 + 5) / 10;
-            ENEMY_COMBATANT(battler_index).damage_F8 = value;
+        if ((ENEMY_COMBATANT(battler_index).status & STATUS_POISONED) != 0u) {
+            value                                 = (ENEMY_COMBATANT(battler_index).hp + 5) / 10;
+            ENEMY_COMBATANT(battler_index).damage = value;
         }
     }
 }

@@ -12,7 +12,7 @@ MATCH void Battle_StreamEndOverlay(void) {
     i = 0u;
     if (g_BattlePartyCount != 0u) {
         do {
-            if ((g_BattlePartyBattlers[i].flags_124.value & 0x2000u) != 0u) {
+            if ((g_BattlePartyBattlers[i].damage_flags.value & 0x2000u) != 0u) {
                 return;
             }
             i += 1u;

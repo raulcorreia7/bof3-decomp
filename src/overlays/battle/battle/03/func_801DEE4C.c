@@ -11,7 +11,8 @@ MATCH u8 func_801DEE4C(void) {
         return 1u;
     }
 
-    if ((*(global_base + 0x63CE) != 0u) && ((battle_work->flags_128.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
+    if ((*(global_base + 0x63CE) != 0u) &&
+        ((battle_work->action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
         return 1u;
     }
 

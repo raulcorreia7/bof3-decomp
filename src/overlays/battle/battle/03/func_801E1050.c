@@ -5,10 +5,10 @@ MATCH void func_801E1050(void) {
     PartyBattler* work;
 
     Battle_ClearSlotPending(g_Task->slot);
-    work                  = g_GameState;
-    work->flags_124.value = work->flags_124.value & ~0xF0u;
-    work->flags_124.value = work->flags_124.value & ~0x200u;
-    g_Task->mode          = 3;
-    g_Task->step          = 0;
-    g_Task->unk_03        = 0;
+    work                     = g_GameState;
+    work->damage_flags.value = work->damage_flags.value & ~0xF0u;
+    work->damage_flags.value = work->damage_flags.value & ~0x200u;
+    g_Task->mode             = 3;
+    g_Task->step             = 0;
+    g_Task->unk_03           = 0;
 }

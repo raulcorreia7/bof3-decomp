@@ -13,7 +13,7 @@ MATCH s32 Party_JoinMember(s32 char_id) {
         g_BattlePartyBattlers[g_PartySize].flags = PARTY_BATTLER_FLAG_OCCUPIED;
         Party_ClearBattlerState(g_PartySize);
         TASK_SET(&g_BattlePartyBattlers[g_PartySize]);
-        g_Task->flags_24 = 1;
+        g_Task->active_flags = 1;
         func_801C1254(id, g_PartySize);
         /* FAKE: retail reads g_CharSlot as u8[]. */
         *((Character*)((u8*)&g_BattlePartyBattlers[g_PartySize] + 0x74)) = g_Characters[((u8*)g_CharSlot)[id]];

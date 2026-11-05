@@ -27,7 +27,7 @@ NON_MATCHING void func_801D1D10(void) {
                 if (index != GAME_NONE) {
                     ((u8*)slot)[-0x15] = id;
                     if (!HAS_STATUS(g_BattlePartyBattlers[index], STATUS_CONFUSED) &&
-                        !(g_BattlePartyBattlers[index].flags_128.volatile_value & 0x14001)) {
+                        !(g_BattlePartyBattlers[index].action_flags.volatile_value & 0x14001)) {
                         g_BattleMessageSlot = (u8*)&g_BattlePartyBattlers[index];
                         D_801EB4D8          = &g_BattlePartyBattlers[index].unk_118;
                         BattleStageMessageResource((s32)&g_BattlePartyBattlers[index]);

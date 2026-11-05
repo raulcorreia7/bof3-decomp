@@ -59,7 +59,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             set_mode:
                 Area_FindSceneRecord(id);
             }
-            g_Task->flags_24 = 0;
+            g_Task->active_flags = 0;
             g_GameFlags |= 0x1000;
         } else if (LOBU(g_GameRequestFlags) & 8) {
             id = 0x1FD;
@@ -67,8 +67,8 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                 id = 0x47;
             }
             Area_FindSceneRecord(id);
-            g_Task->unk_2A   = 0;
-            g_Task->flags_24 = 0;
+            g_Task->unk_2A       = 0;
+            g_Task->active_flags = 0;
         } else if (LOBU(g_GameRequestFlags) & 0x40) {
             func_801C1254((s32)D_80145F09, 0);
         } else if (LOHU(g_GameAreaId) == 0xBD) {
@@ -102,7 +102,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                     rec              = (Character*)((u32)koff + (u32)base);
                     D_80145FCC[off]  = kind;
                     *(Character*)dst = *rec;
-                    if (!(g_Task->flags_24 & 1)) {
+                    if (!(g_Task->active_flags & 1)) {
                         func_801C1254((s32)*order, i & BYTE_MASK);
                         MATCH_FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */
                         order++;

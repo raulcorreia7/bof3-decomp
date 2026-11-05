@@ -18,9 +18,10 @@ MATCH u32 func_801A06D8(void) {
                 continue;
             }
             SP_REF(s8, 0x3) = 0;
-            if (row->unk_09 == 0 && (g_Actors[i].flags_74 & ACTOR_FLAG_SCRIPT_PENDING)) {
-                if (g_Actors[i].flags_74 & ACTOR_FLAG_SCRIPT_REQUEST) {
-                    if ((s8)func_801A17A0(&g_Actors[i].flags_74) && !(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
+            if (row->unk_09 == 0 && (g_Actors[i].interaction_flags & ACTOR_FLAG_SCRIPT_PENDING)) {
+                if (g_Actors[i].interaction_flags & ACTOR_FLAG_SCRIPT_REQUEST) {
+                    if ((s8)func_801A17A0(&g_Actors[i].interaction_flags) &&
+                        !(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                         g_Actors[i].unk_79 = g_Task->direction_08 & 7;
                         if (!(g_Task->option_flags & ACTOR_OPT_KEEP_FACING)) {
                             g_Task->direction_08 = (D_80145E98 ^ 4) & 7;
@@ -35,7 +36,7 @@ MATCH u32 func_801A06D8(void) {
                 } else {
                     func_801A18C8(row);
                 }
-            } else if (g_CurrentActor->flags_74 & ACTOR_FLAG_INTERACTION_PENDING) {
+            } else if (g_CurrentActor->interaction_flags & ACTOR_FLAG_INTERACTION_PENDING) {
                 func_801A3A08();
                 continue;
             } else if (g_Actors[i].roll_90 >= 0x1F && g_Task->unk_09 == 0) {
@@ -46,11 +47,11 @@ MATCH u32 func_801A06D8(void) {
             if (g_Task->unk_06 == 0xA) {
                 continue;
             }
-            flags = g_Actors[i].flags_74;
+            flags = g_Actors[i].interaction_flags;
             if (!(flags & 0x40)) {
                 if (flags & ACTOR_FLAG_MOVING) {
                     func_8015BAC4(g_Task->direction_08);
-                    g_Actors[i].flags_74 &= ~ACTOR_FLAG_MOVING;
+                    g_Actors[i].interaction_flags &= ~ACTOR_FLAG_MOVING;
                 } else if (!(g_Task->option_flags & ACTOR_OPT_WAIT_STREAM)) {
                     n = g_Actors[i].unk_78 - 2 < 0 ? 0 : g_Actors[i].unk_78 - 2;
                     j = 0;

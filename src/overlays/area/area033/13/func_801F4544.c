@@ -12,12 +12,12 @@ MATCH void func_801F4544(void) {
     Game_FindAreaHandler();
     Area_FindSceneRecord(0x205);
 
-    ((u8*)g_Task)[0x48] = 0;
-    g_Task->flags_24    = 0;
-    ((u8*)g_Task)[0x2A] = 0;
-    ((u8*)g_Task)[0x5D] = 0;
-    ((u8*)g_Task)[0x5E] = 0;
-    ((u8*)g_Task)[0x5F] = 0;
+    ((u8*)g_Task)[0x48]  = 0;
+    g_Task->active_flags = 0;
+    ((u8*)g_Task)[0x2A]  = 0;
+    ((u8*)g_Task)[0x5D]  = 0;
+    ((u8*)g_Task)[0x5E]  = 0;
+    ((u8*)g_Task)[0x5F]  = 0;
 
     scratch                                                         = (u8*)g_Task;
     row_offset                                                      = scratch[0x0B] * 4;

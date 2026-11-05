@@ -20,10 +20,10 @@ MATCH void func_8019B3A8(void) {
 
     Area_FindSceneRecord(g_Task->unk_0B);
     func_8019BF78();
-    g_Task->unk_29   = 6;
-    g_Task->unk_48   = 1;
-    g_Task->flags_24 = 0;
-    g_Task->unk_2A   = 0;
+    g_Task->unk_29       = 6;
+    g_Task->unk_48       = 1;
+    g_Task->active_flags = 0;
+    g_Task->unk_2A       = 0;
     ACTOR_CLEAR_TINT();
     work               = g_Task;
     work->option_flags = 0;

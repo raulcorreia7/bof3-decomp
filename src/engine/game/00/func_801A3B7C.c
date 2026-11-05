@@ -27,7 +27,7 @@ MATCH void func_801A3B7C(Actor* entity) {
         }
         func_801ABBA8((u8*)entity + 0x74, g_Task->direction_08);
         g_Task->direction_08 |= 8u;
-        entity->flags_74 |= ACTOR_FLAG_MOVING;
+        entity->interaction_flags |= ACTOR_FLAG_MOVING;
         g_Task->unk_0A = g_Task->unk_09 >> 1;
         return;
     }
@@ -42,5 +42,5 @@ MATCH void func_801A3B7C(Actor* entity) {
     ((s32*)g_Task)[4]    = 0;
     ((s32*)g_Task)[3]    = 0;
     g_Task->direction_08 = (current + sel) & 7u;
-    entity->flags_74 |= ACTOR_FLAG_MOVING;
+    entity->interaction_flags |= ACTOR_FLAG_MOVING;
 }

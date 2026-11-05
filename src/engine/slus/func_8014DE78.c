@@ -17,7 +17,7 @@ NON_MATCHING s8 func_8014DE78(void) {
         if (!ACTOR_IN_USE(g_Actors[i])) {
             continue;
         }
-        if (!(g_Actors[i].flags_24 & ACTOR_FLAG_ACTIVE)) {
+        if (!(g_Actors[i].active_flags & ACTOR_FLAG_ACTIVE)) {
             continue;
         }
         if (g_Actors[i].unk_06 != 0xA) {

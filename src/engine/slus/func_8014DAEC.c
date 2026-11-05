@@ -18,8 +18,8 @@ MATCH u8 func_8014DAEC(void) {
             g_Task->unk_4A = 1;
             return 1;
         }
-        if (*(u8*)((u32)g_Task->source_50 + index) >= 0x80) {
-            g_Task->script_pc = *(u8*)((u32)g_Task->source_50 + index + 1) << 1;
+        if (*(u8*)((u32)g_Task->script + index) >= 0x80) {
+            g_Task->script_pc = *(u8*)((u32)g_Task->script + index + 1) << 1;
             result            = 1;
         }
         func_8014DB98();

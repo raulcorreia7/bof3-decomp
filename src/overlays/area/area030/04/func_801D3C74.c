@@ -56,12 +56,12 @@ MATCH void func_801D3C74(void) {
             if (D_80144125 != 7) {
                 entry = Actor_FindFreeSlot();
                 if (entry != -1) {
-                    g_ActorSlots[entry].flags   = 1;
-                    g_ActorSlots[entry].type    = 0xF;
-                    g_ActorSlots[entry].mode    = 8;
-                    g_ActorSlots[entry].unk_06  = FISHING_STATE->cue_index_06;
-                    g_ActorSlots[entry].unk_4A  = FISHING_STATE->column_4A;
-                    g_ActorSlots[entry].link_0B = 0;
+                    g_ActorSlots[entry].flags  = 1;
+                    g_ActorSlots[entry].type   = 0xF;
+                    g_ActorSlots[entry].mode   = 8;
+                    g_ActorSlots[entry].unk_06 = FISHING_STATE->cue_index_06;
+                    g_ActorSlots[entry].unk_4A = FISHING_STATE->column_4A;
+                    g_ActorSlots[entry].link   = 0;
                 }
             }
             flag                   = FISHING_STATE;

@@ -13,8 +13,8 @@ MATCH void func_8009F884(void) {
         base  = g_BattlePartyBattlers[mode].stats.current_hp;
         flags = g_BattlePartyBattlers[mode].stats.status;
     } else {
-        base  = ENEMY_COMBATANT(mode).hp_94;
-        flags = ENEMY_COMBATANT(mode).status_82;
+        base  = ENEMY_COMBATANT(mode).hp;
+        flags = ENEMY_COMBATANT(mode).status;
     }
     battler_index  = g_BattleActiveBattler;
     selection_kind = g_BattleTarget;

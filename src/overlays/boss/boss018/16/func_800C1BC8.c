@@ -2,8 +2,8 @@
 
 MATCH void func_800C1BC8(void) {
     if (SYS_TestFlag(g_SceneFlags, 0x37) != 0) {
-        g_BattleCurrentEnemy->hp_94 = D_801FD700;
-        g_BattleCurrentEnemy->ap    = D_801FD6FE;
+        g_BattleCurrentEnemy->hp = D_801FD700;
+        g_BattleCurrentEnemy->ap = D_801FD6FE;
     } else {
         SYS_SetFlag(g_SceneFlags, 0x37U);
     }

@@ -12,7 +12,7 @@ MATCH void func_801AD9F0(void) {
             func_8015BAC4(work->direction_08);
         }
         area = (Actor*)GAME_WORK_AREA_PTR;
-        area->flags_74 &= ~ACTOR_FLAG_INTERACTION_PENDING;
+        area->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
         g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
         area         = g_Task;
         area->unk_04 = 0;

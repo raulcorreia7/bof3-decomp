@@ -10,7 +10,7 @@ MATCH void func_801DF914(void) {
     u8*           selector;
 
     current = g_GameState;
-    if ((current->flags_128.value & 2) != 0) {
+    if ((current->action_flags.value & 2) != 0) {
         selector       = &g_DragonForm;
         g_Task->unk_09 = *(u8*)((u8*)&D_801EB198 + *selector);
         g_Task->timer  = *(u8*)((u8*)&D_801EB198 + *selector);

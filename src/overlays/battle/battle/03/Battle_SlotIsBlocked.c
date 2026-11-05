@@ -21,7 +21,7 @@ MATCH u8 Battle_SlotIsBlocked(u32 slot) {
         if ((D_801EB630[subindex].flags & 1u) == 0u) {
             return true;
         }
-        if ((D_801EB630[subindex].status_82 & STATUS_KO) != 0u) {
+        if ((D_801EB630[subindex].status & STATUS_KO) != 0u) {
             return true;
         }
     }

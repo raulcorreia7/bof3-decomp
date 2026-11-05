@@ -4,11 +4,11 @@ MATCH u8 func_801E3160(void) {
     volatile EnemyBattler* ew            = BATTLE_CURRENT_ENEMY_PTR;
     volatile u8*           battle_global = (u8*)(EFFECT_BANK_80140000);
 
-    if ((ew->status_82 & (STATUS_PARALYZED | STATUS_SLEEPING)) != 0u) {
+    if ((ew->status & (STATUS_PARALYZED | STATUS_SLEEPING)) != 0u) {
         return 1u;
     }
 
-    if ((battle_global[0x63CEu] != 0u) && ((ew->flags_104 & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
+    if ((battle_global[0x63CEu] != 0u) && ((ew->action_flags & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
         return 1u;
     }
 

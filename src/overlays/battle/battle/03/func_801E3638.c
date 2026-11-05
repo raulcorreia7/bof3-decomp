@@ -8,14 +8,14 @@ MATCH void func_801E3638(void) {
     PartyBattler* work;
 
     D_801EB3FC[g_Task->step]();
-    if (g_BattleCurrentEnemy->status_82 & STATUS_CONFUSED) {
-        if (g_BattleCurrentEnemy->flags_100 & 0x800) {
+    if (g_BattleCurrentEnemy->status & STATUS_CONFUSED) {
+        if (g_BattleCurrentEnemy->damage_flags & 0x800) {
             if ((s8)++g_BattleEffects[g_Task->slot].unk_09 >= 12) {
-                g_BattleCurrentEnemy->flags_100 ^= 0x800;
+                g_BattleCurrentEnemy->damage_flags ^= 0x800;
             }
         } else {
             if ((s8)--g_BattleEffects[g_Task->slot].unk_09 < -11) {
-                g_BattleCurrentEnemy->flags_100 ^= 0x800;
+                g_BattleCurrentEnemy->damage_flags ^= 0x800;
             }
         }
         work = g_Task;
@@ -25,7 +25,7 @@ MATCH void func_801E3638(void) {
             work->y.raw = g_BattleEffects[work->slot].unk_38.raw + ((s8)g_BattleEffects[work->slot].unk_09 << 9);
         }
     }
-    if (!(g_BattleCurrentEnemy->flags_100 & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
+    if (!(g_BattleCurrentEnemy->damage_flags & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
         func_801E30F8();
     }
 }

@@ -9,7 +9,7 @@ MATCH void func_801A3410(void* work_index) {
     index = func_8015B4F4(FIELD(u8, g_Task, 0x18));
     work  = g_Task;
     if (work->unk_09 == 0) {
-        work->flags_24 |= 0x20;
+        work->active_flags |= 0x20;
         work          = g_Task;
         work->x.fixed = g_Actors[index].x.fixed;
         work->y.fixed = g_Actors[index].y.fixed;

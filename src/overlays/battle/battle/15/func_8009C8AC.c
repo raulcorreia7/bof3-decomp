@@ -9,7 +9,7 @@ MATCH u8 func_8009C8AC(u16 required_mask) {
     u32 action_type;
     u32 slot;
 
-    if (g_BattleCurrentEnemy->damage_F8 == 0)
+    if (g_BattleCurrentEnemy->damage == 0)
         return false;
 
     action_type = LOBU(g_BattleActionType);

@@ -6,7 +6,7 @@ MATCH void func_801F2C04(void) {
     Actor* actor;
 
     actor = g_CurrentActor;
-    actor->flags_74 &= 0xFE;
+    actor->interaction_flags &= 0xFE;
     if (D_80145F09 == 6) {
         Game_SetScriptActive();
         actor      = g_CurrentActor;

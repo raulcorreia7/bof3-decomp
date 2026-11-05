@@ -8,7 +8,7 @@ MATCH void func_801D3CC4(void) {
     u8 i;
 
     for (i = 0; (u32)(i & BYTE_MASK) < BATTLE_PARTY_SLOT_COUNT; i += 1) {
-        if (((g_BattlePartyBattlers[i].flags_124.value & COMBATANT_FLAG_DAMAGED) != 0) &&
+        if (((g_BattlePartyBattlers[i].damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) &&
             (g_BattlePartyBattlers[i].mode != 6)) {
             g_BattlePartyBattlers[i].mode   = 6;
             g_BattlePartyBattlers[i].step   = 0;
@@ -18,7 +18,7 @@ MATCH void func_801D3CC4(void) {
         }
     }
     for (i = 3; (u32)(i & BYTE_MASK) < COMBATANT_COUNT; i += 1) {
-        if (((ENEMY_COMBATANT(i).flags_100 & COMBATANT_FLAG_DAMAGED) != 0) && (ENEMY_COMBATANT(i).mode != 6)) {
+        if (((ENEMY_COMBATANT(i).damage_flags & COMBATANT_FLAG_DAMAGED) != 0) && (ENEMY_COMBATANT(i).mode != 6)) {
             ENEMY_COMBATANT(i).mode   = 6;
             ENEMY_COMBATANT(i).step   = 0;
             ENEMY_COMBATANT(i).unk_03 = 0;

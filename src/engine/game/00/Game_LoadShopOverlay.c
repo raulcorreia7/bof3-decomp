@@ -13,9 +13,9 @@ MATCH void Game_LoadShopOverlay(void) {
             if (!(work->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                 work->direction_08 = work->unk_79;
                 func_8015BAC4(g_Task->direction_08);
-                work->flags_74 = (u8)(work->flags_74 | ACTOR_FLAG_MOVING);
+                work->interaction_flags = (u8)(work->interaction_flags | ACTOR_FLAG_MOVING);
             }
-            work->flags_74 = (u8)(work->flags_74 & ~ACTOR_FLAG_SCRIPT_PENDING);
+            work->interaction_flags = (u8)(work->interaction_flags & ~ACTOR_FLAG_SCRIPT_PENDING);
             g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             Area_RunFrame();
             return;

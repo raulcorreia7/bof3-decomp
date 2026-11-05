@@ -12,13 +12,13 @@ MATCH void func_8019F75C(void) {
     index = 0;
     if (limit > 0) {
         do {
-            *dst = *g_Task->source_50;
-            g_Task->source_50 += 1;
+            *dst = *g_Task->script;
+            g_Task->script += 1;
             index += 1;
             dst += 1;
         } while (index < limit);
     }
-    g_Task->source_50 = MEM_PTR(u8, 0x800F0800u);
+    g_Task->script = MEM_PTR(u8, 0x800F0800u);
     func_8019D648();
     func_8019D9C0();
     g_Task->unk_09 = 0x10;

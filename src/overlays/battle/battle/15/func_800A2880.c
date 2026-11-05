@@ -42,17 +42,17 @@ MATCH s16 func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_
     }
 
     if ((u32)BATTLER_IS_PLAYER(battler_index)) {
-        if (g_BattlePartyBattlers[(u32)battler_index].flags_128.value & COMBATANT_FLAG_DAMAGE_HALVED) {
+        if (g_BattlePartyBattlers[(u32)battler_index].action_flags.value & COMBATANT_FLAG_DAMAGE_HALVED) {
             damage /= 2;
         }
-        if (g_BattlePartyBattlers[(u32)battler_index].flags_124.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (g_BattlePartyBattlers[(u32)battler_index].damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             damage = 0;
         }
     } else {
-        if (D_801EB630[(u32)battler_index - 3u].flags_104 & COMBATANT_FLAG_DAMAGE_HALVED) {
+        if (D_801EB630[(u32)battler_index - 3u].action_flags & COMBATANT_FLAG_DAMAGE_HALVED) {
             damage /= 2;
         }
-        if (D_801EB630[(u32)battler_index - 3u].flags_100 & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (D_801EB630[(u32)battler_index - 3u].damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             damage = 0;
         }
     }

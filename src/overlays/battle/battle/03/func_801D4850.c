@@ -12,17 +12,17 @@ MATCH void func_801D4850(void) {
     if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != 0x27u)) {
         if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
             {
-                u32 flags = BATTLE_ACTIVE_PARTY.flags_128.value & COMBATANT_FLAG_POWER_BOOST;
+                u32 flags = BATTLE_ACTIVE_PARTY.action_flags.value & COMBATANT_FLAG_POWER_BOOST;
                 clr       = 0xFFFFFFBFu;
 
                 if (flags != 0u) {
                     BATTLE_ACTIVE_PARTY.charge = 0u;
-                    BATTLE_ACTIVE_PARTY.flags_128.value &= clr;
+                    BATTLE_ACTIVE_PARTY.action_flags.value &= clr;
                 }
             }
         } else {
             {
-                u32 flags = ENEMY_COMBATANT(g_BattleActiveBattler).flags_104 & COMBATANT_FLAG_POWER_BOOST;
+                u32 flags = ENEMY_COMBATANT(g_BattleActiveBattler).action_flags & COMBATANT_FLAG_POWER_BOOST;
                 clr       = 0xFFFFFFBFu;
 
                 if (flags != 0u) {
@@ -31,7 +31,7 @@ MATCH void func_801D4850(void) {
 
                     ENEMY_COMBATANT(g_BattleActiveBattler).unk_114 = 0u;
                     eindex                                         = g_BattleActiveBattler;
-                    ENEMY_COMBATANT(eindex).flags_104 &= clr;
+                    ENEMY_COMBATANT(eindex).action_flags &= clr;
                 }
             }
         }
@@ -40,17 +40,17 @@ MATCH void func_801D4850(void) {
     if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != 0xA3u)) {
         if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
             {
-                u32 flags = BATTLE_ACTIVE_PARTY.flags_128.value & 0x80u;
+                u32 flags = BATTLE_ACTIVE_PARTY.action_flags.value & 0x80u;
                 clr       = 0xFFFFFF7Fu;
 
                 if (flags != 0u) {
                     BATTLE_ACTIVE_PARTY.unk_139 = 0u;
-                    BATTLE_ACTIVE_PARTY.flags_128.value &= clr;
+                    BATTLE_ACTIVE_PARTY.action_flags.value &= clr;
                 }
             }
         } else {
             {
-                u32 flags = ENEMY_COMBATANT(g_BattleActiveBattler).flags_104 & 0x80u;
+                u32 flags = ENEMY_COMBATANT(g_BattleActiveBattler).action_flags & 0x80u;
                 clr       = 0xFFFFFF7Fu;
 
                 if (flags != 0u) {
@@ -59,7 +59,7 @@ MATCH void func_801D4850(void) {
 
                     ENEMY_COMBATANT(g_BattleActiveBattler).unk_115 = 0u;
                     eindex                                         = g_BattleActiveBattler;
-                    ENEMY_COMBATANT(eindex).flags_104 &= clr;
+                    ENEMY_COMBATANT(eindex).action_flags &= clr;
                 }
             }
         }

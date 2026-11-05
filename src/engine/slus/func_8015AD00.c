@@ -70,7 +70,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     if ((abr & 0x40) == 0) {
         abr = 2;
     }
-    piece = (PanelPiece*)g_Task->source_50;
+    piece = (PanelPiece*)g_Task->script;
     tpage = GetTPage(0, abr & 3, 704, 256);
     prim  = g_GfxPrimCursor;
     p     = prim;
