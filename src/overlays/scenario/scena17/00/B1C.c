@@ -73,7 +73,15 @@ INCLUDE_ASM(func_801F7B20);
 MATCH void func_801F7B88(void) {
     u8* step;
 
-INCLUDE_ASM(func_801F7BC0);
+    if (!g_AreaCameraMoving) {
+        step                  = &D_80146874;
+        g_AreaScrollTargetX   = 0x8C0000;
+        *step                += 1;
+    }
+}
+
+MATCH void func_801F7BC0(void) {
+    u8* step;
 
 INCLUDE_ASM(func_801F7C14);
 
