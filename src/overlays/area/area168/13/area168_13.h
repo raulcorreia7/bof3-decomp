@@ -16,8 +16,8 @@
  * symbol map. */
 void               func_801F4158_area168(s32 index, s8 code);
 /* The two step tables this pass indexes by the menu selection. */
-extern u8 D_801F4F94[];
-extern u8 D_801F4F95[];
+extern u8          D_801F4F94[];
+extern u8          D_801F4F95[];
 /* The shadow spread multiplier this pass indexes by the step code. */
 extern volatile u8 D_801F4BB4;
 /* The scratchpad quad the shadow pass fills and the GTE reads. */

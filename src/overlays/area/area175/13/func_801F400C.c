@@ -8,6 +8,6 @@ MATCH void func_801F400C(void) {
     } else {
         g_SpadWork->x.fixed = 0x2C0000;
         g_SpadWork->y.fixed = 0x5C0000;
-        g_SpadWork->unk_04 = 0;
+        g_SpadWork->unk_04  = 0;
     }
 }

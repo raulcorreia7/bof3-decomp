@@ -10,7 +10,7 @@ MATCH void func_801F4764(void) {
         D_801448EC = 0x5;
         D_801448ED = 0xFF;
     }
-    record = (u8*)g_ScriptWorkRecord;
+    record                    = (u8*)g_ScriptWorkRecord;
     FIELD(s32, record, 0x18U) = D_801F4F94[D_801490C7 * 2];
     /* FAKE: retail reloads the selection byte after the 0x18 store. */
     MATCH_FAKE_BARRIER();
