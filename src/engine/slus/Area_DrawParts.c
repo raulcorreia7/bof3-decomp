@@ -25,21 +25,21 @@ MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
     s32       signed_coordinate;
     s32       draw_mode;
 
-    if ((Area_TestCondition(*(s16*)part_list) << 24) == 0) {
+    if ((Area_TestCondition(((ScenePart*)part_list)[0].head.id) << 24) == 0) {
         return;
     }
     pos.vx = ((x - 0x80) << 7) + FIELD(s8, part_list, 7) * 2;
     pos.vy = ((y - 0x80) << 7) + FIELD(s8, part_list, 6) * 2;
-    pos.vz = *(s32*)(part_list + 4);
+    pos.vz = (s32)((ScenePart*)part_list)[1].raw;
     scale  = (g_FrameCount & 0xFFF) * 4;
-    rot.vx = ((*(u32*)(part_list + 8) >> 0x14) & 0x3FF) * scale;
-    rot.vy = ((*(u32*)(part_list + 8) >> 0xA) & 0x3FF) * scale;
-    rot.vz = (*(u32*)(part_list + 8) & 0x3FF) * scale;
+    rot.vx = (((ScenePart*)part_list)[2].raw >> 0x14 & 0x3FF) * scale;
+    rot.vy = (((ScenePart*)part_list)[2].raw >> 0xA & 0x3FF) * scale;
+    rot.vz = (((ScenePart*)part_list)[2].raw & 0x3FF) * scale;
     for (part_word_offset = 3; part_word_offset != (FIELD(u8, part_list, 0x2u)); part_word_offset += 6) {
         PushMatrix();
-        part_rotation.vx = (rot.vx + ((((u32*)part_list)[part_word_offset] >> 0x12) & 0xFFC)) & ANGLE_MASK;
-        part_rotation.vy = (rot.vy + ((((u32*)part_list)[part_word_offset] >> 8) & 0xFFC)) & ANGLE_MASK;
-        part_rotation.vz = (rot.vz + ((((u32*)part_list)[part_word_offset] & 0x3FF) * 4)) & ANGLE_MASK;
+        part_rotation.vx = (rot.vx + (((((ScenePart*)part_list)[part_word_offset].raw) >> 0x12) & 0xFFC)) & ANGLE_MASK;
+        part_rotation.vy = (rot.vy + (((((ScenePart*)part_list)[part_word_offset].raw) >> 8) & 0xFFC)) & ANGLE_MASK;
+        part_rotation.vz = (rot.vz + (((((ScenePart*)part_list)[part_word_offset].raw) & 0x3FF) * 4)) & ANGLE_MASK;
         RotTrans(&pos, (VECTOR*)matrix.t, &flag);
         RotMatrix(&part_rotation, &matrix);
         MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
@@ -77,9 +77,9 @@ MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
 
         RotTransPers4(&uv[1], &uv[2], &uv[3], &uv[0], (long*)(&prim->x1), (long*)(&prim->x2), (long*)(&prim->x3),
                       (long*)(&prim->x0), &p, &flag);
-        func_80155560(((u32*)part_list)[part_word_offset + 5], prim, 1);
+        func_80155560(((ScenePart*)part_list)[part_word_offset + 5].raw, prim, 1);
         draw_mode = 6;
-        if ((((u32*)part_list)[part_word_offset + 5] & 0x40000000) == 0) {
+        if ((((ScenePart*)part_list)[part_word_offset + 5].raw & 0x40000000) == 0) {
             draw_mode = g_AreaDrawMode;
         }
         GFX_AddPrim(draw_mode, sizeof(*prim));

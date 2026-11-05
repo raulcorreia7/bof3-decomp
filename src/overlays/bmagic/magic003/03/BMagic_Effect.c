@@ -196,7 +196,13 @@ MATCH void func_801EF918(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF9AC);
+MATCH void func_801EF9AC(void) {
+    g_SpadWork->unk_0C = -0x2000;
+    g_SpadWork->unk_10 = 0;
+    func_801DD350(g_SpadWork);
+    func_8014DAEC();
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF9FC(void) {
     g_SpadWork->coord_x_34.raw += g_SpadWork->unk_0C;
