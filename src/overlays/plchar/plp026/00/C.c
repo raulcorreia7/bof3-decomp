@@ -74,7 +74,7 @@ MATCH void func_801CFB94(void) {
     SYS_DISPATCH_TASK(D_801D0A94, 3, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801CFBD8);
+#include "overlays/plchar/Char_TurnAndRequestScript.h"
 
 INCLUDE_ASM(func_801CFCD8);
 

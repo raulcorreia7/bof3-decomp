@@ -27,4 +27,9 @@ extern Callback D_801D0AA8[];
 extern Callback D_801D0AB4[];
 extern Callback D_801D0AC0[];
 
+extern s32  func_801D06C4(void);
+extern void func_801D0868(void);
+#define PLCHAR_CHECK_FACING func_801D06C4
+#define PLCHAR_PREPARE_TURN func_801D0868
+
 #endif

@@ -70,27 +70,7 @@ MATCH void func_801CF770(void) {
     SYS_DISPATCH_TASK(D_801D0670, 3, g_SpadWork);
 }
 
-extern s32 func_801D02A0(void);
-
-MATCH void func_801CF7B4(void) {
-    u8 direction;
-
-    direction = g_SpadWork->direction_08;
-    if (!(direction & 1)) {
-        g_SpadWork->direction_08 = (direction - 1) & 7;
-        if (!(func_801D02A0() & 0xFF)) {
-            g_SpadWork->direction_08 = (g_SpadWork->direction_08 + 2) & 7;
-            if (!(func_801D02A0() & 0xFF)) {
-                g_SpadWork->direction_08 = (g_SpadWork->direction_08 - 2) & 7;
-            }
-        }
-    }
-    func_801D0444();
-    Actor_RequestScript((((s32)(g_SpadWork->direction_08 - 1) / 2) + 0x42) & 0xFF);
-    g_SpadWork->unk_0B = 0;
-    g_SpadWork->unk_0A = 0xB;
-    g_SpadWork->unk_03 = 1;
-}
+#include "overlays/plchar/Char_TurnAndRequestScript.h"
 
 INCLUDE_ASM(func_801CF8B4);
 
