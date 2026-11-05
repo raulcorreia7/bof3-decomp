@@ -53,7 +53,7 @@ MATCH void func_801EF44C(void) {
     u8 temp_v0;
 
     g_SpadWork->word_08.byte.unk_09 += 1;
-    temp_v0 = g_SpadWork->word_08.byte.timer_0A - 2;
+    temp_v0                           = g_SpadWork->word_08.byte.timer_0A - 2;
     g_SpadWork->word_08.byte.timer_0A = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         func_80196718(g_BattleSelectedActor);

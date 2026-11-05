@@ -21,9 +21,9 @@ MATCH void func_801EEFD8(void) {
 INCLUDE_ASM(func_801EF01C);
 
 MATCH void func_801EF0E8(void) {
-    func_801E257C((u32) g_BattleActingBattler, 0xAU);
-    g_SpadWork->unk_27 = D_801EB4E0->unk_27;
-    g_SpadWork->word_08.byte.unk_09 = 0;
+    func_801E257C((u32)g_BattleActingBattler, 0xAU);
+    g_SpadWork->unk_27                = D_801EB4E0->unk_27;
+    g_SpadWork->word_08.byte.unk_09   = 0;
     g_SpadWork->word_08.byte.timer_0A = 0;
     g_SpadWork->unk_02 += 1;
 }
@@ -154,10 +154,10 @@ MATCH void func_801EFAB8(void) {
 INCLUDE_ASM(func_801EFAFC);
 
 MATCH void func_801EFBEC(void) {
-    g_SpadWork->unk_27 = D_801EB4E0->unk_27;
-    g_SpadWork->unk_14 = 0x100;
-    g_SpadWork->unk_20 = -0x10;
-    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->unk_27                = D_801EB4E0->unk_27;
+    g_SpadWork->unk_14                = 0x100;
+    g_SpadWork->unk_20                = -0x10;
+    g_SpadWork->word_08.byte.unk_09   = 0;
     g_SpadWork->word_08.byte.timer_0A = 0x10;
     g_SpadWork->unk_02 += 1;
 }

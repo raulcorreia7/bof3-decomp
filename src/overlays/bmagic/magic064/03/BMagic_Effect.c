@@ -19,11 +19,11 @@ MATCH void func_801EECFC(void) {
 }
 
 MATCH void func_801EED7C(void) {
-    PartyBattler *temp_s0;
-    PartyBattler *temp_v0;
+    PartyBattler* temp_s0;
+    PartyBattler* temp_v0;
 
-    temp_s0 = g_SpadWork;
-    temp_v0 = &g_BattlePartyBattlers[g_BattleActingBattler];
+    temp_s0    = g_SpadWork;
+    temp_v0    = &g_BattlePartyBattlers[g_BattleActingBattler];
     g_SpadWork = temp_v0;
     Actor_RequestScript((temp_v0->word_08.byte.facing_08 + 0x38) & 0xFF);
     g_SpadWork = temp_s0;

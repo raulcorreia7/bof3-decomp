@@ -52,7 +52,7 @@ MATCH void func_801EF228(void) {
 
 MATCH void func_801EF278(void) {
     g_SpadWork->word_08.byte.timer_0A += 8;
-    if ((u8) g_SpadWork->word_08.byte.timer_0A >= 0x81U) {
+    if ((u8)g_SpadWork->word_08.byte.timer_0A >= 0x81U) {
         g_SpadWork->unk_02 += 1;
     }
 }
@@ -60,7 +60,7 @@ MATCH void func_801EF278(void) {
 MATCH void func_801EF2CC(void) {
     u8 temp_v0;
 
-    temp_v0 = g_SpadWork->word_08.byte.unk_09 - 1;
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
     g_SpadWork->word_08.byte.unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         D_801EB4E0->word_08.byte.unk_0B = 0xFF;

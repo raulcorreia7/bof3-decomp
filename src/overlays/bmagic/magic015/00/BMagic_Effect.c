@@ -91,9 +91,9 @@ INCLUDE_ASM(func_801EFCC4);
 
 MATCH void func_801EFD7C(void) {
     if (D_801EB4E0->word_08.byte.unk_0B == 1) {
-        g_SpadWork->unk_40 = 0x10000;
-        g_SpadWork->unk_44 = 0x10000;
-        g_SpadWork->unk_48 = 2;
+        g_SpadWork->unk_40              = 0x10000;
+        g_SpadWork->unk_44              = 0x10000;
+        g_SpadWork->unk_48              = 2;
         g_SpadWork->word_08.byte.unk_09 = 8;
         g_SpadWork->unk_02 += 1;
     }
