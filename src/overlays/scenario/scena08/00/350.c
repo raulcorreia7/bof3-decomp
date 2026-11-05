@@ -225,10 +225,14 @@ INCLUDE_ASM(func_801F8B50);
 
 INCLUDE_ASM(func_801F8BF8);
 
+/* 8 differing, a pure v0/v1 swap of the two byte locals from +0x0 (retail lbu v1,2(a0) against
+ * candidate lbu v0,2(a0)); next lever: permuter to pin the state local in v1. */
 INCLUDE_ASM(func_801F8CDC);
 
 #include "overlays/scenario/Actor_WaitAndStep.h"
 
+/* 6 differing; first at +0x10: candidate lw v1,20(a2) against retail lbu v1,3(a2) — the row[3]
+ * read must stay the third load before the row[0x14] one; next lever: permuter on the schedules. */
 INCLUDE_ASM(func_801F8D4C);
 
 INCLUDE_ASM(func_801F8D98);
