@@ -50,16 +50,16 @@ MATCH void func_801EF788(void) {
     u8 temp_a0;
     u8 temp_v0;
 
-    temp_a0 = g_Task->word_08.byte.unk_09;
+    temp_a0 = g_Task->unk_09;
     if ((temp_a0 & 0xFF) != 0xFF) {
-        temp_v0                     = temp_a0 - 1;
-        g_Task->word_08.byte.unk_09 = temp_v0;
+        temp_v0        = temp_a0 - 1;
+        g_Task->unk_09 = temp_v0;
         if (!(temp_v0 & 0xFF)) {
             func_800AFC98(2, 5);
         }
     }
     if (func_8014DAEC() & 0xFF) {
-        g_Task->word_08.byte.unk_09 = 8;
+        g_Task->unk_09 = 8;
         g_Task->step += 1;
     }
 }
@@ -67,10 +67,10 @@ MATCH void func_801EF788(void) {
 MATCH void func_801EF814(void) {
     u8 temp_v0;
 
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         g_Task->step += 1;
     }
 }

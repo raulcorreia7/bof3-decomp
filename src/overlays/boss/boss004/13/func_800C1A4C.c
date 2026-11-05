@@ -4,8 +4,8 @@ MATCH void func_800C1A4C(void) {
     u8* result;
     u8  temp_v0;
 
-    temp_v0                                      = ((PartyBattler*)g_Task)->word_08.byte.unk_09 - 1;
-    ((PartyBattler*)g_Task)->word_08.byte.unk_09 = temp_v0;
+    temp_v0                         = ((PartyBattler*)g_Task)->unk_09 - 1;
+    ((PartyBattler*)g_Task)->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         Area_FindSceneRecord(0x5F);
         if (g_BattleEncounter == 5) {

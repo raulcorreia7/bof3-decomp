@@ -9,7 +9,7 @@ MATCH void func_800C1DC4(void) {
         }
     }
     if (((PartyBattler*)g_Task)->slot == 5) {
-        ((PartyBattler*)g_Task)->word_08.byte.facing_08 |= 2;
+        ((PartyBattler*)g_Task)->facing |= 2;
         g_BattleCurrentEnemy->script = D_800C2C74;
     } else {
         g_BattleCurrentEnemy->script = D_800C2C5C;

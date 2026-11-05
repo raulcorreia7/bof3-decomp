@@ -64,7 +64,7 @@ MATCH void func_801F00DC(void) {
     u8  value3;
 
     func_800AF764();
-    if ((g_Task->unk_0C == 4) && ((u8)g_Task->word_08.byte.timer_0A < 5U)) {
+    if ((g_Task->unk_0C == 4) && ((u8)g_Task->timer < 5U)) {
         value2 = (rand() & 3) | 0x40;
     } else {
         value2 = (rand() & 3) | 0x18;
@@ -80,12 +80,12 @@ MATCH void func_801F00DC(void) {
             g_Task->unk_0C += 1;
         }
     }
-    g_Task->word_08.byte.unk_09 += g_Task->unk_0C;
+    g_Task->unk_09 += g_Task->unk_0C;
     if (g_Task->unk_0C == 4) {
-        value3                        = g_Task->word_08.byte.timer_0A - 1;
-        g_Task->word_08.byte.timer_0A = value3;
+        value3        = g_Task->timer - 1;
+        g_Task->timer = value3;
         if (!(value3 & 0xFF)) {
-            if (g_Task->word_08.byte.unk_0B == 0) {
+            if (g_Task->unk_0B == 0) {
                 SND_QueueSelectionFx(0x101);
             }
             g_Task->unk_10 = 8;

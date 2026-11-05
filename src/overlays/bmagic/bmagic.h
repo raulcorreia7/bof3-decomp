@@ -71,7 +71,7 @@
     timer            = (WORK)->timer_05 - 1;                                \
     (WORK)->timer_05 = timer;                                               \
     if (timer == 0) {                                                       \
-        D_801EB4E0->word_08.byte.unk_0B -= 1;                               \
+        D_801EB4E0->unk_0B -= 1;                                            \
         CLEAR();                                                            \
     }
 
@@ -112,15 +112,15 @@ ASSERT_OFFSET(BmagicTrailPoint, y, 0x02);
  * place toward the end, freeing the point at unk_0B. A statement macro: the
  * member declares s32 i. */
 #define BMAGIC_SHIFT_TRAIL(TRAIL)                                        \
-    i = g_Task->word_08.byte.timer_0A - 1;                               \
-    while (i >= g_Task->word_08.byte.unk_0B) {                           \
+    i = g_Task->timer - 1;                                               \
+    while (i >= g_Task->unk_0B) {                                        \
         (TRAIL)[g_Task->unk_04][i + 1].x = (TRAIL)[g_Task->unk_04][i].x; \
         (TRAIL)[g_Task->unk_04][i + 1].y = (TRAIL)[g_Task->unk_04][i].y; \
         i -= 1;                                                          \
     }
 
 /* Decrement the active effect ticker. */
-#define BMAGIC_TICK_EFFECT_WORK() (BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--)
+#define BMAGIC_TICK_EFFECT_WORK() (BATTLE_ACTIVE_WORK->unk_0B--)
 
 /* Run the module step handler the task step selects. A bare statement macro:
  * the member declares `handlers`. Kept: as an inline taking the table by value

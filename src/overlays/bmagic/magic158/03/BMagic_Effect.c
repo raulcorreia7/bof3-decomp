@@ -29,14 +29,14 @@ MATCH void func_801EF140(void) {
     u8 count;
     u8 timer;
 
-    count                        = g_Task->word_08.byte.unk_09;
+    count                        = g_Task->unk_09;
     g_Task->word_3C.half.span_3E = (u16)g_Task->word_3C.half.span_3E - 0x60;
     if ((count & 0xFF) != 0x10) {
-        g_Task->word_08.byte.unk_09 = count + 1;
+        g_Task->unk_09 = count + 1;
     }
-    timer = g_Task->word_08.byte.timer_0A;
+    timer = g_Task->timer;
     if (timer != 0x10) {
-        g_Task->word_08.byte.timer_0A = timer + 2;
+        g_Task->timer = timer + 2;
     }
     if (g_Task->word_3C.half.span_3E == BATTLE_ACTIVE_WORK->word_3C.half.span_3E) {
         g_Task->step += 1;

@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC7C);
 
 MATCH void func_801EEF44(void) {
-    if (g_Task->word_08.byte.unk_0B == 0) {
+    if (g_Task->unk_0B == 0) {
         func_800AEF98(4, 0);
         BATTLE_ACTIVE_WORK->flags &= 0xBF;
         func_800A9820(g_BattleTargetSelector);
@@ -47,10 +47,10 @@ MATCH void func_801EF0F0(void) {
     PartyBattler* work;
 
     work = (PartyBattler*)D_801EB4E0;
-    step = work->word_08.byte.unk_0B;
+    step = work->unk_0B;
     if (step < 2) {
-        work->word_08.byte.unk_0B = step - 1;
-        g_Task->step              = g_Task->step + 1;
+        work->unk_0B = step - 1;
+        g_Task->step = g_Task->step + 1;
     }
 }
 
@@ -63,11 +63,11 @@ INCLUDE_ASM(func_801EF158);
 MATCH void func_801EF1D4(void) {
     s32 start;
 
-    start                         = rand() & 0x3F;
-    g_Task->unk_0C                = start;
-    g_Task->unk_10                = start + 0x1F;
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0x3C;
+    start          = rand() & 0x3F;
+    g_Task->unk_0C = start;
+    g_Task->unk_10 = start + 0x1F;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0x3C;
     g_Task->step += 1;
 }
 
@@ -87,8 +87,8 @@ MATCH void func_801EF7F8(void) {
 }
 
 MATCH void func_801EF870(void) {
-    if ((u8)D_801EB4E0->word_08.byte.unk_0B < 3U) {
-        g_Task->word_08.byte.unk_09 = 0;
+    if ((u8)D_801EB4E0->unk_0B < 3U) {
+        g_Task->unk_09 = 0;
         g_Task->step += 1;
     }
 }

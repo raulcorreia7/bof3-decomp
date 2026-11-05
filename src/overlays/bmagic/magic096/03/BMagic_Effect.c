@@ -11,8 +11,8 @@ INCLUDE_ASM(func_801EEC84);
 MATCH void func_801EEDD8(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         func_800A9610(g_BattleTargetSelector, 0x200);
         g_Task->mode = g_Task->mode + 1;

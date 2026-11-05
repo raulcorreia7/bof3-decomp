@@ -46,9 +46,9 @@ MATCH void func_801EEE50(void) {
     temp_s0 = g_Task;
     g_Task  = D_801EC2E0->target.party;
     func_8014DAEC();
-    g_Task                        = temp_s0;
-    temp_s0->word_08.byte.unk_09  = 0;
-    g_Task->word_08.byte.timer_0A = 0;
+    g_Task          = temp_s0;
+    temp_s0->unk_09 = 0;
+    g_Task->timer   = 0;
 }
 
 /* Scheduling residual: one spad cell read hoists above the row stores and one tail instruction is
@@ -57,7 +57,7 @@ MATCH void func_801EEE50(void) {
 INCLUDE_ASM(func_801EEEB0);
 
 MATCH void func_801EEFA4(void) {
-    if (g_Task->word_08.byte.unk_09 == g_Task->word_08.byte.timer_0A) {
+    if (g_Task->unk_09 == g_Task->timer) {
         g_Task->mode += 1;
         g_Task->step = 0;
     }
@@ -106,8 +106,8 @@ INCLUDE_ASM(func_801EF3C4);
 MATCH void func_801EF528(void) {
     PartyBattler* work;
 
-    work                        = (PartyBattler*)D_801EB4E0;
-    work->word_08.byte.timer_0A = work->word_08.byte.timer_0A + 1;
+    work        = (PartyBattler*)D_801EB4E0;
+    work->timer = work->timer + 1;
     func_801E5988();
 }
 
@@ -119,8 +119,8 @@ MATCH void func_801EF55C(void) {
 }
 
 MATCH void func_801EF5BC(void) {
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = D_801EFADC[g_Task->word_08.byte.unk_09];
+    g_Task->unk_09 = 0;
+    g_Task->timer  = D_801EFADC[g_Task->unk_09];
     SND_QueueSelectionFx(256);
     g_Task->unk_10 = 0;
     g_Task->step++;
@@ -164,7 +164,7 @@ MATCH void func_801EF83C(void) {
     handlers     = D_801EEC44;
     g_ScriptBank = 0x800C3800;
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
-    if ((g_Task->flags & 1) && (D_801EB4E0->word_08.byte.timer_0A == 0)) {
+    if ((g_Task->flags & 1) && (D_801EB4E0->timer == 0)) {
         func_8014D290();
     }
     g_ScriptBank = 0x800D3800;

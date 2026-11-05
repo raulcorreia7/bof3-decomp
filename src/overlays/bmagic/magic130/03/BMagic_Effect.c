@@ -37,7 +37,7 @@ MATCH void func_801EF1E0(void) {
     g_Task->unk_5E -= 8;
     g_Task->unk_5F -= 8;
     if ((s8)g_Task->unk_5D == -0x80) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        BATTLE_ACTIVE_WORK->unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -49,8 +49,8 @@ INCLUDE_ASM(func_801EF354);
 MATCH void func_801EF3DC(void) {
     u8 timer;
 
-    timer                         = g_Task->word_08.byte.timer_0A + 1;
-    g_Task->word_08.byte.timer_0A = timer;
+    timer         = g_Task->timer + 1;
+    g_Task->timer = timer;
     if (timer == 16) {
         g_Task->step = g_Task->step + 1;
     }

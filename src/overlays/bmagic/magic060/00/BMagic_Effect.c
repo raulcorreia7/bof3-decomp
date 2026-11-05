@@ -17,12 +17,12 @@ MATCH void func_801EED68(void) {
     u32           slot;
     PartyBattler* work;
 
-    if (g_Task->word_08.byte.unk_0B == 2) {
+    if (g_Task->unk_0B == 2) {
         slot                               = Battle_AllocEffect(1, 0x12) & BYTE_MASK;
         work                               = g_Task;
         g_BattleEffects[slot].mode         = 2;
         g_BattleEffects[slot].target.party = work;
-        g_Task->word_08.byte.unk_09        = 0x10;
+        g_Task->unk_09                     = 0x10;
         g_Task->mode                       = g_Task->mode + 1;
     }
 }
@@ -35,8 +35,8 @@ MATCH void func_801EEE00(void) {
     } else {
         func_801EF2DC();
     }
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         g_Task->mode += 1;
     }
@@ -49,7 +49,7 @@ MATCH void func_801EEE84(void) {
         func_801EF2DC();
     }
     if (g_InputPressed != 0) {
-        g_Task->word_08.byte.unk_0B = 0x83;
+        g_Task->unk_0B = 0x83;
         g_Task->mode++;
     }
 }
@@ -57,7 +57,7 @@ MATCH void func_801EEE84(void) {
 MATCH void func_801EEF04(void) {
     u16* flags;
 
-    if (g_Task->word_08.byte.unk_0B == 0x80) {
+    if (g_Task->unk_0B == 0x80) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         func_801E5988();
     }
@@ -101,10 +101,10 @@ MATCH void func_801EFF88(void) {
 MATCH void func_801F0030(void) {
     u8 temp_v1;
 
-    temp_v1                     = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v1;
+    temp_v1        = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x10) {
-        D_801EB4E0->word_08.byte.unk_0B = 1;
+        D_801EB4E0->unk_0B = 1;
         g_Task->step += 1;
     }
 }
@@ -113,7 +113,7 @@ MATCH void func_801F0090(void) {
     PartyBattler* work;
 
     work = (PartyBattler*)D_801EB4E0;
-    if (work->word_08.byte.unk_0B == 0x83) {
+    if (work->unk_0B == 0x83) {
         g_Task->step++;
     }
 }
@@ -130,8 +130,8 @@ MATCH void func_801F0254(void) {
 }
 
 MATCH void func_801F02CC(void) {
-    if (D_801EB4E0->word_08.byte.unk_0B == 1) {
-        g_Task->word_08.byte.unk_09 = 0;
+    if (D_801EB4E0->unk_0B == 1) {
+        g_Task->unk_09 = 0;
         g_Task->step += 1;
     }
 }
@@ -139,10 +139,10 @@ MATCH void func_801F02CC(void) {
 MATCH void func_801F031C(void) {
     u8 temp_v1;
 
-    temp_v1                     = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v1;
+    temp_v1        = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x1E) {
-        D_801EB4E0->word_08.byte.unk_0B = 2;
+        D_801EB4E0->unk_0B = 2;
         g_Task->step += 1;
     }
 }
@@ -151,7 +151,7 @@ MATCH void func_801F037C(void) {
     PartyBattler* work;
 
     work = (PartyBattler*)D_801EB4E0;
-    if (work->word_08.byte.unk_0B == 0x83) {
+    if (work->unk_0B == 0x83) {
         g_Task->step++;
     }
 }
@@ -159,10 +159,10 @@ MATCH void func_801F037C(void) {
 MATCH void func_801F03BC(void) {
     PartyBattler* active;
 
-    g_Task->word_08.byte.unk_09 = g_Task->word_08.byte.unk_09 - 2;
-    if (g_Task->word_08.byte.unk_09 == 0) {
-        active                      = BATTLE_ACTIVE_WORK;
-        active->word_08.byte.unk_0B = active->word_08.byte.unk_0B - 1;
+    g_Task->unk_09 = g_Task->unk_09 - 2;
+    if (g_Task->unk_09 == 0) {
+        active         = BATTLE_ACTIVE_WORK;
+        active->unk_0B = active->unk_0B - 1;
         func_801E5988();
     }
 }
@@ -178,8 +178,8 @@ MATCH void func_801F082C(void) {
 
     actor = &g_BattleSelectedActor;
     func_80196718(*actor);
-    g_Task->word_08.byte.unk_0B = func_8019651C(*actor, 0, 0, 0, 1);
-    g_Task->word_08.byte.unk_09 = 0;
+    g_Task->unk_0B = func_8019651C(*actor, 0, 0, 0, 1);
+    g_Task->unk_09 = 0;
     g_Task->step += 1;
 }
 

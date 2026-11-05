@@ -21,9 +21,9 @@ MATCH void func_801EED70(void) {
 INCLUDE_ASM(func_801EEDB4);
 
 MATCH void func_801EEF10(void) {
-    g_Task->word_08.byte.unk_0B   = rand() & 15;
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0;
+    g_Task->unk_0B = rand() & 15;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0;
     g_Task->step++;
 }
 

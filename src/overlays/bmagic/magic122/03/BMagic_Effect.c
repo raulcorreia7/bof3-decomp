@@ -25,10 +25,10 @@ MATCH void func_801EF158(void) {
     PartyBattler* work;
 
     work = g_Task;
-    work->word_08.byte.timer_0A += 3;
+    work->timer += 3;
     work = g_Task;
-    work->word_08.byte.unk_09++;
-    if (work->word_08.byte.unk_09 == 8) {
+    work->unk_09++;
+    if (work->unk_09 == 8) {
         work = g_Task;
         work->step++;
     }

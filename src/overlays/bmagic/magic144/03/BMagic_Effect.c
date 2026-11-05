@@ -28,8 +28,8 @@ INCLUDE_ASM(func_801EEF68);
 MATCH void func_801EF078(void) {
     u8             timer;
     PartyBattler** actor;
-    timer                       = g_Task->word_08.byte.unk_09 + 2;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 + 2;
+    g_Task->unk_09 = timer;
     if (timer == 0x10) {
         actor = &g_BattleSelectedActor;
         func_80196718(*actor);
@@ -44,14 +44,14 @@ MATCH void func_801EF078(void) {
 MATCH void func_801EF154(void) {
     u8 count;
 
-    count = g_Task->word_08.byte.unk_09;
+    count = g_Task->unk_09;
     if (count != 0) {
-        g_Task->word_08.byte.unk_09 = count - 1;
+        g_Task->unk_09 = count - 1;
     }
-    if (g_Task->word_08.byte.unk_0B == 0x80) {
+    if (g_Task->unk_0B == 0x80) {
         func_80196718(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        BATTLE_ACTIVE_WORK->unk_0B -= 1;
         func_801E5988();
     }
 }

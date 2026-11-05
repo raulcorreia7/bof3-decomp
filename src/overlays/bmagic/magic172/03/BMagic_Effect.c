@@ -29,13 +29,13 @@ MATCH void func_801EF3A4(void) {
     u8 counter;
     u8 timer;
 
-    g_Task->word_08.byte.unk_0B += 2;
-    timer = g_Task->word_08.byte.timer_0A;
+    g_Task->unk_0B += 2;
+    timer = g_Task->timer;
     if (timer < 0x10U) {
-        g_Task->word_08.byte.timer_0A = timer + 2;
+        g_Task->timer = timer + 2;
     }
-    counter                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = counter;
+    counter        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
         g_Task->step += 1;
     }
@@ -44,12 +44,12 @@ MATCH void func_801EF3A4(void) {
 MATCH void func_801EF430(void) {
     u8 temp_v0;
 
-    g_Task->word_08.byte.unk_0B += 4;
-    temp_v0                       = g_Task->word_08.byte.timer_0A - 2;
-    g_Task->word_08.byte.timer_0A = temp_v0;
+    g_Task->unk_0B += 4;
+    temp_v0       = g_Task->timer - 2;
+    g_Task->timer = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         SND_QueueSelectionFx(0x102);
-        g_Task->word_08.byte.unk_09 = 0x10;
+        g_Task->unk_09 = 0x10;
         g_Task->step += 1;
     }
 }

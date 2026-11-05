@@ -34,7 +34,7 @@ MATCH void func_801EF3A4(void) {
     g_Task->unk_40 += g_Task->unk_0C;
     g_Task->unk_44 += g_Task->unk_10;
     if (g_Task->unk_0C == 0) {
-        g_Task->word_08.byte.unk_09 = 0x10;
+        g_Task->unk_09 = 0x10;
         g_Task->step += 1;
     }
 }
@@ -43,8 +43,8 @@ MATCH void func_801EF43C(void) {
     u8 temp_v0;
 
     func_8014D978();
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         g_Task->unk_18 = 0x60;
         g_Task->unk_1C = -0x80;
@@ -72,10 +72,10 @@ MATCH void func_801EF534(void) {
 
     if (func_8014DAEC() & 0xFF) {
         if (g_BattleTargetSelector & 0x40) {
-            value2                   = g_Task->word_08.byte.unk_0B;
+            value2                   = g_Task->unk_0B;
             D_801EB630[value2].flags = D_801EB630[value2].flags & 0xBF;
         } else {
-            value                              = g_Task->word_08.byte.unk_0B;
+            value                              = g_Task->unk_0B;
             g_BattlePartyBattlers[value].flags = g_BattlePartyBattlers[value].flags & 0xBF;
         }
         g_Task->step += 1;

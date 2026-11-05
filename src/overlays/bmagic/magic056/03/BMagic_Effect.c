@@ -30,12 +30,12 @@ MATCH void func_801EF1F4(void) {
 MATCH void func_801EF2DC(void) {
     u8 counter;
 
-    if (g_Task->word_08.byte.unk_09 == 4) {
+    if (g_Task->unk_09 == 4) {
         func_800A9610(g_BattleTargetSelector, 0x10U);
     }
-    SP_REF(s16, 0)              = g_Task->word_08.byte.unk_09 * 0x1C;
-    counter                     = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = counter;
+    SP_REF(s16, 0) = g_Task->unk_09 * 0x1C;
+    counter        = g_Task->unk_09 + 1;
+    g_Task->unk_09 = counter;
     if ((counter & 0xFF) == 0xC) {
         g_Task->step += 1;
     }
@@ -44,12 +44,12 @@ MATCH void func_801EF2DC(void) {
 MATCH void func_801EF37C(void) {
     u8 temp_v0;
 
-    SP_REF(s16, 0u) = (g_Task->word_08.byte.unk_09 * 4) + 0x120;
-    g_Task->word_08.byte.timer_0A += 1;
-    temp_v0                     = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    SP_REF(s16, 0u) = (g_Task->unk_09 * 4) + 0x120;
+    g_Task->timer += 1;
+    temp_v0        = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v0;
     if ((temp_v0 & 0xFF) == 0x28) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -77,10 +77,10 @@ MATCH void func_801EFB38(void) {
     PartyBattler* work;
 
     work = g_Task;
-    work->word_08.byte.timer_0A += 2;
+    work->timer += 2;
     work = g_Task;
-    work->word_08.byte.unk_09++;
-    if (work->word_08.byte.unk_09 == 12) {
+    work->unk_09++;
+    if (work->unk_09 == 12) {
         work = g_Task;
         work->step++;
     }
@@ -124,8 +124,8 @@ MATCH void func_801F0178(void) {
     g_Task->unk_5F += 0x10;
     if ((s8)g_Task->unk_5D == 0) {
         g_Task->flags &= 0xDF;
-        g_Task->unk_5C              = 0;
-        g_Task->word_08.byte.unk_09 = 8;
+        g_Task->unk_5C = 0;
+        g_Task->unk_09 = 8;
         g_Task->step += 1;
     }
 }
@@ -136,8 +136,8 @@ MATCH void func_801F042C(void) {
     u8 count;
 
     func_8014D978();
-    count                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = count;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
         g_Task->flags |= 0x20;
         g_Task->unk_5C = 1;
@@ -151,12 +151,12 @@ MATCH void func_801F042C(void) {
 INCLUDE_ASM(func_801F04EC);
 
 MATCH void func_801F0658(void) {
-    if (D_801EB4E0->word_08.byte.unk_0B == 1) {
+    if (D_801EB4E0->unk_0B == 1) {
         g_Task->unk_5D += 0x10;
         g_Task->unk_5E += 0x10;
         g_Task->unk_5F += 0x10;
         if ((s8)g_Task->unk_5D == 0) {
-            D_801EB4E0->word_08.byte.unk_0B -= 1;
+            D_801EB4E0->unk_0B -= 1;
             g_Task->step += 1;
         }
     }

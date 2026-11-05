@@ -18,14 +18,14 @@ NON_MATCHING void func_801EEC70(void) {
     u32           value;
     s32           span;
 
-    src                            = BATTLE_ACTIVE_WORK;
-    g_Task->word_08.byte.facing_08 = src->word_08.byte.facing_08;
-    g_Task->coord_x_34.raw         = src->coord_x_34.raw;
-    g_Task->coord_y_38.raw         = src->coord_y_38.raw;
-    span                           = g_BattleSelectedActor->word_3C.word;
-    g_Task->word_08.byte.unk_09    = 0;
-    g_Task->word_3C.word           = span;
-    g_Task->word_08.byte.unk_0B    = 0;
+    src                    = BATTLE_ACTIVE_WORK;
+    g_Task->facing         = src->facing;
+    g_Task->coord_x_34.raw = src->coord_x_34.raw;
+    g_Task->coord_y_38.raw = src->coord_y_38.raw;
+    span                   = g_BattleSelectedActor->word_3C.word;
+    g_Task->unk_09         = 0;
+    g_Task->word_3C.word   = span;
+    g_Task->unk_0B         = 0;
     g_Task->mode += 1;
     offset  = (Battle_AllocEffect(1, 0xA) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     counter = 0;
@@ -36,7 +36,7 @@ NON_MATCHING void func_801EEC70(void) {
         FIELD(u8, D_801EC339, offset)            = (u8)value;
         work                                     = g_Task;
         FIELD(PartyBattler*, D_801EC3A4, offset) = work;
-        work->word_08.byte.unk_0B += 1;
+        work->unk_0B += 1;
         counter += 1;
         value += 2;
     } while (counter < 8);
@@ -47,7 +47,7 @@ INCLUDE_ASM(func_801EEC70);
 #endif
 
 MATCH void func_801EED9C(void) {
-    if (g_Task->word_08.byte.unk_09 != 0) {
+    if (g_Task->unk_09 != 0) {
         func_800A9610(g_BattleTargetSelector, 0x10U);
         g_Task->mode += 1;
     }

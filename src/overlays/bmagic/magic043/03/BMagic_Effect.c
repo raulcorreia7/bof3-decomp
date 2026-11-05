@@ -12,13 +12,13 @@ MATCH void func_801EEEF0(void) {
     PartyBattler* battler;
     u8            value;
 
-    battler                     = g_BattleSelectedActor;
-    value                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = value;
+    battler        = g_BattleSelectedActor;
+    value          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
         func_80196718(battler);
-        g_Task->word_08.byte.timer_0A = func_8019651C(battler, 0, 0, 0, 1);
-        g_Task->word_08.byte.unk_09   = 4;
+        g_Task->timer  = func_8019651C(battler, 0, 0, 0, 1);
+        g_Task->unk_09 = 4;
         g_Task->mode += 1;
     }
 }
@@ -50,9 +50,9 @@ MATCH void func_801EF5E0(void) {
     PartyBattler* work;
     u8            count;
 
-    work                      = g_Task;
-    count                     = work->word_08.byte.unk_09 + 1;
-    work->word_08.byte.unk_09 = count;
+    work         = g_Task;
+    count        = work->unk_09 + 1;
+    work->unk_09 = count;
     work->coord_x_34.raw += work->unk_0C;
     work->coord_y_38.raw += work->unk_10;
     if (count == 24) {
@@ -70,7 +70,7 @@ MATCH void func_801EF72C(void) {
 
     PushMatrix();
     rot.vx = 0x400;
-    rot.vy = D_801EFC9C[g_Task->word_08.byte.facing_08];
+    rot.vy = D_801EFC9C[g_Task->facing];
     rot.vz = 0;
     pos.vx = (g_Task->coord_x_34.raw >> 9) - 0x4000;
     pos.vy = (g_Task->coord_y_38.raw >> 9) - 0x4000;

@@ -5,8 +5,8 @@
 MATCH void Effect_CountDownAndSetTint(void) {
     u8 count;
 
-    count                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = count;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
         g_Task->flags |= 0x20;
         g_Task->unk_5C = 1;

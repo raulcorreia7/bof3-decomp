@@ -22,8 +22,8 @@ MATCH void func_801EEF28(void) {
     PartyBattler* battler;
     u8            value;
 
-    value                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = value;
+    value          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
         g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
         g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
@@ -38,7 +38,7 @@ MATCH void func_801EEF28(void) {
                           0x200) &
                          0xFFF;
         SND_QueueSelectionFx(0x100);
-        g_Task->word_08.byte.unk_09 = 0x20;
+        g_Task->unk_09 = 0x20;
         g_Task->step += 1;
     }
 }
@@ -48,9 +48,9 @@ INCLUDE_ASM(func_801EF04C);
 MATCH void func_801EF0B8(void) {
     PartyBattler* work;
 
-    work                      = g_Task;
-    work->word_08.byte.unk_09 = work->word_08.byte.unk_09 - 1;
-    if (work->word_08.byte.unk_09 == 0) {
+    work         = g_Task;
+    work->unk_09 = work->unk_09 - 1;
+    if (work->unk_09 == 0) {
         SND_QueueSelectionFx(0x101);
         g_Task->step = g_Task->step + 1;
     }
@@ -83,10 +83,10 @@ MATCH void func_801F020C(void) {
     u8 counter;
 
     if (g_FrameCount & 1) {
-        g_Task->word_08.byte.timer_0A += 1;
+        g_Task->timer += 1;
     }
-    counter                     = g_Task->word_08.byte.unk_09 + 0x10;
-    g_Task->word_08.byte.unk_09 = counter;
+    counter        = g_Task->unk_09 + 0x10;
+    g_Task->unk_09 = counter;
     if ((counter & 0xFF) == 0x80) {
         g_Task->step += 1;
     }
@@ -111,19 +111,19 @@ MATCH void func_801F04F4(void) {
 MATCH void func_801F05A4(void) {
     PartyBattler* src;
 
-    src                         = g_BattleSelectedActor;
-    g_Task->coord_x_34          = src->coord_x_34;
-    g_Task->coord_y_38          = src->coord_y_38;
-    g_Task->word_3C             = src->word_3C;
-    g_Task->word_08.byte.unk_09 = 0;
-    g_Task->step                = g_Task->step + 1;
+    src                = g_BattleSelectedActor;
+    g_Task->coord_x_34 = src->coord_x_34;
+    g_Task->coord_y_38 = src->coord_y_38;
+    g_Task->word_3C    = src->word_3C;
+    g_Task->unk_09     = 0;
+    g_Task->step       = g_Task->step + 1;
 }
 
 MATCH void func_801F05F4(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 + 4;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 + 4;
+    g_Task->unk_09 = timer;
     if (timer == 16) {
         g_Task->step = g_Task->step + 1;
     }

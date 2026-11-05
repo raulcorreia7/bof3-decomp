@@ -6,7 +6,7 @@ MATCH void func_800C1B40(void) {
     saved  = (PartyBattler*)g_Task;
     g_Task = (struct Task*)(D_801EC2E0->target.bytes);
     if (func_8014DAEC() & BYTE_MASK) {
-        saved->word_08.byte.timer_0A = 0;
+        saved->timer = 0;
         saved->mode++;
     }
     g_Task = (struct Task*)saved;

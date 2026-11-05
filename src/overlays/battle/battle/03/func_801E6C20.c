@@ -6,8 +6,8 @@ MATCH void func_801E6C20(void) {
     u16           half;
 
     func_8014DAEC();
-    count                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = count;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
     if (count == 0u) {
         gate        = &g_BattleState;
         half        = (u16)(*gate | 0x20u);

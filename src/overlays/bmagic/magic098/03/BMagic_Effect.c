@@ -25,9 +25,9 @@ INCLUDE_ASM(func_801EF1B4);
 MATCH void func_801EF334(void) {
     u8 temp_v0;
 
-    g_Task->word_08.byte.unk_0B += 1;
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    g_Task->unk_0B += 1;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         if (g_BattleTargetSelector & 0x40) {
             func_800A9820((g_Task->unk_03 + 3) & 0xFF);

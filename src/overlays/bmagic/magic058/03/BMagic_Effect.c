@@ -9,7 +9,7 @@ INCLUDE_ASM(func_801EEC28);
 INCLUDE_ASM(func_801EED30);
 
 MATCH void func_801EEE78(void) {
-    if (g_Task->word_08.byte.unk_0B == 0) {
+    if (g_Task->unk_0B == 0) {
         func_801DE8C0(1, 0x3C, Resource_GetText(0x14U));
         g_Task->mode += 1;
     }
@@ -44,15 +44,15 @@ MATCH void func_801EF008(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_Task->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
-    work                           = g_Task;
-    actor                          = D_801EB4E0;
-    work->coord_x_34.raw           = actor->coord_x_34.raw;
-    work->coord_y_38.raw           = actor->coord_y_38.raw;
-    z                              = actor->word_3C.word;
-    work->word_08.byte.timer_0A    = 0x10;
-    work->unk_0C                   = 8;
-    work->word_3C.word             = z;
+    g_Task->facing       = D_801EB4E0->facing;
+    work                 = g_Task;
+    actor                = D_801EB4E0;
+    work->coord_x_34.raw = actor->coord_x_34.raw;
+    work->coord_y_38.raw = actor->coord_y_38.raw;
+    z                    = actor->word_3C.word;
+    work->timer          = 0x10;
+    work->unk_0C         = 8;
+    work->word_3C.word   = z;
     g_Task->step += 1;
 }
 

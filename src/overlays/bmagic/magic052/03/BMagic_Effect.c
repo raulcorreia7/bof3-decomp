@@ -9,16 +9,16 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC7C(void) {
     PartyBattler* work;
 
-    g_Task->word_08.byte.unk_09   = 8;
-    g_Task->word_08.byte.timer_0A = 4;
-    work                          = g_Task;
-    work->mode                    = work->mode + 1;
+    g_Task->unk_09 = 8;
+    g_Task->timer  = 4;
+    work           = g_Task;
+    work->mode     = work->mode + 1;
 }
 
 INCLUDE_ASM(func_801EECBC);
 
 MATCH void func_801EEE30(void) {
-    if (g_Task->word_08.byte.timer_0A-- == 0) {
+    if (g_Task->timer-- == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
@@ -49,7 +49,7 @@ MATCH void func_801EEF84(void) {
     work->unk_2B      = 0;
     work->unk_2C.half = 0;
     g_Task->unk_2A    = 0;
-    temp_v0           = g_Task->word_08.byte.unk_09;
+    temp_v0           = g_Task->unk_09;
     if (temp_v0 != 0) {
         var_a0 = 0x100;
         if (temp_v0 & 1) {

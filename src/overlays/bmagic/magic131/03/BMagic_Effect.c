@@ -36,14 +36,14 @@ INCLUDE_ASM(func_801EFA68);
 
 MATCH void func_801EFB64(void) {
     PartyBattler* work  = g_Task;
-    u8            timer = work->word_08.byte.unk_09 - 1;
+    u8            timer = work->unk_09 - 1;
     work->unk_0C += work->unk_18;
-    work->word_08.byte.unk_09 = timer;
+    work->unk_09 = timer;
     work->unk_10 += work->unk_1C;
     work->unk_2E.half += work->unk_0C;
     work->unk_30.half += work->unk_10;
     if (timer == 0) {
-        g_Task->word_08.byte.unk_09 = 0x24;
+        g_Task->unk_09 = 0x24;
         g_Task->step += 1;
     }
 }
@@ -52,11 +52,11 @@ MATCH void func_801EFBF8(void) {
     u8 temp_v0;
 
     func_8014D978();
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         Actor_SelectScript(1U);
-        g_Task->word_08.byte.unk_09 = 0x29;
+        g_Task->unk_09 = 0x29;
         g_Task->step += 1;
     }
 }
@@ -65,8 +65,8 @@ INCLUDE_ASM(func_801EFC74);
 
 MATCH void func_801EFEF0(void) {
     if (func_8014DAEC() != 0u) {
-        g_Task->word_08.byte.unk_09 = 0xF;
-        g_Task->step                = g_Task->step + 1;
+        g_Task->unk_09 = 0xF;
+        g_Task->step   = g_Task->step + 1;
     }
 }
 
@@ -74,8 +74,8 @@ MATCH void func_801EFF48(void) {
     u32 direction;
     u8  timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         func_800A9820(g_BattleTargetSelector);
         direction = LOBU(g_BattleScrollDir);
@@ -90,8 +90,8 @@ MATCH void func_801EFF48(void) {
             g_Task->unk_18 = -1;
             g_Task->unk_1C = -1;
         }
-        g_Task->word_08.byte.unk_09   = 0;
-        g_Task->word_08.byte.timer_0A = 0x1E;
+        g_Task->unk_09 = 0;
+        g_Task->timer  = 0x1E;
         g_Task->step += 1;
     }
 }
@@ -102,19 +102,19 @@ MATCH void func_801F0034(void) {
     PartyBattler* work;
 
     if (g_FrameCount & 1) {
-        count = g_Task->word_08.byte.unk_09;
+        count = g_Task->unk_09;
         if (count < 8U) {
-            g_Task->word_08.byte.unk_09 = count + 1;
+            g_Task->unk_09 = count + 1;
             g_Task->unk_10 += g_Task->unk_1C;
         }
     }
-    work                        = g_Task;
-    timer                       = work->word_08.byte.timer_0A - 1;
-    work->word_08.byte.timer_0A = timer;
+    work        = g_Task;
+    timer       = work->timer - 1;
+    work->timer = timer;
     work->unk_2E.half += work->unk_0C;
     work->unk_30.half += work->unk_10;
     if (!(timer & BYTE_MASK)) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -131,8 +131,8 @@ MATCH void func_801F0100(void) {
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
 
 MATCH void func_801F01F8(void) {
-    if ((BATTLE_ACTIVE_WORK->word_08.byte.unk_09 == 0) && (EMI_LoaderIsReady() != 0)) {
-        g_Task->word_08.byte.timer_0A = 8;
+    if ((BATTLE_ACTIVE_WORK->unk_09 == 0) && (EMI_LoaderIsReady() != 0)) {
+        g_Task->timer = 8;
         g_Task->step += 1;
     }
 }
@@ -165,13 +165,13 @@ MATCH void func_801F058C(void) {
     s8            count;
 
     work = g_Task;
-    work->word_08.byte.unk_09 += 2;
+    work->unk_09 += 2;
     work         = g_Task;
     count        = work->unk_5D - 4;
     work->unk_5D = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->word_08.byte.unk_0B--;
+        active->unk_0B--;
         func_801E5988();
     }
 }
@@ -198,7 +198,7 @@ MATCH void func_801F0C4C(void) {
     value          = g_Task->unk_14 + 0x20;
     g_Task->unk_14 = value;
     if (value == 0x200) {
-        g_Task->word_08.byte.unk_0B = 1;
+        g_Task->unk_0B = 1;
         g_Task->step += 1;
     }
 }

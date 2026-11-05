@@ -3,11 +3,11 @@
 MATCH void Effect_CountDownAndFinish(void) {
     PartyBattler* work;
 
-    work                        = g_Task;
-    work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
-    if (work->word_08.byte.timer_0A == 0) {
-        work                      = BATTLE_ACTIVE_WORK;
-        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
+    work        = g_Task;
+    work->timer = work->timer - 1;
+    if (work->timer == 0) {
+        work         = BATTLE_ACTIVE_WORK;
+        work->unk_0B = work->unk_0B - 1;
         func_801E5988();
     }
 }

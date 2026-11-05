@@ -6,12 +6,12 @@
 MATCH void func_801EF124(void) {
     u8 temp_v0;
 
-    g_Task->word_08.byte.unk_0B += 1;
-    g_Task->word_08.byte.timer_0A -= 3;
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 2;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    g_Task->unk_0B += 1;
+    g_Task->timer -= 3;
+    temp_v0        = g_Task->unk_09 - 2;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         func_801E5988();
     }
 }

@@ -6,7 +6,7 @@ MATCH void Effect_StepWhileTickUnderThree(void) {
     PartyBattler* work;
 
     work = (PartyBattler*)D_801EB4E0;
-    if (work->word_08.byte.unk_0B < 3) {
+    if (work->unk_0B < 3) {
         g_Task->step = g_Task->step + 1;
     }
 }

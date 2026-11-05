@@ -4,14 +4,14 @@
  * effect modules; every change here must verify every member. */
 /* func_801EF27C (magic056), func_801EEFAC (magic126), Effect_CopyBattlerCoords_801EFAD8 (magic056) */
 /* The statements of Effect_CopyBattlerCoords; each member declares src. */
-#define BMAGIC_COPY_BATTLER_COORDS()                           \
-    src                           = (PartyBattler*)D_801EB4E0; \
-    g_Task->coord_x_34            = src->coord_x_34;           \
-    g_Task->coord_y_38            = src->coord_y_38;           \
-    g_Task->word_3C               = src->word_3C;              \
-    g_Task->word_08.byte.unk_09   = 0;                         \
-    g_Task->word_08.byte.timer_0A = 0;                         \
-    g_Task->step                  = g_Task->step + 1
+#define BMAGIC_COPY_BATTLER_COORDS()                \
+    src                = (PartyBattler*)D_801EB4E0; \
+    g_Task->coord_x_34 = src->coord_x_34;           \
+    g_Task->coord_y_38 = src->coord_y_38;           \
+    g_Task->word_3C    = src->word_3C;              \
+    g_Task->unk_09     = 0;                         \
+    g_Task->timer      = 0;                         \
+    g_Task->step       = g_Task->step + 1
 
 MATCH void Effect_CopyBattlerCoords(void) {
     PartyBattler* src;

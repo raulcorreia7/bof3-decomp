@@ -4,9 +4,9 @@ MATCH void func_800C1AB4(void) {
     PartyBattler* work;
     PartyBattler* spad;
 
-    func_800C236C(g_Task->word_08.byte.unk_09);
+    func_800C236C(g_Task->unk_09);
     work = g_Task;
-    if (work->word_08.byte.unk_09 == 0x30) {
+    if (work->unk_09 == 0x30) {
         work->unk_48 = 2;
         spad         = g_Task;
         spad->unk_40 = 0x10000;
@@ -14,6 +14,6 @@ MATCH void func_800C1AB4(void) {
         SND_PlayCue(EMI_CUE_ID(6, 2));
         g_Task->unk_04++;
     } else {
-        work->word_08.byte.unk_09 += 4;
+        work->unk_09 += 4;
     }
 }

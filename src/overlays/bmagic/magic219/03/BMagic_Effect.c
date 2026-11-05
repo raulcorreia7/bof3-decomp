@@ -13,8 +13,8 @@ INCLUDE_ASM(func_801EEE50);
 MATCH void func_801EEF54(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         SND_QueueSelectionFx(0x101);
         func_800A9610(g_BattleTargetSelector, 0x10);
@@ -45,8 +45,8 @@ MATCH void func_801EF530(void) {
     g_Task->unk_27       = 0x1A;
     g_Task->unk_2B       = 1;
     Actor_SelectScript(1);
-    g_Task->word_08.byte.unk_09   = 0xE;
-    g_Task->word_08.byte.timer_0A = 0xC;
+    g_Task->unk_09 = 0xE;
+    g_Task->timer  = 0xC;
     g_Task->step += 1;
 }
 
@@ -55,14 +55,14 @@ MATCH void func_801EF5DC(void) {
     u8 temp_v0_2;
 
     func_8014DAEC();
-    temp_v0 = g_Task->word_08.byte.timer_0A;
+    temp_v0 = g_Task->timer;
     if (temp_v0 != 0) {
-        g_Task->word_08.byte.timer_0A = temp_v0 - 1;
+        g_Task->timer = temp_v0 - 1;
     }
-    temp_v0_2                   = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0_2;
+    temp_v0_2      = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0_2;
     if (!(temp_v0_2 & 0xFF)) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         Actor_Clear();
     }
 }

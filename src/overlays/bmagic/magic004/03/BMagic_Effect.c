@@ -13,13 +13,13 @@ INCLUDE_ASM(func_801EEF8C);
 MATCH void func_801EF158(void) {
     u16 cue;
 
-    if (g_Task->word_08.byte.unk_0B == 0) {
+    if (g_Task->unk_0B == 0) {
         cue = D_801EFE40[g_Task->unk_04];
         if (cue != 0) {
             SND_QueueSelectionFx(cue);
         }
         func_800A9820(g_BattleTargetSelector);
-        g_Task->word_08.byte.unk_09 = 0;
+        g_Task->unk_09 = 0;
         g_Task->mode++;
     }
 }
@@ -58,16 +58,16 @@ INCLUDE_ASM(func_801EFBEC);
 MATCH void func_801EFD84(void) {
     u8 temp_v0;
 
-    temp_v0 = g_Task->word_08.byte.unk_09;
+    temp_v0 = g_Task->unk_09;
     if (temp_v0 != 0) {
         temp_v0 -= 1;
-        g_Task->word_08.byte.unk_09 = temp_v0;
+        g_Task->unk_09 = temp_v0;
         if (!(temp_v0 & 0xFF)) {
             SND_QueueSelectionFx(0x101);
         }
     }
     if (func_8014DAEC() & 0xFF) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         func_801E5988();
         return;
     }

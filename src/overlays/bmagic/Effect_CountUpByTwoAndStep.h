@@ -5,8 +5,8 @@
 MATCH void Effect_CountUpByTwoAndStep(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 + 2;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 + 2;
+    g_Task->unk_09 = timer;
     if (timer == 16) {
         g_Task->step = g_Task->step + 1;
     }

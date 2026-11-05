@@ -48,11 +48,11 @@ MATCH void func_8009B488(void) {
             if (!(Battle_SlotIsBlocked(index) & BYTE_MASK)) {
                 g_BattlePartyBattlers[index].mode_119 = 0;
                 g_BattlePartyBattlers[index].mode     = 2;
-                state                                 = g_BattlePartyBattlers[index].word_08.byte.facing_08;
+                state                                 = g_BattlePartyBattlers[index].facing;
                 g_BattlePartyBattlers[index].step     = 0;
                 g_BattlePartyBattlers[index].unk_03   = 0;
                 g_BattlePartyBattlers[index].unk_04   = 0;
-                g_BattlePartyBattlers[index].word_08.byte.facing_08 = state ^ 2;
+                g_BattlePartyBattlers[index].facing   = state ^ 2;
             }
             count++;
         } while ((u32)(count & BYTE_MASK) < (u8)g_BattlePartyCount);

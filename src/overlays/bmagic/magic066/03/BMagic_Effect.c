@@ -13,8 +13,8 @@ MATCH void func_801EEDB8(void) {
     u32           slot;
     PartyBattler* work;
 
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         slot                               = Battle_AllocEffect(1, 0x11) & BYTE_MASK;
         work                               = g_Task;
@@ -35,7 +35,7 @@ MATCH void func_801EEEBC(void) {
 
 MATCH void func_801EEF00(void) {
     SYS_DISPATCH_BYTE(D_801F006C, g_Task->step);
-    if (BATTLE_ACTIVE_WORK->word_08.byte.unk_0B != 0xFF) {
+    if (BATTLE_ACTIVE_WORK->unk_0B != 0xFF) {
         Effect_SetActorMatrix();
         func_801EF158();
         PopMatrix();
@@ -49,16 +49,16 @@ INCLUDE_ASM(func_801EEFF8);
 MATCH void func_801EF04C(void) {
     s32 phase;
 
-    g_Task->word_08.byte.unk_0B = (g_Task->word_08.byte.unk_0B - 1) & 0x1F;
-    phase                       = g_Task->unk_10 + 2;
-    g_Task->unk_10              = phase;
+    g_Task->unk_0B = (g_Task->unk_0B - 1) & 0x1F;
+    phase          = g_Task->unk_10 + 2;
+    g_Task->unk_10 = phase;
     if (phase == 0x80) {
         g_Task->step += 1;
     }
 }
 
 MATCH void func_801EF0A4(void) {
-    g_Task->word_08.byte.unk_0B = (g_Task->word_08.byte.unk_0B - 1) & 0x1F;
+    g_Task->unk_0B = (g_Task->unk_0B - 1) & 0x1F;
     g_Task->unk_14 -= 2;
     g_Task->unk_10 -= 2;
     if (g_Task->unk_10 == 0x20) {
@@ -73,7 +73,7 @@ MATCH void func_801EF108(void) {
     g_Task->unk_14 -= 2;
     g_Task->unk_10 = count;
     if (count == 0) {
-        D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        D_801EB4E0->unk_0B = 0xFF;
         func_801E5988();
     }
 }
@@ -92,7 +92,7 @@ MATCH void func_801EF878(void) {
     for (i = 0; i < 4; i++) {
         D_801F00B0[i] = 0;
     }
-    g_Task->word_08.byte.unk_09 = 0;
+    g_Task->unk_09 = 0;
     g_Task->step += 1;
 }
 
@@ -100,8 +100,8 @@ MATCH void func_801EF8C8(void) {
     u8 timer;
 
     func_801EF984();
-    timer                       = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = timer;
     if (timer == 0x60) {
         g_Task->step = g_Task->step + 1;
     }
@@ -111,8 +111,8 @@ MATCH void func_801EF930(void) {
     u8 temp_v1;
 
     func_801EF984();
-    temp_v1                     = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v1;
+    temp_v1        = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x80) {
         func_801E5988();
     }

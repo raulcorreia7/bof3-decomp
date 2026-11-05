@@ -3,11 +3,11 @@
  * modules; every change here must verify every member. */
 /* Effect_CountDownAndStep (magic062, magic067, magic076, magic078, magic082, magic111, magic131, magic137, magic222), Effect_CountDownAndStep_801F0C98 (magic131) */
 /* The statements of Effect_CountDownAndStep; each member declares count. */
-#define BMAGIC_COUNT_DOWN_AND_STEP()                                   \
-    count                         = g_Task->word_08.byte.timer_0A - 1; \
-    g_Task->word_08.byte.timer_0A = count;                             \
-    if (count == 0) {                                                  \
-        g_Task->step = g_Task->step + 1;                               \
+#define BMAGIC_COUNT_DOWN_AND_STEP()     \
+    count         = g_Task->timer - 1;   \
+    g_Task->timer = count;               \
+    if (count == 0) {                    \
+        g_Task->step = g_Task->step + 1; \
     }
 
 MATCH void Effect_CountDownAndStep(void) {

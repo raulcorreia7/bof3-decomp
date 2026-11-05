@@ -74,7 +74,7 @@ MATCH void func_801DF3F8(void) {
                 }
             }
             actor = g_Task;
-            mode  = actor->word_08.byte.facing_08;
+            mode  = actor->facing;
             if ((mode == 1) || (mode == 3)) {
                 s32 slot_offset = actor->slot * BATTLE_EFFECT_STRIDE;
 

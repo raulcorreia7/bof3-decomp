@@ -49,7 +49,7 @@ MATCH void func_801EF644(void) {
 INCLUDE_ASM(func_801EF6B0);
 
 MATCH void func_801EF93C(void) {
-    if (g_Task->word_08.byte.unk_0B == 0) {
+    if (g_Task->unk_0B == 0) {
         func_800AFC54();
         BATTLE_ACTIVE_WORK->flags &= 0xBF;
         func_800AEF98(4, 0);
@@ -82,11 +82,11 @@ INCLUDE_ASM(func_801EFBD8);
 INCLUDE_ASM(func_801EFCC4);
 
 MATCH void func_801EFD7C(void) {
-    if (D_801EB4E0->word_08.byte.unk_0B == 1) {
-        g_Task->unk_40              = 0x10000;
-        g_Task->unk_44              = 0x10000;
-        g_Task->unk_48              = 2;
-        g_Task->word_08.byte.unk_09 = 8;
+    if (D_801EB4E0->unk_0B == 1) {
+        g_Task->unk_40 = 0x10000;
+        g_Task->unk_44 = 0x10000;
+        g_Task->unk_48 = 2;
+        g_Task->unk_09 = 8;
         g_Task->step += 1;
     }
 }
@@ -146,11 +146,11 @@ MATCH void func_801F0B8C(void) {
 INCLUDE_ASM(func_801F0C30);
 
 MATCH void func_801F0D48(void) {
-    g_Task->unk_14                = 0x80;
-    g_Task->unk_20                = -0x10;
-    g_Task->unk_27                = BATTLE_ACTIVE_WORK->unk_27;
-    g_Task->word_08.byte.unk_09   = 0x14;
-    g_Task->word_08.byte.timer_0A = 7;
+    g_Task->unk_14 = 0x80;
+    g_Task->unk_20 = -0x10;
+    g_Task->unk_27 = BATTLE_ACTIVE_WORK->unk_27;
+    g_Task->unk_09 = 0x14;
+    g_Task->timer  = 7;
     g_Task->step += 1;
 }
 
@@ -172,7 +172,7 @@ MATCH void func_801F1180(void) {
     g_Task->unk_5E += 0x10;
     g_Task->unk_5F += 0x10;
     if ((s8)g_Task->unk_5D == -0x40) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         g_Task->step += 1;
     }
 }

@@ -28,16 +28,16 @@ MATCH void func_801EF5C0(void) {
     u8   temp_v0;
 
     func_8014DAEC();
-    if (g_Task->word_08.byte.unk_09 & 1) {
+    if (g_Task->unk_09 & 1) {
         state  = &g_AreaCameraAngle.vx;
         var_v0 = *state + 0x14;
     } else {
         state  = &g_AreaCameraAngle.vx;
         var_v0 = *state - 0x14;
     }
-    *state                      = var_v0;
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    *state         = var_v0;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         g_AreaCameraAngle.vx = -0x2AAU;
         g_Task->step += 1;
@@ -47,9 +47,9 @@ MATCH void func_801EF5C0(void) {
 MATCH void func_801EF674(void) {
     u8 temp_v0;
 
-    temp_v0 = g_Task->word_08.byte.timer_0A;
+    temp_v0 = g_Task->timer;
     if (temp_v0 != 0) {
-        g_Task->word_08.byte.timer_0A = temp_v0 - 2;
+        g_Task->timer = temp_v0 - 2;
     }
     if (func_8014DAEC() & 0xFF) {
         g_Task->step += 1;
@@ -60,8 +60,8 @@ MATCH void func_801EF6D8(void) {
     PartyBattler* work;
 
     if (g_Task->unk_04 == 0) {
-        work                      = (PartyBattler*)D_801EB4E0;
-        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
+        work         = (PartyBattler*)D_801EB4E0;
+        work->unk_0B = work->unk_0B - 1;
         func_801E5988();
     }
 }

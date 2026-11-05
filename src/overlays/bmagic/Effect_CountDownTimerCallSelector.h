@@ -3,8 +3,8 @@
 MATCH void Effect_CountDownTimerCallSelector(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         func_800A9610(g_BattleTargetSelector, 0x20);
         g_Task->mode = g_Task->mode + 1;
