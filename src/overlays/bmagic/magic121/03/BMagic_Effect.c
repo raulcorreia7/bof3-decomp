@@ -73,6 +73,7 @@ MATCH void func_801EF35C(void) {
 
 INCLUDE_ASM(func_801EF3A8);
 
+/* resume: best 368/865 instructions differ (size 0xDCC vs 0xD84; the ternary tpage form, prologue and loop head are exact); first mismatch +0x80 (sp20 = 0 sinks past the y load and sp18 = 1 fills the skip-branch delay slot); next lever: one prim cursor pseudo created before the five cell derivations so they take s1-s4/s7 as retail does, then the permuter. */
 INCLUDE_ASM(func_801EF414);
 
 INCLUDE_ASM(func_801F0198);
