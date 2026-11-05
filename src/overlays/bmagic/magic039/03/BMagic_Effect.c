@@ -34,13 +34,13 @@ INCLUDE_ASM(func_801EEFA8);
 MATCH void func_801EF070(void) {
     PartyBattler* src;
 
-    src            = (PartyBattler*)D_801EB4E0;
-    g_Task->x      = src->x;
-    g_Task->y      = src->y;
-    g_Task->z      = src->z;
-    g_Task->unk_09 = 0;
-    g_Task->timer  = 1;
-    g_Task->step   = g_Task->step + 1;
+    src               = (PartyBattler*)D_801EB4E0;
+    g_Task->pos.x.raw = src->pos.x.raw;
+    g_Task->pos.y.raw = src->pos.y.raw;
+    g_Task->pos.z     = src->pos.z;
+    g_Task->unk_09    = 0;
+    g_Task->timer     = 1;
+    g_Task->step      = g_Task->step + 1;
 }
 
 MATCH void func_801EF0D4(void) {

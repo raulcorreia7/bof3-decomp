@@ -170,9 +170,9 @@ MATCH void func_801F0100(void) {
 MATCH void func_801F0154(void) {
     s32 temp_a1;
 
-    temp_a1           = g_Task->unk_14 + g_Task->unk_20;
-    g_Task->unk_14    = temp_a1;
-    g_Task->z.half.hi = (u16)g_Task->z.half.hi + temp_a1;
+    temp_a1               = g_Task->unk_14 + g_Task->unk_20;
+    g_Task->unk_14        = temp_a1;
+    g_Task->pos.z.half.hi = (u16)g_Task->pos.z.half.hi + temp_a1;
     if (g_Task->unk_14 < -0x10) {
         func_801E5988();
     }

@@ -51,13 +51,13 @@ MATCH void func_801EF27C(void) {
     PartyBattler* dst;
 
     if (--g_Task->unk_09 == 0) {
-        src           = D_801EB4E0;
-        dst           = g_Task;
-        dst->x        = src->x;
-        dst->y        = src->y;
-        dst->z        = src->z;
-        dst->unk_09   = 0;
-        g_Task->timer = 0;
+        src            = D_801EB4E0;
+        dst            = g_Task;
+        dst->pos.x.raw = src->pos.x.raw;
+        dst->pos.y.raw = src->pos.y.raw;
+        dst->pos.z     = src->pos.z;
+        dst->unk_09    = 0;
+        g_Task->timer  = 0;
         g_Task->step++;
     }
 }
@@ -104,12 +104,12 @@ MATCH void func_801EF3D0(void) {
 MATCH void func_801EF484(void) {
     PartyBattler* src;
 
-    src            = (PartyBattler*)D_801EB4E0;
-    g_Task->x      = src->x;
-    g_Task->y      = src->y;
-    g_Task->z      = src->z;
-    g_Task->unk_09 = 0;
-    g_Task->step   = g_Task->step + 1;
+    src               = (PartyBattler*)D_801EB4E0;
+    g_Task->pos.x.raw = src->pos.x.raw;
+    g_Task->pos.y.raw = src->pos.y.raw;
+    g_Task->pos.z     = src->pos.z;
+    g_Task->unk_09    = 0;
+    g_Task->step      = g_Task->step + 1;
 }
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"

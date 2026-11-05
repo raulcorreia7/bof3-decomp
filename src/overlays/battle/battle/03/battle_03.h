@@ -995,8 +995,8 @@ static inline void BattleAdvanceCoords(u8 (*tail_update)(void)) {
         g_Task->unk_03 += 1;
     }
     work = g_Task;
-    work->x.raw += work->unk_0C;
-    work->y.raw += work->unk_10;
+    work->pos.x.raw += work->unk_0C;
+    work->pos.y.raw += work->unk_10;
     tail_update();
 }
 

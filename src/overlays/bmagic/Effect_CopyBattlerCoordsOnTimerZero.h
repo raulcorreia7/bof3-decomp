@@ -14,9 +14,9 @@ MATCH void Effect_CopyBattlerCoordsOnTimerZero(void) {
     if (timer == 0) {
         src            = BATTLE_ACTIVE_WORK;
         work           = g_Task;
-        work->x        = src->x;
-        work->y        = src->y;
-        work->z        = src->z;
+        work->pos.x    = src->pos.x;
+        work->pos.y    = src->pos.y;
+        work->pos.z    = src->pos.z;
         work->unk_09   = 0x40;
         g_Task->timer  = 0;
         g_Task->unk_0B = 0;

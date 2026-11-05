@@ -20,9 +20,9 @@ MATCH void func_801E3638(void) {
         }
         work = g_Task;
         if (work->facing == 1 || work->facing == 3) {
-            work->x.raw = g_BattleEffects[work->slot].unk_34.raw + ((s8)g_BattleEffects[work->slot].unk_09 << 9);
+            work->pos.x.raw = g_BattleEffects[work->slot].pos.x.raw + ((s8)g_BattleEffects[work->slot].unk_09 << 9);
         } else {
-            work->y.raw = g_BattleEffects[work->slot].unk_38.raw + ((s8)g_BattleEffects[work->slot].unk_09 << 9);
+            work->pos.y.raw = g_BattleEffects[work->slot].pos.y.raw + ((s8)g_BattleEffects[work->slot].unk_09 << 9);
         }
     }
     if (!(g_BattleCurrentEnemy->damage_flags & COMBATANT_FLAG_SKIP_ACTION_STEP)) {

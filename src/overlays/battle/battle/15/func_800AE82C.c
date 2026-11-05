@@ -15,15 +15,15 @@ MATCH void func_800AE82C(void) {
         row_work = BATTLE_WORK;
         slot     = row_work->unk_0B;
         if (slot < BATTLE_PARTY_SLOT_COUNT) {
-            row_work->x.raw = g_BattlePartyBattlers[slot].x.raw;
-            row_work->y.raw = g_BattlePartyBattlers[row_work->unk_0B].y.raw;
-            value           = g_BattlePartyBattlers[row_work->unk_0B].z.raw;
+            row_work->pos.x.raw = g_BattlePartyBattlers[slot].pos.x.raw;
+            row_work->pos.y.raw = g_BattlePartyBattlers[row_work->unk_0B].pos.y.raw;
+            value               = g_BattlePartyBattlers[row_work->unk_0B].pos.z.raw;
         } else {
-            row_work->x.raw = ENEMY_COMBATANT(row_work->unk_0B).x;
-            row_work->y.raw = ENEMY_COMBATANT(row_work->unk_0B).y;
-            value           = ENEMY_COMBATANT(row_work->unk_0B).z.raw;
+            row_work->pos.x.raw = ENEMY_COMBATANT(row_work->unk_0B).pos.x.raw;
+            row_work->pos.y.raw = ENEMY_COMBATANT(row_work->unk_0B).pos.y.raw;
+            value               = ENEMY_COMBATANT(row_work->unk_0B).pos.z.raw;
         }
-        row_work->z.raw = value;
+        row_work->pos.z.raw = value;
         func_800AF764();
         tail_work         = BATTLE_WORK;
         tail_work->unk_10 = -0xE;

@@ -78,7 +78,7 @@ MATCH void func_801DF3F8(void) {
             if ((mode == 1) || (mode == 3)) {
                 s32 slot_offset = actor->slot * BATTLE_EFFECT_STRIDE;
 
-                actor->x.raw = (s32)(*(s32*)(D_801EC364 + slot_offset) + (*(s8*)(D_801EC339 + slot_offset) << 9));
+                actor->pos.x.raw = (s32)(*(s32*)(D_801EC364 + slot_offset) + (*(s8*)(D_801EC339 + slot_offset) << 9));
             } else {
                 s32 slot_offset = actor->slot * BATTLE_EFFECT_STRIDE;
 
@@ -89,14 +89,14 @@ MATCH void func_801DF3F8(void) {
     } else if ((g_BattleState & BATTLE_STATE_RELOAD_PARTY) && (g_GameState->action_flags.value & 2)) {
         PartyBattler* work = g_Task;
 
-        work->x.raw = (s32)D_80143F24;
-        work->y.raw = (s32)D_80143F28;
+        work->pos.x.raw = (s32)D_80143F24;
+        work->pos.y.raw = (s32)D_80143F28;
     } else {
-        actor        = g_Task;
-        actor->x.raw = (s32) * (s32*)(D_801EC364 + (actor->slot * BATTLE_EFFECT_STRIDE));
-        y_pos        = *(s32*)(D_801EC368 + (actor->slot * BATTLE_EFFECT_STRIDE));
+        actor            = g_Task;
+        actor->pos.x.raw = (s32) * (s32*)(D_801EC364 + (actor->slot * BATTLE_EFFECT_STRIDE));
+        y_pos            = *(s32*)(D_801EC368 + (actor->slot * BATTLE_EFFECT_STRIDE));
     store_coord_y:
-        actor->y.raw = y_pos;
+        actor->pos.y.raw = y_pos;
     }
     if (!(g_GameState->damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
         func_801DEDE4();

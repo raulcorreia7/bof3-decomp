@@ -28,13 +28,13 @@ MATCH void func_801EEF0C(void) {
 MATCH void func_801EEF94(void) {
     PartyBattler* src;
 
-    src               = g_BattleSelectedActor;
-    g_Task->x         = src->x;
-    g_Task->y         = src->y;
-    g_Task->z.half.hi = src->z.half.hi;
-    g_Task->unk_09    = 0;
-    g_Task->timer     = 0;
-    g_Task->step      = g_Task->step + 1;
+    src                   = g_BattleSelectedActor;
+    g_Task->pos.x.raw     = src->pos.x.raw;
+    g_Task->pos.y.raw     = src->pos.y.raw;
+    g_Task->pos.z.half.hi = src->pos.z.half.hi;
+    g_Task->unk_09        = 0;
+    g_Task->timer         = 0;
+    g_Task->step          = g_Task->step + 1;
 }
 
 MATCH void func_801EEFF4(void) {
@@ -84,12 +84,12 @@ MATCH void func_801EFB88(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        work          = g_Task;
-        work->x.raw   = g_BattleSelectedActor->x.raw + D_801F07AC[work->unk_0B].x;
-        work->y.raw   = g_BattleSelectedActor->y.raw + D_801F07AC[work->unk_0B].y;
-        work->z.raw   = g_BattleSelectedActor->z.raw + D_801F07AC[work->unk_0B].z;
-        work->unk_09  = 0;
-        g_Task->timer = 0;
+        work            = g_Task;
+        work->pos.x.raw = g_BattleSelectedActor->pos.x.raw + D_801F07AC[work->unk_0B].x;
+        work->pos.y.raw = g_BattleSelectedActor->pos.y.raw + D_801F07AC[work->unk_0B].y;
+        work->pos.z.raw = g_BattleSelectedActor->pos.z.raw + D_801F07AC[work->unk_0B].z;
+        work->unk_09    = 0;
+        g_Task->timer   = 0;
         g_Task->step += 1;
     }
 }
@@ -152,13 +152,13 @@ MATCH void func_801F02BC(void) {
 MATCH void func_801F0344(void) {
     PartyBattler* src;
 
-    src            = g_BattleSelectedActor;
-    g_Task->x      = src->x;
-    g_Task->y      = src->y;
-    g_Task->z      = src->z;
-    g_Task->unk_09 = 0;
-    g_Task->timer  = 0;
-    g_Task->step   = g_Task->step + 1;
+    src               = g_BattleSelectedActor;
+    g_Task->pos.x.raw = src->pos.x.raw;
+    g_Task->pos.y.raw = src->pos.y.raw;
+    g_Task->pos.z     = src->pos.z;
+    g_Task->unk_09    = 0;
+    g_Task->timer     = 0;
+    g_Task->step      = g_Task->step + 1;
 }
 
 MATCH void func_801F03A4(void) {

@@ -10,7 +10,7 @@ MATCH void func_801DDAF0(void) {
     g_BattleEffects[index].unk_09       = 0u;
     work_b                              = g_Task;
     g_BattleEffects[index].target.party = work_a;
-    g_BattleEffects[index].unk_34       = work_b->x;
-    g_BattleEffects[index].unk_38       = work_b->y;
-    g_BattleEffects[index].z.raw        = work_b->z.raw;
+    g_BattleEffects[index].pos.x        = work_b->pos.x;
+    g_BattleEffects[index].pos.y        = work_b->pos.y;
+    g_BattleEffects[index].pos.z.raw    = work_b->pos.z.raw;
 }

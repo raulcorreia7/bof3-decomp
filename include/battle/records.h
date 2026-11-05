@@ -145,6 +145,17 @@ typedef union Fix32 {
     } half;
 } Fix32;
 
+/* A battler's or effect's place: x and y, and z (its integer half holds the vertical span). */
+typedef struct BattlePosition {
+    Fix32 x;
+    Fix32 y;
+    Fix32 z;
+} BattlePosition;
+
+ASSERT_SIZE(BattlePosition, 0xC);
+ASSERT_OFFSET(BattlePosition, y, 0x4);
+ASSERT_OFFSET(BattlePosition, z, 0x8);
+
 /* The word at +0x60 of a queued slot. battle/battle/15 stores the action's target
  * index there (func_800AAEBC) and battle/battle/03 reads the low halfword of it to
  * draw the capture count (func_801E5CA4 loads it with `lhu` and hands it to
@@ -195,9 +206,7 @@ typedef struct BattleEffect {
     s16                unk_2E;
     s16                unk_30;
     u16                unk_32;
-    Fix32              unk_34;
-    Fix32              unk_38;
-    Fix32              z; /* +0x3C the work record's word; bmagic stores its span halfword (+0x3E) */
+    BattlePosition     pos; /* +0x34 x, y and z; bmagic stores the z span halfword (+0x3E) */
     u8                 pad_40[8];
     u8                 unk_48;
     u8                 pad_49[2];
@@ -345,9 +354,7 @@ typedef struct EnemyBattler {
     s16                   unk_2E; /* +0x2E cleared when the slot is armed */
     s16                   unk_30; /* +0x30 cleared when the slot is armed */
     s16                   unk_32; /* +0x32 cleared when the slot is armed */
-    s32                   x;      /* +0x34 the enemy's x */
-    s32                   y;      /* +0x38 the enemy's y */
-    /* 0x3C */ Fix32      z;      /* +0x3C the enemy's frame counter */
+    BattlePosition        pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
     u8                    pad_40[0x8];
     u8                    unk_48; /* +0x48 cleared when the slot is armed */
     u8                    pad_49[0x2];
@@ -422,7 +429,7 @@ ASSERT_OFFSET(EnemyBattler, unk_2B, 0x2B);
 ASSERT_OFFSET(EnemyBattler, unk_2E, 0x2E);
 ASSERT_OFFSET(EnemyBattler, unk_30, 0x30);
 ASSERT_OFFSET(EnemyBattler, unk_32, 0x32);
-ASSERT_OFFSET(EnemyBattler, z, 0x3C);
+ASSERT_OFFSET(EnemyBattler, pos, 0x34);
 ASSERT_OFFSET(EnemyBattler, unk_48, 0x48);
 ASSERT_OFFSET(EnemyBattler, unk_4B, 0x4B);
 ASSERT_OFFSET(EnemyBattler, unk_58, 0x58);
@@ -486,9 +493,7 @@ typedef struct PartyBattler {
     BattleScreenCoord unk_2E; /* +0x2E the field overlays read it signed */
     BattleScreenCoord unk_30; /* +0x30 the field overlays read it signed */
     u16               depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
-    Fix32             x;
-    Fix32             y;
-    Fix32             z;
+    BattlePosition    pos;
     u32               unk_40; /* +0x40 battle/battle/03's cell; battle/battle/15 leaves it padded */
     s32               unk_44; /* +0x44 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u8                unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
@@ -549,6 +554,7 @@ ASSERT_OFFSET(PartyBattler, unk_70, 0x70);
 ASSERT_OFFSET(PartyBattler, unk_29, 0x29);
 ASSERT_OFFSET(PartyBattler, unk_2C, 0x2C);
 ASSERT_OFFSET(PartyBattler, depth, 0x32);
+ASSERT_OFFSET(PartyBattler, pos, 0x34);
 ASSERT_OFFSET(PartyBattler, stats, 0x74);
 ASSERT_OFFSET(PartyBattler, hp_change, 0x11C);
 ASSERT_OFFSET(PartyBattler, ap_change, 0x11E);

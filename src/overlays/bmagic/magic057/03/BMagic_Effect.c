@@ -8,9 +8,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/BMagic_RunStep.h"
 
 MATCH void func_801EECB0(void) {
-    g_Task->x.raw = BATTLE_ACTIVE_WORK->x.raw;
-    g_Task->y.raw = BATTLE_ACTIVE_WORK->y.raw;
-    g_Task->z.raw = BATTLE_ACTIVE_WORK->z.raw;
+    g_Task->pos.x.raw = BATTLE_ACTIVE_WORK->pos.x.raw;
+    g_Task->pos.y.raw = BATTLE_ACTIVE_WORK->pos.y.raw;
+    g_Task->pos.z.raw = BATTLE_ACTIVE_WORK->pos.z.raw;
     GFX_CopyPalette(0x1A);
     g_GfxPalettePending += 1;
     g_Task->mode += 1;
@@ -176,13 +176,13 @@ MATCH void func_801EF900(void) {
     s32           temp_a0;
     s8            tone;
 
-    g_Task->x.raw       = D_801EB4E0->x.raw - 1;
-    g_Task->y.raw       = D_801EB4E0->y.raw - 1;
-    temp_a0             = g_Task->x.raw;
+    g_Task->pos.x.raw   = D_801EB4E0->pos.x.raw - 1;
+    g_Task->pos.y.raw   = D_801EB4E0->pos.y.raw - 1;
+    temp_a0             = g_Task->pos.x.raw;
     temp_v0             = Area_SampleHeight(temp_a0, temp_a0);
     work                = g_Task;
     work->unk_25        = 0x1D;
-    work->z.half.hi     = temp_v0;
+    work->pos.z.half.hi = temp_v0;
     g_Task->unk_26      = 0;
     g_Task->unk_48      = 1;
     g_Task->unk_27      = 0xA0;
@@ -203,10 +203,10 @@ MATCH void func_801EF900(void) {
 MATCH void func_801EFA38(void) {
     s32 temp_a0;
 
-    g_Task->x.raw     = D_801EB4E0->x.raw - 1;
-    g_Task->y.raw     = D_801EB4E0->y.raw - 1;
-    temp_a0           = g_Task->x.raw;
-    g_Task->z.half.hi = Area_SampleHeight(temp_a0, temp_a0);
+    g_Task->pos.x.raw     = D_801EB4E0->pos.x.raw - 1;
+    g_Task->pos.y.raw     = D_801EB4E0->pos.y.raw - 1;
+    temp_a0               = g_Task->pos.x.raw;
+    g_Task->pos.z.half.hi = Area_SampleHeight(temp_a0, temp_a0);
     if (!(1 & D_801EB4E0->flags)) {
         g_Task->step += 1;
     }

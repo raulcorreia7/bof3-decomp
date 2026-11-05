@@ -25,10 +25,10 @@ MATCH void func_801E72F4(void) {
     g_Task->unk_28 = D_801EB4E0->unk_28;
     g_Task->unk_2A = D_801EB4E0->unk_2A;
 
-    scratch        = g_Task;
-    scratch->x.raw = D_801EB4E0->x.raw;
-    scratch->y.raw = D_801EB4E0->y.raw;
-    scratch->z.raw = D_801EB4E0->z.raw;
+    scratch            = g_Task;
+    scratch->pos.x.raw = D_801EB4E0->pos.x.raw;
+    scratch->pos.y.raw = D_801EB4E0->pos.y.raw;
+    scratch->pos.z.raw = D_801EB4E0->pos.z.raw;
 
     func_8014D290();
     if (!ACTOR_IN_USE(*D_801EB4E0)) {

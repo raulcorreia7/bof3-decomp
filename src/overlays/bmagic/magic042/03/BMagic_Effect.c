@@ -19,10 +19,10 @@ MATCH void func_801EEDA4(void) {
 INCLUDE_ASM(func_801EEDE8);
 
 MATCH void func_801EEF08(void) {
-    g_Task->facing = D_801EB4E0->facing;
-    g_Task->x.raw  = D_801EB4E0->x.raw;
-    g_Task->y.raw  = D_801EB4E0->y.raw;
-    g_Task->z.raw  = D_801EB4E0->z.raw;
+    g_Task->facing    = D_801EB4E0->facing;
+    g_Task->pos.x.raw = D_801EB4E0->pos.x.raw;
+    g_Task->pos.y.raw = D_801EB4E0->pos.y.raw;
+    g_Task->pos.z.raw = D_801EB4E0->pos.z.raw;
     func_801EF1B0();
     g_Task->unk_0B = 0;
     g_Task->unk_09 = 0;

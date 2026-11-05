@@ -9,9 +9,9 @@ MATCH void func_800C2024(void) {
     ((PartyBattler*)g_Task)->unk_29 = 5;
     Area_FindSceneRecord(0x15C);
     Actor_SelectScript(6U);
-    ((PartyBattler*)g_Task)->x.raw     = D_801EB4E0->x.raw;
-    temp_a1                            = D_801EB4E0->y.raw;
-    ((PartyBattler*)g_Task)->y.raw     = temp_a1;
-    ((PartyBattler*)g_Task)->z.half.hi = Area_SampleHeight(((PartyBattler*)g_Task)->x.raw, temp_a1);
+    ((PartyBattler*)g_Task)->pos.x.raw     = D_801EB4E0->pos.x.raw;
+    temp_a1                                = D_801EB4E0->pos.y.raw;
+    ((PartyBattler*)g_Task)->pos.y.raw     = temp_a1;
+    ((PartyBattler*)g_Task)->pos.z.half.hi = Area_SampleHeight(((PartyBattler*)g_Task)->pos.x.raw, temp_a1);
     ((PartyBattler*)g_Task)->step += 1;
 }

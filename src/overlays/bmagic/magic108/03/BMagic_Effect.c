@@ -17,9 +17,9 @@ MATCH void func_801EEC5C(void) {
     offset                                   = (Battle_AllocEffect(1, 0x1A) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     FIELD(PartyBattler*, D_801EC3A4, offset) = g_Task;
     FIELD(u8, D_801EC338, offset)            = src->facing;
-    FIELD(Fix32, D_801EC364, offset)         = src->x;
-    FIELD(Fix32, D_801EC368, offset)         = src->y;
-    FIELD(Fix32, D_801EC36C, offset)         = src->z;
+    FIELD(Fix32, D_801EC364, offset)         = src->pos.x.raw;
+    FIELD(Fix32, D_801EC368, offset)         = src->pos.y.raw;
+    FIELD(Fix32, D_801EC36C, offset)         = src->pos.z;
     g_Task->unk_0B                           = 0;
     g_Task->mode += 1;
 }
@@ -45,12 +45,12 @@ MATCH void func_801EEE0C(void) {
     g_Task->unk_0C = 0x20000;
     g_Task->unk_10 = 0;
     func_801DD350(g_Task);
-    g_Task->x.raw += g_Task->unk_0C;
-    g_Task->y.raw += g_Task->unk_10;
-    g_Task->z.half.hi = (u16)g_Task->z.half.hi + 0xC0;
-    g_Task->unk_18    = g_Task->x.raw;
-    g_Task->unk_1C    = g_Task->y.raw;
-    g_Task->unk_20    = g_Task->z.raw;
+    g_Task->pos.x.raw += g_Task->unk_0C;
+    g_Task->pos.y.raw += g_Task->unk_10;
+    g_Task->pos.z.half.hi = (u16)g_Task->pos.z.half.hi + 0xC0;
+    g_Task->unk_18        = g_Task->pos.x.raw;
+    g_Task->unk_1C        = g_Task->pos.y.raw;
+    g_Task->unk_20        = g_Task->pos.z.raw;
     MATCH_FAKE_BARRIER(); /* FAKE: keeps the g_BattleActiveBattler read below the coord copy stores */
     slot = g_BattleActiveBattler;
     if (slot < BATTLE_PARTY_SLOT_COUNT) {
@@ -58,12 +58,12 @@ MATCH void func_801EEE0C(void) {
     } else {
         battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
     }
-    g_Task->x.raw  = battler->x.raw;
-    g_Task->y.raw  = battler->y.raw;
-    g_Task->z.raw  = battler->z.raw + 0xC00000;
-    g_Task->unk_0B = 0;
-    g_Task->unk_09 = 0;
-    g_Task->timer  = 0;
+    g_Task->pos.x.raw = battler->pos.x.raw;
+    g_Task->pos.y.raw = battler->pos.y.raw;
+    g_Task->pos.z.raw = battler->pos.z.raw + 0xC00000;
+    g_Task->unk_0B    = 0;
+    g_Task->unk_09    = 0;
+    g_Task->timer     = 0;
     g_Task->mode += 1;
     SND_QueueSelectionFx(0x100);
 }

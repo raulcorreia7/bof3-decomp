@@ -13,7 +13,7 @@ MATCH void func_801F4098(void) {
     y         = g_BattlePartyBattlers[2].unk_30.signed_half;
     x         = g_BattlePartyBattlers[2].unk_2E.signed_half;
     selection = D_801F4644[index];
-    result    = func_8015CC00(3, 0, selection, x, y, g_BattlePartyBattlers[2].z.raw);
+    result    = func_8015CC00(3, 0, selection, x, y, g_BattlePartyBattlers[2].pos.z.raw);
     if ((u8)result != GAME_NONE) {
         work      = TASK_BYTES;
         work[0xB] = result;

@@ -19,10 +19,10 @@ MATCH void func_801EEF48(void) {
 INCLUDE_ASM(func_801EEF8C);
 
 MATCH void func_801EF074(void) {
-    g_Task->facing = BATTLE_ACTIVE_WORK->facing;
-    g_Task->x.raw  = BATTLE_ACTIVE_WORK->x.raw;
-    g_Task->y.raw  = BATTLE_ACTIVE_WORK->y.raw;
-    g_Task->z.raw  = BATTLE_ACTIVE_WORK->z.raw;
+    g_Task->facing    = BATTLE_ACTIVE_WORK->facing;
+    g_Task->pos.x.raw = BATTLE_ACTIVE_WORK->pos.x.raw;
+    g_Task->pos.y.raw = BATTLE_ACTIVE_WORK->pos.y.raw;
+    g_Task->pos.z.raw = BATTLE_ACTIVE_WORK->pos.z.raw;
     func_801EF430(g_Task);
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
@@ -38,10 +38,10 @@ MATCH void func_801EF074(void) {
 INCLUDE_ASM(func_801EF248);
 
 MATCH void func_801EF2D8(void) {
-    g_Task->facing = D_801EB4E0->facing;
-    g_Task->x.raw  = D_801EB4E0->x.raw;
-    g_Task->y.raw  = D_801EB4E0->y.raw;
-    g_Task->z.raw  = D_801EB4E0->z.raw;
+    g_Task->facing    = D_801EB4E0->facing;
+    g_Task->pos.x.raw = D_801EB4E0->pos.x.raw;
+    g_Task->pos.y.raw = D_801EB4E0->pos.y.raw;
+    g_Task->pos.z.raw = D_801EB4E0->pos.z.raw;
     func_801EF430(g_Task);
     g_Task->unk_0B = 0xB;
     g_Task->unk_09 = 0;

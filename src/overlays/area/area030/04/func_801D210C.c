@@ -9,10 +9,10 @@ NON_MATCHING void func_801D210C(void) {
     s32 value;
     u32 index;
 
-    FISHING_STATE->motion_34.unk_34 = D_80145EC4;
-    FISHING_STATE->y_38.pos_y       = D_80145EC8 - 0x8000;
+    FISHING_STATE->motion_34.pos.pos.x.raw = D_80145EC4;
+    FISHING_STATE->y_38.pos_y              = D_80145EC8 - 0x8000;
     FISHING_STATE->bounce_3C.half.key_3E =
-        (s16)(Area_SampleHeight(FISHING_STATE->motion_34.unk_34, D_80145EC8 - 0x8000) + 0x100);
+        (s16)(Area_SampleHeight(FISHING_STATE->motion_34.pos.pos.x.raw, D_80145EC8 - 0x8000) + 0x100);
 
     value                       = D_801E320C->byte_02 * D_801440BC / 255 + 8;
     FISHING_STATE->cue_index_06 = (u8)(value / 15);

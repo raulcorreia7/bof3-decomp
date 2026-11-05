@@ -25,7 +25,7 @@ MATCH void func_801EEC5C(void) {
     work                                     = g_Task;
     FIELD(s32, D_801EC364, offset)           = scroll_x;
     FIELD(s32, D_801EC368, offset)           = g_AreaScrollTargetY;
-    FIELD(s32, D_801EC36C, offset)           = work->z.raw + 0x04000000;
+    FIELD(s32, D_801EC36C, offset)           = work->pos.z.raw + 0x04000000;
     SND_QueueSelectionFx(0x100);
     g_Task->unk_0B = 0;
     g_Task->mode += 1;

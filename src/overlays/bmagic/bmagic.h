@@ -14,9 +14,9 @@
  * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
  * whose vertical span halves into the depth. */
 #define BMAGIC_PROJECT_ACTOR_MATRIX(SPAN_WORK)    \
-    pos.vx = (g_Task->x.raw >> 9) - 0x4000;       \
-    pos.vy = (g_Task->y.raw >> 9) - 0x4000;       \
-    pos.vz = -(SPAN_WORK)->z.half.hi / 2;         \
+    pos.vx = (g_Task->pos.x.raw >> 9) - 0x4000;   \
+    pos.vy = (g_Task->pos.y.raw >> 9) - 0x4000;   \
+    pos.vz = -(SPAN_WORK)->pos.z.half.hi / 2;     \
     RotTrans(&pos, &matrix.t, &flags);            \
     RotMatrix(&rot, &matrix);                     \
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix); \

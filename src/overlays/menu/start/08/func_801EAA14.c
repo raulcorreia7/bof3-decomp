@@ -31,11 +31,11 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
 
     stack_18 = task;
     stack_28 = 0;
-    Menu_DrawWindowFrame((s16)task->x, (s16)stack_18->y, 0x12, 0x15);
-    tmp1     = stack_18->x;
+    Menu_DrawWindowFrame((s16)task->pos.x.raw, (s16)stack_18->pos.y.raw, 0x12, 0x15);
+    tmp1     = stack_18->pos.x.raw;
     stack_20 = (u8*)stack_18->item_table;
     val5     = tmp1 + 7;
-    val4     = stack_18->y + 6;
+    val4     = stack_18->pos.y.raw + 6;
     if (stack_18->unk_0A != 0) {
         val8     = g_UiFormatBuffer;
         val8     = g_UiFormatBuffer;

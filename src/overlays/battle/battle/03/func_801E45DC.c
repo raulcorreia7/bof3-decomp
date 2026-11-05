@@ -19,7 +19,7 @@ MATCH void func_801E45DC(void) {
         }
         g_Task->unk_03 = g_Task->unk_03 + 1;
     }
-    g_Task->x.raw = g_Task->x.raw - g_Task->unk_0C;
-    g_Task->y.raw = g_Task->y.raw - g_Task->unk_10;
+    g_Task->pos.x.raw = g_Task->pos.x.raw - g_Task->unk_0C;
+    g_Task->pos.y.raw = g_Task->pos.y.raw - g_Task->unk_10;
     func_801E30F8();
 }

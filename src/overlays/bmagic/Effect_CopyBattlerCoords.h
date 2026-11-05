@@ -6,9 +6,9 @@
 /* The statements of Effect_CopyBattlerCoords; each member declares src. */
 #define BMAGIC_COPY_BATTLER_COORDS()            \
     src            = (PartyBattler*)D_801EB4E0; \
-    g_Task->x      = src->x;                    \
-    g_Task->y      = src->y;                    \
-    g_Task->z      = src->z;                    \
+    g_Task->pos.x  = src->pos.x;                \
+    g_Task->pos.y  = src->pos.y;                \
+    g_Task->pos.z  = src->pos.z;                \
     g_Task->unk_09 = 0;                         \
     g_Task->timer  = 0;                         \
     g_Task->step   = g_Task->step + 1

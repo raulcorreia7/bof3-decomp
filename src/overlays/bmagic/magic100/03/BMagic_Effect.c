@@ -18,14 +18,14 @@ NON_MATCHING void func_801EEC70(void) {
     u32           value;
     s32           span;
 
-    src            = BATTLE_ACTIVE_WORK;
-    g_Task->facing = src->facing;
-    g_Task->x.raw  = src->x.raw;
-    g_Task->y.raw  = src->y.raw;
-    span           = g_BattleSelectedActor->z.raw;
-    g_Task->unk_09 = 0;
-    g_Task->z.raw  = span;
-    g_Task->unk_0B = 0;
+    src               = BATTLE_ACTIVE_WORK;
+    g_Task->facing    = src->facing;
+    g_Task->pos.x.raw = src->pos.x.raw;
+    g_Task->pos.y.raw = src->pos.y.raw;
+    span              = g_BattleSelectedActor->pos.z.raw;
+    g_Task->unk_09    = 0;
+    g_Task->pos.z.raw = span;
+    g_Task->unk_0B    = 0;
     g_Task->mode += 1;
     offset  = (Battle_AllocEffect(1, 0xA) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     counter = 0;
@@ -92,9 +92,9 @@ MATCH void func_801EF434(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    pos.vx = (g_Task->x.raw >> 9) - 0x4000;
-    pos.vy = (g_Task->y.raw >> 9) - 0x4000;
-    pos.vz = -(g_Task->z.half.hi + 0x100) / 2;
+    pos.vx = (g_Task->pos.x.raw >> 9) - 0x4000;
+    pos.vy = (g_Task->pos.y.raw >> 9) - 0x4000;
+    pos.vz = -(g_Task->pos.z.half.hi + 0x100) / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
@@ -118,12 +118,12 @@ NON_MATCHING void func_801EF8E8(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    pos.vx = (work->x.raw >> 9) - 0x4000;
-    pos.vy = (work->y.raw >> 9) - 0x4000;
+    pos.vx = (work->pos.x.raw >> 9) - 0x4000;
+    pos.vy = (work->pos.y.raw >> 9) - 0x4000;
     if (work->step < 3) {
-        height = -work->z.half.hi;
+        height = -work->pos.z.half.hi;
     } else {
-        height = -(s16)Area_SampleHeight(work->x.raw, work->y.raw);
+        height = -(s16)Area_SampleHeight(work->pos.x.raw, work->pos.y.raw);
     }
     pos.vz = height / 2;
     RotTrans(&pos, &matrix.t, &flags);

@@ -118,11 +118,11 @@ MATCH void func_801EF5FC(void) {
 
     work = g_Task;
     if (!(work->unk_0B & 1)) {
-        g_AreaScrollTargetX = work->x.raw;
+        g_AreaScrollTargetX = work->pos.x.raw;
         MATCH_FAKE_BARRIER(); /* FAKE: retail reads each field after storing the previous target */
-        g_AreaScrollTargetY = work->y.raw;
+        g_AreaScrollTargetY = work->pos.y.raw;
         MATCH_FAKE_BARRIER();
-        g_AreaCameraHeight = work->z.half.hi;
+        g_AreaCameraHeight = work->pos.z.half.hi;
         func_801F103C();
         g_Task->unk_09 = 0x40;
         g_Task->timer  = 1;
