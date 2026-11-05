@@ -53,14 +53,7 @@ MATCH void func_801EF940(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x11);
 }
 
-MATCH void func_801EF990(void) {
-    g_SpadWork->word_08.byte.unk_09 += 1;
-    g_SpadWork->word_08.byte.timer_0A += 1;
-    if (g_SpadWork->word_08.byte.unk_09 == 0x19) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B |= 0x80;
-        g_SpadWork->unk_02 += 1;
-    }
-}
+#include "overlays/bmagic/Effect_CountUpAndMarkBattler.h"
 
 MATCH void func_801EFA24(void) {
     g_SpadWork->word_08.byte.unk_09 -= 2;
