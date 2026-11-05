@@ -22,15 +22,15 @@ MATCH void func_801EEE38(void) {
 }
 
 MATCH void func_801EEEA8(void) {
-    PartyBattler* temp_s0;
-    PartyBattler* temp_v0;
+    PartyBattler* saved_work;
+    PartyBattler* battler;
 
-    temp_s0    = g_SpadWork;
-    temp_v0    = &g_BattlePartyBattlers[g_BattleActingBattler];
-    g_SpadWork = temp_v0;
-    Actor_RequestScript((temp_v0->word_08.byte.facing_08 + 0x3C) & 0xFF);
-    g_SpadWork = temp_s0;
-    temp_s0->unk_03 += 1;
+    saved_work = g_SpadWork;
+    battler    = &g_BattlePartyBattlers[g_BattleActingBattler];
+    g_SpadWork = battler;
+    Actor_RequestScript((battler->word_08.byte.facing_08 + 0x3C) & 0xFF);
+    g_SpadWork = saved_work;
+    saved_work->unk_03 += 1;
 }
 
 INCLUDE_ASM(func_801EEF24);
@@ -40,15 +40,15 @@ INCLUDE_ASM(func_801EF070);
 INCLUDE_ASM(func_801EF138);
 
 MATCH void func_801EF2A0(void) {
-    PartyBattler* temp_a0;
-    PartyBattler* temp_v1;
+    PartyBattler* saved_work;
+    PartyBattler* battler;
 
-    temp_a0    = g_SpadWork;
-    temp_v1    = &g_BattlePartyBattlers[g_BattleActingBattler];
-    g_SpadWork = temp_v1;
-    temp_v1->flags_00 &= 0xBF;
-    g_SpadWork = temp_a0;
-    temp_a0->step_01 += 1;
+    saved_work = g_SpadWork;
+    battler    = &g_BattlePartyBattlers[g_BattleActingBattler];
+    g_SpadWork = battler;
+    battler->flags_00 &= 0xBF;
+    g_SpadWork = saved_work;
+    saved_work->step_01 += 1;
     g_SpadWork->unk_02 = 0;
     g_SpadWork->unk_03 = 0;
 }
@@ -137,9 +137,31 @@ INCLUDE_ASM(func_801EFF94);
 
 #include "overlays/bmagic/Effect_StepOnZeroTick.h"
 
-INCLUDE_ASM(func_801F00E8);
+MATCH void func_801F00E8(void) {
+    u8 temp_v1;
 
-INCLUDE_ASM(func_801F013C);
+    temp_v1            = g_SpadWork->unk_5D - 1;
+    g_SpadWork->unk_5D = temp_v1;
+    if ((s8)temp_v1 == 8) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
+
+MATCH void func_801F013C(void) {
+    s8 temp_v0;
+    u8 temp_v0_2;
+
+    temp_v0 = (s8)g_SpadWork->unk_5D;
+    if (temp_v0 != 0) {
+        g_SpadWork->unk_5D = temp_v0 - 1;
+    }
+    temp_v0_2          = g_SpadWork->unk_5E - 1;
+    g_SpadWork->unk_5E = temp_v0_2;
+    if ((temp_v0_2 << 0x18) == 0) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
@@ -151,7 +173,16 @@ INCLUDE_ASM(func_801F0AC8);
 
 INCLUDE_ASM(func_801F0BA8);
 
-INCLUDE_ASM(func_801F0C50);
+MATCH void func_801F0C50(void) {
+    u8 temp_v0;
+
+    temp_v0                           = g_SpadWork->word_08.byte.timer_0A + 4;
+    g_SpadWork->word_08.byte.timer_0A = temp_v0;
+    if ((u32)(temp_v0 & 0xFF) >= 0x20U) {
+        g_SpadWork->word_08.byte.unk_0B = 1;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F0CB0(void) {
     PartyBattler* work;
@@ -171,7 +202,21 @@ INCLUDE_ASM(func_801F0D0C);
 
 INCLUDE_ASM(func_801F10E8);
 
-INCLUDE_ASM(func_801F11E0);
+MATCH void func_801F11E0(void) {
+    u8 temp_v0;
+
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
+        g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
+        g_SpadWork->word_3C.word          = D_801EB4E0->word_3C.word;
+        g_SpadWork->word_08.byte.unk_0B   = rand() & 0xF;
+        g_SpadWork->word_08.byte.unk_09   = 0;
+        g_SpadWork->word_08.byte.timer_0A = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F129C(void) {
     g_SpadWork->word_08.byte.unk_0B += 1;

@@ -53,7 +53,19 @@ MATCH void func_801EF7C4(void) {
     g_SpadWork->unk_02 += 1;
 }
 
-INCLUDE_ASM(func_801EF884);
+MATCH void func_801EF884(void) {
+    u8 temp_v0;
+
+    Effect_SetActorMatrix();
+    func_801EFA48();
+    PopMatrix();
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->word_08.byte.unk_09 = 0xF;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF908);
 

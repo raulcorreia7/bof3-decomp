@@ -25,7 +25,7 @@ INCLUDE_ASM(func_801EEEEC);
 INCLUDE_ASM(func_801EF148);
 
 MATCH void func_801EF3D8(void) {
-    u8 temp_a0;
+    u8 timer;
 
     if ((u8)g_SpadWork->word_08.byte.timer_0A < 8U) {
         g_SpadWork->word_08.byte.unk_0B += 1;
@@ -33,9 +33,9 @@ MATCH void func_801EF3D8(void) {
         func_800AF764();
         func_801F02B0();
     }
-    temp_a0 = g_SpadWork->word_08.byte.timer_0A;
-    if ((temp_a0 & 0xFF) == 8) {
-        g_SpadWork->word_08.byte.unk_09 = temp_a0;
+    timer = g_SpadWork->word_08.byte.timer_0A;
+    if ((timer & 0xFF) == 8) {
+        g_SpadWork->word_08.byte.unk_09 = timer;
         g_SpadWork->unk_02 += 1;
     }
 }

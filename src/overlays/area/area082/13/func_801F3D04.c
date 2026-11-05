@@ -1,3 +1,11 @@
 #include "area082_13.h"
 
-INCLUDE_ASM(func_801F3D04);
+MATCH void func_801F3D04(void) {
+    g_SpadWork->unk_09 += 1;
+    if ((u8)g_SpadWork->unk_09 >= 0x11U) {
+        g_SpadWork->unk_09 = 0;
+        g_SpadWork->unk_0B = 2;
+        g_SpadWork->state_02 += 1;
+    }
+    func_801F4430();
+}

@@ -29,7 +29,18 @@ MATCH void func_801F6EE8(void) {
     third[1] = 1;
 }
 
-INCLUDE_ASM(func_801F6F24);
+MATCH void func_801F6F24(void) {
+    g_SpadWork->unk_09 -= 1;
+    if (g_SpadWork->unk_09 != 0) {
+        g_SpadWork->tint.bytes.unk_5D += 7;
+        g_SpadWork->tint.bytes.unk_5E += 7;
+        g_SpadWork->tint.bytes.unk_5F += 7;
+    } else {
+        g_SpadWork->unk_01 = 2;
+    }
+    func_801F6FF8();
+    func_801F70DC();
+}
 
 MATCH void func_801F6FD0(void) {
     func_801F6FF8();
@@ -72,7 +83,19 @@ MATCH void func_801F7248(void) {
     func_801F7568();
 }
 
-INCLUDE_ASM(func_801F72A0);
+MATCH void func_801F72A0(void) {
+    g_SpadWork->unk_09 -= 1;
+    if (g_SpadWork->unk_09 != 0) {
+        g_SpadWork->tint.bytes.unk_5D += 2;
+        g_SpadWork->tint.bytes.unk_5E += 2;
+        g_SpadWork->tint.bytes.unk_5F += 2;
+    } else {
+        g_SpadWork->unk_09 = 0x1E;
+        g_SpadWork->unk_01 = 3;
+    }
+    func_801F7484();
+    func_801F7568();
+}
 
 /* nonmatching: the draft with one `work = g_SpadWork` base for the three tint stores is exact except retail compares `andi v1,a1,0xFF` against 0x37 with the area message index in a1 (candidate omits the andi, 0xE4 against 0xE8 bytes); u8, s32, masked and volatile spellings of the index all fold the andi. */
 INCLUDE_ASM(func_801F735C);
@@ -163,7 +186,7 @@ MATCH void func_801F7D14(void) {
 
 MATCH void func_801F7D50(void) {
     Game_SetScriptActive();
-    g_AreaDrawFlags = 31;
+    g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     func_801C16B8();
     func_801C1DF0(0);
     SYS_SetFlag(g_SceneEventFlags, 67);

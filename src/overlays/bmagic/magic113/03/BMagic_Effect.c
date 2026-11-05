@@ -62,7 +62,16 @@ MATCH void func_801EF75C(void) {
 
 INCLUDE_ASM(func_801EF7A0);
 
-INCLUDE_ASM(func_801EF844);
+MATCH void func_801EF844(void) {
+    u8 temp_v1;
+
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x21) {
+        D_801EB4E0->word_08.byte.unk_0B = 3;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF8A4(void) {
     PartyBattler* active;
@@ -90,7 +99,16 @@ MATCH void func_801EFC28(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFCA0);
+MATCH void func_801EFCA0(void) {
+    u8 temp_v1;
+
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x28) {
+        D_801EB4E0->word_08.byte.unk_0B = 4;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EFD00(void) {
     PartyBattler* active;
@@ -118,9 +136,23 @@ MATCH void func_801F0140(void) {
     }
 }
 
-INCLUDE_ASM(func_801F01B8);
+MATCH void func_801F01B8(void) {
+    u8 temp_v1;
 
-INCLUDE_ASM(func_801F0218);
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x31) {
+        D_801EB4E0->word_08.byte.unk_0B = 5;
+        g_SpadWork->unk_02 += 1;
+    }
+}
+
+MATCH void func_801F0218(void) {
+    if (D_801EB4E0->word_08.byte.unk_0B == 0x84) {
+        SND_PlayCue(0x103U);
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F026C(void) {
     PartyBattler* work;

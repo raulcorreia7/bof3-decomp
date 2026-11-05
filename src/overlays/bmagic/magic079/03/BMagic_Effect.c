@@ -48,7 +48,21 @@ INCLUDE_ASM(func_801EEE64);
 
 INCLUDE_ASM(func_801EEEE4);
 
-INCLUDE_ASM(func_801EEF34);
+MATCH void func_801EEF34(void) {
+    u8 temp_a0;
+    u8 temp_v1;
+
+    temp_a0 = g_SpadWork->word_08.byte.unk_09;
+    if ((temp_a0 & 0xFF) != 0x20) {
+        g_SpadWork->word_08.byte.unk_09 = temp_a0 + 1;
+    }
+    temp_v1                           = g_SpadWork->word_08.byte.timer_0A - 1;
+    g_SpadWork->word_08.byte.timer_0A = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x30) {
+        g_SpadWork->word_08.byte.unk_09 = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EEFB8);
 
@@ -75,9 +89,35 @@ MATCH void func_801EF0A8(void) {
 
 INCLUDE_ASM(func_801EF130);
 
-INCLUDE_ASM(func_801EF1DC);
+MATCH void func_801EF1DC(void) {
+    PartyBattler* work;
+    u8            timer;
 
-INCLUDE_ASM(func_801EF23C);
+    work                       = g_SpadWork;
+    timer                      = work->word_08.byte.unk_09 - 1;
+    work->word_3C.half.span_3E = work->word_3C.half.span_3E - 0x40;
+    work->word_08.byte.unk_09  = timer;
+    if (timer == 0) {
+        g_SpadWork->word_08.byte.unk_09 = 0x20;
+        g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
+    }
+}
+
+MATCH void func_801EF23C(void) {
+    u8 temp_v0;
+    u8 temp_v1;
+
+    temp_v0 = g_SpadWork->word_08.byte.unk_09;
+    if (temp_v0 != 0) {
+        g_SpadWork->word_08.byte.unk_09 = temp_v0 - 1;
+    }
+    temp_v1                           = g_SpadWork->word_08.byte.timer_0A + 1;
+    g_SpadWork->word_08.byte.timer_0A = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x80) {
+        g_SpadWork->word_08.byte.unk_09 = 0x20;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF2BC);
 
@@ -120,7 +160,12 @@ MATCH void func_801EFC74(void) {
 
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
 
-INCLUDE_ASM(func_801EFD2C);
+MATCH void func_801EFD2C(void) {
+    g_SpadWork->word_08.byte.timer_0A -= 1;
+    if (D_801EB4E0->word_08.byte.unk_0B == g_SpadWork->step_01) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EFD84(void) {
     PartyBattler* work;
@@ -158,7 +203,12 @@ MATCH void Effect_CountUpAndStep_801EFF08(void) {
     BMAGIC_COUNT_UP_AND_STEP();
 }
 
-INCLUDE_ASM(func_801EFF58);
+MATCH void func_801EFF58(void) {
+    g_SpadWork->word_08.byte.timer_0A += 1;
+    if (D_801EB4E0->word_08.byte.unk_0B == g_SpadWork->step_01) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EFFB0(void) {
     PartyBattler* work;

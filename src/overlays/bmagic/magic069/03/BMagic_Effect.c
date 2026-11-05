@@ -36,9 +36,34 @@ MATCH void func_801EF034(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF0C4);
+MATCH void func_801EF0C4(void) {
+    s32 temp_v0;
 
-INCLUDE_ASM(func_801EF15C);
+    temp_v0            = g_SpadWork->unk_0C - 1;
+    g_SpadWork->unk_0C = temp_v0;
+    g_SpadWork->unk_2E.half -= temp_v0;
+    if (g_SpadWork->unk_0C == 0) {
+        if (g_SpadWork->word_08.byte.unk_0B == 0) {
+            SND_QueueSelectionFx(0x103);
+            g_SpadWork->unk_02 += 1;
+            return;
+        }
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
+
+MATCH void func_801EF15C(void) {
+    u8 temp_v1;
+
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x10) {
+        func_801F0274();
+        g_SpadWork->word_08.byte.unk_0B = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF1D0(void) {
     u8 value;
@@ -96,11 +121,11 @@ MATCH void func_801EF430(void) {
 }
 
 MATCH void func_801EF4C0(void) {
-    s32 temp_v1;
+    s32 count;
 
-    temp_v1            = g_SpadWork->unk_0C - 1;
-    g_SpadWork->unk_0C = temp_v1;
-    g_SpadWork->unk_2E.half += temp_v1;
+    count              = g_SpadWork->unk_0C - 1;
+    g_SpadWork->unk_0C = count;
+    g_SpadWork->unk_2E.half += count;
     if (g_SpadWork->unk_0C == 0) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
         func_801E5988();
@@ -118,13 +143,13 @@ INCLUDE_ASM(func_801EF724);
 INCLUDE_ASM(func_801EF834);
 
 MATCH void func_801EF9C4(void) {
-    u8 temp_a0;
+    u8 timer;
     u8 counter;
 
     func_801EFA84();
-    temp_a0 = g_SpadWork->word_08.byte.timer_0A;
-    if ((temp_a0 & 0xFF) != 0x18) {
-        g_SpadWork->word_08.byte.timer_0A = temp_a0 + 4;
+    timer = g_SpadWork->word_08.byte.timer_0A;
+    if ((timer & 0xFF) != 0x18) {
+        g_SpadWork->word_08.byte.timer_0A = timer + 4;
     }
     counter                         = g_SpadWork->word_08.byte.unk_09 + 1;
     g_SpadWork->word_08.byte.unk_09 = counter;
@@ -133,10 +158,7 @@ MATCH void func_801EF9C4(void) {
     }
 }
 
-MATCH void func_801EFA50(void) {
-    BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
-    func_801E5988();
-}
+#include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 INCLUDE_ASM(func_801EFA84);
 

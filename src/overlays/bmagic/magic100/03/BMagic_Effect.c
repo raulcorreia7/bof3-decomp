@@ -8,7 +8,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC70);
 
-INCLUDE_ASM(func_801EED9C);
+MATCH void func_801EED9C(void) {
+    if (g_SpadWork->word_08.byte.unk_09 != 0) {
+        func_800A9610(g_BattleTargetSelector, 0x10U);
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 

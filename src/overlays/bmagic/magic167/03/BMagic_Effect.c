@@ -60,13 +60,13 @@ MATCH void func_801EFA70(void) {
 }
 
 MATCH void func_801EFACC(void) {
-    u8 temp_v1;
+    u8 timer;
 
     g_SpadWork->word_08.byte.unk_0B += 2;
     g_SpadWork->word_08.byte.unk_09 += 1;
-    temp_v1 = g_SpadWork->word_08.byte.timer_0A;
-    if (temp_v1 < 0x10U) {
-        g_SpadWork->word_08.byte.timer_0A = temp_v1 + 1;
+    timer = g_SpadWork->word_08.byte.timer_0A;
+    if (timer < 0x10U) {
+        g_SpadWork->word_08.byte.timer_0A = timer + 1;
     }
     if (g_SpadWork->word_08.byte.unk_09 == 0x18) {
         g_SpadWork->unk_02 += 1;

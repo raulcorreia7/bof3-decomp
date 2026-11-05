@@ -14,8 +14,8 @@ import yaml
 from bof3.core.io import write_atomic
 from bof3.core.paths import ASM, BUILD, CONFIG
 from bof3.link.inputs import write_if_changed
+from bof3.link.symbols import imported_map, splat_map
 from bof3.link.symbols import load as load_symbols
-from bof3.link.symbols import splat_map
 from bof3.resolve.layout import read_splat
 
 
@@ -218,7 +218,9 @@ def _build_manifest(root: Path, target: str) -> Path:
     if start < 0 or not document.get("sha1"):
         raise ValueError(f"{manifest}: needs `sha1:` and `segments:`")
     directory = root / BUILD / "splat" / target
-    maps = [splat_map(owner) for owner in document["symbol_owners"]]
+    imported = directory / "symbols.imported.txt"
+    write_if_changed(imported, imported_map(root, target))
+    maps = [splat_map(target), str(imported)]
     auto = directory / "symbols.auto.txt"
     write_if_changed(auto, _function_symbols(document, root, [root / m for m in maps]))
     options = {

@@ -22,13 +22,13 @@ MATCH void func_801EEE74(void) {
 INCLUDE_ASM(func_801EEEDC);
 
 MATCH void func_801EEF88(void) {
-    PartyBattler* temp_s0;
+    PartyBattler* saved_work;
 
-    temp_s0    = g_SpadWork;
+    saved_work = g_SpadWork;
     g_SpadWork = D_801EC2E0->target.party;
     func_8014DAEC();
-    g_SpadWork = temp_s0;
-    if (temp_s0->word_08.byte.unk_0B == 0) {
+    g_SpadWork = saved_work;
+    if (saved_work->word_08.byte.unk_0B == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= 4;
         func_801E5988();
