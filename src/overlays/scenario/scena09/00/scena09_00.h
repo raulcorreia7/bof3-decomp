@@ -10,8 +10,10 @@ extern u32       D_801F6C00;
 extern u8        D_80144908[];
 extern u8        D_80146874;
 extern u8        D_80146875;
+extern u16       D_80146876;
 extern Callback  D_801FE3E0[];
 extern Callback  D_801FE3EC[];
+extern u8        D_801FE430[4];
 extern SceneFunc D_801FE434[];
 
 s32 func_801F75BC(void);

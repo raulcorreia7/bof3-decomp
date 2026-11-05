@@ -85,7 +85,11 @@ INCLUDE_ASM(func_801FBD6C);
 MATCH void func_801FC588(void) {
 }
 
-INCLUDE_ASM(func_801FC590);
+MATCH void func_801FC590(void) {
+    u8 cam                   = D_801FE430[D_80146876 & 3];
+    g_AreaCameraRefreshCount = 2;
+    g_AreaCameraOffsetY      = g_AreaCameraOffsetY + ((cam << 24) >> 22);
+}
 
 MATCH void func_801FC5DC(void) {
 }
