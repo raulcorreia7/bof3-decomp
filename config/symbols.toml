@@ -186,13 +186,14 @@ g_BMagicEffectFuncs = { addr = 0x801F1BEC, source = "the module dispatcher index
 
 ["emi/bmagic/magic009/03"]
 Effect_CountDownTimerNextStep = { addr = 0x801EF01C, type = "func", source = "counts the effect timer down and advances the step byte at zero" }
-Effect_NextStepOnWorkZeroTick = { addr = 0x801EF068, type = "func", source = "advances the step byte at +0x01 when the ticker byte at +0x0B of the record at the scratchpad work pointer (+0x44) is zero; one body shared with the other bmagic overlays" }
+Effect_NextStepOnZeroTick = { addr = 0x801EF068, type = "func", source = "one body shared through overlays/bmagic/Effect_NextStepOnZeroTick.h" }
 Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF2D4, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through Bmagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
 Effect_CountDownTimer = { addr = 0x801EF340, type = "func", source = "counts the effect timer down and finishes the effect at zero" }
 Effect_ReloadTimerAndStep = { addr = 0x801EF740, type = "func", source = "reloads the effect timer with the value func_800B0058 returns and advances the effect step" }
 g_BMagicEffectFuncs = { addr = 0x801EF89C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic010/00"]
+Effect_SelectTargetAndAdvance = { addr = 0x801EEC80, type = "func", source = "shared body of emi/bmagic/magic117/00@0x801EF06C" }
 Effect_PlayOnce = { addr = 0x801EEF58, type = "func", source = "plays the effect the target selector chose and clears it" }
 
 ["emi/bmagic/magic012/00"]
@@ -247,7 +248,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF9A4, source = "the module dispatcher index
 
 ["emi/bmagic/magic039/03"]
 BMagic_RunStep = { addr = 0x801EEC34, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
-Effect_NextStepOnWorkZeroTick = { addr = 0x801EEEA8, type = "func", source = "advances the step byte at +0x01 when the ticker byte at +0x0B of the record at the scratchpad work pointer (+0x44) is zero; one body shared with the other bmagic overlays" }
+Effect_NextStepOnZeroTick = { addr = 0x801EEEA8, type = "func", source = "one body shared through overlays/bmagic/Effect_NextStepOnZeroTick.h" }
 Effect_PlayOnZeroTick = { addr = 0x801EEEDC, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_CountDownTimer = { addr = 0x801EF6E0, type = "func", source = "adds eight to the effect timer and counts it down at zero" }
 Effect_SetActorMatrix = { addr = 0x801EF9F4, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
@@ -371,7 +372,8 @@ Effect_TickOnTimerZero = { addr = 0x801F00D0, type = "func", source = "counts th
 g_BMagicEffectFuncs = { addr = 0x801F0BB0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic062/03"]
-Effect_CountDownTimerLoadCounter = { addr = 0x801EEEC0, type = "func", source = "counts the effect timer at +0x09 down and, at zero, runs func_80196718 and func_8019651C on the selected battler, stores the latter's result in the effect counter at +0x0A, reloads the timer with 8 and advances the step byte at +0x01; one body shared with the other bmagic overlays" }
+Effect_DispatchHandlerSlot1 = { addr = 0x801EEC1C, type = "func", source = "one body shared through overlays/bmagic/Effect_DispatchHandlerSlot1.h" }
+Effect_ReplacePaletteFade = { addr = 0x801EEEC0, type = "func", source = "one body shared through overlays/bmagic/Effect_ReplacePaletteFade.h" }
 Effect_NextStep = { addr = 0x801EF078, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 2" }
 Effect_SetActorMatrix = { addr = 0x801EF414, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 Effect_CountUpAndStep = { addr = 0x801EF588, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
@@ -428,14 +430,17 @@ g_BMagicEffectFuncs = { addr = 0x801F04F8, source = "the module dispatcher index
 
 Effect_TickDownAndClear = { addr = 0x801EFA50, type = "func", source = "byte-identical to Effect_TickDownAndClear in the shared header overlays/bmagic/Effect_TickDownAndClear.h" }
 ["emi/bmagic/magic070/03"]
+Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "one body shared through overlays/bmagic/Effect_ReplacePaletteFade.h" }
 Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
 Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 
 ["emi/bmagic/magic071/03"]
+Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "one body shared through overlays/bmagic/Effect_ReplacePaletteFade.h" }
 Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
 Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 
 ["emi/bmagic/magic072/03"]
+Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "one body shared through overlays/bmagic/Effect_ReplacePaletteFade.h" }
 Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
 Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 
@@ -485,7 +490,8 @@ BMagic_AllocEffect = { addr = 0x801EFA20, type = "func", source = "claims the fi
 g_BMagicEffectFuncs = { addr = 0x801EFA84, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic082/03"]
-Effect_CountDownTimerLoadCounter = { addr = 0x801EEF0C, type = "func", source = "counts the effect timer at +0x09 down and, at zero, runs func_80196718 and func_8019651C on the selected battler, stores the latter's result in the effect counter at +0x0A, reloads the timer with 8 and advances the step byte at +0x01; one body shared with the other bmagic overlays" }
+Effect_DispatchHandlerSlot1 = { addr = 0x801EEC1C, type = "func", source = "one body shared through overlays/bmagic/Effect_DispatchHandlerSlot1.h" }
+Effect_ReplacePaletteFade = { addr = 0x801EEF0C, type = "func", source = "one body shared through overlays/bmagic/Effect_ReplacePaletteFade.h" }
 Effect_NextStep = { addr = 0x801EF0C4, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 2" }
 Effect_StartOnZeroTick = { addr = 0x801EF354, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 Effect_SetActorMatrix = { addr = 0x801EF4BC, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
@@ -505,6 +511,7 @@ Actor_Clear = { addr = 0x801F0E24, type = "func", source = "clears the five lead
 g_BMagicEffectFuncs = { addr = 0x801F0EEC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic086/03"]
+Effect_DispatchHandlerSlot1 = { addr = 0x801EEC1C, type = "func", source = "one body shared through overlays/bmagic/Effect_DispatchHandlerSlot1.h" }
 Effect_PlayOnIdleTick = { addr = 0x801EF168, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
 Effect_SetActorMatrix = { addr = 0x801EF1C8, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 Effect_CountUpAndStep = { addr = 0x801EF784, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
@@ -537,8 +544,10 @@ Effect_SetActorMatrix = { addr = 0x801EF700, type = "func", source = "sets the a
 Effect_StartOnZeroTick = { addr = 0x801EEFB4, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 Effect_StepOnOwnTickFlag = { addr = 0x801EF350, type = "func", source = "advances the effect step byte at +0x02 while bit 0x80 of the effect ticker byte at +0x0B of the scratchpad record is set; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix = { addr = 0x801EF4D0, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
+Effect_CopyBattlerCoordsSetTimers = { addr = 0x801EF8C0, type = "func", source = "shared body of emi/bmagic/magic144/03@0x801EF5D4" }
 Effect_CountUpAndMarkBattler = { addr = 0x801EF990, type = "func", source = "raises the work counter at byte 0x09 and the timer at byte 0x0A each frame and, at counter 0x19, sets the high bit of the active battler's effect ticker byte and advances the effect state (func_801EF6A4 in magic144, func_801EF990 in magic092)" }
 Effect_CountDownByTwoFinishAtOne = { addr = 0x801EFA24, type = "func", source = "counts the work counter at byte 0x09 down by 2 and raises the timer at byte 0x0A on odd frames; at counter 1 the active battler's effect ticker byte drops by one and the effect work record is cleared (func_801EF738 in magic144, func_801EFA24 in magic092)" }
+Effect_CopyBattlerCoordsClearTimer = { addr = 0x801F0320, type = "func", source = "shared body of emi/bmagic/magic144/03@0x801F0034" }
 Effect_StepOnTickFlag = { addr = 0x801F03DC, type = "func", source = "advances the effect step while bit 0x80 of the other battler's effect ticker is set" }
 Effect_CountDownCounterAndFinish = { addr = 0x801F0420, type = "func", source = "counts the work counter at byte 0x09 down; at zero the active battler's effect ticker byte drops by one and the effect work record is cleared (func_801F0134 in magic144, func_801F0420 in magic092)" }
 BMagic_AllocEffect = { addr = 0x801F0758, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
@@ -630,6 +639,7 @@ Effect_PlayOnIdleTick = { addr = 0x801EED1C, type = "func", source = "plays the 
 Effect_AdvanceOnTick = { addr = 0x801EF090, type = "func", source = "increments the effect ticker and advances the step at the limit" }
 
 ["emi/bmagic/magic110/03"]
+Effect_DispatchHandlerSlot1 = { addr = 0x801EEC1C, type = "func", source = "one body shared through overlays/bmagic/Effect_DispatchHandlerSlot1.h" }
 Effect_StartPlaying = { addr = 0x801EF114, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic001/00@0x801EEFA4" }
 Effect_CountDownTimerStep = { addr = 0x801EF4DC, type = "func", source = "counts the effect timer down and advances the effect step at zero" }
 Effect_StepWhileTickUnderThree = { addr = 0x801EF8F8, type = "func", source = "advances the effect step while the other battler's effect ticker is under 3" }
@@ -668,6 +678,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF8BC, source = "the module dispatcher index
 
 ["emi/bmagic/magic117/00"]
 Effect_PlayOnce = { addr = 0x801EEFB8, type = "func", source = "byte-identical to Effect_PlayOnce at emi/bmagic/magic008/00@0x801EF010" }
+Effect_SelectTargetAndAdvance = { addr = 0x801EF06C, type = "func", source = "shared body of emi/bmagic/magic010/00@0x801EEC80" }
 Effect_PlayOnce_801EF344 = { addr = 0x801EF344, type = "func", source = "byte-identical to Effect_PlayOnce at emi/bmagic/magic117/00@0x801EEFB8" }
 
 ["emi/bmagic/magic118/03"]
@@ -774,6 +785,7 @@ g_BMagicEffectFuncs = { addr = 0x801F00F8, source = "the module dispatcher index
 
 ["emi/bmagic/magic138/03"]
 BMagic_RunStep = { addr = 0x801EEC28, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
+Effect_TickDownAndClear = { addr = 0x801EF6F8, type = "func", source = "one body shared through overlays/bmagic/Effect_TickDownAndClear.h" }
 g_BMagicEffectFuncs = { addr = 0x801EF72C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic143/03"]
@@ -786,8 +798,10 @@ g_BMagicEffectFuncs = { addr = 0x801EFEE8, source = "the module dispatcher index
 Effect_StartOnZeroTick = { addr = 0x801EEE50, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 Effect_StepOnOwnTickFlag = { addr = 0x801EF11C, type = "func", source = "advances the effect step byte at +0x02 while bit 0x80 of the effect ticker byte at +0x0B of the scratchpad record is set; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix = { addr = 0x801EF1E4, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
+Effect_CopyBattlerCoordsSetTimers = { addr = 0x801EF5D4, type = "func", source = "shared body of emi/bmagic/magic092/03@0x801EF8C0" }
 Effect_CountUpAndMarkBattler = { addr = 0x801EF6A4, type = "func", source = "raises the work counter at byte 0x09 and the timer at byte 0x0A each frame and, at counter 0x19, sets the high bit of the active battler's effect ticker byte and advances the effect state (func_801EF6A4 in magic144, func_801EF990 in magic092)" }
 Effect_CountDownByTwoFinishAtOne = { addr = 0x801EF738, type = "func", source = "counts the work counter at byte 0x09 down by 2 and raises the timer at byte 0x0A on odd frames; at counter 1 the active battler's effect ticker byte drops by one and the effect work record is cleared (func_801EF738 in magic144, func_801EFA24 in magic092)" }
+Effect_CopyBattlerCoordsClearTimer = { addr = 0x801F0034, type = "func", source = "shared body of emi/bmagic/magic092/03@0x801F0320" }
 Effect_StepOnTickFlag = { addr = 0x801F00F0, type = "func", source = "advances the effect step while bit 0x80 of the other battler's effect ticker is set" }
 Effect_CountDownCounterAndFinish = { addr = 0x801F0134, type = "func", source = "counts the work counter at byte 0x09 down; at zero the active battler's effect ticker byte drops by one and the effect work record is cleared (func_801F0134 in magic144, func_801F0420 in magic092)" }
 BMagic_AllocEffect = { addr = 0x801F046C, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
@@ -855,6 +869,7 @@ BMagic_AllocEffect = { addr = 0x801EF69C, type = "func", source = "claims the fi
 g_BMagicEffectFuncs = { addr = 0x801EF718, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic167/03"]
+Effect_DispatchHandlerSlot1 = { addr = 0x801EEC1C, type = "func", source = "one body shared through overlays/bmagic/Effect_DispatchHandlerSlot1.h" }
 Effect_NextStepWhileTickUnderTwo = { addr = 0x801EF048, type = "func", source = "advances the step byte at +0x01 while the effect ticker byte at +0x0B is under 2; one body shared with the other bmagic overlays" }
 Effect_PlayOnZeroTick = { addr = 0x801EF1C8, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_SetActorMatrix = { addr = 0x801EF228, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
@@ -2203,6 +2218,7 @@ Scene_RemoveMomo = { addr = 0x801FE364, type = "func", source = "removes charact
 Actor_WaitAndStep = { addr = 0x801F8730, type = "func", source = "counts the actor wait byte down reloads it at zero and advances the handler index" }
 AngleAverage12 = { addr = 0x801F8F40, type = "func", source = "averages two 12-bit angles along the shorter arc" }
 Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FDB34, type = "func", source = "streams the EMI family for young Ryu, young Nina and Momo, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungNinaYoungGarr = { addr = 0x801FDB80, type = "func", source = "streams the EMI family for young Ryu, young Nina and Garr, empties g_PartySize and joins the three in that order with Party_JoinMember" }
 
 ["emi/scenario/scena08/00"]
 Actor_WaitAndStep = { addr = 0x801F8D18, type = "func", source = "counts the actor wait byte down reloads it at zero and advances the handler index" }
@@ -2224,6 +2240,7 @@ Scene_RemoveMomo = { addr = 0x801FE30C, type = "func", source = "removes charact
 Scene_RemovePeco = { addr = 0x801FE334, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena10/00"]
+Scene_JoinPartyRyuAdultGarrNinaAdult = { addr = 0x801FE314, type = "func", source = "streams the EMI family for adult Ryu, Garr and adult Nina, empties g_PartySize and joins the three in that order with Party_JoinMember, without the palette restage of Scene_SetPartyRyuAdultGarrNinaAdult" }
 Scene_RebuildRyuGarrParty = { addr = 0x801FE4F0, type = "func", source = "clears the three party slots of D_80144908, keeps the last id that is neither adult Ryu (7) nor Garr (2), adult Nina (8) when none is, streams the EMI family for Ryu, Garr and that id and joins all three; byte-equal to func_801FDF54 of scena09" }
 Scene_RemoveMomo = { addr = 0x801FE614, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_StashPartyExceptRyuAdult = { addr = 0x801FE6F4, type = "func", source = "copies the character ids of the party into D_80144908, removes every listed member except adult Ryu (7) and runs func_801C1630; byte-equal to func_801FE234 of scena09" }
@@ -2232,9 +2249,11 @@ Scene_StashPartyExceptRyuAdult = { addr = 0x801FE6F4, type = "func", source = "c
 Scene_JoinAdultNinaAndMomo = { addr = 0x801FAB74, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinAdultNina = { addr = 0x801FABC0, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinMomo = { addr = 0x801FAC04, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_JoinAdultNinaAndMomo_801FAC48 = { addr = 0x801FAC48, type = "func", source = "second copy of Scene_JoinAdultNinaAndMomo in this image" }
 Scene_JoinMomo_801FACD8 = { addr = 0x801FACD8, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinMomoAndPeco = { addr = 0x801FAD1C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinPeco = { addr = 0x801FAD68, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_JoinReiAndGarr = { addr = 0x801FADAC, type = "func", source = "streams the EMI family for adult Ryu, Rei and Garr, rebuilds the battlers, joins Rei then Garr with Party_JoinMember (func_801C187C) and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveRei = { addr = 0x801FADF8, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveGarr = { addr = 0x801FAE20, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemovePeco = { addr = 0x801FAE48, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
@@ -2250,6 +2269,7 @@ Scene_JoinAdultNinaAndMomo_801FCEB4 = { addr = 0x801FCEB4, type = "func", source
 Scene_JoinMomo_801FCF44 = { addr = 0x801FCF44, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinMomoAndPeco = { addr = 0x801FCF88, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinPeco = { addr = 0x801FCFD4, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_JoinReiAndGarr = { addr = 0x801FD018, type = "func", source = "streams the EMI family for adult Ryu, Rei and Garr, rebuilds the battlers, joins Rei then Garr with Party_JoinMember (func_801C187C) and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveRei = { addr = 0x801FD0B0, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveGarr = { addr = 0x801FD0D8, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemovePeco = { addr = 0x801FD100, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
@@ -2258,12 +2278,19 @@ Scene_RemoveAdultNina = { addr = 0x801FD150, type = "func", source = "removes ch
 
 ["emi/scenario/scena13/00"]
 GFX_CopyPaletteCapped = { addr = 0x801FB0B8, type = "func", source = "copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending" }
+Scene_JoinPartyRyuAdultPecoMomo = { addr = 0x801FBB78, type = "func", source = "streams the EMI family for adult Ryu, Momo and Peco, empties g_PartySize and joins adult Ryu, Peco then Momo with Party_JoinMember; the join order differs from the stream order" }
+Scene_SetPartyRyuAdultMomoNinaAdult = { addr = 0x801FBD84, type = "func", source = "streams the EMI family for adult Ryu, Momo and adult Nina, empties g_PartySize, joins the three in that order with Party_JoinMember and restages the party palettes" }
 
 ["emi/scenario/scena14/00"]
+Scene_JoinPartyRyuAdultReiNinaAdult = { addr = 0x801FBD2C, type = "func", source = "streams the EMI family for adult Ryu, adult Nina and Rei, empties g_PartySize and joins adult Ryu, Rei then adult Nina with Party_JoinMember, without the palette restage and in a different join order than Scene_SetPartyRyuAdultNinaAdultRei" }
+Scene_SetPartyRyuAdultReiPeco = { addr = 0x801FBD78, type = "func", source = "streams the EMI family for adult Ryu, Rei and Peco, empties g_PartySize and joins the three in that order with Party_JoinMember" }
+Scene_SetPartyRyuAdultMomoPeco = { addr = 0x801FBDC4, type = "func", source = "streams the EMI family for adult Ryu, Momo and Peco, empties g_PartySize and joins the three in that order with Party_JoinMember" }
+Scene_SetPartyRyuAdultGarrPeco = { addr = 0x801FC020, type = "func", source = "streams the EMI family for adult Ryu, Garr and Peco, empties g_PartySize, joins the three in that order with Party_JoinMember and restages the party palettes" }
 Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FC074, type = "func", source = "streams the EMI family for adult Ryu, Garr and adult Nina, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes; one body shared with the other scenario programs" }
 Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FC22C, type = "func", source = "streams the EMI family for adult Ryu, adult Nina and Rei, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes; one body shared with the other scenario programs" }
 ["emi/scenario/scena15/00"]
 Area_ClearWorkColumn = { addr = 0x801F75AC, type = "func", source = "clears one byte of each row in the actor window" }
+Scene_SetPartyRyuAdultNinaAdultGarr = { addr = 0x801FE4CC, type = "func", source = "streams the EMI family for adult Ryu, adult Nina and Garr, empties g_PartySize, joins the three in that order with Party_JoinMember and restages the party palettes" }
 Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FE520, type = "func", source = "streams the EMI family for adult Ryu, adult Nina and Rei, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena16/00"]
@@ -2271,13 +2298,13 @@ GFX_CopyPaletteCapped = { addr = 0x801F83B0, type = "func", source = "copies 16 
 Scene_ClearParty = { addr = 0x801F84AC, type = "func", source = "one body shared through overlays/scenario/Scene_ClearParty.h" }
 
 ["emi/scenario/scena17/00"]
-Scene_SetPartyRyuTeepoRei = { addr = 0x801F96D4, type = "func", source = "streams the EMI family for characters 0, 3 and 4, sets g_PartySize to 0 and joins CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO and CHAR_ID_REI with Party_JoinMember (func_801C187C); one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F96D4, type = "func", source = "streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena18/00"]
-Scene_SetPartyRyuTeepoRei = { addr = 0x801F6D04, type = "func", source = "streams the EMI family for characters 0, 3 and 4, sets g_PartySize to 0 and joins CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO and CHAR_ID_REI with Party_JoinMember (func_801C187C); one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D04, type = "func", source = "streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena19/00"]
-Scene_SetPartyRyuTeepoRei = { addr = 0x801F6D68, type = "func", source = "streams the EMI family for characters 0, 3 and 4, sets g_PartySize to 0 and joins CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO and CHAR_ID_REI with Party_JoinMember (func_801C187C); one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D68, type = "func", source = "streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
 
 ["emi/world00/area000/13"]
 Message_SelectAnswerValue = { addr = 0x801F2C4C, type = "func", source = "resets the area request and stores the selection-selected state value" }

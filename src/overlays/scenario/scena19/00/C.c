@@ -59,7 +59,7 @@ MATCH s32 func_801F6D60(void) {
     return 0;
 }
 
-#include "overlays/scenario/Scene_SetPartyRyuTeepoRei.h"
+#include "overlays/scenario/Scene_SetPartyRyuYoungTeepoRei.h"
 
 MATCH void func_801F6DB4(void) {
 }

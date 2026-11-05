@@ -28,7 +28,7 @@ MATCH void func_801D150C(void) {
 
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         var_v1 = 9;
         var_v0 = &D_801DB093;
         do {
@@ -132,7 +132,7 @@ INCLUDE_ASM(func_801D2320);
 MATCH void func_801D24A8(void) {
     s8 step;
 
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F294E == 0) {
             func_801D3184(0x26, 0x10);
             func_801D32A0(0xA8, 0x10, 0);
@@ -160,7 +160,7 @@ MATCH void func_801D25CC(void) {
     u8* temp_v1;
 
     if (D_801F294D == 0) {
-        if (g_GameStateIndex != 2) {
+        if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
             temp_v0 = g_SndBgmId * 4;
             SND_StopSequence((s32) * (g_SelectionCues + temp_v0), (s16) * (D_80181EBB + temp_v0));
             SND_RequestBgm((s32)D_801DB0CC);
@@ -197,7 +197,7 @@ INCLUDE_ASM(func_801D2CF8);
 MATCH void func_801D2E10(void) {
     SND_PlayCue(262);
     Message_StartAreaMessage(114);
-    g_GameStateIndex = 2;
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
     D_801F294D       = 0;
     D_801F294C++;
 }
@@ -231,13 +231,13 @@ MATCH void func_801D364C(void) {
     if (EMI_LoaderIsReady() != 0) {
         SND_PlayBgm(0x94, 0x64, 8);
         Message_StartAreaMessage(0x7F);
-        g_GameStateIndex = 2;
+        g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
     }
 }
 
 MATCH void func_801D36A8(void) {
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         SND_PlayCue(0x102U);
         D_801DB0C4 = 4;
         D_801DB07C = 0;
@@ -294,7 +294,7 @@ MATCH void func_801D39A4(void) {
 
 MATCH void func_801D3B04(void) {
     Message_StartAreaMessage(128);
-    g_GameStateIndex = 2;
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
     D_801F294D++;
     func_801D4AE0(16, 24, 0);
     func_801D4F88(104, 64, 0);
@@ -304,7 +304,7 @@ MATCH void func_801D3B04(void) {
 }
 
 MATCH void func_801D3B98(void) {
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         D_801DB0B8 = 0;
         D_801F294D += 1;
     }
@@ -333,7 +333,7 @@ MATCH void func_801D4840(void) {
     u8* temp_v1;
 
     if (D_801F294D == 0) {
-        if (g_GameStateIndex != 2) {
+        if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
             temp_v0 = g_SndBgmId * 4;
             SND_StopSequence((s32) * (g_SelectionCues + temp_v0), (s16) * (D_80181EBB + temp_v0));
             SND_RequestBgm((s32)D_801DB0CC);
@@ -409,7 +409,7 @@ MATCH void func_801D5978(void) {
 MATCH void func_801D5A48(void) {
     if (g_UiWindowEffectBusy == 0) {
         Message_StartAreaMessage(0xE2);
-        g_GameStateIndex = 2;
+        g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294D       = 0;
         D_801F294C += 1;
     }
@@ -441,7 +441,7 @@ MATCH void func_801D5DF4(void) {
 }
 
 MATCH void func_801D5E30(void) {
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         SND_PlayCue(0x102);
         D_801DB0C4 = 4;
         D_801DB0B4 = 0;
@@ -486,7 +486,7 @@ MATCH void func_801D62C8(void) {
 MATCH void func_801D6390(void) {
     u8 value;
 
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2944 == 0) {
             value = 6;
         } else {
@@ -505,7 +505,7 @@ MATCH void func_801D640C(void) {
 INCLUDE_ASM(func_801D6448);
 
 MATCH void func_801D64E0(void) {
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 != 0) {
             SND_PlayCue(0x102U);
             D_801DB0C4 = 0;
@@ -544,7 +544,7 @@ INCLUDE_ASM(func_801D68AC);
 
 MATCH void func_801D6AC8(void) {
     func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 1);
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 == 0) {
             D_801DB0C4 = 0;
             D_801F294E += 1;
@@ -573,7 +573,7 @@ MATCH void func_801D6BE4(void) {
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     if ((u8)D_801DB0C4 == 4) {
         Message_StartAreaMessage(0xF7);
-        g_GameStateIndex = 2;
+        g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294C       = 4;
         D_801F294D       = 0;
     }
@@ -594,7 +594,7 @@ INCLUDE_ASM(func_801D7234);
 MATCH void func_801D73F8(void) {
     u8 value;
 
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2944 == 0) {
             value = 6;
         } else {
@@ -613,7 +613,7 @@ MATCH void func_801D7474(void) {
 INCLUDE_ASM(func_801D74B0);
 
 MATCH void func_801D7548(void) {
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 != 0) {
             SND_PlayCue(0x102U);
             D_801DB0C4 = 0;
@@ -652,7 +652,7 @@ INCLUDE_ASM(func_801D7934);
 
 MATCH void func_801D7B50(void) {
     func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & 0xFF, 1);
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 == 0) {
             D_801DB0C4 = 0;
             D_801F294E += 1;

@@ -488,9 +488,9 @@ MATCH s32 func_801FC5A4(void) {
 }
 
 MATCH void func_801FC5FC(void) {
-    Party_AddVitalItem(1);
+    Party_AddVitalItem(VITAL_ITEM_FLIER);
     Message_StartAreaMessage(0x2F);
-    g_GameStateIndex = 2;
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
     SND_PauseBgm((s32)g_SndBgmId);
     SND_StartXaStream(2, 1);
     while (!(SND_IsXaIdle() & 0xFF)) {
@@ -636,7 +636,7 @@ INCLUDE_ASM(func_801FCDB4);
 
 MATCH void func_801FCE18(void) {
     Message_StartAreaMessage(25);
-    g_GameStateIndex = 2;
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
     Game_SetScriptActive();
     D_80146876 = 30;
     D_80146874 = 7;
@@ -644,7 +644,7 @@ MATCH void func_801FCE18(void) {
 }
 
 MATCH void func_801FCE6C(void) {
-    EMI_LoaderStreamFamily(0, 1, 2, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0);
     D_80144F5A[0] = 255;
     D_80144F5B    = 255;
     D_80144F5C    = 255;
@@ -652,11 +652,11 @@ MATCH void func_801FCE6C(void) {
     D_80144F5E[0] = 255;
     D_80144F5F    = 255;
     g_PartySize   = 0;
-    Party_JoinMember(0);
+    Party_JoinMember(CHAR_ID_RYU_YOUNG);
 }
 
 MATCH void func_801FCEDC(void) {
-    Party_JoinMember(1);
+    Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }
 
 #include "overlays/scenario/Scene_RemoveNina.h"

@@ -12,7 +12,7 @@ MATCH void Area_AdvanceCountdown(void) {
     count                        = ((Actor*)g_SpadWork)->unk_30 - 0x10;
     ((Actor*)g_SpadWork)->unk_30 = count;
     if ((s16)count <= 0) {
-        if (g_GameStateIndex == 0) {
+        if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x201U);
         }
         ((Actor*)g_SpadWork)->state_02 = 1;

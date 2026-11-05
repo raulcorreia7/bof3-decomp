@@ -14,7 +14,7 @@ MATCH void func_801D6818(void) {
                 if (((g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].flags_128.value & 1u) != 0u) ||
                     ((g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].flags_128.value & 2u) != 0u)) {
                     g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].flags_124.value |= 0x2000u;
-                    if (g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].stats.character_id == 4u) {
+                    if (g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].stats.character_id == CHAR_ID_REI) {
                         slot                               = (u8)Battle_AllocEffect(0u, 0xBu);
                         g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[BATTLE_PARTY_CURSOR];
                     } else {

@@ -18,7 +18,14 @@ MATCH void func_801EEEA4(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
-INCLUDE_ASM(func_801EEEE8);
+MATCH void func_801EEEE8(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801EF8DC + 1, g_SpadWork->unk_02);
+    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+        func_8014D290();
+    }
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
 
 INCLUDE_ASM(func_801EEF80);
 
@@ -28,7 +35,14 @@ INCLUDE_ASM(func_801EF2B0);
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
-INCLUDE_ASM(func_801EF40C);
+MATCH void func_801EF40C(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801EF8EC + 1, g_SpadWork->unk_02);
+    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+        func_8014D290();
+    }
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
 
 INCLUDE_ASM(func_801EF4A4);
 

@@ -28,7 +28,7 @@ MATCH void Battle_WriteBackParty(void) {
                 if (value < 5u) {
                     g_Characters[rec].fatigue = value + 1;
                 }
-                g_Characters[rec].status &= 0xBFFFu;
+                g_Characters[rec].status &= ~STATUS_KO;
                 g_Characters[rec].unk_07 &= 0xFBu;
                 Char_RebuildStats(&g_Characters[rec]);
             }

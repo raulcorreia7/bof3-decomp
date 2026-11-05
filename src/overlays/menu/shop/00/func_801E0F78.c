@@ -1,7 +1,7 @@
 #include "shop_00.h"
 
 /* Lists the party members whose record flag bit 0 is set into D_801E6264, then builds the shop's first two panel
- * tasks (and slot 6 when Party_HasVitalItem(0xF) is clear).
+ * tasks (and slot 6 when Party_HasVitalItem(VITAL_ITEM_FOUNTAIN_PEN) is clear).
  * nonmatching 86.53%: retail keeps &D_80148331 in v0 and stores the slot-0 bytes through it before the other
  * fields, in source order; ours folds the pointer to absolute stores and schedules them later. A MenuPanelTask
  * view gives the same score. resume: a pointer GCC cannot fold. */
