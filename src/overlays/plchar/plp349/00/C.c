@@ -28,7 +28,7 @@ INCLUDE_ASM(func_801CE698);
 
 INCLUDE_ASM(func_801CE7B8);
 
-INCLUDE_ASM(func_801CE9F4);
+#include "overlays/plchar/Char_AdvancePaletteScript.h"
 
 #include "overlays/plchar/Char_SelectScriptAndStep.h"
 

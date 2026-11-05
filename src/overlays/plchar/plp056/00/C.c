@@ -74,7 +74,7 @@ MATCH void func_801CF998(void) {
 
 INCLUDE_ASM(func_801CFADC);
 
-INCLUDE_ASM(func_801CFD28);
+#include "overlays/plchar/Char_AdvancePaletteScript.h"
 
 #include "overlays/plchar/Char_SelectScriptAndStep.h"
 
