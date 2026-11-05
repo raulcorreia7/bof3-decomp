@@ -211,13 +211,7 @@ MATCH s32 func_801FAB6C(void) {
     return -1;
 }
 
-MATCH void func_801FAB74(void) {
-    EMI_LoaderStreamFamily(7U, 8U, 5U, 0U);
-    Party_BuildBattlers(0);
-    Party_JoinMember(CHAR_ID_NINA_ADULT);
-    Party_JoinMember(CHAR_ID_MOMO);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_JoinAdultNinaAndMomo.h"
 
 #include "overlays/scenario/Scene_JoinAdultNina.h"
 
