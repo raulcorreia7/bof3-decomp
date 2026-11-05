@@ -65,10 +65,10 @@ void func_801F4F0C(const s32* center, s32 radius, u16 angle, s32 offset_x, s32 o
 
 void func_801F4E64(const s32* center, s32 radius);
 
-extern s32 D_80145EC4;
-extern s32 D_80146954;
+extern s32   D_80145EC4;
+extern s32   D_80146954;
 extern Actor D_80146920;
-extern u8 D_80146865;
-extern u8 D_80146866;
+extern u8    D_80146865;
+extern u8    D_80146866;
 
 #endif
