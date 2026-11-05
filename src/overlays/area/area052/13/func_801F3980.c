@@ -7,7 +7,7 @@ MATCH s32 func_801F3980(s32* x, s32* y) {
     *x     = actor->x.fixed - 0x8000;
     y_half = actor->y.fixed - 0x8000;
     *y     = y_half;
-    if (g_GameStateIndex == 5) {
+    if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
         func_801F3C4C(*x, y_half);
     }
     if (D_80146867 == 0) {

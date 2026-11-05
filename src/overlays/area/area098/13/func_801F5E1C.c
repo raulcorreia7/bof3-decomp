@@ -4,7 +4,7 @@ MATCH void func_801F5E1C(void) {
     s8* flag;
 
     flag = &D_801448EC;
-    if (*flag == 0 && g_GameStateIndex != 2) {
+    if (*flag == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         D_80145040 = D_80145EC4[0];
         D_80145044 = D_80145EC8;
         D_80145048 = g_GameAreaId;

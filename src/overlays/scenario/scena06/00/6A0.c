@@ -256,49 +256,49 @@ INCLUDE_ASM(func_801FDE34);
 INCLUDE_ASM(func_801FDEA4);
 
 MATCH void func_801FDFFC(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 5U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(0);
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_RYU_YOUNG);
+    Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
 }
 
 MATCH void func_801FE048(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 5U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
 }
 
 MATCH void func_801FE08C(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 5U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(1);
+    Party_JoinMember(CHAR_ID_NINA_YOUNG);
     func_801C1630();
 }
 
 MATCH void func_801FE0D0(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 5U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(1);
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_NINA_YOUNG);
+    Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
 }
 
 MATCH void func_801FE11C(void) {
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_MOMO);
 }
 
 MATCH void func_801FE13C(void) {
-    Party_JoinMember(6);
+    Party_JoinMember(CHAR_ID_PECO);
 }
 
 #include "overlays/scenario/Scene_JoinNina.h"
 
 MATCH void func_801FE198(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 2U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(2);
+    Party_JoinMember(CHAR_ID_GARR);
 }
 
 MATCH void Scene_JoinNina_801FE1D4(void) {
@@ -306,27 +306,27 @@ MATCH void Scene_JoinNina_801FE1D4(void) {
 }
 
 MATCH void func_801FE210(void) {
-    EMI_LoaderStreamFamily(0U, 1U, 2U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(1);
-    Party_JoinMember(2);
+    Party_JoinMember(CHAR_ID_NINA_YOUNG);
+    Party_JoinMember(CHAR_ID_GARR);
 }
 
 MATCH void func_801FE254(void) {
-    func_801C1ABC(0);
-    func_801C1ABC(2);
+    func_801C1ABC(CHAR_ID_RYU_YOUNG);
+    func_801C1ABC(CHAR_ID_GARR);
     func_801C1630();
 }
 
 MATCH void func_801FE284(void) {
-    func_801C1ABC(0);
-    func_801C1ABC(5);
+    func_801C1ABC(CHAR_ID_RYU_YOUNG);
+    func_801C1ABC(CHAR_ID_MOMO);
     func_801C1630();
 }
 
 MATCH void func_801FE2B4(void) {
-    func_801C1ABC(0);
-    func_801C1ABC(6);
+    func_801C1ABC(CHAR_ID_RYU_YOUNG);
+    func_801C1ABC(CHAR_ID_PECO);
     func_801C1630();
 }
 
@@ -335,15 +335,15 @@ MATCH void func_801FE2B4(void) {
 #include "overlays/scenario/Scene_RemovePeco.h"
 
 MATCH void func_801FE334(void) {
-    func_801C1ABC(6);
-    func_801C1ABC(2);
+    func_801C1ABC(CHAR_ID_PECO);
+    func_801C1ABC(CHAR_ID_GARR);
     func_801C1630();
 }
 
 #include "overlays/scenario/Scene_RemoveMomo.h"
 
 MATCH void func_801FE38C(void) {
-    func_801C1ABC(5);
-    func_801C1ABC(6);
+    func_801C1ABC(CHAR_ID_MOMO);
+    func_801C1ABC(CHAR_ID_PECO);
     func_801C1630();
 }

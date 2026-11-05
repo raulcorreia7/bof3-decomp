@@ -2,7 +2,7 @@
 
 MATCH void func_801F3EEC(void) {
     if (g_AreaSceneMode == g_SpadWork->unk_0A) {
-        if (g_GameStateIndex == 0) {
+        if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x200);
         }
         (g_AreaCellCodes +
