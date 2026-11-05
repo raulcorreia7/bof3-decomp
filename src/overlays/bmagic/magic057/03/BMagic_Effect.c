@@ -76,6 +76,10 @@ MATCH void func_801EF08C(void) {
     g_ScriptBank = 0x800D3800;
 }
 
+/* Branch residual: both arms' (rand() % 6) << 0x10 prefixes cross-jump into one shared prefix (the
+ * rand call included) while retail keeps per-arm sequences with the arm constant in the j delay
+ * slot (first difference: the beqz v0 target at 0x801EF150); asymmetric arm order merges harder and
+ * drifts the frame. Next lever: permuter. */
 INCLUDE_ASM(func_801EF134);
 
 /* Scheduling residual: the y-store's D_801EB4E0 deref hoists above the rand()%6 division tail while
@@ -107,6 +111,10 @@ MATCH void func_801EF5BC(void) {
     g_SpadWork->unk_02++;
 }
 
+/* The local-table dispatch (Callback table[2] = {func_801EF7A0, func_801EF7E0}) is right; the body
+ * stays 2-3 instructions fat, which shifts the linked table constants +8/+C. The timer compare must
+ * keep (temp & 0xFF) before the beq (u8 temps add 3 instructions, s32 temps fold the mask away).
+ * Next lever: permuter. */
 INCLUDE_ASM(func_801EF620);
 
 MATCH void func_801EF7A0(void) {
