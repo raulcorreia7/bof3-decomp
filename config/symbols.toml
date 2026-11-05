@@ -2445,6 +2445,7 @@ Area_UpdateCameraHeight = { addr = 0x801F35A8, type = "func", source = "stores t
 ["emi/world02/area098/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
+Area_AdvanceSpawnTimer = { addr = 0x801F3AA8, type = "func", source = "runs one frame of the spawn work: claims a slot every fourth frame of g_SpadWork +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_SpadWork +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)" }
 Area_FindFreeWorkRow = { addr = 0x801F4D80, type = "func", source = "finds the first work-window row whose byte is zero or returns NULL" }
 Area_ClearWorkColumn = { addr = 0x801F5240, type = "func", source = "clears one byte of each row in the actor window" }
 Area_ClaimSpawnSlot = { addr = 0x801F526C, type = "func", source = "claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots; one body shared with the other area overlays" }
@@ -2831,6 +2832,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores 
 Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
 
 ["emi/world04/area188/13"]
+Area_AdvanceSpawnTimer = { addr = 0x801F3598, type = "func", source = "runs one frame of the spawn work: claims a slot every fourth frame of g_SpadWork +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_SpadWork +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)" }
 Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "clears one byte of each row in the actor window" }
 Area_ClaimSpawnSlot = { addr = 0x801F3DE0, type = "func", source = "claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots; one body shared with the other area overlays" }
 Area_StepSpawnSlots = { addr = 0x801F3E7C, type = "func", source = "ages every active spawn slot: counts the life byte down, shrinks the radius halfword the draw reads as the disc radius, frees the slot at zero and calls Area_DrawSpawnSlot; returns whether any slot was active, the scene steps ignore it; one body shared with the other area overlays" }

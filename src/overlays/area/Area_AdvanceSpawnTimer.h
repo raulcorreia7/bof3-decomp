@@ -1,6 +1,15 @@
-#include "area098_13.h"
-
-MATCH void func_801F3AA8(void) {
+/* Runs one frame of the spawn work: advances the frame counter at g_SpadWork
+ * +0x06 and claims a spawn slot every fourth frame, runs the per-image spawn
+ * step (AREA_SPAWN_TICK) and the slot pass, then decrements the timer at
+ * g_SpadWork +0x09. When the timer reaches zero the pending spawn is installed:
+ * the work coordinates at +0x64/+0x68/+0x6C move to +0x18/+0x1C/gravity, the
+ * velocity cells +0x0C/+0x10 take -0x1000/-0x400, and the spawn index at +0x01
+ * advances. One definition shared by the world area overlays; the spawn step is
+ * a named setting in each member's image header. Every change here must verify
+ * every member address.
+ */
+/* func_801F3AA8 (area098/13), func_801F3598 (area188/13) */
+MATCH void Area_AdvanceSpawnTimer(void) {
     u8 temp_v0;
     u8 temp_v1;
 
@@ -9,7 +18,7 @@ MATCH void func_801F3AA8(void) {
     if (!(temp_v1 & 3)) {
         Area_ClaimSpawnSlot();
     }
-    func_801F5940();
+    AREA_SPAWN_TICK();
     Area_StepSpawnSlots();
     temp_v0            = g_SpadWork->unk_09 - 1;
     g_SpadWork->unk_09 = temp_v0;
