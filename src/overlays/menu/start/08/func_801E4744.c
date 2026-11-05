@@ -113,7 +113,7 @@ NON_MATCHING void func_801E4744(void) {
                 goto block_41; /* retail branch */
             case 3:
                 SND_PlayCue(EMI_CUE_ID(1, 3));
-                D_801ED860          = 0;
+                g_MenuStartStep     = 0;
                 g_GameEntrySubstate = 1;
                 break;
             case 4:
@@ -203,7 +203,7 @@ NON_MATCHING void func_801E4744(void) {
                 val5               = val9 << 0x18;
             } while (tmp7 < 5);
             UI_SetMode(0);
-            D_801ED860 += 1;
+            g_MenuStartStep += 1;
         }
     }
 }

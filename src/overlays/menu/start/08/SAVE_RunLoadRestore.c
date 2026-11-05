@@ -4,8 +4,8 @@ MATCH void SAVE_RunLoadRestore(void) {
     u8  countdown;
     s32 i;
 
-    countdown  = (u8)D_801ED7F0;
-    D_801ED7F0 = countdown - 1;
+    countdown        = (u8)g_MenuStartTimer;
+    g_MenuStartTimer = countdown - 1;
     if (countdown == 0) {
         for (i = 0; (u32)(i & BYTE_MASK) < 9U; i++) {
             (&g_InputMasks)[i & BYTE_MASK] = D_80145594[i & BYTE_MASK];
@@ -49,7 +49,7 @@ MATCH void SAVE_RunLoadRestore(void) {
             CallbackWait(1);
         }
         g_GameEntrySubstate = 4;
-        D_801ED860          = 0;
+        g_MenuStartStep     = 0;
     }
     if (WINDOW_EFFECT_BUSY()) {
         if (g_InputHeld & PADstart) {

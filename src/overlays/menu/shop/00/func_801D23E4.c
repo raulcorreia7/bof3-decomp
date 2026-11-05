@@ -9,7 +9,7 @@ MATCH void func_801D23E4(void) {
     u8* cursor;
     u8* step;
 
-    selection  = Item_GetKind(D_801E6048, D_801E604C);
+    selection  = Item_GetKind(g_ShopItemCategory, g_ShopItemId);
     index      = selection;
     D_80148624 = 1;
     D_80148628 = D_8014840C + 6;
@@ -24,13 +24,13 @@ MATCH void func_801D23E4(void) {
             SND_PlayCue(EMI_CUE_ID(1, 0));
         }
     } else {
-        TEXT_SetVariable(0, 0xC, Item_GetRecord(D_801E6048, D_801E604C));
+        TEXT_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
         D_80148340 = 0x3A;
     }
     if (g_InputPressed & D_80145AC2) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
         cursor = &D_80148656;
-        func_801D3828(g_CharSlot[D_80144F5A[(s8)*cursor]], (selection + (D_801E6054 + 0xFF)) & BYTE_MASK, D_801E604C);
+        func_801D3828(g_CharSlot[D_80144F5A[(s8)*cursor]], (selection + (D_801E6054 + 0xFF)) & BYTE_MASK, g_ShopItemId);
         Char_RebuildStats(&g_Characters[g_CharSlot[D_80144F5A[(s8)*cursor]]]);
         D_80148652 += 1;
     } else if (g_InputPressed & D_80145AC4) {

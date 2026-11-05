@@ -12,5 +12,5 @@ MATCH void func_801E4670(void) {
     D_801ED7E8      = 2;
     func_801E7000();
     UI_SetMode(1);
-    D_801ED860 += 1;
+    g_MenuStartStep += 1;
 }
