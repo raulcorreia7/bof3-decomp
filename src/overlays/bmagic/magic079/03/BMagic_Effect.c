@@ -236,8 +236,6 @@ MATCH void func_801EFE88(void) {
 }
 
 MATCH void Effect_CountUpAndStep_801EFF08(void) {
-    u8 timer;
-
     BMAGIC_COUNT_UP_AND_STEP();
 }
 

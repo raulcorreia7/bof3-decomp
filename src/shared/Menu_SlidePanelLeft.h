@@ -3,11 +3,16 @@
  * every member. Members: func_800B254C (battle), func_8019973C (game),
  * func_801EA070 (start), and the start copy Menu_SlidePanelLeft_801EA900.
  */
-/* The statements of Menu_SlidePanelLeft; each member declares task and val. */
-#define MENU_SLIDE_PANEL_LEFT() \
-    val     = task->x - 0x20;   \
-    task->x = val;              \
-    if (val < 0x98) {           \
-        task->x     = 152;      \
-        task->state = 0;        \
-    }
+/* The statements of Menu_SlidePanelLeft. */
+#define MENU_SLIDE_PANEL_LEFT()                   \
+    do {                                          \
+        MenuPanelTask* task = g_MenuCurrentPanel; \
+        s16            val;                       \
+                                                  \
+        val     = task->x - 0x20;                 \
+        task->x = val;                            \
+        if (val < 0x98) {                         \
+            task->x     = 152;                    \
+            task->state = 0;                      \
+        }                                         \
+    } while (0)

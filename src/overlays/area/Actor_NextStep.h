@@ -5,8 +5,8 @@
 MATCH void Actor_NextStep(void) {
     u8* work;
 
-    ((u8*)g_Task)[9]    = 0;
-    ((u8*)g_Task)[0x0B] = 0;
-    work                = (u8*)g_Task;
+    TASK_BYTES[9]    = 0;
+    TASK_BYTES[0x0B] = 0;
+    work             = (u8*)g_Task;
     work[1] += 1;
 }

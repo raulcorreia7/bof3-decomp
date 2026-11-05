@@ -25,7 +25,7 @@ INCLUDE_ASM(func_801EF488);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EF668(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_Task)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
 }
 
 INCLUDE_ASM(func_801EF6AC);
@@ -204,8 +204,6 @@ MATCH void func_801F0C4C(void) {
 }
 
 MATCH void Effect_CountDownAndStep_801F0C98(void) {
-    u8 count;
-
     BMAGIC_COUNT_DOWN_AND_STEP();
 }
 
