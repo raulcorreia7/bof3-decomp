@@ -18,6 +18,7 @@ MATCH void func_801EEED4(void) {
 
 INCLUDE_ASM(func_801EEF18);
 
+/* First difference: lui v1 at +0x20; try the work pointer lifetime across the first coordinate stores. */
 INCLUDE_ASM(func_801EEFB4);
 
 MATCH void func_801EF10C(void) {

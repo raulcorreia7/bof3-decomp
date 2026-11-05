@@ -30,7 +30,14 @@ MATCH void func_801EF4E0(void) {
     SYS_DISPATCH_TASK(D_801EF8B4, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EF524);
+MATCH void func_801EF524(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801EF8B4 + 1, g_SpadWork->unk_02);
+    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+        func_8014D290();
+    }
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
 
 INCLUDE_ASM(func_801EF5BC);
 

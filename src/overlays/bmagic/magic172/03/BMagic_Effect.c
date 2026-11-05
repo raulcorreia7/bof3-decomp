@@ -20,6 +20,7 @@ MATCH void func_801EEE38(void) {
 
 INCLUDE_ASM(func_801EEE7C);
 
+/* First difference: lw a0 at +0x28; try scheduling the copied x load before the depth store. */
 INCLUDE_ASM(func_801EF158);
 
 INCLUDE_ASM(func_801EF210);

@@ -40,7 +40,22 @@ MATCH void func_801EF50C(void) {
 
 INCLUDE_ASM(func_801EF52C);
 
-INCLUDE_ASM(func_801EF5D0);
+MATCH void func_801EF5D0(void) {
+    PartyBattler* work;
+    g_SpadWork->unk_29 = 0;
+    g_SpadWork->unk_25 = 0x1D;
+    g_SpadWork->unk_26 = 0;
+    g_SpadWork->unk_24 = 0x84;
+    g_SpadWork->unk_27 = 0xB4;
+    g_SpadWork->unk_28 = 0;
+    work               = g_SpadWork;
+    work->unk_2B       = 0;
+    work->unk_2C.half  = 0;
+    g_SpadWork->unk_2A = 0;
+    Actor_SelectScript(5);
+    SND_PlayCue((g_SpadWork->word_08.byte.timer_0A & 1) | 0x100);
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF6A4(void) {
     if (func_8014D978() != 0u) {

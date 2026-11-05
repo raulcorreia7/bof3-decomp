@@ -20,6 +20,7 @@ MATCH void func_801EF054(void) {
 
 INCLUDE_ASM(func_801EF098);
 
+/* First difference: lui a0 at +0x50; try the work pointer lifetime after the depth copy. */
 INCLUDE_ASM(func_801EF130);
 
 INCLUDE_ASM(func_801EF27C);
@@ -58,7 +59,15 @@ MATCH void func_801EF7A4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF7F4);
+MATCH void func_801EF7F4(void) {
+    s32 value = -0x80;
+    g_SpadWork->unk_5D -= 4;
+    g_SpadWork->unk_5E -= 4;
+    g_SpadWork->unk_5F -= 4;
+    func_8014DAEC();
+    g_SpadWork->unk_5D = value;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void Effect_TickDownAndClear_801EF888(void) {
     EFFECT_TICK_DOWN_AND_CLEAR();
