@@ -1,6 +1,5 @@
-#include "area095_13.h"
-
-MATCH void func_801F3450(Actor* actor) {
+/* Selects the actor script for the current direction; verify both area images. */
+MATCH void Area_StartDirectionalScript(Actor* actor) {
     u8 direction;
 
     g_ScriptState->unk_04 = 1;

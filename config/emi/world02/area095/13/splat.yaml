@@ -17,7 +17,7 @@ segments:
       - [0x4E8, c, func_801F30E8]
       - [0x5F8, c, func_801F31F8]
       - [0x76C, c, func_801F336C]
-      - [0x850, c, func_801F3450]
+      - [0x850, c, Area_StartDirectionalScript]
       - [0x91C, c, func_801F351C]
       - [0x9A4, c, func_801F35A4]
       - [0x9F0, c, func_801F35F0]

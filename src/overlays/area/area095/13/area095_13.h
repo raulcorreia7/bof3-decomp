@@ -12,6 +12,6 @@ extern s32 D_80145EC8;
 
 extern u8 D_801F3684[];
 
-void func_801F3450(Actor* actor);
+void Area_StartDirectionalScript(Actor* actor);
 
 #endif
