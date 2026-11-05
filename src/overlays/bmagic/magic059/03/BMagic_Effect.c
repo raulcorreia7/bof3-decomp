@@ -50,8 +50,6 @@ MATCH void func_801EF570(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimer.h"
 
-/* Follows BMAGIC_PROJECT_ACTOR_MATRIX (bmagic.h), but it first copies the +0x34, +0x38 and
- * +0x3E fields into a second record through a reloaded pointer. */
 MATCH void func_801EF638(void) {
     PartyBattler* src;
     SVECTOR       pos;

@@ -8,7 +8,17 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC80);
 
-INCLUDE_ASM(func_801EEEAC);
+MATCH void func_801EEEAC(void) {
+    u8 temp_v1;
+
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 2;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x54) {
+        g_SpadWork->step_01 += 1;
+        g_SpadWork->word_08.byte.timer_0A = 0x40;
+    }
+    func_801EF0F8(g_SpadWork->unk_64);
+}
 
 MATCH void func_801EEF30(void) {
     s32 raised_offset;

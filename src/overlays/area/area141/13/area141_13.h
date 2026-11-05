@@ -9,6 +9,8 @@
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
+void func_801F390C(void);
+
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F47E8[];
 extern Callback D_801F4DC4[];

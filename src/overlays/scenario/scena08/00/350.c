@@ -376,21 +376,43 @@ MATCH void func_801FE0E0(void) {
 }
 
 MATCH void func_801FE12C(void) {
-    s32 var_a0;
-    u8* var_v1;
+    s32 index;
+    u8* item;
 
-    var_v1 = &g_VitalItemIds;
-    var_a0 = 0;
+    item  = &g_VitalItemIds;
+    index = 0;
     do {
-        if (*var_v1 == 4) {
-            *var_v1 = 0xE;
+        if (*item == 4) {
+            *item = 0xE;
         }
-        var_a0 += 1;
-        var_v1 += 1;
-    } while ((u32)(var_a0 & 0xFF) < 0x20U);
+        index += 1;
+        item += 1;
+    } while ((u32)(index & 0xFF) < 0x20U);
 }
 
-INCLUDE_ASM(func_801FE170);
+MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
+    if ((g_GameAreaId == 1) && (arg0 == 0x338000) && ((u32)((arg1 >> 0x10) - 0x27) < 2U)) {
+        if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
+            Game_SetScriptActive();
+            D_80146874 = 4;
+            D_80146875 = 5;
+            return 1;
+        }
+        if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
+            Game_SetScriptActive();
+            *g_ScriptVars = 0;
+            D_80146874    = 5;
+            D_80146875    = 0;
+            return 1;
+        }
+        goto block_7;
+    }
+block_7:
+    if ((g_GameAreaId == 0x46) && (arg0 == 0x388000) && ((u32)((arg1 >> 0x10) - 0x2E) < 4U)) {
+        SYS_SetFlag(g_SceneFlags, 0x16U);
+    }
+    return 0;
+}
 
 INCLUDE_ASM(func_801FE2A0);
 

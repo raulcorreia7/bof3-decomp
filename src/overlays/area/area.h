@@ -82,7 +82,6 @@ void            func_801F36A4(void);
 void            func_801F3750(void);
 void            func_801F385C(void);
 void            func_801F38DC(void);
-void            func_801F390C(s32 x, s32 y, u32 sprite_id);
 void            func_801F39BC(void);
 void            func_801F39D8(s32 x, s32 y, u32 sprite_id);
 void            func_801F3A64(void);

@@ -222,7 +222,18 @@ MATCH void func_801FCA58(void* entity) {
 MATCH void func_801FCA98(void) {
 }
 
-INCLUDE_ASM(func_801FCAA0);
+MATCH void func_801FCAA0(void) {
+    if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
+        SYS_SetFlag(g_SceneFlags, 2U);
+        Game_SetScriptActive();
+        *g_ScriptVars = 0;
+        D_80146865    = 0;
+        D_80146866    = 0;
+        D_80146867    = 0;
+        D_80146875    = 0;
+        D_80146874    = 0x15;
+    }
+}
 
 MATCH void func_801FCB1C(void) {
     SYS_SetFlag(g_SceneFlags, 11);

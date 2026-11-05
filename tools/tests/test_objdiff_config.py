@@ -142,3 +142,55 @@ def test_objdiff_scores_the_include_asm_function_unmatched(tmp_path: Path) -> No
     assert scores["func_B"] == 100.0
     assert unit["measures"]["matched_functions"] == 1
     assert unit["measures"]["total_functions"] == 2
+
+
+def test_a_readable_data_name_is_defined_at_its_row_address(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A target reference to a readable data row takes its address, as an address name does.
+
+    The compiled base folds ``g_BattleActionLock`` into a constant; without the definition the
+    target keeps a relocation and objdiff scores the same bytes as a mismatch.
+    """
+    calls: list[list[str]] = []
+
+    def command(self: objdiff_config.Project, argv: list[str]) -> str:
+        calls.append(argv)
+        if argv[1:2] == ["-u"]:
+            return (
+                "         U g_BattleActionLock\n"
+                "         U D_80140000\n"
+                "         U func_8014D978\n"
+                "         U g_Unknown\n"
+            )
+        return ""
+
+    monkeypatch.setattr(objdiff_config.Project, "command", command)
+    cfg = {
+        "assembler": "as",
+        "nm": "nm",
+        "objcopy": "objcopy",
+        "assembler_flags": [],
+        "asm_include": [],
+        "data_label": "dlabel",
+        "nonmatching_suffix": SUFFIX,
+    }
+    pattern = re.compile(r"^(?:D|T|jtbl)_([0-9A-Fa-f]+)$")
+    proj = objdiff_config.Project(tmp_path, cfg, pattern, pattern, pattern, pattern)
+    source = tmp_path / "f.s"
+    source.write_text("nop\n", encoding="utf-8")
+    proj.assemble(
+        [source], tmp_path / "out" / "f.o", {"g_BattleActionLock": 0x801463CE}
+    )
+    flags = [arg for argv in calls for arg in argv if arg.startswith("--defsym=")]
+    assert flags == [
+        "--defsym=g_BattleActionLock=0x801463CE",
+        "--defsym=D_80140000=0x80140000",
+    ]
+
+
+def test_a_function_or_unlisted_name_is_left_to_the_link() -> None:
+    rows = objdiff_config._readable_data(ROOT, "emi/battle/battle/03")
+    assert rows["g_BattleActionLock"] == 0x801463CE
+    assert "Actor_Clear" not in rows
+    assert not any(name.startswith(("func_", "D_")) for name in rows)

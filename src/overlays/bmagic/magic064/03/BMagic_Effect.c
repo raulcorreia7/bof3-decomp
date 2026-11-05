@@ -43,7 +43,19 @@ MATCH void func_801EF0D8(void) {
 
 INCLUDE_ASM(func_801EF0E0);
 
-INCLUDE_ASM(func_801EF20C);
+MATCH void func_801EF20C(void) {
+    u8 temp_v0;
+
+    temp_v0 = g_SpadWork->word_08.byte.unk_09;
+    if (temp_v0 != 0) {
+        g_SpadWork->word_08.byte.unk_09 = temp_v0 - 1;
+        return;
+    }
+    func_80196718(D_801EB4E0);
+    D_801EB4E0->flags_00 |= 0x40;
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF29C(void) {
 }
@@ -148,9 +160,27 @@ MATCH void func_801F0214(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0278);
+MATCH void func_801F0278(void) {
+    u8 temp_v1;
 
-INCLUDE_ASM(func_801F0310);
+    func_801F03D8();
+    if (!(g_FrameCount & 1)) {
+        temp_v1 = g_SpadWork->word_08.byte.unk_0B;
+        if (temp_v1 >= 0x18U) {
+            D_801EB4E0->unk_02 += 1;
+            g_SpadWork->unk_02 += 1;
+            return;
+        }
+        g_SpadWork->word_08.byte.unk_0B = temp_v1 + 1;
+    }
+}
+
+MATCH void func_801F0310(void) {
+    if (D_801EB4E0->unk_02 == 0xA) {
+        g_SpadWork->unk_02 += 1;
+    }
+    func_801F03D8();
+}
 
 INCLUDE_ASM(func_801F0364);
 
@@ -178,7 +208,12 @@ MATCH void func_801F0C38(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0CBC);
+MATCH void func_801F0CBC(void) {
+    Actor_RequestScript(g_SpadWork->word_08.byte.unk_0B);
+    do {
+    } while (!(func_8014DAEC() & 0xFF));
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801F0D14(void) {
     g_SpadWork->unk_02 += 1;

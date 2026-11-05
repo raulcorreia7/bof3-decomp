@@ -6,6 +6,9 @@
 
 #include "overlays/boss/boss.h"
 
+#define BOSS_ENEMY_SCRIPT    D_800C1B28
+#define BOSS_ENEMY_STEP_DATA D_800C1B3C
+
 extern u8       D_800C1B28[];
 extern u16      D_800C1B34[];
 extern u16      D_800C1B3C[];
