@@ -49,7 +49,8 @@ Fix causes before functions.
    asm ([toolchain](toolchain.md#compiler-wrapper), [objdiff](toolchain.md#objdiff)), or edit the
    unit's `.c` and run `tools/match.sh <target> <func>`. It answers in a fraction of a second:
    `match`, or the first differing instruction, retail against candidate
-   ([match.sh](toolchain.md#matchsh)).
+   ([match.sh](toolchain.md#matchsh)). `tools/match.sh --diff <target>@<address>` prints the whole
+   function side by side, `!` marking differing rows.
 4. Polish an exact candidate in place ([polish](#polish)).
 5. Run `check-<image>`.
 

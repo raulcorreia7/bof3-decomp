@@ -38,7 +38,21 @@ INCLUDE_ASM(func_801D1D68);
 
 INCLUDE_ASM(func_801D1E98);
 
-INCLUDE_ASM(func_801D1FE4);
+MATCH void func_801D1FE4(void) {
+    s32 index;
+    s8  count;
+
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    index = (D_801DB0B4 + 1) & 0xFF;
+    func_801D2794(index, index, D_801DB0B4);
+    count      = (u8)D_801DB0C4 - 1;
+    D_801DB0C4 = count;
+    if (!(count & 0xFF)) {
+        SND_PlayCue(0x102U);
+        D_801F294D += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D2078);
 
@@ -48,7 +62,31 @@ INCLUDE_ASM(func_801D22A4);
 
 INCLUDE_ASM(func_801D2320);
 
-INCLUDE_ASM(func_801D24A8);
+MATCH void func_801D24A8(void) {
+    s8 step;
+
+    if (g_GameStateIndex != 2) {
+        if (D_801F294E == 0) {
+            func_801D3184(0x26, 0x10);
+            func_801D32A0(0xA8, 0x10, 0);
+            SND_PlayCue(0x102U);
+            D_801DB0C4 = 0;
+            D_801F294E += 1;
+            return;
+        }
+        step       = (u8)D_801DB0C4 + 1;
+        D_801DB0C4 = step;
+        func_801D3184(0x26, 0x10 - ((step & 0xFF) * 0x14));
+        func_801D32A0(0xA8, 0x10 - ((u8)D_801DB0C4 * 0x14), 0);
+        if ((u8)D_801DB0C4 == 4) {
+            D_801F294C = 2;
+            D_801F294D = 0;
+        }
+    } else {
+        func_801D3184(0x26, 0x10);
+        func_801D32A0(0xA8, 0x10, 0);
+    }
+}
 
 INCLUDE_ASM(func_801D25CC);
 
@@ -101,9 +139,23 @@ MATCH void func_801D35A4(void) {
 
 INCLUDE_ASM(func_801D35E0);
 
-INCLUDE_ASM(func_801D364C);
+MATCH void func_801D364C(void) {
+    if (EMI_LoaderIsReady() != 0) {
+        SND_PlayBgm(0x94, 0x64, 8);
+        Message_StartAreaMessage(0x7F);
+        g_GameStateIndex = 2;
+        D_801F294D += 1;
+    }
+}
 
-INCLUDE_ASM(func_801D36A8);
+MATCH void func_801D36A8(void) {
+    if (g_GameStateIndex != 2) {
+        SND_PlayCue(0x102U);
+        D_801DB0C4 = 4;
+        D_801DB07C = 0;
+        D_801F294D += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D3700);
 
@@ -187,11 +239,43 @@ INCLUDE_ASM(func_801D51D0);
 
 INCLUDE_ASM(func_801D5788);
 
-INCLUDE_ASM(func_801D5924);
+MATCH void func_801D5924(void) {
+    func_801D5B2C();
+    if (g_InputPressed != 0) {
+        UI_SetMode(0U);
+        D_801F294D += 1;
+    }
+}
 
-INCLUDE_ASM(func_801D5978);
+MATCH void func_801D5978(void) {
+    s32 offset;
 
-INCLUDE_ASM(func_801D5A48);
+    if (g_UiWindowEffectBusy == 0) {
+        offset = g_SndBgmId * 4;
+        SND_StopSequence((s32) * (g_SelectionCues + offset), (s16) * (D_80181EBB + offset));
+        SND_RequestBgm((s32)D_801DB0CC);
+    loop_2:
+        if (EMI_LoaderIsReady() == 0) {
+            CallbackWait(1U);
+            goto loop_2;
+        }
+        SND_PlayBgm((s32)D_801DB0CC, 0x64, 8);
+        g_AreaDrawFlags = 0x1F;
+        UI_SetMode(1U);
+        D_801F294D += 1;
+        return;
+    }
+    func_801D5B2C();
+}
+
+MATCH void func_801D5A48(void) {
+    if (g_UiWindowEffectBusy == 0) {
+        Message_StartAreaMessage(0xE2);
+        g_GameStateIndex = 2;
+        D_801F294D       = 0;
+        D_801F294C += 1;
+    }
+}
 
 #include "overlays/commu/Commu_AdvanceStep.h"
 
@@ -225,7 +309,19 @@ INCLUDE_ASM(func_801D5F7C);
 
 INCLUDE_ASM(func_801D6124);
 
-INCLUDE_ASM(func_801D62C8);
+MATCH void func_801D62C8(void) {
+    s8 step;
+
+    step       = (u8)D_801DB0C4 + 1;
+    D_801DB0C4 = step;
+    Menu_DrawHeaderBar(0x14, (0x10 - ((step & 0xFF) * 8)) & 0xFFF8, 0x118, 0x13, (s32)D_80144952);
+    func_801D8058(0x4A, ((u8)D_801DB0C4 * 0x28) + 0x64);
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    if ((u8)D_801DB0C4 == 4) {
+        D_801DB0C4 = 5;
+        D_801F294D = 7;
+    }
+}
 
 MATCH void func_801D6390(void) {
     u8 value;
@@ -275,11 +371,29 @@ MATCH void func_801D65F8(void) {
 
 INCLUDE_ASM(func_801D6634);
 
-INCLUDE_ASM(func_801D67F0);
+MATCH void func_801D67F0(void) {
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 1);
+    func_801AE214((D_801DB0D0 * 8) + 0x4A, 0x42, 8, 0);
+    func_801D97C8(D_801DAAA8, 0xB0, 0x2B);
+    func_801D9B80(0x12, 0x61, 0x24, 0x11);
+    func_801D94D0(D_801DAAA8, 0x18, 0x67, D_801DB0D4, (s32)D_801DB0D8);
+    D_801DB0DC = func_801DA114();
+}
 
 INCLUDE_ASM(func_801D68AC);
 
-INCLUDE_ASM(func_801D6AC8);
+MATCH void func_801D6AC8(void) {
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 1);
+    if (g_GameStateIndex != 2) {
+        if (D_801F2945 == 0) {
+            D_801DB0C4 = 0;
+            D_801F294E += 1;
+            return;
+        }
+        D_801DB0C4 = 4;
+        D_801F294E = 0;
+    }
+}
 
 MATCH void func_801D6B60(void) {
     D_801DB0C4 = (u8)D_801DB0C4 + 1;
@@ -289,7 +403,21 @@ MATCH void func_801D6B60(void) {
     }
 }
 
-INCLUDE_ASM(func_801D6BE4);
+MATCH void func_801D6BE4(void) {
+    s8 step;
+
+    step       = (u8)D_801DB0C4 + 1;
+    D_801DB0C4 = step;
+    Menu_DrawHeaderBar(0x14, (0x10 - ((step & 0xFF) * 8)) & 0xFFF8, 0x118, 0x13, (s32)D_80144952);
+    func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
+    if ((u8)D_801DB0C4 == 4) {
+        Message_StartAreaMessage(0xF7);
+        g_GameStateIndex = 2;
+        D_801F294C       = 4;
+        D_801F294D       = 0;
+    }
+}
 
 MATCH void func_801D6CDC(void) {
     SYS_DISPATCH_BYTE(D_801DAE44, D_801F294D);
@@ -351,11 +479,29 @@ MATCH void func_801D7660(void) {
 
 INCLUDE_ASM(func_801D769C);
 
-INCLUDE_ASM(func_801D7878);
+MATCH void func_801D7878(void) {
+    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & 0xFF, 1);
+    func_801AE214((D_801DB0D0 * 8) + 0x5B, 0x50, 8, 0);
+    func_801D97C8(D_801DAAA8, 0xB0, 0x2B);
+    func_801D9B80(0x12, 0x61, 0x24, 0x11);
+    func_801D94D0(D_801DAAA8, 0x18, 0x67, D_801DB0D4, (s32)D_801DB0D8);
+    D_801DB0DC = func_801DA114();
+}
 
 INCLUDE_ASM(func_801D7934);
 
-INCLUDE_ASM(func_801D7B50);
+MATCH void func_801D7B50(void) {
+    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & 0xFF, 1);
+    if (g_GameStateIndex != 2) {
+        if (D_801F2945 == 0) {
+            D_801DB0C4 = 0;
+            D_801F294E += 1;
+            return;
+        }
+        D_801DB0C4 = 4;
+        D_801F294E = 0;
+    }
+}
 
 MATCH void func_801D7BE8(void) {
     D_801DB0C4 = (u8)D_801DB0C4 + 1;

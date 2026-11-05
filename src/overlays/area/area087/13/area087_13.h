@@ -7,16 +7,17 @@
 #include "overlays/area/world02.h"
 #include "work/area_spad.h"
 
-extern SVECTOR     D_1F800014[];
-extern s32         D_80145EC4[];
-extern u8          D_801F4DAC[2666];
-extern u8          D_801F4DAE[];
-extern u8          D_801F4DD4[];
-extern u8          D_801F4DD5[];
-extern Callback    D_801F5734[];
-extern Callback    D_801F5748[];
-extern Callback    D_801F5760[];
-extern u8          D_801F5770[];
+extern SVECTOR  D_1F800014[];
+extern s32      D_80145EC4[];
+extern u8       D_801F4DAC[2666];
+extern u8       D_801F4DAE[];
+extern u8       D_801F4DD4[];
+extern u8       D_801F4DD5[];
+extern Callback D_801F5734[];
+extern Callback D_801F5748[];
+extern Callback D_801F5760[];
+extern u8       D_801F5770[];
+#define AREA_HUD_SPRITE_CELLS D_801F5770
 extern u8          D_801F5771[];
 extern u8          D_801F5772[];
 extern u8          D_801F5773[];
@@ -41,8 +42,9 @@ void Area_DrawHudBanner(s16 x, s16 y);
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F57C8[6];
+#define AREA_HUD_MASK_TABLE D_801F57C8
 /* func_801F3F00 */
-void                  Area_DrawGradientDiamond(s16 x, s16 y);
+void Area_DrawGradientDiamond(s16 x, s16 y);
 
 /* func_801F3A0C */
 void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);

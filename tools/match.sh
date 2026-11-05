@@ -3,6 +3,8 @@
 #
 #   tools/match.sh <target> <function>      tools/match.sh exe/slus_004_22 Actor_ApplyVelocity
 #   tools/match.sh <target>@<address>       tools/match.sh exe/slus_004_22@0x8015C9CC
+#   tools/match.sh --diff <target>@<address>   also print the whole function side by side
+#                                              (retail | candidate, "!" marks a differing line)
 #
 # <function> is a symbol name, an address (8015C9CC, 0x8015C9CC) or func_<ADDR>.
 #
@@ -24,6 +26,11 @@ die() {
 	exit 2
 }
 
+show=
+if [ "${1:-}" = --diff ]; then
+	show=1
+	shift
+fi
 case $# in
 1) case $1 in
 	*@*) target=${1%@*} func=${1#*@} ;;
@@ -229,16 +236,33 @@ dis() { # <file> <address of byte 0>: one line per instruction
 		awk -F'\t' '/^ *[0-9a-f]+:\t/ { sub(/^ +/, "", $1); printf "%s  %s  %s %s\n", toupper($1), $2, $3, $4 }'
 }
 
+side_by_side() { # whole function, one row per instruction; "!" marks rows whose bytes differ
+	dis "$tmp/retail.bin" "0x$addr" >"$tmp/r.txt"
+	dis "$tmp/cand.bin" "0x$addr" >"$tmp/c.txt"
+	awk 'NR == FNR { r[NR] = $0; n = NR; next }
+		{ c[FNR] = $0; if (FNR > n) n = FNR }
+		END {
+			printf "  %-50s   %s\n", "retail", "candidate"
+			for (i = 1; i <= n; i++) {
+				a = (i in r) ? r[i] : ""; b = (i in c) ? c[i] : ""
+				printf "%s %-50s | %s\n", (a == b ? " " : "!"), a, b
+			}
+		}' "$tmp/r.txt" "$tmp/c.txt"
+}
+
 want=$(printf '%s' "$target@0x$addr $fname")
 scope=".text only, relocations resolved against the symbol maps; check-$flat is the gate"
 if [ "$coff" -ne "$rel" ]; then
+	[ -z "$show" ] || side_by_side
 	printf 'differs: %s starts at +0x%X in the candidate, retail +0x%X: code before it in the unit has another size\n' "$fname" "$coff" "$rel"
 	exit 1
 fi
 if cmp -s "$tmp/retail.bin" "$tmp/cand.bin"; then
 	printf 'match: %s, %d bytes (%s)\n' "$want" "$size" "$scope"
+	[ -z "$show" ] || side_by_side
 	exit 0
 fi
+[ -z "$show" ] || side_by_side
 n=$(cmp "$tmp/retail.bin" "$tmp/cand.bin" 2>/dev/null | awk '/differ: /{ sub(/,.*/, "", $5); print $5 }' || :)
 if [ -n "$n" ]; then
 	w=$(((n - 1) / 4 * 4))

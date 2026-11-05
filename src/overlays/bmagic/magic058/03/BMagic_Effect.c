@@ -8,9 +8,20 @@ INCLUDE_ASM(func_801EEC28);
 
 INCLUDE_ASM(func_801EED30);
 
-INCLUDE_ASM(func_801EEE78);
+MATCH void func_801EEE78(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        func_801DE8C0(1, 0x3C, Resource_GetText(0x14U));
+        g_SpadWork->step_01 += 1;
+    }
+}
 
-INCLUDE_ASM(func_801EEEDC);
+MATCH void func_801EEEDC(void) {
+    if (D_801EC2E4 == 0) {
+        func_800A9820(g_BattleTargetSelector);
+        g_BattleState |= 4;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EEF30(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
@@ -32,13 +43,7 @@ INCLUDE_ASM(func_801EF008);
 
 INCLUDE_ASM(func_801EF080);
 
-MATCH void func_801EF338(void) {
-    PartyBattler* work;
-
-    work = (PartyBattler*)D_801EB4E0;
-    work->word_08.byte.unk_0B--;
-    func_801E5988();
-}
+#include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF36C(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, g_SpadWork);

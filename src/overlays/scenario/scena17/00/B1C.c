@@ -24,11 +24,20 @@ MATCH void func_801F789C(void) {
 MATCH void func_801F78D8(void) {
 }
 
-INCLUDE_ASM(func_801F78E0);
+MATCH void func_801F78E0(void) {
+    SYS_DISPATCH_BYTE(D_801F9758, (s8)D_80146874);
+    func_801F8EF0();
+}
 
 INCLUDE_ASM(func_801F7924);
 
-INCLUDE_ASM(func_801F79AC);
+MATCH void func_801F79AC(void) {
+    if ((g_UiWindowEffectBusy == 0) && (EMI_LoaderIsReady() != 0)) {
+        D_80146875 = 0x5A;
+        D_80146874 += 1;
+    }
+    func_801F88CC(0, 0x80);
+}
 
 INCLUDE_ASM(func_801F7A08);
 
@@ -45,7 +54,7 @@ MATCH void func_801F7A84(void) {
         *timer               = 0x80;
         g_AreaCameraAngle.vx = -0x16A;
         g_AreaCameraAngle.vz = 0x200;
-        g_AreaDrawFlags      = 0x1F;
+        g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
         D_80146874           = D_80146874 + 1;
     }
     func_801F88CC(0, 0x80);
@@ -97,7 +106,17 @@ MATCH void func_801F7E9C(void) {
 
 INCLUDE_ASM(func_801F7F04);
 
-INCLUDE_ASM(func_801F7F3C);
+MATCH void func_801F7F3C(void) {
+    s32 height;
+
+    height             = g_AreaCameraHeight + 0x10;
+    g_AreaCameraHeight = height;
+    if ((u32)height >= 0xCC1U) {
+        D_80146875 = 0xF;
+        D_80146874 += 1;
+    }
+    g_AreaCameraRefreshCount = 2;
+}
 
 MATCH void func_801F7F94(void) {
     u8* timer;
@@ -130,7 +149,10 @@ MATCH void func_801F7FF0(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8088);
+MATCH void func_801F8088(void) {
+    SYS_DISPATCH_BYTE(D_801F9798, (s8)D_80146874);
+    func_801F8EF0();
+}
 
 INCLUDE_ASM(func_801F80CC);
 
@@ -154,7 +176,13 @@ MATCH void func_801F81BC(void) {
 
 INCLUDE_ASM(func_801F81F8);
 
-INCLUDE_ASM(func_801F8274);
+MATCH void func_801F8274(void) {
+    if (g_UiWindowEffectBusy == 0) {
+        D_80146875 = 0;
+        D_80146874 += 1;
+    }
+    func_801F8B10(0, 0xFF);
+}
 
 INCLUDE_ASM(func_801F82C0);
 
@@ -215,7 +243,16 @@ MATCH void func_801F8710(void) {
     func_801F8FAC(0xE0, 0xBE, 0x80, 1);
 }
 
-INCLUDE_ASM(func_801F87D0);
+MATCH void func_801F87D0(void) {
+    if (g_GameStateIndex != 2) {
+        if (D_80146875 == 0) {
+            D_80146874 += 1;
+            return;
+        }
+        SND_Exit();
+        CallbackReplace(SYS_StartFrontend);
+    }
+}
 
 MATCH void func_801F8844(void) {
     D_80146873            = 0;

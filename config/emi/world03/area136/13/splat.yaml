@@ -21,7 +21,7 @@ segments:
       - [0x418, c, func_801F3018]
       - [0x448, c, func_801F3048]
       - [0x4C8, c, func_801F30C8]
-      - [0x548, c, func_801F3148]
+      - [0x548, c, Area_SubCameraOffsetY2]
       - [0x570, c, Area_AddCameraOffsetY2]
       - [0x598, c, func_801F3198]
       - [0x7BC, c, func_801F33BC]

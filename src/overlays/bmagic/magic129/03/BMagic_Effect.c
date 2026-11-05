@@ -20,7 +20,12 @@ INCLUDE_ASM(func_801EEFC4);
 
 INCLUDE_ASM(func_801EF058);
 
-INCLUDE_ASM(func_801EF38C);
+MATCH void func_801EF38C(void) {
+    g_SpadWork->word_08.byte.timer_0A += 2;
+    if (g_SpadWork->word_08.byte.timer_0A == 0x10) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF3DC);
 

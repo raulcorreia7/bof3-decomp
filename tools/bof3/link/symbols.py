@@ -39,6 +39,7 @@ __all__ = [
     "address_of",
     "generate",
     "link_map",
+    "imported_map",
     "link_owners",
     "load",
     "resolve",
@@ -292,6 +293,27 @@ def generate(root: Path) -> None:
         link = [f"{e.name} 0x{e.addr:08X}\n" for e in ordered]
         write_if_changed(root / splat_map(target), "".join(splat))
         write_if_changed(root / link_map(target), "".join(link))
+
+
+def imported_map(root: Path, target: str) -> str:
+    """Return the Splat map text a target imports from its other owners.
+
+    A twin overlay may name a function that the target also defines elsewhere; Splat 0.50 keeps
+    both addresses and the link then finds two. The target's own address wins, so an owner's
+    row is dropped when the target holds a row of the same name at another address.
+    """
+    tables = load(root)
+    own = {e.name: e.addr for e in tables.get(target, ())}
+    lines = []
+    for owner in splat_owners(root, target):
+        if owner == target:
+            continue
+        for e in sorted(tables.get(owner, ()), key=lambda e: e.addr):
+            if e.alias or own.get(e.name, e.addr) != e.addr:
+                continue
+            attributes = f" // {e.attributes}" if e.attributes else ""
+            lines.append(f"{e.name} = 0x{e.addr:08X};{attributes}\n")
+    return "".join(lines)
 
 
 class Scan(NamedTuple):

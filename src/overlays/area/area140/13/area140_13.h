@@ -20,4 +20,6 @@ extern Callback D_801F4AC4[];
 /* The overlay step the timer enters. */
 void func_801F3050(void);
 
+s32 func_801F3C44(s32 x, s32 y);
+
 #endif

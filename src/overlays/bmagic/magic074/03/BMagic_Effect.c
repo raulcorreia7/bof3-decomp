@@ -31,7 +31,13 @@ INCLUDE_ASM(func_801EF3C0);
 
 INCLUDE_ASM(func_801EF518);
 
-INCLUDE_ASM(func_801EF6A4);
+MATCH void func_801EF6A4(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        func_800A9820(g_SpadWork->unk_04);
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF710(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, D_801F20DC);

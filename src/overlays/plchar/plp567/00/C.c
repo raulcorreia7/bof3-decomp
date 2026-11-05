@@ -12,9 +12,6 @@ MATCH void Char_StartTurn(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
-/* Follows CHAR_RUN_STEP_SCRIPT (plchar.h), but retail branches on the second
- * facing with `bne` and the 0x41 load in the delay slot, where the macro emits
- * `beq`; the script selection needs another switch or if form. */
 MATCH void Char_RunStepScript_801CE514(void) {
     CHAR_RUN_STEP_CASES(CHARACTER_FACING_AWAY, 0x41, CHARACTER_FACING_BACK, 0x40);
 }
@@ -80,7 +77,12 @@ MATCH void func_801CF51C(void) {
     SYS_DISPATCH_TASK(D_801D07CC, 3, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801CF560);
+MATCH void func_801CF560(void) {
+    func_801CF944();
+    Actor_RequestScript((g_SpadWork->direction_08 - 1) / 2 + 0x42);
+    g_SpadWork->unk_0A = 0xB;
+    g_SpadWork->unk_03 = 1;
+}
 
 INCLUDE_ASM(func_801CF5CC);
 

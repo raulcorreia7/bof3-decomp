@@ -65,14 +65,14 @@ INCLUDE_ASM(func_801EF6EC);
 INCLUDE_ASM(func_801EF7E0);
 
 MATCH void func_801EF8B4(void) {
-    u8 temp_v0;
+    u8 count;
 
     g_SpadWork->unk_5D += 8;
     g_SpadWork->unk_5E += 8;
     g_SpadWork->unk_5F += 8;
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = count;
+    if (!(count & 0xFF)) {
         D_801EB4E0->word_08.byte.unk_0B -= 1;
         g_SpadWork->unk_02 += 1;
     }

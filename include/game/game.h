@@ -18,7 +18,7 @@
 /* One 0xC-byte row of the palette fade table at D_80145BD4. */
 typedef struct PaletteFade {
     u8  flags;
-    u8  unk_01;
+    u8  saved_byte; /* the target byte at +0x27, restored on free */
     u8  red_offset;
     u8  green_offset;
     u8  blue_offset;

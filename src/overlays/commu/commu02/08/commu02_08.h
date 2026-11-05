@@ -38,9 +38,18 @@ extern s16 D_801DB0C8;
 extern s8  D_801DB0B8;
 extern u8  D_801F2944;
 extern u8  D_801F2945;
+extern s32 D_801DB07C;
+extern u8  D_801DAAA8;
+extern u8  D_801DB0D0;
+extern u8  D_801DB0D4;
+extern u8  D_801DB0D8;
+extern s8  D_801DB0DC;
+extern u8  D_801DB0CC;
 
 s32 func_801D7EA0(u8);
 
 s32 func_801D92F4(u8);
+
+s8 func_801DA114();
 
 #endif

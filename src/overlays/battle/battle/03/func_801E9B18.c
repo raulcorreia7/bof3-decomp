@@ -11,18 +11,18 @@ MATCH void func_801E9B18(void) {
     u8*                 row;
 
     handlers = D_801D0FE0;
-    handlers.handlers[((u8*)g_MenuPanelTaskCurrent)[3]]();
-    row = D_80145F04 + ((u8*)g_MenuPanelTaskCurrent)[0xA] * BATTLE_PARTY_STRIDE;
+    handlers.handlers[BATTLE_PANEL_TASK->state]();
+    row = D_80145F04 + BATTLE_PANEL_TASK->cell_0A.slot * BATTLE_PARTY_STRIDE;
     func_801EA1E0((s32)(((u8*)g_MenuPanelTaskCurrent) + 0xB), (s32)(row + 0x1C),
                   (s32)(((u8*)g_MenuPanelTaskCurrent) + 0x1C), (s32)(((u8*)g_MenuPanelTaskCurrent) + 0x14),
                   (s32)(row + 0x14), (s32)(((u8*)g_MenuPanelTaskCurrent) + 0xD),
                   (s32)(((u8*)g_MenuPanelTaskCurrent) + 0x18), ((u8*)g_MenuPanelTaskCurrent) + 0x8);
-    row = D_80145F04 + ((u8*)g_MenuPanelTaskCurrent)[0xA] * BATTLE_PARTY_STRIDE;
+    row = D_80145F04 + BATTLE_PANEL_TASK->cell_0A.slot * BATTLE_PARTY_STRIDE;
     func_801EA1E0((s32)(((u8*)g_MenuPanelTaskCurrent) + 0xC), (s32)(row + 0x1E),
                   (s32)(((u8*)g_MenuPanelTaskCurrent) + 0x1E), (s32)(((u8*)g_MenuPanelTaskCurrent) + 0x16),
                   (s32)(row + 0x16), (s32)(((u8*)g_MenuPanelTaskCurrent) + 0xE),
                   (s32)(((u8*)g_MenuPanelTaskCurrent) + 0x1A), ((u8*)g_MenuPanelTaskCurrent) + 0x9);
-    slot   = ((u8*)g_MenuPanelTaskCurrent)[0xA];
+    slot   = BATTLE_PANEL_TASK->cell_0A.slot;
     offset = slot * BATTLE_PARTY_STRIDE;
     if (g_BattlePartyBattlers[slot].stats.current_hp < (u32)(g_BattlePartyBattlers[slot].stats.max_hp >> 2)) {
         flags = *(u16*)(D_80145F10 + offset) | 0x2000;

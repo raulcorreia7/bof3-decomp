@@ -17,12 +17,12 @@ MATCH void func_801F6E10(void) {
 }
 
 MATCH void func_801F6E54(void) {
-    void* temp_v0_9;
+    void* work;
 
     func_801F8358();
-    temp_v0_9                   = SP_REF(void*, 0x44);
-    FIELD(s32, temp_v0_9, 0xCu) = 0x40;
-    FIELD(u8, temp_v0_9, 0x2u)  = (u8)(FIELD(u8, temp_v0_9, 0x2u) + 1);
+    work                   = SP_REF(void*, 0x44);
+    FIELD(s32, work, 0xCu) = 0x40;
+    FIELD(u8, work, 0x2u)  = (u8)(FIELD(u8, work, 0x2u) + 1);
 }
 
 MATCH void func_801F6E90(void) {
@@ -51,11 +51,11 @@ MATCH void func_801F6F48(void) {
 }
 
 MATCH void func_801F6F8C(void) {
-    void* temp_v0_5;
+    void* work;
 
-    temp_v0_5                    = SP_REF(void*, 0x44);
-    FIELD(s32, temp_v0_5, 0x10u) = -8;
-    FIELD(u8, temp_v0_5, 0x2u)   = (u8)(FIELD(u8, temp_v0_5, 0x2u) + 1);
+    work                    = SP_REF(void*, 0x44);
+    FIELD(s32, work, 0x10u) = -8;
+    FIELD(u8, work, 0x2u)   = (u8)(FIELD(u8, work, 0x2u) + 1);
 }
 
 MATCH void func_801F6FB0(void) {
@@ -311,16 +311,16 @@ INCLUDE_ASM(func_801F9A80);
 INCLUDE_ASM(func_801F9BDC);
 
 MATCH void func_801F9DA8(void) {
-    s32 var_v1_6;
-    s8* var_a0_5;
+    s32 index;
+    s8* row;
 
-    var_a0_5 = (s8*)(AREA_WORK + 0x95C);
-    var_v1_6 = 0;
+    row   = (s8*)(AREA_WORK + 0x95C);
+    index = 0;
     do {
-        *var_a0_5 = 0;
-        var_v1_6 += 1;
-        var_a0_5 += 0x20;
-    } while ((u32)(var_v1_6 & BYTE_MASK) < 0x40U);
+        *row = 0;
+        index += 1;
+        row += 0x20;
+    } while ((u32)(index & BYTE_MASK) < 0x40U);
 }
 
 MATCH u8* func_801F9DD4(void) {
@@ -413,7 +413,19 @@ INCLUDE_ASM(func_801FD524);
 
 INCLUDE_ASM(func_801FD5A0);
 
-INCLUDE_ASM(func_801FD610);
+MATCH ActorSlot* func_801FD610(u8 arg0) {
+    ActorSlot* slot;
+    s32        index;
+
+    index = Actor_FindFreeSlot() & 0xFF;
+    slot  = &g_ActorSlots[index];
+    if (index != 0xFF) {
+        slot->flags_00 = 1;
+        slot->type     = 0x49;
+        slot->unk_01   = arg0;
+    }
+    return slot;
+}
 
 INCLUDE_ASM(func_801FD67C);
 

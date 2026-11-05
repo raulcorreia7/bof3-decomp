@@ -1,9 +1,5 @@
 #include "game_00.h"
 
-/* game_00.h types g_GameAreaId/g_GameRequestFlags volatile; the retail compares use
- * lhu/lbu with no zero-extension mask, so read them through the signed/
- * non-volatile view (proven in func_800A5D00, func_801F9644, func_801F6EB0).
- */
 MATCH s32 func_801A8A98(s32 candidate_x, s32 candidate_y) {
     s32 value;
     u8* buf;

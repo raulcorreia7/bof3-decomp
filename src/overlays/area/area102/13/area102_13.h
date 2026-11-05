@@ -10,4 +10,6 @@ extern u8* g_SpadWork;
 extern u8  D_801F3930[];
 extern u8  D_801F3948[];
 
+s32 func_801F3194();
+
 #endif

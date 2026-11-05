@@ -19,7 +19,17 @@ INCLUDE_ASM(func_801EEE0C);
 
 INCLUDE_ASM(func_801EEF48);
 
-INCLUDE_ASM(func_801EF020);
+MATCH void func_801EF020(void) {
+    u8 temp_v0;
+
+    temp_v0                           = g_SpadWork->word_08.byte.timer_0A + 1;
+    g_SpadWork->word_08.byte.timer_0A = temp_v0;
+    if (!(temp_v0 & 0x1F)) {
+        SND_QueueSelectionFx(0x101);
+        g_SpadWork->word_08.byte.timer_0A = 0;
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_AdvanceOnTick.h"
 
@@ -33,7 +43,16 @@ MATCH void func_801EF0E0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF130);
+MATCH void func_801EF130(void) {
+    u8 temp_v1;
+
+    temp_v1                           = g_SpadWork->word_08.byte.timer_0A + 1;
+    g_SpadWork->word_08.byte.timer_0A = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x80) {
+        D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF180);
 

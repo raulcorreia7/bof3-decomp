@@ -5,8 +5,11 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world03.h"
+#include "work/area_spad.h"
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
+
+void Area_Update(s32 arg);
 
 /* The global state byte the area update gates on. */
 

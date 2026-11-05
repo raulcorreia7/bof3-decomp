@@ -20,7 +20,15 @@ INCLUDE_ASM(func_801EF01C);
 
 INCLUDE_ASM(func_801EF0E8);
 
-INCLUDE_ASM(func_801EF164);
+MATCH void func_801EF164(void) {
+    if (func_8014DAEC() & 0xFF) {
+        func_800AFC98(2, 0);
+        func_801E257C((u32)g_BattleActingBattler, 0xBU);
+        g_SpadWork->unk_14 = 0x100;
+        g_SpadWork->unk_20 = -8;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 /* needs: type g_BattleSelectedActor. Retail rereads it before the second coordinate copy, as a member of an aggregate
  * would (the BattleAction block at 0x80146380 +0x0C); a plain global keeps it in a register. Exact in a scratch build with
@@ -88,11 +96,29 @@ MATCH void func_801EF468(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF518);
+MATCH void func_801EF518(void) {
+    if (func_8014DAEC() & 0xFF) {
+        func_800A9820(g_BattleTargetSelector);
+        g_SpadWork->flags_00 |= 0x20;
+        g_SpadWork->unk_5C = 1;
+        g_SpadWork->unk_5D = 0;
+        g_SpadWork->unk_5E = 0;
+        g_SpadWork->unk_5F = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF5CC);
 
-INCLUDE_ASM(func_801EF688);
+MATCH void func_801EF688(void) {
+    g_SpadWork->unk_5D += 0x10;
+    g_SpadWork->unk_5E += 0x10;
+    g_SpadWork->unk_5F += 0x10;
+    if ((s8)g_SpadWork->unk_5D == -0x40) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF72C(void) {
     BattleHandlerTable3 handlers;
@@ -149,11 +175,28 @@ MATCH void func_801EFE38(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFF28);
+MATCH void func_801EFF28(void) {
+    if (func_8014DAEC() & 0xFF) {
+        g_SpadWork->flags_00 |= 0x20;
+        g_SpadWork->unk_5C = 1;
+        g_SpadWork->unk_5D = 0;
+        g_SpadWork->unk_5E = 0;
+        g_SpadWork->unk_5F = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EFFCC);
 
-INCLUDE_ASM(func_801F00A8);
+MATCH void func_801F00A8(void) {
+    g_SpadWork->unk_5D += 0x10;
+    g_SpadWork->unk_5E += 0x10;
+    g_SpadWork->unk_5F += 0x10;
+    if ((s8)g_SpadWork->unk_5D == -0x40) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801F014C);
 
