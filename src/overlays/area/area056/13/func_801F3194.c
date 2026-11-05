@@ -6,6 +6,6 @@ MATCH void func_801F3194(void) {
         *D_80145E91 = 2;
         *D_80145E92 = 7;
         *D_80145E93 = 0;
-        Area_SetCellPalette((s32)D_80145EC6, (s32)D_80145ECA);
+        Area_SetCellPalette(D_80145EC6, D_80145ECA);
     }
 }
