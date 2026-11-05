@@ -44,7 +44,7 @@ MATCH void func_801EF2DC(void) {
 MATCH void func_801EF37C(void) {
     u8 temp_v0;
 
-    *(s16 *)0x1F800000 = (g_SpadWork->word_08.byte.unk_09 * 4) + 0x120;
+    SP_REF(s16, 0u) = (g_SpadWork->word_08.byte.unk_09 * 4) + 0x120;
     g_SpadWork->word_08.byte.timer_0A += 1;
     temp_v0 = g_SpadWork->word_08.byte.unk_09 + 1;
     g_SpadWork->word_08.byte.unk_09 = temp_v0;
