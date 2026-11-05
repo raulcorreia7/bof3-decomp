@@ -130,6 +130,7 @@ MATCH void func_801F0438(void) {
     }
 }
 
+/* First difference: lui a0 at +0x10; try scheduling the actor load between the coordinate stores. */
 INCLUDE_ASM(func_801F04C0);
 
 MATCH void func_801F053C(void) {
