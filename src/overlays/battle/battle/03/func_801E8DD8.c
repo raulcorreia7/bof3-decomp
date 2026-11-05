@@ -9,35 +9,36 @@
  * source tables and writes them into the current queued object.
  */
 MATCH void func_801E8DD8(void) {
-    u8* slot = (u8*)D_801EB4E0;
-    s8  offset_x;
-    u8  offset_y;
-    s32 row;
+    PartyBattler* active = D_801EB4E0;
+    s8            offset_x;
+    u8            offset_y;
+    s32           row;
 
-    if (slot[5] < 3u) {
+    if (active->slot < 3u) {
         PartyBattler* dst;
 
-        dst              = g_SpadWork;
-        offset_x         = (s8)g_BattlePanelOffsets[(u32)D_80145F09[slot[5]][0] * 8u + (u32)slot[8] * 2u];
-        dst->unk_2E.half = *(u16*)((slot + 0x2Eu)) + offset_x;
-        if (slot[8] < 2u) {
-            row      = slot[5];
+        dst = g_SpadWork;
+        offset_x =
+            (s8)g_BattlePanelOffsets[(u32)D_80145F09[active->slot][0] * 8u + (u32)active->word_08.byte.facing_08 * 2u];
+        dst->unk_2E.half = active->unk_2E.half + offset_x;
+        if (active->word_08.byte.facing_08 < 2u) {
+            row      = active->slot;
             offset_y = s_BattlePanelYOffsets[(u32)D_80145F09[row][0] * 2u];
         } else {
-            row      = slot[5];
+            row      = active->slot;
             offset_y = D_801EB109[(u32)D_80145F09[row][0] * 2u];
         }
-        dst->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
-        g_SpadWork->z    = *(u16*)(((u8*)D_801EB4E0 + 0x32u));
+        dst->unk_30.half = active->unk_30.half - offset_y - 8u;
+        g_SpadWork->z    = D_801EB4E0->z;
     } else {
-        row = slot[5];
+        row = active->slot;
         row -= 3;
         offset_x                = (s8)D_801EB712[row * 0x118];
-        g_SpadWork->unk_2E.half = *(u16*)((slot + 0x2Eu)) + offset_x;
-        row                     = slot[5];
+        g_SpadWork->unk_2E.half = active->unk_2E.half + offset_x;
+        row                     = active->slot;
         row -= 3;
         offset_y                = ENCOUNTER_ENEMIES[D_801EB710[row * 0x118]].height;
-        g_SpadWork->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
-        g_SpadWork->z           = *(u16*)((slot + 0x32u));
+        g_SpadWork->unk_30.half = active->unk_30.half - offset_y - 8u;
+        g_SpadWork->z           = active->z;
     }
 }
