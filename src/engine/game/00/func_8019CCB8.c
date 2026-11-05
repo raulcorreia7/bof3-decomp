@@ -18,14 +18,14 @@ MATCH void func_8019CCB8(void) {
         }
         if (g_SpadWork->unk_0B != 0) {
             g_SpadWork->direction_08 = D_80145E98;
-            g_SpadWork->unk_0C       = g_FacingOffsets[g_SpadWork->direction_08].x * 2;
-            g_SpadWork->unk_10       = g_FacingOffsets[g_SpadWork->direction_08].y * 2;
+            g_SpadWork->vx           = g_FacingOffsets[g_SpadWork->direction_08].x * 2;
+            g_SpadWork->vy           = g_FacingOffsets[g_SpadWork->direction_08].y * 2;
             g_SpadWork->unk_09       = 0x10;
             step                     = g_SpadWork->unk_09;
             move_x                   = g_SpadWork->x.fixed;
             move_y                   = g_SpadWork->y.fixed;
-            move_x += g_SpadWork->unk_0C * step;
-            move_y += g_SpadWork->unk_10 * step;
+            move_x += g_SpadWork->vx * step;
+            move_y += g_SpadWork->vy * step;
             func_8019D4BC();
             if (func_8019D054(move_x, move_y) & BYTE_MASK) {
                 copy_dst   = (u8*)BATTLE_SCRIPT_BANK;

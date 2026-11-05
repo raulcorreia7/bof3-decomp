@@ -9,8 +9,8 @@ MATCH void func_801F2CC8(void) {
         func_801F32C4();
     }
     work = g_SpadWork;
-    if (--work->unk_0C == 0) {
-        work->unk_0C = 0x10;
+    if (--work->vx == 0) {
+        work->vx = 0x10;
         work->unk_01++;
     }
 }

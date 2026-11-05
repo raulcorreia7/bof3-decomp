@@ -373,8 +373,8 @@ MATCH void func_801F2C48(void) {
     work->unk_09 = 0xA;
     work2        = (Actor*)g_SpadWork;
     work->unk_1C = 0;
-    work->unk_0C = v0;
-    work->unk_10 = v1;
+    work->vx     = v0;
+    work->vy     = v1;
     work->vz     = v2;
     work2->unk_01++;
 }
@@ -388,7 +388,7 @@ MATCH void func_801F2C94(void) {
     u8     count;
 
     work = (Actor*)g_SpadWork;
-    func_801F2D5C(&work->unk_0C, work->unk_1C);
+    func_801F2D5C(&work->vx, work->unk_1C);
     work2 = (Actor*)g_SpadWork;
     work->unk_1C += 0x1199;
     count         = (u8)(work2->unk_09 - 1);

@@ -5,6 +5,6 @@ MATCH void func_801F4DC4(void) {
 
     work         = g_SpadWork;
     work->unk_2E = 0;
-    work->unk_0C = 0;
+    work->vx     = 0;
     work->unk_01 = 1;
 }

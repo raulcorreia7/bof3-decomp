@@ -16,7 +16,7 @@ MATCH void func_801F743C(void) {
     Actor* actor;
 
     actor         = g_SpadWork;
-    actor->unk_0C = 0;
+    actor->vx     = 0;
     actor->unk_01 = actor->unk_01 + 1;
 }
 
@@ -34,7 +34,7 @@ MATCH void func_801F7530(void) {
     Actor* actor;
 
     actor         = g_SpadWork;
-    actor->unk_0C = 0x1000;
+    actor->vx     = 0x1000;
     actor->unk_01 = actor->unk_01 + 1;
 }
 
@@ -43,7 +43,7 @@ MATCH void func_801F7554(void) {
     Actor*     actor;
     u8         slot;
 
-    if ((SP_REF(Actor*, 0x44)->unk_0C & 0xF) == 0) {
+    if ((SP_REF(Actor*, 0x44)->vx & 0xF) == 0) {
         slot = Actor_FindFreeSlot();
         if (slot != GAME_NONE) {
             spawned           = &g_ActorSlots[slot];
@@ -56,8 +56,8 @@ MATCH void func_801F7554(void) {
         }
     }
     actor = g_SpadWork;
-    actor->unk_0C -= 1;
-    if (actor->unk_0C == 0) {
+    actor->vx -= 1;
+    if (actor->vx == 0) {
         actor->unk_01 += 1;
     }
 }

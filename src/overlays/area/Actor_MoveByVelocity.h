@@ -17,8 +17,8 @@ MATCH void Actor_MoveByVelocity(void) {
     }
 
     work = g_SpadWork;
-    work->x.fixed += work->unk_0C;
-    work->y.fixed += work->unk_10;
+    work->x.fixed += work->vx;
+    work->y.fixed += work->vy;
     func_8014D978();
     func_8014D290();
 }

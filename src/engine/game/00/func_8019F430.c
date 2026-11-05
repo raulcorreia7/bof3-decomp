@@ -8,13 +8,13 @@ MATCH void func_8019F430(void) {
     Actor* work;
 
     record          = g_SpadWork;
-    step            = record->unk_10 + 0x14000;
+    step            = record->vy + 0x14000;
     record->y.fixed = (s32)(record->y.fixed + step);
-    record->unk_10  = step;
+    record->vy      = step;
     if (record->y.part.integer >= 0) {
         record->unk_09 = 6;
         work           = g_SpadWork;
-        record->unk_10 = (s32)-record->unk_10;
+        record->vy     = (s32)-record->vy;
         work->unk_01   = (u8)(work->unk_01 + 1);
     }
     slot         = g_SpadWork;

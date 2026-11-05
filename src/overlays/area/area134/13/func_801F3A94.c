@@ -7,7 +7,7 @@ MATCH void func_801F3A94(void) {
 
     work        = g_SpadWork;
     g_SpadWork  = &D_80146920;
-    g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
+    g_GameState = (GameState*)g_BattlePartyBattlers;
     g_SpadWork  = work;
     g_SpadWork  = (Actor*)g_BattlePartyBattlers;
     g_SpadWork  = work;

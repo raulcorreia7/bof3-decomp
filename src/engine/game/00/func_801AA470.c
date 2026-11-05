@@ -23,7 +23,7 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
             if (g_GameStateIndex != GAME_REQUEST_BATTLE) {
                 hit              = Actor_ReadState();
                 SP_REF(u16, 0x0) = hit;
-                if (FIELD(u16, g_SpadWork, 0x58u) != hit) {
+                if (g_SpadWork->script_pc != hit) {
                     cmd = code + FIELD(u16, sub, 0xAu);
                     if (hit == cmd[3]) {
                         func_8015D820(cmd[2] | (cmd[1] << 8), cmd[4]);

@@ -7,9 +7,9 @@ MATCH void func_8019C794(void) {
     u8             index;
 
     work = g_SpadWork;
-    work->x.fixed += work->unk_0C;
+    work->x.fixed += work->vx;
     work->unk_0A -= 1;
-    work->y.fixed += work->unk_10;
+    work->y.fixed += work->vy;
     if (g_SpadWork->unk_0A == 0 ||
         (map = (AreaMapBundle*)MAP_BUNDLE_BASE,
          *(u16*)(g_SpadWork->x.part.integer * 2 +

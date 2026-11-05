@@ -15,8 +15,8 @@ MATCH void func_8019CBD8(void) {
     other->tint.signed_bytes.unk_5E      = -0x80;
     g_SpadWork->tint.signed_bytes.unk_5F = -0x80;
     work                                 = g_SpadWork;
-    work->unk_0C                         = 0;
-    work->unk_10                         = 0;
+    work->vx                             = 0;
+    work->vy                             = 0;
     work->vz                             = 0;
     work->unk_09                         = 0;
     func_8019D270();

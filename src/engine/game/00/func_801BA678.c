@@ -59,9 +59,8 @@ NON_MATCHING s32 func_801BA678(void) {
     void*  tmp28;
     void*  tmp29;
 
-    if ((0x400 & g_GameFlags) ||
-        ((tmp24 = g_SpadWork, val20 = FIELD(u8, tmp24, 0x8u), (FIELD(u16, tmp24, 0x34u) == 0)) &&
-         (FIELD(u16, tmp24, 0x38u) == 0))) {
+    if ((0x400 & g_GameFlags) || ((tmp24 = g_SpadWork, val20 = tmp24->direction_08, (FIELD(u16, tmp24, 0x34u) == 0)) &&
+                                  (FIELD(u16, tmp24, 0x38u) == 0))) {
         return 1;
     }
     tmp12 = *(D_80181B00 + (g_SpadWork->direction_08 * 2));

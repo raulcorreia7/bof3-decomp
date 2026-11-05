@@ -18,8 +18,8 @@ MATCH void func_801F4E58(void) {
 
     slots            = SP_PTR(u8*, 0u);
     scratch          = (Actor*)slots[0x11];
-    scratch->unk_0C  = (s16)D_801F6258[scratch->direction_08].x;
-    scratch->unk_10  = (s16)D_801F6258[scratch->direction_08].y;
+    scratch->vx      = (s16)D_801F6258[scratch->direction_08].x;
+    scratch->vy      = (s16)D_801F6258[scratch->direction_08].y;
     scratch->x.fixed = D_80145EC4[0];
     scratch->y.fixed = D_80145EC4[1];
 
@@ -28,13 +28,13 @@ MATCH void func_801F4E58(void) {
         value                   = scratch->y.part.integer - ((s32)(D_801F6258[scratch->direction_08].y << 16) >> 29);
         scratch->y.part.integer = value;
         if (scratch->unk_06 == 1) {
-            if (scratch->unk_0C == 0) {
+            if (scratch->vx == 0) {
                 scratch->x.part.integer += 2;
             } else {
                 scratch->y.part.integer = value + 2;
             }
         } else {
-            if (scratch->unk_0C == 0) {
+            if (scratch->vx == 0) {
                 scratch->x.part.integer -= 2;
             } else {
                 scratch->y.part.integer = value - 2;

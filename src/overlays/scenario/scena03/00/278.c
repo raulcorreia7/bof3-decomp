@@ -181,7 +181,7 @@ MATCH void func_801F7B10(void) {
     u8     value;
 
     actor = g_SpadWork;
-    ptr   = &actor->unk_0C;
+    ptr   = &actor->vx;
     func_801F7FFC(ptr);
     func_801F8170(ptr);
     actor->tint.halves.unk_5E += 1;
@@ -199,7 +199,7 @@ MATCH void func_801F7BB0(void) {
     u8     value;
 
     actor = g_SpadWork;
-    ptr   = &actor->unk_0C;
+    ptr   = &actor->vx;
     func_801F7FFC(ptr);
     func_801F8170(ptr);
     actor->script_pc += 4;
@@ -215,7 +215,7 @@ MATCH void func_801F7C50(void) {
     s32* temp_s0;
     u8   temp_v0;
 
-    temp_s0 = &g_SpadWork->unk_0C;
+    temp_s0 = &g_SpadWork->vx;
     func_801F7FFC(temp_s0);
     func_801F8170(temp_s0);
     temp_v0            = g_SpadWork->unk_09 - 1;
@@ -232,7 +232,7 @@ MATCH void func_801F7CE0(void) {
     u8     remaining;
 
     work = g_SpadWork;
-    pos  = &work->unk_0C;
+    pos  = &work->vx;
     func_801F7FFC(pos);
     func_801F8170(pos);
     work->unk_5A -= 8;
@@ -250,7 +250,7 @@ MATCH void func_801F7D80(void) {
     s16    step;
 
     work = g_SpadWork;
-    pos  = &work->unk_0C;
+    pos  = &work->vx;
     func_801F7FFC(pos);
     func_801F8170(pos);
     step            = work->script_pc - 8;

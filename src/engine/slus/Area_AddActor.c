@@ -11,7 +11,7 @@ MATCH void Area_AddActor(void) {
         work              = g_SpadWork;
         D_8014832C        = byte + 1;
         D_80148214[index] = work;
-        if (work->flags_00 & 8) {
+        if (work->flags_00 & ACTOR_FLAG_SELECTION_FX) {
             func_80161454(index);
         }
     }

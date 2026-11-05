@@ -6,8 +6,8 @@ MATCH void func_8019CEDC(void) {
 
     g_SpadWork->unk_09 = (u8)(g_SpadWork->unk_09 - 1);
     work               = g_SpadWork;
-    work->x.fixed += work->unk_0C;
-    moved         = work->y.fixed + work->unk_10;
+    work->x.fixed += work->vx;
+    moved         = work->y.fixed + work->vy;
     work->y.fixed = moved;
     if (work->unk_09 == 0) {
         if (LOHU(g_GameAreaId) == 0x54) {

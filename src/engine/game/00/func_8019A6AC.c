@@ -20,7 +20,7 @@ MATCH void func_8019A6AC(void) {
         Area_AddActor();
     } else {
         if ((work->unk_09 & 1) != 0) {
-            work->unk_10--;
+            work->vy--;
         }
         func_8014D290();
     }

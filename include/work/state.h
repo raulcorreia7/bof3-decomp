@@ -32,7 +32,7 @@ typedef union GameStateCounter {
     u8 u8_value;
 } GameStateCounter;
 
-typedef struct GameStateRecord {
+typedef struct GameState {
     /* 0x00 */ u8                pad_00[0x79];
     /* 0x79 */ u8                slot_index_79; /* active slot index */
     /* 0x7A */ u8                pad_7A[0x9E];
@@ -54,26 +54,26 @@ typedef struct GameStateRecord {
     /* 0x12E */ u8               pad_12E[0xE];
     /* 0x13C */ u8               slot_13C; /* ability record index */
     /* 0x13D */ u8               unk_13D;  /* the palette fade index; @source: write:func_801AAB00@0x801AAB00 */
-} GameStateRecord;
+} GameState;
 
-ASSERT_SIZE(GameStateRecord, 0x140);
-ASSERT_OFFSET(GameStateRecord, slot_index_79, 0x79);
-ASSERT_OFFSET(GameStateRecord, flags_118, 0x118);
-ASSERT_OFFSET(GameStateRecord, countdown_119, 0x119);
-ASSERT_OFFSET(GameStateRecord, counter_11C, 0x11C);
-ASSERT_OFFSET(GameStateRecord, kind_11E, 0x11E);
-ASSERT_OFFSET(GameStateRecord, wait_11F, 0x11F);
-ASSERT_OFFSET(GameStateRecord, value_120, 0x120);
-ASSERT_OFFSET(GameStateRecord, unk_122, 0x122);
-ASSERT_OFFSET(GameStateRecord, index_124, 0x124);
-ASSERT_OFFSET(GameStateRecord, step_12A, 0x12A);
-ASSERT_OFFSET(GameStateRecord, mode_12B, 0x12B);
-ASSERT_OFFSET(GameStateRecord, flags_12C, 0x12C);
-ASSERT_OFFSET(GameStateRecord, slot_12D, 0x12D);
-ASSERT_OFFSET(GameStateRecord, slot_13C, 0x13C);
-ASSERT_OFFSET(GameStateRecord, unk_13D, 0x13D);
+ASSERT_SIZE(GameState, 0x140);
+ASSERT_OFFSET(GameState, slot_index_79, 0x79);
+ASSERT_OFFSET(GameState, flags_118, 0x118);
+ASSERT_OFFSET(GameState, countdown_119, 0x119);
+ASSERT_OFFSET(GameState, counter_11C, 0x11C);
+ASSERT_OFFSET(GameState, kind_11E, 0x11E);
+ASSERT_OFFSET(GameState, wait_11F, 0x11F);
+ASSERT_OFFSET(GameState, value_120, 0x120);
+ASSERT_OFFSET(GameState, unk_122, 0x122);
+ASSERT_OFFSET(GameState, index_124, 0x124);
+ASSERT_OFFSET(GameState, step_12A, 0x12A);
+ASSERT_OFFSET(GameState, mode_12B, 0x12B);
+ASSERT_OFFSET(GameState, flags_12C, 0x12C);
+ASSERT_OFFSET(GameState, slot_12D, 0x12D);
+ASSERT_OFFSET(GameState, slot_13C, 0x13C);
+ASSERT_OFFSET(GameState, unk_13D, 0x13D);
 
-/* The mode and flag bytes (GameStateRecord +0x12B and +0x12C) of each mode work
+/* The mode and flag bytes (GameState +0x12B and +0x12C) of each mode work
  * record, addressed from the first record's mode byte at a 0x140 stride. */
 typedef struct AreaPartyMode {
     u8 mode;
@@ -85,11 +85,11 @@ ASSERT_SIZE(AreaPartyMode, 0x140);
 
 /* The current mode work record; battle points it at a g_BattlePartyBattlers row. */
 /* D_80146250 */
-extern GameStateRecord* g_GameState; /* 0x80146250 */
+extern GameState*    g_GameState; /* 0x80146250 */
 /* D_80145FBB */
-extern AreaPartyMode    D_80145FBB[]; /* 0x80145FBB */
+extern AreaPartyMode D_80145FBB[]; /* 0x80145FBB */
 /* The scenario record the overlays switch on. */
 /* D_80146870 */
-extern SceneState       g_SceneState; /* 0x80146870 */
+extern SceneState    g_SceneState; /* 0x80146870 */
 
 #endif

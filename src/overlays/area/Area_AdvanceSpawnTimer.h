@@ -28,10 +28,10 @@ MATCH void Area_AdvanceSpawnTimer(void) {
         s32 z;
         u8  t;
 
-        x                  = g_SpadWork->unk_64;
-        y                  = g_SpadWork->unk_68;
-        g_SpadWork->unk_0C = -0x1000;
-        g_SpadWork->unk_10 = -0x400;
+        x              = g_SpadWork->unk_64;
+        y              = g_SpadWork->unk_68;
+        g_SpadWork->vx = -0x1000;
+        g_SpadWork->vy = -0x400;
         do {
         } while (0); /* FAKE: the empty loop keeps the unk_01/unk_6C loads below the constant stores. */
         t                   = g_SpadWork->unk_01;

@@ -31,11 +31,11 @@ MATCH s8 Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
 
     if ((u8)(Actor_GetType()) != 2) {
         if (span != 0) {
-            g_SpadWork->unk_0C = (dir_x << 15) / (g_SpadWork->unk_0A * span);
-            g_SpadWork->unk_10 = (dir_y << 15) / (g_SpadWork->unk_0A * span);
+            g_SpadWork->vx = (dir_x << 15) / (g_SpadWork->unk_0A * span);
+            g_SpadWork->vy = (dir_y << 15) / (g_SpadWork->unk_0A * span);
         } else {
-            g_SpadWork->unk_10 = 0;
-            g_SpadWork->unk_0C = 0;
+            g_SpadWork->vy = 0;
+            g_SpadWork->vx = 0;
         }
         g_SpadWork->unk_04 = 1;
     } else {

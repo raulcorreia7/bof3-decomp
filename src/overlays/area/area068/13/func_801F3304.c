@@ -5,7 +5,7 @@ MATCH void func_801F3304(void) {
 
     if (++D_801F4E10 >= 8) {
         work        = g_SpadWork;
-        g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
+        g_GameState = (GameState*)g_BattlePartyBattlers;
         g_SpadWork  = (Actor*)g_BattlePartyBattlers;
         D_80145EC8 &= 0xFFFFF000;
         D_80145EC4 &= 0xFFFFF000;
@@ -18,7 +18,7 @@ MATCH void func_801F3304(void) {
             case 0x1000:
             case 0x3000:
                 work        = g_SpadWork;
-                g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
+                g_GameState = (GameState*)g_BattlePartyBattlers;
                 g_SpadWork  = (Actor*)g_BattlePartyBattlers;
                 D_80145EC8 += 0x800;
                 g_SpadWork = work;
@@ -26,7 +26,7 @@ MATCH void func_801F3304(void) {
             case 0x2000:
             case 0x6000:
                 work        = g_SpadWork;
-                g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
+                g_GameState = (GameState*)g_BattlePartyBattlers;
                 g_SpadWork  = (Actor*)g_BattlePartyBattlers;
                 D_80145EC4 -= 0x800;
                 g_SpadWork = work;
@@ -34,7 +34,7 @@ MATCH void func_801F3304(void) {
             case 0x4000:
             case 0xC000:
                 work        = g_SpadWork;
-                g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
+                g_GameState = (GameState*)g_BattlePartyBattlers;
                 g_SpadWork  = (Actor*)g_BattlePartyBattlers;
                 D_80145EC8 -= 0x800;
                 g_SpadWork = work;
@@ -42,7 +42,7 @@ MATCH void func_801F3304(void) {
             case 0x8000:
             case 0x9000:
                 work        = g_SpadWork;
-                g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
+                g_GameState = (GameState*)g_BattlePartyBattlers;
                 g_SpadWork  = (Actor*)g_BattlePartyBattlers;
                 D_80145EC4 += 0x800;
                 g_SpadWork = work;

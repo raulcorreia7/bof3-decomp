@@ -32,25 +32,25 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
         if ((ease_in & BYTE_MASK) != 0) {
             g_SpadWork->unk_18 = step_x >> (arg1 & BYTE_MASK);
             g_SpadWork->unk_1C = step_y >> (arg1 & BYTE_MASK);
-            g_SpadWork->unk_0C = 0;
-            g_SpadWork->unk_10 = 0;
+            g_SpadWork->vx     = 0;
+            g_SpadWork->vy     = 0;
         } else {
             g_SpadWork->unk_18 = -(step_x >> (arg1 & BYTE_MASK));
             g_SpadWork->unk_1C = -(step_y >> (arg1 & BYTE_MASK));
-            g_SpadWork->unk_0C = step_x;
-            g_SpadWork->unk_10 = step_y;
+            g_SpadWork->vx     = step_x;
+            g_SpadWork->vy     = step_y;
         }
         g_SpadWork->vz = 0;
     }
-    g_SpadWork->x.fixed += g_SpadWork->unk_0C;
-    g_SpadWork->y.fixed += g_SpadWork->unk_10;
-    g_SpadWork->unk_0C += g_SpadWork->unk_18;
-    g_SpadWork->unk_10 += g_SpadWork->unk_1C;
-    delta = g_SpadWork->unk_10;
+    g_SpadWork->x.fixed += g_SpadWork->vx;
+    g_SpadWork->y.fixed += g_SpadWork->vy;
+    g_SpadWork->vx += g_SpadWork->unk_18;
+    g_SpadWork->vy += g_SpadWork->unk_1C;
+    delta = g_SpadWork->vy;
     if (g_SpadWork->unk_06 == 0x0A) {
         pos_x = g_SpadWork->x.fixed;
         slot  = (u32)(-(((s32)g_CurrentActor - (s32)D_80147A58) * 0xD79435E5)) >> 3;
-        if ((((pos_x ^ (pos_x + g_SpadWork->unk_0C)) & 0x8000) != 0) ||
+        if ((((pos_x ^ (pos_x + g_SpadWork->vx)) & 0x8000) != 0) ||
             ((pos_y = g_SpadWork->y.fixed, (((pos_y ^ (pos_y + delta)) & 0x8000)) != 0))) {
             func_801A3080(g_CurrentActor, g_SpadWork->direction_08 & 7);
         }
@@ -88,8 +88,8 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
     if ((reached_x & reached_y) != 0) {
         g_SpadWork->x.fixed = g_CurrentActor->unk_80;
         g_SpadWork->y.fixed = g_CurrentActor->unk_84;
-        g_SpadWork->unk_0C  = step_x;
-        g_SpadWork->unk_10  = step_y;
+        g_SpadWork->vx      = step_x;
+        g_SpadWork->vy      = step_y;
         g_SpadWork->unk_1C  = 0;
         g_SpadWork->unk_18  = 0;
         return 0;
