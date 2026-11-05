@@ -82,15 +82,7 @@ INCLUDE_ASM(func_801CFF24);
 
 #include "overlays/plchar/Char_SelectScriptAndStep.h"
 
-MATCH void func_801D00B4(void) {
-    Actor* work = g_SpadWork;
-
-    if ((g_ActorSlots[work->unk_06].flags_00 == 0 || g_ActorSlots[work->unk_06].unk_01 == 1) &&
-        g_AreaCameraMoving == 0) {
-        work->unk_06 = 0;
-        g_SpadWork->unk_03 -= 2;
-    }
-}
+#include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
 INCLUDE_ASM(func_801D0148);
 
