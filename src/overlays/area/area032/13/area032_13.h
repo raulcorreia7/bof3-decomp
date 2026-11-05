@@ -18,13 +18,14 @@ s32  GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s
 /* func_80196718 */
 void GFX_FreePaletteFadeTarget(void* target);
 s32  func_801C29A0(s8 tuning_delta);
+void Actor_ProjectFocusAndStep(void);
 void func_801F2DAC(void);
 void func_801F2E64(void);
 void func_801F2EE4(void);
 void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_shade);
 void func_801F30A8(void);
 void func_801F30EC(void);
-void func_801F3480(void);
+void Actor_UnhideAndFinishAtZero(void);
 /* func_801F35B4 */
 void Actor_FreePaletteFades(void);
 void func_801F363C(void);

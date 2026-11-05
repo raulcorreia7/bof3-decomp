@@ -5,8 +5,8 @@ u32 D_801F2C00 = 0x54;
 
 /* Work-state handlers; func_801F30A8 enters the same table at its sixth entry (D_801F3F80). */
 static const Callback s_WorkStates[8] = {
-    func_801F2C48, func_801F2D18, func_801F2DAC, func_801F2E64,
-    func_801F2EE4, func_801F30EC, func_801F3480, Actor_FreePaletteFades,
+    Actor_ProjectFocusAndStep,   func_801F2D18,          func_801F2DAC, func_801F2E64, func_801F2EE4, func_801F30EC,
+    Actor_UnhideAndFinishAtZero, Actor_FreePaletteFades,
 };
 
 /* Variable-length script records; no reader names a field, so the block stays a byte array. */
@@ -155,34 +155,7 @@ MATCH void func_801F2C04(void) {
     SYS_DISPATCH_BYTE(s_WorkStates, SP_REF(u8*, 0x44)[0x1]);
 }
 
-MATCH void func_801F2C48(void) {
-    SVECTOR* vertex;
-    u16*     screen;
-    long     depth;
-    long     flag;
-    long     result;
-    u16      other;
-    u8**     slots;
-    u8*      work;
-    u8*      item;
-
-    vertex                 = D_1F800014;
-    screen                 = D_1F800034;
-    vertex->vx             = (s16)((D_80145EC4 >> 9) - 0x4000);
-    SP_REF(s16, 0x16)      = (s16)((D_80145EC8 >> 9) - 0x4000);
-    SP_REF(s16, 0x18)      = (s16)((-D_80145ECE) / 2);
-    result                 = RotTransPers(vertex, (long*)screen, &depth, &flag);
-    slots                  = SP_PTR(u8*, 0u);
-    work                   = slots[0x11];
-    FIELD(s32, work, 0x60) = result;
-    FIELD(u16, work, 0x2E) = screen[0];
-    other                  = SP_REF(u16, 0x36);
-    work[9]                = 0;
-    slots                  = SP_PTR(u8*, 0u);
-    item                   = slots[0x11];
-    FIELD(u16, work, 0x30) = other;
-    item[1] += 1;
-}
+#include "shared/Actor_ProjectFocusAndStep.h"
 
 MATCH void func_801F2D18(void) {
     u8**   slots;
@@ -316,20 +289,7 @@ MATCH void func_801F30EC(void) {
     slots[0x11][1] = 1;
 }
 
-MATCH void func_801F3480(void) {
-    u8* work;
-
-    work = (u8*)g_SpadWork;
-    if (work[9] != 0) {
-        g_Actors[work[11]].flags_00 |= ACTOR_FLAG_HIDDEN;
-        g_SpadWork->unk_09 -= 1;
-    } else {
-        g_Actors[work[11]].flags_00 &= ~ACTOR_FLAG_HIDDEN;
-        g_Actors[g_SpadWork->unk_03].flags_00 = 0;
-        g_Actors[g_SpadWork->unk_04].flags_00 = 0;
-        g_SpadWork->unk_01                    = 2;
-    }
-}
+#include "shared/Actor_UnhideAndFinishAtZero.h"
 
 #include "shared/Actor_FreePaletteFades.h"
 

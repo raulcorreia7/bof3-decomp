@@ -2124,7 +2124,9 @@ Scene_RemoveRei = { addr = 0x801FE198, type = "func", source = "removes characte
 
 ["emi/scenario/scena03/00"]
 Actor_FreePaletteFades = { addr = 0x801F7334, type = "func", source = "frees the two palette fade targets of the actor slot and resets the area work" }
+Actor_UnhideAndFinishAtZero = { addr = 0x801F78E0, type = "func", source = "keeps the actor slot at the work byte 0x0B hidden until the timer at byte 0x09 reaches zero, then shows it, clears the two actor slots at the work bytes 0x03 and 0x04 and sets the handler index at byte 0x01 to 2" }
 Actor_FreePaletteFades_801F7A14 = { addr = 0x801F7A14, type = "func", source = "byte-identical to Actor_FreePaletteFades at emi/scenario/scena03/00@0x801F7334" }
+Actor_ProjectFocusAndStep = { addr = 0x801F8640, type = "func", source = "projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index" }
 GFX_DrawShadedDisc = { addr = 0x801F8C04, type = "func", source = "fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade" }
 Scene_ShowMessage = { addr = 0x801FCC9C, type = "func", source = "starts the area message of the given index, switches the game state to 2 and sets the script-active flag; byte-equal to func_801F9FD0 of scena04" }
 Scene_RemoveNina = { addr = 0x801FCEFC, type = "func", source = "removes character 1 (CHAR_ID_NINA_YOUNG) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
@@ -2285,7 +2287,9 @@ g_RingScreenPoints = { addr = 0x800E4A04, source = "position_ring.c indexes the 
 
 ["emi/world00/area032/13"]
 GFX_AddPrim = { addr = 0x8014E5A0, type = "func", source = "appends the current primitive to one OT head - marker_work's cell draw calls it" }
+Actor_ProjectFocusAndStep = { addr = 0x801F2C48, type = "func", source = "projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index" }
 GFX_DrawShadedDisc = { addr = 0x801F2F04, type = "func", source = "fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade" }
+Actor_UnhideAndFinishAtZero = { addr = 0x801F3480, type = "func", source = "keeps the actor slot at the work byte 0x0B hidden until the timer at byte 0x09 reaches zero, then shows it, clears the two actor slots at the work bytes 0x03 and 0x04 and sets the handler index at byte 0x01 to 2" }
 Actor_FreePaletteFades = { addr = 0x801F35B4, type = "func", source = "frees the two palette fade targets of the actor slot and resets the area work" }
 Message_Clear = { addr = 0x801F36A0, type = "func", source = "clears the message request and sets the game overlay state bytes when the menu choice is zero" }
 
