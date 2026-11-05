@@ -1,8 +1,5 @@
 #include "game_00.h"
 
-/* Plain scratchpad cell read; emits a fresh absolute load per use. */
-#define WORK_PTR (*SP_PTR(Actor*, 0x44u))
-
 MATCH void func_801B2DDC(void) {
     Actor  rec;
     Actor* state;
@@ -17,9 +14,9 @@ MATCH void func_801B2DDC(void) {
 
     sel = func_801B5C54();
     if (g_GameRequestFlags & 1) {
-        func_801B5BDC(WORK_PTR->direction_08);
+        func_801B5BDC(g_Task->direction_08);
     } else {
-        work = WORK_PTR;
+        work = g_Task;
         Actor_RequestScript((u8)((work->direction_08 >> 1) + 0x10));
     }
     value = FIELD(s16, sel, 4u);
@@ -43,14 +40,14 @@ MATCH void func_801B2DDC(void) {
                     Message_StartAreaMessage(result & 0xFFF);
                 }
                 g_GameState->kind_11E  = g_CurrentActor->callback_index;
-                state                  = WORK_PTR;
+                state                  = g_Task;
                 g_GameState->value_120 = FIELD(u16, sel, 4u);
                 state->step++;
         }
-        WORK_PTR->step++;
+        g_Task->step++;
     } else {
         Resource_RequestArea(0);
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    WORK_PTR->step++;
+    g_Task->step++;
 }
