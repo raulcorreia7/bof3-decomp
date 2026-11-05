@@ -5,8 +5,8 @@
  * every change here must verify every member address. */
 MATCH void func_801F2C94(void) {
     if (D_801490C7 == 1) {
-        g_MessageRequest         = 0x5A;
-        g_ScriptWorkRecord[0x7A] = 0xFF;
+        g_MessageRequest                   = 0x5A;
+        g_ScriptWorkRecord->callback_index = 0xFF;
     } else {
         MESSAGE_REQUEST_CLEAR();
     }

@@ -32,7 +32,7 @@ MATCH void func_801A83DC(void) {
                 if (g_SndBgmId != GAME_NONE) {
                     SND_ResumeBgm(g_SndBgmId);
                 }
-                *g_ScriptWorkRecord = 0;
+                g_ScriptWorkRecord->flags_00 = 0;
                 Game_ClearScriptActive();
                 D_801448EB = 0;
                 *state     = 0;
