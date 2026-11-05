@@ -346,40 +346,40 @@ static u8 D_801F4224[6364] = {
 };
 
 /* Current work record; the payload starts null. */
-static volatile u8* D_801F5B00 = 0;
+static volatile AreaSprite* D_801F5B00 = 0;
 
 MATCH void func_801F2C14(void) {
-    SYS_DISPATCH_BYTE(D_801F4200, SP_REF(u8*, 0x44)[0x1]);
+    SYS_DISPATCH_BYTE(D_801F4200, WORLD00_AREA024_SCRATCH_PTR->dispatch);
 }
 
 MATCH void func_801F2C58(void) {
     func_801F3D0C();
     func_801F3080();
     func_801F3314();
-    ((u8*)g_SpadWork)[9] = 0;
-    ((u8*)g_SpadWork)[1]++;
+    ((Area024Scratch*)g_SpadWork)->step_count = 0;
+    ((Area024Scratch*)g_SpadWork)->dispatch++;
 }
 
 MATCH void func_801F2CB0(void) {
-    func_801F3E48(((u8*)g_SpadWork)[9]);
-    ((u8*)g_SpadWork)[9] = (u8)(((u8*)g_SpadWork)[9] + 2u);
-    if (((u8*)g_SpadWork)[9] >= 0x80u) {
+    func_801F3E48(((Area024Scratch*)g_SpadWork)->step_count);
+    ((Area024Scratch*)g_SpadWork)->step_count = (u8)(((Area024Scratch*)g_SpadWork)->step_count + 2u);
+    if (((Area024Scratch*)g_SpadWork)->step_count >= 0x80u) {
         SND_PlayCue(EMI_CUE_ID(2, 6));
         SND_PlayCue(EMI_CUE_ID(2, 14));
         SND_PlayCue(EMI_CUE_ID(2, 3));
-        ((u8*)g_SpadWork)[9] = 0;
-        ((u8*)g_SpadWork)[1]++;
+        ((Area024Scratch*)g_SpadWork)->step_count = 0;
+        ((Area024Scratch*)g_SpadWork)->dispatch++;
     }
 }
 
 MATCH void func_801F2D5C(void) {
-    u8* work;
+    Area024Scratch* scratch;
 
     func_801F3D5C();
     func_801F362C();
     if ((func_801F30EC() & BYTE_MASK) == 0) {
-        work = (u8*)WORLD00_AREA024_SCRATCH_PTR;
-        work[1]++;
+        scratch = (Area024Scratch*)WORLD00_AREA024_SCRATCH_PTR;
+        scratch->dispatch++;
     }
 }
 
@@ -456,7 +456,7 @@ MATCH void func_801F3080(void) {
 
     do {
         func_801F2FD4((void*)D_801F5B00);
-        D_801F5B00 = (u8*)(((u8*)D_801F5B00 + 0x28u));
+        D_801F5B00++;
         i += 1u;
     } while (i < 8u);
 }
@@ -473,13 +473,13 @@ MATCH s32 func_801F30EC(void) {
     i          = 0u;
 
     do {
-        if (D_801F5B00[0] != 0u) {
-            D_801F4214[D_801F5B00[1]]();
+        if (D_801F5B00->flags_00 != 0u) {
+            D_801F4214[D_801F5B00->flags_01]();
             func_801F2DF8((void*)D_801F5B00);
             result = 1;
         }
 
-        D_801F5B00 = (u8*)(((u8*)D_801F5B00 + 0x28u));
+        D_801F5B00++;
         i += 1u;
     } while (i < 8u);
 
@@ -583,6 +583,7 @@ MATCH void func_801F362C(void) {
     s32           count;
     u8*           src;
     volatile u16* work;
+    u16*          base;
     u16           tmp;
     u16           t0;
     u16           t1;
@@ -594,14 +595,15 @@ MATCH void func_801F362C(void) {
     count = 0;
     work  = (u16*)(WORLD00_AREA024_STATE_OFFSET);
     for (;; work += 12) {
-        work[4]                = (u16)(work[4] + (g_FrameCount & 1));
-        state[0]               = (u16)(state[0] + work[2]);
-        t0                     = work[-1];
-        tmp                    = work[3];
-        t1                     = work[0];
-        t2                     = work[4];
-        work[-1]               = (u16)(t0 + tmp);
-        *(u16*)(void*)&work[0] = (u16)(t1 + t2);
+        work[4]  = (u16)(work[4] + (g_FrameCount & 1));
+        state[0] = (u16)(state[0] + work[2]);
+        t0       = work[-1];
+        tmp      = work[3];
+        t1       = work[0];
+        t2       = work[4];
+        work[-1] = (u16)(t0 + tmp);
+        base     = (u16*)work;
+        *base    = (u16)(t1 + t2);
         func_801F3708(dst, src, (s16*)state);
         dst += 0x28;
         src += 0x28;
@@ -772,15 +774,15 @@ MATCH void func_801F3BE4(void* spin) {
 }
 
 MATCH void func_801F3D0C(void) {
-    u8* work;
-    u8  i;
+    AreaSpin* work;
+    u8        i;
 
-    work = WORLD00_AREA024_SPIN_WORK_BASE;
+    work = (AreaSpin*)WORLD00_AREA024_SPIN_WORK_BASE;
     i    = 0u;
 
     do {
         func_801F3BE4(work);
-        work += 0x2Cu;
+        work++;
         i += 1u;
     } while (i < 16u);
 }
@@ -807,7 +809,7 @@ MATCH void func_801F3D5C(void) {
             work->fade = (s16)(work->fade - 2);
         }
 
-        work = (AreaSpin*)((u8*)work + 0x2Cu);
+        work++;
         i += 1u;
     } while (i < 16u);
 }
@@ -854,18 +856,18 @@ MATCH s32 func_801F3E48(u8 shade) {
         PSX_SET_SEMI_TRANSPARENT(prim);
         setRGB0(prim, shade, shade, shade);
 
-        ((u16*)verts)[0]  = *src++;
-        ((u16*)verts)[1]  = *src++;
-        ((u16*)verts)[2]  = *src++;
-        ((u16*)verts)[4]  = *src++;
-        ((u16*)verts)[5]  = *src++;
-        ((u16*)verts)[6]  = *src++;
-        ((u16*)verts)[8]  = *src++;
-        ((u16*)verts)[9]  = *src++;
-        ((u16*)verts)[10] = *src++;
-        ((u16*)verts)[12] = *src++;
-        ((u16*)verts)[13] = *src++;
-        ((u16*)verts)[14] = *src;
+        verts[0].vx = *src++;
+        verts[0].vy = *src++;
+        verts[0].vz = *src++;
+        verts[1].vx = *src++;
+        verts[1].vy = *src++;
+        verts[1].vz = *src++;
+        verts[2].vx = *src++;
+        verts[2].vy = *src++;
+        verts[2].vz = *src++;
+        verts[3].vx = *src++;
+        verts[3].vy = *src++;
+        verts[3].vz = *src;
         src += 8;
 
         RotTransPers(&verts[0], (long*)&prim->x0, &depth, &flag);

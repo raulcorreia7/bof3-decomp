@@ -170,6 +170,9 @@ INCLUDE_ASM(func_801F0DB4);
 
 INCLUDE_ASM(func_801F0E54);
 
+/* Scheduling residual in the tail copy: retail loads the spad pointer before the actor pointer and
+ * reads unk_02 before the actor word (first difference lui v0,0x8014 at 0x801F1054); a work-local
+ * tail, a statement swap and a step temp all give the same schedule. Next lever: permuter. */
 INCLUDE_ASM(func_801F0F2C);
 
 INCLUDE_ASM(func_801F1088);
