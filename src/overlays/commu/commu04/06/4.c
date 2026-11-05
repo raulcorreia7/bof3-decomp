@@ -52,4 +52,8 @@ INCLUDE_ASM(func_801D1628);
 
 #include "overlays/commu/Commu_AdvanceStep.h"
 
+/* Tried: store-seq body with the menu state block declared in commu04_06.h.
+ * GCC loads the first constant (li v0,-170) before hoisting li v1,2 and
+ * li a0,1; retail hoists all three first. First diff +0x00: li v0,-170.
+ */
 INCLUDE_ASM(func_801D16A4);

@@ -8,7 +8,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EECC4);
 
-INCLUDE_ASM(func_801EEF34);
+MATCH void func_801EEF34(void) {
+    BMagic_ClearWorkFlagsAndStep();
+}
 
 #include "shared/Effect_StartPlaying.h"
 
@@ -129,7 +131,9 @@ MATCH void func_801EF72C(void) {
 
 INCLUDE_ASM(func_801EF78C);
 
-INCLUDE_ASM(func_801EFA14);
+MATCH void func_801EFA14(void) {
+    BMagic_ClearWorkFlagsAndStep();
+}
 
 MATCH void Effect_StartPlaying_801EFA84(void) {
     u16* flags;

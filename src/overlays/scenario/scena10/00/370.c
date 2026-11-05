@@ -214,7 +214,11 @@ INCLUDE_ASM(func_801FE438);
 
 #include "overlays/scenario/Scene_RebuildRyuGarrParty.h"
 
-INCLUDE_ASM(func_801FE5B0);
+MATCH void func_801FE5B0(void) {
+    g_Characters[g_CharSlot[5]].unk_07 &= 254;
+    func_801C1ABC(5);
+    func_801C1630();
+}
 
 #include "overlays/scenario/Scene_RemoveMomo.h"
 

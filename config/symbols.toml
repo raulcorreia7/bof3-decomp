@@ -1264,6 +1264,9 @@ MENU_CAPTION_ICON = { addr = 0x801D8BB4, source = "the caption icon record drawn
 MENU_CLOCK_COLON = { addr = 0x801D8BB8, source = "the colon string drawn twice between hours and minutes while the play clock's thirtieths count is below 15, by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 g_MenuCommandLabels = { addr = 0x801D8C68, source = "label id -> button text, drawn on each button by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
 g_MenuCommandRows = { addr = 0x801D8CC4, source = "5-byte rows (button count, four label ids) indexed by the command row kind, read by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
+MENU_CLUT_STRIP_CELLS = { addr = 0x801D8D28, source = "Menu_DrawClutStrip.h binds MENU_CLUT_STRIP_CELLS in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
+MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D8DD4, source = "Menu_DrawClutStrip.h binds MENU_CLUT_STRIP_ENTRIES in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
+MENU_CLUT_STRIP_PALETTES = { addr = 0x801D8E20, source = "Menu_DrawClutStrip.h binds MENU_CLUT_STRIP_PALETTES in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
 
 ["emi/etc/commu00/00"]
 # Fairy table extents; the types are in include/game/fairy.h.

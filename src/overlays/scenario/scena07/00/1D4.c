@@ -377,7 +377,11 @@ INCLUDE_ASM(func_801FC1C4);
 
 INCLUDE_ASM(func_801FC2D0);
 
-INCLUDE_ASM(func_801FCFB4);
+MATCH void func_801FCFB4(void) {
+    u8 cam                   = D_801FDE88[g_FrameCount & 3];
+    g_AreaCameraRefreshCount = 2;
+    g_AreaCameraOffsetY      = g_AreaCameraOffsetY + ((cam << 24) >> 22);
+}
 
 INCLUDE_ASM(func_801FD000);
 
@@ -477,4 +481,9 @@ MATCH void func_801FDBCC(void) {
     func_801C1ABC(D_80146189);
 }
 
+/* Tried: straight body (func_801C1ABC(2) then four
+ * g_Characters[...].unk_07 &= 254). GCC omits the nops retail emits
+ * after each load in the slot/index sequences (same pattern as
+ * func_801FE1C0). First diff: 0x801FDC30 nop vs lui a0.
+ */
 INCLUDE_ASM(func_801FDBF4);

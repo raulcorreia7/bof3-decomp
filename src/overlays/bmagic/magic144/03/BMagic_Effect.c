@@ -62,7 +62,9 @@ MATCH void func_801EF554(void) {
 
 INCLUDE_ASM(func_801EF5D4);
 
-INCLUDE_ASM(func_801EF654);
+MATCH void func_801EF654(void) {
+    EFFECT_ADVANCE_AT_COUNT(4, 0x11);
+}
 
 MATCH void func_801EF6A4(void) {
     g_SpadWork->word_08.byte.unk_09 += 1;
@@ -94,7 +96,9 @@ INCLUDE_ASM(func_801EFF74);
 
 INCLUDE_ASM(func_801F0034);
 
-INCLUDE_ASM(func_801F00A0);
+MATCH void func_801F00A0(void) {
+    EFFECT_ADVANCE_AT_COUNT(2, 0x10);
+}
 
 #include "overlays/bmagic/Effect_StepOnTickFlag.h"
 
