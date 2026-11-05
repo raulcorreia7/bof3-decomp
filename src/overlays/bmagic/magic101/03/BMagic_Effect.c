@@ -16,7 +16,51 @@ MATCH void func_801EEC18(void) {
     }
 }
 
+/* Three shapes tried (if/else per branch, read-then-condition-xor, shared-goto): gcc's
+ * cross-jump merges the g_BattleActingBattler tests or the facing reads (0x180 vs 0x19C);
+ * retail keeps three separate D_8014637C loads and a shared xor block at 0x801EED50. First
+ * diff 0x801EECE0, the side-mask test's target. Layout problem, not scheduling. */
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EECCC(void) {
+    u32 offset;
+    u32 counter;
+    u32 wave;
+    u8  facing;
+
+    if (g_BattleTargetSelector & 0x40) {
+        if (g_BattleActingBattler >= BATTLE_PARTY_SLOT_COUNT) {
+            facing = ((PartyBattler*)D_8014637C)->word_08.byte.facing_08;
+            goto have_facing;
+        }
+    } else if (g_BattleActingBattler < BATTLE_PARTY_SLOT_COUNT) {
+        facing = ((PartyBattler*)D_8014637C)->word_08.byte.facing_08;
+        goto have_facing;
+    }
+    facing = ((PartyBattler*)D_8014637C)->word_08.byte.facing_08 ^ 0x2;
+have_facing:
+    g_SpadWork->word_08.byte.facing_08 = facing;
+    func_800AFD9C();
+    g_SpadWork->word_08.byte.unk_0B    = 0;
+    g_SpadWork->word_08.byte.unk_09    = 0x30;
+    g_SpadWork->word_08.byte.timer_0A  = 0;
+    g_SpadWork->step_01 += 1;
+    counter                            = 0;
+    do {
+        offset                              = (Battle_AllocEffect(1, 0x1B) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+        wave                                = (counter >> 2) * 3;
+        wave                                = (wave << 2) + 1;
+        FIELD(u8, D_801EC331, offset)       = 0;
+        FIELD(u8, D_801EC334, offset)       = (u8)counter;
+        FIELD(u8, D_801EC339, offset)       = (u8)wave;
+        FIELD(PartyBattler*, D_801EC3A4, offset) = g_SpadWork;
+        g_SpadWork->word_08.byte.unk_0B += 1;
+        counter += 1;
+    } while (counter < 0x10);
+    SND_QueueSelectionFx(0x100);
+}
+#else
 INCLUDE_ASM(func_801EECCC);
+#endif
 
 MATCH void func_801EEE68(void) {
     u8 timer;
