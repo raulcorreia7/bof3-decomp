@@ -149,7 +149,7 @@ MATCH void func_801F034C(void) {
     PopMatrix();
     work                = g_Task;
     next                = work->unk_09 - 1;
-    work->pos.z.half.hi = work->pos.z.half.hi - 0x40;
+    COORD_INT(work->pos.z) -= 0x40;
     work->unk_09        = next;
     if (next == 0) {
         D_801EB4E0->unk_0B = g_Task->unk_0B;
