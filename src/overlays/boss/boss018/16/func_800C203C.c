@@ -3,6 +3,6 @@
 MATCH void func_800C203C(void) {
     Actor* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     FIELD(u32, work, 0x38) += (g_FrameCount & 1) << 9;
 }

@@ -5,7 +5,7 @@ MATCH void func_801E320C(void) {
     g_BattleChooseEndingHook                   = func_801E5768;
     g_BattleEndHook                            = func_801E57C8;
     func_801E2314(0);
-    g_SpadWork->flags_00 |= ACTOR_FLAG_HIDDEN;
+    g_Task->flags |= ACTOR_FLAG_HIDDEN;
     func_801DDAB4(g_BattleCurrentEnemy->status_82);
-    g_SpadWork->step_01 += 1;
+    g_Task->mode += 1;
 }

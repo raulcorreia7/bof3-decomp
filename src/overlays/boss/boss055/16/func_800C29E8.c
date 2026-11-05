@@ -3,5 +3,5 @@
 MATCH void func_800C29E8(void) {
     Callback steps[2] = {func_800C2A40, func_800C2AA8};
 
-    steps[SPAD_WORK_BYTES[2]]();
+    steps[TASK_BYTES[2]]();
 }

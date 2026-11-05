@@ -26,11 +26,11 @@ MATCH void func_801E084C(void) {
     AreaWorkScale* work;
     s32            save;
 
-    saved           = (AreaWorkSaved*)g_SpadWork;
+    saved           = (AreaWorkSaved*)g_Task;
     save            = saved->saved_3C;
     saved->saved_3C = 0;
     func_8014D290();
-    work                             = (AreaWorkScale*)g_SpadWork;
+    work                             = (AreaWorkScale*)g_Task;
     ((AreaWorkSaved*)work)->saved_3C = save;
     if (work->distance_60 < 0) {
         work->result_40 = (0x4650000 / (work->distance_60 - work->scale_3E * 2)) & ~0xFF;

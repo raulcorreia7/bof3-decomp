@@ -1,7 +1,7 @@
 #include "area096_13.h"
 
 MATCH void func_801F34AC(void) {
-    Actor* actor = g_SpadWork;
+    Actor* actor = g_Task;
 
     if (actor->y.part.integer == 0x3A) {
         switch ((u16)(actor->x.part.integer - 0x40)) {

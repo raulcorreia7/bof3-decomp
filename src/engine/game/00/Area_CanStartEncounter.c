@@ -33,14 +33,14 @@ MATCH s32 Area_CanStartEncounter(void) {
         return 0;
     }
     for (i = 0; i < g_PartySize; i++) {
-        if (g_BattlePartyBattlers[i].flags_00 & ACTOR_FLAG_HIDDEN) {
+        if (g_BattlePartyBattlers[i].flags & ACTOR_FLAG_HIDDEN) {
             return 0;
         }
     }
     if (!(g_GameRequestFlags & 1)) {
-        work       = (Actor*)SCRATCH_WORK;
-        ok         = Area_BuildEncounter(4, 0);
-        g_SpadWork = work;
+        work   = (Actor*)SCRATCH_WORK;
+        ok     = Area_BuildEncounter(4, 0);
+        g_Task = work;
         if (ok != 0) {
             for (i = 0; i < g_PartySize; i++) {
                 ok = func_801C472C(FIELD(s32, D_80143F2C, i << 3), FIELD(s32, D_80143F30, i << 3),
@@ -52,7 +52,7 @@ MATCH s32 Area_CanStartEncounter(void) {
         }
         return ok;
     }
-    rec   = g_SpadWork;
+    rec   = g_Task;
     value = rec->y.fixed;
     /* x holds the step count, then the x sum */
     x     = rec->unk_09;

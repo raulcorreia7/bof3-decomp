@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEF84(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 INCLUDE_ASM(func_801EEFC8);
@@ -25,20 +25,20 @@ INCLUDE_ASM(func_801EF1B4);
 MATCH void func_801EF334(void) {
     u8 temp_v0;
 
-    g_SpadWork->word_08.byte.unk_0B += 1;
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    g_Task->word_08.byte.unk_0B += 1;
+    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         if (g_BattleTargetSelector & 0x40) {
-            func_800A9820((g_SpadWork->unk_03 + 3) & 0xFF);
-            func_80196718(&D_801EB630[g_SpadWork->unk_03]);
-            func_800AF814((g_SpadWork->unk_03 + 3) & 0xFF);
+            func_800A9820((g_Task->unk_03 + 3) & 0xFF);
+            func_80196718(&D_801EB630[g_Task->unk_03]);
+            func_800AF814((g_Task->unk_03 + 3) & 0xFF);
         } else {
-            func_800A9820(g_SpadWork->unk_03);
-            func_80196718((EnemyBattler*)&g_BattlePartyBattlers[g_SpadWork->unk_03]);
-            func_800AF814(g_SpadWork->unk_03);
+            func_800A9820(g_Task->unk_03);
+            func_80196718((EnemyBattler*)&g_BattlePartyBattlers[g_Task->unk_03]);
+            func_800AF814(g_Task->unk_03);
         }
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 

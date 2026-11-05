@@ -10,7 +10,7 @@ MATCH void func_801E60DC(void) {
     count        = slot->unk_09;
     slot->unk_09 = count + 0xFF;
     if (count == 0) {
-        D_801EC2E0->unk_01 += 1;
+        D_801EC2E0->mode += 1;
         slot         = D_801EC2E0;
         slot->unk_0C = 0x8000;
         slot->unk_10 = (s32)0xFFFA0000;

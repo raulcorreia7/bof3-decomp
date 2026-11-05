@@ -13,7 +13,7 @@ const u8 g_SpriteSizes[16][2] = {
     {8, 32}, {16, 32}, {24, 32}, {32, 32},
 };
 
-/* Stride 3: func_8014D290 takes the row at [g_SpadWork->unk_2B * 3]. needs: type, the three members. */
+/* Stride 3: func_8014D290 takes the row at [g_Task->unk_2B * 3]. needs: type, the three members. */
 const s8 g_SpriteCellRotations[16] = {
     0, 0, 0, 0, 1, 1, 1, 2, 3, 2, 2, 3, 0, 0, 1, 0,
 };

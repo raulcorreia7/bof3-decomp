@@ -10,7 +10,7 @@ MATCH void func_8015B410(void* matrix) {
     long    flag;
     Actor*  work;
 
-    work        = g_SpadWork;
+    work        = g_Task;
     vertex.vx   = (s16)(work->x.fixed >> 9) - 0x4000;
     vertex.vy   = (s16)(work->y.fixed >> 9) - 0x4000;
     vertex.vz   = (s16)(-work->z.part.integer / 2);

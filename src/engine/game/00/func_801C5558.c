@@ -20,12 +20,12 @@ MATCH void func_801C5558(void) {
     s32    result;
     s16    threshold;
 
-    work                 = g_SpadWork;
+    work                 = g_Task;
     count                = work->z.part.integer + 16;
     route                = work->direction_08;
     work->z.part.integer = count;
 
-    work   = g_SpadWork;
+    work   = g_Task;
     step   = work->state_70.byte + 2;
     /* FAKE: non-const view of the step table on the first read keeps retail's store order. */
     offs_x = (*(FacingStep(*)[8])g_FacingSteps)[route].x * step;
@@ -34,9 +34,9 @@ MATCH void func_801C5558(void) {
 
     threshold = D_80181B70[g_GameState->slot_index_79];
 
-    work = g_SpadWork;
+    work = g_Task;
     if ((s16)work->z.part.integer >= result - threshold) {
-        work->state_02 = 3;
+        work->step = 3;
     }
 
     func_8014D978();

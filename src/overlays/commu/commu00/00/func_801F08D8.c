@@ -9,24 +9,24 @@ MATCH void func_801F08D8(u8 source_index, u8 task_index) {
     s16 distance;
     record_index                = g_FairyJobs[source_index].type - 1;
     index                       = (u8)record_index;
-    g_SpadWork                  = &g_Actors[task_index];
-    g_SpadWork->unk_05          = source_index;
-    g_SpadWork->unk_01          = 6;
+    g_Task                      = &g_Actors[task_index];
+    g_Task->unk_05              = source_index;
+    g_Task->mode                = 6;
     g_Actors[task_index].unk_78 = 0;
     ACTOR_CLEAR_STATE();
     /* Each pair is written value half first, then the zero half the caller
      * reads back as one 32-bit coordinate word. */
-    g_SpadWork->x.part.integer  = D_801F25A4[index][D_801F2928[index]][0];
-    g_SpadWork->x.part.fraction = 0;
-    variant_index               = index;
-    g_SpadWork->y.part.integer  = D_801F25A4[index][D_801F2928[index]][1];
-    g_SpadWork->y.part.fraction = 0;
-    distance = Area_SampleHeight(*((u32*)(&g_SpadWork->x.part.fraction)), *((u32*)(&g_SpadWork->y.part.fraction)));
-    g_SpadWork->z.part.integer = distance;
-    g_SpadWork->direction_08   = D_801F25A4[variant_index][D_801F2928[variant_index]][2];
-    g_SpadWork->unk_48         = 0;
-    Area_FindSceneRecord(D_801F24FC[g_SpadWork->unk_05 % 6]);
-    func_8015BAC4(g_SpadWork->direction_08);
+    g_Task->x.part.integer  = D_801F25A4[index][D_801F2928[index]][0];
+    g_Task->x.part.fraction = 0;
+    variant_index           = index;
+    g_Task->y.part.integer  = D_801F25A4[index][D_801F2928[index]][1];
+    g_Task->y.part.fraction = 0;
+    distance = Area_SampleHeight(*((u32*)(&g_Task->x.part.fraction)), *((u32*)(&g_Task->y.part.fraction)));
+    g_Task->z.part.integer = distance;
+    g_Task->direction_08   = D_801F25A4[variant_index][D_801F2928[variant_index]][2];
+    g_Task->unk_48         = 0;
+    Area_FindSceneRecord(D_801F24FC[g_Task->unk_05 % 6]);
+    func_8015BAC4(g_Task->direction_08);
     switch (g_FairyRooms[variant_index * 8]) {
         case 0:
             func_801F0BF4(task_index);

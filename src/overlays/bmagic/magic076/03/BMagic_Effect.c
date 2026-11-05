@@ -11,12 +11,12 @@ INCLUDE_ASM(func_801EED48);
 MATCH void func_801EEF5C(void) {
     PartyBattler** selected;
 
-    if (--g_SpadWork->word_08.byte.unk_09 == 0) {
+    if (--g_Task->word_08.byte.unk_09 == 0) {
         selected = &g_BattleSelectedActor;
         func_80196718(*selected);
-        g_SpadWork->word_08.byte.timer_0A = func_8019651C((u8*)*selected, 0, 0, 0, 1);
-        g_SpadWork->word_08.byte.unk_09   = 8;
-        g_SpadWork->step_01++;
+        g_Task->word_08.byte.timer_0A = func_8019651C((u8*)*selected, 0, 0, 0, 1);
+        g_Task->word_08.byte.unk_09   = 8;
+        g_Task->mode++;
     }
 }
 
@@ -33,12 +33,12 @@ INCLUDE_ASM(func_801EF160);
 INCLUDE_ASM(func_801EF2E8);
 
 MATCH void func_801EF330(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EF374(void) {
-    SYS_DISPATCH_BYTE(D_801F048C, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F048C, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         func_800AF764();
         func_801EF698();
     }
@@ -55,7 +55,7 @@ INCLUDE_ASM(func_801EF4A8);
 INCLUDE_ASM(func_801EF698);
 
 MATCH void func_801EF8A8(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 6), 1, g_SpadWork);
+    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 6), 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EF8EC);

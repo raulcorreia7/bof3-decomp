@@ -21,9 +21,9 @@ MATCH void func_801E3C14(void) {
 
     D_801463DA                             = 0;
     g_BattlePendingStatus                  = 0;
-    slot                                   = g_SpadWork->slot;
+    slot                                   = g_Task->slot;
     self                                   = g_BattleCurrentEnemy;
-    D_8014639C                             = (s32)g_SpadWork;
+    D_8014639C                             = (s32)g_Task;
     g_BattleTargetRecord                   = (s16*)&self->pad_F1[3];
     g_BattleTarget                         = slot;
     *(s16*)((u8*)self + 0xF8)              = 0;
@@ -44,7 +44,7 @@ MATCH void func_801E3C14(void) {
     }
     lock_work = g_BattleCurrentEnemy;
     if ((lock_work->target_flags_FC & 1) && lock_work->damage_F8 == 0) {
-        g_SpadWork->unk_02 = 3;
+        g_Task->step = 3;
         return;
     }
     if (!(g_BattleCurrentEnemy->flags_100 & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
@@ -61,11 +61,11 @@ MATCH void func_801E3C14(void) {
     }
     hit_work = g_BattleCurrentEnemy;
     if (hit_work->target_flags_FC & 1) {
-        func_800AAC88(hit_work->damage_F8, g_SpadWork->slot);
+        func_800AAC88(hit_work->damage_F8, g_Task->slot);
         hit_work = g_BattleCurrentEnemy;
     }
     if (hit_work->target_flags_FC & 2) {
-        func_800AAEBC(hit_work->unk_FA, g_SpadWork->slot);
+        func_800AAEBC(hit_work->unk_FA, g_Task->slot);
     }
     pending = &g_BattlePendingStatus;
     g_BattleCurrentEnemy->status_82 |= *pending;
@@ -74,9 +74,9 @@ MATCH void func_801E3C14(void) {
     tail_work = g_BattleCurrentEnemy;
     if (tail_work->damage_F8 > 0) {
         if (tail_work->hp_94 == 0) {
-            g_SpadWork->word_08.byte.unk_09 = 0;
+            g_Task->word_08.byte.unk_09 = 0;
             if (g_BattleState & BATTLE_STATE_CRITICAL) {
-                GFX_AllocPaletteFade(g_SpadWork, 0x10, 0x10, 0x10, 0);
+                GFX_AllocPaletteFade(g_Task, 0x10, 0x10, 0x10, 0);
             }
             g_BattleCurrentEnemy->status_82 = STATUS_KO;
         } else if (g_BattleEncounter != 0) {
@@ -100,5 +100,5 @@ MATCH void func_801E3C14(void) {
     flags = &g_BattleState;
     *flags &= ~0x80;
     func_801E30F8();
-    g_SpadWork->unk_03 += 1;
+    g_Task->unk_03 += 1;
 }

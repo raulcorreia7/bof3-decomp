@@ -6,27 +6,27 @@ MATCH void func_800C1BF0(void) {
     u8            value2;
     u8            value3;
 
-    battler    = g_SpadWork;
-    g_SpadWork = D_801EB4E0;
+    battler = g_Task;
+    g_Task  = D_801EB4E0;
     func_8014DAEC();
-    g_SpadWork = battler;
-    value2     = battler->word_08.byte.unk_09;
-    value      = value2 & 0xFF;
+    g_Task = battler;
+    value2 = battler->word_08.byte.unk_09;
+    value  = value2 & 0xFF;
     if (value != 0xFF) {
         if (value == 0) {
             SND_PlayCue(0x601U);
-            g_SpadWork->word_08.byte.unk_09 = 0xFF;
+            g_Task->word_08.byte.unk_09 = 0xFF;
         } else {
             battler->word_08.byte.unk_09 = value2 - 1;
         }
     }
-    value3 = g_SpadWork->word_08.byte.timer_0A;
+    value3 = g_Task->word_08.byte.timer_0A;
     if (value3 == 0) {
-        D_801EB4E0->step_01 = 5;
-        D_801EB4E0->unk_02  = 0;
+        D_801EB4E0->mode = 5;
+        D_801EB4E0->step = 0;
         func_800A9820(g_BattleTargetSelector);
-        g_SpadWork->step_01 += 1;
+        g_Task->mode += 1;
         return;
     }
-    g_SpadWork->word_08.byte.timer_0A = value3 - 1;
+    g_Task->word_08.byte.timer_0A = value3 - 1;
 }

@@ -6,7 +6,7 @@ MATCH void Actor_StopMoving(void) {
     Actor* work;
 
     g_GameState->counter_11C.u8_value = 3;
-    work                              = g_SpadWork;
+    work                              = g_Task;
     g_AreaCameraStep                  = 0;
     g_AreaCameraHeightStep            = 0;
     work->vx                          = 0;

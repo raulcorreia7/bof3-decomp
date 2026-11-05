@@ -61,15 +61,15 @@ MATCH void func_801C329C(void) {
         if ((found & BYTE_MASK) != 0) {
             slot = Actor_FindFreeSlot() & BYTE_MASK;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].flags_00       = 1;
+                g_ActorSlots[slot].flags          = 1;
                 g_ActorSlots[slot].type           = 0x41;
-                g_ActorSlots[slot].unk_08         = g_SpadWork->direction_08;
-                g_ActorSlots[slot].x.part.integer = g_SpadWork->unk_2E;
-                value30                           = g_SpadWork->unk_30;
+                g_ActorSlots[slot].unk_08         = g_Task->direction_08;
+                g_ActorSlots[slot].x.part.integer = g_Task->unk_2E;
+                value30                           = g_Task->unk_30;
                 g_ActorSlots[slot].unk_27         = 0;
                 g_ActorSlots[slot].unk_06         = 1;
                 record                            = g_ActorSlots;
-                work                              = g_SpadWork;
+                work                              = g_Task;
                 record[slot].y.part.integer       = value30;
                 g_ActorSlots[slot].link_0B        = work->unk_05;
             }

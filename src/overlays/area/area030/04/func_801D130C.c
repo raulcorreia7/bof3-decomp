@@ -31,7 +31,7 @@ MATCH void func_801D130C(void) {
     D_800396C0                    = 0;
     D_800396FE                    = 0;
     FISHING_STATE->saved_index_0B = FISHING_STATE->saved_value_27;
-    FISHING_STATE->flags_00 |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    FISHING_STATE->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     FISHING_STATE->saved_value_27 = 0x7B;
     FISHING_STATE->unk_5C         = 1;
     FISHING_STATE->tint_5D        = -0x40;

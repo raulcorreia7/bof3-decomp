@@ -4,7 +4,7 @@ MATCH void func_8019AA44(void) {
     Actor* work;
     Vec3i* angle;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (work->unk_09 != 0) {
         angle = &D_801481E8;
         angle->x += D_801481F8.x;
@@ -16,5 +16,5 @@ MATCH void func_8019AA44(void) {
         work->unk_09--;
         return;
     }
-    work->unk_01 = 2;
+    work->mode = 2;
 }

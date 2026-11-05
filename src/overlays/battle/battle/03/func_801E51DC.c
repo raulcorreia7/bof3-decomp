@@ -8,15 +8,15 @@ MATCH void func_801E51DC(void) {
     volatile u8* timer;
     u8           count;
 
-    func_801DD14C(g_SpadWork->slot);
+    func_801DD14C(g_Task->slot);
     timer  = &D_801462F3;
     count  = *timer - 1;
     *timer = count;
     if ((count & BYTE_MASK) == 0) {
         g_BattleResult |= BATTLE_RESULT_VICTORY;
     }
-    GFX_FreePaletteFadeTarget((void*)g_SpadWork);
-    Battle_ClearSlotPending(g_SpadWork->slot);
+    GFX_FreePaletteFadeTarget((void*)g_Task);
+    Battle_ClearSlotPending(g_Task->slot);
     g_BattleMessageState = 2;
     func_801DE804();
     func_800ACFF4();

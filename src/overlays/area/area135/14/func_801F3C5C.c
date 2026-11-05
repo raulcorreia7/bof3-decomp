@@ -4,13 +4,13 @@ MATCH void func_801F3C5C(void) {
     Actor* work;
     s32    value;
 
-    work            = g_SpadWork;
+    work            = g_Task;
     value           = work->z.fixed;
     g_AreaSceneMode = 0;
     value += 8;
     work->z.fixed = value;
     if (value >= -0x90) {
-        g_SpadWork->state_02 = 1;
+        g_Task->step = 1;
     }
     func_801F3CA8();
 }

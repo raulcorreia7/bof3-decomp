@@ -8,7 +8,7 @@ MATCH void func_801EEC24(void) {
     BattleHandlerTable5 handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EEC94);
@@ -16,10 +16,10 @@ INCLUDE_ASM(func_801EEC94);
 #include "overlays/bmagic/Effect_CountDownTimerCallSelector.h"
 
 MATCH void func_801EEFA4(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+    if (g_Task->word_08.byte.unk_0B == 0) {
         func_800A9820(g_BattleTargetSelector);
-        g_SpadWork->word_08.byte.unk_09 = 0x1E;
-        g_SpadWork->step_01 += 1;
+        g_Task->word_08.byte.unk_09 = 0x1E;
+        g_Task->mode += 1;
     }
 }
 
@@ -28,12 +28,12 @@ INCLUDE_ASM(func_801EF010);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EF2D0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EF314(void) {
-    SYS_DISPATCH_BYTE(D_801F04C8, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0) {
+    SYS_DISPATCH_BYTE(D_801F04C8, g_Task->step);
+    if (g_Task->flags != 0) {
         func_801EF688();
         func_801EF79C();
         PopMatrix();
@@ -46,16 +46,16 @@ MATCH void func_801EF44C(void) {
     s32 count;
     u8  temp_v1;
 
-    count = g_SpadWork->word_08.byte.unk_0B + 1;
-    count += g_SpadWork->word_08.byte.unk_09 >> 6;
-    g_SpadWork->word_08.byte.unk_0B = count;
+    count = g_Task->word_08.byte.unk_0B + 1;
+    count += g_Task->word_08.byte.unk_09 >> 6;
+    g_Task->word_08.byte.unk_0B = count;
     if (g_FrameCount & 1) {
-        g_SpadWork->word_08.byte.timer_0A += 1;
+        g_Task->word_08.byte.timer_0A += 1;
     }
-    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 2;
-    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    temp_v1                     = g_Task->word_08.byte.unk_09 + 2;
+    g_Task->word_08.byte.unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0xC0) {
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
@@ -63,16 +63,16 @@ MATCH void func_801EF4F4(void) {
     s32 count;
     u8  temp_v1;
 
-    count = g_SpadWork->word_08.byte.unk_0B + 1;
-    count += g_SpadWork->word_08.byte.unk_09 >> 6;
-    g_SpadWork->word_08.byte.unk_0B = count;
+    count = g_Task->word_08.byte.unk_0B + 1;
+    count += g_Task->word_08.byte.unk_09 >> 6;
+    g_Task->word_08.byte.unk_0B = count;
     if (g_FrameCount & 1) {
-        g_SpadWork->word_08.byte.timer_0A -= 1;
+        g_Task->word_08.byte.timer_0A -= 1;
     }
-    temp_v1                         = g_SpadWork->word_08.byte.unk_09 - 2;
-    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    temp_v1                     = g_Task->word_08.byte.unk_09 - 2;
+    g_Task->word_08.byte.unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x60) {
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
@@ -83,8 +83,8 @@ INCLUDE_ASM(func_801EF688);
 INCLUDE_ASM(func_801EF79C);
 
 MATCH void func_801EFF24(void) {
-    D_801F04D8[g_SpadWork->unk_02]();
-    if (g_SpadWork->flags_00 != 0) {
+    D_801F04D8[g_Task->step]();
+    if (g_Task->flags != 0) {
         func_801F00C4();
     }
 }
@@ -100,7 +100,7 @@ MATCH void func_801EFF24(void) {
 INCLUDE_ASM(func_801F00C4);
 
 MATCH void func_801F02A0(void) {
-    SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 12, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 12, 2, g_Task);
 }
 
 #include "overlays/bmagic/Effect_RequestQueueEntryAndArmTicker.h"
@@ -111,14 +111,14 @@ MATCH void func_801F038C(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC18;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
 }
 
 MATCH void func_801F03EC(void) {
-    g_SpadWork->word_08.byte.unk_0B = 0;
-    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_Task->word_08.byte.unk_0B = 0;
+    g_Task->word_08.byte.unk_09 = 0;
     Actor_SelectScript(3);
-    g_SpadWork->unk_02++;
+    g_Task->step++;
 }
 
 #include "overlays/bmagic/Effect_AddActorStepOnPlaying.h"

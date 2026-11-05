@@ -8,9 +8,9 @@ MATCH void func_801AC1DC(s32* out, u8 selector) {
     u16     world;
 
     PushMatrix();
-    rot.vx = g_SpadWork->unk_64;
-    rot.vy = g_SpadWork->unk_68;
-    rot.vz = g_SpadWork->unk_6C;
+    rot.vx = g_Task->unk_64;
+    rot.vy = g_Task->unk_68;
+    rot.vz = g_Task->unk_6C;
     RotMatrix(&rot, &matrix);
     trans.vz = 0;
     trans.vy = 0;

@@ -11,12 +11,12 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEE9C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_Task)[1]);
 }
 
 MATCH void func_801EEEE0(void) {
-    SYS_DISPATCH_BYTE(D_801F04D4, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F04D4, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801EF294();
         PopMatrix();
@@ -28,14 +28,14 @@ INCLUDE_ASM(func_801EEF68);
 MATCH void func_801EF078(void) {
     u8             timer;
     PartyBattler** actor;
-    timer                           = g_SpadWork->word_08.byte.unk_09 + 2;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 + 2;
+    g_Task->word_08.byte.unk_09 = timer;
     if (timer == 0x10) {
         actor = &g_BattleSelectedActor;
         func_80196718(*actor);
         func_8019651C(*actor, -8, -8, -8, 1);
         func_800A9820(g_BattleTargetSelector);
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
@@ -44,11 +44,11 @@ MATCH void func_801EF078(void) {
 MATCH void func_801EF154(void) {
     u8 count;
 
-    count = g_SpadWork->word_08.byte.unk_09;
+    count = g_Task->word_08.byte.unk_09;
     if (count != 0) {
-        g_SpadWork->word_08.byte.unk_09 = count - 1;
+        g_Task->word_08.byte.unk_09 = count - 1;
     }
-    if (g_SpadWork->word_08.byte.unk_0B == 0x80) {
+    if (g_Task->word_08.byte.unk_0B == 0x80) {
         func_80196718(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
@@ -61,12 +61,12 @@ MATCH void func_801EF154(void) {
 INCLUDE_ASM(func_801EF294);
 
 MATCH void func_801EF510(void) {
-    SYS_DISPATCH_TASK(D_801F04E4, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801F04E4, 1, g_Task);
 }
 
 MATCH void func_801EF554(void) {
-    SYS_DISPATCH_BYTE(D_801F04EC, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F04EC, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         func_800AF764();
         func_801EF818();
     }

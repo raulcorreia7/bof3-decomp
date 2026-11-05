@@ -20,19 +20,19 @@ MATCH s32 func_801C520C(void) {
     sumY    = FIELD(s32, route, 0x38u) + (D_80181B98[index] * step);
     targetY = sumY;
     if (FIELD(s16, route, 0x3Eu) < Area_ReadHeight(sumX, sumY)) {
-        g_SpadWork->z.part.integer = (s16)((u16)g_SpadWork->z.part.integer + D_80181B88[g_GameState->slot_index_79]);
+        g_Task->z.part.integer = (s16)((u16)g_Task->z.part.integer + D_80181B88[g_GameState->slot_index_79]);
     } else {
-        g_SpadWork->z.part.integer = Area_ReadHeight(targetX, targetY);
-        transitionId               = 0x3F;
-        if (g_SpadWork->direction_08 == 7) {
+        g_Task->z.part.integer = Area_ReadHeight(targetX, targetY);
+        transitionId           = 0x3F;
+        if (g_Task->direction_08 == 7) {
             transitionId = 0x3E;
         }
         done = 1;
         Actor_RequestScript(transitionId);
     }
-    if ((g_SpadWork->unk_05 == 0) &&
+    if ((g_Task->unk_05 == 0) &&
         !((g_GameFlags | g_AreaWalkFlags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
-        Area_AdvanceScroll(g_SpadWork->z.part.integer);
+        Area_AdvanceScroll(g_Task->z.part.integer);
     }
     if (!(g_FrameCount & 3)) {
         func_8014DAEC();

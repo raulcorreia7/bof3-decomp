@@ -25,13 +25,13 @@ MATCH void func_801F74F8(void) {
 }
 
 MATCH void func_801F7518(void) {
-    SYS_DISPATCH_TASK(D_801FE820, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FE820, 1, g_Task);
 }
 
 MATCH void func_801F755C(void) {
-    g_SpadWork->unk_06 = 0x4E;
+    g_Task->unk_06 = 0x4E;
     func_801F6FAC();
-    g_SpadWork->state_02 = 0;
+    g_Task->step = 0;
 }
 
 INCLUDE_ASM(func_801F7590);

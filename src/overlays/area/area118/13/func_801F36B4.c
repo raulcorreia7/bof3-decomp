@@ -3,17 +3,17 @@
 MATCH void func_801F36B4(void) {
     u16 count;
 
-    count              = g_SpadWork->unk_30 + 0x20;
-    g_SpadWork->unk_30 = count;
+    count          = g_Task->unk_30 + 0x20;
+    g_Task->unk_30 = count;
     if ((s16)count >= 0) {
         func_801F33A4();
-        if (g_SpadWork->state_02 == 2) {
+        if (g_Task->step == 2) {
             return;
         }
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x201);
         }
-        g_SpadWork->state_02 = 1;
+        g_Task->step = 1;
     }
     func_801F381C(0);
 }

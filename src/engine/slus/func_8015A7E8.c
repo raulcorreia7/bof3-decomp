@@ -13,7 +13,7 @@ MATCH void func_8015A7E8(void) {
     rec = (u8*)D_80147A58;
     i   = 0;
     for (base = rec; (i & BYTE_MASK) < 4; i++, rec += ACTOR_SIZE) {
-        g_SpadWork     = rec;
+        g_Task         = rec;
         g_CurrentActor = rec;
         if ((rec[0] & 1) == 0) {
             continue;
@@ -34,6 +34,6 @@ MATCH void func_8015A7E8(void) {
             func_801A3A08();
             continue;
         }
-        D_801C83D8[((u8*)g_SpadWork)[1]]((u8*)((i & BYTE_MASK) * ACTOR_SIZE + (u32)base));
+        D_801C83D8[((u8*)g_Task)[1]]((u8*)((i & BYTE_MASK) * ACTOR_SIZE + (u32)base));
     }
 }

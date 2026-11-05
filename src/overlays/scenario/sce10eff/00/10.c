@@ -14,7 +14,7 @@ MATCH void Scene_RunEffect(void) { /* func_801D0C10 */
     BattleHandlerTable3 handlers;
 
     handlers = D_801D0C04;
-    handlers.handlers[((u8*)g_SpadWork)[1]]();
+    handlers.handlers[((u8*)g_Task)[1]]();
 }
 
 /* func_801D0C70 */
@@ -22,25 +22,25 @@ MATCH void Scene_EffectBegin(void) { /* func_801D0C70 */
     u8 i;
     u8 slot;
 
-    D_801D2744 = g_SpadWork;
+    D_801D2744 = g_Task;
 
-    slot                        = Actor_FindFreeSlot();
-    g_ActorSlots[slot].flags_00 = 1;
-    g_ActorSlots[slot].type     = 0x69;
-    g_ActorSlots[slot].unk_01   = 2;
-    g_ActorSlots[slot].unk_02   = 0;
-    g_ActorSlots[slot].unk_03   = 0;
+    slot                      = Actor_FindFreeSlot();
+    g_ActorSlots[slot].flags  = 1;
+    g_ActorSlots[slot].type   = 0x69;
+    g_ActorSlots[slot].mode   = 2;
+    g_ActorSlots[slot].step   = 0;
+    g_ActorSlots[slot].unk_03 = 0;
 
     i = 0;
     do {
         slot                      = Actor_FindFreeSlot();
         g_ActorSlots[slot].unk_04 = i;
         i++;
-        g_ActorSlots[slot].flags_00 = 1;
-        g_ActorSlots[slot].type     = 0x69;
-        g_ActorSlots[slot].unk_01   = 2;
-        g_ActorSlots[slot].unk_02   = 1;
-        g_ActorSlots[slot].unk_03   = 0;
+        g_ActorSlots[slot].flags  = 1;
+        g_ActorSlots[slot].type   = 0x69;
+        g_ActorSlots[slot].mode   = 2;
+        g_ActorSlots[slot].step   = 1;
+        g_ActorSlots[slot].unk_03 = 0;
     } while (i < 4);
 
     i = 0;
@@ -48,28 +48,28 @@ MATCH void Scene_EffectBegin(void) { /* func_801D0C70 */
         slot                      = Actor_FindFreeSlot();
         g_ActorSlots[slot].unk_04 = i;
         i++;
-        g_ActorSlots[slot].flags_00 = 1;
-        g_ActorSlots[slot].type     = 0x69;
-        g_ActorSlots[slot].unk_01   = 2;
-        g_ActorSlots[slot].unk_02   = 2;
-        g_ActorSlots[slot].unk_03   = 0;
+        g_ActorSlots[slot].flags  = 1;
+        g_ActorSlots[slot].type   = 0x69;
+        g_ActorSlots[slot].mode   = 2;
+        g_ActorSlots[slot].step   = 2;
+        g_ActorSlots[slot].unk_03 = 0;
     } while (i < 4);
 
-    g_SpadWork->ticker = 0;
-    g_SpadWork->unk_01++;
+    g_Task->ticker = 0;
+    g_Task->unk_01++;
     SND_PlayCue(EMI_CUE_ID(2, 3));
 }
 
 /* func_801D0E64 */
 MATCH void Scene_EffectEnd(void) { /* func_801D0E64 */
-    if (g_SpadWork->ticker == 9) {
+    if (g_Task->ticker == 9) {
         Actor_Clear();
     }
 }
 
 /* func_801D0E9C */
 MATCH void Scene_EffectRunState(void) { /* func_801D0E9C */
-    D_801D2708[g_SpadWork->state]();
+    D_801D2708[g_Task->state]();
 }
 
 /* func_801D0EE0 */
@@ -82,7 +82,7 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
 
     PushMatrix();
 
-    scratch = g_SpadWork;
+    scratch = g_Task;
 
     rotation.vx = 0;
     rotation.vy = 0;
@@ -103,9 +103,9 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
 }
 
 MATCH void func_801D0FAC(void) {
-    D_801D2714[g_SpadWork->step_index]();
+    D_801D2714[g_Task->step_index]();
     func_801D2658();
-    if (g_SpadWork->step_index != 0) {
+    if (g_Task->step_index != 0) {
         Scene_EffectSetMatrix();
         Scene_DrawBands(0x60, 0x20, 7);
         PopMatrix();
@@ -119,18 +119,18 @@ MATCH void func_801D1034(void) {
     s32              coord_y;
     s16              distance;
 
-    g_SpadWork->ticker = (u8)(RANDOM_MASK(0xF));
-    g_SpadWork->timer  = 0;
-    g_SpadWork->band   = 0;
+    g_Task->ticker = (u8)(RANDOM_MASK(0xF));
+    g_Task->timer  = 0;
+    g_Task->band   = 0;
 
     source       = D_801D2744;
-    work         = g_SpadWork;
+    work         = g_Task;
     work->proj_x = source->proj_x;
     coord_y      = source->proj_y;
     work->proj_y = coord_y;
     distance     = Area_SampleHeight(work->proj_x, coord_y);
 
-    scratch = g_SpadWork;
+    scratch = g_Task;
     scratch->step_index++;
     scratch->proj_z = distance;
 }
@@ -144,12 +144,12 @@ MATCH void func_801D1138(void) {
 
     /* A store through the pointer may alias the cell, so each step reloads
      * it. */
-    work = g_SpadWork;
+    work = g_Task;
     work->ticker++;
-    work = g_SpadWork;
+    work = g_Task;
     work->timer--;
     if (work->timer == 0) {
-        work = g_SpadWork;
+        work = g_Task;
         work->step_index++;
     }
 }
@@ -160,9 +160,9 @@ MATCH void func_801D11A0(void) {
 
     /* A store through the pointer may alias the cell, so each step reloads
      * it. */
-    work = g_SpadWork;
+    work = g_Task;
     work->ticker++;
-    work       = g_SpadWork;
+    work       = g_Task;
     count      = work->band - 1;
     work->band = count;
     if (count == 0) {
@@ -174,10 +174,10 @@ MATCH void func_801D11A0(void) {
 MATCH void func_801D1218(void) {
     SceneBandEffect* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     D_801D2724[work->step_index]();
     func_801D2658();
-    if (g_SpadWork->step_index != 0) {
+    if (g_Task->step_index != 0) {
         Scene_EffectSetMatrix();
         Scene_DrawBands(0x20, 0x50, 0x1F);
         func_801D240C();
@@ -194,11 +194,11 @@ MATCH void func_801D12A8(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_SpadWork->ticker = (u8)(RANDOM_MASK(0xF));
-    g_SpadWork->timer  = 0;
-    g_SpadWork->band   = 0;
+    g_Task->ticker = (u8)(RANDOM_MASK(0xF));
+    g_Task->timer  = 0;
+    g_Task->band   = 0;
 
-    work                          = g_SpadWork;
+    work                          = g_Task;
     counter                       = work->orbit_seed << 5;
     VOL(s32, work->orbit_counter) = counter;
     angle                         = SCE10EFF_ORBIT_ANGLE(counter);
@@ -207,12 +207,12 @@ MATCH void func_801D12A8(void) {
     D_1F800000                    = 0x20;
 
     velocity     = rcos(angle) * D_1F800000;
-    work         = g_SpadWork;
+    work         = g_Task;
     work->proj_x = D_801D2744->proj_x + velocity;
 
     velocity        = rsin(*angle_cell) * D_1F800000;
     source          = D_801D2744;
-    scratch         = g_SpadWork;
+    scratch         = g_Task;
     scratch->proj_y = source->proj_y + velocity;
     scratch->proj_z = (u16)source->proj_z;
     scratch->step_index++;
@@ -239,9 +239,9 @@ MATCH void func_801D1544(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_SpadWork->ticker++;
+    g_Task->ticker++;
 
-    work                          = g_SpadWork;
+    work                          = g_Task;
     counter                       = work->orbit_counter + 1;
     VOL(s32, work->orbit_counter) = counter;
     angle                         = SCE10EFF_ORBIT_ANGLE(counter);
@@ -250,13 +250,13 @@ MATCH void func_801D1544(void) {
     D_1F800000                    = 0x20;
 
     velocity     = rcos(angle) * D_1F800000;
-    work         = g_SpadWork;
+    work         = g_Task;
     work->proj_x = D_801D2744->proj_x + velocity;
 
-    velocity           = rsin(*angle_cell) * D_1F800000;
-    g_SpadWork->proj_y = D_801D2744->proj_y + velocity;
+    velocity       = rsin(*angle_cell) * D_1F800000;
+    g_Task->proj_y = D_801D2744->proj_y + velocity;
 
-    if (TIMER_EXPIRED(g_SpadWork->band)) {
+    if (TIMER_EXPIRED(g_Task->band)) {
         D_801D2744->ticker++;
         Actor_Clear();
     }
@@ -278,7 +278,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
     s32              tpage;
     s32              shade;
     s32              i;
-    work        = g_SpadWork;
+    work        = g_Task;
     depth_cell  = &D_1F800000;
     prev        = &D_1F800014[2];
     quad        = prev - 2;
@@ -296,7 +296,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
     GFX_AddPrim(2, 0x0C);
     radius_base = (s16)radius;
     do {
-        work    = g_SpadWork;
+        work    = g_Task;
         cell[0] = ((work->ticker + i) & 0xF) << 8;
         if (RANDOM_MASK(1)) {
             new_var  = (s16)jitter_mask;
@@ -451,9 +451,9 @@ INCLUDE_ASM(Scene_DrawBands);
 #endif
 
 MATCH void func_801D1D58(void) {
-    D_801D2734[g_SpadWork->step_index]();
+    D_801D2734[g_Task->step_index]();
     func_801D2658();
-    if (g_SpadWork->step_index != 0) {
+    if (g_Task->step_index != 0) {
         Scene_EffectSetMatrix();
         func_801D218C();
         func_801D240C();
@@ -468,11 +468,11 @@ MATCH void func_801D1DE0(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_SpadWork->ticker = (u8)(RANDOM_MASK(0xF));
-    g_SpadWork->timer  = 0;
-    g_SpadWork->band   = 0;
+    g_Task->ticker = (u8)(RANDOM_MASK(0xF));
+    g_Task->timer  = 0;
+    g_Task->band   = 0;
 
-    work                          = g_SpadWork;
+    work                          = g_Task;
     counter                       = (work->orbit_seed << 5) + 0x10;
     angle                         = SCE10EFF_ORBIT_ANGLE(counter);
     VOL(s32, work->orbit_counter) = counter;
@@ -480,12 +480,12 @@ MATCH void func_801D1DE0(void) {
     *angle_cell                   = angle;
     D_1F800000                    = 0x18;
 
-    velocity           = rcos(angle) * D_1F800000;
-    g_SpadWork->proj_x = D_801D2744->proj_x + velocity;
+    velocity       = rcos(angle) * D_1F800000;
+    g_Task->proj_x = D_801D2744->proj_x + velocity;
 
-    velocity           = rsin(*angle_cell) * D_1F800000;
-    g_SpadWork->proj_y = D_801D2744->proj_y + velocity;
+    velocity       = rsin(*angle_cell) * D_1F800000;
+    g_Task->proj_y = D_801D2744->proj_y + velocity;
 
-    g_SpadWork->proj_z = (u16)D_801D2744->proj_z;
-    g_SpadWork->step_index++;
+    g_Task->proj_z = (u16)D_801D2744->proj_z;
+    g_Task->step_index++;
 }

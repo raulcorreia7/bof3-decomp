@@ -11,15 +11,15 @@ MATCH void func_801D11C0(void) {
         return;
     }
     if (D_8014930E >= 0x39) {
-        g_SpadWork->state_02 = 3;
+        g_Task->step = 3;
     }
-    g_SpadWork->unk_2A              = D_80145EBA;
-    g_SpadWork->unk_49              = D_80145ED9;
-    g_SpadWork->unk_4A              = D_80145EDA;
-    g_SpadWork->unk_4B              = D_80145EDB;
-    *(s32*)&g_SpadWork->source_50   = D_80145EE0;
-    *(s32*)((u8*)g_SpadWork + 0x54) = D_80145EE4;
-    *(u16*)((u8*)g_SpadWork + 0x58) = D_80145EE8;
-    *(u16*)((u8*)g_SpadWork + 0x5A) = D_80145EEA;
+    g_Task->unk_2A              = D_80145EBA;
+    g_Task->unk_49              = D_80145ED9;
+    g_Task->unk_4A              = D_80145EDA;
+    g_Task->unk_4B              = D_80145EDB;
+    *(s32*)&g_Task->source_50   = D_80145EE0;
+    *(s32*)((u8*)g_Task + 0x54) = D_80145EE4;
+    *(u16*)((u8*)g_Task + 0x58) = D_80145EE8;
+    *(u16*)((u8*)g_Task + 0x5A) = D_80145EEA;
     Area_AddActor();
 }

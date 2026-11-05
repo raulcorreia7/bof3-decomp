@@ -11,7 +11,7 @@ MATCH void func_800C2310(void) {
     if ((func_8014DAEC() & BYTE_MASK) != 0) {
         battler = &g_BattleActiveBattler;
         index   = *battler;
-        work    = (PartyBattler*)g_SpadWork;
+        work    = (PartyBattler*)g_Task;
         delta_x = D_801EB630[index - 3].coord_x_34 - work->coord_x_34.raw;
         if (delta_x < 0) {
             delta_x += 0xF;
@@ -29,7 +29,7 @@ MATCH void func_800C2310(void) {
             delta_z += 0xF;
         }
         work->unk_18 = delta_z >> 4;
-        work->unk_02++;
+        work->step++;
         func_8014DAEC();
     }
 }

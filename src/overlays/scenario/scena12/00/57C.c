@@ -13,15 +13,15 @@ MATCH void func_801F717C(void) {
 }
 
 MATCH void func_801F71B8(void) {
-    SYS_DISPATCH_TASK(D_801FD184, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FD184, 2, g_Task);
 }
 
 MATCH void func_801F71FC(void) {
     Actor* actor;
 
     D_801FD288.half = (rand() & 1) << 15;
-    actor           = g_SpadWork;
-    actor->state_02 = actor->state_02 + 1;
+    actor           = g_Task;
+    actor->step     = actor->step + 1;
 }
 
 INCLUDE_ASM(func_801F7240);
@@ -42,7 +42,7 @@ MATCH void func_801F7348(void) {
 }
 
 MATCH void func_801F73CC(void) {
-    SYS_DISPATCH_TASK(D_801FD190, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FD190, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801F7410);
@@ -74,15 +74,15 @@ MATCH void func_801F75EC(void) {
 INCLUDE_ASM(Menu_DrawHeaderBar);
 
 MATCH void func_801F7BA8(void) {
-    SYS_DISPATCH_TASK(D_801FD198, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FD198, 1, g_Task);
 }
 
 MATCH void func_801F7BEC(void) {
     Actor* actor;
 
-    actor         = g_SpadWork;
+    actor         = g_Task;
     actor->unk_2E = 0;
-    actor->unk_01 = actor->unk_01 + 1;
+    actor->mode   = actor->mode + 1;
     SND_PlayCue(EMI_CUE_ID(2, 21));
 }
 

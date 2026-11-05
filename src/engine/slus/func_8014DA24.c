@@ -11,24 +11,24 @@ MATCH u8 func_8014DA24(void) {
     u16 index;
     u16 prev;
 
-    result             = 0;
-    count              = g_SpadWork->unk_4A - 1;
-    g_SpadWork->unk_4A = count;
+    result         = 0;
+    count          = g_Task->unk_4A - 1;
+    g_Task->unk_4A = count;
     if ((count & BYTE_MASK) == 0) {
-        if (g_SpadWork->script_pc == 0) {
-            g_SpadWork->script_pc = g_SpadWork->unk_49 * 2;
-            result                = 1;
+        if (g_Task->script_pc == 0) {
+            g_Task->script_pc = g_Task->unk_49 * 2;
+            result            = 1;
         }
 
-        index                 = g_SpadWork->script_pc;
-        prev                  = index - 1;
-        g_SpadWork->script_pc = prev;
-        selected              = *(u8*)(g_SpadWork->source_50 + prev);
-        index                 = index - 2;
-        g_SpadWork->script_pc = index;
-        g_SpadWork->unk_4A    = *(u8*)(g_SpadWork->source_50 + index);
+        index             = g_Task->script_pc;
+        prev              = index - 1;
+        g_Task->script_pc = prev;
+        selected          = *(u8*)(g_Task->source_50 + prev);
+        index             = index - 2;
+        g_Task->script_pc = index;
+        g_Task->unk_4A    = *(u8*)(g_Task->source_50 + index);
 
-        g_SpadWork->unk_5A = (u16) * (u16*)(g_SpadWork->range_54.table + selected * 2);
+        g_Task->unk_5A = (u16) * (u16*)(g_Task->range_54.table + selected * 2);
     }
     return result;
 }

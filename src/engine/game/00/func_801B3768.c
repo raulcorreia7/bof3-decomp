@@ -57,13 +57,13 @@ MATCH void func_801B3768(void) {
         }
         slot_index = g_GameState->slot_12D;
         if (!(g_Actors[slot_index].unk_0B & 1)) {
-            saved_work = g_SpadWork;
-            g_SpadWork = &g_Actors[slot_index];
+            saved_work = g_Task;
+            g_Task     = &g_Actors[slot_index];
             Actor_SelectScript(1U);
-            g_SpadWork = saved_work;
+            g_Task = saved_work;
         }
     }
-    work             = g_SpadWork;
+    work             = g_Task;
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    work->state_02   = (u8)(work->state_02 + 1);
+    work->step       = (u8)(work->step + 1);
 }

@@ -2,13 +2,13 @@
 
 MATCH void func_801D6CC0(void) {
     if (ACTOR_IN_USE(g_BattlePartyBattlers[0])) {
-        g_BattlePartyBattlers[0].step_01 = 2u;
+        g_BattlePartyBattlers[0].mode = 2u;
     }
     if (ACTOR_IN_USE(g_BattlePartyBattlers[1])) {
-        g_BattlePartyBattlers[1].step_01 = 2u;
+        g_BattlePartyBattlers[1].mode = 2u;
     }
     if (ACTOR_IN_USE(g_BattlePartyBattlers[2])) {
-        g_BattlePartyBattlers[2].step_01 = 2u;
+        g_BattlePartyBattlers[2].mode = 2u;
     }
     if ((g_BattleOptions & BATTLE_OPT_KEEP_BGM) == 0u) {
         SND_StopAllSequences();

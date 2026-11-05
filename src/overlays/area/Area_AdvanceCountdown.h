@@ -1,6 +1,6 @@
-/* Advances the countdown at g_SpadWork +0x30 by 0x10: when it reaches zero or
+/* Advances the countdown at g_Task +0x30 by 0x10: when it reaches zero or
  * below the state byte moves to 1 and, if g_GameStateIndex is 0, cue 0x201 plays;
- * the frame update then runs with the mode taken from the sign of g_SpadWork
+ * the frame update then runs with the mode taken from the sign of g_Task
  * +0x32. One definition shared by the world03 area overlays; members keep the
  * explicit Actor view because not every member unit defines the view macro.
  * Every change here must verify every member address.
@@ -9,15 +9,15 @@
 MATCH void Area_AdvanceCountdown(void) {
     u16 count;
 
-    count                        = ((Actor*)g_SpadWork)->unk_30 - 0x10;
-    ((Actor*)g_SpadWork)->unk_30 = count;
+    count                    = ((Actor*)g_Task)->unk_30 - 0x10;
+    ((Actor*)g_Task)->unk_30 = count;
     if ((s16)count <= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x201U);
         }
-        ((Actor*)g_SpadWork)->state_02 = 1;
+        ((Actor*)g_Task)->step = 1;
     }
-    if ((s16)((Actor*)g_SpadWork)->unk_32 != 0) {
+    if ((s16)((Actor*)g_Task)->unk_32 != 0) {
         Area_Update(0);
     } else {
         Area_Update(-1);

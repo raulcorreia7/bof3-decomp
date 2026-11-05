@@ -14,7 +14,7 @@ MATCH s32 func_801BDF08(void) {
     s32    offset;
     s8     found;
 
-    work   = g_SpadWork;
+    work   = g_Task;
     found  = 0;
     step_x = g_FacingSteps[work->direction_08].x;
     step_y = D_80181B98[work->direction_08 * 2];
@@ -25,7 +25,7 @@ MATCH s32 func_801BDF08(void) {
         pos_y += step_y;
     }
     dist    = Area_ReadHeight(pos_x, pos_y);
-    counter = g_SpadWork->z.part.integer;
+    counter = g_Task->z.part.integer;
     diff    = counter - dist;
     if (ABS(diff) > 0x100) {
         dist = counter;
@@ -33,7 +33,7 @@ MATCH s32 func_801BDF08(void) {
     for (i = 0, offset = 0; i < 34; i++, offset += ACTOR_SIZE) {
         if (((u8*)g_Actors)[offset] != 0 && !((&D_8014688F)[offset] & 0x80)) {
             rec = (Actor*)((u8*)g_Actors + offset);
-            if (func_801BDD58(pos_x, pos_y, dist, g_SpadWork->state_70.byte, rec) & BYTE_MASK) {
+            if (func_801BDD58(pos_x, pos_y, dist, g_Task->state_70.byte, rec) & BYTE_MASK) {
                 found        = 1;
                 rec->roll_90 = FIELD(u16, D_80146918, offset) + 1;
             }
@@ -41,7 +41,7 @@ MATCH s32 func_801BDF08(void) {
     }
     if (found != 0) {
         g_GameState->counter_11C.u8_value = 3;
-        g_SpadWork->unk_09                = 0;
+        g_Task->unk_09                    = 0;
     }
     return found;
 }

@@ -8,7 +8,7 @@ MATCH u8 func_801A2DB4(Actor* entity) {
     u8     route;
     Actor* work;
 
-    work  = g_SpadWork;
+    work  = g_Task;
     route = work->direction_08;
     delta = D_80145EC4;
     dx    = work->x.fixed - delta;
@@ -25,16 +25,16 @@ MATCH u8 func_801A2DB4(Actor* entity) {
         if ((dy >> 0x10) < FIELD(s16, entity, 0x8Eu)) {
             status = func_801A2ED4(entity, 0U);
             if ((status & BYTE_MASK) == GAME_NONE) {
-                g_SpadWork->unk_09 = 0;
+                g_Task->unk_09 = 0;
                 return 0xFFU;
             }
             if ((route & 7) != (status & BYTE_MASK)) {
                 /* FAKE: basic-block boundary pins handler status. */
                 /* FAKE: ORDER_LOCK keeps this statement in place; without it the match is 93.06%. */
-                ORDER_LOCK(g_SpadWork->direction_08 = status);
+                ORDER_LOCK(g_Task->direction_08 = status);
                 entity->flags_74 |= ACTOR_FLAG_MOVING;
             }
-            return g_SpadWork->direction_08;
+            return g_Task->direction_08;
         }
         goto block_11; /* the two records share the exit */
     }

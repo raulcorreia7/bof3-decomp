@@ -15,18 +15,18 @@ MATCH void func_800C20CC(void) {
     index = Battle_AllocEffect(3, 6);
     if ((index & BYTE_MASK) != GAME_NONE) {
         slot                                             = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
-        *slot                                            = *(BattleWorkImage*)g_SpadWork;
+        *slot                                            = *(BattleWorkImage*)g_Task;
         g_BattleEffects[index & BYTE_MASK].unk_06        = 3;
         g_BattleEffects[index & BYTE_MASK].handler_index = 6;
-        g_BattleEffects[index & BYTE_MASK].unk_01        = 1;
-        g_BattleEffects[index & BYTE_MASK].unk_02        = 0;
+        g_BattleEffects[index & BYTE_MASK].mode          = 1;
+        g_BattleEffects[index & BYTE_MASK].step          = 0;
         g_BattleEffects[index & BYTE_MASK].unk_03        = 0;
         g_BattleEffects[index & BYTE_MASK].unk_04        = 0;
-        g_BattleEffects[index & BYTE_MASK].unk_00        = g_BattleEffects[index & BYTE_MASK].unk_00 & 0xBF;
-        work                                             = SPAD_WORK_BYTES;
+        g_BattleEffects[index & BYTE_MASK].flags         = g_BattleEffects[index & BYTE_MASK].flags & 0xBF;
+        work                                             = TASK_BYTES;
         g_BattleEffects[index & BYTE_MASK].target.bytes  = work;
         g_BattleEffects[index & BYTE_MASK].unk_0B        = work[0xB];
-        work                                             = SPAD_WORK_BYTES;
+        work                                             = TASK_BYTES;
         if (work[0xB] != 0) {
             work[0xB]--;
         }
@@ -37,7 +37,7 @@ MATCH void func_800C20CC(void) {
         if (func_800AF5FC(&g_BattlePartyBattlers[*kind], 0x10000) != 0) {
             Actor_SelectScript(5);
             func_800A9820(*kind);
-            work = SPAD_WORK_BYTES;
+            work = TASK_BYTES;
             work[2]++;
         }
     } else {
@@ -45,7 +45,7 @@ MATCH void func_800C20CC(void) {
         if (func_800AF5FC(&g_BattleEnemies[*kind * 0x118], 0x10000) != 0) {
             Actor_SelectScript(5);
             func_800A9820(*kind);
-            work = SPAD_WORK_BYTES;
+            work = TASK_BYTES;
             work[2]++;
         }
     }

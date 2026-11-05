@@ -24,7 +24,7 @@
  * battle/battle/03 overlay; the call sites in this target fix the parameter roles
  * named in the prototypes below. */
 /* Typed view of the scratchpad work area; each use reloads the cell. */
-#define BATTLE_WORK                    ((PartyBattler*)g_SpadWork)
+#define BATTLE_WORK                    ((PartyBattler*)g_Task)
 #define BATTLE_ACTIVE_MESSAGE_SLOT_PTR (*(volatile void**)&g_BattleMessageSlot)
 #define BATTLE_ACTIVE_ROW              ((PartyBattler*)g_BattleMessageSlot)
 /* Fixed-address bases, tables, and rodata pointers. The raw literals live only
@@ -159,12 +159,12 @@ typedef struct BattleStatDisplayTemplate {
 ASSERT_SIZE(BattleStatDisplayTemplate, 0x18);
 
 /* Battle-local work row (stride 0x140 at g_BattlePartyBattlers). Offsets 0x24..0x4B
- * are the g_SpadWork stores in func_800ADD44 (retail asm byte/half/word
+ * are the g_Task stores in func_800ADD44 (retail asm byte/half/word
  * widths, matching its exact twin func_800ADA4C). +0x120/+0x124/+0x128 alias
- * D_80145FB0 (u8), D_80145FB4[i].flags_00 (u32) and D_80145FB8[i].flags
+ * D_80145FB0 (u8), D_80145FB4[i].flags (u32) and D_80145FB8[i].flags
  * (u32); 0x9F..0xA3 is the element-slot byte run func_800A2AE0 reads. */
 typedef struct BattlePlayerDamageStatus {
-    volatile u32 flags_00;
+    volatile u32 flags;
     volatile u32 flags_04;
     u8           pad_08[0x138];
 } BattlePlayerDamageStatus;
@@ -172,7 +172,7 @@ typedef struct BattlePlayerDamageStatus {
 ASSERT_SIZE(BattlePlayerDamageStatus, 0x140);
 
 typedef struct BattleEnemyDamageStatus {
-    volatile u32 flags_00;
+    volatile u32 flags;
     volatile u32 flags_04;
     u8           pad_08[0x110];
 } BattleEnemyDamageStatus;
@@ -988,9 +988,9 @@ static inline void Battle_DispatchEffect(BattleHandlerTable3* table) {
     PartyBattler*       work;
 
     handlers     = *table;
-    work         = (PartyBattler*)g_SpadWork;
+    work         = (PartyBattler*)g_Task;
     g_ScriptBank = 0x800F0800;
-    ((Callback*)&handlers)[work->step_01]();
+    ((Callback*)&handlers)[work->mode]();
     g_ScriptBank = 0x800D3800;
 }
 
@@ -1101,9 +1101,9 @@ static inline void BattleRunHandlerQuad(s32 offset) {
     PartyBattler*     work;
 
     handlers = *(BattleHandlerQuad*)((Callback*)&D_800969B8 + offset);
-    handlers.handlers[BATTLE_WORK->step_01]();
-    work = (PartyBattler*)g_SpadWork;
-    if ((work->flags_00 != 0u) && (work->step_01 != 0u)) {
+    handlers.handlers[BATTLE_WORK->mode]();
+    work = (PartyBattler*)g_Task;
+    if ((work->flags != 0u) && (work->mode != 0u)) {
         func_800AE9C4(work->unk_04);
     }
 }

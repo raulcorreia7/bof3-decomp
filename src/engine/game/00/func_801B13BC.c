@@ -15,14 +15,14 @@ MATCH void func_801B13BC(void) {
     flag     = D_1F800008;
     counter  = &D_1F800004;
     *counter = value;
-    if ((flag != 0) && (g_FacingOffsets[g_SpadWork->direction_08].x > 0)) {
+    if ((flag != 0) && (g_FacingOffsets[g_Task->direction_08].x > 0)) {
         *counter = value + 1;
     }
     value2    = D_1F80000E;
     flag2     = D_1F80000C;
     counter2  = &D_1F800006;
     *counter2 = value2;
-    if ((flag2 != 0) && (g_FacingOffsets[g_SpadWork->direction_08].y > 0)) {
+    if ((flag2 != 0) && (g_FacingOffsets[g_Task->direction_08].y > 0)) {
         *counter2 = value2 + 1;
     }
 }

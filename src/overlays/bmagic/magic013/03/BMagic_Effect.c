@@ -18,25 +18,25 @@ MATCH void func_801EEEA0(void) {
     selector = (u8*)&g_BattleTargetSelector;
     if (!(Battle_SlotIsBlocked(*selector) & 0xFF) && (func_800AED5C(1, *selector) & 0xFF)) {
         slot                               = Battle_AllocEffect(1, 0x48) & BYTE_MASK;
-        work                               = g_SpadWork;
+        work                               = g_Task;
         g_BattleEffects[slot].unk_04       = 4;
         g_BattleEffects[slot].unk_09       = 0x18;
         g_BattleEffects[slot].unk_0A       = 4;
         g_BattleEffects[slot].target.party = work;
-        g_SpadWork->word_08.byte.unk_0B += 1;
+        g_Task->word_08.byte.unk_0B += 1;
     }
-    g_SpadWork->step_01 += 1;
+    g_Task->mode += 1;
 }
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEFD0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EF014(void) {
-    SYS_DISPATCH_BYTE(D_801F03C0, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0) {
+    SYS_DISPATCH_BYTE(D_801F03C0, g_Task->step);
+    if (g_Task->flags != 0) {
         func_801EF4F0();
         func_801EF79C();
         PopMatrix();
@@ -58,7 +58,7 @@ MATCH void func_801EF484(void) {
     PartyBattler* work;
     PartyBattler* active;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (work->word_08.byte.unk_0B == 0) {
         work->unk_04 = work->unk_04 - 1;
         if (work->unk_04 == 0) {
@@ -78,12 +78,12 @@ INCLUDE_ASM(func_801EF79C);
 INCLUDE_ASM(func_801EFAA8);
 
 MATCH void func_801EFDB4(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 1, g_SpadWork);
+    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 1, g_Task);
 }
 
 MATCH void func_801EFDF8(void) {
-    SYS_DISPATCH_BYTE(D_801F03DC, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->word_08.byte.unk_09 != 0) {
+    SYS_DISPATCH_BYTE(D_801F03DC, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->word_08.byte.unk_09 != 0) {
         func_801F00A8();
         func_801F0164();
         PopMatrix();
@@ -103,10 +103,10 @@ MATCH void func_801F00A8(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    rot.vz = g_SpadWork->word_08.byte.unk_09 << 6;
-    pos.vx = (g_SpadWork->coord_x_34.raw >> 9) - 0x4000;
-    pos.vy = (g_SpadWork->coord_y_38.raw >> 9) - 0x4000;
-    pos.vz = -g_SpadWork->word_3C.half.span_3E / 2;
+    rot.vz = g_Task->word_08.byte.unk_09 << 6;
+    pos.vx = (g_Task->coord_x_34.raw >> 9) - 0x4000;
+    pos.vy = (g_Task->coord_y_38.raw >> 9) - 0x4000;
+    pos.vz = -g_Task->word_3C.half.span_3E / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);

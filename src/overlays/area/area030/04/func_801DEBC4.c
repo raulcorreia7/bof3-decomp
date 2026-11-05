@@ -14,8 +14,8 @@ MATCH void func_801DEBC4(void) {
         D_801E3200 = 0;
         Area_FindSceneRecord(*(u16*)(D_801E2AC8 + FISHING_STATE->cue_index_06 * 0x24));
 
-        work           = FISHING_STATE;
-        work->flags_00 = (u8)(work->flags_00 | ACTOR_FLAG_SEMI_TRANSPARENT);
+        work        = FISHING_STATE;
+        work->flags = (u8)(work->flags | ACTOR_FLAG_SEMI_TRANSPARENT);
 
         panel                     = FISHING_STATE;
         panel->state_2A           = D_801E2331[panel->counter_08 * 2];

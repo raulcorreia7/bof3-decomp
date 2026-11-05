@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-#define WORK ((Actor*)g_SpadWork)
+#define WORK ((Actor*)g_Task)
 
 MATCH void func_801A68C0(u8* script) {
     s16*   counter = (s16*)&D_1F800000;
@@ -19,17 +19,17 @@ MATCH void func_801A68C0(u8* script) {
 
     tile               = g_GameAreaId;
     offset             = script[9] * 8;
-    g_SpadWork         = &g_Actors[slot];
+    g_Task             = &g_Actors[slot];
     GAME_WORK_AREA_PTR = &g_Actors[slot];
     rows               = g_Actors;
 
-    tile                     = FIELD(s32, g_AreaLoads[tile], 8u) + offset;
-    g_SpadWork->direction_08 = script[0] & 0xF;
+    tile                 = FIELD(s32, g_AreaLoads[tile], 8u) + offset;
+    g_Task->direction_08 = script[0] & 0xF;
     func_801A4AA8();
     func_8015AC8C(tile);
     func_801A4B80(4);
 
-    work = g_SpadWork;
+    work = g_Task;
     x    = script[2] << 16;
     if (script[1] != 0) {
         x |= 0x8000;
@@ -41,14 +41,14 @@ MATCH void func_801A68C0(u8* script) {
     }
     work->y.fixed = y;
 
-    g_SpadWork->z.part.integer    = Area_SampleHeight(work->x.fixed, y);
-    g_SpadWork->unk_01            = script[5];
-    g_SpadWork->state_02          = script[7];
-    g_SpadWork->unk_06            = script[0] >> 4;
-    g_SpadWork->gravity           = 0;
-    g_SpadWork->unk_1C            = 0;
-    g_SpadWork->unk_18            = 0;
-    FIELD(s32, g_SpadWork, 0x70u) = FIELD(u8, g_SpadWork->range_54.table, 0x2u);
+    g_Task->z.part.integer    = Area_SampleHeight(work->x.fixed, y);
+    g_Task->mode              = script[5];
+    g_Task->step              = script[7];
+    g_Task->unk_06            = script[0] >> 4;
+    g_Task->gravity           = 0;
+    g_Task->unk_1C            = 0;
+    g_Task->unk_18            = 0;
+    FIELD(s32, g_Task, 0x70u) = FIELD(u8, g_Task->range_54.table, 0x2u);
 
     rows[*counter].unk_88                         = 0;
     rows[*counter].unk_84                         = 0;
@@ -60,10 +60,10 @@ MATCH void func_801A68C0(u8* script) {
 
     func_801A4990(script + 8);
 
-    g_SpadWork->tint.signed_bytes.unk_5D = -0x80;
-    g_SpadWork->tint.signed_bytes.unk_5F = -0x80;
-    g_SpadWork->tint.signed_bytes.unk_5E = -0x80;
-    g_SpadWork->tint.bytes.flags         = 2;
+    g_Task->tint.signed_bytes.unk_5D = -0x80;
+    g_Task->tint.signed_bytes.unk_5F = -0x80;
+    g_Task->tint.signed_bytes.unk_5E = -0x80;
+    g_Task->tint.bytes.flags         = 2;
 
     if (D_80146900[*counter][0] == 0) {
         Area_SetCellCode(WORK->x.part.integer, WORK->y.part.integer, 0x10);

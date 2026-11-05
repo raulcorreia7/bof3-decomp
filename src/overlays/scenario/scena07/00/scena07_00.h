@@ -42,8 +42,8 @@ extern u16 D_800E4C1E;
     func_801F88B8(MEM_PTR(void, 0x800E48E0u)); \
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \
     D_800E4C1E -= 0xC;                         \
-    if (--g_SpadWork->unk_09 == 0) {           \
-        g_SpadWork->state_02++;                \
+    if (--g_Task->unk_09 == 0) {               \
+        g_Task->step++;                        \
     }
 s32 func_801F85D8(void);
 s32 func_801F9EFC(void);

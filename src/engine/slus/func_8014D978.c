@@ -11,10 +11,10 @@ MATCH u8 func_8014D978(void) {
     u16    index;
     u8     result;
 
-    first_work = g_SpadWork;
+    first_work = g_Task;
     result     = 0;
     if (--first_work->unk_4A == 0) {
-        work  = g_SpadWork;
+        work  = g_Task;
         index = work->script_pc;
         if ((index >> 1) == work->unk_49) {
             work->script_pc = 0;

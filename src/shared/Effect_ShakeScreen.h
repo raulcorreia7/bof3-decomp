@@ -6,11 +6,11 @@ MATCH void Effect_ShakeScreen(void) {
     {
         PartyBattler* work;
 
-        work         = (PartyBattler*)g_SpadWork;
+        work         = (PartyBattler*)g_Task;
         work->unk_5D = -(work->word_08.byte.unk_0B * 16);
-        work         = (PartyBattler*)g_SpadWork;
+        work         = (PartyBattler*)g_Task;
         work->unk_5F = -(work->word_08.byte.unk_0B * 16);
-        work         = (PartyBattler*)g_SpadWork;
+        work         = (PartyBattler*)g_Task;
         work->unk_5E = -(work->word_08.byte.unk_0B * 16);
     }
     func_8014DAEC();
@@ -18,7 +18,7 @@ MATCH void Effect_ShakeScreen(void) {
         PartyBattler* work;
         u8            old;
 
-        work                      = (PartyBattler*)g_SpadWork;
+        work                      = (PartyBattler*)g_Task;
         old                       = work->word_08.byte.unk_09;
         work->word_08.byte.unk_09 = old + 255;
         if (old == 0) {

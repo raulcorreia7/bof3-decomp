@@ -10,7 +10,7 @@ MATCH u16 Actor_ReadState(void) {
     u32    value;
     s32    result;
 
-    record = g_SpadWork;
+    record = g_Task;
     if (record->unk_4A == 1) {
         value = record->script_pc;
         if (((u16)value >> 1) == record->unk_49) {

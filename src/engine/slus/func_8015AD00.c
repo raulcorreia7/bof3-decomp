@@ -53,24 +53,24 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
     vec = D_80149BF0;
     PushMatrix();
-    count = (s8)g_SpadWork->range_54.table[0];
+    count = (s8)g_Task->range_54.table[0];
     func_8015B410(&m);
     SetRotMatrix(&m);
     SetTransMatrix(&m);
-    if (g_SpadWork->unk_48 == 0) {
-        normal.vx = normal.vy = normal.vz = g_SpadWork->unk_40;
+    if (g_Task->unk_48 == 0) {
+        normal.vx = normal.vy = normal.vz = g_Task->unk_40;
         ScaleMatrix(&m, &normal);
     }
     light = m;
-    func_8015B2AC(D_801481B8.m[0], &g_SpadWork->unk_64);
+    func_8015B2AC(D_801481B8.m[0], &g_Task->unk_64);
     func_8015B4B0(&light);
     SetLightMatrix(&D_801481B8);
 
-    abr = g_SpadWork->range_54.table[3];
+    abr = g_Task->range_54.table[3];
     if ((abr & 0x40) == 0) {
         abr = 2;
     }
-    piece = (PanelPiece*)g_SpadWork->source_50;
+    piece = (PanelPiece*)g_Task->source_50;
     tpage = GetTPage(0, abr & 3, 704, 256);
     prim  = g_GfxPrimCursor;
     p     = prim;
@@ -171,16 +171,16 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
                 sort_list->z = z;
             }
 
-            sort_list->work      = (u8*)g_SpadWork;
+            sort_list->work      = (u8*)g_Task;
             sort_list->primitive = p;
-            quad->ft4.r0         = g_SpadWork->tint.bytes.unk_5D;
-            quad->ft4.g0         = g_SpadWork->tint.bytes.unk_5E;
-            quad->ft4.b0         = g_SpadWork->tint.bytes.unk_5F;
-            if ((g_SpadWork->range_54.table[3] & 0x80) != 0) {
+            quad->ft4.r0         = g_Task->tint.bytes.unk_5D;
+            quad->ft4.g0         = g_Task->tint.bytes.unk_5E;
+            quad->ft4.b0         = g_Task->tint.bytes.unk_5F;
+            if ((g_Task->range_54.table[3] & 0x80) != 0) {
                 VectorNormalS(&normal, D_1F800014);
-                color.r  = g_SpadWork->tint.bytes.unk_5D;
-                color.g  = g_SpadWork->tint.bytes.unk_5E;
-                color.b  = g_SpadWork->tint.bytes.unk_5F;
+                color.r  = g_Task->tint.bytes.unk_5D;
+                color.g  = g_Task->tint.bytes.unk_5E;
+                color.b  = g_Task->tint.bytes.unk_5F;
                 color.cd = quad->ft4.code;
                 NormalColorCol(D_1F800014, &color, (CVECTOR*)&quad->ft4.r0);
             }

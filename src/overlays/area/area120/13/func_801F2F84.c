@@ -1,7 +1,7 @@
 #include "area120_13.h"
 
 MATCH void func_801F2F84(void) {
-    Actor* actor = g_SpadWork;
+    Actor* actor = g_Task;
     RECT   rect;
 
     actor->unk_09--;
@@ -11,6 +11,6 @@ MATCH void func_801F2F84(void) {
         rect.w = D_801F43BC;
         rect.h = D_801F43BE;
         StoreImage(&rect, (u32*)AREA_WORK);
-        g_SpadWork->unk_01++;
+        g_Task->mode++;
     }
 }

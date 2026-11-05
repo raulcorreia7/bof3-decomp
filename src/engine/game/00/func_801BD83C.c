@@ -10,11 +10,11 @@ MATCH void func_801BD83C(void) {
     s32 offset;
     s32 value;
 
-    offset   = g_SpadWork->unk_06 * BATTLE_PARTY_STRIDE;
+    offset   = g_Task->unk_06 * BATTLE_PARTY_STRIDE;
     mode     = ((u8*)D_80145FBB)[offset];
     screen_y = FIELD(u16, &D_80145ECE, offset);
     if (mode == 3) {
-        value = g_SpadWork->z.part.integer;
+        value = g_Task->z.part.integer;
         diff  = value - (s16)screen_y;
         if (diff < 0) {
             diff = -diff;
@@ -25,7 +25,7 @@ MATCH void func_801BD83C(void) {
             result = 3;
         }
     } else {
-        alt    = g_SpadWork->z.part.integer;
+        alt    = g_Task->z.part.integer;
         result = ((s16)screen_y < alt) * 2;
     }
     kind = result & BYTE_MASK;

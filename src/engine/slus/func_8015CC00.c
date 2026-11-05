@@ -11,7 +11,7 @@ MATCH s32 func_8015CC00(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z) {
     slot_index = Actor_FindFreeSlot() & BYTE_MASK;
     if (slot_index != GAME_NONE) {
         offset                                = (u32)slot_index * 0x74u;
-        g_ActorSlots[slot_index].flags_00     = 1;
+        g_ActorSlots[slot_index].flags        = 1;
         g_ActorSlots[slot_index].type         = 0x19;
         g_ActorSlots[slot_index].unk_06       = id;
         g_ActorSlots[slot_index].step_0C      = (s8)step;

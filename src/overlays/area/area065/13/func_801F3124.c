@@ -1,5 +1,5 @@
 /* Dropping the volatile cell changes the code: retail reloads it. */
-#define SPAD_WORK_VOLATILE
+#define TASK_VOLATILE
 #include "area065_13.h"
 
 MATCH void func_801F3124(void) {
@@ -14,10 +14,10 @@ MATCH void func_801F3124(void) {
     u32 window;
     u32 window_span;
 
-    scratch               = g_SpadWork;
+    scratch               = g_Task;
     scratch->option_flags = scratch->unk_0B;
 
-    check = g_SpadWork;
+    check = g_Task;
     if (check->unk_0B == 1) {
         key = g_GameContextSeed;
         i   = 0;
@@ -29,7 +29,7 @@ MATCH void func_801F3124(void) {
         i = next + 4;
         goto scan; /* the key is always in the table */
     } else {
-        scratch = g_SpadWork;
+        scratch = g_Task;
         state   = scratch->unk_0B;
         if (state == 2) {
             mode = 3;
@@ -44,13 +44,13 @@ MATCH void func_801F3124(void) {
 
 found:
     window_span     = 0x10000;
-    scratch         = g_SpadWork;
+    scratch         = g_Task;
     window          = 2;
     scratch->unk_18 = key;
     scratch->unk_40 = 0;
     scratch->unk_44 = window_span;
     scratch->unk_48 = window;
-    scratch         = g_SpadWork;
+    scratch         = g_Task;
     scratch->unk_09 = 8;
     mode            = MEM(WorldMapKey, D_801F4DB4 + i).mode;
     goto tail;
@@ -68,11 +68,11 @@ arm:
     scratch->unk_44 = window_span;
     window          = 2;
     scratch->unk_48 = window;
-    scratch         = g_SpadWork;
+    scratch         = g_Task;
     scratch->unk_09 = 8;
 tail:
     Actor_SelectScript(mode);
 
-    check         = g_SpadWork;
-    check->unk_01 = window;
+    check       = g_Task;
+    check->mode = window;
 }

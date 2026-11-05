@@ -22,10 +22,10 @@ MATCH void func_801DE82C(void) {
                     work->cue_index_06 != FISHING_IDLE_CUE) {
                     D_801E3200 = 1;
                     Area_FindSceneRecord(*(u16*)(D_801E2ACA + work->cue_index_06 * sizeof(FishingSceneCue)));
-                    if (!(*(u8*)g_SpadWork & ACTOR_FLAG_OFFSCREEN)) {
+                    if (!(*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN)) {
                         SND_PlayCue(EMI_CUE_ID(2, 6));
                     }
-                    FISHING_STATE->flags_00 &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+                    FISHING_STATE->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
                     FISHING_STATE->state_2A   = 0;
                     FISHING_STATE->counter_48 = 0;
                     Actor_SelectScript(0);

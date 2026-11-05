@@ -8,19 +8,19 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/BMagic_RunStep.h"
 
 MATCH void func_801EECB0(void) {
-    g_SpadWork->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw;
-    g_SpadWork->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw;
-    g_SpadWork->word_3C.word   = BATTLE_ACTIVE_WORK->word_3C.word;
+    g_Task->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw;
+    g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw;
+    g_Task->word_3C.word   = BATTLE_ACTIVE_WORK->word_3C.word;
     GFX_CopyPalette(0x1A);
     g_GfxPalettePending += 1;
-    g_SpadWork->step_01 += 1;
+    g_Task->mode += 1;
 }
 
 MATCH void func_801EED2C(void) {
     BattleResultRings table;
 
     table = D_801EEC10;
-    SYS_DISPATCH_TASK(table.handlers, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(table.handlers, 2, g_Task);
 }
 
 MATCH void func_801EED98(void) {
@@ -29,26 +29,26 @@ MATCH void func_801EED98(void) {
 
     SND_QueueSelectionFx(0x101);
     SND_QueueSelectionFx(0x102);
-    temp_s0    = g_SpadWork;
-    g_SpadWork = D_801EC2E0->target.party;
+    temp_s0 = g_Task;
+    g_Task  = D_801EC2E0->target.party;
     Actor_SelectScript(3U);
-    g_SpadWork                         = temp_s0;
+    g_Task                             = temp_s0;
     slot                               = Battle_AllocEffect(1, 0x41) & BYTE_MASK;
-    g_BattleEffects[slot].unk_01       = 1;
-    g_BattleEffects[slot].unk_02       = 0;
-    g_BattleEffects[slot].target.party = g_SpadWork;
-    g_SpadWork->unk_02 += 1;
+    g_BattleEffects[slot].mode         = 1;
+    g_BattleEffects[slot].step         = 0;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_Task->step += 1;
 }
 
 MATCH void func_801EEE50(void) {
     PartyBattler* temp_s0;
 
-    temp_s0    = g_SpadWork;
-    g_SpadWork = D_801EC2E0->target.party;
+    temp_s0 = g_Task;
+    g_Task  = D_801EC2E0->target.party;
     func_8014DAEC();
-    g_SpadWork                        = temp_s0;
-    temp_s0->word_08.byte.unk_09      = 0;
-    g_SpadWork->word_08.byte.timer_0A = 0;
+    g_Task                        = temp_s0;
+    temp_s0->word_08.byte.unk_09  = 0;
+    g_Task->word_08.byte.timer_0A = 0;
 }
 
 /* Scheduling residual: one spad cell read hoists above the row stores and one tail instruction is
@@ -57,9 +57,9 @@ MATCH void func_801EEE50(void) {
 INCLUDE_ASM(func_801EEEB0);
 
 MATCH void func_801EEFA4(void) {
-    if (g_SpadWork->word_08.byte.unk_09 == g_SpadWork->word_08.byte.timer_0A) {
-        g_SpadWork->step_01 += 1;
-        g_SpadWork->unk_02 = 0;
+    if (g_Task->word_08.byte.unk_09 == g_Task->word_08.byte.timer_0A) {
+        g_Task->mode += 1;
+        g_Task->step = 0;
     }
 }
 
@@ -76,7 +76,7 @@ MATCH void func_801EF02C(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC20;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
 }
 
 MATCH void func_801EF08C(void) {
@@ -84,8 +84,8 @@ MATCH void func_801EF08C(void) {
 
     handlers     = D_801EEC2C;
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
-    if (g_SpadWork->flags_00 & 1) {
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    if (g_Task->flags & 1) {
         func_8014D290();
     }
     g_ScriptBank = 0x800D3800;
@@ -115,15 +115,15 @@ MATCH void func_801EF55C(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC38;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
 }
 
 MATCH void func_801EF5BC(void) {
-    g_SpadWork->word_08.byte.unk_09   = 0;
-    g_SpadWork->word_08.byte.timer_0A = D_801EFADC[g_SpadWork->word_08.byte.unk_09];
+    g_Task->word_08.byte.unk_09   = 0;
+    g_Task->word_08.byte.timer_0A = D_801EFADC[g_Task->word_08.byte.unk_09];
     SND_QueueSelectionFx(256);
-    g_SpadWork->unk_10 = 0;
-    g_SpadWork->unk_02++;
+    g_Task->unk_10 = 0;
+    g_Task->step++;
 }
 
 /* The local-table dispatch (Callback table[2] = {func_801EF7A0, func_801EF7E0}) is right; the body
@@ -135,7 +135,7 @@ INCLUDE_ASM(func_801EF620);
 MATCH void func_801EF7A0(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (work->unk_10 >= -2) {
         work->unk_10--;
     } else {
@@ -146,7 +146,7 @@ MATCH void func_801EF7A0(void) {
 MATCH void func_801EF7E0(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (work->unk_10 < 0) {
         work->unk_10++;
     } else {
@@ -163,8 +163,8 @@ MATCH void func_801EF83C(void) {
 
     handlers     = D_801EEC44;
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
-    if ((g_SpadWork->flags_00 & 1) && (D_801EB4E0->word_08.byte.timer_0A == 0)) {
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    if ((g_Task->flags & 1) && (D_801EB4E0->word_08.byte.timer_0A == 0)) {
         func_8014D290();
     }
     g_ScriptBank = 0x800D3800;
@@ -176,39 +176,39 @@ MATCH void func_801EF900(void) {
     s32           temp_a0;
     s8            tone;
 
-    g_SpadWork->coord_x_34.raw = D_801EB4E0->coord_x_34.raw - 1;
-    g_SpadWork->coord_y_38.raw = D_801EB4E0->coord_y_38.raw - 1;
-    temp_a0                    = g_SpadWork->coord_x_34.raw;
+    g_Task->coord_x_34.raw     = D_801EB4E0->coord_x_34.raw - 1;
+    g_Task->coord_y_38.raw     = D_801EB4E0->coord_y_38.raw - 1;
+    temp_a0                    = g_Task->coord_x_34.raw;
     temp_v0                    = Area_SampleHeight(temp_a0, temp_a0);
-    work                       = g_SpadWork;
+    work                       = g_Task;
     work->unk_25               = 0x1D;
     work->word_3C.half.span_3E = temp_v0;
-    g_SpadWork->unk_26         = 0;
-    g_SpadWork->unk_48         = 1;
-    g_SpadWork->unk_27         = 0xA0;
-    g_SpadWork->unk_28         = 0;
-    g_SpadWork->unk_24         = 4;
+    g_Task->unk_26             = 0;
+    g_Task->unk_48             = 1;
+    g_Task->unk_27             = 0xA0;
+    g_Task->unk_28             = 0;
+    g_Task->unk_24             = 4;
     tone                       = -0x80;
-    g_SpadWork->unk_5D         = tone;
-    g_SpadWork->unk_5E         = tone;
-    g_SpadWork->unk_5F         = tone;
-    g_SpadWork->unk_5C         = 0;
-    g_SpadWork->unk_2A         = 0;
-    g_SpadWork->unk_29         = 4;
-    g_SpadWork->unk_2C.half    = 0;
+    g_Task->unk_5D             = tone;
+    g_Task->unk_5E             = tone;
+    g_Task->unk_5F             = tone;
+    g_Task->unk_5C             = 0;
+    g_Task->unk_2A             = 0;
+    g_Task->unk_29             = 4;
+    g_Task->unk_2C.half        = 0;
     Actor_SelectScript(0U);
-    g_SpadWork->unk_02 += 1;
+    g_Task->step += 1;
 }
 
 MATCH void func_801EFA38(void) {
     s32 temp_a0;
 
-    g_SpadWork->coord_x_34.raw       = D_801EB4E0->coord_x_34.raw - 1;
-    g_SpadWork->coord_y_38.raw       = D_801EB4E0->coord_y_38.raw - 1;
-    temp_a0                          = g_SpadWork->coord_x_34.raw;
-    g_SpadWork->word_3C.half.span_3E = Area_SampleHeight(temp_a0, temp_a0);
-    if (!(1 & D_801EB4E0->flags_00)) {
-        g_SpadWork->unk_02 += 1;
+    g_Task->coord_x_34.raw       = D_801EB4E0->coord_x_34.raw - 1;
+    g_Task->coord_y_38.raw       = D_801EB4E0->coord_y_38.raw - 1;
+    temp_a0                      = g_Task->coord_x_34.raw;
+    g_Task->word_3C.half.span_3E = Area_SampleHeight(temp_a0, temp_a0);
+    if (!(1 & D_801EB4E0->flags)) {
+        g_Task->step += 1;
     }
 }
 

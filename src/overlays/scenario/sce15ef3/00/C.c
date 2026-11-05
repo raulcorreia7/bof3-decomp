@@ -15,21 +15,21 @@ MATCH void func_801D0C0C(void) {
 MATCH void func_801D0C48(void) {
     u8* work;
 
-    work                   = (u8*)g_SpadWork;
+    work                   = (u8*)g_Task;
     FIELD(s32, work, 0x34) = D_80145EC4;
     FIELD(s32, work, 0x38) = D_80145EC8;
     FIELD(s32, work, 0x3C) = D_80145ECC;
     func_801D16DC();
     func_801D19A0();
-    work    = (u8*)g_SpadWork;
+    work    = (u8*)g_Task;
     work[9] = 0x78;
-    work    = (u8*)g_SpadWork;
+    work    = (u8*)g_Task;
     work[1]++;
 }
 
 MATCH void func_801D0CC4(void) {
     if (g_AreaDrawFlags == 0) {
-        g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
+        g_Task->mode = g_Task->mode + 1;
     } else {
         func_801D1A60();
         func_801D18CC();
@@ -41,15 +41,15 @@ MATCH void func_801D0D18(void) {
 }
 
 MATCH void func_801D0D38(void) {
-    SYS_DISPATCH_TASK(D_801D27CC, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D27CC, 1, g_Task);
 }
 
 MATCH void func_801D0D7C(void) {
     u8* work;
 
-    work    = (u8*)g_SpadWork;
+    work    = (u8*)g_Task;
     work[9] = 8;
-    work    = (u8*)g_SpadWork;
+    work    = (u8*)g_Task;
     work[1]++;
 }
 
@@ -58,7 +58,7 @@ INCLUDE_ASM(func_801D0DAC);
 INCLUDE_ASM(func_801D0E38);
 
 MATCH void func_801D0EAC(void) {
-    SYS_DISPATCH_TASK(D_801D27D8, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D27D8, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801D0EF0);
@@ -78,7 +78,7 @@ MATCH void func_801D1048(void) {
 }
 
 MATCH void func_801D1068(void) {
-    SYS_DISPATCH_TASK(D_801D27EC, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D27EC, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801D10AC);
@@ -93,45 +93,45 @@ MATCH void func_801D1370(void) {
     Actor* work;
     u8     timer;
 
-    work         = g_SpadWork;
+    work         = g_Task;
     work->unk_2E = work->unk_2E - 0x10;
     work->unk_30 = work->unk_30 - 0x10;
     func_801D230C();
-    timer              = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         Actor_Clear();
     }
 }
 
 MATCH void func_801D13DC(void) {
-    SYS_DISPATCH_TASK(D_801D2800, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D2800, 1, g_Task);
 }
 
 MATCH void func_801D1420(void) {
-    g_SpadWork->unk_09 = 0;
-    g_SpadWork->unk_06 = 0x10;
-    g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
+    g_Task->unk_09 = 0;
+    g_Task->unk_06 = 0x10;
+    g_Task->mode   = g_Task->mode + 1;
 }
 
 INCLUDE_ASM(func_801D1460);
 
 MATCH void func_801D14DC(void) {
-    g_SpadWork->unk_09 -= 0x10;
+    g_Task->unk_09 -= 0x10;
     if (g_AreaDrawFlags != 0) {
-        func_801D23AC(g_SpadWork->unk_09);
+        func_801D23AC(g_Task->unk_09);
     }
-    if (g_SpadWork->unk_09 == 0) {
+    if (g_Task->unk_09 == 0) {
         if (g_AreaDrawFlags == 0) {
             Actor_Clear();
         } else {
-            g_SpadWork->unk_01--;
+            g_Task->mode--;
         }
     }
 }
 
 MATCH void func_801D1588(void) {
-    SYS_DISPATCH_TASK(D_801D280C, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D280C, 1, g_Task);
 }
 
 #include "../../Scene_ClearScanBarsAndAdvance.h"

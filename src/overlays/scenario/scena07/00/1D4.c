@@ -13,7 +13,7 @@ MATCH void func_801F6DD4(void) {
 }
 
 MATCH void func_801F6E10(void) {
-    SYS_DISPATCH_TASK(D_801FDD3C, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FDD3C, 2, g_Task);
 }
 
 MATCH void func_801F6E54(void) {
@@ -28,15 +28,15 @@ MATCH void func_801F6E54(void) {
 MATCH void func_801F6E90(void) {
     u8* row;
 
-    if ((g_SpadWork->vx & 7) == 0) {
+    if ((g_Task->vx & 7) == 0) {
         row = func_801F8394();
         if (row != NULL) {
             func_801F83D0(row);
         }
     }
     func_801F85D8();
-    if (--g_SpadWork->vx == 0) {
-        g_SpadWork->state_02++;
+    if (--g_Task->vx == 0) {
+        g_Task->step++;
     }
 }
 
@@ -47,7 +47,7 @@ MATCH void func_801F6F14(void) {
 }
 
 MATCH void func_801F6F48(void) {
-    SYS_DISPATCH_TASK(D_801FDD48, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FDD48, 2, g_Task);
 }
 
 MATCH void func_801F6F8C(void) {
@@ -59,15 +59,15 @@ MATCH void func_801F6F8C(void) {
 }
 
 MATCH void func_801F6FB0(void) {
-    func_801F3C3C(g_SpadWork->vy);
-    g_SpadWork->vy += (g_FrameCount & 0xF) == 0;
-    if (g_SpadWork->vy == 0) {
+    func_801F3C3C(g_Task->vy);
+    g_Task->vy += (g_FrameCount & 0xF) == 0;
+    if (g_Task->vy == 0) {
         Actor_Clear();
     }
 }
 
 MATCH void func_801F700C(void) {
-    SYS_DISPATCH_TASK(D_801FDD50, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FDD50, 2, g_Task);
 }
 
 MATCH void func_801F7050(void) {
@@ -76,7 +76,7 @@ MATCH void func_801F7050(void) {
     u8     i;
 
     /* FAKE: the second pointer reproduces retail's copy of the scratch pointer (move into a2). */
-    work       = g_SpadWork;
+    work       = g_Task;
     D_800E4C1E = 0xC0;
     actor      = work;
     actor->vz  = 0;
@@ -87,8 +87,8 @@ MATCH void func_801F7050(void) {
         actor->z.fixed += actor->vz;
     }
     SND_PlayCue(0x202);
-    g_SpadWork->vz = -g_SpadWork->vz;
-    g_SpadWork->state_02++;
+    g_Task->vz = -g_Task->vz;
+    g_Task->step++;
 }
 
 INCLUDE_ASM(func_801F70F8);
@@ -114,7 +114,7 @@ MATCH void func_801F73A4(void) {
 }
 
 MATCH void func_801F73C4(void) {
-    SYS_DISPATCH_TASK(D_801FDD70, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FDD70, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801F7408);
@@ -128,7 +128,7 @@ MATCH void func_801F75C0(void) {
 }
 
 MATCH void func_801F75F4(void) {
-    SYS_DISPATCH_TASK(D_801FDD8C, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FDD8C, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801F7638);
@@ -140,7 +140,7 @@ INCLUDE_ASM(func_801F77AC);
 INCLUDE_ASM(func_801F7810);
 
 MATCH void func_801F786C(void) {
-    SYS_DISPATCH_TASK(D_801FDDAC, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FDDAC, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801F78B0);
@@ -148,7 +148,7 @@ INCLUDE_ASM(func_801F78B0);
 INCLUDE_ASM(func_801F7960);
 
 MATCH void func_801F79EC(void) {
-    SYS_DISPATCH_TASK(D_801FDDB4, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FDDB4, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801F7A30);
@@ -162,7 +162,7 @@ MATCH void func_801F7B68(void) {
 }
 
 MATCH void func_801F7B9C(void) {
-    SYS_DISPATCH_TASK(D_801FDDC0, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FDDC0, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801F7BE0);
@@ -170,21 +170,21 @@ INCLUDE_ASM(func_801F7BE0);
 INCLUDE_ASM(func_801F7C9C);
 
 MATCH void func_801F7D28(void) {
-    SYS_DISPATCH_TASK(D_801FDDC8, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FDDC8, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801F7D6C);
 
 MATCH void func_801F7DDC(void) {
     func_801FA38C();
-    g_SpadWork->vx = g_SpadWork->vx - 1;
-    if (g_SpadWork->vx == 0) {
+    g_Task->vx = g_Task->vx - 1;
+    if (g_Task->vx == 0) {
         Actor_Clear();
     }
 }
 
 MATCH void func_801F7E24(void) {
-    SYS_DISPATCH_TASK(D_801FDDD0, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FDDD0, 2, g_Task);
 }
 
 MATCH void func_801F7E68(void) {
@@ -194,21 +194,21 @@ MATCH void func_801F7E68(void) {
     for (i = 0; i < 32; i++) {
         func_801F88B8(MEM_PTR(void, 0x800E48E0u));
     }
-    if (g_SpadWork->unk_06 != 0) {
+    if (g_Task->unk_06 != 0) {
         SND_PlayCue(0x203);
     }
-    g_SpadWork->state_02++;
+    g_Task->step++;
 }
 
 MATCH void func_801F7EF8(void) {
     func_801F88B8(MEM_PTR(void, 0x800E48E0u));
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
-    g_SpadWork->x.fixed += g_SpadWork->vx;
-    g_SpadWork->y.fixed += g_SpadWork->vy;
-    g_SpadWork->z.fixed += g_SpadWork->vz;
-    if (g_SpadWork->x.fixed == g_SpadWork->unk_18 && g_SpadWork->y.fixed == g_SpadWork->unk_1C) {
-        g_SpadWork->unk_09 = 0x2F;
-        g_SpadWork->state_02++;
+    g_Task->x.fixed += g_Task->vx;
+    g_Task->y.fixed += g_Task->vy;
+    g_Task->z.fixed += g_Task->vz;
+    if (g_Task->x.fixed == g_Task->unk_18 && g_Task->y.fixed == g_Task->unk_1C) {
+        g_Task->unk_09 = 0x2F;
+        g_Task->step++;
     }
 }
 
@@ -424,9 +424,9 @@ MATCH ActorSlot* func_801FD610(u8 arg0) {
     index = Actor_FindFreeSlot() & 0xFF;
     slot  = &g_ActorSlots[index];
     if (index != 0xFF) {
-        slot->flags_00 = 1;
-        slot->type     = 0x49;
-        slot->unk_01   = arg0;
+        slot->flags = 1;
+        slot->type  = 0x49;
+        slot->mode  = arg0;
     }
     return slot;
 }

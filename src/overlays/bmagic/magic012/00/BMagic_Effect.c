@@ -13,30 +13,30 @@ INCLUDE_ASM(func_801EEC5C);
 INCLUDE_ASM(func_801EEEAC);
 
 MATCH void func_801EEFF8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EF03C(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 2, g_SpadWork);
+    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 2, g_Task);
 }
 
 MATCH void func_801EF080(void) {
     u8 value;
 
-    value                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = value;
+    value                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = value;
     if (!(value & 0xFF)) {
-        g_SpadWork->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
-        g_SpadWork->unk_0C                 = 0x20000;
-        g_SpadWork->unk_10                 = 0;
-        func_801DD350(g_SpadWork);
-        g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw + g_SpadWork->unk_0C;
-        g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw + g_SpadWork->unk_10;
-        g_SpadWork->word_3C.half.span_3E  = (u16)D_801EB4E0->word_3C.half.span_3E + 0x100;
-        g_SpadWork->word_08.byte.unk_0B   = rand() & 7;
-        g_SpadWork->word_08.byte.unk_09   = 0x10;
-        g_SpadWork->word_08.byte.timer_0A = 0;
-        g_SpadWork->unk_02 += 1;
+        g_Task->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
+        g_Task->unk_0C                 = 0x20000;
+        g_Task->unk_10                 = 0;
+        func_801DD350(g_Task);
+        g_Task->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw + g_Task->unk_0C;
+        g_Task->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw + g_Task->unk_10;
+        g_Task->word_3C.half.span_3E  = (u16)D_801EB4E0->word_3C.half.span_3E + 0x100;
+        g_Task->word_08.byte.unk_0B   = rand() & 7;
+        g_Task->word_08.byte.unk_09   = 0x10;
+        g_Task->word_08.byte.timer_0A = 0;
+        g_Task->step += 1;
     }
 }
 

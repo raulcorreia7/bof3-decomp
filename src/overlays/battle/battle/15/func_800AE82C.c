@@ -31,6 +31,6 @@ MATCH void func_800AE82C(void) {
         tail_work->unk_2E.half -= 0x18;
         tail_work->unk_30.half -= tail_work->word_08.byte.timer_0A;
         BATTLE_WORK->word_08.byte.timer_0A = 1;
-        BATTLE_WORK->step_01 += 1;
+        BATTLE_WORK->mode += 1;
     }
 }

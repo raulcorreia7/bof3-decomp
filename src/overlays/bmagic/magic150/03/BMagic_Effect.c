@@ -13,17 +13,17 @@ MATCH void func_801EED60(void) {
 
     func_801EF6F8();
     func_801EF8EC();
-    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = timer;
     if (timer == 0) {
-        g_SpadWork->step_01 = g_SpadWork->step_01 + 1;
+        g_Task->mode = g_Task->mode + 1;
     }
 }
 
 MATCH void func_801EEDCC(void) {
     if (func_801EF8EC() == 0) {
-        g_SpadWork->word_08.byte.unk_09 = 4;
-        g_SpadWork->step_01             = g_SpadWork->step_01 + 1;
+        g_Task->word_08.byte.unk_09 = 4;
+        g_Task->mode                = g_Task->mode + 1;
     }
 }
 
@@ -35,11 +35,11 @@ MATCH void func_801EEEC4(void) {
     D_801EFAAC = ((g_FrameCount & 1) * 0x10) + 0x100;
     D_801EFAB0 -= 0x200;
     func_801EF254();
-    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = count;
+    count                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = count;
     if (!(count & 0xFF)) {
-        g_SpadWork->word_08.byte.unk_09 = 4;
-        g_SpadWork->step_01 += 1;
+        g_Task->word_08.byte.unk_09 = 4;
+        g_Task->mode += 1;
         func_800A9820(g_BattleTargetSelector);
         SND_PlayCue(0x102U);
     }

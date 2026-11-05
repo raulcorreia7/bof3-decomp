@@ -20,12 +20,12 @@ MATCH void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event) {
             work->event_flags = event->selector;
             break;
         case 2:
-            saved      = SPAD_WORK_BYTES;
-            g_SpadWork = (struct Task*)work;
+            saved  = TASK_BYTES;
+            g_Task = (struct Task*)work;
             func_800A36F0(work->slot, 0xFFFF);
-            func_800A31E0(((EnemyBattler*)(void*)g_SpadWork)->slot,
+            func_800A31E0(((EnemyBattler*)(void*)g_Task)->slot,
                           *(u8*)&((EnemyBattler*)(void*)work)->status_82 | event->selector);
-            g_SpadWork = (struct Task*)saved;
+            g_Task = (struct Task*)saved;
             break;
         case 3:
             mask = event->selector;

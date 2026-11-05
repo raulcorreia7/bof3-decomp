@@ -10,7 +10,7 @@ static inline void Effect_CountUpTimer(void) {
     PartyBattler* work;
     u8            next;
 
-    work                        = g_SpadWork;
+    work                        = g_Task;
     next                        = work->word_08.byte.timer_0A + 1;
     work->word_08.byte.timer_0A = next;
     if (next == 0xC) {

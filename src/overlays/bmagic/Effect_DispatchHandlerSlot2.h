@@ -6,5 +6,5 @@ MATCH void Effect_DispatchHandlerSlot2(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
 }

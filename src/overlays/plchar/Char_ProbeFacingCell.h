@@ -10,8 +10,8 @@ MATCH s32 Char_ProbeFacingCell(void) {
     s32 cx;
     s32 cy;
 
-    cx    = g_SpadWork->x.fixed + g_FacingSteps[g_SpadWork->direction_08].x * 2;
-    cy    = g_SpadWork->y.fixed + g_FacingSteps[g_SpadWork->direction_08].y * 2;
+    cx    = g_Task->x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;
+    cy    = g_Task->y.fixed + g_FacingSteps[g_Task->direction_08].y * 2;
     found = func_801BDE14(cx, cy, 0) != -1;
     hit   = found;
     /* FAKE: retail writes the flag to $v0 and copies it to $s1; keeping the

@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-/* blocker: tail regalloc; first diff: +0x80 `li v0,1` where retail reads g_SpadWork.
+/* blocker: tail regalloc; first diff: +0x80 `li v0,1` where retail reads g_Task.
  * Reordering the stores or hoisting work/result locals keeps 3 differ and +4 bytes, moving
  * the first diff to +0x70 (`andi a0,v0,0xff` against retail `andi v0,v0,0xff`); the draft
  * already returns the stored 1. Permuter 115k iterations, best score 480. */
@@ -26,7 +26,7 @@ NON_MATCHING s32 func_800AEEC8(s32 arg0, u8 arg1, s32 arg2) {
     g_BattleEffects[slot].unk_04       = mode;
     g_BattleEffects[slot].unk_09       = 1;
     g_BattleEffects[slot].unk_0A       = 0;
-    g_BattleEffects[slot].target.party = g_SpadWork;
+    g_BattleEffects[slot].target.party = g_Task;
     return 1;
 }
 #else

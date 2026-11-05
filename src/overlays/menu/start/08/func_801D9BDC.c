@@ -41,16 +41,16 @@ NON_MATCHING void func_801D9BDC(void) {
     *(u8*)(&D_801485DC) = 0;
     if (D_801ED678 != 0x7F) {
         tmp2                = (D_801ED67C * 3) + D_801ED678;
-        D_801485E0          = D_801EC4D0[tmp2].unk_00;
+        D_801485E0          = D_801EC4D0[tmp2].flags;
         *(u8*)(&D_801485DC) = 1;
-        D_801485E2          = D_801EC4D0[tmp2].unk_02;
+        D_801485E2          = D_801EC4D0[tmp2].step;
         D_801485E7          = 0;
         D_801485E6          = D_801EC4D0[tmp2].unk_04 + 1;
     }
     tmp3                            = ((s8)D_801ED66C * 3) + D_801ED668;
-    D_80148604                      = D_801EC4D0[tmp3].unk_00;
+    D_80148604                      = D_801EC4D0[tmp3].flags;
     FIELD(s8, (&D_801485DC), 0x24u) = 1;
-    D_80148606                      = D_801EC4D0[tmp3].unk_02;
+    D_80148606                      = D_801EC4D0[tmp3].step;
     val8                            = 0;
     D_8014860B                      = 1;
     D_8014860A                      = D_801EC4D0[tmp3].unk_04 + 1;

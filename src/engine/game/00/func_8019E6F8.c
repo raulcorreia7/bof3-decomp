@@ -5,7 +5,7 @@ MATCH void func_8019E6F8(void) {
     s32    value;
 
     func_8014D978();
-    work                 = g_SpadWork;
+    work                 = g_Task;
     value                = work->vz + work->gravity;
     work->vz             = value;
     work->z.part.integer = (u16)(work->z.part.integer + value);

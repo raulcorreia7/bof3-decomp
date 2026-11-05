@@ -17,26 +17,26 @@ MATCH void func_801F6EE8(void) {
     u8* second;
     u8* third;
 
-    first       = (u8*)g_SpadWork;
+    first       = (u8*)g_Task;
     first[0x5F] = 0;
     first[0x5E] = 0;
     first[0x5D] = 0;
 
-    second    = (u8*)g_SpadWork;
+    second    = (u8*)g_Task;
     second[9] = 0x0F;
 
-    third    = (u8*)g_SpadWork;
+    third    = (u8*)g_Task;
     third[1] = 1;
 }
 
 MATCH void func_801F6F24(void) {
-    g_SpadWork->unk_09 -= 1;
-    if (g_SpadWork->unk_09 != 0) {
-        g_SpadWork->tint.bytes.unk_5D += 7;
-        g_SpadWork->tint.bytes.unk_5E += 7;
-        g_SpadWork->tint.bytes.unk_5F += 7;
+    g_Task->unk_09 -= 1;
+    if (g_Task->unk_09 != 0) {
+        g_Task->tint.bytes.unk_5D += 7;
+        g_Task->tint.bytes.unk_5E += 7;
+        g_Task->tint.bytes.unk_5F += 7;
     } else {
-        g_SpadWork->unk_01 = 2;
+        g_Task->mode = 2;
     }
     func_801F6FF8();
     func_801F70DC();
@@ -54,61 +54,61 @@ MATCH void func_801F70DC(void) {
     Actor* actor2;
     s32    i;
 
-    actor = g_SpadWork;
+    actor = g_Task;
     i     = 0;
     do {
-        actor2     = &g_Actors[i & 0xFF];
-        g_SpadWork = actor2;
-        if ((actor2->flags_00 & 1) && (actor2->unk_06 == 6)) {
+        actor2 = &g_Actors[i & 0xFF];
+        g_Task = actor2;
+        if ((actor2->flags & 1) && (actor2->unk_06 == 6)) {
             actor2->unk_29 = 5;
             func_8014D290();
         }
         i += 1;
     } while ((u32)(i & 0xFF) < 0x1EU);
-    g_SpadWork = actor;
+    g_Task = actor;
 }
 
 MATCH void func_801F7198(void) {
-    SYS_DISPATCH_TASK(D_801FBEFC, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FBEFC, 1, g_Task);
 }
 
 MATCH void func_801F71DC(void) {
     Actor* work;
 
-    work                    = g_SpadWork;
+    work                    = g_Task;
     work->tint.bytes.unk_5F = 0;
     work->tint.bytes.unk_5E = 0;
     work->tint.bytes.unk_5D = 0;
-    g_SpadWork->unk_0B      = 0x33;
-    Message_StartAreaMessage(g_SpadWork->unk_0B);
-    g_GameStateIndex   = GAME_REQUEST_MESSAGE;
-    g_SpadWork->unk_01 = 1;
+    g_Task->unk_0B          = 0x33;
+    Message_StartAreaMessage(g_Task->unk_0B);
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    g_Task->mode     = 1;
 }
 
 MATCH void func_801F7248(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        g_SpadWork->unk_09 = 0x1E;
-        g_SpadWork->unk_01 = 2;
+        g_Task->unk_09 = 0x1E;
+        g_Task->mode   = 2;
     }
     func_801F7484();
     func_801F7568();
 }
 
 MATCH void func_801F72A0(void) {
-    g_SpadWork->unk_09 -= 1;
-    if (g_SpadWork->unk_09 != 0) {
-        g_SpadWork->tint.bytes.unk_5D += 2;
-        g_SpadWork->tint.bytes.unk_5E += 2;
-        g_SpadWork->tint.bytes.unk_5F += 2;
+    g_Task->unk_09 -= 1;
+    if (g_Task->unk_09 != 0) {
+        g_Task->tint.bytes.unk_5D += 2;
+        g_Task->tint.bytes.unk_5E += 2;
+        g_Task->tint.bytes.unk_5F += 2;
     } else {
-        g_SpadWork->unk_09 = 0x1E;
-        g_SpadWork->unk_01 = 3;
+        g_Task->unk_09 = 0x1E;
+        g_Task->mode   = 3;
     }
     func_801F7484();
     func_801F7568();
 }
 
-/* nonmatching: the draft with one `work = g_SpadWork` base for the three tint stores is exact except retail compares `andi v1,a1,0xFF` against 0x37 with the area message index in a1 (candidate omits the andi, 0xE4 against 0xE8 bytes); u8, s32, masked and volatile spellings of the index all fold the andi. */
+/* nonmatching: the draft with one `work = g_Task` base for the three tint stores is exact except retail compares `andi v1,a1,0xFF` against 0x37 with the area message index in a1 (candidate omits the andi, 0xE4 against 0xE8 bytes); u8, s32, masked and volatile spellings of the index all fold the andi. */
 INCLUDE_ASM(func_801F735C);
 
 MATCH void func_801F7444(void) {
@@ -125,19 +125,19 @@ MATCH void func_801F7568(void) {
     Actor* work;
     Actor* actor;
 
-    work          = g_SpadWork;
+    work          = g_Task;
     actor         = &g_Actors[work->unk_06];
-    g_SpadWork    = actor;
+    g_Task        = actor;
     actor->unk_29 = 2;
     func_8014D290();
-    g_SpadWork = (Actor*)g_BattlePartyBattlers;
+    g_Task     = (Actor*)g_BattlePartyBattlers;
     D_80145EB9 = 2;
     func_8014D290();
-    g_SpadWork = work;
+    g_Task = work;
 }
 
 MATCH void func_801F75F8(void) {
-    SYS_DISPATCH_TASK(D_801FBF10, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801FBF10, 1, g_Task);
 }
 
 MATCH void func_801F763C(void) {
@@ -156,24 +156,24 @@ MATCH void func_801F763C(void) {
         return;
     }
 
-    slots                             = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][3]].flags_00 = 1;
-    slots                             = SP_PTR(u8*, 0u);
-    slots[0x11][4]                    = Actor_FindFree();
-    slots                             = SP_PTR(u8*, 0u);
+    slots                          = SP_PTR(u8*, 0u);
+    g_Actors[slots[0x11][3]].flags = 1;
+    slots                          = SP_PTR(u8*, 0u);
+    slots[0x11][4]                 = Actor_FindFree();
+    slots                          = SP_PTR(u8*, 0u);
     if (slots[0x11][4] == GAME_NONE) {
-        slots                             = SP_PTR(u8*, 0u);
-        g_Actors[slots[0x11][3]].flags_00 = 0;
+        slots                          = SP_PTR(u8*, 0u);
+        g_Actors[slots[0x11][3]].flags = 0;
         return;
     }
 
-    scratch                           = (s16*)D_1F800000;
-    data                              = (u8*)D_801FBF20;
-    slots                             = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].flags_00 = 1;
-    slots                             = SP_PTR(u8*, 0u);
-    work                              = slots[0x11];
-    *scratch                          = work[3];
+    scratch                        = (s16*)D_1F800000;
+    data                           = (u8*)D_801FBF20;
+    slots                          = SP_PTR(u8*, 0u);
+    g_Actors[slots[0x11][4]].flags = 1;
+    slots                          = SP_PTR(u8*, 0u);
+    work                           = slots[0x11];
+    *scratch                       = work[3];
     func_801A4D54(data);
     *scratch = work[4];
     func_801A4D54(data);
@@ -181,9 +181,9 @@ MATCH void func_801F763C(void) {
 
     g_Actors[work[3]].y.fixed -= 0x10000;
     g_Actors[work[4]].y.fixed += 0x10000;
-    g_Actors[work[3]].flags_00 |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Actors[work[3]].flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].flags_00 |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Actors[slots[0x11][4]].flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots                                     = SP_PTR(u8*, 0u);
     cell                                      = slots[0x11];
     cell4                                     = cell[4];
@@ -203,10 +203,10 @@ INCLUDE_ASM(func_801F7958);
 INCLUDE_ASM(func_801F7A1C);
 
 MATCH void func_801F7C24(void) {
-    g_Actors[g_SpadWork->unk_03].flags_00 = 0;
-    g_Actors[g_SpadWork->unk_04].flags_00 = 0;
-    func_80196718(&g_Actors[g_SpadWork->unk_03]);
-    func_80196718(&g_Actors[g_SpadWork->unk_04]);
+    g_Actors[g_Task->unk_03].flags = 0;
+    g_Actors[g_Task->unk_04].flags = 0;
+    func_80196718(&g_Actors[g_Task->unk_03]);
+    func_80196718(&g_Actors[g_Task->unk_04]);
     func_80196070();
 }
 

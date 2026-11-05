@@ -3,7 +3,7 @@
 MATCH void func_801F2C8C(void) {
     Actor* actor;
 
-    actor           = g_SpadWork;
+    actor           = g_Task;
     g_AreaSceneMode = 2;
-    actor->state_02++;
+    actor->step++;
 }

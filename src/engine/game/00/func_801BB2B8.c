@@ -31,7 +31,7 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
     hy0        = y0 << 16;
     xpack.h.hi = x1;
     ypack.h.hi = y1;
-    work       = g_SpadWork;
+    work       = g_Task;
 
     if (work->x.part.fraction == 0) {
         if (work->state_70.byte == 0)
@@ -40,7 +40,7 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
         hx0 = (hx0 + (xpack.w & -0x10000)) / 2;
     }
 
-    work = g_SpadWork;
+    work = g_Task;
     if (work->y.part.fraction == 0) {
         if (work->state_70.byte == 0)
             hy0 = (hy0 + (ypack.w & -0x10000)) / 2;
@@ -108,7 +108,7 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
     return code1 & BYTE_MASK;
 
 case80:
-    work = g_SpadWork;
+    work = g_Task;
     if (work->unk_05 != 0)
         return 0xFF;
 block43:
@@ -122,7 +122,7 @@ case10:
     low = code1 & BYTE_MASK;
     if (low != 0x11)
         return 0xFF;
-    work = g_SpadWork;
+    work = g_Task;
     if (work == (Actor*)&D_8014626C)
         bit = D_80146277 & 1;
     else
@@ -178,7 +178,7 @@ caseA0:
         }
         if (low == 0xAF)
             return 0xA1;
-        work = g_SpadWork;
+        work = g_Task;
         if (work->unk_05 != 0)
             return 0xFF;
         return low;

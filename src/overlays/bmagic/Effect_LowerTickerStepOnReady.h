@@ -3,6 +3,6 @@
 MATCH void Effect_LowerTickerStepOnReady(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
-        g_SpadWork->unk_02++;
+        g_Task->step++;
     }
 }

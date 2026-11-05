@@ -26,10 +26,10 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             break;
         case 0x82:
-            state->flags_00 |= ACTOR_FLAG_FADE_WHITE;
+            state->flags |= ACTOR_FLAG_FADE_WHITE;
             break;
         case 0x83:
-            state->flags_00 |= ACTOR_FLAG_FADE_BLACK;
+            state->flags |= ACTOR_FLAG_FADE_BLACK;
             break;
         case 0x84: {
             volatile Actor* work;

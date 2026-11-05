@@ -6,16 +6,16 @@ MATCH void func_8019B024(void) {
     s16    counter;
     s32    diff;
 
-    dist    = Area_SampleHeight(g_SpadWork->x.fixed, g_SpadWork->y.fixed);
-    counter = g_SpadWork->z.part.integer;
-    if ((counter >= dist + 0x80) || (counter < dist) || (g_SpadWork->flags_00 & ACTOR_FLAG_OFFSCREEN)) {
-        work = g_SpadWork;
-        work->unk_01++;
+    dist    = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
+    counter = g_Task->z.part.integer;
+    if ((counter >= dist + 0x80) || (counter < dist) || (g_Task->flags & ACTOR_FLAG_OFFSCREEN)) {
+        work = g_Task;
+        work->mode++;
         SND_PlayCue(EMI_CUE_ID(1, 6));
     }
-    g_SpadWork->z.fixed += g_SpadWork->vz;
-    diff           = g_SpadWork->vz - g_SpadWork->gravity;
-    g_SpadWork->vz = diff;
+    g_Task->z.fixed += g_Task->vz;
+    diff       = g_Task->vz - g_Task->gravity;
+    g_Task->vz = diff;
     func_8014D978();
     Area_SetDrawMode();
 }

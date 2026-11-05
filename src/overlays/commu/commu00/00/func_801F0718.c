@@ -2,10 +2,10 @@
 
 /* Shapes the bytes prove: the pair handed to Area_SampleHeight is read through the
  * D_801468BC/D_801468C0 byte views of the slot's packed fields (a
- * g_SpadWork-relative read emits a materialized base plus zero-displacement
+ * g_Task-relative read emits a materialized base plus zero-displacement
  * loads instead); variant_state and the distance pair go through the
  * g_Actors array expression while mode, state, unk_34/36/38/3a/3e,
- * source_index and resource_id go through the g_SpadWork scratch pointer; the
+ * source_index and resource_id go through the g_Task scratch pointer; the
  * unk_3A store precedes unk_38 and the unk_3E store precedes source_index. No
  * .rodata table is involved, so the jump-table alignment residual of
  * func_801F08D8 cannot apply here. */
@@ -17,27 +17,27 @@
 MATCH void func_801F0718(u8 source_index, u8 task_index) {
     s16 distance;
 
-    g_SpadWork         = &g_Actors[task_index];
-    g_SpadWork->unk_06 = 1;
+    g_Task         = &g_Actors[task_index];
+    g_Task->unk_06 = 1;
 
     if (D_801F2568[task_index][2] != 0) {
-        g_SpadWork->unk_01          = 0;
+        g_Task->mode                = 0;
         g_Actors[task_index].unk_78 = 2;
-        g_SpadWork->state_02        = 1;
+        g_Task->step                = 1;
     } else {
-        g_SpadWork->unk_01          = 6;
+        g_Task->mode                = 6;
         g_Actors[task_index].unk_78 = 0;
         ACTOR_CLEAR_STATE();
     }
 
-    g_SpadWork->x.part.integer  = D_801F2568[task_index][0];
-    g_SpadWork->x.part.fraction = 0;
-    g_SpadWork->y.part.integer  = D_801F2568[task_index][1];
-    g_SpadWork->y.part.fraction = 0;
-    distance                    = Area_SampleHeight(*((u32*)&D_801468BC[(task_index & BYTE_MASK) * ACTOR_SIZE]),
-                                                    *((u32*)&D_801468C0[(task_index & BYTE_MASK) * ACTOR_SIZE]));
-    g_SpadWork->z.part.integer  = distance;
-    g_SpadWork->unk_05          = source_index;
-    Area_FindSceneRecord(D_801F24FC[g_SpadWork->unk_05 % 6]);
-    func_8015BAC4(g_SpadWork->direction_08);
+    g_Task->x.part.integer  = D_801F2568[task_index][0];
+    g_Task->x.part.fraction = 0;
+    g_Task->y.part.integer  = D_801F2568[task_index][1];
+    g_Task->y.part.fraction = 0;
+    distance                = Area_SampleHeight(*((u32*)&D_801468BC[(task_index & BYTE_MASK) * ACTOR_SIZE]),
+                                                *((u32*)&D_801468C0[(task_index & BYTE_MASK) * ACTOR_SIZE]));
+    g_Task->z.part.integer  = distance;
+    g_Task->unk_05          = source_index;
+    Area_FindSceneRecord(D_801F24FC[g_Task->unk_05 % 6]);
+    func_8015BAC4(g_Task->direction_08);
 }

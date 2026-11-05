@@ -5,13 +5,13 @@ MATCH void func_801F39BC(void) {
     Actor* e;
     s32    idx;
 
-    s = (Actor*)&g_Actors[((u8*)g_SpadWork)[0x0B]];
-    s->flags_00 |= ACTOR_FLAG_HIDDEN;
-    s          = g_SpadWork;
-    idx        = ((u8*)s)[0x0B];
-    e          = &g_Actors[idx];
-    g_SpadWork = (Actor*)e;
+    s = (Actor*)&g_Actors[((u8*)g_Task)[0x0B]];
+    s->flags |= ACTOR_FLAG_HIDDEN;
+    s      = g_Task;
+    idx    = ((u8*)s)[0x0B];
+    e      = &g_Actors[idx];
+    g_Task = (Actor*)e;
     Actor_SelectScript(1);
-    g_SpadWork = s;
+    g_Task = s;
     Actor_Clear();
 }

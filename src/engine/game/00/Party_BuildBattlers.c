@@ -11,14 +11,14 @@ MATCH void Party_BuildBattlers(u32 mode) {
     }
     for (i = 0; i < g_PartySize; i++) {
         g_GameState = (GameState*)(((u8*)g_BattlePartyBattlers) + (i * BATTLE_PARTY_STRIDE));
-        g_SpadWork  = (Actor*)(((u8*)g_BattlePartyBattlers) + (i * BATTLE_PARTY_STRIDE));
+        g_Task      = (Actor*)(((u8*)g_BattlePartyBattlers) + (i * BATTLE_PARTY_STRIDE));
         *(((u8*)g_BattlePartyBattlers) + (i * 0x140)) = 1;
         entry_table                                   = D_80144F5A;
-        g_SpadWork->unk_05                            = i;
+        g_Task->unk_05                                = i;
         ((void (*)(u8, u8))func_801C1254)(*((entry_table + ((mode & BYTE_MASK) * 3)) + i), i);
-        *((u8*)(((u8*)g_SpadWork) + 0x48))  = 0;
-        *((u32*)(((u8*)g_SpadWork) + 0x40)) = 0x10000;
-        *((u32*)(((u8*)g_SpadWork) + 0x44)) = 0x10000;
+        *((u8*)(((u8*)g_Task) + 0x48))      = 0;
+        *((u32*)(((u8*)g_Task) + 0x40))     = 0x10000;
+        *((u32*)(((u8*)g_Task) + 0x44))     = 0x10000;
         kind                                = g_CharSlot[*((entry_table + ((mode & BYTE_MASK) * 3)) + i)];
         D_80145FCC[i * BATTLE_PARTY_STRIDE] = kind;
         slot_offset                         = i * BATTLE_PARTY_STRIDE;
@@ -28,7 +28,7 @@ MATCH void Party_BuildBattlers(u32 mode) {
         *((((u8*)g_BattlePartyBattlers) + 0x12C) + slot_offset) &= 0xFE;
         if ((mode & BYTE_MASK) != 0) {
             if ((g_Characters[D_80145FCC[slot_offset]].status & STATUS_POISONED) != 0) {
-                GFX_AllocPaletteFade((void*)g_SpadWork, -4, -8, 0, 0);
+                GFX_AllocPaletteFade((void*)g_Task, -4, -8, 0, 0);
             }
         } else {
             func_801C3204();

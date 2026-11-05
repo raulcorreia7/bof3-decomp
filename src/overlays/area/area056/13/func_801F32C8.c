@@ -4,9 +4,9 @@ MATCH void func_801F32C8(void) {
     Actor* actor;
     s16    height;
 
-    g_SpadWork->flags_00 &= 0xBF;
-    height                = Area_ReadHeight(g_SpadWork->x.fixed, g_SpadWork->y.fixed);
-    actor                 = g_SpadWork;
+    g_Task->flags &= 0xBF;
+    height                = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
+    actor                 = g_Task;
     actor->z.part.integer = height + 0x7D0;
     actor->unk_04         = 1;
     actor->vx             = 0;

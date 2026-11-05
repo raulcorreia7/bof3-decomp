@@ -12,8 +12,8 @@ MATCH bool func_801D527C(void) {
             if ((g_BattlePartyBattlers[slot].flags_128.value & COMBATANT_FLAG_CHARGING) &&
                 (g_BattlePartyBattlers[slot].counter_136 == 3)) {
                 count++;
-                g_BattlePartyBattlers[slot].step_01     = 6;
-                g_BattlePartyBattlers[slot].unk_02      = 5;
+                g_BattlePartyBattlers[slot].mode        = 6;
+                g_BattlePartyBattlers[slot].step        = 5;
                 g_BattlePartyBattlers[slot].unk_120     = 0x11;
                 g_BattlePartyBattlers[slot].counter_136 = 0;
                 g_BattlePartyBattlers[slot].unk_04      = 0;
@@ -29,8 +29,8 @@ MATCH bool func_801D527C(void) {
             if ((ENEMY_COMBATANT(slot).flags_104 & COMBATANT_FLAG_CHARGING) &&
                 (g_BattlePartyBattlers[slot].counter_136 == 3)) {
                 count++;
-                ENEMY_COMBATANT(slot).step_01         = 6;
-                ENEMY_COMBATANT(slot).unk_02          = 5;
+                ENEMY_COMBATANT(slot).mode            = 6;
+                ENEMY_COMBATANT(slot).step            = 5;
                 ENEMY_COMBATANT(slot).target_flags_FC = 0x11;
                 ENEMY_COMBATANT(slot).unk_112         = 0;
                 ENEMY_COMBATANT(slot).unk_04          = 0;

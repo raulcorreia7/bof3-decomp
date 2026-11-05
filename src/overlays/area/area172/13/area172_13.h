@@ -58,7 +58,7 @@ void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
 
 #define AREA_SPAWN_SLOT_LIFE        0x20
 #define AREA_SPAWN_SLOT_RADIUS      0x180
-#define AREA_SPAWN_SLOT_CORE_SHADE  g_SpadWork->tint.bytes.unk_5D
+#define AREA_SPAWN_SLOT_CORE_SHADE  g_Task->tint.bytes.unk_5D
 #define AREA_SPAWN_SLOT_RADIUS_STEP 0xC
 
 #endif

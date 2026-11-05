@@ -23,9 +23,9 @@ MATCH void func_801DFCB4(void) {
 
     D_801463DA                             = 0;
     g_BattlePendingStatus                  = 0;
-    slot                                   = g_SpadWork->slot;
+    slot                                   = g_Task->slot;
     self                                   = g_GameState;
-    D_8014639C                             = (s32)g_SpadWork;
+    D_8014639C                             = (s32)g_Task;
     g_BattleTargetRecord                   = (s16*)&self->unk_118;
     g_BattleTarget                         = slot;
     /* Plain pointer stores, not field stores: retail keeps each one ahead
@@ -52,7 +52,7 @@ MATCH void func_801DFCB4(void) {
     }
     lock_work = g_GameState;
     if ((lock_work->unk_120 & 1) && (s16)lock_work->hp_change == 0) {
-        g_SpadWork->unk_02 = 3;
+        g_Task->step = 3;
         return;
     }
     if (!(g_GameState->flags_124.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
@@ -74,11 +74,11 @@ MATCH void func_801DFCB4(void) {
     }
     hit_work = g_GameState;
     if (hit_work->unk_120 & 1) {
-        func_800AAC88(hit_work->hp_change, g_SpadWork->slot);
+        func_800AAC88(hit_work->hp_change, g_Task->slot);
         hit_work = g_GameState;
     }
     if (hit_work->unk_120 & 2) {
-        func_800AAEBC(hit_work->ap_change, g_SpadWork->slot);
+        func_800AAEBC(hit_work->ap_change, g_Task->slot);
     }
     pending   = &g_BattlePendingStatus;
     tail_work = g_GameState;
@@ -94,7 +94,7 @@ MATCH void func_801DFCB4(void) {
             if (!(g_GameState->flags_128.value & 2)) {
                 func_801DD858(1);
             }
-            GFX_FreePaletteFadeTarget(g_SpadWork);
+            GFX_FreePaletteFadeTarget(g_Task);
         } else {
             func_801DD858(0);
         }
@@ -117,5 +117,5 @@ MATCH void func_801DFCB4(void) {
         *flags &= ~0x80;
     }
     func_801DEDE4();
-    g_SpadWork->unk_03 += 1;
+    g_Task->unk_03 += 1;
 }

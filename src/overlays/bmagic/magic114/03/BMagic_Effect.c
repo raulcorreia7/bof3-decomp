@@ -11,22 +11,22 @@ INCLUDE_ASM(func_801EEDA0);
 MATCH void func_801EEE84(void) {
     u8 temp_v0;
 
-    temp_v0                           = g_SpadWork->word_08.byte.timer_0A + 1;
-    g_SpadWork->word_08.byte.timer_0A = temp_v0;
+    temp_v0                       = g_Task->word_08.byte.timer_0A + 1;
+    g_Task->word_08.byte.timer_0A = temp_v0;
     if ((u32)(temp_v0 & 0xFF) >= 0x21U) {
-        g_SpadWork->step_01 += 1;
-        g_SpadWork->word_08.byte.unk_09 = 0;
+        g_Task->mode += 1;
+        g_Task->word_08.byte.unk_09 = 0;
     }
 }
 
 MATCH void func_801EEEE4(void) {
     u8 temp_v0;
 
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    temp_v0                     = g_Task->word_08.byte.unk_09 + 1;
+    g_Task->word_08.byte.unk_09 = temp_v0;
     if ((u32)(temp_v0 & 0xFF) >= 0x21U) {
-        g_SpadWork->step_01 += 1;
-        g_SpadWork->word_08.byte.unk_09 = 0;
+        g_Task->mode += 1;
+        g_Task->word_08.byte.unk_09 = 0;
     }
 }
 
@@ -35,10 +35,10 @@ INCLUDE_ASM(func_801EEF44);
 MATCH void func_801EEFFC(void) {
     u8 temp_v0;
 
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_SpadWork->step_01 += 1;
+        g_Task->mode += 1;
         return;
     }
     func_801F0FBC();
@@ -47,11 +47,11 @@ MATCH void func_801EEFFC(void) {
 MATCH void func_801EF060(void) {
     u8 temp_v0;
 
-    temp_v0                           = g_SpadWork->word_08.byte.timer_0A - 1;
-    g_SpadWork->word_08.byte.timer_0A = temp_v0;
+    temp_v0                       = g_Task->word_08.byte.timer_0A - 1;
+    g_Task->word_08.byte.timer_0A = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_SpadWork->step_01 += 1;
-        g_SpadWork->word_08.byte.unk_09 = 0x40;
+        g_Task->mode += 1;
+        g_Task->word_08.byte.unk_09 = 0x40;
     }
 }
 
@@ -71,7 +71,7 @@ MATCH void func_801EF6A8(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    rot.vz = ((g_SpadWork->word_08.byte.timer_0A & 0x1F) - 2) << 7;
+    rot.vz = ((g_Task->word_08.byte.timer_0A & 0x1F) - 2) << 7;
     src    = (PartyBattler*)D_801EB4E0;
     pos.vx = (src->coord_x_34.raw >> 9) - 0x4000;
     pos.vy = (src->coord_y_38.raw >> 9) - 0x4000;
@@ -84,11 +84,11 @@ MATCH void func_801EF6A8(void) {
 }
 
 MATCH void func_801EF774(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_Task)[1]);
 }
 
 MATCH void func_801EF7B8(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 3), 2, g_SpadWork);
+    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 3), 2, g_Task);
 }
 
 INCLUDE_ASM(func_801EF7FC);
@@ -98,10 +98,10 @@ INCLUDE_ASM(func_801EF8C0);
 INCLUDE_ASM(func_801EFA80);
 
 MATCH void func_801EFDD8(void) {
-    SYS_DISPATCH_BYTE(D_801F1230, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F1230, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         func_801F093C();
-        func_801F04D4(g_SpadWork->word_08.byte.unk_0B);
+        func_801F04D4(g_Task->word_08.byte.unk_0B);
         func_801F0004();
     }
 }
@@ -113,20 +113,20 @@ INCLUDE_ASM(func_801EFE70);
 MATCH void func_801EFF1C(void) {
     s32 value;
 
-    g_SpadWork->unk_20 -= 5;
-    if (g_SpadWork->unk_14 == 0x30) {
+    g_Task->unk_20 -= 5;
+    if (g_Task->unk_14 == 0x30) {
         func_800A9610(g_BattleTargetSelector, 0x10U);
     }
-    value              = g_SpadWork->unk_14 + 2;
-    g_SpadWork->unk_14 = value;
+    value          = g_Task->unk_14 + 2;
+    g_Task->unk_14 = value;
     if (value == 0xC0) {
-        g_SpadWork->word_08.byte.unk_0B = 1;
-        g_SpadWork->unk_02 += 1;
+        g_Task->word_08.byte.unk_0B = 1;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801EFFB0(void) {
-    PartyBattler* work        = g_SpadWork;
+    PartyBattler* work        = g_Task;
     u8            timer       = work->word_08.byte.unk_09 - 1;
     work->word_08.byte.unk_09 = timer;
     work->unk_20 -= 5;
@@ -144,25 +144,25 @@ INCLUDE_ASM(func_801F093C);
 
 MATCH void func_801F0D08(void) {
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_BYTE(D_801F1230 + 3, g_SpadWork->unk_02);
+    SYS_DISPATCH_BYTE(D_801F1230 + 3, g_Task->step);
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
 MATCH void func_801F0D6C(void) {
     PartyBattler* work;
 
-    g_SpadWork->unk_25              = 0x1D;
-    g_SpadWork->unk_26              = 0;
-    g_SpadWork->unk_27              = 0x1A;
-    g_SpadWork->unk_28              = 1;
-    g_SpadWork->unk_2A              = (g_SpadWork->word_08.byte.facing_08 - 1) & 1;
-    g_SpadWork->unk_29              = 4;
-    g_SpadWork->unk_24              = 0;
-    work                            = g_SpadWork;
-    work->unk_2B                    = 0;
-    work->unk_2C.half               = 0;
-    g_SpadWork->word_08.byte.unk_09 = 0;
-    g_SpadWork->unk_02 += 1;
+    g_Task->unk_25              = 0x1D;
+    g_Task->unk_26              = 0;
+    g_Task->unk_27              = 0x1A;
+    g_Task->unk_28              = 1;
+    g_Task->unk_2A              = (g_Task->word_08.byte.facing_08 - 1) & 1;
+    g_Task->unk_29              = 4;
+    g_Task->unk_24              = 0;
+    work                        = g_Task;
+    work->unk_2B                = 0;
+    work->unk_2C.half           = 0;
+    g_Task->word_08.byte.unk_09 = 0;
+    g_Task->step += 1;
     Actor_SelectScript(0);
     func_8014D290();
 }

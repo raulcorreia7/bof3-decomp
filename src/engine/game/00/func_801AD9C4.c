@@ -5,5 +5,5 @@ MATCH void func_801AD9C4(void) {
         return;
     }
 
-    g_SpadWork->unk_04 = 5;
+    g_Task->unk_04 = 5;
 }

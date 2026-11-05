@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EED18);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF064(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 INCLUDE_ASM(func_801EF0A8);
@@ -28,38 +28,38 @@ MATCH void func_801EF5C0(void) {
     u8   temp_v0;
 
     func_8014DAEC();
-    if (g_SpadWork->word_08.byte.unk_09 & 1) {
+    if (g_Task->word_08.byte.unk_09 & 1) {
         state  = &g_AreaCameraAngle.vx;
         var_v0 = *state + 0x14;
     } else {
         state  = &g_AreaCameraAngle.vx;
         var_v0 = *state - 0x14;
     }
-    *state                          = var_v0;
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    *state                      = var_v0;
+    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         g_AreaCameraAngle.vx = -0x2AAU;
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801EF674(void) {
     u8 temp_v0;
 
-    temp_v0 = g_SpadWork->word_08.byte.timer_0A;
+    temp_v0 = g_Task->word_08.byte.timer_0A;
     if (temp_v0 != 0) {
-        g_SpadWork->word_08.byte.timer_0A = temp_v0 - 2;
+        g_Task->word_08.byte.timer_0A = temp_v0 - 2;
     }
     if (func_8014DAEC() & 0xFF) {
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801EF6D8(void) {
     PartyBattler* work;
 
-    if (g_SpadWork->unk_04 == 0) {
+    if (g_Task->unk_04 == 0) {
         work                      = (PartyBattler*)D_801EB4E0;
         work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
         func_801E5988();
@@ -73,12 +73,12 @@ INCLUDE_ASM(func_801EF7E0);
 INCLUDE_ASM(func_801EFA30);
 
 MATCH void func_801EFD50(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 6), 1, g_SpadWork);
+    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 6), 1, g_Task);
 }
 
 MATCH void func_801EFD94(void) {
-    SYS_DISPATCH_BYTE(D_801F056C, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801F056C, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         Effect_SetActorMatrix();
         func_801F01C0();
         PopMatrix();

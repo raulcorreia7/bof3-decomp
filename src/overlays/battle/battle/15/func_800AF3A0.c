@@ -6,7 +6,7 @@ MATCH void func_800AF3A0(VECTOR pos, s16 step) {
     SVECTOR     normal;
     s32         vec[3];
 
-    work   = (BattleWork*)g_SpadWork;
+    work   = (BattleWork*)g_Task;
     vec[0] = ((s32)work->range_axis_34 >> 9) - 0x4000;
     vec[1] = ((s32)work->range_axis_38 >> 9) - 0x4000;
     vec[2] = ((s16)work->unk_3E) >> 1;
@@ -15,7 +15,7 @@ MATCH void func_800AF3A0(VECTOR pos, s16 step) {
     pos.vz -= vec[2];
     VectorNormalS(&pos, &normal);
 
-    store = (BattleWork*)g_SpadWork;
+    store = (BattleWork*)g_Task;
     store->range_axis_34 += (((s32)normal.vx * step) >> 3);
     store->range_axis_38 += (((s32)normal.vy * step) >> 3);
     store->unk_3E += (((s32)normal.vz * step) >> 11);

@@ -50,5 +50,5 @@ MATCH void func_801E7948(void) {
     } else {
         EMI_LoaderStreamInitSlot(D_800B4A68[g_EmiLoadedCharacterIndex]);
     }
-    g_SpadWork->step_01++;
+    g_Task->mode++;
 }

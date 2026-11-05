@@ -5,7 +5,7 @@ MATCH void func_801B0DA0(void) {
     u8     count;
 
     g_GameState->mode_12B.u8_value = 1;
-    work                           = g_SpadWork;
+    work                           = g_Task;
     count                          = work->unk_09;
     if (count == 0) {
         func_801B146C();

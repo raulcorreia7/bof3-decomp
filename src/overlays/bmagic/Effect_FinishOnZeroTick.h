@@ -4,8 +4,8 @@
  * by the bmagic effect modules; every change here must verify every member. */
 /* func_801EF2E4 (magic063), func_801EF2A0 (magic146) */
 MATCH void Effect_FinishOnZeroTick(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        func_800A9820(g_SpadWork->unk_04);
+    if (g_Task->word_08.byte.unk_0B == 0) {
+        func_800A9820(g_Task->unk_04);
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
         func_801E5988();
     }

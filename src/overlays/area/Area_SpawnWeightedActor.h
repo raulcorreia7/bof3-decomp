@@ -38,7 +38,7 @@ pick_weight:
     }
     for (i = 0; i < 8; i++) {
         if (i != count) {
-            g_Actors[i].flags_00 = 0;
+            g_Actors[i].flags = 0;
         }
     }
     if (count < 8) {

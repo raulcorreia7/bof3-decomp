@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC04(void) {
     Callback handlers[2] = {func_801EEC5C, func_801EED84};
 
-    SYS_DISPATCH_TASK(handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EEC5C);
@@ -15,7 +15,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEDE4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 INCLUDE_ASM(func_801EEE28);
@@ -24,38 +24,38 @@ MATCH void func_801EEEC8(void) {
     PartyBattler* src;
     PartyBattler* dst;
 
-    if (--g_SpadWork->word_08.byte.unk_09 == 0) {
-        src                               = D_801EB4E0;
-        dst                               = g_SpadWork;
-        dst->coord_x_34                   = src->coord_x_34;
-        dst->coord_y_38                   = src->coord_y_38;
-        dst->word_3C                      = src->word_3C;
-        dst->word_08.byte.unk_09          = 0x10;
-        g_SpadWork->word_08.byte.timer_0A = 0;
-        g_SpadWork->unk_02++;
+    if (--g_Task->word_08.byte.unk_09 == 0) {
+        src                           = D_801EB4E0;
+        dst                           = g_Task;
+        dst->coord_x_34               = src->coord_x_34;
+        dst->coord_y_38               = src->coord_y_38;
+        dst->word_3C                  = src->word_3C;
+        dst->word_08.byte.unk_09      = 0x10;
+        g_Task->word_08.byte.timer_0A = 0;
+        g_Task->step++;
     }
 }
 
 MATCH void func_801EEF58(void) {
     PartyBattler* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.unk_09++;
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.timer_0A += 2;
     if (work->word_08.byte.timer_0A == 16) {
-        work = g_SpadWork;
-        work->unk_02++;
+        work = g_Task;
+        work->step++;
     }
 }
 
 MATCH void func_801EEFC4(void) {
     u8 timer;
 
-    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 + 1;
+    g_Task->word_08.byte.unk_09 = timer;
     if (timer > 0x20) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     }
 }
 
@@ -64,9 +64,9 @@ MATCH void func_801EF014(void) {
     PartyBattler* active;
     u8            count;
 
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.unk_09++;
-    work                        = g_SpadWork;
+    work                        = g_Task;
     count                       = work->word_08.byte.timer_0A - 2;
     work->word_08.byte.timer_0A = count;
     if (count == 0) {

@@ -4,14 +4,14 @@ MATCH void Effect_CountUpTimerCallSelector(void) {
     PartyBattler* work;
     u8            timer;
 
-    work                      = g_SpadWork;
+    work                      = g_Task;
     work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
-    work                      = g_SpadWork;
+    work                      = g_Task;
     timer                     = work->word_08.byte.unk_09 + 1;
     work->word_08.byte.unk_09 = timer;
     if (timer == 24) {
         func_800A9610(g_BattleTargetSelector, 0x10);
-        work         = g_SpadWork;
-        work->unk_02 = work->unk_02 + 1;
+        work       = g_Task;
+        work->step = work->step + 1;
     }
 }

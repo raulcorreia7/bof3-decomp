@@ -6,11 +6,11 @@ MATCH void func_8015C1A8(s32 slot, u8 field_1c, u8 field_18) {
     u32 index;
     u16 flags;
 
-    index                                = slot & BYTE_MASK;
-    flags                                = g_AreaWalkFlags;
-    g_BattlePartyBattlers[index].unk_18  = field_18;
-    g_BattlePartyBattlers[index].unk_1C  = field_1c;
-    g_AreaWalkFlags                      = flags | AREA_WALK_MAP_LOADING;
-    g_BattlePartyBattlers[index].step_01 = 2;
-    g_BattlePartyBattlers[index].unk_02  = 1;
+    index                               = slot & BYTE_MASK;
+    flags                               = g_AreaWalkFlags;
+    g_BattlePartyBattlers[index].unk_18 = field_18;
+    g_BattlePartyBattlers[index].unk_1C = field_1c;
+    g_AreaWalkFlags                     = flags | AREA_WALK_MAP_LOADING;
+    g_BattlePartyBattlers[index].mode   = 2;
+    g_BattlePartyBattlers[index].step   = 1;
 }

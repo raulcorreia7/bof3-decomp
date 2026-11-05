@@ -6,6 +6,6 @@
  */
 MATCH void Actor_StageScriptRecord(s32 value, s32 position, u8* dst, s32 size) {
     Actor_CopyScriptEntry((u8)value, dst, (u16)size);
-    g_SpadWork->unk_4B = value;
+    g_Task->unk_4B = value;
     Actor_SeekScript((u16)position);
 }

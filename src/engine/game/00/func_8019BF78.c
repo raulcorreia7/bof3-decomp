@@ -1,6 +1,6 @@
 #include "game_00.h"
 
 MATCH void func_8019BF78(void) {
-    g_SpadWork->unk_0B = (u8)Area_GetCellCode(g_SpadWork->x.part.integer, g_SpadWork->y.part.integer);
-    Area_SetCellCode(g_SpadWork->x.part.integer, g_SpadWork->y.part.integer, 0x10);
+    g_Task->unk_0B = (u8)Area_GetCellCode(g_Task->x.part.integer, g_Task->y.part.integer);
+    Area_SetCellCode(g_Task->x.part.integer, g_Task->y.part.integer, 0x10);
 }

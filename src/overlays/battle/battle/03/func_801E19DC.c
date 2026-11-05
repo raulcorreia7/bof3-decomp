@@ -8,6 +8,6 @@ MATCH void func_801E19DC(void) {
     PartyBattler* work;
 
     func_801DEE4C();
-    work = g_SpadWork;
-    work->unk_02 += 1;
+    work = g_Task;
+    work->step += 1;
 }

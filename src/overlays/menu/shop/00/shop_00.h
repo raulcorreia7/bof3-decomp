@@ -92,7 +92,7 @@ ASSERT_OFFSET(ShopPanel, selected, 0x0D);
 ASSERT_OFFSET(ShopPanel, unk_10, 0x10);
 ASSERT_OFFSET(ShopPanel, names, 0x20);
 
-/* The scratchpad work row behind g_SpadWork while func_801D62DC fills it from
+/* The scratchpad work row behind g_Task while func_801D62DC fills it from
  * the selection table at 0x801E537C (three words per row). */
 typedef struct ShopSelection {
     u8  pad_00[0x34];

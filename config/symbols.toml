@@ -91,16 +91,16 @@ Effect_ShakeScreen = { addr = 0x800A8EB8, type = "func", source = "sets the thre
 Battle_PickRandomTarget = { addr = 0x800AB760, type = "func", source = "func_800AB0B8 passes the command slot plus three to pick a random selectable battler id" }
 Battle_LoadEncounterEnemies = { addr = 0x800ABF5C, type = "func", source = "clears g_BattleEnemyCount then calls Battle_AddEnemy for each non-0xFF entry of the encounter's eight-entry row (stride 9)" }
 Battle_AddEnemy = { addr = 0x800AC01C, type = "func", source = "Battle_LoadEncounterEnemies calls it per encounter entry; it fills EnemyBattler D_801EB630[enemy_index] and increments g_BattleEnemyCount" }
-Actor_Clear = { addr = 0x800ACFF4, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x800ACFF4, type = "func", source = "clears the five leading fields of the current g_Task record" }
 Battle_DrawTitledFrame = { addr = 0x800B1A74, type = "func", source = "draws the 137x130 bordered panel of the battle list with the title text chosen by title_index from s_BattleFrameTitles, centered over the panel, and the guide lines and corner sprites; func_800B1728 calls it with the panel position before it draws the list rows" }
 Menu_DrawPanelCursor = { addr = 0x800B20D4, type = "func", source = "draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite" }
 Menu_SlidePanelLeft = { addr = 0x800B254C, type = "func", source = "slides the master panel 0x20 left and clamps its x at 0x98, one body shared with the game and start overlays" }
 Menu_DrawIcon = { addr = 0x800B326C, type = "func", source = "draws one MenuIconPrim from uv/clut" }
 g_BattleEscapeThresholds = { addr = 0x800B44F0, source = "func_8009BACC indexes it with the bucket (diff+0x20)/16 of the party-minus-enemy mean agility difference from func_8009B2B0" }
 s_BattleAffinityLevelBonus = { addr = 0x800B4E94, source = "func_800A7694 writes this bonus for a gene-step affinity level clamped to 0..4" }
-D_800B50B0 = { addr = 0x800B50B0, size = 0x1C, source = "Seven step handlers held by the overlay data, func_800A8540 calls one by step_01" }
-D_800B50CC = { addr = 0x800B50CC, size = 0x8, source = "Two step handlers held by the overlay data, func_800A8C60 calls one by step_01" }
-D_800B50D4 = { addr = 0x800B50D4, source = "Step handler table, func_800A8D80 calls the entry BATTLE_WORK->step_01 selects" }
+D_800B50B0 = { addr = 0x800B50B0, size = 0x1C, source = "Seven step handlers held by the overlay data, func_800A8540 calls one by mode" }
+D_800B50CC = { addr = 0x800B50CC, size = 0x8, source = "Two step handlers held by the overlay data, func_800A8C60 calls one by mode" }
+D_800B50D4 = { addr = 0x800B50D4, source = "Step handler table, func_800A8D80 calls the entry BATTLE_WORK->mode selects" }
 D_800B50DC = { addr = 0x800B50DC, size = 0x8, source = "func_800AA5F4 rolls rand() % entry == 0 with the entry the ability high nibble selects (D_800B50E4 for char 6); needs: what the roll decides" }
 g_BattleSelections = { addr = 0x800B65F8, source = "Battle selection rows, func_800AE2D4 reads the id of the row its index selects" }
 g_BattlePanelUV = { addr = 0x800B6C04, type = "BattlePanelTexture", source = "panel quad UV table 4-byte {u,v} entries indexed by the work row's quad index, 0x30-pixel-wide quads (src/overlays/battle/battle/15/func_800AE9C4.c 19-95)" }
@@ -155,7 +155,7 @@ Effect_StartPlaying = { addr = 0x801EEE30, type = "func", source = "byte-identic
 
 ["emi/bmagic/magic003/03"]
 BMagic_AllocEffect = { addr = 0x801F09C4, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F0A28, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F0A28, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F0B00, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic004/03"]
@@ -235,7 +235,7 @@ Effect_StartPlaying = { addr = 0x801EEFA8, type = "func", source = "byte-identic
 Effect_ReloadTimerAndStep = { addr = 0x801EF0BC, type = "func", source = "reloads the effect timer with the value func_800AFF98 returns and advances the effect step" }
 Effect_CountUpByTwoAndStep = { addr = 0x801EF750, type = "func", source = "counts the effect timer up by two and advances the effect step at 0x10" }
 BMagic_AllocEffect = { addr = 0x801EFD4C, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801EFDB0, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801EFDB0, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801EFE00, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic038/03"]
@@ -320,7 +320,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF004, type = "func", source = "plays the 
 Effect_SetActiveActorMatrix = { addr = 0x801EF728, type = "func", source = "sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler's work record, times the camera; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix = { addr = 0x801F0110, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801F0494, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F04F8, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F04F8, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F0550, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic054/03"]
@@ -354,14 +354,14 @@ BMagic_RunStep = { addr = 0x801EEC50, type = "func", source = "runs the callback
 ["emi/bmagic/magic058/03"]
 Effect_SetActorMatrix = { addr = 0x801EF69C, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801EFE38, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801EFE9C, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801EFE9C, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801EFEEC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 Effect_TickDownAndClear = { addr = 0x801EF338, type = "func", source = "byte-identical to Effect_TickDownAndClear in the shared header overlays/bmagic/Effect_TickDownAndClear.h" }
 ["emi/bmagic/magic059/03"]
 Effect_CountDownTimer = { addr = 0x801EF5C0, type = "func", source = "counts the effect timer down and finishes the effect at zero" }
 BMagic_AllocEffect = { addr = 0x801F0490, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F04F4, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F04F4, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F066C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic060/00"]
@@ -465,7 +465,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF288, type = "func", source = "plays the 
 Effect_CountDownAndStep = { addr = 0x801EF5F0, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
 Effect_TickOnTimerZero = { addr = 0x801EF63C, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
 BMagic_AllocEffect = { addr = 0x801F03D4, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F0438, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F0438, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F0488, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic078/03"]
@@ -507,7 +507,7 @@ Effect_StepOnZeroTick = { addr = 0x801EF528, type = "func", source = "advances t
 Effect_TickOnZeroTick = { addr = 0x801EF744, type = "func", source = "when the effect ticker is zero, ticks the other battler's ticker down and runs the effect step" }
 Effect_SetActorMatrix = { addr = 0x801EF794, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801F0DC0, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F0E24, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F0E24, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F0EEC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic086/03"]
@@ -556,7 +556,7 @@ g_BMagicEffectFuncs = { addr = 0x801F07BC, source = "the module dispatcher index
 ["emi/bmagic/magic093/03"]
 Effect_SetActorMatrix = { addr = 0x801EF7AC, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801F05BC, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F0620, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F0620, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F089C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic094/03"]
@@ -714,21 +714,21 @@ g_BMagicEffectFuncs = { addr = 0x801F02CC, source = "the module dispatcher index
 ["emi/bmagic/magic123/03"]
 Effect_PlayOnZeroTick = { addr = 0x801EF064, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 BMagic_AllocEffect = { addr = 0x801EFCA0, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801EFD04, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801EFD04, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801EFD54, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic124/03"]
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF88, type = "func", source = "counts the effect timer down; at zero requests the target selector and advances the step" }
 Effect_PlayOnZeroTick = { addr = 0x801EF050, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 BMagic_AllocEffect = { addr = 0x801F0828, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F088C, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F088C, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F08DC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic125/03"]
 Effect_PlayOnZeroTick = { addr = 0x801EEE60, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_SetActorMatrix = { addr = 0x801EF1A8, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801F0524, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F0588, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F0588, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F05D8, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic126/03"]
@@ -747,7 +747,7 @@ Effect_RequestTargetOnTimerZero = { addr = 0x801EEEB8, type = "func", source = "
 Effect_PlayOnZeroTick = { addr = 0x801EEF20, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_CountUpTimerByTwoAndStep = { addr = 0x801EF38C, type = "func", source = "one body shared through overlays/bmagic/Effect_CountUpTimerByTwoAndStep.h" }
 BMagic_AllocEffect = { addr = 0x801F0500, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F0564, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F0564, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F05B4, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic130/03"]
@@ -824,7 +824,7 @@ Effect_PlayOnce = { addr = 0x801EF004, type = "func", source = "plays the effect
 Effect_FinishOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "finishes the effect once its ticker byte 0x0B is zero: the side mask at work byte 0x04 goes to func_800A9820, the active battler's effect ticker byte is lowered by one and the effect work is cleared (func_801EF2E4 in magic063, func_801EF2A0 in magic146)" }
 Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF520, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through Bmagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801EF900, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801EF964, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801EF964, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801EF9B4, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic150/03"]
@@ -890,7 +890,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2D8, type = "func", source = "plays the 
 Effect_StartPlaying = { addr = 0x801EF03C, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic001/00@0x801EEFA4" }
 Effect_NextStepUnderTickLimit = { addr = 0x801EF640, type = "func", source = "reloads the effect timer and advances the effect step while the effect ticker is under 5" }
 BMagic_AllocEffect = { addr = 0x801F0368, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F03CC, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F03CC, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F041C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic172/03"]
@@ -908,7 +908,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0988, source = "the module dispatcher index
 Effect_StartOnZeroTick = { addr = 0x801EEF74, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 Effect_TickOnZeroTick = { addr = 0x801EF490, type = "func", source = "when the effect ticker is zero, ticks the other battler's ticker down and runs the effect step" }
 BMagic_AllocEffect = { addr = 0x801EF7EC, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801EF850, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801EF850, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801EF8A0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic216/00"]
@@ -923,7 +923,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF770, source = "the module dispatcher index
 Effect_PlayOnZeroTick = { addr = 0x801EEFC4, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_SetActiveActorMatrix = { addr = 0x801EF664, type = "func", source = "sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler's work record, times the camera; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801EF934, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801EF998, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801EF998, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801EFA00, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic220/03"]
@@ -933,7 +933,7 @@ Effect_StepWhileTickUnderThree = { addr = 0x801EF888, type = "func", source = "a
 Effect_SetActiveActorMatrix = { addr = 0x801EF938, type = "func", source = "sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler's work record, times the camera; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix = { addr = 0x801F0284, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801F0628, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F068C, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F068C, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F06DC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic222/03"]
@@ -956,14 +956,14 @@ Effect_CountUpAndStep = { addr = 0x801EF0F8, type = "func", source = "counts the
 Effect_StepWhileTickUnderTwo = { addr = 0x801EF148, type = "func", source = "advances the effect step while the other battler's effect ticker is under 2" }
 Effect_TickOnTimerZero = { addr = 0x801EF18C, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
 BMagic_AllocEffect = { addr = 0x801EFB78, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801EFBDC, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801EFBDC, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801EFC2C, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic225/03"]
 Effect_PlayOnZeroTick = { addr = 0x801EF278, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_CountUpAndStep = { addr = 0x801EF5D8, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
 BMagic_AllocEffect = { addr = 0x801F02D4, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F0338, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F0338, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F0388, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic226/03"]
@@ -974,7 +974,7 @@ Effect_CountDownAndSetTint = { addr = 0x801EF5F0, type = "func", source = "one b
 Effect_SetActiveActorMatrix = { addr = 0x801EF75C, type = "func", source = "sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler's work record, times the camera; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix = { addr = 0x801F0724, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 BMagic_AllocEffect = { addr = 0x801F0B8C, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F0BF0, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x801F0BF0, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801F0C40, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/boss/boss001/13"]
@@ -1367,7 +1367,7 @@ func_801D0C10 = { addr = 0x801D0C10, type = "func", source = "overlay entry load
 # .data tables of the GAME.EMI entry-0 overlay.
 s_FairyConstructionThresholds = { addr = 0x80195FE0, source = "func_801C2018 copies this s8 threshold row and indexes it by bit_index - 0xF6" }
 Actor_FindFreeSlot = { addr = 0x8019601C, type = "func", source = "returns the first free g_ActorSlots ActorSlot or 0xFF - area030 and sce10eff allocate field rows through it" }
-Actor_Clear = { addr = 0x80196070, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
+Actor_Clear = { addr = 0x80196070, type = "func", source = "clears the five leading fields of the current g_Task record" }
 Actor_Free = { addr = 0x801960C0, type = "func", source = "clears the five leading fields of one g_ActorSlots record" }
 Actor_ClearAll = { addr = 0x8019611C, type = "func", source = "clears all 20 g_ActorSlots records - Game_StartSelectedGame calls it before the next game" }
 Actor_Create = { addr = 0x8019615C, type = "func", source = "claims a free g_ActorSlots slot and fills its kind - coordinates - ground height and link from the request" }
@@ -1400,7 +1400,7 @@ Game_RunSceneCameraState = { addr = 0x80198AC4, type = "func", source = "g_GameS
 Area_RunFrame = { addr = 0x801991B8, type = "func", source = "func_80197378 calls it every field frame; its body runs Area_RunParty, Actor_DispatchAll and Area_DrawScene" }
 Menu_DrawPanelCursor = { addr = 0x80199678, type = "func", source = "draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite" }
 Menu_SlidePanelLeft = { addr = 0x8019973C, type = "func", source = "slides the master panel 0x20 left and clamps its x at 0x98, one body shared with the battle and start overlays" }
-Actor_DispatchAll = { addr = 0x8019A0E4, type = "func", source = "its body runs g_ActorHandlers[type] for each of the 20 g_ActorSlots rows whose flags_00 is set; func_801991B8 calls it each frame" }
+Actor_DispatchAll = { addr = 0x8019A0E4, type = "func", source = "its body runs g_ActorHandlers[type] for each of the 20 g_ActorSlots rows whose flags is set; func_801991B8 calls it each frame" }
 Game_FindAreaHandler = { addr = 0x8019A194, type = "func", source = "index of the AreaHandler whose key_18 equals g_GameAreaId, GAME_AREA_HANDLER_COUNT (11) when none" }
 Game_RequestAreaChange = { addr = 0x8019FA28, type = "func", source = "its body stores the entry seed and position in g_GameContextSeed, g_GameEntryPosX and g_GameEntryPosY and sets g_GameStateIndex to 5; Game_ResetGameState and func_801976EC call it" }
 Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "func_8019FAA0 passes AreaLoad.handler to it; its body clears the four D_80147A58 rows, runs func_801A3F3C over the stream and clears the unused g_Actors rows" }
@@ -1437,7 +1437,7 @@ Party_SwapMembers = { addr = 0x801BE738, type = "func", source = "calls Party_Sw
 Party_SwapBattlerRows = { addr = 0x801BE920, type = "func", source = "swaps the id byte at +0x79, the words at +0x0C to +0x14 and the bytes at +0x118 and +0x119 between two g_BattlePartyBattlers rows, also +0x08, +0x29, +0x34, +0x38, +0x3C and +0x12C when skip_state is 0, and writes 0xFF to +0x4B of both; Party_SwapMembers and func_801B21E8 call it with row indexes" }
 Party_BuildBattlers = { addr = 0x801C1400, type = "func", source = "its body fills the g_BattlePartyBattlers rows from the order bytes at D_80144F5A + mode * 3; Game_ResetGameState and SAVE_RunLoadRestore call it" }
 Party_JoinMember = { addr = 0x801C187C, type = "func", source = "its body writes char_id to D_80144F5A and D_80144F5D at g_PartySize and fills that g_BattlePartyBattlers row; when g_PartySize is PARTY_SLOT_COUNT it sets g_GameStateIndex to 6 and returns 1" }
-Actor_ClearVelocity = { addr = 0x801C5798, type = "func", source = "zeroes the g_SpadWork velocity members +0x0C and +0x10 and vz that Actor_ApplyVelocity integrates into x and y and that Actor_InitMovement seeds" }
+Actor_ClearVelocity = { addr = 0x801C5798, type = "func", source = "zeroes the g_Task velocity members +0x0C and +0x10 and vz that Actor_ApplyVelocity integrates into x and y and that Actor_InitMovement seeds" }
 Area_BuildEncounter = { addr = 0x801C60E0, type = "func", source = "the body rolls the formation, copies its enemies, places them around the party and returns 0 when none fits" }
 Battle_StartScripted = { addr = 0x801C7A54, type = "func", source = "its body stores mode_byte in g_BattleEncounter, sets D_80145E91 to 5 and copies the first byte of s_BattleModeRecords[mode_byte * 4] to g_BattleOptions; the scena00 script code calls it" }
 s_PaletteFadeCounts = { addr = 0x801C7AC0, size = 0x8, source = "func_8019625C takes the color count shifted by 4 from this row, indexed by the palette table index" }
@@ -1474,7 +1474,7 @@ g_ActorHandlers = { addr = 0x801C7C70, size = 0x2EC, source = "Actor_DispatchAll
 D_801C7F5C = { addr = 0x801C7F5C, size = 0x134 }
 D_801C7F74 = { addr = 0x801C7F74, size = 0x1, alias = true }
 D_801C8090 = { addr = 0x801C8090, size = 0xC }
-s_SceneHandlerIds = { addr = 0x801C809C, size = 0x8, source = "func_8019A3FC passes the entry for g_SpadWork->unk_06 to the scene handler dispatcher" }
+s_SceneHandlerIds = { addr = 0x801C809C, size = 0x8, source = "func_8019A3FC passes the entry for g_Task->unk_06 to the scene handler dispatcher" }
 D_801C80A4 = { addr = 0x801C80A4, size = 0x18 }
 D_801C80BC = { addr = 0x801C80BC, size = 0xC }
 D_801C80C8 = { addr = 0x801C80C8, size = 0x18 }
@@ -2634,7 +2634,7 @@ Area_UpdateCameraHeight = { addr = 0x801F35A8, type = "func", source = "stores t
 ["emi/world02/area098/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
-Area_AdvanceSpawnTimer = { addr = 0x801F3AA8, type = "func", source = "runs one frame of the spawn work: claims a slot every fourth frame of g_SpadWork +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_SpadWork +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)" }
+Area_AdvanceSpawnTimer = { addr = 0x801F3AA8, type = "func", source = "runs one frame of the spawn work: claims a slot every fourth frame of g_Task +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_Task +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)" }
 Area_FindFreeWorkRow = { addr = 0x801F4D80, type = "func", source = "finds the first work-window row whose byte is zero or returns NULL" }
 Area_ClearWorkColumn = { addr = 0x801F5240, type = "func", source = "clears one byte of each row in the actor window" }
 Area_ClaimSpawnSlot = { addr = 0x801F526C, type = "func", source = "claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots; one body shared with the other area overlays" }
@@ -2676,7 +2676,7 @@ Actor_FacingToward = { addr = 0x801F4A34, type = "func", source = "returns the e
 Game_RequestMenuOnInput = { addr = 0x801F5034, type = "func", source = "one body shared through overlays/area/Game_RequestMenuOnInput.h" }
 Actor_StopMoving = { addr = 0x801F5108, type = "func", source = "clears the actor velocity words and sets the game overlay byte to 3" }
 Area_SetPanelStepOnInteract = { addr = 0x801F51F0, type = "func", source = "sets the panel step counter g_GameState counter_11C to 4 while the interact input from D_80145AB6 is held within 0x40 of the actor and back to 3 otherwise; one body shared with the other area overlays" }
-Area_StepChargeGauge = { addr = 0x801F5254, type = "func", source = "steps the press-and-hold gauge at g_SpadWork +0x0B between 0 and 0x40 while the re-arm timer at +0x0A is spent: the masked input D_80145AB6 held against g_InputHeld raises it by 1 per frame and a full 0x40 re-arms the timer to 0x1E, releasing lowers it by a level step of 1, 2 or 3, halved per parity when the state byte at +0x02 is set (func_801F5254 in area104/14, func_801F5798 in area121/14)" }
+Area_StepChargeGauge = { addr = 0x801F5254, type = "func", source = "steps the press-and-hold gauge at g_Task +0x0B between 0 and 0x40 while the re-arm timer at +0x0A is spent: the masked input D_80145AB6 held against g_InputHeld raises it by 1 per frame and a full 0x40 re-arms the timer to 0x1E, releasing lowers it by a level step of 1, 2 or 3, halved per parity when the state byte at +0x02 is set (func_801F5254 in area104/14, func_801F5798 in area121/14)" }
 Area_FinishTurnStep = { addr = 0x801F58E8, type = "func", source = "stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step" }
 Area_BeginTurnStep = { addr = 0x801F5988, type = "func", source = "begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)" }
 Area_RunTurnStep = { addr = 0x801F5AB4, type = "func", source = "runs one frame of a turning step: adds the velocity at +0x14 to the angle at +0x6C (masked to 0xFFF), counts the timer at +0x09 down and, at zero, sets state_01 to 1 and calls Area_FinishTurnStep, else calls the image's per-frame sync; Area_BeginTurnStep calls it" }
@@ -2773,7 +2773,7 @@ Actor_FacingToward = { addr = 0x801F4F78, type = "func", source = "returns the e
 Game_RequestMenuOnInput = { addr = 0x801F5578, type = "func", source = "one body shared through overlays/area/Game_RequestMenuOnInput.h" }
 Actor_StopMoving = { addr = 0x801F564C, type = "func", source = "clears the actor velocity words and sets the game overlay byte to 3" }
 Area_SetPanelStepOnInteract = { addr = 0x801F5734, type = "func", source = "sets the panel step counter g_GameState counter_11C to 4 while the interact input from D_80145AB6 is held within 0x40 of the actor and back to 3 otherwise; one body shared with the other area overlays" }
-Area_StepChargeGauge = { addr = 0x801F5798, type = "func", source = "steps the press-and-hold gauge at g_SpadWork +0x0B between 0 and 0x40 while the re-arm timer at +0x0A is spent: the masked input D_80145AB6 held against g_InputHeld raises it by 1 per frame and a full 0x40 re-arms the timer to 0x1E, releasing lowers it by a level step of 1, 2 or 3, halved per parity when the state byte at +0x02 is set (func_801F5254 in area104/14, func_801F5798 in area121/14)" }
+Area_StepChargeGauge = { addr = 0x801F5798, type = "func", source = "steps the press-and-hold gauge at g_Task +0x0B between 0 and 0x40 while the re-arm timer at +0x0A is spent: the masked input D_80145AB6 held against g_InputHeld raises it by 1 per frame and a full 0x40 re-arms the timer to 0x1E, releasing lowers it by a level step of 1, 2 or 3, halved per parity when the state byte at +0x02 is set (func_801F5254 in area104/14, func_801F5798 in area121/14)" }
 Area_FinishTurnStep = { addr = 0x801F5E2C, type = "func", source = "stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step" }
 Area_BeginTurnStep = { addr = 0x801F5ECC, type = "func", source = "begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)" }
 Area_RunTurnStep = { addr = 0x801F5FF8, type = "func", source = "runs one frame of a turning step: adds the velocity at +0x14 to the angle at +0x6C (masked to 0xFFF), counts the timer at +0x09 down and, at zero, sets state_01 to 1 and calls Area_FinishTurnStep, else calls the image's per-frame sync; Area_BeginTurnStep calls it" }
@@ -2842,13 +2842,13 @@ Actor_SnapToGround = { addr = 0x801F2DD4, type = "func", source = "snaps the act
 ["emi/world03/area147/13"]
 World_AdvanceAreaWhenPartyNear = { addr = 0x801F2DF4, type = "func", source = "one body shared through overlays/area/World_AdvanceAreaWhenPartyNear.h" }
 Actor_AdvanceOutsidePartyCell = { addr = 0x801F2FB0, type = "func", source = "advances the work state when the party position D_80145EC4/D_80145EC8 is outside the work cell: the first axis alone decides and the second axis keeps the work in place when the party stands in either half-cell of it, without the area update (func_801F2FB0 in area147/13, func_801F3020 in area148/13, func_801F3F84 in area170/13)" }
-Area_AdvanceCountdown = { addr = 0x801F30AC, type = "func", source = "advances the countdown at g_SpadWork +0x30 by 0x10, moves the state byte to 1 and plays cue 0x201 when g_GameStateIndex is 0 once it reaches zero or below, then runs the frame update with the mode taken from the sign of g_SpadWork +0x32 (func_801F311C in area148/13, func_801F30AC in area147/13)" }
+Area_AdvanceCountdown = { addr = 0x801F30AC, type = "func", source = "advances the countdown at g_Task +0x30 by 0x10, moves the state byte to 1 and plays cue 0x201 when g_GameStateIndex is 0 once it reaches zero or below, then runs the frame update with the mode taken from the sign of g_Task +0x32 (func_801F311C in area148/13, func_801F30AC in area147/13)" }
 Area_Update = { addr = 0x801F313C, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 
 ["emi/world03/area148/13"]
 World_AdvanceAreaWhenPartyNear = { addr = 0x801F2E64, type = "func", source = "one body shared through overlays/area/World_AdvanceAreaWhenPartyNear.h" }
 Actor_AdvanceOutsidePartyCell = { addr = 0x801F3020, type = "func", source = "advances the work state when the party position D_80145EC4/D_80145EC8 is outside the work cell: the first axis alone decides and the second axis keeps the work in place when the party stands in either half-cell of it, without the area update (func_801F2FB0 in area147/13, func_801F3020 in area148/13, func_801F3F84 in area170/13)" }
-Area_AdvanceCountdown = { addr = 0x801F311C, type = "func", source = "advances the countdown at g_SpadWork +0x30 by 0x10, moves the state byte to 1 and plays cue 0x201 when g_GameStateIndex is 0 once it reaches zero or below, then runs the frame update with the mode taken from the sign of g_SpadWork +0x32 (func_801F311C in area148/13, func_801F30AC in area147/13)" }
+Area_AdvanceCountdown = { addr = 0x801F311C, type = "func", source = "advances the countdown at g_Task +0x30 by 0x10, moves the state byte to 1 and plays cue 0x201 when g_GameStateIndex is 0 once it reaches zero or below, then runs the frame update with the mode taken from the sign of g_Task +0x32 (func_801F311C in area148/13, func_801F30AC in area147/13)" }
 Area_Update = { addr = 0x801F31AC, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 Area_ClearSceneFlag46AndResetMode = { addr = 0x801F39A4, type = "func", source = "clears scene event flag 0x46 (g_SceneEventFlags) and returns g_AreaSceneMode to 0; one body shared with the other area overlays" }
 Actor_PlaceAtFocus = { addr = 0x801F39D4, type = "func", source = "copies the field focus point into the work position" }
@@ -3078,7 +3078,7 @@ Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the
 Scene_ClearEventState = { addr = 0x801F2CA4, type = "func", source = "clears the script-active flag and the three scene event state bytes at D_801448EB" }
 
 ["emi/world04/area188/13"]
-Area_AdvanceSpawnTimer = { addr = 0x801F3598, type = "func", source = "runs one frame of the spawn work: claims a slot every fourth frame of g_SpadWork +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_SpadWork +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)" }
+Area_AdvanceSpawnTimer = { addr = 0x801F3598, type = "func", source = "runs one frame of the spawn work: claims a slot every fourth frame of g_Task +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_Task +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)" }
 Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "clears one byte of each row in the actor window" }
 Area_ClaimSpawnSlot = { addr = 0x801F3DE0, type = "func", source = "claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots; one body shared with the other area overlays" }
 Area_StepSpawnSlots = { addr = 0x801F3E7C, type = "func", source = "ages every active spawn slot: counts the life byte down, shrinks the radius halfword the draw reads as the disc radius, frees the slot at zero and calls Area_DrawSpawnSlot; returns whether any slot was active, the scene steps ignore it; one body shared with the other area overlays" }
@@ -3392,7 +3392,7 @@ CF_DVLC = { addr = 0x801DAC24, source = "LIBPRESS table.o CF_DVLC, 65536 bytes e
 s_LogoCdVolume = { addr = 0x801EB470, source = "playback.c passes these four channel levels to CdMix" }
 
 ["exe/slus_004_22"]
-g_SpadWork = { addr = 0x1F800044, size = 0x4, source = "Area_DrawObjectSprite, Area_BuildClut and the battle, field and world steppers read the current work record through it" }
+g_Task = { addr = 0x1F800044, size = 0x4, source = "Area_DrawObjectSprite, Area_BuildClut and the battle, field and world steppers read the current work record through it" }
 g_AreaMapBundle = { addr = 0x80104000, type = "AreaMapBundle", size = 0x30, source = "Area_UploadCell, Area_StoreHeight and the cell units read its header; func_80153DE8 publishes the byte-code base" }
 g_AreaCells = { addr = 0x8012C000, size = 0x1880, source = "Area_ProbeCell fills the tile of each cell, Area_ProbeCellId and func_801530D0 read the primitive row id at +2; func_80152C9C, func_80152D9C, func_80152E94 and func_80152FB0 rotate it" }
 g_AreaCellPrims = { addr = 0x8012D880, size = 0x14000, source = "Area_FindCellQuad and Area_DrawCellQuad index the POLY_FT4 pair by row and g_FrameBufferIndex; func_80153DE8 resets 0x400 rows" }
@@ -3434,7 +3434,7 @@ g_SysResetHoldFrames = { addr = 0x80143F44, source = "SYS_Main counts held reset
 g_PartyX = { addr = 0x80143F7C, type = "s32", source = "func_8015C2D4 seeds the scene scroll from it game/00 func_801A8F94 writes it and func_801C5874 moves the player with it" }
 g_PartyY = { addr = 0x80143F80, type = "s32", source = "func_8015C2D4 seeds the scroll from it game/00 func_801A8F94/801AA470 write it" }
 g_ScrollHeight = { addr = 0x80143F86, type = "s16", source = "func_801A8F94/801AA470/801C5874 store func_8015477C(x, y) func_8015C750/801C5874 feed Area_AdvanceScroll" }
-g_ActorSlots = { addr = 0x80143FC8, size = 0x910, source = "Actor_DispatchAll loops its 20 ActorSlot rows of 0x74 bytes; Actor_FindFreeSlot returns the first slot whose flags_00 is 0, else 0xFF" }
+g_ActorSlots = { addr = 0x80143FC8, size = 0x910, source = "Actor_DispatchAll loops its 20 ActorSlot rows of 0x74 bytes; Actor_FindFreeSlot returns the first slot whose flags is 0, else 0xFF" }
 g_SndMono = { addr = 0x80144951, type = "u8", source = "SAVE_RunLoadVerify selects SsSetStereo for 0 and SsSetMono otherwise; SND_SetCdVolume halves the CD mix for nonzero" }
 g_Characters = { addr = 0x80144968, size = 0x520, source = "func_801C16B8 refills each record's current_hp and current_ap from max_hp and max_ap, func_801ADDD4 raises level, exp and base stats in it, and the shop, status and battle-setup code index it by record slot (8 x 0xA4)" }
 g_SceneFlagWords = { addr = 0x80144E88, type = "u8", source = "the 20 per-scenario 8-byte flag words func_801A7704 indexes it with scenario_id * 8 etc/start/08 func_801E5FD4 uses base+0x5B0 func_80155E7C reads base + (request >> 24) * 8" }
@@ -3586,7 +3586,7 @@ g_AreaCameraRefreshCount = { addr = 0x80149333, type = "u8", source = "set 2/3 o
 g_AreaCellPrimFreeIndex = { addr = 0x80149334, type = "u16", source = "Area_AllocCellPrimRow advances it past the popped id and Area_FreeCellPrimRow steps it back before storing; 0 means no id is left" }
 g_AreaTileRemainderY = { addr = 0x80149338, type = "s16", source = "wrapped at 0x200 with the func_80152E94/80152FB0 refills func_80153DE8 seeds it from the map height" }
 g_AreaSceneMode = { addr = 0x8014933B, type = "u8", source = "Area_TestCondition class FE00 compares the request low byte with it (func_80155E7C) world02/area106 walks 0/1/2" }
-g_AreaDrawMode = { addr = 0x8014933E, type = "u8", source = "the GFX_AddPrim draw mode in func_8015684C/80156C18/801579A8 Area_SetDrawMode stages it into g_SpadWork->unk_29 SYS_StartFrontend sets 6" }
+g_AreaDrawMode = { addr = 0x8014933E, type = "u8", source = "the GFX_AddPrim draw mode in func_8015684C/80156C18/801579A8 Area_SetDrawMode stages it into g_Task->unk_29 SYS_StartFrontend sets 6" }
 s__LOGO_LOGO_EXE_1_80149800 = { addr = 0x80149800, size = 0x14, source = "SYS_RunLogo passes this LOGO executable path to SYS_LoadExec" }
 D_80149814 = { addr = 0x80149814, size = 0x11F0 }
 D_80149998 = { addr = 0x80149998, size = 0x178, alias = true }
@@ -3621,12 +3621,12 @@ Area_DrawScene = { addr = 0x8014BA54, type = "func", source = "Battle_Update and
 Area_SwapObjects = { addr = 0x8014BAB8, type = "func", source = "swaps two D_8014828C object pointers for the object-list sort in func_8014BC70" }
 Area_SwapActors = { addr = 0x8014BAEC, type = "func", source = "swaps two D_80148214 work-record entries for the sort in func_8014BB20" }
 Area_DrawActors = { addr = 0x8014BB20, type = "func", source = "sorts the active D_80148214 records by +0x3E then draws each through func_8014C4D4" }
-Area_DrawObjectSprite = { addr = 0x8014C4D4, type = "func", source = "draws g_SpadWork's sprite cells against the 0x1C0 x 0x170 window" }
+Area_DrawObjectSprite = { addr = 0x8014C4D4, type = "func", source = "draws g_Task's sprite cells against the 0x1C0 x 0x170 window" }
 Area_RoundSpriteCoordinate = { addr = 0x8014CE48, type = "func", source = "rounds a sprite cell coordinate scaled by the work scale, called by Area_DrawObjectSprite" }
-Area_BuildClut = { addr = 0x8014CE78, type = "func", source = "packs g_SpadWork's texture page and CLUT for func_8014C4D4's FT4 cells" }
-Area_DrawSpriteCell = { addr = 0x8014CF9C, type = "func", source = "draws one plain sprite cell of g_SpadWork (func_8014C4D4's mode 0/3 branch)" }
-Area_SetDrawMode = { addr = 0x8014D260, type = "func", source = "stages g_AreaDrawMode into g_SpadWork->unk_29 then runs func_8014D290" }
-Area_AddActor = { addr = 0x8014D4E0, type = "func", source = "appends g_SpadWork to D_80148214 for func_8014BB20's sort" }
+Area_BuildClut = { addr = 0x8014CE78, type = "func", source = "packs g_Task's texture page and CLUT for func_8014C4D4's FT4 cells" }
+Area_DrawSpriteCell = { addr = 0x8014CF9C, type = "func", source = "draws one plain sprite cell of g_Task (func_8014C4D4's mode 0/3 branch)" }
+Area_SetDrawMode = { addr = 0x8014D260, type = "func", source = "stages g_AreaDrawMode into g_Task->unk_29 then runs func_8014D290" }
+Area_AddActor = { addr = 0x8014D4E0, type = "func", source = "appends g_Task to D_80148214 for func_8014BB20's sort" }
 Actor_CopyScriptEntry = { addr = 0x8014D54C, type = "func", source = "selects a script entry through func_8014DC08 and copies its bytes to the staging buffer" }
 Actor_SwitchScript = { addr = 0x8014D5F0, type = "func", source = "copies the selected script record and re-arms its position through func_8014D910" }
 Actor_StageScriptRecord = { addr = 0x8014D664, type = "func", source = "stages the selected script record and position through func_8014D54C and func_8014D910" }
@@ -3636,7 +3636,7 @@ Actor_RequestScript = { addr = 0x8014D8D4, type = "func", source = "reports 1 wh
 Actor_SeekScript = { addr = 0x8014D910, type = "func", source = "reads the entry filter byte - advances by 2 - derives the paired table and stages the next entry" }
 Actor_SelectScriptBank = { addr = 0x8014DC08, type = "func", source = "selects the 3-byte resource record and points unk_50 at its script" }
 Area_FindSceneRecord = { addr = 0x8014DD3C, type = "func", source = "matches a wanted id in the scene table D_801459F4 and fills the palette/tile fields" }
-Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "publishes a field record's +0x32 halfword into g_SpadWork through func_8015B4F4" }
+Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "publishes a field record's +0x32 halfword into g_Task through func_8015B4F4" }
 SYS_ReadCd = { addr = 0x8014E0A8, type = "func", source = "CdRead then CdReadSync/VSync loop - SYS_RunLogo's EXE read calls it" }
 SYS_LoadExec = { addr = 0x8014E0FC, type = "func", source = "SYS_RunLogo reads LOGO.EXE in two sector steps through SYS_ReadCd and copies its header to D_80143E70" }
 GFX_UploadPalette = { addr = 0x8014E22C, type = "func", source = "LoadImage of the 0x100 x 0x20 stage palette when g_GfxPalettePending is set - SYS_Main calls it" }
@@ -3764,8 +3764,8 @@ Game_ClearScriptActive = { addr = 0x8015C058, type = "func", source = "clears th
 Game_SetScriptActive = { addr = 0x8015C088, type = "func", source = "sets the script bits (D_80146871 0x40, GAME_FLAG_SCRIPT_ACTIVE); Scene_RunShopSaveEvent calls it in its first state, and Game_ClearScriptActive clears the same bits" }
 Party_ShowBattlers = { addr = 0x8015C0B8, type = "func", source = "clears ACTOR_FLAG_HIDDEN on the three g_BattlePartyBattlers rows; opcode 12 of the cursor script func_801A8F94 calls it when its operand is not 0, func_8015C100 sets the flag" }
 Party_HideBattlers = { addr = 0x8015C100, type = "func", source = "sets ACTOR_FLAG_HIDDEN on the three g_BattlePartyBattlers rows; opcode 12 of the cursor script func_801A8F94 calls it when its operand is 0 and Party_ShowBattlers (the same rows, flag cleared) otherwise" }
-Actor_GetType = { addr = 0x8015C148, type = "func", source = "classifies g_SpadWork as the mode work (2) - a g_BattlePartyBattlers record (1) - a lower area (0) or a field record (3)" }
-Actor_RunHandler = { addr = 0x8015C264, type = "func", source = "forwards the seven arguments to the D_801821D0 handler selected by g_SpadWork->unk_04" }
+Actor_GetType = { addr = 0x8015C148, type = "func", source = "classifies g_Task as the mode work (2) - a g_BattlePartyBattlers record (1) - a lower area (0) or a field record (3)" }
+Actor_RunHandler = { addr = 0x8015C264, type = "func", source = "forwards the seven arguments to the D_801821D0 handler selected by g_Task->unk_04" }
 Actor_InitMovement = { addr = 0x8015C2D4, type = "func", source = "seeds the hold counter and velocity dividers from the handler entry - or publishes the direction into the scroll globals" }
 Actor_StepMovement = { addr = 0x8015C540, type = "func", source = "steps the work record's coordinates and ground height - requests the next script at the end of the run" }
 Actor_StepScroll = { addr = 0x8015C750, type = "func", source = "advances the actor vertical step and scroll, on countdown expiry copies the scroll target into the actor coordinates (src/engine/slus/Actor_StepScroll.c)" }
@@ -3895,18 +3895,18 @@ Char_TestAbilityRole = { addr = 0x80166904, type = "func", source = "maps the re
 Char_GetAbilityCost = { addr = 0x80166A10, type = "func", source = "rescales the D_801CA71A ability byte for flags 0x1A (halve) and 0x19 (three quarters)" }
 Party_GetAbilities = { addr = 0x80166AE4, type = "func", source = "resolves the party record a slot kind points at and returns its ability panel" }
 Char_GetAbilities = { addr = 0x80166B94, type = "func", source = "resolves the character record and returns the panel its ability-kind record selects" }
-GFX_StagePalette = { addr = 0x80166C48, type = "func", source = "copies 0x20 halfwords of palette row field of the resource record in g_SpadWork->unk_4C to dst and dst + 0x4000 and sets g_GfxPalettePending; the callers pass GAME_PALETTE_STAGE rows" }
+GFX_StagePalette = { addr = 0x80166C48, type = "func", source = "copies 0x20 halfwords of palette row field of the resource record in g_Task->unk_4C to dst and dst + 0x4000 and sets g_GfxPalettePending; the callers pass GAME_PALETTE_STAGE rows" }
 Area_GetCellCode = { addr = 0x80166CB0, type = "func", source = "returns the g_AreaCellCodes byte at (x, y); func_8019BF78 stores it in the spad work and Area_CanStartEncounter tests it against zero" }
-Party_ClearBattlerState = { addr = 0x80166CEC, type = "func", source = "clears the four state bytes after flags_00 (D_80145E91..D_80145E94) of one 0x140-stride party battler row" }
-Party_ResetBattlers = { addr = 0x80166D34, type = "func", source = "clears flags_00 of the three g_BattlePartyBattlers rows and calls Party_ClearBattlerState on each; Party_BuildBattlers calls it first" }
-Party_ClearActiveBattlers = { addr = 0x80166D8C, type = "func", source = "calls Party_ClearBattlerState on each of the three g_BattlePartyBattlers rows whose flags_00 is set; func_801C05AC calls it" }
+Party_ClearBattlerState = { addr = 0x80166CEC, type = "func", source = "clears the four state bytes after flags (D_80145E91..D_80145E94) of one 0x140-stride party battler row" }
+Party_ResetBattlers = { addr = 0x80166D34, type = "func", source = "clears flags of the three g_BattlePartyBattlers rows and calls Party_ClearBattlerState on each; Party_BuildBattlers calls it first" }
+Party_ClearActiveBattlers = { addr = 0x80166D8C, type = "func", source = "calls Party_ClearBattlerState on each of the three g_BattlePartyBattlers rows whose flags is set; func_801C05AC calls it" }
 SYS_ShowFileNotFound = { addr = 0x80166DF4, type = "func", source = "draws D_80149F9C with UI_DrawGlyphString and the three scratchpad ID bytes forever" }
 EMI_LoaderStreamFamily = { addr = 0x80166E88, type = "func", source = "arms the overlay loader for a family key and waits for the stream to become ready" }
 EMI_ArmPartyPlp = { addr = 0x80166F3C, type = "func", source = "re-arms the loader with the party archive row found by EMI_FindPartyArchive and family EMI_FAMILY_PLP unless that row is the loaded index; EMI_LoaderStreamFamily calls it for family 0" }
 EMI_ArmPartyFamily = { addr = 0x80166F84, type = "func", source = "re-arms the loader through EMI_StreamFamilyArchive with the party archive row found by EMI_FindPartyArchive and the given family unless that row is already g_EmiLoadedCharacterIndex; EMI_LoaderStreamFamily calls it" }
 EMI_FindPartyArchive = { addr = 0x80166FF8, type = "func", source = "compares the three party member ids (sorted, 0xFF empty) with the 19 three-byte rows of D_80181B34 and returns the matching row index, calling SYS_ShowFileNotFound when none matches; EMI_ArmPartyPlp and EMI_ArmPartyFamily pass it to EMI_StreamFamilyArchive as the slot" }
 EMI_StreamFamilyArchive = { addr = 0x8016728C, type = "func", source = "maps a content family and index to a loader slot and starts its stream" }
-Area_DispatchScene = { addr = 0x80167344, type = "func", source = "installs D_8014626C as g_SpadWork and dispatches through D_80183A60 by D_8014626D" }
+Area_DispatchScene = { addr = 0x80167344, type = "func", source = "installs D_8014626C as g_Task and dispatches through D_80183A60 by D_8014626D" }
 Area_InitScene = { addr = 0x801673AC, type = "func", source = "seeds the scratch work area for the incoming scene from D_80145FBC and D_80145EC4/8/C" }
 Area_StepSceneTimer = { addr = 0x80167800, type = "func", source = "ticks the scene timer and runs Area_ResetScene on expiry" }
 Area_SyncScrollHeight = { addr = 0x80167848, type = "func", source = "feeds the actor height span_3E to Area_AdvanceScroll while g_AreaCameraMoving is clear (src/engine/slus/Area_SyncScrollHeight.c)" }

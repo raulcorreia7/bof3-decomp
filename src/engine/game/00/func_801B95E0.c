@@ -1,11 +1,11 @@
 #include "game_00.h"
 
-#define STEP_TILE_X(n) (((s16)FIELD(u16, g_SpadWork, 0x36u) + (n)) << 0x10) >> 1
+#define STEP_TILE_X(n) (((s16)FIELD(u16, g_Task, 0x36u) + (n)) << 0x10) >> 1
 #define PAD_FLAG       SP_REF(u8, 0x0)
 #define PAD_A          SP_REF(u8, 0x8)
 #define PAD_B          SP_REF(u8, 0x9)
 #define PAD_C          SP_REF(u8, 0xA)
-#define WDIR           g_SpadWork->direction_08
+#define WDIR           g_Task->direction_08
 
 /* nonmatching unmeasured: tried if-chain compare order, ret var for return 3; pad pointer folds to absolute (retail
  * keeps s0), delay-slot li v0,3 sharing. */
@@ -26,16 +26,16 @@ NON_MATCHING s32 func_801B95E0(void) {
         return 1;
     }
     dir = WDIR;
-    if (g_SpadWork->x.part.fraction != 0 && g_SpadWork->y.part.fraction != 0) {
+    if (g_Task->x.part.fraction != 0 && g_Task->y.part.fraction != 0) {
         return 1;
     }
-    x     = FIELD(u16, g_SpadWork, 0x36u) + (s8)D_80181B00[WDIR * 2];
-    y_arg = y = FIELD(u16, g_SpadWork, 0x3Au) + (s8)D_80181B01[WDIR * 2];
+    x     = FIELD(u16, g_Task, 0x36u) + (s8)D_80181B00[WDIR * 2];
+    y_arg = y = FIELD(u16, g_Task, 0x3Au) + (s8)D_80181B01[WDIR * 2];
     func_801BBBC8(x, y_arg);
 
     if (!(WDIR & 1)) {
-        if (g_SpadWork->x.part.fraction == 0) {
-            if (g_SpadWork->y.part.fraction == 0) {
+        if (g_Task->x.part.fraction == 0) {
+            if (g_Task->y.part.fraction == 0) {
                 pad    = (u8*)&D_1F800008;
                 pad[0] = func_801B9F08(1, 2, 3);
                 pad[1] = func_801B9F08(2, 0, 0);
@@ -53,7 +53,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                         } else if (PAD_C == 0x10) {
                             func_801BB8E8(4, 6, 5);
                         } else {
-                            g_SpadWork->direction_08 = (WDIR + 1) & 7;
+                            g_Task->direction_08 = (WDIR + 1) & 7;
                         }
                     }
                     if (!(g_GameRequestFlags & 1)) {
@@ -87,7 +87,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                     if (WDIR & 1) {
                         return ret;
                     }
-                    probe = Area_ReadStepHeight(x << 0x10, (((s16)FIELD(u16, g_SpadWork, 0x3Au) + y) << 0x10) >> 1, 1)
+                    probe = Area_ReadStepHeight(x << 0x10, (((s16)FIELD(u16, g_Task, 0x3Au) + y) << 0x10) >> 1, 1)
                             << 0x10;
                     if (PAD_FLAG == 0) {
                         return 3;
@@ -101,7 +101,7 @@ NON_MATCHING s32 func_801B95E0(void) {
             }
             goto north_south;
         }
-        if (g_SpadWork->y.part.fraction == 0) {
+        if (g_Task->y.part.fraction == 0) {
             v     = func_801B9F08(2, 4, 0);
             PAD_A = v;
             if (v == 0x70) {
@@ -141,8 +141,8 @@ NON_MATCHING s32 func_801B95E0(void) {
         return func_801BB7B0(8) & BYTE_MASK;
     }
 
-    if (g_SpadWork->x.part.fraction == 0) {
-        if (g_SpadWork->y.part.fraction == 0) {
+    if (g_Task->x.part.fraction == 0) {
+        if (g_Task->y.part.fraction == 0) {
             v     = func_801B9F08(1, 0, 0);
             PAD_A = v;
             if (v == 0xB0) {
@@ -158,8 +158,8 @@ NON_MATCHING s32 func_801B95E0(void) {
         }
         goto diag_south;
     }
-    if (g_SpadWork->y.part.fraction == 0) {
-        if (g_SpadWork->direction_08 & 2) {
+    if (g_Task->y.part.fraction == 0) {
+        if (g_Task->direction_08 & 2) {
             return 3;
         }
         v     = func_801B9F08(2, 4, 0);
@@ -194,7 +194,7 @@ NON_MATCHING s32 func_801B95E0(void) {
         if ((v & 0xF0) == 0xA0) {
             return func_801BB7B0(8) & BYTE_MASK;
         }
-        probe = Area_ReadStepHeight(((((s16)FIELD(u16, g_SpadWork, 0x36u) * 2) + 1) << 0x10) >> 1, y_arg << 0x10, 1)
+        probe = Area_ReadStepHeight(((((s16)FIELD(u16, g_Task, 0x36u) * 2) + 1) << 0x10) >> 1, y_arg << 0x10, 1)
                 << 0x10;
         if (PAD_FLAG != 0) {
             ret = 3;
@@ -242,7 +242,7 @@ diag_south:
     if ((v & 0xF0) == 0xA0) {
         return func_801BB7B0(8) & BYTE_MASK;
     }
-    probe = Area_ReadStepHeight(x << 0x10, ((((s16)FIELD(u16, g_SpadWork, 0x3Au) * 2) + 1) << 0x10) >> 1, 1) << 0x10;
+    probe = Area_ReadStepHeight(x << 0x10, ((((s16)FIELD(u16, g_Task, 0x3Au) * 2) + 1) << 0x10) >> 1, 1) << 0x10;
     if (PAD_FLAG != 0) {
         ret = 3;
         if ((probe >> 0x10) >= 0x41) {

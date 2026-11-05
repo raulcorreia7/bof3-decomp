@@ -5,6 +5,6 @@ MATCH void func_801F2C88(void) {
 
     func_801F2FC8();
     func_801F321C();
-    work = (u8*)g_SpadWork;
+    work = (u8*)g_Task;
     work[1] += 1;
 }

@@ -3,9 +3,9 @@
 MATCH void Effect_CountUpAndStepAt30(void) {
     u8 timer;
 
-    timer                           = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 + 1;
+    g_Task->word_08.byte.unk_09 = timer;
     if (timer == 30) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     }
 }

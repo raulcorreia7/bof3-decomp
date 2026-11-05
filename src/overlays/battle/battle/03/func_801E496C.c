@@ -20,8 +20,8 @@ MATCH void func_801E496C(void) {
         }
     }
     if ((g_BattleCurrentEnemy->target_flags_FC & 1) != 0) {
-        func_800AAC88(g_BattleCurrentEnemy->damage_F8, g_SpadWork->slot);
+        func_800AAC88(g_BattleCurrentEnemy->damage_F8, g_Task->slot);
     }
     func_801E30F8();
-    g_SpadWork->unk_03 = g_SpadWork->unk_03 + 1;
+    g_Task->unk_03 = g_Task->unk_03 + 1;
 }

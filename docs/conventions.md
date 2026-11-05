@@ -1402,13 +1402,17 @@ Adjacent globals that form one record are [one struct or array](#globals-are-rec
 
 One name per address per image. A second name for one address (a width or `volatile` view) is a cast
 macro, not a second `extern`. A cast macro that names the object itself keeps the bytes
-(`#define g_SpadWork ((T *)g_SpadWork)`); an address-taking view hoists the address and changes them.
+(`#define g_Task ((T *)g_Task)`); an address-taking view hoists the address and changes them.
 
-- `g_SpadWork` is the pointer cell at `0x1F800044`: one `extern struct Task *g_SpadWork;` in
+- `g_Task` is the pointer cell at `0x1F800044`: one `extern struct Task *g_Task;` in
   `include/psx/mem.h`. `struct Task` is incomplete, so no member is reachable without a view. Each
   mode header views the cell as its work record through a cast macro. Code with no record type reads
-  bytes through `SPAD_WORK_BYTES[n]`, and assigns the cell with `(struct Task *)`. An image that reads
-  it as `volatile` defines `SPAD_WORK_VOLATILE` before the first include.
+  bytes through `TASK_BYTES[n]`, and assigns the cell with `(struct Task *)`. An image that reads
+  it as `volatile` defines `TASK_VOLATILE` before the first include.
+- Task header: every record the cell points at starts with the same three bytes: `flags` (0x00),
+  `mode` (0x01) and `step` (0x02). A type with a `u8` there uses these names, not `unk_01` or
+  `state_02`. Per-object scratch (fishing, a boss) is a union at the record's tail, one view per
+  user (`ext.fishing`), at the same offsets.
 
 #### Order-sensitive macros
 
@@ -1419,7 +1423,7 @@ merge, and the macro is not a setting to move into a header.
 
 | Macro                               | Header                  | Selects                                             |
 | ----------------------------------- | ----------------------- | --------------------------------------------------- |
-| `SPAD_WORK_VOLATILE`                | `include/psx/mem.h`     | `volatile` view of `g_SpadWork`                     |
+| `TASK_VOLATILE`                     | `include/psx/mem.h`     | `volatile` view of `g_Task`                         |
 | `SCRIPT_VARS_VOLATILE`              | `include/game/script.h` | `volatile u8 g_ScriptVars`                          |
 | `GRAPHICS_PALETTE_PENDING_VOLATILE` | `include/slus/data.h`   | `volatile u8 g_GfxPalettePending`                   |
 | `GAME_SCRATCH_BASE_SCALAR`          | `include/game/spawn.h`  | `u8 D_1F800000[]` in place of the `ScratchPad` view |
@@ -1434,7 +1438,7 @@ differs. Find candidates with `bin/coddog cluster <target>` ([coddog](toolchain.
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Any, body of one statement                                                             | Not shared: each member writes the statement (`SYS_DISPATCH_BYTE(table, step);`).                                                                                                                                                                                                                                       |
 | One image, same body or values used only before the first branch                       | A `static inline` function in the image header; each member is one call (`Battle_ApplyHalfDamage(0x80);`). The inline reads the globals it uses itself and takes values, not pointers it keeps across a call ([inline measurements](toolchain.md#inline-functions-and-byte-identity)).                                  |
-| One image, a value used after a branch, loop or join, or a pointer local `p = &GLOBAL` | Each member is a visible definition whose body is one statement macro from the image or group header: `MATCH void func_801EFF8C(void) { g_SpadWork->unk_09 = 0; BMagic_NextStep(); }`. A member's extra statements are written in its own body, never passed to the macro as code.                                      |
+| One image, a value used after a branch, loop or join, or a pointer local `p = &GLOBAL` | Each member is a visible definition whose body is one statement macro from the image or group header: `MATCH void func_801EFF8C(void) { g_Task->unk_09 = 0; BMagic_NextStep(); }`. A member's extra statements are written in its own body, never passed to the macro as code.                                          |
 | Several images, one member each, same source                                           | One function: one game name in every member's `config/symbols.toml` table, the whole definition (`MATCH`, signature, body) in `src/overlays/<group>/<Name>.h`, included at file level where the function sits. The shared file has no include guard.                                                                    |
 | Several images, a value differs per image                                              | As above; the value is a named setting in each member's image header (`#define AREA_SHOP_REQUEST 0x60`).                                                                                                                                                                                                                |
 | Several images, one image holds two members                                            | The statement macro for every member of the group, so the body has one source.                                                                                                                                                                                                                                          |
@@ -1454,7 +1458,7 @@ A shared body follows these rules:
 - Bodies that differ share a name only as a role: every member fills the same slot (one installer
   or caller, one signature), and the row's `source` names the slot. Otherwise each body takes its own
   name.
-- A per-unit compile switch (`SPAD_WORK_VOLATILE`) stays in the thin `.c`, above the image-header
+- A per-unit compile switch (`TASK_VOLATILE`) stays in the thin `.c`, above the image-header
   include.
 - A value that differs per image is a named setting in the image header. A body that needs more
   than one or two settings, or a macro knot, stays per image.
@@ -1560,12 +1564,12 @@ without a rename, and `tools/symbol.py refs` ranks the units to name first.
 ### Symbols and the link
 
 A global's address is its row in `config/symbols.toml`, or the name itself for an address name
-(`D_80145E90`). `g_SpadWork` is one row in the `["exe/slus_004_22"]` table. The row is the whole
+(`D_80145E90`). `g_Task` is one row in the `["exe/slus_004_22"]` table. The row is the whole
 edit: the link finds the address by itself, with no per-image list to extend and no reconfigure.
 
 ```toml
 ["exe/slus_004_22"]
-g_SpadWork = { addr = 0x1F800044, size = 0x4, source = "..." }
+g_Task = { addr = 0x1F800044, size = 0x4, source = "..." }
 ```
 
 Rows are written in address order. Keys: `addr`; `type` and `size` for splat; `source` (the evidence);

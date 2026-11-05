@@ -11,20 +11,20 @@ INCLUDE_ASM(func_801EED18);
 MATCH void func_801EEF50(void) {
     u16* flags;
 
-    if (g_SpadWork->word_08.byte.unk_0B == 0 && func_801F04A4() == 0) {
+    if (g_Task->word_08.byte.unk_0B == 0 && func_801F04A4() == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         func_801E5988();
     }
 }
 
 MATCH void func_801EEFB0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EEFF4(void) {
     BmagicEffectFuncs handlers;
 
-    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, unk_02);
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, step);
 }
 
 INCLUDE_ASM(func_801EF06C);
@@ -39,9 +39,9 @@ INCLUDE_ASM(func_801EF3D4);
 INCLUDE_ASM(func_801EF52C);
 
 MATCH void func_801EF6B8(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+    if (g_Task->word_08.byte.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
-        func_800A9820(g_SpadWork->unk_04);
+        func_800A9820(g_Task->unk_04);
         func_801E5988();
     }
 }
@@ -78,11 +78,11 @@ INCLUDE_ASM(func_801F00C4);
 INCLUDE_ASM(func_801F03E8);
 
 MATCH void func_801F0454(void) {
-    D_801F21F0->flags_00 = 0;
-    D_801F21F0->step_01  = 0;
-    D_801F21F0->unk_02   = 0;
-    D_801F21F0->unk_03   = 0;
-    D_801F21F0->unk_04   = 0;
+    D_801F21F0->flags  = 0;
+    D_801F21F0->mode   = 0;
+    D_801F21F0->step   = 0;
+    D_801F21F0->unk_03 = 0;
+    D_801F21F0->unk_04 = 0;
 }
 
 INCLUDE_ASM(func_801F04A4);

@@ -3,7 +3,7 @@
 /* One band: the cue fires when the work record's x and y both lie within `radius` of the target point
  * (D_8014930A, D_8014930E); `table` is the cue table the band stores. */
 #define SND_PROXIMITY_BAND(radius, table)         \
-    work   = g_SpadWork;                          \
+    work   = g_Task;                              \
     x      = work->x.part.integer;                \
     target = D_8014930A;                          \
     edge   = x + (radius);                        \

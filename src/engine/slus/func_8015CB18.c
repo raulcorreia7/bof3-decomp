@@ -19,7 +19,7 @@ u16       y;
     byte_value = id;
     half_value = x;
     if (slot != GAME_NONE) {
-        g_ActorSlots[slot].flags_00     = 1;
+        g_ActorSlots[slot].flags        = 1;
         g_ActorSlots[slot].type         = 6;
         g_ActorSlots[slot].step_0C      = step;
         g_ActorSlots[slot].unk_06       = byte_value;

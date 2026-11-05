@@ -7,23 +7,23 @@ MATCH void func_801B207C(void) {
     u8     frames;
     u8     i;
 
-    g_SpadWork->unk_09 += 1;
-    g_SpadWork->direction_08 = (g_SpadWork->direction_08 + 1) & 7;
-    Actor_SelectScript(g_SpadWork->direction_08);
-    frames = g_SpadWork->unk_09;
+    g_Task->unk_09 += 1;
+    g_Task->direction_08 = (g_Task->direction_08 + 1) & 7;
+    Actor_SelectScript(g_Task->direction_08);
+    frames = g_Task->unk_09;
     for (i = 1; i < g_PartySize; i++) {
-        work       = (Actor*)((u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE);
-        g_SpadWork = work;
-        awake      = 3;
-        limit      = -(frames << 5);
-        if (work->unk_01 == awake && limit < (s8)work->tint.bytes.unk_5D) {
-            work->tint.bytes.unk_5D       = limit;
-            g_SpadWork->tint.bytes.unk_5E = g_SpadWork->tint.bytes.unk_5D;
-            g_SpadWork->tint.bytes.unk_5F = g_SpadWork->tint.bytes.unk_5D;
+        work   = (Actor*)((u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE);
+        g_Task = work;
+        awake  = 3;
+        limit  = -(frames << 5);
+        if (work->mode == awake && limit < (s8)work->tint.bytes.unk_5D) {
+            work->tint.bytes.unk_5D   = limit;
+            g_Task->tint.bytes.unk_5E = g_Task->tint.bytes.unk_5D;
+            g_Task->tint.bytes.unk_5F = g_Task->tint.bytes.unk_5D;
         }
     }
-    g_SpadWork = (Actor*)g_BattlePartyBattlers;
+    g_Task = (Actor*)g_BattlePartyBattlers;
     if (D_80145E99 == 4) {
-        ((PartyBattler*)g_BattlePartyBattlers)[0].unk_02 += 1;
+        ((PartyBattler*)g_BattlePartyBattlers)[0].step += 1;
     }
 }

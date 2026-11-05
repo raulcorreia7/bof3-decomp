@@ -7,13 +7,13 @@ MATCH s32 func_801C4E14(void) {
     u8     region;
     s32    inactive;
 
-    work      = g_SpadWork;
+    work      = g_Task;
     countdown = work->unk_09;
     inactive  = 0;
     if (countdown != 0) {
         work->unk_09 = (u8)(countdown - 1);
         func_801C57B4();
-        state = g_SpadWork;
+        state = g_Task;
         if (state->unk_09 == state->unk_0A) {
             region                                                 = state->unk_05;
             g_GfxPalettePending                                    = 1;
@@ -22,7 +22,7 @@ MATCH s32 func_801C4E14(void) {
     } else {
         inactive = 1;
         Actor_RequestScript(work->direction_08);
-        g_SpadWork->unk_0A = 4U;
+        g_Task->unk_0A = 4U;
     }
     func_8014D978();
     return inactive;

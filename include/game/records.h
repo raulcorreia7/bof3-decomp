@@ -95,9 +95,9 @@ typedef enum ActorType {
 } ActorType;
 
 typedef struct ActorSlot {
-    u8    flags_00;     /* 0x00 set to 1 when the slot is claimed */
-    u8    unk_01;       /* 0x01 the kind the caller passes to Char_SpawnActor */
-    u8    unk_02;       /* 0x02 */
+    u8    flags;        /* 0x00 set to 1 when the slot is claimed */
+    u8    mode;         /* 0x01 the kind the caller passes to Char_SpawnActor */
+    u8    step;         /* 0x02 */
     u8    unk_03;       /* 0x03 */
     u8    unk_04;       /* 0x04 */
     u8    type;         /* 0x05 actor type: 0x0F/0x10/0x1E/0x32/0x69; handler index; accessory count */
@@ -131,7 +131,7 @@ typedef struct ActorSlot {
 } ActorSlot;
 
 ASSERT_SIZE(ActorSlot, ACTOR_SLOT_SIZE);
-ASSERT_OFFSET(ActorSlot, flags_00, 0x00);
+ASSERT_OFFSET(ActorSlot, flags, 0x00);
 ASSERT_OFFSET(ActorSlot, type, 0x05);
 ASSERT_OFFSET(ActorSlot, layer_09, 0x09);
 ASSERT_OFFSET(ActorSlot, step_0C, 0x0C);

@@ -17,18 +17,18 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
     if (func_8019C4F0(xh, yh) & BYTE_MASK) {
         return 1;
     }
-    if (g_SpadWork->vx != 0) {
+    if (g_Task->vx != 0) {
         if ((x & HALF_MASK) == 0) {
             goto fail; /* miss: return 0 */
         }
         pos = (xh << 16) | 0x8000;
-        func_80154ABC(pos, y, g_SpadWork->direction_08);
+        func_80154ABC(pos, y, g_Task->direction_08);
         if (SP_REF(u8, 0x0u) != 0) {
-            if (g_SpadWork->z.part.integer < Area_SampleHeight(pos, y)) {
+            if (g_Task->z.part.integer < Area_SampleHeight(pos, y)) {
                 return 1;
             }
         }
-        if (g_SpadWork->vx <= 0) {
+        if (g_Task->vx <= 0) {
             goto fail; /* miss: return 0 */
         }
         next_x = (s16)((x >> 16) + 1);
@@ -38,13 +38,13 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
             goto fail; /* miss: return 0 */
         }
         pos = (yh << 16) | 0x8000;
-        func_80154ABC(x, pos, g_SpadWork->direction_08);
+        func_80154ABC(x, pos, g_Task->direction_08);
         if (SP_REF(u8, 0x0u) != 0) {
-            if (g_SpadWork->z.part.integer < Area_SampleHeight(x, pos)) {
+            if (g_Task->z.part.integer < Area_SampleHeight(x, pos)) {
                 return 1;
             }
         }
-        if (g_SpadWork->vy <= 0) {
+        if (g_Task->vy <= 0) {
             goto fail; /* miss: return 0 */
         }
         next_x = x >> 16;

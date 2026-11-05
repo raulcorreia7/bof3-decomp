@@ -6,19 +6,19 @@ MATCH void func_8019E5D4(void) {
 
     Area_FindSceneRecord(0x18);
 
-    g_SpadWork->flags_24 = 0;
-    g_SpadWork->unk_2A   = 0;
-    g_SpadWork->unk_2B++;
-    g_SpadWork->unk_48 = 0;
+    g_Task->flags_24 = 0;
+    g_Task->unk_2A   = 0;
+    g_Task->unk_2B++;
+    g_Task->unk_48 = 0;
 
     value = rand();
     {
-        Actor* coord = g_SpadWork;
+        Actor* coord = g_Task;
         coord->x.fixed += value & HALF_MASK;
     }
     value = rand();
     {
-        Actor* record   = g_SpadWork;
+        Actor* record   = g_Task;
         record->gravity = -8;
         record->vz      = 0;
         record->y.fixed += value & HALF_MASK;
@@ -34,9 +34,9 @@ MATCH void func_8019E5D4(void) {
         sel = 0;
     }
 
-    g_SpadWork->tint.bytes.unk_5D = 0;
-    g_SpadWork->tint.bytes.unk_5E = 0;
-    g_SpadWork->tint.bytes.unk_5F = 0;
+    g_Task->tint.bytes.unk_5D = 0;
+    g_Task->tint.bytes.unk_5E = 0;
+    g_Task->tint.bytes.unk_5F = 0;
     Actor_SelectScript(sel + 0xB);
-    g_SpadWork->state_02++;
+    g_Task->step++;
 }

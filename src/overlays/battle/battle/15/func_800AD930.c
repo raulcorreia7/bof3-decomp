@@ -6,11 +6,11 @@ MATCH void func_800AD930(void) {
 
     flag = *MEM_PTR(u8, &g_BattlePanelEntry);
     if (flag != GAME_NONE) {
-        work = (PartyBattler*)g_SpadWork;
-        work->unk_02--;
+        work = (PartyBattler*)g_Task;
+        work->step--;
     }
     if (!(D_80148624 & 1)) {
-        BATTLE_WORK->step_01++;
-        BATTLE_WORK->unk_02 = 0;
+        BATTLE_WORK->mode++;
+        BATTLE_WORK->step = 0;
     }
 }

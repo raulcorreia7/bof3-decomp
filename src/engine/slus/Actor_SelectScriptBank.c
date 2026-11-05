@@ -14,12 +14,12 @@ MATCH void Actor_SelectScriptBank(u32 record_index) {
     u8*    base0;
     u8     level;
 
-    work   = g_SpadWork;
+    work   = g_Task;
     header = (u8*)work->unk_4C;
     base0  = header + ((s32*)header)[0];
     base8  = header + ((s32*)header)[2];
     entry  = header + ((s32*)header)[3] + (record_index & BYTE_MASK) * 3;
-    if (!(work->flags_00 & ACTOR_FLAG_SKIP_PALETTE_STAGE)) {
+    if (!(work->flags & ACTOR_FLAG_SKIP_PALETTE_STAGE)) {
         level = work->unk_25;
         if (level > 16) {
             D_80145A54[D_80145A00]    = (level - 0x10) << 6;
@@ -31,6 +31,6 @@ MATCH void Actor_SelectScriptBank(u32 record_index) {
         (&D_80145A04)[D_80145A00] = (s32)(base0 + ((u32*)base0)[entry[0]]);
         D_80145A00++;
     }
-    g_SpadWork->unk_2A    = entry[2];
-    g_SpadWork->source_50 = base8 + ((u16*)base8)[entry[1]];
+    g_Task->unk_2A    = entry[2];
+    g_Task->source_50 = base8 + ((u16*)base8)[entry[1]];
 }

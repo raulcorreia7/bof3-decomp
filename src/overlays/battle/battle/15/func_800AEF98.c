@@ -21,14 +21,14 @@ MATCH void func_800AEF98(s32 step, s32 payload) {
     u8* saved;
     u32 kind;
 
-    work       = (u8*)D_801EB4E0;
-    saved      = SPAD_WORK_BYTES;
-    kind       = *(u8*)&g_BattleActiveBattler;
-    g_SpadWork = (struct Task*)work;
+    work   = (u8*)D_801EB4E0;
+    saved  = TASK_BYTES;
+    kind   = *(u8*)&g_BattleActiveBattler;
+    g_Task = (struct Task*)work;
     if (kind < 3u) {
         Actor_SelectScript_keep_a1((step + work[8]) & BYTE_MASK, payload);
     } else {
         func_801E24F8(kind, payload & BYTE_MASK);
     }
-    g_SpadWork = (struct Task*)saved;
+    g_Task = (struct Task*)saved;
 }

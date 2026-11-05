@@ -81,12 +81,12 @@ file already declares the name. Output: `EXACT`, `FAIL` with the first differenc
 
 ## m2c sweep
 
-`tools/m2c_sweep.py` drafts open functions with m2c, runs each draft through `tools/try_body.py` and keeps the exact ones; `tools/seed.py <target>@<func>` writes the same drafts, the twins, callers and callees into `work/<image>/<ADDR>/` for one function. Both give m2c a typed work cell: the context declares `g_SpadView`, a pointer to the mode's work record (the type the unit casts `g_SpadWork` to, else the image family's record), and the assembly reads `0x1F800044` through it, so drafts name members instead of `->unkN`. The draft spells the cell `g_SpadWork`, or `((T *)g_SpadWork)` where the unit defines no view macro. A context without a complete record keeps the raw cell. The `--help` text lists the options.
+`tools/m2c_sweep.py` drafts open functions with m2c, runs each draft through `tools/try_body.py` and keeps the exact ones; `tools/seed.py <target>@<func>` writes the same drafts, the twins, callers and callees into `work/<image>/<ADDR>/` for one function. Both give m2c a typed work cell: the context declares `g_SpadView`, a pointer to the mode's work record (the type the unit casts `g_Task` to, else the image family's record), and the assembly reads `0x1F800044` through it, so drafts name members instead of `->unkN`. The draft spells the cell `g_Task`, or `((T *)g_Task)` where the unit defines no view macro. A context without a complete record keeps the raw cell. The `--help` text lists the options.
 
 ## Body generators
 
 `gen_body.py` lifts the assembly of a branch-free function into calls and stores and writes C from
-it with the repo's names (`config/symbols.toml` by address, `g_SpadWork` members by offset).
+it with the repo's names (`config/symbols.toml` by address, `g_Task` members by offset).
 `shapes` counts every `INCLUDE_ASM` function by shape (`call-seq`, `store-seq`, `spad`, `dispatch`,
 `straight`, `branch`); `tools/gen_body.py <shape> [rows.tsv] [--dry-run]` writes a body per member
 (`MATCH`, one statement per call or store), declares missing globals in the image header and keeps

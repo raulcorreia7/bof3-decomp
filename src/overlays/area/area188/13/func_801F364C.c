@@ -3,13 +3,13 @@
 MATCH void func_801F364C(void) {
     u8 count;
 
-    count              = g_SpadWork->unk_06;
-    g_SpadWork->unk_06 = count + 1;
+    count          = g_Task->unk_06;
+    g_Task->unk_06 = count + 1;
     if ((count & 3) == 0) {
         Area_ClaimSpawnSlot();
     }
     func_801F44B4();
     Area_StepSpawnSlots();
-    g_SpadWork->unk_09 = 0x20;
-    g_SpadWork->unk_01 += 1;
+    g_Task->unk_09 = 0x20;
+    g_Task->mode += 1;
 }

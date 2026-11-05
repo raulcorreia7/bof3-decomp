@@ -5,13 +5,13 @@ MATCH void func_801F2C48(void) {
     u8     step;
 
     if (!SYS_TestFlag(g_SceneEventFlags, 0xD)) {
-        work = g_SpadWork;
+        work = g_Task;
         step = 2;
     } else {
-        work = g_SpadWork;
+        work = g_Task;
         step = 1;
     }
-    work->unk_01  = step;
-    work          = g_SpadWork;
+    work->mode    = step;
+    work          = g_Task;
     work->z.fixed = 0x1000000;
 }

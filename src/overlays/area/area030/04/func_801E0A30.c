@@ -6,8 +6,8 @@ MATCH void func_801E0A30(void) {
     s32 i;
 
     for (i = 0; i < 7; i++) {
-        g_ActorSlots[i].unk_01 = 0;
-        g_ActorSlots[i].unk_02 = 0;
+        g_ActorSlots[i].mode   = 0;
+        g_ActorSlots[i].step   = 0;
         g_ActorSlots[i].unk_03 = 0;
         g_ActorSlots[i].unk_04 = 0;
     }

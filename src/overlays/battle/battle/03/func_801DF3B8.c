@@ -8,6 +8,6 @@ MATCH void func_801DF3B8(void) {
 
     func_801DEFE4();
     func_801DEDE4();
-    work = g_SpadWork;
-    work->step_01 += 1;
+    work = g_Task;
+    work->mode += 1;
 }

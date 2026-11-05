@@ -6,7 +6,7 @@ MATCH void func_801E6A54(void) {
 
     ScratchPad* sp;
 
-    work                     = g_SpadWork;
+    work                     = g_Task;
     value                    = work->word_08.byte.unk_09;
     sp                       = SPAD(0u);
     sp->view.battle.state_02 = value;

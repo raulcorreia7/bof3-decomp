@@ -48,10 +48,10 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
     void* tmp33;
     void* tmp34;
 
-    tmp33 = g_SpadWork;
+    tmp33 = g_Task;
     val7  = wanted_code;
     if ((FIELD(u16, tmp33, 0x34u) == 0) || (FIELD(u16, tmp33, 0x38u) == 0)) {
-        tmp27 = g_SpadWork;
+        tmp27 = g_Task;
         tmp17 = FIELD(u8, tmp27, 0x8u);
         tmp16 = FIELD(u16, tmp27, 0x36u);
         tmp11 = tmp17 * 2;
@@ -67,7 +67,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                 FIELD(s16, (&D_1F800000), 0x2u) = val2;
                 val7 &= BYTE_MASK;
                 if ((Area_GetCellCode(FIELD(u16, tmp27, 0x36u), tmp0) & BYTE_MASK) == val7) {
-                    tmp31                           = g_SpadWork;
+                    tmp31                           = g_Task;
                     FIELD(s16, (&D_1F800000), 0x2u) = val2;
                     *(u16*)(&D_1F800000)            = FIELD(u16, tmp31, 0x36u);
                     tmp22                           = FIELD(u8, tmp31, 0x8u);
@@ -92,8 +92,8 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                     }
                     goto block_22; /* retail branch */
                 }
-                if ((Area_GetCellCode(val1, FIELD(u16, g_SpadWork, 0x3Au)) & BYTE_MASK) == val7) {
-                    tmp23                           = g_SpadWork;
+                if ((Area_GetCellCode(val1, FIELD(u16, g_Task, 0x3Au)) & BYTE_MASK) == val7) {
+                    tmp23                           = g_Task;
                     *(u16*)(&D_1F800000)            = (u16)val3;
                     FIELD(s16, (&D_1F800000), 0x2u) = FIELD(u16, tmp23, 0x3Au);
                     tmp18                           = FIELD(u8, tmp23, 0x8u);
@@ -117,10 +117,10 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                         }
                     }
                 block_22:
-                    FIELD(s8, g_SpadWork, 0x8u) = val6;
+                    FIELD(s8, g_Task, 0x8u) = val6;
                     goto block_23; /* retail branch */
                 }
-                tmp32 = g_SpadWork;
+                tmp32 = g_Task;
                 tmp19 = FIELD(u8, tmp32, 0x8u);
                 if (tmp19 & 1) {
                     val1                            = (tmp19 + 2) & 7;
@@ -130,12 +130,12 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                     tmp1                            = FIELD(u16, tmp32, 0x3Au) + (s8) * (D_80181B01 + tmp8);
                     FIELD(s16, (&D_1F800000), 0x2u) = tmp1;
                     if (((Area_GetCellCode((s16)tmp14, tmp1) & BYTE_MASK) == val7) ||
-                        (tmp34 = g_SpadWork, val1 = (FIELD(u8, tmp34, 0x8u) - 2) & 7, tmp3 = val1 * 2,
+                        (tmp34 = g_Task, val1 = (FIELD(u8, tmp34, 0x8u) - 2) & 7, tmp3 = val1 * 2,
                          tmp15 = FIELD(u16, tmp34, 0x36u) + (s8) * (D_80181B00 + tmp3), *(u16*)(&D_1F800000) = tmp15,
                          tmp2                            = FIELD(u16, tmp34, 0x3Au) + (s8) * (D_80181B01 + tmp3),
                          FIELD(s16, (&D_1F800000), 0x2u) = tmp2,
                          ((Area_GetCellCode((s16)tmp15, tmp2) & BYTE_MASK) == val7))) {
-                        g_SpadWork->direction_08 = (u8)val1;
+                        g_Task->direction_08 = (u8)val1;
                         return 1U;
                     }
                     return 0U;
@@ -154,7 +154,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                 loop_52:
                     if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) ==
                         (val7 & BYTE_MASK)) {
-                        tmp28 = g_SpadWork;
+                        tmp28 = g_Task;
                         tmp21 = FIELD(u8, tmp28, 0x8u);
                         tmp5  = tmp21 & BYTE_MASK;
                         if (tmp21 & 1) {
@@ -184,7 +184,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                 }
             }
             val1                 = 0;
-            tmp29                = g_SpadWork;
+            tmp29                = g_Task;
             val0                 = &D_1F800000;
             *(u16*)(&D_1F800000) = (u16)(FIELD(u16, tmp29, 0x36u) - 1);
             val2                 = val7 & BYTE_MASK;
@@ -195,7 +195,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                 FIELD(s16, (&D_1F800000), 0x2u) = (s16)(FIELD(s16, (&D_1F800000), 0x2u) + 1);
                 if (val1 >= 2) {
                     val1                 = 0;
-                    tmp30                = g_SpadWork;
+                    tmp30                = g_Task;
                     val0                 = &D_1F800000;
                     *(u16*)(&D_1F800000) = (u16)(FIELD(u16, tmp30, 0x36u) + 1);
                     val2                 = val7 & BYTE_MASK;
@@ -211,12 +211,12 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                         }
                         goto loop_71; /* retail branch */
                     }
-                    g_SpadWork->direction_08 = 3U;
+                    g_Task->direction_08 = 3U;
                     return 1U;
                 }
                 goto loop_68; /* retail branch */
             }
-            g_SpadWork->direction_08 = 7U;
+            g_Task->direction_08 = 7U;
             return 1U;
         }
         if (tmp17 != 7) {
@@ -230,7 +230,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
             loop_31:
                 if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) ==
                     (val7 & BYTE_MASK)) {
-                    tmp24 = g_SpadWork;
+                    tmp24 = g_Task;
                     tmp20 = FIELD(u8, tmp24, 0x8u);
                     tmp4  = tmp20 & BYTE_MASK;
                     if (tmp20 & 1) {
@@ -261,7 +261,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
             }
         }
         val1                 = 0;
-        tmp25                = g_SpadWork;
+        tmp25                = g_Task;
         val0                 = &D_1F800000;
         *(u16*)(&D_1F800000) = FIELD(u16, tmp25, 0x36u);
         val2                 = val7 & BYTE_MASK;
@@ -272,7 +272,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
             *(u16*)(&D_1F800000) = (u16)(*(u16*)(&D_1F800000) + 1);
             if (val1 >= 2) {
                 val1                 = 0;
-                tmp26                = g_SpadWork;
+                tmp26                = g_Task;
                 val0                 = &D_1F800000;
                 *(u16*)(&D_1F800000) = FIELD(u16, tmp26, 0x36u);
                 val2                 = val7 & BYTE_MASK;
@@ -287,12 +287,12 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                     }
                     goto loop_46; /* retail branch */
                 }
-                g_SpadWork->direction_08 = 5U;
+                g_Task->direction_08 = 5U;
                 return 1U;
             }
             goto loop_43; /* retail branch */
         }
-        g_SpadWork->direction_08 = 1U;
+        g_Task->direction_08 = 1U;
         return 1U;
     }
     return 0U;

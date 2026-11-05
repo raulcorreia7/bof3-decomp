@@ -2,5 +2,5 @@
 
 MATCH void func_801B3584(void) {
     func_801C51B0();
-    g_SpadWork->unk_03 = 1;
+    g_Task->unk_03 = 1;
 }

@@ -9,8 +9,8 @@
  */
 /* func_801CFA34 (plp025), func_801CED0C (plp257), func_801CF23C (plp056), func_801CF610 (plp015) */
 MATCH void Char_AdvanceFacingTurn(void) {
-    if (g_SpadWork->direction_08 == g_SpadWork->unk_03) {
-        switch (g_SpadWork->direction_08) {
+    if (g_Task->direction_08 == g_Task->unk_03) {
+        switch (g_Task->direction_08) {
             case 5:
                 Actor_RequestScript(0x41);
                 break;
@@ -18,14 +18,14 @@ MATCH void Char_AdvanceFacingTurn(void) {
                 Actor_RequestScript(0x40);
                 break;
         }
-        g_SpadWork->state_02++;
+        g_Task->step++;
     } else {
-        g_SpadWork->unk_09--;
-        if (g_SpadWork->unk_09 == 0) {
-            g_SpadWork->unk_09       = 2;
-            g_SpadWork->direction_08 = g_SpadWork->direction_08 + g_SpadWork->unk_0B;
-            g_SpadWork->direction_08 &= 7;
-            Actor_RequestScript(g_SpadWork->direction_08);
+        g_Task->unk_09--;
+        if (g_Task->unk_09 == 0) {
+            g_Task->unk_09       = 2;
+            g_Task->direction_08 = g_Task->direction_08 + g_Task->unk_0B;
+            g_Task->direction_08 &= 7;
+            Actor_RequestScript(g_Task->direction_08);
         }
     }
 }

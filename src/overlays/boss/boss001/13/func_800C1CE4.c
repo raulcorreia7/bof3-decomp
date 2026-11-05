@@ -4,7 +4,7 @@ MATCH void func_800C1CE4(void) {
     PartyBattler* work;
 
     func_801E2314(4);
-    work       = g_SpadWork;
+    work       = g_Task;
     D_801463BE = 0x3C;
-    work->unk_02++;
+    work->step++;
 }

@@ -39,7 +39,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         obj   = g_AreaLoads[g_GameAreaId];
                         table = FIELD(ObjectFunc*, obj, 0x3Cu);
                         table[base[state->cursor + 1]](obj);
-                        sel = g_SpadWork->route_index_08;
+                        sel = g_Task->route_index_08;
                         state->cursor += 2;
                         break;
                     case 4:
@@ -110,23 +110,23 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             g_ScrollHeight = Area_SampleHeight(g_PartyX, g_PartyY);
                             sel            = 0xFF;
                         } else {
-                            g_SpadWork->x.fixed =
+                            g_Task->x.fixed =
                                 (s32)((base[state->cursor + 1] << 16) | ((base[state->cursor + 2] != 0) << 15));
-                            g_SpadWork->y.fixed =
+                            g_Task->y.fixed =
                                 (s32)((base[state->cursor + 3] << 16) | ((base[state->cursor + 4] != 0) << 15));
-                            g_SpadWork->z.part.integer = Area_SampleHeight(g_SpadWork->x.fixed, g_SpadWork->y.fixed);
+                            g_Task->z.part.integer = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
                         }
                         state->cursor += 5;
                         break;
                     case 14:
                         left = base[state->cursor + 1];
                         state->flag_00 |= 0x40;
-                        g_SpadWork->unk_07 |= ACTOR_OPT_ROUTE_LOCKED;
+                        g_Task->unk_07 |= ACTOR_OPT_ROUTE_LOCKED;
                         if ((base[state->cursor + 3] & 1) != 0)
-                            g_SpadWork->flags_00 |= ACTOR_FLAG_STEP_MOVE;
+                            g_Task->flags |= ACTOR_FLAG_STEP_MOVE;
                         else
-                            g_SpadWork->flags_00 &= ~ACTOR_FLAG_STEP_MOVE;
-                        g_SpadWork->unk_2A = base[state->cursor + 2];
+                            g_Task->flags &= ~ACTOR_FLAG_STEP_MOVE;
+                        g_Task->unk_2A = base[state->cursor + 2];
                         if ((base[state->cursor + 3] & 2) != 0) {
                             Actor_BeginScript((u8)(left & BYTE_MASK), base[state->cursor + 4]);
                             state->cursor += 1;
@@ -138,12 +138,12 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                     case 15:
                         left = s_TalkMessageIds[base[state->cursor + 1] * 11 + g_GameState->slot_index_79];
                         state->flag_00 |= 0x40;
-                        g_SpadWork->unk_07 |= ACTOR_OPT_ROUTE_LOCKED;
+                        g_Task->unk_07 |= ACTOR_OPT_ROUTE_LOCKED;
                         if ((base[state->cursor + 3] & 1) != 0)
-                            g_SpadWork->flags_00 |= ACTOR_FLAG_STEP_MOVE;
+                            g_Task->flags |= ACTOR_FLAG_STEP_MOVE;
                         else
-                            g_SpadWork->flags_00 &= ~ACTOR_FLAG_STEP_MOVE;
-                        g_SpadWork->unk_2A = base[state->cursor + 2];
+                            g_Task->flags &= ~ACTOR_FLAG_STEP_MOVE;
+                        g_Task->unk_2A = base[state->cursor + 2];
                         if ((base[state->cursor + 3] & 2) != 0) {
                             Actor_BeginScript((u8)(left & BYTE_MASK), base[state->cursor + 4]);
                             state->cursor += 1;

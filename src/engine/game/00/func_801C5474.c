@@ -4,21 +4,21 @@ MATCH s32 func_801C5474(void) {
     Actor* work;
     Actor* state;
     u8     countdown;
-    work      = g_SpadWork;
+    work      = g_Task;
     countdown = work->unk_09;
     if (countdown == 0) {
         Actor_RequestScript(work->direction_08);
         Actor_ClearVelocity();
         g_GameState->mode_12B.u8_value = 0;
-        g_SpadWork->unk_01             = 1;
+        g_Task->mode                   = 1;
         ACTOR_CLEAR_STATE();
-        g_SpadWork->unk_03 = 0;
-        g_SpadWork->unk_04 = 0;
+        g_Task->unk_03 = 0;
+        g_Task->unk_04 = 0;
         return 1;
     }
     work->unk_09 = (u8)(countdown - 1);
     func_801C57B4();
-    state = g_SpadWork;
+    state = g_Task;
     if (state->unk_09 == state->unk_0A) {
         GFX_StagePalette((u32)((state->unk_05 << 6) + (s32)MEM_PTR(u8, 0x80035600u)), 0);
     }

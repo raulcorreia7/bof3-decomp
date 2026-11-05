@@ -10,9 +10,9 @@ MATCH void Area_SlideActorUpOrClear(void) {
 
     Actor_CenterOnScreen();
 
-    work = (u8*)g_SpadWork;
+    work = (u8*)g_Task;
     work[9] -= 1;
-    check = (u8*)g_SpadWork;
+    check = (u8*)g_Task;
     FIELD(s32, work, 0x40) -= 0x2000;
 
     if (check[9] == 0) {
@@ -20,8 +20,8 @@ MATCH void Area_SlideActorUpOrClear(void) {
             Actor_Clear();
             return;
         }
-        check[0x48]        = 0;
-        g_SpadWork->unk_01 = 1;
+        check[0x48]  = 0;
+        g_Task->mode = 1;
         return;
     }
 

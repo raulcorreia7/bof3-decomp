@@ -13,10 +13,10 @@ INCLUDE_ASM(func_801EED60);
 MATCH void func_801EEED8(void) {
     PartyBattler* saved_work;
 
-    saved_work = g_SpadWork;
-    g_SpadWork = D_801EB4E0;
+    saved_work = g_Task;
+    g_Task     = D_801EB4E0;
     func_8014D978();
-    g_SpadWork = saved_work;
+    g_Task = saved_work;
     if (saved_work->word_08.byte.unk_0B == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= 4;
@@ -25,7 +25,7 @@ MATCH void func_801EEED8(void) {
 }
 
 MATCH void func_801EEF60(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EEFA4(void) {
@@ -33,8 +33,8 @@ MATCH void func_801EEFA4(void) {
 
     handlers     = D_801EEC10;
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
-    if (g_SpadWork->flags_00 & 1) {
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
+    if (g_Task->flags & 1) {
         Area_AddActor();
     }
     g_ScriptBank = 0x800D3800;
@@ -48,29 +48,29 @@ MATCH void func_801EF50C(void) {
     func_801E5988();
 }
 
-/* Template magic057/03 body with D_801EEC1C and the unk_02 step: first diff 0x801EF554, retail holds 0x800F0800 in v0 and g_SpadWork in v1. */
+/* Template magic057/03 body with D_801EEC1C and the unk_02 step: first diff 0x801EF554, retail holds 0x800F0800 in v0 and g_Task in v1. */
 INCLUDE_ASM(func_801EF52C);
 
 MATCH void func_801EF5D0(void) {
     PartyBattler* work;
-    g_SpadWork->unk_29 = 0;
-    g_SpadWork->unk_25 = 0x1D;
-    g_SpadWork->unk_26 = 0;
-    g_SpadWork->unk_24 = 0x84;
-    g_SpadWork->unk_27 = 0xB4;
-    g_SpadWork->unk_28 = 0;
-    work               = g_SpadWork;
-    work->unk_2B       = 0;
-    work->unk_2C.half  = 0;
-    g_SpadWork->unk_2A = 0;
+    g_Task->unk_29    = 0;
+    g_Task->unk_25    = 0x1D;
+    g_Task->unk_26    = 0;
+    g_Task->unk_24    = 0x84;
+    g_Task->unk_27    = 0xB4;
+    g_Task->unk_28    = 0;
+    work              = g_Task;
+    work->unk_2B      = 0;
+    work->unk_2C.half = 0;
+    g_Task->unk_2A    = 0;
     Actor_SelectScript(5);
-    SND_PlayCue((g_SpadWork->word_08.byte.timer_0A & 1) | 0x100);
-    g_SpadWork->unk_02 += 1;
+    SND_PlayCue((g_Task->word_08.byte.timer_0A & 1) | 0x100);
+    g_Task->step += 1;
 }
 
 MATCH void func_801EF6A4(void) {
     if (func_8014D978() != 0u) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     } else {
         Area_AddActor();
     }

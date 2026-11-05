@@ -168,11 +168,11 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
         if (val8 >= 0xC1) {
             return 1;
         }
-        tmp0                          = g_SpadWork;
-        val1                          = FIELD(u16, tmp0, 0x3Eu);
-        FIELD(u16, tmp0, 0x3Eu)       = (u16)val0;
-        val7                          = ~func_801BDE14(val3, val4, 1) != 0;
-        FIELD(u16, g_SpadWork, 0x3Eu) = (u16)val1;
+        tmp0                      = g_Task;
+        val1                      = FIELD(u16, tmp0, 0x3Eu);
+        FIELD(u16, tmp0, 0x3Eu)   = (u16)val0;
+        val7                      = ~func_801BDE14(val3, val4, 1) != 0;
+        FIELD(u16, g_Task, 0x3Eu) = (u16)val1;
         return val7;
     }
     return val7;

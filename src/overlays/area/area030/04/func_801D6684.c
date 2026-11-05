@@ -32,21 +32,21 @@ NON_MATCHING void func_801D6684(void) {
     void* spad3;
     void* spad4;
 
-    spad0 = g_SpadWork;
+    spad0 = g_Task;
     if (FIELD(u8, spad0, 0xAu) != 0) {
         func_801D2034(0xD4, 0x8A, 0U, (FIELD(u8, spad0, 0xBu) + 1) & BYTE_MASK);
-        page = g_SpadWork->unk_09 / 12;
+        page = g_Task->unk_09 / 12;
     } else {
         FIELD(u8, spad0, 0x9u) = (u8)(FIELD(u8, spad0, 0x9u) + 1);
-        spad5                  = g_SpadWork;
+        spad5                  = g_Task;
         page                   = FIELD(u8, spad5, 0x9u) / 12;
         if (*((FIELD(u8, spad5, 0xBu) * 8) + &D_801E2050 + (page & BYTE_MASK)) == GAME_NONE) {
             FIELD(u8, spad5, 0xAu) = 0x32U;
         }
     }
     row = 0;
-    if ((g_SpadWork->unk_0A == 0) && (*((g_SpadWork->unk_0B * 8) + &D_801E2050 + (page & BYTE_MASK)) == 1) &&
-        ((u32)((g_SpadWork->unk_09 % 12) & BYTE_MASK) < 0xAU)) {
+    if ((g_Task->unk_0A == 0) && (*((g_Task->unk_0B * 8) + &D_801E2050 + (page & BYTE_MASK)) == 1) &&
+        ((u32)((g_Task->unk_09 % 12) & BYTE_MASK) < 0xAU)) {
         func_8014D978();
     }
     word_ptr   = &D_801E2070;
@@ -63,7 +63,7 @@ NON_MATCHING void func_801D6684(void) {
         cell = *cell_ptr;
         kind = cell & BYTE_MASK;
         if (kind != GAME_NONE) {
-            spad1 = g_SpadWork;
+            spad1 = g_Task;
             if (row == FIELD(u8, spad1, 0xBu)) {
                 if ((u32)((FIELD(u8, spad1, 0x9u) % 12) & BYTE_MASK) < 0xAU) {
                     x = x_fixed >> 0x10;
@@ -100,16 +100,16 @@ NON_MATCHING void func_801D6684(void) {
         cell_table += 8;
     } while (row < 4);
     Area_AddActor();
-    spad2 = g_SpadWork;
+    spad2 = g_Task;
     timer = FIELD(u8, spad2, 0xAu);
     if (timer != 0) {
         FIELD(u8, spad2, 0xAu) = (u8)(timer - 1);
-        spad3                  = g_SpadWork;
+        spad3                  = g_Task;
         if (FIELD(u8, spad3, 0xAu) == 0) {
             FIELD(u8, spad3, 0x9u) = 0U;
-            spad6                  = g_SpadWork;
+            spad6                  = g_Task;
             FIELD(u8, spad6, 0xBu) = (u8)(FIELD(u8, spad6, 0xBu) + 1);
-            spad4                  = g_SpadWork;
+            spad4                  = g_Task;
             if (FIELD(u8, spad4, 0xBu) >= 4U) {
                 FIELD(u8, spad4, 0xBu) = 0U;
             }

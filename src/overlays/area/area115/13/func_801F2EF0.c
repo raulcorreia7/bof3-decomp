@@ -10,23 +10,23 @@ MATCH void func_801F2EF0(void) {
     x      = (D_80145EC4[0] + scaled) >> 16;
     y      = (D_80145EC8 + D_80145EA0 * D_80145E99) >> 16;
 
-    work     = g_SpadWork;
+    work     = g_Task;
     work->vx = x;
     work->vy = y;
 
     /* The step stores re-read the work cell: the compiler must assume a call
      * may have changed it. */
     if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA1) {
-        g_SpadWork->unk_0B = 1;
+        g_Task->unk_0B = 1;
     } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA0) {
-        g_SpadWork->unk_0B = 2;
+        g_Task->unk_0B = 2;
     } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xAE) {
-        g_SpadWork->unk_0B = 3;
+        g_Task->unk_0B = 3;
     } else if (g_AreaWalkFlags & AREA_WALK_TRANSITION) {
-        g_SpadWork->unk_0B = 4;
+        g_Task->unk_0B = 4;
     } else {
-        g_SpadWork->unk_0B = 0;
+        g_Task->unk_0B = 0;
     }
 
-    D_801F4F48[g_SpadWork->unk_01]();
+    D_801F4F48[g_Task->mode]();
 }

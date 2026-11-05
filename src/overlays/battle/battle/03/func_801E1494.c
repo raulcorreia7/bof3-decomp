@@ -33,12 +33,12 @@ MATCH void func_801E1494(void) {
     }
     work = g_GameState;
     if (work->unk_120 & 1) {
-        func_800AAC88((s16)work->hp_change, g_SpadWork->slot);
+        func_800AAC88((s16)work->hp_change, g_Task->slot);
         work = g_GameState;
     }
     if (work->unk_120 & 2) {
-        func_800AAEBC((s16)work->ap_change, g_SpadWork->slot);
+        func_800AAEBC((s16)work->ap_change, g_Task->slot);
     }
     func_801DEDE4();
-    g_SpadWork->unk_03 = g_SpadWork->unk_03 + 1;
+    g_Task->unk_03 = g_Task->unk_03 + 1;
 }

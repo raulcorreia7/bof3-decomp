@@ -30,7 +30,7 @@ MATCH s32 func_801A17A0(u8* entry_record) {
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
 stored:
-    work                         = g_SpadWork;
+    work                         = g_Task;
     FIELD(u16, entry_record, 8u) = flags;
     if (work->option_flags & ACTOR_OPT_NO_SCRIPT_START) {
         entry_record[0] &= 0xDF;

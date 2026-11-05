@@ -6,14 +6,14 @@
 MATCH void Effect_CountDownCounterAndFinish(void) {
     u8 counter;
 
-    counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = counter;
+    counter                     = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = counter;
     if (!(counter & 0xFF)) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
-        g_SpadWork->flags_00 = 0;
-        g_SpadWork->step_01  = 0;
-        g_SpadWork->unk_02   = 0;
-        g_SpadWork->unk_03   = 0;
-        g_SpadWork->unk_04   = 0;
+        g_Task->flags  = 0;
+        g_Task->mode   = 0;
+        g_Task->step   = 0;
+        g_Task->unk_03 = 0;
+        g_Task->unk_04 = 0;
     }
 }

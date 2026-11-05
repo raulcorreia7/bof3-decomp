@@ -8,7 +8,7 @@ MATCH void func_801EEC24(void) {
     MagicTaskFuncs handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
 }
 
 /* Template magic010/00 (func_801EEC80) has no matched C in the tree; no body tried. */
@@ -24,7 +24,7 @@ MATCH void func_801EF000(void) {
     MagicTaskFuncs handlers;
 
     handlers = D_801EEC14;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
 }
 
 #include "overlays/bmagic/Effect_SelectTargetAndAdvance.h"

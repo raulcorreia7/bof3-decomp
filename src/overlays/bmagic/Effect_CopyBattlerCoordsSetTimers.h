@@ -4,14 +4,14 @@ MATCH void Effect_CopyBattlerCoordsSetTimers(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_SpadWork->flags_00 &= 0xBF;
-    work                              = g_SpadWork;
-    actor                             = D_801EB4E0;
-    work->coord_x_34.raw              = actor->coord_x_34.raw;
-    work->coord_y_38.raw              = actor->coord_y_38.raw;
-    z                                 = actor->word_3C.word;
-    work->word_08.byte.unk_09         = 1;
-    work->word_3C.word                = z;
-    g_SpadWork->word_08.byte.timer_0A = 1;
-    g_SpadWork->unk_02 += 1;
+    g_Task->flags &= 0xBF;
+    work                          = g_Task;
+    actor                         = D_801EB4E0;
+    work->coord_x_34.raw          = actor->coord_x_34.raw;
+    work->coord_y_38.raw          = actor->coord_y_38.raw;
+    z                             = actor->word_3C.word;
+    work->word_08.byte.unk_09     = 1;
+    work->word_3C.word            = z;
+    g_Task->word_08.byte.timer_0A = 1;
+    g_Task->step += 1;
 }

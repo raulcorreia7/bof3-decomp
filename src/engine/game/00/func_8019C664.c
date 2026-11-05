@@ -5,12 +5,12 @@ MATCH void func_8019C664(void) {
     void*  flags;
     Actor* state;
 
-    g_SpadWork->direction_08 = (u8)D_80145E98;
+    g_Task->direction_08 = (u8)D_80145E98;
     func_8019EE10();
-    g_SpadWork->unk_27 = 0x7B;
-    Actor_SelectScript(((u8)g_SpadWork->direction_08 >> 1) + 0x4A);
+    g_Task->unk_27 = 0x7B;
+    Actor_SelectScript(((u8)g_Task->direction_08 >> 1) + 0x4A);
     GFX_StagePalette(GAME_PALETTE_STAGE + 0xC0, 1);
-    work                    = g_SpadWork;
+    work                    = g_Task;
     FIELD(s32, work, 0x34u) = (s32)D_80145EC4;
     work->y.fixed           = (s32)D_80145EC8;
     work->z.part.integer    = (s16)((u16)D_80145ECE + 0xC0);
@@ -21,8 +21,8 @@ MATCH void func_8019C664(void) {
     } else {
         work->unk_0A = 0x12;
     }
-    flags         = g_SpadWork;
+    flags         = g_Task;
     *(u8*)(flags) = (u8)(*(u8*)(flags) | ACTOR_FLAG_SKIP_PALETTE_STAGE);
-    state         = g_SpadWork;
-    state->unk_01 = (u8)(state->unk_01 + 1);
+    state         = g_Task;
+    state->mode   = (u8)(state->mode + 1);
 }

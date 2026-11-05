@@ -6,7 +6,7 @@ MATCH s32 func_8019C244(void) {
     s32    y;
     s32    hi;
 
-    work = g_SpadWork;
+    work = g_Task;
     x    = work->x.fixed;
     y    = work->y.fixed;
     switch (work->direction_08) {

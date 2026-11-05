@@ -7,14 +7,14 @@
 MATCH void Actor_ApplyVelocity(void) {
     s32 value;
 
-    value = g_SpadWork->vx;
+    value = g_Task->vx;
     if (value > 0) {
-        g_SpadWork->x.fixed += value;
+        g_Task->x.fixed += value;
     }
-    g_SpadWork->x.fixed &= -0x8000;
-    value = g_SpadWork->vy;
+    g_Task->x.fixed &= -0x8000;
+    value = g_Task->vy;
     if (value > 0) {
-        g_SpadWork->y.fixed += value;
+        g_Task->y.fixed += value;
     }
-    g_SpadWork->y.fixed &= -0x8000;
+    g_Task->y.fixed &= -0x8000;
 }

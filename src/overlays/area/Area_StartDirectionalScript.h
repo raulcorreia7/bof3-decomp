@@ -3,9 +3,9 @@ MATCH void Area_StartDirectionalScript(Actor* actor) {
     u8 direction;
 
     g_ScriptState->unk_04 = 1;
-    direction             = g_SpadWork->direction_08 & 7;
+    direction             = g_Task->direction_08 & 7;
     g_ScriptState->flag_00 |= 0x40;
-    g_SpadWork->option_flags |= 8;
+    g_Task->option_flags |= 8;
     Actor_SelectScript(direction | 8);
     g_ScriptState->unk_07 = 2;
     if (direction == 7) {
@@ -15,5 +15,5 @@ MATCH void Area_StartDirectionalScript(Actor* actor) {
         direction = 7;
         func_801ABBA8(g_ScriptState, 7);
     }
-    g_SpadWork->direction_08 = direction;
+    g_Task->direction_08 = direction;
 }

@@ -4,7 +4,7 @@ MATCH void func_8019AAFC(void) {
     Actor* work;
     u8*    flags;
 
-    work                 = g_SpadWork;
+    work                 = g_Task;
     flags                = &D_80146871;
     g_AreaCameraAngle.vx = (s16)work->unk_64;
     g_AreaCameraAngle.vy = (s16)work->unk_68;

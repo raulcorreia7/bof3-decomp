@@ -71,7 +71,7 @@ NON_MATCHING void func_801E7BA0(void) {
         }
         var_s1      = SP_PTR(PartyBattler, 0x0);
         var_s1      = SP_REF(PartyBattler*, 0x44);
-        g_SpadWork  = (PartyBattler*)D_801EB4E0;
+        g_Task      = (PartyBattler*)D_801EB4E0;
         g_GameState = &g_BattlePartyBattlers[D_801EB4E0->slot];
         temp_a0_132 = D_801EB4E0->slot * BATTLE_PARTY_STRIDE;
         temp_v1_135 = g_BattlePartyBattlers[D_801EB4E0->slot].stats.level;
@@ -87,7 +87,7 @@ NON_MATCHING void func_801E7BA0(void) {
             D_801EB4D4  = temp_v0_176;
             D_801EB4D4  = temp_v0_176 & 0xFFF884FD;
         }
-        temp_v1_191 = (g_SpadWork)->slot;
+        temp_v1_191 = (g_Task)->slot;
         temp_v0_195 = temp_v1_191 * BATTLE_PARTY_STRIDE;
         var_a3_198  = &g_BattlePartyBattlers[temp_v1_191];
         var_a2_201  = temp_v0_195 + s_BattleBattlerTemplates;
@@ -100,22 +100,22 @@ NON_MATCHING void func_801E7BA0(void) {
             var_a2_201 += 0x10;
             var_a3_198 += 0x10;
         } while (var_a2_201 != temp_t0_202);
-        *(D_80145E91 + ((g_SpadWork)->slot * 0x140))     = 6;
-        *(D_80145E92 + ((g_SpadWork)->slot * 0x140))     = 4;
-        *(D_80145E93 + ((g_SpadWork)->slot * 0x140))     = 4;
-        *(D_80145E94 + ((g_SpadWork)->slot * 0x140))     = 1;
-        g_BattlePartyBattlers[(g_SpadWork)->slot].unk_08 = g_BattlePartyBattlers[temp_v1_191].unk_08;
-        *(&D_80145ED8 + ((g_SpadWork)->slot * 0x140))    = 2;
-        temp_a0_288                                      = g_SpadWork;
-        *(&D_80145ED0 + (temp_a0_288->slot * 0x140))     = 0;
-        temp_v1_302                                      = temp_a0_288->slot * BATTLE_PARTY_STRIDE;
-        *(&D_80145FB4 + temp_v1_302)                     = *(&D_80145FB4 + temp_v1_302) | 0x2000;
-        temp_v0_311                                      = temp_a0_288->slot;
-        *(D_801EC364 + (temp_v0_311 * 0x78))             = *(D_80143F2C + (temp_v0_311 * 8));
-        temp_v0_323                                      = temp_a0_288->slot;
-        *(D_801EC368 + (temp_v0_323 * 0x78))             = *(D_80143F30 + (temp_v0_323 * 8));
-        temp_v0_339                                      = temp_a0_288->slot * 0x78;
-        temp_a1_349                                      = g_SpadWork;
+        *(D_80145E91 + ((g_Task)->slot * 0x140))     = 6;
+        *(D_80145E92 + ((g_Task)->slot * 0x140))     = 4;
+        *(D_80145E93 + ((g_Task)->slot * 0x140))     = 4;
+        *(D_80145E94 + ((g_Task)->slot * 0x140))     = 1;
+        g_BattlePartyBattlers[(g_Task)->slot].unk_08 = g_BattlePartyBattlers[temp_v1_191].unk_08;
+        *(&D_80145ED8 + ((g_Task)->slot * 0x140))    = 2;
+        temp_a0_288                                  = g_Task;
+        *(&D_80145ED0 + (temp_a0_288->slot * 0x140)) = 0;
+        temp_v1_302                                  = temp_a0_288->slot * BATTLE_PARTY_STRIDE;
+        *(&D_80145FB4 + temp_v1_302)                 = *(&D_80145FB4 + temp_v1_302) | 0x2000;
+        temp_v0_311                                  = temp_a0_288->slot;
+        *(D_801EC364 + (temp_v0_311 * 0x78))         = *(D_80143F2C + (temp_v0_311 * 8));
+        temp_v0_323                                  = temp_a0_288->slot;
+        *(D_801EC368 + (temp_v0_323 * 0x78))         = *(D_80143F30 + (temp_v0_323 * 8));
+        temp_v0_339                                  = temp_a0_288->slot * 0x78;
+        temp_a1_349                                  = g_Task;
         *(D_801EC36C + (temp_a1_349->slot * 0x78)) =
             Area_SampleHeight(*(D_801EC364 + temp_v0_339), *(D_801EC368 + temp_v0_339)) << 0x10;
         temp_a0_363 = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
@@ -125,19 +125,19 @@ NON_MATCHING void func_801E7BA0(void) {
             *(D_80145F10 + (temp_a1_349->slot * 0x140))  = D_801EB4CC;
             temp_a0_392                                  = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
             *(D_80145F1E + temp_a0_392)                  = g_Characters[*(D_80145FCC + temp_a0_392)].fatigue;
-            temp_a0_409                                  = g_SpadWork;
+            temp_a0_409                                  = g_Task;
             var_s0                                       = 0;
             *(&D_80145FB4 + (temp_a0_409->slot * 0x140)) = D_801EB4D0;
             g_BattlePartyBattlers[temp_a0_409->slot].flags_128.volatile_value = D_801EB4D4;
             do {
                 temp_a0_435 = var_s0 & BYTE_MASK;
                 var_s0 += 1;
-                *(((g_SpadWork)->slot * 0x140) + &D_80145FBC + temp_a0_435) = 0;
+                *(((g_Task)->slot * 0x140) + &D_80145FBC + temp_a0_435) = 0;
             } while ((u32)(var_s0 & BYTE_MASK) < 8U);
             func_801E0B64();
         }
-        func_800A9BD8((g_SpadWork)->slot);
-        temp_a1_458                                   = g_SpadWork;
+        func_800A9BD8((g_Task)->slot);
+        temp_a1_458                                   = g_Task;
         temp_a0_460                                   = temp_a1_458->slot;
         *(&D_80148344 + ((temp_a0_460 + 0xD) * 0x24)) = *(D_80145F18 + (temp_a0_460 * 0x140));
         temp_a0_475                                   = temp_a1_458->slot;
@@ -146,24 +146,24 @@ NON_MATCHING void func_801E7BA0(void) {
         temp_v0_494                                   = temp_a1_490 * BATTLE_PARTY_STRIDE;
         *(&D_8014833B + ((temp_a1_490 + 0xD) * 0x24)) =
             (s8)((s32)(*(D_80145F18 + temp_v0_494) * 0x37) / (s32) * (D_80145F20 + temp_v0_494));
-        temp_a1_528 = (g_SpadWork)->slot;
+        temp_a1_528 = (g_Task)->slot;
         temp_v0_532 = temp_a1_528 * BATTLE_PARTY_STRIDE;
         *D_8014833C[temp_a1_528 + 0xD] =
             (u8)((s32)(*(D_80145F1A + temp_v0_532) * 0x37) / (s32) * (D_80145F22 + temp_v0_532));
-        Actor_SelectScript(((g_SpadWork)->unk_08 + 4) & BYTE_MASK);
-        GFX_StagePalette(((g_SpadWork)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
-        func_801DDAB4((u32) * (D_80145F10 + ((g_SpadWork)->slot * BATTLE_PARTY_STRIDE)));
+        Actor_SelectScript(((g_Task)->unk_08 + 4) & BYTE_MASK);
+        GFX_StagePalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
+        func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
         GFX_UploadPaletteRows();
         if (*(u16*)(&g_BattleState) & BATTLE_STATE_RELOAD_PARTY) {
             *D_801454F5 = D_801463D4;
             *D_801454F6 = D_801463D5;
         } else {
-            *(D_801454F5 + ((g_SpadWork)->slot * 3)) = D_801463D4;
-            *(D_801454F6 + ((g_SpadWork)->slot * 3)) = D_801463D5;
+            *(D_801454F5 + ((g_Task)->slot * 3)) = D_801463D4;
+            *(D_801454F6 + ((g_Task)->slot * 3)) = D_801463D5;
         }
-        g_SpadWork = var_s1;
+        g_Task = var_s1;
         *(u16*)(&g_BattleState) &= ~BATTLE_STATE_RELOAD_PARTY;
-        var_s1->step_01 += 1;
+        var_s1->mode += 1;
     }
 }
 #else

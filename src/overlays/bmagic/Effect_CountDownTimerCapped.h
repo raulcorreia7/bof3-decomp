@@ -10,12 +10,12 @@ MATCH void Effect_CountDownTimerCapped(void) {
     u8            timer;
     u8            count;
 
-    first = g_SpadWork;
+    first = g_Task;
     timer = first->word_08.byte.unk_09;
     if (timer != 0x2E) {
         first->word_08.byte.unk_09 = timer + 1;
     }
-    work                        = g_SpadWork;
+    work                        = g_Task;
     count                       = work->word_08.byte.timer_0A - 1;
     work->word_08.byte.timer_0A = count;
     if (count == 0) {

@@ -14,6 +14,6 @@ MATCH void func_801F3198(void) {
     count                               = (u8)(((AreaSprite*)D_801F63EC)->flags_02 - 1u);
     ((AreaSprite*)D_801F63EC)->flags_02 = count;
     if (!(count & BYTE_MASK)) {
-        ((AreaSprite*)D_801F63EC)->flags_00 = 0u;
+        ((AreaSprite*)D_801F63EC)->flags = 0u;
     }
 }

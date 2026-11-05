@@ -15,7 +15,7 @@ MATCH void func_8019D800(void) {
     dst   = MEM_PTR(u16, 0x800E4800u);
     count = 0;
     work  = MEM_PTR(u16, 0x800E4804u);
-    src   = (s16*)g_SpadWork->source_50;
+    src   = (s16*)g_Task->source_50;
     for (;; work += 0x1C) {
         a                      = work[4];
         b                      = work[2];

@@ -71,19 +71,19 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
 
     val2                    = x;
     val1                    = y;
-    work.fields.unk_00      = D_801D0DE0;
+    work.fields.flags       = D_801D0DE0;
     work.fields.unk_10      = D_801D0DEC;
     work.fields.unk_20      = D_801D0DF8;
     work.fields.unk_30      = D_801D0E04;
     work.fields.unk_38      = D_801D0E0C;
     work.fields.unk_40      = D_801D0E14;
-    work.fields.strings[0]  = (char*)&work.fields.unk_00;
+    work.fields.strings[0]  = (char*)&work.fields.flags;
     work.fields.strings[1]  = (char*)&work.fields.unk_10;
     work.fields.strings[2]  = (char*)&work.fields.unk_20;
     work.fields.strings[3]  = (char*)&work.fields.unk_30;
     work.fields.strings[4]  = (char*)&work.fields.unk_38;
     work.fields.strings[5]  = (char*)&work.fields.unk_40;
-    work.fields.strings[6]  = (char*)&work.fields.unk_00;
+    work.fields.strings[6]  = (char*)&work.fields.flags;
     work.fields.strings[7]  = (char*)&work.fields.unk_10;
     work.fields.strings[8]  = (char*)&work.fields.unk_20;
     work.fields.strings[9]  = (char*)&work.fields.unk_30;

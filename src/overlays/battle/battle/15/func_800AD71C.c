@@ -15,18 +15,18 @@ MATCH void func_800AD71C(void) {
         PartyBattler* record;
         PartyBattler* other;
 
-        record                     = (PartyBattler*)g_SpadWork;
+        record                     = (PartyBattler*)g_Task;
         record->unk_2B             = 0;
-        other                      = (PartyBattler*)g_SpadWork;
+        other                      = (PartyBattler*)g_Task;
         record->unk_2C.signed_half = 2;
         other->unk_2A              = 0;
     }
-    record               = (PartyBattler*)g_SpadWork;
+    record               = (PartyBattler*)g_Task;
     record->word_3C.word = 0;
     record->unk_2E.half  = D_80148628 + 0x14;
-    count                = record->step_01;
+    count                = record->mode;
     label                = D_8014862A;
-    record->step_01      = count + 1;
+    record->mode         = count + 1;
     record->unk_30.half  = label + 0x12;
     Actor_SelectScript(0x13);
     Area_AddActor();

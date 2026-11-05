@@ -4,5 +4,5 @@ MATCH void func_800C19C4(void) {
     Boss054Funcs handlers;
 
     handlers = D_800C1804;
-    handlers.handlers[((PartyBattler*)g_SpadWork)->step_01]();
+    handlers.handlers[((PartyBattler*)g_Task)->mode]();
 }

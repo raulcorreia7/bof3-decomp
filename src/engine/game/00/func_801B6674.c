@@ -11,7 +11,7 @@ NON_MATCHING s32 func_801B6674(void) {
     u8  status;
     u8* counter;
 
-    temp   = Area_GetCellCode(g_SpadWork->x.part.integer, g_SpadWork->y.part.integer);
+    temp   = Area_GetCellCode(g_Task->x.part.integer, g_Task->y.part.integer);
     status = g_GameRequestFlags;
     if (!(status & 1)) {
         return 0;
@@ -24,7 +24,7 @@ NON_MATCHING s32 func_801B6674(void) {
                 }
             }
             if (!(status & 0x20)) {
-                func_801B5BDC(g_SpadWork->route_index_08);
+                func_801B5BDC(g_Task->route_index_08);
             }
             func_801B690C();
             g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;
@@ -49,20 +49,20 @@ NON_MATCHING s32 func_801B6674(void) {
             return 0;
         }
         if (!(g_GameRequestFlags & 0x20)) {
-            func_801B5BDC(g_SpadWork->route_index_08);
+            func_801B5BDC(g_Task->route_index_08);
         }
         D_8014504A += 1;
         g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;
         D_80145048 = g_GameAreaId;
-        D_80145044 = g_SpadWork->y.fixed;
-        D_80145040 = g_SpadWork->x.fixed;
+        D_80145044 = g_Task->y.fixed;
+        D_80145040 = g_Task->x.fixed;
         Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
         return 1;
     }
     if ((g_InputPressed & D_80145AC0) && ((u8)(temp + 0x60) < 2)) {
         D_801448EB = 0x1B;
         if (!(status & 0x20)) {
-            func_801B5BDC(g_SpadWork->route_index_08);
+            func_801B5BDC(g_Task->route_index_08);
         }
         ACTOR_CLEAR_STATE();
         return 1;

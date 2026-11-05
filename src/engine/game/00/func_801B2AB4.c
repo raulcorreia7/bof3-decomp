@@ -19,7 +19,7 @@ MATCH void func_801B2AB4(void) {
                 index++;
             } while (index < g_PartySize);
         }
-        g_SpadWork->unk_0B = 0xFF;
+        g_Task->unk_0B = 0xFF;
     }
-    g_SpadWork->state_02 = 1;
+    g_Task->step = 1;
 }

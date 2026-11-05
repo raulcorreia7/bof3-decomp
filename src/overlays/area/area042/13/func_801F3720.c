@@ -3,12 +3,12 @@
 MATCH void func_801F3720(void) {
     Actor* work;
 
-    func_801F37A8(g_SpadWork->z.fixed, (g_SpadWork->unk_0B & 0xF8) << 0x10);
-    work = g_SpadWork;
+    func_801F37A8(g_Task->z.fixed, (g_Task->unk_0B & 0xF8) << 0x10);
+    work = g_Task;
     work->unk_0B -= 4;
     work->z.fixed += 4;
-    if (g_SpadWork->z.fixed >= -0x7F) {
+    if (g_Task->z.fixed >= -0x7F) {
         D_801448EC = 4;
-        func_80196070(g_SpadWork);
+        func_80196070(g_Task);
     }
 }

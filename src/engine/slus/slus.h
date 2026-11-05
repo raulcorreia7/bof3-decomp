@@ -641,7 +641,7 @@ extern s32                         D_801481F0;
 extern s32                         D_801481F4;
 extern s32                         D_80148200;
 extern u8                          D_8014820C;
-/* The work-record table: func_8014D4E0 appends g_SpadWork, func_8014BB20 sorts it by the s16 at +0x3E. */
+/* The work-record table: func_8014D4E0 appends g_Task, func_8014BB20 sorts it by the s16 at +0x3E. */
 extern Actor*                      D_80148214[];
 extern s32                         D_8014828C[];
 extern u8                          D_80148331[];

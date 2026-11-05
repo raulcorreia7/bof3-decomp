@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CF5EC[((u8*)g_SpadWork)[2]]();
+    D_801CF5EC[((u8*)g_Task)[2]]();
 }
 
 MATCH void Char_StartTurn_801CE448(void) {
@@ -17,11 +17,11 @@ MATCH void Char_RunStepScript_801CE514(void) {
 }
 
 MATCH void func_801CE610(void) {
-    SYS_DISPATCH_TASK(D_801CF5F8, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CF5F8, 2, g_Task);
 }
 
 MATCH void func_801CE654(void) {
-    SYS_DISPATCH_TASK(D_801CF600, 3, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CF600, 3, g_Task);
 }
 
 INCLUDE_ASM(func_801CE698);
@@ -42,7 +42,7 @@ INCLUDE_ASM(func_801CEC18);
 INCLUDE_ASM(func_801CEE24);
 
 MATCH void func_801CEF10(void) {
-    SYS_DISPATCH_TASK(D_801CF614, 3, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CF614, 3, g_Task);
 }
 
 INCLUDE_ASM(func_801CEF54);
@@ -54,7 +54,7 @@ INCLUDE_ASM(func_801CF0EC);
 INCLUDE_ASM(func_801CF184);
 
 MATCH void func_801CF328(void) {
-    SYS_DISPATCH_TASK(D_801CF620, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801CF620, 2, g_Task);
 }
 
 MATCH void Char_StartTurn(void) {
@@ -76,9 +76,9 @@ MATCH void func_801CF554(void) {
 }
 
 MATCH void func_801CF564(void) {
-    D_801CF62C[g_SpadWork->unk_2C]();
+    D_801CF62C[g_Task->unk_2C]();
 }
 
 MATCH void func_801CF5A8(void) {
-    D_801CF638[g_SpadWork->unk_2C]();
+    D_801CF638[g_Task->unk_2C]();
 }

@@ -2,5 +2,5 @@
 
 MATCH void func_801BBE48(void) {
     func_801C3154();
-    D_801CD404[g_SpadWork->unk_01]();
+    D_801CD404[g_Task->mode]();
 }

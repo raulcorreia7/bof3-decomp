@@ -11,9 +11,9 @@ MATCH void func_8014DB98(void) {
     u8*    table;
     u8     selected;
 
-    first_work              = g_SpadWork;
+    first_work              = g_Task;
     first_work->unk_4A      = (u8) * (u8*)(first_work->source_50 + first_work->script_pc);
-    current_work            = g_SpadWork;
+    current_work            = g_Task;
     index                   = current_work->script_pc;
     entries                 = current_work->source_50;
     next_index              = index + 1;

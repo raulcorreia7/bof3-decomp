@@ -6,6 +6,6 @@ MATCH void func_801F3408(void) {
     }
     func_801F3AAC();
     if (*g_ScriptVars == 0x29) {
-        g_SpadWork->unk_01++;
+        g_Task->mode++;
     }
 }

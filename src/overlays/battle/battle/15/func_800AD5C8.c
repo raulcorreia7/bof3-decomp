@@ -8,7 +8,7 @@ MATCH void func_800AD5C8(void) {
 
     i = 0;
     if (g_BattleGeneCount[0] != 0) {
-        work  = (PartyBattler*)g_SpadWork;
+        work  = (PartyBattler*)g_Task;
         count = work->word_08.byte.unk_0B;
         base  = (u16*)(&D_80148628);
         do {
@@ -20,5 +20,5 @@ MATCH void func_800AD5C8(void) {
             i++;
         } while (i < g_BattleGeneCount[0]);
     }
-    BATTLE_WORK->unk_02--;
+    BATTLE_WORK->step--;
 }

@@ -4,10 +4,10 @@
 MATCH void func_801F2F00(void) {
     u16 temp_v0;
 
-    temp_v0            = g_SpadWork->unk_30 + 0x10;
-    g_SpadWork->unk_30 = temp_v0;
+    temp_v0        = g_Task->unk_30 + 0x10;
+    g_Task->unk_30 = temp_v0;
     if ((s16)temp_v0 >= 0xC0) {
-        g_SpadWork->state_02 += 1;
+        g_Task->step += 1;
     }
     func_801F3070(0);
 }

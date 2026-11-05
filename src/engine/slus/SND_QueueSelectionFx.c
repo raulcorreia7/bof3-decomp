@@ -18,7 +18,7 @@ MATCH void SND_QueueSelectionFx(s32 cue_id) {
     packed |= (u32)(*(u8*)&D_8018B344 & 0x1F) << 13;
     packed |= (u32)(*(u8*)&D_8018B36C & 0x1F) << 18;
     packed |= (u32)(*(u8*)&D_8018B394 & 0x1F) << 23;
-    work                = g_SpadWork;
+    work                = g_Task;
     work->state_70.word = work->state_70.word | packed;
-    work->flags_00      = (u8)(work->flags_00 | ACTOR_FLAG_SELECTION_FX);
+    work->flags         = (u8)(work->flags | ACTOR_FLAG_SELECTION_FX);
 }

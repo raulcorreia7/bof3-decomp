@@ -8,14 +8,14 @@ MATCH void Area_RaiseHudBanner(void) {
     Actor* work;
     s16    origin_y;
 
-    work         = g_SpadWork;
+    work         = g_Task;
     origin_y     = work->unk_30 - 0xA;
     work->unk_30 = origin_y;
     if (origin_y < 201) {
         work->unk_03++;
     }
 
-    if (D_801454F2 != 0 && g_SpadWork->unk_0B != 0) {
+    if (D_801454F2 != 0 && g_Task->unk_0B != 0) {
         goto force;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -25,7 +25,7 @@ MATCH void Area_RaiseHudBanner(void) {
         goto done;
     }
 force:
-    g_SpadWork->unk_03 = 3;
+    g_Task->unk_03 = 3;
 done:
-    Area_DrawHudBanner(0x5C, g_SpadWork->unk_30);
+    Area_DrawHudBanner(0x5C, g_Task->unk_30);
 }

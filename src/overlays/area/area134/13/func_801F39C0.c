@@ -1,20 +1,20 @@
 /* The dispatch dance keeps every work-cell write. */
-#define SPAD_WORK_VOLATILE
+#define TASK_VOLATILE
 #include "area134_13.h"
 
 MATCH void func_801F39C0(void) {
     Actor* work;
 
-    work        = g_SpadWork;
-    g_SpadWork  = &D_80146920;
+    work        = g_Task;
+    g_Task      = &D_80146920;
     g_GameState = (GameState*)g_BattlePartyBattlers;
-    g_SpadWork  = work;
-    g_SpadWork  = (Actor*)g_BattlePartyBattlers;
-    g_SpadWork  = work;
+    g_Task      = work;
+    g_Task      = (Actor*)g_BattlePartyBattlers;
+    g_Task      = work;
     if (D_80146954 >= D_80145EC4) {
-        work->unk_01       = 0xD;
-        g_SpadWork->unk_09 = 0;
+        work->mode     = 0xD;
+        g_Task->unk_09 = 0;
         return;
     }
-    work->unk_01 = 0xA;
+    work->mode = 0xA;
 }

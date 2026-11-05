@@ -13,14 +13,14 @@
 /* The statements of Effect_SetActorMatrix after its rotation is set; each
  * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
  * whose vertical span halves into the depth. */
-#define BMAGIC_PROJECT_ACTOR_MATRIX(SPAN_WORK)           \
-    pos.vx = (g_SpadWork->coord_x_34.raw >> 9) - 0x4000; \
-    pos.vy = (g_SpadWork->coord_y_38.raw >> 9) - 0x4000; \
-    pos.vz = -(SPAN_WORK)->word_3C.half.span_3E / 2;     \
-    RotTrans(&pos, &matrix.t, &flags);                   \
-    RotMatrix(&rot, &matrix);                            \
-    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);        \
-    SetRotMatrix(&matrix);                               \
+#define BMAGIC_PROJECT_ACTOR_MATRIX(SPAN_WORK)       \
+    pos.vx = (g_Task->coord_x_34.raw >> 9) - 0x4000; \
+    pos.vy = (g_Task->coord_y_38.raw >> 9) - 0x4000; \
+    pos.vz = -(SPAN_WORK)->word_3C.half.span_3E / 2; \
+    RotTrans(&pos, &matrix.t, &flags);               \
+    RotMatrix(&rot, &matrix);                        \
+    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);    \
+    SetRotMatrix(&matrix);                           \
     SetTransMatrix(&matrix)
 
 /* The statements of Effect_SetActorMatrix with a zero rotation. */
@@ -31,7 +31,7 @@
     rot.vz = 0;                                 \
     BMAGIC_PROJECT_ACTOR_MATRIX(SPAN_WORK)
 
-#define BMAGIC_SET_ACTOR_MATRIX() BMAGIC_SET_ACTOR_MATRIX_SPAN(g_SpadWork)
+#define BMAGIC_SET_ACTOR_MATRIX() BMAGIC_SET_ACTOR_MATRIX_SPAN(g_Task)
 
 /* Free the palette fade of the battler the target selector names (a party row
  * below BATTLE_PARTY_SLOT_COUNT, else an enemy row), tell the battle UI and
@@ -92,7 +92,7 @@
     (WORK)->unk_22   = (WORK)->unk_22 + (WORK)->unk_0A;                                \
     (WORK)->unk_06   = tick;                                                           \
     if ((tick & 0xFF) == (WORK)->pad_07) {                                             \
-        (WORK)->unk_02 += 1;                                                           \
+        (WORK)->step += 1;                                                             \
     }
 
 /* One remembered position of an effect's trail; each trail holds
@@ -111,12 +111,12 @@ ASSERT_OFFSET(BmagicTrailPoint, y, 0x02);
 /* Shift the points of the trail TRAIL[unk_04] from unk_0B up to unk_0A - 1 one
  * place toward the end, freeing the point at unk_0B. A statement macro: the
  * member declares s32 i. */
-#define BMAGIC_SHIFT_TRAIL(TRAIL)                                                \
-    i = g_SpadWork->word_08.byte.timer_0A - 1;                                   \
-    while (i >= g_SpadWork->word_08.byte.unk_0B) {                               \
-        (TRAIL)[g_SpadWork->unk_04][i + 1].x = (TRAIL)[g_SpadWork->unk_04][i].x; \
-        (TRAIL)[g_SpadWork->unk_04][i + 1].y = (TRAIL)[g_SpadWork->unk_04][i].y; \
-        i -= 1;                                                                  \
+#define BMAGIC_SHIFT_TRAIL(TRAIL)                                        \
+    i = g_Task->word_08.byte.timer_0A - 1;                               \
+    while (i >= g_Task->word_08.byte.unk_0B) {                           \
+        (TRAIL)[g_Task->unk_04][i + 1].x = (TRAIL)[g_Task->unk_04][i].x; \
+        (TRAIL)[g_Task->unk_04][i + 1].y = (TRAIL)[g_Task->unk_04][i].y; \
+        i -= 1;                                                          \
     }
 
 /* Decrement the active effect ticker. */
@@ -127,30 +127,30 @@ ASSERT_OFFSET(BmagicTrailPoint, y, 0x02);
  * the frame is 56 bytes where retail has 48 (func_801EEC1C in magic086). */
 #define BMAGIC_DISPATCH_STEP_HANDLERS(table, field) \
     handlers = (table);                             \
-    handlers.handlers[g_SpadWork->field]()
-#define g_SpadWork ((PartyBattler*)g_SpadWork)
+    handlers.handlers[g_Task->field]()
+#define g_Task ((PartyBattler*)g_Task)
 
 /* Go to the effect's next step. */
 static inline void Bmagic_NextStep(void) {
-    PartyBattler* work = g_SpadWork;
+    PartyBattler* work = g_Task;
 
-    work->unk_02 = (u8)(work->unk_02 + 1);
+    work->step = (u8)(work->step + 1);
 }
 
 /* Clear the local effect work. */
 static inline void Bmagic_ResetLocalWork(void) {
-    g_SpadWork->flags_00 = 0;
-    g_SpadWork->step_01  = 0;
-    g_SpadWork->unk_02   = 0;
-    g_SpadWork->unk_03   = 0;
-    g_SpadWork->unk_04   = 0;
+    g_Task->flags  = 0;
+    g_Task->mode   = 0;
+    g_Task->step   = 0;
+    g_Task->unk_03 = 0;
+    g_Task->unk_04 = 0;
 }
 
 /* Run the task handler the spad task byte selects. */
 static inline void Bmagic_DispatchTaskPair(Callback first, Callback second) {
     Callback handlers[2] = {first, second};
 
-    handlers[g_SpadWork->step_01]();
+    handlers[g_Task->mode]();
 }
 
 typedef struct MagicTaskFuncs {
@@ -168,11 +168,11 @@ ASSERT_SIZE(BmagicEffectFuncs, 0x18);
 ASSERT_OFFSET(BmagicEffectFuncs, handlers, 0x00);
 
 /* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
- * func_801EF33C dispatches on step_01. */
+ * func_801EF33C dispatches on mode. */
 typedef struct BmagicEffectWork {
-    /* 0x00 */ u8  flags_00;
-    /* 0x01 */ u8  step_01;
-    /* 0x02 */ u8  unk_02;
+    /* 0x00 */ u8  flags;
+    /* 0x01 */ u8  mode;
+    /* 0x02 */ u8  step;
     /* 0x03 */ u8  unk_03;
     /* 0x04 */ u8  unk_04;
     /* 0x05 */ u8  timer_05;
@@ -186,9 +186,9 @@ typedef struct BmagicEffectWork {
     /* 0x22 */ u16 unk_22;
 } BmagicEffectWork;
 
-ASSERT_OFFSET(BmagicEffectWork, flags_00, 0x00);
-ASSERT_OFFSET(BmagicEffectWork, step_01, 0x01);
-ASSERT_OFFSET(BmagicEffectWork, unk_02, 0x02);
+ASSERT_OFFSET(BmagicEffectWork, flags, 0x00);
+ASSERT_OFFSET(BmagicEffectWork, mode, 0x01);
+ASSERT_OFFSET(BmagicEffectWork, step, 0x02);
 ASSERT_OFFSET(BmagicEffectWork, unk_03, 0x03);
 ASSERT_OFFSET(BmagicEffectWork, unk_04, 0x04);
 ASSERT_OFFSET(BmagicEffectWork, timer_05, 0x05);

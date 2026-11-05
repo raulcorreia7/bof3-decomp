@@ -14,7 +14,7 @@ MATCH void func_801EEDF8(void) {
     s32 temp_v1;
     u8  temp_v1_2;
 
-    temp_v1 = g_SpadWork->word_08.byte.unk_09;
+    temp_v1 = g_Task->word_08.byte.unk_09;
     if (temp_v1 != 0x10) {
         if (temp_v1 < 0x11) {
             var_a0 = 0x101;
@@ -34,22 +34,22 @@ MATCH void func_801EEDF8(void) {
     block_7:
         SND_QueueSelectionFx(var_a0);
     }
-    temp_v1_2                       = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v1_2;
+    temp_v1_2                   = g_Task->word_08.byte.unk_09 + 1;
+    g_Task->word_08.byte.unk_09 = temp_v1_2;
     if ((temp_v1_2 & 0xFF) == 0x19) {
-        g_SpadWork->step_01 += 1;
+        g_Task->mode += 1;
     }
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEF08(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EEF4C(void) {
-    SYS_DISPATCH_BYTE(D_801EFAF0, g_SpadWork->unk_02);
-    if (g_SpadWork->unk_02 != 0 && g_SpadWork->flags_00 != 0) {
+    SYS_DISPATCH_BYTE(D_801EFAF0, g_Task->step);
+    if (g_Task->step != 0 && g_Task->flags != 0) {
         func_800AF764();
         func_801EF1B0();
         func_801EF4C4();
@@ -65,9 +65,9 @@ MATCH void func_801EF138(void) {
     PartyBattler* work;
     u8            count;
 
-    work = g_SpadWork;
+    work = g_Task;
     work->word_08.byte.timer_0A++;
-    work                      = g_SpadWork;
+    work                      = g_Task;
     count                     = work->word_08.byte.unk_09 - 1;
     work->word_08.byte.unk_09 = count;
     if (count == 0) {

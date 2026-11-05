@@ -11,12 +11,12 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEEF0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EEF34(void) {
-    SYS_DISPATCH_BYTE(D_801EF788, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801EF788, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         func_801EF2F0();
         func_801EF3EC();
         PopMatrix();
@@ -29,17 +29,17 @@ MATCH void func_801EF140(void) {
     u8 count;
     u8 timer;
 
-    count                            = g_SpadWork->word_08.byte.unk_09;
-    g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E - 0x60;
+    count                        = g_Task->word_08.byte.unk_09;
+    g_Task->word_3C.half.span_3E = (u16)g_Task->word_3C.half.span_3E - 0x60;
     if ((count & 0xFF) != 0x10) {
-        g_SpadWork->word_08.byte.unk_09 = count + 1;
+        g_Task->word_08.byte.unk_09 = count + 1;
     }
-    timer = g_SpadWork->word_08.byte.timer_0A;
+    timer = g_Task->word_08.byte.timer_0A;
     if (timer != 0x10) {
-        g_SpadWork->word_08.byte.timer_0A = timer + 2;
+        g_Task->word_08.byte.timer_0A = timer + 2;
     }
-    if (g_SpadWork->word_3C.half.span_3E == BATTLE_ACTIVE_WORK->word_3C.half.span_3E) {
-        g_SpadWork->unk_02 += 1;
+    if (g_Task->word_3C.half.span_3E == BATTLE_ACTIVE_WORK->word_3C.half.span_3E) {
+        g_Task->step += 1;
     }
 }
 

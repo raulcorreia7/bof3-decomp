@@ -366,17 +366,17 @@ MATCH void func_801F2C48(void) {
     s32    v1;
     s32    v2;
 
-    work         = (Actor*)g_SpadWork;
+    work         = (Actor*)g_Task;
     v0           = work->x.fixed;
     v1           = work->y.fixed;
     v2           = work->z.fixed;
     work->unk_09 = 0xA;
-    work2        = (Actor*)g_SpadWork;
+    work2        = (Actor*)g_Task;
     work->unk_1C = 0;
     work->vx     = v0;
     work->vy     = v1;
     work->vz     = v2;
-    work2->unk_01++;
+    work2->mode++;
 }
 
 /* `work2`/`work3` re-read the slot so each site emits its own address
@@ -387,16 +387,16 @@ MATCH void func_801F2C94(void) {
     Actor* work3;
     u8     count;
 
-    work = (Actor*)g_SpadWork;
+    work = (Actor*)g_Task;
     func_801F2D5C(&work->vx, work->unk_1C);
-    work2 = (Actor*)g_SpadWork;
+    work2 = (Actor*)g_Task;
     work->unk_1C += 0x1199;
     count         = (u8)(work2->unk_09 - 1);
     work2->unk_09 = count;
     if (count == 0) {
         SND_PlayCue(EMI_CUE_ID(2, 13));
-        work3 = (Actor*)g_SpadWork;
-        work3->unk_01++;
+        work3 = (Actor*)g_Task;
+        work3->mode++;
     }
 }
 
@@ -553,7 +553,7 @@ MATCH void func_801F32B8(void) {
     selection             = D_801F4CE0[index];
     result                = func_8015CB18(1, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        work         = (Actor*)g_SpadWork;
+        work         = (Actor*)g_Task;
         work->unk_0B = (s8)result;
     }
 }
@@ -573,10 +573,10 @@ MATCH void func_801F3360(void) {
     if (slot_index == GAME_NONE) {
         return;
     }
-    slot           = &g_ActorSlots[slot_index];
-    slot->flags_00 = 1;
-    slot->type     = 0x33;
-    slot->x.fixed  = 0x70000;
-    slot->y.fixed  = 0x68000;
-    slot->z.fixed  = (s32)(Area_SampleHeight(slot->x.fixed, 0x68000) << 0x10);
+    slot          = &g_ActorSlots[slot_index];
+    slot->flags   = 1;
+    slot->type    = 0x33;
+    slot->x.fixed = 0x70000;
+    slot->y.fixed = 0x68000;
+    slot->z.fixed = (s32)(Area_SampleHeight(slot->x.fixed, 0x68000) << 0x10);
 }

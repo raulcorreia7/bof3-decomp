@@ -13,41 +13,41 @@ MATCH void func_801D0C0C(void) {
 }
 
 MATCH void func_801D0C48(void) {
-    g_SpadWork->pos_x      = 0x308000;
-    g_SpadWork->pos_y      = 0x740000;
-    g_SpadWork->pos_z      = Area_SampleHeight(g_SpadWork->pos_x, 0x740000) << 16;
-    g_SpadWork->counter_0C = 0x308000;
-    g_SpadWork->counter_10 = 0x718000;
-    g_SpadWork->field_14   = 0xFEC00000;
-    g_SpadWork->origin_x   = 0;
-    g_SpadWork->color_r    = 0;
-    g_SpadWork->timer      = 8;
-    g_SpadWork->step += 1;
+    g_Task->pos_x      = 0x308000;
+    g_Task->pos_y      = 0x740000;
+    g_Task->pos_z      = Area_SampleHeight(g_Task->pos_x, 0x740000) << 16;
+    g_Task->counter_0C = 0x308000;
+    g_Task->counter_10 = 0x718000;
+    g_Task->field_14   = 0xFEC00000;
+    g_Task->origin_x   = 0;
+    g_Task->color_r    = 0;
+    g_Task->timer      = 8;
+    g_Task->step += 1;
 }
 
 MATCH void func_801D0CEC(void) {
-    Sce15ef0Work* work = g_SpadWork;
+    Sce15ef0Work* work = g_Task;
 
     work->color_r += 8;
     work->origin_x += 0x10;
-    func_801D1C1C(&g_SpadWork->pos_x, &g_SpadWork->counter_0C, g_SpadWork->color_r);
-    func_801D1A20(&g_SpadWork->pos_x, (s16)g_SpadWork->origin_x, 2);
+    func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos_x, (s16)g_Task->origin_x, 2);
 
-    if (TIMER_EXPIRED(g_SpadWork->timer)) {
-        g_SpadWork->timer = 0x3C;
-        g_SpadWork->step += 1;
+    if (TIMER_EXPIRED(g_Task->timer)) {
+        g_Task->timer = 0x3C;
+        g_Task->step += 1;
         SND_PlayCue(EMI_CUE_ID(2, 13));
     }
 }
 
 MATCH void func_801D0DB0(void) {
-    func_801D1C1C(&g_SpadWork->pos_x, &g_SpadWork->counter_0C, g_SpadWork->color_r);
-    func_801D1A20(&g_SpadWork->pos_x, (s16)g_SpadWork->origin_x, 2);
+    func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos_x, (s16)g_Task->origin_x, 2);
 
-    if (TIMER_EXPIRED(g_SpadWork->timer)) {
-        g_SpadWork->color_g = 0;
-        g_SpadWork->timer   = 4;
-        g_SpadWork->step += 1;
+    if (TIMER_EXPIRED(g_Task->timer)) {
+        g_Task->color_g = 0;
+        g_Task->timer   = 4;
+        g_Task->step += 1;
     }
 }
 
@@ -57,52 +57,52 @@ MATCH void func_801D0DB0(void) {
 INCLUDE_ASM(func_801D0E5C);
 
 MATCH void func_801D0F44(void) {
-    g_SpadWork->color_g -= 0x40;
-    func_801D1220(g_SpadWork->color_g);
-    func_801D1C1C(&g_SpadWork->pos_x, &g_SpadWork->counter_0C, g_SpadWork->color_r);
-    func_801D1A20(&g_SpadWork->pos_x, (s16)g_SpadWork->origin_x, 2);
+    g_Task->color_g -= 0x40;
+    func_801D1220(g_Task->color_g);
+    func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos_x, (s16)g_Task->origin_x, 2);
     func_801D1914(0x40);
 
-    if (TIMER_EXPIRED(g_SpadWork->timer)) {
-        g_SpadWork->timer = 0x3C;
-        g_SpadWork->step += 1;
+    if (TIMER_EXPIRED(g_Task->timer)) {
+        g_Task->timer = 0x3C;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801D101C(void) {
-    func_801D1C1C(&g_SpadWork->pos_x, &g_SpadWork->counter_0C, g_SpadWork->color_r);
-    func_801D1A20(&g_SpadWork->pos_x, (s16)g_SpadWork->origin_x, 2);
+    func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos_x, (s16)g_Task->origin_x, 2);
     func_801D1914(0x40);
 
-    if (TIMER_EXPIRED(g_SpadWork->timer)) {
-        g_SpadWork->timer = 0x3C;
-        g_SpadWork->step += 1;
+    if (TIMER_EXPIRED(g_Task->timer)) {
+        g_Task->timer = 0x3C;
+        g_Task->step += 1;
         SND_PlayCue(EMI_CUE_ID(2, 14));
     }
 }
 
 MATCH void func_801D10C4(void) {
-    if ((s16)g_SpadWork->origin_x > 0) {
-        g_SpadWork->origin_x -= 0x10;
+    if ((s16)g_Task->origin_x > 0) {
+        g_Task->origin_x -= 0x10;
     }
-    if ((s8)g_SpadWork->color_r > 0) {
-        g_SpadWork->color_r -= 8;
+    if ((s8)g_Task->color_r > 0) {
+        g_Task->color_r -= 8;
     }
-    func_801D1C1C(&g_SpadWork->pos_x, &g_SpadWork->counter_0C, g_SpadWork->color_r);
-    func_801D1A20(&g_SpadWork->pos_x, (s16)g_SpadWork->origin_x, 2);
+    func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos_x, (s16)g_Task->origin_x, 2);
     func_801D1914(0x40);
 
-    if (TIMER_EXPIRED(g_SpadWork->timer)) {
-        g_SpadWork->timer    = 0x10;
-        g_SpadWork->origin_x = 0x40;
-        g_SpadWork->step += 1;
+    if (TIMER_EXPIRED(g_Task->timer)) {
+        g_Task->timer    = 0x10;
+        g_Task->origin_x = 0x40;
+        g_Task->step += 1;
     }
 }
 
 MATCH void func_801D11B4(void) {
-    func_801D1914(g_SpadWork->origin_x -= 4);
+    func_801D1914(g_Task->origin_x -= 4);
 
-    if (TIMER_EXPIRED(g_SpadWork->timer)) {
+    if (TIMER_EXPIRED(g_Task->timer)) {
         Actor_Clear();
     }
 }

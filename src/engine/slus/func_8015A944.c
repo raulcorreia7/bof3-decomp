@@ -7,7 +7,7 @@ MATCH void func_8015A944(void) {
     Actor* work;
     u8     state;
 
-    work = g_SpadWork;
+    work = g_Task;
     if ((work->flags_24 & 0x10) != 0) {
         state = 4;
     } else if ((work->range_54.table[3] & 0x20) != 0) {

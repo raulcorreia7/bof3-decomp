@@ -4,11 +4,11 @@
 MATCH void func_801F2E50(void) {
     Actor* work;
 
-    func_801F2ECC(g_SpadWork->z.fixed, g_SpadWork->unk_0B & 0xF8);
-    work = g_SpadWork;
+    func_801F2ECC(g_Task->z.fixed, g_Task->unk_0B & 0xF8);
+    work = g_Task;
     work->unk_0B -= 2;
     work->z.fixed += 1;
-    if (g_SpadWork->z.fixed >= -0xBF) {
-        func_80196070(g_SpadWork);
+    if (g_Task->z.fixed >= -0xBF) {
+        func_80196070(g_Task);
     }
 }

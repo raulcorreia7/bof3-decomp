@@ -8,7 +8,7 @@ MATCH void func_801EEC2C(void) {
     BattleResultRings table;
 
     table = D_801EEC04;
-    SYS_DISPATCH_TASK(table.handlers, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(table.handlers, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EEC98);
@@ -20,7 +20,7 @@ INCLUDE_ASM(func_801EEC98);
 #include "overlays/bmagic/Effect_CountDownAndPlay.h"
 
 MATCH void func_801EF158(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 INCLUDE_ASM(func_801EF19C);
@@ -29,13 +29,13 @@ INCLUDE_ASM(func_801EF238);
 
 MATCH void func_801EF3A4(void) {
     func_8014D978();
-    g_SpadWork->unk_0C += g_SpadWork->unk_18;
-    g_SpadWork->unk_10 += g_SpadWork->unk_1C;
-    g_SpadWork->unk_40 += g_SpadWork->unk_0C;
-    g_SpadWork->unk_44 += g_SpadWork->unk_10;
-    if (g_SpadWork->unk_0C == 0) {
-        g_SpadWork->word_08.byte.unk_09 = 0x10;
-        g_SpadWork->unk_02 += 1;
+    g_Task->unk_0C += g_Task->unk_18;
+    g_Task->unk_10 += g_Task->unk_1C;
+    g_Task->unk_40 += g_Task->unk_0C;
+    g_Task->unk_44 += g_Task->unk_10;
+    if (g_Task->unk_0C == 0) {
+        g_Task->word_08.byte.unk_09 = 0x10;
+        g_Task->step += 1;
     }
 }
 
@@ -43,12 +43,12 @@ MATCH void func_801EF43C(void) {
     u8 temp_v0;
 
     func_8014D978();
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_SpadWork->unk_18 = 0x60;
-        g_SpadWork->unk_1C = -0x80;
-        g_SpadWork->unk_02 += 1;
+        g_Task->unk_18 = 0x60;
+        g_Task->unk_1C = -0x80;
+        g_Task->step += 1;
     }
 }
 
@@ -56,13 +56,13 @@ MATCH void func_801EF4A8(void) {
     PartyBattler* work;
 
     func_8014D978();
-    work = g_SpadWork;
+    work = g_Task;
     work->unk_0C += work->unk_18;
     work->unk_10 += work->unk_1C;
     work->unk_40 += work->unk_0C;
     work->unk_44 += work->unk_10;
     if (work->unk_0C == 0xC00) {
-        work->unk_02++;
+        work->step++;
     }
 }
 
@@ -72,13 +72,13 @@ MATCH void func_801EF534(void) {
 
     if (func_8014DAEC() & 0xFF) {
         if (g_BattleTargetSelector & 0x40) {
-            value2                    = g_SpadWork->word_08.byte.unk_0B;
-            D_801EB630[value2].unk_00 = D_801EB630[value2].unk_00 & 0xBF;
+            value2                   = g_Task->word_08.byte.unk_0B;
+            D_801EB630[value2].flags = D_801EB630[value2].flags & 0xBF;
         } else {
-            value                                 = g_SpadWork->word_08.byte.unk_0B;
-            g_BattlePartyBattlers[value].flags_00 = g_BattlePartyBattlers[value].flags_00 & 0xBF;
+            value                              = g_Task->word_08.byte.unk_0B;
+            g_BattlePartyBattlers[value].flags = g_BattlePartyBattlers[value].flags & 0xBF;
         }
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 

@@ -2,9 +2,9 @@
 
 /* One 0x140-byte battle work row. Only the fields this unit reads are named. */
 typedef struct BattleWorkSlot {
-    u8  unk_00;
-    u8  unk_01;
-    u8  unk_02;
+    u8  flags;
+    u8  mode;
+    u8  step;
     u8  pad_03[0x31];
     s32 coord_x_34;
     s32 coord_y_38;
@@ -39,8 +39,8 @@ NON_MATCHING void func_801B1E24(void) {
         rows = (BattleWorkSlot*)(base - 8);
         row  = rows;
         do {
-            g_SpadWork = (Actor*)row;
-            prev       = i - 1;
+            g_Task = (Actor*)row;
+            prev   = i - 1;
             if (prev < 0) {
                 prev = g_PartySize - 1;
             }
@@ -49,12 +49,11 @@ NON_MATCHING void func_801B1E24(void) {
                 result = func_801B1B2C(rows->coord_x_34 + (s_EntityPlacementOffsets[index] << 15),
                                        rows->coord_y_38 + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed_70);
                 if (((result & BYTE_MASK) != 0) &&
-                    ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), ((BattleWorkSlot*)g_SpadWork)->speed_70) &
-                      0xFF) != 0)) {
+                    ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), ((BattleWorkSlot*)g_Task)->speed_70) & 0xFF) !=
+                     0)) {
                     goto found; /* first position test matched: run the row mark */
                 }
-                if (!(func_801B1B2C(D_80145EC4, D_80145EC8, value & BYTE_MASK,
-                                    ((BattleWorkSlot*)g_SpadWork)->speed_70) &
+                if (!(func_801B1B2C(D_80145EC4, D_80145EC8, value & BYTE_MASK, ((BattleWorkSlot*)g_Task)->speed_70) &
                       0xFF)) {
                     goto next; /* fallback position rejected: next row */
                 }
@@ -65,9 +64,9 @@ NON_MATCHING void func_801B1E24(void) {
         found:
             if (i != 0) {
                 Party_ClearBattlerState(i & BYTE_MASK);
-                g_SpadWork->unk_01 = 3;
+                g_Task->mode = 3;
                 func_801C2438();
-                g_SpadWork->tint.bytes.flags = 1;
+                g_Task->tint.bytes.flags = 1;
             }
         next:
             i++;
@@ -75,12 +74,12 @@ NON_MATCHING void func_801B1E24(void) {
         } while (i < g_PartySize);
     }
 
-    i          = 1;
-    g_SpadWork = (Actor*)g_BattlePartyBattlers;
-    offset     = BATTLE_PARTY_STRIDE;
+    i      = 1;
+    g_Task = (Actor*)g_BattlePartyBattlers;
+    offset = BATTLE_PARTY_STRIDE;
     while (i < g_PartySize) {
         if (D_80145E91[offset] == 3) {
-            state = g_SpadWork->flags_02 + 1;
+            state = g_Task->flags_02 + 1;
             goto store; /* row not in state 3: keep the incremented state */
         }
         i++;
@@ -88,7 +87,7 @@ NON_MATCHING void func_801B1E24(void) {
     }
     state = 4;
 store:
-    g_SpadWork->flags_02 = state;
+    g_Task->flags_02 = state;
 }
 #else
 INCLUDE_ASM(func_801B1E24);

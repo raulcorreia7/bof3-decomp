@@ -16,7 +16,7 @@ MATCH s32 func_801E0770(void) {
     MATCH_REG(s32, result, "v0");
 
     result = 0;
-    if (4 != g_ActorSlots[0].unk_01) {
+    if (4 != g_ActorSlots[0].mode) {
         return result;
     }
     if (0xFF != D_801E3208) {

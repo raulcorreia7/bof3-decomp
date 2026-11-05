@@ -1,5 +1,5 @@
 /* Every step re-reads the scratchpad cell. */
-#define SPAD_WORK_VOLATILE
+#define TASK_VOLATILE
 #include "area115_13.h"
 
 MATCH void func_801F30F0(void) {
@@ -14,10 +14,10 @@ MATCH void func_801F30F0(void) {
     u32 window_span;
     u8  state;
 
-    scratch       = (u8*)g_SpadWork;
+    scratch       = (u8*)g_Task;
     scratch[0x07] = scratch[0x0B];
 
-    check = (u8*)g_SpadWork;
+    check = (u8*)g_Task;
     if (check[0x0B] == 1) {
         key = g_GameContextSeed;
         i   = 0;
@@ -29,7 +29,7 @@ MATCH void func_801F30F0(void) {
         i = next + 4;
         goto scan;
     } else {
-        scratch = (u8*)g_SpadWork;
+        scratch = (u8*)g_Task;
         state   = scratch[0x0B];
         if (state == 2) {
             mode = 3;
@@ -44,13 +44,13 @@ MATCH void func_801F30F0(void) {
 
 found:
     window_span             = 0x10000;
-    scratch                 = (u8*)g_SpadWork;
+    scratch                 = (u8*)g_Task;
     window                  = 2;
     *(u32*)(scratch + 0x18) = key;
     *(u32*)(scratch + 0x40) = 0;
     *(u32*)(scratch + 0x44) = window_span;
     scratch[0x48]           = window;
-    scratch                 = (u8*)g_SpadWork;
+    scratch                 = (u8*)g_Task;
     scratch[0x09]           = 8;
     mode                    = MEM(WorldMapKey, D_801F4D7C + i).mode;
     goto tail;
@@ -68,11 +68,11 @@ arm:
     *(u32*)(scratch + 0x44) = window_span;
     window                  = 2;
     scratch[0x48]           = window;
-    scratch                 = (u8*)g_SpadWork;
+    scratch                 = (u8*)g_Task;
     scratch[0x09]           = 8;
 tail:
     Actor_SelectScript(mode);
 
-    check       = (u8*)g_SpadWork;
+    check       = (u8*)g_Task;
     check[0x01] = window;
 }

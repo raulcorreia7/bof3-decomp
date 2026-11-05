@@ -8,6 +8,6 @@ MATCH s8 Area_IsStepBlocked(s32 handler_x, s32 handler_y) {
     if ((result & BYTE_MASK) == 0) {
         result = func_801A8728(handler_x, handler_y);
     }
-    g_SpadWork = saved;
+    g_Task = saved;
     return result;
 }

@@ -13,7 +13,7 @@ MATCH void func_8019D9C0(void) {
     D_800E4D42 = 0;
     /* NOTE: a goto loop; gcc 2.7.2 strength-reduces a do/while here (+20 bytes). */
 loop:
-    work        = g_SpadWork;
+    work        = g_Task;
     *dst        = work->x.fixed;
     *(dst2 - 5) = work->y.fixed;
     /* Third coord word follows y.fixed with no named field. */

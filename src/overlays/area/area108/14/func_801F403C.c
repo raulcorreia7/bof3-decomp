@@ -3,6 +3,6 @@
 MATCH void func_801F403C(void) {
     Actor* actor;
 
-    actor = g_SpadWork;
-    actor->state_02++;
+    actor = g_Task;
+    actor->step++;
 }

@@ -5,7 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-#define g_SpadWork ((PartyBattler*)g_SpadWork)
+#define g_Task ((PartyBattler*)g_Task)
 
 void func_801EEEAC(void);
 

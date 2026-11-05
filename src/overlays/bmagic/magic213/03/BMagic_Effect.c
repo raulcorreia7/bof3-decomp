@@ -11,11 +11,11 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEFC0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EF004(void) {
-    SYS_DISPATCH_TASK(D_801EF8A4, 2, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801EF8A4, 2, g_Task);
 }
 
 INCLUDE_ASM(func_801EF048);
@@ -27,13 +27,13 @@ INCLUDE_ASM(func_801EF348);
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
 MATCH void func_801EF4E0(void) {
-    SYS_DISPATCH_TASK(D_801EF8B4, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801EF8B4, 1, g_Task);
 }
 
 MATCH void func_801EF524(void) {
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_BYTE(D_801EF8B4 + 1, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+    SYS_DISPATCH_BYTE(D_801EF8B4 + 1, g_Task->step);
+    if (g_Task->flags != 0 && g_Task->step != 0) {
         func_8014D290();
     }
     g_ScriptBank = AREA_SCRIPT_BANK;

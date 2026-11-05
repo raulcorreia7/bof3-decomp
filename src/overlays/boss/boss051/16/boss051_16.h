@@ -7,7 +7,7 @@
 #include "overlays/boss/boss.h"
 
 /* The scratchpad work area is a PartyBattler record in this image. */
-#define g_SpadWork ((PartyBattler*)g_SpadWork)
+#define g_Task ((PartyBattler*)g_Task)
 
 extern Callback D_800C1804[];
 extern u8       D_800C1DB0[];

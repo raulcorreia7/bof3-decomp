@@ -13,7 +13,7 @@ MATCH void func_801A50C0(u8* script) {
         return;
     }
 
-    g_SpadWork         = &g_Actors[slot];
+    g_Task             = &g_Actors[slot];
     GAME_WORK_AREA_PTR = &g_Actors[slot];
 
     D_1F800002 = (u16)((script[1] << 8) | script[2]);
@@ -21,9 +21,9 @@ MATCH void func_801A50C0(u8* script) {
     func_801A4AA8();
     Area_FindSceneRecord(D_1F800002);
 
-    g_SpadWork->flags_00 = ACTOR_FLAG_IN_USE;
+    g_Task->flags = ACTOR_FLAG_IN_USE;
 
-    work                    = g_SpadWork;
+    work                    = g_Task;
     D_80146908[*counter][0] = work->x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
     MATCH_BARRIER();
@@ -34,11 +34,11 @@ MATCH void func_801A50C0(u8* script) {
 
     D_80146910[*counter][0] = 0;
 
-    g_SpadWork->z.part.integer = Area_SampleHeight(work->x.fixed, work->y.fixed);
-    g_SpadWork->unk_01         = script[0xA];
-    g_SpadWork->state_02       = script[0xC];
-    g_SpadWork->direction_08   = script[0] & 0xF;
-    g_SpadWork->unk_06         = script[0] >> 4;
+    g_Task->z.part.integer = Area_SampleHeight(work->x.fixed, work->y.fixed);
+    g_Task->mode           = script[0xA];
+    g_Task->step           = script[0xC];
+    g_Task->direction_08   = script[0] & 0xF;
+    g_Task->unk_06         = script[0] >> 4;
 
     FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[4];
     FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[5];
@@ -51,13 +51,13 @@ MATCH void func_801A50C0(u8* script) {
     func_801A4990(script + 0xD);
 
     if (script[3] & 0x80) {
-        g_SpadWork->flags_00 |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     }
 
-    g_SpadWork->tint.bytes.unk_5D = 0;
-    g_SpadWork->tint.bytes.unk_5F = 0;
-    g_SpadWork->tint.bytes.unk_5E = 0;
-    g_SpadWork->tint.bytes.flags  = script[3] & 0xF;
+    g_Task->tint.bytes.unk_5D = 0;
+    g_Task->tint.bytes.unk_5F = 0;
+    g_Task->tint.bytes.unk_5E = 0;
+    g_Task->tint.bytes.flags  = script[3] & 0xF;
 
     func_801A4914();
 

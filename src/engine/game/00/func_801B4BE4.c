@@ -23,7 +23,7 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
         want  = code;
         do {
             if ((Area_GetCellCode(cells[0], cells[1]) & BYTE_MASK) == want) {
-                g_SpadWork->direction_08 = mode;
+                g_Task->direction_08 = mode;
                 return true;
             }
             ((u16*)cells)[0] = ((u16*)cells)[0] + 1;
@@ -37,7 +37,7 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
         want  = code;
         do {
             if ((Area_GetCellCode(cells[0], cells[1]) & BYTE_MASK) == want) {
-                g_SpadWork->direction_08 = mode;
+                g_Task->direction_08 = mode;
                 return true;
             }
             ((u16*)cells)[1] = ((u16*)cells)[1] + 1;

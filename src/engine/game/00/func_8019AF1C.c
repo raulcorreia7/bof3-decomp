@@ -4,17 +4,17 @@ MATCH void func_8019AF1C(void) {
     Actor* work;
     s16    dist;
 
-    dist = Area_SampleHeight(g_SpadWork->x.fixed, g_SpadWork->y.fixed);
-    work = g_SpadWork;
-    if (dist >= work->z.part.integer || (work->flags_00 & ACTOR_FLAG_OFFSCREEN) || work->unk_01 == 0) {
-        work->vz      = D_801C8108[work->state_02][0];
-        work->gravity = D_801C810C[work->state_02][0];
-        work->unk_01++;
+    dist = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
+    work = g_Task;
+    if (dist >= work->z.part.integer || (work->flags & ACTOR_FLAG_OFFSCREEN) || work->mode == 0) {
+        work->vz      = D_801C8108[work->step][0];
+        work->gravity = D_801C810C[work->step][0];
+        work->mode++;
     }
-    g_SpadWork->x.fixed += g_SpadWork->vx;
-    g_SpadWork->y.fixed += g_SpadWork->vy;
-    g_SpadWork->z.fixed += g_SpadWork->vz;
-    g_SpadWork->vz -= g_SpadWork->gravity;
+    g_Task->x.fixed += g_Task->vx;
+    g_Task->y.fixed += g_Task->vy;
+    g_Task->z.fixed += g_Task->vz;
+    g_Task->vz -= g_Task->gravity;
     func_8014D978();
     Area_SetDrawMode();
 }

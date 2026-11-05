@@ -5,5 +5,5 @@ MATCH void func_800A8CC8(void) {
     func_801DEE4C();
     BATTLE_WORK->unk_29              = 3;
     BATTLE_WORK->word_08.byte.unk_09 = 8;
-    BATTLE_WORK->step_01++;
+    BATTLE_WORK->mode++;
 }

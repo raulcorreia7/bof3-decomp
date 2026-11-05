@@ -18,26 +18,26 @@ MATCH void func_801D0CC0(void) {
     u16 screen_x;
     u8  mode;
 
-    screen_x           = g_SpadWork->unk_2E + 0x20;
-    g_SpadWork->unk_2E = screen_x;
-    func_801D147C(&g_SpadWork->unk_64, (s16)screen_x, 6);
-    mode               = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = mode;
+    screen_x       = g_Task->unk_2E + 0x20;
+    g_Task->unk_2E = screen_x;
+    func_801D147C(&g_Task->unk_64, (s16)screen_x, 6);
+    mode           = g_Task->unk_09 - 1;
+    g_Task->unk_09 = mode;
     if (!(mode & 0xFF)) {
-        g_SpadWork->unk_09 = 0x40;
-        g_SpadWork->unk_01 += 1;
+        g_Task->unk_09 = 0x40;
+        g_Task->mode += 1;
     }
 }
 
 MATCH void func_801D0D54(void) {
     u8 mode;
 
-    func_801D147C(&g_SpadWork->unk_64, (s16)g_SpadWork->unk_2E, 6);
-    mode               = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = mode;
+    func_801D147C(&g_Task->unk_64, (s16)g_Task->unk_2E, 6);
+    mode           = g_Task->unk_09 - 1;
+    g_Task->unk_09 = mode;
     if (!(mode & 0xFF)) {
-        g_SpadWork->unk_09 = 0x20;
-        g_SpadWork->unk_01 += 1;
+        g_Task->unk_09 = 0x20;
+        g_Task->mode += 1;
     }
 }
 
@@ -54,12 +54,12 @@ INCLUDE_ASM(func_801D12A0);
 MATCH void func_801D13F4(void) {
     u8 remaining;
 
-    g_SpadWork->unk_2E -= 0x10;
-    g_SpadWork->unk_03 -= 8;
+    g_Task->unk_2E -= 0x10;
+    g_Task->unk_03 -= 8;
     func_801D1A60();
-    func_801D1678(&g_SpadWork->unk_18, &g_SpadWork->x, g_SpadWork->unk_03);
-    remaining          = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = remaining;
+    func_801D1678(&g_Task->unk_18, &g_Task->x, g_Task->unk_03);
+    remaining      = g_Task->unk_09 - 1;
+    g_Task->unk_09 = remaining;
     if (!(remaining & 0xFF)) {
         func_80196070();
     }
@@ -90,7 +90,7 @@ MATCH void func_801D19C8(void) {
             slot->active = 1;
             slot->unk_01 = 0;
             slot->life   = 0x10;
-            actor        = g_SpadWork;
+            actor        = g_Task;
             slot->x      = actor->x.fixed;
             slot->y      = actor->y.fixed;
             slot->z      = actor->z.fixed;
@@ -199,7 +199,7 @@ MATCH void func_801D2138(s32* first, s32* second) {
 }
 
 MATCH void func_801D2170(void) {
-    SYS_DISPATCH_TASK(D_801D3954, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D3954, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801D21B4);
@@ -217,7 +217,7 @@ MATCH void func_801D2B44(void) {
 }
 
 MATCH void func_801D2B64(void) {
-    SYS_DISPATCH_TASK(D_801D396C, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D396C, 1, g_Task);
 }
 
 /* Tried: spad body (five work stores, unk_01++, SND_PlayCue(520)), with
@@ -235,7 +235,7 @@ INCLUDE_ASM(func_801D2C94);
 INCLUDE_ASM(func_801D2D5C);
 
 MATCH void func_801D2DEC(void) {
-    SYS_DISPATCH_TASK(D_801D397C, 1, g_SpadWork);
+    SYS_DISPATCH_TASK(D_801D397C, 1, g_Task);
 }
 
 INCLUDE_ASM(func_801D2E30);

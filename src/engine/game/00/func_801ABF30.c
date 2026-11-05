@@ -11,7 +11,7 @@ MATCH VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_kind) {
     u8     count;
     u8     key;
 
-    SAVE_SLOT = g_SpadWork;
+    SAVE_SLOT = g_Task;
     key       = sel;
     if ((sel & 0x80) != 0) {
         key &= 0x3F;
@@ -29,15 +29,15 @@ MATCH VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_kind) {
     } else {
         work = &D_80147A58[key];
     }
-    g_SpadWork = work;
+    g_Task = work;
     /* FAKE: keeps the scratchpad store ahead of the call-argument setup. */
     MATCH_BARRIER();
     func_801AC1DC((s32*)&buf.vx, selector_kind);
-    cur = g_SpadWork;
+    cur = g_Task;
     buf.vx += cur->x.fixed;
     buf.vy += cur->y.fixed;
     buf.vz += (s16)cur->z.part.integer;
-    g_SpadWork = SAVE_SLOT;
-    *out       = buf;
+    g_Task = SAVE_SLOT;
+    *out   = buf;
     return out;
 }

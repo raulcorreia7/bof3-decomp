@@ -53,7 +53,7 @@ loop:
     slot->unk_0A           = digits;
     slot->unk_09           = 8;
     FIELD(s16, slot, 0x32) = 0;
-    slot->unk_01 += 1;
+    slot->mode += 1;
 }
 #else
 INCLUDE_ASM(func_801E5E2C);

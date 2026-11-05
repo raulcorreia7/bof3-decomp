@@ -14,18 +14,18 @@ MATCH void func_801D2AE0(void) {
         return;
     }
 
-    scratch                    = (volatile u8*)g_SpadWork;
+    scratch                    = (volatile u8*)g_Task;
     *(u32*)((scratch + 0x34u)) = *(u32*)((world + 0x3FFCu));
     *(u32*)((scratch + 0x38u)) = *(u32*)((world + 0x4000u));
     scratch[0x2Au]             = world[0x3FF2u];
 
-    scratch                    = (volatile u8*)g_SpadWork;
+    scratch                    = (volatile u8*)g_Task;
     scratch[0x49u]             = world[0x4011u];
-    scratch                    = (volatile u8*)g_SpadWork;
+    scratch                    = (volatile u8*)g_Task;
     scratch[0x4Au]             = world[0x4012u];
-    scratch                    = (volatile u8*)g_SpadWork;
+    scratch                    = (volatile u8*)g_Task;
     scratch[0x4Bu]             = world[0x4013u];
-    scratch                    = (volatile u8*)g_SpadWork;
+    scratch                    = (volatile u8*)g_Task;
     *(u32*)((scratch + 0x50u)) = *(u32*)((world + 0x4018u));
     *(u32*)((scratch + 0x54u)) = *(u32*)((world + 0x401Cu));
     *(u16*)((scratch + 0x58u)) = *(u16*)((world + 0x4020u));

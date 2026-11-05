@@ -5,10 +5,10 @@
 MATCH void Actor_SlideScreenOffBottom(void) {
     Actor* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     work->unk_30 -= 0x20;
     if ((s16)work->unk_30 < -0xFF) {
-        work->state_02++;
+        work->step++;
     }
     Area_Update();
 }

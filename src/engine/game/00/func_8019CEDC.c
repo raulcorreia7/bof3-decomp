@@ -4,8 +4,8 @@ MATCH void func_8019CEDC(void) {
     Actor* work;
     s32    moved;
 
-    g_SpadWork->unk_09 = (u8)(g_SpadWork->unk_09 - 1);
-    work               = g_SpadWork;
+    g_Task->unk_09 = (u8)(g_Task->unk_09 - 1);
+    work           = g_Task;
     work->x.fixed += work->vx;
     moved         = work->y.fixed + work->vy;
     work->y.fixed = moved;
@@ -18,8 +18,8 @@ MATCH void func_8019CEDC(void) {
             }
         }
         func_8019D270();
-        g_SpadWork->unk_0B = 0;
-        g_SpadWork->unk_01 = 1;
+        g_Task->unk_0B = 0;
+        g_Task->mode   = 1;
     }
     func_8015A944();
 }

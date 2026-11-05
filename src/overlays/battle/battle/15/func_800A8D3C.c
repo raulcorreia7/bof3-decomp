@@ -5,7 +5,7 @@
 
 MATCH void func_800A8D3C(void) {
     func_801DEE4C();
-    if (D_801EB4E0->step_01 == 5) {
+    if (D_801EB4E0->mode == 5) {
         func_801E5988();
     }
 }

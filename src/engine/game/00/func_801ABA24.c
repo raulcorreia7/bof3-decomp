@@ -10,25 +10,25 @@ MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
     action = ((u8*)target)[FIELD(u16, sub, 0xAu)];
     switch (action) {
         case 0x61:
-            result = (g_SpadWork->direction_08 & 7) + 0x14;
+            result = (g_Task->direction_08 & 7) + 0x14;
             break;
         case 0x62:
-            result = (g_SpadWork->direction_08 & 7) + 0x1C;
+            result = (g_Task->direction_08 & 7) + 0x1C;
             break;
         case 0x63:
-            result = (g_SpadWork->direction_08 & 7) + 0x24;
+            result = (g_Task->direction_08 & 7) + 0x24;
             break;
         case 0x64:
-            result = (g_SpadWork->direction_08 & 7) + 0x2C;
+            result = (g_Task->direction_08 & 7) + 0x2C;
             break;
         case 0x65:
-            work   = g_SpadWork;
+            work   = g_Task;
             mode   = work->direction_08;
             result = (((u32)mode >> 1) & 3) | 0x34;
             /* 0x65 and 0x66 share the route update at set_route. */
             goto set_route;
         case 0x66:
-            work   = g_SpadWork;
+            work   = g_Task;
             mode   = work->direction_08;
             result = (((u32)mode >> 1) & 3) | 0x10;
         set_route:
@@ -38,11 +38,11 @@ MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
             break;
         case 0x60:
         default:
-            result = g_SpadWork->direction_08 & 7;
+            result = g_Task->direction_08 & 7;
             break;
     }
     FIELD(u8, sub, 0x0u) |= 0x40;
-    g_SpadWork->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     Actor_SelectScript(result);
-    return g_SpadWork->direction_08;
+    return g_Task->direction_08;
 }

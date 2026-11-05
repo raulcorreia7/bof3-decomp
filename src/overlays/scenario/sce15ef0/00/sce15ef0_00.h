@@ -7,7 +7,7 @@
 #include "sys/gameui.h"
 #include "overlays/scenario/scenario.h"
 
-#define g_SpadWork ((Sce15ef0Work*)g_SpadWork)
+#define g_Task ((Sce15ef0Work*)g_Task)
 
 /* The overlay's scratchpad work area: the scenario effect layout (fields at
  * +0x01, +0x09, +0x0C, +0x2E, +0x34 and +0x5D match scena00's SceneEffect). */

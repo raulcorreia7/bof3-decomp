@@ -2,16 +2,16 @@
 
 MATCH void func_8019ED40(void) {
     if (g_GameStateIndex != GAME_REQUEST_IDLE) {
-        if (g_SpadWork->unk_0B == 0u) {
+        if (g_Task->unk_0B == 0u) {
             return;
         }
         if (func_8014DAEC() != 0u) {
-            g_SpadWork->unk_0B = 1;
+            g_Task->unk_0B = 1;
         }
-        if (g_SpadWork->unk_0B != 2u) {
+        if (g_Task->unk_0B != 2u) {
             return;
         }
-    } else if ((func_8014DAEC() != 0u) || (g_SpadWork->unk_0B != 0u)) {
+    } else if ((func_8014DAEC() != 0u) || (g_Task->unk_0B != 0u)) {
         Actor_Clear();
         return;
     }

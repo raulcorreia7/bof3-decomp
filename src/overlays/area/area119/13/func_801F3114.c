@@ -3,7 +3,7 @@
 MATCH void func_801F3114(void) {
     u8* work;
 
-    work                    = (u8*)g_SpadWork;
+    work                    = (u8*)g_Task;
     FIELD(u16, work, 0x30u) = (u16)(FIELD(u16, work, 0x30u) - 0x20);
     if ((s16)FIELD(u16, work, 0x30u) < -0xFF) {
         work[2]++;

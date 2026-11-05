@@ -9,8 +9,8 @@ MATCH void func_801B3690(void) {
     hint = g_EmiLoadedCharacterIndex;
     D_801CD164[hint & 0x7F]();
     if (g_GameState->mode_12B.u8_value == 0) {
-        Actor_RequestScript(g_SpadWork->direction_08);
+        Actor_RequestScript(g_Task->direction_08);
         Party_ClearBattlerState(0);
-        g_SpadWork->unk_01 = 1;
+        g_Task->mode = 1;
     }
 }

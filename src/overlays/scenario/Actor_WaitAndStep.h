@@ -5,10 +5,10 @@
 MATCH void Actor_WaitAndStep(Actor* actor) {
     u8 wait;
 
-    wait            = actor->state_02 - 1;
-    actor->state_02 = wait;
+    wait        = actor->step - 1;
+    actor->step = wait;
     if (!(wait & BYTE_MASK)) {
-        actor->state_02 = 32;
-        actor->unk_01   = actor->unk_01 + 1;
+        actor->step = 32;
+        actor->mode = actor->mode + 1;
     }
 }

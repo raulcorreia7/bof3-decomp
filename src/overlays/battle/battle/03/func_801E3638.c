@@ -7,18 +7,18 @@
 MATCH void func_801E3638(void) {
     PartyBattler* work;
 
-    D_801EB3FC[g_SpadWork->unk_02]();
+    D_801EB3FC[g_Task->step]();
     if (g_BattleCurrentEnemy->status_82 & STATUS_CONFUSED) {
         if (g_BattleCurrentEnemy->flags_100 & 0x800) {
-            if ((s8)++g_BattleEffects[g_SpadWork->slot].unk_09 >= 12) {
+            if ((s8)++g_BattleEffects[g_Task->slot].unk_09 >= 12) {
                 g_BattleCurrentEnemy->flags_100 ^= 0x800;
             }
         } else {
-            if ((s8)--g_BattleEffects[g_SpadWork->slot].unk_09 < -11) {
+            if ((s8)--g_BattleEffects[g_Task->slot].unk_09 < -11) {
                 g_BattleCurrentEnemy->flags_100 ^= 0x800;
             }
         }
-        work = g_SpadWork;
+        work = g_Task;
         if (work->word_08.byte.facing_08 == 1 || work->word_08.byte.facing_08 == 3) {
             work->coord_x_34.raw =
                 g_BattleEffects[work->slot].unk_34.raw + ((s8)g_BattleEffects[work->slot].unk_09 << 9);

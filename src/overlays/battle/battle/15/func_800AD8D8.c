@@ -10,7 +10,7 @@ MATCH void func_800AD8D8(void) {
     flag = *MEM_PTR(u8, &g_BattlePanelEntry);
     if (flag == GAME_NONE) {
         Actor_SelectScript(0x13);
-        work = (PartyBattler*)g_SpadWork;
-        work->unk_02++;
+        work = (PartyBattler*)g_Task;
+        work->step++;
     }
 }

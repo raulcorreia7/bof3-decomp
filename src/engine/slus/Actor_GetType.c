@@ -5,7 +5,7 @@
 MATCH s32 Actor_GetType(void) {
     u8* work;
 
-    work = (u8*)g_SpadWork;
+    work = (u8*)g_Task;
     if (work == D_80143F48) {
         return 2;
     }

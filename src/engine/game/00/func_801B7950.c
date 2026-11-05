@@ -4,6 +4,6 @@ MATCH void func_801B7950(void) {
     Actor* work;
 
     func_801C4D1C();
-    work = g_SpadWork;
+    work = g_Task;
     work->unk_04++;
 }

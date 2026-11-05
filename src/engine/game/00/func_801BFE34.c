@@ -19,7 +19,7 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
             kind        = 0;
             record      = (u8*)g_BattlePartyBattlers + offset;
             g_GameState = (GameState*)record;
-            g_SpadWork  = (Actor*)record;
+            g_Task      = (Actor*)record;
             key         = record[0x79];
             while (1) {
                 if (D_80144F5D[kind & BYTE_MASK] == key)
@@ -31,11 +31,11 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
             kind &= BYTE_MASK;
             func_801BF5A8(D_80143F24, D_80143F28, kind);
             kind <<= 3;
-            FIELD(s32, D_80143F2C, kind) = g_SpadWork->x.fixed;
-            FIELD(s32, D_80143F30, kind) = g_SpadWork->y.fixed;
-            g_SpadWork->unk_48           = 0;
-            g_SpadWork->direction_08     = s_RouteIndexByMode[g_BattleScrollDir];
-            Actor_RequestScript(g_SpadWork->direction_08);
+            FIELD(s32, D_80143F2C, kind) = g_Task->x.fixed;
+            FIELD(s32, D_80143F30, kind) = g_Task->y.fixed;
+            g_Task->unk_48               = 0;
+            g_Task->direction_08         = s_RouteIndexByMode[g_BattleScrollDir];
+            Actor_RequestScript(g_Task->direction_08);
             offset += BATTLE_PARTY_STRIDE;
             count += 1;
         } while (count < g_PartySize);

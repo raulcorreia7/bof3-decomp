@@ -13,14 +13,14 @@ MATCH void func_8015BAC4(u8 selector) {
     u16    table_word;
     s32    index;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (work->unk_06 < 8U) {
         if (work->unk_06 != 6) {
             work->unk_2A = D_801C839D[selector * 2];
             context      = g_CurrentActor[0x95];
             index        = selector * 2;
             if (context != GAME_NONE) {
-                frame      = g_SpadWork;
+                frame      = g_Task;
                 table_byte = D_801C839C[index];
                 if (frame->unk_4B != table_byte) {
                     table_word = table_byte;

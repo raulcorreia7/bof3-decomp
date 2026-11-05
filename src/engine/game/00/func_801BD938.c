@@ -22,15 +22,15 @@ MATCH s32 func_801BD938(void) {
     if (D_80145FBB[0].mode == 9) {
         return 0;
     }
-    slot = g_SpadWork->unk_05;
+    slot = g_Task->unk_05;
     if (D_80145FBB[slot ^ 3].mode == 9) {
         return 0;
     }
     if (slot == ((RANDOM_MASK(1)) + 1)) {
         g_GameState->mode_12B.u8_value = 9;
-        Actor_RequestScript(g_SpadWork->direction_08);
-        g_SpadWork->unk_09 = 2;
-        g_SpadWork->unk_01 = 6;
+        Actor_RequestScript(g_Task->direction_08);
+        g_Task->unk_09 = 2;
+        g_Task->mode   = 6;
         ACTOR_CLEAR_STATE();
         return 1;
     }

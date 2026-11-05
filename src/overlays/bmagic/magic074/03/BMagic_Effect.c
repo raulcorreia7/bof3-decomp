@@ -11,13 +11,13 @@ INCLUDE_ASM(func_801EED18);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEF9C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EEFE0(void) {
     BmagicEffectFuncs handlers;
 
-    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, unk_02);
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, step);
 }
 
 INCLUDE_ASM(func_801EF058);
@@ -32,9 +32,9 @@ INCLUDE_ASM(func_801EF3C0);
 INCLUDE_ASM(func_801EF518);
 
 MATCH void func_801EF6A4(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+    if (g_Task->word_08.byte.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
-        func_800A9820(g_SpadWork->unk_04);
+        func_800A9820(g_Task->unk_04);
         func_801E5988();
     }
 }
@@ -71,9 +71,9 @@ INCLUDE_ASM(func_801F00B0);
 INCLUDE_ASM(func_801F03D4);
 
 MATCH void func_801F0440(void) {
-    D_801F20DC->flags_00 = 0;
-    D_801F20DC->step_01  = 0;
-    D_801F20DC->unk_02   = 0;
-    D_801F20DC->unk_03   = 0;
-    D_801F20DC->unk_04   = 0;
+    D_801F20DC->flags  = 0;
+    D_801F20DC->mode   = 0;
+    D_801F20DC->step   = 0;
+    D_801F20DC->unk_03 = 0;
+    D_801F20DC->unk_04 = 0;
 }

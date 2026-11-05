@@ -17,7 +17,7 @@ MATCH void func_801E8DD8(void) {
     if (slot[5] < 3u) {
         PartyBattler* dst;
 
-        dst              = g_SpadWork;
+        dst              = g_Task;
         offset_x         = (s8)g_BattlePanelOffsets[(u32)D_80145F09[slot[5]][0] * 8u + (u32)slot[8] * 2u];
         dst->unk_2E.half = *(u16*)((slot + 0x2Eu)) + offset_x;
         if (slot[8] < 2u) {
@@ -28,16 +28,16 @@ MATCH void func_801E8DD8(void) {
             offset_y = D_801EB109[(u32)D_80145F09[row][0] * 2u];
         }
         dst->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
-        g_SpadWork->z    = *(u16*)(((u8*)D_801EB4E0 + 0x32u));
+        g_Task->z        = *(u16*)(((u8*)D_801EB4E0 + 0x32u));
     } else {
         row = slot[5];
         row -= 3;
-        offset_x                = (s8)D_801EB712[row * 0x118];
-        g_SpadWork->unk_2E.half = *(u16*)((slot + 0x2Eu)) + offset_x;
-        row                     = slot[5];
+        offset_x            = (s8)D_801EB712[row * 0x118];
+        g_Task->unk_2E.half = *(u16*)((slot + 0x2Eu)) + offset_x;
+        row                 = slot[5];
         row -= 3;
-        offset_y                = ENCOUNTER_ENEMIES[D_801EB710[row * 0x118]].height;
-        g_SpadWork->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
-        g_SpadWork->z           = *(u16*)((slot + 0x32u));
+        offset_y            = ENCOUNTER_ENEMIES[D_801EB710[row * 0x118]].height;
+        g_Task->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
+        g_Task->z           = *(u16*)((slot + 0x32u));
     }
 }

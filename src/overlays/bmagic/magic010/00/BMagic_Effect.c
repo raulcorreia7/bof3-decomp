@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC14(void) {
     BattleResultRings table = D_801EEC04;
 
-    table.handlers[SP_REF(PartyBattler*, 0x44u)->step_01]();
+    table.handlers[SP_REF(PartyBattler*, 0x44u)->mode]();
 }
 
 #include "overlays/bmagic/Effect_SelectTargetAndAdvance.h"

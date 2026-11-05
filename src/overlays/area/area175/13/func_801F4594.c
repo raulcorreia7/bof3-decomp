@@ -1,7 +1,7 @@
 #include "area175_13.h"
 
 MATCH void func_801F4594(Actor* actor) {
-    actor->unk_01 = 4;
+    actor->mode   = 4;
     actor->unk_78 = 2;
     actor->unk_77 = 0xD;
     actor->unk_7E = 0;

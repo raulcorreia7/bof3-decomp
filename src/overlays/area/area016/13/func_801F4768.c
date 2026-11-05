@@ -22,7 +22,7 @@ NON_MATCHING void func_801F4768(void) {
     s32       uv;
     s32       tpage;
 
-    frame = g_SpadWork;
+    frame = g_Task;
     if (frame->flags_02 == 0) {
         frame->y.part.integer = (u16)(frame->y.part.integer + (g_FrameCount & 0xF));
         frame->flags_02       = (u8)(frame->flags_02 + 1);
@@ -32,14 +32,14 @@ NON_MATCHING void func_801F4768(void) {
         return;
     }
 
-    frame          = g_SpadWork;
+    frame          = g_Task;
     width          = frame->unk_0B - 2;
     frame->y.fixed = frame->y.fixed + 0x800 + (width << 10);
     if ((D_80104001 + 8) < frame->y.part.integer) {
         frame->y.part.integer = -8;
     }
 
-    frame = g_SpadWork;
+    frame = g_Task;
     if ((abs(D_8014930A - frame->x.part.integer) < 0x1A) || (abs(D_8014930E - frame->y.part.integer) < 0x1A)) {
         primitive = (POLY_FT4*)g_GfxPrimCursor;
         row       = 0;
@@ -55,7 +55,7 @@ NON_MATCHING void func_801F4768(void) {
         q2->vz   = -0x300;
         q3->vz   = -0x300;
 
-        frame  = g_SpadWork;
+        frame  = g_Task;
         offset = (2 - width) << 8;
         offset += abs(0xF - (g_FrameCount & 0x1F));
         x_high = (frame->x.fixed >> 9) - 0x3FC0;
@@ -81,7 +81,7 @@ NON_MATCHING void func_801F4768(void) {
 
         for (row = 0; row < (2 - width) * 4 + 1; row++) {
             for (col = 0; col < (2 - width) * 4; col++) {
-                frame = g_SpadWork;
+                frame = g_Task;
                 source =
                     Area_FindCellQuad(frame->x.part.integer - 2 + width + col, frame->y.part.integer - 2 + width + row);
                 if (source != NULL) {
@@ -103,21 +103,21 @@ NON_MATCHING void func_801F4768(void) {
                     primitive->b0    = 0x28;
 
                     primitive->u0 = (u8)(D_801F51D8[width] + col * D_801F51E0[width]);
-                    uv            = D_801F51E0[width] * g_SpadWork->y.part.fraction;
+                    uv            = D_801F51E0[width] * g_Task->y.part.fraction;
                     if (uv < 0) {
                         uv += 0xFFFF;
                     }
                     primitive->v0 = (u8)((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16));
 
                     primitive->u1 = (u8)(D_801F51E0[width] + (D_801F51D8[width] + col * D_801F51E0[width]));
-                    uv            = D_801F51E0[width] * g_SpadWork->y.part.fraction;
+                    uv            = D_801F51E0[width] * g_Task->y.part.fraction;
                     if (uv < 0) {
                         uv += 0xFFFF;
                     }
                     primitive->v1 = (u8)((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16));
 
                     primitive->u2 = (u8)(D_801F51D8[width] + col * D_801F51E0[width]);
-                    uv            = (D_801F51E0[width] & BYTE_MASK) * g_SpadWork->y.part.fraction;
+                    uv            = (D_801F51E0[width] & BYTE_MASK) * g_Task->y.part.fraction;
                     if (uv < 0) {
                         uv += 0xFFFF;
                     }
@@ -125,14 +125,14 @@ NON_MATCHING void func_801F4768(void) {
                         (u8)(D_801F51E0[width] + ((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16)));
 
                     primitive->u3 = (u8)(D_801F51E0[width] + (D_801F51D8[width] + col * D_801F51E0[width]));
-                    uv            = (D_801F51E0[width] & BYTE_MASK) * g_SpadWork->y.part.fraction;
+                    uv            = (D_801F51E0[width] & BYTE_MASK) * g_Task->y.part.fraction;
                     if (uv < 0) {
                         uv += 0xFFFF;
                     }
                     primitive->v3 =
                         (u8)(D_801F51E0[width] + ((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16)));
 
-                    frame = g_SpadWork;
+                    frame = g_Task;
                     Area_AddCellPrim((frame->x.part.integer - 2 + width + col) << 16,
                                      (frame->y.part.integer - 2 + width + row) << 16, 1, 0x28);
                 }

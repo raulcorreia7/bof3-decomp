@@ -126,11 +126,11 @@ NON_MATCHING void func_801D1228(void) {
         if ((u32)slot < 3U) {
             row_offset = (((s32)slot * 4) + slot) << 6;
             if (ACTOR_IN_USE(g_BattlePartyBattlers[slot])) {
-                g_SpadWork = g_BattlePartyBattlers + row_offset;
+                g_Task = g_BattlePartyBattlers + row_offset;
                 goto found; /* joins the shared work-pointer exit */
             }
         } else if (!(Battle_SlotIsBlocked((u32)slot) & BYTE_MASK) && (g_BattleEncounter != 37)) {
-            g_SpadWork = (((((s32)(((s32)slot * 8) + slot) * 4) - slot) * 8) + g_BattleEnemies);
+            g_Task = (((((s32)(((s32)slot * 8) + slot) * 4) - slot) * 8) + g_BattleEnemies);
         found: /* the live battler's work pointer */
             GFX_UploadPaletteRows();
         }

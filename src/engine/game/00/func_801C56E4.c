@@ -5,18 +5,18 @@ MATCH void func_801C56E4(void) {
     Actor* work;
     Actor* state;
 
-    work               = g_SpadWork;
+    work               = g_Task;
     work->direction_08 = (u8)(work->direction_08 ^ 4);
     index              = 0x3B;
-    if (g_SpadWork->direction_08 == 3) {
+    if (g_Task->direction_08 == 3) {
         index = 0x3A;
     }
     Actor_RequestScript(index);
-    GFX_StagePalette((g_SpadWork->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
+    GFX_StagePalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
     Actor_ClearVelocity();
-    state                = g_SpadWork;
-    state->gravity       = -8;
-    state->unk_01        = 2;
-    g_SpadWork->state_02 = 3;
-    g_SpadWork->unk_03   = 3;
+    state          = g_Task;
+    state->gravity = -8;
+    state->mode    = 2;
+    g_Task->step   = 3;
+    g_Task->unk_03 = 3;
 }

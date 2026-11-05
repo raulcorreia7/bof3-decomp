@@ -40,16 +40,16 @@ ASSERT_OFFSET(ScanBar, y, 0x04);
 static inline void Scene_AdvanceActorState(void) {
     Actor* actor;
 
-    actor           = SP_REF(Actor*, 0x44);
-    actor->state_02 = (u8)(actor->state_02 + 1);
+    actor       = SP_REF(Actor*, 0x44);
+    actor->step = (u8)(actor->step + 1);
 }
 
 /* Advance the current actor's step index. */
 static inline void Scene_AdvanceActorStep(void) {
     Actor* actor;
 
-    actor         = SP_REF(Actor*, 0x44);
-    actor->unk_01 = (u8)(actor->unk_01 + 1);
+    actor       = SP_REF(Actor*, 0x44);
+    actor->mode = (u8)(actor->mode + 1);
 }
 
 /* The scenario request cell: the step machine stores and steps it as a byte,

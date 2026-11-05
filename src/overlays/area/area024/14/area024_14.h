@@ -16,10 +16,10 @@
 #define WORLD00_AREA024_PTR_7AAC       MEM(volatile u8*, 0x80147AACu)
 #define WORLD00_AREA024_SCRATCH_PTR    SP_REF(volatile Area024Scratch*, 0x44u)
 
-#define g_SpadWork                     ((volatile Area024Scratch*)g_SpadWork)
+#define g_Task                         ((volatile Area024Scratch*)g_Task)
 
 typedef struct AreaSprite {
-    u8                flags_00; /* set to 1 when the sprite is armed */
+    u8                flags; /* set to 1 when the sprite is armed */
     u8                flags_01;
     u8                flags_02; /* set to 4 */
     u8                flags_03; /* set to 0x40 */

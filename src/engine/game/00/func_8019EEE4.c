@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-#define WORK ((Actor*)g_SpadWork)
+#define WORK ((Actor*)g_Task)
 
 MATCH u8 func_8019EEE4(void) {
     s16 distance;
@@ -10,8 +10,8 @@ MATCH u8 func_8019EEE4(void) {
     s32 index;
 
     found    = 0;
-    distance = Area_SampleHeight(g_SpadWork->x.fixed, g_SpadWork->y.fixed);
-    slot     = func_801BDE14(g_SpadWork->x.fixed, g_SpadWork->y.fixed, 0);
+    distance = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
+    slot     = func_801BDE14(g_Task->x.fixed, g_Task->y.fixed, 0);
     if (slot != -1) {
         g_Actors[slot].flags_74 |= ACTOR_FLAG_INTERACTION_PENDING;
         return true;
@@ -50,7 +50,7 @@ MATCH u8 func_8019EEE4(void) {
     if (found) {
         roll = RANDOM_MASK(0xF);
         if (roll >= 0xD) {
-            g_SpadWork->unk_0B = 2;
+            g_Task->unk_0B = 2;
             if (roll == 0xF) {
                 func_801B5E58(0xA);
             } else {
@@ -58,18 +58,18 @@ MATCH u8 func_8019EEE4(void) {
             }
             index = (s8)Actor_FindFreeSlot();
             if (index != -1) {
-                g_ActorSlots[index].flags_00 = 1;
-                g_ActorSlots[index].type     = 0x34;
-                g_ActorSlots[index].unk_01   = 1;
-                g_ActorSlots[index].x.fixed  = g_SpadWork->x.fixed;
-                g_ActorSlots[index].y.fixed  = g_SpadWork->y.fixed;
+                g_ActorSlots[index].flags   = 1;
+                g_ActorSlots[index].type    = 0x34;
+                g_ActorSlots[index].mode    = 1;
+                g_ActorSlots[index].x.fixed = g_Task->x.fixed;
+                g_ActorSlots[index].y.fixed = g_Task->y.fixed;
                 g_ActorSlots[index].z.part.integer =
                     Area_SampleHeight(g_ActorSlots[index].x.fixed, g_ActorSlots[index].y.fixed) + 0x100;
                 g_ActorSlots[index].link_0B = 0;
             }
             D_80145E97 = 1;
         } else {
-            g_SpadWork->unk_0B = 0;
+            g_Task->unk_0B = 0;
         }
         return true;
     }

@@ -3,9 +3,9 @@
 MATCH void func_801F4080(void) {
     Actor* work;
 
-    work = g_SpadWork;
+    work = g_Task;
     if (work->z.part.integer != 0x3C0) {
-        work->flags_00 &= 0xBF;
+        work->flags &= 0xBF;
         SYS_ToggleFlag(g_SceneEventFlags, 0x4B);
     } else {
         g_ScriptState->cursor += 8;

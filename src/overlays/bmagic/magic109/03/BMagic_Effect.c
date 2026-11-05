@@ -11,13 +11,13 @@ INCLUDE_ASM(func_801EEC80);
 MATCH void func_801EEEAC(void) {
     u8 temp_v1;
 
-    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 2;
-    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    temp_v1                     = g_Task->word_08.byte.unk_09 + 2;
+    g_Task->word_08.byte.unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x54) {
-        g_SpadWork->step_01 += 1;
-        g_SpadWork->word_08.byte.timer_0A = 0x40;
+        g_Task->mode += 1;
+        g_Task->word_08.byte.timer_0A = 0x40;
     }
-    func_801EF0F8(g_SpadWork->unk_64);
+    func_801EF0F8(g_Task->unk_64);
 }
 
 MATCH void func_801EEF30(void) {
@@ -25,24 +25,24 @@ MATCH void func_801EEF30(void) {
     s32 lowered_offset;
     u8  timer;
 
-    timer                             = g_SpadWork->word_08.byte.timer_0A;
-    g_SpadWork->word_08.byte.timer_0A = timer + 0xFF;
+    timer                         = g_Task->word_08.byte.timer_0A;
+    g_Task->word_08.byte.timer_0A = timer + 0xFF;
     if (timer == 0) {
         func_800A9610(g_BattleTargetSelector, 0x10U);
-        g_SpadWork->step_01 += 1;
+        g_Task->mode += 1;
     }
-    func_801EF0F8(g_SpadWork->unk_64);
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        raised_offset      = g_SpadWork->unk_64 + 8;
-        g_SpadWork->unk_64 = raised_offset;
+    func_801EF0F8(g_Task->unk_64);
+    if (g_Task->word_08.byte.unk_0B == 0) {
+        raised_offset  = g_Task->unk_64 + 8;
+        g_Task->unk_64 = raised_offset;
         if (raised_offset >= 0x80) {
-            g_SpadWork->word_08.byte.unk_0B = 1;
+            g_Task->word_08.byte.unk_0B = 1;
         }
     } else {
-        lowered_offset     = g_SpadWork->unk_64 - 8;
-        g_SpadWork->unk_64 = lowered_offset;
+        lowered_offset = g_Task->unk_64 - 8;
+        g_Task->unk_64 = lowered_offset;
         if (lowered_offset < -0x7F) {
-            g_SpadWork->word_08.byte.unk_0B = 0;
+            g_Task->word_08.byte.unk_0B = 0;
         }
     }
 }
@@ -51,26 +51,26 @@ MATCH void func_801EF008(void) {
     u8  timer;
     s32 offset;
 
-    timer                           = g_SpadWork->word_08.byte.unk_09 - 2;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 - 2;
+    g_Task->word_08.byte.unk_09 = timer;
     if (timer == 2) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
         return;
     }
-    func_801EF0F8(g_SpadWork->unk_64);
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        offset             = g_SpadWork->unk_64 + 8;
-        g_SpadWork->unk_64 = offset;
+    func_801EF0F8(g_Task->unk_64);
+    if (g_Task->word_08.byte.unk_0B == 0) {
+        offset         = g_Task->unk_64 + 8;
+        g_Task->unk_64 = offset;
         if (offset >= 0x80) {
-            g_SpadWork->word_08.byte.unk_0B = 1;
+            g_Task->word_08.byte.unk_0B = 1;
         }
     } else {
-        offset             = g_SpadWork->unk_64 - 8;
-        g_SpadWork->unk_64 = offset;
+        offset         = g_Task->unk_64 - 8;
+        g_Task->unk_64 = offset;
         if (offset < -0x7F) {
-            g_SpadWork->word_08.byte.unk_0B = 0;
+            g_Task->word_08.byte.unk_0B = 0;
         }
     }
 }

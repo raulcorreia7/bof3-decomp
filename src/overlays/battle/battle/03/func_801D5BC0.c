@@ -14,8 +14,8 @@ MATCH u8 func_801D5BC0(void) {
             g_BattlePartyBattlers[index].hp_change = 0u;
             func_801DCEF8(index);
             count += 1u;
-            g_BattlePartyBattlers[index].step_01 = 6u;
-            g_BattlePartyBattlers[index].unk_02  = 5u;
+            g_BattlePartyBattlers[index].mode    = 6u;
+            g_BattlePartyBattlers[index].step    = 5u;
             g_BattlePartyBattlers[index].unk_04  = 0u;
             g_BattlePartyBattlers[index].unk_03  = 0u;
             g_BattlePartyBattlers[index].unk_120 = 0x11u;
@@ -29,8 +29,8 @@ MATCH u8 func_801D5BC0(void) {
             ENEMY_COMBATANT(index).damage_F8 = 0u;
             func_801DCEF8(index);
             count += 1u;
-            ENEMY_COMBATANT(index).step_01         = 6u;
-            ENEMY_COMBATANT(index).unk_02          = 5u;
+            ENEMY_COMBATANT(index).mode            = 6u;
+            ENEMY_COMBATANT(index).step            = 5u;
             ENEMY_COMBATANT(index).unk_04          = 0u;
             ENEMY_COMBATANT(index).unk_03          = 0u;
             ENEMY_COMBATANT(index).target_flags_FC = 0x11u;

@@ -19,15 +19,15 @@ MATCH void func_800A87D4(void) {
         *slot                                            = *(BattleWorkImage*)g_BattleWorkCell;
         g_BattleEffects[index & BYTE_MASK].unk_06        = 0;
         g_BattleEffects[index & BYTE_MASK].handler_index = 0x12;
-        g_BattleEffects[index & BYTE_MASK].unk_01        = 0;
-        g_BattleEffects[index & BYTE_MASK].unk_02        = 0;
+        g_BattleEffects[index & BYTE_MASK].mode          = 0;
+        g_BattleEffects[index & BYTE_MASK].step          = 0;
         g_BattleEffects[index & BYTE_MASK].unk_03        = 0;
         g_BattleEffects[index & BYTE_MASK].unk_04        = 0;
-        g_BattleEffects[index & BYTE_MASK].unk_00        = g_BattleEffects[index & BYTE_MASK].unk_00 & 0xBF;
-        work                                             = SPAD_WORK_BYTES;
+        g_BattleEffects[index & BYTE_MASK].flags         = g_BattleEffects[index & BYTE_MASK].flags & 0xBF;
+        work                                             = TASK_BYTES;
         g_BattleEffects[index & BYTE_MASK].target.bytes  = work;
         g_BattleEffects[index & BYTE_MASK].unk_0B        = work[0xB];
-        work                                             = SPAD_WORK_BYTES;
+        work                                             = TASK_BYTES;
         if (work[0xB] != 0) {
             work[0xB]--;
         }
@@ -36,17 +36,17 @@ MATCH void func_800A87D4(void) {
     if (*kind < 3) {
         func_800AF2B4((BattleRange*)&g_BattlePartyBattlers[*kind], 0x50);
         if (func_800AF5FC((BattleRange*)&g_BattlePartyBattlers[*kind], 0x10000) != 0) {
-            Actor_SelectScript((SPAD_WORK_BYTES[8] + 0x44) & BYTE_MASK);
+            Actor_SelectScript((TASK_BYTES[8] + 0x44) & BYTE_MASK);
             func_800A9820(*kind);
-            work = SPAD_WORK_BYTES;
+            work = TASK_BYTES;
             work[1]++;
         }
     } else {
         func_800AF2B4((BattleRange*)&((volatile BattleEnemyRecord*)g_BattleEnemies)[*kind], 0x50);
         if (func_800AF5FC((BattleRange*)&((volatile BattleEnemyRecord*)g_BattleEnemies)[*kind], 0x10000) != 0) {
-            Actor_SelectScript((SPAD_WORK_BYTES[8] + 0x44) & BYTE_MASK);
+            Actor_SelectScript((TASK_BYTES[8] + 0x44) & BYTE_MASK);
             func_800A9820(*kind);
-            work = SPAD_WORK_BYTES;
+            work = TASK_BYTES;
             work[1]++;
         }
     }

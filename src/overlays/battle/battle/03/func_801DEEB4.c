@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
 MATCH void func_801DEEB4(void) {
-    volatile PartyBattler* work = g_SpadWork;
+    volatile PartyBattler* work = g_Task;
 
     if (ACTOR_IN_USE(*work)) {
-        D_801EB120[work->step_01]();
+        D_801EB120[work->mode]();
     }
 }

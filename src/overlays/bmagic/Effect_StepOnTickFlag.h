@@ -7,6 +7,6 @@ MATCH void Effect_StepOnTickFlag(void) {
 
     work = (PartyBattler*)D_801EB4E0;
     if ((work->word_08.byte.unk_0B & 0x80) != 0) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     }
 }

@@ -23,7 +23,7 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
             if (g_GameStateIndex != GAME_REQUEST_BATTLE) {
                 hit              = Actor_ReadState();
                 SP_REF(u16, 0x0) = hit;
-                if (g_SpadWork->script_pc != hit) {
+                if (g_Task->script_pc != hit) {
                     cmd = code + FIELD(u16, sub, 0xAu);
                     if (hit == cmd[3]) {
                         func_8015D820(cmd[2] | (cmd[1] << 8), cmd[4]);
@@ -36,15 +36,15 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
         done:
             return value;
         case 0xD2:
-            g_SpadWork->unk_07 ^= 0x40;
-            if (g_SpadWork->unk_07 & 0x40) {
-                FIELD(s8, g_SpadWork, 0x48u) = 0;
+            g_Task->unk_07 ^= 0x40;
+            if (g_Task->unk_07 & 0x40) {
+                FIELD(s8, g_Task, 0x48u) = 0;
             } else {
-                FIELD(s8, g_SpadWork, 0x48u) = 1;
+                FIELD(s8, g_Task, 0x48u) = 1;
             }
             return value;
         case 0xD3:
-            g_SpadWork->unk_07 ^= ACTOR_OPT_NO_TARGET;
+            g_Task->unk_07 ^= ACTOR_OPT_NO_TARGET;
             return value;
         case 0xD4:
             idx  = &D_1F800001;
@@ -65,11 +65,11 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
                 cmd                                 = code + FIELD(u16, sub, 0xAu);
                 FIELD(s32, D_80147CBC, *idx * 0x10) = (s16)(cmd[2] | (cmd[1] << 8)) / D_80147CBA[*idx * 0x10];
             } else {
-                g_SpadWork->unk_6C = (s16)(cmd[6] | (cmd[5] << 8));
-                cmd                = code + FIELD(u16, sub, 0xAu);
-                g_SpadWork->unk_68 = (s16)(cmd[4] | (cmd[3] << 8));
-                cmd                = code + FIELD(u16, sub, 0xAu);
-                g_SpadWork->unk_64 = (s16)(cmd[2] | (cmd[1] << 8));
+                g_Task->unk_6C = (s16)(cmd[6] | (cmd[5] << 8));
+                cmd            = code + FIELD(u16, sub, 0xAu);
+                g_Task->unk_68 = (s16)(cmd[4] | (cmd[3] << 8));
+                cmd            = code + FIELD(u16, sub, 0xAu);
+                g_Task->unk_64 = (s16)(cmd[2] | (cmd[1] << 8));
             }
             *(u8*)sub |= 8;
             FIELD(u16, sub, 0xAu) += 7;
@@ -112,18 +112,18 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
             return value;
         case 0xDB:
             Actor_ApplyVelocity();
-            g_SpadWork->z.part.integer = Area_SampleHeight(g_SpadWork->x.fixed, g_SpadWork->y.fixed);
+            g_Task->z.part.integer = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
             /* fallthrough */
         case 0xDC:
-            Area_SetCellPalette(g_SpadWork->x.part.integer, g_SpadWork->y.part.integer);
+            Area_SetCellPalette(g_Task->x.part.integer, g_Task->y.part.integer);
             return value;
         case 0xDD:
-            Area_ClearCellPalette(g_SpadWork->x.part.integer, g_SpadWork->y.part.integer);
+            Area_ClearCellPalette(g_Task->x.part.integer, g_Task->y.part.integer);
             return value;
         case 0xDE: {
             void* obj = g_AreaLoads[g_GameAreaId];
             (*(void (**)())((code[FIELD(u16, sub, 0xAu) + 1] * 4) + FIELD(s32, obj, 0x3Cu)))(obj);
-            value = g_SpadWork->direction_08;
+            value = g_Task->direction_08;
             next  = FIELD(u16, sub, 0xAu) + 1;
             goto set_cursor;
         }

@@ -9,10 +9,10 @@ MATCH void func_8015AC8C(u8* panel) {
     s32    value;
     u8     index;
 
-    g_SpadWork->flags_00 = ACTOR_FLAG_IN_USE;
-    g_SpadWork->flags_24 = ACTOR_FLAG_ACTIVE;
-    g_SpadWork->unk_48   = 1;
-    work                 = g_SpadWork;
+    g_Task->flags        = ACTOR_FLAG_IN_USE;
+    g_Task->flags_24     = ACTOR_FLAG_ACTIVE;
+    g_Task->unk_48       = 1;
+    work                 = g_Task;
     work->unk_40         = ONE;
     work->unk_44         = ONE;
     value                = FIELD(s32, panel, 0x4u);

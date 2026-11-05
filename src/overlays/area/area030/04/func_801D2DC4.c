@@ -33,7 +33,7 @@ NON_MATCHING void func_801D2DC4(void) {
 
     func_801E0C80(0, 2);
     func_801E0DCC(0x11, 2, 0x87, 0xB4);
-    work = g_SpadWork;
+    work = g_Task;
     if ((work->unk_10 == 0) && ((origin_y = work->unk_30, limit = *(&D_80146892 + (D_801E3208 * 0x98)),
                                  step = D_801E320C->byte_03 * 4, (((origin_y + step + 0xC) < limit) != 0)) ||
                                 (limit < ((origin_y - step) - 0xC)))) {
@@ -50,7 +50,7 @@ NON_MATCHING void func_801D2DC4(void) {
     } else {
         work->unk_09 = 0U;
     }
-    work_row                    = g_SpadWork;
+    work_row                    = g_Task;
     origin_y_now                = (u16)(FIELD(s16, work_row, 0x30u)) + FIELD(s32, work_row, 0x10u);
     FIELD(s16, work_row, 0x30u) = origin_y_now;
     step_bytes                  = D_801E320C->byte_03 * 4;
@@ -74,7 +74,7 @@ NON_MATCHING void func_801D2DC4(void) {
     FIELD(s8, prim, 0x5u)  = 0x80;
     FIELD(s8, prim, 0x6u)  = 0x80;
     GFX_AddPrim(2U, 0x10U);
-    work_now     = g_SpadWork;
+    work_now     = g_Task;
     row_flags    = D_801E320C->byte_03;
     span         = row_flags * 8;
     band         = span + 0x18;

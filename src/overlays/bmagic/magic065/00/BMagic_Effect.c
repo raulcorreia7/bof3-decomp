@@ -11,15 +11,15 @@ INCLUDE_ASM(func_801EEC90);
 MATCH void func_801EF08C(void) {
     u8 counter;
 
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        if (g_SpadWork->word_08.byte.unk_09 == 0x1E) {
+    if (g_Task->word_08.byte.unk_0B == 0) {
+        if (g_Task->word_08.byte.unk_09 == 0x1E) {
             func_800AEF98(4, 0);
-            BATTLE_ACTIVE_WORK->flags_00 &= 0xBF;
+            BATTLE_ACTIVE_WORK->flags &= 0xBF;
         }
-        counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
-        g_SpadWork->word_08.byte.unk_09 = counter;
+        counter                     = g_Task->word_08.byte.unk_09 - 1;
+        g_Task->word_08.byte.unk_09 = counter;
         if (!(counter & 0xFF)) {
-            g_SpadWork->step_01 += 1;
+            g_Task->mode += 1;
         }
     }
 }
@@ -28,12 +28,12 @@ MATCH void func_801EF134(void) {
     u16 item;
 
     if (D_801EC2E4 == 0) {
-        if (g_SpadWork->word_08.byte.timer_0A == 0x38) {
-            item = g_SpadWork->unk_2C.half;
+        if (g_Task->word_08.byte.timer_0A == 0x38) {
+            item = g_Task->unk_2C.half;
             BMagic_SetTextItemName(item & 0xFF, item >> 8);
         }
-        func_801DE8C0(1, 0x1E, Resource_GetText((u32)g_SpadWork->word_08.byte.timer_0A));
-        g_SpadWork->step_01 += 1;
+        func_801DE8C0(1, 0x1E, Resource_GetText((u32)g_Task->word_08.byte.timer_0A));
+        g_Task->mode += 1;
     }
 }
 
@@ -48,7 +48,7 @@ MATCH void func_801EF1CC(void) {
 }
 
 MATCH void func_801EF20C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_Task)[1]);
 }
 
 INCLUDE_ASM(func_801EF250);
@@ -59,11 +59,11 @@ MATCH void func_801EF328(void) {
     u8 timer;
 
     func_8014DAEC();
-    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = timer;
+    timer                       = g_Task->word_08.byte.unk_09 - 1;
+    g_Task->word_08.byte.unk_09 = timer;
     if (timer == 0) {
         func_800AFC98(0, 4);
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
+        g_Task->step = g_Task->step + 1;
     }
 }
 
@@ -71,7 +71,7 @@ MATCH void func_801EF394(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800A9820(g_BattleTargetSelector);
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
-        g_SpadWork->unk_02 += 1;
+        g_Task->step += 1;
     }
 }
 

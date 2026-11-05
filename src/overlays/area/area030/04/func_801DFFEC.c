@@ -9,7 +9,7 @@ MATCH void func_801DFFEC(void) {
     u32  x;
     u32  y;
 
-    record                       = (u32*)g_SpadWork;
+    record                       = (u32*)g_Task;
     x                            = record[13];
     y                            = record[14];
     FISHING_STATE->step_timer_09 = 8;

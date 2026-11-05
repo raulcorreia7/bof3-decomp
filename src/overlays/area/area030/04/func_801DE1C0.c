@@ -53,17 +53,17 @@ NON_MATCHING void func_801DE1C0(void) {
         if ((s32)count > 0) {
             row_offset = row_index * FISHING_ROW_STRIDE;
             do {
-                row                = &g_Actors[row_offset];
-                g_SpadWork         = row;
-                g_CurrentActor     = row;
-                *row               = 0x21;
-                g_SpadWork->unk_05 = row_index;
-                g_SpadWork->unk_06 = column;
-                roll               = RANDOM_MASK(0xFF);
+                row            = &g_Actors[row_offset];
+                g_Task         = row;
+                g_CurrentActor = row;
+                *row           = 0x21;
+                g_Task->unk_05 = row_index;
+                g_Task->unk_06 = column;
+                roll           = RANDOM_MASK(0xFF);
             loop_4:
                 ROW_ROLL    = roll;
                 roll        = ROW_ROLL;
-                limit       = *(LIMIT_TABLE + (g_SpadWork->unk_06 * FISHING_KIND_STRIDE));
+                limit       = *(LIMIT_TABLE + (g_Task->unk_06 * FISHING_KIND_STRIDE));
                 roll_masked = roll & HALF_MASK;
                 if (limit < roll_masked) {
                     roll = roll - (limit >> 1);
@@ -75,7 +75,7 @@ NON_MATCHING void func_801DE1C0(void) {
                     clamped = (u16)half;
                 }
                 ROW_ROLL    = clamped;
-                cur         = g_SpadWork;
+                cur         = g_Task;
                 kind_offset = FIELD(u8, cur, 0x6u) * FISHING_KIND_STRIDE;
                 hit_value   = (KIND_TABLE[kind_offset] * ((s32)(ROW_ROLL * 0xA) / (s32)LIMIT_TABLE[kind_offset])) / 10;
                 ROW_VALUE   = hit_value;
@@ -99,14 +99,14 @@ NON_MATCHING void func_801DE1C0(void) {
                         }
                     }
                 }
-                g_SpadWork->unk_01 = 0;
+                g_Task->mode = 0;
                 ACTOR_CLEAR_STATE();
                 row_offset += FISHING_ROW_STRIDE;
-                g_SpadWork->unk_03 = 0;
+                g_Task->unk_03 = 0;
                 row_index += 1;
-                g_SpadWork->unk_04 = 0;
+                g_Task->unk_04 = 0;
                 count -= 1;
-                g_SpadWork->tint.bytes.flags = 0;
+                g_Task->tint.bytes.flags = 0;
             } while ((s32)count > 0);
         }
         column += 1;

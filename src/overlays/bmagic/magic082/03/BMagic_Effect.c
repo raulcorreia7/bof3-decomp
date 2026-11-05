@@ -23,12 +23,12 @@ INCLUDE_ASM(func_801EF3A0);
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF56C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
 
 MATCH void func_801EF5B0(void) {
-    SYS_DISPATCH_BYTE(D_801F0D1C, g_SpadWork->unk_02);
-    if (g_SpadWork->flags_00 != 0) {
+    SYS_DISPATCH_BYTE(D_801F0D1C, g_Task->step);
+    if (g_Task->flags != 0) {
         Effect_SetActorMatrix();
         func_801EFA00();
         func_801EF720();
@@ -47,7 +47,7 @@ INCLUDE_ASM(func_801EF720);
 INCLUDE_ASM(func_801EFA00);
 
 MATCH void func_801EFD30(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 5), 2, g_SpadWork);
+    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 5), 2, g_Task);
 }
 
 #include "overlays/bmagic/Effect_CountDownAndStep.h"
@@ -64,7 +64,7 @@ MATCH void func_801F00DC(void) {
     u8  value3;
 
     func_800AF764();
-    if ((g_SpadWork->unk_0C == 4) && ((u8)g_SpadWork->word_08.byte.timer_0A < 5U)) {
+    if ((g_Task->unk_0C == 4) && ((u8)g_Task->word_08.byte.timer_0A < 5U)) {
         value2 = (rand() & 3) | 0x40;
     } else {
         value2 = (rand() & 3) | 0x18;
@@ -73,25 +73,25 @@ MATCH void func_801F00DC(void) {
     Effect_SetActorMatrix();
     func_801F03E0();
     PopMatrix();
-    if (g_SpadWork->unk_0C < 4) {
-        value              = g_SpadWork->unk_10 + 1;
-        g_SpadWork->unk_10 = value;
+    if (g_Task->unk_0C < 4) {
+        value          = g_Task->unk_10 + 1;
+        g_Task->unk_10 = value;
         if (!(value & 7)) {
-            g_SpadWork->unk_0C += 1;
+            g_Task->unk_0C += 1;
         }
     }
-    g_SpadWork->word_08.byte.unk_09 += g_SpadWork->unk_0C;
-    if (g_SpadWork->unk_0C == 4) {
-        value3                            = g_SpadWork->word_08.byte.timer_0A - 1;
-        g_SpadWork->word_08.byte.timer_0A = value3;
+    g_Task->word_08.byte.unk_09 += g_Task->unk_0C;
+    if (g_Task->unk_0C == 4) {
+        value3                        = g_Task->word_08.byte.timer_0A - 1;
+        g_Task->word_08.byte.timer_0A = value3;
         if (!(value3 & 0xFF)) {
-            if (g_SpadWork->word_08.byte.unk_0B == 0) {
+            if (g_Task->word_08.byte.unk_0B == 0) {
                 SND_QueueSelectionFx(0x101);
             }
-            g_SpadWork->unk_10 = 8;
-            g_SpadWork->unk_14 = 8;
-            g_SpadWork->unk_20 = 8;
-            g_SpadWork->unk_02 += 1;
+            g_Task->unk_10 = 8;
+            g_Task->unk_14 = 8;
+            g_Task->unk_20 = 8;
+            g_Task->step += 1;
         }
     }
 }

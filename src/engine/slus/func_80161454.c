@@ -35,7 +35,7 @@ NON_MATCHING void func_80161454(u32 index) {
 
     val3 = 0;
     if (g_AreaWalkFlags & AREA_WALK_TRANSITION) {
-        work = g_SpadWork;
+        work = g_Task;
         tmp0 = (s16)work->unk_30;
         val0 = (tmp0 + 0x40) * 0x2C;
         if (tmp0 < -0x40) {
@@ -63,7 +63,7 @@ NON_MATCHING void func_80161454(u32 index) {
             val0 = (val0 * (0x64 - val7)) / 100;
         }
     } else {
-        work = g_SpadWork;
+        work = g_Task;
         tmp2 = (s32)(work->x.fixed - g_AreaScrollTargetX) >> 0xC;
         tmp3 = (s32)(work->y.fixed - g_AreaScrollTargetY) >> 0xC;
         tmp5 = (csqrt((tmp2 * tmp2) + (tmp3 * tmp3)) >> 4) * 0xA;
@@ -75,7 +75,7 @@ NON_MATCHING void func_80161454(u32 index) {
             val0 = val1;
         }
         if (g_SndMono == 0) {
-            work = g_SpadWork;
+            work = g_Task;
             a1   = (s16)work->unk_2E - 0xA0;
             if (a1 < 0) {
                 q = (a1 * (s16)val1) / 480;
@@ -100,22 +100,22 @@ NON_MATCHING void func_80161454(u32 index) {
             }
         }
     }
-    work = g_SpadWork;
+    work = g_Task;
     val4 = 8;
     if (((s32)work->unk_70 & 0x0FFFFF00) == 0x0FFFFF00) {
-        work->flags_00     = work->flags_00 & 0xF7;
-        work               = g_SpadWork;
+        work->flags        = work->flags & 0xF7;
+        work               = g_Task;
         (s32) work->unk_70 = (s32)work->unk_70 & 0xF00000FF;
         return;
     }
     val2 = 0x1F;
     do {
         val5 = val4 & BYTE_MASK;
-        tmp4 = ((s32)g_SpadWork->unk_70 >> val5) & 0x1F;
+        tmp4 = ((s32)g_Task->unk_70 >> val5) & 0x1F;
         if (tmp4 != 0x1F) {
             val8 = 1 << tmp4;
             if (SpuGetKeyStatus(val8) == SPU_OFF) {
-                work               = g_SpadWork;
+                work               = g_Task;
                 (s32) work->unk_70 = (s32)work->unk_70 | (0x1F << val5);
             } else {
                 val3 |= val8;

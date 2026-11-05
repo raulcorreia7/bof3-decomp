@@ -1,4 +1,4 @@
-/* Steps the press-and-hold gauge at g_SpadWork +0x0B, 0 to 0x40, while the
+/* Steps the press-and-hold gauge at g_Task +0x0B, 0 to 0x40, while the
  * re-arm timer at +0x0A is spent: the masked input D_80145AB6 held against
  * g_InputHeld raises the gauge by 1 per frame (a full 0x40 re-arms the timer to
  * 0x1E), releasing lowers it by a level step of 1, 2 or 3, halved per parity
@@ -16,21 +16,21 @@ MATCH void Area_StepChargeGauge(void) {
     u8     held;
     u8     level;
 
-    timer = g_SpadWork->unk_0A;
+    timer = g_Task->unk_0A;
     if (timer != 0) {
-        g_SpadWork->unk_0A = timer - 1;
+        g_Task->unk_0A = timer - 1;
     }
-    if (g_SpadWork->unk_0A == 0) {
+    if (g_Task->unk_0A == 0) {
         if (g_InputHeld & D_80145AB6) {
-            held = g_SpadWork->unk_0B;
+            held = g_Task->unk_0B;
             if (held < 0x40U) {
-                g_SpadWork->unk_0B = held + 1;
+                g_Task->unk_0B = held + 1;
             }
-            if (g_SpadWork->unk_0B == 0x40) {
-                g_SpadWork->unk_0A = 0x1E;
+            if (g_Task->unk_0B == 0x40) {
+                g_Task->unk_0A = 0x1E;
             }
         } else {
-            level = g_SpadWork->unk_0B;
+            level = g_Task->unk_0B;
             if (level != 0) {
                 if (level >= 0x31U) {
                     step = 3;
@@ -40,17 +40,17 @@ MATCH void Area_StepChargeGauge(void) {
                         step = 2;
                     }
                 }
-                if (g_SpadWork->state_02 != 0) {
-                    g_SpadWork->unk_0B -= step >> 1;
+                if (g_Task->step != 0) {
+                    g_Task->unk_0B -= step >> 1;
                     if (g_FrameCount & 1) {
-                        g_SpadWork->unk_0B -= step & 1;
+                        g_Task->unk_0B -= step & 1;
                     }
                 } else {
-                    g_SpadWork->unk_0B -= step;
+                    g_Task->unk_0B -= step;
                 }
             }
         }
-        w       = g_SpadWork;
+        w       = g_Task;
         clamped = (s8)w->unk_0B;
         if (clamped >= 0) {
             stored = 0x40;
