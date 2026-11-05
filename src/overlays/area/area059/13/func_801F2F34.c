@@ -45,15 +45,15 @@ NON_MATCHING s32 func_801F2F34(void) {
 #else
 /* Area request handler: Game_SetScriptActive, Actor unk_01/unk_77/unk_7E,
  * the g_Actors row index into D_80146867, then D_801448EB/D_801448ED.
- * The draft above is 38/39 (tools/match.sh): only the first shift-add
- * multiply temp colors v0 instead of a0 (0x801F2F7C retail
- * `sll a0,a1,3` vs `sll v0,a1,3`) and the chain colors follow. The
- * difference recycling, the split `step = (-((s32)record * 0xD79435E5))
- * >> 3` and the do-while schedule all reproduce retail; local-alloc
- * (ties, copy/arithmetic suggestions, density order, regno scan of
- * local-alloc.c) still skips v0/v1 for that temp. Best permuter score 55
- * in work/permute/nonmatchings/func_801F2F34-2 (this shape). Next lever:
- * a source shape whose first chain temp takes a0 with v0 free, then
- * func_801F3F48 follows (unk_77 = 5, D_801448ED = 3). */
+ * Draft is 38/39: the first shift-add multiply temp colors v0 instead of
+ * a0 (0x801F2F7C retail `sll a0,a1,3`) and the chain colors follow. Best
+ * score 55 (work/permute/nonmatchings/func_801F2F34-3). GCC 2.7.2
+ * local-alloc.c closes every other color: the last-use tie gives
+ * subu a1,a1,v1, the copy-propagated product copy leaves a fresh temp,
+ * and const4 scans to a2 last. The tied {record,row} qty and the first
+ * temp must both skip free v0/v1 in the regno scan though no hard reg
+ * holds v0 across the chain - that model does not close. Next lever: a
+ * shape whose first chain temp takes a0 with v0 free. Then
+ * func_801F3F48 (unk_77 = 5, D_801448ED = 3). */
 INCLUDE_ASM(func_801F2F34);
 #endif
