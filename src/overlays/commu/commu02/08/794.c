@@ -693,6 +693,7 @@ INCLUDE_ASM(func_801D7EA0);
 
 INCLUDE_ASM(func_801D7EF0);
 
+/* 34 differing: +0x00 frame is 0x30, not 0x38; preserve both copies of the x argument. */
 INCLUDE_ASM(func_801D8058);
 
 INCLUDE_ASM(func_801D812C);
