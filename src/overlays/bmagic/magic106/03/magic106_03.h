@@ -5,6 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+void func_801EF970(void);
+
 extern void (*D_801EF9C0[])(void);
 extern void (*D_801EF9C4[])(void);
 extern u8* D_801F05F8;

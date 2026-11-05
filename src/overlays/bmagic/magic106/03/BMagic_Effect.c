@@ -50,7 +50,35 @@ INCLUDE_ASM(func_801EF16C);
 
 INCLUDE_ASM(func_801EF29C);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF418(void) {
+    u8  timer;
+    u8  spin;
+    u8  counter;
+    s32 cosTerm;
+    s32 angle;
+
+    angle                        = (FIELD(u16, D_801F05F8, 0xE) + 0x40) & 0xFFF;
+    FIELD(u16, D_801F05F8, 0xE)  = angle;
+    FIELD(s32, D_801F05F8, 0x10) = D_801EB4E0->coord_x_34.raw + rsin(angle) * FIELD(s16, D_801F05F8, 0xC);
+    cosTerm                      = rcos((s16)FIELD(u16, D_801F05F8, 0xE)) * FIELD(s16, D_801F05F8, 0xC);
+    counter                      = FIELD(u8, D_801F05F8, 0xB) + 1;
+    spin                         = FIELD(u8, D_801F05F8, 0xA);
+    FIELD(u16, D_801F05F8, 0x1A) = (u16)(FIELD(u16, D_801F05F8, 0x1A) + spin);
+    FIELD(u8, D_801F05F8, 0xB)   = counter;
+    FIELD(s32, D_801F05F8, 0x14) = D_801EB4E0->coord_y_38.raw + cosTerm;
+    if (g_FrameCount & 1) {
+        timer                    = FIELD(u8, D_801F05F8, 9) - 1;
+        FIELD(u8, D_801F05F8, 9) = timer;
+        if (!(timer & 0xFF)) {
+            D_801EB4E0->word_08.byte.unk_0B -= 1;
+            func_801EF970();
+        }
+    }
+}
+#else
 INCLUDE_ASM(func_801EF418);
+#endif
 
 MATCH void func_801EF52C(void) {
     SVECTOR pos;
