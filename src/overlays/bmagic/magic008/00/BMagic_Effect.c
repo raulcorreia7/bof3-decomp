@@ -282,7 +282,19 @@ MATCH void func_801F0AC8(void) {
     func_8014D290();
 }
 
-INCLUDE_ASM(func_801F0B44);
+MATCH void func_801F0B44(void) {
+    u16* battle_half;
+
+    if ((u8)g_SpadWork->word_08.byte.unk_09 < 0xCU) {
+        battle_half = (u16*)&g_BattleActionId;
+        if (*battle_half != 0xA4) {
+            func_801F0BBC();
+        }
+        g_SpadWork->word_08.byte.unk_09 += 4;
+        return;
+    }
+    func_801E5988();
+}
 
 INCLUDE_ASM(func_801F0BBC);
 
