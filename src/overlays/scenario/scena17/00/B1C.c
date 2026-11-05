@@ -68,7 +68,16 @@ MATCH void func_801F7A84(void) {
     func_801F88CC(0, 0x80);
 }
 
-INCLUDE_ASM(func_801F7B20);
+MATCH void func_801F7B20(void) {
+    u8* timer;
+
+    timer = &D_80146875;
+    *timer -= 1;
+    func_801F88CC(1, *timer);
+    if (*timer == 0) {
+        D_80146874 += 1;
+    }
+}
 
 MATCH void func_801F7B88(void) {
     u8* step;
