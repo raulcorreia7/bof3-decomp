@@ -488,7 +488,7 @@ MATCH s32 func_801FC5A4(void) {
 }
 
 MATCH void func_801FC5FC(void) {
-    Party_AddVitalItem(VITAL_ITEM_FLIER);
+    Item_VitalAdd(VITAL_ITEM_FLIER);
     Message_StartAreaMessage(0x2F);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     SND_PauseBgm((s32)g_SndBgmId);

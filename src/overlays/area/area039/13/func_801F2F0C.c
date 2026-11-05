@@ -14,5 +14,5 @@ MATCH void func_801F2F0C(void) {
         index += 1;
         item += 1;
     } while ((u32)(index & BYTE_MASK) < 0x20U);
-    Party_AddVitalItem(4);
+    Item_VitalAdd(4);
 }

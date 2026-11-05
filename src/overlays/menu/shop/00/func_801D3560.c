@@ -22,8 +22,8 @@ MATCH void func_801D3560(u16* result_code) {
             break;
         }
     }
-    /* FAKE: retail reads Party_HasVitalItem as u8(s32). */
-    if (((u8 (*)(s32))Party_HasVitalItem)(VITAL_ITEM_FLIER) != 0) {
+    /* FAKE: retail reads Item_VitalHas as u8(s32). */
+    if (((u8 (*)(s32))Item_VitalHas)(VITAL_ITEM_FLIER) != 0) {
         /* Unsigned compare matches retail's range test on the narrowed byte. */
         if ((u32)(D_80148699 - 6) < 2) {
             *result_code = 0x46;

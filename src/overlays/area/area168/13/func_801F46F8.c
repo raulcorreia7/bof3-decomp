@@ -4,7 +4,7 @@ MATCH void func_801F46F8(void) {
     u16 message;
 
     if (D_801490C7 == 0) {
-        if (Party_HasVitalItem(0xC) != 0) {
+        if (Item_VitalHas(0xC) != 0) {
             g_MessageRequest = 6;
             g_AreaSceneMode |= 1;
             return;

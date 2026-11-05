@@ -3,7 +3,7 @@
 /* stores item_id in the first empty slot of the 0x20-byte table at
  * g_VitalItemIds, returning 1, or 0 when the table is full.
  */
-MATCH s32 Party_AddVitalItem(u8 item_id) {
+MATCH s32 Item_VitalAdd(u8 item_id) {
     u8* entry;
     u32 index;
 

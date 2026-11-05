@@ -298,7 +298,7 @@ u32          Item_GetFlags(u32 category, u32 item);
 /* func_801660DC */
 s32          Char_GetAbilityElement(s32 ability_id);
 /* func_80166140 */
-bool         Party_HasVitalItem(s32 item_id);
+bool         Item_VitalHas(s32 item_id);
 /* func_8016620C */
 void         TEXT_SetVariable(u8 slot, u8 length, const u8* text);
 /* func_80166438 */

@@ -9,7 +9,7 @@ MATCH void func_801F4288(void) {
         g_TextVariables[0][i] = record[i];
     }
     D_801490E4[0] = 0;
-    Party_AddVitalItem(VITAL_ITEM_KEY);
+    Item_VitalAdd(VITAL_ITEM_KEY);
     Resource_RequestArea(2);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
 }

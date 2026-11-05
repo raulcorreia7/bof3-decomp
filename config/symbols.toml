@@ -3448,7 +3448,7 @@ g_SndBgmId = { addr = 0x80145029, source = "selection index (0xff = none)" }
 g_BattleCount = { addr = 0x8014502C, source = "the battle counter incremented once per battle, read by the commu00 anchor reset, and the battle return transition at func_80197378 increments it" }
 g_InventoryIds = { addr = 0x8014504C, size = 0x200, source = "Party_CountItem and the item menu sort and scan one 128-slot id array per category (item, weapon, armor, accessory) through the D_801C893C pointer table" }
 g_InventoryCounts = { addr = 0x8014524C, size = 0x200, source = "Party_CountItem and the item menu read one 128-slot quantity array per category through the D_801C8950 pointer table, and func_801D8364 prints the accessory count when it is 2 or more" }
-g_VitalItemIds = { addr = 0x8014544C, size = 0x20, source = "Party_HasVitalItem scans it for an id, Party_AddVitalItem stores an id in a free entry and returns 0 when the table is full (32 entries)" }
+g_VitalItemIds = { addr = 0x8014544C, size = 0x20, source = "Item_VitalHas scans it for an id, Item_VitalAdd stores an id in a free entry and returns 0 when the table is full (32 entries)" }
 g_BattleTargetRows = { addr = 0x80145500, type = "BattleSlot", source = "six 4-byte gene selection rows {gene,gene,gene,gate} gate 0xFF = row unusable (func_800A4FD8.c 13), rows priced in AP through D_800B4C7C (func_800A4FD8.c 16-24) moved from" }
 g_GameCelerityTimer = { addr = 0x80145554, size = 0x4, source = "func_80198CAC counts it down each frame like g_PlayClock in reverse, func_801AF5B0 refuses the celerity ability while it is nonzero; it lies at save offset +0xE7C" }
 g_GameBonebreakTimer = { addr = 0x80145558, size = 0x4, source = "func_80198CAC counts it down each frame like g_PlayClock in reverse, func_801AF5B0 refuses the bonebreak ability while it is nonzero, func_8009F6EC sets it; it lies at save offset +0xE80" }
@@ -3744,7 +3744,7 @@ Game_IsScenarioEqual = { addr = 0x8015B61C, type = "func", source = "returns 1 w
 Game_IsAreaEqual = { addr = 0x8015B644, type = "func", source = "returns 1 when the operand byte equals g_GameAreaId; entry 1 of the script handler table D_8018217C" }
 Game_TestSceneFlag = { addr = 0x8015B66C, type = "func", source = "tests the operand bit in the g_SceneFlagWords row selected by D_8014820C with SYS_TestFlag; entry 2 of the script handler table D_8018217C" }
 Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "tests the operand bit of g_SceneEventFlags with SYS_TestFlag; entry 12 of the script handler table D_8018217C" }
-Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "forwards the operand byte to Party_HasVitalItem; entry 13 of the script handler table D_8018217C" }
+Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "forwards the operand byte to Item_VitalHas; entry 13 of the script handler table D_8018217C" }
 Game_IsScenarioAtLeast = { addr = 0x8015B7C4, type = "func", source = "returns 1 when the operand byte is at or above g_SceneState.scenario_id; entry 14 of the script handler table D_8018217C" }
 Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "returns 1 when the operand byte equals g_ScriptVars[0]; entry 3 of the script handler table D_8018217C" }
 Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "returns 1 when the operand byte equals g_ScriptVars[1]; entry 4 of the script handler table D_8018217C" }
@@ -3879,9 +3879,9 @@ Item_GetFlags = { addr = 0x80165F68, type = "func", source = "returns the flags 
 Item_GetPower = { addr = 0x80166034, type = "func", source = "returns the power byte of a weapon row (+0x12) or an armor row (+0x10), 0 for other categories" }
 UI_ClearFormatBuffer = { addr = 0x801660B0, type = "func", source = "clears the first eight words of g_UiFormatBuffer" }
 Char_GetAbilityElement = { addr = 0x801660DC, type = "func", source = "returns the 1-based first set bit of the D_801CA71C ability flags - or 0" }
-Party_HasVitalItem = { addr = 0x80166140, type = "func", source = "scans the 32-entry g_VitalItemIds table for an id and reports a hit; callers test it before granting or showing the item" }
-Party_AddVitalItem = { addr = 0x80166180, type = "func", source = "stores an id in the first free g_VitalItemIds entry and returns 0 when the 32-entry table is full" }
-Party_RemoveVitalItem = { addr = 0x801661C4, type = "func", source = "clears the g_VitalItemIds entry equal to the id and reports whether one was found" }
+Item_VitalHas = { addr = 0x80166140, type = "func", source = "scans the 32-entry g_VitalItemIds table for an id and reports a hit; callers test it before granting or showing the item" }
+Item_VitalAdd = { addr = 0x80166180, type = "func", source = "stores an id in the first free g_VitalItemIds entry and returns 0 when the 32-entry table is full" }
+Item_VitalRemove = { addr = 0x801661C4, type = "func", source = "clears the g_VitalItemIds entry equal to the id and reports whether one was found" }
 TEXT_SetVariable = { addr = 0x8016620C, type = "func", source = "copies count bytes of src into slot index of the 32-byte g_TextVariables rows and terminates the copy; the shop and area message code fills the message variables with it" }
 Party_CountItem = { addr = 0x8016628C, type = "func", source = "counts one item in the inventory or the live character equipment - called by the shop and communication readers" }
 Party_CountInventory = { addr = 0x80166438, type = "func", source = "counts the non-zero bytes of the selected D_801C893C inventory record" }
