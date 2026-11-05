@@ -1339,6 +1339,7 @@ func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "overlay entry load
 ["emi/etc/commu02/08"]
 func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "overlay entry loads D_801F294C and calls D_801DABCC[step]" }
 Commu_AdvanceStep = { addr = 0x801D5A9C, type = "func", source = "adds one to D_801448EC unless g_GameStateIndex is 2" }
+Commu_AdvanceStep_801D7E30 = { addr = 0x801D7E30, type = "func", source = "byte-identical to Commu_AdvanceStep in this image" }
 Fairy_VillageCountFairies = { addr = 0x801D7E64, type = "func", source = "counts the active rows of the 60-row fairy roster g_FairyJobs" }
 Menu_DrawHeaderBar = { addr = 0x801D8A40, type = "func", source = "draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952); byte-equal copy in the start, sisyou, Bate, Shisu, shop, commu02, scena12 and area008 images" }
 Menu_DrawPortrait = { addr = 0x801D8F8C, type = "func", source = "draws a 40x48 portrait from the image's 4-byte atlas records with the requested shade, one body shared with the shop, start, Bate and Shisu overlays" }
