@@ -5,7 +5,7 @@
  */
 /* func_801F382C (area115), func_801F3840 (area121) */
 MATCH void Area_CountHudBannerHold(void) {
-Actor* work;
+    Actor* work;
 
     work = g_SpadWork;
     if (work->unk_0B == 0) {
@@ -17,13 +17,13 @@ Actor* work;
     }
 
     if (D_801454F2 != 0 && g_SpadWork->unk_0B != 0) {
-        goto bump; 
+        goto bump;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
-        goto bump; 
+        goto bump;
     }
     if (GAME_SCRIPT_ACTIVE() == 0) {
-        goto done; 
+        goto done;
     }
 bump:
     g_SpadWork->unk_03++;

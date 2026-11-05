@@ -4,7 +4,7 @@
  */
 /* func_801F3228 (area115), func_801F323C (area121) */
 MATCH void Area_SlideActorDown(void) {
-u8* work;
+    u8* work;
     u8* reload;
     u8  timer;
 
