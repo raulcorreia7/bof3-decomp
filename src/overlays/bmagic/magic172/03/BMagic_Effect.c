@@ -55,7 +55,16 @@ MATCH void func_801EF430(void) {
 }
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
-INCLUDE_ASM(func_801EF518);
+extern Callback D_801F0B90[];
+void            func_801F0908(void);
+
+MATCH void func_801EF518(void) {
+    D_801F0B90[g_SpadWork->unk_02]();
+    if (g_SpadWork->flags_00 & g_SpadWork->unk_02) {
+        func_800AF764();
+        func_801F0908();
+    }
+}
 
 INCLUDE_ASM(func_801EF590);
 
