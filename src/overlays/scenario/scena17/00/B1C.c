@@ -219,7 +219,17 @@ MATCH void func_801F8110(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8170);
+MATCH void func_801F8170(void) {
+    s8* stage;
+
+    if (g_UiWindowEffectBusy == 0) {
+        stage          = &D_80146873;
+        D_80146874     = 0;
+        *stage         = *stage + 1;
+    } else {
+        func_801F938C();
+    }
+}
 
 MATCH void func_801F81BC(void) {
     SYS_DISPATCH_BYTE(D_801F97A4, g_SceneState.state_04);
