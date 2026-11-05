@@ -95,7 +95,23 @@ MATCH void func_801D1FE4(void) {
 
 INCLUDE_ASM(func_801D2078);
 
-INCLUDE_ASM(func_801D21FC);
+MATCH void func_801D21FC(void) {
+    u8* state = &g_GameStateIndex;
+
+    if (*state != 2) {
+        if (D_801DB07C >= 0x2710) {
+            Message_StartAreaMessage(0x79);
+            *state = 2;
+            D_801F294D += 1;
+        } else {
+            Message_StartAreaMessage(0x78);
+            *state     = 2;
+            D_801F294D = 3;
+        }
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+}
 
 MATCH void func_801D22A4(void) {
     u8* state = &g_GameStateIndex;
