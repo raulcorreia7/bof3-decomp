@@ -313,6 +313,29 @@ Battler* ptr = &g_Battlers[i];            /* a storage word for a game object */
 s32 tmp2, val;                            /* names that say nothing */
 ```
 
+#### Nested members
+
+A large record groups a run of members that has one meaning. Each group needs evidence: the code
+reads the members together, copies them as a unit, or a shared type already names them.
+
+**Do**
+
+```c
+typedef struct BattlePosition { Fix32 x; Fix32 y; Fix32 z; } BattlePosition;  /* a point */
+typedef struct PartyBattler {
+    u8 flags, mode, step;       /* the task header */
+    BattlePosition pos;         /* copied whole by Effect_CopyBattlerCoords */
+    union { u8 byte[4]; u32 word; } cell;  /* only when two readers see the same bytes in two roles */
+} PartyBattler;
+```
+
+**Don't**
+
+```c
+struct { s32 a, b, c; } group;  /* nested to look tidy: no reader uses the three together */
+Fix32 z;                        /* a member named z whose role is a frame counter */
+```
+
 ### Ids
 
 An id is the fixed-width integer the retail data stores, named `<thing>_id`; its values are
