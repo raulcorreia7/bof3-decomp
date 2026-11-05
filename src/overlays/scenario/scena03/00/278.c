@@ -239,7 +239,23 @@ MATCH void func_801F7C50(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7CE0);
+MATCH void func_801F7CE0(void) {
+    Actor* work;
+    s32*   pos;
+    u8     remaining;
+
+    work = g_SpadWork;
+    pos  = &work->unk_0C;
+    func_801F7FFC(pos);
+    func_801F8170(pos);
+    work->unk_5A -= 8;
+    work->tint.halves.unk_5C -= 0x40;
+    remaining          = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = remaining;
+    if (!(remaining & 0xFF)) {
+        g_SpadWork->unk_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F7D80);
 
