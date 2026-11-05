@@ -224,9 +224,9 @@ u8 g_MenuLabelPower[4] = "Pwr";
 u8 g_MenuLabelDefense[4] = "Def";
 u8 g_MenuLabelIntellect[4] = "Int";
 u8 g_MenuLabelAgility[4] = "Agl";
-/* D_801EC950: the sprite of each equipment row, read by func_801DBF04. */
+/* D_801EC950: the sprite of each equipment row, read by Shop_DrawEquipment. */
 u8 g_MenuEquipRowIcons[8] = {8, 10, 9, 11, 12, 12};
-/* D_801EC958: the equipment panel caption, drawn by func_801DBF04. */
+/* D_801EC958: the equipment panel caption, drawn by Shop_DrawEquipment. */
 u8 g_MenuLabelEquip[8] = "EQUIP";
 /* 0x801EC960: two labels, "EXP" and "NEXT". No reader found. */
 static u8 s_gap_801EC960[12] = "EXP" T_END "NEXT";

@@ -212,8 +212,8 @@ extern u8              D_801EC784[];
 extern u8              D_801EC790[];
 extern u8              D_801EC854[];
 extern u8              g_MenuLabelAgility[4];
-extern u8              g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:func_801DBF04 */
-extern u8              g_MenuLabelEquip[8];    /* the equipment panel caption. @source: read:func_801DBF04 */
+extern u8              g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:Shop_DrawEquipment */
+extern u8              g_MenuLabelEquip[8];    /* the equipment panel caption. @source: read:Shop_DrawEquipment */
 extern u8              g_MenuPortraitAtlas[96];
 extern u8              MENU_CAPTION_ICON[792];
 extern s32             D_801ECC98[];
@@ -375,7 +375,8 @@ void        Menu_SwapBytes_801DAC08(u8* first, u8* second);
 extern void func_801DB510(void);
 void        func_801DB550(void);
 void        func_801DB5AC(void);
-extern void func_801DBF04(s16 x, s16 y, u8 record_index);
+/* func_801DBF04 */
+extern void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);
 extern void func_801DC150(s16 x, s16 y, u8 character_index, s32 layout);
 extern s32  func_801DCDB8(u16, u16, u8, u8, s32);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);

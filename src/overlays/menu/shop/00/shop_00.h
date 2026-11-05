@@ -227,8 +227,10 @@ extern u8          D_801E5738[];
 extern u8          D_801E5814[];
 extern u8          D_801E581C[];
 extern u8          g_MenuLabelAgility[];
-extern u8          D_801E5834[];
-extern u8          D_801E583C[];
+/* D_801E5834 */
+extern u8          g_MenuEquipRowIcons[];
+/* D_801E583C */
+extern u8          g_MenuLabelEquip[];
 extern u8          D_801E5844[];
 extern u8          D_801E5848[];
 extern u8          g_MenuPortraitAtlas[];
