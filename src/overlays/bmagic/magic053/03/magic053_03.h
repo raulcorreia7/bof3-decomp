@@ -4,6 +4,7 @@
 /* The bmagic/magic053/03 overlay. Only this image includes the file. */
 
 #include "overlays/bmagic/bmagic.h"
+#include "sys/scene.h"
 
 extern Callback     D_801F056C[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
