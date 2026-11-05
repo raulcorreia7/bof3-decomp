@@ -34,7 +34,17 @@ MATCH void func_801EF058(void) {
 
 INCLUDE_ASM(func_801EF0B8);
 
-INCLUDE_ASM(func_801EF324);
+MATCH void func_801EF324(void) {
+    u16* battle_flags;
+
+    if (g_SpadWork->word_08.byte.unk_0B == 0xFF) {
+        func_800AFC54();
+        func_800AEF98(4, 0);
+        battle_flags = &g_BattleState;
+        *battle_flags |= 4;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF384(void) {
     MagicTaskFuncs handlers;
