@@ -2244,8 +2244,10 @@ GFX_CopyPaletteCapped = { addr = 0x801FB0B8, type = "func", source = "copies 16 
 
 ["emi/scenario/scena14/00"]
 Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FC074, type = "func", source = "streams the EMI family for adult Ryu, Garr and adult Nina, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes; one body shared with the other scenario programs" }
+Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FC22C, type = "func", source = "streams the EMI family for adult Ryu, adult Nina and Rei, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes; one body shared with the other scenario programs" }
 ["emi/scenario/scena15/00"]
 Area_ClearWorkColumn = { addr = 0x801F75AC, type = "func", source = "clears one byte of each row in the actor window" }
+Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FE520, type = "func", source = "streams the EMI family for adult Ryu, adult Nina and Rei, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena16/00"]
 GFX_CopyPaletteCapped = { addr = 0x801F83B0, type = "func", source = "copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending" }
