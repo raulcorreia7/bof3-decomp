@@ -56,7 +56,18 @@ MATCH void func_801EEFF4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF094);
+MATCH void func_801EF094(void) {
+    u8 temp_v0;
+
+    SP_REF(s16, 0u) = (g_SpadWork->word_08.byte.unk_09 * 4) + 0xC0;
+    g_SpadWork->word_08.byte.timer_0A += 1;
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if ((temp_v0 & 0xFF) == 0x28) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
