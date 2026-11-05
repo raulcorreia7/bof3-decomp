@@ -175,7 +175,8 @@ extern char        D_801D0CF0[];
 extern char        D_801D0CF8[];
 extern char        D_801D0CFC[];
 extern char        g_MenuZennyFormat[];
-extern char        D_801D0D0C[];
+/* D_801D0D0C */
+extern char        g_MenuNextExpBlank[];
 extern char        g_MenuClockFormat[];
 extern char        D_801D0E44[];
 extern char        D_801D0E48[];

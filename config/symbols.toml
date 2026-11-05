@@ -1273,6 +1273,7 @@ Area_RoundSpriteCoordinate = { addr = 0x800C3254, type = "func", source = "round
 ["emi/etc/bate/00"]
 g_MenuStatFormat = { addr = 0x801D0C20, source = "Menu_DrawStatPanel.h binds g_MenuStatFormat in emi/etc/bate/00 and the item rows print values through it (twin rule, decomp/layout#shared-bodies)" }
 g_MenuZennyFormat = { addr = 0x801D0C44, source = "the caption and item-row values print through this format string, drawn by Menu_DrawZennyWindow.h (twin rule, decomp/layout#shared-bodies)" }
+g_MenuNextExpBlank = { addr = 0x801D0C48, source = "the dashes the item row prints in place of the next-level experience at the level cap, after g_MenuZennyFormat" }
 g_MenuClockFormat = { addr = 0x801D0D1C, source = "the play time window prints hours and minutes through this format string, drawn by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "overlay entry loads D_80148650 and calls D_801D86E0[step]" }
 Menu_DrawCharacterWindow = { addr = 0x801D27C4, type = "func", source = "draws one party member's window from g_Characters[character_slot]: portrait of the character id, name, level, poison and confusion labels, current and max HP and AP, exp bar; the shop and start panel tasks pass the slot found through g_CharSlot" }
@@ -1642,6 +1643,7 @@ UI_UpdateWindowFade = { addr = 0x801D1B00, type = "func", source = "advances the
 ["emi/etc/shisu/00"]
 g_MenuStatFormat = { addr = 0x801D0C04, source = "Menu_DrawStatPanel.h binds g_MenuStatFormat in emi/etc/shisu/00 and the item rows print values through it (twin rule, decomp/layout#shared-bodies)" }
 g_MenuZennyFormat = { addr = 0x801D0C28, source = "the caption and item-row values print through this format string, drawn by Menu_DrawZennyWindow.h (twin rule, decomp/layout#shared-bodies)" }
+g_MenuNextExpBlank = { addr = 0x801D0C2C, source = "the dashes the item row prints in place of the next-level experience at the level cap, after g_MenuZennyFormat" }
 g_MenuClockFormat = { addr = 0x801D0D00, source = "the play time window prints hours and minutes through this format string, drawn by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "overlay entry loads D_80148650 and calls D_801D96DC[step]" }
 Menu_DrawPanelCursor = { addr = 0x801D2FE8, type = "func", source = "draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite" }
@@ -1695,6 +1697,7 @@ D_801DA12C = { addr = 0x801DA12C, source = "func_801D2DEC decrements and func_80
 g_SaveBuffer = { addr = 0x800C1A00, source = "the resident save image, etc/start/08 binds the same address as SAVE_IMAGE_ADDR" }
 g_MenuStatFormat = { addr = 0x801D0CE4, source = "Menu_DrawStatPanel.h binds g_MenuStatFormat in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuZennyFormat = { addr = 0x801D0D08, source = "the caption and item-row values print through this format string, drawn by Menu_DrawZennyWindow.h (twin rule, decomp/layout#shared-bodies)" }
+g_MenuNextExpBlank = { addr = 0x801D0D0C, source = "the dashes the item row prints in place of the next-level experience at the level cap, after g_MenuZennyFormat" }
 g_MenuClockFormat = { addr = 0x801D0DE0, source = "the play time window prints hours and minutes through this format string, drawn by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "the body runs D_801E5144[D_80148650]" }
 Shop_ApplyPercent = { addr = 0x801D3654, type = "func", source = "returns value * percent / 100 with a minimum of 1, the item list prices rows through it" }
@@ -1799,6 +1802,7 @@ g_MasterMenuCursor = { addr = 0x801D428A, source = "indexes the 0x140-byte stock
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).
 g_MenuStatFormat = { addr = 0x801D0C4C, source = "Menu_DrawStatPanel.h binds g_MenuStatFormat in emi/etc/start/08 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuZennyFormat = { addr = 0x801D0C70, source = "the caption and item-row values print through this format string, drawn by Menu_DrawZennyWindow (twin rule, decomp/layout#shared-bodies)" }
+g_MenuNextExpBlank = { addr = 0x801D0C74, source = "the dashes the item row prints in place of the next-level experience at the level cap, after g_MenuZennyFormat" }
 g_MenuClockFormat = { addr = 0x801D0D48, source = "the play time window prints hours and minutes through this format string, drawn by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 s_RowCaptionTags = { addr = 0x801D0EB0, source = "func_801E30FC copies these eight three-byte caption tags and hands one to the text draws" }
 g_SaveFileNameFormat = { addr = 0x801D0EC8, source = "SAVE_RunLoadVerify formats the slot into it for the card file name; func_801E54A4 filters the card directory with it and func_801E7348 compares directory names against it" }

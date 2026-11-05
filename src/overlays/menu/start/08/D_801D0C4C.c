@@ -8,7 +8,7 @@ char D_801D0C60[4] = "%8d";
 char D_801D0C64[12] = "--------";
 
 char g_MenuZennyFormat[4] = "%7d";
-char D_801D0C74[8] = "-------";
+char g_MenuNextExpBlank[8] = "-------";
 
 /* 0x801D0C7C: ten 0x14-byte action layout rows: a name, its tile offset and six signed corner offsets
  * (the shop image names them ShopActionLayout). No reader in this image. */
