@@ -1339,6 +1339,7 @@ func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "overlay entry load
 ["emi/etc/commu02/08"]
 func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "overlay entry loads D_801F294C and calls D_801DABCC[step]" }
 Commu_AdvanceStep = { addr = 0x801D5A9C, type = "func", source = "adds one to D_801448EC unless g_GameStateIndex is 2" }
+Commu_AdvanceStep_801D7E30 = { addr = 0x801D7E30, type = "func", source = "byte-identical to Commu_AdvanceStep in this image" }
 Fairy_VillageCountFairies = { addr = 0x801D7E64, type = "func", source = "counts the active rows of the 60-row fairy roster g_FairyJobs" }
 Menu_DrawHeaderBar = { addr = 0x801D8A40, type = "func", source = "draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952); byte-equal copy in the start, sisyou, Bate, Shisu, shop, commu02, scena12 and area008 images" }
 Menu_DrawPortrait = { addr = 0x801D8F8C, type = "func", source = "draws a 40x48 portrait from the image's 4-byte atlas records with the requested shade, one body shared with the shop, start, Bate and Shisu overlays" }
@@ -2451,8 +2452,10 @@ Area_FindFreeWorkRow = { addr = 0x801178C4, type = "func", source = "finds the f
 Message_SetAnswerMessage = { addr = 0x801F2C54, type = "func", source = "stores the message id D_801F5CD8 holds for the menu choice D_801490C7 in g_MessageRequest" }
 Area_AddCameraOffsetY20 = { addr = 0x801F33E8, type = "func", source = "adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_SubCameraOffsetY20 = { addr = 0x801F3410, type = "func", source = "subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
+Area_ResetCameraOffsetY = { addr = 0x801F3438, type = "func", source = "one body shared through src/overlays/area/Area_ResetCameraOffsetY.h" }
 Area_SubCameraOffsetY4 = { addr = 0x801F3700, type = "func", source = "subtracts 4 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_AddCameraOffsetY4 = { addr = 0x801F3728, type = "func", source = "adds 4 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
+Area_ResetCameraOffsetY_801F3750 = { addr = 0x801F3750, type = "func", source = "byte-identical to Area_ResetCameraOffsetY in this image" }
 
 ["emi/world01/area050/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
