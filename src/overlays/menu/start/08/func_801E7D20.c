@@ -19,7 +19,7 @@ MATCH s32 func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s
 
     ability = ability_id;
     cost    = Char_GetAbilityCost(character_index & BYTE_MASK, ability, 0) & BYTE_MASK;
-    if (record->current_ap < (u32)cost) {
+    if (record->ap < (u32)cost) {
         return 0;
     }
 
@@ -38,7 +38,7 @@ MATCH s32 func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s
     character = character_index & BYTE_MASK;
     ability   = D_801ED224[cost & BYTE_MASK](character, target_index & BYTE_MASK, use_battle_record & BYTE_MASK);
     if ((ability & BYTE_MASK) == 1 || (ability & BYTE_MASK) == 5) {
-        record->current_ap -= Char_GetAbilityCost(character, ability_id & BYTE_MASK, 0) & BYTE_MASK;
+        record->ap -= Char_GetAbilityCost(character, ability_id & BYTE_MASK, 0) & BYTE_MASK;
     }
 
     return ability & BYTE_MASK;

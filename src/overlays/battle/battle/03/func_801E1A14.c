@@ -8,7 +8,7 @@ MATCH void func_801E1A14(void) {
     expected = 4;
     work     = g_GameState;
     if (work->mode_119 == expected) {
-        work->stats.current_ap = work->stats.current_ap - D_801463C8;
+        work->chr.ap = work->chr.ap - D_801463C8;
     }
     battle_flags = &g_BattleState;
     *battle_flags |= 0x800;

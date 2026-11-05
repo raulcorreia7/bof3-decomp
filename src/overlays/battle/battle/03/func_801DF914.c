@@ -15,8 +15,8 @@ MATCH void func_801DF914(void) {
         g_Task->unk_09 = *(u8*)((u8*)&D_801EB198 + *selector);
         g_Task->timer  = *(u8*)((u8*)&D_801EB198 + *selector);
     } else {
-        g_Task->unk_09 = *(u8*)((u8*)&s_BattleCharacterSprites + current->stats.character_id);
-        g_Task->timer  = *(u8*)((u8*)&s_BattleCharacterSprites + g_GameState->stats.character_id);
+        g_Task->unk_09 = *(u8*)((u8*)&s_BattleCharacterSprites + current->chr.character_id);
+        g_Task->timer  = *(u8*)((u8*)&s_BattleCharacterSprites + g_GameState->chr.character_id);
     }
     Actor_RequestScript((g_Task->facing + 0xC) & BYTE_MASK);
     func_801DEDE4();

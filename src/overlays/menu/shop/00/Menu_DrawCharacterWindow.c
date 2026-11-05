@@ -40,7 +40,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s3
     } else if (stats->status & STATUS_CONFUSED) {
         UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801E581C);
     }
-    if (stats->current_hp < (u32)(stats->stats.max_hp >> 2)) {
+    if (stats->hp < (u32)(stats->stats.max_hp >> 2)) {
         stats->status |= STATUS_LOW_HP;
     } else {
         stats->status &= ~STATUS_LOW_HP;
@@ -49,13 +49,13 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s3
         if (stats->status & STATUS_LOW_HP) {
             clut = 4;
         }
-        if (stats->current_hp < 2) {
+        if (stats->hp < 2) {
             clut = 2;
         }
     } else {
         clut = 7;
     }
-    sprintf(g_UiFormatBuffer, D_801D0CE8, stats->current_hp);
+    sprintf(g_UiFormatBuffer, D_801D0CE8, stats->hp);
     UI_DrawGlyphString(x + 22, y + 31, clut, g_UiFormatBuffer);
     if ((u8)shaded == 0) {
         clut = (stats->fatigue != 0) * 4;
@@ -66,16 +66,16 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s3
     UI_DrawGlyphString(x + 22, y + 31, clut, g_UiFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
     if ((u8)shaded == 0) {
-        if (stats->current_ap < (u32)(stats->stats.max_ap >> 2)) {
+        if (stats->ap < (u32)(stats->stats.max_ap >> 2)) {
             clut = 4;
         }
-        if (stats->current_ap == 0) {
+        if (stats->ap == 0) {
             clut = 2;
         }
     } else {
         clut = 7;
     }
-    sprintf(g_UiFormatBuffer, D_801D0CE8, stats->current_ap);
+    sprintf(g_UiFormatBuffer, D_801D0CE8, stats->ap);
     UI_DrawGlyphString(x + 22, y + 39, clut, g_UiFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
     sprintf(g_UiFormatBuffer, D_801D0CF0, stats->stats.max_ap);

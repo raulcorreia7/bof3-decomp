@@ -56,7 +56,7 @@ MATCH u8 func_801DB058(void) {
         if (func_801DB2F8((u8)index) != 0u) {
             u16 value;
 
-            value = g_BattlePartyBattlers[(u8)index].stats.stats.agility;
+            value = g_BattlePartyBattlers[(u8)index].chr.stats.agility;
             total += value;
             CLAMP_MIN(maximum, value);
             count += 1u;

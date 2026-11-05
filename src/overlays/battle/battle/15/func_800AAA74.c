@@ -18,20 +18,20 @@ MATCH void func_800AAA74(void) {
 
     switch (g_PartyFormation) {
         case PARTY_FORMATION_ATTACK:
-            Char_AddStat(&g_BattlePartyBattlers[0].stats.base_stats.power,
-                         (s32)((u32)g_BattlePartyBattlers[0].stats.base_stats.power >> 1u));
-            Char_AddStat(&g_BattlePartyBattlers[0].stats.base_stats.defense,
-                         -((s32)((u32)g_BattlePartyBattlers[0].stats.base_stats.defense >> 2u)));
-            Char_AddPercent(&g_BattlePartyBattlers[0].stats.base_stats.reprisal_chance,
-                            g_BattlePartyBattlers[0].stats.base_stats.reprisal_chance);
+            Char_AddStat(&g_BattlePartyBattlers[0].chr.base.power,
+                         (s32)((u32)g_BattlePartyBattlers[0].chr.base.power >> 1u));
+            Char_AddStat(&g_BattlePartyBattlers[0].chr.base.defense,
+                         -((s32)((u32)g_BattlePartyBattlers[0].chr.base.defense >> 2u)));
+            Char_AddPercent(&g_BattlePartyBattlers[0].chr.base.reprisal_chance,
+                            g_BattlePartyBattlers[0].chr.base.reprisal_chance);
             return;
         case PARTY_FORMATION_DEFENSE:
             if (g_BattlePartyCount != 0u) {
                 slot = 0u;
                 do {
                     if (Battle_SlotIsBlocked(slot) == 0u) {
-                        Char_AddStat(&g_BattlePartyBattlers[slot].stats.base_stats.agility,
-                                     -((s32)((u32)g_BattlePartyBattlers[slot].stats.base_stats.agility >> 2u)));
+                        Char_AddStat(&g_BattlePartyBattlers[slot].chr.base.agility,
+                                     -((s32)((u32)g_BattlePartyBattlers[slot].chr.base.agility >> 2u)));
                     }
                     slot += 1u;
                 } while (slot < g_BattlePartyCount);
@@ -42,24 +42,24 @@ MATCH void func_800AAA74(void) {
                 slot = 0u;
                 do {
                     if (Battle_SlotIsBlocked(slot) == 0u) {
-                        value = g_BattlePartyBattlers[slot].stats.base_stats.defense;
-                        copy  = g_BattlePartyBattlers[0].stats.base_stats.agility;
+                        value                                        = g_BattlePartyBattlers[slot].chr.base.defense;
+                        copy                                         = g_BattlePartyBattlers[0].chr.base.agility;
                         /* plain store: this driver owns the stat; only readers on the
                          * camera side need volatile ordering */
-                        g_BattlePartyBattlers[slot].stats.base_stats.agility = copy;
-                        Char_AddStat(&g_BattlePartyBattlers[slot].stats.base_stats.defense, -((s32)((u32)value >> 1u)));
+                        g_BattlePartyBattlers[slot].chr.base.agility = copy;
+                        Char_AddStat(&g_BattlePartyBattlers[slot].chr.base.defense, -((s32)((u32)value >> 1u)));
                     }
                     slot += 1u;
                 } while (slot < g_BattlePartyCount);
             }
             break;
         case PARTY_FORMATION_MAGIC:
-            Char_AddStat(&g_BattlePartyBattlers[2].stats.base_stats.intellect,
-                         (s32)((u32)g_BattlePartyBattlers[2].stats.base_stats.intellect >> 1u));
-            Char_AddStat(&g_BattlePartyBattlers[0].stats.base_stats.intellect,
-                         -((s32)((u32)g_BattlePartyBattlers[0].stats.base_stats.intellect >> 2u)));
-            Char_AddStat(&g_BattlePartyBattlers[1].stats.base_stats.intellect,
-                         -((s32)((u32)g_BattlePartyBattlers[1].stats.base_stats.intellect >> 2u)));
+            Char_AddStat(&g_BattlePartyBattlers[2].chr.base.intellect,
+                         (s32)((u32)g_BattlePartyBattlers[2].chr.base.intellect >> 1u));
+            Char_AddStat(&g_BattlePartyBattlers[0].chr.base.intellect,
+                         -((s32)((u32)g_BattlePartyBattlers[0].chr.base.intellect >> 2u)));
+            Char_AddStat(&g_BattlePartyBattlers[1].chr.base.intellect,
+                         -((s32)((u32)g_BattlePartyBattlers[1].chr.base.intellect >> 2u)));
             break;
     }
 }

@@ -8,7 +8,7 @@ MATCH u8 func_801E8FA8(void) {
 
     field = &D_801EB4E0->slot;
     if (*field < 3) {
-        mask = g_BattlePartyBattlers[*field].stats.status;
+        mask = g_BattlePartyBattlers[*field].chr.status;
     } else {
         mask = ENEMY_COMBATANT(*field).status;
     }

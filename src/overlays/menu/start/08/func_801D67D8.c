@@ -14,10 +14,10 @@ NON_MATCHING void func_801D67D8(u8 party_slot) {
 
     character  = g_CharSlot[D_80144F5A[party_slot & BYTE_MASK]];
     record     = &g_Characters[character];
-    slots[0]   = &record->equipment.weapon;
-    slots[1]   = &record->equipment.shield;
-    slots[2]   = &record->equipment.helmet;
-    slots[3]   = &record->equipment.armor;
+    slots[0]   = &record->equip.weapon;
+    slots[1]   = &record->equip.shield;
+    slots[2]   = &record->equip.helmet;
+    slots[3]   = &record->equip.armor;
     D_801ED63C = *slots[0];
     best       = g_Weapons[*slots[0]].stats.power;
     for (i = 0; i < 128; i++) {
@@ -45,8 +45,8 @@ NON_MATCHING void func_801D67D8(u8 party_slot) {
             }
         }
     }
-    D_801ED640 = record->equipment.accessories[0];
-    D_801ED641 = record->equipment.accessories[1];
+    D_801ED640 = record->equip.accessories[0];
+    D_801ED641 = record->equip.accessories[1];
 }
 #else
 INCLUDE_ASM(func_801D67D8);

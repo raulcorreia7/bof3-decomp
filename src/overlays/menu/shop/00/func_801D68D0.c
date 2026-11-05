@@ -14,15 +14,15 @@ MATCH void func_801D68D0(s32 reset_slots) {
         if (reset_slots & BYTE_MASK) {
             slot->fatigue = 0;
             Char_ClearStatus(id, 0xA0, 0);
-            slot->current_willpower = slot->stats.willpower;
+            slot->willpower = slot->stats.willpower;
         }
         slot->inoculations = 0;
         Char_RebuildStats(slot);
         max_hp             = slot->stats.max_hp;
         max_ap             = slot->stats.max_ap;
         slot->inoculations = 0;
-        slot->current_hp   = max_hp;
-        slot->current_ap   = max_ap;
+        slot->hp           = max_hp;
+        slot->ap           = max_ap;
         Char_ClearStatus(id, 0x2000, 0);
         index += 1;
     } while ((u32)(index & BYTE_MASK) < 8U);

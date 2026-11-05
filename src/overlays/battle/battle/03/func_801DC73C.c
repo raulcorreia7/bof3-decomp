@@ -21,7 +21,7 @@ MATCH u32 func_801DC73C(s16 damage, u32 battler_index, u32 slot_index) {
 
     battler_index &= BYTE_MASK;
     if (BATTLER_IS_PLAYER(battler_index)) {
-        flags = g_BattlePartyBattlers[battler_index].stats.status;
+        flags = g_BattlePartyBattlers[battler_index].chr.status;
     } else {
         /* enemy rows share the flag test below */
         goto enemy;

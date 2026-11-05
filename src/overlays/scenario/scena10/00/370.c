@@ -213,7 +213,7 @@ MATCH void func_801FE360(void) {
     u8 i;
 
     for (i = 0; i < g_PartySize; i++) {
-        func_801C1ABC(g_BattlePartyBattlers[i].stats.character_id);
+        func_801C1ABC(g_BattlePartyBattlers[i].chr.character_id);
     }
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0);
     g_PartySize = 0;

@@ -204,7 +204,7 @@ MATCH void func_801FC0C8(void) {
     func_801C1630();
 }
 
-/* Copies the three party character ids (g_BattlePartyBattlers[i].stats.character_id) into D_80144908, calls func_801C1ABC
+/* Copies the three party character ids (g_BattlePartyBattlers[i].chr.character_id) into D_80144908, calls func_801C1ABC
  * on each, EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0), g_PartySize = 0, Party_JoinMember(CHAR_ID_RYU_ADULT), func_801C1630(). The body is right but
  * retail's frame is 0x20 against 0x18 (first differing instruction +0x0: addiu sp,sp,-32). */
 INCLUDE_ASM(func_801FC130);

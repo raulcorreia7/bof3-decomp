@@ -28,7 +28,7 @@ MATCH void func_801DEFE4(void) {
     }
 
     work  = g_GameState;
-    flags = work->stats.status;
+    flags = work->chr.status;
     if (flags & STATUS_KO) {
         Actor_RequestScript(g_Task->facing + 0x1C);
         return;

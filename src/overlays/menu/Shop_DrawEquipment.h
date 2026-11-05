@@ -15,12 +15,12 @@ MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
     UI_DrawText((s16)(x + 46), (s16)(y + 7), 0, 0xFF, g_MenuLabelEquip);
     func_801644D8(0, (s32)(u16)(x + 7), (s32)(u16)(y + 5), 0x10, 0x10, 0x80);
 
-    objects[0] = &g_Weapons[record->equipment.weapon];
-    objects[1] = &g_Armors[record->equipment.shield];
-    objects[2] = &g_Armors[record->equipment.helmet];
-    objects[3] = &g_Armors[record->equipment.armor];
-    objects[4] = &g_Accessories[record->equipment.accessories[0]];
-    objects[5] = &g_Accessories[record->equipment.accessories[1]];
+    objects[0] = &g_Weapons[record->equip.weapon];
+    objects[1] = &g_Armors[record->equip.shield];
+    objects[2] = &g_Armors[record->equip.helmet];
+    objects[3] = &g_Armors[record->equip.armor];
+    objects[4] = &g_Accessories[record->equip.accessories[0]];
+    objects[5] = &g_Accessories[record->equip.accessories[1]];
 
     for (row = 0; row < 6; row++) {
         row_y = (u16)(y + (row * 0xD + 0x1A));

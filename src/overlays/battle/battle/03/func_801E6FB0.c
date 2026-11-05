@@ -31,7 +31,7 @@ MATCH void func_801E6FB0(void) {
     }
     slot = LOBU(D_801EB4E0->slot);
     if (BATTLER_IS_PLAYER(slot)) {
-        flags = g_BattlePartyBattlers[slot].stats.status;
+        flags = g_BattlePartyBattlers[slot].chr.status;
     } else {
         row   = slot - 3;
         flags = D_801EB630[row].status;

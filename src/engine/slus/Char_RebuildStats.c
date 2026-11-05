@@ -17,20 +17,20 @@ MATCH void Char_RebuildStats(Character* record) {
     u8  idx;
     u8* entry;
 
-    *(CharacterAttributes*)&record->stats.max_hp = *(CharacterAttributes*)&record->base_stats.max_hp;
+    *(CharacterAttributes*)&record->stats.max_hp = *(CharacterAttributes*)&record->base.max_hp;
 
     Char_ApplyWeapon((u8*)record);
     Char_ApplyArmor((u8*)record);
     Char_ApplyAccessories((u8*)record);
     Char_ApplyMaster((u8*)record);
 
-    prod                 = record->base_stats.max_hp * record->fatigue;
+    prod                 = record->base.max_hp * record->fatigue;
     quot                 = (prod + 5) / 10;
     next                 = record->stats.max_hp - quot;
     record->stats.max_hp = next;
     cur                  = next;
-    if (cur < record->current_hp) {
-        record->current_hp = cur;
+    if (cur < record->hp) {
+        record->hp = cur;
     }
 
     if (record->inoculations & 1) {

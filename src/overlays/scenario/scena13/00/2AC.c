@@ -379,7 +379,7 @@ MATCH void func_801FBDD8(void) {
     u8 slot;
 
     for (slot = 0; slot < 3; slot++) {
-        ids[slot] = g_BattlePartyBattlers[slot].stats.character_id;
+        ids[slot] = g_BattlePartyBattlers[slot].chr.character_id;
     }
     for (slot = 0; slot < 3; slot++) {
         func_801C1ABC(ids[slot]);

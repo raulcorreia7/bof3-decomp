@@ -9,7 +9,7 @@ MATCH void Scene_StashPartyExceptRyuAdult(void) {
     u8 slot;
 
     for (slot = 0; slot < g_PartySize; slot++) {
-        ids[slot] = D_80144908[slot] = g_BattlePartyBattlers[slot].stats.character_id;
+        ids[slot] = D_80144908[slot] = g_BattlePartyBattlers[slot].chr.character_id;
     }
     for (slot = 0; slot < 3; slot++) {
         if (ids[slot] != CHAR_ID_RYU_ADULT) {

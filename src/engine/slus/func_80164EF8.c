@@ -35,13 +35,13 @@ MATCH void func_80164EF8(s32 index, u8* patch, u8* flags, u16* values) {
         src += 4;
         dst += 4;
     } while (src != end);
-    *dst                          = *src;
-    copy.equipment.weapon         = patch[0];
-    copy.equipment.shield         = patch[1];
-    copy.equipment.helmet         = patch[2];
-    copy.equipment.armor          = patch[3];
-    copy.equipment.accessories[0] = patch[4];
-    copy.equipment.accessories[1] = patch[5];
+    *dst                      = *src;
+    copy.equip.weapon         = patch[0];
+    copy.equip.shield         = patch[1];
+    copy.equip.helmet         = patch[2];
+    copy.equip.armor          = patch[3];
+    copy.equip.accessories[0] = patch[4];
+    copy.equip.accessories[1] = patch[5];
     Char_RebuildStats(&copy);
     for (i = 0; i < 4; i++) {
         flags[i]  = 0;

@@ -19,7 +19,7 @@ MATCH bool func_801D527C(void) {
                 g_BattlePartyBattlers[slot].unk_04      = 0;
                 g_BattlePartyBattlers[slot].unk_03      = 0;
                 g_BattlePartyBattlers[slot].action_flags.value &= ~0x4000;
-                g_BattlePartyBattlers[slot].hp_change = g_BattlePartyBattlers[slot].stats.current_hp;
+                g_BattlePartyBattlers[slot].hp_change = g_BattlePartyBattlers[slot].chr.hp;
                 Battle_SetSlotPending(slot);
             }
         }

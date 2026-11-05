@@ -36,24 +36,24 @@ NON_MATCHING void func_800A0EC4(void) {
         index = 0;
         if (g_BattlePartyCount != 0) {
             do {
-                row_offset                     = index * BATTLE_PARTY_STRIDE;
-                cell                           = (Character*)((*(D_80145FCC + row_offset) * 0xA4) + (u8*)&g_Characters);
-                dest                           = (Character*)(row_offset + D_80145F04);
-                dest->equipment.weapon         = cell->equipment.weapon;
-                dest->equipment.shield         = cell->equipment.shield;
-                dest->equipment.helmet         = cell->equipment.helmet;
-                dest->equipment.armor          = cell->equipment.armor;
-                dest->equipment.accessories[0] = cell->equipment.accessories[0];
+                row_offset                 = index * BATTLE_PARTY_STRIDE;
+                cell                       = (Character*)((*(D_80145FCC + row_offset) * 0xA4) + (u8*)&g_Characters);
+                dest                       = (Character*)(row_offset + D_80145F04);
+                dest->equip.weapon         = cell->equip.weapon;
+                dest->equip.shield         = cell->equip.shield;
+                dest->equip.helmet         = cell->equip.helmet;
+                dest->equip.armor          = cell->equip.armor;
+                dest->equip.accessories[0] = cell->equip.accessories[0];
                 index++;
-                dest->equipment.accessories[1]      = cell->equipment.accessories[1];
-                ((s32*)&dest->base_stats.max_hp)[0] = ((s32*)&cell->stats.max_hp)[0];
-                ((s32*)&dest->base_stats.max_hp)[1] = ((s32*)&cell->stats.max_hp)[1];
-                ((s32*)&dest->base_stats.max_hp)[2] = ((s32*)&cell->stats.max_hp)[2];
-                ((s32*)&dest->base_stats.max_hp)[3] = ((s32*)&cell->stats.max_hp)[3];
-                ((s32*)&dest->base_stats.max_hp)[4] = ((s32*)&cell->stats.max_hp)[4];
-                ((s32*)&dest->base_stats.max_hp)[5] = ((s32*)&cell->stats.max_hp)[5];
-                ((s32*)&dest->base_stats.max_hp)[6] = ((s32*)&cell->stats.max_hp)[6];
-                ((s32*)&dest->base_stats.max_hp)[7] = ((s32*)&cell->stats.max_hp)[7];
+                dest->equip.accessories[1]    = cell->equip.accessories[1];
+                ((s32*)&dest->base.max_hp)[0] = ((s32*)&cell->stats.max_hp)[0];
+                ((s32*)&dest->base.max_hp)[1] = ((s32*)&cell->stats.max_hp)[1];
+                ((s32*)&dest->base.max_hp)[2] = ((s32*)&cell->stats.max_hp)[2];
+                ((s32*)&dest->base.max_hp)[3] = ((s32*)&cell->stats.max_hp)[3];
+                ((s32*)&dest->base.max_hp)[4] = ((s32*)&cell->stats.max_hp)[4];
+                ((s32*)&dest->base.max_hp)[5] = ((s32*)&cell->stats.max_hp)[5];
+                ((s32*)&dest->base.max_hp)[6] = ((s32*)&cell->stats.max_hp)[6];
+                ((s32*)&dest->base.max_hp)[7] = ((s32*)&cell->stats.max_hp)[7];
             } while ((u32)(index & BYTE_MASK) < (u8)g_BattlePartyCount);
         }
         index = 0;

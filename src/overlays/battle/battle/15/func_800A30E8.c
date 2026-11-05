@@ -19,7 +19,7 @@ MATCH s32 func_800A30E8(u8 unused, u8 battler_index) {
     damage = (power * scale) / 100u;
 
     if (BATTLER_IS_PLAYER(battler_index)) {
-        resistance = g_BattlePartyBattlers[battler_index].stats.stats.resistances[RES_SLOT_HOLY];
+        resistance = g_BattlePartyBattlers[battler_index].chr.stats.resistances[RES_SLOT_HOLY];
     } else {
         resistance = ENEMY_COMBATANT((u32)battler_index).resistances[RES_SLOT_HOLY];
     }

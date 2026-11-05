@@ -35,7 +35,7 @@ case_1:
     mapped_character = g_CharSlot[D_80144F5A[(u8)ch]];
     character_offset = (u32)mapped_character * PARTY_RECORD_STRIDE;
     required_level   = Char_GetAbilityCost((u8)mapped_character, (u8)kind, 0u) & BYTE_MASK;
-    learned_level    = g_Characters[mapped_character].current_ap;
+    learned_level    = g_Characters[mapped_character].ap;
     if (learned_level < required_level)
         return 0;
     if (ability[0xC] & 1u)

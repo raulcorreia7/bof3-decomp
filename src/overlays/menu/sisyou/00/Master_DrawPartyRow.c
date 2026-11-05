@@ -31,7 +31,7 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
         UI_DrawTextString((s16)(x + 46), (s16)(y + 23), 1, 0x10, D_801D4050);
     }
 
-    value = record->current_hp;
+    value = record->hp;
     align = (record->status >> 11) & 4;
     if (value < 2U) {
         align = 2;
@@ -43,11 +43,11 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     sprintf((char*)g_UiFormatBuffer, D_801D0C10, record->stats.max_hp);
     UI_DrawGlyphString(text_x, text_y, 0, g_UiFormatBuffer);
 
-    align = ((record->stats.max_ap >> 2) >= record->current_ap) ? 4 : 0;
-    if (record->current_ap == 0) {
+    align = ((record->stats.max_ap >> 2) >= record->ap) ? 4 : 0;
+    if (record->ap == 0) {
         align = 2;
     }
-    sprintf((char*)g_UiFormatBuffer, D_801D0C08, record->current_ap);
+    sprintf((char*)g_UiFormatBuffer, D_801D0C08, record->ap);
     text_y = (s16)(y + 0x27);
     UI_DrawGlyphString(text_x, text_y, align, g_UiFormatBuffer);
     sprintf((char*)g_UiFormatBuffer, D_801D0C10, record->stats.max_ap);
