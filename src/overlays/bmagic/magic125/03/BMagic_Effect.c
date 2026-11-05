@@ -64,7 +64,25 @@ MATCH void func_801EF808(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF890);
+MATCH void func_801EF890(void) {
+    u8 timer;
+
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
+        g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
+        g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
+        g_SpadWork->word_3C.word          = D_801EB4E0->word_3C.word;
+        g_SpadWork->unk_5D                = 0xF;
+        g_SpadWork->unk_5E                = 0xF;
+        g_SpadWork->unk_5F                = 0xF;
+        g_SpadWork->unk_14                = 0x100;
+        g_SpadWork->unk_20                = 0x21;
+        g_SpadWork->word_08.byte.unk_09   = 0x10;
+        g_SpadWork->word_08.byte.timer_0A = 0x1E;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF960);
 

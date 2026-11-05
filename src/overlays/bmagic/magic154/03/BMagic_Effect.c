@@ -27,7 +27,37 @@ MATCH void func_801EF0C0(void) {
 
 INCLUDE_ASM(func_801EF104);
 
-INCLUDE_ASM(func_801EF1EC);
+MATCH void func_801EF1EC(void) {
+    u8 timer;
+
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
+        g_SpadWork->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
+        g_SpadWork->unk_0C                 = 0;
+        g_SpadWork->unk_10                 = g_SpadWork->word_08.byte.unk_0B << 0xF;
+        func_801DD350(g_SpadWork);
+        g_SpadWork->coord_x_34.raw = D_801EB4E0->coord_x_34.raw + g_SpadWork->unk_0C;
+        g_SpadWork->coord_y_38.raw = D_801EB4E0->coord_y_38.raw + g_SpadWork->unk_10;
+        g_SpadWork->word_3C.word   = D_801EB4E0->word_3C.word;
+        g_SpadWork->unk_40         = 0x8000;
+        g_SpadWork->unk_44         = 0x8000;
+        g_SpadWork->unk_48         = 2;
+        g_SpadWork->unk_25         = 0x1D;
+        g_SpadWork->unk_26         = 0;
+        g_SpadWork->unk_27         = 0xA0;
+        g_SpadWork->unk_28         = 0;
+        g_SpadWork->unk_2A         = g_SpadWork->word_08.byte.facing_08 & 1;
+        g_SpadWork->unk_29         = 3;
+        g_SpadWork->unk_24         = 4;
+        g_SpadWork->unk_2C.half    = 0;
+        g_SpadWork->unk_2B         = 0;
+        Actor_SelectScript(0U);
+        func_8014D978();
+        g_SpadWork->word_08.byte.unk_09 = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF380(void) {
     PartyBattler* work;
