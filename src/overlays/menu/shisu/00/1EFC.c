@@ -21,7 +21,17 @@ MATCH void func_801D2C50(void) {
     func_801D2978();
 }
 
-INCLUDE_ASM(func_801D2C84);
+MATCH void func_801D2C84(void) {
+    s32* value = &D_801DA0B4;
+
+    if ((*value & 0xFFF) != 0) {
+        *value     = (*value + 0x40) & 0xFC0;
+        D_801DA04E = 0;
+    } else {
+        D_801DA04E = 1;
+    }
+    func_801D2978();
+}
 
 INCLUDE_ASM(func_801D2CE4);
 
@@ -44,7 +54,17 @@ MATCH void func_801D2DEC(void) {
     func_801D2ADC();
 }
 
-INCLUDE_ASM(func_801D2E20);
+MATCH void func_801D2E20(void) {
+    s32* value = &D_801DA12C;
+
+    if ((*value & 0xFFF) != 0) {
+        *value     = (*value - 0x40) & 0xFC0;
+        D_801DA0C6 = 0;
+    } else {
+        D_801DA0C6 = 1;
+    }
+    func_801D2ADC();
+}
 
 /* 10 differing: +0x54 loads 0x02000000, not 0xFE000000; preserve the intermediate subtraction. */
 INCLUDE_ASM(func_801D2E80);
