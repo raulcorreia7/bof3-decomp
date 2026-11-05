@@ -18,7 +18,7 @@ MATCH void Char_AdvancePaletteScript(void) {
         } else {
             func_8014D978();
         }
-        if (g_GameStateIndex == 0) {
+        if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             done = 1;
         }
     } else if (func_8014DAEC() & 0xFF) {

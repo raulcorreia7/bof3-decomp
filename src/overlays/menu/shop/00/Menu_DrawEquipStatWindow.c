@@ -37,7 +37,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_slot, s32 
     UI_DrawWindow((x + 3) & HALF_MASK, (y + 3) & HALF_MASK, 108, 48, present, D_80144952);
     clut = 0;
     if (present == 0) {
-        func_80164D2C(character_slot, (equip_slot - 1) & BYTE_MASK, item_id, flags, values);
+        Char_PreviewEquip(character_slot, (equip_slot - 1) & BYTE_MASK, item_id, flags, values);
         values[2] = values[3];
         flags[2]  = flags[3];
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {

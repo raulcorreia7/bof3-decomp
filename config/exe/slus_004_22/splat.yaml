@@ -36,7 +36,7 @@ segments:
       - [0xB3C3C, .rodata, data_80149C3C]
       - [0xB3C78, .rodata, data_80149C78]
       - [0xB3C90, .rodata, Char_ApplyMaster]
-      - [0xB3CC8, .rodata, func_80164D2C]
+      - [0xB3CC8, .rodata, Char_PreviewEquip]
       - [0xB3CE0, .rodata, Char_ApplyWeapon]
       # Keep split: 4-byte alignment fill follows Char_ApplyWeapon's bounded table; next table is 8-aligned.
       - {start: 0xB3DE4, type: data, name: D_80149DE4, linker_section_order: .rodata}
@@ -515,7 +515,7 @@ segments:
       - [0xCE7C4, c, Menu_DrawCursorSprite]
       - [0xCE8A0, c, Char_ApplyMaster]
       - [0xCEA44, c, Char_RebuildStats]
-      - [0xCED2C, c, func_80164D2C]
+      - [0xCED2C, c, Char_PreviewEquip]
       - [0xCEEF8, c, func_80164EF8]
       - [0xCF0B4, c, Item_Add]
       - [0xCF1DC, c, Char_AddAbility]
