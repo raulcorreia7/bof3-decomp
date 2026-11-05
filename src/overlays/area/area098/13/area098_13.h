@@ -29,6 +29,7 @@
 extern Callback D_801F5F68[];
 extern Callback D_801F5F7C[];
 extern s32      D_80145EC4[];
+extern u16      g_GameAreaId;
 extern Callback D_801F5F88[];
 extern Callback D_801F5FAC[];
 extern u8       D_801F6510;

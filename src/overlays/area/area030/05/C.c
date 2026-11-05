@@ -224,7 +224,7 @@ MATCH void func_800F5828(void) {
         for (i = 0; i < 12; i++) {
             g_TextVariables[0][i] = src[i];
         }
-        D_801490E4 = 0;
+        D_801490E4[0] = 0;
         UI_DrawText(0x28, 0x14, 0, 0xFF, (u8*)(D_8001008C + 0x80010000u));
         UI_DrawText(0xEE, 0x14, 0, 0xFF, (u8*)(D_80010094 + 0x80010000u));
         Menu_DrawCursorSprite((D_800F7248 << 5) + 0xED, 0x16, 0);

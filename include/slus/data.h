@@ -46,41 +46,47 @@ extern volatile u8 g_GfxPalettePending; /* 0x80145988 */
 /* D_80145988 */
 extern u8 g_GfxPalettePending; /* 0x80145988 */
 #endif
-extern u8            D_80145E91[];
-extern u8            D_80145E92[];
-extern u8            D_80145E93[];
-extern u8            D_80145E98;
-extern u8            D_80145E99;
-extern s32           D_80145E9C;
-extern s32           D_80145EA0;
-extern s16           D_80145EC6;
-extern s32           D_80145EC8;
-extern s16           D_80145ECA;
-extern s32           D_80145ECC;
-extern s16           D_80145ECE;
-extern u8            D_80145ED8;
-extern u8            D_80145EDB;
+extern u8  D_80145E91[];
+extern u8  D_80145E92[];
+extern u8  D_80145E93[];
+extern u8  D_80145E98;
+extern u8  D_80145E99;
+extern s32 D_80145E9C;
+extern s32 D_80145EA0;
+extern s16 D_80145EC6;
+extern s32 D_80145EC8;
+extern s16 D_80145ECA;
+extern s32 D_80145ECC;
+extern s16 D_80145ECE;
+extern u8  D_80145ED8;
+extern u8  D_80145EDB;
 /* Player battle-record copies (stride 0x140), selected by g_BattleActingBattler. */
-extern u8            D_80145F04[];
-extern u8            D_80145F10[];
-extern u16           D_80145F1A[];
-extern u8            D_80145FA9;
-extern s8            D_80145FBC;
+extern u8  D_80145F04[];
+extern u8  D_80145F10[];
+extern u16 D_80145F1A[];
+extern u8  D_80145FA9;
+extern s8  D_80145FBC;
 /* D_801462E0 */
-extern u8            g_BattleMode;
+extern u8  g_BattleMode;
 /* D_801462E1 */
-extern u8            g_BattleStep;
+extern u8  g_BattleStep;
 /* D_801462E2 */
-extern u8            g_BattleSubStep;
+extern u8  g_BattleSubStep;
 /* D_801462E8 */
-extern u16           g_BattleState;
+extern u16 g_BattleState;
 /* D_80146325 */
-extern u8            g_BattleOptions;
+extern u8  g_BattleOptions;
 /* D_80146328 */
-extern u8            g_BattleResult;
+extern u8  g_BattleResult;
 /* D_80146329 */
-extern u8            g_BattleEventFlags;
-extern u8*           D_8014637C;
+extern u8  g_BattleEventFlags;
+/* The bytes the battle code index; the bmagic images that copy its record
+ * define BATTLE_PARTY_CELL_RECORD before their first include. */
+#ifdef BATTLE_PARTY_CELL_RECORD
+extern struct PartyBattler* D_8014637C;
+#else
+extern u8* D_8014637C;
+#endif
 /* D_80146384 */
 extern volatile u8   g_BattleTargetSelector;
 /* D_80146854 */

@@ -56,7 +56,7 @@ MATCH void Fairy_RollExploreReward(void) {
         for (i = 0; i < 12; i++) {
             g_TextVariables[0][i] = src[i];
         }
-        D_801490E4 = 0;
+        D_801490E4[0] = 0;
         Message_StartAreaMessage(0x4F);
         edp_tail                                                    = &D_801448ED;
         g_FairyJobs[*edp_tail].progress_anchor                      = g_BattleCount;

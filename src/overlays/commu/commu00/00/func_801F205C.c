@@ -31,8 +31,8 @@ MATCH void func_801F205C(void) {
         for (i = 0; i < 12; i++) {
             g_TextVariables[0][i] = src[i];
         }
-        D_801490E4 = 0;
-        edp        = &D_801448ED;
+        D_801490E4[0] = 0;
+        edp           = &D_801448ED;
         if (Party_AddItem(g_FairyJobs[*edp].unk_03 & 0xF, g_FairyJobs[*edp].record_state,
                           /* The pending count's low byte: retail loads one byte. */
                           ((u8*)D_801F26CC)[entry_index * 6 + 4], 0) &

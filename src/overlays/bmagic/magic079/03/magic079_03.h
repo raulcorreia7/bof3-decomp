@@ -3,6 +3,8 @@
 
 /* The bmagic/magic079/03 overlay. Only this image includes the file. */
 
+#define BATTLE_PARTY_CELL_RECORD
+
 #include "overlays/bmagic/bmagic.h"
 
 void func_801EED38(void);

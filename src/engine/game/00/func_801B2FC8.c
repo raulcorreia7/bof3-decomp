@@ -37,7 +37,7 @@ MATCH void func_801B2FC8(void) {
             for (i = 0; i < 12; i++) {
                 g_TextVariables[0][i] = item[i];
             }
-            D_801490E4 = 0;
+            D_801490E4[0] = 0;
             if (Party_AddItem(sel->kind_06, FIELD(u16, sel, 0x4u) >> 8, 1, 0) & BYTE_MASK) {
                 if (sel->index_04 != GAME_NONE) {
                     SYS_SetFlag(D_80145004, sel->index_04);

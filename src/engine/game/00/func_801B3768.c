@@ -40,7 +40,7 @@ MATCH void func_801B3768(void) {
                 g_TextVariables[0][byte_index] = row[byte_index];
                 index += 1;
             } while ((u32)(index & BYTE_MASK) < 0xCU);
-            D_801490E4 = 0;
+            D_801490E4[0] = 0;
             if (Party_AddItem(selector, high & BYTE_MASK, 1, 0) & BYTE_MASK) {
                 kind = g_Actors[g_GameState->slot_12D].unk_05;
                 if (kind != GAME_NONE) {

@@ -68,8 +68,7 @@ MATCH void Fish_LocationMessage(void) {
                             dst[i] = blank;
                         }
                     }
-                    /* FAKE: retail reads D_801490E4 as u8[]. */
-                    ((u8*)&D_801490E4)[slot] = 0;
+                    D_801490E4[slot] = 0;
                     slot += 0x20;
                     dst += 0x20;
                     count++;

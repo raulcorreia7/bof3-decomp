@@ -14,7 +14,14 @@ INCLUDE_ASM(func_801EEEF4);
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
-INCLUDE_ASM(func_801EF0A4);
+MATCH void func_801EF0A4(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0xFF) {
+        D_8014637C->unk_29 = 4;
+        func_800A9820(g_BattleTargetSelector);
+        g_BattleState |= 4;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF114(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
