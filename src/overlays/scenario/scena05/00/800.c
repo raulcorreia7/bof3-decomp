@@ -372,8 +372,8 @@ MATCH void Scene_JoinNina_801FD49C(void) {
 }
 
 MATCH void func_801FD4D8(void) {
-    func_801C1ABC(5);
-    func_801C1ABC(1);
+    func_801C1ABC(CHAR_ID_MOMO);
+    func_801C1ABC(CHAR_ID_NINA_YOUNG);
     func_801C1630();
 }
 
@@ -384,6 +384,6 @@ MATCH void func_801FD4D8(void) {
 #include "overlays/scenario/Scene_RemovePeco.h"
 
 MATCH void func_801FD580(void) {
-    func_801C1ABC(0);
+    func_801C1ABC(CHAR_ID_RYU_YOUNG);
     func_801C1630();
 }

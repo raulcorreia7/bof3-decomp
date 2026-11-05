@@ -517,5 +517,5 @@ MATCH void func_801FE840(void) {
 }
 
 MATCH void func_801FE874(void) {
-    func_801C1ABC(2);
+    func_801C1ABC(CHAR_ID_GARR);
 }

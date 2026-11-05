@@ -30,9 +30,9 @@ MATCH void func_801D0EDC(void) {
         need = (u32)row->max_hp >> 2;
         have = row->current_hp;
         if (have < need) {
-            flags = row->status | 0x2000;
+            flags = row->status | STATUS_LOW_HP;
         } else {
-            flags = row->status & 0xDFFF;
+            flags = row->status & ~STATUS_LOW_HP;
         }
         row->status = flags;
         count++;

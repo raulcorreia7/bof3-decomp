@@ -10,7 +10,7 @@ MATCH void func_8015AC8C(u8* panel) {
     u8     index;
 
     g_SpadWork->flags_00 = ACTOR_FLAG_IN_USE;
-    g_SpadWork->flags_24 = 0x40;
+    g_SpadWork->flags_24 = ACTOR_FLAG_ACTIVE;
     g_SpadWork->unk_48   = 1;
     work                 = g_SpadWork;
     work->unk_40         = ONE;

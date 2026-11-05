@@ -132,10 +132,11 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             state->flag_00 = (u8)(state->flag_00 | ACTOR_FLAG_MOVING);
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE4:
-            spad_work_e4               = g_SpadWork;
-            SP_REF(u8, 0x3)            = 0xFF;
-            spad_work_e4->option_flags = (u8)(spad_work_e4->option_flags & 0xD7);
-            state->flag_00             = (u8)(state->flag_00 & 0xBF);
+            spad_work_e4    = g_SpadWork;
+            SP_REF(u8, 0x3) = 0xFF;
+            spad_work_e4->option_flags =
+                (u8)(spad_work_e4->option_flags & ~(ACTOR_OPT_ROUTE_LOCKED | ACTOR_OPT_WAIT_STREAM));
+            state->flag_00 = (u8)(state->flag_00 & 0xBF);
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xEA:
             spad_work_ea = g_SpadWork;

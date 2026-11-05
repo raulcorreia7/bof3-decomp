@@ -2,8 +2,8 @@
 
 MATCH void func_801F2C04(void) {
     if (MENU_SELECTION_IDLE()) {
-        if (Party_CountItem(0, 0x59, 0) != 0) {
-            Party_RemoveItem(0, 0x59, 1, 0);
+        if (Party_CountItem(ITEM_CAT_ITEM, 0x59, 0) != 0) {
+            Party_RemoveItem(ITEM_CAT_ITEM, 0x59, 1, 0);
             g_MessageRequest = 5;
             return;
         }
