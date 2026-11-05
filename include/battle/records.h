@@ -435,6 +435,14 @@ ASSERT_OFFSET(EnemyBattler, hp, 0x94);
 ASSERT_OFFSET(EnemyBattler, cell_A0, 0xA0);
 ASSERT_OFFSET(EnemyBattler, kind, 0xE0);
 ASSERT_OFFSET(EnemyBattler, unk_E8, 0xE8);
+
+/* Point a boss enemy at its script, event handler and step table. */
+static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, EnemyBattlerEventFunc handler, u16* steps) {
+    enemy->script = script;
+    enemy->unk_E4 = handler;
+    enemy->unk_E8 = steps;
+}
+
 ASSERT_OFFSET(EnemyBattler, target_flags, 0xFC);
 ASSERT_OFFSET(EnemyBattler, damage_flags, 0x100);
 ASSERT_OFFSET(EnemyBattler, action_flags, 0x104);
