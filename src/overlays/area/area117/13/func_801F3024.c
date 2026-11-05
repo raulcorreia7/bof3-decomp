@@ -11,7 +11,7 @@ MATCH void func_801F3024(void) {
             return;
         }
         g_SpadWork->state_02 = 1;
-        if (g_GameStateIndex == 0) {
+        if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x201);
         }
     }

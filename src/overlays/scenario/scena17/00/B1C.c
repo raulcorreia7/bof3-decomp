@@ -437,7 +437,7 @@ MATCH void func_801F8710(void) {
         SND_SetBankLayout(0);
         g_AreaDrawFlags = 0;
         Message_StartAreaMessage(1);
-        g_GameStateIndex = 2;
+        g_GameStateIndex = GAME_REQUEST_MESSAGE;
         state            = &D_80146874;
         (*state)++;
     }
@@ -446,7 +446,7 @@ MATCH void func_801F8710(void) {
 }
 
 MATCH void func_801F87D0(void) {
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_80146875 == 0) {
             D_80146874 += 1;
             return;

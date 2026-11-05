@@ -490,7 +490,7 @@ MATCH s32 func_801FC5A4(void) {
 MATCH void func_801FC5FC(void) {
     Party_AddVitalItem(VITAL_ITEM_FLIER);
     Message_StartAreaMessage(0x2F);
-    g_GameStateIndex = 2;
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
     SND_PauseBgm((s32)g_SndBgmId);
     SND_StartXaStream(2, 1);
     while (!(SND_IsXaIdle() & 0xFF)) {
@@ -636,7 +636,7 @@ INCLUDE_ASM(func_801FCDB4);
 
 MATCH void func_801FCE18(void) {
     Message_StartAreaMessage(25);
-    g_GameStateIndex = 2;
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
     Game_SetScriptActive();
     D_80146876 = 30;
     D_80146874 = 7;
