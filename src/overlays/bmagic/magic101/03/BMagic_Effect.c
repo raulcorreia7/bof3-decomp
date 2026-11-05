@@ -80,7 +80,23 @@ MATCH void func_801EF690(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF700);
+MATCH void func_801EF700(void) {
+    u8            counter;
+    s32           value;
+    PartyBattler* work;
+
+    g_SpadWork->word_08.byte.unk_0B += g_SpadWork->word_08.byte.timer_0A >> 1;
+    work                        = g_SpadWork;
+    counter                     = work->word_08.byte.timer_0A - 1;
+    value                       = work->unk_1C - 2;
+    work->word_08.byte.timer_0A = counter;
+    work->unk_1C                = value;
+    work->unk_10 += value;
+    if (!(counter & 0xFF)) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF78C);
 
