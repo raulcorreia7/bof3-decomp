@@ -151,7 +151,7 @@ MATCH void func_801F6F30(void) {
         if (object_index != 0xFFu) {
             g_ActorSlots[object_index].flags_00  = 1u;
             g_ActorSlots[D_1F800000[0]].type     = 0x13u;
-            g_ActorSlots[D_1F800000[0]].pos.x    = (s32)(((s16*)base)[0] - 170);
+            g_ActorSlots[D_1F800000[0]].pos.x    = (s32)((s16)*base - 170);
             g_ActorSlots[D_1F800000[0]].pos.y    = (s32)g_AreaCameraAngle.vy;
             g_ActorSlots[D_1F800000[0]].pos.z    = (s32)g_AreaCameraAngle.vz;
             g_ActorSlots[D_1F800000[0]].layer_09 = 0x40u;
@@ -468,7 +468,7 @@ MATCH void func_801F7790(void) {
             timer = &g_SceneState.timer_06;
             if (--*timer != 0u) {
                 UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010006));
-                GFX_CopyPaletteCapped((u32)(*(u8*)timer));
+                GFX_CopyPaletteCapped((u32)(u8)*timer);
                 break;
             }
             func_801F845C();

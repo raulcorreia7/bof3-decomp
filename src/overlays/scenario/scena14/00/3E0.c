@@ -198,7 +198,14 @@ MATCH void func_801FC074(void) {
     func_801C1630();
 }
 
-INCLUDE_ASM(func_801FC0C8);
+MATCH void func_801FC0C8(void) {
+    EMI_LoaderStreamFamily(7U, 4U, *D_80144908, 0U);
+    g_PartySize = 0;
+    func_801C187C(7U);
+    func_801C187C(4U);
+    func_801C187C(*D_80144908);
+    func_801C1630();
+}
 
 /* Copies the three party character ids (g_BattlePartyBattlers[i].stats.character_id) into D_80144908, calls func_801C1ABC
  * on each, EMI_LoaderStreamFamily(7, 8, 4, 0), g_PartySize = 0, Party_JoinMember(7), func_801C1630(). The body is right but

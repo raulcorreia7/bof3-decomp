@@ -1,4 +1,4 @@
 #include "area140_13.h"
 
-/* resume: best 5 differing (the kept selector andi shapes: `u8 flag; u16 word = flag;` with the sub on the raw register keeps `andi v1,v1,0xFF` but hoists it before the branch where retail keeps it in the bnez delay slot); first mismatch +0x14 (lui v1 vs v0, the load register); next lever: place `word = flag` in the second test's arm so dbr fills the delay slot, then the permuter. */
+/* resume: best 5 differing pure C (first `!` +0x0: lui v0 vs v1, the actor row pointer register; the selector tail is exact with `u16 word = flag` after the range sub and `word & 0xFF == 7`, whose andi fills the bnez delay slot); exact bytes with MATCH_REG(Actor*, work, "v0") but `harmful` is a gated quality metric; next lever: keep the u16 view's andi without flipping the prologue v0/v1 tie. */
 INCLUDE_ASM(func_801F3DAC);

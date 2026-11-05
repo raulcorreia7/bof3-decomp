@@ -173,7 +173,18 @@ INCLUDE_ASM(func_801F802C);
 
 INCLUDE_ASM(func_801F8108);
 
-INCLUDE_ASM(func_801F81F4);
+MATCH void func_801F81F4(u16 arg0) {
+    s32 count;
+    s32 index;
+
+    count = 0x40;
+    do {
+        index = count & 0xFF;
+        count -= 1;
+        D_801FE9EC[index] = D_801FE9EC[index - 1];
+    } while (count & 0xFF);
+    D_801FE9EC[0] = arg0;
+}
 
 INCLUDE_ASM(func_801F823C);
 
@@ -246,14 +257,12 @@ MATCH void func_801F986C(void) {
 
 /* Stores 60 in byte 9 and increments byte 1 of the scratchpad buffer at slots[0x11]. */
 MATCH void func_801F98B0(void) {
-    void** slots;
-    void*  sp_ptr;
+    u8** slots;
 
-    slots            = SP_PTR(void*, 0u);
-    sp_ptr           = slots[0x11];
-    ((u8*)sp_ptr)[9] = 0x3C;
-    sp_ptr           = slots[0x11];
-    ((u8*)sp_ptr)[1]++;
+    slots          = SP_PTR(u8*, 0u);
+    slots[0x11][9] = 0x3C;
+    slots          = SP_PTR(u8*, 0u);
+    slots[0x11][1]++;
 }
 
 INCLUDE_ASM(func_801F98E0);
@@ -266,11 +275,32 @@ INCLUDE_ASM(func_801F9AC0);
 
 INCLUDE_ASM(func_801F9B68);
 
-INCLUDE_ASM(func_801F9C00);
+MATCH void func_801F9C00(void) {
+    Actor* work;
+
+    work          = g_SpadWork;
+    work->x.fixed = 0x270000;
+    work->y.fixed = 0x80000;
+    work->z.fixed = 0x8000000;
+    work->vz      = 0;
+    work->unk_01 += 1;
+    SND_PlayCue(0x204);
+    SND_PlayCue(0x205);
+}
 
 INCLUDE_ASM(func_801F9C58);
 
-INCLUDE_ASM(func_801F9CE0);
+MATCH void func_801F9CE0(void) {
+    Actor* work;
+
+    work          = g_SpadWork;
+    work->x.fixed = 0x190000;
+    work->y.fixed = 0xF0000;
+    work->z.fixed = 0x6000000;
+    work->vz      = 0;
+    work->unk_01 += 1;
+    SND_PlayCue(0x20A);
+}
 
 INCLUDE_ASM(func_801F9D30);
 

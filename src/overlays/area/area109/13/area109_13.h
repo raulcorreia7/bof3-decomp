@@ -6,4 +6,8 @@
 
 #include "overlays/area/world02.h"
 
+extern u8 D_801F2E90[];
+
+s32 func_801F2D04(void);
+
 #endif

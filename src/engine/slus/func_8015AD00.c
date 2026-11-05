@@ -10,6 +10,24 @@ typedef struct PanelPiece {
     u16 uv[4];   /* 0x20 */
 } PanelPiece;
 
+/* One 0x28-byte primitive this function builds at the primitive cursor: a
+ * POLY_FT4, with a halves view over the uv pairs retail stores whole. */
+typedef union PanelQuadPrim {
+    POLY_FT4 ft4;
+
+    struct {
+        u8  pad_00[0x0C];
+        u16 uv0; /* 0x0C */
+        u8  pad_0E[0x06];
+        u16 uv1; /* 0x14 */
+        u8  pad_16[0x06];
+        u16 uv2; /* 0x1C */
+        u8  pad_1E[0x06];
+        u16 uv3; /* 0x24 */
+        u8  pad_26[0x02];
+    } halves;
+} PanelQuadPrim;
+
 /* projects the panel's textured-quad table through the GTE into
  * the primitive list, fills one sort-list row per quad and returns the quad
  * count.
@@ -17,20 +35,21 @@ typedef struct PanelPiece {
 MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     CVECTOR color;
     STACK_PADS(VECTOR, 1); /* FAKE: retail keeps a dead 16-byte VECTOR slot at sp+0x18. */
-    VECTOR      normal;
-    VECTOR      vec;
-    MATRIX      light;
-    MATRIX      m;
-    s32         z;
-    u8          abr;
-    u16         count;
-    u16         tpage;
-    u8*         prim;
-    u8*         p;
-    PanelPiece* piece;
-    u16         otz;
-    u16         vv;
-    s32         i;
+    VECTOR         normal;
+    VECTOR         vec;
+    MATRIX         light;
+    MATRIX         m;
+    s32            z;
+    u8             abr;
+    u16            count;
+    u16            tpage;
+    u8*            prim;
+    u8*            p;
+    PanelPiece*    piece;
+    PanelQuadPrim* quad;
+    u16            otz;
+    u16            vv;
+    s32            i;
 
     vec = D_80149BF0;
     PushMatrix();
@@ -61,7 +80,8 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     i = 0;
     if (count != 0) {
         do {
-            SetPolyFT4((POLY_FT4*)p);
+            quad = (PanelQuadPrim*)p;
+            SetPolyFT4(&quad->ft4);
 
             vv = piece->v[0][0];
             MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
@@ -111,17 +131,17 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x30u) = vv;
             MATCH_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            normal.vx         = piece->n[0];
-            normal.vy         = piece->n[1];
-            normal.vz         = piece->n[2];
-            *(u16*)(p + 0xC)  = piece->uv[0];
-            *(u16*)(p + 0x14) = piece->uv[1];
-            *(u16*)(p + 0x1C) = piece->uv[2];
-            *(u16*)(p + 0x24) = piece->uv[3];
+            normal.vx        = piece->n[0];
+            normal.vy        = piece->n[1];
+            normal.vz        = piece->n[2];
+            quad->halves.uv0 = piece->uv[0];
+            quad->halves.uv1 = piece->uv[1];
+            quad->halves.uv2 = piece->uv[2];
+            quad->halves.uv3 = piece->uv[3];
 
             gte_ldv0(&D_1F800014[0]);
             gte_rtps();
-            gte_stsxy((u32*)(p + 8));
+            gte_stsxy(&quad->ft4.x0);
             gte_stszotz(&z);
             otz           = (u16)z;
             sort_list->z  = otz;
@@ -129,7 +149,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
             gte_ldv0(&D_1F800014[1]);
             gte_rtps();
-            gte_stsxy((u32*)(p + 0x10));
+            gte_stsxy(&quad->ft4.x1);
             gte_stszotz(&z);
             if (sort_list->z < z) {
                 sort_list->z = z;
@@ -137,7 +157,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
             gte_ldv0(&D_1F800014[2]);
             gte_rtps();
-            gte_stsxy((u32*)(p + 0x18));
+            gte_stsxy(&quad->ft4.x2);
             gte_stszotz(&z);
             if (sort_list->z < z) {
                 sort_list->z = z;
@@ -145,7 +165,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
             gte_ldv0(&D_1F800014[3]);
             gte_rtps();
-            gte_stsxy((u32*)(p + 0x20));
+            gte_stsxy(&quad->ft4.x3);
             gte_stszotz(&z);
             if (sort_list->z < z) {
                 sort_list->z = z;
@@ -153,20 +173,20 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
             sort_list->work      = (u8*)g_SpadWork;
             sort_list->primitive = p;
-            *(u8*)(p + 4)        = g_SpadWork->tint.bytes.unk_5D;
-            *(u8*)(p + 5)        = g_SpadWork->tint.bytes.unk_5E;
-            *(u8*)(p + 6)        = g_SpadWork->tint.bytes.unk_5F;
-            if ((*(s8*)(g_SpadWork->range_54.table + 3) & 0x80) != 0) {
+            quad->ft4.r0         = g_SpadWork->tint.bytes.unk_5D;
+            quad->ft4.g0         = g_SpadWork->tint.bytes.unk_5E;
+            quad->ft4.b0         = g_SpadWork->tint.bytes.unk_5F;
+            if ((g_SpadWork->range_54.table[3] & 0x80) != 0) {
                 VectorNormalS(&normal, D_1F800014);
                 color.r  = g_SpadWork->tint.bytes.unk_5D;
                 color.g  = g_SpadWork->tint.bytes.unk_5E;
                 color.b  = g_SpadWork->tint.bytes.unk_5F;
-                color.cd = *(u8*)(p + 7);
-                NormalColorCol(D_1F800014, &color, (CVECTOR*)(p + 4));
+                color.cd = quad->ft4.code;
+                NormalColorCol(D_1F800014, &color, (CVECTOR*)&quad->ft4.r0);
             }
 
-            *(u16*)(p + 0x16) = tpage;
-            *(u16*)(p + 0xE)  = GetClut(piece->clut * 16, 483);
+            quad->ft4.tpage = tpage;
+            quad->ft4.clut  = GetClut(piece->clut * 16, 483);
             SetSemiTrans(p, (abr >> 6) & 1);
 
             i++;

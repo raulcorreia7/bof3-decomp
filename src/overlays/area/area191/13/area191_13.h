@@ -22,6 +22,8 @@ extern u8 D_801F4260[];
 extern u8 D_801F4290[];
 
 /* The game-overlay state bytes the request paths write. */
+extern u8 D_80146874;
+extern u8 D_80146875;
 
 /* The published field work row and the state byte the reset writes. */
 
