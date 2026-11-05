@@ -41,6 +41,9 @@
 #define BATTLE_ENDING_BYTES            ((volatile u8*)&g_BattleMode)
 /* Single fixed-address globals (inline; no symbol binding required). */
 #define BATTLE_GLOBAL_WORD_598C        (*(u32*)&g_GfxPrimCursor)
+/* Party slot the entrance pass is on, and the entrance sub-step byte 0x801462E2. */
+#define BATTLE_PARTY_CURSOR            (((u8*)&D_80140000)[0x62E5])
+#define BATTLE_ENTRANCE_STEP           (((u8*)&D_80140000)[0x62E2])
 #define BATTLE_GLOBAL_BYTE_62F3        (*(u8*)&D_801462F3)
 #define g_GameState                    ((PartyBattler* volatile)g_GameState)
 #define g_SpadWork                     ((PartyBattler*)g_SpadWork)
