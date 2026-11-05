@@ -32,4 +32,6 @@ extern u8 D_80146875;
         ((Actor*)g_CurrentActor)->flags_74 &= ~ACTOR_FLAG_INTERACTION_PENDING; \
     }
 
+s32 func_8019601C();
+
 #endif
