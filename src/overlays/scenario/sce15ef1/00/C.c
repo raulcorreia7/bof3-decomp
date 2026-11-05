@@ -16,7 +16,17 @@ INCLUDE_ASM(func_801D0C48);
 
 INCLUDE_ASM(func_801D0CC0);
 
-INCLUDE_ASM(func_801D0D54);
+MATCH void func_801D0D54(void) {
+    u8 mode;
+
+    func_801D147C(&g_SpadWork->unk_64, (s16)g_SpadWork->unk_2E, 6);
+    mode               = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = mode;
+    if (!(mode & 0xFF)) {
+        g_SpadWork->unk_09 = 0x20;
+        g_SpadWork->unk_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D0DD8);
 
