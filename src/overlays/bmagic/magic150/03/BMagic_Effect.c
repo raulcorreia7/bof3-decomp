@@ -66,7 +66,7 @@ INCLUDE_ASM(func_801EF324);
 INCLUDE_ASM(func_801EF4E0);
 
 MATCH void func_801EF6B0(void) {
-    u8  i;
+    u8   i;
     u16* work;
 
     D_801EFAF4 = D_801EFAB4;
@@ -74,8 +74,8 @@ MATCH void func_801EF6B0(void) {
     do {
         work = (u16*)D_801EFAF4;
         i++;
-        *work  = 0;
-        work  += 4;
+        *work = 0;
+        work += 4;
         D_801EFAF4 = (u8*)work;
     } while (i < 8);
 }

@@ -9,9 +9,9 @@ MATCH void func_801F2D3C(void) {
     index = 0;
     tail  = (s8*)(AREA_WORK + 2);
     do {
-        *row             = 0;
-        tail[-1]         = 0;
-        *tail            = 0;
+        *row     = 0;
+        tail[-1] = 0;
+        *tail    = 0;
         tail += 0x18;
         index += 1;
         row += 0x18;

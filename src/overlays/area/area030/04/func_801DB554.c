@@ -12,7 +12,7 @@ MATCH void func_801DB554(void) {
         limit = g_Actors[D_801E3208].roll_90;
         if (g_FishBestCatch[value] < limit) {
             g_FishBestCatch[value] = (u8)limit;
-            D_801E3214                      = 1;
+            D_801E3214             = 1;
         }
 
         SND_PlayCue(EMI_CUE_ID(1, 2));
