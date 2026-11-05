@@ -475,8 +475,13 @@ MATCH s32 func_801FC690(void) {
     return 0;
 }
 
+/* Tried: call-seq body (Game_SetScriptActive; D_80146876 = 30;
+ * D_80146874 = 7; D_80146875 = 0; return 0). GCC loads the constants
+ * in v0; retail materializes them in v1. Pinning a temp to v1 with
+ * MATCH_REG matches exactly but raises the quality harmful gate, so
+ * it is kept as assembly. First diff: 0x801FC6D4 li v0,30 vs li v1.
+ */
 INCLUDE_ASM(func_801FC6C4);
-
 INCLUDE_ASM(func_801FC704);
 
 INCLUDE_ASM(func_801FC7EC);
