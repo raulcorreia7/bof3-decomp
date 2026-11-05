@@ -22,14 +22,14 @@ MATCH void func_801D6B28(s8 panel_kind) {
         value  = work->pos_x_0C;
         left_x = (value < 0x39) ? 0x39 : ((value >= 0x7A) ? 0x79 : value);
 
-        shown                 = (FishingState*)SP_REF(u8*, 0x44u);
-        work->pos_x_0C        = left_x;
+        shown          = (FishingState*)SP_REF(u8*, 0x44u);
+        work->pos_x_0C = left_x;
 
         value   = shown->cursor_10;
         right_x = (value < 0x41) ? 0x41 : ((value >= 0x95) ? 0x94 : value);
 
-        pair                  = (FishingState*)SP_REF(u8*, 0x44u);
-        shown->cursor_10      = right_x;
+        pair             = (FishingState*)SP_REF(u8*, 0x44u);
+        shown->cursor_10 = right_x;
 
         if ((pair->cursor_10 < pair->pos_x_0C) || (pair->pos_x_0C + 0x20 < pair->cursor_10)) {
             func_801D3244((s16)pair->pos_x_0C, 0xB3, 0x20u, ((pair->cue_index_06 & 7u) << 1), 1u, 1);

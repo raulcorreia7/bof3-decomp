@@ -6,11 +6,11 @@
 MATCH void func_801D3684(void) {
     s32 val;
 
-    val                           = FISHING_STATE->origin_y_30 + 8;
-    FISHING_STATE->origin_y_30    = (u16)val;
+    val                        = FISHING_STATE->origin_y_30 + 8;
+    FISHING_STATE->origin_y_30 = (u16)val;
 
     if ((s16)val >= 0x13) {
-        FISHING_STATE->origin_y_30 = 0x12;
+        FISHING_STATE->origin_y_30      = 0x12;
         FISHING_STATE->handler_index_01 = (u8)(FISHING_STATE->handler_index_01 + 1);
     }
 
