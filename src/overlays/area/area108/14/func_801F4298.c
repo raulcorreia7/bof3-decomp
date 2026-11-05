@@ -1,4 +1,29 @@
 #include "area108_14.h"
 
-/* first differing instruction: beq v1,v0,0x801F42E8 (retail) against 0x801F42E4 (candidate); retail repeats lui+addiu a0 = &D_801448ED in each case and stores the state byte before a0 += 0x63B for SYS_SetFlag, 0x88 bytes against 0x80; switch, pointer local and a pointer bump tried. */
-INCLUDE_ASM(func_801F4298);
+MATCH void func_801F4298(void) {
+    u8* flags;
+    u8  flag;
+
+    g_MessageRequest = 0xFFFF;
+    if (D_801490C7 == 0) {
+        goto block_3;
+    }
+    if (D_801490C7 == 1) {
+        goto block_4;
+    }
+    return;
+block_3:
+    flags  = &D_801448ED;
+    *flags = 3;
+    flags += 0x63B;
+    flag   = 0x1E;
+    goto block_5;
+block_4:
+    flags  = &D_801448ED;
+    *flags = 2;
+    flags += 0x63B;
+    flag   = 0x1F;
+block_5:
+    SYS_SetFlag(flags, flag);
+    D_801448EB = 5;
+}
