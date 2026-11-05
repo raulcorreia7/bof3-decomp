@@ -9,23 +9,23 @@ MATCH void func_800AD2EC(void) {
     u16          label;
     u8           count;
 
-    g_SpadWork[0x29] = 1;
-    g_SpadWork[0x25] = 0x1E;
-    g_SpadWork[0x26] = 0;
-    g_SpadWork[0x24] = 0x80;
-    g_SpadWork[0x27] = 0x1B;
-    g_SpadWork[0x28] = 1;
+    SPAD_WORK_BYTES[0x29] = 1;
+    SPAD_WORK_BYTES[0x25] = 0x1E;
+    SPAD_WORK_BYTES[0x26] = 0;
+    SPAD_WORK_BYTES[0x24] = 0x80;
+    SPAD_WORK_BYTES[0x27] = 0x1B;
+    SPAD_WORK_BYTES[0x28] = 1;
     {
         u8* record;
         u8* other;
 
-        record                 = g_SpadWork;
+        record                 = SPAD_WORK_BYTES;
         record[0x2B]           = 0;
-        other                  = g_SpadWork;
+        other                  = SPAD_WORK_BYTES;
         *(s16*)(record + 0x2C) = 2;
         other[0x2A]            = 0;
     }
-    record                          = g_SpadWork;
+    record                          = SPAD_WORK_BYTES;
     first                           = record[0xB];
     remainder                       = (u8)first % 6;
     *(volatile s32*)(record + 0x3C) = 0;
@@ -34,7 +34,7 @@ MATCH void func_800AD2EC(void) {
     count                           = record[1];
     label                           = D_8014862A;
     record[1]                       = count + 1;
-    ptr                             = g_SpadWork;
+    ptr                             = SPAD_WORK_BYTES;
     *(u16*)(record + 0x30)          = (second / 3 * 16 & 0x1FE0) + (0x30 + label);
     Actor_SelectScript(ptr[0x4B]);
     Area_AddActor();

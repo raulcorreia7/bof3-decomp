@@ -5,7 +5,7 @@ MATCH void func_800C1848(void) {
     u8*           spad;
 
     work         = g_BattleCurrentEnemy;
-    spad         = g_SpadWork;
+    spad         = SPAD_WORK_BYTES;
     work->script = D_800C1E14;
     work->unk_E4 = func_800C1B18;
     work->unk_E8 = D_800C1E20;

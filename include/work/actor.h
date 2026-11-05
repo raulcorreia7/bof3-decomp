@@ -32,7 +32,7 @@
 
 /* The actor's state step in the scratchpad work cell: the byte
  * SYS_DISPATCH_TASK indexes and the battle step tables read and write. */
-#define ACTOR_SET_STEP(step) (g_SpadWork[1] = (step))
+#define ACTOR_SET_STEP(step) (SPAD_WORK_BYTES[1] = (step))
 
 /* Clear the actor's state step: the record starts a new task at state 0. */
 #define ACTOR_CLEAR_STATE()  (g_SpadWork->state_02 = 0)

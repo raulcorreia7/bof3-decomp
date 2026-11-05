@@ -20,7 +20,7 @@ MATCH void func_801D0EDC(void) {
         pond       = ((u8*)g_Actors) + (index * ACTOR_SIZE);
         D_80148650 = *(s32*)(pond + 0x18) + 2;
         D_80148699 = (u8) * (s32*)(pond + 0x1C);
-        g_SpadWork = pond;
+        g_SpadWork = (struct Task*)pond;
     }
     count = 0;
 

@@ -1,8 +1,6 @@
 #ifndef OVERLAY_BATTLE_BATTLE_15_H
 #define OVERLAY_BATTLE_BATTLE_15_H
 
-/* The scratchpad work-area pointer (cell 0x1F800044) is reloaded per access. */
-#define SPAD_WORK_VOLATILE
 #define BATTLE_COMMAND_COUNT_VOLATILE
 
 /* The battle/battle/15 overlay's local declarations: the command, step and damage

@@ -6,7 +6,7 @@ MATCH void func_800C1A00(void) {
     work = g_BattleCurrentEnemy;
     if (work->hp_94 == 0xFFFF) {
         g_BattleActionType = 3;
-        g_SpadWork[4]      = 0;
+        SPAD_WORK_BYTES[4] = 0;
         SND_QueueSelectionFx(0x602);
     }
 }

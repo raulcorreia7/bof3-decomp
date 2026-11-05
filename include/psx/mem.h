@@ -69,13 +69,16 @@
 /* retail addresses */
 /* Scratchpad work pointer at 0x1F800044. Each mode reads it through its own pointee type: a header defines a
  * `g_SpadWork` view macro, `((T *)g_SpadWork)`, for its type. A unit that must re-read the cell
- * after every store defines SPAD_WORK_VOLATILE before its first include. */
+ * after every store defines SPAD_WORK_VOLATILE before its first include. `struct Task` is incomplete: no
+ * member is reachable without a view. SPAD_WORK_BYTES is the byte view for a record with no type. */
 #ifdef SPAD_WORK_VOLATILE
 /* D_1F800044 */
-extern u8* volatile g_SpadWork;
+extern struct Task* volatile g_SpadWork;
 #else
 /* D_1F800044 */
-extern u8* g_SpadWork;
+extern struct Task* g_SpadWork;
 #endif
+
+#define SPAD_WORK_BYTES ((u8*)g_SpadWork)
 
 #endif
