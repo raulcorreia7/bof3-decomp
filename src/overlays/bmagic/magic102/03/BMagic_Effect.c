@@ -1,3 +1,5 @@
+/* Every step re-reads the scratchpad cell. */
+#define SPAD_WORK_VOLATILE
 #include "magic102_03.h"
 
 #if BOF3_USE_ASM
@@ -8,7 +10,22 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC80);
 
-INCLUDE_ASM(func_801EF218);
+/* Counts this effect's steps; at the tick limit it re-arms the counter, steps
+ * the magic, and flips the area camera's vertical offset with the frame parity. */
+MATCH void func_801EF218(void) {
+    PartyBattler* work;
+    u8            tick;
+
+    work                      = g_SpadWork;
+    tick                      = work->word_08.byte.unk_09 + EFFECT_TICK_INCREMENT;
+    work->word_08.byte.unk_09 = tick;
+    if (tick >= EFFECT_TICK_LIMIT) {
+        g_SpadWork->word_08.byte.unk_09 = 0;
+        g_SpadWork->step_01 += 1;
+    }
+    g_AreaCameraOffsetY      = (((g_FrameCount & 1) * 2) - 1) * (g_SpadWork->word_08.byte.unk_09 >> 1);
+    g_AreaCameraRefreshCount = 2;
+}
 
 INCLUDE_ASM(func_801EF2B8);
 
