@@ -36,5 +36,6 @@ extern u8  g_VitalItemIds;
 
 extern u16 D_800E4C1E;
 extern u16 g_GameAreaId;
+extern u16 D_801FE9EC[];
 
 #endif
