@@ -10,6 +10,10 @@ extern MagicTaskFuncs D_801EEC04;
 extern Callback     D_801F0078[];
 
 void func_800AF764(void);
+void func_801EED1C(void);
+void Effect_PlayOnZeroTick(void);
+void func_801EF880(void);
+void func_801EFCF0(void);
 /* The x/y speed pairs the step indexes by the work counter. */
 extern s16 D_801F004C[];
 extern s16 D_801F004E[];

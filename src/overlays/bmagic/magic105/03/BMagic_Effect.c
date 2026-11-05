@@ -4,7 +4,29 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC14);
+MATCH void func_801EEC14(void) {
+    PartyBattler* saved_work;
+    PartyBattler* saved_active;
+    PartyBattler* swap;
+    s32           count;
+
+    Bmagic_DispatchTaskPair(func_801EED1C, Effect_PlayOnZeroTick);
+    count = 0;
+    do {
+        if (BMAGIC_EFFECT_SLOTS[(u8)count].unk_00 & 1) {
+            saved_work   = g_SpadWork;
+            saved_active = D_801EB4E0;
+            swap         = BMAGIC_EFFECT_SLOTS[(u8)count].target.party;
+            g_SpadWork   = MEM_PTR(PartyBattler, &BMAGIC_EFFECT_SLOTS[(u8)count]);
+            D_801EB4E0   = swap;
+            func_801EF880();
+            func_801EFCF0();
+            D_801EB4E0   = saved_active;
+            g_SpadWork   = saved_work;
+        }
+        count += 1;
+    } while ((u8)count < BMAGIC_EFFECT_COUNT);
+}
 
 INCLUDE_ASM(func_801EED1C);
 
