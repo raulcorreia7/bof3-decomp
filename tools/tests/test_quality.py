@@ -148,3 +148,9 @@ def test_a_field_seam_turned_into_an_unk_member_keeps_the_names_count() -> None:
     old = {"src/a/x.c": "MATCH void F(void) {\n    FIELD(u8, p, 0x79u) = 1;\n}\n"}
     new = {"src/a/x.c": "MATCH void F(void) {\n    p->unk_79 = 1;\n}\n"}
     assert quality.ratchet(old, new, {"src/a/x.c"}) == []
+
+
+def test_a_byte_view_turned_into_an_unk_member_keeps_the_names_count() -> None:
+    old = {"src/a/x.c": "MATCH void F(void) {\n    ((u8*)panel)[0x0A] = 1;\n}\n"}
+    new = {"src/a/x.c": "MATCH void F(void) {\n    panel->unk_0A = 1;\n}\n"}
+    assert quality.ratchet(old, new, {"src/a/x.c"}) == []
