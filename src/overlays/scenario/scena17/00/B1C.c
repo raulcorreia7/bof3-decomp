@@ -50,11 +50,11 @@ MATCH void func_801F79AC(void) {
 MATCH void func_801F7A08(void) {
     u8* timer;
 
-    timer  = &D_80146875;
+    timer = &D_80146875;
     *timer -= 1;
     if (*timer == 0) {
         SND_PlayBgm(0x96, 0x64, 0x8);
-        *timer       = 0x1E;
+        *timer = 0x1E;
         D_80146874 += 1;
     }
     func_801F88CC(0, 0x80);
@@ -267,8 +267,8 @@ MATCH void func_801F81F8(void) {
     CallbackWait(1);
     g_AreaDrawFlags = 0x1F;
     SND_PlayBgm(0xA0, 0x64, 0x8);
-    step       = &D_80146874;
-    *step     += 1;
+    step = &D_80146874;
+    *step += 1;
 }
 
 MATCH void func_801F8274(void) {
@@ -287,9 +287,9 @@ MATCH void func_801F833C(void) {
     timer = &D_80146875;
     *timer -= 1;
     if (*timer == 0) {
-        D_80146867   = 0x6E;
+        D_80146867 = 0x6E;
         D_80146874 += 1;
-        *timer       = 0x46;
+        *timer = 0x46;
     }
     func_801F8B10(0x1F4, 0xFF);
 }
