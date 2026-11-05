@@ -20,7 +20,12 @@ MATCH void func_801EED70(void) {
 
 INCLUDE_ASM(func_801EEDB4);
 
-INCLUDE_ASM(func_801EEF10);
+MATCH void func_801EEF10(void) {
+    g_SpadWork->word_08.byte.unk_0B   = rand() & 15;
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
+    g_SpadWork->unk_02++;
+}
 
 INCLUDE_ASM(func_801EEF78);
 
