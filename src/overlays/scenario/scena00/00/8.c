@@ -2425,8 +2425,7 @@ MATCH void func_801FC3A0(void) {
     }
 }
 
-/* The scenario entity-handler table, indexed by byte 0x7A of the entity record.
- */
+/* The scenario entity-handler table, indexed by byte 0x7A of the entity record. */
 static SceneFunc D_801FCA84[] = {(SceneFunc)func_801FC810, (SceneFunc)Scene_ClearParty};
 
 /* func_801FC7D0 */
