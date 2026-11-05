@@ -69,7 +69,7 @@ MATCH void func_801CFC38(void) {
 
 INCLUDE_ASM(func_801CFC7C);
 
-INCLUDE_ASM(func_801CFCF4);
+#include "overlays/plchar/Char_UpdateLinkedFacing.h"
 
 INCLUDE_ASM(func_801CFE14);
 

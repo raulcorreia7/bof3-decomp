@@ -1938,6 +1938,7 @@ Char_RunStepScript_801CF23C = { addr = 0x801CF23C, type = "func", source = "runs
 Char_AdvancePaletteScript = { addr = 0x801CF71C, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801CF84C, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801CF8AC, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801CF8AC in plp034)" }
+Char_UpdateLinkedFacing = { addr = 0x801CFCF4, type = "func", source = "updates the linked actor facing when the character timer expires" }
 Char_StartTurn_801D0094 = { addr = 0x801D0094, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript = { addr = 0x801D0160, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
 
@@ -2034,6 +2035,7 @@ Char_RunStepScript_801CE514 = { addr = 0x801CE514, type = "func", source = "runs
 Char_AdvancePaletteScript = { addr = 0x801CE9F4, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801CEB24, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801CEB84, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801CEB84 in plp349)" }
+Char_UpdateLinkedFacing = { addr = 0x801CEFCC, type = "func", source = "updates the linked actor facing when the character timer expires" }
 Char_StartTurn = { addr = 0x801CF36C, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript = { addr = 0x801CF438, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
 
