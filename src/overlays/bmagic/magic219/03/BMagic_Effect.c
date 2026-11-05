@@ -36,7 +36,22 @@ INCLUDE_ASM(func_801EF3CC);
 
 INCLUDE_ASM(func_801EF530);
 
-INCLUDE_ASM(func_801EF5DC);
+MATCH void func_801EF5DC(void) {
+    u8 temp_v0;
+    u8 temp_v0_2;
+
+    func_8014DAEC();
+    temp_v0 = g_SpadWork->word_08.byte.timer_0A;
+    if (temp_v0 != 0) {
+        g_SpadWork->word_08.byte.timer_0A = temp_v0 - 1;
+    }
+    temp_v0_2                       = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0_2;
+    if (!(temp_v0_2 & 0xFF)) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        Actor_Clear();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
 

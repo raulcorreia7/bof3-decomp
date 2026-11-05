@@ -35,12 +35,47 @@ MATCH void func_801EF0E0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF178);
+MATCH void func_801EF178(void) {
+    s32 var_a0;
+    u8  temp_v0;
 
-INCLUDE_ASM(func_801EF21C);
+    temp_v0                           = g_SpadWork->word_08.byte.timer_0A - 1;
+    g_SpadWork->word_08.byte.timer_0A = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        var_a0 = 0x100;
+        if (g_SpadWork->word_08.byte.unk_0B & 1) {
+            var_a0 = 0x101;
+        }
+        SND_QueueSelectionFx(var_a0);
+        g_SpadWork->word_08.byte.unk_09   = 0;
+        g_SpadWork->word_08.byte.timer_0A = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
+
+MATCH void func_801EF21C(void) {
+    u8 temp_v1;
+
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 8) {
+        g_SpadWork->word_08.byte.timer_0A = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 /* Template: bmagic/magic040 func_801EF114; size 0x6C against retail 0x7C, first difference lbu v0,9(v1) at +0x0C. */
-INCLUDE_ASM(func_801EF27C);
+MATCH void func_801EF27C(void) {
+    u8 temp_v0;
+
+    g_SpadWork->word_08.byte.timer_0A += 1;
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if ((temp_v0 & 0xFF) == 0x10) {
+        g_SpadWork->word_08.byte.timer_0A = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF2F8(void) {
     PartyBattler* work;

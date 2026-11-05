@@ -8,6 +8,23 @@
 #include "work/area_spad.h"
 #include "shared/WorldSpin.h"
 
+/* The spin triangle record of src/overlays/area/area024/14/area024_14.h,
+ * whose fields the shared spin passes read. */
+typedef struct AreaSpin {
+    s32     origin_x;
+    s32     origin_y;
+    s32     origin_z;
+    u8      unk_0C[4];
+    SVECTOR vertex_a;
+    SVECTOR vertex_b;
+    s16     angle_lo;
+    s16     angle_hi;
+    s16     spin_angle;
+    s16     unk_26;
+    s16     scale;
+    s16     fade;
+} AreaSpin;
+
 #define AREA_SPIN_RADIUS     24
 #define AREA_SPIN_PITCH      (RANDOM_MASK(0x7FF) - 0x400)
 #define AREA_SPIN_SCALE_MASK 0x3

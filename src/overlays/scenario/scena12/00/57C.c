@@ -218,7 +218,19 @@ MATCH void func_801FC7D4(void) {
     g_SceneState.state_04 = 1;
 }
 
-INCLUDE_ASM(func_801FC80C);
+MATCH s32 func_801FC80C(s32 arg0) {
+    if ((g_GameAreaId == 0x79) && (SYS_TestFlag(g_SceneFlags, 0) != 0)) {
+        if (arg0 <= 0x160000) {
+            Game_SetScriptActive();
+            D_80146875 = 0x3C;
+            D_80146874 = 2;
+            return 1;
+        }
+        /* Duplicate return node #5. Try simplifying control flow for better match */
+        return 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM(func_801FC890);
 

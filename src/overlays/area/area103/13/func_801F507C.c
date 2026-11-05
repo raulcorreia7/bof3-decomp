@@ -11,7 +11,7 @@ MATCH void func_801F507C(void) {
     }
     func_801F5174(steps >> 2, delta * 4);
     g_SpadWork->unk_09 += 1;
-    if ((u8)g_SpadWork->unk_09 >= 0x19U) {
+    if (g_SpadWork->unk_09 >= 0x19U) {
         g_SpadWork->unk_09 = 0;
         g_SpadWork->state_02 += 1;
     }

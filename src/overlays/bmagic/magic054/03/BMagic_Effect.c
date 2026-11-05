@@ -13,7 +13,12 @@ MATCH void func_801EEC2C(void) {
 
 INCLUDE_ASM(func_801EEC98);
 
-INCLUDE_ASM(func_801EF05C);
+MATCH void func_801EF05C(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        func_800A9820(g_BattleTargetSelector);
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 #include "shared/Effect_StartPlaying.h"
 
@@ -39,7 +44,18 @@ MATCH void func_801EF3A4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF43C);
+MATCH void func_801EF43C(void) {
+    u8 temp_v0;
+
+    func_8014D978();
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->unk_18 = 0x60;
+        g_SpadWork->unk_1C = -0x80;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF4A8(void) {
     PartyBattler* work;

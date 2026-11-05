@@ -32,6 +32,7 @@ extern Callback D_801F5828[];
 extern Callback D_801F5838[];
 extern s32      D_801F5848[];
 extern s32      D_801F5858[];
+extern s32      D_801F5818;
 
 /* The shared work-area reset; the executable map has no name for it yet. */
 

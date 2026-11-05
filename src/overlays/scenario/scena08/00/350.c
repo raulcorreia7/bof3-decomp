@@ -390,7 +390,29 @@ MATCH void func_801FE12C(void) {
     } while ((u32)(index & 0xFF) < 0x20U);
 }
 
-INCLUDE_ASM(func_801FE170);
+MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
+    if ((g_GameAreaId == 1) && (arg0 == 0x338000) && ((u32)((arg1 >> 0x10) - 0x27) < 2U)) {
+        if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
+            Game_SetScriptActive();
+            D_80146874 = 4;
+            D_80146875 = 5;
+            return 1;
+        }
+        if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
+            Game_SetScriptActive();
+            *g_ScriptVars = 0;
+            D_80146874    = 5;
+            D_80146875    = 0;
+            return 1;
+        }
+        goto block_7;
+    }
+block_7:
+    if ((g_GameAreaId == 0x46) && (arg0 == 0x388000) && ((u32)((arg1 >> 0x10) - 0x2E) < 4U)) {
+        SYS_SetFlag(g_SceneFlags, 0x16U);
+    }
+    return 0;
+}
 
 INCLUDE_ASM(func_801FE2A0);
 

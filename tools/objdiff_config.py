@@ -34,6 +34,7 @@ from pathlib import Path
 from typing import Any
 
 import quality
+from bof3.link import symbols
 from bof3.link.graph import source_object
 from bof3.resolve import load_target_manifests
 from bof3.status.claims import source_text
@@ -78,16 +79,26 @@ class Project:
             raise SystemExit(f"{argv[0]} failed: {detail}")
         return proc.stdout
 
-    def assemble(self, sources: list[Path], output: Path) -> Path:
-        """Assemble one unit's split asm, reusing an object that is already current."""
+    def assemble(
+        self,
+        sources: list[Path],
+        output: Path,
+        readable: dict[str, int] | None = None,
+    ) -> Path:
+        """Assemble one unit's split asm, reusing an object that is already current.
+
+        ``readable`` maps the readable data names the image links against to their
+        addresses; a reference to one resolves as the compiled base's constant does.
+        """
         output.parent.mkdir(parents=True, exist_ok=True)
+        inputs = [*sources, self.root / symbols.TABLE]
         if output.is_file() and all(
-            source.stat().st_mtime <= output.stat().st_mtime for source in sources
+            source.stat().st_mtime <= output.stat().st_mtime for source in inputs
         ):
             return output
         source = self._combine(sources, output)
         self._assemble(source, output)
-        self._resolve_data(source, output)
+        self._resolve_data(source, output, readable or {})
         self._strip(source, output)
         output.touch()
         return output
@@ -105,8 +116,10 @@ class Project:
         argv.extend(["-o", str(output), str(source)])
         self.command(argv)
 
-    def _resolve_data(self, source: Path, output: Path) -> None:
-        """Resolve address-named data relocations so a base constant can match."""
+    def _resolve_data(
+        self, source: Path, output: Path, readable: dict[str, int]
+    ) -> None:
+        """Resolve data relocations to their addresses so a base constant can match."""
         definitions = []
         for line in self.command([self.tool("nm"), "-u", str(output)]).splitlines():
             if not line.split():
@@ -115,6 +128,8 @@ class Project:
             match = self.data_address.match(name)
             if match is not None:
                 definitions.append(f"--defsym={name}=0x{match.group(1)}")
+            elif name in readable:
+                definitions.append(f"--defsym={name}=0x{readable[name]:08X}")
         if definitions:
             self._assemble(source, output, tuple(definitions))
 
@@ -332,6 +347,7 @@ def _game_units(
     target_id = str(target["id"])
     source_dir = project.root / str(target["source_dir"])
     sources = sorted(source_dir.glob("*.c"))
+    readable = _readable_data(project.root, target_id)
     asm_dir = project.root / project.cfg["asm"] / target_id
     if not asm_dir.is_dir() and any(
         project.func_address.match(source.stem) for source in sources
@@ -362,7 +378,7 @@ def _game_units(
         if not broken and category != str(project.cfg["hand_category"]):
             base, unlifted = project.report_base(base)
         target_object = project.path("target_objects") / relative.with_suffix(".o")
-        project.assemble(asm, target_object)
+        project.assemble(asm, target_object, readable)
         complete = (
             project.hand_complete(source)
             if category == str(project.cfg["hand_category"])
@@ -436,6 +452,21 @@ def _unlifted_units(
             )
         )
     return units
+
+
+def _readable_data(root: Path, target: str) -> dict[str, int]:
+    """Return ``name -> address`` for the readable data rows an image links against.
+
+    A name with a row of a function type is left to the link: a call against an absolute
+    address would not encode as one. A name whose owners give two addresses is left out.
+    """
+    table = symbols.load(root)
+    found: dict[str, set[int]] = {}
+    for owner in symbols.link_owners(root, target):
+        for entry in table.get(owner, ()):
+            if entry.type != "func" and symbols.address_of(entry.name) is None:
+                found.setdefault(entry.name, set()).add(entry.addr)
+    return {name: addrs.pop() for name, addrs in found.items() if len(addrs) == 1}
 
 
 def _sdk_source(row: dict[str, Any], payload: bytes, output: Path) -> Path:

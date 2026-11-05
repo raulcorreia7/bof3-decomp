@@ -36,9 +36,34 @@ MATCH void func_801EF034(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF0C4);
+MATCH void func_801EF0C4(void) {
+    s32 temp_v0;
 
-INCLUDE_ASM(func_801EF15C);
+    temp_v0            = g_SpadWork->unk_0C - 1;
+    g_SpadWork->unk_0C = temp_v0;
+    g_SpadWork->unk_2E.half -= temp_v0;
+    if (g_SpadWork->unk_0C == 0) {
+        if (g_SpadWork->word_08.byte.unk_0B == 0) {
+            SND_QueueSelectionFx(0x103);
+            g_SpadWork->unk_02 += 1;
+            return;
+        }
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
+
+MATCH void func_801EF15C(void) {
+    u8 temp_v1;
+
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x10) {
+        func_801F0274();
+        g_SpadWork->word_08.byte.unk_0B = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF1D0(void) {
     u8 value;

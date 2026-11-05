@@ -44,13 +44,22 @@ extern u16 D_801F6216;
 
 /* The camera and view steps the handlers enter. */
 void func_801F32A0(s32 value);
-void func_801F37C4(void);
-void func_801F3830(s32 arg0, s32 arg1);
-void func_801F3CA8(void);
-s32  func_801F5BCC(s32);
+
+/* The scaled grid position and size the step checks compare against. */
+extern u8  D_80147C29;
+extern s32 D_80147C2C;
+extern s32 D_80147C30;
+extern s32 D_80147C54;
+extern s32 D_80147C58;
+extern u8  D_80147C90;
+void       func_801F37C4(void);
+void       func_801F3830(s32 arg0, s32 arg1);
+void       func_801F3CA8(void);
+s32        func_801F5BCC(s32);
+s32        func_801F5D1C(void);
 /* The overlay's companion steps the wrappers enter. */
-void func_801F5D98(void);
-void func_801F5F28(void);
+void       func_801F5D98(void);
+void       func_801F5F28(void);
 
 extern u8 D_80147AAC[];
 

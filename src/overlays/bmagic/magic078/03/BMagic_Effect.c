@@ -16,7 +16,17 @@ MATCH void func_801EEEE4(void) {
 
 INCLUDE_ASM(func_801EEF28);
 
-INCLUDE_ASM(func_801EF08C);
+MATCH void func_801EF08C(void) {
+    u8 temp_a1;
+
+    temp_a1 = g_SpadWork->word_08.byte.unk_09;
+    if ((temp_a1 & 0xFF) == 0xC) {
+        g_SpadWork->word_08.byte.timer_0A = 0xF;
+        g_SpadWork->unk_02 += 1;
+        return;
+    }
+    g_SpadWork->word_08.byte.unk_09 = temp_a1 + 1;
+}
 
 #include "overlays/bmagic/Effect_CountDownAndStep.h"
 
@@ -43,8 +53,6 @@ INCLUDE_ASM(func_801EF318);
 
 INCLUDE_ASM(func_801EFE14);
 
-/* Follows BMAGIC_PROJECT_ACTOR_MATRIX (bmagic.h), but the work pointer lives in $a1 and a
- * type-13 branch loads a word into the rotation before the projection. */
 MATCH void func_801EFEB8(void) {
     PartyBattler* work;
     SVECTOR       pos;
@@ -74,9 +82,26 @@ INCLUDE_ASM(func_801EFF84);
 
 INCLUDE_ASM(func_801F00A0);
 
-INCLUDE_ASM(func_801F00EC);
+MATCH void func_801F00EC(void) {
+    u8 temp_a0;
 
-INCLUDE_ASM(func_801F014C);
+    temp_a0 = g_SpadWork->word_08.byte.unk_09;
+    if ((temp_a0 & 0xFF) == 8) {
+        SND_QueueSelectionFx(0x101);
+        g_SpadWork->unk_02 += 1;
+        return;
+    }
+    g_SpadWork->word_08.byte.unk_09 = temp_a0 + 1;
+}
+
+MATCH void func_801F014C(void) {
+    func_800AF2B4(D_801EB4E0, 0x30);
+    g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E + 0x10;
+    if (func_800AF5FC(D_801EB4E0, 0x1C000) != 0) {
+        g_SpadWork->word_08.byte.timer_0A = 0x1E;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F01D0(void) {
     PartyBattler* work;

@@ -105,6 +105,27 @@ def test_a_function_that_gains_placeholders_fails_the_names_ratchet() -> None:
     assert quality.ratchet(new, old, {"src/a/x.c"}) == []
 
 
+def test_one_address_name_in_two_images_is_two_functions() -> None:
+    old = {
+        "src/a/x.c": "MATCH void func_801EF27C(void) { a = D_801EF000; }\n",
+        "src/b/x.c": "INCLUDE_ASM(func_801EF27C);\n",
+    }
+    new = {
+        "src/a/x.c": old["src/a/x.c"],
+        "src/b/x.c": "MATCH void func_801EF27C(void) { a = D_801EF000; b = unk_1C; }\n",
+    }
+    assert quality.ratchet(old, new, {"src/a/x.c", "src/b/x.c"}) == []
+
+
+def test_a_moved_body_that_gains_placeholders_fails_the_names_ratchet() -> None:
+    old = {"src/a/x.c": "MATCH void F(void) { a = D_801EF000; }\n", "src/a/F.h": ""}
+    new = {
+        "src/a/x.c": "",
+        "src/a/F.h": "MATCH void F(void) { a = D_801EF000; b = unk_1C; }\n",
+    }
+    assert quality.ratchet(old, new, {"src/a/x.c", "src/a/F.h"}) == ["F: names 1 -> 2"]
+
+
 def test_a_new_match_is_exempt_from_addr_and_names() -> None:
     old = {"src/a/x.c": "MATCH void F(void) { a = 1; }\nINCLUDE_ASM(func_801EEC20);\n"}
     new = {

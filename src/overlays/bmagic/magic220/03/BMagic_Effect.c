@@ -20,7 +20,19 @@ INCLUDE_ASM(func_801EEFBC);
 
 INCLUDE_ASM(func_801EF078);
 
-INCLUDE_ASM(func_801EF1F4);
+MATCH void func_801EF1F4(void) {
+    u8 temp_v0;
+
+    func_8014DAEC();
+    g_SpadWork->word_08.byte.unk_0B += 0xC;
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->word_08.byte.unk_09   = 0x1E;
+        g_SpadWork->word_08.byte.timer_0A = 3;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF294);
 
@@ -34,7 +46,18 @@ INCLUDE_ASM(func_801EF6B8);
 
 #include "overlays/bmagic/Effect_StepWhileTickUnderThree.h"
 
-INCLUDE_ASM(func_801EF8CC);
+MATCH void func_801EF8CC(void) {
+    s8 temp_v0;
+
+    temp_v0 = (s8)g_SpadWork->unk_5D;
+    if (temp_v0 != 0) {
+        g_SpadWork->unk_5D = temp_v0 - 2;
+    }
+    if (func_8014DAEC() & 0xFF) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
 
