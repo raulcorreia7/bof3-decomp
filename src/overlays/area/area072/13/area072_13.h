@@ -8,6 +8,6 @@
 
 void Area_SetCellCode(s16 column, s16 row, u8 code);
 
-s32 func_801F2C04();
+void func_801F2C04(void);
 
 #endif
