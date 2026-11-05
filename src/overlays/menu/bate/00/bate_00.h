@@ -84,9 +84,6 @@ extern u8            D_801D8EE1;
 extern u8            D_801D8EE2;
 extern u8            D_801D8EE3;
 extern u8            D_801D8EE4;
-extern u8 D_801D8E20[];
-extern u8 D_801D8DD4[];
-extern MenuSpriteRect D_801D8D28[];
 
 void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
