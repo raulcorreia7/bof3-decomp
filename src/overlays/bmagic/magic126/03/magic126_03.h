@@ -22,5 +22,10 @@ extern Callback D_801F1268[];
 extern u8       D_801F12BC[];
 void            func_801F11AC(void);
 void            func_801F0ED0(void);
+void            func_801F091C(void);
+
+void      func_801EECE4(void);
+void      Effect_PlayOnZeroTick(void);
+extern u8 D_801F12D8[];
 
 #endif
