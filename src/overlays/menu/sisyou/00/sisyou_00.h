@@ -52,9 +52,6 @@
 #define MASTER_MENU_TEXT_X            27
 #define MASTER_MENU_TEXT_Y            19
 
-/* Retail reads the status halfword at +0x0C of a party record as a word. */
-#define STATUS_WORD(record)           (*(u32*)&(record)->status)
-
 /* The payload prologue at 0x801D0C00: the type-0 EMI loader compares the
  * first word with the archive TOC's cached first word; the rest are the three
  * sprintf formats the shop panels pass as D_801D0C04/D_801D0C08/D_801D0C10. */
