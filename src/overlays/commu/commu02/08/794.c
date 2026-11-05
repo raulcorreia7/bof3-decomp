@@ -97,7 +97,18 @@ INCLUDE_ASM(func_801D2078);
 
 INCLUDE_ASM(func_801D21FC);
 
-INCLUDE_ASM(func_801D22A4);
+MATCH void func_801D22A4(void) {
+    u8* state = &g_GameStateIndex;
+
+    if (*state != 2) {
+        Party_AddZenny(D_801DB07C, 0);
+        Message_StartAreaMessage(0x75);
+        D_801DB07C = 0;
+        *state     = 2;
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+}
 
 INCLUDE_ASM(func_801D2320);
 
