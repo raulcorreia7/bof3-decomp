@@ -12,7 +12,7 @@ MATCH void func_8019D800(void) {
     u16           a;
     u16           b;
 
-    dst   = MEM_PTR(u16, 0x800E4800u);
+    dst   = MEM_PTR(u16, AREA_WORK);
     count = 0;
     work  = MEM_PTR(u16, 0x800E4804u);
     src   = (s16*)g_Task->script;

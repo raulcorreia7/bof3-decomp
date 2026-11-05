@@ -7,7 +7,7 @@
 
 #include "overlays/area/world00.h"
 
-#define WORLD00_AREA024_WORK_BASE      MEM_PTR(volatile AreaSprite, 0x800E4800u)
+#define WORLD00_AREA024_WORK_BASE      MEM_PTR(volatile AreaSprite, AREA_WORK)
 #define WORLD00_AREA024_SPIN_WORK_BASE MEM_PTR(u8, 0x800E5000u)
 #define WORLD00_AREA024_STATE_BASE     MEM_PTR(volatile s16, 0x800E4940u)
 #define WORLD00_AREA024_STATE_OFFSET   MEM_PTR(volatile s16, 0x800E4944u)

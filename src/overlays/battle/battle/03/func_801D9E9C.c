@@ -26,7 +26,7 @@ NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4)
     val5 = arg2;
     val6 = arg3;
     SetPolyFT4(val7);
-    val7->tpage = GetTPage(0, 0, 960, 0);
+    val7->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     val2        = 0xB0;
     if (val8 == 0) {
         val2 = 0xE0;
@@ -63,7 +63,7 @@ NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4)
     GFX_AddPrim(1U, 0x28U);
     val7 = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(val7);
-    val7->tpage = GetTPage(0, 0, 960, 0);
+    val7->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     val7->clut  = GetClut(176, 480);
     val7->r0    = 0x80;
     val7->g0    = 0x80;

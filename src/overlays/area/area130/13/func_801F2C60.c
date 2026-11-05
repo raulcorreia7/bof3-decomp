@@ -4,7 +4,7 @@ MATCH void func_801F2C60(void) {
     s32 var_s0;
     s32 var_s1;
 
-    var_s1 = 0x800E4800;
+    var_s1 = AREA_WORK;
     var_s0 = 0;
     do {
         Area_InitSpin(var_s1);

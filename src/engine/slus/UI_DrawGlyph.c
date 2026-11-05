@@ -22,7 +22,7 @@ NON_MATCHING void UI_DrawGlyph(s32 color, u8* text) {
         val2 = 0xB;
     }
     if (*val0 != STRING_SPACE) {
-        FIELD(u16, g_GfxPrimCursor, 0x16u) = GetTPage(0, 1, 960, 0);
+        FIELD(u16, g_GfxPrimCursor, 0x16u) = GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y);
         FIELD(s8, g_GfxPrimCursor, 0xCu)   = (s8)(((*val0 - '0') % 31) * 8);
         FIELD(s8, g_GfxPrimCursor, 0xDu)   = (s8)((((*val0 - '0') / 31) * 0xC) + 0x48);
         FIELD(s8, g_GfxPrimCursor, 0x14u)  = (s8)(val1 + (((*val0 - '0') % 31) * 8));

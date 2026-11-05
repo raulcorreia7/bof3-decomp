@@ -232,7 +232,7 @@ MATCH void func_801F2D3C(void) {
 MATCH void func_801F2F5C(void) {
     u8 i;
 
-    D_801F3E00 = MEM_PTR(AreaSlotWork, 0x800E4800u);
+    D_801F3E00 = MEM_PTR(AreaSlotWork, AREA_WORK);
     i          = 0u;
     do {
         D_801F3E00->unk_00[0] = 0u;
@@ -254,7 +254,7 @@ MATCH void func_801F2FB0(void* slot) {
 MATCH AreaSlotWork* func_801F3004(void) {
     u8 i;
 
-    D_801F3E00 = MEM_PTR(AreaSlotWork, 0x800E4800u);
+    D_801F3E00 = MEM_PTR(AreaSlotWork, AREA_WORK);
     i          = 0u;
     do {
         if (D_801F3E00->unk_00[0] != 0u) {
@@ -274,10 +274,10 @@ MATCH void func_801F3060(void) {
     s16 scale;
 
     Area_SetCameraMatrix(scratch);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
     GFX_AddPrim(3u, 0x0Cu);
 
-    D_801F3E00 = MEM_PTR(AreaSlotWork, 0x800E4800u);
+    D_801F3E00 = MEM_PTR(AreaSlotWork, AREA_WORK);
     i          = 0u;
     do {
         if (D_801F3E00->unk_00[0] != 0u) {
@@ -314,7 +314,7 @@ MATCH void func_801F318C(s16 radius) {
     s32          angle = 65408;
     s8           i     = 0;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, 960, 0) & HALF_MASK, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
     GFX_AddPrim(3u, 0x0Cu);
     Area_SetCameraMatrix(scratch);
 

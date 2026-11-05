@@ -4,7 +4,7 @@ MATCH void func_801F30E4(void) {
     s32 i;
     s8* p;
 
-    p = (s8*)0x800E4800u;
+    p = (s8*)AREA_WORK;
     i = 0;
     do {
         *p = 0;

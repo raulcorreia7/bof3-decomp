@@ -11,7 +11,7 @@ MATCH void Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot) {
     s32 panel_y;
     s32 new_var;
 
-    GFX_AddDrawMode(GetTPage(0, 0, 960, 0));
+    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     new_var = (s16)(y + 2);
     index   = slot - 3;
     /* FAKE: retail reads D_80144952 as s8. */

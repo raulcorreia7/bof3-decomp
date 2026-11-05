@@ -3,7 +3,7 @@
 MATCH void func_801F2FC8(void) {
     u8 i;
 
-    D_801F63EC = MEM_PTR(u8, 0x800E4800u);
+    D_801F63EC = MEM_PTR(u8, AREA_WORK);
     i          = 0u;
     do {
         func_801F2F1C(D_801F63EC);

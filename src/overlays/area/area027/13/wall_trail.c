@@ -268,7 +268,7 @@ MATCH void func_801F2C74(void) {
     s32* dst;
     s16  angle;
 
-    dst = MEM_PTR(s32, 0x800E4800u);
+    dst = MEM_PTR(s32, AREA_WORK);
     i   = 0;
     do {
         dst[0]          = 0x20000;
@@ -298,7 +298,7 @@ MATCH void func_801F2D5C(void) {
     u16 y;
     u8  v;
 
-    arg   = MEM_PTR(s32, 0x800E4800u);
+    arg   = MEM_PTR(s32, AREA_WORK);
     outer = 0;
     fld   = MEM_PTR(volatile s32, 0x800E4814u);
     do {

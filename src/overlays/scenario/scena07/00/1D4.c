@@ -279,7 +279,7 @@ INCLUDE_ASM(func_801F8764);
 MATCH void func_801F8804(u8 shade) {
     TILE* tile;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, 960, 0), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
     GFX_AddPrim(1, 0x0C);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);

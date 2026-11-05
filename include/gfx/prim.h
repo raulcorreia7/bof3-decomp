@@ -37,6 +37,10 @@
 /* The low nibble of a sprite cell's size byte indexes g_SpriteSizes. */
 #define GFX_SPRITE_SIZE_MASK         0x0F
 
+/* The texture page the 4-bit font sheets load into (@source: wiki:systems/rendering). */
+#define FONT_TPAGE_X                 960
+#define FONT_TPAGE_Y                 0
+
 /* Color packing. */
 #define PSX_COLOR_R(c)               ((u16)(c) & 0x1Fu)
 #define PSX_COLOR_G(c)               (((u16)(c) >> 5) & 0x1Fu)

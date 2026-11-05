@@ -27,7 +27,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s1 = y;
     var_s0 = slot;
     var_s4 = var_s0 - 3;
-    GFX_AddDrawMode(GetTPage(0, 0, 960, 0) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     var_s0 = var_s2 + 4;
     var_s0 <<= 0x10;
     var_s0     = var_s0 >> 0x10;
@@ -39,7 +39,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     func_801D9C80((s16)var_s0, (s16)(var_s1 + 8), 8U, 1U);
     func_801D9AB4((s16)var_s0, (s16)(var_s1 + 6), 2, 1);
     func_801D9AB4((s16)var_s0, (s16)(var_s1 + 0x19), 3, 1);
-    GFX_AddDrawMode(GetTPage(0, 1, 960, 0) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     var_s0 = var_s2 << 0x10;
     var_s0 = (s32)(s16)var_s2;
     func_801D9C80((s16)var_s0, (s16)(var_s1 + 2), 8U, 0U);

@@ -5,7 +5,7 @@
 MATCH void func_801D99AC(s16 x, s16 y, u8 template_index) {
     TILE* tile;
 
-    GFX_AddDrawMode(GetTPage(0, 2, 960, 0));
+    GFX_AddDrawMode(GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     tile->x0        = x;

@@ -3,7 +3,7 @@
 MATCH void func_801DA5A8(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b) {
     BattleSpritePrimitive* primitive;
 
-    GFX_AddDrawMode(GetTPage(0, 1, 960, 0));
+    GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y));
     primitive = (BattleSpritePrimitive*)g_GfxPrimCursor;
     SetLineF2((LINE_F2*)primitive);
     setRGB0(primitive, r, g, b);
