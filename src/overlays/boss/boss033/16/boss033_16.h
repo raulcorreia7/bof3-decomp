@@ -8,6 +8,8 @@
 #include "overlays/battle/battle.h"
 
 extern volatile u8 g_BattleActingBattler;
+extern s32         D_80145EC4;
+extern s8          D_80146875;
 extern u8          D_800C2744[];
 extern u16         D_800C2750[];
 extern Callback    D_800C275C[];
