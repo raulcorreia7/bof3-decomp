@@ -116,7 +116,7 @@ MATCH void func_801F6E48(void) {
     projection.vy = ((origin[1] + SPAD_ROW->y.fixed) >> 9) - 0x4000;
     projection.vz = -(origin[2] + SPAD_ROW->z.part.integer) / 2;
 
-    work_cell->projected = RotTransPers(&projection, (long*)((u8*)poly + 8), &depth, &flag);
+    work_cell->projected = RotTransPers(&projection, (long*)&poly->x0, &depth, &flag);
 
     y           = poly->y0;
     x           = poly->x0;
@@ -964,7 +964,7 @@ MATCH void func_801F8D90(void) {
     projection.vy = ((origin[1] + SPAD_ROW->y.fixed) >> 9) - 0x4000;
     projection.vz = -(origin[2] + SPAD_ROW->z.part.integer) / 2;
 
-    work_cell->projected = RotTransPers(&projection, (long*)((u8*)poly + 8), &depth, &flag);
+    work_cell->projected = RotTransPers(&projection, (long*)&poly->x0, &depth, &flag);
 
     poly->x1 = poly->x0 + 8;
     poly->x0 = poly->x0 - 8;
@@ -978,7 +978,7 @@ MATCH void func_801F8D90(void) {
     projection.vy = ((origin[1] + SPAD_ROW->y.fixed) >> 9) - 0x4000;
     projection.vz = -(origin[2] + SPAD_ROW->z.part.integer) / 2;
 
-    work_cell->projected = RotTransPers(&projection, (long*)((u8*)poly + 0x18), &depth, &flag);
+    work_cell->projected = RotTransPers(&projection, (long*)&poly->x2, &depth, &flag);
 
     poly->x3   = poly->x2 + 8;
     poly->x2   = poly->x2 - 8;
