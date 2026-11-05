@@ -4,13 +4,13 @@
  * and integrates the object's three velocity components into its three
  * position accumulators. */
 MATCH void func_801E0394(void) {
-    u8* spad;
+    FishingState* work;
 
     if (g_SpadWork->unk_09 != 0) {
         g_SpadWork->unk_09 = (u8)(g_SpadWork->unk_09 - 1u);
-        spad               = (u8*)g_SpadWork;
-        *(s32*)(spad + 0x34) += *(s32*)(spad + 0x0C);
-        *(s32*)(spad + 0x38) += *(s32*)(spad + 0x10);
-        *(u16*)(spad + 0x3E) = (u16)(*(u16*)(spad + 0x3E) + *(s32*)(spad + 0x14));
+        work               = FISHING_STATE;
+        work->motion_34.unk_34 += work->pos_x_0C;
+        work->y_38.pos_y       += work->cursor_10;
+        *(u16*)((u8*)work + 0x3E) = (u16)(*(u16*)((u8*)work + 0x3E) + work->step_14);
     }
 }
