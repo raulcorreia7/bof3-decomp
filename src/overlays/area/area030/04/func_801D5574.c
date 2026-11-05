@@ -13,7 +13,8 @@ MATCH void func_801D5574(void) {
 
     FISHING_STATE->step_timer_09 += 1;
     if (FISHING_STATE->saved_index_0B == 0) {
-        func_801D9534(0x14, (0x12 - FISHING_STATE->step_timer_09 * 0x10) & 0xFFFE, 0x118, 0x13, 0);
+        func_801D9534(MENU_HEADER_X, (0x12 - FISHING_STATE->step_timer_09 * 0x10) & 0xFFFE, MENU_HEADER_WIDTH,
+                      MENU_HEADER_HEIGHT, 0);
         y      = 0x28;
         mask   = 0;
         t      = FISHING_STATE->step_timer_09 * 3;
@@ -22,7 +23,7 @@ MATCH void func_801D5574(void) {
         offset += 0x58;
         offset &= HALF_MASK;
     } else {
-        func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+        func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         mask = 0;
         if (D_80145E93[0] >= 3) {
             mask = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;

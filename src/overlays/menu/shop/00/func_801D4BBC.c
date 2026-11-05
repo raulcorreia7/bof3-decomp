@@ -5,7 +5,7 @@ MATCH void func_801D4BBC(void) {
     u8  count;
     u8  flag;
 
-    Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     WinDrawCueText(28, 22, D_801E60EC + 0x85);
     func_801DDFB0(0x62, 0x4C, D_801E60F8, LOBU(g_SaveCardPort), 1);
     CardAccessFile(0, 0, 0, 0, 0);

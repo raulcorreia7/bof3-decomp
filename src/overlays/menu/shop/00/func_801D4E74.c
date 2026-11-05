@@ -9,7 +9,7 @@ MATCH void func_801D4E74(void) {
     u8  prev;
     u8  index;
 
-    Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     WinDrawCueText(28, 22, 0x9D);
     SAVE_DrawSlots(0x20, 0x30, 1);
     buttons = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));

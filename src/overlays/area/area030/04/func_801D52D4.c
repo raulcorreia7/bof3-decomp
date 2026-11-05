@@ -7,7 +7,7 @@ MATCH void func_801D52D4(void) {
     FishingState* stepped;
     u32           mask;
 
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 
     mask = 0;
     if (D_80145E93[0] >= 3) {

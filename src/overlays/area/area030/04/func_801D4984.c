@@ -22,7 +22,7 @@ MATCH void func_801D4984(void) {
     }
     func_801E1320(0xB0, FISHING_STATE->step_timer_09 * 0x1E + 0x9C);
     func_801E162C(8, FISHING_STATE->step_timer_09 * 0x1E + 0x94, 0xFFFF);
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;
     if (D_80145E93[0] >= 3u) {
         mask = BIT(FISHING_STATE->cue_index_06) & BYTE_MASK;

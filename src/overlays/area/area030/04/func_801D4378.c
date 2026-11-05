@@ -18,10 +18,11 @@ MATCH void func_801D4378(void) {
         }
     }
     if (FISHING_STATE->saved_index_0B == 0) {
-        func_801D9534(0x14, (0x12 - FISHING_STATE->step_timer_09 * 0x10) & 0xFFFE, 0x118, 0x13, 0);
+        func_801D9534(MENU_HEADER_X, (0x12 - FISHING_STATE->step_timer_09 * 0x10) & 0xFFFE, MENU_HEADER_WIDTH,
+                      MENU_HEADER_HEIGHT, 0);
         func_801D7C10((u16)(FISHING_STATE->step_timer_09 * 0x2D + 0x58), 0x28, 0);
     } else {
-        func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+        func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         mask = 0;
         if (D_80145E93[0] >= 3) {
             mask = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;

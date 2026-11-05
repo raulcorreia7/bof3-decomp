@@ -31,6 +31,6 @@ MATCH void func_801DA168(void) {
 
     Menu_DrawCursorSprite(0x70, (0x82 - FISHING_STATE->cue_index_06 * 0x10) & 0xFFFE, 0);
     func_801E16DC();
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_DrawText(0x1D, 0x15, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_80010080));
 }

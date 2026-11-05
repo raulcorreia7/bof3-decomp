@@ -6,7 +6,7 @@ MATCH void func_801D4CF0(void) {
 
     counter = &D_80148654;
     func_801DDFB0(0x62 + *counter * 0x30, 0x4C, D_801E60F8, LOBU(g_SaveCardPort), 1);
-    Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     count    = *counter + 1;
     *counter = count;
     if (count == 4) {

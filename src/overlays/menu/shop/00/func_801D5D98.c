@@ -8,7 +8,7 @@ MATCH void func_801D5D98(void) {
     u8  count;
     u8* panel_state;
 
-    Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     panel_state  = &D_80148652;
     *panel_state = 0;
     if (D_801E60F0 == 2 || D_8014865C == -2) {

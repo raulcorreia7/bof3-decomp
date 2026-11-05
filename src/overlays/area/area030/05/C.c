@@ -36,7 +36,7 @@ MATCH void func_800F500C(void) {
 
 MATCH void func_800F5048(void) {
     D_800F71F0[3 + s_Step]();
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     func_800F606C(0);
     func_800F6730();
     func_800F5E44();
@@ -112,7 +112,7 @@ MATCH void func_800F51BC(void) {
         D_800F724C += 1;
     }
 tail:
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     if (((s8)s_ListCursor & 0xC0) == 0) {
         WinDrawCueText(0x18, 0x14,
                        Item_GetDescription(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3],
@@ -182,7 +182,7 @@ MATCH void func_800F550C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         s_Step = s_Step - 1;
     }
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_DrawText(0x18, 0x14, 0, 0xFF, (u8*)(D_8001009C + 0x80010000u));
     func_800F606C(1);
     func_800F6C5C();
@@ -216,7 +216,7 @@ MATCH void func_800F5828(void) {
         }
     }
 
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 
     if (s_Step == 2) {
         src = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][s_ListCursor & 0xF] * 8],
@@ -237,7 +237,7 @@ MATCH void func_800F5828(void) {
 }
 
 MATCH void func_800F5AD8(void) {
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     if ((g_InputPressed & (D_80145AC2 | D_80145AC4)) != 0) {
         s_ListItemId = 1;
         SND_PlayCue(EMI_CUE_ID(1, 6));
@@ -290,7 +290,7 @@ MATCH void func_800F5BE0(void) {
             }
         }
     }
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_DrawText(0x18, 0x14, 0, 0xFF, (u8*)((u16)D_8001008A + 0x80010000u));
     Menu_DrawCursorSprite(D_800F7248 * 32 + 0xEE, 0x16, 0);
     func_800F606C(0);
@@ -303,7 +303,7 @@ MATCH void func_800F5D98(void) {
         g_GameEntrySubstate = 1;
         return;
     }
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_DrawText(0x18, 0x14, 0, 0xFF, (u8*)((u16)D_8001008A + 0x80010000u));
     Menu_DrawCursorSprite(D_800F7248 * 32 + 0xEE, 0x16, 0);
     func_800F606C(0);
