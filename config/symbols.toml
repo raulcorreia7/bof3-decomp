@@ -528,6 +528,7 @@ Effect_SetActorMatrix = { addr = 0x801EF4D0, type = "func", source = "sets the a
 Effect_CountUpAndMarkBattler = { addr = 0x801EF990, type = "func", source = "raises the work counter at byte 0x09 and the timer at byte 0x0A each frame and, at counter 0x19, sets the high bit of the active battler's effect ticker byte and advances the effect state (func_801EF6A4 in magic144, func_801EF990 in magic092)" }
 Effect_CountDownByTwoFinishAtOne = { addr = 0x801EFA24, type = "func", source = "counts the work counter at byte 0x09 down by 2 and raises the timer at byte 0x0A on odd frames; at counter 1 the active battler's effect ticker byte drops by one and the effect work record is cleared (func_801EF738 in magic144, func_801EFA24 in magic092)" }
 Effect_StepOnTickFlag = { addr = 0x801F03DC, type = "func", source = "advances the effect step while bit 0x80 of the other battler's effect ticker is set" }
+Effect_CountDownCounterAndFinish = { addr = 0x801F0420, type = "func", source = "counts the work counter at byte 0x09 down; at zero the active battler's effect ticker byte drops by one and the effect work record is cleared (func_801F0134 in magic144, func_801F0420 in magic092)" }
 BMagic_AllocEffect = { addr = 0x801F0758, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 g_BMagicEffectFuncs = { addr = 0x801F07BC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
@@ -768,6 +769,7 @@ Effect_SetActorMatrix = { addr = 0x801EF1E4, type = "func", source = "sets the a
 Effect_CountUpAndMarkBattler = { addr = 0x801EF6A4, type = "func", source = "raises the work counter at byte 0x09 and the timer at byte 0x0A each frame and, at counter 0x19, sets the high bit of the active battler's effect ticker byte and advances the effect state (func_801EF6A4 in magic144, func_801EF990 in magic092)" }
 Effect_CountDownByTwoFinishAtOne = { addr = 0x801EF738, type = "func", source = "counts the work counter at byte 0x09 down by 2 and raises the timer at byte 0x0A on odd frames; at counter 1 the active battler's effect ticker byte drops by one and the effect work record is cleared (func_801EF738 in magic144, func_801EFA24 in magic092)" }
 Effect_StepOnTickFlag = { addr = 0x801F00F0, type = "func", source = "advances the effect step while bit 0x80 of the other battler's effect ticker is set" }
+Effect_CountDownCounterAndFinish = { addr = 0x801F0134, type = "func", source = "counts the work counter at byte 0x09 down; at zero the active battler's effect ticker byte drops by one and the effect work record is cleared (func_801F0134 in magic144, func_801F0420 in magic092)" }
 BMagic_AllocEffect = { addr = 0x801F046C, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 g_BMagicEffectFuncs = { addr = 0x801F04D0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
