@@ -4,6 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+/* Needs split review: entry reads v0 and v1 before setting them. */
 INCLUDE_ASM(func_801D2AFC);
 
 MATCH void func_801D2C0C(void) {
