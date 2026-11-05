@@ -1,4 +1,4 @@
 #include "area134_13.h"
 
-/* Either D_80146865 is 0xFF or D_80146866 is 0x80: step 0x17, else clear D_80146865 and the step; then clear state_02. With u8 flag pointer to D_80146865 the flow matches; first difference is the work pointer register (retail v0, candidate v1) at the second lui 0x1f80. */
+/* resume: best 3 differing (the true-block spad reload and the 0x17 constant trade v0/v1: retail reload v0 / constant v1, ours reversed; the pointer local for D_80146865 fixes the selector reads - &D_80146865 in a0 across the tests and the clear); first `!` +0x2C (lui v0 vs v1); next lever: the permuter (work/permute/nonmatchings/func_801F33C0). */
 INCLUDE_ASM(func_801F33C0);
