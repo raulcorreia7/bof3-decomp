@@ -92,7 +92,22 @@ MATCH void func_801EF678(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF720);
+MATCH void func_801EF720(void) {
+    PartyBattler* work;
+    PartyBattler* source;
+
+    g_SpadWork->unk_5D -= 8;
+    g_SpadWork->unk_5E -= 8;
+    g_SpadWork->unk_5F -= 8;
+    if ((s8)g_SpadWork->unk_5D == -0x80) {
+        work                 = g_SpadWork;
+        source               = BATTLE_ACTIVE_WORK;
+        work->coord_x_34.raw = source->coord_x_34.raw;
+        work->coord_y_38.raw = source->coord_y_38.raw;
+        work->word_3C.word   = source->word_3C.word;
+        work->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF7D0(void) {
     g_SpadWork->unk_5D += 0x10;
