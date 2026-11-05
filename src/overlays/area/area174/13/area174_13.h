@@ -26,6 +26,7 @@ extern Callback D_801F66D4[17];
 extern u16      g_GameAreaId;
 
 extern u8   func_801F2EC4(void);
+extern void Actor_BeginScript(u8 raw_selector, u16 raw_code);
 extern void func_801F4A5C(u8* pairs, u8 flag);
 extern void func_801F4B0C(void);
 extern void func_801F4C68(void);
