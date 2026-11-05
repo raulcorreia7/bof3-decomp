@@ -12,17 +12,17 @@ MATCH void func_801F3320(void) {
     s32    angle;
     s32    spin;
 
-    scratch = g_SpadWork;
-    mode = scratch->unk_0A - 1;
-    x = scratch->x.fixed;
-    step = scratch->unk_0C;
-    angle = scratch->unk_40;
+    scratch          = g_SpadWork;
+    mode             = scratch->unk_0A - 1;
+    x                = scratch->x.fixed;
+    step             = scratch->unk_0C;
+    angle            = scratch->unk_40;
     scratch->x.fixed = x + step;
-    spin = scratch->unk_44;
-    scratch->unk_40 = angle - 0x2000;
-    scratch->unk_0A = mode;
-    check = g_SpadWork;
-    scratch->unk_44 = spin - 0x2000;
+    spin             = scratch->unk_44;
+    scratch->unk_40  = angle - 0x2000;
+    scratch->unk_0A  = mode;
+    check            = g_SpadWork;
+    scratch->unk_44  = spin - 0x2000;
 
     if ((check->unk_0A & 3) == 0) {
         check->unk_04 = 1;
@@ -30,7 +30,7 @@ MATCH void func_801F3320(void) {
 
     /* FAKE: retail splits the last re-read across the copy so the row stays
      * in one register. */
-    work = g_SpadWork;
+    work    = g_SpadWork;
     scratch = work;
     if (scratch->unk_0A == 0) {
         work->unk_04 = 0;
