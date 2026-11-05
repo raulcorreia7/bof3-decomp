@@ -3,5 +3,5 @@
 MATCH void func_801E7818(void) {
     BattleSavedPreviewFuncs table = D_801D0F6C;
 
-    table.handlers[SP_REF(u8*, 0x44)[1]]();
+    table.handlers[TASK_BYTES[1]]();
 }

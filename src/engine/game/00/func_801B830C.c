@@ -4,7 +4,7 @@ MATCH void func_801B830C(void) {
     u8* work;
     u8  step;
 
-    work = SP_REF(u8*, 0x44u);
+    work = TASK_BYTES;
     if (work[9] == 0) {
         step     = work[10] + 1;
         work[10] = step;
@@ -13,7 +13,7 @@ MATCH void func_801B830C(void) {
         }
         func_801C24D0();
     }
-    work    = SP_REF(u8*, 0x44u);
+    work    = TASK_BYTES;
     work[9] = work[9] - 1;
     func_801B0DFC();
     func_8014D978();

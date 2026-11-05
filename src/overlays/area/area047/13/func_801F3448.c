@@ -3,7 +3,7 @@
 MATCH void func_801F3448(void) {
     u8* sp;
 
-    sp = SP_REF(u8*, 0x44);
+    sp = TASK_BYTES;
     if (sp[0x2] == 0) {
         FIELD(s32, sp, 0x34) = -0x3900;
         FIELD(s32, sp, 0x38) = -0x3880;

@@ -7,7 +7,7 @@ MATCH void func_801DC838(void) {
     Callback handler;
 
     func_801E16DC();
-    work    = SP_REF(u8*, 0x44u);
+    work    = TASK_BYTES;
     handler = D_801E22D0[work[3]];
     handler();
 }

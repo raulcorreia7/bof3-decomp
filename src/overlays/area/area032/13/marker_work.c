@@ -152,7 +152,7 @@ static const Callback D_801F4908[2] = {
 };
 
 MATCH void func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(s_WorkStates, SP_REF(u8*, 0x44)[0x1]);
+    SYS_DISPATCH_BYTE(s_WorkStates, TASK_BYTES[0x1]);
 }
 
 #include "shared/Actor_ProjectFocusAndStep.h"
@@ -226,7 +226,7 @@ MATCH void func_801F2EE4(void) {
 #include "shared/GFX_DrawShadedDisc.h"
 
 MATCH void func_801F30A8(void) {
-    SYS_DISPATCH_BYTE(D_801F3F80, SP_REF(u8*, 0x44)[0x1]);
+    SYS_DISPATCH_BYTE(D_801F3F80, TASK_BYTES[0x1]);
 }
 
 MATCH void func_801F30EC(void) {
@@ -308,7 +308,7 @@ MATCH void func_801F363C(void) {
 #include "overlays/area/Message_Clear.h"
 
 MATCH void func_801F36E4(void) {
-    SYS_DISPATCH_BYTE(D_801F4900, SP_REF(u8*, 0x44)[0x4]);
+    SYS_DISPATCH_BYTE(D_801F4900, TASK_BYTES[0x4]);
 }
 
 MATCH void func_801F3728(void) {
@@ -348,7 +348,7 @@ MATCH void func_801F378C(void) {
 }
 
 MATCH void func_801F3800(void) {
-    SYS_DISPATCH_BYTE(D_801F4908, SP_REF(u8*, 0x44)[0x4]);
+    SYS_DISPATCH_BYTE(D_801F4908, TASK_BYTES[0x4]);
 }
 
 MATCH void func_801F3844(void) {

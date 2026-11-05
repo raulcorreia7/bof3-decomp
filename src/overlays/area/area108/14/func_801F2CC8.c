@@ -8,7 +8,7 @@ MATCH void func_801F2CC8(void) {
 
     func_801F34B8();
     if ((func_801F3034() & BYTE_MASK) == 0) {
-        work = SP_REF(u8*, 0x44u);
+        work = TASK_BYTES;
         work[1]++;
     }
 }

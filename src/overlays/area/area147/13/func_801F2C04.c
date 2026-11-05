@@ -2,5 +2,5 @@
 
 /* Dispatch the scratchpad state byte through the overlay's handler table. */
 MATCH void func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(D_801F358C, SP_REF(u8*, 0x44)[0x2]);
+    SYS_DISPATCH_BYTE(D_801F358C, TASK_BYTES[0x2]);
 }

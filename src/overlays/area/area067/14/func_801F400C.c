@@ -15,7 +15,7 @@ MATCH void func_801F400C(void) {
     selection = D_801F4644[index];
     result    = func_8015CC00(3, 0, selection, x, y, g_BattlePartyBattlers[1].z.raw);
     if ((u8)result != GAME_NONE) {
-        work      = SP_REF(u8*, 0x44u);
+        work      = TASK_BYTES;
         work[0xB] = (u8)result;
     }
 }

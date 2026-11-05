@@ -1,5 +1,5 @@
 #include "area043_13.h"
 
 MATCH void func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(D_801F37F8, SP_REF(u8*, 0x44)[0x4]);
+    SYS_DISPATCH_BYTE(D_801F37F8, TASK_BYTES[0x4]);
 }
