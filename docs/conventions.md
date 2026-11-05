@@ -321,7 +321,7 @@ reads the members together, copies them as a unit, or a shared type already name
 **Do**
 
 ```c
-typedef struct BattlePosition { Fix32 x; Fix32 y; Fix32 z; } BattlePosition;  /* a point */
+typedef struct BattlePosition { Coord x; Coord y; Coord z; } BattlePosition;  /* a point */
 typedef struct PartyBattler {
     u8 flags, mode, step;       /* the task header */
     BattlePosition pos;         /* copied whole by Effect_CopyBattlerCoords */
@@ -333,7 +333,7 @@ typedef struct PartyBattler {
 
 ```c
 struct { s32 a, b, c; } group;  /* nested to look tidy: no reader uses the three together */
-Fix32 z;                        /* a member named z whose role is a frame counter */
+Coord z;                        /* a member named z whose role is a frame counter */
 ```
 
 ### Ids

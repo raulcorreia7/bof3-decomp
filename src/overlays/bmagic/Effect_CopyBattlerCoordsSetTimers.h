@@ -5,13 +5,13 @@ MATCH void Effect_CopyBattlerCoordsSetTimers(void) {
     s32           z;
 
     g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
-    work            = g_Task;
-    actor           = D_801EB4E0;
-    work->pos.x.raw = actor->pos.x.raw;
-    work->pos.y.raw = actor->pos.y.raw;
-    z               = actor->pos.z.raw;
-    work->unk_09    = 1;
-    work->pos.z.raw = z;
-    g_Task->timer   = 1;
+    work              = g_Task;
+    actor             = D_801EB4E0;
+    work->pos.x.fixed = actor->pos.x.fixed;
+    work->pos.y.fixed = actor->pos.y.fixed;
+    z                 = actor->pos.z.fixed;
+    work->unk_09      = 1;
+    work->pos.z.fixed = z;
+    g_Task->timer     = 1;
     g_Task->step += 1;
 }

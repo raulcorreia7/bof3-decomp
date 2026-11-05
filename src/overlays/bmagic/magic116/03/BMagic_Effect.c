@@ -9,9 +9,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC80(void) {
     PartyBattler* saved_work;
 
-    g_Task->pos.x.raw = D_801EC2E0->target.party->pos.x.raw;
-    g_Task->pos.y.raw = D_801EC2E0->target.party->pos.y.raw;
-    g_Task->pos.z.raw = D_801EC2E0->target.party->pos.z.raw + 0x01000000;
+    g_Task->pos.x.fixed = D_801EC2E0->target.party->pos.x.fixed;
+    g_Task->pos.y.fixed = D_801EC2E0->target.party->pos.y.fixed;
+    g_Task->pos.z.fixed = D_801EC2E0->target.party->pos.z.fixed + 0x01000000;
     func_801EEFF4();
     saved_work = g_Task;
     g_Task     = D_801EC2E0->target.party;

@@ -75,9 +75,9 @@ MATCH void func_801EF654(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = g_Task->timer << 4;
-    pos.vx = (g_Task->pos.x.raw >> 9) - 0x4000;
-    pos.vy = (g_Task->pos.y.raw >> 9) - 0x4000;
-    pos.vz = -g_Task->pos.z.half.hi / 2;
+    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    pos.vz = -g_Task->pos.z.part.integer / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);

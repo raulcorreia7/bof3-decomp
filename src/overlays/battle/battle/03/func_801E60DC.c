@@ -6,7 +6,7 @@ MATCH void func_801E60DC(void) {
     u8            count;
 
     slot = work = D_801EC2E0;
-    slot->pos.y.raw += 0x40000;
+    slot->pos.y.fixed += 0x40000;
     count        = slot->unk_09;
     slot->unk_09 = count + 0xFF;
     if (count == 0) {
@@ -14,7 +14,7 @@ MATCH void func_801E60DC(void) {
         slot         = D_801EC2E0;
         slot->unk_0C = 0x8000;
         slot->unk_10 = (s32)0xFFFA0000;
-        slot->unk_1C = slot->pos.y.half.hi;
-        slot->unk_18 = slot->pos.x.half.hi;
+        slot->unk_1C = slot->pos.y.part.integer;
+        slot->unk_18 = slot->pos.x.part.integer;
     }
 }

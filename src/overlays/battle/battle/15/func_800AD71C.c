@@ -22,7 +22,7 @@ MATCH void func_800AD71C(void) {
         other->unk_2A              = 0;
     }
     record              = (PartyBattler*)g_Task;
-    record->pos.z.raw   = 0;
+    record->pos.z.fixed = 0;
     record->unk_2E.half = D_80148628 + 0x14;
     count               = record->mode;
     label               = D_8014862A;

@@ -8,8 +8,8 @@ MATCH void func_801E347C(void) {
     work = g_Task;
     work->flags &= ~ACTOR_FLAG_HIDDEN;
     func_801E2314(0);
-    old34          = g_Task->pos.x.raw;
-    old38          = g_Task->pos.y.raw;
+    old34          = g_Task->pos.x.fixed;
+    old38          = g_Task->pos.y.fixed;
     g_Task->unk_0C = 0x80000;
     g_Task->unk_10 = 0;
     g_Task->unk_18 = old34;
@@ -21,16 +21,16 @@ MATCH void func_801E347C(void) {
         s32 dy;
         s32 depth;
 
-        depth          = g_Task->pos.x.raw;
+        depth          = g_Task->pos.x.fixed;
         dx             = g_Task->unk_0C;
         dy             = g_Task->unk_10;
         g_Task->unk_0C = 0x8000;
         g_Task->unk_10 = 0;
         depth -= dx;
-        ((volatile PartyBattler*)g_Task)->pos.x.raw = depth;
+        ((volatile PartyBattler*)g_Task)->pos.x.fixed = depth;
         depth -= dy;
-        work            = g_Task;
-        work->pos.x.raw = depth;
+        work              = g_Task;
+        work->pos.x.fixed = depth;
         func_801DD350((s32)work);
     }
     work       = g_Task;

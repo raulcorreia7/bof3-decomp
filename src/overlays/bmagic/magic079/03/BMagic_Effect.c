@@ -107,10 +107,10 @@ MATCH void func_801EF1DC(void) {
     PartyBattler* work;
     u8            timer;
 
-    work                = g_Task;
-    timer               = work->unk_09 - 1;
-    work->pos.z.half.hi = work->pos.z.half.hi - 0x40;
-    work->unk_09        = timer;
+    work                     = g_Task;
+    timer                    = work->unk_09 - 1;
+    work->pos.z.part.integer = work->pos.z.part.integer - 0x40;
+    work->unk_09             = timer;
     if (timer == 0) {
         g_Task->unk_09 = 0x20;
         g_Task->step   = g_Task->step + 1;
@@ -177,13 +177,13 @@ MATCH void func_801EFBEC(void) {
 MATCH void func_801EFC74(void) {
     PartyBattler* src;
 
-    src               = g_BattleSelectedActor;
-    g_Task->pos.x.raw = src->pos.x.raw;
-    g_Task->pos.y.raw = src->pos.y.raw;
-    g_Task->pos.z     = src->pos.z;
-    g_Task->unk_09    = 4;
-    g_Task->timer     = 0xB0;
-    g_Task->step      = g_Task->step + 1;
+    src                 = g_BattleSelectedActor;
+    g_Task->pos.x.fixed = src->pos.x.fixed;
+    g_Task->pos.y.fixed = src->pos.y.fixed;
+    g_Task->pos.z       = src->pos.z;
+    g_Task->unk_09      = 4;
+    g_Task->timer       = 0xB0;
+    g_Task->step        = g_Task->step + 1;
 }
 
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
@@ -226,12 +226,12 @@ MATCH void func_801EFE88(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & 0xFF)) {
-        src               = D_8014637C;
-        g_Task->pos.x.raw = src->pos.x.raw;
-        g_Task->pos.y.raw = src->pos.y.raw;
-        g_Task->pos.z     = src->pos.z;
-        g_Task->unk_09    = 4;
-        g_Task->step      = g_Task->step + 1;
+        src                 = D_8014637C;
+        g_Task->pos.x.fixed = src->pos.x.fixed;
+        g_Task->pos.y.fixed = src->pos.y.fixed;
+        g_Task->pos.z       = src->pos.z;
+        g_Task->unk_09      = 4;
+        g_Task->step        = g_Task->step + 1;
     }
 }
 

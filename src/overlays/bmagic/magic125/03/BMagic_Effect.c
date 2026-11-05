@@ -22,15 +22,15 @@ MATCH void func_801EEFF8(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
-        g_Task->pos.x.raw = D_801EB4E0->pos.x.raw;
-        g_Task->pos.y.raw = D_801EB4E0->pos.y.raw;
-        g_Task->pos.z.raw = D_801EB4E0->pos.z.raw + 0x04000000;
-        g_Task->unk_5D    = (rand() & 3) + 4;
-        g_Task->unk_5E    = (rand() & 3) + 4;
-        g_Task->unk_5F    = (rand() & 3) + 4;
-        g_Task->unk_14    = 0x100;
-        g_Task->unk_09    = 0x10;
-        g_Task->timer     = 8;
+        g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
+        g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
+        g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed + 0x04000000;
+        g_Task->unk_5D      = (rand() & 3) + 4;
+        g_Task->unk_5E      = (rand() & 3) + 4;
+        g_Task->unk_5F      = (rand() & 3) + 4;
+        g_Task->unk_14      = 0x100;
+        g_Task->unk_09      = 0x10;
+        g_Task->timer       = 8;
         g_Task->step += 1;
     }
 }
@@ -39,7 +39,7 @@ MATCH void func_801EF0F8(void) {
     PartyBattler* work  = g_Task;
     u8            timer = work->timer - 1;
     work->timer         = timer;
-    work->pos.z.raw += 0xFF800000;
+    work->pos.z.fixed += 0xFF800000;
     if (timer == 0) {
         g_Task->step += 1;
     }
@@ -70,16 +70,16 @@ MATCH void func_801EF890(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        g_Task->pos.x.raw = D_801EB4E0->pos.x.raw;
-        g_Task->pos.y.raw = D_801EB4E0->pos.y.raw;
-        g_Task->pos.z.raw = D_801EB4E0->pos.z.raw;
-        g_Task->unk_5D    = 0xF;
-        g_Task->unk_5E    = 0xF;
-        g_Task->unk_5F    = 0xF;
-        g_Task->unk_14    = 0x100;
-        g_Task->unk_20    = 0x21;
-        g_Task->unk_09    = 0x10;
-        g_Task->timer     = 0x1E;
+        g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
+        g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
+        g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
+        g_Task->unk_5D      = 0xF;
+        g_Task->unk_5E      = 0xF;
+        g_Task->unk_5F      = 0xF;
+        g_Task->unk_14      = 0x100;
+        g_Task->unk_20      = 0x21;
+        g_Task->unk_09      = 0x10;
+        g_Task->timer       = 0x1E;
         g_Task->step += 1;
     }
 }

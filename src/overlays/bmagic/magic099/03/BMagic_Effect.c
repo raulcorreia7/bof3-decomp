@@ -50,12 +50,12 @@ MATCH void func_801EF264(void) {
 }
 
 MATCH void func_801EF2EC(void) {
-    g_Task->unk_0B    = rand() & 0xF;
-    g_Task->unk_09    = 0;
-    g_Task->timer     = 0;
-    g_Task->pos.x.raw = D_801EB4E0->pos.x.raw;
-    g_Task->pos.y.raw = D_801EB4E0->pos.y.raw;
-    g_Task->pos.z.raw = D_801EB4E0->pos.z.raw;
+    g_Task->unk_0B      = rand() & 0xF;
+    g_Task->unk_09      = 0;
+    g_Task->timer       = 0;
+    g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
+    g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
+    g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
     g_Task->step += 1;
 }
 
@@ -123,12 +123,12 @@ MATCH void func_801EF7D8(void) {
     *angle_cell            = angle;
     D_1F800000             = 0x28;
 
-    velocity        = rcos(angle) * D_1F800000;
-    work            = g_Task;
-    work->pos.x.raw = BATTLE_ACTIVE_WORK->pos.x.raw + velocity;
+    velocity          = rcos(angle) * D_1F800000;
+    work              = g_Task;
+    work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity          = rsin(*angle_cell) * D_1F800000;
-    g_Task->pos.y.raw = BATTLE_ACTIVE_WORK->pos.y.raw + velocity;
+    velocity            = rsin(*angle_cell) * D_1F800000;
+    g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     if (--g_Task->timer == 0) {
         BATTLE_ACTIVE_WORK->unk_0B++;
@@ -168,13 +168,13 @@ MATCH void func_801F0090(void) {
     *angle_cell            = angle;
     D_1F800000             = 0x18;
 
-    velocity          = rcos(angle) * D_1F800000;
-    g_Task->pos.x.raw = BATTLE_ACTIVE_WORK->pos.x.raw + velocity;
+    velocity            = rcos(angle) * D_1F800000;
+    g_Task->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity          = rsin(*angle_cell) * D_1F800000;
-    g_Task->pos.y.raw = BATTLE_ACTIVE_WORK->pos.y.raw + velocity;
+    velocity            = rsin(*angle_cell) * D_1F800000;
+    g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
-    g_Task->pos.z.half.hi = (u16)BATTLE_ACTIVE_WORK->pos.z.half.hi;
+    g_Task->pos.z.part.integer = (u16)BATTLE_ACTIVE_WORK->pos.z.part.integer;
     g_Task->step++;
 }
 
@@ -213,13 +213,13 @@ MATCH void func_801F0314(void) {
     *angle_cell            = angle;
     D_1F800000             = 0x18;
 
-    velocity        = rcos(angle) * D_1F800000;
-    work            = g_Task;
-    work->pos.x.raw = BATTLE_ACTIVE_WORK->pos.x.raw + velocity;
+    velocity          = rcos(angle) * D_1F800000;
+    work              = g_Task;
+    work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity           = rsin(*angle_cell) * D_1F800000;
-    scratch            = g_Task;
-    scratch->pos.y.raw = BATTLE_ACTIVE_WORK->pos.y.raw + velocity;
+    velocity             = rsin(*angle_cell) * D_1F800000;
+    scratch              = g_Task;
+    scratch->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
     scratch->timer -= 2;
 
     if (g_Task->timer == 0) {

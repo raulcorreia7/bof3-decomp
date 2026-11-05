@@ -26,15 +26,15 @@ MATCH void func_801EF014(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_Task->facing  = D_801EB4E0->facing;
-    work            = g_Task;
-    actor           = D_801EB4E0;
-    work->pos.x.raw = actor->pos.x.raw;
-    work->pos.y.raw = actor->pos.y.raw;
-    z               = actor->pos.z.raw;
-    work->unk_0B    = 0;
-    work->pos.z.raw = z;
-    g_Task->unk_09  = 0;
+    g_Task->facing    = D_801EB4E0->facing;
+    work              = g_Task;
+    actor             = D_801EB4E0;
+    work->pos.x.fixed = actor->pos.x.fixed;
+    work->pos.y.fixed = actor->pos.y.fixed;
+    z                 = actor->pos.z.fixed;
+    work->unk_0B      = 0;
+    work->pos.z.fixed = z;
+    g_Task->unk_09    = 0;
     g_Task->step += 1;
 }
 
@@ -82,8 +82,8 @@ MATCH void func_801EF540(void) {
     SP_REF(s16, 2) = (s16)(temp_v0 << 6);
     temp_a0        = g_Task->unk_14 + ((s32)(rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
     g_Task->unk_0C = temp_a0;
-    g_Task->pos.x.raw += (s32)(rsin(temp_a0) * 0x7000) >> 0xC;
-    g_Task->pos.y.raw += (s32)(rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
+    g_Task->pos.x.fixed += (s32)(rsin(temp_a0) * 0x7000) >> 0xC;
+    g_Task->pos.y.fixed += (s32)(rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
     func_800AF764(g_Task);
     func_801EF7E8();
     temp_v0_2      = g_Task->unk_09 + 1;
@@ -102,8 +102,8 @@ MATCH void func_801EF660(void) {
     SP_REF(s16, 2) = (s16)(temp_v0 << 6);
     temp_a0        = g_Task->unk_14 + ((s32)(rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
     g_Task->unk_0C = temp_a0;
-    g_Task->pos.x.raw += (s32)(rsin(temp_a0) * 0x7000) >> 0xC;
-    g_Task->pos.y.raw += (s32)(rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
+    g_Task->pos.x.fixed += (s32)(rsin(temp_a0) * 0x7000) >> 0xC;
+    g_Task->pos.y.fixed += (s32)(rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
     func_800AF764(g_Task);
     func_801EF7E8();
     g_Task->unk_09 += 1;
