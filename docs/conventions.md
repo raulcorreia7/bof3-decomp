@@ -16,29 +16,29 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 
 ## Quick reference
 
-| Do                                                                    | Don't                                                         |
-| --------------------------------------------------------------------- | ------------------------------------------------------------- |
-| Tag every name: `SND_PlayCue`, `Battle_ApplyDamage`, `g_BattleActors` | Leave a game name untagged, or write `g_BATTLE_Actors`        |
-| `Tag_VerbObject`; a family of 3+ is `Tag_ObjectVerb`: `Item_VitalAdd` | Glue the subject to the verb: `MessageSelectAnswerOpenMenu`   |
-| Keep the address name above a named definition: `/* func_801F2C04 */` | Lose the `func_`/`D_` name a search from assembly needs       |
-| `snake_case` locals, parameters and members: `item_id`, `party_slot`  | Hungarian or camelCase: `pItem`, `nCount`, `itemId`           |
-| Name the role: `BattlePanel`, `coord_x`                               | Name the storage: `BattlePanelRecord`, `half_3A`, `ByteView`  |
-| Keep the address name until a caller proves the role                  | Guess a name from a count, an offset or a tool's output       |
-| Members and typed pointers: `battler->hp`                             | Casts and offsets: `*(s16*)((u8*)p + 0x1C)`                   |
-| `enum` for closed sets and flag words; `#define` for sizes and limits | An `enum` type as a member or parameter (it is an `int`)      |
-| Decimal quantities, hex bit patterns: `hp < 100`, `flags & 0x80`      | `hp < 0x64`, `flags & 128`                                    |
-| Named bits: `INPUT_REPEATED(held, (PADLup \| PADLdown))`              | `INPUT_REPEATED(held, 0x5000)`                                |
-| PsyQ functions and names directly; game macros for sets and checks    | Raw SDK numbers, renamed SDK values, raw hardware addresses   |
-| Restate decompiler output as structured C with named locals           | Keep `temp_v0`, `var_s1`, `goto loop_1` and pointer math      |
-| `BYTE_MASK`, `MIN`, `ARRAY_COUNT` and the other `util.h` helpers      | A local copy of a helper, or a helper that shadows the SDK    |
-| A `static inline` helper for a repeated operation                     | A macro where an inline matches the same bytes                |
-| Reusable helpers, at most two steps from the real thing               | A `#define` that only renames or forwards, or a chain of them |
-| Braces on every body; parentheses around bitwise operands             | `if (x) y();`, `if (a & B && c)`                              |
-| `/* FAKE: <reason>. */` beside every fake-match helper                | A bare `register ... asm()`, `__asm__` or `.word` in C        |
-| One `extern` in the owning header                                     | `extern` in a `.c`, or a second name for one address          |
-| [Header layout](#header-layout): one block per record, in table order | Enums after their users, or an ID enum sorted by name         |
-| One-line `/* */` comments that say what a name cannot                 | A comment that restates the name, tells history or evidence   |
-| Adjacent globals as one struct, array or union, members by role       | Loose globals at one base or stride                           |
+| Do                                                                         | Don't                                                         |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Tag every name: `SND_PlayCue`, `Battle_ApplyDamage`, `g_BattleActors`      | Leave a game name untagged, or write `g_BATTLE_Actors`        |
+| `Tag_VerbObject`; a family of 3+ is `Tag_ObjectVerb`: `Message_WindowOpen` | Glue the subject to the verb: `MessageSelectAnswerOpenMenu`   |
+| Keep the address name above a named definition: `/* func_801F2C04 */`      | Lose the `func_`/`D_` name a search from assembly needs       |
+| `snake_case` locals, parameters and members: `item_id`, `party_slot`       | Hungarian or camelCase: `pItem`, `nCount`, `itemId`           |
+| Name the role: `BattlePanel`, `coord_x`                                    | Name the storage: `BattlePanelRecord`, `half_3A`, `ByteView`  |
+| Keep the address name until a caller proves the role                       | Guess a name from a count, an offset or a tool's output       |
+| Members and typed pointers: `battler->hp`                                  | Casts and offsets: `*(s16*)((u8*)p + 0x1C)`                   |
+| `enum` for closed sets and flag words; `#define` for sizes and limits      | An `enum` type as a member or parameter (it is an `int`)      |
+| Decimal quantities, hex bit patterns: `hp < 100`, `flags & 0x80`           | `hp < 0x64`, `flags & 128`                                    |
+| Named bits: `INPUT_REPEATED(held, (PADLup \| PADLdown))`                   | `INPUT_REPEATED(held, 0x5000)`                                |
+| PsyQ functions and names directly; game macros for sets and checks         | Raw SDK numbers, renamed SDK values, raw hardware addresses   |
+| Restate decompiler output as structured C with named locals                | Keep `temp_v0`, `var_s1`, `goto loop_1` and pointer math      |
+| `BYTE_MASK`, `MIN`, `ARRAY_COUNT` and the other `util.h` helpers           | A local copy of a helper, or a helper that shadows the SDK    |
+| A `static inline` helper for a repeated operation                          | A macro where an inline matches the same bytes                |
+| Reusable helpers, at most two steps from the real thing                    | A `#define` that only renames or forwards, or a chain of them |
+| Braces on every body; parentheses around bitwise operands                  | `if (x) y();`, `if (a & B && c)`                              |
+| `/* FAKE: <reason>. */` beside every fake-match helper                     | A bare `register ... asm()`, `__asm__` or `.word` in C        |
+| One `extern` in the owning header                                          | `extern` in a `.c`, or a second name for one address          |
+| [Header layout](#header-layout): one block per record, in table order      | Enums after their users, or an ID enum sorted by name         |
+| One-line `/* */` comments that say what a name cannot                      | A comment that restates the name, tells history or evidence   |
+| Adjacent globals as one struct, array or union, members by role            | Loose globals at one base or stride                           |
 
 ## Language and formatting
 
@@ -180,8 +180,8 @@ A function name takes one of two orders:
    acted on: `Party_AddMember`, `Battle_FindTarget`, `Shop_Buy`.
 2. **Object first**, for a family: `Tag_ObjectVerb`. When three or more functions under one tag act
    on the same object, the object comes first, so the family sorts together, as PsyQ writes
-   `SsSeqOpen`, `SsSeqPlay` and `SsSeqClose`: `Item_VitalAdd`, `Item_VitalRemove`,
-   `Item_VitalHas`; `Message_WindowOpen`, `Message_WindowClose`, `Message_WindowDraw`.
+   `SsSeqOpen`, `SsSeqPlay` and `SsSeqClose`: `Message_WindowOpen`, `Message_WindowClose`,
+   `Message_WindowDraw`.
 
 Count the family across the whole tree. Two functions are not a family. When a third member gets a
 name, rename the other two in the same change. A qualifier goes last when two functions differ
@@ -211,15 +211,15 @@ function pointer the engine calls at an event is `g_<Tag><Event>Hook`.
 ```c
 void Battle_RunAttack(Battler* battler);
 u8   Party_FindMember(u8 character_id);   /* GAME_NONE when absent */
-void Item_VitalAdd(u8 vital_item_id);     /* one of the Item_Vital family */
-s32  Item_VitalHas(u8 vital_item_id);
+void Message_WindowOpen(u8 window_id);    /* one of the Message_Window family */
+s32  Message_WindowIsOpen(u8 window_id);
 ```
 
 **Don't**
 
 ```c
 void Message_OpenAnswerMenu(void);   /* no tag; subject before the verb */
-void Item_AddVital(u8 vital_item_id); /* a family member in verb-first order */
+void Message_OpenWindow(u8 window_id); /* a family member in verb-first order */
 void Battle_AttackCb(Battler* battler);
 void Battle_AttackHandler(Battler* battler);
 u8   Party_GetMember(u8 character_id);    /* Get never fails; this searches */
@@ -280,7 +280,7 @@ Name each one for what the game keeps in it, in the words its programmer would u
 
 | Thing                 | Form                                                     | Example                                     |
 | --------------------- | -------------------------------------------------------- | ------------------------------------------- |
-| one value             | `g_<Tag><Thing>`, singular                               | `g_BattleActiveBattler`, `g_PartyCount`     |
+| one value             | `g_<Tag><Thing>`, singular                               | `g_ShopSelectedItem`, `g_PartyCount`        |
 | a system's state      | `g_<Tag>State`, one per system, typed `<Tag>State`       | `g_ShopState`                               |
 | an array              | the plural of one element, sized by its `_COUNT`         | `g_Weapons[WEAPON_COUNT]`, `g_PartyMembers` |
 | parallel arrays       | the shared noun, then what each holds                    | `g_InventoryIds`, `g_InventoryCounts`       |
@@ -306,7 +306,7 @@ Battler* battler = &g_Battlers[battler_index];
 **Don't**
 
 ```c
-extern u8 g_BattleActingBattler;          /* a step of the code, not the battler */
+extern u8 g_ShopSelectStep;              /* a step of the code, not the item */
 extern u8 g_ShopVars[0x40];               /* a filler word, raw bytes */
 
 Battler* ptr = &g_Battlers[i];            /* a storage word for a game object */
