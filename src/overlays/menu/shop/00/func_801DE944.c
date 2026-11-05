@@ -3,7 +3,7 @@
 /* Refreshes the status-panel rows and the field-camera scroll: fills the row
  * buffer from the party records, then on scene 0x85 copies the per-row scroll
  * table and on scene 0x5C seeds a fixed scroll and its angle, priming
- * g_AreaScrollTargetX/0C unless the camera flag D_80146871 bit 6 is set.
+ * g_AreaScrollTargetX/0C unless the camera flag g_SceneState.flags_01 bit 6 is set.
  */
 MATCH void func_801DE944(void) {
     u8*  party;
@@ -48,7 +48,7 @@ MATCH void func_801DE944(void) {
             D_80145EC4 += FIELD(s16, D_801E5C48, D_80145E98 * 4) << 15;
             D_80145EC8 += FIELD(s16, D_801E5C48, D_80145E98 * 4 + 2) << 15;
         }
-        if (!(D_80146871 & 0x40)) {
+        if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
             g_AreaScrollTargetX = D_80145EC4;
             g_AreaScrollTargetY = D_80145EC8;
             func_80153DE8();
@@ -80,7 +80,7 @@ MATCH void func_801DE944(void) {
                 dst += BATTLE_PARTY_STRIDE;
             }
         }
-        if (!(D_80146871 & 0x40)) {
+        if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
             g_AreaScrollTargetX = D_80145EC4;
             g_AreaScrollTargetY = D_80145EC8;
             func_80153DE8();

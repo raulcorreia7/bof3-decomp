@@ -8,6 +8,15 @@
  * bit 0x80 and 0x20 are set by Scene_RequestChapterAdvance and func_8019A904; mode_02 is the
  * dispatch byte of every scenario overlay (scena09 764.c); step_05 is the step
  * each controller switches on (scena00 8.c); timer_06 counts that step down. */
+/* g_SceneState.flags_01. Bit 0x01 is read by the script kind 9 and by the Ryu pajama intro checks; its role is
+ * not named. */
+typedef enum SceneStateFlags {
+    SCENE_STATE_CAMERA_MOVING = 1
+        << 5, /* set when a camera move starts, cleared when it ends (func_8019A904, func_8019AAFC) */
+    SCENE_STATE_SCRIPT_ACTIVE   = 1 << 6, /* set with GAME_FLAG_SCRIPT_ACTIVE by Game_SetScriptActive */
+    SCENE_STATE_CHAPTER_ADVANCE = 1 << 7, /* set by Scene_RequestChapterAdvance; func_8019FAA0 steps the scenario */
+} SceneStateFlags;
+
 typedef struct SceneState {
     s8  scenario_id;
     u8  flags_01;

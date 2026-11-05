@@ -12,5 +12,5 @@ MATCH void func_801F2CB4(void) {
     SYS_SetFlag(g_SceneFlags, 5);
     flags = &g_SceneState.flags_01;
     g_GameFlags &= 0xFF77;
-    *flags &= 0xBF;
+    *flags &= ~SCENE_STATE_SCRIPT_ACTIVE;
 }

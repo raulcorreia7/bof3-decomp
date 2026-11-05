@@ -12,7 +12,7 @@ MATCH void func_801F3BE0(void) {
         MATCH_REG(u8, flag_value, "a0");
 
         counter    = D_80144F56;
-        flag       = &D_80146871;
+        flag       = &g_SceneState.flags_01;
         D_80144F54 = 0;
         D_80146880 = 0;
         D_80146881 = 0;

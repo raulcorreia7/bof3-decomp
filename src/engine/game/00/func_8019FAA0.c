@@ -67,7 +67,7 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
         *(GameCopyBlock*)D_801581E0 = *(GameCopyBlock*)s_ScriptCopyBlock;
     }
 
-    if ((LOB(g_SceneState.flags_01) & 0x80) != 0) {
+    if ((LOB(g_SceneState.flags_01) & SCENE_STATE_CHAPTER_ADVANCE) != 0) {
         counter                        = LOBU(g_SceneState.scenario_id);
         LOBU(g_SceneState.scenario_id) = (u8)(counter + 1);
         if ((s8)(counter + 1) == 16) {
