@@ -27,7 +27,20 @@ MATCH void func_801EF114(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
-INCLUDE_ASM(func_801EF158);
+extern Callback D_801EFD5C[];
+
+MATCH void func_801EF158(void) {
+    D_801EFD5C[g_SpadWork->unk_02]();
+    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+        if (g_SpadWork->unk_02 >= 2) {
+            g_SpadWork->word_08.byte.timer_0A += 1;
+        }
+        func_801EF4A4();
+        func_801EF5B0();
+        func_801EF914();
+        PopMatrix();
+    }
+}
 
 INCLUDE_ASM(func_801EF200);
 
