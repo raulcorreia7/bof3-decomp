@@ -152,9 +152,28 @@ MATCH void func_801F03FC(void) {
     }
 }
 
-INCLUDE_ASM(func_801F047C);
+MATCH void func_801F047C(void) {
+    if (func_8014DAEC() & 0xFF) {
+        SND_QueueSelectionFx(0x101);
+        g_SpadWork->word_08.byte.unk_09 = 0xF;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
-INCLUDE_ASM(func_801F04DC);
+MATCH void func_801F04DC(void) {
+    Actor* work;
+    u8     timer;
+
+    work         = g_SpadWork;
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    work->unk_40 = work->unk_40 - 0x800;
+    work->unk_44 = work->unk_44 - 0x1000;
+    if (timer == 0) {
+        D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F0548(void) {
     func_801E5988();
@@ -165,14 +184,14 @@ INCLUDE_ASM(func_801F0568);
 INCLUDE_ASM(func_801F05FC);
 
 MATCH void func_801F0710(void) {
-    u8 temp_v0;
+    u8 count;
 
     g_SpadWork->unk_5D += 3;
     g_SpadWork->unk_5E += 3;
     g_SpadWork->unk_5F += 3;
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = count;
+    if (!(count & 0xFF)) {
         g_SpadWork->word_08.byte.unk_09 = func_800AFF98();
         g_SpadWork->unk_02 += 1;
     }
@@ -192,7 +211,13 @@ MATCH void func_801F07D4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0864);
+MATCH void func_801F0864(void) {
+    if (func_8014DAEC() & 0xFF) {
+        SND_QueueSelectionFx(0x101);
+        g_SpadWork->word_08.byte.unk_09 = 0x20;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F08C4(void) {
     u8 counter;
@@ -308,9 +333,27 @@ INCLUDE_ASM(func_801F1294);
 
 #include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
 
-INCLUDE_ASM(func_801F1384);
+MATCH void func_801F1384(void) {
+    u8 temp_v0;
 
-INCLUDE_ASM(func_801F1400);
+    func_8014DAEC();
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        func_800AFC98(2, 0);
+        func_800A9820(g_BattleTargetSelector);
+        g_SpadWork->unk_02 += 1;
+    }
+}
+
+MATCH void func_801F1400(void) {
+    if (func_8014DAEC() & 0xFF) {
+        if (g_SpadWork->unk_02 == 5) {
+            D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        }
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F1474);
 
@@ -324,9 +367,27 @@ MATCH void Effect_ReloadTimerAndStep_801F17BC(void) {
     BMAGIC_RELOAD_TIMER_AND_STEP();
 }
 
-INCLUDE_ASM(func_801F1804);
+MATCH void func_801F1804(void) {
+    u8 temp_v0;
 
-INCLUDE_ASM(func_801F1880);
+    func_8014DAEC();
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        func_800AFC98(2, 0);
+        func_800A9820(g_BattleTargetSelector);
+        g_SpadWork->unk_02 += 1;
+    }
+}
+
+MATCH void func_801F1880(void) {
+    if (func_8014DAEC() & 0xFF) {
+        if (g_SpadWork->unk_02 == 8) {
+            D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        }
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F18F4);
 

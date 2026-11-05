@@ -29,7 +29,16 @@ MATCH void func_801EF09C(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
 }
 
-INCLUDE_ASM(func_801EF0E0);
+MATCH void func_801EF0E0(void) {
+    SYS_DISPATCH_BYTE(D_801F08F0, g_SpadWork->unk_02);
+    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+        func_801EFA54();
+        func_801EFE34();
+        func_801EFB2C();
+        func_801EF370();
+        PopMatrix();
+    }
+}
 
 INCLUDE_ASM(func_801EF178);
 

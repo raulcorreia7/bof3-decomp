@@ -1,17 +1,17 @@
 #include "area098_13.h"
 
-void func_801F3878(void) {
-    u16 screen_x;
-    u8  mode;
+MATCH void func_801F3878(void) {
+    u16 temp_a1;
+    u8  temp_v0;
 
-    screen_x           = g_SpadWork->unk_2E + 0x20;
-    g_SpadWork->unk_2E = screen_x;
-    func_801F46EC(&g_SpadWork->unk_64, (s16)screen_x, 6);
-    mode               = g_SpadWork->unk_09 - 1;
-    g_SpadWork->unk_09 = mode;
-    if (!(mode & 0xFF)) {
+    temp_a1            = g_SpadWork->unk_2E + 0x20;
+    g_SpadWork->unk_2E = temp_a1;
+    func_801F46EC(&g_SpadWork->unk_64, (s16)temp_a1, 6);
+    temp_v0            = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
         g_SpadWork->unk_09 = 0x80;
         g_SpadWork->unk_01 += 1;
-        SND_PlayCue(EMI_CUE_ID(2, 0x9));
+        SND_PlayCue(0x209U);
     }
 }

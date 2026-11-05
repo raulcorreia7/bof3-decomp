@@ -88,11 +88,35 @@ INCLUDE_ASM(func_801F7AD0);
 
 INCLUDE_ASM(func_801F7B2C);
 
-INCLUDE_ASM(func_801F7BA8);
+MATCH void func_801F7BA8(void) {
+    Actor* work;
+    u8     timer;
+
+    work          = g_SpadWork;
+    timer         = work->unk_09 - 1;
+    work->y.fixed = work->y.fixed + 0x10000;
+    work->unk_09  = timer;
+    if (timer == 0) {
+        g_SpadWork->unk_09   = 0x10;
+        g_SpadWork->state_02 = g_SpadWork->state_02 + 1;
+    }
+}
 
 INCLUDE_ASM(func_801F7C08);
 
-INCLUDE_ASM(func_801F7C98);
+MATCH void func_801F7C98(void) {
+    Actor* work;
+    u8     timer;
+
+    work          = g_SpadWork;
+    timer         = work->unk_09 - 1;
+    work->y.fixed = work->y.fixed - 0x10000;
+    work->unk_09  = timer;
+    if (timer == 0) {
+        g_SpadWork->unk_09   = 0x80;
+        g_SpadWork->state_02 = g_SpadWork->state_02 + 1;
+    }
+}
 
 MATCH void func_801F7CF8(void) {
     u8 timer;
@@ -105,7 +129,16 @@ MATCH void func_801F7CF8(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7D54);
+MATCH void func_801F7D54(void) {
+    u8 timer;
+
+    D_800E4C1E -= 0x18;
+    timer              = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = timer;
+    if (timer == 0) {
+        Actor_Clear();
+    }
+}
 
 MATCH u8* func_801F7DAC(void) {
     u8* p;
@@ -357,7 +390,29 @@ MATCH void func_801FE12C(void) {
     } while ((u32)(var_a0 & 0xFF) < 0x20U);
 }
 
-INCLUDE_ASM(func_801FE170);
+MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
+    if ((g_GameAreaId == 1) && (arg0 == 0x338000) && ((u32)((arg1 >> 0x10) - 0x27) < 2U)) {
+        if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
+            Game_SetScriptActive();
+            D_80146874 = 4;
+            D_80146875 = 5;
+            return 1;
+        }
+        if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
+            Game_SetScriptActive();
+            *g_ScriptVars = 0;
+            D_80146874    = 5;
+            D_80146875    = 0;
+            return 1;
+        }
+        goto block_7;
+    }
+block_7:
+    if ((g_GameAreaId == 0x46) && (arg0 == 0x388000) && ((u32)((arg1 >> 0x10) - 0x2E) < 4U)) {
+        SYS_SetFlag(g_SceneFlags, 0x16U);
+    }
+    return 0;
+}
 
 INCLUDE_ASM(func_801FE2A0);
 
@@ -369,7 +424,7 @@ MATCH void func_801FE698(void) {
 }
 
 MATCH void func_801FE6DC(void) {
-    g_Characters[g_CharSlot[10]].unk_07 &= 254;
+    g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
     g_PartySize = 0;
     Party_JoinMember(7);
 }

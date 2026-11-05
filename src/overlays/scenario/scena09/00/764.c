@@ -12,7 +12,12 @@ MATCH void func_801F7364(void) {
     D_801FE384[entity[1]]();
 }
 
-INCLUDE_ASM(func_801F73A0);
+MATCH void func_801F73A0(void) {
+    func_801F7574();
+    func_801F76D0();
+    g_SpadWork->unk_09 = 0xFF;
+    g_SpadWork->unk_01++;
+}
 
 MATCH void func_801F73F0(void) {
     if (!(func_801F75BC() & BYTE_MASK)) {
@@ -245,7 +250,13 @@ MATCH void func_801FDD38(void) {
     func_801C1630();
 }
 
-INCLUDE_ASM(func_801FDD7C);
+MATCH void func_801FDD7C(void) {
+    EMI_LoaderStreamFamily(7U, 8U, 5U, 0U);
+    Party_BuildBattlers(0);
+    Party_JoinMember(CHAR_ID_NINA_ADULT);
+    Party_JoinMember(CHAR_ID_MOMO);
+    func_801C1630();
+}
 
 #include "overlays/scenario/Scene_JoinMomo.h"
 
@@ -257,7 +268,13 @@ MATCH void func_801FDE50(void) {
     func_801C1630();
 }
 
-INCLUDE_ASM(func_801FDE80);
+MATCH void func_801FDE80(void) {
+    EMI_LoaderStreamFamily(7U, 6U, 5U, 0U);
+    Party_BuildBattlers(0);
+    Party_JoinMember(CHAR_ID_MOMO);
+    Party_JoinMember(CHAR_ID_PECO);
+    func_801C1630();
+}
 
 #include "overlays/scenario/Scene_JoinPeco.h"
 

@@ -39,16 +39,16 @@ INCLUDE_ASM(func_801D1D68);
 INCLUDE_ASM(func_801D1E98);
 
 MATCH void func_801D1FE4(void) {
-    s32 temp_a0;
-    s8  temp_v0;
+    s32 index;
+    s8  count;
 
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
-    temp_a0 = (D_801DB0B4 + 1) & 0xFF;
-    func_801D2794(temp_a0, temp_a0, D_801DB0B4);
-    temp_v0    = (u8)D_801DB0C4 - 1;
-    D_801DB0C4 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    index = (D_801DB0B4 + 1) & 0xFF;
+    func_801D2794(index, index, D_801DB0B4);
+    count      = (u8)D_801DB0C4 - 1;
+    D_801DB0C4 = count;
+    if (!(count & 0xFF)) {
         SND_PlayCue(0x102U);
         D_801F294D += 1;
     }
@@ -63,7 +63,7 @@ INCLUDE_ASM(func_801D22A4);
 INCLUDE_ASM(func_801D2320);
 
 MATCH void func_801D24A8(void) {
-    s8 temp_v1;
+    s8 step;
 
     if (g_GameStateIndex != 2) {
         if (D_801F294E == 0) {
@@ -74,9 +74,9 @@ MATCH void func_801D24A8(void) {
             D_801F294E += 1;
             return;
         }
-        temp_v1    = (u8)D_801DB0C4 + 1;
-        D_801DB0C4 = temp_v1;
-        func_801D3184(0x26, 0x10 - ((temp_v1 & 0xFF) * 0x14));
+        step       = (u8)D_801DB0C4 + 1;
+        D_801DB0C4 = step;
+        func_801D3184(0x26, 0x10 - ((step & 0xFF) * 0x14));
         func_801D32A0(0xA8, 0x10 - ((u8)D_801DB0C4 * 0x14), 0);
         if ((u8)D_801DB0C4 == 4) {
             D_801F294C = 2;
@@ -248,11 +248,11 @@ INCLUDE_ASM(func_801D5788);
 INCLUDE_ASM(func_801D5924);
 
 MATCH void func_801D5978(void) {
-    s32 temp_v0;
+    s32 offset;
 
     if (g_UiWindowEffectBusy == 0) {
-        temp_v0 = g_SndBgmId * 4;
-        SND_StopSequence((s32) * (g_SelectionCues + temp_v0), (s16) * (D_80181EBB + temp_v0));
+        offset = g_SndBgmId * 4;
+        SND_StopSequence((s32) * (g_SelectionCues + offset), (s16) * (D_80181EBB + offset));
         SND_RequestBgm((s32)D_801DB0CC);
     loop_2:
         if (EMI_LoaderIsReady() == 0) {
@@ -310,11 +310,11 @@ INCLUDE_ASM(func_801D5F7C);
 INCLUDE_ASM(func_801D6124);
 
 MATCH void func_801D62C8(void) {
-    s8 temp_v1;
+    s8 step;
 
-    temp_v1    = (u8)D_801DB0C4 + 1;
-    D_801DB0C4 = temp_v1;
-    Menu_DrawHeaderBar(0x14, (0x10 - ((temp_v1 & 0xFF) * 8)) & 0xFFF8, 0x118, 0x13, (s32)D_80144952);
+    step       = (u8)D_801DB0C4 + 1;
+    D_801DB0C4 = step;
+    Menu_DrawHeaderBar(0x14, (0x10 - ((step & 0xFF) * 8)) & 0xFFF8, 0x118, 0x13, (s32)D_80144952);
     func_801D8058(0x4A, ((u8)D_801DB0C4 * 0x28) + 0x64);
     func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
     if ((u8)D_801DB0C4 == 4) {
@@ -404,11 +404,11 @@ MATCH void func_801D6B60(void) {
 }
 
 MATCH void func_801D6BE4(void) {
-    s8 temp_v1;
+    s8 step;
 
-    temp_v1    = (u8)D_801DB0C4 + 1;
-    D_801DB0C4 = temp_v1;
-    Menu_DrawHeaderBar(0x14, (0x10 - ((temp_v1 & 0xFF) * 8)) & 0xFFF8, 0x118, 0x13, (s32)D_80144952);
+    step       = (u8)D_801DB0C4 + 1;
+    D_801DB0C4 = step;
+    Menu_DrawHeaderBar(0x14, (0x10 - ((step & 0xFF) * 8)) & 0xFFF8, 0x118, 0x13, (s32)D_80144952);
     func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     if ((u8)D_801DB0C4 == 4) {

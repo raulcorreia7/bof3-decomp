@@ -13,7 +13,6 @@ MATCH void Battle_ReserveStagePanels(void) {
     u8  first;
     u8* counter;
     s32 index;
-    s32 offset;
     s16 panel_x;
     s16 panel_y;
 
@@ -32,24 +31,20 @@ MATCH void Battle_ReserveStagePanels(void) {
         BattleStageSelectionRingRecord(2, 0x30, Resource_GetText(BATTLE_TEXT_INITIATIVE_OPPONENT));
     }
     for (battler = 0; battler < BATTLE_PARTY_SLOT_COUNT; battler++) {
-        offset = battler * BATTLE_PARTY_STRIDE;
         if (ACTOR_IN_USE(g_BattlePartyBattlers[battler])) {
             Menu_ArmPanelTask((battler + 0xD) & BYTE_MASK, 3);
             D_80148332[battler + 0xD].mode_00 = 5;
             D_80148332[0xD + battler].unk_01  = 0;
             /* FAKE: barrier keeps the row-byte load after the two panel byte stores. */
             MATCH_BARRIER();
-            /* FAKE: retail reads D_80145E98 as u8[]. */
-            first   = ((u8*)&D_80145E98)[offset];
+            first   = g_BattlePartyBattlers[battler].word_08.byte.facing_08;
             index   = first * 2 + D_80145F09[battler][0] * 8;
-            panel_x = *(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_2E) + offset) + (s8)g_BattlePanelOffsets[index];
+            panel_x = g_BattlePartyBattlers[battler].unk_2E.half + (s8)g_BattlePanelOffsets[index];
             panel_x = (s8)D_801EAEA4[(g_BattleScrollDir & 0xFE) ^ 2] + panel_x;
             D_80148332[battler + 0xD].x_02 = panel_x;
             /* The y lookup reloads the row bytes; the x store may have changed them. */
-            /* FAKE: retail reads D_80145E98 as u8[]. */
-            index                          = ((u8*)&D_80145E98)[offset] * 2 + D_80145F09[battler][0] * 8;
-            panel_y =
-                *(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_30) + offset) + (s8)(g_BattlePanelOffsets + 1)[index] + 0xC;
+            index   = g_BattlePartyBattlers[battler].word_08.byte.facing_08 * 2 + D_80145F09[battler][0] * 8;
+            panel_y = g_BattlePartyBattlers[battler].unk_30.half + (s8)(g_BattlePanelOffsets + 1)[index] + 0xC;
             D_80148332[battler + 0xD].battler_08 = battler;
             D_80148332[battler + 0xD].unk_06     = 0;
             D_80148332[battler + 0xD].unk_07     = 0;

@@ -45,4 +45,6 @@ extern u8 D_80144F5B;
 extern u8 D_80144F5C;
 extern u8 D_80144F5F;
 
+s32 func_8019601C();
+
 #endif

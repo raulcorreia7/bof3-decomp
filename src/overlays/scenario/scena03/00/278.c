@@ -74,7 +74,17 @@ MATCH void func_801F6EB4(void) {
     slots[0x11][1] = 1;
 }
 
-INCLUDE_ASM(func_801F7260);
+MATCH void func_801F7260(void) {
+    if (g_SpadWork->unk_09 != 0) {
+        g_BattlePartyBattlers->flags_00 |= 0x40;
+        g_SpadWork->unk_09 -= 1;
+        return;
+    }
+    g_BattlePartyBattlers->flags_00 &= 0xBF;
+    g_Actors[g_SpadWork->unk_03].flags_00 = 0;
+    g_Actors[g_SpadWork->unk_04].flags_00 = 0;
+    g_SpadWork->unk_01                    = 2;
+}
 
 #include "shared/Actor_FreePaletteFades.h"
 
@@ -159,7 +169,6 @@ MATCH void func_801F78E0(void) {
     }
 }
 
-/* @source: read:Actor_FreePaletteFades@0x801F7334 (byte-identical matched twin) */
 MATCH void Actor_FreePaletteFades_801F7A14(void) {
     u8** slots;
 
@@ -215,7 +224,20 @@ MATCH void func_801F7BB0(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7C50);
+MATCH void func_801F7C50(void) {
+    s32* temp_s0;
+    u8   temp_v0;
+
+    temp_s0 = &g_SpadWork->unk_0C;
+    func_801F7FFC(temp_s0);
+    func_801F8170(temp_s0);
+    temp_v0            = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->unk_09 = 0x80;
+        g_SpadWork->unk_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F7CE0);
 
@@ -226,11 +248,11 @@ MATCH void func_801F7DF0(void) {
 }
 
 MATCH void func_801F7E34(void) {
-    void* temp_v1_9;
+    void* work;
 
     SND_PlayCue(EMI_CUE_ID(2, 9));
-    temp_v1_9                  = SP_REF(void*, 0x44);
-    FIELD(u8, temp_v1_9, 0x1u) = (u8)(FIELD(u8, temp_v1_9, 0x1u) + 1);
+    work                  = SP_REF(void*, 0x44);
+    FIELD(u8, work, 0x1u) = (u8)(FIELD(u8, work, 0x1u) + 1);
 }
 
 INCLUDE_ASM(func_801F7E6C);
@@ -253,7 +275,25 @@ MATCH void func_801F8328(void) {
     SND_PlayCue(516);
 }
 
-INCLUDE_ASM(func_801F8370);
+MATCH void func_801F8370(void) {
+    ActorSlot* temp_v0;
+    s32        temp_v1;
+    u8         temp_v0_2;
+
+    if (g_SpadWork->unk_09 & 4) {
+        temp_v1 = func_8019601C() & 0xFF;
+        if (temp_v1 != 0xFF) {
+            temp_v0           = &g_ActorSlots[temp_v1];
+            temp_v0->flags_00 = 1;
+            temp_v0->type     = 0x24;
+        }
+    }
+    temp_v0_2          = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = temp_v0_2;
+    if (!(temp_v0_2 & 0xFF)) {
+        g_SpadWork->unk_01 += 1;
+    }
+}
 
 MATCH void func_801F842C(void) {
     Actor_Clear();
@@ -484,7 +524,27 @@ MATCH s32 func_801FC690(void) {
 INCLUDE_ASM(func_801FC6C4);
 INCLUDE_ASM(func_801FC704);
 
-INCLUDE_ASM(func_801FC7EC);
+MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
+    u8 var_v0;
+
+    if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
+        if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
+            if ((u32)((arg0 >> 0x10) - 2) < 3U) {
+                if (arg1 == 0x60000) {
+                    var_v0 = 2;
+                    goto block_9;
+                }
+            }
+        } else if ((SYS_TestFlag(g_SceneFlags, 0) != 0) && ((u32)((arg0 >> 0x10) - 3) < 2U)) {
+            if (arg1 == 0x40000) {
+                var_v0 = 1;
+            block_9:
+                D_80146874 = var_v0;
+            }
+        }
+    }
+    return 0;
+}
 
 MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
@@ -517,7 +577,37 @@ MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM(func_801FC9DC);
+MATCH s8 func_801FC9DC(s32 arg0, s32 arg1) {
+    if (SYS_TestFlag(g_SceneFlags, 0x18) == 0) {
+        if (arg0 == 0x3A8000) {
+            if ((u32)((arg1 >> 0x10) - 0x3C) >= 2U) {
+                goto block_4;
+            }
+            goto block_9;
+        }
+    block_4:
+        if (arg1 == 0x28000) {
+            if ((u32)((arg0 >> 0x10) - 0x1F) >= 2U) {
+                goto block_7;
+            }
+            goto block_9;
+        }
+    block_7:
+        if (arg1 == 0x4C8000) {
+            if ((u32)((arg0 >> 0x10) - 0x1F) < 2U) {
+            block_9:
+                D_80146874 = 5;
+                D_80146875 = 0;
+                return Scene_ShowMessage(0x12);
+            }
+            /* Duplicate return node #11. Try simplifying control flow for better match */
+            return 0;
+        }
+        /* Duplicate return node #11. Try simplifying control flow for better match */
+        return 0;
+    }
+    return 0;
+}
 
 MATCH s8 func_801FCAB8(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x1A) != 0) {

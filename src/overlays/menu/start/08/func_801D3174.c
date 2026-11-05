@@ -23,7 +23,7 @@ MATCH void func_801D3174(void) {
     Menu_DrawClutStrip(D_80144953);
     step = &D_8014850C;
     mode = 3;
-    if (*(s8*)&D_801ED618 == 0) {
+    if (D_801ED618 == 0) {
         mode = 1;
     }
     *step = mode;
@@ -118,7 +118,7 @@ MATCH void func_801D3174(void) {
     if (g_InputPressed & D_80145AC2) {
         if (*row != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
-            if (*(s8*)&D_801ED618 == 0) {
+            if (D_801ED618 == 0) {
                 if ((func_801AF494(base[8], 0, base[0xA], *row) & BYTE_MASK) != 0) {
                     entry = *row;
                     if (D_801C8970[entry * 0x12] & 0x10) {

@@ -49,6 +49,7 @@ extern u8       D_801F56FC[];
 extern u8       D_801F5718[];
 extern u8       D_801F63C4[];
 extern u8*      D_801F63EC;
+extern u8       D_80145F09;
 
 /* func_8019651C */
 s32  GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);

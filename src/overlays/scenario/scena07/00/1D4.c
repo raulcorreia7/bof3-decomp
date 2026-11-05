@@ -17,12 +17,12 @@ MATCH void func_801F6E10(void) {
 }
 
 MATCH void func_801F6E54(void) {
-    void* temp_v0_9;
+    void* work;
 
     func_801F8358();
-    temp_v0_9                   = SP_REF(void*, 0x44);
-    FIELD(s32, temp_v0_9, 0xCu) = 0x40;
-    FIELD(u8, temp_v0_9, 0x2u)  = (u8)(FIELD(u8, temp_v0_9, 0x2u) + 1);
+    work                   = SP_REF(void*, 0x44);
+    FIELD(s32, work, 0xCu) = 0x40;
+    FIELD(u8, work, 0x2u)  = (u8)(FIELD(u8, work, 0x2u) + 1);
 }
 
 MATCH void func_801F6E90(void) {
@@ -51,11 +51,11 @@ MATCH void func_801F6F48(void) {
 }
 
 MATCH void func_801F6F8C(void) {
-    void* temp_v0_5;
+    void* work;
 
-    temp_v0_5                    = SP_REF(void*, 0x44);
-    FIELD(s32, temp_v0_5, 0x10u) = -8;
-    FIELD(u8, temp_v0_5, 0x2u)   = (u8)(FIELD(u8, temp_v0_5, 0x2u) + 1);
+    work                    = SP_REF(void*, 0x44);
+    FIELD(s32, work, 0x10u) = -8;
+    FIELD(u8, work, 0x2u)   = (u8)(FIELD(u8, work, 0x2u) + 1);
 }
 
 MATCH void func_801F6FB0(void) {
@@ -421,7 +421,7 @@ MATCH ActorSlot* func_801FD610(u8 arg0) {
     ActorSlot* slot;
     s32        index;
 
-    index = func_8019601C() & 0xFF;
+    index = Actor_FindFreeSlot() & 0xFF;
     slot  = &g_ActorSlots[index];
     if (index != 0xFF) {
         slot->flags_00 = 1;

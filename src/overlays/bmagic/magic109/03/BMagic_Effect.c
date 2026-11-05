@@ -11,27 +11,27 @@ INCLUDE_ASM(func_801EEC80);
 INCLUDE_ASM(func_801EEEAC);
 
 MATCH void func_801EEF30(void) {
-    s32 temp_v0;
-    s32 temp_v0_2;
-    u8  temp_a0;
+    s32 raised_offset;
+    s32 lowered_offset;
+    u8  timer;
 
-    temp_a0                           = g_SpadWork->word_08.byte.timer_0A;
-    g_SpadWork->word_08.byte.timer_0A = temp_a0 + 0xFF;
-    if (temp_a0 == 0) {
+    timer                             = g_SpadWork->word_08.byte.timer_0A;
+    g_SpadWork->word_08.byte.timer_0A = timer + 0xFF;
+    if (timer == 0) {
         func_800A9610(g_BattleTargetSelector, 0x10U);
         g_SpadWork->step_01 += 1;
     }
     func_801EF0F8(g_SpadWork->unk_64);
     if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        temp_v0            = g_SpadWork->unk_64 + 8;
-        g_SpadWork->unk_64 = temp_v0;
-        if (temp_v0 >= 0x80) {
+        raised_offset      = g_SpadWork->unk_64 + 8;
+        g_SpadWork->unk_64 = raised_offset;
+        if (raised_offset >= 0x80) {
             g_SpadWork->word_08.byte.unk_0B = 1;
         }
     } else {
-        temp_v0_2          = g_SpadWork->unk_64 - 8;
-        g_SpadWork->unk_64 = temp_v0_2;
-        if (temp_v0_2 < -0x7F) {
+        lowered_offset     = g_SpadWork->unk_64 - 8;
+        g_SpadWork->unk_64 = lowered_offset;
+        if (lowered_offset < -0x7F) {
             g_SpadWork->word_08.byte.unk_0B = 0;
         }
     }

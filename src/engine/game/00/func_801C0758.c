@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* The loop is a label and a backward goto: gcc 2.7.2 only hoists the g_BattlePartyBattlers address out of a recognized
- * loop, and retail reloads it each pass. In the else arm count is 0, so g_BattlePartyBattlers[count] is row 0. */
 MATCH void func_801C0758(s32 x, s32 y, u8 kind) {
     s32  count;
     s32  idx;

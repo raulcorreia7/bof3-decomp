@@ -1,9 +1,5 @@
 #include "game_00.h"
 
-/* The retail caller tests the callee's result word directly, and the callee
- * sign-extends its byte result into v0, so the word view matches the byte
- * view for the zero test the caller makes. */
-
 MATCH void func_801B146C(void) {
     u8     state_flags;
     u8     level_flag;
