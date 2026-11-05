@@ -46,6 +46,7 @@ MATCH void func_801EF0F8(void) {
 }
 
 /* Best 7 differences: lui a0 at 0x801EF148; adjust register allocation. */
+/* First difference: lui v0 at entry; try register allocation for the work pointer and incremented value. */
 INCLUDE_ASM(func_801EF148);
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"

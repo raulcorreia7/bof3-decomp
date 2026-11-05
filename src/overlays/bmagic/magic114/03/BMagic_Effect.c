@@ -107,6 +107,7 @@ MATCH void func_801EFDD8(void) {
 }
 
 /* Best 20 differences: bnez at 0x801EFE94; adjust work pointer reloads. */
+/* Best draft differs at +0x34: lui v1 replaces lui a0; try the work pointer lifetime after the sound. */
 INCLUDE_ASM(func_801EFE70);
 
 MATCH void func_801EFF1C(void) {

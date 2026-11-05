@@ -18,6 +18,7 @@ MATCH void func_801EEF78(void) {
 
 INCLUDE_ASM(func_801EEFBC);
 
+/* First difference: lui v0 at +0x84; try the work pointer lifetime around the scale and flag stores. */
 INCLUDE_ASM(func_801EF078);
 
 MATCH void func_801EF1F4(void) {

@@ -9,6 +9,7 @@ INCLUDE_ASM(func_801EEC24);
 INCLUDE_ASM(func_801EEDEC);
 
 /* Best 1 difference: slti at 0x801EEFA0; adjust signed form comparison. */
+/* Best draft differs at +0x3C: sltiu replaces retail slti; try preserving signed switch comparison. */
 INCLUDE_ASM(func_801EEF64);
 
 INCLUDE_ASM(func_801EF000);
@@ -188,6 +189,7 @@ MATCH void Effect_CountDownAndStep_801F0C98(void) {
 }
 
 /* Best 7 differences: lui a0 at 0x801F0CE4; adjust register allocation. */
+/* First difference: lui v0 at entry; try register allocation for the work pointer and incremented value. */
 INCLUDE_ASM(func_801F0CE4);
 
 MATCH void Effect_SetActorMatrix_801F0D44(void) {
