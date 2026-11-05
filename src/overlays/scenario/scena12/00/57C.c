@@ -16,7 +16,13 @@ MATCH void func_801F71B8(void) {
     SYS_DISPATCH_TASK(D_801FD184, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801F71FC);
+MATCH void func_801F71FC(void) {
+    Actor* actor;
+
+    D_801FD288.half = (rand() & 1) << 15;
+    actor           = g_SpadWork;
+    actor->state_02 = actor->state_02 + 1;
+}
 
 INCLUDE_ASM(func_801F7240);
 
@@ -59,7 +65,7 @@ MATCH void func_801F75EC(void) {
 
     buffer = (char*)g_UiFormatBuffer;
     Menu_DrawHeaderBar(0x8A, 0x1E, 0x2D, 0x14, 1u);
-    value = D_801FD288[0];
+    value = D_801FD288.bytes[0];
     fmt   = D_801F6C04;
     sprintf(buffer, fmt, value);
     UI_DrawAsciiString(0x95, 0x22, 0, buffer);
