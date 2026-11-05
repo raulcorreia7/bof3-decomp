@@ -21,7 +21,18 @@ MATCH void func_801D2C50(void) {
     func_801D2978();
 }
 
-INCLUDE_ASM(func_801D2C84);
+MATCH void func_801D2C84(void) {
+    s32* counter = &D_801DA0B4;
+    s32  cur     = *counter;
+
+    if (cur & 0xFFF) {
+        *counter   = (cur + 0x40) & 0xFC0;
+        D_801DA04E = 0;
+    } else {
+        D_801DA04E = 1;
+    }
+    func_801D2978();
+}
 
 INCLUDE_ASM(func_801D2CE4);
 
