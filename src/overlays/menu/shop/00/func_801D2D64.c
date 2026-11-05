@@ -10,39 +10,39 @@ MATCH void func_801D2D64(void) {
     D_80148499 = 7;
     D_8014849A = 0xA;
     D_8014849C = (s16)D_80148430;
-    D_8014849E = (D_80148432 + (D_801E6044 - D_80148437) * 0xD) + 0x14;
-    D_801484A2 = D_801E6048;
-    D_801484A3 = D_801E604C;
-    D_801484A4 = D_801E6050;
+    D_8014849E = (D_80148432 + (g_ShopStockIndex - D_80148437) * 0xD) + 0x14;
+    D_801484A2 = g_ShopItemCategory;
+    D_801484A3 = g_ShopItemId;
+    D_801484A4 = g_ShopItemCount;
     D_801484A5 = D_801E606C;
     input      = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
-    previous   = D_801E6050;
+    previous   = g_ShopItemCount;
     if (input & PADLleft) {
-        D_801E6050 -= 1;
+        g_ShopItemCount -= 1;
     } else if (input & PADLright) {
-        D_801E6050 += 1;
+        g_ShopItemCount += 1;
     }
-    if ((s8)D_801E6050 <= 0) {
-        D_801E6050 = 1;
+    if ((s8)g_ShopItemCount <= 0) {
+        g_ShopItemCount = 1;
     }
-    if ((u8)D_801E605C < D_801E6050) {
-        D_801E6050 = D_801E605C;
+    if ((u8)g_ShopItemCountMax < g_ShopItemCount) {
+        g_ShopItemCount = g_ShopItemCountMax;
     }
-    if (previous != D_801E6050) {
+    if (previous != g_ShopItemCount) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if (input & PADLdown) {
-        D_801E6050 -= 0xA;
+        g_ShopItemCount -= 0xA;
     } else if (input & PADLup) {
-        D_801E6050 += 0xA;
+        g_ShopItemCount += 0xA;
     }
-    if ((s8)D_801E6050 <= 0) {
-        D_801E6050 = 1;
+    if ((s8)g_ShopItemCount <= 0) {
+        g_ShopItemCount = 1;
     }
-    if ((u8)D_801E605C < D_801E6050) {
-        D_801E6050 = D_801E605C;
+    if ((u8)g_ShopItemCountMax < g_ShopItemCount) {
+        g_ShopItemCount = g_ShopItemCountMax;
     }
-    if (previous != D_801E6050) {
+    if (previous != g_ShopItemCount) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if (g_InputPressed & D_80145AC2) {

@@ -1752,6 +1752,13 @@ g_MenuCommandRows = { addr = 0x801E59C0, source = "5-byte rows (button count, fo
 MENU_CLUT_STRIP_CELLS = { addr = 0x801E5A24, source = "the 4-byte sprite cells the CLUT strip body walks, shared name with emi/etc/start/08" }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801E5AD0, source = "the sprite-cell indices the CLUT strip body walks, shared name with emi/etc/start/08" }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801E5B1C, source = "the four per-clut entry offsets the CLUT strip body reads, shared name with emi/etc/start/08" }
+g_ShopStockIndex = { addr = 0x801E6044, source = "read:func_801D163C@0x801D163C indexes the shop stock rows at D_8018E7CC (count byte, then category and item pairs) with it and wraps it at the count" }
+g_ShopItemCategory = { addr = 0x801E6048, source = "read:func_801D1D60@0x801D1D60 passes it as the Party_AddItem and Item_GetKind category; func_801D163C@0x801D163C loads it from the shop stock row" }
+g_ShopItemId = { addr = 0x801E604C, source = "read:func_801D1D60@0x801D1D60 passes it as the Party_AddItem item; func_801D163C@0x801D163C loads it from the shop stock row" }
+g_ShopItemCount = { addr = 0x801E6050, source = "read:func_801D1D60@0x801D1D60 passes it as the Party_AddItem amount and multiplies it by the price; func_801D2D64@0x801D2D64 steps it by the arrows" }
+g_ShopItemCountMax = { addr = 0x801E605C, source = "write:func_801D163C@0x801D163C sets it to g_Zenny / price, capped to 99 minus the held count; func_801D2D64@0x801D2D64 clamps the count to it" }
+g_ShopItemPrice = { addr = 0x801E6060, source = "write:func_801D163C@0x801D163C sets it to Shop_ApplyPercent(Item_GetPrice(...)); func_801D1D60@0x801D1D60 subtracts price * count from g_Zenny" }
+g_ShopPricePercent = { addr = 0x801E6064, source = "read:func_801D163C@0x801D163C passes it as the percent argument of Shop_ApplyPercent" }
 g_SaveSlotFirst = { addr = 0x801E6074, source = "the first visible stock row, shared name with the start overlay" }
 g_SaveSlotCount = { addr = 0x801E6078, source = "the visible stock row count, shared name with the start overlay" }
 g_SaveSlots = { addr = 0x801E6098, size = 0x54, source = "the three stock rows, shared name with the start overlay" }
