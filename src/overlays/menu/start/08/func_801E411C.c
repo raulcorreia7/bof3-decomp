@@ -26,7 +26,7 @@ MATCH void func_801E411C(void) {
                ((((u16)packed >> 8) != 0) && ((packed & 0xF) == 1))) {
         D_801ED86C = 0;
     }
-    next_state = D_801ED860 + 1;
-    D_801ED7EC = D_801ED86C - 1;
-    D_801ED860 = next_state;
+    next_state      = g_MenuStartStep + 1;
+    D_801ED7EC      = D_801ED86C - 1;
+    g_MenuStartStep = next_state;
 }

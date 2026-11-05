@@ -11,63 +11,64 @@ MATCH void func_801D163C(void) {
     MenuPanelTask* panel;
     MenuPanelTask* panels;
 
-    entry                      = D_8018E7CC + D_801E6044 * 2;
-    D_801E6048                 = entry[1];
+    entry                      = D_8018E7CC + g_ShopStockIndex * 2;
+    g_ShopItemCategory         = entry[1];
     i                          = 0;
     choice                     = entry[2];
     g_MenuPanelTasks[8].unk_0A = 0;
-    D_801E604C                 = choice;
+    g_ShopItemId               = choice;
     panels                     = &g_MenuPanelTasks[3];
     for (; i < (u8)Party_CountOrder(0); i++) {
         panel         = (MenuPanelTask*)(i * sizeof(MenuPanelTask) + (u32)panels);
-        panel->unk_0B = Item_GetKind(D_801E6048, D_801E604C);
-        panel->unk_0C = D_801E604C;
+        panel->unk_0B = Item_GetKind(g_ShopItemCategory, g_ShopItemId);
+        panel->unk_0C = g_ShopItemId;
     }
-    g_MenuPanelTasks[0].unk_10 = Item_GetDescription(D_801E6048, D_801E604C);
+    g_MenuPanelTasks[0].unk_10 = Item_GetDescription(g_ShopItemCategory, g_ShopItemId);
     D_80148474                 = 0;
     if (D_80148453 == 0) {
         /* FAKE: block boundary keeps the panel-task stores base-relative off one la. */
         ORDER_LOCK((void)0);
         g_MenuPanelTasks[21].unk_00[0] = 1;
         D_80148628                     = (u16)D_80148454 + 4;
-        D_8014862A                     = (u16)D_80148456 + D_801E6044 * 0xD + 0xA;
+        D_8014862A                     = (u16)D_80148456 + g_ShopStockIndex * 0xD + 0xA;
         D_80148644                     = D_8018E7CC;
     }
     input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
-    old   = D_801E6044;
+    old   = g_ShopStockIndex;
     if (input & PADLup) {
-        if ((D_801E6044 = old - 1) < 0) {
-            D_801E6044 = *D_8018E7CC - 1;
+        if ((g_ShopStockIndex = old - 1) < 0) {
+            g_ShopStockIndex = *D_8018E7CC - 1;
         }
     } else if (input & PADLdown) {
-        if ((D_801E6044 = old + 1) > (s8)*D_8018E7CC - 1) {
-            D_801E6044 = 0;
+        if ((g_ShopStockIndex = old + 1) > (s8)*D_8018E7CC - 1) {
+            g_ShopStockIndex = 0;
         }
     }
-    if ((s8)old != D_801E6044) {
+    if ((s8)old != g_ShopStockIndex) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    D_8014845C = D_801E6044;
+    D_8014845C = g_ShopStockIndex;
     if (g_InputPressed & D_80145AC2) {
-        pick       = D_8018E7CC + D_801E6044 * 2;
-        D_801E6048 = pick[1];
-        D_801E604C = pick[2];
-        D_801E6050 = 1;
-        D_801E6060 = Shop_ApplyPercent(Item_GetPrice(D_801E6048, D_801E604C), D_801E6064);
-        D_801E605C = g_Zenny / (u32)D_801E6060;
-        held       = Party_CountItem(D_801E6048, D_801E604C, 0) + Party_CountItem(D_801E6048, D_801E604C, 1);
+        pick               = D_8018E7CC + g_ShopStockIndex * 2;
+        g_ShopItemCategory = pick[1];
+        g_ShopItemId       = pick[2];
+        g_ShopItemCount    = 1;
+        g_ShopItemPrice    = Shop_ApplyPercent(Item_GetPrice(g_ShopItemCategory, g_ShopItemId), g_ShopPricePercent);
+        g_ShopItemCountMax = g_Zenny / (u32)g_ShopItemPrice;
+        held =
+            Party_CountItem(g_ShopItemCategory, g_ShopItemId, 0) + Party_CountItem(g_ShopItemCategory, g_ShopItemId, 1);
         if ((u8)held >= 100) {
-            D_801E6050 = 0;
-            D_801E605C = 0;
-        } else if ((u8)(99 - held) < (u32)D_801E605C) {
-            D_801E605C = (u8)(99 - held);
-            if (D_801E605C != 0) {
-                D_801E6050 = 1;
+            g_ShopItemCount    = 0;
+            g_ShopItemCountMax = 0;
+        } else if ((u8)(99 - held) < (u32)g_ShopItemCountMax) {
+            g_ShopItemCountMax = (u8)(99 - held);
+            if (g_ShopItemCountMax != 0) {
+                g_ShopItemCount = 1;
             } else {
-                D_801E6050 = 0;
+                g_ShopItemCount = 0;
             }
         }
-        if (g_Zenny >= (u32)D_801E6060) {
+        if (g_Zenny >= (u32)g_ShopItemPrice) {
             D_8014865B = 1;
             SND_PlayCue(EMI_CUE_ID(1, 3));
             D_80148652 += 1;

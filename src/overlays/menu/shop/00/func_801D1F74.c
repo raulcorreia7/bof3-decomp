@@ -7,7 +7,7 @@ MATCH void func_801D1F74(void) {
     u16  pad_state;
     s16  count;
 
-    block = Item_GetRecord(D_801E6048, D_801E604C);
+    block = Item_GetRecord(g_ShopItemCategory, g_ShopItemId);
     mode  = &D_8014865B;
     pad   = &g_InputPressed;
     TEXT_SetVariable(0, 0xC, block);

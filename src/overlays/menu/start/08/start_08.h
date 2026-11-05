@@ -279,10 +279,12 @@ extern s8       D_801ED7E0;
 extern s8       D_801ED7E4;
 extern u8       D_801ED7E8;
 extern u8       D_801ED7EC;
-extern s8       D_801ED7F0;
+/* D_801ED7F0 */
+extern s8       g_MenuStartTimer;
 extern u8       D_801ED7F4;
 extern u8       D_801ED7F8;
-extern u8       D_801ED860;
+/* D_801ED860 */
+extern u8       g_MenuStartStep;
 extern u8       D_801ED864;
 extern u8       D_801ED868;
 extern u8       D_801ED86C;

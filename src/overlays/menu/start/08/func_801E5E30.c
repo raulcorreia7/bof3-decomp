@@ -1,8 +1,8 @@
 #include "start_08.h"
 
 void      Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style); /* extern */
-extern u8 D_801ED7FC; /* local: u8 read; a sibling copy is s8 */
-extern u8 D_801ED800; /* local: u8 read; a sibling copy is s8 */
+extern u8 D_801ED7FC;            /* local: u8 read; a sibling copy is s8 */
+extern u8 g_MenuStartReturnStep; /* local: u8 read; a sibling copy is s8 */
 
 MATCH void func_801E5E30(void) {
     Menu_DrawClutStrip(D_80144953);
@@ -18,8 +18,8 @@ MATCH void func_801E5E30(void) {
             break;
     }
     UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(D_801ED7FC + 0xA6));
-    D_801ED7F0 -= 1;
-    if (D_801ED7F0 == 0) {
-        D_801ED860 = D_801ED800;
+    g_MenuStartTimer -= 1;
+    if (g_MenuStartTimer == 0) {
+        g_MenuStartStep = g_MenuStartReturnStep;
     }
 }

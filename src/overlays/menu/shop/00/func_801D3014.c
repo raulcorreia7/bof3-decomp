@@ -8,7 +8,7 @@ MATCH void func_801D3014(void) {
     u8*  counter;
     u32* wallet;
 
-    TEXT_SetVariable(0, 12, Item_GetRecord(D_801E6048, D_801E604C));
+    TEXT_SetVariable(0, 12, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
     D_80148340 = 0x52;
     toggle     = &D_8014865B;
     D_80148624 = 1;
@@ -23,16 +23,16 @@ MATCH void func_801D3014(void) {
         if (*toggle != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             wallet  = &g_Zenny;
-            price   = *wallet + D_801E6050 * D_801E6060;
+            price   = *wallet + g_ShopItemCount * g_ShopItemPrice;
             *wallet = price;
             if (price > 0x98967F) {
                 *wallet = 0x98967F;
             }
-            stock = D_801C8950[D_801E6048] + D_801E6044;
-            *stock -= D_801E6050;
-            if (D_801C8950[D_801E6048][D_801E6044] == 0) {
-                D_801C893C[D_801E6048][D_801E6044] = 0;
-                D_801C8950[D_801E6048][D_801E6044] = 0;
+            stock = D_801C8950[g_ShopItemCategory] + g_ShopStockIndex;
+            *stock -= g_ShopItemCount;
+            if (D_801C8950[g_ShopItemCategory][g_ShopStockIndex] == 0) {
+                D_801C893C[g_ShopItemCategory][g_ShopStockIndex] = 0;
+                D_801C8950[g_ShopItemCategory][g_ShopStockIndex] = 0;
             }
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 6));

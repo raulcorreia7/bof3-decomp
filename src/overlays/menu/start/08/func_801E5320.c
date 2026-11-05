@@ -1,10 +1,7 @@
 #include "start_08.h"
 
-/* Start-overlay panel bytes shared with the record list (D_801ED7F0 index,
- * D_801ED860 step counter, D_801ED870 record byte) and the save-probe result
- * g_SaveCardPort. The two pad masks select the confirm and cancel bits. */
 extern s8 D_801ED7FC;
-extern u8 D_801ED800;
+extern u8 g_MenuStartReturnStep;
 
 MATCH void func_801E5320(void) {
     u32  prev;
@@ -31,14 +28,14 @@ MATCH void func_801E5320(void) {
     pad = &g_InputPressed;
     if ((*pad & D_80145AC2) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
-        D_801ED7F0 = 2;
-        D_801ED7FC = 5;
-        count      = D_801ED860;
-        D_801ED860 = 0xE;
-        D_801ED800 = count + 1;
+        g_MenuStartTimer      = 2;
+        D_801ED7FC            = 5;
+        count                 = g_MenuStartStep;
+        g_MenuStartStep       = 0xE;
+        g_MenuStartReturnStep = count + 1;
     } else if ((*pad & D_80145AC4) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        D_801ED860          = 0;
+        g_MenuStartStep     = 0;
         g_GameEntrySubstate = 1;
     }
 }

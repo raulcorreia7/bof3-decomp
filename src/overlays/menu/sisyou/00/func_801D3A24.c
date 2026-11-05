@@ -71,10 +71,10 @@ NON_MATCHING void func_801D3A24(void) {
                 break;
             default:
                 for (i = 0; i < 12; i += 2) {
-                    if (diff < D_801D4088[D_801448ED][i / 2].level) {
+                    if (diff < g_MasterSkills[D_801448ED][i / 2].level) {
                         continue;
                     }
-                    skill = D_801D4088[D_801448ED][i / 2].ability;
+                    skill = g_MasterSkills[D_801448ED][i / 2].ability;
                     if (((u32*)(&D_801448ED + 0x693))[skill >> 5] & (1 << (skill& 0x1F))) {
                         continue;
                     }
@@ -84,11 +84,12 @@ NON_MATCHING void func_801D3A24(void) {
                     }
                     func_801D39CC(D_80145FCC.bytes[g_MasterMenuCursor * BATTLE_PARTY_STRIDE]);
                     for (k = 0; k < 12; k++) {
-                        D_801490F8[k] = ((const u8*)(g_Abilities))[D_801D4088[D_801448ED][i / 2].ability * 0x14 + k];
+                        D_801490F8[k] =
+                            ((const u8*)(g_Abilities))[g_MasterSkills[D_801448ED][i / 2].ability * 0x14 + k];
                     }
                     done       = 1;
                     D_80149104 = 0;
-                    skill      = D_801D4088[D_801448ED][i / 2].ability;
+                    skill      = g_MasterSkills[D_801448ED][i / 2].ability;
                     ((u32*)(&D_801448ED + 0x693))[skill >> 5] |= 1 << (skill & 0x1F);
                     break;
                 }
@@ -96,7 +97,7 @@ NON_MATCHING void func_801D3A24(void) {
         }
     }
     if (done) {
-        Message_StartAreaMessage((s16)(D_801D41BC[D_801448ED] + 0xE));
+        Message_StartAreaMessage((s16)(g_MasterMessageIds[D_801448ED] + 0xE));
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
     }
     g_MasterSubStep += 1;

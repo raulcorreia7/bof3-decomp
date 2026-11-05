@@ -5,7 +5,7 @@ MATCH void func_801D26A8(void) {
     u8  i;
     u8* state;
 
-    block = Item_GetRecord(D_801E6048, D_801E604C);
+    block = Item_GetRecord(g_ShopItemCategory, g_ShopItemId);
     TEXT_SetVariable(0, 0xC, block);
     D_80148340 = 0x4D;
     D_80148624 = 0;
@@ -20,7 +20,7 @@ MATCH void func_801D26A8(void) {
             i++;
         }
         D_8014840B = 1;
-        if ((Party_CountItem(D_801E6048, D_801E604C, 0) & HALF_MASK) != 0) {
+        if ((Party_CountItem(g_ShopItemCategory, g_ShopItemId, 0) & HALF_MASK) != 0) {
             state = &D_80148652;
             *state -= 2;
         } else {

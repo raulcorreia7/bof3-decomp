@@ -6,6 +6,6 @@ MATCH void func_801E5F34(void) {
     SAVE_DrawSlots(0x20, 0x30, 0);
     WinDrawCueText(28, 21, 0xB1);
     UI_SetMode(0);
-    D_801ED7F0 = 0x1E;
-    D_801ED860 += 1;
+    g_MenuStartTimer = 0x1E;
+    g_MenuStartStep += 1;
 }

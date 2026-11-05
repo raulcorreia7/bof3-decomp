@@ -25,12 +25,12 @@ MATCH void func_801E3EC4(void) {
     g_SpadWork[6]              = 4;
     g_SpadWork[9]              = 0;
     Actor_SelectScript((g_SpadWork[6] + 8) & BYTE_MASK);
-    D_801ED7EC = 1;
-    *hint      = 0xFF;
-    D_801ED864 = 0x80;
-    D_80148694 = 0;
-    D_801ED868 = 0x40;
-    D_801ED860 = 0;
+    D_801ED7EC      = 1;
+    *hint           = 0xFF;
+    D_801ED864      = 0x80;
+    D_80148694      = 0;
+    D_801ED868      = 0x40;
+    g_MenuStartStep = 0;
     /* FAKE: retail takes the step counter's address before the increment. */
     (*(CampMenuStepCounter*)&g_GameEntrySubstate).rows[0] += 1;
 }
