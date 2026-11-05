@@ -17,14 +17,14 @@ MATCH u8 func_801A2C94(Actor* actor) {
     if (dx < 0) {
         dx = -dx;
     }
-    if ((dx >> 0x10) < entity->stamina_max_8C) {
+    if ((dx >> 0x10) < entity->ext.bounds.half_width) {
         dy    = D_80145EC8;
         delta = work->y.fixed;
         dy -= delta;
         if (dy < 0) {
             dy = -dy;
         }
-        if ((dy >> 0x10) < FIELD(s16, entity, 0x8Eu)) {
+        if ((dy >> 0x10) < entity->ext.bounds.half_height) {
             status = func_801A2ED4(entity, 1U);
             if ((status & BYTE_MASK) == GAME_NONE) {
                 g_Task->unk_09 = 0;
