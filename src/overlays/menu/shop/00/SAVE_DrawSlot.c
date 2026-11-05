@@ -16,8 +16,7 @@ MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row) {
         if (GetGraphType() != 1) {
             GetGraphType();
         }
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, NULL);
-        GFX_AddPrim(1, 0xC);
+        GFX_AddDrawMode(0xF);
         func_801DA120((u16)(left + 9), (u16)(top + 5), (u8)(index + 3), 0x1E, (u16)GetClut(16, 480), 128);
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
             icon = *(row->unk_00 + i + 5);

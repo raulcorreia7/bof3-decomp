@@ -63,6 +63,13 @@ s32  GFX_StepScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 bl
 /* func_8014F800 */
 void UI_DrawText(s16 x, s16 y, s32 flag, u32 color, u8* text);
 
+/* Queue a draw-mode primitive for the texture page at order-table slot 1: the
+ * default texture window, primitive size 0xC. */
+static inline void GFX_AddDrawMode(s32 tpage) {
+    GFX_SET_DRAW_MODE(tpage);
+    GFX_AddPrim(1, 0xC);
+}
+
 /* Begin a semi-transparent, neutral-colour sprite at (x, y) on the shared
  * cursor and return it. */
 static inline SPRT* GfxBeginSprite(s32 x, s32 y, u32 clut) {

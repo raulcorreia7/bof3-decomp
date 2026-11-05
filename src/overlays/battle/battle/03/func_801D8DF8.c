@@ -27,8 +27,7 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     u8  color_g;
     u8  color_b;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 960, 0) & HALF_MASK, NULL);
-    GFX_AddPrim(1U, 0xCU);
+    GFX_AddDrawMode(GetTPage(0, 0, 960, 0) & HALF_MASK);
     draw_x = panel_x + 4;
     draw_x <<= 0x10;
     draw_x       = draw_x >> 0x10;
@@ -39,8 +38,7 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     func_801D9C80((s16)draw_x, (s16)(panel_y + 8), 8U, 1U);
     func_801D9AB4((s16)draw_x, (s16)(panel_y + 6), 2, 1);
     func_801D9AB4((s16)draw_x, (s16)(panel_y + 0x19), 3, 1);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 960, 0) & HALF_MASK, NULL);
-    GFX_AddPrim(1U, 0xCU);
+    GFX_AddDrawMode(GetTPage(0, 1, 960, 0) & HALF_MASK);
     draw_x = panel_x << 0x10;
     draw_x = (s32)(s16)panel_x;
     func_801D9C80((s16)draw_x, (s16)(panel_y + 2), 8U, 0U);

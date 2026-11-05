@@ -22,8 +22,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
 
     if (GetGraphType() != 1)
         GetGraphType();
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, NULL);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(0xF);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     tile->x0 = x1;

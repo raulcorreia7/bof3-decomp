@@ -10,8 +10,7 @@ MATCH void Battle_DrawNumber(s16 x, s16 y, u8 palette, u16 value) {
 
     i = 0;
     sprintf((s8*)g_UiFormatBuffer, &D_801D0C78, value);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 960, 0) & HALF_MASK, NULL);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddDrawMode(GetTPage(0, 0, 960, 0) & HALF_MASK);
     do {
         if (g_UiFormatBuffer[i] != ' ') {
             g_UiFormatBuffer[i] -= '0';

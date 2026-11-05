@@ -14,8 +14,7 @@ MATCH void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 f
         tpage = 896;
     }
     shift = GetTPage(0, 0, tpage, 256);
-    GFX_SET_DRAW_MODE(shift);
-    GFX_AddPrim(1, 12);
+    GFX_AddDrawMode(shift);
 
     id = record_table[2];
     if (id == GAME_NONE) {
