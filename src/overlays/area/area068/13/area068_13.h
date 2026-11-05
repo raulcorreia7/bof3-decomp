@@ -25,5 +25,7 @@ extern u8  D_80145E97;
 extern u8  D_80145EDA;
 extern u16 D_80145EE8;
 extern u8  D_801F4E00;
+extern u8  D_80145FA8;
+extern u8  D_80146865;
 
 #endif
