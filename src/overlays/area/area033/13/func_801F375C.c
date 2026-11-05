@@ -22,7 +22,7 @@ MATCH void func_801F375C(void) {
         goto done;
     }
 bump:
-    ((u8*)g_SpadWork)[3]++;
+    ((u8*)g_SpadWork)[0x03]++;
 done:
     func_801F3FF8(0x5C, g_SpadWork->unk_30);
 }

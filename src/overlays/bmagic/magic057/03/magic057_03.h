@@ -16,5 +16,4 @@ extern BattleEffect* volatile D_801EC2E0;
 extern BattleHandlerTable3 D_801EEC2C;
 
 extern BattleHandlerTable3 D_801EEC44;
-
 #endif
