@@ -1,4 +1,3 @@
-#define GAME_SCRATCH_BASE_SCALAR
 #include "area141_13.h"
 
 extern u8 D_801F4E2C[];
@@ -22,9 +21,9 @@ MATCH void func_801F4674(void) {
             return;
         }
         g_Actors[second_index].flags_00 = 1;
-        *(s16*)D_1F800000               = (u8)first;
+        D_1F800000.view.area.entity_counter = (u8)first;
         func_801A4D54(D_801F4E2C);
-        *(s16*)D_1F800000 = (u8)second;
+        D_1F800000.view.area.entity_counter = (u8)second;
         func_801A4D54(D_801F4E2C + 0x11);
     }
 }
