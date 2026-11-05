@@ -6,7 +6,42 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_RunStep.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEC70(void) {
+    PartyBattler* src;
+    PartyBattler* work;
+    u32           offset;
+    u32           counter;
+    u32           value;
+    s32           span;
+
+    src                                         = BATTLE_ACTIVE_WORK;
+    g_SpadWork->word_08.byte.facing_08          = src->word_08.byte.facing_08;
+    g_SpadWork->coord_x_34.raw                  = src->coord_x_34.raw;
+    g_SpadWork->coord_y_38.raw                  = src->coord_y_38.raw;
+    span                                        = g_BattleSelectedActor->word_3C.word;
+    g_SpadWork->word_08.byte.unk_09             = 0;
+    g_SpadWork->word_3C.word                    = span;
+    g_SpadWork->word_08.byte.unk_0B             = 0;
+    g_SpadWork->step_01 += 1;
+    offset                                      = (Battle_AllocEffect(1, 0xA) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+    counter                                     = 0;
+    value                                       = 1;
+    do {
+        FIELD(u8, D_801EC331, offset)           = 0;
+        FIELD(u8, D_801EC33B, offset)           = (u8)counter;
+        FIELD(u8, D_801EC339, offset)           = (u8)value;
+        work                                      = g_SpadWork;
+        FIELD(PartyBattler*, D_801EC3A4, offset) = work;
+        work->word_08.byte.unk_0B += 1;
+        counter += 1;
+        value += 2;
+    } while (counter < 8);
+    SND_QueueSelectionFx(0x100);
+}
+#else
 INCLUDE_ASM(func_801EEC70);
+#endif
 
 MATCH void func_801EED9C(void) {
     if (g_SpadWork->word_08.byte.unk_09 != 0) {

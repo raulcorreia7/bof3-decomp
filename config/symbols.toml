@@ -595,6 +595,7 @@ Effect_CountDownTimerRaiseTicker = { addr = 0x801EF3E4, type = "func", source = 
 g_BMagicEffectFuncs = { addr = 0x801F0994, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic100/03"]
+Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true }
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 Effect_PlayOnZeroTick = { addr = 0x801EEDF8, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 g_BMagicEffectFuncs = { addr = 0x801EFDCC, source = "the module dispatcher indexes it with the shared spad step byte" }
@@ -634,6 +635,7 @@ Effect_SetActorMatrixQuarterRoll = { addr = 0x801EFA18, type = "func", source = 
 
 ["emi/bmagic/magic108/03"]
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_PlayOnIdleTick = { addr = 0x801EED1C, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
 Effect_AdvanceOnTick = { addr = 0x801EF090, type = "func", source = "increments the effect ticker and advances the step at the limit" }

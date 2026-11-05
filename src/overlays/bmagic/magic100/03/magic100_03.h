@@ -8,6 +8,12 @@
 /* The step handlers the module runner dispatches. */
 extern Callback D_801EFDD0[];
 
+/* One-field views of the queued-slot record at g_BattleEffects (stride 0x78). */
+extern u8 D_801EC331[];
+extern u8 D_801EC339[];
+extern u8 D_801EC33B[];
+extern u8 D_801EC3A4[];
+
 void func_801EF434(void);
 void func_801EF4E8(void);
 void func_801EF8E8(void);
