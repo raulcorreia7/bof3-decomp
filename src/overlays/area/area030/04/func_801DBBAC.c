@@ -22,7 +22,7 @@ MATCH void func_801DBBAC(void) {
         /* pond record +6 (fish id), read through the table base: the
          * D_8014688E spelling lets gcc hold its address across the calls */
         /* FAKE: retail reads g_Actors as u8[]. */
-        fish                          = ((u8*)g_Actors)[D_801E3208 * 0x98 + 6];
+        fish                          = g_Actors[D_801E3208].unk_06;
         if ((u8)fish == 0x16) {
             FISHING_STATE->step_timer_09  = 4;
             FISHING_STATE->saved_index_0B = 1;
