@@ -6,7 +6,7 @@
 
 #include "overlays/area/world01.h"
 
-#define AREA_SELECTION_FIRST D_801F363C
+#define AREA_SELECTION_FIRST  D_801F363C
 #define AREA_SELECTION_SECOND D_801F363D
 
 void Area_SetCellCode(s16 column, s16 row, u8 code);

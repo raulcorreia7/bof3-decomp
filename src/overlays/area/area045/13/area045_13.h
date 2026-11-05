@@ -7,7 +7,7 @@
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
 
-#define AREA_SCENE_RECORD 0x3B
+#define AREA_SCENE_RECORD     0x3B
 
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F5364 + 0x10)
 
@@ -40,7 +40,7 @@ extern u8          D_801F5408[];
 extern WorldMapMarker D_801F53CC[6];
 #define AREA_HUD_MASK_TABLE D_801F53CC
 /* func_801F3ECC */
-void                  Area_DrawGradientDiamond(s16 x, s16 y);
+void Area_DrawGradientDiamond(s16 x, s16 y);
 
 /* func_801F39D8 */
 void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);

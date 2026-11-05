@@ -15,15 +15,15 @@
 
 /* The scratchpad cell holding this mode's work pointer. */
 
-extern SVECTOR     D_1F800014[];
+extern SVECTOR D_1F800014[];
 /* The selection byte that arms the area request. */
 /* The area state byte and the frame flags it is tested against. */
 /* The staged cue rows' fields: the allocation flags, kind, layer, step and
  * distance halfword, indexed by the row stride the spawn pass allocates. */
-extern s32         D_80145EC4[];
+extern s32     D_80145EC4[];
 /* The payload's data after the last function; the per-state handler tables
  * start at 0x130. */
-extern u8          D_801F4C3C[];
+extern u8      D_801F4C3C[];
 #define AREA_HUD_SPRITE_CELLS (D_801F4C3C + 0x158)
 extern ScreenPoint D_801F4E10[];
 extern u8          D_801F4E20[];
@@ -37,9 +37,9 @@ extern u8 Game_FindAreaHandler(void);
 extern WorldMapMarker D_801F4DEC[6];
 #define AREA_HUD_MASK_TABLE D_801F4DEC
 /* func_801F389C */
-void                  Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
+void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 /* func_801F3D90 */
-void                  Area_DrawGradientDiamond(s16 x, s16 y);
+void Area_DrawGradientDiamond(s16 x, s16 y);
 
 void func_801F338C(void);
 

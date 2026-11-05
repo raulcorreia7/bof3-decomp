@@ -6,7 +6,7 @@
 
 #include "overlays/area/world02.h"
 
-#define AREA_SELECTION_FIRST D_801F4130
+#define AREA_SELECTION_FIRST  D_801F4130
 #define AREA_SELECTION_SECOND D_801F4131
 
 extern u8 D_801F4130[];

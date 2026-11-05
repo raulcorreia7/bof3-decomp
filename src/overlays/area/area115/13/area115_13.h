@@ -15,18 +15,18 @@ typedef Vec2us AreaSpawnPoint;
 
 ASSERT_SIZE(AreaSpawnPoint, 4);
 
-extern SVECTOR        D_1F800014[];
-extern s32            D_80145EC4[];
-extern u8             D_801F4D7C[]; /* key rows: u16 key + byte mode, stride 4 */
-extern WorldMapPoint  D_801F4D90[];
-extern u16            D_801F4E90[5][16];
-extern u8             D_801F4F30[12];
-extern u8             D_801F4F31[];
-extern u8             D_801F4F3C[]; /* the "Manillo" text at +0x10 */
-extern Callback       D_801F4F48[];
-extern Callback       D_801F4F5C[];
-extern Callback       D_801F4F74[];
-extern u8             D_801F4F84[]; /* one four-byte sprite cell per id: w, h, u0, v0 */
+extern SVECTOR       D_1F800014[];
+extern s32           D_80145EC4[];
+extern u8            D_801F4D7C[]; /* key rows: u16 key + byte mode, stride 4 */
+extern WorldMapPoint D_801F4D90[];
+extern u16           D_801F4E90[5][16];
+extern u8            D_801F4F30[12];
+extern u8            D_801F4F31[];
+extern u8            D_801F4F3C[]; /* the "Manillo" text at +0x10 */
+extern Callback      D_801F4F48[];
+extern Callback      D_801F4F5C[];
+extern Callback      D_801F4F74[];
+extern u8            D_801F4F84[]; /* one four-byte sprite cell per id: w, h, u0, v0 */
 #define AREA_HUD_SPRITE_CELLS D_801F4F84
 extern WorldMapMarker D_801F4FDC[6];
 #define AREA_HUD_MASK_TABLE D_801F4FDC

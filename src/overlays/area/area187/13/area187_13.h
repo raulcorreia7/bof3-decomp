@@ -6,7 +6,7 @@
 
 #include "overlays/area/world04.h"
 
-#define AREA_SELECTION_FIRST D_801F35CC
+#define AREA_SELECTION_FIRST  D_801F35CC
 #define AREA_SELECTION_SECOND D_801F35CD
 
 /* The record the selection step writes and its two tables. */

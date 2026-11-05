@@ -38,7 +38,7 @@ extern void (*D_801F5034[])(void);
 extern WorldMapMarker D_801F4FF8[6];
 #define AREA_HUD_MASK_TABLE D_801F4FF8
 /* func_801F3E00 */
-void                  Area_DrawGradientDiamond(s16 x, s16 y);
+void Area_DrawGradientDiamond(s16 x, s16 y);
 
 u8   Game_FindAreaHandler(void);
 void func_801F33FC(void);

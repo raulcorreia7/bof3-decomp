@@ -9,7 +9,7 @@
 #include "work/area_spad.h"
 #include <abs.h>
 
-#define AREA_SCENE_RECORD 0xF
+#define AREA_SCENE_RECORD    0xF
 
 /* Signed spawn offsets (func_801F42F8) as u16 words: 0x2000 and -0x2000. */
 #define SPAWN_OFFSET_FORWARD 0x2000u
@@ -27,34 +27,34 @@ typedef struct WorldMapKey {
  * table, in retail address order, in D_801F4DA0_Data.c. */
 
 /* Data, in address order. */
-extern SVECTOR        D_1F800014[];
-extern s32            D_80145EC4[];
+extern SVECTOR       D_1F800014[];
+extern s32           D_80145EC4[];
 /* The steppers that must reload the cell after every store select the
  * volatile declaration. */
-extern WorldMapKey    D_801F4D7C[9];
-extern WorldMapPoint  D_801F4DA0[137];
+extern WorldMapKey   D_801F4D7C[9];
+extern WorldMapPoint D_801F4DA0[137];
 /* Key rows: column 0 is matched against g_GameContextSeed; column g_SceneState is
  * the value Fish_LocationMessage passes on. */
-extern u16            D_801F4FC4[9][16];
-extern u8             D_801F50E4[28];
-extern u8             D_801F50E5[]; /* the record-selector byte at +1 */
-extern u8             D_801F50F4[]; /* the "Manillo" text at +0x10 */
-extern Callback       D_801F5100[5];
-extern Callback       D_801F5114[2];
-extern Callback       D_801F511C[4];
-extern Callback       D_801F512C[4];
-extern u8             D_801F513C[88];
+extern u16           D_801F4FC4[9][16];
+extern u8            D_801F50E4[28];
+extern u8            D_801F50E5[]; /* the record-selector byte at +1 */
+extern u8            D_801F50F4[]; /* the "Manillo" text at +0x10 */
+extern Callback      D_801F5100[5];
+extern Callback      D_801F5114[2];
+extern Callback      D_801F511C[4];
+extern Callback      D_801F512C[4];
+extern u8            D_801F513C[88];
 #define AREA_HUD_SPRITE_CELLS D_801F513C
 extern WorldMapMarker D_801F5194[6];
 #define AREA_HUD_MASK_TABLE D_801F5194
-extern Callback       D_801F51AC[3];
-extern ScreenPoint    D_801F51B8[4];
-extern u8             D_801F51C8[8];
-extern u8             D_801F51C9[]; /* the second byte of each D_801F51C8 pair */
-extern Callback       D_801F51D0[2];
-extern u8             D_801F51D8[4];
-extern u8             D_801F51DC[4];
-extern u8             D_801F51E0[2];
+extern Callback    D_801F51AC[3];
+extern ScreenPoint D_801F51B8[4];
+extern u8          D_801F51C8[8];
+extern u8          D_801F51C9[]; /* the second byte of each D_801F51C8 pair */
+extern Callback    D_801F51D0[2];
+extern u8          D_801F51D8[4];
+extern u8          D_801F51DC[4];
+extern u8          D_801F51E0[2];
 
 /* func_801559AC */
 POLY_FT4* Area_FindCellQuad(s32 column, s32 row);

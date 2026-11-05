@@ -9,9 +9,9 @@
 
 void Area_SetCellCode(s16 column, s16 row, u8 code);
 
-extern SVECTOR     D_1F800014[];
-extern s32         D_80145EC4[];
-extern u8          D_801F4DB4[];
+extern SVECTOR D_1F800014[];
+extern s32     D_80145EC4[];
+extern u8      D_801F4DB4[];
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F4DB4 + 0x4FC)
 /* The spawn step handler table indexed by the record's step byte. */
 extern Callback    D_801F5274[];
@@ -36,7 +36,7 @@ extern void Area_DrawHud(s16 x, s16 y);
 extern WorldMapMarker D_801F5308[6];
 #define AREA_HUD_MASK_TABLE D_801F5308
 /* func_801F3F04 */
-void                  Area_DrawGradientDiamond(s16 x, s16 y);
+void Area_DrawGradientDiamond(s16 x, s16 y);
 
 extern WorldMapPoint D_801F4DE0[];
 extern u16           D_801F50FC[5][16];
