@@ -12,17 +12,17 @@ MATCH void func_801F4544(void) {
     Game_FindAreaHandler();
     Area_FindSceneRecord(0x205);
 
-    ((u8*)g_Task)[0x48]  = 0;
+    TASK_BYTES[0x48]     = 0;
     g_Task->active_flags = 0;
-    ((u8*)g_Task)[0x2A]  = 0;
-    ((u8*)g_Task)[0x5D]  = 0;
-    ((u8*)g_Task)[0x5E]  = 0;
-    ((u8*)g_Task)[0x5F]  = 0;
+    TASK_BYTES[0x2A]     = 0;
+    TASK_BYTES[0x5D]     = 0;
+    TASK_BYTES[0x5E]     = 0;
+    TASK_BYTES[0x5F]     = 0;
 
     scratch                                                         = (u8*)g_Task;
     row_offset                                                      = scratch[0x0B] * 4;
     map_offset                                                      = D_801F4CB0[0x19 + row_offset] * D_80104000;
     *(g_AreaCellCodes + map_offset + D_801F4CB0[0x18 + row_offset]) = 0xA0;
     Actor_SelectScript(0);
-    ((u8*)g_Task)[1] = 1;
+    TASK_BYTES[1] = 1;
 }

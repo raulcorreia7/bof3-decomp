@@ -37,13 +37,13 @@ MATCH void Actor_SpawnRandomGroup(void) {
         if (index == GAME_NONE) {
             break;
         }
-        g_ActorSlots[index].flags          = 1;
-        g_ActorSlots[index].type           = 0x16;
-        g_ActorSlots[index].mode           = 1;
-        g_ActorSlots[index].unk_06         = (u8)i;
-        g_ActorSlots[index].unk_08         = (u8)(kind >> 4);
-        distance                           = Area_SampleHeight(D_80145EC4[0], D_80145EC4[1]) + 0x400;
-        g_ActorSlots[index].z.part.integer = distance;
+        g_ActorSlots[index].flags        = 1;
+        g_ActorSlots[index].type         = 0x16;
+        g_ActorSlots[index].mode         = 1;
+        g_ActorSlots[index].unk_06       = (u8)i;
+        g_ActorSlots[index].unk_08       = (u8)(kind >> 4);
+        distance                         = Area_SampleHeight(D_80145EC4[0], D_80145EC4[1]) + 0x400;
+        COORD_INT(g_ActorSlots[index].z) = distance;
         i++;
     } while (i < count);
 }

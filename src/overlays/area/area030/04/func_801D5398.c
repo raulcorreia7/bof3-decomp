@@ -26,7 +26,7 @@ MATCH void func_801D5398(void) {
         g_ActorSlots[index].flags = 1;
         g_ActorSlots[index].type  = 0x1A;
         g_ActorSlots[index].mode  = 0x10;
-        g_ActorSlots[index].step  = (u8) * (u16*)&g_Task->z.part.integer;
+        g_ActorSlots[index].step  = (u8) * (u16*)&COORD_INT(g_Task->z);
 
         work                   = FISHING_STATE;
         work->handler_index_01 = (u8)(work->handler_index_01 + 1);

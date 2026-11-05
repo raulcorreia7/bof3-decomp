@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_801B79F8(void) {
-    g_Task->z.part.integer = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed) - 0x200;
+    COORD_INT(g_Task->z) = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed) - 0x200;
     g_Task->x.fixed -= g_FacingOffsets[g_Task->direction_08].x * ((g_Task->state_70.byte + 1) << 5);
     g_Task->y.fixed -= g_FacingOffsets[g_Task->direction_08].y * ((g_Task->state_70.byte + 1) << 5);
     if (g_Task->direction_08 == 7) {

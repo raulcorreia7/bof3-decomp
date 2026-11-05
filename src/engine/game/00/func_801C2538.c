@@ -30,5 +30,5 @@ MATCH void func_801C2538(void) {
     if (SP_REF(volatile u8, 0x0u) != 0) {
         result = Area_ReadHeight(pos_x, pos_y);
     }
-    g_Task->vz = (result - g_Task->z.part.integer) / g_Task->unk_09;
+    g_Task->vz = (result - COORD_INT(g_Task->z)) / g_Task->unk_09;
 }

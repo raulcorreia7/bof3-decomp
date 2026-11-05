@@ -7,13 +7,13 @@ MATCH void func_801B7FE0(void) {
     u8     arg;
 
     work = g_Task;
-    work->z.part.integer -= 0x10;
-    if ((s16)work->z.part.integer < Area_ReadHeight(work->x.fixed, work->y.fixed)) {
-        value                 = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
-        store                 = g_Task;
-        store->unk_09         = 2;
-        store->z.part.integer = value;
-        g_Task->unk_0A        = 0;
+    COORD_INT(work->z) -= 0x10;
+    if ((s16)COORD_INT(work->z) < Area_ReadHeight(work->x.fixed, work->y.fixed)) {
+        value               = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
+        store               = g_Task;
+        store->unk_09       = 2;
+        COORD_INT(store->z) = value;
+        g_Task->unk_0A      = 0;
         Actor_RequestScript((g_Task->direction_08 == 3) ? 7 : 1);
         g_Task->unk_04 = 9;
     }

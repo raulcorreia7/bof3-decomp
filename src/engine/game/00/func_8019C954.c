@@ -25,7 +25,7 @@ MATCH void func_8019C954(void) {
         work                    = (u8*)g_Task;
         FIELD(s32, work, 0x34u) = record->x.fixed;
         FIELD(s32, work, 0x38u) = record->y.fixed;
-        counter                 = record->z.part.integer;
+        counter                 = COORD_INT(record->z);
         work[0x5D]              = 0;
         next                    = (u8*)g_Task;
         FIELD(s16, work, 0x3Eu) = counter;

@@ -29,7 +29,7 @@ MATCH void func_801EEE94(void) {
     Callback handlers[2];
 
     handlers[0] = func_801EEEE0;
-    handlers[((u8*)g_Task)[1]]();
+    handlers[TASK_BYTES[1]]();
 }
 
 INCLUDE_ASM(func_801EEEE0);

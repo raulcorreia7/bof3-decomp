@@ -22,7 +22,7 @@ MATCH void func_801EEFE0(void) {
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF0C0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_Task)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
 }
 
 INCLUDE_ASM(func_801EF104);

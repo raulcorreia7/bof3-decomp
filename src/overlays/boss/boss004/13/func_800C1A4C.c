@@ -15,7 +15,7 @@ MATCH void func_800C1A4C(void) {
             ((PartyBattler*)g_Task)->unk_2A = 1;
             ((PartyBattler*)g_Task)->pos.x.fixed += 0x18000;
         }
-        ((PartyBattler*)g_Task)->pos.z.part.integer =
+        COORD_INT(((PartyBattler*)g_Task)->pos.z) =
             Area_SampleHeight(((PartyBattler*)g_Task)->pos.x.fixed, ((PartyBattler*)g_Task)->pos.y.fixed);
         g_BattleCurrentEnemy->script = &D_800C272C;
         Actor_SelectScript(1U);

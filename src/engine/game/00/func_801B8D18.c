@@ -12,7 +12,7 @@ MATCH bool func_801B8D18(void) {
 
     if (g_Task->state_70.byte == 0) {
         if (g_Task->direction_08 == 3) {
-            if (g_Task->x.part.fraction != 0) {
+            if (COORD_FRAC(g_Task->x) != 0) {
                 return false;
             }
             x     = g_Task->x.fixed + 0x8000;
@@ -21,7 +21,7 @@ MATCH bool func_801B8D18(void) {
             if (SPAD_ACTIVE == 0 || value < 0x41) {
                 return false;
             }
-            if (g_Task->y.part.fraction != 0) {
+            if (COORD_FRAC(g_Task->y) != 0) {
                 value = Area_ReadStepHeight(x, y + 0x8000, 3);
                 if (SPAD_ACTIVE == 0 || value < 0x41) {
                     return false;
@@ -30,7 +30,7 @@ MATCH bool func_801B8D18(void) {
             return true;
         }
         if (g_Task->direction_08 == 5) {
-            if (g_Task->y.part.fraction != 0) {
+            if (COORD_FRAC(g_Task->y) != 0) {
                 return false;
             }
             x     = g_Task->x.fixed & 0xFFFF0000;
@@ -39,7 +39,7 @@ MATCH bool func_801B8D18(void) {
             if (SPAD_ACTIVE == 0 || value < 0x41) {
                 return false;
             }
-            if (g_Task->x.part.fraction != 0) {
+            if (COORD_FRAC(g_Task->x) != 0) {
                 value = Area_ReadStepHeight(x + 0x8000, y, 5);
                 if (SPAD_ACTIVE == 0 || value < 0x41) {
                     return false;
@@ -51,7 +51,7 @@ MATCH bool func_801B8D18(void) {
     }
 
     if (g_Task->direction_08 == 3) {
-        if (g_Task->x.part.fraction == 0) {
+        if (COORD_FRAC(g_Task->x) == 0) {
             return false;
         }
         x     = g_Task->x.fixed + 0x10000;
@@ -65,7 +65,7 @@ MATCH bool func_801B8D18(void) {
         if (SPAD_ACTIVE == 0 || value < 0x41) {
             return false;
         }
-        if (g_Task->y.part.fraction == 0) {
+        if (COORD_FRAC(g_Task->y) == 0) {
             value = Area_ReadStepHeight(x, y - 0x10000, 3);
             if (SPAD_ACTIVE == 0 || value < 0x41) {
                 return false;
@@ -74,7 +74,7 @@ MATCH bool func_801B8D18(void) {
         return true;
     }
     if (g_Task->direction_08 == 5) {
-        if (g_Task->y.part.fraction == 0) {
+        if (COORD_FRAC(g_Task->y) == 0) {
             return false;
         }
         x     = g_Task->x.fixed & 0xFFFF0000;
@@ -88,7 +88,7 @@ MATCH bool func_801B8D18(void) {
         if (SPAD_ACTIVE == 0 || value < 0x41) {
             return false;
         }
-        if (g_Task->x.part.fraction == 0) {
+        if (COORD_FRAC(g_Task->x) == 0) {
             value = Area_ReadStepHeight(x - 0x10000, y, 3);
             if (SPAD_ACTIVE == 0 || value < 0x41) {
                 return false;
