@@ -107,7 +107,16 @@ MATCH void func_801EF8C8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF930);
+MATCH void func_801EF930(void) {
+    u8 temp_v1;
+
+    func_801EF984();
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x80) {
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF984);
 
