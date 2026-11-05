@@ -38,7 +38,12 @@ MATCH void func_80117610(void) {
     func_80117900();
 }
 
-INCLUDE_ASM(func_8011765C);
+MATCH void func_8011765C(void) {
+    g_GameFlags |= 0x40;
+    func_801172D0();
+    ((Actor*)g_SpadWork)->unk_09 = 0xB4;
+    ((Actor*)g_SpadWork)->unk_01 += 1;
+}
 
 INCLUDE_ASM(func_801176B8);
 
@@ -72,6 +77,14 @@ MATCH void func_80117C38(void) {
 
 INCLUDE_ASM(func_80117C58);
 
-INCLUDE_ASM(func_80117DF0);
+MATCH void func_80117DF0(void) {
+    if (!(g_FrameCount & 1)) {
+        ((Actor*)g_SpadWork)->unk_09 += 1;
+    }
+    if ((u8)((Actor*)g_SpadWork)->unk_09 >= 0x80U) {
+        func_80196070();
+    }
+    func_80117E78(0x80 - ((Actor*)g_SpadWork)->unk_09, 0);
+}
 
 INCLUDE_ASM(func_80117E78);
