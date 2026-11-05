@@ -146,6 +146,7 @@ g_BattleTemplateStats = { addr = 0x801EC364, source = "Battler template stat row
 BMagic_RunStep = { addr = 0x801EEC64, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 Effect_StartPlaying = { addr = 0x801EEFA4, type = "func", source = "raises the g_BattleState flag 0x4 (BATTLE_STATE_EFFECT_PLAYING) and runs func_801E5988, which clears the effect work record D_801EC2E0; the effect step tables of the bmagic and boss overlays call it" }
 Effect_StartPlaying_801EFA84 = { addr = 0x801EFA84, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic001/00@0x801EEFA4" }
+Effect_PrimeTintOnScriptReady = { addr = 0x801EFF28, type = "func", source = "sets the work flag 0x20, primes the tint bytes at +0x5C..+0x5F to (1,0,0,0) and advances the effect step once func_8014DAEC reports the script stream ready; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F04B4, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic002/00"]
@@ -337,6 +338,7 @@ Effect_SetActorMatrix = { addr = 0x801EF410, type = "func", source = "sets the a
 Effect_CopyBattlerCoords_801EFAD8 = { addr = 0x801EFAD8, type = "func", source = "byte-identical to Effect_CopyBattlerCoords at emi/bmagic/magic056/03@0x801EF27C" }
 Effect_CountUpAndStepAt30 = { addr = 0x801EFBA4, type = "func", source = "counts the effect timer at +0x09 up and advances the effect step byte at +0x02 at 30; one body shared with the other bmagic overlays" }
 Effect_CountDownTimerCapped = { addr = 0x801EFBF4, type = "func", source = "raises the effect timer to 0x2E, counts the effect counter down and finishes the effect at zero" }
+Effect_PrimeTintOnScriptReady = { addr = 0x801F0024, type = "func", source = "sets the work flag 0x20, primes the tint bytes at +0x5C..+0x5F to (1,0,0,0) and advances the effect step once func_8014DAEC reports the script stream ready; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F0744, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic057/03"]
