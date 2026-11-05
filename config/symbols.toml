@@ -2166,6 +2166,7 @@ Scene_RemoveNina = { addr = 0x801FCEFC, type = "func", source = "removes charact
 
 ["emi/scenario/scena04/00"]
 Scene_ShowMessage = { addr = 0x801F9FD0, type = "func", source = "starts the area message of the given index, switches the game state to 2 and sets the script-active flag; byte-equal to func_801FCC9C of scena03" }
+Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FA12C, type = "func", source = "streams the EMI family for young Ryu, young Nina and Momo, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena05/00"]
 Scene_JoinNina = { addr = 0x801FD460, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers and joins character 1 (CHAR_ID_NINA_YOUNG) with Party_JoinMember, without the palette restage of Scene_JoinAdultNina; one body shared with the other scenario programs" }
@@ -2184,6 +2185,7 @@ Scene_RemoveMomo = { addr = 0x801FE364, type = "func", source = "removes charact
 ["emi/scenario/scena07/00"]
 Actor_WaitAndStep = { addr = 0x801F8730, type = "func", source = "counts the actor wait byte down reloads it at zero and advances the handler index" }
 AngleAverage12 = { addr = 0x801F8F40, type = "func", source = "averages two 12-bit angles along the shorter arc" }
+Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FDB34, type = "func", source = "streams the EMI family for young Ryu, young Nina and Momo, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena08/00"]
 Actor_WaitAndStep = { addr = 0x801F8D18, type = "func", source = "counts the actor wait byte down reloads it at zero and advances the handler index" }
