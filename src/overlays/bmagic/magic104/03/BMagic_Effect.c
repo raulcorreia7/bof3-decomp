@@ -99,7 +99,21 @@ MATCH void func_801EF2F8(void) {
 
 INCLUDE_ASM(func_801EF370);
 
-INCLUDE_ASM(func_801EFA54);
+MATCH void func_801EFA54(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+
+    PushMatrix();
+    rot.vx = 0;
+    rot.vy = 0;
+    rot.vz = 0;
+    if (g_SpadWork->slot == 0xC) {
+        rot.vz = (g_FrameCount & 0xF) << 8;
+    }
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_SpadWork);
+}
 
 INCLUDE_ASM(func_801EFB2C);
 

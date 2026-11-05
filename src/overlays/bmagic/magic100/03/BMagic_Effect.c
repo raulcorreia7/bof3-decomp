@@ -66,6 +66,36 @@ MATCH void func_801EF434(void) {
 
 INCLUDE_ASM(func_801EF4E8);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF8E8(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+    s32     height;
+    PartyBattler* work;
+
+    PushMatrix();
+    work = g_SpadWork;
+    rot.vx = 0;
+    rot.vy = 0;
+    rot.vz = 0;
+    pos.vx = (work->coord_x_34.raw >> 9) - 0x4000;
+    pos.vy = (work->coord_y_38.raw >> 9) - 0x4000;
+    if (work->unk_02 < 3) {
+        height = -work->word_3C.half.span_3E;
+    } else {
+        height = -(s16)Area_SampleHeight(work->coord_x_34.raw, work->coord_y_38.raw);
+    }
+    pos.vz = height / 2;
+    RotTrans(&pos, &matrix.t, &flags);
+    RotMatrix(&rot, &matrix);
+    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
+    SetRotMatrix(&matrix);
+    SetTransMatrix(&matrix);
+}
+#else
 INCLUDE_ASM(func_801EF8E8);
+#endif
 
 INCLUDE_ASM(func_801EF9D4);
