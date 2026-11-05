@@ -42,15 +42,7 @@ MATCH void func_801EF268(void) {
     }
 }
 
-MATCH void func_801EF2D4(void) {
-    u8 timer;
-
-    timer              = g_SpadWork->unk_04 + 2;
-    g_SpadWork->unk_04 = timer;
-    if (timer == 16) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
-    }
-}
+#include "../../Effect_CountUpWorkByteAndStep.h"
 
 MATCH void func_801EF324(void) {
     PartyBattler* work;

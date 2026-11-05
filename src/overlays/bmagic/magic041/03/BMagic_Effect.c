@@ -4,11 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC38(void) {
-    BattleHandlerTable6 handlers = D_801EEC04;
-
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_SpadWork);
-}
+#include "../../Effect_DispatchHandlerSlot1.h"
 
 INCLUDE_ASM(func_801EECB0);
 

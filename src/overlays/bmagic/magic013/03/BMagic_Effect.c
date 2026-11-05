@@ -48,15 +48,7 @@ MATCH void func_801EF014(void) {
 
 INCLUDE_ASM(func_801EF0A4);
 
-MATCH void func_801EF1A0(void) {
-    u8 timer;
-
-    timer              = g_SpadWork->unk_04 + 2;
-    g_SpadWork->unk_04 = timer;
-    if (timer == 16) {
-        g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
-    }
-}
+#include "../../Effect_CountUpWorkByteAndStep.h"
 
 INCLUDE_ASM(func_801EF1F0);
 
