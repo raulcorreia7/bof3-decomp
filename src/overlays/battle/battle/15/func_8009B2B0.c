@@ -35,7 +35,7 @@ MATCH void func_8009B2B0(void) {
 
         for (slot = 0; slot < (*(u8*)&g_BattlePartyCount); slot++) {
             if (Battle_SlotIsBlocked(slot) == 0) {
-                player_sum += g_BattlePartyBattlers[slot].stats.agility;
+                player_sum += g_BattlePartyBattlers[slot].stats.stats.agility;
             }
         }
         player_sum /= g_BattleLivingPartyCount;

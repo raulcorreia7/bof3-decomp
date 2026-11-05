@@ -81,7 +81,7 @@ NON_MATCHING void func_801D6AC4(s32 party_slot) {
         val8  = D_801C8944[val1 & BYTE_MASK];
         val6  = val8 & BYTE_MASK;
         armor = &g_Armors[val6];
-        val9  = armor->power;
+        val9  = armor->stats.power;
         val7  = armor->weight;
         if ((armor->equip_type - 2) == (val2 - 1)) {
             frame.value = (s32)val4;

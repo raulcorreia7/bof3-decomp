@@ -8,12 +8,12 @@ MATCH void func_801D6E6C(void) {
 
     i       = 0;
     record  = &g_Characters[g_CharSlot[D_80144F5A[D_80148510]]];
-    ptrs[0] = &record->weapon;
-    ptrs[1] = &record->shield;
-    ptrs[2] = &record->helmet;
-    ptrs[3] = &record->armor;
-    ptrs[4] = &record->accessories[0];
-    ptrs[5] = &record->accessories[1];
+    ptrs[0] = &record->equipment.weapon;
+    ptrs[1] = &record->equipment.shield;
+    ptrs[2] = &record->equipment.helmet;
+    ptrs[3] = &record->equipment.armor;
+    ptrs[4] = &record->equipment.accessories[0];
+    ptrs[5] = &record->equipment.accessories[1];
     do {
         want = (&D_801ED63C)[i & BYTE_MASK];
         if (want != 0) {

@@ -13,9 +13,9 @@ MATCH u8 func_801D54F8(void) {
             last_index = index;
             count += 1u;
             g_BattlePartyBattlers[index].counter_137             = 0u;
-            g_BattlePartyBattlers[index].stats.current_hp        = g_BattlePartyBattlers[index].stats.max_hp;
-            g_BattlePartyBattlers[index].stats.current_ap        = g_BattlePartyBattlers[index].stats.max_ap;
-            g_BattlePartyBattlers[index].stats.current_willpower = g_BattlePartyBattlers[index].stats.willpower;
+            g_BattlePartyBattlers[index].stats.current_hp        = g_BattlePartyBattlers[index].stats.stats.max_hp;
+            g_BattlePartyBattlers[index].stats.current_ap        = g_BattlePartyBattlers[index].stats.stats.max_ap;
+            g_BattlePartyBattlers[index].stats.current_willpower = g_BattlePartyBattlers[index].stats.stats.willpower;
             func_800A36F0(index, 0x8FFu);
         }
     }

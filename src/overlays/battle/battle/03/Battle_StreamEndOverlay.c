@@ -30,9 +30,9 @@ MATCH void Battle_StreamEndOverlay(void) {
 
                 g_Task = work;
                 if (HAS_STATUS(g_BattlePartyBattlers[i], 0x800u)) {
-                    g_BattlePartyBattlers[i].stats.current_hp        = g_BattlePartyBattlers[i].stats.max_hp;
-                    g_BattlePartyBattlers[i].stats.current_ap        = g_BattlePartyBattlers[i].stats.max_ap;
-                    g_BattlePartyBattlers[i].stats.current_willpower = g_BattlePartyBattlers[i].stats.willpower;
+                    g_BattlePartyBattlers[i].stats.current_hp        = g_BattlePartyBattlers[i].stats.stats.max_hp;
+                    g_BattlePartyBattlers[i].stats.current_ap        = g_BattlePartyBattlers[i].stats.stats.max_ap;
+                    g_BattlePartyBattlers[i].stats.current_willpower = g_BattlePartyBattlers[i].stats.stats.willpower;
                     func_800A36F0(i, g_BattlePartyBattlers[i].stats.status & ~STATUS_KO);
                 }
                 func_800A36F0(i, g_BattlePartyBattlers[i].stats.status & STATUS_CURE_MASK);

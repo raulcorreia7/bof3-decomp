@@ -10,13 +10,13 @@ MATCH void Char_AddHp(s32 amount, u8 char_id) {
 
     record = &g_Characters[g_CharSlot[char_id]];
     value  = record->current_hp;
-    if (value < record->max_hp) {
+    if (value < record->stats.max_hp) {
         record->current_hp = value + amount;
-        if (record->max_hp < (u16)(value + amount)) {
-            record->current_hp = record->max_hp;
+        if (record->stats.max_hp < (u16)(value + amount)) {
+            record->current_hp = record->stats.max_hp;
         }
         slot = g_GameState->unk_13A[2];
-        if ((g_Characters[slot].max_hp >> 2) < g_Characters[slot].current_hp) {
+        if ((g_Characters[slot].stats.max_hp >> 2) < g_Characters[slot].current_hp) {
             g_Characters[slot].status &= ~STATUS_LOW_HP;
             g_GameState->stats.status &= ~STATUS_LOW_HP;
         }

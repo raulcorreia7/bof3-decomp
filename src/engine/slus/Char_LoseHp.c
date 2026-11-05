@@ -21,7 +21,7 @@ MATCH s32 Char_LoseHp(s32 mode, s32 index) {
 
     block = g_GameState;
     slot  = block->unk_13A[2];
-    if ((g_Characters[slot].max_hp >> 2) >= g_Characters[slot].current_hp) {
+    if ((g_Characters[slot].stats.max_hp >> 2) >= g_Characters[slot].current_hp) {
         g_Characters[slot].status |= STATUS_LOW_HP;
         block->stats.status |= STATUS_LOW_HP;
     }

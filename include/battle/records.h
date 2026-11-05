@@ -306,7 +306,7 @@ typedef struct BattlePanelTask {
     u16               row_base;  /* +0x12 the panel list's first row (func_800B1728) */
     u16               hp;        /* +0x14 copied from EnemyBattler.hp; the HP bar's numerator */
     u8                pad_16[6]; /* +0x16 .. +0x1B */
-    u16               max_hp;    /* +0x1C copied from EnemyBattler.cell_A0.max_hp; the HP bar's divisor */
+    u16               max_hp;    /* +0x1C copied from EnemyBattler.cell_A0.stats.max_hp; the HP bar's divisor */
 } BattlePanelTask;
 
 ASSERT_SIZE(BattlePanelTask, 0x1E);

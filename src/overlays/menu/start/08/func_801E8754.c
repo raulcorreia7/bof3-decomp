@@ -10,8 +10,8 @@ MATCH s32 func_801E8754(s32 character_index, s32 record_index) {
     } else {
         rec = (Character*)&D_80145F04[(character_index & BYTE_MASK) * BATTLE_PARTY_STRIDE];
     }
-    a = Char_AddWillpower((&rec->base_willpower), 1);
-    b = Char_AddWillpower((&rec->willpower), 1);
+    a = Char_AddWillpower((&rec->base_stats.willpower), 1);
+    b = Char_AddWillpower((&rec->stats.willpower), 1);
     if ((a != 0) || (b != 0)) {
         return 0;
     }

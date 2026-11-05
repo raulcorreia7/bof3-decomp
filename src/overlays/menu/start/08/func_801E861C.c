@@ -6,8 +6,8 @@ MATCH s32 func_801E861C(s32 character_index, s32 record_index) {
     u8         b;
 
     rec = Start_PickPartyRecord(character_index, record_index);
-    a   = Char_AddStat(&rec->base_agility, 1);
-    b   = Char_AddStat(&rec->agility, 1);
+    a   = Char_AddStat(&rec->base_stats.agility, 1);
+    b   = Char_AddStat(&rec->stats.agility, 1);
     if ((a != 0) || (b != 0)) {
         return 0;
     }

@@ -11,12 +11,12 @@ MATCH void Char_AddAp(s32 amount, s32 char_id) {
 
     rec   = &g_Characters[g_CharSlot[char_id & BYTE_MASK]];
     cur   = rec->current_ap;
-    limit = rec->max_ap;
+    limit = rec->stats.max_ap;
     if (cur < limit) {
         next            = cur + amount;
         rec->current_ap = next;
-        if (rec->max_ap < (next & HALF_MASK)) {
-            rec->current_ap = rec->max_ap;
+        if (rec->stats.max_ap < (next & HALF_MASK)) {
+            rec->current_ap = rec->stats.max_ap;
         }
     }
 }

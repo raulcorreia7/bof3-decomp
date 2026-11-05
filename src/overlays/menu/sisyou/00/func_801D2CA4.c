@@ -24,7 +24,7 @@ MATCH void func_801D2CA4(void) {
         D_801490DD                                                              = 0;
         edp                                                                     = &D_801448ED;
         g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].master_id = *edp;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].unk_84 =
+        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].master_level =
             g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level;
         g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[0] =
             g_MasterStats[*edp].hp_bonus;
