@@ -1,6 +1,9 @@
 #include "battle_15.h"
 
-/* 3 differing: +0x80 loads 1 before g_SpadWork; move the work load ahead of the queue writes. */
+/* blocker: tail regalloc; first diff: +0x80 `li v0,1` where retail reads g_SpadWork.
+ * Reordering the stores or hoisting work/result locals keeps 3 differ and +4 bytes, moving
+ * the first diff to +0x70 (`andi a0,v0,0xff` against retail `andi v0,v0,0xff`); the draft
+ * already returns the stored 1. Permuter 115k iterations, best score 480. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_800AEEC8(s32 arg0, u8 arg1, s32 arg2) {
     u8  mode;
