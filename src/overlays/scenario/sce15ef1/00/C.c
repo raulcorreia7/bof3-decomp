@@ -14,7 +14,20 @@ MATCH void func_801D0C0C(void) {
 
 INCLUDE_ASM(func_801D0C48);
 
-INCLUDE_ASM(func_801D0CC0);
+void func_801D0CC0(void) {
+    u16 screen_x;
+    u8  mode;
+
+    screen_x           = g_SpadWork->unk_2E + 0x20;
+    g_SpadWork->unk_2E = screen_x;
+    func_801D147C(&g_SpadWork->unk_64, (s16)screen_x, 6);
+    mode               = g_SpadWork->unk_09 - 1;
+    g_SpadWork->unk_09 = mode;
+    if (!(mode & 0xFF)) {
+        g_SpadWork->unk_09 = 0x40;
+        g_SpadWork->unk_01 += 1;
+    }
+}
 
 MATCH void func_801D0D54(void) {
     u8 mode;
