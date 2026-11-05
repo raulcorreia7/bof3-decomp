@@ -13,14 +13,14 @@ MATCH void func_801EEEF4(void) {
     PartyBattler* battler;
     u8            value;
 
-    battler                     = g_BattleSelectedActor;
-    value                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = value;
+    battler        = g_BattleSelectedActor;
+    value          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
         battler->unk_5C = 1;
         func_80196718(battler);
-        g_Task->word_08.byte.timer_0A = func_8019651C(battler, 0, 0, 0, 1);
-        g_Task->word_08.byte.unk_09   = 8;
+        g_Task->timer  = func_8019651C(battler, 0, 0, 0, 1);
+        g_Task->unk_09 = 8;
         g_Task->mode += 1;
     }
 }
@@ -30,10 +30,10 @@ MATCH void func_801EEFA0(void) {
     STACK_PADS(u8, 8);
     u8 timer;
 
-    D_80145BD4[g_Task->word_08.byte.timer_0A].red_offset -= 1;
-    D_80145BD4[g_Task->word_08.byte.timer_0A].green_offset -= 1;
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    D_80145BD4[g_Task->timer].red_offset -= 1;
+    D_80145BD4[g_Task->timer].green_offset -= 1;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         g_Task->mode = g_Task->mode + 1;
     }
@@ -119,10 +119,10 @@ MATCH void func_801EF900(void) {
 MATCH void func_801EFA2C(void) {
     u8 temp_v0;
 
-    temp_v0                       = g_Task->word_08.byte.timer_0A - 1;
-    g_Task->word_08.byte.timer_0A = temp_v0;
+    temp_v0       = g_Task->timer - 1;
+    g_Task->timer = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         g_Task->step += 1;
     }
 }
@@ -130,9 +130,9 @@ MATCH void func_801EFA2C(void) {
 MATCH void func_801EFA94(void) {
     PartyBattler* work;
 
-    work                      = g_Task;
-    work->word_08.byte.unk_09 = work->word_08.byte.unk_09 - 2;
-    if (g_Task->word_08.byte.unk_09 == 0) {
+    work         = g_Task;
+    work->unk_09 = work->unk_09 - 2;
+    if (g_Task->unk_09 == 0) {
         func_801E5988();
     }
 }

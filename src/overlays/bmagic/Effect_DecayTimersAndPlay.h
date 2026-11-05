@@ -4,17 +4,17 @@
  * must verify every member. */
 /* func_801EEEA8 (magic055), func_801EEEA8 (magic091) */
 MATCH void Effect_DecayTimersAndPlay(void) {
-    if (g_Task->word_08.byte.unk_0B < 4u) {
-        if (g_Task->word_08.byte.unk_09 != 0) {
-            g_Task->word_08.byte.unk_09--;
+    if (g_Task->unk_0B < 4u) {
+        if (g_Task->unk_09 != 0) {
+            g_Task->unk_09--;
         }
     }
-    if (g_Task->word_08.byte.unk_0B < 3u) {
-        if (g_Task->word_08.byte.timer_0A != 0) {
-            g_Task->word_08.byte.timer_0A--;
+    if (g_Task->unk_0B < 3u) {
+        if (g_Task->timer != 0) {
+            g_Task->timer--;
         }
     }
-    if ((g_Task->word_08.word & 0xFFFF0000u) == 0) {
+    if ((PARTY_BATTLER_WORD_08(g_Task) & 0xFFFF0000u) == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();

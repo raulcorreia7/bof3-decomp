@@ -28,8 +28,8 @@ MATCH void func_801EF478(void) {
     u8 timer;
 
     func_801F0390();
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         BMAGIC_TICK_EFFECT_WORK();
         func_801E5988();
@@ -44,16 +44,16 @@ MATCH void func_801F02A0(void) {
     s32 i;
 
     BMAGIC_SHIFT_TRAIL(D_801F0A38)
-    D_801F0A38[g_Task->unk_04][g_Task->word_08.byte.unk_0B].x = g_Task->unk_2E.half;
-    D_801F0A38[g_Task->unk_04][g_Task->word_08.byte.unk_0B].y = g_Task->unk_30.half;
+    D_801F0A38[g_Task->unk_04][g_Task->unk_0B].x = g_Task->unk_2E.half;
+    D_801F0A38[g_Task->unk_04][g_Task->unk_0B].y = g_Task->unk_30.half;
 }
 
 MATCH void func_801F0390(void) {
     s32 i;
 
     BMAGIC_SHIFT_TRAIL(D_801F0A38)
-    D_801F0A38[g_Task->unk_04][g_Task->word_08.byte.unk_0B].x = -1;
-    D_801F0A38[g_Task->unk_04][g_Task->word_08.byte.unk_0B].y = -1;
+    D_801F0A38[g_Task->unk_04][g_Task->unk_0B].x = -1;
+    D_801F0A38[g_Task->unk_04][g_Task->unk_0B].y = -1;
 }
 
 MATCH void func_801F0478(void) {
@@ -66,11 +66,11 @@ MATCH void func_801F0478(void) {
 MATCH void func_801F04F0(void) {
     func_800AF764();
     g_Task->unk_30.half += 8;
-    g_Task->unk_5D                = (rand() & 3) + 1;
-    g_Task->unk_5E                = (rand() & 3) + 1;
-    g_Task->unk_5F                = (rand() & 3) + 1;
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0x10;
+    g_Task->unk_5D = (rand() & 3) + 1;
+    g_Task->unk_5E = (rand() & 3) + 1;
+    g_Task->unk_5F = (rand() & 3) + 1;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0x10;
     g_Task->step += 1;
 }
 

@@ -26,15 +26,15 @@ MATCH void func_801EF014(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_Task->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
-    work                           = g_Task;
-    actor                          = D_801EB4E0;
-    work->coord_x_34.raw           = actor->coord_x_34.raw;
-    work->coord_y_38.raw           = actor->coord_y_38.raw;
-    z                              = actor->word_3C.word;
-    work->word_08.byte.unk_0B      = 0;
-    work->word_3C.word             = z;
-    g_Task->word_08.byte.unk_09    = 0;
+    g_Task->facing       = D_801EB4E0->facing;
+    work                 = g_Task;
+    actor                = D_801EB4E0;
+    work->coord_x_34.raw = actor->coord_x_34.raw;
+    work->coord_y_38.raw = actor->coord_y_38.raw;
+    z                    = actor->word_3C.word;
+    work->unk_0B         = 0;
+    work->word_3C.word   = z;
+    g_Task->unk_09       = 0;
     g_Task->step += 1;
 }
 
@@ -45,9 +45,9 @@ INCLUDE_ASM(func_801EF090);
 #include "../../Effect_DispatchHandlerSlot2.h"
 
 MATCH void func_801EF250(void) {
-    g_Task                                  = D_801EB4E0;
-    BATTLE_ACTIVE_WORK->word_08.byte.unk_0B = 0;
-    g_Task->word_08.byte.unk_09             = 0;
+    g_Task                     = D_801EB4E0;
+    BATTLE_ACTIVE_WORK->unk_0B = 0;
+    g_Task->unk_09             = 0;
     Actor_SelectScript(2U);
     g_Task->mode = 1;
     g_Task->step = 1;
@@ -78,7 +78,7 @@ MATCH void func_801EF540(void) {
     s32 temp_v0;
     u8  temp_v0_2;
 
-    temp_v0        = (g_Task->word_08.byte.unk_09 + g_Task->word_08.byte.unk_0B) & 0x3F;
+    temp_v0        = (g_Task->unk_09 + g_Task->unk_0B) & 0x3F;
     SP_REF(s16, 2) = (s16)(temp_v0 << 6);
     temp_a0        = g_Task->unk_14 + ((s32)(rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
     g_Task->unk_0C = temp_a0;
@@ -86,8 +86,8 @@ MATCH void func_801EF540(void) {
     g_Task->coord_y_38.raw += (s32)(rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
     func_800AF764(g_Task);
     func_801EF7E8();
-    temp_v0_2                   = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v0_2;
+    temp_v0_2      = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v0_2;
     if ((temp_v0_2 & 0xFF) == 0x10) {
         g_Task->step += 1;
     }
@@ -98,7 +98,7 @@ MATCH void func_801EF660(void) {
     s32 temp_v0;
     u8  temp_v0_2;
 
-    temp_v0        = (g_Task->word_08.byte.unk_09 + g_Task->word_08.byte.unk_0B) & 0x3F;
+    temp_v0        = (g_Task->unk_09 + g_Task->unk_0B) & 0x3F;
     SP_REF(s16, 2) = (s16)(temp_v0 << 6);
     temp_a0        = g_Task->unk_14 + ((s32)(rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
     g_Task->unk_0C = temp_a0;
@@ -106,11 +106,11 @@ MATCH void func_801EF660(void) {
     g_Task->coord_y_38.raw += (s32)(rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
     func_800AF764(g_Task);
     func_801EF7E8();
-    g_Task->word_08.byte.unk_09 += 1;
-    temp_v0_2                     = g_Task->word_08.byte.timer_0A - 1;
-    g_Task->word_08.byte.timer_0A = temp_v0_2;
+    g_Task->unk_09 += 1;
+    temp_v0_2     = g_Task->timer - 1;
+    g_Task->timer = temp_v0_2;
     if (!(temp_v0_2 & 0xFF)) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         g_Task->flags  = 0;
         g_Task->mode   = 0;
         g_Task->step   = 0;

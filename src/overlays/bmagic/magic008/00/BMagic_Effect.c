@@ -14,7 +14,7 @@ MATCH void func_801EECF0(void) {
 INCLUDE_ASM(func_801EED5C);
 
 MATCH void func_801EEF6C(void) {
-    if (g_Task->word_08.byte.unk_0B == 0xFF) {
+    if (g_Task->unk_0B == 0xFF) {
         func_800AEF98(4, 0);
         BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         g_Task->mode += 1;
@@ -37,7 +37,7 @@ INCLUDE_ASM(func_801EF0B8);
 MATCH void func_801EF324(void) {
     u16* battle_flags;
 
-    if (g_Task->word_08.byte.unk_0B == 0xFF) {
+    if (g_Task->unk_0B == 0xFF) {
         func_800AFC54();
         func_800AEF98(4, 0);
         battle_flags = &g_BattleState;
@@ -77,7 +77,7 @@ MATCH void func_801EF75C(void) {
 INCLUDE_ASM(func_801EF7C8);
 
 MATCH void func_801EF9D4(void) {
-    if (g_Task->word_08.byte.unk_0B == 0xFF) {
+    if (g_Task->unk_0B == 0xFF) {
         BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
         g_Task->mode += 1;
@@ -100,7 +100,7 @@ MATCH void func_801EFA74(void) {
 INCLUDE_ASM(func_801EFAD4);
 
 MATCH void func_801EFC90(void) {
-    if (g_Task->word_08.byte.unk_0B == 0xFF) {
+    if (g_Task->unk_0B == 0xFF) {
         BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
         g_Task->mode += 1;
@@ -137,10 +137,10 @@ MATCH void func_801F0250(void) {
 INCLUDE_ASM(func_801F0294);
 
 MATCH void func_801F0330(void) {
-    g_Task->unk_40              = 0x10000;
-    g_Task->unk_44              = 0x10000;
-    g_Task->unk_48              = 2;
-    g_Task->word_08.byte.unk_09 = 0x1E;
+    g_Task->unk_40 = 0x10000;
+    g_Task->unk_44 = 0x10000;
+    g_Task->unk_48 = 2;
+    g_Task->unk_09 = 0x1E;
     g_Task->step += 1;
 }
 
@@ -150,8 +150,8 @@ MATCH void func_801F03FC(void) {
     u8 counter;
 
     func_8014DAEC();
-    counter                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = counter;
+    counter        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
         func_800A9820(g_BattleTargetSelector);
         func_800AFC98(2, 4);
@@ -162,7 +162,7 @@ MATCH void func_801F03FC(void) {
 MATCH void func_801F047C(void) {
     if (func_8014DAEC() & 0xFF) {
         SND_QueueSelectionFx(0x101);
-        g_Task->word_08.byte.unk_09 = 0xF;
+        g_Task->unk_09 = 0xF;
         g_Task->step += 1;
     }
 }
@@ -177,7 +177,7 @@ MATCH void func_801F04DC(void) {
     work->unk_40 = work->unk_40 - 0x800;
     work->unk_44 = work->unk_44 - 0x1000;
     if (timer == 0) {
-        D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        D_801EB4E0->unk_0B = 0xFF;
         g_Task->step += 1;
     }
 }
@@ -196,10 +196,10 @@ MATCH void func_801F0710(void) {
     g_Task->unk_5D += 3;
     g_Task->unk_5E += 3;
     g_Task->unk_5F += 3;
-    count                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = count;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
-        g_Task->word_08.byte.unk_09 = func_800AFF98();
+        g_Task->unk_09 = func_800AFF98();
         g_Task->step += 1;
     }
 }
@@ -208,12 +208,12 @@ MATCH void func_801F07D4(void) {
     u8 counter;
 
     func_8014DAEC();
-    counter                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = counter;
+    counter        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
         func_800A9820(g_BattleTargetSelector);
         func_800AFC98(2, 4);
-        g_Task->word_08.byte.unk_09 = 0x20;
+        g_Task->unk_09 = 0x20;
         g_Task->step += 1;
     }
 }
@@ -221,7 +221,7 @@ MATCH void func_801F07D4(void) {
 MATCH void func_801F0864(void) {
     if (func_8014DAEC() & 0xFF) {
         SND_QueueSelectionFx(0x101);
-        g_Task->word_08.byte.unk_09 = 0x20;
+        g_Task->unk_09 = 0x20;
         g_Task->step += 1;
     }
 }
@@ -232,10 +232,10 @@ MATCH void func_801F08C4(void) {
     g_Task->unk_5D -= 3;
     g_Task->unk_5E -= 3;
     g_Task->unk_5F -= 3;
-    counter                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = counter;
+    counter        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B = 0xFF;
+        BATTLE_ACTIVE_WORK->unk_0B = 0xFF;
         func_801E5988();
     }
 }
@@ -248,23 +248,23 @@ MATCH void func_801F0964(void) {
 }
 
 MATCH void func_801F09D0(void) {
-    g_Task->word_08.byte.unk_09 = func_800AFF98();
-    g_Task->step                = g_Task->step + 1;
+    g_Task->unk_09 = func_800AFF98();
+    g_Task->step   = g_Task->step + 1;
     func_8014D290();
 }
 
 MATCH void func_801F0A20(void) {
     u8 value;
 
-    value                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = value;
+    value          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
         func_8014DAEC();
         func_800AFC98(2, 4);
         g_Task->step += 1;
     } else if (func_8014DAEC() & 0xFF) {
         func_800AFC98(2, 4);
-        g_Task->word_08.byte.unk_09 = 0;
+        g_Task->unk_09 = 0;
         g_Task->step += 1;
     }
     func_8014D290();
@@ -273,7 +273,7 @@ MATCH void func_801F0A20(void) {
 MATCH void func_801F0AC8(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800A9820(g_BattleTargetSelector);
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        BATTLE_ACTIVE_WORK->unk_0B -= 1;
         g_Task->step += 1;
     }
     func_8014D290();
@@ -282,12 +282,12 @@ MATCH void func_801F0AC8(void) {
 MATCH void func_801F0B44(void) {
     u16* battle_half;
 
-    if ((u8)g_Task->word_08.byte.unk_09 < 0xCU) {
+    if ((u8)g_Task->unk_09 < 0xCU) {
         battle_half = (u16*)&g_BattleActionId;
         if (*battle_half != 0xA4) {
             func_801F0BBC();
         }
-        g_Task->word_08.byte.unk_09 += 4;
+        g_Task->unk_09 += 4;
         return;
     }
     func_801E5988();
@@ -314,10 +314,10 @@ MATCH void func_801F0FA4(void) {
         g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
         g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
         func_8014DAEC();
-        value                       = g_Task->word_08.byte.unk_09 - 1;
-        g_Task->word_08.byte.unk_09 = value;
+        value          = g_Task->unk_09 - 1;
+        g_Task->unk_09 = value;
         if (!(value & 0xFF)) {
-            g_Task->word_08.byte.unk_09 = g_Task->word_08.byte.unk_0B + 4;
+            g_Task->unk_09 = g_Task->unk_0B + 4;
             g_Task->step += 1;
         }
     } else {
@@ -339,7 +339,7 @@ MATCH void func_801F11C4(void) {
     g_Task->unk_5E -= 3;
     g_Task->unk_5F -= 3;
     if ((s8)g_Task->unk_5D == -0x80) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         g_Task->step += 1;
     }
 }
@@ -356,8 +356,8 @@ MATCH void func_801F1384(void) {
     u8 temp_v0;
 
     func_8014DAEC();
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         func_800AFC98(2, 0);
         func_800A9820(g_BattleTargetSelector);
@@ -368,7 +368,7 @@ MATCH void func_801F1384(void) {
 MATCH void func_801F1400(void) {
     if (func_8014DAEC() & 0xFF) {
         if (g_Task->step == 5) {
-            D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+            D_801EB4E0->unk_0B = 0xFF;
         }
         g_Task->step += 1;
     }
@@ -390,8 +390,8 @@ MATCH void func_801F1804(void) {
     u8 temp_v0;
 
     func_8014DAEC();
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         func_800AFC98(2, 0);
         func_800A9820(g_BattleTargetSelector);
@@ -402,7 +402,7 @@ MATCH void func_801F1804(void) {
 MATCH void func_801F1880(void) {
     if (func_8014DAEC() & 0xFF) {
         if (g_Task->step == 8) {
-            D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+            D_801EB4E0->unk_0B = 0xFF;
         }
         g_Task->step += 1;
     }

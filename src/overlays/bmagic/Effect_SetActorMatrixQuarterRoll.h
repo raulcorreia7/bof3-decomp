@@ -10,7 +10,7 @@ MATCH void Effect_SetActorMatrixQuarterRoll(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    if (g_Task->word_08.byte.facing_08 & 1) {
+    if (g_Task->facing & 1) {
         rot.vz = ONE / 4;
     }
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);

@@ -32,8 +32,8 @@ MATCH void func_801EF4F0(void) {
     timer        = work->unk_5D - 1;
     work->unk_5D = timer;
     if (timer == 0) {
-        work                      = D_801EB4E0;
-        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
+        work         = D_801EB4E0;
+        work->unk_0B = work->unk_0B - 1;
         func_801E5988();
     }
 }
@@ -51,31 +51,31 @@ MATCH void func_801F00D4(void) {
     s32 value2;
     u8  value3;
 
-    value3                      = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = value3;
+    value3         = g_Task->unk_09 - 1;
+    g_Task->unk_09 = value3;
     if (!(value3 & 0xFF)) {
-        g_Task->unk_14                = 0x40000;
-        g_Task->unk_20                = 0x20000;
-        value2                        = (rand() & 0xF) + 0x1C;
-        value                         = (g_Task->word_08.byte.unk_0B & 0x1F) << 7;
-        g_Task->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw + (rsin(value) * value2);
-        g_Task->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw + (rcos(value) * value2);
-        g_Task->word_3C.word          = D_801EB4E0->word_3C.word;
-        g_Task->unk_5D                = (rand() & 7) + 5;
-        g_Task->unk_5E                = (rand() & 7) + 5;
-        g_Task->unk_5F                = (rand() & 7) + 5;
-        g_Task->word_08.byte.unk_09   = 0x10;
-        g_Task->word_08.byte.timer_0A = 0x10;
+        g_Task->unk_14         = 0x40000;
+        g_Task->unk_20         = 0x20000;
+        value2                 = (rand() & 0xF) + 0x1C;
+        value                  = (g_Task->unk_0B & 0x1F) << 7;
+        g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw + (rsin(value) * value2);
+        g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw + (rcos(value) * value2);
+        g_Task->word_3C.word   = D_801EB4E0->word_3C.word;
+        g_Task->unk_5D         = (rand() & 7) + 5;
+        g_Task->unk_5E         = (rand() & 7) + 5;
+        g_Task->unk_5F         = (rand() & 7) + 5;
+        g_Task->unk_09         = 0x10;
+        g_Task->timer          = 0x10;
         g_Task->step += 1;
     }
 }
 
 MATCH void func_801F023C(void) {
-    PartyBattler* work        = g_Task;
-    u8            timer       = work->word_08.byte.unk_09 - 1;
-    s32           value       = work->unk_14 + work->unk_20;
-    work->word_08.byte.unk_09 = timer;
-    work->unk_14              = value;
+    PartyBattler* work  = g_Task;
+    u8            timer = work->unk_09 - 1;
+    s32           value = work->unk_14 + work->unk_20;
+    work->unk_09        = timer;
+    work->unk_14        = value;
     work->word_3C.word += value;
     if (timer == 0) {
         g_Task->step += 1;
@@ -83,14 +83,14 @@ MATCH void func_801F023C(void) {
 }
 
 MATCH void func_801F029C(void) {
-    PartyBattler* work          = g_Task;
-    u8            timer         = work->word_08.byte.timer_0A - 1;
-    s32           value         = work->unk_14 + work->unk_20;
-    work->word_08.byte.timer_0A = timer;
-    work->unk_14                = value;
+    PartyBattler* work  = g_Task;
+    u8            timer = work->timer - 1;
+    s32           value = work->unk_14 + work->unk_20;
+    work->timer         = timer;
+    work->unk_14        = value;
     work->word_3C.word += value;
     if (timer == 0) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         Actor_Clear();
     }
 }

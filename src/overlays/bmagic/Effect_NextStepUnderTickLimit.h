@@ -6,9 +6,9 @@ MATCH void Effect_NextStepUnderTickLimit(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->word_08.byte.unk_0B < 5) {
-        work->word_08.byte.unk_09 = 8;
-        work                      = g_Task;
-        work->step                = work->step + 1;
+    if (work->unk_0B < 5) {
+        work->unk_09 = 8;
+        work         = g_Task;
+        work->step   = work->step + 1;
     }
 }

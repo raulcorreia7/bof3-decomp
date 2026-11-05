@@ -32,8 +32,8 @@ INCLUDE_ASM(func_801EF3C0);
 INCLUDE_ASM(func_801EF518);
 
 MATCH void func_801EF6A4(void) {
-    if (g_Task->word_08.byte.unk_0B == 0) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+    if (g_Task->unk_0B == 0) {
+        BATTLE_ACTIVE_WORK->unk_0B -= 1;
         func_800A9820(g_Task->unk_04);
         func_801E5988();
     }

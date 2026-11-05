@@ -13,9 +13,9 @@ INCLUDE_ASM(func_801EEEB0);
 MATCH void func_801EEFE0(void) {
     u8 timer;
 
-    if (g_Task->word_08.byte.unk_0B == 0) {
-        timer                       = g_Task->word_08.byte.unk_09 - 1;
-        g_Task->word_08.byte.unk_09 = timer;
+    if (g_Task->unk_0B == 0) {
+        timer          = g_Task->unk_09 - 1;
+        g_Task->unk_09 = timer;
         if (!(timer & 0xFF)) {
             g_Task->mode += 1;
         }
@@ -43,14 +43,14 @@ MATCH void func_801EF444(void) {
     u8            timer;
     PartyBattler* work;
 
-    work                      = g_Task;
-    timer                     = work->word_08.byte.unk_09 - 1;
-    work->word_08.byte.unk_09 = timer;
-    battler                   = &g_BattlePartyBattlers[work->unk_04];
+    work         = g_Task;
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    battler      = &g_BattlePartyBattlers[work->unk_04];
     if (!(timer & BYTE_MASK)) {
         func_80196718(battler);
-        g_Task->word_08.byte.timer_0A = func_8019651C(battler, 0, 0, 0, 1);
-        g_Task->word_08.byte.unk_09   = 8;
+        g_Task->timer  = func_8019651C(battler, 0, 0, 0, 1);
+        g_Task->unk_09 = 8;
         g_Task->step += 1;
     }
 }
@@ -62,8 +62,8 @@ INCLUDE_ASM(func_801EF4FC);
 INCLUDE_ASM(func_801EF688);
 
 MATCH void func_801EF7D0(void) {
-    if (g_Task->word_08.byte.unk_0B == 0) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+    if (g_Task->unk_0B == 0) {
+        BATTLE_ACTIVE_WORK->unk_0B -= 1;
         if (func_801DB524(g_Task->unk_04) & 0xFF) {
             func_800A9820(g_Task->unk_04);
         }

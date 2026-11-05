@@ -4,7 +4,7 @@ MATCH void Effect_StepOnZeroTick(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->word_08.byte.unk_0B == 0) {
+    if (work->unk_0B == 0) {
         work->step++;
     }
 }

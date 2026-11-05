@@ -14,18 +14,18 @@ MATCH void func_801E679C(void) {
     work->unk_2B      = 0;
     work->unk_2C.half = 0;
     if (g_Task->unk_07 != 6) {
-        if ((u32)(g_Task->word_08.byte.facing_08 - 1) < 2) {
+        if ((u32)(g_Task->facing - 1) < 2) {
             g_Task->unk_2A = 1;
         } else {
             g_Task->unk_2A = 0;
         }
-    } else if (g_Task->word_08.byte.facing_08 & 1) {
+    } else if (g_Task->facing & 1) {
         g_Task->unk_2A = 1;
     } else {
         g_Task->unk_2A = 0;
     }
     g_Task->mode = g_Task->mode + 1;
     table        = D_801EB4B0 + (g_Task->unk_07 << 1);
-    Actor_SelectScript(table[g_Task->word_08.byte.facing_08 >> 1]);
+    Actor_SelectScript(table[g_Task->facing >> 1]);
     Area_AddActor();
 }

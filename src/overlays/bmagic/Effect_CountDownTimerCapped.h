@@ -11,16 +11,16 @@ MATCH void Effect_CountDownTimerCapped(void) {
     u8            count;
 
     first = g_Task;
-    timer = first->word_08.byte.unk_09;
+    timer = first->unk_09;
     if (timer != 0x2E) {
-        first->word_08.byte.unk_09 = timer + 1;
+        first->unk_09 = timer + 1;
     }
-    work                        = g_Task;
-    count                       = work->word_08.byte.timer_0A - 1;
-    work->word_08.byte.timer_0A = count;
+    work        = g_Task;
+    count       = work->timer - 1;
+    work->timer = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->word_08.byte.unk_0B--;
+        active->unk_0B--;
         func_801E5988();
     }
 }

@@ -5,12 +5,12 @@ MATCH void Effect_CopyBattlerCoordsClearTimer(void) {
     s32           z;
 
     g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
-    work                      = g_Task;
-    actor                     = D_801EB4E0;
-    work->coord_x_34.raw      = actor->coord_x_34.raw;
-    work->coord_y_38.raw      = actor->coord_y_38.raw;
-    z                         = actor->word_3C.word;
-    work->word_08.byte.unk_09 = 0;
-    work->word_3C.word        = z;
+    work                 = g_Task;
+    actor                = D_801EB4E0;
+    work->coord_x_34.raw = actor->coord_x_34.raw;
+    work->coord_y_38.raw = actor->coord_y_38.raw;
+    z                    = actor->word_3C.word;
+    work->unk_09         = 0;
+    work->word_3C.word   = z;
     g_Task->step += 1;
 }

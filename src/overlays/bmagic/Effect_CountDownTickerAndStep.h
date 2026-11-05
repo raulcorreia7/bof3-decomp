@@ -3,8 +3,8 @@
 MATCH void Effect_CountDownTickerAndStep(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_0B - 1;
-    g_Task->word_08.byte.unk_0B = timer;
+    timer          = g_Task->unk_0B - 1;
+    g_Task->unk_0B = timer;
     if (timer == 0) {
         g_Task->step = g_Task->step + 1;
     }

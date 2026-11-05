@@ -71,7 +71,7 @@ NON_MATCHING void func_801EF418(void) {
         timer                    = FIELD(u8, D_801F05F8, 9) - 1;
         FIELD(u8, D_801F05F8, 9) = timer;
         if (!(timer & 0xFF)) {
-            D_801EB4E0->word_08.byte.unk_0B -= 1;
+            D_801EB4E0->unk_0B -= 1;
             func_801EF970();
         }
     }

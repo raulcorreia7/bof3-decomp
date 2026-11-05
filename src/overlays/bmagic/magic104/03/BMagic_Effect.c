@@ -9,8 +9,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC80);
 
 MATCH void func_801EEE7C(void) {
-    if (g_Task->word_08.byte.unk_0B == 7) {
-        g_Task->word_08.byte.unk_09 = 8;
+    if (g_Task->unk_0B == 7) {
+        g_Task->unk_09 = 8;
         g_Task->mode += 1;
     }
 }
@@ -18,7 +18,7 @@ MATCH void func_801EEE7C(void) {
 INCLUDE_ASM(func_801EEEC0);
 
 MATCH void func_801EF03C(void) {
-    if (g_Task->word_08.byte.unk_0B == 7) {
+    if (g_Task->unk_0B == 7) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
@@ -44,16 +44,16 @@ MATCH void func_801EF178(void) {
     s32 var_a0;
     u8  temp_v0;
 
-    temp_v0                       = g_Task->word_08.byte.timer_0A - 1;
-    g_Task->word_08.byte.timer_0A = temp_v0;
+    temp_v0       = g_Task->timer - 1;
+    g_Task->timer = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         var_a0 = 0x100;
-        if (g_Task->word_08.byte.unk_0B & 1) {
+        if (g_Task->unk_0B & 1) {
             var_a0 = 0x101;
         }
         SND_QueueSelectionFx(var_a0);
-        g_Task->word_08.byte.unk_09   = 0;
-        g_Task->word_08.byte.timer_0A = 0;
+        g_Task->unk_09 = 0;
+        g_Task->timer  = 0;
         g_Task->step += 1;
     }
 }
@@ -61,10 +61,10 @@ MATCH void func_801EF178(void) {
 MATCH void func_801EF21C(void) {
     u8 temp_v1;
 
-    temp_v1                     = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v1;
+    temp_v1        = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 8) {
-        g_Task->word_08.byte.timer_0A = 0;
+        g_Task->timer = 0;
         g_Task->step += 1;
     }
 }
@@ -73,11 +73,11 @@ MATCH void func_801EF21C(void) {
 MATCH void func_801EF27C(void) {
     u8 temp_v0;
 
-    g_Task->word_08.byte.timer_0A += 1;
-    temp_v0                     = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    g_Task->timer += 1;
+    temp_v0        = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v0;
     if ((temp_v0 & 0xFF) == 0x10) {
-        g_Task->word_08.byte.timer_0A = 0;
+        g_Task->timer = 0;
         g_Task->step += 1;
     }
 }
@@ -86,13 +86,13 @@ MATCH void func_801EF2F8(void) {
     PartyBattler* work;
     PartyBattler* active;
 
-    work                        = g_Task;
-    work->word_08.byte.timer_0A = work->word_08.byte.timer_0A + 1;
-    work                        = g_Task;
-    work->word_08.byte.unk_09   = work->word_08.byte.unk_09 + 1;
-    if (work->word_08.byte.unk_09 == 0x18) {
-        active                      = BATTLE_ACTIVE_WORK;
-        active->word_08.byte.unk_0B = g_Task->word_08.byte.unk_0B;
+    work         = g_Task;
+    work->timer  = work->timer + 1;
+    work         = g_Task;
+    work->unk_09 = work->unk_09 + 1;
+    if (work->unk_09 == 0x18) {
+        active         = BATTLE_ACTIVE_WORK;
+        active->unk_0B = g_Task->unk_0B;
         func_801E5988();
     }
 }
@@ -131,12 +131,12 @@ MATCH void func_801F02F4(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->word_08.byte.timer_0A == 0) {
-        work->word_08.byte.unk_09  = 8;
+    if (work->timer == 0) {
+        work->unk_09               = 8;
         work->word_3C.half.span_3E = work->word_3C.half.span_3E + 0x200;
         Bmagic_NextStep();
     } else {
-        work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
+        work->timer = work->timer - 1;
     }
 }
 
@@ -148,12 +148,12 @@ MATCH void func_801F034C(void) {
     func_801EFA54();
     func_801F03C4();
     PopMatrix();
-    next                         = g_Task->word_08.byte.unk_09 - 1;
+    next                         = g_Task->unk_09 - 1;
     span                         = (u16)(g_Task->word_3C.half.span_3E - 0x40);
-    g_Task->word_08.byte.unk_09  = next;
+    g_Task->unk_09               = next;
     g_Task->word_3C.half.span_3E = span;
     if (!(next & 0xFF)) {
-        D_801EB4E0->word_08.byte.unk_0B = g_Task->word_08.byte.unk_0B;
+        D_801EB4E0->unk_0B = g_Task->unk_0B;
         func_801E5988();
     }
 }

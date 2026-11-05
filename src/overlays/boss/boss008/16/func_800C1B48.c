@@ -5,8 +5,8 @@ MATCH void func_800C1B48(void) {
     u32 value2;
     u8  value3;
 
-    func_800C236C(g_Task->word_08.byte.unk_09);
-    value3 = g_Task->word_08.byte.unk_09;
+    func_800C236C(g_Task->unk_09);
+    value3 = g_Task->unk_09;
     if (value3 == 0) {
         g_Task->unk_48 = 0;
         Area_FindSceneRecord(0x83);
@@ -19,8 +19,8 @@ MATCH void func_800C1B48(void) {
         g_Task->unk_04 = 0;
         return;
     }
-    g_Task->word_08.byte.unk_09 = value3 - 4;
-    value                       = g_Task->unk_40;
+    g_Task->unk_09 = value3 - 4;
+    value          = g_Task->unk_40;
     if ((s32)value > 0) {
         g_Task->unk_40 = value - 0x2000;
     } else {

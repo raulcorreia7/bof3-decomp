@@ -54,9 +54,9 @@ MATCH void func_801EF628(void) {
     g_Task->unk_2E.half += (s32)(rsin(g_Task->unk_14) * 8) >> 0xC;
     offset = (s32)(rcos(g_Task->unk_14) * 8) >> 0xC;
     g_Task->unk_30.half += offset;
-    g_Task->word_08.byte.unk_09 += 1;
-    timer                         = g_Task->word_08.byte.timer_0A + 4;
-    g_Task->word_08.byte.timer_0A = timer;
+    g_Task->unk_09 += 1;
+    timer         = g_Task->timer + 4;
+    g_Task->timer = timer;
     if ((timer & BYTE_MASK) == 0x10) {
         g_Task->step += 1;
     }
@@ -68,9 +68,9 @@ MATCH void func_801EF6E0(void) {
     g_Task->unk_2E.half += (s32)(rsin(g_Task->unk_14) * 0x18) >> 0xC;
     cosine = rcos(g_Task->unk_14);
     g_Task->unk_30.half += (s32)(cosine * 0x18) >> 0xC;
-    g_Task->word_08.byte.unk_09 += 1;
-    if (g_Task->word_08.byte.unk_09 == 0x14) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+    g_Task->unk_09 += 1;
+    if (g_Task->unk_09 == 0x14) {
+        D_801EB4E0->unk_0B -= 1;
         Actor_Clear();
     }
 }

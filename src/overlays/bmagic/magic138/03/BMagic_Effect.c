@@ -17,7 +17,7 @@ MATCH void func_801EEED8(void) {
     g_Task     = D_801EB4E0;
     func_8014D978();
     g_Task = saved_work;
-    if (saved_work->word_08.byte.unk_0B == 0) {
+    if (saved_work->unk_0B == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= 4;
         func_801E5988();
@@ -64,7 +64,7 @@ MATCH void func_801EF5D0(void) {
     work->unk_2C.half = 0;
     g_Task->unk_2A    = 0;
     Actor_SelectScript(5);
-    SND_PlayCue((g_Task->word_08.byte.timer_0A & 1) | 0x100);
+    SND_PlayCue((g_Task->timer & 1) | 0x100);
     g_Task->step += 1;
 }
 

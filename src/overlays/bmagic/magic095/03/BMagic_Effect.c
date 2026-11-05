@@ -16,12 +16,12 @@ MATCH void func_801EEF64(void) {
     func_801EF1FC();
     func_801EF804();
     func_801EFDDC();
-    counter                     = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = counter;
+    counter        = g_Task->unk_09 + 1;
+    g_Task->unk_09 = counter;
     if ((counter & 0xFF) == 0x40) {
         SND_QueueSelectionFx(0x101);
         SND_QueueSelectionFx(0x102);
-        g_Task->word_08.byte.unk_09 = 0x30;
+        g_Task->unk_09 = 0x30;
         g_Task->mode += 1;
     }
 }
@@ -32,8 +32,8 @@ MATCH void func_801EEFFC(void) {
     func_801EF1FC();
     func_801EF804();
     func_801EFDDC();
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         g_Task->mode = g_Task->mode + 1;
     }
@@ -46,8 +46,8 @@ MATCH void func_801EF070(void) {
     PartyBattler* battler;
 
     func_801EFDDC();
-    timer                         = g_Task->word_08.byte.timer_0A - 1;
-    g_Task->word_08.byte.timer_0A = timer;
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
     if (timer == 0) {
         BMAGIC_RELEASE_TARGET_AND_PLAY();
     }
@@ -73,8 +73,8 @@ MATCH void func_801F0070(void) {
     u8 counter;
 
     if (BATTLE_ACTIVE_WORK->mode == 3) {
-        counter                     = g_Task->word_08.byte.unk_09 - 1;
-        g_Task->word_08.byte.unk_09 = counter;
+        counter        = g_Task->unk_09 - 1;
+        g_Task->unk_09 = counter;
         if (!(counter & 0xFF)) {
             g_Task->mode += 1;
         }
@@ -85,8 +85,8 @@ MATCH void func_801F00D8(void) {
     u8 temp_v1;
 
     func_801F012C();
-    temp_v1                     = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v1;
+    temp_v1        = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x20) {
         func_801E5988();
     }

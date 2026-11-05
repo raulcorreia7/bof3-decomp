@@ -11,13 +11,13 @@ INCLUDE_ASM(func_801EEC90);
 MATCH void func_801EF08C(void) {
     u8 counter;
 
-    if (g_Task->word_08.byte.unk_0B == 0) {
-        if (g_Task->word_08.byte.unk_09 == 0x1E) {
+    if (g_Task->unk_0B == 0) {
+        if (g_Task->unk_09 == 0x1E) {
             func_800AEF98(4, 0);
             BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         }
-        counter                     = g_Task->word_08.byte.unk_09 - 1;
-        g_Task->word_08.byte.unk_09 = counter;
+        counter        = g_Task->unk_09 - 1;
+        g_Task->unk_09 = counter;
         if (!(counter & 0xFF)) {
             g_Task->mode += 1;
         }
@@ -28,11 +28,11 @@ MATCH void func_801EF134(void) {
     u16 item;
 
     if (D_801EC2E4 == 0) {
-        if (g_Task->word_08.byte.timer_0A == 0x38) {
+        if (g_Task->timer == 0x38) {
             item = g_Task->unk_2C.half;
             BMagic_SetTextItemName(item & 0xFF, item >> 8);
         }
-        func_801DE8C0(1, 0x1E, Resource_GetText((u32)g_Task->word_08.byte.timer_0A));
+        func_801DE8C0(1, 0x1E, Resource_GetText((u32)g_Task->timer));
         g_Task->mode += 1;
     }
 }
@@ -59,8 +59,8 @@ MATCH void func_801EF328(void) {
     u8 timer;
 
     func_8014DAEC();
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         func_800AFC98(0, 4);
         g_Task->step = g_Task->step + 1;
@@ -70,7 +70,7 @@ MATCH void func_801EF328(void) {
 MATCH void func_801EF394(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800A9820(g_BattleTargetSelector);
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        BATTLE_ACTIVE_WORK->unk_0B -= 1;
         g_Task->step += 1;
     }
 }

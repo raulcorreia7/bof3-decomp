@@ -35,10 +35,10 @@ INCLUDE_ASM(func_801EF460);
 MATCH void func_801EF5FC(void) {
     u8 counter;
 
-    if (BATTLE_ACTIVE_WORK->word_08.byte.unk_0B == 1) {
+    if (BATTLE_ACTIVE_WORK->unk_0B == 1) {
         func_8014DAEC();
-        counter                     = g_Task->word_08.byte.unk_09 - 1;
-        g_Task->word_08.byte.unk_09 = counter;
+        counter        = g_Task->unk_09 - 1;
+        g_Task->unk_09 = counter;
         if (!(counter & 0xFF)) {
             func_800A9820(g_BattleTargetSelector);
             func_800AFC98(2, 4);
@@ -49,8 +49,8 @@ MATCH void func_801EF5FC(void) {
 
 MATCH void func_801EF694(void) {
     if (func_8014DAEC() != 0u) {
-        g_Task->word_08.byte.unk_09 = 8;
-        g_Task->step                = g_Task->step + 1;
+        g_Task->unk_09 = 8;
+        g_Task->step   = g_Task->step + 1;
     }
 }
 
@@ -58,20 +58,20 @@ MATCH void func_801EF6EC(void) {
     s8 tone;
     u8 temp_v0;
 
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         if ((u8)g_BattleActiveBattler >= 3U) {
             func_801E257C(g_BattleActiveBattler, 0);
         }
         g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        g_Task->unk_5C              = 1;
-        g_Task->unk_2B              = 1;
-        tone                        = -0x40;
-        g_Task->unk_5D              = tone;
-        g_Task->unk_5E              = tone;
-        g_Task->unk_5F              = tone;
-        g_Task->word_08.byte.unk_09 = 8;
+        g_Task->unk_5C = 1;
+        g_Task->unk_2B = 1;
+        tone           = -0x40;
+        g_Task->unk_5D = tone;
+        g_Task->unk_5E = tone;
+        g_Task->unk_5F = tone;
+        g_Task->unk_09 = 8;
         g_Task->step += 1;
     }
 }
@@ -84,10 +84,10 @@ MATCH void func_801EF8B4(void) {
     g_Task->unk_5D += 8;
     g_Task->unk_5E += 8;
     g_Task->unk_5F += 8;
-    count                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = count;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         g_Task->step += 1;
     }
 }

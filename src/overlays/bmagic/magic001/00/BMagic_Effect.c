@@ -22,9 +22,9 @@ INCLUDE_ASM(func_801EF01C);
 
 MATCH void func_801EF0E8(void) {
     func_801E257C((u32)g_BattleActiveBattler, 0xAU);
-    g_Task->unk_27                = D_801EB4E0->unk_27;
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0;
+    g_Task->unk_27 = D_801EB4E0->unk_27;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0;
     g_Task->step += 1;
 }
 
@@ -47,16 +47,16 @@ MATCH void func_801EF280(void) {
     PartyBattler* work;
     u8            timer;
 
-    work                      = g_Task;
-    timer                     = work->word_08.byte.unk_09 - 1;
-    work->word_08.byte.unk_09 = timer;
+    work         = g_Task;
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
     work->unk_14 += work->unk_20;
     work->word_3C.half.span_3E += work->unk_14;
     if (timer == 0) {
         SND_QueueSelectionFx(0x203);
         func_801E257C(g_BattleActiveBattler, 0xC);
         func_800A9610(g_BattleTargetSelector, 0x10);
-        g_Task->word_08.byte.unk_09 = 3;
+        g_Task->unk_09 = 3;
         g_Task->step++;
     }
 }
@@ -76,20 +76,20 @@ MATCH void func_801EF37C(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         func_800AFC98(2, 0);
         func_801E257C(g_BattleActiveBattler, 0xB);
-        work                        = g_Task;
-        work->unk_14                = 0x140;
-        work->word_08.byte.timer_0A = 9;
-        work->unk_20                = -0x40;
+        work         = g_Task;
+        work->unk_14 = 0x140;
+        work->timer  = 9;
+        work->unk_20 = -0x40;
         g_Task->step++;
     }
 }
 
 MATCH void func_801EF408(void) {
-    PartyBattler* work          = g_Task;
-    u8            timer         = work->word_08.byte.timer_0A - 1;
-    s32           value         = work->unk_14 + work->unk_20;
-    work->word_08.byte.timer_0A = timer;
-    work->unk_14                = value;
+    PartyBattler* work  = g_Task;
+    u8            timer = work->timer - 1;
+    s32           value = work->unk_14 + work->unk_20;
+    work->timer         = timer;
+    work->unk_14        = value;
     work->word_3C.half.span_3E += value;
     if (timer == 0) {
         g_Task->step += 1;
@@ -104,8 +104,8 @@ MATCH void func_801EF468(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         SND_QueueSelectionFx(0x203);
         func_801E257C(g_BattleActiveBattler, 0xC);
-        timer                       = g_Task->word_08.byte.unk_09 - 1;
-        g_Task->word_08.byte.unk_09 = timer;
+        timer          = g_Task->unk_09 - 1;
+        g_Task->unk_09 = timer;
         if (timer != 0) {
             g_Task->step -= 3;
         } else {
@@ -160,11 +160,11 @@ MATCH void func_801EFAB8(void) {
 INCLUDE_ASM(func_801EFAFC);
 
 MATCH void func_801EFBEC(void) {
-    g_Task->unk_27                = D_801EB4E0->unk_27;
-    g_Task->unk_14                = 0x100;
-    g_Task->unk_20                = -0x10;
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0x10;
+    g_Task->unk_27 = D_801EB4E0->unk_27;
+    g_Task->unk_14 = 0x100;
+    g_Task->unk_20 = -0x10;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0x10;
     g_Task->step += 1;
 }
 
@@ -178,15 +178,15 @@ MATCH void func_801EFD28(void) {
     u8  temp_a1;
     u8  temp_v0;
 
-    temp_a1                      = g_Task->word_08.byte.timer_0A;
+    temp_a1                      = g_Task->timer;
     temp_v1                      = g_Task->unk_14 + g_Task->unk_20;
     g_Task->unk_14               = temp_v1;
     g_Task->word_3C.half.span_3E = (u16)g_Task->word_3C.half.span_3E + temp_v1;
     if (temp_a1 < 8U) {
-        g_Task->word_08.byte.timer_0A = temp_a1 + 1;
+        g_Task->timer = temp_a1 + 1;
     }
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         func_800AFC98(2, 0);
         SND_QueueSelectionFx(0x203);
@@ -197,7 +197,7 @@ MATCH void func_801EFD28(void) {
         /* FAKE: Without the barrier, the scheduler sinks the angle store into the call's delay slot. */
         MATCH_FAKE_BARRIER();
         func_800A9820(g_BattleTargetSelector);
-        g_Task->word_08.byte.unk_09 = 0x10;
+        g_Task->unk_09 = 0x10;
         g_Task->step += 1;
     }
 }
@@ -212,14 +212,14 @@ MATCH void func_801EFE38(void) {
     value                        = g_Task->unk_14 + g_Task->unk_20;
     g_Task->unk_14               = value;
     g_Task->word_3C.half.span_3E = (u16)g_Task->word_3C.half.span_3E + value;
-    if ((u8)g_Task->word_08.byte.unk_09 < 8U) {
-        value3 = g_Task->word_08.byte.timer_0A;
+    if ((u8)g_Task->unk_09 < 8U) {
+        value3 = g_Task->timer;
         if (value3 < 0x10U) {
-            g_Task->word_08.byte.timer_0A = value3 + 1;
+            g_Task->timer = value3 + 1;
         }
     }
-    value2                      = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = value2;
+    value2         = g_Task->unk_09 - 1;
+    g_Task->unk_09 = value2;
     if (!(value2 & 0xFF)) {
         g_Task->step += 1;
     }
@@ -239,9 +239,9 @@ MATCH void func_801EFFCC(void) {
         g_Task->unk_5E -= 0x10;
         g_Task->unk_5F -= 0x10;
     }
-    temp_v0_2 = g_Task->word_08.byte.timer_0A;
+    temp_v0_2 = g_Task->timer;
     if (temp_v0_2 != 0) {
-        g_Task->word_08.byte.timer_0A = temp_v0_2 - 2;
+        g_Task->timer = temp_v0_2 - 2;
     }
     if ((s8)g_Task->unk_5D == -0x80) {
         work                 = g_Task;

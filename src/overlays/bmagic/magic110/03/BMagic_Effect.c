@@ -16,12 +16,12 @@ MATCH void func_801EEEDC(void) {
 
     func_801EF148();
     if (g_FrameCount & 1) {
-        temp_v1 = g_Task->word_08.byte.timer_0A;
+        temp_v1 = g_Task->timer;
         if (temp_v1 < 0x10U) {
-            g_Task->word_08.byte.timer_0A = temp_v1 + 2;
+            g_Task->timer = temp_v1 + 2;
         }
-        temp_v1_2                   = g_Task->word_08.byte.unk_09 + 1;
-        g_Task->word_08.byte.unk_09 = temp_v1_2;
+        temp_v1_2      = g_Task->unk_09 + 1;
+        g_Task->unk_09 = temp_v1_2;
         if ((temp_v1_2 & 0xFF) == 0x10) {
             g_Task->mode += 1;
         }
@@ -38,12 +38,12 @@ MATCH void func_801EF068(void) {
 
     func_801EF148();
     if (!(g_FrameCount & 3)) {
-        temp_v0 = g_Task->word_08.byte.timer_0A;
+        temp_v0 = g_Task->timer;
         if (temp_v0 != 0) {
-            g_Task->word_08.byte.timer_0A = temp_v0 - 1;
+            g_Task->timer = temp_v0 - 1;
         }
-        temp_v0_2                   = g_Task->word_08.byte.unk_09 - 1;
-        g_Task->word_08.byte.unk_09 = temp_v0_2;
+        temp_v0_2      = g_Task->unk_09 - 1;
+        g_Task->unk_09 = temp_v0_2;
         if (!(temp_v0_2 & 0xFF)) {
             func_800A9820(g_BattleTargetSelector);
             g_Task->mode += 1;
@@ -92,7 +92,7 @@ MATCH void func_801EF6B4(void) {
     temp_v1             = g_Task->unk_30.half - 4;
     g_Task->unk_30.half = temp_v1;
     if ((s16)temp_v1 < 0xB2) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         g_Task->step += 1;
     }
 }
@@ -104,7 +104,7 @@ MATCH void func_801EF740(void) {
     temp_v1             = g_Task->unk_30.half - 2;
     g_Task->unk_30.half = temp_v1;
     if ((s16)temp_v1 < 0x80) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -155,11 +155,11 @@ INCLUDE_ASM(func_801F0040);
 MATCH void func_801F00D8(void) {
     PartyBattler* work;
 
-    work                        = g_Task;
-    work->word_08.byte.unk_09   = work->word_08.byte.unk_09 + 2;
-    work                        = g_Task;
-    work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
-    if (work->word_08.byte.timer_0A == 0) {
+    work         = g_Task;
+    work->unk_09 = work->unk_09 + 2;
+    work         = g_Task;
+    work->timer  = work->timer - 1;
+    if (work->timer == 0) {
         func_801E5988();
     }
 }

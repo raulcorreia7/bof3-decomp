@@ -27,15 +27,15 @@ INCLUDE_ASM(func_801EF148);
 MATCH void func_801EF3D8(void) {
     u8 timer;
 
-    if ((u8)g_Task->word_08.byte.timer_0A < 8U) {
-        g_Task->word_08.byte.unk_0B += 1;
-        g_Task->word_08.byte.timer_0A += 1;
+    if ((u8)g_Task->timer < 8U) {
+        g_Task->unk_0B += 1;
+        g_Task->timer += 1;
         func_800AF764();
         func_801F02B0();
     }
-    timer = g_Task->word_08.byte.timer_0A;
+    timer = g_Task->timer;
     if ((timer & 0xFF) == 8) {
-        g_Task->word_08.byte.unk_09 = timer;
+        g_Task->unk_09 = timer;
         g_Task->step += 1;
     }
 }
@@ -44,8 +44,8 @@ MATCH void func_801EF484(void) {
     u8 timer;
 
     func_801F03A0();
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         BMAGIC_TICK_EFFECT_WORK();
         func_801E5988();
@@ -60,16 +60,16 @@ MATCH void func_801F02B0(void) {
     s32 i;
 
     BMAGIC_SHIFT_TRAIL(D_801F09B0)
-    D_801F09B0[g_Task->unk_04][g_Task->word_08.byte.unk_0B].x = g_Task->unk_2E.half;
-    D_801F09B0[g_Task->unk_04][g_Task->word_08.byte.unk_0B].y = g_Task->unk_30.half;
+    D_801F09B0[g_Task->unk_04][g_Task->unk_0B].x = g_Task->unk_2E.half;
+    D_801F09B0[g_Task->unk_04][g_Task->unk_0B].y = g_Task->unk_30.half;
 }
 
 MATCH void func_801F03A0(void) {
     s32 i;
 
     BMAGIC_SHIFT_TRAIL(D_801F09B0)
-    D_801F09B0[g_Task->unk_04][g_Task->word_08.byte.unk_0B].x = -1;
-    D_801F09B0[g_Task->unk_04][g_Task->word_08.byte.unk_0B].y = -1;
+    D_801F09B0[g_Task->unk_04][g_Task->unk_0B].x = -1;
+    D_801F09B0[g_Task->unk_04][g_Task->unk_0B].y = -1;
 }
 
 INCLUDE_ASM(func_801F0488);
@@ -89,7 +89,7 @@ MATCH void func_801F0540(void) {
     g_Task->unk_2C.half = 0;
     g_Task->unk_2B      = 1;
     Actor_SelectScript(0U);
-    g_Task->word_08.byte.unk_09 = 0;
+    g_Task->unk_09 = 0;
     g_Task->step += 1;
 }
 
@@ -97,8 +97,8 @@ MATCH void func_801F0648(void) {
     u8 timer;
 
     func_8014DAEC();
-    timer                       = g_Task->word_08.byte.unk_09 + 4;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 + 4;
+    g_Task->unk_09 = timer;
     if (timer == 0x10) {
         g_Task->step = g_Task->step + 1;
     }

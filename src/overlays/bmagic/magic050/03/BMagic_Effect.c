@@ -14,7 +14,7 @@ MATCH void func_801EEDF8(void) {
     s32 temp_v1;
     u8  temp_v1_2;
 
-    temp_v1 = g_Task->word_08.byte.unk_09;
+    temp_v1 = g_Task->unk_09;
     if (temp_v1 != 0x10) {
         if (temp_v1 < 0x11) {
             var_a0 = 0x101;
@@ -34,8 +34,8 @@ MATCH void func_801EEDF8(void) {
     block_7:
         SND_QueueSelectionFx(var_a0);
     }
-    temp_v1_2                   = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v1_2;
+    temp_v1_2      = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v1_2;
     if ((temp_v1_2 & 0xFF) == 0x19) {
         g_Task->mode += 1;
     }
@@ -66,12 +66,12 @@ MATCH void func_801EF138(void) {
     u8            count;
 
     work = g_Task;
-    work->word_08.byte.timer_0A++;
-    work                      = g_Task;
-    count                     = work->word_08.byte.unk_09 - 1;
-    work->word_08.byte.unk_09 = count;
+    work->timer++;
+    work         = g_Task;
+    count        = work->unk_09 - 1;
+    work->unk_09 = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
+        BATTLE_ACTIVE_WORK->unk_0B--;
         func_801E5988();
     }
 }

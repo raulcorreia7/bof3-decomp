@@ -46,9 +46,9 @@ MATCH void func_801EEF14(void) {
 #include "overlays/bmagic/Effect_CopyBattlerCoords.h"
 
 MATCH void func_801EF00C(void) {
-    g_Task->word_08.byte.unk_09 += 2;
-    g_Task->word_08.byte.timer_0A += 24;
-    if (g_Task->word_08.byte.unk_09 == 0x10) {
+    g_Task->unk_09 += 2;
+    g_Task->timer += 24;
+    if (g_Task->unk_09 == 0x10) {
         Bmagic_NextStep();
     }
 }
@@ -74,23 +74,23 @@ MATCH void func_801EFAF4(void) {
 }
 
 MATCH void func_801EFB74(void) {
-    u8            timer = g_Task->word_08.byte.unk_09 - 1;
+    u8            timer = g_Task->unk_09 - 1;
     PartyBattler* work;
     PartyBattler* actor;
     s32           z;
 
-    g_Task->word_08.byte.unk_09 = timer;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         SND_QueueSelectionFx(0x100);
-        work                          = g_Task;
-        actor                         = D_801EB4E0;
-        work->coord_x_34.raw          = actor->coord_x_34.raw;
-        work->coord_y_38.raw          = actor->coord_y_38.raw;
-        z                             = actor->word_3C.word;
-        work->word_08.byte.unk_0B     = 0;
-        work->word_3C.word            = z;
-        g_Task->word_08.byte.unk_09   = 0x14;
-        g_Task->word_08.byte.timer_0A = 0;
+        work                 = g_Task;
+        actor                = D_801EB4E0;
+        work->coord_x_34.raw = actor->coord_x_34.raw;
+        work->coord_y_38.raw = actor->coord_y_38.raw;
+        z                    = actor->word_3C.word;
+        work->unk_0B         = 0;
+        work->word_3C.word   = z;
+        g_Task->unk_09       = 0x14;
+        g_Task->timer        = 0;
         g_Task->step += 1;
     }
 }
@@ -100,8 +100,8 @@ MATCH void func_801EFB74(void) {
 MATCH void func_801EFC94(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 + 2;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 + 2;
+    g_Task->unk_09 = timer;
     if (timer == 150) {
         g_Task->step = g_Task->step + 1;
     }

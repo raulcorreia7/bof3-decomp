@@ -22,13 +22,13 @@ static inline void BattleEffectTimerStep(void) {
 
     /* A store through the pointer may alias the cell, so each step reloads
      * it. */
-    g_Task->word_08.byte.unk_0B++;
+    g_Task->unk_0B++;
     work = g_Task;
-    if (work->word_08.byte.timer_0A < 16) {
-        work->word_08.byte.timer_0A += 2;
+    if (work->timer < 16) {
+        work->timer += 2;
     } else {
-        work->word_08.byte.unk_09 = 60;
-        work                      = g_Task;
+        work->unk_09 = 60;
+        work         = g_Task;
         work->step++;
     }
 }
@@ -46,7 +46,7 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
     MATCH_REG(s32*, angle_cell, "s0");
     s32 velocity;
 
-    g_Task->word_08.byte.unk_0B++;
+    g_Task->unk_0B++;
 
     work                   = g_Task;
     counter                = work->unk_0C + 1;
@@ -63,7 +63,7 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
     velocity               = rsin(*angle_cell) * D_1F800000;
     g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
 
-    if (--g_Task->word_08.byte.unk_09 == 0) {
+    if (--g_Task->unk_09 == 0) {
         g_Task->step++;
     }
 }

@@ -5,12 +5,12 @@
  * every member. */
 /* func_801EF738 (magic144), func_801EFA24 (magic092) */
 MATCH void Effect_CountDownByTwoFinishAtOne(void) {
-    g_Task->word_08.byte.unk_09 -= 2;
+    g_Task->unk_09 -= 2;
     if (g_FrameCount & 1) {
-        g_Task->word_08.byte.timer_0A += 1;
+        g_Task->timer += 1;
     }
-    if (g_Task->word_08.byte.unk_09 == 1) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+    if (g_Task->unk_09 == 1) {
+        BATTLE_ACTIVE_WORK->unk_0B -= 1;
         g_Task->flags  = 0;
         g_Task->mode   = 0;
         g_Task->step   = 0;

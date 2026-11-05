@@ -20,7 +20,7 @@ MATCH void func_801EED60(void) {
 
     g_Task->unk_2E.half = g_BattleSelectedActor->unk_2E.half;
     g_Task->unk_30.half = g_BattleSelectedActor->unk_30.half - 0x10;
-    if (g_Task->word_08.byte.unk_0B == 0xFF) {
+    if (g_Task->unk_0B == 0xFF) {
         BMAGIC_RELEASE_TARGET_AND_PLAY();
     }
 }
@@ -29,8 +29,8 @@ INCLUDE_ASM(func_801EEE4C);
 
 MATCH void func_801EEF1C(void) {
     func_800A9610(g_BattleTargetSelector, 32);
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0;
     g_Task->mode++;
 }
 
@@ -40,14 +40,14 @@ MATCH void func_801EF078(void) {
     u8 temp_v1;
     u8 temp_v1_2;
 
-    temp_v1 = g_Task->word_08.byte.timer_0A;
+    temp_v1 = g_Task->timer;
     if (temp_v1 < 0x10U) {
-        g_Task->word_08.byte.timer_0A = temp_v1 + 1;
+        g_Task->timer = temp_v1 + 1;
     }
-    temp_v1_2                   = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v1_2;
+    temp_v1_2      = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v1_2;
     if ((temp_v1_2 & 0xFF) == 0x10) {
-        g_Task->word_08.byte.unk_09 = 0;
+        g_Task->unk_09 = 0;
         g_Task->mode += 1;
     }
 }
@@ -55,10 +55,10 @@ MATCH void func_801EF078(void) {
 MATCH void func_801EF0FC(void) {
     u8 temp_v1;
 
-    temp_v1                     = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = temp_v1;
+    temp_v1        = g_Task->unk_09 + 1;
+    g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x20) {
-        D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        D_801EB4E0->unk_0B = 0xFF;
         func_801E5988();
     }
 }
@@ -74,7 +74,7 @@ MATCH void func_801EF654(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    rot.vz = g_Task->word_08.byte.timer_0A << 4;
+    rot.vz = g_Task->timer << 4;
     pos.vx = (g_Task->coord_x_34.raw >> 9) - 0x4000;
     pos.vy = (g_Task->coord_y_38.raw >> 9) - 0x4000;
     pos.vz = -g_Task->word_3C.half.span_3E / 2;

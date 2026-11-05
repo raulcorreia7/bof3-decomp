@@ -19,13 +19,13 @@ MATCH void func_801EEF48(void) {
 INCLUDE_ASM(func_801EEF8C);
 
 MATCH void func_801EF074(void) {
-    g_Task->word_08.byte.facing_08 = BATTLE_ACTIVE_WORK->word_08.byte.facing_08;
-    g_Task->coord_x_34.raw         = BATTLE_ACTIVE_WORK->coord_x_34.raw;
-    g_Task->coord_y_38.raw         = BATTLE_ACTIVE_WORK->coord_y_38.raw;
-    g_Task->word_3C.word           = BATTLE_ACTIVE_WORK->word_3C.word;
+    g_Task->facing         = BATTLE_ACTIVE_WORK->facing;
+    g_Task->coord_x_34.raw = BATTLE_ACTIVE_WORK->coord_x_34.raw;
+    g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw;
+    g_Task->word_3C.word   = BATTLE_ACTIVE_WORK->word_3C.word;
     func_801EF430(g_Task);
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0;
     g_Task->step += 1;
 }
 
@@ -38,23 +38,23 @@ MATCH void func_801EF074(void) {
 INCLUDE_ASM(func_801EF248);
 
 MATCH void func_801EF2D8(void) {
-    g_Task->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
-    g_Task->coord_x_34.raw         = D_801EB4E0->coord_x_34.raw;
-    g_Task->coord_y_38.raw         = D_801EB4E0->coord_y_38.raw;
-    g_Task->word_3C.word           = D_801EB4E0->word_3C.word;
+    g_Task->facing         = D_801EB4E0->facing;
+    g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
+    g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
+    g_Task->word_3C.word   = D_801EB4E0->word_3C.word;
     func_801EF430(g_Task);
-    g_Task->word_08.byte.unk_0B   = 0xB;
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0x80;
+    g_Task->unk_0B = 0xB;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0x80;
     g_Task->step += 1;
 }
 
 MATCH void func_801EF388(void) {
-    g_Task->word_08.byte.unk_0B -= 1;
-    g_Task->word_08.byte.unk_09 += g_Task->word_08.byte.unk_0B;
-    g_Task->word_08.byte.timer_0A -= 0xC;
-    if (g_Task->word_08.byte.unk_0B == 0) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+    g_Task->unk_0B -= 1;
+    g_Task->unk_09 += g_Task->unk_0B;
+    g_Task->timer -= 0xC;
+    if (g_Task->unk_0B == 0) {
+        BATTLE_ACTIVE_WORK->unk_0B -= 1;
         func_801E5988();
     }
 }

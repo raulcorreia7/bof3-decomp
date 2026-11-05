@@ -14,17 +14,17 @@ MATCH void func_801EEF98(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->word_08.byte.unk_0B != 0) {
-        work->word_08.byte.unk_09 = 8;
-        work                      = g_Task;
-        work->mode                = work->mode + 1;
+    if (work->unk_0B != 0) {
+        work->unk_09 = 8;
+        work         = g_Task;
+        work->mode   = work->mode + 1;
     }
 }
 
 INCLUDE_ASM(func_801EEFDC);
 
 MATCH void func_801EF0EC(void) {
-    if (g_Task->word_08.byte.unk_0B == 9) {
+    if (g_Task->unk_0B == 9) {
         func_80196718(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
         func_800A9820(g_BattleTargetSelector);
@@ -50,12 +50,12 @@ MATCH void func_801EF264(void) {
 }
 
 MATCH void func_801EF2EC(void) {
-    g_Task->word_08.byte.unk_0B   = rand() & 0xF;
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0;
-    g_Task->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
-    g_Task->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
-    g_Task->word_3C.word          = D_801EB4E0->word_3C.word;
+    g_Task->unk_0B         = rand() & 0xF;
+    g_Task->unk_09         = 0;
+    g_Task->timer          = 0;
+    g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
+    g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
+    g_Task->word_3C.word   = D_801EB4E0->word_3C.word;
     g_Task->step += 1;
 }
 
@@ -71,13 +71,13 @@ MATCH void func_801EF44C(void) {
     u8            count;
 
     work = g_Task;
-    work->word_08.byte.unk_0B++;
-    work                        = g_Task;
-    count                       = work->word_08.byte.timer_0A - 1;
-    work->word_08.byte.timer_0A = count;
+    work->unk_0B++;
+    work        = g_Task;
+    count       = work->timer - 1;
+    work->timer = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->word_08.byte.unk_0B++;
+        active->unk_0B++;
         func_801E5988();
     }
 }
@@ -113,7 +113,7 @@ MATCH void func_801EF7D8(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_Task->word_08.byte.unk_0B++;
+    g_Task->unk_0B++;
 
     work                   = g_Task;
     counter                = work->unk_0C + 1;
@@ -130,8 +130,8 @@ MATCH void func_801EF7D8(void) {
     velocity               = rsin(*angle_cell) * D_1F800000;
     g_Task->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
 
-    if (--g_Task->word_08.byte.timer_0A == 0) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B++;
+    if (--g_Task->timer == 0) {
+        BATTLE_ACTIVE_WORK->unk_0B++;
         func_801E5988();
     }
 }
@@ -156,9 +156,9 @@ MATCH void func_801F0090(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_Task->word_08.byte.unk_0B   = (u8)(RANDOM_MASK(0xF));
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0;
+    g_Task->unk_0B = (u8)(RANDOM_MASK(0xF));
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0;
 
     work                   = g_Task;
     counter                = (work->unk_03 << 5) + 0x10;
@@ -182,11 +182,11 @@ MATCH void func_801F01AC(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->word_08.byte.timer_0A < 16) {
-        work->word_08.byte.timer_0A += 2;
+    if (work->timer < 16) {
+        work->timer += 2;
     } else {
-        work->word_08.byte.unk_09 = 60;
-        work                      = g_Task;
+        work->unk_09 = 60;
+        work         = g_Task;
         work->step++;
     }
 }
@@ -203,7 +203,7 @@ MATCH void func_801F0314(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_Task->word_08.byte.unk_0B++;
+    g_Task->unk_0B++;
 
     work                   = g_Task;
     counter                = work->unk_0C + 1;
@@ -220,10 +220,10 @@ MATCH void func_801F0314(void) {
     velocity                = rsin(*angle_cell) * D_1F800000;
     scratch                 = g_Task;
     scratch->coord_y_38.raw = BATTLE_ACTIVE_WORK->coord_y_38.raw + velocity;
-    scratch->word_08.byte.timer_0A -= 2;
+    scratch->timer -= 2;
 
-    if (g_Task->word_08.byte.timer_0A == 0) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B++;
+    if (g_Task->timer == 0) {
+        BATTLE_ACTIVE_WORK->unk_0B++;
         func_801E5988();
     }
 }

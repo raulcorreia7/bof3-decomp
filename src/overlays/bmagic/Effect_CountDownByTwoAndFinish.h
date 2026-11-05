@@ -3,11 +3,11 @@
 MATCH void Effect_CountDownByTwoAndFinish(void) {
     PartyBattler* active;
 
-    g_Task->word_08.byte.unk_0B   = g_Task->word_08.byte.unk_0B + 1;
-    g_Task->word_08.byte.timer_0A = g_Task->word_08.byte.timer_0A - 2;
-    if (g_Task->word_08.byte.timer_0A == 0) {
-        active                      = BATTLE_ACTIVE_WORK;
-        active->word_08.byte.unk_0B = active->word_08.byte.unk_0B - 1;
+    g_Task->unk_0B = g_Task->unk_0B + 1;
+    g_Task->timer  = g_Task->timer - 2;
+    if (g_Task->timer == 0) {
+        active         = BATTLE_ACTIVE_WORK;
+        active->unk_0B = active->unk_0B - 1;
         func_801E5988();
     }
 }

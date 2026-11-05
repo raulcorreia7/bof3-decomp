@@ -19,7 +19,7 @@ MATCH void func_801E3638(void) {
             }
         }
         work = g_Task;
-        if (work->word_08.byte.facing_08 == 1 || work->word_08.byte.facing_08 == 3) {
+        if (work->facing == 1 || work->facing == 3) {
             work->coord_x_34.raw =
                 g_BattleEffects[work->slot].unk_34.raw + ((s8)g_BattleEffects[work->slot].unk_09 << 9);
         } else {

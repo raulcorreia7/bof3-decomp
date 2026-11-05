@@ -16,9 +16,9 @@ INCLUDE_ASM(func_801EEC94);
 #include "overlays/bmagic/Effect_CountDownTimerCallSelector.h"
 
 MATCH void func_801EEFA4(void) {
-    if (g_Task->word_08.byte.unk_0B == 0) {
+    if (g_Task->unk_0B == 0) {
         func_800A9820(g_BattleTargetSelector);
-        g_Task->word_08.byte.unk_09 = 0x1E;
+        g_Task->unk_09 = 0x1E;
         g_Task->mode += 1;
     }
 }
@@ -46,14 +46,14 @@ MATCH void func_801EF44C(void) {
     s32 count;
     u8  temp_v1;
 
-    count = g_Task->word_08.byte.unk_0B + 1;
-    count += g_Task->word_08.byte.unk_09 >> 6;
-    g_Task->word_08.byte.unk_0B = count;
+    count = g_Task->unk_0B + 1;
+    count += g_Task->unk_09 >> 6;
+    g_Task->unk_0B = count;
     if (g_FrameCount & 1) {
-        g_Task->word_08.byte.timer_0A += 1;
+        g_Task->timer += 1;
     }
-    temp_v1                     = g_Task->word_08.byte.unk_09 + 2;
-    g_Task->word_08.byte.unk_09 = temp_v1;
+    temp_v1        = g_Task->unk_09 + 2;
+    g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0xC0) {
         g_Task->step += 1;
     }
@@ -63,14 +63,14 @@ MATCH void func_801EF4F4(void) {
     s32 count;
     u8  temp_v1;
 
-    count = g_Task->word_08.byte.unk_0B + 1;
-    count += g_Task->word_08.byte.unk_09 >> 6;
-    g_Task->word_08.byte.unk_0B = count;
+    count = g_Task->unk_0B + 1;
+    count += g_Task->unk_09 >> 6;
+    g_Task->unk_0B = count;
     if (g_FrameCount & 1) {
-        g_Task->word_08.byte.timer_0A -= 1;
+        g_Task->timer -= 1;
     }
-    temp_v1                     = g_Task->word_08.byte.unk_09 - 2;
-    g_Task->word_08.byte.unk_09 = temp_v1;
+    temp_v1        = g_Task->unk_09 - 2;
+    g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x60) {
         g_Task->step += 1;
     }
@@ -115,8 +115,8 @@ MATCH void func_801F038C(void) {
 }
 
 MATCH void func_801F03EC(void) {
-    g_Task->word_08.byte.unk_0B = 0;
-    g_Task->word_08.byte.unk_09 = 0;
+    g_Task->unk_0B = 0;
+    g_Task->unk_09 = 0;
     Actor_SelectScript(3);
     g_Task->step++;
 }

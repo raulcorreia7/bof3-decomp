@@ -31,15 +31,15 @@ MATCH void func_801EEEE4(void) {
     PartyBattler* src;
     PartyBattler* dst;
 
-    if (--g_Task->word_08.byte.unk_09 == 0) {
-        src                           = BATTLE_ACTIVE_WORK;
-        dst                           = g_Task;
-        dst->coord_x_34               = src->coord_x_34;
-        dst->coord_y_38               = src->coord_y_38;
-        dst->word_3C                  = src->word_3C;
-        dst->unk_5D                   = 0x10;
-        g_Task->word_08.byte.unk_09   = 0x10;
-        g_Task->word_08.byte.timer_0A = 4;
+    if (--g_Task->unk_09 == 0) {
+        src             = BATTLE_ACTIVE_WORK;
+        dst             = g_Task;
+        dst->coord_x_34 = src->coord_x_34;
+        dst->coord_y_38 = src->coord_y_38;
+        dst->word_3C    = src->word_3C;
+        dst->unk_5D     = 0x10;
+        g_Task->unk_09  = 0x10;
+        g_Task->timer   = 4;
         g_Task->step++;
     }
 }
@@ -51,16 +51,16 @@ MATCH void func_801EF0F0(void) {
     u8 timer;
 
     if (g_FrameCount & 1) {
-        timer = g_Task->word_08.byte.timer_0A;
+        timer = g_Task->timer;
         if (timer < 0x20U) {
-            g_Task->word_08.byte.timer_0A = timer + 1;
+            g_Task->timer = timer + 1;
         }
     }
-    g_Task->word_08.byte.unk_09 += 1;
+    g_Task->unk_09 += 1;
     count          = g_Task->unk_5D - 1;
     g_Task->unk_5D = count;
     if ((count << 0x18) == 0) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         func_801E5988();
     }
 }

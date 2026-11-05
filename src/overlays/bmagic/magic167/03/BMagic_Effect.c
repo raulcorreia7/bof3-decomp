@@ -11,11 +11,11 @@ INCLUDE_ASM(func_801EEC94);
 MATCH void func_801EEE88(void) {
     PartyBattler** selected;
 
-    if (--g_Task->word_08.byte.unk_09 == 0) {
+    if (--g_Task->unk_09 == 0) {
         selected = &g_BattleSelectedActor;
         GFX_FreePaletteFadeTarget(*selected);
-        g_Task->word_08.byte.timer_0A = GFX_AllocPaletteFade((u8*)*selected, 0, 0, 0, 1);
-        g_Task->word_08.byte.unk_09   = 8;
+        g_Task->timer  = GFX_AllocPaletteFade((u8*)*selected, 0, 0, 0, 1);
+        g_Task->unk_09 = 8;
         g_Task->mode++;
     }
 }
@@ -51,33 +51,33 @@ INCLUDE_ASM(func_801EF9B8);
 MATCH void func_801EFA70(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->word_08.byte.timer_0A = 0x1;
-        g_Task->step                  = g_Task->step + 1;
+        g_Task->timer = 0x1;
+        g_Task->step  = g_Task->step + 1;
     }
 }
 
 MATCH void func_801EFACC(void) {
     u8 timer;
 
-    g_Task->word_08.byte.unk_0B += 2;
-    g_Task->word_08.byte.unk_09 += 1;
-    timer = g_Task->word_08.byte.timer_0A;
+    g_Task->unk_0B += 2;
+    g_Task->unk_09 += 1;
+    timer = g_Task->timer;
     if (timer < 0x10U) {
-        g_Task->word_08.byte.timer_0A = timer + 1;
+        g_Task->timer = timer + 1;
     }
-    if (g_Task->word_08.byte.unk_09 == 0x18) {
+    if (g_Task->unk_09 == 0x18) {
         g_Task->step += 1;
     }
 }
 
 MATCH void func_801EFB5C(void) {
-    g_Task->word_08.byte.unk_0B += 2;
-    g_Task->word_08.byte.unk_09 += 1;
-    g_Task->word_08.byte.timer_0A -= 1;
-    if (g_Task->word_08.byte.unk_09 == 0x28) {
+    g_Task->unk_0B += 2;
+    g_Task->unk_09 += 1;
+    g_Task->timer -= 1;
+    if (g_Task->unk_09 == 0x28) {
         g_Task->step += 1;
     }
 }
@@ -86,11 +86,11 @@ MATCH void func_801EFBE4(void) {
     PartyBattler* work;
     u8            next;
 
-    work                        = g_Task;
-    next                        = work->word_08.byte.timer_0A + 1;
-    work->word_08.byte.timer_0A = next;
+    work        = g_Task;
+    next        = work->timer + 1;
+    work->timer = next;
     if (next == 0x18) {
-        D_801EB4E0->word_08.byte.unk_0B--;
+        D_801EB4E0->unk_0B--;
         func_801E5988();
     }
 }

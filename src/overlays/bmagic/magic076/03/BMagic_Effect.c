@@ -11,11 +11,11 @@ INCLUDE_ASM(func_801EED48);
 MATCH void func_801EEF5C(void) {
     PartyBattler** selected;
 
-    if (--g_Task->word_08.byte.unk_09 == 0) {
+    if (--g_Task->unk_09 == 0) {
         selected = &g_BattleSelectedActor;
         func_80196718(*selected);
-        g_Task->word_08.byte.timer_0A = func_8019651C((u8*)*selected, 0, 0, 0, 1);
-        g_Task->word_08.byte.unk_09   = 8;
+        g_Task->timer  = func_8019651C((u8*)*selected, 0, 0, 0, 1);
+        g_Task->unk_09 = 8;
         g_Task->mode++;
     }
 }

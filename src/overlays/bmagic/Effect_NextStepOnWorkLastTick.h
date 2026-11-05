@@ -4,7 +4,7 @@ MATCH void Effect_NextStepOnWorkLastTick(void) {
     PartyBattler* work;
 
     work = SP_REF(PartyBattler*, 0x44u);
-    if (work->word_08.byte.unk_0B == 1) {
+    if (work->unk_0B == 1) {
         work->mode = work->mode + 1;
     }
 }

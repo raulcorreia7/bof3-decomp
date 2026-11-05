@@ -30,17 +30,17 @@ MATCH void func_801EF208(void) {
 }
 
 MATCH void func_801EF260(void) {
-    if ((u8)g_Task->word_08.byte.unk_09 < 0xCU) {
+    if ((u8)g_Task->unk_09 < 0xCU) {
         func_801EF348();
-        g_Task->word_08.byte.unk_09 += 4;
+        g_Task->unk_09 += 4;
         return;
     }
     g_Task->step += 1;
 }
 
 MATCH void func_801EF2CC(void) {
-    if (g_Task->word_08.byte.unk_0B == 0) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+    if (g_Task->unk_0B == 0) {
+        D_801EB4E0->unk_0B -= 1;
         g_Task->step += 1;
     }
 }
@@ -71,11 +71,11 @@ INCLUDE_ASM(func_801EF600);
 MATCH void func_801EF7A0(void) {
     PartyBattler* work;
 
-    work                        = g_Task;
-    work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 2;
-    if (work->word_08.byte.timer_0A == 0) {
-        work                      = (PartyBattler*)D_801EB4E0;
-        work->word_08.byte.unk_0B = work->word_08.byte.unk_0B - 1;
+    work        = g_Task;
+    work->timer = work->timer - 2;
+    if (work->timer == 0) {
+        work         = (PartyBattler*)D_801EB4E0;
+        work->unk_0B = work->unk_0B - 1;
         Actor_Clear();
     }
 }

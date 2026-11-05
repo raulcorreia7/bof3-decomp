@@ -12,12 +12,12 @@ MATCH void func_801EEE14(void) {
     u8             temp_v0;
     PartyBattler** selected;
 
-    temp_v0                     = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = temp_v0;
+    temp_v0        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         selected = &g_BattleSelectedActor;
         func_80196718(*selected);
-        g_Task->word_08.byte.unk_09 = func_8019651C(*selected, 0, 0, 0, 1);
+        g_Task->unk_09 = func_8019651C(*selected, 0, 0, 0, 1);
         g_Task->mode += 1;
     }
 }
@@ -50,14 +50,14 @@ MATCH void func_801EF27C(void) {
     PartyBattler* src;
     PartyBattler* dst;
 
-    if (--g_Task->word_08.byte.unk_09 == 0) {
-        src                           = D_801EB4E0;
-        dst                           = g_Task;
-        dst->coord_x_34               = src->coord_x_34;
-        dst->coord_y_38               = src->coord_y_38;
-        dst->word_3C                  = src->word_3C;
-        dst->word_08.byte.unk_09      = 0;
-        g_Task->word_08.byte.timer_0A = 0;
+    if (--g_Task->unk_09 == 0) {
+        src             = D_801EB4E0;
+        dst             = g_Task;
+        dst->coord_x_34 = src->coord_x_34;
+        dst->coord_y_38 = src->coord_y_38;
+        dst->word_3C    = src->word_3C;
+        dst->unk_09     = 0;
+        g_Task->timer   = 0;
         g_Task->step++;
     }
 }
@@ -65,8 +65,8 @@ MATCH void func_801EF27C(void) {
 MATCH void func_801EF308(void) {
     u8 timer;
 
-    timer                         = g_Task->word_08.byte.timer_0A + 4;
-    g_Task->word_08.byte.timer_0A = timer;
+    timer         = g_Task->timer + 4;
+    g_Task->timer = timer;
     if (timer == 32) {
         g_Task->step = g_Task->step + 1;
     }
@@ -78,13 +78,13 @@ MATCH void func_801EF358(void) {
     u8            count;
 
     work = g_Task;
-    work->word_08.byte.unk_09 += 4;
-    work                        = g_Task;
-    count                       = work->word_08.byte.timer_0A - 1;
-    work->word_08.byte.timer_0A = count;
+    work->unk_09 += 4;
+    work        = g_Task;
+    count       = work->timer - 1;
+    work->timer = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->word_08.byte.unk_0B--;
+        active->unk_0B--;
         func_801E5988();
     }
 }
@@ -104,12 +104,12 @@ MATCH void func_801EF3D0(void) {
 MATCH void func_801EF484(void) {
     PartyBattler* src;
 
-    src                         = (PartyBattler*)D_801EB4E0;
-    g_Task->coord_x_34          = src->coord_x_34;
-    g_Task->coord_y_38          = src->coord_y_38;
-    g_Task->word_3C             = src->word_3C;
-    g_Task->word_08.byte.unk_09 = 0;
-    g_Task->step                = g_Task->step + 1;
+    src                = (PartyBattler*)D_801EB4E0;
+    g_Task->coord_x_34 = src->coord_x_34;
+    g_Task->coord_y_38 = src->coord_y_38;
+    g_Task->word_3C    = src->word_3C;
+    g_Task->unk_09     = 0;
+    g_Task->step       = g_Task->step + 1;
 }
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"

@@ -5,7 +5,7 @@
  */
 /* func_801EF6AC (magic008), func_801EF150 (magic015), func_801EF594 (magic015) */
 #define EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE()                    \
-    if (g_Task->word_08.byte.unk_0B == 0) {                            \
+    if (g_Task->unk_0B == 0) {                                         \
         func_800AFC54();                                               \
         func_800AEF98(4, 0);                                           \
         BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY; \

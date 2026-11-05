@@ -28,8 +28,8 @@ MATCH void func_800ADA4C(void) {
     work->word_3C.word       = 0;
     pair                     = &D_801485CA;
     base                     = (u8*)g_BattleTargetRows;
-    row                      = base + ((*pair + slotp->word_08.byte.unk_09) * 4);
-    slot                     = row[slotp->word_08.byte.timer_0A];
+    row                      = base + ((*pair + slotp->unk_09) * 4);
+    slot                     = row[slotp->timer];
     if (slot != GAME_NONE) {
         Actor_SelectScript(slot);
     }

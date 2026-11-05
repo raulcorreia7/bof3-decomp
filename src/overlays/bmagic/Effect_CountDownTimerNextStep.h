@@ -5,8 +5,8 @@
 MATCH void Effect_CountDownTimerNextStep(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         g_Task->mode = g_Task->mode + 1;
     }

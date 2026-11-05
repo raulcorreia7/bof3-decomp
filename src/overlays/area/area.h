@@ -125,8 +125,8 @@ extern u8 D_80147ACF;
     selection = (table)[index];                                      \
     result    = func_8015CB18((kind), 0, selection, x, y);           \
     if ((u8)result != GAME_NONE) {                                   \
-        work                      = (PartyBattler*)g_Task;           \
-        work->word_08.byte.unk_0B = (u8)result;                      \
+        work         = (PartyBattler*)g_Task;                        \
+        work->unk_0B = (u8)result;                                   \
     }
 
 void Area_DrawHud(s16 x, s16 y);

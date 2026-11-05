@@ -10,17 +10,17 @@ MATCH void func_800C1BF0(void) {
     g_Task  = D_801EB4E0;
     func_8014DAEC();
     g_Task = battler;
-    value2 = battler->word_08.byte.unk_09;
+    value2 = battler->unk_09;
     value  = value2 & 0xFF;
     if (value != 0xFF) {
         if (value == 0) {
             SND_PlayCue(0x601U);
-            g_Task->word_08.byte.unk_09 = 0xFF;
+            g_Task->unk_09 = 0xFF;
         } else {
-            battler->word_08.byte.unk_09 = value2 - 1;
+            battler->unk_09 = value2 - 1;
         }
     }
-    value3 = g_Task->word_08.byte.timer_0A;
+    value3 = g_Task->timer;
     if (value3 == 0) {
         D_801EB4E0->mode = 5;
         D_801EB4E0->step = 0;
@@ -28,5 +28,5 @@ MATCH void func_800C1BF0(void) {
         g_Task->mode += 1;
         return;
     }
-    g_Task->word_08.byte.timer_0A = value3 - 1;
+    g_Task->timer = value3 - 1;
 }

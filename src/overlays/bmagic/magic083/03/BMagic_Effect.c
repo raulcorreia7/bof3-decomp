@@ -69,7 +69,7 @@ MATCH void func_801F01F8(void) {
     u8  value5;
 
     func_800AF764();
-    if ((g_Task->unk_0C == 4) && ((u8)g_Task->word_08.byte.timer_0A < 5U)) {
+    if ((g_Task->unk_0C == 4) && ((u8)g_Task->timer < 5U)) {
         value2 = (rand() & 3) | 0x40;
     } else {
         value2 = (rand() & 3) | 0x18;
@@ -85,10 +85,10 @@ MATCH void func_801F01F8(void) {
             g_Task->unk_0C += 1;
         }
     }
-    g_Task->word_08.byte.unk_09 += g_Task->unk_0C;
+    g_Task->unk_09 += g_Task->unk_0C;
     if (g_Task->unk_0C == 4) {
-        value4                        = g_Task->word_08.byte.timer_0A - 1;
-        g_Task->word_08.byte.timer_0A = value4;
+        value4        = g_Task->timer - 1;
+        g_Task->timer = value4;
         if (!(value4 & 0xFF)) {
             value5 = g_Task->unk_03;
             if (!(value5 & 0xF0)) {

@@ -20,14 +20,14 @@ MATCH void func_801EEC5C(void) {
     func_800AFD9C();
     offset                                   = (Battle_AllocEffect(1, 0x19) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     FIELD(PartyBattler*, D_801EC3A4, offset) = g_Task;
-    FIELD(u8, D_801EC338, offset)            = ((PartyBattler*)D_8014637C)->word_08.byte.facing_08;
+    FIELD(u8, D_801EC338, offset)            = ((PartyBattler*)D_8014637C)->facing;
     scroll_x                                 = g_AreaScrollTargetX;
     work                                     = g_Task;
     FIELD(s32, D_801EC364, offset)           = scroll_x;
     FIELD(s32, D_801EC368, offset)           = g_AreaScrollTargetY;
     FIELD(s32, D_801EC36C, offset)           = work->word_3C.word + 0x04000000;
     SND_QueueSelectionFx(0x100);
-    g_Task->word_08.byte.unk_0B = 0;
+    g_Task->unk_0B = 0;
     g_Task->mode += 1;
 }
 
@@ -50,16 +50,16 @@ MATCH void func_801EEDA0(void) {
 }
 
 MATCH void func_801EEE50(void) {
-    g_Task->word_08.byte.unk_0B   = 0;
-    g_Task->word_08.byte.unk_09   = 0;
-    g_Task->word_08.byte.timer_0A = 0;
+    g_Task->unk_0B = 0;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0;
     g_Task->mode++;
 }
 
 MATCH void func_801EEEA0(void) {
-    g_Task->word_08.byte.unk_09 += 1;
-    g_Task->word_08.byte.timer_0A += 1;
-    if (g_Task->word_08.byte.unk_09 == 0x20) {
+    g_Task->unk_09 += 1;
+    g_Task->timer += 1;
+    if (g_Task->unk_09 == 0x20) {
         g_Task->mode = g_Task->mode + 1;
     }
 }
@@ -69,11 +69,11 @@ MATCH void func_801EEEA0(void) {
 MATCH void func_801EEF5C(void) {
     PartyBattler* active;
 
-    g_Task->word_08.byte.unk_09   = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.timer_0A = g_Task->word_08.byte.timer_0A - 1;
-    if (g_Task->word_08.byte.timer_0A == 0) {
-        active                      = BATTLE_ACTIVE_WORK;
-        active->word_08.byte.unk_0B = 255;
+    g_Task->unk_09 = g_Task->unk_09 + 1;
+    g_Task->timer  = g_Task->timer - 1;
+    if (g_Task->timer == 0) {
+        active         = BATTLE_ACTIVE_WORK;
+        active->unk_0B = 255;
         func_801E5988();
     }
 }
@@ -86,13 +86,13 @@ MATCH void func_801EEFD4(void) {
     u8      angle;
 
     PushMatrix();
-    if (g_Task->word_08.byte.facing_08 & 1) {
+    if (g_Task->facing & 1) {
         rot.vx = 0;
-        angle  = g_Task->word_08.byte.unk_09 & 0x3F;
+        angle  = g_Task->unk_09 & 0x3F;
         rot.vy = (u32)rsin(angle << 6) >> 3;
         rot.vz = 0;
     } else {
-        angle  = g_Task->word_08.byte.unk_09 & 0x3F;
+        angle  = g_Task->unk_09 & 0x3F;
         rot.vx = (u32)rsin(angle << 6) >> 3;
         rot.vy = 0;
         rot.vz = 0;

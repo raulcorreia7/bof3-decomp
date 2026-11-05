@@ -14,14 +14,14 @@ MATCH void func_801EF218(void) {
     PartyBattler* work;
     u8            tick;
 
-    work                      = g_Task;
-    tick                      = work->word_08.byte.unk_09 + EFFECT_TICK_INCREMENT;
-    work->word_08.byte.unk_09 = tick;
+    work         = g_Task;
+    tick         = work->unk_09 + EFFECT_TICK_INCREMENT;
+    work->unk_09 = tick;
     if (tick >= EFFECT_TICK_LIMIT) {
-        g_Task->word_08.byte.unk_09 = 0;
+        g_Task->unk_09 = 0;
         g_Task->mode += 1;
     }
-    g_AreaCameraOffsetY      = (((g_FrameCount & 1) * 2) - 1) * (g_Task->word_08.byte.unk_09 >> 1);
+    g_AreaCameraOffsetY      = (((g_FrameCount & 1) * 2) - 1) * (g_Task->unk_09 >> 1);
     g_AreaCameraRefreshCount = 2;
 }
 

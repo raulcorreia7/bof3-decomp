@@ -5,21 +5,21 @@ MATCH void Effect_DriftStep(void) {
     u8            timer;
     u8            ticks;
 
-    ticks                       = g_Task->word_08.byte.unk_0B + 1;
-    g_Task->word_08.byte.unk_0B = ticks + (g_Task->word_08.byte.unk_09 >> 6);
+    ticks          = g_Task->unk_0B + 1;
+    g_Task->unk_0B = ticks + (g_Task->unk_09 >> 6);
     if (g_FrameCount & 1) {
-        g_Task->word_08.byte.timer_0A -= 1;
+        g_Task->timer -= 1;
     }
     g_Task->unk_0C = 0x2000;
     g_Task->unk_10 = 0;
     func_801DD350(g_Task);
-    work                      = g_Task;
-    timer                     = work->word_08.byte.unk_09 - 2;
-    work->word_08.byte.unk_09 = timer;
+    work         = g_Task;
+    timer        = work->unk_09 - 2;
+    work->unk_09 = timer;
     work->coord_x_34.raw += work->unk_0C;
     work->coord_y_38.raw += work->unk_10;
     if (timer == 0x30) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        D_801EB4E0->unk_0B -= 1;
         func_801E5988();
     }
 }

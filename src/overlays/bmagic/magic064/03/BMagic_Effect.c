@@ -25,10 +25,10 @@ MATCH void func_801EED7C(void) {
     temp_s0 = g_Task;
     temp_v0 = &g_BattlePartyBattlers[g_BattleActiveBattler];
     g_Task  = temp_v0;
-    Actor_RequestScript((temp_v0->word_08.byte.facing_08 + 0x38) & 0xFF);
+    Actor_RequestScript((temp_v0->facing + 0x38) & 0xFF);
     g_Task = temp_s0;
     SND_PlayCue(0x100U);
-    g_Task->word_08.byte.unk_0B = 0;
+    g_Task->unk_0B = 0;
     g_Task->step += 1;
 }
 
@@ -38,8 +38,8 @@ MATCH void func_801EEE1C(void) {
     battler = g_Task;
     g_Task  = &g_BattlePartyBattlers[g_BattleActiveBattler];
     if (!(func_8014DAEC() & 0xFF)) {
-        g_Task                       = battler;
-        battler->word_08.byte.unk_09 = 0x10;
+        g_Task          = battler;
+        battler->unk_09 = 0x10;
         return;
     }
     g_Task = battler;
@@ -58,14 +58,14 @@ INCLUDE_ASM(func_801EF0E0);
 MATCH void func_801EF20C(void) {
     u8 temp_v0;
 
-    temp_v0 = g_Task->word_08.byte.unk_09;
+    temp_v0 = g_Task->unk_09;
     if (temp_v0 != 0) {
-        g_Task->word_08.byte.unk_09 = temp_v0 - 1;
+        g_Task->unk_09 = temp_v0 - 1;
         return;
     }
     func_80196718(D_801EB4E0);
     D_801EB4E0->flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
-    g_Task->word_08.byte.unk_09 = 0;
+    g_Task->unk_09 = 0;
     g_Task->step += 1;
 }
 
@@ -78,19 +78,19 @@ MATCH void func_801EF2A4(void) {
 
     battler = g_Task;
     g_Task  = &g_BattlePartyBattlers[g_BattleActiveBattler];
-    func_801F0EEC(1, 2, (0x80 - battler->word_08.byte.unk_09) & 0xFF);
-    func_801F0EEC(0, 1, (0x80 - battler->word_08.byte.unk_09) & 0xFF);
-    func_801F0EEC(3, 2, battler->word_08.byte.unk_09);
-    func_801F0EEC(2, 1, battler->word_08.byte.unk_09);
+    func_801F0EEC(1, 2, (0x80 - battler->unk_09) & 0xFF);
+    func_801F0EEC(0, 1, (0x80 - battler->unk_09) & 0xFF);
+    func_801F0EEC(3, 2, battler->unk_09);
+    func_801F0EEC(2, 1, battler->unk_09);
     g_Task = battler;
     if (D_801EB4E0->unk_2C.half == 0) {
         value = 0x242;
-        if ((u8)D_801EB4E0->word_08.byte.facing_08 < 2U) {
+        if ((u8)D_801EB4E0->facing < 2U) {
             value = 0x240;
         }
     } else {
         value = 0x243;
-        if ((u8)D_801EB4E0->word_08.byte.facing_08 < 2U) {
+        if ((u8)D_801EB4E0->facing < 2U) {
             value = 0x241;
         }
     }
@@ -117,17 +117,17 @@ MATCH void func_801EF5FC(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (!(work->word_08.byte.unk_0B & 1)) {
+    if (!(work->unk_0B & 1)) {
         g_AreaScrollTargetX = work->coord_x_34.raw;
         MATCH_FAKE_BARRIER(); /* FAKE: retail reads each field after storing the previous target */
         g_AreaScrollTargetY = work->coord_y_38.raw;
         MATCH_FAKE_BARRIER();
         g_AreaCameraHeight = work->word_3C.half.span_3E;
         func_801F103C();
-        g_Task->word_08.byte.unk_09   = 0x40;
-        g_Task->word_08.byte.timer_0A = 1;
-        g_Task->mode                  = 2;
-        g_Task->step                  = 0;
+        g_Task->unk_09 = 0x40;
+        g_Task->timer  = 1;
+        g_Task->mode   = 2;
+        g_Task->step   = 0;
     }
 }
 
@@ -176,8 +176,8 @@ MATCH void func_801F007C(void) {
 INCLUDE_ASM(func_801F009C);
 
 MATCH void func_801F01C4(void) {
-    g_Task->word_08.byte.unk_0B = 0;
-    g_Task->word_08.byte.unk_09 = 64;
+    g_Task->unk_0B = 0;
+    g_Task->unk_09 = 64;
     func_801F03D8();
     g_Task->step++;
 }
@@ -186,8 +186,8 @@ MATCH void func_801F0214(void) {
     u8 timer;
 
     func_801F03D8();
-    timer                       = g_Task->word_08.byte.unk_09 - 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
     if (timer == 0) {
         g_Task->step = g_Task->step + 1;
     }
@@ -198,13 +198,13 @@ MATCH void func_801F0278(void) {
 
     func_801F03D8();
     if (!(g_FrameCount & 1)) {
-        temp_v1 = g_Task->word_08.byte.unk_0B;
+        temp_v1 = g_Task->unk_0B;
         if (temp_v1 >= 0x18U) {
             D_801EB4E0->step += 1;
             g_Task->step += 1;
             return;
         }
-        g_Task->word_08.byte.unk_0B = temp_v1 + 1;
+        g_Task->unk_0B = temp_v1 + 1;
     }
 }
 
@@ -242,7 +242,7 @@ MATCH void func_801F0C38(void) {
 }
 
 MATCH void func_801F0CBC(void) {
-    Actor_RequestScript(g_Task->word_08.byte.unk_0B);
+    Actor_RequestScript(g_Task->unk_0B);
     do {
     } while (!(func_8014DAEC() & 0xFF));
     g_Task->step += 1;
@@ -267,13 +267,13 @@ MATCH void func_801F0DD8(void) {
     PartyBattler* work;
     s8            counter;
 
-    work                      = g_Task;
-    counter                   = work->word_08.byte.unk_09 - 1;
-    work->word_08.byte.unk_09 = counter;
+    work         = g_Task;
+    counter      = work->unk_09 - 1;
+    work->unk_09 = counter;
     if (counter == -6) {
         g_Task->step++;
     }
-    Area_UpdatePaletteTint((s8)g_Task->word_08.byte.unk_09);
+    Area_UpdatePaletteTint((s8)g_Task->unk_09);
 }
 
 MATCH void func_801F0E50(void) {
@@ -291,11 +291,11 @@ MATCH void func_801F0E90(void) {
     PartyBattler* work;
 
     work = g_Task;
-    work->word_08.byte.unk_09++;
-    if (work->word_08.byte.unk_09 == 0) {
+    work->unk_09++;
+    if (work->unk_09 == 0) {
         func_801E5988();
     }
-    Area_UpdatePaletteTint((s8)g_Task->word_08.byte.unk_09);
+    Area_UpdatePaletteTint((s8)g_Task->unk_09);
 }
 
 INCLUDE_ASM(func_801F0EEC);

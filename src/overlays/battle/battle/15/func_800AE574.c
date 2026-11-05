@@ -13,8 +13,8 @@ MATCH void func_800AE574(void) {
     u16           base;
 
     first = (PartyBattler*)g_Task;
-    first->word_08.byte.unk_09--;
-    if (first->word_08.byte.unk_09 != 0) {
+    first->unk_09--;
+    if (first->unk_09 != 0) {
         return;
     }
 
@@ -39,8 +39,8 @@ MATCH void func_800AE574(void) {
     FIELD(u16, third, 0x2E) = height;
     flag                    = (PartyBattler*)g_Task;
     base -= next;
-    FIELD(u16, third, 0x30)     = base;
-    flag->word_08.byte.timer_0A = 1;
+    FIELD(u16, third, 0x30) = base;
+    flag->timer             = 1;
 
     last       = (PartyBattler*)g_Task;
     last->mode = (u8)(last->mode + 1);

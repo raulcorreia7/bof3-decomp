@@ -19,9 +19,9 @@ INCLUDE_ASM(func_801EF224);
 MATCH void func_801EF4C4(void) {
     u8* work;
 
-    *(u8*)((u8*)g_Task + 0x09)    = 0;
-    g_Task->word_08.byte.timer_0A = 0;
-    work                          = (u8*)g_Task;
+    *(u8*)((u8*)g_Task + 0x09) = 0;
+    g_Task->timer              = 0;
+    work                       = (u8*)g_Task;
     work[2] += 1;
 }
 
@@ -29,10 +29,10 @@ MATCH void func_801EF504(void) {
     PartyBattler* work;
 
     work = g_Task;
-    work->word_08.byte.unk_09++;
+    work->unk_09++;
     work = g_Task;
-    work->word_08.byte.timer_0A += 2;
-    if (work->word_08.byte.timer_0A == 32) {
+    work->timer += 2;
+    if (work->timer == 32) {
         work = g_Task;
         work->step++;
     }
@@ -41,8 +41,8 @@ MATCH void func_801EF504(void) {
 MATCH void func_801EF570(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = timer;
     if (timer == 0xA0) {
         g_Task->step = g_Task->step + 1;
     }
@@ -89,10 +89,10 @@ MATCH void func_801F0070(void) {
     PartyBattler* work;
 
     work = g_Task;
-    work->word_08.byte.unk_09++;
+    work->unk_09++;
     work = g_Task;
-    work->word_08.byte.timer_0A++;
-    if (work->word_08.byte.timer_0A == 32) {
+    work->timer++;
+    if (work->timer == 32) {
         work = g_Task;
         work->step++;
     }
@@ -101,8 +101,8 @@ MATCH void func_801F0070(void) {
 MATCH void func_801F00DC(void) {
     u8 timer;
 
-    timer                       = g_Task->word_08.byte.unk_09 + 1;
-    g_Task->word_08.byte.unk_09 = timer;
+    timer          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = timer;
     if (timer == 160) {
         g_Task->step = g_Task->step + 1;
     }
@@ -113,12 +113,12 @@ MATCH void func_801F012C(void) {
     u8            count;
 
     work = g_Task;
-    work->word_08.byte.unk_09++;
-    work                        = g_Task;
-    count                       = work->word_08.byte.timer_0A - 1;
-    work->word_08.byte.timer_0A = count;
+    work->unk_09++;
+    work        = g_Task;
+    count       = work->timer - 1;
+    work->timer = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
+        BATTLE_ACTIVE_WORK->unk_0B--;
         Actor_Clear();
     }
 }

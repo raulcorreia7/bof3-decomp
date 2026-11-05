@@ -5,7 +5,7 @@ MATCH void func_800C1C18(void) {
     u32 slot;
     u32 step;
 
-    if (((PartyBattler*)g_Task)->word_08.byte.timer_0A == 0) {
+    if (((PartyBattler*)g_Task)->timer == 0) {
         selector = (u8*)&g_BattleTargetSelector;
         if (Battle_SlotIsBlocked(*selector) & 0xFF) {
             ((PartyBattler*)g_Task)->mode = 9;

@@ -5,12 +5,12 @@
 MATCH void func_801EF1B8(void) {
     u8 timer;
 
-    g_Task->word_08.byte.unk_09 -= 1;
-    g_Task->word_08.byte.unk_0B += 2;
-    timer                         = g_Task->word_08.byte.timer_0A + 1;
-    g_Task->word_08.byte.timer_0A = timer;
+    g_Task->unk_09 -= 1;
+    g_Task->unk_0B += 2;
+    timer         = g_Task->timer + 1;
+    g_Task->timer = timer;
     if ((timer & 0xFF) == 0x10) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B = 0xFF;
+        BATTLE_ACTIVE_WORK->unk_0B = 0xFF;
         func_801E5988();
     }
 }
