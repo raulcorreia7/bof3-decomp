@@ -23,7 +23,22 @@ MATCH void func_801EED2C(void) {
     SYS_DISPATCH_TASK(table.handlers, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EED98);
+MATCH void func_801EED98(void) {
+    PartyBattler* temp_s0;
+    s32           slot;
+
+    SND_QueueSelectionFx(0x101);
+    SND_QueueSelectionFx(0x102);
+    temp_s0    = g_SpadWork;
+    g_SpadWork = D_801EC2E0->target.party;
+    Actor_SelectScript(3U);
+    g_SpadWork                         = temp_s0;
+    slot                               = Battle_AllocEffect(1, 0x41) & BYTE_MASK;
+    g_BattleEffects[slot].unk_01       = 1;
+    g_BattleEffects[slot].unk_02       = 0;
+    g_BattleEffects[slot].target.party = g_SpadWork;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EEE50(void) {
     PartyBattler* temp_s0;

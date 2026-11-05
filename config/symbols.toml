@@ -335,6 +335,8 @@ Effect_CountDownTimerCapped = { addr = 0x801EFBF4, type = "func", source = "rais
 g_BMagicEffectFuncs = { addr = 0x801F0744, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic057/03"]
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 BMagic_RunStep = { addr = 0x801EEC50, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 
 ["emi/bmagic/magic058/03"]
