@@ -25,13 +25,13 @@ MATCH void func_801EEEC8(void) {
     PartyBattler* dst;
 
     if (--g_Task->unk_09 == 0) {
-        src            = D_801EB4E0;
-        dst            = g_Task;
-        dst->pos.x.raw = src->pos.x.raw;
-        dst->pos.y.raw = src->pos.y.raw;
-        dst->pos.z     = src->pos.z;
-        dst->unk_09    = 0x10;
-        g_Task->timer  = 0;
+        src              = D_801EB4E0;
+        dst              = g_Task;
+        dst->pos.x.fixed = src->pos.x.fixed;
+        dst->pos.y.fixed = src->pos.y.fixed;
+        dst->pos.z       = src->pos.z;
+        dst->unk_09      = 0x10;
+        g_Task->timer    = 0;
         g_Task->step++;
     }
 }

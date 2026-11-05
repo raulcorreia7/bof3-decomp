@@ -53,8 +53,8 @@ MATCH void func_801EF5E0(void) {
     work         = g_Task;
     count        = work->unk_09 + 1;
     work->unk_09 = count;
-    work->pos.x.raw += work->unk_0C;
-    work->pos.y.raw += work->unk_10;
+    work->pos.x.fixed += work->unk_0C;
+    work->pos.y.fixed += work->unk_10;
     if (count == 24) {
         g_Task->step++;
     }
@@ -72,9 +72,9 @@ MATCH void func_801EF72C(void) {
     rot.vx = 0x400;
     rot.vy = D_801EFC9C[g_Task->facing];
     rot.vz = 0;
-    pos.vx = (g_Task->pos.x.raw >> 9) - 0x4000;
-    pos.vy = (g_Task->pos.y.raw >> 9) - 0x4000;
-    pos.vz = -g_Task->pos.z.half.hi / 2;
+    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    pos.vz = -g_Task->pos.z.part.integer / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);

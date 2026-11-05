@@ -12,5 +12,5 @@ MATCH void func_801DDAF0(void) {
     g_BattleEffects[index].target.party = work_a;
     g_BattleEffects[index].pos.x        = work_b->pos.x;
     g_BattleEffects[index].pos.y        = work_b->pos.y;
-    g_BattleEffects[index].pos.z.raw    = work_b->pos.z.raw;
+    g_BattleEffects[index].pos.z.fixed  = work_b->pos.z.fixed;
 }

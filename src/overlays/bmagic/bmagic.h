@@ -13,14 +13,14 @@
 /* The statements of Effect_SetActorMatrix after its rotation is set; each
  * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
  * whose vertical span halves into the depth. */
-#define BMAGIC_PROJECT_ACTOR_MATRIX(SPAN_WORK)    \
-    pos.vx = (g_Task->pos.x.raw >> 9) - 0x4000;   \
-    pos.vy = (g_Task->pos.y.raw >> 9) - 0x4000;   \
-    pos.vz = -(SPAN_WORK)->pos.z.half.hi / 2;     \
-    RotTrans(&pos, &matrix.t, &flags);            \
-    RotMatrix(&rot, &matrix);                     \
-    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix); \
-    SetRotMatrix(&matrix);                        \
+#define BMAGIC_PROJECT_ACTOR_MATRIX(SPAN_WORK)     \
+    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;  \
+    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;  \
+    pos.vz = -(SPAN_WORK)->pos.z.part.integer / 2; \
+    RotTrans(&pos, &matrix.t, &flags);             \
+    RotMatrix(&rot, &matrix);                      \
+    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);  \
+    SetRotMatrix(&matrix);                         \
     SetTransMatrix(&matrix)
 
 /* The statements of Effect_SetActorMatrix with a zero rotation. */

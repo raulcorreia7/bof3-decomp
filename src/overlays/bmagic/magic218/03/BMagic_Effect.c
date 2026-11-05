@@ -32,14 +32,14 @@ MATCH void func_801EEEE4(void) {
     PartyBattler* dst;
 
     if (--g_Task->unk_09 == 0) {
-        src            = BATTLE_ACTIVE_WORK;
-        dst            = g_Task;
-        dst->pos.x.raw = src->pos.x.raw;
-        dst->pos.y.raw = src->pos.y.raw;
-        dst->pos.z     = src->pos.z;
-        dst->unk_5D    = 0x10;
-        g_Task->unk_09 = 0x10;
-        g_Task->timer  = 4;
+        src              = BATTLE_ACTIVE_WORK;
+        dst              = g_Task;
+        dst->pos.x.fixed = src->pos.x.fixed;
+        dst->pos.y.fixed = src->pos.y.fixed;
+        dst->pos.z       = src->pos.z;
+        dst->unk_5D      = 0x10;
+        g_Task->unk_09   = 0x10;
+        g_Task->timer    = 4;
         g_Task->step++;
     }
 }
