@@ -22,3 +22,7 @@ A missing shared type outside the grant is a `needs: type <Type>+0xOFF <width> (
 
 Report: `typed` or `shared` (record, member or group, the accesses that prove it, owning header),
 `kept` (the access that still matches, and why) or `needs`.
+5. Read the result as its original programmer would have written it
+([the rule](../../../../docs/conventions.md#write-it-as-the-original-programmer-did)); rewrite any
+line that still reads like decompiler output. Finish with `pre-push`: every image matches
+(`check`), every source builds as plain C (`check-plain`) and no function falls back to `INCLUDE_ASM`.
