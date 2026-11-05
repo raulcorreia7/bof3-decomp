@@ -13,8 +13,8 @@
 
 /* Fields of the row published through g_CurrentActor. */
 #define ROW_ROLL              FISHING_ROW->roll_90
-#define ROW_VALUE             FISHING_ROW->stamina_max_8C
-#define ROW_VALUE2            FISHING_ROW->stamina_8E
+#define ROW_VALUE             FISHING_ROW->ext.fishing.stamina_max
+#define ROW_VALUE2            FISHING_ROW->ext.fishing.stamina
 
 /* Spawns the area-030 state rows for the active spawn columns, rolling and clamping each row's hit value into
  * the kind table words. */

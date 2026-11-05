@@ -8,12 +8,12 @@ MATCH void func_801E026C(s8 delta) {
     s16    max;
     u16    result;
 
-    value                   = FISHING_ROW->stamina_8E + delta;
-    FISHING_ROW->stamina_8E = value;
-    work                    = FISHING_ROW;
-    result                  = work->stamina_8E;
+    value                            = FISHING_ROW->ext.fishing.stamina + delta;
+    FISHING_ROW->ext.fishing.stamina = value;
+    work                             = FISHING_ROW;
+    result                           = work->ext.fishing.stamina;
     if ((s16)value >= 0) {
-        max = work->stamina_max_8C;
+        max = work->ext.fishing.stamina_max;
         if (max < (s16)value) {
             result = max;
         }
@@ -23,5 +23,5 @@ MATCH void func_801E026C(s8 delta) {
             result = 0;
         ORDER_LOCK_END;
     }
-    work->stamina_8E = result;
+    work->ext.fishing.stamina = result;
 }
