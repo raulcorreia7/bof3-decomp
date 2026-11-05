@@ -1404,10 +1404,11 @@ One name per address per image. A second name for one address (a width or `volat
 macro, not a second `extern`. A cast macro that names the object itself keeps the bytes
 (`#define g_SpadWork ((T *)g_SpadWork)`); an address-taking view hoists the address and changes them.
 
-- `g_SpadWork` is one cell, declared in `include/psx/mem.h` as `extern u8 *g_SpadWork;`, or `u8 *volatile`
-  under `SPAD_WORK_VOLATILE`. Each mode header views it as
-  its work record through a cast macro. An image that reads it as `volatile` defines
-  `SPAD_WORK_VOLATILE` before the first include.
+- `g_SpadWork` is the pointer cell at `0x1F800044`: one `extern struct Task *g_SpadWork;` in
+  `include/psx/mem.h`. `struct Task` is incomplete, so no member is reachable without a view. Each
+  mode header views the cell as its work record through a cast macro. Code with no record type reads
+  bytes through `SPAD_WORK_BYTES[n]`, and assigns the cell with `(struct Task *)`. An image that reads
+  it as `volatile` defines `SPAD_WORK_VOLATILE` before the first include.
 
 #### Order-sensitive macros
 

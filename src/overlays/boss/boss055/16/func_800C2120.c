@@ -2,5 +2,5 @@
 
 MATCH void func_800C2120(void) {
     func_801E3160();
-    g_SpadWork[2]++;
+    SPAD_WORK_BYTES[2]++;
 }

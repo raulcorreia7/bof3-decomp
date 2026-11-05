@@ -5,7 +5,7 @@ MATCH void func_800A8678(void) {
     u32 offset;
     u32 value;
 
-    work = g_SpadWork;
+    work = SPAD_WORK_BYTES;
     if (FIELD(s32, work, 0x3C) < FIELD(s32, work, 0x20)) {
         FIELD(s32, work, 0x3C) = FIELD(s32, work, 0x3C) + 0x01000000;
     } else {
@@ -15,7 +15,7 @@ MATCH void func_800A8678(void) {
         } else {
             FIELD(u8, work, 0x8) ^= 2u;
             value                  = g_AreaScrollTargetX + ((s8*)D_800B44C0)[(g_BattleScrollDir ^ 2) * 2];
-            work                   = g_SpadWork;
+            work                   = SPAD_WORK_BYTES;
             FIELD(s32, work, 0x34) = value;
             offset                 = (g_BattleScrollDir ^ 2) * 2;
         }

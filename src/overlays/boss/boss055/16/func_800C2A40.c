@@ -6,5 +6,5 @@ MATCH void func_800C2A40(void) {
     ((Actor*)g_SpadWork)->flags_24 = 0;
     ((Actor*)g_SpadWork)->z.fixed  = 0;
     func_800C2AA8();
-    g_SpadWork[2]++;
+    SPAD_WORK_BYTES[2]++;
 }

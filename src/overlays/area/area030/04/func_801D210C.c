@@ -32,7 +32,7 @@ NON_MATCHING void func_801D210C(void) {
     }
 
     g_AreaCameraStep              = 0;
-    g_SpadWork[0xC]               = 0;
+    SPAD_WORK_BYTES[0xC]          = 0;
     FISHING_STATE->step_14        = *(u32*)(D_801E1D38 + FISHING_STATE->cue_index_06 * 8);
     FISHING_STATE->flags_24       = 0;
     FISHING_STATE->step_limit_20  = *(u32*)(D_801E1D3C + FISHING_STATE->cue_index_06 * 8);
