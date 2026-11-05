@@ -16,9 +16,9 @@ MATCH void Party_BuildBattlers(u32 mode) {
         entry_table                                   = D_80144F5A;
         g_Task->unk_05                                = i;
         ((void (*)(u8, u8))func_801C1254)(*((entry_table + ((mode & BYTE_MASK) * 3)) + i), i);
-        ((PartyBattler*)g_Task)->unk_48     = 0;
-        ((PartyBattler*)g_Task)->unk_40     = 0x10000;
-        ((PartyBattler*)g_Task)->unk_44     = 0x10000;
+        *((u8*)(((u8*)g_Task) + 0x48))      = 0;
+        *((u32*)(((u8*)g_Task) + 0x40))     = 0x10000;
+        *((u32*)(((u8*)g_Task) + 0x44))     = 0x10000;
         kind                                = g_CharSlot[*((entry_table + ((mode & BYTE_MASK) * 3)) + i)];
         D_80145FCC[i * BATTLE_PARTY_STRIDE] = kind;
         slot_offset                         = i * BATTLE_PARTY_STRIDE;

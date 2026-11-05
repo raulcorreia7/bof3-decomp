@@ -6,7 +6,7 @@ void func_801DAC1C(void);
 NON_MATCHING void func_801DAA68(void) {
     u8*            record;
     MenuPanelTask* rows;
-    MenuPanelTask* panel;
+    u8*            panel;
     u8             i;
     u32            idx;
     u8             count;
@@ -37,17 +37,17 @@ NON_MATCHING void func_801DAA68(void) {
         if ((s32)idx >= (u32)count) {
             break;
         }
-        panel         = &g_MenuPanelTasks[4 + idx];
-        panel->unk_0A = i;
+        panel      = &D_801483C0 + (idx * 0x24);
+        panel[0xA] = i;
         i += 1;
-        panel->unk_00[1] = 6;
-        panel->unk_00[2] = 0;
-        panel->state     = 0;
-        panel->unk_00[0] = 1;
-        panel->x         = 0x11;
-        panel->y         = (idx * 0x36) + 0x3E;
-        panel->unk_0B    = 1;
-        panel->unk_0C    = 0;
+        panel[0x1]       = 6;
+        panel[0x2]       = 0;
+        panel[0x3]       = 0;
+        panel[0x0]       = 1;
+        ((u16*)panel)[2] = 0x11;
+        ((u16*)panel)[3] = (idx * 0x36) + 0x3E;
+        panel[0xB]       = 1;
+        panel[0xC]       = 0;
     }
 
     Menu_DrawClutStrip(D_80144953);

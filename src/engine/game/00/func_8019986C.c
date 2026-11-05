@@ -5,8 +5,8 @@ MATCH void func_8019986C(void) {
     u8* color;
 
     g_MenuTaskHandlers[g_MenuCurrentPanel->state]();
-    func_801D50E8(g_MenuCurrentPanel->x, g_MenuCurrentPanel->y, (s16)g_MenuCurrentPanel->unk_12, 0x13,
-                  (s32)GAME_WINDOW_STYLE);
+    func_801D50E8(FIELD(s16, g_MenuCurrentPanel, 4u), FIELD(s16, g_MenuCurrentPanel, 6u),
+                  (s16)g_MenuCurrentPanel->unk_12, 0x13, (s32)GAME_WINDOW_STYLE);
     value = (s16)g_MenuCurrentPanel->unk_10;
     if (value != 0) {
         color = Resource_GetText((u32)(u16)value);

@@ -37,7 +37,7 @@ NON_MATCHING void func_801E5E2C(void) {
     digits = 2;
     /* Shorter each pass: the ladder ends when the value still fits the divisor. */
 loop:
-    if ((slot->word_60 / divisor) <= 0) {
+    if ((FIELD(s32, slot, 0x60) / divisor) <= 0) {
         digits -= 1;
         divisor = (divisor & BYTE_MASK) / 10;
         if (digits != 0) {
@@ -50,9 +50,9 @@ loop:
     } else {
         D_801EB730[(kind - 3) * 0x118] |= 0x80;
     }
-    slot->unk_0A = digits;
-    slot->unk_09 = 8;
-    slot->unk_32 = 0;
+    slot->unk_0A           = digits;
+    slot->unk_09           = 8;
+    FIELD(s16, slot, 0x32) = 0;
     slot->mode += 1;
 }
 #else
