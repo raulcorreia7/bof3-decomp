@@ -16,7 +16,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     spread = D_801D0C7C;
     if (element == 0xFFFF) {
         if (BATTLER_IS_PLAYER(attacker)) {
-            *(u16*)D_1F800000 = g_Weapons[g_BattlePartyBattlers[attacker].stats.weapon].element;
+            *(u16*)D_1F800000 = g_Weapons[g_BattlePartyBattlers[attacker].stats.equipment.weapon].element;
         } else {
             *(u16*)D_1F800000 = 0;
         }
@@ -38,15 +38,15 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     }
     damage = Battle_RollBaseDamage(attacker, target, 0);
     if (BATTLER_IS_PLAYER(attacker) && !BATTLER_IS_PLAYER(target)) {
-        if ((g_BattlePartyBattlers[attacker].stats.weapon == WEAPON_DEMONSBANE ||
-             g_BattlePartyBattlers[attacker].stats.weapon == WEAPON_HOLY_AVENGER ||
-             g_BattlePartyBattlers[attacker].stats.weapon == WEAPON_ARIES_SPEAR) &&
+        if ((g_BattlePartyBattlers[attacker].stats.equipment.weapon == WEAPON_DEMONSBANE ||
+             g_BattlePartyBattlers[attacker].stats.equipment.weapon == WEAPON_HOLY_AVENGER ||
+             g_BattlePartyBattlers[attacker].stats.equipment.weapon == WEAPON_ARIES_SPEAR) &&
             ENEMY_COMBATANT(target).unk_7D == 4) {
             damage *= 2;
         }
-        if ((g_BattlePartyBattlers[attacker].stats.weapon == WEAPON_DRAGON_BLADE ||
-             g_BattlePartyBattlers[attacker].stats.weapon == WEAPON_DRAGON_SPEAR ||
-             g_BattlePartyBattlers[attacker].stats.weapon == WEAPON_DRAGONFANG) &&
+        if ((g_BattlePartyBattlers[attacker].stats.equipment.weapon == WEAPON_DRAGON_BLADE ||
+             g_BattlePartyBattlers[attacker].stats.equipment.weapon == WEAPON_DRAGON_SPEAR ||
+             g_BattlePartyBattlers[attacker].stats.equipment.weapon == WEAPON_DRAGONFANG) &&
             ENEMY_COMBATANT(target).unk_7D == 1) {
             damage *= 2;
         }

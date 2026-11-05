@@ -16,11 +16,11 @@ MATCH void func_8009AAE8(void) {
         bitIndex   = selectBit & BYTE_MASK;
     }
     record                             = bitIndex;
-    s_BattleEquipment[0]               = g_Characters[record].weapon;
-    s_BattleEquipment[1]               = g_Characters[record].shield;
-    s_BattleEquipment[2]               = g_Characters[record].helmet;
-    s_BattleEquipment[3]               = g_Characters[record].armor;
-    s_BattleEquipment[4]               = g_Characters[record].accessories[0];
-    s_BattleEquipment[5]               = g_Characters[record].accessories[1];
+    s_BattleEquipment[0]               = g_Characters[record].equipment.weapon;
+    s_BattleEquipment[1]               = g_Characters[record].equipment.shield;
+    s_BattleEquipment[2]               = g_Characters[record].equipment.helmet;
+    s_BattleEquipment[3]               = g_Characters[record].equipment.armor;
+    s_BattleEquipment[4]               = g_Characters[record].equipment.accessories[0];
+    s_BattleEquipment[5]               = g_Characters[record].equipment.accessories[1];
     s_BattleEquipment[g_BattleItemRow] = saveBuf;
 }

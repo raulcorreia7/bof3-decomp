@@ -15,14 +15,14 @@ MATCH u8* Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode) {
     }
     switch ((u8)ability_type) {
         default:
-            return record->healing_abilities;
+            return record->abilities.healing;
         case ABILITY_TYPE_HEAL:
-            return record->healing_abilities;
+            return record->abilities.healing;
         case ABILITY_TYPE_ASSIST:
-            return record->assist_abilities;
+            return record->abilities.assist;
         case ABILITY_TYPE_ATTACK:
-            return record->attack_abilities;
+            return record->abilities.attack;
         case ABILITY_TYPE_SKILL:
-            return record->skill_abilities;
+            return record->abilities.skill;
     }
 }

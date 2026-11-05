@@ -18,40 +18,42 @@ MATCH u8 func_801D5DCC(void) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
             if (g_BattlePartyBattlers[slot].stats.character_id == CHAR_ID_PECO) {
-                g_BattlePartyBattlers[slot].hp_change -= (g_BattlePartyBattlers[slot].stats.max_hp + 10) / 20;
+                g_BattlePartyBattlers[slot].hp_change -= (g_BattlePartyBattlers[slot].stats.stats.max_hp + 10) / 20;
             }
             if (g_BattlePartyBattlers[slot].stats.character_id == CHAR_ID_RYU_ADULT ||
                 g_BattlePartyBattlers[slot].stats.character_id == CHAR_ID_RYU_YOUNG) {
                 if (g_BattlePartyBattlers[slot].action_flags.volatile_value & 2) {
                     if (g_DragonForm == 0x12) {
-                        g_BattlePartyBattlers[slot].hp_change -= (g_BattlePartyBattlers[slot].stats.max_hp + 10) / 20;
+                        g_BattlePartyBattlers[slot].hp_change -=
+                            (g_BattlePartyBattlers[slot].stats.stats.max_hp + 10) / 20;
                     }
                 }
             }
-            if (g_BattlePartyBattlers[slot].stats.weapon == WEAPON_BEAST_SPEAR) {
-                delta = g_BattlePartyBattlers[slot].hp_change + (g_BattlePartyBattlers[slot].stats.max_hp + 10) / 20;
+            if (g_BattlePartyBattlers[slot].stats.equipment.weapon == WEAPON_BEAST_SPEAR) {
+                delta =
+                    g_BattlePartyBattlers[slot].hp_change + (g_BattlePartyBattlers[slot].stats.stats.max_hp + 10) / 20;
                 g_BattlePartyBattlers[slot].hp_change = delta;
                 if (delta >= g_BattlePartyBattlers[slot].stats.current_hp) {
                     g_BattlePartyBattlers[slot].hp_change = g_BattlePartyBattlers[slot].stats.current_hp - 1;
                 }
             }
-            if (g_BattlePartyBattlers[slot].stats.armor == ARMOR_LIFE_ARMOR) {
+            if (g_BattlePartyBattlers[slot].stats.equipment.armor == ARMOR_LIFE_ARMOR) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
-            if (g_BattlePartyBattlers[slot].stats.accessories[0] == ACCESSORY_CUPIDS_LYRE) {
+            if (g_BattlePartyBattlers[slot].stats.equipment.accessories[0] == ACCESSORY_CUPIDS_LYRE) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
-            if (g_BattlePartyBattlers[slot].stats.accessories[1] == ACCESSORY_CUPIDS_LYRE) {
+            if (g_BattlePartyBattlers[slot].stats.equipment.accessories[1] == ACCESSORY_CUPIDS_LYRE) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
-            if (g_BattlePartyBattlers[slot].stats.accessories[0] == ACCESSORY_IVORY_CHARM) {
+            if (g_BattlePartyBattlers[slot].stats.equipment.accessories[0] == ACCESSORY_IVORY_CHARM) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
-            if (g_BattlePartyBattlers[slot].stats.accessories[1] == ACCESSORY_IVORY_CHARM) {
+            if (g_BattlePartyBattlers[slot].stats.equipment.accessories[1] == ACCESSORY_IVORY_CHARM) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
             if (HAS_STATUS(g_BattlePartyBattlers[slot], 1)) {
-                g_BattlePartyBattlers[slot].hp_change -= g_BattlePartyBattlers[slot].stats.max_hp >> 1;
+                g_BattlePartyBattlers[slot].hp_change -= g_BattlePartyBattlers[slot].stats.stats.max_hp >> 1;
             }
             if ((s16)g_BattlePartyBattlers[slot].hp_change != 0) {
                 g_BattlePartyBattlers[slot].mode    = 6;

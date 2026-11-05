@@ -75,7 +75,7 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     status_value  = status_mode & BYTE_MASK;
     UI_DrawGlyphString((s16)(panel_x + 40), (s16)status_text_y, (u32)status_value, (u8*)g_UiFormatBuffer);
     func_801D94D4((s32)(s16)(panel_x + 0x30), (u32)hp_text_y, status_value,
-                  (s32)(u8)g_BattlePartyBattlers[battler_index].stats.max_hp);
+                  (s32)(u8)g_BattlePartyBattlers[battler_index].stats.stats.max_hp);
     panel_left_x <<= 0x10;
     panel_left_x = panel_left_x >> 0x10;
     bar_border_y = panel_y + 2;

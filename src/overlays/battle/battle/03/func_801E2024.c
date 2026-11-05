@@ -11,7 +11,7 @@ MATCH void func_801E2024(void) {
     work->unk_09 = count;
     if (count == 0) {
         if ((func_800A8F58() & BYTE_MASK) == 0) {
-            chance = g_GameState->stats.critical_chance;
+            chance = g_GameState->stats.stats.critical_chance;
             if ((rand() % 100) < (s32)chance) {
                 gate = &g_BattleState;
                 *gate |= 0x80;

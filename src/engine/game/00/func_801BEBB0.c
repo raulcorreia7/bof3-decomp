@@ -28,7 +28,7 @@ MATCH void func_801BEBB0(void) {
         while ((random = RANDOM_MASK(0x7F)) >= 101) {
         }
         if (slot < g_PartySize) {
-            if (g_Characters[g_CharSlot[D_80144F5A[slot]]].surprise_chance >= random) {
+            if (g_Characters[g_CharSlot[D_80144F5A[slot]]].stats.surprise_chance >= random) {
                 id = Actor_FindFreeSlot((s16)random) /* (s16): no re-mask of the roll; 99.26% with a plain u8 */;
                 if (id != GAME_NONE) {
                     g_ActorSlots[id].flags      = one;

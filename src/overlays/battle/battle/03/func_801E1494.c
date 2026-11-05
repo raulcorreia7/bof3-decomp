@@ -25,7 +25,7 @@ MATCH void func_801E1494(void) {
         }
         entry                   = g_GameState;
         amount                  = entry->stats.current_hp - entry->hp_change;
-        cap                     = entry->stats.max_hp;
+        cap                     = entry->stats.stats.max_hp;
         entry->stats.current_hp = amount;
         if (cap < amount) {
             entry->stats.current_hp = cap;

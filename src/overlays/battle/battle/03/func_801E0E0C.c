@@ -23,13 +23,13 @@ MATCH u8 func_801E0E0C(void) {
             return 0u;
         }
         if ((flags_80 & STATUS_KO) != 0u) {
-            if (g_BattlePartyBattlers[index].stats.accessories[0] == ACCESSORY_SOUL_GEM) {
+            if (g_BattlePartyBattlers[index].stats.equipment.accessories[0] == ACCESSORY_SOUL_GEM) {
                 return 0u;
             }
-            if (g_BattlePartyBattlers[index].stats.accessories[1] == ACCESSORY_SOUL_GEM) {
+            if (g_BattlePartyBattlers[index].stats.equipment.accessories[1] == ACCESSORY_SOUL_GEM) {
                 return 0u;
             }
-            if (g_BattlePartyBattlers[index].stats.armor == ARMOR_MANLY_CLOTHES) {
+            if (g_BattlePartyBattlers[index].stats.equipment.armor == ARMOR_MANLY_CLOTHES) {
                 return 0u;
             }
         }

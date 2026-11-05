@@ -22,7 +22,7 @@ MATCH void func_801E9B18(void) {
                   (s32)(((u8*)g_MenuCurrentPanel) + 0x1A), ((u8*)g_MenuCurrentPanel) + 0x9);
     slot   = BATTLE_PANEL_TASK->cell_0A.slot;
     offset = slot * BATTLE_PARTY_STRIDE;
-    if (g_BattlePartyBattlers[slot].stats.current_hp < (u32)(g_BattlePartyBattlers[slot].stats.max_hp >> 2)) {
+    if (g_BattlePartyBattlers[slot].stats.current_hp < (u32)(g_BattlePartyBattlers[slot].stats.stats.max_hp >> 2)) {
         flags = *(u16*)(D_80145F10 + offset) | 0x2000;
     } else {
         flags = *(u16*)(D_80145F10 + offset) & 0xDFFF;
