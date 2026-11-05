@@ -52,7 +52,7 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     }
     battler_index = index & BYTE_MASK;
     UI_DrawTextString((s16)(panel_x + 4), (s16)(panel_y + 2), status_mode, 5U,
-                      (const u8*)&g_BattlePartyBattlers[battler_index].stats);
+                      (const u8*)&g_BattlePartyBattlers[battler_index].chr);
     bar_status = (u8)g_BattlePartyBattlers[battler_index].chr.status;
     if (bar_status & 0x4000) {
         status_mode = 2;
