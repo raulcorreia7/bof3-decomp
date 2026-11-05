@@ -21,7 +21,7 @@ segments:
       - [0x8AC, c, func_801F34AC]
       - [0x934, c, func_801F3534]
       - [0x980, c, func_801F3580]
-      - [0x9A8, c, func_801F35A8]
+      - [0x9A8, c, Area_UpdateCameraHeight]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

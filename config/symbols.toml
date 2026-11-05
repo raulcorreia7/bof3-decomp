@@ -2436,6 +2436,12 @@ Area_StepStreamSetDrawMode = { addr = 0x801F52A0, type = "func", source = "calls
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 
+["emi/world02/area095/13"]
+Area_UpdateCameraHeight = { addr = 0x801F3618, type = "func", source = "stores the ground height at the party position D_80145EC4/D_80145EC8 in g_AreaCameraHeight, 0x20 lower when the camera already sits at that height, and advances g_AreaCameraRefreshCount by 2 (func_801F3618 in area095/13, func_801F35A8 in area096/13)" }
+
+["emi/world02/area096/13"]
+Area_UpdateCameraHeight = { addr = 0x801F35A8, type = "func", source = "stores the ground height at the party position D_80145EC4/D_80145EC8 in g_AreaCameraHeight, 0x20 lower when the camera already sits at that height, and advances g_AreaCameraRefreshCount by 2 (func_801F3618 in area095/13, func_801F35A8 in area096/13)" }
+
 ["emi/world02/area098/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
