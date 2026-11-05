@@ -41,8 +41,6 @@
 #define PSX_COLOR_R(c)               ((u16)(c) & 0x1Fu)
 #define PSX_COLOR_G(c)               (((u16)(c) >> 5) & 0x1Fu)
 #define PSX_COLOR_B(c)               (((u16)(c) >> 10) & 0x1Fu)
-#define PSX_COLOR_STP(c)             (((u16)(c) >> 15) & 1u)
-#define PSX_PACK_COLOR(r, g, b, stp) ((u16)((r) | ((g) << 5) | ((b) << 10) | ((u16)(stp) << 15)))
 
 /* Shared primitive cursor (PsyQ SDK global, owned by the main exe). A named
  * symbol (not a fixed-address macro) so codegen emits the symbol-relative
