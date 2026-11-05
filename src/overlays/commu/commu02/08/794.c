@@ -656,7 +656,14 @@ MATCH void func_801D7BE8(void) {
 
 INCLUDE_ASM(func_801D7C6C);
 
-INCLUDE_ASM(func_801D7DD4);
+MATCH void func_801D7DD4(void) {
+    u8* state = &g_GameStateIndex;
+
+    if (*state != 2 && D_801F294D == 0) {
+        Message_StartAreaMessage(0xF6);
+        *state = 2;
+    }
+}
 
 /* func_801D7E30: the same body as the second copy in this image */
 #define Commu_AdvanceStep func_801D7E30
