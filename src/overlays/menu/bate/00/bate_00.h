@@ -46,6 +46,7 @@ extern u8            D_801D0D98[];
 extern Callback      D_801D86E0[];
 extern Callback      D_801D8700[];
 extern Callback      D_801D870C[];
+extern Callback      D_801D8718[];
 extern Callback      D_801D8720[];
 extern Callback      D_801D8764[];
 extern Callback      D_801D8770[];

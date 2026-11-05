@@ -56,6 +56,9 @@ MATCH void func_801D0F70(void) {
     }
 }
 
-INCLUDE_ASM(func_801D0FF8);
+MATCH void func_801D0FF8(void) {
+    SYS_DISPATCH_BYTE(D_801D8718, D_80148652);
+    Menu_DrawClutStrip(D_80144953);
+}
 
 INCLUDE_ASM(func_801D1044);

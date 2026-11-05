@@ -67,6 +67,7 @@ MATCH void func_801CFC38(void) {
     SYS_DISPATCH_TASK(D_801D0334, 3, g_SpadWork);
 }
 
+/* Template plp016/00 starts with func_801D0444; first diff at +0x0, retail loads g_SpadWork and calls 0x8015DF18 with lhu +0x2C. */
 INCLUDE_ASM(func_801CFC7C);
 
 #include "overlays/plchar/Char_UpdateLinkedFacing.h"

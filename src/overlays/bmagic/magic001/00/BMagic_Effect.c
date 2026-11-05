@@ -84,7 +84,17 @@ MATCH void func_801EF37C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF408);
+MATCH void func_801EF408(void) {
+    PartyBattler* work          = g_SpadWork;
+    u8            timer         = work->word_08.byte.timer_0A - 1;
+    s32           value         = work->unk_14 + work->unk_20;
+    work->word_08.byte.timer_0A = timer;
+    work->unk_14                = value;
+    work->word_3C.half.span_3E += value;
+    if (timer == 0) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF468(void) {
     u8 timer;
