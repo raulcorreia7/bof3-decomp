@@ -14,7 +14,14 @@ MATCH void func_801F771C(void) {
     ORDER_LOCK(D_801F973C[index]());
 }
 
-INCLUDE_ASM(func_801F7750);
+MATCH void func_801F7750(void) {
+    GFX_ResetPalette();
+    g_GfxPalettePending  = 1;
+    g_AreaDrawFlags      = 0x1F;
+    func_8019FA28(0xC7, 0xB60000, 0x128000, 7);
+    g_ScriptVarsReq.word = 0;
+    D_80146872           = 1;
+}
 
 INCLUDE_ASM(func_801F77B4);
 
