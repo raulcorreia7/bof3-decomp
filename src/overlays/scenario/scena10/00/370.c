@@ -198,11 +198,7 @@ INCLUDE_ASM(func_801FE00C);
 INCLUDE_ASM(func_801FE2B0);
 
 MATCH void func_801FE314(void) {
-    EMI_LoaderStreamFamily(7, 2, 8, 0);
-    g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(2);
-    Party_JoinMember(8);
+    SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_NINA_ADULT);
 }
 
 MATCH void func_801FE360(void) {

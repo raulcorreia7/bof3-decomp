@@ -19,4 +19,25 @@ void func_801C1ABC(s32 character_id);
 void func_801C1DF0(s32 handler_index);
 void func_801C601C(s8 route_index);
 
+/* Stream in the family, empty the party, join the three members in stream order and restage the party palettes. */
+#define SCENE_SET_PARTY(a, b, c)            \
+    {                                       \
+        EMI_LoaderStreamFamily(a, b, c, 0); \
+        g_PartySize = 0;                    \
+        Party_JoinMember(a);                \
+        Party_JoinMember(b);                \
+        Party_JoinMember(c);                \
+        func_801C1630();                    \
+    }
+
+/* As SCENE_SET_PARTY, without the palette restage. */
+#define SCENE_SET_PARTY_NO_RESTAGE(a, b, c) \
+    {                                       \
+        EMI_LoaderStreamFamily(a, b, c, 0); \
+        g_PartySize = 0;                    \
+        Party_JoinMember(a);                \
+        Party_JoinMember(b);                \
+        Party_JoinMember(c);                \
+    }
+
 #endif

@@ -464,11 +464,7 @@ MATCH void func_801FDAFC(void) {
 #include "overlays/scenario/Scene_SetPartyRyuYoungNinaYoungMomo.h"
 
 MATCH void func_801FDB80(void) {
-    EMI_LoaderStreamFamily(0, 1, 2, 0);
-    g_PartySize = 0;
-    Party_JoinMember(0);
-    Party_JoinMember(1);
-    Party_JoinMember(2);
+    SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR);
 }
 
 MATCH void func_801FDBCC(void) {

@@ -371,12 +371,7 @@ MATCH void func_801FBCC4(void) {
 }
 
 MATCH void func_801FBD84(void) {
-    EMI_LoaderStreamFamily(7, 5, 8, 0);
-    g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(5);
-    Party_JoinMember(8);
-    func_801C1630();
+    SCENE_SET_PARTY(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT);
 }
 
 MATCH void func_801FBDD8(void) {
