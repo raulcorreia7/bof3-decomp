@@ -1,7 +1,8 @@
 #include "area168_13.h"
 
-/* Best: structure exact, 7 differing rows all register renames (state retail v1
- * against a0, value retail v0 against v1). Tried nested and flat arms, a state
- * local in both declaration orders, s8/u16/s32 value, permuter 45 over two
- * windows. Next lever: a form whose first pseudo claims v0 before the state. */
+/* Best 2 differing (permuter): hold the compare constant in a local and test
+ * `state == one` — li v0,1 against li a0,1 at 0x801F49E4 and the bne operand.
+ * Everything else matches with the s8 state local. Next lever: permuter from
+ * this form (score 10 over four windows) or a form whose constant pseudo takes
+ * v0 before the value. */
 INCLUDE_ASM(func_801F49D4);
