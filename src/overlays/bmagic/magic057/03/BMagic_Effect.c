@@ -36,8 +36,14 @@ MATCH void func_801EEFA4(void) {
     }
 }
 
-/* State macro form: first difference is lui v1 at 0x801EEFF0. */
-INCLUDE_ASM(func_801EEFEC);
+MATCH void func_801EEFEC(void) {
+    u16* battle_flags;
+
+    battle_flags = &g_BattleState;
+    *battle_flags |= 4;
+    func_800A9820(*(battle_flags = &g_BattleTargetSelector));
+    func_801E5988();
+}
 
 MATCH void func_801EF02C(void) {
     BattleHandlerTable3 handlers;
