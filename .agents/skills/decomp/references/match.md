@@ -24,7 +24,8 @@ Input: `TARGET@0xADDRESS` from the task.
 4. Helpers only after pure C fails, benign before harmful, each with its `FAKE:` note
    ([helpers](../../../../docs/conventions.md#fake-match-helpers)). A near-match goes to the
    [permuter](../../../../docs/matching.md#permuter).
-5. On a match, polish the exact candidate ([polish](../../../../docs/matching.md#polish)) and re-run
+5. On a match, polish the exact candidate before it lands ([polish](../../../../docs/matching.md#polish);
+   [the rule](../../../../docs/conventions.md#write-it-as-the-original-programmer-did)) and re-run
    `match.sh`. After a type or signature change also run `tools/sigs.py scan <path>`. Without a
    match, leave a hint above the `INCLUDE_ASM` line: the template tried and the first differing
    instruction.
