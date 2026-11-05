@@ -9,7 +9,7 @@ MATCH void func_801F36C0(void) {
         scratch->unk_03++;
     }
 
-    if (D_801454F2 != 0 && ((u8*)g_SpadWork)[0x0B] != 0) {
+    if (D_801454F2 != 0 && g_SpadWork->unk_0B != 0) {
         goto force;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
