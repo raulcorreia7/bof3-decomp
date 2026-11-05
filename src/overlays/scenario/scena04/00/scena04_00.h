@@ -43,4 +43,6 @@ void func_80196070(void);
 
 s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 
+void func_801F75BC(s32 arg0, s32 arg1);
+
 #endif

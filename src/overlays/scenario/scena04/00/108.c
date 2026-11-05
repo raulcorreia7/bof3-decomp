@@ -16,7 +16,22 @@ INCLUDE_ASM(func_801F6D44);
 
 INCLUDE_ASM(func_801F6DD4);
 
-INCLUDE_ASM(func_801F6EA4);
+MATCH void func_801F6EA4(void) {
+    Actor* work;
+    Actor* actor;
+    u8     mode;
+
+    work = g_SpadWork;
+    func_801F7084(&work->unk_0C);
+    func_801F75BC(0x10, 0xFF);
+    actor         = g_SpadWork;
+    mode          = actor->unk_09 - 1;
+    actor->unk_09 = mode;
+    if (mode == 0) {
+        g_SpadWork->unk_09 = 4;
+        g_SpadWork->unk_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F6F2C);
 
