@@ -3,10 +3,8 @@
 MATCH void func_800C1848(void) {
     EnemyBattler* work;
 
-    work         = g_BattleCurrentEnemy;
-    work->script = D_800C1AB4;
-    work->unk_E4 = func_800C18A0;
-    work->unk_E8 = D_800C1ACC;
+    work = g_BattleCurrentEnemy;
+    EnemyBattler_SetScript(work, D_800C1AB4, func_800C18A0, D_800C1ACC);
     ACTOR_SET_STEP(2);
     func_8014D978();
 }

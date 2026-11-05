@@ -9,10 +9,8 @@ MATCH void func_800C1A2C(void) {
     } else {
         SYS_SetFlag(g_SceneFlags, 0x36);
     }
-    work         = g_BattleCurrentEnemy;
-    work->script = D_800C2C44;
-    work->unk_E4 = func_800C1B18;
-    work->unk_E8 = D_800C2C94;
+    work = g_BattleCurrentEnemy;
+    EnemyBattler_SetScript(work, D_800C2C44, func_800C1B18, D_800C2C94);
     ACTOR_SET_STEP(1);
     Actor_RequestScript(2);
     func_8014D978();
