@@ -10,7 +10,7 @@ MATCH void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u1
     u16*       before[4];
     u16*       after[4];
     Character* character;
-    s32        i;
+    u8         i;
     s32        j;
 
     character = &g_Characters[character_id];
@@ -44,7 +44,7 @@ MATCH void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u1
             break;
     }
     Char_RebuildStats(&preview);
-    for (i = 0; (u32)(u8)i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         j         = i & BYTE_MASK;
         flags[j]  = 0;
         values[j] = *after[j];
