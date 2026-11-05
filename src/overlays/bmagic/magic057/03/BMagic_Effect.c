@@ -155,7 +155,35 @@ MATCH void func_801EF83C(void) {
     g_ScriptBank = 0x800D3800;
 }
 
-INCLUDE_ASM(func_801EF900);
+MATCH void func_801EF900(void) {
+    PartyBattler* work;
+    s16           temp_v0;
+    s32           temp_a0;
+    s8            tone;
+
+    g_SpadWork->coord_x_34.raw = D_801EB4E0->coord_x_34.raw - 1;
+    g_SpadWork->coord_y_38.raw = D_801EB4E0->coord_y_38.raw - 1;
+    temp_a0                    = g_SpadWork->coord_x_34.raw;
+    temp_v0                    = Area_SampleHeight(temp_a0, temp_a0);
+    work                       = g_SpadWork;
+    work->unk_25               = 0x1D;
+    work->word_3C.half.span_3E = temp_v0;
+    g_SpadWork->unk_26         = 0;
+    g_SpadWork->unk_48         = 1;
+    g_SpadWork->unk_27         = 0xA0;
+    g_SpadWork->unk_28         = 0;
+    g_SpadWork->unk_24         = 4;
+    tone                       = -0x80;
+    g_SpadWork->unk_5D         = tone;
+    g_SpadWork->unk_5E         = tone;
+    g_SpadWork->unk_5F         = tone;
+    g_SpadWork->unk_5C         = 0;
+    g_SpadWork->unk_2A         = 0;
+    g_SpadWork->unk_29         = 4;
+    g_SpadWork->unk_2C.half    = 0;
+    Actor_SelectScript(0U);
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EFA38(void) {
     s32 temp_a0;
