@@ -12,12 +12,46 @@ MATCH void func_801F6D08(void) {
     D_801FA180[entity[1]]();
 }
 
-INCLUDE_ASM(func_801F6D44);
+MATCH void func_801F6D44(void) {
+    Actor* work;
+
+    work                   = g_SpadWork;
+    work->vz               = 0x1000000;
+    FIELD(s32, work, 0x2C) = 0x1000000;
+    work->unk_0C           = 0x568000;
+    work->unk_10           = 0x128000;
+    work->unk_1C           = 0;
+    work->gravity          = 0x2200000;
+    FIELD(s32, work, 0x24) = 0x568000;
+    FIELD(s32, work, 0x28) = 0x128000;
+    work->x.fixed          = 0x4000;
+    work->y.fixed          = 0x2200000;
+    func_801F747C();
+    g_SpadWork->unk_09 = 8;
+    g_SpadWork->unk_01 += 1;
+}
 
 INCLUDE_ASM(func_801F6DD4);
 
-INCLUDE_ASM(func_801F6EA4);
+MATCH void func_801F6EA4(void) {
+    Actor* work;
+    Actor* actor;
+    u8     mode;
 
+    work = g_SpadWork;
+    func_801F7084(&work->unk_0C);
+    func_801F75BC(0x10, 0xFF);
+    actor         = g_SpadWork;
+    mode          = actor->unk_09 - 1;
+    actor->unk_09 = mode;
+    if (mode == 0) {
+        g_SpadWork->unk_09 = 4;
+        g_SpadWork->unk_01 += 1;
+    }
+}
+
+/* 10 differing; first at +0x40: candidate lbu a1,9(v0) against retail lbu a0,9(v0) — the unk_09
+ * value must sit in a0 and build the func_801F75BC argument in the arms; next lever: permuter. */
 INCLUDE_ASM(func_801F6F2C);
 
 MATCH void func_801F6FF8(void) {
@@ -223,7 +257,19 @@ INCLUDE_ASM(func_801F9DF4);
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 
-INCLUDE_ASM(func_801FA010);
+MATCH s32 func_801FA010(s32 arg0, s32 arg1) {
+    s8  index;
+    s32 result;
+
+    index = func_801A7AD8(&D_801FA228, 1, arg0, arg1);
+    if (index >= 0) {
+        SYS_DISPATCH_BYTE(D_801FA230, index);
+        result = 1;
+    } else {
+        result = -1;
+    }
+    return result;
+}
 
 MATCH void func_801FA074(void) {
     Game_SetScriptActive();

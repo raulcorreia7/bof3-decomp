@@ -10,7 +10,17 @@ INCLUDE_ASM(func_801EED8C);
 
 INCLUDE_ASM(func_801EEEB0);
 
-INCLUDE_ASM(func_801EEFE0);
+MATCH void func_801EEFE0(void) {
+    u8 timer;
+
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+        g_SpadWork->word_08.byte.unk_09 = timer;
+        if (!(timer & 0xFF)) {
+            g_SpadWork->step_01 += 1;
+        }
+    }
+}
 
 #include "shared/Effect_StartPlaying.h"
 

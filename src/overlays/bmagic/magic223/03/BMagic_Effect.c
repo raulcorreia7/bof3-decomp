@@ -10,6 +10,7 @@ INCLUDE_ASM(func_801EED18);
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
+/* Best 3 differences: address load at 0x801EEFC8; adjust flags pointer placement. */
 INCLUDE_ASM(func_801EEFB4);
 
 MATCH void func_801EF00C(void) {
