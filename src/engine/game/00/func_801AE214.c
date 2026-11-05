@@ -11,9 +11,18 @@ MATCH void func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode)
     line = (LINE_F2*)g_GfxPrimCursor;
     x    = line_x;
     y    = line_y;
-    /* FAKE: ORDER_LOCK keeps this statement in place; without it the match is 97.44%. */
-    ORDER_LOCK(delta = line_length; SetLineF2(line); mode = (u8)line_mode; color = 0x28;
-               if (mode == 0) { color = 0x8C; } line->r0 = color; line->g0 = color;);
+    /* FAKE: the order lock holds this run in place; without it the match is 97.44%. */
+    ORDER_LOCK_BEGIN
+        delta = line_length;
+        SetLineF2(line);
+        mode  = (u8)line_mode;
+        color = 0x28;
+        if (mode == 0) {
+            color = 0x8C;
+        }
+        line->r0 = color;
+        line->g0 = color;
+    ORDER_LOCK_END;
     line->b0 = color;
     line->x0 = x;
     line->x1 = (s16)(x + delta);

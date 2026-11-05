@@ -13,6 +13,8 @@ extern SceneFunc D_801FC468[];
 extern Callback D_801FC418[];
 
 extern u16 g_GameAreaId;
+/* kept: written as g_SceneState.flags_01, func_801F8850 changes size and the image symbols move. */
+extern u8  D_80146871;
 s16        func_801F326C(s32 message);
 s16        func_801F37AC(s32 message);
 

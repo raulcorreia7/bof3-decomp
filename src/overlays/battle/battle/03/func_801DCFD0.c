@@ -24,16 +24,14 @@ MATCH void func_801DCFD0(void) {
             dst         = (BattleRecordChunk*)(&g_Characters[D_80145FCC[slot_offset]]);
             src         = (BattleRecordChunk*)(D_80145F04 + slot_offset);
             end         = (BattleRecordChunk*)(((u8*)src) + 0xA0u);
-            /* FAKE: ORDER_LOCK keeps this statement in place; without it the match is 63.83%. */
-            ORDER_LOCK(
+            do {
                 *dst = *src;
                 src += 1;
                 dst += 1;
-        } while (src != end);
-        /* Copy the final word after the 0xA0-byte row sequence. */
-        do {
-            *((s32*)dst) = *((s32*)src);
-            );
+            } while (src != end);
+            /* Copy the final word after the 0xA0-byte row sequence. */
+            /* FAKE: the order lock holds this store in place; without it the match is 63.83%. */
+            ORDER_LOCK(*((s32*)dst) = *((s32*)src));
             index += 1;
         } while (((u32)(index & BYTE_MASK)) < ((u8)g_PartySize));
     }
