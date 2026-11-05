@@ -82,22 +82,22 @@ ASSERT_SIZE(FishingCueStep, 0x08);
  * stepped to the selected row by func_801DDE2C. Bytes 0x04 through 0x07 are
  * read as signed (func_801DB140). */
 typedef struct FishingCharRow {
-    u8 unk_00;    /* 0x00 */
-    u8 unk_01;    /* 0x01 */
-    u8 unk_02;    /* 0x02 */
-    u8 unk_03;    /* 0x03 */
-    s8 unk_04;    /* 0x04 */
-    s8 unk_05;    /* 0x05 */
-    s8 unk_06;    /* 0x06 */
-    s8 unk_07;    /* 0x07 */
+    u8 byte_00;    /* 0x00 */
+    u8 byte_01;    /* 0x01 */
+    u8 byte_02;    /* 0x02 */
+    u8 byte_03;    /* 0x03 */
+    s8 sbyte_04;    /* 0x04 */
+    s8 sbyte_05;    /* 0x05 */
+    s8 sbyte_06;    /* 0x06 */
+    s8 sbyte_07;    /* 0x07 */
     u8 pad_08[2]; /* 0x08 */
 } FishingCharRow;
 
 ASSERT_SIZE(FishingCharRow, 0x0A);
-ASSERT_OFFSET(FishingCharRow, unk_04, 0x04);
-ASSERT_OFFSET(FishingCharRow, unk_05, 0x05);
-ASSERT_OFFSET(FishingCharRow, unk_06, 0x06);
-ASSERT_OFFSET(FishingCharRow, unk_07, 0x07);
+ASSERT_OFFSET(FishingCharRow, sbyte_04, 0x04);
+ASSERT_OFFSET(FishingCharRow, sbyte_05, 0x05);
+ASSERT_OFFSET(FishingCharRow, sbyte_06, 0x06);
+ASSERT_OFFSET(FishingCharRow, sbyte_07, 0x07);
 
 /* The item pointer at 0x50 and the message text pointer at 0x54 are stored as
  * words and dereferenced as bytes. */

@@ -13,7 +13,7 @@ MATCH void func_801D1CF0(void) {
     work  = (FishingState*)SP_REF(u8*, 0x44u);
     speed = (s32)work->step_delta_18;
     if (speed != 0) {
-        switch (D_801E320C->unk_01) {
+        switch (D_801E320C->byte_01) {
             case 0:
                 work->pos_x_0C = work->pos_x_0C + speed;
                 if ((s32)work->step_delta_18 > 0 && work->pos_x_0C >= 0xFF) {
