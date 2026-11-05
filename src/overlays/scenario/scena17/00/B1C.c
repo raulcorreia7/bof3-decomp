@@ -399,7 +399,15 @@ INCLUDE_ASM(func_801F91F0);
 
 INCLUDE_ASM(func_801F938C);
 
-INCLUDE_ASM(func_801F9490);
+MATCH void func_801F9490(void) {
+    g_GameEntrySubstate = 0;
+    func_8014BA04();
+    Menu_ResetPanelTasks();
+    while (1) {
+        SYS_DISPATCH_BYTE(D_801F9DBC, g_GameEntrySubstate);
+        CallbackWait(1);
+    }
+}
 
 INCLUDE_ASM(func_801F9504);
 
