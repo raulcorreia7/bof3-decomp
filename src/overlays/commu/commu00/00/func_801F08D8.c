@@ -16,13 +16,13 @@ MATCH void func_801F08D8(u8 source_index, u8 task_index) {
     ACTOR_CLEAR_STATE();
     /* Each pair is written value half first, then the zero half the caller
      * reads back as one 32-bit coordinate word. */
-    g_Task->x.part.integer  = D_801F25A4[index][D_801F2928[index]][0];
-    g_Task->x.part.fraction = 0;
+    COORD_INT(g_Task->x)  = D_801F25A4[index][D_801F2928[index]][0];
+    COORD_FRAC(g_Task->x) = 0;
     variant_index           = index;
-    g_Task->y.part.integer  = D_801F25A4[index][D_801F2928[index]][1];
-    g_Task->y.part.fraction = 0;
-    distance = Area_SampleHeight(*((u32*)(&g_Task->x.part.fraction)), *((u32*)(&g_Task->y.part.fraction)));
-    g_Task->z.part.integer = distance;
+    COORD_INT(g_Task->y)  = D_801F25A4[index][D_801F2928[index]][1];
+    COORD_FRAC(g_Task->y) = 0;
+    distance = Area_SampleHeight(*((u32*)(&COORD_FRAC(g_Task->x))), *((u32*)(&COORD_FRAC(g_Task->y))));
+    COORD_INT(g_Task->z) = distance;
     g_Task->direction_08   = D_801F25A4[variant_index][D_801F2928[variant_index]][2];
     g_Task->unk_48         = 0;
     Area_FindSceneRecord(D_801F24FC[g_Task->unk_05 % 6]);

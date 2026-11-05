@@ -23,7 +23,7 @@ MATCH void func_801A3410(void* work_index) {
         work = g_Task;
         work->x.fixed += delta[0];
         work->y.fixed += delta[1];
-        work->z.part.integer += delta[2];
+        COORD_INT(work->z) += delta[2];
     }
     func_801A1384(work_index);
     tail = g_Task;

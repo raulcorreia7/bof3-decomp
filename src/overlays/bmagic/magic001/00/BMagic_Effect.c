@@ -51,7 +51,7 @@ MATCH void func_801EF280(void) {
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
     work->unk_14 += work->unk_20;
-    work->pos.z.part.integer += work->unk_14;
+    COORD_INT(work->pos.z) += work->unk_14;
     if (timer == 0) {
         SND_QueueSelectionFx(0x203);
         func_801E257C(g_BattleActiveBattler, 0xC);
@@ -90,7 +90,7 @@ MATCH void func_801EF408(void) {
     s32           value = work->unk_14 + work->unk_20;
     work->timer         = timer;
     work->unk_14        = value;
-    work->pos.z.part.integer += value;
+    COORD_INT(work->pos.z) += value;
     if (timer == 0) {
         g_Task->step += 1;
     }
@@ -181,7 +181,7 @@ MATCH void func_801EFD28(void) {
     temp_a1                    = g_Task->timer;
     temp_v1                    = g_Task->unk_14 + g_Task->unk_20;
     g_Task->unk_14             = temp_v1;
-    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + temp_v1;
+    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + temp_v1;
     if (temp_a1 < 8U) {
         g_Task->timer = temp_a1 + 1;
     }
@@ -211,7 +211,7 @@ MATCH void func_801EFE38(void) {
     g_Task->pos.y.fixed += (s32)(rcos(g_Task->unk_0C) << 0xD) >> 0xC;
     value                      = g_Task->unk_14 + g_Task->unk_20;
     g_Task->unk_14             = value;
-    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + value;
+    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + value;
     if ((u8)g_Task->unk_09 < 8U) {
         value3 = g_Task->timer;
         if (value3 < 0x10U) {

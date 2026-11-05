@@ -39,8 +39,8 @@ MATCH void func_801D195C(s16 panel_x, s16 panel_y) {
 
     if (g_ActorSlots[0].mode == 4) {
         y = 0xB4;
-        if (g_ActorSlots[0].z.part.integer <= 0) {
-            y = 0xB4 - g_ActorSlots[0].z.part.integer / 32;
+        if (COORD_INT(g_ActorSlots[0].z) <= 0) {
+            y = 0xB4 - COORD_INT(g_ActorSlots[0].z) / 32;
         }
         func_801D18CC((s16)(panel_x + 0x69), y, 2);
     }

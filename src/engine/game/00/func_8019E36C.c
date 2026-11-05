@@ -7,10 +7,10 @@ MATCH void func_8019E36C(void) {
 
     add                    = g_Task->vz + g_Task->gravity;
     g_Task->vz             = add;
-    g_Task->z.part.integer = (u16)(g_Task->z.part.integer + add);
+    COORD_INT(g_Task->z) = (u16)(COORD_INT(g_Task->z) + add);
     func_8014D978();
     dist  = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
-    limit = g_Task->z.part.integer;
+    limit = COORD_INT(g_Task->z);
     if (dist >= limit) {
         Actor_Clear();
         return;

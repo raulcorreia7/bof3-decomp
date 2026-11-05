@@ -18,7 +18,7 @@ MATCH void func_8019F4F8(void) {
             routeOffset = (s32)g_Task->unk_0B * BATTLE_PARTY_STRIDE;
             func_8019F5B8(
                 *(s16*)(((u8*)&g_BattlePartyBattlers[0].unk_2E) + routeOffset),
-                (s16)(*(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_30) + routeOffset) + (u16)g_Task->y.part.integer),
+                (s16)(*(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_30) + routeOffset) + (u16)COORD_INT(g_Task->y)),
                 g_Task->unk_06, g_Task->unk_27);
         }
     } else {

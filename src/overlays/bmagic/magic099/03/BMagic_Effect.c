@@ -174,7 +174,7 @@ MATCH void func_801F0090(void) {
     velocity            = rsin(*angle_cell) * D_1F800000;
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
-    g_Task->pos.z.part.integer = (u16)BATTLE_ACTIVE_WORK->pos.z.part.integer;
+    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(BATTLE_ACTIVE_WORK->pos.z);
     g_Task->step++;
 }
 

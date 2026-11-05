@@ -64,13 +64,13 @@ MATCH void func_801C329C(void) {
                 g_ActorSlots[slot].flags          = 1;
                 g_ActorSlots[slot].type           = 0x41;
                 g_ActorSlots[slot].unk_08         = g_Task->direction_08;
-                g_ActorSlots[slot].x.part.integer = g_Task->unk_2E;
+                COORD_INT(g_ActorSlots[slot].x) = g_Task->unk_2E;
                 value30                           = g_Task->unk_30;
                 g_ActorSlots[slot].unk_27         = 0;
                 g_ActorSlots[slot].unk_06         = 1;
                 record                            = g_ActorSlots;
                 work                              = g_Task;
-                record[slot].y.part.integer       = value30;
+                COORD_INT(record[slot].y)       = value30;
                 g_ActorSlots[slot].link           = work->unk_05;
             }
         }

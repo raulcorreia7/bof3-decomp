@@ -26,7 +26,7 @@ NON_MATCHING s32 func_801B95E0(void) {
         return 1;
     }
     dir = WDIR;
-    if (g_Task->x.part.fraction != 0 && g_Task->y.part.fraction != 0) {
+    if (COORD_FRAC(g_Task->x) != 0 && COORD_FRAC(g_Task->y) != 0) {
         return 1;
     }
     x     = FIELD(u16, g_Task, 0x36u) + (s8)D_80181B00[WDIR * 2];
@@ -34,8 +34,8 @@ NON_MATCHING s32 func_801B95E0(void) {
     func_801BBBC8(x, y_arg);
 
     if (!(WDIR & 1)) {
-        if (g_Task->x.part.fraction == 0) {
-            if (g_Task->y.part.fraction == 0) {
+        if (COORD_FRAC(g_Task->x) == 0) {
+            if (COORD_FRAC(g_Task->y) == 0) {
                 pad    = (u8*)&D_1F800008;
                 pad[0] = func_801B9F08(1, 2, 3);
                 pad[1] = func_801B9F08(2, 0, 0);
@@ -101,7 +101,7 @@ NON_MATCHING s32 func_801B95E0(void) {
             }
             goto north_south;
         }
-        if (g_Task->y.part.fraction == 0) {
+        if (COORD_FRAC(g_Task->y) == 0) {
             v     = func_801B9F08(2, 4, 0);
             PAD_A = v;
             if (v == 0x70) {
@@ -141,8 +141,8 @@ NON_MATCHING s32 func_801B95E0(void) {
         return func_801BB7B0(8) & BYTE_MASK;
     }
 
-    if (g_Task->x.part.fraction == 0) {
-        if (g_Task->y.part.fraction == 0) {
+    if (COORD_FRAC(g_Task->x) == 0) {
+        if (COORD_FRAC(g_Task->y) == 0) {
             v     = func_801B9F08(1, 0, 0);
             PAD_A = v;
             if (v == 0xB0) {
@@ -158,7 +158,7 @@ NON_MATCHING s32 func_801B95E0(void) {
         }
         goto diag_south;
     }
-    if (g_Task->y.part.fraction == 0) {
+    if (COORD_FRAC(g_Task->y) == 0) {
         if (g_Task->direction_08 & 2) {
             return 3;
         }

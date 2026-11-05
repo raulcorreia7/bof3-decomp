@@ -182,7 +182,7 @@ MATCH void func_801EF900(void) {
     temp_v0                  = Area_SampleHeight(temp_a0, temp_a0);
     work                     = g_Task;
     work->unk_25             = 0x1D;
-    work->pos.z.part.integer = temp_v0;
+    COORD_INT(work->pos.z) = temp_v0;
     g_Task->unk_26           = 0;
     g_Task->unk_48           = 1;
     g_Task->unk_27           = 0xA0;
@@ -206,7 +206,7 @@ MATCH void func_801EFA38(void) {
     g_Task->pos.x.fixed        = D_801EB4E0->pos.x.fixed - 1;
     g_Task->pos.y.fixed        = D_801EB4E0->pos.y.fixed - 1;
     temp_a0                    = g_Task->pos.x.fixed;
-    g_Task->pos.z.part.integer = Area_SampleHeight(temp_a0, temp_a0);
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(temp_a0, temp_a0);
     if (!(1 & D_801EB4E0->flags)) {
         g_Task->step += 1;
     }

@@ -24,7 +24,7 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
         pos = (xh << 16) | 0x8000;
         func_80154ABC(pos, y, g_Task->direction_08);
         if (SP_REF(u8, 0x0u) != 0) {
-            if (g_Task->z.part.integer < Area_SampleHeight(pos, y)) {
+            if (COORD_INT(g_Task->z) < Area_SampleHeight(pos, y)) {
                 return 1;
             }
         }
@@ -40,7 +40,7 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
         pos = (yh << 16) | 0x8000;
         func_80154ABC(x, pos, g_Task->direction_08);
         if (SP_REF(u8, 0x0u) != 0) {
-            if (g_Task->z.part.integer < Area_SampleHeight(x, pos)) {
+            if (COORD_INT(g_Task->z) < Area_SampleHeight(x, pos)) {
                 return 1;
             }
         }

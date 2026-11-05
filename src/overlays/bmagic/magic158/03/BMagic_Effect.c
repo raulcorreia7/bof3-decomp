@@ -30,7 +30,7 @@ MATCH void func_801EF140(void) {
     u8 timer;
 
     count                      = g_Task->unk_09;
-    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer - 0x60;
+    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) - 0x60;
     if ((count & 0xFF) != 0x10) {
         g_Task->unk_09 = count + 1;
     }
@@ -38,7 +38,7 @@ MATCH void func_801EF140(void) {
     if (timer != 0x10) {
         g_Task->timer = timer + 2;
     }
-    if (g_Task->pos.z.part.integer == BATTLE_ACTIVE_WORK->pos.z.part.integer) {
+    if (COORD_INT(g_Task->pos.z) == COORD_INT(BATTLE_ACTIVE_WORK->pos.z)) {
         g_Task->step += 1;
     }
 }

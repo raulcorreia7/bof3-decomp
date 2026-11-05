@@ -211,7 +211,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         FIELD(s32, tmp23, 0x34u)   = (s32)(FIELD(s32, tmp23, 0x34u) & ~0x7FFF);
         tmp5                       = FIELD(s32, tmp23, 0x38u) & ~0x7FFF;
         FIELD(s32, tmp23, 0x38u)   = tmp5;
-        g_Task->depth.part.integer = Area_ReadHeight(FIELD(s32, tmp23, 0x34u), tmp5);
+        COORD_INT(g_Task->depth) = Area_ReadHeight(FIELD(s32, tmp23, 0x34u), tmp5);
     }
 }
 #else

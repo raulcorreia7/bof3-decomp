@@ -47,7 +47,7 @@ MATCH s32 func_801E0770(void) {
         return result;
     }
     dz = work->bounce_3C.half.key_3E;
-    dz = dz - g_ActorSlots[0].z.part.integer;
+    dz = dz - COORD_INT(g_ActorSlots[0].z);
     if (dz < 0) {
         dz = -dz;
     }

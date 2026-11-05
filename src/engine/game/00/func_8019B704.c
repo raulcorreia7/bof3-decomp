@@ -49,7 +49,7 @@ NON_MATCHING void func_8019B704(void) {
     }
     acc                        = g_Task->unk_14 + g_Task->unk_20;
     g_Task->unk_14             = acc;
-    g_Task->depth.part.integer = (u16)(g_Task->depth.part.integer + acc);
+    COORD_INT(g_Task->depth) = (u16)(COORD_INT(g_Task->depth) + acc);
     if ((g_AreaCameraMoving == 0) && (delta > 0x40000) && (g_AreaScrollTargetX == D_80145EC4) &&
         (g_AreaScrollTargetY == D_80145EC8)) {
         if (g_Task->unk_0C > 0) {
@@ -70,12 +70,12 @@ NON_MATCHING void func_8019B704(void) {
         g_Task->unk_09   = 0x14;
     }
     dist = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
-    if (dist < (s16)g_Task->depth.part.integer) {
+    if (dist < (s16)COORD_INT(g_Task->depth)) {
         g_Task->unk_20 = -8;
     } else {
         g_Task->unk_14             = 0;
         g_Task->unk_20             = 0;
-        g_Task->depth.part.integer = (u16)dist;
+        COORD_INT(g_Task->depth) = (u16)dist;
     }
     if ((func_8019C028() & BYTE_MASK) == 0) {
         if ((func_8019C344(g_Task->x.fixed, g_Task->y.fixed) & BYTE_MASK) != 0) {
@@ -88,7 +88,7 @@ NON_MATCHING void func_8019B704(void) {
         if (g_Task->unk_06 != 0) {
             switch (g_Task->unk_07) {
                 case 0:
-                    if ((g_Task->x.part.fraction == 0) && (g_Task->y.part.fraction == 0)) {
+                    if ((COORD_FRAC(g_Task->x) == 0) && (COORD_FRAC(g_Task->y) == 0)) {
                         g_Task->unk_07 = 0;
                         g_Task->unk_0A = 0;
                         Actor_SelectScript(0);

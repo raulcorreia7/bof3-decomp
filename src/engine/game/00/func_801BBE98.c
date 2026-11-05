@@ -23,7 +23,7 @@ MATCH void func_801BBE98(void) {
     work                      = g_Task;
     work->tint.bytes.unk_5D   = 0;
     ptr                       = g_Task;
-    work->z.part.integer      = ret;
+    COORD_INT(work->z)      = ret;
     ptr->tint.bytes.unk_5E    = 0;
     g_Task->tint.bytes.unk_5F = 0;
     g_Task->tint.bytes.flags  = 2;

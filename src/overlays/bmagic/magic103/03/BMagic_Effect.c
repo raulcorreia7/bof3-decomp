@@ -31,7 +31,7 @@ MATCH void func_801EEF94(void) {
     src                        = g_BattleSelectedActor;
     g_Task->pos.x.fixed        = src->pos.x.fixed;
     g_Task->pos.y.fixed        = src->pos.y.fixed;
-    g_Task->pos.z.part.integer = src->pos.z.part.integer;
+    COORD_INT(g_Task->pos.z) = COORD_INT(src->pos.z);
     g_Task->unk_09             = 0;
     g_Task->timer              = 0;
     g_Task->step               = g_Task->step + 1;

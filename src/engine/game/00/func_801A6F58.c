@@ -31,7 +31,7 @@ MATCH void func_801A6F58(u8* script) {
 
     D_80146910[*counter][0] = 0;
 
-    g_Task->z.part.integer = Area_SampleHeight(work->x.fixed, work->y.fixed);
+    COORD_INT(g_Task->z) = Area_SampleHeight(work->x.fixed, work->y.fixed);
     g_Task->mode           = script[9];
     g_Task->step           = script[0xB];
     g_Task->direction_08   = script[0] & 0xF;

@@ -59,7 +59,7 @@ NON_MATCHING void func_800ABCE0(s32 slot, u16 unit, s32 x, s32 y) {
     enemy->pos.x.raw                = x;
     enemy->pos.y.raw                = y;
     enemy                           = (EnemyBattler*)g_Task;
-    enemy->pos.z.half.hi            = Area_SampleHeight(FIELD(s32, enemy, 0x34u), y);
+    COORD_INT(enemy->pos.z)            = Area_SampleHeight(FIELD(s32, enemy, 0x34u), y);
     enemy->unk_2B                   = 0;
     Area_FindSceneRecord(FIELD(u16, &D_800E405E, unit_offset));
     enemy_offset                          = (slot & BYTE_MASK) * BATTLE_ENEMY_STRIDE;

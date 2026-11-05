@@ -2,7 +2,7 @@
 
 MATCH void func_801F42C0(void) {
     ((Actor*)g_Task)->direction_08   = ((Actor*)g_Task)->unk_0B;
-    ((Actor*)g_Task)->z.part.integer = (u16)((Actor*)g_Task)->z.part.integer + 0xC0;
+    COORD_INT(((Actor*)g_Task)->z) = (u16)COORD_INT(((Actor*)g_Task)->z) + 0xC0;
     func_801F4544();
     ((Actor*)g_Task)->direction_08 = (((Actor*)g_Task)->direction_08 + 3) & 7;
     func_801F45C8();

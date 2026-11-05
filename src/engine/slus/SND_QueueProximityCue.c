@@ -4,13 +4,13 @@
  * (D_8014930A, D_8014930E); `table` is the cue table the band stores. */
 #define SND_PROXIMITY_BAND(radius, table)         \
     work   = g_Task;                              \
-    x      = work->x.part.integer;                \
+    x      = COORD_INT(work->x);                \
     target = D_8014930A;                          \
     edge   = x + (radius);                        \
     if (edge >= target) {                         \
         edge = x - (radius);                      \
         if (target >= edge) {                     \
-            y      = work->y.part.integer;        \
+            y      = COORD_INT(work->y);        \
             target = D_8014930E;                  \
             edge   = y + (radius);                \
             if (edge >= target) {                 \

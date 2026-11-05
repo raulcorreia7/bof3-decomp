@@ -41,13 +41,13 @@ MATCH void func_801B146C(void) {
     if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(func_801C2AAC() & BYTE_MASK)) {
         if (func_801C2B4C() & BYTE_MASK) {
             work_b = g_Task;
-            Area_SetCellPalette(work_b->x.part.integer, work_b->y.part.integer);
+            Area_SetCellPalette(COORD_INT(work_b->x), COORD_INT(work_b->y));
             return;
         }
         state_flags = g_GameRequestFlags;
         if (state_flags & 1) {
             work_c = g_Task;
-            if ((Area_GetCellCode(work_c->x.part.integer, work_c->y.part.integer) & BYTE_MASK) == 0xAF) {
+            if ((Area_GetCellCode(COORD_INT(work_c->x), COORD_INT(work_c->y)) & BYTE_MASK) == 0xAF) {
                 func_801B5BDC(g_Task->direction_08);
                 Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
                 g_GameEntryMode   = 0;
@@ -60,9 +60,9 @@ MATCH void func_801B146C(void) {
                 goto block_46; /* re-arm the frame flags */
             }
             work_d = g_Task;
-            if ((Area_GetCellCode(work_d->x.part.integer, work_d->y.part.integer) & BYTE_MASK) == 0xC0) {
+            if ((Area_GetCellCode(COORD_INT(work_d->x), COORD_INT(work_d->y)) & BYTE_MASK) == 0xC0) {
                 work_e = g_Task;
-                func_801A0048(work_e->x.part.integer, work_e->y.part.integer);
+                func_801A0048(COORD_INT(work_e->x), COORD_INT(work_e->y));
             }
             goto block_24; /* continue with the front request */
         }
@@ -80,7 +80,7 @@ MATCH void func_801B146C(void) {
         work_g = g_Task;
         if (func_801C39D8(work_g->x.fixed, work_g->y.fixed, work_g->state_70.byte, 0xA7, 0U) & BYTE_MASK) {
             work_h = g_Task;
-            func_801A0048(work_h->x.part.integer, work_h->y.part.integer);
+            func_801A0048(COORD_INT(work_h->x), COORD_INT(work_h->y));
             g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
             Actor_RequestScript(g_Task->direction_08);
             goto block_46; /* re-arm the frame flags */

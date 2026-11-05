@@ -13,7 +13,7 @@ MATCH void func_801E352C(void) {
     work->pos.y.fixed         = y;
     value                     = Area_SampleHeight(work->pos.x.fixed, y);
     work2                     = g_Task;
-    work2->pos.z.part.integer = value;
+    COORD_INT(work2->pos.z) = value;
     if (work2->pos.x.fixed == work2->unk_18) {
         if (work2->pos.y.fixed == work2->unk_1C) {
             work2->mode    = 3;

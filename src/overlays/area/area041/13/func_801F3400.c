@@ -6,7 +6,7 @@ MATCH void func_801F3400(void) {
     if (g_Task->unk_09 >= 0x29U) {
         SND_PlayCue(0x205);
         g_Task->unk_09         = 0;
-        g_Task->z.part.integer = -0x88;
+        COORD_INT(g_Task->z) = -0x88;
         g_Task->step += 1;
     }
 }

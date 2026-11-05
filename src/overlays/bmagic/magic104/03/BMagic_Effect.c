@@ -133,7 +133,7 @@ MATCH void func_801F02F4(void) {
     work = g_Task;
     if (work->timer == 0) {
         work->unk_09             = 8;
-        work->pos.z.part.integer = work->pos.z.part.integer + 0x200;
+        COORD_INT(work->pos.z) = COORD_INT(work->pos.z) + 0x200;
         Bmagic_NextStep();
     } else {
         work->timer = work->timer - 1;
@@ -149,9 +149,9 @@ MATCH void func_801F034C(void) {
     func_801F03C4();
     PopMatrix();
     next                  = g_Task->unk_09 - 1;
-    span                  = (u16)(g_Task->pos.z.half.hi - 0x40);
+    span                  = (u16)(COORD_INT(g_Task->pos.z) - 0x40);
     g_Task->unk_09        = next;
-    g_Task->pos.z.half.hi = span;
+    COORD_INT(g_Task->pos.z) = span;
     if (!(next & 0xFF)) {
         D_801EB4E0->unk_0B = g_Task->unk_0B;
         func_801E5988();

@@ -9,7 +9,7 @@ MATCH void func_801F31F0(void) {
         g_Task->x.fixed = -0x2B80;
     }
     g_Task->y.fixed        = -0x31C0;
-    g_Task->z.part.integer = -0x80;
+    COORD_INT(g_Task->z) = -0x80;
     func_801F2EFC();
     func_801F3064();
 }

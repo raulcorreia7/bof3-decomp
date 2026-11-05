@@ -6,9 +6,9 @@ MATCH void func_801F3EEC(void) {
             SND_PlayCue(0x200);
         }
         (g_AreaCellCodes +
-         g_Task->y.part.integer * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width_00)[g_Task->x.part.integer]       = 0xA1;
+         COORD_INT(g_Task->y) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width_00)[COORD_INT(g_Task->x)]       = 0xA1;
         (g_AreaCellCodes +
-         (g_Task->y.part.integer + 1) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width_00)[g_Task->x.part.integer] = 0xA1;
+         (COORD_INT(g_Task->y) + 1) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width_00)[COORD_INT(g_Task->x)] = 0xA1;
         g_Task->step                                                                                         = 2;
     }
     func_801F381C(1);

@@ -6,8 +6,8 @@ MATCH void func_801F3F18(void) {
     g_Task->vz += g_Task->gravity;
     func_801B0DFC();
     result = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
-    if (g_Task->z.part.integer < result) {
-        g_Task->z.part.integer = result;
+    if (COORD_INT(g_Task->z) < result) {
+        COORD_INT(g_Task->z) = result;
         g_Task->vz             = 0;
         g_Task->gravity        = 0;
         g_Task->unk_04         = 2;

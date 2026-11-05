@@ -24,32 +24,32 @@ MATCH void func_801F41B8(void) {
     scratch->y.fixed = D_80145EC4[1];
 
     if (scratch->unk_06 != 0) {
-        scratch->x.part.integer -= (s32)(D_801F4E10[scratch->direction_08].x << 16) >> 29;
-        value                   = scratch->y.part.integer - ((s32)(D_801F4E10[scratch->direction_08].y << 16) >> 29);
-        scratch->y.part.integer = value;
+        COORD_INT(scratch->x) -= (s32)(D_801F4E10[scratch->direction_08].x << 16) >> 29;
+        value                   = COORD_INT(scratch->y) - ((s32)(D_801F4E10[scratch->direction_08].y << 16) >> 29);
+        COORD_INT(scratch->y) = value;
         if (scratch->unk_06 == 1) {
             if (scratch->vx == 0) {
-                scratch->x.part.integer += 2;
+                COORD_INT(scratch->x) += 2;
             } else {
-                scratch->y.part.integer = value + 2;
+                COORD_INT(scratch->y) = value + 2;
             }
         } else {
             if (scratch->vx == 0) {
-                scratch->x.part.integer -= 2;
+                COORD_INT(scratch->x) -= 2;
             } else {
-                scratch->y.part.integer = value - 2;
+                COORD_INT(scratch->y) = value - 2;
             }
         }
     }
 
     slots   = SP_PTR(u8*, 0u);
     scratch = (Actor*)slots[0x11];
-    scratch->x.part.integer -= (s32)(D_801F4E10[scratch->direction_08].x << 16) >> 25;
-    y                       = scratch->y.part.integer - ((s32)(D_801F4E10[scratch->direction_08].y << 16) >> 25);
+    COORD_INT(scratch->x) -= (s32)(D_801F4E10[scratch->direction_08].x << 16) >> 25;
+    y                       = COORD_INT(scratch->y) - ((s32)(D_801F4E10[scratch->direction_08].y << 16) >> 25);
     scratch->unk_0B         = 0;
     slots                   = SP_PTR(u8*, 0u);
     cell                    = slots[0x11];
-    scratch->y.part.integer = y;
+    COORD_INT(scratch->y) = y;
     cell[1] += 1;
 
     slots = SP_PTR(u8*, 0u);

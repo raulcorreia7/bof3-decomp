@@ -44,7 +44,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                     work     = g_Task;
                     den      = work->unk_09 * state->unk_07;
                     work->vz = ((s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4)) -
-                                (s16)work->z.part.integer) /
+                                (s16)COORD_INT(work->z)) /
                                den;
                     state->flags |= GAME_CURSOR_FLAG_MOVING;
                 } else {
@@ -52,7 +52,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                     s32  step;
 
                     counter    = (s16*)&D_1F800000;
-                    *counter   = g_Task->z.part.integer;
+                    *counter   = COORD_INT(g_Task->z);
                     D_1F800002 = (s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
                     func_801C5DFC(value);
                     step       = (0x80 / g_AreaCameraStep) * D_80143FC3;
@@ -72,7 +72,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                 g_Task->unk_09 = 1;
             work     = g_Task;
             work->vz = ((s16)((*(table + state->index_0A + 1) << 8) | *(table + state->index_0A + 2)) -
-                        (s16)work->z.part.integer) /
+                        (s16)COORD_INT(work->z)) /
                        work->unk_09;
             work->vx = 0;
             work->vy = 0;
@@ -113,7 +113,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             }
             work                 = g_Task;
             work->vz             = 0;
-            work->z.part.integer = (u16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
+            COORD_INT(work->z) = (u16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
             state->index_0A += 4;
             break;
         }
@@ -166,7 +166,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             Actor* work;
 
             work   = g_Task;
-            result = Area_SetCellPalette(work->x.part.integer, work->y.part.integer);
+            result = Area_SetCellPalette(COORD_INT(work->x), COORD_INT(work->y));
             /* Retail shares the cue check with case 0xFC. */
             goto queue_cue;
         }
@@ -174,7 +174,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             Actor* work;
 
             work   = g_Task;
-            result = Area_ClearCellPalette(work->x.part.integer, work->y.part.integer);
+            result = Area_ClearCellPalette(COORD_INT(work->x), COORD_INT(work->y));
         }
         queue_cue:
             if (result != 0)

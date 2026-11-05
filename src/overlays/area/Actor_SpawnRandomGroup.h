@@ -43,7 +43,7 @@ MATCH void Actor_SpawnRandomGroup(void) {
         g_ActorSlots[index].unk_06         = (u8)i;
         g_ActorSlots[index].unk_08         = (u8)(kind >> 4);
         distance                           = Area_SampleHeight(D_80145EC4[0], D_80145EC4[1]) + 0x400;
-        g_ActorSlots[index].z.part.integer = distance;
+        COORD_INT(g_ActorSlots[index].z) = distance;
         i++;
     } while (i < count);
 }

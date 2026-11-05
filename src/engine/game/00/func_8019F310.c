@@ -4,11 +4,11 @@ MATCH void func_8019F310(void) {
     u8 alt;
 
     alt                     = g_GameRequestFlags & 1;
-    g_Task->y.part.fraction = 0;
+    COORD_FRAC(g_Task->y) = 0;
     if (alt) {
-        g_Task->y.part.integer = -0xA;
+        COORD_INT(g_Task->y) = -0xA;
     } else {
-        g_Task->y.part.integer = -0x14;
+        COORD_INT(g_Task->y) = -0x14;
     }
     g_Task->vy     = 0x20000;
     g_Task->unk_29 = 3;

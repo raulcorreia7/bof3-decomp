@@ -16,7 +16,7 @@
 #define BMAGIC_PROJECT_ACTOR_MATRIX(SPAN_WORK)     \
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;  \
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;  \
-    pos.vz = -(SPAN_WORK)->pos.z.part.integer / 2; \
+    pos.vz = -COORD_INT((SPAN_WORK)->pos.z) / 2; \
     RotTrans(&pos, &matrix.t, &flags);             \
     RotMatrix(&rot, &matrix);                      \
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);  \

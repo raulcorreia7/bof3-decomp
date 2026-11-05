@@ -25,7 +25,7 @@ MATCH void func_801EF000(void) {
         g_BattleEffects[slot].unk_08             = (facing + 2) & 3;
         g_BattleEffects[slot].pos.x              = g_Task->pos.x;
         g_BattleEffects[slot].pos.y              = g_Task->pos.y;
-        g_BattleEffects[slot].pos.z.part.integer = g_Task->pos.z.part.integer;
+        COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(g_Task->pos.z);
         g_Task->mode += 1;
     }
 }

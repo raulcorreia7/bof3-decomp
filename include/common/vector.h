@@ -71,4 +71,8 @@ typedef union Coord {
 
 ASSERT_SIZE(Coord, 0x04);
 
+/* The integer and fraction halves of a Coord, as lvalues. */
+#define COORD_INT(c)  (c).part.integer
+#define COORD_FRAC(c) (c).part.fraction
+
 #endif

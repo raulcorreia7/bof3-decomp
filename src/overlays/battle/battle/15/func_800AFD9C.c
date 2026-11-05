@@ -24,7 +24,7 @@ MATCH void func_800AFD9C(void) {
                     count++;
                     sum_x += D_801EB630[i].pos.x.fixed >> 9;
                     sum_y += D_801EB630[i].pos.y.fixed >> 9;
-                    sum_span += D_801EB630[i].pos.z.part.integer;
+                    sum_span += COORD_INT(D_801EB630[i].pos.z);
                 }
             }
         } else {
@@ -33,13 +33,13 @@ MATCH void func_800AFD9C(void) {
                     count++;
                     sum_x += g_BattlePartyBattlers[i].pos.x.fixed >> 9;
                     sum_y += g_BattlePartyBattlers[i].pos.y.fixed >> 9;
-                    sum_span += g_BattlePartyBattlers[i].pos.z.part.integer;
+                    sum_span += COORD_INT(g_BattlePartyBattlers[i].pos.z);
                 }
             }
         }
         work                     = BATTLE_WORK;
         work->pos.x.fixed        = (sum_x / count) << 9;
         work->pos.y.fixed        = (sum_y / count) << 9;
-        work->pos.z.part.integer = sum_span / count;
+        COORD_INT(work->pos.z) = sum_span / count;
     }
 }

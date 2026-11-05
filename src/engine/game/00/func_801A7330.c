@@ -44,7 +44,7 @@ MATCH void func_801A7330(const volatile u8* data) {
 
     w2                 = g_Task;
     w2->mode           = 6;
-    w2->z.part.integer = (u16)dist;
+    COORD_INT(w2->z) = (u16)dist;
     ACTOR_CLEAR_STATE();
     /* FAKE: barrier pins the flags store before the route-index load. */
     MATCH_BARRIER();
@@ -82,8 +82,8 @@ MATCH void func_801A7330(const volatile u8* data) {
             return;
         }
         /* The 16-bit halves of the two position words have no named members. */
-        if (g_Task->x.part.fraction == 0 && g_Task->y.part.fraction == 0) {
-            Area_SetCellCode(g_Task->x.part.integer, g_Task->y.part.integer, 0x10);
+        if (COORD_FRAC(g_Task->x) == 0 && COORD_FRAC(g_Task->y) == 0) {
+            Area_SetCellCode(COORD_INT(g_Task->x), COORD_INT(g_Task->y), 0x10);
         }
         Actor_SelectScript(1);
     } else {
