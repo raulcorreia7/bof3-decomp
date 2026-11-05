@@ -161,7 +161,7 @@ MATCH void func_801D1910(void) {
     }
 }
 
-/* 7 differing: the copy block loads D_80148652 and the D_801DA0A7 source late (v0 reused after the D_801DA0C1/D_801DA049 stores); the draft hoists both early (v1/t1). */
+/* 7 differing: the copy block loads D_80148652 and the D_801DA0A7 source late (v0 reused after the D_801DA0C1/D_801DA049 stores); the draft hoists both early (v1/t1). Permuter, 6 min, best score 320: no exact candidate. */
 INCLUDE_ASM(func_801D1964);
 
 INCLUDE_ASM(func_801D1A20);

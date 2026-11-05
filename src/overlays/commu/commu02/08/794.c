@@ -417,8 +417,19 @@ MATCH void func_801D5A48(void) {
 
 #include "overlays/commu/Commu_AdvanceStep.h"
 
-/* 3 differences; +0x20 masks into v1, retail uses v0; try the loop register allocation. */
-INCLUDE_ASM(func_801D5AD0);
+MATCH s32 func_801D5AD0(s32 arg0) {
+    s32 var_s1;
+
+    var_s1 = rand() & 0x7F;
+    do {
+    loop_1:
+        if ((u32)(var_s1 & 0xFF) >= (u32)(arg0 & 0xFF)) {
+            var_s1 -= rand() & 0xF;
+            goto loop_1;
+        }
+    } while (0);
+    return var_s1 & 0xFF;
+}
 
 INCLUDE_ASM(func_801D5B2C);
 
