@@ -39,7 +39,7 @@ MATCH void func_801D4E74(void) {
             } else {
                 SND_PlayCue(EMI_CUE_ID(1, 7));
                 D_80148652       = 0xC;
-                g_SaveCardStatus = 4;
+                g_SaveCardStatus = CARD_EVENT_CAPACITY;
             }
         } else {
             D_8014865B = 0;
