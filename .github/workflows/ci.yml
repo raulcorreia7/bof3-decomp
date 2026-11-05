@@ -40,7 +40,7 @@ jobs:
       - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
         with:
           enable-cache: true
-      - uses: dprint/check@7dc032d8874778fc024f6f9b4a7e6d896782c330 # v2.5
+      - uses: dprint/check@371a959e3c77f34a76a03d2c50df2e3f2302d016 # v2.6
         with:
           dprint-version: 0.64.3
           cache: true
