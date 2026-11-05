@@ -1,7 +1,6 @@
 #include "battle_03.h"
 
-/* TODO
- */
+/* Queues a 4x4 tile sprite at the origin, textured from the tile table and tinted by the palette row. */
 MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_index) {
     /* FAKE: retail keeps origin_x in $s2 and origin_y in
      * $s3 (retail `move s2,a0` / `move s3,a1`); gcc 2.7.2 assigns the pair
