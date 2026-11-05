@@ -24,5 +24,5 @@ MATCH void func_801F4648(void) {
     map_offset = D_801F4DB4[row_offset + 0x2D] * ((AreaMapBundle*)&D_80104000)->width_00;
     *(g_AreaCellCodes + map_offset + D_801F4DB4[row_offset + 0x2C]) = 0xA0;
     Actor_SelectScript(0);
-    ((u8*)g_SpadWork)[1] = 1;
+    ((u8*)g_SpadWork)[0x01] = 1;
 }
