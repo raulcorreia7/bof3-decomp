@@ -24,7 +24,16 @@ MATCH void func_801D0E88(void) {
     *counter += 1;
 }
 
-INCLUDE_ASM(func_801D0EC4);
+MATCH void func_801D0EC4(void) {
+    func_801D7224(D_80144953);
+    if (g_UiWindowEffectBusy == 0) {
+        u8* step = &D_80148650;
+
+        D_80148651 = 0;
+        D_80148364 = 0x2B;
+        *step += 1;
+    }
+}
 
 MATCH void func_801D0F24(void) {
     SYS_DISPATCH_BYTE(D_801D96F8, D_80148651);
@@ -32,7 +41,19 @@ MATCH void func_801D0F24(void) {
 
 INCLUDE_ASM(func_801D0F60);
 
-INCLUDE_ASM(func_801D0FAC);
+MATCH void func_801D0FAC(void) {
+    if (g_UiWindowEffectBusy == 0) {
+        u8* step = &D_80148650;
+
+        D_80148651  = 0;
+        D_80148354  = 0;
+        *D_80148378 = 0;
+        D_8014839C  = 0;
+        *step += 1;
+        return;
+    }
+    func_801D7224(D_80144953);
+}
 
 INCLUDE_ASM(func_801D1018);
 
@@ -93,7 +114,32 @@ MATCH void func_801D1E34(void) {
     D_8014839F                     = 1;
 }
 
-INCLUDE_ASM(func_801D1E60);
+MATCH s32 func_801D1E60(void) {
+    u32 value = D_80144FF9;
+
+    if (value < 0x26) {
+        return 9;
+    }
+    if (value - 0x26 < 2) {
+        return 10;
+    }
+    if (value - 0x28 < 5) {
+        return 11;
+    }
+    if (value - 0x2D < 5) {
+        return 12;
+    }
+    if (value - 0x32 < 10) {
+        return 13;
+    }
+    if (value - 0x3C < 5) {
+        return 14;
+    }
+    if (value - 0x41 < 3) {
+        return 15;
+    }
+    return 16;
+}
 
 INCLUDE_ASM(func_801D1EE8);
 
