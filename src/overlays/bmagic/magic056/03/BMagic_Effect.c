@@ -101,7 +101,22 @@ MATCH void func_801EFFE8(void) {
 
 #include "overlays/bmagic/Effect_PrimeTintOnScriptReady.h"
 
-INCLUDE_ASM(func_801F00C8);
+MATCH void func_801F00C8(void) {
+    PartyBattler* work;
+    PartyBattler* source;
+
+    g_SpadWork->unk_5D -= 0x10;
+    g_SpadWork->unk_5E -= 0x10;
+    g_SpadWork->unk_5F -= 0x10;
+    if ((s8)g_SpadWork->unk_5D == -0x80) {
+        work                 = g_SpadWork;
+        source               = BATTLE_ACTIVE_WORK;
+        work->coord_x_34.raw = source->coord_x_34.raw;
+        work->coord_y_38.raw = source->coord_y_38.raw;
+        work->word_3C.word   = source->word_3C.word;
+        work->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F0178(void) {
     g_SpadWork->unk_5D += 0x10;
