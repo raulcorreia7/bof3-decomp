@@ -5,33 +5,33 @@
  * snaps both positions to the sign bit, clears the velocity words and raises the
  * work state. */
 MATCH void func_801E0044(void) {
-    u8* record;
-    u8* record2;
-    u8  timer;
-    u8  state;
+    FishingState* work;
+    FishingState* checked;
+    u8            timer;
+    u8            state;
     /* FAKE: retail reuses v0 as the halfword accumulator. */
     MATCH_FAKE_PIN(u16, value, "v0");
-    u8* work3;
+    FishingState* ended;
 
-    record                 = (u8*)g_SpadWork;
-    *(u32*)(record + 0x34) = *(u32*)(record + 0x34) + *(u32*)(record + 0xC);
-    timer                  = record[9];
-    record[9]              = timer - 1;
-    record2                = (u8*)g_SpadWork;
-    *(u32*)(record + 0x38) = *(u32*)(record + 0x38) + *(u32*)(record + 0x10);
-    state                  = 1;
-    if (record2[9] == 0) {
-        record2[1] = state;
-        work3      = (u8*)g_SpadWork;
-        value      = *(u16*)(record2 + 0x34);
+    work                      = FISHING_STATE;
+    *(u32*)((u8*)work + 0x34) = *(u32*)((u8*)work + 0x34) + work->pos_x_0C;
+    timer                     = work->step_timer_09;
+    work->step_timer_09       = timer - 1;
+    checked                   = FISHING_STATE;
+    work->y_38.pos_y          = work->y_38.pos_y + work->cursor_10;
+    state                     = 1;
+    if (checked->step_timer_09 == 0) {
+        checked->handler_index_01 = state;
+        ended                     = FISHING_STATE;
+        value                     = *(u16*)((u8*)checked + 0x34);
         value &= 0x8000;
-        *(u16*)(record2 + 0x34) = value;
-        *(u32*)(record2 + 0xC)  = 0;
-        *(u32*)(record2 + 0x10) = 0;
-        value                   = *(u16*)(record2 + 0x38);
+        *(u16*)((u8*)checked + 0x34) = (u16)value;
+        checked->pos_x_0C            = 0;
+        checked->cursor_10           = 0;
+        value                        = (u16)checked->y_38.half.low_38.pos_low_38;
         value &= 0x8000;
-        *(u16*)(record2 + 0x38) = value;
-        work3[2]                = 0;
+        checked->y_38.half.low_38.pos_low_38 = (s16)value;
+        ended->mode_index_02                 = 0;
     }
     func_8014D978();
 }

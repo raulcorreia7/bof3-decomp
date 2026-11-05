@@ -38,4 +38,6 @@ extern u16 D_800E4C1E;
 extern u16 g_GameAreaId;
 extern u16 D_801FE9EC[];
 
+void func_801F9688(void);
+
 #endif

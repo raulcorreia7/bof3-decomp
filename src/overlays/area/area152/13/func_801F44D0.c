@@ -15,7 +15,7 @@ MATCH void func_801F44D0(void) {
     Area_FindSceneRecord(0x205);
 
     ((u8*)g_SpadWork)[0x48] = 0;
-    ((u8*)g_SpadWork)[0x24] = 0;
+    g_SpadWork->flags_24    = 0;
     ((u8*)g_SpadWork)[0x2A] = 0;
     ((u8*)g_SpadWork)[0x5D] = 0;
     ((u8*)g_SpadWork)[0x5E] = 0;
@@ -25,5 +25,5 @@ MATCH void func_801F44D0(void) {
     map_offset = *((u8*)D_801F4C3C + 0xD + row_offset) * MEM(u8, 0x80104000);
     *(g_AreaCellCodes + map_offset + *((u8*)D_801F4C3C + 0xC + row_offset)) = 0xA0;
     Actor_SelectScript(0);
-    ((u8*)g_SpadWork)[0x01] = 1;
+    ((u8*)g_SpadWork)[1] = 1;
 }

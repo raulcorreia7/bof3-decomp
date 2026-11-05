@@ -7,7 +7,7 @@
 
 #include "overlays/area/world00.h"
 
-#define WORLD00_AREA024_WORK_BASE      MEM_PTR(u8, 0x800E4800u)
+#define WORLD00_AREA024_WORK_BASE      MEM_PTR(volatile AreaSprite, 0x800E4800u)
 #define WORLD00_AREA024_SPIN_WORK_BASE MEM_PTR(u8, 0x800E5000u)
 #define WORLD00_AREA024_STATE_BASE     MEM_PTR(volatile s16, 0x800E4940u)
 #define WORLD00_AREA024_STATE_OFFSET   MEM_PTR(volatile s16, 0x800E4944u)
@@ -30,6 +30,8 @@ typedef struct AreaSprite {
     /* 0x14 */ VECTOR normal;    /* the sprite's normal */
     /* 0x24 */ u16    half_size; /* the projected half-size */
 } AreaSprite;
+
+ASSERT_SIZE(AreaSprite, 0x28);
 
 typedef struct Area024Scratch {
     u8             unk_00[0x01]; /* byte 0x00 */
@@ -68,6 +70,8 @@ typedef struct AreaSpin {
     /* 0x28 */ s16     scale; /* the vertex scale */
     /* 0x2A */ s16     fade;  /* the triangle fade */
 } AreaSpin;
+
+ASSERT_SIZE(AreaSpin, 0x2C);
 
 extern volatile u8 D_80147A58;
 extern VECTOR      D_801F2C04;

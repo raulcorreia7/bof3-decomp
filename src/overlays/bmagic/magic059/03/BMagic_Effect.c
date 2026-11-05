@@ -19,9 +19,9 @@ INCLUDE_ASM(func_801EF224);
 MATCH void func_801EF4C4(void) {
     u8* work;
 
-    ((u8*)g_SpadWork)[0x09] = 0;
-    ((u8*)g_SpadWork)[0x0A] = 0;
-    work                    = (u8*)g_SpadWork;
+    *(u8*)((u8*)g_SpadWork + 0x09)    = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
+    work                              = (u8*)g_SpadWork;
     work[2] += 1;
 }
 

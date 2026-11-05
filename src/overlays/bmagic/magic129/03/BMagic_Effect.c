@@ -75,9 +75,30 @@ MATCH void func_801F00D4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F023C);
+MATCH void func_801F023C(void) {
+    PartyBattler* work        = g_SpadWork;
+    u8            timer       = work->word_08.byte.unk_09 - 1;
+    s32           value       = work->unk_14 + work->unk_20;
+    work->word_08.byte.unk_09 = timer;
+    work->unk_14              = value;
+    work->word_3C.word += value;
+    if (timer == 0) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
-INCLUDE_ASM(func_801F029C);
+MATCH void func_801F029C(void) {
+    PartyBattler* work          = g_SpadWork;
+    u8            timer         = work->word_08.byte.timer_0A - 1;
+    s32           value         = work->unk_14 + work->unk_20;
+    work->word_08.byte.timer_0A = timer;
+    work->unk_14                = value;
+    work->word_3C.word += value;
+    if (timer == 0) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        Actor_Clear();
+    }
+}
 
 INCLUDE_ASM(func_801F030C);
 

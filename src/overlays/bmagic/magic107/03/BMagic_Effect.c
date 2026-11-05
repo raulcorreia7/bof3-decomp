@@ -10,11 +10,30 @@ MATCH void func_801EEC04(void) {
     table[SP_REF(u8*, 0x44)[1]]();
 }
 
+/* Body shape is row 6's field-view form (func_800AFD9C, Battle_AllocEffect(1, 0x19), the
+ * D_801EC3A4/D_801EC338/D_801EC364/D_801EC368/D_801EC36C stores, SND_QueueSelectionFx(0x100)); everything
+ * matches but one schedule slot: retail hoists the g_SpadWork cell reload for the span word to 0x801EECC0
+ * (between the g_AreaScrollTargetX load and the D_801EC364 store); the s32 form leaves it by the word load at
+ * 0x801EECE0 and the BattleFix32 union form hoists the coordinate loads too. Permuter candidate. */
 INCLUDE_ASM(func_801EEC5C);
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
-INCLUDE_ASM(func_801EEDA0);
+MATCH void func_801EEDA0(void) {
+    SYS_DISPATCH_BYTE(D_801F048C, g_SpadWork->step_01);
+    if (g_SpadWork->flags_00 != 0) {
+        func_801EEFD4();
+        func_801EF0E4();
+        func_801EF544();
+        func_801EF290();
+        PopMatrix();
+        Effect_SetActorMatrixQuarterRoll();
+        func_801F01AC();
+        func_801EFAE0();
+        func_801EFEA8();
+        PopMatrix();
+    }
+}
 
 MATCH void func_801EEE50(void) {
     g_SpadWork->word_08.byte.unk_0B   = 0;
