@@ -1,21 +1,12 @@
 #include "area119_13.h"
 
 MATCH void func_801F4324(void) {
-    u8* work;
-    u8  index;
-    s16 y;
-    s16 x;
-    u8  selection;
-    s32 result;
+    PartyBattler* work;
+    u8            index;
+    s16           y;
+    s16           x;
+    u8            selection;
+    s32           result;
 
-    TASK_SET((u8*)&g_BattlePartyBattlers[1]);
-    index     = D_80144F5A[1];
-    y         = g_BattlePartyBattlers[1].unk_30.signed_half;
-    x         = g_BattlePartyBattlers[1].unk_2E.signed_half;
-    selection = (D_801F45C4 + 0x8Cu)[index];
-    result    = func_8015CB18(1, 0, selection, x, y);
-    if ((u8)result != GAME_NONE) {
-        work       = (u8*)g_Task;
-        work[0x0B] = (s8)result;
-    }
+    AREA_PARTY_PROBE(1, 1, (D_801F45C4 + 0x8Cu), 1);
 }
