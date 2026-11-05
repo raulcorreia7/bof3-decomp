@@ -32,5 +32,6 @@ extern u8  D_80146866;
 extern u8  D_80146867;
 extern u16 D_801F9DD0;
 extern u8  D_801F9DD4;
+extern Callback D_801F9DBC[];
 
 #endif
