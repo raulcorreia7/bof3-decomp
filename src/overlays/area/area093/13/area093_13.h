@@ -6,4 +6,6 @@
 
 #include "overlays/area/world02.h"
 
+#define AREA_SCRIPT_VARIANT 0xB
+
 #endif
