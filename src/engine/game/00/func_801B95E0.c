@@ -1,11 +1,10 @@
 #include "game_00.h"
 
-#define STEP_TILE_X(n) (((s16)FIELD(u16, g_Task, 0x36u) + (n)) << 0x10) >> 1
-#define PAD_FLAG       SP_REF(u8, 0x0)
-#define PAD_A          SP_REF(u8, 0x8)
-#define PAD_B          SP_REF(u8, 0x9)
-#define PAD_C          SP_REF(u8, 0xA)
-#define WDIR           g_Task->direction_08
+#define PAD_FLAG SP_REF(u8, 0x0)
+#define PAD_A    SP_REF(u8, 0x8)
+#define PAD_B    SP_REF(u8, 0x9)
+#define PAD_C    SP_REF(u8, 0xA)
+#define WDIR     g_Task->direction_08
 
 /* nonmatching unmeasured: tried if-chain compare order, ret var for return 3; pad pointer folds to absolute (retail
  * keeps s0), delay-slot li v0,3 sharing. */
@@ -78,7 +77,8 @@ NON_MATCHING s32 func_801B95E0(void) {
                     if (WDIR & 1) {
                         return ret;
                     }
-                    probe = Area_ReadStepHeight(STEP_TILE_X(x), y << 0x10, 3) << 0x10;
+                    probe = Area_ReadStepHeight((((s16)FIELD(u16, g_Task, 0x36u) + (x)) << 0x10) >> 1, y << 0x10, 3)
+                            << 0x10;
                     if (PAD_FLAG != 0 && (probe >> 0x10) >= 0x41) {
                         func_801BB8E8(4, 6, 5);
                         return 1;
