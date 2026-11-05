@@ -54,7 +54,7 @@ MATCH void func_801F7A84(void) {
         *timer               = 0x80;
         g_AreaCameraAngle.vx = -0x16A;
         g_AreaCameraAngle.vz = 0x200;
-        g_AreaDrawFlags      = 0x1F;
+        g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
         D_80146874           = D_80146874 + 1;
     }
     func_801F88CC(0, 0x80);
