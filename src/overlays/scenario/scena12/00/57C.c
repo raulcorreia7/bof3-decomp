@@ -245,9 +245,9 @@ INCLUDE_ASM(func_801FCC54);
 MATCH s32 func_801FCCBC(void) {
     Game_SetScriptActive();
     g_ScriptVars[0] = 0;
-    D_80146865 = 0;
-    D_80146866 = 0;
-    D_80146867 = 0;
+    D_80146865      = 0;
+    D_80146866      = 0;
+    D_80146867      = 0;
     if (D_80145F09 != 5) {
         D_80146875 = 0;
         D_80146874 = 5;
