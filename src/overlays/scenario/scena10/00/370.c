@@ -110,7 +110,15 @@ INCLUDE_ASM(func_801FC280);
 
 INCLUDE_ASM(func_801FC830);
 
-INCLUDE_ASM(func_801FC8A0);
+MATCH void func_801FC8A0(void) {
+    if (g_SceneState.step_05 == 0x23) {
+        Game_ClearScriptActive();
+        func_801BE1B0(4);
+        *g_ScriptVars         = 0x20;
+        g_SceneState.state_04 = 0;
+        g_SceneState.step_05  = 0;
+    }
+}
 
 INCLUDE_ASM(func_801FC900);
 

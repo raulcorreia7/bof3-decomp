@@ -60,7 +60,34 @@ MATCH void func_801EF354(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF3DC(void) {
+    u8  counter;
+    u8  angle;
+    s32 value;
+
+    counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = counter;
+    if (!(counter & 0xFF)) {
+        g_SpadWork->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
+        g_SpadWork->coord_x_34.raw         = D_801EB4E0->coord_x_34.raw;
+        angle                              = g_SpadWork->unk_04;
+        g_SpadWork->coord_y_38.raw         = D_801EB4E0->coord_y_38.raw;
+        g_SpadWork->word_08.byte.unk_0B    = angle * 4 & 0x3F;
+        g_SpadWork->word_3C.word           = D_801EB4E0->word_3C.word + 0x01800000;
+        value                              = D_801EFCC0[g_SpadWork->unk_04];
+        g_SpadWork->unk_10                 = 0x60;
+        angle                              = g_SpadWork->unk_04;
+        g_SpadWork->unk_14                 = 0x20;
+        g_SpadWork->word_08.byte.unk_09    = angle * 4 + 1;
+        g_SpadWork->unk_0C                 = value << 8;
+        g_SpadWork->word_08.byte.timer_0A  = 0;
+        g_SpadWork->unk_02                 = g_SpadWork->unk_02 + 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801EF3DC);
+#endif
 
 INCLUDE_ASM(func_801EF4DC);
 
