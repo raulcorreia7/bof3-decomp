@@ -601,6 +601,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EEDF8, type = "func", source = "plays the 
 g_BMagicEffectFuncs = { addr = 0x801EFDCC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic101/03"]
+Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true }
 Effect_CountDownTimerNextStep = { addr = 0x801EEED4, type = "func", source = "counts the effect timer down and advances the step byte at zero" }
 Effect_PlayOnZeroTick = { addr = 0x801EEF6C, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 Effect_SetActorMatrix = { addr = 0x801EEFCC, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
