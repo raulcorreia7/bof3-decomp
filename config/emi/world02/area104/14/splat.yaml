@@ -49,7 +49,7 @@ segments:
       - [0x2508, c, Actor_StopMoving]
       - [0x2540, c, func_801F5140]
       - [0x25F0, c, func_801F51F0]
-      - [0x2654, c, func_801F5254]
+      - [0x2654, c, Area_StepChargeGauge]
       - [0x27D4, c, func_801F53D4]
       - [0x2818, c, func_801F5418]
       - [0x295C, c, func_801F555C]

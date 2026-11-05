@@ -27,7 +27,7 @@ void Area_DrawHud(s16 x, s16 y);
 /* func_801F4188 */
 void Area_DrawHudBanner(s16 x, s16 y);
 void func_801F4E3C(void);
-void func_801F5254(void);
+void Area_StepChargeGauge(void);
 void func_801F564C(void);
 void func_801F5738(void);
 /* func_801F5988 */
