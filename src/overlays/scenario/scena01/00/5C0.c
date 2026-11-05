@@ -64,7 +64,13 @@ MATCH void func_801F7FC4(void) {
     SYS_DISPATCH_BYTE(D_801FE29C, D_80146872);
 }
 
-INCLUDE_ASM(func_801F8000);
+MATCH void func_801F8000(void) {
+    func_801C1DF0(0);
+    func_8019FA28(9, 0x570000, 0x40000, 7);
+    *D_80144E90          = 0;
+    g_ScriptVarsReq.word = 0;
+    D_80146872           = 1;
+}
 
 INCLUDE_ASM(func_801F8050);
 
