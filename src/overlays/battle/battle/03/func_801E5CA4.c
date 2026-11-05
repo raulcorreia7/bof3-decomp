@@ -14,21 +14,21 @@ MATCH void func_801E5CA4(void) {
                 if (slot->mode < 3U) {
                     Battle_DrawRollingDigits(slot->unk_27);
                 } else {
-                    Battle_DrawNumber((s16)(slot->unk_34.half.hi - 0xC), slot->unk_38.half.hi, slot->unk_27,
+                    Battle_DrawNumber((s16)(slot->pos.x.half.hi - 0xC), slot->pos.y.half.hi, slot->unk_27,
                                       slot->word_60.capture_count);
                 }
                 break;
             case 1:
                 work = D_801EC2E0;
-                func_801D9804(work->unk_34.half.hi, work->unk_38.half.hi, work->unk_27, 2);
+                func_801D9804(work->pos.x.half.hi, work->pos.y.half.hi, work->unk_27, 2);
                 break;
             case 2:
                 work = D_801EC2E0;
-                func_801D9804(work->unk_34.half.hi, work->unk_38.half.hi, work->unk_27, 1);
+                func_801D9804(work->pos.x.half.hi, work->pos.y.half.hi, work->unk_27, 1);
                 break;
             case 3:
                 work = D_801EC2E0;
-                func_801D9804(work->unk_34.half.hi, work->unk_38.half.hi, work->unk_27, 0);
+                func_801D9804(work->pos.x.half.hi, work->pos.y.half.hi, work->unk_27, 0);
                 break;
             case 4:
                 break;

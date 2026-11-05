@@ -34,9 +34,9 @@ MATCH void func_801EEEE4(void) {
     if (--g_Task->unk_09 == 0) {
         src            = BATTLE_ACTIVE_WORK;
         dst            = g_Task;
-        dst->x         = src->x;
-        dst->y         = src->y;
-        dst->z         = src->z;
+        dst->pos.x.raw = src->pos.x.raw;
+        dst->pos.y.raw = src->pos.y.raw;
+        dst->pos.z     = src->pos.z;
         dst->unk_5D    = 0x10;
         g_Task->unk_09 = 0x10;
         g_Task->timer  = 4;

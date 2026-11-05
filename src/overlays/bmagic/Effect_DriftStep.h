@@ -16,8 +16,8 @@ MATCH void Effect_DriftStep(void) {
     work         = g_Task;
     timer        = work->unk_09 - 2;
     work->unk_09 = timer;
-    work->x.raw += work->unk_0C;
-    work->y.raw += work->unk_10;
+    work->pos.x.raw += work->unk_0C;
+    work->pos.y.raw += work->unk_10;
     if (timer == 0x30) {
         D_801EB4E0->unk_0B -= 1;
         func_801E5988();

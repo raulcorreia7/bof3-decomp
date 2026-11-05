@@ -20,19 +20,19 @@ NON_MATCHING void func_801E5E2C(void) {
     source = slot->target.party;
     kind   = source->slot;
     if (kind < 3) {
-        slot->unk_34.half.hi =
+        slot->pos.x.half.hi =
             source->unk_2E.half + (s8)g_BattlePanelOffsets[(source->unk_08 * 2) + (source->unk_2C.half * 8)];
         source = slot->target.party;
         offset = (g_BattlePanelOffsets + 1)[(source->unk_08 * 2) + (source->unk_2C.half * 8)];
     } else {
-        slot->unk_34.half.hi = source->unk_2E.half + (s8)D_801EB712[(kind - 3) * 0x118];
-        source               = slot->target.party;
-        offset               = D_801EB713[(source->slot - 3) * 0x118];
+        slot->pos.x.half.hi = source->unk_2E.half + (s8)D_801EB712[(kind - 3) * 0x118];
+        source              = slot->target.party;
+        offset              = D_801EB713[(source->slot - 3) * 0x118];
     }
-    slot->unk_38.half.hi = source->unk_30.half + offset;
-    divisor              = 0x64;
+    slot->pos.y.half.hi = source->unk_30.half + offset;
+    divisor             = 0x64;
     if (slot->unk_0B == 1) {
-        slot->unk_38.half.hi = slot->unk_38.half.hi - 9;
+        slot->pos.y.half.hi = slot->pos.y.half.hi - 9;
     }
     digits = 2;
     /* Shorter each pass: the ladder ends when the value still fits the divisor. */

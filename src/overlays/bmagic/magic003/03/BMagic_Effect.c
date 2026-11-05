@@ -106,9 +106,9 @@ MATCH void func_801EF3C8(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        temp_x         = g_Task->x.raw;
-        temp_a1        = g_Task->y.raw;
-        temp_a2        = g_Task->z.raw;
+        temp_x         = g_Task->pos.x.raw;
+        temp_a1        = g_Task->pos.y.raw;
+        temp_a2        = g_Task->pos.z.raw;
         g_Task->unk_0C = 0x2000;
         g_Task->unk_14 = 0x300000;
         g_Task->unk_10 = 0;
@@ -139,12 +139,12 @@ MATCH void func_801EF478(void) {
         func_800A9610(g_BattleTargetSelector, 0x10U);
         g_Task->unk_09 = 0xFF;
     }
-    g_Task->x.raw += g_Task->unk_0C;
-    g_Task->y.raw += g_Task->unk_10;
-    g_Task->z.raw += g_Task->unk_14;
+    g_Task->pos.x.raw += g_Task->unk_0C;
+    g_Task->pos.y.raw += g_Task->unk_10;
+    g_Task->pos.z.raw += g_Task->unk_14;
     g_Task->unk_14 += g_Task->unk_20;
     func_8014DAEC();
-    if (g_Task->z.raw == g_Task->unk_44) {
+    if (g_Task->pos.z.raw == g_Task->unk_44) {
         g_Task->step += 1;
     }
 }
@@ -176,10 +176,10 @@ MATCH void func_801EF578(void) {
 }
 
 MATCH void func_801EF644(void) {
-    g_Task->x.raw += g_Task->unk_0C;
-    g_Task->y.raw += g_Task->unk_10;
+    g_Task->pos.x.raw += g_Task->unk_0C;
+    g_Task->pos.y.raw += g_Task->unk_10;
     func_8014DAEC();
-    if (g_Task->x.raw == g_Task->unk_18 && g_Task->y.raw == g_Task->unk_1C) {
+    if (g_Task->pos.x.raw == g_Task->unk_18 && g_Task->pos.y.raw == g_Task->unk_1C) {
         g_Task->step++;
     }
 }
@@ -209,12 +209,12 @@ MATCH void func_801EF708(void) {
 INCLUDE_ASM(func_801EF7A8);
 
 MATCH void func_801EF918(void) {
-    g_Task->x.raw += g_Task->unk_0C;
-    g_Task->y.raw += g_Task->unk_10;
-    g_Task->z.raw += g_Task->unk_14;
+    g_Task->pos.x.raw += g_Task->unk_0C;
+    g_Task->pos.y.raw += g_Task->unk_10;
+    g_Task->pos.z.raw += g_Task->unk_14;
     g_Task->unk_14 += g_Task->unk_20;
     func_8014DAEC();
-    if (g_Task->z.raw == g_Task->unk_44) {
+    if (g_Task->pos.z.raw == g_Task->unk_44) {
         g_Task->step++;
     }
 }
@@ -228,10 +228,10 @@ MATCH void func_801EF9AC(void) {
 }
 
 MATCH void func_801EF9FC(void) {
-    g_Task->x.raw += g_Task->unk_0C;
-    g_Task->y.raw += g_Task->unk_10;
+    g_Task->pos.x.raw += g_Task->unk_0C;
+    g_Task->pos.y.raw += g_Task->unk_10;
     func_8014DAEC();
-    if ((g_Task->x.raw == g_Task->unk_18) && (g_Task->y.raw == g_Task->unk_1C)) {
+    if ((g_Task->pos.x.raw == g_Task->unk_18) && (g_Task->pos.y.raw == g_Task->unk_1C)) {
         func_80196718(g_Task);
         D_801EB4E0->unk_0B -= 1;
         func_801E5988();

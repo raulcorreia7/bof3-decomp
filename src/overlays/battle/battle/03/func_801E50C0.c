@@ -24,8 +24,8 @@ MATCH void func_801E50C0(void) {
                     motion_work = g_Task;
                     motion_work->unk_0C += motion_work->unk_18;
                     motion_work->unk_10 += motion_work->unk_1C;
-                    motion_work->x.raw += motion_work->unk_0C;
-                    motion_work->y.raw += motion_work->unk_10;
+                    motion_work->pos.x.raw += motion_work->unk_0C;
+                    motion_work->pos.y.raw += motion_work->unk_10;
                 }
                 func_801E30F8();
             } else {

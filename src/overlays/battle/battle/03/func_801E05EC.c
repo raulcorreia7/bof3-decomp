@@ -37,17 +37,17 @@ MATCH void func_801E05EC(void) {
 
         /* FAKE: volatile byte view keeps the reload separate from the branch
          * test load. */
-        countdown   = VOL(u8, work->timer);
-        position_x  = work->x.raw;
-        delta_x     = work->unk_0C;
-        position_y  = work->y.raw;
-        delta_y     = work->unk_10;
-        countdown   = countdown - 1;
-        position_x  = position_x - delta_x;
-        position_y  = position_y - delta_y;
-        work->x.raw = position_x;
-        work->y.raw = position_y;
-        work->timer = countdown;
+        countdown       = VOL(u8, work->timer);
+        position_x      = work->pos.x.raw;
+        delta_x         = work->unk_0C;
+        position_y      = work->pos.y.raw;
+        delta_y         = work->unk_10;
+        countdown       = countdown - 1;
+        position_x      = position_x - delta_x;
+        position_y      = position_y - delta_y;
+        work->pos.x.raw = position_x;
+        work->pos.y.raw = position_y;
+        work->timer     = countdown;
     }
     func_801DEE4C();
 }

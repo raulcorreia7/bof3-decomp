@@ -37,9 +37,9 @@ MATCH void func_801EF1EC(void) {
         g_Task->unk_0C = 0;
         g_Task->unk_10 = g_Task->unk_0B << 0xF;
         func_801DD350(g_Task);
-        g_Task->x.raw       = D_801EB4E0->x.raw + g_Task->unk_0C;
-        g_Task->y.raw       = D_801EB4E0->y.raw + g_Task->unk_10;
-        g_Task->z.raw       = D_801EB4E0->z.raw;
+        g_Task->pos.x.raw   = D_801EB4E0->pos.x.raw + g_Task->unk_0C;
+        g_Task->pos.y.raw   = D_801EB4E0->pos.y.raw + g_Task->unk_10;
+        g_Task->pos.z.raw   = D_801EB4E0->pos.z.raw;
         g_Task->unk_40      = 0x8000;
         g_Task->unk_44      = 0x8000;
         g_Task->unk_48      = 2;

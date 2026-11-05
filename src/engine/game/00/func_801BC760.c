@@ -64,10 +64,10 @@ NON_MATCHING s32 func_801BC760(void) {
     }
     row    = &g_BattlePartyBattlers[g_Task->unk_06];
     span   = 0x18000;
-    tgt_x  = row->x.raw + (row->unk_0C * row->unk_09);
-    near_a = tgt_x - (g_FacingSteps[row->unk_08].x * 2);
-    tgt_y  = row->y.raw + (row->unk_10 * row->unk_09);
-    near_b = tgt_y - (g_FacingSteps[row->unk_08].y * 2);
+    tgt_x  = row->pos.x.raw + (row->unk_0C * row->unk_09);
+    near_a = tgt_x - (g_FacingSteps[row->unk_08].pos.x.raw * 2);
+    tgt_y  = row->pos.y.raw + (row->unk_10 * row->unk_09);
+    near_b = tgt_y - (g_FacingSteps[row->unk_08].pos.y.raw * 2);
     if (row->unk_70 != 0) {
         span = 0x20000;
     }

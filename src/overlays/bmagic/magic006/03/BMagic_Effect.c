@@ -25,12 +25,12 @@ MATCH void func_801EEF28(void) {
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
-        g_Task->x.raw = D_801EB4E0->x.raw;
-        g_Task->y.raw = D_801EB4E0->y.raw;
-        g_Task->z.raw = D_801EB4E0->z.raw + 0x800000;
+        g_Task->pos.x.raw = D_801EB4E0->pos.x.raw;
+        g_Task->pos.y.raw = D_801EB4E0->pos.y.raw;
+        g_Task->pos.z.raw = D_801EB4E0->pos.z.raw + 0x800000;
         func_800AF764(g_Task);
         battler        = g_BattleSelectedActor;
-        g_Task->unk_0C = ratan2(battler->x.raw - g_Task->x.raw, battler->y.raw - g_Task->y.raw);
+        g_Task->unk_0C = ratan2(battler->pos.x.raw - g_Task->pos.x.raw, battler->pos.y.raw - g_Task->pos.y.raw);
         g_Task->unk_10 = 0;
         g_Task->unk_14 = (ratan2((s16)battler->unk_2E.half - (s16)g_Task->unk_2E.half,
                                  (s16)battler->unk_30.half - (s16)g_Task->unk_30.half) -
@@ -110,12 +110,12 @@ MATCH void func_801F04F4(void) {
 MATCH void func_801F05A4(void) {
     PartyBattler* src;
 
-    src            = g_BattleSelectedActor;
-    g_Task->x      = src->x;
-    g_Task->y      = src->y;
-    g_Task->z      = src->z;
-    g_Task->unk_09 = 0;
-    g_Task->step   = g_Task->step + 1;
+    src               = g_BattleSelectedActor;
+    g_Task->pos.x.raw = src->pos.x.raw;
+    g_Task->pos.y.raw = src->pos.y.raw;
+    g_Task->pos.z     = src->pos.z;
+    g_Task->unk_09    = 0;
+    g_Task->step      = g_Task->step + 1;
 }
 
 MATCH void func_801F05F4(void) {

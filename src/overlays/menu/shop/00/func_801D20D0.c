@@ -16,8 +16,8 @@ NON_MATCHING void func_801D20D0(void) {
     g_MenuPanelTasks[0].unk_10     = 0x4B;
     g_MenuPanelTasks[21].unk_00[0] = 0;
     g_MenuPanelTasks[20].unk_00[0] = 1;
-    D_80148604                     = g_MenuPanelTasks[(s8)*cursor + 3].x;
-    D_80148606                     = g_MenuPanelTasks[(s8)*cursor + 3].y;
+    D_80148604                     = g_MenuPanelTasks[(s8)*cursor + 3].pos.x.raw;
+    D_80148606                     = g_MenuPanelTasks[(s8)*cursor + 3].pos.y.raw;
     count                          = Party_CountOrder(0);
     buttons                        = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     old                            = *cursor;

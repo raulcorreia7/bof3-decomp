@@ -113,20 +113,20 @@ NON_MATCHING void func_801EF3DC(void) {
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
-        g_Task->facing = D_801EB4E0->facing;
-        g_Task->x.raw  = D_801EB4E0->x.raw;
-        angle          = g_Task->unk_04;
-        g_Task->y.raw  = D_801EB4E0->y.raw;
-        g_Task->unk_0B = angle * 4 & 0x3F;
-        g_Task->z.raw  = D_801EB4E0->z.raw + 0x01800000;
-        value          = D_801EFCC0[g_Task->unk_04];
-        g_Task->unk_10 = 0x60;
-        angle          = g_Task->unk_04;
-        g_Task->unk_14 = 0x20;
-        g_Task->unk_09 = angle * 4 + 1;
-        g_Task->unk_0C = value << 8;
-        g_Task->timer  = 0;
-        g_Task->step   = g_Task->step + 1;
+        g_Task->facing    = D_801EB4E0->facing;
+        g_Task->pos.x.raw = D_801EB4E0->pos.x.raw;
+        angle             = g_Task->unk_04;
+        g_Task->pos.y.raw = D_801EB4E0->pos.y.raw;
+        g_Task->unk_0B    = angle * 4 & 0x3F;
+        g_Task->pos.z.raw = D_801EB4E0->pos.z.raw + 0x01800000;
+        value             = D_801EFCC0[g_Task->unk_04];
+        g_Task->unk_10    = 0x60;
+        angle             = g_Task->unk_04;
+        g_Task->unk_14    = 0x20;
+        g_Task->unk_09    = angle * 4 + 1;
+        g_Task->unk_0C    = value << 8;
+        g_Task->timer     = 0;
+        g_Task->step      = g_Task->step + 1;
     }
 }
 #else
