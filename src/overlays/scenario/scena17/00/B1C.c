@@ -137,7 +137,18 @@ MATCH void func_801F7C14(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7C6C);
+MATCH void func_801F7C6C(void) {
+    u8* step;
+
+    if (g_AreaCameraMoving == 0) {
+        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        step                = &D_80146874;
+        g_AreaScrollTargetX = 0x2E0000;
+        *step += 1;
+    } else if (g_FrameCount & 1) {
+        g_AreaCameraHeight -= 1;
+    }
+}
 
 /* needs: type. While the camera is idle: Area_AdvanceScroll(Area_SampleHeight(x, y)), g_AreaScrollTargetX = 0x260000, g_AreaCameraHeightStep = (Area_SampleHeight(x, y) - g_AreaCameraHeight) / 128, g_AreaSceneMode = 1, D_80146874++ (through a pointer local); otherwise g_AreaCameraHeight += 2, or 3 every fourth frame. Exact except retail reloads g_AreaScrollTargetX after the 0x260000 store (lui a0 / lw a0 where the candidate folds lui a0,0x26; first differing instruction +0x30), which needs `g_AreaScrollTargetX` volatile in slus/data.h with the exe kept exact. */
 INCLUDE_ASM(func_801F7D08);
