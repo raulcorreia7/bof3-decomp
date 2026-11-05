@@ -72,7 +72,18 @@ MATCH void func_801F7198(void) {
     SYS_DISPATCH_TASK(D_801FBEFC, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801F71DC);
+MATCH void func_801F71DC(void) {
+    Actor* work;
+
+    work                    = g_SpadWork;
+    work->tint.bytes.unk_5F = 0;
+    work->tint.bytes.unk_5E = 0;
+    work->tint.bytes.unk_5D = 0;
+    g_SpadWork->unk_0B      = 0x33;
+    Message_StartAreaMessage(g_SpadWork->unk_0B);
+    g_GameStateIndex   = 2;
+    g_SpadWork->unk_01 = 1;
+}
 
 MATCH void func_801F7248(void) {
     if (g_GameStateIndex != 2) {
