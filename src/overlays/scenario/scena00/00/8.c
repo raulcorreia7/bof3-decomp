@@ -100,10 +100,10 @@ MATCH void func_801F6E48(void) {
     work_cell->z.fixed_point = adopted->z.fixed;
     g_GfxPrimCursor          = prim + 8;
     g_SpadWork               = (u8*)adopted;
-    ((s16*)prim)[0]          = 0;
-    ((s16*)prim)[1]          = 240;
-    ((s16*)prim)[2]          = 16;
-    ((s16*)prim)[3]          = 16;
+    ((RECT*)prim)->x          = 0;
+    ((RECT*)prim)->y          = 240;
+    ((RECT*)prim)->w          = 16;
+    ((RECT*)prim)->h          = 16;
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
 
@@ -150,10 +150,10 @@ MATCH void func_801F6E48(void) {
 
     prim            = g_GfxPrimCursor;
     g_GfxPrimCursor = prim + 8;
-    ((s16*)prim)[0] = 0;
-    ((s16*)prim)[1] = 0;
-    ((s16*)prim)[2] = 256;
-    ((s16*)prim)[3] = 256;
+    ((RECT*)prim)->x = 0;
+    ((RECT*)prim)->y = 0;
+    ((RECT*)prim)->w = 256;
+    ((RECT*)prim)->h = 256;
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
@@ -948,10 +948,10 @@ MATCH void func_801F8D90(void) {
     work_cell->z.fixed_point = first->z.fixed;
     g_GfxPrimCursor          = prim + 8;
     g_SpadWork               = (u8*)first;
-    ((s16*)prim)[0]          = 0;
-    ((s16*)prim)[1]          = 240;
-    ((s16*)prim)[2]          = 16;
-    ((s16*)prim)[3]          = 16;
+    ((RECT*)prim)->x          = 0;
+    ((RECT*)prim)->y          = 240;
+    ((RECT*)prim)->w          = 16;
+    ((RECT*)prim)->h          = 16;
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
 
@@ -1005,10 +1005,10 @@ MATCH void func_801F8D90(void) {
 
     prim            = g_GfxPrimCursor;
     g_GfxPrimCursor = prim + 8;
-    ((s16*)prim)[0] = 0;
-    ((s16*)prim)[1] = 0;
-    ((s16*)prim)[2] = 256;
-    ((s16*)prim)[3] = 256;
+    ((RECT*)prim)->x = 0;
+    ((RECT*)prim)->y = 0;
+    ((RECT*)prim)->w = 256;
+    ((RECT*)prim)->h = 256;
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
@@ -1054,8 +1054,6 @@ MATCH void func_801F9178(void) {
     D_80146872           = 1;
 }
 
-/* SND_PlayCue from include/sys/gameui.h */
-
 MATCH void func_801F92DC(void) {
     s32  slot_index;
     s8   next_state;
@@ -1081,7 +1079,6 @@ MATCH void func_801F92DC(void) {
             }
             state0  = &g_AreaCameraAngle.vz;
             *state0 = *state0 - 0x155;
-            /* Shared exit: the 0x66 == 3 path continues at the state test. */
             goto block_7;
         }
         if (g_ScriptVars[2] == 3) {
@@ -1092,7 +1089,6 @@ MATCH void func_801F92DC(void) {
             *state3    = *state3 + 0x155;
         block_7:
             if (g_ScriptVars[2] != 3) {
-                /* Shared reset: both the == 0 and the != 3 paths reach it. */
                 goto block_8;
             }
         } else {
@@ -1144,12 +1140,6 @@ MATCH void func_801F92DC(void) {
     D_80146872 = 2;
 }
 
-/* Byte-typed bases: the per-slot rows below are addressed as base + slot * 0x74
- * and the stored widths differ per column (1, 0x13, a word, a byte). */
-
-/* local: argument width differs per caller (s32/s16/u32), which changes the
- * call-site load, so no single shared declaration fits. */
-
 MATCH void func_801F9644(void) {
     s16* timer;
     s32  slot;
@@ -1188,9 +1178,6 @@ MATCH void func_801F9644(void) {
     }
 }
 
-/* local: argument width differs per caller (s32/s16/u32), which changes the
- * call-site load, so no single shared declaration fits. */
-
 MATCH void func_801F9868(void) {
     s32 slot;
     u8  i;
@@ -1204,7 +1191,7 @@ MATCH void func_801F9868(void) {
                 loop_10:
                     if (EMI_LoaderIsReady() == 0) {
                         CallbackWait(1U);
-                        goto loop_10; /* spin until the overlay loader reports ready */
+                        goto loop_10;
                     }
                     g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
                     g_ScriptVarsReq.word = 0;
@@ -1283,21 +1270,11 @@ MATCH void func_801F9BD4(void) {
 MATCH void func_801F9BDC(void) {
 }
 
-/* Scene request bytes and the frontend state set this controller drives,
- * plus the first byte of the spawned-object record array; widths follow the
- * loads and stores here and the exact siblings in this target. The object table
- * holds 0x74-byte records, and every record store goes through the field's own
- * base symbol (retail materializes an address per store) while the slot index
- * is re-read from the scratchpad byte cell D_1F800000.
- */
-
 /* PsyQ master volume: the left and right channel levels (SPU_VOL_MAIN_L/R). */
 
 MATCH void func_801F9BE4(void) {
     u16* counter;
 
-    /* g_SceneState.step_05 is the intro-controller state; the arms also watch the
-     * frontend bytes g_ScriptVars[2]/g_ScriptVars[3] and g_UiWindowEffectBusy. */
     switch (g_SceneState.step_05) {
         case 0:
             if (WINDOW_EFFECT_BUSY()) {
@@ -1371,8 +1348,6 @@ MATCH void func_801F9BE4(void) {
             }
             D_1F800000[0] = Actor_FindFreeSlot();
             if ((D_1F800000[0] & BYTE_MASK) != GAME_NONE) {
-                /* Seed the record of the 0x74-byte table: flags, kind, spawn x/y/z
-                 * and layer (offsets 0, 5, 0x64, 0x68, 0x6C, 9). */
                 g_ActorSlots[D_1F800000[0]].flags_00 = 1;
                 g_ActorSlots[D_1F800000[0]].type     = 0x13;
                 g_ActorSlots[D_1F800000[0]].pos.x    = g_AreaCameraAngle.vx + 384;
@@ -1395,13 +1370,6 @@ MATCH void func_801F9BE4(void) {
             break;
     }
 }
-
-/* Scene request byte, state byte, shared camera words and the spawned-object
- * table fields this controller writes; widths follow the loads and stores here
- * and the exact siblings in this target. The object table is 0x74-byte records
- * reached from the per-field base arrays, and every field store re-reads the
- * slot index from the scratchpad byte cell D_1F800000.
- */
 
 MATCH void func_801F9FB8(void) {
     u8* state;
@@ -1455,11 +1423,6 @@ MATCH void func_801F9FB8(void) {
             break;
     }
 }
-
-/* Scene step inputs and the shared frontend state byte/halfword set; widths
- * proven by the accesses in this function and the exact siblings in this
- * target. Plain types: each state byte loads once with no reload or masking.
- */
 
 MATCH void func_801FA27C(void) {
     u8 id;
@@ -1666,7 +1629,7 @@ MATCH void func_801FA7D8(void) {
             ORDER_LOCK(value = D_801FCA4C[g_FrameCount & 0xFu]);
             (*fade)--;
             accum = &D_80147A96;
-            goto accumulate; /* the shared tail folds the table value into the accumulator */
+            goto accumulate;
         }
 
         case 5: {
@@ -1680,12 +1643,7 @@ MATCH void func_801FA7D8(void) {
             if (D_80146866 == 0u) {
                 break;
             }
-            /* FAKE: the index read gets its own statement and is locked, so the
-             * scheduler cannot hoist the accum address above it (bin/diff shows
-             * exactly that hoist: current `lui a0,0x8014`/`addiu a0,a0,31382`
-             * before `lui v0,0x8014`/`lw v0,15980(v0)`). Statements are written in
-             * retail's order: 0x801FAA74 `lui v0`/`lw v0`, 0x801FAA7C `lui a0`/
-             * `addiu a0,a0,31382`, 0x801FAA88 `sb`, 0x801FAA8C `andi v0,v0,0xF`. */
+            /* FAKE: the index read gets its own statement and is locked, so the scheduler cannot hoist the accum address above it. */
             /* FAKE: the lock holds the retail load order around the index read. */
             ORDER_LOCK(index_raw = g_FrameCount);
             accum      = &D_80147A96;
@@ -1861,13 +1819,6 @@ MATCH void func_801FA7D8(void) {
     }
 }
 
-/* Scene request byte, the table-driven state selector and the shared
- * frontend/camera words this controller drives. g_ScriptVars is a byte-addressed
- * cell: constant-index accesses use the plain symbol offset, the read-modify-
- * write updates materialize the cell address. Widths follow the loads and
- * stores here and the exact siblings in this target.
- */
-
 MATCH void func_801FAF6C(void) {
     switch (g_SceneState.step_05) {
         case 0:
@@ -1946,14 +1897,6 @@ MATCH void func_801FAF6C(void) {
             break;
     }
 }
-
-/* Scene request/step bytes, countdown and the shared frontend, camera and
- * spawn-table fields this controller drives. g_ScriptVars and g_SceneState.timer_06 are the
- * request byte and the countdown halfword: constant-index accesses use the
- * plain symbol offset, read-modify-write accesses materialize the cell address.
- * Widths follow the loads and stores here and the exact siblings in this
- * target.
- */
 
 MATCH void func_801FB204(void) {
     u8 slot;
@@ -2073,11 +2016,6 @@ MATCH void func_801FB620(void) {
     }
 }
 
-/* Scene request, mode and state bytes plus the countdown halfword shared
- * with the frontend; widths follow the loads and stores here: the request is
- * cleared with one word store, the mode and state are single bytes.
- */
-
 MATCH void func_801FB67C(void) {
     u8* state;
 
@@ -2102,11 +2040,6 @@ MATCH void func_801FB67C(void) {
             break;
     }
 }
-
-/* Scene request byte, state byte, countdown halfword and the two staged
- * position words this step machine drives; widths follow the loads and stores
- * here.
- */
 
 /* Scene angle interpolation: turns the scene angle g_AreaCameraAngle.vz to `degrees`,
  * spreading the turn over `duration` times the route's base frame count;
@@ -2165,9 +2098,9 @@ MATCH void func_801FB744(void) {
 /* Advances the scena00 transition sequence, handling input, camera state and audio cues. */
 MATCH void func_801FB924(void) {
     u16* counter;
-    /* FAKE: keep the D_80145EB4 address for its masked load/store; direct access scored 95.94%. */
+    /* FAKE: keep the D_80145EB4 address for its masked load/store. */
     u8*  flags;
-    /* FAKE: hold the g_PartyY base before g_AreaFocusY; direct updates scored 95.65%. */
+    /* FAKE: hold the g_PartyY base before g_AreaFocusY. */
     u32* base;
 
     if ((g_FrameCount & 0x1F) == 0) {
@@ -2277,11 +2210,10 @@ MATCH void func_801FB924(void) {
 
         case 6: {
             s16* camera;
-            /* FAKE: keep magnitude for the index and signed step; direct index 1 and -0x40 scored 88.99%. */
+            /* FAKE: keep magnitude for the index and signed step. */
             s16  magnitude;
             s32* counter;
 
-            /* D_1F800010 is volatile; each read reloads the camera base. */
             D_1F800010                = (s16*)(((AreaLoad*)g_AreaLoads[g_GameAreaId])->unk_0C + 0x12);
             D_1F800010[0]             = (RANDOM_MASK(0x7)) - 3;
             D_1F800010[magnitude = 1] = (RANDOM_MASK(0x7)) - 3;
@@ -2416,8 +2348,6 @@ MATCH void func_801FC01C(void) {
     }
 }
 
-/* Destination counter view of the same 0x28-byte slot: the twelve per-cell
- * lifetimes at +0x02..+0x18, subtracted from D_801FD5D0's cells. */
 typedef struct SceneLifeRecord {
     u8  unk_00[2];
     u16 lifetime[12];
@@ -2496,8 +2426,6 @@ MATCH void func_801FC3A0(void) {
 }
 
 /* The scenario entity-handler table, indexed by byte 0x7A of the entity record.
- * Both handlers are defined without arguments, so the two entries carry the
- * SceneFunc cast.
  */
 static SceneFunc D_801FCA84[] = {(SceneFunc)func_801FC810, (SceneFunc)Scene_ClearParty};
 
