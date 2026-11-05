@@ -133,10 +133,7 @@ MATCH void func_801EF9C4(void) {
     }
 }
 
-MATCH void func_801EFA50(void) {
-    BATTLE_ACTIVE_WORK->word_08.byte.unk_0B--;
-    func_801E5988();
-}
+#include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 INCLUDE_ASM(func_801EFA84);
 
