@@ -118,14 +118,10 @@ MATCH void func_801EF518(void) {
 
 INCLUDE_ASM(func_801EF5CC);
 
+#include "overlays/bmagic/Effect_RampTintAndFinish.h"
+
 MATCH void func_801EF688(void) {
-    g_SpadWork->unk_5D += 0x10;
-    g_SpadWork->unk_5E += 0x10;
-    g_SpadWork->unk_5F += 0x10;
-    if ((s8)g_SpadWork->unk_5D == -0x40) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
-        func_801E5988();
-    }
+    EFFECT_RAMP_TINT_AND_FINISH();
 }
 
 MATCH void func_801EF72C(void) {
@@ -197,13 +193,7 @@ MATCH void func_801EFE38(void) {
 INCLUDE_ASM(func_801EFFCC);
 
 MATCH void func_801F00A8(void) {
-    g_SpadWork->unk_5D += 0x10;
-    g_SpadWork->unk_5E += 0x10;
-    g_SpadWork->unk_5F += 0x10;
-    if ((s8)g_SpadWork->unk_5D == -0x40) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
-        func_801E5988();
-    }
+    EFFECT_RAMP_TINT_AND_FINISH();
 }
 
 INCLUDE_ASM(func_801F014C);
