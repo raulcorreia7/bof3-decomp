@@ -80,11 +80,7 @@ extern u8            D_80144DF6;
 extern u8            D_80144DF7;
 extern u8            D_80148338;
 extern s8            D_80148511;
-extern u8            D_801D8EE0;
-extern u8            D_801D8EE1;
-extern u8            D_801D8EE2;
-extern u8            D_801D8EE3;
-extern u8            D_801D8EE4;
+extern u8            D_801D8EE0[5];
 
 typedef struct BateState {
     u8 unk_00;
