@@ -48,6 +48,7 @@ MATCH void func_801EF50C(void) {
     func_801E5988();
 }
 
+/* Template magic057/03 body with D_801EEC1C and the unk_02 step: first diff 0x801EF554, retail holds 0x800F0800 in v0 and g_SpadWork in v1. */
 INCLUDE_ASM(func_801EF52C);
 
 MATCH void func_801EF5D0(void) {

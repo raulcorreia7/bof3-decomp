@@ -68,6 +68,7 @@ INCLUDE_ASM(func_801EF4B4);
 
 #include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
 
+/* Template magic008/00: first diff 0x801EF5E0, retail decrements D_801EB4E0 +0x0B on the non-zero path where the template bumps unk_02. */
 INCLUDE_ASM(func_801EF58C);
 
 MATCH void func_801EF648(void) {

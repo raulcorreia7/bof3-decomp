@@ -40,6 +40,7 @@ INCLUDE_ASM(func_801EF910);
 
 #include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
 
+/* Template magic008/00: first diff 0x801EFA18, retail branches over the g_BattleActionId < 0x85 test (v0) where the candidate is branchless. */
 INCLUDE_ASM(func_801EF9E8);
 
 #include "overlays/bmagic/Effect_LowerTickerStepOnReady.h"
