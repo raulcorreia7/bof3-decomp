@@ -39,6 +39,8 @@ extern u16 D_80146876;
 extern u8  D_80146874;
 extern u8  D_80146875;
 
+s8 func_801FCD1C(void);
+
 extern u8 D_80144F5B;
 extern u8 D_80144F5C;
 extern u8 D_80144F5F;
