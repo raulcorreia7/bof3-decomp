@@ -4,7 +4,7 @@ MATCH void func_801F431C(void) {
     ActorSlot* slot;
     s32        index;
 
-    index = func_8019601C() & 0xFF;
+    index = Actor_FindFreeSlot() & 0xFF;
     if (index != 0xFF) {
         slot           = &g_ActorSlots[index];
         slot->flags_00 = 1;

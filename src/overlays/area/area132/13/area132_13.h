@@ -19,6 +19,5 @@ void func_801F37A4(s32 arg0);
 s32  func_801F3800(void);
 s32  func_801F38B0(void);
 
-s32 func_8019601C();
 
 #endif
