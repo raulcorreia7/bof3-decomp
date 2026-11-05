@@ -59,7 +59,7 @@ MATCH void func_801EF328(void) {
     }
 }
 
-void func_801EF394(void) {
+MATCH void func_801EF394(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800A9820(g_BattleTargetSelector);
         BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;

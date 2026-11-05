@@ -1,6 +1,6 @@
 #include "area098_13.h"
 
-void func_801F3814(void) {
+MATCH void func_801F3814(void) {
     Actor* work;
     s32*   pos;
     s32    z;

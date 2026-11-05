@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC80);
 
-void func_801EEE7C(void) {
+MATCH void func_801EEE7C(void) {
     if (g_SpadWork->word_08.byte.unk_0B == 7) {
         g_SpadWork->word_08.byte.unk_09 = 8;
         g_SpadWork->step_01 += 1;

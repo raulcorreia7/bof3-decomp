@@ -62,7 +62,7 @@ MATCH void func_801EF554(void) {
 
 INCLUDE_ASM(func_801EF5D4);
 
-void func_801EF654(void) {
+MATCH void func_801EF654(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x11);
 }
 
@@ -96,7 +96,7 @@ INCLUDE_ASM(func_801EFF74);
 
 INCLUDE_ASM(func_801F0034);
 
-void func_801F00A0(void) {
+MATCH void func_801F00A0(void) {
     EFFECT_ADVANCE_AT_COUNT(2, 0x10);
 }
 

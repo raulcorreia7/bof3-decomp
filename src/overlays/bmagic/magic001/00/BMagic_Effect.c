@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EECC4);
 
-void func_801EEF34(void) {
+MATCH void func_801EEF34(void) {
     BMagic_ClearWorkFlagsAndStep();
 }
 
@@ -131,7 +131,7 @@ MATCH void func_801EF72C(void) {
 
 INCLUDE_ASM(func_801EF78C);
 
-void func_801EFA14(void) {
+MATCH void func_801EFA14(void) {
     BMagic_ClearWorkFlagsAndStep();
 }
 

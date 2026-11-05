@@ -14,7 +14,7 @@ MATCH void func_801F73B8(void) {
 
 INCLUDE_ASM(func_801F73FC);
 
-void func_801F7480(void) {
+MATCH void func_801F7480(void) {
     func_801F7678(g_SpadWork->unk_09);
     if ((g_FrameCount & 1) == 0) {
         func_801F7AE4();

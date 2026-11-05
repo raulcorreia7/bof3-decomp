@@ -108,7 +108,7 @@ MATCH void func_801F0438(void) {
 
 INCLUDE_ASM(func_801F04C0);
 
-void func_801F053C(void) {
+MATCH void func_801F053C(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x40);
 }
 

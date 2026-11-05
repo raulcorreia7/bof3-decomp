@@ -74,7 +74,7 @@ INCLUDE_ASM(func_801FAE0C);
 
 INCLUDE_ASM(func_801FBC78);
 
-void func_801FBD0C(void) {
+MATCH void func_801FBD0C(void) {
     u8* timer;
 
     timer = &D_80146875;

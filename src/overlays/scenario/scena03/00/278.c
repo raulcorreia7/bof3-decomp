@@ -188,7 +188,7 @@ MATCH void func_801F7AE0(void) {
     work[1]++;
 }
 
-void func_801F7B10(void) {
+MATCH void func_801F7B10(void) {
     Actor* actor;
     s32*   ptr;
     u8     value;
@@ -626,7 +626,7 @@ INCLUDE_ASM(func_801FCB4C);
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 
-s32 func_801FCCDC(void) {
+MATCH s32 func_801FCCDC(void) {
     if (MEM(u16, GAME_AREA_ID_ADDR) == 71) {
         return func_801FCD1C();
     }

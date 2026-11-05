@@ -14,7 +14,7 @@ MATCH void func_801D0C0C(void) {
 
 INCLUDE_ASM(func_801D0C48);
 
-void func_801D0CC0(void) {
+MATCH void func_801D0CC0(void) {
     u16 screen_x;
     u8  mode;
 

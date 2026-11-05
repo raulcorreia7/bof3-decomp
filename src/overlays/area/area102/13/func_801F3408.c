@@ -1,6 +1,6 @@
 #include "area102_13.h"
 
-void func_801F3408(void) {
+MATCH void func_801F3408(void) {
     func_801F36B4(g_SpadWork->unk_09);
     g_SpadWork->unk_09 += 1;
     if (g_SpadWork->unk_09 >= 8U) {
