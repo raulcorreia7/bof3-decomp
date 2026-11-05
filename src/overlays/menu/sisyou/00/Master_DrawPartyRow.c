@@ -18,7 +18,8 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     sprintf((char*)g_UiFormatBuffer, D_801D0C04, record->level);
     UI_DrawGlyphString((s16)(x + 22), (s16)(y + 23), 0, g_UiFormatBuffer);
 
-    if ((STATUS_WORD(record) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
+    /* Retail reads the status halfword and the next one as a word. */
+    if ((LOWU(record->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
             UI_DrawTextString((s16)(x + 46), (s16)(y + 23), 1, 0x10, D_801D4048);
         } else {
