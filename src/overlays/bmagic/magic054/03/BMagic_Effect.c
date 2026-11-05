@@ -13,12 +13,7 @@ MATCH void func_801EEC2C(void) {
 
 INCLUDE_ASM(func_801EEC98);
 
-MATCH void func_801EF05C(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        func_800A9820(g_BattleTargetSelector);
-        g_SpadWork->step_01 += 1;
-    }
-}
+#include "overlays/bmagic/Effect_MarkTargetDamagedOnTickerZero.h"
 
 #include "shared/Effect_StartPlaying.h"
 

@@ -317,6 +317,7 @@ Actor_Clear = { addr = 0x801F04F8, type = "func", source = "clears the five lead
 g_BMagicEffectFuncs = { addr = 0x801F0550, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic054/03"]
+Effect_MarkTargetDamagedOnTickerZero = { addr = 0x801EF05C, type = "func", source = "marks the battlers selected by g_BattleTargetSelector as damaged through func_800A9820 and advances the effect step once the effect ticker at +0x0B is zero; one body shared with the other bmagic overlays" }
 Effect_StartPlaying = { addr = 0x801EF0B8, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic001/00@0x801EEFA4" }
 Effect_CountDownAndPlay = { addr = 0x801EF0EC, type = "func", source = "counts the effect timer down; at zero plays the effect the target selector chose" }
 Effect_TickDownAndClear = { addr = 0x801EF624, type = "func", source = "decrements the active battler's effect ticker byte at +0x0B and runs func_801E5988, which clears the effect work record D_801EC2E0 (the call Effect_StartPlaying makes); one body shared with the other bmagic overlays" }
@@ -588,6 +589,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFCBC, source = "the module dispatcher index
 
 ["emi/bmagic/magic103/03"]
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
+Effect_MarkTargetDamagedOnTickerZero = { addr = 0x801EEE38, type = "func", source = "marks the battlers selected by g_BattleTargetSelector as damaged through func_800A9820 and advances the effect step once the effect ticker at +0x0B is zero; one body shared with the other bmagic overlays" }
 Effect_StartPlaying = { addr = 0x801EEE94, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic001/00@0x801EEFA4" }
 Effect_SetActorMatrix = { addr = 0x801EF128, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 Effect_CountUpAndStepAt30 = { addr = 0x801F0410, type = "func", source = "counts the effect timer at +0x09 up and advances the effect step byte at +0x02 at 30; one body shared with the other bmagic overlays" }
