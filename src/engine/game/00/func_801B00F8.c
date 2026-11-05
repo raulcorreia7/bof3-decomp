@@ -9,5 +9,5 @@ MATCH void func_801B00F8(void) {
         D_80146256 = countdown - 1;
     }
     func_801BDBC4();
-    D_801CD0AC[FIELD(u8, SP_REF(void*, 0x44u), 1)]();
+    D_801CD0AC[FIELD(u8, g_Task, 1)]();
 }

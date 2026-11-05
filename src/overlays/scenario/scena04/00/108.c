@@ -157,7 +157,7 @@ MATCH void func_801F7BC0(void) {
         }
     }
     func_801F7EC0();
-    FIELD(s32, SP_REF(u8*, 0x44), 0x0C) = 0x40;
+    FIELD(s32, g_Task, 0x0C) = 0x40;
 }
 
 MATCH void func_801F7CA8(void) {
