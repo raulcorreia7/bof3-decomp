@@ -34,6 +34,7 @@ MATCH void func_801EED2C(void) {
     g_SpadWork = saved;
 }
 
+/* Best 5 differences: lui v1 at 0x801EEDF0; adjust register allocation. */
 INCLUDE_ASM(func_801EEDB0);
 
 MATCH void func_801EEE34(void) {
