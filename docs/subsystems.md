@@ -24,7 +24,7 @@ Every `src/` directory belongs to one row. A `Name.h` shared body sits at the fo
 
 ## Debt
 
-Totals from `tools/quality.py` on main `7140282c7f`. Rerun it for the current numbers. `addr` counts matched functions still named `func_<ADDR>`; `names` counts `D_` and `unk_` tokens in matched bodies.
+Totals from `tools/quality.py` on main `7140282c7f`. Rerun it for the current numbers. `addr` counts matched functions still named `func_<ADDR>`; `names` counts `D_` and `unk_` tokens and `FIELD(...)` offset accesses in matched bodies.
 
 | Subsystem        | Matched functions | `addr` | `names` | `casts` | `harmful` | `twins` | `pasted` |
 | ---------------- | ----------------: | -----: | ------: | ------: | --------: | ------: | -------: |
