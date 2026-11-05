@@ -7,6 +7,6 @@ MATCH void func_801DDE2C(void) {
         D_801E3210 = (FishingTarget*)(D_801E2720 + D_80145026 * sizeof(FishingTarget));
     }
     if (D_80145028 != 0) {
-        D_801E320C = D_801E2748 + D_80145028 * 10;
+        D_801E320C = (FishingCharRow*)(D_801E2748 + D_80145028 * 10);
     }
 }

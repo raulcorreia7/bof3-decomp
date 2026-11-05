@@ -2,7 +2,7 @@
 /* Each access reloads the work cell: the stores go through its pointer, which
  * the compiler must assume may alias the cell. */
 MATCH void func_801F3060(void) {
-    ((u8*)g_SpadWork)[0x24] = 0x80;
+    g_SpadWork->flags_24 = 0x80;
     Area_FindSceneRecord(AREA_SCENE_RECORD);
     ((u8*)g_SpadWork)[0x29] = 5;
     ((u8*)g_SpadWork)[0x2A] = 0;

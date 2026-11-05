@@ -7,5 +7,5 @@ MATCH void BMagic_RunStep(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC00.steps;
-    handlers.handlers[((u8*)g_SpadWork)[1]]();
+    handlers.handlers[g_SpadWork->step_01]();
 }

@@ -27,7 +27,7 @@ extern u8        D_801FCF5C[];
 
 extern Callback D_801FCF24[];
 
-void func_801FC5A4(void);
+s32 func_801FC5A4(void);
 
 /* Sets one scene flag bit, then runs func_801FC5A4. */
 static inline void Scene_SetFlagThenContinue(void* flags, u8 bit) {
@@ -35,6 +35,7 @@ static inline void Scene_SetFlagThenContinue(void* flags, u8 bit) {
     func_801FC5A4();
 }
 
+extern u8  D_80144EA2;
 extern u16 D_80146876;
 extern u8  D_80146874;
 extern u8  D_80146875;

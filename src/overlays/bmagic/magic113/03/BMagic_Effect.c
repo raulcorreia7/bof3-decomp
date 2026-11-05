@@ -57,7 +57,7 @@ MATCH void func_801EF3A0(void) {
 INCLUDE_ASM(func_801EF4F0);
 
 MATCH void func_801EF75C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 INCLUDE_ASM(func_801EF7A0);

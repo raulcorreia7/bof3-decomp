@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EED0C);
 INCLUDE_ASM(func_801EF118);
 
 MATCH void func_801EF1E0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 INCLUDE_ASM(func_801EF224);
@@ -19,9 +19,9 @@ INCLUDE_ASM(func_801EF224);
 MATCH void func_801EF4C4(void) {
     u8* work;
 
-    ((u8*)g_SpadWork)[0x09] = 0;
-    ((u8*)g_SpadWork)[0x0A] = 0;
-    work                    = (u8*)g_SpadWork;
+    *(u8*)((u8*)g_SpadWork + 0x09)    = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
+    work                              = (u8*)g_SpadWork;
     work[2] += 1;
 }
 

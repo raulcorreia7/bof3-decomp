@@ -517,7 +517,15 @@ MATCH void func_801FC578(void* entity, void* flags) {
     Scene_SetFlagThenContinue(flags, 0x13);
 }
 
-INCLUDE_ASM(func_801FC5A4);
+MATCH s32 func_801FC5A4(void) {
+    if ((D_80144EA2 & 0xF) == 0xF) {
+        Game_SetScriptActive();
+        D_80146875 = 6;
+        D_80146876 = 0x1E;
+        return 1;
+    }
+    return 0;
+}
 
 MATCH void func_801FC5FC(void) {
     Party_AddVitalItem(1);

@@ -34,7 +34,34 @@ MATCH void func_801EEE94(void) {
 
 INCLUDE_ASM(func_801EEEE0);
 
-INCLUDE_ASM(func_801EEF84);
+MATCH void func_801EEF84(void) {
+    PartyBattler* work;
+    s32           var_a0;
+    u8            temp_v0;
+
+    g_SpadWork->unk_29 = 0;
+    g_SpadWork->unk_25 = 0x1D;
+    g_SpadWork->unk_26 = 0;
+    g_SpadWork->unk_24 = 0x84;
+    g_SpadWork->unk_27 = 0xB4;
+    g_SpadWork->unk_28 = 0;
+    work               = g_SpadWork;
+    work->unk_2B       = 0;
+    work->unk_2C.half  = 0;
+    g_SpadWork->unk_2A = 0;
+    temp_v0            = g_SpadWork->word_08.byte.unk_09;
+    if (temp_v0 != 0) {
+        var_a0 = 0x100;
+        if (temp_v0 & 1) {
+            var_a0 = 0x101;
+        }
+    } else {
+        var_a0 = 0x102;
+    }
+    SND_QueueSelectionFx(var_a0);
+    Actor_SelectScript(5U);
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF070(void) {
     PartyBattler* work;

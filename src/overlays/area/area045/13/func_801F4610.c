@@ -14,15 +14,15 @@ MATCH void func_801F4610(void) {
     Area_FindSceneRecord(0x205);
 
     ((u8*)g_SpadWork)[0x48] = 0;
-    ((u8*)g_SpadWork)[0x24] = 0;
+    g_SpadWork->flags_24    = 0;
     ((u8*)g_SpadWork)[0x2A] = 0;
     ((u8*)g_SpadWork)[0x5D] = 0;
     ((u8*)g_SpadWork)[0x5E] = 0;
     ((u8*)g_SpadWork)[0x5F] = 0;
 
     row_offset = ((u8*)g_SpadWork)[0x0B] * 4;
-    map_offset = ((u8*)D_801F4D7C + 0x29)[row_offset] * ((AreaMapBundle*)&D_80104000)->width_00;
-    *(g_AreaCellCodes + map_offset + ((u8*)D_801F4D7C + 0x28)[row_offset]) = 0xA0;
+    map_offset = D_801F4D7C[0x29 + row_offset] * ((AreaMapBundle*)&D_80104000)->width_00;
+    *(g_AreaCellCodes + map_offset + D_801F4D7C[0x28 + row_offset]) = 0xA0;
     Actor_SelectScript(0);
     ((u8*)g_SpadWork)[0x01] = 1;
 }

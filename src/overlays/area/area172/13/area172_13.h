@@ -41,6 +41,7 @@ extern u8 D_801F507C[];
 extern void Area_SetCellCode(s16 column, s16 row, u8 code);
 extern void func_801F2DF4(s32 arg0);
 void        func_801F4E8C(s32 x, s32 y);
+void        func_801F4060(s16 step);
 void        func_801F47F0(void);
 
 extern u8 D_80146874;
