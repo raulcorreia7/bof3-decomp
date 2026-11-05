@@ -119,7 +119,13 @@ extern volatile u8   D_80148627;
 /* D_801492E8 */
 extern u8            g_CameraMatrix[];
 /* D_80149308 */
+/* A unit that must re-read the target after storing it defines
+ * AREA_SCROLL_TARGET_VOLATILE before its first include. */
+#ifdef AREA_SCROLL_TARGET_VOLATILE
+extern volatile s32  g_AreaScrollTargetX;
+#else
 extern s32           g_AreaScrollTargetX;
+#endif
 /* D_8014930C */
 extern s32           g_AreaScrollTargetY; /* 0x8014930C */
 extern s32           D_80149310;

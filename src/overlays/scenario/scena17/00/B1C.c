@@ -1,3 +1,4 @@
+#define AREA_SCROLL_TARGET_VOLATILE
 #include "scena17_00.h"
 
 #if BOF3_USE_ASM
