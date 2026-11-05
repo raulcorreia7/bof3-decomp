@@ -15,8 +15,10 @@ MATCH void func_801EEC04(void) {
  * 0x801EEC5C); plain, saved-target and hybrid target forms all give the same schedule. */
 INCLUDE_ASM(func_801EEC5C);
 
-/* Regalloc: the m2c draft with the arg-less else call matches except that the spad pointer and
- * the halfword value swap v0/v1; first difference lui v0 at 0x801EECF4. */
+/* Regalloc: the no-local form (inline cell reads, arg-less else call) differs only in the tie
+ * where the spad pointer takes v1 and the half value v0 (first difference lui v1, 0x801EECF4); a
+ * u8 local reproduces retail's v0/v1 roles but materializes andi a0,a0,0xff for the promoted call
+ * argument (0x801EED0C), and an s32 or register local loses both. */
 INCLUDE_ASM(func_801EECE4);
 
 INCLUDE_ASM(func_801EED94);
