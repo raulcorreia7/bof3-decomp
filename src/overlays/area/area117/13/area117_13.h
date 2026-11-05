@@ -6,6 +6,10 @@
 
 #include "overlays/area/world03.h"
 
+/* The scroll target position the step checks compare against. */
+extern s32 D_80145EC4;
+extern s32 D_80145EC8;
+
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0x1C
 
