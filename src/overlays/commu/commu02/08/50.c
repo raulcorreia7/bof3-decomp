@@ -27,7 +27,30 @@ MATCH void func_801D0DA4(void) {
     SYS_DISPATCH_BYTE(D_801DABE0, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D0DE0);
+MATCH void func_801D0DE0(void) {
+    s8 temp_v1;
+    u8 check;
+
+    if (D_801F294E == 0) {
+        D_801DB0C4 = 4;
+        SND_PlayCue(0x102U);
+        D_801F294E += 1;
+        return;
+    }
+    temp_v1    = (u8)D_801DB0C4 - 1;
+    D_801DB0C4 = temp_v1;
+    func_801D3184(0x6E - ((temp_v1 & 0xFF) * 0x28), 0x48);
+    func_801D32A0(0x6E - ((u8)D_801DB0C4 * 0x28), 0x74, 1);
+    check = D_801DB0C4;
+    if (check == 0) {
+        Message_StartAreaMessage(0x71);
+        g_GameStateIndex = 2;
+        D_801DB07C       = 0;
+        D_801DB0B4       = 0;
+        D_801F294E       = 0;
+        D_801F294D += 1;
+    }
+}
 
 MATCH void func_801D0EEC(void) {
     func_801D3184(0x6E, 0x48);
