@@ -99,10 +99,7 @@ MATCH void func_801CF6C8(void) {
     SYS_DISPATCH_TASK(D_801D03EC, 2, g_SpadWork);
 }
 
-/* plchar/plp056/00 func_801CF70C template: exact match, twin body in
- * plp457/00 func_801CEC60; left as assembly so the quality names ratchet does
- * not rise against the one-call func_801CF70C in plp016/00. */
-INCLUDE_ASM(func_801CF70C);
+#include "overlays/plchar/Char_StartFacingTurn.h"
 
 MATCH void Char_RunStepScript_801CF800(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
