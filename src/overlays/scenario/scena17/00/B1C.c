@@ -438,7 +438,21 @@ INCLUDE_ASM(func_801F8FAC);
 
 INCLUDE_ASM(func_801F90BC);
 
-INCLUDE_ASM(func_801F9160);
+MATCH void func_801F9160(s16 x, s16 y) {
+    SPRT* prim;
+
+    prim = (SPRT*)g_GfxPrimCursor;
+    SetSprt(prim);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    prim->clut = 0x7B85;
+    prim->v0   = 0x40;
+    prim->w    = 0x58;
+    prim->x0   = x;
+    prim->y0   = y;
+    prim->u0   = 0;
+    prim->h    = 0x12;
+    GFX_AddPrim(1, 0x14);
+}
 
 INCLUDE_ASM(func_801F91F0);
 
