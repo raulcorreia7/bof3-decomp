@@ -2451,8 +2451,10 @@ Area_FindFreeWorkRow = { addr = 0x801178C4, type = "func", source = "finds the f
 Message_SetAnswerMessage = { addr = 0x801F2C54, type = "func", source = "stores the message id D_801F5CD8 holds for the menu choice D_801490C7 in g_MessageRequest" }
 Area_AddCameraOffsetY20 = { addr = 0x801F33E8, type = "func", source = "adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_SubCameraOffsetY20 = { addr = 0x801F3410, type = "func", source = "subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
+Area_ResetCameraOffsetY = { addr = 0x801F3438, type = "func", source = "one body shared through src/overlays/area/Area_ResetCameraOffsetY.h" }
 Area_SubCameraOffsetY4 = { addr = 0x801F3700, type = "func", source = "subtracts 4 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_AddCameraOffsetY4 = { addr = 0x801F3728, type = "func", source = "adds 4 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
+Area_ResetCameraOffsetY_801F3750 = { addr = 0x801F3750, type = "func", source = "byte-identical to Area_ResetCameraOffsetY in this image" }
 
 ["emi/world01/area050/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
