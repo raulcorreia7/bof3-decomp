@@ -319,6 +319,8 @@ MATCH void func_801F9DBC(void) {
     SYS_DISPATCH_TASK(D_801FE938, 1, g_SpadWork);
 }
 
+/* 3 differing; first at +4: candidate ori v1,v1,0x8000 against retail lui v0,0x1f80 — the
+ * 0x198000 low-half ori must fill the work load's delay slot; next lever: permuter. */
 INCLUDE_ASM(func_801F9E00);
 
 INCLUDE_ASM(func_801F9E50);
