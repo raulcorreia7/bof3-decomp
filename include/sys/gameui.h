@@ -35,12 +35,15 @@ ASSERT_OFFSET(ScriptState, cursor, 0x0A);
 
 /* The player's menu choice at 0x801490C7 (MenuState.selection_index): zero
  * while no answer is selected, nonzero once the player picks one. */
-#define MENU_SELECTION_IDLE()   (D_801490C7 == 0)
-#define MENU_SELECTION_ARMED()  (D_801490C7 != 0)
+/* An alias byte of D_801490BC.selection_index: the area overlays read it as a plain byte, and the
+ * member access changes their code. */
+extern s8 D_801490C7;
+#define MENU_SELECTION_IDLE()  (D_801490C7 == 0)
+#define MENU_SELECTION_ARMED() (D_801490C7 != 0)
 
 /* The repeatable buttons of a pad mask: INPUT_GetRepeatedButtons sees the held keys
  * filtered to the buttons that repeat. */
-#define INPUT_DIRECTIONAL       (PADLup | PADLright | PADLdown | PADLleft)
+#define INPUT_DIRECTIONAL      (PADLup | PADLright | PADLdown | PADLleft)
 #define INPUT_ACTION_BUTTONS                                                                          \
     (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADL2 | PADR1 | PADR2 | PADstart | PADselect)
 #define INPUT_REPEATED(pressed, buttons) (INPUT_GetRepeatedButtons((pressed) & (buttons)))

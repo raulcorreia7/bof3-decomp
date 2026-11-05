@@ -22,8 +22,6 @@ extern u8  D_801455C7;
 /* The battle record rows whose first byte is a slot tag. */
 extern u8  D_80145F09[][BATTLE_PARTY_STRIDE];
 /* The global state byte the area update gates on. */
-/* The selection byte that arms the area request. */
-extern s8  D_801490C7;
 extern u8  D_801F2944;
 extern u8  D_801F2945;
 extern u8  D_801F294C;

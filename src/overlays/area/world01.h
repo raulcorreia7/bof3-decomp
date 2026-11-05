@@ -19,9 +19,6 @@
 /* The shop panel step the request sets. */
 #define g_MasterSubStep          (*(s8*)&g_MasterSubStep)
 
-/* The selection byte that arms the area request. */
-extern s8 D_801490C7;
-
 u8 Game_FindAreaHandler(void);
 
 #endif

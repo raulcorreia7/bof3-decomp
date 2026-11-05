@@ -13,8 +13,6 @@
 #define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0x10
 
-/* The selection byte that arms the area request. */
-extern s8       D_801490C7;
 extern Callback D_801F5750[];
 
 /* func_8015B5F4 */

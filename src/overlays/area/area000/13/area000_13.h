@@ -7,8 +7,6 @@
 
 #include "overlays/area/world00.h"
 
-extern s8 D_801490C7;
-
 /* Resets the destination state the scratchpad work pointer selects. */
 void func_801F2CD8(void);
 
