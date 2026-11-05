@@ -19,18 +19,7 @@ INCLUDE_ASM(func_801EECCC);
 
 #include "overlays/bmagic/func_801EF09C.h"
 
-MATCH void func_801EF124(void) {
-    u8 temp_v0;
-
-    g_SpadWork->word_08.byte.unk_0B += 1;
-    g_SpadWork->word_08.byte.timer_0A -= 3;
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 2;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
-        func_801E5988();
-    }
-}
+#include "overlays/bmagic/func_801EF124.h"
 
 #include "overlays/bmagic/func_801EF1B8.h"
 
