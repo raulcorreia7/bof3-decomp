@@ -7,7 +7,6 @@
 MATCH void func_800B232C(void) {
     D_800B6E40[BATTLE_PANEL_TASK->state]();
     /* FAKE: retail reads g_CharSlot as u8[]. */
-    func_800B3324(((u8*)g_CharSlot)[D_80144F5D[((u8*)g_MenuCurrentPanel)[0xC]]], ((u16*)g_MenuCurrentPanel)[2],
-                  ((u16*)g_MenuCurrentPanel)[3], ((s32*)g_MenuCurrentPanel)[8], BATTLE_PANEL_TASK->cursor,
-                  g_MenuCurrentPanel);
+    func_800B3324(((u8*)g_CharSlot)[D_80144F5D[g_MenuCurrentPanel->unk_0C]], g_MenuCurrentPanel->x,
+                  g_MenuCurrentPanel->y, ((s32*)g_MenuCurrentPanel)[8], BATTLE_PANEL_TASK->cursor, g_MenuCurrentPanel);
 }
