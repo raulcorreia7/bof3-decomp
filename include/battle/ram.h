@@ -176,7 +176,10 @@ extern u8 g_BattleCommandCount;
 /* D_80146324 */
 extern u8     g_BattleSurprise;
 extern Spoils D_80146326;
-extern s32    D_80146330;
+/* D_80146330 */
+extern s32    g_BattleSpoilsZenny;
+/* D_8014632C */
+extern u32    g_BattleSpoilsExp;
 
 /* The kind of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
 enum {

@@ -30,7 +30,7 @@ MATCH void func_8009B2B0(void) {
                 enemy_sum += D_801EB630[slot].stats.agility;
             }
         }
-        divisor = D_801462F3;
+        divisor = g_BattleLivingEnemyCount;
         enemy_sum /= divisor;
 
         for (slot = 0; slot < (*(u8*)&g_BattlePartyCount); slot++) {

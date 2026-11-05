@@ -68,7 +68,8 @@ extern volatile u8                  g_BattleUiState;
 extern volatile u8                  g_BattlePanelEntry;
 /* D_801462EC */
 extern volatile u8                  g_BattleScrollDir;
-extern u8                           D_801462F3;
+/* D_801462F3 */
+extern u8                           g_BattleLivingEnemyCount;
 extern volatile u8                  D_80146322;
 extern volatile u8                  D_80146323;
 /* Main-executable battle-selection cell consumed by the countdown arm. */

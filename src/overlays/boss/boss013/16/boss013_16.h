@@ -25,7 +25,6 @@ extern u8           D_80146322;
 /* The selection-kind byte: battle/ram.h names the cell as g_BattleActiveBattler but
  * declares only the 6375 byte. */
 extern u8           g_BattleActiveBattler;
-extern s32          D_8014632C;
 extern u16          D_801EB6B6;
 extern u16          D_801EB7CE;
 extern PartyBattler D_801EB860;

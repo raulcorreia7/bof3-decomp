@@ -1,24 +1,22 @@
 #include "battle_03.h"
 
-extern volatile s32 D_8014632C;
-
 MATCH void func_801E54EC(void) {
     u8            count;
     int           new_var;
-    volatile s32* acc;
+    volatile u32* acc;
 
     g_Task->flags = g_Task->flags | ACTOR_FLAG_HIDDEN;
-    acc           = &D_8014632C;
+    acc           = &g_BattleSpoilsExp;
     *acc += g_BattleCurrentEnemy->exp;
     ORDER_LOCK_BEGIN
-        D_80146330 += g_BattleCurrentEnemy->zenny;
+        g_BattleSpoilsZenny += g_BattleCurrentEnemy->zenny;
         g_BattleCurrentEnemy->status |= STATUS_KO;
         g_BattleCurrentEnemy->zenny = 0;
         func_801DD14C(g_Task->slot);
         func_801E531C();
-        count      = D_801462F3 - 1;
-        D_801462F3 = count;
-        new_var    = count == 0;
+        count                    = g_BattleLivingEnemyCount - 1;
+        g_BattleLivingEnemyCount = count;
+        new_var                  = count == 0;
         if (new_var) {
             g_BattleResult |= BATTLE_RESULT_VICTORY;
         }

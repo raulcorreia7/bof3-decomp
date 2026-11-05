@@ -12,7 +12,7 @@ MATCH void func_800AD5C8(void) {
         count = work->unk_0B;
         base  = (u16*)(&D_80148628);
         do {
-            if (D_801463C4[i] == count) {
+            if (g_BattleGenes[i] == count) {
                 work->unk_2E.half = base[0] + (i * 0x18 + 0x41);
                 work->unk_30.half = base[1] + 0x12;
                 return;

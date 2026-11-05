@@ -8,7 +8,7 @@ MATCH bool func_800A82A0(u8 selection_id) {
     index = 0;
     if (count != 0) {
         do {
-            if (D_801463C4[index] == selection_id) {
+            if (g_BattleGenes[index] == selection_id) {
                 return true;
             }
             index++;

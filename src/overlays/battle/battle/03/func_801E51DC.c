@@ -9,7 +9,7 @@ MATCH void func_801E51DC(void) {
     u8           count;
 
     func_801DD14C(g_Task->slot);
-    timer  = &D_801462F3;
+    timer  = &g_BattleLivingEnemyCount;
     count  = *timer - 1;
     *timer = count;
     if ((count & BYTE_MASK) == 0) {

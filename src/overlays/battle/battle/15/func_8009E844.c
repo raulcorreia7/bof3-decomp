@@ -26,7 +26,7 @@ MATCH void func_8009E844(void) {
                 ((s16*)g_BattleTargetRecord)[2] = (s16)(-(s32)D_801EB6D0[battler - 3u][0] >> 2);
                 /* FAKE: retail keeps the selection store before the counter update. */
                 MATCH_FAKE_BARRIER();
-                D_801462F3++;
+                g_BattleLivingEnemyCount++;
             }
             func_800A36F0(g_BattleTarget, 0x4000);
             return;

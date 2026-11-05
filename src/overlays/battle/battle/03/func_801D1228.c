@@ -1,7 +1,5 @@
 #include "battle_03.h"
 
-extern s32 D_8014632C;
-
 /* Resets the battle: clears the battle state, the living player
  * count and the per-slot rows, then hands the first live battler the work
  * pointer.
@@ -42,8 +40,8 @@ NON_MATCHING void func_801D1228(void) {
     g_BattleState          = 0;
     g_BattleResult         = 0;
     D_801463D0             = 1;
-    D_80146330             = 0;
-    D_8014632C             = 0;
+    g_BattleSpoilsZenny    = 0;
+    g_BattleSpoilsExp      = 0;
     D_80146326.attempts    = 0;
     g_BattleBossFlags      = 0;
     D_801463BA             = 0;
