@@ -220,11 +220,10 @@ MATCH void func_801D35A4(void) {
     SYS_DISPATCH_BYTE(D_801DACC4, D_801F294D);
 }
 
-/* Tried: straight body (D_801DB0CC = bgm; SND_StopSequence(cues[id<<2],
- * D_80181EBB[id<<2]); SND_RequestBgm(148); D_801F294D++). GCC hoists the
- * g_SndBgmId load to v1 (retail v0); pinning bgm to v0 keeps the hoisted
- * load but GCC reorders the prologue after the arg loads and inserts a
- * nop after the hoisted load. First diff: 0x801D35E0 lui v1 vs v0.
+/* Blocked on a header type: include/sys/gameui.h declares g_SelectionCues and D_80181EBB as
+ * const u8[]. The const lets GCC hoist their loads above the D_801DB0CC store. A u8 view matches
+ * (tested body: D_801DB0CC = g_SndBgmId; SND_StopSequence(cues[id * 4], D_80181EBB[id * 4]);
+ * SND_RequestBgm(0x94); D_801F294D += 1). First diff with const: 0x801D35E0 lui v1 vs v0.
  */
 INCLUDE_ASM(func_801D35E0);
 
