@@ -72,6 +72,7 @@ Every page: [docs/README.md](docs/README.md). Run the quality pass
 
 Docs, comments, commit messages and pull requests follow one standard.
 
+- **Current.** Present tense, no history.
 - **What, not how.** Say what a thing does and why. The code shows how.
 - **ASD-STE100** is the basis for technical text: short sentences, one instruction per sentence,
   active voice, one term for one concept, numbered steps for a procedure. Exact technical terms
@@ -84,3 +85,4 @@ Docs, comments, commit messages and pull requests follow one standard.
   5. Never use a foreign phrase, a scientific word or a jargon word if you can think of an everyday
      English equivalent.
   6. Break any of these rules sooner than say anything outright barbarous.
+- Comments say what, never how: one line, only where a name cannot say it ([standard](https://github.com/raulcorreia7/bof3/blob/main/docs/standard.md#comments)).
