@@ -37,7 +37,21 @@ MATCH void func_801F78E0(void) {
     func_801F8EF0();
 }
 
-INCLUDE_ASM(func_801F7924);
+MATCH void func_801F7924(void) {
+    u8* step;
+
+    if (g_UiWindowEffectBusy == 0) {
+        g_AreaScrollTargetX = 0xB00000;
+        g_AreaScrollTargetY = 0x138000;
+        func_80153DE8();
+        g_AreaSceneMode = 4;
+        SND_RequestBgm(0x96);
+        UI_SetMode(1);
+        func_801F88CC(0, 0x80);
+        step = &D_80146874;
+        *step += 1;
+    }
+}
 
 MATCH void func_801F79AC(void) {
     if ((g_UiWindowEffectBusy == 0) && (EMI_LoaderIsReady() != 0)) {
