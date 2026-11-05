@@ -51,18 +51,18 @@ MATCH void func_801D2EAC(void) {
             return;
         }
         {
-            u8*  step         = &D_80148651;
-            s32  group        = D_80148504.group;
-            s32  group_cursor;
-            u8   next;
+            u8* step  = &D_80148651;
+            s32 group = D_80148504.group;
+            s32 group_cursor;
+            u8  next;
 
-            next                     = *step;
-            D_80148504.group_first   = s_ChoiceMenuValues[group];
-            group_cursor             = s_ChoiceMenuCursors[group];
-            next                    += 1;
-            D_80148504.drawn_cursor  = 0xFF;
-            *step                    = next;
-            D_80148504.group_cursor  = group_cursor;
+            next                   = *step;
+            D_80148504.group_first = s_ChoiceMenuValues[group];
+            group_cursor           = s_ChoiceMenuCursors[group];
+            next += 1;
+            D_80148504.drawn_cursor = 0xFF;
+            *step                   = next;
+            D_80148504.group_cursor = group_cursor;
             return;
         }
     }
