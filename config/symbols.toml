@@ -679,6 +679,7 @@ BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback
 Effect_PlayOnIdleTick = { addr = 0x801EEFB0, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
 Effect_CountUpTimerCallSelector = { addr = 0x801EF2EC, type = "func", source = "lowers the effect ticker byte at +0x0B, counts the effect timer at +0x09 up and, at 24, calls func_800A9610 with g_BattleTargetSelector and 0x10 and advances the effect step byte at +0x02; one body shared with the other bmagic overlays" }
 Effect_CountUpAndStepAt120 = { addr = 0x801EF374, type = "func", source = "counts the effect timer at +0x09 up and advances the effect step byte at +0x02 at 120; one body shared with the other bmagic overlays" }
+Effect_CountUpAndFinishAt136 = { addr = 0x801EF3C4, type = "func", source = "raises the effect ticker, lowers the work byte at +0x04 and counts the counter at +0x09; at 136 it sets the active battler's ticker to 0xFF and clears the effect; one body shared with the other bmagic overlays" }
 Effect_SetActorMatrix = { addr = 0x801F0BF8, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
 g_BMagicEffectFuncs = { addr = 0x801F0CA8, source = "the module dispatcher indexes it with the shared spad step byte" }
 
@@ -691,6 +692,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0C38, source = "the module dispatcher index
 Effect_PlayOnIdleTick = { addr = 0x801EEDFC, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
 Effect_CountUpTimerCallSelector = { addr = 0x801EF1C4, type = "func", source = "lowers the effect ticker byte at +0x0B, counts the effect timer at +0x09 up and, at 24, calls func_800A9610 with g_BattleTargetSelector and 0x10 and advances the effect step byte at +0x02; one body shared with the other bmagic overlays" }
 Effect_CountUpAndStepAt120 = { addr = 0x801EF24C, type = "func", source = "counts the effect timer at +0x09 up and advances the effect step byte at +0x02 at 120; one body shared with the other bmagic overlays" }
+Effect_CountUpAndFinishAt136 = { addr = 0x801EF29C, type = "func", source = "raises the effect ticker, lowers the work byte at +0x04 and counts the counter at +0x09; at 136 it sets the active battler's ticker to 0xFF and clears the effect; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F02CC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic123/03"]
