@@ -1,4 +1,4 @@
 #include "area198_13.h"
 
-/* Body: every eighth frame with g_ScriptVars[0] >= 3, play cue 0 when unk_0B is a multiple of 8, call func_801F36B4 (twice from 4 up), then rewind the script cursor by 2. First differing instruction: addiu sp,sp,-32 (retail keeps &g_ScriptVars in s0 across the calls); a u8* local and the direct array reads fold the address into each use. */
+/* resume: best 2 differing (the unk_0B byte load lands in v0 where retail keeps v1, the g_SpadWork pointer register; the retail frame carries 8 unused bytes - STACK_PADS(u8, 8) with a FAKE note fixes the frame rows); first `!` +0x44 (lbu v1 vs v0); next lever: the permuter on the load register tie, tried byte local and work local. */
 INCLUDE_ASM(func_801F3600);

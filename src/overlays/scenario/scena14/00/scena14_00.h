@@ -23,5 +23,6 @@ extern u8 D_80146874;
 extern u8 D_80146875;
 
 extern u8 D_80144908[];
+extern s8 D_801FC44C[];
 
 #endif

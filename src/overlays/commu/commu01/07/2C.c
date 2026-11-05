@@ -75,6 +75,7 @@ INCLUDE_ASM(func_801D4178);
 
 INCLUDE_ASM(func_801D42DC);
 
+/* 2 differences; +0x60 returns early without the retail s16 shift pair; try the result type. */
 INCLUDE_ASM(func_801D4474);
 
 INCLUDE_ASM(func_801D44E0);
