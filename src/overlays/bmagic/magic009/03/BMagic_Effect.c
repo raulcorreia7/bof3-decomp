@@ -14,8 +14,14 @@ INCLUDE_ASM(func_801EEF08);
 
 #include "overlays/bmagic/Effect_NextStepOnWorkZeroTick.h"
 
-/* Pointer and saved-target forms: first difference is lui v1 at 0x801EF0A0. */
-INCLUDE_ASM(func_801EF09C);
+MATCH void func_801EF09C(void) {
+    u16* battle_flags;
+
+    battle_flags = &g_BattleState;
+    *battle_flags |= 0x2004;
+    func_800A9820(*(battle_flags = &g_BattleTargetSelector));
+    func_801E5988();
+}
 
 MATCH void func_801EF0DC(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
