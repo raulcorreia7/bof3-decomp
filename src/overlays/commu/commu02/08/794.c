@@ -73,6 +73,7 @@ MATCH void func_801D1938(void) {
 
 INCLUDE_ASM(func_801D1A50);
 
+/* 12 differing: +0x44 loads the index before the counter; change loop register allocation. */
 INCLUDE_ASM(func_801D1D68);
 
 INCLUDE_ASM(func_801D1E98);
