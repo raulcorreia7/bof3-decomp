@@ -2536,9 +2536,11 @@ g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApply
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 
 ["emi/world02/area095/13"]
+Area_FlipStoredActorFacingX = { addr = 0x801F35F0, type = "func", source = "turns the actor stored in scratch cell 0x44 to face the other horizontal way (facing 3 right, 7 left from g_FacingOffsets); one body shared through overlays/area/Area_FlipStoredActorFacingX.h" }
 Area_UpdateCameraHeight = { addr = 0x801F3618, type = "func", source = "stores the ground height at the party position D_80145EC4/D_80145EC8 in g_AreaCameraHeight, 0x20 lower when the camera already sits at that height, and advances g_AreaCameraRefreshCount by 2 (func_801F3618 in area095/13, func_801F35A8 in area096/13)" }
 
 ["emi/world02/area096/13"]
+Area_FlipStoredActorFacingX = { addr = 0x801F3580, type = "func", source = "turns the actor stored in scratch cell 0x44 to face the other horizontal way (facing 3 right, 7 left from g_FacingOffsets); one body shared through overlays/area/Area_FlipStoredActorFacingX.h" }
 Area_UpdateCameraHeight = { addr = 0x801F35A8, type = "func", source = "stores the ground height at the party position D_80145EC4/D_80145EC8 in g_AreaCameraHeight, 0x20 lower when the camera already sits at that height, and advances g_AreaCameraRefreshCount by 2 (func_801F3618 in area095/13, func_801F35A8 in area096/13)" }
 
 ["emi/world02/area098/13"]
