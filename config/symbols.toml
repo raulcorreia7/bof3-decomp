@@ -219,6 +219,7 @@ g_BMagicEffectFuncs = { addr = 0x801F1630, source = "the module dispatcher index
 
 ["emi/bmagic/magic017/03"]
 BMagic_RunStep = { addr = 0x801EEC38, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
+Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF68, type = "func", source = "advances the active battler's script step through func_800AEF98, clears its flag bit 0x40 and advances the effect step once the effect ticker at +0x0B is zero; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801EF990, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic020/03"]
@@ -228,6 +229,7 @@ Effect_PlayOnce = { addr = 0x801EF350, type = "func", source = "plays the effect
 g_BMagicEffectFuncs = { addr = 0x801EFEB8, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic021/03"]
+Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF38, type = "func", source = "advances the active battler's script step through func_800AEF98, clears its flag bit 0x40 and advances the effect step once the effect ticker at +0x0B is zero; one body shared with the other bmagic overlays" }
 Effect_StartPlaying = { addr = 0x801EEFA8, type = "func", source = "byte-identical to Effect_StartPlaying at emi/bmagic/magic001/00@0x801EEFA4" }
 Effect_ReloadTimerAndStep = { addr = 0x801EF0BC, type = "func", source = "reloads the effect timer with the value func_800AFF98 returns and advances the effect step" }
 Effect_CountUpByTwoAndStep = { addr = 0x801EF750, type = "func", source = "counts the effect timer up by two and advances the effect step at 0x10" }
