@@ -172,6 +172,7 @@ MATCH void Effect_CountDownAndStep_801F0C98(void) {
     BMAGIC_COUNT_DOWN_AND_STEP();
 }
 
+/* Best 7 differences: lui a0 at 0x801F0CE4; adjust register allocation. */
 INCLUDE_ASM(func_801F0CE4);
 
 MATCH void Effect_SetActorMatrix_801F0D44(void) {
