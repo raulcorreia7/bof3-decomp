@@ -8,6 +8,8 @@
 
 extern u32       D_801F6C00;
 extern u8        D_80144908[];
+extern u8        D_80146874;
+extern u8        D_80146875;
 extern Callback  D_801FE3E0[];
 extern Callback  D_801FE3EC[];
 extern SceneFunc D_801FE434[];

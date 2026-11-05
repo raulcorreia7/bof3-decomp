@@ -69,7 +69,16 @@ INCLUDE_ASM(func_801FAE0C);
 
 INCLUDE_ASM(func_801FBC78);
 
-INCLUDE_ASM(func_801FBD0C);
+void func_801FBD0C(void) {
+    u8* timer;
+
+    timer = &D_80146875;
+    if (*timer == 0 && g_GameStateIndex != 2) {
+        func_801BE1B0(1);
+        D_80146874 = 0;
+        *timer     = 0;
+    }
+}
 
 INCLUDE_ASM(func_801FBD6C);
 
