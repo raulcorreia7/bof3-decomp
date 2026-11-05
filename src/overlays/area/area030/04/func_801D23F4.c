@@ -50,8 +50,7 @@ MATCH void func_801D23F4(void) {
         work_d          = (FishingState*)g_SpadWork;
         step            = work_d->step_14 + work_d->step_limit_20;
         work_d->step_14 = step;
-        if (((work_d->cursor_10 + *(s32*)((u8*)&D_801E1D58 + work_d->cue_index_06 * 8)) < work_d->y_38.pos_y) &&
-            (step < 0)) {
+        if (((work_d->cursor_10 + D_801E1D58[work_d->cue_index_06].offset_00) < work_d->y_38.pos_y) && (step < 0)) {
             work_d->step_14       = 0;
             work_d->step_limit_20 = 0;
         }

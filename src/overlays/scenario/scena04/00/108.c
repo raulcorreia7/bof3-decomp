@@ -31,6 +31,8 @@ MATCH void func_801F6D44(void) {
     g_SpadWork->unk_01 += 1;
 }
 
+/* 16 differing; first at +4: retail hoists li a0,0x10 ahead of the s0 save and interleaves the
+ * loads and the arg build (candidate 0xCC against 0xD0); next lever: permuter on the schedules. */
 INCLUDE_ASM(func_801F6DD4);
 
 MATCH void func_801F6EA4(void) {
