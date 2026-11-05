@@ -143,7 +143,17 @@ MATCH void func_801EF81C(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801EF83C);
+MATCH void func_801EF83C(void) {
+    BattleHandlerTable3 handlers;
+
+    handlers     = D_801EEC44;
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
+    if ((g_SpadWork->flags_00 & 1) && (D_801EB4E0->word_08.byte.timer_0A == 0)) {
+        func_8014D290();
+    }
+    g_ScriptBank = 0x800D3800;
+}
 
 INCLUDE_ASM(func_801EF900);
 
