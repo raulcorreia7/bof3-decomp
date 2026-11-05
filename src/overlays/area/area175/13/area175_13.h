@@ -31,5 +31,4 @@ extern u8 D_801F45EC[];
 void func_801EECA4(void);
 void Area_ProjectPoint(s32* pos, long* screen_xy);
 
-
 #endif
