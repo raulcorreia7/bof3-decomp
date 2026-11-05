@@ -277,7 +277,18 @@ INCLUDE_ASM(func_801F9AC0);
 
 INCLUDE_ASM(func_801F9B68);
 
-INCLUDE_ASM(func_801F9C00);
+MATCH void func_801F9C00(void) {
+    Actor* work;
+
+    work          = g_SpadWork;
+    work->x.fixed = 0x270000;
+    work->y.fixed = 0x80000;
+    work->z.fixed = 0x8000000;
+    work->vz      = 0;
+    work->unk_01 += 1;
+    SND_PlayCue(0x204);
+    SND_PlayCue(0x205);
+}
 
 INCLUDE_ASM(func_801F9C58);
 
