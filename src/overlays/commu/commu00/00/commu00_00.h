@@ -254,7 +254,7 @@ extern FairyVillageData D_801F24FC_Data;
 
 /* The scratchpad work pointer; each overlay types the pointee for its mode. */
 
-bool Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
+bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 void func_801D3568(void);
 void func_801D5034(void);
 void func_801D5D5C(void);

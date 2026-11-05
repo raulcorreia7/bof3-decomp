@@ -34,7 +34,7 @@ MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
             color = 7;
         }
         if (g_MenuCommandRows[row][1 + i] == 8 && (u8)Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) == 0 &&
-            (Party_CountItem(0, ITEM_SKILL_INK, 0) & HALF_MASK) == 0) {
+            (Item_Count(0, ITEM_SKILL_INK, 0) & HALF_MASK) == 0) {
             color = 7;
         }
         label       = g_MenuCommandLabels[g_MenuCommandRows[row][1 + i]];

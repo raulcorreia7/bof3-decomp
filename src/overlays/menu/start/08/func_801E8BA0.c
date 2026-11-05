@@ -7,7 +7,7 @@ MATCH s32 func_801E8BA0(void) {
     u8*  counter_address;
     u16* global_counter;
 
-    Party_AddItem(ITEM_CAT_ITEM, ITEM_FAERIE_TIARA, 1, 0);
+    Item_Add(ITEM_CAT_ITEM, ITEM_FAERIE_TIARA, 1, 0);
     bit_index       = 255;
     bitset          = g_SceneEventFlags;
     counter_address = &D_8014869D;

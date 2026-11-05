@@ -30,7 +30,7 @@ extern Callback     D_801F0CA4[];
 extern Callback     D_801F0CB8[];
 extern Callback     D_801F0CC0[];
 extern char         D_801F0CD0[];
-extern bool         Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
+extern bool         Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 extern void         UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 
 #endif

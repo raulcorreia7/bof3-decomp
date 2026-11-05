@@ -302,7 +302,7 @@ extern Callback g_MenuCampFuncs[5];
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
 void        UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
-extern bool Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
+extern bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 extern bool Char_RestoreHp(s32 character_index, s32 amount, s32 use_battle_copy);
 extern s32  Char_RestoreAp(s32 character_index, s32 amount, s32 use_battle_copy);
 extern s32  Char_AddCappedStat(u16* value, s32 delta);
@@ -629,7 +629,7 @@ extern s8        D_801ED678;
 extern s8        D_801ED67C;
 extern u8        D_801ED69C;
 extern s32       D_801ED878;
-extern s32       Party_CountItem(u8 category, u8 item, u8 mode);
+extern s32       Item_Count(u8 category, u8 item, u8 mode);
 
 /* Pick the party record the record index selects: record 0 is the saved
  * Character, any other is the Character copy inside the battle row. */

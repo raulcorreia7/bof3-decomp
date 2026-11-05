@@ -522,7 +522,7 @@ MATCH void func_801F31C4(void) {
 }
 
 MATCH void func_801F31EC(void) {
-    Party_AddItem(ITEM_CAT_VITAL, VITAL_ITEM_EGG, 1, 0);
+    Item_Add(ITEM_CAT_VITAL, VITAL_ITEM_EGG, 1, 0);
     SND_PlayCue(EMI_CUE_ID(1, 6));
     SYS_SetFlag(g_SceneFlags, 0x33u);
 }

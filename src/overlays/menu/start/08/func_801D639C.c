@@ -66,7 +66,7 @@ MATCH void func_801D639C(void) {
     if (g_InputPressed & D_80145AC2) {
         if (slot_flag != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
-            Party_AddItem(group_index, *choice, 1, 0);
+            Item_Add(group_index, *choice, 1, 0);
             *choice = 0;
             Char_RebuildStats((Character*)record);
             func_801D6E6C();

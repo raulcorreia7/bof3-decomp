@@ -547,8 +547,8 @@ s8   Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, 
 s32  func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 void func_8015D820(u16 cue_id, u8 index);
 void func_80164020(u32 arg0, u32 arg1);
-bool Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
-s32  Party_CountItem(u8 category, u8 item, u8 mode);
+bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
+s32  Item_Count(u8 category, u8 item, u8 mode);
 u8   Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void GFX_StagePalette(u8* dst, s32 field);
 void Party_ResetBattlers(void);

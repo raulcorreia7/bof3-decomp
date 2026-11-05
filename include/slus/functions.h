@@ -302,11 +302,11 @@ bool         Item_VitalHas(s32 item_id);
 /* func_8016620C */
 void         TEXT_SetVariable(u8 slot, u8 length, const u8* text);
 /* func_80166438 */
-s32          Party_CountInventory(u32 category);
+s32          Item_CountHeld(u32 category);
 /* func_801664A0 */
 s32          Party_CountAbilities(u8 character_index, u8 ability_kind, u8 mode);
 /* func_801665A0 */
-u8           Party_RemoveItem(s32 category, u8 item, s32 amount, s32 unused);
+u8           Item_Remove(s32 category, u8 item, s32 amount, s32 unused);
 /* func_8016663C */
 s32          Party_SpendZenny(u32 amount, s32 unused);
 /* func_8016666C */

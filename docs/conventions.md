@@ -88,7 +88,7 @@ while (i < 3) { Party_ResetMember(i); i++; }
 | Thing                                    | Form                        | Example                                  |
 | ---------------------------------------- | --------------------------- | ---------------------------------------- |
 | system function                          | `TAG_PascalName`            | `SND_PlayCue`, `EMI_LoaderInit`          |
-| game function                            | `Tag_PascalName`            | `Battle_ApplyDamage`, `Party_AddItem`    |
+| game function                            | `Tag_PascalName`            | `Battle_ApplyDamage`, `Item_Add`         |
 | global                                   | `g_` + tag word + name      | `g_BattleActors`, `g_SndVolume`          |
 | file static                              | `s_` + tag word + name      | `s_BattleDamageScale`                    |
 | type                                     | PascalCase, no tag, no `_t` | `Battler`, `PartyBattler`, `ScreenPoint` |
@@ -119,7 +119,7 @@ extern PartyRef g_PartyView;             /* how it was found */
 extern u8  g_PartyCount;
 static s16 s_BattleDamageScale;
 
-void Party_AddItem(u16 item_id, u8 item_count);
+void Item_Add(u16 item_id, u8 item_count);
 ```
 
 **Don't**
@@ -330,7 +330,7 @@ enum {
     /* ... */
 };
 
-void Party_AddItem(u16 item_id, u8 item_count);
+void Item_Add(u16 item_id, u8 item_count);
 ```
 
 **Don't**
@@ -338,7 +338,7 @@ void Party_AddItem(u16 item_id, u8 item_count);
 ```c
 typedef u16 ItemId;                                        /* a name the compiler never checks */
 typedef enum ItemId { ITEM_ID_HEALING_HERB = 1 } ItemId;
-void Party_AddItem(ItemId item, u8 count);                 /* an int where retail passes a u16 */
+void Item_Add(ItemId item, u8 count);                 /* an int where retail passes a u16 */
 ```
 
 ### Types
@@ -1498,7 +1498,7 @@ These stay:
 
 ```c
 /* Add item_count of item_id to the bag; the stack stops at ITEM_STACK_MAX. */
-void Party_AddItem(u16 item_id, u8 item_count);
+void Item_Add(u16 item_id, u8 item_count);
 
 /* @bug reads one row past g_ShopStock when shop_index is SHOP_COUNT. */
 

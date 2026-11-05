@@ -85,10 +85,10 @@ MATCH void func_801D0FAC(void) {
 
 MATCH void func_801D1018(void) {
     if (g_MenuStatusItems.unk_08 != 0) {
-        Party_RemoveItem(ITEM_CAT_ITEM, 0x4DU, g_MenuStatusItems.used[0], 0);
-        Party_RemoveItem(ITEM_CAT_ITEM, 0x23U, g_MenuStatusItems.used[1], 0);
-        Party_RemoveItem(ITEM_CAT_ITEM, 0x24U, g_MenuStatusItems.used[2], 0);
-        Party_RemoveItem(ITEM_CAT_ITEM, 0x56U, g_MenuStatusItems.used[3], 0);
+        Item_Remove(ITEM_CAT_ITEM, 0x4DU, g_MenuStatusItems.used[0], 0);
+        Item_Remove(ITEM_CAT_ITEM, 0x23U, g_MenuStatusItems.used[1], 0);
+        Item_Remove(ITEM_CAT_ITEM, 0x24U, g_MenuStatusItems.used[2], 0);
+        Item_Remove(ITEM_CAT_ITEM, 0x56U, g_MenuStatusItems.used[3], 0);
         D_80146875 = 0x14;
         func_801D1EE8();
         if (D_801DA044 >= 0x33) {
@@ -169,10 +169,10 @@ INCLUDE_ASM(func_801D1A20);
 INCLUDE_ASM(func_801D1B58);
 
 MATCH void func_801D1CA4(void) {
-    g_MenuStatusItems.held[0] = Party_CountItem(ITEM_CAT_ITEM, 77, 0);
-    g_MenuStatusItems.held[1] = Party_CountItem(ITEM_CAT_ITEM, 35, 0);
-    g_MenuStatusItems.held[2] = Party_CountItem(ITEM_CAT_ITEM, 36, 0);
-    g_MenuStatusItems.held[3] = Party_CountItem(ITEM_CAT_ITEM, 86, 0);
+    g_MenuStatusItems.held[0] = Item_Count(ITEM_CAT_ITEM, 77, 0);
+    g_MenuStatusItems.held[1] = Item_Count(ITEM_CAT_ITEM, 35, 0);
+    g_MenuStatusItems.held[2] = Item_Count(ITEM_CAT_ITEM, 36, 0);
+    g_MenuStatusItems.held[3] = Item_Count(ITEM_CAT_ITEM, 86, 0);
 }
 
 /* Tried: store-seq body with the status block declared in shisu_00.h.

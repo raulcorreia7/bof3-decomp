@@ -26,7 +26,7 @@ NON_MATCHING s32 func_8009AC18(void) {
     if ((*slots[g_BattleItemRow] == 0) || (g_BattleItemRow == 0)) {
         return 0;
     }
-    Party_AddItem(D_800B44B8[g_BattleItemRow], *slots[g_BattleItemRow], 1, 0);
+    Item_Add(D_800B44B8[g_BattleItemRow], *slots[g_BattleItemRow], 1, 0);
     *slots[g_BattleItemRow] = 0;
     Char_RebuildStats(base);
     if (g_BattlePartyCount != 0) {

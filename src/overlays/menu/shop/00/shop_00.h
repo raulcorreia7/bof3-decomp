@@ -342,9 +342,9 @@ extern u8          D_801E6264[];
 
 void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 void func_80164D2C(u8 idx, u8 sel, u8 val, u8* flags, u16* dst);
-bool Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
+bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 u32  Char_ClearStatus(u8 index, u16 mask, u8 mode);
-s32  Party_CountItem(u8 category, u8 item, u8 mode);
+s32  Item_Count(u8 category, u8 item, u8 mode);
 s32  Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void Area_RunSetupStream(s32 cursor);
 void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);

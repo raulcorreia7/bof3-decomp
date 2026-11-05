@@ -31,8 +31,8 @@ NON_MATCHING void func_8009A744(void) {
         value = s_BattleEquipment[i];
         if (value != 0) {
             if (value != *slots[i]) {
-                Party_RemoveItem(D_800B44B0[i], value, 1, 0);
-                Party_AddItem(D_800B44B0[i], *slots[i], 1, 0);
+                Item_Remove(D_800B44B0[i], value, 1, 0);
+                Item_Add(D_800B44B0[i], *slots[i], 1, 0);
                 *slots[i] = s_BattleEquipment[i];
             }
         }

@@ -29,11 +29,11 @@ MATCH void func_801E3284(MenuPanelTask* task) {
     UI_DrawGlyphString((s16)(task->x + 137), (s16)(task->y + 7), 0U, text);
     UI_DrawText((s16)(task->x + 14), (s16)(task->y + 32), 0, 0xFFU, Resource_GetText(0x27U));
 
-    sprintf((char*)text, D_801D0E98, Party_CountItem(group, key, 0U) & HALF_MASK);
+    sprintf((char*)text, D_801D0E98, Item_Count(group, key, 0U) & HALF_MASK);
     UI_DrawGlyphString((s16)(task->x + 137), (s16)(task->y + 35), 0U, text);
     UI_DrawText((s16)(task->x + 14), (s16)(task->y + 45), 0, 0xFFU, Resource_GetText(0x28U));
 
-    sprintf((char*)text, D_801D0E98, Party_CountItem(group, key, 1U) & HALF_MASK);
+    sprintf((char*)text, D_801D0E98, Item_Count(group, key, 1U) & HALF_MASK);
     UI_DrawGlyphString((s16)(task->x + 137), (s16)(task->y + 48), 0U, text);
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 896, 256) & HALF_MASK, NULL);
