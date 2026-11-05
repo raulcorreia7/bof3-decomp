@@ -171,7 +171,22 @@ INCLUDE_ASM(func_801F0648);
 
 INCLUDE_ASM(func_801F0AC8);
 
-INCLUDE_ASM(func_801F0BA8);
+MATCH void func_801F0BA8(void) {
+    PartyBattler* work;
+    s32           value;
+
+    g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
+    g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
+    g_SpadWork->word_3C.word          = D_801EB4E0->word_3C.word;
+    value                             = rand() & 0x1F;
+    work                              = g_SpadWork;
+    work->unk_5D                      = 0x10;
+    work->unk_0C                      = value;
+    g_SpadWork->word_08.byte.unk_0B   = 0;
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 4;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801F0C50(void) {
     u8 temp_v0;
