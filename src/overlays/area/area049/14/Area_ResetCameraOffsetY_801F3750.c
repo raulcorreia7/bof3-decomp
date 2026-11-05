@@ -1,7 +1,8 @@
 #include "area049_14.h"
 
+#include "overlays/area/Area_ResetCameraOffsetYStatements.h"
+
 /* func_801F3750 */
 MATCH void Area_ResetCameraOffsetY_801F3750(void) {
-    g_AreaCameraOffsetY      = 0;
-    g_AreaCameraRefreshCount = 2;
+    AREA_RESET_CAMERA_OFFSET_Y();
 }
