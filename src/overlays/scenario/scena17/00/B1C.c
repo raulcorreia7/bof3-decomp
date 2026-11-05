@@ -47,7 +47,18 @@ MATCH void func_801F79AC(void) {
     func_801F88CC(0, 0x80);
 }
 
-INCLUDE_ASM(func_801F7A08);
+MATCH void func_801F7A08(void) {
+    u8* timer;
+
+    timer  = &D_80146875;
+    *timer -= 1;
+    if (*timer == 0) {
+        SND_PlayBgm(0x96, 0x64, 0x8);
+        *timer       = 0x1E;
+        D_80146874 += 1;
+    }
+    func_801F88CC(0, 0x80);
+}
 
 MATCH void func_801F7A84(void) {
     u8* timer;
