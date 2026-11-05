@@ -30,10 +30,10 @@ u8 D_801D4020[MASTER_MENU_SPRITE_0C8_SIZE] = {
 };
 
 /* Panel stat labels. */
-char D_801D4038[MASTER_MENU_LABEL_SIZE]      = "Pwr";
-char D_801D403C[MASTER_MENU_LABEL_SIZE]      = "Def";
-char D_801D4040[MASTER_MENU_LABEL_SIZE]      = "Int";
-char D_801D4044[MASTER_MENU_LABEL_SIZE]      = "Agl";
+u8 g_MenuLabelPower[MASTER_MENU_LABEL_SIZE]      = "Pwr";
+u8 g_MenuLabelDefense[MASTER_MENU_LABEL_SIZE]      = "Def";
+u8 g_MenuLabelIntellect[MASTER_MENU_LABEL_SIZE]      = "Int";
+u8 g_MenuLabelAgility[MASTER_MENU_LABEL_SIZE]      = "Agl";
 char D_801D4048[MASTER_MENU_LABEL_LONG_SIZE] = "Pois";
 char D_801D4050[MASTER_MENU_LABEL_LONG_SIZE] = "Conf";
 
@@ -56,7 +56,7 @@ MenuPortraitSprite D_801D4058[MASTER_MENU_ATLAS_COUNT] = {
 // clang-format on
 
 /* Master skill grants: {level threshold, ability id}; {99, 0xFF} marks an empty slot. */
-MasterSkill D_801D4088[MASTER_COUNT][MASTER_SKILL_COUNT] = {
+MasterSkill g_MasterSkills[MASTER_COUNT][MASTER_SKILL_COUNT] = {
     {{2, ABILITY_RISKY_BLOW},
      {5, ABILITY_FOCUS},
      {8, ABILITY_SUPER_COMBO},
@@ -88,7 +88,7 @@ MasterSkill D_801D4088[MASTER_COUNT][MASTER_SKILL_COUNT] = {
 
 /* Master stat bonuses: hp, ap, power, defense, agility, intellect. */
 // clang-format off
-SisyouMasterStats D_801D4154[MASTER_COUNT] = {
+MasterStats g_MasterStats[MASTER_COUNT] = {
     {2, -2, 2, 1, 0, -3},
     {0, 1, -1, -1, 0, 2},
     {-1, 1, -2, 1, 0, 2},
@@ -113,7 +113,7 @@ u8 D_801D41BA = 0x00;
 u8 D_801D41BB = 0x00;
 
 /* Message ids the panels queue. */
-u16 D_801D41BC[MASTER_MENU_MESSAGE_ID_COUNT] = {
+u16 g_MasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT] = {
     64, 0, 32, 128, 128, 0, 0, 144, 0, 43, 96, 92, 112, 132, 152, 80, 3, 0,
 };
 

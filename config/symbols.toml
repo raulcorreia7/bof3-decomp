@@ -1778,6 +1778,13 @@ Menu_DrawPortrait = { addr = 0x801D23A0, type = "func", source = "draws a 40x48 
 Menu_DrawIcon = { addr = 0x801D2520, type = "func", source = "draws one MenuIconPrim from uv/clut" }
 Master_DispatchMenu = { addr = 0x801D25D8, type = "func", source = "dispatches g_MasterMenuFuncs by the panel step byte D_801D4285, etc/game/00 runs it each frame" }
 Master_ApplyMaster = { addr = 0x801D3ED0, type = "func", source = "writes the master value D_801D4270[D_801448ED] into the party record at D_80146889 + slot * 0x98 and closes the panel" }
+g_MenuLabelPower = { addr = 0x801D4038, source = "retail text Pwr, drawn beside the power stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
+g_MenuLabelDefense = { addr = 0x801D403C, source = "retail text Def, drawn beside the defense stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
+g_MenuLabelIntellect = { addr = 0x801D4040, source = "retail text Int, drawn beside the intellect stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
+g_MenuLabelAgility = { addr = 0x801D4044, source = "retail text Agl, drawn beside the agility stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
+g_MasterSkills = { addr = 0x801D4088, source = "read:func_801D3A24@0x801D3A24 compares the level of each row of the current master and teaches the row's ability" }
+g_MasterStats = { addr = 0x801D4154, source = "write:func_801D2CA4@0x801D2CA4 copies the row of the current master into the character's level_up_modifiers" }
+g_MasterMessageIds = { addr = 0x801D41BC, source = "read:func_801D2CA4@0x801D2CA4 adds an offset to the entry of the current master and passes it to Message_StartAreaMessage" }
 g_MasterBannerLock = { addr = 0x801D4284, source = "set when the info banner owns the panel" }
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }

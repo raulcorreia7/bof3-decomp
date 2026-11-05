@@ -9,7 +9,7 @@ MATCH void func_801D2CA4(void) {
     u8* edp;
 
     if (g_MasterBannerLock != 0) {
-        Message_StartAreaMessage((s16)(D_801D41BC[D_801448ED] + 4));
+        Message_StartAreaMessage((s16)(g_MasterMessageIds[D_801448ED] + 4));
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
         g_MasterStep     = 6;
         g_MasterSubStep  = 0;
@@ -26,14 +26,19 @@ MATCH void func_801D2CA4(void) {
         g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].master_id = *edp;
         g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].unk_84 =
             g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[0] = D_801D4154[*edp].hp;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[1] = D_801D4154[*edp].ap;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[2] = D_801D4154[*edp].power;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[3] = D_801D4154[*edp].defense;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[4] = D_801D4154[*edp].agility;
+        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[0] =
+            g_MasterStats[*edp].hp_bonus;
+        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[1] =
+            g_MasterStats[*edp].ap_bonus;
+        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[2] =
+            g_MasterStats[*edp].power_bonus;
+        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[3] =
+            g_MasterStats[*edp].defense_bonus;
+        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[4] =
+            g_MasterStats[*edp].agility_bonus;
         g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[5] =
-            D_801D4154[*edp].intellect;
-        Message_StartAreaMessage((s16)(D_801D41BC[*edp] + 10));
+            g_MasterStats[*edp].intellect_bonus;
+        Message_StartAreaMessage((s16)(g_MasterMessageIds[*edp] + 10));
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
         g_MasterSubStep += 1;
     }
