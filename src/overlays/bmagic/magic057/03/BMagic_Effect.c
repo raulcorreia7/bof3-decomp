@@ -78,6 +78,10 @@ MATCH void func_801EF08C(void) {
 
 INCLUDE_ASM(func_801EF134);
 
+/* Scheduling residual: the y-store's D_801EB4E0 deref hoists above the rand()%6 division tail while
+ * retail keeps it late (candidate 0x168 vs retail 0x164; first difference sra a0,v0,0x1f at
+ * 0x801EF440). Clean % and the m2c decomposition sit one instruction away; the operand swap does
+ * not move the deref. Next lever: permuter. */
 INCLUDE_ASM(func_801EF3C4);
 
 MATCH void func_801EF528(void) {
