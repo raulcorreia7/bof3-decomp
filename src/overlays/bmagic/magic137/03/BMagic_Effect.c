@@ -52,7 +52,23 @@ MATCH void func_801EF174(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF21C);
+MATCH void func_801EF21C(void) {
+    PartyBattler* work = g_SpadWork;
+    u8            count;
+    u8            phase = work->word_08.byte.unk_0B;
+    u8            timer;
+    phase += 1;
+    timer                     = work->word_08.byte.unk_09;
+    work->word_08.byte.unk_0B = phase + (timer >> 6);
+    if (g_FrameCount & 1) {
+        g_SpadWork->word_08.byte.timer_0A -= 1;
+    }
+    count                           = g_SpadWork->word_08.byte.unk_09 - 2;
+    g_SpadWork->word_08.byte.unk_09 = count;
+    if (count == 0x60) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_DriftStep.h"
 
