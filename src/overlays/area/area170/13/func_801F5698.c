@@ -1,4 +1,12 @@
 #include "area170_13.h"
 
-/* Draft: first difference at 801F56A8, lui a0 versus li v0. */
-INCLUDE_ASM(func_801F5698);
+MATCH s32 func_801F5698(void) {
+    s8* flags;
+
+    Game_SetScriptActive();
+    flags      = &D_801448EB;
+    *flags     = 0x25;
+    D_801448EC = 0x28;
+    SYS_ClearFlag(flags + 0x63D, 0x7EU);
+    return 1;
+}

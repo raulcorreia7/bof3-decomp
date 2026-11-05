@@ -182,10 +182,10 @@ MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     UI_DrawText((s16)(x0 + 75), (s16)(y0 + 16), (s32)palette, 4U, &D_801D8B84[0x12]);
     UI_DrawWindowOutline((s16)(x0 + 0x33), (s16)(y0 + 0x2E), 0x56, 0x14, 0xF1);
     Menu_DrawIcon((u16)(x0 + 0x36), (u16)(y0 + 0x30), 4U, mode);
-    sprintf((char*)g_UiFormatBuffer, g_MenuZennyFormat, *(s32*)((u8*)&g_Characters[0].exp + row_off));
+    sprintf((char*)g_UiFormatBuffer, g_MenuZennyFormat, g_Characters[item_index].exp);
     UI_DrawGlyphString((s16)(x0 + 78), (s16)(y0 + 48), (u32)palette, g_UiFormatBuffer);
     Menu_DrawIcon((u16)(x0 + 0x36), (u16)(y0 + 0x39), 5U, mode);
-    count = ((u8*)&g_Characters[0].level)[row_off];
+    count = g_Characters[item_index].level;
     if (count < 0x63U) {
         count_y = y0;
         sprintf((char*)g_UiFormatBuffer, g_MenuZennyFormat, Char_GetExpForLevel(item_index, (count + 1) & BYTE_MASK));
@@ -348,7 +348,7 @@ MATCH void func_801D8208(u8 index, s32 left, s32 top, MenuListRow* row) {
         UI_DrawGlyphString(label_x, (s16)(y + 37), 0, g_UiFormatBuffer);
         UI_DrawGlyphString(label_x, (s16)(y + 36), 0, (u8*)&D_801D0D90);
         UI_DrawGlyphString(label_x, (s16)(y + 39), 0, (u8*)&D_801D0D90);
-        Menu_DrawExperienceLine((u16)(x + 0x14), (u16)(y + 0x12), 0, row->unk_00[8], *(s32*)(row->unk_00 + 0x10));
+        Menu_DrawExperienceLine((u16)(x + 0x14), (u16)(y + 0x12), 0, row->unk_00[8], ((MenuListRowWords*)row)->unk_10);
     }
     UI_DrawSpriteRun((s16)x, (s16)y, D_801D8A3C, row->unk_00[0x14] && row ? 2 : 0);
     if (row != NULL && row->unk_00[0x14] != 0) {

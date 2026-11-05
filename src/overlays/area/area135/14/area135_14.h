@@ -36,6 +36,10 @@ extern Callback D_801F6B40[];
 extern Callback D_801F6B48[];
 extern Callback D_801F6B6C[];
 
+/* The x/y entry-coordinate pairs the request step indexes. */
+extern u8 D_801F6AAC[];
+extern u8 D_801F6AB4[];
+
 /* The panel box words func_80159B9C draws: x, y, width and height. */
 extern u16 D_801F6210;
 extern u16 D_801F6212;
@@ -44,6 +48,9 @@ extern u16 D_801F6216;
 
 /* The camera and view steps the handlers enter. */
 void func_801F32A0(s32 value);
+
+/* The shared flag byte the request path sets a bit of. */
+extern u8 D_80143FBC;
 
 /* The scaled grid position and size the step checks compare against. */
 extern u8  D_80147C29;
