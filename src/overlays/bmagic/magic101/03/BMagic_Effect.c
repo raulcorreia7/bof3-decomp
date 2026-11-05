@@ -66,7 +66,21 @@ INCLUDE_ASM(func_801EF4DC);
 
 INCLUDE_ASM(func_801EF580);
 
-INCLUDE_ASM(func_801EF690);
+MATCH void func_801EF690(void) {
+    /* FAKE: pin the work copy to v1; the allocator otherwise keeps it in a0 and the
+     * unk_09/unk_10 reads swap against retail. */
+    MATCH_FAKE_PIN(PartyBattler*, work, "$3");
+    u8 counter;
+
+    g_SpadWork->word_08.byte.unk_0B += 4;
+    work                             = g_SpadWork;
+    work->unk_10 += work->unk_1C;
+    counter                          = work->word_08.byte.unk_09 - 1;
+    work->word_08.byte.unk_09 = counter;
+    if (!(counter & 0xFF)) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF700);
 
