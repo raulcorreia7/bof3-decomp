@@ -11,17 +11,17 @@ MATCH void func_801F342C(void) {
     func_801F4060(scratch->unk_0C);
     /* FAKE: retail splits each re-read across a cell copy so the row stays
      * in one register. */
-    cell_1 = g_SpadWork;
+    cell_1  = g_SpadWork;
     scratch = (Actor*)cell_1;
     scratch->unk_09--;
     if (scratch->unk_09 != 0) {
         return;
     }
-    cell_2 = g_SpadWork;
-    scratch = (Actor*)cell_2;
+    cell_2          = g_SpadWork;
+    scratch         = (Actor*)cell_2;
     scratch->unk_32 = 0x140;
     scratch->unk_09 = 0x10;
-    check = (Actor*)g_SpadWork;
+    check           = (Actor*)g_SpadWork;
     scratch->unk_0C = 0x100;
     scratch->unk_10 = 0x100;
     check->unk_01++;

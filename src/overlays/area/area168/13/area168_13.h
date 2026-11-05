@@ -14,7 +14,11 @@
 
 /* The shadow-quad renderer the step pairs call; func_801F4158 in the retail
  * symbol map. */
-void func_801F4158_area168(s32 index, s32 code);
+void               func_801F4158_area168(s32 index, s8 code);
+/* The shadow spread multiplier this pass indexes by the step code. */
+extern volatile u8 D_801F4BB4;
+/* The scratchpad quad the shadow pass fills and the GTE reads. */
+extern SVECTOR     D_1F800014[];
 
 /* The scratchpad cell holding this mode's work pointer. */
 
