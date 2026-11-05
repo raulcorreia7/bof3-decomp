@@ -26,7 +26,7 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
         }
     } else if (record->status & STATUS_POISONED) {
         UI_DrawTextString((s16)(x + 46), (s16)(y + 23), 1, 0x10, D_801D4048);
-    } else if (record->status & 0x20) {
+    } else if (record->status & STATUS_CONFUSED) {
         UI_DrawTextString((s16)(x + 46), (s16)(y + 23), 1, 0x10, D_801D4050);
     }
 

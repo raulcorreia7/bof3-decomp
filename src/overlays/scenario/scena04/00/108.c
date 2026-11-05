@@ -281,7 +281,7 @@ MATCH void func_801FA074(void) {
 }
 
 MATCH void func_801FA0B4(void) {
-    EMI_LoaderStreamFamily(0, 1, 5, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0);
     D_80144F5A    = 255;
     D_80144F5B    = 255;
     D_80144F5C    = 255;
@@ -289,8 +289,8 @@ MATCH void func_801FA0B4(void) {
     D_80144F5E    = 255;
     D_80144F5F    = 255;
     g_PartySize   = 0;
-    Party_JoinMember(0);
-    Party_JoinMember(1);
+    Party_JoinMember(CHAR_ID_RYU_YOUNG);
+    Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }
 
 #include "overlays/scenario/Scene_SetPartyRyuYoungNinaYoungMomo.h"

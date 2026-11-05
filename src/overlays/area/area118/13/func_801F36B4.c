@@ -10,7 +10,7 @@ MATCH void func_801F36B4(void) {
         if (g_SpadWork->state_02 == 2) {
             return;
         }
-        if (g_GameStateIndex == 0) {
+        if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x201);
         }
         g_SpadWork->state_02 = 1;

@@ -391,7 +391,7 @@ MATCH void func_801FD35C(void) {
     u8* timer;
 
     timer = &D_80146875;
-    if (*timer == 0 && g_GameStateIndex != 2) {
+    if (*timer == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         Game_ClearScriptActive();
         D_80146874 = 0;
         *timer     = 0;
@@ -463,19 +463,15 @@ MATCH void func_801FDAFC(void) {
 
 #include "overlays/scenario/Scene_SetPartyRyuYoungNinaYoungMomo.h"
 
-MATCH void func_801FDB80(void) {
-    EMI_LoaderStreamFamily(0, 1, 2, 0);
-    g_PartySize = 0;
-    Party_JoinMember(0);
-    Party_JoinMember(1);
-    Party_JoinMember(2);
+MATCH void Scene_SetPartyRyuYoungNinaYoungGarr(void) {
+    SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR);
 }
 
 MATCH void func_801FDBCC(void) {
     func_801C1ABC(D_80146189);
 }
 
-/* Tried: straight body (func_801C1ABC(2) then four
+/* Tried: straight body (func_801C1ABC(CHAR_ID_GARR) then four
  * g_Characters[...].unk_07 &= 254). GCC omits the nops retail emits
  * after each load in the slot/index sequences (same pattern as
  * func_801FE1C0). First diff: 0x801FDC30 nop vs lui a0.

@@ -81,12 +81,12 @@ MATCH void func_801F71DC(void) {
     work->tint.bytes.unk_5D = 0;
     g_SpadWork->unk_0B      = 0x33;
     Message_StartAreaMessage(g_SpadWork->unk_0B);
-    g_GameStateIndex   = 2;
+    g_GameStateIndex   = GAME_REQUEST_MESSAGE;
     g_SpadWork->unk_01 = 1;
 }
 
 MATCH void func_801F7248(void) {
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         g_SpadWork->unk_09 = 0x1E;
         g_SpadWork->unk_01 = 2;
     }
@@ -323,12 +323,12 @@ INCLUDE_ASM(func_801FB464);
 
 INCLUDE_ASM(func_801FBA34);
 
-MATCH void func_801FBB78(void) {
-    EMI_LoaderStreamFamily(7, 5, 6, 0);
+MATCH void Scene_JoinPartyRyuAdultPecoMomo(void) {
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_PECO, 0);
     g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(6);
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_JoinMember(CHAR_ID_PECO);
+    Party_JoinMember(CHAR_ID_MOMO);
 }
 
 MATCH void func_801FBBC4(void) {
@@ -341,16 +341,16 @@ MATCH void func_801FBBC4(void) {
     for (slot = 0; slot < 3; slot++) {
         func_801C1ABC(D_80144908[slot]);
     }
-    EMI_LoaderStreamFamily(7, 4, 8, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
     g_PartySize = 0;
-    Party_JoinMember(7);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
     func_801C1630();
 }
 
 MATCH void func_801FBC88(void) {
-    EMI_LoaderStreamFamily(7U, 5U, 8U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0U);
     g_PartySize = 0;
-    Party_JoinMember(7);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
 }
 
 MATCH void func_801FBCC4(void) {
@@ -370,13 +370,8 @@ MATCH void func_801FBCC4(void) {
     }
 }
 
-MATCH void func_801FBD84(void) {
-    EMI_LoaderStreamFamily(7, 5, 8, 0);
-    g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(5);
-    Party_JoinMember(8);
-    func_801C1630();
+MATCH void Scene_SetPartyRyuAdultMomoNinaAdult(void) {
+    SCENE_SET_PARTY(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT);
 }
 
 MATCH void func_801FBDD8(void) {
@@ -389,19 +384,19 @@ MATCH void func_801FBDD8(void) {
     for (slot = 0; slot < 3; slot++) {
         func_801C1ABC(ids[slot]);
     }
-    EMI_LoaderStreamFamily(7, 4, 2, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
     g_PartySize = 0;
-    Party_JoinMember(7);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
     func_801C1630();
 }
 
 MATCH void func_801FBE98(void) {
-    Party_JoinMember(4);
+    Party_JoinMember(CHAR_ID_REI);
     func_801C1630();
 }
 
 MATCH void func_801FBEC0(void) {
-    Party_JoinMember(2);
+    Party_JoinMember(CHAR_ID_GARR);
     func_801C1630();
 }
 

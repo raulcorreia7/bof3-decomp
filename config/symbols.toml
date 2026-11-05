@@ -2218,6 +2218,7 @@ Scene_RemoveMomo = { addr = 0x801FE364, type = "func", source = "removes charact
 Actor_WaitAndStep = { addr = 0x801F8730, type = "func", source = "counts the actor wait byte down reloads it at zero and advances the handler index" }
 AngleAverage12 = { addr = 0x801F8F40, type = "func", source = "averages two 12-bit angles along the shorter arc" }
 Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FDB34, type = "func", source = "streams the EMI family for young Ryu, young Nina and Momo, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungNinaYoungGarr = { addr = 0x801FDB80, type = "func", source = "streams the EMI family for young Ryu, young Nina and Garr, empties g_PartySize and joins the three in that order with Party_JoinMember" }
 
 ["emi/scenario/scena08/00"]
 Actor_WaitAndStep = { addr = 0x801F8D18, type = "func", source = "counts the actor wait byte down reloads it at zero and advances the handler index" }
@@ -2239,6 +2240,7 @@ Scene_RemoveMomo = { addr = 0x801FE30C, type = "func", source = "removes charact
 Scene_RemovePeco = { addr = 0x801FE334, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena10/00"]
+Scene_JoinPartyRyuAdultGarrNinaAdult = { addr = 0x801FE314, type = "func", source = "streams the EMI family for adult Ryu, Garr and adult Nina, empties g_PartySize and joins the three in that order with Party_JoinMember, without the palette restage of Scene_SetPartyRyuAdultGarrNinaAdult" }
 Scene_RebuildRyuGarrParty = { addr = 0x801FE4F0, type = "func", source = "clears the three party slots of D_80144908, keeps the last id that is neither adult Ryu (7) nor Garr (2), adult Nina (8) when none is, streams the EMI family for Ryu, Garr and that id and joins all three; byte-equal to func_801FDF54 of scena09" }
 Scene_RemoveMomo = { addr = 0x801FE614, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_StashPartyExceptRyuAdult = { addr = 0x801FE6F4, type = "func", source = "copies the character ids of the party into D_80144908, removes every listed member except adult Ryu (7) and runs func_801C1630; byte-equal to func_801FE234 of scena09" }
@@ -2247,9 +2249,11 @@ Scene_StashPartyExceptRyuAdult = { addr = 0x801FE6F4, type = "func", source = "c
 Scene_JoinAdultNinaAndMomo = { addr = 0x801FAB74, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinAdultNina = { addr = 0x801FABC0, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinMomo = { addr = 0x801FAC04, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_JoinAdultNinaAndMomo_801FAC48 = { addr = 0x801FAC48, type = "func", source = "second copy of Scene_JoinAdultNinaAndMomo in this image" }
 Scene_JoinMomo_801FACD8 = { addr = 0x801FACD8, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinMomoAndPeco = { addr = 0x801FAD1C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinPeco = { addr = 0x801FAD68, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_JoinReiAndGarr = { addr = 0x801FADAC, type = "func", source = "streams the EMI family for adult Ryu, Rei and Garr, rebuilds the battlers, joins Rei then Garr with Party_JoinMember (func_801C187C) and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveRei = { addr = 0x801FADF8, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveGarr = { addr = 0x801FAE20, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemovePeco = { addr = 0x801FAE48, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
@@ -2265,6 +2269,7 @@ Scene_JoinAdultNinaAndMomo_801FCEB4 = { addr = 0x801FCEB4, type = "func", source
 Scene_JoinMomo_801FCF44 = { addr = 0x801FCF44, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinMomoAndPeco = { addr = 0x801FCF88, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_JoinPeco = { addr = 0x801FCFD4, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_JoinReiAndGarr = { addr = 0x801FD018, type = "func", source = "streams the EMI family for adult Ryu, Rei and Garr, rebuilds the battlers, joins Rei then Garr with Party_JoinMember (func_801C187C) and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveRei = { addr = 0x801FD0B0, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemoveGarr = { addr = 0x801FD0D8, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
 Scene_RemovePeco = { addr = 0x801FD100, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
@@ -2273,12 +2278,19 @@ Scene_RemoveAdultNina = { addr = 0x801FD150, type = "func", source = "removes ch
 
 ["emi/scenario/scena13/00"]
 GFX_CopyPaletteCapped = { addr = 0x801FB0B8, type = "func", source = "copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending" }
+Scene_JoinPartyRyuAdultPecoMomo = { addr = 0x801FBB78, type = "func", source = "streams the EMI family for adult Ryu, Momo and Peco, empties g_PartySize and joins adult Ryu, Peco then Momo with Party_JoinMember; the join order differs from the stream order" }
+Scene_SetPartyRyuAdultMomoNinaAdult = { addr = 0x801FBD84, type = "func", source = "streams the EMI family for adult Ryu, Momo and adult Nina, empties g_PartySize, joins the three in that order with Party_JoinMember and restages the party palettes" }
 
 ["emi/scenario/scena14/00"]
+Scene_JoinPartyRyuAdultReiNinaAdult = { addr = 0x801FBD2C, type = "func", source = "streams the EMI family for adult Ryu, adult Nina and Rei, empties g_PartySize and joins adult Ryu, Rei then adult Nina with Party_JoinMember, without the palette restage and in a different join order than Scene_SetPartyRyuAdultNinaAdultRei" }
+Scene_SetPartyRyuAdultReiPeco = { addr = 0x801FBD78, type = "func", source = "streams the EMI family for adult Ryu, Rei and Peco, empties g_PartySize and joins the three in that order with Party_JoinMember" }
+Scene_SetPartyRyuAdultMomoPeco = { addr = 0x801FBDC4, type = "func", source = "streams the EMI family for adult Ryu, Momo and Peco, empties g_PartySize and joins the three in that order with Party_JoinMember" }
+Scene_SetPartyRyuAdultGarrPeco = { addr = 0x801FC020, type = "func", source = "streams the EMI family for adult Ryu, Garr and Peco, empties g_PartySize, joins the three in that order with Party_JoinMember and restages the party palettes" }
 Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FC074, type = "func", source = "streams the EMI family for adult Ryu, Garr and adult Nina, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes; one body shared with the other scenario programs" }
 Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FC22C, type = "func", source = "streams the EMI family for adult Ryu, adult Nina and Rei, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes; one body shared with the other scenario programs" }
 ["emi/scenario/scena15/00"]
 Area_ClearWorkColumn = { addr = 0x801F75AC, type = "func", source = "clears one byte of each row in the actor window" }
+Scene_SetPartyRyuAdultNinaAdultGarr = { addr = 0x801FE4CC, type = "func", source = "streams the EMI family for adult Ryu, adult Nina and Garr, empties g_PartySize, joins the three in that order with Party_JoinMember and restages the party palettes" }
 Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FE520, type = "func", source = "streams the EMI family for adult Ryu, adult Nina and Rei, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena16/00"]
@@ -2286,13 +2298,13 @@ GFX_CopyPaletteCapped = { addr = 0x801F83B0, type = "func", source = "copies 16 
 Scene_ClearParty = { addr = 0x801F84AC, type = "func", source = "one body shared through overlays/scenario/Scene_ClearParty.h" }
 
 ["emi/scenario/scena17/00"]
-Scene_SetPartyRyuTeepoRei = { addr = 0x801F96D4, type = "func", source = "streams the EMI family for characters 0, 3 and 4, sets g_PartySize to 0 and joins CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO and CHAR_ID_REI with Party_JoinMember (func_801C187C); one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F96D4, type = "func", source = "streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena18/00"]
-Scene_SetPartyRyuTeepoRei = { addr = 0x801F6D04, type = "func", source = "streams the EMI family for characters 0, 3 and 4, sets g_PartySize to 0 and joins CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO and CHAR_ID_REI with Party_JoinMember (func_801C187C); one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D04, type = "func", source = "streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena19/00"]
-Scene_SetPartyRyuTeepoRei = { addr = 0x801F6D68, type = "func", source = "streams the EMI family for characters 0, 3 and 4, sets g_PartySize to 0 and joins CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO and CHAR_ID_REI with Party_JoinMember (func_801C187C); one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D68, type = "func", source = "streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
 
 ["emi/world00/area000/13"]
 Message_SelectAnswerValue = { addr = 0x801F2C4C, type = "func", source = "resets the area request and stores the selection-selected state value" }

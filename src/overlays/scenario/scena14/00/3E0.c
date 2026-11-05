@@ -149,83 +149,70 @@ INCLUDE_ASM(func_801FB648);
 
 INCLUDE_ASM(func_801FB84C);
 
-MATCH void func_801FBD2C(void) {
-    EMI_LoaderStreamFamily(7, 8, 4, 0);
+MATCH void Scene_JoinPartyRyuAdultReiNinaAdult(void) {
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0);
     g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(4);
-    Party_JoinMember(8);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_JoinMember(CHAR_ID_REI);
+    Party_JoinMember(CHAR_ID_NINA_ADULT);
 }
 
-MATCH void func_801FBD78(void) {
-    EMI_LoaderStreamFamily(7, 4, 6, 0);
-    g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(4);
-    Party_JoinMember(6);
+MATCH void Scene_SetPartyRyuAdultReiPeco(void) {
+    SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_PECO);
 }
 
-MATCH void func_801FBDC4(void) {
-    EMI_LoaderStreamFamily(7, 5, 6, 0);
-    g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(5);
-    Party_JoinMember(6);
+MATCH void Scene_SetPartyRyuAdultMomoPeco(void) {
+    SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_PECO);
 }
 
 INCLUDE_ASM(func_801FBE10);
 
 MATCH void func_801FBF18(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
-    EMI_LoaderStreamFamily(7, 4, 8, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
     g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(4);
-    Party_JoinMember(8);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_JoinMember(CHAR_ID_REI);
+    Party_JoinMember(CHAR_ID_NINA_ADULT);
     func_801C1630();
 }
 
 MATCH void func_801FBFA8(void) {
-    EMI_LoaderStreamFamily(0, 1, 5, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0);
     g_PartySize = 0;
-    Party_JoinMember(0);
-    Party_JoinMember(1);
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_RYU_YOUNG);
+    Party_JoinMember(CHAR_ID_NINA_YOUNG);
+    Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
     D_80144F5D[0] = 7;
     D_80144F5E    = 8;
     D_80144F5F    = 5;
 }
 
-MATCH void func_801FC020(void) {
-    EMI_LoaderStreamFamily(7, 2, 6, 0);
-    g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(2);
-    Party_JoinMember(6);
-    func_801C1630();
+MATCH void Scene_SetPartyRyuAdultGarrPeco(void) {
+    SCENE_SET_PARTY(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO);
 }
 
 #include "overlays/scenario/Scene_SetPartyRyuAdultGarrNinaAdult.h"
 
 MATCH void func_801FC0C8(void) {
-    EMI_LoaderStreamFamily(7U, 4U, *D_80144908, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, *D_80144908, 0U);
     g_PartySize = 0;
-    func_801C187C(7U);
-    func_801C187C(4U);
+    func_801C187C(CHAR_ID_RYU_ADULT);
+    func_801C187C(CHAR_ID_REI);
     func_801C187C(*D_80144908);
     func_801C1630();
 }
 
 /* Copies the three party character ids (g_BattlePartyBattlers[i].stats.character_id) into D_80144908, calls func_801C1ABC
- * on each, EMI_LoaderStreamFamily(7, 8, 4, 0), g_PartySize = 0, Party_JoinMember(7), func_801C1630(). The body is right but
+ * on each, EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0), g_PartySize = 0, Party_JoinMember(CHAR_ID_RYU_ADULT), func_801C1630(). The body is right but
  * retail's frame is 0x20 against 0x18 (first differing instruction +0x0: addiu sp,sp,-32). */
 INCLUDE_ASM(func_801FC130);
 
 MATCH void func_801FC1E8(void) {
-    EMI_LoaderStreamFamily(7, 2, 6, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO, 0);
     g_PartySize = 0;
-    Party_JoinMember(7);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
     func_801C1630();
 }
 
@@ -237,14 +224,14 @@ MATCH void func_801FC280(void) {
 
     for (slot = 0; slot < 3; slot++) {
         character = D_80144908[slot];
-        if (character != 7 && character != 4) {
+        if (character != CHAR_ID_RYU_ADULT && character != CHAR_ID_REI) {
             break;
         }
     }
-    EMI_LoaderStreamFamily(7, 4, character, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, character, 0);
     g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(4);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(character);
     func_801C1630();
 }

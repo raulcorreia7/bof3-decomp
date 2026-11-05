@@ -28,7 +28,7 @@ MATCH void func_801D0C98(void) {
 }
 
 MATCH void func_801D0CF4(void) {
-    if (g_GameStateIndex != 2) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         Menu_ResetPanelTasks();
         func_801D16A4();
         D_801D1774 = 4;
@@ -47,7 +47,7 @@ MATCH void func_801D11DC(void) {
     if (*D_80148333 == 0) {
         Menu_ResetPanelTasks();
         Message_StartAreaMessage(0x5F);
-        g_GameStateIndex = 2;
+        g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294C += 1;
     }
 }

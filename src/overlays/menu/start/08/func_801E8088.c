@@ -15,7 +15,7 @@ MATCH s32 func_801E8088(s32 character_index, s32 record_index) {
     } else {
         record = (Character*)&D_80145F04[index * BATTLE_PARTY_STRIDE];
     }
-    if (record->status & 0xA0) {
+    if (record->status & (STATUS_POISONED | STATUS_CONFUSED)) {
         value |= 1;
         if ((rand() % 100) < 0x1E) {
             Char_ClearStatus(character_index & BYTE_MASK, 0xA0U, record_index & BYTE_MASK);

@@ -53,7 +53,7 @@ MATCH void func_801F7518(void) {
 
 MATCH void func_801F759C(void) {
     func_801F75EC();
-    if ((g_GameStateIndex != 2) && (g_GameEntryState != 4)) {
+    if ((g_GameStateIndex != GAME_REQUEST_MESSAGE) && (g_GameEntryState != 4)) {
         func_80196070();
     }
 }
@@ -276,9 +276,9 @@ MATCH void Scene_JoinAdultNinaAndMomo_801FCEB4(void) {
 }
 
 MATCH void func_801FCF00(void) {
-    EMI_LoaderStreamFamily(7U, 2U, 5U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(0);
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
 }
 
@@ -290,19 +290,13 @@ MATCH void Scene_JoinMomo_801FCF44(void) {
 
 #include "overlays/scenario/Scene_JoinPeco.h"
 
-MATCH void func_801FD018(void) {
-    EMI_LoaderStreamFamily(7, 4, 2, 0);
-    func_801C1400(0);
-    func_801C187C(4);
-    func_801C187C(2);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_JoinReiAndGarr.h"
 
 MATCH void func_801FD064(void) {
-    EMI_LoaderStreamFamily(7, 5, 2, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_GARR, 0);
     Party_BuildBattlers(0);
-    Party_JoinMember(2);
-    Party_JoinMember(5);
+    Party_JoinMember(CHAR_ID_GARR);
+    Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
 }
 
