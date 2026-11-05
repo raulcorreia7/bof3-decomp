@@ -5,7 +5,7 @@ MATCH void func_801F4080(void) {
 
     work = g_Task;
     if (work->z.part.integer != 0x3C0) {
-        work->flags &= 0xBF;
+        work->flags &= ~ACTOR_FLAG_HIDDEN;
         SYS_ToggleFlag(g_SceneEventFlags, 0x4B);
     } else {
         g_ScriptState->cursor += 8;

@@ -7,6 +7,6 @@ MATCH void func_801F2FD8(void) {
         D_801448EC       = 0xA;
         g_MessageRequest = 0x49;
     } else {
-        g_MessageRequest = 0xFFFF;
+        MESSAGE_REQUEST_CLEAR();
     }
 }

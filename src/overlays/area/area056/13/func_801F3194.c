@@ -1,7 +1,7 @@
 #include "area056_13.h"
 
 MATCH void func_801F3194(void) {
-    g_MessageRequest = 0xFFFF;
+    MESSAGE_REQUEST_CLEAR();
     if (D_801490C7 == 1) {
         *D_80145E91 = 2;
         *D_80145E92 = 7;

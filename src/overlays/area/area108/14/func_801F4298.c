@@ -4,7 +4,7 @@ MATCH void func_801F4298(void) {
     u8* flags;
     u8  flag;
 
-    g_MessageRequest = 0xFFFF;
+    MESSAGE_REQUEST_CLEAR();
     if (D_801490C7 == 0) {
         goto block_3;
     }

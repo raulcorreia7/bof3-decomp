@@ -3,7 +3,7 @@
 MATCH void func_801F3CE0(void) {
     s8 variant;
 
-    g_MessageRequest = 0xFFFF;
+    MESSAGE_REQUEST_CLEAR();
     if (D_801490C7 != 2) {
         variant = 2;
         if (D_801490C7 == 0) {
