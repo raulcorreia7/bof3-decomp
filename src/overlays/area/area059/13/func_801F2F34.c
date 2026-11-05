@@ -16,12 +16,12 @@ NON_MATCHING s32 func_801F2F34(void) {
     MATCH_FAKE_PIN(s32, base, "v1");
 
     Game_SetScriptActive();
-    record1          = g_ScriptWorkRecord;
-    request          = 4;
-    record1->unk_01  = request;
-    record2          = g_ScriptWorkRecord;
-    base             = (s32)g_Actors;
-    record2->unk_77  = 0;
+    record1         = g_ScriptWorkRecord;
+    request         = 4;
+    record1->unk_01 = request;
+    record2         = g_ScriptWorkRecord;
+    base            = (s32)g_Actors;
+    record2->unk_77 = 0;
     /* FAKE: use keeps the g_Actors row materialized before the unk_77
      * store. */
     MATCH_FAKE_USE(base);
