@@ -10,7 +10,17 @@ INCLUDE_ASM(func_801EEDD8);
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
-INCLUDE_ASM(func_801EEFF0);
+MATCH void func_801EEFF0(void) {
+    u8 temp_v0;
+
+    if ((u8)g_SpadWork->word_08.byte.unk_0B < 3U) {
+        temp_v0                           = g_SpadWork->word_08.byte.timer_0A - 1;
+        g_SpadWork->word_08.byte.timer_0A = temp_v0;
+        if (!(temp_v0 & 0xFF)) {
+            g_SpadWork->step_01 += 1;
+        }
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
