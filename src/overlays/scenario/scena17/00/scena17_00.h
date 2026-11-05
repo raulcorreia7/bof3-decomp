@@ -12,10 +12,13 @@ u8               func_801F938C(void);
 extern u8        D_80146875;
 extern u32       D_801F6C00;
 extern Callback  D_801F9748[];
+extern Callback  D_801F9758[];
+extern Callback  D_801F9798[];
 extern Callback  D_801F97A4[];
 extern SceneFunc D_801F97D8[];
 
 void      Shop_DispatchStep(void);
+void      func_801F8EF0(void);
 void      func_801F9490(void);
 void      func_801F88CC(s32 arg0, s32 arg1);
 void      func_801F8B10(s32 arg0, s32 arg1);
