@@ -1,7 +1,7 @@
 #include "area077_14.h"
 
 MATCH void func_801F5A08(void) {
-    g_MessageRequest = 0xFFFF;
+    MESSAGE_REQUEST_CLEAR();
     switch (D_801490C7) {
         case 0:
             g_ScriptVars[0] = 1;

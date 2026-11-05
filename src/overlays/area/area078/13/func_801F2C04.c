@@ -3,7 +3,7 @@
 MATCH void func_801F2C04(void) {
     s32 bit;
 
-    g_MessageRequest = 0xFFFF;
+    MESSAGE_REQUEST_CLEAR();
     switch (D_801490C7) {
         case 0:
             bit = 0x16;

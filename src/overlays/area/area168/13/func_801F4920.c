@@ -2,7 +2,7 @@
 
 /* Draft matches; adjacent scene globals need a shared type. */
 MATCH void func_801F4920(void) {
-    g_MessageRequest = 0xFFFF;
+    MESSAGE_REQUEST_CLEAR();
     if (D_801490C7 == 0) {
         SYS_SetFlag(g_SceneEventFlags, 0x8FU);
         Game_SetScriptActive();

@@ -1,7 +1,7 @@
 #include "area188_13.h"
 
 MATCH void func_801F46CC(void) {
-    g_MessageRequest = 0xFFFF;
+    MESSAGE_REQUEST_CLEAR();
     if (g_SceneState.scenario_id >= 0xD) {
         if (D_801490C7 == 0) {
             D_801448EB = 0xA;

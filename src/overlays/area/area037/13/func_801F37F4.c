@@ -5,8 +5,8 @@ MATCH void func_801F37F4(void) {
 
     sel = D_801490C7;
     if (sel == 0) {
-        g_MessageRequest = 0xFFFF;
-        g_ScriptVars[3]  = 0x64;
+        MESSAGE_REQUEST_CLEAR();
+        g_ScriptVars[3] = 0x64;
         func_801BE1B0(3);
     } else {
         g_MessageRequest = 0xBD;

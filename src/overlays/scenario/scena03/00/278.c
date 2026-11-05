@@ -80,7 +80,7 @@ MATCH void func_801F7260(void) {
         g_Task->unk_09 -= 1;
         return;
     }
-    g_BattlePartyBattlers->flags &= 0xBF;
+    g_BattlePartyBattlers->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
     g_Actors[g_Task->unk_03].flags = 0;
     g_Actors[g_Task->unk_04].flags = 0;
     g_Task->mode                   = 2;

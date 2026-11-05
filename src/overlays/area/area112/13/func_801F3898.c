@@ -1,7 +1,7 @@
 #include "area112_13.h"
 
 MATCH void func_801F3898(void) {
-    g_MessageRequest = 0xFFFF;
+    MESSAGE_REQUEST_CLEAR();
     if (D_801490C7 == 0) {
         SYS_ClearFlag(g_SceneEventFlags, 0x3CU);
         SYS_ClearFlag(g_SceneEventFlags, 0x3DU);
