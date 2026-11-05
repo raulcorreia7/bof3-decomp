@@ -22,6 +22,6 @@ MATCH void func_801E4318(void) {
         D_801ED864 = 0x40;
     }
     if (D_80148654 == 0) {
-        D_801ED860 += 1;
+        g_MenuStartStep += 1;
     }
 }

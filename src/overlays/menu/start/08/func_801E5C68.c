@@ -1,7 +1,7 @@
 #include "start_08.h"
 
-extern u8 D_801ED7FC; /* local: u8 write; a sibling copy is s8 */
-extern u8 D_801ED800; /* local: u8 write; a sibling copy is s8 */
+extern u8 D_801ED7FC;            /* local: u8 write; a sibling copy is s8 */
+extern u8 g_MenuStartReturnStep; /* local: u8 write; a sibling copy is s8 */
 
 MATCH void func_801E5C68(void) {
     u8* timer;
@@ -10,7 +10,7 @@ MATCH void func_801E5C68(void) {
     step = 3;
     Menu_DrawClutStrip(D_80144953);
     Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
-    D_801ED800 = 2;
+    g_MenuStartReturnStep = 2;
     switch (g_SaveCardStatus) {
         case 1:
             D_801ED7FC = 0xC;
@@ -26,8 +26,8 @@ MATCH void func_801E5C68(void) {
             break;
         case 5:
             SAVE_DrawSlots(0x20, 0x30, 0U);
-            D_801ED7FC = 0xB;
-            D_801ED800 = 0xF;
+            D_801ED7FC            = 0xB;
+            g_MenuStartReturnStep = 0xF;
             break;
         case 6:
             D_801ED7FC = 0x11;
@@ -36,9 +36,9 @@ MATCH void func_801E5C68(void) {
             D_801ED7FC = 0x12;
             break;
         case 8:
-            D_801ED7FC = 0xC;
-            D_801ED800 = 0;
-            step       = 1;
+            D_801ED7FC            = 0xC;
+            g_MenuStartReturnStep = 0;
+            step                  = 1;
             break;
         default:
             D_801ED7FC = 0x10;
@@ -46,11 +46,11 @@ MATCH void func_801E5C68(void) {
     }
     UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(D_801ED7FC + 0xA6));
     /* The retail code reaches the countdown byte through its address. */
-    if ((g_InputPressed & D_80145AC2) != 0 || (D_801ED800 == 0xF && --*(timer = &D_80148654) == 0)) {
-        if (D_801ED800 != 0xF) {
+    if ((g_InputPressed & D_80145AC2) != 0 || (g_MenuStartReturnStep == 0xF && --*(timer = &D_80148654) == 0)) {
+        if (g_MenuStartReturnStep != 0xF) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
         }
         g_GameEntrySubstate = step;
-        D_801ED860          = D_801ED800;
+        g_MenuStartStep     = g_MenuStartReturnStep;
     }
 }

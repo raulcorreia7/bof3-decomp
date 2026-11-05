@@ -1862,9 +1862,12 @@ s_PanelIconSelectors = { addr = 0x801ED1D8, source = "func_801E7210 reads the th
 s_PanelIconValues = { addr = 0x801ED1F0, source = "func_801E7210 fills the panel icon bytes from this value table" }
 g_SaveRecordTypeCommands = { addr = 0x801ED2D4, source = "func_801E8C9C picks the record-kind handler through this table" }
 s_PartyCharacterIds = { addr = 0x801ED610, source = "func_801D177C and func_801D21F4 keep the three party character ids here" }
+g_MenuStartTimer = { addr = 0x801ED7F0, source = "read:func_801E5BCC@0x801E5BCC counts it up to 4 as the slide offset of SAVE_DrawSlots; func_801E5E30@0x801E5E30 counts it down to 0 and then restores the step" }
+g_MenuStartReturnStep = { addr = 0x801ED800, source = "write:func_801E4FFC@0x801E4FFC stores the step plus 1 before jumping to step 14; read:func_801E5E30@0x801E5E30 restores it as the step" }
 g_SaveSlotFirst = { addr = 0x801ED804, source = "the first visible stock row, shared name with the shop overlay" }
 g_SaveSlotCount = { addr = 0x801ED808, source = "the visible stock row count, shared name with the shop overlay" }
 g_SaveSlots = { addr = 0x801ED80C, size = 0x54, source = "the three stock rows, shared name with the shop overlay" }
+g_MenuStartStep = { addr = 0x801ED860, source = "read:func_801E4024@0x801E4024 and func_801E4ED4@0x801E4ED4 dispatch the D_801ED11C and D_801ED148 step tables by it; the step functions add 1 to advance" }
 s_ChoiceMenuValues = { addr = 0x801ED894, source = "func_801D3174 saves the choice-menu value per slot" }
 s_ChoiceMenuCursors = { addr = 0x801ED89C, source = "func_801D3174 saves the choice-menu cursor per slot" }
 s_SkillOrderCursors = { addr = 0x801ED8A8, source = "func_801D8908 saves the skill-order cursor of a party slot and column, func_801DB04C swaps the rows" }

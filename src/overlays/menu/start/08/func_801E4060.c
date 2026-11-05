@@ -5,5 +5,5 @@ void func_801E7608(void);
 MATCH void func_801E4060(void) {
     func_801E7608();
     D_80148654 = 2;
-    D_801ED860 += 1;
+    g_MenuStartStep += 1;
 }

@@ -37,7 +37,7 @@ MATCH void func_801E5738(void) {
         if (*(&g_SaveSlots[0].source_index + (g_SaveSlotFirst * SHOP_ROW_STRIDE)) != GAME_NONE) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             D_8014865B = 1;
-            D_801ED860++;
+            g_MenuStartStep++;
             return;
         }
         SND_PlayCue(EMI_CUE_ID(1, 7));
@@ -45,6 +45,6 @@ MATCH void func_801E5738(void) {
     }
     if (g_InputPressed & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        D_801ED860 = 0xC;
+        g_MenuStartStep = 0xC;
     }
 }
