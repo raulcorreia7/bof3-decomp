@@ -7,7 +7,7 @@ MATCH u8 func_800A40D0(u8 arg0) {
     /* FAKE: pin the row index to v1 so the scaled offset keeps v0. */
     MATCH_REG(u16, index, "v1");
 
-    if (func_800A3A10(g_BattleActingBattler, g_BattleTarget) != 0) {
+    if (func_800A3A10(g_BattleActiveBattler, g_BattleTarget) != 0) {
         return true;
     }
     index = g_BattleActionId;

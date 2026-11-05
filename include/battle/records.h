@@ -37,9 +37,9 @@
  * mask. Pass the row itself or, for a pointer, its dereference. */
 #define HAS_STATUS(battler, flag)    (((battler).stats.status & (flag)) != 0)
 
-/* The acting battler's row. Each battle overlay declares the acting-battler
+/* The active battler's row. Each battle overlay declares the active-battler
  * byte itself, so the macro expands where it is used. */
-#define BATTLE_ACTING_PARTY          (g_BattlePartyBattlers[g_BattleActingBattler])
+#define BATTLE_ACTIVE_PARTY          (g_BattlePartyBattlers[g_BattleActiveBattler])
 
 /* One drop of an enemy: the item id the battle spoils gain when the roll
  * passes, and the index into the 8-byte drop chance table at 0x801D0CB8. */

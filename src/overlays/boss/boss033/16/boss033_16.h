@@ -7,7 +7,7 @@
 #include "overlays/boss/boss.h"
 #include "overlays/battle/battle.h"
 
-extern volatile u8 g_BattleActingBattler;
+extern volatile u8 g_BattleActiveBattler;
 extern s32         D_80145EC4;
 extern s8          D_80146875;
 extern u8          D_800C2744[];

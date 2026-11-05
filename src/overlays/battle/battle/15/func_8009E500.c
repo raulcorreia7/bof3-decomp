@@ -10,7 +10,7 @@
 NON_MATCHING void func_8009E500(void) {
     s16 delta;
     u16 limit;
-    if (!(func_800A3A10(g_BattleActingBattler, g_BattleTarget) & BYTE_MASK)) {
+    if (!(func_800A3A10(g_BattleActiveBattler, g_BattleTarget) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_BattleTarget)) {
             if (g_BattlePartyBattlers[g_BattleTarget].flags_124.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
                 g_BattleTargetRecord[3] = 0;
@@ -25,20 +25,20 @@ NON_MATCHING void func_8009E500(void) {
         g_BattleAction->unk_08  = 2;
         g_BattleTargetRecord[4] = 2;
         delta                   = g_BattleTargetRecord[3];
-        if (BATTLER_IS_PLAYER(g_BattleActingBattler)) {
-            limit = D_80145F1A[g_BattleActingBattler * 160 + 4];
-            if (limit < D_80145F1A[g_BattleActingBattler * 160] + delta) {
+        if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
+            limit = D_80145F1A[g_BattleActiveBattler * 160 + 4];
+            if (limit < D_80145F1A[g_BattleActiveBattler * 160] + delta) {
                 g_BattleAction->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&D_80145F1A[g_BattleActingBattler * 160], limit, delta),
-                          g_BattleActingBattler);
+            func_800AAEBC(-Char_AddPoints(&D_80145F1A[g_BattleActiveBattler * 160], limit, delta),
+                          g_BattleActiveBattler);
         } else {
-            limit = D_801EB6C4[g_BattleActingBattler - 3][7];
-            if (limit < D_801EB6C4[g_BattleActingBattler - 3][1] + delta) {
+            limit = D_801EB6C4[g_BattleActiveBattler - 3][7];
+            if (limit < D_801EB6C4[g_BattleActiveBattler - 3][1] + delta) {
                 g_BattleAction->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&D_801EB6C4[g_BattleActingBattler - 3][1], limit, delta),
-                          g_BattleActingBattler);
+            func_800AAEBC(-Char_AddPoints(&D_801EB6C4[g_BattleActiveBattler - 3][1], limit, delta),
+                          g_BattleActiveBattler);
         }
         g_BattleAction->unk_08 = 0;
     } else {

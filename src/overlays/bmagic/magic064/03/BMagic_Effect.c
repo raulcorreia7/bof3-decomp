@@ -23,7 +23,7 @@ MATCH void func_801EED7C(void) {
     PartyBattler* temp_v0;
 
     temp_s0    = g_SpadWork;
-    temp_v0    = &g_BattlePartyBattlers[g_BattleActingBattler];
+    temp_v0    = &g_BattlePartyBattlers[g_BattleActiveBattler];
     g_SpadWork = temp_v0;
     Actor_RequestScript((temp_v0->word_08.byte.facing_08 + 0x38) & 0xFF);
     g_SpadWork = temp_s0;
@@ -36,7 +36,7 @@ MATCH void func_801EEE1C(void) {
     PartyBattler* battler;
 
     battler    = g_SpadWork;
-    g_SpadWork = &g_BattlePartyBattlers[g_BattleActingBattler];
+    g_SpadWork = &g_BattlePartyBattlers[g_BattleActiveBattler];
     if (!(func_8014DAEC() & 0xFF)) {
         g_SpadWork                   = battler;
         battler->word_08.byte.unk_09 = 0x10;
@@ -77,7 +77,7 @@ MATCH void func_801EF2A4(void) {
     u32           value;
 
     battler    = g_SpadWork;
-    g_SpadWork = &g_BattlePartyBattlers[g_BattleActingBattler];
+    g_SpadWork = &g_BattlePartyBattlers[g_BattleActiveBattler];
     func_801F0EEC(1, 2, (0x80 - battler->word_08.byte.unk_09) & 0xFF);
     func_801F0EEC(0, 1, (0x80 - battler->word_08.byte.unk_09) & 0xFF);
     func_801F0EEC(3, 2, battler->word_08.byte.unk_09);
@@ -104,7 +104,7 @@ MATCH void func_801EF570(void) {
     PartyBattler* battler;
 
     battler    = g_SpadWork;
-    g_SpadWork = &g_BattlePartyBattlers[g_BattleActingBattler];
+    g_SpadWork = &g_BattlePartyBattlers[g_BattleActiveBattler];
     if (!(func_8014DAEC() & 0xFF)) {
         g_SpadWork = battler;
         return;

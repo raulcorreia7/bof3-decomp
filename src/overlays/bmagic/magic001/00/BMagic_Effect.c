@@ -21,7 +21,7 @@ MATCH void func_801EEFD8(void) {
 INCLUDE_ASM(func_801EF01C);
 
 MATCH void func_801EF0E8(void) {
-    func_801E257C((u32)g_BattleActingBattler, 0xAU);
+    func_801E257C((u32)g_BattleActiveBattler, 0xAU);
     g_SpadWork->unk_27                = D_801EB4E0->unk_27;
     g_SpadWork->word_08.byte.unk_09   = 0;
     g_SpadWork->word_08.byte.timer_0A = 0;
@@ -31,7 +31,7 @@ MATCH void func_801EF0E8(void) {
 MATCH void func_801EF164(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800AFC98(2, 0);
-        func_801E257C((u32)g_BattleActingBattler, 0xBU);
+        func_801E257C((u32)g_BattleActiveBattler, 0xBU);
         g_SpadWork->unk_14 = 0x100;
         g_SpadWork->unk_20 = -8;
         g_SpadWork->unk_02 += 1;
@@ -54,7 +54,7 @@ MATCH void func_801EF280(void) {
     work->word_3C.half.span_3E += work->unk_14;
     if (timer == 0) {
         SND_QueueSelectionFx(0x203);
-        func_801E257C(g_BattleActingBattler, 0xC);
+        func_801E257C(g_BattleActiveBattler, 0xC);
         func_800A9610(g_BattleTargetSelector, 0x10);
         g_SpadWork->word_08.byte.unk_09 = 3;
         g_SpadWork->unk_02++;
@@ -63,7 +63,7 @@ MATCH void func_801EF280(void) {
 
 MATCH void func_801EF324(void) {
     if (func_8014DAEC() != 0u) {
-        func_801E257C(g_BattleActingBattler, 0xA);
+        func_801E257C(g_BattleActiveBattler, 0xA);
         g_SpadWork->unk_02 = g_SpadWork->unk_02 + 1;
     }
 }
@@ -75,7 +75,7 @@ MATCH void func_801EF37C(void) {
     func_8014DAEC();
     if (func_8014DAEC() & BYTE_MASK) {
         func_800AFC98(2, 0);
-        func_801E257C(g_BattleActingBattler, 0xB);
+        func_801E257C(g_BattleActiveBattler, 0xB);
         work                        = g_SpadWork;
         work->unk_14                = 0x140;
         work->word_08.byte.timer_0A = 9;
@@ -103,7 +103,7 @@ MATCH void func_801EF468(void) {
     func_8014DAEC();
     if (func_8014DAEC() & BYTE_MASK) {
         SND_QueueSelectionFx(0x203);
-        func_801E257C(g_BattleActingBattler, 0xC);
+        func_801E257C(g_BattleActiveBattler, 0xC);
         timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
         g_SpadWork->word_08.byte.unk_09 = timer;
         if (timer != 0) {

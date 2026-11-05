@@ -3,7 +3,7 @@
 MATCH void func_800C1C4C(void) {
     EnemyBattler* work;
 
-    if ((g_BattleEncounter == 16) && (g_BattleActingBattler == 8)) {
+    if ((g_BattleEncounter == 16) && (g_BattleActiveBattler == 8)) {
         work = g_BattleCurrentEnemy;
         if (work->damage_F8 == 0) {
             work->damage_F8 = 1;

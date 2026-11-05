@@ -16,7 +16,7 @@ MATCH void func_8009F884(void) {
         base  = ENEMY_COMBATANT(mode).hp_94;
         flags = ENEMY_COMBATANT(mode).status_82;
     }
-    battler_index  = g_BattleActingBattler;
+    battler_index  = g_BattleActiveBattler;
     selection_kind = g_BattleTarget;
     /* FAKE: keeps the 2 load in the jal delay slot. */
     MATCH_FAKE_BARRIER();

@@ -38,7 +38,7 @@ NON_MATCHING void func_801D43EC(void) {
             *battle_flags &= ~BATTLE_STATE_REPRISAL_DONE;
         }
         if (*battle_flags & BATTLE_STATE_REPRISAL_PENDING) {
-            block74            = (s32*)&g_BattleActingBattler;
+            block74            = (s32*)&g_BattleActiveBattler;
             block84            = (s32*)&g_BattleTargetSelector;
             saved0             = block74[0];
             saved1             = block74[1];
@@ -53,7 +53,7 @@ NON_MATCHING void func_801D43EC(void) {
             block84[2]         = saved2;
             block84[3]         = saved3;
             g_BattleActionType = 1;
-            index              = g_BattleActingBattler;
+            index              = g_BattleActiveBattler;
             if ((u8)index < 3U) {
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_80145F20 + index * 0x140 + 3);
                 flags                         = g_BattlePartyBattlers[index].flags_124.value & COMBATANT_FLAG_REPRISAL;

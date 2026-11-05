@@ -28,7 +28,7 @@ MATCH void func_801D3624(void) {
     *setup_flags &= ~0x20;
     D_8014637C[1] = 7;
     D_8014637C[2] = 0;
-    Battle_SetSlotPending(g_BattleActingBattler);
+    Battle_SetSlotPending(g_BattleActiveBattler);
     mode       = g_BattleActionId;
     D_801463CD = (u8)mode;
     if ((u16)(mode - 0x24) < 2 || mode == 0x8C) {

@@ -5,6 +5,7 @@
  * at zero.
  */
 /* FAKE: _nv weak views avoid the andi and hoist the loads out of the prologue. */
+/* FAKE: a second symbol forces the separate %hi/%lo load retail has. */
 extern u8           D_801CA71B[];
 extern volatile u16 D_80145F26[][160];
 
@@ -16,7 +17,7 @@ MATCH void func_800A0D64(void) {
 
     index                   = g_BattleActionId;
     base_value              = D_801CA71B[4 * (5 * index)];
-    g_BattleTargetRecord[2] = func_800A2880(g_BattleActingBattler_nv, g_BattleTarget_nv, base_value, 0);
+    g_BattleTargetRecord[2] = func_800A2880(g_BattleActiveBattler_nv, g_BattleTarget_nv, base_value, 0);
     /* FAKE: keeps the record store ahead of the selector read. */
     MATCH_BARRIER();
     battler = g_BattleTarget_nv;

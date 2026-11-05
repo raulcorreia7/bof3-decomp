@@ -8,7 +8,7 @@ MATCH void func_801E6FB0(void) {
     u8  id;
 
     if ((g_BattleState & BATTLE_STATE_EFFECT_LOADING) &&
-        ((D_801EB4E0->slot == g_BattleActingBattler) ||
+        ((D_801EB4E0->slot == g_BattleActiveBattler) ||
          ((LOBU(g_BattleActionType) == 4) && ((LOHU(g_BattleActionId) == 0x97) || (LOHU(g_BattleActionId) == 0xE1))))) {
         g_SpadWork->step_01 += 1;
         return;

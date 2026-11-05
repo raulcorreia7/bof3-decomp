@@ -21,9 +21,9 @@ MATCH void func_8009EDB4(void) {
 
     flags      = &g_BattleState;
     flag_value = *flags;
-    /* FAKE: non-volatile alias of g_BattleActingBattler; the volatile read emits an andi
+    /* FAKE: non-volatile alias of g_BattleActiveBattler; the volatile read emits an andi
      * after lbu that retail does not carry. */
-    slot       = (*(u8*)&g_BattleActingBattler);
+    slot       = (*(u8*)&g_BattleActiveBattler);
     *flags     = flag_value | BATTLE_STATE_DAMAGE_APPLIED;
     if (slot < 3u) {
         action =
@@ -46,7 +46,7 @@ MATCH void func_8009EDB4(void) {
     counter   = &D_801EC30C;
     *counter  = 0;
     Char_AddStat(counter, action + delta_raw);
-    battler_index  = g_BattleActingBattler;
+    battler_index  = g_BattleActiveBattler;
     selection_kind = g_BattleTarget;
     /* FAKE: keeps the 0xFFFF load in the jal delay slot. */
     MATCH_FAKE_BARRIER();

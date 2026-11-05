@@ -16,7 +16,7 @@ MATCH void func_800A14B4(void) {
     u32          next;
 
     func_800A3F28();
-    p    = &g_BattleActingBattler;
+    p    = &g_BattleActiveBattler;
     slot = LOBU(p[0]);
     if (BATTLER_IS_PLAYER(slot)) {
         g_BattlePartyBattlers[slot].flags_128.volatile_value |= COMBATANT_FLAG_POWER_BOOST;

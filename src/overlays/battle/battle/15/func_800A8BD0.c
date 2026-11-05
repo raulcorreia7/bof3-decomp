@@ -4,7 +4,7 @@ MATCH void func_800A8BD0(void) {
     u8* work;
     u8* saved;
 
-    BATTLE_ACTING_PARTY.flags_00 &= ~ACTOR_FLAG_HIDDEN;
+    BATTLE_ACTIVE_PARTY.flags_00 &= ~ACTOR_FLAG_HIDDEN;
     work       = (u8*)D_801EB4E0;
     saved      = SPAD_WORK_BYTES;
     g_SpadWork = (struct Task*)work;

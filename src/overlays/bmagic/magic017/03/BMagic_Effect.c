@@ -61,8 +61,8 @@ MATCH void func_801EF6EC(void) {
     temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
     g_SpadWork->word_08.byte.unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        if ((u8)g_BattleActingBattler >= 3U) {
-            func_801E257C(g_BattleActingBattler, 0);
+        if ((u8)g_BattleActiveBattler >= 3U) {
+            func_801E257C(g_BattleActiveBattler, 0);
         }
         g_SpadWork->flags_00 |= 0x20;
         g_SpadWork->unk_5C              = 1;

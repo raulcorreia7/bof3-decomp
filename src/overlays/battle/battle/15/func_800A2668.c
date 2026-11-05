@@ -6,7 +6,7 @@ MATCH void func_800A2668(void) {
     u8           selection_kind;
     s32          half;
 
-    battler       = &g_BattleActingBattler;
+    battler       = &g_BattleActiveBattler;
     battler_index = *battler;
     /* FAKE: statement boundary keeps the retail register order and schedule. */
     ORDER_LOCK(selection_kind = g_BattleTarget);

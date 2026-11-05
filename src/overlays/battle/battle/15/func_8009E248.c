@@ -14,7 +14,7 @@ NON_MATCHING void func_8009E248(void) {
     s16 hp_bar;
     u16 hp;
 
-    id = g_BattleActingBattler;
+    id = g_BattleActiveBattler;
     if (!(func_800A3A10(id, g_BattleTarget) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_BattleTarget)) {
             if (!(g_BattlePartyBattlers[g_BattleTarget].flags_124.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE)) {

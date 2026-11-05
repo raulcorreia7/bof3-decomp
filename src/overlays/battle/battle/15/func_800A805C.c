@@ -16,7 +16,7 @@ MATCH u8 func_800A805C(void) {
     count = 0;
     slot  = 0;
     do {
-        if (LOBU(g_BattleActingBattler) != slot) {
+        if (LOBU(g_BattleActiveBattler) != slot) {
             if (Battle_SlotIsBlocked(slot) == 0) {
                 offset       = slot * BATTLE_PARTY_STRIDE;
                 slots[count] = D_80145F09[offset];

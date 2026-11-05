@@ -1,9 +1,7 @@
 #include "battle_03.h"
 
-/* Non-volatile alias for g_BattleActionType: the volatile symbol makes every
- * byte comparison materialize an `andi`, which retail does not carry, and a
- * distinct symbol keeps the second sample a real load.
- * FAKE: non-volatile alias of g_BattleActionType; the volatile symbol scores 87.01%.
+/* FAKE: LOBU reads g_BattleActionType without the volatile `andi` retail does not carry;
+ * the plain volatile name does not match.
  */
 
 /* runs the queued step: while not retreating and the enemy's spin flag is set it clears the gate and arms
@@ -27,12 +25,12 @@ MATCH void func_801E020C(void) {
         half = &g_BattleState;
         if ((*half & BATTLE_STATE_REPRISAL_PENDING) == 0) {
             if ((g_BattleTargetSelector & BATTLE_TARGET_BOTH_SIDES) == 0) {
-                if (g_BattleActionType_nv == 1) {
+                if (LOBU(g_BattleActionType) == 1) {
                     if ((func_801DD448() & BYTE_MASK) != 0) {
                         *half |= BATTLE_STATE_REPRISAL_PENDING;
                     }
                 }
-                if ((g_BattleActionType_nv == 4) && ((D_801CA71C[g_BattleActionId].mask & 0x800) != 0) &&
+                if ((LOBU(g_BattleActionType) == 4) && ((D_801CA71C[g_BattleActionId].mask & 0x800) != 0) &&
                     ((func_801DD448() & BYTE_MASK) != 0) && ((D_801CA718[g_BattleActionId][0] & 0x10) == 0)) {
                     g_BattleState |= BATTLE_STATE_REPRISAL_PENDING;
                 }

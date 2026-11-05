@@ -6,7 +6,7 @@ MATCH void func_800A0660(void) {
     u16 saved;
     u32 slot;
 
-    slot = (*(u8*)&g_BattleActingBattler);
+    slot = (*(u8*)&g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(slot)) {
         saved = g_BattlePartyBattlers[slot].stats.status & STATUS_BLIND;
         g_BattlePartyBattlers[slot].stats.status &= ~STATUS_BLIND;
@@ -14,7 +14,7 @@ MATCH void func_800A0660(void) {
         saved = ENEMY_COMBATANT(slot).status_82 & STATUS_BLIND;
         ENEMY_COMBATANT(slot).status_82 &= 0xFFF7;
     }
-    battler                 = (u8*)&g_BattleActingBattler;
+    battler                 = (u8*)&g_BattleActiveBattler;
     D_801EC324              = 0x64;
     slot                    = *battler;
     kind                    = (*(u8*)&g_BattleTarget);

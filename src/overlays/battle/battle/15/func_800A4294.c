@@ -8,7 +8,7 @@ MATCH s16 func_800A4294(s32 input_kind) {
     u16 element_mask;
     u32 battler;
 
-    mode = (*(u8*)&g_BattleActingBattler);
+    mode = (*(u8*)&g_BattleActiveBattler);
     if (mode < 3u) {
         base = D_80145F18[mode][0];
     } else {

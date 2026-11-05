@@ -51,8 +51,8 @@ MATCH void func_801EEE0C(void) {
     g_SpadWork->unk_18               = g_SpadWork->coord_x_34.raw;
     g_SpadWork->unk_1C               = g_SpadWork->coord_y_38.raw;
     g_SpadWork->unk_20               = g_SpadWork->word_3C.word;
-    MATCH_FAKE_BARRIER(); /* FAKE: keeps the g_BattleActingBattler read below the coord copy stores */
-    slot = g_BattleActingBattler;
+    MATCH_FAKE_BARRIER(); /* FAKE: keeps the g_BattleActiveBattler read below the coord copy stores */
+    slot = g_BattleActiveBattler;
     if (slot < BATTLE_PARTY_SLOT_COUNT) {
         battler = &g_BattlePartyBattlers[slot];
     } else {

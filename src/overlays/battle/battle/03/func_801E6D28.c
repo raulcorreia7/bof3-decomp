@@ -7,7 +7,7 @@ MATCH void func_801E6D28(void) {
     u8   index;
     s32  offset;
 
-    if ((g_BattleState & BATTLE_STATE_EFFECT_LOADING) != 0 && D_801EB4E0->slot == g_BattleActingBattler) {
+    if ((g_BattleState & BATTLE_STATE_EFFECT_LOADING) != 0 && D_801EB4E0->slot == g_BattleActiveBattler) {
         return;
     }
     field = &D_801EB4E0->slot;

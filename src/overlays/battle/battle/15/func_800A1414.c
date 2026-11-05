@@ -6,7 +6,7 @@ MATCH void func_800A1414(void) {
     u32 battler;
 
     func_800A3F28();
-    battler = LOBU(g_BattleActingBattler);
+    battler = LOBU(g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(battler)) {
         g_BattlePartyBattlers[battler].flags_124.value |= COMBATANT_FLAG_REPRISAL;
         return;

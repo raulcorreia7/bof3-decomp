@@ -14,7 +14,7 @@ MATCH void func_800AFC98(s32 effect_0, s32 effect_1) {
     /* FAKE: holds the effect_1 copy to the retail s0 home. */
     MATCH_FAKE_PIN(s32, other, "s0");
 
-    kind  = *(u8*)&g_BattleActingBattler;
+    kind  = *(u8*)&g_BattleActiveBattler;
     sel   = effect_0;
     other = effect_1;
     if (kind < 3u) {

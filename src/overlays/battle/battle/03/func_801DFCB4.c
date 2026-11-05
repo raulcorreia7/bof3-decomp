@@ -1,5 +1,6 @@
 #include "battle_03.h"
 
+/* FAKE: a second symbol forces the separate %hi/%lo load retail has. */
 /* FAKE: non-volatile alias of g_BattleActionType for the closing mode test;
  * LOBU keeps the byte's address live in s0 across the calls (82.97%). */
 
@@ -42,7 +43,7 @@ MATCH void func_801DFCB4(void) {
     }
     switch (LOBU(g_BattleActionType)) {
         case 1:
-            g_BattleTargetRecord[2] = Battle_ApplyDamage(g_BattleActingBattler, g_BattleTarget);
+            g_BattleTargetRecord[2] = Battle_ApplyDamage(g_BattleActiveBattler, g_BattleTarget);
             break;
         case 4:
         case 5:

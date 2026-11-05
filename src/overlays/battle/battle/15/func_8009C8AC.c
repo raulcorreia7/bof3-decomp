@@ -19,7 +19,7 @@ MATCH u8 func_8009C8AC(u16 required_mask) {
         kind = g_BattleActionType_nv;
     }
     if (kind == 1) {
-        slot = LOBU(g_BattleActingBattler);
+        slot = LOBU(g_BattleActiveBattler);
         if (!BATTLER_IS_PLAYER(slot))
             return false;
         if (required_mask & 0x100)

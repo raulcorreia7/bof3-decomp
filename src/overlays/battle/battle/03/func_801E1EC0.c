@@ -16,7 +16,7 @@ MATCH void func_801E1EC0(void) {
 
     slot_id = Battle_AllocEffect(0, 0xF);
     dst     = (WorkChunk*)&g_BattleEffects[slot_id & BYTE_MASK];
-    src     = (WorkChunk*)&BATTLE_ACTING_PARTY;
+    src     = (WorkChunk*)&BATTLE_ACTIVE_PARTY;
     end     = src + 7;
     do {
         *dst = *src;

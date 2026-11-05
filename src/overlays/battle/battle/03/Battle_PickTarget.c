@@ -31,7 +31,7 @@ MATCH u8 Battle_PickTarget(void) {
             }
         }
 
-        if (BATTLER_IS_PLAYER(g_BattleActingBattler)) {
+        if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
             if ((targeting_flags & 0x20u) != 0u) {
                 return 0x40u;
             }
@@ -45,10 +45,10 @@ MATCH u8 Battle_PickTarget(void) {
     }
 
     if ((targeting_flags & 0x40u) == 0u) {
-        return g_BattleActingBattler;
+        return g_BattleActiveBattler;
     }
 
-    if (BATTLER_IS_PLAYER(g_BattleActingBattler)) {
+    if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
         if ((targeting_flags & 0x20u) != 0u) {
             return func_800A955C();
         }
