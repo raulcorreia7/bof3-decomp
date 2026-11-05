@@ -69,6 +69,15 @@ typedef union FishingStateY {
 
 ASSERT_SIZE(FishingStateY, 4);
 
+/* One cue row of D_801E1D58: the 16.16 fixed-point height offset and the
+ * per-step delta; four rows, indexed by cue_index_06 (func_801D23F4). */
+typedef struct FishingCueStep {
+    s32 offset_00;
+    s32 step_04;
+} FishingCueStep;
+
+ASSERT_SIZE(FishingCueStep, 0x08);
+
 /* The item pointer at 0x50 and the message text pointer at 0x54 are stored as
  * words and dereferenced as bytes. */
 typedef union FishingItemPointer {
@@ -347,7 +356,7 @@ extern Callback              D_801E1D10[];
 extern Callback              D_801E1D20[];
 extern u8                    D_801E1D38[];
 extern u8                    D_801E1D3C[];
-extern s32                   D_801E1D58[];
+extern FishingCueStep        D_801E1D58[];
 extern s32                   D_801E1D5C;
 extern Callback              D_801E1D78[];
 extern Callback              D_801E1D80[];
