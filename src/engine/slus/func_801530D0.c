@@ -10,12 +10,10 @@
         *(u32*)(D_80142CC4 + (off)) = (u32)(pkt);                                      \
     } while (0)
 
-/* draws the visible window of the 0x37 by 0x1C tile ring: each cell is projected through the GTE, culled against the
+/* Draws the visible window of the 0x37 by 0x1C tile ring: each cell is projected through the GTE, culled against the
  * screen box, given a packet pair (plus linked rows at +0x46/+0x4E) and linked into the ordering table by depth.
- * Lifted from the first draft; the scratch words behind D_1F80000C hold the window half-width.
+ * The scratch words behind D_1F80000C hold the window half-width.
  */
-/* nonmatching 69.51%: restated from the first draft with byte offsets, gte macros and a link macro. resume: first
- * mismatch of the register assignment and the shared block_38 tail. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801530D0(void) {
     s32 sp10_row;
@@ -249,5 +247,9 @@ NON_MATCHING s32 func_801530D0(void) {
     func_80153D34();
 }
 #else
+/* nonmatching 69.51%: first difference +0x0 retail addiu sp,sp,-0x78 against candidate -0x70; retail keeps 8 reload
+ * homes at 0x10-0x4F (used 0x10/0x18/0x20/0x40/0x48), the draft 7 (used 0x10-0x30). resume: a source shape with one
+ * more reload home between the map-bundle base pointer and the two OT-stepper locals (unused homes: retail
+ * 0x28/0x30/0x38, draft 0x38/0x40; both are reload (use (mem)) placeholder homes). */
 INCLUDE_ASM(func_801530D0);
 #endif

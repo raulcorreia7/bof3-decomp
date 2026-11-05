@@ -181,6 +181,9 @@ block_16:
     return val12 + 1;
 }
 #else
-/* No caller in C or assembly, so it is reached through a table; the three glyph branches (0x12 and 0x13, 0x15, and codes from 0x5B) share one POLY_FT4 fill in retail, which the draft splits. */
+/* nonmatching 55.84%: first difference +0x0 retail addiu sp,sp,-0x50 against candidate -0x40 (0xA4C against 0x9F8);
+ * retail spills three values at 0x10/0x18/0x20, the draft two. resume: add the (u8)color local retail keeps at 0x10($sp)
+ * (stored at +0x70, read byte-wise only by the block_11 clut tail at 0x801E3DB0; the 0x12/0x13 tail uses the s32 color
+ * at 0x18), then restate the shared POLY_FT4 fill (0x12/0x13 no offset unsigned, 0x15 +0x64 signed, 0x5B +0x23 signed). */
 INCLUDE_ASM(Menu_DrawGlyphAt);
 #endif

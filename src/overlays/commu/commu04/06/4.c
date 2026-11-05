@@ -52,5 +52,9 @@ INCLUDE_ASM(func_801D1628);
 
 #include "overlays/commu/Commu_AdvanceStep.h"
 
-/* first differing instruction: 0x801D16A4, retail hoists li v1,2 / li a0,1 / li v0,-0xAA before the first store while the candidate stores D_80148334 first then loads 2 and 1; the owner-table block (D_80148331-D_80148357, the BattleOwnerKind record) needs a typed view; plain and local forms tried. */
+/* First diff +0x00: placement of li v0,-0xAA - retail hoists li v1,2 / li a0,1 /
+ * li v0,-0xAA before the first store, the candidate stores D_80148334 first
+ * then loads 2 and 1. Tried: store-seq body with the state block
+ * (D_80148331-D_80148357, the BattleOwnerKind record) declared in
+ * commu04_06.h, plus plain and local forms; the block needs a typed view. */
 INCLUDE_ASM(func_801D16A4);

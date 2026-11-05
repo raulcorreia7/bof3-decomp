@@ -14,4 +14,10 @@ extern u8 D_801F3824[];
 void GFX_FreePaletteFadeTarget(void* target);
 void func_801F30A8(s32* pos);
 
+/* func_801F2E80 */
+s32 Area_CheckStepTrigger(s32 x, s32 y);
+
+/* The first row of the trigger band in the shared Area_CheckStepTrigger body. */
+#define AREA_STEP_TRIGGER_ROW 0x29
+
 #endif

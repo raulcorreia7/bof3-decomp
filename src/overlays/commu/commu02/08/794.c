@@ -192,6 +192,12 @@ MATCH void func_801D35A4(void) {
     SYS_DISPATCH_BYTE(D_801DACC4, D_801F294D);
 }
 
+/* Tried: straight body (D_801DB0CC = bgm; SND_StopSequence(cues[id<<2],
+ * D_80181EBB[id<<2]); SND_RequestBgm(148); D_801F294D++). GCC hoists the
+ * g_SndBgmId load to v1 (retail v0); pinning bgm to v0 keeps the hoisted
+ * load but GCC reorders the prologue after the arg loads and inserts a
+ * nop after the hoisted load. First diff: 0x801D35E0 lui v1 vs v0.
+ */
 INCLUDE_ASM(func_801D35E0);
 
 MATCH void func_801D364C(void) {

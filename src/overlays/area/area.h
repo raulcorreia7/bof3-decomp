@@ -56,7 +56,6 @@ void            func_801F2D18(void);
 void            func_801F2D3C(void);
 extern u8       D_801F2DD4[];
 void            func_801F2E1C(void);
-void            func_801F2E80(s32 entry_x);
 void            func_801F2ED8(void);
 void            func_801F2EEC(void);
 void            func_801F2F24(void);
