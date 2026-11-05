@@ -2748,6 +2748,7 @@ World_AdvanceAreaWhenPartyNear = { addr = 0x801F2E64, type = "func", source = "o
 Actor_AdvanceOutsidePartyCell = { addr = 0x801F3020, type = "func", source = "advances the work state when the party position D_80145EC4/D_80145EC8 is outside the work cell: the first axis alone decides and the second axis keeps the work in place when the party stands in either half-cell of it, without the area update (func_801F2FB0 in area147/13, func_801F3020 in area148/13, func_801F3F84 in area170/13)" }
 Area_AdvanceCountdown = { addr = 0x801F311C, type = "func", source = "advances the countdown at g_SpadWork +0x30 by 0x10, moves the state byte to 1 and plays cue 0x201 when g_GameStateIndex is 0 once it reaches zero or below, then runs the frame update with the mode taken from the sign of g_SpadWork +0x32 (func_801F311C in area148/13, func_801F30AC in area147/13)" }
 Area_Update = { addr = 0x801F31AC, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
+Area_ClearSceneFlag46AndResetMode = { addr = 0x801F39A4, type = "func", source = "clears scene event flag 0x46 (g_SceneEventFlags) and returns g_AreaSceneMode to 0; one body shared with the other area overlays" }
 Actor_PlaceAtFocus = { addr = 0x801F39D4, type = "func", source = "copies the field focus point into the work position" }
 Message_ShowParty = { addr = 0x801F3A20, type = "func", source = "shows the tagged area slot message and enters game state 2" }
 Message_SelectAnswer = { addr = 0x801F3BA8, type = "func", source = "stores the selected or idle area request id the selection byte picks" }
@@ -2877,6 +2878,7 @@ Actor_SlideScreenX = { addr = 0x801F2FE0, type = "func", source = "advances the 
 Actor_AdvanceWhenPartyAway = { addr = 0x801F303C, type = "func", source = "advances the work state when the party position is outside the work cell" }
 Actor_SlideScreenDown16 = { addr = 0x801F314C, type = "func", source = "scrolls the actor screen origin down by 0x10 and cues 0x201 when it reaches zero (area167)" }
 Area_Update = { addr = 0x801F31BC, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
+Area_ClearSceneFlag46AndResetMode = { addr = 0x801F3F28, type = "func", source = "clears scene event flag 0x46 (g_SceneEventFlags) and returns g_AreaSceneMode to 0; one body shared with the other area overlays" }
 Actor_PlaceAtFocus = { addr = 0x801F4434, type = "func", source = "copies the field focus point into the work position" }
 
 ["emi/world04/area168/13"]
