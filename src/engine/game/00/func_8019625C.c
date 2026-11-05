@@ -28,7 +28,7 @@ NON_MATCHING void func_8019625C(void) {
 
     for (entry_index = 0; entry_index < 32; entry_index++) {
         entry = &D_80145BD4[entry_index];
-        if ((entry->flags & 1u) != 0u) {
+        if ((entry->flags & PALETTE_FADE_ACTIVE) != 0u) {
             value             = entry->saved_byte;
             table_index       = entry->table_index;
             divisor           = s_PaletteFadeDivisors[table_index];

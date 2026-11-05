@@ -7,7 +7,7 @@ MATCH void func_801F2CF8(void) {
     Actor* actor;
 
     actor       = g_SpadWork;
-    g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
+    g_GameState = (GameState*)g_BattlePartyBattlers;
     g_SpadWork  = (Actor*)g_BattlePartyBattlers;
     if (D_80145EE8 == 0xC && D_80145EDA == 1) {
         Actor_SelectScript(0x6E);

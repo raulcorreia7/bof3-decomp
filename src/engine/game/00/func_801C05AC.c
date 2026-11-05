@@ -16,7 +16,7 @@ MATCH void func_801C05AC(void) {
         for (i = 0; i < g_PartySize; i++) {
             row = &g_BattlePartyBattlers[i];
             if (!((g_GameFlags >> i) & 1)) {
-                g_GameState = (GameStateRecord*)row;
+                g_GameState = (GameState*)row;
                 g_SpadWork  = (Actor*)row;
                 if (g_BattlePartyBattlers[i].slot == 0) {
                     func_801B00F8();

@@ -12,7 +12,7 @@ MATCH void Area_ResetScene(void) {
         g_GameState->counter_11C.s8_value = 3;
         func_801BC000();
         work = SP_REF(void*, 0x44);
-        if ((work->unk_0C == 0) && (work->unk_10 == 0) && (work->unk_01 == 1)) {
+        if ((work->vx == 0) && (work->vy == 0) && (work->unk_01 == 1)) {
             work->state_02 = 0;
         }
     }

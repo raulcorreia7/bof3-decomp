@@ -32,31 +32,31 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
         case 0xC1:
             if (Actor_GetType() != 1) {
                 slot = g_CurrentActor->unk_93;
-                D_80145BD6[slot].red_offset += (code + CUR(sub))[1];
-                D_80145BD6[g_CurrentActor->unk_93].green_offset += (code + CUR(sub))[2];
+                D_80145BD4[slot].red_offset += (code + CUR(sub))[1];
+                D_80145BD4[g_CurrentActor->unk_93].green_offset += (code + CUR(sub))[2];
                 slot = g_CurrentActor->unk_93;
             } else {
                 slot = g_GameState->unk_13D;
-                D_80145BD6[slot].red_offset += (code + CUR(sub))[1];
-                D_80145BD6[g_GameState->unk_13D].green_offset += (code + CUR(sub))[2];
+                D_80145BD4[slot].red_offset += (code + CUR(sub))[1];
+                D_80145BD4[g_GameState->unk_13D].green_offset += (code + CUR(sub))[2];
                 slot = g_GameState->unk_13D;
             }
-            D_80145BD6[slot].blue_offset += (code + CUR(sub))[3];
+            D_80145BD4[slot].blue_offset += (code + CUR(sub))[3];
             CUR(sub) += 3;
             break;
         case 0xC2:
             if (Actor_GetType() != 1) {
                 slot = g_CurrentActor->unk_93;
-                D_80145BD6[slot].red_offset -= (code + CUR(sub))[1];
-                D_80145BD6[g_CurrentActor->unk_93].green_offset -= (code + CUR(sub))[2];
+                D_80145BD4[slot].red_offset -= (code + CUR(sub))[1];
+                D_80145BD4[g_CurrentActor->unk_93].green_offset -= (code + CUR(sub))[2];
                 slot = g_CurrentActor->unk_93;
             } else {
                 slot = g_GameState->unk_13D;
-                D_80145BD6[slot].red_offset -= (code + CUR(sub))[1];
-                D_80145BD6[g_GameState->unk_13D].green_offset -= (code + CUR(sub))[2];
+                D_80145BD4[slot].red_offset -= (code + CUR(sub))[1];
+                D_80145BD4[g_GameState->unk_13D].green_offset -= (code + CUR(sub))[2];
                 slot = g_GameState->unk_13D;
             }
-            D_80145BD6[slot].blue_offset -= (code + CUR(sub))[3];
+            D_80145BD4[slot].blue_offset -= (code + CUR(sub))[3];
             CUR(sub) += 3;
             break;
         case 0xC3:

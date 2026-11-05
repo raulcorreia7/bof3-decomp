@@ -4,8 +4,8 @@ MATCH void func_8019EC20(void) {
     Actor* work;
 
     work = (Actor*)g_SpadWork;
-    work->x.fixed += work->unk_0C;
-    work->y.fixed += work->unk_10;
+    work->x.fixed += work->vx;
+    work->y.fixed += work->vy;
     if (FIELD(u16, MAP_BUNDLE_BASE,
               (work->y.part.integer * MEM(u8, MAP_BUNDLE_BASE) * 2 + D_80104002 * 4 + work->x.part.integer * 2)) != 0) {
         if (func_8019EEE4()) {

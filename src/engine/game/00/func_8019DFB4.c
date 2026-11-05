@@ -53,11 +53,11 @@ loop_1: /* scan the world-id table down from index 8 */
     work_e                  = g_SpadWork;
     work_e->vz              = 0xFFF80000;
     work_e->y.fixed         = (s32)(work_e->y.fixed + (step_y & 0x7FFF));
-    g_SpadWork->unk_0C      = (s32)(RANDOM_MASK(0xFFF));
+    g_SpadWork->vx          = (s32)(RANDOM_MASK(0xFFF));
     value                   = RANDOM_MASK(0xFFF);
     work_f                  = g_SpadWork;
-    work_f->unk_10          = value;
-    if (work_f->unk_0C >= 0x801) {
+    work_f->vy              = value;
+    if (work_f->vx >= 0x801) {
         active = 1;
     } else if (value >= 0x801) {
         work_f->unk_2A = 1;

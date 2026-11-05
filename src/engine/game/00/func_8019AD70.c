@@ -4,6 +4,6 @@ MATCH void func_8019AD70(void) {
     Actor* work;
 
     work                = g_SpadWork;
-    g_AreaCameraOffsetZ = work->unk_0C;
+    g_AreaCameraOffsetZ = work->vx;
     func_8019AAFC();
 }

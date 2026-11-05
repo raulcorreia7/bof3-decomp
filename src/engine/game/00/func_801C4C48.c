@@ -8,8 +8,8 @@ MATCH void func_801C4C48(void) {
 
     work = g_SpadWork;
     step = work->unk_09;
-    x    = work->x.fixed + (work->unk_0C * step);
-    y    = work->y.fixed + (work->unk_10 * step);
+    x    = work->x.fixed + (work->vx * step);
+    y    = work->y.fixed + (work->vy * step);
     Area_ReadStepHeight(x, y, work->direction_08);
     if ((SP_REF(u8, 0x0u) == 0) && ((Area_ReadHeight(x, y) - g_SpadWork->z.part.integer) >= 0x80)) {
         g_GameState->counter_11C.u8_value = (u8)(g_GameState->counter_11C.u8_value - 1);

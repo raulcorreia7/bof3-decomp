@@ -19,7 +19,7 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | Do                                                                    | Don't                                                         |
 | --------------------------------------------------------------------- | ------------------------------------------------------------- |
 | Tag every name: `SND_PlayCue`, `Battle_ApplyDamage`, `g_BattleActors` | Leave a game name untagged, or write `g_BATTLE_Actors`        |
-| `Tag_VerbObject`: `Message_OpenAnswerMenu`                            | Glue the subject to the verb: `MessageSelectAnswerOpenMenu`   |
+| `Tag_VerbObject`; a family of 3+ is `Tag_ObjectVerb`: `Item_VitalAdd` | Glue the subject to the verb: `MessageSelectAnswerOpenMenu`   |
 | Keep the address name above a named definition: `/* func_801F2C04 */` | Lose the `func_`/`D_` name a search from assembly needs       |
 | `snake_case` locals, parameters and members: `item_id`, `party_slot`  | Hungarian or camelCase: `pItem`, `nCount`, `itemId`           |
 | Name the role: `BattlePanel`, `coord_x`                               | Name the storage: `BattlePanelRecord`, `half_3A`, `ByteView`  |
@@ -174,9 +174,18 @@ UI parts:
 
 ### Functions
 
-A function name is `Tag_VerbObject`: the tag, an underscore, a verb, then the thing acted on, with
-a qualifier last when two functions differ: `Party_AddItem`, `Battle_FindTarget`,
-`Message_OpenAnswerMenu`. The subject is the tag, never a word glued to the verb
+A function name takes one of two orders:
+
+1. **Verb first**, the default: `Tag_VerbObject`. The tag, an underscore, a verb, then the thing
+   acted on: `Party_AddMember`, `Battle_FindTarget`, `Shop_Buy`.
+2. **Object first**, for a family: `Tag_ObjectVerb`. When three or more functions under one tag act
+   on the same object, the object comes first, so the family sorts together, as PsyQ writes
+   `SsSeqOpen`, `SsSeqPlay` and `SsSeqClose`: `Item_VitalAdd`, `Item_VitalRemove`,
+   `Item_VitalHas`; `Message_WindowOpen`, `Message_WindowClose`, `Message_WindowDraw`.
+
+Count the family across the whole tree. Two functions are not a family. When a third member gets a
+name, rename the other two in the same change. A qualifier goes last when two functions differ
+(`Battle_TargetNext`, `Battle_TargetPrev`). The subject is the tag, never a word glued to the verb
 (`Message_SelectAnswer`). One verb per concept:
 
 | Verb                            | Meaning                                          |
@@ -202,12 +211,15 @@ function pointer the engine calls at an event is `g_<Tag><Event>Hook`.
 ```c
 void Battle_RunAttack(Battler* battler);
 u8   Party_FindMember(u8 character_id);   /* GAME_NONE when absent */
+void Item_VitalAdd(u8 vital_item_id);     /* one of the Item_Vital family */
+s32  Item_VitalHas(u8 vital_item_id);
 ```
 
 **Don't**
 
 ```c
 void Message_OpenAnswerMenu(void);   /* no tag; subject before the verb */
+void Item_AddVital(u8 vital_item_id); /* a family member in verb-first order */
 void Battle_AttackCb(Battler* battler);
 void Battle_AttackHandler(Battler* battler);
 u8   Party_GetMember(u8 character_id);    /* Get never fails; this searches */
@@ -260,6 +272,45 @@ typedef struct Battler {
 } Battler;
 
 void Fairy_SetJob(u8 job, u8 idx);   /* the thing acted on last; abbreviated */
+```
+
+### Globals, arrays, structs and unions
+
+Name each one for what the game keeps in it, in the words its programmer would use:
+
+| Thing                 | Form                                                     | Example                                     |
+| --------------------- | -------------------------------------------------------- | ------------------------------------------- |
+| one value             | `g_<Tag><Thing>`, singular                               | `g_BattleActiveBattler`, `g_PartyCount`     |
+| a system's state      | `g_<Tag>State`, one per system, typed `<Tag>State`       | `g_ShopState`                               |
+| an array              | the plural of one element, sized by its `_COUNT`         | `g_Weapons[WEAPON_COUNT]`, `g_PartyMembers` |
+| parallel arrays       | the shared noun, then what each holds                    | `g_InventoryIds`, `g_InventoryCounts`       |
+| a struct              | the game noun, singular                                  | `Battler`, `ShopStock`, `EncounterTable`    |
+| a struct inside one   | the member named for its role                            | `stats`, `coord`, `cursor`                  |
+| a union               | the value, with one member per role it plays             | `argument`: `item_id` or `ability_id`       |
+| a pointer to a record | the record's own noun                                    | `Battler* battler = &g_Battlers[i];`        |
+| a yes/no local        | the state word                                           | `found`, `done`, `visible`                  |
+| a counter             | `timer` counts down to zero; `frame` counts up from zero | `timer`, `frame`                            |
+
+Locals use short game words: `battler`, `item`, `price`, `page`, `cursor`, `count`. A temporary that
+matching forces keeps the name of the value it holds.
+
+**Do**
+
+```c
+extern Battler   g_Battlers[BATTLER_COUNT];
+extern ShopState g_ShopState;
+
+Battler* battler = &g_Battlers[battler_index];
+```
+
+**Don't**
+
+```c
+extern u8 g_BattleActingBattler;          /* a step of the code, not the battler */
+extern u8 g_ShopVars[0x40];               /* a filler word, raw bytes */
+
+Battler* ptr = &g_Battlers[i];            /* a storage word for a game object */
+s32 tmp2, val;                            /* names that say nothing */
 ```
 
 ### Ids

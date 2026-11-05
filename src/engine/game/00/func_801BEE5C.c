@@ -45,7 +45,7 @@ found:
     off  = 0;
     do {
         rec         = (u8*)g_BattlePartyBattlers + off;
-        g_GameState = (GameStateRecord*)rec;
+        g_GameState = (GameState*)rec;
         g_SpadWork  = (Actor*)rec;
         kind        = rec[0x13C];
         flags       = g_Characters[kind].status;
@@ -82,7 +82,7 @@ phase2:
         idx         = 0;
         phase2_base = (u8*)g_BattlePartyBattlers + off;
         phase2_rec  = phase2_base;
-        g_GameState = (GameStateRecord*)phase2_rec;
+        g_GameState = (GameState*)phase2_rec;
         g_SpadWork  = (Actor*)phase2_rec;
         do {
             base                 = (u8*)((phase2_rec[0x05] << 6) + (u32)tbl);

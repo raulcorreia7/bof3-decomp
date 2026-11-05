@@ -27,11 +27,10 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 #include "data.h"
 #include <stdio.h>
 
-#define GRAPHICS_PALETTE_FADE_COUNT 0x20
-#define TILE_RUN_SIZE               0x8
+#define TILE_RUN_SIZE          0x8
 
 /* Fixed retail addresses the units dereference. */
-#define ENCOUNTER_TABLE_BASE        0x800E4000u /* formations and enemy records (@source: wiki:formats/area) */
+#define ENCOUNTER_TABLE_BASE   0x800E4000u /* formations and enemy records (@source: wiki:formats/area) */
 #define GAME_PALETTE_STAGE     0x80035600u /* 0x40-byte palette staging entries; GFX_StagePalette copies them out */
 #define GAME_PALETTE_MIRROR    0x80039600u /* GAME_PALETTE_STAGE + 0x4000, GFX_StagePalette's second copy */
 #define GAME_AREA_ID_ADDR      0x80143F00  /* the u16 world id; MEM reads it non-volatile to match retail */
@@ -145,16 +144,6 @@ typedef struct GameResetRecord {
     s16 unk_0A;
 } GameResetRecord;
 
-typedef struct GraphicsPaletteAnimation {
-    u8  flags;
-    u8  unk_01;
-    u8  unk_02;
-    u8  unk_03;
-    u8* source_table;
-    u8* current_entry;
-    u8* owner;
-} GraphicsPaletteAnimation;
-
 typedef struct {
     u8  cx;   /* 0x00 */
     u8  cy;   /* 0x01 */
@@ -213,15 +202,6 @@ typedef struct RoutePoint {
     s16 pad_06;
 } RoutePoint;
 
-/* Signed byte view of the three palette-offset counters in a 12-byte palette
- * entry, at the D_80145BD6 label. */
-typedef struct GamePaletteOffset {
-    s8 red_offset;
-    s8 green_offset;
-    s8 blue_offset;
-    u8 pad_03[9];
-} GamePaletteOffset;
-
 /* Per-slot column views over the 0x98-byte work records: the trailing padding
  * carries the record stride so each column keeps its own field base. */
 typedef struct GameSlotWordColumn {
@@ -273,142 +253,139 @@ typedef struct GameCursorState {
 ASSERT_OFFSET(GameCursorState, unk_04, 0x04);
 ASSERT_SIZE(GameCursorState, 0x0C);
 
-extern u16                      D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
-extern u8                       D_1F800003;
-extern u16                      D_1F800004; /* 0x1F800004 */
-extern u16                      D_1F800006; /* 0x1F800006 */
-extern s16                      D_1F800008; /* 0x1F800008 */
-extern u16                      D_1F80000A; /* 0x1F80000A */
-extern s16                      D_1F80000C; /* 0x1F80000C */
-extern u16                      D_1F80000E; /* 0x1F80000E */
-extern s8                       D_800E4D40; /* 0x800E4D40 */
-extern s16                      D_800E4D42; /* 0x800E4D42 */
-extern u8                       D_80143BB1;
-extern volatile u16             g_GameAreaId;
-extern volatile u8              D_80143F06; /* 0x80143F06 */
-extern volatile u32             D_80143F08; /* 0x80143F08 */
-extern volatile u32             D_80143F0C; /* 0x80143F0C */
-extern s16                      D_80143F16; /* 0x80143F16; signed high halfword of the context bundle */
-extern s16                      D_80143F1A; /* 0x80143F1A */
-extern volatile u8              g_GameRequestKind;
-extern s16                      D_80143F22;
+extern u16                D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
+extern u8                 D_1F800003;
+extern u16                D_1F800004; /* 0x1F800004 */
+extern u16                D_1F800006; /* 0x1F800006 */
+extern s16                D_1F800008; /* 0x1F800008 */
+extern u16                D_1F80000A; /* 0x1F80000A */
+extern s16                D_1F80000C; /* 0x1F80000C */
+extern u16                D_1F80000E; /* 0x1F80000E */
+extern s8                 D_800E4D40; /* 0x800E4D40 */
+extern s16                D_800E4D42; /* 0x800E4D42 */
+extern u8                 D_80143BB1;
+extern volatile u16       g_GameAreaId;
+extern volatile u8        D_80143F06; /* 0x80143F06 */
+extern volatile u32       D_80143F08; /* 0x80143F08 */
+extern volatile u32       D_80143F0C; /* 0x80143F0C */
+extern s16                D_80143F16; /* 0x80143F16; signed high halfword of the context bundle */
+extern s16                D_80143F1A; /* 0x80143F1A */
+extern volatile u8        g_GameRequestKind;
+extern s16                D_80143F22;
 /* Scene step byte, countdown halfword and the slot index cached in the
  * scratchpad byte at 0x1F800000. The read-modify-write sites go through a
  * pointer, which is the shape this target's exact siblings use; plain stores
  * keep the scalar spelling.
  */
-extern s16                      D_80143F26;
-extern s16                      D_80143F2A;
-extern RoutePoint               D_80143F2E[]; /* 0x80143F2E */
-extern s16                      D_80143F32;
-extern u8                       D_80143F49;
-extern volatile u8              D_80143F4A;
-extern volatile u8              D_80143F4B; /* 0x80143F4B */
-extern s8                       D_80143F4E; /* 0x80143F4E */
-extern u8                       D_80143F51;
-extern s32                      D_80143F5C;
-extern s32                      D_80143F84;
-extern s16                      g_ScrollHeight;
-extern u8                       D_80143FBC;
-extern u8                       D_80143FBD;
-extern u8                       D_80143FBF;
-extern u8                       D_80143FC1;
-extern u8                       D_80143FC3;
-extern s8                       D_801448E8; /* 0x801448E8 */
-extern s16                      D_801448EE; /* 0x801448EE */
-extern s16                      D_801448F0; /* 0x801448F0 */
-extern u8                       D_80144EE2;
-extern u8                       D_80144F5E[]; /* 0x80144F5E */
-extern u8                       D_80144FC4[]; /* 0x80144FC4; per-slot spawn-gate flag bytes */
-extern u8                       D_80145004[]; /* 0x80145004 */
-extern s32                      D_8014503C;   /* 0x8014503C */
-extern s8                       D_8014504B;   /* 0x8014504B */
-extern u8                       g_FairyRooms;
-extern u8                       D_801457AB;
-extern PaletteFade              D_80145BD4[];
-extern GamePaletteOffset        D_80145BD6[];
-extern GraphicsPaletteAnimation D_80145D94[];
-extern u8                       D_80145E97;
-extern u8                       D_80145E9B;
-extern s32                      D_80145EA4; /* 0x80145EA4 */
-extern u8                       D_80145EBB;
-extern u16                      D_80145EBC; /* 0x80145EBC */
-extern u32                      D_80145EDC; /* 0x80145EDC */
-extern u8                       D_80145F00; /* 0x80145F00 */
-extern u8                       D_80145F09; /* 0x80145F09 */
-extern u8                       D_80145FA8; /* 0x80145FA8 */
-extern u8                       D_80145FAC;
-extern u8                       D_80145FB4[];
-extern u16                      D_80145FB8; /* 0x80145FB8 */
-extern u8                       D_80145FD1;
-extern u8                       D_80145FD6;
-extern u8                       D_80145FDB;
-extern u8                       D_80146111;
-extern u8                       D_80146119;
-extern u8                       D_8014611B;
-extern s32                      D_8014611C;
-extern s32                      D_80146120;
-extern s32                      D_80146144;
-extern s32                      D_80146148;
-extern volatile u8              D_80146256;
-extern u8                       D_80146260;
-extern u8                       D_80146261;
-extern u8                       D_80146262;
-extern s32                      D_80146264; /* 0x80146264 */
-extern s16                      D_80146266; /* 0x80146266 */
-extern s32                      D_80146268; /* 0x80146268 */
-extern s16                      D_8014626A; /* 0x8014626A */
-extern u8                       D_8014626C;
-extern u8                       D_8014626E;
-extern u8                       D_8014626F;
-extern u8                       D_80146270;
-extern u8                       g_BattleUiStep;
-extern u8                       g_BattleUiState;
-extern u8                       g_BattleScrollDir;
-extern u8                       g_BattlePartyCount;
-extern u8                       D_80146855;
-extern u8                       D_80146856;
-extern u16                      D_80146878;
-extern u8                       D_8014688F;
-extern u8                       D_80146893[]; /* 0x80146893 */
-extern GameSlotByteColumn       D_801468B1[];
-extern GameSlotWordColumn       D_801468B6[];
-extern GameSlotWordColumn       D_801468B8[];
-extern u8                       D_801468BE[]; /* 0x801468BE */
-extern u8                       D_801468C2[]; /* 0x801468C2 */
-extern s32                      D_801468C4;
-extern u8                       D_801468FF;
-extern u8                       D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
-extern u16                      D_80146904[30][0x4C];               /* 0x80146904 */
-extern s32                      D_80146908[30][0x26];               /* 0x80146908 */
-extern s32                      D_8014690C[30][0x26];               /* 0x8014690C */
-extern s32                      D_80146910[30][0x26];               /* 0x80146910 */
-extern u16                      D_80146914;
-extern u16                      D_80146918[][ACTOR_SIZE / 2];
-extern u8                       D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
-extern Actor                    D_80147A58[];
-extern u8                       D_80147CB8[]; /* 0x80147CB8 */
-extern s8                       D_80147CB9[]; /* 0x80147CB9 */
-extern s8                       D_80147CBA[]; /* 0x80147CBA */
-extern u8                       D_80147CBB[]; /* 0x80147CBB */
-extern s32                      D_80147CBC[];
-extern s32                      D_80147CC0[];
-extern s32                      D_80147CC4[];
-extern u16                      D_801481D8;
-extern Vec3i                    D_801481E8;   /* scene angle, 16.16 fixed point */
-extern Vec3i                    D_801481F8;   /* per-frame step of D_801481E8 */
-extern s16                      D_8014820C;   /* 0x8014820C */
-extern s8                       D_80148654;   /* 0x80148654 */
-extern s8                       D_80148656;   /* 0x80148656 */
-extern s8                       D_801490E0;   /* 0x801490E0 */
-extern u8                       D_801581E0[]; /* 0x801581E0 */
-extern u8*                      D_80181164[];
-extern FacingStep               g_FacingOffsets[]; /* 0x80181AC0 */
-extern s8                       D_80181B00[];
-extern s8                       D_80181B01[];
-extern u8                       D_80181B1C[]; /* 0x80181B1C */
-extern u8                       D_80181B28[]; /* 0x80181B28 */
-extern s16                      D_80181B70[]; /* 0x80181B70 */
+extern s16                D_80143F26;
+extern s16                D_80143F2A;
+extern RoutePoint         D_80143F2E[]; /* 0x80143F2E */
+extern s16                D_80143F32;
+extern u8                 D_80143F49;
+extern volatile u8        D_80143F4A;
+extern volatile u8        D_80143F4B; /* 0x80143F4B */
+extern s8                 D_80143F4E; /* 0x80143F4E */
+extern u8                 D_80143F51;
+extern s32                D_80143F5C;
+extern s32                D_80143F84;
+extern s16                g_ScrollHeight;
+extern u8                 D_80143FBC;
+extern u8                 D_80143FBD;
+extern u8                 D_80143FBF;
+extern u8                 D_80143FC1;
+extern u8                 D_80143FC3;
+extern s8                 D_801448E8; /* 0x801448E8 */
+extern s16                D_801448EE; /* 0x801448EE */
+extern s16                D_801448F0; /* 0x801448F0 */
+extern u8                 D_80144EE2;
+extern u8                 D_80144F5E[]; /* 0x80144F5E */
+extern u8                 D_80144FC4[]; /* 0x80144FC4; per-slot spawn-gate flag bytes */
+extern u8                 D_80145004[]; /* 0x80145004 */
+extern s32                D_8014503C;   /* 0x8014503C */
+extern s8                 D_8014504B;   /* 0x8014504B */
+extern u8                 g_FairyRooms;
+extern u8                 D_801457AB;
+extern u8                 D_80145E97;
+extern u8                 D_80145E9B;
+extern s32                D_80145EA4; /* 0x80145EA4 */
+extern u8                 D_80145EBB;
+extern u16                D_80145EBC; /* 0x80145EBC */
+extern u32                D_80145EDC; /* 0x80145EDC */
+extern u8                 D_80145F00; /* 0x80145F00 */
+extern u8                 D_80145F09; /* 0x80145F09 */
+extern u8                 D_80145FA8; /* 0x80145FA8 */
+extern u8                 D_80145FAC;
+extern u8                 D_80145FB4[];
+extern u16                D_80145FB8; /* 0x80145FB8 */
+extern u8                 D_80145FD1;
+extern u8                 D_80145FD6;
+extern u8                 D_80145FDB;
+extern u8                 D_80146111;
+extern u8                 D_80146119;
+extern u8                 D_8014611B;
+extern s32                D_8014611C;
+extern s32                D_80146120;
+extern s32                D_80146144;
+extern s32                D_80146148;
+extern volatile u8        D_80146256;
+extern u8                 D_80146260;
+extern u8                 D_80146261;
+extern u8                 D_80146262;
+extern s32                D_80146264; /* 0x80146264 */
+extern s16                D_80146266; /* 0x80146266 */
+extern s32                D_80146268; /* 0x80146268 */
+extern s16                D_8014626A; /* 0x8014626A */
+extern u8                 D_8014626C;
+extern u8                 D_8014626E;
+extern u8                 D_8014626F;
+extern u8                 D_80146270;
+extern u8                 g_BattleUiStep;
+extern u8                 g_BattleUiState;
+extern u8                 g_BattleScrollDir;
+extern u8                 g_BattlePartyCount;
+extern u8                 D_80146855;
+extern u8                 D_80146856;
+extern u16                D_80146878;
+extern u8                 D_8014688F;
+extern u8                 D_80146893[]; /* 0x80146893 */
+extern GameSlotByteColumn D_801468B1[];
+extern GameSlotWordColumn D_801468B6[];
+extern GameSlotWordColumn D_801468B8[];
+extern u8                 D_801468BE[]; /* 0x801468BE */
+extern u8                 D_801468C2[]; /* 0x801468C2 */
+extern s32                D_801468C4;
+extern u8                 D_801468FF;
+extern u8                 D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
+extern u16                D_80146904[30][0x4C];               /* 0x80146904 */
+extern s32                D_80146908[30][0x26];               /* 0x80146908 */
+extern s32                D_8014690C[30][0x26];               /* 0x8014690C */
+extern s32                D_80146910[30][0x26];               /* 0x80146910 */
+extern u16                D_80146914;
+extern u16                D_80146918[][ACTOR_SIZE / 2];
+extern u8                 D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
+extern Actor              D_80147A58[];
+extern u8                 D_80147CB8[]; /* 0x80147CB8 */
+extern s8                 D_80147CB9[]; /* 0x80147CB9 */
+extern s8                 D_80147CBA[]; /* 0x80147CBA */
+extern u8                 D_80147CBB[]; /* 0x80147CBB */
+extern s32                D_80147CBC[];
+extern s32                D_80147CC0[];
+extern s32                D_80147CC4[];
+extern u16                D_801481D8;
+extern Vec3i              D_801481E8;   /* scene angle, 16.16 fixed point */
+extern Vec3i              D_801481F8;   /* per-frame step of D_801481E8 */
+extern s16                D_8014820C;   /* 0x8014820C */
+extern s8                 D_80148654;   /* 0x80148654 */
+extern s8                 D_80148656;   /* 0x80148656 */
+extern s8                 D_801490E0;   /* 0x801490E0 */
+extern u8                 D_801581E0[]; /* 0x801581E0 */
+extern u8*                D_80181164[];
+extern FacingStep         g_FacingOffsets[]; /* 0x80181AC0 */
+extern s8                 D_80181B00[];
+extern s8                 D_80181B01[];
+extern u8                 D_80181B1C[]; /* 0x80181B1C */
+extern u8                 D_80181B28[]; /* 0x80181B28 */
+extern s16                D_80181B70[]; /* 0x80181B70 */
 extern u32      D_80181CA8[60]; /* 0x80181CA8 - the 60-word table the exe defines at src/engine/slus/data_80181CA8.c */
 extern s32      D_80181CAC;
 extern u8       D_80181E40[]; /* 0x80181E40 */

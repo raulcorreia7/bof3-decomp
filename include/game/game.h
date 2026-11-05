@@ -15,13 +15,22 @@
 #include "common/handler.h"
 #include "types.h"
 
+/* Rows in the palette fade table at D_80145BD4. */
+#define GRAPHICS_PALETTE_FADE_COUNT 32
+
+/* `PaletteFade.flags` bit 0 marks a row in use (@source: write:GFX_AllocPaletteFade@0x8019651C,
+ * read:GFX_FreePaletteFade@0x80196670). */
+typedef enum PaletteFadeFlags {
+    PALETTE_FADE_ACTIVE = 1 << 0,
+} PaletteFadeFlags;
+
 /* One 0xC-byte row of the palette fade table at D_80145BD4. */
 typedef struct PaletteFade {
-    u8  flags;
+    u8  flags;      /* PaletteFadeFlags */
     u8  saved_byte; /* the target byte at +0x27, restored on free */
-    u8  red_offset;
-    u8  green_offset;
-    u8  blue_offset;
+    s8  red_offset;
+    s8  green_offset;
+    s8  blue_offset;
     u8  table_index;
     u8  step;
     u8  unk_07;
@@ -30,6 +39,36 @@ typedef struct PaletteFade {
 
 ASSERT_OFFSET(PaletteFade, target, 0x08);
 ASSERT_SIZE(PaletteFade, 0x0C);
+
+/* The three fade offsets of each PaletteFade row as the D_80145BD6 label (D_80145BD4 + 2) addresses them. */
+typedef struct GamePaletteOffset {
+    s8 red_offset;
+    s8 green_offset;
+    s8 blue_offset;
+    u8 pad_03[9];
+} GamePaletteOffset;
+
+ASSERT_SIZE(GamePaletteOffset, 0x0C);
+
+/* One 0x10-byte slot of the palette animation table at D_80145D94; bit 0 of flags marks it in use. */
+typedef struct GraphicsPaletteAnimation {
+    u8  flags;
+    u8  unk_01;
+    u8  unk_02;
+    u8  unk_03;
+    u8* source_table;
+    u8* current_entry;
+    u8* owner;
+} GraphicsPaletteAnimation;
+
+ASSERT_SIZE(GraphicsPaletteAnimation, 0x10);
+
+/* D_80145BD4 */
+extern PaletteFade              D_80145BD4[GRAPHICS_PALETTE_FADE_COUNT];
+/* D_80145BD6 */
+extern GamePaletteOffset        D_80145BD6[GRAPHICS_PALETTE_FADE_COUNT];
+/* D_80145D94 */
+extern GraphicsPaletteAnimation D_80145D94[8];
 
 /* GAME.EMI#0 exports: the frontend's data and entry points, in address order. */
 

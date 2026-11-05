@@ -56,7 +56,7 @@ MATCH s32 Area_CanStartEncounter(void) {
     value = rec->y.fixed;
     /* x holds the step count, then the x sum */
     x     = rec->unk_09;
-    dy    = rec->unk_10 * x;
-    x     = rec->x.fixed + rec->unk_0C * x;
+    dy    = rec->vy * x;
+    x     = rec->x.fixed + rec->vx * x;
     return (AREA_CELL_CODE_S16(x >> 16, (value + dy) >> 16) & BYTE_MASK) == 0;
 }

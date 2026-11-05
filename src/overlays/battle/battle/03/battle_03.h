@@ -80,17 +80,6 @@ typedef struct DamageSpread {
     u8 percent[8];
 } DamageSpread;
 
-/* One 0xC-byte row of the sprite slot table at D_80145BD4. */
-typedef struct BattleSpriteSlot {
-    u8 pad_00[2];
-    u8 unk_02; /* +0x02 second copy of the shared sprite value */
-    u8 unk_03;
-    u8 unk_04;
-    u8 pad_05[7];
-} BattleSpriteSlot;
-
-ASSERT_SIZE(BattleSpriteSlot, 0xC);
-
 /* One 0xC-byte row of the event slot table at g_BattleEventSlots; D_801EB4DC points at the running row. */
 typedef struct BattleEventSlot {
     u8  unk_00;
@@ -207,49 +196,47 @@ typedef struct {
 } BattlePanelTaskForwarders;
 
 /* Overlay data and routines the sources use; names are the retail addresses. */
-extern u8               D_1F800002;
-extern u16*             D_800B4A64;
-extern u16*             D_800B4A68;
-extern u8               D_800B51F8[];
-extern void*            D_800B6178[];
+extern u8              D_1F800002;
+extern u16*            D_800B4A64;
+extern u16*            D_800B4A68;
+extern u8              D_800B51F8[];
+extern void*           D_800B6178[];
 /* D_800B65F8 */
-extern BattleSelection  g_BattleSelections[];
+extern BattleSelection g_BattleSelections[];
 /* D_80143F00 */
-extern u16              g_GameAreaId;
-extern BattleSpriteSlot D_80145BD4[];
-extern s32              D_80145BD6;
-extern s32              D_80145ED0;
-extern u8               D_80145F09[][BATTLE_PARTY_STRIDE];
-extern volatile u8      D_80145F18[];
-extern volatile u8      D_80145F1C[];
-extern u8               D_80145F20[];
-extern u8               D_80145F22[];
+extern u16             g_GameAreaId;
+extern s32             D_80145ED0;
+extern u8              D_80145F09[][BATTLE_PARTY_STRIDE];
+extern volatile u8     D_80145F18[];
+extern volatile u8     D_80145F1C[];
+extern u8              D_80145F20[];
+extern u8              D_80145F22[];
 /* One-field views of the same rows: the local rows (stride 0x140) and the
  * enemy rows (stride 0x118), each anchored at the field the retail symbol
  * names. */
-extern u8               D_80145FB1;
-extern u8               D_80145FB2[];
+extern u8              D_80145FB1;
+extern u8              D_80145FB2[];
 /* FAKE: func_801D4B38 and func_801D64C4 only match with the flags cell as its own volatile word row. */
-extern volatile u32     D_80145FB8[][80];
-extern u8               D_80145FC6;
-extern u8               D_80145FC7;
+extern volatile u32    D_80145FB8[][80];
+extern u8              D_80145FC6;
+extern u8              D_80145FC7;
 /* D_801462E3 */
-extern u8               g_BattleUiStep;
-extern u8               D_80145FC9;
-extern u8               D_801462E7;
+extern u8              g_BattleUiStep;
+extern u8              D_80145FC9;
+extern u8              D_801462E7;
 /* D_801462F0 */
-extern u8               g_BattlePartyCount;
-extern u8               D_801462F6[];
-extern u8               D_80146304; /* oscillation direction latch */
-extern u8               D_80146308; /* UI oscillator byte */
-extern u8               D_8014630C;
-extern u8               D_80146327;
-extern u8               D_80146364[];
+extern u8              g_BattlePartyCount;
+extern u8              D_801462F6[];
+extern u8              D_80146304; /* oscillation direction latch */
+extern u8              D_80146308; /* UI oscillator byte */
+extern u8              D_8014630C;
+extern u8              D_80146327;
+extern u8              D_80146364[];
 /* D_80146374 */
-extern u8               g_BattleActingBattler;
-extern u16              D_80146388;
+extern u8              g_BattleActingBattler;
+extern u16             D_80146388;
 /* D_80146394 */
-extern u8               g_BattleTarget;
+extern u8              g_BattleTarget;
 /* The active record's 0x118 result cells. */
 /* D_801463A0 */
 extern s16* volatile g_BattleTargetRecord;

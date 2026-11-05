@@ -531,11 +531,6 @@ extern u16                         g_InputRepeatButtons;
  * computes with them. */
 extern u16                         D_80145ACA;
 extern u16                         D_80145ACC;
-/* Palette work area in this executable's work region. The overlay's richer view
- * of the same addresses is src/engine/game/00/game_00.h (PaletteFade, a
- * 0x0C-byte record whose first byte is its flag). */
-extern u8                          D_80145BD4[];
-extern u8                          D_80145D94[];
 extern s32                         D_80145DA0;
 extern u8                          D_80145E9B[];
 extern u32                         D_80145EC4;

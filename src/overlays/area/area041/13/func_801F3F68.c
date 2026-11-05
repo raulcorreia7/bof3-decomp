@@ -6,7 +6,7 @@ MATCH void func_801F3F68(void) {
     s32    speed;
 
     actor = g_SpadWork;
-    speed = actor->unk_0C;
+    speed = actor->vx;
     actor->unk_0A -= 1;
     actor->x.fixed += speed;
     if (g_SpadWork->unk_0A == 0) {

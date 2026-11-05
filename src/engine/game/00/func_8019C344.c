@@ -17,7 +17,7 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
     if (func_8019C4F0(xh, yh) & BYTE_MASK) {
         return 1;
     }
-    if (g_SpadWork->unk_0C != 0) {
+    if (g_SpadWork->vx != 0) {
         if ((x & HALF_MASK) == 0) {
             goto fail; /* miss: return 0 */
         }
@@ -28,7 +28,7 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
                 return 1;
             }
         }
-        if (g_SpadWork->unk_0C <= 0) {
+        if (g_SpadWork->vx <= 0) {
             goto fail; /* miss: return 0 */
         }
         next_x = (s16)((x >> 16) + 1);
@@ -44,7 +44,7 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
                 return 1;
             }
         }
-        if (g_SpadWork->unk_10 <= 0) {
+        if (g_SpadWork->vy <= 0) {
             goto fail; /* miss: return 0 */
         }
         next_x = x >> 16;

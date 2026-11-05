@@ -18,7 +18,7 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
         do {
             kind        = 0;
             record      = (u8*)g_BattlePartyBattlers + offset;
-            g_GameState = (GameStateRecord*)record;
+            g_GameState = (GameState*)record;
             g_SpadWork  = (Actor*)record;
             key         = record[0x79];
             while (1) {

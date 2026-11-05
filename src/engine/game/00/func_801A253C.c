@@ -9,8 +9,8 @@ MATCH void func_801A253C(Actor* entity) {
 
     start_x = g_SpadWork->x.fixed;
     if (g_SpadWork->unk_09 != 0) {
-        g_SpadWork->x.fixed = start_x + g_SpadWork->unk_0C;
-        g_SpadWork->y.fixed += g_SpadWork->unk_10;
+        g_SpadWork->x.fixed = start_x + g_SpadWork->vx;
+        g_SpadWork->y.fixed += g_SpadWork->vy;
         g_SpadWork->z.part.integer += g_SpadWork->vz;
         g_SpadWork->unk_09--;
         if (g_SpadWork->unk_09 == 0) {

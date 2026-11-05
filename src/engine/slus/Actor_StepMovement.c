@@ -1,11 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* steps the scratchpad work record: it adds the unk_0C delta to
- * unk_34 and the unk_10 delta to unk_38, adds the old unk_14 shifted right by
- * eight to unk_3E, counts unk_0A down and adds the incoming step to unk_14;
- * it keeps the larger ground height in unk_3E, and when unk_0A runs out it writes
- * 0x10 divided by the byte from g_RouteSpeedScale into unk_0A, or calls
- * func_8015C9CC and sets unk_04 to 3.
+/* steps the scratchpad work record: it adds vx to x and vy to y, adds the old vz shifted right by eight
+ * to the z integer, counts unk_0A down and adds the incoming step to vz; it keeps the larger ground
+ * height in the z integer, and when unk_0A runs out it writes 0x10 divided by the byte from
+ * g_RouteSpeedScale into unk_0A, or calls Actor_ApplyVelocity and sets unk_04 to 3.
  */
 MATCH s8 Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, u8 flags) {
     Actor* work;
@@ -18,8 +16,8 @@ MATCH s8 Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     speed         = work->vz;
     sum           = work->x.fixed;
     count         = work->unk_0A - 1;
-    work->x.fixed = sum + work->unk_0C;
-    work->y.fixed += work->unk_10;
+    work->x.fixed = sum + work->vx;
+    work->y.fixed += work->vy;
     work->z.part.integer += work->vz >> 8;
     work->unk_0A = count;
     work->vz     = speed + vz_step;

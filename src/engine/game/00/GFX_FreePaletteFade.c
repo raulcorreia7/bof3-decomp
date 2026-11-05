@@ -4,7 +4,7 @@ MATCH void GFX_FreePaletteFade(u8 index) {
     u8* target;
     u8  saved;
 
-    if ((D_80145BD4[index].flags & 1u) == 0u) {
+    if ((D_80145BD4[index].flags & PALETTE_FADE_ACTIVE) == 0u) {
         return;
     }
     if ((D_80145BD4[index].flags & 0x80u) != 0u) {

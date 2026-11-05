@@ -5,8 +5,8 @@ MATCH void func_801B7658(void) {
 
     count = g_SpadWork->unk_09;
     if (count == 0) {
-        g_SpadWork->unk_0C = 0;
-        g_SpadWork->unk_10 = 0;
+        g_SpadWork->vx     = 0;
+        g_SpadWork->vy     = 0;
         g_SpadWork->unk_03 = 3;
     } else {
         g_SpadWork->unk_09 = (u8)(count - 1);

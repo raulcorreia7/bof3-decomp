@@ -17,7 +17,7 @@ MATCH void func_801BF448(void) {
         do {
             i           = 0;
             rec         = (u8*)g_BattlePartyBattlers + rec_off;
-            g_GameState = (GameStateRecord*)rec;
+            g_GameState = (GameState*)rec;
             g_SpadWork  = (Actor*)rec;
             key         = rec[0x79];
             while (1) {

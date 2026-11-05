@@ -10,9 +10,9 @@ MATCH void func_801F2F20(void) {
     x      = (D_80145EC4[0] + scaled) >> 16;
     y      = (D_80145EC8 + D_80145EA0 * D_80145E99) >> 16;
 
-    scratch         = g_SpadWork;
-    scratch->unk_0C = x;
-    scratch->unk_10 = y;
+    scratch     = g_SpadWork;
+    scratch->vx = x;
+    scratch->vy = y;
 
     /* The step stores re-read the work cell: the compiler must assume a call
      * may have changed it. */

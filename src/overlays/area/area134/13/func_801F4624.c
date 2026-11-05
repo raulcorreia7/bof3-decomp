@@ -7,7 +7,7 @@ MATCH void func_801F4624(void) {
     u8     count;
 
     work = (Actor*)g_SpadWork;
-    func_801F4E64(&work->unk_0C, work->unk_1C);
+    func_801F4E64(&work->vx, work->unk_1C);
     work2 = (Actor*)g_SpadWork;
     work->unk_1C += 0x1199;
     count         = (u8)(work2->unk_09 - 1);
