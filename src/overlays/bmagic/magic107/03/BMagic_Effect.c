@@ -10,12 +10,26 @@ MATCH void func_801EEC04(void) {
     table[SP_REF(u8*, 0x44)[1]]();
 }
 
-/* Body shape is row 6's field-view form (func_800AFD9C, Battle_AllocEffect(1, 0x19), the
- * D_801EC3A4/D_801EC338/D_801EC364/D_801EC368/D_801EC36C stores, SND_QueueSelectionFx(0x100)); everything
- * matches but one schedule slot: retail hoists the g_SpadWork cell reload for the span word to 0x801EECC0
- * (between the g_AreaScrollTargetX load and the D_801EC364 store); the s32 form leaves it by the word load at
- * 0x801EECE0 and the BattleFix32 union form hoists the coordinate loads too. Permuter candidate. */
-INCLUDE_ASM(func_801EEC5C);
+/* The g_SpadWork base for the span read must be fetched before the D_801EC364 store and the
+ * word_3C member read kept in place; both inline reads or an early span local shift the reload. */
+MATCH void func_801EEC5C(void) {
+    PartyBattler* work;
+    s32           scroll_x;
+    u32           offset;
+
+    func_800AFD9C();
+    offset                                      = (Battle_AllocEffect(1, 0x19) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+    FIELD(PartyBattler*, D_801EC3A4, offset)    = g_SpadWork;
+    FIELD(u8, D_801EC338, offset)               = ((PartyBattler*)D_8014637C)->word_08.byte.facing_08;
+    scroll_x                                    = g_AreaScrollTargetX;
+    work                                        = g_SpadWork;
+    FIELD(s32, D_801EC364, offset)              = scroll_x;
+    FIELD(s32, D_801EC368, offset)              = g_AreaScrollTargetY;
+    FIELD(s32, D_801EC36C, offset)              = work->word_3C.word + 0x04000000;
+    SND_QueueSelectionFx(0x100);
+    g_SpadWork->word_08.byte.unk_0B             = 0;
+    g_SpadWork->step_01 += 1;
+}
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
