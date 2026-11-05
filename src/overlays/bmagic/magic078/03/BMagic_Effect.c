@@ -45,12 +45,7 @@ MATCH void func_801EF1CC(void) {
 
 INCLUDE_ASM(func_801EF228);
 
-MATCH void func_801EF278(void) {
-    g_SpadWork->word_08.byte.timer_0A += 8;
-    if ((u8)g_SpadWork->word_08.byte.timer_0A >= 0x81U) {
-        g_SpadWork->unk_02 += 1;
-    }
-}
+INCLUDE_ASM(func_801EF278);
 
 INCLUDE_ASM(func_801EF2CC);
 
