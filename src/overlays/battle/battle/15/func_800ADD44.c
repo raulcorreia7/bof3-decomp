@@ -1,3 +1,5 @@
+/* Dropping the volatile cell changes the code: retail reloads it. */
+#define SPAD_WORK_VOLATILE
 #include "battle_15.h"
 
 MATCH void func_800ADD44(void) {

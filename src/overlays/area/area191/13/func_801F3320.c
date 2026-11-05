@@ -1,5 +1,3 @@
-/* Every step re-reads the scratchpad cell. */
-#define SPAD_WORK_VOLATILE
 #include "area191_13.h"
 
 MATCH void func_801F3320(void) {
