@@ -11,7 +11,7 @@ MATCH void func_801F3260(void) {
         MESSAGE_REQUEST_CLEAR();
         D_801F2944 = 1;
     } else {
-        g_MessageRequest         = 0x2A1;
-        g_ScriptWorkRecord[0x7A] = 0xFF;
+        g_MessageRequest                   = 0x2A1;
+        g_ScriptWorkRecord->callback_index = 0xFF;
     }
 }
