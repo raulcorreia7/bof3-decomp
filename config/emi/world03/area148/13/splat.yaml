@@ -13,7 +13,7 @@ segments:
       - [0x264, c, func_801F2E64]
       - [0x3A4, c, func_801F2FA4]
       - [0x420, c, func_801F3020]
-      - [0x51C, c, func_801F311C]
+      - [0x51C, c, Area_AdvanceCountdown]
       - [0x5AC, c, Area_Update]
       - [0x9D8, c, func_801F35D8]
       - [0xA1C, c, func_801F361C]
