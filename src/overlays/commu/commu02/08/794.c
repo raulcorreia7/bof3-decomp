@@ -321,6 +321,7 @@ INCLUDE_ASM(func_801D3E44);
 
 INCLUDE_ASM(func_801D4158);
 
+/* 4 differences; +0x48 call target shifts with a 12-byte short body; try the character selection. */
 INCLUDE_ASM(func_801D42B4);
 
 INCLUDE_ASM(func_801D437C);
