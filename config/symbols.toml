@@ -2788,6 +2788,7 @@ Message_ClearRequest = { addr = 0x801F3634, type = "func", source = "clears the 
 Actor_AdvanceWhenPartyNear = { addr = 0x801F2EA0, type = "func", source = "advances the work state when the party position is inside the work cell" }
 Actor_SlideScreenX = { addr = 0x801F2FE0, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F303C, type = "func", source = "advances the work state when the party position is outside the work cell" }
+Actor_SlideScreenDown16 = { addr = 0x801F314C, type = "func", source = "scrolls the actor screen origin down by 0x10 and cues 0x201 when it reaches zero (area167)" }
 Area_Update = { addr = 0x801F31BC, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 Actor_PlaceAtFocus = { addr = 0x801F4434, type = "func", source = "copies the field focus point into the work position" }
 
@@ -2795,6 +2796,7 @@ Actor_PlaceAtFocus = { addr = 0x801F4434, type = "func", source = "copies the fi
 Actor_AdvanceWhenPartyNear = { addr = 0x801F35F8, type = "func", source = "advances the work state when the party position is inside the work cell" }
 Actor_SlideScreenX = { addr = 0x801F3738, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F3794, type = "func", source = "advances the work state when the party position is outside the work cell" }
+Actor_SlideScreenDown16 = { addr = 0x801F38A4, type = "func", source = "scrolls the actor screen origin down by 0x10 and cues 0x201 when it reaches zero (area168)" }
 Area_Update = { addr = 0x801F3914, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 func_801F4158_area168 = { addr = 0x801F4158, type = "func", source = "mechanical disambiguation of the cross-image address-name collision with the area.h func_801F4158 edge_cross declaration (coordinator instruction)" }
 Message_ClearRequest = { addr = 0x801F4808, type = "func", source = "clears the area request slot and resets the game-overlay state bytes when the selection byte is clear" }
@@ -2803,12 +2805,14 @@ Message_ClearRequest = { addr = 0x801F4808, type = "func", source = "clears the 
 Actor_AdvanceWhenPartyNear = { addr = 0x801F2DCC, type = "func", source = "advances the work state when the party position is inside the work cell" }
 Actor_SlideScreenX = { addr = 0x801F2F0C, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F68, type = "func", source = "advances the work state when the party position is outside the work cell" }
+Actor_SlideScreenDown16 = { addr = 0x801F3078, type = "func", source = "scrolls the actor screen origin down by 0x10 and cues 0x201 when it reaches zero (area169)" }
 Area_Update = { addr = 0x801F30E8, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 
 ["emi/world04/area170/13"]
 Actor_AdvanceWhenPartyNear = { addr = 0x801F3DE8, type = "func", source = "advances the work state when the party position is inside the work cell" }
 Actor_SlideScreenX = { addr = 0x801F3F28, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
 Actor_AdvanceOutsidePartyCell = { addr = 0x801F3F84, type = "func", source = "advances the work state when the party position D_80145EC4/D_80145EC8 is outside the work cell: the first axis alone decides and the second axis keeps the work in place when the party stands in either half-cell of it, without the area update (func_801F2FB0 in area147/13, func_801F3020 in area148/13, func_801F3F84 in area170/13)" }
+Actor_SlideScreenDown16 = { addr = 0x801F4080, type = "func", source = "scrolls the actor screen origin down by 0x10 and cues 0x201 when it reaches zero (area170)" }
 Area_Update = { addr = 0x801F40F0, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 
 ["emi/world04/area172/13"]
@@ -2820,6 +2824,7 @@ Area_InitSpin = { addr = 0x801F3E90, type = "func", source = "starts one spin-ef
 
 ["emi/world04/area173/14"]
 Actor_SlideScreenX = { addr = 0x801F4458, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
+Actor_SlideScreenDown16 = { addr = 0x801F4570, type = "func", source = "scrolls the actor screen origin down by 0x10 and cues 0x201 when it reaches zero (area173)" }
 Area_Update = { addr = 0x801F45E0, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 Message_ShowParty = { addr = 0x801F48C4, type = "func", source = "shows the tagged area slot message and enters game state 2" }
 g_PartyMemberMessages = { addr = 0x801F5914, size = 0x18, source = "WORLD_ShowAreaSlotMessage matches tags[i] against a battle record row byte 0 and shows messages[i] through func_80150224" }
@@ -2828,6 +2833,7 @@ g_PartyMemberMessages = { addr = 0x801F5914, size = 0x18, source = "WORLD_ShowAr
 Actor_AdvanceWhenPartyNear = { addr = 0x801F363C, type = "func", source = "advances the work state when the party position is inside the work cell" }
 Actor_SlideScreenX = { addr = 0x801F377C, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "advances the work state when the party position is outside the work cell" }
+Actor_SlideScreenDown16 = { addr = 0x801F38E8, type = "func", source = "scrolls the actor screen origin down by 0x10 and cues 0x201 when it reaches zero (area174)" }
 Area_Update = { addr = 0x801F3958, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 
 ["emi/world04/area175/13"]
