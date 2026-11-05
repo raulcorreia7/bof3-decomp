@@ -40,7 +40,19 @@ MATCH void func_801EED7C(void) {
 
 INCLUDE_ASM(func_801EEE0C);
 
-INCLUDE_ASM(func_801EEF48);
+MATCH void func_801EEF48(void) {
+    s32 vec[4];
+
+    g_SpadWork->word_08.byte.timer_0A += 1;
+    vec[0] = ((s32)g_SpadWork->unk_18 >> 9) - 0x4000;
+    vec[1] = ((s32)g_SpadWork->unk_1C >> 9) - 0x4000;
+    vec[2] = (s32)g_SpadWork->unk_20 >> 0x11;
+    /* The retail build passes the never-written slot after the vector. */
+    func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x20);
+    if (func_800AF6B8(g_SpadWork->unk_18, g_SpadWork->unk_1C, g_SpadWork->unk_20, 0x8000) != 0) {
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void func_801EF020(void) {
     u8 temp_v0;

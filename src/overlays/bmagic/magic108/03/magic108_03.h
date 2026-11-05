@@ -8,6 +8,8 @@
 #define EFFECT_TICK_INCREMENT 8
 #define EFFECT_TICK_LIMIT     0x80
 
+void func_800AF3A0(s32, s32, s32, s32, s32);
+u32  func_800AF6B8(u32, u32, s32, u32);
 void func_801EED1C(void);
 
 extern Callback D_801EFC9C[];
