@@ -115,6 +115,7 @@ MATCH void func_801EF7B4(void) {
     }
 }
 
+/* First difference: lui v1 at entry; try a work pointer lifetime that keeps a0 across the coordinate loads. */
 INCLUDE_ASM(func_801EF844);
 
 MATCH void func_801EF8C0(void) {
