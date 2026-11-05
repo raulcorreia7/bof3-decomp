@@ -78,29 +78,9 @@ MATCH void func_801EF654(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x11);
 }
 
-MATCH void func_801EF6A4(void) {
-    g_SpadWork->word_08.byte.unk_09 += 1;
-    g_SpadWork->word_08.byte.timer_0A += 1;
-    if (g_SpadWork->word_08.byte.unk_09 == 0x19) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B |= 0x80;
-        g_SpadWork->unk_02 += 1;
-    }
-}
+#include "overlays/bmagic/Effect_CountUpAndMarkBattler.h"
 
-MATCH void func_801EF738(void) {
-    g_SpadWork->word_08.byte.unk_09 -= 2;
-    if (g_FrameCount & 1) {
-        g_SpadWork->word_08.byte.timer_0A += 1;
-    }
-    if (g_SpadWork->word_08.byte.unk_09 == 1) {
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
-        g_SpadWork->flags_00 = 0;
-        g_SpadWork->step_01  = 0;
-        g_SpadWork->unk_02   = 0;
-        g_SpadWork->unk_03   = 0;
-        g_SpadWork->unk_04   = 0;
-    }
-}
+#include "overlays/bmagic/Effect_CountDownByTwoFinishAtOne.h"
 
 INCLUDE_ASM(func_801EF818);
 
@@ -114,20 +94,7 @@ MATCH void func_801F00A0(void) {
 
 #include "overlays/bmagic/Effect_StepOnTickFlag.h"
 
-MATCH void func_801F0134(void) {
-    u8 counter;
-
-    counter                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = counter;
-    if (!(counter & 0xFF)) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
-        g_SpadWork->flags_00 = 0;
-        g_SpadWork->step_01  = 0;
-        g_SpadWork->unk_02   = 0;
-        g_SpadWork->unk_03   = 0;
-        g_SpadWork->unk_04   = 0;
-    }
-}
+#include "overlays/bmagic/Effect_CountDownCounterAndFinish.h"
 
 INCLUDE_ASM(func_801F01D0);
 

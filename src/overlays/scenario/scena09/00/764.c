@@ -252,13 +252,7 @@ MATCH void func_801FDD38(void) {
     func_801C1630();
 }
 
-MATCH void func_801FDD7C(void) {
-    EMI_LoaderStreamFamily(7U, 8U, 5U, 0U);
-    Party_BuildBattlers(0);
-    Party_JoinMember(CHAR_ID_NINA_ADULT);
-    Party_JoinMember(CHAR_ID_MOMO);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_JoinAdultNinaAndMomo.h"
 
 #include "overlays/scenario/Scene_JoinMomo.h"
 
@@ -270,13 +264,7 @@ MATCH void func_801FDE50(void) {
     func_801C1630();
 }
 
-MATCH void func_801FDE80(void) {
-    EMI_LoaderStreamFamily(7U, 6U, 5U, 0U);
-    Party_BuildBattlers(0);
-    Party_JoinMember(CHAR_ID_MOMO);
-    Party_JoinMember(CHAR_ID_PECO);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_JoinMomoAndPeco.h"
 
 #include "overlays/scenario/Scene_JoinPeco.h"
 

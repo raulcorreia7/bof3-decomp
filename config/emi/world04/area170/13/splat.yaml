@@ -25,7 +25,7 @@ segments:
       - [0x102C, c, func_801F3C2C]
       - [0x11E8, c, Actor_AdvanceWhenPartyNear]
       - [0x1328, c, Actor_SlideScreenX]
-      - [0x1384, c, func_801F3F84]
+      - [0x1384, c, Actor_AdvanceOutsidePartyCell]
       - [0x1480, c, func_801F4080]
       - [0x14F0, c, Area_Update]
       - [0x18F8, c, func_801F44F8]

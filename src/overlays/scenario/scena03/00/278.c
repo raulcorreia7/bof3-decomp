@@ -154,20 +154,7 @@ MATCH void func_801F754C(void) {
     slots[0x11][1] = 1;
 }
 
-MATCH void func_801F78E0(void) {
-    u8* work;
-
-    work = (u8*)g_SpadWork;
-    if (work[9] != 0) {
-        g_Actors[work[11]].flags_00 |= ACTOR_FLAG_HIDDEN;
-        g_SpadWork->unk_09 -= 1;
-    } else {
-        g_Actors[work[11]].flags_00 &= ~ACTOR_FLAG_HIDDEN;
-        g_Actors[g_SpadWork->unk_03].flags_00 = 0;
-        g_Actors[g_SpadWork->unk_04].flags_00 = 0;
-        g_SpadWork->unk_01                    = 2;
-    }
-}
+#include "shared/Actor_UnhideAndFinishAtZero.h"
 
 MATCH void Actor_FreePaletteFades_801F7A14(void) {
     u8** slots;
@@ -346,34 +333,7 @@ MATCH void func_801F85FC(void) {
     SYS_DISPATCH_TASK(D_801FCFAC, 1, g_SpadWork);
 }
 
-MATCH void func_801F8640(void) {
-    SVECTOR* vertex;
-    u16*     screen;
-    long     depth;
-    long     flag;
-    long     result;
-    u16      other;
-    u8**     slots;
-    u8*      work;
-    u8*      item;
-
-    vertex                 = D_1F800014;
-    screen                 = D_1F800034;
-    vertex->vx             = (s16)((D_80145EC4 >> 9) - 0x4000);
-    SP_REF(s16, 0x16)      = (s16)((D_80145EC8 >> 9) - 0x4000);
-    SP_REF(s16, 0x18)      = (s16)((-D_80145ECE) / 2);
-    result                 = RotTransPers(vertex, (long*)screen, &depth, &flag);
-    slots                  = SP_PTR(u8*, 0u);
-    work                   = slots[0x11];
-    FIELD(s32, work, 0x60) = result;
-    FIELD(u16, work, 0x2E) = screen[0];
-    other                  = SP_REF(u16, 0x36);
-    work[9]                = 0;
-    slots                  = SP_PTR(u8*, 0u);
-    item                   = slots[0x11];
-    FIELD(u16, work, 0x30) = other;
-    item[1] += 1;
-}
+#include "shared/Actor_ProjectFocusAndStep.h"
 
 MATCH void func_801F8710(void) {
     u8**   slots;

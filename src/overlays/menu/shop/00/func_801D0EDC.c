@@ -4,13 +4,13 @@
  * owns them (src/engine/game/00/game_00.h). */
 
 MATCH void func_801D0EDC(void) {
-    s32 index;
-    u8* pond;
-    u8* row;
-    u16 flags;
-    s32 count;
-    u32 have;
-    u32 need;
+    s32        index;
+    u8*        pond;
+    Character* row;
+    u16        flags;
+    s32        count;
+    u32        have;
+    u32        need;
 
     index = D_8014865C;
     if (index < 0) {
@@ -25,18 +25,18 @@ MATCH void func_801D0EDC(void) {
     count = 0;
 
     /* retail walks the records from the status halfword: +0x8 is current_hp, +0x10 is max_hp */
-    row = (u8*)&g_Characters[0].status;
+    row = &g_Characters[0];
     do {
-        need = *(volatile u16*)(row + 0x10) >> 2;
-        have = *(volatile u16*)(row + 0x8);
+        need = (u32)row->max_hp >> 2;
+        have = row->current_hp;
         if (have < need) {
-            flags = *(u16*)row | 0x2000;
+            flags = row->status | 0x2000;
         } else {
-            flags = *(u16*)row & 0xDFFF;
+            flags = row->status & 0xDFFF;
         }
-        *(u16*)row = flags;
+        row->status = flags;
         count++;
-        row += PARTY_RECORD_STRIDE;
+        row++;
     } while ((u8)count < PARTY_RECORD_COUNT);
 
     D_80148651 = 0;

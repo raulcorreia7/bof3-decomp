@@ -56,15 +56,7 @@ INCLUDE_ASM(func_801CF000);
 
 #include "overlays/plchar/Char_SelectScriptAndStep.h"
 
-MATCH void func_801CF190(void) {
-    Actor* work = g_SpadWork;
-
-    if ((g_ActorSlots[work->unk_06].flags_00 == 0 || g_ActorSlots[work->unk_06].unk_01 == 1) &&
-        g_AreaCameraMoving == 0) {
-        work->unk_06 = 0;
-        g_SpadWork->unk_03 -= 2;
-    }
-}
+#include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
 INCLUDE_ASM(func_801CF224);
 
@@ -86,16 +78,7 @@ MATCH void func_801CF560(void) {
 
 INCLUDE_ASM(func_801CF5CC);
 
-MATCH void func_801CF704(void) {
-    Actor* work = g_SpadWork;
-
-    if ((g_ActorSlots[work->unk_0B].flags_00 == 0 || g_ActorSlots[work->unk_0B].unk_01 == 1) &&
-        g_AreaCameraMoving == 0) {
-        work->unk_2B                   = 0;
-        g_GameState->mode_12B.s8_value = 0;
-    }
-    func_8014D978();
-}
+#include "overlays/plchar/Char_ClearModeIfUnused.h"
 
 INCLUDE_ASM(func_801CF7A0);
 
