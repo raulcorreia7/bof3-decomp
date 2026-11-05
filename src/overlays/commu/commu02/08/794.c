@@ -421,13 +421,13 @@ MATCH s32 func_801D5AD0(s32 arg0) {
     s32 var_s1;
 
     var_s1 = rand() & 0x7F;
-    do {
+    ORDER_LOCK_BEGIN
     loop_1:
         if ((u32)(var_s1 & 0xFF) >= (u32)(arg0 & 0xFF)) {
             var_s1 -= rand() & 0xF;
             goto loop_1;
         }
-    } while (0);
+    ORDER_LOCK_END;
     return var_s1 & 0xFF;
 }
 

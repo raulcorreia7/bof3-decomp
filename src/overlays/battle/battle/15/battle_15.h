@@ -918,9 +918,14 @@ void BattleStageAttackNameMessage(u32 slot_index, s8 queue_kind);
 void BattleStageMessageResource(void* message_slot);
 s32  func_801DEE4C();
 void func_801E24F8(u32 enemy_index, u32 script_index);
-void Actor_SelectScript_keep_a1(u32 arg0, u32 arg1);
-s32  func_80097574(void);
-void func_80097EC0(void);
+#if defined(MATCHING)
+/* A second name for Actor_SelectScript that also passes the payload the retail call leaves in $a1. */
+void Actor_SelectScript_keep_a1(u32 selector, u32 payload);
+#else
+#define Actor_SelectScript_keep_a1(selector, payload) Actor_SelectScript(selector)
+#endif
+s32         func_80097574(void);
+void        func_80097EC0(void);
 extern void func_8009AAE8(void);
 void        func_8009B03C(void);
 void        func_8009B160(void);

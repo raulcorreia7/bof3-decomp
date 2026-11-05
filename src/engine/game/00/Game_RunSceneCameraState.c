@@ -5,8 +5,8 @@ MATCH void Game_RunSceneCameraState(void) {
     Callback        handler;
 
     entry = &g_GameFlowHandlers[g_GameEntrySubstate];
-    /* FAKE: ORDER_LOCK is the macro spelling of the do/while (0) block that keeps this statement in place. */
-    ORDER_LOCK((void)0);
+    /* FAKE: the order fence splits the schedule here. */
+    ORDER_FENCE();
     handler = *entry;
     handler();
 }

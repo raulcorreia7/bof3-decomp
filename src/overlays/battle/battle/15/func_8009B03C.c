@@ -37,7 +37,7 @@ MATCH void func_8009B03C(void) {
     D_801485BE        = 0x3F;
     latch             = head - 0x24;
     /* FAKE: block boundary keeps the second store base-relative off the pinned base. */
-    ORDER_LOCK((void)0);
+    ORDER_FENCE();
     *latch             = one;
     saved_x            = D_80148574;
     D_80148597         = one;

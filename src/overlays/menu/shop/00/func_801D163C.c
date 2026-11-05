@@ -27,7 +27,7 @@ MATCH void func_801D163C(void) {
     D_80148474                 = 0;
     if (D_80148453 == 0) {
         /* FAKE: block boundary keeps the panel-task stores base-relative off one la. */
-        ORDER_LOCK((void)0);
+        ORDER_FENCE();
         g_MenuPanelTasks[21].unk_00[0] = 1;
         D_80148628                     = (u16)D_80148454 + 4;
         D_8014862A                     = (u16)D_80148456 + g_ShopStockIndex * 0xD + 0xA;

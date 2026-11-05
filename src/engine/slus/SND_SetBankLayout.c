@@ -64,8 +64,8 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
     w          = FIELD(s32, D_8018239C, off + 12);
     v += size;
     w = v + w;
-    /* FAKE: do-while(0) scope steers regalloc. */
-    do {
+    /* FAKE: the order lock steers regalloc. */
+    ORDER_LOCK_BEGIN
         D_80148A24 = v;
         D_80148A40 = w;
         D_801467C4 = w;
@@ -105,7 +105,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
         D_80148A44 = end;
         D_80148A2C = next;
         D_80148A48 = last;
-    } while (0);
+    ORDER_LOCK_END;
     D_80148A30 = size;
     D_80148A4C = v;
     D_801467F4 = off;

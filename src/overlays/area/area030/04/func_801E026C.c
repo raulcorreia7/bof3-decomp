@@ -18,10 +18,10 @@ MATCH void func_801E026C(s8 delta) {
             result = max;
         }
     } else {
-        /* FAKE: do-while(0) scope steers regalloc */
-        do {
+        /* FAKE: the order lock steers regalloc */
+        ORDER_LOCK_BEGIN
             result = 0;
-        } while (0);
+        ORDER_LOCK_END;
     }
     work->stamina_8E = result;
 }

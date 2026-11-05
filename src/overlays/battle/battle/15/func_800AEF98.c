@@ -7,7 +7,9 @@
  * the compiler keeps the $a1 write. The widths are the ones this caller
  * already used: a plain word for the selector and a plain word for the
  * payload. */
+#if defined(MATCHING)
 asm(".globl Actor_SelectScript_keep_a1\n.set Actor_SelectScript_keep_a1, Actor_SelectScript\n");
+#endif
 
 /* swaps the scratchpad work pointer (0x1F800044) for the active battle work record, then advances its +0x08
  * byte through Actor_SelectScript or, for kind 3 and above, forwards the kind and payload through func_801E24F8; restores

@@ -12,8 +12,7 @@ MATCH void func_801F2C04(void) {
         actor      = g_CurrentActor;
         D_801448EB = 0x2A;
         D_801448EC = 0;
-        do {
-        } while (0); /* FAKE: the empty loop keeps the unk_7E load below the byte stores. */
+        ORDER_FENCE(); /* FAKE: the order fence keeps the unk_7E load below the byte stores. */
         actor->unk_7E += 1;
     }
 }

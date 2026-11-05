@@ -22,10 +22,9 @@ MATCH void func_801D61C0(void) {
         D_801E6100[i] = value;
         if (value != 0) {
             SsSepPause(0, i);
-            /* Empty loop: the retail tail keeps the next-value increment in
-             * the cue call's delay slot; the block boundary holds it. */
-            do {
-            } while (0);
+            /* FAKE: the order fence keeps the next-value increment in
+             * the cue call's delay slot. */
+            ORDER_FENCE();
         }
         next = i + 1;
         i    = next;
