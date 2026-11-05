@@ -1290,6 +1290,7 @@ Fairy_JoinVillage = { addr = 0x801F00D4, type = "func", source = "activates a ra
 Fairy_VillageCountFairies = { addr = 0x801F02E4, type = "func", source = "counts the active rows of the 60-row fairy roster g_FairyJobs" }
 Fairy_VillageBuildJobs = { addr = 0x801F0534, type = "func", source = "builds task rows in the first 20 of the 30 g_Actors records from the active fairy records and their room kinds" }
 Fairy_ShowPlayRecordMessage = { addr = 0x801F1318, type = "func", source = "formats the play clock hours and minutes and g_BattleCount into text variables 0-2 (D_80145030 into 3), starts message 0x55 and enters game state 2" }
+Scene_ClearEventState = { addr = 0x801F1684, type = "func", source = "clears the script-active flag and the three scene event state bytes at D_801448EB" }
 Fairy_GrantGift = { addr = 0x801F18F8, type = "func", source = "claims the gift-shop row earned by the fairy's battle count and queues its item and message 0x96" }
 Fairy_RollExploreReward = { addr = 0x801F1BC8, type = "func", source = "rolls the weighted D_801EEC98 reward table for the fairy's job and queues the item or its message" }
 g_FairyExploreRewards = { addr = 0x801F2618, source = "Fairy_RollExploreReward reads the FairyExploreReward table" }
@@ -2887,6 +2888,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores 
 
 ["emi/world04/area187/13"]
 Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
+Scene_ClearEventState = { addr = 0x801F2CA4, type = "func", source = "clears the script-active flag and the three scene event state bytes at D_801448EB" }
 
 ["emi/world04/area188/13"]
 Area_AdvanceSpawnTimer = { addr = 0x801F3598, type = "func", source = "runs one frame of the spawn work: claims a slot every fourth frame of g_SpadWork +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_SpadWork +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)" }
@@ -4346,6 +4348,7 @@ Area_SubCameraOffsetY20 = { addr = 0x801F2DC8, type = "func", source = "subtract
 Area_AddCameraOffsetY20 = { addr = 0x801F2DF0, type = "func", source = "adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_SubCameraOffsetY2 = { addr = 0x801F2E68, type = "func", source = "subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_AddCameraOffsetY2 = { addr = 0x801F2E90, type = "func", source = "adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
+Scene_ClearEventState = { addr = 0x801F2F1C, type = "func", source = "clears the script-active flag and the three scene event state bytes at D_801448EB" }
 
 ["emi/battle/batl_end/00"]
 Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "its body calls Party_AddItem for each queued item and sets g_BattleStep 4" }
