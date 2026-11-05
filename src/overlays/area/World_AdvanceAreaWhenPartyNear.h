@@ -2,6 +2,6 @@
  */
 /* func_801F2DF4, func_801F2E64 */
 MATCH void World_AdvanceAreaWhenPartyNear(void) {
-World_AdvanceWhenPartyNear();
+    World_AdvanceWhenPartyNear();
     Area_Update(0);
 }

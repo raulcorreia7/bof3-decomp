@@ -3,7 +3,7 @@
  */
 /* func_801EF448, func_801EF5F0 */
 MATCH void Effect_CountDownAndSetTint(void) {
-u8 count;
+    u8 count;
 
     count                           = g_SpadWork->word_08.byte.unk_09 - 1;
     g_SpadWork->word_08.byte.unk_09 = count;

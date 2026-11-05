@@ -4,7 +4,7 @@
  */
 /* func_801F5034 (area104), func_801F5578 (area121) */
 MATCH s32 Game_RequestMenuOnInput(void) {
-if ((g_InputPressed & D_80145AB8) == 0) {
+    if ((g_InputPressed & D_80145AB8) == 0) {
         return 0;
     }
     if (g_GameFlags & GAME_FLAG_RUN_LOCK) {

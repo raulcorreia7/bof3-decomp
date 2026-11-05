@@ -3,7 +3,7 @@
  */
 /* func_801F3124 (area104), func_801F3078 (area121) */
 MATCH void Area_FindSceneRecordAndClearTint(void) {
-g_SpadWork->flags_24 = 0x80;
+    g_SpadWork->flags_24 = 0x80;
     Area_FindSceneRecord(0x158);
     g_SpadWork->unk_29            = 5;
     g_SpadWork->unk_2A            = 0;

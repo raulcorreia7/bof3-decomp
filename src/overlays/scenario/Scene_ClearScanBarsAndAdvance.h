@@ -3,7 +3,7 @@
  */
 /* func_801D15CC (sce15ef3), func_801D0DE8 (sce15ef2) */
 MATCH void Scene_ClearScanBarsAndAdvance(void) {
-Actor* work;
+    Actor* work;
 
     work         = g_SpadWork;
     work->unk_2E = 300;
