@@ -20,7 +20,13 @@ MATCH void func_801EEFD8(void) {
 
 INCLUDE_ASM(func_801EF01C);
 
-INCLUDE_ASM(func_801EF0E8);
+MATCH void func_801EF0E8(void) {
+    func_801E257C((u32) g_BattleActingBattler, 0xAU);
+    g_SpadWork->unk_27 = D_801EB4E0->unk_27;
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF164(void) {
     if (func_8014DAEC() & 0xFF) {
