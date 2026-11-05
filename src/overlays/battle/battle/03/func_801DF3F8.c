@@ -57,7 +57,7 @@ MATCH void func_801DF3F8(void) {
                 *(D_801EC339 + slot_offset) = level;
                 if (level < 12) {
                 } else {
-                    goto block_12; /* shared animation vector join */
+                    goto confuse_flip;
                 }
             } else {
                 PartyBattler* work = g_SpadWork;
@@ -69,7 +69,7 @@ MATCH void func_801DF3F8(void) {
                 level                       = *(D_801EC339 + slot_offset) - 1;
                 *(D_801EC339 + slot_offset) = level;
                 if (level < -11) {
-                block_12:
+                confuse_flip:
                     g_GameState->flags_124.value ^= 0x800;
                 }
             }
@@ -84,7 +84,7 @@ MATCH void func_801DF3F8(void) {
                 s32 slot_offset = actor->slot * BATTLE_EFFECT_STRIDE;
 
                 y_pos = *(s32*)(D_801EC368 + slot_offset) + (*(s8*)(D_801EC339 + slot_offset) << 9);
-                goto block_21; /* shared animation vector join */
+                goto store_coord_y;
             }
         }
     } else if ((g_BattleState & BATTLE_STATE_RELOAD_PARTY) && (g_GameState->flags_128.value & 2)) {
@@ -96,7 +96,7 @@ MATCH void func_801DF3F8(void) {
         actor                 = g_SpadWork;
         actor->coord_x_34.raw = (s32) * (s32*)(D_801EC364 + (actor->slot * BATTLE_EFFECT_STRIDE));
         y_pos                 = *(s32*)(D_801EC368 + (actor->slot * BATTLE_EFFECT_STRIDE));
-    block_21:
+    store_coord_y:
         actor->coord_y_38.raw = y_pos;
     }
     if (!(g_GameState->flags_124.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
