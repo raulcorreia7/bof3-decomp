@@ -35,7 +35,7 @@ NON_MATCHING void func_801D2DC4(void) {
     func_801E0DCC(0x11, 2, 0x87, 0xB4);
     work = g_SpadWork;
     if ((work->unk_10 == 0) && ((origin_y = work->unk_30, limit = *(&D_80146892 + (D_801E3208 * 0x98)),
-                                 step = FIELD(u8, D_801E320C, 0x3u) * 4, (((origin_y + step + 0xC) < limit) != 0)) ||
+                                 step = D_801E320C->unk_03 * 4, (((origin_y + step + 0xC) < limit) != 0)) ||
                                 (limit < ((origin_y - step) - 0xC)))) {
         timer = work->unk_09;
         if (timer >= 0xFU) {
@@ -53,7 +53,7 @@ NON_MATCHING void func_801D2DC4(void) {
     work_row                    = g_SpadWork;
     origin_y_now                = (u16)(FIELD(s16, work_row, 0x30u)) + FIELD(s32, work_row, 0x10u);
     FIELD(s16, work_row, 0x30u) = origin_y_now;
-    step_bytes                  = FIELD(u8, D_801E320C, 0x3u) * 4;
+    step_bytes                  = D_801E320C->unk_03 * 4;
     cursor_limit                = step_bytes - 0x24;
     if (origin_y_now >= cursor_limit) {
         gap          = 0x24 - step_bytes;
@@ -75,7 +75,7 @@ NON_MATCHING void func_801D2DC4(void) {
     FIELD(s8, prim, 0x6u)  = 0x80;
     GFX_AddPrim(2U, 0x10U);
     work_now     = g_SpadWork;
-    row_flags    = FIELD(u8, D_801E320C, 0x3u);
+    row_flags    = D_801E320C->unk_03;
     span         = row_flags * 8;
     band         = span + 0x18;
     line         = ((u16)(FIELD(s16, work_now, 0x30u)) - (row_flags * 4)) + 0xAD;

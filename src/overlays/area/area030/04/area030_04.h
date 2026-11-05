@@ -78,6 +78,27 @@ typedef struct FishingCueStep {
 
 ASSERT_SIZE(FishingCueStep, 0x08);
 
+/* One 10-byte character record row inside the PanelIcon table; D_801E320C is
+ * stepped to the selected row by func_801DDE2C. Bytes 0x04 through 0x07 are
+ * read as signed (func_801DB140). */
+typedef struct FishingCharRow {
+    u8 unk_00;    /* 0x00 */
+    u8 unk_01;    /* 0x01 */
+    u8 unk_02;    /* 0x02 */
+    u8 unk_03;    /* 0x03 */
+    s8 unk_04;    /* 0x04 */
+    s8 unk_05;    /* 0x05 */
+    s8 unk_06;    /* 0x06 */
+    s8 unk_07;    /* 0x07 */
+    u8 pad_08[2]; /* 0x08 */
+} FishingCharRow;
+
+ASSERT_SIZE(FishingCharRow, 0x0A);
+ASSERT_OFFSET(FishingCharRow, unk_04, 0x04);
+ASSERT_OFFSET(FishingCharRow, unk_05, 0x05);
+ASSERT_OFFSET(FishingCharRow, unk_06, 0x06);
+ASSERT_OFFSET(FishingCharRow, unk_07, 0x07);
+
 /* The item pointer at 0x50 and the message text pointer at 0x54 are stored as
  * words and dereferenced as bytes. */
 typedef union FishingItemPointer {
@@ -450,7 +471,7 @@ extern u8                    D_801E31FC;
 extern u8                    D_801E3200;
 extern u8                    D_801E3204;
 extern u8                    D_801E3208;
-extern u8*                   D_801E320C;
+extern FishingCharRow*       D_801E320C;
 extern FishingTarget*        D_801E3210;
 extern u8                    D_801E3214;
 

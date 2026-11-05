@@ -5,8 +5,8 @@
  * scratchpad probe record within 0x7FFF of the anchor on x and y and within
  * 0x400 on z. */
 MATCH s32 func_801E0770(void) {
-    u8* spad;
-    s32 d;
+    FishingState* work;
+    s32           d;
     /* FAKE: retail keeps the z delta in $v0. */
     MATCH_REG(s32, dz, "v0");
     /* FAKE: retail keeps the y anchor in $a0. */
@@ -29,15 +29,15 @@ MATCH s32 func_801E0770(void) {
     if (3 != D_80145E92[0]) {
         return result;
     }
-    spad = (u8*)g_SpadWork;
-    d    = -g_ActorSlots[0].x.fixed + *(s32*)(spad + 0x34);
+    work = FISHING_STATE;
+    d    = -g_ActorSlots[0].x.fixed + work->motion_34.unk_34;
     if (d < 0) {
         d = -d;
     }
     if (d > 0x7FFF) {
         return result;
     }
-    d      = *(s32*)(spad + 0x38);
+    d      = work->y_38.pos_y;
     anchor = g_ActorSlots[0].y.fixed;
     d      = d - anchor;
     if (d < 0) {
@@ -46,7 +46,7 @@ MATCH s32 func_801E0770(void) {
     if (d > limit) {
         return result;
     }
-    dz = *(s16*)(spad + 0x3E);
+    dz = work->bounce_3C.half.key_3E;
     dz = dz - g_ActorSlots[0].z.part.integer;
     if (dz < 0) {
         dz = -dz;
