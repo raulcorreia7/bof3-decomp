@@ -6,6 +6,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_RunStep.h"
 
+/* Structurally complete; the candidate keeps the loop counter in t-regs and CSEs the work
+ * reload, retail keeps them in $s0/$s1 and reloads g_SpadWork each iteration (75 vs 67
+ * instructions). Permuter tried: best 2030, 23 errors (2400 iterations). */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC70(void) {
     PartyBattler* src;
