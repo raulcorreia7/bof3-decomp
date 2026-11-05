@@ -104,11 +104,11 @@ MATCH void func_801F7E9C(void) {
 INCLUDE_ASM(func_801F7F04);
 
 MATCH void func_801F7F3C(void) {
-    s32 temp_v0;
+    s32 height;
 
-    temp_v0            = g_AreaCameraHeight + 0x10;
-    g_AreaCameraHeight = temp_v0;
-    if ((u32)temp_v0 >= 0xCC1U) {
+    height             = g_AreaCameraHeight + 0x10;
+    g_AreaCameraHeight = height;
+    if ((u32)height >= 0xCC1U) {
         D_80146875 = 0xF;
         D_80146874 += 1;
     }
