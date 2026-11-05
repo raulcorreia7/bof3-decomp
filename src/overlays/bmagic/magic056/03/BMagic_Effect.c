@@ -68,8 +68,6 @@ MATCH void func_801EFA50(void) {
 }
 
 MATCH void Effect_CopyBattlerCoords_801EFAD8(void) {
-    PartyBattler* src;
-
     BMAGIC_COPY_BATTLER_COORDS();
 }
 

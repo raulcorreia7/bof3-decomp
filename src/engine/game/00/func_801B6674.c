@@ -11,7 +11,7 @@ NON_MATCHING s32 func_801B6674(void) {
     u8  status;
     u8* counter;
 
-    temp   = Area_GetCellCode(g_Task->x.part.integer, g_Task->y.part.integer);
+    temp   = Area_GetCellCode(COORD_INT(g_Task->x), COORD_INT(g_Task->y));
     status = g_GameRequestFlags;
     if (!(status & 1)) {
         return 0;

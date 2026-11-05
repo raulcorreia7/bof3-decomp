@@ -10,7 +10,7 @@ MATCH void func_801B3488(void) {
         func_801C56E4();
     }
     if (!((g_GameFlags | g_AreaWalkFlags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
-        Area_AdvanceScroll(((Actor*)SCRATCH_WORK)->z.part.integer);
+        Area_AdvanceScroll(COORD_INT(((Actor*)SCRATCH_WORK)->z));
         func_801C2710();
     }
 }

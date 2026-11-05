@@ -35,11 +35,11 @@ MATCH void func_801A5EFC(u8* script) {
 
     D_80146910[*counter][0] = 0;
 
-    g_Task->z.part.integer = Area_SampleHeight(work->x.fixed, work->y.fixed);
-    g_Task->mode           = script[0xA];
-    g_Task->step           = script[0xC];
-    g_Task->direction_08   = script[0] & 0xF;
-    g_Task->unk_06         = script[0] >> 4;
+    COORD_INT(g_Task->z) = Area_SampleHeight(work->x.fixed, work->y.fixed);
+    g_Task->mode         = script[0xA];
+    g_Task->step         = script[0xC];
+    g_Task->direction_08 = script[0] & 0xF;
+    g_Task->unk_06       = script[0] >> 4;
 
     /* The headers declare the per-slot columns D_80146914 and D_80146916 as scalars,
      * so their slot offset stays byte arithmetic on the column address. */

@@ -132,8 +132,8 @@ MATCH void func_801F02F4(void) {
 
     work = g_Task;
     if (work->timer == 0) {
-        work->unk_09             = 8;
-        work->pos.z.part.integer = work->pos.z.part.integer + 0x200;
+        work->unk_09 = 8;
+        COORD_INT(work->pos.z) += 0x200;
         Bmagic_NextStep();
     } else {
         work->timer = work->timer - 1;

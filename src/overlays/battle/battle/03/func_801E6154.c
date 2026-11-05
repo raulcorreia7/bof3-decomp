@@ -5,7 +5,7 @@ MATCH void func_801E6154(void) {
     BattleEffect* new_var;
 
     work = D_801EC2E0;
-    if ((work->pos.y.part.integer >= work->unk_1C) && (work->unk_18 != work->pos.x.part.integer)) {
+    if ((COORD_INT(work->pos.y) >= work->unk_1C) && (work->unk_18 != COORD_INT(work->pos.x))) {
         work->unk_09 = 10;
         D_801EC2E0->mode++;
     } else {

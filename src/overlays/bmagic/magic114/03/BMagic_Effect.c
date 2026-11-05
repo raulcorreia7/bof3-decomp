@@ -75,7 +75,7 @@ MATCH void func_801EF6A8(void) {
     src    = (PartyBattler*)D_801EB4E0;
     pos.vx = (src->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (src->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -(src->pos.z.part.integer + 0x200) / 2;
+    pos.vz = -(COORD_INT(src->pos.z) + 0x200) / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
@@ -84,7 +84,7 @@ MATCH void func_801EF6A8(void) {
 }
 
 MATCH void func_801EF774(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_Task)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
 }
 
 MATCH void func_801EF7B8(void) {

@@ -17,8 +17,8 @@ MATCH void func_801F3224(void) {
             Actor_Clear();
             return;
         }
-        check[0x48]         = 0;
-        ((u8*)g_Task)[0x01] = 1;
+        check[0x48]      = 0;
+        TASK_BYTES[0x01] = 1;
         return;
     }
 

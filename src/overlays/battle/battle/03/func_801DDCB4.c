@@ -34,7 +34,7 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
     rt  = s_BattleStatusRecoveryPenalties;
     id2 = battler_index & BYTE_MASK;
     if (id2 < 3u) {
-        state = g_BattlePartyBattlers[id2].stats.resistances[RES_SLOT_STATUS];
+        state = g_BattlePartyBattlers[id2].stats.stats.resistances[RES_SLOT_STATUS];
     } else {
         enemy_index = id2 - 3u;
         state       = D_801EB630[enemy_index].resistances[RES_SLOT_STATUS];

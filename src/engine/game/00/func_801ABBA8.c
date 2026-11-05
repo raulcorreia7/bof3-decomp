@@ -28,7 +28,7 @@ MATCH void func_801ABBA8(void* sub, s32 route) {
         if (SP_REF(volatile u8, 0x0u) != 0) {
             result = Area_SampleHeight(pos_x, pos_y);
         }
-        g_Task->vz = (result - g_Task->z.part.integer) / g_Task->unk_09;
+        g_Task->vz = (result - COORD_INT(g_Task->z)) / g_Task->unk_09;
     }
     g_Task->flags |= ACTOR_FLAG_STEP_MOVE;
 }

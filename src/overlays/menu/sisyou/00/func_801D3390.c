@@ -21,7 +21,7 @@ MATCH void func_801D3390(void) {
         }
         D_801490DD                                                                          = 0;
         g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].master_id             = 0xFF;
-        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].unk_84                = 0;
+        g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].master_level          = 0;
         g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[0] = 0;
         g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[1] = 0;
         g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[2] = 0;

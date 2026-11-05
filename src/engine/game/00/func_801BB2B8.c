@@ -33,7 +33,7 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
     ypack.h.hi = y1;
     work       = g_Task;
 
-    if (work->x.part.fraction == 0) {
+    if (COORD_FRAC(work->x) == 0) {
         if (work->state_70.byte == 0)
             hx0 = (hx0 + (xpack.w & -0x10000)) / 2;
     } else if (work->state_70.byte != 0) {
@@ -41,7 +41,7 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
     }
 
     work = g_Task;
-    if (work->y.part.fraction == 0) {
+    if (COORD_FRAC(work->y) == 0) {
         if (work->state_70.byte == 0)
             hy0 = (hy0 + (ypack.w & -0x10000)) / 2;
     } else if (work->state_70.byte != 0) {

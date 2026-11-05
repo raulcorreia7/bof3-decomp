@@ -46,11 +46,11 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_slot, s32 
         }
     } else {
         clut = 7;
-        sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->power);
+        sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->stats.power);
         UI_DrawGlyphString(x + 44, y + 8, 7, (void*)g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->defense);
+        sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->stats.defense);
         UI_DrawGlyphString(x + 44, y + 23, 7, (void*)g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->agility);
+        sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->stats.agility);
         UI_DrawGlyphString(x + 44, y + 38, 7, (void*)g_UiFormatBuffer);
     }
     Menu_DrawCharacterPortrait((x + 0x46) & HALF_MASK, (y + 2) & HALF_MASK, stats->character_id, present);

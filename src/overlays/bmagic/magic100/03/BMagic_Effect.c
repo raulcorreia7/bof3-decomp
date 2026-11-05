@@ -94,7 +94,7 @@ MATCH void func_801EF434(void) {
     rot.vz = 0;
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -(g_Task->pos.z.part.integer + 0x100) / 2;
+    pos.vz = -(COORD_INT(g_Task->pos.z) + 0x100) / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
@@ -121,7 +121,7 @@ NON_MATCHING void func_801EF8E8(void) {
     pos.vx = (work->pos.x.raw >> 9) - 0x4000;
     pos.vy = (work->pos.y.raw >> 9) - 0x4000;
     if (work->step < 3) {
-        height = -work->pos.z.half.hi;
+        height = -COORD_INT(work->pos.z);
     } else {
         height = -(s16)Area_SampleHeight(work->pos.x.raw, work->pos.y.raw);
     }

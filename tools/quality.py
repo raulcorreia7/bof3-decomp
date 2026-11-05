@@ -9,7 +9,9 @@
 Metrics, counted inside ``MATCH`` function bodies unless noted:
 
 - ``addr``    matched functions still named ``func_<ADDR>``
-- ``names``   ``D_<ADDR>`` and ``unk_<hex>`` tokens
+- ``names``   ``D_<ADDR>``, ``unk_<hex>`` and ``FIELD(...)`` tokens: an offset access is an unnamed
+              member, so turning one into an ``unk_<OFF>`` member keeps the count; the
+              per-function ratchet also counts raw width casts the same way
 - ``casts``   lines with a raw width cast: ``*(u8 *)p``, ``((u8 *)p)[n]``, ``(u8 *)p + 0x10``
 - ``harmful`` ``MATCH_FAKE_PIN``, ``MATCH_REG``, ``MATCH_FAKE_OPAQUE``, ``MATCH_FAKE_USE``, ``CLOBBER_*``
 - ``notes``   ``FAKE:`` notes (whole file)
@@ -57,7 +59,7 @@ WEIGHT = {
 COMMENT = re.compile(r"/\*.*?\*/|//[^\n]*", re.S)
 FUNC = re.compile(r"^MATCH\s[^;{}()]*?\b(\w+)\s*\([^;{}]*\)\s*\{", re.M)
 ADDR_NAME = re.compile(r"func_[0-9A-Fa-f]{8}")
-PLACEHOLDER = re.compile(r"\b(?:D_[0-9A-Fa-f]{8}|unk_[0-9A-Fa-f]+)\b")
+PLACEHOLDER = re.compile(r"\b(?:D_[0-9A-Fa-f]{8}|unk_[0-9A-Fa-f]+|FIELD(?=\s*\())\b")
 WIDTH = r"(?:volatile\s+)?(?:u|s)(?:8|16|32)\s*\*\s*"
 RAW_CAST = re.compile(
     rf"\*\s*\(\s*{WIDTH}\)"  # *(u8 *)p
@@ -222,7 +224,7 @@ def functions(
     out: dict[str, tuple[int, str, bool]] = {}
     for path in sorted(set(paths) & files.keys()):
         for name, body in bodies(strip_comments(files[path])):
-            tokens = len(PLACEHOLDER.findall(body))
+            tokens = unnamed(body)
             prior = out.get(name, (0, "", False))
             out[name] = (
                 max(tokens, prior[0]),
@@ -230,6 +232,12 @@ def functions(
                 bool(ADDR_NAME.fullmatch(name)),
             )
     return out
+
+
+def unnamed(body: str) -> int:
+    """Return the unnamed accesses in ``body``: placeholder tokens plus raw width casts, so a
+    byte view turned into an ``unk_<OFF>`` member keeps the count."""
+    return len(PLACEHOLDER.findall(body)) + len(RAW_CAST.findall(body))
 
 
 def placeholders(
@@ -240,9 +248,7 @@ def placeholders(
     out: dict[tuple[str, str], int] = {}
     for path in sorted(set(paths) & files.keys()):
         for name, body in bodies(strip_comments(files[path])):
-            out[path, name] = max(
-                len(PLACEHOLDER.findall(body)), out.get((path, name), 0)
-            )
+            out[path, name] = max(unnamed(body), out.get((path, name), 0))
     return out
 
 

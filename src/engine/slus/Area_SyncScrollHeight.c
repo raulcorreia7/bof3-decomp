@@ -5,7 +5,7 @@
  */
 MATCH void Area_SyncScrollHeight(void) {
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(g_GameState->pos.z.part.integer);
+        Area_AdvanceScroll(COORD_INT(g_GameState->pos.z));
         g_GameStateIndex = GAME_REQUEST_IDLE;
     }
 }

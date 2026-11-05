@@ -698,8 +698,6 @@ MATCH void func_801D7DD4(void) {
 
 /* func_801D7E30 */
 MATCH void Commu_AdvanceStep_801D7E30(void) {
-    u8* state;
-
     COMMU_ADVANCE_STEP();
 }
 

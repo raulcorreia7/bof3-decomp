@@ -31,10 +31,10 @@ MATCH u32 Battle_ApplyDamage(u8 attacker, u8 target) {
                 g_BattlePartyBattlers[target].stats.current_hp = 0;
             }
         } else if (g_BattlePartyBattlers[target].stats.current_hp - damage <
-                   g_BattlePartyBattlers[target].stats.max_hp) {
+                   g_BattlePartyBattlers[target].stats.stats.max_hp) {
             g_BattlePartyBattlers[target].stats.current_hp -= damage;
         } else {
-            g_BattlePartyBattlers[target].stats.current_hp = g_BattlePartyBattlers[target].stats.max_hp;
+            g_BattlePartyBattlers[target].stats.current_hp = g_BattlePartyBattlers[target].stats.stats.max_hp;
             g_BattlePartyBattlers[target].unk_120 |= 4;
         }
     } else if (ENEMY_COMBATANT(target).hp != 0xFFFF) {
@@ -59,13 +59,16 @@ MATCH u32 Battle_ApplyDamage(u8 attacker, u8 target) {
         }
     }
     if (attacker < 3 && g_BattlePartyBattlers[attacker].unk_13A[2] == 5 && damage != 0) {
-        if (g_BattlePartyBattlers[attacker].stats.weapon == WEAPON_SLEEP_SHELLS && !func_800A3DF8(attacker, target)) {
+        if (g_BattlePartyBattlers[attacker].stats.equipment.weapon == WEAPON_SLEEP_SHELLS &&
+            !func_800A3DF8(attacker, target)) {
             func_800A31E0(target, 0x40);
         }
-        if (g_BattlePartyBattlers[attacker].stats.weapon == WEAPON_FLASH_SHELLS && !func_800A3DF8(attacker, target)) {
+        if (g_BattlePartyBattlers[attacker].stats.equipment.weapon == WEAPON_FLASH_SHELLS &&
+            !func_800A3DF8(attacker, target)) {
             func_800A31E0(target, 8);
         }
-        if (g_BattlePartyBattlers[attacker].stats.weapon == WEAPON_GAS_SHELLS && !func_800A3DF8(attacker, target)) {
+        if (g_BattlePartyBattlers[attacker].stats.equipment.weapon == WEAPON_GAS_SHELLS &&
+            !func_800A3DF8(attacker, target)) {
             func_800A31E0(target, 0x20);
         }
     }
