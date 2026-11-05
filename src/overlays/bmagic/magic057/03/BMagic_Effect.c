@@ -25,7 +25,16 @@ MATCH void func_801EED2C(void) {
 
 INCLUDE_ASM(func_801EED98);
 
-INCLUDE_ASM(func_801EEE50);
+MATCH void func_801EEE50(void) {
+    PartyBattler* temp_s0;
+
+    temp_s0    = g_SpadWork;
+    g_SpadWork = D_801EC2E0->target.party;
+    func_8014DAEC();
+    g_SpadWork                        = temp_s0;
+    temp_s0->word_08.byte.unk_09      = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
+}
 
 INCLUDE_ASM(func_801EEEB0);
 
