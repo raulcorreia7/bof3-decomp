@@ -15,8 +15,7 @@ MATCH void func_801E9FDC(void) {
 
     panel    = g_MenuPanelTaskCurrent;
     index    = panel->unk_0A;
-    /* FAKE: retail reads D_80145E98 as u8[]. */
-    b0       = ((u8*)&D_80145E98)[index * BATTLE_PARTY_STRIDE];
+    b0       = g_BattlePartyBattlers[index].word_08.byte.facing_08;
     b1       = D_80145F09[index][0];
     panel->x = g_BattlePartyBattlers[index].unk_2E.signed_half + *(s8*)&g_BattlePanelOffsets[b1 * 8 + b0 * 2] +
                (b0 == 0 || b0 == 3 ? D_801EAEA4 : D_801EAEA6);
