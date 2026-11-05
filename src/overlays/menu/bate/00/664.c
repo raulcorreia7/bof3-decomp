@@ -231,7 +231,56 @@ INCLUDE_ASM(func_801D5634);
 /* Same body in the shop, start, Bate and Shisu overlays; the shop draft differs from retail in frame size (0x58 against 0x50) and save order, and the retail parameter locals sit in s6, s3, s0 and s4. */
 INCLUDE_ASM(Menu_DrawEquipStatWindow);
 
-INCLUDE_ASM(Menu_DrawClutStrip);
+MATCH void Menu_DrawClutStrip(u8 clut_index) {
+    u16             cluts[4];
+    u16*            clut;
+    SPRT*           prim;
+    u8*             entry;
+    MenuSpriteRect* desc;
+    s16             x;
+    s16             y;
+    s32             index;
+    /* FAKE: retail keeps the constant shade byte in s5. */
+    MATCH_REG(u8, shade, "s5");
+    u8 h;
+    u8 row;
+    u8 pair;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256), NULL);
+    GFX_AddPrim(1, 0xC);
+    cluts[0] = GetClut(48, 482);
+    cluts[1] = GetClut(80, 482);
+    cluts[2] = GetClut(64, 482);
+    cluts[3] = GetClut(96, 482);
+    index    = clut_index & BYTE_MASK;
+    clut     = (u16*)((index << 1) + (u32)cluts);
+    x        = 0;
+    for (row = 0; row < 5; row++) {
+        entry = &D_801D8DD4[D_801D8E20[index]];
+        for (pair = 0; pair < 2; pair++, x += 0x20) {
+            y     = 0;
+            shade = 0x80;
+            do {
+                prim = (SPRT*)g_GfxPrimCursor;
+                SetSprt(prim);
+                SetSemiTrans(prim, 0);
+                prim->x0   = x;
+                prim->y0   = y;
+                prim->clut = *clut;
+                desc       = &D_801D8D28[*entry];
+                prim->u0   = desc->u;
+                prim->v0   = desc->v;
+                prim->w    = desc->w;
+                h          = desc->h;
+                setRGB0(prim, shade, shade, shade);
+                prim->h = h;
+                GFX_AddPrim(1, 0x14);
+                y += desc->h;
+                entry++;
+            } while (y < 240);
+        }
+    }
+}
 
 #include "overlays/menu/Menu_DrawFilledPanel.h"
 
