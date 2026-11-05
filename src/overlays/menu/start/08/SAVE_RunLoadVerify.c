@@ -37,7 +37,7 @@ MATCH void SAVE_RunLoadVerify(void) {
             g_GameFlags = D_80145025;
             if ((sum & SAVE_CHECKSUM_MASK) != stored) {
                 SND_PlayCue(EMI_CUE_ID(1, 7));
-                g_SaveCardStatus = 7;
+                g_SaveCardStatus = SAVE_STATUS_BAD_CHECKSUM;
             } else {
                 if (g_SndMono == 0) {
                     SsSetStereo();
@@ -45,7 +45,7 @@ MATCH void SAVE_RunLoadVerify(void) {
                     SsSetMono();
                 }
                 D_80148654       = 0x3C;
-                g_SaveCardStatus = 5;
+                g_SaveCardStatus = SAVE_STATUS_LOADED;
             }
         }
     }

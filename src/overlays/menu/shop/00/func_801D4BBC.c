@@ -21,7 +21,7 @@ MATCH void func_801D4BBC(void) {
             return;
         }
         flag             = D_801E60FC;
-        g_SaveCardStatus = flag ? 5 : CARD_EVENT_CAPACITY;
+        g_SaveCardStatus = flag ? SAVE_STATUS_NO_FILE : CARD_EVENT_CAPACITY;
     }
     SND_PlayCue(EMI_CUE_ID(1, 7));
     D_80148652 = 0xC;

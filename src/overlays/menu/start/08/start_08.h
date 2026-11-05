@@ -73,6 +73,14 @@ typedef union CampMenuStepCounter {
 ASSERT_SIZE(CampMenuStepCounter, 2);
 ASSERT_OFFSET(CampMenuStepCounter, rows, 0);
 
+/* The save menu results g_SaveCardStatus holds beyond the CardEvent codes 0 to 4. */
+enum {
+    SAVE_STATUS_LOADED       = 5, /* the load verified; the slots show */
+    SAVE_STATUS_NO_FILE      = 6, /* the card directory has no save file */
+    SAVE_STATUS_BAD_CHECKSUM = 7, /* the loaded file failed its checksum */
+    SAVE_STATUS_NO_CARD      = 8, /* neither port holds a usable card */
+};
+
 extern u16             g_GameAreaId;
 extern u8              D_80144F57;
 extern u16             D_80145594[];

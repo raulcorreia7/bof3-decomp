@@ -15,7 +15,7 @@ MATCH void func_801E54A4(void) {
             g_MenuStartStep += 1;
             return;
         }
-        g_SaveCardStatus = 6;
+        g_SaveCardStatus = SAVE_STATUS_NO_FILE;
         /* Join the path where g_SaveCardStatus was already nonzero. */
         goto queue_cue;
     }
