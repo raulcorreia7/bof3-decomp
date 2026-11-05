@@ -82,9 +82,7 @@ INCLUDE_ASM(func_801CF8B4);
 
 INCLUDE_ASM(func_801CFD24);
 
-/* Char_SpawnActor variant (shared body in plchar/Char_SpawnActor.h, 57 instructions): this one adds 0x200 to the sampled
- * height and sets link_0B to 1, and keeps the args in $s2/$s3/$s4 with the constant in $s1; the template body with those two
- * edits and MATCH_REG pins still saves $s2 first where retail saves $s3 first (first difference at +0x4). */
+/* Exact draft: pin y to s4 and kind to s2, leave x unpinned; shared twins need an evidenced name. */
 INCLUDE_ASM(func_801CFF30);
 
 MATCH void func_801D001C(void) {
