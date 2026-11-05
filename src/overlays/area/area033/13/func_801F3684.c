@@ -9,7 +9,7 @@ MATCH void func_801F3684(void) {
         scratch->unk_03++;
     }
 
-    if ((D_801454F2 != 0 && ((u8*)g_SpadWork)[0x0B] != 0) || g_GameStateIndex == GAME_REQUEST_MESSAGE ||
+    if ((D_801454F2 != 0 && g_SpadWork->unk_0B != 0) || g_GameStateIndex == GAME_REQUEST_MESSAGE ||
         (g_GameFlags & GAME_FLAG_SCRIPT_ACTIVE) != 0) {
         ((u8*)g_SpadWork)[3] = 3;
     }

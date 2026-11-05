@@ -2,7 +2,7 @@
 #include "work/area_spad.h"
 
 MATCH void func_801F2C48(void) {
-    ((u8*)g_SpadWork)[0x0A] = 0x40;
-    ((u8*)g_SpadWork)[4]    = 1;
+    g_SpadWork->unk_0A   = 0x40;
+    ((u8*)g_SpadWork)[4] = 1;
     g_GameState->unk_122 -= 2;
 }
