@@ -49,7 +49,18 @@ INCLUDE_ASM(func_801EF47C);
 
 INCLUDE_ASM(func_801EF628);
 
-INCLUDE_ASM(func_801EF6E0);
+MATCH void func_801EF6E0(void) {
+    s32 cosine;
+
+    g_SpadWork->unk_2E.half += (s32)(rsin(g_SpadWork->unk_14) * 0x18) >> 0xC;
+    cosine = rcos(g_SpadWork->unk_14);
+    g_SpadWork->unk_30.half += (s32)(cosine * 0x18) >> 0xC;
+    g_SpadWork->word_08.byte.unk_09 += 1;
+    if (g_SpadWork->word_08.byte.unk_09 == 0x14) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        Actor_Clear();
+    }
+}
 
 INCLUDE_ASM(func_801EF7A8);
 
