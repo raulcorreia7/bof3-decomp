@@ -10,7 +10,7 @@ INCLUDE_ASM(func_801EEC84);
 
 MATCH void func_801EEE9C(void) {
     if (g_Task->word_08.byte.unk_0B == 0) {
-        D_801EB4E0->flags &= 0xBF;
+        D_801EB4E0->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(0x18, 0);
         g_Task->mode += 1;
     }
