@@ -54,7 +54,13 @@ INCLUDE_ASM(func_801EF768);
 
 INCLUDE_ASM(func_801EF864);
 
-INCLUDE_ASM(func_801EFA64);
+MATCH void func_801EFA64(void) {
+    s32 wave;
+    u16 phase;
+    u8  tick;
+
+    BMAGIC_SWAY_ADVANCE_WORK(D_801F21F0)
+}
 
 MATCH void func_801EFB14(void) {
     u16 phase;

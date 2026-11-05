@@ -92,7 +92,22 @@ MATCH void func_801EF678(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF720);
+MATCH void func_801EF720(void) {
+    PartyBattler* work;
+    PartyBattler* source;
+
+    g_SpadWork->unk_5D -= 8;
+    g_SpadWork->unk_5E -= 8;
+    g_SpadWork->unk_5F -= 8;
+    if ((s8)g_SpadWork->unk_5D == -0x80) {
+        work                 = g_SpadWork;
+        source               = BATTLE_ACTIVE_WORK;
+        work->coord_x_34.raw = source->coord_x_34.raw;
+        work->coord_y_38.raw = source->coord_y_38.raw;
+        work->word_3C.word   = source->word_3C.word;
+        work->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF7D0(void) {
     g_SpadWork->unk_5D += 0x10;
@@ -118,7 +133,29 @@ MATCH void func_801EF894(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF928);
+MATCH void func_801EF928(void) {
+    PartyBattler* work;
+    PartyBattler* source;
+    u8            temp_v0;
+
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->flags_00 |= 0x20;
+        g_SpadWork->unk_5C   = 1;
+        g_SpadWork->unk_5D   = (u8) - ((g_SpadWork->word_08.byte.unk_0B + 1) * 0x14);
+        g_SpadWork->unk_5E   = (u8) - ((g_SpadWork->word_08.byte.unk_0B + 1) * 0x14);
+        g_SpadWork->unk_5F   = (u8) - ((g_SpadWork->word_08.byte.unk_0B + 1) * 0x14);
+        g_SpadWork->unk_2B   = 0;
+        g_SpadWork->unk_27   = D_801EB4E0->unk_27;
+        work                 = g_SpadWork;
+        source               = BATTLE_ACTIVE_WORK;
+        work->coord_x_34.raw = source->coord_x_34.raw;
+        work->coord_y_38.raw = source->coord_y_38.raw;
+        work->word_3C.word   = source->word_3C.word;
+        work->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EFA70(void) {
     PartyBattler** selected;

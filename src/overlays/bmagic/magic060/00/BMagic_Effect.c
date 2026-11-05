@@ -173,7 +173,15 @@ MATCH void func_801F07E8(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 11, 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801F082C);
+MATCH void func_801F082C(void) {
+    PartyBattler** actor;
+
+    actor = &g_BattleSelectedActor;
+    func_80196718(*actor);
+    g_SpadWork->word_08.byte.unk_0B = func_8019651C(*actor, 0, 0, 0, 1);
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->unk_02 += 1;
+}
 
 INCLUDE_ASM(func_801F08B8);
 

@@ -217,7 +217,31 @@ MATCH void func_801EFE38(void) {
 
 #include "overlays/bmagic/Effect_PrimeTintOnScriptReady.h"
 
-INCLUDE_ASM(func_801EFFCC);
+MATCH void func_801EFFCC(void) {
+    PartyBattler* work;
+    PartyBattler* source;
+    s8            temp_v0;
+    u8            temp_v0_2;
+
+    temp_v0 = (s8)g_SpadWork->unk_5D;
+    if (temp_v0 != -0x80) {
+        g_SpadWork->unk_5D = temp_v0 - 0x10;
+        g_SpadWork->unk_5E -= 0x10;
+        g_SpadWork->unk_5F -= 0x10;
+    }
+    temp_v0_2 = g_SpadWork->word_08.byte.timer_0A;
+    if (temp_v0_2 != 0) {
+        g_SpadWork->word_08.byte.timer_0A = temp_v0_2 - 2;
+    }
+    if ((s8)g_SpadWork->unk_5D == -0x80) {
+        work                 = g_SpadWork;
+        source               = BATTLE_ACTIVE_WORK;
+        work->coord_x_34.raw = source->coord_x_34.raw;
+        work->coord_y_38.raw = source->coord_y_38.raw;
+        work->word_3C.word   = source->word_3C.word;
+        work->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F00A8(void) {
     EFFECT_RAMP_TINT_AND_FINISH();

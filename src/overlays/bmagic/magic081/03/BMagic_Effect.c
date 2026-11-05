@@ -69,7 +69,26 @@ MATCH void func_801EF330(void) {
 
 INCLUDE_ASM(func_801EF39C);
 
-INCLUDE_ASM(func_801EF44C);
+MATCH void func_801EF44C(void) {
+    s32 temp_a0;
+    s32 temp_v0;
+    u8  temp_v0_2;
+
+    temp_v0            = (g_SpadWork->word_08.byte.unk_09 + g_SpadWork->word_08.byte.unk_0B) & 0x3F;
+    SP_REF(s16, 2)     = (s16)(temp_v0 << 6);
+    temp_a0            = g_SpadWork->unk_14 + ((s32)(rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
+    g_SpadWork->unk_0C = temp_a0;
+    g_SpadWork->coord_x_34.raw += (s32)(rsin(temp_a0) * 0x7000) >> 0xC;
+    g_SpadWork->coord_y_38.raw += (s32)(rcos(g_SpadWork->unk_0C) * 0x7000) >> 0xC;
+    func_800AF764(g_SpadWork);
+    func_801EF6A0();
+    temp_v0_2                       = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0_2;
+    if ((temp_v0_2 & 0xFF) == 0x10) {
+        g_SpadWork->word_08.byte.timer_0A = 0x40;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF57C);
 

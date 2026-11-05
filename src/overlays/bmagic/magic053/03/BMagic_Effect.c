@@ -22,7 +22,27 @@ INCLUDE_ASM(func_801EF174);
 
 INCLUDE_ASM(func_801EF420);
 
-INCLUDE_ASM(func_801EF5C0);
+MATCH void func_801EF5C0(void) {
+    s16* state;
+    u16  var_v0;
+    u8   temp_v0;
+
+    func_8014DAEC();
+    if (g_SpadWork->word_08.byte.unk_09 & 1) {
+        state  = &g_AreaCameraAngle.vx;
+        var_v0 = *state + 0x14;
+    } else {
+        state  = &g_AreaCameraAngle.vx;
+        var_v0 = *state - 0x14;
+    }
+    *state                          = var_v0;
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_AreaCameraAngle.vx = -0x2AAU;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF674(void) {
     u8 temp_v0;

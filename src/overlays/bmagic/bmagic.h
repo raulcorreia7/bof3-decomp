@@ -75,6 +75,26 @@
         CLEAR();                                                            \
     }
 
+/* The sway-advance step of the effect work record WORK points to: phase_0C
+ * advances and its low six bits set the wave (also stored in the scratchpad
+ * halfword at 0x1F800006), which moves unk_20 around unk_08 by 0x18 * sin;
+ * unk_22 grows by unk_0A; unk_06 counts up and the step advances whenever the
+ * count reaches pad_07. A statement macro: the member declares s32 wave, u16
+ * phase and u8 tick. The rsin argument keeps its (s16) truncation: the wave is
+ * passed twice and the second, recomputed shift lands in the call's delay slot. */
+#define BMAGIC_SWAY_ADVANCE_WORK(WORK)                                                 \
+    phase            = (WORK)->phase_0C + 1;                                           \
+    (WORK)->phase_0C = phase;                                                          \
+    wave             = phase & 0x3F;                                                   \
+    SP_REF(s16, 6)   = (s16)(wave << 6);                                               \
+    (WORK)->unk_20   = (WORK)->unk_08 + ((s32)(rsin((s16)(wave << 6)) * 0x18) >> 0xC); \
+    tick             = (WORK)->unk_06 + 1;                                             \
+    (WORK)->unk_22   = (WORK)->unk_22 + (WORK)->unk_0A;                                \
+    (WORK)->unk_06   = tick;                                                           \
+    if ((tick & 0xFF) == (WORK)->pad_07) {                                             \
+        (WORK)->unk_02 += 1;                                                           \
+    }
+
 /* One remembered position of an effect's trail; each trail holds
  * BMAGIC_TRAIL_LENGTH of them, one trail per work byte unk_04. */
 typedef struct BmagicTrailPoint {
