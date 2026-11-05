@@ -12,6 +12,8 @@ MATCH void func_801EEC04(void) {
 
 INCLUDE_ASM(func_801EEC5C);
 
+/* Regalloc: the m2c draft with the arg-less else call matches except that the spad pointer and
+ * the halfword value swap v0/v1; first difference lui v0 at 0x801EECF4. */
 INCLUDE_ASM(func_801EECE4);
 
 INCLUDE_ASM(func_801EED94);
