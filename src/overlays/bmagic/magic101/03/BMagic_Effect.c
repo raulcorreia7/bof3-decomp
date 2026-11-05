@@ -40,18 +40,18 @@ NON_MATCHING void func_801EECCC(void) {
 have_facing:
     g_SpadWork->word_08.byte.facing_08 = facing;
     func_800AFD9C();
-    g_SpadWork->word_08.byte.unk_0B    = 0;
-    g_SpadWork->word_08.byte.unk_09    = 0x30;
-    g_SpadWork->word_08.byte.timer_0A  = 0;
+    g_SpadWork->word_08.byte.unk_0B   = 0;
+    g_SpadWork->word_08.byte.unk_09   = 0x30;
+    g_SpadWork->word_08.byte.timer_0A = 0;
     g_SpadWork->step_01 += 1;
-    counter                            = 0;
+    counter = 0;
     do {
-        offset                              = (Battle_AllocEffect(1, 0x1B) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
-        wave                                = (counter >> 2) * 3;
-        wave                                = (wave << 2) + 1;
-        FIELD(u8, D_801EC331, offset)       = 0;
-        FIELD(u8, D_801EC334, offset)       = (u8)counter;
-        FIELD(u8, D_801EC339, offset)       = (u8)wave;
+        offset                                   = (Battle_AllocEffect(1, 0x1B) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+        wave                                     = (counter >> 2) * 3;
+        wave                                     = (wave << 2) + 1;
+        FIELD(u8, D_801EC331, offset)            = 0;
+        FIELD(u8, D_801EC334, offset)            = (u8)counter;
+        FIELD(u8, D_801EC339, offset)            = (u8)wave;
         FIELD(PartyBattler*, D_801EC3A4, offset) = g_SpadWork;
         g_SpadWork->word_08.byte.unk_0B += 1;
         counter += 1;
