@@ -5,7 +5,7 @@
  */
 /* func_801F32A4 (area115), func_801F32B8 (area121) */
 MATCH void Area_RequestRestartOnContextChange(void) {
-Actor* work;
+    Actor* work;
     u8     step;
 
     Actor_CenterOnScreen();
@@ -14,10 +14,10 @@ Actor* work;
         step = work->unk_0B;
         if (step == work->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
-                goto tail; 
+                goto tail;
             }
             if (work->unk_18 == g_GameContextSeed) {
-                goto tail; 
+                goto tail;
             }
         }
         g_SpadWork->unk_48 = 2;

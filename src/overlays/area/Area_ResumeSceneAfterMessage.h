@@ -3,7 +3,7 @@
  */
 /* func_801F2F40, func_801F2CA8 */
 MATCH void Area_ResumeSceneAfterMessage(void) {
-MESSAGE_REQUEST_CLEAR();
+    MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {
         Game_SetScriptActive();
         g_SceneState.state_04 = 1;

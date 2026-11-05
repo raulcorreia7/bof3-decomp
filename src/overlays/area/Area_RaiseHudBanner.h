@@ -2,9 +2,10 @@
  * at the top row; the screen-mode flag, a message or a script force the
  * same state, and the banner record 0x5C draws at the work y coordinate.
  */
-/* func_801F3754 (area115), func_801F3768 (area121) */
+/* func_801F3754 (area115), func_801F3768 (area121), func_801F3814
+ * (area104), func_801F42B4 (area088) */
 MATCH void Area_RaiseHudBanner(void) {
-Actor* work;
+    Actor* work;
     s16    origin_y;
 
     work         = g_SpadWork;
@@ -15,13 +16,13 @@ Actor* work;
     }
 
     if (D_801454F2 != 0 && g_SpadWork->unk_0B != 0) {
-        goto force; 
+        goto force;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
-        goto force; 
+        goto force;
     }
     if (GAME_SCRIPT_ACTIVE() == 0) {
-        goto done; 
+        goto done;
     }
 force:
     g_SpadWork->unk_03 = 3;

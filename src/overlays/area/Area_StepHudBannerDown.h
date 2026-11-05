@@ -3,9 +3,10 @@
  * or script active it loads state 1 instead, and draws the banner record
  * 0x5C at the work y coordinate.
  */
-/* func_801F392C (area115), func_801F3940 (area121) */
+/* func_801F392C (area115), func_801F3940 (area121), func_801F448C
+ * (area088), func_801F37EC (area152), func_801F395C (area087) */
 MATCH void Area_StepHudBannerDown(void) {
-Actor* work;
+    Actor* work;
     s16    origin_y;
 
     work         = g_SpadWork;

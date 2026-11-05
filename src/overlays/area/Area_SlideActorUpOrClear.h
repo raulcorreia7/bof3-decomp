@@ -5,7 +5,7 @@
  */
 /* func_801F3364 (area115), func_801F3378 (area121) */
 MATCH void Area_SlideActorUpOrClear(void) {
-u8* work;
+    u8* work;
     u8* check;
 
     Actor_CenterOnScreen();
