@@ -1,6 +1,10 @@
-#include "start_08.h"
-
-MATCH void func_801DBF04(s16 x, s16 y, u8 record_index) {
+/* Draw the equipment panel: the six equipped objects, each with its sprite, and the EQUIP caption. One
+ * definition shared by the shop, start, Bate and Shisu overlays; each overlay includes this file where
+ * the function sits and binds g_MenuEquipRowIcons and g_MenuLabelEquip in its table in
+ * config/symbols.toml. Every change here must verify every member.
+ */
+/* 0x801D2F64 (bate), 0x801D3F0C (shisu), 0x801D8A0C (shop), 0x801DBF04 (start) */
+MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
     const volatile void* objects[6];
     Character*           record;
     u16                  row_y;

@@ -61,8 +61,10 @@ extern u8            D_801D896C[];
 extern u8            D_801D8978[];
 extern u8            D_801D8A3C[];
 extern u8            g_MenuLabelAgility[];
-extern u8            D_801D8B38[];
-extern u8            D_801D8B40[];
+/* D_801D8B38 */
+extern u8            g_MenuEquipRowIcons[];
+/* D_801D8B40 */
+extern u8            g_MenuLabelEquip[];
 extern u8            g_MenuPortraitAtlas[];
 extern u8            D_801D8B84[];
 extern u8            MENU_CAPTION_ICON[];
