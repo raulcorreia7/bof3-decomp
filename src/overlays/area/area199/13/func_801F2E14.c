@@ -12,8 +12,8 @@ MATCH void func_801F2E14(void) {
     offset = 0;
     do {
         D_801F44B4[i] = 0;
-        j    = 0x1F;
-        cell = offset + 0xBA;
+        j             = 0x1F;
+        cell          = offset + 0xBA;
         do {
             D_801F54D0[cell] = fill;
             j -= 1;
