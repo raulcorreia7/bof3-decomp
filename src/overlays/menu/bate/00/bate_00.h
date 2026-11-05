@@ -85,6 +85,17 @@ extern u8            D_801D8EE2;
 extern u8            D_801D8EE3;
 extern u8            D_801D8EE4;
 
+typedef struct BateState {
+    u8 unk_00;
+    u8 pad_01[3];
+    u8 unk_04;
+    u8 pad_05[3];
+    u8 unk_08;
+} BateState;
+
+extern s8        D_80148659;
+extern BateState D_801D8ED4;
+
 void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);

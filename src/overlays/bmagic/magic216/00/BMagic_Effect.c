@@ -10,7 +10,14 @@ INCLUDE_ASM(func_801EEC70);
 
 INCLUDE_ASM(func_801EECDC);
 
-INCLUDE_ASM(func_801EEF58);
+MATCH void func_801EEF58(void) {
+    u16* flags;
+
+    if (D_801EC2E4 == 0) {
+        BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EEF98(s32 index, s32 category) {
     switch (category & BYTE_MASK) {

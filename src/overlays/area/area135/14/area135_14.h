@@ -69,5 +69,6 @@ void       func_801F5D98(void);
 void       func_801F5F28(void);
 
 extern u8 D_80147AAC[];
+extern s8 D_80149340;
 
 #endif
