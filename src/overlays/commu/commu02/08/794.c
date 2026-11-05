@@ -239,7 +239,13 @@ INCLUDE_ASM(func_801D51D0);
 
 INCLUDE_ASM(func_801D5788);
 
-INCLUDE_ASM(func_801D5924);
+MATCH void func_801D5924(void) {
+    func_801D5B2C();
+    if (g_InputPressed != 0) {
+        UI_SetMode(0U);
+        D_801F294D += 1;
+    }
+}
 
 MATCH void func_801D5978(void) {
     s32 offset;
