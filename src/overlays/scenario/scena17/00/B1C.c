@@ -495,6 +495,8 @@ MATCH void func_801F8EF0(void) {
 
 INCLUDE_ASM(func_801F8FAC);
 
+/* 13 differing; first at +0x14: candidate move s2,a2 against retail move s2,a3 (retail maps
+ * the args s1=pal, s2=tex, s3=x, s4=y); next lever: permuter on the arg locals' use order. */
 INCLUDE_ASM(func_801F90BC);
 
 MATCH void func_801F9160(s16 x, s16 y) {
