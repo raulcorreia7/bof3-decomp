@@ -560,6 +560,9 @@ typedef struct PartyBattler {
 
 ASSERT_SIZE(PartyBattler, 0x140);
 ASSERT_OFFSET(PartyBattler, slot, 0x05);
+/* The four bytes at +0x08 as one word; the bmagic tests mask it. */
+#define PARTY_BATTLER_WORD_08(battler) (*(u32*)&(battler)->facing)
+
 ASSERT_OFFSET(PartyBattler, facing, 0x08);
 ASSERT_OFFSET(PartyBattler, unk_09, 0x09);
 ASSERT_OFFSET(PartyBattler, timer, 0x0A);

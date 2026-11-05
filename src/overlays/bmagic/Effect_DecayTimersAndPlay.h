@@ -14,7 +14,7 @@ MATCH void Effect_DecayTimersAndPlay(void) {
             g_Task->timer--;
         }
     }
-    if ((*(u32*)&g_Task->facing & 0xFFFF0000u) == 0) {
+    if ((PARTY_BATTLER_WORD_08(g_Task) & 0xFFFF0000u) == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();

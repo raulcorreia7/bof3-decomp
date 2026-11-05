@@ -12,7 +12,7 @@ INCLUDE_ASM(func_801EED04);
 MATCH void func_801EF02C(void) {
     u16* flags;
 
-    if ((*(u32*)&g_Task->facing & 0xFF00FF00u) == 0) {
+    if ((PARTY_BATTLER_WORD_08(g_Task) & 0xFF00FF00u) == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         func_801E5988();
     }
