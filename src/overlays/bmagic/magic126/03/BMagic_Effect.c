@@ -4,7 +4,25 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC04);
+MATCH void func_801EEC04(void) {
+    PartyBattler* saved;
+    PartyBattler* swap;
+    s32           count;
+
+    Bmagic_DispatchTaskPair(func_801EECE4, Effect_PlayOnZeroTick);
+    count = 0;
+    do {
+        if (D_801F12BC[(u8)count << 5] & 1) {
+            saved      = D_801EB4E0;
+            swap       = FIELD(PartyBattler*, D_801F12D8, (u8)count << 5);
+            D_801F22BC = D_801F12BC + ((u8)count << 5);
+            D_801EB4E0 = swap;
+            func_801F091C();
+            D_801EB4E0 = saved;
+        }
+        count += 1;
+    } while ((u8)count < 0x80);
+}
 
 INCLUDE_ASM(func_801EECE4);
 
@@ -14,7 +32,16 @@ MATCH void func_801EEED0(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
-INCLUDE_ASM(func_801EEF14);
+MATCH void func_801EEF14(void) {
+    SYS_DISPATCH_BYTE(D_801F1268, g_SpadWork->unk_02);
+    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+        Effect_SetActorMatrix();
+        func_801EF438();
+        func_801EF7A4();
+        func_801EF1C8();
+        PopMatrix();
+    }
+}
 
 #include "overlays/bmagic/Effect_CopyBattlerCoords.h"
 
@@ -124,7 +151,17 @@ INCLUDE_ASM(func_801F0DA4);
 
 INCLUDE_ASM(func_801F0ED0);
 
-INCLUDE_ASM(func_801F1110);
+MATCH u32 func_801F1110(void) {
+    u8 index;
+
+    for (index = 0u; index < 0x80; index++) {
+        if ((D_801F12BC[index << 5] & 1) == 0) {
+            D_801F12BC[index << 5] |= 1;
+            return index;
+        }
+    }
+    return 0xFFu;
+}
 
 MATCH void func_801F116C(void) {
     D_801F22BC->flags_00 = 0;

@@ -46,7 +46,19 @@ INCLUDE_ASM(func_801EF42C);
 
 INCLUDE_ASM(func_801EF55C);
 
-INCLUDE_ASM(func_801EF5E0);
+MATCH void func_801EF5E0(void) {
+    PartyBattler* work;
+    u8            count;
+
+    work                      = g_SpadWork;
+    count                     = work->word_08.byte.unk_09 + 1;
+    work->word_08.byte.unk_09 = count;
+    work->coord_x_34.raw += work->unk_0C;
+    work->coord_y_38.raw += work->unk_10;
+    if (count == 24) {
+        g_SpadWork->unk_02++;
+    }
+}
 
 INCLUDE_ASM(func_801EF64C);
 

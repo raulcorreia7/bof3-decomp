@@ -3,7 +3,7 @@
 MATCH void func_801F2E8C(void) {
     D_801448EB = 0x28;
     g_GameFlags |= 0x140;
-    if (!Party_HasVitalItem(0xA)) {
+    if (!Party_HasVitalItem(VITAL_ITEM_SEA_CHARTS)) {
         D_801448EC = 0;
         g_AreaSceneMode++;
     } else {

@@ -460,7 +460,7 @@ MATCH void func_801FD6FC(u8 character) {
 INCLUDE_ASM(func_801FD780);
 
 MATCH void func_801FE178(void) {
-    Party_JoinMember(4);
+    Party_JoinMember(CHAR_ID_REI);
 }
 
 #include "overlays/scenario/Scene_RemoveRei.h"

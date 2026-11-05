@@ -28,7 +28,17 @@ MATCH void func_801EEF60(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
-INCLUDE_ASM(func_801EEFA4);
+MATCH void func_801EEFA4(void) {
+    BattleHandlerTable3 handlers;
+
+    handlers     = D_801EEC10;
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
+    if (g_SpadWork->flags_00 & 1) {
+        Area_AddActor();
+    }
+    g_ScriptBank = 0x800D3800;
+}
 
 INCLUDE_ASM(func_801EF04C);
 
@@ -38,6 +48,7 @@ MATCH void func_801EF50C(void) {
     func_801E5988();
 }
 
+/* Template magic057/03 body with D_801EEC1C and the unk_02 step: first diff 0x801EF554, retail holds 0x800F0800 in v0 and g_SpadWork in v1. */
 INCLUDE_ASM(func_801EF52C);
 
 MATCH void func_801EF5D0(void) {
@@ -65,10 +76,4 @@ MATCH void func_801EF6A4(void) {
     }
 }
 
-MATCH void func_801EF6F8(void) {
-    PartyBattler* active;
-
-    active = BATTLE_ACTIVE_WORK;
-    active->word_08.byte.unk_0B--;
-    func_801E5988();
-}
+#include "overlays/bmagic/Effect_TickDownAndClear.h"

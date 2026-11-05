@@ -428,18 +428,13 @@ INCLUDE_ASM(func_801FE18C);
 INCLUDE_ASM(func_801FE3C8);
 
 MATCH void func_801FE49C(void) {
-    Party_JoinMember(4);
-    Party_JoinMember(2);
+    Party_JoinMember(CHAR_ID_REI);
+    Party_JoinMember(CHAR_ID_GARR);
     func_801C1630();
 }
 
-MATCH void func_801FE4CC(void) {
-    EMI_LoaderStreamFamily(7, 8, 2, 0);
-    g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(8);
-    Party_JoinMember(2);
-    func_801C1630();
+MATCH void Scene_SetPartyRyuAdultNinaAdultGarr(void) {
+    SCENE_SET_PARTY(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_GARR);
 }
 
 #include "overlays/scenario/Scene_SetPartyRyuAdultNinaAdultRei.h"

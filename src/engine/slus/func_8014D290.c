@@ -53,7 +53,7 @@ NON_MATCHING void func_8014D290(void) {
     work->unk_32 = key;
 
     if (g_SpadWork->unk_32 >= 0x37) {
-        g_SpadWork->flags_00 |= 0x80;
+        g_SpadWork->flags_00 |= ACTOR_FLAG_OFFSCREEN;
         return;
     }
     sort               = g_SpadWork->unk_32 << 8;

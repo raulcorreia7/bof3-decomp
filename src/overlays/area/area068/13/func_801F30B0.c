@@ -4,8 +4,10 @@ MATCH void func_801F30B0(void) {
     Actor* work;
     u16*   input;
 
-    if (g_InputPressed == 0x1000 || g_InputPressed == 0x4000 || g_InputPressed == 0x2000 || g_InputPressed == 0x8000 ||
-        g_InputPressed == 0x3000 || g_InputPressed == 0x6000 || g_InputPressed == 0x9000 || g_InputPressed == 0xC000) {
+    if (g_InputPressed == PADLup || g_InputPressed == PADLdown || g_InputPressed == PADLright ||
+        g_InputPressed == PADLleft || g_InputPressed == (PADLup | PADLright) ||
+        g_InputPressed == (PADLdown | PADLright) || g_InputPressed == (PADLup | PADLleft) ||
+        g_InputPressed == (PADLdown | PADLleft)) {
         input      = &g_InputPressed;
         D_801F4E14 = *input;
         SND_PlayCue(0x202);

@@ -8,7 +8,7 @@ MATCH void func_801F36CC(void) {
     if (timer == 0) {
         D_801F4E00         = 0;
         g_SpadWork->unk_01 = 0x14;
-    } else if (g_InputPressed == 0x40) {
+    } else if (g_InputPressed == PADRdown) {
         D_801F4E0C = 0;
         D_801F4E04++;
         g_SpadWork->unk_01 = 0x10;

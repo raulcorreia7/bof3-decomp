@@ -4,11 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC1C(void) {
-    BmagicEffectFuncs handlers = D_801EEC04;
-
-    handlers.handlers[g_SpadWork->step_01]();
-}
+#include "overlays/bmagic/Effect_DispatchHandlerSlot1.h"
 
 INCLUDE_ASM(func_801EEC94);
 
@@ -63,7 +59,14 @@ MATCH void func_801EF3F8(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
-INCLUDE_ASM(func_801EF43C);
+MATCH void func_801EF43C(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801F0478, g_SpadWork->unk_02);
+    if ((g_SpadWork->flags_00 & 1) && g_SpadWork->unk_02 >= 2) {
+        func_8014D290();
+    }
+    g_ScriptBank = 0x800D3800;
+}
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 

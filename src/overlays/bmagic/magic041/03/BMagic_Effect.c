@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "../../Effect_DispatchHandlerSlot1.h"
+#include "overlays/bmagic/Effect_DispatchHandlerSlot1.h"
 
 INCLUDE_ASM(func_801EECB0);
 
