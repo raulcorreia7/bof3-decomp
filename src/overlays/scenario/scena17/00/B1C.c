@@ -388,10 +388,9 @@ MATCH void func_801F84F4(void) {
     func_801F8B10(0x4B0, 0x80);
 }
 
-/* Counts D_80146875 down and, at zero, D_80146867; both zero steps D_80146874, else D_80146875 = 0x1E, then func_801F8B10 and func_801F8FAC. The pointer-local draft is 4 to 8 bytes short whichever branch order: retail ends the step branch with `j` and the 0x4B0 argument load in its delay slot, and falls into a second copy of that load from the else branch (first differing instruction +0x30: beqz targets +0x78 against +0x70). */
-/* 6 differing; first at +0x2C: candidate beqz v0 targets the shared li against retail's
- * jal (the ready-skip delay slot holds li a0,0x4B0 in retail); next lever: permuter on the
- * reorg's arg duplication, or a body where the ready-skip path has its own call. */
+/* 6 differing; first at +0x2C: candidate beqz v0 targets the shared li against retail's jal (the
+ * ready-skip and step-branch delay slots each hold li a0,0x4B0 in retail); next lever: permuter on
+ * the arg duplication across paths, or a body where each path has its own func_801F8B10 call. */
 INCLUDE_ASM(func_801F8594);
 
 MATCH void func_801F8664(void) {
