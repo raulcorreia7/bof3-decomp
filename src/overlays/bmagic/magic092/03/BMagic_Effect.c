@@ -29,7 +29,27 @@ INCLUDE_ASM(func_801EF1F0);
 
 #include "overlays/bmagic/Effect_StepOnOwnTickFlag.h"
 
-INCLUDE_ASM(func_801EF388);
+MATCH void func_801EF388(void) {
+    u8 temp_v0;
+
+    temp_v0 = g_SpadWork->word_08.byte.unk_09;
+    if (temp_v0 != 0) {
+        g_SpadWork->word_08.byte.unk_09 = temp_v0 - 1;
+    }
+    if (g_SpadWork->word_08.byte.unk_0B == 0x80) {
+        if (g_BattleTargetSelector & 0x40) {
+            func_80196718(&D_801EB630[g_SpadWork->unk_03]);
+            func_800AF814((g_SpadWork->unk_03 + 3) & 0xFF);
+            func_800A9820((g_SpadWork->unk_03 + 3) & 0xFF);
+        } else {
+            func_80196718((EnemyBattler*)&g_BattlePartyBattlers[g_SpadWork->unk_03]);
+            func_800AF814(g_SpadWork->unk_03);
+            func_800A9820(g_SpadWork->unk_03);
+        }
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
