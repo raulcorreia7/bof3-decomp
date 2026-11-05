@@ -70,11 +70,11 @@ MATCH void func_801CF998(void) {
     SYS_DISPATCH_TASK(D_801D089C, 3, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801CF9DC);
+#include "overlays/plchar/Char_TurnAndRequestScript.h"
 
 INCLUDE_ASM(func_801CFADC);
 
-INCLUDE_ASM(func_801CFD28);
+#include "overlays/plchar/Char_AdvancePaletteScript.h"
 
 #include "overlays/plchar/Char_SelectScriptAndStep.h"
 

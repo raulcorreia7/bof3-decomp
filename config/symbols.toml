@@ -1898,6 +1898,8 @@ Char_RunStepScript = { addr = 0x801CF23C, type = "func", source = "runs one rout
 Char_ClearModeIfSlotFree = { addr = 0x801CF494, type = "func", source = "clears the panel mode byte once the actor slot at work byte +0x0B is free, then runs func_8014D978" }
 Char_StartTurn_801CF544 = { addr = 0x801CF544, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CF610 = { addr = 0x801CF610, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
+Char_TurnAndRequestScript = { addr = 0x801CF7B4, type = "func", source = "tests facing directions and requests the selected direction script" }
+Char_AdvancePaletteScript = { addr = 0x801CFB00, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801CFC30, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801CFC90, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801CFC90 in plp016)" }
 Char_ClearModeIfUnused = { addr = 0x801D0204, type = "func", source = "clears the probe-slot reference at the work byte +0x2B and the panel mode byte in the game state record when the actor slot at the work byte +0x0B is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving, then runs func_8014D978 (func_801D0204 in plp016)" }
@@ -1921,6 +1923,8 @@ Char_StartTurn = { addr = 0x801CF170, type = "func", source = "starts the charac
 Char_RunStepScript_801CF23C = { addr = 0x801CF23C, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
 Char_StartTurn_801CF968 = { addr = 0x801CF968, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript = { addr = 0x801CFA34, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
+Char_TurnAndRequestScript = { addr = 0x801CFBD8, type = "func", source = "tests facing directions and requests the selected direction script" }
+Char_AdvancePaletteScript = { addr = 0x801CFF24, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801D0054, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801D00B4, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801D00B4 in plp026)" }
 Char_ClearModeIfUnused = { addr = 0x801D0628, type = "func", source = "clears the probe-slot reference at the work byte +0x2B and the panel mode byte in the game state record when the actor slot at the work byte +0x0B is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving, then runs func_8014D978 (func_801D0628 in plp026)" }
@@ -1931,8 +1935,10 @@ Char_SpawnActor = { addr = 0x801CEF14, type = "func", source = "claims a g_Actor
 Char_ProbeFacingCell = { addr = 0x801CEFF8, type = "func", source = "builds the 16.16 route position and probes the record table and map kind 0xF2 at the cell and its +1 neighbours" }
 Char_StartTurn = { addr = 0x801CF170, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript_801CF23C = { addr = 0x801CF23C, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
+Char_AdvancePaletteScript = { addr = 0x801CF71C, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801CF84C, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801CF8AC, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801CF8AC in plp034)" }
+Char_UpdateLinkedFacing = { addr = 0x801CFCF4, type = "func", source = "updates the linked actor facing when the character timer expires" }
 Char_StartTurn_801D0094 = { addr = 0x801D0094, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript = { addr = 0x801D0160, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
 
@@ -1946,6 +1952,8 @@ Char_ClaimLinkSlot = { addr = 0x801CF548, type = "func", source = "launches the 
 Char_PollScriptRequest = { addr = 0x801CF654, type = "func", source = "answers the character script request once func_8014DAEC reports ready: with option_flags set it requests the script of direction_08 and clears the options, otherwise a free actor slot at the link byte +0x0B (claimed by Char_ClaimLinkSlot) clears the +0x2B marker and the panel mode byte" }
 Char_StartTurn_801CF76C = { addr = 0x801CF76C, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript = { addr = 0x801CF838, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
+Char_TurnAndRequestScript = { addr = 0x801CF9DC, type = "func", source = "tests facing directions and requests the selected direction script" }
+Char_AdvancePaletteScript = { addr = 0x801CFD28, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801CFE58, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801CFEB8, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801CFEB8 in plp056)" }
 Char_ClearModeIfUnused = { addr = 0x801D042C, type = "func", source = "clears the probe-slot reference at the work byte +0x2B and the panel mode byte in the game state record when the actor slot at the work byte +0x0B is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving, then runs func_8014D978 (func_801D042C in plp056)" }
@@ -1984,6 +1992,8 @@ Char_RunStepScript_801CE514 = { addr = 0x801CE514, type = "func", source = "runs
 Char_TickPauseTimer = { addr = 0x801CE83C, type = "func", source = "counts the work byte +0x09 down and calls func_801B0DFC each tick; at zero it clears the panel mode byte and game flag 0x1000, then runs func_8014D978" }
 Char_StartTurn = { addr = 0x801CEC40, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript = { addr = 0x801CED0C, type = "func", source = "byte-identical to Char_RunStepScript at emi/plchar/plp247/00@0x801CED0C" }
+Char_TurnAndRequestScript = { addr = 0x801CEEB0, type = "func", source = "tests facing directions and requests the selected direction script" }
+Char_AdvancePaletteScript = { addr = 0x801CF1FC, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801CF32C, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801CF38C, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801CF38C in plp267)" }
 Char_ClearModeIfUnused = { addr = 0x801CF900, type = "func", source = "clears the probe-slot reference at the work byte +0x2B and the panel mode byte in the game state record when the actor slot at the work byte +0x0B is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving, then runs func_8014D978 (func_801CF900 in plp267)" }
@@ -2022,8 +2032,10 @@ Char_ProbeFacingCell = { addr = 0x801CF724, type = "func", source = "the route-s
 ["emi/plchar/plp349/00"]
 Char_StartTurn_801CE448 = { addr = 0x801CE448, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CE514 = { addr = 0x801CE514, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
+Char_AdvancePaletteScript = { addr = 0x801CE9F4, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801CEB24, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801CEB84, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801CEB84 in plp349)" }
+Char_UpdateLinkedFacing = { addr = 0x801CEFCC, type = "func", source = "updates the linked actor facing when the character timer expires" }
 Char_StartTurn = { addr = 0x801CF36C, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript = { addr = 0x801CF438, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
 
@@ -2046,6 +2058,8 @@ Char_StartTurn = { addr = 0x801CE448, type = "func", source = "starts the charac
 Char_RunStepScript = { addr = 0x801CE514, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
 Char_StartTurn_801CE664 = { addr = 0x801CE664, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript_801CE730 = { addr = 0x801CE730, type = "func", source = "runs the route step script with this image's turn facings, the same body as Char_RunStepScript in this image" }
+Char_TurnAndRequestScript = { addr = 0x801CE8D4, type = "func", source = "tests facing directions and requests the selected direction script" }
+Char_AdvancePaletteScript = { addr = 0x801CEC20, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801CED50, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801CEDB0, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801CEDB0 in plp467)" }
 Char_ClearModeIfUnused = { addr = 0x801CF324, type = "func", source = "clears the probe-slot reference at the work byte +0x2B and the panel mode byte in the game state record when the actor slot at the work byte +0x0B is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving, then runs func_8014D978 (func_801CF324 in plp467)" }
@@ -2076,6 +2090,8 @@ Char_ClaimLinkSlot = { addr = 0x801CE820, type = "func", source = "launches the 
 Char_PollScriptRequest = { addr = 0x801CE92C, type = "func", source = "answers the character script request once func_8014DAEC reports ready: with option_flags set it requests the script of direction_08 and clears the options, otherwise a free actor slot at the link byte +0x0B (claimed by Char_ClaimLinkSlot) clears the +0x2B marker and the panel mode byte" }
 Char_StartTurn_801CEA44 = { addr = 0x801CEA44, type = "func", source = "starts the character walk route, the same body as Char_StartTurn in this image" }
 Char_RunStepScript = { addr = 0x801CEB10, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
+Char_TurnAndRequestScript = { addr = 0x801CECB4, type = "func", source = "tests facing directions and requests the selected direction script" }
+Char_AdvancePaletteScript = { addr = 0x801CF000, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801CF130, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801CF190, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801CF190 in plp567)" }
 Char_ClearModeIfUnused = { addr = 0x801CF704, type = "func", source = "clears the probe-slot reference at the work byte +0x2B and the panel mode byte in the game state record when the actor slot at the work byte +0x0B is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving, then runs func_8014D978 (func_801CF704 in plp567)" }
@@ -2104,6 +2120,7 @@ Char_ClearModeIfSlotFree = { addr = 0x801CF9C4, type = "func", source = "clears 
 ["emi/plchar/plp678/00"]
 Char_StartTurn = { addr = 0x801CE448, type = "func", source = "starts the character walk route through Actor_GetTurnStep, writes the direction byte and arms the step timer" }
 Char_RunStepScript = { addr = 0x801CE514, type = "func", source = "runs one route step script, selecting the turn script id at the direction byte or counting the step timer down to the next script" }
+Char_AdvancePaletteScript = { addr = 0x801CEA04, type = "func", source = "stages the palette and advances the character script" }
 Char_SelectScriptAndStep = { addr = 0x801CEB34, type = "func", source = "starts the character script from the cue byte once func_8014DAEC reports ready, then advances the work byte at +0x03" }
 Char_ClearSlotRefIfUnused = { addr = 0x801CEB94, type = "func", source = "clears the actor-slot reference at the work byte +0x06 and lowers the work byte +0x03 by 2 when that slot is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving (func_801CEB94 in plp678)" }
 Char_ClearModeIfUnused = { addr = 0x801CF108, type = "func", source = "clears the probe-slot reference at the work byte +0x2B and the panel mode byte in the game state record when the actor slot at the work byte +0x0B is unused (its use flag is clear or its byte +0x01 is set) and the area camera is not moving, then runs func_8014D978 (func_801CF108 in plp678)" }

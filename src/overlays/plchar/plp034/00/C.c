@@ -50,7 +50,7 @@ INCLUDE_ASM(func_801CF3C0);
 
 INCLUDE_ASM(func_801CF4E0);
 
-INCLUDE_ASM(func_801CF71C);
+#include "overlays/plchar/Char_AdvancePaletteScript.h"
 
 #include "overlays/plchar/Char_SelectScriptAndStep.h"
 
@@ -69,7 +69,7 @@ MATCH void func_801CFC38(void) {
 
 INCLUDE_ASM(func_801CFC7C);
 
-INCLUDE_ASM(func_801CFCF4);
+#include "overlays/plchar/Char_UpdateLinkedFacing.h"
 
 INCLUDE_ASM(func_801CFE14);
 
