@@ -23,5 +23,9 @@ extern Callback D_801F43EC[];
 /* The state update's fallback handler. */
 /* The image's setup pass. */
 void func_801F2D28(s32 arg0);
+/* The current map row in the field-loader table. */
+extern u16 g_GameAreaId;
+
+void Actor_BeginScript(u8 raw_selector, u16 raw_code);
 
 #endif
