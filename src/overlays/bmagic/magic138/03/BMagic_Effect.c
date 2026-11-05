@@ -65,10 +65,4 @@ MATCH void func_801EF6A4(void) {
     }
 }
 
-MATCH void func_801EF6F8(void) {
-    PartyBattler* active;
-
-    active = BATTLE_ACTIVE_WORK;
-    active->word_08.byte.unk_0B--;
-    func_801E5988();
-}
+#include "overlays/bmagic/Effect_TickDownAndClear.h"

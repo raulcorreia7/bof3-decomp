@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC94);
 
-#include "overlays/bmagic/Effect_NextStepOnWorkZeroTick.h"
+#include "overlays/bmagic/Effect_NextStepOnZeroTick.h"
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 

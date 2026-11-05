@@ -12,7 +12,7 @@ INCLUDE_ASM(func_801EEF08);
 
 #include "overlays/bmagic/Effect_CountDownTimerNextStep.h"
 
-#include "overlays/bmagic/Effect_NextStepOnWorkZeroTick.h"
+#include "overlays/bmagic/Effect_NextStepOnZeroTick.h"
 
 MATCH void func_801EF09C(void) {
     u16* battle_flags;
