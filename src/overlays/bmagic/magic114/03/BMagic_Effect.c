@@ -24,8 +24,6 @@ INCLUDE_ASM(func_801EF128);
 
 INCLUDE_ASM(func_801EF280);
 
-/* Follows BMAGIC_PROJECT_ACTOR_MATRIX (bmagic.h), but the rotation derives from the work byte
- * at +0x0A masked to 0x1F and a second global. */
 MATCH void func_801EF6A8(void) {
     PartyBattler* src;
     SVECTOR       pos;
