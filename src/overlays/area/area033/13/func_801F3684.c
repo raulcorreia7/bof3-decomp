@@ -11,7 +11,7 @@ MATCH void func_801F3684(void) {
 
     if ((D_801454F2 != 0 && ((u8*)g_SpadWork)[0x0B] != 0) || g_GameStateIndex == GAME_REQUEST_MESSAGE ||
         (g_GameFlags & GAME_FLAG_SCRIPT_ACTIVE) != 0) {
-        ((u8*)g_SpadWork)[3] = 3;
+        ((u8*)g_SpadWork)[0x03] = 3;
     }
     func_801F3FF8(0x5C, g_SpadWork->unk_30);
 }

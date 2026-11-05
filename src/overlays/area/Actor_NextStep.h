@@ -5,7 +5,7 @@
 MATCH void Actor_NextStep(void) {
     u8* work;
 
-    ((u8*)g_SpadWork)[9]    = 0;
+    ((u8*)g_SpadWork)[0x09] = 0;
     ((u8*)g_SpadWork)[0x0B] = 0;
     work                    = (u8*)g_SpadWork;
     work[1] += 1;
