@@ -61,7 +61,17 @@ MATCH void func_801EF02C(void) {
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EF08C);
+MATCH void func_801EF08C(void) {
+    BattleHandlerTable3 handlers;
+
+    handlers     = D_801EEC2C;
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
+    if (g_SpadWork->flags_00 & 1) {
+        func_8014D290();
+    }
+    g_ScriptBank = 0x800D3800;
+}
 
 INCLUDE_ASM(func_801EF134);
 

@@ -13,4 +13,6 @@ extern u8 D_801EFADC[];
 
 extern BattleEffect* volatile D_801EC2E0;
 
+extern BattleHandlerTable3 D_801EEC2C;
+
 #endif
