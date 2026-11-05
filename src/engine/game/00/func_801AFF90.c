@@ -1,11 +1,13 @@
 #include "game_00.h"
 
-MATCH s16 func_801AFF90(void* origin, void* first_point, void* second_point) {
-    s16 y1;
-    s16 y2;
+/* The cross product of (first - origin) and (second - first): its sign tells which side of the
+ * line origin-first the point second lies on. */
+MATCH s16 func_801AFF90(Vec2s* origin, Vec2s* first_point, Vec2s* second_point) {
+    s16 first_x;
+    s16 first_y;
 
-    y1 = FIELD(s16, first_point, 0u);
-    y2 = FIELD(s16, first_point, 2u);
-    return (s16)(((y1 - FIELD(s16, origin, 0u)) * (FIELD(s16, second_point, 2u) - y2)) -
-                 ((y2 - FIELD(s16, origin, 2u)) * (FIELD(s16, second_point, 0u) - y1)));
+    first_x = first_point->x;
+    first_y = first_point->y;
+    return (s16)(((first_x - origin->x) * (second_point->y - first_y)) -
+                 ((first_y - origin->y) * (second_point->x - first_x)));
 }

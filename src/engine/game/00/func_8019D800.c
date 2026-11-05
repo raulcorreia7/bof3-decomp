@@ -27,7 +27,7 @@ MATCH void func_8019D800(void) {
         t2                     = work[4];
         work[-1]               = (u16)(t0 + tmp);
         *(u16*)(void*)&work[0] = (u16)(t1 + t2);
-        func_8019D8C0((void*)dst, src);
+        func_8019D8C0((SpinQuad*)dst, src);
         dst += 0x1C;
         src += 0x14;
         count += 1;
