@@ -17,7 +17,14 @@ MATCH void func_801EEEE0(void) {
     D_801EF9C0[work[1]]();
 }
 
-INCLUDE_ASM(func_801EEF24);
+MATCH void func_801EEF24(void) {
+    SYS_DISPATCH_BYTE(D_801EF9C4, D_801F05F8[2]);
+    if (D_801F05F8[0] != 0 && D_801F05F8[2] != 0) {
+        func_801EF52C();
+        func_801EF5F4();
+        PopMatrix();
+    }
+}
 
 INCLUDE_ASM(func_801EEFAC);
 
