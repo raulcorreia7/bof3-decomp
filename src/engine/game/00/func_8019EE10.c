@@ -17,9 +17,7 @@ MATCH void func_8019EE10(void) {
     next                      = g_Task;
     FIELD(u32, work, 0x70u)   = 0;
     next->unk_26              = 0;
-    g_Task->tint.bytes.unk_5D = 0;
-    g_Task->tint.bytes.unk_5E = 0;
-    g_Task->tint.bytes.unk_5F = 0;
-    g_Task->tint.bytes.flags  = 0;
-    g_Task->unk_48            = 0;
+    ACTOR_CLEAR_TINT();
+    g_Task->tint.bytes.flags = 0;
+    g_Task->unk_48           = 0;
 }

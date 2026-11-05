@@ -37,6 +37,13 @@
 /* Clear the actor's state step: the record starts a new task at state 0. */
 #define ACTOR_CLEAR_STATE()  (g_Task->step = 0)
 
+/* Clear the actor's three tint bytes: the row draws untinted. A bare statement
+ * macro: use it as a whole statement, never under an unbraced `if`. */
+#define ACTOR_CLEAR_TINT()         \
+    g_Task->tint.bytes.unk_5D = 0; \
+    g_Task->tint.bytes.unk_5E = 0; \
+    g_Task->tint.bytes.unk_5F = 0
+
 /* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the
  * row's palette pair; bit 3 marks selection voices queued on the row
  * (@source: write:SND_QueueSelectionFx@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes the advance-stream tail after the step
