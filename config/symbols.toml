@@ -1684,6 +1684,7 @@ MENU_CAPTION_ICON = { addr = 0x801D9BD8, source = "the caption icon record drawn
 MENU_CLOCK_COLON = { addr = 0x801D9BDC, source = "the colon string drawn twice between hours and minutes while the play clock's thirtieths count is below 15, by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 g_MenuCommandLabels = { addr = 0x801D9C8C, source = "label id -> button text, drawn on each button by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
 g_MenuCommandRows = { addr = 0x801D9CE8, source = "5-byte rows (button count, four label ids) indexed by the command row kind, read by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
+g_MenuStatusItems = { addr = 0x801DA028, type = "MenuStatusItems", size = 0xC, source = "read:func_801D1CA4@0x801D1CA4 counts four items into held[]; write:func_801D1018@0x801D1018 passes used[] to Party_RemoveItem" }
 D_801DA0B4 = { addr = 0x801DA0B4, source = "func_801D2C50 increments this word by 0x20" }
 D_801DA12C = { addr = 0x801DA12C, source = "func_801D2DEC decrements and func_801D2F68 increments this word by 0x20" }
 
