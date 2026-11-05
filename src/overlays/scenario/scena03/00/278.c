@@ -197,7 +197,7 @@ MATCH void func_801F7B10(void) {
     ptr   = &actor->unk_0C;
     func_801F7FFC(ptr);
     func_801F8170(ptr);
-    ((u16*)actor)[0x2F] += 1;
+    actor->tint.halves.unk_5E += 1;
     value              = g_SpadWork->unk_09 - 1;
     g_SpadWork->unk_09 = value;
     if (!(value & 0xFF)) {
@@ -515,12 +515,7 @@ MATCH s32 func_801FC690(void) {
     return 0;
 }
 
-/* Tried: call-seq body (Game_SetScriptActive; D_80146876 = 30;
- * D_80146874 = 7; D_80146875 = 0; return 0). GCC loads the constants
- * in v0; retail materializes them in v1. Pinning a temp to v1 with
- * MATCH_REG matches exactly but raises the quality harmful gate, so
- * it is kept as assembly. First diff: 0x801FC6D4 li v0,30 vs li v1.
- */
+/* li v1,30 at 0x801FC6D4: GCC picks v0 for the constants; MATCH_REG matches but fails quality. */
 INCLUDE_ASM(func_801FC6C4);
 INCLUDE_ASM(func_801FC704);
 
