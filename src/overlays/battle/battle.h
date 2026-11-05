@@ -11,8 +11,8 @@
 #include "scenario/effect.h"
 #include "sys/exe.h"
 
-/* Reloads g_MenuPanelTaskCurrent on every use, like the panel functions do. */
-#define BATTLE_PANEL_TASK ((BattlePanelTask*)g_MenuPanelTaskCurrent)
+/* Reloads g_MenuCurrentPanel on every use, like the panel functions do. */
+#define BATTLE_PANEL_TASK ((BattlePanelTask*)g_MenuCurrentPanel)
 
 /* The battle system as the two battle overlays implement it. A battle keeps a
  * 0x140-byte local work row per party member and a 0x118-byte enemy row

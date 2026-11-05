@@ -8,9 +8,9 @@ MATCH void func_801EA650(void) {
     u8                  index;
 
     handlers = D_801D0FF8;
-    handlers.handlers[g_MenuPanelTaskCurrent->state]();
-    func_801D7EB0((s16)g_MenuPanelTaskCurrent->x, (s16)g_MenuPanelTaskCurrent->y);
+    handlers.handlers[g_MenuCurrentPanel->state]();
+    func_801D7EB0((s16)g_MenuCurrentPanel->x, (s16)g_MenuCurrentPanel->y);
     index = BATTLE_PANEL_TASK->cell_0A.slot;
-    UI_DrawText((s16)(g_MenuPanelTaskCurrent->x + 4), (s16)(g_MenuPanelTaskCurrent->y + 3), D_801EB4FA[index][0], 0xFFu,
+    UI_DrawText((s16)(g_MenuCurrentPanel->x + 4), (s16)(g_MenuCurrentPanel->y + 3), D_801EB4FA[index][0], 0xFFu,
                 (u8*)D_801EB4F4[index][0]);
 }

@@ -3,7 +3,7 @@
 MATCH void func_801E9878(void) {
     MenuPanelTask* task;
 
-    task = g_MenuPanelTaskCurrent;
+    task = g_MenuCurrentPanel;
     task->x -= 0x20;
     if ((s16)task->x <= -180) {
         LOH(task->x) = -180;

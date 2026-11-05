@@ -7,5 +7,5 @@ MATCH void func_801598F4(void) {
     struct CallbackTable5 table;
 
     table = D_80149B50;
-    table.entry[g_MenuPanelTaskCurrent->state]();
+    table.entry[g_MenuCurrentPanel->state]();
 }

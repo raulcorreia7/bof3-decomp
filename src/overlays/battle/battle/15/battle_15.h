@@ -1110,10 +1110,10 @@ static inline void BattleRunHandlerQuad(s32 offset) {
 
 /* Seed the panel task after the queued slot grid is filled. */
 static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
-    g_MenuPanelTaskCurrent->unk_14 = unk14;
-    g_MenuPanelTaskCurrent->unk_08 = unk08;
-    g_MenuPanelTaskCurrent->unk_09 = 0x11;
-    g_MenuPanelTaskCurrent->state  = (u8)(g_MenuPanelTaskCurrent->state + 1);
+    g_MenuCurrentPanel->unk_14 = unk14;
+    g_MenuCurrentPanel->unk_08 = unk08;
+    g_MenuCurrentPanel->unk_09 = 0x11;
+    g_MenuCurrentPanel->state  = (u8)(g_MenuCurrentPanel->state + 1);
 }
 
 u8 func_800A40D0(u8 arg0);

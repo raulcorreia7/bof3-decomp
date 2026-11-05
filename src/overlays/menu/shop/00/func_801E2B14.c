@@ -5,7 +5,7 @@ MATCH void func_801E2B14(void) {
     u16            next_val;
     s16            clamped;
 
-    task_root    = g_MenuPanelTaskCurrent;
+    task_root    = g_MenuCurrentPanel;
     next_val     = task_root->y - 0x10;
     task_root->y = next_val;
     if ((s16)next_val >= -0x13) {

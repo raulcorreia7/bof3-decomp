@@ -10,7 +10,7 @@ MATCH void func_80159580(void) {
     s32            count;
 
     count        = 0;
-    task         = (MenuPanelTask*)g_MenuPanelTaskCurrent;
+    task         = (MenuPanelTask*)g_MenuCurrentPanel;
     task->unk_10 = (u16)(task->unk_10 - task->unk_14);
     task->x      = (u16)(task->x + (s16)task->unk_14 / 2);
     if ((task->unk_10 << 0x10) < 0) {
@@ -26,14 +26,13 @@ MATCH void func_80159580(void) {
                 task->x = (u16)((D_8017F930[D_801490BC.panel_index * 4] + (task->unk_0A >> 1)) << 4);
                 break;
             default:
-                g_MenuPanelTaskCurrent->x =
-                    (u16)((D_8017F944[D_801490CE][0] + (g_MenuPanelTaskCurrent->unk_0A >> 1)) << 4);
+                g_MenuCurrentPanel->x = (u16)((D_8017F944[D_801490CE][0] + (g_MenuCurrentPanel->unk_0A >> 1)) << 4);
                 break;
         }
         count++;
-        g_MenuPanelTaskCurrent->unk_10 = 0;
+        g_MenuCurrentPanel->unk_10 = 0;
     }
-    task         = (MenuPanelTask*)g_MenuPanelTaskCurrent;
+    task         = (MenuPanelTask*)g_MenuCurrentPanel;
     task->unk_12 = (u16)(task->unk_12 - task->unk_16);
     task->y      = (u16)(task->y + (s16)task->unk_16 / 2);
     if ((task->unk_12 << 0x10) < 0) {
@@ -49,22 +48,21 @@ MATCH void func_80159580(void) {
                 task->y = (u16)((D_8017F930[1 + D_801490BC.panel_index * 4] + (task->unk_0B >> 1)) << 4);
                 break;
             default:
-                g_MenuPanelTaskCurrent->y =
-                    (u16)((D_8017F944[D_801490CE][1] + (g_MenuPanelTaskCurrent->unk_0B >> 1)) << 4);
+                g_MenuCurrentPanel->y = (u16)((D_8017F944[D_801490CE][1] + (g_MenuCurrentPanel->unk_0B >> 1)) << 4);
                 break;
         }
         count++;
-        g_MenuPanelTaskCurrent->unk_12 = 0;
+        g_MenuCurrentPanel->unk_12 = 0;
     }
     if ((count & BYTE_MASK) == 2) {
-        g_MenuPanelTaskCurrent->state++;
+        g_MenuCurrentPanel->state++;
         return;
     }
-    if (!(g_MenuPanelTaskCurrent->flags & 1)) {
-        func_80159FA0((s16)g_MenuPanelTaskCurrent->x >> 4, (s16)g_MenuPanelTaskCurrent->y >> 4,
-                      (u8)(g_MenuPanelTaskCurrent->unk_10 >> 4), (u8)(g_MenuPanelTaskCurrent->unk_12 >> 4));
+    if (!(g_MenuCurrentPanel->flags & 1)) {
+        func_80159FA0((s16)g_MenuCurrentPanel->x >> 4, (s16)g_MenuCurrentPanel->y >> 4,
+                      (u8)(g_MenuCurrentPanel->unk_10 >> 4), (u8)(g_MenuCurrentPanel->unk_12 >> 4));
     }
-    if (g_MenuPanelTaskCurrent->unk_00[2] == 0) {
+    if (g_MenuCurrentPanel->unk_00[2] == 0) {
         UI_UpdateLayout();
     }
 }

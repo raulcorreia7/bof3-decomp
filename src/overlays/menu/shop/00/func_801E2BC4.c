@@ -4,7 +4,7 @@
  * this translation unit. */
 
 MATCH void func_801E2BC4(void) {
-    MenuPanelTask* panel = g_MenuPanelTaskCurrent;
+    MenuPanelTask* panel = g_MenuCurrentPanel;
     u8*            bytes = (u8*)panel;
 
     Menu_DrawCursorFrame(panel->x, panel->y, D_801E5DD8[bytes[0xA]], 0x34, bytes[0xB], 6);

@@ -75,7 +75,7 @@ static inline void Menu_SlidePanelUp(void) {
     MenuPanelTask* task;
     u16            y;
 
-    task    = g_MenuPanelTaskCurrent;
+    task    = g_MenuCurrentPanel;
     y       = task->y - MENU_PANEL_STEP_Y;
     task->y = y;
     if ((s16)y < MENU_PANEL_HIDDEN_Y) {

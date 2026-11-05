@@ -3,7 +3,7 @@
 MATCH void func_801E9910(void) {
     MenuPanelTask* panel;
 
-    panel = g_MenuPanelTaskCurrent;
+    panel = g_MenuCurrentPanel;
     Battle_DrawEnemyNamePanel((s32)(s16)panel->x, (s32)(s16)panel->y, ((u8*)panel)[0x0A]);
     if (g_BattleSelectionLatch != 0u) {
         if (*D_801EB4D8 == BATTLE_PANEL_TASK->cell_0A.slot) {

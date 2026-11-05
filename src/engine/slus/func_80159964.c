@@ -4,5 +4,5 @@
  */
 MATCH void func_80159964(void) {
     func_8015A554();
-    g_MenuPanelTaskCurrent->state += 1;
+    g_MenuCurrentPanel->state += 1;
 }

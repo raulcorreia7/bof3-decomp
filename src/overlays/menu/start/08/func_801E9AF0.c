@@ -4,7 +4,7 @@
  * byte lookup tables and the draw helper owned by this overlay. */
 
 MATCH void func_801E9AF0(void) {
-    D_801ED414[g_MenuPanelTaskCurrent->state]();
-    func_801DC150((s16)g_MenuPanelTaskCurrent->x, (s16)g_MenuPanelTaskCurrent->y,
-                  g_CharSlot[D_80144F5A[((u8*)g_MenuPanelTaskCurrent)[0xA]]], 1);
+    D_801ED414[g_MenuCurrentPanel->state]();
+    func_801DC150((s16)g_MenuCurrentPanel->x, (s16)g_MenuCurrentPanel->y,
+                  g_CharSlot[D_80144F5A[((u8*)g_MenuCurrentPanel)[0xA]]], 1);
 }

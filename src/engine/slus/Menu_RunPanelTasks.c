@@ -23,7 +23,7 @@ MATCH void Menu_RunPanelTasks(void) {
             offset = 0;
             do {
                 if ((((u8*)g_MenuPanelTasks)[offset] != 0) && (*((u8*)&D_8014833F + offset) == mode)) {
-                    g_MenuPanelTaskCurrent = (MenuPanelTask*)task;
+                    g_MenuCurrentPanel = (MenuPanelTask*)task;
                     funcs[task[1]]();
                 }
                 task += 0x24;

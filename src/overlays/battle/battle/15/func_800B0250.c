@@ -5,8 +5,8 @@ MATCH void func_800B0250(void) {
     u8  j;
     u32 slot;
 
-    g_MenuPanelTaskCurrent->unk_08 = 0x18;
-    g_MenuPanelTaskCurrent->unk_09 = 0x11;
+    g_MenuCurrentPanel->unk_08 = 0x18;
+    g_MenuCurrentPanel->unk_09 = 0x11;
     for (i = 0; i < 18; i++) {
         D_800B7088[i][0] = 0;
     }
@@ -20,5 +20,5 @@ MATCH void func_800B0250(void) {
         }
     }
     Battle_AllocEffect(0, 0xA);
-    g_MenuPanelTaskCurrent->state++;
+    g_MenuCurrentPanel->state++;
 }

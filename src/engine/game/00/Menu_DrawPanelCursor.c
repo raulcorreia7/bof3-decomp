@@ -1,5 +1,5 @@
 #include "game_00.h"
 
 MATCH void Menu_DrawPanelCursor(void) {
-    Menu_DrawCursorSprite(g_MenuPanelTaskCurrent->x, g_MenuPanelTaskCurrent->y, 0);
+    Menu_DrawCursorSprite(g_MenuCurrentPanel->x, g_MenuCurrentPanel->y, 0);
 }

@@ -12,6 +12,6 @@ MATCH void func_800B15BC(void) {
             g_BattleEffects[offset].unk_09 = row;
         }
     }
-    g_MenuPanelTaskCurrent->unk_14 = 0xC;
-    g_MenuPanelTaskCurrent->state  = (u8)(g_MenuPanelTaskCurrent->state + 1);
+    g_MenuCurrentPanel->unk_14 = 0xC;
+    g_MenuCurrentPanel->state  = (u8)(g_MenuCurrentPanel->state + 1);
 }

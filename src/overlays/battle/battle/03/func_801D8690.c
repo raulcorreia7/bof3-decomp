@@ -53,8 +53,8 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     temp_v1_139 = *((u8*)&D_801EB6AF + ((var_s4 & BYTE_MASK) * 0x118));
     var_s7      = var_s1;
     if (temp_v1_139 == 1) {
-        func_801D9E9C(var_s3, (s16)(var_s1 + 0xA), (u16)g_MenuPanelTaskCurrent->unk_0B,
-                      (u16)g_MenuPanelTaskCurrent->flags, (s8)(s32)temp_v1_139);
+        func_801D9E9C(var_s3, (s16)(var_s1 + 0xA), (u16)g_MenuCurrentPanel->unk_0B, (u16)g_MenuCurrentPanel->flags,
+                      (s8)(s32)temp_v1_139);
         var_a0_154 = var_fp + 4;
     } else {
         func_801D94D4((s32)(s16)(var_s2 + 0x24), (u32)(s16)(var_s1 + 0xC), 0, 0xFFFF);

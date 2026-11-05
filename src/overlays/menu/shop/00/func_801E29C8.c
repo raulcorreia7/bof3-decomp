@@ -1,7 +1,7 @@
 #include "shop_00.h"
 
 MATCH void func_801E29C8(void) {
-    D_801E5DC0[g_MenuPanelTaskCurrent->state]();
-    Menu_DrawCommandRow((s16)g_MenuPanelTaskCurrent->x, (s16)g_MenuPanelTaskCurrent->y, g_MenuPanelTaskCurrent->unk_0A,
-                        g_MenuPanelTaskCurrent->unk_0B, 0);
+    D_801E5DC0[g_MenuCurrentPanel->state]();
+    Menu_DrawCommandRow((s16)g_MenuCurrentPanel->x, (s16)g_MenuCurrentPanel->y, g_MenuCurrentPanel->unk_0A,
+                        g_MenuCurrentPanel->unk_0B, 0);
 }

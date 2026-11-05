@@ -48,21 +48,21 @@ NON_MATCHING void func_8015A554(void) {
         } while (D_801490BC.last_row >= (row & BYTE_MASK));
     }
 
-    rows                           = &D_801490BC.last_row;
-    height                         = count * 0xD;
-    g_MenuPanelTaskCurrent->unk_0A = 0xDC;
-    g_MenuPanelTaskCurrent->unk_0B = height + 8 + *rows * 2;
-    g_MenuPanelTaskCurrent->unk_18 = 0x30;
-    g_MenuPanelTaskCurrent->x      = ((g_MenuPanelTaskCurrent->unk_0A >> 1) + 48) * 16;
-    top                            = (g_MenuPanelTaskCurrent->unk_0B >> 1) + 0x78;
-    g_MenuPanelTaskCurrent->y      = (top - (height >> 1)) * 16;
-    g_MenuPanelTaskCurrent->unk_10 = 0;
-    g_MenuPanelTaskCurrent->unk_12 = 0;
-    g_MenuPanelTaskCurrent->unk_1A = 0x78 - ((s32)height + *rows) / 2;
-    g_MenuPanelTaskCurrent->unk_14 = (g_MenuPanelTaskCurrent->unk_0A * 0x10) / 5;
-    g_MenuPanelTaskCurrent->unk_16 = (g_MenuPanelTaskCurrent->unk_0B * 0x10) / 5;
-    base                           = 0x7C - ((s32)height + *rows) / 2;
-    i                              = 0;
+    rows                       = &D_801490BC.last_row;
+    height                     = count * 0xD;
+    g_MenuCurrentPanel->unk_0A = 0xDC;
+    g_MenuCurrentPanel->unk_0B = height + 8 + *rows * 2;
+    g_MenuCurrentPanel->unk_18 = 0x30;
+    g_MenuCurrentPanel->x      = ((g_MenuCurrentPanel->unk_0A >> 1) + 48) * 16;
+    top                        = (g_MenuCurrentPanel->unk_0B >> 1) + 0x78;
+    g_MenuCurrentPanel->y      = (top - (height >> 1)) * 16;
+    g_MenuCurrentPanel->unk_10 = 0;
+    g_MenuCurrentPanel->unk_12 = 0;
+    g_MenuCurrentPanel->unk_1A = 0x78 - ((s32)height + *rows) / 2;
+    g_MenuCurrentPanel->unk_14 = (g_MenuCurrentPanel->unk_0A * 0x10) / 5;
+    g_MenuCurrentPanel->unk_16 = (g_MenuCurrentPanel->unk_0B * 0x10) / 5;
+    base                       = 0x7C - ((s32)height + *rows) / 2;
+    i                          = 0;
     if (*rows >= 0) {
         do {
             D_801490CF[i & BYTE_MASK] = base + D_801490CF[i & BYTE_MASK] * 0xD + (i & BYTE_MASK) * 2;
