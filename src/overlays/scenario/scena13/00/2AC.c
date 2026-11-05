@@ -114,15 +114,15 @@ MATCH void func_801F7568(void) {
     Actor* work;
     Actor* actor;
 
-    work           = g_SpadWork;
-    actor          = &g_Actors[work->unk_06];
-    g_SpadWork     = actor;
-    actor->unk_29  = 2;
+    work          = g_SpadWork;
+    actor         = &g_Actors[work->unk_06];
+    g_SpadWork    = actor;
+    actor->unk_29 = 2;
     func_8014D290();
-    g_SpadWork     = (Actor*)g_BattlePartyBattlers;
-    D_80145EB9     = 2;
+    g_SpadWork = (Actor*)g_BattlePartyBattlers;
+    D_80145EB9 = 2;
     func_8014D290();
-    g_SpadWork     = work;
+    g_SpadWork = work;
 }
 
 MATCH void func_801F75F8(void) {
