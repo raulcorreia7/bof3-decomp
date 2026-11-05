@@ -125,6 +125,23 @@ MATCH void func_801EF700(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF78C);
+MATCH void func_801EF78C(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+
+    PushMatrix();
+    if (BATTLE_ACTIVE_WORK->word_08.byte.facing_08 & 1) {
+        rot.vx = 0;
+        rot.vy = g_SpadWork->unk_0C;
+        rot.vz = 0;
+    } else {
+        rot.vx = g_SpadWork->unk_0C;
+        rot.vy = 0;
+        rot.vz = 0;
+    }
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_SpadWork);
+}
 
 INCLUDE_ASM(func_801EF88C);
