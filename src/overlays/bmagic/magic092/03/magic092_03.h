@@ -5,12 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-#define EFFECT_ADVANCE_AT_COUNT(increment, limit) \
-    g_Task->unk_09 += (increment);                \
-    if (g_Task->unk_09 == (limit)) {              \
-        g_Task->step += 1;                        \
-    }
-
 extern Callback D_801F07D8[];
 void            func_800AF764(void);
 void            func_801EFB04(void);
