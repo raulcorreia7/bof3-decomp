@@ -7,7 +7,7 @@ MATCH void func_801F2D6C(void) {
         func_801F3268(2);
     }
     func_801F33B0();
-    count = g_SpadWork->unk_09 - 1;
+    count              = g_SpadWork->unk_09 - 1;
     g_SpadWork->unk_09 = count;
     if (count == 0) {
         g_SpadWork->unk_01 += 1;
