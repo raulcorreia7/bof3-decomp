@@ -20,7 +20,7 @@ MATCH s32 Party_JoinMember(s32 char_id) {
         g_Task->unk_05                                                   = g_PartySize;
         g_Task->unk_4B                                                   = 0xFF;
         /* FAKE: retail reads g_CharSlot as u8[]. */
-        D_80145FCC[g_PartySize * BATTLE_PARTY_STRIDE]                    = ((u8*)g_CharSlot)[char_id & BYTE_MASK];
+        g_BattlePartyBattlers[g_PartySize].record_slot                   = ((u8*)g_CharSlot)[char_id & BYTE_MASK];
         /* FAKE: retail keeps the incremented party count in v0. */
         ORDER_LOCK(g_PartySize += 1);
         return 0;

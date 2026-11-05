@@ -41,7 +41,7 @@ NON_MATCHING void func_8009A744(void) {
     if (g_BattlePartyCount != 0) {
         i = 0;
         do {
-            cell      = &g_Characters[D_80145FCC[i * BATTLE_PARTY_STRIDE]];
+            cell      = &g_Characters[g_BattlePartyBattlers[i].record_slot];
             row       = D_80145F04 + i * BATTLE_PARTY_STRIDE;
             row[0x0E] = cell[0x0E];
             row[0x0F] = cell[0x0F];

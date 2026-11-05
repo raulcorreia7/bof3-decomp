@@ -12,7 +12,7 @@ MATCH void func_801DD8AC(u32 battler_index) {
     battler_index &= BYTE_MASK;
     off = battler_index * 320u;
     if ((((u8*)(g_BattlePartyBattlers))[off] & 1u) != 0u) {
-        tidx                                                        = D_80145FCC[off] * PARTY_RECORD_STRIDE;
+        tidx = g_BattlePartyBattlers[battler_index].record_slot * PARTY_RECORD_STRIDE;
         /* FAKE: volatile-drop keeps the original load and store order. */
         *MATCH_VOLATILE_PTR(u16, ((u8*)&g_Characters[0].hp + tidx)) = g_BattlePartyBattlers[battler_index].chr.hp;
         /* FAKE: volatile-drop keeps the original load and store order. */
