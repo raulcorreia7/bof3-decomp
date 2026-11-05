@@ -941,7 +941,7 @@ MATCH void func_801F8D90(void) {
     work      = (u8*)g_SpadWork;
     prim      = g_GfxPrimCursor;
     work_cell = (SceneEffect*)work;
-    first     = (Actor*)(D_80147A58 + *(s32*)(work + 0x0C) * 0x98);
+    first     = (Actor*)(D_80147A58 + work_cell->counter_0C * 0x98);
 
     work_cell->pos_x         = first->x.fixed;
     work_cell->pos_y         = first->y.fixed;
@@ -970,7 +970,7 @@ MATCH void func_801F8D90(void) {
     poly->x0 = poly->x0 - 8;
     poly->y1 = poly->y0;
 
-    second     = (Actor*)(D_80147A58 + *(s32*)(work + 0x18) * 0x98);
+    second     = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
     g_SpadWork = (u8*)second;
     func_801AC1DC(origin, work[0x1C]);
 
@@ -1221,8 +1221,8 @@ MATCH void func_801F9868(void) {
                     pal1 = MEM_PTR(u8, AREA_PALETTE_ARENA_33E00);
                     pal2 = MEM_PTR(u8, AREA_PALETTE_WORK + 0x600u);
                     for (; i < 16; i++) {
-                        *(u16*)(pal1 + i * 2 + 0x80) = *(u16*)(pal1 + i * 2 + 0xA0);
-                        *(u16*)(pal2 + i * 2 + 0x80) = *(u16*)(pal2 + i * 2 + 0xA0);
+                        *((u16*)pal1 + i + 0x40) = *((u16*)pal1 + i + 0x50);
+                        *((u16*)pal2 + i + 0x40) = *((u16*)pal2 + i + 0x50);
                     }
                     g_GfxPalettePending = 1;
                     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
