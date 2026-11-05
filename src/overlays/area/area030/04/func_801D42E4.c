@@ -17,12 +17,12 @@ MATCH void func_801D42E4(void) {
     work->saved_index_0B = 0;
     advanced             = FISHING_STATE;
 
-    work->motion_34.unk_34 = 0;
-    work->y_38.pos_y       = 0;
-    work->bounce_3C.unk_3C = 0;
-    work->pos_x_0C         = 0;
-    work->cursor_10        = 0;
+    *(u32*)((u8*)work + 0x34) = 0;
+    work->y_38.pos_y          = 0;
+    *(u32*)((u8*)work + 0x3C) = 0;
+    work->pos_x_0C            = 0;
+    work->cursor_10           = 0;
 
-    advanced->unk_2C           = 0xFFFF;
-    advanced->handler_index_01 = (u8)(advanced->handler_index_01 + 1);
+    *(u16*)((u8*)advanced + 0x2C) = 0xFFFF;
+    advanced->handler_index_01    = (u8)(advanced->handler_index_01 + 1);
 }
