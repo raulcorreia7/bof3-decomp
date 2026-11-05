@@ -54,4 +54,21 @@ INCLUDE_ASM(func_801EFAF4);
 
 INCLUDE_ASM(func_801EFBEC);
 
-INCLUDE_ASM(func_801EFD84);
+MATCH void func_801EFD84(void) {
+    u8 temp_v0;
+
+    temp_v0 = g_SpadWork->word_08.byte.unk_09;
+    if (temp_v0 != 0) {
+        temp_v0 -= 1;
+        g_SpadWork->word_08.byte.unk_09 = temp_v0;
+        if (!(temp_v0 & 0xFF)) {
+            SND_QueueSelectionFx(0x101);
+        }
+    }
+    if (func_8014DAEC() & 0xFF) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+        return;
+    }
+    func_8014D290();
+}
