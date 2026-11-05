@@ -16,7 +16,7 @@ extern Callback            D_801F4138[];
 extern PartyMemberMessages g_PartyMemberMessages[2];
 
 /* The image's step passes. */
-void func_801F3030(u8 arg0);
+void func_801F3030(s32 arg0);
 void func_801F3850(void);
 
 #endif
