@@ -68,10 +68,26 @@ the disc only the disc-free checks run ([toolchain](docs/toolchain.md#without-a-
 Every page: [docs/README.md](docs/README.md). Run the quality pass
 ([review](.agents/skills/decomp/references/review.md#quality-pass)) on your diff before every report.
 
+## Index
+
+Everything an agent can read, in one list.
+
+- Skill: [.agents/skills/decomp/SKILL.md](.agents/skills/decomp/SKILL.md). Its references:
+  [match](.agents/skills/decomp/references/match.md), [name](.agents/skills/decomp/references/name.md),
+  [refactor](.agents/skills/decomp/references/refactor.md),
+  [research](.agents/skills/decomp/references/research.md),
+  [review](.agents/skills/decomp/references/review.md), [tool](.agents/skills/decomp/references/tool.md).
+- Tools: [tools/README.md](tools/README.md) lists every tool by task. Every tool takes `--help`.
+- Docs: [docs/README.md](docs/README.md) lists every page.
+- CI: [.github/workflows/ci.yml](.github/workflows/ci.yml) runs the disc-free checks.
+- Wiki (game and format facts): [site](https://raulcorreia7.github.io/bof3-wiki/). For a model: [llms.txt](https://raulcorreia7.github.io/bof3-wiki/llms.txt) (index), [llms-small.txt](https://raulcorreia7.github.io/bof3-wiki/llms-small.txt) (compact, for a small context), [llms-full.txt](https://raulcorreia7.github.io/bof3-wiki/llms-full.txt) (everything).
+- Project standard: [docs/standard.md](https://github.com/raulcorreia7/bof3/blob/main/docs/standard.md).
+
 ## Writing
 
 Docs, comments, commit messages and pull requests follow one standard.
 
+- **Current.** Present tense, no history.
 - **What, not how.** Say what a thing does and why. The code shows how.
 - **ASD-STE100** is the basis for technical text: short sentences, one instruction per sentence,
   active voice, one term for one concept, numbered steps for a procedure. Exact technical terms
@@ -84,3 +100,4 @@ Docs, comments, commit messages and pull requests follow one standard.
   5. Never use a foreign phrase, a scientific word or a jargon word if you can think of an everyday
      English equivalent.
   6. Break any of these rules sooner than say anything outright barbarous.
+- Comments say what, never how: one line, only where a name cannot say it ([standard](https://github.com/raulcorreia7/bof3/blob/main/docs/standard.md#comments)).

@@ -38,7 +38,22 @@ MATCH void func_801EF254(void) {
 
 INCLUDE_ASM(func_801EF2CC);
 
-INCLUDE_ASM(func_801EF444);
+MATCH void func_801EF444(void) {
+    PartyBattler* battler;
+    u8            timer;
+    PartyBattler* work;
+
+    work                      = g_SpadWork;
+    timer                     = work->word_08.byte.unk_09 - 1;
+    work->word_08.byte.unk_09 = timer;
+    battler                   = &g_BattlePartyBattlers[work->unk_04];
+    if (!(timer & BYTE_MASK)) {
+        func_80196718(battler);
+        g_SpadWork->word_08.byte.timer_0A = func_8019651C(battler, 0, 0, 0, 1);
+        g_SpadWork->word_08.byte.unk_09   = 8;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF4FC);
 

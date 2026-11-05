@@ -18,7 +18,27 @@ MATCH void func_801EF108(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 2), 2, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EF14C);
+MATCH void func_801EF14C(void) {
+    u8 timer;
+
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
+        g_SpadWork->unk_2E.half = D_801EB4E0->unk_2E.half;
+        g_SpadWork->unk_30.half = D_801EB4E0->unk_30.half;
+        if (rand() & 1) {
+            g_SpadWork->unk_14 = D_801EB4E0->unk_14 + (rand() & BYTE_MASK);
+        } else {
+            g_SpadWork->unk_14 = D_801EB4E0->unk_14 - (rand() & BYTE_MASK);
+        }
+        g_SpadWork->unk_03                = rand() & 7;
+        g_SpadWork->unk_0C                = (rand() & 7) + 8;
+        g_SpadWork->word_08.byte.unk_0B   = rand();
+        g_SpadWork->word_08.byte.unk_09   = (rand() & 0xF) + 8;
+        g_SpadWork->word_08.byte.timer_0A = 2;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF28C);
 

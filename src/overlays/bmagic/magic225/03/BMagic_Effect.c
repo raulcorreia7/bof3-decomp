@@ -81,6 +81,7 @@ MATCH void func_801F0140(void) {
     }
 }
 
+/* First difference at 0x801F0278: work pointer in a0 instead of a1; adjust local lifetimes. */
 INCLUDE_ASM(func_801F021C);
 
 /* func_801F02D4 */
