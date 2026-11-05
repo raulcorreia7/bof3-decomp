@@ -4,7 +4,30 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC18);
+extern u8 D_801F0470[];
+void      func_801EF340(void);
+void      func_801EECF8(void);
+void      Effect_StartOnZeroTick(void);
+
+MATCH void func_801EEC18(void) {
+    PartyBattler* saved;
+    PartyBattler* swap;
+    s32           count;
+
+    Bmagic_DispatchTaskPair(func_801EECF8, Effect_StartOnZeroTick);
+    count = 0;
+    do {
+        if (D_801F0454[(u8)count << 5] & 1) {
+            saved      = D_801EB4E0;
+            swap       = FIELD(PartyBattler*, D_801F0470, (u8)count << 5);
+            D_801F1054 = D_801F0454 + ((u8)count << 5);
+            D_801EB4E0 = swap;
+            func_801EF340();
+            D_801EB4E0 = saved;
+        }
+        count += 1;
+    } while ((u8)count < 0x60);
+}
 
 INCLUDE_ASM(func_801EECF8);
 
