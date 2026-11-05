@@ -9,9 +9,31 @@ INCLUDE_ASM(func_801EEC28);
 /* nonmatching: clears bytes +0, +1 and +2 of 32 rows (stride 0x78) at D_801F0B38, then sets the work cell (unk_2E 0xA0, unk_30 0x70, unk_0B 0, unk_09 0x1E, unk_0A 0) and steps. Struct rows, one u8 array and three u8 arrays all keep the row bases in registers (first differing instruction: retail move v1,zero at +4 against a lui base); retail indexes with one running offset in v1 and a lui/addu pair per store. */
 INCLUDE_ASM(func_801EED14);
 
-INCLUDE_ASM(func_801EEDAC);
+MATCH void func_801EEDAC(void) {
+    u8 temp_v0;
 
-INCLUDE_ASM(func_801EEE28);
+    func_801F07B0(1);
+    func_801F0164(1);
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->word_08.byte.unk_09 = 0x1E;
+        g_SpadWork->step_01 += 1;
+    }
+}
+
+MATCH void func_801EEE28(void) {
+    u8 temp_v0;
+
+    func_801F07B0(2);
+    func_801F0164(2);
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->word_08.byte.unk_09 = 0xA;
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EEEA4);
 
@@ -28,11 +50,28 @@ MATCH void func_801EF04C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF0A8);
+MATCH void func_801EF0A8(void) {
+    u8 temp_v0;
+
+    func_801F07B0(0);
+    func_801F0550(g_SpadWork->word_08.byte.timer_0A);
+    func_801F0164(0);
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF12C);
 
-INCLUDE_ASM(func_801EF1FC);
+MATCH void func_801EF1FC(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        *D_8014637C &= 0xBF;
+        func_800AEF98(4, 0);
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void func_801EF268(void) {
     SND_QueueSelectionFx(258);
@@ -159,7 +198,16 @@ MATCH void func_801EF918(void) {
 
 INCLUDE_ASM(func_801EF9AC);
 
-INCLUDE_ASM(func_801EF9FC);
+MATCH void func_801EF9FC(void) {
+    g_SpadWork->coord_x_34.raw += g_SpadWork->unk_0C;
+    g_SpadWork->coord_y_38.raw += g_SpadWork->unk_10;
+    func_8014DAEC();
+    if ((g_SpadWork->coord_x_34.raw == g_SpadWork->unk_18) && (g_SpadWork->coord_y_38.raw == g_SpadWork->unk_1C)) {
+        func_80196718(g_SpadWork);
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EFA9C(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
