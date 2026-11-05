@@ -9,7 +9,26 @@ MATCH void func_801D0D80(void) {
     SYS_DISPATCH_BYTE(D_801D96DC, D_80148650);
 }
 
-INCLUDE_ASM(func_801D0DBC);
+MATCH void func_801D0DBC(void) {
+    func_801D1CA4();
+    D_801DA031 = 0;
+    D_801DA032 = 0;
+    D_801DA030 = 0;
+    D_801DA02C = 0;
+    D_801DA02D = 0;
+    D_801DA02E = 0;
+    D_801DA02F = 0;
+    D_801DA033 = func_801D1E60();
+    func_801D27BC();
+    {
+        u8* step = &D_80148650;
+        u8  cur  = *step;
+
+        D_80148651 = 0;
+        D_80148652 = 0;
+        *step      = cur + 1;
+    }
+}
 
 MATCH void func_801D0E4C(void) {
     SYS_DISPATCH_BYTE(D_801D96F0, D_80148651);
@@ -39,7 +58,16 @@ MATCH void func_801D0F24(void) {
     SYS_DISPATCH_BYTE(D_801D96F8, D_80148651);
 }
 
-INCLUDE_ASM(func_801D0F60);
+MATCH void func_801D0F60(void) {
+    func_801D7224(D_80144953);
+    UI_SetMode(2U);
+    func_801D1E34();
+    {
+        u8* step = &D_80148651;
+
+        *step += 1;
+    }
+}
 
 MATCH void func_801D0FAC(void) {
     if (g_UiWindowEffectBusy == 0) {
@@ -55,7 +83,42 @@ MATCH void func_801D0FAC(void) {
     func_801D7224(D_80144953);
 }
 
-INCLUDE_ASM(func_801D1018);
+MATCH void func_801D1018(void) {
+    if (D_801DA030 != 0) {
+        Party_RemoveItem(0, 0x4DU, (s32)D_801DA02C, 0);
+        Party_RemoveItem(0, 0x23U, (s32)D_801DA02D, 0);
+        Party_RemoveItem(0, 0x24U, (s32)D_801DA02E, 0);
+        Party_RemoveItem(0, 0x56U, (s32)D_801DA02F, 0);
+        D_80146875 = 0x14;
+        func_801D1EE8();
+        if (D_801DA044 >= 0x33) {
+            D_80146867 = 2;
+            if (D_801DA044 < 0x5A) {
+                D_80144E5E = 0;
+            } else if (D_801DA044 < 0x78) {
+                D_80144E5E = 1;
+            } else if (D_801DA044 < 0x96) {
+                D_80144E5E = 2;
+            } else if (D_801DA044 < 0xAA) {
+                D_80144E5E = 3;
+            } else if (D_801DA044 < 0xB4) {
+                D_80144E5E = 4;
+            } else {
+                D_80144E5E = 5;
+            }
+        } else {
+            D_80146867 = 1;
+        }
+    } else {
+        D_80146875 = 5;
+    }
+    Menu_ResetPanelTasks();
+    {
+        u16* sub = &g_GameEntrySubstate;
+
+        *sub += 1;
+    }
+}
 
 MATCH void func_801D11A4(void) {
     func_801D7224(D_80144953);
