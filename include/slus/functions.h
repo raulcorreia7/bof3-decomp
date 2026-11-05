@@ -304,7 +304,7 @@ void         TEXT_SetVariable(u8 slot, u8 length, const u8* text);
 /* func_80166438 */
 s32          Item_CountHeld(u32 category);
 /* func_801664A0 */
-s32          Party_CountAbilities(u8 character_index, u8 ability_kind, u8 mode);
+s32          Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode);
 /* func_801665A0 */
 u8           Item_Remove(s32 category, u8 item, s32 amount, s32 unused);
 /* func_8016663C */
@@ -312,9 +312,9 @@ s32          Party_SpendZenny(u32 amount, s32 unused);
 /* func_8016666C */
 s32          Party_AddZenny(s32 amount, s32 skip_earned);
 /* func_80166AE4: kind table for (source slot, group, table kind) */
-u8*          Party_GetAbilities(u32 formation_index, u32 panel, u32 mode);
+u8*          Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
-u8*          Char_GetAbilities(u8 character_index, u8 ability_kind, u8 mode);
+u8*          Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
 /* func_80166CB0 */
 s32          Area_GetCellCode(s32 x, s32 y);
 /* func_80166CEC */

@@ -4,7 +4,7 @@
  * copy (0x80145F04, stride 0x140) and returns the panel selected by the low two
  * bits of its ability-kind record.
  */
-MATCH u8* Char_GetAbilities(u8 character_index, u8 ability_kind, u8 mode) {
+MATCH u8* Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode) {
     Character* record;
     u8         i;
 
@@ -14,16 +14,16 @@ MATCH u8* Char_GetAbilities(u8 character_index, u8 ability_kind, u8 mode) {
     } else {
         record = (Character*)(D_80145F04 + i * 0x140);
     }
-    switch (D_801CA719[ability_kind & BYTE_MASK].value & 0x3) {
+    switch (D_801CA719[ability_id & BYTE_MASK].value & 0x3) {
         default:
             return record->healing_abilities;
-        case 0:
+        case ABILITY_TYPE_HEAL:
             return record->healing_abilities;
-        case 1:
+        case ABILITY_TYPE_ASSIST:
             return record->assist_abilities;
-        case 2:
+        case ABILITY_TYPE_ATTACK:
             return record->attack_abilities;
-        case 3:
+        case ABILITY_TYPE_SKILL:
             return record->skill_abilities;
     }
 }

@@ -3,7 +3,7 @@
 /* selects one ability panel by kind (or the shared default table),
  * then counts its nonzero entries.
  */
-MATCH s32 Party_CountAbilities(u8 character_index, u8 ability_kind, u8 mode) {
+MATCH s32 Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode) {
     Character* record;
     u8*        table;
     u8         length;
@@ -15,20 +15,20 @@ MATCH s32 Party_CountAbilities(u8 character_index, u8 ability_kind, u8 mode) {
     } else {
         record = (Character*)(D_80145F04 + character_index * 0x140);
     }
-    switch (ability_kind) {
-        case 0:
+    switch (ability_type) {
+        case ABILITY_TYPE_HEAL:
             table  = record->healing_abilities;
             length = 0xA;
             break;
-        case 1:
+        case ABILITY_TYPE_ASSIST:
             table  = record->assist_abilities;
             length = 0xA;
             break;
-        case 2:
+        case ABILITY_TYPE_ATTACK:
             table  = record->attack_abilities;
             length = 0xA;
             break;
-        case 3:
+        case ABILITY_TYPE_SKILL:
             table  = record->skill_abilities;
             length = 0xA;
             break;
