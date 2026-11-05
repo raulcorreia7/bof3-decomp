@@ -16,7 +16,7 @@ MATCH void func_801F30B0(void) {
             case 0x3000:
                 work        = g_Task;
                 g_GameState = (GameState*)g_BattlePartyBattlers;
-                g_Task      = (Actor*)g_BattlePartyBattlers;
+                TASK_SET(g_BattlePartyBattlers);
                 D_80145EC8 -= 0x800;
                 g_Task = work;
                 break;
@@ -24,7 +24,7 @@ MATCH void func_801F30B0(void) {
             case 0x6000:
                 work        = g_Task;
                 g_GameState = (GameState*)g_BattlePartyBattlers;
-                g_Task      = (Actor*)g_BattlePartyBattlers;
+                TASK_SET(g_BattlePartyBattlers);
                 D_80145EC4 += 0x800;
                 g_Task = work;
                 break;
@@ -32,7 +32,7 @@ MATCH void func_801F30B0(void) {
             case 0xC000:
                 work        = g_Task;
                 g_GameState = (GameState*)g_BattlePartyBattlers;
-                g_Task      = (Actor*)g_BattlePartyBattlers;
+                TASK_SET(g_BattlePartyBattlers);
                 D_80145EC8 += 0x800;
                 g_Task = work;
                 break;
@@ -40,7 +40,7 @@ MATCH void func_801F30B0(void) {
             case 0x9000:
                 work        = g_Task;
                 g_GameState = (GameState*)g_BattlePartyBattlers;
-                g_Task      = (Actor*)g_BattlePartyBattlers;
+                TASK_SET(g_BattlePartyBattlers);
                 D_80145EC4 -= 0x800;
                 g_Task = work;
                 break;

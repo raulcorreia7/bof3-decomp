@@ -21,7 +21,7 @@ MATCH void func_80167910(void) {
     s32       i;
     s32       mode;
 
-    g_Task = (Actor*)D_8014626C;
+    TASK_SET(D_8014626C);
     if (D_8014626C[0] & 0x40) {
         return;
     }

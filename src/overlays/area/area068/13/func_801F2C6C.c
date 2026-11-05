@@ -6,7 +6,7 @@ MATCH void func_801F2C6C(void) {
     temp_s0 = g_Task;
     if (D_80146865 != 0) {
         g_GameState = (GameState*)g_BattlePartyBattlers;
-        g_Task      = (Actor*)g_BattlePartyBattlers;
+        TASK_SET(g_BattlePartyBattlers);
         D_80145FA8 |= 0x40;
         Actor_SelectScript(0x6FU);
         g_Task = temp_s0;

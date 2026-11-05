@@ -4,8 +4,8 @@ MATCH void Boss_EndBattle(void) {
     u8* work;
 
     func_800AC844(0);
-    work       = (u8*)func_800AC754(0);
-    g_Task     = (struct Task*)work;
+    work = (u8*)func_800AC754(0);
+    TASK_SET(work);
     work[0x2A] = 0;
     Actor_SelectScript(4);
     func_800AC934(1);

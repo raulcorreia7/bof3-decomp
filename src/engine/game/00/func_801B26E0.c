@@ -11,7 +11,7 @@ MATCH void func_801B26E0(void) {
     level = g_Task->unk_09;
     if (i < g_PartySize) {
         do {
-            g_Task = (Actor*)&g_BattlePartyBattlers[i];
+            TASK_SET(&g_BattlePartyBattlers[i]);
             if (g_Task->mode == 3) {
                 g_Task->tint.bytes.unk_5D = -(level << 5);
                 g_Task->tint.bytes.unk_5E = g_Task->tint.bytes.unk_5D;
@@ -21,10 +21,10 @@ MATCH void func_801B26E0(void) {
         } while (i < g_PartySize);
     }
     g_GameState = (GameState*)g_BattlePartyBattlers;
-    g_Task      = (Actor*)g_BattlePartyBattlers;
+    TASK_SET(g_BattlePartyBattlers);
     if (D_80145E99 == 0) {
         for (i = 1; i < g_PartySize; i++) {
-            g_Task = (Actor*)&g_BattlePartyBattlers[i];
+            TASK_SET(&g_BattlePartyBattlers[i]);
             if (g_Task->mode == 3) {
                 GFX_StagePalette(GAME_PALETTE_STAGE + (g_Task->unk_05 << 6), 0);
                 g_Task->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
@@ -37,7 +37,7 @@ MATCH void func_801B26E0(void) {
                 g_Task->gravity = 0;
             }
         }
-        g_Task = (Actor*)g_BattlePartyBattlers;
+        TASK_SET(g_BattlePartyBattlers);
         g_BattlePartyBattlers[0].step += 1;
     }
 }

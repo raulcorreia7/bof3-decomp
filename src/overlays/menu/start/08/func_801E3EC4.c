@@ -10,7 +10,7 @@ MATCH void func_801E3EC4(void) {
     g_AreaWalkFlags = 0;
     *hint           = 0;
     g_GameState     = g_BattlePartyBattlers;
-    g_Task          = (struct Task*)g_BattlePartyBattlers;
+    TASK_SET(g_BattlePartyBattlers);
     func_801C1254(0, 0);
     TASK_BYTES[0]              = 1;
     g_GameState->slot_index_79 = 0;

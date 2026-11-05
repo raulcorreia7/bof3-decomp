@@ -99,11 +99,11 @@ MATCH void func_801F6E48(void) {
     work_cell->pos_y         = adopted->y.fixed;
     work_cell->z.fixed_point = adopted->z.fixed;
     g_GfxPrimCursor          = prim + 8;
-    g_Task                   = (u8*)adopted;
-    ((RECT*)prim)->x         = 0;
-    ((RECT*)prim)->y         = 240;
-    ((RECT*)prim)->w         = 16;
-    ((RECT*)prim)->h         = 16;
+    TASK_SET(adopted);
+    ((RECT*)prim)->x = 0;
+    ((RECT*)prim)->y = 240;
+    ((RECT*)prim)->w = 16;
+    ((RECT*)prim)->h = 16;
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
 
@@ -947,11 +947,11 @@ MATCH void func_801F8D90(void) {
     work_cell->pos_y         = first->y.fixed;
     work_cell->z.fixed_point = first->z.fixed;
     g_GfxPrimCursor          = prim + 8;
-    g_Task                   = (u8*)first;
-    ((RECT*)prim)->x         = 0;
-    ((RECT*)prim)->y         = 240;
-    ((RECT*)prim)->w         = 16;
-    ((RECT*)prim)->h         = 16;
+    TASK_SET(first);
+    ((RECT*)prim)->x = 0;
+    ((RECT*)prim)->y = 240;
+    ((RECT*)prim)->w = 16;
+    ((RECT*)prim)->h = 16;
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
 
@@ -971,7 +971,7 @@ MATCH void func_801F8D90(void) {
     poly->y1 = poly->y0;
 
     second = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
-    g_Task = (u8*)second;
+    TASK_SET(second);
     func_801AC1DC(origin, work[0x1C]);
 
     projection.vx = ((origin[0] + SPAD_ROW->x.fixed) >> 9) - 0x4000;

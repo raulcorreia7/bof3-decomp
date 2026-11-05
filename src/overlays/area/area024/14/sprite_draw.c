@@ -830,9 +830,9 @@ MATCH s32 func_801F3E48(u8 shade) {
     LINE_F4*                 prim;
     u16                      i;
 
-    vec    = D_801F2C04;
-    saved  = (volatile Area024Scratch*)g_Task;
-    g_Task = (struct Task*)&D_80147A58;
+    vec   = D_801F2C04;
+    saved = (volatile Area024Scratch*)g_Task;
+    TASK_SET(&D_80147A58);
     PushMatrix();
 
     mtxp  = &matrix;
@@ -881,5 +881,5 @@ MATCH s32 func_801F3E48(u8 shade) {
     }
 
     PopMatrix();
-    g_Task = (struct Task*)saved;
+    TASK_SET(saved);
 }

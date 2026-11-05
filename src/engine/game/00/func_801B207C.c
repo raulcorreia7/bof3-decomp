@@ -22,7 +22,7 @@ MATCH void func_801B207C(void) {
             g_Task->tint.bytes.unk_5F = g_Task->tint.bytes.unk_5D;
         }
     }
-    g_Task = (Actor*)g_BattlePartyBattlers;
+    TASK_SET(g_BattlePartyBattlers);
     if (D_80145E99 == 4) {
         ((PartyBattler*)g_BattlePartyBattlers)[0].step += 1;
     }

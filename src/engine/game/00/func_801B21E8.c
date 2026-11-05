@@ -128,7 +128,7 @@ NON_MATCHING void func_801B21E8(void) {
             val5 += BATTLE_PARTY_STRIDE;
         } while (val4 < (s32)g_PartySize);
     }
-    g_Task           = (Actor*)g_BattlePartyBattlers;
+    TASK_SET(g_BattlePartyBattlers);
     g_GameState      = (GameState*)g_BattlePartyBattlers;
     g_AreaCameraStep = 0x20;
     tmp3             = g_AreaScrollTargetX - D_80145EC4;

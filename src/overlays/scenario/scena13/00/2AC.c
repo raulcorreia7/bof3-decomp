@@ -130,7 +130,7 @@ MATCH void func_801F7568(void) {
     g_Task        = actor;
     actor->unk_29 = 2;
     func_8014D290();
-    g_Task     = (Actor*)g_BattlePartyBattlers;
+    TASK_SET(g_BattlePartyBattlers);
     D_80145EB9 = 2;
     func_8014D290();
     g_Task = work;

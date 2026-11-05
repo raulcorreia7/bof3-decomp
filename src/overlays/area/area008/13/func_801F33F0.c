@@ -6,11 +6,11 @@ MATCH void func_801F33F0(void) {
     u8*    flag;
     u8     step;
 
-    s      = g_Task;
-    flag   = &g_ScriptVars[3];
-    step   = *flag;
-    e      = &g_Actors[((u8*)s)[0x0B]];
-    g_Task = (Actor*)e;
+    s    = g_Task;
+    flag = &g_ScriptVars[3];
+    step = *flag;
+    e    = &g_Actors[((u8*)s)[0x0B]];
+    TASK_SET(e);
     if ((step & 0x80u) != 0u) {
         s->mode = 0x0E;
     } else if (g_ScriptVars[1] == 1) {

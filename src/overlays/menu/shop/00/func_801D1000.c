@@ -13,8 +13,8 @@ MATCH void func_801D1000(void) {
 
     index = D_8014865C;
     if (index >= 0) {
-        slot   = (u8*)g_Actors + index * ACTOR_SIZE;
-        g_Task = (struct Task*)slot;
+        slot = (u8*)g_Actors + index * ACTOR_SIZE;
+        TASK_SET(slot);
         if ((slot[7] & 8) == 0) {
             slot[8] = slot[0x79];
             func_8015BAC4(TASK_BYTES[8]);

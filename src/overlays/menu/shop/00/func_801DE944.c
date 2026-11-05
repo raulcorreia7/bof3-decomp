@@ -31,7 +31,7 @@ MATCH void func_801DE944(void) {
         if (i < g_PartySize) {
             row = 0;
             do {
-                g_Task = (struct Task*)((u8*)g_BattlePartyBattlers + row);
+                TASK_SET(((u8*)g_BattlePartyBattlers + row));
                 func_801C1254(D_80145F09[row], i);
                 Actor_SelectScript(TASK_BYTES[8]);
                 if (D_8014504A != 0) {
@@ -54,7 +54,7 @@ MATCH void func_801DE944(void) {
             func_80153DE8();
         }
     } else {
-        g_Task                   = (struct Task*)(actor - 0x79);
+        TASK_SET((actor - 0x79));
         g_PartySize              = 1;
         D_80145E95               = 0;
         *(Character*)(actor - 5) = *(Character*)(party - 0x5F2);
