@@ -8,15 +8,52 @@ INCLUDE_ASM(func_801EEC44);
 
 INCLUDE_ASM(func_801EEDA0);
 
-INCLUDE_ASM(func_801EEE84);
+MATCH void func_801EEE84(void) {
+    u8 temp_v0;
 
-INCLUDE_ASM(func_801EEEE4);
+    temp_v0                           = g_SpadWork->word_08.byte.timer_0A + 1;
+    g_SpadWork->word_08.byte.timer_0A = temp_v0;
+    if ((u32)(temp_v0 & 0xFF) >= 0x21U) {
+        g_SpadWork->step_01 += 1;
+        g_SpadWork->word_08.byte.unk_09 = 0;
+    }
+}
+
+MATCH void func_801EEEE4(void) {
+    u8 temp_v0;
+
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if ((u32)(temp_v0 & 0xFF) >= 0x21U) {
+        g_SpadWork->step_01 += 1;
+        g_SpadWork->word_08.byte.unk_09 = 0;
+    }
+}
 
 INCLUDE_ASM(func_801EEF44);
 
-INCLUDE_ASM(func_801EEFFC);
+MATCH void func_801EEFFC(void) {
+    u8 temp_v0;
 
-INCLUDE_ASM(func_801EF060);
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->step_01 += 1;
+        return;
+    }
+    func_801F0FBC();
+}
+
+MATCH void func_801EF060(void) {
+    u8 temp_v0;
+
+    temp_v0                           = g_SpadWork->word_08.byte.timer_0A - 1;
+    g_SpadWork->word_08.byte.timer_0A = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->step_01 += 1;
+        g_SpadWork->word_08.byte.unk_09 = 0x40;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountDownAndPlay.h"
 
