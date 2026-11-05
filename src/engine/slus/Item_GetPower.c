@@ -7,12 +7,12 @@
  */
 MATCH u8 Item_GetPower(u8 category, u8 item) {
     switch (category) {
-        case 0:
+        case ITEM_CAT_ITEM:
         default:
             return 0;
-        case 1:
+        case ITEM_CAT_WEAPON:
             return D_801C90E8[(item & BYTE_MASK) * 0x18 + 6];
-        case 2:
+        case ITEM_CAT_ARMOR:
             return D_801C98B0[(item & BYTE_MASK) * 0x16 + 4];
     }
 }

@@ -7,7 +7,7 @@ MATCH void func_801DC4B8(void) {
     u8* flags;
 
     flags = &D_80145026;
-    if (Item_Remove(3, *flags, 1, 0) == 0) {
+    if (Item_Remove(ITEM_CAT_ACCESSORY, *flags, 1, 0) == 0) {
         *flags     = 0;
         D_80145027 = 0;
     }

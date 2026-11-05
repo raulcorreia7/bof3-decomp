@@ -290,7 +290,7 @@ s32          Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, 
 /* func_801654B0 */
 s32          Char_AddWillpower(u8* value, u16 delta);
 /* func_80165E04 */
-s32          Item_GetKind(s32 kind, s32 index);
+s32          Item_GetKind(s32 category, s32 item_id);
 /* func_80165EC0 */
 u8           Item_GetEquipability(u8 category, u8 item);
 /* func_80165F68 */

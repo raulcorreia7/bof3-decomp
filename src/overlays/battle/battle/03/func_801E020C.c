@@ -25,13 +25,14 @@ MATCH void func_801E020C(void) {
         half = &g_BattleState;
         if ((*half & BATTLE_STATE_REPRISAL_PENDING) == 0) {
             if ((g_BattleTargetSelector & BATTLE_TARGET_BOTH_SIDES) == 0) {
-                if (LOBU(g_BattleActionType) == 1) {
+                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK) {
                     if ((func_801DD448() & BYTE_MASK) != 0) {
                         *half |= BATTLE_STATE_REPRISAL_PENDING;
                     }
                 }
-                if ((LOBU(g_BattleActionType) == 4) && ((D_801CA71C[g_BattleActionId].mask & 0x800) != 0) &&
-                    ((func_801DD448() & BYTE_MASK) != 0) && ((D_801CA718[g_BattleActionId][0] & 0x10) == 0)) {
+                if ((LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) &&
+                    ((D_801CA71C[g_BattleActionId].mask & 0x800) != 0) && ((func_801DD448() & BYTE_MASK) != 0) &&
+                    ((D_801CA718[g_BattleActionId][0] & 0x10) == 0)) {
                     g_BattleState |= BATTLE_STATE_REPRISAL_PENDING;
                 }
             }

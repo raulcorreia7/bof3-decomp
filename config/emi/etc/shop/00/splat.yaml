@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x0, .data, D_801D0C00]
-      - [0x4, .rodata, func_801D3828]
+      - [0x4, .rodata, Shop_Equip]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_2
     type: code
@@ -92,7 +92,7 @@ segments:
       - [0x2A54, c, Shop_ApplyPercent]
       - [0x2A88, c, Shop_GetSellPrice]
       - [0x2B10, c, func_801D3710]
-      - [0x2C28, c, func_801D3828]
+      - [0x2C28, c, Shop_Equip]
   # Placement: .text resumes after another section in the retail bytes; one segment would group both .text runs.
   - name: text
     type: code

@@ -448,7 +448,7 @@ MATCH u8 func_800F65A8(s32 slot, s32 amount) {
             return false;
         }
         limit = (u8(*)[8]) & D_801E2F7E[0][3];
-        if ((Item_Count(0, (u8)(value + 0x38), 0) & HALF_MASK) <
+        if ((Item_Count(ITEM_CAT_ITEM, (u8)(value + 0x38), 0) & HALF_MASK) <
             limit[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i] * (amount & BYTE_MASK)) {
             return true;
         }
@@ -485,12 +485,13 @@ MATCH void func_800F6730(void) {
         if (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] == GAME_NONE) {
             break;
         }
-        value = (s32)Item_GetRecord(0, (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
+        value = (s32)Item_GetRecord(ITEM_CAT_ITEM,
+                                    (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
         UI_DrawText(0xAD, (s16)(0x58 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
         sprintf(g_UiFormatBuffer, D_800F5000.format,
                 D_801E2F81[D_801E3134[g_GameContextKind][slot]][i] * (s8)s_ListItemId);
         UI_DrawGlyphString(0x110, (s16)(0x5C + i * 13), 0, g_UiFormatBuffer);
-        cost = Item_Count(0, (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK, 0);
+        cost = Item_Count(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK, 0);
         if (cost < D_801E2F81[D_801E3134[g_GameContextKind][slot]][i]) {
             UI_DrawText(0xAD, (s16)(0xA4 + i * 13), 7, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
             sprintf(g_UiFormatBuffer, D_800F5000.format, cost);
@@ -624,7 +625,8 @@ MATCH void func_800F7100(void) {
         }
         p       = D_801E2F7E[idx] + 3;
         new_var = p[i] * ((s8)s_ListItemId);
-        Item_Remove(0, (D_801E2F7E[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]][i] + 0x38) & BYTE_MASK,
+        Item_Remove(ITEM_CAT_ITEM,
+                    (D_801E2F7E[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]][i] + 0x38) & BYTE_MASK,
                     new_var & BYTE_MASK, 0);
     }
 }

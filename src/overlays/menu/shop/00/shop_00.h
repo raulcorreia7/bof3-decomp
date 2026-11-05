@@ -389,7 +389,8 @@ void func_801D3560(u16* result_code);
 s32  Shop_ApplyPercent(s32 value, s32 percent);
 u32  Shop_GetSellPrice(s32 item_kind, s32 quantity, s32 discount_flag);
 void func_801D3710(void);
-void func_801D3828(u8 record, u8 row, u8 color);
+/* func_801D3828 */
+void Shop_Equip(u8 character_id, u8 slot, u8 item_id);
 void func_801D39BC(void);
 void func_801D39F8(void);
 void func_801D3AA8(void);

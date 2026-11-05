@@ -52,6 +52,17 @@ typedef enum EquipFlags {
     EQUIP_WHELP = 1 << 7,
 } EquipFlags;
 
+/* Equipment slot: the order of the Character members weapon, shield, helmet,
+ * armor and accessories[]. */
+typedef enum EquipSlot {
+    EQUIP_SLOT_WEAPON      = 0,
+    EQUIP_SLOT_SHIELD      = 1,
+    EQUIP_SLOT_HELMET      = 2,
+    EQUIP_SLOT_ARMOR       = 3,
+    EQUIP_SLOT_ACCESSORY_1 = 4,
+    EQUIP_SLOT_ACCESSORY_2 = 5,
+} EquipSlot;
+
 /* Playable-character slot: the record's position in the 8-entry base-stat
  * array. Whelp occupies slot 7 but stores 0x0A in its character index field;
  * slot and stored index are different namespaces (@source: wiki:data/records#masks-and-value-ranges). */
