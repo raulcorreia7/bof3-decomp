@@ -13,9 +13,9 @@ MATCH void func_801B9210(void) {
     }
     g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
     if ((g_Task->x.fixed & 0x7FFF) != 0 || (g_Task->y.fixed & 0x7FFF) != 0) {
-        g_Task->x.fixed        = (g_Task->x.fixed + 0x4800) & ~0x7FFF;
-        g_Task->y.fixed        = (g_Task->y.fixed + 0x4800) & ~0x7FFF;
-        g_Task->z.part.integer = Area_ReadStepHeight(g_Task->x.fixed, g_Task->y.fixed, g_Task->direction_08);
+        g_Task->x.fixed      = (g_Task->x.fixed + 0x4800) & ~0x7FFF;
+        g_Task->y.fixed      = (g_Task->y.fixed + 0x4800) & ~0x7FFF;
+        COORD_INT(g_Task->z) = Area_ReadStepHeight(g_Task->x.fixed, g_Task->y.fixed, g_Task->direction_08);
         if (g_Task->unk_05 == 0) {
             v                   = g_Task->x.fixed;
             g_AreaScrollTargetX = v;

@@ -19,5 +19,5 @@ MATCH void func_801AC0A0(s8 tuning_delta) {
     work           = g_Task;
     work->vx       = (buf[0] - work->x.fixed) / step;
     work->vy       = (buf[1] - work->y.fixed) / step;
-    work->vz       = (buf[2] - work->z.part.integer) / step;
+    work->vz       = (buf[2] - COORD_INT(work->z)) / step;
 }

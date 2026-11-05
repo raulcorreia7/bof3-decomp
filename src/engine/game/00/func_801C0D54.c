@@ -9,7 +9,7 @@ MATCH void func_801C0D54(void) {
             arg = 0x3A;
         Actor_RequestScript(arg);
         g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
-        g_Task->z.part.integer = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed) + 0x7D0;
+        COORD_INT(g_Task->z) = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed) + 0x7D0;
         Actor_ClearVelocity();
         g_Task->gravity = -8;
         g_Task->mode    = 2;

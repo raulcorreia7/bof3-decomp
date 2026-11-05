@@ -109,7 +109,7 @@ MATCH void func_801EFEB8(void) {
     }
     pos.vx = (work->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (work->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -work->pos.z.part.integer / 2;
+    pos.vz = -COORD_INT(work->pos.z) / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
@@ -135,7 +135,7 @@ MATCH void func_801F00EC(void) {
 
 MATCH void func_801F014C(void) {
     func_800AF2B4(D_801EB4E0, 0x30);
-    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + 0x10;
+    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + 0x10;
     if (func_800AF5FC(D_801EB4E0, 0x1C000) != 0) {
         g_Task->timer = 0x1E;
         g_Task->step += 1;

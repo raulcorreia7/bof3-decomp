@@ -18,7 +18,7 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
         for (;;) {
             route  = ((g_Task->direction_08 ^ 4) + i) & 7;
             result = func_801C3E40(g_Task->x.fixed + g_FacingSteps[route].x * 2,
-                                   g_Task->y.fixed + g_FacingSteps[route].y * 2, 0, g_Task->z.part.integer) &
+                                   g_Task->y.fixed + g_FacingSteps[route].y * 2, 0, COORD_INT(g_Task->z)) &
                      0xFF;
             /* FAKE: holds the increment after the probe call. */
             MATCH_BARRIER();

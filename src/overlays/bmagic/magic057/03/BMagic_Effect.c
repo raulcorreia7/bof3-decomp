@@ -176,26 +176,26 @@ MATCH void func_801EF900(void) {
     s32           temp_a0;
     s8            tone;
 
-    g_Task->pos.x.fixed      = D_801EB4E0->pos.x.fixed - 1;
-    g_Task->pos.y.fixed      = D_801EB4E0->pos.y.fixed - 1;
-    temp_a0                  = g_Task->pos.x.fixed;
-    temp_v0                  = Area_SampleHeight(temp_a0, temp_a0);
-    work                     = g_Task;
-    work->unk_25             = 0x1D;
-    work->pos.z.part.integer = temp_v0;
-    g_Task->unk_26           = 0;
-    g_Task->unk_48           = 1;
-    g_Task->unk_27           = 0xA0;
-    g_Task->unk_28           = 0;
-    g_Task->unk_24           = 4;
-    tone                     = -0x80;
-    g_Task->unk_5D           = tone;
-    g_Task->unk_5E           = tone;
-    g_Task->unk_5F           = tone;
-    g_Task->unk_5C           = 0;
-    g_Task->unk_2A           = 0;
-    g_Task->unk_29           = 4;
-    g_Task->unk_2C.half      = 0;
+    g_Task->pos.x.fixed    = D_801EB4E0->pos.x.fixed - 1;
+    g_Task->pos.y.fixed    = D_801EB4E0->pos.y.fixed - 1;
+    temp_a0                = g_Task->pos.x.fixed;
+    temp_v0                = Area_SampleHeight(temp_a0, temp_a0);
+    work                   = g_Task;
+    work->unk_25           = 0x1D;
+    COORD_INT(work->pos.z) = temp_v0;
+    g_Task->unk_26         = 0;
+    g_Task->unk_48         = 1;
+    g_Task->unk_27         = 0xA0;
+    g_Task->unk_28         = 0;
+    g_Task->unk_24         = 4;
+    tone                   = -0x80;
+    g_Task->unk_5D         = tone;
+    g_Task->unk_5E         = tone;
+    g_Task->unk_5F         = tone;
+    g_Task->unk_5C         = 0;
+    g_Task->unk_2A         = 0;
+    g_Task->unk_29         = 4;
+    g_Task->unk_2C.half    = 0;
     Actor_SelectScript(0U);
     g_Task->step += 1;
 }
@@ -203,10 +203,10 @@ MATCH void func_801EF900(void) {
 MATCH void func_801EFA38(void) {
     s32 temp_a0;
 
-    g_Task->pos.x.fixed        = D_801EB4E0->pos.x.fixed - 1;
-    g_Task->pos.y.fixed        = D_801EB4E0->pos.y.fixed - 1;
-    temp_a0                    = g_Task->pos.x.fixed;
-    g_Task->pos.z.part.integer = Area_SampleHeight(temp_a0, temp_a0);
+    g_Task->pos.x.fixed      = D_801EB4E0->pos.x.fixed - 1;
+    g_Task->pos.y.fixed      = D_801EB4E0->pos.y.fixed - 1;
+    temp_a0                  = g_Task->pos.x.fixed;
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(temp_a0, temp_a0);
     if (!(1 & D_801EB4E0->flags)) {
         g_Task->step += 1;
     }

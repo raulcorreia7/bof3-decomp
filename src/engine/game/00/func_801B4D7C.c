@@ -103,7 +103,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                     val0                 = &D_1F800000;
                     *(u16*)(&D_1F800000) = val5;
                     val8                 = &D_1F800000 + 2;
-                    SP_REF(void*, 0x2)   = g_Task->y.part.integer;
+                    SP_REF(void*, 0x2)   = COORD_INT(g_Task->y);
                 loop_20:
                     if ((Area_GetCellCode((s16) * (u16*)(&D_1F800000), FIELD(s16, (&D_1F800000), 0x2u)) & BYTE_MASK) ==
                         (val6 & BYTE_MASK)) {

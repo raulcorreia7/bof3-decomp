@@ -17,13 +17,13 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
     s32    reached_x;
     s32    reached_y;
 
-    work                   = g_Task;
-    route_index            = work->direction_08 & 7;
-    step_x                 = g_FacingOffsets[route_index].x * g_RouteSpeedScale[g_CurrentActor->unk_78];
-    step_y                 = g_FacingOffsets[route_index].y * g_RouteSpeedScale[g_CurrentActor->unk_78];
-    reached_y              = 0;
-    g_Task->z.part.integer = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
-    reached_x              = 0;
+    work                 = g_Task;
+    route_index          = work->direction_08 & 7;
+    step_x               = g_FacingOffsets[route_index].x * g_RouteSpeedScale[g_CurrentActor->unk_78];
+    step_y               = g_FacingOffsets[route_index].y * g_RouteSpeedScale[g_CurrentActor->unk_78];
+    reached_y            = 0;
+    COORD_INT(g_Task->z) = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
+    reached_x            = 0;
     if ((g_Task->unk_18 + g_Task->unk_1C) == 0) {
         g_CurrentActor->unk_80 =
             g_Task->x.fixed + (g_FacingSteps[g_Task->direction_08 & 7].x << 1) * (arg1 & BYTE_MASK);

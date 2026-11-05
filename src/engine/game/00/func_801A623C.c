@@ -31,11 +31,11 @@ MATCH void func_801A623C(u8* script) {
 
     D_80146910[*counter][0] = 0;
 
-    g_Task->z.part.integer = Area_SampleHeight(work->x.fixed, work->y.fixed);
-    g_Task->mode           = script[9];
-    g_Task->step           = script[0xB];
-    g_Task->direction_08   = script[0] & 0xF;
-    g_Task->unk_06         = script[0] >> 4;
+    COORD_INT(g_Task->z) = Area_SampleHeight(work->x.fixed, work->y.fixed);
+    g_Task->mode         = script[9];
+    g_Task->step         = script[0xB];
+    g_Task->direction_08 = script[0] & 0xF;
+    g_Task->unk_06       = script[0] >> 4;
 
     FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[3];
     FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[4];

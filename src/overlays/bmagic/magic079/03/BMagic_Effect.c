@@ -107,10 +107,10 @@ MATCH void func_801EF1DC(void) {
     PartyBattler* work;
     u8            timer;
 
-    work                     = g_Task;
-    timer                    = work->unk_09 - 1;
-    work->pos.z.part.integer = work->pos.z.part.integer - 0x40;
-    work->unk_09             = timer;
+    work  = g_Task;
+    timer = work->unk_09 - 1;
+    COORD_INT(work->pos.z) -= 0x40;
+    work->unk_09 = timer;
     if (timer == 0) {
         g_Task->unk_09 = 0x20;
         g_Task->step   = g_Task->step + 1;

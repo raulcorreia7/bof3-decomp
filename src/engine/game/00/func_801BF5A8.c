@@ -31,7 +31,7 @@ NON_MATCHING void func_801BF5A8(s32 x, s32 y, s32 party_slot) {
         FIELD(s32, rec, 0x34u) = x - (FIELD(s32, &D_80181CAC, off) * (D_801CD459[g_BattleScrollDir * 2] / 4));
         FIELD(s32, rec, 0x38u) = y + (FIELD(s32, D_80181CA8, off) * (D_801CD459[g_BattleScrollDir * 2] / 4));
     }
-    g_Task->depth.part.integer = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
+    COORD_INT(g_Task->depth) = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
 }
 #else
 INCLUDE_ASM(func_801BF5A8);

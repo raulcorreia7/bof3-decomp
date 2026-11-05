@@ -44,8 +44,8 @@ NON_MATCHING s8 func_8014DE78(void) {
         if (range < dist) {
             continue;
         }
-        range = self->depth.part.integer;
-        dist  = range - g_Actors[i].depth.part.integer;
+        range = COORD_INT(self->depth);
+        dist  = range - COORD_INT(g_Actors[i].depth);
         if (dist < 0) {
             dist = -dist;
         }
