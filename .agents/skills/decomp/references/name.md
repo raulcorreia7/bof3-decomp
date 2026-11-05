@@ -34,7 +34,7 @@ game words, the purpose rather than the instructions. Before you keep a name, te
   first for a family of three or more (`Message_WindowOpen`, `Message_WindowClose`).
 - It has no `And` and no step list. A function that does two things is named for why it does them.
 - It has no storage words: no field names, offsets, flag numbers, widths, `Slot0`, `ByTwo`, `Byte`, `Word`.
-- A colleague could guess it before reading the body: `Party_AddItem`, `Battle_EndTurn`, `Shop_Buy`.
+- A colleague could guess it before reading the body: `Item_Add`, `Battle_EndTurn`, `Shop_Buy`.
 
 | Don't (mechanical)                                                | Do (natural), when the users show it                              | Why                                                                         |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------- |

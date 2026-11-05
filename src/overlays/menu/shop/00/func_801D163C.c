@@ -55,8 +55,7 @@ MATCH void func_801D163C(void) {
         g_ShopItemCount    = 1;
         g_ShopItemPrice    = Shop_ApplyPercent(Item_GetPrice(g_ShopItemCategory, g_ShopItemId), g_ShopPricePercent);
         g_ShopItemCountMax = g_Zenny / (u32)g_ShopItemPrice;
-        held =
-            Party_CountItem(g_ShopItemCategory, g_ShopItemId, 0) + Party_CountItem(g_ShopItemCategory, g_ShopItemId, 1);
+        held = Item_Count(g_ShopItemCategory, g_ShopItemId, 0) + Item_Count(g_ShopItemCategory, g_ShopItemId, 1);
         if ((u8)held >= 100) {
             g_ShopItemCount    = 0;
             g_ShopItemCountMax = 0;

@@ -27,7 +27,7 @@ MATCH void func_801DFDF4(void) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             SND_PlayCue(EMI_CUE_ID(1, 2));
             D_801E625C = 0;
-            Party_RemoveItem(ITEM_CAT_ITEM, ITEM_SKILL_INK, 1, 0);
+            Item_Remove(ITEM_CAT_ITEM, ITEM_SKILL_INK, 1, 0);
             two         = 2;
             D_80148379  = 7;
             D_8014837A  = 0xD;

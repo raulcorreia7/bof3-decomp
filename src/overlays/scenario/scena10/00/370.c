@@ -87,7 +87,7 @@ MATCH u8 func_801FA5EC(void) {
     u8 count;
 
     for (i = 0; i < 8; i += 1) {
-        count = Party_CountItem(0, i + 0x4E, 0);
+        count = Item_Count(0, i + 0x4E, 0);
         if (count != 0) {
             return count;
         }

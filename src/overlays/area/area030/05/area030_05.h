@@ -56,9 +56,9 @@ void func_800F6EE0(u16 x, u16 y);
 void func_800F7094(s32 x, s32 y, s32 kind, s32 value, u8 selected);
 void func_800F7100(void);
 /* func_801650B4 */
-bool Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
+bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 /* func_8016628C */
-s32  Party_CountItem(u8 category, u8 item, u8 mode);
+s32  Item_Count(u8 category, u8 item, u8 mode);
 void func_801D799C(s16 arg0, s16 arg1, s32 arg2, s32 arg3);
 s32  func_801D9534(s16 arg0, u16 arg1, s16 arg2, s16 arg3, s32 arg4);
 

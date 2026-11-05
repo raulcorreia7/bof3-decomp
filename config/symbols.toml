@@ -1687,7 +1687,7 @@ MENU_CAPTION_ICON = { addr = 0x801D9BD8, source = "the caption icon record drawn
 MENU_CLOCK_COLON = { addr = 0x801D9BDC, source = "the colon string drawn twice between hours and minutes while the play clock's thirtieths count is below 15, by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 g_MenuCommandLabels = { addr = 0x801D9C8C, source = "label id -> button text, drawn on each button by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
 g_MenuCommandRows = { addr = 0x801D9CE8, source = "5-byte rows (button count, four label ids) indexed by the command row kind, read by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
-g_MenuStatusItems = { addr = 0x801DA028, type = "MenuStatusItems", size = 0xC, source = "read:func_801D1CA4@0x801D1CA4 counts four items into held[]; write:func_801D1018@0x801D1018 passes used[] to Party_RemoveItem" }
+g_MenuStatusItems = { addr = 0x801DA028, type = "MenuStatusItems", size = 0xC, source = "read:func_801D1CA4@0x801D1CA4 counts four items into held[]; write:func_801D1018@0x801D1018 passes used[] to Item_Remove" }
 D_801DA0B4 = { addr = 0x801DA0B4, source = "func_801D2C50 increments this word by 0x20" }
 D_801DA12C = { addr = 0x801DA12C, source = "func_801D2DEC decrements and func_801D2F68 increments this word by 0x20" }
 
@@ -1757,9 +1757,9 @@ MENU_CLUT_STRIP_CELLS = { addr = 0x801E5A24, source = "the 4-byte sprite cells t
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801E5AD0, source = "the sprite-cell indices the CLUT strip body walks, shared name with emi/etc/start/08" }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801E5B1C, source = "the four per-clut entry offsets the CLUT strip body reads, shared name with emi/etc/start/08" }
 g_ShopStockIndex = { addr = 0x801E6044, source = "read:func_801D163C@0x801D163C indexes the shop stock rows at D_8018E7CC (count byte, then category and item pairs) with it and wraps it at the count" }
-g_ShopItemCategory = { addr = 0x801E6048, source = "read:func_801D1D60@0x801D1D60 passes it as the Party_AddItem and Item_GetKind category; func_801D163C@0x801D163C loads it from the shop stock row" }
-g_ShopItemId = { addr = 0x801E604C, source = "read:func_801D1D60@0x801D1D60 passes it as the Party_AddItem item; func_801D163C@0x801D163C loads it from the shop stock row" }
-g_ShopItemCount = { addr = 0x801E6050, source = "read:func_801D1D60@0x801D1D60 passes it as the Party_AddItem amount and multiplies it by the price; func_801D2D64@0x801D2D64 steps it by the arrows" }
+g_ShopItemCategory = { addr = 0x801E6048, source = "read:func_801D1D60@0x801D1D60 passes it as the Item_Add and Item_GetKind category; func_801D163C@0x801D163C loads it from the shop stock row" }
+g_ShopItemId = { addr = 0x801E604C, source = "read:func_801D1D60@0x801D1D60 passes it as the Item_Add item; func_801D163C@0x801D163C loads it from the shop stock row" }
+g_ShopItemCount = { addr = 0x801E6050, source = "read:func_801D1D60@0x801D1D60 passes it as the Item_Add amount and multiplies it by the price; func_801D2D64@0x801D2D64 steps it by the arrows" }
 g_ShopItemCountMax = { addr = 0x801E605C, source = "write:func_801D163C@0x801D163C sets it to g_Zenny / price, capped to 99 minus the held count; func_801D2D64@0x801D2D64 clamps the count to it" }
 g_ShopItemPrice = { addr = 0x801E6060, source = "write:func_801D163C@0x801D163C sets it to Shop_ApplyPercent(Item_GetPrice(...)); func_801D1D60@0x801D1D60 subtracts price * count from g_Zenny" }
 g_ShopPricePercent = { addr = 0x801E6064, source = "read:func_801D163C@0x801D163C passes it as the percent argument of Shop_ApplyPercent" }
@@ -3446,8 +3446,8 @@ g_FishBestCatch = { addr = 0x80144FE4, size = 0x20, source = "func_801DB554 rais
 g_EmiLoadedCharacterIndex = { addr = 0x80145024, source = "the character index the EMI stream last loaded, read and written by func_801E7948, func_801F1824 and func_801976EC" }
 g_SndBgmId = { addr = 0x80145029, source = "selection index (0xff = none)" }
 g_BattleCount = { addr = 0x8014502C, source = "the battle counter incremented once per battle, read by the commu00 anchor reset, and the battle return transition at func_80197378 increments it" }
-g_InventoryIds = { addr = 0x8014504C, size = 0x200, source = "Party_CountItem and the item menu sort and scan one 128-slot id array per category (item, weapon, armor, accessory) through the D_801C893C pointer table" }
-g_InventoryCounts = { addr = 0x8014524C, size = 0x200, source = "Party_CountItem and the item menu read one 128-slot quantity array per category through the D_801C8950 pointer table, and func_801D8364 prints the accessory count when it is 2 or more" }
+g_InventoryIds = { addr = 0x8014504C, size = 0x200, source = "Item_Count and the item menu sort and scan one 128-slot id array per category (item, weapon, armor, accessory) through the D_801C893C pointer table" }
+g_InventoryCounts = { addr = 0x8014524C, size = 0x200, source = "Item_Count and the item menu read one 128-slot quantity array per category through the D_801C8950 pointer table, and func_801D8364 prints the accessory count when it is 2 or more" }
 g_VitalItemIds = { addr = 0x8014544C, size = 0x20, source = "Item_VitalHas scans it for an id, Item_VitalAdd stores an id in a free entry and returns 0 when the table is full (32 entries)" }
 g_BattleTargetRows = { addr = 0x80145500, type = "BattleSlot", source = "six 4-byte gene selection rows {gene,gene,gene,gate} gate 0xFF = row unusable (func_800A4FD8.c 13), rows priced in AP through D_800B4C7C (func_800A4FD8.c 16-24) moved from" }
 g_GameCelerityTimer = { addr = 0x80145554, size = 0x4, source = "func_80198CAC counts it down each frame like g_PlayClock in reverse, func_801AF5B0 refuses the celerity ability while it is nonzero; it lies at save offset +0xE7C" }
@@ -3857,7 +3857,7 @@ func_801642D0 = { addr = 0x801642D0, type = "func" }
 Menu_DrawCursorSprite = { addr = 0x801647C4, type = "func", source = "draws the 0x18 x 0xC cursor sprite (CLUT 0x7802) at (x - 0x16, y + 2); Menu_DrawPanelCursor passes it the panel task position and func_8015A1D8 the panel position" }
 Char_ApplyMaster = { addr = 0x801648A0, type = "func", source = "runs the D_80183A1C script that the master_id byte (Character +0x1B) selects: opcodes 0-8 call Char_AddResistance and 9-13 call Char_AddPercent on the live block; Char_RebuildStats calls it last" }
 Char_RebuildStats = { addr = 0x80164A44, type = "func", source = "its body copies the base block over +0x1C then applies fatigue and equipment" }
-Party_AddItem = { addr = 0x801650B4, type = "func", source = "adds a quantity to the matching D_801C893C/D_801C8950 inventory slot - caps at 99 and inserts a free slot" }
+Item_Add = { addr = 0x801650B4, type = "func", source = "adds a quantity to the matching D_801C893C/D_801C8950 inventory slot - caps at 99 and inserts a free slot" }
 Char_AddAbility = { addr = 0x801651DC, type = "func", source = "stores the ability id in the first empty byte of the 10-entry panel Char_GetAbilities selects, or of the 128-entry stock D_8014546C when to_stock is set, and returns 0 when the table is full or the id is 0; func_801ADDD4 learns level-up abilities through it and the shop and ability menus put a panel ability back in the stock with to_stock 1" }
 Char_RestoreHp = { addr = 0x80165280, type = "func", source = "adds the amount to current_hp of a g_Characters record (the D_80145F04 battle copy when the mode is set), clamps at max_hp, and amount 0 restores to max_hp; clears the low-HP status once hp reaches a quarter. The start-menu item-use functions pass 0x14, 0x28, 0x50 and 0x64 and report failure when it returns 0" }
 Char_RestoreAp = { addr = 0x8016534C, type = "func", source = "adds the amount to current_ap of a g_Characters record (the D_80145F04 battle copy when the mode is set), clamps at max_ap, and amount 0 restores to max_ap; the start-menu item-use functions test its result" }
@@ -3883,10 +3883,10 @@ Item_VitalHas = { addr = 0x80166140, type = "func", source = "scans the 32-entry
 Item_VitalAdd = { addr = 0x80166180, type = "func", source = "stores an id in the first free g_VitalItemIds entry and returns 0 when the 32-entry table is full" }
 Item_VitalRemove = { addr = 0x801661C4, type = "func", source = "clears the g_VitalItemIds entry equal to the id and reports whether one was found" }
 TEXT_SetVariable = { addr = 0x8016620C, type = "func", source = "copies count bytes of src into slot index of the 32-byte g_TextVariables rows and terminates the copy; the shop and area message code fills the message variables with it" }
-Party_CountItem = { addr = 0x8016628C, type = "func", source = "counts one item in the inventory or the live character equipment - called by the shop and communication readers" }
-Party_CountInventory = { addr = 0x80166438, type = "func", source = "counts the non-zero bytes of the selected D_801C893C inventory record" }
+Item_Count = { addr = 0x8016628C, type = "func", source = "counts one item in the inventory or the live character equipment - called by the shop and communication readers" }
+Item_CountHeld = { addr = 0x80166438, type = "func", source = "counts the non-zero bytes of the selected D_801C893C inventory record" }
 Party_CountAbilities = { addr = 0x801664A0, type = "func", source = "counts the non-zero entries of the selected ability panel" }
-Party_RemoveItem = { addr = 0x801665A0, type = "func", source = "subtracts a quantity from the matching D_801C893C/D_801C8950 inventory slot and clears the slot at zero; the shop, battle and equip callers consume items with it, the inverse of Party_AddItem" }
+Item_Remove = { addr = 0x801665A0, type = "func", source = "subtracts a quantity from the matching D_801C893C/D_801C8950 inventory slot and clears the slot at zero; the shop, battle and equip callers consume items with it, the inverse of Item_Add" }
 Party_SpendZenny = { addr = 0x8016663C, type = "func", source = "subtracts the amount from PARTY_ZENNY when the balance covers it" }
 Party_AddZenny = { addr = 0x8016666C, type = "func", source = "adds to PARTY_ZENNY and the D_80145030 earned total - clamping at 9999999" }
 Item_GetDescription = { addr = 0x801666C8, type = "func", source = "returns the group's u16 resource id for one choice entry from the row table the low byte of group_index selects" }
@@ -4548,7 +4548,7 @@ Area_AddCameraOffsetY2 = { addr = 0x801F2E90, type = "func", source = "adds 2 to
 Scene_ClearEventState = { addr = 0x801F2F1C, type = "func", source = "clears the script-active flag and the three scene event state bytes at D_801448EB" }
 
 ["emi/battle/batl_end/00"]
-Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "its body calls Party_AddItem for each queued item and sets g_BattleStep 4" }
+Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "its body calls Item_Add for each queued item and sets g_BattleStep 4" }
 
 ["emi/battle/batl_ovr/00"]
 Battle_RunGameOver = { addr = 0x801EF0A8, type = "func", source = "its body clears the battle bytes, calls SND_Exit and CallbackReplace(SYS_StartFrontend)" }

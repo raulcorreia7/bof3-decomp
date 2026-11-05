@@ -881,7 +881,7 @@ void        func_800B4220(s16 x, s16 y, u8 selected);
 /* func_8014FF0C */
 void        UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 /* func_801650B4 */
-bool        Party_AddItem(s32 category, u8 item, u8 amount, s32 unused);
+bool        Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
 s16         Char_AddPoints(u16* value, u16 limit, s16 delta);
 u32         Char_AddPercent(u8* value, u8 delta);

@@ -4,7 +4,7 @@
  * inventory quantity, any other mode counts it among the equipment of the
  * live character records, plus the fishing rod and lures for accessories.
  */
-MATCH s32 Party_CountItem(u8 category, u8 item, u8 mode) {
+MATCH s32 Item_Count(u8 category, u8 item, u8 mode) {
     u8*        ids;
     u8*        qtys;
     Character* record;

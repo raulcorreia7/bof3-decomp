@@ -47,7 +47,7 @@ MATCH void Fairy_RollExploreReward(void) {
         offset = (i + (RANDOM_MASK(0xF))) * 2;
         high   = D_801F2619[offset];
         low    = g_FairyExploreRewards[offset];
-        if (!(Party_AddItem(high, low, 1, 0) & BYTE_MASK)) {
+        if (!(Item_Add(high, low, 1, 0) & BYTE_MASK)) {
             Message_StartAreaMessage(0x50);
             /* The item pair was rejected: skip the refresh tail. */
             goto done;

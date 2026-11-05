@@ -5,7 +5,7 @@ MATCH void func_801F2DB0(void) {
         g_CurrentActor->flags_74 &= 0xFE;
         return;
     }
-    if (Party_CountItem(ITEM_CAT_ITEM, ITEM_FAERIE_TIARA, 0) == 0) {
+    if (Item_Count(ITEM_CAT_ITEM, ITEM_FAERIE_TIARA, 0) == 0) {
         g_AreaSceneMode = 1;
         g_CurrentActor->flags_74 &= 0xFE;
         SND_PlayCue(0x201U);

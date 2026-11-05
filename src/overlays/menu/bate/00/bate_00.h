@@ -105,6 +105,6 @@ void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 
 void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 
-s32 Party_CountItem(u8 category, u8 item, u8 mode);
+s32 Item_Count(u8 category, u8 item, u8 mode);
 
 #endif
