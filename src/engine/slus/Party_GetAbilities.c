@@ -3,7 +3,7 @@
 /* resolves the party record a slot kind points at: character records
  *           are selected for mode == 0, formation records otherwise.
  */
-MATCH u8* Party_GetAbilities(u32 formation_index, u32 panel, u32 mode) {
+MATCH u8* Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode) {
     Character* record;
     u32        slot;
 
@@ -13,16 +13,16 @@ MATCH u8* Party_GetAbilities(u32 formation_index, u32 panel, u32 mode) {
     } else {
         record = (Character*)(D_80145F04 + (formation_index & BYTE_MASK) * 0x140);
     }
-    switch ((u8)panel) {
+    switch ((u8)ability_type) {
         default:
             return record->healing_abilities;
-        case 0:
+        case ABILITY_TYPE_HEAL:
             return record->healing_abilities;
-        case 1:
+        case ABILITY_TYPE_ASSIST:
             return record->assist_abilities;
-        case 2:
+        case ABILITY_TYPE_ATTACK:
             return record->attack_abilities;
-        case 3:
+        case ABILITY_TYPE_SKILL:
             return record->skill_abilities;
     }
 }
