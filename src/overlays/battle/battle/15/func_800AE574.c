@@ -18,11 +18,11 @@ MATCH void func_800AE574(void) {
         return;
     }
 
-    source            = D_801EB4E0;
-    second            = (PartyBattler*)g_Task;
-    second->pos.x.raw = source->pos.x.raw;
-    second->pos.y.raw = source->pos.y.raw;
-    second->pos.z.raw = source->pos.z.raw;
+    source              = D_801EB4E0;
+    second              = (PartyBattler*)g_Task;
+    second->pos.x.fixed = source->pos.x.fixed;
+    second->pos.y.fixed = source->pos.y.fixed;
+    second->pos.z.fixed = source->pos.z.fixed;
     func_800AF764();
 
     third                   = TASK_BYTES;

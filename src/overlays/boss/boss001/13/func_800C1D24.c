@@ -9,9 +9,9 @@ MATCH void func_800C1D24(void) {
     timer    = *counter - 1;
     *counter = timer;
     if (timer == 0) {
-        value                 = g_Task->pos.y.raw + 0x8000;
-        g_Task->pos.y.raw     = value;
-        g_Task->pos.z.half.hi = Area_SampleHeight(g_Task->pos.x.raw, value);
+        value                      = g_Task->pos.y.fixed + 0x8000;
+        g_Task->pos.y.fixed        = value;
+        g_Task->pos.z.part.integer = Area_SampleHeight(g_Task->pos.x.fixed, value);
         Area_FindSceneRecord(0x5F);
         g_BattleCurrentEnemy->script = &D_800C21A0;
         g_Task->unk_2A               = 0;

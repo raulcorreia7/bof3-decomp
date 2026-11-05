@@ -26,7 +26,7 @@ MATCH void func_800ADD44(void) {
     work                     = (volatile PartyBattler*)g_Task;
     work->unk_4B             = 0xFF;
     slotp                    = (PartyBattler*)g_Task;
-    work->pos.z.raw          = 0;
+    work->pos.z.fixed        = 0;
     pair                     = &D_801485EE;
     base                     = (u8*)D_80145518;
     row                      = base + ((*pair + slotp->unk_09) * 4);

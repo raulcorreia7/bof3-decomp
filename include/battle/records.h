@@ -17,6 +17,7 @@
  * decides: the comment on each member records which unit reads it. */
 
 #include "common/handler.h"
+#include "common/vector.h"
 #include "game/character.h"
 #include "game/records.h"
 #include "types.h"
@@ -134,22 +135,11 @@ typedef struct BattleSelectionType {
 ASSERT_SIZE(BattleSelectionType, 0x14);
 ASSERT_OFFSET(BattleSelectionType, mask, 0x00);
 
-/* 16.16 fixed-point position: the whole word, or the fraction and integer halves read on their own.
- * The z cell at +0x3C keeps the vertical span in its integer half (+0x3E). */
-typedef union Fix32 {
-    s32 raw;
-
-    struct {
-        u16 lo;
-        s16 hi;
-    } half;
-} Fix32;
-
 /* A battler's or effect's place: x and y, and z (its integer half holds the vertical span). */
 typedef struct BattlePosition {
-    Fix32 x;
-    Fix32 y;
-    Fix32 z;
+    Coord x;
+    Coord y;
+    Coord z;
 } BattlePosition;
 
 ASSERT_SIZE(BattlePosition, 0xC);

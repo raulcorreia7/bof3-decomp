@@ -15,17 +15,17 @@ MATCH void func_801EF000(void) {
     u8            facing;
 
     if (g_Task->unk_0B == 3) {
-        slot                                = Battle_AllocEffect(1, 3) & BYTE_MASK;
-        work                                = g_Task;
-        g_BattleEffects[slot].mode          = 1;
-        g_BattleEffects[slot].target.party  = work;
-        facing                              = D_801EB4E0->facing;
-        g_BattleEffects[slot].unk_09        = 0;
-        g_BattleEffects[slot].unk_0A        = 0;
-        g_BattleEffects[slot].unk_08        = (facing + 2) & 3;
-        g_BattleEffects[slot].pos.x         = g_Task->pos.x;
-        g_BattleEffects[slot].pos.y         = g_Task->pos.y;
-        g_BattleEffects[slot].pos.z.half.hi = g_Task->pos.z.half.hi;
+        slot                                     = Battle_AllocEffect(1, 3) & BYTE_MASK;
+        work                                     = g_Task;
+        g_BattleEffects[slot].mode               = 1;
+        g_BattleEffects[slot].target.party       = work;
+        facing                                   = D_801EB4E0->facing;
+        g_BattleEffects[slot].unk_09             = 0;
+        g_BattleEffects[slot].unk_0A             = 0;
+        g_BattleEffects[slot].unk_08             = (facing + 2) & 3;
+        g_BattleEffects[slot].pos.x              = g_Task->pos.x;
+        g_BattleEffects[slot].pos.y              = g_Task->pos.y;
+        g_BattleEffects[slot].pos.z.part.integer = g_Task->pos.z.part.integer;
         g_Task->mode += 1;
     }
 }

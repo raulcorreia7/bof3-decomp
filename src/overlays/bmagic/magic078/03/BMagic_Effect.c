@@ -35,8 +35,8 @@ MATCH void func_801EF12C(void) {
     s32 var_v0;
     s32 var_v1;
 
-    temp_v0 = ratan2(g_BattleSelectedActor->pos.y.raw - g_Task->pos.y.raw,
-                     g_BattleSelectedActor->pos.x.raw - g_Task->pos.x.raw);
+    temp_v0 = ratan2(g_BattleSelectedActor->pos.y.fixed - g_Task->pos.y.fixed,
+                     g_BattleSelectedActor->pos.x.fixed - g_Task->pos.x.fixed);
     var_v1  = g_Task->unk_0C;
     if (var_v1 < 0) {
         var_v1 += 0x3F;
@@ -107,9 +107,9 @@ MATCH void func_801EFEB8(void) {
     if (work->slot == 0xD) {
         rot.vz = work->unk_0C;
     }
-    pos.vx = (work->pos.x.raw >> 9) - 0x4000;
-    pos.vy = (work->pos.y.raw >> 9) - 0x4000;
-    pos.vz = -work->pos.z.half.hi / 2;
+    pos.vx = (work->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (work->pos.y.fixed >> 9) - 0x4000;
+    pos.vz = -work->pos.z.part.integer / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
@@ -135,7 +135,7 @@ MATCH void func_801F00EC(void) {
 
 MATCH void func_801F014C(void) {
     func_800AF2B4(D_801EB4E0, 0x30);
-    g_Task->pos.z.half.hi = (u16)g_Task->pos.z.half.hi + 0x10;
+    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + 0x10;
     if (func_800AF5FC(D_801EB4E0, 0x1C000) != 0) {
         g_Task->timer = 0x1E;
         g_Task->step += 1;

@@ -44,15 +44,15 @@ MATCH void func_801EF008(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_Task->facing  = D_801EB4E0->facing;
-    work            = g_Task;
-    actor           = D_801EB4E0;
-    work->pos.x.raw = actor->pos.x.raw;
-    work->pos.y.raw = actor->pos.y.raw;
-    z               = actor->pos.z.raw;
-    work->timer     = 0x10;
-    work->unk_0C    = 8;
-    work->pos.z.raw = z;
+    g_Task->facing    = D_801EB4E0->facing;
+    work              = g_Task;
+    actor             = D_801EB4E0;
+    work->pos.x.fixed = actor->pos.x.fixed;
+    work->pos.y.fixed = actor->pos.y.fixed;
+    z                 = actor->pos.z.fixed;
+    work->timer       = 0x10;
+    work->unk_0C      = 8;
+    work->pos.z.fixed = z;
     g_Task->step += 1;
 }
 
