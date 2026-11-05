@@ -13,12 +13,10 @@ MATCH void func_801F5170(void) {
     Game_FindAreaHandler();
     Area_FindSceneRecord(0x205);
 
-    g_Task->unk_48            = 0;
-    g_Task->flags_24          = 0;
-    g_Task->unk_2A            = 0;
-    g_Task->tint.bytes.unk_5D = 0;
-    g_Task->tint.bytes.unk_5E = 0;
-    g_Task->tint.bytes.unk_5F = 0;
+    g_Task->unk_48   = 0;
+    g_Task->flags_24 = 0;
+    g_Task->unk_2A   = 0;
+    ACTOR_CLEAR_TINT();
 
     row_offset = g_Task->unk_0B * 4;
     map_offset = D_801F591D[row_offset] * ((AreaMapBundle*)&D_80104000)->width_00;

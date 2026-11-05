@@ -12,7 +12,7 @@ MATCH void func_801D5894(void) {
     WinDrawCueText(28, 22, D_801E60EC + 0x85);
     SAVE_DrawSlots(0x20, 0x30, 0);
     CardAccessFile(0, 0, 0, 0, 0);
-    if (g_SaveCardStatus == 0) {
+    if (g_SaveCardStatus == CARD_EVENT_OK) {
         sprintf((char*)g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);
         sprintf((char*)g_UiFormatBuffer, D_801D0C68, g_PlayClock.hours_00, g_PlayClock.minutes_01,
                 g_PlayClock.seconds_02);
@@ -34,7 +34,7 @@ MATCH void func_801D5894(void) {
                 return;
             }
         }
-        if (g_SaveCardStatus == 3) {
+        if (g_SaveCardStatus == CARD_EVENT_ERROR) {
             g_SaveCardStatus = 6;
         }
         SND_PlayCue(EMI_CUE_ID(1, 7));

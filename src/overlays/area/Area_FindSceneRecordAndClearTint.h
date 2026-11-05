@@ -5,10 +5,8 @@
 MATCH void Area_FindSceneRecordAndClearTint(void) {
     g_Task->flags_24 = 0x80;
     Area_FindSceneRecord(0x158);
-    g_Task->unk_29            = 5;
-    g_Task->unk_2A            = 0;
-    g_Task->tint.bytes.unk_5D = 0;
-    g_Task->tint.bytes.unk_5E = 0;
-    g_Task->tint.bytes.unk_5F = 0;
-    g_Task->mode              = 1;
+    g_Task->unk_29 = 5;
+    g_Task->unk_2A = 0;
+    ACTOR_CLEAR_TINT();
+    g_Task->mode = 1;
 }

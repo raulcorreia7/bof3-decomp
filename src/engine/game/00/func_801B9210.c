@@ -8,10 +8,8 @@ MATCH void func_801B9210(void) {
     if (g_Task->tint.bytes.flags != 0) {
         GFX_StagePalette((u32)(GAME_PALETTE_STAGE + (g_Task->unk_05 << 6)), 0);
         g_Task->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
-        g_Task->tint.bytes.flags  = 0;
-        g_Task->tint.bytes.unk_5D = 0;
-        g_Task->tint.bytes.unk_5E = 0;
-        g_Task->tint.bytes.unk_5F = 0;
+        g_Task->tint.bytes.flags = 0;
+        ACTOR_CLEAR_TINT();
     }
     g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
     if ((g_Task->x.fixed & 0x7FFF) != 0 || (g_Task->y.fixed & 0x7FFF) != 0) {

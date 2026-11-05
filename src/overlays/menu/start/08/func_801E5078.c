@@ -5,8 +5,8 @@
 
 MATCH void func_801E5078(void) {
     s32 port;
-    s32 prev;
-    s32 curr;
+    s32 first_status;
+    s32 second_status;
 
     Menu_DrawClutStrip(D_80144953);
     Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, (s32)D_80144952);
@@ -14,12 +14,12 @@ MATCH void func_801E5078(void) {
     g_SaveCardPort = 0;
     CardAccessFile(0, 0, 0, 0, 0);
     port           = 1;
-    prev           = g_SaveCardStatus;
+    first_status   = g_SaveCardStatus;
     g_SaveCardPort = port;
     CardAccessFile(0, 0, 0, 0, 0);
-    curr = g_SaveCardStatus;
-    if ((prev == 0) || (prev == 2)) {
-        if ((curr == 0) || (curr == 2)) {
+    second_status = g_SaveCardStatus;
+    if ((first_status == CARD_EVENT_OK) || (first_status == CARD_EVENT_NEW)) {
+        if ((second_status == CARD_EVENT_OK) || (second_status == CARD_EVENT_NEW)) {
             D_801ED7F8     = 1;
             g_SaveCardPort = 0;
             D_801ED7F4     = 0;
@@ -30,7 +30,7 @@ MATCH void func_801E5078(void) {
             D_801ED7F8     = 0;
             D_801ED870     = 1;
         }
-    } else if ((curr == 0) || (curr == 2)) {
+    } else if ((second_status == CARD_EVENT_OK) || (second_status == CARD_EVENT_NEW)) {
         D_801ED7F4     = 1;
         D_801ED7F8     = 1;
         g_SaveCardPort = port;
