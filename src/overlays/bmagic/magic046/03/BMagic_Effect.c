@@ -27,12 +27,7 @@ INCLUDE_ASM(func_801EF090);
 
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
-MATCH void func_801EF1F0(void) {
-    BattleHandlerTable3 handlers;
-
-    handlers = D_801EEC10;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
-}
+#include "../../Effect_DispatchHandlerSlot2.h"
 
 MATCH void func_801EF250(void) {
     g_SpadWork                              = D_801EB4E0;
