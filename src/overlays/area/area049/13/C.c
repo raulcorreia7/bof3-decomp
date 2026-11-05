@@ -11,7 +11,13 @@ MATCH void func_8011700C(void) {
     SYS_DISPATCH_TASK(D_8011818C, 1, entity);
 }
 
-INCLUDE_ASM(func_80117048);
+MATCH void func_80117048(void) {
+    ((Actor*)g_SpadWork)->x.fixed = 0xB8000;
+    ((Actor*)g_SpadWork)->y.fixed = 0x548000;
+    ((Actor*)g_SpadWork)->z.fixed = 0x1000000;
+    func_801172D0();
+    ((Actor*)g_SpadWork)->unk_01 += 1;
+}
 
 MATCH void func_801170A4(void) {
     if (!(func_80117410() & BYTE_MASK)) {

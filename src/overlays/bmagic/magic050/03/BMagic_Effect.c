@@ -9,7 +9,37 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC70);
 
-INCLUDE_ASM(func_801EEDF8);
+MATCH void func_801EEDF8(void) {
+    s32 var_a0;
+    s32 temp_v1;
+    u8  temp_v1_2;
+
+    temp_v1 = g_SpadWork->word_08.byte.unk_09;
+    if (temp_v1 != 0x10) {
+        if (temp_v1 < 0x11) {
+            var_a0 = 0x101;
+            if (temp_v1 != 8) {
+            } else {
+                goto block_7;
+            }
+        } else {
+            var_a0 = 0x101;
+            if (temp_v1 != 0x18) {
+            } else {
+                goto block_7;
+            }
+        }
+    } else {
+        var_a0 = 0x102;
+    block_7:
+        SND_QueueSelectionFx(var_a0);
+    }
+    temp_v1_2                       = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1_2;
+    if ((temp_v1_2 & 0xFF) == 0x19) {
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 

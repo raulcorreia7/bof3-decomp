@@ -60,7 +60,27 @@ MATCH void func_801EF694(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF6EC);
+MATCH void func_801EF6EC(void) {
+    s8 tone;
+    u8 temp_v0;
+
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        if ((u8)g_BattleActingBattler >= 3U) {
+            func_801E257C(g_BattleActingBattler, 0);
+        }
+        g_SpadWork->flags_00 |= 0x20;
+        g_SpadWork->unk_5C              = 1;
+        g_SpadWork->unk_2B              = 1;
+        tone                            = -0x40;
+        g_SpadWork->unk_5D              = tone;
+        g_SpadWork->unk_5E              = tone;
+        g_SpadWork->unk_5F              = tone;
+        g_SpadWork->word_08.byte.unk_09 = 8;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF7E0);
 
