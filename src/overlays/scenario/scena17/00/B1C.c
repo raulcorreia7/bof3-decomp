@@ -197,7 +197,15 @@ MATCH void func_801F8088(void) {
     func_801F8EF0();
 }
 
-INCLUDE_ASM(func_801F80CC);
+MATCH void func_801F80CC(void) {
+    u8* step;
+
+    SND_StartXaStream(8, 1);
+    step       = &D_80146874;
+    D_801F9DD0 = 0;
+    D_801F9DD4 = 0;
+    *step     += 1;
+}
 
 MATCH void func_801F8110(void) {
     u8  ready;
