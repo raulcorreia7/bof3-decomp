@@ -19,7 +19,6 @@ MATCH void GFX_ResetPalette(void) {
     }
 
     for (row = 0; row < 32u; row++) {
-        memcpy((u8*)g_GraphicsPaletteDst + row * 0x200, (u8*)MEM_PTR(const u16, 0x80033800u) + row * 0x200,
-               0x200);
+        memcpy((u8*)g_GraphicsPaletteDst + row * 0x200, (u8*)MEM_PTR(const u16, 0x80033800u) + row * 0x200, 0x200);
     }
 }

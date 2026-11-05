@@ -71,8 +71,8 @@ MATCH void func_801D3C74(void) {
         color   = *(D_801E1E80 + (palette->row_4B * FISHING_PALETTE_ROW_STRIDE));
         if (color != GAME_NONE) {
             color_index = color * FISHING_COLOR_ENTRY_SIZE;
-            UI_DrawText((palette->origin_x_2E + (palette->counter_49 * FISHING_PALETTE_WIDTH)),
-                        (D_80144154 + 2), * (D_801E1F16 + color_index), 1U, (color_index + D_801E1F14));
+            UI_DrawText((palette->origin_x_2E + (palette->counter_49 * FISHING_PALETTE_WIDTH)), (D_80144154 + 2),
+                        *(D_801E1F16 + color_index), 1U, (color_index + D_801E1F14));
         }
     }
     draw = FISHING_STATE;

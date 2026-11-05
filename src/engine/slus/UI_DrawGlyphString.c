@@ -40,14 +40,14 @@ MATCH void UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text) {
             ca                      = *p;
             t1                      = (ca) - ' ';
             if (t1 < 0) {
-                v0b = (ca) - 1;
+                v0b = (ca)-1;
             } else {
                 v0b = t1;
             }
             sprite[0xC] = ((t1 - ((v0b >> 5) << 5)) << 3);
             cb          = *p;
             if (((cb) - ' ') < 0) {
-                v0a = (cb) - 1;
+                v0a = (cb)-1;
             } else {
                 v0a = (cb) - ' ';
             }

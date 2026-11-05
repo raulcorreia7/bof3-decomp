@@ -19,13 +19,13 @@ loop_1:
         if ((color_data[0x28] == 0) && ((color_data[0x24] & 4) == 0)) {
             ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = flagged;
         }
-        result                                                 = slot & BYTE_MASK;
-        ((PaletteFade*)((u8*)D_80145BD4 + offset))->step       = GFX_MarkPaletteCells(color_data[0x28], result, 1);
-        tmp_a                                                  = color_data[0x27];
-        ((PaletteFade*)((u8*)D_80145BD4 + offset))->saved_byte = tmp_a;
-        tmp_b                                                  = color_data[0x28];
-        ((PaletteFade*)((u8*)D_80145BD4 + offset))->target     = color_data;
-        ((PaletteFade*)((u8*)D_80145BD4 + offset))->red_offset = palette_base;
+        result                                                   = slot & BYTE_MASK;
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->step         = GFX_MarkPaletteCells(color_data[0x28], result, 1);
+        tmp_a                                                    = color_data[0x27];
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->saved_byte   = tmp_a;
+        tmp_b                                                    = color_data[0x28];
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->target       = color_data;
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->red_offset   = palette_base;
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->green_offset = palette_count;
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->blue_offset  = palette_index;
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->table_index  = tmp_b;

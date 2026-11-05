@@ -378,7 +378,7 @@ MATCH void func_800F606C(s32 arg0) {
     UI_DrawText(0x36, 0x3E, (u8)(n * 7), 0xFF, (u8*)((D_8001008E) + 0x80010000u));
     for (i = 0; i < D_800F7240; i++) {
         h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)],
-                                ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
+                           ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
         w = func_800F65A8(i & BYTE_MASK, 1);
         if ((arg0 & BYTE_MASK) != 0) {
             UI_DrawText(0x25, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
@@ -486,7 +486,7 @@ MATCH void func_800F6730(void) {
             break;
         }
         value = Item_GetRecord(ITEM_CAT_ITEM,
-                                    (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
+                               (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
         UI_DrawText(0xAD, (0x58 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
         sprintf(g_UiFormatBuffer, D_800F5000.format,
                 D_801E2F81[D_801E3134[g_GameContextKind][slot]][i] * (s8)s_ListItemId);

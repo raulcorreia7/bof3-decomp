@@ -12,5 +12,5 @@ MATCH s32 func_801E0ABC(u8 row_index, u16 value) {
         return *(u16*)(D_801E2ADA + row_index * 0x24);
     }
     q = (value * 10) / limit;
-    return (u16)(* (u16*)(D_801E2ADA + row_index * 0x24) * q / 10);
+    return (u16)(*(u16*)(D_801E2ADA + row_index * 0x24) * q / 10);
 }

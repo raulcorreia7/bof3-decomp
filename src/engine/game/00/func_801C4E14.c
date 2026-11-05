@@ -15,8 +15,8 @@ MATCH s32 func_801C4E14(void) {
         func_801C57B4();
         state = g_Task;
         if (state->unk_09 == state->unk_0A) {
-            region                                                 = state->unk_05;
-            g_GfxPalettePending                                    = 1;
+            region                                            = state->unk_05;
+            g_GfxPalettePending                               = 1;
             *(u16*)(MEM_PTR(u8, 0x8003963Eu) + (region << 6)) = 0;
         }
     } else {

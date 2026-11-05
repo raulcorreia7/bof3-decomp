@@ -18,12 +18,12 @@ MATCH void func_801D1CF0(void) {
                 work->pos_x_0C = work->pos_x_0C + speed;
                 if ((s32)work->step_delta_18 > 0 && work->pos_x_0C >= 0xFF) {
                     work->pos_x_0C      = 0xFF;
-                    work->step_delta_18 = - work->step_delta_18;
+                    work->step_delta_18 = -work->step_delta_18;
                 } else {
                     back = (FishingState*)TASK_BYTES;
                     if ((s32)back->step_delta_18 < 0 && back->pos_x_0C <= 0) {
                         back->pos_x_0C      = 0;
-                        back->step_delta_18 = - back->step_delta_18;
+                        back->step_delta_18 = -back->step_delta_18;
                     }
                 }
                 break;

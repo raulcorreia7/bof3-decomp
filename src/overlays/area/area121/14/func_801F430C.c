@@ -25,7 +25,7 @@ MATCH void func_801F430C(void) {
 
     if (FIELD(u8, scratch, 0x06) != 0) {
         FIELD(s16, scratch, 0x36) -= (D_801F687C[FIELD(u8, scratch, 8)].x << 16) >> 29;
-        value = FIELD(s16, scratch, 0x3A) - ((D_801F687C[FIELD(u8, scratch, 8)].y << 16) >> 29);
+        value                     = FIELD(s16, scratch, 0x3A) - ((D_801F687C[FIELD(u8, scratch, 8)].y << 16) >> 29);
         FIELD(s16, scratch, 0x3A) = value;
         if (FIELD(u8, scratch, 0x06) == 1) {
             if (FIELD(s32, scratch, 0x0C) == 0) {

@@ -45,7 +45,7 @@ MATCH void func_801D23F4(void) {
     } else {
         row = work_a->cue_index_06 * 8;
         if (current_y == (target_y + *(s32*)((u8*)&D_801E1D58 + row))) {
-            work_a->step_limit_20 = * (s32*)((u8*)&D_801E1D5C + row);
+            work_a->step_limit_20 = *(s32*)((u8*)&D_801E1D5C + row);
         }
         work_d          = (FishingState*)g_Task;
         step            = work_d->step_14 + work_d->step_limit_20;

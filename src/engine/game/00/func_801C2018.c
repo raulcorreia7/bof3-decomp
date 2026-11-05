@@ -58,7 +58,7 @@ MATCH void func_801C2018(void) {
                     if (counter_threshold < 5) {
                         counter_threshold = 5;
                     }
-                    if (* (u32*)counter_word >= counter_threshold) {
+                    if (*(u32*)counter_word >= counter_threshold) {
                         ((void (*)(void*, s32))SYS_SetFlag)(counter_word - 0x680, bit_index);
                         *(u32*)counter_word = 0U;
                     }
@@ -74,7 +74,7 @@ MATCH void func_801C2018(void) {
             if (*status_byte_ptr < 7U) {
                 func_801C1E88(1, (s32*)(status_byte_ptr - 0xC));
             }
-            if (* (u8*)(&D_801455C3) < 0xAU) {
+            if (*(u8*)(&D_801455C3) < 0xAU) {
                 func_801C1E88(0, (s32*)(status_byte_ptr - 8));
             }
             func_801C1F4C(5);

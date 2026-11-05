@@ -4,5 +4,5 @@
  * 8 bits.
  */
 MATCH s32 Game_HasVitalItem(u8** cursor) {
-    return Item_VitalHas(* *cursor) & BYTE_MASK;
+    return Item_VitalHas(**cursor) & BYTE_MASK;
 }

@@ -37,15 +37,14 @@ MATCH void func_801D3F40(void) {
         id = D_801E1E80[FISHING_STATE->row_4B * 0xC];
         if (id != GAME_NONE) {
             index = id * 3;
-            UI_DrawText((FISHING_STATE->origin_x_2E + (FISHING_STATE->counter_49 * 8)), (*ox + 2),
-                        D_801E1F16[index], 1, (u8*)(index + D_801E1F14));
+            UI_DrawText((FISHING_STATE->origin_x_2E + (FISHING_STATE->counter_49 * 8)), (*ox + 2), D_801E1F16[index], 1,
+                        (u8*)(index + D_801E1F14));
         }
     } else {
         id = D_801E1E80[FISHING_STATE->row_4B * 0xC];
         if (id != GAME_NONE) {
             index = id * 3;
-            UI_DrawText(FISHING_STATE->origin_x_2E, (D_80144154 + 2), D_801E1F16[index], 1,
-                        (u8*)(index + D_801E1F14));
+            UI_DrawText(FISHING_STATE->origin_x_2E, (D_80144154 + 2), D_801E1F16[index], 1, (u8*)(index + D_801E1F14));
             if ((s16)FISHING_STATE->origin_x_2E == 0x1D) {
                 FISHING_STATE->step_timer_09 = 4;
                 FISHING_STATE->handler_index_01 += 1;

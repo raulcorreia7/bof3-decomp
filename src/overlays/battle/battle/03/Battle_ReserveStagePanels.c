@@ -37,10 +37,10 @@ MATCH void Battle_ReserveStagePanels(void) {
             D_80148332[0xD + battler].unk_01  = 0;
             /* FAKE: barrier keeps the row-byte load after the two panel byte stores. */
             MATCH_BARRIER();
-            first   = g_BattlePartyBattlers[battler].facing;
-            index   = first * 2 + D_80145F09[battler][0] * 8;
-            panel_x = g_BattlePartyBattlers[battler].unk_2E.half + g_BattlePanelOffsets[index];
-            panel_x = D_801EAEA4[(g_BattleScrollDir & 0xFE) ^ 2] + panel_x;
+            first                          = g_BattlePartyBattlers[battler].facing;
+            index                          = first * 2 + D_80145F09[battler][0] * 8;
+            panel_x                        = g_BattlePartyBattlers[battler].unk_2E.half + g_BattlePanelOffsets[index];
+            panel_x                        = D_801EAEA4[(g_BattleScrollDir & 0xFE) ^ 2] + panel_x;
             D_80148332[battler + 0xD].x_02 = panel_x;
             /* The y lookup reloads the row bytes; the x store may have changed them. */
             index                          = g_BattlePartyBattlers[battler].facing * 2 + D_80145F09[battler][0] * 8;
