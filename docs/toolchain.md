@@ -22,7 +22,6 @@ checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 | `maspsx`                                                     | ASPSX emulation                                    | `third_party/` submodule, set up by `tools/setup.sh`             | game build             |
 | `decomp-permuter`, `asm-differ`, `m2c`                       | Permuter, differ, decompiler                       | `third_party/` submodules, set up by `tools/setup.sh --matching` | matching               |
 | `coddog`, `objdiff-cli`, `rizin`                             | Twin search, function diff and report, disassembly | [matching aids](#matching-aids)                                  | matching, analysis     |
-| a MIPS `objdump` (`mips-linux-gnu-objdump`)                  | Lets the permuter score candidates                 | system package (`binutils-mips-linux-gnu` on Debian and Ubuntu)  | permuter               |
 
 ## Setup
 
@@ -433,8 +432,9 @@ is a starting point; only `check-<image>` accepts it.
 `.venv/bin/python tools/permuter_import.py <source.c>` imports the unit's first `NON_MATCHING`
 definition, else its first `MATCH` definition, into `third_party/decomp-permuter`
 (`tools/setup.sh --matching`), with the flags in `build/meson/emit/cflags.txt`. A unit that links
-the split assembly (`MATCH INCLUDE_ASM(name)`) imports its C model. The permuter needs a
-MIPS `objdump` on `PATH` ([host tools](#host-tools)). Search the imported function with:
+the split assembly (`MATCH INCLUDE_ASM(name)`) imports its C model. The settings call the repo's
+`bin/internal/binutils/objdump` and `as`, so the permuter needs no MIPS binutils on `PATH`. Search the
+imported function with:
 
 ```sh
 .venv/bin/python third_party/decomp-permuter/permuter.py work/permute/nonmatchings/<func> -j 8
