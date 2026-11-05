@@ -61,8 +61,8 @@ MATCH void func_800F5138(void) {
     D_800F71F0[5 + s_Step]();
     func_800F5E44();
     func_800F6730();
-    if ((*(s8*)&s_ListCursor & 0xC0) == 0) {
-        Menu_DrawCursorSprite(0x1A, *(s8*)&s_ListCursor * 13 + 0x51, 0);
+    if (((s8)s_ListCursor & 0xC0) == 0) {
+        Menu_DrawCursorSprite(0x1A, (s8)s_ListCursor * 13 + 0x51, 0);
     }
 }
 
@@ -87,9 +87,9 @@ MATCH void func_800F51BC(void) {
     if ((g_InputPressed & D_80145AC2) != 0) {
         if (func_800F65A8(s_ListCursor, 1) == 0) {
             total = Party_CountItem(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3],
-                                    ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3], 0) +
+                                    D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].unk_00, 0) +
                     Party_CountItem(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3],
-                                    ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3], 1);
+                                    D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].unk_00, 1);
             if (total >= 99) {
                 s_ListCursor |= 0x80;
                 SND_PlayCue(EMI_CUE_ID(1, 4));
@@ -116,7 +116,7 @@ tail:
     if (((s8)s_ListCursor & 0xC0) == 0) {
         WinDrawCueText(0x18, 0x14,
                        Item_GetDescription(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3],
-                                           ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3]) &
+                                           D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].unk_00) &
                            0xFFFF);
     }
     func_800F606C(0);
@@ -209,7 +209,7 @@ MATCH void func_800F5828(void) {
             SND_PlayCue(EMI_CUE_ID(1, 5));
             s_ListCursor &= 0xBF;
             Party_AddItem(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] * 8],
-                          ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][(s8)s_ListCursor] * 8], s_ListItemId, 0);
+                          D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].unk_00, s_ListItemId, 0);
             func_800F7100();
             s_ListItemId = 1;
             s_Step       = 0;
@@ -220,7 +220,7 @@ MATCH void func_800F5828(void) {
 
     if (s_Step == 2) {
         src = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][s_ListCursor & 0xF] * 8],
-                             ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][s_ListCursor & 0xF] * 8]);
+                             D_801E2F7C[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]].unk_00);
         for (i = 0; i < 12; i++) {
             g_TextVariables[0][i] = src[i];
         }
@@ -447,7 +447,7 @@ MATCH u8 func_800F65A8(s32 slot, s32 amount) {
         if (value == GAME_NONE) {
             return false;
         }
-        limit = (u8(*)[8])((u8*)D_801E2F7E + 3);
+        limit = (u8(*)[8]) & D_801E2F7E[0][3];
         if ((Party_CountItem(0, (u8)(value + 0x38), 0) & HALF_MASK) <
             limit[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i] * (amount & BYTE_MASK)) {
             return true;
@@ -554,7 +554,7 @@ MATCH void func_800F6C5C(void) {
     value = (s32)Item_GetRecord(D_801E2F7C[entry].unk_01, D_801E2F7C[entry].unk_00);
     UI_DrawText(0x21, 0x68, 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
 
-    sprintf(g_UiFormatBuffer, D_800F5000.format, *(s8*)&s_ListItemId);
+    sprintf(g_UiFormatBuffer, D_800F5000.format, (s8)s_ListItemId);
     UI_DrawGlyphString(0x84, 0x6C, 0, g_UiFormatBuffer);
 
     entry = D_801E3134[g_GameContextKind][slot];
