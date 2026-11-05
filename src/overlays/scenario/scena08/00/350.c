@@ -477,27 +477,27 @@ block_7:
 INCLUDE_ASM(func_801FE2A0);
 
 MATCH void func_801FE698(void) {
-    EMI_LoaderStreamFamily(7, 2, 10, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_WHELP, 0);
     g_PartySize = 0;
-    Party_JoinMember(10);
+    Party_JoinMember(CHAR_ID_WHELP);
     func_801C1630();
 }
 
 MATCH void func_801FE6DC(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
     g_PartySize = 0;
-    Party_JoinMember(7);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
 }
 
 MATCH void func_801FE740(void) {
-    Party_JoinMember(2);
+    Party_JoinMember(CHAR_ID_GARR);
 }
 
 MATCH void func_801FE760(void) {
-    EMI_LoaderStreamFamily(7, 2, 4, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_REI, 0);
     g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(2);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_JoinMember(CHAR_ID_GARR);
     func_801C1630();
 }
 
@@ -505,14 +505,14 @@ MATCH void func_801FE760(void) {
 
 MATCH void func_801FE800(void) {
     g_PartySize = 0;
-    Party_JoinMember(7);
-    Party_JoinMember(8);
-    Party_JoinMember(4);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_JoinMember(CHAR_ID_NINA_ADULT);
+    Party_JoinMember(CHAR_ID_REI);
     func_801C1630();
 }
 
 MATCH void func_801FE840(void) {
-    EMI_LoaderStreamFamily(7U, 8U, 4U, 0U);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0U);
     func_801FE800();
 }
 

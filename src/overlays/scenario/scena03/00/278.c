@@ -644,7 +644,7 @@ MATCH void func_801FCE18(void) {
 }
 
 MATCH void func_801FCE6C(void) {
-    EMI_LoaderStreamFamily(0, 1, 2, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0);
     D_80144F5A[0] = 255;
     D_80144F5B    = 255;
     D_80144F5C    = 255;
@@ -652,11 +652,11 @@ MATCH void func_801FCE6C(void) {
     D_80144F5E[0] = 255;
     D_80144F5F    = 255;
     g_PartySize   = 0;
-    Party_JoinMember(0);
+    Party_JoinMember(CHAR_ID_RYU_YOUNG);
 }
 
 MATCH void func_801FCEDC(void) {
-    Party_JoinMember(1);
+    Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }
 
 #include "overlays/scenario/Scene_RemoveNina.h"
