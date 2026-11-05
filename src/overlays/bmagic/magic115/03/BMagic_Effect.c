@@ -20,6 +20,7 @@ MATCH void func_801EF054(void) {
 
 INCLUDE_ASM(func_801EF098);
 
+/* First difference: lui a0 at +0x50; try the work pointer lifetime after the depth copy. */
 INCLUDE_ASM(func_801EF130);
 
 INCLUDE_ASM(func_801EF27C);
