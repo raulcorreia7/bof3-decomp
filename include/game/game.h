@@ -40,6 +40,16 @@ typedef struct PaletteFade {
 ASSERT_OFFSET(PaletteFade, target, 0x08);
 ASSERT_SIZE(PaletteFade, 0x0C);
 
+/* The three fade offsets of each PaletteFade row as the D_80145BD6 label (D_80145BD4 + 2) addresses them. */
+typedef struct GamePaletteOffset {
+    s8 red_offset;
+    s8 green_offset;
+    s8 blue_offset;
+    u8 pad_03[9];
+} GamePaletteOffset;
+
+ASSERT_SIZE(GamePaletteOffset, 0x0C);
+
 /* One 0x10-byte slot of the palette animation table at D_80145D94; bit 0 of flags marks it in use. */
 typedef struct GraphicsPaletteAnimation {
     u8  flags;
@@ -55,6 +65,8 @@ ASSERT_SIZE(GraphicsPaletteAnimation, 0x10);
 
 /* D_80145BD4 */
 extern PaletteFade              D_80145BD4[GRAPHICS_PALETTE_FADE_COUNT];
+/* D_80145BD6 */
+extern GamePaletteOffset        D_80145BD6[GRAPHICS_PALETTE_FADE_COUNT];
 /* D_80145D94 */
 extern GraphicsPaletteAnimation D_80145D94[8];
 

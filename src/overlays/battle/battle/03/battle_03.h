@@ -205,7 +205,6 @@ extern void*           D_800B6178[];
 extern BattleSelection g_BattleSelections[];
 /* D_80143F00 */
 extern u16             g_GameAreaId;
-extern s32             D_80145BD6;
 extern s32             D_80145ED0;
 extern u8              D_80145F09[][BATTLE_PARTY_STRIDE];
 extern volatile u8     D_80145F18[];
