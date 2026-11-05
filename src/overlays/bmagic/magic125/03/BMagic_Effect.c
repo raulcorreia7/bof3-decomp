@@ -36,8 +36,8 @@ MATCH void func_801EEFF8(void) {
 }
 
 MATCH void func_801EF0F8(void) {
-    PartyBattler* work = g_SpadWork;
-    u8 timer = work->word_08.byte.timer_0A - 1;
+    PartyBattler* work          = g_SpadWork;
+    u8            timer         = work->word_08.byte.timer_0A - 1;
     work->word_08.byte.timer_0A = timer;
     work->word_3C.word += 0xFF800000;
     if (timer == 0) {
