@@ -32,13 +32,7 @@ INCLUDE_ASM(func_801EF008);
 
 INCLUDE_ASM(func_801EF080);
 
-MATCH void func_801EF338(void) {
-    PartyBattler* work;
-
-    work = (PartyBattler*)D_801EB4E0;
-    work->word_08.byte.unk_0B--;
-    func_801E5988();
-}
+#include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF36C(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, g_SpadWork);
