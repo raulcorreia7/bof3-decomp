@@ -4,26 +4,26 @@
  * D_80146144/48 product terms vs near-sum differs (51.9%). */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BC760(void) {
-    PartyBattler*    row;
-    s32              goal_x;
-    s32              goal_y;
-    s32              span;
-    s32              da;
-    s32              db;
-    s32              dc;
-    s32              dd;
-    s32              dsum;
-    s32              dx;
-    s32              dy;
-    s32              near_a;
-    s32              near_b;
-    s32              result;
-    s32              tgt_x;
-    s32              tgt_y;
-    u8               dir;
-    u8               count;
-    u8               cnt2;
-    GameStateRecord* saved;
+    PartyBattler* row;
+    s32           goal_x;
+    s32           goal_y;
+    s32           span;
+    s32           da;
+    s32           db;
+    s32           dc;
+    s32           dd;
+    s32           dsum;
+    s32           dx;
+    s32           dy;
+    s32           near_a;
+    s32           near_b;
+    s32           result;
+    s32           tgt_x;
+    s32           tgt_y;
+    u8            dir;
+    u8            count;
+    u8            cnt2;
+    GameState*    saved;
 
     dir    = g_SpadWork->route_index_08;
     goal_x = D_80145EC4 + (D_80145E9C * D_80145E99);
@@ -138,7 +138,7 @@ NON_MATCHING s32 func_801BC760(void) {
     if (!((g_GameFlags | g_AreaWalkFlags) & AREA_WALK_BUSY(0))) {
         if (*(u8*)g_SpadWork & ACTOR_FLAG_OFFSCREEN) {
             saved       = g_GameState;
-            g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
+            g_GameState = (GameState*)g_BattlePartyBattlers;
             near_a      = (D_80145EC4 + (D_80145E9C * D_80145E99)) & ~0x7FFF;
             near_b      = (D_80145EC8 + (D_80145EA0 * D_80145E99)) & ~0x7FFF;
             if (!(func_801C3E40(near_a, near_b, g_SpadWork->state_70.byte, Area_ReadHeight(near_a, near_b)) &

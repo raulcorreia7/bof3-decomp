@@ -10,7 +10,7 @@ MATCH void Party_BuildBattlers(u32 mode) {
         Party_ResetBattlers();
     }
     for (i = 0; i < g_PartySize; i++) {
-        g_GameState = (GameStateRecord*)(((u8*)g_BattlePartyBattlers) + (i * BATTLE_PARTY_STRIDE));
+        g_GameState = (GameState*)(((u8*)g_BattlePartyBattlers) + (i * BATTLE_PARTY_STRIDE));
         g_SpadWork  = (Actor*)(((u8*)g_BattlePartyBattlers) + (i * BATTLE_PARTY_STRIDE));
         *(((u8*)g_BattlePartyBattlers) + (i * 0x140)) = 1;
         entry_table                                   = D_80144F5A;

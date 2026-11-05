@@ -20,7 +20,7 @@ MATCH void func_801B26E0(void) {
             i++;
         } while (i < g_PartySize);
     }
-    g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
+    g_GameState = (GameState*)g_BattlePartyBattlers;
     g_SpadWork  = (Actor*)g_BattlePartyBattlers;
     if (D_80145E99 == 0) {
         for (i = 1; i < g_PartySize; i++) {
