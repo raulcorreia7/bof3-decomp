@@ -78,7 +78,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 s
     block_16:
         UI_DrawTextString(val0, val1, val3, 0x10, D_801EC938);
     }
-    if (character->current_hp < (u32)(character->stats.max_hp >> 2)) {
+    if (character->hp < (u32)(character->stats.max_hp >> 2)) {
         val8 = character->status | STATUS_LOW_HP;
     } else {
         val8 = character->status & ~STATUS_LOW_HP;
@@ -88,7 +88,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 s
         if (character->status & STATUS_LOW_HP) {
             val9 = 4;
         }
-        if (character->current_hp < 2U) {
+        if (character->hp < 2U) {
             val9 = 2;
         }
     } else {
@@ -96,7 +96,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 s
     }
     val10 = g_UiFormatBuffer;
     val10 = g_UiFormatBuffer;
-    sprintf((char*)g_UiFormatBuffer, D_801D0C50, character->current_hp);
+    sprintf((char*)g_UiFormatBuffer, D_801D0C50, character->hp);
     UI_DrawGlyphString((s16)(val7 + 22), (s16)(val2 + 31), val9, g_UiFormatBuffer);
     if (!(val4 & BYTE_MASK)) {
         val9 = (character->fatigue != 0) * 4;
@@ -110,7 +110,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 s
     tmp0 = val4 & BYTE_MASK;
     val9 = -(tmp0 != 0) & 7;
     if (tmp0 == 0) {
-        tmp3 = character->current_ap;
+        tmp3 = character->ap;
         if (tmp3 < (u32)(character->stats.max_ap >> 2)) {
             val9 = 4;
         }
@@ -122,7 +122,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 s
     }
     val1 = (s16)g_UiFormatBuffer;
     val1 = (s16)g_UiFormatBuffer;
-    sprintf((char*)val1, D_801D0C50, character->current_ap);
+    sprintf((char*)val1, D_801D0C50, character->ap);
     val5 = val7 + 0x16;
     val5 <<= 0x10;
     val5  = val5 >> 0x10;

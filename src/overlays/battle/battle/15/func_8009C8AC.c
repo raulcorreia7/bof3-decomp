@@ -24,7 +24,7 @@ MATCH u8 func_8009C8AC(u16 required_mask) {
             return false;
         if (required_mask & 0x100)
             return false;
-        if (D_801C90EB[g_BattlePartyBattlers[slot].stats.equipment.weapon * 0x18] & required_mask)
+        if (D_801C90EB[g_BattlePartyBattlers[slot].chr.equip.weapon * 0x18] & required_mask)
             return true;
     }
     return false;

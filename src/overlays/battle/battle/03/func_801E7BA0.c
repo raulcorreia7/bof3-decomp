@@ -74,7 +74,7 @@ NON_MATCHING void func_801E7BA0(void) {
         TASK_SET(D_801EB4E0);
         g_GameState = &g_BattlePartyBattlers[D_801EB4E0->slot];
         temp_a0_132 = D_801EB4E0->slot * BATTLE_PARTY_STRIDE;
-        temp_v1_135 = g_BattlePartyBattlers[D_801EB4E0->slot].stats.level;
+        temp_v1_135 = g_BattlePartyBattlers[D_801EB4E0->slot].chr.level;
         if ((temp_v1_135 == 7) || (temp_v1_135 == 0)) {
             D_801EB4C8  = *(D_80145F1A + temp_a0_132);
             temp_a0_154 = *(D_80145F10 + (D_801EB4E0->slot * BATTLE_PARTY_STRIDE));
@@ -119,7 +119,7 @@ NON_MATCHING void func_801E7BA0(void) {
         *(D_801EC36C + (temp_a1_349->slot * 0x78)) =
             Area_SampleHeight(*(D_801EC364 + temp_v0_339), *(D_801EC368 + temp_v0_339)) << 0x10;
         temp_a0_363 = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
-        temp_v1_366 = g_BattlePartyBattlers[temp_a1_349->slot].stats.level;
+        temp_v1_366 = g_BattlePartyBattlers[temp_a1_349->slot].chr.level;
         if ((temp_v1_366 == 7) || (temp_v1_366 == 0)) {
             *(D_80145F1A + temp_a0_363)                  = D_801EB4C8;
             *(D_80145F10 + (temp_a1_349->slot * 0x140))  = D_801EB4CC;

@@ -647,7 +647,7 @@ static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_i
     if ((record_index & BYTE_MASK) == 0) {
         return &g_Characters[character_index & BYTE_MASK];
     } else {
-        return &g_BattlePartyBattlers[character_index & BYTE_MASK].stats;
+        return &g_BattlePartyBattlers[character_index & BYTE_MASK].chr;
     }
 }
 

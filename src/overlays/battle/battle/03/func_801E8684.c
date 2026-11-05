@@ -54,7 +54,7 @@ NON_MATCHING void func_801E8684(void) {
     *(D_801EC36C + (temp_a1_173->slot * 0x78)) =
         Area_SampleHeight(*(D_801EC364 + temp_v0_163), *(D_801EC368 + temp_v0_163)) << 0x10;
     temp_a0_187 = temp_a1_173->slot * BATTLE_PARTY_STRIDE;
-    temp_v1_190 = g_BattlePartyBattlers[temp_a1_173->slot].stats.level;
+    temp_v1_190 = g_BattlePartyBattlers[temp_a1_173->slot].chr.level;
     if ((temp_v1_190 == 7) || (temp_v1_190 == 0)) {
         *(D_80145F1A + temp_a0_187)                  = D_801EB4C8;
         *(D_80145F10 + (temp_a1_173->slot * 0x140))  = D_801EB4CC;

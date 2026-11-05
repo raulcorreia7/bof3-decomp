@@ -25,22 +25,22 @@ MATCH void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u1
     preview   = *character;
     switch (slot) {
         case EQUIP_SLOT_WEAPON:
-            preview.equipment.weapon = item_id;
+            preview.equip.weapon = item_id;
             break;
         case EQUIP_SLOT_SHIELD:
-            preview.equipment.shield = item_id;
+            preview.equip.shield = item_id;
             break;
         case EQUIP_SLOT_HELMET:
-            preview.equipment.helmet = item_id;
+            preview.equip.helmet = item_id;
             break;
         case EQUIP_SLOT_ARMOR:
-            preview.equipment.armor = item_id;
+            preview.equip.armor = item_id;
             break;
         case EQUIP_SLOT_ACCESSORY_1:
-            preview.equipment.accessories[0] = item_id;
+            preview.equip.accessories[0] = item_id;
             break;
         case EQUIP_SLOT_ACCESSORY_2:
-            preview.equipment.accessories[1] = item_id;
+            preview.equip.accessories[1] = item_id;
             break;
     }
     Char_RebuildStats(&preview);

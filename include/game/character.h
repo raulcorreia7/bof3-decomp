@@ -135,7 +135,7 @@ typedef enum MasterId {
 
 /* The 0x20-byte stat block: the live copy at +0x1C holds the equipment and
  * buffs a battle reads; the permanent copy at +0x3C is what level-ups raise. */
-typedef struct StatBlock {
+typedef struct Stats {
     u16 max_hp;
     u16 max_ap;
     u16 power;
@@ -151,18 +151,18 @@ typedef struct StatBlock {
     u8  evasion;
     u8  accuracy;
     u8  pad_1D[3];
-} StatBlock;
+} Stats;
 
-ASSERT_SIZE(StatBlock, 0x20);
+ASSERT_SIZE(Stats, 0x20);
 
 /* Equipped item ids, in EquipSlot order. */
-typedef struct EquipmentSet {
+typedef struct Equipment {
     u8 weapon;
     u8 shield;
     u8 helmet;
     u8 armor;
     u8 accessories[CHARACTER_ACCESSORY_COUNT];
-} EquipmentSet;
+} Equipment;
 
 /* The four learned-ability lists, in ability-type order. */
 typedef struct AbilitySet {
@@ -173,25 +173,25 @@ typedef struct AbilitySet {
 } AbilitySet;
 
 typedef struct Character {
-    u8           name[CHARACTER_NAME_LENGTH];
-    u8           character_id; /* CharacterId */
-    u8           level;
-    u8           unk_07; /* party-row flags byte; bit 0 selects the rows func_801E0F78 lists */
-    u32          exp;
-    u16          status; /* StatusFlags */
-    EquipmentSet equipment;
-    u16          current_hp;
-    u16          current_ap;
-    u8           current_willpower;
-    u8           inoculations;
-    u8           fatigue;
-    u8           master_id; /* MasterId */
-    StatBlock    stats;
-    StatBlock    base_stats;
-    AbilitySet   abilities;
-    u8           master_level; /* the level when the current master was assigned */
-    u8           level_up_modifiers[CHARACTER_LEVEL_MODIFIER_COUNT];
-    u8           unk_8B[0x19];
+    u8         name[CHARACTER_NAME_LENGTH];
+    u8         character_id; /* CharacterId */
+    u8         level;
+    u8         unk_07; /* party-row flags byte; bit 0 selects the rows func_801E0F78 lists */
+    u32        exp;
+    u16        status; /* StatusFlags */
+    Equipment  equip;
+    u16        hp;
+    u16        ap;
+    u8         willpower;
+    u8         inoculations;
+    u8         fatigue;
+    u8         master_id; /* MasterId */
+    Stats      stats;
+    Stats      base;
+    AbilitySet abilities;
+    u8         master_level; /* the level when the current master was assigned */
+    u8         level_up_modifiers[CHARACTER_LEVEL_MODIFIER_COUNT];
+    u8         unk_8B[0x19];
 } Character;
 
 ASSERT_SIZE(Character, PARTY_RECORD_STRIDE);

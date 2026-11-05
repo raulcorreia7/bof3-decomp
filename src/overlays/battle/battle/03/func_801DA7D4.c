@@ -57,7 +57,7 @@ NON_MATCHING void func_801DA7D4(void) {
                 total        = sum;
                 entry        = &entries[total];
                 entry->index = (s16)i;
-                entry->value = g_BattlePartyBattlers[i].stats.stats.agility;
+                entry->value = g_BattlePartyBattlers[i].chr.stats.agility;
                 sum++;
             }
         }

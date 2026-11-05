@@ -31,12 +31,12 @@ NON_MATCHING void func_8009FB38(void) {
                 row_offset    = (row_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
                 src           = (Character*)((D_80145FCC[row_offset] * PARTY_RECORD_STRIDE) + ((u8*)src_base));
                 dst_row       = dst_base + row_offset;
-                dst_row[0x0E] = src->equipment.weapon;
-                dst_row[0x0F] = src->equipment.shield;
-                dst_row[0x10] = src->equipment.helmet;
-                dst_row[0x11] = src->equipment.armor;
-                dst_row[0x12] = src->equipment.accessories[0];
-                dst_row[0x13] = src->equipment.accessories[1];
+                dst_row[0x0E] = src->equip.weapon;
+                dst_row[0x0F] = src->equip.shield;
+                dst_row[0x10] = src->equip.helmet;
+                dst_row[0x11] = src->equip.armor;
+                dst_row[0x12] = src->equip.accessories[0];
+                dst_row[0x13] = src->equip.accessories[1];
                 memcpy(dst_row + 0x3C, &src->stats.max_hp, 0x20);
                 row_index++;
             } while (((u32)(row_index & BYTE_MASK)) < (*active_count));

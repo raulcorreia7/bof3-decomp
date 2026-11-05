@@ -31,21 +31,21 @@ MATCH s32 Item_Count(u8 category, u8 item, u8 mode) {
                 default:
                     break;
                 case ITEM_CAT_WEAPON:
-                    if (record->equipment.weapon == item)
+                    if (record->equip.weapon == item)
                         count++;
                     break;
                 case ITEM_CAT_ARMOR:
-                    if (record->equipment.shield == item)
+                    if (record->equip.shield == item)
                         count++;
-                    if (record->equipment.helmet == item)
+                    if (record->equip.helmet == item)
                         count++;
-                    if (record->equipment.armor == item)
+                    if (record->equip.armor == item)
                         count++;
                     break;
                 case ITEM_CAT_ACCESSORY:
-                    if (record->equipment.accessories[0] == item)
+                    if (record->equip.accessories[0] == item)
                         count++;
-                    if (record->equipment.accessories[1] == item)
+                    if (record->equip.accessories[1] == item)
                         count++;
                     break;
             }

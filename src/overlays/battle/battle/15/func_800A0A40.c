@@ -19,10 +19,10 @@ MATCH void func_800A0A40(void) {
         /* FAKE: the destination slot is volatile: without it the scheduler sinks
          * the store past the volatile index reload and the load-delay `nop` the
          * original emits disappears. */
-        base                                               = g_BattlePartyBattlers[battler_index].stats.current_hp;
+        base                                               = g_BattlePartyBattlers[battler_index].chr.hp;
         /* FAKE: volatile-drop keeps the original load and store order. */
         (MATCH_VOLATILE_PTR(s16, g_BattleTargetRecord))[2] = base - 1;
-        BATTLE_ACTIVE_PARTY.stats.current_hp               = 1;
+        BATTLE_ACTIVE_PARTY.chr.hp                         = 1;
     } else {
         u16 base;
 

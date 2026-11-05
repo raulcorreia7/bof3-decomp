@@ -14,7 +14,7 @@ MATCH void func_8009E844(void) {
     slot    = &g_BattleTarget;
     battler = LOBU(*slot);
     if (BATTLER_IS_PLAYER(battler)) {
-        base = g_BattlePartyBattlers[battler].stats.status;
+        base = g_BattlePartyBattlers[battler].chr.status;
         if (((RANDOM_MASK(3)) != 0) && ((base & 0x4000) != 0)) {
             battler = LOBU(*slot);
             if (BATTLER_IS_PLAYER(battler)) {

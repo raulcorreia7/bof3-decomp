@@ -12,7 +12,7 @@ MATCH void func_8009DE8C(void) {
     ctx = (BattleSelectionContext*)&g_BattleTarget;
     sel = ctx->sel;
     if (BATTLER_IS_PLAYER(sel)) {
-        ((s16*)g_BattleTargetRecord)[2] = -g_BattlePartyBattlers[sel].stats.stats.max_hp;
+        ((s16*)g_BattleTargetRecord)[2] = -g_BattlePartyBattlers[sel].chr.stats.max_hp;
     } else {
         value = ENEMY_COMBATANT(sel).cell_A0.max_hp;
         if ((u16)value == 0xFFFFu) {

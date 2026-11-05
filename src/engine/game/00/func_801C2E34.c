@@ -19,9 +19,9 @@ MATCH void func_801C2E34(u8 index) {
         g_GameState->countdown_119 = 0x28;
     }
     record_index1 = g_GameState->slot_13C;
-    if ((u32)(g_Characters[record_index1].stats.max_hp >> 2) >= g_Characters[record_index1].current_hp) {
+    if ((u32)(g_Characters[record_index1].stats.max_hp >> 2) >= g_Characters[record_index1].hp) {
         g_Characters[record_index1].status |= STATUS_LOW_HP;
-        ((PartyBattler*)g_GameState)->stats.status |= STATUS_LOW_HP;
+        ((PartyBattler*)g_GameState)->chr.status |= STATUS_LOW_HP;
     }
     flags         = entry[2];
     record_index2 = g_GameState->slot_13C;

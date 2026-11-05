@@ -79,17 +79,17 @@ NON_MATCHING void func_801DF00C(s32 panel_x, s32 panel_y) {
             if (record->status & STATUS_LOW_HP) {
                 clut = 4;
             }
-            if (record->current_hp < 2U) {
+            if (record->hp < 2U) {
                 clut = 2;
             }
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0E68, record->current_hp);
+            sprintf((s8*)g_UiFormatBuffer, &D_801D0E68, record->hp);
             UI_DrawGlyphString((s16)text_x, (s16)(base_y + 29), (u32)clut, (void*)g_UiFormatBuffer);
             clut = (record->fatigue != 0) * 4;
             sprintf((s8*)g_UiFormatBuffer, &D_801D0E70, record->stats.max_hp);
             UI_DrawGlyphString((s16)text_x, (s16)(base_y + 29), (u32)clut, (void*)g_UiFormatBuffer);
             Menu_DrawIcon((base_x + 2) & HALF_MASK, (base_y + 0x25) & HALF_MASK, 1U, 0U);
             clut  = 0;
-            value = record->current_ap;
+            value = record->ap;
             if (((u16)(record->stats.max_ap >> 2)) >= value) {
                 clut = 4;
             }
@@ -97,7 +97,7 @@ NON_MATCHING void func_801DF00C(s32 panel_x, s32 panel_y) {
                 clut = 2;
             }
             row += 1;
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0E68, record->current_ap);
+            sprintf((s8*)g_UiFormatBuffer, &D_801D0E68, record->ap);
             UI_DrawGlyphString((s16)text_x, (s16)(base_y + 37), (u32)clut, (void*)g_UiFormatBuffer);
             base_y += 0x34;
             sprintf((s8*)g_UiFormatBuffer, &D_801D0E70, record->stats.max_ap);

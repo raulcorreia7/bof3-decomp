@@ -18,12 +18,12 @@ MATCH void func_801E0F0C(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0) {
-        work                   = g_GameState;
-        one                    = 1;
-        mask                   = ~4;
-        work->stats.current_hp = one;
-        work->stats.status &= ~STATUS_KO;
-        work->stats.current_willpower >>= 1;
+        work         = g_GameState;
+        one          = 1;
+        mask         = ~4;
+        work->chr.hp = one;
+        work->chr.status &= ~STATUS_KO;
+        work->chr.willpower >>= 1;
         work->damage_flags.value &= mask;
         offset                       = (Battle_AllocEffect(0, 1) & BYTE_MASK) * 0x78;
         spad                         = g_Task;
@@ -36,7 +36,7 @@ MATCH void func_801E0F0C(void) {
         if (g_BattleEventFlags == 0) {
             func_801D9484();
             Battle_SetTextPartyName(g_Task->slot);
-            func_801DEBC4(0, g_GameState->stats.character_id);
+            func_801DEBC4(0, g_GameState->chr.character_id);
         }
         g_Task->unk_03 = 2;
         func_801DEDE4();

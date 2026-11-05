@@ -1122,14 +1122,14 @@ Which form a twin group takes: [shared bodies](#shared-bodies).
 ```c
 /* Whether the party battler can act this turn: alive and awake. */
 static inline bool Battle_CanAct(PartyBattler* battler) {
-    return battler->stats.current_hp != 0 && !HAS_STATUS(*battler, STATUS_SLEEPING);
+    return battler->chr.hp != 0 && !HAS_STATUS(*battler, STATUS_SLEEPING);
 }
 ```
 
 **Don't**
 
 ```c
-#define CAN_ACT(b) b->stats.current_hp != 0 && !(b->stats.status & 0x40) /* untagged, unparenthesized, a raw flag */
+#define CAN_ACT(b) b->chr.hp != 0 && !(b->chr.status & 0x40) /* untagged, unparenthesized, a raw flag */
 #define Battle_CanAct(b) ((b)->stats.current_hp != 0)                     /* a macro in a function's name */
 #define DO_STEP(body) do { body } while (0)                  /* code as an argument */
 ```
