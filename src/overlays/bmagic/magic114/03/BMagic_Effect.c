@@ -141,7 +141,11 @@ INCLUDE_ASM(func_801F04D4);
 
 INCLUDE_ASM(func_801F093C);
 
-INCLUDE_ASM(func_801F0D08);
+MATCH void func_801F0D08(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801F1230 + 3, g_SpadWork->unk_02);
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
 
 INCLUDE_ASM(func_801F0D6C);
 
