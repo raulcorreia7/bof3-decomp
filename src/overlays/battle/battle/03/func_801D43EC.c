@@ -52,7 +52,7 @@ NON_MATCHING void func_801D43EC(void) {
             block84[1]         = saved1;
             block84[2]         = saved2;
             block84[3]         = saved3;
-            g_BattleActionType = 1;
+            g_BattleActionType = BATTLE_ACTION_ATTACK;
             index              = g_BattleActiveBattler;
             if ((u8)index < 3U) {
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_80145F20 + index * 0x140 + 3);

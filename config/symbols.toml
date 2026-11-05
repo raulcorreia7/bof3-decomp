@@ -1708,6 +1708,7 @@ g_MenuClockFormat = { addr = 0x801D0DE0, source = "the play time window prints h
 Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "the body runs D_801E5144[D_80148650]" }
 Shop_ApplyPercent = { addr = 0x801D3654, type = "func", source = "returns value * percent / 100 with a minimum of 1, the item list prices rows through it" }
 Shop_GetSellPrice = { addr = 0x801D3688, type = "func", source = "reads the item value through Item_GetPrice and halves it, kind 0 quantities 0x2B..0x36 take the discount price" }
+Shop_Equip = { addr = 0x801D3828, type = "func", source = "swaps one equipment slot of a party member for the chosen item; called only by the shop equip step func_801D23E4" }
 SAVE_DispatchState = { addr = 0x801D46A4, type = "func", source = "its body is SYS_DISPATCH_BYTE over the 21-entry table D_801E530C, indexed by D_80148652" }
 SAVE_DrawSlots = { addr = 0x801D67B0, type = "func", source = "draws the visible stock rows and the panel header, one body shared with the start overlay" }
 SAVE_BuildSlotImage = { addr = 0x801D69E0, type = "func", source = "func_801D51B8 and func_801D5894 call it; its body copies g_SceneState, the party order and the five-byte name into the image at D_801448D8, sums the image and stores the sum in D_800C1A70" }
