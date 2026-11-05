@@ -24,6 +24,7 @@ extern void (*D_801F4F80[])(void);
 extern void (*D_801F4F90[])(void);
 /* The map arrow sprite's width, height, u and v per sprite id. */
 extern u8 D_801F4FA0[];
+#define AREA_HUD_SPRITE_CELLS D_801F4FA0
 extern u8 D_801F4FA1[];
 extern u8 D_801F4FA2[];
 extern u8 D_801F4FA3[];
@@ -35,8 +36,9 @@ extern u8          D_801F502D[];
 extern void (*D_801F5034[])(void);
 /* The world map marker rows the step handler selects by a controller mask. */
 extern WorldMapMarker D_801F4FF8[6];
+#define AREA_HUD_MASK_TABLE D_801F4FF8
 /* func_801F3E00 */
-void                  Area_DrawGradientDiamond(s16 x, s16 y);
+void Area_DrawGradientDiamond(s16 x, s16 y);
 
 u8   Game_FindAreaHandler(void);
 void func_801F33FC(void);
