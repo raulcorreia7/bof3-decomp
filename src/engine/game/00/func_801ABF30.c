@@ -36,7 +36,7 @@ MATCH VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_kind) {
     cur = g_Task;
     buf.vx += cur->x.fixed;
     buf.vy += cur->y.fixed;
-    buf.vz += cur->z.part.integer;
+    buf.vz += (s16)COORD_INT(cur->z);
     g_Task = SAVE_SLOT;
     *out   = buf;
     return out;

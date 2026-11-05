@@ -30,7 +30,7 @@ MATCH void func_801DF3F8(void) {
     if ((g_BattleMode == 1) && ((u8)g_BattleStep >= 2U)) {
         PartyBattler* work;
 
-        if (g_GameState->stats.character_id != D_80145F09[D_801462EE][0]) {
+        if (g_GameState->chr.character_id != D_80145F09[D_801462EE][0]) {
             offset       = -0x1E;
             work         = g_Task;
             work->unk_5F = offset;

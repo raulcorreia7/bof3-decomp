@@ -30,8 +30,8 @@ MATCH void func_801D3304(void) {
         }
     }
     if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
-        row  = BATTLE_ACTIVE_PARTY.stats.current_ap;
-        flag = BATTLE_ACTIVE_PARTY.stats.status;
+        row  = BATTLE_ACTIVE_PARTY.chr.ap;
+        flag = BATTLE_ACTIVE_PARTY.chr.status;
     } else {
         row  = ENEMY_COMBATANT(g_BattleActiveBattler).ap;
         flag = ENEMY_COMBATANT(g_BattleActiveBattler).status;

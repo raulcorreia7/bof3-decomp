@@ -112,22 +112,28 @@ extern Callback D_801F5804[];
 
 extern u8 D_80147ACF;
 
-/* Ask func_8015CB18 what the party battler `battler` finds at its position: aim the task at the battler,
+/* Ask func_8015CB18 what the party battler in `slot` finds at its position: aim the task at the battler,
  * look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the
- * battler's word_08 byte 0xB. The statements of the area probe functions, used as a member's whole body
- * after it declares `PartyBattler* work`, `u8 index`, `s16 y`, `s16 x`, `u8 selection` and `s32 result`.
- * Every change here must verify every member. */
-#define AREA_PARTY_PROBE(battler, slot, table, kind)                 \
-    g_Task    = (u8*)&g_BattlePartyBattlers[(battler)];              \
-    index     = D_80144F5A[(slot)];                                  \
-    y         = g_BattlePartyBattlers[(battler)].unk_30.signed_half; \
-    x         = g_BattlePartyBattlers[(battler)].unk_2E.signed_half; \
-    selection = (table)[index];                                      \
-    result    = func_8015CB18((kind), 0, selection, x, y);           \
-    if ((u8)result != GAME_NONE) {                                   \
-        work         = (PartyBattler*)g_Task;                        \
-        work->unk_0B = (u8)result;                                   \
+ * battler's unk_0B. Every change here must verify every member. */
+static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
+    PartyBattler* battler;
+    u8            index;
+    s16           y;
+    s16           x;
+    u8            selection;
+    s32           result;
+
+    g_Task    = (u8*)&g_BattlePartyBattlers[slot];
+    index     = D_80144F5A[slot];
+    y         = g_BattlePartyBattlers[slot].unk_30.signed_half;
+    x         = g_BattlePartyBattlers[slot].unk_2E.signed_half;
+    selection = table[index];
+    result    = func_8015CB18(kind, 0, selection, x, y);
+    if ((u8)result != GAME_NONE) {
+        battler         = (PartyBattler*)g_Task;
+        battler->unk_0B = (u8)result;
     }
+}
 
 void Area_DrawHud(s16 x, s16 y);
 

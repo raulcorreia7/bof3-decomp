@@ -33,7 +33,7 @@ MATCH void func_801DFCB4(void) {
     *(s16*)((u8*)self + 0x11C)             = 0;
     *(s16*)((u32)g_BattleTargetRecord + 6) = 0;
     *((u8*)g_BattleTargetRecord + 8)       = 0;
-    D_801EC2E8                             = *(BattleStatBlock*)&g_GameState->stats.max_hp;
+    D_801EC2E8                             = *(BattleStatBlock*)&g_GameState->chr.stats.max_hp;
     stats_work                             = g_GameState;
     if (HAS_STATUS(*stats_work, 0x800)) {
         D_801EC2EE = 1;
@@ -82,14 +82,14 @@ MATCH void func_801DFCB4(void) {
     }
     pending   = &g_BattlePendingStatus;
     tail_work = g_GameState;
-    tail_work->stats.status |= *pending;
+    tail_work->chr.status |= *pending;
     *pending = 0;
     if ((s16)tail_work->hp_change > 0) {
-        if (tail_work->stats.current_hp == 0) {
+        if (tail_work->chr.hp == 0) {
             if (tail_work->action_flags.value & 2) {
-                tail_work->stats.status |= STATUS_KO;
+                tail_work->chr.status |= STATUS_KO;
             } else {
-                tail_work->stats.status = STATUS_KO;
+                tail_work->chr.status = STATUS_KO;
             }
             if (!(g_GameState->action_flags.value & 2)) {
                 func_801DD858(1);

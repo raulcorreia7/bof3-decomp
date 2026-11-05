@@ -14,7 +14,7 @@ MATCH void func_801EF054(void) {
     if (*first < g_BattlePartyCount) {
         row = first;
         do {
-            id     = func_801DD7AC(g_BattlePartyBattlers[*row].stats.character_id);
+            id     = func_801DD7AC(g_BattlePartyBattlers[*row].chr.character_id);
             row[2] = id;
             *row += 1;
             if (func_801EF928(id, 0) != 0) {

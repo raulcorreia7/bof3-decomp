@@ -9,7 +9,7 @@ MATCH u8 func_8009C8AC(u16 required_mask) {
     u32 action_type;
     u32 slot;
 
-    if (g_BattleCurrentEnemy->damage == 0)
+    if (g_BattleCurrentEnemy->hp_change == 0)
         return false;
 
     action_type = LOBU(g_BattleActionType);
@@ -24,7 +24,7 @@ MATCH u8 func_8009C8AC(u16 required_mask) {
             return false;
         if (required_mask & 0x100)
             return false;
-        if (D_801C90EB[g_BattlePartyBattlers[slot].stats.weapon * 0x18] & required_mask)
+        if (D_801C90EB[g_BattlePartyBattlers[slot].chr.equip.weapon * 0x18] & required_mask)
             return true;
     }
     return false;

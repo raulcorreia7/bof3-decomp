@@ -12,17 +12,17 @@ MATCH s32 func_801E87F0(s32 record_index, s32 use_battle_record) {
     } else {
         rec = (Character*)&D_80145F04[(record_index & BYTE_MASK) * BATTLE_PARTY_STRIDE];
     }
-    limit = rec->max_hp;
-    cur   = rec->current_hp;
+    limit = rec->stats.max_hp;
+    cur   = rec->hp;
     if (cur == limit) {
         return 3;
     }
     if (rec->fatigue < 9) {
         rec->fatigue = (u8)(rec->fatigue + 1);
         Char_RebuildStats(rec);
-        rec->current_hp = rec->max_hp;
+        rec->hp = rec->stats.max_hp;
     } else if (cur < limit) {
-        rec->current_hp = limit;
+        rec->hp = limit;
     } else {
         return 3;
     }

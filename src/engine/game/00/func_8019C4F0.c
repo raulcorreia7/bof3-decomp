@@ -41,11 +41,11 @@ s32       stale_a3;
     org.parts.tile = x;
     dist           = Area_SampleHeight(org.word, stale_a3 & 0xFFFF0000);
     tile           = Area_GetCellCode(ix, iy);
-    counter        = ((Actor*)SCRATCH_WORK)->z.part.integer;
+    counter        = COORD_INT(((Actor*)SCRATCH_WORK)->z);
     if (counter - dist < 257 && (tile & 0xF0) == 0xF0) {
         return 1;
     }
-    counter = ((Actor*)SCRATCH_WORK)->z.part.integer;
+    counter = COORD_INT(((Actor*)SCRATCH_WORK)->z);
     if (counter == dist) {
         if ((tile & BYTE_MASK) == 0x10 || (tile & 0xF0) == 0x20 || (tile & 0xF0) == 0xA0) {
         found:

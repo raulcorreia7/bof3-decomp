@@ -14,8 +14,8 @@ MATCH void func_800A5E98(void) {
         slot  = (u8*)&D_80145518[row];
         value = slot[i & BYTE_MASK];
         if (value != GAME_NONE) {
-            D_801463C4[i & BYTE_MASK] = value;
-            g_BattleGeneCount[0]      = g_BattleGeneCount[0] + 1;
+            g_BattleGenes[i & BYTE_MASK] = value;
+            g_BattleGeneCount[0]         = g_BattleGeneCount[0] + 1;
         }
         i = i + 1;
     } while ((u32)(i & BYTE_MASK) < 3U);

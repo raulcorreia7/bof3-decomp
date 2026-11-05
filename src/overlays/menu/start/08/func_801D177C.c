@@ -33,7 +33,7 @@ MATCH void func_801D177C(void) {
     i          = 0;
     chr        = g_Characters;
     for (; i < 8; i++) {
-        if (chr->current_hp < (chr->max_hp >> 2)) {
+        if (chr->hp < (chr->stats.max_hp >> 2)) {
             chr->status |= STATUS_LOW_HP;
         } else {
             chr->status &= 0xDFFF;

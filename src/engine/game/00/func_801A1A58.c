@@ -23,7 +23,7 @@ MATCH s32 func_801A1A58(Actor* actor) {
     dx = (dx >> 16) - FIELD(s16, entity, 0x82u);
     /* FAKE: retail loads the x bound after the delta. */
     MATCH_BARRIER();
-    bound_x = FIELD(s16, entity, 0x8Cu);
+    bound_x = entity->ext.bounds.half_width;
     if (dx < 0) {
         dx = -dx;
     }
@@ -33,7 +33,7 @@ MATCH s32 func_801A1A58(Actor* actor) {
         return 0;
     }
     dy_delta = (dy_sum >> 16) - FIELD(s16, entity, 0x86u);
-    bound_y  = FIELD(s16, entity, 0x8Eu);
+    bound_y  = entity->ext.bounds.half_height;
     if (dy_delta < 0) {
         dy_delta = -dy_delta;
     }

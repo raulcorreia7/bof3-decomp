@@ -25,7 +25,7 @@ MATCH s32 func_801BDF08(void) {
         pos_y += step_y;
     }
     dist    = Area_ReadHeight(pos_x, pos_y);
-    counter = g_Task->z.part.integer;
+    counter = COORD_INT(g_Task->z);
     diff    = counter - dist;
     if (ABS(diff) > 0x100) {
         dist = counter;

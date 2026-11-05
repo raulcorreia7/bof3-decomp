@@ -150,7 +150,7 @@ MATCH void func_801EFF50(void) {
     rot.vz = (g_Task->unk_0B & 0x3f) << 6;
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -(g_Task->pos.z.part.integer + 0x200) / 2;
+    pos.vz = -(COORD_INT(g_Task->pos.z) + 0x200) / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);

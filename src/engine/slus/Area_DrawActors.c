@@ -21,7 +21,7 @@ MATCH void Area_DrawActors(void) {
                 if (index >= (i & BYTE_MASK) + 1) {
                     start = (i & BYTE_MASK) + 1;
                     do {
-                        if (D_80148214[index]->z.part.integer < D_80148214[index - 1]->z.part.integer) {
+                        if (COORD_INT(D_80148214[index]->z) < COORD_INT(D_80148214[index - 1]->z)) {
                             Area_SwapActors(index, (j - 1) & BYTE_MASK);
                         }
                         j--;

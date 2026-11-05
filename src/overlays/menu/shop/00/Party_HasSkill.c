@@ -9,8 +9,8 @@ MATCH s32 Party_HasSkill(s32 item_id) {
     u8  j;
 
     for (j = 0; j < 7; j++) {
-        row = g_Characters[j].skill_abilities;
-        for (i = 0; i < 10; i++) {
+        row = g_Characters[0].abilities.skill + j * sizeof(Character);
+        for (i = 0; i < CHARACTER_ABILITY_COUNT; i++) {
             if (*row == (item_id & BYTE_MASK)) {
                 return 1;
             }

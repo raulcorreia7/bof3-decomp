@@ -19,7 +19,7 @@ NON_MATCHING void func_8009FB38(void) {
     selected_battler_address = (u8*)(&g_BattleTarget);
     battler                  = *selected_battler_address;
     if (battler < 3U) {
-        template_index = D_80145FCC[battler * BATTLE_PARTY_STRIDE];
+        template_index = g_BattlePartyBattlers[battler].record_slot;
         stat_base      = g_Characters;
         Char_RebuildStats((u8*)(&stat_base[template_index]));
         row_index = 0;
@@ -31,13 +31,13 @@ NON_MATCHING void func_8009FB38(void) {
                 row_offset    = (row_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
                 src           = (Character*)((D_80145FCC[row_offset] * PARTY_RECORD_STRIDE) + ((u8*)src_base));
                 dst_row       = dst_base + row_offset;
-                dst_row[0x0E] = src->weapon;
-                dst_row[0x0F] = src->shield;
-                dst_row[0x10] = src->helmet;
-                dst_row[0x11] = src->armor;
-                dst_row[0x12] = src->accessories[0];
-                dst_row[0x13] = src->accessories[1];
-                memcpy(dst_row + 0x3C, &src->max_hp, 0x20);
+                dst_row[0x0E] = src->equip.weapon;
+                dst_row[0x0F] = src->equip.shield;
+                dst_row[0x10] = src->equip.helmet;
+                dst_row[0x11] = src->equip.armor;
+                dst_row[0x12] = src->equip.accessories[0];
+                dst_row[0x13] = src->equip.accessories[1];
+                memcpy(dst_row + 0x3C, &src->stats.max_hp, 0x20);
                 row_index++;
             } while (((u32)(row_index & BYTE_MASK)) < (*active_count));
         }

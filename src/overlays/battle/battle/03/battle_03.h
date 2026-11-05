@@ -44,7 +44,6 @@
 /* Party slot the entrance pass is on, and the entrance sub-step byte 0x801462E2. */
 #define BATTLE_PARTY_CURSOR            (((u8*)&D_80140000)[0x62E5])
 #define BATTLE_ENTRANCE_STEP           (((u8*)&D_80140000)[0x62E2])
-#define BATTLE_GLOBAL_BYTE_62F3        (*(u8*)&D_801462F3)
 #define g_GameState                    ((PartyBattler* volatile)g_GameState)
 #define g_Task                         ((PartyBattler*)g_Task)
 

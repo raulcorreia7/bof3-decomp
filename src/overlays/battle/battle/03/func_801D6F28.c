@@ -20,7 +20,7 @@ MATCH void func_801D6F28(void) {
     i = 0u;
     if (g_BattlePartyCount != 0u) {
         do {
-            func_800A36F0(i, g_BattlePartyBattlers[i].stats.status & STATUS_CURE_MASK);
+            func_800A36F0(i, g_BattlePartyBattlers[i].chr.status & STATUS_CURE_MASK);
             GFX_FreePaletteFadeTarget(&g_BattlePartyBattlers[i]);
             i += 1u;
         } while (i < g_BattlePartyCount);

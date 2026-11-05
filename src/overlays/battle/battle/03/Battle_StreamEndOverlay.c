@@ -30,12 +30,12 @@ MATCH void Battle_StreamEndOverlay(void) {
 
                 g_Task = work;
                 if (HAS_STATUS(g_BattlePartyBattlers[i], 0x800u)) {
-                    g_BattlePartyBattlers[i].stats.current_hp        = g_BattlePartyBattlers[i].stats.max_hp;
-                    g_BattlePartyBattlers[i].stats.current_ap        = g_BattlePartyBattlers[i].stats.max_ap;
-                    g_BattlePartyBattlers[i].stats.current_willpower = g_BattlePartyBattlers[i].stats.willpower;
-                    func_800A36F0(i, g_BattlePartyBattlers[i].stats.status & ~STATUS_KO);
+                    g_BattlePartyBattlers[i].chr.hp        = g_BattlePartyBattlers[i].chr.stats.max_hp;
+                    g_BattlePartyBattlers[i].chr.ap        = g_BattlePartyBattlers[i].chr.stats.max_ap;
+                    g_BattlePartyBattlers[i].chr.willpower = g_BattlePartyBattlers[i].chr.stats.willpower;
+                    func_800A36F0(i, g_BattlePartyBattlers[i].chr.status & ~STATUS_KO);
                 }
-                func_800A36F0(i, g_BattlePartyBattlers[i].stats.status & STATUS_CURE_MASK);
+                func_800A36F0(i, g_BattlePartyBattlers[i].chr.status & STATUS_CURE_MASK);
                 GFX_FreePaletteFadeTarget(work);
                 func_801DDFEC(i);
                 i += 1u;

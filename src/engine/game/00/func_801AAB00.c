@@ -60,13 +60,13 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             CUR(sub) += 3;
             break;
         case 0xC3:
-            g_Task->unk_48 = (code + CUR(sub))[1];
+            g_Task->base.unk_0C = (code + CUR(sub))[1];
             g_Task->unk_40 += PACK24(code + CUR(sub), 2);
             g_Task->unk_44 += PACK24(code + CUR(sub), 4);
             CUR(sub) += 5;
             break;
         case 0xC4:
-            g_Task->unk_48 = (code + CUR(sub))[1];
+            g_Task->base.unk_0C = (code + CUR(sub))[1];
             g_Task->unk_40 -= PACK24(code + CUR(sub), 2);
             g_Task->unk_44 -= PACK24(code + CUR(sub), 4);
             CUR(sub) += 5;
@@ -87,7 +87,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             CUR(sub) += 3;
             break;
         case 0xC7:
-            g_Task->unk_48 = 2;
+            g_Task->base.unk_0C = 2;
             g_Task->unk_40 += PACK24(code + CUR(sub), 1);
             g_Task->unk_44 += PACK24(code + CUR(sub), 3);
             g_Task->x.fixed += PACK24(code + CUR(sub), 5);

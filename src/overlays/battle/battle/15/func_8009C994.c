@@ -55,23 +55,23 @@ MATCH void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event) {
             break;
         case 6:
             if (event->selector & 2) {
-                factor       = event->value * 100;
-                scaled       = work->unk_86 * factor / 1000;
-                work->unk_86 = (u32)scaled > 0xFFFF ? 0xFFFF : (u16)scaled;
+                factor    = event->value * 100;
+                scaled    = work->exp * factor / 1000;
+                work->exp = (u32)scaled > 0xFFFF ? 0xFFFF : (u16)scaled;
             }
             if (event->selector & 1) {
-                factor       = event->value * 100;
-                scaled       = work->unk_84 * factor / 1000;
-                work->unk_84 = (u32)scaled > 0xFFFF ? 0xFFFF : (u16)scaled;
+                factor      = event->value * 100;
+                scaled      = work->zenny * factor / 1000;
+                work->zenny = (u32)scaled > 0xFFFF ? 0xFFFF : (u16)scaled;
             }
             break;
         case 7:
             D_801463D7 = event->selector;
             break;
     }
-    work->unk_7E = event->unk_04;
+    work->choice_ai = event->unk_04;
     for (i = 0; i < 8; i++) {
-        work->techniques[i] = event->unk_08[i];
+        work->skills[i] = event->unk_08[i];
     }
     func_800A9BD8(work->slot);
     if (work->hp != 0 && event->panel_id != 0 && D_801EB5A8 < 8) {

@@ -15,10 +15,10 @@ MATCH void func_8009DAB4(void) {
 
     battler = LOBU(g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(battler)) {
-        value = g_BattlePartyBattlers[battler].stats.power;
+        value = g_BattlePartyBattlers[battler].chr.stats.power;
     } else {
         idx   = battler - 3u;
-        value = D_801EB630[idx].attack;
+        value = D_801EB630[idx].stats.power;
     }
     D_801EC30C = value;
     switch (RANDOM_MASK(3)) {

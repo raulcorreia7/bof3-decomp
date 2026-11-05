@@ -6,7 +6,7 @@ MATCH void func_800C1D14(void) {
     s32           remaining;
 
     remaining = enemy->hp - FIELD(s16, enemy, 0xF8);
-    if ((s32)(enemy->cell_A0.max_hp >> 2) < remaining) {
+    if ((s32)(enemy->stats.max_hp >> 2) < remaining) {
         return;
     }
     flag = &g_BattleBossFlags;

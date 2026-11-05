@@ -139,6 +139,23 @@ typedef union ActorStateWord {
 
 ASSERT_SIZE(ActorStateWord, 0x04);
 
+/* The role tail at +0x8C. Area code that tests the player's distance reads the half extents
+ * of the box (func_801A1A58, func_801A2C94, func_801A2DB4); the pond fish rows keep the
+ * stamina gauge there (area030/04 func_801E026C), the maximum first. */
+typedef union ActorExt {
+    struct {
+        s16 half_width;
+        s16 half_height;
+    } bounds;
+
+    struct {
+        s16 stamina_max;
+        u16 stamina;
+    } fishing;
+} ActorExt;
+
+ASSERT_SIZE(ActorExt, 0x04);
+
 typedef struct Actor {
     u8             flags;             /* 0x00 - entity flags; ActorFlags */
     u8             mode;              /* 0x01 - commu00 calls it the task mode */
@@ -208,10 +225,7 @@ typedef struct Actor {
     s32            unk_80;            /* 0x80 */
     s32            unk_84;            /* 0x84 */
     u32            unk_88;            /* 0x88 */
-    s16            stamina_max_8C;    /* 0x8C */
-    u16            stamina_8E;        /* 0x8E - the fishing gauge: a signed delta is added and
-                                *        the result is clamped into [0, +0x8C]
-                                *        (emi/world00/area030/04 func_801E026C) */
+    ActorExt       ext;               /* 0x8C - see ActorExt */
     u16            roll_90;           /* 0x90 */
     u8             facing_92;         /* 0x92 - the facing direction: the fishing code writes
                                 *        `rand() & 3` and turns the row by it
@@ -242,7 +256,7 @@ ASSERT_OFFSET(Actor, unk_77, 0x77);
 ASSERT_OFFSET(Actor, callback_index, 0x7A);
 ASSERT_OFFSET(Actor, unk_7C, 0x7C);
 ASSERT_OFFSET(Actor, unk_88, 0x88);
-ASSERT_OFFSET(Actor, stamina_8E, 0x8E);
+ASSERT_OFFSET(Actor, ext, 0x8C);
 ASSERT_OFFSET(Actor, facing_92, 0x92);
 
 /* D_80146884 */

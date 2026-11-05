@@ -27,8 +27,8 @@ MATCH void func_801D0EDC(void) {
     /* retail walks the records from the status halfword: +0x8 is current_hp, +0x10 is max_hp */
     row = &g_Characters[0];
     do {
-        need = (u32)row->max_hp >> 2;
-        have = row->current_hp;
+        need = (u32)row->stats.max_hp >> 2;
+        have = row->hp;
         if (have < need) {
             flags = row->status | STATUS_LOW_HP;
         } else {

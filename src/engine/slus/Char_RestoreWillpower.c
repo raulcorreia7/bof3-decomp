@@ -13,14 +13,14 @@ MATCH s32 Char_RestoreWillpower(s32 character_index, s32 amount, s32 mode) {
     } else {
         rec = (Character*)&D_80145F04[(character_index & BYTE_MASK) * 0x140];
     }
-    cur = rec->current_willpower;
-    if (cur == rec->willpower) {
+    cur = rec->willpower;
+    if (cur == rec->stats.willpower) {
         return 0;
     }
-    rec->current_willpower = (cur + amount);
-    limit                  = rec->willpower;
-    if ((limit < (u32)((cur + amount) & BYTE_MASK)) || ((amount & BYTE_MASK) == 0)) {
-        rec->current_willpower = limit;
+    rec->willpower = (u8)(cur + amount);
+    limit          = rec->stats.willpower;
+    if (((u32)limit < (u32)((cur + amount) & BYTE_MASK)) || ((amount & BYTE_MASK) == 0)) {
+        rec->willpower = limit;
     }
     return 1;
 }

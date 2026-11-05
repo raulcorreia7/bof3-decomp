@@ -16,14 +16,14 @@ MATCH u8* Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode) {
     }
     switch (D_801CA719[ability_id & BYTE_MASK].value & 0x3) {
         default:
-            return record->healing_abilities;
+            return record->abilities.healing;
         case ABILITY_TYPE_HEAL:
-            return record->healing_abilities;
+            return record->abilities.healing;
         case ABILITY_TYPE_ASSIST:
-            return record->assist_abilities;
+            return record->abilities.assist;
         case ABILITY_TYPE_ATTACK:
-            return record->attack_abilities;
+            return record->abilities.attack;
         case ABILITY_TYPE_SKILL:
-            return record->skill_abilities;
+            return record->abilities.skill;
     }
 }

@@ -8,7 +8,7 @@ MATCH void func_800A1978(void) {
         if (func_800A3A10(g_BattleActiveBattler, g_BattleTarget) == 0) {
             mode = *MEM_PTR(u8, &g_BattleTarget);
             if (mode < 3u) {
-                base = g_BattlePartyBattlers[mode].stats.current_hp;
+                base = g_BattlePartyBattlers[mode].chr.hp;
             } else {
                 base = ENEMY_COMBATANT(mode).hp;
             }

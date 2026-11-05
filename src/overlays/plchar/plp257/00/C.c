@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CFEDC[((u8*)g_Task)[2]]();
+    D_801CFEDC[TASK_BYTES[2]]();
 }
 
 MATCH void Char_StartTurn_801CE448(void) {

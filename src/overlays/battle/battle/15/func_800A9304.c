@@ -42,7 +42,7 @@ MATCH u8 func_800A9304(u8 slot) {
         goto copy_selection;
     }
     index = slot - BATTLE_PARTY_SLOT_COUNT;
-    if (D_801EB630[index].unk_AA < 2 || (D_801EB630[index].status & STATUS_CONFUSED) ||
+    if (D_801EB630[index].stats.intellect < 2 || (D_801EB630[index].status & STATUS_CONFUSED) ||
         (D_801EB630[index].action_flags & COMBATANT_FLAG_CHARGING)) {
         if ((*(u8*)&g_BattleActionType) == BATTLE_ACTION_ABILITY) {
             action = D_801CA718[D_801EB726[slot - BATTLE_PARTY_SLOT_COUNT][0] * BATTLE_KIND_STRIDE];

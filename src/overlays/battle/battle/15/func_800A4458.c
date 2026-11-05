@@ -18,56 +18,56 @@ MATCH void func_800A4458(void) {
     do {
         if (g_BattlePartyBattlers[slot].action_flags.value & 2) {
             template_hp = tpl->max_hp;
-            max_hp      = template_hp - ((template_hp * g_BattlePartyBattlers[slot].stats.fatigue + 5) / 10);
+            max_hp      = template_hp - ((template_hp * g_BattlePartyBattlers[slot].chr.fatigue + 5) / 10);
             work        = &g_BattlePartyBattlers[slot];
 
-            work->stats.base_hp                      = max_hp;
-            stat                                     = g_BattlePartyBattlers[slot].stats.base_power;
-            g_BattlePartyBattlers[slot].stats.max_hp = max_hp;
+            work->chr.base.max_hp                        = max_hp;
+            stat                                         = g_BattlePartyBattlers[slot].chr.base.power;
+            g_BattlePartyBattlers[slot].chr.stats.max_hp = max_hp;
 
-            stat                                    = stat + tpl->power;
-            work->stats.base_power                  = stat;
-            g_BattlePartyBattlers[slot].stats.power = stat;
+            stat                                        = stat + tpl->power;
+            work->chr.base.power                        = stat;
+            g_BattlePartyBattlers[slot].chr.stats.power = stat;
 
-            stat                                      = g_BattlePartyBattlers[slot].stats.base_defense + tpl->defense;
-            work->stats.base_defense                  = stat;
-            g_BattlePartyBattlers[slot].stats.defense = stat;
+            stat                                          = g_BattlePartyBattlers[slot].chr.base.defense + tpl->defense;
+            work->chr.base.defense                        = stat;
+            g_BattlePartyBattlers[slot].chr.stats.defense = stat;
 
-            stat                                      = g_BattlePartyBattlers[slot].stats.base_agility + tpl->agility;
-            work->stats.base_agility                  = stat;
-            g_BattlePartyBattlers[slot].stats.agility = stat;
+            stat                                          = g_BattlePartyBattlers[slot].chr.base.agility + tpl->agility;
+            work->chr.base.agility                        = stat;
+            g_BattlePartyBattlers[slot].chr.stats.agility = stat;
 
-            stat                       = g_BattlePartyBattlers[slot].stats.base_intellect + tpl->intellect;
-            work->stats.base_intellect = stat;
-            g_BattlePartyBattlers[slot].stats.intellect = stat;
+            stat                     = g_BattlePartyBattlers[slot].chr.base.intellect + tpl->intellect;
+            work->chr.base.intellect = stat;
+            g_BattlePartyBattlers[slot].chr.stats.intellect = stat;
 
-            res                                              = tpl->resistances[0];
-            work->stats.base_resistances[0]                  = res;
-            g_BattlePartyBattlers[slot].stats.resistances[0] = res;
-            res                                              = tpl->resistances[1];
-            work->stats.base_resistances[1]                  = res;
-            g_BattlePartyBattlers[slot].stats.resistances[1] = res;
-            res                                              = tpl->resistances[2];
-            work->stats.base_resistances[2]                  = res;
-            g_BattlePartyBattlers[slot].stats.resistances[2] = res;
-            res                                              = tpl->resistances[3];
-            work->stats.base_resistances[3]                  = res;
-            g_BattlePartyBattlers[slot].stats.resistances[3] = res;
-            res                                              = tpl->resistances[4];
-            work->stats.base_resistances[4]                  = res;
-            g_BattlePartyBattlers[slot].stats.resistances[4] = res;
-            res                                              = tpl->resistances[5];
-            work->stats.base_resistances[5]                  = res;
-            g_BattlePartyBattlers[slot].stats.resistances[5] = res;
-            res                                              = tpl->resistances[6];
-            work->stats.base_resistances[6]                  = res;
-            g_BattlePartyBattlers[slot].stats.resistances[6] = res;
-            res                                              = tpl->resistances[7];
-            work->stats.base_resistances[7]                  = res;
-            g_BattlePartyBattlers[slot].stats.resistances[7] = res;
-            res                                              = tpl->resistances[8];
-            work->stats.base_resistances[8]                  = res;
-            g_BattlePartyBattlers[slot].stats.resistances[8] = res;
+            res                                                  = tpl->resistances[0];
+            work->chr.base.resistances[0]                        = res;
+            g_BattlePartyBattlers[slot].chr.stats.resistances[0] = res;
+            res                                                  = tpl->resistances[1];
+            work->chr.base.resistances[1]                        = res;
+            g_BattlePartyBattlers[slot].chr.stats.resistances[1] = res;
+            res                                                  = tpl->resistances[2];
+            work->chr.base.resistances[2]                        = res;
+            g_BattlePartyBattlers[slot].chr.stats.resistances[2] = res;
+            res                                                  = tpl->resistances[3];
+            work->chr.base.resistances[3]                        = res;
+            g_BattlePartyBattlers[slot].chr.stats.resistances[3] = res;
+            res                                                  = tpl->resistances[4];
+            work->chr.base.resistances[4]                        = res;
+            g_BattlePartyBattlers[slot].chr.stats.resistances[4] = res;
+            res                                                  = tpl->resistances[5];
+            work->chr.base.resistances[5]                        = res;
+            g_BattlePartyBattlers[slot].chr.stats.resistances[5] = res;
+            res                                                  = tpl->resistances[6];
+            work->chr.base.resistances[6]                        = res;
+            g_BattlePartyBattlers[slot].chr.stats.resistances[6] = res;
+            res                                                  = tpl->resistances[7];
+            work->chr.base.resistances[7]                        = res;
+            g_BattlePartyBattlers[slot].chr.stats.resistances[7] = res;
+            res                                                  = tpl->resistances[8];
+            work->chr.base.resistances[8]                        = res;
+            g_BattlePartyBattlers[slot].chr.stats.resistances[8] = res;
         }
         slot++;
     } while (BATTLER_IS_PLAYER(slot));

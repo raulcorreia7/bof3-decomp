@@ -112,13 +112,13 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
             return value;
         case 0xDB:
             Actor_ApplyVelocity();
-            g_Task->depth.part.integer = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
+            COORD_INT(g_Task->depth) = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
             /* fallthrough */
         case 0xDC:
-            Area_SetCellPalette(g_Task->x.part.integer, g_Task->y.part.integer);
+            Area_SetCellPalette(COORD_INT(g_Task->x), COORD_INT(g_Task->y));
             return value;
         case 0xDD:
-            Area_ClearCellPalette(g_Task->x.part.integer, g_Task->y.part.integer);
+            Area_ClearCellPalette(COORD_INT(g_Task->x), COORD_INT(g_Task->y));
             return value;
         case 0xDE: {
             void* obj = g_AreaLoads[g_GameAreaId];

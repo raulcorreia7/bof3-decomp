@@ -16,11 +16,11 @@ MATCH void func_801D6FBC(void) {
         record_index = bit_index & BYTE_MASK;
     }
     record                    = record_index;
-    D_801ED63C                = g_Characters[record].weapon;
-    D_801ED63D                = g_Characters[record].shield;
-    D_801ED63E                = g_Characters[record].helmet;
-    D_801ED63F                = g_Characters[record].armor;
-    D_801ED640                = g_Characters[record].accessories[0];
-    D_801ED641                = g_Characters[record].accessories[1];
+    D_801ED63C                = g_Characters[record].equip.weapon;
+    D_801ED63D                = g_Characters[record].equip.shield;
+    D_801ED63E                = g_Characters[record].equip.helmet;
+    D_801ED63F                = g_Characters[record].equip.armor;
+    D_801ED640                = g_Characters[record].equip.accessories[0];
+    D_801ED641                = g_Characters[record].equip.accessories[1];
     (&D_801ED63C)[D_8014850E] = index;
 }

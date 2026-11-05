@@ -177,7 +177,9 @@ keeping only the changes the score needs. A zero score is not proof; the image l
 
 ## Polish
 
-An exact function becomes the most human-accurate C that still byte-matches:
+Polish is part of every match, not a later pass: an exact function lands only after it reads the way
+its original programmer wrote it ([the rule](conventions.md#write-it-as-the-original-programmer-did)),
+with names still from evidence. It becomes the most human-accurate C that still byte-matches:
 
 - no pointer math; real types and fields;
 - named constants ([values](conventions.md#how-a-value-is-written));

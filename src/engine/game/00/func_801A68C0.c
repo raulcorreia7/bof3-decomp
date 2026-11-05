@@ -41,7 +41,7 @@ MATCH void func_801A68C0(u8* script) {
     }
     work->y.fixed = y;
 
-    g_Task->z.part.integer    = Area_SampleHeight(work->x.fixed, y);
+    COORD_INT(g_Task->z)      = Area_SampleHeight(work->x.fixed, y);
     g_Task->mode              = script[5];
     g_Task->step              = script[7];
     g_Task->unk_06            = script[0] >> 4;
@@ -66,15 +66,15 @@ MATCH void func_801A68C0(u8* script) {
     g_Task->tint.bytes.flags         = 2;
 
     if (D_80146900[*counter][0] == 0) {
-        Area_SetCellCode(WORK->x.part.integer, WORK->y.part.integer, 0x10);
-        if (WORK->x.part.fraction != 0) {
-            Area_SetCellCode((WORK->x.part.integer + 1), WORK->y.part.integer, 0x10);
+        Area_SetCellCode(COORD_INT(WORK->x), COORD_INT(WORK->y), 0x10);
+        if (COORD_FRAC(WORK->x) != 0) {
+            Area_SetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), COORD_INT(WORK->y), 0x10);
         }
-        if (WORK->y.part.fraction != 0) {
-            Area_SetCellCode(WORK->x.part.integer, (WORK->y.part.integer + 1), 0x10);
+        if (COORD_FRAC(WORK->y) != 0) {
+            Area_SetCellCode(COORD_INT(WORK->x), (s16)((u16)COORD_INT(WORK->y) + 1), 0x10);
         }
-        if ((WORK->x.part.fraction != 0) && (WORK->y.part.fraction != 0)) {
-            Area_SetCellCode((WORK->x.part.integer + 1), (WORK->y.part.integer + 1), 0x10);
+        if ((COORD_FRAC(WORK->x) != 0) && (COORD_FRAC(WORK->y) != 0)) {
+            Area_SetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), (s16)((u16)COORD_INT(WORK->y) + 1), 0x10);
         }
     }
 

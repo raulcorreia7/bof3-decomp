@@ -7,7 +7,7 @@ MATCH void func_8019EC20(void) {
     work->x.fixed += work->vx;
     work->y.fixed += work->vy;
     if (FIELD(u16, MAP_BUNDLE_BASE,
-              (work->y.part.integer * MEM(u8, MAP_BUNDLE_BASE) * 2 + D_80104002 * 4 + work->x.part.integer * 2)) != 0) {
+              (COORD_INT(work->y) * MEM(u8, MAP_BUNDLE_BASE) * 2 + D_80104002 * 4 + COORD_INT(work->x) * 2)) != 0) {
         if (func_8019EEE4()) {
             func_8019EE10();
             ((Actor*)g_Task)->unk_27 = D_80145EB7;

@@ -20,10 +20,10 @@ MATCH void func_801C5558(void) {
     s32    result;
     s16    threshold;
 
-    work                 = g_Task;
-    count                = work->z.part.integer + 16;
-    route                = work->direction_08;
-    work->z.part.integer = count;
+    work               = g_Task;
+    count              = COORD_INT(work->z) + 16;
+    route              = work->direction_08;
+    COORD_INT(work->z) = count;
 
     work   = g_Task;
     step   = work->state_70.byte + 2;
@@ -35,7 +35,7 @@ MATCH void func_801C5558(void) {
     threshold = D_80181B70[g_GameState->slot_index_79];
 
     work = g_Task;
-    if (work->z.part.integer >= result - threshold) {
+    if ((s16)COORD_INT(work->z) >= result - threshold) {
         work->step = 3;
     }
 

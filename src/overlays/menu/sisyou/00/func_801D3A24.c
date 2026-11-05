@@ -35,7 +35,7 @@ NON_MATCHING void func_801D3A24(void) {
     rec        = D_80145FCC.bytes[idx];
     chr_master = g_Characters[rec].master_id;
     if (chr_master == D_801448ED) {
-        diff = g_Characters[rec].level - g_Characters[rec].unk_84;
+        diff = g_Characters[rec].level - g_Characters[rec].master_level;
         switch (chr_master) {
             case 0xB:
                 if (diff >= 3 && !(D_80144F59 & 8)) {

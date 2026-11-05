@@ -2,7 +2,7 @@
 
 /* sums the per-turn hit point change of each living party member (modes, equipment, accessories, status bit 1)
  * and arms the follow-up state for every battler whose change is non-zero; living enemies with status bit 1 take half
- * of their cell_A0 value. Returns whether D_801463C2 is set.
+ * of their max HP. Returns whether D_801463C2 is set.
  */
 MATCH u8 func_801D5DCC(void) {
     u8  slot;
@@ -17,41 +17,43 @@ MATCH u8 func_801D5DCC(void) {
             if (g_PartyFormation == 5) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
-            if (g_BattlePartyBattlers[slot].stats.character_id == CHAR_ID_PECO) {
-                g_BattlePartyBattlers[slot].hp_change -= (g_BattlePartyBattlers[slot].stats.max_hp + 10) / 20;
+            if (g_BattlePartyBattlers[slot].chr.character_id == CHAR_ID_PECO) {
+                g_BattlePartyBattlers[slot].hp_change -= (g_BattlePartyBattlers[slot].chr.stats.max_hp + 10) / 20;
             }
-            if (g_BattlePartyBattlers[slot].stats.character_id == CHAR_ID_RYU_ADULT ||
-                g_BattlePartyBattlers[slot].stats.character_id == CHAR_ID_RYU_YOUNG) {
+            if (g_BattlePartyBattlers[slot].chr.character_id == CHAR_ID_RYU_ADULT ||
+                g_BattlePartyBattlers[slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
                 if (g_BattlePartyBattlers[slot].action_flags.volatile_value & 2) {
                     if (g_DragonForm == 0x12) {
-                        g_BattlePartyBattlers[slot].hp_change -= (g_BattlePartyBattlers[slot].stats.max_hp + 10) / 20;
+                        g_BattlePartyBattlers[slot].hp_change -=
+                            (g_BattlePartyBattlers[slot].chr.stats.max_hp + 10) / 20;
                     }
                 }
             }
-            if (g_BattlePartyBattlers[slot].stats.weapon == WEAPON_BEAST_SPEAR) {
-                delta = g_BattlePartyBattlers[slot].hp_change + (g_BattlePartyBattlers[slot].stats.max_hp + 10) / 20;
+            if (g_BattlePartyBattlers[slot].chr.equip.weapon == WEAPON_BEAST_SPEAR) {
+                delta =
+                    g_BattlePartyBattlers[slot].hp_change + (g_BattlePartyBattlers[slot].chr.stats.max_hp + 10) / 20;
                 g_BattlePartyBattlers[slot].hp_change = delta;
-                if (delta >= g_BattlePartyBattlers[slot].stats.current_hp) {
-                    g_BattlePartyBattlers[slot].hp_change = g_BattlePartyBattlers[slot].stats.current_hp - 1;
+                if (delta >= g_BattlePartyBattlers[slot].chr.hp) {
+                    g_BattlePartyBattlers[slot].hp_change = g_BattlePartyBattlers[slot].chr.hp - 1;
                 }
             }
-            if (g_BattlePartyBattlers[slot].stats.armor == ARMOR_LIFE_ARMOR) {
+            if (g_BattlePartyBattlers[slot].chr.equip.armor == ARMOR_LIFE_ARMOR) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
-            if (g_BattlePartyBattlers[slot].stats.accessories[0] == ACCESSORY_CUPIDS_LYRE) {
+            if (g_BattlePartyBattlers[slot].chr.equip.accessories[0] == ACCESSORY_CUPIDS_LYRE) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
-            if (g_BattlePartyBattlers[slot].stats.accessories[1] == ACCESSORY_CUPIDS_LYRE) {
+            if (g_BattlePartyBattlers[slot].chr.equip.accessories[1] == ACCESSORY_CUPIDS_LYRE) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
-            if (g_BattlePartyBattlers[slot].stats.accessories[0] == ACCESSORY_IVORY_CHARM) {
+            if (g_BattlePartyBattlers[slot].chr.equip.accessories[0] == ACCESSORY_IVORY_CHARM) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
-            if (g_BattlePartyBattlers[slot].stats.accessories[1] == ACCESSORY_IVORY_CHARM) {
+            if (g_BattlePartyBattlers[slot].chr.equip.accessories[1] == ACCESSORY_IVORY_CHARM) {
                 g_BattlePartyBattlers[slot].hp_change -= 1;
             }
             if (HAS_STATUS(g_BattlePartyBattlers[slot], 1)) {
-                g_BattlePartyBattlers[slot].hp_change -= g_BattlePartyBattlers[slot].stats.max_hp >> 1;
+                g_BattlePartyBattlers[slot].hp_change -= g_BattlePartyBattlers[slot].chr.stats.max_hp >> 1;
             }
             if ((s16)g_BattlePartyBattlers[slot].hp_change != 0) {
                 g_BattlePartyBattlers[slot].mode    = 6;
@@ -71,7 +73,7 @@ MATCH u8 func_801D5DCC(void) {
                 ENEMY_COMBATANT(slot).unk_04       = 0;
                 ENEMY_COMBATANT(slot).unk_03       = 0;
                 ENEMY_COMBATANT(slot).target_flags = 0x11;
-                ENEMY_COMBATANT(slot).damage       = -(ENEMY_COMBATANT(slot).cell_A0.max_hp >> 1);
+                ENEMY_COMBATANT(slot).hp_change    = -(ENEMY_COMBATANT(slot).stats.max_hp >> 1);
                 Battle_SetSlotPending(slot);
             }
         }

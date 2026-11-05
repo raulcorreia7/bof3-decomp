@@ -33,7 +33,7 @@ MATCH void func_800B0498(void) {
     UI_DrawWindow((s32)(u16)(g_MenuCurrentPanel->x + 135u), (s32)(u16)(g_MenuCurrentPanel->y + 10u), 48, 16, 0,
                   (s32)*style);
 
-    panel_count = -(s32)(BATTLE_ACTIVE_ROW->stats.current_ap < D_801463B8[0]) & 7;
+    panel_count = -(s32)(BATTLE_ACTIVE_ROW->chr.ap < D_801463B8[0]) & 7;
     UI_DrawAsciiString((s16)(u16)(g_MenuCurrentPanel->x + 136u), (s16)(u16)(g_MenuCurrentPanel->y + 12u), panel_count,
                        (const void*)(D_800B6D1C));
 

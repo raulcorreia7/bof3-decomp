@@ -88,7 +88,7 @@
 #define BATTLE_ACTIVE_WORK                ((PartyBattler*)D_801EB4E0)
 
 /* A hit's target answers with a reprisal when its reprisal roll passes
- * (Character.reprisal_chance, or the enemy's event_flags bit 2): the hit's
+ * (Character.stats.reprisal_chance, or the enemy's event_flags bit 2): the hit's
  * ending step sets REPRISAL_PENDING, the turn's closing step hands the action
  * to that battler, and the answer's own ending step sets REPRISAL_DONE so the
  * answer is not itself answered (func_801E020C, func_801E414C, func_801D43EC).
@@ -176,7 +176,10 @@ extern u8 g_BattleCommandCount;
 /* D_80146324 */
 extern u8     g_BattleSurprise;
 extern Spoils D_80146326;
-extern s32    D_80146330;
+/* D_80146330 */
+extern s32    g_BattleSpoilsZenny;
+/* D_8014632C */
+extern u32    g_BattleSpoilsExp;
 
 /* The kind of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
 enum {

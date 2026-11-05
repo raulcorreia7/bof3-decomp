@@ -27,15 +27,15 @@ MATCH void func_8009B2B0(void) {
     } else {
         for (slot = 3; slot < COMBATANT_COUNT; slot++) {
             if (Battle_SlotIsBlocked(slot) == 0) {
-                enemy_sum += D_801EB630[slot].agility;
+                enemy_sum += D_801EB630[slot].stats.agility;
             }
         }
-        divisor = D_801462F3;
+        divisor = g_BattleLivingEnemyCount;
         enemy_sum /= divisor;
 
         for (slot = 0; slot < (*(u8*)&g_BattlePartyCount); slot++) {
             if (Battle_SlotIsBlocked(slot) == 0) {
-                player_sum += g_BattlePartyBattlers[slot].stats.agility;
+                player_sum += g_BattlePartyBattlers[slot].chr.stats.agility;
             }
         }
         player_sum /= g_BattleLivingPartyCount;

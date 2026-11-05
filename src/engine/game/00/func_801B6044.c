@@ -17,7 +17,7 @@ MATCH s32 func_801B6044(void) {
         return 0;
     }
     ((u8*)next_context)[1]         = 0xA;
-    ((u8*)g_Task)[2]               = 0;
+    TASK_BYTES[2]                  = 0;
     g_GameState->mode_12B.u8_value = 8;
     return 1;
 }

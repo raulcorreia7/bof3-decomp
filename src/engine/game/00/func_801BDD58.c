@@ -15,7 +15,7 @@ NON_MATCHING s32 func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* re
     s32 hit;
     u8  factor;
 
-    dist_y = record->depth.part.integer - z;
+    dist_y = COORD_INT(record->depth) - z;
     if (dist_y < 0) {
         dist_y = -dist_y;
     }

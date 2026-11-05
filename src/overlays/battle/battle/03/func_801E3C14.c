@@ -29,7 +29,7 @@ MATCH void func_801E3C14(void) {
     *(s16*)((u8*)self + 0xF8)              = 0;
     *(s16*)((u32)g_BattleTargetRecord + 6) = 0;
     *((u8*)g_BattleTargetRecord + 8)       = 0;
-    D_801EC2E8                             = *(BattleStatBlock*)&g_BattleCurrentEnemy->cell_A0;
+    D_801EC2E8                             = *(BattleStatBlock*)&g_BattleCurrentEnemy->stats;
     switch (LOBU(g_BattleActionType)) {
         case BATTLE_ACTION_ATTACK:
             g_BattleTargetRecord[2] = Battle_ApplyDamage(g_BattleActiveBattler, LOBU(g_BattleTargetSelector));
@@ -43,7 +43,7 @@ MATCH void func_801E3C14(void) {
         g_BattleCurrentEnemy->unk_E4(1);
     }
     lock_work = g_BattleCurrentEnemy;
-    if ((lock_work->target_flags & 1) && lock_work->damage == 0) {
+    if ((lock_work->target_flags & 1) && lock_work->hp_change == 0) {
         g_Task->step = 3;
         return;
     }
@@ -61,18 +61,18 @@ MATCH void func_801E3C14(void) {
     }
     hit_work = g_BattleCurrentEnemy;
     if (hit_work->target_flags & 1) {
-        func_800AAC88(hit_work->damage, g_Task->slot);
+        func_800AAC88(hit_work->hp_change, g_Task->slot);
         hit_work = g_BattleCurrentEnemy;
     }
     if (hit_work->target_flags & 2) {
-        func_800AAEBC(hit_work->unk_FA, g_Task->slot);
+        func_800AAEBC(hit_work->ap_change, g_Task->slot);
     }
     pending = &g_BattlePendingStatus;
     g_BattleCurrentEnemy->status |= *pending;
     *pending = 0;
     func_8009BBE8();
     tail_work = g_BattleCurrentEnemy;
-    if (tail_work->damage > 0) {
+    if (tail_work->hp_change > 0) {
         if (tail_work->hp == 0) {
             g_Task->unk_09 = 0;
             if (g_BattleState & BATTLE_STATE_CRITICAL) {
@@ -83,7 +83,7 @@ MATCH void func_801E3C14(void) {
             func_801E52F0(tail_work->unk_E8[2]);
         }
     }
-    if (g_BattleCurrentEnemy->damage < 0 || (s16)g_BattleCurrentEnemy->unk_FA < 0) {
+    if (g_BattleCurrentEnemy->hp_change < 0 || (s16)g_BattleCurrentEnemy->ap_change < 0) {
         SND_PlayCue(EMI_CUE_ID(2, 6));
     }
     if (!(g_BattleState & BATTLE_STATE_DAMAGE_APPLIED)) {

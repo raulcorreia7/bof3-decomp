@@ -12,19 +12,19 @@ MATCH void func_801E10C8(void) {
     g_Task->unk_09 = count;
     if (count == 0) {
         if (g_Task->unk_03 == 3) {
-            g_GameState->stats.accessories[0] = ACCESSORY_NOTHING;
+            g_GameState->chr.equip.accessories[0] = ACCESSORY_NOTHING;
         }
         if (g_Task->unk_03 == 5) {
-            g_GameState->stats.armor = ARMOR_NOTHING;
+            g_GameState->chr.equip.armor = ARMOR_NOTHING;
             func_801E0B64();
         }
         if (g_Task->unk_03 == 6) {
-            g_GameState->stats.accessories[1] = ACCESSORY_NOTHING;
+            g_GameState->chr.equip.accessories[1] = ACCESSORY_NOTHING;
         }
         current = g_GameState;
-        current->stats.status &= ~STATUS_KO;
-        current->stats.current_hp          = current->stats.max_hp;
-        current->stats.current_willpower   = current->stats.willpower;
+        current->chr.status &= ~STATUS_KO;
+        current->chr.hp                    = current->chr.stats.max_hp;
+        current->chr.willpower             = current->chr.stats.willpower;
         slot                               = Battle_AllocEffect(0, 1) & BYTE_MASK;
         owner                              = g_Task;
         g_BattleEffects[slot].unk_07       = 2;

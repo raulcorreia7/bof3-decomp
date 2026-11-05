@@ -21,7 +21,7 @@ MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     item_index = item & BYTE_MASK;
     UI_DrawWindowOutline((s16)(x0 + 2), (s16)(y0 + 2), 0x86, 0x2A, 0xF1);
     row_off = item_index * 0xA4;
-    cell    = (u8*)&g_Characters[0].max_hp + row_off;
+    cell    = (u8*)&g_Characters[0].stats.max_hp + row_off;
     sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, FIELD(u16, cell, 0x4u));
     stat_x = (s16)(x0 + 0x29);
     stat_y = (s16)(y0 + 5);

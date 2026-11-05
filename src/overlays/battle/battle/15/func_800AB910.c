@@ -39,7 +39,7 @@ NON_MATCHING void func_800AB910(void) {
         off_y                            = FIELD(u16, work, 0x2Eu);
         off_x                            = FIELD(u16, work, 0x30u);
         off_z                            = FIELD(u16, work, 0x32u);
-        flags                            = FIELD(u8, g_GameState, 0x79u);
+        flags                            = g_GameState->slot_index_79;
         g_BattleEffects[(u8)slot].unk_32 = off_z;
         stage                            = work[0x08];
         g_BattleEffects[(u8)slot].unk_2E = off_y + (s8)g_BattlePanelOffsets[stage * 2 + flags * 8];
@@ -49,7 +49,7 @@ NON_MATCHING void func_800AB910(void) {
         off_y                            = FIELD(u16, work, 0x2Eu);
         off_x                            = FIELD(u16, work, 0x30u);
         off_z                            = FIELD(u16, work, 0x32u);
-        flags                            = FIELD(u8, g_GameState, 0x79u);
+        flags                            = g_GameState->slot_index_79;
         g_BattleEffects[(u8)slot].unk_32 = off_z;
         g_BattleEffects[(u8)slot].unk_2E = off_y + (s8)g_BattleCurrentEnemy->unk_E2;
         g_BattleEffects[(u8)slot].unk_30 = off_x + (s8)g_BattleCurrentEnemy->unk_E3;

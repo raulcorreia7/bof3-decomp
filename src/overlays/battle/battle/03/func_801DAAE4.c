@@ -18,7 +18,7 @@ NON_MATCHING void func_801DAAE4(void) {
             if (func_801DB9E4((u8)index) != 0u) {
                 u16 value;
 
-                value = g_BattlePartyBattlers[(u8)index].stats.agility;
+                value = g_BattlePartyBattlers[(u8)index].chr.stats.agility;
                 total += value;
                 CLAMP_MIN(maximum, value);
             }
@@ -50,11 +50,11 @@ NON_MATCHING void func_801DAAE4(void) {
                 }
                 score                       = D_801EB550[(u8)count].value;
                 score                       = (s16)(score * g_BattleTurnPriorityMultipliers[(u8)func_801DB434(
-                                                                g_BattlePartyBattlers[(u8)index].stats.level, 1u)]) /
+                                                                g_BattlePartyBattlers[(u8)index].chr.level, 1u)]) /
                                               100;
                 D_801EB550[(u8)count].value = score;
                 count += 1u;
-                D_801EB550[(u8)count - 1u].value = score + g_BattlePartyBattlers[(u8)index].stats.agility;
+                D_801EB550[(u8)count - 1u].value = score + g_BattlePartyBattlers[(u8)index].chr.stats.agility;
             }
         }
         index += 1u;
@@ -72,7 +72,7 @@ NON_MATCHING void func_801DAAE4(void) {
                 D_801EB550[(u8)count].index = (u8)index;
                 count += 1u;
                 D_801EB550[(u8)count - 1u].value =
-                    D_801EB630[slot].agility + D_801EAF48[((u8)rank * 0x10u) + (RANDOM_MASK(0xFu))];
+                    D_801EB630[slot].stats.agility + D_801EAF48[((u8)rank * 0x10u) + (RANDOM_MASK(0xFu))];
             }
         }
         index += 1u;

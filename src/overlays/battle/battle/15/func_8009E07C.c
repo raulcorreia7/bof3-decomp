@@ -10,7 +10,7 @@ MATCH void func_8009E07C(void) {
 
     battler = LOBU(g_BattleTarget);
     if (battler < 3u) {
-        status = g_BattlePartyBattlers[battler].stats.status & STATUS_KO;
+        status = g_BattlePartyBattlers[battler].chr.status & STATUS_KO;
     } else {
         battler -= 3;
         status = D_801EB630[battler].status & STATUS_KO;
@@ -22,7 +22,7 @@ MATCH void func_8009E07C(void) {
         if (*state < 3u) {
             g_BattleLivingPartyCount += 1;
         } else {
-            D_801462F3 += 1;
+            g_BattleLivingEnemyCount += 1;
         }
     } else {
         g_BattleTargetRecord[2] = 0;

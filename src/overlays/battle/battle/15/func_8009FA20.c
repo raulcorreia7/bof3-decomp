@@ -11,10 +11,10 @@ MATCH void func_8009FA20(void) {
 
     battler = LOBU(g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(battler)) {
-        value = g_BattlePartyBattlers[battler].stats.power;
+        value = g_BattlePartyBattlers[battler].chr.stats.power;
     } else {
         enemy_index = battler - 3u;
-        value       = D_801EB630[enemy_index].attack;
+        value       = D_801EB630[enemy_index].stats.power;
     }
     D_801EC30C = value;
     /* FAKE: keeps the retail store before the scaled view's address setup. */

@@ -12,7 +12,7 @@ MATCH u8 func_801D590C(void) {
             if (func_801DDCB4(index) != 0u) {
                 last_index                               = index;
                 g_BattlePartyBattlers[index].counter_121 = 0u;
-                g_BattlePartyBattlers[index].stats.status &= ~STATUS_CONFUSED;
+                g_BattlePartyBattlers[index].chr.status &= ~STATUS_CONFUSED;
                 count += 1u;
             } else {
                 g_BattlePartyBattlers[index].counter_121 += 1u;

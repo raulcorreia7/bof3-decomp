@@ -6,8 +6,8 @@ MATCH s32 func_801E83AC(s32 character_index, s32 record_index) {
     u8         b;
 
     rec = Start_PickPartyRecord(character_index, record_index);
-    a   = Char_AddCappedStat(&rec->base_hp, 1);
-    b   = Char_AddCappedStat(&rec->max_hp, 1);
+    a   = Char_AddCappedStat(&rec->base.max_hp, 1);
+    b   = Char_AddCappedStat(&rec->stats.max_hp, 1);
     if ((a != 0) || (b != 0)) {
         return 0;
     }

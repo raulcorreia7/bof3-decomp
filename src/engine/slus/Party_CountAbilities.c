@@ -17,19 +17,19 @@ MATCH s32 Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode) {
     }
     switch (ability_type) {
         case ABILITY_TYPE_HEAL:
-            table  = record->healing_abilities;
+            table  = record->abilities.healing;
             length = 0xA;
             break;
         case ABILITY_TYPE_ASSIST:
-            table  = record->assist_abilities;
+            table  = record->abilities.assist;
             length = 0xA;
             break;
         case ABILITY_TYPE_ATTACK:
-            table  = record->attack_abilities;
+            table  = record->abilities.attack;
             length = 0xA;
             break;
         case ABILITY_TYPE_SKILL:
-            table  = record->skill_abilities;
+            table  = record->abilities.skill;
             length = 0xA;
             break;
         default:

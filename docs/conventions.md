@@ -40,6 +40,21 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | One-line `/* */` comments that say what a name cannot                      | A comment that restates the name, tells history or evidence   |
 | Adjacent globals as one struct, array or union, members by role            | Loose globals at one base or stride                           |
 
+## Write it as the original programmer did
+
+Every type, struct, member, value and helper reads the way the game's programmer wrote it in 1997:
+
+- Records are built from nested structs (`pos`, `stats`, `equip`).
+- Values are game enums or named constants.
+- Arithmetic uses compound operators (`hp -= damage`).
+- Fixed-point halves go through `COORD_INT()`.
+- One typed local replaces repeated casts.
+- Helpers declare their own locals.
+- Any line that still looks like decompiler output gets rewritten, then byte-checked.
+
+Each change is done when `check` prints `check: 428 images match`, `check-plain` passes and the
+`INCLUDE_ASM` count has not risen; `pre-push` runs all three.
+
 ## Language and formatting
 
 C89 plus the extensions the retail compiler supports: designated initializers for data tables and
@@ -1107,14 +1122,14 @@ Which form a twin group takes: [shared bodies](#shared-bodies).
 ```c
 /* Whether the party battler can act this turn: alive and awake. */
 static inline bool Battle_CanAct(PartyBattler* battler) {
-    return battler->stats.current_hp != 0 && !HAS_STATUS(*battler, STATUS_SLEEPING);
+    return battler->chr.hp != 0 && !HAS_STATUS(*battler, STATUS_SLEEPING);
 }
 ```
 
 **Don't**
 
 ```c
-#define CAN_ACT(b) b->stats.current_hp != 0 && !(b->stats.status & 0x40) /* untagged, unparenthesized, a raw flag */
+#define CAN_ACT(b) b->chr.hp != 0 && !(b->chr.status & 0x40) /* untagged, unparenthesized, a raw flag */
 #define Battle_CanAct(b) ((b)->stats.current_hp != 0)                     /* a macro in a function's name */
 #define DO_STEP(body) do { body } while (0)                  /* code as an argument */
 ```

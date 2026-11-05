@@ -21,8 +21,8 @@ MATCH s32 func_801D62D8(void) {
                     /* retail shares this clear block */
                     goto clear;
                 }
-                countdown = g_BattlePartyBattlers[index].stats.current_ap;
-                if (countdown < ((*D_801463B8 + 1) >> 1)) {
+                countdown = g_BattlePartyBattlers[index].chr.ap;
+                if ((s32)countdown < ((s32)(*D_801463B8 + 1) >> 1)) {
                     g_BattlePartyBattlers[index].mode   = 6;
                     g_BattlePartyBattlers[index].step   = 4;
                     g_BattlePartyBattlers[index].unk_03 = 4;
@@ -31,7 +31,7 @@ MATCH s32 func_801D62D8(void) {
                 } else {
                     g_BattlePartyBattlers[index].hp_change = 0;
                     g_BattlePartyBattlers[index].ap_change = 0;
-                    g_BattlePartyBattlers[index].stats.current_ap -= (*D_801463B8 + 1) >> 1;
+                    g_BattlePartyBattlers[index].chr.ap -= (*D_801463B8 + 1) >> 1;
                     step                                   = (*D_801463B8 + 1) >> 1;
                     g_BattlePartyBattlers[index].ap_change = step;
                     if (step != 0) {

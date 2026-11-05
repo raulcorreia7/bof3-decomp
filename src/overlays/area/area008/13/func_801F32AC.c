@@ -5,13 +5,13 @@ MATCH void func_801F32AC(void) {
     u8     idx;
 
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
-        ((u8*)g_Task)[0x01] = 0x0E;
+        TASK_BYTES[0x01] = 0x0E;
         return;
     }
     if (g_ScriptVars[2] == 1) {
-        idx = ((u8*)g_Task)[0x0B];
+        idx = TASK_BYTES[0x0B];
         e   = &g_Actors[idx];
         e->flags &= ~ACTOR_FLAG_HIDDEN;
-        ((u8*)g_Task)[0x01] = 2;
+        TASK_BYTES[0x01] = 2;
     }
 }

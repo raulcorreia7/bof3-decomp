@@ -35,10 +35,10 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             volatile Actor* work;
 
             func_801ABF30(buf, table[state->index_0A + 1], table[state->index_0A + 2]);
-            work                    = SCRATCH_WORK;
-            work->x.fixed           = buf[0];
-            work->y.fixed           = buf[1];
-            FIELD(s32, work, 0x3Cu) = buf[2];
+            work          = SCRATCH_WORK;
+            work->x.fixed = buf[0];
+            work->y.fixed = buf[1];
+            work->z       = buf[2];
             state->index_0A += 2;
             break;
         }

@@ -25,28 +25,28 @@ MATCH s32 func_801C38F4(s32 record_index, s32 field_mode, s32 wanted_id) {
     }
     goto done; /* an unknown mode counts nothing */
 mode1:
-    if (record->weapon == (wanted_id & BYTE_MASK)) {
+    if (record->equip.weapon == (wanted_id & BYTE_MASK)) {
         count = 1;
     }
     goto done; /* the mode-1 compare is done */
 mode2:
     target = wanted_id & BYTE_MASK;
-    if (record->shield == target) {
+    if (record->equip.shield == target) {
         count = 1;
     }
-    if (record->helmet == target) {
+    if (record->equip.helmet == target) {
         count += 1;
     }
-    if (record->armor == target) {
+    if (record->equip.armor == target) {
         count += 1;
     }
     goto done; /* the mode-2 compares are done */
 mode3:
     target = wanted_id & BYTE_MASK;
-    if (record->accessories[0] == target) {
+    if (record->equip.accessories[0] == target) {
         count = 1;
     }
-    if (record->accessories[1] == target) {
+    if (record->equip.accessories[1] == target) {
         count += 1;
     }
 done:

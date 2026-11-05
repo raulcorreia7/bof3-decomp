@@ -10,7 +10,6 @@ extern u8           g_BattleUiStep;
 extern u8           g_BattlePartyCount;
 extern u8           D_80145F16[][BATTLE_PARTY_STRIDE];
 extern u8           D_80145F17[][BATTLE_PARTY_STRIDE];
-extern u32          D_8014632C;
 extern volatile u16 D_801463B0;
 extern char         D_80149118[];
 extern u8*          D_801EB4F4;

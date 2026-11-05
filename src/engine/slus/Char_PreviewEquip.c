@@ -14,33 +14,33 @@ MATCH void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u1
     s32        j;
 
     character = &g_Characters[character_id];
-    before[0] = &character->power;
-    before[1] = &character->defense;
-    before[2] = &character->intellect;
-    before[3] = &character->agility;
-    after[0]  = &preview.power;
-    after[1]  = &preview.defense;
-    after[2]  = &preview.intellect;
-    after[3]  = &preview.agility;
+    before[0] = &character->stats.power;
+    before[1] = &character->stats.defense;
+    before[2] = &character->stats.intellect;
+    before[3] = &character->stats.agility;
+    after[0]  = &preview.stats.power;
+    after[1]  = &preview.stats.defense;
+    after[2]  = &preview.stats.intellect;
+    after[3]  = &preview.stats.agility;
     preview   = *character;
     switch (slot) {
         case EQUIP_SLOT_WEAPON:
-            preview.weapon = item_id;
+            preview.equip.weapon = item_id;
             break;
         case EQUIP_SLOT_SHIELD:
-            preview.shield = item_id;
+            preview.equip.shield = item_id;
             break;
         case EQUIP_SLOT_HELMET:
-            preview.helmet = item_id;
+            preview.equip.helmet = item_id;
             break;
         case EQUIP_SLOT_ARMOR:
-            preview.armor = item_id;
+            preview.equip.armor = item_id;
             break;
         case EQUIP_SLOT_ACCESSORY_1:
-            preview.accessories[0] = item_id;
+            preview.equip.accessories[0] = item_id;
             break;
         case EQUIP_SLOT_ACCESSORY_2:
-            preview.accessories[1] = item_id;
+            preview.equip.accessories[1] = item_id;
             break;
     }
     Char_RebuildStats(&preview);

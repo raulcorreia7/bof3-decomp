@@ -455,7 +455,7 @@ MATCH s32 func_801FDA34(void) {
     u8 i;
 
     for (i = 0; i < g_PartySize; i++) {
-        if (g_BattlePartyBattlers[i].stats.character_id == 2) {
+        if (g_BattlePartyBattlers[i].chr.character_id == 2) {
             return 1;
         }
     }

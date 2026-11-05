@@ -13,9 +13,9 @@ MATCH void func_801E1494(void) {
     PartyBattler* work;
     work  = g_GameState;
     value = (s16)work->hp_change;
-    if (work->stats.current_hp <= value) {
-        work->stats.status     = STATUS_KO;
-        work->stats.current_hp = 0;
+    if (work->chr.hp <= value) {
+        work->chr.status = STATUS_KO;
+        work->chr.hp     = 0;
         func_801DD858(1);
     } else {
         if (value >= 0) {
@@ -23,12 +23,12 @@ MATCH void func_801E1494(void) {
         } else {
             SND_QueueSelectionFx(0x206);
         }
-        entry                   = g_GameState;
-        amount                  = entry->stats.current_hp - entry->hp_change;
-        cap                     = entry->stats.max_hp;
-        entry->stats.current_hp = amount;
+        entry         = g_GameState;
+        amount        = entry->chr.hp - entry->hp_change;
+        cap           = entry->chr.stats.max_hp;
+        entry->chr.hp = amount;
         if (cap < amount) {
-            entry->stats.current_hp = cap;
+            entry->chr.hp = cap;
         }
     }
     work = g_GameState;

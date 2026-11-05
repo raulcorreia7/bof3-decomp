@@ -13,7 +13,7 @@ MATCH s32 func_800A6CF8(u8 selection_id, u8 slot_index) {
     index = 0;
     if (count != 0) {
         do {
-            if (D_801463C4[index] == value) {
+            if (g_BattleGenes[index] == value) {
                 return 1;
             }
             index++;

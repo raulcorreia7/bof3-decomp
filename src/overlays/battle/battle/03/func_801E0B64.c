@@ -15,7 +15,7 @@ NON_MATCHING void func_801E0B64(void) {
 
     Char_RebuildStats(&g_Characters[g_GameState->unk_13A[2]]);
     for (slot = 0; slot < g_BattlePartyCount; slot++) {
-        src = &g_Characters[D_80145FCC[slot * BATTLE_PARTY_STRIDE]];
+        src = &g_Characters[g_BattlePartyBattlers[slot].record_slot];
         dst = &D_80145F04[slot * BATTLE_PARTY_STRIDE];
         for (i = 14; i < 20; i++) {
             dst[i] = src[i];

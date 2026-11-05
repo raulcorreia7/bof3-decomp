@@ -92,7 +92,7 @@ MATCH void func_801EF2F0(void) {
     rot.vx = 0;
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -g_Task->pos.z.part.integer / 2;
+    pos.vz = -COORD_INT(g_Task->pos.z) / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
@@ -126,14 +126,14 @@ MATCH void func_801EF930(void) {
         BATTLE_ACTIVE_WORK->pos.x.fixed + ((rsin(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
     g_Task->pos.y.fixed =
         BATTLE_ACTIVE_WORK->pos.y.fixed + ((rcos(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
-    g_Task->pos.z.part.integer = (u16)((u16)BATTLE_ACTIVE_WORK->pos.z.part.integer + *cell) - 0x20;
-    height                     = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
-    work                       = g_Task;
-    work->unk_25               = 0x1D;
-    work->unk_14               = height >> 16;
-    g_Task->unk_26             = 0;
-    g_Task->unk_27             = 0xA0;
-    g_Task->unk_28             = 0;
+    COORD_INT(g_Task->pos.z) = (u16)((u16)COORD_INT(BATTLE_ACTIVE_WORK->pos.z) + *cell) - 0x20;
+    height                   = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    work                     = g_Task;
+    work->unk_25             = 0x1D;
+    work->unk_14             = height >> 16;
+    g_Task->unk_26           = 0;
+    g_Task->unk_27           = 0xA0;
+    g_Task->unk_28           = 0;
     g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     tint                = -0x40;
     g_Task->unk_5D      = tint;
@@ -154,8 +154,8 @@ MATCH void func_801EFB68(void) {
     g_Task->timer += 1;
     g_Task->pos.x.fixed += (s32)(rsin((g_Task->timer & 0x3F) << 8) * 8) >> 3;
     g_Task->pos.y.fixed += (s32)(rcos((g_Task->timer & 0x3F) << 8) * 8) >> 3;
-    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer - 8;
-    if ((func_8014DAEC() & 0xFF) || (g_Task->pos.z.part.integer < g_Task->unk_14)) {
+    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) - 8;
+    if ((func_8014DAEC() & 0xFF) || (COORD_INT(g_Task->pos.z) < g_Task->unk_14)) {
         D_801EB4E0->unk_0B -= 1;
         g_Task->flags = 0;
         g_Task->mode  = 0;

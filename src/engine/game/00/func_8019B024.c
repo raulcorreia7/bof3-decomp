@@ -7,7 +7,7 @@ MATCH void func_8019B024(void) {
     s32    diff;
 
     dist    = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
-    counter = g_Task->z.part.integer;
+    counter = COORD_INT(g_Task->z);
     if ((counter >= dist + 0x80) || (counter < dist) || (g_Task->flags & ACTOR_FLAG_OFFSCREEN)) {
         work = g_Task;
         work->mode++;

@@ -18,10 +18,10 @@ MATCH void func_801C16B8(void) {
         if (g_Characters[count].unk_07 & 1) {
             g_Characters[count].fatigue = 0;
             Char_RebuildStats(record);
-            g_Characters[count].status            = 0;
-            g_Characters[count].current_willpower = g_Characters[count].willpower;
-            g_Characters[count].current_hp        = g_Characters[count].max_hp;
-            g_Characters[count].current_ap        = g_Characters[count].max_ap;
+            g_Characters[count].status    = 0;
+            g_Characters[count].willpower = g_Characters[count].stats.willpower;
+            g_Characters[count].hp        = g_Characters[count].stats.max_hp;
+            g_Characters[count].ap        = g_Characters[count].stats.max_ap;
         }
         record += 1;
         count += 1;

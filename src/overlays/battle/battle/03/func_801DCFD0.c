@@ -21,7 +21,7 @@ MATCH void func_801DCFD0(void) {
         do {
             row         = index & BYTE_MASK;
             slot_offset = row * BATTLE_PARTY_STRIDE;
-            dst         = (BattleRecordChunk*)(&g_Characters[D_80145FCC[slot_offset]]);
+            dst         = (BattleRecordChunk*)(&g_Characters[g_BattlePartyBattlers[row].record_slot]);
             src         = (BattleRecordChunk*)(D_80145F04 + slot_offset);
             end         = (BattleRecordChunk*)(((u8*)src) + 0xA0u);
             do {

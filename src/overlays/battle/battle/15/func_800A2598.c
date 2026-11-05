@@ -12,7 +12,7 @@ MATCH void func_800A2598(void) {
         g_BattleTargetRecord[2] = Battle_CalcDamage(g_BattleActiveBattler, mode, 0xFFFF);
         slot                    = LOBU(g_BattleTarget);
         slot -= 3;
-        if (D_801EB630[slot].unk_7D == 4) {
+        if (D_801EB630[slot].enemy_id.byte.family == 4) {
             record = *(s16**)&g_BattleTargetRecord;
             record[2] *= 2;
         }

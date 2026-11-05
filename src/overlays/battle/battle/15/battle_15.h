@@ -552,7 +552,8 @@ extern volatile u8                       g_BattleTarget;
 /* D_801463A0 */
 extern volatile s16* volatile g_BattleTargetRecord;
 extern u16                              D_801463B4;
-extern u8                               D_801463C4[];
+/* D_801463C4 */
+extern u8                               g_BattleGenes[];
 extern u8                               D_801463D6;
 /* D_801463D8 */
 extern u16                              g_BattlePendingStatus;

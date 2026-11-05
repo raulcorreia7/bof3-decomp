@@ -22,5 +22,5 @@ MATCH void Battle_LoadEncounterEnemies(void) {
         slot++;
     } while ((u32)(slot & BYTE_MASK) < 8u);
 
-    D_801462F3 = g_BattleEnemyCount;
+    g_BattleLivingEnemyCount = g_BattleEnemyCount;
 }

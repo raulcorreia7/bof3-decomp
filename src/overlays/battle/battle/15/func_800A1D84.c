@@ -50,11 +50,11 @@ NON_MATCHING void func_800A1D84(void) {
             row_offset                         = *active * BATTLE_PARTY_STRIDE;
             D_80145F1E[row_offset]             = D_80145F1E[row_offset] + 1;
         }
-        Char_RebuildStats(&g_Characters[D_80145FCC[*active * BATTLE_PARTY_STRIDE]]);
+        Char_RebuildStats(&g_Characters[g_BattlePartyBattlers[*active].record_slot]);
         i = 0;
         if (g_BattlePartyCount != 0) {
             do {
-                cell       = &g_Characters[D_80145FCC[i * BATTLE_PARTY_STRIDE]];
+                cell       = &g_Characters[g_BattlePartyBattlers[i].record_slot];
                 dest       = i * BATTLE_PARTY_STRIDE + D_80145F04;
                 dest[0x0E] = cell[0x0E];
                 dest[0x0F] = cell[0x0F];

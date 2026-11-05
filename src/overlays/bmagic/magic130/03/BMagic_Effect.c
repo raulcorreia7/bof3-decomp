@@ -57,8 +57,6 @@ MATCH void func_801EF3DC(void) {
 }
 
 MATCH void Effect_CountDownTimerStep_801EF42C(void) {
-    u8 timer;
-
     BMAGIC_COUNT_DOWN_TIMER_STEP();
 }
 

@@ -13,9 +13,9 @@ MATCH void func_8009F1BC(void) {
 
     battler = LOBU(g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(battler)) {
-        value = g_BattlePartyBattlers[battler].stats.power * 2;
+        value = g_BattlePartyBattlers[battler].chr.stats.power * 2;
     } else {
-        value = ENEMY_COMBATANT(battler).attack * 2;
+        value = ENEMY_COMBATANT(battler).stats.power * 2;
     }
     D_801EC30C     = value;
     battler_index  = g_BattleActiveBattler;

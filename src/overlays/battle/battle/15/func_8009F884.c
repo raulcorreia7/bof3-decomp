@@ -10,8 +10,8 @@ MATCH void func_8009F884(void) {
 
     mode = LOBU(g_BattleTarget);
     if (mode < 3u) {
-        base  = g_BattlePartyBattlers[mode].stats.current_hp;
-        flags = g_BattlePartyBattlers[mode].stats.status;
+        base  = g_BattlePartyBattlers[mode].chr.hp;
+        flags = g_BattlePartyBattlers[mode].chr.status;
     } else {
         base  = ENEMY_COMBATANT(mode).hp;
         flags = ENEMY_COMBATANT(mode).status;

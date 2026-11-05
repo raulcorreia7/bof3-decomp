@@ -16,7 +16,7 @@ MATCH void func_801E7634(void) {
         Actor_SelectScript((D_801EB4E0->facing + 4) & BYTE_MASK);
         GFX_FreePaletteFadeTarget(&g_BattlePartyBattlers[g_Task->slot]);
         GFX_StagePalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
-        func_801DDAB4(g_BattlePartyBattlers[g_Task->slot].stats.status);
+        func_801DDAB4(g_BattlePartyBattlers[g_Task->slot].chr.status);
         GFX_UploadPaletteRows();
         g_GameState->action_flags.value &= ~1;
         func_801E0B64();

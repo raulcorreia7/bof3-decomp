@@ -39,7 +39,7 @@ NON_MATCHING void func_801DA7D4(void) {
     do {
         if ((D_801463BA == 0) || (ENEMY_COMBATANT(i).action_flags & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
             if (func_801DB9E4(i) & BYTE_MASK) {
-                value = ENEMY_COMBATANT(i).agility;
+                value = ENEMY_COMBATANT(i).stats.agility;
                 sum += value;
                 if (max < (u32)value) {
                     max = value;
@@ -57,7 +57,7 @@ NON_MATCHING void func_801DA7D4(void) {
                 total        = sum;
                 entry        = &entries[total];
                 entry->index = (s16)i;
-                entry->value = g_BattlePartyBattlers[i].stats.agility;
+                entry->value = g_BattlePartyBattlers[i].chr.stats.agility;
                 sum++;
             }
         }

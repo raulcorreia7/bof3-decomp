@@ -11,11 +11,11 @@ MATCH void func_801A253C(Actor* entity) {
     if (g_Task->unk_09 != 0) {
         g_Task->x.fixed = start_x + g_Task->vx;
         g_Task->y.fixed += g_Task->vy;
-        g_Task->z.part.integer += g_Task->vz;
+        COORD_INT(g_Task->z) += g_Task->vz;
         g_Task->unk_09--;
         if (g_Task->unk_09 == 0) {
             if (!(entity->interaction_flags & 0x80)) {
-                g_Task->z.part.integer = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
+                COORD_INT(g_Task->z) = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
             }
             work            = g_Task;
             entity->roll_90 = 0;

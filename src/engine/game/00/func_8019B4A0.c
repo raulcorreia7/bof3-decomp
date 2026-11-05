@@ -11,9 +11,8 @@ MATCH void func_8019B4A0(void) {
     if (*state != 1) {
         if (g_Task->unk_0A != 0) {
             if ((func_8019C1E4() & BYTE_MASK) == 0) {
-                ((void (*)(s16, s16, s32))Area_SetCellCode)(g_Task->x.part.integer, g_Task->y.part.integer,
-                                                            g_Task->unk_0B);
-                g_Task->unk_0A = ((g_Task->unk_0A + 1) >> 1);
+                ((void (*)(s16, s16, s32))Area_SetCellCode)(COORD_INT(g_Task->x), COORD_INT(g_Task->y), g_Task->unk_0B);
+                g_Task->unk_0A = (u8)((g_Task->unk_0A + 1) >> 1);
                 vx             = g_FacingOffsets[g_Task->direction_08].x;
                 span           = (g_Task->unk_0A - 1) * 0xC00;
                 g_Task->vx     = vx * 4;
@@ -50,13 +49,12 @@ MATCH void func_8019B4A0(void) {
                 g_Task->unk_09 = 0;
                 g_Task->mode   = g_Task->mode + 1;
             } else {
-                ((void (*)(s16, s16, s32))Area_SetCellCode)(g_Task->x.part.integer, g_Task->y.part.integer,
-                                                            g_Task->unk_0B);
+                ((void (*)(s16, s16, s32))Area_SetCellCode)(COORD_INT(g_Task->x), COORD_INT(g_Task->y), g_Task->unk_0B);
                 g_Task->unk_09 = 0;
                 g_Task->mode   = 4;
             }
         } else if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
-            ((void (*)(s16, s16, s32))Area_SetCellCode)(g_Task->x.part.integer, g_Task->y.part.integer, g_Task->unk_0B);
+            ((void (*)(s16, s16, s32))Area_SetCellCode)(COORD_INT(g_Task->x), COORD_INT(g_Task->y), g_Task->unk_0B);
         }
     }
     Area_SetDrawMode();

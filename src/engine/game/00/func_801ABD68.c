@@ -18,7 +18,7 @@ MATCH u8 func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas) {
     dy    = pos_y - work->y.fixed;
     dist  = Area_SampleHeight(pos_x, pos_y);
     work2 = g_Task;
-    dz    = dist - work2->z.part.integer;
+    dz    = dist - COORD_INT(work2->z);
     if (FIELD(u8, deltas, 0x4u) != 0) {
         count          = count ? count : 1;
         work2->unk_09  = count;

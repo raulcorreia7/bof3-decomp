@@ -26,11 +26,15 @@
 
 /* The statements of Menu_SwapBytes: swap the bytes two pointers address, as the
  * menu overlays swap two entries of a party order array or of the standby list.
- * The member declares `u8 temp`. */
+ */
 #define MENU_SWAP_BYTES(first, second) \
-    temp      = *(first);              \
-    *(first)  = *(second);             \
-    *(second) = temp
+    do {                               \
+        u8 temp;                       \
+                                       \
+        temp      = *(first);          \
+        *(first)  = *(second);         \
+        *(second) = temp;              \
+    } while (0)
 
 /* D_80144F50 */
 extern u32 g_Zenny;

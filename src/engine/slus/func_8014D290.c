@@ -30,22 +30,22 @@ NON_MATCHING void func_8014D290(void) {
     }
     work = g_Task;
 
-    col = g_Task->y.part.integer - g_AreaTileOriginY;
-    row = g_Task->x.part.integer - g_AreaTileOriginX;
-    if (g_Task->x.part.fraction != 0) {
+    col = COORD_INT(g_Task->y) - g_AreaTileOriginY;
+    row = COORD_INT(g_Task->x) - g_AreaTileOriginX;
+    if (COORD_FRAC(g_Task->x) != 0) {
         col++;
     }
     key = row + col;
 
-    zero  = (g_Task->x.part.fraction == 0);
+    zero  = (COORD_FRAC(g_Task->x) == 0);
     table = &g_SpriteCellRotations[g_Task->unk_2B * 3];
-    if (g_Task->y.part.fraction == 0) {
+    if (COORD_FRAC(g_Task->y) == 0) {
         table += 1 + zero;
     } else {
         table += zero;
     }
     offset = *table;
-    if (g_Task->y.part.fraction != 0) {
+    if (COORD_FRAC(g_Task->y) != 0) {
         key += (offset + 1);
     } else {
         key += offset;
@@ -65,14 +65,14 @@ NON_MATCHING void func_8014D290(void) {
             sort |= (g_Task->y.fixed >> 15) & BYTE_MASK;
         }
     } else {
-        sort |= (((u16)g_Task->depth.part.integer >> 5) & BYTE_MASK) ^ 0x80;
+        sort |= (((u16)COORD_INT(g_Task->depth) >> 5) & BYTE_MASK) ^ 0x80;
     }
     g_Task->unk_32 = sort;
     Actor_ReadValue();
 
     vec.vx = (g_Task->x.fixed >> 9) - 0x4000;
     vec.vy = (g_Task->y.fixed >> 9) - 0x4000;
-    vec.vz = -g_Task->depth.part.integer / 2;
+    vec.vz = -COORD_INT(g_Task->depth) / 2;
     rot    = RotTransPers(&vec, &sxy, &p, &flag);
 
     FIELD(s32, g_Task, 0x60) = rot;
