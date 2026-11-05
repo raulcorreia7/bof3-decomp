@@ -107,6 +107,10 @@ MATCH void func_801EF5BC(void) {
     g_SpadWork->unk_02++;
 }
 
+/* The local-table dispatch (Callback table[2] = {func_801EF7A0, func_801EF7E0}) is right; the body
+ * stays 2-3 instructions fat, which shifts the linked table constants +8/+C. The timer compare must
+ * keep (temp & 0xFF) before the beq (u8 temps add 3 instructions, s32 temps fold the mask away).
+ * Next lever: permuter. */
 INCLUDE_ASM(func_801EF620);
 
 MATCH void func_801EF7A0(void) {
