@@ -44,10 +44,10 @@ INCLUDE_ASM(func_801D1C90);
 INCLUDE_ASM(func_801D1E8C);
 
 MATCH void func_801D1FA0(void) {
-    u8 temp_s0;
+    u8 slot;
 
-    temp_s0 = D_8014833D;
-    if (Item_GetEquipability(D_80148338, temp_s0) & 1) {
+    slot = D_8014833D;
+    if (Item_GetEquipability(D_80148338, slot) & 1) {
         D_80148511 = 0;
     } else {
         D_80148511 = 1;
@@ -58,7 +58,7 @@ MATCH void func_801D1FA0(void) {
     D_801D8EE3                = D_80144DF5;
     D_801D8EE4                = D_80144DF6;
     D_801D8EE4                = D_80144DF7;
-    (&D_801D8EE0)[D_8014835E] = temp_s0;
+    (&D_801D8EE0)[D_8014835E] = slot;
 }
 
 MATCH void func_801D2070(void) {
