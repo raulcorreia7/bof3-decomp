@@ -67,7 +67,7 @@ INCLUDE_ASM(func_801EF12C);
 
 MATCH void func_801EF1FC(void) {
     if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        D_8014637C->flags_00 &= 0xBF;
+        *D_8014637C &= 0xBF;
         func_800AEF98(4, 0);
         g_SpadWork->step_01 += 1;
     }

@@ -3,6 +3,8 @@
 
 /* The bmagic/magic132/03 overlay. Only this image includes the file. */
 
+#define BATTLE_PARTY_CELL_RECORD
+
 #include "overlays/bmagic/bmagic.h"
 
 extern BattleHandlerTable5 D_801EEC04;

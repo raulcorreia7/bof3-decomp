@@ -46,78 +46,84 @@ extern volatile u8 g_GfxPalettePending; /* 0x80145988 */
 /* D_80145988 */
 extern u8 g_GfxPalettePending; /* 0x80145988 */
 #endif
-extern u8                   D_80145E91[];
-extern u8                   D_80145E92[];
-extern u8                   D_80145E93[];
-extern u8                   D_80145E98;
-extern u8                   D_80145E99;
-extern s32                  D_80145E9C;
-extern s32                  D_80145EA0;
-extern s16                  D_80145EC6;
-extern s32                  D_80145EC8;
-extern s16                  D_80145ECA;
-extern s32                  D_80145ECC;
-extern s16                  D_80145ECE;
-extern u8                   D_80145ED8;
-extern u8                   D_80145EDB;
+extern u8  D_80145E91[];
+extern u8  D_80145E92[];
+extern u8  D_80145E93[];
+extern u8  D_80145E98;
+extern u8  D_80145E99;
+extern s32 D_80145E9C;
+extern s32 D_80145EA0;
+extern s16 D_80145EC6;
+extern s32 D_80145EC8;
+extern s16 D_80145ECA;
+extern s32 D_80145ECC;
+extern s16 D_80145ECE;
+extern u8  D_80145ED8;
+extern u8  D_80145EDB;
 /* Player battle-record copies (stride 0x140), selected by g_BattleActingBattler. */
-extern u8                   D_80145F04[];
-extern u8                   D_80145F10[];
-extern u16                  D_80145F1A[];
-extern u8                   D_80145FA9;
-extern s8                   D_80145FBC;
+extern u8  D_80145F04[];
+extern u8  D_80145F10[];
+extern u16 D_80145F1A[];
+extern u8  D_80145FA9;
+extern s8  D_80145FBC;
 /* D_801462E0 */
-extern u8                   g_BattleMode;
+extern u8  g_BattleMode;
 /* D_801462E1 */
-extern u8                   g_BattleStep;
+extern u8  g_BattleStep;
 /* D_801462E2 */
-extern u8                   g_BattleSubStep;
+extern u8  g_BattleSubStep;
 /* D_801462E8 */
-extern u16                  g_BattleState;
+extern u16 g_BattleState;
 /* D_80146325 */
-extern u8                   g_BattleOptions;
+extern u8  g_BattleOptions;
 /* D_80146328 */
-extern u8                   g_BattleResult;
+extern u8  g_BattleResult;
 /* D_80146329 */
-extern u8                   g_BattleEventFlags;
+extern u8  g_BattleEventFlags;
+/* The bytes the battle code index; the bmagic images that copy its record
+ * define BATTLE_PARTY_CELL_RECORD before their first include. */
+#ifdef BATTLE_PARTY_CELL_RECORD
 extern struct PartyBattler* D_8014637C;
+#else
+extern u8* D_8014637C;
+#endif
 /* D_80146384 */
-extern volatile u8          g_BattleTargetSelector;
+extern volatile u8   g_BattleTargetSelector;
 /* D_80146854 */
-extern u8                   g_EmiStreamFlags;
+extern u8            g_EmiStreamFlags;
 /* D_8014686C */
-extern u32*                 g_SceneFlags; /* 0x8014686C */
-extern u8                   D_80146871;
-extern u8                   D_8014688E[];
-extern u8                   D_801468BC[];
-extern u8                   D_801468C0[];
-extern s16                  D_80146916;
-extern s32                  D_80147A8C;
-extern s32                  D_80147A94;
+extern u32*          g_SceneFlags; /* 0x8014686C */
+extern u8            D_80146871;
+extern u8            D_8014688E[];
+extern u8            D_801468BC[];
+extern u8            D_801468C0[];
+extern s16           D_80146916;
+extern s32           D_80147A8C;
+extern s32           D_80147A94;
 /* Per-slot effect work arrays at a 0x30-byte stride: the accumulators at
  * D_801FD030, the seeded deltas at D_801FCA90 and the per-cell lifetimes at
  * D_801FD5D0.
  */
-extern u8*                  D_80147AA8;
-extern s32                  D_80147AC4;
+extern u8*           D_80147AA8;
+extern s32           D_80147AC4;
 /* D_80148208 */
-extern struct Actor*        g_ScriptWorkRecord;
-extern s16                  D_80148334;
-extern u16                  D_80148336;
-extern u8                   D_8014837B;
-extern u8                   D_8014839F;
-extern s8                   D_801484EA;
+extern struct Actor* g_ScriptWorkRecord;
+extern s16           D_80148334;
+extern u16           D_80148336;
+extern u8            D_8014837B;
+extern u8            D_8014839F;
+extern s8            D_801484EA;
 /* D_80148573 */
-extern u8                   g_BattleChoicePhase;
-extern volatile u8          D_80148597;
-extern s8                   D_801485E6;
-extern s8                   D_801485E7;
-extern u8                   D_80148624;
-extern u8                   D_80148625;
-extern u8                   D_80148626;
-extern volatile u8          D_80148627;
+extern u8            g_BattleChoicePhase;
+extern volatile u8   D_80148597;
+extern s8            D_801485E6;
+extern s8            D_801485E7;
+extern u8            D_80148624;
+extern u8            D_80148625;
+extern u8            D_80148626;
+extern volatile u8   D_80148627;
 /* D_801492E8 */
-extern u8                   g_CameraMatrix[];
+extern u8            g_CameraMatrix[];
 /* D_80149308 */
 /* A unit that must re-read the target after storing it defines
  * AREA_SCROLL_TARGET_VOLATILE before its first include. */
