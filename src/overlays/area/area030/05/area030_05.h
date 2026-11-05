@@ -11,10 +11,10 @@
 
 /* Work-cost row: two cost bytes followed by two three-byte runs. */
 typedef struct AreaCost {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02[3];
-    u8 unk_05[3];
+    u8 cost_00;
+    u8 cost_01;
+    u8 run_02[3];
+    u8 run_05[3];
 } AreaCost;
 
 /* Payload prologue: the loader-verified module id and the "*%2d" format the

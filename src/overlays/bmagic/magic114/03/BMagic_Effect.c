@@ -106,6 +106,7 @@ MATCH void func_801EFDD8(void) {
     }
 }
 
+/* Best 20 differences: bnez at 0x801EFE94; adjust work pointer reloads. */
 INCLUDE_ASM(func_801EFE70);
 
 MATCH void func_801EFF1C(void) {

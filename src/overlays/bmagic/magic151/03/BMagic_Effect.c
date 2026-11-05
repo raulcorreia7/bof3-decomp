@@ -259,6 +259,7 @@ MATCH void func_801F1D28(void) {
     }
 }
 
+/* Best 7 differences: lui a0 at 0x801F1D60; adjust register allocation. */
 INCLUDE_ASM(func_801F1D60);
 
 MATCH void Effect_SetActorMatrix_801F1DC0(void) {
