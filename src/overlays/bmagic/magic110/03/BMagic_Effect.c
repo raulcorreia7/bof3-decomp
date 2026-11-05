@@ -4,11 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC1C(void) {
-    BmagicEffectFuncs handlers = D_801EEC04;
-
-    handlers.handlers[g_SpadWork->step_01]();
-}
+#include "overlays/bmagic/Effect_DispatchHandlerSlot1.h"
 
 INCLUDE_ASM(func_801EEC94);
 
