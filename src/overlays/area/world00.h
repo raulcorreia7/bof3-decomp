@@ -16,8 +16,6 @@
 #define AREA_RESET_VARIANT       0xFF
 #define g_MasterSubStep          (*(s8*)&g_MasterSubStep)
 
-/* The selection byte that arms the area request. */
-extern s8 D_801490C7;
 #include "overlays/area/Message_SelectAnswerValue.h"
 
 void func_800F500C(void);
