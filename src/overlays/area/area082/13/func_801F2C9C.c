@@ -3,7 +3,7 @@
 MATCH void func_801F2C9C(void) {
     u16 remaining;
 
-    remaining            = g_SpadWork->unk_2C - 1;
+    remaining          = g_SpadWork->unk_2C - 1;
     g_SpadWork->unk_2C = remaining;
     g_SpadWork->unk_64 += 4;
     g_SpadWork->unk_68 += 4;

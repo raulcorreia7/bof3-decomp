@@ -5,7 +5,7 @@ MATCH void func_801F507C(void) {
     s32 steps;
 
     delta = 0x1F - g_SpadWork->unk_09;
-    steps  = delta;
+    steps = delta;
     if (delta < 0) {
         steps = delta + 3;
     }

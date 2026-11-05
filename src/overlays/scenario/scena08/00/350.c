@@ -379,7 +379,7 @@ MATCH void func_801FE12C(void) {
     s32 index;
     u8* item;
 
-    item = &g_VitalItemIds;
+    item  = &g_VitalItemIds;
     index = 0;
     do {
         if (*item == 4) {
