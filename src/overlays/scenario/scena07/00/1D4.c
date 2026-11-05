@@ -314,7 +314,7 @@ MATCH void func_801F9DA8(void) {
     s32 index;
     s8* row;
 
-    row = (s8*)(AREA_WORK + 0x95C);
+    row   = (s8*)(AREA_WORK + 0x95C);
     index = 0;
     do {
         *row = 0;
