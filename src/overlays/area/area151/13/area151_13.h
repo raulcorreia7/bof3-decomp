@@ -10,9 +10,7 @@
 #define D_801F4D04 (D_801F4CE8 + 0x1Cu)
 #define D_801F4D05 (D_801F4CE8 + 0x1Du)
 #define D_801F5468 (D_801F4CE8 + 0x780u)
-#define D_801F5469 (D_801F4CE8 + 0x781u)
-#define D_801F546A (D_801F4CE8 + 0x782u)
-#define D_801F546B (D_801F4CE8 + 0x783u)
+#define AREA_HUD_SPRITE_CELLS D_801F5468
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 

@@ -42,6 +42,7 @@ extern Callback       D_801F5114[2];
 extern Callback       D_801F511C[4];
 extern Callback       D_801F512C[4];
 extern u8             D_801F513C[88];
+#define AREA_HUD_SPRITE_CELLS D_801F513C
 extern WorldMapMarker D_801F5194[6];
 #define AREA_HUD_MASK_TABLE D_801F5194
 extern Callback       D_801F51AC[3];

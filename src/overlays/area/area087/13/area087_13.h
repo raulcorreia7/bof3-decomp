@@ -17,6 +17,7 @@ extern Callback    D_801F5734[];
 extern Callback    D_801F5748[];
 extern Callback    D_801F5760[];
 extern u8          D_801F5770[];
+#define AREA_HUD_SPRITE_CELLS D_801F5770
 extern u8          D_801F5771[];
 extern u8          D_801F5772[];
 extern u8          D_801F5773[];

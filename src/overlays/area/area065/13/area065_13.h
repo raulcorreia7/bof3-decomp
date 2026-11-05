@@ -12,6 +12,7 @@ void Area_SetCellCode(s16 column, s16 row, u8 code);
 extern SVECTOR     D_1F800014[];
 extern s32         D_80145EC4[];
 extern u8          D_801F4DB4[];
+#define AREA_HUD_SPRITE_CELLS ((u8*)D_801F4DB4 + 0x4FC)
 /* The spawn step handler table indexed by the record's step byte. */
 extern Callback    D_801F5274[];
 extern u8          D_801F5288[];

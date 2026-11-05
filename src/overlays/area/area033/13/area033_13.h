@@ -24,6 +24,7 @@ extern void (*D_801F4F80[])(void);
 extern void (*D_801F4F90[])(void);
 /* The map arrow sprite's width, height, u and v per sprite id. */
 extern u8 D_801F4FA0[];
+#define AREA_HUD_SPRITE_CELLS D_801F4FA0
 extern u8 D_801F4FA1[];
 extern u8 D_801F4FA2[];
 extern u8 D_801F4FA3[];

@@ -24,6 +24,7 @@ extern s32         D_80145EC4[];
 /* The payload's data after the last function; the per-state handler tables
  * start at 0x130. */
 extern u8          D_801F4C3C[];
+#define AREA_HUD_SPRITE_CELLS (D_801F4C3C + 0x158)
 extern ScreenPoint D_801F4E10[];
 extern u8          D_801F4E20[];
 extern u8          D_801F4E21[];

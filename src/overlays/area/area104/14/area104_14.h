@@ -16,6 +16,7 @@ extern u8       D_801F6A80[];
 extern u8       D_801F6A90[];
 /* The map arrow sprite's width, height, u and v per sprite id. */
 extern u8       D_801F6AA0[];
+#define AREA_HUD_SPRITE_CELLS D_801F6AA0
 extern u8       D_801F6B10[];
 extern u8       D_801F6B18[];
 
