@@ -52,13 +52,13 @@ MATCH void func_801D1FA0(void) {
     } else {
         D_80148511 = 1;
     }
-    D_801D8EE0                = D_80144DF2;
-    D_801D8EE1                = D_80144DF3;
-    D_801D8EE2                = D_80144DF4;
-    D_801D8EE3                = D_80144DF5;
-    D_801D8EE4                = D_80144DF6;
-    D_801D8EE4                = D_80144DF7;
-    (&D_801D8EE0)[D_8014835E] = slot;
+    D_801D8EE0[0]          = D_80144DF2;
+    D_801D8EE0[1]          = D_80144DF3;
+    D_801D8EE0[2]          = D_80144DF4;
+    D_801D8EE0[3]          = D_80144DF5;
+    D_801D8EE0[4]          = D_80144DF6;
+    D_801D8EE0[4]          = D_80144DF7;
+    D_801D8EE0[D_8014835E] = slot;
 }
 
 MATCH void func_801D2070(void) {

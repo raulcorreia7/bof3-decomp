@@ -11,7 +11,7 @@ NON_MATCHING void func_801D20D0(void) {
     u8* cursor;
     s8  i;
 
-    TEXT_SetVariable(0, 0xC, Item_GetRecord(D_801E6048, D_801E604C));
+    TEXT_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
     cursor                         = &D_80148656;
     g_MenuPanelTasks[0].unk_10     = 0x4B;
     g_MenuPanelTasks[21].unk_00[0] = 0;
@@ -35,7 +35,7 @@ NON_MATCHING void func_801D20D0(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if (g_InputPressed & D_80145AC2) {
-        if ((Item_GetEquipability(D_801E6048, D_801E604C) >> g_CharSlot[D_80144F5A[(s8)*cursor]]) & 1) {
+        if ((Item_GetEquipability(g_ShopItemCategory, g_ShopItemId) >> g_CharSlot[D_80144F5A[(s8)*cursor]]) & 1) {
             for (i = 0; i < (u8)Party_CountOrder(0); i++) {
                 if (i == (s8)D_80148656) {
                     g_MenuPanelTasks[i + 3].state = 3;

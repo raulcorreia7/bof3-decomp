@@ -28,6 +28,15 @@ Input: `TARGET@0xADDRESS` from the task.
    `match.sh`. After a type or signature change also run `tools/sigs.py scan <path>`. Without a
    match, leave a hint above the `INCLUDE_ASM` line: the template tried and the first differing
    instruction.
+6. The split: a match changes the unit's `.c` and, for a name, `config/symbols.toml`. The
+   `config/<target>/splat.yaml` row stays. Change `splat.yaml` only when the split itself is wrong:
+   a span that is the head of a longer function (merge, [order](../../../../docs/matching.md#order-of-work)),
+   code inside a `T_*`/`bin` subsegment or a multi-function unit
+   ([traps](../../../../docs/matching.md#traps)), or a fully matched unit that still has its hex
+   offset name (`git mv` with its row, [unit files](../../../../docs/conventions.md#unit-files)).
+   `splat.yaml` is the target map, so the change needs the owner's grant (AGENTS.md rule 4);
+   without it, report `needs: split <target> <offset> <reason>`. How to edit it:
+   [split](../../../../docs/toolchain.md#split).
 
 Report: `exact` (candidate path, `check-<image>` result), `blocked` (cause, first diff, falsified
 hypotheses with measurements, best score, the one lever that would change it) or `needs`

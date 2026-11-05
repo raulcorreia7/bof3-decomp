@@ -79,8 +79,7 @@ ASSERT_SIZE(MenuPortraitSprite, MASTER_MENU_ATLAS_RECORD_SIZE);
 ASSERT_OFFSET(MenuPortraitSprite, clut_x, 0x02);
 ASSERT_OFFSET(MenuPortraitSprite, clut_y, 0x03);
 
-/* Master skill record: the level byte D_801D4088 compares and the ability
- * byte D_801D4089 reads, both at index (i + master * 0xC). */
+/* Master skill record: one level and the ability it teaches. */
 typedef struct MasterSkill {
     u8 level;
     u8 ability;
@@ -88,23 +87,6 @@ typedef struct MasterSkill {
 
 ASSERT_SIZE(MasterSkill, MASTER_SKILL_SIZE);
 ASSERT_OFFSET(MasterSkill, ability, 0x01);
-
-/* One master's six signed stat bonuses: the hp, ap, power, defense, agility
- * and intellect bonus the master grants. */
-typedef struct SisyouMasterStats {
-    s8 hp;
-    s8 ap;
-    s8 power;
-    s8 defense;
-    s8 agility;
-    s8 intellect;
-} SisyouMasterStats;
-
-ASSERT_SIZE(SisyouMasterStats, MASTER_STATS_STRIDE);
-ASSERT_OFFSET(SisyouMasterStats, power, 0x02);
-ASSERT_OFFSET(SisyouMasterStats, defense, 0x03);
-ASSERT_OFFSET(SisyouMasterStats, agility, 0x04);
-ASSERT_OFFSET(SisyouMasterStats, intellect, 0x05);
 
 /* The shared stock tables are read as rows (2-D) in the master walkers and
  * as raw bytes in the stock-row printers. */
@@ -124,18 +106,19 @@ extern u8                 D_801D3F58[MASTER_MENU_SPRITE_BANK_SIZE];
 extern u8                 D_801D3FE8[MASTER_MENU_SPRITE_090_SIZE];
 extern u8                 D_801D4014[MASTER_MENU_SPRITE_0BC_SIZE];
 extern u8                 D_801D4020[MASTER_MENU_SPRITE_0C8_SIZE];
-extern char               D_801D4038[MASTER_MENU_LABEL_SIZE];      /* "Pwr" */
-extern char               D_801D403C[MASTER_MENU_LABEL_SIZE];      /* "Def" */
-extern char               D_801D4040[MASTER_MENU_LABEL_SIZE];      /* "Int" */
-extern char               D_801D4044[MASTER_MENU_LABEL_SIZE];      /* "Agl" */
+/* D_801D4044 */
+extern u8                 g_MenuLabelAgility[MASTER_MENU_LABEL_SIZE];
 extern char               D_801D4048[MASTER_MENU_LABEL_LONG_SIZE]; /* "Pois" */
 extern char               D_801D4050[MASTER_MENU_LABEL_LONG_SIZE]; /* "Conf" */
 extern MenuPortraitSprite D_801D4058[MASTER_MENU_ATLAS_COUNT];
-extern MasterSkill        D_801D4088[MASTER_COUNT][MASTER_SKILL_COUNT];
-extern SisyouMasterStats  D_801D4154[MASTER_COUNT];
+/* D_801D4088 */
+extern MasterSkill        g_MasterSkills[MASTER_COUNT][MASTER_SKILL_COUNT];
+/* D_801D4154 */
+extern MasterStats        g_MasterStats[MASTER_COUNT];
 extern u8                 D_801D41BA;
 extern u8                 D_801D41BB;
-extern u16                D_801D41BC[MASTER_MENU_MESSAGE_ID_COUNT];
+/* D_801D41BC */
+extern s16                g_MasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT];
 extern Callback           D_801D4204[SISYOU_SUB2_HANDLER_COUNT];
 extern Callback           D_801D421C[SISYOU_SUB3_HANDLER_COUNT];
 extern Callback           D_801D4240[SISYOU_SUB4_HANDLER_COUNT];
@@ -201,7 +184,7 @@ static inline void MasterMenuRequestMasterMessage(u8* state, s32 offset) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;
     }
-    Message_StartAreaMessage((s16)(D_801D41BC[D_801448ED] + offset));
+    Message_StartAreaMessage((s16)(g_MasterMessageIds[D_801448ED] + offset));
     *state = GAME_REQUEST_MESSAGE;
     g_MasterSubStep++;
 }
@@ -211,7 +194,7 @@ static inline void MasterMenuRunActivePanelMessage(u8* state) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;
     }
-    Message_StartAreaMessage((s16)(D_801D41BC[D_801448ED] + 4));
+    Message_StartAreaMessage((s16)(g_MasterMessageIds[D_801448ED] + 4));
     *state       = 2;
     g_MasterStep = 6;
 }

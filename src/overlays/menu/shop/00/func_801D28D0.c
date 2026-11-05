@@ -17,13 +17,13 @@ MATCH void func_801D28D0(void) {
     u8               selected_cursor;
     u8*              counter;
 
-    panel      = (MenuChoicePanel*)&D_8014842C;
-    item_index = panel->group & BYTE_MASK;
-    item_entry = D_801C893C[item_index][panel->group_cursor];
-    D_801E6048 = panel->group;
-    D_801E604C = item_entry;
-    D_80148340 = Item_GetDescription(item_index, (s32)item_entry);
-    D_80148435 = 0;
+    panel              = (MenuChoicePanel*)&D_8014842C;
+    item_index         = panel->group & BYTE_MASK;
+    item_entry         = D_801C893C[item_index][panel->group_cursor];
+    g_ShopItemCategory = panel->group;
+    g_ShopItemId       = item_entry;
+    D_80148340         = Item_GetDescription(item_index, (s32)item_entry);
+    D_80148435         = 0;
     if (D_8014842F == 0) {
         D_80148624     = 1;
         panel_x        = panel->x;
@@ -95,20 +95,20 @@ MATCH void func_801D28D0(void) {
     }
     if (panel->confirm_gate == 0) {
         if ((g_InputPressed & D_80145AC2) != 0) {
-            selected_item = (D_801E604C = D_801C893C[panel->group][panel->group_cursor]);
-            D_801E6048    = panel->group;
-            D_80148628    = panel->x + 7;
-            D_8014862A    = panel->y + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
+            selected_item      = (g_ShopItemId = D_801C893C[panel->group][panel->group_cursor]);
+            g_ShopItemCategory = panel->group;
+            D_80148628         = panel->x + 7;
+            D_8014862A = panel->y + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
             SND_PlayCue(EMI_CUE_ID(1, 3));
-            if (func_801AF494(panel->kind, 0, D_801E6048, D_801E604C) & BYTE_MASK) {
+            if (func_801AF494(panel->kind, 0, g_ShopItemCategory, g_ShopItemId) & BYTE_MASK) {
                 SND_PlayCue(EMI_CUE_ID(1, 3));
-                selected_cursor = panel->group_cursor;
-                D_801E6044      = selected_cursor;
-                D_801E605C      = (s32)D_801C8950[D_801E6048][(s8)selected_cursor];
-                D_801E6050      = 1;
-                D_801E6060      = Shop_GetSellPrice((s32)D_801E6048, (s32)D_801E604C, (s32)D_801E606C);
-                counter         = &D_80148652;
-                *counter        = *counter + 1;
+                selected_cursor    = panel->group_cursor;
+                g_ShopStockIndex   = selected_cursor;
+                g_ShopItemCountMax = (s32)D_801C8950[g_ShopItemCategory][(s8)selected_cursor];
+                g_ShopItemCount    = 1;
+                g_ShopItemPrice    = Shop_GetSellPrice((s32)g_ShopItemCategory, (s32)g_ShopItemId, (s32)D_801E606C);
+                counter            = &D_80148652;
+                *counter           = *counter + 1;
                 return;
             }
             SND_PlayCue(EMI_CUE_ID(1, 7));

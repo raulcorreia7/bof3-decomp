@@ -61,6 +61,7 @@ void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 extern void func_801D1D1C(void);
+extern void func_801D1E34(void);
 extern s32  func_801D2978(void);
 extern s32  func_801D2ADC(void);
 extern void func_801D2C0C(void);
@@ -91,18 +92,22 @@ s32  Party_CountItem(u8 category, u8 item, u8 mode);
 void func_801D3320(MenuPanelTask* task);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 
-extern u8   D_801DA028;
-extern u8   D_801DA029;
-extern u8   D_801DA02A;
-extern u8   D_801DA02B;
-extern u8   D_801DA02C;
-extern u8   D_801DA02D;
-extern u8   D_801DA02E;
-extern u8   D_801DA02F;
-extern u8   D_801DA030;
-extern u8   D_801DA031;
-extern u8   D_801DA032;
-extern u8   D_801DA033;
+/* The item stacks the screen counts and consumes: held[] and used[] follow the same four items. */
+typedef struct MenuStatusItems {
+    /* 0x00 */ u8 held[4];
+    /* 0x04 */ u8 used[4];
+    /* 0x08 */ u8 unk_08; /* nonzero commits the use */
+    /* 0x09 */ u8 unk_09;
+    /* 0x0A */ u8 unk_0A;
+    /* 0x0B */ u8 unk_0B;
+} MenuStatusItems;
+
+ASSERT_OFFSET(MenuStatusItems, used, 0x04);
+ASSERT_SIZE(MenuStatusItems, 12);
+
+/* D_801DA028 */
+extern MenuStatusItems g_MenuStatusItems;
+
 extern void func_801D1CA4(void);
 extern s32  func_801D1E60(void);
 extern void func_801D1EE8(void);

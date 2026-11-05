@@ -99,7 +99,21 @@ MATCH void func_801EF2F8(void) {
 
 INCLUDE_ASM(func_801EF370);
 
-INCLUDE_ASM(func_801EFA54);
+MATCH void func_801EFA54(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+
+    PushMatrix();
+    rot.vx = 0;
+    rot.vy = 0;
+    rot.vz = 0;
+    if (g_SpadWork->slot == 0xC) {
+        rot.vz = (g_FrameCount & 0xF) << 8;
+    }
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_SpadWork);
+}
 
 INCLUDE_ASM(func_801EFB2C);
 
@@ -113,7 +127,18 @@ MATCH void func_801F020C(void) {
     GFX_AddPrim(4, 0xC);
 }
 
-INCLUDE_ASM(func_801F02F4);
+MATCH void func_801F02F4(void) {
+    PartyBattler* work;
+
+    work = g_SpadWork;
+    if (work->word_08.byte.timer_0A == 0) {
+        work->word_08.byte.unk_09  = 8;
+        work->word_3C.half.span_3E = work->word_3C.half.span_3E + 0x200;
+        Bmagic_NextStep();
+    } else {
+        work->word_08.byte.timer_0A = work->word_08.byte.timer_0A - 1;
+    }
+}
 
 #ifdef NON_MATCHING
 MATCH void func_801F034C(void) {
