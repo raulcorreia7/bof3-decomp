@@ -571,7 +571,7 @@ MATCH s32 func_801F96CC(void) {
     return 0;
 }
 
-#include "overlays/scenario/Scene_SetPartyRyuTeepoRei.h"
+#include "overlays/scenario/Scene_SetPartyRyuYoungTeepoRei.h"
 
 MATCH void func_801F9720(void) {
 }

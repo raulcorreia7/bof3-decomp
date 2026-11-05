@@ -149,7 +149,7 @@ INCLUDE_ASM(func_801FB648);
 
 INCLUDE_ASM(func_801FB84C);
 
-MATCH void func_801FBD2C(void) {
+MATCH void Scene_JoinPartyRyuAdultReiNinaAdult(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0);
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
@@ -157,11 +157,11 @@ MATCH void func_801FBD2C(void) {
     Party_JoinMember(CHAR_ID_NINA_ADULT);
 }
 
-MATCH void func_801FBD78(void) {
+MATCH void Scene_SetPartyRyuAdultReiPeco(void) {
     SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_PECO);
 }
 
-MATCH void func_801FBDC4(void) {
+MATCH void Scene_SetPartyRyuAdultMomoPeco(void) {
     SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_PECO);
 }
 
@@ -189,7 +189,7 @@ MATCH void func_801FBFA8(void) {
     D_80144F5F    = 5;
 }
 
-MATCH void func_801FC020(void) {
+MATCH void Scene_SetPartyRyuAdultGarrPeco(void) {
     SCENE_SET_PARTY(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO);
 }
 

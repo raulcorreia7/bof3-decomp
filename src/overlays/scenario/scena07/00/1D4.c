@@ -463,7 +463,7 @@ MATCH void func_801FDAFC(void) {
 
 #include "overlays/scenario/Scene_SetPartyRyuYoungNinaYoungMomo.h"
 
-MATCH void func_801FDB80(void) {
+MATCH void Scene_SetPartyRyuYoungNinaYoungGarr(void) {
     SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR);
 }
 

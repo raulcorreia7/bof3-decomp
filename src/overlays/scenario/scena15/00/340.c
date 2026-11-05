@@ -433,7 +433,7 @@ MATCH void func_801FE49C(void) {
     func_801C1630();
 }
 
-MATCH void func_801FE4CC(void) {
+MATCH void Scene_SetPartyRyuAdultNinaAdultGarr(void) {
     SCENE_SET_PARTY(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_GARR);
 }
 

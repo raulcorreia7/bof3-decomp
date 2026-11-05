@@ -197,7 +197,7 @@ INCLUDE_ASM(func_801FE00C);
 
 INCLUDE_ASM(func_801FE2B0);
 
-MATCH void func_801FE314(void) {
+MATCH void Scene_JoinPartyRyuAdultGarrNinaAdult(void) {
     SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_NINA_ADULT);
 }
 
