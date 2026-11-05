@@ -3,7 +3,7 @@
 MATCH void func_801F30AC(void) {
     u16 count;
 
-    count = g_SpadWork->unk_30 - 0x10;
+    count              = g_SpadWork->unk_30 - 0x10;
     g_SpadWork->unk_30 = count;
     if ((s16)count <= 0) {
         if (g_GameStateIndex == 0) {
