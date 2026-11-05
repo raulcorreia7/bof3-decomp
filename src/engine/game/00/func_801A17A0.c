@@ -38,6 +38,6 @@ stored:
     } else {
         result = 1;
     }
-    g_ScriptWorkRecord = (s8*)g_CurrentActor;
+    g_ScriptWorkRecord = g_CurrentActor;
     return result;
 }

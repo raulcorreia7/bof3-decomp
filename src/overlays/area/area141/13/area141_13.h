@@ -19,6 +19,9 @@ extern Callback D_801F47E8[];
 extern Callback D_801F4DC4[];
 extern Callback D_801F4DCC[];
 
+/* func_80196718 */
+void GFX_FreePaletteFadeTarget(void* target);
+
 extern u8 D_801F4DBC[];
 void      func_801F4300(u8* table, s32 arg);
 
