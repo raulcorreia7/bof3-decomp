@@ -413,7 +413,20 @@ MATCH void func_801D5E30(void) {
     }
 }
 
-INCLUDE_ASM(func_801D5E94);
+MATCH void func_801D5E94(void) {
+    s8 count;
+    u8 check;
+
+    count      = (u8)D_801DB0C4 - 1;
+    D_801DB0C4 = count;
+    Menu_DrawHeaderBar(0x14, (0x10 - ((count & 0xFF) * 8)) & 0xFFF8, 0x118, 0x13, (s32)D_80144952);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
+    check = D_801DB0C4;
+    if (check == 0) {
+        D_801F294D += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D5F7C);
 
