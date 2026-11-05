@@ -8,7 +8,7 @@ MATCH void func_801F34D4(void) {
     u8            selection;
     s32           result;
 
-    g_SpadWork = (u8*)&g_BattlePartyBattlers[1];
+    g_SpadWork = (struct Task*)&g_BattlePartyBattlers[1];
     index      = D_80144F5A[1];
     y          = g_BattlePartyBattlers[1].unk_30.signed_half;
     x          = g_BattlePartyBattlers[1].unk_2E.signed_half;

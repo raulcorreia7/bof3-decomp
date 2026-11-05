@@ -14,11 +14,11 @@ MATCH void func_801E7000(void) {
     func_801E6784(D_801ED7E8, 0xA8, 0x2B);
     Menu_DrawWindowFrame(0x12, 0x61, 0x24, 0x11);
     Start_DrawNameEntryGrid(D_801ED7E8, 0x18, 0x67);
-    g_SpadWork[9] = g_SpadWork[9] + 1;
-    if (g_SpadWork[9] >= 0xA) {
-        g_SpadWork[9] = 0;
-        g_SpadWork[6] = (g_SpadWork[6] + 1) & 7;
-        Actor_SelectScript((g_SpadWork[6] + 8) & BYTE_MASK);
+    SPAD_WORK_BYTES[9] = SPAD_WORK_BYTES[9] + 1;
+    if (SPAD_WORK_BYTES[9] >= 0xA) {
+        SPAD_WORK_BYTES[9] = 0;
+        SPAD_WORK_BYTES[6] = (SPAD_WORK_BYTES[6] + 1) & 7;
+        Actor_SelectScript((SPAD_WORK_BYTES[6] + 8) & BYTE_MASK);
     }
     Area_AddActor();
     func_8014D978();

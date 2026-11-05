@@ -3,6 +3,6 @@
 MATCH void func_800C1CDC(void) {
     if (g_BattleCurrentEnemy->hp_94 == 0xFFFF) {
         g_BattleActionType = 3;
-        g_SpadWork[4]      = 0;
+        SPAD_WORK_BYTES[4] = 0;
     }
 }

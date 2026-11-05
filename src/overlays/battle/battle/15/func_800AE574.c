@@ -25,7 +25,7 @@ MATCH void func_800AE574(void) {
     second->word_3C.word   = source->word_3C.word;
     func_800AF764();
 
-    third                   = g_SpadWork;
+    third                   = SPAD_WORK_BYTES;
     FIELD(u32, third, 0x10) = -0xE;
     /* FAKE: holds the work store ahead of the field reloads. */
     MATCH_FAKE_BARRIER();

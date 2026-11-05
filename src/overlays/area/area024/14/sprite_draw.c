@@ -833,7 +833,7 @@ MATCH s32 func_801F3E48(u8 shade) {
 
     vec        = D_801F2C04;
     saved      = (volatile Area024Scratch*)g_SpadWork;
-    g_SpadWork = (u8*)&D_80147A58;
+    g_SpadWork = (struct Task*)&D_80147A58;
     PushMatrix();
 
     mtxp  = &matrix;
@@ -883,5 +883,5 @@ MATCH s32 func_801F3E48(u8 shade) {
     }
 
     PopMatrix();
-    g_SpadWork = (u8*)saved;
+    g_SpadWork = (struct Task*)saved;
 }

@@ -1404,9 +1404,11 @@ One name per address per image. A second name for one address (a width or `volat
 macro, not a second `extern`. A cast macro that names the object itself keeps the bytes
 (`#define g_SpadWork ((T *)g_SpadWork)`); an address-taking view hoists the address and changes them.
 
-- `g_SpadWork` is one `extern u8 *g_SpadWork;` in `include/psx/mem.h`. Each mode header views it as
-  its work record through a cast macro. An image that reads it as `volatile` defines
-  `SPAD_WORK_VOLATILE` before the first include.
+- `g_SpadWork` is the pointer cell at `0x1F800044`: one `extern struct Task *g_SpadWork;` in
+  `include/psx/mem.h`. `struct Task` is incomplete, so no member is reachable without a view. Each
+  mode header views the cell as its work record through a cast macro. Code with no record type reads
+  bytes through `SPAD_WORK_BYTES[n]`, and assigns the cell with `(struct Task *)`. An image that reads
+  it as `volatile` defines `SPAD_WORK_VOLATILE` before the first include.
 
 #### Order-sensitive macros
 
@@ -1563,7 +1565,7 @@ edit: the link finds the address by itself, with no per-image list to extend and
 
 ```toml
 ["exe/slus_004_22"]
-g_SpadWork = { addr = 0x1F800000, type = "SpadWork", size = 0x400, source = "..." }
+g_SpadWork = { addr = 0x1F800044, size = 0x4, source = "..." }
 ```
 
 Rows are written in address order. Keys: `addr`; `type` and `size` for splat; `source` (the evidence);

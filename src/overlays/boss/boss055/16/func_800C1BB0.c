@@ -2,5 +2,5 @@
 
 MATCH void func_800C1BB0(void) {
     func_800A9820(g_BattleTargetSelector);
-    g_SpadWork[2]++;
+    SPAD_WORK_BYTES[2]++;
 }

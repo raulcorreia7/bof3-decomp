@@ -42,9 +42,9 @@ MATCH void func_801D62DC(void) {
         if (g_PartySize != 0) {
             base = selection * 0x30;
             do {
-                g_SpadWork = (u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE;
+                g_SpadWork = (struct Task*)((u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE);
                 func_801C1254(D_80145F09[i * BATTLE_PARTY_STRIDE], i);
-                Actor_SelectScript(g_SpadWork[8]);
+                Actor_SelectScript(SPAD_WORK_BYTES[8]);
                 offset                               = i * 0x10 + base;
                 ((ShopSelection*)g_SpadWork)->unk_34 = FIELD(s32, &D_801E537C, offset);
                 ((ShopSelection*)g_SpadWork)->unk_38 = FIELD(s32, &D_801E5380, offset);

@@ -31,14 +31,14 @@ MATCH void func_801DE944(void) {
         if (i < g_PartySize) {
             row = 0;
             do {
-                g_SpadWork = (u8*)g_BattlePartyBattlers + row;
+                g_SpadWork = (struct Task*)((u8*)g_BattlePartyBattlers + row);
                 func_801C1254(D_80145F09[row], i);
-                Actor_SelectScript(g_SpadWork[8]);
+                Actor_SelectScript(SPAD_WORK_BYTES[8]);
                 if (D_8014504A != 0) {
                     ACTOR_SET_STEP(0);
-                    g_SpadWork[2] = 0;
-                    g_SpadWork[3] = 0;
-                    g_SpadWork[4] = 0;
+                    SPAD_WORK_BYTES[2] = 0;
+                    SPAD_WORK_BYTES[3] = 0;
+                    SPAD_WORK_BYTES[4] = 0;
                 }
                 row += BATTLE_PARTY_STRIDE;
                 i++;
@@ -54,17 +54,17 @@ MATCH void func_801DE944(void) {
             func_80153DE8();
         }
     } else {
-        g_SpadWork               = actor - 0x79;
+        g_SpadWork               = (struct Task*)(actor - 0x79);
         g_PartySize              = 1;
         D_80145E95               = 0;
         *(Character*)(actor - 5) = *(Character*)(party - 0x5F2);
-        g_SpadWork[0x48]         = 0;
+        SPAD_WORK_BYTES[0x48]    = 0;
         func_801C1254(D_80145F09[0], 0);
-        Actor_SelectScript(g_SpadWork[8]);
+        Actor_SelectScript(SPAD_WORK_BYTES[8]);
         ACTOR_SET_STEP(0);
-        g_SpadWork[2] = 0;
-        g_SpadWork[3] = 0;
-        g_SpadWork[4] = 0;
+        SPAD_WORK_BYTES[2] = 0;
+        SPAD_WORK_BYTES[3] = 0;
+        SPAD_WORK_BYTES[4] = 0;
     }
     if (g_GameAreaId == 133) {
         i = 0;

@@ -10,10 +10,10 @@ MATCH void func_800AE640(void) {
     u16 sum;
     u8  count;
 
-    work = g_SpadWork;
+    work = SPAD_WORK_BYTES;
     if (work[0xA] < 8) {
         work[0xA]++;
-        work = g_SpadWork;
+        work = SPAD_WORK_BYTES;
     }
     step                 = work[9] + 1;
     counter              = *(u32*)(work + 0x10) + 2;
@@ -22,7 +22,7 @@ MATCH void func_800AE640(void) {
     *(u32*)(work + 0x10) = counter;
     *(u16*)(work + 0x30) = sum;
     if (step == 12) {
-        tail                 = g_SpadWork;
+        tail                 = SPAD_WORK_BYTES;
         count                = tail[1];
         *(s32*)(tail + 0x10) = -6;
         tail[1]              = count + 1;

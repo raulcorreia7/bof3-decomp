@@ -4,9 +4,9 @@ MATCH void func_800AD808(void) {
     u8*      work;
     Callback funcs[2] = {func_800AD8D8, func_800AD930};
 
-    work = g_SpadWork;
+    work = SPAD_WORK_BYTES;
     funcs[work[0x02]]();
-    work = g_SpadWork;
+    work = SPAD_WORK_BYTES;
     if (!(work[0x00] & 1)) {
         return;
     }
