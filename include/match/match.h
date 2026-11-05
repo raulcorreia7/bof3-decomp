@@ -204,6 +204,18 @@
 #endif
 
 /*
+ * An empty boundary: splits the schedule at this point without holding any
+ * statement. Same rules as ORDER_LOCK.
+ */
+#if defined(MATCHING)
+#define ORDER_FENCE() \
+    do {              \
+    } while (0)
+#else
+#define ORDER_FENCE() ((void)0)
+#endif
+
+/*
  * Unmatched code/data inclusion for C source. The assembler-side set for the
  * split path lives in `include/match/include_asm.h`; this header is the one
  * game source sees. `ASM_DIR` is the image's one asm folder, passed as

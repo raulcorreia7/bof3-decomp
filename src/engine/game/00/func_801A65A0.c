@@ -17,26 +17,24 @@ MATCH void func_801A65A0(u8* script) {
         func_801A4AA8();
         func_801C1254(script[1], script[0xF]);
         g_Task->flags = ACTOR_FLAG_IN_USE;
-        do {
-            coord_x  = script[5] << 16;
-            slot_off = *counter * ACTOR_SIZE;
-            work     = g_Task;
-            if (script[4] != 0) {
-                coord_x |= 0x8000;
-            }
-            work->x.fixed           = coord_x;
-            D_80146908[*counter][0] = coord_x;
-            /* FAKE: barrier pins the x store before the y loads. */
-            MATCH_BARRIER();
-            D_8014690C[*counter][0] = work->y.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
-            /* FAKE: forces the counter re-read before the next shadow store. */
-            MATCH_BARRIER();
-            D_80146910[*counter][0] = 0;
-            dist                    = Area_SampleHeight(work->x.fixed, work->y.fixed);
-            record                  = g_Task;
-            record->z.part.integer  = (u16)dist;
-            record->mode            = script[8];
-        } while (0);
+        coord_x       = script[5] << 16;
+        slot_off      = *counter * ACTOR_SIZE;
+        work          = g_Task;
+        if (script[4] != 0) {
+            coord_x |= 0x8000;
+        }
+        work->x.fixed           = coord_x;
+        D_80146908[*counter][0] = coord_x;
+        /* FAKE: barrier pins the x store before the y loads. */
+        MATCH_BARRIER();
+        D_8014690C[*counter][0] = work->y.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
+        /* FAKE: forces the counter re-read before the next shadow store. */
+        MATCH_BARRIER();
+        D_80146910[*counter][0] = 0;
+        dist                    = Area_SampleHeight(work->x.fixed, work->y.fixed);
+        record                  = g_Task;
+        record->z.part.integer  = (u16)dist;
+        record->mode            = script[8];
 
         g_Task->step                                   = script[0xA];
         g_Task->direction_08                           = script[0] & 0xF;

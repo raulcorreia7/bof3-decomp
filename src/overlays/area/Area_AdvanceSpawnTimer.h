@@ -32,16 +32,14 @@ MATCH void Area_AdvanceSpawnTimer(void) {
         y          = g_Task->unk_68;
         g_Task->vx = -0x1000;
         g_Task->vy = -0x400;
-        do {
-        } while (0); /* FAKE: the empty loop keeps the unk_01/unk_6C loads below the constant stores. */
+        ORDER_FENCE(); /* FAKE: the order fence keeps the unk_01/unk_6C loads below the constant stores. */
         t               = g_Task->mode;
         z               = g_Task->unk_6C;
         t               = t + 1;
         g_Task->unk_18  = x;
         g_Task->unk_1C  = y;
         g_Task->gravity = z;
-        do {
-        } while (0); /* FAKE: the empty loop keeps the byte store last in retail's schedule. */
+        ORDER_FENCE(); /* FAKE: the order fence keeps the byte store last in retail's schedule. */
         g_Task->mode = t;
     }
 }

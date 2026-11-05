@@ -43,13 +43,13 @@ NON_MATCHING void func_8009FB38(void) {
         }
         func_800AAA74();
         active_count = &g_BattlePartyCount;
-        do {
+        ORDER_LOCK_BEGIN
             for (row_index = 0; ((u32)(row_index & BYTE_MASK)) < (*active_count); row_index++) {
                 row_offset = (row_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
                 memcpy(&D_80145F04[row_offset + 0x1C], &D_80145F04[row_offset + 0x3C], 0x20);
             }
             row_index = 0;
-        } while (0);
+        ORDER_LOCK_END;
         func_800A4458();
         if (g_BattlePartyCount != 0) {
             do {

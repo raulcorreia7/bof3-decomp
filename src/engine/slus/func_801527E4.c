@@ -18,9 +18,9 @@ MATCH void func_801527E4(void) {
         func_801F2C04();
         return;
     }
-    /* do-while (0) around the x step and one local for the x position, then the y distance: together they give
+    /* FAKE: the order lock around the x step and one local for the x position, then the y distance: together they give
      * both steps the retail register homes. */
-    do {
+    ORDER_LOCK_BEGIN
         value = D_80149310;
         dist  = 0x800000 - ((value + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF);
         if (dist != 0) {
@@ -34,7 +34,7 @@ MATCH void func_801527E4(void) {
             D_80149336 -= step_x;
             g_AreaTileRemainderY -= step_x;
         }
-    } while (0);
+    ORDER_LOCK_END;
     value = 0x800000 - (D_80149314 << 8) - (g_AreaScrollTargetY & ~0x7FFF);
     if (value != 0) {
         g_AreaCameraMoving = 1;

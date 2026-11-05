@@ -20,10 +20,10 @@ MATCH s32 func_801C7608(s16 x0, s16 y0, s16 x1, s16 y1) {
         x1  = tmp;
         tmp = y0;
         y0  = y1;
-        /* FAKE: do-while(0) scope steers regalloc */
-        do {
+        /* FAKE: the order lock steers regalloc */
+        ORDER_LOCK_BEGIN
             y1 = tmp;
-        } while (0);
+        ORDER_LOCK_END;
     }
     if (x0 != x1) {
         if (y0 == y1) {

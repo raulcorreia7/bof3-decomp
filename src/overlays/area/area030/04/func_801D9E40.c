@@ -36,10 +36,10 @@ MATCH void func_801D9E40(void) {
                 D_801E3204 = 0;
             }
             FISHING_STATE->mode_index_02 = 2;
-            /* FAKE: do-while(0) scope steers regalloc */
-            do {
+            /* FAKE: the order lock steers regalloc */
+            ORDER_LOCK_BEGIN
                 FISHING_STATE->sub_index_03 = 0;
-            } while (0);
+            ORDER_LOCK_END;
             break;
         case PADL1:
             D_80144125                   = 7;

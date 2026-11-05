@@ -26,7 +26,7 @@ NON_MATCHING s32 func_801F2F34(void) {
      * store. */
     MATCH_FAKE_USE(base);
     record = g_ScriptWorkRecord;
-    do {
+    ORDER_LOCK_BEGIN
         record->unk_7E = 0;
         record         = (Actor*)((s32)record - base);
         step           = ((s32)(-(((s32)record) * 0xD79435E5))) >> 3;
@@ -34,7 +34,7 @@ NON_MATCHING s32 func_801F2F34(void) {
         /* FAKE: barrier keeps the D_801448EB/D_801448ED stores in statement
          * order after the row store. */
         MATCH_FAKE_BARRIER();
-    } while (0);
+    ORDER_LOCK_END;
     step       = 5;
     D_801448EB = request;
     /* FAKE: barrier keeps the D_801448ED store after the D_801448EB store. */

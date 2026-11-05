@@ -37,9 +37,6 @@ MATCH void func_801D7E4C(void) {
     old     = *cursor;
     if (buttons & PADLup) {
         *cursor -= 1;
-        /* FAKE: empty do-while(0) scope steers regalloc */
-        do {
-        } while (0);
         if ((s8)*cursor < 0) {
             *cursor = count - 1;
         }

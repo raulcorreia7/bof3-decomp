@@ -67,6 +67,7 @@ endif
 
 run_target('check-tree', command: [tools / 'check_tree.sh'])
 run_target('include-asm', command: [tools / 'check_asm.sh'])
+run_target('check-plain', command: [tools / 'check_plain.sh'])
 format_sh = find_program(tools / 'format.sh')
 run_target('format', command: [format_sh])
 run_target('format-check', command: [format_sh, '--check'])

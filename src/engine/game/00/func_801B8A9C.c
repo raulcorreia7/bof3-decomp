@@ -46,14 +46,14 @@ loop_top:
                 found++;
             }
             if (found == 2) {
-                /* FAKE: do-while(0) scope steers regalloc */
-                do {
+                /* FAKE: the order lock steers regalloc */
+                ORDER_LOCK_BEGIN
                     found = 1;
                     if (vals[1] < vals[0]) {
                         vals[0] = vals[1];
                         route   = index_copy;
                     }
-                } while (0);
+                ORDER_LOCK_END;
             }
         }
     }

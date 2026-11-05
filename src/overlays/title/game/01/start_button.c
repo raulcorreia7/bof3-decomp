@@ -17,7 +17,7 @@ MATCH void UI_HandleStartButton(void) {
     u16* timer      = (u16*)(front_gate - 0x13);
 
     /* FAKE: block boundary after the base setup keeps the field addresses off the gate base. */
-    ORDER_LOCK((void)0);
+    ORDER_FENCE();
     if (*front_gate != 0u) {
         if ((g_InputPressed & INPUT_START) != 0u) {
             if (EMI_LoaderIsReady()) {

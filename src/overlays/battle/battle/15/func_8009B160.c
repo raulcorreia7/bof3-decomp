@@ -8,13 +8,13 @@ MATCH void func_8009B160(void) {
     u8  slot_index;
     u8  tail_index;
 
-    /* FAKE: do-while(0) scope steers regalloc */
-    do {
+    /* FAKE: the order lock steers regalloc */
+    ORDER_LOCK_BEGIN
         one   = 1;
         eight = 8;
         slot  = g_BattleMessageSlot;
         three = 3;
-    } while (0);
+    ORDER_LOCK_END;
 
     D_801485B9          = eight;
     D_801485B8          = one;

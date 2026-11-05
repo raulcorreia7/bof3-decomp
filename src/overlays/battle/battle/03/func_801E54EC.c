@@ -27,7 +27,7 @@ MATCH void func_801E54EC(void) {
     g_Task->flags = g_Task->flags | ACTOR_FLAG_HIDDEN;
     acc           = &D_8014632C;
     *acc += ENEMY_STEP->damage_hi;
-    do {
+    ORDER_LOCK_BEGIN
         D_80146330 += ENEMY_STEP->damage;
         ENEMY_STEP->pending = ENEMY_STEP->pending | 0x4000;
         ENEMY_STEP->damage  = 0;
@@ -48,6 +48,6 @@ MATCH void func_801E54EC(void) {
         Battle_ClearSlotPending(g_Task->slot);
         g_Task->mode = 2;
         g_Task->step = 0;
-    } while (0);
+    ORDER_LOCK_END;
     g_Task->unk_03 = 0;
 }

@@ -14,8 +14,8 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s3
     clut = (u8)shaded ? 7 : 0;
     UI_DrawWindow((px + 3) & HALF_MASK, (py + 3) & HALF_MASK, 125, 48, (u8)shaded, CHARACTER_BLOCK->window_style);
     x = px;
-    /* AID: a do-while(0) scope steers the register homes of x, y and stats. */
-    do {
+    /* AID: a the order lock steers the register homes of x, y and stats. */
+    ORDER_LOCK_BEGIN
         y = py;
         px += 0x56;
         py += 2;
@@ -25,7 +25,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s3
                                    (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
         text_clut = clut & BYTE_MASK;
         UI_DrawText((s16)(x + 20), (s16)(y + 3), text_clut, 5, stats);
-    } while (0);
+    ORDER_LOCK_END;
     sprintf(g_UiFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
     UI_DrawGlyphString(x + 22, text_y, text_clut, g_UiFormatBuffer);

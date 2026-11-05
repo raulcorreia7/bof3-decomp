@@ -1116,14 +1116,15 @@ behavior C cannot express; `include/match/match.h` defines them and they are ine
 matching build. Try in order: correct types and signedness, the original control flow, temporary
 lifetimes and declaration order, casts and grouping, the unit's compiler profile, then a helper.
 
-| Group   | Helpers                                                                                                                                                                                                                   |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| benign  | `MATCH_VOLATILE`, `MATCH_VOLATILE_PTR`, `MATCH_FAKE_BARRIER`/`MATCH_BARRIER`, `ORDER_LOCK`/`ORDER_LOCK_BEGIN`…`ORDER_LOCK_END`, `STACK_PADS` (retail frame bytes nothing explains), `MATCH_FAKE_HOLD`, `NO_SIBLING_CALLS` |
-| harmful | `MATCH_FAKE_PIN`/`MATCH_REG` (register pin), `CLOBBER_*`, `MATCH_FAKE_OPAQUE`/`MATCH_FAKE_USE`                                                                                                                            |
+| Group   | Helpers                                                                                                                                                                                                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| benign  | `MATCH_VOLATILE`, `MATCH_VOLATILE_PTR`, `MATCH_FAKE_BARRIER`/`MATCH_BARRIER`, `ORDER_LOCK`/`ORDER_LOCK_BEGIN`…`ORDER_LOCK_END`/`ORDER_FENCE`, `STACK_PADS` (retail frame bytes nothing explains), `MATCH_FAKE_HOLD`, `NO_SIBLING_CALLS` |
+| harmful | `MATCH_FAKE_PIN`/`MATCH_REG` (register pin), `CLOBBER_*`, `MATCH_FAKE_OPAQUE`/`MATCH_FAKE_USE`                                                                                                                                          |
 
 Each use carries an adjacent `/* FAKE: <reason>. */`; a dummy local counts as one, and its note
 carries the best pure-C score. `ORDER_LOCK(stmt)` holds one statement; a run of statements goes
-between `ORDER_LOCK_BEGIN` and `ORDER_LOCK_END;` instead of inside the macro's argument. Prefer benign over harmful: a pointer local, a
+between `ORDER_LOCK_BEGIN` and `ORDER_LOCK_END;` instead of inside the macro's argument. `ORDER_FENCE()` is the empty boundary; write it instead of a bare `do { } while (0);`. Every
+helper compiles away without `MATCHING`, and `check-plain` proves the sources build that way. Prefer benign over harmful: a pointer local, a
 recomputed address or a statement reorder usually moves the allocator before a pin does. A raw
 `__asm__`, a bare `register ... asm("reg")` or a `.word` is not source.
 
