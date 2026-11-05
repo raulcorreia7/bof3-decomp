@@ -21,7 +21,6 @@ MATCH void func_801F2C04(void) {
     u8  weight;
     s32 i;
     s32 pick;
-    s32 offset;
     s32 y;
 
     roll  = rand() & 0x3F;
@@ -41,16 +40,12 @@ pick_weight:
         }
     }
     if (count < 8) {
-        pick   = rand();
-        offset = count * (ACTOR_SIZE / 8);
-        /* FAKE: retail keeps the nineteen-times step live across the pick
-         * mask. */
-        MATCH_FAKE_USE(offset);
-        pick                           = (pick & 7) * 2;
-        g_Actors[count].x.fixed        = D_801F2DBC[pick] << 16;
-        y                              = D_801F2DBD[pick] << 16;
-        g_Actors[count].y.fixed        = y;
-        g_Actors[count].z.part.integer = Area_SampleHeight(g_Actors[count].x.fixed, y);
+        pick                       = rand();
+        g_Actors[count].x.fixed    = D_801F2DBC[(pick & 7) * 2] << 16;
+        y                          = D_801F2DBD[(pick & 7) * 2] << 16;
+        g_Actors[count].y.fixed    = y;
+        g_Actors[count].z.part.integer =
+            Area_SampleHeight(g_Actors[count].x.fixed, y);
     }
     D_80143F22 = D_80145FB8 - 5;
 }
