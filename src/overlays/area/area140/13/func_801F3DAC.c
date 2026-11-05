@@ -1,4 +1,18 @@
 #include "area140_13.h"
 
-/* resume: best 5 differing (the kept selector andi shapes: `u8 flag; u16 word = flag;` with the sub on the raw register keeps `andi v1,v1,0xFF` but hoists it before the branch where retail keeps it in the bnez delay slot); first mismatch +0x14 (lui v1 vs v0, the load register); next lever: place `word = flag` in the second test's arm so dbr fills the delay slot, then the permuter. */
-INCLUDE_ASM(func_801F3DAC);
+MATCH void func_801F3DAC(void) {
+    /* FAKE: retail keeps the actor row pointer in v0; pure C best 5 differing. */
+    MATCH_REG(Actor*, work, "v0");
+    u8  flag;
+    u16 word;
+    u32 near_five;
+
+    work = g_CurrentActor;
+    work->flags_74 &= 0xFE;
+    flag = D_80145F09[0][0];
+    if (((near_five = (u32)(flag - 5) < 2U), (word = flag), near_five) || ((word & 0xFF) == 7)) {
+        SYS_SetFlag(g_SceneEventFlags, 0x54U);
+        Area_SetCellPalette(2, 7);
+        g_SpadWork->flags_00 = 0;
+    }
+}
