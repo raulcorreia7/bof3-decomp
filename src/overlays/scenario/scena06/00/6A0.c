@@ -200,7 +200,17 @@ MATCH void func_801FD1C8(void) {
     D_80146874 = 0x10;
 }
 
-INCLUDE_ASM(func_801FD234);
+MATCH void func_801FD234(void) {
+    Game_SetScriptActive();
+    *g_ScriptVars = 0;
+    D_80146865    = 0;
+    if (SYS_TestFlag(g_SceneFlags, 0x23) != 0) {
+        D_80146875 = 0x14;
+    } else {
+        D_80146875 = 0xA;
+    }
+    D_80146874 = 0x10;
+}
 
 MATCH s32 func_801FD294(void) {
     return 0;
