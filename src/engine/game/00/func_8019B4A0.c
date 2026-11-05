@@ -13,7 +13,7 @@ MATCH void func_8019B4A0(void) {
             if ((func_8019C1E4() & BYTE_MASK) == 0) {
                 ((void (*)(s16, s16, s32))Area_SetCellCode)(g_Task->x.part.integer, g_Task->y.part.integer,
                                                             g_Task->unk_0B);
-                g_Task->unk_0A = (u8)((g_Task->unk_0A + 1) >> 1);
+                g_Task->unk_0A = ((g_Task->unk_0A + 1) >> 1);
                 vx             = g_FacingOffsets[g_Task->direction_08].x;
                 span           = (g_Task->unk_0A - 1) * 0xC00;
                 g_Task->vx     = vx * 4;

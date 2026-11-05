@@ -7,7 +7,7 @@ MATCH void func_8019B1E8(void) {
 
     if (func_8014DAEC() & BYTE_MASK) {
         count          = g_Task->unk_09 - 1;
-        g_Task->unk_09 = (u8)count;
+        g_Task->unk_09 = count;
         if ((count & BYTE_MASK) == 0) {
             g_Task->mode = 2;
         }

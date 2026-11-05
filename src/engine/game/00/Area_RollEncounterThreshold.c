@@ -66,7 +66,7 @@ MATCH void Area_RollEncounterThreshold(u32 keep_armed) {
     }
     goto store;
 check:
-    if ((u16)D_80145FB8 < (u32)(total & BYTE_MASK))
+    if (D_80145FB8 < (total & BYTE_MASK))
         return;
 store:
     D_80145FB8 = total & BYTE_MASK;

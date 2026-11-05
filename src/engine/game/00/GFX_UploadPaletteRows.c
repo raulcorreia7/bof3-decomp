@@ -34,14 +34,14 @@ MATCH void GFX_UploadPaletteRows(void) {
         start = quotient;
     }
     color_index = 1u;
-    if (color_index < ((u32)s_PaletteFadeColorCounts[table_index] << 4)) {
+    if (color_index < (s_PaletteFadeColorCounts[table_index] << 4)) {
         colors    = g_GraphicsPaletteDst + (start & BYTE_MASK) * 256u;
         cell_base = product & BYTE_MASK;
         loop_work = work;
         do {
             colors[cell_base + color_index] |= 0x8000u;
             color_index++;
-        } while (color_index < ((u32)s_PaletteFadeColorCounts[loop_work[0x28]] << 4));
+        } while (color_index < (s_PaletteFadeColorCounts[loop_work[0x28]] << 4));
     }
     g_GfxPalettePending = 1u;
 }

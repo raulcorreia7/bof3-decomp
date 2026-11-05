@@ -4,7 +4,7 @@ MATCH void func_8019CEDC(void) {
     Actor* work;
     s32    moved;
 
-    g_Task->unk_09 = (u8)(g_Task->unk_09 - 1);
+    g_Task->unk_09 = (g_Task->unk_09 - 1);
     work           = g_Task;
     work->x.fixed += work->vx;
     moved         = work->y.fixed + work->vy;

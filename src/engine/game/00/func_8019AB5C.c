@@ -11,5 +11,5 @@ MATCH void func_8019AB5C(void) {
         Actor_Clear();
         return;
     }
-    work->unk_09 = (u8)(value - 1);
+    work->unk_09 = (value - 1);
 }

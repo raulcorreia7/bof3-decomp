@@ -37,8 +37,8 @@ MATCH void func_8019BBA4(void) {
             }
         }
     }
-    dist = (s16)Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
-    if (dist < (s16)g_Task->z.part.integer) {
+    dist = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
+    if (dist < g_Task->z.part.integer) {
         g_Task->gravity = -8;
     } else {
         g_Task->gravity = 0;
@@ -47,8 +47,8 @@ MATCH void func_8019BBA4(void) {
     g_Task->vz += g_Task->gravity;
     g_Task->z.part.integer += g_Task->vz;
     if ((func_8019C028() & BYTE_MASK) == 0) {
-        if ((s16)g_Task->z.part.integer < dist) {
-            g_Task->z.part.integer = (u16)Area_SampleHeight(x, y);
+        if (g_Task->z.part.integer < dist) {
+            g_Task->z.part.integer = Area_SampleHeight(x, y);
             g_Task->vz             = 0;
             g_Task->gravity        = 0;
         }

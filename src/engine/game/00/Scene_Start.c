@@ -9,8 +9,8 @@ MATCH void Scene_Start(u8 scenario_index) {
 
     none_sel           = 0xFFFFu;
     state              = &g_SceneState;
-    state->scenario_id = (s8)scenario_index;
-    index8             = (s32)((s8)scenario_index) * 8;
+    state->scenario_id = scenario_index;
+    index8             = ((s8)scenario_index) * 8;
     base               = g_SceneFlagWords;
     state->mode_02     = 0u;
     state->unk_03      = 0u;
@@ -21,7 +21,7 @@ MATCH void Scene_Start(u8 scenario_index) {
     state->unk_08      = 0u;
 
     *(u32*)(base + index8) = 0u;
-    g_SceneFlags           = (u32*)(base + ((s32)state->scenario_id * 8));
+    g_SceneFlags           = (u32*)(base + (state->scenario_id * 8));
     ready_phase            = GAME_REQUEST_AREA_CHANGE;
     Scene_RequestOverlay();
 

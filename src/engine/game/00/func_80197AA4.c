@@ -12,7 +12,7 @@ MATCH void func_80197AA4(void) {
     s8            dy;
     s32           span;
 
-    ready = (u8)func_801BEE5C();
+    ready = func_801BEE5C();
     func_801A06D8();
     func_801992B8();
     if (ready != 0) {
@@ -24,9 +24,9 @@ MATCH void func_80197AA4(void) {
             *coord_a = *coord_a + D_801C7B74[index].dx;
             dy       = D_801C7B74[index].dy;
             MATCH_BARRIER(); /* FAKE: keeps the delta load before the span math. */
-            span                   = (s32)D_801CD954;
+            span                   = D_801CD954;
             g_AreaCameraStep       = 0x40;
-            span                   = span - (s32)g_AreaCameraHeight;
+            span                   = span - g_AreaCameraHeight;
             g_AreaCameraHeightStep = span >> 4;
             coord_b                = (volatile u16*)&D_8014930E;
             sum                    = *coord_b + dy;

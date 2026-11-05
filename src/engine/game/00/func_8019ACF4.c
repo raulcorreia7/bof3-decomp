@@ -11,14 +11,14 @@ MATCH void func_8019ACF4(void) {
     /* FAKE: volatile re-read keeps the direction load before the store.
      */
     step                = FIELD(volatile s32, work, 0x10u);
-    g_AreaCameraOffsetZ = (s16)(pos >> 16);
+    g_AreaCameraOffsetZ = (pos >> 16);
     if (step < 0) {
         if (g_AreaCameraOffsetZ < work->vx) {
-            g_AreaCameraOffsetZ = (s16)work->vx;
+            g_AreaCameraOffsetZ = work->vx;
         }
     } else {
         if (g_AreaCameraOffsetZ > work->vx) {
-            g_AreaCameraOffsetZ = (s16)work->vx;
+            g_AreaCameraOffsetZ = work->vx;
         }
     }
 }

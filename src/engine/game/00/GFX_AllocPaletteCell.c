@@ -15,7 +15,7 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                 SP_REF(u8, 0x01u) = column;
                 switch (mode) {
                     case 0:
-                        return (u8)(column + row * 16u - 0x40u);
+                        return (column + row * 16u - 0x40u);
                     case 1:
                         if (column != 0u) {
                             break;
@@ -29,7 +29,7 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                             end++;
                         }
                         if (end == 0x10u) {
-                            return (u8)(row + (column >> 4) + 0x1Cu);
+                            return (row + (column >> 4) + 0x1Cu);
                         }
                         break;
                     case 2:
@@ -44,7 +44,7 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                             end++;
                         }
                         if (end == column + 2) {
-                            return (u8)(row * 8u + (column >> 1) - 0x20u);
+                            return (row * 8u + (column >> 1) - 0x20u);
                         }
                         break;
                     case 3:
@@ -59,7 +59,7 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                             end++;
                         }
                         if (end == column + 4) {
-                            return (u8)(row * 4u + (column >> 2) + 0x70u);
+                            return (row * 4u + (column >> 2) + 0x70u);
                         }
                         break;
                     case 4:
@@ -74,7 +74,7 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                             end++;
                         }
                         if (end == column + 8) {
-                            return (u8)(row * 2u + (column >> 3) + 0x38u);
+                            return (row * 2u + (column >> 3) + 0x38u);
                         }
                         break;
                     default:

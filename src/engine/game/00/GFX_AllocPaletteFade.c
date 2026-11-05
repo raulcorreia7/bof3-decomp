@@ -15,12 +15,12 @@ MATCH s32 GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_cou
     flagged = value | 0x80;
 loop_1:
     if ((((PaletteFade*)((u8*)D_80145BD4 + offset))->flags & PALETTE_FADE_ACTIVE) == 0) {
-        ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = (u8)value;
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = value;
         if ((color_data[0x28] == 0) && ((color_data[0x24] & 4) == 0)) {
-            ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = (u8)flagged;
+            ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = flagged;
         }
         result                                                 = slot & BYTE_MASK;
-        ((PaletteFade*)((u8*)D_80145BD4 + offset))->step       = GFX_MarkPaletteCells(color_data[0x28], (u8)result, 1);
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->step       = GFX_MarkPaletteCells(color_data[0x28], result, 1);
         tmp_a                                                  = color_data[0x27];
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->saved_byte = tmp_a;
         tmp_b                                                  = color_data[0x28];
