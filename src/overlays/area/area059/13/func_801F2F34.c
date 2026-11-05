@@ -2,14 +2,12 @@
 
 /* Area request handler: Game_SetScriptActive, Actor unk_01/unk_77/unk_7E,
  * the g_Actors row index into D_80146867, then D_801448EB/D_801448ED.
- * Near match: split reload statements (rec1/rec2/rec3 = g_ScriptWorkRecord)
- * plus MATCH_REG(s32, action, "a2"), a step local and two MATCH_FAKE_BARRIER
- * lines reproduce retail through 0x801F2F54 and from 0x801F2F60 on (including
- * the li a2 in the first load-delay slot and the [index][li 5][EB][ED] tail).
- * First differing instruction: retail 0x801F2F5C lui v1, %hi(g_Actors) in the
- * second load-delay slot against a nop; the table-address materialization
- * (reload re-materialized at the subu) lands one slot late whatever its
- * register. Resume: hold the g_Actors address in a pinned local whose
- * statement fills that slot, or a flag-profile trial; then func_801F3F48
- * follows with unk_77 = 5, D_801448ED = 3. */
+ * Best score 100 (permuter, work/permute/nonmatchings/func_801F2F34): the
+ * split-reload shape with a pinned a2 request code, MATCH_FAKE_USE on the
+ * table base and two MATCH_FAKE_BARRIER lines matches every instruction;
+ * first differing instruction 0x801F2F68 lui a1,%hi(g_ScriptWorkRecord)
+ * against lui v0 - the third reload takes v0 instead of a1 and the chain
+ * colors follow. Next lever: a source shape whose third reload colors a1
+ * (the rec3 pin sinks the table-address materialization out of the second
+ * load-delay slot). Then func_801F3F48 follows (unk_77 = 5, D_801448ED = 3). */
 INCLUDE_ASM(func_801F2F34);
