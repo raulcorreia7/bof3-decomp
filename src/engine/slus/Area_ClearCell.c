@@ -17,7 +17,7 @@ MATCH void Area_ClearCell(s32 x, s32 y) {
     u16            cell;
 
     map                                                            = (AreaMapBundle*)MAP_BUNDLE_BASE;
-    *(u8*)((u8*)g_AreaCellCodes + (s16)y * map->width_00 + (s16)x) = 0;
+    g_AreaCellCodes[(s16)y * map->width_00 + (s16)x] = 0;
     dx                                                             = (s16)(x - ((u16)g_AreaTileOriginX - 1));
     dy                                                             = (s16)(y - (u16)g_AreaTileOriginY);
     row                                                            = dx + dy;
