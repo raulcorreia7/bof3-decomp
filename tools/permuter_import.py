@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shlex
 import subprocess
 import sys
 from pathlib import Path
@@ -22,6 +23,8 @@ from bof3.status.claims import source_text
 from cc import asm_dir
 
 ROOT = Path(__file__).resolve().parent.parent
+# The permuter's MIPS flags (its MIPS_SETTINGS). A set objdump_command replaces its default arguments.
+OBJDUMP_ARGUMENTS = ["-drz", "-m", "mips:4300"]
 _DRAFT = re.compile(r"^NON_MATCHING\s+.*?\b([A-Za-z_]\w*)\s*\(", re.M)
 _DEFINITION = re.compile(
     r"^(?:MATCH|NON_MATCHING)\s+(?:INCLUDE_ASM\(\s*(\w+)\s*\)|.*?\b([A-Za-z_]\w*)\s*\()",
@@ -44,6 +47,21 @@ def function_name(source: Path) -> str:
     if match is None:
         raise SystemExit(f"{source}: no MATCH or NON_MATCHING definition")
     return match.group(1) or match.group(2)
+
+
+def settings_toml(compiler: str, assembler: str, prelude: str) -> str:
+    """Return the permuter settings; objdump is the repo's binutils, found without PATH."""
+    objdump = shlex.join([f"{ROOT}/bin/internal/binutils/objdump", *OBJDUMP_ARGUMENTS])
+    return "\n".join(
+        [
+            'compiler_type = "gcc"',
+            f"compiler_command = {json.dumps(compiler)}",
+            f"assembler_command = {json.dumps(assembler)}",
+            f"objdump_command = {json.dumps(objdump)}",
+            f"asm_prelude_file = {json.dumps(prelude)}",
+            "",
+        ]
+    )
 
 
 def main() -> int:
@@ -81,14 +99,8 @@ def main() -> int:
     compiler = f"{sys.executable} {ROOT}/tools/cc.py {compiler_flags} -O2 -DNON_MATCHING -DBOF3_ASM_MATCH=0 -c"
     write_atomic(
         settings,
-        "\n".join(
-            [
-                'compiler_type = "gcc"',
-                f"compiler_command = {json.dumps(compiler)}",
-                f"assembler_command = {json.dumps(assembler_command)}",
-                f"asm_prelude_file = {json.dumps(prelude.relative_to(ROOT).as_posix())}",
-                "",
-            ]
+        settings_toml(
+            compiler, assembler_command, prelude.relative_to(ROOT).as_posix()
         ),
     )
     text = asm.read_text(encoding="utf-8", errors="replace")
