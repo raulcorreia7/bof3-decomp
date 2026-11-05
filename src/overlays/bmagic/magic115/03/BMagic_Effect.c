@@ -18,7 +18,14 @@ MATCH void func_801EF054(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
-INCLUDE_ASM(func_801EF098);
+MATCH void func_801EF098(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801EF8C0 + 1, g_SpadWork->unk_02);
+    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+        func_8014D290();
+    }
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
 
 /* First difference: lui a0 at +0x50; try the work pointer lifetime after the depth copy. */
 INCLUDE_ASM(func_801EF130);
@@ -29,7 +36,14 @@ INCLUDE_ASM(func_801EF49C);
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
-INCLUDE_ASM(func_801EF5F8);
+MATCH void func_801EF5F8(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801EF8D0 + 1, g_SpadWork->unk_02);
+    if (g_SpadWork->flags_00 != 0 && g_SpadWork->unk_02 != 0) {
+        func_8014D290();
+    }
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
 
 MATCH void func_801EF690(void) {
     g_SpadWork->unk_25      = 0x1D;
