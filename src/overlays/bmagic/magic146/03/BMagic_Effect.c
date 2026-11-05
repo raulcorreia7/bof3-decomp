@@ -22,7 +22,13 @@ MATCH void func_801EF090(void) {
 
 INCLUDE_ASM(func_801EF0D4);
 
-INCLUDE_ASM(func_801EF2A0);
+MATCH void func_801EF2A0(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        func_800A9820(g_SpadWork->unk_04);
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF2FC(void) {
     SYS_DISPATCH_TASK(D_801EF9C0, 1, g_SpadWork);
