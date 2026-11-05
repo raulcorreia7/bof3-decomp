@@ -12,9 +12,9 @@ u8 g_MenuLabelIntellect[4] = "Int" T_END;
 
 u8 g_MenuLabelAgility[4] = "Agl" T_END;
 
-u8 D_801E5834[8] = {0x08, 0x0A, 0x09, 0x0B, 0x0C, 0x0C, 0x00, 0x00};
+u8 g_MenuEquipRowIcons[8] = {0x08, 0x0A, 0x09, 0x0B, 0x0C, 0x0C, 0x00, 0x00};
 
-u8 D_801E583C[8] = "EQUIP" T_END;
+u8 g_MenuLabelEquip[8] = "EQUIP" T_END;
 
 u8 D_801E5844[4] = "EXP" T_END;
 

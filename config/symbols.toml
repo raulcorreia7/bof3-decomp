@@ -1273,10 +1273,12 @@ Area_RoundSpriteCoordinate = { addr = 0x800C3254, type = "func", source = "round
 ["emi/etc/bate/00"]
 g_MenuStatFormat = { addr = 0x801D0C20, source = "Menu_DrawStatPanel.h binds g_MenuStatFormat in emi/etc/bate/00 and the item rows print values through it (twin rule, decomp/layout#shared-bodies)" }
 g_MenuZennyFormat = { addr = 0x801D0C44, source = "the caption and item-row values print through this format string, drawn by Menu_DrawZennyWindow.h (twin rule, decomp/layout#shared-bodies)" }
+g_MenuNextExpBlank = { addr = 0x801D0C48, source = "the dashes the item row prints in place of the next-level experience at the level cap, after g_MenuZennyFormat" }
 g_MenuClockFormat = { addr = 0x801D0D1C, source = "the play time window prints hours and minutes through this format string, drawn by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "overlay entry loads D_80148650 and calls D_801D86E0[step]" }
 Menu_DrawCharacterWindow = { addr = 0x801D27C4, type = "func", source = "draws one party member's window from g_Characters[character_slot]: portrait of the character id, name, level, poison and confusion labels, current and max HP and AP, exp bar; the shop and start panel tasks pass the slot found through g_CharSlot" }
 Menu_DrawStatPanel = { addr = 0x801D2C2C, type = "func", source = "draws the four stat labels, their values and the glyph rows, one body shared with the shop, start and Shisu overlays" }
+Shop_DrawEquipment = { addr = 0x801D2F64, type = "func", source = "draws the equipment panel: the six equipped objects with their sprites and the EQUIP caption, byte-equal in the bate, shisu, shop and start images" }
 Menu_DrawCursorFrame = { addr = 0x801D3384, type = "func", source = "draws the menu cursor frame at the cursor position in emi/etc/shop/00 func_801D7444" }
 Menu_DrawPortrait = { addr = 0x801D3518, type = "func", source = "draws a 40x48 portrait from the image's 4-byte atlas records with the requested shade, one body shared with the shop, start, Shisu and commu overlays" }
 Menu_DrawCharacterPortrait = { addr = 0x801D3664, type = "func", source = "callers pass a character id (Menu_DrawCharacterWindow, Menu_DrawEquipStatWindow, the record character_index) as the atlas index; id 4 is CHAR_ID_REI and it draws atlas record 0xB once g_SceneState.scenario_id reaches 8, then calls Menu_DrawPortrait; one body shared with the shop, start, Bate and Shisu overlays" }
@@ -1312,6 +1314,8 @@ g_MenuLabelPower = { addr = 0x801D8B28, source = "Menu_DrawStatPanel.h binds g_M
 g_MenuLabelDefense = { addr = 0x801D8B2C, source = "Menu_DrawStatPanel.h binds g_MenuLabelDefense in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelIntellect = { addr = 0x801D8B30, source = "Menu_DrawStatPanel.h binds g_MenuLabelIntellect in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelAgility = { addr = 0x801D8B34, source = "Menu_DrawStatPanel.h binds g_MenuLabelAgility in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
+g_MenuEquipRowIcons = { addr = 0x801D8B38, source = "equipment-row sprites drawn by Shop_DrawEquipment.h, one per equipment row" }
+g_MenuLabelEquip = { addr = 0x801D8B40, source = "the equipment panel caption EQUIP, drawn by Shop_DrawEquipment.h" }
 g_MenuPortraitAtlas = { addr = 0x801D8B54, source = "the 4-byte portrait atlas records walked by Menu_DrawPortrait.h (twin rule, decomp/layout#shared-bodies)" }
 MENU_CAPTION_ICON = { addr = 0x801D8BB4, source = "the caption icon record drawn by Menu_DrawZennyWindow.h (twin rule, decomp/layout#shared-bodies)" }
 MENU_CLOCK_COLON = { addr = 0x801D8BB8, source = "the colon string drawn twice between hours and minutes while the play clock's thirtieths count is below 15, by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
@@ -1642,11 +1646,13 @@ UI_UpdateWindowFade = { addr = 0x801D1B00, type = "func", source = "advances the
 ["emi/etc/shisu/00"]
 g_MenuStatFormat = { addr = 0x801D0C04, source = "Menu_DrawStatPanel.h binds g_MenuStatFormat in emi/etc/shisu/00 and the item rows print values through it (twin rule, decomp/layout#shared-bodies)" }
 g_MenuZennyFormat = { addr = 0x801D0C28, source = "the caption and item-row values print through this format string, drawn by Menu_DrawZennyWindow.h (twin rule, decomp/layout#shared-bodies)" }
+g_MenuNextExpBlank = { addr = 0x801D0C2C, source = "the dashes the item row prints in place of the next-level experience at the level cap, after g_MenuZennyFormat" }
 g_MenuClockFormat = { addr = 0x801D0D00, source = "the play time window prints hours and minutes through this format string, drawn by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "overlay entry loads D_80148650 and calls D_801D96DC[step]" }
 Menu_DrawPanelCursor = { addr = 0x801D2FE8, type = "func", source = "draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite" }
 Menu_DrawCharacterWindow = { addr = 0x801D376C, type = "func", source = "draws one party member's window from g_Characters[character_slot]: portrait of the character id, name, level, poison and confusion labels, current and max HP and AP, exp bar; the shop and start panel tasks pass the slot found through g_CharSlot" }
 Menu_DrawStatPanel = { addr = 0x801D3BD4, type = "func", source = "draws the four stat labels, their values and the glyph rows, one body shared with the shop, start and Bate overlays" }
+Shop_DrawEquipment = { addr = 0x801D3F0C, type = "func", source = "draws the equipment panel: the six equipped objects with their sprites and the EQUIP caption, byte-equal in the bate, shisu, shop and start images" }
 Menu_DrawCursorFrame = { addr = 0x801D432C, type = "func", source = "draws the menu cursor frame at the cursor position in emi/etc/shop/00 func_801D7444" }
 Menu_DrawPortrait = { addr = 0x801D44C0, type = "func", source = "draws a 40x48 portrait from the image's 4-byte atlas records with the requested shade, one body shared with the shop, start, Bate and commu overlays" }
 Menu_DrawCharacterPortrait = { addr = 0x801D460C, type = "func", source = "callers pass a character id (Menu_DrawCharacterWindow, Menu_DrawEquipStatWindow, the record character_index) as the atlas index; id 4 is CHAR_ID_REI and it draws atlas record 0xB once g_SceneState.scenario_id reaches 8, then calls Menu_DrawPortrait; one body shared with the shop, start, Bate and Shisu overlays" }
@@ -1682,6 +1688,8 @@ g_MenuLabelPower = { addr = 0x801D9B4C, source = "Menu_DrawStatPanel.h binds g_M
 g_MenuLabelDefense = { addr = 0x801D9B50, source = "Menu_DrawStatPanel.h binds g_MenuLabelDefense in emi/etc/shisu/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelIntellect = { addr = 0x801D9B54, source = "Menu_DrawStatPanel.h binds g_MenuLabelIntellect in emi/etc/shisu/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelAgility = { addr = 0x801D9B58, source = "Menu_DrawStatPanel.h binds g_MenuLabelAgility in emi/etc/shisu/00 (twin rule, decomp/layout#shared-bodies)" }
+g_MenuEquipRowIcons = { addr = 0x801D9B5C, source = "equipment-row sprites drawn by Shop_DrawEquipment.h, one per equipment row" }
+g_MenuLabelEquip = { addr = 0x801D9B64, source = "the equipment panel caption EQUIP, drawn by Shop_DrawEquipment.h" }
 g_MenuPortraitAtlas = { addr = 0x801D9B78, source = "the 4-byte portrait atlas records walked by Menu_DrawPortrait.h (twin rule, decomp/layout#shared-bodies)" }
 MENU_CAPTION_ICON = { addr = 0x801D9BD8, source = "the caption icon record drawn by Menu_DrawZennyWindow.h (twin rule, decomp/layout#shared-bodies)" }
 MENU_CLOCK_COLON = { addr = 0x801D9BDC, source = "the colon string drawn twice between hours and minutes while the play clock's thirtieths count is below 15, by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
@@ -1695,6 +1703,7 @@ D_801DA12C = { addr = 0x801DA12C, source = "func_801D2DEC decrements and func_80
 g_SaveBuffer = { addr = 0x800C1A00, source = "the resident save image, etc/start/08 binds the same address as SAVE_IMAGE_ADDR" }
 g_MenuStatFormat = { addr = 0x801D0CE4, source = "Menu_DrawStatPanel.h binds g_MenuStatFormat in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuZennyFormat = { addr = 0x801D0D08, source = "the caption and item-row values print through this format string, drawn by Menu_DrawZennyWindow.h (twin rule, decomp/layout#shared-bodies)" }
+g_MenuNextExpBlank = { addr = 0x801D0D0C, source = "the dashes the item row prints in place of the next-level experience at the level cap, after g_MenuZennyFormat" }
 g_MenuClockFormat = { addr = 0x801D0DE0, source = "the play time window prints hours and minutes through this format string, drawn by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "the body runs D_801E5144[D_80148650]" }
 Shop_ApplyPercent = { addr = 0x801D3654, type = "func", source = "returns value * percent / 100 with a minimum of 1, the item list prices rows through it" }
@@ -1749,6 +1758,8 @@ g_MenuLabelPower = { addr = 0x801E5824, source = "Menu_DrawStatPanel.h binds g_M
 g_MenuLabelDefense = { addr = 0x801E5828, source = "Menu_DrawStatPanel.h binds g_MenuLabelDefense in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelIntellect = { addr = 0x801E582C, source = "Menu_DrawStatPanel.h binds g_MenuLabelIntellect in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelAgility = { addr = 0x801E5830, source = "Menu_DrawStatPanel.h binds g_MenuLabelAgility in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
+g_MenuEquipRowIcons = { addr = 0x801E5834, source = "equipment-row sprites drawn by Shop_DrawEquipment.h, one per equipment row" }
+g_MenuLabelEquip = { addr = 0x801E583C, source = "the equipment panel caption EQUIP, drawn by Shop_DrawEquipment.h" }
 g_MenuPortraitAtlas = { addr = 0x801E5850, source = "the 4-byte portrait atlas records walked by Menu_DrawPortrait.h (twin rule, decomp/layout#shared-bodies)" }
 MENU_CAPTION_ICON = { addr = 0x801E58B0, source = "the caption icon record drawn by Menu_DrawZennyWindow.h (twin rule, decomp/layout#shared-bodies)" }
 MENU_CLOCK_COLON = { addr = 0x801E58B4, source = "the colon string drawn twice between hours and minutes while the play clock's thirtieths count is below 15, by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
@@ -1800,6 +1811,7 @@ g_MasterMenuCursor = { addr = 0x801D428A, source = "indexes the 0x140-byte stock
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).
 g_MenuStatFormat = { addr = 0x801D0C4C, source = "Menu_DrawStatPanel.h binds g_MenuStatFormat in emi/etc/start/08 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuZennyFormat = { addr = 0x801D0C70, source = "the caption and item-row values print through this format string, drawn by Menu_DrawZennyWindow (twin rule, decomp/layout#shared-bodies)" }
+g_MenuNextExpBlank = { addr = 0x801D0C74, source = "the dashes the item row prints in place of the next-level experience at the level cap, after g_MenuZennyFormat" }
 g_MenuClockFormat = { addr = 0x801D0D48, source = "the play time window prints hours and minutes through this format string, drawn by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 s_RowCaptionTags = { addr = 0x801D0EB0, source = "func_801E30FC copies these eight three-byte caption tags and hands one to the text draws" }
 g_SaveFileNameFormat = { addr = 0x801D0EC8, source = "SAVE_RunLoadVerify formats the slot into it for the card file name; func_801E54A4 filters the card directory with it and func_801E7348 compares directory names against it" }
@@ -1811,6 +1823,7 @@ Menu_SwapBytes_801D933C = { addr = 0x801D933C, type = "func", source = "byte-ide
 Menu_SwapBytes_801DAC08 = { addr = 0x801DAC08, type = "func", source = "byte-identical to Menu_SwapBytes at emi/etc/start/08@0x801D4A30" }
 Menu_DrawCharacterWindow = { addr = 0x801DB764, type = "func", source = "draws one party member's window from g_Characters[character_slot]: portrait of the character id, name, level, poison and confusion labels, current and max HP and AP, exp bar; the shop and start panel tasks pass the slot found through g_CharSlot" }
 Menu_DrawStatPanel = { addr = 0x801DBBCC, type = "func", source = "draws the four stat labels, their values and the glyph rows, one body shared with the shop, Bate and Shisu overlays" }
+Shop_DrawEquipment = { addr = 0x801DBF04, type = "func", source = "draws the equipment panel: the six equipped objects with their sprites and the EQUIP caption, byte-equal in the bate, shisu, shop and start images" }
 Menu_DrawCursorFrame = { addr = 0x801DC324, type = "func", source = "draws the menu cursor frame with the corner bits selected by the frame mode" }
 Menu_DrawPortrait = { addr = 0x801DC4B8, type = "func", source = "draws a 40x48 portrait from the image's 4-byte atlas records with the requested shade, one body shared with the shop, Bate, Shisu and commu overlays" }
 Menu_DrawCharacterPortrait = { addr = 0x801DC604, type = "func", source = "callers pass a character id (Menu_DrawCharacterWindow, Menu_DrawEquipStatWindow, the record character_index) as the atlas index; id 4 is CHAR_ID_REI and it draws atlas record 0xB once g_SceneState.scenario_id reaches 8, then calls Menu_DrawPortrait; one body shared with the shop, start, Bate and Shisu overlays" }

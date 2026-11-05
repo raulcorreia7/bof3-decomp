@@ -30,7 +30,7 @@ char D_801D0CF0[8] = "   /%3d";
 char D_801D0CF8[4] = "%8d";
 char D_801D0CFC[12] = "--------";
 char g_MenuZennyFormat[4] = "%7d";
-char D_801D0D0C[8] = "-------";
+char g_MenuNextExpBlank[8] = "-------";
 
 ShopActionLayout D_801D0D14[10] = {
     {{'N', 'o', 'r', 'm', 'a', 'l', '\0'}, 6, {0, 0, 0, 0, 0, 0}},
