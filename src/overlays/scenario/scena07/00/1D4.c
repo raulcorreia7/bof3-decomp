@@ -451,7 +451,16 @@ MATCH s32 func_801FD960(s32 arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM(func_801FDA34);
+MATCH s32 func_801FDA34(void) {
+    u8 i;
+
+    for (i = 0; i < g_PartySize; i++) {
+        if (g_BattlePartyBattlers[i].stats.character_id == 2) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM(func_801FDA98);
 
