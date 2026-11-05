@@ -14,7 +14,7 @@ MATCH s32 GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_cou
     value   = flag_value * 2 + 0x41;
     flagged = value | 0x80;
 loop_1:
-    if ((((PaletteFade*)((u8*)D_80145BD4 + offset))->flags & 1) == 0) {
+    if ((((PaletteFade*)((u8*)D_80145BD4 + offset))->flags & PALETTE_FADE_ACTIVE) == 0) {
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = (u8)value;
         if ((color_data[0x28] == 0) && ((color_data[0x24] & 4) == 0)) {
             ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = (u8)flagged;

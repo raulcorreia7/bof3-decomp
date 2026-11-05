@@ -81,7 +81,7 @@ NON_MATCHING void func_8014D290(void) {
     if (D_8014832D < 0x28) {
         D_8014828C[D_8014832D] = (s32)g_SpadWork;
         D_8014832D++;
-        if (g_SpadWork->flags_00 & 8) {
+        if (g_SpadWork->flags_00 & ACTOR_FLAG_SELECTION_FX) {
             func_80161454((u32)g_SpadWork);
         }
     }

@@ -6,14 +6,12 @@
  */
 MATCH void GFX_ResetPaletteFades(void) {
     u8  entry;
-    u32 offset;
     u8  row;
     u8  column;
     u8* map;
 
-    for (entry = 0; entry < 32; entry++) {
-        offset                             = entry * 0x0C;
-        *(u8*)((char*)D_80145BD4 + offset) = 0;
+    for (entry = 0; entry < GRAPHICS_PALETTE_FADE_COUNT; entry++) {
+        D_80145BD4[entry].flags = 0;
     }
 
     for (row = 0; row < 4; row++) {
