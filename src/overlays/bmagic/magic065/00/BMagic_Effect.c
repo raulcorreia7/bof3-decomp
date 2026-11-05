@@ -59,7 +59,13 @@ MATCH void func_801EF328(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF394);
+void func_801EF394(void) {
+    if (func_8014DAEC() & 0xFF) {
+        func_800A9820(g_BattleTargetSelector);
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF408(void) {
     func_801E5988();
