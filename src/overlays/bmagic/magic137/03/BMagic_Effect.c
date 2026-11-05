@@ -93,12 +93,7 @@ MATCH void func_801EFC58(void) {
 
 INCLUDE_ASM(func_801EFDF8);
 
-MATCH void func_801EFFBC(void) {
-    BattleHandlerTable3 handlers;
-
-    handlers = D_801EEC10;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
-}
+#include "../../Effect_DispatchHandlerSlot2.h"
 
 MATCH void func_801F001C(void) {
     g_SpadWork->word_08.byte.unk_0B = 0;

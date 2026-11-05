@@ -28,20 +28,7 @@ INCLUDE_ASM(func_801EF148);
 
 INCLUDE_ASM(func_801EF324);
 
-MATCH void func_801EF448(void) {
-    u8 count;
-
-    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = count;
-    if (!(count & 0xFF)) {
-        g_SpadWork->flags_00 |= 0x20;
-        g_SpadWork->unk_5C = 1;
-        g_SpadWork->unk_5D = 0;
-        g_SpadWork->unk_5E = 0;
-        g_SpadWork->unk_5F = 0;
-        g_SpadWork->unk_02 += 1;
-    }
-}
+#include "../../Effect_CountDownAndSetTint.h"
 
 MATCH void func_801EF4F0(void) {
     g_SpadWork->unk_5D -= 0x10;

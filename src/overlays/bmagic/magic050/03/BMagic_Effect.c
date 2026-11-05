@@ -59,12 +59,7 @@ MATCH void func_801EEF4C(void) {
 
 INCLUDE_ASM(func_801EEFDC);
 
-MATCH void func_801EF0E8(void) {
-    g_SpadWork->word_08.byte.timer_0A += 2;
-    if (g_SpadWork->word_08.byte.timer_0A == 0x10) {
-        g_SpadWork->unk_02 += 1;
-    }
-}
+#include "../../Effect_CountUpTimerByTwoAndStep.h"
 
 MATCH void func_801EF138(void) {
     PartyBattler* work;
