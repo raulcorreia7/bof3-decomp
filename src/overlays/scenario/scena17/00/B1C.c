@@ -70,7 +70,8 @@ MATCH void func_801F7A84(void) {
 
 INCLUDE_ASM(func_801F7B20);
 
-INCLUDE_ASM(func_801F7B88);
+MATCH void func_801F7B88(void) {
+    u8* step;
 
 INCLUDE_ASM(func_801F7BC0);
 
