@@ -17,7 +17,15 @@ MATCH void func_801EEEE0(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
-INCLUDE_ASM(func_801EEF24);
+MATCH void func_801EEF24(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801F0D64, g_SpadWork->unk_02);
+    if ((g_SpadWork->flags_00 & 1) && g_SpadWork->unk_02 != 0) {
+        func_800AF764();
+        func_8014D290();
+    }
+    g_ScriptBank = 0x800D3800;
+}
 
 INCLUDE_ASM(func_801EEFC8);
 
