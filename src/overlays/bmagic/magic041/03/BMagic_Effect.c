@@ -12,7 +12,19 @@ MATCH void func_801EEC38(void) {
 
 INCLUDE_ASM(func_801EECB0);
 
-INCLUDE_ASM(func_801EEE14);
+MATCH void func_801EEE14(void) {
+    u8             temp_v0;
+    PartyBattler** selected;
+
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        selected = &g_BattleSelectedActor;
+        func_80196718(*selected);
+        g_SpadWork->word_08.byte.unk_09 = func_8019651C(*selected, 0, 0, 0, 1);
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EEEB4);
 
