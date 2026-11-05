@@ -461,13 +461,7 @@ MATCH void func_801FDAFC(void) {
     g_SceneState.step_05  = 0xA;
 }
 
-MATCH void func_801FDB34(void) {
-    EMI_LoaderStreamFamily(0, 1, 5, 0);
-    g_PartySize = 0;
-    func_801C187C(0);
-    func_801C187C(1);
-    func_801C187C(5);
-}
+#include "overlays/scenario/Scene_SetPartyRyuYoungNinaYoungMomo.h"
 
 MATCH void func_801FDB80(void) {
     EMI_LoaderStreamFamily(0, 1, 2, 0);
