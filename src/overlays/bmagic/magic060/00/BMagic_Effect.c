@@ -136,7 +136,16 @@ MATCH void func_801F02CC(void) {
     }
 }
 
-INCLUDE_ASM(func_801F031C);
+MATCH void func_801F031C(void) {
+    u8 temp_v1;
+
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x1E) {
+        D_801EB4E0->word_08.byte.unk_0B = 2;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F037C(void) {
     PartyBattler* work;
