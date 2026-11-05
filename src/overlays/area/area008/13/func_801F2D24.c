@@ -15,7 +15,7 @@ MATCH void func_801F2D24(void) {
     }
     previous                  = g_Task;
     WORLD00_AREA008_STATE_PTR = (volatile Actor*)&g_BattlePartyBattlers[1];
-    g_Task                    = (u8*)&g_BattlePartyBattlers[1];
+    TASK_SET(&g_BattlePartyBattlers[1]);
     if (D_80146028 == 4 && D_8014601A == 1) {
         D_801F53F4     = D_801F4674[RANDOM_MASK(7)];
         g_Task         = previous;

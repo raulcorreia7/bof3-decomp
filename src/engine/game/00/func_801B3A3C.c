@@ -15,8 +15,8 @@ MATCH void func_801B3A3C(void) {
     if (g_MessageRequest == 3u) {
         off = g_GameState->slot_12D * ACTOR_SIZE;
         if (!(FIELD(u8, D_80146893, off) & 1u)) {
-            saved  = g_Task;
-            g_Task = (Actor*)((u8*)g_Actors + off);
+            saved = g_Task;
+            TASK_SET(((u8*)g_Actors + off));
             Actor_SelectScript(0u);
             g_Task = saved;
         }

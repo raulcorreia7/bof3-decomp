@@ -11,8 +11,8 @@ MATCH void func_801DDB7C(void) {
     index = 0u;
     while (index < 3u) {
         if (ACTOR_IN_USE(g_BattlePartyBattlers[index])) {
-            work        = &g_BattlePartyBattlers[index];
-            g_Task      = (PartyBattler*)(work);
+            work = &g_BattlePartyBattlers[index];
+            TASK_SET((work));
             g_GameState = work;
             func_801DDAF0();
         } else {
@@ -24,8 +24,8 @@ MATCH void func_801DDB7C(void) {
     index = 3u;
     while (index < 11u) {
         if ((ENEMY_COMBATANT(index).flags & 1u) != 0u) {
-            enemy                    = (EnemyBattler*)g_BattleEnemies + index;
-            g_Task                   = (PartyBattler*)(enemy);
+            enemy = (EnemyBattler*)g_BattleEnemies + index;
+            TASK_SET((enemy));
             BATTLE_CURRENT_ENEMY_PTR = enemy;
             func_801DDAF0();
         } else {

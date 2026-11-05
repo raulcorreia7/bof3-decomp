@@ -17,7 +17,7 @@ MATCH void func_801C05AC(void) {
             row = &g_BattlePartyBattlers[i];
             if (!((g_GameFlags >> i) & 1)) {
                 g_GameState = (GameState*)row;
-                g_Task      = (Actor*)row;
+                TASK_SET(row);
                 if (g_BattlePartyBattlers[i].slot == 0) {
                     func_801B00F8();
                 } else {

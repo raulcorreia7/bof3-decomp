@@ -4,7 +4,7 @@ MATCH void func_801BE574(s32 count, u8* ids) {
     s32 i;
 
     for (i = 0; i < (count & BYTE_MASK); i++) {
-        g_Task = (Actor*)&((u8*)g_BattlePartyBattlers)[i * BATTLE_PARTY_STRIDE];
+        TASK_SET(&((u8*)g_BattlePartyBattlers)[i * BATTLE_PARTY_STRIDE]);
         ((u8*)g_BattlePartyBattlers)[i * BATTLE_PARTY_STRIDE] &= 0xDF;
         ACTOR_CLEAR_TINT();
         g_Task->tint.bytes.flags = 2;

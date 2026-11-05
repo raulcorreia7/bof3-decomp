@@ -42,7 +42,7 @@ MATCH void func_801D62DC(void) {
         if (g_PartySize != 0) {
             base = selection * 0x30;
             do {
-                g_Task = (struct Task*)((u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE);
+                TASK_SET(((u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE));
                 func_801C1254(D_80145F09[i * BATTLE_PARTY_STRIDE], i);
                 Actor_SelectScript(TASK_BYTES[8]);
                 offset                           = i * 0x10 + base;

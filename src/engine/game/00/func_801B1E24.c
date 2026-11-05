@@ -39,8 +39,8 @@ NON_MATCHING void func_801B1E24(void) {
         rows = (BattleWorkSlot*)(base - 8);
         row  = rows;
         do {
-            g_Task = (Actor*)row;
-            prev   = i - 1;
+            TASK_SET(row);
+            prev = i - 1;
             if (prev < 0) {
                 prev = g_PartySize - 1;
             }
@@ -74,8 +74,8 @@ NON_MATCHING void func_801B1E24(void) {
         } while (i < g_PartySize);
     }
 
-    i      = 1;
-    g_Task = (Actor*)g_BattlePartyBattlers;
+    i = 1;
+    TASK_SET(g_BattlePartyBattlers);
     offset = BATTLE_PARTY_STRIDE;
     while (i < g_PartySize) {
         if (D_80145E91[offset] == 3) {

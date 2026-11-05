@@ -46,9 +46,9 @@ found:
     do {
         rec         = (u8*)g_BattlePartyBattlers + off;
         g_GameState = (GameState*)rec;
-        g_Task      = (Actor*)rec;
-        kind        = rec[0x13C];
-        flags       = g_Characters[kind].status;
+        TASK_SET(rec);
+        kind  = rec[0x13C];
+        flags = g_Characters[kind].status;
         if ((flags & 0x4000) != 0) {
             Actor_StageScriptRecord(rec[0x4B], 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
             g_Task->unk_0B = 0;
@@ -83,7 +83,7 @@ phase2:
         phase2_base = (u8*)g_BattlePartyBattlers + off;
         phase2_rec  = phase2_base;
         g_GameState = (GameState*)phase2_rec;
-        g_Task      = (Actor*)phase2_rec;
+        TASK_SET(phase2_rec);
         do {
             base                 = (u8*)((phase2_rec[0x05] << 6) + (u32)tbl);
             source_row           = (u16*)base;

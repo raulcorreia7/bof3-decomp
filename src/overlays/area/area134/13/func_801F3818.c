@@ -9,8 +9,8 @@ MATCH void func_801F3818(void) {
     g_Task      = &D_80146920;
     g_GameState = (GameState*)g_BattlePartyBattlers;
     g_Task      = work;
-    g_Task      = (Actor*)g_BattlePartyBattlers;
-    g_Task      = work;
+    TASK_SET(g_BattlePartyBattlers);
+    g_Task = work;
     if (D_80146954 >= D_80145EC4) {
         work->mode     = 0xD;
         g_Task->unk_09 = 0;

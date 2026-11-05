@@ -11,7 +11,7 @@ MATCH void Party_BuildBattlers(u32 mode) {
     }
     for (i = 0; i < g_PartySize; i++) {
         g_GameState = (GameState*)(((u8*)g_BattlePartyBattlers) + (i * BATTLE_PARTY_STRIDE));
-        g_Task      = (Actor*)(((u8*)g_BattlePartyBattlers) + (i * BATTLE_PARTY_STRIDE));
+        TASK_SET((((u8*)g_BattlePartyBattlers) + (i * BATTLE_PARTY_STRIDE)));
         *(((u8*)g_BattlePartyBattlers) + (i * 0x140)) = 1;
         entry_table                                   = D_80144F5A;
         g_Task->unk_05                                = i;

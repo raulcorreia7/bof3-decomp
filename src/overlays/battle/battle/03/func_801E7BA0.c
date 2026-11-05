@@ -69,9 +69,9 @@ NON_MATCHING void func_801E7BA0(void) {
                 } while ((u32)(var_s0 & BYTE_MASK) < (u8)g_BattlePartyCount);
             }
         }
-        var_s1      = SP_PTR(PartyBattler, 0x0);
-        var_s1      = SP_REF(PartyBattler*, 0x44);
-        g_Task      = (PartyBattler*)D_801EB4E0;
+        var_s1 = SP_PTR(PartyBattler, 0x0);
+        var_s1 = SP_REF(PartyBattler*, 0x44);
+        TASK_SET(D_801EB4E0);
         g_GameState = &g_BattlePartyBattlers[D_801EB4E0->slot];
         temp_a0_132 = D_801EB4E0->slot * BATTLE_PARTY_STRIDE;
         temp_v1_135 = g_BattlePartyBattlers[D_801EB4E0->slot].stats.level;

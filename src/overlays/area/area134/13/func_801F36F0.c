@@ -5,10 +5,10 @@ MATCH void func_801F36F0(void) {
     u8*    work;
     s32    i;
 
-    i      = 0;
-    work   = (u8*)g_Task;
-    g_Task = (u8*)&g_Actors[1];
-    row    = &g_Actors[1];
+    i    = 0;
+    work = (u8*)g_Task;
+    TASK_SET(&g_Actors[1]);
+    row = &g_Actors[1];
     do {
         row->x.fixed += 0x4000;
         i++;

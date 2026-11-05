@@ -79,6 +79,9 @@ extern struct Task* volatile g_Task;
 extern struct Task* g_Task;
 #endif
 
-#define TASK_BYTES ((u8*)g_Task)
+#define TASK_BYTES       ((u8*)g_Task)
+
+/* Point the cell at a record of any type: the cell holds the record as an untyped task pointer. */
+#define TASK_SET(record) (g_Task = (void*)(record))
 
 #endif

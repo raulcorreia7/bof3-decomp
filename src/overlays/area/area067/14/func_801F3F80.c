@@ -8,7 +8,7 @@ MATCH void func_801F3F80(void) {
     u8  selection;
     s32 result;
 
-    g_Task    = (u8*)&g_BattlePartyBattlers[0];
+    TASK_SET(&g_BattlePartyBattlers[0]);
     index     = D_80144F5A[0];
     y         = g_BattlePartyBattlers[0].coord_y_38.raw;
     x         = g_BattlePartyBattlers[0].coord_x_34.raw;

@@ -87,8 +87,8 @@ MATCH void func_801F783C(void) {
     i    = 0;
     if (g_PartySize != 0) {
         do {
-            battler         = &g_BattlePartyBattlers[i & BYTE_MASK];
-            g_Task          = (Actor*)battler;
+            battler = &g_BattlePartyBattlers[i & BYTE_MASK];
+            TASK_SET(battler);
             battler->unk_29 = 3;
             func_8014D290();
             i += 1;

@@ -18,8 +18,8 @@ MATCH void func_801BF448(void) {
             i           = 0;
             rec         = (u8*)g_BattlePartyBattlers + rec_off;
             g_GameState = (GameState*)rec;
-            g_Task      = (Actor*)rec;
-            key         = rec[0x79];
+            TASK_SET(rec);
+            key = rec[0x79];
             while (1) {
                 if (D_80144F5A[i & BYTE_MASK] == key)
                     break;
