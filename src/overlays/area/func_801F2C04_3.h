@@ -40,12 +40,11 @@ pick_weight:
         }
     }
     if (count < 8) {
-        pick                       = rand();
-        g_Actors[count].x.fixed    = D_801F2DBC[(pick & 7) * 2] << 16;
-        y                          = D_801F2DBD[(pick & 7) * 2] << 16;
-        g_Actors[count].y.fixed    = y;
-        g_Actors[count].z.part.integer =
-            Area_SampleHeight(g_Actors[count].x.fixed, y);
+        pick                           = rand();
+        g_Actors[count].x.fixed        = D_801F2DBC[(pick & 7) * 2] << 16;
+        y                              = D_801F2DBD[(pick & 7) * 2] << 16;
+        g_Actors[count].y.fixed        = y;
+        g_Actors[count].z.part.integer = Area_SampleHeight(g_Actors[count].x.fixed, y);
     }
     D_80143F22 = D_80145FB8 - 5;
 }
