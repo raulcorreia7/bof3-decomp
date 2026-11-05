@@ -87,7 +87,7 @@ MATCH void func_80117DF0(void) {
     if (!(g_FrameCount & 1)) {
         ((Actor*)g_Task)->unk_09 += 1;
     }
-    if ((u8)((Actor*)g_Task)->unk_09 >= 0x80U) {
+    if (((Actor*)g_Task)->unk_09 >= 0x80U) {
         func_80196070();
     }
     func_80117E78(0x80 - ((Actor*)g_Task)->unk_09, 0);

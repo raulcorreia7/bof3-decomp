@@ -7,7 +7,7 @@ MATCH void func_801F405C(void) {
         value = g_Task->unk_09;
         func_801F4160(value, value);
         g_Task->unk_09 += 1;
-        if ((u8)g_Task->unk_09 >= 0x6DU) {
+        if (g_Task->unk_09 >= 0x6DU) {
             g_AreaSceneMode = 1;
             *g_ScriptVars   = 0xF;
             g_Task->step += 1;

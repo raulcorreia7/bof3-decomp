@@ -29,10 +29,10 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         (((LOBU(g_GameRequestFlags) & 9) != 0) || (LOHU(g_GameAreaId) == 0xBD) || (LOHU(g_GameAreaId) == 0xBB) ||
          (((LOBU(g_GameRequestFlags) & 0x40) != 0) && (SYS_TestFlag(g_SceneEventFlags, 0x77U) == 0)))) {
         count = Party_CountOrder(0);
-        for (i = 0; i < (s32)count; i++) {
+        for (i = 0; i < count; i++) {
             g_Characters[g_CharSlot[D_80144F5A[i]]].status &= ~STATUS_CONFUSED;
         }
-        for (i = 0; i < (s32)count; i++) {
+        for (i = 0; i < count; i++) {
             if (g_Characters[g_CharSlot[D_80144F5A[i]]].status & STATUS_POISONED) {
                 D_80145FA8 = 0xA;
                 break;
@@ -70,7 +70,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             g_Task->unk_2A       = 0;
             g_Task->active_flags = 0;
         } else if (LOBU(g_GameRequestFlags) & 0x40) {
-            func_801C1254((s32)D_80145F09, 0);
+            func_801C1254(D_80145F09, 0);
         } else if (LOHU(g_GameAreaId) == 0xBD) {
             D_80145EBB         = 0;
             *(s32*)&D_80145F00 = 0;
@@ -81,8 +81,8 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             Party_BuildBattlers(0);
         } else {
             i = 0;
-            if (i < (s32)g_PartySize) {
-                addr  = (u32)g_BattlePartyBattlers;
+            if (i < g_PartySize) {
+                addr  = g_BattlePartyBattlers;
                 base  = (u8*)g_Characters;
                 order = base + 0x5F2;        /* party order field follows the records */
                 mask  = (u8*)(addr + 0x12C); /* row flag byte */
@@ -99,25 +99,25 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                     feed             = D_80145F04;
                     dst              = feed + off;
                     koff             = (kind & BYTE_MASK) * PARTY_RECORD_STRIDE;
-                    rec              = (Character*)((u32)koff + (u32)base);
+                    rec              = (Character*)(koff + (u32)base);
                     D_80145FCC[off]  = kind;
                     *(Character*)dst = *rec;
                     if (!(g_Task->active_flags & 1)) {
-                        func_801C1254((s32)*order, i & BYTE_MASK);
+                        func_801C1254(*order, i & BYTE_MASK);
                         MATCH_FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */
                         order++;
                     } else {
-                        func_801C1254((s32)*order, i & BYTE_MASK);
+                        func_801C1254(*order, i & BYTE_MASK);
                         order++;
                         GFX_FreePaletteFadeTarget(g_Task);
-                        g_Task->unk_27 = (u8)(g_Task->unk_05 + 0x78);
-                        GFX_StagePalette((u32)(g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
+                        g_Task->unk_27 = (g_Task->unk_05 + 0x78);
+                        GFX_StagePalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
                     }
                     mask += BATTLE_PARTY_STRIDE;
                     work += BATTLE_PARTY_STRIDE;
                     off += BATTLE_PARTY_STRIDE;
                     i++;
-                } while (i < (s32)g_PartySize);
+                } while (i < g_PartySize);
             }
         }
     }

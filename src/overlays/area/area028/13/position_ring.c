@@ -164,7 +164,7 @@ MATCH void func_801F2C80(void) {
     }
     func_801F318C(g_Task->unk_2E);
     func_801F3060();
-    next           = (u16)(g_Task->unk_2E + 0x40u);
+    next           = (g_Task->unk_2E + 0x40u);
     g_Task->unk_2E = next;
     if ((s16)next >= 0x400) {
         g_Task->unk_2E = 0x400;
@@ -198,19 +198,19 @@ MATCH void func_801F2D3C(void) {
     ratio_x        = (work->offset_x << 7) / work->scale;
     x_base         = D_800E4A00.x;
     i              = 0;
-    work->screen_x = (u16)(x_base + ratio_x);
+    work->screen_x = (x_base + ratio_x);
     ratio_y        = (work->offset_y << 7) / work->scale;
     y_base         = D_800E4A00.y;
     w              = work;
-    work->screen_y = (u16)(y_base + ratio_y);
+    work->screen_y = (y_base + ratio_y);
 
     do {
-        next = (u32)i + 1u;
-        d.x  = (s16)(WORLD_RING_HALFWORD(next & (32u - 1u), 0x4A04u) - WORLD_RING_HALFWORD(i, 0x4A04u));
-        d.y  = (s16)(WORLD_RING_HALFWORD(next & (32u - 1u), 0x4A06u) - WORLD_RING_HALFWORD(i, 0x4A06u));
-        c.x  = (s16)(w->screen_x - WORLD_RING_HALFWORD(i, 0x4A04u));
-        c.y  = (s16)(w->screen_y - WORLD_RING_HALFWORD(i, 0x4A06u));
-        i    = (u8)next;
+        next = i + 1u;
+        d.x  = (WORLD_RING_HALFWORD(next & (32u - 1u), 0x4A04u) - WORLD_RING_HALFWORD(i, 0x4A04u));
+        d.y  = (WORLD_RING_HALFWORD(next & (32u - 1u), 0x4A06u) - WORLD_RING_HALFWORD(i, 0x4A06u));
+        c.x  = (w->screen_x - WORLD_RING_HALFWORD(i, 0x4A04u));
+        c.y  = (w->screen_y - WORLD_RING_HALFWORD(i, 0x4A06u));
+        i    = next;
         if (((d.x * c.y) - (d.y * c.x)) < 0) {
             return;
         }
@@ -222,7 +222,7 @@ MATCH void func_801F2D3C(void) {
     prim->x0 = D_801F3E00->screen_x;
     prim->y0 = D_801F3E00->screen_y;
     shade    = -0x40 - (D_801F3E00->scale - 0x80) * 0xC0 / 512;
-    prim->b0 = (prim->g0 = (prim->r0 = (u8)shade));
+    prim->b0 = (prim->g0 = (prim->r0 = shade));
     GFX_AddPrim(3u, 0x0Cu);
 }
 
@@ -246,8 +246,8 @@ MATCH void func_801F2FB0(void* slot) {
 
     work            = slot;
     work->unk_00[0] = 1u;
-    work->offset_x  = (s16)((RANDOM_MASK(0xFF)) - 0x80);
-    work->offset_y  = (s16)((RANDOM_MASK(0xFF)) - 0x80);
+    work->offset_x  = ((RANDOM_MASK(0xFF)) - 0x80);
+    work->offset_y  = ((RANDOM_MASK(0xFF)) - 0x80);
     work->scale     = 0x280;
 }
 
@@ -281,7 +281,7 @@ MATCH void func_801F3060(void) {
     i          = 0u;
     do {
         if (D_801F3E00->unk_00[0] != 0u) {
-            scale             = (s16)(D_801F3E00->scale - 0x20);
+            scale             = (D_801F3E00->scale - 0x20);
             D_801F3E00->scale = scale;
             if (scale < 0x80) {
                 D_801F3E00->unk_00[0] = 0u;

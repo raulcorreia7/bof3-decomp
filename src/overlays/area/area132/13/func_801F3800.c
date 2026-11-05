@@ -10,7 +10,7 @@ MATCH s32 func_801F3800(void) {
             D_801F4A88 += 0x18;
             i += 1u;
         } else {
-            return (s32)D_801F4A88;
+            return D_801F4A88;
         }
     } while (i < 32u);
     return 0;

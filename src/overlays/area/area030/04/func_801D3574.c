@@ -9,7 +9,7 @@ MATCH void func_801D3574(void) {
 
     work              = FISHING_STATE;
     val               = work->origin_x_2E - 0x1E;
-    work->origin_x_2E = (u16)val;
+    work->origin_x_2E = val;
 
     if ((s16)val < -0x45) {
         work->origin_x_2E      = 0xA0;

@@ -9,8 +9,8 @@ MATCH u32 Battle_AllocEffect(u32 mode, u32 handler_index) {
     for (index = 0u; index < BATTLE_EFFECT_COUNT; index++) {
         if ((g_BattleEffects[index].flags & 1u) == 0u) {
             g_BattleEffects[index].flags |= 1u;
-            g_BattleEffects[index].unk_06        = (u8)mode;
-            g_BattleEffects[index].handler_index = (u8)handler_index;
+            g_BattleEffects[index].unk_06        = mode;
+            g_BattleEffects[index].handler_index = handler_index;
             return index;
         }
     }

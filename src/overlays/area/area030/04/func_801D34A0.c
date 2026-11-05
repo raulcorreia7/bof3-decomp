@@ -11,13 +11,13 @@ MATCH void func_801D34A0(void) {
     work = FISHING_STATE;
 
     val               = work->origin_x_2E - 0x1E;
-    work->origin_x_2E = (u16)val;
+    work->origin_x_2E = val;
 
     if ((s16)val < 0xA1) {
         work->step_timer_09       = 0x1E;
         stepped                   = FISHING_STATE;
         work->origin_x_2E         = 0xA0;
-        stepped->handler_index_01 = (u8)(stepped->handler_index_01 + 1);
+        stepped->handler_index_01 = (stepped->handler_index_01 + 1);
     }
 
     Area_AddActor();

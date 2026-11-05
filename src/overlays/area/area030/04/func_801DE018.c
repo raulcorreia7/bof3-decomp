@@ -25,10 +25,10 @@ MATCH void func_801DE018(void) {
     func_801DDFD4();
     for (i = 0; i < 4; i++) {
         v    = D_801E31E0[i];
-        m    = (u8)(*(u8*)(*(u8**)(D_801E28F4 + i * 8) + v) & 0x7F);
+        m    = (*(u8*)(*(u8**)(D_801E28F4 + i * 8) + v) & 0x7F);
         mode = 0;
         if (v != 0) {
-            D_801E31E4[i] = (u8)(D_801E31E4[i] - 1);
+            D_801E31E4[i] = (D_801E31E4[i] - 1);
         }
         if (D_801E31F0 == 1) {
             if (D_801E31E0[i] != 0) {
@@ -51,15 +51,15 @@ MATCH void func_801DE018(void) {
             if ((*(u8*)(*(u8**)(D_801E28F4 + i * 8) + v) & 0x80) != 0) {
                 grow  = D_801E28F8[i * 8];
                 limit = g_ActorSlots[0].unk_07;
-                span  = (s8)D_801E3210->unk_0F;
+                span  = D_801E3210->unk_0F;
                 if (grow + span >= limit) {
-                    g_ActorSlots[0].unk_07 = (s8)(grow + span);
-                    g_ActorSlots[0].unk_0A = (s8)D_801E3210->unk_10;
+                    g_ActorSlots[0].unk_07 = (grow + span);
+                    g_ActorSlots[0].unk_0A = D_801E3210->unk_10;
                 }
                 D_801E31E0[i] = 0;
                 D_801E31E4[i] = 0;
             } else {
-                D_801E31E0[i] = (u8)(v + 1);
+                D_801E31E0[i] = (v + 1);
                 D_801E31E4[i] = 0xC;
             }
         } else if (mode == 2) {

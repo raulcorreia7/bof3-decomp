@@ -32,7 +32,7 @@ MATCH void func_801D5574(void) {
         y      = 0x28;
     }
     func_801D7C10(offset, y, mask);
-    func_801D72E4(0x27, (s16)(FISHING_STATE->step_timer_09 * 0x3C + 0x40));
+    func_801D72E4(0x27, (FISHING_STATE->step_timer_09 * 0x3C + 0x40));
     if (FISHING_STATE->step_timer_09 == 4) {
         if (FISHING_STATE->saved_index_0B == 0) {
             FISHING_STATE->handler_index_01 = 0;

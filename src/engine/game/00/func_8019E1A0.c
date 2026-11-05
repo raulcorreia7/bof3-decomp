@@ -7,20 +7,20 @@ MATCH void func_8019E1A0(void) {
     Actor* record;
 
     work          = g_Task;
-    work->x.fixed = (s32)(work->x.fixed + work->vx);
-    work->y.fixed = (s32)(work->y.fixed + work->vy);
-    work->z.fixed = (s32)(work->z.fixed + work->vz);
+    work->x.fixed = (work->x.fixed + work->vx);
+    work->y.fixed = (work->y.fixed + work->vy);
+    work->z.fixed = (work->z.fixed + work->vz);
     func_8014D978();
     record     = g_Task;
     sceneTimer = record->unk_09;
     if (sceneTimer != 0) {
-        record->unk_09 = (u8)(sceneTimer - 1);
+        record->unk_09 = (sceneTimer - 1);
         Area_SetDrawMode();
         return;
     }
     stepTimer = record->unk_0A;
     if (stepTimer != 0) {
-        record->unk_0A = (u8)(stepTimer - 1);
+        record->unk_0A = (stepTimer - 1);
         if (g_FrameCount & 1) {
             Area_SetDrawMode();
         }

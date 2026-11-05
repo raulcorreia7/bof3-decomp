@@ -15,23 +15,23 @@ MATCH void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_m
     char* buffer;
     u16   ux;
 
-    index       = (u8)record_index;
-    shade_byte  = (u8)record_shade;
+    index       = record_index;
+    shade_byte  = record_shade;
     x           = record_x;
     mode        = record_mode;
-    flag        = (u8)sprite_flag;
+    flag        = sprite_flag;
     kind        = record_kind;
-    table_index = (u8)Item_GetKind(mode, (s32)index);
+    table_index = Item_GetKind(mode, index);
     row         = record_y + 2;
-    ux          = (u16)x;
-    func_801AEA80((s32)ux, row & HALF_MASK, (s32)s_ItemSpriteIds[table_index], (s32)flag);
-    entry = Item_GetRecord(mode, (s32)index);
+    ux          = x;
+    func_801AEA80(ux, row & HALF_MASK, s_ItemSpriteIds[table_index], flag);
+    entry = Item_GetRecord(mode, index);
     kind &= BYTE_MASK;
-    UI_DrawText(x + 10, record_y, (s32)kind, func_801AF20C(entry) & BYTE_MASK, entry);
+    UI_DrawText(x + 10, record_y, kind, func_801AF20C(entry) & BYTE_MASK, entry);
     shade = shade_byte & BYTE_MASK;
     if (shade >= 2U) {
         buffer = (char*)g_UiFormatBuffer;
         sprintf(buffer, D_80195F90, shade);
-        UI_DrawGlyphString((s16)(x + 109), row, (u32)kind, (const u8*)buffer);
+        UI_DrawGlyphString((x + 109), row, kind, (const u8*)buffer);
     }
 }

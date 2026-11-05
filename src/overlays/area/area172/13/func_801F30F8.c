@@ -14,7 +14,7 @@ MATCH void func_801F30F8(void) {
             Area_InitSpin(value);
             i += 1;
             value += 0x2C;
-        } while ((u32)(i & 0xFF) < 0x20U);
+        } while ((i & 0xFF) < 0x20U);
         PopMatrix();
         g_Task->unk_06            = 0;
         g_Task->tint.bytes.unk_5D = 8;

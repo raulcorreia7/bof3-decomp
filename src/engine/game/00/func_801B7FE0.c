@@ -8,7 +8,7 @@ MATCH void func_801B7FE0(void) {
 
     work = g_Task;
     work->z.part.integer -= 0x10;
-    if ((s16)work->z.part.integer < Area_ReadHeight(work->x.fixed, work->y.fixed)) {
+    if (work->z.part.integer < Area_ReadHeight(work->x.fixed, work->y.fixed)) {
         value                 = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
         store                 = g_Task;
         store->unk_09         = 2;

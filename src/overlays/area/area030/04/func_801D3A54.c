@@ -49,7 +49,7 @@ MATCH void func_801D3A54(void) {
                       FISHING_CURSOR_TIMER * 2 + 0x11D);
     }
     if (FISHING_CURSOR_COUNT != 0) {
-        UI_DrawText((s16)FISHING_CURSOR_ROW_Y, (s16)(D_80144154 + 2), 0, FISHING_CURSOR_COUNT,
+        UI_DrawText(FISHING_CURSOR_ROW_Y, (D_80144154 + 2), 0, FISHING_CURSOR_COUNT,
                     (u8*)(D_801E1E7C[FISHING_CURSOR_CATEGORY * 3]));
     }
 }

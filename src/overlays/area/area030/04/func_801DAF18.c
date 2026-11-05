@@ -8,7 +8,7 @@ MATCH void func_801DAF18(void) {
     D_8014419E = 2;
     counter    = D_80144199;
     D_801440B1 = 0;
-    D_80144199 = (u8)(counter + 1);
+    D_80144199 = (counter + 1);
 
     g_AreaScrollTargetY = *(u32*)(D_801468C0 + D_801E3208 * 152);
     SND_StartDecrescendo(0, 0, 0x64, 8);

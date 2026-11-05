@@ -9,7 +9,7 @@ MATCH void func_801D2648(void) {
 
     if (FISHING_STATE->step_index_0A != 0) {
         FISHING_STATE->step_index_0A -= 1;
-        if (FISHING_STATE->step_index_0A == 0 && (s8)D_801E3210->unk_0F < (s32)FISHING_STATE->counter_07) {
+        if (FISHING_STATE->step_index_0A == 0 && (s8)D_801E3210->unk_0F < FISHING_STATE->counter_07) {
             FISHING_STATE->step_index_0A = D_801E3210->unk_10;
             FISHING_STATE->counter_07 -= 1;
         }

@@ -29,7 +29,7 @@ MATCH void func_801527E4(void) {
             if (dist > 0) {
                 dir = 1;
             }
-            step_x     = dir * (s16)g_AreaCameraStep;
+            step_x     = dir * g_AreaCameraStep;
             D_80149310 = value + step_x;
             D_80149336 -= step_x;
             g_AreaTileRemainderY -= step_x;
@@ -42,15 +42,15 @@ MATCH void func_801527E4(void) {
         if (value > 0) {
             dir = 1;
         }
-        step_y = dir * (s16)g_AreaCameraStep;
+        step_y = dir * g_AreaCameraStep;
         D_80149314 += step_y;
         D_80149336 += step_y;
         g_AreaTileRemainderY -= step_y;
     }
     if (g_AreaCameraMoving != 0) {
-        g_AreaCameraHeight += (s16)g_AreaCameraHeightStep;
+        g_AreaCameraHeight += g_AreaCameraHeightStep;
         if (g_AreaMapBundle.scroll_1E == 0) {
-            g_AreaTileRemainderY -= (s16)g_AreaCameraHeightStep * 2;
+            g_AreaTileRemainderY -= g_AreaCameraHeightStep * 2;
         }
         g_AreaCameraRefreshCount = 2;
         dir                      = ((0x800000 - ((D_80149310 + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF)) |
@@ -93,12 +93,12 @@ MATCH void func_801527E4(void) {
     }
     RotMatrix(&g_AreaCameraAngle, (MATRIX*)g_CameraMatrix);
     view.vx = (u32)D_80149310 >> 1;
-    view.vy = (u32)D_80149314 >> 1;
+    view.vy = D_80149314 >> 1;
     view.vz = (u32)g_AreaCameraHeight >> 1;
     ApplyMatrix((MATRIX*)g_CameraMatrix, &view, &trans);
     D_801492FC = trans.vx + g_AreaCameraOffsetX;
     D_80149300 = trans.vy + g_AreaCameraOffsetY;
-    D_80149304 = trans.vz + (s16)g_AreaCameraOffsetZ + 0x1194;
+    D_80149304 = trans.vz + g_AreaCameraOffsetZ + 0x1194;
     SetRotMatrix((MATRIX*)g_CameraMatrix);
     SetTransMatrix((MATRIX*)g_CameraMatrix);
     if (g_AreaCameraRefreshCount != 0) {

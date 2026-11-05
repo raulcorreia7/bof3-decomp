@@ -26,5 +26,5 @@ MATCH void func_801D0CDC(void) {
 
     state                   = FISHING_STATE;
     state->cursor_10        = 0xF0;
-    state->handler_index_01 = (u8)(state->handler_index_01 + 1);
+    state->handler_index_01 = (state->handler_index_01 + 1);
 }

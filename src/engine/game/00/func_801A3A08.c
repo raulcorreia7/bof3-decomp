@@ -15,7 +15,7 @@ MATCH void func_801A3A08(void) {
     }
     if ((((Actor*)g_CurrentActor)->unk_94 & 0x7F) != 0x7F) {
     dispatch:
-        func_801ACE10((s32)D_80145F09);
+        func_801ACE10(D_80145F09);
     } else {
         GAME_WORK_AREA_PTR->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
     }

@@ -18,14 +18,14 @@ MATCH void func_801D3244(s16 panel_x, s16 panel_y, u8 panel_width, s8 u_offset, 
     layer   = ot_layer;
     x       = panel_x;
     y       = panel_y;
-    enabled = (u8)is_enabled;
+    enabled = is_enabled;
     u_shift = u_offset;
     width   = panel_width;
 
     func_801E0C80(0, layer);
     sprite     = (SPRT*)func_801E0DCC(0x1C, layer, x, y);
     w          = width & BYTE_MASK;
-    sprite->w  = (s16)w;
+    sprite->w  = w;
     sprite->u0 = sprite->u0 + u_shift;
 
     if (enabled != 0 && (g_FrameCount & 8) == 0) {
@@ -36,7 +36,7 @@ MATCH void func_801D3244(s16 panel_x, s16 panel_y, u8 panel_width, s8 u_offset, 
         prim->h  = 8;
         prim->x0 = x;
         prim->y0 = y;
-        prim->w  = (u16)w;
+        prim->w  = w;
         setRGB0(prim, 255, 0, 0);
         GFX_AddPrim(layer, 0x10);
     }

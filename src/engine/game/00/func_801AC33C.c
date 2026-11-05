@@ -49,7 +49,7 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
     delta = g_Task->vy;
     if (g_Task->unk_06 == 0x0A) {
         pos_x = g_Task->x.fixed;
-        slot  = (u32)(-(((s32)g_CurrentActor - (s32)D_80147A58) * 0xD79435E5)) >> 3;
+        slot  = (-(((s32)g_CurrentActor - (s32)D_80147A58) * 0xD79435E5)) >> 3;
         if ((((pos_x ^ (pos_x + g_Task->vx)) & 0x8000) != 0) ||
             ((pos_y = g_Task->y.fixed, (((pos_y ^ (pos_y + delta)) & 0x8000)) != 0))) {
             func_801A3080(g_CurrentActor, g_Task->direction_08 & 7);

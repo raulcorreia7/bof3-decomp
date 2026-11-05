@@ -21,7 +21,7 @@ MATCH void EMI_LoaderCopySector(void) {
         CdGetSector((void*)transfer_address, transfer_words);
 
         if (transfer_words != 0x200u) {
-            CdGetSector((void*)(g_EmiRingBase + ((s32)g_EmiRingSlot << 11)), 0x200u - transfer_words);
+            CdGetSector((void*)(g_EmiRingBase + (g_EmiRingSlot << 11)), 0x200u - transfer_words);
         }
 
         *transfer_size_ptr = 0;

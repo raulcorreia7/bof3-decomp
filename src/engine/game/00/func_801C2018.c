@@ -21,7 +21,7 @@ MATCH void func_801C2018(void) {
     effect_bank_bytes = (u8*)EFFECT_BANK_80140000;
     if ((SYS_TestFlag(input_bits, 4U) != 0) && (SYS_TestFlag(input_bits + 3, 4U) == 0) &&
         (effect_bank_bytes[0x54F3] < 30U)) {
-        effect_bank_bytes[0x54F3] = (u8)(effect_bank_bytes[0x54F3] + 1);
+        effect_bank_bytes[0x54F3] = (effect_bank_bytes[0x54F3] + 1);
     }
     if (g_SceneState.scenario_id >= 8) {
         bit_index     = 0xF6;
@@ -49,16 +49,16 @@ MATCH void func_801C2018(void) {
                     selected_record_count = kind_10_count;
                 }
                 if ((u8)selected_record_count != 0) {
-                    *(u32*)counter_word = (u32)(*(u32*)counter_word + 1);
+                    *(u32*)counter_word = (*(u32*)counter_word + 1);
                     if ((bit_index == 246) || (bit_index == 249) || (bit_index == 252)) {
-                        counter_threshold = (s8)selector_thresholds[(u32)bit_index - 0xF6u] - D_801455C5;
+                        counter_threshold = (s8)selector_thresholds[bit_index - 0xF6u] - D_801455C5;
                     } else {
-                        counter_threshold = (s8)selector_thresholds[(u32)bit_index - 0xF6u] - counter_word[0x1E];
+                        counter_threshold = (s8)selector_thresholds[bit_index - 0xF6u] - counter_word[0x1E];
                     }
                     if (counter_threshold < 5) {
                         counter_threshold = 5;
                     }
-                    if ((u32) * (u32*)counter_word >= (u32)counter_threshold) {
+                    if (* (u32*)counter_word >= counter_threshold) {
                         ((void (*)(void*, s32))SYS_SetFlag)(counter_word - 0x680, bit_index);
                         *(u32*)counter_word = 0U;
                     }
@@ -74,14 +74,14 @@ MATCH void func_801C2018(void) {
             if (*status_byte_ptr < 7U) {
                 func_801C1E88(1, (s32*)(status_byte_ptr - 0xC));
             }
-            if ((u8) * (u8*)(&D_801455C3) < 0xAU) {
+            if (* (u8*)(&D_801455C3) < 0xAU) {
                 func_801C1E88(0, (s32*)(status_byte_ptr - 8));
             }
             func_801C1F4C(5);
             func_801C1F4C(0xB);
         }
     }
-    if ((SYS_TestFlag(g_SceneEventFlags, 0xF5U) == 0) && ((u8)D_801455C4 >= 4U)) {
+    if ((SYS_TestFlag(g_SceneEventFlags, 0xF5U) == 0) && (D_801455C4 >= 4U)) {
         SYS_SetFlag(g_SceneEventFlags, 0xF5U);
     }
 }

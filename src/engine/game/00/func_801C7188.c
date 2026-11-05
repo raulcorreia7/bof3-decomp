@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH s16 func_801C7188(s16 value) {
-    if ((s32)value < 0)
+    if (value < 0)
         return -value;
     return value;
 }

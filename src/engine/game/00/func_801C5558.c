@@ -35,7 +35,7 @@ MATCH void func_801C5558(void) {
     threshold = D_80181B70[g_GameState->slot_index_79];
 
     work = g_Task;
-    if ((s16)work->z.part.integer >= result - threshold) {
+    if (work->z.part.integer >= result - threshold) {
         work->step = 3;
     }
 

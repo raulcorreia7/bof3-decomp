@@ -8,7 +8,7 @@ MATCH s32 func_8015B7F0(u8** cursor) {
 
     flags = g_Characters[**cursor].unk_07;
     if (1 & flags) {
-        return (u8)1;
+        return 1;
     }
     flags = 0;
     return flags;

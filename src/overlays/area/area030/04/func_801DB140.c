@@ -50,7 +50,7 @@ MATCH void func_801DB140(void) {
             Actor_RequestScript(7);
         }
         if (g_InputPressed & PADRdown) {
-            D_801468A4[D_801E3208].state = (s32)(s8)(D_801468A4[D_801E3208].state - (D_801E320C->byte_03 + 2));
+            D_801468A4[D_801E3208].state = (s8)(D_801468A4[D_801E3208].state - (D_801E320C->byte_03 + 2));
             Actor_RequestScript(7);
             func_801DB04C();
             goto counted_again; /* the slot timer moved, so the state changed */
@@ -73,7 +73,7 @@ MATCH void func_801DB140(void) {
         D_80144216 -= 1;
     } else if (g_InputHeld & PADRdown) {
         if (g_InputPressed & PADRdown) {
-            D_801468A4[D_801E3208].state = (s32)(s8)(D_801468A4[D_801E3208].state - (D_801E320C->byte_03 + 2));
+            D_801468A4[D_801E3208].state = (s8)(D_801468A4[D_801E3208].state - (D_801E320C->byte_03 + 2));
         } else {
             func_801DB0AC();
         }

@@ -15,7 +15,7 @@ MATCH void func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode)
     ORDER_LOCK_BEGIN
         delta = line_length;
         SetLineF2(line);
-        mode  = (u8)line_mode;
+        mode  = line_mode;
         color = 0x28;
         if (mode == 0) {
             color = 0x8C;
@@ -25,7 +25,7 @@ MATCH void func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode)
     ORDER_LOCK_END;
     line->b0 = color;
     line->x0 = x;
-    line->x1 = (s16)(x + delta);
+    line->x1 = (x + delta);
     line->y1 = y;
     line->y0 = y;
     GFX_AddPrim(1U, 0x10U);

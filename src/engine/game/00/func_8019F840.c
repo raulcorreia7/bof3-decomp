@@ -37,7 +37,7 @@ MATCH void func_8019F840(void) {
                 }
                 i++;
                 offset = i * BATTLE_PARTY_STRIDE;
-            } while (i < (s32)g_PartySize);
+            } while (i < g_PartySize);
         }
     }
 }

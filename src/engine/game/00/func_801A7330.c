@@ -22,7 +22,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     g_Task             = &g_Actors[slot];
     GAME_WORK_AREA_PTR = &g_Actors[slot];
 
-    D_1F800002 = (u16)((data[1] << 8) | data[2]);
+    D_1F800002 = ((data[1] << 8) | data[2]);
 
     func_801A4AA8();
     Area_FindSceneRecord(D_1F800002);
@@ -44,7 +44,7 @@ MATCH void func_801A7330(const volatile u8* data) {
 
     w2                 = g_Task;
     w2->mode           = 6;
-    w2->z.part.integer = (u16)dist;
+    w2->z.part.integer = dist;
     ACTOR_CLEAR_STATE();
     /* FAKE: barrier pins the flags store before the route-index load. */
     MATCH_BARRIER();

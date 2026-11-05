@@ -5,7 +5,7 @@
  */
 MATCH void func_801D3C1C(void) {
     if (EMI_LoaderIsReady() != 0) {
-        func_800AE260(g_BattleAction->unk_02, (s32)D_8014637C);
+        func_800AE260(g_BattleAction->unk_02, D_8014637C);
         g_BattleMode    = 3;
         g_BattleStep    = 2;
         g_BattleSubStep = 0;

@@ -6,7 +6,7 @@ MATCH void func_801B9210(void) {
     s32 v;
 
     if (g_Task->tint.bytes.flags != 0) {
-        GFX_StagePalette((u32)(GAME_PALETTE_STAGE + (g_Task->unk_05 << 6)), 0);
+        GFX_StagePalette((GAME_PALETTE_STAGE + (g_Task->unk_05 << 6)), 0);
         g_Task->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->tint.bytes.flags = 0;
         ACTOR_CLEAR_TINT();
@@ -26,7 +26,7 @@ MATCH void func_801B9210(void) {
     }
     saved                = g_Task->direction_08;
     g_Task->direction_08 = saved ^ 4;
-    mode                 = (u8)func_801B9598();
+    mode                 = func_801B9598();
     if (mode == 1 || mode == 3) {
         if ((func_801BDF08() << 24) != 0) {
             g_Task->unk_09 = 0;

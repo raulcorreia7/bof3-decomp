@@ -30,21 +30,21 @@ MATCH u8 func_8019EEE4(void) {
         Area_ClearCell(WORK->x.part.integer, WORK->y.part.integer);
     }
     if ((WORK->x.part.fraction != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)WORK->x.part.integer + 1), WORK->y.part.integer) & BYTE_MASK) == 0xFD) {
+        if ((Area_GetCellCode((s16)(WORK->x.part.integer + 1), WORK->y.part.integer) & BYTE_MASK) == 0xFD) {
             found = 1;
-            Area_ClearCell((s16)((u16)WORK->x.part.integer + 1), WORK->y.part.integer);
+            Area_ClearCell((s16)(WORK->x.part.integer + 1), WORK->y.part.integer);
         }
     }
     if ((WORK->y.part.fraction != 0) && !found &&
-        ((Area_GetCellCode(WORK->x.part.integer, (s16)((u16)WORK->y.part.integer + 1)) & BYTE_MASK) == 0xFD)) {
+        ((Area_GetCellCode(WORK->x.part.integer, (s16)(WORK->y.part.integer + 1)) & BYTE_MASK) == 0xFD)) {
         found = 1;
-        Area_ClearCell(WORK->x.part.integer, (s16)((u16)WORK->y.part.integer + 1));
+        Area_ClearCell(WORK->x.part.integer, (s16)(WORK->y.part.integer + 1));
     }
     if ((WORK->x.part.fraction != 0) && (WORK->y.part.fraction != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)WORK->x.part.integer + 1), (s16)((u16)WORK->y.part.integer + 1)) &
+        if ((Area_GetCellCode((s16)(WORK->x.part.integer + 1), (s16)(WORK->y.part.integer + 1)) &
              BYTE_MASK) == 0xFD) {
             found = 1;
-            Area_ClearCell((s16)((u16)WORK->x.part.integer + 1), (s16)((u16)WORK->y.part.integer + 1));
+            Area_ClearCell((s16)(WORK->x.part.integer + 1), (s16)(WORK->y.part.integer + 1));
         }
     }
     if (found) {

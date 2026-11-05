@@ -26,5 +26,5 @@ MATCH void func_801D6044(void) {
     FISHING_STATE->cue_index_06  = 0;
 
     tail               = FISHING_STATE;
-    tail->sub_index_03 = (u8)(tail->sub_index_03 + 1);
+    tail->sub_index_03 = (tail->sub_index_03 + 1);
 }

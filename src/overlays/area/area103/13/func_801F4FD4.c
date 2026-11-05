@@ -9,7 +9,7 @@ MATCH void func_801F4FD4(void) {
         func_801F53F0(value);
     }
     g_Task->unk_09 += 1;
-    if ((u8)g_Task->unk_09 >= 0x20U) {
+    if (g_Task->unk_09 >= 0x20U) {
         g_Task->unk_09 = 0;
         g_Task->step += 1;
     }

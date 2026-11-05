@@ -28,5 +28,5 @@ MATCH void func_801D39B8(void) {
 
     panel                   = FISHING_STATE;
     panel->origin_x_2E      = 0x125;
-    panel->handler_index_01 = (u8)(panel->handler_index_01 + 1);
+    panel->handler_index_01 = (panel->handler_index_01 + 1);
 }

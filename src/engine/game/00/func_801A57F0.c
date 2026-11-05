@@ -24,7 +24,7 @@ MATCH void func_801A57F0(u8* script) {
     g_Task             = &g_Actors[slot];
     GAME_WORK_AREA_PTR = &g_Actors[slot];
 
-    D_1F800002 = (u16)((script[1] << 8) | script[2]);
+    D_1F800002 = ((script[1] << 8) | script[2]);
 
     func_801A4AA8();
     Area_FindSceneRecord(D_1F800002);
@@ -54,7 +54,7 @@ MATCH void func_801A57F0(u8* script) {
 
     *(u16*)((u8*)&D_80146914 + *counter * ACTOR_SIZE) = script[4];
     *(s16*)((u8*)&D_80146916 + *counter * ACTOR_SIZE) = script[5];
-    D_80146904[*counter][0]                           = (u16)(script[0xF] | (script[0xE] << 8));
+    D_80146904[*counter][0]                           = (script[0xF] | (script[0xE] << 8));
     /* FAKE: forces the counter re-read before the next shadow store. */
     MATCH_BARRIER();
     D_80146900[*counter][0]                          = script[0xB];

@@ -44,12 +44,12 @@ MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
                 break;
             case STRING_NUM:
                 str++;
-                ((SPRT*)g_GfxPrimCursor)->u0 = (u8)(((*str + 91) % 21) * 12);
+                ((SPRT*)g_GfxPrimCursor)->u0 = (((*str + 91) % 21) * 12);
                 glyph_y                      = ((*str + 0x5B) / 21) * 0xC;
-                ((SPRT*)g_GfxPrimCursor)->v0 = (u8)(shade + glyph_y);
+                ((SPRT*)g_GfxPrimCursor)->v0 = (shade + glyph_y);
                 ((SPRT*)g_GfxPrimCursor)->w  = 8;
-                ((SPRT*)g_GfxPrimCursor)->h  = (s16)height;
-                func_8014FB80((s16)D_80145ACA, (s16)D_80145ACC, clut, shade);
+                ((SPRT*)g_GfxPrimCursor)->h  = height;
+                func_8014FB80(D_80145ACA, D_80145ACC, clut, shade);
                 D_80145ACA += 8;
                 break;
             case STRING_VAR:
@@ -62,12 +62,12 @@ MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
             case STRING_END:
                 break;
             default:
-                ((SPRT*)g_GfxPrimCursor)->u0 = (u8)(((*str - '0') % 31) * 8);
+                ((SPRT*)g_GfxPrimCursor)->u0 = (((*str - '0') % 31) * 8);
                 glyph_y                      = (((*str - '0') / 31) * 0xC) + 0x48;
-                ((SPRT*)g_GfxPrimCursor)->v0 = (u8)(shade + glyph_y);
+                ((SPRT*)g_GfxPrimCursor)->v0 = (shade + glyph_y);
                 ((SPRT*)g_GfxPrimCursor)->w  = 8;
-                ((SPRT*)g_GfxPrimCursor)->h  = (s16)height;
-                func_8014FB80((s16)D_80145ACA, (s16)D_80145ACC, clut, shade);
+                ((SPRT*)g_GfxPrimCursor)->h  = height;
+                func_8014FB80(D_80145ACA, D_80145ACC, clut, shade);
                 D_80145ACA += 8;
                 break;
         }

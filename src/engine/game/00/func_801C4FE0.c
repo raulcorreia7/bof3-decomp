@@ -36,7 +36,7 @@ MATCH s32 func_801C4FE0(void) {
     }
 
     if (g_Task->unk_05 == 0 && !((g_GameFlags | g_AreaWalkFlags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
-        Area_AdvanceScroll((s16)g_Task->z.part.integer);
+        Area_AdvanceScroll(g_Task->z.part.integer);
     }
     if (!(g_FrameCount & 3)) {
         func_8014DAEC();

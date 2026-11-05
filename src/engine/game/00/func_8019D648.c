@@ -20,37 +20,37 @@ MATCH void func_8019D648(void) {
     aux  = MEM_PTR(u16, 0x800E4814u);
     src  = (s16*)(base + 12);
     do {
-        *dst    = (u16)((src[-11] + src[-8] + src[-5] + src[-2]) >> 2);
-        aux[-9] = (u16)((src[-10] + src[-7] + src[-4] + src[-1]) >> 2);
+        *dst    = ((src[-11] + src[-8] + src[-5] + src[-2]) >> 2);
+        aux[-9] = ((src[-10] + src[-7] + src[-4] + src[-1]) >> 2);
         cur     = base + 1;
         count   = 0;
-        aux[-8] = (u16)((src[-9] + src[-6] + src[-3] + src[0]) >> 2);
+        aux[-8] = ((src[-9] + src[-6] + src[-3] + src[0]) >> 2);
         do {
             out     = (s16*)(dst + (count & BYTE_MASK) * 4);
-            out[12] = (s16)(cur[0] - *dst);
+            out[12] = (cur[0] - *dst);
             cur += 1;
-            out[13] = (s16)(cur[0] - aux[-9]);
+            out[13] = (cur[0] - aux[-9]);
             cur += 1;
-            out[14] = (s16)(cur[0] - aux[-8]);
+            out[14] = (cur[0] - aux[-8]);
             count += 1;
             cur += 1;
-        } while (((u32)count & BYTE_MASK) < 4u);
+        } while ((count & BYTE_MASK) < 4u);
         src += 20;
         base += 20;
-        args[0]  = (s32)(s16)*dst;
+        args[0]  = (s16)*dst;
         dst_next = (s16*)(dst + 4);
-        args[1]  = (s32)(s16)aux[-9];
+        args[1]  = (s16)aux[-9];
         dst += 28;
-        args[2] = (s32)(s16)aux[-8];
+        args[2] = (s16)aux[-8];
         /* retail passes the count as a third word, which libgte.h's two-argument prototype lacks */
         ((void (*)(s32*, void*, s32))VectorNormalS)(args, dst_next, count);
         row += 1;
         aux[-2] = 0;
         aux[-1] = 0;
         aux[0]  = 0;
-        aux[-6] = (u16)((s32)((u32)aux[-6] << 0x10) >> 0x16);
-        aux[-5] = (u16)((s32)((u32)aux[-5] << 0x10) >> 0x16);
-        aux[-4] = (u16)((s32)((u32)aux[-4] << 0x10) >> 0x16);
+        aux[-6] = ((aux[-6] << 0x10) >> 0x16);
+        aux[-5] = ((aux[-5] << 0x10) >> 0x16);
+        aux[-4] = ((aux[-4] << 0x10) >> 0x16);
         aux += 28;
-    } while (((u32)row & BYTE_MASK) < 24u);
+    } while ((row & BYTE_MASK) < 24u);
 }

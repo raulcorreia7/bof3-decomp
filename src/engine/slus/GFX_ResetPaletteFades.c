@@ -20,6 +20,6 @@ MATCH void GFX_ResetPaletteFades(void) {
         do {
             map[column] = 0xFF;
             column++;
-        } while ((u32)column < 16u);
+        } while (column < 16u);
     }
 }

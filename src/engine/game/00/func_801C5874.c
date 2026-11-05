@@ -45,12 +45,12 @@ MATCH void func_801C5874(void) {
                 goto tail;
             }
             range *= 2;
-            g_AreaCameraStep = (s16)(g_RouteSpeedScale[D_80143FC0] * 8);
+            g_AreaCameraStep = (g_RouteSpeedScale[D_80143FC0] * 8);
             step             = (D_80143F84 - (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16)) /
                                ((0x80 / g_AreaCameraStep) * (range >> 16));
             g_AreaCameraHeightStep = 0;
             D_80143F4A             = 3;
-            g_ScrollHeight         = (s16)g_AreaCameraHeight;
+            g_ScrollHeight         = g_AreaCameraHeight;
             *px                    = g_PartyX;
             *py                    = g_PartyY;
             D_80143F5C             = step;

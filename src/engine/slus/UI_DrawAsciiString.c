@@ -24,7 +24,7 @@ MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
         MATCH_FAKE_PIN(s32, attr, "s0");
         attr = flags;
         func_8014FC00(0);
-        color = (u16)((attr & 0x3F) | 0x7800);
+        color = ((attr & 0x3F) | 0x7800);
     }
     x0     = x;
     shade  = 0x80;
@@ -38,11 +38,11 @@ MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
             sprite->clut = color;
             setRGB0(sprite, shade, shade, shade);
             sprite->h  = 12;
-            sprite->u0 = (u8)(((*str - '0') % 31) * 8);
+            sprite->u0 = (((*str - '0') % 31) * 8);
             value      = ((*str - '0') / 31) * 0xC + 0x48;
             sprite->x0 = x;
             sprite->y0 = y;
-            sprite->v0 = (u8)value;
+            sprite->v0 = value;
             SetSprt(sprite);
             PSX_SET_SEMI_TRANSPARENT(sprite);
             GFX_AddPrim(1, 0x14);

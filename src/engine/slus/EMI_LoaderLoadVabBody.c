@@ -12,7 +12,7 @@ MATCH void EMI_LoaderLoadVabBody(void) {
         SpuSetTransferMode(SPU_TRANSFER_BY_DMA);
         SsVabClose(D_8014677C[D_80146483].resource_id);
         entry_index = D_80146483;
-        if ((s16)SsVabOpenHeadSticky((unsigned char*)D_8014677C[entry_index].source,
+        if (SsVabOpenHeadSticky((unsigned char*)D_8014677C[entry_index].source,
                                      D_8014677C[entry_index].resource_id, D_8014677C[entry_index].spu_address) == -1) {
             g_EmiReadStatus  = 2;
             g_EmiStreamState = 0;

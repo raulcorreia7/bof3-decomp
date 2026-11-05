@@ -14,5 +14,5 @@ MATCH void Actor_SwitchScript(u8 value, u8* dst, s32 size) {
         g_Task->unk_4B = value;
         current        = 0;
     }
-    Actor_SeekScript((u16)current);
+    Actor_SeekScript(current);
 }

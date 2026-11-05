@@ -7,7 +7,7 @@ MATCH void func_801DA3F4(void) {
     FishingState* record;
 
     record                = FISHING_STATE;
-    record->step_timer_09 = (u8)(record->step_timer_09 - 1);
+    record->step_timer_09 = (record->step_timer_09 - 1);
 
     func_801E19CC((s16)(FISHING_STATE->step_timer_09 * 80 + 0x44), 0x4E);
 
@@ -15,7 +15,7 @@ MATCH void func_801DA3F4(void) {
     if (record->step_timer_09 == 0) {
         record->cue_index_06 = 1;
         record               = FISHING_STATE;
-        record->sub_index_03 = (u8)(record->sub_index_03 + 1);
+        record->sub_index_03 = (record->sub_index_03 + 1);
     }
 
     func_801E16DC();

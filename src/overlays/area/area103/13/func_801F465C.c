@@ -6,7 +6,7 @@ MATCH void func_801F465C(void) {
     if (g_Task->unk_09 == 0xF) {
         g_Task->unk_09 = 0;
     }
-    count = (s16)g_Task->unk_32;
+    count = g_Task->unk_32;
     if (count > 0) {
         g_Task->unk_32 = count - 1;
     } else if (!((g_Task->unk_09 / 5) & 0xFF)) {

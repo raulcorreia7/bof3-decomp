@@ -16,7 +16,7 @@ MATCH void func_8015920C(void) {
     panel->x -= (s16)panel->unk_14 / 2;
 
     advanced = 0;
-    if ((s32)panel->unk_0A < ((s16)panel->unk_10 >> 4)) {
+    if (panel->unk_0A < ((s16)panel->unk_10 >> 4)) {
         switch (panel->unk_00[2]) {
             case 0:
                 if (panel->flags & 2) {
@@ -34,7 +34,7 @@ MATCH void func_8015920C(void) {
                 break;
         }
         advanced++;
-        g_MenuCurrentPanel->unk_10 = (u16)(g_MenuCurrentPanel->unk_0A * 0x10);
+        g_MenuCurrentPanel->unk_10 = (g_MenuCurrentPanel->unk_0A * 0x10);
     }
 
     panel = g_MenuCurrentPanel;
@@ -42,7 +42,7 @@ MATCH void func_8015920C(void) {
     panel->unk_12 = panel->unk_12 + panel->unk_16;
     panel->y -= (s16)panel->unk_16 / 2;
 
-    if ((s32)panel->unk_0B < ((s16)panel->unk_12 >> 4)) {
+    if (panel->unk_0B < ((s16)panel->unk_12 >> 4)) {
         switch (panel->unk_00[2]) {
             case 0:
                 if (panel->flags & 2) {
@@ -60,7 +60,7 @@ MATCH void func_8015920C(void) {
                 break;
         }
         advanced++;
-        g_MenuCurrentPanel->unk_12 = (u16)(g_MenuCurrentPanel->unk_0B * 0x10);
+        g_MenuCurrentPanel->unk_12 = (g_MenuCurrentPanel->unk_0B * 0x10);
     }
 
     if ((g_MenuCurrentPanel->flags & 1) == 0) {

@@ -18,5 +18,5 @@ MATCH void func_801DDE94(s8 request) {
         D_8014412B = 1;
         *counter += 1;
     }
-    D_8014412A = (u8)saved;
+    D_8014412A = saved;
 }

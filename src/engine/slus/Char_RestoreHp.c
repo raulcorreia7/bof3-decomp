@@ -17,12 +17,12 @@ MATCH bool Char_RestoreHp(s32 character_index, s32 amount, s32 use_battle_copy) 
     if (cur == rec->max_hp) {
         return false;
     }
-    rec->current_hp = (u16)(cur + amount);
+    rec->current_hp = (cur + amount);
     limit           = rec->max_hp;
-    if (((u32)limit < (u32)((cur + amount) & HALF_MASK)) || ((amount & HALF_MASK) == 0)) {
-        rec->current_hp = (u16)limit;
+    if ((limit < (u32)((cur + amount) & HALF_MASK)) || ((amount & HALF_MASK) == 0)) {
+        rec->current_hp = limit;
     }
-    if (rec->current_hp >= (u32)(rec->max_hp >> 2)) {
+    if (rec->current_hp >= (rec->max_hp >> 2)) {
         Char_ClearStatus(character_index & BYTE_MASK, 0x2000, use_battle_copy & BYTE_MASK);
     }
     return true;

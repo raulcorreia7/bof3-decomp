@@ -9,7 +9,7 @@ MATCH void func_801C51B0(void) {
     work                                                  = g_Task;
     field                                                 = work->unk_05;
     g_GfxPalettePending                                   = 1;
-    *(u16*)(MEM_PTR(u8, 0x8003963Eu) + ((u32)field << 6)) = 0;
+    *(u16*)(MEM_PTR(u8, 0x8003963Eu) + (field << 6)) = 0;
     route                                                 = work->direction_08;
     /* FAKE: barrier keeps saved ra from sinking below work load. */
     MATCH_BARRIER();
@@ -17,5 +17,5 @@ MATCH void func_801C51B0(void) {
     if (route == 7) {
         index = 0x37;
     }
-    Actor_RequestScript((u8)index);
+    Actor_RequestScript(index);
 }

@@ -391,7 +391,7 @@ MATCH void func_801F2C94(void) {
     func_801F2D5C(&work->vx, work->unk_1C);
     work2 = (Actor*)g_Task;
     work->unk_1C += 0x1199;
-    count         = (u8)(work2->unk_09 - 1);
+    count         = (work2->unk_09 - 1);
     work2->unk_09 = count;
     if (count == 0) {
         SND_PlayCue(EMI_CUE_ID(2, 13));
@@ -424,9 +424,9 @@ MATCH void func_801F2D5C(const s32* center, s32 radius) {
     tbl340c = (s32*)D_801F340C;
     do {
         idx = i & BYTE_MASK;
-        func_801F2E04(center, radius, (u16)(idx << 10), tbl33fc[idx], tbl340c[idx]);
+        func_801F2E04(center, radius, (idx << 10), tbl33fc[idx], tbl340c[idx]);
         i += 1;
-    } while (((u32)(i & BYTE_MASK)) < 4u);
+    } while (((i & BYTE_MASK)) < 4u);
 }
 
 MATCH void func_801F2E04(const s32* center, s32 radius, u16 angle, s32 offset_x, s32 offset_y) {
@@ -463,7 +463,7 @@ MATCH void func_801F2E04(const s32* center, s32 radius, u16 angle, s32 offset_x,
         packet->y2 = screen1[1];
         PSX_SET_NEUTRAL_RGB(packet);
         Area_AddCellPrim(((s32*)center)[0] + offset_x, ((s32*)center)[1] + offset_y, 0, 0x18);
-    } while (((u32)(i & BYTE_MASK)) < 4u);
+    } while (((i & BYTE_MASK)) < 4u);
 }
 
 MATCH void func_801F300C(void) {
@@ -554,7 +554,7 @@ MATCH void func_801F32B8(void) {
     result    = func_8015CB18(1, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
         work         = (Actor*)g_Task;
-        work->unk_0B = (s8)result;
+        work->unk_0B = result;
     }
 }
 
@@ -578,5 +578,5 @@ MATCH void func_801F3360(void) {
     slot->type    = 0x33;
     slot->x.fixed = 0x70000;
     slot->y.fixed = 0x68000;
-    slot->z.fixed = (s32)(Area_SampleHeight(slot->x.fixed, 0x68000) << 0x10);
+    slot->z.fixed = (Area_SampleHeight(slot->x.fixed, 0x68000) << 0x10);
 }

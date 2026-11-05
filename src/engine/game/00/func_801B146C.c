@@ -27,7 +27,7 @@ MATCH void func_801B146C(void) {
         work_a     = g_Task;
         work_count = work_a->option_flags;
         if (work_count < 0x11U) {
-            work_a->option_flags = (u8)(work_count + 1);
+            work_a->option_flags = (work_count + 1);
         }
     } else {
         g_Task->option_flags = 0U;
@@ -89,7 +89,7 @@ MATCH void func_801B146C(void) {
         if (!(func_801C472C(work_i->x.fixed, work_i->y.fixed, work_i->state_70.byte, 0xA6, 0U) & BYTE_MASK)) {
             Actor_RequestScript(g_Task->direction_08);
             D_8014504A = 0;
-            Game_RequestAreaChange(D_80145048, (u32)D_80145040, (u32)D_80145044, 4U);
+            Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, 4U);
             return;
         }
         world_flags = g_AreaWalkFlags;
@@ -97,12 +97,12 @@ MATCH void func_801B146C(void) {
             g_AreaWalkFlags = world_flags ^ 0x20;
             func_801C24D0();
             work_j         = g_Task;
-            work_j->unk_09 = (u8)(work_j->unk_09 - 1);
+            work_j->unk_09 = (work_j->unk_09 - 1);
             func_801B0DFC();
             g_Task->step = 2;
             goto block_end; /* leave the frame flags alone */
         }
-        counter    = (u16)D_80143F22;
+        counter    = D_80143F22;
         D_80143F22 = counter + 1;
         route_id   = g_Task->direction_08;
         if ((route_id == 2) || (route_id == 6)) {

@@ -7,7 +7,7 @@ MATCH void func_801C601C(s8 route_index) {
     func_801BE710((GameResetRecord*)&D_80143FBC);
     first      = g_AreaScrollTargetX;
     D_80143FC0 = 3;
-    D_80143FBF = (u8)route_index;
+    D_80143FBF = route_index;
     D_80143FC1 |= 0x80;
     g_PartyX       = MEM(s32, 0x80149308u);
     g_PartyY       = g_AreaScrollTargetY;

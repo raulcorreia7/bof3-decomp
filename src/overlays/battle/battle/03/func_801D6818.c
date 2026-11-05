@@ -15,14 +15,14 @@ MATCH void func_801D6818(void) {
                     ((g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].action_flags.value & 2u) != 0u)) {
                     g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].damage_flags.value |= 0x2000u;
                     if (g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].stats.character_id == CHAR_ID_REI) {
-                        slot                               = (u8)Battle_AllocEffect(0u, 0xBu);
+                        slot                               = Battle_AllocEffect(0u, 0xBu);
                         g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[BATTLE_PARTY_CURSOR];
                     } else {
                         for (index = 0u; index < BATTLE_PARTY_SLOT_COUNT; index++) {
-                            offset = (u32)index * BATTLE_PARTY_STRIDE;
+                            offset = index * BATTLE_PARTY_STRIDE;
                             *(u32*)((s_BattleBattlerTemplateTails + offset)) &= ~1u;
                         }
-                        slot                               = (u8)Battle_AllocEffect(0u, 0xCu);
+                        slot                               = Battle_AllocEffect(0u, 0xCu);
                         g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[BATTLE_PARTY_CURSOR];
                     }
                     BATTLE_PARTY_CURSOR += 1u;

@@ -15,7 +15,7 @@ MATCH s8 func_8015B4F4(s32 code) {
     } else {
         index = 0;
         count = 0;
-        while ((u32)(index & BYTE_MASK) < 30U) {
+        while ((index & BYTE_MASK) < 30U) {
             offset = (index & BYTE_MASK) * ACTOR_SIZE;
             if (D_8014688E[offset] == 10) {
                 if ((count & BYTE_MASK) == (u8)result) {

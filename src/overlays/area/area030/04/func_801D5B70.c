@@ -34,6 +34,6 @@ MATCH void func_801D5B70(void) {
         FishingState* record;
 
         record               = FISHING_STATE;
-        record->sub_index_03 = (u8)(record->sub_index_03 - 1);
+        record->sub_index_03 = (record->sub_index_03 - 1);
     }
 }

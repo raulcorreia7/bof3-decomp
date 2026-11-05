@@ -25,7 +25,7 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
                 if (D_80144F5D[kind & BYTE_MASK] == key)
                     break;
                 kind += 1;
-                if ((u32)(kind & BYTE_MASK) >= 3U)
+                if ((kind & BYTE_MASK) >= 3U)
                     break;
             }
             kind &= BYTE_MASK;

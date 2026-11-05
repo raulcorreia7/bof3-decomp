@@ -6,12 +6,12 @@ MATCH void func_801F3198(void) {
     u8          tick;
 
     work = (AreaSprite*)D_801F63EC;
-    tick = (u8)(work->flags_03 - 1u);
+    tick = (work->flags_03 - 1u);
     work->origin_x += work->normal.vx;
     work->origin_y += work->normal.vy;
     work->flags_03 = tick;
     work->origin_z += work->normal.vz;
-    count                               = (u8)(((AreaSprite*)D_801F63EC)->flags_02 - 1u);
+    count                               = (((AreaSprite*)D_801F63EC)->flags_02 - 1u);
     ((AreaSprite*)D_801F63EC)->flags_02 = count;
     if (!(count & BYTE_MASK)) {
         ((AreaSprite*)D_801F63EC)->flags = 0u;

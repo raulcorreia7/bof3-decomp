@@ -41,15 +41,15 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
             dy = wy + *py;
             /* FAKE: retail forms the y sum before the x subtraction. */
             MATCH_FAKE_USE(dy);
-            dx -= (s32)target_x;
+            dx -= target_x;
             if (dx < 0) {
                 dx = -dx;
             }
-            dy -= (s32)target_y;
+            dy -= target_y;
             if (dy < 0) {
                 dy = -dy;
             }
-            dist = (u32)(dx + dy);
+            dist = (dx + dy);
             if ((route_step & BYTE_MASK) != 0u) {
                 if (entity->unk_88 < dist) {
                     entity->unk_88 = dist;

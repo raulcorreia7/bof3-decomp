@@ -8,13 +8,13 @@ MATCH void func_801F4E3C(void) {
     func_801C3598();
     func_801C2BEC();
     if (g_GameRequestFlags & 1) {
-        if ((Area_GetCellCode((s32)g_Task->x.part.integer, (s32)g_Task->y.part.integer) & 0xFF) == 0xAF) {
+        if ((Area_GetCellCode(g_Task->x.part.integer, g_Task->y.part.integer) & 0xFF) == 0xAF) {
             func_8019FA28(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
             g_GameEntryMode   = 0;
             g_GameRequestKind = 0xC;
             return;
         }
-        if ((Area_GetCellCode((s32)g_Task->x.part.integer, (s32)g_Task->y.part.integer) & 0xFF) == 0xC0) {
+        if ((Area_GetCellCode(g_Task->x.part.integer, g_Task->y.part.integer) & 0xFF) == 0xC0) {
             func_801A0048(g_Task->x.part.integer, g_Task->y.part.integer);
         }
     }

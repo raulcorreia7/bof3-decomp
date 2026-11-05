@@ -9,7 +9,7 @@ MATCH void func_801D9C4C(void) {
     if (WINDOW_EFFECT_IDLE()) {
         D_8014419E = 0;
         p          = &D_80144199;
-        *p         = (u8)(*p + 1);
+        *p         = (*p + 1);
         FISHING_STATE->sub_index_03 += 1;
     }
 }

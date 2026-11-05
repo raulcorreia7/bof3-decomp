@@ -72,7 +72,7 @@ MATCH void SYS_ShowException(void) {
         UI_DrawGlyphString(20, 20, 0, (void*)PTR_s_EXCEPTION_8017f504);
         UI_DrawGlyphString(100, 20, 2, *(void* const*)((const u8*)PTR_s_INTERRRUPT_8017f508 + (exception_code & 0x3C)));
 
-        sprintf((char*)g_UiFormatBuffer, D_80149990, (u32)exception_pc);
+        sprintf((char*)g_UiFormatBuffer, D_80149990, exception_pc);
         UI_DrawGlyphString(70, 36, 3, (void*)g_UiFormatBuffer);
         sprintf((char*)g_UiFormatBuffer, D_80149990, exception_pc[0]);
         UI_DrawGlyphString(142, 36, 4, (void*)g_UiFormatBuffer);

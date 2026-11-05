@@ -3,10 +3,10 @@
 MATCH void func_801F38C4(void) {
     s16 temp_v0;
 
-    temp_v0                = (u16)g_Task->z.part.integer - 0x10;
+    temp_v0                = g_Task->z.part.integer - 0x10;
     g_Task->z.part.integer = temp_v0;
     if ((temp_v0 << 0x10) <= 0) {
-        Area_ClearCellPalette((s32)(s16)((u16)g_Task->x.part.integer + 1), (s32)(s16)((u16)g_Task->y.part.integer + 1));
+        Area_ClearCellPalette((s16)(g_Task->x.part.integer + 1), (s16)(g_Task->y.part.integer + 1));
         g_Task->step = 1;
     }
     func_801F3950(g_Task->direction_08, g_Task->z.part.integer);

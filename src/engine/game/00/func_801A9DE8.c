@@ -44,7 +44,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                     work     = g_Task;
                     den      = work->unk_09 * state->unk_07;
                     work->vz = ((s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4)) -
-                                (s16)work->z.part.integer) /
+                                work->z.part.integer) /
                                den;
                     state->flags |= GAME_CURSOR_FLAG_MOVING;
                 } else {
@@ -53,7 +53,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
 
                     counter    = (s16*)&D_1F800000;
                     *counter   = g_Task->z.part.integer;
-                    D_1F800002 = (s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
+                    D_1F800002 = ((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
                     func_801C5DFC(value);
                     step       = (0x80 / g_AreaCameraStep) * D_80143FC3;
                     D_80143F5C = ((SP_REF(s16, 0x2u) - *counter) << 16) / step;
@@ -72,7 +72,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                 g_Task->unk_09 = 1;
             work     = g_Task;
             work->vz = ((s16)((*(table + state->index_0A + 1) << 8) | *(table + state->index_0A + 2)) -
-                        (s16)work->z.part.integer) /
+                        work->z.part.integer) /
                        work->unk_09;
             work->vx = 0;
             work->vy = 0;
@@ -113,7 +113,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             }
             work                 = g_Task;
             work->vz             = 0;
-            work->z.part.integer = (u16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
+            work->z.part.integer = ((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
             state->index_0A += 4;
             break;
         }
@@ -134,7 +134,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                 /* FAKE: counter store before work read. */
                 MATCH_BARRIER();
                 if ((work->script_pc != mode) && (mode == *(table + state->index_0A + 2)))
-                    SND_PlayCue((u16)(0x200u | *(table + state->index_0A + 1)));
+                    SND_PlayCue((0x200u | *(table + state->index_0A + 1)));
             }
             state->index_0A += 2;
             break;

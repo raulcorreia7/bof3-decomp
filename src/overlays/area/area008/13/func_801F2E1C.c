@@ -14,7 +14,7 @@ MATCH void func_801F2E1C(void) {
         g_Task->mode    = 6;
         return;
     }
-    tmp        = (u8)(D_801F53F4 - 1);
+    tmp        = (D_801F53F4 - 1);
     D_801F53F4 = tmp;
     if ((tmp & BYTE_MASK) < 2) {
         g_ScriptVars[2]           = 2;

@@ -17,6 +17,6 @@ MATCH void func_801A4990(u8* script) {
     }
     mode = g_CurrentActor->unk_78;
     if (mode != 0) {
-        g_Task->unk_0A = (u8)(0x10 / (s32)g_RouteSpeedScale[mode]);
+        g_Task->unk_0A = (0x10 / g_RouteSpeedScale[mode]);
     }
 }

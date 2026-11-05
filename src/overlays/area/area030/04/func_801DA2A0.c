@@ -9,7 +9,7 @@ MATCH void func_801DA2A0(void) {
     u8*  byte_counter;
     u16* word_counter;
 
-    FISHING_STATE->step_timer_09 = (u8)(FISHING_STATE->step_timer_09 + 1);
+    FISHING_STATE->step_timer_09 = (FISHING_STATE->step_timer_09 + 1);
     func_801E1758((s16)(0x6C - (FISHING_STATE->step_timer_09 * 0x50)), 0x56);
     work = (u8*)g_Task;
     if (work[9] == 5) {

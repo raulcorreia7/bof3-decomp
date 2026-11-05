@@ -11,16 +11,16 @@ MATCH u8* func_801B3C3C(s32 bounds_x, s32 bounds_y) {
     y      = bounds_y & BYTE_MASK;
     cursor = entry + 3;
 loop_1: /* scan each 8-byte bounds entry until one contains (x, y) */
-    if (x < (s32)*entry) {
+    if (x < *entry) {
         goto block_5; /* outside this entry's range, try the next */
     }
-    if (y < (s32)cursor[-2]) {
+    if (y < cursor[-2]) {
         goto block_5; /* the entry is not the wanted one */
     }
-    if ((s32)cursor[-1] < x) {
+    if (cursor[-1] < x) {
         goto block_5; /* the entry is not the wanted one */
     }
-    if ((s32)*cursor < y) {
+    if (*cursor < y) {
         goto block_5; /* the entry is not the wanted one */
     }
     return entry;

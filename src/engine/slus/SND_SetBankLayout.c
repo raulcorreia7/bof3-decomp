@@ -32,7 +32,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
     v += fixed;
     D_80146788[0]             = v;
     w                         = FIELD(s32, D_80182348, off);
-    D_80146784                = (s32)D_801486A0;
+    D_80146784                = D_801486A0;
     D_80148A34                = v;
     D_801467A0                = 1;
     D_8014677C[0].spu_address = w;
@@ -44,7 +44,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
     D_8014679C = w;
     D_80146794 = v;
     v          = FIELD(s32, D_80182348, off + 4);
-    D_80146798 = (s32)layer2;
+    D_80146798 = layer2;
     D_80148A38 = w;
     D_801467B4 = 2;
     D_80146790 = v;
@@ -56,7 +56,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
     D_801467B0 = v;
     D_801467A8 = w;
     w          = FIELD(s32, D_80182348, off + 8);
-    D_801467AC = (s32)D_80148798;
+    D_801467AC = D_80148798;
     D_80148A3C = v;
     D_801467C8 = 3;
     D_801467A4 = w;
@@ -71,7 +71,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
         D_801467C4 = w;
         D_801467BC = v;
         v          = FIELD(s32, D_80182348, off + 12);
-        D_801467C0 = (s32)D_80148814;
+        D_801467C0 = D_80148814;
         D_801467DC = 4;
         D_801467B8 = v;
         size       = FIELD(s32, D_801823F0, off + 12);
@@ -81,7 +81,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
         D_801467D8 = end;
         D_801467D0 = w;
         v          = FIELD(s32, D_80182348, off + 16);
-        D_801467D4 = (s32)D_80148890;
+        D_801467D4 = D_80148890;
         D_801467F0 = 5;
         D_801467CC = v;
         next       = FIELD(s32, D_801823F0, off + 16);
@@ -91,7 +91,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
         D_801467EC = last;
         D_801467E4 = next;
         v          = FIELD(s32, D_80182348, off + 20);
-        D_801467E8 = (s32)D_8014890C;
+        D_801467E8 = D_8014890C;
         D_80146804 = 6;
         D_801467E0 = v;
         size       = FIELD(s32, D_801823F0, off + 20);
@@ -109,5 +109,5 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
     D_80148A30 = size;
     D_80148A4C = v;
     D_801467F4 = off;
-    D_801467FC = (s32)D_80148988;
+    D_801467FC = D_80148988;
 }

@@ -24,5 +24,5 @@ MATCH void func_801E0C80(s32 graphic, s32 layer) {
     }
 
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim((u32)(u8)layer, 0x0C);
+    GFX_AddPrim((u8)layer, 0x0C);
 }

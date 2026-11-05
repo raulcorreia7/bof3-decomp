@@ -7,12 +7,12 @@ MATCH void func_801D3510(void) {
     u8* tail;
     u8  value;
 
-    value   = (u8)(head[9] - 1);
+    value   = (head[9] - 1);
     head[9] = value;
 
     tail = (u8*)g_Task;
     if (tail[9] == 0) {
-        tail[1] = (u8)(tail[1] + 1);
+        tail[1] = (tail[1] + 1);
     }
 
     Area_AddActor();

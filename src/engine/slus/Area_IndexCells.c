@@ -77,11 +77,11 @@ MATCH void Area_IndexCells(void) {
                     }
                     difference = 0x7FEFC000;
                     base       = raw_row * 0x38 + (u32)table;
-                    cell       = (s16*)((u32)(table_column * 2) + base);
+                    cell       = (s16*)((table_column * 2) + base);
                     /* FAKE: Preserve wrapped-index order. */
                     MATCH_FAKE_BARRIER();
                     record_index = g_AreaMapBundle.record_region_24;
-                    difference += (s32)record;
+                    difference += record;
                     difference -= record_index * 4;
                     difference = (difference >> 2) + 1;
                     *cell      = difference;

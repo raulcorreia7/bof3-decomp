@@ -36,7 +36,7 @@ MATCH s32 func_801C4040(s32 pos_x, s32 pos_y, s16 probe_range) {
     }
     if (dist < 193) {
         saved                  = g_Task->z.part.integer;
-        g_Task->z.part.integer = (u16)probe_range;
+        g_Task->z.part.integer = probe_range;
         found                  = ~func_801BDE14(pos_x, pos_y, 0) != 0;
         g_Task->z.part.integer = saved;
         return found;

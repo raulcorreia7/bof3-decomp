@@ -10,5 +10,5 @@ MATCH void func_801DDCB8(void) {
     spad_ptr        = TASK_BYTES;
     g_AreaDrawFlags = AREA_DRAW_SORTED_RECORDS | 2 | AREA_DRAW_CELL_LAYERS | AREA_DRAW_APPEND_ACTOR_PRIMITIVES |
                       AREA_DRAW_APPEND_AREA_PRIMITIVES;
-    spad_ptr[3]     = (u8)(spad_ptr[3] + 1u);
+    spad_ptr[3]     = (spad_ptr[3] + 1u);
 }

@@ -30,7 +30,7 @@ MATCH void func_801D799C(s16 x, s16 y, u8 height, u8 style) {
     prim->u3   = prim->u1;
     prim->v0   = D_801E218C[style].v;
     prim->v1   = prim->v0;
-    prim->v2   = prim->v0 + (u8)D_801E218C[style].v_span;
+    prim->v2   = prim->v0 + D_801E218C[style].v_span;
     prim->v3   = prim->v2;
     PSX_SET_NEUTRAL_RGB(prim);
     GFX_AddPrim(1, 0x28);

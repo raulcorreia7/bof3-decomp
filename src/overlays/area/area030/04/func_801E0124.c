@@ -11,7 +11,7 @@ MATCH void func_801E0124(void) {
     Area_FindSceneRecord(*(u16*)(D_801E2ACA + FISHING_STATE->cue_index_06 * 36));
 
     record        = FISHING_STATE;
-    record->flags = (u8)(record->flags & ~ACTOR_FLAG_SEMI_TRANSPARENT);
+    record->flags = (record->flags & ~ACTOR_FLAG_SEMI_TRANSPARENT);
 
     FISHING_STATE->state_2A = 0;
 
@@ -19,5 +19,5 @@ MATCH void func_801E0124(void) {
     Actor_SelectScript(0);
 
     record                = FISHING_STATE;
-    record->mode_index_02 = (u8)(record->mode_index_02 + 1);
+    record->mode_index_02 = (record->mode_index_02 + 1);
 }

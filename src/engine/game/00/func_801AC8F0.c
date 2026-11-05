@@ -10,7 +10,7 @@ MATCH u16 func_801AC8F0(ScriptState* state, u8 wanted_id, u8* base) {
     if (!(cursor & 0x4000)) {
         return cursor;
     }
-    if (base[(u16)offset] == 0x0A && base[(u16)offset + 1] == wanted_id) {
+    if (base[offset] == 0x0A && base[offset + 1] == wanted_id) {
         /* the cursor's own record already matches: use the shared exit */
         goto done;
     }
@@ -23,7 +23,7 @@ loop:
         } else {
             offset += 2;
         }
-    } else if ((u32)(opcode - 14) < 2U) {
+    } else if ((opcode - 14) < 2U) {
         if (record[3] & 2) {
             offset += 5;
         } else {
@@ -37,5 +37,5 @@ loop:
         goto loop;
     }
 done:
-    return (u16)offset;
+    return offset;
 }

@@ -7,7 +7,7 @@ MATCH void func_801B5BDC(u8 route_index) {
         Actor_RequestScript(route_index);
         return;
     }
-    index = (u32)route_index * 2;
+    index = route_index * 2;
     Actor_RequestScript(s_RouteStepScratch[index]);
     SCRATCH_WORK->unk_2A = s_RouteStepScratch[index + 1];
 }

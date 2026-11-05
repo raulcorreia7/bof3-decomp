@@ -18,7 +18,7 @@ MATCH void GFX_RunTransferQueue(void) {
         table1 = D_80145A54;
         table2 = &D_80145A54[20];
         do {
-            index  = (u8)i;
+            index  = i;
             rect.x = table1[index];
             rect.y = table2[index];
             record = (u16*)(&D_80145A04)[index];

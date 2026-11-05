@@ -24,5 +24,5 @@ MATCH void func_801D42E4(void) {
     work->cursor_10           = 0;
 
     *(u16*)((u8*)advanced + 0x2C) = 0xFFFF;
-    advanced->handler_index_01    = (u8)(advanced->handler_index_01 + 1);
+    advanced->handler_index_01    = (advanced->handler_index_01 + 1);
 }

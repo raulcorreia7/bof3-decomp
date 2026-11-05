@@ -14,11 +14,11 @@ MATCH void SND_QueueSelectionFx(s32 cue_id) {
     D_8018B36C = -1;
     D_8018B394 = -1;
     SND_PlayCue(cue_id);
-    packed = (u32)(*(u8*)&D_8018B31C & 0x1F) << 8;
-    packed |= (u32)(*(u8*)&D_8018B344 & 0x1F) << 13;
-    packed |= (u32)(*(u8*)&D_8018B36C & 0x1F) << 18;
-    packed |= (u32)(*(u8*)&D_8018B394 & 0x1F) << 23;
+    packed = (*(u8*)&D_8018B31C & 0x1F) << 8;
+    packed |= (*(u8*)&D_8018B344 & 0x1F) << 13;
+    packed |= (*(u8*)&D_8018B36C & 0x1F) << 18;
+    packed |= (*(u8*)&D_8018B394 & 0x1F) << 23;
     work                = g_Task;
     work->state_70.word = work->state_70.word | packed;
-    work->flags         = (u8)(work->flags | ACTOR_FLAG_SELECTION_FX);
+    work->flags         = (work->flags | ACTOR_FLAG_SELECTION_FX);
 }

@@ -25,7 +25,7 @@ MATCH void func_801D6128(void) {
             BANNER_INDEX = D_801E2025[entry_offset];
             BANNER_FRAME = 0;
         }
-        Actor_SelectScript((u8)D_801E2024[BANNER_INDEX * 3]);
+        Actor_SelectScript(D_801E2024[BANNER_INDEX * 3]);
         BANNER_TIMER = D_801E2025[BANNER_INDEX * 3];
         if (D_801E2026[BANNER_INDEX * 3] == 0x50) {
             entry                      = Actor_FindFreeSlot() & BYTE_MASK;

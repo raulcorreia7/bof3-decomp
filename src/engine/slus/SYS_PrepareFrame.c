@@ -34,7 +34,7 @@ MATCH void SYS_PrepareFrame(void) {
     table_offset  = (buffer_index + 4) << 3;
     do {
         *(u32*)(D_80142CC0 + table_offset) = 0;
-        *(u32*)(D_80142CC4 + table_offset) = (u32)(packet + packet_offset);
+        *(u32*)(D_80142CC4 + table_offset) = (packet + packet_offset);
         packet += 0x30;
         table_offset += 0x30;
         index++;

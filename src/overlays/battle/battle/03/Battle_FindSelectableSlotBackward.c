@@ -13,7 +13,7 @@ MATCH u8 Battle_FindSelectableSlotBackward(u8 slot) {
                 return candidate;
             }
         }
-        wrap = (s8)slot;
+        wrap = slot;
         for (index = 2; wrap < index; index--) {
             candidate = index;
             if (!Battle_SlotIsBlocked(candidate)) {
@@ -28,7 +28,7 @@ MATCH u8 Battle_FindSelectableSlotBackward(u8 slot) {
             return candidate;
         }
     }
-    wrap = (s8)slot;
+    wrap = slot;
     for (index = 10; wrap < index; index--) {
         candidate = index;
         if (!Battle_SlotIsBlocked(candidate)) {

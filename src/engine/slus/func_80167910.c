@@ -25,9 +25,9 @@ MATCH void func_80167910(void) {
     if (D_8014626C[0] & 0x40) {
         return;
     }
-    pos.vx         = (s16)((D_801462A0 >> 9) - 0x4000);
-    pos.vy         = (s16)((D_801462A4 >> 9) - 0x4000);
-    pos.vz         = (s16)(-(D_801462AA + 0x80) / 2);
+    pos.vx         = ((D_801462A0 >> 9) - 0x4000);
+    pos.vy         = ((D_801462A4 >> 9) - 0x4000);
+    pos.vz         = (-(D_801462AA + 0x80) / 2);
     g_Task->unk_60 = RotTransPers(&pos, (long*)&sxy, &p, &flag);
     g_Task->unk_2E = sxy.vx;
     g_Task->unk_30 = sxy.vy;
@@ -39,9 +39,9 @@ MATCH void func_80167910(void) {
     poly->x2 = poly->x0;
     poly->x3 = poly->x1;
     if (g_FrameCount & 8) {
-        poly->y0 = g_Task->unk_30 - 27 + (((u32)g_FrameCount >> 1) & 3);
+        poly->y0 = g_Task->unk_30 - 27 + ((g_FrameCount >> 1) & 3);
     } else {
-        poly->y0 = g_Task->unk_30 - 24 - (((u32)g_FrameCount >> 1) & 3);
+        poly->y0 = g_Task->unk_30 - 24 - ((g_FrameCount >> 1) & 3);
     }
     poly->u0 = 204;
     poly->u1 = 204;
@@ -69,9 +69,9 @@ MATCH void func_80167910(void) {
     axis.vx = 0;
     axis.vy = 0;
     axis.vz = 0;
-    rot.vx  = (s16)((g_Task->x.fixed >> 9) - 0x4000);
-    rot.vy  = (s16)((g_Task->y.fixed >> 9) - 0x4000);
-    rot.vz  = (s16)(-g_Task->z.part.integer / 2);
+    rot.vx  = ((g_Task->x.fixed >> 9) - 0x4000);
+    rot.vy  = ((g_Task->y.fixed >> 9) - 0x4000);
+    rot.vz  = (-g_Task->z.part.integer / 2);
     RotTrans(&rot, (VECTOR*)mtx.t, &flag);
     RotMatrix(&axis, &mtx);
     MulMatrix2((MATRIX*)g_CameraMatrix, &mtx);
@@ -91,20 +91,20 @@ MATCH void func_80167910(void) {
         GFX_AddPrim(3, 0xC);
     }
     if (g_FrameCount & 8) {
-        radius = (s16)(0x38 - ((~((u32)g_FrameCount >> 1) & 3) * 2));
+        radius = (0x38 - ((~(g_FrameCount >> 1) & 3) * 2));
     } else {
-        radius = (s16)(0x38 - (g_FrameCount & 6));
+        radius = (0x38 - (g_FrameCount & 6));
     }
     for (i = 0; i < 32; i++) {
         angle            = i << 7;
         D_1F800014[0].vx = 0;
         D_1F800014[0].vy = 0;
         D_1F800014[0].vz = 0;
-        D_1F800014[1].vx = (s16)FIXED_MUL(radius, rcos(angle));
-        D_1F800014[1].vy = (s16)FIXED_MUL(radius, rsin(angle));
+        D_1F800014[1].vx = FIXED_MUL(radius, rcos(angle));
+        D_1F800014[1].vy = FIXED_MUL(radius, rsin(angle));
         D_1F800014[1].vz = 0;
-        D_1F800014[2].vx = (s16)FIXED_MUL(radius, rcos(angle + 128));
-        D_1F800014[2].vy = (s16)FIXED_MUL(radius, rsin(angle + 128));
+        D_1F800014[2].vx = FIXED_MUL(radius, rcos(angle + 128));
+        D_1F800014[2].vy = FIXED_MUL(radius, rsin(angle + 128));
         D_1F800014[2].vz = 0;
         prim             = g_GfxPrimCursor;
         prim[3]          = 6;

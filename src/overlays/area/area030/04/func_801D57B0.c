@@ -42,5 +42,5 @@ MATCH void func_801D57B0(void) {
     FISHING_STATE->tint_5F       = 0;
 
     work               = FISHING_STATE;
-    work->sub_index_03 = (u8)(work->sub_index_03 + 1);
+    work->sub_index_03 = (work->sub_index_03 + 1);
 }

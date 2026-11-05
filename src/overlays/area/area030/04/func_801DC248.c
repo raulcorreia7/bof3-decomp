@@ -16,7 +16,7 @@ MATCH void func_801DC248(void) {
     u8* counter;
 
     FISHING_PAGE_STEP += 1;
-    func_801E0ED0((s16)(-(FISHING_PAGE_STEP * 0x500000) >> 16), 0x4E);
+    func_801E0ED0((-(FISHING_PAGE_STEP * 0x500000) >> 16), 0x4E);
     func_801E0F4C((FISHING_PAGE_STEP * 0x30) + 0x80, 0x5B, D_8014688E[D_801E3208 * 0x98]);
 
     offset = D_801E3208 * 0x98;

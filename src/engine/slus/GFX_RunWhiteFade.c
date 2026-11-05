@@ -11,7 +11,7 @@ MATCH void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order) {
     s32 semi_trans_copy;
     s32 order_copy;
 
-    delta16         = (s16)delta;
+    delta16         = delta;
     semi_trans_copy = semi_trans;
     order_copy      = order;
     if ((delta << 0x10) <= 0) {
@@ -19,7 +19,7 @@ MATCH void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order) {
     } else {
         level = 0;
     }
-    if (((s32)delta16) <= 0) {
+    if ((delta16) <= 0) {
         D_80143E07 = 0;
         D_80143E06 = 0;
         D_80143E05 = 0;
@@ -27,7 +27,7 @@ MATCH void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order) {
         D_80143D76 = 0;
         D_80143D75 = 0;
     }
-    step       = (s32)delta16;
+    step       = delta16;
     blend_mode = 1;
     while ((GFX_StepScreenFade(&level, step, semi_trans_copy & BYTE_MASK, order_copy & BYTE_MASK, blend_mode) &
             BYTE_MASK) == 0) {

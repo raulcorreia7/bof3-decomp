@@ -12,27 +12,27 @@ MATCH void Area_BuildClut(u16* dst) {
     switch (g_Task->unk_28) {
         case 0:
             sel  = g_Task->unk_27;
-            *dst = (u16)(((base + (sel >> 4)) << 6) | (sel & 0xF));
+            *dst = (((base + (sel >> 4)) << 6) | (sel & 0xF));
             break;
         case 1: {
             u32 n;
 
             n    = g_Task->unk_27;
-            *dst = (u16)((base + n) << 6);
+            *dst = ((base + n) << 6);
             break;
         }
         case 2:
             sel  = g_Task->unk_27;
-            *dst = (u16)(((base + (sel >> 3)) << 6) | ((sel & 7) * 2));
+            *dst = (((base + (sel >> 3)) << 6) | ((sel & 7) * 2));
             break;
         case 3:
             sel  = g_Task->unk_27;
-            *dst = (u16)(((base + (sel >> 2)) << 6) | ((sel & 3) * 4));
+            *dst = (((base + (sel >> 2)) << 6) | ((sel & 3) * 4));
             break;
         case 4:
         default:
             sel  = g_Task->unk_27;
-            *dst = (u16)(((base + (sel >> 1)) << 6) | ((sel & 1) * 8));
+            *dst = (((base + (sel >> 1)) << 6) | ((sel & 1) * 8));
             break;
     }
 }

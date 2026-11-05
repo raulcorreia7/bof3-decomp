@@ -21,7 +21,7 @@ MATCH void func_801D23F4(void) {
     } else if (height <= 0x14FFFF) {
         g_AreaScrollTargetY = 0x150000;
     } else {
-        g_AreaScrollTargetY = (u32)height;
+        g_AreaScrollTargetY = height;
     }
     work_a    = (FishingState*)g_Task;
     current_y = work_a->y_38.pos_y;
@@ -39,13 +39,13 @@ MATCH void func_801D23F4(void) {
             work_c                   = (FishingState*)g_Task;
             g_AreaCameraStep         = 0;
             work_c->cursor_10        = 0;
-            work_c->handler_index_01 = (u8)(work_c->handler_index_01 + 1);
+            work_c->handler_index_01 = (work_c->handler_index_01 + 1);
         }
         Actor_SelectScript(4U);
     } else {
         row = work_a->cue_index_06 * 8;
         if (current_y == (target_y + *(s32*)((u8*)&D_801E1D58 + row))) {
-            work_a->step_limit_20 = (s32) * (s32*)((u8*)&D_801E1D5C + row);
+            work_a->step_limit_20 = * (s32*)((u8*)&D_801E1D5C + row);
         }
         work_d          = (FishingState*)g_Task;
         step            = work_d->step_14 + work_d->step_limit_20;
@@ -55,9 +55,9 @@ MATCH void func_801D23F4(void) {
             work_d->step_limit_20 = 0;
         }
         work_e                   = (FishingState*)g_Task;
-        work_e->motion_34.unk_34 = (s32)(work_e->motion_34.unk_34 + work_e->pos_x_0C);
-        work_e->y_38.pos_y       = (s32)(work_e->y_38.pos_y - 0x4000);
-        work_e->bounce_3C.unk_3C = (s32)(work_e->bounce_3C.unk_3C + work_e->step_14);
+        work_e->motion_34.unk_34 = (work_e->motion_34.unk_34 + work_e->pos_x_0C);
+        work_e->y_38.pos_y       = (work_e->y_38.pos_y - 0x4000);
+        work_e->bounce_3C.unk_3C = (work_e->bounce_3C.unk_3C + work_e->step_14);
         if (work_e->y_38.pos_y == 0x3C0000) {
             g_AreaCameraStep = 0x40;
         }

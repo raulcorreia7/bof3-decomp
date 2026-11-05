@@ -28,7 +28,7 @@ MATCH u8 func_8014DA24(void) {
         g_Task->script_pc = index;
         g_Task->unk_4A    = *(u8*)(g_Task->script + index);
 
-        g_Task->unk_5A = (u16) * (u16*)(g_Task->range_54.table + selected * 2);
+        g_Task->unk_5A = * (u16*)(g_Task->range_54.table + selected * 2);
     }
     return result;
 }

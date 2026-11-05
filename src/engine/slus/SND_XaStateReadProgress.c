@@ -15,7 +15,7 @@ MATCH void SND_XaStateReadProgress(void) {
         }
     } else if (*flag != 0) {
         SND_FadeCdVolume(0x80);
-        wrap = (u16)D_8014681E < 6U;
+        wrap = D_8014681E < 6U;
         D_8014681E += 1;
         if (wrap == 0) {
             g_EmiServiceState = 5;

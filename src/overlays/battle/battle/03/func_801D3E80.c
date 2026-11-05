@@ -6,7 +6,7 @@ MATCH void func_801D3E80(void) {
     u32 entry_index;
     u8* counter;
 
-    for (voice = 16; (u32)(voice & BYTE_MASK) < 24u; voice++) {
+    for (voice = 16; (voice & BYTE_MASK) < 24u; voice++) {
         SsUtKeyOffV(voice & BYTE_MASK);
     }
 

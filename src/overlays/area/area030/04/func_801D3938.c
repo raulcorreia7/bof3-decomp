@@ -6,7 +6,7 @@ MATCH void func_801D3938(void) {
     s32 val;
 
     val                        = FISHING_STATE->origin_y_30 - 8;
-    FISHING_STATE->origin_y_30 = (u16)val;
+    FISHING_STATE->origin_y_30 = val;
 
     if ((s16)val < -0x19) {
         if (FISHING_STATE->counter_07 != 0u) {

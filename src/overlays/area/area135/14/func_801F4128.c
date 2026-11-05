@@ -7,7 +7,7 @@ MATCH void func_801F4128(void) {
     if (D_80143F03 == 4) {
         work                   = g_Task;
         span                   = (u16*)g_ScriptState;
-        FIELD(u16, work, 0x3E) = (u16)(FIELD(u16, work, 0x3E) + work->vz);
-        FIELD(u16, span, 0xA)  = (u16)(FIELD(u16, span, 0xA) - 2);
+        FIELD(u16, work, 0x3E) = (FIELD(u16, work, 0x3E) + work->vz);
+        FIELD(u16, span, 0xA)  = (FIELD(u16, span, 0xA) - 2);
     }
 }

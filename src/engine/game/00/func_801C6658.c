@@ -74,8 +74,8 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
                 *(s32*)(D_80143F30 + off) = *(s32*)(D_80143F30 + off) + step_b;
             }
             count += 1;
-        } while ((u32)(count & BYTE_MASK) < 8U);
+        } while ((count & BYTE_MASK) < 8U);
         sel += 1;
-    } while ((u32)(sel & BYTE_MASK) < 2U);
+    } while ((sel & BYTE_MASK) < 2U);
     return 0;
 }

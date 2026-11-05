@@ -22,7 +22,7 @@ MATCH void func_801A0CFC(Actor* entity) {
         if (D_801C83BC[g_Task->step](entity, param, 2) != 0) {
             value = ((s32 (*)(Actor*))func_801A2C94)(entity);
             if (g_Task->unk_09 != 0) {
-                entity->unk_7B = (u8)((RANDOM_MASK(3)) + 3);
+                entity->unk_7B = ((RANDOM_MASK(3)) + 3);
             }
         } else {
             value = 0xFF;
@@ -35,8 +35,8 @@ MATCH void func_801A0CFC(Actor* entity) {
     if (((value & BYTE_MASK) != GAME_NONE) && (g_Task->unk_09 != 0)) {
         g_Task->unk_03       = g_Task->mode;
         g_Task->mode         = 0x0A;
-        entity->unk_79       = (u8)(value & 7);
-        g_Task->direction_08 = (u8)(saved & 7);
+        entity->unk_79       = (value & 7);
+        g_Task->direction_08 = (saved & 7);
         work                 = (u8*)g_Task;
         work[0x0A]           = 0;
         work[9]              = 0;

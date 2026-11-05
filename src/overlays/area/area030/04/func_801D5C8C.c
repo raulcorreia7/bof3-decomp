@@ -31,5 +31,5 @@ MATCH void func_801D5C8C(void) {
     state               = FISHING_STATE;
     tail->pos_x_0C      = 0;
     tail->step_delta_18 = 4;
-    state->sub_index_03 = (u8)(state->sub_index_03 + 1);
+    state->sub_index_03 = (state->sub_index_03 + 1);
 }

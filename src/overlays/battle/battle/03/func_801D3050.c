@@ -14,7 +14,7 @@ MATCH void func_801D3050(void) {
         do {
             s32 row;
 
-            row                   = (s32)*battler - 3;
+            row                   = *battler - 3;
             g_TextVariables[0][i] = D_801EB6A4[row][i];
             i++;
         } while (i < 8);

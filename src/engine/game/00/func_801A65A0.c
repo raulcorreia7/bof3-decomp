@@ -33,7 +33,7 @@ MATCH void func_801A65A0(u8* script) {
         D_80146910[*counter][0] = 0;
         dist                    = Area_SampleHeight(work->x.fixed, work->y.fixed);
         record                  = g_Task;
-        record->z.part.integer  = (u16)dist;
+        record->z.part.integer  = dist;
         record->mode            = script[8];
 
         g_Task->step                                   = script[0xA];
@@ -41,7 +41,7 @@ MATCH void func_801A65A0(u8* script) {
         g_Task->unk_06                                 = script[0] >> 4;
         FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[2];
         FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[3];
-        FIELD(u16, D_80146904, *counter * ACTOR_SIZE)  = (u16)(script[0xD] | (script[0xC] << 8));
+        FIELD(u16, D_80146904, *counter * ACTOR_SIZE)  = (script[0xD] | (script[0xC] << 8));
         FIELD(u8, &D_801468FF, *counter * ACTOR_SIZE)  = script[0xE];
         FIELD(u8, D_80146900, *counter * ACTOR_SIZE)   = script[9];
         FIELD(u8, D_8014691C, *counter * ACTOR_SIZE)   = 0x7F;
@@ -51,6 +51,6 @@ MATCH void func_801A65A0(u8* script) {
         g_Task->tint.bytes.unk_5E = 0;
         g_Task->tint.bytes.flags  = 2;
         func_801A4914();
-        *counter = (u16)(*counter + 1);
+        *counter = (*counter + 1);
     }
 }

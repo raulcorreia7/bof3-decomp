@@ -68,13 +68,13 @@ MATCH void func_801A68C0(u8* script) {
     if (D_80146900[*counter][0] == 0) {
         Area_SetCellCode(WORK->x.part.integer, WORK->y.part.integer, 0x10);
         if (WORK->x.part.fraction != 0) {
-            Area_SetCellCode((s16)((u16)WORK->x.part.integer + 1), WORK->y.part.integer, 0x10);
+            Area_SetCellCode((WORK->x.part.integer + 1), WORK->y.part.integer, 0x10);
         }
         if (WORK->y.part.fraction != 0) {
-            Area_SetCellCode(WORK->x.part.integer, (s16)((u16)WORK->y.part.integer + 1), 0x10);
+            Area_SetCellCode(WORK->x.part.integer, (WORK->y.part.integer + 1), 0x10);
         }
         if ((WORK->x.part.fraction != 0) && (WORK->y.part.fraction != 0)) {
-            Area_SetCellCode((s16)((u16)WORK->x.part.integer + 1), (s16)((u16)WORK->y.part.integer + 1), 0x10);
+            Area_SetCellCode((WORK->x.part.integer + 1), (WORK->y.part.integer + 1), 0x10);
         }
     }
 

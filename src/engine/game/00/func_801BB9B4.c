@@ -15,7 +15,7 @@ MATCH void func_801BB9B4(s16 probe_x, s16 probe_y) {
     if (g_Task->direction_08 & 1) {
         return;
     }
-    if (func_801BB86C(probe_x, probe_x, g_Task->y.part.integer, (s16)(g_Task->y.part.integer + 1), 1) & BYTE_MASK) {
+    if (func_801BB86C(probe_x, probe_x, g_Task->y.part.integer, (g_Task->y.part.integer + 1), 1) & BYTE_MASK) {
         func_801BB8E8(4, 6, 5);
     }
     if (g_Task->direction_08 & 1) {
@@ -26,14 +26,14 @@ MATCH void func_801BB9B4(s16 probe_x, s16 probe_y) {
             func_801BB8E8(4, 6, 5);
         }
     } else {
-        if (func_801BB86C(probe_x, probe_x, probe_y, (s16)((u16)g_Task->y.part.integer + 1), 1) & BYTE_MASK) {
+        if (func_801BB86C(probe_x, probe_x, probe_y, (g_Task->y.part.integer + 1), 1) & BYTE_MASK) {
             func_801BB8E8(4, 6, 5);
         }
     }
     if (g_Task->direction_08 & 1) {
         return;
     }
-    if (func_801BB86C(g_Task->x.part.integer, (s16)(g_Task->x.part.integer + 1), probe_y, probe_y, 3) & BYTE_MASK) {
+    if (func_801BB86C(g_Task->x.part.integer, (g_Task->x.part.integer + 1), probe_y, probe_y, 3) & BYTE_MASK) {
         func_801BB8E8(2, 4, 3);
     }
     route = g_Task->direction_08;
@@ -45,7 +45,7 @@ MATCH void func_801BB9B4(s16 probe_x, s16 probe_y) {
             func_801BB8E8(2, 4, 3);
         }
     } else {
-        if (func_801BB86C((s16)((u16)g_Task->x.part.integer + 1), probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
+        if (func_801BB86C((g_Task->x.part.integer + 1), probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
             func_801BB8E8(2, 4, 3);
         }
     }

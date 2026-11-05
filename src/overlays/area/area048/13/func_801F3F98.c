@@ -7,7 +7,7 @@ MATCH void func_801F3F98(void) {
         g_Task->step += 1;
     }
     g_Task->unk_09 += 1;
-    if ((u8)g_Task->unk_09 >= 0x41U) {
+    if (g_Task->unk_09 >= 0x41U) {
         g_Task->unk_09 = 0;
         if (rand() & 1) {
             g_Task->step = 5;

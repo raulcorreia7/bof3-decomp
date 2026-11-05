@@ -20,5 +20,5 @@ MATCH void func_80159FA0(s32 x, s32 y, u8 width, u8 height) {
     setRGB0(line, 120, 120, 120);
     setXY4(line, x0, y0, x1, y0, x1, y1, x0, y1);
     GFX_AddPrim(1u, sizeof(LINE_F4));
-    func_8015A2B0((s16)x0, (s16)y0, (s16)x0, (s16)y1, 0x78);
+    func_8015A2B0(x0, y0, x0, y1, 0x78);
 }

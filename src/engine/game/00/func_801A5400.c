@@ -59,15 +59,15 @@ MATCH void func_801A5400(u8* script) {
         Area_SetCellCode(cell_record_a->x.part.integer, cell_record_a->y.part.integer, 0x10);
         cell_record_b = g_Task;
         if (cell_record_b->x.part.fraction != 0) {
-            Area_SetCellCode((s16)((u16)cell_record_b->x.part.integer + 1), cell_record_b->y.part.integer, 0x10);
+            Area_SetCellCode((cell_record_b->x.part.integer + 1), cell_record_b->y.part.integer, 0x10);
         }
         if (g_Task->y.part.fraction != 0) {
-            Area_SetCellCode(g_Task->x.part.integer, (s16)(g_Task->y.part.integer + 1), 0x10);
+            Area_SetCellCode(g_Task->x.part.integer, (g_Task->y.part.integer + 1), 0x10);
         }
         cell_record_c = g_Task;
         if ((cell_record_c->x.part.fraction != 0) && (cell_record_c->y.part.fraction != 0)) {
-            Area_SetCellCode((s16)((u16)cell_record_c->x.part.integer + 1),
-                             (s16)((u16)cell_record_c->y.part.integer + 1), 0x10);
+            Area_SetCellCode((cell_record_c->x.part.integer + 1),
+                             (cell_record_c->y.part.integer + 1), 0x10);
         }
         VOL(u16, D_1F800000) += 1;
     }

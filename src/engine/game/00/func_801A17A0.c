@@ -14,7 +14,7 @@ MATCH s32 func_801A17A0(u8* entry_record) {
         return 0;
     }
     if (flags & 0x8000) {
-        entry = (u32)g_AreaLoads[g_GameAreaId];
+        entry = g_AreaLoads[g_GameAreaId];
         list  = (s32*)FIELD(u32, entry, 4u);
         func_801A3F3C((u8*)list[flags & 0xFFF]);
         if (FIELD(u16, entry_record, 8u) & 0x8000) {

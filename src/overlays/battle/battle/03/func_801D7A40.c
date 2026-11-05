@@ -41,7 +41,7 @@ MATCH void func_801D7A40(s16 x, s16 y) {
     } else {
         func_801D7D10(g_BattlePanelSlot, (x + s_BattlePanelOffsets[g_BattlePanelSlot][0] - (row_width >> 1)),
                       (y + s_BattlePanelOffsets[g_BattlePanelSlot][1] - (row_width >> 1)),
-                      (u8)(row_width + BATTLE_PANEL_SIZE), (u8)(row_width + BATTLE_PANEL_SIZE), shade);
+                      (u8)(row_width + BATTLE_PANEL_SIZE), (row_width + BATTLE_PANEL_SIZE), shade);
     }
     /* The entrance origins are the rows after the queued panels, with their
      * offsets and widths in the same two tables; a battle quad's palette row
@@ -52,7 +52,7 @@ MATCH void func_801D7A40(s16 x, s16 y) {
         func_801D7D10(BATTLE_PANEL_SLOT_COUNT,
                       (x + s_BattlePanelOffsets[BATTLE_PANEL_SLOT_COUNT][0] - (row_width >> 1)),
                       (y + s_BattlePanelOffsets[BATTLE_PANEL_SLOT_COUNT][1] - (row_width >> 1)),
-                      (u8)(row_width + BATTLE_PANEL_SIZE), (u8)(row_width + BATTLE_PANEL_SIZE), 0x80);
+                      (u8)(row_width + BATTLE_PANEL_SIZE), (row_width + BATTLE_PANEL_SIZE), 0x80);
     }
     entrance_widths++;
     row_width = entrance_widths[0];
@@ -60,6 +60,6 @@ MATCH void func_801D7A40(s16 x, s16 y) {
         func_801D7D10(BATTLE_PANEL_SLOT_COUNT + 1,
                       (x + s_BattlePanelOffsets[BATTLE_PANEL_SLOT_COUNT + 1][0] - (row_width >> 1)),
                       (y + s_BattlePanelOffsets[BATTLE_PANEL_SLOT_COUNT + 1][1] - (row_width >> 1)),
-                      (u8)(row_width + BATTLE_PANEL_SIZE), (u8)(row_width + BATTLE_PANEL_SIZE), 0x80);
+                      (u8)(row_width + BATTLE_PANEL_SIZE), (row_width + BATTLE_PANEL_SIZE), 0x80);
     }
 }

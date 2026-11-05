@@ -34,7 +34,7 @@ MATCH void Area_DrawSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     if (z == 0) {
         return;
     }
-    n = (u32)g_FrameCount % record[8];
+    n = g_FrameCount % record[8];
     while (1) {
         if (n < record[0xA + i]) {
             break;

@@ -10,9 +10,9 @@ MATCH s32 Char_AddCappedStat(u16* value, s32 delta) {
     if ((cur & HALF_MASK) == 0x3E7) {
         return 0;
     }
-    next   = (u16)(cur + delta);
+    next   = (cur + delta);
     *value = next;
-    if ((u32)(next & HALF_MASK) >= 0x3E8U) {
+    if ((next & HALF_MASK) >= 0x3E8U) {
         *value = 0x3E7;
     }
     return 1;

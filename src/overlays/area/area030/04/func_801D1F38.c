@@ -16,7 +16,7 @@ MATCH void func_801D1F38(void) {
         UI_DrawText(0x8A, 0xC8, 0, 0xC, (u8*)((label * ACCESSORY_STRIDE) + (u32)g_Accessories));
     }
 
-    count = (s8)(g_ActorSlots[0].unk_07 - D_801E3210->unk_0F);
+    count = (g_ActorSlots[0].unk_07 - D_801E3210->unk_0F);
     if (count >= 0) {
         elapsed = count;
         if (count >= 5) {
@@ -28,6 +28,6 @@ MATCH void func_801D1F38(void) {
 
     count = elapsed;
     if (count != 0) {
-        func_801D2034((s16)(g_ActorSlots[0].unk_2E + 0xA), (s16)(g_ActorSlots[0].unk_30 - 0x18), 2, (u8)count);
+        func_801D2034((g_ActorSlots[0].unk_2E + 0xA), (g_ActorSlots[0].unk_30 - 0x18), 2, (u8)count);
     }
 }

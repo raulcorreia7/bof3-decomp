@@ -5,9 +5,9 @@ MATCH void func_801AD734(void) {
     u32    choice;
     s8     value;
 
-    choice = (u32)(RANDOM_MASK(0xF));
+    choice = (RANDOM_MASK(0xF));
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-        func_8015BAC4((u8)((D_80145E98 ^ 4) & 7));
+        func_8015BAC4(((D_80145E98 ^ 4) & 7));
     }
     g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
     if ((FIELD(u8, GAME_WORK_AREA_PTR, 0x94u) & 0x80) == 0) {
@@ -25,13 +25,13 @@ MATCH void func_801AD734(void) {
             case 6:
                 func_801ADAC0(1);
                 Party_AddZenny(1, 0);
-                func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
+                func_801ADCF4(((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 g_Task->unk_04 = 2;
                 break;
             case 7:
                 func_801ADAC0(1);
                 Party_AddZenny(10, 0);
-                func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
+                func_801ADCF4(((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 g_Task->unk_04 = 3;
                 break;
             default:

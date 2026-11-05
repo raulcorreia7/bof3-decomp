@@ -37,12 +37,12 @@ MATCH void Area_AddCellPrim(s32 x, s32 y, s32 depth, s32 size) {
         cursor = g_GfxPrimCursor;
         limit  = g_FrameBufferIndex * 0x9000 + PRIM_ARENA_BASE;
         next   = cursor + (size & BYTE_MASK);
-        if ((u32)next < limit) {
+        if (next < limit) {
             offset = (g_FrameBufferIndex + 4) * 8 + count * 0x30;
             packet = *(u8**)(D_80142CC4 + offset);
             setaddr(packet, cursor);
             g_GfxPrimCursor              = next;
-            *(u32*)(D_80142CC4 + offset) = (u32)cursor;
+            *(u32*)(D_80142CC4 + offset) = cursor;
         }
     }
 }

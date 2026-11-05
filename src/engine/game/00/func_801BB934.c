@@ -10,7 +10,7 @@ MATCH bool func_801BB934(s32 first_index, s32 second_index, s8 route_value, s32 
         }
         FIELD(s8, g_Task, 8) = route_value;
     } else if (((u8*)&D_1F800000)[second_index & BYTE_MASK] == expected) {
-        FIELD(s8, g_Task, 8) = (s8)(route_value ^ 4);
+        FIELD(s8, g_Task, 8) = (route_value ^ 4);
     }
     return false;
 }

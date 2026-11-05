@@ -24,8 +24,8 @@ MATCH void func_801F430C(void) {
     FIELD(s32, scratch, 0x38) = D_80145EC8;
 
     if (FIELD(u8, scratch, 0x06) != 0) {
-        FIELD(s16, scratch, 0x36) -= (s32)(D_801F687C[FIELD(u8, scratch, 8)].x << 16) >> 29;
-        value = FIELD(s16, scratch, 0x3A) - ((s32)(D_801F687C[FIELD(u8, scratch, 8)].y << 16) >> 29);
+        FIELD(s16, scratch, 0x36) -= (D_801F687C[FIELD(u8, scratch, 8)].x << 16) >> 29;
+        value = FIELD(s16, scratch, 0x3A) - ((D_801F687C[FIELD(u8, scratch, 8)].y << 16) >> 29);
         FIELD(s16, scratch, 0x3A) = value;
         if (FIELD(u8, scratch, 0x06) == 1) {
             if (FIELD(s32, scratch, 0x0C) == 0) {
@@ -44,8 +44,8 @@ MATCH void func_801F430C(void) {
 
     slots   = SP_PTR(u8*, 0u);
     scratch = slots[0x11];
-    FIELD(s16, scratch, 0x36) -= (s32)(D_801F687C[FIELD(u8, scratch, 8)].x << 16) >> 25;
-    y                         = FIELD(s16, scratch, 0x3A) - ((s32)(D_801F687C[FIELD(u8, scratch, 8)].y << 16) >> 25);
+    FIELD(s16, scratch, 0x36) -= (D_801F687C[FIELD(u8, scratch, 8)].x << 16) >> 25;
+    y                         = FIELD(s16, scratch, 0x3A) - ((D_801F687C[FIELD(u8, scratch, 8)].y << 16) >> 25);
     FIELD(u8, scratch, 0x0B)  = 0;
     slots                     = SP_PTR(u8*, 0u);
     cell                      = slots[0x11];

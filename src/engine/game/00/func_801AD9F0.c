@@ -17,10 +17,10 @@ MATCH void func_801AD9F0(void) {
         area         = g_Task;
         area->unk_04 = 0;
     } else {
-        work->tint.signed_bytes.unk_5D = (s8)(count + 0x10);
+        work->tint.signed_bytes.unk_5D = (count + 0x10);
         work                           = g_Task;
-        work->tint.bytes.unk_5F        = (u8)(work->tint.bytes.unk_5F + 0x10);
+        work->tint.bytes.unk_5F        = (work->tint.bytes.unk_5F + 0x10);
         work                           = g_Task;
-        work->tint.bytes.unk_5E        = (u8)(work->tint.bytes.unk_5E + 0x10);
+        work->tint.bytes.unk_5E        = (work->tint.bytes.unk_5E + 0x10);
     }
 }

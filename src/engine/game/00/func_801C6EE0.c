@@ -30,7 +30,7 @@ MATCH s32 func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach) {
     block_6:
         index += 1;
         entry++;
-        if ((u32)(index & BYTE_MASK) >= (u32)(count & BYTE_MASK)) {
+        if ((index & BYTE_MASK) >= (u32)(count & BYTE_MASK)) {
             goto block_7; /* walked every requested entry */
         }
         goto loop_2; /* next entry */

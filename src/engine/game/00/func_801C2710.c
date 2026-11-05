@@ -15,10 +15,10 @@ MATCH void func_801C2710(void) {
     index               = g_GameState->counter_11C.u8_value;
     product             = g_AreaCameraStep * g_RouteSpeedScale[index];
     state               = (u8*)SCRATCH_WORK;
-    g_AreaCameraStep    = (s16)product;
+    g_AreaCameraStep    = product;
     g_AreaScrollTargetX = ((s32*)state)[13] + ((s32*)state)[3] * state[0x09];
     g_AreaScrollTargetY = ((s32*)state)[14] + ((s32*)state)[4] * state[0x09];
     /* FAKE: barrier pins load after store. */
     MATCH_BARRIER();
-    g_AreaCameraHeightStep = (s16)((s32*)state)[5];
+    g_AreaCameraHeightStep = ((s32*)state)[5];
 }

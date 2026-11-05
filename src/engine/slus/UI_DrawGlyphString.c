@@ -25,7 +25,7 @@ MATCH void UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text) {
     func_8014FC00(0);
     sprite  = g_GfxPrimCursor;
     cl      = cl & 0x3Fu;
-    color   = (u16)(cl | 0x7800u);
+    color   = (cl | 0x7800u);
     start_x = X;
     do {
         cc = *p;
@@ -38,20 +38,20 @@ MATCH void UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text) {
             sprite[0x5]             = 0x80;
             sprite[0x6]             = 0x80;
             ca                      = *p;
-            t1                      = ((s32)ca) - ' ';
+            t1                      = (ca) - ' ';
             if (t1 < 0) {
-                v0b = ((s32)ca) - 1;
+                v0b = (ca) - 1;
             } else {
                 v0b = t1;
             }
-            sprite[0xC] = (u8)((t1 - ((v0b >> 5) << 5)) << 3);
+            sprite[0xC] = ((t1 - ((v0b >> 5) << 5)) << 3);
             cb          = *p;
-            if ((((s32)cb) - ' ') < 0) {
-                v0a = ((s32)cb) - 1;
+            if (((cb) - ' ') < 0) {
+                v0a = (cb) - 1;
             } else {
-                v0a = ((s32)cb) - ' ';
+                v0a = (cb) - ' ';
             }
-            sprite[0xD]             = (u8)((v0a >> 5) << 3);
+            sprite[0xD]             = ((v0a >> 5) << 3);
             *((s16*)(sprite + 0x8)) = X;
             *((s16*)(sprite + 0xA)) = Y;
             SetSprt8((SPRT_8*)sprite);

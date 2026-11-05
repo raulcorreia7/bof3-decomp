@@ -10,9 +10,9 @@ MATCH void func_8019D8C0(SpinQuad* quad, s16* out) {
     dst = out;
     PushMatrix();
     dst += 1;
-    quad->rotation.vx = (s16)(rand() & 0xFC0);
-    quad->rotation.vy = (s16)(rand() & 0xFC0);
-    quad->rotation.vz = (s16)(rand() & 0xFC0);
+    quad->rotation.vx = (rand() & 0xFC0);
+    quad->rotation.vy = (rand() & 0xFC0);
+    quad->rotation.vz = (rand() & 0xFC0);
     RotMatrix(&quad->rotation, &rot);
     rot.t[0] = 0;
     rot.t[1] = 0;
@@ -29,6 +29,6 @@ MATCH void func_8019D8C0(SpinQuad* quad, s16* out) {
         dst += 1;
         *dst = quad->z + vtx.vz;
         dst += 1;
-    } while (((u32)(index & BYTE_MASK)) < 4U);
+    } while (((index & BYTE_MASK)) < 4U);
     PopMatrix();
 }

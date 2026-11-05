@@ -18,15 +18,15 @@ MATCH void SYS_UpdateKeyState(void) {
     /* FAKE: keeps the record base in one register. */
     MATCH_FAKE_OPAQUE(first);
     old_first = first[-1];
-    first[-1] = (u16)pad;
+    first[-1] = pad;
     second    = &D_80145AAE;
     /* FAKE: keeps the record base in one register. */
     MATCH_FAKE_OPAQUE(second);
     old_second = second[-1];
     high       = pad >> 16;
-    second[-1] = (u16)high;
+    second[-1] = high;
     first[0]   = old_first;
-    first[1]   = (u16)(pad & (pad ^ old_first));
+    first[1]   = (pad & (pad ^ old_first));
     second[0]  = old_second;
-    second[1]  = (u16)(high & (high ^ old_second));
+    second[1]  = (high & (high ^ old_second));
 }

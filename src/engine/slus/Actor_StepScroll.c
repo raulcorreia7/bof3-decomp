@@ -7,13 +7,13 @@
 MATCH s8 Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, s32 flags) {
     s16 limit;
 
-    g_Task->z.part.integer = (u16)(g_Task->z.part.integer + (g_Task->vz >> 8));
+    g_Task->z.part.integer = (g_Task->z.part.integer + (g_Task->vz >> 8));
     g_Task->vz             = g_Task->vz + vz_step;
     Area_AdvanceScroll(g_ScrollHeight[0]);
     g_Task->unk_0A = g_Task->unk_0A - 1;
     limit          = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
     if (g_Task->vz < 0 && limit > g_Task->z.part.integer) {
-        g_Task->z.part.integer = (u16)limit;
+        g_Task->z.part.integer = limit;
         Area_AdvanceScroll(limit);
         /* FAKE: the single-pass block homes flags in s1 and entry in s2. */
         ORDER_LOCK_BEGIN
@@ -24,7 +24,7 @@ MATCH s8 Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_st
     }
     if (g_Task->unk_0A == 0) {
         if (g_Task->unk_0B != 0) {
-            g_Task->unk_0A = 0x10 / (s32)g_RouteSpeedScale[((u8*)entry)[4]];
+            g_Task->unk_0A = 0x10 / g_RouteSpeedScale[((u8*)entry)[4]];
             g_Task->unk_0B = g_Task->unk_0B - 1;
         } else {
             if (limit >= g_Task->z.part.integer) {

@@ -16,7 +16,7 @@ MATCH void Battle_RunEvents(void) {
             D_801EB4DC = slot;
             if ((slot->unk_00 != 0u) && (slot->unk_03 == group) && ((slot->unk_01 & g_BattleEventFlags) == 0u)) {
                 sp                       = SPAD(0u);
-                sp->view.battle.state_00 = (u8)slot_index;
+                sp->view.battle.state_00 = slot_index;
                 handlers.handlers[slot->unk_01]();
             }
         }

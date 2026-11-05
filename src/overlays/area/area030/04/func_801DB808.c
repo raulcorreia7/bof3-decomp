@@ -7,7 +7,7 @@
 MATCH void func_801DB808(void) {
     s32 offset;
 
-    FISHING_STATE->step_timer_09 = (u8)(FISHING_STATE->step_timer_09 - 1);
+    FISHING_STATE->step_timer_09 = (FISHING_STATE->step_timer_09 - 1);
 
     func_801E0ED0(0, 0x4E);
     func_801E0F4C(0x80, 0x5B, D_8014688E[D_801E3208 * 0x98]);
@@ -16,7 +16,7 @@ MATCH void func_801DB808(void) {
     func_801E1004(D_8014688E[offset], 0, FISHING_STATE->step_timer_09);
 
     if (FISHING_STATE->step_timer_09 == 0) {
-        FISHING_STATE->sub_index_03 = (u8)(FISHING_STATE->sub_index_03 + 1);
+        FISHING_STATE->sub_index_03 = (FISHING_STATE->sub_index_03 + 1);
     }
     func_8014D978();
     func_801E16DC();

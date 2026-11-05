@@ -14,7 +14,7 @@ MATCH void func_801F33F0(void) {
     if ((step & 0x80u) != 0u) {
         s->mode = 0x0E;
     } else if (g_ScriptVars[1] == 1) {
-        u8 next = (u8)(step + 1);
+        u8 next = (step + 1);
 
         g_ScriptVars[1] = 2;
         *flag           = next;

@@ -45,6 +45,6 @@ MATCH void func_801D0F5C(void) {
         FISHING_STATE->tint_5D        = -0x80;
         FISHING_STATE->tint_5E        = -0x80;
         FISHING_STATE->tint_5F        = -0x80;
-        FISHING_STATE->sub_index_03   = (u8)(FISHING_STATE->sub_index_03 + 1);
+        FISHING_STATE->sub_index_03   = (FISHING_STATE->sub_index_03 + 1);
     }
 }

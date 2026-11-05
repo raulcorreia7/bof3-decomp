@@ -5,14 +5,14 @@ MATCH void func_801F30FC(void) {
     u8          count;
 
     work           = (AreaSprite*)D_801F63EC;
-    count          = (u8)(work->flags_02 - 1u);
+    count          = (work->flags_02 - 1u);
     work->flags_02 = count;
-    work->origin_x += (s32)(work->normal.vx * 2);
-    work->origin_y += (s32)(work->normal.vy * 2);
-    work->origin_z += (s32)(work->normal.vz * 2);
-    work->half_size = (u16)(work->half_size + 0x80u);
+    work->origin_x += (work->normal.vx * 2);
+    work->origin_y += (work->normal.vy * 2);
+    work->origin_z += (work->normal.vz * 2);
+    work->half_size = (work->half_size + 0x80u);
     if (!(count & BYTE_MASK)) {
         ((AreaSprite*)D_801F63EC)->flags_02 = 0x40u;
-        ((AreaSprite*)D_801F63EC)->flags_01 = (u8)(((AreaSprite*)D_801F63EC)->flags_01 + 1u);
+        ((AreaSprite*)D_801F63EC)->flags_01 = (((AreaSprite*)D_801F63EC)->flags_01 + 1u);
     }
 }

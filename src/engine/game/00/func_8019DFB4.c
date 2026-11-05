@@ -41,19 +41,19 @@ loop_1: /* scan the world-id table down from index 8 */
     work_a->active_flags    = 0;
     work_b                  = g_Task;
     work_a->z.part.fraction = 0;
-    work_a->z.part.integer  = (u16)(counter + (jitter & 0x7F));
+    work_a->z.part.integer  = (counter + (jitter & 0x7F));
     work_b->unk_2A          = 0;
     work_c                  = g_Task;
-    work_c->unk_2B          = (u8)(work_c->unk_2B + 1);
+    work_c->unk_2B          = (work_c->unk_2B + 1);
     g_Task->unk_48          = 0;
     step_x                  = RANDOM_MASK(0x7FFF);
     work_d                  = g_Task;
-    work_d->x.fixed         = (s32)(work_d->x.fixed + step_x);
+    work_d->x.fixed         = (work_d->x.fixed + step_x);
     step_y                  = rand();
     work_e                  = g_Task;
     work_e->vz              = 0xFFF80000;
-    work_e->y.fixed         = (s32)(work_e->y.fixed + (step_y & 0x7FFF));
-    g_Task->vx              = (s32)(RANDOM_MASK(0xFFF));
+    work_e->y.fixed         = (work_e->y.fixed + (step_y & 0x7FFF));
+    g_Task->vx              = (RANDOM_MASK(0xFFF));
     value                   = RANDOM_MASK(0xFFF);
     work_f                  = g_Task;
     work_f->vy              = value;
@@ -70,5 +70,5 @@ loop_1: /* scan the world-id table down from index 8 */
     g_Task->unk_09 = 0x10;
     g_Task->unk_0A = 8;
     work_g         = g_Task;
-    work_g->step   = (u8)(work_g->step + 1);
+    work_g->step   = (work_g->step + 1);
 }

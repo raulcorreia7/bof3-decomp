@@ -21,8 +21,8 @@ MATCH s32 Area_ClearCellPalette(s32 x, s32 y) {
     s32* object;
     u16  cell;
 
-    dx      = (s16)(x - (u16)g_AreaTileOriginX);
-    dy      = (s16)(y - (u16)g_AreaTileOriginY);
+    dx      = (x - g_AreaTileOriginX);
+    dy      = (y - g_AreaTileOriginY);
     changed = 0;
     row     = dx + dy;
     if ((u32)row >= AREA_CELL_GRID_ROWS) {

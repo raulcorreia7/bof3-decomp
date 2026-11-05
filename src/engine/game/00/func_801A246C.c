@@ -16,7 +16,7 @@ MATCH s32 func_801A246C(s32 value_a, s32 value_b, s32 flag_bits) {
         if ((D_80146878 & 0x2) != (D_80143F22 & 0x2)) {
             value = FIELD(u8, value_a, 0x7Bu);
             if (value < 0xFAu) {
-                FIELD(u8, value_a, 0x7Bu) = (u8)(value + 1u);
+                FIELD(u8, value_a, 0x7Bu) = (value + 1u);
             }
             return 1;
         }
@@ -25,9 +25,9 @@ MATCH s32 func_801A246C(s32 value_a, s32 value_b, s32 flag_bits) {
     if (flags != 0) {
         if (FIELD(u8, value_a, 0x7Bu) != 0u) {
             work      = (u8*)g_Task;
-            work[9]   = (u8)(0x20 / (s32)(value_b & BYTE_MASK));
+            work[9]   = (0x20 / (value_b & BYTE_MASK));
             work      = (u8*)g_Task;
-            work[0xA] = (u8)(work[9] >> 1);
+            work[0xA] = (work[9] >> 1);
         }
     }
     return 0;

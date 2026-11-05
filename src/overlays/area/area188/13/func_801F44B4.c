@@ -18,5 +18,5 @@ MATCH void func_801F44B4(void) {
         FIELD(u16, angle, 0) += 0x10;
         i += 1;
         angle += 0x2C;
-    } while ((u32)(i & 0xFF) < 0x10U);
+    } while ((i & 0xFF) < 0x10U);
 }

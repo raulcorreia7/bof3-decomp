@@ -10,7 +10,7 @@ MATCH void func_8019E2A8(void) {
     g_Task->active_flags             = 0;
     g_Task->unk_2A                   = 0;
     work                             = g_Task;
-    work->unk_2B                     = (u8)(work->unk_2B + 1);
+    work->unk_2B                     = (work->unk_2B + 1);
     g_Task->unk_48                   = 0;
     state                            = g_Task;
     state->tint.signed_bytes.unk_5D  = 0;
@@ -21,5 +21,5 @@ MATCH void func_8019E2A8(void) {
     g_Task->tint.signed_bytes.unk_5F = 0;
     Actor_SelectScript(8);
     flags       = g_Task;
-    flags->step = (u8)(flags->step + 1);
+    flags->step = (flags->step + 1);
 }

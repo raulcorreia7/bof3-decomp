@@ -12,5 +12,5 @@ MATCH void func_801D1B54(void) {
     record->cursor_10        = 0;
     record->unk_1C           = 0;
     record->step_delta_18    = value;
-    record->handler_index_01 = (u8)(record->handler_index_01 + 1);
+    record->handler_index_01 = (record->handler_index_01 + 1);
 }

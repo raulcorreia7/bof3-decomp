@@ -6,7 +6,7 @@ MATCH void func_801C5D68(void) {
 
     counter = &D_80143F51;
     if (*counter != 0) {
-        value          = (u16)g_ScrollHeight + D_80143F5C;
+        value          = g_ScrollHeight + D_80143F5C;
         g_ScrollHeight = value;
         Area_AdvanceScroll(value);
         (*counter)--;

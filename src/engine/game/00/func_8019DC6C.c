@@ -28,7 +28,7 @@ MATCH void func_8019DC6C(void) {
     rec   = MEM_PTR(GameSpawnRecord, 0x800E4D44u);
     i     = 0;
     do {
-        func_8019DAA0((s32*)rec, state->offset_02, (u8)state->count_00);
+        func_8019DAA0((s32*)rec, state->offset_02, state->count_00);
         if (g_Task->unk_09 >= 12u) {
             rec->x_00 += rec->vx_10 * 2;
             rec->y_04 += rec->vy_14 * 2;

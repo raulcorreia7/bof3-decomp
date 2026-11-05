@@ -20,7 +20,7 @@ MATCH void func_801B0568(void) {
         tmp9 = g_Task;
         tmp4 = tmp9->unk_0A;
         if (tmp4 != 0) {
-            tmp9->unk_0A = (u8)(tmp4 - 1);
+            tmp9->unk_0A = (tmp4 - 1);
             return;
         }
         if (!(func_801B59B4() & BYTE_MASK)) {
@@ -83,9 +83,9 @@ MATCH void func_801B0568(void) {
                     tmp1         = tmp5->unk_09;
                     tmp2         = tmp5->x.fixed + (tmp5->vx * tmp1);
                     tmp10        = tmp5->y.fixed + (tmp5->vy * tmp1);
-                    tmp5->unk_06 = (u8)(tmp5->unk_06 - 1);
+                    tmp5->unk_06 = (tmp5->unk_06 - 1);
                     if ((g_Task->unk_06 == 0) ||
-                        (Area_GetCellCode((s16)((s32)tmp2 >> 0x10), (s16)((s32)tmp10 >> 0x10)) & BYTE_MASK)) {
+                        (Area_GetCellCode((tmp2 >> 0x10), (tmp10 >> 0x10)) & BYTE_MASK)) {
                         D_80143F22 = 0;
                         g_AreaWalkFlags &= ~(AREA_WALK_TRANSITION | 0x2000);
                         Area_RollEncounterThreshold(0U);
@@ -101,7 +101,7 @@ MATCH void func_801B0568(void) {
             }
             func_801B5BDC((g_Task->direction_08 + 8) & BYTE_MASK);
             tmp6         = g_Task;
-            tmp6->unk_09 = (u8)(tmp6->unk_09 - 1);
+            tmp6->unk_09 = (tmp6->unk_09 - 1);
             func_801B0DFC();
             g_GameState->mode_12B.s8_value = 1;
             g_Task->step                   = 2;
@@ -132,7 +132,7 @@ MATCH void func_801B0568(void) {
                 tmp7->unk_03 = 1;
             }
             g_GameState->mode_12B.s8_value  = 3;
-            g_GameState->flags_12C.u8_value = (u8)(g_GameState->flags_12C.u8_value | 2);
+            g_GameState->flags_12C.u8_value = (g_GameState->flags_12C.u8_value | 2);
             g_AreaWalkFlags |= 0x80;
             return;
         case_3:
@@ -142,7 +142,7 @@ MATCH void func_801B0568(void) {
             g_Task->mode                    = 2;
             g_Task->step                    = 5;
             g_GameState->mode_12B.s8_value  = 2;
-            g_GameState->flags_12C.u8_value = (u8)(g_GameState->flags_12C.u8_value | 2);
+            g_GameState->flags_12C.u8_value = (g_GameState->flags_12C.u8_value | 2);
             g_AreaWalkFlags |= 0x100;
             return;
         case_5:

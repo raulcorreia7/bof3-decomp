@@ -23,7 +23,7 @@ loop:
         }
     }
     count += 1;
-    if ((u32)(count & BYTE_MASK) < 3u) {
+    if ((count & BYTE_MASK) < 3u) {
         /* goto form: the do-while shape hoists the table bases out of the loop. */
         goto loop;
     }

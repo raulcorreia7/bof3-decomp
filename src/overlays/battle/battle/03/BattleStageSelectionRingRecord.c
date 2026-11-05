@@ -6,9 +6,9 @@ MATCH void BattleStageSelectionRingRecord(s8 slot_index, s8 record_kind, u8* tex
     int off;
 
     i                     = D_801EC328;
-    D_801EB5B0[(u8)i * 8] = (u8)slot_index;
+    D_801EB5B0[i * 8] = slot_index;
     i                     = D_801EC328;
-    D_801EB5B1[(u8)i * 8] = (u8)record_kind;
+    D_801EB5B1[i * 8] = record_kind;
     i                     = D_801EC328;
     off                   = (int)(u8)i * 2;
     D_801EB5B4[off]       = text;

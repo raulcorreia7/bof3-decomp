@@ -9,18 +9,18 @@ MATCH void func_8019F430(void) {
 
     record          = g_Task;
     step            = record->vy + 0x14000;
-    record->y.fixed = (s32)(record->y.fixed + step);
+    record->y.fixed = (record->y.fixed + step);
     record->vy      = step;
     if (record->y.part.integer >= 0) {
         record->unk_09 = 6;
         work           = g_Task;
-        record->vy     = (s32)-record->vy;
-        work->mode     = (u8)(work->mode + 1);
+        record->vy     = -record->vy;
+        work->mode     = (work->mode + 1);
     }
     slot         = g_Task;
     heightOffset = slot->unk_0B * BATTLE_PARTY_STRIDE;
     func_8019F5B8(
         *(s16*)((u8*)((u8*)&g_BattlePartyBattlers[0].unk_2E) + heightOffset),
-        (s16)(*(u16*)((u8*)((u8*)&g_BattlePartyBattlers[0].unk_30) + heightOffset) + (u16)slot->y.part.integer),
+        (*(u16*)((u8*)((u8*)&g_BattlePartyBattlers[0].unk_30) + heightOffset) + slot->y.part.integer),
         slot->unk_06, slot->unk_27);
 }

@@ -14,7 +14,7 @@ MATCH void func_80153CC4(u32 unused) {
 
     count_a3  = 0;
     level_t1  = g_FrameBufferIndex & BYTE_MASK;
-    base_t0   = (u32)(u8*)&D_80142CC0;
+    base_t0   = (u8*)&D_80142CC0;
     offset_a2 = 0;
     do {
         count_a1 = 0;

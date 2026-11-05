@@ -6,7 +6,7 @@ MATCH void func_801B76F4(void) {
     g_Task->vz += g_Task->gravity;
     func_801B0DFC();
     dist = Area_ReadHeight(g_Task->x.fixed, g_Task->y.fixed);
-    if ((s16)g_Task->z.part.integer < dist) {
+    if (g_Task->z.part.integer < dist) {
         g_Task->z.part.integer = dist;
         if (g_Task->vz < -0x80) {
             Actor_RequestScript((g_Task->direction_08 >> 1) + 0x34);
@@ -21,7 +21,7 @@ MATCH void func_801B76F4(void) {
     }
     if ((g_Task->unk_05 == 0) &&
         (((g_GameFlags | g_AreaWalkFlags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE)) == 0)) {
-        Area_AdvanceScroll((s16)g_Task->z.part.integer);
+        Area_AdvanceScroll(g_Task->z.part.integer);
     }
     func_8014D978();
 }

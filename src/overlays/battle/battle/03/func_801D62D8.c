@@ -22,7 +22,7 @@ MATCH s32 func_801D62D8(void) {
                     goto clear;
                 }
                 countdown = g_BattlePartyBattlers[index].stats.current_ap;
-                if ((s32)countdown < ((s32)(*D_801463B8 + 1) >> 1)) {
+                if (countdown < ((*D_801463B8 + 1) >> 1)) {
                     g_BattlePartyBattlers[index].mode   = 6;
                     g_BattlePartyBattlers[index].step   = 4;
                     g_BattlePartyBattlers[index].unk_03 = 4;

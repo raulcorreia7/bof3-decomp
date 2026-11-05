@@ -16,6 +16,6 @@ MATCH void func_801F3F80(void) {
     result    = func_8015CC00(3, 0, selection, x, y, g_BattlePartyBattlers[0].pos.z.fixed);
     if ((u8)result != GAME_NONE) {
         work      = TASK_BYTES;
-        work[0xB] = (u8)result;
+        work[0xB] = result;
     }
 }

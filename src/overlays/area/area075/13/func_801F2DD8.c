@@ -6,7 +6,7 @@ MATCH void func_801F2DD8(void) {
     tint                      = g_Task->tint.bytes.unk_5D - 2;
     g_Task->tint.bytes.unk_5D = tint;
     /* FAKE: the shift preserves the retail zero test. */
-    if (((u32)tint << 24) == 0) {
+    if ((tint << 24) == 0) {
         func_80196070();
     }
     if (!(g_Task->tint.bytes.unk_5D & 0x1F)) {

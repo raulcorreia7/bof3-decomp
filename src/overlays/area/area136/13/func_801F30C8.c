@@ -16,6 +16,6 @@ MATCH void func_801F30C8(void) {
     result    = func_8015CB18(1, 0, selection, x, y);
     if ((u8)result != 0xFF) {
         work      = g_Task;
-        work[0xB] = (u8)result;
+        work[0xB] = result;
     }
 }
