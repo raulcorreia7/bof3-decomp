@@ -139,7 +139,15 @@ MATCH void func_801F7E9C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7F04);
+MATCH void func_801F7F04(void) {
+    u8* step;
+
+    if (D_80146867 == 0x64) {
+        step              = &D_80146874;
+        g_AreaSceneMode   = 3;
+        *step            += 1;
+    }
+}
 
 MATCH void func_801F7F3C(void) {
     s32 height;
