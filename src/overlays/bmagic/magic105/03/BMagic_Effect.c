@@ -26,7 +26,23 @@ MATCH void func_801EEFBC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF06C);
+MATCH void func_801EF06C(void) {
+    PartyBattler* src;
+    PartyBattler* work;
+    STACK_PADS(u8, 8);
+
+    src                            = BATTLE_ACTIVE_WORK;
+    work                           = g_SpadWork;
+    work->coord_x_34               = src->coord_x_34;
+    work->coord_y_38               = src->coord_y_38;
+    work->word_3C                  = src->word_3C;
+    work->unk_0C                   = src->unk_0C + D_801F004C[work->unk_04];
+    work->unk_10                   = src->unk_0C + D_801F004E[work->unk_04];
+    work->word_08.byte.unk_0B      = 0;
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
+    g_SpadWork->unk_02 += 1;
+}
 
 INCLUDE_ASM(func_801EF124);
 
