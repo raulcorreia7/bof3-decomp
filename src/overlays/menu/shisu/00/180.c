@@ -77,6 +77,10 @@ MATCH void func_801D1CA4(void) {
     D_801DA02B = Party_CountItem(0, 86, 0);
 }
 
+/* Tried: store-seq body with the status block declared in shisu_00.h.
+ * GCC loads the first store constant (li v0,20) first; retail hoists
+ * li v1,1 and li a0,2 before it. First diff +0x00: li v0,20.
+ */
 INCLUDE_ASM(func_801D1D1C);
 
 MATCH void func_801D1E34(void) {
