@@ -7,5 +7,7 @@
 
 extern MagicTaskFuncs D_801EEC04;
 extern Callback       D_801F08F0[];
+/* The step handlers the draw step dispatches. */
+extern Callback       D_801F0900[];
 
 #endif

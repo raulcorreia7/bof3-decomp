@@ -27,7 +27,7 @@ segments:
       - [0x1354, c, func_801F3F54]
       - [0x13BC, c, func_801F3FBC]
       - [0x14D8, c, func_801F40D8]
-      - [0x1558, c, func_801F4158]
+      - [0x1558, c, func_801F4158_area168]
       - [0x18B0, c, func_801F44B0]
       - [0x18F4, c, func_801F44F4]
       - [0x1A34, c, func_801F4634]
