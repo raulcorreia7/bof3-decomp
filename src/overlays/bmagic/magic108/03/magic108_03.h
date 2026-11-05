@@ -10,4 +10,11 @@
 
 void func_801EED1C(void);
 
+extern Callback D_801EFC9C[];
+
+void func_801EF180(void);
+void func_801EF2D4(void);
+void func_801EF5C0(void);
+void func_801EF6C0(void);
+
 #endif

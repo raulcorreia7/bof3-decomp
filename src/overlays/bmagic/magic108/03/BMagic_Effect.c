@@ -13,7 +13,17 @@ INCLUDE_ASM(func_801EEC5C);
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
-INCLUDE_ASM(func_801EED7C);
+MATCH void func_801EED7C(void) {
+    SYS_DISPATCH_BYTE(D_801EFC9C, g_SpadWork->step_01);
+    if (g_SpadWork->flags_00 != 0) {
+        func_801EF5C0();
+        func_801EF6C0();
+        PopMatrix();
+        func_801EF180();
+        func_801EF2D4();
+        PopMatrix();
+    }
+}
 
 INCLUDE_ASM(func_801EEE0C);
 
