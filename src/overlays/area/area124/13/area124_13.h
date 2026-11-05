@@ -6,6 +6,6 @@
 
 #include "overlays/area/world03.h"
 
-void func_801F2C04(void);
+void Area_SpawnWeightedActor(void);
 
 #endif
