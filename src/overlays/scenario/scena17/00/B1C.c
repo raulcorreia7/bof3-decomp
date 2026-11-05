@@ -1,3 +1,4 @@
+#define AREA_SCROLL_TARGET_VOLATILE
 #include "scena17_00.h"
 
 #if BOF3_USE_ASM
@@ -13,7 +14,14 @@ MATCH void func_801F771C(void) {
     ORDER_LOCK(D_801F973C[index]());
 }
 
-INCLUDE_ASM(func_801F7750);
+MATCH void func_801F7750(void) {
+    GFX_ResetPalette();
+    g_GfxPalettePending = 1;
+    g_AreaDrawFlags     = 0x1F;
+    func_8019FA28(0xC7, 0xB60000, 0x128000, 7);
+    g_ScriptVarsReq.word = 0;
+    D_80146872           = 1;
+}
 
 INCLUDE_ASM(func_801F77B4);
 
@@ -29,7 +37,21 @@ MATCH void func_801F78E0(void) {
     func_801F8EF0();
 }
 
-INCLUDE_ASM(func_801F7924);
+MATCH void func_801F7924(void) {
+    u8* step;
+
+    if (g_UiWindowEffectBusy == 0) {
+        g_AreaScrollTargetX = 0xB00000;
+        g_AreaScrollTargetY = 0x138000;
+        func_80153DE8();
+        g_AreaSceneMode = 4;
+        SND_RequestBgm(0x96);
+        UI_SetMode(1);
+        func_801F88CC(0, 0x80);
+        step = &D_80146874;
+        *step += 1;
+    }
+}
 
 MATCH void func_801F79AC(void) {
     if ((g_UiWindowEffectBusy == 0) && (EMI_LoaderIsReady() != 0)) {
@@ -39,7 +61,18 @@ MATCH void func_801F79AC(void) {
     func_801F88CC(0, 0x80);
 }
 
-INCLUDE_ASM(func_801F7A08);
+MATCH void func_801F7A08(void) {
+    u8* timer;
+
+    timer = &D_80146875;
+    *timer -= 1;
+    if (*timer == 0) {
+        SND_PlayBgm(0x96, 0x64, 0x8);
+        *timer = 0x1E;
+        D_80146874 += 1;
+    }
+    func_801F88CC(0, 0x80);
+}
 
 MATCH void func_801F7A84(void) {
     u8* timer;
@@ -60,15 +93,62 @@ MATCH void func_801F7A84(void) {
     func_801F88CC(0, 0x80);
 }
 
-INCLUDE_ASM(func_801F7B20);
+MATCH void func_801F7B20(void) {
+    u8* timer;
 
-INCLUDE_ASM(func_801F7B88);
+    timer = &D_80146875;
+    *timer -= 1;
+    func_801F88CC(1, *timer);
+    if (*timer == 0) {
+        D_80146874 += 1;
+    }
+}
 
-INCLUDE_ASM(func_801F7BC0);
+MATCH void func_801F7B88(void) {
+    u8* step;
 
-INCLUDE_ASM(func_801F7C14);
+    if (!g_AreaCameraMoving) {
+        step                = &D_80146874;
+        g_AreaScrollTargetX = 0x8C0000;
+        *step += 1;
+    }
+}
 
-INCLUDE_ASM(func_801F7C6C);
+MATCH void func_801F7BC0(void) {
+    u8* step;
+
+    g_AreaCameraAngle.vx -= 5;
+    if (g_AreaCameraMoving == 0) {
+        step                = &D_80146874;
+        g_AreaScrollTargetX = 0x540000;
+        D_80146867          = 0xA;
+        *step += 1;
+    }
+}
+
+MATCH void func_801F7C14(void) {
+    u8* step;
+
+    if (g_AreaCameraMoving == 0 && D_80146867 == 0x14) {
+        step                = &D_80146874;
+        g_AreaCameraStep    = 0x10;
+        g_AreaScrollTargetX = 0x3C0000;
+        *step += 1;
+    }
+}
+
+MATCH void func_801F7C6C(void) {
+    u8* step;
+
+    if (g_AreaCameraMoving == 0) {
+        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        step                = &D_80146874;
+        g_AreaScrollTargetX = 0x2E0000;
+        *step += 1;
+    } else if (g_FrameCount & 1) {
+        g_AreaCameraHeight -= 1;
+    }
+}
 
 /* needs: type. While the camera is idle: Area_AdvanceScroll(Area_SampleHeight(x, y)), g_AreaScrollTargetX = 0x260000, g_AreaCameraHeightStep = (Area_SampleHeight(x, y) - g_AreaCameraHeight) / 128, g_AreaSceneMode = 1, D_80146874++ (through a pointer local); otherwise g_AreaCameraHeight += 2, or 3 every fourth frame. Exact except retail reloads g_AreaScrollTargetX after the 0x260000 store (lui a0 / lw a0 where the candidate folds lui a0,0x26; first differing instruction +0x30), which needs `g_AreaScrollTargetX` volatile in slus/data.h with the exe kept exact. */
 INCLUDE_ASM(func_801F7D08);
@@ -104,7 +184,15 @@ MATCH void func_801F7E9C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7F04);
+MATCH void func_801F7F04(void) {
+    u8* step;
+
+    if (D_80146867 == 0x64) {
+        step            = &D_80146874;
+        g_AreaSceneMode = 3;
+        *step += 1;
+    }
+}
 
 MATCH void func_801F7F3C(void) {
     s32 height;
@@ -154,7 +242,15 @@ MATCH void func_801F8088(void) {
     func_801F8EF0();
 }
 
-INCLUDE_ASM(func_801F80CC);
+MATCH void func_801F80CC(void) {
+    u8* step;
+
+    SND_StartXaStream(8, 1);
+    step       = &D_80146874;
+    D_801F9DD0 = 0;
+    D_801F9DD4 = 0;
+    *step += 1;
+}
 
 MATCH void func_801F8110(void) {
     u8  ready;
@@ -168,13 +264,37 @@ MATCH void func_801F8110(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8170);
+MATCH void func_801F8170(void) {
+    s8* stage;
+
+    if (g_UiWindowEffectBusy == 0) {
+        stage      = &D_80146873;
+        D_80146874 = 0;
+        *stage     = *stage + 1;
+    } else {
+        func_801F938C();
+    }
+}
 
 MATCH void func_801F81BC(void) {
     SYS_DISPATCH_BYTE(D_801F97A4, g_SceneState.state_04);
 }
 
-INCLUDE_ASM(func_801F81F8);
+MATCH void func_801F81F8(void) {
+    /* FAKE: the two words size the frame like retail. */
+    s32 unused[2];
+    u8* step;
+
+    g_AreaScrollTargetX = 0x258000;
+    g_AreaScrollTargetY = 0x1B0000;
+    func_80153DE8();
+    UI_SetMode(1);
+    CallbackWait(1);
+    g_AreaDrawFlags = 0x1F;
+    SND_PlayBgm(0xA0, 0x64, 0x8);
+    step = &D_80146874;
+    *step += 1;
+}
 
 MATCH void func_801F8274(void) {
     if (g_UiWindowEffectBusy == 0) {
@@ -184,9 +304,34 @@ MATCH void func_801F8274(void) {
     func_801F8B10(0, 0xFF);
 }
 
-INCLUDE_ASM(func_801F82C0);
+MATCH void func_801F82C0(void) {
+    u8* timer;
+    u8  value;
 
-INCLUDE_ASM(func_801F833C);
+    timer  = &D_80146875;
+    value  = *timer + 1;
+    *timer = value;
+    if (value == 0x32) {
+        *timer = 0x96;
+        D_80146874 += 1;
+        func_801F8B10(0x1F4, 0xFF);
+    } else {
+        func_801F8B10(value * 10, 0xFF);
+    }
+}
+
+MATCH void func_801F833C(void) {
+    u8* timer;
+
+    timer = &D_80146875;
+    *timer -= 1;
+    if (*timer == 0) {
+        D_80146867 = 0x6E;
+        D_80146874 += 1;
+        *timer = 0x46;
+    }
+    func_801F8B10(0x1F4, 0xFF);
+}
 
 MATCH void func_801F83A8(void) {
     u8* timer;
@@ -201,14 +346,51 @@ MATCH void func_801F83A8(void) {
     func_801F8B10(0x1F4, 0xFF);
 }
 
-INCLUDE_ASM(func_801F8404);
+MATCH void func_801F8404(void) {
+    u8* timer;
+    u8  value;
 
+    timer  = &D_80146875;
+    value  = *timer + 2;
+    *timer = value;
+    if (value >= 0x46) {
+        *timer = 0;
+        D_80146874 += 1;
+        func_801F8B10(0x4B0, 0xFF);
+    } else {
+        func_801F8B10(value * 10 + 0x1F4, 0xFF);
+    }
+}
+
+/* 7 differing; first at +0x18: candidate addiu v0,v0,2 against retail addiu a1,v0,2. Two
+ * tail-merged calls of func_801F8B10 with the +2 sum kept in a1 (their second argument);
+ * next lever: permuter on the sum local's register. */
 INCLUDE_ASM(func_801F8480);
 
 /* nonmatching: timer D_80146875 counts up; at 0x80 it sets D_80146867 = 0x3C, the timer to 0x1E, D_801F9DD8 = 0, steps D_80146874, starts EMI_LoaderStreamInitSlot(0x260), then calls func_801F8FAC(0xE0, 0xBE, shade, 1) and func_801F8B10(0x4B0, 0x80). Candidate is 8 bytes short (first differing instruction: bnez at +0x28 targets +0x78 against +0x70): retail sets a0, a1 and a2 inside the branch and ends it with j, and sets only a1 on the other path. */
-INCLUDE_ASM(func_801F84F4);
+MATCH void func_801F84F4(void) {
+    u8* timer;
+    u8  value;
 
-/* Counts D_80146875 down and, at zero, D_80146867; both zero steps D_80146874, else D_80146875 = 0x1E, then func_801F8B10 and func_801F8FAC. The pointer-local draft is 4 to 8 bytes short whichever branch order: retail ends the step branch with `j` and the 0x4B0 argument load in its delay slot, and falls into a second copy of that load from the else branch (first differing instruction +0x30: beqz targets +0x78 against +0x70). */
+    timer  = &D_80146875;
+    value  = *timer + 1;
+    *timer = value;
+    if (value >= 0x80) {
+        D_80146867 = 0x3C;
+        *timer     = 0x1E;
+        D_801F9DD8 = 0;
+        D_80146874 += 1;
+        EMI_LoaderStreamInitSlot(0x260);
+        func_801F8FAC(0xE0, 0xBE, 0x80, 1);
+    } else {
+        func_801F8FAC(0xE0, 0xBE, value, 1);
+    }
+    func_801F8B10(0x4B0, 0x80);
+}
+
+/* 6 differing; first at +0x2C: candidate beqz v0 targets the shared li against retail's jal (the
+ * ready-skip and step-branch delay slots each hold li a0,0x4B0 in retail); next lever: permuter on
+ * the arg duplication across paths, or a body where each path has its own func_801F8B10 call. */
 INCLUDE_ASM(func_801F8594);
 
 MATCH void func_801F8664(void) {
@@ -281,19 +463,73 @@ INCLUDE_ASM(func_801F88CC);
 
 INCLUDE_ASM(func_801F8B10);
 
-INCLUDE_ASM(func_801F8EF0);
+MATCH void func_801F8EF0(void) {
+    TILE* prim;
+    u8    len;
+    u8    code;
+    s16   width;
+    s16   height;
+
+    len    = 3;
+    code   = 0x60;
+    width  = 0x140;
+    height = 0x1E;
+    prim   = (TILE*)g_GfxPrimCursor;
+    setlen(prim, len);
+    setcode(prim, code);
+    setRGB0(prim, 0, 0, 0);
+    prim->x0 = 0;
+    prim->y0 = 0;
+    prim->w  = width;
+    prim->h  = height;
+    GFX_AddPrim(1, 0x10);
+
+    prim = (TILE*)g_GfxPrimCursor;
+    setlen(prim, len);
+    setcode(prim, code);
+    setRGB0(prim, 0, 0, 0);
+    prim->x0 = 0;
+    prim->y0 = 0xD2;
+    prim->w  = width;
+    prim->h  = height;
+    GFX_AddPrim(1, 0x10);
+}
 
 INCLUDE_ASM(func_801F8FAC);
 
+/* 13 differing; first at +0x14: candidate move s2,a2 against retail move s2,a3 (retail maps
+ * the args s1=pal, s2=tex, s3=x, s4=y); next lever: permuter on the arg locals' use order. */
 INCLUDE_ASM(func_801F90BC);
 
-INCLUDE_ASM(func_801F9160);
+MATCH void func_801F9160(s16 x, s16 y) {
+    SPRT* prim;
+
+    prim = (SPRT*)g_GfxPrimCursor;
+    SetSprt(prim);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    prim->clut = 0x7B85;
+    prim->v0   = 0x40;
+    prim->w    = 0x58;
+    prim->x0   = x;
+    prim->y0   = y;
+    prim->u0   = 0;
+    prim->h    = 0x12;
+    GFX_AddPrim(1, 0x14);
+}
 
 INCLUDE_ASM(func_801F91F0);
 
 INCLUDE_ASM(func_801F938C);
 
-INCLUDE_ASM(func_801F9490);
+MATCH void func_801F9490(void) {
+    g_GameEntrySubstate = 0;
+    func_8014BA04();
+    Menu_ResetPanelTasks();
+    while (1) {
+        SYS_DISPATCH_BYTE(D_801F9DBC, g_GameEntrySubstate);
+        CallbackWait(1);
+    }
+}
 
 INCLUDE_ASM(func_801F9504);
 
