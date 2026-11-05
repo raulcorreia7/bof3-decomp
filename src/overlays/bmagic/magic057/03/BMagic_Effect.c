@@ -51,6 +51,9 @@ MATCH void func_801EEE50(void) {
     g_SpadWork->word_08.byte.timer_0A = 0;
 }
 
+/* Scheduling residual: one spad cell read hoists above the row stores and one tail instruction is
+ * missing (candidate 0xF0 vs retail 0xF4; first difference lui a1,0x1f80 at 0x801EEF28). Typed
+ * g_BattleEffects form; permuter best 555/800 after 7 min. */
 INCLUDE_ASM(func_801EEEB0);
 
 MATCH void func_801EEFA4(void) {
