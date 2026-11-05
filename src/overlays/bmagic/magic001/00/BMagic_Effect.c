@@ -192,16 +192,7 @@ MATCH void func_801EFE38(void) {
     }
 }
 
-MATCH void func_801EFF28(void) {
-    if (func_8014DAEC() & 0xFF) {
-        g_SpadWork->flags_00 |= 0x20;
-        g_SpadWork->unk_5C = 1;
-        g_SpadWork->unk_5D = 0;
-        g_SpadWork->unk_5E = 0;
-        g_SpadWork->unk_5F = 0;
-        g_SpadWork->unk_02 += 1;
-    }
-}
+#include "overlays/bmagic/Effect_PrimeTintOnScriptReady.h"
 
 INCLUDE_ASM(func_801EFFCC);
 
