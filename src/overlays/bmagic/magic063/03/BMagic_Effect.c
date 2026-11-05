@@ -56,8 +56,6 @@ INCLUDE_ASM(func_801EF704);
 
 INCLUDE_ASM(func_801EF880);
 
-/* Follows BMAGIC_PROJECT_ACTOR_MATRIX (bmagic.h) with the rotation computed from the work
- * halfword at +0x0E and the byte at +0x03; the pointer is a second global. */
 MATCH void func_801EF994(void) {
     SVECTOR pos;
     SVECTOR rot;
