@@ -24,7 +24,17 @@ INCLUDE_ASM(func_801EF420);
 
 INCLUDE_ASM(func_801EF5C0);
 
-INCLUDE_ASM(func_801EF674);
+MATCH void func_801EF674(void) {
+    u8 temp_v0;
+
+    temp_v0 = g_SpadWork->word_08.byte.timer_0A;
+    if (temp_v0 != 0) {
+        g_SpadWork->word_08.byte.timer_0A = temp_v0 - 2;
+    }
+    if (func_8014DAEC() & 0xFF) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF6D8(void) {
     PartyBattler* work;
