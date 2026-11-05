@@ -3,5 +3,5 @@
 MATCH void func_801F097C(void) {
     Callback table[2] = {func_801F09D4, func_801F09F4};
 
-    table[((u8*)g_MenuPanelTaskCurrent)[3]]();
+    table[BATTLE_PANEL_TASK->state]();
 }
