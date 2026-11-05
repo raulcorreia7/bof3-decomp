@@ -49,7 +49,15 @@ MATCH void func_801EF264(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF2EC);
+MATCH void func_801EF2EC(void) {
+    g_SpadWork->word_08.byte.unk_0B   = rand() & 0xF;
+    g_SpadWork->word_08.byte.unk_09   = 0;
+    g_SpadWork->word_08.byte.timer_0A = 0;
+    g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
+    g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
+    g_SpadWork->word_3C.word          = D_801EB4E0->word_3C.word;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF374(void) {
     BattleEffectTimerStep();
