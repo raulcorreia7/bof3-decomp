@@ -266,14 +266,12 @@ MATCH void func_801F986C(void) {
 
 /* Stores 60 in byte 9 and increments byte 1 of the scratchpad buffer at slots[0x11]. */
 MATCH void func_801F98B0(void) {
-    void** slots;
-    void*  sp_ptr;
+    u8** slots;
 
-    slots            = SP_PTR(void*, 0u);
-    sp_ptr           = slots[0x11];
-    ((u8*)sp_ptr)[9] = 0x3C;
-    sp_ptr           = slots[0x11];
-    ((u8*)sp_ptr)[1]++;
+    slots          = SP_PTR(u8*, 0u);
+    slots[0x11][9] = 0x3C;
+    slots          = SP_PTR(u8*, 0u);
+    slots[0x11][1]++;
 }
 
 INCLUDE_ASM(func_801F98E0);

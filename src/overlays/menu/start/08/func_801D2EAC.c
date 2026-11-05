@@ -2,8 +2,6 @@
 
 /* Runs the four-row choice menu: moves the D_801ED618 cursor on up/down, then on confirm advances the menu step by
  * the chosen row, or on cancel backs out to the previous panel. */
-/* nonmatching 97.19%: retail loads the step byte right after the group index in the last confirm branch; ours
- * loads it after the first table read. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D2EAC(void) {
     s32 pad;
@@ -79,5 +77,6 @@ NON_MATCHING void func_801D2EAC(void) {
     }
 }
 #else
+/* 97.19%; +0x1EC step address loads late; try a source shape that keeps it in a1. */
 INCLUDE_ASM(func_801D2EAC);
 #endif

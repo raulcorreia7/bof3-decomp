@@ -95,9 +95,36 @@ MATCH void func_801D1FE4(void) {
 
 INCLUDE_ASM(func_801D2078);
 
-INCLUDE_ASM(func_801D21FC);
+MATCH void func_801D21FC(void) {
+    u8* state = &g_GameStateIndex;
 
-INCLUDE_ASM(func_801D22A4);
+    if (*state != 2) {
+        if (D_801DB07C >= 0x2710) {
+            Message_StartAreaMessage(0x79);
+            *state = 2;
+            D_801F294D += 1;
+        } else {
+            Message_StartAreaMessage(0x78);
+            *state     = 2;
+            D_801F294D = 3;
+        }
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+}
+
+MATCH void func_801D22A4(void) {
+    u8* state = &g_GameStateIndex;
+
+    if (*state != 2) {
+        Party_AddZenny(D_801DB07C, 0);
+        Message_StartAreaMessage(0x75);
+        D_801DB07C = 0;
+        *state     = 2;
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+}
 
 INCLUDE_ASM(func_801D2320);
 
@@ -294,6 +321,7 @@ INCLUDE_ASM(func_801D3E44);
 
 INCLUDE_ASM(func_801D4158);
 
+/* 4 differences; +0x48 call target shifts with a 12-byte short body; try the character selection. */
 INCLUDE_ASM(func_801D42B4);
 
 INCLUDE_ASM(func_801D437C);
@@ -389,6 +417,7 @@ MATCH void func_801D5A48(void) {
 
 #include "overlays/commu/Commu_AdvanceStep.h"
 
+/* 3 differences; +0x20 masks into v1, retail uses v0; try the loop register allocation. */
 INCLUDE_ASM(func_801D5AD0);
 
 INCLUDE_ASM(func_801D5B2C);
@@ -397,7 +426,15 @@ MATCH void func_801D5D5C(void) {
     SYS_DISPATCH_BYTE(D_801DADEC, D_801F294C);
 }
 
-INCLUDE_ASM(func_801D5D98);
+MATCH void func_801D5D98(void) {
+    u8* state = &g_GameStateIndex;
+
+    if (*state != 2) {
+        Message_StartAreaMessage(0xEE);
+        *state = 2;
+        D_801F294C += 1;
+    }
+}
 
 MATCH void func_801D5DF4(void) {
     SYS_DISPATCH_BYTE(D_801DAE00, D_801F294D);
@@ -413,7 +450,20 @@ MATCH void func_801D5E30(void) {
     }
 }
 
-INCLUDE_ASM(func_801D5E94);
+MATCH void func_801D5E94(void) {
+    s8 count;
+    u8 check;
+
+    count      = (u8)D_801DB0C4 - 1;
+    D_801DB0C4 = count;
+    Menu_DrawHeaderBar(0x14, (0x10 - ((count & 0xFF) * 8)) & 0xFFF8, 0x118, 0x13, (s32)D_80144952);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+    func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
+    check = D_801DB0C4;
+    if (check == 0) {
+        D_801F294D += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D5F7C);
 
@@ -623,7 +673,14 @@ MATCH void func_801D7BE8(void) {
 
 INCLUDE_ASM(func_801D7C6C);
 
-INCLUDE_ASM(func_801D7DD4);
+MATCH void func_801D7DD4(void) {
+    u8* state = &g_GameStateIndex;
+
+    if (*state != 2 && D_801F294D == 0) {
+        Message_StartAreaMessage(0xF6);
+        *state = 2;
+    }
+}
 
 /* func_801D7E30: the same body as the second copy in this image */
 #define Commu_AdvanceStep func_801D7E30
