@@ -9,7 +9,7 @@ MATCH void Actor_StopMoving(void) {
     work                              = g_SpadWork;
     g_AreaCameraStep                  = 0;
     g_AreaCameraHeightStep            = 0;
-    work->unk_0C                      = 0;
-    work->unk_10                      = 0;
+    work->vx                          = 0;
+    work->vy                          = 0;
     work->vz                          = 0;
 }

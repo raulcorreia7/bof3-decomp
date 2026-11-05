@@ -13,8 +13,8 @@ MATCH void func_801B85C0(void) {
             }
             g_GameState->counter_11C.s8_value = 3;
             record                            = (u8*)g_GameState;
-            g_SpadWork->unk_0C                = 0;
-            g_SpadWork->unk_10                = 0;
+            g_SpadWork->vx                    = 0;
+            g_SpadWork->vy                    = 0;
             record[0x12B]                     = 0;
             g_SpadWork->unk_01                = 1;
             ACTOR_CLEAR_STATE();

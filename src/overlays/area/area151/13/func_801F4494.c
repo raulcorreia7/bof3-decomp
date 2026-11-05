@@ -15,8 +15,8 @@ MATCH void func_801F4494(void) {
     }
 
     work = (Actor*)g_SpadWork;
-    work->x.fixed += work->unk_0C;
-    work->y.fixed += work->unk_10;
+    work->x.fixed += work->vx;
+    work->y.fixed += work->vy;
     func_8014D978();
     func_8014D290();
 }

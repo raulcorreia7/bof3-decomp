@@ -70,12 +70,12 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             g_SpadWork->unk_09 = *(table + state->index_0A + 3);
             if (g_SpadWork->unk_09 == 0)
                 g_SpadWork->unk_09 = 1;
-            work         = g_SpadWork;
-            work->vz     = ((s16)((*(table + state->index_0A + 1) << 8) | *(table + state->index_0A + 2)) -
-                            (s16)work->z.part.integer) /
-                           work->unk_09;
-            work->unk_0C = 0;
-            work->unk_10 = 0;
+            work     = g_SpadWork;
+            work->vz = ((s16)((*(table + state->index_0A + 1) << 8) | *(table + state->index_0A + 2)) -
+                        (s16)work->z.part.integer) /
+                       work->unk_09;
+            work->vx = 0;
+            work->vy = 0;
             state->index_0A += 3;
             break;
         }

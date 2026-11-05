@@ -7,8 +7,8 @@ MATCH void func_8019E1A0(void) {
     Actor* record;
 
     work          = g_SpadWork;
-    work->x.fixed = (s32)(work->x.fixed + work->unk_0C);
-    work->y.fixed = (s32)(work->y.fixed + work->unk_10);
+    work->x.fixed = (s32)(work->x.fixed + work->vx);
+    work->y.fixed = (s32)(work->y.fixed + work->vy);
     work->z.fixed = (s32)(work->z.fixed + work->vz);
     func_8014D978();
     record     = g_SpadWork;

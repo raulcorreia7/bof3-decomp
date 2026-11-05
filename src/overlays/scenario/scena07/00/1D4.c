@@ -28,14 +28,14 @@ MATCH void func_801F6E54(void) {
 MATCH void func_801F6E90(void) {
     u8* row;
 
-    if ((g_SpadWork->unk_0C & 7) == 0) {
+    if ((g_SpadWork->vx & 7) == 0) {
         row = func_801F8394();
         if (row != NULL) {
             func_801F83D0(row);
         }
     }
     func_801F85D8();
-    if (--g_SpadWork->unk_0C == 0) {
+    if (--g_SpadWork->vx == 0) {
         g_SpadWork->state_02++;
     }
 }
@@ -59,9 +59,9 @@ MATCH void func_801F6F8C(void) {
 }
 
 MATCH void func_801F6FB0(void) {
-    func_801F3C3C(g_SpadWork->unk_10);
-    g_SpadWork->unk_10 += (g_FrameCount & 0xF) == 0;
-    if (g_SpadWork->unk_10 == 0) {
+    func_801F3C3C(g_SpadWork->vy);
+    g_SpadWork->vy += (g_FrameCount & 0xF) == 0;
+    if (g_SpadWork->vy == 0) {
         Actor_Clear();
     }
 }
@@ -177,8 +177,8 @@ INCLUDE_ASM(func_801F7D6C);
 
 MATCH void func_801F7DDC(void) {
     func_801FA38C();
-    g_SpadWork->unk_0C = g_SpadWork->unk_0C - 1;
-    if (g_SpadWork->unk_0C == 0) {
+    g_SpadWork->vx = g_SpadWork->vx - 1;
+    if (g_SpadWork->vx == 0) {
         Actor_Clear();
     }
 }
@@ -203,8 +203,8 @@ MATCH void func_801F7E68(void) {
 MATCH void func_801F7EF8(void) {
     func_801F88B8(MEM_PTR(void, 0x800E48E0u));
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
-    g_SpadWork->x.fixed += g_SpadWork->unk_0C;
-    g_SpadWork->y.fixed += g_SpadWork->unk_10;
+    g_SpadWork->x.fixed += g_SpadWork->vx;
+    g_SpadWork->y.fixed += g_SpadWork->vy;
     g_SpadWork->z.fixed += g_SpadWork->vz;
     if (g_SpadWork->x.fixed == g_SpadWork->unk_18 && g_SpadWork->y.fixed == g_SpadWork->unk_1C) {
         g_SpadWork->unk_09 = 0x2F;

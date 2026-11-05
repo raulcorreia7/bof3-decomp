@@ -18,8 +18,8 @@ MATCH void func_8019E95C(void) {
     work                          = g_SpadWork;
     work->tint.bytes.unk_5D       = 0;
     other                         = g_SpadWork;
-    work->unk_10                  = -0x2000;
-    work->unk_0C                  = 0;
+    work->vy                      = -0x2000;
+    work->vx                      = 0;
     work->vz                      = 0x40;
     other->tint.bytes.unk_5E      = 0;
     g_SpadWork->tint.bytes.unk_5F = 0;

@@ -251,7 +251,7 @@ MATCH void func_801F8EA8(void) {
 
     Area_SetCameraMatrix(&matrix);
     work = g_SpadWork;
-    func_801F92F0(&work->x, &work->unk_0C);
+    func_801F92F0(&work->x, &work->vx);
     g_SpadWork->unk_09 = 8;
     g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
     if (!(g_SpadWork->unk_0B & 2)) {

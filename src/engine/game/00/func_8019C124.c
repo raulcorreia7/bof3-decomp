@@ -6,7 +6,7 @@ MATCH void func_8019C124(s32 step_byte) {
 
     work = g_SpadWork;
     if (work->x.part.fraction != 0) {
-        vel = work->unk_0C;
+        vel = work->vx;
         if (vel > 0) {
             if ((step_byte & BYTE_MASK) == 0) {
                 work->unk_18 = (work->x.fixed + 0x10000) & 0xFFFF0000;
@@ -19,7 +19,7 @@ MATCH void func_8019C124(s32 step_byte) {
         }
         work->unk_18 = work->x.fixed & 0xFFFF0000;
     } else if (work->y.part.fraction != 0) {
-        vel = work->unk_10;
+        vel = work->vy;
         if (vel > 0) {
             if ((step_byte & BYTE_MASK) == 0) {
                 work->unk_18 = (work->y.fixed + 0x10000) & 0xFFFF0000;

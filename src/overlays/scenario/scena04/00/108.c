@@ -18,8 +18,8 @@ MATCH void func_801F6D44(void) {
     work                   = g_SpadWork;
     work->vz               = 0x1000000;
     FIELD(s32, work, 0x2C) = 0x1000000;
-    work->unk_0C           = 0x568000;
-    work->unk_10           = 0x128000;
+    work->vx               = 0x568000;
+    work->vy               = 0x128000;
     work->unk_1C           = 0;
     work->gravity          = 0x2200000;
     FIELD(s32, work, 0x24) = 0x568000;
@@ -41,7 +41,7 @@ MATCH void func_801F6EA4(void) {
     u8     mode;
 
     work = g_SpadWork;
-    func_801F7084(&work->unk_0C);
+    func_801F7084(&work->vx);
     func_801F75BC(0x10, 0xFF);
     actor         = g_SpadWork;
     mode          = actor->unk_09 - 1;
@@ -59,7 +59,7 @@ INCLUDE_ASM(func_801F6F2C);
 MATCH void func_801F6FF8(void) {
     Actor* work;
 
-    func_801F7084(&g_SpadWork->unk_0C);
+    func_801F7084(&g_SpadWork->vx);
     work = g_SpadWork;
     work->unk_09--;
     if (work->unk_09 == 0) {
@@ -162,8 +162,8 @@ MATCH void func_801F7BC0(void) {
 
 MATCH void func_801F7CA8(void) {
     func_801F7EC0();
-    g_SpadWork->unk_0C = g_SpadWork->unk_0C - 1;
-    if (g_SpadWork->unk_0C == 0) {
+    g_SpadWork->vx = g_SpadWork->vx - 1;
+    if (g_SpadWork->vx == 0) {
         func_80196070();
     }
 }

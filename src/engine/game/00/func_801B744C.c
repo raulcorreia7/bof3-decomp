@@ -6,16 +6,16 @@ MATCH void func_801B744C(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         rate                = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
         g_SpadWork->unk_09  = 0x20 / rate;
-        g_SpadWork->unk_0C  = g_FacingOffsets[g_SpadWork->direction_08].x * rate * (g_SpadWork->state_70.byte + 1);
-        g_SpadWork->unk_10  = g_FacingOffsets[g_SpadWork->direction_08].y * rate * (g_SpadWork->state_70.byte + 1);
+        g_SpadWork->vx      = g_FacingOffsets[g_SpadWork->direction_08].x * rate * (g_SpadWork->state_70.byte + 1);
+        g_SpadWork->vy      = g_FacingOffsets[g_SpadWork->direction_08].y * rate * (g_SpadWork->state_70.byte + 1);
         g_SpadWork->vz      = (g_SpadWork->state_70.byte + 1) << 6;
         g_SpadWork->gravity = -((g_SpadWork->state_70.byte + 1) * 8);
         if (g_SpadWork->unk_05 == 0) {
             s32 dx;
             s32 dy;
 
-            dx                    = g_SpadWork->unk_0C * g_SpadWork->unk_09;
-            dy                    = g_SpadWork->unk_10 * g_SpadWork->unk_09;
+            dx                    = g_SpadWork->vx * g_SpadWork->unk_09;
+            dy                    = g_SpadWork->vy * g_SpadWork->unk_09;
             MEM(s32, 0x80149308u) = g_SpadWork->x.fixed + dx;
             MEM(s32, 0x8014930Cu) = g_SpadWork->y.fixed + dy;
             MEM(s16, 0x8014932Eu) = rate * 8;

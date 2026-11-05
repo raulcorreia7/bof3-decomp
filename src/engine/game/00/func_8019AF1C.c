@@ -11,8 +11,8 @@ MATCH void func_8019AF1C(void) {
         work->gravity = D_801C810C[work->state_02][0];
         work->unk_01++;
     }
-    g_SpadWork->x.fixed += g_SpadWork->unk_0C;
-    g_SpadWork->y.fixed += g_SpadWork->unk_10;
+    g_SpadWork->x.fixed += g_SpadWork->vx;
+    g_SpadWork->y.fixed += g_SpadWork->vy;
     g_SpadWork->z.fixed += g_SpadWork->vz;
     g_SpadWork->vz -= g_SpadWork->gravity;
     func_8014D978();

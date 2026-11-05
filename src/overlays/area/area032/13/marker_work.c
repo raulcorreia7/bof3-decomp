@@ -341,7 +341,7 @@ MATCH void func_801F378C(void) {
         counter              = (u16)(g_GameState->unk_122 - 2);
         slot                 = SP_REF(Actor*, 0x44);
         g_GameState->unk_122 = counter;
-        slot->x.fixed += slot->unk_0C;
+        slot->x.fixed += slot->vx;
         return;
     }
     SP_REF(Actor*, 0x44)->unk_04 = 0;
@@ -419,7 +419,7 @@ MATCH void func_801F3920(void) {
         slots[0x11][4]         = 0;
         g_CurrentActor->unk_78 = 2;
     } else {
-        work->x.fixed += work->unk_0C;
+        work->x.fixed += work->vx;
         g_CurrentActor->unk_7E -= 2;
     }
 }

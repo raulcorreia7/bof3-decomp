@@ -18,9 +18,9 @@ MATCH void func_8019A3FC(void) {
     ptr->unk_48 = 0;
 
     work           = g_SpadWork;
-    delta          = work->unk_0C;
+    delta          = work->vx;
     total          = (s32) * (u16*)&work->unk_2E + delta;
-    delta          = work->unk_10;
+    delta          = work->vy;
     work->flags_24 = 0;
     work->unk_2E   = (u16)total;
     total          = (s32) * (u16*)&work->unk_30;

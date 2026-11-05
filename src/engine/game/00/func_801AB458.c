@@ -120,7 +120,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             slot         = g_GameState->slot_index_79;
             work         = SCRATCH_WORK;
             work->unk_0B = func_8015CC00(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]],
-                                         work->x.fixed, work->y.fixed, FIELD(s32, work, 0x3Cu));
+                                         work->x.fixed, work->y.fixed, work->z.fixed);
             state->index_0A += 1;
             break;
         }

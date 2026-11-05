@@ -18,10 +18,10 @@ MATCH void func_801ABBA8(void* sub, s32 route) {
         g_SpadWork->unk_09 = 0x10;
     }
     g_SpadWork->unk_09 = (u8)(g_SpadWork->unk_09 / (u32)(rate & BYTE_MASK));
-    g_SpadWork->unk_0C = g_FacingOffsets[slot].x * rate;
+    g_SpadWork->vx     = g_FacingOffsets[slot].x * rate;
     high               = g_FacingOffsets[slot].y * rate;
-    g_SpadWork->unk_10 = high;
-    pos_x              = g_SpadWork->x.fixed + g_SpadWork->unk_0C * g_SpadWork->unk_09;
+    g_SpadWork->vy     = high;
+    pos_x              = g_SpadWork->x.fixed + g_SpadWork->vx * g_SpadWork->unk_09;
     pos_y              = g_SpadWork->y.fixed + high * g_SpadWork->unk_09;
     if ((((u8*)sub)[0] & 0x80) == 0) {
         result = func_80154ABC(pos_x, pos_y, slot, sub);

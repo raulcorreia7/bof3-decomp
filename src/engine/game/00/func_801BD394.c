@@ -21,8 +21,8 @@ MATCH void func_801BD394(void) {
     work  = g_SpadWork;
     slot  = (Actor*)((u8*)g_BattlePartyBattlers + work->unk_06 * BATTLE_PARTY_STRIDE);
     count = slot->unk_09;
-    x     = slot->x.fixed + slot->unk_0C * count;
-    y     = slot->y.fixed + slot->unk_10 * count;
+    x     = slot->x.fixed + slot->vx * count;
+    y     = slot->y.fixed + slot->vy * count;
     range = 0x18000;
     if (slot->state_70.byte != 0) {
         range = 0x20000;

@@ -9,9 +9,9 @@ MATCH void func_8019BBA4(void) {
     x = g_SpadWork->x.fixed;
     y = g_SpadWork->y.fixed;
     if (g_SpadWork->unk_18 != 0) {
-        if (g_SpadWork->unk_0C != 0) {
-            g_SpadWork->x.fixed = x + g_SpadWork->unk_0C;
-            if (g_SpadWork->unk_0C > 0) {
+        if (g_SpadWork->vx != 0) {
+            g_SpadWork->x.fixed = x + g_SpadWork->vx;
+            if (g_SpadWork->vx > 0) {
                 if (g_SpadWork->unk_18 < g_SpadWork->x.fixed) {
                     g_SpadWork->x.fixed = g_SpadWork->unk_18;
                     g_SpadWork->unk_18  = 0;
@@ -23,8 +23,8 @@ MATCH void func_8019BBA4(void) {
                 }
             }
         } else {
-            g_SpadWork->y.fixed = y + g_SpadWork->unk_10;
-            if (g_SpadWork->unk_10 > 0) {
+            g_SpadWork->y.fixed = y + g_SpadWork->vy;
+            if (g_SpadWork->vy > 0) {
                 if (g_SpadWork->unk_18 < g_SpadWork->y.fixed) {
                     g_SpadWork->y.fixed = g_SpadWork->unk_18;
                     g_SpadWork->unk_18  = 0;
@@ -53,14 +53,14 @@ MATCH void func_8019BBA4(void) {
             g_SpadWork->gravity        = 0;
         }
         if ((g_SpadWork->unk_18 == 0) && (g_SpadWork->vz == 0)) {
-            limit = g_SpadWork->unk_0C;
+            limit = g_SpadWork->vx;
             if (limit < 0) {
                 limit = -limit;
             }
             if (limit >= 16385) {
                 g_SpadWork->unk_01 = 4;
             } else {
-                limit = g_SpadWork->unk_10;
+                limit = g_SpadWork->vy;
                 if (limit < 0) {
                     limit = -limit;
                 }

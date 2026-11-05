@@ -422,7 +422,7 @@ MATCH void func_801F31CC(void) {
 
     if (SYS_TestFlag(D_80144E98, 0x17) != 0) {
         g_SpadWork->state_02 += 1u;
-        g_SpadWork->unk_0C = 0u;
+        g_SpadWork->vx = 0u;
     }
 
     point[0] = (s16)0xE340u;
@@ -442,21 +442,21 @@ MATCH void func_801F31CC(void) {
 MATCH void func_801F32B0(void) {
     s16 point[3];
 
-    if (g_SpadWork->unk_0C >= ONE / 4) {
+    if (g_SpadWork->vx >= ONE / 4) {
         g_SpadWork->state_02 += 1u;
     }
-    g_SpadWork->unk_0C += 32;
+    g_SpadWork->vx += 32;
 
     point[0] = (s16)0xE340u;
     point[1] = (s16)0xE3C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, *(s16*)&g_SpadWork->unk_0C, 0x13500126u);
+    func_801F3480((const AreaPoint*)point, *(s16*)&g_SpadWork->vx, 0x13500126u);
     Area_AddCellPrim(0x468000, 0x478000, -1, 0x28);
 
     point[0] = (s16)0xE340u;
     point[1] = (s16)0xE4C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, (s16)(ONE / 2 - g_SpadWork->unk_0C), 0x13510125u);
+    func_801F3480((const AreaPoint*)point, (s16)(ONE / 2 - g_SpadWork->vx), 0x13510125u);
     Area_AddCellPrim(0x468000, 0x498000, -1, 0x28);
 }
 

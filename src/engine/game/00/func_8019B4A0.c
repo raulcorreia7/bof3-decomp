@@ -16,31 +16,31 @@ MATCH void func_8019B4A0(void) {
                 g_SpadWork->unk_0A = (u8)((g_SpadWork->unk_0A + 1) >> 1);
                 vx                 = g_FacingOffsets[g_SpadWork->direction_08].x;
                 span               = (g_SpadWork->unk_0A - 1) * 0xC00;
-                g_SpadWork->unk_0C = vx * 4;
+                g_SpadWork->vx     = vx * 4;
                 if ((vx * 4) > 0) {
-                    g_SpadWork->unk_0C = vx * 4 + span;
+                    g_SpadWork->vx = vx * 4 + span;
                 } else if ((vx * 4) < 0) {
-                    g_SpadWork->unk_0C = vx * 4 - span;
+                    g_SpadWork->vx = vx * 4 - span;
                 }
-                vy                 = g_FacingOffsets[g_SpadWork->direction_08].y;
-                g_SpadWork->unk_10 = vy * 4;
+                vy             = g_FacingOffsets[g_SpadWork->direction_08].y;
+                g_SpadWork->vy = vy * 4;
                 if ((vy * 4) > 0) {
-                    g_SpadWork->unk_10 = vy * 4 + span;
+                    g_SpadWork->vy = vy * 4 + span;
                 } else if ((vy * 4) < 0) {
-                    g_SpadWork->unk_10 = vy * 4 - span;
+                    g_SpadWork->vy = vy * 4 - span;
                 }
                 g_SpadWork->gravity = 0;
                 g_SpadWork->vz      = 0;
-                if (g_SpadWork->unk_0C > 0) {
+                if (g_SpadWork->vx > 0) {
                     g_SpadWork->unk_18 = -0x400;
-                } else if (g_SpadWork->unk_0C < 0) {
+                } else if (g_SpadWork->vx < 0) {
                     g_SpadWork->unk_18 = 0x400;
                 } else {
                     g_SpadWork->unk_18 = 0;
                 }
-                if (g_SpadWork->unk_10 > 0) {
+                if (g_SpadWork->vy > 0) {
                     g_SpadWork->unk_1C = -0x400;
-                } else if (g_SpadWork->unk_10 < 0) {
+                } else if (g_SpadWork->vy < 0) {
                     g_SpadWork->unk_1C = 0x400;
                 } else {
                     g_SpadWork->unk_1C = 0;

@@ -81,8 +81,8 @@ MATCH void func_801B0568(void) {
                 if (g_AreaWalkFlags & (AREA_WALK_TRANSITION | 0x2000)) {
                     tmp5         = g_SpadWork;
                     tmp1         = tmp5->unk_09;
-                    tmp2         = tmp5->x.fixed + (tmp5->unk_0C * tmp1);
-                    tmp10        = tmp5->y.fixed + (tmp5->unk_10 * tmp1);
+                    tmp2         = tmp5->x.fixed + (tmp5->vx * tmp1);
+                    tmp10        = tmp5->y.fixed + (tmp5->vy * tmp1);
                     tmp5->unk_06 = (u8)(tmp5->unk_06 - 1);
                     if ((g_SpadWork->unk_06 == 0) ||
                         (Area_GetCellCode((s16)((s32)tmp2 >> 0x10), (s16)((s32)tmp10 >> 0x10)) & BYTE_MASK)) {

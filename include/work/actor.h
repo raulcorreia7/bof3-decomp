@@ -146,8 +146,8 @@ typedef struct Actor {
     u8             unk_09;         /* 0x09 - area032 calls it the marker mode byte */
     u8             unk_0A;         /* 0x0A */
     u8             unk_0B;         /* 0x0B */
-    s32            unk_0C;         /* 0x0C - area032 adds it to x as the x step */
-    s32            unk_10;         /* 0x10 */
+    s32            vx;             /* 0x0C added to x each step */
+    s32            vy;             /* 0x10 added to y each step */
     s32            vz;             /* 0x14 signed vertical speed */
     s32            unk_18;         /* 0x18 - commu00 calls it variant_arg_0 */
     s32            unk_1C;         /* 0x1C - commu00 calls it variant_arg_1 */
@@ -216,6 +216,8 @@ typedef struct Actor {
 ASSERT_SIZE(Actor, ACTOR_SIZE);
 ASSERT_OFFSET(Actor, flags_00, 0x00);
 ASSERT_OFFSET(Actor, direction_08, 0x08);
+ASSERT_OFFSET(Actor, vx, 0x0C);
+ASSERT_OFFSET(Actor, vy, 0x10);
 ASSERT_OFFSET(Actor, vz, 0x14);
 ASSERT_OFFSET(Actor, unk_18, 0x18);
 ASSERT_OFFSET(Actor, gravity, 0x20);

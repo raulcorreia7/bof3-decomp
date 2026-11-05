@@ -15,7 +15,7 @@ MATCH void func_801F3320(void) {
     scratch          = g_SpadWork;
     mode             = scratch->unk_0A - 1;
     x                = scratch->x.fixed;
-    step             = scratch->unk_0C;
+    step             = scratch->vx;
     angle            = scratch->unk_40;
     scratch->x.fixed = x + step;
     spin             = scratch->unk_44;
