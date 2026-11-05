@@ -86,7 +86,21 @@ INCLUDE_ASM(func_801EF818);
 
 INCLUDE_ASM(func_801EFF74);
 
-INCLUDE_ASM(func_801F0034);
+MATCH void func_801F0034(void) {
+    PartyBattler* work;
+    PartyBattler* actor;
+    s32           z;
+
+    g_SpadWork->flags_00 &= 0xBF;
+    work                      = g_SpadWork;
+    actor                     = D_801EB4E0;
+    work->coord_x_34.raw      = actor->coord_x_34.raw;
+    work->coord_y_38.raw      = actor->coord_y_38.raw;
+    z                         = actor->word_3C.word;
+    work->word_08.byte.unk_09 = 0;
+    work->word_3C.word        = z;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801F00A0(void) {
     EFFECT_ADVANCE_AT_COUNT(2, 0x10);
