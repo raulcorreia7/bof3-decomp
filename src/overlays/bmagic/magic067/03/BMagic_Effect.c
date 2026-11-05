@@ -42,7 +42,22 @@ MATCH void func_801EF314(void) {
 
 INCLUDE_ASM(func_801EF38C);
 
-INCLUDE_ASM(func_801EF44C);
+MATCH void func_801EF44C(void) {
+    s32 count;
+    u8  temp_v1;
+
+    count = g_SpadWork->word_08.byte.unk_0B + 1;
+    count += g_SpadWork->word_08.byte.unk_09 >> 6;
+    g_SpadWork->word_08.byte.unk_0B = count;
+    if (g_FrameCount & 1) {
+        g_SpadWork->word_08.byte.timer_0A += 1;
+    }
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 2;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0xC0) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF4F4);
 
