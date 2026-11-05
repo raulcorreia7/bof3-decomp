@@ -117,4 +117,6 @@ extern u8   D_80144FF9;
 
 extern s8 D_801DA04E;
 
+extern u8 D_801DA0C6;
+
 #endif

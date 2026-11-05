@@ -55,7 +55,18 @@ MATCH void func_801D2DEC(void) {
     func_801D2ADC();
 }
 
-INCLUDE_ASM(func_801D2E20);
+MATCH void func_801D2E20(void) {
+    s32* counter = &D_801DA12C;
+    s32  cur     = *counter;
+
+    if (cur & 0xFFF) {
+        *counter   = (cur - 0x40) & 0xFC0;
+        D_801DA0C6 = 0;
+    } else {
+        D_801DA0C6 = 1;
+    }
+    func_801D2ADC();
+}
 
 /* 10 differing: +0x54 loads 0x02000000, not 0xFE000000; preserve the intermediate subtraction. */
 INCLUDE_ASM(func_801D2E80);
