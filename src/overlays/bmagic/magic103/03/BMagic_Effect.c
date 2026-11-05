@@ -61,7 +61,7 @@ MATCH void func_801EF094(void) {
 
     SP_REF(s16, 0u) = (g_SpadWork->word_08.byte.unk_09 * 4) + 0xC0;
     g_SpadWork->word_08.byte.timer_0A += 1;
-    temp_v0 = g_SpadWork->word_08.byte.unk_09 + 1;
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 + 1;
     g_SpadWork->word_08.byte.unk_09 = temp_v0;
     if ((temp_v0 & 0xFF) == 0x28) {
         D_801EB4E0->word_08.byte.unk_0B -= 1;
