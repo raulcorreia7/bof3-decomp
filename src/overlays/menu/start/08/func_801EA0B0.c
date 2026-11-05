@@ -7,6 +7,6 @@ MATCH void func_801EA0B0(void) {
     D_801ED45C[g_MenuCurrentPanel->state]();
     /* clang-format off */
     Menu_DrawCommandRow((s16)g_MenuCurrentPanel->x, (s16)g_MenuCurrentPanel->y,
-                        g_MenuCurrentPanel->unk_0A, g_MenuCurrentPanel->unk_0B, 0);
+                        ((u8*)g_MenuCurrentPanel)[0xA], ((u8*)g_MenuCurrentPanel)[0xB], 0);
     /* clang-format on */
 }
