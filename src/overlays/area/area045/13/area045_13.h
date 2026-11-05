@@ -7,6 +7,8 @@
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
 
+#define AREA_SCENE_RECORD 0x3B
+
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F5364 + 0x10)
 
 void Area_SetCellCode(s16 column, s16 row, u8 code);

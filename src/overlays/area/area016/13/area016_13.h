@@ -9,6 +9,8 @@
 #include "work/area_spad.h"
 #include <abs.h>
 
+#define AREA_SCENE_RECORD 0xF
+
 /* Signed spawn offsets (func_801F42F8) as u16 words: 0x2000 and -0x2000. */
 #define SPAWN_OFFSET_FORWARD 0x2000u
 #define SPAWN_OFFSET_BACK    0xE000u
