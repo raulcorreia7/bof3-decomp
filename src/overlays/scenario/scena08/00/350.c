@@ -243,7 +243,12 @@ MATCH void func_801F95D4(void) {
     SYS_DISPATCH_TASK(D_801FE908, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801F9618);
+MATCH void func_801F9618(void) {
+    func_801F9688();
+    if (g_GameAreaId != 2) {
+        g_SpadWork->unk_01 += 1;
+    }
+}
 
 MATCH void func_801F9668(void) {
     Actor_Clear();
