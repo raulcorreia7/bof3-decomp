@@ -344,7 +344,8 @@ extern volatile u8 D_801E6260;
 extern u8          D_801E6264[];
 
 void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
-void func_80164D2C(u8 idx, u8 sel, u8 val, u8* flags, u16* dst);
+/* func_80164D2C */
+void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
 bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 u32  Char_ClearStatus(u8 index, u16 mask, u8 mode);
 s32  Item_Count(u8 category, u8 item, u8 mode);

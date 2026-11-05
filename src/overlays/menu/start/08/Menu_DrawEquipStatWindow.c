@@ -61,7 +61,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_slot, s32
     val9     = stack_28;
     UI_DrawWindow((val1 + 3) & HALF_MASK, (val0 + 3) & HALF_MASK, 108, 48, (s32)val9, CHARACTER_BLOCK->window_style);
     if (val9 == 0) {
-        func_80164D2C(val10, (val5 - 1) & BYTE_MASK, val11, &stack_18[0], &stack_20[0]);
+        Char_PreviewEquip(val10, (val5 - 1) & BYTE_MASK, val11, &stack_18[0], &stack_20[0]);
         val10       = 0;
         val6        = g_UiFormatBuffer;
         byte_buffer = stack_18;

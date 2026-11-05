@@ -649,7 +649,8 @@ void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_st
 
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 
-void func_80164D2C(u8 idx, u8 sel, u8 val, u8* flags, u16* dst);
+/* func_80164D2C */
+void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
 
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 
