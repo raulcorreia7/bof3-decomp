@@ -6,7 +6,7 @@
 
 #include "overlays/area/world03.h"
 
-/* The scroll target position the step checks compare against. */
+/* The party position in 16.16 fixed point. */
 extern s32 D_80145EC4;
 extern s32 D_80145EC8;
 
