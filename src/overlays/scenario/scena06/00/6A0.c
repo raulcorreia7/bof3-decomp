@@ -241,6 +241,7 @@ INCLUDE_ASM(func_801FDD7C);
 MATCH void func_801FDE2C(void) {
 }
 
+/* Permuter, 6 min, best score 170: no exact candidate. First diff at 801FDE4C is the scheduled load. */
 INCLUDE_ASM(func_801FDE34);
 
 INCLUDE_ASM(func_801FDEA4);
