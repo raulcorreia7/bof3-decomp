@@ -5,8 +5,11 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world03.h"
+#include "work/area_spad.h"
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
+
+void func_801F390C(void);
 
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F47E8[];

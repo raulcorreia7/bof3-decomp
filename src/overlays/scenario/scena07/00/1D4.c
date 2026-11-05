@@ -417,7 +417,7 @@ MATCH ActorSlot* func_801FD610(u8 arg0) {
     ActorSlot* slot;
     s32        index;
 
-    index = func_8019601C() & 0xFF;
+    index = Actor_FindFreeSlot() & 0xFF;
     slot  = &g_ActorSlots[index];
     if (index != 0xFF) {
         slot->flags_00 = 1;

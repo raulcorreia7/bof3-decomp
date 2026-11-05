@@ -32,7 +32,16 @@ MATCH void func_801EF070(void) {
     g_SpadWork->unk_02                = g_SpadWork->unk_02 + 1;
 }
 
-INCLUDE_ASM(func_801EF0D4);
+MATCH void func_801EF0D4(void) {
+    u8 temp_v1;
+
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 2;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x10) {
+        g_SpadWork->word_08.byte.timer_0A = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF134);
 

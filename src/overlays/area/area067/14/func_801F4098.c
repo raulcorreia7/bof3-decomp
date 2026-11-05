@@ -16,6 +16,6 @@ MATCH void func_801F4098(void) {
     result     = func_8015CC00(3, 0, selection, x, y, g_BattlePartyBattlers[2].word_3C.word);
     if ((u8)result != GAME_NONE) {
         work      = SP_REF(u8*, 0x44u);
-        work[0xB] = (u8)result;
+        work[0xB] = result;
     }
 }
