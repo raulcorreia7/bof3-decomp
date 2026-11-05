@@ -4,5 +4,5 @@ MATCH void func_801E9074(void) {
     BattlePanelFuncs handlers;
 
     handlers = g_BattlePanelFuncs;
-    handlers.handlers[((u8*)g_MenuCurrentPanel)[2]]();
+    handlers.handlers[g_MenuCurrentPanel->unk_00[2]]();
 }
