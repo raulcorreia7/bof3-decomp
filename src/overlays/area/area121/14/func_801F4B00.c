@@ -2,5 +2,5 @@
 
 MATCH void func_801F4B00(void) {
     (*D_801F689C[g_SpadWork->state_02])();
-    func_801F5798();
+    Area_StepChargeGauge();
 }
