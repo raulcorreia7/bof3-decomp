@@ -95,7 +95,7 @@ NON_MATCHING void func_801E7BA0(void) {
         do {
             *(s32*)(var_a3_198)          = (s32) * (s32*)(var_a2_201);
             FIELD(s32, var_a3_198, 0x4u) = (s32)FIELD(s32, var_a2_201, 0x4u);
-            FIELD(s32, var_a3_198, 0x8u) = (s32)FIELD(s32, var_a2_201, 0x8u);
+            var_a3_198->facing           = (s32)FIELD(s32, var_a2_201, 0x8u);
             var_a3_198->unk_0C           = FIELD(s32, var_a2_201, 0xCu);
             var_a2_201 += 0x10;
             var_a3_198 += 0x10;

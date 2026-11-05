@@ -42,13 +42,13 @@ NON_MATCHING void func_800ABCE0(s32 slot, u16 unit, s32 x, s32 y) {
     enemy->unk_5D                   = 0;
     FIELD(s32, enemy, 0x14u)        = 0;
     FIELD(s32, enemy, 0x10u)        = 0;
-    FIELD(s32, enemy, 0x0Cu)        = 0;
-    FIELD(s32, enemy, 0x20u)        = 0;
+    enemy->unk_0C                   = 0;
+    enemy->unk_20                   = 0;
     FIELD(s32, enemy, 0x1Cu)        = 0;
     FIELD(s32, enemy, 0x18u)        = 0;
-    FIELD(s16, enemy, 0x32u)        = 0;
-    FIELD(s16, enemy, 0x30u)        = 0;
-    FIELD(s16, enemy, 0x2Eu)        = 0;
+    enemy->unk_32                   = 0;
+    enemy->unk_30                   = 0;
+    enemy->unk_2E                   = 0;
     ((EnemyBattler*)g_Task)->unk_5C = 0;
     ((EnemyBattler*)g_Task)->unk_06 = 0;
     ((EnemyBattler*)g_Task)->unk_07 = 0;
@@ -59,7 +59,7 @@ NON_MATCHING void func_800ABCE0(s32 slot, u16 unit, s32 x, s32 y) {
     enemy->pos.x.raw                = x;
     enemy->pos.y.raw                = y;
     enemy                           = (EnemyBattler*)g_Task;
-    COORD_INT(enemy->pos.z)         = Area_SampleHeight(FIELD(s32, enemy, 0x34u), y);
+    COORD_INT(enemy->pos.z)         = Area_SampleHeight(enemy->pos, y);
     enemy->unk_2B                   = 0;
     Area_FindSceneRecord(FIELD(u16, &D_800E405E, unit_offset));
     enemy_offset                          = (slot & BYTE_MASK) * BATTLE_ENEMY_STRIDE;
