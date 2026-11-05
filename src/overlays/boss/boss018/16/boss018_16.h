@@ -39,6 +39,11 @@ extern u16      D_800C2C9C;
 extern u16      D_800C2CA4;
 extern u16      D_801FD6FC;
 extern u16      D_801FD702;
+extern s8       D_80146875;
+extern u16      D_801EB6C4;
+extern u16      D_801EB6C6;
+extern u16      D_801EB7DC;
+extern u16      D_801EB8F4;
 
 void func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode);
 void func_800C197C(s32 mode);
