@@ -14,8 +14,8 @@ MATCH void func_801F325C(void) {
     scratch->unk_40 += 0x2000;
 
     if (((u8*)scratch2)[9] == 0) {
-        scratch2->unk_48     = 0;
-        ((u8*)g_SpadWork)[1] = 3;
+        scratch2->unk_48        = 0;
+        ((u8*)g_SpadWork)[0x01] = 3;
     }
 
     Area_AddActor();

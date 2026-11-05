@@ -76,7 +76,17 @@ MATCH void func_801EF52C(void) {
 
 INCLUDE_ASM(func_801EF5F4);
 
-INCLUDE_ASM(func_801EF914);
+MATCH u32 func_801EF914(void) {
+    u8 index;
+
+    for (index = 0u; index < 0x60; index++) {
+        if ((D_801EF9F8[index << 5] & 1) == 0) {
+            D_801EF9F8[index << 5] |= 1;
+            return index;
+        }
+    }
+    return 0xFFu;
+}
 
 MATCH void func_801EF970(void) {
     D_801F05F8[0] = 0;

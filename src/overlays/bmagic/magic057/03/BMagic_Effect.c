@@ -23,22 +23,7 @@ MATCH void func_801EED2C(void) {
     SYS_DISPATCH_TASK(table.handlers, 2, g_SpadWork);
 }
 
-MATCH void func_801EED98(void) {
-    PartyBattler* temp_s0;
-    s32           slot;
-
-    SND_QueueSelectionFx(0x101);
-    SND_QueueSelectionFx(0x102);
-    temp_s0    = g_SpadWork;
-    g_SpadWork = D_801EC2E0->target.party;
-    Actor_SelectScript(3U);
-    g_SpadWork                         = temp_s0;
-    slot                               = Battle_AllocEffect(1, 0x41) & BYTE_MASK;
-    g_BattleEffects[slot].unk_01       = 1;
-    g_BattleEffects[slot].unk_02       = 0;
-    g_BattleEffects[slot].target.party = g_SpadWork;
-    g_SpadWork->unk_02 += 1;
-}
+INCLUDE_ASM(func_801EED98);
 
 MATCH void func_801EEE50(void) {
     PartyBattler* temp_s0;
@@ -146,47 +131,9 @@ MATCH void func_801EF81C(void) {
     func_801E5988();
 }
 
-MATCH void func_801EF83C(void) {
-    BattleHandlerTable3 handlers;
+INCLUDE_ASM(func_801EF83C);
 
-    handlers     = D_801EEC44;
-    g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_TASK(handlers.handlers, 2, g_SpadWork);
-    if ((g_SpadWork->flags_00 & 1) && (D_801EB4E0->word_08.byte.timer_0A == 0)) {
-        func_8014D290();
-    }
-    g_ScriptBank = 0x800D3800;
-}
-
-MATCH void func_801EF900(void) {
-    PartyBattler* work;
-    s16           temp_v0;
-    s32           temp_a0;
-    s8            tone;
-
-    g_SpadWork->coord_x_34.raw = D_801EB4E0->coord_x_34.raw - 1;
-    g_SpadWork->coord_y_38.raw = D_801EB4E0->coord_y_38.raw - 1;
-    temp_a0                    = g_SpadWork->coord_x_34.raw;
-    temp_v0                    = Area_SampleHeight(temp_a0, temp_a0);
-    work                       = g_SpadWork;
-    work->unk_25               = 0x1D;
-    work->word_3C.half.span_3E = temp_v0;
-    g_SpadWork->unk_26         = 0;
-    g_SpadWork->unk_48         = 1;
-    g_SpadWork->unk_27         = 0xA0;
-    g_SpadWork->unk_28         = 0;
-    g_SpadWork->unk_24         = 4;
-    tone                       = -0x80;
-    g_SpadWork->unk_5D         = tone;
-    g_SpadWork->unk_5E         = tone;
-    g_SpadWork->unk_5F         = tone;
-    g_SpadWork->unk_5C         = 0;
-    g_SpadWork->unk_2A         = 0;
-    g_SpadWork->unk_29         = 4;
-    g_SpadWork->unk_2C.half    = 0;
-    Actor_SelectScript(0U);
-    g_SpadWork->unk_02 += 1;
-}
+INCLUDE_ASM(func_801EF900);
 
 MATCH void func_801EFA38(void) {
     s32 temp_a0;

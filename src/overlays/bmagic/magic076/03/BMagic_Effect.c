@@ -33,7 +33,7 @@ INCLUDE_ASM(func_801EF160);
 INCLUDE_ASM(func_801EF2E8);
 
 MATCH void func_801EF330(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 MATCH void func_801EF374(void) {

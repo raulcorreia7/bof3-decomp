@@ -229,7 +229,7 @@ INCLUDE_ASM(func_801FDB1C);
 INCLUDE_ASM(func_801FDBA8);
 
 /* 1 differing; +0x28: candidate li v1,20 against retail li v0,1 — the return 1 must materialize
- * before the store constants (the Game_SetScriptActive family's shared wall); next lever: permuter. */
+ * before the store constants even with direct returns (Game_SetScriptActive family wall); permuter. */
 INCLUDE_ASM(func_801FDC1C);
 
 /* Returns -1 when scene flag 0x33 is set; else sets the script active, D_80146875 = 0x32 (0x34 unless D_80145F09 == 4),

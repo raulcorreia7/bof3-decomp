@@ -130,7 +130,7 @@ static inline void Bmagic_ResetLocalWork(void) {
 static inline void Bmagic_DispatchTaskPair(Callback first, Callback second) {
     Callback handlers[2] = {first, second};
 
-    handlers[((u8*)g_SpadWork)[1]]();
+    handlers[g_SpadWork->step_01]();
 }
 
 typedef struct MagicTaskFuncs {
