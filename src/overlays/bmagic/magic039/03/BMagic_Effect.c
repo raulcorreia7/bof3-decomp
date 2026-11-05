@@ -49,19 +49,7 @@ INCLUDE_ASM(func_801EF1F4);
 
 INCLUDE_ASM(func_801EF320);
 
-MATCH void func_801EF44C(void) {
-    u8 temp_v0;
-
-    g_SpadWork->word_08.byte.unk_09 += 1;
-    temp_v0                           = g_SpadWork->word_08.byte.timer_0A - 2;
-    g_SpadWork->word_08.byte.timer_0A = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
-        func_80196718(g_BattleSelectedActor);
-        func_800AF814(g_BattleTargetSelector);
-        D_801EB4E0->word_08.byte.unk_0B -= 1;
-        func_801E5988();
-    }
-}
+INCLUDE_ASM(func_801EF44C);
 
 MATCH void func_801EF4E4(void) {
     BattleHandlerTable3 handlers;
