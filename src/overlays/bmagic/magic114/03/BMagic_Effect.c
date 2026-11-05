@@ -147,7 +147,24 @@ MATCH void func_801F0D08(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
-INCLUDE_ASM(func_801F0D6C);
+MATCH void func_801F0D6C(void) {
+    PartyBattler* work;
+
+    g_SpadWork->unk_25              = 0x1D;
+    g_SpadWork->unk_26              = 0;
+    g_SpadWork->unk_27              = 0x1A;
+    g_SpadWork->unk_28              = 1;
+    g_SpadWork->unk_2A              = (g_SpadWork->word_08.byte.facing_08 - 1) & 1;
+    g_SpadWork->unk_29              = 4;
+    g_SpadWork->unk_24              = 0;
+    work                            = g_SpadWork;
+    work->unk_2B                    = 0;
+    work->unk_2C.half               = 0;
+    g_SpadWork->word_08.byte.unk_09 = 0;
+    g_SpadWork->unk_02 += 1;
+    Actor_SelectScript(0);
+    func_8014D290();
+}
 
 MATCH void func_801F0E4C(void) {
     if (func_8014DAEC() & BYTE_MASK) {

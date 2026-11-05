@@ -34,7 +34,21 @@ INCLUDE_ASM(func_801EF118);
 
 INCLUDE_ASM(func_801EF3CC);
 
-INCLUDE_ASM(func_801EF530);
+MATCH void func_801EF530(void) {
+    PartyBattler* work = g_SpadWork;
+
+    work->unk_25         = 0x1D;
+    work->coord_x_34.raw = work->unk_0C;
+    work->coord_y_38.raw = work->unk_10;
+    work->word_3C.word   = work->unk_14;
+    g_SpadWork->unk_26   = 0;
+    g_SpadWork->unk_27   = 0x1A;
+    g_SpadWork->unk_2B   = 1;
+    Actor_SelectScript(1);
+    g_SpadWork->word_08.byte.unk_09   = 0xE;
+    g_SpadWork->word_08.byte.timer_0A = 0xC;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF5DC(void) {
     u8 temp_v0;
