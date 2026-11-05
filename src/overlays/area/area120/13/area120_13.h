@@ -25,4 +25,7 @@ extern u8 D_801F43E4;
 #define AREA_ROW_COUNT  0x100
 #define AREA_ROW_STRIDE 0x1C
 
+/* g_GameEntryState and the byte after it, read as one word. */
+extern u32 g_GameEntryStateWord;
+
 #endif

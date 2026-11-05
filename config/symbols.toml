@@ -2650,6 +2650,9 @@ Area_AddCameraOffsetY2 = { addr = 0x801F41B8, type = "func", source = "adds 2 to
 Area_SubCameraOffsetY2 = { addr = 0x801F41E0, type = "func", source = "subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetCameraOffsetY = { addr = 0x801F4208, type = "func", source = "zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }
 
+["emi/world03/area120/13"]
+g_GameEntryStateWord = { addr = 0x80143B90, alias = true }
+
 ["emi/world03/area121/14"]
 Message_ClearOnCancel = { addr = 0x801F2C08, type = "func", source = "byte-identical to Message_ClearOnCancel at emi/world03/area151/13@0x801F2C04" }
 Area_FindSceneRecordAndClearTint = { addr = 0x801F3078, type = "func", source = "one body shared through overlays/area/Area_FindSceneRecordAndClearTint.h" }
