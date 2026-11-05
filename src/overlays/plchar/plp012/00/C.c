@@ -40,6 +40,7 @@ MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801CFDA4, 2, g_SpadWork);
 }
 
+/* Draft differs at +0xE8: SND_PlayCue argument narrows to u16; retail passes the full sum. */
 INCLUDE_ASM(func_801CF37C);
 
 #include "overlays/plchar/Char_ClearModeIfSlotFree.h"
