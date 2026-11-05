@@ -9,6 +9,7 @@ INCLUDE_ASM(func_801EEC24);
 INCLUDE_ASM(func_801EEDEC);
 
 /* Best 1 difference: slti at 0x801EEFA0; adjust signed form comparison. */
+/* Best draft differs at +0x3C: sltiu replaces retail slti; try preserving signed switch comparison. */
 INCLUDE_ASM(func_801EEF64);
 
 INCLUDE_ASM(func_801EF000);
