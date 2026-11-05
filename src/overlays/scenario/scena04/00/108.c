@@ -50,6 +50,8 @@ MATCH void func_801F6EA4(void) {
     }
 }
 
+/* 10 differing; first at +0x40: candidate lbu a1,9(v0) against retail lbu a0,9(v0) — the unk_09
+ * value must sit in a0 and build the func_801F75BC argument in the arms; next lever: permuter. */
 INCLUDE_ASM(func_801F6F2C);
 
 MATCH void func_801F6FF8(void) {
