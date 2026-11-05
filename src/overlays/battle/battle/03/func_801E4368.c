@@ -5,7 +5,7 @@ MATCH u8 func_801E4368(void) {
         0u) {
         return 0u;
     }
-    if (BATTLER_IS_PLAYER(g_BattleActingBattler)) {
+    if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
         if ((LOBU(g_BattleActionType) == 4u) && (LOHU(g_BattleActionId) == 0xA1u)) {
             return 0u;
         }

@@ -57,7 +57,7 @@
         u32 row;                                                                \
         u8  battler;                                                            \
         u8  result;                                                             \
-        battler = *(u8*)&g_BattleActingBattler;                                 \
+        battler = *(u8*)&g_BattleActiveBattler;                                 \
         if (battler < 3u) {                                                     \
             if ((g_BattlePartyBattlers[battler].flags_128.value & 2u) != 0u) {  \
                 result = flagged[g_DragonForm];                                 \
@@ -542,7 +542,7 @@ extern volatile u8                       D_801462E7;
 extern volatile u8                       g_BattlePartyCount; /* u8 active-battler count at 0x801462F0. */
 extern u8                                D_8014630C[];
 /* D_80146374 */
-extern volatile u8                       g_BattleActingBattler;
+extern volatile u8                       g_BattleActiveBattler;
 /* D_80146394 */
 extern volatile u8                       g_BattleTarget;
 /* g_BattleTargetRecord points at a panel task: its +0x04 and +0x06 cells are the
@@ -663,7 +663,7 @@ extern volatile u8                      g_BattleSelectionHead;
 /* Per-access views of a symbol at the same address, named by an
  * `alias = true` row in config/symbols.toml (this image's table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for
  * one cell use them; a cast of the canonical symbol merges the pair and changes the bytes. */
-extern u8                               g_BattleActingBattler_nv;
+extern u8                               g_BattleActiveBattler_nv;
 extern u8                               g_BattleTarget_nv;
 extern BattleSelectionState             D_801462F0_state;
 
@@ -944,7 +944,7 @@ extern u8   g_BattleUiStep_nv;
 static inline void BattleApplyHalfDamage(s32 anim) {
     s32 half;
 
-    half                            = Battle_CalcDamage(g_BattleActingBattler, g_BattleTarget, 0xFFFF) / 2;
+    half                            = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, 0xFFFF) / 2;
     ((u16*)g_BattleTargetRecord)[2] = half;
     if (half != 0) {
         func_800A4238(anim);
@@ -1076,7 +1076,7 @@ static inline void BattleSetSelectionFlag(u32 flag) {
      * delay-slot constant in $v1 while $v0 stayed free. */
     MATCH_REG(u8, one, "v0");
 
-    if (func_800A3A10(g_BattleActingBattler, g_BattleTarget) == 0) {
+    if (func_800A3A10(g_BattleActiveBattler, g_BattleTarget) == 0) {
         mode = *(u8*)&g_BattleTarget;
         if (mode < 3u) {
             g_BattlePartyBattlers[mode].flags_128.value |= flag;

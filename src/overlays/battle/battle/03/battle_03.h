@@ -233,7 +233,7 @@ extern u8              D_8014630C;
 extern u8              D_80146327;
 extern u8              D_80146364[];
 /* D_80146374 */
-extern u8              g_BattleActingBattler;
+extern u8              g_BattleActiveBattler;
 extern u16             D_80146388;
 /* D_80146394 */
 extern u8              g_BattleTarget;

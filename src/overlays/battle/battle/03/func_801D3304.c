@@ -14,9 +14,9 @@ MATCH void func_801D3304(void) {
         battle_half  = (u16*)&g_BattleActionId;
         *battle_half = g_BattleAction->unk_02;
         if (func_800A9A84() & BYTE_MASK) {
-            func_801DD14C(g_BattleActingBattler);
-            BATTLE_ACTING_PARTY.step_01 = 2;
-            BATTLE_ACTING_PARTY.unk_02  = 0;
+            func_801DD14C(g_BattleActiveBattler);
+            BATTLE_ACTIVE_PARTY.step_01 = 2;
+            BATTLE_ACTIVE_PARTY.unk_02  = 0;
             g_BattleMode                = 3;
             g_BattleStep                = 0;
             g_BattleSubStep             = 0;
@@ -29,12 +29,12 @@ MATCH void func_801D3304(void) {
             func_801DE560(1, 1, 0, 0x3C, (u8*)&D_80149298);
         }
     }
-    if (BATTLER_IS_PLAYER(g_BattleActingBattler)) {
-        row  = BATTLE_ACTING_PARTY.stats.current_ap;
-        flag = BATTLE_ACTING_PARTY.stats.status;
+    if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
+        row  = BATTLE_ACTIVE_PARTY.stats.current_ap;
+        flag = BATTLE_ACTIVE_PARTY.stats.status;
     } else {
-        row  = ENEMY_COMBATANT(g_BattleActingBattler).ap;
-        flag = ENEMY_COMBATANT(g_BattleActingBattler).status_82;
+        row  = ENEMY_COMBATANT(g_BattleActiveBattler).ap;
+        flag = ENEMY_COMBATANT(g_BattleActiveBattler).status_82;
     }
     if ((flag & STATUS_SILENCED) != 0 && (D_801CA71C[*(u16*)&g_BattleActionId].mask & 0x400)) {
         func_801D9484();
@@ -45,10 +45,10 @@ MATCH void func_801D3304(void) {
     }
     action = *(u16*)&g_BattleActionId;
     if (action != 0x97) {
-        if (BATTLER_IS_PLAYER(g_BattleActingBattler)) {
-            D_801463C8 = Char_GetAbilityCost(BATTLE_ACTING_PARTY.slot, action & BYTE_MASK, 1);
+        if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
+            D_801463C8 = Char_GetAbilityCost(BATTLE_ACTIVE_PARTY.slot, action & BYTE_MASK, 1);
         } else {
-            D_801463C8 = Char_GetAbilityCost(ENEMY_COMBATANT(g_BattleActingBattler).slot, action & BYTE_MASK, 1);
+            D_801463C8 = Char_GetAbilityCost(ENEMY_COMBATANT(g_BattleActiveBattler).slot, action & BYTE_MASK, 1);
         }
     } else {
         D_801463C8 = D_801463B8[0];

@@ -18,7 +18,7 @@ MATCH void func_8009EF28(void) {
     u8  selection_kind;
 
     if ((RANDOM_MASK(0x7F)) < 0x20) {
-        battler_index                   = g_BattleActingBattler;
+        battler_index                   = g_BattleActiveBattler;
         half                            = (volatile u16*)&g_BattleState;
         flag_value                      = *half;
         selection_kind                  = g_BattleTarget;

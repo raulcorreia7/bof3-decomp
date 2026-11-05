@@ -5,7 +5,7 @@ MATCH void func_800A0188(void) {
     u8   mode;
     u16  base;
 
-    g_BattleTargetRecord[2] = Battle_CalcDamage(g_BattleActingBattler, g_BattleTarget, 0xFFFF);
+    g_BattleTargetRecord[2] = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, 0xFFFF);
     /* FAKE: barrier holds mode load below the store */
     MATCH_FAKE_BARRIER();
     mode = LOBU(g_BattleTarget);

@@ -17,7 +17,7 @@ MATCH void func_8009F010(void) {
     u8  selection_kind;
     s16 selection;
 
-    index = g_BattleActingBattler_nv;
+    index = LOBU(g_BattleActiveBattler);
     if (index < 3) {
         value = g_BattlePartyBattlers[index].stats.intellect;
     } else {
@@ -25,7 +25,7 @@ MATCH void func_8009F010(void) {
         value       = D_801EB630[enemy_index].unk_AA;
     }
     D_801EC30C     = value;
-    battler_index  = g_BattleActingBattler;
+    battler_index  = g_BattleActiveBattler;
     selection_kind = g_BattleTarget;
     /* FAKE: keeps the 0xFFFF load in the jal delay slot. */
     MATCH_FAKE_BARRIER();

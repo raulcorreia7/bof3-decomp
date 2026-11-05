@@ -23,7 +23,7 @@ NON_MATCHING void func_800A0EC4(void) {
     u32        rate;
     u8*        state;
 
-    state = &g_BattleActingBattler;
+    state = &g_BattleActiveBattler;
     if (*state < 3U) {
         record_index = *(D_80145FCC + (*state * BATTLE_PARTY_STRIDE));
         timer        = g_Characters[record_index].fatigue;
@@ -93,7 +93,7 @@ NON_MATCHING void func_800A0EC4(void) {
             }
         }
     }
-    if (!(func_800A3A10(*(u8*)&g_BattleActingBattler, g_BattleTarget) & BYTE_MASK)) {
+    if (!(func_800A3A10(*(u8*)&g_BattleActiveBattler, g_BattleTarget) & BYTE_MASK)) {
         if ((u8)g_BattleTarget < 3U) {
             value = D_80145F18[g_BattleTarget][0];
         } else {

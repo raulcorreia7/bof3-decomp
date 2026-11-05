@@ -16,7 +16,7 @@ NON_MATCHING void func_800AB910(void) {
 
     slot                                   = Battle_AllocEffect(0, 3);
     g_BattleEffects[(u8)slot].target.party = BATTLE_WORK;
-    target                                 = g_BattleActingBattler;
+    target                                 = g_BattleActiveBattler;
     if (BATTLER_IS_PLAYER(target)) {
         flags = FIELD(u32, D_80146390, 0xCu);
         if (flags & 2) {

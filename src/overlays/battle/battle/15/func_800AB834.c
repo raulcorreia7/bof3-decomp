@@ -11,7 +11,7 @@ MATCH void func_800AB834(void) {
     u8 battler;
 
     row     = LOBU(g_BattleState) >> 7;
-    battler = LOBU(g_BattleActingBattler);
+    battler = LOBU(g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(battler)) {
         SND_PlayCue(D_800B50EC[LOBU(g_BattleState) >> 7][D_801C90ED[D_80145F12[battler * BATTLE_PARTY_STRIDE] * 0x18]]);
     } else {

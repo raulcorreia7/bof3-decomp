@@ -9,7 +9,7 @@ MATCH void func_800C2310(void) {
     s32           delta_z;
 
     if ((func_8014DAEC() & BYTE_MASK) != 0) {
-        battler = &g_BattleActingBattler;
+        battler = &g_BattleActiveBattler;
         index   = *battler;
         work    = (PartyBattler*)g_SpadWork;
         delta_x = D_801EB630[index - 3].coord_x_34 - work->coord_x_34.raw;

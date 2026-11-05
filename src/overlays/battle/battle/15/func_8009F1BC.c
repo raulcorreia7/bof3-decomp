@@ -11,14 +11,14 @@ MATCH void func_8009F1BC(void) {
     u8  selection_kind;
     s16 res;
 
-    battler = LOBU(g_BattleActingBattler);
+    battler = LOBU(g_BattleActiveBattler);
     if (BATTLER_IS_PLAYER(battler)) {
         value = g_BattlePartyBattlers[battler].stats.power * 2;
     } else {
         value = ENEMY_COMBATANT(battler).attack * 2;
     }
     D_801EC30C     = value;
-    battler_index  = g_BattleActingBattler;
+    battler_index  = g_BattleActiveBattler;
     selection_kind = g_BattleTarget;
     /* FAKE: keeps the kind-0x20 materialization in the jal delay slot. */
     MATCH_FAKE_BARRIER();

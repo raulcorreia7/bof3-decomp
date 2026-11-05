@@ -5,7 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern u8 g_BattleActingBattler;
+extern u8 g_BattleActiveBattler;
 
 void func_800AFC54(void);
 

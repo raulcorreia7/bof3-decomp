@@ -5,7 +5,7 @@ MATCH void func_800A22CC(void) {
     u32          battler_index;
 
     func_800A3F28();
-    battler_index_cell = &g_BattleActingBattler;
+    battler_index_cell = &g_BattleActiveBattler;
     battler_index      = LOBU(*battler_index_cell);
     if (BATTLER_IS_PLAYER(battler_index)) {
         g_BattlePartyBattlers[battler_index].flags_128.volatile_value |= COMBATANT_FLAG_CHARGING;

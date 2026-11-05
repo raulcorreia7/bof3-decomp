@@ -17,7 +17,7 @@ MATCH void func_801EEC18(void) {
 }
 
 /* Three shapes tried (if/else per branch, read-then-condition-xor, shared-goto): gcc's
- * cross-jump merges the g_BattleActingBattler tests or the facing reads (0x180 vs 0x19C);
+ * cross-jump merges the g_BattleActiveBattler tests or the facing reads (0x180 vs 0x19C);
  * retail keeps three separate D_8014637C loads and a shared xor block at 0x801EED50. First
  * diff 0x801EECE0, the side-mask test's target. Layout problem, not scheduling. */
 #ifdef NON_MATCHING
@@ -28,11 +28,11 @@ NON_MATCHING void func_801EECCC(void) {
     u8  facing;
 
     if (g_BattleTargetSelector & 0x40) {
-        if (g_BattleActingBattler >= BATTLE_PARTY_SLOT_COUNT) {
+        if (g_BattleActiveBattler >= BATTLE_PARTY_SLOT_COUNT) {
             facing = ((PartyBattler*)D_8014637C)->word_08.byte.facing_08;
             goto have_facing;
         }
-    } else if (g_BattleActingBattler < BATTLE_PARTY_SLOT_COUNT) {
+    } else if (g_BattleActiveBattler < BATTLE_PARTY_SLOT_COUNT) {
         facing = ((PartyBattler*)D_8014637C)->word_08.byte.facing_08;
         goto have_facing;
     }

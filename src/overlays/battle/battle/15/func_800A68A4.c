@@ -11,12 +11,12 @@ MATCH void func_800A68A4(void) {
     {
         /* The loop's pointer must die before the first call, or the address is
          * held in s1 from entry. */
-        volatile u8* loop_battler = &g_BattleActingBattler;
+        volatile u8* loop_battler = &g_BattleActiveBattler;
         for (; i < 8; i++) {
             g_BattlePartyBattlers[*loop_battler].unk_12C[i] = 0;
         }
     }
-    battler = &g_BattleActingBattler;
+    battler = &g_BattleActiveBattler;
     g_BattlePartyBattlers[*battler].flags_124.volatile_value &=
         ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
     g_BattlePartyBattlers[*battler].flags_128.volatile_value &= 0xFFFB84FF;
@@ -58,5 +58,5 @@ MATCH void func_800A68A4(void) {
     g_BattleTargetRows[0].gate_03 = (D_800B6F5C << 5) + (D_800B6F58 & 0x1F);
     g_DragonForm                  = D_800B6F58;
     D_801463B9                    = D_800B6F5C;
-    func_800A9BD8(g_BattleActingBattler);
+    func_800A9BD8(g_BattleActiveBattler);
 }

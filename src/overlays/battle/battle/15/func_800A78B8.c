@@ -8,7 +8,7 @@ MATCH void func_800A78B8(void) {
     u8  i;
     u8  value;
 
-    dst   = &D_80145F04[g_BattleActingBattler * BATTLE_PARTY_STRIDE];
+    dst   = &D_80145F04[g_BattleActiveBattler * BATTLE_PARTY_STRIDE];
     count = 0;
     for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
         value = D_800B4EA4[D_800B6F58][i];

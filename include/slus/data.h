@@ -60,7 +60,7 @@ extern s32 D_80145ECC;
 extern s16 D_80145ECE;
 extern u8  D_80145ED8;
 extern u8  D_80145EDB;
-/* Player battle-record copies (stride 0x140), selected by g_BattleActingBattler. */
+/* Player battle-record copies (stride 0x140), selected by g_BattleActiveBattler. */
 extern u8  D_80145F04[];
 extern u8  D_80145F10[];
 extern u16 D_80145F1A[];

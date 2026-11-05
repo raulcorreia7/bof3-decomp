@@ -26,7 +26,7 @@ MATCH void func_801EEEA8(void) {
     PartyBattler* battler;
 
     saved_work = g_SpadWork;
-    battler    = &g_BattlePartyBattlers[g_BattleActingBattler];
+    battler    = &g_BattlePartyBattlers[g_BattleActiveBattler];
     g_SpadWork = battler;
     Actor_RequestScript((battler->word_08.byte.facing_08 + 0x3C) & 0xFF);
     g_SpadWork = saved_work;
@@ -44,7 +44,7 @@ MATCH void func_801EF2A0(void) {
     PartyBattler* battler;
 
     saved_work = g_SpadWork;
-    battler    = &g_BattlePartyBattlers[g_BattleActingBattler];
+    battler    = &g_BattlePartyBattlers[g_BattleActiveBattler];
     g_SpadWork = battler;
     battler->flags_00 &= 0xBF;
     g_SpadWork = saved_work;

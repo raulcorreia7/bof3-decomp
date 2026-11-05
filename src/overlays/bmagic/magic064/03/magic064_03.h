@@ -20,7 +20,7 @@ extern BattleHandlerTable3 D_801EEC70;
 extern BattleResultRings   D_801EEC40;
 extern BattleHandlerTable3 D_801EEC50;
 extern void*               D_801F28B4;
-extern u8                  g_BattleActingBattler;
+extern u8                  g_BattleActiveBattler;
 
 void GFX_FreePaletteFadeTarget(void* target);
 void func_801EF8F4(void);

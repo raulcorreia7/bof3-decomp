@@ -10,7 +10,7 @@ MATCH u8 func_800A403C(u8 arg0) {
 
     func_800A3F28();
     saved = arg0;
-    if (func_800A3A10(g_BattleActingBattler, g_BattleTarget) != 0) {
+    if (func_800A3A10(g_BattleActiveBattler, g_BattleTarget) != 0) {
         return 1;
     }
     index = g_BattleActionId;

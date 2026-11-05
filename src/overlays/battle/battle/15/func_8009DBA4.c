@@ -9,7 +9,7 @@ MATCH void func_8009DBA4(void) {
     u16 base;
     s16 value;
 
-    ((s16*)g_BattleTargetRecord)[2] = Battle_CalcDamage(g_BattleActingBattler, g_BattleTarget, 4);
+    ((s16*)g_BattleTargetRecord)[2] = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, 4);
     /* FAKE: holds the selection-record store ahead of the index reload. */
     MATCH_FAKE_BARRIER();
     index = (*(u8*)&g_BattleTarget);

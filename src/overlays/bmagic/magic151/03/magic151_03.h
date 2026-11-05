@@ -14,7 +14,7 @@ void            func_801F026C(void);
 void            func_801F0648(void);
 
 extern Callback D_801F250C[];
-extern u8       g_BattleActingBattler;
+extern u8       g_BattleActiveBattler;
 void            func_801F1DC0(void);
 void            func_801F1E70(void);
 void            func_801F2188(void);

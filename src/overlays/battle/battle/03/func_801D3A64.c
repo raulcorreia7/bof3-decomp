@@ -8,10 +8,10 @@ MATCH void func_801D3A64(void) {
 
     g_BattleActionId = g_BattleAction->unk_02;
     if ((func_800A9B44() & BYTE_MASK) != 0) {
-        func_801DDFEC(g_BattleActingBattler);
-        func_801DD14C(g_BattleActingBattler);
-        BATTLE_ACTING_PARTY.step_01 = 2;
-        BATTLE_ACTING_PARTY.unk_02  = 0;
+        func_801DDFEC(g_BattleActiveBattler);
+        func_801DD14C(g_BattleActiveBattler);
+        BATTLE_ACTIVE_PARTY.step_01 = 2;
+        BATTLE_ACTIVE_PARTY.unk_02  = 0;
         g_BattleMode                = 3;
         g_BattleStep                = 0;
         g_BattleSubStep             = 0;

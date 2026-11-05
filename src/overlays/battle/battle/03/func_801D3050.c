@@ -5,12 +5,12 @@ MATCH void func_801D3050(void) {
     u8           i;
 
     func_801D4850();
-    if (g_BattleSubStep == 2 && !BATTLER_IS_PLAYER(g_BattleActingBattler)) {
+    if (g_BattleSubStep == 2 && !BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
         for (i = 0; i < 32; i++) {
             g_TextVariables[0][i] = 0;
         }
         i       = 0;
-        battler = &g_BattleActingBattler;
+        battler = &g_BattleActiveBattler;
         do {
             s32 row;
 

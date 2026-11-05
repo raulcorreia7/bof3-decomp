@@ -24,7 +24,7 @@ MATCH u8 func_801DD448(void) {
     if ((work->flags_124.value & 1u) != 0u) {
         return 0u;
     }
-    if (BATTLER_IS_PLAYER(g_BattleActingBattler)) {
+    if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
         return 0u;
     }
     if (HAS_STATUS(*work, 0x4864u)) {

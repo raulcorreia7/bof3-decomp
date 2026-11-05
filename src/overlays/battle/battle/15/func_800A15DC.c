@@ -10,7 +10,7 @@ MATCH void func_800A15DC(void) {
     u32          battler;
 
     func_800A3F28();
-    battlerPtr = &g_BattleActingBattler;
+    battlerPtr = &g_BattleActiveBattler;
     if ((battler = LOBU(*battlerPtr)) < 3U) {
         g_BattlePartyBattlers[battler].flags_128.value |= 0x80u;
         playerIndex = *battlerPtr;

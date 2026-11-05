@@ -8,7 +8,7 @@ MATCH void func_8009FAE4(void) {
 
     flags      = &g_BattleState;
     value      = *flags;
-    a          = g_BattleActingBattler;
+    a          = g_BattleActiveBattler;
     b          = g_BattleTargetSelector;
     *flags     = value | 0x4000;
     D_801463CA = a;
