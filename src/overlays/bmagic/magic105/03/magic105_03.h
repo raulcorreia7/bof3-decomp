@@ -6,6 +6,10 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern MagicTaskFuncs D_801EEC04;
+/* The step handlers the bank-swap runner dispatches. */
+extern Callback     D_801F0078[];
+
+void func_800AF764(void);
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect   D_801F00A0[];
 #define BMAGIC_EFFECT_SLOTS D_801F00A0
