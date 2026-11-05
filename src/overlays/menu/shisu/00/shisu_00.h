@@ -96,5 +96,6 @@ extern u8  D_801DA029;
 extern u8  D_801DA02A;
 extern u8  D_801DA02B;
 extern s16 D_80148364;
+extern u8  D_8014839C;
 
 #endif

@@ -41,7 +41,19 @@ MATCH void func_801D0F24(void) {
 
 INCLUDE_ASM(func_801D0F60);
 
-INCLUDE_ASM(func_801D0FAC);
+MATCH void func_801D0FAC(void) {
+    if (g_UiWindowEffectBusy == 0) {
+        u8* step = &D_80148650;
+
+        D_80148651  = 0;
+        D_80148354  = 0;
+        *D_80148378 = 0;
+        D_8014839C  = 0;
+        *step += 1;
+        return;
+    }
+    func_801D7224(D_80144953);
+}
 
 INCLUDE_ASM(func_801D1018);
 
