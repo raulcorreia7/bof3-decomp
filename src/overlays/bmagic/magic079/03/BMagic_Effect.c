@@ -219,11 +219,21 @@ MATCH void func_801EFE00(void) {
     }
 }
 
-/* Counts unk_09 down; at 0 copies coord_x_34, coord_y_38 and word_3C from D_8014637C, sets unk_09 = 4 and steps.
- * The Effect_CopyBattlerCoords shape with a work local and a reloaded g_SpadWork for the step matches the bytes with
- * (PartyBattler*)D_8014637C; needs: type D_8014637C PartyBattler* (it is u8* in slus/data.h; battle/battle/03 indexes it
- * as bytes at 5 sites and casts it at 4). */
-INCLUDE_ASM(func_801EFE88);
+MATCH void func_801EFE88(void) {
+    PartyBattler* src;
+    u8            timer;
+
+    timer                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = timer;
+    if (!(timer & 0xFF)) {
+        src                             = D_8014637C;
+        g_SpadWork->coord_x_34          = src->coord_x_34;
+        g_SpadWork->coord_y_38          = src->coord_y_38;
+        g_SpadWork->word_3C             = src->word_3C;
+        g_SpadWork->word_08.byte.unk_09 = 4;
+        g_SpadWork->unk_02              = g_SpadWork->unk_02 + 1;
+    }
+}
 
 MATCH void Effect_CountUpAndStep_801EFF08(void) {
     u8 timer;
