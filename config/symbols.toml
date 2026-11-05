@@ -2338,6 +2338,7 @@ g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApply
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 Message_OpenAnswerMenu = { addr = 0x801F2C04, type = "func", source = "arms the selected or idle area request and the shop panel step" }
 Actor_RunAreaStep = { addr = 0x801F2D5C, type = "func", source = "clears the work reset flag and hands the work pointer to the area step" }
+Area_CheckStepTrigger = { addr = 0x801F2E80, type = "func", source = "the per-game-area step-trigger check func_801A8728 dispatches in Area_IsStepBlocked's path; the scenario entry Scene_CheckStepTrigger fills the same slot" }
 Actor_SnapToGround = { addr = 0x801F3014, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
 
 ["emi/world01/area061/13"]

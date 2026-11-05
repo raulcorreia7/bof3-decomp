@@ -46,111 +46,111 @@ extern volatile u8 g_GfxPalettePending; /* 0x80145988 */
 /* D_80145988 */
 extern u8 g_GfxPalettePending; /* 0x80145988 */
 #endif
-extern u8          D_80145E91[];
-extern u8          D_80145E92[];
-extern u8          D_80145E93[];
-extern u8          D_80145E98;
-extern u8          D_80145E99;
-extern s32         D_80145E9C;
-extern s32         D_80145EA0;
-extern s16         D_80145EC6;
-extern s32         D_80145EC8;
-extern s16         D_80145ECA;
-extern s32         D_80145ECC;
-extern s16         D_80145ECE;
-extern u8          D_80145ED8;
-extern u8          D_80145EDB;
+extern u8            D_80145E91[];
+extern u8            D_80145E92[];
+extern u8            D_80145E93[];
+extern u8            D_80145E98;
+extern u8            D_80145E99;
+extern s32           D_80145E9C;
+extern s32           D_80145EA0;
+extern s16           D_80145EC6;
+extern s32           D_80145EC8;
+extern s16           D_80145ECA;
+extern s32           D_80145ECC;
+extern s16           D_80145ECE;
+extern u8            D_80145ED8;
+extern u8            D_80145EDB;
 /* Player battle-record copies (stride 0x140), selected by g_BattleActingBattler. */
-extern u8          D_80145F04[];
-extern u8          D_80145F10[];
-extern u16         D_80145F1A[];
-extern u8          D_80145FA9;
-extern s8          D_80145FBC;
+extern u8            D_80145F04[];
+extern u8            D_80145F10[];
+extern u16           D_80145F1A[];
+extern u8            D_80145FA9;
+extern s8            D_80145FBC;
 /* D_801462E0 */
-extern u8          g_BattleMode;
+extern u8            g_BattleMode;
 /* D_801462E1 */
-extern u8          g_BattleStep;
+extern u8            g_BattleStep;
 /* D_801462E2 */
-extern u8          g_BattleSubStep;
+extern u8            g_BattleSubStep;
 /* D_801462E8 */
-extern u16         g_BattleState;
+extern u16           g_BattleState;
 /* D_80146325 */
-extern u8          g_BattleOptions;
+extern u8            g_BattleOptions;
 /* D_80146328 */
-extern u8          g_BattleResult;
+extern u8            g_BattleResult;
 /* D_80146329 */
-extern u8          g_BattleEventFlags;
-extern u8*         D_8014637C;
+extern u8            g_BattleEventFlags;
+extern u8*           D_8014637C;
 /* D_80146384 */
-extern volatile u8 g_BattleTargetSelector;
+extern volatile u8   g_BattleTargetSelector;
 /* D_80146854 */
-extern u8          g_EmiStreamFlags;
+extern u8            g_EmiStreamFlags;
 /* D_8014686C */
-extern u32*        g_SceneFlags; /* 0x8014686C */
-extern u8          D_80146871;
-extern u8          D_8014688E[];
-extern u8          D_801468BC[];
-extern u8          D_801468C0[];
-extern s16         D_80146916;
-extern s32         D_80147A8C;
-extern s32         D_80147A94;
+extern u32*          g_SceneFlags; /* 0x8014686C */
+extern u8            D_80146871;
+extern u8            D_8014688E[];
+extern u8            D_801468BC[];
+extern u8            D_801468C0[];
+extern s16           D_80146916;
+extern s32           D_80147A8C;
+extern s32           D_80147A94;
 /* Per-slot effect work arrays at a 0x30-byte stride: the accumulators at
  * D_801FD030, the seeded deltas at D_801FCA90 and the per-cell lifetimes at
  * D_801FD5D0.
  */
-extern u8*         D_80147AA8;
-extern s32         D_80147AC4;
+extern u8*           D_80147AA8;
+extern s32           D_80147AC4;
 /* D_80148208 */
-extern u8*         g_ScriptWorkRecord;
-extern s16         D_80148334;
-extern u16         D_80148336;
-extern u8          D_8014837B;
-extern u8          D_8014839F;
-extern s8          D_801484EA;
+extern struct Actor* g_ScriptWorkRecord;
+extern s16           D_80148334;
+extern u16           D_80148336;
+extern u8            D_8014837B;
+extern u8            D_8014839F;
+extern s8            D_801484EA;
 /* D_80148573 */
-extern u8          g_BattleChoicePhase;
-extern volatile u8 D_80148597;
-extern s8          D_801485E6;
-extern s8          D_801485E7;
-extern u8          D_80148624;
-extern u8          D_80148625;
-extern u8          D_80148626;
-extern volatile u8 D_80148627;
+extern u8            g_BattleChoicePhase;
+extern volatile u8   D_80148597;
+extern s8            D_801485E6;
+extern s8            D_801485E7;
+extern u8            D_80148624;
+extern u8            D_80148625;
+extern u8            D_80148626;
+extern volatile u8   D_80148627;
 /* D_801492E8 */
-extern u8          g_CameraMatrix[];
+extern u8            g_CameraMatrix[];
 /* D_80149308 */
-extern s32         g_AreaScrollTargetX;
+extern s32           g_AreaScrollTargetX;
 /* D_8014930C */
-extern s32         g_AreaScrollTargetY; /* 0x8014930C */
-extern s32         D_80149310;
+extern s32           g_AreaScrollTargetY; /* 0x8014930C */
+extern s32           D_80149310;
 /* D_80149318 */
-extern s32         g_AreaCameraHeight;
+extern s32           g_AreaCameraHeight;
 /* D_80149320 */
-extern s16         g_AreaTileOriginX;
+extern s16           g_AreaTileOriginX;
 /* D_80149328 */
-extern s16         g_AreaCameraOffsetX;
+extern s16           g_AreaCameraOffsetX;
 /* D_8014932A */
-extern s16         g_AreaCameraOffsetY;
+extern s16           g_AreaCameraOffsetY;
 /* D_8014932C */
-extern s16         g_AreaCameraOffsetZ;
+extern s16           g_AreaCameraOffsetZ;
 /* D_8014932E */
-extern s16         g_AreaCameraStep;
+extern s16           g_AreaCameraStep;
 /* D_80149330 */
-extern s16         g_AreaCameraHeightStep;
+extern s16           g_AreaCameraHeightStep;
 /* D_80149332 */
-extern u8          g_AreaCameraMoving;
+extern u8            g_AreaCameraMoving;
 /* D_80149333 */
-extern u8          g_AreaCameraRefreshCount;
-extern u8          D_8014933A;
+extern u8            g_AreaCameraRefreshCount;
+extern u8            D_8014933A;
 /* D_8014933B */
-extern u8          g_AreaSceneMode;
+extern u8            g_AreaSceneMode;
 /* D_8017F974 */
-extern void* const g_AreaLoads[200]; /* 0x8017F974 */
-extern u8          D_8014933C;
+extern void* const   g_AreaLoads[200]; /* 0x8017F974 */
+extern u8            D_8014933C;
 /* D_80181B10 */
-extern const u8    g_CharSlot[];
+extern const u8      g_CharSlot[];
 /* D_80181BD4 */
-extern const u8    g_RouteSpeedScale[]; /* 0x80181BD4 */
+extern const u8      g_RouteSpeedScale[]; /* 0x80181BD4 */
 
 extern const u8 D_80181B34[20][3];
 extern const u8 D_80181B88[12];

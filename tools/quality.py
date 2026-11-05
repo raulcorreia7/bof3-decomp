@@ -232,6 +232,20 @@ def functions(
     return out
 
 
+def placeholders(
+    files: dict[str, str], paths: Iterable[str]
+) -> dict[tuple[str, str], int]:
+    """Return ``(path, name) -> most placeholder tokens in one copy`` for the ``MATCH`` functions
+    in ``paths``."""
+    out: dict[tuple[str, str], int] = {}
+    for path in sorted(set(paths) & files.keys()):
+        for name, body in bodies(strip_comments(files[path])):
+            out[path, name] = max(
+                len(PLACEHOLDER.findall(body)), out.get((path, name), 0)
+            )
+    return out
+
+
 def ratchet(
     old: dict[str, str],
     new: dict[str, str],
@@ -240,16 +254,26 @@ def ratchet(
 ) -> list[str]:
     """Return one line per function that got worse in the touched files, by name.
 
-    ``names`` compares a function present in both revisions. ``addr`` flags a ``func_<ADDR>``
+    ``names`` compares a function present in both revisions, in the same file, or in its new
+    file when the body moved. ``addr`` flags a ``func_<ADDR>``
     function whose body was matched under a real name before. A new ``MATCH`` body is exempt.
     """
     changed = list(changed)
     before, after = functions(old, changed), functions(new, changed)
     named = {sh for _, sh, addr in before.values() if not addr}
     lines = []
-    for name, (tokens, sh, addr) in sorted(after.items()):
-        if "names" in gate and name in before and tokens > before[name][0]:
-            lines.append(f"{name}: names {before[name][0]} -> {tokens}")
+    # Overlays reuse addresses, so one func_<ADDR> name can be two functions in two images:
+    # compare the copy in the same file, and fall back to the name only for a body that moved.
+    was, now = placeholders(old, changed), placeholders(new, changed)
+    gone = {name for path, name in was.keys() - now.keys()}
+    for path, name in sorted(now):
+        tokens = now[path, name]
+        prior = was.get((path, name))
+        if prior is None and name in gone and name in before:
+            prior = before[name][0]
+        if "names" in gate and prior is not None and tokens > prior:
+            lines.append(f"{name}: names {prior} -> {tokens}")
+    for name, (_, sh, addr) in sorted(after.items()):
         if "addr" in gate and addr and name not in before and sh in named:
             lines.append(f"{name}: addr named -> func_<ADDR>")
     return lines
