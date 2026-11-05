@@ -2,8 +2,7 @@
 
 /* Runs the four-row choice menu: moves the D_801ED618 cursor on up/down, then on confirm advances the menu step by
  * the chosen row, or on cancel backs out to the previous panel. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D2EAC(void) {
+MATCH void func_801D2EAC(void) {
     s32 pad;
     u8  cursor;
 
@@ -52,12 +51,18 @@ NON_MATCHING void func_801D2EAC(void) {
             return;
         }
         {
-            u8* step = &D_80148651;
+            u8*  step         = &D_80148651;
+            s32  group        = D_80148504.group;
+            s32  group_cursor;
+            u8   next;
 
-            D_80148504.group_first  = s_ChoiceMenuValues[D_80148504.group];
-            D_80148504.group_cursor = s_ChoiceMenuCursors[D_80148504.group];
-            *step += 1;
-            D_80148504.drawn_cursor = 0xFF;
+            next                     = *step;
+            D_80148504.group_first   = s_ChoiceMenuValues[group];
+            group_cursor             = s_ChoiceMenuCursors[group];
+            next                    += 1;
+            D_80148504.drawn_cursor  = 0xFF;
+            *step                    = next;
+            D_80148504.group_cursor  = group_cursor;
             return;
         }
     }
@@ -76,7 +81,3 @@ NON_MATCHING void func_801D2EAC(void) {
         D_80148651 += 2;
     }
 }
-#else
-/* 97.19%; +0x1EC step address loads late; try a source shape that keeps it in a1. */
-INCLUDE_ASM(func_801D2EAC);
-#endif
