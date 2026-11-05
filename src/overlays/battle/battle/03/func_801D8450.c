@@ -9,7 +9,7 @@ MATCH void func_801D8450(u32 panel_index) {
     u8  g;
     u8  b;
 
-    GFX_AddDrawMode(GetTPage(0, 0, 960, 0));
+    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     index = panel_index;
     /* FAKE: byte-offset read of the frame origin; the array-subscript
      * form shifts the RTL insn numbering and the scheduler sinks the call

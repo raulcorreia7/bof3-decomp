@@ -13,7 +13,7 @@ MATCH s32 func_801F4E7C(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x3C0, 0), 0);
     GFX_AddPrim(2, 0xC);
     func_801AFE18(buffer);
-    slot = MEM_PTR(u8, 0x800E4800u);
+    slot = MEM_PTR(u8, AREA_WORK);
     for (i = 0; i < 16; i += 1, slot += 0x1C) {
         if (slot[0] != 0) {
             D_801F5FBC[slot[1]](slot);

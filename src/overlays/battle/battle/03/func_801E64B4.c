@@ -5,7 +5,7 @@ MATCH void func_801E64B4(void) {
     s32           value;
 
     g_AreaCameraOffsetZ -= (u16)D_801EC2E0->unk_0C;
-    GFX_AddDrawMode(GetTPage(0, 0, 960, 0));
+    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
         value = D_801EC2E0->unk_10;
         func_801D9DBC(0, 0, 0xB, ((value << 10) + (value << 5) + value) & HALF_MASK, 1);

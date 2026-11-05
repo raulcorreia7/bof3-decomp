@@ -4,7 +4,7 @@ MATCH void func_801D9804(s32 x, s32 y, s32 clut_index, s32 glyph_index) {
     SPRT* packet;
     u16   clut;
 
-    GFX_AddDrawMode(GetTPage(0, 0, 960, 0));
+    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
 
     packet       = (SPRT*)g_GfxPrimCursor;
     clut         = GetClut((clut_index & BYTE_MASK) << 4, 480);

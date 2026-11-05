@@ -14,7 +14,7 @@ MATCH void func_8019D648(void) {
     s16* dst_next;
     s16* out;
 
-    dst  = MEM_PTR(u16, 0x800E4800u);
+    dst  = MEM_PTR(u16, AREA_WORK);
     row  = 0;
     base = FIELD(u16*, g_Task, 0x50u);
     aux  = MEM_PTR(u16, 0x800E4814u);

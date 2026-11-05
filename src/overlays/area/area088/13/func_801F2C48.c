@@ -10,7 +10,7 @@ MATCH void func_801F2C48(void) {
     MATCH_FAKE_BARRIER(); /* FAKE: keeps the D_800E4B3E store below the work stores */
     D_800E4B3E = 0x60;
     do {
-        func_801F2F28((u8*)0x800E4800);
+        func_801F2F28((u8*)AREA_WORK);
         i += 1;
     } while ((u32)(i & 0xFF) < 0x20U);
     g_Task->unk_09 = 0;

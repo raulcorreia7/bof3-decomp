@@ -9,7 +9,7 @@ MATCH void func_801DA078(s32 x, s32 y, s32 u_index) {
     SPRT* sprite;
     s32   texture_u;
 
-    GFX_AddDrawMode(GetTPage(0, 1, 960, 0));
+    GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y));
 
     texture_u    = (u_index & BYTE_MASK) << 4;
     sprite       = (SPRT*)g_GfxPrimCursor;

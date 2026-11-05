@@ -31,7 +31,7 @@ NON_MATCHING void func_801D750C(s32 x, s32 y) {
 
     var_s2 = x;
     var_s3 = y;
-    GFX_AddDrawMode(GetTPage(0, 0, 960, 0) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     var_s0 = var_s2 << 0x10;
     var_s0 = (s16)var_s2;
     func_801D9AB4(var_s0, (s16)var_s3, ((g_BattlePartyCount * 2) + 0xA) & 0xFE, 1);
