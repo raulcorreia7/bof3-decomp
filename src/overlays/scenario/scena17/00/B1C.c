@@ -321,7 +321,21 @@ MATCH void func_801F83A8(void) {
     func_801F8B10(0x1F4, 0xFF);
 }
 
-INCLUDE_ASM(func_801F8404);
+MATCH void func_801F8404(void) {
+    u8* timer;
+    u8  value;
+
+    timer  = &D_80146875;
+    value  = *timer + 2;
+    *timer = value;
+    if (value >= 0x46) {
+        *timer = 0;
+        D_80146874 += 1;
+        func_801F8B10(0x4B0, 0xFF);
+    } else {
+        func_801F8B10(value * 10 + 0x1F4, 0xFF);
+    }
+}
 
 /* 7 differing; first at +0x18: candidate addiu v0,v0,2 against retail addiu a1,v0,2. Two
  * tail-merged calls of func_801F8B10 with the +2 sum kept in a1 (their second argument);
