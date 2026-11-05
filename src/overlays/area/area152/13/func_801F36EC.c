@@ -12,7 +12,7 @@ MATCH void func_801F36EC(void) {
         }
     }
 
-    if (D_801454F2 != 0 && g_SpadWork->unk_0B != 0) {
+    if (D_801454F2 != 0 && ((u8*)g_SpadWork)[0x0B] != 0) {
         goto bump;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -22,7 +22,7 @@ MATCH void func_801F36EC(void) {
         goto done;
     }
 bump:
-    g_SpadWork->unk_03++;
+    ((u8*)g_SpadWork)[0x03]++;
 done:
     Area_DrawHudBanner(0x5C, g_SpadWork->unk_30);
 }

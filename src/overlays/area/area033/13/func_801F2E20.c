@@ -17,16 +17,16 @@ MATCH void func_801F2E20(void) {
     /* The step stores re-read the work cell: the compiler must assume a call
      * may have changed it. */
     if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA1) {
-        g_SpadWork->unk_0B = 1;
+        ((u8*)g_SpadWork)[0x0B] = 1;
     } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA0) {
-        g_SpadWork->unk_0B = 2;
+        ((u8*)g_SpadWork)[0x0B] = 2;
     } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xAE) {
-        g_SpadWork->unk_0B = 3;
+        ((u8*)g_SpadWork)[0x0B] = 3;
     } else if (g_AreaWalkFlags & AREA_WALK_TRANSITION) {
-        g_SpadWork->unk_0B = 4;
+        ((u8*)g_SpadWork)[0x0B] = 4;
     } else {
-        g_SpadWork->unk_0B = 0;
+        ((u8*)g_SpadWork)[0x0B] = 0;
     }
 
-    D_801F4F64[g_SpadWork->unk_01]();
+    D_801F4F64[((u8*)g_SpadWork)[0x01]]();
 }

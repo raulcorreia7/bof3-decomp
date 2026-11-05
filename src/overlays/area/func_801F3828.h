@@ -15,7 +15,7 @@ MATCH void func_801F3828(void) {
         }
     }
 
-    if (D_801454F2 != 0 && g_SpadWork->unk_0B != 0) {
+    if (D_801454F2 != 0 && ((u8*)g_SpadWork)[0x0B] != 0) {
         goto bump; /* skips the 0x100 test: advance state byte 0x03 */
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -25,7 +25,7 @@ MATCH void func_801F3828(void) {
         goto done; /* skips the advance: panel `0x5C` draws next */
     }
 bump:
-    g_SpadWork->unk_03++;
+    ((u8*)g_SpadWork)[0x03]++;
 done:
     func_801F40C4(0x5C, g_SpadWork->unk_30);
 }
