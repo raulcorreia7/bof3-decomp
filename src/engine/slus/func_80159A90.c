@@ -12,7 +12,7 @@ MATCH void func_80159A90(void) {
     u16 y;
 
     mode  = &D_801490CE;
-    panel = g_MenuPanelTaskCurrent;
+    panel = g_MenuCurrentPanel;
 
     x        = *(u16*)((u8*)&D_8017F944 + (VOL(u8, *mode) * 4));
     panel->x = (u16)((x + 35) << 4);
@@ -25,9 +25,9 @@ MATCH void func_80159A90(void) {
     *(u8*)((u8*)panel + 0xA)   = 0x47;
     panel->y                   = (u16)((y + 16) << 4);
 
-    panel                    = g_MenuPanelTaskCurrent;
+    panel                    = g_MenuCurrentPanel;
     *(u8*)((u8*)panel + 0xB) = 0x20;
 
-    panel = g_MenuPanelTaskCurrent;
+    panel = g_MenuCurrentPanel;
     panel->state++;
 }

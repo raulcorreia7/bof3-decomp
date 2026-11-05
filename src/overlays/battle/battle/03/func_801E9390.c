@@ -27,6 +27,6 @@ MATCH void func_801E9390(void) {
         }
         i += 1;
     } while ((i & BYTE_MASK) < 7u);
-    task = g_MenuPanelTaskCurrent;
+    task = g_MenuCurrentPanel;
     func_801D7A40((s16)task->x, (s16)task->y);
 }

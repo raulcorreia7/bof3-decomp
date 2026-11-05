@@ -3,5 +3,5 @@
 MATCH void func_801EA7DC(void) {
     BattleResultRings table = D_801D1004;
 
-    table.handlers[g_MenuPanelTaskCurrent->state]();
+    table.handlers[g_MenuCurrentPanel->state]();
 }

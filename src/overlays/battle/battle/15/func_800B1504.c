@@ -5,7 +5,7 @@ MATCH void func_800B1504(void) {
     s16            x;
 
     func_800B1728();
-    task = g_MenuPanelTaskCurrent;
+    task = g_MenuCurrentPanel;
     x    = task->x;
     if (x >= 347) {
         func_80158E20();

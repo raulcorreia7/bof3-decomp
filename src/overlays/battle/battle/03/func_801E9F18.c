@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
 MATCH void func_801E9F18(void) {
-    if ((g_BattleSelectionLatch != 0) && (((Battle_SlotIsBlocked(g_MenuPanelTaskCurrent->unk_0A) & BYTE_MASK) == 0) ||
+    if ((g_BattleSelectionLatch != 0) && (((Battle_SlotIsBlocked(g_MenuCurrentPanel->unk_0A) & BYTE_MASK) == 0) ||
                                           (func_80097EB8() & BYTE_MASK) || (func_8009AF7C() & BYTE_MASK))) {
-        if (D_801EB4D8[0] == g_MenuPanelTaskCurrent->unk_0A) {
+        if (D_801EB4D8[0] == g_MenuCurrentPanel->unk_0A) {
             func_801EA174();
         }
         if ((D_801EB4D8[0] & 0x80) != 0) {

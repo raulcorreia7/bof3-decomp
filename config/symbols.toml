@@ -3545,7 +3545,7 @@ g_AreaFocusY = { addr = 0x80147A90, source = "Actor_PlaceAtFocus copies it to th
 g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "game/00 func_801A17A0 stores the current field row (D_80146884) at the end of a script command world04/area153/175 read it as the record" }
 g_ScriptState = { addr = 0x80148210, type = "GameScriptState", source = "game/00 func_801A8D38 stores the sub record it steps world areas update its +0x07/+0x0A" }
 g_AreaDrawFlags = { addr = 0x8014832E, source = "draw-pass flag word, its bits select the sorted, negative-depth, cell-layer and primitive passes (include/sys/gameui.h)" }
-g_MenuPanelTasks = { addr = 0x80148330, source = "22 slots, g_MenuPanelTaskCurrent points into it" }
+g_MenuPanelTasks = { addr = 0x80148330, source = "22 slots, g_MenuCurrentPanel points into it" }
 g_BattleMessageState = { addr = 0x801483C3, type = "u8", source = "battle message/effect window state 1 queued (func_801D31FC.c 6, func_801D3304.c 27), 2 closing (func_801E51DC.c 20, func_8009704C.c 151), 0 idle (func_801DE698.c 18) read by the" }
 g_BattleChoicePanel = { addr = 0x80148570, type = "BattleChoicePanel", source = "base of the battle choice-panel record MenuChoicePanel header read/written by func_80097FE8.c 13-33 and func_80098450.c 29-118 existing row g_BattleSelectionHead names only byte 0" }
 g_BattleChoicePhase = { addr = 0x80148573, type = "u8", source = "choice-panel phase at panel+3 0 while the panel runs (func_8009704C.c 39-41, func_80098450.c 18-20), non-zero once a selection commits (func_80098450.c 104,126)" }
@@ -3553,7 +3553,7 @@ g_BattleListCursor = { addr = 0x8014859F, type = "u8", source = "row cursor insi
 g_BattlePanelMode = { addr = 0x801485BB, type = "u8", source = "current battle selection panel mode, 0 = none (func_80099568.c 21, func_80099B74.c 30) 2/3/4 arm panels (func_800A50B8.c 14, func_800A602C.c 7, func_800A6870.c 6)" }
 g_BattleItemRow = { addr = 0x801485C2, type = "u8", source = "selected row 0-5 of the six-row battle item panel indexes s_BattleEquipment (func_8009AAE8.c 25) and D_800B44B8 (func_8009AC18.c 26-30) wraps 0..5 (func_80099568.c 71-80)" }
 g_BattleTargetCursorCol = { addr = 0x801485C8, type = "s16", source = "target-grid cursor column 0-2 with row 0x801485CA it indexes g_BattleTargetRows (func_800A4D3C.c 37, func_800A5164.c 13)" }
-g_MenuPanelTaskCurrent = { addr = 0x80148648, source = "read or written by func_801D8690, func_801E9074, func_801E90FC" }
+g_MenuCurrentPanel = { addr = 0x80148648, source = "read or written by func_801D8690, func_801E9074, func_801E90FC" }
 g_MenuPanelMode = { addr = 0x8014864C, type = "u8", source = "front-end panel-task mode/queue level 0-2 choosing the task group (src/engine/slus/Menu_RunPanelTasks.c 16-25) cleared with the panel block (src/engine/slus/Menu_ResetPanelTasks.c 32)" }
 D_80148650 = { addr = 0x80148650, source = "font-state index" }
 D_80148651 = { addr = 0x80148651, source = "font-state substep" }

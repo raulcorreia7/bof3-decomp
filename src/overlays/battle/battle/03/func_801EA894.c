@@ -4,7 +4,7 @@ MATCH void func_801EA894(void) {
     MenuPanelTask* panel;
     s16            state;
 
-    panel      = g_MenuPanelTaskCurrent;
+    panel      = g_MenuCurrentPanel;
     D_801EC2E4 = 1u;
     state      = panel->y;
     if (state == 0x12) {

@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801EA774(void) {
-    MenuPanelTask* panel = g_MenuPanelTaskCurrent;
+    MenuPanelTask* panel = g_MenuCurrentPanel;
     s16            state = (s16)panel->y;
 
     if (state == -0x16) {

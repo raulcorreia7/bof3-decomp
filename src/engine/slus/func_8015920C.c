@@ -10,7 +10,7 @@ MATCH void func_8015920C(void) {
     u16            next_y;
     u8             advanced;
 
-    panel = g_MenuPanelTaskCurrent;
+    panel = g_MenuCurrentPanel;
 
     panel->unk_10 = panel->unk_10 + panel->unk_14;
     panel->x -= (s16)panel->unk_14 / 2;
@@ -30,14 +30,14 @@ MATCH void func_8015920C(void) {
                 panel->x = panel->unk_18 * 16;
                 break;
             default:
-                g_MenuPanelTaskCurrent->x = D_8017F944[D_801490CE][0] * 16;
+                g_MenuCurrentPanel->x = D_8017F944[D_801490CE][0] * 16;
                 break;
         }
         advanced++;
-        g_MenuPanelTaskCurrent->unk_10 = (u16)(g_MenuPanelTaskCurrent->unk_0A * 0x10);
+        g_MenuCurrentPanel->unk_10 = (u16)(g_MenuCurrentPanel->unk_0A * 0x10);
     }
 
-    panel = g_MenuPanelTaskCurrent;
+    panel = g_MenuCurrentPanel;
 
     panel->unk_12 = panel->unk_12 + panel->unk_16;
     panel->y -= (s16)panel->unk_16 / 2;
@@ -56,21 +56,21 @@ MATCH void func_8015920C(void) {
                 panel->y = panel->unk_1A * 16;
                 break;
             default:
-                g_MenuPanelTaskCurrent->y = D_8017F944[D_801490CE][1] * 16;
+                g_MenuCurrentPanel->y = D_8017F944[D_801490CE][1] * 16;
                 break;
         }
         advanced++;
-        g_MenuPanelTaskCurrent->unk_12 = (u16)(g_MenuPanelTaskCurrent->unk_0B * 0x10);
+        g_MenuCurrentPanel->unk_12 = (u16)(g_MenuCurrentPanel->unk_0B * 0x10);
     }
 
-    if ((g_MenuPanelTaskCurrent->flags & 1) == 0) {
-        u32 width  = (g_MenuPanelTaskCurrent->unk_10 >> 4) & BYTE_MASK;
-        u32 height = (g_MenuPanelTaskCurrent->unk_12 >> 4) & BYTE_MASK;
+    if ((g_MenuCurrentPanel->flags & 1) == 0) {
+        u32 width  = (g_MenuCurrentPanel->unk_10 >> 4) & BYTE_MASK;
+        u32 height = (g_MenuCurrentPanel->unk_12 >> 4) & BYTE_MASK;
 
-        func_80159FA0((s16)g_MenuPanelTaskCurrent->x >> 4, (s16)g_MenuPanelTaskCurrent->y >> 4, width, height);
+        func_80159FA0((s16)g_MenuCurrentPanel->x >> 4, (s16)g_MenuCurrentPanel->y >> 4, width, height);
     }
 
     if ((advanced & BYTE_MASK) == 2) {
-        g_MenuPanelTaskCurrent->state += 1;
+        g_MenuCurrentPanel->state += 1;
     }
 }

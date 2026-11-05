@@ -28,7 +28,7 @@ MATCH void func_8015A098(void) {
         do {
             row          = rowp->row;
             table_offset = row * 6;
-            panel        = g_MenuPanelTaskCurrent;
+            panel        = g_MenuCurrentPanel;
             cursor       = UI_DrawTextAt((*(u16*)((u8*)&D_8017F960 + table_offset) + ((s16)panel->x >> 4)) & HALF_MASK,
                                          (*(u16*)((u8*)&D_8017F962 + table_offset) + ((s16)panel->y >> 4) +
                                           *(s16*)((u8*)&D_8017F964 + table_offset) * i) &

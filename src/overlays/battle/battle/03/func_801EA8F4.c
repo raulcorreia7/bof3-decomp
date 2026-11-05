@@ -7,7 +7,7 @@ MATCH void func_801EA8F4(void) {
 
     func_801EAAB8();
     if (((D_801EB5B0[D_801EBF04 * 8] & 1) != 0) && (g_InputPressed != 0) && ((func_801EAB38() & BYTE_MASK) != 0)) {
-        g_MenuPanelTaskCurrent->state = 3;
+        g_MenuCurrentPanel->state = 3;
     }
     offset = D_801EBF04 * 8;
     if ((D_801EB5B0[offset] & 2) != 0) {
@@ -16,7 +16,7 @@ MATCH void func_801EA8F4(void) {
             next               = value - 1;
             D_801EB5B1[offset] = next;
             if (((next & BYTE_MASK) == 0) && ((func_801EAB38() & BYTE_MASK) != 0)) {
-                g_MenuPanelTaskCurrent->state = 3;
+                g_MenuCurrentPanel->state = 3;
             }
         }
     }

@@ -14,31 +14,31 @@ MATCH void func_80159050(void) {
 
     flags = &D_801490CE;
 
-    g_MenuPanelTaskCurrent->flags = 0;
-    flag_byte                     = *flags;
+    g_MenuCurrentPanel->flags = 0;
+    flag_byte                 = *flags;
     if ((flag_byte & 0x80) != 0) {
         *flags = flag_byte & 0x7F;
-        g_MenuPanelTaskCurrent->flags |= 1;
+        g_MenuCurrentPanel->flags |= 1;
         flag_byte = *flags;
     }
     if ((flag_byte & 0x40) != 0) {
         *flags = flag_byte & 0xBF;
-        g_MenuPanelTaskCurrent->flags |= 2;
-        g_MenuPanelTaskCurrent->unk_0A = 0x78;
-        g_MenuPanelTaskCurrent->unk_0B = 0x36;
-        task                           = (MenuPanelTask*)g_MenuPanelTaskCurrent;
-        task->x                        = (((u8*)&D_8017F91C)[*flags * 2] + 60) * 16;
-        next_y                         = ((u8*)&D_8017F91D)[*flags * 2] + 0x1B;
+        g_MenuCurrentPanel->flags |= 2;
+        g_MenuCurrentPanel->unk_0A = 0x78;
+        g_MenuCurrentPanel->unk_0B = 0x36;
+        task                       = (MenuPanelTask*)g_MenuCurrentPanel;
+        task->x                    = (((u8*)&D_8017F91C)[*flags * 2] + 60) * 16;
+        next_y                     = ((u8*)&D_8017F91D)[*flags * 2] + 0x1B;
     } else {
-        g_MenuPanelTaskCurrent->unk_0A = 0xC8;
-        g_MenuPanelTaskCurrent->unk_0B = 0x36;
-        task                           = (MenuPanelTask*)g_MenuPanelTaskCurrent;
-        task->x                        = (((u8*)&g_MenuPanelOrigins)[*flags * 2] + 100) * 16;
-        next_y                         = ((u8*)&D_8017F90D)[*flags * 2] + 0x1B;
+        g_MenuCurrentPanel->unk_0A = 0xC8;
+        g_MenuCurrentPanel->unk_0B = 0x36;
+        task                       = (MenuPanelTask*)g_MenuCurrentPanel;
+        task->x                    = (((u8*)&g_MenuPanelOrigins)[*flags * 2] + 100) * 16;
+        next_y                     = ((u8*)&D_8017F90D)[*flags * 2] + 0x1B;
     }
     task->y = next_y * 16;
 
-    task         = (MenuPanelTask*)g_MenuPanelTaskCurrent;
+    task         = (MenuPanelTask*)g_MenuCurrentPanel;
     task->unk_10 = 0;
     task->unk_12 = 0;
     task->state += 1;

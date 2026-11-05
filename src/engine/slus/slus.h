@@ -1312,7 +1312,7 @@ static inline void Snd_ToggleSequencePlayer(void (*action)(short, short), s32 cu
 static inline void Slus_DrawPanelBox(void) {
     MenuPanelTask* panel;
 
-    panel = g_MenuPanelTaskCurrent;
+    panel = g_MenuCurrentPanel;
     func_80159B9C((s16)panel->x >> 4, (s16)panel->y >> 4, (u8)(panel->unk_10 >> 4), (u8)(panel->unk_12 >> 4));
 }
 

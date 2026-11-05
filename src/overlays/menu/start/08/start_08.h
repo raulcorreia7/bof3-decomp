@@ -31,7 +31,7 @@
         MenuPanelTask* panel;                    \
         u16            next;                     \
                                                  \
-        panel    = g_MenuPanelTaskCurrent;       \
+        panel    = g_MenuCurrentPanel;           \
         next     = panel->x + MENU_PANEL_STEP_X; \
         panel->x = next;                         \
         if ((s16)next >= 17) {                   \
@@ -513,7 +513,7 @@ extern s32  func_801EFCA8(char* prefix, u8 length);
 static inline void Menu_SlidePanelIn(void) {
     MenuPanelTask* task;
 
-    task = g_MenuPanelTaskCurrent;
+    task = g_MenuCurrentPanel;
     task->x += MENU_PANEL_STEP_X;
     if ((s16)task->x >= 321) {
         task->x     = 320;
@@ -525,7 +525,7 @@ static inline void Menu_SlidePanelIn(void) {
 static inline void MenuRetreatPanelXToMinus200(void) {
     MenuPanelTask* task;
 
-    task = g_MenuPanelTaskCurrent;
+    task = g_MenuCurrentPanel;
     task->x -= MENU_PANEL_STEP_X;
     if ((s16)task->x < -200) {
         LOH(task->x) = -200;
@@ -539,7 +539,7 @@ static inline void MenuAdvancePanelYField6(void) {
     u8*            bytes;
     u16            next;
 
-    panel    = g_MenuPanelTaskCurrent;
+    panel    = g_MenuCurrentPanel;
     bytes    = (u8*)panel;
     next     = panel->y + MENU_PANEL_STEP_Y;
     panel->y = next;

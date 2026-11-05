@@ -2,7 +2,7 @@
 #include "shared/Menu_SlidePanelLeft.h"
 
 MATCH void Menu_SlidePanelLeft_801EA900(void) {
-    MenuPanelTask* task = g_MenuPanelTaskCurrent;
+    MenuPanelTask* task = g_MenuCurrentPanel;
     s16            val;
 
     MENU_SLIDE_PANEL_LEFT();

@@ -83,14 +83,14 @@ MATCH void func_801D2F68(void) {
 }
 
 MATCH void func_801D2F9C(void) {
-    SYS_DISPATCH_TASK(g_MenuStatusTaskFuncs, 2, g_MenuPanelTaskCurrent);
+    SYS_DISPATCH_TASK(g_MenuStatusTaskFuncs, 2, g_MenuCurrentPanel);
 }
 
 MATCH void func_801D2FE0(void) {
 }
 
 MATCH void Menu_DrawPanelCursor(void) {
-    Menu_DrawCursorSprite(g_MenuPanelTaskCurrent->x, g_MenuPanelTaskCurrent->y, 0);
+    Menu_DrawCursorSprite(g_MenuCurrentPanel->x, g_MenuCurrentPanel->y, 0);
 }
 
 INCLUDE_ASM(func_801D3018);
@@ -102,18 +102,18 @@ MATCH void func_801D30E4(void) {
 MATCH void func_801D3124(void) {
     u16 next_pos;
 
-    next_pos                  = g_MenuPanelTaskCurrent->y + 0x10;
-    g_MenuPanelTaskCurrent->y = next_pos;
+    next_pos              = g_MenuCurrentPanel->y + 0x10;
+    g_MenuCurrentPanel->y = next_pos;
     if ((s16)next_pos >= 0x11) {
-        g_MenuPanelTaskCurrent->y     = 16U;
-        g_MenuPanelTaskCurrent->state = 0;
+        g_MenuCurrentPanel->y     = 16U;
+        g_MenuCurrentPanel->state = 0;
     }
 }
 
 MATCH void func_801D3164(void) {
-    D_801D9768[g_MenuPanelTaskCurrent->state]();
-    Menu_DrawCommandRow(g_MenuPanelTaskCurrent->x, g_MenuPanelTaskCurrent->y, g_MenuPanelTaskCurrent->unk_0A,
-                        g_MenuPanelTaskCurrent->unk_0B, 0);
+    D_801D9768[g_MenuCurrentPanel->state]();
+    Menu_DrawCommandRow(g_MenuCurrentPanel->x, g_MenuCurrentPanel->y, g_MenuCurrentPanel->unk_0A,
+                        g_MenuCurrentPanel->unk_0B, 0);
 }
 
 MATCH void func_801D31CC(void) {
@@ -123,38 +123,38 @@ MATCH void func_801D31CC(void) {
 MATCH void func_801D320C(void) {
     u16 next_pos;
 
-    next_pos                  = g_MenuPanelTaskCurrent->y + 0x10;
-    g_MenuPanelTaskCurrent->y = next_pos;
+    next_pos              = g_MenuCurrentPanel->y + 0x10;
+    g_MenuCurrentPanel->y = next_pos;
     if ((s16)next_pos >= 0x27) {
-        g_MenuPanelTaskCurrent->y     = 38U;
-        g_MenuPanelTaskCurrent->state = 0;
+        g_MenuCurrentPanel->y     = 38U;
+        g_MenuCurrentPanel->state = 0;
     }
 }
 
 MATCH void func_801D324C(void) {
-    D_801D9774[g_MenuPanelTaskCurrent->state]();
-    func_801D3320(g_MenuPanelTaskCurrent);
+    D_801D9774[g_MenuCurrentPanel->state]();
+    func_801D3320(g_MenuCurrentPanel);
 }
 
 MATCH void func_801D32A0(void) {
     u16 x;
 
-    x                         = g_MenuPanelTaskCurrent->x - 0x20;
-    g_MenuPanelTaskCurrent->x = x;
+    x                     = g_MenuCurrentPanel->x - 0x20;
+    g_MenuCurrentPanel->x = x;
     if ((s16)x < -200) {
-        LOH(g_MenuPanelTaskCurrent->x) = -0xC8;
-        g_MenuPanelTaskCurrent->state  = 0;
+        LOH(g_MenuCurrentPanel->x) = -0xC8;
+        g_MenuCurrentPanel->state  = 0;
     }
 }
 
 MATCH void func_801D32E0(void) {
     u16 next_pos;
 
-    next_pos                  = g_MenuPanelTaskCurrent->x + 0x20;
-    g_MenuPanelTaskCurrent->x = next_pos;
+    next_pos              = g_MenuCurrentPanel->x + 0x20;
+    g_MenuCurrentPanel->x = next_pos;
     if ((s16)next_pos >= 0x12) {
-        g_MenuPanelTaskCurrent->x     = 17U;
-        g_MenuPanelTaskCurrent->state = 0;
+        g_MenuCurrentPanel->x     = 17U;
+        g_MenuCurrentPanel->state = 0;
     }
 }
 

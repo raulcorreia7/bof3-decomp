@@ -4,7 +4,7 @@ MATCH void func_801E915C(void) {
     MenuPanelTask* panel;
     s16            value;
 
-    panel = g_MenuPanelTaskCurrent;
+    panel = g_MenuCurrentPanel;
     value = (s16)panel->y;
     if (value < 0xC9) {
         panel->y = 200;
@@ -12,5 +12,5 @@ MATCH void func_801E915C(void) {
     } else {
         panel->y = (u16)(value - 4);
     }
-    func_801D750C((s32)(s16)g_MenuPanelTaskCurrent->x, (s32)(s16)g_MenuPanelTaskCurrent->y);
+    func_801D750C((s32)(s16)g_MenuCurrentPanel->x, (s32)(s16)g_MenuCurrentPanel->y);
 }

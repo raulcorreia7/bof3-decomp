@@ -5,7 +5,7 @@ MATCH void func_801E9EAC(void) {
     u8*            bytes;
     u16            next;
 
-    panel    = g_MenuPanelTaskCurrent;
+    panel    = g_MenuCurrentPanel;
     bytes    = (u8*)panel;
     next     = panel->x + MENU_PANEL_STEP_X;
     panel->x = next;
