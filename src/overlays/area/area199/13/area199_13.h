@@ -16,6 +16,7 @@ extern u8       D_801F44B4[];
 /* The step handler bank. */
 extern Callback D_801F44B8[];
 
+void func_801F2E80(s32 entry_x);
 void func_801F2E14(void);
 /* The image's step passes. */
 void func_801F3398(void);
