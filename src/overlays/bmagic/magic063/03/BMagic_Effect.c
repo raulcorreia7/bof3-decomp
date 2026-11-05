@@ -99,7 +99,17 @@ INCLUDE_ASM(func_801F00F0);
 
 INCLUDE_ASM(func_801F0220);
 
-INCLUDE_ASM(func_801F0354);
+MATCH u32 func_801F0354(void) {
+    u8 index;
+
+    for (index = 0u; index < 0x60; index++) {
+        if ((D_801F0454[index << 5] & 1) == 0) {
+            D_801F0454[index << 5] |= 1;
+            return index;
+        }
+    }
+    return 0xFFu;
+}
 
 MATCH void func_801F03B0(void) {
     D_801F1054->flags_00 = 0;
