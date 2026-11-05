@@ -309,22 +309,22 @@ MATCH void func_801FE0E8(void) {
 #include "overlays/scenario/Scene_RemoveRei.h"
 
 MATCH void func_801FE154(void) {
-    func_801C1ABC(4);
-    func_801C1ABC(2);
+    func_801C1ABC(CHAR_ID_REI);
+    func_801C1ABC(CHAR_ID_GARR);
     func_801C1630();
 }
 
 #include "overlays/scenario/Scene_RemoveGarr.h"
 
 MATCH void func_801FE1AC(void) {
-    func_801C1ABC(2);
-    func_801C1ABC(8);
+    func_801C1ABC(CHAR_ID_GARR);
+    func_801C1ABC(CHAR_ID_NINA_ADULT);
     func_801C1630();
 }
 
 MATCH void func_801FE1DC(void) {
-    func_801C1ABC(4);
-    func_801C1ABC(8);
+    func_801C1ABC(CHAR_ID_REI);
+    func_801C1ABC(CHAR_ID_NINA_ADULT);
     func_801C1630();
 }
 
@@ -337,6 +337,6 @@ MATCH void func_801FE1DC(void) {
 #include "overlays/scenario/Scene_RemovePeco.h"
 
 MATCH void func_801FE35C(void) {
-    func_801C1ABC(7);
+    func_801C1ABC(CHAR_ID_RYU_ADULT);
     func_801C1630();
 }

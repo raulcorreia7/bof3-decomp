@@ -331,12 +331,12 @@ MATCH void func_801FE10C(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
     EMI_LoaderStreamFamily(9, 3, 4, 0);
     g_PartySize                              = 0;
-    g_Characters[g_CharSlot[9]].character_id = 9;
+    g_Characters[g_CharSlot[9]].character_id = CHAR_ID_RYU_PAJAMAS;
     Party_JoinMember(9);
 }
 
 MATCH void func_801FE1B0(void) {
-    g_Characters[g_CharSlot[0]].character_id = 0;
+    g_Characters[g_CharSlot[0]].character_id = CHAR_ID_RYU_YOUNG;
     EMI_LoaderStreamFamily(0, 3, 4, 0);
     g_PartySize = 0;
     Party_JoinMember(0);

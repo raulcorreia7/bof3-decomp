@@ -231,7 +231,7 @@ INCLUDE_ASM(func_801FE438);
 
 MATCH void func_801FE5B0(void) {
     g_Characters[g_CharSlot[5]].unk_07 &= 254;
-    func_801C1ABC(5);
+    func_801C1ABC(CHAR_ID_MOMO);
     func_801C1630();
 }
 
