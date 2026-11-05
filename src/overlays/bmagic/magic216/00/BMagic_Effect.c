@@ -6,7 +6,21 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_RunStep.h"
 
-INCLUDE_ASM(func_801EEC70);
+MATCH void func_801EEC70(void) {
+    PartyBattler* work;
+    PartyBattler* actor;
+    s32           z;
+
+    g_SpadWork->word_08.byte.facing_08 = D_801EB4E0->word_08.byte.facing_08;
+    work                               = g_SpadWork;
+    actor                              = D_801EB4E0;
+    work->coord_x_34.raw               = actor->coord_x_34.raw;
+    work->coord_y_38.raw               = actor->coord_y_38.raw;
+    z                                  = actor->word_3C.word;
+    work->word_08.byte.unk_0B          = 0;
+    work->word_3C.word                 = z;
+    g_SpadWork->step_01 += 1;
+}
 
 INCLUDE_ASM(func_801EECDC);
 

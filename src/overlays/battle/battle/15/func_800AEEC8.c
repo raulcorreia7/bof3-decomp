@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-/* nonmatching 94.34%: delete@+0x0000; the selection check and the 0x48 work entry still differ at the queue write. */
+/* 3 differing: +0x80 loads 1 before g_SpadWork; move the work load ahead of the queue writes. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_800AEEC8(s32 arg0, u8 arg1, s32 arg2) {
     u8  mode;

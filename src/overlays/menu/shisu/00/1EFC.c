@@ -46,6 +46,7 @@ MATCH void func_801D2DEC(void) {
 
 INCLUDE_ASM(func_801D2E20);
 
+/* 10 differing: +0x54 loads 0x02000000, not 0xFE000000; preserve the intermediate subtraction. */
 INCLUDE_ASM(func_801D2E80);
 
 MATCH void func_801D2F48(void) {
