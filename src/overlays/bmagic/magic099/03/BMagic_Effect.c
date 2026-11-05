@@ -34,7 +34,7 @@ MATCH void func_801EF0EC(void) {
 }
 
 MATCH void func_801EF16C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 #include "overlays/bmagic/Effect_SetActorMatrixRolled.h"

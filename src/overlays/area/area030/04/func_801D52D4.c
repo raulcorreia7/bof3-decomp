@@ -23,5 +23,5 @@ MATCH void func_801D52D4(void) {
     work->step_14            = 0;
     work->step_limit_20      = 0;
     stepped->step_timer_09   = 4;
-    ((u8*)g_SpadWork)[1]     = (u8)(((u8*)g_SpadWork)[1] + 1);
+    g_SpadWork->unk_01       = (u8)(g_SpadWork->unk_01 + 1);
 }

@@ -26,7 +26,7 @@ MATCH void func_801EF03C(void) {
 }
 
 MATCH void func_801EF09C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 MATCH void func_801EF0E0(void) {

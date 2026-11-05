@@ -9,5 +9,5 @@ MATCH void func_801F3060(void) {
     g_SpadWork->tint.bytes.unk_5D = 0;
     g_SpadWork->tint.bytes.unk_5E = 0;
     g_SpadWork->tint.bytes.unk_5F = 0;
-    ((u8*)g_SpadWork)[1]          = 1;
+    g_SpadWork->unk_01            = 1;
 }
