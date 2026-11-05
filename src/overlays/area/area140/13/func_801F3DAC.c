@@ -1,18 +1,4 @@
 #include "area140_13.h"
 
-MATCH void func_801F3DAC(void) {
-    /* FAKE: retail keeps the actor row pointer in v0; pure C best 5 differing. */
-    MATCH_REG(Actor*, work, "v0");
-    u8  flag;
-    u16 word;
-    u32 near_five;
-
-    work = g_CurrentActor;
-    work->flags_74 &= 0xFE;
-    flag = D_80145F09[0][0];
-    if (((near_five = (u32)(flag - 5) < 2U), (word = flag), near_five) || ((word & 0xFF) == 7)) {
-        SYS_SetFlag(g_SceneEventFlags, 0x54U);
-        Area_SetCellPalette(2, 7);
-        g_SpadWork->flags_00 = 0;
-    }
-}
+/* resume: best 5 differing pure C (first `!` +0x0: lui v0 vs v1, the actor row pointer register; the selector tail is exact with `u16 word = flag` after the range sub and `word & 0xFF == 7`, whose andi fills the bnez delay slot); exact bytes with MATCH_REG(Actor*, work, "v0") but `harmful` is a gated quality metric; next lever: keep the u16 view's andi without flipping the prologue v0/v1 tie. */
+INCLUDE_ASM(func_801F3DAC);
