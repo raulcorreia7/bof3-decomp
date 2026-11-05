@@ -1,9 +1,5 @@
 #include "game_00.h"
 
-/* NOTE: the table at 0x80032000 (D_80032000) is addressed through its
- * constant address; a symbol-based access makes both assemblers expand the
- * index add as `addu at,at,idx` where retail has `addu at,idx,at`.
- */
 MATCH u32 func_801C6FD4(s32 map_column, s32 map_row) {
     u16 row;
     s32 index;

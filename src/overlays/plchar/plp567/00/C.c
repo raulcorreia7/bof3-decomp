@@ -12,9 +12,6 @@ MATCH void Char_StartTurn(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
-/* Follows CHAR_RUN_STEP_SCRIPT (plchar.h), but retail branches on the second
- * facing with `bne` and the 0x41 load in the delay slot, where the macro emits
- * `beq`; the script selection needs another switch or if form. */
 MATCH void Char_RunStepScript_801CE514(void) {
     CHAR_RUN_STEP_CASES(CHARACTER_FACING_AWAY, 0x41, CHARACTER_FACING_BACK, 0x40);
 }

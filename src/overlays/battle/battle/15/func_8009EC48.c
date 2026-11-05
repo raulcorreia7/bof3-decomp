@@ -1,9 +1,5 @@
 #include "battle_15.h"
 
-/* The volatile active-battler byte cannot feed index arithmetic without an
- * extra mask; the non-volatile alias at the same address keeps the retail
- * load. */
-
 MATCH void func_8009EC48(void) {
     volatile u16* p_flag;
     u16           flag;
