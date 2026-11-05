@@ -46,12 +46,11 @@ pick_weight:
         /* FAKE: retail keeps the nineteen-times step live across the pick
          * mask. */
         MATCH_FAKE_USE(offset);
-        pick                       = (pick & 7) * 2;
-        g_Actors[count].x.fixed    = D_801F2DBC[pick] << 16;
-        y                          = D_801F2DBD[pick] << 16;
-        g_Actors[count].y.fixed    = y;
-        g_Actors[count].z.part.integer =
-            Area_SampleHeight(g_Actors[count].x.fixed, y);
+        pick                           = (pick & 7) * 2;
+        g_Actors[count].x.fixed        = D_801F2DBC[pick] << 16;
+        y                              = D_801F2DBD[pick] << 16;
+        g_Actors[count].y.fixed        = y;
+        g_Actors[count].z.part.integer = Area_SampleHeight(g_Actors[count].x.fixed, y);
     }
     D_80143F22 = D_80145FB8 - 5;
 }
