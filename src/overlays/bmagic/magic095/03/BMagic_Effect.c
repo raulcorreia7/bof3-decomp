@@ -61,7 +61,13 @@ INCLUDE_ASM(func_801EF804);
 
 INCLUDE_ASM(func_801EFDDC);
 
-INCLUDE_ASM(func_801F0018);
+extern Callback D_801F0654[];
+
+MATCH void func_801F0018(void) {
+    Effect_SetActorMatrix();
+    D_801F0654[g_SpadWork->step_01]();
+    PopMatrix();
+}
 
 MATCH void func_801F0070(void) {
     u8 counter;
