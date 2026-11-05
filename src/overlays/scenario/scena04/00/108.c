@@ -223,7 +223,19 @@ INCLUDE_ASM(func_801F9DF4);
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 
-INCLUDE_ASM(func_801FA010);
+MATCH s32 func_801FA010(s32 arg0, s32 arg1) {
+    s8  index;
+    s32 result;
+
+    index = func_801A7AD8(&D_801FA228, 1, arg0, arg1);
+    if (index >= 0) {
+        SYS_DISPATCH_BYTE(D_801FA230, index);
+        result = 1;
+    } else {
+        result = -1;
+    }
+    return result;
+}
 
 MATCH void func_801FA074(void) {
     Game_SetScriptActive();

@@ -31,12 +31,16 @@ void       func_801F7FCC(void);
 void       func_801F7084(s32* step);
 s8         func_801F9DF4();
 
-extern u8 D_80144F5A;
-extern u8 D_80144F5B;
-extern u8 D_80144F5C;
-extern u8 D_80144F5E;
-extern u8 D_80144F5F;
+extern u8       D_80144F5A;
+extern u8       D_80144F5B;
+extern u8       D_80144F5C;
+extern u8       D_80144F5E;
+extern u8       D_80144F5F;
+extern u8       D_801FA228;
+extern Callback D_801FA230[];
 
 void func_80196070(void);
+
+s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 
 #endif
