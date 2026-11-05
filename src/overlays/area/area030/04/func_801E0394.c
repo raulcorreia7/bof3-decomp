@@ -11,6 +11,6 @@ MATCH void func_801E0394(void) {
         work                    = FISHING_STATE;
         work->motion_34.unk_34 += work->pos_x_0C;
         work->y_38.pos_y += work->cursor_10;
-        *(u16*)((u8*)work + 0x3E) = (u16)(*(u16*)((u8*)work + 0x3E) + work->step_14);
+        work->bounce_3C.half.key_3E = (u16)(work->bounce_3C.half.key_3E + work->step_14);
     }
 }

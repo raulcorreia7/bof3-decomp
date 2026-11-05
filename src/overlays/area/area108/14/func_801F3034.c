@@ -18,7 +18,7 @@ MATCH s32 func_801F3034(void) {
             result = 1;
         }
 
-        D_801F63EC = (u8*)(((u8*)D_801F63EC + 0x28u));
+        D_801F63EC += 0x28;
         i += 1u;
     } while (i < 16u);
 

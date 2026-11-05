@@ -9,7 +9,7 @@ MATCH void func_801DB8F0(void) {
     s32 offset;
 
     if ((g_InputPressed & PADRdown) != 0) {
-        FISHING_STATE->step_timer_09 = (u8) * (u16*)(D_80146918 + D_801E3208 * 0x98);
+        FISHING_STATE->step_timer_09 = (u8)g_Actors[D_801E3208].roll_90;
     } else {
         FISHING_STATE->step_timer_09 = (u8)(FISHING_STATE->step_timer_09 + 1);
     }
@@ -20,7 +20,7 @@ MATCH void func_801DB8F0(void) {
     offset = D_801E3208 * 0x98;
     func_801E1004(D_8014688E[offset], FISHING_STATE->step_timer_09, 0);
 
-    if (FISHING_STATE->step_timer_09 == *(u16*)(D_80146918 + D_801E3208 * 0x98)) {
+    if (FISHING_STATE->step_timer_09 == g_Actors[D_801E3208].roll_90) {
         if (D_801E3214 != 0) {
             SND_PlayCue(EMI_CUE_ID(2, 13));
         }

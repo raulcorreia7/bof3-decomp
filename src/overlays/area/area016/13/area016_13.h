@@ -15,14 +15,6 @@
 #define SPAWN_OFFSET_FORWARD 0x2000u
 #define SPAWN_OFFSET_BACK    0xE000u
 
-/* One world key row: the key matched against g_GameContextSeed and the mode it
- * selects. */
-typedef struct WorldMapKey {
-    u16 key;
-    u8  mode;
-    u8  unk_03;
-} WorldMapKey;
-
 /* The overlay's data block at 0x801F4DA0..0x801F51E0 is one variable per
  * table, in retail address order, in D_801F4DA0_Data.c. */
 

@@ -23,7 +23,7 @@ MATCH void func_801F305C(void) {
         i   = 0;
     scan:
         next = i;
-        if (key == *(u16*)(D_801F4CE8 + next)) {
+        if (key == MEM(WorldMapKey, D_801F4CE8 + next).key) {
             goto found;
         }
         i = next + 4;
@@ -52,7 +52,7 @@ found:
     scratch[0x48]           = window;
     scratch                 = (u8*)g_SpadWork;
     scratch[0x09]           = 8;
-    mode                    = D_801F4CE8[i + 2];
+    mode                    = MEM(WorldMapKey, D_801F4CE8 + i).mode;
     goto tail;
 
 check4:

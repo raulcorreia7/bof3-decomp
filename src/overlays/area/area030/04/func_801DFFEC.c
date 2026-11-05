@@ -9,11 +9,11 @@ MATCH void func_801DFFEC(void) {
     u32  x;
     u32  y;
 
-    record             = (u32*)g_SpadWork;
-    x                  = record[13];
-    y                  = record[14];
-    ((u8*)record)[0x9] = 8;
-    record[3]          = ((x & 0xFFFF8000u) - x) >> 3;
-    record[4]          = ((y & 0xFFFF8000u) - y) >> 3;
+    record                       = (u32*)g_SpadWork;
+    x                            = record[13];
+    y                            = record[14];
+    FISHING_STATE->step_timer_09 = 8;
+    record[3]                    = ((x & 0xFFFF8000u) - x) >> 3;
+    record[4]                    = ((y & 0xFFFF8000u) - y) >> 3;
     FISHING_STATE->mode_index_02 += 1;
 }

@@ -554,7 +554,7 @@ MATCH void func_801F3DCC(void) {
     slots                                         = SP_PTR(u8*, 0u);
     item                                          = slots[0x11];
     g_ActorSlots[(u32)item[0x0B]].x.fixed         = ((Actor*)item)->x.fixed;
-    g_ActorSlots[(u32)item[0x0B]].y.fixed         = *(s32*)(item + 0x38) + 0x8000;
+    g_ActorSlots[(u32)item[0x0B]].y.fixed         = ((Actor*)item)->y.fixed + 0x8000;
     g_ActorSlots[(u32)item[0x0B]].z.fixed         = ((Actor*)item)->z.fixed + 0x01000000;
     g_ActorSlots[(u32)item[0x0B]].layer_09        = 0x3C;
 }

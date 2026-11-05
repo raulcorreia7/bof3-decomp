@@ -38,6 +38,17 @@ typedef struct WorldMapPoint {
 
 ASSERT_SIZE(WorldMapPoint, 4);
 
+/* One world key row: the key matched against g_GameContextSeed and the mode it
+ * selects. The area key tables are scanned at a 4-byte stride by func_801F30EC
+ * and its per-area twins. */
+typedef struct WorldMapKey {
+    u16 key;    /* 0x00 */
+    u8  mode;   /* 0x02 */
+    u8  unk_03; /* 0x03 */
+} WorldMapKey;
+
+ASSERT_SIZE(WorldMapKey, 4);
+
 extern u8       D_80143F06;
 extern u16      D_801448EE;
 extern u8       D_80146867;

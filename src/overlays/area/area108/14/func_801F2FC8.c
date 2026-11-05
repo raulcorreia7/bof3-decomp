@@ -7,7 +7,7 @@ MATCH void func_801F2FC8(void) {
     i          = 0u;
     do {
         func_801F2F1C(D_801F63EC);
-        D_801F63EC = (u8*)((u8*)D_801F63EC + 0x28u);
+        D_801F63EC += 0x28;
         i += 1u;
     } while (i < 16u);
 }

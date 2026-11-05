@@ -9,5 +9,5 @@ MATCH void WorldMap_StartScene(void) {
     ((u8*)g_SpadWork)[0x5D] = 0;
     ((u8*)g_SpadWork)[0x5E] = 0;
     ((u8*)g_SpadWork)[0x5F] = 0;
-    ((u8*)g_SpadWork)[0x01] = 1;
+    ((u8*)g_SpadWork)[1]    = 1;
 }
