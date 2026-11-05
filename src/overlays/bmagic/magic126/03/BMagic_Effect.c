@@ -46,7 +46,27 @@ MATCH void func_801EFAF4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFB74);
+MATCH void func_801EFB74(void) {
+    u8            timer = g_SpadWork->word_08.byte.unk_09 - 1;
+    PartyBattler* work;
+    PartyBattler* actor;
+    s32           z;
+
+    g_SpadWork->word_08.byte.unk_09 = timer;
+    if (timer == 0) {
+        SND_QueueSelectionFx(0x100);
+        work                              = g_SpadWork;
+        actor                             = D_801EB4E0;
+        work->coord_x_34.raw              = actor->coord_x_34.raw;
+        work->coord_y_38.raw              = actor->coord_y_38.raw;
+        z                                 = actor->word_3C.word;
+        work->word_08.byte.unk_0B         = 0;
+        work->word_3C.word                = z;
+        g_SpadWork->word_08.byte.unk_09   = 0x14;
+        g_SpadWork->word_08.byte.timer_0A = 0;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountUpTimersAndStep.h"
 
