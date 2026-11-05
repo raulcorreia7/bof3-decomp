@@ -72,7 +72,22 @@ MATCH void func_801EF554(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF5D4);
+MATCH void func_801EF5D4(void) {
+    PartyBattler* work;
+    PartyBattler* actor;
+    s32           z;
+
+    g_SpadWork->flags_00 &= 0xBF;
+    work                              = g_SpadWork;
+    actor                             = D_801EB4E0;
+    work->coord_x_34.raw              = actor->coord_x_34.raw;
+    work->coord_y_38.raw              = actor->coord_y_38.raw;
+    z                                 = actor->word_3C.word;
+    work->word_08.byte.unk_09         = 1;
+    work->word_3C.word                = z;
+    g_SpadWork->word_08.byte.timer_0A = 1;
+    g_SpadWork->unk_02 += 1;
+}
 
 MATCH void func_801EF654(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x11);
