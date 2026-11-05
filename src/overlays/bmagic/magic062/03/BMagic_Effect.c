@@ -33,7 +33,7 @@ INCLUDE_ASM(func_801EF2F0);
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF4C4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 MATCH void func_801EF508(void) {

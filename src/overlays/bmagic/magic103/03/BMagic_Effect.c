@@ -18,7 +18,7 @@ MATCH void func_801EEE38(void) {
 #include "shared/Effect_StartPlaying.h"
 
 MATCH void func_801EEEC8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, ((u8*)g_SpadWork)[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_SpadWork->step_01);
 }
 
 MATCH void func_801EEF0C(void) {
@@ -111,7 +111,21 @@ MATCH void func_801EFC70(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFCF4);
+MATCH void func_801EFCF4(void) {
+    PartyBattler* work;
+    u8            counter;
+    s32           drop;
+
+    func_800AF764();
+    work                      = g_SpadWork;
+    counter                   = work->word_08.byte.unk_09 + 1;
+    drop                      = (VOL(u8, work->word_08.byte.unk_09) - 8) / 2;
+    work->word_08.byte.unk_09 = counter;
+    work->unk_30.half -= drop;
+    if ((counter & 0xFF) == 0x1C) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EFD74);
 

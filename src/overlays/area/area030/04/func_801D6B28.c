@@ -13,29 +13,28 @@ MATCH void func_801D6B28(s8 panel_kind) {
     func_801E0DCC(0x11, 1, 0x36, 0x9C);
 
     {
-        u8* cell;
-        u8* next;
-        u8* mode_cell;
-        s32 value;
+        FishingState* work;
+        FishingState* shown;
+        FishingState* pair;
+        s32           value;
 
-        cell   = SP_REF(u8*, 0x44u);
-        value  = *(s32*)(cell + 0x0Cu);
+        work   = (FishingState*)SP_REF(u8*, 0x44u);
+        value  = work->pos_x_0C;
         left_x = (value < 0x39) ? 0x39 : ((value >= 0x7A) ? 0x79 : value);
 
-        next                  = SP_REF(u8*, 0x44u);
-        *(s32*)(cell + 0x0Cu) = left_x;
+        shown          = (FishingState*)SP_REF(u8*, 0x44u);
+        work->pos_x_0C = left_x;
 
-        value   = *(s32*)(next + 0x10u);
+        value   = shown->cursor_10;
         right_x = (value < 0x41) ? 0x41 : ((value >= 0x95) ? 0x94 : value);
 
-        mode_cell             = SP_REF(u8*, 0x44u);
-        *(s32*)(next + 0x10u) = right_x;
+        pair             = (FishingState*)SP_REF(u8*, 0x44u);
+        shown->cursor_10 = right_x;
 
-        if ((*(s32*)(mode_cell + 0x10u) < *(s32*)(mode_cell + 0x0Cu)) ||
-            (*(s32*)(mode_cell + 0x0Cu) + 0x20 < *(s32*)(mode_cell + 0x10u))) {
-            func_801D3244((s16) * (s32*)(mode_cell + 0x0Cu), 0xB3, 0x20u, ((mode_cell[6] & 7u) << 1), 1u, 1);
+        if ((pair->cursor_10 < pair->pos_x_0C) || (pair->pos_x_0C + 0x20 < pair->cursor_10)) {
+            func_801D3244((s16)pair->pos_x_0C, 0xB3, 0x20u, ((pair->cue_index_06 & 7u) << 1), 1u, 1);
         } else {
-            func_801D3244((s16) * (s32*)(mode_cell + 0x0Cu), 0xB3, 0x20u, ((mode_cell[6] & 7u) << 1), 1u, 0);
+            func_801D3244((s16)pair->pos_x_0C, 0xB3, 0x20u, ((pair->cue_index_06 & 7u) << 1), 1u, 0);
         }
     }
 

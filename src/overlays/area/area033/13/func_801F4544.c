@@ -13,7 +13,7 @@ MATCH void func_801F4544(void) {
     Area_FindSceneRecord(0x205);
 
     ((u8*)g_SpadWork)[0x48] = 0;
-    ((u8*)g_SpadWork)[0x24] = 0;
+    g_SpadWork->flags_24    = 0;
     ((u8*)g_SpadWork)[0x2A] = 0;
     ((u8*)g_SpadWork)[0x5D] = 0;
     ((u8*)g_SpadWork)[0x5E] = 0;

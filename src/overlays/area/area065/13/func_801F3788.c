@@ -9,7 +9,7 @@ MATCH void func_801F3788(void) {
         scratch->unk_03++;
     }
 
-    if (D_801454F2 != 0 && ((u8*)g_SpadWork)[0xB] != 0) {
+    if (D_801454F2 != 0 && ((u8*)g_SpadWork)[0x0B] != 0) {
         goto force; /* skips the 0x100 test: force state byte 0x03 */
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -19,7 +19,7 @@ MATCH void func_801F3788(void) {
         goto done; /* skips the forced write: panel `0x5C` draws next */
     }
 force:
-    ((u8*)g_SpadWork)[3] = 3;
+    ((u8*)g_SpadWork)[0x03] = 3;
 done:
     func_801F40FC(0x5C, g_SpadWork->unk_30);
 }

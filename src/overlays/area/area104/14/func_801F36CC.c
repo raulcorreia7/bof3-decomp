@@ -7,7 +7,7 @@ MATCH void func_801F36CC(void) {
     }
 
     if (D_801454F2 != 2) {
-        ((u8*)g_SpadWork)[2] = 1;
+        g_SpadWork->state_02 = 1;
     }
 
     Area_DrawHud(0x10, g_SpadWork->unk_2E);
