@@ -8,12 +8,12 @@ MATCH void func_801F5200(void) {
     u8  selection;
     s32 result;
 
-    SP_REF(u8*, 0x44u) = (u8*)g_BattlePartyBattlers;
-    index              = D_80144F5A[0];
-    y                  = g_BattlePartyBattlers[0].unk_30.signed_half;
-    x                  = g_BattlePartyBattlers[0].unk_2E.signed_half;
-    selection          = D_801F5724[0x144u + index];
-    result             = func_8015CB18(1, 0, selection, x, y);
+    TASK_SET((u8*)g_BattlePartyBattlers);
+    index     = D_80144F5A[0];
+    y         = g_BattlePartyBattlers[0].unk_30.signed_half;
+    x         = g_BattlePartyBattlers[0].unk_2E.signed_half;
+    selection = D_801F5724[0x144u + index];
+    result    = func_8015CB18(1, 0, selection, x, y);
     if ((u8)result != 0xFF) {
         work      = (u8*)g_Task;
         work[0xB] = (u8)result;

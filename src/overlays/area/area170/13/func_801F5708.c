@@ -19,6 +19,6 @@ MATCH void func_801F5708(void) {
     Resource_RequestArea(request);
 done:
     func_801BE1B0(0xD);
-    g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-    SP_REF(Actor*, 0x44) = work;
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    TASK_SET(work);
 }

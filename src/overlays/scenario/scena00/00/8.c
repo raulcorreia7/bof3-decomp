@@ -2184,8 +2184,8 @@ MATCH void func_801FB924(void) {
                 func_801FBE88();
                 index = *counter >> 12;
                 if (D_801FCA64[index * 2] != 0) {
-                    SP_REF(u8*, 0x44u) = (u8*)g_Actors;
-                    D_80146890         = D_801FCA65[index * 2];
+                    TASK_SET((u8*)g_Actors);
+                    D_80146890 = D_801FCA65[index * 2];
                     Actor_RequestScript(D_80146890);
                 }
             } else {
@@ -2223,8 +2223,8 @@ MATCH void func_801FB924(void) {
             counter[0]                = (camera[0] >= 0) ? 0x40 : -magnitude;
             counter[1]                = (camera[1] >= 0) ? 0x40 : -magnitude;
             if ((g_FrameCount & 0x3) == 0) {
-                SP_REF(u8*, 0x44u) = (u8*)g_Actors;
-                D_80146890         = (D_80146890 + 1) & 0x3;
+                TASK_SET((u8*)g_Actors);
+                D_80146890 = (D_80146890 + 1) & 0x3;
                 Actor_RequestScript(D_80146890);
             }
             SND_PlayCue(EMI_CUE_ID(2, 4));

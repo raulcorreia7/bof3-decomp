@@ -35,7 +35,7 @@ MATCH void Area_DrawActors(void) {
         if (D_8014832C != 0) {
             i = 0;
             do {
-                SP_REF(Actor*, 0x44) = D_80148214[i & BYTE_MASK];
+                TASK_SET(D_80148214[i & BYTE_MASK]);
                 i++;
                 Area_DrawObjectSprite();
             } while ((u8)i < D_8014832C);

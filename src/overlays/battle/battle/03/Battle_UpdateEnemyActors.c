@@ -7,9 +7,9 @@ MATCH void Battle_UpdateEnemyActors(void) {
 
     for (i = 0; i < 8u; i++) {
         if (D_801EB630[i].flags != 0u) {
-            enemy                                 = &D_801EB630[i];
-            SP_REF(volatile PartyBattler*, 0x44u) = (PartyBattler*)enemy;
-            BATTLE_CURRENT_ENEMY_PTR              = enemy;
+            enemy = &D_801EB630[i];
+            TASK_SET((PartyBattler*)enemy);
+            BATTLE_CURRENT_ENEMY_PTR = enemy;
             func_8014D290();
         }
     }

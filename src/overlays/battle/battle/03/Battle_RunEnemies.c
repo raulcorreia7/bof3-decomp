@@ -7,9 +7,9 @@ MATCH void Battle_RunEnemies(void) {
 
     for (i = 0; (i & BYTE_MASK) < 8u; i++) {
         if (D_801EB630[(u8)i].flags != 0u) {
-            enemy                                 = &D_801EB630[(u8)i];
-            SP_REF(volatile PartyBattler*, 0x44u) = (PartyBattler*)enemy;
-            g_BattleCurrentEnemy                  = (EnemyBattler*)enemy;
+            enemy = &D_801EB630[(u8)i];
+            TASK_SET((PartyBattler*)enemy);
+            g_BattleCurrentEnemy = (EnemyBattler*)enemy;
             if (g_BattleEncounter != 0u) {
                 if (enemy->mode != 0u) {
                     enemy->unk_E4(2);

@@ -546,12 +546,12 @@ MATCH void func_801F32B8(void) {
     u8     selection;
     s32    result;
 
-    SP_REF(Actor*, 0x44u) = (Actor*)g_BattlePartyBattlers;
-    index                 = D_80144F5A[0];
-    y                     = g_BattlePartyBattlers[0].unk_30.signed_half;
-    x                     = g_BattlePartyBattlers[0].unk_2E.signed_half;
-    selection             = D_801F4CE0[index];
-    result                = func_8015CB18(1, 0, selection, x, y);
+    TASK_SET((Actor*)g_BattlePartyBattlers);
+    index     = D_80144F5A[0];
+    y         = g_BattlePartyBattlers[0].unk_30.signed_half;
+    x         = g_BattlePartyBattlers[0].unk_2E.signed_half;
+    selection = D_801F4CE0[index];
+    result    = func_8015CB18(1, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
         work         = (Actor*)g_Task;
         work->unk_0B = (s8)result;

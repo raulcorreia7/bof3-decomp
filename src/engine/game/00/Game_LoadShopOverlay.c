@@ -4,8 +4,8 @@ MATCH void Game_LoadShopOverlay(void) {
     Actor* work;
 
     if (D_8014865C >= 0) {
-        work                 = &g_Actors[D_8014865C];
-        SP_REF(Actor*, 0x44) = work;
+        work = &g_Actors[D_8014865C];
+        TASK_SET(work);
         if (work->unk_18 == 9) {
             g_GameEntryState    = 2u;
             g_GameEntrySubstate = 0u;
