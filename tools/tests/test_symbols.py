@@ -130,3 +130,18 @@ def test_own_rows_are_proven_against_the_linked_address(tmp_path: Path) -> None:
     assert "g_Two" in message
     assert "0x80100004" in message
     assert "0x80100008" in message
+
+
+def test_imported_map_keeps_the_targets_own_address(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = table(
+        tmp_path,
+        '["exe/a"]\nPick = { addr = 0x10 }\nOwn = { addr = 0x20 }\n'
+        '["exe/b"]\nPick = { addr = 0x90 }\nOther = { addr = 0x94 }\n',
+    )
+    (root / "config/exe/b").mkdir()
+    (root / "config/exe/b/splat.yaml").write_text("name: b\n")
+    monkeypatch.setattr(symbols, "splat_owners", lambda _root, _t: ["exe/a", "exe/b"])
+    assert symbols.imported_map(root, "exe/a") == "Other = 0x00000094;\n"
+    assert symbols.imported_map(root, "exe/b") == "Own = 0x00000020;\n"
