@@ -60,6 +60,12 @@
 #define SP_PTR(type, byte_offset)           MEM_PTR(type, SP(byte_offset))
 #define SP_REF(type, byte_offset)           MEM(type, SP(byte_offset))
 
+/* Volatile access to a RAM address by width (not hardware registers: those are
+ * HW_REF in psx/hw_extra.h). */
+#define REG8(address)                       MEM(volatile u8, address)
+#define REG16(address)                      MEM(volatile u16, address)
+#define REG32(address)                      MEM(volatile u32, address)
+
 /* retail addresses */
 /* Scratchpad work pointer at 0x1F800044. Each mode reads it through its own pointee type: a header defines a
  * `g_Task` view macro, `((T *)g_Task)`, for its type. A unit that must re-read the cell

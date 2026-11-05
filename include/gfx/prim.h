@@ -13,34 +13,36 @@
  * the primitive cursor `g_GfxPrimCursor`. */
 
 /* The screen, in pixels. */
-#define SCREEN_WIDTH                320
+#define SCREEN_WIDTH                 320
 
 /* retail addresses */
 /* First primitive arena: bank n starts at this address + n * 0x9000. */
-#define PRIM_ARENA_BASE             0x80028FCCu
+#define PRIM_ARENA_BASE              0x80028FCCu
 
 /* Semi-transparent primitive: the PsyQ SetSemiTrans code bit, set. */
-#define PSX_SET_SEMI_TRANSPARENT(p) SetSemiTrans((p), 1)
+#define PSX_SET_SEMI_TRANSPARENT(p)  SetSemiTrans((p), 1)
 
 /* Neutral full-brightness colour: 0x80 is the midpoint of each 5-bit channel. */
-#define PSX_SET_NEUTRAL_RGB(p)      setRGB0((p), 128, 128, 128)
+#define PSX_SET_NEUTRAL_RGB(p)       setRGB0((p), 128, 128, 128)
 
 /* Begin a draw-mode primitive at the shared cursor with the default
  * texture window and no extra argument. */
-#define GFX_SET_DRAW_MODE(tpage)    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (tpage), 0)
+#define GFX_SET_DRAW_MODE(tpage)     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (tpage), 0)
 
 /* Draw one cue record's text at (x, y): the resource is the text bank. */
-#define WinDrawCueText(x, y, cue)   UI_DrawText((x), (y), 0, 0xFF, Resource_GetText(cue))
+#define WinDrawCueText(x, y, cue)    UI_DrawText((x), (y), 0, 0xFF, Resource_GetText(cue))
 /* Fixed-address accessor global. */
-#define g_GraphicsPaletteDst        MEM_PTR(volatile u16, 0x80037800u)
+#define g_GraphicsPaletteDst         MEM_PTR(volatile u16, 0x80037800u)
 
 /* The low nibble of a sprite cell's size byte indexes g_SpriteSizes. */
-#define GFX_SPRITE_SIZE_MASK        0x0F
+#define GFX_SPRITE_SIZE_MASK         0x0F
 
 /* Color packing. */
-#define PSX_COLOR_R(c)              ((u16)(c) & 0x1Fu)
-#define PSX_COLOR_G(c)              (((u16)(c) >> 5) & 0x1Fu)
-#define PSX_COLOR_B(c)              (((u16)(c) >> 10) & 0x1Fu)
+#define PSX_COLOR_R(c)               ((u16)(c) & 0x1Fu)
+#define PSX_COLOR_G(c)               (((u16)(c) >> 5) & 0x1Fu)
+#define PSX_COLOR_B(c)               (((u16)(c) >> 10) & 0x1Fu)
+#define PSX_COLOR_STP(c)             (((u16)(c) >> 15) & 1u)
+#define PSX_PACK_COLOR(r, g, b, stp) ((u16)((r) | ((g) << 5) | ((b) << 10) | ((u16)(stp) << 15)))
 
 /* Shared primitive cursor (PsyQ SDK global, owned by the main exe). A named
  * symbol (not a fixed-address macro) so codegen emits the symbol-relative
