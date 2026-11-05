@@ -6,7 +6,7 @@ MATCH void func_801D3C9C(void) {
 
     counter = &D_80148654;
     func_801D6D6C(0x6E - *counter * 48, 0x4C);
-    Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     if (D_8014865C != -1) {
         WinDrawCueText(28, 22, 0xA1);
         Menu_DrawZennyWindow(0x62, 0x28, 0, g_Zenny);

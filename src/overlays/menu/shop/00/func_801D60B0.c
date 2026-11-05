@@ -7,7 +7,7 @@ MATCH void func_801D60B0(void) {
 
     counter = &D_80148654;
     cursor  = *counter;
-    Menu_DrawHeaderBar(0x14, (0x12 - cursor * 20) & 0xFFFE, 0x118, 0x13, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x12 - cursor * 20) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     count = *counter;
     count++;
     *counter = count;

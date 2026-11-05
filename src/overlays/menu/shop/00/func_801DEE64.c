@@ -22,5 +22,6 @@ MATCH void func_801DEE64(void) {
     /* FAKE: second pointer local for the post-loop use, pure-C best 85.85%. */
     counter_end = &D_80148654;
     func_801DF00C(((*counter_end * 0x2D) + 0x96) & HALF_MASK, 0x3B);
-    Menu_DrawHeaderBar(0x14, (0x12 - (*counter_end * 8)) & 0xFFFE, 0x118, 0x13, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x12 - (*counter_end * 8)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+                       D_80144952);
 }

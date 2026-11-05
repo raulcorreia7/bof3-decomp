@@ -4,7 +4,7 @@ MATCH void func_801D5390(void) {
     u8* cursor;
     u8  step;
 
-    Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     cursor = &D_80148654;
     SAVE_DrawSlots((s16)(*cursor * 0x50 + 0x20), 0x30, 0);
     step    = *cursor + 1;

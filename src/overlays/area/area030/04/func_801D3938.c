@@ -16,5 +16,5 @@ MATCH void func_801D3938(void) {
         }
     }
 
-    func_801D9534(0x14, FISHING_STATE->origin_y_30, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, FISHING_STATE->origin_y_30, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 }

@@ -10,7 +10,7 @@ NON_MATCHING void func_801E206C(void) {
     s32 keys;
 
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(0x14, 0x10, 0x118, 0x13, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     func_801E26A8(0x1C, 0x40);
     func_801E2668(D_80148655, 0x70, 0x26);
     if ((s8)D_80148655 != 9) {

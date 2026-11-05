@@ -4,7 +4,7 @@ MATCH void func_801D5790(void) {
     u8 prev;
 
     g_SaveSlotCount = 3;
-    Menu_DrawHeaderBar(0x14, 0x12, 0x118, 0x13, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     WinDrawCueText(28, 22, 0x90);
     SAVE_DrawSlots(0x20, 0x30, 0);
     if (Menu_ToggleOption() & BYTE_MASK) {

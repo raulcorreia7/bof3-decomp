@@ -722,7 +722,7 @@ static inline void FishingDrawCue(u8 accessoryCue) {
     FishingState* record;
     s32           mask;
 
-    func_801D9534(0x14, 0x12, 0x118, 0x13, 0);
+    func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;
     if (D_80145E93[0] >= 3u) {
         record = FISHING_STATE;
