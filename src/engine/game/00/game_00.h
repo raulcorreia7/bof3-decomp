@@ -194,6 +194,21 @@ typedef struct GameHandlerTable6 {
  * dx: x; dy: y. */
 typedef Vec2i GameRouteStep;
 
+/* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
+ * func_8019D8C0 rotates and writes out as screen vertices. */
+typedef struct SpinQuad {
+    s16     x;
+    s16     y;
+    s16     z;
+    u8      unk_06[0x0A];
+    SVECTOR rotation; /* 0x10 */
+    SVECTOR corners[4];
+} SpinQuad;
+
+ASSERT_OFFSET(SpinQuad, rotation, 0x10);
+ASSERT_OFFSET(SpinQuad, corners, 0x18);
+ASSERT_SIZE(SpinQuad, 0x38);
+
 typedef struct RoutePoint {
     s16 unk_00;
     s16 pad_02;
@@ -685,7 +700,7 @@ void    func_8019D270(void);
 void    func_8019D4BC(void);
 void    func_8019D648(void);
 void    func_8019D800(void);
-void    func_8019D8C0(void* obj, s16* out);
+void    func_8019D8C0(SpinQuad* quad, s16* out);
 void    func_8019D9C0(void);
 s32     func_8019DAA0(s32* spawn_record, s16 spawn_offset, u8 spawn_count);
 void    func_8019DC6C(void);
