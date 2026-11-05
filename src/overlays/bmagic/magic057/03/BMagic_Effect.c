@@ -122,7 +122,17 @@ INCLUDE_ASM(func_801EF83C);
 
 INCLUDE_ASM(func_801EF900);
 
-INCLUDE_ASM(func_801EFA38);
+MATCH void func_801EFA38(void) {
+    s32 temp_a0;
+
+    g_SpadWork->coord_x_34.raw       = D_801EB4E0->coord_x_34.raw - 1;
+    g_SpadWork->coord_y_38.raw       = D_801EB4E0->coord_y_38.raw - 1;
+    temp_a0                          = g_SpadWork->coord_x_34.raw;
+    g_SpadWork->word_3C.half.span_3E = Area_SampleHeight(temp_a0, temp_a0);
+    if (!(1 & D_801EB4E0->flags_00)) {
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EFABC(void) {
     func_801E5988();
