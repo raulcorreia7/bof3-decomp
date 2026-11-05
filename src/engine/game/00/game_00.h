@@ -35,6 +35,7 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 #define GAME_PALETTE_STAGE     0x80035600u /* 0x40-byte palette staging entries; GFX_StagePalette copies them out */
 #define GAME_PALETTE_MIRROR    0x80039600u /* GAME_PALETTE_STAGE + 0x4000, GFX_StagePalette's second copy */
 #define GAME_AREA_ID_ADDR      0x80143F00  /* the u16 world id; MEM reads it non-volatile to match retail */
+#define AREA_MESSAGE_REQUEST   0xD8        /* the message Message_RunAreaMessage starts */
 
 #define SCRATCH_WORK           SP_REF(volatile Actor*, 0x44u)
 #define GAME_ENTITY_COUNTER    SP_REF(s16, 0x0u)

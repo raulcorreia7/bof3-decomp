@@ -17,8 +17,8 @@ extern u8       D_801F6A90[];
 /* The map arrow sprite's width, height, u and v per sprite id. */
 extern u8       D_801F6AA0[];
 #define AREA_HUD_SPRITE_CELLS D_801F6AA0
-extern u8       D_801F6B10[];
-extern u8       D_801F6B18[];
+extern u8 D_801F6B10[];
+extern u8 D_801F6B18[];
 
 /* func_801F367C */
 void Area_Update(void);
@@ -34,20 +34,21 @@ void func_801F5738(void);
 s32  Area_BeginTurnStep(s32 direction, s32 previous);
 void Area_FinishTurnStep(void);
 
-#define AREA_TURN_SYNC   func_801F5738
+#define AREA_TURN_SYNC       func_801F5738
+#define AREA_MESSAGE_REQUEST 4 /* the message Message_RunAreaMessage starts */
 
 /* The value of area update step in the shared Area_Update body. */
-#define AREA_UPDATE_STEP Area_DrawHud
+#define AREA_UPDATE_STEP     Area_DrawHud
 
 extern WorldMapMarker D_801F6AF8[6];
 #define AREA_HUD_MASK_TABLE D_801F6AF8
-extern u16            g_GameAreaId;
-extern u16            D_80143F22;
-extern s8             g_GameRequestKind;
+extern u16 g_GameAreaId;
+extern u16 D_80143F22;
+extern s8  g_GameRequestKind;
 /* func_801F3A9C */
-void                  Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
+void       Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 /* func_801F3F90 */
-void                  Area_DrawGradientDiamond(s16 x, s16 y);
+void       Area_DrawGradientDiamond(s16 x, s16 y);
 
 void func_8015A944(void);
 
