@@ -266,13 +266,7 @@ MATCH void Scene_JoinMomo_801FCF44(void) {
     SCENE_JOIN_MOMO();
 }
 
-MATCH void func_801FCF88(void) {
-    EMI_LoaderStreamFamily(7U, 6U, 5U, 0U);
-    Party_BuildBattlers(0);
-    Party_JoinMember(CHAR_ID_MOMO);
-    Party_JoinMember(CHAR_ID_PECO);
-    func_801C1630();
-}
+#include "overlays/scenario/Scene_JoinMomoAndPeco.h"
 
 #include "overlays/scenario/Scene_JoinPeco.h"
 
