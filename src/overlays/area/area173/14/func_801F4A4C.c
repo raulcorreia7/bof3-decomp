@@ -1,4 +1,4 @@
 #include "area173_14.h"
 
-/* Same shape as func_801F3030 (area128): x=0x168000, z=0x5000000, y=0x7A8000 when slot_index_79 == 2 else 0x168000, direction_08=1; not matched, constant register differs (v0 in retail). */
+/* resume: best 5 differing (the y value shares its lui in the branch delay slot but our build keeps it in a1 where retail merges it with the compare constant in v0; the x value splits lui/ori around the loads in retail); first `!` +0x4 (ori v0 vs lui a0 - retail splits the x value materialization around the loads); next lever: the permuter (work/permute/nonmatchings/func_801F4A4C), the empty-do-while anchor moved the split once already. */
 INCLUDE_ASM(func_801F4A4C);

@@ -1,4 +1,20 @@
+/* The dispatch dance keeps every work-cell write. */
+#define SPAD_WORK_VOLATILE
 #include "area134_13.h"
 
-/* first differing instruction: lui v0 (retail) against lui v1 (candidate) at the g_Actors[0].x load. Body: save g_SpadWork, point it at g_Actors, compare g_Actors[0].x with D_80145EC4, g_GameState = g_BattlePartyBattlers, store the saved work pointer back three times (the middle one g_BattlePartyBattlers), then step 4 or (0xD and unk_09 = 0); the stores are kept by retail, plain and SP_REF forms drop or reorder them */
-INCLUDE_ASM(func_801F3064);
+MATCH void func_801F3064(void) {
+    Actor* work;
+
+    work        = g_SpadWork;
+    g_SpadWork  = g_Actors;
+    g_GameState = (GameStateRecord*)g_BattlePartyBattlers;
+    g_SpadWork  = work;
+    g_SpadWork  = (Actor*)g_BattlePartyBattlers;
+    g_SpadWork  = work;
+    if (FIELD(s32, D_801468BC, 0) >= D_80145EC4) {
+        work->unk_01       = 0xD;
+        g_SpadWork->unk_09 = 0;
+        return;
+    }
+    work->unk_01 = 0xA;
+}

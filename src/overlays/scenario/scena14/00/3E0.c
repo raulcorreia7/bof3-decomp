@@ -38,7 +38,13 @@ INCLUDE_ASM(func_801F7BA0);
 
 INCLUDE_ASM(func_801F7FB8);
 
-INCLUDE_ASM(func_801F8800);
+MATCH void func_801F8800(u8 amount) {
+    s32 step;
+
+    step                     = D_801FC44C[g_FrameCount & 3] * amount;
+    g_AreaCameraRefreshCount = 2;
+    g_AreaCameraOffsetY += step;
+}
 
 INCLUDE_ASM(func_801F8850);
 
