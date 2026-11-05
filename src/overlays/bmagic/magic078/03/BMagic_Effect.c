@@ -30,7 +30,27 @@ MATCH void func_801EF08C(void) {
 
 #include "overlays/bmagic/Effect_CountDownAndStep.h"
 
-INCLUDE_ASM(func_801EF12C);
+MATCH void func_801EF12C(void) {
+    s32 temp_v0;
+    s32 var_v0;
+    s32 var_v1;
+
+    temp_v0 = ratan2(g_BattleSelectedActor->coord_y_38.raw - g_SpadWork->coord_y_38.raw,
+                     g_BattleSelectedActor->coord_x_34.raw - g_SpadWork->coord_x_34.raw);
+    var_v1  = g_SpadWork->unk_0C;
+    if (var_v1 < 0) {
+        var_v1 += 0x3F;
+    }
+    var_v1 >>= 6;
+    var_v0 = temp_v0 & 0xFFF;
+    if (var_v0 < 0) {
+        var_v0 += 0x3F;
+    }
+    if (var_v1 == (var_v0 >> 6)) {
+        g_SpadWork->word_08.byte.timer_0A = 0xF;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF1CC(void) {
     u8 count;
