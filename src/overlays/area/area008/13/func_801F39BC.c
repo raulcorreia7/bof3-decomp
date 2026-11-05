@@ -5,7 +5,7 @@ MATCH void func_801F39BC(void) {
     Actor* e;
     s32    idx;
 
-    s = (Actor*)&g_Actors[((u8*)g_SpadWork)[0x0B]];
+    s = (Actor*)&g_Actors[g_SpadWork->unk_0B];
     s->flags_00 |= ACTOR_FLAG_HIDDEN;
     s          = g_SpadWork;
     idx        = ((u8*)s)[0x0B];
