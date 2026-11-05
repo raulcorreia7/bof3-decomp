@@ -25,7 +25,19 @@ MATCH void func_801EEEE0(void) {
 
 INCLUDE_ASM(func_801EEF68);
 
-INCLUDE_ASM(func_801EF078);
+MATCH void func_801EF078(void) {
+    u8             timer;
+    PartyBattler** actor;
+    timer                           = g_SpadWork->word_08.byte.unk_09 + 2;
+    g_SpadWork->word_08.byte.unk_09 = timer;
+    if (timer == 0x10) {
+        actor = &g_BattleSelectedActor;
+        func_80196718(*actor);
+        func_8019651C(*actor, -8, -8, -8, 1);
+        func_800A9820(g_BattleTargetSelector);
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_StepOnOwnTickFlag.h"
 
