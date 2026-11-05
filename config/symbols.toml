@@ -2104,6 +2104,7 @@ Scene_ClaimScanBar = { addr = 0x801D15DC, type = "func", source = "marks the fir
 Scene_StepScanBars = { addr = 0x801D1624, type = "func", source = "steps and draws the 16 scan bars: state 0 sets half height 4 and y to the argument, state 1 waits, state 2 lowers y by 8 per call and frees the bar once y is negative; returns 1 when a bar is live; byte-equal to the twin of the other image with another bar base" }
 
 ["emi/scenario/sce15ef3/00"]
+Area_FindFreeSpriteRow = { addr = 0x801D171C, type = "func", source = "finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL" }
 Scene_DrawScanBar = { addr = 0x801D2424, type = "func", source = "draws one scan bar as two semi-transparent gradient quads across x 0..320 above and below y, each as tall as the half height plus the frame parity; byte-equal to the twin of the other image" }
 Scene_ClearScanBars = { addr = 0x801D25C0, type = "func", source = "clears the in-use byte of each of the 16 scan bars; byte-equal to Scene_ClearScanBars of sce15ef2 with another bar base" }
 Scene_ClaimScanBar = { addr = 0x801D25EC, type = "func", source = "marks the first free of the 16 scan bars in use and resets its state byte; byte-equal to Scene_ClaimScanBar of sce15ef2 with another bar base" }
@@ -2642,6 +2643,7 @@ Message_Clear = { addr = 0x801F3AC0, type = "func", source = "clears the message
 ["emi/world03/area143/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
+Area_FindFreeSpriteRow = { addr = 0x801F2D7C, type = "func", source = "finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL" }
 Message_SelectAnswer = { addr = 0x801F3ACC, type = "func", source = "stores the selected or idle area request id the selection byte picks" }
 Message_ClearRequest = { addr = 0x801F3B8C, type = "func", source = "clears the area request slot and resets the game-overlay state bytes when the selection byte is clear" }
 Message_Clear = { addr = 0x801F3BCC, type = "func", source = "clears the message request and sets the game overlay state bytes when the menu choice is zero" }

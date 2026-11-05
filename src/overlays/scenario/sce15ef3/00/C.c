@@ -168,19 +168,7 @@ MATCH void func_801D16DC(void) {
     } while ((u32)(index & HALF_MASK) < 0x100U);
 }
 
-MATCH u8* func_801D171C(void) {
-    u8* p;
-    u16 i;
-
-    p = MEM_PTR(u8, 0x800E4800);
-    for (i = 0; i < 256; i++) {
-        if (p[0] == 0) {
-            return p;
-        }
-        p += 0x18;
-    }
-    return NULL;
-}
+#include "shared/Area_FindFreeSpriteRow.h"
 
 INCLUDE_ASM(func_801D1758);
 
