@@ -67,6 +67,7 @@ INCLUDE_ASM(func_801EF43C);
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
+/* First difference: lui v1 at +0x20; try the work pointer lifetime across the coordinate stores. */
 INCLUDE_ASM(func_801EF528);
 
 MATCH void func_801EF648(void) {
