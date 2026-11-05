@@ -18,16 +18,16 @@ MATCH void func_801EEC5C(void) {
     u32           offset;
 
     func_800AFD9C();
-    offset                                      = (Battle_AllocEffect(1, 0x19) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
-    FIELD(PartyBattler*, D_801EC3A4, offset)    = g_SpadWork;
-    FIELD(u8, D_801EC338, offset)               = ((PartyBattler*)D_8014637C)->word_08.byte.facing_08;
-    scroll_x                                    = g_AreaScrollTargetX;
-    work                                        = g_SpadWork;
-    FIELD(s32, D_801EC364, offset)              = scroll_x;
-    FIELD(s32, D_801EC368, offset)              = g_AreaScrollTargetY;
-    FIELD(s32, D_801EC36C, offset)              = work->word_3C.word + 0x04000000;
+    offset                                   = (Battle_AllocEffect(1, 0x19) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+    FIELD(PartyBattler*, D_801EC3A4, offset) = g_SpadWork;
+    FIELD(u8, D_801EC338, offset)            = ((PartyBattler*)D_8014637C)->word_08.byte.facing_08;
+    scroll_x                                 = g_AreaScrollTargetX;
+    work                                     = g_SpadWork;
+    FIELD(s32, D_801EC364, offset)           = scroll_x;
+    FIELD(s32, D_801EC368, offset)           = g_AreaScrollTargetY;
+    FIELD(s32, D_801EC36C, offset)           = work->word_3C.word + 0x04000000;
     SND_QueueSelectionFx(0x100);
-    g_SpadWork->word_08.byte.unk_0B             = 0;
+    g_SpadWork->word_08.byte.unk_0B = 0;
     g_SpadWork->step_01 += 1;
 }
 
