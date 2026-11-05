@@ -115,6 +115,25 @@ MATCH void func_801F020C(void) {
 
 INCLUDE_ASM(func_801F02F4);
 
+#ifdef NON_MATCHING
+MATCH void func_801F034C(void) {
+    u8  next;
+    u16 span;
+
+    func_801EFA54();
+    func_801F03C4();
+    PopMatrix();
+    next                             = g_SpadWork->word_08.byte.unk_09 - 1;
+    span                             = (u16)(g_SpadWork->word_3C.half.span_3E - 0x40);
+    g_SpadWork->word_08.byte.unk_09  = next;
+    g_SpadWork->word_3C.half.span_3E = span;
+    if (!(next & 0xFF)) {
+        D_801EB4E0->word_08.byte.unk_0B = g_SpadWork->word_08.byte.unk_0B;
+        func_801E5988();
+    }
+}
+#else
 INCLUDE_ASM(func_801F034C);
+#endif
 
 INCLUDE_ASM(func_801F03C4);
