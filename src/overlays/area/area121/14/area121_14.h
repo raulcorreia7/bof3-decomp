@@ -26,6 +26,7 @@ extern Callback       D_801F67E0[];
 extern Callback       D_801F67F0[];
 extern u8             D_801F6800[]; /* one four-byte sprite cell per id: w, h, u0, v0 */
 extern WorldMapMarker D_801F6858[6];
+#define AREA_HUD_MASK_TABLE D_801F6858
 extern Callback       D_801F6870[];
 extern AreaSpawnPoint D_801F687C[];
 extern u8             D_801F688C[];

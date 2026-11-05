@@ -48,6 +48,7 @@ void Area_DrawHudBanner(s16 x, s16 y);
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F54C0[6];
+#define AREA_HUD_MASK_TABLE D_801F54C0
 /* func_801F3948 */
 void                  Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 /* func_801F3E3C */

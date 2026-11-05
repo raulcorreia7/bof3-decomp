@@ -39,6 +39,7 @@ void Area_FinishTurnStep(void);
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F6AF8[6];
+#define AREA_HUD_MASK_TABLE D_801F6AF8
 extern u16            g_GameAreaId;
 extern u16            D_80143F22;
 extern s8             g_GameRequestKind;

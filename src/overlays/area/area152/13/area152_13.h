@@ -34,6 +34,7 @@ extern u8 Game_FindAreaHandler(void);
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F4DEC[6];
+#define AREA_HUD_MASK_TABLE D_801F4DEC
 /* func_801F389C */
 void                  Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 /* func_801F3D90 */

@@ -33,6 +33,7 @@ extern void Area_DrawHud(s16 x, s16 y);
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F5308[6];
+#define AREA_HUD_MASK_TABLE D_801F5308
 /* func_801F3F04 */
 void                  Area_DrawGradientDiamond(s16 x, s16 y);
 

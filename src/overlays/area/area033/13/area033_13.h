@@ -35,6 +35,7 @@ extern u8          D_801F502D[];
 extern void (*D_801F5034[])(void);
 /* The world map marker rows the step handler selects by a controller mask. */
 extern WorldMapMarker D_801F4FF8[6];
+#define AREA_HUD_MASK_TABLE D_801F4FF8
 /* func_801F3E00 */
 void                  Area_DrawGradientDiamond(s16 x, s16 y);
 
