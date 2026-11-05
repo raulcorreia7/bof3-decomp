@@ -8,8 +8,8 @@ MATCH void func_801F3C3C(s32 arg0) {
     s32  g;
     s32  b;
 
-    dst   = (u16*)0x80038400;
-    src   = (u16*)0x80034400;
+    dst = (u16*)0x80038400;
+    src = (u16*)0x80034400;
     do {
         color = *src;
         r     = color & 0x1F;

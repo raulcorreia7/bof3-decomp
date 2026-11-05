@@ -16,13 +16,13 @@ block_3:
     flags  = &D_801448ED;
     *flags = 3;
     flags += 0x63B;
-    flag   = 0x1E;
+    flag = 0x1E;
     goto block_5;
 block_4:
     flags  = &D_801448ED;
     *flags = 2;
     flags += 0x63B;
-    flag   = 0x1F;
+    flag = 0x1F;
 block_5:
     SYS_SetFlag(flags, flag);
     D_801448EB = 5;
