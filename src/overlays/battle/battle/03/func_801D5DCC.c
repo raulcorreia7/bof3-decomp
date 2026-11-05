@@ -2,7 +2,7 @@
 
 /* sums the per-turn hit point change of each living party member (modes, equipment, accessories, status bit 1)
  * and arms the follow-up state for every battler whose change is non-zero; living enemies with status bit 1 take half
- * of their cell_A0 value. Returns whether D_801463C2 is set.
+ * of their max HP. Returns whether D_801463C2 is set.
  */
 MATCH u8 func_801D5DCC(void) {
     u8  slot;
@@ -73,7 +73,7 @@ MATCH u8 func_801D5DCC(void) {
                 ENEMY_COMBATANT(slot).unk_04       = 0;
                 ENEMY_COMBATANT(slot).unk_03       = 0;
                 ENEMY_COMBATANT(slot).target_flags = 0x11;
-                ENEMY_COMBATANT(slot).damage       = -(ENEMY_COMBATANT(slot).cell_A0.max_hp >> 1);
+                ENEMY_COMBATANT(slot).hp_change    = -(ENEMY_COMBATANT(slot).stats.max_hp >> 1);
                 Battle_SetSlotPending(slot);
             }
         }

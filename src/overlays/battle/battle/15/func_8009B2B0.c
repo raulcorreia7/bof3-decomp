@@ -27,7 +27,7 @@ MATCH void func_8009B2B0(void) {
     } else {
         for (slot = 3; slot < COMBATANT_COUNT; slot++) {
             if (Battle_SlotIsBlocked(slot) == 0) {
-                enemy_sum += D_801EB630[slot].agility;
+                enemy_sum += D_801EB630[slot].stats.agility;
             }
         }
         divisor = D_801462F3;

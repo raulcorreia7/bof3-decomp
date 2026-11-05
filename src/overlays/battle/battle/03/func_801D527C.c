@@ -36,7 +36,7 @@ MATCH bool func_801D527C(void) {
                 ENEMY_COMBATANT(slot).unk_04       = 0;
                 ENEMY_COMBATANT(slot).unk_03       = 0;
                 ENEMY_COMBATANT(slot).action_flags &= ~COMBATANT_FLAG_CHARGING;
-                ENEMY_COMBATANT(slot).damage = ENEMY_COMBATANT(slot).hp;
+                ENEMY_COMBATANT(slot).hp_change = ENEMY_COMBATANT(slot).hp;
                 Battle_SetSlotPending(slot);
             }
         }

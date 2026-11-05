@@ -25,8 +25,8 @@ MATCH u8 func_801D5BC0(void) {
 
     for (index = 3u; index < 11u; index++) {
         if ((func_801D64C4(index) == 0u) && ((ENEMY_COMBATANT(index).status & STATUS_POISONED) != 0u)) {
-            ENEMY_COMBATANT(index).unk_FA = 0u;
-            ENEMY_COMBATANT(index).damage = 0u;
+            ENEMY_COMBATANT(index).ap_change = 0u;
+            ENEMY_COMBATANT(index).hp_change = 0u;
             func_801DCEF8(index);
             count += 1u;
             ENEMY_COMBATANT(index).mode         = 6u;

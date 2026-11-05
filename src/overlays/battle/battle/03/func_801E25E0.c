@@ -17,8 +17,8 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
     u8            slot;
 
     slot               = arg0;
-    g_BattleActionType = ((s32)D_800B51F8[D_801EB630[slot & BYTE_MASK].unk_7E] >> ((rand() & 3) * 2)) & 3;
-    if ((g_BattleState & BATTLE_STATE_OVER) && (D_801EB630[slot & BYTE_MASK].unk_AA < 2U)) {
+    g_BattleActionType = ((s32)D_800B51F8[D_801EB630[slot & BYTE_MASK].choice_ai] >> ((rand() & 3) * 2)) & 3;
+    if ((g_BattleState & BATTLE_STATE_OVER) && (D_801EB630[slot & BYTE_MASK].stats.intellect < 2U)) {
         g_BattleActionType = 0;
     }
     if (g_BattleActionType != 1) {

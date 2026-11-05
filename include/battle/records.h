@@ -44,13 +44,25 @@
 
 /* One drop of an enemy: the item id the battle spoils gain when the roll
  * passes, and the index into the 8-byte drop chance table at 0x801D0CB8. */
+/* The enemy id as the record stores it, read as two bytes: the low byte tells
+ * enemies apart (func_801DA69C, func_8009CFEC, func_801E54EC) and the high byte is the
+ * family the slayer weapons test (Battle_CalcDamage, func_800A2598). */
+typedef union EnemyBattlerId {
+    u16 value;
+
+    struct {
+        u8 kind;
+        u8 family;
+    } byte;
+} EnemyBattlerId;
+
 typedef struct EnemyBattlerDrop {
     u16 item_00;
     u8  rate_02;
     u8  pad_03;
 } EnemyBattlerDrop;
 
-/* Two drops fill 0x98..0xA0 of an EnemyBattler: cell_A0 follows drops[2]. */
+/* Two drops fill 0x98..0xA0 of an EnemyBattler: stats follows drops[2]. */
 ASSERT_SIZE(EnemyBattlerDrop, 0x4);
 
 /* The mode handler an enemy record points at. */
@@ -248,14 +260,6 @@ typedef union BattleWorkHalfOrByte90 {
     u8  value;
 } BattleWorkHalfOrByte90;
 
-/* The cell at +0xA0 of an enemy work record. battle/battle/03 reads the halfword as
- * the enemy's capture cap (func_801E496C) and battle/battle/15 reads the low byte
- * (func_800AFC98), so the cell carries both widths. */
-typedef union BattleEnemyCellA0 {
-    u16 max_hp;
-    u8  value;
-} BattleEnemyCellA0;
-
 /* The cell at +0x0A of a battle panel task. battle/battle/03 reads it as the
  * selected battler slot (the row index is slot - 3) and battle/battle/15 reads it
  * as the panel's slide mode (0 moves the panel right), so the cell carries
@@ -306,7 +310,7 @@ typedef struct BattlePanelTask {
     u16               row_base;  /* +0x12 the panel list's first row (func_800B1728) */
     u16               hp;        /* +0x14 copied from EnemyBattler.hp; the HP bar's numerator */
     u8                pad_16[6]; /* +0x16 .. +0x1B */
-    u16               max_hp;    /* +0x1C copied from EnemyBattler.cell_A0.stats.max_hp; the HP bar's divisor */
+    u16               max_hp;    /* +0x1C copied from EnemyBattler.stats.max_hp; the HP bar's divisor */
 } BattlePanelTask;
 
 ASSERT_SIZE(BattlePanelTask, 0x1E);
@@ -358,29 +362,21 @@ typedef struct EnemyBattler {
     u8                    unk_5F; /* +0x5F cleared when the slot is armed */
     u8                    pad_60[0x14];
     u8                    name[8]; /* +0x74 the 8-character enemy name, drawn as text by Battle_DrawEnemyNamePanel */
-    u8                    kind_id;
-    u8                    unk_7D;      /* +0x7D battle/battle/15's cell; battle/battle/03 leaves it padded */
-    u8                    unk_7E;      /* +0x7E battle/battle/03's cell; func_801E25E0 reads it as a byte */
+    EnemyBattlerId        enemy_id;
+    u8                    choice_ai;
     u8                    unk_7F;      /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
     u16                   event_flags; /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16                   status;      /* +0x82 StatusFlags; bit 0x4000 marks the slot blocked */
-    u16                   unk_84;      /* +0x84 damage; func_801E54EC clears it */
-    u16                   unk_86;      /* +0x86 damage; func_801E54EC banks it in D_8014632C */
-    u16                   power;       /* +0x88 read by the turn-order ranking */
+    u16                   status; /* +0x82 StatusFlags; func_801E54EC sets STATUS_KO when the enemy leaves the field */
+    u16                   zenny;  /* +0x84 banked in the spoils by func_801E54EC */
+    u16                   exp;    /* +0x86 banked in the spoils by func_801E54EC */
+    u16                   power;  /* +0x88 read by the turn-order ranking */
     u8                    pad_8A[2];
-    u8                    techniques[8]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
+    u8                    skills[8]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
     u16                   hp;
     u16                   ap; /* +0x96 battle/battle/03's cell; battle/battle/15 leaves it padded */
     EnemyBattlerDrop      drops[2];
-    BattleEnemyCellA0     cell_A0; /* +0xA0 the cell both overlays read at their own width */
-    u8                    pad_A2[0x2];
-    u16                   attack;  /* +0xA4 battle/battle/15's cell; battle/battle/03 leaves it padded */
-    u16                   unk_A6;  /* +0xA6 battle/battle/15's cell; battle/battle/03 leaves it padded */
-    u16                   agility; /* +0xA8 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16                   unk_AA;  /* +0xAA battle/battle/15's cell; battle/battle/03 leaves it padded */
-    u8                    pad_AC[0x3];
-    u8                    resistances[RES_SLOT_COUNT]; /* +0xAF per-element resistance levels, as in Character */
-    u8                    pad_B8[0x28];
+    Stats                 stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
+    Stats                 base;  /* +0xC0 the stats before buffs */
     u8                    kind;
     u8                    unk_E1;
     u8                    unk_E2; /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
@@ -392,8 +388,8 @@ typedef struct EnemyBattler {
     u8                    pad_F1[ENEMY_COMBATANT_PAD_F1_SIZE];
     u8                    unk_F5;
     u16                   technique;
-    s16                   damage; /* +0xF8 damage dealt this hit; negative heals (func_801E496C) */
-    u16                   unk_FA;
+    s16                   hp_change; /* +0xF8 HP dealt this hit; negative heals (func_801E496C) */
+    s16                   ap_change;
     u8                    target_flags; /* +0xFC battle/battle/15 calls it target_flags */
     u8                    unk_FD;
     u8                    pad_FE[0x2];
@@ -427,9 +423,16 @@ ASSERT_OFFSET(EnemyBattler, unk_5A, 0x5A);
 ASSERT_OFFSET(EnemyBattler, unk_5C, 0x5C);
 ASSERT_OFFSET(EnemyBattler, unk_5F, 0x5F);
 ASSERT_OFFSET(EnemyBattler, status, 0x82);
-ASSERT_OFFSET(EnemyBattler, techniques, 0x8C);
+ASSERT_OFFSET(EnemyBattler, skills, 0x8C);
 ASSERT_OFFSET(EnemyBattler, hp, 0x94);
-ASSERT_OFFSET(EnemyBattler, cell_A0, 0xA0);
+ASSERT_OFFSET(EnemyBattler, enemy_id, 0x7C);
+ASSERT_OFFSET(EnemyBattler, choice_ai, 0x7E);
+ASSERT_OFFSET(EnemyBattler, zenny, 0x84);
+ASSERT_OFFSET(EnemyBattler, exp, 0x86);
+ASSERT_OFFSET(EnemyBattler, stats, 0xA0);
+ASSERT_OFFSET(EnemyBattler, base, 0xC0);
+ASSERT_OFFSET(EnemyBattler, hp_change, 0xF8);
+ASSERT_OFFSET(EnemyBattler, ap_change, 0xFA);
 ASSERT_OFFSET(EnemyBattler, kind, 0xE0);
 ASSERT_OFFSET(EnemyBattler, unk_E8, 0xE8);
 
