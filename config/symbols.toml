@@ -597,6 +597,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0048, source = "the module dispatcher index
 Effect_PlayOnZeroTick = { addr = 0x801EEE80, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 
 ["emi/bmagic/magic107/03"]
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_PlayOnIdleTick = { addr = 0x801EED40, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
 Effect_AdvanceOnTick = { addr = 0x801EEF0C, type = "func", source = "increments the effect ticker and advances the step at the limit" }
 Effect_SetActorMatrixQuarterRoll = { addr = 0x801EFA18, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera, with the rotation rolled by ONE / 4 about z (rot.vz) when bit 0 of work byte +0x08 is set; one body shared with the other bmagic overlays" }

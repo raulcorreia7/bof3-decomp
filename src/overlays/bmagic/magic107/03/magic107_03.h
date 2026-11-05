@@ -12,7 +12,14 @@ void func_801EED40(void);
 
 extern Callback D_801F048C[];
 
+/* One-field views of the queued-slot record at g_BattleEffects (stride 0x78). */
+extern u8 D_801EC338[];
+extern u8 D_801EC364[];
+extern u8 D_801EC368[];
+extern u8 D_801EC36C[];
+
 void Effect_SetActorMatrixQuarterRoll(void);
+void func_800AFD9C(void);
 void func_801EEFD4(void);
 void func_801EF0E4(void);
 void func_801EF290(void);
