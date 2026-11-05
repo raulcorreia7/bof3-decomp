@@ -204,8 +204,6 @@ MATCH void func_801F0C4C(void) {
 }
 
 MATCH void Effect_CountDownAndStep_801F0C98(void) {
-    u8 count;
-
     BMAGIC_COUNT_DOWN_AND_STEP();
 }
 
