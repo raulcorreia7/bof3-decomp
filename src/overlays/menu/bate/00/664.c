@@ -181,10 +181,10 @@ MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     UI_DrawText((s16)(x0 + 75), (s16)(y0 + 3), (s32)palette, 4U, &D_801D8B84[0xC]);
     UI_DrawText((s16)(x0 + 75), (s16)(y0 + 16), (s32)palette, 4U, &D_801D8B84[0x12]);
     UI_DrawWindowOutline((s16)(x0 + 0x33), (s16)(y0 + 0x2E), 0x56, 0x14, 0xF1);
-    Menu_DrawIconCell((u16)(x0 + 0x36), (u16)(y0 + 0x30), 4U, mode);
+    Menu_DrawIcon((u16)(x0 + 0x36), (u16)(y0 + 0x30), 4U, mode);
     sprintf((char*)g_UiFormatBuffer, g_MenuZennyFormat, g_Characters[item_index].exp);
     UI_DrawGlyphString((s16)(x0 + 78), (s16)(y0 + 48), (u32)palette, g_UiFormatBuffer);
-    Menu_DrawIconCell((u16)(x0 + 0x36), (u16)(y0 + 0x39), 5U, mode);
+    Menu_DrawIcon((u16)(x0 + 0x36), (u16)(y0 + 0x39), 5U, mode);
     count = g_Characters[item_index].level;
     if (count < 0x63U) {
         count_y = y0;
@@ -200,9 +200,11 @@ MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
 
 INCLUDE_ASM(func_801D3E18);
 
-#include "overlays/menu/Menu_DrawIconCell.h"
+#include "overlays/menu/Menu_DrawIcon.h"
 
-#include "shared/Menu_DrawIcon.h"
+MATCH void func_801D4678(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
+    MenuDrawPanelIcon(x, y, u, v, clut, color);
+}
 
 #include "overlays/menu/Menu_DrawExperienceLine.h"
 
@@ -331,7 +333,7 @@ MATCH void func_801D8208(u8 index, s32 left, s32 top, MenuListRow* row) {
         }
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, NULL);
         GFX_AddPrim(1, 0xC);
-        Menu_DrawIcon((u16)(left + 9), (u16)(top + 5), (u8)(index + 3), 0x1E, (u16)GetClut(16, 480), 128);
+        func_801D4678((u16)(left + 9), (u16)(top + 5), (u8)(index + 3), 0x1E, (u16)GetClut(16, 480), 128);
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
             icon = *(row->unk_00 + i + 5);
             if (icon != GAME_NONE) {

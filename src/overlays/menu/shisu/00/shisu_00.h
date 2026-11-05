@@ -65,7 +65,7 @@ extern s32  func_801D2978(void);
 extern s32  func_801D2ADC(void);
 extern void func_801D2C0C(void);
 extern void func_801D2DA8(void);
-extern void Menu_DrawIconCell(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
+extern void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 extern void Menu_DrawFilledPanel(s16 x, s16 y, s16 width, s32 height);
 
