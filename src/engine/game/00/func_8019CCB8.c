@@ -33,7 +33,7 @@ MATCH void func_8019CCB8(void) {
                 copy_index = 0;
                 if (copy_count > 0) {
                     do {
-                        *copy_dst = *(u8*)g_SpadWork->source_50;
+                        *copy_dst = *g_SpadWork->source_50;
                         copy_index += 1;
                         g_SpadWork->source_50 = (u8*)g_SpadWork->source_50 + 1;
                         copy_dst += 1;
