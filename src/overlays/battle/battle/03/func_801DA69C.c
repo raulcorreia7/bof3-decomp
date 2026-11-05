@@ -6,7 +6,7 @@ MATCH u8 func_801DA69C(u32 enemy_index) {
     u8 slot_kind;
 
     enemy_index &= BYTE_MASK;
-    slot_kind   = D_801EB630[enemy_index].kind_id;
+    slot_kind   = D_801EB630[enemy_index].enemy_id.byte.kind;
     owner_index = 7;
     while (owner_index >= 0) {
         if (D_8014833A[owner_index + 5].kind_00 == enemy_index + 3u) {
@@ -27,7 +27,7 @@ MATCH u8 func_801DA69C(u32 enemy_index) {
             continue;
         }
         ui_kind = D_8014833A[scan_index + 5].kind_00;
-        if (ENEMY_COMBATANT(ui_kind).kind_id == slot_kind) {
+        if (ENEMY_COMBATANT(ui_kind).enemy_id.byte.kind == slot_kind) {
             return false;
         }
     }

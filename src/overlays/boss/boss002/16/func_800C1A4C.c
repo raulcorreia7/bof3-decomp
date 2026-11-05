@@ -7,8 +7,8 @@ MATCH void func_800C1A4C(void) {
     s32           remaining;
 
     work      = g_BattleCurrentEnemy;
-    remaining = work->hp - work->damage;
-    limit     = work->cell_A0.max_hp >> 2;
+    remaining = work->hp - work->hp_change;
+    limit     = work->stats.max_hp >> 2;
     if (!((s32)limit < remaining)) {
         flags = &g_BattleBossFlags;
         *flags |= 1;

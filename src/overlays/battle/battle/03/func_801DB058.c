@@ -22,7 +22,7 @@ MATCH u8 func_801DB058(void) {
             u16 value;
 
             slot  = (u8)index - 3u;
-            value = D_801EB630[slot].agility;
+            value = D_801EB630[slot].stats.agility;
             total += value;
             CLAMP_MIN(maximum, value);
             count += 1u;

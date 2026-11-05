@@ -22,7 +22,7 @@ MATCH void func_8009F010(void) {
         value = g_BattlePartyBattlers[index].chr.stats.intellect;
     } else {
         enemy_index = index - 3;
-        value       = D_801EB630[enemy_index].unk_AA;
+        value       = D_801EB630[enemy_index].stats.intellect;
     }
     D_801EC30C     = value;
     battler_index  = g_BattleActiveBattler;

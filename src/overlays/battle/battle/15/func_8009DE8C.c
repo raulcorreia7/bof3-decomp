@@ -14,7 +14,7 @@ MATCH void func_8009DE8C(void) {
     if (BATTLER_IS_PLAYER(sel)) {
         ((s16*)g_BattleTargetRecord)[2] = -g_BattlePartyBattlers[sel].chr.stats.max_hp;
     } else {
-        value = ENEMY_COMBATANT(sel).cell_A0.max_hp;
+        value = ENEMY_COMBATANT(sel).stats.max_hp;
         if ((u16)value == 0xFFFFu) {
             ((s16*)g_BattleTargetRecord)[2] = -1;
             row_off                         = (ctx->sel - 3u) * BATTLE_ENEMY_STRIDE;

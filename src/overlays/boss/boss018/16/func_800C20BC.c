@@ -4,7 +4,7 @@ MATCH void func_800C20BC(void) {
     EnemyBattler* work;
 
     work = g_BattleCurrentEnemy;
-    if (work->damage > 0) {
+    if (work->hp_change > 0) {
         SND_QueueSelectionFx((rand() & 1) ? 0x600 : 0x601);
     }
 }

@@ -37,7 +37,7 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
         state = g_BattlePartyBattlers[id2].chr.stats.resistances[RES_SLOT_STATUS];
     } else {
         enemy_index = id2 - 3u;
-        state       = D_801EB630[enemy_index].resistances[RES_SLOT_STATUS];
+        state       = D_801EB630[enemy_index].stats.resistances[RES_SLOT_STATUS];
     }
 
     limit = 10000 - (s32)rt[state] * 50;

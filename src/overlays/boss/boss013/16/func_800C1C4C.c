@@ -5,8 +5,8 @@ MATCH void func_800C1C4C(void) {
 
     if ((g_BattleEncounter == 16) && (g_BattleActiveBattler == 8)) {
         work = g_BattleCurrentEnemy;
-        if (work->damage == 0) {
-            work->damage = 1;
+        if (work->hp_change == 0) {
+            work->hp_change = 1;
         }
     }
     work = g_BattleCurrentEnemy;

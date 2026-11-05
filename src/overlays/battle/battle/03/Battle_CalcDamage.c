@@ -41,13 +41,13 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
         if ((g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_DEMONSBANE ||
              g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_HOLY_AVENGER ||
              g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_ARIES_SPEAR) &&
-            ENEMY_COMBATANT(target).unk_7D == 4) {
+            ENEMY_COMBATANT(target).enemy_id.byte.family == 4) {
             damage *= 2;
         }
         if ((g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_DRAGON_BLADE ||
              g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_DRAGON_SPEAR ||
              g_BattlePartyBattlers[attacker].chr.equip.weapon == WEAPON_DRAGONFANG) &&
-            ENEMY_COMBATANT(target).unk_7D == 1) {
+            ENEMY_COMBATANT(target).enemy_id.byte.family == 1) {
             damage *= 2;
         }
     }

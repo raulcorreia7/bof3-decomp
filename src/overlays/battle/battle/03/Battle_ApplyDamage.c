@@ -49,10 +49,10 @@ MATCH u32 Battle_ApplyDamage(u8 attacker, u8 target) {
             } else {
                 ENEMY_COMBATANT(target).hp = 0;
             }
-        } else if (ENEMY_COMBATANT(target).hp - damage < ENEMY_COMBATANT(target).cell_A0.max_hp) {
+        } else if (ENEMY_COMBATANT(target).hp - damage < ENEMY_COMBATANT(target).stats.max_hp) {
             ENEMY_COMBATANT(target).hp -= damage;
         } else {
-            ENEMY_COMBATANT(target).hp = ENEMY_COMBATANT(target).cell_A0.max_hp;
+            ENEMY_COMBATANT(target).hp = ENEMY_COMBATANT(target).stats.max_hp;
             ENEMY_COMBATANT(target).target_flags |= 4;
         }
     }
