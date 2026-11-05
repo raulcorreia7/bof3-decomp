@@ -32,5 +32,9 @@ void func_801F7DE8(void);
 extern u8  D_80146874;
 extern u16 D_80146876;
 extern u8  D_80146875;
+extern u8  g_VitalItemIds;
+
+extern u16 D_800E4C1E;
+extern u16 g_GameAreaId;
 
 #endif

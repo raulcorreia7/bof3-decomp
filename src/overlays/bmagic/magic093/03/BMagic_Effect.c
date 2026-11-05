@@ -107,7 +107,18 @@ MATCH void func_801F00F0(void) {
     }
 }
 
-INCLUDE_ASM(func_801F015C);
+MATCH void func_801F015C(void) {
+    u8 temp_v0;
+
+    g_SpadWork->word_08.byte.unk_09 += 1;
+    g_SpadWork->word_08.byte.timer_0A -= 1;
+    temp_v0                         = g_SpadWork->word_08.byte.unk_0B - 1;
+    g_SpadWork->word_08.byte.unk_0B = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        Actor_Clear();
+    }
+}
 
 INCLUDE_ASM(func_801F01F0);
 

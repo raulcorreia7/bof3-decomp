@@ -8,7 +8,13 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC84);
 
-INCLUDE_ASM(func_801EEE9C);
+MATCH void func_801EEE9C(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        D_801EB4E0->flags_00 &= 0xBF;
+        func_800AEF98(0x18, 0);
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 #include "shared/Effect_StartPlaying.h"
 
@@ -28,17 +34,28 @@ MATCH void func_801EEF80(void) {
 
 #include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
 
-INCLUDE_ASM(func_801EF06C);
+MATCH void func_801EF06C(void) {
+    u8 temp_v0;
+
+    func_8014DAEC();
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        func_800AFC98(2, 4);
+        func_800A9820(g_BattleTargetSelector);
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF0E8(void) {
-    u8 temp_a0;
+    u8 count;
 
-    temp_a0 = g_SpadWork->word_08.byte.unk_09;
-    if ((temp_a0 & 0xFF) == 0x10) {
+    count = g_SpadWork->word_08.byte.unk_09;
+    if ((count & 0xFF) == 0x10) {
         SND_QueueSelectionFx(0x100);
         g_SpadWork->unk_02 += 1;
     } else {
-        g_SpadWork->word_08.byte.unk_09 = temp_a0 + 4;
+        g_SpadWork->word_08.byte.unk_09 = count + 4;
     }
     func_801EF1DC();
     func_8014DAEC();

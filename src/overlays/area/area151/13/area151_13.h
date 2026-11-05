@@ -7,12 +7,10 @@
 #include "overlays/area/world03.h"
 #include "work/area_spad.h"
 
-#define D_801F4D04 (D_801F4CE8 + 0x1Cu)
-#define D_801F4D05 (D_801F4CE8 + 0x1Du)
-#define D_801F5468 (D_801F4CE8 + 0x780u)
-#define D_801F5469 (D_801F4CE8 + 0x781u)
-#define D_801F546A (D_801F4CE8 + 0x782u)
-#define D_801F546B (D_801F4CE8 + 0x783u)
+#define D_801F4D04            (D_801F4CE8 + 0x1Cu)
+#define D_801F4D05            (D_801F4CE8 + 0x1Du)
+#define D_801F5468            (D_801F4CE8 + 0x780u)
+#define AREA_HUD_SPRITE_CELLS D_801F5468
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
@@ -48,9 +46,10 @@ void Area_DrawHudBanner(s16 x, s16 y);
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F54C0[6];
+#define AREA_HUD_MASK_TABLE D_801F54C0
 /* func_801F3948 */
-void                  Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
+void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 /* func_801F3E3C */
-void                  Area_DrawGradientDiamond(s16 x, s16 y);
+void Area_DrawGradientDiamond(s16 x, s16 y);
 
 #endif

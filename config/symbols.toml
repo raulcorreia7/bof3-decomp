@@ -343,6 +343,7 @@ BMagic_AllocEffect = { addr = 0x801EFE38, type = "func", source = "claims the fi
 Actor_Clear = { addr = 0x801EFE9C, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
 g_BMagicEffectFuncs = { addr = 0x801EFEEC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
+Effect_TickDownAndClear = { addr = 0x801EF338, type = "func", source = "byte-identical to Effect_TickDownAndClear in the shared header overlays/bmagic/Effect_TickDownAndClear.h" }
 ["emi/bmagic/magic059/03"]
 Effect_CountDownTimer = { addr = 0x801EF5C0, type = "func", source = "counts the effect timer down and finishes the effect at zero" }
 BMagic_AllocEffect = { addr = 0x801F0490, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
@@ -410,6 +411,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFCC8, source = "the module dispatcher index
 Effect_PlayOnZeroTick = { addr = 0x801EEE30, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
 g_BMagicEffectFuncs = { addr = 0x801F04F8, source = "the module dispatcher indexes it with the shared spad step byte" }
 
+Effect_TickDownAndClear = { addr = 0x801EFA50, type = "func", source = "byte-identical to Effect_TickDownAndClear in the shared header overlays/bmagic/Effect_TickDownAndClear.h" }
 ["emi/bmagic/magic070/03"]
 Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
 Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
@@ -2261,6 +2263,7 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4674, type = "func", source = "calls
 
 ["emi/world00/area036/13"]
 Actor_RunAreaStep = { addr = 0x801F2C30, type = "func", source = "clears the work reset flag and hands the work pointer to the area step" }
+Area_CheckStepTrigger = { addr = 0x801F2C64, type = "func", source = "the per-game-area step-trigger check func_801A8728 dispatches in Area_IsStepBlocked's path; the scenario entry Scene_CheckStepTrigger fills the same slot" }
 Actor_SnapToGround = { addr = 0x801F2D5C, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
 
 ["emi/world00/area037/13"]
@@ -2505,6 +2508,7 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "calls func_8014D978,
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 Actor_RunAreaStep = { addr = 0x801F2D80, type = "func", source = "byte-identical to Actor_RunAreaStep at emi/world03/area143/13@0x801F3C40" }
+Area_CheckStepTrigger = { addr = 0x801F2DB4, type = "func", source = "the per-game-area step-trigger check func_801A8728 dispatches in Area_IsStepBlocked's path; the scenario entry Scene_CheckStepTrigger fills the same slot" }
 Actor_SnapToGround = { addr = 0x801F2EE4, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
 
 ["emi/world03/area117/13"]
@@ -2562,6 +2566,7 @@ Area_ResetCameraOffsetY = { addr = 0x801F53D0, type = "func", source = "zeroes g
 
 ["emi/world03/area136/13"]
 Actor_WalkWhileWithinLimit = { addr = 0x801F2D68, type = "func", source = "walks the script actor one step along facing 5 and rewinds the script cursor while its y position plus the facing-5 y step is at most the per-scene limit table entry D_801448ED selects (func_801F2D68 in area136, func_801F4840 in area188)" }
+Area_SubCameraOffsetY2 = { addr = 0x801F3148, source = "subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_AddCameraOffsetY2 = { addr = 0x801F3170, source = "adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 
 ["emi/world03/area139/13"]
@@ -2821,6 +2826,7 @@ Area_ResetCameraOffsetY = { addr = 0x801F4930, type = "func", source = "zeroes g
 
 ["emi/world04/area189/13"]
 Actor_ClearVelocity = { addr = 0x801F5F20, type = "func", source = "byte-identical to Actor_ClearVelocity at emi/etc/game/00@0x801C5798; the caller func_801F5D20 clears the spad actor velocity members before it steps" }
+Char_DrainFatigue = { addr = 0x801F6024, type = "func", source = "the drain pass area189_13.h names: walks g_Characters, steps the fatigue field toward 9 and calls Char_RebuildStats (area030 wiki:data/records)" }
 
 ["emi/world04/area193/13"]
 Message_SetAnswerMessage = { addr = 0x801F2C70, type = "func", source = "stores the message id the answer table D_801F39FC holds for the menu choice D_801490C7 in g_MessageRequest" }

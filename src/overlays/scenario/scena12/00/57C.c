@@ -45,7 +45,12 @@ MATCH void func_801F7518(void) {
     SCENA12_START_SCRIPT();
 }
 
-INCLUDE_ASM(func_801F759C);
+MATCH void func_801F759C(void) {
+    func_801F75EC();
+    if ((g_GameStateIndex != 2) && (g_GameEntryState != 4)) {
+        func_80196070();
+    }
+}
 
 MATCH void func_801F75EC(void) {
     char* buffer;
@@ -213,7 +218,19 @@ MATCH void func_801FC7D4(void) {
     g_SceneState.state_04 = 1;
 }
 
-INCLUDE_ASM(func_801FC80C);
+MATCH s32 func_801FC80C(s32 arg0) {
+    if ((g_GameAreaId == 0x79) && (SYS_TestFlag(g_SceneFlags, 0) != 0)) {
+        if (arg0 <= 0x160000) {
+            Game_SetScriptActive();
+            D_80146875 = 0x3C;
+            D_80146874 = 2;
+            return 1;
+        }
+        /* Duplicate return node #5. Try simplifying control flow for better match */
+        return 0;
+    }
+    return 0;
+}
 
 INCLUDE_ASM(func_801FC890);
 
@@ -228,13 +245,25 @@ MATCH s32 func_801FCD38(void) {
 
 INCLUDE_ASM(func_801FCD58);
 
-INCLUDE_ASM(func_801FCDE0);
+MATCH void func_801FCDE0(void) {
+    EMI_LoaderStreamFamily(7U, 8U, 5U, 0U);
+    Party_BuildBattlers(0);
+    Party_JoinMember(CHAR_ID_NINA_ADULT);
+    Party_JoinMember(CHAR_ID_MOMO);
+    func_801C1630();
+}
 
 #include "overlays/scenario/Scene_JoinAdultNina.h"
 
 #include "overlays/scenario/Scene_JoinMomo.h"
 
-INCLUDE_ASM(func_801FCEB4);
+MATCH void func_801FCEB4(void) {
+    EMI_LoaderStreamFamily(7U, 8U, 5U, 0U);
+    Party_BuildBattlers(0);
+    Party_JoinMember(CHAR_ID_NINA_ADULT);
+    Party_JoinMember(CHAR_ID_MOMO);
+    func_801C1630();
+}
 
 MATCH void func_801FCF00(void) {
     EMI_LoaderStreamFamily(7U, 2U, 5U, 0U);
@@ -247,7 +276,13 @@ MATCH void Scene_JoinMomo_801FCF44(void) {
     SCENE_JOIN_MOMO();
 }
 
-INCLUDE_ASM(func_801FCF88);
+MATCH void func_801FCF88(void) {
+    EMI_LoaderStreamFamily(7U, 6U, 5U, 0U);
+    Party_BuildBattlers(0);
+    Party_JoinMember(CHAR_ID_MOMO);
+    Party_JoinMember(CHAR_ID_PECO);
+    func_801C1630();
+}
 
 #include "overlays/scenario/Scene_JoinPeco.h"
 

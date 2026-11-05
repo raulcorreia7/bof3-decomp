@@ -41,7 +41,14 @@ MATCH void func_801D1058(void) {
 
 INCLUDE_ASM(func_801D1094);
 
-INCLUDE_ASM(func_801D1124);
+MATCH void func_801D1124(void) {
+    if (EMI_LoaderIsReady() != 0) {
+        SND_PlayBgm((s32)D_801D1944, 0x64, 8);
+        D_801D1948 = 0;
+        D_801F294D += 1;
+    }
+    func_801D1250(0x32, 0x28);
+}
 
 MATCH void func_801D1184(void) {
     u8 count;

@@ -26,17 +26,17 @@ MATCH void func_801EEF34(void) {
 INCLUDE_ASM(func_801EEFBC);
 
 MATCH void func_801EF140(void) {
-    u8 temp_a0;
-    u8 temp_v0;
+    u8 count;
+    u8 timer;
 
-    temp_a0                          = g_SpadWork->word_08.byte.unk_09;
+    count                            = g_SpadWork->word_08.byte.unk_09;
     g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E - 0x60;
-    if ((temp_a0 & 0xFF) != 0x10) {
-        g_SpadWork->word_08.byte.unk_09 = temp_a0 + 1;
+    if ((count & 0xFF) != 0x10) {
+        g_SpadWork->word_08.byte.unk_09 = count + 1;
     }
-    temp_v0 = g_SpadWork->word_08.byte.timer_0A;
-    if (temp_v0 != 0x10) {
-        g_SpadWork->word_08.byte.timer_0A = temp_v0 + 2;
+    timer = g_SpadWork->word_08.byte.timer_0A;
+    if (timer != 0x10) {
+        g_SpadWork->word_08.byte.timer_0A = timer + 2;
     }
     if (g_SpadWork->word_3C.half.span_3E == BATTLE_ACTIVE_WORK->word_3C.half.span_3E) {
         g_SpadWork->unk_02 += 1;

@@ -1,17 +1,5 @@
 #include "game_00.h"
 
-/* ATTEMPT (insert/frame): the measured function matches instruction for
- * instruction except the frame: 40 bytes with `vars= 8` (`sw ra,0x20(sp)`,
- * `addiu sp,sp,-40`) against retail's 32 (`sw ra,0x18(sp)`, `addiu sp,sp,-32`).
- * The 8 bytes are two dead 4-byte slots; the only constructs that allocate
- * temps here are the two index multiplies `route_index_08 * 2` scaled by the
- * s32 element size (the sibling emi/etc/game/00@0x801A1AE4 has the same
- * `route * 2` index into an s32 table and the same dead `vars= 8` residual).
- * The matched in-unit twins func_801ABBA8 and func_8019B4A0 index the same
- * table through the FacingStep view (`g_FacingOffsets[idx].x/.y`), which
- * needs no index multiply in the source and folds to the same `sll
- * v0,v0,0x3; addu at,at,v0; lw .x/.y` addressing. No other change.
- */
 MATCH void func_801C2538(void) {
     u8  rate;
     u32 step;

@@ -17,11 +17,11 @@ MATCH void func_801EEEC0(void) {
 INCLUDE_ASM(func_801EEF04);
 
 MATCH void func_801EEFF8(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = count;
+    if (!(count & 0xFF)) {
         g_SpadWork->coord_x_34.raw        = D_801EB4E0->coord_x_34.raw;
         g_SpadWork->coord_y_38.raw        = D_801EB4E0->coord_y_38.raw;
         g_SpadWork->word_3C.word          = D_801EB4E0->word_3C.word + 0x04000000;
@@ -59,12 +59,12 @@ INCLUDE_ASM(func_801EF890);
 INCLUDE_ASM(func_801EF960);
 
 MATCH void func_801EFAB0(void) {
-    s32 temp_v1;
+    s32 level;
     u8  counter;
 
-    temp_v1 = g_SpadWork->unk_14;
-    if (temp_v1 >= 9) {
-        g_SpadWork->unk_14 = temp_v1 - 1;
+    level = g_SpadWork->unk_14;
+    if (level >= 9) {
+        g_SpadWork->unk_14 = level - 1;
     }
     if (g_FrameCount & 1) {
         counter                         = g_SpadWork->word_08.byte.unk_09 - 1;

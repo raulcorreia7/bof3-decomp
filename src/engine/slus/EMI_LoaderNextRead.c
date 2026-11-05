@@ -29,7 +29,6 @@ MATCH s32 EMI_LoaderNextRead(u8 slot) {
         g_EmiPayloadSector = first_sector;
     } else {
         g_EmiPayloadSector = g_EmiSlotSectors[slot];
-        /* Preserve the original compiler's slot-address register allocation. */
         slot_table         = D_80146844.slots - -slot;
         g_EmiBytesLeft     = slot_table->size;
         g_EmiLoadArg       = slot_table->load_arg;

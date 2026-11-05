@@ -93,7 +93,17 @@ MATCH void func_801EF70C(void) {
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
 
 /* Template: bmagic/magic040 func_801EF114; size 0x6C against retail 0x7C, first difference lbu v0,9(v1) at +0x0C. */
-INCLUDE_ASM(func_801EF7D4);
+MATCH void func_801EF7D4(void) {
+    u8 temp_v0;
+
+    g_SpadWork->word_08.byte.timer_0A += 1;
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if ((temp_v0 & 0xFF) == 0x18) {
+        D_801EB4E0->word_08.byte.unk_0B = 1;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF850(void) {
     u8 timer;
@@ -107,9 +117,30 @@ MATCH void func_801EF850(void) {
 
 #include "overlays/bmagic/Effect_CountDownTickerAndStep.h"
 
-INCLUDE_ASM(func_801EF8EC);
+MATCH void func_801EF8EC(void) {
+    g_SpadWork->word_08.byte.unk_09 -= 1;
+    g_SpadWork->word_08.byte.timer_0A -= 1;
+    if (g_SpadWork->word_08.byte.unk_09 == 0x10) {
+        D_801EB4E0->word_08.byte.unk_0B = 2;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
-INCLUDE_ASM(func_801EF974);
+MATCH void func_801EF974(void) {
+    u8 temp_v0;
+    u8 temp_v0_2;
+
+    temp_v0 = g_SpadWork->word_08.byte.unk_09;
+    if (temp_v0 != 0) {
+        g_SpadWork->word_08.byte.unk_09 = temp_v0 - 1;
+    }
+    temp_v0_2                         = g_SpadWork->word_08.byte.timer_0A - 1;
+    g_SpadWork->word_08.byte.timer_0A = temp_v0_2;
+    if (!(temp_v0_2 & 0xFF)) {
+        D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF9E0);
 
@@ -124,8 +155,27 @@ MATCH void func_801F0038(void) {
 
 #include "overlays/bmagic/Effect_NextStepOnLastTick.h"
 
-INCLUDE_ASM(func_801F0100);
+MATCH void func_801F0100(void) {
+    u8 temp_v0;
 
-INCLUDE_ASM(func_801F0154);
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->unk_14 = 0x20;
+        g_SpadWork->unk_20 = -1;
+        g_SpadWork->unk_02 += 1;
+    }
+}
+
+MATCH void func_801F0154(void) {
+    s32 temp_a1;
+
+    temp_a1                          = g_SpadWork->unk_14 + g_SpadWork->unk_20;
+    g_SpadWork->unk_14               = temp_a1;
+    g_SpadWork->word_3C.half.span_3E = (u16)g_SpadWork->word_3C.half.span_3E + temp_a1;
+    if (g_SpadWork->unk_14 < -0x10) {
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801F01A8);

@@ -26,6 +26,7 @@ extern char          D_801D0D7C[];
 extern Callback      D_801D96DC[];
 extern Callback      D_801D96F0[];
 extern Callback      D_801D96F8[];
+extern Callback      D_801D9700[];
 extern Callback      D_801D970C[];
 extern Callback      D_801D9720[];
 extern Callback      D_801D9734[];

@@ -27,7 +27,18 @@ INCLUDE_ASM(func_801EF270);
 
 #include "overlays/bmagic/Effect_CountUpAndStepAt120.h"
 
-INCLUDE_ASM(func_801EF3C4);
+MATCH void func_801EF3C4(void) {
+    u8 counter;
+
+    g_SpadWork->word_08.byte.unk_0B += 1;
+    g_SpadWork->unk_04 -= 1;
+    counter                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = counter;
+    if ((counter & 0xFF) == 0x88) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B = 0xFF;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF44C);
 
@@ -42,7 +53,17 @@ MATCH void func_801F0008(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0044);
+MATCH void func_801F0044(void) {
+    u8 temp_v0;
+
+    func_8014D978();
+    func_8014D290();
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        func_801E5988();
+    }
+}
 
 MATCH void func_801F009C(void) {
     u8 timer;
@@ -55,7 +76,16 @@ MATCH void func_801F009C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0104);
+MATCH void func_801F0104(void) {
+    u8 temp_v1;
+
+    func_801F0274();
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x70) {
+        func_801E5988();
+    }
+}
 
 MATCH void func_801F0158(void) {
     u8 timer;
@@ -79,7 +109,16 @@ MATCH void func_801F01C0(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0224);
+MATCH void func_801F0224(void) {
+    u8 temp_v0;
+
+    func_801F08AC();
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801F0274);
 

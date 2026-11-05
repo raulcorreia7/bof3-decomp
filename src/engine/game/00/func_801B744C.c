@@ -16,8 +16,6 @@ MATCH void func_801B744C(void) {
 
             dx                    = g_SpadWork->unk_0C * g_SpadWork->unk_09;
             dy                    = g_SpadWork->unk_10 * g_SpadWork->unk_09;
-            /* Constant addresses: retail reloads the scratchpad work pointer
-             * after these stores, which a symbol-based store does not force. */
             MEM(s32, 0x80149308u) = g_SpadWork->x.fixed + dx;
             MEM(s32, 0x8014930Cu) = g_SpadWork->y.fixed + dy;
             MEM(s16, 0x8014932Eu) = rate * 8;

@@ -3,8 +3,7 @@
 /* Steps g_BattleRowCursor over the party rows, asking func_801EF928 about each member's id. On
  * the first hit it sets bit 5 of g_BattleResult and steps g_BattleUiState; when no row hits it
  * resets g_BattleUiState and steps g_BattleUiStep.
- * Retail reaches g_BattleUiState (-1), the selected id D_801462E7 (+2) and g_BattleResult (+0x43)
- * from the g_BattleRowCursor address. needs: type, one record over 0x801462E3..0x80146328. */
+ * needs: type, one record over 0x801462E3..0x80146328. */
 MATCH void func_801EF054(void) {
     u8* first = &g_BattleRowCursor;
     u8* row;

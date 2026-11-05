@@ -50,8 +50,6 @@ INCLUDE_ASM(func_801EF5E0);
 
 INCLUDE_ASM(func_801EF64C);
 
-/* Follows BMAGIC_PROJECT_ACTOR_MATRIX (bmagic.h), but rot.vx starts at 0x400 and a halfword
- * table indexed by the work byte at +0x08 feeds the rotation. */
 MATCH void func_801EF72C(void) {
     SVECTOR pos;
     SVECTOR rot;

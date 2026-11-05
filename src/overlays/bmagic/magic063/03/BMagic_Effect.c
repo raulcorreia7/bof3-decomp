@@ -33,7 +33,13 @@ MATCH void func_801EF190(void) {
 
 INCLUDE_ASM(func_801EF1C8);
 
-INCLUDE_ASM(func_801EF2E4);
+MATCH void func_801EF2E4(void) {
+    if (g_SpadWork->word_08.byte.unk_0B == 0) {
+        func_800A9820(g_SpadWork->unk_04);
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF340(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 1, 1, D_801F1054);
@@ -56,8 +62,6 @@ INCLUDE_ASM(func_801EF704);
 
 INCLUDE_ASM(func_801EF880);
 
-/* Follows BMAGIC_PROJECT_ACTOR_MATRIX (bmagic.h) with the rotation computed from the work
- * halfword at +0x0E and the byte at +0x03; the pointer is a second global. */
 MATCH void func_801EF994(void) {
     SVECTOR pos;
     SVECTOR rot;

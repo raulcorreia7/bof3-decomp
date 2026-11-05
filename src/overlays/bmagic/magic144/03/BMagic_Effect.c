@@ -30,11 +30,11 @@ INCLUDE_ASM(func_801EF078);
 #include "overlays/bmagic/Effect_StepOnOwnTickFlag.h"
 
 MATCH void func_801EF154(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0 = g_SpadWork->word_08.byte.unk_09;
-    if (temp_v0 != 0) {
-        g_SpadWork->word_08.byte.unk_09 = temp_v0 - 1;
+    count = g_SpadWork->word_08.byte.unk_09;
+    if (count != 0) {
+        g_SpadWork->word_08.byte.unk_09 = count - 1;
     }
     if (g_SpadWork->word_08.byte.unk_0B == 0x80) {
         func_80196718(g_BattleSelectedActor);
@@ -64,7 +64,14 @@ INCLUDE_ASM(func_801EF5D4);
 
 INCLUDE_ASM(func_801EF654);
 
-INCLUDE_ASM(func_801EF6A4);
+MATCH void func_801EF6A4(void) {
+    g_SpadWork->word_08.byte.unk_09 += 1;
+    g_SpadWork->word_08.byte.timer_0A += 1;
+    if (g_SpadWork->word_08.byte.unk_09 == 0x19) {
+        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B |= 0x80;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF738(void) {
     g_SpadWork->word_08.byte.unk_09 -= 2;

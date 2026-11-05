@@ -71,7 +71,21 @@ MATCH void func_801EF35C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF3A8);
+MATCH void func_801EF3A8(void) {
+    u8 temp_v0;
+    u8 temp_v0_2;
+
+    temp_v0 = g_SpadWork->word_08.byte.unk_0B;
+    if (temp_v0 != 0) {
+        g_SpadWork->word_08.byte.unk_0B = temp_v0 - 1;
+    }
+    temp_v0_2                       = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0_2;
+    if (!(temp_v0_2 & 0xFF)) {
+        D_801EB4E0->word_08.byte.unk_0B = 0xFF;
+        func_801E5988();
+    }
+}
 
 /* resume: best 368/865 instructions differ (size 0xDCC vs 0xD84; the ternary tpage form, prologue and loop head are exact); first mismatch +0x80 (sp20 = 0 sinks past the y load and sp18 = 1 fills the skip-branch delay slot); next lever: one prim cursor pseudo created before the five cell derivations so they take s1-s4/s7 as retail does, then the permuter. */
 INCLUDE_ASM(func_801EF414);

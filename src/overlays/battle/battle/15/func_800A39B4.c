@@ -1,9 +1,5 @@
 #include "battle_15.h"
 
-/* candidate: the volatile-drop cell read (same shape as func_800A0898 in this
- * target) lets the prologue addiu sink into the first branch delay slot; the
- * record pin keeps the record in a1. Local object inspection equals the retail
- * object instruction for instruction (23/23). */
 MATCH void func_800A39B4(s16 delta, u8 battler_index) {
     s8* record;
     s8  value;

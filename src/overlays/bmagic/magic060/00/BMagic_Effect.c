@@ -27,7 +27,20 @@ MATCH void func_801EED68(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEE00);
+MATCH void func_801EEE00(void) {
+    u8 temp_v0;
+
+    if ((u8)g_BattleTargetSelector < 3U) {
+        func_801EF174();
+    } else {
+        func_801EF2DC();
+    }
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        g_SpadWork->step_01 += 1;
+    }
+}
 
 MATCH void func_801EEE84(void) {
     if (g_BattleTargetSelector < 3) {
@@ -85,7 +98,16 @@ MATCH void func_801EFF88(void) {
 
 #include "overlays/bmagic/Effect_ClearTimerNextStep.h"
 
-INCLUDE_ASM(func_801F0030);
+MATCH void func_801F0030(void) {
+    u8 temp_v1;
+
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x10) {
+        D_801EB4E0->word_08.byte.unk_0B = 1;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F0090(void) {
     PartyBattler* work;
@@ -114,7 +136,16 @@ MATCH void func_801F02CC(void) {
     }
 }
 
-INCLUDE_ASM(func_801F031C);
+MATCH void func_801F031C(void) {
+    u8 temp_v1;
+
+    temp_v1                         = g_SpadWork->word_08.byte.unk_09 + 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v1;
+    if ((temp_v1 & 0xFF) == 0x1E) {
+        D_801EB4E0->word_08.byte.unk_0B = 2;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801F037C(void) {
     PartyBattler* work;

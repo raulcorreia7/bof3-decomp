@@ -116,12 +116,12 @@ MATCH void func_801F0178(void) {
 INCLUDE_ASM(func_801F023C);
 
 MATCH void func_801F042C(void) {
-    u8 temp_v0;
+    u8 count;
 
     func_8014D978();
-    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
-    g_SpadWork->word_08.byte.unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    count                           = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = count;
+    if (!(count & 0xFF)) {
         g_SpadWork->flags_00 |= 0x20;
         g_SpadWork->unk_5C = 1;
         g_SpadWork->unk_5D = 0;
