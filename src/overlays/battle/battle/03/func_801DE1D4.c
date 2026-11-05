@@ -42,8 +42,8 @@ NON_MATCHING void func_801DE1D4(void) {
             }
             slot = Battle_AllocEffect(0, 7);
             memcpy(&g_BattleEffects[(u8)slot], &ENEMY_COMBATANT(index), 0x74);
-            g_BattleEffects[(u8)slot].target.enemy  = (EnemyBattler*)g_BattleEnemies + index;
-            g_Task                                  = (PartyBattler*)(g_BattleEnemies + index * 0x118);
+            g_BattleEffects[(u8)slot].target.enemy = (EnemyBattler*)g_BattleEnemies + index;
+            TASK_SET((g_BattleEnemies + index * 0x118));
             g_BattleEffects[(u8)slot].handler_index = 7;
             g_BattleEffects[(u8)slot].unk_06        = 0;
             g_BattleEffects[(u8)slot].mode          = 0;

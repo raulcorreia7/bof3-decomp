@@ -20,7 +20,7 @@ MATCH void func_801F2E1C(void) {
         g_ScriptVars[2]           = 2;
         previous                  = g_Task;
         WORLD00_AREA008_STATE_PTR = (volatile Actor*)&g_BattlePartyBattlers[1];
-        g_Task                    = (u8*)&g_BattlePartyBattlers[1];
+        TASK_SET(&g_BattlePartyBattlers[1]);
         Actor_SelectScript(1);
         D_801F53F4     = D_801F4680[RANDOM_MASK(3)];
         g_Task         = previous;

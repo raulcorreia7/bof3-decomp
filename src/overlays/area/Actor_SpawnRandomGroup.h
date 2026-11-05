@@ -14,7 +14,7 @@ MATCH void Actor_SpawnRandomGroup(void) {
     s32  coords[2];
     s32* cp;
 
-    if (D_80146871 & 1) {
+    if (g_SceneState.flags_01 & 1) {
         Actor_Clear();
         return;
     }

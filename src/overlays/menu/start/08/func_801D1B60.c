@@ -15,7 +15,7 @@ MATCH void func_801D1B60(void) {
     saved_work = TASK_BYTES;
     D_8014847E = (s8)D_80148655;
     kind       = D_801EC38C[(s8)D_80148655];
-    g_Task     = (struct Task*)g_BattlePartyBattlers;
+    TASK_SET(g_BattlePartyBattlers);
     D_801484A8 = (s16)kind;
     if ((D_8014504A == 0 && ((g_GameRequestFlags & 1) || g_GameAreaId == 189) && (func_801B6470(kind) & BYTE_MASK)) ||
         (D_8014504A != 0 && (func_801D2190() & BYTE_MASK))) {
@@ -23,8 +23,8 @@ MATCH void func_801D1B60(void) {
     } else {
         D_80148480 = 1;
     }
-    g_Task = (struct Task*)saved_work;
-    input  = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    TASK_SET(saved_work);
+    input = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
     if (input & PADLleft) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         D_80148654 = 0;

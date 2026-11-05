@@ -21,8 +21,8 @@ NON_MATCHING void Battle_AddEnemy(s32 entry_index, s32 enemy_index, s32 entry_va
             words_in += 4;
             words_out += 4;
         } while (words_in != words_end);
-        *words_out                      = *words_in;
-        g_Task                          = (u8*)&D_801EB630[enemy_index & BYTE_MASK];
+        *words_out = *words_in;
+        TASK_SET(&D_801EB630[enemy_index & BYTE_MASK]);
         ((EnemyBattler*)g_Task)->mode   = 0;
         ((EnemyBattler*)g_Task)->unk_04 = 0;
         ((EnemyBattler*)g_Task)->unk_03 = 0;

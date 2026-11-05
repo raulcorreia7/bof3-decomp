@@ -29,9 +29,9 @@ NON_MATCHING void func_801E8684(void) {
     u8            temp_v1_190;
     u8            temp_v1_31;
 
-    var_s0                            = SP_PTR(PartyBattler, 0x0);
-    var_s0                            = SP_REF(PartyBattler*, 0x44);
-    g_Task                            = (PartyBattler*)D_801EB4E0;
+    var_s0 = SP_PTR(PartyBattler, 0x0);
+    var_s0 = SP_REF(PartyBattler*, 0x44);
+    TASK_SET(D_801EB4E0);
     g_GameState                       = &g_BattlePartyBattlers[D_801EB4E0->slot];
     temp_v1_31                        = D_801EB4E0->slot;
     D_801EB4E0->unk_40                = 0;

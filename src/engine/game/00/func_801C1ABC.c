@@ -70,7 +70,7 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
         dst  = (u8*)g_BattlePartyBattlers;
         do {
             if ((&D_80144EE2)[code] == GAME_NONE) {
-                g_Task                  = (Actor*)dst;
+                TASK_SET(dst);
                 value                   = (&D_80144EE2)[code + 1];
                 (&D_80144EE2)[code + 1] = 0xFF;
                 (&D_80144EE2)[code]     = value;

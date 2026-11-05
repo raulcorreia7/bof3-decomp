@@ -38,7 +38,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                 break;
             }
         }
-        g_Task                                           = (Actor*)g_BattlePartyBattlers;
+        TASK_SET(g_BattlePartyBattlers);
         g_PartySize                                      = 1;
         D_80145E95                                       = 0;
         *(Character*)((u8*)g_BattlePartyBattlers + 0x74) = g_Characters[0];
@@ -89,7 +89,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                 work  = (u8*)addr;
                 off   = 0;
                 do {
-                    g_Task = (Actor*)work;
+                    TASK_SET(work);
                     *work |= 1;
                     *mask &= 0xFE;
                     g_Task->x.fixed  = 0;

@@ -12,7 +12,7 @@ MATCH void func_801A65A0(u8* script) {
 
     slot = *counter;
     if (slot < ENTITY_MAX) {
-        g_Task         = (Actor*)&g_Actors[slot];
+        TASK_SET(&g_Actors[slot]);
         g_CurrentActor = (Actor*)&g_Actors[slot];
         func_801A4AA8();
         func_801C1254(script[1], script[0xF]);

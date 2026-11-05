@@ -6,6 +6,6 @@ MATCH void Boss_EndBattle(void) {
     func_800AC844(0);
     entry          = func_800AC754(0);
     g_CurrentActor = entry;
-    g_Task         = (struct Task*)entry;
+    TASK_SET(entry);
     Actor_SelectScript(0);
 }

@@ -20,7 +20,7 @@ MATCH void func_801A18C8(Actor* record) {
                 g_GameEntryState = 7;
                 return;
             }
-            if ((D_80146871 & 0x40) == 0) {
+            if ((g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE) == 0) {
                 if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
                     g_Task->direction_08 = work->unk_79;
                     work->flags_74 |= ACTOR_FLAG_MOVING;

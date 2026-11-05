@@ -3,11 +3,11 @@
 MATCH void func_800C1B40(void) {
     PartyBattler* saved;
 
-    saved  = (PartyBattler*)g_Task;
-    g_Task = (struct Task*)(D_801EC2E0->target.bytes);
+    saved = (PartyBattler*)g_Task;
+    TASK_SET((D_801EC2E0->target.bytes));
     if (func_8014DAEC() & BYTE_MASK) {
         saved->timer = 0;
         saved->mode++;
     }
-    g_Task = (struct Task*)saved;
+    TASK_SET(saved);
 }

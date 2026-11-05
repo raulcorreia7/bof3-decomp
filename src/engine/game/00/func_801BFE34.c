@@ -19,8 +19,8 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
             kind        = 0;
             record      = (u8*)g_BattlePartyBattlers + offset;
             g_GameState = (GameState*)record;
-            g_Task      = (Actor*)record;
-            key         = record[0x79];
+            TASK_SET(record);
+            key = record[0x79];
             while (1) {
                 if (D_80144F5D[kind & BYTE_MASK] == key)
                     break;

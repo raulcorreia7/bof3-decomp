@@ -8,7 +8,7 @@ MATCH void func_801F2CF8(void) {
 
     actor       = g_Task;
     g_GameState = (GameState*)g_BattlePartyBattlers;
-    g_Task      = (Actor*)g_BattlePartyBattlers;
+    TASK_SET(g_BattlePartyBattlers);
     if (D_80145EE8 == 0xC && D_80145EDA == 1) {
         Actor_SelectScript(0x6E);
         g_Task = actor;

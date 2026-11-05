@@ -7,8 +7,8 @@ MATCH void Actor_DispatchAll(void) {
     count = 0;
     do {
         if (g_ActorSlots[count & BYTE_MASK].flags != 0) {
-            slot   = &g_ActorSlots[count & BYTE_MASK];
-            g_Task = (Actor*)slot;
+            slot = &g_ActorSlots[count & BYTE_MASK];
+            TASK_SET(slot);
             g_ActorHandlers[slot->type]();
         }
         count++;

@@ -20,8 +20,8 @@ NON_MATCHING void func_800ABCE0(s32 slot, u16 unit, s32 x, s32 y) {
     s32           unit_offset;
     s32           enemy_offset;
 
-    enemy        = &D_801EB630[slot & BYTE_MASK];
-    g_Task       = (u8*)enemy;
+    enemy = &D_801EB630[slot & BYTE_MASK];
+    TASK_SET(enemy);
     enemy->flags = 1;
     unit_offset  = (unit & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE;
     unit_id      = FIELD(u16, &D_800E405E, unit_offset);

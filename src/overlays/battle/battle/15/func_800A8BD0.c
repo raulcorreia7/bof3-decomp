@@ -5,10 +5,10 @@ MATCH void func_800A8BD0(void) {
     u8* saved;
 
     BATTLE_ACTIVE_PARTY.flags &= ~ACTOR_FLAG_HIDDEN;
-    work   = (u8*)D_801EB4E0;
-    saved  = TASK_BYTES;
-    g_Task = (struct Task*)work;
+    work  = (u8*)D_801EB4E0;
+    saved = TASK_BYTES;
+    TASK_SET(work);
     Actor_SelectScript((work[8] + 4) & BYTE_MASK);
-    g_Task = (struct Task*)saved;
+    TASK_SET(saved);
     func_801E5988();
 }

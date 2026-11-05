@@ -8,7 +8,7 @@ MATCH void func_801BFAC4(void) {
     while (i < (s32)g_PartySize) {
         work        = (u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE;
         g_GameState = (GameState*)work;
-        g_Task      = (Actor*)work;
+        TASK_SET(work);
         func_8014D978();
         i++;
     }

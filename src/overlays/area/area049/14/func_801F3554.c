@@ -8,14 +8,5 @@ MATCH void func_801F3554(void) {
     u8            selection;
     s32           result;
 
-    g_Task    = (struct Task*)&g_BattlePartyBattlers[2];
-    index     = D_80144F5A[2];
-    y         = g_BattlePartyBattlers[2].unk_30.signed_half;
-    x         = g_BattlePartyBattlers[2].unk_2E.signed_half;
-    selection = D_801F398C[index];
-    result    = func_8015CB18(4, 0, selection, x, y);
-    if ((u8)result != GAME_NONE) {
-        work         = (PartyBattler*)g_Task;
-        work->unk_0B = (u8)result;
-    }
+    AREA_PARTY_PROBE(2, 2, D_801F398C, 4);
 }
