@@ -45,13 +45,36 @@ MATCH void func_801EF380(void) {
 
 INCLUDE_ASM(func_801EF3E4);
 
-INCLUDE_ASM(func_801EF454);
+MATCH void func_801EF454(void) {
+    g_SpadWork->unk_44 -= 0x1000;
+    if ((s8)g_SpadWork->unk_5F == -0x80) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EF4B4);
 
 #include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
 
-INCLUDE_ASM(func_801EF58C);
+MATCH void func_801EF58C(void) {
+    u8 temp_v0;
+
+    temp_v0                         = g_SpadWork->word_08.byte.unk_09 - 1;
+    g_SpadWork->word_08.byte.unk_09 = temp_v0;
+    if (!(temp_v0 & 0xFF)) {
+        func_8014DAEC();
+        func_800AFC98(2, 4);
+        goto block_4;
+    }
+    if (func_8014DAEC() & 0xFF) {
+        func_800AFC98(2, 4);
+        g_SpadWork->word_08.byte.unk_09 = 0;
+    block_4:
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 MATCH void func_801EF648(void) {
     if (func_8014DAEC() & BYTE_MASK) {
