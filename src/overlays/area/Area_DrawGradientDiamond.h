@@ -79,14 +79,14 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     /* FAKE: volatile-drop keeps the original load and store order. */
     *MATCH_VOLATILE_PTR(u8, (primitive + 0x1E)) = 0xFFu;
 
-    *(s16*)(primitive + 8)    = (s16)(vx0 - 0x9E) + x;
-    *(s16*)(primitive + 10)   = (s16)(vy0 - 0x76) + y;
-    *(s16*)(primitive + 0x10) = (s16)((s16) * (s16*)(primitive + 0x10) - 0x9E) + x;
-    *(s16*)(primitive + 0x12) = (s16)((s16) * (s16*)(primitive + 0x12) - 0x76) + y;
-    *(s16*)(primitive + 0x18) = (s16)((s16) * (s16*)(primitive + 0x18) - 0x9E) + x;
-    *(s16*)(primitive + 0x1A) = (s16)((s16) * (s16*)(primitive + 0x1A) - 0x76) + y;
-    *(s16*)(primitive + 0x20) = (s16)((s16) * (s16*)(primitive + 0x20) - 0x9E) + x;
-    *(s16*)(primitive + 0x22) = (s16)((s16) * (s16*)(primitive + 0x22) - 0x76) + y;
+    ((POLY_G4*)primitive)->x0 = (s16)(vx0 - 0x9E) + x;
+    ((POLY_G4*)primitive)->y0 = (s16)(vy0 - 0x76) + y;
+    ((POLY_G4*)primitive)->x1 = (s16)((s16)((POLY_G4*)primitive)->x1 - 0x9E) + x;
+    ((POLY_G4*)primitive)->y1 = (s16)((s16)((POLY_G4*)primitive)->y1 - 0x76) + y;
+    ((POLY_G4*)primitive)->x2 = (s16)((s16)((POLY_G4*)primitive)->x2 - 0x9E) + x;
+    ((POLY_G4*)primitive)->y2 = (s16)((s16)((POLY_G4*)primitive)->y2 - 0x76) + y;
+    ((POLY_G4*)primitive)->x3 = (s16)((s16)((POLY_G4*)primitive)->x3 - 0x9E) + x;
+    ((POLY_G4*)primitive)->y3 = (s16)((s16)((POLY_G4*)primitive)->y3 - 0x76) + y;
 
     GFX_AddPrim(1u, 0x24u);
     PopMatrix();

@@ -8,11 +8,11 @@ MATCH void func_801DB554(void) {
     u16           limit;
 
     if (D_80144199 == 4) {
-        value = *(u8*)(D_8014688E + D_801E3208 * 152);
-        limit = *(u16*)(D_80146918 + D_801E3208 * 152);
-        if (*(u8*)(g_FishBestCatch + value) < limit) {
-            *(u8*)(g_FishBestCatch + value) = (u8)limit;
-            D_801E3214                      = 1;
+        value = g_Actors[D_801E3208].unk_06;
+        limit = g_Actors[D_801E3208].roll_90;
+        if (g_FishBestCatch[value] < limit) {
+            g_FishBestCatch[value] = (u8)limit;
+            D_801E3214             = 1;
         }
 
         SND_PlayCue(EMI_CUE_ID(1, 2));

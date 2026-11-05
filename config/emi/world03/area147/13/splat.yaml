@@ -13,7 +13,7 @@ segments:
       - [0x1F4, c, func_801F2DF4]
       - [0x334, c, func_801F2F34]
       - [0x3B0, c, func_801F2FB0]
-      - [0x4AC, c, func_801F30AC]
+      - [0x4AC, c, Area_AdvanceCountdown]
       - [0x53C, c, Area_Update]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data

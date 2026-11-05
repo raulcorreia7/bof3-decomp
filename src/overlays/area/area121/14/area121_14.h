@@ -55,7 +55,7 @@ void Area_DrawGradientDiamond(s16 x, s16 y);
 /* func_801F40DC */
 void Area_DrawHudBanner(s16 x, s16 y);
 void func_801F5380(void);
-void func_801F5798(void);
+void Area_StepChargeGauge(void);
 void func_801F5B90(void);
 
 /* The value of area update step in the shared Area_Update body. */

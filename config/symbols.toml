@@ -371,6 +371,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0C10, source = "the module dispatcher index
 
 ["emi/bmagic/magic063/03"]
 Effect_StartOnZeroTick = { addr = 0x801EEEE4, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
+Effect_FinishOnZeroTick = { addr = 0x801EF2E4, type = "func", source = "finishes the effect once its ticker byte 0x0B is zero: the side mask at work byte 0x04 goes to func_800A9820, the active battler's effect ticker byte is lowered by one and the effect work is cleared (func_801EF2E4 in magic063, func_801EF2A0 in magic146)" }
 g_BMagicEffectFuncs = { addr = 0x801F0400, source = "the module dispatcher indexes it with the shared spad step byte" }
 D_801F1054 = { addr = 0x801F1054, source = "func_801EF340 loads this word as the task-work pointer" }
 
@@ -777,6 +778,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF414, source = "the module dispatcher index
 ["emi/bmagic/magic146/03"]
 Effect_NextStepOnZeroTick = { addr = 0x801EEFD0, type = "func", source = "advances the step byte at +0x01 when the effect ticker byte at +0x0B is zero; one body shared with the other bmagic overlays" }
 Effect_PlayOnce = { addr = 0x801EF004, type = "func", source = "plays the effect the target selector chose and clears it" }
+Effect_FinishOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "finishes the effect once its ticker byte 0x0B is zero: the side mask at work byte 0x04 goes to func_800A9820, the active battler's effect ticker byte is lowered by one and the effect work is cleared (func_801EF2E4 in magic063, func_801EF2A0 in magic146)" }
 Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF520, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through Bmagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801EF900, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801EF964, type = "func", source = "clears the five leading fields of the current g_SpadWork record" }
@@ -2436,9 +2438,16 @@ Area_StepStreamSetDrawMode = { addr = 0x801F52A0, type = "func", source = "calls
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 
+["emi/world02/area095/13"]
+Area_UpdateCameraHeight = { addr = 0x801F3618, type = "func", source = "stores the ground height at the party position D_80145EC4/D_80145EC8 in g_AreaCameraHeight, 0x20 lower when the camera already sits at that height, and advances g_AreaCameraRefreshCount by 2 (func_801F3618 in area095/13, func_801F35A8 in area096/13)" }
+
+["emi/world02/area096/13"]
+Area_UpdateCameraHeight = { addr = 0x801F35A8, type = "func", source = "stores the ground height at the party position D_80145EC4/D_80145EC8 in g_AreaCameraHeight, 0x20 lower when the camera already sits at that height, and advances g_AreaCameraRefreshCount by 2 (func_801F3618 in area095/13, func_801F35A8 in area096/13)" }
+
 ["emi/world02/area098/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
+Area_AdvanceSpawnTimer = { addr = 0x801F3AA8, type = "func", source = "runs one frame of the spawn work: claims a slot every fourth frame of g_SpadWork +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_SpadWork +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)" }
 Area_FindFreeWorkRow = { addr = 0x801F4D80, type = "func", source = "finds the first work-window row whose byte is zero or returns NULL" }
 Area_ClearWorkColumn = { addr = 0x801F5240, type = "func", source = "clears one byte of each row in the actor window" }
 Area_ClaimSpawnSlot = { addr = 0x801F526C, type = "func", source = "claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots; one body shared with the other area overlays" }
@@ -2474,6 +2483,7 @@ Area_DrawGradientDiamond = { addr = 0x801F3F90, type = "func", source = "builds 
 Area_DrawHudBanner = { addr = 0x801F4188, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
 Actor_FacingToward = { addr = 0x801F4A34, type = "func", source = "returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)" }
 Actor_StopMoving = { addr = 0x801F5108, type = "func", source = "clears the actor velocity words and sets the game overlay byte to 3" }
+Area_StepChargeGauge = { addr = 0x801F5254, type = "func", source = "steps the press-and-hold gauge at g_SpadWork +0x0B between 0 and 0x40 while the re-arm timer at +0x0A is spent: the masked input D_80145AB6 held against g_InputHeld raises it by 1 per frame and a full 0x40 re-arms the timer to 0x1E, releasing lowers it by a level step of 1, 2 or 3, halved per parity when the state byte at +0x02 is set (func_801F5254 in area104/14, func_801F5798 in area121/14)" }
 Area_FinishTurnStep = { addr = 0x801F58E8, type = "func", source = "stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step" }
 Area_BeginTurnStep = { addr = 0x801F5988, type = "func", source = "begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)" }
 Area_RunTurnStep = { addr = 0x801F5AB4, type = "func", source = "runs one frame of a turning step: adds the velocity at +0x14 to the angle at +0x6C (masked to 0xFFF), counts the timer at +0x09 down and, at zero, sets state_01 to 1 and calls Area_FinishTurnStep, else calls the image's per-frame sync; Area_BeginTurnStep calls it" }
@@ -2547,6 +2557,7 @@ Actor_MoveByVelocity = { addr = 0x801F453C, type = "func", source = "moves the a
 Area_StepStreamSetDrawMode = { addr = 0x801F4754, type = "func", source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 Actor_FacingToward = { addr = 0x801F4F78, type = "func", source = "returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)" }
 Actor_StopMoving = { addr = 0x801F564C, type = "func", source = "clears the actor velocity words and sets the game overlay byte to 3" }
+Area_StepChargeGauge = { addr = 0x801F5798, type = "func", source = "steps the press-and-hold gauge at g_SpadWork +0x0B between 0 and 0x40 while the re-arm timer at +0x0A is spent: the masked input D_80145AB6 held against g_InputHeld raises it by 1 per frame and a full 0x40 re-arms the timer to 0x1E, releasing lowers it by a level step of 1, 2 or 3, halved per parity when the state byte at +0x02 is set (func_801F5254 in area104/14, func_801F5798 in area121/14)" }
 Area_FinishTurnStep = { addr = 0x801F5E2C, type = "func", source = "stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step" }
 Area_BeginTurnStep = { addr = 0x801F5ECC, type = "func", source = "begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)" }
 Area_RunTurnStep = { addr = 0x801F5FF8, type = "func", source = "runs one frame of a turning step: adds the velocity at +0x14 to the angle at +0x6C (masked to 0xFFF), counts the timer at +0x09 down and, at zero, sets state_01 to 1 and calls Area_FinishTurnStep, else calls the image's per-frame sync; Area_BeginTurnStep calls it" }
@@ -2607,9 +2618,11 @@ Actor_RunAreaStep = { addr = 0x801F2C34, type = "func", source = "clears the wor
 Actor_SnapToGround = { addr = 0x801F2DD4, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
 
 ["emi/world03/area147/13"]
+Area_AdvanceCountdown = { addr = 0x801F30AC, type = "func", source = "advances the countdown at g_SpadWork +0x30 by 0x10, moves the state byte to 1 and plays cue 0x201 when g_GameStateIndex is 0 once it reaches zero or below, then runs the frame update with the mode taken from the sign of g_SpadWork +0x32 (func_801F311C in area148/13, func_801F30AC in area147/13)" }
 Area_Update = { addr = 0x801F313C, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 
 ["emi/world03/area148/13"]
+Area_AdvanceCountdown = { addr = 0x801F311C, type = "func", source = "advances the countdown at g_SpadWork +0x30 by 0x10, moves the state byte to 1 and plays cue 0x201 when g_GameStateIndex is 0 once it reaches zero or below, then runs the frame update with the mode taken from the sign of g_SpadWork +0x32 (func_801F311C in area148/13, func_801F30AC in area147/13)" }
 Area_Update = { addr = 0x801F31AC, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 Actor_PlaceAtFocus = { addr = 0x801F39D4, type = "func", source = "copies the field focus point into the work position" }
 Message_ShowParty = { addr = 0x801F3A20, type = "func", source = "shows the tagged area slot message and enters game state 2" }
@@ -2823,6 +2836,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores 
 Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
 
 ["emi/world04/area188/13"]
+Area_AdvanceSpawnTimer = { addr = 0x801F3598, type = "func", source = "runs one frame of the spawn work: claims a slot every fourth frame of g_SpadWork +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_SpadWork +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)" }
 Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "clears one byte of each row in the actor window" }
 Area_ClaimSpawnSlot = { addr = 0x801F3DE0, type = "func", source = "claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots; one body shared with the other area overlays" }
 Area_StepSpawnSlots = { addr = 0x801F3E7C, type = "func", source = "ages every active spawn slot: counts the life byte down, shrinks the radius halfword the draw reads as the disc radius, frees the slot at zero and calls Area_DrawSpawnSlot; returns whether any slot was active, the scene steps ignore it; one body shared with the other area overlays" }

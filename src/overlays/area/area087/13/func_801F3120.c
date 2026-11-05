@@ -23,7 +23,7 @@ MATCH void func_801F3120(void) {
         i   = 0;
     scan:
         next = i;
-        if (key == *(u16*)((u8*)D_801F4DAC + next)) {
+        if (key == MEM(WorldMapKey, D_801F4DAC + next).key) {
             goto found; /* the found step also stores the key */
         }
         i = next + 4;

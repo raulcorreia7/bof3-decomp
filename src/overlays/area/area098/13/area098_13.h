@@ -42,6 +42,9 @@ extern s32  Area_StepSpawnSlots(void);
 /* func_801F53BC */
 extern void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
 
+/* The per-image spawn step Area_AdvanceSpawnTimer runs between the slot claim and the slot pass. */
+#define AREA_SPAWN_TICK             func_801F5940
+
 #define AREA_SPAWN_SLOT_LIFE        0x10
 #define AREA_SPAWN_SLOT_RADIUS      0x100
 #define AREA_SPAWN_SLOT_CORE_SHADE  0x40

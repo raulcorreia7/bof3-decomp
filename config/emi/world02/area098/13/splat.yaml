@@ -23,7 +23,7 @@ segments:
       - [0xC78, c, func_801F3878]
       - [0xD10, c, func_801F3910]
       - [0xD94, c, func_801F3994]
-      - [0xEA8, c, func_801F3AA8]
+      - [0xEA8, c, Area_AdvanceSpawnTimer]
       - [0xF5C, c, func_801F3B5C]
       - [0xFD4, c, func_801F3BD4]
       - [0x10DC, c, func_801F3CDC]

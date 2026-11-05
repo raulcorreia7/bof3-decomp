@@ -3,7 +3,7 @@
 MATCH void func_801F395C(void) {
     Actor* scratch;
     /* FAKE: value pinned to v0. */
-    MATCH_REG(s32, armed, "v0");
+    s32    armed;
 
     scratch = g_SpadWork;
     scratch->unk_30 += 0xA;
