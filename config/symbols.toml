@@ -2310,6 +2310,9 @@ Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "spawns on
 Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "moves the actor by the projected velocity when the tile is classified" }
 Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 
+["emi/world00/area020/13"]
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
+
 ["emi/world00/area021/13"]
 Message_SetAnswerMessage = { addr = 0x801F2C6C, type = "func", source = "stores the message id the answer table D_801F33B4 holds for the menu choice D_801490C7 in g_MessageRequest" }
 
@@ -2325,6 +2328,9 @@ Area_AddCameraOffsetY20 = { addr = 0x801F3258, type = "func", source = "adds 0x1
 
 ["emi/world00/area028/13"]
 g_RingScreenPoints = { addr = 0x800E4A04, source = "position_ring.c indexes the screen-point ring by byte offset 0x4A04 from base 0x800E0000" }
+
+["emi/world00/area029/13"]
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
 
 ["emi/world00/area032/13"]
 GFX_AddPrim = { addr = 0x8014E5A0, type = "func", source = "appends the current primitive to one OT head - marker_work's cell draw calls it" }
@@ -2433,6 +2439,12 @@ Actor_SnapToGround = { addr = 0x801F3014, type = "func", source = "snaps the act
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 
+["emi/world01/area063/13"]
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
+
+["emi/world01/area064/13"]
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
+
 ["emi/world01/area065/13"]
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
 Actor_GrowAndSetStep3 = { addr = 0x801F325C, type = "func", source = "grows the actor scale at offset 0x40 by 0x2000 each frame and sets the handler index at byte 0x01 to 3 when the timer at byte 0x09 expires (area065)" }
@@ -2457,6 +2469,12 @@ Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "stores 
 ["emi/world01/area068/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
+
+["emi/world01/area072/13"]
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
+
+["emi/world01/area073/13"]
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
 
 ["emi/world01/area074/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
@@ -2598,6 +2616,9 @@ GFX_DrawShadedDisc = { addr = 0x801F3D90, type = "func", source = "fans 32 POLY_
 Message_ClearRequest = { addr = 0x801F4320, type = "func", source = "clears the area request slot and resets the game-overlay state bytes when the selection byte is clear" }
 Message_Clear = { addr = 0x801F4360, type = "func", source = "clears the message request and sets the game overlay state bytes when the menu choice is zero" }
 
+["emi/world02/area110/13"]
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
+
 ["emi/world02/area111/13"]
 Message_SelectAnswer = { addr = 0x801F33D0, type = "func", source = "stores the selected or idle area request id the selection byte picks" }
 
@@ -2687,9 +2708,13 @@ Area_FinishTurnStep = { addr = 0x801F5E2C, type = "func", source = "stores direc
 Area_BeginTurnStep = { addr = 0x801F5ECC, type = "func", source = "begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)" }
 Area_RunTurnStep = { addr = 0x801F5FF8, type = "func", source = "runs one frame of a turning step: adds the velocity at +0x14 to the angle at +0x6C (masked to 0xFFF), counts the timer at +0x09 down and, at zero, sets state_01 to 1 and calls Area_FinishTurnStep, else calls the image's per-frame sync; Area_BeginTurnStep calls it" }
 
+["emi/world03/area124/13"]
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
+
 ["emi/world03/area125/13"]
 Area_FindFreeWorkRow = { addr = 0x801F3348, type = "func", source = "finds the first work-window row whose byte is zero or returns NULL" }
 Area_ClearWorkColumn = { addr = 0x801F3384, type = "func", source = "clears one byte of each row in the actor window" }
+Area_SpawnWeightedActor = { addr = 0x801F3504, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
 
 ["emi/world03/area130/13"]
 Area_DrawSpinTriangle = { addr = 0x801F2E30, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }

@@ -27,7 +27,7 @@ void Area_SetCellCode(s16 column, s16 row, u8 code);
 void Area_ProjectPoint(s32* pos, long* screen_xy);
 void func_801E0C80(s32 graphic, s32 layer);
 u8*  func_801E0DCC(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite_y);
-void func_801F2C04(void);
+void Area_SpawnWeightedActor(void);
 /* func_801F2C4C */
 void Message_SelectAnswerValue(void);
 void func_801F2D1C(void);

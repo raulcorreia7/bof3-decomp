@@ -1,12 +1,12 @@
 /* Weighted random actor spawn: picks a row from the D_801F2DCC weights, hides
  * the first eight Actor rows except the pick, places it at the
  * D_801F2DBC/D_801F2DBD coordinate pair with the Area_SampleHeight height, and
- * steps D_80143F22 from D_80145FB8. One definition shared by the six
- * world00/world01/world02 area overlays (emi/world00/area029/13 and emi/world01/
- * area063/13, area064/13, area072/13, area073/13 and emi/world02/area110/13) at
- * 0x801F2C04; every change
- * here must verify every member. */
-/* func_801F2C04 (area029/13), func_801F2C04 (area063/13), func_801F2C04 (area064/13), func_801F2C04 (area072/13), func_801F2C04 (area073/13), func_801F2C04 (area110/13) */
+ * steps D_80143F22 from D_80145FB8. One definition shared by nine area
+ * overlays: emi/world00/area029/13, emi/world01/area063/13, area064/13,
+ * area072/13, area073/13 and emi/world02/area110/13 at 0x801F2C04;
+ * emi/world03/area125/13 at 0x801F3504; emi/world00/area020/13 and
+ * emi/world03/area124/13 carry retargeted-tables copies. Every change here
+ * must verify every member. */
 
 s16 Area_SampleHeight(s32 x, s32 y);
 
@@ -17,7 +17,7 @@ extern u8  D_801F2DCC[];
 extern s16 D_80143F22;
 extern u16 D_80145FB8;
 
-MATCH void func_801F2C04(void) {
+MATCH void Area_SpawnWeightedActor(void) {
     u8  roll;
     s32 count;
     u8  weight;
