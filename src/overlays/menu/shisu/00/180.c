@@ -149,8 +149,19 @@ MATCH void func_801D18E4(void) {
     *count     = value + 1;
 }
 
-INCLUDE_ASM(func_801D1910);
+MATCH void func_801D1910(void) {
+    if ((D_801DA0C6 != 0) && (D_801DA04E != 0)) {
+        D_801DA0C1 = 3;
+        D_801DA049 = 3;
+        {
+            u8* step = &D_80148652;
 
+            *step += 1;
+        }
+    }
+}
+
+/* 7 differing: the copy block loads D_80148652 and the D_801DA0A7 source late (v0 reused after the D_801DA0C1/D_801DA049 stores); the draft hoists both early (v1/t1). */
 INCLUDE_ASM(func_801D1964);
 
 INCLUDE_ASM(func_801D1A20);

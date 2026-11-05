@@ -26,7 +26,7 @@ MATCH void func_801EF000(void) {
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_SpadWork);
 }
 
-INCLUDE_ASM(func_801EF06C);
+#include "overlays/bmagic/Effect_SelectTargetAndAdvance.h"
 
 INCLUDE_ASM(func_801EF0F8);
 

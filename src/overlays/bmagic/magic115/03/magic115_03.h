@@ -5,6 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern Callback D_801EF8D0[];
+
+extern Callback D_801EF8C0[];
+
 extern MagicTaskFuncs D_801EEC04;
 
 #endif

@@ -4,11 +4,11 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC1C.h"
+#include "overlays/bmagic/Effect_DispatchHandlerSlot1.h"
 
 INCLUDE_ASM(func_801EEC94);
 
-#include "overlays/bmagic/Effect_CountDownTimerLoadCounter.h"
+#include "overlays/bmagic/Effect_ReplacePaletteFade.h"
 
 INCLUDE_ASM(func_801EEFB4);
 

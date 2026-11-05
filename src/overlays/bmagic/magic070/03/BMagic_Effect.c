@@ -8,7 +8,7 @@ INCLUDE_ASM(func_801EEC28);
 
 INCLUDE_ASM(func_801EED38);
 
-#include "overlays/bmagic/func_801EEFA4.h"
+#include "overlays/bmagic/Effect_ReplacePaletteFade.h"
 
 INCLUDE_ASM(func_801EF04C);
 

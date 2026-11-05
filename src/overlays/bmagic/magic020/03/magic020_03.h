@@ -5,14 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-typedef struct BattleHandlerTable6 {
-    Callback handlers[6];
-} BattleHandlerTable6;
-
-ASSERT_SIZE(BattleHandlerTable6, 0x18);
-
 extern BattleHandlerTable3 D_801EEC3C;
 
-extern BattleHandlerTable6 D_801EEC04;
+extern BmagicEffectFuncs D_801EEC04;
 
 #endif
