@@ -30,12 +30,12 @@ MATCH void func_801EF080(void) {
         g_Task->unk_0C = 0x20000;
         g_Task->unk_10 = 0;
         func_801DD350(g_Task);
-        g_Task->coord_x_34.raw       = D_801EB4E0->coord_x_34.raw + g_Task->unk_0C;
-        g_Task->coord_y_38.raw       = D_801EB4E0->coord_y_38.raw + g_Task->unk_10;
-        g_Task->word_3C.half.span_3E = (u16)D_801EB4E0->word_3C.half.span_3E + 0x100;
-        g_Task->unk_0B               = rand() & 7;
-        g_Task->unk_09               = 0x10;
-        g_Task->timer                = 0;
+        g_Task->x.raw     = D_801EB4E0->x.raw + g_Task->unk_0C;
+        g_Task->y.raw     = D_801EB4E0->y.raw + g_Task->unk_10;
+        g_Task->z.half.hi = (u16)D_801EB4E0->z.half.hi + 0x100;
+        g_Task->unk_0B    = rand() & 7;
+        g_Task->unk_09    = 0x10;
+        g_Task->timer     = 0;
         g_Task->step += 1;
     }
 }

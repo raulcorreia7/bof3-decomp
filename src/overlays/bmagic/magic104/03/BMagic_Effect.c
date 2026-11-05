@@ -132,8 +132,8 @@ MATCH void func_801F02F4(void) {
 
     work = g_Task;
     if (work->timer == 0) {
-        work->unk_09               = 8;
-        work->word_3C.half.span_3E = work->word_3C.half.span_3E + 0x200;
+        work->unk_09    = 8;
+        work->z.half.hi = work->z.half.hi + 0x200;
         Bmagic_NextStep();
     } else {
         work->timer = work->timer - 1;
@@ -148,10 +148,10 @@ MATCH void func_801F034C(void) {
     func_801EFA54();
     func_801F03C4();
     PopMatrix();
-    next                         = g_Task->unk_09 - 1;
-    span                         = (u16)(g_Task->word_3C.half.span_3E - 0x40);
-    g_Task->unk_09               = next;
-    g_Task->word_3C.half.span_3E = span;
+    next              = g_Task->unk_09 - 1;
+    span              = (u16)(g_Task->z.half.hi - 0x40);
+    g_Task->unk_09    = next;
+    g_Task->z.half.hi = span;
     if (!(next & 0xFF)) {
         D_801EB4E0->unk_0B = g_Task->unk_0B;
         func_801E5988();

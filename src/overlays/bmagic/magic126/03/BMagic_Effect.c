@@ -82,15 +82,15 @@ MATCH void func_801EFB74(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         SND_QueueSelectionFx(0x100);
-        work                 = g_Task;
-        actor                = D_801EB4E0;
-        work->coord_x_34.raw = actor->coord_x_34.raw;
-        work->coord_y_38.raw = actor->coord_y_38.raw;
-        z                    = actor->word_3C.word;
-        work->unk_0B         = 0;
-        work->word_3C.word   = z;
-        g_Task->unk_09       = 0x14;
-        g_Task->timer        = 0;
+        work           = g_Task;
+        actor          = D_801EB4E0;
+        work->x.raw    = actor->x.raw;
+        work->y.raw    = actor->y.raw;
+        z              = actor->z.raw;
+        work->unk_0B   = 0;
+        work->z.raw    = z;
+        g_Task->unk_09 = 0x14;
+        g_Task->timer  = 0;
         g_Task->step += 1;
     }
 }

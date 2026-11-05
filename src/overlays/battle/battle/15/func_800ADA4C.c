@@ -25,7 +25,7 @@ MATCH void func_800ADA4C(void) {
     work                     = (PartyBattler*)g_Task;
     work->unk_4B             = 0xFF;
     slotp                    = (PartyBattler*)g_Task;
-    work->word_3C.word       = 0;
+    work->z.raw              = 0;
     pair                     = &D_801485CA;
     base                     = (u8*)g_BattleTargetRows;
     row                      = base + ((*pair + slotp->unk_09) * 4);

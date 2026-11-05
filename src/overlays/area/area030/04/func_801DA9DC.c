@@ -35,7 +35,7 @@ NON_MATCHING void func_801DA9DC(void) {
         FISHING_STATE->sub_index_03  = 0U;
         return;
     }
-    if (Area_SampleHeight(g_ActorSlots[0].x.fixed, g_ActorSlots[0].y.fixed) >= g_ActorSlots[0].z.part.integer) {
+    if (Area_SampleHeight(g_ActorSlots[0].x.fixed, g_ActorSlots[0].y.fixed) >= g_ActorSlots[0].depth.part.integer) {
         chance = D_801E3210->unk_11;
         if (((RANDOM_MASK(0xF)) < chance) && !(g_FrameCount & 0xF)) {
             g_ActorSlots[0].step_0C      = 0;
@@ -50,7 +50,7 @@ NON_MATCHING void func_801DA9DC(void) {
             FISHING_STATE->sub_index_03  = 0U;
             return;
         }
-        g_ActorSlots[0].z.part.integer = Area_SampleHeight(g_ActorSlots[0].x.fixed, g_ActorSlots[0].y.fixed);
+        g_ActorSlots[0].depth.part.integer = Area_SampleHeight(g_ActorSlots[0].x.fixed, g_ActorSlots[0].y.fixed);
         goto box_16; /* joins the common update calls */
     }
 box_16:

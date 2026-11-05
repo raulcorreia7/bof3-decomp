@@ -100,11 +100,11 @@ MATCH void func_801EF720(void) {
     g_Task->unk_5E -= 8;
     g_Task->unk_5F -= 8;
     if ((s8)g_Task->unk_5D == -0x80) {
-        work                 = g_Task;
-        source               = BATTLE_ACTIVE_WORK;
-        work->coord_x_34.raw = source->coord_x_34.raw;
-        work->coord_y_38.raw = source->coord_y_38.raw;
-        work->word_3C.word   = source->word_3C.word;
+        work        = g_Task;
+        source      = BATTLE_ACTIVE_WORK;
+        work->x.raw = source->x.raw;
+        work->y.raw = source->y.raw;
+        work->z.raw = source->z.raw;
         work->step += 1;
     }
 }
@@ -142,17 +142,17 @@ MATCH void func_801EF928(void) {
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        g_Task->unk_5C       = 1;
-        g_Task->unk_5D       = (u8) - ((g_Task->unk_0B + 1) * 0x14);
-        g_Task->unk_5E       = (u8) - ((g_Task->unk_0B + 1) * 0x14);
-        g_Task->unk_5F       = (u8) - ((g_Task->unk_0B + 1) * 0x14);
-        g_Task->unk_2B       = 0;
-        g_Task->unk_27       = D_801EB4E0->unk_27;
-        work                 = g_Task;
-        source               = BATTLE_ACTIVE_WORK;
-        work->coord_x_34.raw = source->coord_x_34.raw;
-        work->coord_y_38.raw = source->coord_y_38.raw;
-        work->word_3C.word   = source->word_3C.word;
+        g_Task->unk_5C = 1;
+        g_Task->unk_5D = (u8) - ((g_Task->unk_0B + 1) * 0x14);
+        g_Task->unk_5E = (u8) - ((g_Task->unk_0B + 1) * 0x14);
+        g_Task->unk_5F = (u8) - ((g_Task->unk_0B + 1) * 0x14);
+        g_Task->unk_2B = 0;
+        g_Task->unk_27 = D_801EB4E0->unk_27;
+        work           = g_Task;
+        source         = BATTLE_ACTIVE_WORK;
+        work->x.raw    = source->x.raw;
+        work->y.raw    = source->y.raw;
+        work->z.raw    = source->z.raw;
         work->step += 1;
     }
 }

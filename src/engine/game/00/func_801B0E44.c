@@ -61,7 +61,7 @@ NON_MATCHING s32 func_801B0E44(void) {
                 x = ((s16*)pos2)[-2];
                 y = ((s16*)pos2)[-1];
             } else {
-                diff = g_Task->z.part.integer - (s16)result;
+                diff = g_Task->depth.part.integer - (s16)result;
                 if (diff < 0) {
                     diff = -diff;
                 }

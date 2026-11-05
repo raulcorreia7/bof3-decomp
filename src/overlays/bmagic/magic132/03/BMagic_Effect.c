@@ -51,8 +51,8 @@ MATCH void func_801EF324(void) {
     work         = g_Task;
     count        = work->unk_09 - 1;
     work->unk_09 = count;
-    work->coord_x_34.raw += work->unk_0C;
-    work->coord_y_38.raw += work->unk_10;
+    work->x.raw += work->unk_0C;
+    work->y.raw += work->unk_10;
     if (count == 0) {
         g_Task->step++;
     }

@@ -126,17 +126,17 @@ MATCH void func_801EFE90(void) {
     PartyBattler* actor = D_801EB4E0;
     s32           z;
 
-    work->coord_x_34.raw = actor->coord_x_34.raw;
-    work->coord_y_38.raw = actor->coord_y_38.raw;
-    z                    = actor->word_3C.word;
-    work->unk_5D         = 0x10;
-    work->word_3C.word   = z;
-    g_Task->unk_5E       = 0x10;
-    g_Task->unk_5F       = 0x24;
-    g_Task->unk_04       = 0;
-    g_Task->unk_0B       = 0;
-    g_Task->unk_09       = 0;
-    g_Task->timer        = 0x1E;
+    work->x.raw    = actor->x.raw;
+    work->y.raw    = actor->y.raw;
+    z              = actor->z.raw;
+    work->unk_5D   = 0x10;
+    work->z.raw    = z;
+    g_Task->unk_5E = 0x10;
+    g_Task->unk_5F = 0x24;
+    g_Task->unk_04 = 0;
+    g_Task->unk_0B = 0;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0x1E;
     g_Task->step += 1;
 }
 
@@ -192,16 +192,16 @@ MATCH void func_801F0BA8(void) {
     PartyBattler* work;
     s32           value;
 
-    g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
-    g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
-    g_Task->word_3C.word   = D_801EB4E0->word_3C.word;
-    value                  = rand() & 0x1F;
-    work                   = g_Task;
-    work->unk_5D           = 0x10;
-    work->unk_0C           = value;
-    g_Task->unk_0B         = 0;
-    g_Task->unk_09         = 0;
-    g_Task->timer          = 4;
+    g_Task->x.raw  = D_801EB4E0->x.raw;
+    g_Task->y.raw  = D_801EB4E0->y.raw;
+    g_Task->z.raw  = D_801EB4E0->z.raw;
+    value          = rand() & 0x1F;
+    work           = g_Task;
+    work->unk_5D   = 0x10;
+    work->unk_0C   = value;
+    g_Task->unk_0B = 0;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 4;
     g_Task->step += 1;
 }
 
@@ -240,12 +240,12 @@ MATCH void func_801F11E0(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
-        g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
-        g_Task->word_3C.word   = D_801EB4E0->word_3C.word;
-        g_Task->unk_0B         = rand() & 0xF;
-        g_Task->unk_09         = 0;
-        g_Task->timer          = 0;
+        g_Task->x.raw  = D_801EB4E0->x.raw;
+        g_Task->y.raw  = D_801EB4E0->y.raw;
+        g_Task->z.raw  = D_801EB4E0->z.raw;
+        g_Task->unk_0B = rand() & 0xF;
+        g_Task->unk_09 = 0;
+        g_Task->timer  = 0;
         g_Task->step += 1;
     }
 }
@@ -282,12 +282,12 @@ MATCH void func_801F1CCC(void) {
     PartyBattler* actor = D_801EB4E0;
     s32           z;
 
-    work->coord_x_34.raw = actor->coord_x_34.raw;
-    work->coord_y_38.raw = actor->coord_y_38.raw;
-    z                    = actor->word_3C.word;
-    work->unk_09         = 0x10;
-    work->unk_14         = 0x100;
-    work->word_3C.word   = z;
+    work->x.raw  = actor->x.raw;
+    work->y.raw  = actor->y.raw;
+    z            = actor->z.raw;
+    work->unk_09 = 0x10;
+    work->unk_14 = 0x100;
+    work->z.raw  = z;
     g_Task->step += 1;
 }
 

@@ -311,8 +311,8 @@ MATCH void func_801F0FA4(void) {
     u8 value;
 
     if (g_FrameCount & 1) {
-        g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw;
-        g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw;
+        g_Task->x.raw = D_801EB4E0->x.raw;
+        g_Task->y.raw = D_801EB4E0->y.raw;
         func_8014DAEC();
         value          = g_Task->unk_09 - 1;
         g_Task->unk_09 = value;
@@ -321,8 +321,8 @@ MATCH void func_801F0FA4(void) {
             g_Task->step += 1;
         }
     } else {
-        g_Task->coord_x_34.raw = D_801EB4E0->coord_x_34.raw + g_Task->unk_0C;
-        g_Task->coord_y_38.raw = D_801EB4E0->coord_y_38.raw + g_Task->unk_10;
+        g_Task->x.raw = D_801EB4E0->x.raw + g_Task->unk_0C;
+        g_Task->y.raw = D_801EB4E0->y.raw + g_Task->unk_10;
     }
 }
 

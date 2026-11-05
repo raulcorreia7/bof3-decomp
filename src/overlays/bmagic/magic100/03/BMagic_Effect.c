@@ -18,14 +18,14 @@ NON_MATCHING void func_801EEC70(void) {
     u32           value;
     s32           span;
 
-    src                    = BATTLE_ACTIVE_WORK;
-    g_Task->facing         = src->facing;
-    g_Task->coord_x_34.raw = src->coord_x_34.raw;
-    g_Task->coord_y_38.raw = src->coord_y_38.raw;
-    span                   = g_BattleSelectedActor->word_3C.word;
-    g_Task->unk_09         = 0;
-    g_Task->word_3C.word   = span;
-    g_Task->unk_0B         = 0;
+    src            = BATTLE_ACTIVE_WORK;
+    g_Task->facing = src->facing;
+    g_Task->x.raw  = src->x.raw;
+    g_Task->y.raw  = src->y.raw;
+    span           = g_BattleSelectedActor->z.raw;
+    g_Task->unk_09 = 0;
+    g_Task->z.raw  = span;
+    g_Task->unk_0B = 0;
     g_Task->mode += 1;
     offset  = (Battle_AllocEffect(1, 0xA) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     counter = 0;
@@ -77,7 +77,7 @@ INCLUDE_ASM(func_801EF0D8);
 
 INCLUDE_ASM(func_801EF1DC);
 
-/* Spin step: moves coord_x_34/coord_y_38 by unk_0C/unk_10, raises span_3E by 0x40, turns unk_20 by +-0x200 (mod 0x1000, direction unk_0B & 1), counts unk_0A down. Tried the m2c if/else into a s32/u32/u8 local, a ternary and in-place
+/* Spin step: moves x/y by unk_0C/unk_10, raises span_3E by 0x40, turns unk_20 by +-0x200 (mod 0x1000, direction unk_0B & 1), counts unk_0A down. Tried the m2c if/else into a s32/u32/u8 local, a ternary and in-place
  * updates: first differing instruction addiu v0,v0,512 retail against addiu a0,v0,512 (retail keeps the angle in v0, the candidate allocates a0). */
 INCLUDE_ASM(func_801EF358);
 
@@ -92,9 +92,9 @@ MATCH void func_801EF434(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    pos.vx = (g_Task->coord_x_34.raw >> 9) - 0x4000;
-    pos.vy = (g_Task->coord_y_38.raw >> 9) - 0x4000;
-    pos.vz = -(g_Task->word_3C.half.span_3E + 0x100) / 2;
+    pos.vx = (g_Task->x.raw >> 9) - 0x4000;
+    pos.vy = (g_Task->y.raw >> 9) - 0x4000;
+    pos.vz = -(g_Task->z.half.hi + 0x100) / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
@@ -118,12 +118,12 @@ NON_MATCHING void func_801EF8E8(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    pos.vx = (work->coord_x_34.raw >> 9) - 0x4000;
-    pos.vy = (work->coord_y_38.raw >> 9) - 0x4000;
+    pos.vx = (work->x.raw >> 9) - 0x4000;
+    pos.vy = (work->y.raw >> 9) - 0x4000;
     if (work->step < 3) {
-        height = -work->word_3C.half.span_3E;
+        height = -work->z.half.hi;
     } else {
-        height = -(s16)Area_SampleHeight(work->coord_x_34.raw, work->coord_y_38.raw);
+        height = -(s16)Area_SampleHeight(work->x.raw, work->y.raw);
     }
     pos.vz = height / 2;
     RotTrans(&pos, &matrix.t, &flags);

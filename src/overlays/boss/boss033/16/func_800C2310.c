@@ -12,19 +12,19 @@ MATCH void func_800C2310(void) {
         battler = &g_BattleActiveBattler;
         index   = *battler;
         work    = (PartyBattler*)g_Task;
-        delta_x = D_801EB630[index - 3].coord_x_34 - work->coord_x_34.raw;
+        delta_x = D_801EB630[index - 3].x - work->x.raw;
         if (delta_x < 0) {
             delta_x += 0xF;
         }
         work->unk_0C = delta_x >> 4;
-        delta_y      = D_801EB630[*battler - 3].coord_y_38 - work->coord_y_38.raw;
+        delta_y      = D_801EB630[*battler - 3].y - work->y.raw;
         if (delta_y < 0) {
             delta_y += 0xF;
         }
         work->unk_10 = delta_y >> 4;
         work->unk_14 = 0x40;
         work->unk_20 = -8;
-        delta_z      = D_801EB630[*battler - 3].word_3C.word - work->word_3C.word;
+        delta_z      = D_801EB630[*battler - 3].z.raw - work->z.raw;
         if (delta_z < 0) {
             delta_z += 0xF;
         }

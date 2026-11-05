@@ -134,15 +134,16 @@ typedef struct BattleSelectionType {
 ASSERT_SIZE(BattleSelectionType, 0x14);
 ASSERT_OFFSET(BattleSelectionType, mask, 0x00);
 
-/* 32-bit position cell whose two halfwords are also read on their own. */
-typedef union BattleFix32 {
+/* 16.16 fixed-point position: the whole word, or the fraction and integer halves read on their own.
+ * The z cell at +0x3C keeps the vertical span in its integer half (+0x3E). */
+typedef union Fix32 {
     s32 raw;
 
     struct {
         u16 lo;
         s16 hi;
     } half;
-} BattleFix32;
+} Fix32;
 
 /* The word at +0x60 of a queued slot. battle/battle/15 stores the action's target
  * index there (func_800AAEBC) and battle/battle/03 reads the low halfword of it to
@@ -152,19 +153,6 @@ typedef union BattleTargetIndex {
     s32 target_index;  /* the action's target index, as battle/battle/15 stores it */
     u16 capture_count; /* the low halfword, as battle/battle/03 draws it */
 } BattleTargetIndex;
-
-/* The word at +0x3C of a local work record. It is copied whole by
- * func_801E72F4 and func_801DDAF0, and its high halfword is the vertical span
- * written by func_801DEF0C and func_801E352C. The two overlays read that
- * halfword with opposite signs. */
-typedef union BattleWorkWord3C {
-    u32 word;
-
-    struct {
-        u8  pad_00[2];
-        s16 span_3E; /* the vertical span; func_800AF764 projects it negated */
-    } half;
-} BattleWorkWord3C;
 
 /* What a queued effect acts on: a party or enemy battler, another effect, or a payload address. */
 typedef union BattleEffectTarget {
@@ -207,9 +195,9 @@ typedef struct BattleEffect {
     s16                unk_2E;
     s16                unk_30;
     u16                unk_32;
-    BattleFix32        unk_34;
-    BattleFix32        unk_38;
-    BattleWorkWord3C   word_3C; /* +0x3C the work record's word; bmagic stores its span halfword (+0x3E) */
+    Fix32              unk_34;
+    Fix32              unk_38;
+    Fix32              z; /* +0x3C the work record's word; bmagic stores its span halfword (+0x3E) */
     u8                 pad_40[8];
     u8                 unk_48;
     u8                 pad_49[2];
@@ -331,60 +319,47 @@ ASSERT_OFFSET(BattlePanelTask, row_base, 0x12);
 ASSERT_OFFSET(BattlePanelTask, hp, 0x14);
 ASSERT_OFFSET(BattlePanelTask, max_hp, 0x1C);
 
-/* The word at +0x3C of an enemy work record.  The slot setup writes its high
- * halfword with the vertical span at the enemy's position (Area_SampleHeight of
- * the enemy's x and y) and the whole word is copied into the local work
- * record's word_3C (func_800AE82C). */
-typedef union BattleEnemyWord3C {
-    s32 word;
-
-    struct {
-        u8  pad_00[2];
-        s16 span_3E; /* the vertical span at the enemy's position */
-    } half;
-} BattleEnemyWord3C;
-
 typedef struct EnemyBattler {
-    u8                           flags;
-    u8                           mode;
-    u8                           step;
-    u8                           unk_03;
-    u8                           unk_04;
-    u8                           slot;   /* +0x05 battler slot; func_800ABCE0 stores slot + 3 here */
-    u8                           unk_06; /* +0x06 cleared when the slot is armed */
-    u8                           unk_07; /* +0x07 cleared when the slot is armed */
-    u8                           unk_08; /* +0x08 the battle index with its low bit flipped */
-    u8                           pad_09[0x3];
-    s32                          unk_0C; /* +0x0C cleared when the slot is armed */
-    s32                          unk_10; /* +0x10 cleared when the slot is armed */
-    s32                          unk_14; /* +0x14 cleared when the slot is armed */
-    s32                          unk_18; /* +0x18 cleared when the slot is armed */
-    s32                          unk_1C; /* +0x1C cleared when the slot is armed */
-    s32                          unk_20; /* +0x20 cleared when the slot is armed */
-    u8                           unk_24; /* +0x24 cleared when the slot is armed */
-    u8                           pad_25[0x4];
-    u8                           unk_29; /* +0x29 set to 4 when the slot is armed */
-    u8                           pad_2A[0x1];
-    u8                           unk_2B; /* +0x2B cleared when the slot is armed */
-    u8                           pad_2C[0x2];
-    s16                          unk_2E;     /* +0x2E cleared when the slot is armed */
-    s16                          unk_30;     /* +0x30 cleared when the slot is armed */
-    s16                          unk_32;     /* +0x32 cleared when the slot is armed */
-    s32                          coord_x_34; /* +0x34 the enemy's x */
-    s32                          coord_y_38; /* +0x38 the enemy's y */
-    /* 0x3C */ BattleEnemyWord3C word_3C;    /* +0x3C the enemy's frame counter */
-    u8                           pad_40[0x8];
-    u8                           unk_48; /* +0x48 cleared when the slot is armed */
-    u8                           pad_49[0x2];
-    u8                           unk_4B; /* +0x4B set to 0xFF when the slot is armed */
-    u8                           pad_4C[0xC];
-    u16                          unk_58; /* +0x58 the halfword the boss end-of-battle setup copies to the spad record */
-    u16                          unk_5A; /* +0x5A the halfword the boss end-of-battle setup copies to the spad record */
-    u8                           unk_5C; /* +0x5C cleared when the slot is armed */
-    u8                           unk_5D; /* +0x5D cleared when the slot is armed */
-    u8                           unk_5E; /* +0x5E cleared when the slot is armed */
-    u8                           unk_5F; /* +0x5F cleared when the slot is armed */
-    u8                           pad_60[0x14];
+    u8                    flags;
+    u8                    mode;
+    u8                    step;
+    u8                    unk_03;
+    u8                    unk_04;
+    u8                    slot;   /* +0x05 battler slot; func_800ABCE0 stores slot + 3 here */
+    u8                    unk_06; /* +0x06 cleared when the slot is armed */
+    u8                    unk_07; /* +0x07 cleared when the slot is armed */
+    u8                    unk_08; /* +0x08 the battle index with its low bit flipped */
+    u8                    pad_09[0x3];
+    s32                   unk_0C; /* +0x0C cleared when the slot is armed */
+    s32                   unk_10; /* +0x10 cleared when the slot is armed */
+    s32                   unk_14; /* +0x14 cleared when the slot is armed */
+    s32                   unk_18; /* +0x18 cleared when the slot is armed */
+    s32                   unk_1C; /* +0x1C cleared when the slot is armed */
+    s32                   unk_20; /* +0x20 cleared when the slot is armed */
+    u8                    unk_24; /* +0x24 cleared when the slot is armed */
+    u8                    pad_25[0x4];
+    u8                    unk_29; /* +0x29 set to 4 when the slot is armed */
+    u8                    pad_2A[0x1];
+    u8                    unk_2B; /* +0x2B cleared when the slot is armed */
+    u8                    pad_2C[0x2];
+    s16                   unk_2E; /* +0x2E cleared when the slot is armed */
+    s16                   unk_30; /* +0x30 cleared when the slot is armed */
+    s16                   unk_32; /* +0x32 cleared when the slot is armed */
+    s32                   x;      /* +0x34 the enemy's x */
+    s32                   y;      /* +0x38 the enemy's y */
+    /* 0x3C */ Fix32      z;      /* +0x3C the enemy's frame counter */
+    u8                    pad_40[0x8];
+    u8                    unk_48; /* +0x48 cleared when the slot is armed */
+    u8                    pad_49[0x2];
+    u8                    unk_4B; /* +0x4B set to 0xFF when the slot is armed */
+    u8                    pad_4C[0xC];
+    u16                   unk_58; /* +0x58 the halfword the boss end-of-battle setup copies to the spad record */
+    u16                   unk_5A; /* +0x5A the halfword the boss end-of-battle setup copies to the spad record */
+    u8                    unk_5C; /* +0x5C cleared when the slot is armed */
+    u8                    unk_5D; /* +0x5D cleared when the slot is armed */
+    u8                    unk_5E; /* +0x5E cleared when the slot is armed */
+    u8                    unk_5F; /* +0x5F cleared when the slot is armed */
+    u8                    pad_60[0x14];
     u8                    name[8]; /* +0x74 the 8-character enemy name, drawn as text by Battle_DrawEnemyNamePanel */
     u8                    kind_id;
     u8                    unk_7D;      /* +0x7D battle/battle/15's cell; battle/battle/03 leaves it padded */
@@ -447,7 +422,7 @@ ASSERT_OFFSET(EnemyBattler, unk_2B, 0x2B);
 ASSERT_OFFSET(EnemyBattler, unk_2E, 0x2E);
 ASSERT_OFFSET(EnemyBattler, unk_30, 0x30);
 ASSERT_OFFSET(EnemyBattler, unk_32, 0x32);
-ASSERT_OFFSET(EnemyBattler, word_3C, 0x3C);
+ASSERT_OFFSET(EnemyBattler, z, 0x3C);
 ASSERT_OFFSET(EnemyBattler, unk_48, 0x48);
 ASSERT_OFFSET(EnemyBattler, unk_4B, 0x4B);
 ASSERT_OFFSET(EnemyBattler, unk_58, 0x58);
@@ -510,10 +485,10 @@ typedef struct PartyBattler {
     BattleScreenCoord unk_2C; /* +0x2C the halfword both overlays read */
     BattleScreenCoord unk_2E; /* +0x2E the field overlays read it signed */
     BattleScreenCoord unk_30; /* +0x30 the field overlays read it signed */
-    u16               z;      /* +0x32 depth halfword; func_800AB910 calls it off_z */
-    BattleFix32       coord_x_34;
-    BattleFix32       coord_y_38;
-    BattleWorkWord3C  word_3C;
+    u16               depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
+    Fix32             x;
+    Fix32             y;
+    Fix32             z;
     u32               unk_40; /* +0x40 battle/battle/03's cell; battle/battle/15 leaves it padded */
     s32               unk_44; /* +0x44 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u8                unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
@@ -573,7 +548,7 @@ ASSERT_OFFSET(PartyBattler, unk_60, 0x60);
 ASSERT_OFFSET(PartyBattler, unk_70, 0x70);
 ASSERT_OFFSET(PartyBattler, unk_29, 0x29);
 ASSERT_OFFSET(PartyBattler, unk_2C, 0x2C);
-ASSERT_OFFSET(PartyBattler, z, 0x32);
+ASSERT_OFFSET(PartyBattler, depth, 0x32);
 ASSERT_OFFSET(PartyBattler, stats, 0x74);
 ASSERT_OFFSET(PartyBattler, hp_change, 0x11C);
 ASSERT_OFFSET(PartyBattler, ap_change, 0x11E);

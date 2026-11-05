@@ -29,8 +29,8 @@ MATCH void func_801EF140(void) {
     u8 count;
     u8 timer;
 
-    count                        = g_Task->unk_09;
-    g_Task->word_3C.half.span_3E = (u16)g_Task->word_3C.half.span_3E - 0x60;
+    count             = g_Task->unk_09;
+    g_Task->z.half.hi = (u16)g_Task->z.half.hi - 0x60;
     if ((count & 0xFF) != 0x10) {
         g_Task->unk_09 = count + 1;
     }
@@ -38,7 +38,7 @@ MATCH void func_801EF140(void) {
     if (timer != 0x10) {
         g_Task->timer = timer + 2;
     }
-    if (g_Task->word_3C.half.span_3E == BATTLE_ACTIVE_WORK->word_3C.half.span_3E) {
+    if (g_Task->z.half.hi == BATTLE_ACTIVE_WORK->z.half.hi) {
         g_Task->step += 1;
     }
 }
