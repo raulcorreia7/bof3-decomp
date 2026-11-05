@@ -173,7 +173,18 @@ INCLUDE_ASM(func_801F802C);
 
 INCLUDE_ASM(func_801F8108);
 
-INCLUDE_ASM(func_801F81F4);
+MATCH void func_801F81F4(u16 arg0) {
+    s32 count;
+    s32 index;
+
+    count = 0x40;
+    do {
+        index = count & 0xFF;
+        count -= 1;
+        D_801FE9EC[index] = D_801FE9EC[index - 1];
+    } while (count & 0xFF);
+    D_801FE9EC[0] = arg0;
+}
 
 INCLUDE_ASM(func_801F823C);
 
