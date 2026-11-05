@@ -64,7 +64,27 @@ MATCH void func_801EEF5C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFD4);
+MATCH void func_801EEFD4(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+    u8      angle;
+
+    PushMatrix();
+    if (g_SpadWork->word_08.byte.facing_08 & 1) {
+        rot.vx = 0;
+        angle  = g_SpadWork->word_08.byte.unk_09 & 0x3F;
+        rot.vy = (u32)rsin(angle << 6) >> 3;
+        rot.vz = 0;
+    } else {
+        angle  = g_SpadWork->word_08.byte.unk_09 & 0x3F;
+        rot.vx = (u32)rsin(angle << 6) >> 3;
+        rot.vy = 0;
+        rot.vz = 0;
+    }
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_SpadWork);
+}
 
 INCLUDE_ASM(func_801EF0E4);
 

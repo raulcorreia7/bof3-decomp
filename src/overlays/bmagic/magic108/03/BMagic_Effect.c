@@ -93,6 +93,30 @@ INCLUDE_ASM(func_801EF180);
 
 INCLUDE_ASM(func_801EF2D4);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF5C0(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+    u8      timer;
+
+    PushMatrix();
+    if (g_SpadWork->word_08.byte.facing_08 & 1) {
+        rot.vx = 0;
+        timer  = g_SpadWork->word_08.byte.timer_0A;
+        rot.vz = 0x400;
+        rot.vy = (timer & 0x1F) << 7;
+    } else {
+        timer  = g_SpadWork->word_08.byte.timer_0A;
+        rot.vy = 0;
+        rot.vz = 0;
+        rot.vx = (timer & 0x1F) << 7;
+    }
+    BMAGIC_PROJECT_ACTOR_MATRIX(g_SpadWork);
+}
+#else
 INCLUDE_ASM(func_801EF5C0);
+#endif
 
 INCLUDE_ASM(func_801EF6C0);
