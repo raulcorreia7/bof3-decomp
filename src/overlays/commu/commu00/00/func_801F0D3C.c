@@ -1,5 +1,8 @@
 #include "commu00_00.h"
 
+/* Byte fields of each 8-byte record-kind entry. */
+#define RECORD_KIND_FIELD_2(index) (D_801457AA[((index) & BYTE_MASK) * 8])
+
 MATCH void func_801F0D3C(u8 task_index, u8 record_kind_index) {
     u32 key_term;
     u32 field_term;
@@ -12,7 +15,7 @@ MATCH void func_801F0D3C(u8 task_index, u8 record_kind_index) {
         D_80146904[(task_index & BYTE_MASK) * ACTOR_SIZE / 2] = 0xC008;
         g_Task->unk_18                                        = 0;
         key_term                                              = (u32)(VILLAGE_ROOM_SUBTYPE(record_kind_index) << 1);
-        field_term     = (u32)(D_801457AA[(record_kind_index & BYTE_MASK) * 8] + 0x11);
-        g_Task->unk_1C = key_term + field_term;
+        field_term                                            = (u32)(RECORD_KIND_FIELD_2(record_kind_index) + 0x11);
+        g_Task->unk_1C                                        = key_term + field_term;
     }
 }

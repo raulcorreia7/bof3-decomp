@@ -80,7 +80,7 @@
 /* The kind table read without volatile semantics: the cell is declared
  * volatile for its other users, so the units that walk it take a plain view. */
 /* Byte at the start of each 8-byte record-kind entry. */
-#define VILLAGE_ROOM_SUBTYPE(index)           (D_801457A9[index * 8])
+#define VILLAGE_ROOM_SUBTYPE(index)           (D_801457A9[(index) * 8])
 /* Unsigned view: the cell is declared s8, but the original reads and writes it
  * unsigned (lbu/sb). */
 /* FAKE: retail reads the state byte unsigned. */
