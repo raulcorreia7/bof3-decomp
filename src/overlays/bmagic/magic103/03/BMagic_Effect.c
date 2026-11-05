@@ -122,7 +122,21 @@ MATCH void func_801EFCF4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFD74);
+MATCH void func_801EFD74(void) {
+    u8 counter;
+
+    func_800AF764();
+    g_SpadWork->unk_30.half -= ((s32)g_SpadWork->word_08.byte.unk_09 - 8) / 2;
+    if ((g_SpadWork->word_08.byte.unk_09 & 0xFF) != 0x2C) {
+        g_SpadWork->word_08.byte.unk_09 = g_SpadWork->word_08.byte.unk_09 + 1;
+    }
+    counter                           = g_SpadWork->word_08.byte.timer_0A - 1;
+    g_SpadWork->word_08.byte.timer_0A = counter;
+    if (!(counter & 0xFF)) {
+        D_801EB4E0->word_08.byte.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 INCLUDE_ASM(func_801EFE20);
 
