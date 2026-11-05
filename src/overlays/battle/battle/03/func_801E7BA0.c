@@ -70,7 +70,7 @@ NON_MATCHING void func_801E7BA0(void) {
             }
         }
         var_s1 = SP_PTR(PartyBattler, 0x0);
-        var_s1 = SP_REF(PartyBattler*, 0x44);
+        var_s1 = g_Task;
         TASK_SET(D_801EB4E0);
         g_GameState = &g_BattlePartyBattlers[D_801EB4E0->slot];
         temp_a0_132 = D_801EB4E0->slot * BATTLE_PARTY_STRIDE;

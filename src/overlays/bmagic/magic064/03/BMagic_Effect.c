@@ -157,7 +157,7 @@ MATCH void func_801EF87C(void) {
 MATCH void func_801EF89C(void) {
     Callback table[2] = {func_801EF8F4, func_801F001C};
 
-    table[SP_REF(u8*, 0x44)[3]]();
+    table[TASK_BYTES[3]]();
 }
 
 INCLUDE_ASM(func_801EF8F4);
@@ -282,7 +282,7 @@ MATCH void func_801F0E50(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->step == 10) {
-        work       = SP_REF(PartyBattler*, 0x44u);
+        work       = g_Task;
         work->step = work->step + 1;
     }
 }

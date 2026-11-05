@@ -9,11 +9,11 @@ MATCH void func_801F3764(void) {
     a = D_801F4E08;
     b = D_801F4E04;
     if (b >= a - 1 && b <= a + 1) {
-        p          = SP_REF(u8*, 0x44);
+        p          = TASK_BYTES;
         D_801F4E0C = 0;
         value      = 0x15;
     } else {
-        p     = SP_REF(u8*, 0x44);
+        p     = TASK_BYTES;
         value = 0x16;
     }
     p[0x1] = value;

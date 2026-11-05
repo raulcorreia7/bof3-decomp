@@ -7,7 +7,7 @@ MATCH void func_801DAE3C(void) {
     u8* spad_ptr;
 
     if (g_AreaCameraMoving == 0) {
-        spad_ptr            = SP_REF(u8*, 0x44u);
+        spad_ptr            = TASK_BYTES;
         g_AreaCameraStep    = 0x40;
         g_AreaScrollTargetY = 0x3C0000;
         spad_ptr[3] += 1;

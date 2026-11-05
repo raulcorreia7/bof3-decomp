@@ -25,7 +25,7 @@ INCLUDE_ASM(func_801EEEE0);
 MATCH void func_801EEFF0(void) {
     PartyBattler* work;
 
-    work = SP_REF(PartyBattler*, 0x44u);
+    work = g_Task;
     if (work->unk_0B == 2) {
         work->mode = (u8)(work->mode + 1);
     }
@@ -64,7 +64,7 @@ MATCH void func_801EF3A0(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->unk_0B == 2) {
-        work       = SP_REF(PartyBattler*, 0x44u);
+        work       = g_Task;
         work->step = work->step + 1;
     }
 }

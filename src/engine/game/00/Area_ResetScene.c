@@ -11,7 +11,7 @@ MATCH void Area_ResetScene(void) {
         Actor_ClearVelocity();
         g_GameState->counter_11C.s8_value = 3;
         func_801BC000();
-        work = SP_REF(void*, 0x44);
+        work = g_Task;
         if ((work->vx == 0) && (work->vy == 0) && (work->mode == 1)) {
             work->step = 0;
         }

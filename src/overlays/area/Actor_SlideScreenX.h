@@ -8,7 +8,7 @@ MATCH void Actor_SlideScreenX(void) {
     u8* work;
     u16 origin;
 
-    work                                 = SP_REF(u8*, 0x44);
+    work                                 = TASK_BYTES;
     origin                               = FIELD(u16, work, AREA_ORIGIN_OFFSET) + ACTOR_SCREEN_X_STEP;
     FIELD(u16, work, AREA_ORIGIN_OFFSET) = origin;
     if ((s16)origin >= ACTOR_SCREEN_X_THRESHOLD) {

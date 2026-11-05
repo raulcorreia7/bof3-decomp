@@ -770,7 +770,7 @@ MATCH void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
 }
 
 MATCH void func_801F8748(void) {
-    D_801FC9D4[SP_REF(u8*, 0x44u)[1]]();
+    D_801FC9D4[TASK_BYTES[1]]();
 }
 
 MATCH void func_801F878C(void) {

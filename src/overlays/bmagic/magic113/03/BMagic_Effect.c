@@ -44,7 +44,7 @@ MATCH void func_801EF35C(void) {
 MATCH void func_801EF3A0(void) {
     PartyBattler* work;
 
-    work = SP_REF(PartyBattler*, 0x44u);
+    work = g_Task;
     if (work->unk_0B == 0x80) {
         work->mode = (u8)(work->mode + 1);
     }
@@ -79,7 +79,7 @@ MATCH void func_801EF8A4(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->unk_0B == 132) {
-        work       = SP_REF(PartyBattler*, 0x44u);
+        work       = g_Task;
         work->step = work->step + 1;
     }
 }
@@ -116,7 +116,7 @@ MATCH void func_801EFD00(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->unk_0B == 132) {
-        work       = SP_REF(PartyBattler*, 0x44u);
+        work       = g_Task;
         work->step = work->step + 1;
     }
 }

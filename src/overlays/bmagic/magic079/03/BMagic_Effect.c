@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC04(void) {
     Callback table[2] = {func_801EEC5C, func_801EED38};
 
-    table[SP_REF(u8*, 0x44)[1]]();
+    table[TASK_BYTES[1]]();
 }
 
 MATCH void func_801EEC5C(void) {

@@ -10,7 +10,7 @@ MATCH void func_801D1CF0(void) {
     FishingState* back;
     s32           speed;
 
-    work  = (FishingState*)SP_REF(u8*, 0x44u);
+    work  = (FishingState*)TASK_BYTES;
     speed = (s32)work->step_delta_18;
     if (speed != 0) {
         switch (D_801E320C->byte_01) {
@@ -20,7 +20,7 @@ MATCH void func_801D1CF0(void) {
                     work->pos_x_0C      = 0xFF;
                     work->step_delta_18 = (u32) - (s32)work->step_delta_18;
                 } else {
-                    back = (FishingState*)SP_REF(u8*, 0x44u);
+                    back = (FishingState*)TASK_BYTES;
                     if ((s32)back->step_delta_18 < 0 && back->pos_x_0C <= 0) {
                         back->pos_x_0C      = 0;
                         back->step_delta_18 = (u32) - (s32)back->step_delta_18;
@@ -46,7 +46,7 @@ MATCH void func_801D1CF0(void) {
                 } else {
                     work->cursor_10 = work->cursor_10 + speed;
                 }
-                fresh           = (FishingState*)SP_REF(u8*, 0x44u);
+                fresh           = (FishingState*)TASK_BYTES;
                 fresh->pos_x_0C = fresh->pos_x_0C + fresh->cursor_10;
                 if (fresh->cursor_10 > 0) {
                     if (fresh->pos_x_0C >= 0xFF) {

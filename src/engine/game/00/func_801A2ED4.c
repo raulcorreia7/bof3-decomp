@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-#define WORK SP_REF(Actor*, 0x44u)
+#define WORK g_Task
 
 MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
     u32 target_x;

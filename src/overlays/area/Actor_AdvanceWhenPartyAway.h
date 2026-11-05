@@ -8,7 +8,7 @@
 MATCH void Actor_AdvanceWhenPartyAway(void) {
     u8* work;
 
-    work = SP_REF(u8*, 0x44);
+    work = TASK_BYTES;
     if (FIELD(u8, work, 0x08) != 0) {
         if (abs(D_80145EC8 - ((((s32)FIELD(s16, work, 0x3A) + 1) << 16) | 0x8000)) > 0x20000) {
             goto advance;

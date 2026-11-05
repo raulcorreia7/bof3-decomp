@@ -5,7 +5,7 @@
 #include "area030_04.h"
 
 MATCH void func_801D9B14(void) {
-    u8*      work    = SP_REF(u8*, 0x44);
+    u8*      work    = TASK_BYTES;
     Callback handler = D_801E21E0[work[2]];
     handler();
 }

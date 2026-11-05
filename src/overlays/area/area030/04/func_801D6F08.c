@@ -6,6 +6,6 @@ MATCH void func_801D6F08(void) {
     u8* spad_ptr;
 
     func_801D6A2C();
-    spad_ptr      = SP_REF(u8*, 0x44u);
+    spad_ptr      = TASK_BYTES;
     spad_ptr[0xB] = 0x37;
 }

@@ -18,17 +18,17 @@ MATCH void func_801D6B28(s8 panel_kind) {
         FishingState* pair;
         s32           value;
 
-        work   = (FishingState*)SP_REF(u8*, 0x44u);
+        work   = (FishingState*)TASK_BYTES;
         value  = work->pos_x_0C;
         left_x = (value < 0x39) ? 0x39 : ((value >= 0x7A) ? 0x79 : value);
 
-        shown          = (FishingState*)SP_REF(u8*, 0x44u);
+        shown          = (FishingState*)TASK_BYTES;
         work->pos_x_0C = left_x;
 
         value   = shown->cursor_10;
         right_x = (value < 0x41) ? 0x41 : ((value >= 0x95) ? 0x94 : value);
 
-        pair             = (FishingState*)SP_REF(u8*, 0x44u);
+        pair             = (FishingState*)TASK_BYTES;
         shown->cursor_10 = right_x;
 
         if ((pair->cursor_10 < pair->pos_x_0C) || (pair->pos_x_0C + 0x20 < pair->cursor_10)) {
@@ -39,8 +39,8 @@ MATCH void func_801D6B28(s8 panel_kind) {
     }
 
     if ((panel_kind & BYTE_MASK) == 0) {
-        func_801D2C34((s16) * (s16*)(SP_REF(u8*, 0x44u) + 0x10u), 0xB3, 0, 1u);
+        func_801D2C34((s16) * (s16*)(TASK_BYTES + 0x10u), 0xB3, 0, 1u);
     } else {
-        func_801D2C34((s16) * (s16*)(SP_REF(u8*, 0x44u) + 0x10u), 0xB3, 1, 1u);
+        func_801D2C34((s16) * (s16*)(TASK_BYTES + 0x10u), 0xB3, 1, 1u);
     }
 }

@@ -52,33 +52,33 @@ NON_MATCHING void func_80167428(void) {
         } else {
             g_AreaCameraHeightStep = 0;
         }
-        FIELD(s8, g_GameState, 0x11Cu)         = 3;
-        tmp12                                  = SP_REF(void*, 0x44);
-        *(u8*)(tmp12)                          = (u8)(*(u8*)(tmp12) | 0x40);
-        FIELD(s8, (SP_REF(void*, 0x44)), 0x1u) = 3;
+        FIELD(s8, g_GameState, 0x11Cu) = 3;
+        tmp12                          = g_Task;
+        *(u8*)(tmp12)                  = (u8)(*(u8*)(tmp12) | 0x40);
+        FIELD(s8, (g_Task), 0x1u)      = 3;
         return;
     }
     if (D_80145ABA & D_8014625C) {
         FIELD(s8, g_GameState, 0x11Cu) = 3;
         g_GameEntrySubstate += 1;
-        FIELD(s8, (SP_REF(void*, 0x44)), 0x1u) = 1;
-        FIELD(s8, (SP_REF(void*, 0x44)), 0x2u) = 0;
+        FIELD(s8, (g_Task), 0x1u) = 1;
+        FIELD(s8, (g_Task), 0x2u) = 0;
         return;
     }
     if (!(func_801B59B4() & BYTE_MASK)) {
-        FIELD(s8, g_GameState, 0x11Cu)         = 3;
-        tmp9                                   = SP_REF(void*, 0x44);
-        FIELD(u8, tmp9, 0x9u)                  = 0U;
-        FIELD(s32, tmp9, 0xCu)                 = 0;
-        FIELD(s32, tmp9, 0x10u)                = 0;
-        FIELD(s32, tmp9, 0x14u)                = 0;
-        g_AreaCameraStep                       = 0;
-        g_AreaCameraHeightStep                 = 0;
-        FIELD(s8, (SP_REF(void*, 0x44)), 0x1u) = 1;
+        FIELD(s8, g_GameState, 0x11Cu) = 3;
+        tmp9                           = g_Task;
+        FIELD(u8, tmp9, 0x9u)          = 0U;
+        FIELD(s32, tmp9, 0xCu)         = 0;
+        FIELD(s32, tmp9, 0x10u)        = 0;
+        FIELD(s32, tmp9, 0x14u)        = 0;
+        g_AreaCameraStep               = 0;
+        g_AreaCameraHeightStep         = 0;
+        FIELD(s8, (g_Task), 0x1u)      = 1;
         return;
     }
     if (!(func_801B0E44() & BYTE_MASK)) {
-        tmp8 = SP_REF(void*, 0x44);
+        tmp8 = g_Task;
         tmp0 = FIELD(u8, tmp8, 0x8u) * 8;
         tmp2 = ((s32*)g_FacingSteps)[tmp0];
         tmp4 = D_80145EC4 - (FIELD(s32, tmp8, 0x34u) + tmp2);
@@ -92,7 +92,7 @@ NON_MATCHING void func_80167428(void) {
             val0 = -val0;
         }
         if ((val2 > 0x60000) || (val0 > 0x60000) || (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE)) {
-            tmp10                    = SP_REF(void*, 0x44);
+            tmp10                    = g_Task;
             FIELD(u8, tmp10, 0x9u)   = 0U;
             FIELD(s32, tmp10, 0xCu)  = 0;
             FIELD(s32, tmp10, 0x10u) = 0;
@@ -117,18 +117,18 @@ NON_MATCHING void func_80167428(void) {
             FIELD(s8, g_GameState, 0x11Cu) = val5;
             func_801C24D0(val0, tmp2, tmp8);
             func_801C4C48();
-            tmp11                  = SP_REF(void*, 0x44);
+            tmp11                  = g_Task;
             FIELD(u8, tmp11, 0x9u) = (u8)(FIELD(u8, tmp11, 0x9u) - 1);
             func_801B0DFC();
             val4 = 2;
         }
     } else {
-        FIELD(s8, g_GameState, 0x11Cu)         = 3;
-        FIELD(u8, (SP_REF(void*, 0x44)), 0x9u) = 0U;
-        val4                                   = 1;
+        FIELD(s8, g_GameState, 0x11Cu) = 3;
+        FIELD(u8, (g_Task), 0x9u)      = 0U;
+        val4                           = 1;
     }
-    FIELD(s8, (SP_REF(void*, 0x44)), 0x1u) = val4;
-    g_GameStateIndex                       = GAME_REQUEST_SCENE_CAMERA;
+    FIELD(s8, (g_Task), 0x1u) = val4;
+    g_GameStateIndex          = GAME_REQUEST_SCENE_CAMERA;
     g_AreaWalkFlags &= 0x1F;
 }
 #else

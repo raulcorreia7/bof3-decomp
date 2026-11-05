@@ -3,6 +3,6 @@
 MATCH void func_801F2E88(void) {
     u8* work;
 
-    work = SP_REF(u8*, 0x44);
+    work = TASK_BYTES;
     work[1] += 1;
 }
