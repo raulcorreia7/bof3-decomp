@@ -8,13 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC98);
 
-MATCH void func_801EEF68(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        func_800AEF98(4, 0);
-        BATTLE_ACTIVE_WORK->flags_00 &= 0xBF;
-        g_SpadWork->step_01 += 1;
-    }
-}
+#include "overlays/bmagic/Effect_ReleaseActiveBattlerOnTickerZero.h"
 
 MATCH void func_801EEFD8(void) {
     u16* flags;

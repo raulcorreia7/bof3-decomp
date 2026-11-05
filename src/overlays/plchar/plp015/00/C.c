@@ -55,27 +55,7 @@ MATCH void Char_StartTurn_801CF544(void) {
 
 /* Runs one route step script: facing 5 requests script 0x41 and facing 3 requests 0x40,
  * the reverse of the script ids in CHAR_RUN_STEP_SCRIPT (plchar.h). */
-MATCH void func_801CF610(void) {
-    if (g_SpadWork->direction_08 == g_SpadWork->unk_03) {
-        switch (g_SpadWork->direction_08) {
-            case 5:
-                Actor_RequestScript(0x41);
-                break;
-            case 3:
-                Actor_RequestScript(0x40);
-                break;
-        }
-        g_SpadWork->state_02++;
-    } else {
-        g_SpadWork->unk_09--;
-        if (g_SpadWork->unk_09 == 0) {
-            g_SpadWork->unk_09       = 2;
-            g_SpadWork->direction_08 = g_SpadWork->direction_08 + g_SpadWork->unk_0B;
-            g_SpadWork->direction_08 &= 7;
-            Actor_RequestScript(g_SpadWork->direction_08);
-        }
-    }
-}
+#include "../../Char_AdvanceFacingTurn.h"
 
 MATCH void func_801CF70C(void) {
     SYS_DISPATCH_TASK(D_801CFBBC, 2, g_SpadWork);

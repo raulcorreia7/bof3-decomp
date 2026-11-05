@@ -43,7 +43,20 @@ MATCH void func_801EF0D4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF134);
+MATCH void func_801EF134(void) {
+    u8             temp_v0;
+    PartyBattler** selected;
+
+    g_SpadWork->word_08.byte.unk_09 += 1;
+    temp_v0                           = g_SpadWork->word_08.byte.timer_0A + 2;
+    g_SpadWork->word_08.byte.timer_0A = temp_v0;
+    if ((temp_v0 & 0xFF) == 0x18) {
+        selected = &g_BattleSelectedActor;
+        func_80196718(*selected);
+        g_SpadWork->word_08.byte.unk_0B = func_8019651C(*selected, 0, 0, 0, 1);
+        g_SpadWork->unk_02 += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF1F4);
 

@@ -59,15 +59,7 @@ MATCH void func_801D0DA4(void) {
     SYS_DISPATCH_TASK(D_801D1B2C, 1, g_SpadWork);
 }
 
-MATCH void func_801D0DE8(void) {
-    Actor* work;
-
-    work         = g_SpadWork;
-    work->unk_2E = 300;
-    work->unk_09 = 0;
-    Scene_ClearScanBars();
-    g_SpadWork->unk_01 = g_SpadWork->unk_01 + 1;
-}
+#include "../../Scene_ClearScanBarsAndAdvance.h"
 
 INCLUDE_ASM(func_801D0E30);
 

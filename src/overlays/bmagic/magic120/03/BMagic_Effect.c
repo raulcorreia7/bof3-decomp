@@ -35,18 +35,7 @@ MATCH void func_801EF270(void) {
 
 #include "overlays/bmagic/Effect_CountUpAndStepAt120.h"
 
-MATCH void func_801EF3C4(void) {
-    u8 counter;
-
-    g_SpadWork->word_08.byte.unk_0B += 1;
-    g_SpadWork->unk_04 -= 1;
-    counter                         = g_SpadWork->word_08.byte.unk_09 + 1;
-    g_SpadWork->word_08.byte.unk_09 = counter;
-    if ((counter & 0xFF) == 0x88) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B = 0xFF;
-        func_801E5988();
-    }
-}
+#include "overlays/bmagic/Effect_CountUpAndFinishAt136.h"
 
 INCLUDE_ASM(func_801EF44C);
 

@@ -293,13 +293,7 @@ MATCH void func_801FA0B4(void) {
     Party_JoinMember(1);
 }
 
-MATCH void func_801FA12C(void) {
-    EMI_LoaderStreamFamily(0, 1, 5, 0);
-    g_PartySize = 0;
-    func_801C187C(0);
-    func_801C187C(1);
-    func_801C187C(5);
-}
+#include "overlays/scenario/Scene_SetPartyRyuYoungNinaYoungMomo.h"
 
 MATCH void func_801FA178(void) {
 }

@@ -12,13 +12,10 @@ MATCH void func_801EECA0(void) {
 
 INCLUDE_ASM(func_801EED0C);
 
+#include "overlays/bmagic/Effect_RestorePaletteAndReleaseActive.h"
+
 MATCH void func_801EF150(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        func_800AFC54();
-        func_800AEF98(4, 0);
-        BATTLE_ACTIVE_WORK->flags_00 &= 0xBF;
-        g_SpadWork->step_01 += 1;
-    }
+    EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE();
 }
 
 #include "shared/Effect_StartPlaying.h"
@@ -34,12 +31,7 @@ MATCH void func_801EF248(void) {
 INCLUDE_ASM(func_801EF2B4);
 
 MATCH void func_801EF594(void) {
-    if (g_SpadWork->word_08.byte.unk_0B == 0) {
-        func_800AFC54();
-        func_800AEF98(4, 0);
-        BATTLE_ACTIVE_WORK->flags_00 &= 0xBF;
-        g_SpadWork->step_01 += 1;
-    }
+    EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE();
 }
 
 MATCH void Effect_StartPlaying_801EF610(void) {
@@ -145,14 +137,10 @@ INCLUDE_ASM(func_801F0864);
 
 INCLUDE_ASM(func_801F0A94);
 
+#include "overlays/bmagic/Effect_RampTintAndFinish.h"
+
 MATCH void func_801F0B8C(void) {
-    g_SpadWork->unk_5D += 0x10;
-    g_SpadWork->unk_5E += 0x10;
-    g_SpadWork->unk_5F += 0x10;
-    if ((s8)g_SpadWork->unk_5D == -0x40) {
-        BATTLE_ACTIVE_WORK->word_08.byte.unk_0B -= 1;
-        func_801E5988();
-    }
+    EFFECT_RAMP_TINT_AND_FINISH();
 }
 
 INCLUDE_ASM(func_801F0C30);

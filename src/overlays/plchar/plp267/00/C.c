@@ -92,28 +92,7 @@ MATCH void func_801CFCA4(void) {
     SYS_DISPATCH_TASK(D_801D09D0, 2, g_SpadWork);
 }
 
-MATCH void func_801CFCE8(void) {
-    s32 to_back;
-    s32 to_away;
-
-    if (g_SceneState.scenario_id == 15) {
-        g_GameState->mode_12B.s8_value = 0;
-    } else {
-        to_back = g_SpadWork->direction_08 - 3;
-        to_back = ABS(to_back);
-        to_away = g_SpadWork->direction_08 - 5;
-        to_away = ABS(to_away);
-        if (to_away < to_back) {
-            g_SpadWork->unk_0B = func_801B2D00(5);
-            g_SpadWork->unk_03 = 5;
-        } else {
-            g_SpadWork->unk_0B = func_801B2D00(3);
-            g_SpadWork->unk_03 = 3;
-        }
-        g_SpadWork->unk_09 = 2;
-        g_SpadWork->state_02++;
-    }
-}
+#include "../../Char_StartNearestFacingTurn.h"
 
 MATCH void Char_RunStepScript_801CFDDC(void) {
     CHAR_RUN_STEP_SCRIPT(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
