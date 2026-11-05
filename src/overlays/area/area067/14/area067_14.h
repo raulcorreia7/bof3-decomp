@@ -22,4 +22,6 @@ extern u16   D_801F5390[];
 extern u16   D_801F5384[];
 extern u16   D_801F539C[];
 
+s32 func_8019601C();
+
 #endif
