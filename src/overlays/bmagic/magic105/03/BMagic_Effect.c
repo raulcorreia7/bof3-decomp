@@ -21,8 +21,8 @@ MATCH void func_801EEC14(void) {
             D_801EB4E0   = swap;
             func_801EF880();
             func_801EFCF0();
-            D_801EB4E0   = saved_active;
-            g_SpadWork   = saved_work;
+            D_801EB4E0 = saved_active;
+            g_SpadWork = saved_work;
         }
         count += 1;
     } while ((u8)count < BMAGIC_EFFECT_COUNT);
@@ -53,15 +53,15 @@ MATCH void func_801EF06C(void) {
     PartyBattler* work;
     STACK_PADS(u8, 8);
 
-    src                            = BATTLE_ACTIVE_WORK;
-    work                           = g_SpadWork;
-    work->coord_x_34               = src->coord_x_34;
-    work->coord_y_38               = src->coord_y_38;
-    work->word_3C                  = src->word_3C;
-    work->unk_0C                   = src->unk_0C + D_801F004C[work->unk_04];
-    work->unk_10                   = src->unk_0C + D_801F004E[work->unk_04];
-    work->word_08.byte.unk_0B      = 0;
-    g_SpadWork->word_08.byte.unk_09 = 0;
+    src                               = BATTLE_ACTIVE_WORK;
+    work                              = g_SpadWork;
+    work->coord_x_34                  = src->coord_x_34;
+    work->coord_y_38                  = src->coord_y_38;
+    work->word_3C                     = src->word_3C;
+    work->unk_0C                      = src->unk_0C + D_801F004C[work->unk_04];
+    work->unk_10                      = src->unk_0C + D_801F004E[work->unk_04];
+    work->word_08.byte.unk_0B         = 0;
+    g_SpadWork->word_08.byte.unk_09   = 0;
     g_SpadWork->word_08.byte.timer_0A = 0;
     g_SpadWork->unk_02 += 1;
 }
