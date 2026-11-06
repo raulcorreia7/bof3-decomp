@@ -14,7 +14,6 @@
 
 /* The party position in 16.16 fixed point. */
 extern s32 D_80145EC4;
-extern s32 D_80145EC8;
 
 extern u8 D_80146920[];
 extern u8 D_801F45C4[];

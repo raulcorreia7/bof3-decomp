@@ -18,7 +18,6 @@ extern BattleHandlerTable5 D_801EEC04;
 extern u16      D_801EFCC0[];
 extern u16      D_801EFCE0[];
 extern Callback D_801EFCE8[];
-void            func_801EF78C(void);
 void            func_801EF88C(void);
 
 #endif

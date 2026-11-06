@@ -8,8 +8,6 @@
  * emi/world03/area124/13 carry retargeted-tables copies. Every change here
  * must verify every member. */
 
-s16 Area_SampleHeight(s32 x, s32 y);
-
 extern s16 D_80143F22;
 extern u16 D_80145FB8;
 extern u8  D_801468C6[];

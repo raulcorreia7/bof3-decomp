@@ -8,7 +8,6 @@
 #include "work/area_spad.h"
 
 extern s32 D_80145EC4;
-extern s32 D_80145EC8;
 
 extern u8 D_801F3684[];
 

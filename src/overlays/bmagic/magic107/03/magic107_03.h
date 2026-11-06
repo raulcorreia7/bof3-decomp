@@ -20,7 +20,6 @@ extern u8       D_801EC3A4[];
 extern Callback D_801F048C[];
 
 void func_801EED40(void);
-void func_801EEFD4(void);
 void func_801EF0E4(void);
 void func_801EF290(void);
 void func_801EF544(void);
