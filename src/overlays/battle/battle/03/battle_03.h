@@ -92,7 +92,7 @@ typedef struct BattleEventSlot {
 
 ASSERT_SIZE(BattleEventSlot, 0xC);
 
-/* One of the two 4-byte drop rows at EnemyBattler+0x98 (func_801E531C). */
+/* One of the two 4-byte drop rows at EnemyBattler+0x98 (Battle_RollEnemyDrops). */
 typedef struct BattleSpritePrimitive {
     u8  pad_00[4];
     u8  r0;
@@ -466,7 +466,8 @@ void func_80096F00(void);
 void func_800980A8(void);
 void func_8009834C(void);
 void func_8009B274(void);
-void func_8009BBE8(void);
+/* func_8009BBE8 */
+void Battle_TestAiCondition(void);
 void func_8009BFC4(void);
 void func_8009D198(void);
 u16  func_800A2AE0(u8 arg0);
@@ -697,7 +698,8 @@ void          func_801E4490(void);
 void          func_801E47E0(void);
 void          func_801E4928(void);
 void          func_801E4F34(void);
-void          func_801E531C(void);
+/* func_801E531C */
+void          Battle_RollEnemyDrops(void);
 /* func_801E5824 */
 void          Battle_RunEffects(void);
 void          func_801E5AF4(void);

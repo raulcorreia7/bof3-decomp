@@ -4,7 +4,7 @@ MATCH void func_800C1CFC(void) {
     EnemyBattler* work;
 
     func_8014DAEC();
-    func_801E54EC();
+    Battle_CollectEnemySpoils();
     GFX_FreePaletteSlotOwner(g_Task);
     work = g_BattleCurrentEnemy;
     work->damage_flags |= COMBATANT_FLAG_SKIP_ACTION_STEP;

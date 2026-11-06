@@ -8,6 +8,6 @@ MATCH void func_800C1848(void) {
     g_Task->mode = 2;
     func_8014D978();
     if (SYS_TestFlag(g_SceneFlags, 2) != 0) {
-        func_800AC218((g_BattleCurrentEnemy->slot - 3) & 0xFF, func_800AC704(0x96) & 0xFF);
+        Battle_LoadEnemyBattler((g_BattleCurrentEnemy->slot - 3) & 0xFF, func_800AC704(0x96) & 0xFF);
     }
 }

@@ -7,7 +7,8 @@ extern u8   Battle_Unk0E1BitTest(volatile u8* entry, s32 bit_index);
  * applies the ones whose trigger test passes, then hands the frame to the
  * event dispatcher.
  */
-MATCH void func_8009BBE8(void) {
+/* func_8009BBE8 */
+MATCH void Battle_TestAiCondition(void) {
     BattleEventPacket* packet;
     u8                 i;
 
