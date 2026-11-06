@@ -53,9 +53,9 @@ static inline void World_SpawnActorAtFocus(void) {
         slot->type         = 0x90;
         slot->header.mode  = 0;
         work               = g_Task;
-        slot->x.fixed      = work->pos.x.fixed;
-        slot->y.fixed      = work->pos.y.fixed;
-        slot->z.fixed      = work->pos.z.fixed;
+        slot->pos.x.fixed  = work->pos.x.fixed;
+        slot->pos.y.fixed  = work->pos.y.fixed;
+        slot->pos.z.fixed  = work->pos.z.fixed;
     }
 }
 

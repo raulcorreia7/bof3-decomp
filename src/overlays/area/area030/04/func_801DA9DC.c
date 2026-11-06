@@ -27,7 +27,7 @@ NON_MATCHING void func_801DA9DC(void) {
         D_80144125                  = 7;
         return;
     }
-    if (g_ActorSlots[0].y.fixed > 0x3E7FFF) {
+    if (g_ActorSlots[0].pos.y.fixed > 0x3E7FFF) {
         SND_PlayCue(EMI_CUE_ID(2, 3));
         D_801440B1                   = 0;
         g_ActorSlots[0].header.mode  = 0;
@@ -35,22 +35,23 @@ NON_MATCHING void func_801DA9DC(void) {
         FISHING_STATE->sub_index_03  = 0U;
         return;
     }
-    if (Area_SampleHeight(g_ActorSlots[0].x.fixed, g_ActorSlots[0].y.fixed) >= COORD_INT(g_ActorSlots[0].depth)) {
+    if (Area_SampleHeight(g_ActorSlots[0].pos.x.fixed, g_ActorSlots[0].pos.y.fixed) >=
+        COORD_INT(g_ActorSlots[0].depth)) {
         chance = D_801E3210->unk_11;
         if (((RANDOM_MASK(0xF)) < chance) && !(g_FrameCount & 0xF)) {
             g_ActorSlots[0].scene_step = 0;
             g_ActorSlots[0].selection  = 0;
             g_ActorSlots[0].unk_14     = 0;
             follow_ptr                 = &g_AreaScrollTargetY;
-            if ((s32)*follow_ptr < g_ActorSlots[0].y.fixed) {
-                *follow_ptr = (u32)g_ActorSlots[0].y.fixed;
+            if ((s32)*follow_ptr < g_ActorSlots[0].pos.y.fixed) {
+                *follow_ptr = (u32)g_ActorSlots[0].pos.y.fixed;
             }
             g_AreaCameraStep             = 0x10;
             FISHING_STATE->mode_index_02 = 5;
             FISHING_STATE->sub_index_03  = 0U;
             return;
         }
-        COORD_INT(g_ActorSlots[0].depth) = Area_SampleHeight(g_ActorSlots[0].x.fixed, g_ActorSlots[0].y.fixed);
+        COORD_INT(g_ActorSlots[0].depth) = Area_SampleHeight(g_ActorSlots[0].pos.x.fixed, g_ActorSlots[0].pos.y.fixed);
         goto box_16; /* joins the common update calls */
     }
 box_16:
@@ -103,7 +104,7 @@ box_16:
         Actor_RequestScript(limit);
     }
     func_801DDD4C();
-    g_AreaScrollTargetY = (u32)g_ActorSlots[0].y.fixed;
+    g_AreaScrollTargetY = (u32)g_ActorSlots[0].pos.y.fixed;
     follow              = g_ActorSlots[0].selection >> 8;
     if (g_ActorSlots[0].selection == 0) {
         follow = 0x10;
@@ -118,8 +119,8 @@ box_16:
         capped = 0x150000;
     }
     g_AreaScrollTargetY = capped;
-    if (((g_ActorSlots[0].x.fixed <= 0x80000) && (g_ActorSlots[0].scene_step < 0)) ||
-        ((g_ActorSlots[0].x.fixed > 0x11FFFF) && (g_ActorSlots[0].scene_step > 0))) {
+    if (((g_ActorSlots[0].pos.x.fixed <= 0x80000) && (g_ActorSlots[0].scene_step < 0)) ||
+        ((g_ActorSlots[0].pos.x.fixed > 0x11FFFF) && (g_ActorSlots[0].scene_step > 0))) {
         g_ActorSlots[0].scene_step = 0;
     }
     if (g_ActorSlots[0].selection > 0) {

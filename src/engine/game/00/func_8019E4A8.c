@@ -15,9 +15,9 @@ MATCH void func_8019E4A8(void) {
             g_ActorSlots[index].header.mode  = 2;
             g_ActorSlots[index].header.step  = 2;
             work                             = g_Task;
-            g_ActorSlots[index].x.fixed      = work->pos.x.fixed;
-            g_ActorSlots[index].y.fixed      = work->pos.y.fixed;
-            g_ActorSlots[index].z.fixed      = work->pos.z.fixed;
+            g_ActorSlots[index].pos.x.fixed  = work->pos.x.fixed;
+            g_ActorSlots[index].pos.y.fixed  = work->pos.y.fixed;
+            g_ActorSlots[index].pos.z.fixed  = work->pos.z.fixed;
         }
         g_Task->unk_0A -= 1;
         if (g_Task->unk_0A == 0) {

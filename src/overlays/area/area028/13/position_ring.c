@@ -374,7 +374,7 @@ MATCH void func_801F3424(void) {
     slot               = &g_ActorSlots[actor_slot];
     slot->header.flags = 1;
     slot->type         = 0x40;
-    slot->x.fixed      = 0x150000;
-    slot->y.fixed      = 0x5B0000;
-    slot->z.fixed      = Area_SampleHeight(slot->x.fixed, 0x5B0000) << 16;
+    slot->pos.x.fixed  = 0x150000;
+    slot->pos.y.fixed  = 0x5B0000;
+    slot->pos.z.fixed  = Area_SampleHeight(slot->pos.x.fixed, 0x5B0000) << 16;
 }
