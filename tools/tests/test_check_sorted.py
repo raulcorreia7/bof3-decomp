@@ -12,7 +12,9 @@ def test_sorted_enum_and_defines_pass() -> None:
 
 def test_descending_enum_member_is_reported_with_its_line() -> None:
     text = "typedef enum A {\n    A_TWO = 2,\n    A_ONE = 1,\n} A;\n"
-    assert check_sorted.check_text(text, "a.h") == ["a.h:3: enum member A_ONE sorts before A_TWO"]
+    assert check_sorted.check_text(text, "a.h") == [
+        "a.h:3: enum member A_ONE sorts before A_TWO"
+    ]
 
 
 def test_shifted_flags_and_define_runs_are_compared_by_value() -> None:

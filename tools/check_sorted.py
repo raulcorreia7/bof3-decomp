@@ -47,7 +47,7 @@ def value(expr: str, names: dict[str, int]) -> int | None:
 
 def first_unsorted(items: list[Item]) -> tuple[int, str, str] | None:
     """Return the line and both names of the first descent in (name, line, value) items."""
-    for (an, _, av), (bn, bl, bv) in zip(items, items[1:]):
+    for (an, _, av), (bn, bl, bv) in zip(items, items[1:], strict=False):
         if bv < av:
             return bl, an, bn
     return None
