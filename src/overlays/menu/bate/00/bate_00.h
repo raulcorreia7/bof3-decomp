@@ -28,61 +28,61 @@ typedef struct BateAbilityPanel {
     u8* names;
 } BateAbilityPanel;
 
-extern u8            D_80145FCC[][BATTLE_PARTY_STRIDE];
-extern u8            D_80148656;
-extern u8            D_8018E244;
-extern OverlayHeader D_801D0C00;
+extern s8            D_80144DE4;
+extern u8            D_80144DF2;
+extern u8            D_80144DF3;
+extern u8            D_80144DF4;
 extern char          g_MenuStatFormat[];
 extern char          g_MenuZennyFormat[];
 /* D_801D0C48 */
 extern char          g_MenuNextExpBlank[];
 extern char          g_MenuClockFormat[];
+extern u8            D_80144DF5;
+extern u8            D_80144DF6;
+extern u8            D_80144DF7;
+extern u8            D_80145FCC[][BATTLE_PARTY_STRIDE];
+extern u8            D_80148338;
+extern s8            D_80148511;
+extern u8            D_80148656;
+extern s8            D_80148658;
+extern u8            D_8018E244;
+extern OverlayHeader D_801D0C00;
 extern u8            D_801D0D80[];
 extern u8            D_801D0D84[];
+extern u8            MENU_CAPTION_GLYPH_2[];
+extern u8            MENU_CLOCK_CAPTION[];
+extern u8            MENU_COMMAND_FRAME[];
+extern u8            MENU_COMMAND_FRAME_SELECTED[];
 extern u8            D_801D0D90[];
 extern u8            D_801D0D94[];
 extern u8            D_801D0D98[];
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step bytes. */
 extern Callback      D_801D86E0[];
-extern Callback      D_801D8700[];
-extern Callback      D_801D870C[];
-extern Callback      D_801D8718[];
-extern Callback      D_801D8720[];
-extern Callback      D_801D8764[];
-extern Callback      D_801D8770[];
-extern u8            MENU_CAPTION_GLYPH_2[];
-extern u8            MENU_CLOCK_CAPTION[];
-extern u8            MENU_COMMAND_FRAME[];
-extern u8            MENU_COMMAND_FRAME_SELECTED[];
-extern u8            D_801D893C[];
-extern u8            D_801D8954[];
-extern u8            D_801D896C[];
-extern u8            D_801D8978[];
-extern u8            D_801D8A3C[];
+extern s8            D_801D86F0;
 extern u8            g_MenuLabelAgility[];
 /* D_801D8B38 */
 extern u8            g_MenuEquipRowIcons[];
 /* D_801D8B40 */
 extern u8            g_MenuLabelEquip[];
 extern u8            g_MenuPortraitAtlas[];
-extern u8            D_801D8B84[];
+extern Callback      D_801D8700[];
 extern u8            MENU_CAPTION_ICON[];
 extern u8            MENU_CLOCK_COLON[];
 extern u8*           g_MenuCommandLabels[];
 extern u8            g_MenuCommandRows[][5];
+extern Callback      D_801D870C[];
+extern Callback      D_801D8718[];
+extern Callback      D_801D8720[];
+extern Callback      D_801D8764[];
+extern Callback      D_801D8770[];
+extern u8            D_801D893C[];
+extern u8            D_801D8954[];
+extern u8            D_801D896C[];
+extern u8            D_801D8978[];
+extern u8            D_801D8A3C[];
+extern u8            D_801D8B84[];
 extern u8*           D_801D8E80[];
-extern s8            D_80148658;
-extern s8            D_80144DE4;
-extern s8            D_801D86F0;
-extern u8            D_80144DF2;
-extern u8            D_80144DF3;
-extern u8            D_80144DF4;
-extern u8            D_80144DF5;
-extern u8            D_80144DF6;
-extern u8            D_80144DF7;
-extern u8            D_80148338;
-extern s8            D_80148511;
 extern u8            D_801D8EE0[5];
 
 typedef struct BateState {
@@ -96,18 +96,18 @@ typedef struct BateState {
 extern s8        D_80148659;
 extern BateState D_801D8ED4;
 
-void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
-void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
-void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
+s32  Item_Count(u8 category, u8 item, u8 mode);
+void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 s32  Char_GetExpForLevel(s32 character, s32 level);
+void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
+
+void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
+
+void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+
 void func_801D73B4(BateAbilityPanel* panel);
-
-void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
-
-void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
-
-s32 Item_Count(u8 category, u8 item, u8 mode);
 
 #endif
