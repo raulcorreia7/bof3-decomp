@@ -29,7 +29,9 @@ typedef struct SaveData {
     /* 0x000 */ SceneState      scene_state; /* a snapshot of g_SceneState */
     /* 0x010 */ u8              unk_10[3];
     /* 0x013 */ SceneEventState scene_event;
-    /* 0x016 */ u8              unk_16[0x5A];
+    /* 0x016 */ u8              unk_16[0xA];
+    /* 0x020 */ u8              script_vars[4]; /* a copy of g_ScriptVars[0..3] */
+    /* 0x024 */ u8              unk_24[0x4C];
     /* 0x070 */ u16             checksum;     /* zeroed while the payload is summed, then holds the sum */
     /* 0x072 */ u8              unk_72[8];    /* holds g_SndMono at 0x79, read through volatile views */
     /* 0x07A */ u8              window_style; /* the last argument of UI_DrawWindow */
@@ -67,6 +69,7 @@ typedef struct SaveData {
 
 ASSERT_SIZE(SaveData, SAVE_DATA_SIZE);
 ASSERT_OFFSET(SaveData, scene_event, 0x013);
+ASSERT_OFFSET(SaveData, script_vars, 0x020);
 ASSERT_OFFSET(SaveData, checksum, 0x070);
 ASSERT_OFFSET(SaveData, window_style, 0x07A);
 ASSERT_OFFSET(SaveData, characters, 0x090);

@@ -151,14 +151,6 @@ void        func_801F2020(void);
 void        func_801F228C(void);
 int         abs(int); /* SDK libc, no staged abs.h */
 
-extern u8 D_801448F8;
-
-extern u8 D_801448F9;
-
-extern u8 D_801448FA;
-
-extern u8 D_801448FB;
-
 extern s32 D_801457AC;
 
 /* function-local data for func_801729D0 */
