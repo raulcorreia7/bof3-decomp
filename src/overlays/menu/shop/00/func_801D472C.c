@@ -5,7 +5,7 @@ MATCH void func_801D472C(void) {
     u8  count;
 
     D_801E6110 = 0;
-    D_801E60EC = 0x17;
+    D_801E60EC = SAVE_WAIT_PROBE;
     Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     D_801E6080 = 0;
     /* Pointer form: retail keeps one base register across the counter read and

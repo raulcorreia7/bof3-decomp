@@ -84,9 +84,21 @@ ASSERT_OFFSET(ShopSelection, unk_34, 0x34);
 
 /* The save menu results g_SaveCardStatus holds beyond the CardEvent codes 0 to 4. */
 enum {
-    SAVE_STATUS_NO_FILE   = 5, /* GAME_TEXT_NO_SAVE_FILE */
-    SAVE_STATUS_SAVED     = 8, /* GAME_TEXT_SAVE_COMPLETE */
-    SAVE_STATUS_FORMATTED = 9, /* GAME_TEXT_INIT_COMPLETE */
+    SAVE_STATUS_NO_FILE       = 5,  /* GAME_TEXT_NO_SAVE_FILE */
+    SAVE_STATUS_WRITE_FAILED  = 6,  /* the write ended in a card error */
+    SAVE_STATUS_FORMAT_FAILED = 7,  /* the card format failed */
+    SAVE_STATUS_SAVED         = 8,  /* GAME_TEXT_SAVE_COMPLETE */
+    SAVE_STATUS_FORMATTED     = 9,  /* GAME_TEXT_INIT_COMPLETE */
+    SAVE_STATUS_CREATED       = 10, /* a new file was saved */
+};
+
+/* D_801E60EC: the save message shown during the timed wait, named for the step it precedes. */
+enum {
+    SAVE_WAIT_OVERWRITE = 20,
+    SAVE_WAIT_FORMAT    = 21,
+    SAVE_WAIT_CREATE    = 22,
+    SAVE_WAIT_PROBE     = 23,
+    SAVE_WAIT_SCAN      = 25,
 };
 
 extern u8          g_SaveBuffer[];
