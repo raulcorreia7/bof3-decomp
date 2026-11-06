@@ -50,36 +50,6 @@
 #define FISHING_LURE_REELING_FLOAT_OFFSET  0x04u
 #define FISHING_LURE_SIDEWAYS_FLOAT_OFFSET 0x08u
 
-/* Rod table row; every field is one byte (@source: wiki:data/field#fairy-village-and-fishing). */
-typedef struct FishingRod {
-    u8 cast_power_speed_00;
-    u8 cast_sweep_direction_01; /* 0 linear bidirectional, 1 linear
-                                   unidirectional, 2 quadratic bidirectional */
-    u8 max_distance_02;         /* half the value in metres */
-    u8 reel_cursor_size_03;
-    s8 cursor_return_speed_04;
-    s8 cursor_left_speed_05;
-    s8 cursor_right_speed_06;
-    u8 unk_07;
-    u8 snap_left_tension_08;
-    u8 snap_right_tension_09;
-} FishingRod;
-
-ASSERT_SIZE(FishingRod, FISHING_ROD_STRIDE);
-
-typedef struct FishingLure {
-    u8 unk_00;
-    u8 idle_float_01[3];
-    u8 reeling_float_04[4];
-    u8 sideways_float_08[4];
-    u8 unk_0C[8];
-} FishingLure;
-
-ASSERT_SIZE(FishingLure, FISHING_LURE_STRIDE);
-ASSERT_OFFSET(FishingLure, idle_float_01, FISHING_LURE_IDLE_FLOAT_OFFSET);
-ASSERT_OFFSET(FishingLure, reeling_float_04, FISHING_LURE_REELING_FLOAT_OFFSET);
-ASSERT_OFFSET(FishingLure, sideways_float_08, FISHING_LURE_SIDEWAYS_FLOAT_OFFSET);
-
 /* D_80144FE4 */
 extern u8 g_FishBestCatch[FISHING_RECORD_COUNT];
 

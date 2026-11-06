@@ -22,8 +22,7 @@
  * The formats:
  *
  * - `AreaMapBundle` and its cell rows: map bundle.
- * - `AreaActorDef`, `AreaActorDefs`: scene/step table.
- * - `AreaScriptBank`, `AreaScriptSection`: area script bank.
+ * - `AreaActorDef`: scene/step table.
  * - `AreaTrail`, `AreaSlotWork`, `Vec2U16`: neighboring buffers; the
  *   area program owns them.
  *
@@ -102,7 +101,7 @@
 #define AREA_AUX_ID_FIRST          0xFCu
 #define AREA_AUX_ID_LAST           0x104u
 
-/* The area program's work memory (AreaWorkPointers.work_08). */
+/* The area program's work memory. */
 #define AREA_WORK                  0x800E4800u
 
 #define WORLD_VERTEX_POINT_SIZE    0x06
@@ -190,80 +189,6 @@ typedef enum AreaWalkFlags {
     AREA_WALK_MAP_LOADING   = 1 << 15,
 } AreaWalkFlags;
 
-/* One +0x24 cell record: four signed corner heights, loaded as s8 by
- * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`.
- */
-typedef struct AreaCellCorners {
-    s8 corner_height_00[4];
-} AreaCellCorners;
-
-ASSERT_SIZE(AreaCellCorners, AREA_MAP_CELL_RECORD_SIZE);
-
-/* Four-byte bank-A tile rectangle. */
-typedef struct AreaTileRect {
-    u8 dv_00;
-    u8 du_01;
-    u8 v_02;
-    s8 u_03; /* signed: `lb a0,3(a1)` at 0x80155670; 0x80 reads as -128 */
-} AreaTileRect;
-
-ASSERT_SIZE(AreaTileRect, AREA_TILE_RECT_SIZE);
-
-/* Eight-byte bank-B tile descriptor: four UV pairs. */
-typedef struct AreaTileQuad {
-    u8 uv_pairs_00[4][2];
-} AreaTileQuad;
-
-ASSERT_SIZE(AreaTileQuad, AREA_TILE_QUAD_SIZE);
-
-/* +0x20/+0x22 list entry header; the body follows as u32 words. */
-typedef struct AreaMapListRecordHeader {
-    u8 operand_00[2];
-    u8 word_count_02; /* includes this 4-byte header */
-    u8 opcode_03;
-} AreaMapListRecordHeader;
-
-ASSERT_SIZE(AreaMapListRecordHeader, AREA_MAP_LIST_RECORD_HEADER_SIZE);
-
-/* +0x24 cell header; words_02 includes this header and its record chain. */
-typedef struct AreaMapCellHeader {
-    u8  y_00;
-    u8  x_01;
-    u16 words_02;
-} AreaMapCellHeader;
-
-ASSERT_SIZE(AreaMapCellHeader, AREA_MAP_CELL_HEADER_SIZE);
-
-/* +0x28 object header; the body follows as body_words_02 words. */
-typedef struct AreaMapObjectHeader {
-    u16 tag_00;
-    u16 body_words_02;
-} AreaMapObjectHeader;
-
-ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
-
-/* `0x800D3800` - the area script bank: a `u32` directory, then one `u16` slot
- * table per section, then byte-addressed records. `dir_bytes == 4 * L` is the
- * directory's own size, not an entry count: read as a count it overruns the
- * payload (`WORLD00/AREA016.EMI` slot 4: `u32[0] = 28`, `u32[29] = 0x240018` in
- * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches
- * the block through `g_ScriptBank`: `section = u32[bank + 4*lhu(work+0x2C)]`,
- * `record = bank + section + u16[bank + section + 2*lbu(work+0x4B)]`, stored to
- * `work+0x50`. The battle overlays swap `0x800F0800` in for the duration of a
- * battle handler. */
-typedef struct AreaScriptBank {
-    u32 dir_bytes;      /* 0x00 - == 4 * L, the directory's own size */
-    u32 section_off[1]; /* 0x04 - L-1 entries, block-relative, strictly increasing */
-} AreaScriptBank;
-
-/* One section: `slots_bytes == 2 * M` in 2072 of 2380 sections; the 308 that
- * are not monotone are 51 byte-identical blobs reused across payloads, likely a
- * second section kind. The last section runs to the end of the block. */
-typedef struct AreaScriptSection {
-    u16 slots_bytes;   /* 0x00 - == 2 * M */
-    u16 record_off[1]; /* 0x02 - M entries, relative to the section base */
-} AreaScriptSection;
-
 /* `0x800E3800` - the scene table: a `u32` count then 8-byte records.
  * `exe/slus_004_22@0x8014DD3C` copies `script_section` to work+0x2C;
  * `@0x8014D6DC` uses it as a script-bank directory index and
@@ -289,24 +214,6 @@ typedef struct AreaActorDef {
 } AreaActorDef;
 
 ASSERT_SIZE(AreaActorDef, AREA_ACTOR_DEF_SIZE);
-
-typedef struct AreaActorDefs {
-    u32          count_00;   /* 0x00 - == (size - 4) / 8 in 200/200, count 4-51 */
-    AreaActorDef records[1]; /* 0x04 */
-} AreaActorDefs;
-
-/* `0x801459F0` - the four pointers the loader publishes together. Each word has
- * its own name in the tree (`g_ScriptBank` the script bank, `D_801459F4` the scene
- * records); this type is what a reader casts the address to when it wants all
- * four, so the words keep their own declarations. */
-typedef struct AreaWorkPointers {
-    u32 script_bank_00;   /* 0x00 -> 0x800D3800 (swapped per battle handler) */
-    u32 scene_records_04; /* 0x04 -> 0x800E3804 */
-    u32 work_08;          /* 0x08 -> 0x800E4800 */
-    u32 code_base_0C;     /* 0x0C -> 0x800F5000 */
-} AreaWorkPointers;
-
-ASSERT_SIZE(AreaWorkPointers, AREA_WORK_POINTERS_SIZE);
 
 /* One AREA024 vertex row: four packed points at +0x02. The program copies
  * 0x28-byte rows (`emi/world00/area024/14@0x801F3314`) and advances both

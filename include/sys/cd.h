@@ -19,15 +19,6 @@
  * EMI_LdrLoadSequence). */
 #define EMI_LOADER_STEP         (*(volatile u32*)(D_80140000 + 0x646C))
 
-typedef struct EmiActiveLoad {
-    u32 active_lba;
-    u32 remaining_size;
-    u32 load_arg;
-    u32 first_word;
-    u16 type;
-    u8  header_mode;
-} EmiActiveLoad;
-
 /* The EXE-side stream entry points are registry rows (EMI_Ldr*). */
 
 /* D_80146468 */

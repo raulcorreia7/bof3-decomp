@@ -281,13 +281,6 @@ typedef union BattleScreenCoord {
     s16 signed_half;
 } BattleScreenCoord;
 
-/* The cell at +0x90 of a local work record: battle/battle/03 reads the halfword, and
- * battle/battle/15 reads the low byte of it. */
-typedef union BattleWorkHalfOrByte90 {
-    u16 half;
-    u8  value;
-} BattleWorkHalfOrByte90;
-
 /* The cell at +0x0A of a battle panel task. battle/battle/03 reads it as the
  * selected battler slot (the row index is slot - 3) and battle/battle/15 reads it
  * as the panel's slide mode (0 moves the panel right), so the cell carries

@@ -85,16 +85,6 @@ typedef enum EmiLoaderState {
     EMI_LOADER_STATE_ARCHIVE_HEADER = 5,
 } EmiLoaderState;
 
-/* Never executable: EMI is a sector-aligned data container, so an entry is classified by type alone
- * (@source: wiki:formats/emi#entry-types). */
-typedef struct EmiArchiveHeader {
-    u32 entry_count;           /* 0x00 */
-    u32 version;               /* 0x04; 1 in all 880 US Breath of Fire III (USA) archives */
-    u8  magic[EMI_MAGIC_SIZE]; /* 0x08; EMI_MAGIC_STR */
-} EmiArchiveHeader;
-
-ASSERT_SIZE(EmiArchiveHeader, EMI_ARCHIVE_HEADER_SIZE);
-
 /* TOC rows start at 0x10, one per entry, and each payload starts on an EMI_SECTOR_SIZE
  * boundary: `next = current + ((size + 0x7ff) & ~0x7ff)`. `load_arg` is not always a CPU
  * pointer - it is a destination or a selector per type (@source: wiki:formats/emi#load-argument). */

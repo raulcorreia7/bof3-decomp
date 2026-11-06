@@ -16,16 +16,4 @@
 #define STR_SECTOR_SIZE       2336
 #define STR_RAW_SECTOR_SIZE   2352
 
-/* An XA subheader: the 4-byte frame header of an XA sector; the sector's
- * 8-byte subheader holds two (psx-spx: "CDROM XA Subheader, File, Channel,
- * Interleave"). */
-typedef struct XaSubheader {
-    u8 file;    /* 0x00 stream file number */
-    u8 channel; /* 0x01 interleaved channel number */
-    u8 submode; /* 0x02 bit 2: audio sector; bit 7: end of file */
-    u8 coding;  /* 0x03 bit 0: stereo; bit 2: 18.9 kHz rate */
-} XaSubheader;
-
-ASSERT_SIZE(XaSubheader, STR_XA_SUBHEADER_SIZE);
-
 #endif
