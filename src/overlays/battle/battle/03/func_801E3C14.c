@@ -23,7 +23,7 @@ MATCH void func_801E3C14(void) {
     g_BattlePendingStatus                  = 0;
     slot                                   = g_Task->slot;
     self                                   = g_BattleCurrentEnemy;
-    D_8014639C                             = (s32)g_Task;
+    D_8014639C                             = g_Task;
     g_BattleTargetRecord                   = (s16*)&self->pad_F1[3];
     g_BattleTarget                         = slot;
     *(s16*)((u8*)self + 0xF8)              = 0;
@@ -83,7 +83,7 @@ MATCH void func_801E3C14(void) {
             func_801E52F0(tail_work->unk_E8[2]);
         }
     }
-    if (g_BattleCurrentEnemy->hp_change < 0 || (s16)g_BattleCurrentEnemy->ap_change < 0) {
+    if (g_BattleCurrentEnemy->hp_change < 0 || g_BattleCurrentEnemy->ap_change < 0) {
         SND_PlayCue(EMI_CUE_ID(2, 6));
     }
     if (!(g_BattleState & BATTLE_STATE_DAMAGE_APPLIED)) {

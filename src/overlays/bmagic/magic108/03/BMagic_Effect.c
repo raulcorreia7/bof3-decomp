@@ -47,7 +47,7 @@ MATCH void func_801EEE0C(void) {
     func_801DD350(g_Task);
     g_Task->pos.x.fixed += g_Task->unk_0C;
     g_Task->pos.y.fixed += g_Task->unk_10;
-    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + 0xC0;
+    COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + 0xC0;
     g_Task->unk_18           = g_Task->pos.x.fixed;
     g_Task->unk_1C           = g_Task->pos.y.fixed;
     g_Task->unk_20           = g_Task->pos.z.fixed;
@@ -72,9 +72,9 @@ MATCH void func_801EEF48(void) {
     s32 vec[4];
 
     g_Task->timer += 1;
-    vec[0] = ((s32)g_Task->unk_18 >> 9) - 0x4000;
-    vec[1] = ((s32)g_Task->unk_1C >> 9) - 0x4000;
-    vec[2] = (s32)g_Task->unk_20 >> 0x11;
+    vec[0] = (g_Task->unk_18 >> 9) - 0x4000;
+    vec[1] = (g_Task->unk_1C >> 9) - 0x4000;
+    vec[2] = g_Task->unk_20 >> 0x11;
     /* The retail build passes the never-written slot after the vector. */
     func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x20);
     if (func_800AF6B8(g_Task->unk_18, g_Task->unk_1C, g_Task->unk_20, 0x8000) != 0) {

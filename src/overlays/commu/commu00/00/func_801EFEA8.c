@@ -48,14 +48,14 @@ MATCH s32 func_801EFEA8(void) {
                 }
                 record_count_low_byte = active_record_count & BYTE_MASK;
                 if (record_count_low_byte != 0) {
-                    battle_delta = (*battle_count_ptr - *timer_ptr) / (u32)(6 - record_count_low_byte);
+                    battle_delta = (*battle_count_ptr - *timer_ptr) / (6 - record_count_low_byte);
                     if (battle_delta != 0) {
                         updated_progress              = battle_delta + D_801457AB[group_byte_offset];
                         D_801457AB[group_byte_offset] = updated_progress;
                         /* kept: direct D_801455C4 access changes the retail register schedule. */
                         progress_or_queue_count       = (&D_801F2560)[FIELD(u8, battle_count_ptr, 0x598u)];
                         queue_record_index            = 0;
-                        if (progress_or_queue_count < (u32)(updated_progress & BYTE_MASK)) {
+                        if (progress_or_queue_count < (updated_progress & BYTE_MASK)) {
                             D_801457AB[group_byte_offset] = progress_or_queue_count;
                         }
                         queue_group_number                            = group_number;

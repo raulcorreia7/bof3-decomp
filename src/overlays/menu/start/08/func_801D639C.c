@@ -44,14 +44,14 @@ MATCH void func_801D639C(void) {
     D_801484CC = Item_GetDescription(group_index, *choice);
     one        = 1;
     D_80148624 = 1;
-    D_80148628 = (u16)D_80148508 + 6;
-    D_8014862A = (u16)(D_8014850A + (D_8014850E * 0xD + 0x57));
+    D_80148628 = D_80148508 + 6;
+    D_8014862A = (D_8014850A + (D_8014850E * 0xD + 0x57));
     input      = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         next_slot  = D_8014850E + 1;
         D_8014850E = next_slot;
-        if ((u32)(next_slot & BYTE_MASK) >= 6U) {
+        if ((next_slot & BYTE_MASK) >= 6U) {
             D_8014850E = 1;
         }
     } else if (input & PADLup) {

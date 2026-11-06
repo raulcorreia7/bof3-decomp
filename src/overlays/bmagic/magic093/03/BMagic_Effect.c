@@ -29,7 +29,7 @@ MATCH void func_801EF0C4(void) {
 INCLUDE_ASM(func_801EF108);
 
 MATCH void func_801EF264(void) {
-    if ((u8)D_801EB4E0->unk_0B < 8U) {
+    if (D_801EB4E0->unk_0B < 8U) {
         if (g_BattleTargetSelector & 0x40) {
             func_800A9820((g_Task->unk_03 + 3) & 0xFF);
             func_80196718(&D_801EB630[g_Task->unk_03]);

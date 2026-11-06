@@ -14,7 +14,7 @@ MATCH s16 func_800A3060(u8 battler_index, u16 rule_mask) {
             value = D_800B496C[index];
         }
     } else if (rule_mask & 0x20u) {
-        index = ENEMY_COMBATANT((u32)battler_index).stats.resistances[RES_SLOT_HOLY];
+        index = ENEMY_COMBATANT(battler_index).stats.resistances[RES_SLOT_HOLY];
         value = D_800B496C[index];
     }
     return value;

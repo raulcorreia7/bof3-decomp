@@ -12,5 +12,5 @@ MATCH void func_800A50B8(void) {
     counter           = (u8*)&g_BattleUiState;
     count             = *counter;
     g_BattlePanelMode = 2;
-    *counter          = (u8)(count + 1);
+    *counter          = (count + 1);
 }

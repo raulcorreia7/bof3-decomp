@@ -38,8 +38,8 @@ MATCH void func_801EF398(void) {
             if (amount <= 0) {
                 amount = 1;
             }
-            if ((u32)(g_BattleCount - D_801455BC) >= (u32)amount &&
-                (u32)D_801455C4 >= (u32)D_801F2523[D_801455C3 & BYTE_MASK]) {
+            if ((g_BattleCount - D_801455BC) >= amount &&
+                D_801455C4 >= D_801F2523[D_801455C3 & BYTE_MASK]) {
                 D_801455C3 += 1;
                 D_801455BC += amount;
                 D_80145E60[g_FairyVillageUpdateCount * 2] = 6;

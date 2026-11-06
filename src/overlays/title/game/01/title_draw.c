@@ -177,13 +177,13 @@ MATCH u8* GFX_BuildGlyphPrimitive(s32 x, s32 y, s32 glyph, s32 palette, u8 flags
 
     setRGB0(sprite, 128u, 128u, 128u);
     geom         = (u8)glyph * (WIN_GEOMETRY_STRIDE * 2u);
-    sprite->x0   = (s16)x;
-    sprite->y0   = (s16)y;
-    sprite->u0   = (u8) * (u16*)(((u8*)D_801D1C6C + geom));
-    sprite->v0   = (u8) * (u16*)(((u8*)&D_801D1C6E + geom));
+    sprite->x0   = x;
+    sprite->y0   = y;
+    sprite->u0   = * (u16*)(((u8*)D_801D1C6C + geom));
+    sprite->v0   = * (u16*)(((u8*)&D_801D1C6E + geom));
     sprite->w    = *(u16*)(((u8*)&D_801D1C70 + geom));
     sprite->h    = *(u16*)(((u8*)&D_801D1C72 + geom));
-    sprite->clut = (u16)(*(u16*)(((u8*)&D_801D1C74 + geom)) << 6);
+    sprite->clut = (*(u16*)(((u8*)&D_801D1C74 + geom)) << 6);
     GFX_AddPrim((u8)palette, 20);
     return primitive;
 }
@@ -308,14 +308,14 @@ MATCH void UI_UpdateWindowFade(void) { /* func_801D1B00 */
     p = *phase;
     if (p == 1u) {
         alpha                 = g_UiTitlePrimaryAlpha + 4u;
-        g_UiTitlePrimaryAlpha = (u16)alpha;
+        g_UiTitlePrimaryAlpha = alpha;
         if ((s16)alpha >= 128) {
             g_UiTitlePrimaryAlpha = 128u;
             primary_active        = 0;
         }
 
         alpha                   = g_UiTitleSecondaryAlpha + 2u;
-        g_UiTitleSecondaryAlpha = (u16)alpha;
+        g_UiTitleSecondaryAlpha = alpha;
         if ((s16)alpha >= 128) {
             g_UiTitleSecondaryAlpha = 128u;
             secondary_active        = 0;

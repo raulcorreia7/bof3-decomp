@@ -23,7 +23,7 @@ MATCH void func_8009B488(void) {
     *(u16*)&D_8014930E += (s8)value;
     if (g_BattleUiStep == 2) {
         g_AreaCameraHeightStep =
-            (s16)((s32)((((s32 (*)(s32, s32))Area_SampleHeight)(g_AreaScrollTargetX, g_AreaScrollTargetY) -
+            (((((s32 (*)(s32, s32))Area_SampleHeight)(g_AreaScrollTargetX, g_AreaScrollTargetY) -
                          g_AreaCameraHeight)
                         << 16) >>
                   21);
@@ -55,7 +55,7 @@ MATCH void func_8009B488(void) {
                 g_BattlePartyBattlers[index].facing   = state ^ 2;
             }
             count++;
-        } while ((u32)(count & BYTE_MASK) < (u8)g_BattlePartyCount);
+        } while ((u32)(count & BYTE_MASK) < g_BattlePartyCount);
     }
     phase = &g_BattleUiState;
     *phase += 1;

@@ -14,7 +14,7 @@ MATCH void func_801E05EC(void) {
     if (work->timer == 0) {
         battle = g_GameState;
         if (battle->unk_120 & 0x10) {
-            func_800AAC88((s16)battle->hp_change, work->slot);
+            func_800AAC88(battle->hp_change, work->slot);
         } else {
             slot                               = Battle_AllocEffect(0U, 1U) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_Task;

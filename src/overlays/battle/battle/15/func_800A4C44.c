@@ -7,5 +7,5 @@ MATCH void func_800A4C44(void) {
 
     D_80148627 = 2;
     D_8014862E = 0;
-    *counter   = (u8)(count + 1);
+    *counter   = (count + 1);
 }

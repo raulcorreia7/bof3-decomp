@@ -11,6 +11,6 @@ MATCH void func_800A0244(void) {
         } else {
             base = ENEMY_COMBATANT(battler).hp;
         }
-        ((s16*)g_BattleTargetRecord)[2] = (s16)(base >> 1);
+        ((s16*)g_BattleTargetRecord)[2] = (base >> 1);
     }
 }

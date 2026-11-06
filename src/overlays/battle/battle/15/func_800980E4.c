@@ -12,5 +12,5 @@ MATCH void func_800980E4(void) {
     g_BattleSelectionLatch = 1;
     g_InputRepeatButtons   = 0;
     game_ram               = (u8*)(u8*)(EFFECT_BANK_80140000);
-    game_ram[0x62E3]       = (u8)(game_ram[0x62E3] + 1u);
+    game_ram[0x62E3]       = (game_ram[0x62E3] + 1u);
 }

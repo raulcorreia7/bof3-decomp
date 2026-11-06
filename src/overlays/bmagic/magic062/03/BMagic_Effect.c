@@ -74,7 +74,7 @@ MATCH void func_801EFF68(void) {
     u8  value3;
 
     func_800AF764();
-    if ((g_Task->unk_0C == 4) && ((u8)g_Task->timer < 5U)) {
+    if ((g_Task->unk_0C == 4) && (g_Task->timer < 5U)) {
         value2 = (rand() & 3) | 0x40;
     } else {
         value2 = (rand() & 3) | 0x18;

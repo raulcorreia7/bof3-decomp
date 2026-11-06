@@ -11,7 +11,7 @@ MATCH void func_801D1FDC(void) {
     for (;;) {
         count = Party_CountOrder(0);
         idx   = i & BYTE_MASK;
-        if (idx >= (u32)count) {
+        if (idx >= count) {
             break;
         }
         panel = &D_801483C0 + idx * 0x24;

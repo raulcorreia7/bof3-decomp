@@ -15,7 +15,7 @@ MATCH void func_800A39B4(s16 delta, u8 battler_index) {
     } else if (total < -25) {
         result = -0x19;
     } else {
-        result = (s8)(delta + value);
+        result = (delta + value);
     }
     /* FAKE: statement boundary keeps the retail register order and schedule. */
     ORDER_LOCK(record[0x14] = result);

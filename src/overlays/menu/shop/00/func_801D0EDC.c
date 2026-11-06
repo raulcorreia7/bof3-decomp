@@ -19,7 +19,7 @@ MATCH void func_801D0EDC(void) {
         /* FAKE: retail reads g_Actors as u8[]. */
         pond       = ((u8*)g_Actors) + (index * ACTOR_SIZE);
         D_80148650 = *(s32*)(pond + 0x18) + 2;
-        D_80148699 = (u8) * (s32*)(pond + 0x1C);
+        D_80148699 = * (s32*)(pond + 0x1C);
         TASK_SET(pond);
     }
     count = 0;
@@ -27,7 +27,7 @@ MATCH void func_801D0EDC(void) {
     /* retail walks the records from the status halfword: +0x8 is current_hp, +0x10 is max_hp */
     row = &g_Characters[0];
     do {
-        need = (u32)row->stats.max_hp >> 2;
+        need = row->stats.max_hp >> 2;
         have = row->hp;
         if (have < need) {
             flags = row->status | STATUS_LOW_HP;

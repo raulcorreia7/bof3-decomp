@@ -32,7 +32,7 @@ MATCH void func_801EF134(void) {
             item = g_Task->unk_2C.half;
             BMagic_SetTextItemName(item & 0xFF, item >> 8);
         }
-        func_801DE8C0(1, 0x1E, Resource_GetText((u32)g_Task->timer));
+        func_801DE8C0(1, 0x1E, Resource_GetText(g_Task->timer));
         g_Task->mode += 1;
     }
 }

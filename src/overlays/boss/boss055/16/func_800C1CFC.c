@@ -5,7 +5,7 @@ MATCH void func_800C1CFC(void) {
 
     func_8014DAEC();
     func_801E54EC();
-    GFX_FreePaletteSlotOwner((s32)g_Task);
+    GFX_FreePaletteSlotOwner(g_Task);
     work = g_BattleCurrentEnemy;
     work->damage_flags |= COMBATANT_FLAG_SKIP_ACTION_STEP;
     TASK_BYTES[0] &= ~ACTOR_FLAG_HIDDEN;

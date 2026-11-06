@@ -45,17 +45,17 @@ MATCH void func_801D1094(void) {
     if (g_SndBgmId != 0xFF) {
         if (g_SndBgmId != D_801D1944) {
             temp_v0 = g_SndBgmId * 4;
-            SND_StopSequence((s32) * (g_SelectionCues + temp_v0), (s16) * (D_80181EBB + temp_v0));
+            SND_StopSequence(* (g_SelectionCues + temp_v0), * (D_80181EBB + temp_v0));
         }
     }
-    SND_RequestBgm((s32)D_801D1944);
+    SND_RequestBgm(D_801D1944);
     func_801D1250(0x32, 0x28);
     D_801F294D += 1;
 }
 
 MATCH void func_801D1124(void) {
     if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBgm((s32)D_801D1944, 0x64, 8);
+        SND_PlayBgm(D_801D1944, 0x64, 8);
         D_801D1948 = 0;
         D_801F294D += 1;
     }

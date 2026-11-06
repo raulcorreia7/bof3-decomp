@@ -18,7 +18,7 @@ MATCH s32 func_801E87F0(s32 record_index, s32 use_battle_record) {
         return 3;
     }
     if (rec->fatigue < 9) {
-        rec->fatigue = (u8)(rec->fatigue + 1);
+        rec->fatigue = (rec->fatigue + 1);
         Char_RebuildStats(rec);
         rec->hp = rec->stats.max_hp;
     } else if (cur < limit) {

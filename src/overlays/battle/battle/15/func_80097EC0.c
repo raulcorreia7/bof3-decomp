@@ -38,7 +38,7 @@ MATCH void func_80097EC0(void) {
     g_BattleChoicePanel[3]              = 2u;
     slot_index                          = g_BattleMessageSlot[5];
     active_selection_slot               = D_801EB4D8;
-    source_slot_offset                  = (u32)slot_index * 3u;
+    source_slot_offset                  = slot_index * 3u;
     g_BattleChoicePanel[0xA]            = slot_index;
     g_BattleChoicePanel[0xB]            = ((u8*)D_801454F4)[source_slot_offset];
     VOL(u16, g_BattleChoicePanel[0x10]) = ((u8*)D_801454F4)[source_slot_offset + 1];
@@ -52,7 +52,7 @@ MATCH void func_80097EC0(void) {
     if (flag_mask != 2u) {
         VOL(u16, g_BattleChoicePanel[0x14]) = 0u;
     } else {
-        VOL(u16, g_BattleChoicePanel[0x14]) = (u16)(active_selection_flags & 2u);
+        VOL(u16, g_BattleChoicePanel[0x14]) = (active_selection_flags & 2u);
     }
     init_work->scroll_base_x = 0x140u;
     init_work->scroll_base_y = 0x3Fu;

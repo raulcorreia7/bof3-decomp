@@ -21,9 +21,9 @@ MATCH void func_801E1E80(s16 panel_x, s16 panel_y) {
     value = Item_Count(ITEM_CAT_ITEM, ITEM_SKILL_INK, 0);
     sprintf((char*)g_UiFormatBuffer, D_801D0E84, value & HALF_MASK);
     UI_DrawAsciiString(x + 52, y, 0, g_UiFormatBuffer);
-    UI_DrawSpriteRun(x, (s16)(scaled_y >> 16), D_801E5CC0, 0);
+    UI_DrawSpriteRun(x, (scaled_y >> 16), D_801E5CC0, 0);
     for (i = 0; i < 9; i++) {
-        UI_DrawSpriteRun((s16)(base_x + (i * 8)), (s16)(scaled_y >> 16), D_801E5CCC, 0);
+        UI_DrawSpriteRun((base_x + (i * 8)), (scaled_y >> 16), D_801E5CCC, 0);
     }
     UI_DrawSpriteRun(base_x, base_y, D_801E5CD8, 0);
 }

@@ -22,7 +22,7 @@ MATCH void func_801F6E54(void) {
     func_801F8358();
     work                   = SP_REF(void*, 0x44);
     FIELD(s32, work, 0xCu) = 0x40;
-    FIELD(u8, work, 0x2u)  = (u8)(FIELD(u8, work, 0x2u) + 1);
+    FIELD(u8, work, 0x2u)  = (FIELD(u8, work, 0x2u) + 1);
 }
 
 MATCH void func_801F6E90(void) {
@@ -55,7 +55,7 @@ MATCH void func_801F6F8C(void) {
 
     work                    = SP_REF(void*, 0x44);
     FIELD(s32, work, 0x10u) = -8;
-    FIELD(u8, work, 0x2u)   = (u8)(FIELD(u8, work, 0x2u) + 1);
+    FIELD(u8, work, 0x2u)   = (FIELD(u8, work, 0x2u) + 1);
 }
 
 MATCH void func_801F6FB0(void) {
@@ -320,7 +320,7 @@ MATCH void func_801F9DA8(void) {
         *row = 0;
         index += 1;
         row += 0x20;
-    } while ((u32)(index & BYTE_MASK) < 0x40U);
+    } while ((index & BYTE_MASK) < 0x40U);
 }
 
 MATCH u8* func_801F9DD4(void) {
@@ -438,10 +438,10 @@ MATCH s32 func_801FD960(s32 arg0, s32 arg1) {
 
     if (g_GameAreaId == 0x67) {
         if ((SYS_TestFlag(g_SceneFlags, 3) == 0) && (arg1 <= 0x200000)) {
-            if ((u32)((arg0 >> 0x10) - 0x4A) < 2U) {
+            if (((arg0 >> 0x10) - 0x4A) < 2U) {
                 Game_SetScriptActive();
                 value = g_SndBgmId * 4;
-                SND_StartDecrescendo((s32) * (g_SelectionCues + value), (s16) * (D_80181EBB + value), 0x64, 0x20);
+                SND_StartDecrescendo(* (g_SelectionCues + value), * (D_80181EBB + value), 0x64, 0x20);
                 D_80146874 = 4;
                 D_80146875 = 0;
                 return 1;

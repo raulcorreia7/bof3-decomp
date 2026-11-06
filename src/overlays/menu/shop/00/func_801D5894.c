@@ -19,14 +19,14 @@ MATCH void func_801D5894(void) {
         strcpy(save_name, (char*)g_UiFormatBuffer);
         sprintf((char*)g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);
         strcpy(date_label, (char*)g_UiFormatBuffer);
-        if (((SaveProbe)CardAccessFile)(1, (s32)date_label, 0x200, 0, 0) != -1) {
+        if (((SaveProbe)CardAccessFile)(1, date_label, 0x200, 0, 0) != -1) {
             D_801E6108 = g_SaveSlotFirst + 1;
             SAVE_BuildSlotImage();
             if (D_801E60FC != 0) {
                 D_801E60FC -= 1;
                 D_801E610C += 1;
             }
-            if (((SaveProbe)CardAccessFile)(1, (s32)date_label, 2, SAVE_FILE_SIZE, 0) != -1) {
+            if (((SaveProbe)CardAccessFile)(1, date_label, 2, SAVE_FILE_SIZE, 0) != -1) {
                 g_SaveCardStatus = 0xA;
                 D_80148652       = 0xC;
                 D_80148654       = 0x3C;

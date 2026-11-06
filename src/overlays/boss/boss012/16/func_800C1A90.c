@@ -3,7 +3,7 @@
 MATCH void func_800C1A90(void) {
     EnemyBattler* work;
 
-    GFX_FreePaletteSlotOwner((s32)g_Task);
+    GFX_FreePaletteSlotOwner(g_Task);
     func_801E54EC();
     work = g_BattleCurrentEnemy;
     work->damage_flags |= COMBATANT_FLAG_SKIP_ACTION_STEP;

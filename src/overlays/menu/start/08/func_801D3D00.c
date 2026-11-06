@@ -14,9 +14,9 @@ MATCH void func_801D3D00(void) {
     D_801484CC = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][D_80148510]);
     D_80148624 = 1;
     D_80148534 = 0;
-    D_80148628 = (u16)D_80148508 + 7;
+    D_80148628 = D_80148508 + 7;
     span       = (D_80148510 - D_8014850F) * 0xD + 0x1A;
-    D_8014862A = (u16)D_8014850A + span;
+    D_8014862A = D_8014850A + span;
     panel      = &D_80148504;
     pressed    = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
     cursor     = D_80148510;
@@ -24,11 +24,11 @@ MATCH void func_801D3D00(void) {
         if (cursor != 0) {
             D_80148510 = cursor - 1;
         }
-        if ((u32)D_80148510 < (u32)D_8014850F) {
+        if (D_80148510 < D_8014850F) {
             D_80148516 = 0xF0;
         }
     } else if (pressed & PADLdown) {
-        if ((u32)cursor < 0x7FU) {
+        if (cursor < 0x7FU) {
             D_80148510 = cursor + 1;
         }
         if (D_80148510 >= D_8014850F + 9) {
@@ -37,7 +37,7 @@ MATCH void func_801D3D00(void) {
     } else if (pressed & 4) {
         if ((D_8014850F & BYTE_MASK) == 0) {
             D_80148510 = 0;
-        } else if ((u32)(D_8014850F & BYTE_MASK) < 9U) {
+        } else if ((D_8014850F & BYTE_MASK) < 9U) {
             D_80148510 = cursor - D_8014850F;
             D_8014850F = 0;
         } else {

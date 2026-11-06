@@ -10,8 +10,8 @@ MATCH void func_801D3884(void) {
     Menu_DrawClutStrip(D_80144953);
     D_801484CC = 0x17;
     D_80148624 = 1;
-    D_80148628 = (u16)D_80148508 + 0x2A;
-    D_8014862A = (u16)D_8014850A + 7;
+    D_80148628 = D_80148508 + 0x2A;
+    D_8014862A = D_8014850A + 7;
     trigger    = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     D_80148510 = 0xFF;
     if (trigger & PADLleft) {
@@ -30,7 +30,7 @@ MATCH void func_801D3884(void) {
         D_80148514 = 0x31;
         step_up    = D_8014850E + 1;
         D_8014850E = step_up;
-        if ((u32)(step_up & BYTE_MASK) >= 4U) {
+        if ((step_up & BYTE_MASK) >= 4U) {
             D_8014850E = 0;
         }
     store_selection:

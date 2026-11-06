@@ -39,7 +39,7 @@ MATCH void func_801EF0C0(void) {
     work         = g_Task;
     work->unk_29 = 2;
     work         = g_Task;
-    work->step   = (u8)(work->step + 1);
+    work->step   = (work->step + 1);
 }
 
 MATCH void func_801EF0F0(void) {
@@ -87,7 +87,7 @@ MATCH void func_801EF7F8(void) {
 }
 
 MATCH void func_801EF870(void) {
-    if ((u8)D_801EB4E0->unk_0B < 3U) {
+    if (D_801EB4E0->unk_0B < 3U) {
         g_Task->unk_09 = 0;
         g_Task->step += 1;
     }

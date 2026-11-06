@@ -308,7 +308,7 @@ MATCH s32 CardOpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
         }
         VSync(1);
         retries++;
-    } while ((u32)(retries & BYTE_MASK) < 120U);
+    } while ((retries & BYTE_MASK) < 120U);
     CardPollInfo();
     CardPollSoftwareEvents();
     if (g_SaveCardStatus != CARD_EVENT_OK) {
@@ -323,13 +323,13 @@ MATCH s32 CardOpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
     retries = 0;
     do {
         total += D_8018E990[retries & BYTE_MASK].size;
-        if ((u32)(total + (port << 13)) > 0x1E000U) {
+        if ((total + (port << 13)) > 0x1E000U) {
             g_SaveCardStatus = CARD_EVENT_CAPACITY;
         } else {
             g_SaveCardStatus = CARD_EVENT_ERROR;
         }
         retries++;
-    } while ((u32)(retries & BYTE_MASK) < 15U);
+    } while ((retries & BYTE_MASK) < 15U);
     return -1;
 }
 

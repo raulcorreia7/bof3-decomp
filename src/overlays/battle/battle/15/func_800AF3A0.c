@@ -16,7 +16,7 @@ MATCH void func_800AF3A0(VECTOR pos, s16 step) {
     VectorNormalS(&pos, &normal);
 
     store = (BattleWork*)g_Task;
-    store->range_axis_34 += (((s32)normal.vx * step) >> 3);
-    store->range_axis_38 += (((s32)normal.vy * step) >> 3);
-    store->unk_3E += (((s32)normal.vz * step) >> 11);
+    store->range_axis_34 += ((normal.vx * step) >> 3);
+    store->range_axis_38 += ((normal.vy * step) >> 3);
+    store->unk_3E += ((normal.vz * step) >> 11);
 }

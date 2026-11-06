@@ -7,7 +7,7 @@ MATCH u8 func_801EAB6C(u8* message) {
     count = 0;
     value = *message;
     while (value != 0u) {
-        if (((u32)(value - 0x12u) < 2u) || (value == 0x15u)) {
+        if (((value - 0x12u) < 2u) || (value == 0x15u)) {
             message += 1;
         }
         message += 1;

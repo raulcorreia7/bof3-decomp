@@ -27,7 +27,7 @@ MATCH void func_801DF3F8(void) {
         work->unk_5E = 0;
         work->unk_5D = 0;
     }
-    if ((g_BattleMode == 1) && ((u8)g_BattleStep >= 2U)) {
+    if ((g_BattleMode == 1) && (g_BattleStep >= 2U)) {
         PartyBattler* work;
 
         if (g_GameState->chr.character_id != D_80145F09[D_801462EE][0]) {
@@ -78,7 +78,7 @@ MATCH void func_801DF3F8(void) {
             if ((mode == 1) || (mode == 3)) {
                 s32 slot_offset = actor->slot * BATTLE_EFFECT_STRIDE;
 
-                actor->pos.x.fixed = (s32)(*(s32*)(D_801EC364 + slot_offset) + (*(s8*)(D_801EC339 + slot_offset) << 9));
+                actor->pos.x.fixed = (*(s32*)(D_801EC364 + slot_offset) + (*(s8*)(D_801EC339 + slot_offset) << 9));
             } else {
                 s32 slot_offset = actor->slot * BATTLE_EFFECT_STRIDE;
 
@@ -89,11 +89,11 @@ MATCH void func_801DF3F8(void) {
     } else if ((g_BattleState & BATTLE_STATE_RELOAD_PARTY) && (g_GameState->action_flags.value & 2)) {
         PartyBattler* work = g_Task;
 
-        work->pos.x.fixed = (s32)D_80143F24;
-        work->pos.y.fixed = (s32)D_80143F28;
+        work->pos.x.fixed = D_80143F24;
+        work->pos.y.fixed = D_80143F28;
     } else {
         actor              = g_Task;
-        actor->pos.x.fixed = (s32) * (s32*)(D_801EC364 + (actor->slot * BATTLE_EFFECT_STRIDE));
+        actor->pos.x.fixed = * (s32*)(D_801EC364 + (actor->slot * BATTLE_EFFECT_STRIDE));
         y_pos              = *(s32*)(D_801EC368 + (actor->slot * BATTLE_EFFECT_STRIDE));
     store_coord_y:
         actor->pos.y.fixed = y_pos;

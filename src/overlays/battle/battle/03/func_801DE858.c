@@ -9,7 +9,7 @@ MATCH u8 func_801DE858(s8 event_kind) {
 
     index = 0u;
     while (index < 8u) {
-        offset = (u32)index * 12u;
+        offset = index * 12u;
         if ((((volatile u8*)g_BattleEventSlots)[offset] != 0u) &&
             (((volatile u8*)g_BattleEventSlots + 1)[offset] == (u8)event_kind)) {
             return false;

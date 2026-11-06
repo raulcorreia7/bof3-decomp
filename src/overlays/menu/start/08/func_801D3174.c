@@ -34,9 +34,9 @@ MATCH void func_801D3174(void) {
     /* FAKE: keeps the pad load ahead of the panel stores. */
     MATCH_BARRIER();
     D_80148624 = 1;
-    D_80148628 = (u16)D_80148508 + 7;
+    D_80148628 = D_80148508 + 7;
     offset     = (D_80148510 - D_8014850F) * 13 + 0x1A;
-    D_8014862A = (u16)D_8014850A + offset;
+    D_8014862A = D_8014850A + offset;
     trigger    = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (trigger & PADLleft) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
@@ -58,7 +58,7 @@ MATCH void func_801D3174(void) {
         s_ChoiceMenuValues[D_8014850E]  = D_8014850F;
         step_up                         = D_8014850E + 1;
         D_8014850E                      = step_up;
-        if ((u32)(step_up & BYTE_MASK) >= 4U) {
+        if ((step_up & BYTE_MASK) >= 4U) {
             D_8014850E = 0;
         }
     /* Shared tail of both cursor-step directions. */

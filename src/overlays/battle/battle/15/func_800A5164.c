@@ -18,7 +18,7 @@ MATCH void func_800A5164(void) {
             g_BattleGeneCount[0]         = g_BattleGeneCount[0] + 1;
         }
         i = i + 1;
-    } while ((u32)(i & BYTE_MASK) < 3U);
+    } while ((i & BYTE_MASK) < 3U);
 
     func_800A82F8();
     g_BattlePanelMode = 2;

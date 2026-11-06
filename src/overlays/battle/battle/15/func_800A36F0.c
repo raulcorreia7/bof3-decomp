@@ -10,9 +10,9 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
     u32 saved_work;
 
     if (BATTLER_IS_PLAYER(battler_index)) {
-        status = g_BattlePartyBattlers[(u32)battler_index].chr.status;
+        status = g_BattlePartyBattlers[battler_index].chr.status;
     } else {
-        status = ENEMY_COMBATANT((u32)battler_index).status;
+        status = ENEMY_COMBATANT(battler_index).status;
     }
 
     if (flags & STATUS_KO) {
@@ -47,7 +47,7 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
         u32 slot;
 
         status &= ~STATUS_CONFUSED;
-        slot = (u32)battler_index;
+        slot = battler_index;
         if (BATTLER_IS_PLAYER(battler_index)) {
             g_BattlePartyBattlers[slot].pos.x.fixed = g_BattleTemplateStats[slot].defence[0];
             g_BattlePartyBattlers[slot].pos.y.fixed = g_BattleTemplateStats[slot].defence[1];
@@ -61,20 +61,20 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
 
     if (BATTLER_IS_PLAYER(battler_index)) {
         volatile u8* battler;
-        battler = (u8*)(&g_BattlePartyBattlers[(u32)battler_index]);
+        battler = (u8*)(&g_BattlePartyBattlers[battler_index]);
         GFX_FreePaletteFadeTarget(battler);
         saved_work                                           = g_BattleWorkCell;
-        g_BattlePartyBattlers[(u32)battler_index].chr.status = status;
-        g_BattleWorkCell                                     = (u32)battler;
-        func_801DDAB4(g_BattlePartyBattlers[(u32)battler_index].chr.status);
+        g_BattlePartyBattlers[battler_index].chr.status = status;
+        g_BattleWorkCell                                     = battler;
+        func_801DDAB4(g_BattlePartyBattlers[battler_index].chr.status);
     } else {
         volatile u8* battler;
-        battler = (u8*)(&((volatile BattleEnemyRecord*)g_BattleEnemies)[(u32)battler_index]);
+        battler = (u8*)(&((volatile BattleEnemyRecord*)g_BattleEnemies)[battler_index]);
         GFX_FreePaletteFadeTarget(battler);
         saved_work                                 = g_BattleWorkCell;
-        ENEMY_COMBATANT((u32)battler_index).status = status;
-        g_BattleWorkCell                           = (u32)battler;
-        func_801DDAB4(ENEMY_COMBATANT((u32)battler_index).status);
+        ENEMY_COMBATANT(battler_index).status = status;
+        g_BattleWorkCell                           = battler;
+        func_801DDAB4(ENEMY_COMBATANT(battler_index).status);
     }
 
     g_BattleWorkCell = saved_work;

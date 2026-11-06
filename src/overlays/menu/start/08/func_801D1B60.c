@@ -13,10 +13,10 @@ MATCH void func_801D1B60(void) {
 
     Menu_DrawClutStrip(D_80144953);
     saved_work = TASK_BYTES;
-    D_8014847E = (s8)D_80148655;
+    D_8014847E = D_80148655;
     kind       = D_801EC38C[(s8)D_80148655];
     TASK_SET(g_BattlePartyBattlers);
-    D_801484A8 = (s16)kind;
+    D_801484A8 = kind;
     if ((D_8014504A == 0 && ((g_GameRequestFlags & 1) || g_GameAreaId == 189) && (func_801B6470(kind) & BYTE_MASK)) ||
         (D_8014504A != 0 && (func_801D2190() & BYTE_MASK))) {
         D_80148480 = 0;

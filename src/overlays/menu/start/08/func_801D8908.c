@@ -36,7 +36,7 @@ MATCH void func_801D8908(void) {
             next       = value - 1;
             D_8014857C = next;
         }
-    } else if ((buttons & PADLdown) && (u8)value < 9) {
+    } else if ((buttons & PADLdown) && value < 9) {
         next       = value + 1;
         D_8014857C = next;
     }

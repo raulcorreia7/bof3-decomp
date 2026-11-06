@@ -8,7 +8,7 @@ MATCH void func_801D3560(u16* result_code) {
     Character* entry;
 
     *result_code = 100;
-    for (i = 0; i < (u32)Party_CountOrder(0); i++) {
+    for (i = 0; i < Party_CountOrder(0); i++) {
         /* Shift form: it keeps the table symbol in the load's immediate field,
          * which `i * 0x140` does not. */
         item  = D_80145FCC[i][0];

@@ -12,7 +12,7 @@ MATCH void func_801D29A4(void) {
     for (;;) {
         count = Party_CountOrder(0);
         idx   = i & BYTE_MASK;
-        if (idx >= (u32)count) {
+        if (idx >= count) {
             break;
         }
         panel            = &D_801484E0 + idx * 0x24;

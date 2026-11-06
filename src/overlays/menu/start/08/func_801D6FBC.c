@@ -8,7 +8,7 @@ MATCH void func_801D6FBC(void) {
 
     index     = D_80148535;
     bit_index = g_CharSlot[D_80144F5A[D_80148510]];
-    if (((s32)(Item_GetEquipability(D_80148530, index) & BYTE_MASK) >> bit_index) & 1) {
+    if (((Item_GetEquipability(D_80148530, index) & BYTE_MASK) >> bit_index) & 1) {
         D_80148511   = 0;
         record_index = bit_index & BYTE_MASK;
     } else {

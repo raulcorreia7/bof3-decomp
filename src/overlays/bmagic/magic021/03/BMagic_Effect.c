@@ -30,7 +30,7 @@ MATCH void func_801EF208(void) {
 }
 
 MATCH void func_801EF260(void) {
-    if ((u8)g_Task->unk_09 < 0xCU) {
+    if (g_Task->unk_09 < 0xCU) {
         func_801EF348();
         g_Task->unk_09 += 4;
         return;

@@ -13,7 +13,7 @@ MATCH void func_801E60DC(void) {
         D_801EC2E0->mode += 1;
         slot         = D_801EC2E0;
         slot->unk_0C = 0x8000;
-        slot->unk_10 = (s32)0xFFFA0000;
+        slot->unk_10 = 0xFFFA0000;
         slot->unk_1C = COORD_INT(slot->pos.y);
         slot->unk_18 = COORD_INT(slot->pos.x);
     }

@@ -16,6 +16,6 @@ MATCH void func_800A0188(void) {
     }
     record = *(s16**)&g_BattleTargetRecord;
     if (record[2] >= (s16)base) {
-        record[2] = (s16)(base - 1);
+        record[2] = (base - 1);
     }
 }
