@@ -6,5 +6,5 @@
 #include "overlays/bmagic/bmagic.h"
 
 /* Battle flag and the request hand-off these overlays toggle. */
-extern BattleResultRings D_801EEC04;
+extern BattleHandlerTable4 D_801EEC04;
 #endif

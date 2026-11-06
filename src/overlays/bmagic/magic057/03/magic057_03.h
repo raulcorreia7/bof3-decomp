@@ -6,7 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern BattleEffect* volatile D_801EC2E0;
-extern BattleResultRings   D_801EEC10;
+extern BattleHandlerTable4 D_801EEC10;
 extern BattleHandlerTable3 D_801EEC20;
 
 extern BattleHandlerTable3 D_801EEC2C;

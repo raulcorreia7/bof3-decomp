@@ -90,7 +90,7 @@ MATCH void func_801EF358(void) {
 }
 
 MATCH void func_801EF3D0(void) {
-    MagicTaskFuncs handlers;
+    BattleHandlerTable4 handlers;
 
     handlers = D_801EEC28;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);

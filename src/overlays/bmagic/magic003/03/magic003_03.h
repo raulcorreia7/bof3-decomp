@@ -13,9 +13,9 @@ void func_801EF324(void);
 
 void func_801EF708(void);
 
-extern MagicTaskFuncs D_801EEC18;
+extern BattleHandlerTable4 D_801EEC18;
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern BattleEffect   D_801F0B38[];
+extern BattleEffect        D_801F0B38[];
 #define BMAGIC_EFFECT_SLOTS D_801F0B38
 #define BMAGIC_EFFECT_COUNT 32
 

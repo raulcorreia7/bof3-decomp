@@ -5,7 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern MagicTaskFuncs D_801EEC04;
+extern BattleHandlerTable4 D_801EEC04;
 
 /* This effect steps the shared tick counter (unk_09) by one per
  * step and advances the magic step at its limit. */

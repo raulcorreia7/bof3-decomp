@@ -17,7 +17,7 @@ MATCH void func_801EECB0(void) {
 }
 
 MATCH void func_801EED2C(void) {
-    BattleResultRings table;
+    BattleHandlerTable4 table;
 
     table = D_801EEC10;
     SYS_DISPATCH_TASK(table.handlers, 2, g_Task);

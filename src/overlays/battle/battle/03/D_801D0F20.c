@@ -112,7 +112,7 @@ BattleHandlerTable3 D_801D0FF8 = {
 };
 
 /* 0x801D1004 */
-BattleResultRings D_801D1004 = {
+BattleHandlerTable4 D_801D1004 = {
     (Callback)func_801EA848,
     (Callback)func_801EA894,
     (Callback)func_801EA8F4,

@@ -24,13 +24,7 @@ INCLUDE_ASM(func_801EF37C);
 
 INCLUDE_ASM(func_801EF478);
 
-MATCH void func_801EF678(void) {
-    s32 wave;
-    u16 phase;
-    u8  tick;
-
-    BMAGIC_SWAY_ADVANCE_WORK(D_801F17B0)
-}
+#include "overlays/bmagic/func_801EF678.h"
 
 #include "overlays/bmagic/func_801EF728.h"
 
