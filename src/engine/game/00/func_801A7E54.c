@@ -4,26 +4,26 @@
 MATCH void func_801A7E54(void) {
     u8* flag;
 
-    switch (D_801448EC) {
+    switch (g_SaveData.scene_event.step) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_SetScriptActive();
-                D_801448EC = 1;
+                g_SaveData.scene_event.step = 1;
             }
             break;
         case 1:
-            func_801BE1B0(s_SceneStateStepArgs[D_801448ED]);
-            D_801448EC = 2;
+            func_801BE1B0(s_SceneStateStepArgs[g_SaveData.scene_event.selection]);
+            g_SaveData.scene_event.step = 2;
             break;
         case 2:
             if (g_ScriptVars[3] == 0x20) {
-                D_801448EE = 0x10;
-                D_801448EC = 3;
+                D_801448EE                  = 0x10;
+                g_SaveData.scene_event.step = 3;
             }
             break;
         case 3:
             if (--(*(u16*)&D_801448EE) == 0) {
-                switch (D_801448ED) {
+                switch (g_SaveData.scene_event.selection) {
                     case 0:
                     case 4:
                         Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, 0x110000, 0x590000, 0x85);
@@ -37,7 +37,7 @@ MATCH void func_801A7E54(void) {
                         Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, 0x3E0000, 0x50000, 0x81);
                         break;
                 }
-                D_801448EC = 4;
+                g_SaveData.scene_event.step = 4;
             }
             break;
         case 4:
@@ -47,9 +47,9 @@ MATCH void func_801A7E54(void) {
                 Game_ClearScriptActive();
                 SYS_ClearFlag(g_SaveData.scene_event_flags, 0x1E);
                 SYS_ClearFlag(g_SaveData.scene_event_flags, 0x1F);
-                D_801448EB = 0;
-                D_801448EC = 0;
-                D_801448ED = 0;
+                g_SaveData.scene_event.mode      = 0;
+                g_SaveData.scene_event.step      = 0;
+                g_SaveData.scene_event.selection = 0;
             }
             break;
     }

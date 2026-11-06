@@ -8,8 +8,8 @@ MATCH void func_801F3D4C(void) {
     } else {
         if (D_801490C7 == 1) {
             Game_SetScriptActive();
-            D_801448EB = 0x29;
-            D_801448EC = 0;
+            g_SaveData.scene_event.mode = 0x29;
+            g_SaveData.scene_event.step = 0;
         }
         message = 0xFFFF;
     }

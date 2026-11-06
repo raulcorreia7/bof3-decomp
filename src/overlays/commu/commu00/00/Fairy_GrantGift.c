@@ -11,7 +11,7 @@ MATCH void Fairy_GrantGift(void) {
     u32       elapsed;
 
     memcpy(buf, g_FairyGifts, 0x50);
-    elapsed = g_SaveData.battle_count - g_SaveData.fairy_jobs[D_801448ED].progress_anchor;
+    elapsed = g_SaveData.battle_count - g_SaveData.fairy_jobs[g_SaveData.scene_event.selection].progress_anchor;
     for (i = 0; i < 20; i++) {
         if (elapsed < buf[i].num_battles) {
             break;
@@ -30,7 +30,7 @@ MATCH void Fairy_GrantGift(void) {
         if (!(Item_Add(buf[i].item_type, buf[i].item_index, 1, 0) & BYTE_MASK)) {
             FAIRY_EVENT_STEP = FAIRY_EVENT_STEP + 1;
         } else {
-            g_SaveData.fairy_jobs[D_801448ED].progress_anchor = g_SaveData.battle_count;
+            g_SaveData.fairy_jobs[g_SaveData.scene_event.selection].progress_anchor = g_SaveData.battle_count;
         }
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;

@@ -7,7 +7,7 @@ MATCH s32 func_801F42F4(s32 entry_x, s32 entry_y) {
         }
         if ((entry_y >> 16) >= 10 && (entry_y >> 16) <= 11) {
             Game_SetScriptActive();
-            D_801448EC = 5;
+            g_SaveData.scene_event.step = 5;
         }
     }
     return 0;

@@ -6,7 +6,7 @@ MATCH void func_801F4920(void) {
     if (D_801490C7 == 0) {
         SYS_SetFlag(g_SaveData.scene_event_flags, 0x8FU);
         Game_SetScriptActive();
-        D_801448EB = 0x3B;
-        D_801448EC = 0;
+        g_SaveData.scene_event.mode = 0x3B;
+        g_SaveData.scene_event.step = 0;
     }
 }

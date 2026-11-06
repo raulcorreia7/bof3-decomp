@@ -97,6 +97,8 @@ typedef union MasterStock {
 
 /* Data, in address order. */
 extern MasterStock        D_80145FCC;
+/* Separate symbol from g_SaveData.scene_event.selection: sharing the record base changes these units. */
+extern u8                 D_801448ED;
 extern u8                 D_801D0C04[];
 extern u8                 D_801D0C08[];
 extern u8                 D_801D0C10[];
@@ -182,7 +184,7 @@ static inline void MasterMenuRequestMasterMessage(u8* state, s32 offset) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[D_801448ED] + offset));
+    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SaveData.scene_event.selection] + offset));
     *state = GAME_REQUEST_MESSAGE;
     g_MasterSubStep++;
 }
@@ -192,7 +194,7 @@ static inline void MasterMenuRunActivePanelMessage(u8* state) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[D_801448ED] + 4));
+    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SaveData.scene_event.selection] + 4));
     *state       = 2;
     g_MasterStep = 6;
 }

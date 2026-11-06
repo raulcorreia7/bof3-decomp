@@ -526,16 +526,16 @@ MATCH POLY_FT4* func_801F3480(const AreaPoint* point, s32 angle, u32 texture) {
 MATCH void func_801F35E0(void) {
     g_MessageRequest = RESET_SENTINEL;
     if ((D_801490C7 & 1) == 0) {
-        D_801448EB = 1;
-        D_801448EC = 0;
+        g_SaveData.scene_event.mode = 1;
+        g_SaveData.scene_event.step = 0;
     }
 }
 
 MATCH void func_801F3618(void) {
     g_MessageRequest = RESET_SENTINEL;
     if ((D_801490C7 & 1) == 0) {
-        D_801448EB = 2;
-        D_801448EC = 0;
+        g_SaveData.scene_event.mode = 2;
+        g_SaveData.scene_event.step = 0;
     }
 }
 
@@ -616,22 +616,22 @@ MATCH void func_801F376C(void) {
 }
 
 MATCH void func_801F37E4(void) {
-    switch (D_801448EC) {
+    switch (g_SaveData.scene_event.step) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_SetScriptActive();
                 SYS_SetFlag(g_SaveData.scene_event_flags, 1);
-                D_801448EC = 1;
+                g_SaveData.scene_event.step = 1;
             }
             break;
         case 1:
             func_801BE1B0(1);
-            D_801448EC = 2;
+            g_SaveData.scene_event.step = 2;
             break;
         case 2:
             if (g_ScriptVars[3] == 0x20) {
-                D_801448EE = 16;
-                D_801448EC = 3;
+                D_801448EE                  = 16;
+                g_SaveData.scene_event.step = 3;
             }
             break;
         case 3: {
@@ -640,8 +640,8 @@ MATCH void func_801F37E4(void) {
 
             if (TIMER_EXPIRED(*timer)) {
                 Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, 0x4B0000u, 0x380000u, 143);
-                D_801448EC = 4;
-                flag       = &g_ScriptVars[3];
+                g_SaveData.scene_event.step = 4;
+                flag                        = &g_ScriptVars[3];
                 (*flag)++;
             }
         } break;
@@ -652,8 +652,8 @@ MATCH void func_801F37E4(void) {
                 *flag = 0;
                 Game_ClearScriptActive();
                 SYS_ClearFlag(g_SaveData.scene_event_flags, 1);
-                D_801448EB = 0;
-                D_801448EC = 0;
+                g_SaveData.scene_event.mode = 0;
+                g_SaveData.scene_event.step = 0;
             }
         } break;
     }

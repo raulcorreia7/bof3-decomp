@@ -338,9 +338,9 @@ MATCH void func_801FB3DC(void) {
 MATCH void func_801FB414(void) {
     SYS_SetFlag(g_SceneFlags, 28);
     Game_SetScriptActive();
-    D_801448EB = 44;
-    D_801448EC = 0;
-    D_801448ED = 17;
+    g_SaveData.scene_event.mode      = 44;
+    g_SaveData.scene_event.step      = 0;
+    g_SaveData.scene_event.selection = 17;
 }
 
 INCLUDE_ASM(func_801FB464);

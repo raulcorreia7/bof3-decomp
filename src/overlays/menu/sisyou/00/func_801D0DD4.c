@@ -24,7 +24,7 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
 
     if (pad & D_80145AC2) {
         item = D_80145FCC.bytes[g_MasterMenuCursor * BATTLE_PARTY_STRIDE];
-        if (g_SaveData.characters[item].master_id == D_801448ED) {
+        if (g_SaveData.characters[item].master_id == g_SaveData.scene_event.selection) {
             if ((confirm & BYTE_MASK) == 0) {
                 goto play_stop; /* both row-state cases share this exit */
             }

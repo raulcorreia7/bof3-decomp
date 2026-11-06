@@ -168,7 +168,7 @@ MATCH void func_801D25CC(void) {
         }
     } else if (EMI_LoaderIsReady() != 0) {
         SND_PlayBgm(D_801DB0CC, 0x64, 8);
-        temp_v1  = &D_801448EC;
+        temp_v1  = &g_SaveData.scene_event.step;
         *temp_v1 = *temp_v1 + 1;
     }
 }
@@ -337,7 +337,7 @@ MATCH void func_801D4840(void) {
         }
     } else if (EMI_LoaderIsReady() != 0) {
         SND_PlayBgm(D_801DB0CC, 0x64, 8);
-        temp_v1  = &D_801448EC;
+        temp_v1  = &g_SaveData.scene_event.step;
         *temp_v1 = *temp_v1 + 1;
     }
 }

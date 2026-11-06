@@ -308,6 +308,9 @@ extern u8                 D_80143FBD;
 extern u8                 D_80143FBF;
 extern u8                 D_80143FC1;
 extern u8                 D_80143FC3;
+/* Separate symbols from g_SaveData.scene_event: sharing the record base changes func_801A852C. */
+extern s8                 D_801448EB;
+extern s8                 D_801448EC;
 extern s8                 D_801448E8; /* 0x801448E8 */
 extern s16                D_801448EE; /* 0x801448EE */
 extern s16                D_801448F0; /* 0x801448F0 */

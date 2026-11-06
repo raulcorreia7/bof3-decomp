@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world03.h"
+#include "work/save.h"
 extern u8 D_80146874;
 extern u8 D_80146875;
 

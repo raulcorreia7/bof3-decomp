@@ -2,5 +2,5 @@
 
 MATCH void func_801F4674(void) {
     Game_SetScriptActive();
-    D_801448EC = 5;
+    g_SaveData.scene_event.step = 5;
 }

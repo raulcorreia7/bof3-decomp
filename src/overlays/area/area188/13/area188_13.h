@@ -8,6 +8,7 @@
 #include "work/area_spad.h"
 
 #include "shared/WorldSpin.h"
+#include "work/save.h"
 
 /* The per-scene y limit bytes the walk step reads, in 16.16 units. */
 #define AREA_WALK_LIMIT_TABLE D_801F6898

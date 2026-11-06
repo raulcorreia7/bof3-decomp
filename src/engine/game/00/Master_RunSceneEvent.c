@@ -1,12 +1,12 @@
 #include "game_00.h"
 
 MATCH void Master_RunSceneEvent(void) {
-    switch (D_801448EC) {
+    switch (g_SaveData.scene_event.step) {
         case 0:
             g_AreaWalkFlags |= AREA_WALK_BUSY_ALL;
             EMI_LoaderStreamInitSlot(EMI_SLOT_SISYOU);
             {
-                s8* state = &D_801448EC;
+                s8* state = &g_SaveData.scene_event.step;
                 *state    = *state + 1;
             }
             return;
@@ -15,7 +15,7 @@ MATCH void Master_RunSceneEvent(void) {
                 GFX_CopyPalette(2U);
                 func_801D0C18();
                 {
-                    s8* state = &D_801448EC;
+                    s8* state = &g_SaveData.scene_event.step;
                     *state    = *state + 1;
                 }
             }
@@ -28,21 +28,21 @@ MATCH void Master_RunSceneEvent(void) {
         case 3:
             g_EmiStreamFlags = 0x20;
             EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
-            D_801448EC = D_801448EC + 1;
+            g_SaveData.scene_event.step = g_SaveData.scene_event.step + 1;
             return;
         case 4:
             if (EMI_LoaderIsReady() != 0) {
                 g_AreaWalkFlags &= ~AREA_WALK_BUSY_ALL;
                 Game_ClearScriptActive();
-                D_801448EB = 0;
-                D_801448EC = 0;
-                D_801448ED = 0;
+                g_SaveData.scene_event.mode      = 0;
+                g_SaveData.scene_event.step      = 0;
+                g_SaveData.scene_event.selection = 0;
                 return;
             }
             break;
         case 5:
             if (g_AreaSceneMode == 2) {
-                D_801448EC = 0;
+                g_SaveData.scene_event.step = 0;
             }
             break;
     }

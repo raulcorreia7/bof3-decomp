@@ -5,9 +5,9 @@ MATCH void func_801F3DBC(void) {
     if ((g_CharSlot[D_80145F09] == 1) && (SYS_TestFlag(g_SaveData.scene_event_flags, 0xB) == 0) &&
         (SYS_TestFlag(g_SaveData.scene_event_flags, 0x11) == 0)) {
         SYS_SetFlag(g_SaveData.scene_event_flags, 0xBU);
-        D_801448EB = 7;
-        D_801448EC = 0xA;
-        D_801448EE = 0x384;
+        g_SaveData.scene_event.mode = 7;
+        g_SaveData.scene_event.step = 0xA;
+        D_801448EE                  = 0x384;
         g_GameFlags |= 0x20;
     }
 }

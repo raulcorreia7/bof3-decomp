@@ -10,10 +10,10 @@ MATCH void Master_ApplyMaster(void) {
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }
-    value = D_801D4270[D_801448ED];
+    value = D_801D4270[g_SaveData.scene_event.selection];
     if (value != GAME_NONE) {
         D_80146889[g_ScriptVars[3] * ACTOR_SIZE] = value;
     }
     g_MasterStep = 0;
-    D_801448EC++;
+    g_SaveData.scene_event.step++;
 }

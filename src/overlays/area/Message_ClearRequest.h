@@ -9,8 +9,8 @@
 MATCH void Message_ClearRequest(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {
-        D_801448EB = 0xA;
-        D_801448EC = 0;
-        D_801448ED = AREA_RESET_VARIANT;
+        g_SaveData.scene_event.mode      = 0xA;
+        g_SaveData.scene_event.step      = 0;
+        g_SaveData.scene_event.selection = AREA_RESET_VARIANT;
     }
 }

@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "shared/etc.h"
+#include "work/save.h"
 
 /* The overlay's step table: the handlers the entry stub dispatches, selected
  * by the commu step byte commu00 owns. */

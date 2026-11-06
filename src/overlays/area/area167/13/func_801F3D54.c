@@ -9,8 +9,8 @@ MATCH void func_801F3D54(void) {
             D_80146866 = 2;
         }
         Game_SetScriptActive();
-        D_80146867 = 0x40;
-        D_801448EB = 0x20;
-        D_801448EC = 0x14;
+        D_80146867                  = 0x40;
+        g_SaveData.scene_event.mode = 0x20;
+        g_SaveData.scene_event.step = 0x14;
     }
 }

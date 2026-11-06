@@ -17,7 +17,7 @@ MATCH void func_801F2C6C(void) {
     u8             blank;
     u32            id;
 
-    state = &D_801448EC;
+    state = &g_SaveData.scene_event.step;
     switch (*state) {
         case 0:
             Game_SetScriptActive();
@@ -79,15 +79,15 @@ MATCH void func_801F2C6C(void) {
                 Message_StartAreaMessage((s16)(index + 22));
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            (*(u8*)&D_801448EC)++;
+            (*(u8*)&g_SaveData.scene_event.step)++;
             break;
 
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                D_801448EB = 0;
-                *state     = 0;
-                D_801448ED = 0;
+                g_SaveData.scene_event.mode      = 0;
+                *state                           = 0;
+                g_SaveData.scene_event.selection = 0;
             }
             break;
     }

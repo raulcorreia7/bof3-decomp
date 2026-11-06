@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world04.h"
+#include "work/save.h"
 
 #define AREA_SELECTION_FIRST  D_801F35CC
 #define AREA_SELECTION_SECOND D_801F35CD

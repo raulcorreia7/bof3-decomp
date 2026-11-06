@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world00.h"
+#include "work/save.h"
 
 /* The shop panel step the request sets. */
 #endif

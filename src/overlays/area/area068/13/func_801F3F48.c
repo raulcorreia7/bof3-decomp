@@ -4,7 +4,7 @@
 NON_MATCHING s32 func_801F3F48(void) {
     s32 step;
     /* FAKE: pin carries the request code in a2 from the first store to the
-     * D_801448EB store. */
+     * g_SaveData.scene_event.mode store. */
     MATCH_FAKE_PIN(s32, request, "a2");
     Actor* record1;
     Actor* record2;
@@ -31,15 +31,15 @@ NON_MATCHING s32 func_801F3F48(void) {
         record         = (Actor*)((s32)record - base);
         step           = ((s32)(-(((s32)record) * 0xD79435E5))) >> 3;
         D_80146867     = (s8)step;
-        /* FAKE: barrier keeps the D_801448EB/D_801448ED stores in statement
+        /* FAKE: barrier keeps the g_SaveData.scene_event.mode/g_SaveData.scene_event.selection stores in statement
          * order after the row store. */
         MATCH_FAKE_BARRIER();
     ORDER_LOCK_END;
-    step       = 3;
-    D_801448EB = request;
-    /* FAKE: barrier keeps the D_801448ED store after the D_801448EB store. */
+    step                        = 3;
+    g_SaveData.scene_event.mode = request;
+    /* FAKE: barrier keeps the g_SaveData.scene_event.selection store after the g_SaveData.scene_event.mode store. */
     MATCH_FAKE_BARRIER();
-    D_801448ED = step;
+    g_SaveData.scene_event.selection = step;
     return 0;
 }
 #else

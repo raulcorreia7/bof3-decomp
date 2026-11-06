@@ -7,6 +7,7 @@
 #define GAME_SCRATCH_BASE_SCALAR
 #include "overlays/area/world00.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 
 extern SVECTOR  D_1F800014[];
 extern s32      D_80145EC4;

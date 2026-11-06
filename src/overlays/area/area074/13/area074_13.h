@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world01.h"
+#include "work/save.h"
 
 extern u32 D_80144F94;
 
