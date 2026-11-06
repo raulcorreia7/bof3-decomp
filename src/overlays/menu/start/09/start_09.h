@@ -14,31 +14,31 @@
 #define SAVE_FRAME_ADDR        0x800C1800u
 
 /* Card-name table dimensions. */
-#define CARD_NAME_MAX          8
-#define CARD_NAME_SIZE         0x30
 #define CARD_WILDCARD_MAX      4
 #define CARD_PORT_PREFIX_LEN   6
 #define CARD_GAME_ID_LEN       6
 #define CARD_PORT_PATTERN_LEN  7
+#define CARD_NAME_MAX          8
+#define CARD_NAME_SIZE         0x30
 
 /* PSX TIM constants and record dimensions. */
 #define TIM_MAGIC              0x10
 
+#define TIM_ICON_COUNT         3
 #define TIM_HEADER_SIZE        0x08
+#define TIM_CLUT_COLORS        16
+#define TIM_ICON_PIXEL_SIZE    16
 #define TIM_CLUT_BLOCK_SIZE    0x2C
+#define TIM_IMAGE_WORDS        64
 #define TIM_IMAGE_BLOCK_SIZE   0x8C
 #define TIM_ICON_SIZE          0xC0
-#define TIM_CLUT_COLORS        16
-#define TIM_IMAGE_WORDS        64
-#define TIM_ICON_COUNT         3
-#define TIM_ICON_PIXEL_SIZE    16
 
 /* Save-frame layout. */
+#define CARD_ICON_FRAME_COUNT  3
 #define CARD_HEADER_MAGIC_SIZE 4
 #define CARD_HEADER_NAME_SIZE  28
 #define CARD_ICON_PALETTE_SIZE 0x20
 #define CARD_ICON_FRAME_SIZE   0x80
-#define CARD_ICON_FRAME_COUNT  3
 #define CARD_FILE_HEADER_SIZE  0x200
 
 typedef enum TimFlags {

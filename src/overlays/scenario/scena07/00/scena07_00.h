@@ -6,8 +6,8 @@
 
 #include "overlays/scenario/scenario.h"
 #include "work/area_spad.h"
-#define SCRATCH_ROW_STRIDE 0x1C
 #define SCRATCH_ROW_OFFSET 0x00
+#define SCRATCH_ROW_STRIDE 0x1C
 
 void             func_801F3C3C(s32 arg0);
 void             func_801FA38C(void);

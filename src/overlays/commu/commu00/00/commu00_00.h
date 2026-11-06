@@ -26,9 +26,9 @@
 #define FAIRY_EXPLORE_TRIP_MIDDLE             1
 #define FAIRY_EXPLORE_TRIP_FAR                2
 
-#define FAIRY_EXPLORE_SUCCESS_NEAR            65
-#define FAIRY_EXPLORE_SUCCESS_MIDDLE          55
 #define FAIRY_EXPLORE_SUCCESS_FAR             15
+#define FAIRY_EXPLORE_SUCCESS_MIDDLE          55
+#define FAIRY_EXPLORE_SUCCESS_NEAR            65
 
 #define FAIRY_LABEL_CAP_NEAR                  15
 #define FAIRY_LABEL_CAP_MIDDLE                20
@@ -39,40 +39,40 @@
 
 /* The fairy job row: 8 bytes, the stride the village code walks
  * (func_801EF110, func_801EFA50). */
-#define FAIRY_JOB_SIZE                        0x8
-#define FAIRY_VARIANT_SIZE                    0x6
-#define FAIRY_VILLAGE_HEAD_SIZE               0xC
 #define FAIRY_EXPLORE_TRIP_COUNT              3
 #define FAIRY_REWARD_ROLL_SIZE                4
-#define FAIRY_VILLAGE_HEADER_DATA_SIZE        0x60
 #define FAIRY_VILLAGE_FMT_SIZE                4
+#define FAIRY_VARIANT_SIZE                    0x6
+#define FAIRY_JOB_SIZE                        0x8
+#define FAIRY_VILLAGE_HEAD_SIZE               0xC
+#define FAIRY_VILLAGE_HEADER_DATA_SIZE        0x60
 
 /* The overlay's shared data block at 0x801F24FC..0x801F2950, read through the
  * symbol views in the data block. Each define is one member's row count. */
-#define FAIRY_VILLAGE_DATA_SIZE               0x454
-#define FAIRY_VILLAGE_RESOURCE_ID_COUNT       6
-#define FAIRY_CULTURE_LEVEL_COUNT             7
-#define FAIRY_VILLAGE_JOB_PROGRESS_CAP_COUNT  13
-#define FAIRY_VILLAGE_COPY_CLASS_COUNT        8
+#define COMMU00_HANDLER_114_COUNT             1
 #define FAIRY_VILLAGE_COPY_CLASS_FIELD_COUNT  3
-#define FAIRY_VILLAGE_MUSIC_LEVEL_CAP_COUNT   8
-#define FAIRY_VILLAGE_TASK_ROW_COUNT          20
 #define FAIRY_VILLAGE_TASK_ROW_FIELD_COUNT    3
-#define FAIRY_VILLAGE_VARIANT_ROW_COUNT       8
 #define FAIRY_VILLAGE_VARIANT_ROW_FIELD_COUNT 3
 #define FAIRY_VILLAGE_VARIANT_VARIANT_COUNT   3
-#define COMMU00_HANDLER_F0_COUNT              6
 #define COMMU00_HANDLER_108_COUNT             3
-#define COMMU00_HANDLER_114_COUNT             1
-#define COMMU00_HANDLER_17C_COUNT             5
-#define COMMU00_HANDLER_190_COUNT             4
-#define COMMU00_HANDLER_1A0_COUNT             5
-#define COMMU00_HANDLER_1B4_COUNT             7
-#define COMMU00_HANDLER_1F0_COUNT             5
-#define FAIRY_VILLAGE_COPY_ITEM_COUNT         16
-#define FAIRY_VILLAGE_VARIANT_COUNTER_COUNT   8
 #define FAIRY_VILLAGE_LABEL_ROW_COUNT         3
 #define FAIRY_VILLAGE_LABEL_FIELD_COUNT       3
+#define COMMU00_HANDLER_190_COUNT             4
+#define COMMU00_HANDLER_17C_COUNT             5
+#define COMMU00_HANDLER_1A0_COUNT             5
+#define COMMU00_HANDLER_1F0_COUNT             5
+#define FAIRY_VILLAGE_RESOURCE_ID_COUNT       6
+#define COMMU00_HANDLER_F0_COUNT              6
+#define FAIRY_CULTURE_LEVEL_COUNT             7
+#define COMMU00_HANDLER_1B4_COUNT             7
+#define FAIRY_VILLAGE_COPY_CLASS_COUNT        8
+#define FAIRY_VILLAGE_MUSIC_LEVEL_CAP_COUNT   8
+#define FAIRY_VILLAGE_VARIANT_ROW_COUNT       8
+#define FAIRY_VILLAGE_VARIANT_COUNTER_COUNT   8
+#define FAIRY_VILLAGE_JOB_PROGRESS_CAP_COUNT  13
+#define FAIRY_VILLAGE_COPY_ITEM_COUNT         16
+#define FAIRY_VILLAGE_TASK_ROW_COUNT          20
+#define FAIRY_VILLAGE_DATA_SIZE               0x454
 
 /* The loaded work-area pointer; the pointee is the unit's Actor. */
 #define FAIRY_VILLAGE_ACTIVE_UI               D_801F2948

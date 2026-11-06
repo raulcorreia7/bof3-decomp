@@ -17,11 +17,11 @@
 /* Shared panel-animation quantities. Steps and clamps are human quantities, so
  * they are decimal (handbook: addresses/masks/encodings hex, pixel steps/clamps
  * decimal). */
-#define MENU_PANEL_STEP_X      32
-#define MENU_PANEL_STEP_Y      16
 #define MENU_PANEL_FLOOR_X     (-170)
 #define MENU_PANEL_HIDDEN_X    (-150)
 #define MENU_PANEL_HIDDEN_Y    (-20)
+#define MENU_PANEL_STEP_Y      16
+#define MENU_PANEL_STEP_X      32
 
 #define MENU_CHOICE_PANEL_SIZE 0x14
 #define MENU_PANEL_TASK_SIZE   0x24

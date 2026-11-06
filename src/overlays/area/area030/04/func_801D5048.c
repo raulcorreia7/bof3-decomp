@@ -1,20 +1,20 @@
 #include "area030_04.h"
 
 /* The status panel frame the row is drawn into. */
-#define FISHING_PANEL_X       0x14
-#define FISHING_PANEL_Y       0x12
-#define FISHING_PANEL_WIDTH   0x118
-#define FISHING_PANEL_HEIGHT  0x13
 #define FISHING_FRAME_STEP    0x10
+#define FISHING_PANEL_Y       0x12
+#define FISHING_PANEL_HEIGHT  0x13
+#define FISHING_PANEL_X       0x14
+#define FISHING_ROW_STEP      0x1E
 #define FISHING_CURSOR_Y      0x28
 #define FISHING_CURSOR_STEP   0x2D
-#define FISHING_CURSOR_ORIGIN 0x58
-#define FISHING_ROW_STEP      0x1E
-#define FISHING_ROW_ORIGIN_X  0x9C
-#define FISHING_ROW_ORIGIN_Y  0x94
-#define FISHING_ICON_X        0x80
-#define FISHING_ICON_Y        0x5B
 #define FISHING_BAR_Y         0x4E
+#define FISHING_CURSOR_ORIGIN 0x58
+#define FISHING_ICON_Y        0x5B
+#define FISHING_ICON_X        0x80
+#define FISHING_ROW_ORIGIN_Y  0x94
+#define FISHING_ROW_ORIGIN_X  0x9C
+#define FISHING_PANEL_WIDTH   0x118
 
 /* Draws one row of the rotating status display. */
 MATCH void func_801D5048(void) {

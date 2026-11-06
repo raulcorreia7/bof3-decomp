@@ -35,8 +35,8 @@ typedef struct {
 #define ENCSPU_ENCODE_CONTINUE (1<<1)
 #define ENCSPU_ENCODE_END      (1<<2)
 
-#define ENCSPU_ENCODE_LOOP    1
 #define ENCSPU_ENCODE_NO_LOOP 0
+#define ENCSPU_ENCODE_LOOP    1
 
 #define ENCSPU_ENCODE_ENDIAN_LITTLE 0
 #define ENCSPU_ENCODE_ENDIAN_BIG    1

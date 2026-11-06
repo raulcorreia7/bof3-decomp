@@ -14,43 +14,43 @@
  * record offsets and func_8014F800 draws the record. */
 #define MASTER_MENU_TEXT_BANK         0x80010000
 
-#define MASTER_MENU_HEAD_SIZE         0x18
-#define MASTER_MENU_FMT_A_SIZE        4
-#define MASTER_MENU_FMT_BC_SIZE       8
-#define MASTER_MENU_ATLAS_RECORD_SIZE 4
-#define MASTER_MENU_ATLAS_COUNT       12
 #define MASTER_SKILL_SIZE             2
-#define MASTER_MENU_SPRITE_BANK_SIZE  0x90
-#define MASTER_MENU_SPRITE_090_SIZE   0x2C
-#define MASTER_MENU_SPRITE_0BC_SIZE   0x0C
-#define MASTER_MENU_SPRITE_0C8_SIZE   0x18
-#define MASTER_MENU_LABEL_SIZE        4
-#define MASTER_MENU_LABEL_LONG_SIZE   8
-#define MASTER_MENU_MESSAGE_ID_COUNT  18
-#define MASTER_MENU_STEP_COUNT        7
 #define MASTER_MENU_SUBSTEP_COUNT     2
+#define SISYOU_SUB5_HANDLER_COUNT     3
+#define MASTER_MENU_FMT_A_SIZE        4
+#define MASTER_MENU_ATLAS_RECORD_SIZE 4
+#define MASTER_MENU_LABEL_SIZE        4
+#define MASTER_MENU_STATE_COUNT       4
 #define SISYOU_SUB2_HANDLER_COUNT     6
+#define MASTER_MENU_STEP_COUNT        7
+#define MASTER_MENU_FMT_BC_SIZE       8
+#define MASTER_MENU_LABEL_LONG_SIZE   8
 #define SISYOU_SUB3_HANDLER_COUNT     9
 #define SISYOU_SUB4_HANDLER_COUNT     9
-#define SISYOU_SUB5_HANDLER_COUNT     3
+#define MASTER_MENU_ATLAS_COUNT       12
+#define MASTER_MENU_SPRITE_0BC_SIZE   0x0C
+#define MASTER_MENU_MESSAGE_ID_COUNT  18
 #define MASTER_MENU_VALUE_COUNT       20
-#define MASTER_MENU_STATE_COUNT       4
+#define MASTER_MENU_HEAD_SIZE         0x18
+#define MASTER_MENU_SPRITE_0C8_SIZE   0x18
+#define MASTER_MENU_SPRITE_090_SIZE   0x2C
+#define MASTER_MENU_SPRITE_BANK_SIZE  0x90
 
 /* The party screen layout, in pixels: the party rows, the stat panel, the
  * selection box, the header frame and the header text. The four drawers
  * (func_801D10AC, func_801D0DD4, func_801D12FC, func_801D0C88) place them. */
+#define MASTER_MENU_FRAME_Y           16
 #define MASTER_MENU_ROW_X             17
-#define MASTER_MENU_ROW_TOP           62
+#define MASTER_MENU_FRAME_HEIGHT      19
+#define MASTER_MENU_TEXT_Y            19
+#define MASTER_MENU_FRAME_X           20
+#define MASTER_MENU_TEXT_X            27
+#define MASTER_MENU_SELECT_HEIGHT     52
 #define MASTER_MENU_ROW_PITCH         54
+#define MASTER_MENU_ROW_TOP           62
 #define MASTER_MENU_STAT_PANEL_X      137
 #define MASTER_MENU_SELECT_WIDTH      272
-#define MASTER_MENU_SELECT_HEIGHT     52
-#define MASTER_MENU_FRAME_X           20
-#define MASTER_MENU_FRAME_Y           16
 #define MASTER_MENU_FRAME_WIDTH       280
-#define MASTER_MENU_FRAME_HEIGHT      19
-#define MASTER_MENU_TEXT_X            27
-#define MASTER_MENU_TEXT_Y            19
 
 /* The payload prologue at 0x801D0C00: the type-0 EMI loader compares the
  * first word with the archive TOC's cached first word; the rest are the three

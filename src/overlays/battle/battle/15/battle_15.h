@@ -34,8 +34,8 @@
 /* Entry table at D_8014688E with its parallel id byte table at D_8014691A:
  * thirty records of stride 0x98, kind 7 marks a live entry
  * (func_800AC754, func_800AC7D0). */
-#define BATTLE_ENTRY_STRIDE            0x98
 #define BATTLE_ENTRY_COUNT             30
+#define BATTLE_ENTRY_STRIDE            0x98
 /* The kind byte of a live entry; the other kinds are unproven. */
 #define BATTLE_ENTRY_KIND              7
 
@@ -43,9 +43,9 @@
  * the seeded roll's fifth over the base, capped at the max; the rate is the
  * base over the seeded roll's fifth, floored at the min. */
 #define BATTLE_HIT_THRESHOLD_BASE      50
+#define BATTLE_HIT_RATE_MIN            50
 #define BATTLE_HIT_THRESHOLD_MAX       100
 #define BATTLE_HIT_RATE_BASE           125
-#define BATTLE_HIT_RATE_MIN            50
 #define g_GameState                    ((volatile u32)g_GameState)
 #define g_AreaScrollTargetY            (*(u32*)&g_AreaScrollTargetY)
 

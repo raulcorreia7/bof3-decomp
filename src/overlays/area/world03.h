@@ -11,9 +11,9 @@
 extern u16 D_80146876;
 
 /* The work origin offset, step and threshold this overlay advances. */
-#define AREA_ORIGIN_OFFSET       0x2E
 #define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0x10
+#define AREA_ORIGIN_OFFSET       0x2E
 
 /* The work-window byte offset and row stride this overlay clears. */
 #define SCRATCH_COLUMN_OFFSET    0

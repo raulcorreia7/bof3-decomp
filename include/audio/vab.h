@@ -43,13 +43,13 @@
 /* Bank geometry: a header (VH) followed by the program table, the tone table
  * and the VAG size table. The tone table sits at 0x820 because the program
  * table holds 128 fixed 16-byte records. */
-#define VAB_HEADER_SIZE       0x20
 #define VAB_PROGRAM_SIZE      0x10
-#define VAB_PROGRAM_MAX       128
-#define VAB_TONE_SIZE         0x20
 #define VAB_TONES_PER_PROGRAM 16
+#define VAB_HEADER_SIZE       0x20
+#define VAB_TONE_SIZE         0x20
 #define VAB_PROGRAM_TABLE     0x20
-#define VAB_TONE_TABLE        0x820
+#define VAB_PROGRAM_MAX       128
 #define VAB_SIZE_TABLE_MAX    256
+#define VAB_TONE_TABLE        0x820
 
 #endif

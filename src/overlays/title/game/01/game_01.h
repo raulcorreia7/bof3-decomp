@@ -7,10 +7,10 @@
 
 #include "shared/etc.h"
 
-#define WIN_POPUP_PENDING_MASK   0x00FFFF00u
-#define WIN_POPUP_PENDING_OPEN   0x00020000u
-#define WIN_GLYPH_GEOMETRY_COUNT 20
 #define WIN_GEOMETRY_STRIDE      5u
+#define WIN_GLYPH_GEOMETRY_COUNT 20
+#define WIN_POPUP_PENDING_OPEN   0x00020000u
+#define WIN_POPUP_PENDING_MASK   0x00FFFF00u
 
 typedef enum InputFlags {
     INPUT_START = PADstart,

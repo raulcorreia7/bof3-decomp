@@ -8,14 +8,14 @@
 #define _LIBCOMB_H_
 
 /* status bits */
-#define COMB_CTS		0x100
-#define COMB_DSR		0x80
-#define COMB_FE			0x20
-#define COMB_OE			0x10
-#define COMB_PERROR		0x8
-#define COMB_TXU		0x4
-#define COMB_RXRDY		0x2
 #define COMB_TXRDY		0x1
+#define COMB_RXRDY		0x2
+#define COMB_TXU		0x4
+#define COMB_PERROR		0x8
+#define COMB_OE			0x10
+#define COMB_FE			0x20
+#define COMB_DSR		0x80
+#define COMB_CTS		0x100
 
 
 /* control bits */

@@ -27,9 +27,9 @@ typedef struct AreaSpin {
 
 #define AREA_SPIN_RADIUS     24
 #define AREA_SPIN_PITCH      (RANDOM_MASK(0x7FF) - 0x400)
+#define AREA_SPIN_FADE       0
 #define AREA_SPIN_SCALE_MASK 0x3
 #define AREA_SPIN_SCALE_BASE 4
-#define AREA_SPIN_FADE       0
 
 /* The scratchpad cell holding this mode's work pointer. */
 

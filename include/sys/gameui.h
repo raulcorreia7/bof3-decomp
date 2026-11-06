@@ -31,10 +31,10 @@ ASSERT_OFFSET(ScriptState, cursor, 0x0A);
  * stores a message index in the slot and Message_StartRequest reads the slot as that
  * index; the player's menu choice at D_801490C7 decides the index. */
 /* The menu header bar every screen draws at the top: geometry in pixels, y at its resting row. */
-#define MENU_HEADER_X           0x14
 #define MENU_HEADER_Y           0x12
-#define MENU_HEADER_WIDTH       0x118
 #define MENU_HEADER_HEIGHT      0x13
+#define MENU_HEADER_X           0x14
+#define MENU_HEADER_WIDTH       0x118
 
 #define MESSAGE_NONE            0xFFFF
 #define MESSAGE_REQUEST_CLEAR() (g_MessageRequest = MESSAGE_NONE)

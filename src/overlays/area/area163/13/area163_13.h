@@ -8,8 +8,8 @@
 #include "work/area_spad.h"
 
 /* The work origin offset, step and threshold this overlay advances. */
-#define AREA_ORIGIN_OFFSET       0x30
 #define ACTOR_SCREEN_X_STEP      0x20
+#define AREA_ORIGIN_OFFSET       0x30
 #define ACTOR_SCREEN_X_THRESHOLD 0x100
 
 /* The party position in 16.16 fixed point. */

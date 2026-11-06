@@ -4,12 +4,14 @@ MATCH void func_801F3BCC(void) {
     u16 value;
 
     if (D_801490C7 == 0) {
-        if ((Item_Count(ITEM_CAT_ITEM, 0x49, 0) & 0xFFFF) && (Item_Count(ITEM_CAT_ITEM, 0x3F, 0) & 0xFFFF) &&
-            (Item_Count(ITEM_CAT_ITEM, 0x27, 0) & 0xFFFF) && (Item_Count(ITEM_CAT_ITEM, 0x1D, 0) & 0xFFFF)) {
-            Item_Remove(ITEM_CAT_ITEM, 0x49U, 1, 0);
-            Item_Remove(ITEM_CAT_ITEM, 0x3FU, 1, 0);
-            Item_Remove(ITEM_CAT_ITEM, 0x27U, 1, 0);
-            Item_Remove(ITEM_CAT_ITEM, 0x1DU, 1, 0);
+        if ((Item_Count(ITEM_CAT_ITEM, ITEM_ANGLER, 0) & 0xFFFF) &&
+            (Item_Count(ITEM_CAT_ITEM, ITEM_MARTIAN_SQUID, 0) & 0xFFFF) &&
+            (Item_Count(ITEM_CAT_ITEM, ITEM_BEEF_JERKY, 0) & 0xFFFF) &&
+            (Item_Count(ITEM_CAT_ITEM, ITEM_SWALLOW_EYE, 0) & 0xFFFF)) {
+            Item_Remove(ITEM_CAT_ITEM, ITEM_ANGLER, 1, 0);
+            Item_Remove(ITEM_CAT_ITEM, ITEM_MARTIAN_SQUID, 1, 0);
+            Item_Remove(ITEM_CAT_ITEM, ITEM_BEEF_JERKY, 1, 0);
+            Item_Remove(ITEM_CAT_ITEM, ITEM_SWALLOW_EYE, 1, 0);
             g_MessageRequest = 0x62;
             return;
         }

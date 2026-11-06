@@ -13,9 +13,9 @@
 
 #define AREA_SPIN_RADIUS     32
 #define AREA_SPIN_PITCH      RANDOM_MASK(0x3FF)
+#define AREA_SPIN_FADE       0
 #define AREA_SPIN_SCALE_MASK 0x7
 #define AREA_SPIN_SCALE_BASE 8
-#define AREA_SPIN_FADE       0
 
 extern u8  D_80144F5B;
 extern u8  D_80144F5C;

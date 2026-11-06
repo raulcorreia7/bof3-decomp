@@ -1,11 +1,11 @@
 #include "shop_00.h"
 
 /* The description panel's frame is this wide and this tall. */
-#define SHOP_DESC_PANEL_WIDTH    0xAA
 #define SHOP_DESC_PANEL_HEIGHT   0x1C
+#define SHOP_DESC_PANEL_WIDTH    0xAA
 /* The border sprite rows along the panel's top and bottom edges. */
-#define SHOP_DESC_BORDER_COLUMNS 20
 #define SHOP_DESC_BORDER_ROWS    2
+#define SHOP_DESC_BORDER_COLUMNS 20
 /* Each border sprite is one cell wide. */
 #define SHOP_DESC_BORDER_STRIDE  8
 

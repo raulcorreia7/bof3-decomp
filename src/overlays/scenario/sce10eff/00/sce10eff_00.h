@@ -8,9 +8,9 @@
 
 /* rsin/rcos take 4096 (ONE) units per turn: the orbit counter wraps every 128
  * steps of 32 units. */
-#define SCE10EFF_ORBIT_STEPS          128
 #define SCE10EFF_ORBIT_STEP_SHIFT     5
 #define SCN_EFFECT_STATE_STEP_COUNT   15
+#define SCE10EFF_ORBIT_STEPS          128
 #define SCE10EFF_ORBIT_ANGLE(counter) (((counter) & (SCE10EFF_ORBIT_STEPS - 1)) << SCE10EFF_ORBIT_STEP_SHIFT)
 #define g_Task                        ((SceneBandEffect*)g_Task)
 

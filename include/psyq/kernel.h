@@ -12,13 +12,13 @@
 
 /* don't change these macros and structures which is refereced in kernel code */ 
 
-#define DescMask 	0xff000000
-#define DescTH 		DescMask
 #define DescHW   	0xf0000000
 #define DescEV   	0xf1000000
 #define DescRC   	0xf2000000
 #define DescUEV   	0xf3000000	/* User event */
 #define DescSW   	0xf4000000	/* BIOS */
+#define DescMask 	0xff000000
+#define DescTH 		DescMask
 
 #define HwVBLANK	(DescHW|0x01)	/* VBLANK */
 #define HwGPU		(DescHW|0x02)	/* GPU */
@@ -39,17 +39,17 @@
 #define SwCARD		(DescSW|0x01)	/* memory card */
 #define SwMATH          (DescSW|0x02)	/* libmath */
 
-#define RCntCNT0     	(DescRC|0x00)  	/* •\¦ƒsƒNƒZƒ‹ */
-#define RCntCNT1  	(DescRC|0x01)  	/* …•½“¯Šú */
-#define RCntCNT2  	(DescRC|0x02)  	/* ƒVƒXƒeƒ€ƒNƒƒbƒN‚W•ªü */
-#define RCntCNT3  	(DescRC|0x03)  	/* ‚’¼“¯Šú ƒ^[ƒQƒbƒg’l‚Í‚P‚ÉŒÅ’è */
+#define RCntCNT0     	(DescRC|0x00)  	/* ï¿½\ï¿½ï¿½ï¿½sï¿½Nï¿½Zï¿½ï¿½ */
+#define RCntCNT1  	(DescRC|0x01)  	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+#define RCntCNT2  	(DescRC|0x02)  	/* ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½bï¿½Nï¿½Wï¿½ï¿½ï¿½ï¿½ */
+#define RCntCNT3  	(DescRC|0x03)  	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½lï¿½Í‚Pï¿½ÉŒÅ’ï¿½ */
 
-#define RCntMdINTR	0x1000
-#define RCntMdNOINTR	0x2000
-#define RCntMdSC	0x0001
 #define RCntMdSP	0x0000
 #define RCntMdFR	0x0000
+#define RCntMdSC	0x0001
 #define RCntMdGATE	0x0010
+#define RCntMdINTR	0x1000
+#define RCntMdNOINTR	0x2000
 
 #define EvSpCZ		0x0001		/* counter becomes zero */
 #define EvSpINT		0x0002		/* interrupted */
@@ -61,6 +61,8 @@
 #define EvSpDE		0x0080		/* data end */
 #define EvSpTIMOUT      0x0100          /* time out */
 #define EvSpUNKNOWN     0x0200          /* unknown command */
+#define EvSpEDOM        0x0301		/* domain error in libmath */
+#define EvSpERANGE      0x0302		/* range error in libmath */
 #define EvSpIOER	0x0400		/* end of read buffer */
 #define EvSpIOEW	0x0800		/* end of write buffer */
 #define EvSpTRAP       	0x1000          /* general interrupt */
@@ -68,8 +70,6 @@
 #define EvSpSYSCALL	0x4000		/* system call instruction */
 #define EvSpERROR	0x8000		/* error happned */
 #define EvSpPERROR	0x8001		/* previous write error happned */
-#define EvSpEDOM        0x0301		/* domain error in libmath */
-#define EvSpERANGE      0x0302		/* range error in libmath */
 
 #define EvMdINTR	0x1000
 #define EvMdNOINTR	0x2000

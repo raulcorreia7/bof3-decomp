@@ -63,27 +63,27 @@
 /*
  * CD-ROM Mode (used int CdlSetmode)
  */
+#define CdlModeDA	0x01	/* 0: CD-DA off		1: CD-DA on	*/
+#define CdlModeAP	0x02	/* 0: AutoPause off	1: AutoPause on */
+#define CdlModeRept  	0x04	/* 0: Report off	1: Report on	*/
+#define CdlModeSF	0x08	/* 0: Channel off	1: Channel on	*/
+#define CdlModeSize0	0x10	/* 0: -			1: 2328byte	*/
+#define CdlModeSize1	0x20	/* 0: 2048 byte		1: 2340byte	*/
+#define CdlModeRT	0x40	/* 0: ADPCM off		1: ADPCM on	*/
+#define CdlModeSpeed	0x80	/* 0: normal speed	1: double speed	*/
 #define CdlModeStream  0x100    /* Normal Streaming                     */
 #define CdlModeStream2 0x120    /* SUB HEADER information includes      */
-#define CdlModeSpeed	0x80	/* 0: normal speed	1: double speed	*/
-#define CdlModeRT	0x40	/* 0: ADPCM off		1: ADPCM on	*/
-#define CdlModeSize1	0x20	/* 0: 2048 byte		1: 2340byte	*/
-#define CdlModeSize0	0x10	/* 0: -			1: 2328byte	*/
-#define CdlModeSF	0x08	/* 0: Channel off	1: Channel on	*/
-#define CdlModeRept  	0x04	/* 0: Report off	1: Report on	*/
-#define CdlModeAP	0x02	/* 0: AutoPause off	1: AutoPause on */
-#define CdlModeDA	0x01	/* 0: CD-DA off		1: CD-DA on	*/
 
 /*
  * Status Contents
  */
-#define CdlStatPlay		0x80	/* playing CD-DA */
-#define CdlStatSeek		0x40	/* seeking */
-#define CdlStatRead		0x20	/* reading data sectors */
-#define CdlStatShellOpen	0x10	/* once shell open */
-#define CdlStatSeekError	0x04	/* seek error detected */
-#define CdlStatStandby		0x02	/* spindle motor rotating */
 #define CdlStatError		0x01	/* command error detected */
+#define CdlStatStandby		0x02	/* spindle motor rotating */
+#define CdlStatSeekError	0x04	/* seek error detected */
+#define CdlStatShellOpen	0x10	/* once shell open */
+#define CdlStatRead		0x20	/* reading data sectors */
+#define CdlStatSeek		0x40	/* seeking */
+#define CdlStatPlay		0x80	/* playing CD-DA */
 
 /*
  * Macros for CdGetDiskType()
@@ -186,9 +186,9 @@ typedef struct {
 /*
  *	Low Level File System for CdSearchFile() 
  */
+#define CdlMAXLEVEL	8	/* max levels of directories */
 #define CdlMAXFILE	64	/* max number of files in a directory */
 #define CdlMAXDIR	128	/* max number of total directories */
-#define CdlMAXLEVEL	8	/* max levels of directories */
 
 typedef struct {
 	CdlLOC	pos;		/* file location */
@@ -212,7 +212,7 @@ typedef struct {
     u_long  dummy1;
     u_long  dummy2;
     CdlLOC  loc;
-} StHEADER;             /* CD-ROM STR ç\ë¢ëÃ */
+} StHEADER;             /* CD-ROM STR ÔøΩ\ÔøΩÔøΩÔøΩÔøΩ */
 
 #define  StFREE       0x0000
 #define  StREWIND     0x0001
@@ -221,8 +221,8 @@ typedef struct {
 #define  StLOCK       0x0004
 
 #define  EDC 0
-#define  SECTOR_SIZE (512)	/* Sector Size (word) */
 #define  HEADER_SIZE (8)	/* Header Size (word) */
+#define  SECTOR_SIZE (512)	/* Sector Size (word) */
 
 #define  StSTATUS         0x00
 #define  StVER            0x00

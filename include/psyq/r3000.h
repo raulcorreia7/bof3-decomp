@@ -9,12 +9,12 @@
 /*
  * Segment base addresses and sizes
  */
-#define	K0BASE		0x80000000
 #define	K0SIZE		0x20000000
-#define	K1BASE		0xA0000000
 #define	K1SIZE		0x20000000
-#define	K2BASE		0xC0000000
 #define	K2SIZE		0x20000000
+#define	K0BASE		0x80000000
+#define	K1BASE		0xA0000000
+#define	K2BASE		0xC0000000
 
 /*
  * Exception vectors
@@ -54,20 +54,20 @@
  */
 #define	SR_CUMASK	0xf0000000	/* coproc usable bits */
 
-#define	SR_CU3		0x80000000	/* Coprocessor 3 usable */
-#define	SR_CU2		0x40000000	/* Coprocessor 2 usable */
-#define	SR_CU1		0x20000000	/* Coprocessor 1 usable */
 #define	SR_CU0		0x10000000	/* Coprocessor 0 usable */
+#define	SR_CU1		0x20000000	/* Coprocessor 1 usable */
+#define	SR_CU2		0x40000000	/* Coprocessor 2 usable */
+#define	SR_CU3		0x80000000	/* Coprocessor 3 usable */
 
 #define	SR_BEV		0x00400000	/* use boot exception vectors */
 
 /* Cache control bits */
-#define	SR_TS		0x00200000	/* TLB shutdown */
-#define	SR_PE		0x00100000	/* cache parity error */
-#define	SR_CM		0x00080000	/* cache miss */
-#define	SR_PZ		0x00040000	/* cache parity zero */
-#define	SR_SWC		0x00020000	/* swap cache */
 #define	SR_ISC		0x00010000	/* Isolate data cache */
+#define	SR_SWC		0x00020000	/* swap cache */
+#define	SR_PZ		0x00040000	/* cache parity zero */
+#define	SR_CM		0x00080000	/* cache miss */
+#define	SR_PE		0x00100000	/* cache parity error */
+#define	SR_TS		0x00200000	/* TLB shutdown */
 
 #define SR_MM_MODE	0x00010000	/* lwl/swl/etc become scache/etc */
 #define lcache		lwl
@@ -79,7 +79,6 @@
  * Interrupt enable bits
  * (NOTE: bits set to 1 enable the corresponding level interrupt)
  */
-#define	SR_IMASK	0x0000ff00	/* Interrupt mask */
 #define	SR_IMASK8	0x00000000	/* mask level 8 */
 #define	SR_IMASK7	0x00008000	/* mask level 7 */
 #define	SR_IMASK6	0x0000c000	/* mask level 6 */
@@ -88,23 +87,24 @@
 #define	SR_IMASK3	0x0000f800	/* mask level 3 */
 #define	SR_IMASK2	0x0000fc00	/* mask level 2 */
 #define	SR_IMASK1	0x0000fe00	/* mask level 1 */
+#define	SR_IMASK	0x0000ff00	/* Interrupt mask */
 #define	SR_IMASK0	0x0000ff00	/* mask level 0 */
 
-#define	SR_IBIT8	0x00008000	/* bit level 8 */
-#define	SR_IBIT7	0x00004000	/* bit level 7 */
-#define	SR_IBIT6	0x00002000	/* bit level 6 */
-#define	SR_IBIT5	0x00001000	/* bit level 5 */
-#define	SR_IBIT4	0x00000800	/* bit level 4 */
-#define	SR_IBIT3	0x00000400	/* bit level 3 */
-#define	SR_IBIT2	0x00000200	/* bit level 2 */
 #define	SR_IBIT1	0x00000100	/* bit level 1 */
+#define	SR_IBIT2	0x00000200	/* bit level 2 */
+#define	SR_IBIT3	0x00000400	/* bit level 3 */
+#define	SR_IBIT4	0x00000800	/* bit level 4 */
+#define	SR_IBIT5	0x00001000	/* bit level 5 */
+#define	SR_IBIT6	0x00002000	/* bit level 6 */
+#define	SR_IBIT7	0x00004000	/* bit level 7 */
+#define	SR_IBIT8	0x00008000	/* bit level 8 */
 
-#define	SR_KUO		0x00000020	/* old kernel/user, 0 => k, 1 => u */
-#define	SR_IEO		0x00000010	/* old interrupt enable, 1 => enable */
-#define	SR_KUP		0x00000008	/* prev kernel/user, 0 => k, 1 => u */
-#define	SR_IEP		0x00000004	/* prev interrupt enable, 1 => enable */
-#define	SR_KUC		0x00000002	/* cur kernel/user, 0 => k, 1 => u */
 #define	SR_IEC		0x00000001	/* cur interrupt enable, 1 => enable */
+#define	SR_KUC		0x00000002	/* cur kernel/user, 0 => k, 1 => u */
+#define	SR_IEP		0x00000004	/* prev interrupt enable, 1 => enable */
+#define	SR_KUP		0x00000008	/* prev kernel/user, 0 => k, 1 => u */
+#define	SR_IEO		0x00000010	/* old interrupt enable, 1 => enable */
+#define	SR_KUO		0x00000020	/* old kernel/user, 0 => k, 1 => u */
 
 #define	SR_IMASKSHIFT	8
 
@@ -113,25 +113,25 @@
 /*
  * Cause Register
  */
-#define	CAUSE_BD	0x80000000	/* Branch delay slot */
-#define	CAUSE_CEMASK	0x30000000	/* coprocessor error */
 #define	CAUSE_CESHIFT	28
+#define	CAUSE_CEMASK	0x30000000	/* coprocessor error */
+#define	CAUSE_BD	0x80000000	/* Branch delay slot */
 
 /* Interrupt pending bits */
-#define	CAUSE_IP8	0x00008000	/* External level 8 pending */
-#define	CAUSE_IP7	0x00004000	/* External level 7 pending */
-#define	CAUSE_IP6	0x00002000	/* External level 6 pending */
-#define	CAUSE_IP5	0x00001000	/* External level 5 pending */
-#define	CAUSE_IP4	0x00000800	/* External level 4 pending */
-#define	CAUSE_IP3	0x00000400	/* External level 3 pending */
-#define	CAUSE_SW2	0x00000200	/* Software level 2 pending */
 #define	CAUSE_SW1	0x00000100	/* Software level 1 pending */
+#define	CAUSE_SW2	0x00000200	/* Software level 2 pending */
+#define	CAUSE_IP3	0x00000400	/* External level 3 pending */
+#define	CAUSE_IP4	0x00000800	/* External level 4 pending */
+#define	CAUSE_IP5	0x00001000	/* External level 5 pending */
+#define	CAUSE_IP6	0x00002000	/* External level 6 pending */
+#define	CAUSE_IP7	0x00004000	/* External level 7 pending */
+#define	CAUSE_IP8	0x00008000	/* External level 8 pending */
 
-#define	CAUSE_IPMASK	0x0000FF00	/* Pending interrupt mask */
 #define	CAUSE_IPSHIFT	8
+#define	CAUSE_IPMASK	0x0000FF00	/* Pending interrupt mask */
 
-#define	CAUSE_EXCMASK	0x0000003C	/* Cause code bits */
 #define	CAUSE_EXCSHIFT	2
+#define	CAUSE_EXCMASK	0x0000003C	/* Cause code bits */
 
 #define	CAUSE_FMT	"\20\40BD\36CE1\35CE0\20IP8\17IP7\16IP6\15IP5\14IP4\13IP3\12SW2\11SW1\1INT"
 
@@ -213,8 +213,8 @@
 #define NRANDOMENTRIES  (NTLBENTRIES-NWIREDENTRIES)
 #define NTLBENTRIES     64              /* WAG for now */
 
-#define TLBRAND_RANDMASK        0x00003f00
 #define TLBRAND_RANDSHIFT       8
+#define TLBRAND_RANDMASK        0x00003f00
 
 
 /*
@@ -233,12 +233,12 @@ extern int (*c0vec_tbl[])();
 #endif
 #endif !LOCORE
 
-#define BRK_KERNEL 	0xf1
 #define EXCEPT_NORM     1
 #define EXCEPT_UTLB     2
 #define EXCEPT_BRKPT   	3
 #define EXCEPT_DB    	4
 #define EXCEPT_GDB    	4
 #define EXCEPT_INT    	9
+#define BRK_KERNEL 	0xf1
 #define EXCEPT_ELSE    	0xff
 #endif /* _R3000_H */

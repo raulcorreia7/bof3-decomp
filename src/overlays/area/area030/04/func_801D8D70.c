@@ -6,8 +6,8 @@
 #define FISHING_ICON_ROW_COUNT  10
 #define FISHING_LABEL_ROW_COUNT 16
 /* The panel frame is this wide, and the labelled column sits this far right. */
-#define FISHING_PANEL_WIDTH     0x8A
 #define FISHING_LABEL_COLUMN_X  0x88
+#define FISHING_PANEL_WIDTH     0x8A
 
 /* Draws the two-line AREA030 panel: a 0x8A-wide frame per section,
  * the item icon rows, and the two labelled columns. */

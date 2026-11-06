@@ -28,20 +28,20 @@
 /* Constants. */
 
 /* Fixed retail addresses the units dereference. */
-#define SCENE_TABLE_BASE    0x800E3800u /* scene table: a u32 count, then AreaActorDef entries */
 #define RESOURCE_TABLE_BASE 0x8001A000u /* resource id table. @source: read:Resource_GetText@0x801502D0 */
+#define SCENE_TABLE_BASE    0x800E3800u /* scene table: a u32 count, then AreaActorDef entries */
 #define RESOURCE_ID_GROUP_WORD(id)                                                                                     \
     (((id) >> 12) & 0xC)                           /* byte offset of the group base word: id bits 14 and 15 times 4 */
 #define RESOURCE_ID_INDEX(id) ((id) & 0x3FFF)      /* index into the group's u16 offset table */
+#define WORD_SIGN_BIT         0x80000000u          /* the sign bit of a word */
 #define SLUS_LOAD_ADDRESS     0x80010000u          /* the main executable's link address */
 #define AREA_CODE_BASE        0x800F5000u          /* the area code base (AreaHandlerRecord.code_base_0C) */
-#define WORD_SIGN_BIT         0x80000000u          /* the sign bit of a word */
 #define COPY_KERNEL_ENTRY     ((u32) & D_8016432C) /* resume entry of the stream copy kernel */
-#define AREA_CELL_GRID_ROWS   56                   /* rows of the cell grids: g_AreaCellGrid and g_AreaCells */
-#define AREA_CELL_GRID_COLS   28                   /* columns of the cell grids */
-#define MAP_ZONE_COUNT        666                  /* records in g_AreaEncounterZones */
-#define MAP_ZONE_LIST_COUNT   200                  /* lists in D_80181164, one per map index */
 #define MAP_ZONE_SIZE         0x08
+#define AREA_CELL_GRID_COLS   28  /* columns of the cell grids */
+#define AREA_CELL_GRID_ROWS   56  /* rows of the cell grids: g_AreaCellGrid and g_AreaCells */
+#define MAP_ZONE_LIST_COUNT   200 /* lists in D_80181164, one per map index */
+#define MAP_ZONE_COUNT        666 /* records in g_AreaEncounterZones */
 /* The tone a cue reader looked up last: D_8018B40C is the tone's offset inside
  * the VAB header at `vab_header` (one of the words D_80148A18-D_80148A30). */
 #define CUE_TONE(vab_header)  ((VagAtr*)(D_8018B40C + (vab_header)))

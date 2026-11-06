@@ -12,13 +12,13 @@
  * @source: wiki:formats/emi. */
 
 /* Container layout, measured over all 880 US Breath of Fire III (USA) archives (@source: wiki:formats/emi#padding). */
-#define EMI_SECTOR_SIZE             0x800  /* payload alignment; also the first payload offset */
 #define EMI_MAGIC_OFFSET            0x08   /* archive header magic offset, before the TOC at 0x10 */
 #define EMI_MAGIC_SIZE              8      /* archive header magic size; see EMI_MAGIC_STR */
 #define EMI_TOC_ENTRY_SIZE          0x10   /* TOC row size; the header is 0x10 + entry_count * 0x10 bytes */
-#define EMI_TOC_ENTRY_PAD           0x2e2e /* fill of the TOC entry u16 at 0x0e */
 #define EMI_HEADER_FILL             0x2e   /* fill from the TOC end up to EMI_SECTOR_SIZE */
 #define EMI_PAYLOAD_FILL            0x5f   /* fill from a payload end to the next EMI_SECTOR_SIZE boundary */
+#define EMI_SECTOR_SIZE             0x800  /* payload alignment; also the first payload offset */
+#define EMI_TOC_ENTRY_PAD           0x2e2e /* fill of the TOC entry u16 at 0x0e */
 
 #define EMI_MAGIC_STR               "MATH_TBL"
 #define EMI_DATA_OFFSET             0x800u
@@ -32,9 +32,9 @@
 #define EMI_BENEMY_BANK             6
 
 #define EMI_BGM_SLOT_VAB_HEADER     0
+#define EMI_BGM_BANK                0
 #define EMI_BGM_SLOT_SEQUENCE       1
 #define EMI_BGM_SLOT_VAB_BODY       2 /* 3 when the archive also carries a cue table at 2 */
-#define EMI_BGM_BANK                0
 
 /* A whole bank holds three VAB triples around a zero filler and the LZ77 container;
  * a one-section bank holds the first triple and one section. */
@@ -43,17 +43,17 @@
 #define EMI_BPLCHAR_SLOT_VAB_BODY   2
 #define EMI_BPLCHAR_SLOT_SECTION    3 /* one-section bank */
 #define EMI_BPLCHAR_SLOT_FILLER     3 /* whole bank */
-#define EMI_BPLCHAR_SLOT_CONTAINER  7 /* whole bank */
 #define EMI_BPLCHAR_BANK_FIRST      3
 #define EMI_BPLCHAR_BANK_SECOND     4
 #define EMI_BPLCHAR_BANK_THIRD      5
+#define EMI_BPLCHAR_SLOT_CONTAINER  7 /* whole bank */
 
 #define EMI_PLCHAR_SLOT_VAB_HEADER  0
+#define EMI_PLCHAR_SLOT_PROGRAM     0 /* PLPxxx: the character program */
 #define EMI_PLCHAR_SLOT_CUES        1
+#define EMI_PLCHAR_BANK             1
 #define EMI_PLCHAR_SLOT_VAB_BODY    2
 #define EMI_PLCHAR_SLOT_CONTAINER   3 /* PLxxx: the character bank, LZ77 */
-#define EMI_PLCHAR_SLOT_PROGRAM     0 /* PLPxxx: the character program */
-#define EMI_PLCHAR_BANK             1
 
 #define EMI_ARCHIVE_HEADER_SIZE     0x10
 

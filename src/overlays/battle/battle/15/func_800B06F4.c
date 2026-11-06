@@ -3,8 +3,8 @@
 /* The panel sprite steps this many pixels along each edge. */
 #define BATTLE_PANEL_STEP      8
 /* The panel texture page. */
-#define BATTLE_PANEL_TEXTURE_X 0x340
 #define BATTLE_PANEL_TEXTURE_Y 0x100
+#define BATTLE_PANEL_TEXTURE_X 0x340
 
 MATCH void func_800B06F4(s16 x, s16 y, u8 width, u8 height) {
     s16 px;

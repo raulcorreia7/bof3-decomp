@@ -10,8 +10,8 @@
 #define HW_REF(type, addr) MEM(volatile type, addr)
 
 #define BIOS_KERNEL_BASE   0x80000000u
-#define BIOS_EXC_VECTOR    0x80000080u
 #define BIOS_BP_VECTOR     0x80000040u
+#define BIOS_EXC_VECTOR    0x80000080u
 #define BIOS_A0_VECTOR     0x800000A0u
 #define BIOS_B0_VECTOR     0x800000B0u
 #define BIOS_C0_VECTOR     0x800000C0u

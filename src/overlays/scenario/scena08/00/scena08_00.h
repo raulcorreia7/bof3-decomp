@@ -6,8 +6,8 @@
 
 #include "overlays/scenario/scenario.h"
 #include "work/area_spad.h"
-#define SCRATCH_ROW_STRIDE 0x28
 #define SCRATCH_ROW_OFFSET 0x00
+#define SCRATCH_ROW_STRIDE 0x28
 
 extern u32      D_801F6C00;
 extern Callback D_801FE8A0[];

@@ -169,10 +169,10 @@ INCLUDE_ASM(func_801D1A20);
 INCLUDE_ASM(func_801D1B58);
 
 MATCH void func_801D1CA4(void) {
-    g_MenuStatusItems.held[0] = Item_Count(ITEM_CAT_ITEM, 77, 0);
-    g_MenuStatusItems.held[1] = Item_Count(ITEM_CAT_ITEM, 35, 0);
-    g_MenuStatusItems.held[2] = Item_Count(ITEM_CAT_ITEM, 36, 0);
-    g_MenuStatusItems.held[3] = Item_Count(ITEM_CAT_ITEM, 86, 0);
+    g_MenuStatusItems.held[0] = Item_Count(ITEM_CAT_ITEM, ITEM_MACKEREL, 0);
+    g_MenuStatusItems.held[1] = Item_Count(ITEM_CAT_ITEM, ITEM_SHALY_SEED, 0);
+    g_MenuStatusItems.held[2] = Item_Count(ITEM_CAT_ITEM, ITEM_VINEGAR, 0);
+    g_MenuStatusItems.held[3] = Item_Count(ITEM_CAT_ITEM, ITEM_HORSERADISH, 0);
 }
 
 /* blocker: store constant order; first diff: +0x00 li v0,20. */

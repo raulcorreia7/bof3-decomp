@@ -23,8 +23,8 @@
 #include "types.h"
 
 /* The record's size, its stride in the table and the table's row count. */
-#define ACTOR_SIZE           0x98
 #define ACTOR_COUNT          30
+#define ACTOR_SIZE           0x98
 
 /* Ask whether a work row is live: the update walks only rows with the in-use
  * bit set. Pass the row itself or, for a pointer, its dereference. */
