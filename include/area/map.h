@@ -4,6 +4,10 @@
 #include "common/handler.h"
 #include "types.h"
 
+typedef enum AreaId {
+    AREA_ID_DESERT_OF_DEATH_MAP = 189,
+} AreaId;
+
 /* One entry of the per-map table the field loader walks: a load handler, the
  * step table, the color-matrix input, a handler table and the completion
  * callback. Only this prefix is modelled; unk_0C points to 6-byte records.
