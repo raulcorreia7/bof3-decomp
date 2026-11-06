@@ -5,13 +5,13 @@
 #include "game/enemy.h"
 
 /* Gene slots in the per-gene tables; EMPTY is outside the id range. */
-#define GENE_TYPE_COUNT         18
+#define GENE_ID_COUNT           18
 
 /* Affinity columns per gene row. */
-#define AFF_COUNT               14
+#define AFFINITY_COUNT          14
 
 /* Runtime dragon state: the selected id, the companion byte copied from
- * D_800B4D4C, and the signed affinity accumulator over AFF_* columns. */
+ * D_800B4D4C, and the signed affinity accumulator over AFFINITY_* columns. */
 #define BATTLE_DRAGON_ID        0x800B6F58u
 #define BATTLE_DRAGON_COMPANION 0x800B6F5Cu
 #define BATTLE_GENE_AFFINITY    0x800B6F60u
@@ -35,45 +35,45 @@
 
 /* Gene ids as the battle tables index them; the patch-gated Flame area record
  * (0x21) has no slot here. */
-typedef enum GeneType {
-    GENE_FLAME    = 0x00,
-    GENE_FROST    = 0x01,
-    GENE_THUNDER  = 0x02,
-    GENE_SHADOW   = 0x03,
-    GENE_RADIANCE = 0x04,
-    GENE_FORCE    = 0x05,
-    GENE_DEFENDER = 0x06,
-    GENE_ELDRITCH = 0x07,
-    GENE_MIRACLE  = 0x08,
-    GENE_GROSS    = 0x09,
-    GENE_THORN    = 0x0A,
-    GENE_REVERSE  = 0x0B,
-    GENE_MUTANT   = 0x0C,
-    GENE_UNKNOWN  = 0x0D,
-    GENE_TRANCE   = 0x0E,
-    GENE_FAILURE  = 0x0F,
-    GENE_FUSION   = 0x10,
-    GENE_INFINITY = 0x11,
+typedef enum GeneId {
+    GENE_FLAME    = 0,
+    GENE_FROST    = 1,
+    GENE_THUNDER  = 2,
+    GENE_SHADOW   = 3,
+    GENE_RADIANCE = 4,
+    GENE_FORCE    = 5,
+    GENE_DEFENDER = 6,
+    GENE_ELDRITCH = 7,
+    GENE_MIRACLE  = 8,
+    GENE_GROSS    = 9,
+    GENE_THORN    = 10,
+    GENE_REVERSE  = 11,
+    GENE_MUTANT   = 12,
+    GENE_UNKNOWN  = 13,
+    GENE_TRANCE   = 14,
+    GENE_FAILURE  = 15,
+    GENE_FUSION   = 16,
+    GENE_INFINITY = 17,
     GENE_EMPTY    = 0xFF,
-} GeneType;
+} GeneId;
 
 /* Affinity columns, in the order the dragon-id selection reads them: five
  * elements, then five stats, then the four form affinities. */
 typedef enum GeneAffinity {
-    AFF_FLAME        = 0x00,
-    AFF_FROST        = 0x01,
-    AFF_THUNDER      = 0x02,
-    AFF_SHADOW       = 0x03,
-    AFF_RADIANCE     = 0x04,
-    AFF_HP           = 0x05,
-    AFF_POWER        = 0x06,
-    AFF_DEFENSE      = 0x07,
-    AFF_SPEED        = 0x08,
-    AFF_INTELLIGENCE = 0x09,
-    AFF_DRAGON       = 0x0A,
-    AFF_WARRIOR      = 0x0B,
-    AFF_COUNTER      = 0x0C,
-    AFF_BEHEMOTH     = 0x0D,
+    AFFINITY_FLAME        = 0,
+    AFFINITY_FROST        = 1,
+    AFFINITY_THUNDER      = 2,
+    AFFINITY_SHADOW       = 3,
+    AFFINITY_RADIANCE     = 4,
+    AFFINITY_HP           = 5,
+    AFFINITY_POWER        = 6,
+    AFFINITY_DEFENSE      = 7,
+    AFFINITY_SPEED        = 8,
+    AFFINITY_INTELLIGENCE = 9,
+    AFFINITY_DRAGON       = 10,
+    AFFINITY_WARRIOR      = 11,
+    AFFINITY_COUNTER      = 12,
+    AFFINITY_BEHEMOTH     = 13,
 } GeneAffinity;
 
 typedef struct Gene {
@@ -105,7 +105,7 @@ ASSERT_SIZE(DragonFormStats, DRAGON_FORM_STATS_SIZE);
 ASSERT_OFFSET(DragonFormStats, resist, 0x05);
 
 /* 0x800B4C7C: per-gene AP cost, 8-bit entries. */
-extern const u8 D_800B4C7C[GENE_TYPE_COUNT];
+extern const u8 D_800B4C7C[GENE_ID_COUNT];
 /* 0x800B4D4C / 0x800B4D58: 11 predetermined forms; 0xFF is a wildcard gene and
  * the dragon id is `row + 4`. D_800B4D58 is read as [selection id][slot]. */
 extern const u8 D_800B4D4C[11];

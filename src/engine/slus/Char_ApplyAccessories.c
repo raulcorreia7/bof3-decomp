@@ -80,7 +80,7 @@ MATCH void Char_ApplyAccessories(void* param) {
                 delta   = 3;
                 /* retail shares one counter call after case 23. */
                 goto block_counter;
-            case ACCESSORY_HAWK_S_RING:
+            case ACCESSORY_HAWKS_RING:
                 Char_AddPercent(p + 0x18, 0x14);
                 break;
             case ACCESSORY_ARTEMIS_CAP:

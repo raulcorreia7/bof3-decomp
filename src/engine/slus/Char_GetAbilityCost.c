@@ -19,8 +19,8 @@ MATCH u8 Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode) {
     if ((record->equip.accessories[0] == ACCESSORY_SPIRIT_RING) ||
         (record->equip.accessories[1] == ACCESSORY_SPIRIT_RING)) {
         value = (value + 1) >> 1;
-    } else if ((record->equip.accessories[0] == ACCESSORY_SHAMAN_SRING) ||
-               (record->equip.accessories[1] == ACCESSORY_SHAMAN_SRING)) {
+    } else if ((record->equip.accessories[0] == ACCESSORY_SHAMANS_RING) ||
+               (record->equip.accessories[1] == ACCESSORY_SHAMANS_RING)) {
         value = 3 * value;
         if ((value & 3) != 0) {
             value = (value >> 2) + 1;
