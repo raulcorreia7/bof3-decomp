@@ -1,4 +1,5 @@
 #include "scena14_00.h"
+#include "area/map.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -50,7 +51,7 @@ MATCH void func_801F8850(void) {
     flags = &D_80145FF4;
     *flags &= 0xFE;
     D_80146134 &= 0xFE;
-    Game_RequestAreaChange(0xC4, 0x298000, 0x168000, 0x80);
+    Game_RequestAreaChange(AREA_ID_DESERT_MANMO, 0x298000, 0x168000, 0x80);
     Game_SetScriptActive();
     D_80146874 = 2;
     D_80146875 = 0;

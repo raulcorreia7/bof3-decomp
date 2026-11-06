@@ -15,7 +15,7 @@ MATCH void func_801DDFEC(u32 battler_index) {
     body:
         battler = *(u8*)((char*)&D_8014630C + (index & BYTE_MASK));
         if (battler == (battler_index & BYTE_MASK)) {
-            if (g_BattlePartyBattlers[battler].turn.command.type != 5u) {
+            if (g_BattlePartyBattlers[battler].turn.command.type != BATTLE_COMMAND_ITEM) {
                 return;
             }
             substate = g_BattlePartyBattlers[battler].turn.command.id;

@@ -1,4 +1,5 @@
 #include "shop_00.h"
+#include "area/map.h"
 
 /* UI-owner row field behind the scratchpad row pointer. */
 #define SPAD_ROW(type, offset) FIELD(type, g_Task, offset)
@@ -15,7 +16,7 @@ MATCH void func_801D62DC(void) {
         return;
     }
     func_801D6E94();
-    if (g_GameAreaId == 187 || g_GameAreaId == 193 ||
+    if (g_GameAreaId == AREA_ID_ADULT_CAMP || g_GameAreaId == AREA_ID_DESERT_ENTRANCE_CAMP ||
         (g_GameAreaId == 191 && g_SceneState.scenario_id == 0xE && SYS_TestFlag(g_SceneFlags[0], 5) != 0)) {
         for (track = 0; track < 4; track++) {
             if (D_801E6100[track] != 0) {
@@ -26,7 +27,7 @@ MATCH void func_801D62DC(void) {
         selection_ptr  = &g_SndBgmId;
         *selection_ptr = 0xFF;
         selection      = 0;
-        if (g_GameAreaId == 133) {
+        if (g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
             SYS_ClearFlag(selection_ptr - 0x101, 0x77);
             selection = 1;
         }

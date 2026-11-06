@@ -1,4 +1,5 @@
 #include "scena12_00.h"
+#include "area/map.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -259,7 +260,7 @@ MATCH void func_801FC7D4(void) {
 }
 
 MATCH s32 func_801FC80C(s32 arg0) {
-    if ((g_GameAreaId == 0x79) && (SYS_TestFlag(g_SceneFlags, 0) != 0)) {
+    if ((g_GameAreaId == AREA_ID_STEEL_BEACH_MAP) && (SYS_TestFlag(g_SceneFlags, 0) != 0)) {
         if (arg0 <= 0x160000) {
             Game_SetScriptActive();
             D_80146875 = 0x3C;

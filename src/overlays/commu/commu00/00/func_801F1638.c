@@ -1,7 +1,5 @@
 #include "commu00_00.h"
 
-/* The work cell is stored through SP_REF and re-read through the file-local
- * cell symbol, so each access emits its own address load. */
 MATCH void func_801F1638(void) {
     u8* record = FAIRY_VILLAGE_ACTIVE_UI;
 

@@ -1,4 +1,5 @@
 #include "scena00_00.h"
+#include "area/map.h"
 
 static Scene00Tables D_801FC980_Tables = {
     {
@@ -999,7 +1000,7 @@ MATCH void func_801F9178(void) {
     u8 j;
 
     func_801C1DF0(0);
-    Game_RequestAreaChange(0x18, 0x630000, 0xC0000, 3);
+    Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WHELP, 0x630000, 0xC0000, 3);
     /* FAKE: place loop init early. */
     i                     = 0;
     state                 = &D_801448FC;
@@ -1073,7 +1074,7 @@ MATCH void func_801F92DC(void) {
         g_SceneState.state_04 = 0xA;
     }
     func_801F9644();
-    if (g_GameAreaId == 4) {
+    if (g_GameAreaId == AREA_ID_DAUNA_MINE_INTRO) {
         if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
             g_AreaDrawFlags = 0;
             SYS_SetFlag(g_SceneFlags, 0U);
@@ -1096,7 +1097,7 @@ MATCH void func_801F92DC(void) {
         g_SceneState.timer_06 = 0x14;
         g_AreaDrawFlags       = 0;
     }
-    if (g_GameAreaId == 31) {
+    if (g_GameAreaId == AREA_ID_TITLE_INTRO) {
         g_AreaCameraAngle.vx = 256;
         g_AreaCameraAngle.vz = 0;
         g_AreaCameraAngle.vy = 0;
@@ -1119,7 +1120,7 @@ MATCH void func_801F9644(void) {
     s32  slot;
     u8   id;
 
-    if (g_GameAreaId == 2) {
+    if (g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) {
         if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
             g_ScriptVarsReq.word = 0;
             Area_AdvanceScroll(0x300);
@@ -1157,7 +1158,7 @@ MATCH void func_801F9868(void) {
     u8  i;
     u8  free_slot;
 
-    if (g_GameAreaId == 24) {
+    if (g_GameAreaId == AREA_ID_DAUNA_MINE_WHELP) {
         switch (D_80143F03) {
             case 1:
                 if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
@@ -1304,7 +1305,7 @@ MATCH void func_801F9BE4(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            Game_RequestAreaChange(4, 0x440000, 0x80000, 5);
+            Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, 0x440000, 0x80000, 5);
             g_SceneState.step_05 = 5;
             break;
 
@@ -1336,7 +1337,7 @@ MATCH void func_801F9BE4(void) {
             if (g_ScriptVars[3] != 0x60) {
                 break;
             }
-            Game_RequestAreaChange(0x1F, 0x70000, 0x140000, 0);
+            Game_RequestAreaChange(AREA_ID_TITLE_INTRO, 0x70000, 0x140000, 0);
             g_GameRequestKind = 0xFF;
             SND_FadeOutBgm(6, 0x5A, 0x40);
             g_SceneState.state_04 = 3;
@@ -1390,7 +1391,7 @@ MATCH void func_801F9FB8(void) {
         case 3:
             if (g_ScriptVars[2] == 0x38) {
                 SND_PlayBgm(2, 0x64, 0x20);
-                Game_RequestAreaChange(2, 0x340000, 0x430000, 3);
+                Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, 0x340000, 0x430000, 3);
                 g_SceneState.state_04 = 4;
                 *state                = 0;
             }
@@ -1523,7 +1524,7 @@ MATCH void func_801FA27C(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            Game_RequestAreaChange(0x18, 0x630000, 0xC0000, 3);
+            Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WHELP, 0x630000, 0xC0000, 3);
             g_SceneState.state_04 = 5;
             g_SceneState.step_05  = 0;
             break;
@@ -1715,7 +1716,7 @@ MATCH void func_801FA7D8(void) {
                 return;
             }
             SYS_SetFlag(g_SceneFlags, 4u);
-            Game_RequestAreaChange(0x18u, 0x630000u, 0x110000u, 3u);
+            Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WHELP, 0x630000u, 0x110000u, 3u);
             g_GameRequestKind    = 9u;
             g_GameEntryMode      = 0xFFu;
             g_SceneState.step_05 = 0xBu;
@@ -1863,7 +1864,7 @@ MATCH void func_801FAF6C(void) {
             break;
 
         case 50:
-            Game_RequestAreaChange(0x1F, 0x40000, 0x240000, 1);
+            Game_RequestAreaChange(AREA_ID_TITLE_INTRO, 0x40000, 0x240000, 1);
             g_GamePrevSelection   = 4;
             g_SceneState.state_04 = 0;
             g_SceneState.step_05  = 0;
@@ -1969,7 +1970,7 @@ MATCH void func_801FB204(void) {
 
         case 8:
             if (g_ScriptVarsReq.byte == 0x25) {
-                Game_RequestAreaChange(0x1F, 0x40000, 0x240000, 1);
+                Game_RequestAreaChange(AREA_ID_TITLE_INTRO, 0x40000, 0x240000, 1);
                 g_SceneState.state_04 = 0;
                 g_SceneState.step_05  = 0;
             }
@@ -2004,7 +2005,7 @@ MATCH void func_801FB67C(void) {
             if (g_SceneState.timer_06 != 0) {
                 g_SceneState.timer_06--;
             } else {
-                Game_RequestAreaChange(1, 0xF0000u, 0x210000u, 1);
+                Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ADULT, 0xF0000u, 0x210000u, 1);
                 SND_PlayCue(EMI_CUE_ID(2, 6));
                 g_ScriptVarsReq.word  = 0;
                 *state                = 0;
@@ -2042,7 +2043,7 @@ MATCH void func_801FB744(void) {
                 if (g_SceneState.timer_06 != 0) {
                     g_SceneState.timer_06--;
                 } else {
-                    Game_RequestAreaChange(1, 0x1A0000, 0x160000, 1);
+                    Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ADULT, 0x1A0000, 0x160000, 1);
                     *state = 2;
                 }
             }
@@ -2226,7 +2227,7 @@ MATCH void func_801FB924(void) {
                 flags           = &g_BattlePartyBattlers[0].unk_24;
                 g_GameFlags &= ~(GAME_FLAG_SCROLL_LOCK | GAME_FLAG_RUN_LOCK);
                 *flags &= 0xDF;
-                Game_RequestAreaChange(9, 0x570000, 0x40000, 7);
+                Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_BEFORE_NUE, 0x570000, 0x40000, 7);
                 Scene_RequestChapterAdvance();
             }
             break;
@@ -2417,11 +2418,11 @@ MATCH void func_801FC810(void) {
 /* Step trigger: entry_08 of the scenario, called by Area_IsStepBlocked with its handler_x (x >> 16 is compared with the
  * column). A hit starts a scripted scene and returns 1; a nonzero result blocks the step. */
 MATCH s32 Scene_CheckStepTrigger(s32 x) { /* func_801FC818 */
-    if ((g_GameAreaId == 2) && ((x >> 0x10) == 0x2B) && (SYS_TestFlag(g_SceneFlags, 6) != 0)) {
+    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) && ((x >> 0x10) == 0x2B) && (SYS_TestFlag(g_SceneFlags, 6) != 0)) {
         g_SceneState.state_04 = 7;
         g_SceneState.step_05  = 0;
     }
-    if (g_GameAreaId == 24) {
+    if (g_GameAreaId == AREA_ID_DAUNA_MINE_WHELP) {
         if (D_80143F03 == 0) {
             if ((x >> 0x10) == 0x14) {
                 if (SYS_TestFlag(g_SceneFlags, 7) != 0) {

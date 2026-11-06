@@ -1,4 +1,5 @@
 #include "scena03_00.h"
+#include "area/map.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -619,7 +620,7 @@ INCLUDE_ASM(func_801FCB4C);
 #include "overlays/scenario/Scene_ShowMessage.h"
 
 MATCH s32 func_801FCCDC(void) {
-    if (MEM(u16, GAME_AREA_ID_ADDR) == 71) {
+    if (MEM(u16, GAME_AREA_ID_ADDR) == AREA_ID_MOUNT_BOUMORE_SECOND) {
         return func_801FCD1C();
     }
     return 0;

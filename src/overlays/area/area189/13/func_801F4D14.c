@@ -1,4 +1,5 @@
 #include "area189_13.h"
+#include "area/map.h"
 
 MATCH void func_801F4D14(void) {
     u8* flags;
@@ -8,9 +9,9 @@ MATCH void func_801F4D14(void) {
         flags  = &g_SceneState.flags_01;
         *flags = *flags & 0xFE;
         if (D_801448EC != 0) {
-            Game_RequestAreaChange(0x96, 0x180000, 0x300000, 1);
+            Game_RequestAreaChange(AREA_ID_OASIS, 0x180000, 0x300000, 1);
         } else {
-            Game_RequestAreaChange(0xC1, 0x1A8000, 0x1C0000, 1);
+            Game_RequestAreaChange(AREA_ID_DESERT_ENTRANCE_CAMP, 0x1A8000, 0x1C0000, 1);
         }
         D_801448EB = 0;
         D_801448EC = 0;

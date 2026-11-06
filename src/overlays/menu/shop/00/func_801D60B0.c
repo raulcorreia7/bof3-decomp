@@ -1,4 +1,5 @@
 #include "shop_00.h"
+#include "area/map.h"
 
 MATCH void func_801D60B0(void) {
     u8* counter;
@@ -14,7 +15,8 @@ MATCH void func_801D60B0(void) {
     if (count == 5) {
         D_80148650 = 1;
         D_80148651 = 0;
-        if (g_GameRequestFlags == 0x40 || g_GameAreaId == 188 || g_GameAreaId == 133 || g_GameAreaId == 193) {
+        if (g_GameRequestFlags == 0x40 || g_GameAreaId == AREA_ID_BLACK_SHIP ||
+            g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP || g_GameAreaId == AREA_ID_DESERT_ENTRANCE_CAMP) {
             D_8014865C = D_8014865F;
         }
     }

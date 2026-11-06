@@ -49,9 +49,14 @@ typedef struct FairyPrize {
 
 ASSERT_SIZE(FairyPrize, FAIRY_PRIZE_STRIDE);
 
-/* One of the village's 60 job slots: the slot is live while `active` is set,
- * `type` is the job being worked, and `progress_anchor` is the battle count when
- * the job last advanced. */
+typedef enum FairyJobType {
+    FAIRY_JOB_IDLE  = 0,
+    FAIRY_JOB_HUNT  = 9,
+    FAIRY_JOB_CLEAR = 10,
+    FAIRY_JOB_BUILD = 11,
+} FairyJobType;
+
+/* A village job and the battle count when it last advanced. */
 typedef struct FairyJob {
     u8  active;
     u8  type;

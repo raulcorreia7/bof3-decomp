@@ -46,6 +46,15 @@
 
 /* The action a battler has queued: whom it targets, what kind it is (examine 0, attack 1, defend 2, ability 4, item 5)
  * and the ability or item id. */
+typedef enum BattleCommandType {
+    BATTLE_COMMAND_EXAMINE = 0,
+    BATTLE_COMMAND_ATTACK  = 1,
+    BATTLE_COMMAND_DEFEND  = 2,
+    BATTLE_COMMAND_ESCAPE  = 3,
+    BATTLE_COMMAND_ABILITY = 4,
+    BATTLE_COMMAND_ITEM    = 5,
+} BattleCommandType;
+
 typedef struct BattleCommandSlot {
     u8  target;
     u8  type;

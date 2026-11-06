@@ -28,7 +28,7 @@ MATCH void Fairy_JoinVillage(void) {
             src_offset                         = index * 9;
             copy_src                           = (u8*)(src_offset + (u32)src);
             g_FairyJobs[index].active          = one;
-            g_FairyJobs[index].type            = 0;
+            g_FairyJobs[index].type            = FAIRY_JOB_IDLE;
             count                              = *count_ptr;
             end                                = dst + 5;
             g_FairyJobs[index].record_state    = 0;

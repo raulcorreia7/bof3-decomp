@@ -14,7 +14,7 @@ MATCH void func_801DD29C(void) {
                 break;
             }
             ((u8*)r)[-0x15]                                            = v;
-            g_BattlePartyBattlers[(v & BYTE_MASK)].turn.command.type   = 1;
+            g_BattlePartyBattlers[(v & BYTE_MASK)].turn.command.type   = BATTLE_COMMAND_ATTACK;
             g_BattlePartyBattlers[((u8*)r)[-0x15]].turn.command.target = 3;
             ((u8*)r)[0] += 1;
         }

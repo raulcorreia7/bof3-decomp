@@ -1,4 +1,5 @@
 #include "game_00.h"
+#include "area/map.h"
 
 MATCH void func_801A7E54(void) {
     u8* flag;
@@ -25,7 +26,7 @@ MATCH void func_801A7E54(void) {
                 switch (D_801448ED) {
                     case 0:
                     case 4:
-                        Game_RequestAreaChange(0x6C, 0x110000, 0x590000, 0x85);
+                        Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, 0x110000, 0x590000, 0x85);
                         break;
                     case 1:
                     case 2:
@@ -33,7 +34,7 @@ MATCH void func_801A7E54(void) {
                         break;
                     case 3:
                     case 5:
-                        Game_RequestAreaChange(4, 0x3E0000, 0x50000, 0x81);
+                        Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, 0x3E0000, 0x50000, 0x81);
                         break;
                 }
                 D_801448EC = 4;

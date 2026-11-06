@@ -1,4 +1,5 @@
 #include "scena01_00.h"
+#include "area/map.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -87,7 +88,7 @@ MATCH void func_801F7FC4(void) {
 
 MATCH void func_801F8000(void) {
     func_801C1DF0(0);
-    Game_RequestAreaChange(9, 0x570000, 0x40000, 7);
+    Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_BEFORE_NUE, 0x570000, 0x40000, 7);
     *D_80144E90          = 0;
     g_ScriptVarsReq.word = 0;
     D_80146872           = 1;

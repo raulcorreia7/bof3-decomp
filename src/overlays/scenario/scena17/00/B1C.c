@@ -1,5 +1,6 @@
 #define AREA_SCROLL_TARGET_VOLATILE
 #include "scena17_00.h"
+#include "area/map.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -18,7 +19,7 @@ MATCH void func_801F7750(void) {
     GFX_ResetPalette();
     g_GfxPalettePending = 1;
     g_AreaDrawFlags     = 0x1F;
-    Game_RequestAreaChange(0xC7, 0xB60000, 0x128000, 7);
+    Game_RequestAreaChange(AREA_ID_END_GAME_SAVE, 0xB60000, 0x128000, 7);
     g_ScriptVarsReq.word = 0;
     D_80146872           = 1;
 }

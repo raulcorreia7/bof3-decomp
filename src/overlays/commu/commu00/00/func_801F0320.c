@@ -12,8 +12,8 @@ MATCH void func_801F0320(void) {
     s32 kind_10;
     s32 kind_11;
 
-    kind_10    = 10;
-    kind_11    = 11;
+    kind_10    = FAIRY_JOB_CLEAR;
+    kind_11    = FAIRY_JOB_BUILD;
     sum_10     = &D_801455C5;
     sum_11     = sum_10 + 1;
     *sum_10    = 0;
