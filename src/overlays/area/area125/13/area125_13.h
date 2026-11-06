@@ -36,8 +36,8 @@ extern u8 D_801F368E[];
 
 /* func_801F3384 */
 void Area_ClearWorkColumn(void);
-s32  func_801F33B0(void);
-void Area_SpawnWeightedActor(void);
 void func_801F31B0(s32 arg0);
+void Area_SpawnWeightedActor(void);
+s32  func_801F33B0(void);
 
 #endif

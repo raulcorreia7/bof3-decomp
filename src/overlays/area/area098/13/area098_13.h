@@ -26,10 +26,10 @@
 #define AREA_SPIN_SCALE_BASE 3
 #define AREA_SPIN_FADE       0x20
 
+extern u16      g_GameAreaId;
+extern s32      D_80145EC4[];
 extern Callback D_801F5F68[];
 extern Callback D_801F5F7C[];
-extern s32      D_80145EC4[];
-extern u16      g_GameAreaId;
 extern Callback D_801F5F88[];
 extern Callback D_801F5FAC[];
 extern u8       D_801F6510;
@@ -50,13 +50,13 @@ extern void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
 #define AREA_SPAWN_SLOT_RADIUS      0x100
 #define AREA_SPAWN_SLOT_CORE_SHADE  0x40
 #define AREA_SPAWN_SLOT_RADIUS_STEP 0x10
-extern void func_801F5940(void);
+void        Area_SetCellCode(s16 column, s16 row, u8 code);
 void        func_801F4D44(void);
 void        func_801F5050(u8 level);
-void        Area_SetCellCode(s16 column, s16 row, u8 code);
-
-extern u8 D_80146865;
+extern void func_801F5940(void);
 
 extern u8 D_8014554C[];
+
+extern u8 D_80146865;
 
 #endif

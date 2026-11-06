@@ -6,10 +6,10 @@
 
 #include "overlays/area/world00.h"
 
+extern u16 D_80146876;
 /* Handler tables the step bytes select. */
 extern void (*D_801F40F0[])(void);
-extern void (*D_801F40FC[])(void);
 
-extern u16 D_80146876;
+extern void (*D_801F40FC[])(void);
 
 #endif

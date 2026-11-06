@@ -16,6 +16,7 @@
 
 /* The party position in 16.16 fixed point. */
 extern s32 D_80145EC4;
+extern u8  D_80146866;
 /* The mode byte the request handler writes. */
 /* The overlay state bytes the request sets. */
 /* The second field focus coordinate the work-position copy reads. */
@@ -24,7 +25,6 @@ extern s32 g_AreaFocusY;
 /* The overlay's flag word. */
 /* The payload includes per-state handler tables. */
 extern u8  D_801F4A68[];
-extern u8  D_80146866;
 
 void SYS_ToggleFlag(void* bits, u8 bit_index);
 

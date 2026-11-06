@@ -14,23 +14,23 @@
 
 /* The scratchpad cell holding this mode's work pointer. */
 
+/* The current map row in the field-loader table. */
+extern u16      g_GameAreaId;
 /* The party position in 16.16 fixed point. */
 extern s32      D_80145EC4;
 /* The payload's first words: the per-state handler pointers. */
 extern u8       D_801F4FAC[];
-/* The row table the step lookup reads through the load entry. */
-extern u8*      D_801F6748[];
 /* The palette callbacks this overlay animates. */
 extern Callback D_801F66D4[17];
-/* The current map row in the field-loader table. */
-extern u16      g_GameAreaId;
+/* The row table the step lookup reads through the load entry. */
+extern u8*      D_801F6748[];
 
-extern u8   func_801F2EC4(void);
 extern void Actor_BeginScript(u8 raw_selector, u16 raw_code);
+u8*         func_801F2E88(void);
+extern u8   func_801F2EC4(void);
 extern void func_801F4A5C(u8* pairs, u8 flag);
 extern void func_801F4B0C(void);
-extern void func_801F4C68(void);
 
-u8* func_801F2E88(void);
+extern void func_801F4C68(void);
 
 #endif

@@ -26,13 +26,13 @@
 /* The selection bytes the request saves. */
 /* The payload includes the overlay's per-state handler tables. */
 extern u8 D_801F45EC[];
-/* The per-count movement step table. */
-extern s8 D_801F5378[];
 /* The per-frame movement step table. */
 extern s8 D_801F5360[];
+/* The per-count movement step table. */
+extern s8 D_801F5378[];
 
+void Area_ProjectPoint(s32* pos, long* screen_xy);
 /* Fairy_VillageInit in the commu overlay at the same address. */
 void func_801EECA4(void);
-void Area_ProjectPoint(s32* pos, long* screen_xy);
 
 #endif
