@@ -607,7 +607,7 @@ extern u8                               D_801C90ED[];
  */
 /* Selection-kind flag table base: byte 0 of the kind entry holds the flags. */
 extern u8                               D_801CA718[];
-extern BattleAbilityCategory           D_801CA719[];
+extern u8                               D_801CA719[];
 extern u8                               D_801CAF13;
 extern u8                               D_801CD78E[];
 extern u32                              D_801EB082;
