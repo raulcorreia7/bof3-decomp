@@ -5,28 +5,13 @@
  * and its data. Only this image includes the file. */
 
 #include "common/vector.h"
+#include "overlays/area/AreaSprite.h"
 #include "overlays/area/world02.h"
 #include "work/area_spad.h"
 #include <rand.h>
 
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0x04
-
-typedef struct AreaSprite {
-    u8      flags;
-    u8      flags_01;
-    u8      flags_02;
-    u8      flags_03;
-    Vec3S32 origin;
-    u8      unk_10[4];
-    VECTOR  normal;
-    u16     half_size;
-} AreaSprite;
-
-ASSERT_SIZE(AreaSprite, 0x28);
-ASSERT_OFFSET(AreaSprite, origin, 0x04);
-ASSERT_OFFSET(AreaSprite, normal, 0x14);
-ASSERT_OFFSET(AreaSprite, half_size, 0x24);
 
 typedef struct Area108Scratch {
     u8      unk_00[0x34];

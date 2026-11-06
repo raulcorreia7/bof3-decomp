@@ -6,6 +6,7 @@
  * file. */
 
 #include "common/vector.h"
+#include "overlays/area/AreaSprite.h"
 #include "overlays/area/world00.h"
 #include "shared/WorldSpin.h"
 
@@ -19,19 +20,6 @@
 #define WORLD00_AREA024_SCRATCH_PTR    SP_REF(volatile Area024Scratch*, 0x44u)
 
 #define g_Task                         ((volatile Area024Scratch*)g_Task)
-
-typedef struct AreaSprite {
-    u8                flags; /* set to 1 when the sprite is armed */
-    u8                flags_01;
-    u8                flags_02; /* set to 4 */
-    u8                flags_03; /* set to 0x40 */
-    Vec3S32           origin;
-    u8                unk_10[4];
-    /* 0x14 */ VECTOR normal;    /* the sprite's normal */
-    /* 0x24 */ u16    half_size; /* the projected half-size */
-} AreaSprite;
-
-ASSERT_SIZE(AreaSprite, 0x28);
 
 typedef struct Area024Scratch {
     u8            unk_00[0x01]; /* byte 0x00 */
