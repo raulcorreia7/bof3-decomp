@@ -20,4 +20,8 @@ ASSERT_SIZE(Coord, 0x04);
 #define COORD_INT(c)  ((c).part.integer)
 #define COORD_FRAC(c) ((c).part.fraction)
 
+/* A whole number of cells as a 16.16 coordinate: `TO_COORD(12) + COORD_HALF` is 12.5. */
+#define TO_COORD(n)   ((n) << 16)
+#define COORD_HALF    0x8000
+
 #endif

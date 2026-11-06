@@ -634,7 +634,7 @@ MATCH void func_801F37E4(void) {
             u8*  flag;
 
             if (TIMER_EXPIRED(*timer)) {
-                Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, 0x4B0000u, 0x380000u, 143);
+                Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(75), TO_COORD(56), 143);
                 g_SceneEventStep = 4;
                 flag             = &g_ScriptVars[3];
                 (*flag)++;

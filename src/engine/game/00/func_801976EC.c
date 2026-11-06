@@ -50,10 +50,10 @@ MATCH void func_801976EC(void) {
 
             *clear = 0u;
             SYS_ClearFlag(clear - 0x122, 0x77u);
-            Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, 4u);
+            Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);
         }
     } else if (D_8014869D != 0u) {
-        Game_RequestAreaChange(D_8014869D, 0x430000, 0x160000, 4u);
+        Game_RequestAreaChange(D_8014869D, TO_COORD(67), TO_COORD(22), FACING_DOWN_RIGHT);
         D_8014869D = 0u;
     } else {
         g_GameStateIndex = GAME_REQUEST_IDLE;

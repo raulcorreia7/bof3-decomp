@@ -9,9 +9,9 @@ MATCH void func_801F4D14(void) {
         flags  = &g_SceneState.flags_01;
         *flags = *flags & 0xFE;
         if (g_SceneEventStep != 0) {
-            Game_RequestAreaChange(AREA_ID_OASIS, 0x180000, 0x300000, 1);
+            Game_RequestAreaChange(AREA_ID_OASIS, TO_COORD(24), TO_COORD(48), FACING_UP);
         } else {
-            Game_RequestAreaChange(AREA_ID_DESERT_ENTRANCE_CAMP, 0x1A8000, 0x1C0000, 1);
+            Game_RequestAreaChange(AREA_ID_DESERT_ENTRANCE_CAMP, TO_COORD(26) + COORD_HALF, TO_COORD(28), FACING_UP);
         }
         g_SceneEventMode = 0;
         g_SceneEventStep = 0;

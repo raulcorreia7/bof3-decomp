@@ -54,7 +54,7 @@ MATCH void func_801F6CCC(void) {
 
     func_801C1DF0(0u);
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-    Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, 0x1A0000u, 0x88000u, 5u);
+    Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, TO_COORD(26), TO_COORD(8) + COORD_HALF, FACING_DOWN);
     D_801448FC  = 4u;
     D_80144900  = 0x1A0000u;
     flags       = g_GameFlags;
@@ -318,7 +318,7 @@ MATCH void func_801F7230(void) {
                 UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
                 break;
             }
-            Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, 0x440000u, 0x80000u, 5u);
+            Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, TO_COORD(68), TO_COORD(8), FACING_DOWN);
             next  = &g_SceneState.step_05;
             *next = (*next + 1u);
             break;
@@ -364,7 +364,7 @@ MATCH void func_801F7230(void) {
 
         case 11:
             if (g_ScriptVars[3] == 0x60u) {
-                Game_RequestAreaChange(AREA_ID_TITLE_INTRO, 0x70000u, 0x140000u, 0u);
+                Game_RequestAreaChange(AREA_ID_TITLE_INTRO, TO_COORD(7), TO_COORD(20), FACING_UP_LEFT);
                 SCENA16_D_80143F1D = 0xFFu;
                 SND_FadeOutBgm(6u, 0x50, 0x40);
                 g_ScriptVars[2]       = 0u;
@@ -489,7 +489,7 @@ MATCH void func_801F7790(void) {
 
         case 9:
             SND_PlayBgm(2u, 100, 0x20);
-            Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, 0x340000u, 0x430000u, 3u);
+            Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, TO_COORD(52), TO_COORD(67), FACING_RIGHT);
             g_SceneState.state_04 = 4;
             g_SceneState.step_05  = 0u;
             break;
