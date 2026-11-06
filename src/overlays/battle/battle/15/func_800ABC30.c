@@ -12,7 +12,7 @@ MATCH void func_800ABC30(void) {
     do {
         if (D_801463DC[loop_count & BYTE_MASK].active != 0) {
             Battle_ArmEnemySlot(count & BYTE_MASK, D_801463DC[loop_count & BYTE_MASK].id,
-                          D_801463DC[loop_count & BYTE_MASK].x, D_801463DC[loop_count & BYTE_MASK].y);
+                                D_801463DC[loop_count & BYTE_MASK].x, D_801463DC[loop_count & BYTE_MASK].y);
             count += 1;
         }
         loop_count += 1;
