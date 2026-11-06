@@ -89,7 +89,7 @@ NON_MATCHING void func_801DE1C0(void) {
                         if (steps >= 0) {
                             walk_limit = steps;
                         loop_12:
-                            if (RANDOM_MASK(1)) {
+                            if RANDOM_MASK (1) {
                                 walk += 1;
                                 ROW_ROLL = (u16)(ROW_ROLL + 1);
                                 if (walk_limit >= walk) {

@@ -2033,8 +2033,8 @@ MATCH void func_801FB744(void) {
 
             request = &g_ScriptVars[2];
             if (*request & 1) {
-                D_80147C54 = (((RANDOM_MASK(7)) - 3) << 0xA) + 0x1A8000;
-                D_80147C58 = (((RANDOM_MASK(7)) - 3) << 0xA) + 0x158000;
+                D_80147C54 = ((RANDOM_MASK(7) - 3) << 0xA) + 0x1A8000;
+                D_80147C58 = ((RANDOM_MASK(7) - 3) << 0xA) + 0x158000;
             }
             if (*request == 3) {
                 if (g_SceneState.timer_06 != 0) {
@@ -2186,8 +2186,8 @@ MATCH void func_801FB924(void) {
             s32* counter;
 
             D_1F800010                = (s16*)(((AreaLoad*)g_AreaLoads[g_GameAreaId])->unk_0C + 0x12);
-            D_1F800010[0]             = (RANDOM_MASK(0x7)) - 3;
-            D_1F800010[magnitude = 1] = (RANDOM_MASK(0x7)) - 3;
+            D_1F800010[0]             = RANDOM_MASK(0x7) - 3;
+            D_1F800010[magnitude = 1] = RANDOM_MASK(0x7) - 3;
             camera                    = D_1F800010;
             magnitude                 = 0x40;
             counter                   = D_80147BEC;
@@ -2274,7 +2274,7 @@ MATCH void func_801FC01C(void) {
     i    = 0;
     if (*D_80147BDC > 0) {
         do {
-            shift                          = 0xB - (RANDOM_MASK(3));
+            shift                          = 0xB - RANDOM_MASK(3);
             slot                           = i * 0x30;
             rec                            = (SceneSampleRecord*)(i * 0x28 + (s32)base);
             SCENE_FX(D_801FD030, slot, 0)  = rec->sample_02 << 16;
@@ -2301,7 +2301,7 @@ MATCH void func_801FC01C(void) {
             SCENE_FX(D_801FCA90, slot, 10) = rec->weight_1C << shift;
             SCENE_FX(D_801FD030, slot, 11) = rec->sample_18 << 16;
             SCENE_FX(D_801FCA90, slot, 11) = rec->weight_1E << shift;
-            lifetime                       = (RANDOM_MASK(7)) + 1;
+            lifetime                       = RANDOM_MASK(7) + 1;
             SCENE_FX(D_801FD5D0, slot, 0)  = lifetime;
             SCENE_FX(D_801FD5D0, slot, 1)  = lifetime;
             SCENE_FX(D_801FD5D0, slot, 2)  = lifetime;

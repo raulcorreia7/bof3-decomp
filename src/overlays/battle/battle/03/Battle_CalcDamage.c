@@ -121,8 +121,6 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     if (damage >= 10000) {
         damage = 9999;
     }
-    if (damage < -9999) {
-        damage = -9999;
-    }
+    CLAMP_MIN(damage, -9999);
     return damage;
 }

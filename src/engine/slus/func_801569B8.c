@@ -44,11 +44,9 @@ NON_MATCHING void func_801569B8(u8* record, s32 cell_x, s32 cell_y) {
         val9 = (u8**)g_GfxPrimCursor;
         SetPolyFT4((POLY_FT4*)val9);
         SetShadeTex(val9, 0);
-        tmp6 = RANDOM_MASK(3);
-        val8 = 0x10 - ((u32)(g_FrameCount & 0x1FFF) >> 8);
-        if (val8 < 0) {
-            val8 = -val8;
-        }
+        tmp6              = RANDOM_MASK(3);
+        val8              = 0x10 - ((u32)(g_FrameCount & 0x1FFF) >> 8);
+        val8              = ABS(val8);
         SP_REF(s16, 0x18) = val1;
         SP_REF(s16, 0x20) = val1;
         SP_REF(s16, 0x28) = val1;

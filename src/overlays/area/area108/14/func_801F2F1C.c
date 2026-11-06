@@ -9,8 +9,8 @@ MATCH void func_801F2F1C(void* sprite) {
     work->origin.x  = scratch->pos.x;
     work->origin.y  = scratch->pos.y;
     work->origin.z  = scratch->pos.z;
-    work->normal.vx = (RANDOM_MASK(0xFF)) - 0x80;
-    work->normal.vy = (RANDOM_MASK(0xFF)) - 0x80;
+    work->normal.vx = RANDOM_MASK(0xFF) - 0x80;
+    work->normal.vy = RANDOM_MASK(0xFF) - 0x80;
     work->normal.vz = RANDOM_MASK(0x7F);
     VectorNormal(&work->normal, &work->normal);
     work->flags     = 1u;

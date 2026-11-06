@@ -16,14 +16,10 @@ MATCH void func_801E441C(void) {
                 D_801ED864 = 0x80;
             }
             D_801ED868 -= 8;
-            if (D_801ED868 < 0x40) {
-                D_801ED868 = 0x40;
-            }
+            CLAMP_MIN(D_801ED868, 0x40);
         } else {
             D_801ED864 -= 8;
-            if (D_801ED864 < 0x40) {
-                D_801ED864 = 0x40;
-            }
+            CLAMP_MIN(D_801ED864, 0x40);
             D_801ED868 += 8;
             if (D_801ED868 >= 0x81) {
                 D_801ED868 = 0x80;

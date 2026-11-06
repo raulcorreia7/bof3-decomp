@@ -23,7 +23,7 @@ MATCH void func_801A0AE4(Actor* record) {
             if ((mode != 0) && (D_801C83BC[spad_b->header.step](record, param, 2) & BYTE_MASK)) {
                 func_801A2C10(record);
                 if (g_Task->unk_09 != 0) {
-                    timer = (RANDOM_MASK(3)) + 3;
+                    timer = RANDOM_MASK(3) + 3;
                     /* Shared timer update after the random reload. */
                     goto block_7;
                 }

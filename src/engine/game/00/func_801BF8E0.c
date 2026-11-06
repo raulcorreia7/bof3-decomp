@@ -67,9 +67,7 @@ MATCH void func_801BF8E0(void) {
         adx = abs(dx);
         dy  = abs(*py - y);
         *py = *((s32*)((u8*)&D_80145EC8 + row));
-        if (adx < dy) {
-            adx = dy;
-        }
+        adx = MAX(adx, dy);
         ret = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight;
         adx = (u32)adx >> 13;
         adx &= BYTE_MASK;

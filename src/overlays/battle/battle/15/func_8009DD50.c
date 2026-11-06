@@ -12,7 +12,5 @@ MATCH void func_8009DD50(void) {
         ((BattlePanelTask*)g_BattleTargetRecord)->x.signed_half = value;
     }
     panel = (BattlePanelTask*)g_BattleTargetRecord;
-    if (panel->x.signed_half < 0) {
-        panel->x.signed_half = 0;
-    }
+    CLAMP_MIN(panel->x.signed_half, 0);
 }

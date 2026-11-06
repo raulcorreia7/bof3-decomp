@@ -55,7 +55,7 @@ MATCH void func_801E3C14(void) {
             !(Item_GetFlags(LOHU(g_BattleActionId) >> 8, LOHU(g_BattleActionId) & BYTE_MASK) & 4)) {
             func_801E2314(4);
         }
-        if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY && !(D_801CA718[LOHU(g_BattleActionId)][0] & 4)) {
+        if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY && !(D_801CA718[g_BattleActionId][0] & 4)) {
             func_801E2314(4);
         }
     }
@@ -92,7 +92,7 @@ MATCH void func_801E3C14(void) {
             func_800AB834();
             func_800AB910();
         }
-        if (g_BattleActionType_nv == BATTLE_ACTION_ABILITY && (D_801CA71C[LOHU(g_BattleActionId)].mask & 0x800)) {
+        if (g_BattleActionType_nv == BATTLE_ACTION_ABILITY && (D_801CA71C[g_BattleActionId].mask & 0x800)) {
             func_800AB834();
             func_800AB910();
         }

@@ -17,7 +17,7 @@ NON_MATCHING u8 Battle_PickEnemyTarget(u8 enemy_index) {
     u8  picked;
 
     index = enemy_index;
-    switch (LOBU(g_BattleActionType)) {
+    switch (g_BattleActionType) {
         case 1:
             flags = D_801EB6B0[index][0];
             if (flags & 1) {

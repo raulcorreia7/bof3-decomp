@@ -26,9 +26,7 @@ NON_MATCHING void func_801E03F8(void) {
     }
     pos_x = FISHING_STATE->motion_34.pos.pos.x.raw;
     if (pos_x <= 0x80000) {
-        if (FISHING_STATE->pos_x_0C < 0) {
-            FISHING_STATE->pos_x_0C = -FISHING_STATE->pos_x_0C;
-        }
+        FISHING_STATE->pos_x_0C = ABS(FISHING_STATE->pos_x_0C);
     } else if (pos_x > 0x13FFFF) {
         if (FISHING_STATE->pos_x_0C > 0) {
             FISHING_STATE->pos_x_0C = -FISHING_STATE->pos_x_0C;
@@ -59,9 +57,7 @@ NON_MATCHING void func_801E03F8(void) {
     pos_y       = FISHING_STATE->y_38.pos_y;
     if (pos_y < upper_limit) {
         if (pos_y <= lower_limit) {
-            if (FISHING_STATE->cursor_10 < 0) {
-                FISHING_STATE->cursor_10 = -FISHING_STATE->cursor_10;
-            }
+            FISHING_STATE->cursor_10 = ABS(FISHING_STATE->cursor_10);
         }
     } else {
         if (FISHING_STATE->cursor_10 > 0) {
@@ -71,17 +67,13 @@ NON_MATCHING void func_801E03F8(void) {
     for (index = 0; index < 8; index++) {
         vx    = g_FacingOffsets[index].pos.x.raw;
         value = vx;
-        if (value < 0) {
-            value = -value;
-        }
+        value = ABS(value);
         if (value < 0x401) {
             vx = vx * 2;
         }
         vy    = g_FacingOffsets[index].pos.y.raw;
         value = vy;
-        if (value < 0) {
-            value = -value;
-        }
+        value = ABS(value);
         if (value < 0x401) {
             vy = vy * 2;
         }

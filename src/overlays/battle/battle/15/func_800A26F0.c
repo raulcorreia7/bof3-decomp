@@ -10,13 +10,13 @@ MATCH void func_800A26F0(void) {
     func_800A3F28();
     for (slot = 0u; slot < BATTLE_PARTY_SLOT_COUNT; slot++) {
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) == 0u) {
-            g_BattlePartyBattlers[LOBU(g_BattleTarget)].turn.action_flags.value &= ~0x40000u;
+            g_BattlePartyBattlers[g_BattleTarget].turn.action_flags.value &= ~0x40000u;
         }
     }
 
     for (slot = 3u; slot < 11u; slot++) {
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) == 0u) {
-            ENEMY_COMBATANT(LOBU(g_BattleTarget)).turn.action_flags.value &= ~0x40000u;
+            ENEMY_COMBATANT(g_BattleTarget).turn.action_flags.value &= ~0x40000u;
         }
     }
 

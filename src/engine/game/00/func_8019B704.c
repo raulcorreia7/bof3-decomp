@@ -15,9 +15,7 @@ NON_MATCHING void func_8019B704(void) {
         saved          = g_Task->unk_0C;
         acc            = saved + g_Task->unk_18;
         g_Task->unk_0C = acc;
-        if (acc < 0) {
-            acc = -acc;
-        }
+        acc            = ABS(acc);
         if (acc < ONE) {
             g_Task->unk_0C = saved;
             g_Task->unk_18 = 0;
@@ -29,9 +27,7 @@ NON_MATCHING void func_8019B704(void) {
         saved          = g_Task->unk_10;
         acc            = saved + g_Task->unk_1C;
         g_Task->unk_1C = acc;
-        if (acc < 0) {
-            acc = -acc;
-        }
+        acc            = ABS(acc);
         if (acc < ONE) {
             g_Task->unk_10 = saved;
             g_Task->unk_1C = 0;
@@ -40,9 +36,7 @@ NON_MATCHING void func_8019B704(void) {
         g_Task->pos.y.fixed = total;
         delta               = total - D_80145EC8;
     }
-    if (delta < 0) {
-        delta = -delta;
-    }
+    delta = ABS(delta);
     if ((g_Task->unk_18 == 0) && (g_Task->unk_1C == 0)) {
         g_Task->unk_06 = 1;
         g_Task->unk_07 = 0;
@@ -77,11 +71,11 @@ NON_MATCHING void func_8019B704(void) {
         g_Task->unk_20           = 0;
         COORD_INT(g_Task->depth) = (u16)dist;
     }
-    if ((func_8019C028() & BYTE_MASK) == 0) {
-        if ((func_8019C344(g_Task->pos.x.fixed, g_Task->pos.y.fixed) & BYTE_MASK) != 0) {
+    if ((func_8019C028() & 0xFF) == 0) {
+        if ((func_8019C344(g_Task->pos.x.fixed, g_Task->pos.y.fixed) & 0xFF) != 0) {
             g_Task->unk_06 = 1;
             g_Task->unk_07 = 2;
-        } else if ((func_8019C1E4() & BYTE_MASK) != 0) {
+        } else if ((func_8019C1E4() & 0xFF) != 0) {
             g_Task->unk_06 = 1;
             g_Task->unk_07 = 1;
         }

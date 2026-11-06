@@ -8,7 +8,7 @@ MATCH void func_8009B828(void) {
     u8 i;
     u8 flags;
 
-    if (LOBU(g_AreaCameraMoving) == 0) {
+    if (g_AreaCameraMoving == 0) {
         func_801DAAE4();
         i = 0;
         /* FAKE: keeps i = 0 beside the call so it fills the jal delay slot;
