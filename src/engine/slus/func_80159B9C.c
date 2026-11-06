@@ -3,8 +3,8 @@
 /* draws a translucent textured quad and its outline at the given
  * screen position, then four corner bars around it.
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 69.08%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 69.08%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     s16       w;
@@ -26,9 +26,10 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     setXY0(tile, x1, y1);
-    w = w & BYTE_MASK;
-    setWH(tile, w + 1, h + 1);
-    h = h & BYTE_MASK;
+    w       = w & BYTE_MASK;
+    tile->w = w + 1;
+    h       = h & BYTE_MASK;
+    tile->h = h + 1;
     setRGB0(tile, 0, 0, 0);
     SetSemiTrans(tile, 1);
     GFX_AddPrim(1, 0x10);
