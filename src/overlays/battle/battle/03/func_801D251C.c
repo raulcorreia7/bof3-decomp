@@ -4,7 +4,7 @@ MATCH void func_801D251C(void) {
     u8* counter;
     u8  count;
     u8* otherRecord;
-    D_801EB4D8->command.type   = 2;
+    D_801EB4D8->command.type   = BATTLE_COMMAND_DEFEND;
     D_801EB4D8->command.target = g_BattleMessageSlot[5];
     otherRecord                = g_BattleMessageSlot;
     D_801EB4D8->damage_flags.value |= 2u;

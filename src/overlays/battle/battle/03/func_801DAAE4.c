@@ -37,7 +37,7 @@ NON_MATCHING void func_801DAAE4(void) {
 
                 D_801EB550[(u8)count].index = (u8)index;
                 D_801EB550[(u8)count].value = 0;
-                if (g_BattlePartyBattlers[(u8)index].turn.command.type == 4u) {
+                if (g_BattlePartyBattlers[(u8)index].turn.command.type == BATTLE_COMMAND_ABILITY) {
                     mode = D_801CA719[g_BattlePartyBattlers[(u8)index].turn.command.id].value;
                     if (mode == 1 || mode == 3) {
                         D_801EB550[(u8)count].value = 2;
@@ -45,7 +45,7 @@ NON_MATCHING void func_801DAAE4(void) {
                         D_801EB550[(u8)count].value = 4;
                     }
                 }
-                if (g_BattlePartyBattlers[(u8)index].turn.command.type == 5u) {
+                if (g_BattlePartyBattlers[(u8)index].turn.command.type == BATTLE_COMMAND_ITEM) {
                     D_801EB550[(u8)count].value = 1;
                 }
                 score                       = D_801EB550[(u8)count].value;
