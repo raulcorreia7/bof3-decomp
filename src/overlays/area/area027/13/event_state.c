@@ -2,22 +2,22 @@
 #include "area/map.h"
 
 MATCH void func_801F394C(void) {
-    switch (D_801448EC) {
+    switch (g_SceneEventStep) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_SetScriptActive();
                 SYS_SetFlag(g_SceneEventFlags, 0);
-                D_801448EC = 1;
+                g_SceneEventStep = 1;
             }
             break;
         case 1:
             func_801BE1B0(2);
-            D_801448EC = 2;
+            g_SceneEventStep = 2;
             break;
         case 2:
             if (g_ScriptVars[3] == 0x10) {
-                D_801448EE = 16;
-                D_801448EC = 3;
+                D_801448EE       = 16;
+                g_SceneEventStep = 3;
             }
             break;
         case 3: {
@@ -26,8 +26,8 @@ MATCH void func_801F394C(void) {
 
             if (TIMER_EXPIRED(*timer)) {
                 Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, 0x260000u, 0x380000u, 144);
-                D_801448EC = 4;
-                flag       = &g_ScriptVars[3];
+                g_SceneEventStep = 4;
+                flag             = &g_ScriptVars[3];
                 (*flag)++;
             }
         } break;
@@ -38,8 +38,8 @@ MATCH void func_801F394C(void) {
                 *flag = 0;
                 Game_ClearScriptActive();
                 SYS_ClearFlag(g_SceneEventFlags, 0);
-                D_801448EB = 0;
-                D_801448EC = 0;
+                g_SceneEventMode = 0;
+                g_SceneEventStep = 0;
             }
         } break;
     }

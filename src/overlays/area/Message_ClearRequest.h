@@ -10,8 +10,8 @@
 MATCH void Message_ClearRequest(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {
-        D_801448EB = 0xA;
-        D_801448EC = 0;
-        D_801448ED = AREA_RESET_VARIANT;
+        g_SceneEventMode      = 0xA;
+        g_SceneEventStep      = 0;
+        g_SceneEventSelection = AREA_RESET_VARIANT;
     }
 }

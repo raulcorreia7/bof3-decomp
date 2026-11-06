@@ -13,7 +13,7 @@ MATCH void func_801D3798(void) {
         return;
     }
     for (i = 0; i < g_PartySize; i++) {
-        if (g_Characters[D_80145FCC.rows[i][0]].master_id == D_801448ED) {
+        if (g_Characters[D_80145FCC.rows[i][0]].master_id == g_SceneEventSelection) {
             break;
         }
     }
@@ -21,7 +21,7 @@ MATCH void func_801D3798(void) {
         g_MasterSubStep = 0;
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[D_801448ED] + 9));
+    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + 9));
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     g_MasterSubStep++;
 }

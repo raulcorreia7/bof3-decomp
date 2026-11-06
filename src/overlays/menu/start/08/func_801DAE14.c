@@ -40,7 +40,7 @@ NON_MATCHING void func_801DAE14(void) {
     for (i = 0; i < 8; i++) {
         if (((u8*)&g_Characters[0].unk_07)[offset] & 1) {
             for (index = 0; index < (count & BYTE_MASK); index++) {
-                if (g_Characters[i].character_index == D_80144F5A[index]) {
+                if (g_Characters[i].character_index == g_PartyWalkOrder[index]) {
                     break;
                 }
             }

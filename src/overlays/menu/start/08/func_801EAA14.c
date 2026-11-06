@@ -54,7 +54,7 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
                 val7  = 0;
             }
             val6 = val4 & HALF_MASK;
-            UI_DrawWindow(val5 & HALF_MASK, val6, 125, 48, (val10 + 0x80) & BYTE_MASK, (s32)D_80144952);
+            UI_DrawWindow(val5 & HALF_MASK, val6, 125, 48, (val10 + 0x80) & BYTE_MASK, (s32)g_WindowStyle);
             if (!(val10 & BYTE_MASK)) {
                 val9 = (FIELD(u16, val11, 0xCu) >> 6) & 2;
             } else {

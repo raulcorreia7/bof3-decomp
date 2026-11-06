@@ -1061,8 +1061,8 @@ static inline void BattleDrawPanelFrame(s32 x, s32 y, s32 kind, s32 glyph0, s32 
     u8  b;
 
     GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
-    /* FAKE: retail reads D_80144952 as s8. */
-    color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + (((*(s8*)&D_80144952) << 6) | 0x20));
+    /* FAKE: retail reads g_WindowStyle as s8. */
+    color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + (((*(s8*)&g_WindowStyle) << 6) | 0x20));
     r     = PSX_COLOR_R(color) << 3;
     g     = PSX_COLOR_G(color) << 3;
     b     = PSX_COLOR_B(color) << 3;

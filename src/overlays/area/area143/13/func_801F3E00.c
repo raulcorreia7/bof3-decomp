@@ -2,11 +2,11 @@
 
 MATCH s32 func_801F3E00(void) {
     Game_SetScriptActive();
-    D_801448EB = 4;
-    D_801448ED = 0xF;
+    g_SceneEventMode      = 4;
+    g_SceneEventSelection = 0xF;
     if (g_AreaSceneMode == 0) {
-        g_AreaSceneMode = 1;
-        D_801448EC      = 5;
+        g_AreaSceneMode  = 1;
+        g_SceneEventStep = 5;
     }
     return 0;
 }

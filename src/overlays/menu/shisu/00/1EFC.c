@@ -237,7 +237,7 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
     u8       flags;
     u8       n;
 
-    UI_DrawWindow((panel->pos.x + 3) & HALF_MASK, (panel->pos.y + 3) & HALF_MASK, 154, 160, 0, D_80144952);
+    UI_DrawWindow((panel->pos.x + 3) & HALF_MASK, (panel->pos.y + 3) & HALF_MASK, 154, 160, 0, g_WindowStyle);
     n    = 0;
     list = Party_GetAbilities(panel->group, panel->group_first, 0);
     y    = panel->pos.y;
@@ -250,7 +250,7 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
             }
             level   = Char_GetAbilityElement(*list);
             ability = (Ability*)&g_Abilities[*list];
-            count   = Char_GetAbilityCost(g_CharSlot[D_80144F5A[(s8)D_80148656]], *list, 0);
+            count   = Char_GetAbilityCost(g_CharSlot[g_PartyWalkOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->drawn_cursor || n == panel->group_cursor) {
                 if (shade != 7) {
                     func_801AF930((s16)(panel->pos.x + 7), (s16)(y + 0x1A), 7, level, (u8*)ability, count, 1);
@@ -309,7 +309,7 @@ MATCH void func_801D91B0(u8 index, s32 left, s32 top, MenuListRow* row) {
 
     x = left;
     y = top;
-    UI_DrawWindow(left + 8, y, 200, 48, 0, D_80144952);
+    UI_DrawWindow(left + 8, y, 200, 48, 0, g_WindowStyle);
     if (row != NULL) {
         if (GetGraphType() != 1) {
             GetGraphType();

@@ -22,7 +22,7 @@ MATCH void func_801C329C(void) {
         index = 0;
         if ((s16)total > 0) {
             do {
-                sel = g_CharSlot[D_80144F5A[index]];
+                sel = g_CharSlot[g_PartyWalkOrder[index]];
                 if (g_Characters[sel].status & STATUS_POISONED) {
                     found = 1;
                 }
@@ -44,7 +44,7 @@ MATCH void func_801C329C(void) {
                 index = 0;
                 if ((s16)total > 0) {
                     do {
-                        id  = D_80144F5A[index];
+                        id  = g_PartyWalkOrder[index];
                         sel = g_CharSlot[id];
                         if ((g_Characters[sel].status & STATUS_POISONED) && ((Char_LoseHP(1, id) & HALF_MASK) != 0)) {
                             found = 1;

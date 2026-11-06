@@ -3,7 +3,7 @@
 MATCH void func_801D3B98(void) {
     u8 count;
 
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     if (D_8014865C != -1) {
         sprintf((char*)g_UiFormatBuffer, (const char*)D_801D0C1C, D_80148699 * 10);
         TEXT_SetVariable(0, 8, g_UiFormatBuffer);

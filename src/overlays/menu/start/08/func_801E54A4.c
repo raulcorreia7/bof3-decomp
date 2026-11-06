@@ -2,7 +2,7 @@
 
 MATCH void func_801E54A4(void) {
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     func_801E14A8(0x62, 0x4C, D_801ED870, g_SaveCardPort, 0);
     CardAccessFile(0, 0, 0, 0, 0);
     g_SaveSlotFirst = 0;

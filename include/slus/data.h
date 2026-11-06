@@ -32,7 +32,7 @@ extern u8          D_80144956;
 extern u8          g_SceneEventFlags[];
 /* D_80144F58 */
 extern u8          g_PartyFormation;
-extern u8          D_80144F5D[];
+extern u8          g_PartyBattleOrder[];
 extern u32         D_80145040;
 extern u32         D_80145044;
 extern u8          D_8014546C[];

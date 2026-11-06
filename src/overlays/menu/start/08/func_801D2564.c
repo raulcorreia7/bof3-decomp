@@ -24,7 +24,7 @@ MATCH void func_801D2564(void) {
     /* FAKE: preserve first table store order. */
     MATCH_FAKE_BARRIER();
     D_801485E2 = g_MenuPanelTasks[selection_index + 4].pos.y;
-    TEXT_SetVariable(0U, 5U, g_CharSlot[D_80144F5A[selection_index]] * 0xA4 + panel_data);
+    TEXT_SetVariable(0U, 5U, g_CharSlot[g_PartyWalkOrder[selection_index]] * 0xA4 + panel_data);
     g_MenuPanelTasks[11].unk_10 = 0x12;
     input                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     count                       = Party_CountOrder(PARTY_ORDER_KIND_WALKING);

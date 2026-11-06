@@ -183,9 +183,9 @@ MATCH void func_801FBFA8(void) {
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
-    D_80144F5D[0] = 7;
-    D_80144F5E    = 8;
-    D_80144F5F    = 5;
+    g_PartyBattleOrder[0] = 7;
+    D_80144F5E            = 8;
+    D_80144F5F            = 5;
 }
 
 MATCH void Scene_SetPartyRyuAdultGarrPeco(void) {

@@ -3,6 +3,7 @@
 
 #include "game/character.h"
 #include "shared/etc.h"
+#include "work/save.h"
 #include <string.h>
 #include <stdio.h>
 

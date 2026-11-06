@@ -5,7 +5,7 @@ MATCH s32 func_801F14F8(u8* active_ui) {
     MATCH_REG(u8, flag, "v1");
 
     FAIRY_VILLAGE_ACTIVE_UI = active_ui;
-    D_801448EB              = 0x17;
+    g_SceneEventMode        = 0x17;
     Game_SetScriptActive();
     flag       = 1;
     D_801448F2 = flag;

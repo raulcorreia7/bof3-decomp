@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-extern u8 D_80144F5A[];
+extern u8 g_PartyWalkOrder[];
 
 /* Forwards the selector byte to func_8014D6DC with a zero extra operand.
  * The retail masks the argument with 0xFF before the call

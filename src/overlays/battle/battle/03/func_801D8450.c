@@ -16,8 +16,8 @@ MATCH void func_801D8450(u32 panel_index) {
      * constants past the frame loads. */
     x     = *(s16*)((u8*)D_801EAEE8 + index * 8);
     y     = D_801EAEE8[index].unk_02;
-    /* FAKE: retail reads D_80144952 as s8. */
-    color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + (((*(s8*)&D_80144952) << 6) | 0x20));
+    /* FAKE: retail reads g_WindowStyle as s8. */
+    color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + (((*(s8*)&g_WindowStyle) << 6) | 0x20));
     r     = PSX_COLOR_R(color) << 3;
     g     = PSX_COLOR_G(color) << 3;
     b     = PSX_COLOR_B(color) << 3;

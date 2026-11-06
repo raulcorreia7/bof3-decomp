@@ -40,7 +40,7 @@ MATCH void func_801BF8E0(void) {
     index = 0;
     limit = g_PartySize;
     if (limit > 0) {
-        key = D_80144F5A[0];
+        key = g_PartyWalkOrder[0];
         /* src doubles as the bound: retail keeps both in a0 (a separate local 89.26%). */
         src = limit;
         dst = 0;

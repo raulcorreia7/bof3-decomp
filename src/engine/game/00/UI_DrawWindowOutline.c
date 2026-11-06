@@ -29,7 +29,7 @@ NON_MATCHING void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 
     val0  = x;
     val4  = y;
     val2  = width;
-    tmp3  = *(u16*)(((D_80144952 << 6) | 0x20) + (u8*)&D_80033A08);
+    tmp3  = *(u16*)(((g_WindowStyle << 6) | 0x20) + (u8*)&D_80033A08);
     tmp4  = tmp3 & HALF_MASK;
     tmp1  = flags & 1;
     if (tmp1 == 0) {

@@ -36,7 +36,7 @@
 /* NOTE: retail reads the window style byte at 0x80144952 signed (`lb`) in func_8019986C and
  * func_801AEBA0 and unsigned (`lbu`) in func_801999F8 and UI_DrawWindowOutline, so exports.h keeps u8 and only
  * the signed readers view it as s8. */
-#define GAME_WINDOW_STYLE      (*(s8*)&D_80144952)
+#define GAME_WINDOW_STYLE      (*(s8*)&g_WindowStyle)
 
 /* FAKE: the game images call Area_GetCellCode as s32(s16, s16) and truncate at the call; the area images pass
  * s32 coordinates untruncated, so one prototype cannot serve both (an s16 prototype changes 11 area images). */

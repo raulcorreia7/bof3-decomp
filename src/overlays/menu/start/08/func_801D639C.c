@@ -13,7 +13,7 @@ MATCH void func_801D639C(void) {
     choice = &D_80144953;
     Menu_DrawClutStrip(*choice);
     choice += 0x15;
-    record = (g_CharSlot[D_80144F5A[g_MenuPanelTasks[13].unk_0C]] * 0xA4) + choice;
+    record = (g_CharSlot[g_PartyWalkOrder[g_MenuPanelTasks[13].unk_0C]] * 0xA4) + choice;
     switch (g_MenuPanelTasks[13].unk_0A) {
         case 0:
         default:

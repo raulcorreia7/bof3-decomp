@@ -12,7 +12,7 @@ MATCH void func_801D21F4(void) {
         if (s_PartyCharacterIds[i] != CHAR_ID_BLANK) {
             j = 0;
             do {
-                if (D_80144F5A[j] != CHAR_ID_BLANK && s_PartyCharacterIds[i] == D_80144F5A[j]) {
+                if (g_PartyWalkOrder[j] != CHAR_ID_BLANK && s_PartyCharacterIds[i] == g_PartyWalkOrder[j]) {
                     unmatched = 0;
                     goto add; /* a match skips the not-found flag */
                 }
@@ -30,10 +30,10 @@ MATCH void func_801D21F4(void) {
             saved[i][j] = D_801454F4[i][j];
     }
     for (i = 0; i < PARTY_SLOT_COUNT; i++) {
-        if (D_80144F5D[i] != CHAR_ID_BLANK) {
+        if (g_PartyBattleOrder[i] != CHAR_ID_BLANK) {
             j = 0;
             do {
-                if (D_801ED613[j] != CHAR_ID_BLANK && D_80144F5D[i] == D_801ED613[j]) {
+                if (D_801ED613[j] != CHAR_ID_BLANK && g_PartyBattleOrder[i] == D_801ED613[j]) {
                     D_801454F4[i][0] = saved[j][0];
                     D_801454F4[i][1] = saved[j][1];
                     D_801454F4[i][2] = saved[j][2];

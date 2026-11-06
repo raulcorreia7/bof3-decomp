@@ -13,7 +13,7 @@ MATCH void Shop_DrawItems(MenuListPanel* panel) {
     u8  color;
     u8  dim;
 
-    UI_DrawWindow(panel->pos.x + 3, panel->pos.y + 3, 173, 159, panel->unk_0A, D_80144952);
+    UI_DrawWindow(panel->pos.x + 3, panel->pos.y + 3, 173, 159, panel->unk_0A, g_WindowStyle);
     names = panel->names;
     y     = panel->pos.y + 8;
     for (index = 0; index < names[0]; index++) {

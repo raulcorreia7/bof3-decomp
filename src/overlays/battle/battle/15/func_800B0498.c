@@ -22,7 +22,7 @@ MATCH void func_800B0498(void) {
     func_800B06F4(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_08,
                   g_MenuCurrentPanel->unk_09);
 
-    style = &D_80144952;
+    style = &g_WindowStyle;
     UI_DrawWindow((u16)(g_MenuCurrentPanel->pos.x + 6u), (u16)(g_MenuCurrentPanel->pos.y + 33u),
                   (u16)(g_MenuCurrentPanel->unk_08 * 8u - 15u), (u16)(g_MenuCurrentPanel->unk_09 * 8u - 39u), 0,
                   *style);

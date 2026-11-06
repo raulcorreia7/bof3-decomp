@@ -8,7 +8,7 @@ MATCH void func_800C2680(void) {
     UI_SetMode(4);
     g_PartySize = D_801FE4E4;
     for (i = 0; i < g_PartySize; i++) {
-        D_80144F5D[i] = D_801FE4EC[i];
+        g_PartyBattleOrder[i] = D_801FE4EC[i];
     }
     g_PartySize = 3;
 }

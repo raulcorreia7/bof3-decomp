@@ -5,9 +5,9 @@ MATCH s32 func_801F2C98(s32 x, s32 y) {
 
     if (y <= 0x3A0000 && ((x >> 16) - 0x30) < 3U) {
         if ((facing < 2U || facing == 2) && Item_VitalHas(VITAL_ITEM_GUILD_LETTER) == 0) {
-            D_80146867 = 1;
-            D_801448EB = 0xD;
-            D_801448EC = 0;
+            D_80146867       = 1;
+            g_SceneEventMode = 0xD;
+            g_SceneEventStep = 0;
             return 1;
         }
         return 0;

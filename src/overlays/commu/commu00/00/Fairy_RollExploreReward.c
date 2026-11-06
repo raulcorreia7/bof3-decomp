@@ -15,7 +15,7 @@ MATCH void Fairy_RollExploreReward(void) {
     u8              low;
 
     memcpy(buf, D_801EEC98, 12);
-    edp   = &D_801448ED;
+    edp   = &g_SceneEventSelection;
     state = g_FairyJobs[*edp].record_state;
     if (state == 3) {
         Message_StartAreaMessage(0x52);
@@ -36,7 +36,7 @@ MATCH void Fairy_RollExploreReward(void) {
         } else {
             roll -= buf[D_801457A9[offset * 8]].value;
         }
-        offset = g_FairyJobs[D_801448ED].type - 1;
+        offset = g_FairyJobs[g_SceneEventSelection].type - 1;
         for (i = 1; i < 3; i++) {
             if (buf[D_801457A9[offset * 8]].weights[i - 1] >= (u8)roll) {
                 break;
@@ -58,7 +58,7 @@ MATCH void Fairy_RollExploreReward(void) {
         }
         D_801490E4[0] = 0;
         Message_StartAreaMessage(0x4F);
-        edp_tail                                                    = &D_801448ED;
+        edp_tail                                                    = &g_SceneEventSelection;
         g_FairyJobs[*edp_tail].progress_anchor                      = g_BattleCount;
         /* FAKE: retail reloads the index through the materialized pointer. */
         g_FairyJobs[*MATCH_VOLATILE_PTR(u8, edp_tail)].record_state = 0;

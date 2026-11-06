@@ -399,7 +399,7 @@ MATCH void func_800F63CC(u16 x, u16 y, u8 color) {
     s16 x2;
     s16 y2;
 
-    UI_DrawWindow(x, (y + 1), 0x8C, 0xA0, (color | 0x80), D_80144952);
+    UI_DrawWindow(x, (y + 1), 0x8C, 0xA0, (color | 0x80), g_WindowStyle);
     func_801E0C80(9, 1);
     func_801E0DCC(0x25, 1, x, y);
 
@@ -501,7 +501,7 @@ MATCH void func_800F6A84(u16 x, u16 y) {
     s16 x2;
     s16 y2;
 
-    UI_DrawWindow(x, (y + 1), 0x84, 0x42, 0x80, D_80144952);
+    UI_DrawWindow(x, (y + 1), 0x84, 0x42, 0x80, g_WindowStyle);
 
     func_801E0C80(9, 1);
     func_801E0DCC(0x25, 1, x, y);
@@ -572,7 +572,7 @@ MATCH void func_800F6EE0(u16 x, u16 y) {
     s32 offset;
     s16 y2;
 
-    UI_DrawWindow(x, y, 0x88, 0x36, 0x80, D_80144952);
+    UI_DrawWindow(x, y, 0x88, 0x36, 0x80, g_WindowStyle);
     func_801E0C80(8, 1);
     func_801E0DCC(0x33, 1, x, y);
 

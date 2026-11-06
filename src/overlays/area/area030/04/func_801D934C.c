@@ -22,7 +22,7 @@ NON_MATCHING void func_801D934C(s32 x, s32 y, s32 width, s32 height) {
     val3     = y;
     val6     = width;
     stack_10 = (s32)height;
-    val2     = ((u16*)&D_80033A08)[(((u32)((*(s8*)&D_80144952) << 6)) | 0x20) >> 1];
+    val2     = ((u16*)&D_80033A08)[(((u32)((*(s8*)&g_WindowStyle) << 6)) | 0x20) >> 1];
     val0     = (val2 & 0x1F) * 8;
     val2 &= HALF_MASK;
     val7 = val2 >> 2;

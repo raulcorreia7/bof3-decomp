@@ -23,7 +23,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     u8* cursor;
     u8* text;
 
-    UI_DrawWindow(panel_x, (panel_y + 1) & HALF_MASK, 0x8B, 0x9E, 0x80, (s32)D_80144952);
+    UI_DrawWindow(panel_x, (panel_y + 1) & HALF_MASK, 0x8B, 0x9E, 0x80, (s32)g_WindowStyle);
     if (FISHING_STATE->step_index_0A != 0) {
         FISHING_STATE->step_index_0A = (u8)(FISHING_STATE->step_index_0A - 1);
         max_count                    = 0xA;

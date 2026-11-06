@@ -5,15 +5,15 @@ MATCH void Scene_ResetEventState(void) {
     s32 index;
     u8  value;
 
-    i             = 0;
-    D_801448E8    = 0;
-    D_801448EA[0] = 1;
-    D_801448EB    = 0;
-    D_801448EC    = 0;
-    D_801448EE    = 0;
-    D_801448ED    = 0;
-    D_801448E9    = 0;
-    D_801448F0    = 0;
+    i                     = 0;
+    D_801448E8            = 0;
+    D_801448EA[0]         = 1;
+    g_SceneEventMode      = 0;
+    g_SceneEventStep      = 0;
+    D_801448EE            = 0;
+    g_SceneEventSelection = 0;
+    D_801448E9            = 0;
+    D_801448F0            = 0;
     do {
         index = i & BYTE_MASK;
         value = s_EventFlagsReset[index];

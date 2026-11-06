@@ -22,6 +22,7 @@
 #include "menu/save.h"
 #include "slus/facing.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 #include <stdio.h>
 #include <abs.h>
 #include <memory.h>

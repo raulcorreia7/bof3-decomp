@@ -41,7 +41,7 @@ MATCH void func_801DE200(void) {
             limit = search_limit;
             if (search_limit != 0) {
             loop_4:
-                if (*record != D_80144F5A[order_index]) {
+                if (*record != g_PartyWalkOrder[order_index]) {
                     order_index += 1;
                     if (order_index < limit) {
                         goto loop_4; /* retail branch */

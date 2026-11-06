@@ -11,7 +11,7 @@ MATCH void func_801976EC(void) {
     func_80198C38(0u);
     CallbackWait(1u);
     if (D_80148661 != 0u) {
-        EMI_LoaderStreamFamily(D_80144F5A[0], D_80144F5A[1], D_80144F5A[2], 0u);
+        EMI_LoaderStreamFamily(g_PartyWalkOrder[0], g_PartyWalkOrder[1], g_PartyWalkOrder[2], 0u);
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1u);
         }

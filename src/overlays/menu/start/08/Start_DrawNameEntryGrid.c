@@ -30,7 +30,7 @@ NON_MATCHING void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
     y      = base_y + 6;
     row    = 0;
     labels = D_801D0F00;
-    UI_DrawWindow(grid_x & HALF_MASK, base_y, 272, 123, 0, D_80144952);
+    UI_DrawWindow(grid_x & HALF_MASK, base_y, 272, 123, 0, g_WindowStyle);
     cell = D_801ECDBC + (page & BYTE_MASK) * 0x60;
     for (; row < 8; row++) {
         x = grid_x + 4;

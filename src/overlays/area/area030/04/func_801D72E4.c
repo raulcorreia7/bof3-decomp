@@ -21,7 +21,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
 
-    UI_DrawWindow(panel_x & HALF_MASK, panel_y & HALF_MASK, 0xF2, 0x9F, 0xF0, (s32)D_80144952);
+    UI_DrawWindow(panel_x & HALF_MASK, panel_y & HALF_MASK, 0xF2, 0x9F, 0xF0, (s32)g_WindowStyle);
     if (FISHING_STATE->counter_08 != 0) {
         if (FISHING_STATE->step_timer_09 == 0) {
             health = FISHING_STATE->bounce_3C.half.unk_3C;
@@ -102,8 +102,8 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
             bar_y += 0xD;
         } while (count < bar_count);
     }
-    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 0xF2, 0xE, 0, (s32)D_80144952);
-    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 0x94) & HALF_MASK, 0xF2, 0xB, 0x30, (s32)D_80144952);
+    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 0xF2, 0xE, 0, (s32)g_WindowStyle);
+    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 0x94) & HALF_MASK, 0xF2, 0xB, 0x30, (s32)g_WindowStyle);
     health = FISHING_STATE->bounce_3C.half.unk_3C;
     UI_DrawText((s16)(panel_x + 0x3D), (s16)(panel_y + 6), 0, 0xFFU,
                 ((u8*)&D_80010000 + D_80010000[D_801E2114[health]]));

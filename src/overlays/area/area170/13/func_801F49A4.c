@@ -4,7 +4,7 @@ MATCH void func_801F49A4(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {
         Game_SetScriptActive();
-        D_801448EB = 0x25;
-        D_801448EC = 0xF;
+        g_SceneEventMode = 0x25;
+        g_SceneEventStep = 0xF;
     }
 }

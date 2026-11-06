@@ -16,12 +16,12 @@ MATCH void Menu_DrawStatPanel(s16 panel_x, s16 panel_y, u8 palette_index) {
     s16        y15;
     s16        y17;
     u8         i;
-    base = &D_80144952;
+    base = &g_WindowStyle;
     y15  = panel_x + 5;
     UI_DrawWindow((y15), ((panel_y + 3)), 148, 45, 0, base[0]);
     xb     = panel_x + 0xB;
     y8     = panel_y + 8;
-    entryp = (Character*)(&D_80144952 + 0x16 + palette_index * 0xA4);
+    entryp = (Character*)(&g_WindowStyle + 0x16 + palette_index * 0xA4);
     UI_DrawText(xb, y8, 0, 0xFF, g_MenuLabelPower);
     sprintf((char*)g_UiFormatBuffer, (const char*)D_801D0C04, entryp->stats.power);
     x30 = panel_x + 0x30;

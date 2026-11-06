@@ -16,8 +16,8 @@
 
 #define CHARACTER_BLOCK_RECORDS 0x16
 
-/* The block at its retail address; an image header declares D_80144952. */
-#define CHARACTER_BLOCK         ((Char_Block*)&D_80144952)
+/* The block at its retail address; an image header declares g_WindowStyle. */
+#define CHARACTER_BLOCK         ((Char_Block*)&g_WindowStyle)
 
 /* func_801ADDD4 applies the six stat gains and learns both abilities. */
 #define LEVEL_OBJECT(exp, hp, ap, power, defense, agility, intellect, ability, extra_ability)                   \
@@ -63,8 +63,8 @@ typedef enum EquipSlot {
     EQUIP_SLOT_ACCESSORY_2 = 5,
 } EquipSlot;
 
-/* Which party-order array a call reads: the walking order at D_80144F5A or the
- * battle order at D_80144F5D, three character ids each, 0xFF for an empty
+/* Which party-order array a call reads: the walking order g_PartyWalkOrder or the
+ * battle order g_PartyBattleOrder, three character ids each, 0xFF for an empty
  * position. Party_CountOrder and Party_BuildBattlers take it as their mode. */
 typedef enum PartyOrderKind {
     PARTY_ORDER_KIND_WALKING = 0,
