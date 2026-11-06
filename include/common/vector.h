@@ -1,6 +1,7 @@
 #ifndef COMMON_VECTOR_H
 #define COMMON_VECTOR_H
 
+#include "common/fixed.h"
 #include "types.h"
 
 /* Packed vectors used across images; PsyQ vectors retain their SDK padding. */
@@ -32,6 +33,17 @@ typedef struct Vec3S32 {
     s32 y;
     s32 z;
 } Vec3S32;
+
+typedef struct Vec3Coord {
+    Coord x;
+    Coord y;
+    Coord z;
+} Vec3Coord;
+
+ASSERT_SIZE(Vec3Coord, 0x0C);
+ASSERT_OFFSET(Vec3Coord, x, 0x00);
+ASSERT_OFFSET(Vec3Coord, y, 0x04);
+ASSERT_OFFSET(Vec3Coord, z, 0x08);
 
 ASSERT_SIZE(Vec2S16, 0x04);
 ASSERT_SIZE(Vec2U16, 0x04);
