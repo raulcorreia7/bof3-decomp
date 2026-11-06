@@ -27,7 +27,7 @@ MATCH void func_801F5380(void) {
     Actor_StopMoving();
     if (func_801A79A4(g_Task->x.fixed, g_Task->y.fixed) == 0) {
         func_801C329C();
-        if (!(g_GameFlags & 0x100) && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING)) {
+        if (!(g_GameFlags & GAME_FLAG_SCRIPT_ACTIVE) && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING)) {
             value = D_8014625C & (D_80145AB6 | (g_InputMasks | 0xF000));
             if (value != 0) {
                 func_801F4B4C(value);
