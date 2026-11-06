@@ -12,8 +12,8 @@ MATCH void func_801E3334(void) {
     work->unk_48  = 2u;
     work          = g_Task;
     work->unk_18  = 0x666u;
-    work->scale_y = 0u;
-    work->scale_x = 0u;
+    work->scale.y = 0u;
+    work->scale.x = 0u;
     work->unk_0C  = 0u;
     work->unk_03  = 1u;
 }

@@ -11,9 +11,9 @@ MATCH void func_801E8558(void) {
 
     D_801EB4E0->flags &= ~ACTOR_FLAG_HIDDEN;
     stage = D_801EB4E0;
-    step  = stage->scale_x;
+    step  = stage->scale.x;
     if (step != 0x10000) {
-        stage->scale_x = step + 0x2000;
+        stage->scale.x = step + 0x2000;
         return;
     }
     stage->unk_48 = 0;

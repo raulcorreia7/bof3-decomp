@@ -8,9 +8,9 @@ MATCH void func_801E3398(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if ((s32)work->scale_x <= 0xFFFF) {
-        work->scale_x += work->unk_0C;
-        work->scale_y += work->unk_0C;
+    if ((s32)work->scale.x <= 0xFFFF) {
+        work->scale.x += work->unk_0C;
+        work->scale.y += work->unk_0C;
         work->unk_0C += work->unk_18;
     } else {
         work->unk_48   = 0;

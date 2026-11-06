@@ -976,8 +976,8 @@ static inline void BattleDrainWorkCounter(void) {
     PartyBattler* work;
 
     work = D_801EB4E0;
-    if (work->scale_x != 0) {
-        work->scale_x -= 0x2000;
+    if (work->scale.x != 0) {
+        work->scale.x -= 0x2000;
     } else {
         work->flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
         g_Task->mode++;

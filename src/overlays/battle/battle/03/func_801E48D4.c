@@ -8,9 +8,9 @@ MATCH void func_801E48D4(void) {
     s32           timer;
 
     work = g_Task;
-    work->scale_y += work->unk_10;
+    work->scale.y += work->unk_10;
     work->unk_10 += work->unk_1C;
-    timer = work->scale_y;
+    timer = work->scale.y;
     if (timer < 0) {
         Battle_DefeatEnemy();
     }

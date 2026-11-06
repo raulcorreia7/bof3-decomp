@@ -44,8 +44,8 @@ found:
     scratch          = g_Task;
     window           = 2;
     scratch->unk_18  = key;
-    scratch->scale_x = 0;
-    scratch->scale_y = window_span;
+    scratch->scale.x = 0;
+    scratch->scale.y = window_span;
     scratch->unk_48  = window;
     scratch          = g_Task;
     scratch->unk_09  = 8;
@@ -61,8 +61,8 @@ check4:
 
 arm:
     window_span      = 0x10000;
-    scratch->scale_x = 0;
-    scratch->scale_y = window_span;
+    scratch->scale.x = 0;
+    scratch->scale.y = window_span;
     window           = 2;
     scratch->unk_48  = window;
     scratch          = g_Task;
