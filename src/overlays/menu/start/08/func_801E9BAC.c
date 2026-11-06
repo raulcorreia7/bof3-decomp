@@ -6,7 +6,7 @@ MATCH void func_801E9BAC(void) {
     task = g_MenuCurrentPanel;
     task->x += 0x20;
     if ((s16)task->x >= 0x2E) {
-        LOH(task->x) = 0x2D;
+        task->x = 0x2D;
         task->state  = 0;
     }
 }

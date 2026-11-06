@@ -6,7 +6,7 @@ MATCH u8* func_801B3C3C(s32 bounds_x, s32 bounds_y) {
     u8* entry;
     u8* cursor;
 
-    entry  = D_80181164[LOHU(g_GameAreaId)];
+    entry  = D_80181164[g_GameAreaId];
     x      = bounds_x & BYTE_MASK;
     y      = bounds_y & BYTE_MASK;
     cursor = entry + 3;

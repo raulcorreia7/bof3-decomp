@@ -90,11 +90,11 @@ NON_MATCHING void func_801F4768(void) {
                     SetShadeTex(primitive, 0);
                     SetSemiTrans(primitive, 1);
 
-                    LOWU(primitive->x0) = *(const u32*)&source->x0;
-                    LOWU(primitive->x1) = *(const u32*)&source->x1;
-                    LOWU(primitive->x2) = *(const u32*)&source->x2;
+                    primitive->x0 = *(const u32*)&source->x0;
+                    primitive->x1 = *(const u32*)&source->x1;
+                    primitive->x2 = *(const u32*)&source->x2;
                     primitive->clut     = 0x78CB;
-                    LOWU(primitive->x3) = *(const u32*)&source->x3;
+                    primitive->x3 = *(const u32*)&source->x3;
 
                     tpage            = getTPage(0, 2, 704, 256);
                     primitive->tpage = (u16)tpage;

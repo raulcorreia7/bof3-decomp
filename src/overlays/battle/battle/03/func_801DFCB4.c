@@ -63,7 +63,7 @@ MATCH void func_801DFCB4(void) {
                 }
                 break;
             case BATTLE_ACTION_ABILITY:
-                if (!(D_801CA718[LOHU(g_BattleActionId)][0] & 4)) {
+                if (!(D_801CA718[g_BattleActionId][0] & 4)) {
                     func_801DF34C();
                 }
                 break;
@@ -109,7 +109,7 @@ MATCH void func_801DFCB4(void) {
             func_800AB834();
             func_800AB910();
         }
-        if (g_BattleActionType_nv == BATTLE_ACTION_ABILITY && (D_801CA71C[LOHU(g_BattleActionId)].mask & 0x800)) {
+        if (g_BattleActionType_nv == BATTLE_ACTION_ABILITY && (D_801CA71C[g_BattleActionId].mask & 0x800)) {
             func_800AB834();
             func_800AB910();
         }

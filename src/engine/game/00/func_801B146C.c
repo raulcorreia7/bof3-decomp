@@ -73,7 +73,7 @@ MATCH void func_801B146C(void) {
               (pos_x == 0x20000) || (pos_y == 0x20000) || (pos_x == ((D_80104000 - 3) << 0x10)) ||
                   (pos_y == ((D_80104001 - 3) << 0x10))))) {
             Actor_RequestScript(g_Task->direction_08);
-            Game_RequestAreaChange(LOHU(D_80143F04), LOWU(D_80143F08), LOWU(D_80143F0C), 4U);
+            Game_RequestAreaChange(D_80143F04, D_80143F08, LOWU(D_80143F0C), 4U);
             goto block_46; /* re-arm the frame flags */
         }
     block_24:
