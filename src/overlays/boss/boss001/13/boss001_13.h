@@ -25,7 +25,6 @@ extern Callback     D_800C2270[];
 /* Battle RAM cell cleared by the mode start; the block around it belongs to
  * include/battle/ram.h, which does not name this halfword yet. */
 extern volatile u16 D_801463BE;
-void                func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode);
 /* D_801EB630 */
 extern EnemyBattler g_BattleEnemyBattlers[];
 

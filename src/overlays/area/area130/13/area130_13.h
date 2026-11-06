@@ -31,7 +31,6 @@ extern s16 D_801469EA;
 extern u8  D_801F3ED8[];
 extern u16 D_801F5058[];
 
-s32  Item_VitalAdd(u8 item_id);
-void Area_ProjectPoint(s32* pos, long* screen_xy);
+s32 Item_VitalAdd(u8 item_id);
 
 #endif

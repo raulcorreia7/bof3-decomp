@@ -23,15 +23,9 @@ extern u8 D_801F6B18[];
 /* func_801F367C */
 void Area_Update(void);
 /* func_801F3BC4 */
-/* func_801F4188 */
-void Area_DrawHudBanner(s16 x, s16 y);
 void func_801F4E3C(void);
-void Area_StepChargeGauge(void);
 void func_801F564C(void);
 void func_801F5738(void);
-/* func_801F5988 */
-s32  Area_BeginTurnStep(s32 direction, s32 previous);
-void Area_FinishTurnStep(void);
 
 #define AREA_TURN_SYNC       func_801F5738
 #define AREA_MESSAGE_REQUEST 4 /* the message Message_RunAreaMessage starts */
@@ -44,10 +38,6 @@ extern WorldMapMarker D_801F6AF8[6];
 extern u16 g_GameAreaId;
 extern s8  g_GameRequestKind;
 extern u16 D_80143F22;
-/* func_801F3A9C */
-void       Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
-/* func_801F3F90 */
-void       Area_DrawGradientDiamond(s16 x, s16 y);
 
 void func_8015A944(void);
 

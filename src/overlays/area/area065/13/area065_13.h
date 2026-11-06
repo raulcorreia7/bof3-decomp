@@ -26,16 +26,11 @@ extern u8          D_801F533C[];
 extern u8          D_801F533D[];
 extern u8          D_801F5344[];
 
-/* func_801F3A10 */
-void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
-
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F5308[6];
 #define AREA_HUD_MASK_TABLE D_801F5308
-/* func_801F3F04 */
-void Area_DrawGradientDiamond(s16 x, s16 y);
 
 extern WorldMapPoint D_801F4DE0[];
 extern u16           D_801F50FC[5][16];

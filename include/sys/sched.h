@@ -45,29 +45,4 @@ ASSERT_SIZE(CallbackSlot, CALLBACK_SLOT_SIZE);
 ASSERT_OFFSET(CallbackSlot, state, 0x00);
 ASSERT_OFFSET(CallbackSlot, callback, 0x04);
 
-/* func_8014AEE0 */
-void SYS_RunLogo(void);
-/* func_8014AFC0 */
-void SYS_UpdateKeyState(void);
-/* func_8014B020 */
-void SYS_PrepareFrame(void);
-/* func_8014B0F0 */
-void SYS_SubmitFrame(void);
-/* func_8014B17C */
-void SYS_CaptureDrawTime(void);
-/* func_8014B33C */
-void CallbackStopAll(void);
-/* func_8014B6B4 */
-void CallbackInitThreads(void);
-/* func_8014B73C */
-void CallbackRun(void);
-/* func_8014B854 */
-void CallbackRegister(s32 callback_slot, Callback callback);
-/* func_8014B87C */
-void CallbackWait(u16 countdown);
-/* func_8014B8B0 */
-void CallbackExit(void);
-/* func_8014B900 */
-void CallbackCloseThread(s32 callback_slot);
-
 #endif

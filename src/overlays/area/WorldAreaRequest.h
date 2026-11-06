@@ -69,5 +69,3 @@
  * image owns the bytes. */
 /* D_801D4286 */
 extern u8 g_MasterSubStep;
-
-void Area_DrawHud(s16 x, s16 y);

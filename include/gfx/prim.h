@@ -67,17 +67,6 @@ extern u8* g_GfxPrimCursor;
 /* D_80145AD4 */
 extern u8  g_UiFormatBuffer[];
 
-/* func_8014E564 */
-void GFX_ClearRect(s16 x, s16 y, s16 width, s16 height);
-/* func_8014E5A0 */
-void GFX_AddPrim(u32 ot_index, u32 primitive_size);
-/* func_8014E6D0 */
-void GFX_RunTransferQueue(void);
-/* func_8014F704 */
-s32  GFX_StepScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
-/* func_8014F800 */
-void UI_DrawText(s16 x, s16 y, s32 flag, u32 color, u8* text);
-
 /* Queue a draw-mode primitive for the texture page at order-table slot 1: the
  * default texture window, primitive size 0xC. */
 static inline void GFX_AddDrawMode(s32 tpage) {

@@ -237,37 +237,6 @@ extern const u8     D_80181EBB[];
  * retail callee shifts the incoming $a0 logically (srl $v0,$a0,12 at
  * 0x801502D8) and masks it itself (andi $a0,$a0,0x3FFF at 0x801502E4), and
  * the eight callers pass a 32-bit word. */
-s32              INPUT_GetRepeatedButtons(s32 button_mask);
 /* Game-front dispatchers: mode, layout bank, and cue entry points. */
-/* func_8014ECAC */
-void             UI_SetMode(u16 local_mode);
-/* func_8014FC90 */
-extern const u8* UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* text);
-/* func_80150224 */
-void             Message_StartAreaMessage(s32 message_index);
-/* func_80150284 */
-extern void      Resource_RequestArea(s32 request_id);
-/* func_801502D0 */
-u8*              Resource_GetText(u32 resource_id);
-/* func_80158DB8 */
-s32              Menu_ArmPanelTask(u8 menu_id, u8 mode);
-/* func_8015B580 */
-void             SYS_SetFlag(void* bits, u8 bit_index);
-/* func_8015B5A8 */
-extern void      SYS_ClearFlag(void* bits, u8 bit_index);
-/* func_80161808 */
-void             SND_SetBankLayout(u32 layout_bank);
-/* func_80161C20 */
-void             SND_PlayBgm(s32 selection_id, s32 cue_level, s32 cue_shape);
-/* func_80161CD0 */
-void             SND_FadeOutBgm(u8 selection_id, s32 cue_level, s32 cue_shape);
-/* func_80164A44 */
-void             Char_RebuildStats(Character* record);
-/* func_80196070 */
-void             Actor_Clear(void);
-/* func_801666C8 */
-s32              Item_GetDescription(s32 category, s32 item_id);
-/* func_80196F78 */
-void             Game_RunCampMenuLoop(void);
 
 #endif

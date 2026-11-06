@@ -10,8 +10,6 @@ extern MagicTaskFuncs D_801EEC04;
 extern s16            D_801F004C[];
 
 void                func_800AF764(void);
-void                func_801EED1C(void);
-void                Effect_PlayOnZeroTick(void);
 void                func_801EF880(void);
 void                func_801EFCF0(void);
 extern s16          D_801F004E[];

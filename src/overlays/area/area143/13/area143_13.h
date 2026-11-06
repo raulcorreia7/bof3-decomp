@@ -34,7 +34,6 @@ extern Callback            D_801F5308[];
 /* The frame word the request compares. */
 
 /* The selection-arm and work-reset calls shared with the field. */
-void GFX_FreePaletteFadeTarget(void* target);
 /* The scene steps the work step enters. */
 /* The overlay's gate the request wrapper tests. */
 s32  func_801F2EF0();

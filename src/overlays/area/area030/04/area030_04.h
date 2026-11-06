@@ -476,7 +476,6 @@ s32  func_800F7094(s32 arg0, s16 arg1, u8 arg2, s32 arg3, s32 arg4);
 void Actor_BeginScript(s32 raw_selector, s32 raw_code);
 /* func_801650B4 */
 bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
-s32  func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
 void func_801D0C90(void);
 void func_801D0CDC(void);
 void func_801D0DDC(void);

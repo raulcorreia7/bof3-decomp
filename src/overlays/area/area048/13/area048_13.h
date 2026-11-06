@@ -7,8 +7,6 @@
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
 
-void SYS_ToggleFlag(void* bits, u8 bit_index);
-
 extern u8 D_80145F09;
 extern u8 D_8014686B;
 extern u8 D_80146874;

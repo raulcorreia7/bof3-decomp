@@ -12,9 +12,6 @@
 /* The fixed work record the dispatch compares the work pointer against. */
 extern Actor D_80143F48;
 
-/* func_80196718 */
-void GFX_FreePaletteFadeTarget(void* target);
-
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F47E8[];
 extern u8       D_801F4DBC[];

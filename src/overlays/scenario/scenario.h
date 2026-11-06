@@ -65,6 +65,8 @@ ASSERT_OFFSET(SceneRequest, byte, 0x00);
 
 #define g_ScriptVarsReq (*(SceneRequest*)&g_ScriptVars)
 
+s16  func_801F326C(s32 message);
+s16  func_801F37AC(s32 message);
 void func_801F7484(void);
 void func_801F74EC(void);
 void func_801F7A18(void);

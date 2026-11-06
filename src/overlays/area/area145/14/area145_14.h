@@ -24,7 +24,6 @@ extern PartyMemberMessages g_PartyMemberMessages[3];
 /* The stage byte the sound step tests. */
 
 /* The selection-arm and work-reset calls shared with the field. */
-void GFX_FreePaletteFadeTarget(void* target);
 /* The bounds step and the choice query the handlers enter. */
 void func_801F332C(u8* first, u8* second);
 /* The draw step that reads the three-word work position. */

@@ -59,8 +59,6 @@ static inline void World_SpawnActorAtFocus(void) {
     }
 }
 
-void Area_ProjectPoint(s32* pos, long* screen_xy);
-
 void func_801F4E64(const s32* center, s32 radius);
 
 void func_801F4F0C(const s32* center, s32 radius, u16 angle, s32 offset_x, s32 offset_y);

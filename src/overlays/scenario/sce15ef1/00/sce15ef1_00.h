@@ -24,8 +24,6 @@ extern Callback D_801D397C[];
 
 extern Callback D_801D3918[];
 
-void Area_ProjectPoint(s32* pos, long* screen_xy);
-
 extern AreaSpawnSlot D_801D39A8[EFFECT_SLOT_COUNT];
 
 extern void func_801D1B10(AreaSpawnSlot* slot);

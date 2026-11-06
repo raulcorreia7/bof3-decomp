@@ -1282,8 +1282,6 @@ u8*         func_801642F4(u8* dst, const u8* src, u32 count);
 void        Char_ApplyMaster(u8* arg);
 extern s16  Char_AddStat(u16* value, s16 delta);
 /* Retail calls this executable makes into its own units and the overlays. */
-u32         Char_AddPercent(u8* value, u8 delta);
-u32         Char_ClearStatus(u8 index, u16 mask, u8 mode);
 void        Char_ApplyWeapon(void* character);
 void        Char_ApplyArmor(void* character);
 void        Char_ApplyAccessories(void* param);
@@ -1367,7 +1365,5 @@ void EMI_LoaderService(void);
 s32 Char_AddResistance(u8* counter, s32 delta);
 
 void SYS_ShowFileNotFound(void);
-
-s32 func_801B59B4(void);
 
 #endif
