@@ -1,8 +1,5 @@
 #include "commu00_00.h"
 
-/* The original reads the record state once for both comparisons, so the access
- * must stay CSE-able across them. */
-
 MATCH void func_801F0FBC(u8 source_index, u8 task_index, u8 record_kind_index) {
     if (g_FairyJobs[source_index].record_state == 0) {
         g_Task->unk_06                                        = 1;

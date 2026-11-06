@@ -1,8 +1,5 @@
 #include "commu00_00.h"
 
-/* The 60 active-record slots are FairyJob rows; this pass
- * folds the 9-byte rows of D_801F2705 for the slots of one kind. */
-
 MATCH void func_801EF110(s32 battle_count) {
     u32 dec;
     s32 total;

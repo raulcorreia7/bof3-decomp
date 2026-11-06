@@ -1,8 +1,6 @@
 #include "area030_04.h"
 
-/* Resets the area-030 depth gauge when its state byte is clear and,
- * when the gauge flag is set, draws five shaded horizontal segments projected
- * from the depth steps. */
+/* Draw the fishing depth gauge. */
 MATCH void func_801DD9A0(void) {
     SVECTOR  pos;
     s16      sxy[4];
