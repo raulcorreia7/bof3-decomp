@@ -5,7 +5,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801D0C0C(void) {
-    u8* entity;
+    /* FAKE: retail reads the handler record from entry $v0; the pin is the
+       entry-register residual (identical bytes to the unpinned 84.46%). */
+    MATCH_REG(u8*, entity, "v0");
 
     D_801D3918[entity[1]]();
 }
@@ -137,7 +139,7 @@ MATCH void func_801D1CD4(const void* spin) {
     primitive = (POLY_G3*)g_GfxPrimCursor;
 
     SetPolyG3(primitive);
-    SetSemiTrans(primitive, 1);
+    PSX_SET_SEMI_TRANSPARENT(primitive);
     Area_ProjectPoint(work, &primitive->x0);
 
     point[0] =
@@ -172,8 +174,12 @@ MATCH void func_801D1CD4(const void* spin) {
     }
 
     setRGB0(primitive, shade, shade, 0);
-    setRGB1(primitive, 0, 0, 0);
-    setRGB2(primitive, 0, 0, 0);
+    primitive->r1 = 0;
+    primitive->g1 = 0;
+    primitive->b1 = 0;
+    primitive->r2 = 0;
+    primitive->g2 = 0;
+    primitive->b2 = 0;
 
     GFX_AddPrim(2u, 0x1Cu);
 }

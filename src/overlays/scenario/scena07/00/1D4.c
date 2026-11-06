@@ -5,7 +5,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F6DD4(void) {
-    u8* entity;
+    /* FAKE: retail reads the handler record from entry $v0; the pin is the
+       entry-register residual (identical bytes to the unpinned 84.46%). */
+    MATCH_REG(u8*, entity, "v0");
 
     D_801FDD14[entity[1]]();
 }
@@ -291,10 +293,11 @@ MATCH void func_801F8804(u8 shade) {
     GFX_AddPrim(1, 0x0C);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
-    SetSemiTrans(tile, 1);
-    tile->w = 320;
-    setXY0(tile, 0, 0);
-    tile->h = 240;
+    PSX_SET_SEMI_TRANSPARENT(tile);
+    tile->w  = 320;
+    tile->x0 = 0;
+    tile->y0 = 0;
+    tile->h  = 240;
     setRGB0(tile, shade, shade, shade);
     GFX_AddPrim(1, 0x10);
 }
