@@ -16,7 +16,6 @@ extern u8       D_801EC364[];
 extern u8       D_801EC368[];
 extern u8       D_801EC36C[];
 /* One-field views of the queued-slot record at g_BattleEffects (stride 0x78). */
-extern u8       D_801EC3A4[];
 extern Callback D_801F048C[];
 
 void func_801EED40(void);

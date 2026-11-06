@@ -10,7 +10,6 @@
 
 extern SVECTOR  D_1F800014[];
 extern s8       D_80144EA0;
-extern s32      D_80145EC4;
 extern u8       D_801468E4[];
 extern u32      D_801F6C00;
 extern Callback D_801FCF24[];
