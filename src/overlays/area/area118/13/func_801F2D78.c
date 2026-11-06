@@ -6,6 +6,6 @@ MATCH void func_801F2D78(void) {
         Game_SetScriptActive();
         g_SceneState.step_05  = 5;
         g_SceneState.state_04 = 7;
-        func_80196070();
+        Actor_Clear();
     }
 }

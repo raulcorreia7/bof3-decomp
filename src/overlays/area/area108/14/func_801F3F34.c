@@ -14,6 +14,6 @@ MATCH void func_801F3F34(void) {
     }
     if (g_Task->unk_09 == 0xF) {
         SYS_ClearFlag(g_SceneEventFlags, 0x1C);
-        func_80196070();
+        Actor_Clear();
     }
 }

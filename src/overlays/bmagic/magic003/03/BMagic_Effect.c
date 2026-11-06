@@ -232,7 +232,7 @@ MATCH void func_801EF9FC(void) {
     g_Task->pos.y.fixed += g_Task->unk_10;
     func_8014DAEC();
     if ((g_Task->pos.x.fixed == g_Task->unk_18) && (g_Task->pos.y.fixed == g_Task->unk_1C)) {
-        func_80196718(g_Task);
+        GFX_FreePaletteFadeTarget(g_Task);
         D_801EB4E0->unk_0B -= 1;
         func_801E5988();
     }

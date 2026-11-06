@@ -63,8 +63,8 @@ MATCH void func_801EF134(void) {
     g_Task->timer = temp_v0;
     if ((temp_v0 & 0xFF) == 0x18) {
         selected = &g_BattleSelectedActor;
-        func_80196718(*selected);
-        g_Task->unk_0B = func_8019651C(*selected, 0, 0, 0, 1);
+        GFX_FreePaletteFadeTarget(*selected);
+        g_Task->unk_0B = GFX_AllocPaletteFade(*selected, 0, 0, 0, 1);
         g_Task->header.step += 1;
     }
 }
@@ -80,7 +80,7 @@ MATCH void func_801EF44C(void) {
     temp_v0       = g_Task->timer - 2;
     g_Task->timer = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        func_80196718(g_BattleSelectedActor);
+        GFX_FreePaletteFadeTarget(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
         D_801EB4E0->unk_0B -= 1;
         func_801E5988();

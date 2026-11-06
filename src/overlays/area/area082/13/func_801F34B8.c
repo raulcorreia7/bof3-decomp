@@ -10,6 +10,6 @@ MATCH void func_801F34B8(void) {
     g_Task->unk_2E = scroll;
     scroll         = (count << 16) == 0;
     if (scroll) {
-        func_80196070();
+        Actor_Clear();
     }
 }

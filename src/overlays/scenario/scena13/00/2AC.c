@@ -231,9 +231,9 @@ INCLUDE_ASM(func_801F7A1C);
 MATCH void func_801F7C24(void) {
     g_Actors[g_Task->unk_03].header.flags = 0;
     g_Actors[g_Task->unk_04].header.flags = 0;
-    func_80196718(&g_Actors[g_Task->unk_03]);
-    func_80196718(&g_Actors[g_Task->unk_04]);
-    func_80196070();
+    GFX_FreePaletteFadeTarget(&g_Actors[g_Task->unk_03]);
+    GFX_FreePaletteFadeTarget(&g_Actors[g_Task->unk_04]);
+    Actor_Clear();
 }
 
 MATCH void func_801F7D14(void) {

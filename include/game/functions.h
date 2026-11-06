@@ -8,7 +8,7 @@
 /* The resident game overlay's functions the other images call, in address order. */
 
 /* func_8019601C */
-u8    Actor_FindFreeSlot();
+u8    Actor_FindFreeSlot(void);
 /* func_80196070 */
 void  Actor_Clear(void);
 /* func_801960C0 */

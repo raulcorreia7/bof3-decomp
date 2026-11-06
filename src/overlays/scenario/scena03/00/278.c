@@ -257,7 +257,7 @@ MATCH void func_801F7D80(void) {
     work->script_pc = step;
     if (step < 0) {
         g_Task->unk_06 = 1;
-        func_80196070();
+        Actor_Clear();
     }
 }
 

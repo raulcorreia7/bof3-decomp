@@ -6,7 +6,7 @@ MATCH void func_801F478C(void) {
     beat = g_Task->unk_09 / 5;
     if (beat == 4) {
         Area_ClearCellPalette(0x43, 0x1A);
-        func_80196070();
+        Actor_Clear();
         return;
     }
     if (g_Task->unk_09 % 5 == 0) {
