@@ -552,6 +552,7 @@ void func_80117A30(void);
 void func_80117BF4(void);
 void Actor_BeginScript(u8 raw_selector, u8 raw_code);
 s16  func_80154ABC();
+void Area_ClearCell(s32 x, s32 y);
 void func_8015A7E8(void);
 void func_8015A944();
 s32  func_8015AC8C(s32);
@@ -568,8 +569,8 @@ void GFX_StagePalette(u8* dst, s32 field);
 void Party_ResetBattlers(void);
 void Party_ClearActiveBattlers(void);
 void func_80167910(void);
-void func_80167E00(void);
 
+void    func_80167E00(void);
 s32     GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
 void    GFX_FreePaletteFadeTarget(void* target);
 void    GFX_CopyPaletteAnimationColors(GraphicsPaletteAnimation* slot);
@@ -822,12 +823,13 @@ void    func_801A6F58(u8* script);
 void    func_801A72B0(void* packed_selector);
 void    func_801A72E8(void* selector);
 void    func_801A7330(const volatile u8* data);
+s8      Area_IsStepBlocked(s32 handler_x, s32 handler_y);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 void    func_801A7CE8(void);
 void    Master_RunSceneEvent(void);
+void    Message_RunAreaMessage(void);
 void    func_801A7E54(void);
 void    Scene_RunShopSaveEvent(void);
-void    Message_RunAreaMessage(void);
 void    func_801A839C(void);
 void    func_801A83DC(void);
 void    func_801A852C(void);
@@ -898,6 +900,7 @@ void    func_801B036C(void);
 void    func_801B0568(void);
 void    func_801B0C88(void);
 void    func_801B0DA0(void);
+void    func_801B13BC(void);
 void    func_801B146C(void);
 void    func_801B1AE8(void);
 void    func_801B1E24(void);
@@ -1029,11 +1032,14 @@ s32     func_801BB7B0(s32 selector);
 s32     func_801BB86C(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 probe_mode);
 void    func_801BB8E8(u8 arg_a, u8 arg_b, u8 arg_c);
 bool    func_801BB934(s32 first_index, s32 second_index, s8 route_value, s32 expected_value);
+void    func_801BBBC8(s16 from_x, s16 from_y);
 void    func_801BBE48(void);
 void    func_801BBE98(void);
 void    func_801BBFB4(void);
 void    func_801BC000(void);
+s32     func_801BC4D0(void);
 s32     func_801BC760(void);
+void    func_801BCD60(s32 target_x, s32 target_y);
 void    func_801BD290(s32 pos_x, s32 pos_y, s8* direction_out);
 void    func_801BD32C(void);
 void    func_801BD35C(void);
@@ -1117,13 +1123,13 @@ bool    func_801C4EC4(void);
 bool    func_801C4F88(void);
 s32     func_801C4FE0(void);
 void    func_801C51B0(void);
+void    Actor_ClearVelocity(void);
 s32     func_801C520C(void);
 bool    func_801C539C(void);
 s32     func_801C5474(void);
 void    func_801C5558(void);
 void    func_801C5620(void);
 void    func_801C56E4(void);
-void    Actor_ClearVelocity(void);
 void    func_801C57B4(void);
 void    func_801C57F4(void);
 void    func_801C5830(void);
@@ -1543,12 +1549,6 @@ void    func_801F8D70(void);
 void    func_801F95D4(void);
 void    func_801F986C(void);
 void    func_801F9DBC(void);
-s8      Area_IsStepBlocked(s32 handler_x, s32 handler_y);
-void    func_801B13BC(void);
-void    func_801BBBC8(s16 from_x, s16 from_y);
-s32     func_801BC4D0(void);
-void    func_801BCD60(s32 target_x, s32 target_y);
-void    Area_ClearCell(s32 x, s32 y);
 
 /* Run the overlay map-load handshake: wait for the loader, switch the window
  * to mode 3, drain the effect loop and run the world/front update slice. */
@@ -1652,20 +1652,20 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
 
 s32 func_801A20F8(s16 cell_x, s16 cell_y);
 
-s32 func_801BA278(u8 cell0, u8 cell1, u8 cell2, u8 cell3, u8 cell4);
-
 s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags);
 
 s32 func_801B1C18(s32 x, s32 y, s32 mode);
 
 u8 func_801B4BE4(u8 mode, u8 code);
 
-s32 Area_BuildEncounter(u8 work_mode, s32 work_index);
-
 void func_801B690C(void);
+
+s32 func_801BA278(u8 cell0, u8 cell1, u8 cell2, u8 cell3, u8 cell4);
 
 void func_801BB9B4(s16 probe_x, s16 probe_y);
 
 void func_801BBCCC(s16 from_x, s16 from_y, s16 to_x, s16 to_y);
+
+s32 Area_BuildEncounter(u8 work_mode, s32 work_index);
 
 #endif
