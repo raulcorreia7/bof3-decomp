@@ -28,6 +28,17 @@ def test_address_names_placeholders_and_raw_casts_are_counted_in_bodies() -> Non
     assert found["casts"] == 3
 
 
+def test_byte_views_count_as_unnamed() -> None:
+    body = (
+        "u8* panel = arg0;\n"
+        "panel[0x10] = 1;\n"
+        "panel[i] = 2;\n"
+        "x = *((u32*)(((u8*)p) + 4));\n"
+        "y = q->hp;\n"
+    )
+    assert quality.unnamed(body) == 2
+
+
 def test_comments_hide_names_and_notes_count_whole_file() -> None:
     text = "/* FAKE: pin. */\nMATCH void F(void) {\n    /* D_801EF000 *(u8 *)p */\n    MATCH_FAKE_PIN(x);\n}\n"
     found = row(text)
