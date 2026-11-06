@@ -14,7 +14,7 @@ MATCH bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 re
                 return false;
             }
             index = record_index;
-            if ((D_801C8970[index * 0x12] & 1) == 0) {
+            if ((g_Items[index].flags & 1) == 0) {
                 return false;
             }
             if (index != ITEM_FAERIE_TIARA) {

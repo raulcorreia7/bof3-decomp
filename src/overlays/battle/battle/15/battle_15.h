@@ -602,7 +602,6 @@ extern s16                              g_AreaTileOriginY;
 extern volatile u8                      D_80150000[];
 extern u8*                              D_801C893C[];
 extern u8*                              D_801C8950[];
-extern u8                               D_801C90EB[];
 extern u8                               D_801C90ED[];
 /* Selection-kind table base; byte 0 of each stride-0x14 entry holds the flags.
  */

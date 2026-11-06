@@ -22,7 +22,7 @@ NON_MATCHING void func_800AB910(void) {
         if (flags & 2) {
             state = 7;
         } else {
-            state = D_801C90ED[D_80145F12[target * BATTLE_PARTY_STRIDE] * 0x18];
+            state = g_Weapons[D_80145F12[target * BATTLE_PARTY_STRIDE]].sound;
         }
     } else {
         flags = FIELD(u32, D_80146390, 0xCu);

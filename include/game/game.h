@@ -196,11 +196,6 @@ extern Callback  D_801C88FC[2];
 extern Callback  D_801C8904[2];
 /* D_801C8938 */
 extern u8        s_SceneMessages[4];
-extern u8        D_801C90EC[];
-extern u8        D_801C90EE[];
-extern u8        D_801C98B3[];
-extern u8        D_801C98B4[];
-extern u8        D_801C9E8A[];
 extern u8        D_801CA624[232];
 extern u8        D_801CA71E[];
 /* D_801CD050 */

@@ -20,7 +20,7 @@ MATCH void Char_ApplyAccessories(void* param) {
     kinds[1] = base[0x13];
     n        = 0;
     do {
-        Char_AddStat((u16*)(p + 8), -D_801C9E8B[*kind * 0x14]);
+        Char_AddStat((u16*)(p + 8), -g_Accessories[*kind].weight);
         switch (*kind) {
             case ACCESSORY_TITAN_BELT:
                 pair = (u16*)(p + 4);

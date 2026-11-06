@@ -903,19 +903,15 @@ extern u8                          D_801C839D[];
 extern void (*D_801C83D8[])(u8*);
 extern u8*                   D_801C893C[];
 extern u8*                   D_801C8950[];
-extern u8                    D_801C8971[];
 /* The five row tables of choice resources. Each symbol is a byte scalar, so its
  * rows are addressed with the group's byte stride. */
 extern u8                    D_801C8972;
 extern u8                    D_801C8FE8;
 extern u8                    D_801C90E8[];
-extern u8                    D_801C90EA[];
 extern u8                    D_801C90F0;
 extern u8                    D_801C98B0[];
-extern u8                    D_801C98B2[];
 extern u8                    D_801C98B6;
 extern u8                    D_801C9E88[];
-extern u8                    D_801C9E8B[];
 extern u8                    D_801C9E8C;
 extern BattleAbilityCategory D_801CA719[];
 extern u8                    D_801CA71A[];

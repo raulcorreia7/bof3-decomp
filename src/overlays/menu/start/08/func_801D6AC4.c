@@ -9,10 +9,6 @@ NON_MATCHING void func_801D6AC4(s32 party_slot) {
         s32 value;
     } frame;
 
-    s32    tmp0;
-    s32    tmp1;
-    s32    tmp2;
-    s32    tmp3;
     s32    val0;
     s32    val1;
     s32    val2;
@@ -45,25 +41,22 @@ NON_MATCHING void func_801D6AC4(s32 party_slot) {
     frame.slots[3] = frame.record + 0x11;
     tmp14          = FIELD(u8, frame.record, 0xEu);
     val3           = 0;
-    tmp2           = tmp14 * 0x18;
     D_801ED63C     = tmp14;
-    val5           = D_801C90EE[tmp2];
-    val10          = D_801C90EC[tmp2];
+    val5           = g_Weapons[tmp14].power;
+    val10          = g_Weapons[tmp14].weight;
     do {
         val8        = D_801C8940[val3 & BYTE_MASK];
         val6        = val8 & BYTE_MASK;
-        tmp3        = val6 * 0x18;
-        val9        = D_801C90EE[tmp3];
-        val7        = D_801C90EC[tmp3];
+        val9        = g_Weapons[val6].power;
+        val7        = g_Weapons[val6].weight;
         frame.value = (s32)val4;
         if ((((s32)(Item_GetEquipability(ITEM_CAT_WEAPON, val6) & BYTE_MASK) >> val4) & 1) &&
             ((tmp7 = val10 & BYTE_MASK, (D_801ED63C == 0)) || (tmp11 = val7 & BYTE_MASK, ((tmp11 < tmp7) != 0)) ||
              ((tmp4 = val5 & HALF_MASK, (tmp7 == tmp11)) &&
               ((tmp8 = val9 & HALF_MASK, ((tmp4 < tmp8) != 0)) || ((tmp4 == tmp8) && (val6 < (u8)D_801ED63C)))))) {
-            tmp0       = val8 * 0x18;
             D_801ED63C = val8;
-            val5       = D_801C90EE[tmp0];
-            val10      = D_801C90EC[tmp0];
+            val5       = g_Weapons[val8].power;
+            val10      = g_Weapons[val8].weight;
         }
         val3 += 1;
     } while ((u32)(val3 & BYTE_MASK) < 0x80U);
@@ -74,14 +67,13 @@ NON_MATCHING void func_801D6AC4(s32 party_slot) {
         tmp13               = *frame.slots[val0];
         val2                = val0;
         (&D_801ED63C)[val2] = tmp13;
-        tmp1                = (tmp13 & BYTE_MASK) * 0x16;
-        val5                = D_801C98B4[tmp1];
-        val10               = D_801C98B3[tmp1];
+        val5                = g_Armors[tmp13 & BYTE_MASK].power;
+        val10               = g_Armors[tmp13 & BYTE_MASK].weight;
     loop_12:
         val8  = D_801C8944[val1 & BYTE_MASK];
         val6  = val8 & BYTE_MASK;
         armor = &g_Armors[val6];
-        val9  = armor->stats.power;
+        val9  = armor->power;
         val7  = armor->weight;
         if ((armor->equip_type - 2) == (val2 - 1)) {
             frame.value = (s32)val4;
@@ -91,7 +83,7 @@ NON_MATCHING void func_801D6AC4(s32 party_slot) {
                  ((tmp6 = val5 & HALF_MASK, (tmp5 == tmp9)) && ((tmp10 = val9 & HALF_MASK, ((tmp6 < tmp10) != 0)) ||
                                                                 ((tmp6 == tmp10) && (val6 < (u8)D_801ED63C)))))) {
                 (&D_801ED63C)[val2] = val8;
-                tmp12               = D_801C98B3[(val8 & BYTE_MASK) * 0x16];
+                tmp12               = g_Armors[val8 & BYTE_MASK].weight;
                 val5                = tmp12 & BYTE_MASK;
                 val10               = tmp12;
             }
