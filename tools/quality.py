@@ -68,7 +68,8 @@ RAW_CAST = re.compile(
     rf"|\(\s*{WIDTH}\)\s*\w+\s*\+\s*(?:0x)?[0-9]"  # (u8 *)p + 0x10
 )
 # A byte-pointer local (`u8* panel`), whose constant indexes are unnamed members.
-BYTE_LOCAL = re.compile(r"\b[us]8\s*\*\s*(\w+)\s*[;=,)]")
+# A byte-pointer local, declared plainly or through a register pin (`MATCH_REG(u8*, p, "v0")`).
+BYTE_LOCAL = re.compile(r"\b[us]8\s*\*\s*,?\s*(\w+)\s*[;=,)]")
 HARMFUL = re.compile(
     r"\b(?:MATCH_FAKE_PIN|MATCH_REG|MATCH_FAKE_OPAQUE|MATCH_FAKE_USE|CLOBBER_\w+)\b"
 )
