@@ -38,7 +38,7 @@ MATCH void func_801A852C(void) {
                 D_80145040 = D_80145EC4;
                 D_80145044 = D_80145EC8;
                 D_80145048 = g_GameAreaId;
-                Game_RequestAreaChange(seed & HALF_MASK, 0x430000, 0x160000, 4);
+                Game_RequestAreaChange(seed & HALF_MASK, TO_COORD(67), TO_COORD(22), FACING_DOWN_RIGHT);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
                 Game_ClearScriptActive();
                 g_SceneEventMode = 0;

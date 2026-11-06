@@ -9,7 +9,7 @@ MATCH s32 func_801F33E4(s32 entry_x, s32 entry_y) {
         if (*flag != 0) {
             *flag = 0;
             SND_PlayCue(EMI_CUE_ID(2, 12));
-            Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, 4);
+            Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);
         }
     } else {
         D_801455C7 = 1;

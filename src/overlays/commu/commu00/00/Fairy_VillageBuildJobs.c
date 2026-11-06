@@ -33,7 +33,7 @@ MATCH void Fairy_VillageBuildJobs(void) {
             func_801F08D8(record, task);
             task++;
         } else if (kind == FAIRY_JOB_CLEAR) {
-            if (g_GameAreaId >= 182) {
+            if (g_GameAreaId >= AREA_ID_FAIRY_VILLAGE_182) {
                 label = 0xCD;
             } else {
                 variant = RANDOM_MASK(0x7);

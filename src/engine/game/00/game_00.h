@@ -718,7 +718,7 @@ void    func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette);
 void    func_8019F840(void);
 void    func_8019F98C(void);
 void    func_8019F9D0(void);
-void    func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b, u8 context_kind);
+void    func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing);
 void    func_8019FF88(s32 entry_mode, s32 entry_index, s32 entry_flags);
 void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);

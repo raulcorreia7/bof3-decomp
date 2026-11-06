@@ -12,7 +12,7 @@ MATCH void func_800A2598(void) {
         g_BattleTargetRecord->hp_change = Battle_CalcDamage(g_BattleActiveBattler, mode, BATTLE_ELEMENT_FROM_WEAPON);
         slot                            = LOBU(g_BattleTarget);
         slot -= 3;
-        if (g_BattleEnemyBattlers[slot].enemy_id.byte.family == 4) {
+        if (g_BattleEnemyBattlers[slot].enemy_id.byte.family == ENEMY_FAMILY_DEMON) {
             record = *(BattleTurn**)&g_BattleTargetRecord;
             record->hp_change *= 2;
         }

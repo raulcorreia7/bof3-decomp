@@ -5,7 +5,7 @@ typedef struct GameCopyBlock {
 } GameCopyBlock;
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b, u8 context_kind) {
+NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing) {
     AreaLoad* entry;
     void*     matrix;
     u32       word_a;
@@ -17,7 +17,7 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
     u8        counter;
     u8        mode;
 
-    if ((context_kind & 0x80u) != 0)
+    if ((entry_facing & 0x80u) != 0)
         g_AreaWalkFlags |= AREA_WALK_MAP_LOADING;
     else
         g_AreaWalkFlags &= 0x7FFFu;
@@ -38,10 +38,10 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
     else
         SND_StartBGM(seed, 100, 8);
 
-    if (g_GameAreaId != selection_seed) {
+    if (g_GameAreaId != area_id) {
         if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
-            g_GameAreaId = selection_seed;
-            EMI_LoaderStreamInitSlot((u32)(selection_seed + EMI_SLOT_AREA));
+            g_GameAreaId = area_id;
+            EMI_LoaderStreamInitSlot((u32)(area_id + EMI_SLOT_AREA));
             while (EMI_LoaderIsReady() == 0)
                 CallbackWait(1u);
         }
@@ -52,7 +52,7 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
     GFX_ResetPalette();
     g_GfxPalettePending = 1u;
 
-    func_801BFF9C(context_a, context_b, (u32)context_kind);
+    func_801BFF9C(entry_x, entry_y, (u32)entry_facing);
     D_80143F03 = func_801A0348(g_AreaTargetCellX, g_AreaTargetCellY);
     func_80153DE8();
 
@@ -89,9 +89,9 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
 
     world_flags = g_AreaWalkFlags;
     if ((world_flags & AREA_WALK_MAP_LOADING) != 0) {
-        if ((context_kind & 0x80u) != 0) {
+        if ((entry_facing & 0x80u) != 0) {
             D_80146260 = 0u;
-            func_801BE1B0((u32)(context_kind & 0x7Fu));
+            func_801BE1B0((u32)(entry_facing & 0x7Fu));
             g_AreaWalkFlags &= ~AREA_WALK_ACCEPT_LOCK;
             func_80199440();
         }
@@ -105,12 +105,12 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
         else {
             if (g_PartySize < 2u)
                 goto end;
-            func_8019FF88(0, context_a, context_b);
+            func_8019FF88(0, entry_x, entry_y);
             if (((g_GameFlags & 0x800u) == 0) && ((g_AreaWalkFlags & AREA_WALK_MAP_LOADING) == 0))
                 Area_SetCellPalette(g_AreaTargetCellX, g_AreaTargetCellY);
             goto tail;
         }
-        func_8019FF88(mode, context_a, context_b);
+        func_8019FF88(mode, entry_x, entry_y);
     tail:
         mode = g_PartySize;
         if (mode < 2u)
