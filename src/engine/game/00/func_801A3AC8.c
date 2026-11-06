@@ -10,9 +10,9 @@ MATCH s32 func_801A3AC8(Actor* record) {
 
     rec   = record;
     route = rec->direction_08 & 7;
-    pos_x = rec->x.fixed + g_FacingSteps[route].x;
+    pos_x = rec->pos.x.fixed + g_FacingSteps[route].x;
     x     = pos_x;
-    pos_y = rec->y.fixed + D_80181B98[route * 2];
+    pos_y = rec->pos.y.fixed + D_80181B98[route * 2];
     y     = pos_y;
     if (func_801BDE14(x, y, g_Task->state_70.byte) == -1) {
         return func_801BE0C0(x, y, g_Task->state_70.byte) != -1;

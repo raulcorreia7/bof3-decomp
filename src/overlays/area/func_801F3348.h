@@ -3,6 +3,6 @@
  * every change here must verify every member address. */
 MATCH void func_801F3348(void) {
     if (g_AreaScrollTargetX <= 0x2E0000) {
-        g_Task->x.fixed = g_AreaScrollTargetX;
+        g_Task->pos.x.fixed = g_AreaScrollTargetX;
     }
 }

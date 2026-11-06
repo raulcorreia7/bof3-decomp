@@ -10,10 +10,10 @@ MATCH void func_801A3410(void* work_index) {
     work  = g_Task;
     if (work->unk_09 == 0) {
         work->active_flags |= 0x20;
-        work          = g_Task;
-        work->x.fixed = g_Actors[index].x.fixed;
-        work->y.fixed = g_Actors[index].y.fixed;
-        work->z.fixed = *(s32*)((u8*)&D_801468C4 + index * ACTOR_SIZE);
+        work              = g_Task;
+        work->pos.x.fixed = g_Actors[index].pos.x.fixed;
+        work->pos.y.fixed = g_Actors[index].pos.y.fixed;
+        work->pos.z.fixed = *(s32*)((u8*)&D_801468C4 + index * ACTOR_SIZE);
         if (work->unk_06 != 0xA) {
             work->unk_64 = g_Actors[index].unk_64;
             work->unk_68 = g_Actors[index].unk_68;
@@ -21,9 +21,9 @@ MATCH void func_801A3410(void* work_index) {
         }
         func_801AC1DC(delta, FIELD(u8, g_Task, 0x1Cu));
         work = g_Task;
-        work->x.fixed += delta[0];
-        work->y.fixed += delta[1];
-        COORD_INT(work->z) += delta[2];
+        work->pos.x.fixed += delta[0];
+        work->pos.y.fixed += delta[1];
+        COORD_INT(work->pos.z) += delta[2];
     }
     func_801A1384(work_index);
     tail = g_Task;

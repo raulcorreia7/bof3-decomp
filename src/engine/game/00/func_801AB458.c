@@ -35,10 +35,10 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             volatile Actor* work;
 
             func_801ABF30(buf, table[state->index_0A + 1], table[state->index_0A + 2]);
-            work          = SCRATCH_WORK;
-            work->x.fixed = buf[0];
-            work->y.fixed = buf[1];
-            work->z       = buf[2];
+            work              = SCRATCH_WORK;
+            work->pos.x.fixed = buf[0];
+            work->pos.y.fixed = buf[1];
+            work->pos.z       = buf[2];
             state->index_0A += 2;
             break;
         }
@@ -120,7 +120,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             slot         = g_GameState->slot_index_79;
             work         = SCRATCH_WORK;
             work->unk_0B = func_8015CC00(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]],
-                                         work->x.fixed, work->y.fixed, work->depth.fixed);
+                                         work->pos.x.fixed, work->pos.y.fixed, work->depth.fixed);
             state->index_0A += 1;
             break;
         }

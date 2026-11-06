@@ -19,7 +19,7 @@ MATCH void func_80098DC4(void) {
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     if ((trigger & (PADLup | PADLdown)) != 0) {
         if ((Item_GetFlags(D_8014857A, D_801C893C[D_8014857A][D_8014857C]) & 0x80u) != 0u) {
-            D_801EB4D8[0] = Battle_FindSelectableSlotForward(3);
+            D_801EB4D8->command.target = Battle_FindSelectableSlotForward(3);
             *(u8*)&g_BattleUIState -= 1u;
             SND_PlayCue(EMI_CUE_ID(1, 1));
             return;
@@ -27,19 +27,19 @@ MATCH void func_80098DC4(void) {
     }
     if ((trigger & PADLright) != 0) {
         if ((func_8009AF7C() & BYTE_MASK) != 0u) {
-            D_801EB4D8[0] = func_801DD7D8(g_BattlePartyCount - 1, 0, ((s8*)D_801EB4D8)[0] + 1);
+            D_801EB4D8->command.target = func_801DD7D8(g_BattlePartyCount - 1, 0, (s8)D_801EB4D8->command.target + 1);
         } else {
-            D_801EB4D8[0] = Battle_FindSelectableSlotForward(
-                func_801DD7D8(g_BattlePartyCount - 1, 0, ((s8*)D_801EB4D8)[0] + 1) & BYTE_MASK);
+            D_801EB4D8->command.target = Battle_FindSelectableSlotForward(
+                func_801DD7D8(g_BattlePartyCount - 1, 0, (s8)D_801EB4D8->command.target + 1) & BYTE_MASK);
         }
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if ((trigger & PADLleft) != 0) {
         if ((func_8009AF7C() & BYTE_MASK) != 0u) {
-            D_801EB4D8[0] = func_801DD7D8(g_BattlePartyCount - 1, 0, ((s8*)D_801EB4D8)[0] - 1);
+            D_801EB4D8->command.target = func_801DD7D8(g_BattlePartyCount - 1, 0, (s8)D_801EB4D8->command.target - 1);
         } else {
-            D_801EB4D8[0] = Battle_FindSelectableSlotBackward(
-                func_801DD7D8(g_BattlePartyCount - 1, 0, ((s8*)D_801EB4D8)[0] - 1) & BYTE_MASK);
+            D_801EB4D8->command.target = Battle_FindSelectableSlotBackward(
+                func_801DD7D8(g_BattlePartyCount - 1, 0, (s8)D_801EB4D8->command.target - 1) & BYTE_MASK);
         }
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }

@@ -17,11 +17,11 @@ MATCH s32 func_801BC4D0(void) {
     rate           = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
     g_Task->unk_09 = (g_Task->unk_09 / (rate & BYTE_MASK));
     if (g_Task->state_70.byte == 0) {
-        SP_REF(s32, 0x8) = g_Task->x.fixed + g_FacingOffsets[g_Task->direction_08].x * rate * g_Task->unk_09;
-        SP_REF(s32, 0xC) = g_Task->y.fixed + g_FacingOffsets[g_Task->direction_08].y * rate * g_Task->unk_09;
+        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction_08].x * rate * g_Task->unk_09;
+        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction_08].y * rate * g_Task->unk_09;
     } else {
-        SP_REF(s32, 0x8) = g_Task->x.fixed + g_FacingOffsets[g_Task->direction_08].x * rate * g_Task->unk_09 * 2;
-        SP_REF(s32, 0xC) = g_Task->y.fixed + g_FacingOffsets[g_Task->direction_08].y * rate * g_Task->unk_09 * 2;
+        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction_08].x * rate * g_Task->unk_09 * 2;
+        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction_08].y * rate * g_Task->unk_09 * 2;
     }
     switch (kind & BYTE_MASK) {
         case 0:

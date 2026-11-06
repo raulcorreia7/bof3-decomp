@@ -16,10 +16,10 @@ MATCH void func_801E7778(void) {
     if (step != 0x10000) {
         work->scale.x = step + 0x2000;
     } else {
-        work->unk_48                                    = 0;
-        index                                           = D_801EB4E0->slot;
-        value                                           = g_BattlePartyBattlers[index].damage_flags.value & 0xFFFFDFFFu;
-        g_BattlePartyBattlers[index].damage_flags.value = value;
+        work->unk_48 = 0;
+        index        = D_801EB4E0->slot;
+        value        = g_BattlePartyBattlers[index].turn.damage_flags.value & 0xFFFFDFFFu;
+        g_BattlePartyBattlers[index].turn.damage_flags.value = value;
         func_801E5988();
     }
 }

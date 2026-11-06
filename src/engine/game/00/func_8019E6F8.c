@@ -8,8 +8,8 @@ MATCH void func_8019E6F8(void) {
     work     = g_Task;
     value    = work->vz + work->gravity;
     work->vz = value;
-    COORD_INT(work->z) += value;
-    if (Area_SampleHeight(work->x.fixed, work->y.fixed) >= (s16)COORD_INT(work->z)) {
+    COORD_INT(work->pos.z) += value;
+    if (Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed) >= (s16)COORD_INT(work->pos.z)) {
         Actor_Clear();
         return;
     }

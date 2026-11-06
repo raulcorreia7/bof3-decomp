@@ -18,14 +18,14 @@ MATCH s32 func_801BDF08(void) {
     found  = 0;
     step_x = g_FacingSteps[work->direction_08].x;
     step_y = D_80181B98[work->direction_08 * 2];
-    pos_x  = work->x.fixed + step_x;
-    pos_y  = work->y.fixed + step_y;
+    pos_x  = work->pos.x.fixed + step_x;
+    pos_y  = work->pos.y.fixed + step_y;
     if (g_GameFlags & 0x1000) {
         pos_x += step_x;
         pos_y += step_y;
     }
     dist    = Area_ReadHeight(pos_x, pos_y);
-    counter = COORD_INT(g_Task->z);
+    counter = COORD_INT(g_Task->pos.z);
     diff    = counter - dist;
     if (ABS(diff) > 0x100) {
         dist = counter;

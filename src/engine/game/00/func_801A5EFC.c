@@ -25,21 +25,21 @@ MATCH void func_801A5EFC(u8* script) {
     /* The outer shadow assignment forms the slot offset before the position
      * flag test, as retail schedules it. */
     work                    = g_Task;
-    D_80146908[*counter][0] = work->x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
+    D_80146908[*counter][0] = work->pos.x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
     MATCH_BARRIER();
 
-    D_8014690C[*counter][0] = work->y.fixed = (script[9] << 16) | (script[8] != 0 ? 0x8000 : 0);
+    D_8014690C[*counter][0] = work->pos.y.fixed = (script[9] << 16) | (script[8] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
     MATCH_BARRIER();
 
     D_80146910[*counter][0] = 0;
 
-    COORD_INT(g_Task->z) = Area_SampleHeight(work->x.fixed, work->y.fixed);
-    g_Task->header.mode  = script[0xA];
-    g_Task->header.step  = script[0xC];
-    g_Task->direction_08 = script[0] & 0xF;
-    g_Task->unk_06       = script[0] >> 4;
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    g_Task->header.mode      = script[0xA];
+    g_Task->header.step      = script[0xC];
+    g_Task->direction_08     = script[0] & 0xF;
+    g_Task->unk_06           = script[0] >> 4;
 
     /* The headers declare the per-slot columns D_80146914 and D_80146916 as scalars,
      * so their slot offset stays byte arithmetic on the column address. */

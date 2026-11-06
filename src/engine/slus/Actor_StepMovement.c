@@ -12,18 +12,18 @@ MATCH s8 Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     u8     count;
     s32    sum;
 
-    work          = g_Task;
-    speed         = work->vz;
-    sum           = work->x.fixed;
-    count         = work->unk_0A - 1;
-    work->x.fixed = sum + work->vx;
-    work->y.fixed += work->vy;
-    COORD_INT(work->z) += work->vz >> 8;
+    work              = g_Task;
+    speed             = work->vz;
+    sum               = work->pos.x.fixed;
+    count             = work->unk_0A - 1;
+    work->pos.x.fixed = sum + work->vx;
+    work->pos.y.fixed += work->vy;
+    COORD_INT(work->pos.z) += work->vz >> 8;
     work->unk_0A = count;
     work->vz     = speed + vz_delta;
-    height       = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
-    if (g_Task->vz < 0 && height > COORD_INT(g_Task->z)) {
-        COORD_INT(g_Task->z) = height;
+    height       = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    if (g_Task->vz < 0 && height > COORD_INT(g_Task->pos.z)) {
+        COORD_INT(g_Task->pos.z) = height;
         if (flags & 2) {
             g_Task->unk_04 = 0;
             return 0;

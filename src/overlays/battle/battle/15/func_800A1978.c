@@ -12,7 +12,7 @@ MATCH void func_800A1978(void) {
             } else {
                 base = ENEMY_COMBATANT(mode).hp;
             }
-            ((s16*)g_BattleTargetRecord)[2] = base - 1;
+            g_BattleTargetRecord->hp_change = base - 1;
         }
     }
 }

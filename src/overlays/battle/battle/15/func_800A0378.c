@@ -15,11 +15,11 @@ MATCH void func_800A0378(void) {
         } else {
             base = ENEMY_COMBATANT(mode).hp;
         }
-        ((s16*)g_BattleTargetRecord)[2] = base;
+        g_BattleTargetRecord->hp_change = base;
     } else {
         flag = 1;
         /* FAKE: stops the scheduler sinking the flag into the load-delay slot. */
         MATCH_FAKE_BARRIER();
-        ((u8*)g_BattleTargetRecord)[8] = flag;
+        g_BattleTargetRecord->target_flags = flag;
     }
 }

@@ -17,7 +17,7 @@ MATCH void func_801DF7EC(void) {
     entry->green_offset              = sprite;
     *(u8*)((u8*)D_80145BD6 + offset) = sprite;
     if ((g_BattleSelectionLatch == 0) ||
-        (((value = D_801EB4D8[0]) != g_Task->slot) && ((value & BATTLE_TARGET_PARTY_SIDE) == 0))) {
+        (((value = D_801EB4D8->command.target) != g_Task->slot) && ((value & BATTLE_TARGET_PARTY_SIDE) == 0))) {
         GFX_FreePaletteFade(g_Task->unk_07);
         g_Task->header.step = 0;
     }

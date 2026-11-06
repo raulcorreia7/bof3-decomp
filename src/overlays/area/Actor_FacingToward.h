@@ -4,8 +4,8 @@
  * world area overlays. Every change here must verify every member address. */
 /* func_801F4A34 (area104/14), func_801F4F78 (area121/14) */
 MATCH s32 Actor_FacingToward(s32 x, s32 y, u8 row) {
-    s32 dx = x - g_Actors[row].x.fixed;
-    s32 dy = y - g_Actors[row].y.fixed;
+    s32 dx = x - g_Actors[row].pos.x.fixed;
+    s32 dy = y - g_Actors[row].pos.y.fixed;
 
     if (dx < 0 && dy < 0) {
         return 0;

@@ -95,25 +95,25 @@ MATCH void func_801F6E48(void) {
     work_cell = (SceneEffect*)work;
     adopted   = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
 
-    work_cell->pos_x         = adopted->x.fixed;
-    work_cell->pos_y         = adopted->y.fixed;
-    work_cell->z.fixed_point = adopted->z.fixed;
+    work_cell->pos_x         = adopted->pos.x.fixed;
+    work_cell->pos_y         = adopted->pos.y.fixed;
+    work_cell->z.fixed_point = adopted->pos.z.fixed;
     g_GfxPrimCursor          = prim + 8;
     TASK_SET(adopted);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
     setWH(((RECT*)prim), 16, 16);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
-    Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
+    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
 
     poly = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(poly);
 
     func_801AC1DC(origin, work_cell->channel_1C);
 
-    projection.vx = ((origin[0] + SPAD_ROW->x.fixed) >> 9) - 0x4000;
-    projection.vy = ((origin[1] + SPAD_ROW->y.fixed) >> 9) - 0x4000;
-    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->z)) / 2;
+    projection.vx = ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000;
+    projection.vy = ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000;
+    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2;
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x0, &depth, &flag);
 
@@ -139,7 +139,7 @@ MATCH void func_801F6E48(void) {
 
     SetShadeTex(poly, 1);
 
-    Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x28);
+    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x28);
 
     prim             = g_GfxPrimCursor;
     g_GfxPrimCursor  = prim + 8;
@@ -148,7 +148,7 @@ MATCH void func_801F6E48(void) {
     setWH(((RECT*)prim), 256, 256);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
-    Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
+    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
 }
 
 MATCH void func_801F70F0(void) {
@@ -283,9 +283,9 @@ MATCH void func_801F74EC(void) {
     next.y                  = point.y;
     point.z                 = work->z;
     next.z                  = point.z;
-    row_point.x             = row->x.fixed;
-    row_point.y             = row->y.fixed;
-    row_point.z.fixed_point = row->z.fixed;
+    row_point.x             = row->pos.x.fixed;
+    row_point.y             = row->pos.y.fixed;
+    row_point.z.fixed_point = row->pos.z.fixed;
     stop                    = 1;
     do {
         next.x = point.x;
@@ -325,9 +325,9 @@ MATCH void func_801F7670(void) {
     point.x                 = work->pos_x;
     point.y                 = work->pos_y;
     point.z                 = work->z;
-    row_point.x             = row->x.fixed;
-    row_point.y             = row->y.fixed;
-    row_point.z.fixed_point = row->z.fixed;
+    row_point.x             = row->pos.x.fixed;
+    row_point.y             = row->pos.y.fixed;
+    row_point.z.fixed_point = row->pos.z.fixed;
     stop                    = 1;
     do {
         next.x = point.x;
@@ -924,25 +924,25 @@ MATCH void func_801F8D90(void) {
     work_cell = (SceneEffect*)work;
     first     = (Actor*)(D_80147A58 + work_cell->counter_0C * 0x98);
 
-    work_cell->pos_x         = first->x.fixed;
-    work_cell->pos_y         = first->y.fixed;
-    work_cell->z.fixed_point = first->z.fixed;
+    work_cell->pos_x         = first->pos.x.fixed;
+    work_cell->pos_y         = first->pos.y.fixed;
+    work_cell->z.fixed_point = first->pos.z.fixed;
     g_GfxPrimCursor          = prim + 8;
     TASK_SET(first);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
     setWH(((RECT*)prim), 16, 16);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
-    Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
+    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
 
     poly = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(poly);
 
     func_801AC1DC(origin, work[0x10]);
 
-    projection.vx = ((origin[0] + SPAD_ROW->x.fixed) >> 9) - 0x4000;
-    projection.vy = ((origin[1] + SPAD_ROW->y.fixed) >> 9) - 0x4000;
-    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->z)) / 2;
+    projection.vx = ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000;
+    projection.vy = ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000;
+    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2;
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x0, &depth, &flag);
 
@@ -954,9 +954,9 @@ MATCH void func_801F8D90(void) {
     TASK_SET(second);
     func_801AC1DC(origin, work[0x1C]);
 
-    projection.vx = ((origin[0] + SPAD_ROW->x.fixed) >> 9) - 0x4000;
-    projection.vy = ((origin[1] + SPAD_ROW->y.fixed) >> 9) - 0x4000;
-    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->z)) / 2;
+    projection.vx = ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000;
+    projection.vy = ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000;
+    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2;
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x2, &depth, &flag);
 
@@ -976,7 +976,7 @@ MATCH void func_801F8D90(void) {
 
     SetShadeTex(poly, 1);
 
-    Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x28);
+    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x28);
 
     prim             = g_GfxPrimCursor;
     g_GfxPrimCursor  = prim + 8;
@@ -985,7 +985,7 @@ MATCH void func_801F8D90(void) {
     setWH(((RECT*)prim), 256, 256);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
-    Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
+    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
 }
 
 MATCH void func_801F913C(void) {

@@ -30,21 +30,21 @@ MATCH void func_801A7330(const volatile u8* data) {
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
 
     work                    = g_Task;
-    D_80146908[*counter][0] = (work->x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
+    D_80146908[*counter][0] = (work->pos.x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
     /* FAKE: barrier pins the counter re-read before the shadow store. */
     MATCH_BARRIER();
 
-    D_8014690C[*counter][0] = (work->y.fixed = (data[7] << 16) | ((data[6] != 0) ? 0x8000 : 0));
+    D_8014690C[*counter][0] = (work->pos.y.fixed = (data[7] << 16) | ((data[6] != 0) ? 0x8000 : 0));
     /* FAKE: barrier pins the counter re-read against merging. */
     MATCH_BARRIER();
 
     D_80146910[*counter][0] = 0;
 
-    dist = Area_SampleHeight(work->x.fixed, work->y.fixed);
+    dist = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
 
-    w2               = g_Task;
-    w2->header.mode  = 6;
-    COORD_INT(w2->z) = (u16)dist;
+    w2                   = g_Task;
+    w2->header.mode      = 6;
+    COORD_INT(w2->pos.z) = (u16)dist;
     ACTOR_CLEAR_STEP();
     /* FAKE: barrier pins the flags store before the route-index load. */
     MATCH_BARRIER();
@@ -82,8 +82,8 @@ MATCH void func_801A7330(const volatile u8* data) {
             return;
         }
         /* The 16-bit halves of the two position words have no named members. */
-        if (COORD_FRAC(g_Task->x) == 0 && COORD_FRAC(g_Task->y) == 0) {
-            Area_SetCellCode(COORD_INT(g_Task->x), COORD_INT(g_Task->y), 0x10);
+        if (COORD_FRAC(g_Task->pos.x) == 0 && COORD_FRAC(g_Task->pos.y) == 0) {
+            Area_SetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);
         }
         Actor_SelectScript(1);
     } else {

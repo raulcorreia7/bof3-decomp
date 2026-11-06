@@ -3,9 +3,9 @@
 MATCH void func_801F5464(void) {
     Actor* work = g_Task;
 
-    work->y.fixed -= 0x2000;
-    COORD_INT(work->z) -= 0x10;
-    if (work->y.fixed == 0x340000) {
+    work->pos.y.fixed -= 0x2000;
+    COORD_INT(work->pos.z) -= 0x10;
+    if (work->pos.y.fixed == 0x340000) {
         work->header.step = 1;
     }
     func_801F54B8();

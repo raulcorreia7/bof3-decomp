@@ -17,27 +17,27 @@ MATCH void func_800A68A4(void) {
         }
     }
     battler = &g_BattleActiveBattler;
-    g_BattlePartyBattlers[*battler].damage_flags.volatile_value &=
+    g_BattlePartyBattlers[*battler].turn.damage_flags.volatile_value &=
         ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
-    g_BattlePartyBattlers[*battler].action_flags.volatile_value &= 0xFFFB84FF;
+    g_BattlePartyBattlers[*battler].turn.action_flags.volatile_value &= 0xFFFB84FF;
     func_800A9BD8(*battler);
-    index                                                    = *battler;
-    flags                                                    = g_BattlePartyBattlers[index].action_flags.volatile_value;
-    D_800B6F58                                               = 0;
-    D_800B6F5C                                               = 0;
-    g_BattlePartyBattlers[index].action_flags.volatile_value = flags | 2;
-    slot                                                     = func_800A6C2C();
+    index      = *battler;
+    flags      = g_BattlePartyBattlers[index].turn.action_flags.volatile_value;
+    D_800B6F58 = 0;
+    D_800B6F5C = 0;
+    g_BattlePartyBattlers[index].turn.action_flags.volatile_value = flags | 2;
+    slot                                                          = func_800A6C2C();
     if (slot != GAME_NONE) {
         func_800A7C14(slot);
         D_800B6F58 = slot + 4;
         if ((u8)(slot + 4) == 8) {
-            g_BattlePartyBattlers[*battler].action_flags.value |= 0x10000;
+            g_BattlePartyBattlers[*battler].turn.action_flags.value |= 0x10000;
         }
         if (D_800B6F58 == 7) {
-            g_BattlePartyBattlers[*battler].action_flags.value |= 0x20000;
+            g_BattlePartyBattlers[*battler].turn.action_flags.value |= 0x20000;
         }
         if (D_800B6F58 == 4) {
-            g_BattlePartyBattlers[*battler].action_flags.value |= 0x20000;
+            g_BattlePartyBattlers[*battler].turn.action_flags.value |= 0x20000;
         }
     } else {
         func_800A6E14(0xFF);

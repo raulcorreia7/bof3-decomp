@@ -3,10 +3,10 @@
 MATCH void func_801F2DA0(void) {
     Actor* work  = g_Task;
     u8     timer = work->unk_09 + 1;
-    u16    y     = COORD_INT(work->y);
+    u16    y     = COORD_INT(work->pos.y);
 
     work->unk_09 = timer;
-    COORD_INT(work->z) += y;
+    COORD_INT(work->pos.z) += y;
     if (g_Task->unk_09 >= 16) {
         g_Task->header.step++;
         func_801F2EA8();

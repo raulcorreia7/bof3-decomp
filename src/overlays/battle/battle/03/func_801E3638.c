@@ -9,13 +9,13 @@ MATCH void func_801E3638(void) {
 
     D_801EB3FC[g_Task->header.step]();
     if (g_BattleCurrentEnemy->status & STATUS_CONFUSED) {
-        if (g_BattleCurrentEnemy->damage_flags & 0x800) {
+        if (g_BattleCurrentEnemy->turn.damage_flags.value & 0x800) {
             if ((s8)++g_BattleEffects[g_Task->slot].unk_09 >= 12) {
-                g_BattleCurrentEnemy->damage_flags ^= 0x800;
+                g_BattleCurrentEnemy->turn.damage_flags.value ^= 0x800;
             }
         } else {
             if ((s8)--g_BattleEffects[g_Task->slot].unk_09 < -11) {
-                g_BattleCurrentEnemy->damage_flags ^= 0x800;
+                g_BattleCurrentEnemy->turn.damage_flags.value ^= 0x800;
             }
         }
         work = g_Task;
@@ -25,7 +25,7 @@ MATCH void func_801E3638(void) {
             work->pos.y.fixed = g_BattleEffects[work->slot].pos.y.fixed + ((s8)g_BattleEffects[work->slot].unk_09 << 9);
         }
     }
-    if (!(g_BattleCurrentEnemy->damage_flags & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
+    if (!(g_BattleCurrentEnemy->turn.damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
         func_801E30F8();
     }
 }

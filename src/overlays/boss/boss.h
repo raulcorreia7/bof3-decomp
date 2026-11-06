@@ -63,18 +63,18 @@ void Boss_EndBattle3(void);
 
 /* Finishes the boss's defeat: banks the spoils, shows the task again and parks it in mode 3.
  * Boss_FinishDefeat (boss001, boss002, boss004, boss017, boss022) and Boss_FinishDefeat_800C1900 (boss001). */
-#define BOSS_FINISH_DEFEAT()                                   \
-    do {                                                       \
-        EnemyBattler* work;                                    \
-                                                               \
-        func_8014DAEC();                                       \
-        Battle_DefeatEnemy();                                  \
-        work = g_BattleCurrentEnemy;                           \
-        work->damage_flags |= COMBATANT_FLAG_SKIP_ACTION_STEP; \
-        TASK_BYTES[0] &= ~ACTOR_FLAG_HIDDEN;                   \
-        ACTOR_SET_MODE(3);                                     \
-        TASK_BYTES[2] = 0;                                     \
-        TASK_BYTES[3] = 0;                                     \
+#define BOSS_FINISH_DEFEAT()                                              \
+    do {                                                                  \
+        EnemyBattler* work;                                               \
+                                                                          \
+        func_8014DAEC();                                                  \
+        Battle_DefeatEnemy();                                             \
+        work = g_BattleCurrentEnemy;                                      \
+        work->turn.damage_flags.value |= COMBATANT_FLAG_SKIP_ACTION_STEP; \
+        TASK_BYTES[0] &= ~ACTOR_FLAG_HIDDEN;                              \
+        ACTOR_SET_MODE(3);                                                \
+        TASK_BYTES[2] = 0;                                                \
+        TASK_BYTES[3] = 0;                                                \
     } while (0)
 
 #endif

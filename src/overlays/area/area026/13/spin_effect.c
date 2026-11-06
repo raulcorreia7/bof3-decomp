@@ -367,9 +367,9 @@ MATCH void func_801F2C48(void) {
     s32    v2;
 
     work         = (Actor*)g_Task;
-    v0           = work->x.fixed;
-    v1           = work->y.fixed;
-    v2           = work->z.fixed;
+    v0           = work->pos.x.fixed;
+    v1           = work->pos.y.fixed;
+    v2           = work->pos.z.fixed;
     work->unk_09 = 0xA;
     work2        = (Actor*)g_Task;
     work->unk_1C = 0;

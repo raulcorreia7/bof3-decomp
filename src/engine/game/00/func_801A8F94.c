@@ -110,11 +110,11 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             g_ScrollHeight = Area_SampleHeight(g_PartyX, g_PartyY);
                             sel            = 0xFF;
                         } else {
-                            g_Task->x.fixed =
+                            g_Task->pos.x.fixed =
                                 (s32)((base[state->cursor + 1] << 16) | ((base[state->cursor + 2] != 0) << 15));
-                            g_Task->y.fixed =
+                            g_Task->pos.y.fixed =
                                 (s32)((base[state->cursor + 3] << 16) | ((base[state->cursor + 4] != 0) << 15));
-                            COORD_INT(g_Task->depth) = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
+                            COORD_INT(g_Task->depth) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
                         }
                         state->cursor += 5;
                         break;

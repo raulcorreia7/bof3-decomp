@@ -9,12 +9,12 @@ MATCH void Actor_ApplyVelocity(void) {
 
     value = g_Task->vx;
     if (value > 0) {
-        g_Task->x.fixed += value;
+        g_Task->pos.x.fixed += value;
     }
-    g_Task->x.fixed &= -0x8000;
+    g_Task->pos.x.fixed &= -0x8000;
     value = g_Task->vy;
     if (value > 0) {
-        g_Task->y.fixed += value;
+        g_Task->pos.y.fixed += value;
     }
-    g_Task->y.fixed &= -0x8000;
+    g_Task->pos.y.fixed &= -0x8000;
 }
