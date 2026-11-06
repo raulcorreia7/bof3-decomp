@@ -73,8 +73,16 @@ typedef struct StatMultipliers {
 
 ASSERT_SIZE(StatMultipliers, 0x04);
 
-/* One drop of an enemy: the item id the battle spoils gain when the roll
- * passes, and the index into the 8-byte drop chance table at 0x801D0CB8. */
+/* The family byte of an enemy id: the slayer weapons double damage to their
+ * family (Dragon Blade, Dragon Spear and Dragonfang to dragons; Demonsbane,
+ * Holy Avenger and Aries Spear to demons). The disc records hold only these three
+ * values: 146 enemies with none, 11 dragons, 12 demons. */
+typedef enum EnemyFamily {
+    ENEMY_FAMILY_NONE   = 0,
+    ENEMY_FAMILY_DRAGON = 1,
+    ENEMY_FAMILY_DEMON  = 4,
+} EnemyFamily;
+
 /* The enemy id as the record stores it, read as two bytes: the low byte tells
  * enemies apart (func_801DA69C, func_8009CFEC, Battle_DefeatEnemy) and the high byte is the
  * family the slayer weapons test (Battle_CalcDamage, func_800A2598). */
@@ -87,6 +95,8 @@ typedef union EnemyBattlerId {
     } byte;
 } EnemyBattlerId;
 
+/* One drop of an enemy: the item id the battle spoils gain when the roll
+ * passes, and the index into the 8-byte drop chance table at 0x801D0CB8. */
 typedef struct EnemyBattlerDrop {
     u16 item_00;
     u8  rate_02;

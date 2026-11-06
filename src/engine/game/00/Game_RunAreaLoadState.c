@@ -43,7 +43,7 @@ MATCH void Game_RunAreaLoadState(void) {
     }
 
     pending_world = LOHU(g_GameAreaId);
-    if (pending_world != 0xBD) {
+    if (pending_world != AREA_ID_DESERT_OF_DEATH_MAP) {
         Area_RollEncounterThreshold(1u);
     }
 

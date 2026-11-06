@@ -26,15 +26,18 @@ MATCH void func_801A7E54(void) {
                 switch (g_SceneEventSelection) {
                     case 0:
                     case 4:
-                        Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, 0x110000, 0x590000, 0x85);
+                        Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, TO_COORD(17), TO_COORD(89),
+                                               AREA_ENTRY_MAP_LOADING | FACING_DOWN);
                         break;
                     case 1:
                     case 2:
-                        Game_RequestAreaChange(0x22, 0x340000, 0x430000, 0x81);
+                        Game_RequestAreaChange(AREA_ID_DAUNA_MINE_BAIS, TO_COORD(52), TO_COORD(67),
+                                               AREA_ENTRY_MAP_LOADING | FACING_UP);
                         break;
                     case 3:
                     case 5:
-                        Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, 0x3E0000, 0x50000, 0x81);
+                        Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, TO_COORD(62), TO_COORD(5),
+                                               AREA_ENTRY_MAP_LOADING | FACING_UP);
                         break;
                 }
                 g_SceneEventStep = 4;

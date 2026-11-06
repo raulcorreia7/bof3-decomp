@@ -16,7 +16,7 @@ MATCH void func_8019F840(void) {
             func_801F41D8();
         } else if (LOHU(g_GameAreaId) == AREA_ID_HIDDEN_FACTORY_ROOMS) {
             func_801F4CD0();
-        } else if (LOHU(g_GameAreaId) == 0xA9) {
+        } else if (LOHU(g_GameAreaId) == AREA_ID_MYRIA_STATION_HEAL) {
             func_801F3628();
         } else if (LOHU(g_GameAreaId) == AREA_ID_MYRIA_STATION_PLANT_ROOM) {
             func_801F3868();
