@@ -37,14 +37,6 @@
  * the candidate table at 0x801463DC before a wild encounter. Evidence:
  * @source: wiki:data/battle#where-the-records-are. */
 
-/* A battle-effect module's head: the two battle modules BATL_END and BATL_OVR
- * carry the id alone. */
-typedef struct BattleModule {
-    EmiModuleId id; /* 0x00; 0x142 BATL_END, 0x143 BATL_OVR */
-} BattleModule;
-
-ASSERT_SIZE(BattleModule, 4);
-
 /* Camera scroll step per direction: func_8009B488, func_8009B700, func_8009B794
  * and func_800A8678 add one entry to the x/y phase scroll words, indexed by
  * g_BattleScrollDir. */
