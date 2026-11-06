@@ -61,9 +61,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         if (tmp7 < 0) {
             val1 = -val1;
         }
-        if (val12 < val1) {
-            val12 = val1;
-        }
+        val12 = MAX(val12, val1);
         if (val12 > 0xFFFFF) {
             val3 = ((s32)(val12 + 0xFFF10000) >> 0x10) + 1;
         } else {

@@ -55,9 +55,7 @@ MATCH void func_801C2018(void) {
                     } else {
                         counter_threshold = (s8)selector_thresholds[bit_index - 0xF6u] - counter_word[0x1E];
                     }
-                    if (counter_threshold < 5) {
-                        counter_threshold = 5;
-                    }
+                    CLAMP_MIN(counter_threshold, 5);
                     if (*(u32*)counter_word >= counter_threshold) {
                         ((void (*)(void*, s32))SYS_SetFlag)(counter_word - 0x680, bit_index);
                         *(u32*)counter_word = 0U;

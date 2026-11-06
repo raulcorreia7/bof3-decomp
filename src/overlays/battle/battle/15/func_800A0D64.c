@@ -27,7 +27,5 @@ MATCH void func_800A0D64(void) {
         ((s16*)g_BattleTargetRecord)[2] -= D_801EB6D6[battler - 3u][0];
     }
     record = (s16*)g_BattleTargetRecord;
-    if (record[2] < 0) {
-        record[2] = 0;
-    }
+    CLAMP_MIN(record[2], 0);
 }

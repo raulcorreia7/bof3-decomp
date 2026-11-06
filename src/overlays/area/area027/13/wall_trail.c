@@ -364,15 +364,11 @@ MATCH void func_801F2F0C(const void* arg0) {
                *(s16*)(((const u8*)work + ((index + 1) << 2) + 26)));
 
         red = ((0x20u - index) * 8u);
-        if (red > 0xFFu) {
-            red = 0xFFu;
-        }
+        red = MIN(red, 0xFFu);
         setRGB0(primitive, red, 0u, 0u);
 
         red = ((0x1Fu - index) * 8u);
-        if (red > 0xFFu) {
-            red = 0xFFu;
-        }
+        red = MIN(red, 0xFFu);
         setRGB1(primitive, red, 0u, 0u);
 
         GFX_AddPrim(1u, 0x14u);
