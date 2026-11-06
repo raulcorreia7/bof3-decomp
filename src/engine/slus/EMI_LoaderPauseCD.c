@@ -2,7 +2,7 @@
 
 /* pauses the CD reader and flags completion.
  */
-MATCH void EMI_LoaderPauseCd(void) {
+MATCH void EMI_LoaderPauseCD(void) {
     if (CdSync(1, D_80146498) != CdlNoIntr) {
         D_8014648C = 0;
         if (CdPause() != 0) {

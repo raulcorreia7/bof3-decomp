@@ -6,11 +6,11 @@ MATCH void func_80098C18(void) {
 
     held = g_InputPressed;
     if ((held & D_80145AC4) != 0u) {
-        g_BattleUiState = 4u;
+        g_BattleUIState = 4u;
         return;
     }
     if ((held & D_80145AC2) != 0u) {
-        g_BattleUiState = 3u;
+        g_BattleUIState = 3u;
         return;
     }
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
@@ -23,7 +23,7 @@ MATCH void func_80098C18(void) {
             }
             /* FAKE: byte pointer access keeps the address in a register so the
              * store merges into the shared SND_PlayCue delay slot. */
-            *(u8*)&g_BattleUiState += 1;
+            *(u8*)&g_BattleUIState += 1;
             SND_PlayCue(EMI_CUE_ID(1, 1));
             return;
         }

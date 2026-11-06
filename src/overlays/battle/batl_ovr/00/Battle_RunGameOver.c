@@ -19,8 +19,8 @@ MATCH void Battle_RunGameOver(void) {
         g_BattleMode       = 0;
         g_BattleStep       = 0;
         g_BattleSubStep    = 0;
-        g_BattleUiStep     = 0;
-        g_BattleUiState    = 0;
+        g_BattleUIStep     = 0;
+        g_BattleUIState    = 0;
         func_800ACF80();
         func_801E5A38();
         SND_Exit();

@@ -24,7 +24,7 @@ MATCH void Battle_GrantQueuedItems(void) {
 
         g_BattleStep    = 4;
         g_BattleSubStep = 0;
-        g_BattleUiStep  = 0;
-        g_BattleUiState = 0;
+        g_BattleUIStep  = 0;
+        g_BattleUIState = 0;
     }
 }

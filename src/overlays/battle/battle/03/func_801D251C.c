@@ -13,6 +13,6 @@ MATCH void func_801D251C(void) {
     count                   = *counter;
     g_BattleStep            = 1;
     g_BattleSubStep         = 0;
-    g_BattleUiStep          = 0;
+    g_BattleUIStep          = 0;
     *counter                = count + 1u;
 }

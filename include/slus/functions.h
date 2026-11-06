@@ -47,7 +47,7 @@ u8           func_8014DAEC(void);
 /* func_8014DC08 */
 extern void  Actor_SelectScriptBank(u32 record_index);
 /* func_8014E0A8 */
-extern s32   SYS_ReadCd(s32 size, void* buffer, s32 sectors);
+extern s32   SYS_ReadCD(s32 size, void* buffer, s32 sectors);
 /* func_8014E284 */
 void         GFX_ResetPalette(void);
 /* func_8014E3A0 */
@@ -225,9 +225,9 @@ void         SND_InstallSequenceFuncs(void);
 /* func_80162D9C */
 void         EMI_LoaderIdle(void);
 /* func_80162DA4 */
-void         EMI_LoaderSetCdSpeed(void);
+void         EMI_LoaderSetCDSpeed(void);
 /* func_80162E18 */
-void         EMI_LoaderSeekCd(void);
+void         EMI_LoaderSeekCD(void);
 /* func_80162E70 */
 void         EMI_LoaderFinishSeek(void);
 /* func_80162E98 */
@@ -235,7 +235,7 @@ void         EMI_LoaderStartRead(void);
 /* func_80162F04 */
 void         EMI_LoaderFinishRead(void);
 /* func_80162F34 */
-void         EMI_LoaderPauseCd(void);
+void         EMI_LoaderPauseCD(void);
 /* func_80162F88 */
 void         EMI_LoaderFinishPause(void);
 /* func_8016305C */
@@ -249,11 +249,11 @@ void         EMI_LoaderUploadSector(void);
 /* func_80163418 */
 void         EMI_LoaderTransferVabBody(void);
 /* func_80163744 */
-void         SND_ResolveXaStream(s32 stream_id);
+void         SND_ResolveXAStream(s32 stream_id);
 /* func_80163858 */
-void         SND_StoreXaSyncResult(s32 intr, u8* result);
+void         SND_StoreXASyncResult(s32 intr, u8* result);
 /* func_801638B0 */
-void         SND_ServiceXa(void);
+void         SND_ServiceXA(void);
 /* func_801639B8 */
 void         SND_XaStateIdle(void);
 /* func_801639D0 */
@@ -273,11 +273,11 @@ void         SND_XaStatePauseResult(void);
 /* func_80163E3C */
 void         SND_XaStateWaitSync(void);
 /* func_80163E88 */
-bool         SND_HasXaCdError(void);
+bool         SND_HasXACDError(void);
 /* func_80163EB0 */
-void         SND_SetCdVolume(u8 volume);
+void         SND_SetCDVolume(u8 volume);
 /* func_80163F50 */
-void         SND_FadeCdVolume(s32 level);
+void         SND_FadeCDVolume(s32 level);
 /* func_80164028 */
 void         EMI_DecodeBegin(u8* dst);
 /* func_80164064 */
@@ -326,11 +326,11 @@ void         Area_InitScene(void);
 /* func_80167848 */
 void         Area_SyncScrollHeight(void);
 /* func_80167FDC */
-void         Char_AddHp(s32 amount, u8 char_id);
+void         Char_AddHP(s32 amount, u8 char_id);
 /* func_8016813C */
-s32          Char_LoseHp(s32 mode, s32 index);
+s32          Char_LoseHP(s32 mode, s32 index);
 /* func_80168248 */
-s32          Char_SpendAp(s32 requested, s32 character_id);
+s32          Char_SpendAP(s32 requested, s32 character_id);
 /* The libsnd internals have no header in this tree; s16 arguments as retail passes them. */
 /* func_80196CF0 */
 u8           GFX_StartPaletteAnimation(u8* owner, u8* source_table);

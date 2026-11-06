@@ -21,9 +21,9 @@ MATCH void func_8009B2B0(void) {
     counter       = *counter_byte + 1;
     *counter_byte = counter;
     if (g_BattleEncounter != 0) {
-        g_BattleUiStep = g_BattleUiStep + 1;
+        g_BattleUIStep = g_BattleUIStep + 1;
     } else if (counter >= 3) {
-        g_BattleUiStep = 2;
+        g_BattleUIStep = 2;
     } else {
         for (slot = 3; slot < COMBATANT_COUNT; slot++) {
             if (Battle_SlotIsBlocked(slot) == 0) {
@@ -45,11 +45,11 @@ MATCH void func_8009B2B0(void) {
             /* FAKE: keeps roll live across the compare so the slt result takes v0 as in retail; pure C best 98.06%,
              * no source spelling of the compare moves the result register. */
             MATCH_FAKE_USE(roll);
-            g_BattleUiStep = 2;
+            g_BattleUIStep = 2;
         } else if (g_BattleSurprise == 1) {
-            g_BattleUiStep = 2;
+            g_BattleUIStep = 2;
         } else {
-            g_BattleUiStep = 1;
+            g_BattleUIStep = 1;
         }
     }
 }

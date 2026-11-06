@@ -492,8 +492,8 @@ MATCH void func_801FC5FC(void) {
     Message_StartAreaMessage(0x2F);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     SND_PauseBgm(g_SndBgmId);
-    SND_StartXaStream(2, 1);
-    while (!(SND_IsXaIdle() & 0xFF)) {
+    SND_StartXAStream(2, 1);
+    while (!(SND_IsXAIdle() & 0xFF)) {
         func_801992B8();
         CallbackWait(1U);
     }

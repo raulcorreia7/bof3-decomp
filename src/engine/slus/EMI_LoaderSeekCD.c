@@ -2,7 +2,7 @@
 
 /* seeks the CD reader and flags completion.
  */
-MATCH void EMI_LoaderSeekCd(void) {
+MATCH void EMI_LoaderSeekCD(void) {
     u16* counter;
 
     counter = &D_80146492;

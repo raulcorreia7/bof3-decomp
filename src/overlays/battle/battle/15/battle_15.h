@@ -207,11 +207,11 @@ typedef struct BattleHandlerQuad {
  * table holds four packets per enemy kind record, at the kind record's +0x34.
  *
  * Evidence: the retail reads the packet's +0x00 with `lbu` and switches on it
- * (Battle_TestAiCondition), its +0x01 with `lbu` and switches on it (func_8009C994),
+ * (Battle_TestAICondition), its +0x01 with `lbu` and switches on it (func_8009C994),
  * its +0x02 and +0x03 with `lbu`, its +0x04 with `lbu`, its +0x06 with `lh`
  * and its +0x08..+0x0F with `lbu` (func_8009C994). */
 typedef struct BattleEventPacket {
-    u8  kind;        /* +0x00 the kind Battle_TestAiCondition switches on to pick the trigger test */
+    u8  kind;        /* +0x00 the kind Battle_TestAICondition switches on to pick the trigger test */
     u8  effect_kind; /* +0x01 the kind func_8009C994 switches on to pick the record update */
     u8  selector;    /* +0x02 the bits that select the cells the packet updates */
     u8  value;       /* +0x03 the value the selected cells take */
@@ -540,7 +540,7 @@ extern u8                                D_801460E9;
 extern u16                               D_801460EA;
 extern u8                                D_801460F2;
 /* D_801462E3 */
-extern volatile u8                       g_BattleUiStep;
+extern volatile u8                       g_BattleUIStep;
 extern volatile u8                       D_801462E7;
 /* D_801462F0 */
 extern volatile u8                       g_BattlePartyCount; /* u8 active-battler count at 0x801462F0. */
@@ -945,7 +945,7 @@ void        func_800AF2B4(BattleRange* target, s32 step);
 s32         func_800AF5FC(BattleRange* target, u32 extent);
 extern void func_800B1DAC(s16 x, s16 y, u8 sprite_arg);
 s32         func_801DDE7C(u8 slot_index, u16 packed_value);
-extern u8   g_BattleUiStep_nv;
+extern u8   g_BattleUIStep_nv;
 
 /* Store half the calculated damage and queue its animation. */
 static inline void BattleApplyHalfDamage(s32 anim) {

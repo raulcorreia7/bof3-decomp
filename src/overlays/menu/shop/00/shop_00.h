@@ -53,7 +53,7 @@
                 return;                              \
             }                                        \
         }                                            \
-        if ((SND_IsXaIdle() & BYTE_MASK) != 0) {     \
+        if ((SND_IsXAIdle() & BYTE_MASK) != 0) {     \
             count         = (cue_counter);           \
             (cue_counter) = count + 1;               \
             UI_SetMode(1);                           \

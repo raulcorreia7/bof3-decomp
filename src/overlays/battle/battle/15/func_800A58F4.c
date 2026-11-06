@@ -11,7 +11,7 @@ MATCH void func_800A58F4(void) {
         ((u8*)D_801EB5B1)[((D_801EC328 - 1) & 0xF) * 8] = 1;
         g_BattleStep                                    = 1;
         g_BattleSubStep                                 = 0;
-        g_BattleUiStep                                  = 0;
-        g_BattleUiState                                 = 0;
+        g_BattleUIStep                                  = 0;
+        g_BattleUIState                                 = 0;
     }
 }

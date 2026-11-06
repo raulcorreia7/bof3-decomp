@@ -6,6 +6,6 @@ MATCH void func_801EEEB8(void) {
 
     if (WINDOW_EFFECT_IDLE()) {
         D_801463B0 = 0x2C;
-        g_BattleUiStep += 1;
+        g_BattleUIStep += 1;
     }
 }

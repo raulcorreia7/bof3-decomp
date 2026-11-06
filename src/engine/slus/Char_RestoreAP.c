@@ -3,7 +3,7 @@
 /* advances the record halfword toward its limit by delta, clamping
  * at the limit.
  */
-MATCH s32 Char_RestoreAp(s32 character_index, s32 amount, s32 mode) {
+MATCH s32 Char_RestoreAP(s32 character_index, s32 amount, s32 mode) {
     Character* rec;
     s32        cur;
     s32        limit;

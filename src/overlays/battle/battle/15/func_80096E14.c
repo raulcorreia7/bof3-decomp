@@ -10,7 +10,7 @@ MATCH void func_80096E14(void) {
     counter                 = g_BattleCommandCount;
     g_BattleStep            = 1;
     g_BattleSubStep         = 0;
-    g_BattleUiStep          = 0;
-    g_BattleUiState         = 0;
+    g_BattleUIStep          = 0;
+    g_BattleUIState         = 0;
     g_BattleCommandCount    = counter + 1;
 }

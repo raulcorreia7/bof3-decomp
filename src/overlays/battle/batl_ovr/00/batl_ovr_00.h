@@ -4,7 +4,7 @@
 #include "overlays/battle/battle.h"
 
 /* D_801462E3 */
-extern u8       g_BattleUiStep;
+extern u8       g_BattleUIStep;
 extern u16      D_801463B0;
 extern void     GFX_FreePaletteFadeTarget(void* target);
 extern void     func_801EF180(s32 arg);

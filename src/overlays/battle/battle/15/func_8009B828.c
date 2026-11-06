@@ -32,8 +32,8 @@ MATCH void func_8009B828(void) {
         g_BattleMode    = 3;
         g_BattleStep    = 0;
         g_BattleSubStep = 0;
-        g_BattleUiStep  = 0;
-        g_BattleUiState = 0;
+        g_BattleUIStep  = 0;
+        g_BattleUIState = 0;
         LOHU(*(volatile u16*)&g_BattleState) |= 8;
     }
 }

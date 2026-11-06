@@ -100,7 +100,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             func_801AC9D0();
             break;
         case 0x89:
-            SND_StartXaStream((table[state->index_0A + 1] << 8) | table[state->index_0A + 2], 1);
+            SND_StartXAStream((table[state->index_0A + 1] << 8) | table[state->index_0A + 2], 1);
             state->index_0A += 2;
             break;
         case 0x8A:
@@ -108,7 +108,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             state->index_0A += 2;
             break;
         case 0x8B:
-            if ((SND_IsXaIdle() & BYTE_MASK) != 0) {
+            if ((SND_IsXAIdle() & BYTE_MASK) != 0) {
                 break;
             }
             state->index_0A--;

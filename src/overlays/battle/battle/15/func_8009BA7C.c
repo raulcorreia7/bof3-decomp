@@ -6,7 +6,7 @@ MATCH void func_8009BA7C(void) {
         g_AreaCameraStep = 0;
         g_BattleStep     = 3;
         g_BattleSubStep  = 0;
-        g_BattleUiStep   = 0;
-        g_BattleUiState  = 0;
+        g_BattleUIStep   = 0;
+        g_BattleUIState  = 0;
     }
 }

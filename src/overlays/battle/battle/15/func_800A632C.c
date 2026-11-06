@@ -15,17 +15,17 @@ MATCH void func_800A632C(void) {
     pad                                      = *pad_state;
     if ((pad & D_80145AC4) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        page_counter = (u8*)&g_BattleUiState;
+        page_counter = (u8*)&g_BattleUIState;
         *page_counter -= 1;
         return;
     }
     if ((pad & D_80145AC2) != 0) {
         if (D_801463B4 == 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
-            g_BattleUiState += 1;
+            g_BattleUIState += 1;
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 6));
-            g_BattleUiState -= 1;
+            g_BattleUIState -= 1;
         }
         return;
     }

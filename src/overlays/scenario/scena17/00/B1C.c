@@ -265,7 +265,7 @@ MATCH void func_801F8088(void) {
 MATCH void func_801F80CC(void) {
     u8* step;
 
-    SND_StartXaStream(8, 1);
+    SND_StartXAStream(8, 1);
     step       = &D_80146874;
     D_801F9DD0 = 0;
     D_801F9DD4 = 0;
@@ -277,7 +277,7 @@ MATCH void func_801F8110(void) {
     u8* step;
 
     ready = func_801F938C();
-    if ((u8)SND_IsXaIdle() && ready) {
+    if ((u8)SND_IsXAIdle() && ready) {
         UI_SetMode(0xD);
         step  = &D_80146874;
         *step = *step + 1;

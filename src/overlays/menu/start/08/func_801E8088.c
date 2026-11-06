@@ -9,7 +9,7 @@ MATCH s32 func_801E8088(s32 character_index, s32 record_index) {
 
     index = character_index & BYTE_MASK;
     mode  = record_index & BYTE_MASK;
-    value = Char_RestoreHp(index, 5, mode);
+    value = Char_RestoreHP(index, 5, mode);
     if (mode == 0) {
         record = &g_Characters[index];
     } else {

@@ -27,7 +27,7 @@ MATCH s32 SYS_LoadExec(const char* path) {
     for (;;) {
         if (CdSearchFile(&file, (char*)current_path) != NULL) {
             CdControl(CdlSetloc, (u_char*)&file, NULL);
-            if (SYS_ReadCd(0x800, D_801459F8, sectors) == 0) {
+            if (SYS_ReadCD(0x800, D_801459F8, sectors) == 0) {
                 SystemWord4* s = (SystemWord4*)D_801459F8;
                 SystemWord4* d = (SystemWord4*)D_80143E70;
                 SystemWord4* e = s + 8;
@@ -48,7 +48,7 @@ MATCH s32 SYS_LoadExec(const char* path) {
                 CdIntToPos(CdPosToInt(&file.pos) + 1, &file.pos);
                 CdControlB(CdlSetloc, (u_char*)&file, NULL);
 
-                if (SYS_ReadCd(exe_size[0], (void*)exe_size[-1], sectors) == 0) {
+                if (SYS_ReadCD(exe_size[0], (void*)exe_size[-1], sectors) == 0) {
                     attempts += 1;
                     return 0;
                 }
