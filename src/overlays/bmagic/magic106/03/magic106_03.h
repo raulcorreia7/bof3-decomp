@@ -13,7 +13,6 @@ extern void (*D_801EF9C4[])(void);
 extern u8 D_801EF9F8[];
 
 void Effect_PlayOnZeroTick(void);
-void func_801EEEE0(void);
 void func_801EF52C(void);
 void func_801EF5F4(void);
 void func_801EF970(void);

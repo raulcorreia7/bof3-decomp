@@ -22,7 +22,6 @@ extern u16      D_801492DC;
 /* The state handler banks the step dispatchers index. */
 extern Callback D_801F6238[];
 
-void Char_RebuildStats(Character* record);
 /* The image's step passes. */
 void func_801F3514(void);
 void func_801F3800(void);
