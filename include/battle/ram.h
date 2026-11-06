@@ -205,7 +205,7 @@ extern u16           D_801463C2;
 extern u8            D_801463C8;
 /* The slot that owns the pending panel: battle/battle/15 latches the selected slot
  * into it (func_8009FAE4), battle/battle/03 clears the 0x4000 event bit when the
- * active row's slot matches it (Battle_CollectEnemySpoils). */
+ * active row's slot matches it (Battle_DefeatEnemy). */
 extern u8            D_801463CA;
 extern u8            D_801463CD;
 extern u8            D_801463CF;

@@ -4,7 +4,7 @@ MATCH void func_800C19C0(void) {
     Actor_RequestScript(0xFU);
     g_Task->unk_2A = 0;
     func_8014DAEC();
-    Battle_CollectEnemySpoils();
+    Battle_DefeatEnemy();
     g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
     g_Task->mode   = 3;
     g_Task->step   = 0;

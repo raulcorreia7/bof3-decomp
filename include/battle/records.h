@@ -61,7 +61,7 @@ typedef struct StatMultipliers {
 /* One drop of an enemy: the item id the battle spoils gain when the roll
  * passes, and the index into the 8-byte drop chance table at 0x801D0CB8. */
 /* The enemy id as the record stores it, read as two bytes: the low byte tells
- * enemies apart (func_801DA69C, func_8009CFEC, Battle_CollectEnemySpoils) and the high byte is the
+ * enemies apart (func_801DA69C, func_8009CFEC, Battle_DefeatEnemy) and the high byte is the
  * family the slayer weapons test (Battle_CalcDamage, func_800A2598). */
 typedef union EnemyBattlerId {
     u16 value;
@@ -339,64 +339,64 @@ ASSERT_OFFSET(BattlePanelTask, hp, 0x14);
 ASSERT_OFFSET(BattlePanelTask, max_hp, 0x1C);
 
 typedef struct EnemyBattler {
-    u8             flags;
-    u8             mode;
-    u8             step;
-    u8             unk_03;
-    u8             unk_04;
-    u8             slot;   /* +0x05 battler slot; Battle_ArmEnemySlot stores slot + 3 here */
-    u8             unk_06; /* +0x06 cleared when the slot is armed */
-    u8             unk_07; /* +0x07 cleared when the slot is armed */
-    u8             unk_08; /* +0x08 the battle index with its low bit flipped */
-    u8             pad_09[0x3];
-    s32            unk_0C; /* +0x0C cleared when the slot is armed */
-    s32            unk_10; /* +0x10 cleared when the slot is armed */
-    s32            unk_14; /* +0x14 cleared when the slot is armed */
-    s32            unk_18; /* +0x18 cleared when the slot is armed */
-    s32            unk_1C; /* +0x1C cleared when the slot is armed */
-    s32            unk_20; /* +0x20 cleared when the slot is armed */
-    u8             unk_24; /* +0x24 cleared when the slot is armed */
-    u8             pad_25[0x4];
-    u8             unk_29; /* +0x29 set to 4 when the slot is armed */
-    u8             pad_2A[0x1];
-    u8             unk_2B; /* +0x2B cleared when the slot is armed */
-    u8             pad_2C[0x2];
-    s16            unk_2E; /* +0x2E cleared when the slot is armed */
-    s16            unk_30; /* +0x30 cleared when the slot is armed */
-    s16            unk_32; /* +0x32 cleared when the slot is armed */
-    BattlePosition pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
-    u8             pad_40[0x8];
-    u8             unk_48; /* +0x48 cleared when the slot is armed */
-    u8             pad_49[0x2];
-    u8             unk_4B; /* +0x4B set to 0xFF when the slot is armed */
-    u8             pad_4C[0xC];
-    u16            unk_58; /* +0x58 the halfword the boss end-of-battle setup copies to the spad record */
-    u16            unk_5A; /* +0x5A the halfword the boss end-of-battle setup copies to the spad record */
-    u8             unk_5C; /* +0x5C cleared when the slot is armed */
-    u8             unk_5D; /* +0x5D cleared when the slot is armed */
-    u8             unk_5E; /* +0x5E cleared when the slot is armed */
-    u8             unk_5F; /* +0x5F cleared when the slot is armed */
-    u8             pad_60[0x14];
-    u8             name[8]; /* +0x74 the 8-character enemy name, drawn as text by Battle_DrawEnemyNamePanel */
-    EnemyBattlerId enemy_id;
-    u8             choice_ai;
-    u8             unk_7F;      /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16            event_flags; /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16 status; /* +0x82 StatusFlags; Battle_CollectEnemySpoils sets STATUS_KO when the enemy leaves the field */
-    u16 zenny;  /* +0x84 banked in the spoils by Battle_CollectEnemySpoils */
-    u16 exp;    /* +0x86 banked in the spoils by Battle_CollectEnemySpoils */
-    u16 power;  /* +0x88 read by the turn-order ranking */
-    u8  pad_8A[2];
-    u8  skills[8]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
-    u16 hp;
-    u16 ap; /* +0x96 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    EnemyBattlerDrop      drops[2];
-    Stats                 stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
-    Stats                 base;  /* +0xC0 the stats before buffs */
-    u8                    kind;
-    u8                    unk_E1;
-    u8                    unk_E2; /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
-    u8                    unk_E3; /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
+    u8               flags;
+    u8               mode;
+    u8               step;
+    u8               unk_03;
+    u8               unk_04;
+    u8               slot;   /* +0x05 battler slot; Battle_ArmEnemySlot stores slot + 3 here */
+    u8               unk_06; /* +0x06 cleared when the slot is armed */
+    u8               unk_07; /* +0x07 cleared when the slot is armed */
+    u8               unk_08; /* +0x08 the battle index with its low bit flipped */
+    u8               pad_09[0x3];
+    s32              unk_0C; /* +0x0C cleared when the slot is armed */
+    s32              unk_10; /* +0x10 cleared when the slot is armed */
+    s32              unk_14; /* +0x14 cleared when the slot is armed */
+    s32              unk_18; /* +0x18 cleared when the slot is armed */
+    s32              unk_1C; /* +0x1C cleared when the slot is armed */
+    s32              unk_20; /* +0x20 cleared when the slot is armed */
+    u8               unk_24; /* +0x24 cleared when the slot is armed */
+    u8               pad_25[0x4];
+    u8               unk_29; /* +0x29 set to 4 when the slot is armed */
+    u8               pad_2A[0x1];
+    u8               unk_2B; /* +0x2B cleared when the slot is armed */
+    u8               pad_2C[0x2];
+    s16              unk_2E; /* +0x2E cleared when the slot is armed */
+    s16              unk_30; /* +0x30 cleared when the slot is armed */
+    s16              unk_32; /* +0x32 cleared when the slot is armed */
+    BattlePosition   pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
+    u8               pad_40[0x8];
+    u8               unk_48; /* +0x48 cleared when the slot is armed */
+    u8               pad_49[0x2];
+    u8               unk_4B; /* +0x4B set to 0xFF when the slot is armed */
+    u8               pad_4C[0xC];
+    u16              unk_58; /* +0x58 the halfword the boss end-of-battle setup copies to the spad record */
+    u16              unk_5A; /* +0x5A the halfword the boss end-of-battle setup copies to the spad record */
+    u8               unk_5C; /* +0x5C cleared when the slot is armed */
+    u8               unk_5D; /* +0x5D cleared when the slot is armed */
+    u8               unk_5E; /* +0x5E cleared when the slot is armed */
+    u8               unk_5F; /* +0x5F cleared when the slot is armed */
+    u8               pad_60[0x14];
+    u8               name[8]; /* +0x74 the 8-character enemy name, drawn as text by Battle_DrawEnemyNamePanel */
+    EnemyBattlerId   enemy_id;
+    u8               choice_ai;
+    u8               unk_7F;      /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
+    u16              event_flags; /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    u16              status; /* +0x82 StatusFlags; Battle_DefeatEnemy sets STATUS_KO when the enemy leaves the field */
+    u16              zenny;  /* +0x84 banked in the spoils by Battle_DefeatEnemy */
+    u16              exp;    /* +0x86 banked in the spoils by Battle_DefeatEnemy */
+    u16              power;  /* +0x88 read by the turn-order ranking */
+    u8               pad_8A[2];
+    u8               skills[8]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
+    u16              hp;
+    u16              ap; /* +0x96 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    EnemyBattlerDrop drops[2];
+    Stats            stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
+    Stats            base;  /* +0xC0 the stats before buffs */
+    u8               kind;
+    u8               unk_E1;
+    u8               unk_E2; /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
+    u8               unk_E3; /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
     EnemyBattlerEventFunc unk_E4;
     u16*                  unk_E8;
     u8*                   script;

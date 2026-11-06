@@ -11,7 +11,7 @@ MATCH void func_800C1B48(void) {
         g_Task->unk_48 = 0;
         Area_FindSceneRecord(0x83);
         Actor_SelectScript(0U);
-        Battle_CollectEnemySpoils();
+        Battle_DefeatEnemy();
         g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
         g_Task->mode = 6;
         g_Task->step = 4;
