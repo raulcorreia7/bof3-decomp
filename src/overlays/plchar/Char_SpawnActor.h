@@ -18,14 +18,14 @@ MATCH void Char_SpawnActor(s32 arg0, s32 arg1, s32 arg2) {
     kind = arg0;
     slot = Actor_FindFreeSlot();
     if (slot != GAME_NONE) {
-        g_ActorSlots[slot].header.flags = 1;
-        g_ActorSlots[slot].type         = 0x34;
-        x_word                          = x << 16;
-        g_ActorSlots[slot].x.fixed      = x_word;
-        y_word                          = y << 16;
-        g_ActorSlots[slot].header.mode  = kind;
-        g_ActorSlots[slot].y.fixed      = y_word;
-        COORD_INT(g_ActorSlots[slot].z) = Area_SampleHeight(g_ActorSlots[slot].x.fixed, y_word) + 0x100;
-        g_ActorSlots[slot].link         = 0;
+        g_ActorSlots[slot].header.flags     = 1;
+        g_ActorSlots[slot].type             = 0x34;
+        x_word                              = x << 16;
+        g_ActorSlots[slot].pos.x.fixed      = x_word;
+        y_word                              = y << 16;
+        g_ActorSlots[slot].header.mode      = kind;
+        g_ActorSlots[slot].pos.y.fixed      = y_word;
+        COORD_INT(g_ActorSlots[slot].pos.z) = Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, y_word) + 0x100;
+        g_ActorSlots[slot].link             = 0;
     }
 }

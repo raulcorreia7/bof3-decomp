@@ -3,8 +3,8 @@
 extern s32 D_801ECDBC;
 extern s8  D_801ED105;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 81.20%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 81.20%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E4744(void) {
     s32* val0;

@@ -28,14 +28,14 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
         key   = character_id & BYTE_MASK;
         limit = g_PartySize;
     search1:
-        if (D_80144F5D[slot] == key)
+        if (g_PartyBattleOrder[slot] == key)
             goto found1;
         slot++;
         if (slot < limit)
             goto search1;
     found1:;
     }
-    D_80144F5D[slot] = 0xFF;
+    g_PartyBattleOrder[slot] = 0xFF;
     if (slot < (s32)g_PartySize - 1) {
         cur  = &D_80144F5E[slot];
         prev = cur - 1;
@@ -54,14 +54,14 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
         key   = character_id & BYTE_MASK;
         limit = g_PartySize;
     search2:
-        if (D_80144F5A[slot] == key)
+        if (g_PartyFieldOrder[slot] == key)
             goto found2;
         slot++;
         if (slot < limit)
             goto search2;
     found2:;
     }
-    D_80144F5A[slot] = 0xFF;
+    g_PartyFieldOrder[slot] = 0xFF;
     if ((s32)g_PartySize - 1 > 0) {
         slot = 0;
         off  = 0;

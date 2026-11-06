@@ -1,9 +1,9 @@
-/* Starts message AREA_MESSAGE_REQUEST and waits for the message screen to close. One definition shared by the game engine
- * and an area overlay; every change here must verify every member. */
+/* Starts message AREA_MESSAGE_REQUEST and waits for the message screen to close. One definition shared by the game
+ * engine and an area overlay; every change here must verify every member. */
 MATCH void Message_RunAreaMessage(void) {
     s8* state;
 
-    state = &D_801448EC;
+    state = &g_SceneEventStep;
     switch (*state) {
         case 0:
             Game_SetScriptActive();
@@ -14,9 +14,9 @@ MATCH void Message_RunAreaMessage(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                D_801448EB = 0;
-                *state     = 0;
-                D_801448ED = 0;
+                g_SceneEventMode      = 0;
+                *state                = 0;
+                g_SceneEventSelection = 0;
             }
             return;
     }

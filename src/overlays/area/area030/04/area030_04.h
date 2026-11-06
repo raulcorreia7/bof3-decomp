@@ -353,7 +353,7 @@ extern s32                   D_80146898;
 extern FishingSelectionState D_801468A4[];
 extern u8                    D_80146918[];
 /* D_80181AC0 */
-extern FacingStep            g_FacingOffsets[];
+extern Point2DL              g_FacingOffsets[];
 extern char                  D_801D0C04[];
 extern char                  D_801D0C08[];
 extern char                  D_801D0C10[];
@@ -702,7 +702,7 @@ void func_801E1C7C(void);
 static inline void WorldAdvanceFishingSubState(u8 subState) {
     if (D_80144199 == 3) {
         SND_StopSequence(0, 1);
-        SND_PlayBgm(0x28, 0x64, 8);
+        SND_PlayBGM(0x28, 0x64, 8);
         SND_PlayCue(EMI_CUE_ID(2, 3));
         func_801DDE94(subState);
         FISHING_STATE->sub_index_03 += 1;

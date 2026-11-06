@@ -50,7 +50,7 @@ MATCH void func_801EF264(void) {
 }
 
 MATCH void func_801EF2EC(void) {
-    g_Task->unk_0B      = rand() & 0xF;
+    g_Task->unk_0B      = RANDOM_MASK(0xF);
     g_Task->unk_09      = 0;
     g_Task->timer       = 0;
     g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
@@ -156,7 +156,7 @@ MATCH void func_801F0090(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_Task->unk_0B = (RANDOM_MASK(0xF));
+    g_Task->unk_0B = (rand() & 0xF);
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
 

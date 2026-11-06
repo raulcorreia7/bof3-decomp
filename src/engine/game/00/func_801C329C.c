@@ -17,12 +17,12 @@ MATCH void func_801C329C(void) {
 
     scratch_ptr = scratch;
     found       = 0;
-    total       = Party_CountOrder(0);
+    total       = Party_CountOrder(PARTY_ORDER_FIELD);
     if (g_GameRequestFlags & 1) {
         index = 0;
         if ((s16)total > 0) {
             do {
-                sel = g_CharSlot[D_80144F5A[index]];
+                sel = g_CharSlot[g_PartyFieldOrder[index]];
                 if (g_Characters[sel].status & STATUS_POISONED) {
                     found = 1;
                 }
@@ -44,7 +44,7 @@ MATCH void func_801C329C(void) {
                 index = 0;
                 if ((s16)total > 0) {
                     do {
-                        id  = D_80144F5A[index];
+                        id  = g_PartyFieldOrder[index];
                         sel = g_CharSlot[id];
                         if ((g_Characters[sel].status & STATUS_POISONED) && ((Char_LoseHP(1, id) & HALF_MASK) != 0)) {
                             found = 1;
@@ -61,17 +61,17 @@ MATCH void func_801C329C(void) {
         if ((found & BYTE_MASK) != 0) {
             slot = Actor_FindFreeSlot() & BYTE_MASK;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].header.flags = 1;
-                g_ActorSlots[slot].type         = 0x41;
-                g_ActorSlots[slot].unk_08       = g_Task->direction_08;
-                COORD_INT(g_ActorSlots[slot].x) = g_Task->unk_2E;
-                value30                         = g_Task->unk_30;
-                g_ActorSlots[slot].unk_27       = 0;
-                g_ActorSlots[slot].unk_06       = 1;
-                record                          = g_ActorSlots;
-                work                            = g_Task;
-                COORD_INT(record[slot].y)       = value30;
-                g_ActorSlots[slot].link         = work->unk_05;
+                g_ActorSlots[slot].header.flags     = 1;
+                g_ActorSlots[slot].type             = 0x41;
+                g_ActorSlots[slot].unk_08           = g_Task->direction_08;
+                COORD_INT(g_ActorSlots[slot].pos.x) = g_Task->unk_2E;
+                value30                             = g_Task->unk_30;
+                g_ActorSlots[slot].unk_27           = 0;
+                g_ActorSlots[slot].unk_06           = 1;
+                record                              = g_ActorSlots;
+                work                                = g_Task;
+                COORD_INT(record[slot].pos.y)       = value30;
+                g_ActorSlots[slot].link             = work->unk_05;
             }
         }
     }

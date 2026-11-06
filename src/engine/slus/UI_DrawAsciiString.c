@@ -34,10 +34,9 @@ MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
             x = x0;
             y += 0xC;
         } else if (*str != ' ' && *str != '\0') {
-            sprite->w    = 8;
             sprite->clut = color;
             setRGB0(sprite, shade, shade, shade);
-            sprite->h  = 12;
+            setWH(sprite, 8, 12);
             sprite->u0 = (((*str - '0') % 31) * 8);
             value      = ((*str - '0') / 31) * 0xC + 0x48;
             setXY0(sprite, x, y);

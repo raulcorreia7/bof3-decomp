@@ -33,8 +33,8 @@ MATCH void UI_DrawMessageScript(void) {
     drawn             = 0;
     base              = (u8*)&g_MessageScript;
     p                 = *(u8**)base;
-    g_MessageWindow.text_x = g_MessageWindow.origin_x;
-    g_MessageWindow.text_y = g_MessageWindow.origin_y;
+    g_MessageWindow.text.x = g_MessageWindow.origin.x;
+    g_MessageWindow.text.y = g_MessageWindow.origin.y;
     color             = 0;
     if (D_801490B9 != 0) {
         cursor = (u16*)(base + 0x10);

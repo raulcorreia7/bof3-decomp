@@ -33,9 +33,9 @@ typedef struct ShopWork {
 #define SHOP_WORK_RECORD(offset) ((ShopWorkRecord*)(SHOP_WORK_BASE + (offset)))
 #define SHOP_WORK                ((ShopWork*)SHOP_WORK_BASE)
 
-/* nonmatching unmeasured: tried the first draft (39.90%); 16-byte struct copy (49.74%); byte-array copy for the unaligned
- * lwl/lwr (56.85%); u16 loop counter and u16 destination store (63.45%); the FIELD offset views replaced by typed
- * fields and the work-text pointer, the first-draft pointer juggling removed (61.62%). residual is the register
+/* nonmatching unmeasured: tried the first draft (39.90%); 16-byte struct copy (49.74%); byte-array copy for the
+ * unaligned lwl/lwr (56.85%); u16 loop counter and u16 destination store (63.45%); the FIELD offset views replaced by
+ * typed fields and the work-text pointer, the first-draft pointer juggling removed (61.62%). residual is the register
  * allocation of the second row loop: retail homes the work base in s2, the row base in s3 and the constants in
  * t0/t1/a0-a3, the candidate homes them in s0 and v1. resume: a source shape that gives the work base the s2 home and
  * the loop constants their own registers, without keeping the work-text pointer alive past the row loop. */
@@ -61,10 +61,10 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     *(ShopStateHeader*)&D_801448D8 = *(ShopStateHeader*)&g_SceneState;
     j                              = 0;
     D_80144948                     = 0;
-    D_801448F8                     = g_ScriptVars[0];
-    D_801448F9                     = g_ScriptVars[1];
-    D_801448FA                     = g_ScriptVars[2];
-    D_801448FB                     = g_ScriptVars[3];
+    g_SavedScriptVars[0]           = g_ScriptVars[0];
+    g_SavedScriptVars[1]           = g_ScriptVars[1];
+    g_SavedScriptVars[2]           = g_ScriptVars[2];
+    g_SavedScriptVars[3]           = g_ScriptVars[3];
     D_80144900                     = (u32)D_80145EC4;
     D_80144904                     = (u32)D_80145EC8;
     D_801448FC                     = g_GameAreaId;
@@ -76,7 +76,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
         *(u16*)((j * 2) + (&D_801448D8 + 0xCBC)) = (u16)(&g_InputMasks)[j];
         n                                        = n + 1;
     } while ((u32)n < 9U);
-    work     = &D_801448D8;
+    work     = (u8*)&g_SaveData;
     dst_text = work + 0xCA0;
     src_text = work + 0x90;
     strncpy((s8*)dst_text, (s8*)src_text, 5);
@@ -84,7 +84,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     col  = 0 & HALF_MASK;
     do {
         name_index = slot & HALF_MASK;
-        if (D_80144F5A[col] == 4) {
+        if (g_PartyFieldOrder[col] == 4) {
             mode = SHOP_WORK->field_74C & 0x7F;
             if ((mode != 5) && (mode != 0xC)) {
                 dst_text[col + 5] = 0xB;
@@ -94,7 +94,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
             }
         } else {
         store_row:
-            dst_text[name_index + 5] = (u8)D_80144F5A[name_index];
+            dst_text[name_index + 5] = (u8)g_PartyFieldOrder[name_index];
         }
         slot += 1;
         col = slot & HALF_MASK;
@@ -130,7 +130,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     if (g_SaveSlotFirst == g_SaveSlotCount) {
         g_SaveSlotCount += 1;
     }
-    func_801D6CE4(g_SaveSlotFirst, &D_801448D8);
+    func_801D6CE4(g_SaveSlotFirst, (u8*)&g_SaveData);
 }
 #else
 INCLUDE_ASM(SAVE_BuildSlotImage);

@@ -21,7 +21,7 @@ MATCH void func_801D42F0(void) {
     D_801485E0                  = 0xB6;
     sel                         = &D_80148656;
     D_801485E2                  = *sel * 0x36 + 0x3E;
-    count                       = Party_CountOrder(0);
+    count                       = Party_CountOrder(PARTY_ORDER_FIELD);
     input                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     old                         = *sel;
     if (input & PADLup) {
@@ -41,7 +41,7 @@ MATCH void func_801D42F0(void) {
     }
 
     if (g_InputPressed & D_80145AC2) {
-        result = func_801E8C9C(g_CharSlot[D_80144F5A[*current]], *items, 0) & BYTE_MASK;
+        result = func_801E8C9C(g_CharSlot[g_PartyFieldOrder[*current]], *items, 0) & BYTE_MASK;
         if ((result == 0) || (result == 4)) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             *counts -= 1;

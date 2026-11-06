@@ -31,7 +31,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s0 = var_s2 + 4;
     var_s0 <<= 0x10;
     var_s0     = var_s0 >> 0x10;
-    temp_v0_57 = *(u16*)((u8*)&D_80033A08 + ((D_80144952 << 6) | 0x20));
+    temp_v0_57 = *(u16*)((u8*)&D_80033A08 + ((g_WindowStyle << 6) | 0x20));
     temp_v0_61 = temp_v0_57 & HALF_MASK;
     var_s6     = (temp_v0_61 >> 2) & 0xF8;
     var_s5     = (temp_v0_61 >> 7) & 0xF8;

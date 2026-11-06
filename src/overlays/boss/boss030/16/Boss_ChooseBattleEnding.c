@@ -8,7 +8,7 @@ MATCH void Boss_ChooseBattleEnding(void) {
         (*visit_count)++;
         g_SceneState.step_05 = 0xC;
         func_801DDED8();
-        g_SndBgmId = 0x5A;
+        g_SndBGMId = 0x5A;
     } else {
         func_801DDF00();
     }

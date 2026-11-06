@@ -46,7 +46,7 @@ MATCH void func_801F7924(void) {
         g_AreaScrollTargetY = 0x138000;
         func_80153DE8();
         g_AreaSceneMode = 4;
-        SND_RequestBgm(0x96);
+        SND_RequestBGM(0x96);
         UI_SetMode(1);
         func_801F88CC(0, 0x80);
         step = &D_80146874;
@@ -68,7 +68,7 @@ MATCH void func_801F7A08(void) {
     timer = &D_80146875;
     *timer -= 1;
     if (*timer == 0) {
-        SND_PlayBgm(0x96, 0x64, 0x8);
+        SND_PlayBGM(0x96, 0x64, 0x8);
         *timer = 0x1E;
         D_80146874 += 1;
     }
@@ -246,7 +246,7 @@ MATCH void func_801F7FF0(void) {
     u32 row;
 
     if (g_UiWindowEffectBusy == 0) {
-        bgm = &g_SndBgmId;
+        bgm = &g_SndBGMId;
         row = *bgm * 4;
         SND_StopSequence(g_SelectionCues[row], D_80181EBB[row]);
         stage           = &D_80146873;
@@ -312,7 +312,7 @@ MATCH void func_801F81F8(void) {
     UI_SetMode(1);
     CallbackWait(1);
     g_AreaDrawFlags = 0x1F;
-    SND_PlayBgm(0xA0, 0x64, 0x8);
+    SND_PlayBGM(0xA0, 0x64, 0x8);
     step = &D_80146874;
     *step += 1;
 }
@@ -386,7 +386,11 @@ MATCH void func_801F8404(void) {
 /* blocker: sum register; first diff: +0x18 addiu v0,v0,2 (candidate) against addiu a1,v0,2 (retail). */
 INCLUDE_ASM(func_801F8480);
 
-/* nonmatching: timer D_80146875 counts up; at 0x80 it sets D_80146867 = 0x3C, the timer to 0x1E, D_801F9DD8 = 0, steps D_80146874, starts EMI_LoaderStreamInitSlot(0x260), then calls func_801F8FAC(0xE0, 0xBE, shade, 1) and func_801F8B10(0x4B0, 0x80). Candidate is 8 bytes short (first differing instruction: bnez at +0x28 targets +0x78 against +0x70): retail sets a0, a1 and a2 inside the branch and ends it with j, and sets only a1 on the other path. */
+/* nonmatching: timer D_80146875 counts up; at 0x80 it sets D_80146867 = 0x3C, the timer to 0x1E, D_801F9DD8 = 0, steps
+   D_80146874, starts EMI_LoaderStreamInitSlot(0x260), then calls func_801F8FAC(0xE0, 0xBE, shade, 1) and
+   func_801F8B10(0x4B0, 0x80). Candidate is 8 bytes short (first differing instruction: bnez at +0x28 targets +0x78
+   against +0x70): retail sets a0, a1 and a2 inside the branch and ends it with j, and sets only a1 on the other path.
+*/
 MATCH void func_801F84F4(void) {
     u8* timer;
     u8  value;
@@ -414,7 +418,7 @@ MATCH void func_801F8664(void) {
     u8* state;
 
     if ((g_InputPressed & PADRdown) || D_801F9DD8 != 0) {
-        SND_StartDecrescendo(g_SelectionCues[g_SndBgmId * 4], D_80181EBB[g_SndBgmId * 4], 100, 16);
+        SND_StartDecrescendo(g_SelectionCues[g_SndBGMId * 4], D_80181EBB[g_SndBGMId * 4], 100, 16);
         UI_SetMode(0xD);
         state = &D_80146874;
         (*state)++;
@@ -428,7 +432,7 @@ MATCH void func_801F8710(void) {
     u8* bgm;
 
     if (g_UiWindowEffectBusy == 0) {
-        bgm = &g_SndBgmId;
+        bgm = &g_SndBGMId;
         SND_StopSequence(g_SelectionCues[*bgm * 4], D_80181EBB[*bgm * 4]);
         *bgm = GAME_NONE;
         SND_SetBankLayout(0);
@@ -521,10 +525,9 @@ MATCH void func_801F9160(s16 x, s16 y) {
     setRGB0(prim, 0x80, 0x80, 0x80);
     prim->clut = 0x7B85;
     prim->v0   = 0x40;
-    prim->w    = 0x58;
     setXY0(prim, x, y);
     prim->u0 = 0;
-    prim->h  = 0x12;
+    setWH(prim, 0x58, 0x12);
     GFX_AddPrim(1, 0x14);
 }
 

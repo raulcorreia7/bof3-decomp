@@ -4,6 +4,7 @@
 /* The world03/area125/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
+#include "common/vector.h"
 #include "overlays/area/world03.h"
 #include "work/area_spad.h"
 
@@ -15,18 +16,17 @@
 #define SCRATCH_COLUMN_COUNT 16
 
 typedef struct AreaSprite {
-    u8  unk_00[3];
-    u8  flags_03;  /* the shade of the sprite */
-    u16 half_size; /* the projected half-size */
-    u8  unk_06[2];
-    s32 origin_x; /* the camera x */
-    s32 origin_y; /* the camera y */
-    s32 unk_10;
-    s32 unk_14;
-    s32 unk_18;
-    s32 unk_1C;
-    s32 unk_20;
-    s32 unk_24;
+    u8       unk_00[3];
+    u8       flags_03;  /* the shade of the sprite */
+    u16      half_size; /* the projected half-size */
+    u8       unk_06[2];
+    Point2DL origin;
+    s32      unk_10;
+    s32      unk_14;
+    s32      unk_18;
+    s32      unk_1C;
+    s32      unk_20;
+    s32      unk_24;
 } AreaSprite;
 
 extern u8 D_801F364C[];

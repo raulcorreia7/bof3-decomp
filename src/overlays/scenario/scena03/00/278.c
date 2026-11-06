@@ -490,13 +490,13 @@ MATCH void func_801FC5FC(void) {
     Item_VitalAdd(VITAL_ITEM_FLIER);
     Message_StartAreaMessage(0x2F);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    SND_PauseBgm(g_SndBgmId);
+    SND_PauseBGM(g_SndBGMId);
     SND_StartXAStream(2, 1);
     while (!(SND_IsXAIdle() & 0xFF)) {
         func_801992B8();
         CallbackWait(1U);
     }
-    SND_ResumeBgm(g_SndBgmId);
+    SND_ResumeBGM(g_SndBGMId);
 }
 
 MATCH void func_801FC688(void) {
@@ -642,13 +642,13 @@ MATCH void func_801FCE18(void) {
 
 MATCH void func_801FCE6C(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0);
-    D_80144F5A[0] = 255;
-    D_80144F5B    = 255;
-    D_80144F5C    = 255;
-    D_80144F5D[0] = 255;
-    D_80144F5E[0] = 255;
-    D_80144F5F    = 255;
-    g_PartySize   = 0;
+    g_PartyFieldOrder[0]  = 255;
+    D_80144F5B            = 255;
+    D_80144F5C            = 255;
+    g_PartyBattleOrder[0] = 255;
+    D_80144F5E[0]         = 255;
+    D_80144F5F            = 255;
+    g_PartySize           = 0;
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
 }
 

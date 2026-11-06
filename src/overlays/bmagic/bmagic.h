@@ -4,6 +4,7 @@
 /* Declarations shared by two or more bmagic images; an image header that
  * reads one includes this file. */
 
+#include "common/vector.h"
 #include "game.h"
 #include "gfx/prim.h"
 #include "overlays/battle/battle.h"
@@ -94,16 +95,8 @@
         (WORK)->header.step += 1;                                                      \
     }
 
-/* One remembered position of an effect's trail; each trail holds
- * BMAGIC_TRAIL_LENGTH of them, one trail per work byte unk_04. */
-typedef struct BmagicTrailPoint {
-    s16 x;
-    s16 y;
-} BmagicTrailPoint;
-
-ASSERT_SIZE(BmagicTrailPoint, 0x4);
-ASSERT_OFFSET(BmagicTrailPoint, x, 0x00);
-ASSERT_OFFSET(BmagicTrailPoint, y, 0x02);
+/* One remembered position of an effect's trail. */
+typedef Point2D TrailPoint;
 
 #define BMAGIC_TRAIL_LENGTH 32
 
@@ -130,14 +123,14 @@ ASSERT_OFFSET(BmagicTrailPoint, y, 0x02);
 #define g_Task ((PartyBattler*)g_Task)
 
 /* Go to the effect's next step. */
-static inline void Bmagic_NextStep(void) {
+static inline void BMagic_NextStep(void) {
     PartyBattler* work = g_Task;
 
     work->header.step = (u8)(work->header.step + 1);
 }
 
 /* Clear the local effect work. */
-static inline void Bmagic_ResetLocalWork(void) {
+static inline void BMagic_ResetLocalWork(void) {
     g_Task->header.flags = 0;
     g_Task->header.mode  = 0;
     g_Task->header.step  = 0;
@@ -146,22 +139,22 @@ static inline void Bmagic_ResetLocalWork(void) {
 }
 
 /* Run the task handler the spad task byte selects. */
-static inline void Bmagic_DispatchTaskPair(Callback first, Callback second) {
+static inline void BMagic_DispatchTaskPair(Callback first, Callback second) {
     Callback handlers[2] = {first, second};
 
     handlers[g_Task->header.mode]();
 }
 
-typedef struct BmagicEffectFuncs {
+typedef struct BMagicEffectFuncs {
     Callback handlers[6];
-} BmagicEffectFuncs;
+} BMagicEffectFuncs;
 
-ASSERT_SIZE(BmagicEffectFuncs, 0x18);
-ASSERT_OFFSET(BmagicEffectFuncs, handlers, 0x00);
+ASSERT_SIZE(BMagicEffectFuncs, 0x18);
+ASSERT_OFFSET(BMagicEffectFuncs, handlers, 0x00);
 
 /* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
  * func_801EF33C dispatches on mode. */
-typedef struct BmagicEffectWork {
+typedef struct BMagicEffectWork {
     /* 0x00 */ TaskHeader header;
     /* 0x03 */ u8         unk_03;
     /* 0x04 */ u8         unk_04;
@@ -174,23 +167,44 @@ typedef struct BmagicEffectWork {
     /* 0x0E */ u8         pad_0E[0x12];
     /* 0x20 */ s16        unk_20;
     /* 0x22 */ u16        unk_22;
-} BmagicEffectWork;
+} BMagicEffectWork;
 
-ASSERT_OFFSET(BmagicEffectWork, unk_03, 0x03);
-ASSERT_OFFSET(BmagicEffectWork, unk_04, 0x04);
-ASSERT_OFFSET(BmagicEffectWork, timer_05, 0x05);
-ASSERT_OFFSET(BmagicEffectWork, unk_06, 0x06);
-ASSERT_OFFSET(BmagicEffectWork, unk_08, 0x08);
-ASSERT_OFFSET(BmagicEffectWork, unk_0A, 0x0A);
-ASSERT_OFFSET(BmagicEffectWork, phase_0C, 0x0C);
-ASSERT_OFFSET(BmagicEffectWork, unk_20, 0x20);
-ASSERT_OFFSET(BmagicEffectWork, unk_22, 0x22);
+ASSERT_SIZE(BMagicEffectWork, 0x24);
+
+ASSERT_OFFSET(BMagicEffectWork, unk_03, 0x03);
+ASSERT_OFFSET(BMagicEffectWork, unk_04, 0x04);
+ASSERT_OFFSET(BMagicEffectWork, timer_05, 0x05);
+ASSERT_OFFSET(BMagicEffectWork, unk_06, 0x06);
+ASSERT_OFFSET(BMagicEffectWork, unk_08, 0x08);
+ASSERT_OFFSET(BMagicEffectWork, unk_0A, 0x0A);
+ASSERT_OFFSET(BMagicEffectWork, phase_0C, 0x0C);
+ASSERT_OFFSET(BMagicEffectWork, unk_20, 0x20);
+ASSERT_OFFSET(BMagicEffectWork, unk_22, 0x22);
 
 extern MagicModule       D_801EEC00;
-/* D_801EF3E8 (magic161), D_801EF414 (magic145), D_801EF420 (magic159), D_801EF510 (magic065), D_801EF658 (magic054), D_801EF6CC (magic154), D_801EF718 (magic166), D_801EF72C (magic138), D_801EF770 (magic218), D_801EF784 (magic158), D_801EF7A0 (magic075), D_801EF818 (magic048), D_801EF89C (magic009), D_801EF8A0 (magic213), D_801EF8BC (magic115), D_801EF8D8 (magic045), D_801EF990 (magic017), D_801EF9A4 (magic038), D_801EF9B4 (magic146), D_801EFA00 (magic219), D_801EFA44 (magic130), D_801EFA84 (magic081), D_801EFA9C (magic050), D_801EFA9C (magic111), D_801EFB70 (magic042), D_801EFBB0 (magic012), D_801EFC2C (magic223), D_801EFC6C (magic040), D_801EFC88 (magic043), D_801EFCBC (magic101), D_801EFCC8 (magic068), D_801EFD54 (magic123), D_801EFD58 (magic132), D_801EFD8C (magic041), D_801EFDCC (magic100), D_801EFE00 (magic021), D_801EFE58 (magic004), D_801EFEB8 (magic020), D_801EFEE8 (magic143), D_801EFEEC (magic058), D_801EFF34 (magic046), D_801F0028 (magic088), D_801F0048 (magic105), D_801F0064 (magic066), D_801F00F8 (magic137), D_801F02A4 (magic079), D_801F02CC (magic122), D_801F0340 (magic098), D_801F0354 (magic086), D_801F0388 (magic225), D_801F03BC (magic013), D_801F0400 (magic063), D_801F041C (magic169), D_801F0424 (magic039), D_801F046C (magic110), D_801F0488 (magic076), D_801F04A8 (magic096), D_801F04B4 (magic001), D_801F04B8 (magic067), D_801F04D0 (magic144), D_801F04F8 (magic069), D_801F0508 (magic087), D_801F0550 (magic053), D_801F0554 (magic074), D_801F05B4 (magic129), D_801F05D8 (magic125), D_801F0668 (magic073), D_801F066C (magic059), D_801F06DC (magic220), D_801F0744 (magic056), D_801F0794 (magic103), D_801F07BC (magic092), D_801F0878 (magic078), D_801F089C (magic093), D_801F08B0 (magic167), D_801F08DC (magic124), D_801F08E8 (magic104), D_801F0988 (magic173), D_801F0994 (magic099), D_801F0A14 (magic044), D_801F0A24 (magic006), D_801F0AC0 (magic097), D_801F0B00 (magic003), D_801F0B74 (magic172), D_801F0B94 (magic113), D_801F0BB0 (magic060), D_801F0C10 (magic062), D_801F0C38 (magic121), D_801F0C40 (magic226), D_801F0CA8 (magic120), D_801F0D14 (magic082), D_801F0D54 (magic222), D_801F0EEC (magic083), D_801F121C (magic114), D_801F125C (magic126), D_801F1394 (magic064), D_801F1630 (magic015), D_801F1BC4 (magic131), D_801F1BEC (magic008), D_801F24A4 (magic151) */
+/* D_801EF3E8 (magic161), D_801EF414 (magic145), D_801EF420 (magic159), D_801EF510 (magic065), D_801EF658 (magic054),
+   D_801EF6CC (magic154), D_801EF718 (magic166), D_801EF72C (magic138), D_801EF770 (magic218), D_801EF784 (magic158),
+   D_801EF7A0 (magic075), D_801EF818 (magic048), D_801EF89C (magic009), D_801EF8A0 (magic213), D_801EF8BC (magic115),
+   D_801EF8D8 (magic045), D_801EF990 (magic017), D_801EF9A4 (magic038), D_801EF9B4 (magic146), D_801EFA00 (magic219),
+   D_801EFA44 (magic130), D_801EFA84 (magic081), D_801EFA9C (magic050), D_801EFA9C (magic111), D_801EFB70 (magic042),
+   D_801EFBB0 (magic012), D_801EFC2C (magic223), D_801EFC6C (magic040), D_801EFC88 (magic043), D_801EFCBC (magic101),
+   D_801EFCC8 (magic068), D_801EFD54 (magic123), D_801EFD58 (magic132), D_801EFD8C (magic041), D_801EFDCC (magic100),
+   D_801EFE00 (magic021), D_801EFE58 (magic004), D_801EFEB8 (magic020), D_801EFEE8 (magic143), D_801EFEEC (magic058),
+   D_801EFF34 (magic046), D_801F0028 (magic088), D_801F0048 (magic105), D_801F0064 (magic066), D_801F00F8 (magic137),
+   D_801F02A4 (magic079), D_801F02CC (magic122), D_801F0340 (magic098), D_801F0354 (magic086), D_801F0388 (magic225),
+   D_801F03BC (magic013), D_801F0400 (magic063), D_801F041C (magic169), D_801F0424 (magic039), D_801F046C (magic110),
+   D_801F0488 (magic076), D_801F04A8 (magic096), D_801F04B4 (magic001), D_801F04B8 (magic067), D_801F04D0 (magic144),
+   D_801F04F8 (magic069), D_801F0508 (magic087), D_801F0550 (magic053), D_801F0554 (magic074), D_801F05B4 (magic129),
+   D_801F05D8 (magic125), D_801F0668 (magic073), D_801F066C (magic059), D_801F06DC (magic220), D_801F0744 (magic056),
+   D_801F0794 (magic103), D_801F07BC (magic092), D_801F0878 (magic078), D_801F089C (magic093), D_801F08B0 (magic167),
+   D_801F08DC (magic124), D_801F08E8 (magic104), D_801F0988 (magic173), D_801F0994 (magic099), D_801F0A14 (magic044),
+   D_801F0A24 (magic006), D_801F0AC0 (magic097), D_801F0B00 (magic003), D_801F0B74 (magic172), D_801F0B94 (magic113),
+   D_801F0BB0 (magic060), D_801F0C10 (magic062), D_801F0C38 (magic121), D_801F0C40 (magic226), D_801F0CA8 (magic120),
+   D_801F0D14 (magic082), D_801F0D54 (magic222), D_801F0EEC (magic083), D_801F121C (magic114), D_801F125C (magic126),
+   D_801F1394 (magic064), D_801F1630 (magic015), D_801F1BC4 (magic131), D_801F1BEC (magic008), D_801F24A4 (magic151) */
 extern Callback          g_BMagicEffectFuncs[];
-extern BmagicEffectWork* D_801F17B0;
-extern BmagicEffectWork* D_801F17B4;
+extern BMagicEffectWork* D_801F17B0;
+extern BMagicEffectWork* D_801F17B4;
 
 void func_800A9610(u8 selector, u16 flags);
 /* Per-image effect entry points whose name is a different symbol in another

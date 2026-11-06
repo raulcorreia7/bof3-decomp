@@ -17,7 +17,7 @@ MATCH void func_801D159C(s16 panel_x, s16 panel_y) {
         value = 0;
     } else {
         /* FAKE: retail reads the low byte of the y integer half (lbu). */
-        value = 0x3E - *(u8*)&COORD_INT(g_ActorSlots[0].y);
+        value = 0x3E - *(u8*)&COORD_INT(g_ActorSlots[0].pos.y);
     }
 
     CLAMP_MIN(value, 0);

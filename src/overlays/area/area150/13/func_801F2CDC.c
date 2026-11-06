@@ -3,8 +3,8 @@
 MATCH void func_801F2CDC(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_ARMED()) {
-        D_801448EC = 0xE;
+        g_SceneEventStep = 0xE;
     } else {
-        D_801448EC = 0xC;
+        g_SceneEventStep = 0xC;
     }
 }

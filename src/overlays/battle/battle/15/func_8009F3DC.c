@@ -2,6 +2,6 @@
 
 MATCH void func_8009F3DC(void) {
     g_BattleActionType = BATTLE_ACTION_ABILITY;
-    g_BattleActionId   = 0x55;
+    g_BattleActionId   = ABILITY_MIGHT;
     func_800A403C(0);
 }

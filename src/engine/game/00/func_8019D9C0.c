@@ -19,8 +19,8 @@ loop:
     /* Third coord word follows y.fixed with no named field. */
     *(dst2 - 4) = ((s32*)&work->pos.x.fixed)[2];
     count += 1;
-    *(dst2 - 2) = (RANDOM_MASK(0xFF)) - 0x80;
-    *(dst2 - 1) = (RANDOM_MASK(0xFF)) - 0x80;
+    *(dst2 - 2) = RANDOM_MASK(0xFF) - 0x80;
+    *(dst2 - 1) = RANDOM_MASK(0xFF) - 0x80;
     *dst2       = RANDOM_MASK(0x7F);
     VectorNormal((VECTOR*)(dst + 4), (VECTOR*)(dst + 4));
     *dst2 = *dst2 << 9;

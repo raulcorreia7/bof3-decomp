@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* The channel record at g_UiWindowChannel is addressed by byte offsets from its flag halfword: +0 flags, +2 a result byte,
- * +3 a repeat count, +0xC the script cursor, +0x10 the return cursor. */
+/* The channel record at g_UiWindowChannel is addressed by byte offsets from its flag halfword: +0 flags, +2 a result
+ * byte, +3 a repeat count, +0xC the script cursor, +0x10 the return cursor. */
 #define CHAN_CURSOR(base) (*(u8**)((base) + 0xC))
 #define CHAN_RETURN(base) (*(u8**)((base) + 0x10))
 #define STEP_TABLE        ((u8*)D_8017F5B4)

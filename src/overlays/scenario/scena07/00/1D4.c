@@ -293,9 +293,8 @@ MATCH void func_801F8804(u8 shade) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    tile->w = 320;
     setXY0(tile, 0, 0);
-    tile->h = 240;
+    setWH(tile, 320, 240);
     setRGB0(tile, shade, shade, shade);
     GFX_AddPrim(1, 0x10);
 }
@@ -451,7 +450,7 @@ MATCH s32 func_801FD960(s32 arg0, s32 arg1) {
         if ((SYS_TestFlag(g_SceneFlags, 3) == 0) && (arg1 <= 0x200000)) {
             if (((arg0 >> 0x10) - 0x4A) < 2U) {
                 Game_SetScriptActive();
-                value = g_SndBgmId * 4;
+                value = g_SndBGMId * 4;
                 SND_StartDecrescendo(*(g_SelectionCues + value), *(D_80181EBB + value), 0x64, 0x20);
                 D_80146874 = 4;
                 D_80146875 = 0;

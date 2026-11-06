@@ -34,9 +34,9 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
     D_80143F06 = flag;
     D_80143F0C = word_b;
     if (seed == 0xFFu)
-        g_SndBgmId = 0xFFu;
+        g_SndBGMId = 0xFFu;
     else
-        SND_StartBgm(seed, 100, 8);
+        SND_StartBGM(seed, 100, 8);
 
     if (g_GameAreaId != selection_seed) {
         if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
@@ -67,12 +67,12 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
         *(GameCopyBlock*)D_801581E0 = *(GameCopyBlock*)s_ScriptCopyBlock;
     }
 
-    if ((LOB(g_SceneState.flags_01) & SCENE_STATE_CHAPTER_ADVANCE) != 0) {
-        counter                        = LOBU(g_SceneState.scenario_id);
-        LOBU(g_SceneState.scenario_id) = (u8)(counter + 1);
+    if ((g_SceneState.flags_01 & SCENE_STATE_CHAPTER_ADVANCE) != 0) {
+        counter                  = g_SceneState.scenario_id;
+        g_SceneState.scenario_id = (u8)(counter + 1);
         if ((s8)(counter + 1) == 16) {
-            LOBU(g_SceneState.scenario_id) = (u8)(counter + 2);
-            Scene_Start(LOBU(g_SceneState.scenario_id));
+            g_SceneState.scenario_id = (u8)(counter + 2);
+            Scene_Start(g_SceneState.scenario_id);
         }
     }
 

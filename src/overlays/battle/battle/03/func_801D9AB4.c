@@ -12,7 +12,7 @@ MATCH void func_801D9AB4(s16 x, s16 y, s32 shape_index, s32 shade) {
            x + *(s16*)((u8*)&D_801EAD30 + shape_index + 8), y + *(s16*)((u8*)&D_801EAD30 + shape_index + 0xA),
            x + *(s16*)((u8*)&D_801EAD30 + shape_index + 0xC), y + *(s16*)((u8*)&D_801EAD30 + shape_index + 0xE));
     shade &= BYTE_MASK;
-    selector = &D_80144952;
+    selector = &g_WindowStyle;
     /* A halfword read: the palette entry's low five bits are one channel. */
     setRGB0(prim, PSX_COLOR_R(*(volatile u16*)(MEM_PTR(u8, 0x80033A08u) + (((*selector * 2) + shade) << 5))) << 3,
             PSX_COLOR_G(*(volatile u16*)(MEM_PTR(u8, 0x80033A08u) + (((*selector * 2) + shade) << 5))) << 3,

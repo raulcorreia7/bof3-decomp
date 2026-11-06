@@ -14,7 +14,7 @@ MATCH void func_801D5114(void) {
 
     func_801D4A44();
     kind = D_80148504.group;
-    mask = 1 << g_CharSlot[D_80144F5A[D_80148656]];
+    mask = 1 << g_CharSlot[g_PartyFieldOrder[D_80148656]];
     for (i = 0; i < 127; i++) {
         left  = D_801C893C[kind];
         right = D_801C8950[kind];

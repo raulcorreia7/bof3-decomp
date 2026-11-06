@@ -17,5 +17,5 @@ MATCH void func_801F2DC8(void) {
     g_MessageRequest = table.pair[selection].first;
     /* FAKE: Retail stores the first field before it loads the second. */
     MATCH_FAKE_BARRIER();
-    D_801448EC = table.pair[selection].second;
+    g_SceneEventStep = table.pair[selection].second;
 }

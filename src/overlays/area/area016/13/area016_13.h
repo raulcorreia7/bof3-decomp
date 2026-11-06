@@ -7,7 +7,7 @@
 
 #include "overlays/area/world00.h"
 #include "work/area_spad.h"
-#include <abs.h>
+#include "common/util.h"
 
 #define AREA_SCENE_RECORD    0xF
 
@@ -39,14 +39,14 @@ extern u8            D_801F513C[88];
 #define AREA_HUD_SPRITE_CELLS D_801F513C
 extern WorldMapMarker D_801F5194[6];
 #define AREA_HUD_MASK_TABLE D_801F5194
-extern Callback    D_801F51AC[3];
-extern ScreenPoint D_801F51B8[4];
-extern u8          D_801F51C8[8];
-extern u8          D_801F51C9[]; /* the second byte of each D_801F51C8 pair */
-extern Callback    D_801F51D0[2];
-extern u8          D_801F51D8[4];
-extern u8          D_801F51DC[4];
-extern u8          D_801F51E0[2];
+extern Callback D_801F51AC[3];
+extern UPoint2D D_801F51B8[4];
+extern u8       D_801F51C8[8];
+extern u8       D_801F51C9[]; /* the second byte of each D_801F51C8 pair */
+extern Callback D_801F51D0[2];
+extern u8       D_801F51D8[4];
+extern u8       D_801F51DC[4];
+extern u8       D_801F51E0[2];
 
 void func_801F30EC(void);
 void func_801F3224(void);

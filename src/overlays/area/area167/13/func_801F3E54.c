@@ -4,8 +4,8 @@ MATCH void func_801F3E54(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {
         Game_SetScriptActive();
-        g_ScriptVars[3] = 0x60;
-        D_801448EB      = 0x20;
-        D_801448EC      = 0xA;
+        g_ScriptVars[3]  = 0x60;
+        g_SceneEventMode = 0x20;
+        g_SceneEventStep = 0xA;
     }
 }

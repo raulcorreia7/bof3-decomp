@@ -1,7 +1,9 @@
 /* Spawns one to three actor records of random kind at the focus point and
  * sets each one's height from the height query. One definition shared by
  * the world area overlays; every change here must verify every member. */
-/*  func_801F41BC (area016), func_801F407C (area152), func_801F40F0 (area033), func_801F4128 (area151), func_801F41BC (area045), func_801F41BC (area115), func_801F41D0 (area121), func_801F41EC (area087), func_801F41F4 (area065) , func_801F4D1C (area088) */
+/* func_801F41BC (area016), func_801F407C (area152), func_801F40F0 (area033), func_801F4128 (area151), func_801F41BC
+   (area045), func_801F41BC (area115), func_801F41D0 (area121), func_801F41EC (area087), func_801F41F4 (area065) ,
+   func_801F4D1C (area088) */
 MATCH void Actor_SpawnRandomGroup(void) {
     s32  i;
     s16  count;
@@ -37,13 +39,13 @@ MATCH void Actor_SpawnRandomGroup(void) {
         if (index == GAME_NONE) {
             break;
         }
-        g_ActorSlots[index].header.flags = 1;
-        g_ActorSlots[index].type         = 0x16;
-        g_ActorSlots[index].header.mode  = 1;
-        g_ActorSlots[index].unk_06       = (u8)i;
-        g_ActorSlots[index].unk_08       = (u8)(kind >> 4);
-        distance                         = Area_SampleHeight(D_80145EC4[0], D_80145EC4[1]) + 0x400;
-        COORD_INT(g_ActorSlots[index].z) = distance;
+        g_ActorSlots[index].header.flags     = 1;
+        g_ActorSlots[index].type             = 0x16;
+        g_ActorSlots[index].header.mode      = 1;
+        g_ActorSlots[index].unk_06           = (u8)i;
+        g_ActorSlots[index].unk_08           = (u8)(kind >> 4);
+        distance                             = Area_SampleHeight(D_80145EC4[0], D_80145EC4[1]) + 0x400;
+        COORD_INT(g_ActorSlots[index].pos.z) = distance;
         i++;
     } while (i < count);
 }

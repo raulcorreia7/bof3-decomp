@@ -19,10 +19,6 @@ typedef struct UvRect {
 
 ASSERT_SIZE(UvRect, 0x4);
 
-/* The game's own sprite primitives are the PsyQ SDK's records: the panel icon
- * is an `SPRT_8` (the menu names it `MenuIconPrim` in menu/panel.h), written at
- * the primitive cursor `g_GfxPrimCursor`. */
-
 /* The screen, in pixels. */
 #define SCREEN_WIDTH                 320
 

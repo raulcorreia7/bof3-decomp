@@ -23,7 +23,7 @@ MATCH bool func_801B544C(void) {
         }
     }
     if (!(found & BYTE_MASK)) {
-        if (RANDOM_MASK(1)) {
+        if RANDOM_MASK (1) {
             g_GameState->mode_12B.u8_value = 9;
             Actor_RequestScript(g_Task->direction_08);
             TASK_BYTES[0x9] = 2;

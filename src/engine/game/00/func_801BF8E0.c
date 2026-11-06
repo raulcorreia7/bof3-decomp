@@ -40,7 +40,7 @@ MATCH void func_801BF8E0(void) {
     index = 0;
     limit = g_PartySize;
     if (limit > 0) {
-        key = D_80144F5A[0];
+        key = g_PartyFieldOrder[0];
         /* src doubles as the bound: retail keeps both in a0 (a separate local 89.26%). */
         src = limit;
         dst = 0;
@@ -67,9 +67,7 @@ MATCH void func_801BF8E0(void) {
         adx = abs(dx);
         dy  = abs(*py - y);
         *py = *((s32*)((u8*)&D_80145EC8 + row));
-        if (adx < dy) {
-            adx = dy;
-        }
+        adx = MAX(adx, dy);
         ret = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight;
         adx = (u32)adx >> 13;
         adx &= BYTE_MASK;

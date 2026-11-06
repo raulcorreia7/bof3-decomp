@@ -24,7 +24,7 @@ MATCH void func_801D62DC(void) {
             }
         }
     } else {
-        selection_ptr  = &g_SndBgmId;
+        selection_ptr  = &g_SndBGMId;
         *selection_ptr = 0xFF;
         selection      = 0;
         if (g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
@@ -37,8 +37,8 @@ MATCH void func_801D62DC(void) {
         g_AreaWalkFlags &= ~AREA_WALK_BUSY_ALL;
         /* FAKE: keeps the Party_CountOrder argument out of the load delay slot (pure C 96.05). */
         MATCH_FAKE_BARRIER();
-        g_PartySize = Party_CountOrder(0);
-        Party_BuildBattlers(0);
+        g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
+        Party_BuildBattlers(PARTY_ORDER_FIELD);
         i = 0;
         if (g_PartySize != 0) {
             base = selection * 0x30;

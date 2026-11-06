@@ -14,7 +14,7 @@ MATCH void func_801DA984(void) {
         func_801DB510();
         i     = 0;
         value = 4;
-        for (; i < Party_CountOrder(0); i++) {
+        for (; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
             D_80148333[((i + 4) * 9) << 2] = value;
         }
         g_MenuPanelTasks[7].state  = 2;

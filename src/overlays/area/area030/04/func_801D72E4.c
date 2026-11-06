@@ -15,13 +15,13 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     s16 bar_y;
     s16 bar_x;
     s32 count;
-    s32 bar_position;
+    s32 scroll_pos;
     s32 member;
     u8* text;
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
 
-    UI_DrawWindow(panel_x & HALF_MASK, panel_y & HALF_MASK, 0xF2, 0x9F, 0xF0, (s32)D_80144952);
+    UI_DrawWindow(panel_x & HALF_MASK, panel_y & HALF_MASK, 0xF2, 0x9F, 0xF0, (s32)g_WindowStyle);
     if (FISHING_STATE->counter_08 != 0) {
         if (FISHING_STATE->step_timer_09 == 0) {
             health = FISHING_STATE->bounce_3C.half.unk_3C;
@@ -30,9 +30,9 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
                 FISHING_STATE->bounce_3C.half.key_3E = (s16)FISHING_STATE->bounce_3C.half.unk_3C;
             }
             if ((s8)FISHING_STATE->counter_08 > 0) {
-                bar_position           = FISHING_STATE->step_14 - 1;
-                FISHING_STATE->step_14 = bar_position;
-                if (bar_position < 0) {
+                scroll_pos             = FISHING_STATE->step_14 - 1;
+                FISHING_STATE->step_14 = scroll_pos;
+                if (scroll_pos < 0) {
                     FISHING_STATE->step_14 = 0x35;
                 }
             }
@@ -40,8 +40,8 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
             FISHING_STATE->step_index_0A = (u8)(FISHING_STATE->step_index_0A + 1);
         }
         if (FISHING_STATE->step_index_0A == 0) {
-            bar_position = FISHING_STATE->step_14;
-            if (bar_position == FISHING_STATE->step_limit_20) {
+            scroll_pos = FISHING_STATE->step_14;
+            if (scroll_pos == FISHING_STATE->step_limit_20) {
                 FISHING_STATE->step_timer_09             = 0U;
                 FISHING_STATE->counter_08                = 0U;
                 member                                   = Actor_FindFreeSlot() & BYTE_MASK;
@@ -50,10 +50,10 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
                 g_ActorSlots[member].header.mode         = 0x10;
                 *(s16*)&g_ActorSlots[member].header.step = (s16)FISHING_STATE->bounce_3C.half.key_3E;
             } else {
-                bar_position = bar_position - 1;
+                scroll_pos = scroll_pos - 1;
                 if ((s8)FISHING_STATE->counter_08 > 0) {
-                    FISHING_STATE->step_14 = bar_position;
-                    if (bar_position < 0) {
+                    FISHING_STATE->step_14 = scroll_pos;
+                    if (scroll_pos < 0) {
                         FISHING_STATE->step_14 = 0x35;
                     }
                 }
@@ -64,9 +64,9 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
             if (FISHING_STATE->step_index_0A == 4) {
                 FISHING_STATE->step_index_0A = 0U;
                 if ((s8)FISHING_STATE->counter_08 < 0) {
-                    bar_position           = FISHING_STATE->step_14 + 1;
-                    FISHING_STATE->step_14 = bar_position;
-                    if (bar_position >= 0x36) {
+                    scroll_pos             = FISHING_STATE->step_14 + 1;
+                    FISHING_STATE->step_14 = scroll_pos;
+                    if (scroll_pos >= 0x36) {
                         FISHING_STATE->step_14 = 0;
                     }
                 }
@@ -102,8 +102,8 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
             bar_y += 0xD;
         } while (count < bar_count);
     }
-    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 0xF2, 0xE, 0, (s32)D_80144952);
-    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 0x94) & HALF_MASK, 0xF2, 0xB, 0x30, (s32)D_80144952);
+    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 0xF2, 0xE, 0, (s32)g_WindowStyle);
+    UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 0x94) & HALF_MASK, 0xF2, 0xB, 0x30, (s32)g_WindowStyle);
     health = FISHING_STATE->bounce_3C.half.unk_3C;
     UI_DrawText((s16)(panel_x + 0x3D), (s16)(panel_y + 6), 0, 0xFFU,
                 ((u8*)&D_80010000 + D_80010000[D_801E2114[health]]));

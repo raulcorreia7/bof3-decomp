@@ -4,7 +4,7 @@
 MATCH void Menu_DrawFilledPanel(s16 x, s16 y, s16 width, s32 height) {
     u8 i;
 
-    UI_DrawWindow((x + 3) & HALF_MASK, (y + 3) & HALF_MASK, (u8)width * 8 + 45, (u8)height * 8 + 24, 0, D_80144952);
+    UI_DrawWindow((x + 3) & HALF_MASK, (y + 3) & HALF_MASK, (u8)width * 8 + 45, (u8)height * 8 + 24, 0, g_WindowStyle);
     GFX_AddDrawMode(GetTPage(0, 0, 832, 256) & HALF_MASK);
 
     UI_DrawSprite(x, y, 0, 1);

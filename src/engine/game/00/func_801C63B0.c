@@ -15,13 +15,13 @@ MATCH s32 func_801C63B0(void) {
     STACK_PADS(u8, 8);
 
     mode  = g_PartyFormation;
-    count = Party_CountOrder(1);
+    count = Party_CountOrder(PARTY_ORDER_BATTLE);
     slot  = D_801CD944;
     i     = 0;
     for (; i < BATTLE_PARTY_SLOT_COUNT; i++) {
         s_PartySlotOrder[i] = i;
         slot->active        = 0;
-        if ((g_CharSlot[D_80144F5D[i]] == 2) || (g_CharSlot[D_80144F5D[i]] == 6)) {
+        if ((g_CharSlot[g_PartyBattleOrder[i]] == 2) || (g_CharSlot[g_PartyBattleOrder[i]] == 6)) {
             slot->key = 1;
         } else {
             slot->key = 0;

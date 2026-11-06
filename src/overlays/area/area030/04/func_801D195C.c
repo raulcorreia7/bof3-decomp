@@ -17,7 +17,7 @@ MATCH void func_801D195C(s16 panel_x, s16 panel_y) {
     if (g_ActorSlots[0].header.mode == 0) {
         y = panel_y;
     } else {
-        y = panel_y - Area_SampleHeight(g_ActorSlots[0].x.fixed, g_ActorSlots[0].y.fixed) / 32;
+        y = panel_y - Area_SampleHeight(g_ActorSlots[0].pos.x.fixed, g_ActorSlots[0].pos.y.fixed) / 32;
     }
     base = panel_y;
     CLAMP_MIN(y, base);
@@ -26,9 +26,8 @@ MATCH void func_801D195C(s16 panel_x, s16 panel_y) {
 
     primitive = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(primitive);
-    primitive->x0 = x;
     primitive->x1 = (panel_x + 105);
-    primitive->y0 = (y + 16);
+    setXY0(primitive, x, (y + 16));
     primitive->y1 = (y + 16);
     primitive->y2 = (base + 40);
     primitive->y3 = (base + 40);
@@ -39,8 +38,8 @@ MATCH void func_801D195C(s16 panel_x, s16 panel_y) {
 
     if (g_ActorSlots[0].header.mode == 4) {
         y = 0xB4;
-        if (COORD_INT(g_ActorSlots[0].z) <= 0) {
-            y = 0xB4 - COORD_INT(g_ActorSlots[0].z) / 32;
+        if (COORD_INT(g_ActorSlots[0].pos.z) <= 0) {
+            y = 0xB4 - COORD_INT(g_ActorSlots[0].pos.z) / 32;
         }
         func_801D18CC((panel_x + 0x69), y, 2);
     }

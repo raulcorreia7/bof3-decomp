@@ -15,9 +15,9 @@ MATCH void func_801DA35C(void) {
     *timer    = remaining;
     if (remaining == 0) {
         index = 0;
-        panel_data += 0x607; /* the party order table at PARTY_ORDER_WALKING */
+        panel_data += 0x607; /* the party order table at PARTY_FIELD_ORDER_BASE */
     loop_2:
-        if (index < Party_CountOrder(0U)) {
+        if (index < Party_CountOrder(PARTY_ORDER_FIELD)) {
             row = (MenuPanelTask*)&D_801483C0 + index;
             if (g_Characters[g_CharSlot[*(panel_data + (row->unk_0B * 3) + row->unk_0A)]].unk_07 & 2) {
                 row->unk_0C = 1;

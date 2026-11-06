@@ -50,6 +50,9 @@ u8          Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 extern void func_801D8270(s32 x, s32 y);
 void        func_801D9484(void);
 void        func_801DAAE4(void);
+/* The element argument that takes the attacker's weapon element. */
+#define BATTLE_ELEMENT_FROM_WEAPON 0xFFFF
+
 /* One hit's damage, defined by the battle/battle/03 overlay at this address. */
 /* func_801DC044 */
 s16         Battle_CalcDamage(u8 attacker, u8 target, u16 element);

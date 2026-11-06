@@ -39,7 +39,7 @@ NON_MATCHING void func_801D750C(s32 x, s32 y) {
     func_801D9C80(var_s0, (s16)(var_s3 + 2), (g_BattlePartyCount + 0xD) & BYTE_MASK, 1U);
     var_s4     = var_s2;
     var_s5     = 0;
-    temp_v0_81 = *(((D_80144952 << 6) | 0x20) + &D_80033A08);
+    temp_v0_81 = *(((g_WindowStyle << 6) | 0x20) + &D_80033A08);
     var_s6     = var_s3;
     temp_v0_85 = temp_v0_81 & HALF_MASK;
     if (g_BattlePartyCount != 0) {

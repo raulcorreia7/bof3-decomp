@@ -7,9 +7,8 @@ MATCH void func_801EF318(void) {
     GFX_AddPrim(2, 0x0C);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
-    tile->w = 320;
     setXY0(tile, 0, 0);
-    tile->h = 240;
+    setWH(tile, 320, 240);
     setRGB0(tile, 0, 0, 0);
     GFX_AddPrim(2, 0x10);
 }

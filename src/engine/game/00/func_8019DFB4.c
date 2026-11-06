@@ -53,7 +53,7 @@ loop_1: /* scan the world-id table down from index 8 */
     work_e     = g_Task;
     work_e->vz = 0xFFF80000;
     work_e->pos.y.fixed += (step_y & 0x7FFF);
-    g_Task->vx = (s32)(RANDOM_MASK(0xFFF));
+    g_Task->vx = (s32)RANDOM_MASK(0xFFF);
     value      = RANDOM_MASK(0xFFF);
     work_f     = g_Task;
     work_f->vy = value;

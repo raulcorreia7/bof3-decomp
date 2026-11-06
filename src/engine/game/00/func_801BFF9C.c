@@ -26,14 +26,15 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
     z = work_mode;
     g_GameFlags &= 0xEFFF;
     if (!(g_AreaWalkFlags & AREA_WALK_MAP_LOADING) &&
-        (((LOBU(g_GameRequestFlags) & 9) != 0) || (LOHU(g_GameAreaId) == 0xBD) || (LOHU(g_GameAreaId) == 0xBB) ||
+        (((LOBU(g_GameRequestFlags) & 9) != 0) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) ||
+         (LOHU(g_GameAreaId) == AREA_ID_ADULT_CAMP) ||
          (((LOBU(g_GameRequestFlags) & 0x40) != 0) && (SYS_TestFlag(g_SceneEventFlags, 0x77U) == 0)))) {
-        count = Party_CountOrder(0);
+        count = Party_CountOrder(PARTY_ORDER_FIELD);
         for (i = 0; i < count; i++) {
-            g_Characters[g_CharSlot[D_80144F5A[i]]].status &= ~STATUS_CONFUSED;
+            g_Characters[g_CharSlot[g_PartyFieldOrder[i]]].status &= ~STATUS_CONFUSED;
         }
         for (i = 0; i < count; i++) {
-            if (g_Characters[g_CharSlot[D_80144F5A[i]]].status & STATUS_POISONED) {
+            if (g_Characters[g_CharSlot[g_PartyFieldOrder[i]]].status & STATUS_POISONED) {
                 D_80145FA8 = 0xA;
                 break;
             }
@@ -71,14 +72,14 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             g_Task->active_flags = 0;
         } else if (LOBU(g_GameRequestFlags) & 0x40) {
             func_801C1254(D_80145F09, 0);
-        } else if (LOHU(g_GameAreaId) == 0xBD) {
+        } else if (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) {
             g_BattlePartyBattlers[0].unk_2B = 0;
             *(s32*)&D_80145F00              = 0;
         }
     } else {
-        g_PartySize = Party_CountOrder(0);
+        g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
         if (!(g_AreaWalkFlags & AREA_WALK_MAP_LOADING)) {
-            Party_BuildBattlers(0);
+            Party_BuildBattlers(PARTY_ORDER_FIELD);
         } else {
             i = 0;
             if (i < g_PartySize) {
@@ -121,7 +122,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             }
         }
     }
-    if (!(LOBU(g_GameRequestFlags) & 8)) {
+    if (!(g_GameRequestFlags & 8)) {
         if (z & 0x80) {
             g_AreaScrollTargetX = x;
             g_AreaScrollTargetY = y;

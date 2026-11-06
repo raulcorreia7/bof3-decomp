@@ -81,9 +81,9 @@ NON_MATCHING void func_801B21E8(void) {
                     val11 += 0x10;
                     val12 += 0x10;
                 } while (val11 != tmp11);
-                *val12                = *val11;
-                g_GameState->slot_13C = (u8)g_CharSlot[g_GameState->slot_index_79];
-                D_80144F5A[val4]      = g_GameState->slot_index_79;
+                *val12                  = *val11;
+                g_GameState->slot_13C   = (u8)g_CharSlot[g_GameState->slot_index_79];
+                g_PartyFieldOrder[val4] = g_GameState->slot_index_79;
                 if (val4 != 0) {
                     func_801C2438();
                     tmp6                            = g_Task;
@@ -143,10 +143,8 @@ NON_MATCHING void func_801B21E8(void) {
     }
     g_AreaScrollTargetX = D_80145EC4;
     g_AreaScrollTargetY = D_80145EC8;
-    if (val7 < val10) {
-        val7 = val10;
-    }
-    tmp0 = ((u32)val7 >> 0xD) & BYTE_MASK;
+    val7                = MAX(val7, val10);
+    tmp0                = ((u32)val7 >> 0xD) & BYTE_MASK;
     if (tmp0 != 0) {
         g_AreaCameraHeightStep = (s16)((s16)((u16)D_80145ECE - g_AreaCameraHeight) / tmp0);
     } else {

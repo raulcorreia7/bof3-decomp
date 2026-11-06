@@ -23,7 +23,7 @@ MATCH void func_800AAEBC(s16 target_index, u8 battler_index) {
     }
 
     if (target_index < 0) {
-        g_BattleEffects[action_slot].word_60.target_index = target_index >= 0 ? target_index : -target_index;
+        g_BattleEffects[action_slot].word_60.target_index = ABS(target_index);
         g_BattleEffects[action_slot].unk_27               = 1u;
     } else {
         g_BattleEffects[action_slot].word_60.target_index = target_index;

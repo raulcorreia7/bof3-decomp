@@ -9,8 +9,8 @@ typedef struct Start08Rotation {
 extern Start08Rotation D_801EC4D0[];
 extern u8              D_801ED66C;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 82.70%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 82.70%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D9BDC(void) {
     s16   val0;
@@ -48,9 +48,9 @@ NON_MATCHING void func_801D9BDC(void) {
         g_MenuPanelTasks[19].unk_0A = D_801EC4D0[tmp2].unk_04 + 1;
     }
     tmp3                            = ((s8)D_801ED66C * 3) + D_801ED668;
-    g_MenuPanelTasks[20].x          = D_801EC4D0[tmp3].flags;
+    g_MenuPanelTasks[20].pos.x      = D_801EC4D0[tmp3].flags;
     FIELD(s8, (&D_801485DC), 0x24u) = 1;
-    g_MenuPanelTasks[20].y          = D_801EC4D0[tmp3].step;
+    g_MenuPanelTasks[20].pos.y      = D_801EC4D0[tmp3].step;
     val8                            = 0;
     g_MenuPanelTasks[20].unk_0B     = 1;
     g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].unk_04 + 1;
@@ -89,7 +89,7 @@ NON_MATCHING void func_801D9BDC(void) {
             D_801ED67C = (s8)D_801ED66C;
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 4));
-            Menu_SwapBytes_801DAC08(&D_80144F5D[(s8)D_801ED66C], &D_80144F5D[D_801ED67C]);
+            Menu_SwapBytes_801DAC08(&g_PartyBattleOrder[(s8)D_801ED66C], &g_PartyBattleOrder[D_801ED67C]);
             if ((s8)D_801ED66C != D_801ED67C) {
                 D_801ED660 = (u8)(s8)D_801ED66C;
                 D_801ED664 = (u8)D_801ED67C;

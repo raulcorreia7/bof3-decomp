@@ -61,6 +61,8 @@ typedef struct BattleCommandSlot {
     u16 id;
 } BattleCommandSlot;
 
+ASSERT_SIZE(BattleCommandSlot, 0x04);
+
 /* Battle stat modifiers, one signed byte per stat. */
 typedef struct StatMultipliers {
     s8 power;
@@ -68,6 +70,8 @@ typedef struct StatMultipliers {
     s8 agility;
     s8 intellect;
 } StatMultipliers;
+
+ASSERT_SIZE(StatMultipliers, 0x04);
 
 /* One drop of an enemy: the item id the battle spoils gain when the roll
  * passes, and the index into the 8-byte drop chance table at 0x801D0CB8. */
@@ -92,9 +96,6 @@ typedef struct EnemyBattlerDrop {
 /* Two drops fill 0x98..0xA0 of an EnemyBattler: stats follows drops[2]. */
 ASSERT_SIZE(EnemyBattlerDrop, 0x4);
 
-/* The mode handler an enemy record points at. */
-typedef ModeFunc EnemyBattlerEventFunc;
-
 /* Half of a 0x20-byte battler stat block. The retail copies each half with an
  * unaligned word pair, so the two halves stay one 16-byte type. */
 typedef struct BattleStatBlockPart {
@@ -110,6 +111,8 @@ typedef struct BattleAction {
     u8  pad_04[4];
     u8  unk_08; /* +0x08 step byte: func_8009E248 sets 1, func_8009E500 sets 2 */
 } BattleAction;
+
+ASSERT_SIZE(BattleAction, 0x0A);
 
 ASSERT_OFFSET(BattleAction, unk_02, 0x02);
 ASSERT_OFFSET(BattleAction, unk_08, 0x08);
@@ -128,17 +131,15 @@ ASSERT_OFFSET(BattleAction, unk_08, 0x08);
  * The id is the index of one 0x88-byte enemy record (Battle_ArmEnemySlot reads
  * &D_800E405E + id * 0x88), so +0x01 is that index and 0xFF means none. */
 typedef struct EncounterEnemy {
-    u8  active; /* 0x00 - set by the game overlay, cleared when the candidate is out of reach */
-    u8  id;     /* 0x01 - the enemy-record index; 0xFF means none */
-    u8  pad_02[2];
-    s32 x; /* 0x04 - the encounter x, 16.16 */
-    s32 y; /* 0x08 - the encounter y, 16.16 */
+    u8       active; /* 0x00 - set by the game overlay, cleared when the candidate is out of reach */
+    u8       id;     /* 0x01 - the enemy-record index; 0xFF means none */
+    u8       pad_02[2];
+    Point2DL pos; /* 0x04 encounter position, 16.16 */
 } EncounterEnemy;
 
 ASSERT_SIZE(EncounterEnemy, 0x0C);
 ASSERT_OFFSET(EncounterEnemy, id, 0x01);
-ASSERT_OFFSET(EncounterEnemy, x, 0x04);
-ASSERT_OFFSET(EncounterEnemy, y, 0x08);
+ASSERT_OFFSET(EncounterEnemy, pos, 0x04);
 
 /* One entry of the panel-owner table at 0x801ED9B0: the owner index, a second
  * byte, and the panel id. */
@@ -222,7 +223,7 @@ typedef struct BattleEffect {
     s16                unk_2E;
     s16                unk_30;
     u16                unk_32;
-    Vec3Coord          pos; /* +0x34 x, y and z; bmagic stores the z span halfword (+0x3E) */
+    WorldPos           pos; /* +0x34 x, y and z; bmagic stores the z span halfword (+0x3E) */
     u8                 pad_40[8];
     u8                 unk_48;
     u8                 pad_49[2];
@@ -382,7 +383,7 @@ typedef struct EnemyBattler {
     s16              unk_2E; /* +0x2E cleared when the slot is armed */
     s16              unk_30; /* +0x30 cleared when the slot is armed */
     s16              unk_32; /* +0x32 cleared when the slot is armed */
-    Vec3Coord        pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
+    WorldPos         pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
     u8               pad_40[0x8];
     u8               unk_48; /* +0x48 cleared when the slot is armed */
     u8               pad_49[0x2];
@@ -415,19 +416,19 @@ typedef struct EnemyBattler {
     u8               unk_E1;
     u8               unk_E2; /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
     u8               unk_E3; /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
-    EnemyBattlerEventFunc unk_E4;
-    u16*                  unk_E8;
-    u8*                   script;
-    u8                    unk_F0;
-    u8                    pad_F1[ENEMY_COMBATANT_PAD_F1_SIZE];
-    BattleTurn            turn;             /* +0xF4 the action the enemy has queued and its outcome */
-    StatMultipliers       stat_multipliers; /* +0x108 */
-    u8                    pad_10C[6];
-    u8                    unk_112;
-    u8                    pad_113[0x1];
-    u8                    unk_114;
-    u8                    unk_115;
-    u8                    pad_116[0x2];
+    ModeFunc         unk_E4;
+    u16*             unk_E8;
+    u8*              script;
+    u8               unk_F0;
+    u8               pad_F1[ENEMY_COMBATANT_PAD_F1_SIZE];
+    BattleTurn       turn;             /* +0xF4 the action the enemy has queued and its outcome */
+    StatMultipliers  stat_multipliers; /* +0x108 */
+    u8               pad_10C[6];
+    u8               unk_112;
+    u8               pad_113[0x1];
+    u8               unk_114;
+    u8               unk_115;
+    u8               pad_116[0x2];
 } EnemyBattler;
 
 ASSERT_SIZE(EnemyBattler, 0x118);
@@ -463,7 +464,7 @@ ASSERT_OFFSET(EnemyBattler, turn, 0xF4);
 ASSERT_OFFSET(EnemyBattler, unk_E8, 0xE8);
 
 /* Point a boss enemy at its script, event handler and step table. */
-static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, EnemyBattlerEventFunc handler, u16* steps) {
+static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, ModeFunc handler, u16* steps) {
     enemy->script = script;
     enemy->unk_E4 = handler;
     enemy->unk_E8 = steps;
@@ -514,8 +515,8 @@ typedef struct PartyBattler {
     BattleScreenCoord unk_2E; /* +0x2E the field overlays read it signed */
     BattleScreenCoord unk_30; /* +0x30 the field overlays read it signed */
     u16               depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
-    Vec3Coord         pos;
-    Vec2S32           scale;  /* +0x40 16.16, 0x10000 at setup */
+    WorldPos          pos;
+    SpriteScale       scale;  /* +0x40 16.16, 0x10000 at setup */
     u8                unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u8                unk_49;
     u8                unk_4A;

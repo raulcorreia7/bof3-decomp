@@ -10,10 +10,10 @@ MATCH s32 func_801F4A18(s32 entry_x, s32 entry_y) {
         SYS_ClearFlag(g_SceneEventFlags, 0x14U);
         SYS_ClearFlag(g_SceneEventFlags, 0x15U);
         g_GameFlags &= 0xFFDF;
-        if (D_801448EB == 7) {
-            D_801448EB = 0;
-            D_801448EC = 0;
-            D_801448EE = 0;
+        if (g_SceneEventMode == 7) {
+            g_SceneEventMode = 0;
+            g_SceneEventStep = 0;
+            D_801448EE       = 0;
         }
     }
     return 0;

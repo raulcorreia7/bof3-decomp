@@ -37,7 +37,7 @@ MATCH void Game_RunFieldState(void) {
             u8 selection;
 
             g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-            selection = g_SndBgmId;
+            selection = g_SndBGMId;
             if (selection != GAME_NONE && g_GamePrevSelection != selection) {
                 SND_StartDecrescendo(g_SelectionCues[selection * 4], D_80181EBB[selection * 4], 100, 16);
             }
@@ -45,7 +45,7 @@ MATCH void Game_RunFieldState(void) {
                 UI_SetMode(g_GameEntryMode);
                 func_80198BC4(0);
             }
-            selection = g_SndBgmId;
+            selection = g_SndBGMId;
             if (selection != GAME_NONE && g_GamePrevSelection != selection) {
                 SND_StopSequence(g_SelectionCues[selection * 4], D_80181EBB[selection * 4]);
             }

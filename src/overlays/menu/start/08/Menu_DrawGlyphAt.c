@@ -1,7 +1,7 @@
 #include "start_08.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 55.84%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 55.84%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph_left, s32 glyph_right) {
     s32       stack_18;
@@ -74,10 +74,9 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
         tmp3 = val2 + ((val13 & BYTE_MASK) - (val6 & BYTE_MASK));
         tmp0 = val3 + 0xC;
         setXY4(val11, val1, val0, tmp3, val0, val1, tmp0, tmp3, tmp0);
-        tmp6      = *val12;
-        val11->u0 = (s8)(val7 + (((tmp6 % 21) & BYTE_MASK) * 0xC));
+        tmp6 = *val12;
+        setUV0(val11, (s8)(val7 + (((tmp6 % 21) & BYTE_MASK) * 0xC)), (s8)(((tmp17 / 21) & BYTE_MASK) * 0xC));
         tmp17     = *val12;
-        val11->v0 = (s8)(((tmp17 / 21) & BYTE_MASK) * 0xC);
         tmp7      = *val12;
         val11->u1 = (s8)(stack_20 + (((tmp7 % 21) & BYTE_MASK) * 0xC));
         tmp18     = *val12;
@@ -106,9 +105,8 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
         setXY4(val11, val1, val0, tmp4, val0, val1, tmp1, tmp4, tmp1);
         tmp13 = *val12;
         if (tmp13 < 0x5BU) {
-            val11->u0 = (s8)(val6 + (((tmp13 % 21) & BYTE_MASK) * 0xC));
+            setUV0(val11, (s8)(val6 + (((tmp13 % 21) & BYTE_MASK) * 0xC)), (s8)(((tmp20 / 21) & BYTE_MASK) * 0xC));
             tmp20     = *val12;
-            val11->v0 = (s8)(((tmp20 / 21) & BYTE_MASK) * 0xC);
             tmp10     = *val12;
             val11->u1 = (s8)(val13 + (((tmp10 % 21) & BYTE_MASK) * 0xC));
             tmp22     = *val12;

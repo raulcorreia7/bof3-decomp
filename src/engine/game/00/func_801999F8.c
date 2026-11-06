@@ -19,9 +19,9 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     u16  field;
     s32  offset;
 
-    UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 3), 153, 154, task->unk_09, D_80144952);
+    UI_DrawWindow((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 153, 154, task->unk_09, g_WindowStyle);
     value = func_801AFD10(&task->unk_0B, &row, &count, (u8*)&task->unk_12) & BYTE_MASK;
-    y     = task->y + (s8)row;
+    y     = task->pos.y + (s8)row;
     src   = D_801C893C[task->unk_0A] + value;
     dst   = D_801C8950[task->unk_0A] + value;
     for (i = 0; i < count + 9; i++) {
@@ -29,8 +29,8 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         if (byte != 0) {
             flag = 0;
             if (task->unk_09 != 0 ||
-                (func_801AF494(task->unk_08, g_CharSlot[D_80144F5A[D_80148656]], task->unk_0A, byte) & BYTE_MASK) ==
-                    0) {
+                (func_801AF494(task->unk_08, g_CharSlot[g_PartyFieldOrder[D_80148656]], task->unk_0A, byte) &
+                 BYTE_MASK) == 0) {
                 flag = 1;
             }
             visible = flag;
@@ -46,29 +46,29 @@ MATCH void func_801999F8(MenuPanelTask* task) {
             }
             if (slot == task->flags || slot == task->unk_0C) {
                 if (flip8 != 7) {
-                    func_801AF800((task->x + 7), (s16)(y + 0x1A), 7, task->unk_0A, *src, shade, 1);
+                    func_801AF800((task->pos.x + 7), (s16)(y + 0x1A), 7, task->unk_0A, *src, shade, 1);
                 }
-                func_801AF800((task->x + 7), (s16)(y + 0x18), flip8, task->unk_0A, *src, shade, visible);
+                func_801AF800((task->pos.x + 7), (s16)(y + 0x18), flip8, task->unk_0A, *src, shade, visible);
             } else {
-                func_801AF800((task->x + 7), (s16)(y + 0x1A), flip8, task->unk_0A, *src, shade, visible);
+                func_801AF800((task->pos.x + 7), (s16)(y + 0x1A), flip8, task->unk_0A, *src, shade, visible);
             }
         }
         src++;
         dst++;
         y += 0xD;
     }
-    /* FAKE: retail reads D_80144952 as s8. */
-    UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 3), 153, 20, task->unk_09, *(u8*)((s8*)&D_80144952));
-    UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 146), 153, 8, task->unk_09, *(u8*)((s8*)&D_80144952));
+    /* FAKE: retail reads g_WindowStyle as s8. */
+    UI_DrawWindow((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 153, 20, task->unk_09, *(u8*)((s8*)&g_WindowStyle));
+    UI_DrawWindow((u16)(task->pos.x + 3), (u16)(task->pos.y + 146), 153, 8, task->unk_09, *(u8*)((s8*)&g_WindowStyle));
     slotp  = &D_801C7C5C[task->unk_0A];
     value  = func_801AF20C(*slotp) & BYTE_MASK;
     offset = (value * 4) - 0x4E;
-    UI_DrawText((task->x - offset), (task->y + 7), -(task->unk_09 != 0) & 7, 0x10, *slotp);
+    UI_DrawText((task->pos.x - offset), (task->pos.y + 7), -(task->unk_09 != 0) & 7, 0x10, *slotp);
     sprintf((char*)g_UiFormatBuffer, (const char*)D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK,
             (task->unk_0A != 4) ? 0x80 : 0x20);
-    UI_DrawGlyphString((task->x + 85), (task->y + 146), -(task->unk_09 != 0) & 7, g_UiFormatBuffer);
-    UI_DrawSpriteRun(task->x, task->y, (task->unk_10 & 2) != 0 ? s_MenuLine1FlagRun : s_MenuLine1Run, 1);
-    UI_DrawSpriteRun(task->x, task->y, (task->unk_10 & 1) != 0 ? s_MenuLine2FlagRun : s_MenuLine2Run, 1);
+    UI_DrawGlyphString((task->pos.x + 85), (task->pos.y + 146), -(task->unk_09 != 0) & 7, g_UiFormatBuffer);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_10 & 2) != 0 ? s_MenuLine1FlagRun : s_MenuLine1Run, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_10 & 1) != 0 ? s_MenuLine2FlagRun : s_MenuLine2Run, 1);
     field = task->unk_10;
     if ((field & 0xF0) == 0) {
         task->unk_10 = 0;
@@ -76,25 +76,25 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         task->unk_10 = field - 0x10;
     }
     for (i = 0; i < 10; i++) {
-        UI_DrawSprite((task->x + (i + 5) * 8), task->y, 1, 1);
+        UI_DrawSprite((task->pos.x + (i + 5) * 8), task->pos.y, 1, 1);
     }
     for (i = 0; i < 15; i++) {
-        UI_DrawSprite(task->x, (task->y + (i + 3) * 8), 4, 1);
+        UI_DrawSprite(task->pos.x, (task->pos.y + (i + 3) * 8), 4, 1);
     }
-    UI_DrawSprite((task->x + 144), (task->y + 24), 0x16, 1);
+    UI_DrawSprite((task->pos.x + 144), (task->pos.y + 24), 0x16, 1);
     for (i = 0; i < 12; i++) {
-        UI_DrawSprite((task->x + 144), (task->y + (i + 5) * 8), 0x17, 1);
+        UI_DrawSprite((task->pos.x + 144), (task->pos.y + (i + 5) * 8), 0x17, 1);
     }
-    UI_DrawSprite((task->x + 144), (task->y + 136), 0x18, 1);
-    UI_DrawSprite(task->x, (task->y + 144), 0x19, 1);
+    UI_DrawSprite((task->pos.x + 144), (task->pos.y + 136), 0x18, 1);
+    UI_DrawSprite(task->pos.x, (task->pos.y + 144), 0x19, 1);
     for (i = 0; i < 9; i++) {
-        UI_DrawSprite((task->x + (i + 1) * 8), (task->y + 144), 0x1A, 1);
+        UI_DrawSprite((task->pos.x + (i + 1) * 8), (task->pos.y + 144), 0x1A, 1);
     }
-    UI_DrawSprite((task->x + 80), (task->y + 144), 0x1B, 1);
+    UI_DrawSprite((task->pos.x + 80), (task->pos.y + 144), 0x1B, 1);
     for (i = 0; i < 6; i++) {
-        UI_DrawSprite((task->x + (i + 11) * 8), (task->y + 144), 0x1C, 1);
+        UI_DrawSprite((task->pos.x + (i + 11) * 8), (task->pos.y + 144), 0x1C, 1);
     }
-    UI_DrawSprite((task->x + 136), (task->y + 144), 0x1D, 1);
-    func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, (task->x + 0x90), (task->y + 0x18), 9,
+    UI_DrawSprite((task->pos.x + 136), (task->pos.y + 144), 0x1D, 1);
+    func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, (task->pos.x + 0x90), (task->pos.y + 0x18), 9,
                   (task->unk_0A != 4) ? 0x80 : 0x20, 0x74);
 }

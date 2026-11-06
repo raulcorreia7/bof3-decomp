@@ -5,19 +5,19 @@ MATCH void func_801A852C(void) {
     s32 bit_index;
     s32 seed;
 
-    state = &D_801448EC;
+    state = &g_SceneEventStep;
     switch (*state) {
         case 0:
             Game_SetScriptActive();
             Message_StartAreaMessage((Item_Count(ITEM_CAT_ITEM, ITEM_FAERIE_TIARA, 0) & HALF_MASK) ? 0x21 : 0x20);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            (&D_801448EB)[1] += 1;
+            (&g_SceneEventMode)[1] += 1;
             break;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                D_801448EB = 0;
-                *state     = 0;
+                g_SceneEventMode = 0;
+                *state           = 0;
             }
             break;
         case 2:
@@ -41,8 +41,8 @@ MATCH void func_801A852C(void) {
                 Game_RequestAreaChange(seed & HALF_MASK, 0x430000, 0x160000, 4);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
                 Game_ClearScriptActive();
-                D_801448EB = 0;
-                D_801448EC = 0;
+                g_SceneEventMode = 0;
+                g_SceneEventStep = 0;
             }
             break;
     }

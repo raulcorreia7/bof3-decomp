@@ -30,7 +30,7 @@ MATCH s32 func_801E0770(void) {
         return result;
     }
     work = FISHING_STATE;
-    d    = -g_ActorSlots[0].x.fixed + *(s32*)((u8*)work + 0x34);
+    d    = -g_ActorSlots[0].pos.x.fixed + *(s32*)((u8*)work + 0x34);
     if (d < 0) {
         d = -d;
     }
@@ -38,18 +38,14 @@ MATCH s32 func_801E0770(void) {
         return result;
     }
     d      = work->y_38.pos_y;
-    anchor = g_ActorSlots[0].y.fixed;
+    anchor = g_ActorSlots[0].pos.y.fixed;
     d      = d - anchor;
-    if (d < 0) {
-        d = -d;
-    }
+    d      = ABS(d);
     if (d > limit) {
         return result;
     }
     dz = work->bounce_3C.half.key_3E;
-    dz = dz - COORD_INT(g_ActorSlots[0].z);
-    if (dz < 0) {
-        dz = -dz;
-    }
+    dz = dz - COORD_INT(g_ActorSlots[0].pos.z);
+    dz = ABS(dz);
     return dz < 0x400;
 }

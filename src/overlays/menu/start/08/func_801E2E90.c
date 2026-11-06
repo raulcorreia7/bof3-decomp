@@ -12,7 +12,8 @@ typedef struct PanelTail {
     u8 bytes[7];
 } PanelTail;
 
-/* 76.7%; first difference at the prologue: retail saves s5 (sel live across the three calls, frame 0xC0), ours uses frame 0xB8. */
+/* 76.7%; first difference at the prologue: retail saves s5 (sel live across the three calls, frame 0xC0), ours uses
+   frame 0xB8. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     MenuPanelRows table;
@@ -25,7 +26,7 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
 
     table = *(MenuPanelRows*)&D_801D0E28;
     tail  = *(PanelTail*)&D_801D0EA8;
-    sel   = &D_80144952;
+    sel   = &g_WindowStyle;
     index = row_index & BYTE_MASK;
     row   = table.rows[index];
 
@@ -43,9 +44,8 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
 
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
-    line->x0 = (s16)(x + 63);
+    setXY0(line, (s16)(x + 63), (s16)(y + 1));
     line->x1 = (s16)(x + 63);
-    line->y0 = (s16)(y + 1);
     line->y1 = (s16)(y + 14);
     setRGB0(line, 128, 128, 128);
     GFX_AddPrim(1U, 0x10U);

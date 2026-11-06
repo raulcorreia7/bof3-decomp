@@ -27,8 +27,8 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
     /* FAKE: the volatile typed store keeps tpage ahead of the palette load. */
     *(volatile u16*)&primitive->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     palette_index &= BYTE_MASK;
-    /* FAKE: retail reads D_80144952 as s8. */
-    primitive->clut = GetClut((((*(s8*)&D_80144952) * 2) + palette_index) * 16, 481);
+    /* FAKE: retail reads g_WindowStyle as s8. */
+    primitive->clut = GetClut((((*(s8*)&g_WindowStyle) * 2) + palette_index) * 16, 481);
     start_x         = x;
     setRGB0(primitive, 0x80, 0x80, 0x80);
     start_y = y;
@@ -37,9 +37,8 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
     palette_offset &= BYTE_MASK;
     palette_offset *= 4;
     setXY4(primitive, start_x, start_y, x, start_y, start_x, y, x, y);
-    primitive->u0 = D_801EAF2C[palette_offset];
-    v_delta       = palette_index * 8;
-    primitive->v0 = (D_801EAF2D[palette_offset] - v_delta);
+    v_delta = palette_index * 8;
+    setUV0(primitive, D_801EAF2C[palette_offset], (D_801EAF2D[palette_offset] - v_delta));
     primitive->u1 = (D_801EAF2C[palette_offset] + D_801EAF2E[palette_offset]);
     primitive->v1 = (D_801EAF2D[palette_offset] - v_delta);
     primitive->u2 = D_801EAF2C[palette_offset];

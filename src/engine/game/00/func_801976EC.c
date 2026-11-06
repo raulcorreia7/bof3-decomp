@@ -11,7 +11,7 @@ MATCH void func_801976EC(void) {
     func_80198C38(0u);
     CallbackWait(1u);
     if (D_80148661 != 0u) {
-        EMI_LoaderStreamFamily(D_80144F5A[0], D_80144F5A[1], D_80144F5A[2], 0u);
+        EMI_LoaderStreamFamily(g_PartyFieldOrder[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0u);
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1u);
         }
@@ -38,7 +38,7 @@ MATCH void func_801976EC(void) {
     if (*request != 0u) {
         pending  = &D_8014504A;
         *request = 0u;
-        if ((*pending == 0u) && ((g_GameRequestFlags & 1u) || (LOHU(g_GameAreaId) == 0xBDu))) {
+        if ((*pending == 0u) && ((g_GameRequestFlags & 1u) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP))) {
             *pending   = 1u;
             D_80145040 = D_80145EC4;
             D_80145044 = D_80145EC8;

@@ -161,14 +161,14 @@ MATCH void func_801D25CC(void) {
 
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-            temp_v0 = g_SndBgmId * 4;
+            temp_v0 = g_SndBGMId * 4;
             SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
-            SND_RequestBgm(D_801DB0CC);
+            SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
     } else if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBgm(D_801DB0CC, 0x64, 8);
-        temp_v1  = &D_801448EC;
+        SND_PlayBGM(D_801DB0CC, 0x64, 8);
+        temp_v1  = &g_SceneEventStep;
         *temp_v1 = *temp_v1 + 1;
     }
 }
@@ -225,7 +225,7 @@ INCLUDE_ASM(func_801D35E0);
 
 MATCH void func_801D364C(void) {
     if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBgm(0x94, 0x64, 8);
+        SND_PlayBGM(0x94, 0x64, 8);
         Message_StartAreaMessage(0x7F);
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
@@ -330,14 +330,14 @@ MATCH void func_801D4840(void) {
 
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-            temp_v0 = g_SndBgmId * 4;
+            temp_v0 = g_SndBGMId * 4;
             SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
-            SND_RequestBgm(D_801DB0CC);
+            SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
     } else if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBgm(D_801DB0CC, 0x64, 8);
-        temp_v1  = &D_801448EC;
+        SND_PlayBGM(D_801DB0CC, 0x64, 8);
+        temp_v1  = &g_SceneEventStep;
         *temp_v1 = *temp_v1 + 1;
     }
 }
@@ -385,15 +385,15 @@ MATCH void func_801D5978(void) {
     s32 offset;
 
     if (g_UiWindowEffectBusy == 0) {
-        offset = g_SndBgmId * 4;
+        offset = g_SndBGMId * 4;
         SND_StopSequence(*(g_SelectionCues + offset), *(D_80181EBB + offset));
-        SND_RequestBgm(D_801DB0CC);
+        SND_RequestBGM(D_801DB0CC);
     loop_2:
         if (EMI_LoaderIsReady() == 0) {
             CallbackWait(1U);
             goto loop_2;
         }
-        SND_PlayBgm(D_801DB0CC, 0x64, 8);
+        SND_PlayBGM(D_801DB0CC, 0x64, 8);
         g_AreaDrawFlags = 0x1F;
         UI_SetMode(1U);
         D_801F294D += 1;
@@ -464,7 +464,7 @@ MATCH void func_801D5E94(void) {
     count      = D_801DB0C4 - 1;
     D_801DB0C4 = count;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((count & 0xFF) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                       D_80144952);
+                       g_WindowStyle);
     func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     check = D_801DB0C4;
@@ -483,7 +483,7 @@ MATCH void func_801D62C8(void) {
     step       = D_801DB0C4 + 1;
     D_801DB0C4 = step;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & 0xFF) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                       D_80144952);
+                       g_WindowStyle);
     func_801D8058(0x4A, ((u8)D_801DB0C4 * 0x28) + 0x64);
     func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
     if ((u8)D_801DB0C4 == 4) {
@@ -578,7 +578,7 @@ MATCH void func_801D6BE4(void) {
     step       = D_801DB0C4 + 1;
     D_801DB0C4 = step;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & 0xFF) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                       D_80144952);
+                       g_WindowStyle);
     func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     if ((u8)D_801DB0C4 == 4) {

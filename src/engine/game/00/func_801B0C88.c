@@ -8,11 +8,11 @@ MATCH void func_801B0C88(void) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
 
-    total = Party_CountOrder(0);
+    total = Party_CountOrder(PARTY_ORDER_FIELD);
     index = 0;
     if ((total & BYTE_MASK) > 0) {
         do {
-            sel = g_CharSlot[D_80144F5A[index]];
+            sel = g_CharSlot[g_PartyFieldOrder[index]];
             if (g_Characters[sel].status & STATUS_POISONED) {
                 /* party member is active: use mode 3 */
                 goto store3;

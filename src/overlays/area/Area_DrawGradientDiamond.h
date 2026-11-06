@@ -2,7 +2,9 @@
  * the points by the area camera angle, projects them and
  * queues one Gouraud quad. One definition shared by the area overlays; every
  * change here must verify every member. */
-/* func_801F3ECC (area016), func_801F3E00 (area033), func_801F3ECC (area045), func_801F3F04 (area065), func_801F3F00 (area087), func_801F4A30 (area088), func_801F3F90 (area104), func_801F3ED0 (area115), func_801F3EE4 (area121), func_801F3E3C (area151), func_801F3D90 (area152) */
+/* func_801F3ECC (area016), func_801F3E00 (area033), func_801F3ECC (area045), func_801F3F04 (area065), func_801F3F00
+   (area087), func_801F4A30 (area088), func_801F3F90 (area104), func_801F3ED0 (area115), func_801F3EE4 (area121),
+   func_801F3E3C (area151), func_801F3D90 (area152) */
 MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     MATRIX matrix;
     long   depth;
@@ -46,9 +48,8 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     VOL(s16, q3->vz)        = 0;
 
     SetPolyG4((POLY_G4*)primitive);
-    RotTransPers4((SVECTOR*)scratch, (SVECTOR*)(scratch + 1), (SVECTOR*)(scratch + 2), (SVECTOR*)(scratch + 3),
-                  (long*)(primitive + 8), (long*)(primitive + 0x10), (long*)(primitive + 0x18),
-                  (long*)(primitive + 0x20), &depth, &flag);
+    RotTransPers4(scratch, scratch + 1, scratch + 2, scratch + 3, (long*)(primitive + 8), (long*)(primitive + 0x10),
+                  (long*)(primitive + 0x18), (long*)(primitive + 0x20), &depth, &flag);
 
     vx0 = *MATCH_VOLATILE_PTR(s16, (primitive + 8));
 

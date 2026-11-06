@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC04(void) {
-    Bmagic_DispatchTaskPair(func_801EEC5C, func_801EEF38);
+    BMagic_DispatchTaskPair(func_801EEC5C, func_801EEF38);
 }
 
 INCLUDE_ASM(func_801EEC5C);
@@ -29,7 +29,7 @@ MATCH void func_801EF324(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        if (g_BattleTargetSelector & 0x40) {
+        if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
             func_800A9820((g_Task->unk_03 + 3) & 0xFF);
             GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[g_Task->unk_03]);
             func_800AF814((g_Task->unk_03 + 3) & 0xFF);

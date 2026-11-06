@@ -14,7 +14,7 @@ MATCH void func_801A0380(s16 x, s16 y, u16 kind) {
     STACK_PADS(u8, 8);
 
     if (g_GameFlags & 0x80) {
-        result = g_SndBgmId;
+        result = g_SndBGMId;
     } else {
         record = func_801A0490(x, y, kind);
         if (record[7] == 0) {

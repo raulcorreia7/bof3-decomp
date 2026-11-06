@@ -365,15 +365,11 @@ MATCH void func_801F2F0C(const void* arg0) {
                *(s16*)(((const u8*)work + ((index + 1) << 2) + 26)));
 
         red = ((0x20u - index) * 8u);
-        if (red > 0xFFu) {
-            red = 0xFFu;
-        }
+        red = MIN(red, 0xFFu);
         setRGB0(primitive, red, 0u, 0u);
 
         red = ((0x1Fu - index) * 8u);
-        if (red > 0xFFu) {
-            red = 0xFFu;
-        }
+        red = MIN(red, 0xFFu);
         setRGB1(primitive, red, 0u, 0u);
 
         GFX_AddPrim(1u, 0x14u);
@@ -423,13 +419,13 @@ MATCH void func_801F31CC(void) {
     point[0] = 0xE340u;
     point[1] = 0xE3C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, 0, 0x13500126u);
+    func_801F3480((const Point3D*)point, 0, 0x13500126u);
     Area_AddCellPrim(0x468000, 0x478000, 0, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, ONE / 2, 0x13510125u);
+    func_801F3480((const Point3D*)point, ONE / 2, 0x13510125u);
     Area_AddCellPrim(0x468000, 0x498000, -1, 0x28);
 }
 
@@ -445,13 +441,13 @@ MATCH void func_801F32B0(void) {
     point[0] = 0xE340u;
     point[1] = 0xE3C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, *(s16*)&g_Task->vx, 0x13500126u);
+    func_801F3480((const Point3D*)point, *(s16*)&g_Task->vx, 0x13500126u);
     Area_AddCellPrim(0x468000, 0x478000, -1, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, (s16)(ONE / 2 - g_Task->vx), 0x13510125u);
+    func_801F3480((const Point3D*)point, (s16)(ONE / 2 - g_Task->vx), 0x13510125u);
     Area_AddCellPrim(0x468000, 0x498000, -1, 0x28);
 }
 
@@ -467,11 +463,11 @@ MATCH void func_801F33A8(void) {
     point[0] = ((u >> 9) - 0x4000);
     point[1] = ((v >> 9) - 0x4000);
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, ONE / 4, 0x13500126u);
+    func_801F3480((const Point3D*)point, ONE / 4, 0x13500126u);
     Area_AddCellPrim(u, v, -1, 0x28);
 }
 
-MATCH POLY_FT4* func_801F3480(const AreaPoint* point, s32 angle, u32 texture) {
+MATCH POLY_FT4* func_801F3480(const Point3D* point, s32 angle, u32 texture) {
     SVECTOR   rotation;
     MATRIX    matrix;
     long      depth;
@@ -513,9 +509,8 @@ MATCH POLY_FT4* func_801F3480(const AreaPoint* point, s32 angle, u32 texture) {
     VOL(s16, quad[1].vy) = 0;
     VOL(s16, quad[3].vz) = 0;
     VOL(s16, quad[2].vz) = 0;
-    RotTransPers4((SVECTOR*)quad, (SVECTOR*)(quad + 1), (SVECTOR*)(quad + 2), (SVECTOR*)(quad + 3),
-                  (long*)((u8*)primitive + 8), (long*)((u8*)primitive + 0x10), (long*)((u8*)primitive + 0x18),
-                  (long*)((u8*)primitive + 0x20), &depth, &flag);
+    RotTransPers4(quad, quad + 1, quad + 2, quad + 3, (long*)((u8*)primitive + 8), (long*)((u8*)primitive + 0x10),
+                  (long*)((u8*)primitive + 0x18), (long*)((u8*)primitive + 0x20), &depth, &flag);
 
     PopMatrix();
 
@@ -526,16 +521,16 @@ MATCH POLY_FT4* func_801F3480(const AreaPoint* point, s32 angle, u32 texture) {
 MATCH void func_801F35E0(void) {
     g_MessageRequest = RESET_SENTINEL;
     if ((g_MessageChoice & 1) == 0) {
-        D_801448EB = 1;
-        D_801448EC = 0;
+        g_SceneEventMode = 1;
+        g_SceneEventStep = 0;
     }
 }
 
 MATCH void func_801F3618(void) {
     g_MessageRequest = RESET_SENTINEL;
     if ((g_MessageChoice & 1) == 0) {
-        D_801448EB = 2;
-        D_801448EC = 0;
+        g_SceneEventMode = 2;
+        g_SceneEventStep = 0;
     }
 }
 
@@ -616,22 +611,22 @@ MATCH void func_801F376C(void) {
 }
 
 MATCH void func_801F37E4(void) {
-    switch (D_801448EC) {
+    switch (g_SceneEventStep) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_SetScriptActive();
                 SYS_SetFlag(g_SceneEventFlags, 1);
-                D_801448EC = 1;
+                g_SceneEventStep = 1;
             }
             break;
         case 1:
             func_801BE1B0(1);
-            D_801448EC = 2;
+            g_SceneEventStep = 2;
             break;
         case 2:
             if (g_ScriptVars[3] == 0x20) {
-                D_801448EE = 16;
-                D_801448EC = 3;
+                D_801448EE       = 16;
+                g_SceneEventStep = 3;
             }
             break;
         case 3: {
@@ -640,8 +635,8 @@ MATCH void func_801F37E4(void) {
 
             if (TIMER_EXPIRED(*timer)) {
                 Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, 0x4B0000u, 0x380000u, 143);
-                D_801448EC = 4;
-                flag       = &g_ScriptVars[3];
+                g_SceneEventStep = 4;
+                flag             = &g_ScriptVars[3];
                 (*flag)++;
             }
         } break;
@@ -652,8 +647,8 @@ MATCH void func_801F37E4(void) {
                 *flag = 0;
                 Game_ClearScriptActive();
                 SYS_ClearFlag(g_SceneEventFlags, 1);
-                D_801448EB = 0;
-                D_801448EC = 0;
+                g_SceneEventMode = 0;
+                g_SceneEventStep = 0;
             }
         } break;
     }

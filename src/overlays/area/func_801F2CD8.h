@@ -6,7 +6,7 @@
 MATCH void func_801F2CD8(void) {
     if (g_MessageChoice == 1) {
         g_MessageRequest = 0x5F;
-        D_801448EC       = 1;
+        g_SceneEventStep = 1;
     } else {
         MESSAGE_REQUEST_CLEAR();
     }

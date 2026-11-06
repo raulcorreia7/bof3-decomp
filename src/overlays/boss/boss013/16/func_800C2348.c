@@ -1,7 +1,7 @@
 #include "boss013_16.h"
 
 MATCH void func_800C2348(void) {
-    if (g_BattleResult & 2) {
+    if (g_BattleResult & BATTLE_RESULT_VICTORY) {
         *g_ScriptVars     = 0x14;
         g_BattleSpoilsExp = D_801EB6B6 + D_801EB7CE;
         func_801DDED8();
@@ -16,6 +16,6 @@ MATCH void func_800C2348(void) {
         *g_ScriptVars = 0x50;
         func_801DDF28();
     }
-    g_SndBgmId = 0x31;
+    g_SndBGMId = 0x31;
     g_GameFlags &= 0xFF7F;
 }

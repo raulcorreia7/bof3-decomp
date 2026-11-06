@@ -18,8 +18,8 @@ extern u16 D_801F5CD4[];
 
 extern u16 D_801F5CD8[];
 
-/* A bare statement macro, used as a member's whole body. Clear the interaction bit; when the party confirmed (D_80145F09 is 6), run the script and store the
- * two step bytes. */
+/* A bare statement macro, used as a member's whole body. Clear the interaction bit; when the party confirmed
+ * (D_80145F09 is 6), run the script and store the two step bytes. */
 #define AREA_INTERACT_CONFIRM(step_next)                                                \
     if (D_80145F09 == 6) {                                                              \
         ((Actor*)g_CurrentActor)->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING; \

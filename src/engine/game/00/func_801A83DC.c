@@ -3,7 +3,7 @@
 MATCH void func_801A83DC(void) {
     s8* state;
 
-    state = &D_801448EC;
+    state = &g_SceneEventStep;
     switch (*state) {
         case 0: {
             u8* game_state;
@@ -13,13 +13,13 @@ MATCH void func_801A83DC(void) {
                 /* Dest is the bit buffer at 0x80145548 (ahead of the celerity and
                  * bonebreak timers); base+offset keeps the s0-reuse addiu, absolute form regresses
                  * bytes. */
-                SYS_SetFlag(state + 0xC5C, D_801448ED);
-                strncpy((char*)g_TextVariables[0], (char*)Resource_GetText((D_801448ED + 0x4172)), 8);
+                SYS_SetFlag(state + 0xC5C, g_SceneEventSelection);
+                strncpy((char*)g_TextVariables[0], (char*)Resource_GetText((g_SceneEventSelection + 0x4172)), 8);
                 D_801490E0 = 0;
                 Resource_RequestArea(0xFA);
                 *game_state = GAME_REQUEST_MESSAGE;
-                if (g_SndBgmId != GAME_NONE) {
-                    SND_PauseBgm(g_SndBgmId);
+                if (g_SndBGMId != GAME_NONE) {
+                    SND_PauseBGM(g_SndBGMId);
                 }
                 SND_StartXAStream(9, 1);
                 *state = 1;
@@ -29,14 +29,14 @@ MATCH void func_801A83DC(void) {
         }
         case 1:
             if ((SND_IsXAIdle() & BYTE_MASK) && (g_GameStateIndex != GAME_REQUEST_MESSAGE)) {
-                if (g_SndBgmId != GAME_NONE) {
-                    SND_ResumeBgm(g_SndBgmId);
+                if (g_SndBGMId != GAME_NONE) {
+                    SND_ResumeBGM(g_SndBGMId);
                 }
                 g_ScriptWorkRecord->header.flags = 0;
                 Game_ClearScriptActive();
-                D_801448EB = 0;
-                *state     = 0;
-                D_801448ED = 0;
+                g_SceneEventMode      = 0;
+                *state                = 0;
+                g_SceneEventSelection = 0;
             }
             break;
     }

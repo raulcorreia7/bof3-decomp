@@ -5,9 +5,9 @@ MATCH s32 func_801F3A6C(void) {
     MATCH_REG(s32, action, "v1");
 
     Game_SetScriptActive();
-    action     = 4;
-    D_801448EB = action;
-    action     = 12;
-    D_801448ED = action;
+    action                = 4;
+    g_SceneEventMode      = action;
+    action                = 12;
+    g_SceneEventSelection = action;
     return 0;
 }

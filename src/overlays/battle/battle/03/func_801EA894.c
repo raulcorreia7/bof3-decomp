@@ -6,11 +6,11 @@ MATCH void func_801EA894(void) {
 
     panel      = g_MenuCurrentPanel;
     D_801EC2E4 = 1u;
-    state      = panel->y;
+    state      = panel->pos.y;
     if (state == 0x12) {
         panel->state++;
     } else {
-        panel->y = state + 8;
+        panel->pos.y = state + 8;
     }
     func_801EAAB8();
 }

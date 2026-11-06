@@ -15,15 +15,6 @@
 #include "common/vector.h"
 #include <string.h>
 
-/* Per-mode signed adjustments to the camera angle inputs. */
-/* x: added to D_80143F24 for angle.vx. */
-/* y: added to D_80143F28 for angle.vy. */
-typedef Vec2S16 CameraAngleOffset;
-
-ASSERT_SIZE(CameraAngleOffset, 4);
-ASSERT_OFFSET(CameraAngleOffset, x, 0x00);
-ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
-
 #include "data.h"
 #include <stdio.h>
 
@@ -45,7 +36,7 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 /* NOTE: retail reads the window style byte at 0x80144952 signed (`lb`) in func_8019986C and
  * func_801AEBA0 and unsigned (`lbu`) in func_801999F8 and UI_DrawWindowOutline, so exports.h keeps u8 and only
  * the signed readers view it as s8. */
-#define GAME_WINDOW_STYLE      (*(s8*)&D_80144952)
+#define GAME_WINDOW_STYLE      (*(s8*)&g_WindowStyle)
 
 /* FAKE: the game images call Area_GetCellCode as s32(s16, s16) and truncate at the call; the area images pass
  * s32 coordinates untruncated, so one prototype cannot serve both (an s16 prototype changes 11 area images). */
@@ -191,14 +182,10 @@ typedef struct GameHandlerTable6 {
     Callback handlers[6];
 } GameHandlerTable6;
 
-/* One game route step: two volatile signed words.
- * dx: x; dy: y. */
-typedef Vec2S32 GameRouteStep;
-
 /* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * func_8019D8C0 rotates and writes out as screen vertices. */
 typedef struct SpinQuad {
-    Vec3S16 pos;
+    Point3D pos;
     u8      unk_06[0x0A];
     SVECTOR rotation; /* 0x10 */
     SVECTOR corners[4];
@@ -382,16 +369,15 @@ extern s32                D_80147CBC[];
 extern s32                D_80147CC0[];
 extern s32                D_80147CC4[];
 extern u16                D_801481D8;
-extern Vec3S32            D_801481E8;   /* scene angle, 16.16 fixed point */
-extern Vec3S32            D_801481F8;   /* per-frame step of D_801481E8 */
+extern Point3DL           D_801481E8;   /* scene angle, 16.16 fixed point */
+extern Point3DL           D_801481F8;   /* per-frame step of D_801481E8 */
 extern s16                D_8014820C;   /* 0x8014820C */
 extern s8                 D_80148654;   /* 0x80148654 */
 extern s8                 D_80148656;   /* 0x80148656 */
 extern s8                 D_801490E0;   /* 0x801490E0 */
 extern u8                 D_801581E0[]; /* 0x801581E0 */
-/* D_80181164 */
 extern u8*                g_EncounterZoneLists[];
-extern FacingStep         g_FacingOffsets[]; /* 0x80181AC0 */
+extern Point2DL           g_FacingOffsets[]; /* 0x80181AC0 */
 extern s8                 D_80181B00[];
 extern s8                 D_80181B01[];
 extern u8                 D_80181B1C[]; /* 0x80181B1C */
@@ -1578,7 +1564,7 @@ static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 fla
 static inline void Game_RollAreaSetup(s32 actor_slot) {
     u32 choice;
 
-    choice = (u32)(RANDOM_MASK(0xF));
+    choice = (u32)RANDOM_MASK(0xF);
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
         func_8015BAC4((u8)((g_BattlePartyBattlers[0].facing ^ 4) & 7));
     }

@@ -11,7 +11,7 @@ MATCH void func_801E5738(void) {
     u8  row;
 
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(0xAC));
     SAVE_DrawSlots(0x20, 0x30, 1U);
     pressed  = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));

@@ -9,7 +9,7 @@ MATCH void func_801EEC04(void) {
     PartyBattler* swap;
     s32           count;
 
-    Bmagic_DispatchTaskPair(func_801EECE4, Effect_PlayOnZeroTick);
+    BMagic_DispatchTaskPair(func_801EECE4, Effect_PlayOnZeroTick);
     count = 0;
     do {
         if (D_801EF9F8[(u8)count << 5] & 1) {

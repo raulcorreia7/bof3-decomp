@@ -6,7 +6,7 @@ MATCH void func_801D2738(void) {
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }
-    SYS_SetFlag(D_8014554F, D_801448ED);
+    SYS_SetFlag(D_8014554F, g_SceneEventSelection);
     g_MasterStep    = 3;
     g_MasterSubStep = 0;
 }

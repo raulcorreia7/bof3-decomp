@@ -11,20 +11,20 @@
 
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F5364 + 0x10)
 
-extern SVECTOR     D_1F800014[];
-extern s32         D_80145EC4[];
-extern u8          D_801F4D7C[];
+extern SVECTOR  D_1F800014[];
+extern s32      D_80145EC4[];
+extern u8       D_801F4D7C[];
 /* The spawn step handler table indexed by the record's step byte. */
-extern Callback    D_801F5338[];
-extern u8          D_801F534C[];
-extern u8          D_801F5354[];
-extern u8          D_801F53E4[];
+extern Callback D_801F5338[];
+extern u8       D_801F534C[];
+extern u8       D_801F5354[];
+extern u8       D_801F53E4[];
 /* The signed spawn focus offsets, one (x, y) pair per spawn row. */
-extern ScreenPoint D_801F53F0[];
+extern UPoint2D D_801F53F0[];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
-extern u8          D_801F5400[];
-extern u8          D_801F5401[];
-extern u8          D_801F5408[];
+extern u8       D_801F5400[];
+extern u8       D_801F5401[];
+extern u8       D_801F5408[];
 
 /* The steppers that reload the cell after every store select the volatile
  * declaration. */

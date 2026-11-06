@@ -25,7 +25,7 @@ MATCH void func_801C7244(s32 mode) {
     do {
         if (entry->active != 0) {
             count += 1;
-            D_801CD954 += Area_SampleHeight(entry->x, entry->y);
+            D_801CD954 += Area_SampleHeight(entry->pos.x, entry->pos.y);
         }
         entry++;
         index += 1;
@@ -33,7 +33,7 @@ MATCH void func_801C7244(s32 mode) {
 
     index = 0;
 loop_5:
-    if ((u8)index < (Party_CountOrder(1) & BYTE_MASK)) {
+    if ((u8)index < (Party_CountOrder(PARTY_ORDER_BATTLE) & BYTE_MASK)) {
         count += 1;
         D_801CD954 += Area_SampleHeight(*(s32*)(D_80143F2C + ((u8)index << 3)), *(s32*)(D_80143F30 + ((u8)index << 3)));
         index += 1;

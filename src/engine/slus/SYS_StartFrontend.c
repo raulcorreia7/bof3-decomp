@@ -25,7 +25,7 @@ MATCH void SYS_StartFrontend(void) {
     SsUtSetReverbDepth(0x28, 0x28);
     SsSetRVol(0x28, 0x28);
     SND_Start();
-    clear = &D_801448D8;
+    clear = (u8*)&g_SaveData;
     for (i = 0; i < SAVE_BLOCK_SIZE; i++)
         *clear++ = 0;
     j                         = 0;
@@ -36,7 +36,7 @@ MATCH void SYS_StartFrontend(void) {
     g_AreaWalkFlags           = 0;
     D_80144950                = 1;
     g_SndMono                 = 0;
-    D_80144952                = 0;
+    g_WindowStyle             = 0;
     D_80144953                = 0;
     D_80144954                = 0;
     D_80144955                = 0;

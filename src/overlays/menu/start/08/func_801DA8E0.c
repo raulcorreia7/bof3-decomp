@@ -8,7 +8,7 @@ MATCH void func_801DA8E0(void) {
     timer = &D_80148654;
     if (TIMER_EXPIRED(*timer)) {
         i = 0;
-        while (i < Party_CountOrder(0)) {
+        while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
             D_8014833C[i + 4][0] = 0;
             i++;
         }

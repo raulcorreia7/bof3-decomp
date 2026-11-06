@@ -15,7 +15,7 @@ MATCH void func_801E1E80(s16 panel_x, s16 panel_y) {
     base_y = y;
 
     scaled_y = y << 16;
-    UI_DrawWindow(x + 3, y + 3, 85, 16, 0, D_80144952);
+    UI_DrawWindow(x + 3, y + 3, 85, 16, 0, g_WindowStyle);
     y += 4;
     UI_DrawText(x + 4, y, 0, 0xFF, D_801E5D38);
     value = Item_Count(ITEM_CAT_ITEM, ITEM_SKILL_INK, 0);

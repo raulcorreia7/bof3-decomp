@@ -91,8 +91,8 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
         rotation.vz = 0;
     }
 
-    vertex.vx = (scratch->proj_x >> 9) - 0x4000;
-    vertex.vy = (scratch->proj_y >> 9) - 0x4000;
+    vertex.vx = (scratch->proj.x >> 9) - 0x4000;
+    vertex.vy = (scratch->proj.y >> 9) - 0x4000;
     vertex.vz = (-scratch->proj_z / 2);
 
     RotTrans(&vertex, (VECTOR*)&matrix.t, &flag);
@@ -119,16 +119,16 @@ MATCH void func_801D1034(void) {
     s32              coord_y;
     s16              distance;
 
-    g_Task->ticker = (RANDOM_MASK(0xF));
+    g_Task->ticker = RANDOM_MASK(0xF);
     g_Task->timer  = 0;
     g_Task->band   = 0;
 
     source       = D_801D2744;
     work         = g_Task;
-    work->proj_x = source->proj_x;
-    coord_y      = source->proj_y;
-    work->proj_y = coord_y;
-    distance     = Area_SampleHeight(work->proj_x, coord_y);
+    work->proj.x = source->proj.x;
+    coord_y      = source->proj.y;
+    work->proj.y = coord_y;
+    distance     = Area_SampleHeight(work->proj.x, coord_y);
 
     scratch = g_Task;
     scratch->step_index++;
@@ -194,7 +194,7 @@ MATCH void func_801D12A8(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_Task->ticker = (RANDOM_MASK(0xF));
+    g_Task->ticker = RANDOM_MASK(0xF);
     g_Task->timer  = 0;
     g_Task->band   = 0;
 
@@ -208,12 +208,12 @@ MATCH void func_801D12A8(void) {
 
     velocity     = rcos(angle) * D_1F800000;
     work         = g_Task;
-    work->proj_x = D_801D2744->proj_x + velocity;
+    work->proj.x = D_801D2744->proj.x + velocity;
 
     velocity        = rsin(*angle_cell) * D_1F800000;
     source          = D_801D2744;
     scratch         = g_Task;
-    scratch->proj_y = source->proj_y + velocity;
+    scratch->proj.y = source->proj.y + velocity;
     scratch->proj_z = source->proj_z;
     scratch->step_index++;
 }
@@ -251,10 +251,10 @@ MATCH void func_801D1544(void) {
 
     velocity     = rcos(angle) * D_1F800000;
     work         = g_Task;
-    work->proj_x = D_801D2744->proj_x + velocity;
+    work->proj.x = D_801D2744->proj.x + velocity;
 
     velocity       = rsin(*angle_cell) * D_1F800000;
-    g_Task->proj_y = D_801D2744->proj_y + velocity;
+    g_Task->proj.y = D_801D2744->proj.y + velocity;
 
     if (TIMER_EXPIRED(g_Task->band)) {
         D_801D2744->ticker++;
@@ -298,7 +298,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
     do {
         work    = g_Task;
         cell[0] = ((work->ticker + i) & 0xF) << 8;
-        if (RANDOM_MASK(1)) {
+        if RANDOM_MASK (1) {
             new_var  = (s16)jitter_mask;
             cell[-1] = radius_base + (rand() & new_var);
         } else {
@@ -419,7 +419,7 @@ MATCH void func_801D1DE0(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_Task->ticker = (RANDOM_MASK(0xF));
+    g_Task->ticker = RANDOM_MASK(0xF);
     g_Task->timer  = 0;
     g_Task->band   = 0;
 
@@ -432,10 +432,10 @@ MATCH void func_801D1DE0(void) {
     D_1F800000                    = 0x18;
 
     velocity       = rcos(angle) * D_1F800000;
-    g_Task->proj_x = D_801D2744->proj_x + velocity;
+    g_Task->proj.x = D_801D2744->proj.x + velocity;
 
     velocity       = rsin(*angle_cell) * D_1F800000;
-    g_Task->proj_y = D_801D2744->proj_y + velocity;
+    g_Task->proj.y = D_801D2744->proj.y + velocity;
 
     g_Task->proj_z = D_801D2744->proj_z;
     g_Task->step_index++;

@@ -21,7 +21,7 @@ MATCH void SAVE_RunLoadRestore(void) {
             D_80145AC4   = PADRup;
             D_80145ABE   = PADselect;
         }
-        g_PartySize = Party_CountOrder(0U);
+        g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
         EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);
@@ -30,20 +30,20 @@ MATCH void SAVE_RunLoadRestore(void) {
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);
         }
-        Party_BuildBattlers(0);
+        Party_BuildBattlers(PARTY_ORDER_FIELD);
         {
             u8* src;
             s8* dst;
 
-            src = &D_801448D8;
+            src = (u8*)&g_SaveData;
             dst = &g_SceneState;
             memcpy(dst, src, 0x10);
-            g_SceneFlags = (*dst * 8) + (&D_801448D8 + 0x5B0);
+            g_SceneFlags = (*dst * 8) + ((u8*)&g_SaveData + 0x5B0);
         }
-        g_ScriptVars[0] = D_801448F8;
-        g_ScriptVars[1] = D_801448F9;
-        g_ScriptVars[2] = D_801448FA;
-        g_ScriptVars[3] = D_801448FB;
+        g_ScriptVars[0] = g_SavedScriptVars[0];
+        g_ScriptVars[1] = g_SavedScriptVars[1];
+        g_ScriptVars[2] = g_SavedScriptVars[2];
+        g_ScriptVars[3] = g_SavedScriptVars[3];
         Scene_RequestOverlay();
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);
@@ -56,7 +56,7 @@ MATCH void SAVE_RunLoadRestore(void) {
             D_801ED18C = 1;
         }
         Menu_DrawClutStrip(D_80144953);
-        Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+        Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
         SAVE_DrawSlots(0x20, 0x30, 0U);
         UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(0xB1));
     }

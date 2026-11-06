@@ -424,7 +424,7 @@ MATCH void func_801F2DF8(const void* sprite) {
     primitive->tpage = GetTPage(0, 1, 704, 256);
     setRGB0(primitive, VOL(u8, work->flags_03), VOL(u8, work->flags_03), VOL(u8, work->flags_03));
 
-    Area_AddCellPrim(VOL(s32, work->origin_x), VOL(s32, work->origin_y), 2, 0x28);
+    Area_AddCellPrim(VOL(s32, work->origin.x), VOL(s32, work->origin.y), 2, 0x28);
 }
 
 MATCH void func_801F2FD4(void* sprite) {
@@ -433,11 +433,11 @@ MATCH void func_801F2FD4(void* sprite) {
 
     work            = (AreaSprite*)sprite;
     scratch         = WORLD00_AREA024_SCRATCH_PTR;
-    work->origin_x  = scratch->pos_x;
-    work->origin_y  = scratch->pos_y;
-    work->origin_z  = scratch->pos_z;
-    work->normal.vx = (RANDOM_MASK(0xFF)) - 0x80;
-    work->normal.vy = (RANDOM_MASK(0xFF)) - 0x80;
+    work->origin.x  = scratch->pos.x;
+    work->origin.y  = scratch->pos.y;
+    work->origin.z  = scratch->pos.z;
+    work->normal.vx = RANDOM_MASK(0xFF) - 0x80;
+    work->normal.vy = RANDOM_MASK(0xFF) - 0x80;
     work->normal.vz = RANDOM_MASK(0x7F);
     VectorNormal(&work->normal, &work->normal);
     work->flags     = 1u;
@@ -493,9 +493,9 @@ MATCH void func_801F31B4(void) {
     work           = (AreaSprite*)D_801F5B00;
     count          = (work->flags_02 - 1u);
     work->flags_02 = count;
-    work->origin_x += (work->normal.vx * 2);
-    work->origin_y += (work->normal.vy * 2);
-    work->origin_z += (work->normal.vz * 2);
+    work->origin.x += (work->normal.vx * 2);
+    work->origin.y += (work->normal.vy * 2);
+    work->origin.z += (work->normal.vz * 2);
     work->half_size = (work->half_size + 0x80u);
     if (!(count & BYTE_MASK)) {
         ((AreaSprite*)D_801F5B00)->flags_02 = 0x40u;
@@ -510,10 +510,10 @@ MATCH void func_801F3250(void) {
 
     work = (AreaSprite*)D_801F5B00;
     tick = (work->flags_03 - 1u);
-    work->origin_x += work->normal.vx;
-    work->origin_y += work->normal.vy;
+    work->origin.x += work->normal.vx;
+    work->origin.y += work->normal.vy;
     work->flags_03 = tick;
-    work->origin_z += work->normal.vz;
+    work->origin.z += work->normal.vz;
     count                               = (((AreaSprite*)D_801F5B00)->flags_02 - 1u);
     ((AreaSprite*)D_801F5B00)->flags_02 = count;
     if (!(count & BYTE_MASK)) {
@@ -693,9 +693,9 @@ MATCH void func_801F3944(const void* spin) {
     point[1] =
         ((rsin(work->spin_angle) * work->vertex_a.vx + rcos(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;
     point[2] = (work->vertex_a.vz << 12) * work->scale;
-    point[0] += work->origin_x;
-    point[1] += work->origin_y;
-    point[2] += work->origin_z;
+    point[0] += work->origin.x;
+    point[1] += work->origin.y;
+    point[2] += work->origin.z;
     Area_ProjectPoint(point, &primitive->x1);
 
     point[0] =
@@ -703,9 +703,9 @@ MATCH void func_801F3944(const void* spin) {
     point[1] =
         ((rsin(work->spin_angle) * work->vertex_b.vx + rcos(work->spin_angle) * work->vertex_b.vy) >> 8) * work->scale;
     point[2] = (work->vertex_b.vz << 12) * work->scale;
-    point[0] += work->origin_x;
-    point[1] += work->origin_y;
-    point[2] += work->origin_z;
+    point[0] += work->origin.x;
+    point[1] += work->origin.y;
+    point[2] += work->origin.z;
     Area_ProjectPoint(point, &primitive->x2);
 
     fade = work->fade;
@@ -734,13 +734,13 @@ MATCH void func_801F3BE4(void* spin) {
 
     work           = (WorldSpin*)spin;
     scratch        = WORLD00_AREA024_SCRATCH_PTR;
-    work->origin_x = scratch->pos_x;
-    work->origin_y = scratch->pos_y;
-    work->origin_z = scratch->pos_z;
+    work->origin.x = scratch->pos.x;
+    work->origin.y = scratch->pos.y;
+    work->origin.z = scratch->pos.z;
 
-    rot[0] = (RANDOM_MASK(0xFFF));
+    rot[0] = RANDOM_MASK(0xFFF);
     rot[1] = RANDOM_MASK(0x3FF);
-    rot[2] = (RANDOM_MASK(0xFFF));
+    rot[2] = RANDOM_MASK(0xFFF);
 
     work->vertex_a.vx = rcos(16);
     work->vertex_a.vy = rsin(16);
@@ -759,7 +759,7 @@ MATCH void func_801F3BE4(void* spin) {
     ApplyMatrixSV(&matrix, &work->vertex_b, &work->vertex_b);
     PopMatrix();
 
-    work->scale      = (RANDOM_MASK(3)) + 0xA;
+    work->scale      = RANDOM_MASK(3) + 0xA;
     work->angle_lo   = 0;
     work->angle_hi   = 0;
     work->spin_angle = 0;

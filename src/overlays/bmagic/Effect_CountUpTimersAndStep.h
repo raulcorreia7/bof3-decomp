@@ -1,4 +1,5 @@
-/* Counts the timer and the wait up; advances the step when the wait reaches 16. Every change here must verify every member. */
+/* Counts the timer and the wait up; advances the step when the wait reaches 16. Every change here must verify every
+   member. */
 /* func_801EF114 (magic040), func_801EFC28 (magic126) */
 MATCH void Effect_CountUpTimersAndStep(void) {
     PartyBattler* work;

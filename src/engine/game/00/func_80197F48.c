@@ -9,18 +9,18 @@ MATCH void func_80197F48(void) {
     changed = 0;
     if (g_AreaCameraMoving == 0 && EMI_LoaderIsReady() != 0) {
         g_AreaDrawMode = 6;
-        Party_BuildBattlers(0);
+        Party_BuildBattlers(PARTY_ORDER_FIELD);
         func_801BFB34();
         flags      = &g_BattleOptions;
         D_80143F22 = 0;
         if ((*flags & 2) == 0) {
             Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         }
-        if ((*flags & 0x40) == 0 && (g_BattleResult & BATTLE_RESULT_NO_BGM) == 0 && g_SndBgmId != 0xFF) {
+        if ((*flags & 0x40) == 0 && (g_BattleResult & BATTLE_RESULT_NO_BGM) == 0 && g_SndBGMId != 0xFF) {
             for (i = 0; i < 1376; i++) {
                 D_80148A50[i] = D_8018E268[i];
             }
-            sel = &g_SndBgmId;
+            sel = &g_SndBGMId;
             /* NOTE: '<< 2' in place of '* 4' keeps cc1 from reserving 32 unused frame bytes. */
             SsSepReplay(g_SelectionFxVoices[g_SelectionCues[*sel << 2]], D_80181EBB[*sel << 2]);
             SND_SetSequenceVolume((u16)(s8)(u8)g_SelectionFxVoices[g_SelectionCues[*sel << 2]], D_80181EBB[*sel << 2],

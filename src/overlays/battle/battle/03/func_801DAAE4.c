@@ -73,7 +73,7 @@ NON_MATCHING void func_801DAAE4(void) {
                 D_801EB550[(u8)count].index = (u8)index;
                 count += 1u;
                 D_801EB550[(u8)count - 1u].value =
-                    g_BattleEnemyBattlers[slot].stats.agility + D_801EAF48[((u8)rank * 0x10u) + (RANDOM_MASK(0xFu))];
+                    g_BattleEnemyBattlers[slot].stats.agility + D_801EAF48[((u8)rank * 0x10u) + RANDOM_MASK(0xFu)];
             }
         }
         index += 1u;

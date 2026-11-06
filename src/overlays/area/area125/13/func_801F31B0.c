@@ -17,10 +17,10 @@ MATCH void func_801F31B0(s32 arg0) {
         sprite->unk_00[2] = 0;
         sprite->half_size = 0x80;
         x                 = FIELD(s16, D_801F364C, index * 4) << 8;
-        sprite->origin_x  = x;
+        sprite->origin.x  = x;
         y                 = FIELD(s16, D_801F364E, index * 4) << 8;
         sprite->unk_10    = 0;
-        sprite->origin_y  = y;
+        sprite->origin.y  = y;
         z                 = FIELD(s16, D_801F368C, index * 4) << 5;
         sprite->unk_18    = z;
         w                 = FIELD(s16, D_801F368E, index * 4) << 5;

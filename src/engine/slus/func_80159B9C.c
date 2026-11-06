@@ -3,8 +3,8 @@
 /* draws a translucent textured quad and its outline at the given
  * screen position, then four corner bars around it.
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 69.08%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 69.08%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     s16       w;
@@ -47,7 +47,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     poly = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(poly);
     poly->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    poly->clut  = GetClut(((s8)D_80144952 << 5) | 0x10, 481);
+    poly->clut  = GetClut(((s8)g_WindowStyle << 5) | 0x10, 481);
     x2          = x + w;
     y2          = y + h;
     setRGB0(poly, 255, 255, 255);

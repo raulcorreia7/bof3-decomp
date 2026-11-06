@@ -20,8 +20,8 @@ NON_MATCHING void func_801DAA68(void) {
     g_MenuPanelTasks[11].unk_02 = 9;
     g_MenuPanelTasks[11].state  = 2;
     record[0]                   = 1;
-    g_MenuPanelTasks[11].x      = 0x14;
-    g_MenuPanelTasks[11].y      = 0x10;
+    g_MenuPanelTasks[11].pos.x  = 0x14;
+    g_MenuPanelTasks[11].pos.y  = 0x10;
     g_MenuPanelTasks[11].unk_10 = 0;
     for (i = 0; i < 2; i++) {
         rows[i].unk_00[1] = 6;
@@ -32,7 +32,7 @@ NON_MATCHING void func_801DAA68(void) {
 
     i = 0;
     for (;;) {
-        count = Party_CountOrder(0);
+        count = Party_CountOrder(PARTY_ORDER_FIELD);
         index = i & BYTE_MASK;
         if ((s32)index >= (u32)count) {
             break;

@@ -21,9 +21,8 @@ MATCH void func_801D2C34(s16 x, s16 y, s8 flip, u8 ot_index) {
         primitive->tpage = 0x229;
     }
     primitive->clut = 0x7A40;
-    primitive->x0   = (x - 8);
-    primitive->x1   = (x + 8);
-    primitive->y0   = y;
+    setXY0(primitive, (x - 8), y);
+    primitive->x1 = (x + 8);
     setRGB0(primitive, 128, 128, 128);
     primitive->y1 = y;
     primitive->x2 = primitive->x0;

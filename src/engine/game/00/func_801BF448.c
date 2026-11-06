@@ -21,7 +21,7 @@ MATCH void func_801BF448(void) {
             TASK_SET(rec);
             key = rec[0x79];
             while (1) {
-                if (D_80144F5A[i & BYTE_MASK] == key)
+                if (g_PartyFieldOrder[i & BYTE_MASK] == key)
                     break;
                 i += 1;
                 if ((i & BYTE_MASK) >= 3U)

@@ -14,7 +14,7 @@ MATCH void Party_BuildBattlers(u32 mode) {
         g_GameState = (GameState*)battler;
         TASK_SET(battler);
         battler->header.flags = PARTY_BATTLER_FLAG_OCCUPIED;
-        entry_table           = D_80144F5A;
+        entry_table           = g_PartyFieldOrder;
         g_Task->unk_05        = i;
         ((void (*)(u8, u8))func_801C1254)(*((entry_table + ((mode & BYTE_MASK) * 3)) + i), i);
         g_Task->unk_48                           = 0;
@@ -22,8 +22,8 @@ MATCH void Party_BuildBattlers(u32 mode) {
         g_Task->scale.y                          = 0x10000;
         kind                                     = g_CharSlot[*((entry_table + ((mode & BYTE_MASK) * 3)) + i)];
         g_BattlePartyBattlers[i].character_index = kind;
-        /* g_Characters is the 0xA4-byte character-record table; D_80144F5A is at +0x5F2. */
-        record_base                              = (Character*)(D_80144F5A - 0x5F2);
+        /* g_Characters is the 0xA4-byte character-record table; g_PartyFieldOrder is at +0x5F2. */
+        record_base                              = (Character*)(g_PartyFieldOrder - 0x5F2);
         g_BattlePartyBattlers[i].chr             = record_base[kind];
         g_BattlePartyBattlers[i].unk_12C[0] &= 0xFE;
         if ((mode & BYTE_MASK) != 0) {

@@ -13,7 +13,7 @@ MATCH void func_801D639C(void) {
     choice = &D_80144953;
     Menu_DrawClutStrip(*choice);
     choice += 0x15;
-    record = (g_CharSlot[D_80144F5A[g_MenuPanelTasks[13].unk_0C]] * 0xA4) + choice;
+    record = (g_CharSlot[g_PartyFieldOrder[g_MenuPanelTasks[13].unk_0C]] * 0xA4) + choice;
     switch (g_MenuPanelTasks[13].unk_0A) {
         case 0:
         default:
@@ -44,8 +44,8 @@ MATCH void func_801D639C(void) {
     g_MenuPanelTasks[11].unk_10 = Item_GetDescription(group_index, *choice);
     one                         = 1;
     g_MenuPanelTasks[21].active = 1;
-    g_MenuPanelTasks[21].x      = (u16)g_MenuPanelTasks[13].x + 6;
-    g_MenuPanelTasks[21].y      = (u16)(g_MenuPanelTasks[13].y + (g_MenuPanelTasks[13].unk_0A * 0xD + 0x57));
+    g_MenuPanelTasks[21].pos.x  = (u16)g_MenuPanelTasks[13].pos.x + 6;
+    g_MenuPanelTasks[21].pos.y  = (u16)(g_MenuPanelTasks[13].pos.y + (g_MenuPanelTasks[13].unk_0A * 0xD + 0x57));
     input                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(1, 1));

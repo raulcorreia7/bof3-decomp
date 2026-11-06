@@ -14,7 +14,7 @@ MATCH s32 func_801E7B48(s32 caster_index, s32 target_index, s32 use_battle_recor
     i                = 0;
     character_offset = (caster_index & BYTE_MASK) * 0xA4;
     for (;;) {
-        count = Party_CountOrder(0);
+        count = Party_CountOrder(PARTY_ORDER_FIELD);
         index = i & BYTE_MASK;
         if (index >= count) {
             break;

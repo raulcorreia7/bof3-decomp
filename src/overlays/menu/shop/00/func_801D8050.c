@@ -16,13 +16,13 @@ MATCH void func_801D8050(s32 panel_x) {
         s2 = 0;
     }
     s0        = s2 & BYTE_MASK;
-    call_arg4 = D_80144952;
+    call_arg4 = g_WindowStyle;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - (s0 * 0xA)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, call_arg4);
     s1 = 0;
     s0 = s0 << 5;
     s0 = 0x11 - s0;
 loop:
-    cnt = Party_CountOrder(0);
+    cnt = Party_CountOrder(PARTY_ORDER_FIELD);
     if ((s1 & BYTE_MASK) < (cnt & BYTE_MASK)) {
         id = D_80145FCC[(s1 & BYTE_MASK)][0];
         if (g_Characters[id].inoculations != 0) {

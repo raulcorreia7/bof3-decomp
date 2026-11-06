@@ -7,8 +7,8 @@ MATCH void func_801E524C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
     }
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
-    func_801E14A8(0x62 - g_MenuStartTimer * 0x30, 0x4C, D_801ED870, LOBU(g_SaveCardPort), 0);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    func_801E14A8(0x62 - g_MenuStartTimer * 0x30, 0x4C, D_801ED870, g_SaveCardPort, 0);
     count            = g_MenuStartTimer - 1;
     g_MenuStartTimer = count;
     if (count == 0) {

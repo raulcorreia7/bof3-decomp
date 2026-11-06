@@ -7,8 +7,8 @@
 /* Panel-lock flag owned by the main executable. */
 
 MATCH void func_801D26C4(void) {
-    SYS_SetFlag(D_8014554C, D_801448ED);
-    Message_StartAreaMessage(g_MasterMessageIds[D_801448ED]);
+    SYS_SetFlag(D_8014554C, g_SceneEventSelection);
+    Message_StartAreaMessage(g_MasterMessageIds[g_SceneEventSelection]);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     g_MasterSubStep++;
 }

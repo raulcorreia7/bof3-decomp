@@ -8,8 +8,8 @@ typedef struct Start08PanelHead {
     u8  unk_110;
 } Start08PanelHead;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 88.89%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 88.89%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8390(void) {
     s16* panel;
@@ -25,13 +25,13 @@ NON_MATCHING void func_801D8390(void) {
     g_MenuPanelTasks[19].unk_0B = 1;
     g_MenuPanelTasks[21].active = 1;
     slot                        = (u8*)panel + 0xA4;
-    D_801485E0                  = g_MenuPanelTasks[4].x;
-    D_801485E2                  = g_MenuPanelTasks[4].y + g_MenuPanelTasks[16].unk_0A * 0x36;
-    g_MenuPanelTasks[21].x      = g_MenuPanelTasks[16].x + 0x2A;
-    g_MenuPanelTasks[21].y      = g_MenuPanelTasks[16].y + 7;
+    D_801485E0                  = g_MenuPanelTasks[4].pos.x;
+    D_801485E2                  = g_MenuPanelTasks[4].pos.y + g_MenuPanelTasks[16].unk_0A * 0x36;
+    g_MenuPanelTasks[21].pos.x  = g_MenuPanelTasks[16].pos.x + 0x2A;
+    g_MenuPanelTasks[21].pos.y  = g_MenuPanelTasks[16].pos.y + 7;
     pad                         = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
     g_MenuPanelTasks[16].flags  = 0xFF;
-    count                       = Party_CountOrder(0);
+    count                       = Party_CountOrder(PARTY_ORDER_FIELD);
     if (pad & PADLup) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         g_MenuPanelTasks[16].unk_0A -= 1;
@@ -68,8 +68,8 @@ NON_MATCHING void func_801D8390(void) {
         g_MenuPanelTasks[18].unk_01 = 6;
         g_MenuPanelTasks[18].unk_02 = 0xF;
         state[-0x24]                = 1;
-        g_MenuPanelTasks[18].x      = 0x28;
-        g_MenuPanelTasks[18].y      = 0x3C;
+        g_MenuPanelTasks[18].pos.x  = 0x28;
+        g_MenuPanelTasks[18].pos.y  = 0x3C;
         g_BattleItemRow             = (g_MenuPanelTasks[16].unk_0B == 3) ? 6 : 5;
         g_MenuPanelTasks[18].unk_0B = 0;
         D_80148652 += 1;

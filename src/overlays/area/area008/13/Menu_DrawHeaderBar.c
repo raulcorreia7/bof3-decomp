@@ -127,10 +127,9 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     primitive->x1 = (s16)((s32)x + width_plus_1);
     primitive->y1 = (s16)(u16)y;
     primitive->x3 = (s16)((s32)x + width_plus_1);
-    primitive->x0 = (s16)((s32)x + width_plus_1 - 2);
+    setXY0(primitive, (s16)((s32)x + width_plus_1 - 2), (s16)(u16)y);
     primitive->x2 = (s16)((s32)x + width_plus_1 - 2);
     primitive->y3 = bottom_y;
-    primitive->y0 = (s16)(u16)y;
     setUV0(primitive, 0u, 0u);
     primitive->u1 = 2u;
     primitive->v1 = 0u;

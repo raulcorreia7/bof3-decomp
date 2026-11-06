@@ -1,11 +1,11 @@
 #ifndef OVERLAY_AREA_WORLD_SPIN_H
 #define OVERLAY_AREA_WORLD_SPIN_H
 
+#include "common/vector.h"
+
 /* The spin-effect work record the overlay's sprite pass draws. */
 typedef struct WorldSpin {
-    /* 0x00 */ s32     origin_x; /* the camera x, copied from the scratch record */
-    /* 0x04 */ s32     origin_y; /* the camera y */
-    /* 0x08 */ s32     origin_z; /* the camera z */
+    Point3DL           origin;
     u8                 unk_0C[4];
     /* 0x10 */ SVECTOR vertex_a;   /* the first rotated vertex offset */
     /* 0x18 */ SVECTOR vertex_b;   /* the second rotated vertex offset */
@@ -18,7 +18,7 @@ typedef struct WorldSpin {
 } WorldSpin;
 
 ASSERT_SIZE(WorldSpin, 0x2C);
-ASSERT_OFFSET(WorldSpin, origin_x, 0x00);
+ASSERT_OFFSET(WorldSpin, origin, 0x00);
 ASSERT_OFFSET(WorldSpin, vertex_a, 0x10);
 ASSERT_OFFSET(WorldSpin, vertex_b, 0x18);
 ASSERT_OFFSET(WorldSpin, spin_angle, 0x24);

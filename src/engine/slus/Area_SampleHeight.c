@@ -5,8 +5,8 @@
  * larger diagonal sum * 16 or, with both half-cell bits, the largest corner * 32, as s16; outside the grid it returns
  * 0.
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best
- * score 82.69%. resume: a lever or header fix that closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned
+ * draft; best score 82.69%. resume: a lever or header fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     s8   v[4];

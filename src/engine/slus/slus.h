@@ -7,6 +7,7 @@
  * this file. */
 
 #define GAME_SCRATCH_BASE_SCALAR
+#include "common/vector.h"
 #include "game.h"
 #include "sys/cd.h"
 #include "sys/exe.h"
@@ -21,8 +22,9 @@
 #include "menu/save.h"
 #include "slus/facing.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 #include <stdio.h>
-#include <abs.h>
+#include "common/util.h"
 #include <memory.h>
 
 /* Constants. */
@@ -221,23 +223,19 @@ typedef union ScenePart {
 
 /* The text, panel and cue handlers share this state block. */
 typedef struct MenuState {
-    u16 text_x;          /* 0x00 */
-    u16 text_y;          /* 0x02 */
-    u16 origin_x;        /* 0x04 */
-    u16 origin_y;        /* 0x06 */
-    u8  step_id;         /* 0x08 */
-    u8  panel_index;     /* 0x09 */
-    s8  last_row;        /* 0x0A */
-    s8  selection_index; /* 0x0B */
-    s16 cue_counter;     /* 0x0C */
-    s16 cue_timer;       /* 0x0E */
+    UPoint2D text;
+    UPoint2D origin;
+    u8       step_id;         /* 0x08 */
+    u8       panel_index;     /* 0x09 */
+    s8       last_row;        /* 0x0A */
+    s8       selection_index; /* 0x0B */
+    s16      cue_counter;     /* 0x0C */
+    s16      cue_timer;       /* 0x0E */
 } MenuState;
 
 ASSERT_SIZE(MenuState, 0x10);
-ASSERT_OFFSET(MenuState, text_x, 0x00);
-ASSERT_OFFSET(MenuState, text_y, 0x02);
-ASSERT_OFFSET(MenuState, origin_x, 0x04);
-ASSERT_OFFSET(MenuState, origin_y, 0x06);
+ASSERT_OFFSET(MenuState, text, 0x00);
+ASSERT_OFFSET(MenuState, origin, 0x04);
 ASSERT_OFFSET(MenuState, step_id, 0x08);
 ASSERT_OFFSET(MenuState, panel_index, 0x09);
 ASSERT_OFFSET(MenuState, last_row, 0x0A);
@@ -635,7 +633,7 @@ extern PanelSortItem               D_80147CFC[];
 extern PanelSortItem               D_80147D08[]; /* == &D_80147CFC[1] */
 extern PanelSortDepth              D_80147D0C[]; /* == &D_80147CFC[1].depth */
 extern MATRIX                      D_801481B8;
-extern SVECTOR                     D_801481D8;
+extern CameraAngle                 D_801481D8;
 extern u16                         D_801481E0;
 extern s32                         D_801481F0;
 extern s32                         D_801481F4;
@@ -765,7 +763,7 @@ extern const EncounterZone* const  g_EncounterZoneLists[MAP_ZONE_LIST_COUNT];
 extern const SceneFlagPair         D_80181484[SCENE_FLAG_COUNT];
 extern const ScriptRef             D_80181BDC[40];
 extern const ScriptRef* const      D_80181C7C[11];
-extern const BgmTrack              D_80181EB8[BGM_TRACK_COUNT];
+extern const BGMTrack              D_80181EB8[BGM_TRACK_COUNT];
 extern u8                          D_80182174;
 extern u8                          D_80182175;
 extern u8                          D_80182176;
@@ -1322,7 +1320,7 @@ static inline void Slus_DrawPanelBox(void) {
     MenuPanelTask* panel;
 
     panel = g_MenuCurrentPanel;
-    func_80159B9C((s16)panel->x >> 4, (s16)panel->y >> 4, (u8)(panel->unk_10 >> 4), (u8)(panel->unk_12 >> 4));
+    func_80159B9C((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->unk_10 >> 4), (u8)(panel->unk_12 >> 4));
 }
 
 void SYS_Main(void);

@@ -9,8 +9,8 @@ MATCH void func_801F4F0C(const s32* center, s32 radius, u16 angle, s32 offset_x,
     u8       scratch[0x20]; /* FAKE: unreferenced local pads frame to 0x80. */
 
     Area_ProjectPoint(center, screen0);
-    point[0] = ((s32*)center)[0] + ((radius * rcos(angle)) >> 12);
-    point[1] = ((s32*)center)[1] + ((radius * rsin(angle)) >> 12);
+    point[0] = ((s32*)center)[0] + FIXED_MUL(radius, rcos(angle));
+    point[1] = ((s32*)center)[1] + FIXED_MUL(radius, rsin(angle));
     point[2] = ((s32*)center)[2];
     Area_ProjectPoint(point, screen1);
 
@@ -23,8 +23,8 @@ MATCH void func_801F4F0C(const s32* center, s32 radius, u16 angle, s32 offset_x,
         SetSemiTrans(packet, 1);
         setXY2(packet, screen0[0], screen0[1], screen1[0], screen1[1]);
         angle += 0x100;
-        point[0] = ((s32*)center)[0] + ((radius * rcos(angle)) >> 12);
-        point[1] = ((s32*)center)[1] + ((radius * rsin(angle)) >> 12);
+        point[0] = ((s32*)center)[0] + FIXED_MUL(radius, rcos(angle));
+        point[1] = ((s32*)center)[1] + FIXED_MUL(radius, rsin(angle));
         i += 1;
         Area_ProjectPoint(point, screen1);
         packet->x2 = screen1[0];

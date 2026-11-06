@@ -44,8 +44,8 @@ MATCH void func_801D0C4C(void) {
 INCLUDE_ASM(func_801D0D4C);
 
 MATCH void func_801D0F34(void) {
-    /* FAKE: retail reads D_801448EC as u8[]. */
-    ((u8*)&D_801448EC)[0] += 1;
+    /* FAKE: retail reads g_SceneEventStep as u8[]. */
+    ((u8*)&g_SceneEventStep)[0] += 1;
 }
 
 INCLUDE_ASM(func_801D0F50);

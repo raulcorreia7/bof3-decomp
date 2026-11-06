@@ -21,7 +21,7 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
     s32 neg_b;
 
     arg2b = entry_index & BYTE_MASK;
-    index = SQ(arg2b) + (table_index & BYTE_MASK);
+    index = arg2b * arg2b + (table_index & BYTE_MASK);
     entry = ((table_slot & BYTE_MASK) * 8) + ((u8*)D_80181CA8 + (index * 0x18));
     cur_a = *(s32*)entry;
     neg_a = -cur_a;

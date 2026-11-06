@@ -159,8 +159,8 @@ u16 D_801F4FC4[9][16] = {
 
 /* Item pool: 0x00/0x01 record selectors and "Manillo" text. */
 u8 D_801F50E4[28] = {
-    0x00, 0x00, 0x01, 0x04, 0xFF, 0x01, 0x01, 0x02, 0x03, 0x16, 0x0B, 0x02, 0x03, 0x08, 0xFF, 0x00,
-    0x4D, 0x61, 0x6E, 0x69, 0x6C, 0x6C, 0x6F, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x01, 0x04, 0xFF, 0x01, 0x01, 0x02, 0x03, 0x16, 0x0B, 0x02, 0x03, 0x08,
+    0xFF, 0x00, 0x4D, 0x61, 0x6E, 0x69, 0x6C, 0x6C, 0x6F, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
 /* Step handlers. */
@@ -174,19 +174,25 @@ Callback D_801F5114[2] = {
 };
 
 Callback D_801F511C[4] = {
-    Actor_SlideScreenLeft, Actor_SlideScreenX, Area_Update, func_801F3608,
+    Actor_SlideScreenLeft,
+    Actor_SlideScreenX,
+    Area_Update,
+    func_801F3608,
 };
 
 Callback D_801F512C[4] = {
-    Actor_SetScreenBottom, func_801F3750, func_801F3828, func_801F3928,
+    Actor_SetScreenBottom,
+    func_801F3750,
+    func_801F3828,
+    func_801F3928,
 };
 
 /* Sprite cells: w, h, u0, v0 per sprite id. */
 u8 D_801F513C[88] = {
-    112, 48, 0, 0,   56, 16, 8, 80,  56, 8, 8, 96,   56, 16, 8, 104, 128, 24, 0, 56,  8, 24, 0, 80,
-    8,   8,  64, 80, 8,  8,  72, 80, 8,  8, 64, 88,  8,  8,  72, 88,  8,   8,  64, 96,  8, 8,  72, 96,
-    8,   8,  64, 104, 8, 8,  72, 104, 8,  8, 80, 80,  8,  8,  88, 80,  8,   8,  80, 88,  8, 8,  88, 88,
-    8,   8,  80, 96, 8,  8,  88, 96, 8,  8, 80, 104, 8,  8,  88, 104,
+    112, 48, 0,  0,  56, 16, 8,  80,  56, 8,  8,  96,  56, 16, 8,  104, 128, 24,  0,  56, 8,  24,
+    0,   80, 8,  8,  64, 80, 8,  8,   72, 80, 8,  8,   64, 88, 8,  8,   72,  88,  8,  8,  64, 96,
+    8,   8,  72, 96, 8,  8,  64, 104, 8,  8,  72, 104, 8,  8,  80, 80,  8,   8,   88, 80, 8,  8,
+    80,  88, 8,  8,  88, 88, 8,  8,   80, 96, 8,  8,   88, 96, 8,  8,   80,  104, 8,  8,  88, 104,
 };
 
 /* Panel markers selected by the controller bits. */
@@ -208,7 +214,7 @@ Callback D_801F51AC[3] = {
 };
 
 /* Spawn offsets selected by the work byte at +0x08. */
-ScreenPoint D_801F51B8[4] = {
+UPoint2D D_801F51B8[4] = {
     {0, SPAWN_OFFSET_BACK},
     {SPAWN_OFFSET_BACK, 0},
     {0, SPAWN_OFFSET_FORWARD},
@@ -225,9 +231,15 @@ Callback D_801F51D0[2] = {
 };
 
 u8 D_801F51D8[4] = {
-    0x00, 0x50, 0x00, 0x00,
+    0x00,
+    0x50,
+    0x00,
+    0x00,
 };
 
 u8 D_801F51DC[4] = {
-    0xA0, 0xC0, 0x00, 0x00,
+    0xA0,
+    0xC0,
+    0x00,
+    0x00,
 };

@@ -17,7 +17,7 @@ MATCH void Fish_LocationMessage(void) {
     u8             blank;
     u32            id;
 
-    state = &D_801448EC;
+    state = &g_SceneEventStep;
     switch (*state) {
         case 0:
             Game_SetScriptActive();
@@ -79,15 +79,15 @@ MATCH void Fish_LocationMessage(void) {
                 Message_StartAreaMessage((s16)(index + 22));
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            (*(u8*)&D_801448EC)++;
+            (*(u8*)&g_SceneEventStep)++;
             break;
 
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                D_801448EB = 0;
-                *state     = 0;
-                D_801448ED = 0;
+                g_SceneEventMode      = 0;
+                *state                = 0;
+                g_SceneEventSelection = 0;
             }
             break;
     }

@@ -28,7 +28,7 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | A slot is a filled position (`party_slot`); a fixed table position is an index (`CharacterIndex`) | `CharacterSlot` for the record array's position               |
 | An id is the value the game stores to identify a thing (`item_id`, `CharacterId`)                 | `slot_id`, `item_index` for the stored value                  |
 | A fixed array position is an index (`element_index`); never abbreviate it                         | `idx`, `slot_index`, `element_slot`                           |
-| A vector type names its element width: `Vec3S32`, `Vec2U16`                                       | `Vec3i`, `Vec2us`                                             |
+| A vector type names its element width: `Point3DL`, `UPoint2D`                                     | `Vec3i`, `Vec2us`                                             |
 | `mode`/`step`: state phase, `step++`; `timer` counts down; `tick` counts up per frame             | `tick--`, a `timer` that counts up, a per-frame `_step`       |
 | A per-frame amount is a `_delta` or `speed`: `vz_delta`                                           | `vz_step`                                                     |
 | Keep the address name until a caller proves the role                                              | Guess a name from a count, an offset or a tool's output       |
@@ -278,7 +278,7 @@ typedef struct Battler {
     /* 0x1C */ s16 hp;      /* 0 on KO */
     /* 0x1E */ s16 unk_1E;
     /* 0x20 */ u8  pad_20[4];
-    /* 0x24 */ Vec2S16 coord;
+    /* 0x24 */ Point2D coord;
 } Battler;
 
 void Fairy_SetJob(u8 fairy_index, u8 job_type);
@@ -291,7 +291,7 @@ typedef struct Battler {
     s16 half_1C;            /* the width and offset, not the role */
     s16 hp2;                /* a guess with a number */
     u8  data[4];
-    Vec2S16 pos_24;
+    Point2D pos_24;
 } Battler;
 
 void Fairy_SetJob(u8 job, u8 idx);   /* the thing acted on last; abbreviated */
@@ -396,7 +396,7 @@ shared type, with its comment, so the meaning stays when the layout is reused.
 
 ```c
 /* A point on the 320x240 screen, in pixels. */
-typedef Vec2U16 ScreenPoint;
+typedef UPoint2D ScreenPoint;
 ```
 
 **Don't**
@@ -404,6 +404,11 @@ typedef Vec2U16 ScreenPoint;
 ```c
 typedef struct { u16 x; u16 y; } ScreenPointData;   /* a second layout, a filler word */
 ```
+
+A role that recurs gets one typedef over the shared block (`Point2D`, `Point3DL`, `Coord3D`, `SVECTOR`,
+...), in the header that owns its domain, and every member, parameter and global of that role uses it
+(`WorldPos`, `SpriteScale`, `CameraAngle`). A one-off keeps the block type and carries the role in its
+member name. Never one typedef per member, never a second layout.
 
 #### Storage words
 
@@ -502,7 +507,7 @@ two systems have their own thing under one noun. `B` in a disc label marks the b
 | `AreaSceneRecord`, `area-scene`                                                               | `AreaActorDef` (`id`, `clut_select`, `texture_page`, `texture_v`, `texture_mode`, `script_section`), `g_AreaActorDefs`, `area-actor-defs`, `SpriteTextureMode` |
 | SHISU, BATE, COMMU00, BATL_END, BATL_OVR, DEMO, FIRST                                         | Status menu, Ability menu, Fairy Village, battle victory, battle defeat, title resources, boot resources                                                       |
 | SCENA `Scenario*`, `ScenarioCallback`, `ScenarioElevation`                                    | `Scene*`, `SceneFunc`, `SceneElevation`                                                                                                                        |
-| `FieldWork`, `WorldVec`, `WorldCost`, `EmiCueRecord`, `AreaVertexRecord`, `EtcOverlayHead/Id` | `Actor`, `Vec2S16`, `AreaCost`, `EmiCue`, `AreaVertex`, `OverlayHeader`/`OverlayId`                                                                            |
+| `FieldWork`, `WorldVec`, `WorldCost`, `EmiCueRecord`, `AreaVertexRecord`, `EtcOverlayHead/Id` | `Actor`, `Point2D`, `AreaCost`, `EmiCue`, `AreaVertex`, `OverlayHeader`/`OverlayId`                                                                            |
 | `magic-table`                                                                                 | `bmagic-table`                                                                                                                                                 |
 | `BOF3_1.1`                                                                                    | "Breath of Fire III (USA)": volume `BREATH_OF_FIRE3`, 1998-03-26, boot `SLUS_004.22`                                                                           |
 | COMMU01-05, BATL_DRA/RE2/RET/SE, AFLDKWA, MTEST, RTEST, A085SE2, A108SE2                      | keep the disc label until code shows the job                                                                                                                   |
@@ -630,11 +635,11 @@ One definition per thing, in its owning header; local to an image only when one 
 second reader moves a type up ([lowest scope wins](#lowest-scope-wins)). A game type is shared only
 when two or more subsystems store the same layout.
 
-| Type                            | Holds                       |
-| ------------------------------- | --------------------------- |
-| `Vec2S16`, `Vec2U16`, `Vec2S32` | 2-D vectors by member width |
-| `Vec3S16`, `Vec3S32`            | 3-D vectors by member width |
-| `Coord`                         | a 16.16 coordinate          |
+| Type                              | Holds                       |
+| --------------------------------- | --------------------------- |
+| `Point2D`, `UPoint2D`, `Point2DL` | 2-D vectors by member width |
+| `Point3D`, `Point3DL`             | 3-D vectors by member width |
+| `Coord`                           | a 16.16 coordinate          |
 
 The shared fundamentals are defined once in `include/common/vector.h` and `include/common/fixed.h`. Local types with a proven
 matching layout use the shared type and member names. PsyQ types stay at SDK calls; PsyQ's padded
@@ -1443,7 +1448,7 @@ Retail RAM address literals stay out of C and headers; hardware registers, the s
 BIOS addresses and format offsets stay as defines.
 
 A named global lives in the header of the system that owns it, beside the code that reads and
-writes it: `g_SndBgmId` in the sound runtime header, `g_BattleState` in `battle/ram.h`. Each system
+writes it: `g_SndBGMId` in the sound runtime header, `g_BattleState` in `battle/ram.h`. Each system
 header stays self-contained. An executable word with no name yet is declared at the lowest scope that
 covers its users ([lowest scope wins](#lowest-scope-wins)); one that several families read is in
 `include/slus/data.h` or `include/slus/functions.h`, in address order. The change that names one moves

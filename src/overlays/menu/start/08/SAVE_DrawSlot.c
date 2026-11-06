@@ -11,7 +11,7 @@ MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry) {
 
     x = left;
     y = top;
-    UI_DrawWindow(left + 8, y, 200, 48, 0, D_80144952);
+    UI_DrawWindow(left + 8, y, 200, 48, 0, g_WindowStyle);
     if (entry != NULL) {
         if (GetGraphType() != 1) {
             GetGraphType();

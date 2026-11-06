@@ -16,7 +16,7 @@ MATCH void func_801D62AC(void) {
         func_801D71EC();
         i   = 0;
         off = 0x90;
-        while (i < (Party_CountOrder(0) & BYTE_MASK)) {
+        while (i < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK)) {
             i++;
             temp             = off;
             D_80148333[temp] = 4;

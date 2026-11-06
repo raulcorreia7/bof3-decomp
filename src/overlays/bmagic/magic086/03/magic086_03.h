@@ -5,7 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BmagicEffectFuncs D_801EEC04;
+extern BMagicEffectFuncs D_801EEC04;
 extern Callback          D_801F0360[];
 
 void func_801EF424(void);

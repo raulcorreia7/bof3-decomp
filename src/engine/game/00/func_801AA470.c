@@ -1,7 +1,7 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried first-draft switch cleaned; signed divide by array element adds 8 stack bytes (frame 0x28 vs
- * 0x20); index pointer, cursor tails. */
+/* nonmatching unmeasured: tried first-draft switch cleaned; signed divide by array element adds 8 stack bytes (frame
+ * 0x28 vs 0x20); index pointer, cursor tails. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
     u8* code;

@@ -2,7 +2,7 @@
 
 MATCH void func_801F599C(void) {
     Game_SetScriptActive();
-    D_801448EB = 0x2C;
-    D_801448EC = 0;
-    D_801448ED = 7;
+    g_SceneEventMode      = 0x2C;
+    g_SceneEventStep      = 0;
+    g_SceneEventSelection = 7;
 }

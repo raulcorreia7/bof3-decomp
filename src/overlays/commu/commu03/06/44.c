@@ -42,20 +42,20 @@ MATCH void func_801D1058(void) {
 MATCH void func_801D1094(void) {
     s32 temp_v0;
 
-    if (g_SndBgmId != 0xFF) {
-        if (g_SndBgmId != D_801D1944) {
-            temp_v0 = g_SndBgmId * 4;
+    if (g_SndBGMId != 0xFF) {
+        if (g_SndBGMId != D_801D1944) {
+            temp_v0 = g_SndBGMId * 4;
             SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
         }
     }
-    SND_RequestBgm(D_801D1944);
+    SND_RequestBGM(D_801D1944);
     func_801D1250(0x32, 0x28);
     D_801F294D += 1;
 }
 
 MATCH void func_801D1124(void) {
     if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBgm(D_801D1944, 0x64, 8);
+        SND_PlayBGM(D_801D1944, 0x64, 8);
         D_801D1948 = 0;
         D_801F294D += 1;
     }
@@ -84,6 +84,6 @@ INCLUDE_ASM(func_801D1714);
 MATCH void func_801D18AC(void) {
     u8* state;
 
-    state = &D_801448EC;
+    state = &g_SceneEventStep;
     *state += 1;
 }

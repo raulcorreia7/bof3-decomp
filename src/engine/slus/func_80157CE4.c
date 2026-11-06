@@ -2,8 +2,8 @@
 
 /* lifted draft, best score 45.34%; semantics unverified
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 45.34%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 45.34%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
     u16   stack_28;

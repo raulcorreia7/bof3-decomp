@@ -2,6 +2,6 @@
 
 MATCH void func_801F319C(void) {
     Game_SetScriptActive();
-    D_801448EB = 0x1E;
-    D_801448EC = 0;
+    g_SceneEventMode = 0x1E;
+    g_SceneEventStep = 0;
 }

@@ -1,4 +1,5 @@
-/* Moves the effect's actor one drift step and releases the ticker when the timer runs out. Every change here must verify every member. */
+/* Moves the effect's actor one drift step and releases the ticker when the timer runs out. Every change here must
+   verify every member. */
 /* func_801EF59C (magic067), func_801EF2C4 (magic137) */
 MATCH void Effect_DriftStep(void) {
     PartyBattler* work;

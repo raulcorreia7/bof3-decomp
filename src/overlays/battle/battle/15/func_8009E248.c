@@ -5,8 +5,8 @@ extern u16 D_801EB6D0[][0x8C];
 
 /* Shows the selected battler's damage step and adjusts the HP bar.
  */
-/* nonmatching unmeasured: tried the first draft rewritten with typed HP record views and flag checks. resume: close the +0x0
- * branch (early-return shape). */
+/* nonmatching unmeasured: tried the first draft rewritten with typed HP record views and flag checks. resume: close the
+ * +0x0 branch (early-return shape). */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009E248(void) {
     s32 id;

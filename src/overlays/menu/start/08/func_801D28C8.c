@@ -13,7 +13,7 @@ MATCH void func_801D28C8(void) {
     if (count == 0) {
         func_801D2D74();
         i = 0;
-        while (i < Party_CountOrder(0)) {
+        while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
             D_80148333[((i + 4) * 9) << 2] = 4;
             i++;
         }

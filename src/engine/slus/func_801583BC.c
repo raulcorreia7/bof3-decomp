@@ -5,7 +5,8 @@
  */
 MATCH void func_801583BC(void* obj) {
     s32 first;
-    /* FAKE: pin the second field result in the retail destination register. Natural u16/s32 locals without the pin tried: 2 of 2 differ. */
+    /* FAKE: pin the second field result in the retail destination register. Natural u16/s32 locals without the pin
+       tried: 2 of 2 differ. */
     MATCH_FAKE_PIN(s32, second, "v1");
 
     if (D_8014933C != 0) {

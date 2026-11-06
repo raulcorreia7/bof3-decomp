@@ -3,7 +3,8 @@
  * file where the function sits and binds g_MenuPortraitAtlas in its
  * table in config/symbols.toml.
  */
-/* func_801D23A0 (sisyou), func_801D3518 (bate), func_801D44C0 (shisu), func_801D8F8C (commu02), func_801D8FC0 (shop), func_801DC4B8 (start) */
+/* func_801D23A0 (sisyou), func_801D3518 (bate), func_801D44C0 (shisu), func_801D8F8C (commu02), func_801D8FC0 (shop),
+   func_801DC4B8 (start) */
 MATCH void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode) {
     SPRT* sprt;
     u8*   entry;

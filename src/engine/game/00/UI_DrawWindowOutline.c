@@ -1,7 +1,7 @@
 #include "game_00.h"
 
-/* draws the outline of the rectangle at (x, y) of width by height in the window style color; bit 0 of flags picks the blend
- * of the edge pieces and bits 4-7 cut the four corners. */
+/* draws the outline of the rectangle at (x, y) of width by height in the window style color; bit 0 of flags picks the
+ * blend of the edge pieces and bits 4-7 cut the four corners. */
 /* nonmatching unmeasured: tried 65.09%: byte-based color table index fixed; retail colors computed first in s4/s3/s1,
  * args copied to s8/s7/s5 (pins reach correct set but lose 8 points); no sh a0,0x28(sp) arg spill in retail. */
 #ifdef NON_MATCHING
@@ -29,7 +29,7 @@ NON_MATCHING void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 
     val0  = x;
     val4  = y;
     val2  = width;
-    tmp3  = *(u16*)(((D_80144952 << 6) | 0x20) + (u8*)&D_80033A08);
+    tmp3  = *(u16*)(((g_WindowStyle << 6) | 0x20) + (u8*)&D_80033A08);
     tmp4  = tmp3 & HALF_MASK;
     tmp1  = flags & 1;
     if (tmp1 == 0) {

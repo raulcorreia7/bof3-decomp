@@ -10,7 +10,7 @@ MATCH void func_801F2CDC(void) {
         slot               = &g_ActorSlots[index];
         slot->header.flags = 1;
         slot->type         = 0x1C;
-        slot->x.fixed      = g_Task->pos.x.fixed;
-        slot->y.fixed      = g_Task->pos.y.fixed;
+        slot->pos.x.fixed  = g_Task->pos.x.fixed;
+        slot->pos.y.fixed  = g_Task->pos.y.fixed;
     }
 }

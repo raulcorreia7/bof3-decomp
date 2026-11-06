@@ -6,7 +6,7 @@
 
 #include "overlays/area/world04.h"
 #include "work/area_spad.h"
-#include <abs.h>
+#include "common/util.h"
 
 /* The work origin offset, step and threshold this overlay advances. */
 #define AREA_ORIGIN_OFFSET       0x2E
@@ -25,9 +25,9 @@ extern s32     D_80145EC4[];
  * start at 0x130. */
 extern u8      D_801F4C3C[];
 #define AREA_HUD_SPRITE_CELLS (D_801F4C3C + 0x158)
-extern ScreenPoint D_801F4E10[];
-extern u8          D_801F4E20[];
-extern u8          D_801F4E21[];
+extern UPoint2D D_801F4E10[];
+extern u8       D_801F4E20[];
+extern u8       D_801F4E21[];
 
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud

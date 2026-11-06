@@ -12,17 +12,17 @@ extern s32     D_80145EC4[];
 extern u8      D_801F4DB4[];
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F4DB4 + 0x4FC)
 /* The spawn step handler table indexed by the record's step byte. */
-extern Callback    D_801F5274[];
-extern u8          D_801F5288[];
-extern u8          D_801F5290[];
-extern u8          D_801F52A0[];
-extern u8          D_801F5320[];
+extern Callback D_801F5274[];
+extern u8       D_801F5288[];
+extern u8       D_801F5290[];
+extern u8       D_801F52A0[];
+extern u8       D_801F5320[];
 /* The signed spawn focus offsets, one (x, y) pair per spawn row. */
-extern ScreenPoint D_801F532C[];
+extern UPoint2D D_801F532C[];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
-extern u8          D_801F533C[];
-extern u8          D_801F533D[];
-extern u8          D_801F5344[];
+extern u8       D_801F533C[];
+extern u8       D_801F533D[];
+extern u8       D_801F5344[];
 
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud

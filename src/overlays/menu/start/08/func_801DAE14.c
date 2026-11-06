@@ -18,10 +18,10 @@ extern u8  D_801ED694[][2];
 extern u8  D_801ED695[][2];
 extern u8  D_801ED69C;
 
-/* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to g_MenuPanelTasks[12].unk_0A,
- * for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv (85.21), 15 min of rewrite search
- * (type hacks). resume: j must be a preheader-initialised biv with addiu v1,v1,2 in the branch delay slot and i++ after
- * the volatile load. */
+/* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to
+ * g_MenuPanelTasks[12].unk_0A, for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv
+ * (85.21), 15 min of rewrite search (type hacks). resume: j must be a preheader-initialised biv with addiu v1,v1,2 in
+ * the branch delay slot and i++ after the volatile load. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DAE14(void) {
     s32 count;
@@ -33,14 +33,14 @@ NON_MATCHING void func_801DAE14(void) {
     volatile u8* flags;
     volatile u8* total;
 
-    count  = Party_CountOrder(0);
+    count  = Party_CountOrder(PARTY_ORDER_FIELD);
     flags  = &D_801484EA;
     *flags = 0;
     offset = 0;
     for (i = 0; i < 8; i++) {
         if (((u8*)&g_Characters[0].unk_07)[offset] & 1) {
             for (index = 0; index < (count & BYTE_MASK); index++) {
-                if (g_Characters[i].character_index == D_80144F5A[index]) {
+                if (g_Characters[i].character_index == g_PartyFieldOrder[index]) {
                     break;
                 }
             }
@@ -55,8 +55,8 @@ NON_MATCHING void func_801DAE14(void) {
     g_MenuPanelTasks[12].unk_01 = 6;
     g_MenuPanelTasks[12].unk_02 = 0x13;
     g_MenuPanelTasks[12].state  = 2;
-    g_MenuPanelTasks[12].x      = BATTLE_PARTY_STRIDE;
-    g_MenuPanelTasks[12].y      = 0x3B;
+    g_MenuPanelTasks[12].pos.x  = BATTLE_PARTY_STRIDE;
+    g_MenuPanelTasks[12].pos.y  = 0x3B;
     D_80148500                  = D_801ED690;
 
     for (i = 0; i < (count & BYTE_MASK); i++) {

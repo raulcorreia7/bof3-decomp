@@ -8,11 +8,11 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     u32        value;
     s32        align;
 
-    base = &D_80144952;
+    base = &g_WindowStyle;
     UI_DrawWindow((x + 3), (y + 3), 125, 48, 0, base[0]);
     /* FAKE: the record base is formed straight from the byte symbol; folding the offset through the pointer local
      * places the address pair too early. */
-    record = (Character*)(&D_80144952 + 0x16) + entry;
+    record = (Character*)(&g_WindowStyle + 0x16) + entry;
     Menu_DrawPortrait((x + 0x56), (y + 2), record->character_id, ((record->status >> 6) & 2));
     UI_DrawText((x + 20), (y + 3), 0, 5, (u8*)record);
     sprintf((char*)g_UiFormatBuffer, D_801D0C04, record->level);

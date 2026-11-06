@@ -90,7 +90,7 @@ MATCH void func_801D2FE0(void) {
 }
 
 MATCH void Menu_DrawPanelCursor(void) {
-    Menu_DrawCursorSprite(g_MenuCurrentPanel->x, g_MenuCurrentPanel->y, 0);
+    Menu_DrawCursorSprite(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, 0);
 }
 
 INCLUDE_ASM(func_801D3018);
@@ -102,17 +102,17 @@ MATCH void func_801D30E4(void) {
 MATCH void func_801D3124(void) {
     u16 next_pos;
 
-    next_pos              = g_MenuCurrentPanel->y + 0x10;
-    g_MenuCurrentPanel->y = next_pos;
+    next_pos                  = g_MenuCurrentPanel->pos.y + 0x10;
+    g_MenuCurrentPanel->pos.y = next_pos;
     if ((s16)next_pos >= 0x11) {
-        g_MenuCurrentPanel->y     = 16U;
+        g_MenuCurrentPanel->pos.y = 16U;
         g_MenuCurrentPanel->state = 0;
     }
 }
 
 MATCH void func_801D3164(void) {
     D_801D9768[g_MenuCurrentPanel->state]();
-    Menu_DrawCommandRow(g_MenuCurrentPanel->x, g_MenuCurrentPanel->y, g_MenuCurrentPanel->unk_0A,
+    Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A,
                         g_MenuCurrentPanel->unk_0B, 0);
 }
 
@@ -123,10 +123,10 @@ MATCH void func_801D31CC(void) {
 MATCH void func_801D320C(void) {
     u16 next_pos;
 
-    next_pos              = g_MenuCurrentPanel->y + 0x10;
-    g_MenuCurrentPanel->y = next_pos;
+    next_pos                  = g_MenuCurrentPanel->pos.y + 0x10;
+    g_MenuCurrentPanel->pos.y = next_pos;
     if ((s16)next_pos >= 0x27) {
-        g_MenuCurrentPanel->y     = 38U;
+        g_MenuCurrentPanel->pos.y = 38U;
         g_MenuCurrentPanel->state = 0;
     }
 }
@@ -139,21 +139,21 @@ MATCH void func_801D324C(void) {
 MATCH void func_801D32A0(void) {
     u16 x;
 
-    x                     = g_MenuCurrentPanel->x - 0x20;
-    g_MenuCurrentPanel->x = x;
+    x                         = g_MenuCurrentPanel->pos.x - 0x20;
+    g_MenuCurrentPanel->pos.x = x;
     if ((s16)x < -200) {
-        LOH(g_MenuCurrentPanel->x) = -0xC8;
-        g_MenuCurrentPanel->state  = 0;
+        LOH(g_MenuCurrentPanel->pos.x) = -0xC8;
+        g_MenuCurrentPanel->state      = 0;
     }
 }
 
 MATCH void func_801D32E0(void) {
     u16 next_pos;
 
-    next_pos              = g_MenuCurrentPanel->x + 0x20;
-    g_MenuCurrentPanel->x = next_pos;
+    next_pos                  = g_MenuCurrentPanel->pos.x + 0x20;
+    g_MenuCurrentPanel->pos.x = next_pos;
     if ((s16)next_pos >= 0x12) {
-        g_MenuCurrentPanel->x     = 17U;
+        g_MenuCurrentPanel->pos.x = 17U;
         g_MenuCurrentPanel->state = 0;
     }
 }
@@ -237,10 +237,10 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
     u8       flags;
     u8       n;
 
-    UI_DrawWindow((panel->x + 3) & HALF_MASK, (panel->y + 3) & HALF_MASK, 154, 160, 0, D_80144952);
+    UI_DrawWindow((panel->pos.x + 3) & HALF_MASK, (panel->pos.y + 3) & HALF_MASK, 154, 160, 0, g_WindowStyle);
     n    = 0;
     list = Party_GetAbilities(panel->group, panel->group_first, 0);
-    y    = panel->y;
+    y    = panel->pos.y;
     do {
         if (*list != 0) {
             locked = (u8)func_801AF5B0(panel->kind, D_80148656, *list) == 0;
@@ -250,25 +250,25 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
             }
             level   = Char_GetAbilityElement(*list);
             ability = (Ability*)&g_Abilities[*list];
-            count   = Char_GetAbilityCost(g_CharSlot[D_80144F5A[(s8)D_80148656]], *list, 0);
+            count   = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->drawn_cursor || n == panel->group_cursor) {
                 if (shade != 7) {
-                    func_801AF930((s16)(panel->x + 7), (s16)(y + 0x1A), 7, level, (u8*)ability, count, 1);
+                    func_801AF930((s16)(panel->pos.x + 7), (s16)(y + 0x1A), 7, level, (u8*)ability, count, 1);
                 }
-                func_801AF930((s16)(panel->x + 7), (s16)(y + 0x18), shade, level, (u8*)ability, count, locked);
+                func_801AF930((s16)(panel->pos.x + 7), (s16)(y + 0x18), shade, level, (u8*)ability, count, locked);
             } else {
-                func_801AF930((s16)(panel->x + 7), (s16)(y + 0x1A), shade, level, (u8*)ability, count, locked);
+                func_801AF930((s16)(panel->pos.x + 7), (s16)(y + 0x1A), shade, level, (u8*)ability, count, locked);
             }
         }
         n++;
         y += 0xD;
         list++;
     } while (n < 10);
-    x = panel->x + 0x4E;
-    UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->y + 7), 0, 0x10,
+    x = panel->pos.x + 0x4E;
+    UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, 0x10,
                 D_801D9EA4[panel->group_first]);
-    UI_DrawSpriteRun(panel->x, panel->y, (FIELD(u8, panel, 0x9u) & 2) ? D_801D9978 : D_801D9960, 1);
-    UI_DrawSpriteRun(panel->x, panel->y, (FIELD(u8, panel, 0x9u) & 1) ? D_801D999C : D_801D9990, 1);
+    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & 2) ? D_801D9978 : D_801D9960, 1);
+    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & 1) ? D_801D999C : D_801D9990, 1);
     flags = FIELD(u8, panel, 0x9u);
     if (!(flags & 0xF0)) {
         FIELD(u8, panel, 0x9u) = 0;
@@ -276,23 +276,23 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
         FIELD(u8, panel, 0x9u) = flags - 0x10;
     }
     for (n = 0; n < 10; n++) {
-        UI_DrawSprite(panel->x + (n + 5) * 8, panel->y, 1, 1);
+        UI_DrawSprite(panel->pos.x + (n + 5) * 8, panel->pos.y, 1, 1);
     }
     for (n = 0; n < 17; n++) {
-        UI_DrawSprite(panel->x, panel->y + (n + 3) * 8, 4, 1);
+        UI_DrawSprite(panel->pos.x, panel->pos.y + (n + 3) * 8, 4, 1);
     }
-    UI_DrawSprite(panel->x + 144, panel->y + 24, 0x20, 1);
+    UI_DrawSprite(panel->pos.x + 144, panel->pos.y + 24, 0x20, 1);
     for (n = 0; n < 15; n++) {
-        UI_DrawSprite(panel->x + 144, panel->y + (n + 4) * 8, 0x21, 1);
+        UI_DrawSprite(panel->pos.x + 144, panel->pos.y + (n + 4) * 8, 0x21, 1);
     }
-    UI_DrawSprite(panel->x, panel->y + 160, 5, 1);
-    UI_DrawSprite(panel->x + 144, panel->y + 152, 0x22, 1);
+    UI_DrawSprite(panel->pos.x, panel->pos.y + 160, 5, 1);
+    UI_DrawSprite(panel->pos.x + 144, panel->pos.y + 152, 0x22, 1);
     if ((s16)panel->unk_10 != 0) {
-        UI_DrawSprite(panel->x + 8, panel->y, 0x32, 1);
-        UI_DrawSprite(panel->x + 144, panel->y, 0x34, 1);
+        UI_DrawSprite(panel->pos.x + 8, panel->pos.y, 0x32, 1);
+        UI_DrawSprite(panel->pos.x + 144, panel->pos.y, 0x34, 1);
     }
     for (n = 0; n < 17; n++) {
-        UI_DrawSprite(panel->x + (n + 1) * 8, panel->y + 160, 6, 1);
+        UI_DrawSprite(panel->pos.x + (n + 1) * 8, panel->pos.y + 160, 6, 1);
     }
 }
 
@@ -309,7 +309,7 @@ MATCH void func_801D91B0(u8 index, s32 left, s32 top, MenuListRow* row) {
 
     x = left;
     y = top;
-    UI_DrawWindow(left + 8, y, 200, 48, 0, D_80144952);
+    UI_DrawWindow(left + 8, y, 200, 48, 0, g_WindowStyle);
     if (row != NULL) {
         if (GetGraphType() != 1) {
             GetGraphType();

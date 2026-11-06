@@ -5,8 +5,8 @@ MATCH void func_801D4CF0(void) {
     u8  count;
 
     counter = &D_80148654;
-    func_801DDFB0(0x62 + *counter * 0x30, 0x4C, D_801E60F8, LOBU(g_SaveCardPort), 1);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    func_801DDFB0(0x62 + *counter * 0x30, 0x4C, D_801E60F8, g_SaveCardPort, 1);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     count    = *counter + 1;
     *counter = count;
     if (count == 4) {

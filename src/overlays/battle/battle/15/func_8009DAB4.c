@@ -21,23 +21,24 @@ MATCH void func_8009DAB4(void) {
         value       = g_BattleEnemyBattlers[enemy_index].stats.power;
     }
     D_801EC30C = value;
-    switch (RANDOM_MASK(3)) {
-        case 0: {
-            u16* cell = (u16*)&D_801EC30C;
-            *cell     = (*cell >> 1);
-            break;
+    switch
+        RANDOM_MASK(3) {
+            case 0: {
+                u16* cell = (u16*)&D_801EC30C;
+                *cell     = (*cell >> 1);
+                break;
+            }
+            case 3: {
+                volatile u16* cell = &D_801EC30C;
+                u16           half = *cell;
+                *cell              = half + (half >> 1);
+                break;
+            }
         }
-        case 3: {
-            volatile u16* cell = &D_801EC30C;
-            u16           half = *cell;
-            *cell              = half + (half >> 1);
-            break;
-        }
-    }
     battler_index  = g_BattleActiveBattler;
     selection_kind = g_BattleTarget;
     /* FAKE: keeps the 0xFFFF load in the jal delay slot. */
     MATCH_FAKE_BARRIER();
-    res                             = Battle_CalcDamage(battler_index, selection_kind, 0xFFFF);
+    res                             = Battle_CalcDamage(battler_index, selection_kind, BATTLE_ELEMENT_FROM_WEAPON);
     g_BattleTargetRecord->hp_change = res;
 }

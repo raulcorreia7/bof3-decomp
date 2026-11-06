@@ -40,11 +40,11 @@ MATCH void func_801D2064(void) {
 
     velocity     = rcos(angle) * D_1F800000;
     work         = g_Task;
-    work->proj_x = D_801D2744->proj_x + velocity;
+    work->proj.x = D_801D2744->proj.x + velocity;
 
     velocity        = rsin(*angle_cell) * D_1F800000;
     scratch         = g_Task;
-    scratch->proj_y = D_801D2744->proj_y + velocity;
+    scratch->proj.y = D_801D2744->proj.y + velocity;
     scratch->band -= 2;
 
     if (g_Task->band == 0) {
@@ -82,10 +82,10 @@ MATCH void func_801D218C(void) {
             SetLineG2(primitive);
             SetSemiTrans(primitive, 1);
             RotTransPers((SVECTOR*)D_1F800014, (long*)&primitive->x0, &p, &flag);
-            if (RANDOM_MASK(1)) {
-                D_1F800000 = (RANDOM_MASK(0x3F)) + 0x80;
+            if RANDOM_MASK (1) {
+                D_1F800000 = RANDOM_MASK(0x3F) + 0x80;
             } else {
-                D_1F800000 = 0x80 - (RANDOM_MASK(0x3F));
+                D_1F800000 = 0x80 - RANDOM_MASK(0x3F);
             }
             page    = ((g_Task->ticker + i + 2) & 0xF) << 8;
             vec[0]  = 0;
@@ -108,7 +108,7 @@ MATCH void func_801D240C(void) {
     s32      angle;
     s32      i;
 
-    D_1F800000 = (RANDOM_MASK(7)) + g_Task->band * 3;
+    D_1F800000 = RANDOM_MASK(7) + g_Task->band * 3;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5, 0);
     i         = 0;
@@ -120,14 +120,14 @@ MATCH void func_801D240C(void) {
         SetPolyG3(primitive);
         SetSemiTrans(primitive, 1);
 
-        setXY0(primitive, g_Task->origin_x, g_Task->origin_y);
+        setXY0(primitive, g_Task->origin.x, g_Task->origin.y);
         angle         = i << 9;
-        primitive->x1 = g_Task->origin_x + FIXED_MUL(rsin(angle), *angle_ptr);
-        primitive->y1 = g_Task->origin_y + FIXED_MUL(rcos(angle), *angle_ptr);
+        primitive->x1 = g_Task->origin.x + FIXED_MUL(rsin(angle), *angle_ptr);
+        primitive->y1 = g_Task->origin.y + FIXED_MUL(rcos(angle), *angle_ptr);
         i++;
         angle         = i << 9;
-        primitive->x2 = g_Task->origin_x + FIXED_MUL(rsin(angle), *angle_ptr);
-        primitive->y2 = g_Task->origin_y + FIXED_MUL(rcos(angle), *angle_ptr);
+        primitive->x2 = g_Task->origin.x + FIXED_MUL(rsin(angle), *angle_ptr);
+        primitive->y2 = g_Task->origin.y + FIXED_MUL(rcos(angle), *angle_ptr);
         setRGB0(primitive, g_Task->band * 8, g_Task->band * 8, g_Task->band * 6);
         setRGB1(primitive, 1, 1, 1);
         setRGB2(primitive, 1, 1, 1);
@@ -139,12 +139,12 @@ MATCH void func_801D2658(void) {
     s16     vec[3];
     TILE_1* primitive;
 
-    vec[0]    = (g_Task->proj_x >> 9) - 0x4000;
+    vec[0]    = (g_Task->proj.x >> 9) - 0x4000;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = (g_Task->proj_y >> 9) - 0x4000;
+    vec[1]    = (g_Task->proj.y >> 9) - 0x4000;
     vec[2]    = -(g_Task->proj_z / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);
-    g_Task->origin_x = primitive->x0;
-    g_Task->origin_y = primitive->y0;
+    g_Task->origin.x = primitive->x0;
+    g_Task->origin.y = primitive->y0;
 }

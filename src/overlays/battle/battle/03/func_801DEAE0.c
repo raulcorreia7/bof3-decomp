@@ -12,15 +12,15 @@ MATCH void func_801DEAE0(void) {
             x = local_18[RANDOM_MASK(1u)];
             break;
         case 0u:
-            x = local_18[4u + (RANDOM_MASK(1u))];
+            x = local_18[4u + RANDOM_MASK(1u)];
             break;
         case 2u:
         case 3u:
         case 4u:
-            x = local_18[2u + (RANDOM_MASK(1u))];
+            x = local_18[2u + RANDOM_MASK(1u)];
             break;
         default:
-            x = local_18[4u + (RANDOM_MASK(1u))];
+            x = local_18[4u + RANDOM_MASK(1u)];
             break;
     }
 

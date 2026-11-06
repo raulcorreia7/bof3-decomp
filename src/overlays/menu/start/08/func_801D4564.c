@@ -1,7 +1,7 @@
 #include "start_08.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 82.15%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 82.15%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D4564(void) {
     s32 tmp0;
@@ -13,9 +13,9 @@ NON_MATCHING void func_801D4564(void) {
     g_MenuPanelTasks[11].unk_10 =
         Item_GetDescription(g_MenuPanelTasks[13].unk_0A, D_801C893C[D_8014850E][g_MenuPanelTasks[13].unk_0C]);
     g_MenuPanelTasks[21].active = 1;
-    g_MenuPanelTasks[21].x      = (u16)g_MenuPanelTasks[13].x + 7;
-    g_MenuPanelTasks[21].y =
-        (u16)g_MenuPanelTasks[13].y + (((g_MenuPanelTasks[13].unk_0C - g_MenuPanelTasks[13].unk_0B) * 0xD) + 0x1A);
+    g_MenuPanelTasks[21].pos.x  = (u16)g_MenuPanelTasks[13].pos.x + 7;
+    g_MenuPanelTasks[21].pos.y =
+        (u16)g_MenuPanelTasks[13].pos.y + (((g_MenuPanelTasks[13].unk_0C - g_MenuPanelTasks[13].unk_0B) * 0xD) + 0x1A);
     tmp0 = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
     if (tmp0 & PADLup) {
         if (g_MenuPanelTasks[13].unk_0C != 0) {

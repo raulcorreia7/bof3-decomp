@@ -15,7 +15,7 @@ MATCH void func_801DB140(void) {
     u8*           counter;
 
     D_801E31FC = D_801E31F8;
-    if (g_ActorSlots[0].y.fixed > 0x3E7FFF) {
+    if (g_ActorSlots[0].pos.y.fixed > 0x3E7FFF) {
         D_80144199                                             = 1;
         D_8014419E                                             = 4;
         D_8014403D                                             = 4;
@@ -25,7 +25,7 @@ MATCH void func_801DB140(void) {
         D_80146889[D_801E3208 * sizeof(FishingSelectionState)] = 6;
         SND_PlayCue(EMI_CUE_ID(2, 3));
         SND_StopSequence(0, 1);
-        SND_PlayBgm(0x2A, 0x64, 8);
+        SND_PlayBGM(0x2A, 0x64, 8);
         Actor_RequestScript(0xA);
         FISHING_STATE->sub_index_03 = 3;
         return;
