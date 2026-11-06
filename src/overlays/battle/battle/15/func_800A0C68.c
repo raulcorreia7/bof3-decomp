@@ -24,7 +24,7 @@ MATCH void func_800A0C68(void) {
             if (i < 7) {
                 weight = D_800B4924[i];
             }
-            value = (Battle_CalcDamage(base[0], base[0x20], 0xFFFF) * weight) / 10;
+            value = (Battle_CalcDamage(base[0], base[0x20], BATTLE_ELEMENT_FROM_WEAPON) * weight) / 10;
             total += value;
             i++;
         } while (i < base[0x62]);

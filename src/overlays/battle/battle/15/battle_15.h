@@ -918,7 +918,7 @@ extern u8   g_BattleUIStep_nv;
 static inline void BattleApplyHalfDamage(s32 anim) {
     s32 half;
 
-    half                            = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, 0xFFFF) / 2;
+    half = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, BATTLE_ELEMENT_FROM_WEAPON) / 2;
     g_BattleTargetRecord->hp_change = half;
     if (half != 0) {
         func_800A4238(anim);

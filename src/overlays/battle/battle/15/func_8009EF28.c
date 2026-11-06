@@ -24,7 +24,7 @@ MATCH void func_8009EF28(void) {
         selection_kind                  = g_BattleTarget;
         updated                         = flag_value | BATTLE_STATE_CRITICAL;
         *(u16*)half                     = updated;
-        g_BattleTargetRecord->hp_change = Battle_CalcDamage(battler_index, selection_kind, 0xFFFF);
+        g_BattleTargetRecord->hp_change = Battle_CalcDamage(battler_index, selection_kind, BATTLE_ELEMENT_FROM_WEAPON);
         return;
     }
     record               = g_BattleTargetRecord;

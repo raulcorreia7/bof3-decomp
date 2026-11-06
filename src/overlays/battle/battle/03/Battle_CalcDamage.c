@@ -14,7 +14,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     u16*         power;
 
     spread = D_801D0C7C;
-    if (element == 0xFFFF) {
+    if (element == BATTLE_ELEMENT_FROM_WEAPON) {
         if (BATTLER_IS_PLAYER(attacker)) {
             *(u16*)D_1F800000 = g_Weapons[g_BattlePartyBattlers[attacker].chr.equip.weapon].element;
         } else {
