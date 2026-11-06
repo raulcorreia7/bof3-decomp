@@ -12,7 +12,7 @@ MATCH void func_801D21F4(void) {
         if (s_PartyCharacterIds[i] != CHAR_ID_BLANK) {
             j = 0;
             do {
-                if (g_PartyWalkOrder[j] != CHAR_ID_BLANK && s_PartyCharacterIds[i] == g_PartyWalkOrder[j]) {
+                if (g_PartyFieldOrder[j] != CHAR_ID_BLANK && s_PartyCharacterIds[i] == g_PartyFieldOrder[j]) {
                     unmatched = 0;
                     goto add; /* a match skips the not-found flag */
                 }

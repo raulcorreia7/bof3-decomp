@@ -53,14 +53,14 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
         key   = character_id & BYTE_MASK;
         limit = g_PartySize;
     search2:
-        if (g_PartyWalkOrder[slot] == key)
+        if (g_PartyFieldOrder[slot] == key)
             goto found2;
         slot++;
         if (slot < limit)
             goto search2;
     found2:;
     }
-    g_PartyWalkOrder[slot] = 0xFF;
+    g_PartyFieldOrder[slot] = 0xFF;
     if ((s32)g_PartySize - 1 > 0) {
         slot = 0;
         off  = 0;

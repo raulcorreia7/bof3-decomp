@@ -25,7 +25,7 @@ MATCH void func_801DB140(void) {
         D_80146889[D_801E3208 * sizeof(FishingSelectionState)] = 6;
         SND_PlayCue(EMI_CUE_ID(2, 3));
         SND_StopSequence(0, 1);
-        SND_PlayBgm(0x2A, 0x64, 8);
+        SND_PlayBGM(0x2A, 0x64, 8);
         Actor_RequestScript(0xA);
         FISHING_STATE->sub_index_03 = 3;
         return;

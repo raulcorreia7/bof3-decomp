@@ -1,6 +1,6 @@
 #include "sys/gameui.h"
 #include "scenario/runtime.h"
-#include <abs.h>
+#include "common/util.h"
 
 /* One source for the answer-message bodies every world area overlay carries. Every
  * change here must verify every member address.

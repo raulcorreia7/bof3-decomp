@@ -18,7 +18,7 @@ extern u8       D_801F5290[];
 extern u8       D_801F52A0[];
 extern u8       D_801F5320[];
 /* The signed spawn focus offsets, one (x, y) pair per spawn row. */
-extern Vec2U16  D_801F532C[];
+extern UPoint2D D_801F532C[];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
 extern u8       D_801F533C[];
 extern u8       D_801F533D[];

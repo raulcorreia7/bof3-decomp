@@ -32,7 +32,7 @@ NON_MATCHING s32 func_801AF5B0(s32 item_category, s32 character_index, s32 abili
     }
     return 1;
 case_1:
-    mapped_character = g_CharSlot[g_PartyWalkOrder[(u8)ch]];
+    mapped_character = g_CharSlot[g_PartyFieldOrder[(u8)ch]];
     character_offset = (u32)mapped_character * PARTY_RECORD_STRIDE;
     required_level   = Char_GetAbilityCost((u8)mapped_character, (u8)kind, 0u) & BYTE_MASK;
     learned_level    = g_Characters[mapped_character].ap;

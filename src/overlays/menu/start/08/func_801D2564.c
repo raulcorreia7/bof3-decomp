@@ -24,10 +24,10 @@ MATCH void func_801D2564(void) {
     /* FAKE: preserve first table store order. */
     MATCH_FAKE_BARRIER();
     D_801485E2 = g_MenuPanelTasks[selection_index + 4].pos.y;
-    TEXT_SetVariable(0U, 5U, g_CharSlot[g_PartyWalkOrder[selection_index]] * 0xA4 + panel_data);
+    TEXT_SetVariable(0U, 5U, g_CharSlot[g_PartyFieldOrder[selection_index]] * 0xA4 + panel_data);
     g_MenuPanelTasks[11].unk_10 = 0x12;
     input                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
-    count                       = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+    count                       = Party_CountOrder(PARTY_ORDER_FIELD);
     old_selection               = *selection;
     if ((input & PADLup) != 0) {
         new_selection = old_selection - 1;
@@ -64,7 +64,7 @@ MATCH void func_801D2564(void) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         SND_PlayCue(EMI_CUE_ID(1, 2));
         i = 0;
-        while (i < Party_CountOrder(PARTY_ORDER_KIND_WALKING)) {
+        while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
             g_MenuPanelTasks[i + 12].state = 1;
             i++;
         }

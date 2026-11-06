@@ -12,7 +12,7 @@
 
 extern u16 g_GameAreaId;
 extern s8  D_80144EA8;
-extern u8  g_PartyWalkOrder;
+extern u8  g_PartyFieldOrder;
 extern u8  D_80144F5B;
 extern u8  D_80144F5C;
 extern u8  D_80144F5E;

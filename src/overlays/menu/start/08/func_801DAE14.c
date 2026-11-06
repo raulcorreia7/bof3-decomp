@@ -33,14 +33,14 @@ NON_MATCHING void func_801DAE14(void) {
     volatile u8* flags;
     volatile u8* total;
 
-    count  = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+    count  = Party_CountOrder(PARTY_ORDER_FIELD);
     flags  = &D_801484EA;
     *flags = 0;
     offset = 0;
     for (i = 0; i < 8; i++) {
         if (((u8*)&g_Characters[0].unk_07)[offset] & 1) {
             for (index = 0; index < (count & BYTE_MASK); index++) {
-                if (g_Characters[i].character_index == g_PartyWalkOrder[index]) {
+                if (g_Characters[i].character_index == g_PartyFieldOrder[index]) {
                     break;
                 }
             }

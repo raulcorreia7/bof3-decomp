@@ -14,7 +14,7 @@ MATCH void func_801EEC18(void) {
     PartyBattler* swap;
     s32           count;
 
-    Bmagic_DispatchTaskPair(func_801EECF8, Effect_StartOnZeroTick);
+    BMagic_DispatchTaskPair(func_801EECF8, Effect_StartOnZeroTick);
     count = 0;
     do {
         if (D_801F0454[(u8)count << 5] & 1) {

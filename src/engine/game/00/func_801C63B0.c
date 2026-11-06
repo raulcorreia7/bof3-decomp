@@ -15,7 +15,7 @@ MATCH s32 func_801C63B0(void) {
     STACK_PADS(u8, 8);
 
     mode  = g_PartyFormation;
-    count = Party_CountOrder(PARTY_ORDER_KIND_BATTLE);
+    count = Party_CountOrder(PARTY_ORDER_BATTLE);
     slot  = D_801CD944;
     i     = 0;
     for (; i < BATTLE_PARTY_SLOT_COUNT; i++) {

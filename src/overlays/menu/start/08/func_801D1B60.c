@@ -74,15 +74,15 @@ MATCH void func_801D1B60(void) {
         g_MenuPanelTasks[9].state  = 1;
         g_MenuPanelTasks[10].state = 1;
         if (*selection == 0) {
-            for (i = 0; i < (Party_CountOrder(PARTY_ORDER_KIND_WALKING) & BYTE_MASK); i++) {
+            for (i = 0; i < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK); i++) {
                 D_80148333[((i + 4) * 9) << 2] = 1;
             }
         } else if ((s8)D_80148655 == 5) {
-            for (i = 0; i < (Party_CountOrder(PARTY_ORDER_KIND_WALKING) & BYTE_MASK); i++) {
+            for (i = 0; i < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK); i++) {
                 D_80148333[((i + 4) * 9) << 2] = 7;
             }
         } else {
-            for (i = 0; i < (Party_CountOrder(PARTY_ORDER_KIND_WALKING) & BYTE_MASK); i++) {
+            for (i = 0; i < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK); i++) {
                 D_80148333[((i + 4) * 9) << 2] = 2;
             }
         }

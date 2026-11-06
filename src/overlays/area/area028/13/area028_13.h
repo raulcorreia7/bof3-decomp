@@ -10,7 +10,7 @@
 
 #define WORLD_POSITION_RING_ENTRY_COUNT 32u
 
-extern Vec2U16 D_800E4A00;
+extern UPoint2D D_800E4A00;
 
 void          func_801F2C80(void);
 void          func_801F2F5C(void);

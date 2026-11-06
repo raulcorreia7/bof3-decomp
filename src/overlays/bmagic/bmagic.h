@@ -96,7 +96,7 @@
     }
 
 /* One remembered position of an effect's trail. */
-typedef Vec2S16 BmagicTrailPoint;
+typedef Point2D TrailPoint;
 
 #define BMAGIC_TRAIL_LENGTH 32
 
@@ -123,14 +123,14 @@ typedef Vec2S16 BmagicTrailPoint;
 #define g_Task ((PartyBattler*)g_Task)
 
 /* Go to the effect's next step. */
-static inline void Bmagic_NextStep(void) {
+static inline void BMagic_NextStep(void) {
     PartyBattler* work = g_Task;
 
     work->header.step = (u8)(work->header.step + 1);
 }
 
 /* Clear the local effect work. */
-static inline void Bmagic_ResetLocalWork(void) {
+static inline void BMagic_ResetLocalWork(void) {
     g_Task->header.flags = 0;
     g_Task->header.mode  = 0;
     g_Task->header.step  = 0;
@@ -139,22 +139,22 @@ static inline void Bmagic_ResetLocalWork(void) {
 }
 
 /* Run the task handler the spad task byte selects. */
-static inline void Bmagic_DispatchTaskPair(Callback first, Callback second) {
+static inline void BMagic_DispatchTaskPair(Callback first, Callback second) {
     Callback handlers[2] = {first, second};
 
     handlers[g_Task->header.mode]();
 }
 
-typedef struct BmagicEffectFuncs {
+typedef struct BMagicEffectFuncs {
     Callback handlers[6];
-} BmagicEffectFuncs;
+} BMagicEffectFuncs;
 
-ASSERT_SIZE(BmagicEffectFuncs, 0x18);
-ASSERT_OFFSET(BmagicEffectFuncs, handlers, 0x00);
+ASSERT_SIZE(BMagicEffectFuncs, 0x18);
+ASSERT_OFFSET(BMagicEffectFuncs, handlers, 0x00);
 
 /* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
  * func_801EF33C dispatches on mode. */
-typedef struct BmagicEffectWork {
+typedef struct BMagicEffectWork {
     /* 0x00 */ TaskHeader header;
     /* 0x03 */ u8         unk_03;
     /* 0x04 */ u8         unk_04;
@@ -167,19 +167,19 @@ typedef struct BmagicEffectWork {
     /* 0x0E */ u8         pad_0E[0x12];
     /* 0x20 */ s16        unk_20;
     /* 0x22 */ u16        unk_22;
-} BmagicEffectWork;
+} BMagicEffectWork;
 
-ASSERT_SIZE(BmagicEffectWork, 0x24);
+ASSERT_SIZE(BMagicEffectWork, 0x24);
 
-ASSERT_OFFSET(BmagicEffectWork, unk_03, 0x03);
-ASSERT_OFFSET(BmagicEffectWork, unk_04, 0x04);
-ASSERT_OFFSET(BmagicEffectWork, timer_05, 0x05);
-ASSERT_OFFSET(BmagicEffectWork, unk_06, 0x06);
-ASSERT_OFFSET(BmagicEffectWork, unk_08, 0x08);
-ASSERT_OFFSET(BmagicEffectWork, unk_0A, 0x0A);
-ASSERT_OFFSET(BmagicEffectWork, phase_0C, 0x0C);
-ASSERT_OFFSET(BmagicEffectWork, unk_20, 0x20);
-ASSERT_OFFSET(BmagicEffectWork, unk_22, 0x22);
+ASSERT_OFFSET(BMagicEffectWork, unk_03, 0x03);
+ASSERT_OFFSET(BMagicEffectWork, unk_04, 0x04);
+ASSERT_OFFSET(BMagicEffectWork, timer_05, 0x05);
+ASSERT_OFFSET(BMagicEffectWork, unk_06, 0x06);
+ASSERT_OFFSET(BMagicEffectWork, unk_08, 0x08);
+ASSERT_OFFSET(BMagicEffectWork, unk_0A, 0x0A);
+ASSERT_OFFSET(BMagicEffectWork, phase_0C, 0x0C);
+ASSERT_OFFSET(BMagicEffectWork, unk_20, 0x20);
+ASSERT_OFFSET(BMagicEffectWork, unk_22, 0x22);
 
 extern MagicModule       D_801EEC00;
 /* D_801EF3E8 (magic161), D_801EF414 (magic145), D_801EF420 (magic159), D_801EF510 (magic065), D_801EF658 (magic054),
@@ -203,8 +203,8 @@ extern MagicModule       D_801EEC00;
    D_801F0D14 (magic082), D_801F0D54 (magic222), D_801F0EEC (magic083), D_801F121C (magic114), D_801F125C (magic126),
    D_801F1394 (magic064), D_801F1630 (magic015), D_801F1BC4 (magic131), D_801F1BEC (magic008), D_801F24A4 (magic151) */
 extern Callback          g_BMagicEffectFuncs[];
-extern BmagicEffectWork* D_801F17B0;
-extern BmagicEffectWork* D_801F17B4;
+extern BMagicEffectWork* D_801F17B0;
+extern BMagicEffectWork* D_801F17B4;
 
 void func_800A9610(u8 selector, u16 flags);
 /* Per-image effect entry points whose name is a different symbol in another

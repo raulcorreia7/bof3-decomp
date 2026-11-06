@@ -196,7 +196,7 @@ g_BMagicEffectFuncs = { addr = 0x801F1BEC, source = "the module dispatcher index
 ["emi/bmagic/magic009/03"]
 Effect_CountDownTimerNextStep = { addr = 0x801EF01C, type = "func", source = "counts the effect timer down and advances the step byte at zero" }
 Effect_NextStepOnZeroTick = { addr = 0x801EF068, type = "func", source = "one body shared through overlays/bmagic/Effect_NextStepOnZeroTick.h" }
-Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF2D4, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through Bmagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
+Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF2D4, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through BMagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
 Effect_CountDownTimer = { addr = 0x801EF340, type = "func", source = "counts the effect timer down and finishes the effect at zero" }
 Effect_ReloadTimerAndStep = { addr = 0x801EF740, type = "func", source = "reloads the effect timer with the value func_800B0058 returns and advances the effect step" }
 g_BMagicEffectFuncs = { addr = 0x801EF89C, source = "the module dispatcher indexes it with the shared spad step byte" }
@@ -378,7 +378,7 @@ g_BMagicEffectFuncs = { addr = 0x801F066C, source = "the module dispatcher index
 ["emi/bmagic/magic060/00"]
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
-Effect_ClearTimerNextStep = { addr = 0x801F0000, type = "func", source = "zeroes the effect timer byte at +0x09 of the scratchpad record, the byte Effect_CountDownTimerNextStep counts down, and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
+Effect_ClearTimerNextStep = { addr = 0x801F0000, type = "func", source = "zeroes the effect timer byte at +0x09 of the scratchpad record, the byte Effect_CountDownTimerNextStep counts down, and advances the step byte through BMagic_NextStep; one body shared with the other bmagic overlays" }
 Effect_TickOnTimerZero = { addr = 0x801F00D0, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
 g_BMagicEffectFuncs = { addr = 0x801F0BB0, source = "the module dispatcher indexes it with the shared spad step byte" }
 
@@ -403,7 +403,7 @@ D_801F1054 = { addr = 0x801F1054, source = "func_801EF340 loads this word as the
 ["emi/bmagic/magic064/03"]
 D_801EEC50 = { addr = 0x801EEC50, type = "BattleHandlerTable3", size = 0x0c, source = "copied to the stack by func_801EF7F8, which indexes it with the spad step byte at offset 2" }
 BMagic_RunStep = { addr = 0x801EEC7C, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
-Effect_ClearTimerNextStep = { addr = 0x801F0DA8, type = "func", source = "zeroes the effect timer byte at +0x09 of the scratchpad record, the byte Effect_CountDownTimerNextStep counts down, and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
+Effect_ClearTimerNextStep = { addr = 0x801F0DA8, type = "func", source = "zeroes the effect timer byte at +0x09 of the scratchpad record, the byte Effect_CountDownTimerNextStep counts down, and advances the step byte through BMagic_NextStep; one body shared with the other bmagic overlays" }
 g_BMagicEffectFuncs = { addr = 0x801F1394, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic065/00"]
@@ -423,7 +423,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0064, source = "the module dispatcher index
 Effect_CountDownTimerCallSelector = { addr = 0x801EEF3C, type = "func", source = "counts the effect timer at +0x09 down and, at zero, calls func_800A9610 with g_BattleTargetSelector and 0x20 and advances the step byte at +0x01; one body shared with the other bmagic overlays" }
 Effect_StartOnZeroTick = { addr = 0x801EF284, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
 Effect_DriftStep = { addr = 0x801EF59C, type = "func", source = "one drift step: raises the effect ticker at +0x0B by one plus the timer at +0x09 / 64, drops the effect counter at +0x0A every second frame, moves the actor by +0x0C and +0x10 and, once the timer falls to 0x30, lowers the active ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
-Effect_ArmCounterNextStep = { addr = 0x801EFF8C, type = "func", source = "zeroes the effect timer at +0x09, loads the effect counter at +0x0A with 0x88 and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
+Effect_ArmCounterNextStep = { addr = 0x801EFF8C, type = "func", source = "zeroes the effect timer at +0x09, loads the effect counter at +0x0A with 0x88 and advances the step byte through BMagic_NextStep; one body shared with the other bmagic overlays" }
 Effect_CountUpAndStep = { addr = 0x801EFFCC, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
 Effect_CountDownAndStep = { addr = 0x801F001C, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
 Effect_TickOnTimerZero = { addr = 0x801F0068, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
@@ -784,7 +784,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFA44, source = "the module dispatcher index
 
 ["emi/bmagic/magic131/03"]
 Effect_StartOnZeroTick = { addr = 0x801EF61C, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
-Effect_ClearTimerNextStep = { addr = 0x801F0178, type = "func", source = "zeroes the effect timer byte at +0x09 of the scratchpad record, the byte Effect_CountDownTimerNextStep counts down, and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
+Effect_ClearTimerNextStep = { addr = 0x801F0178, type = "func", source = "zeroes the effect timer byte at +0x09 of the scratchpad record, the byte Effect_CountDownTimerNextStep counts down, and advances the step byte through BMagic_NextStep; one body shared with the other bmagic overlays" }
 Effect_CountUpByTwoAndStep = { addr = 0x801F01A8, type = "func", source = "counts the effect timer up by two and advances the effect step at 0x10" }
 Effect_CountDownAndStep = { addr = 0x801F0264, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
 Effect_TickOnTimerZero = { addr = 0x801F02B0, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
@@ -801,7 +801,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFD58, source = "the module dispatcher index
 BMagic_RunStep = { addr = 0x801EEC1C, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 Effect_CountDownTimerCallSelector = { addr = 0x801EEEFC, type = "func", source = "counts the effect timer at +0x09 down and, at zero, calls func_800A9610 with g_BattleTargetSelector and 0x20 and advances the step byte at +0x01; one body shared with the other bmagic overlays" }
 Effect_DriftStep = { addr = 0x801EF2C4, type = "func", source = "one drift step: raises the effect ticker at +0x0B by one plus the timer at +0x09 / 64, drops the effect counter at +0x0A every second frame, moves the actor by +0x0C and +0x10 and, once the timer falls to 0x30, lowers the active ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
-Effect_ArmCounterNextStep = { addr = 0x801EFCC0, type = "func", source = "zeroes the effect timer at +0x09, loads the effect counter at +0x0A with 0x88 and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
+Effect_ArmCounterNextStep = { addr = 0x801EFCC0, type = "func", source = "zeroes the effect timer at +0x09, loads the effect counter at +0x0A with 0x88 and advances the step byte through BMagic_NextStep; one body shared with the other bmagic overlays" }
 Effect_CountUpAndStep = { addr = 0x801EFD00, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
 Effect_CountDownAndStep = { addr = 0x801EFD50, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
 Effect_TickOnTimerZero = { addr = 0x801EFD9C, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
@@ -837,7 +837,7 @@ g_BMagicEffectFuncs = { addr = 0x801F04D0, source = "the module dispatcher index
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
 Effect_NextStepOnZeroTick = { addr = 0x801EEDB0, type = "func", source = "advances the step byte at +0x01 when the effect ticker byte at +0x0B is zero; one body shared with the other bmagic overlays" }
 Effect_PlayOnce = { addr = 0x801EEDE4, type = "func", source = "plays the effect the target selector chose and clears it" }
-Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF034, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through Bmagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
+Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF034, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through BMagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
 Effect_CountDownTimer = { addr = 0x801EF0A0, type = "func", source = "counts the effect timer down and finishes the effect at zero" }
 g_BMagicEffectFuncs = { addr = 0x801EF414, source = "the module dispatcher indexes it with the shared spad step byte" }
 
@@ -845,7 +845,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF414, source = "the module dispatcher index
 Effect_NextStepOnZeroTick = { addr = 0x801EEFD0, type = "func", source = "advances the step byte at +0x01 when the effect ticker byte at +0x0B is zero; one body shared with the other bmagic overlays" }
 Effect_PlayOnce = { addr = 0x801EF004, type = "func", source = "plays the effect the target selector chose and clears it" }
 Effect_FinishOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "finishes the effect once its ticker byte 0x0B is zero: the side mask at work byte 0x04 goes to func_800A9820, the active battler's effect ticker byte is lowered by one and the effect work is cleared (func_801EF2E4 in magic063, func_801EF2A0 in magic146)" }
-Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF520, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through Bmagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
+Effect_CountUpTimersByTwoNextStep = { addr = 0x801EF520, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by two and advances the step byte through BMagic_NextStep at timer 0x10; one body shared with the other bmagic overlays" }
 BMagic_AllocEffect = { addr = 0x801EF900, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
 Actor_Clear = { addr = 0x801EF964, type = "func", source = "clears the five leading fields of the current g_Task record" }
 g_BMagicEffectFuncs = { addr = 0x801EF9B4, source = "the module dispatcher indexes it with the shared spad step byte" }
@@ -977,7 +977,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0D54, source = "the module dispatcher index
 
 ["emi/bmagic/magic223/03"]
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF4C, type = "func", source = "counts the effect timer down; at zero requests the target selector and advances the step" }
-Effect_ArmCounterNextStep = { addr = 0x801EF0B8, type = "func", source = "zeroes the effect timer at +0x09, loads the effect counter at +0x0A with 0x88 and advances the step byte through Bmagic_NextStep; one body shared with the other bmagic overlays" }
+Effect_ArmCounterNextStep = { addr = 0x801EF0B8, type = "func", source = "zeroes the effect timer at +0x09, loads the effect counter at +0x0A with 0x88 and advances the step byte through BMagic_NextStep; one body shared with the other bmagic overlays" }
 Effect_CountUpAndStep = { addr = 0x801EF0F8, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
 Effect_StepWhileTickUnderTwo = { addr = 0x801EF148, type = "func", source = "advances the effect step while the other battler's effect ticker is under 2" }
 Effect_TickOnTimerZero = { addr = 0x801EF18C, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
@@ -1658,14 +1658,14 @@ Game_RunTitle = { addr = 0x801D0C04, type = "func", source = "GAME.EMI entry, cl
 Game_BeginTitle = { addr = 0x801D0C90, type = "func", source = "state 0, selects layout bank 2, requests DEMO.EMI, waits for the loader and arms the title fade" }
 Game_WaitTitleFade = { addr = 0x801D0D5C, type = "func", source = "waits for fade phase 2 and arms the 360-tick title timer" }
 Game_AdvanceTitleFade = { addr = 0x801D0D94, type = "func", source = "counts the title timer to zero, selects fade phase 3 and rearms 900 ticks" }
-SND_StartTitleBgm = { addr = 0x801D0DF0, type = "func", source = "counts the title timer to zero, enters local mode 0 and opens the selection effect" }
+SND_StartTitleBGM = { addr = 0x801D0DF0, type = "func", source = "counts the title timer to zero, enters local mode 0 and opens the selection effect" }
 Game_StartSelectedGame = { addr = 0x801D0E54, type = "func", source = "waits for the selection effect to close, resets the title phases and requests scenario 16" }
 UI_WaitTitleInput = { addr = 0x801D0F00, type = "func", source = "prompt state, reads pad input and starts the selected cue" }
 UI_UpdateChoicePrompt = { addr = 0x801D0FB8, type = "func", source = "updates the prompt while the EXE gate is open, else returns to title state 0" }
 Game_LeaveTitle = { addr = 0x801D1000, type = "func", source = "closes the selection effect, restores layout bank 0 and exits the EXE callback thread" }
 UI_HandleStartButton = { addr = 0x801D104C, type = "func", source = "intercepts Start, redirects to state 2 early or to the popup close and state 7" }
-SND_StartSelectionEffect = { addr = 0x801D1134, type = "func", source = "starts the g_SndBgmId effect through SND_StartDecrescendo with g_SelectionCues[selection]" }
-SND_StopSelectionEffect = { addr = 0x801D1184, type = "func", source = "stops the g_SndBgmId effect and clears the selection byte" }
+SND_StartSelectionEffect = { addr = 0x801D1134, type = "func", source = "starts the g_SndBGMId effect through SND_StartDecrescendo with g_SelectionCues[selection]" }
+SND_StopSelectionEffect = { addr = 0x801D1184, type = "func", source = "stops the g_SndBGMId effect and clears the selection byte" }
 UI_DrawChoicePrompt = { addr = 0x801D11E4, type = "func", source = "clears g_UiPopupRequest when the EXE selection reaches idle, then draws the title prompt sprite" }
 UI_DrawChoicePanels = { addr = 0x801D12CC, type = "func", source = "draws the New Game/Load prompt panels, their labels and the pulsing selection marker" }
 UI_DrawLabelPair = { addr = 0x801D150C, type = "func", source = "draws the 4/5 label pair (15/16 when selected) at x,y" }
@@ -3498,12 +3498,12 @@ g_SceneFlagWords = { addr = 0x80144E88, type = "u8", source = "the 20 per-scenar
 g_SceneEventFlags = { addr = 0x80144F28, type = "u8", source = "a 0x28-byte event-flag block world areas SYS_SetFlag/TestBit/ToggleBit bits 0x23-0x71 (func_801F3608/801F3B9C/801F2DC4) ram-map names the same bytes factory gate 0x80144F32," }
 g_Zenny = { addr = 0x80144F50, size = 0x4, source = "Party_SpendZenny subtracts from it when the balance covers the price, Party_AddZenny adds to it and clamps it at 9999999, and every shop panel prints it as the money held" }
 g_PartyFormation = { addr = 0x80144F58, source = "party formation byte at 0x80144F58, func_800AAA74 switches on it to apply the formation stat changes (1 attack, 2 defense, 3 chain, 4 magic)" }
-g_PartyWalkOrder = { addr = 0x80144F5A, size = 0x3, source = "three character ids indexing g_CharSlot; Party_CountOrder and Party_BuildBattlers walk it at mode 0 (wiki save layout +0x882)" }
-g_PartyBattleOrder = { addr = 0x80144F5D, size = 0x3, source = "the battle order, the second three bytes Party_CountOrder walks at mode 1; the menus swap it against g_PartyWalkOrder (wiki save layout +0x885)" }
+g_PartyFieldOrder = { addr = 0x80144F5A, size = 0x3, source = "three character ids indexing g_CharSlot; Party_CountOrder and Party_BuildBattlers walk it at mode 0 (wiki save layout +0x882)" }
+g_PartyBattleOrder = { addr = 0x80144F5D, size = 0x3, source = "the battle order, the second three bytes Party_CountOrder walks at mode 1; the menus swap it against g_PartyFieldOrder (wiki save layout +0x885)" }
 g_PlayClock = { addr = 0x80144FC0, size = 0x4, source = "func_80198CAC advances its thirtieths, seconds, minutes and hours each frame and stops it at 99 hours 59 minutes 59 seconds, and the status, save and shop panels print hours and minutes from it" }
 g_FishBestCatch = { addr = 0x80144FE4, size = 0x20, source = "func_801DB554 raises a fish's byte to the new catch size when it is larger, func_801E0B6C sums func_801E0ABC over all 32 bytes, and the pond fish pages in area030/04 print it as the best catch" }
 g_EmiLoadedCharacterIndex = { addr = 0x80145024, source = "the character index the EMI stream last loaded, read and written by func_801E7948, func_801F1824 and func_801976EC" }
-g_SndBgmId = { addr = 0x80145029, source = "selection index (0xff = none)" }
+g_SndBGMId = { addr = 0x80145029, source = "selection index (0xff = none)" }
 g_BattleCount = { addr = 0x8014502C, source = "the battle counter incremented once per battle, read by the commu00 anchor reset, and the battle return transition at func_80197378 increments it" }
 g_InventoryIds = { addr = 0x8014504C, size = 0x200, source = "Item_Count and the item menu sort and scan one 128-slot id array per category (item, weapon, armor, accessory) through the D_801C893C pointer table" }
 g_InventoryCounts = { addr = 0x8014524C, size = 0x200, source = "Item_Count and the item menu read one 128-slot quantity array per category through the D_801C8950 pointer table, and func_801D8364 prints the accessory count when it is 2 or more" }
@@ -3857,12 +3857,12 @@ SND_QueueCueVolume = { addr = 0x8015D7C8, type = "func", source = "latches the D
 SND_QueueProximityCue = { addr = 0x8015DC08, type = "func", source = "raises the proximity cue for the active work area's distance band" }
 SND_PlayCue = { addr = 0x8015DF18, type = "func", source = "dispatches a cue's bank and record, updates the interpolated channel values and keys the requested voices" }
 SND_SetBankLayout = { addr = 0x80161808, type = "func", source = "builds the window layout table for one bank, six entries of base pointer, index and accumulated size into D_80148A1C..4C" }
-SND_StartBgm = { addr = 0x80161B24, type = "func", source = "waits for the loader then starts the requested BGM's cue" }
-SND_RequestBgm = { addr = 0x80161BBC, type = "func", source = "starts the BGM stream when it differs from g_SndBgmId" }
-SND_PlayBgm = { addr = 0x80161C20, type = "func", source = "resolves the BGM's two cue bytes - starts and stops the cue and publishes g_SndBgmId" }
-SND_FadeOutBgm = { addr = 0x80161CD0, type = "func", source = "passes the BGM row's two bytes to the duck path func_8015D554" }
-SND_PauseBgm = { addr = 0x80161D20, type = "func", source = "pauses the sequence player for the selected entry" }
-SND_ResumeBgm = { addr = 0x80161D74, type = "func", source = "replays the selected entry's sequence" }
+SND_StartBGM = { addr = 0x80161B24, type = "func", source = "waits for the loader then starts the requested BGM's cue" }
+SND_RequestBGM = { addr = 0x80161BBC, type = "func", source = "starts the BGM stream when it differs from g_SndBGMId" }
+SND_PlayBGM = { addr = 0x80161C20, type = "func", source = "resolves the BGM's two cue bytes - starts and stops the cue and publishes g_SndBGMId" }
+SND_FadeOutBGM = { addr = 0x80161CD0, type = "func", source = "passes the BGM row's two bytes to the duck path func_8015D554" }
+SND_PauseBGM = { addr = 0x80161D20, type = "func", source = "pauses the sequence player for the selected entry" }
+SND_ResumeBGM = { addr = 0x80161D74, type = "func", source = "replays the selected entry's sequence" }
 SND_InstallSequenceFuncs = { addr = 0x80161DC8, type = "func", source = "installs the _Ss* sequence handlers into D_8018DB58..D_8018DBE8" }
 EMI_LoaderInit = { addr = 0x80161F58, type = "func", source = "CdInit loop, VSync(3), clears the 24 callback states" }
 EMI_LoaderStreamInitSlot = { addr = 0x80161FDC, type = "func", source = "latch slot id, reset ring, install CD callbacks" }
@@ -4508,7 +4508,7 @@ g_CharSlot = { addr = 0x80181B10, size = 12, source = "the 12-byte character-slo
 g_FacingSteps = { addr = 0x80181B94, type = "FacingStep", source = "8 facing steps, Char_ProbeFacingCell adds step x and y to a position" }
 g_RouteSpeedScale = { addr = 0x80181BD4, source = "8 speed scales the route walkers multiply a step by" }
 s_LoaderRecordBytes = { addr = 0x80181D98, source = "record list bytes the D_80181E40 list and count entries point into" }
-g_SelectionCues = { addr = 0x80181EBA, type = "SelectionCue", source = "SND_PlayBgm/SND_PlaySequence read (D_80181EBA[i], D_80181EBB[i]) with a 4-byte row stride game/00 func_80197F48 and scena16 use it" }
+g_SelectionCues = { addr = 0x80181EBA, type = "SelectionCue", source = "SND_PlayBGM/SND_PlaySequence read (D_80181EBA[i], D_80181EBB[i]) with a 4-byte row stride game/00 func_80197F48 and scena16 use it" }
 s_ScriptCopyBlock = { addr = 0x8018216C, source = "the 16-byte copy block the etc/game/00 script interpreter reads" }
 g_VabProgramOffsets = { addr = 0x801821E0, source = "4 halfwords - the program block offset" }
 g_VabToneOffsets = { addr = 0x801821E8, source = "80 halfwords - 32 * tone" }

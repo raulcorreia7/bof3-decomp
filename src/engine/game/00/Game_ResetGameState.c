@@ -9,7 +9,7 @@ MATCH void Game_ResetGameState(void) {
 
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     g_AreaDrawMode  = 6u;
-    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
+    Party_BuildBattlers(PARTY_ORDER_FIELD);
     selection_seed = D_801448FC;
     g_GameAreaId   = 0xFFFFu;
     world_flags    = g_AreaWalkFlags;
@@ -30,9 +30,9 @@ MATCH void Game_ResetGameState(void) {
     Game_RequestAreaChange(selection_seed, context_a, context_b, context_kind);
 
     if (*(u32*)&g_PlayClock != 0u) {
-        g_GamePrevSelection = g_SndBgmId;
+        g_GamePrevSelection = g_SndBGMId;
     }
 
-    g_SndBgmId       = 0xFFu;
+    g_SndBGMId       = 0xFFu;
     g_GameEntryState = 1u;
 }

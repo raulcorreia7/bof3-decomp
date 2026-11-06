@@ -292,17 +292,17 @@ void        SND_PlayCue(u16 cue_id);
 /* func_80161808 */
 void        SND_SetBankLayout(u32 layout_bank);
 /* func_80161B24 */
-void        SND_StartBgm(u8 bgm_id, u8 cue_level, u8 cue_shape);
+void        SND_StartBGM(u8 bgm_id, u8 cue_level, u8 cue_shape);
 /* func_80161BBC */
-s32         SND_RequestBgm(s32 requested);
+s32         SND_RequestBGM(s32 requested);
 /* func_80161C20 */
-void        SND_PlayBgm(s32 selection_id, s32 cue_level, s32 cue_shape);
+void        SND_PlayBGM(s32 selection_id, s32 cue_level, s32 cue_shape);
 /* func_80161CD0 */
-void        SND_FadeOutBgm(u8 selection_id, s32 cue_level, s32 cue_shape);
+void        SND_FadeOutBGM(u8 selection_id, s32 cue_level, s32 cue_shape);
 /* func_80161D20 */
-void        SND_PauseBgm(s32 cue_id);
+void        SND_PauseBGM(s32 cue_id);
 /* func_80161D74 */
-void        SND_ResumeBgm(s32 cue_id);
+void        SND_ResumeBGM(s32 cue_id);
 /* func_80161DC8 */
 void        SND_InstallSequenceFuncs(void);
 /* func_80161F58 */

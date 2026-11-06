@@ -31,7 +31,7 @@ MATCH void func_801EF210(void) {
 }
 
 MATCH void func_801EF254(void) {
-    BmagicEffectFuncs handlers;
+    BMagicEffectFuncs handlers;
 
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC14, header.step);
 }
@@ -92,5 +92,5 @@ INCLUDE_ASM(func_801F0090);
 
 /* func_801F03CC */
 MATCH void Actor_Clear(void) {
-    Bmagic_ResetLocalWork();
+    BMagic_ResetLocalWork();
 }

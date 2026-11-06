@@ -56,9 +56,9 @@ typedef struct SceneBandEffect {
     /* 0x0B */ u8  ticker;        /* a random nibble that is bumped */
     /* 0x0C */ s32 orbit_counter; /* the orbit counter */
     u8             pad_10[0x1E];
-    Vec2U16        origin;
+    UPoint2D       origin;
     u8             pad_32[0x02];
-    Vec2S32        proj;
+    Point2DL       proj;
     u8             pad_3c[0x02];
     /* 0x3E */ s16 proj_z; /* the projected z; the GTE vertex takes it halved */
 } SceneBandEffect;

@@ -5,61 +5,61 @@
 #include "types.h"
 
 /* Packed vectors used across images; PsyQ vectors retain their SDK padding. */
-typedef struct Vec2S16 {
+typedef struct Point2D {
     s16 x;
     s16 y;
-} Vec2S16;
+} Point2D;
 
-typedef struct Vec2U16 {
+typedef struct UPoint2D {
     u16 x;
     u16 y;
-} Vec2U16;
+} UPoint2D;
 
-typedef struct Vec2S32 {
+typedef struct Point2DL {
     s32 x;
     s32 y;
-} Vec2S32;
+} Point2DL;
 
-typedef struct Vec3S16 {
+typedef struct Point3D {
     s16 x;
     s16 y;
     s16 z;
-} Vec3S16;
+} Point3D;
 
 /* Three signed words: a position or an angle accumulator that the game stores
  * packed, without the SDK's pad word. */
-typedef struct Vec3S32 {
+typedef struct Point3DL {
     s32 x;
     s32 y;
     s32 z;
-} Vec3S32;
+} Point3DL;
 
-typedef struct Vec3Coord {
+typedef struct Coord3D {
     Coord x;
     Coord y;
     Coord z;
-} Vec3Coord;
+} Coord3D;
 
 /* Where an actor or effect stands: x, y and z in 16.16 world units. */
-typedef Vec3Coord WorldPos;
+typedef Coord3D WorldPos;
 
 /* A sprite's horizontal and vertical size, 16.16; 0x10000 is full size. */
-typedef Vec2S32 SpriteScale;
+typedef Point2DL SpriteScale;
 
-ASSERT_SIZE(Vec3Coord, 0x0C);
-ASSERT_OFFSET(Vec3Coord, x, 0x00);
-ASSERT_OFFSET(Vec3Coord, y, 0x04);
-ASSERT_OFFSET(Vec3Coord, z, 0x08);
+ASSERT_SIZE(Coord3D, 0x0C);
+ASSERT_OFFSET(Coord3D, x, 0x00);
+ASSERT_OFFSET(Coord3D, y, 0x04);
+ASSERT_OFFSET(Coord3D, z, 0x08);
 
-ASSERT_SIZE(Vec2S16, 0x04);
-ASSERT_OFFSET(Vec2S16, y, 0x02);
-ASSERT_SIZE(Vec2U16, 0x04);
-ASSERT_OFFSET(Vec2U16, y, 0x02);
-ASSERT_SIZE(Vec2S32, 0x08);
-ASSERT_OFFSET(Vec2S32, y, 0x04);
-ASSERT_SIZE(Vec3S16, 0x06);
-ASSERT_SIZE(Vec3S32, 0x0C);
-ASSERT_OFFSET(Vec3S32, y, 0x04);
-ASSERT_OFFSET(Vec3S32, z, 0x08);
+ASSERT_SIZE(Point2D, 0x04);
+ASSERT_OFFSET(Point2D, y, 0x02);
+ASSERT_SIZE(UPoint2D, 0x04);
+ASSERT_OFFSET(UPoint2D, y, 0x02);
+ASSERT_SIZE(Point2DL, 0x08);
+ASSERT_OFFSET(Point2DL, y, 0x04);
+ASSERT_SIZE(Point3D, 0x06);
+ASSERT_SIZE(Point3DL, 0x0C);
+ASSERT_OFFSET(Point3DL, y, 0x04);
+ASSERT_OFFSET(Point3DL, z, 0x08);
 
 #endif

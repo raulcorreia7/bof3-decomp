@@ -9,7 +9,7 @@ MATCH void Boss_ChooseBattleEnding(void) {
     if (bits & BATTLE_RESULT_VICTORY) {
         g_ScriptVars[0] = 5;
         *status         = bits | BATTLE_RESULT_NO_BGM;
-        g_SndBgmId      = 0x44;
+        g_SndBGMId      = 0x44;
         func_801DDED8();
     } else {
         func_801DDF00();

@@ -43,7 +43,7 @@ typedef struct SaveData {
     /* 0x67C */ u8              unk_67C[4];
     /* 0x680 */ u8              party_formation;
     /* 0x681 */ u8              unk_681;
-    /* 0x682 */ u8              walk_order[SAVE_PARTY_SLOT_COUNT];   /* character ids */
+    /* 0x682 */ u8              field_order[SAVE_PARTY_SLOT_COUNT];  /* character ids */
     /* 0x685 */ u8              battle_order[SAVE_PARTY_SLOT_COUNT]; /* character ids */
     /* 0x688 */ u8              unk_688[0x60];
     /* 0x6E8 */ GameClock       play_clock;
@@ -77,7 +77,7 @@ ASSERT_OFFSET(SaveData, scene_flag_words, 0x5B0);
 ASSERT_OFFSET(SaveData, scene_event_flags, 0x650);
 ASSERT_OFFSET(SaveData, zenny, 0x678);
 ASSERT_OFFSET(SaveData, party_formation, 0x680);
-ASSERT_OFFSET(SaveData, walk_order, 0x682);
+ASSERT_OFFSET(SaveData, field_order, 0x682);
 ASSERT_OFFSET(SaveData, battle_order, 0x685);
 ASSERT_OFFSET(SaveData, play_clock, 0x6E8);
 ASSERT_OFFSET(SaveData, fish_best_catch, 0x70C);

@@ -200,7 +200,7 @@ MATCH void func_801D73B4(MenuListPanel* panel) {
             }
             level   = Char_GetAbilityElement(*list);
             ability = (Ability*)&g_Abilities[*list];
-            count   = Char_GetAbilityCost(g_CharSlot[g_PartyWalkOrder[(s8)D_80148656]], *list, 0);
+            count   = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->selected || n == panel->unk_0C) {
                 if (shade != 7) {
                     func_801AF930((s16)(panel->pos.x + 7), (s16)(y + 0x1A), 7, level, (u8*)ability, count, 1);

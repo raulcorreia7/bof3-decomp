@@ -1,4 +1,4 @@
-#include <abs.h>
+#include "common/util.h"
 /* Show a party member's message: the first slot whose tag equals the first byte
  * of a battle record row, then game state 2. One source for the world area
  * overlays; each member names its record slot and declares the loop counters.

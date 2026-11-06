@@ -17,12 +17,12 @@ MATCH void func_801C329C(void) {
 
     scratch_ptr = scratch;
     found       = 0;
-    total       = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+    total       = Party_CountOrder(PARTY_ORDER_FIELD);
     if (g_GameRequestFlags & 1) {
         index = 0;
         if ((s16)total > 0) {
             do {
-                sel = g_CharSlot[g_PartyWalkOrder[index]];
+                sel = g_CharSlot[g_PartyFieldOrder[index]];
                 if (g_Characters[sel].status & STATUS_POISONED) {
                     found = 1;
                 }
@@ -44,7 +44,7 @@ MATCH void func_801C329C(void) {
                 index = 0;
                 if ((s16)total > 0) {
                     do {
-                        id  = g_PartyWalkOrder[index];
+                        id  = g_PartyFieldOrder[index];
                         sel = g_CharSlot[id];
                         if ((g_Characters[sel].status & STATUS_POISONED) && ((Char_LoseHP(1, id) & HALF_MASK) != 0)) {
                             found = 1;

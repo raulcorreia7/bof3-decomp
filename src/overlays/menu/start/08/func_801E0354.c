@@ -28,7 +28,7 @@ MATCH void func_801E0354(MenuPanelTask* task) {
             }
             level   = Char_GetAbilityElement(*text);
             entry   = (u8*)&g_Abilities[*text];
-            ability = Char_GetAbilityCost(g_CharSlot[g_PartyWalkOrder[(s8)D_80148656]], *text, 0);
+            ability = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *text, 0);
             if (n == task->flags || n == task->unk_0C) {
                 if ((u8)color != 7) {
                     func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, entry, ability, 1);
