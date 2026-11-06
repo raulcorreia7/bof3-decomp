@@ -405,6 +405,11 @@ typedef Vec2U16 ScreenPoint;
 typedef struct { u16 x; u16 y; } ScreenPointData;   /* a second layout, a filler word */
 ```
 
+A role that recurs gets one typedef over the shared block (`Vec2S16`, `Vec3S32`, `Vec3Coord`, `SVECTOR`,
+...), in the header that owns its domain, and every member, parameter and global of that role uses it
+(`WorldPos`, `SpriteScale`, `CameraAngle`). A one-off keeps the block type and carries the role in its
+member name. Never one typedef per member, never a second layout.
+
 #### Storage words
 
 A name says what a thing is, never how it is stored or found. Drop the storage word; what is left is

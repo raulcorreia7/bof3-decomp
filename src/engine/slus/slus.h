@@ -632,7 +632,7 @@ extern PanelSortItem               D_80147CFC[];
 extern PanelSortItem               D_80147D08[]; /* == &D_80147CFC[1] */
 extern PanelSortDepth              D_80147D0C[]; /* == &D_80147CFC[1].depth */
 extern MATRIX                      D_801481B8;
-extern SVECTOR                     D_801481D8;
+extern CameraAngle                 D_801481D8;
 extern u16                         D_801481E0;
 extern s32                         D_801481F0;
 extern s32                         D_801481F4;
