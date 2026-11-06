@@ -212,7 +212,7 @@ void         Area_IndexCells(void);
 void         Menu_RunPanelTasks(void);
 void         func_80158E20(void);
 /* func_80158DB8 */
-s32          Menu_ArmPanelTask(u8 menu_id, u8 mode);
+s32          Menu_ArmPanelTask(u8 menu_id, u8 handler);
 /* func_80158E50 */
 void         Menu_ResetPanelTasks(void);
 /* func_8015A758 */

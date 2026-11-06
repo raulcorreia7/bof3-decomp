@@ -3,7 +3,7 @@
 extern s8 D_801ED66C;
 
 /* Lays out the 3x3 start-menu grid: column 0 marks the rows below the member count, and each other cell arms the
- * next choice panel when its bit is set in D_80144F59 and the panel index is below the count's limit.
+ * next choice panel when its character bit is set in g_MasterRewardFlags and the panel index is below the count's limit.
  * nonmatching 88.98%: retail keeps &D_801ED680 in t9 across both loops and computes row < count before the row
  * offset; ours rematerializes the address per row. resume: a loop shape that makes the table base invariant. */
 #ifdef NON_MATCHING
@@ -45,7 +45,7 @@ NON_MATCHING void func_801DAC1C(void) {
                 table[col] = 0;
             }
             if (col != 0) {
-                if ((bit & D_80144F59) != 0 && panel_index < limit) {
+                if ((bit & g_MasterRewardFlags) != 0 && panel_index < limit) {
                     table[col]       = 1;
                     panel            = &D_801484E0 + panel_index * 0x24;
                     panel[1]         = 6;

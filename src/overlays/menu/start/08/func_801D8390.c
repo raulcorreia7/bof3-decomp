@@ -63,15 +63,15 @@ NON_MATCHING void func_801D8390(void) {
     D_80148656 = slot[0xA];
     if (g_InputPressed & D_80145AC2) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
-        state                       = &D_801485DC;
-        *state                      = 0;
-        g_MenuPanelTasks[18].unk_01 = 6;
-        g_MenuPanelTasks[18].unk_02 = 0xF;
-        state[-0x24]                = 1;
-        g_MenuPanelTasks[18].pos.x  = 0x28;
-        g_MenuPanelTasks[18].pos.y  = 0x3C;
-        g_BattleItemRow             = (g_MenuPanelTasks[16].unk_0B == 3) ? 6 : 5;
-        g_MenuPanelTasks[18].unk_0B = 0;
+        state                        = &D_801485DC;
+        *state                       = 0;
+        g_MenuPanelTasks[18].handler = 6;
+        g_MenuPanelTasks[18].mode    = 0xF;
+        state[-0x24]                 = 1;
+        g_MenuPanelTasks[18].pos.x   = 0x28;
+        g_MenuPanelTasks[18].pos.y   = 0x3C;
+        g_BattleItemRow              = (g_MenuPanelTasks[16].unk_0B == 3) ? 6 : 5;
+        g_MenuPanelTasks[18].unk_0B  = 0;
         D_80148652 += 1;
     } else if (g_InputPressed & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
