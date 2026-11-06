@@ -7,7 +7,7 @@ MATCH void func_801F08D8(u8 source_index, u8 task_index) {
     s32 record_index;
     u8  index;
     s16 distance;
-    record_index                = g_FairyJobs[source_index].type - 1;
+    record_index                = g_SaveData.fairy_jobs[source_index].type - 1;
     index                       = record_index;
     g_Task                      = &g_Actors[task_index];
     g_Task->unk_05              = source_index;

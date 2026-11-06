@@ -10,7 +10,7 @@ MATCH s32 func_801E4C2C(s32 item_class) {
             enabled = MEM(u8, PARTY_FLAGS) & 8;
             break;
         case 12:
-            enabled = SYS_TestFlag(g_SceneEventFlags, 0x6C);
+            enabled = SYS_TestFlag(g_SaveData.scene_event_flags, 0x6C);
             break;
         case 13:
             enabled = MEM(u8, PARTY_FLAGS) & 0x10;

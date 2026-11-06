@@ -72,7 +72,7 @@ MATCH void func_801BC000(void) {
                         Actor_RequestScript(g_Task->direction_08);
                         goto block_26; /* retail branch */
                     }
-                    if (!(g_Characters[g_GameState->slot_13C].status & STATUS_CONFUSED)) {
+                    if (!(g_SaveData.characters[g_GameState->slot_13C].status & STATUS_CONFUSED)) {
                         g_GameState->step_12A.s8_value = 0;
                     }
                     func_801C2538();

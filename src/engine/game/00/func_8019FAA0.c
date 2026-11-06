@@ -34,7 +34,7 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
     D_80143F06 = flag;
     D_80143F0C = word_b;
     if (seed == 0xFFu)
-        g_SndBgmId = 0xFFu;
+        g_SaveData.snd_bgm_id = 0xFFu;
     else
         SND_StartBgm(seed, 100, 8);
 
@@ -82,7 +82,7 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
     if (entry->callback != 0)
         entry->callback();
 
-    SYS_ClearFlag(g_SceneEventFlags, 0x1Cu);
+    SYS_ClearFlag(g_SaveData.scene_event_flags, 0x1Cu);
     g_SceneState.mode_02 = 1u;
     Game_RunScenarioEntry();
     func_801C05AC();

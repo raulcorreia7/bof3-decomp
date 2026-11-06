@@ -13,13 +13,13 @@ MATCH void func_801D4D8C(void) {
 
     func_801D4A44();
     for (ring = 0; (u32)(ring & BYTE_MASK) < 127; ring += 1) {
-        left  = g_InventoryIds[1];
-        out   = g_InventoryIds[1] + 0x200;
+        left  = g_SaveData.inventory_ids[1];
+        out   = g_SaveData.inventory_ids[1] + 0x200;
         limit = 0x7F - (ring & BYTE_MASK);
         inner = 0;
         if (limit > 0) {
             span  = limit;
-            right = g_InventoryIds[1] + 1;
+            right = g_SaveData.inventory_ids[1] + 1;
             do {
                 left_id = *left;
                 if (left_id != 0) {

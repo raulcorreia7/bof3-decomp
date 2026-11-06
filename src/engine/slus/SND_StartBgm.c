@@ -10,7 +10,7 @@ MATCH void SND_StartBgm(u8 bgm_id, u8 cue_level, u8 cue_shape) {
                 CallbackWait(1);
             }
         }
-        if (g_SndBgmId != bgm_id) {
+        if (g_SaveData.snd_bgm_id != bgm_id) {
             SND_PlayBgm(bgm_id, cue_level, cue_shape);
         }
     }

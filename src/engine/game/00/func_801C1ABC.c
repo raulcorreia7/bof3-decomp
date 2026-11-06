@@ -102,14 +102,14 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
     ((u8*)g_BattlePartyBattlers)[((s32)g_PartySize - 1) * BATTLE_PARTY_STRIDE] = 0;
     Party_ClearBattlerState(((s32)g_PartySize - 1) & BYTE_MASK);
     if (g_PartySize == 3) {
-        if (g_PartyFormation >= 3u)
-            g_PartyFormation = 0;
+        if (g_SaveData.party_formation >= 3u)
+            g_SaveData.party_formation = 0;
         else
             goto tail;
     } else {
     tail:
         if (g_PartySize == 2)
-            g_PartyFormation = 0;
+            g_SaveData.party_formation = 0;
     }
     g_PartySize = (u8)((s32)g_PartySize - 1);
 }

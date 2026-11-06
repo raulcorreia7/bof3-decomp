@@ -1,7 +1,7 @@
 #include "area100_13.h"
 
 MATCH void func_801F3B20(void) {
-    SYS_SetFlag(g_SceneEventFlags, 69);
+    SYS_SetFlag(g_SaveData.scene_event_flags, 69);
     Area_SetCellPalette(74, 30);
     SND_PlayCue(265);
     Area_SetCellCode(73, 30, 161);

@@ -9,6 +9,7 @@
 
 #include "shared/etc.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 #include <stdio.h>
 #include <string.h>
 

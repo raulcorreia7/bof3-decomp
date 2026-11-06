@@ -34,7 +34,7 @@ MATCH void func_801D6F28(void) {
             Actor_StageScriptRecord(work->unk_4B, (u16)(half - 2u), (u8*)0x800F0800u, 0x1800);
         }
     }
-    EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     {
         volatile u8* state = &g_BattleSubStep;
 

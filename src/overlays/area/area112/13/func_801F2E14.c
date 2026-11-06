@@ -1,7 +1,7 @@
 #include "area112_13.h"
 
 MATCH void func_801F2E14(void) {
-    if (!SYS_TestFlag(g_SceneEventFlags, COORD_FRAC(g_Task->pos.x))) {
+    if (!SYS_TestFlag(g_SaveData.scene_event_flags, COORD_FRAC(g_Task->pos.x))) {
         g_Task->unk_09 = 0;
         g_Task->header.step++;
         COORD_INT(g_Task->pos.y) = 8;

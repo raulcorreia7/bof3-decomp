@@ -8,6 +8,7 @@
 #include "game/character.h"
 #include "battle/ram.h"
 #include "shared/etc.h"
+#include "work/save.h"
 #include <stdio.h>
 
 /* The main-executable text bank at 0x80010000: the message id indexes its u16

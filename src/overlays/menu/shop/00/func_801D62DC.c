@@ -24,7 +24,7 @@ MATCH void func_801D62DC(void) {
             }
         }
     } else {
-        selection_ptr  = &g_SndBgmId;
+        selection_ptr  = &g_SaveData.snd_bgm_id;
         *selection_ptr = 0xFF;
         selection      = 0;
         if (g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {

@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world04.h"
+#include "work/save.h"
 
 /* The selection record and its two step tables. */
 extern u8 D_801F380C[];

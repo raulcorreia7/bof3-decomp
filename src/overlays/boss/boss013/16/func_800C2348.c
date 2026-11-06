@@ -16,6 +16,6 @@ MATCH void func_800C2348(void) {
         *g_ScriptVars = 0x50;
         func_801DDF28();
     }
-    g_SndBgmId = 0x31;
+    g_SaveData.snd_bgm_id = 0x31;
     g_GameFlags &= 0xFF7F;
 }

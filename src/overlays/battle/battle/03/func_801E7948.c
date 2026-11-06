@@ -12,28 +12,28 @@ MATCH void func_801E7948(void) {
 
     if (g_BattleState & BATTLE_STATE_RELOAD_PARTY) {
         if (func_801E7B34() & BYTE_MASK) {
-            if (g_EmiLoadedCharacterIndex == 7) {
+            if (g_SaveData.emi_loaded_character_index == 7) {
                 slot = 0x205;
                 if (D_801EB4E0->facing < 2) {
                     slot = 0x201;
                 }
                 EMI_LoaderStreamInitSlot(slot);
             }
-            if (g_EmiLoadedCharacterIndex == 0xD) {
+            if (g_SaveData.emi_loaded_character_index == 0xD) {
                 slot = 0x206;
                 if (D_801EB4E0->facing < 2) {
                     slot = 0x202;
                 }
                 EMI_LoaderStreamInitSlot(slot);
             }
-            if (g_EmiLoadedCharacterIndex == 0xE) {
+            if (g_SaveData.emi_loaded_character_index == 0xE) {
                 slot = 0x207;
                 if (D_801EB4E0->facing < 2) {
                     slot = 0x203;
                 }
                 EMI_LoaderStreamInitSlot(slot);
             }
-            if (g_EmiLoadedCharacterIndex == 0xF) {
+            if (g_SaveData.emi_loaded_character_index == 0xF) {
                 slot = 0x208;
                 if (D_801EB4E0->facing < 2) {
                     slot = 0x204;
@@ -41,14 +41,14 @@ MATCH void func_801E7948(void) {
                 EMI_LoaderStreamInitSlot(slot);
             }
         } else if (D_801EB4E0->facing < 2) {
-            EMI_LoaderStreamInitSlot(g_EmiLoadedCharacterIndex + EMI_SLOT_BPLD);
+            EMI_LoaderStreamInitSlot(g_SaveData.emi_loaded_character_index + EMI_SLOT_BPLD);
         } else {
-            EMI_LoaderStreamInitSlot(g_EmiLoadedCharacterIndex + EMI_SLOT_BPLU);
+            EMI_LoaderStreamInitSlot(g_SaveData.emi_loaded_character_index + EMI_SLOT_BPLU);
         }
     } else if (D_801EB4E0->facing < 2) {
-        EMI_LoaderStreamInitSlot(D_800B4A64[g_EmiLoadedCharacterIndex]);
+        EMI_LoaderStreamInitSlot(D_800B4A64[g_SaveData.emi_loaded_character_index]);
     } else {
-        EMI_LoaderStreamInitSlot(D_800B4A68[g_EmiLoadedCharacterIndex]);
+        EMI_LoaderStreamInitSlot(D_800B4A68[g_SaveData.emi_loaded_character_index]);
     }
     g_Task->header.mode++;
 }

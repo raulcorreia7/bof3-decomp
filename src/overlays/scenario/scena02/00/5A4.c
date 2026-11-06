@@ -453,7 +453,7 @@ MATCH void func_801FD6FC(u8 character) {
     u8* ability;
     u8  i;
 
-    ability = g_Characters[character].abilities.skill;
+    ability = g_SaveData.characters[character].abilities.skill;
     for (i = 0; i < 10; i++) {
         if (*ability != 0) {
             Char_AddAbility(*ability, 0, 1, 0);

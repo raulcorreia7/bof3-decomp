@@ -14,7 +14,7 @@ MATCH u8 func_801D5DCC(void) {
             g_BattlePartyBattlers[slot].turn.ap_change = 0;
             /* FAKE: keeps the mode byte load after the two stores (the scheduler hoists it above them). */
             MATCH_BARRIER();
-            if (g_PartyFormation == 5) {
+            if (g_SaveData.party_formation == 5) {
                 g_BattlePartyBattlers[slot].turn.hp_change -= 1;
             }
             if (g_BattlePartyBattlers[slot].chr.character_id == CHAR_ID_PECO) {

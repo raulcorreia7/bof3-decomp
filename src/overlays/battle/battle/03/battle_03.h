@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <memory.h>
 #include "menu/draw.h"
+#include "work/save.h"
 #include <strings.h>
 
 /* retail addresses */

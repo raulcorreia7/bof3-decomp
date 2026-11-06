@@ -12,7 +12,7 @@ MATCH s32 func_801E1C10(void) {
     do {
         i = 0;
         do {
-            if (g_InventoryIds[0][i] == value && g_InventoryCounts[0][i] == 0x63) {
+            if (g_SaveData.inventory_ids[0][i] == value && g_SaveData.inventory_counts[0][i] == 0x63) {
                 count += 1;
             }
             i += 1;

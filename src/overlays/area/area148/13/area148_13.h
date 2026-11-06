@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world03.h"
+#include "work/save.h"
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 

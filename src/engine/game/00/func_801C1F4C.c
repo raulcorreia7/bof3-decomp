@@ -18,7 +18,7 @@ MATCH void func_801C1F4C(s32 key) {
             next  = outer + 1;
             inner = 0;
             do {
-                if ((((u8*)g_FairyJobs)[inner] != 0) && (((u8*)g_FairyJobs)[inner + 1] == next)) {
+                if ((((u8*)g_SaveData.fairy_jobs)[inner] != 0) && (((u8*)g_SaveData.fairy_jobs)[inner + 1] == next)) {
                     total += 1;
                 }
                 inner += 8;

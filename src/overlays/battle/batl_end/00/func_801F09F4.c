@@ -2,7 +2,7 @@
 
 MATCH void func_801F09F4(void) {
     func_801D8270(0x6E, 0x28);
-    sprintf(D_80149118, D_801EEC4C, g_Zenny);
+    sprintf(D_80149118, D_801EEC4C, g_SaveData.zenny);
     UI_DrawAsciiString(126, 42, 0, D_80149118);
     UI_DrawText(182, 42, 0, 0xFF, D_801F0CD0);
 }

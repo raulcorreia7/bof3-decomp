@@ -45,7 +45,7 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
         stack_38 = tmp0 << 0x10;
         stack_40 = (s32)tmp0;
         do {
-            val11 = &g_Characters[g_CharSlot[*stack_20]];
+            val11 = &g_SaveData.characters[g_CharSlot[*stack_20]];
             val10 = 1;
             if (FIELD(u8, val11, 0x7u) & 2) {
                 val7 = 7;

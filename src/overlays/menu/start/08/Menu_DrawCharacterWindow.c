@@ -33,7 +33,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     val5 += 0x56;
     tmp1 = val5 & HALF_MASK;
     val1 += 2;
-    character = &g_Characters[character_index];
+    character = &g_SaveData.characters[character_index];
     if (val6 == 0) {
         val11 = (character->status >> 6) & 2;
     } else {

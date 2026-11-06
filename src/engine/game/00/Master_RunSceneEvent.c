@@ -27,7 +27,7 @@ MATCH void Master_RunSceneEvent(void) {
             return;
         case 3:
             g_EmiStreamFlags = 0x20;
-            EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+            EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
             D_801448EC = D_801448EC + 1;
             return;
         case 4:

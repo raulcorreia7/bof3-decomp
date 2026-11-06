@@ -21,16 +21,16 @@ MATCH void Battle_WriteBackParty(void) {
             index = i & BYTE_MASK;
             off   = index * BATTLE_PARTY_STRIDE;
             if ((*(u16*)((D_80145F10 + off)) & 0x4000u) != 0u) {
-                rec                         = g_BattlePartyBattlers[index].character_index;
-                value                       = g_Characters[rec].fatigue;
-                g_Characters[rec].hp        = 1;
-                g_Characters[rec].willpower = 1;
+                rec                                  = g_BattlePartyBattlers[index].character_index;
+                value                                = g_SaveData.characters[rec].fatigue;
+                g_SaveData.characters[rec].hp        = 1;
+                g_SaveData.characters[rec].willpower = 1;
                 if (value < 5u) {
-                    g_Characters[rec].fatigue = value + 1;
+                    g_SaveData.characters[rec].fatigue = value + 1;
                 }
-                g_Characters[rec].status &= ~STATUS_KO;
-                g_Characters[rec].unk_07 &= 0xFBu;
-                Char_RebuildStats(&g_Characters[rec]);
+                g_SaveData.characters[rec].status &= ~STATUS_KO;
+                g_SaveData.characters[rec].unk_07 &= 0xFBu;
+                Char_RebuildStats(&g_SaveData.characters[rec]);
             }
             i += 1;
         } while ((u32)(i & BYTE_MASK) < g_BattlePartyCount);

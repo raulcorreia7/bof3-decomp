@@ -230,7 +230,7 @@ INCLUDE_ASM(func_801FE438);
 #include "overlays/scenario/Scene_RebuildRyuGarrParty.h"
 
 MATCH void func_801FE5B0(void) {
-    g_Characters[g_CharSlot[5]].unk_07 &= 254;
+    g_SaveData.characters[g_CharSlot[5]].unk_07 &= 254;
     func_801C1ABC(CHAR_ID_MOMO);
     func_801C1630();
 }

@@ -2,7 +2,7 @@
 
 MATCH void func_801F2C74(void) {
     if (g_GameStateIndex != GAME_REQUEST_BATTLE) {
-        if (g_BattleCount % 5 != 0) {
+        if (g_SaveData.battle_count % 5 != 0) {
             ((Actor*)g_Task)->header.mode = 0;
         } else {
             Game_SetScriptActive();

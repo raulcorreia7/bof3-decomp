@@ -33,7 +33,7 @@ MATCH void func_801E1710(MenuPanelTask* task) {
         y += 0xD;
         list++;
     } while (n < 10);
-    record     = g_Characters[task->unk_0A].name;
+    record     = g_SaveData.characters[task->unk_0A].name;
     name_width = func_801AF20C(record);
     if ((u8)name_width >= 6) {
         name_width = 5;

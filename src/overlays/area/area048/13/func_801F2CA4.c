@@ -13,7 +13,7 @@ MATCH void func_801F2CA4(void) {
     g_Task->vz      = value;
     func_801F302C(&g_Task->vx, &g_Task->unk_18, g_Task);
     func_801F2EC0();
-    if (SYS_TestFlag(g_SceneEventFlags, 0xD) == 0) {
+    if (SYS_TestFlag(g_SaveData.scene_event_flags, 0xD) == 0) {
         g_Task->header.mode = 2;
     }
 }

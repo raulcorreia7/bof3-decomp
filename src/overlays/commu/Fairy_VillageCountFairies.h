@@ -5,7 +5,7 @@ MATCH u8 Fairy_VillageCountFairies(void) {
     s32 index;
 
     for (index = 0; index < 60; index++) {
-        if (g_FairyJobs[index].active != 0) {
+        if (g_SaveData.fairy_jobs[index].active != 0) {
             count++;
         }
     }

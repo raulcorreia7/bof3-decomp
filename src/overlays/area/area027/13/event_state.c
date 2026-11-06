@@ -6,7 +6,7 @@ MATCH void func_801F394C(void) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_SetScriptActive();
-                SYS_SetFlag(g_SceneEventFlags, 0);
+                SYS_SetFlag(g_SaveData.scene_event_flags, 0);
                 D_801448EC = 1;
             }
             break;
@@ -37,7 +37,7 @@ MATCH void func_801F394C(void) {
             if (*flag == 0x31) {
                 *flag = 0;
                 Game_ClearScriptActive();
-                SYS_ClearFlag(g_SceneEventFlags, 0);
+                SYS_ClearFlag(g_SaveData.scene_event_flags, 0);
                 D_801448EB = 0;
                 D_801448EC = 0;
             }

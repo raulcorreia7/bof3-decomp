@@ -29,7 +29,7 @@ NON_MATCHING void func_801DF00C(s32 panel_x, s32 panel_y) {
         clut     = 0;
         do {
             row_y  = base_y & HALF_MASK;
-            record = &g_Characters[g_CharSlot[D_801E6244[row & BYTE_MASK]]];
+            record = &g_SaveData.characters[g_CharSlot[D_801E6244[row & BYTE_MASK]]];
             UI_DrawWindow(base_x & HALF_MASK, row_y, 125, 48, 0x80, (s32)D_80144952);
             if (text_x != 0) {
                 shade = 1;

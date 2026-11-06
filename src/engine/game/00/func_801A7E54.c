@@ -45,8 +45,8 @@ MATCH void func_801A7E54(void) {
             if (*flag == 0x31) {
                 *flag = 0;
                 Game_ClearScriptActive();
-                SYS_ClearFlag(g_SceneEventFlags, 0x1E);
-                SYS_ClearFlag(g_SceneEventFlags, 0x1F);
+                SYS_ClearFlag(g_SaveData.scene_event_flags, 0x1E);
+                SYS_ClearFlag(g_SaveData.scene_event_flags, 0x1F);
                 D_801448EB = 0;
                 D_801448EC = 0;
                 D_801448ED = 0;

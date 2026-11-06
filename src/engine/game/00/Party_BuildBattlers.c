@@ -22,12 +22,12 @@ MATCH void Party_BuildBattlers(u32 mode) {
         g_Task->scale.y                          = 0x10000;
         kind                                     = g_CharSlot[*((entry_table + ((mode & BYTE_MASK) * 3)) + i)];
         g_BattlePartyBattlers[i].character_index = kind;
-        /* g_Characters is the 0xA4-byte character-record table; D_80144F5A is at +0x5F2. */
+        /* g_SaveData.characters is the 0xA4-byte character-record table; D_80144F5A is at +0x5F2. */
         record_base                              = (Character*)(D_80144F5A - 0x5F2);
         g_BattlePartyBattlers[i].chr             = record_base[kind];
         g_BattlePartyBattlers[i].unk_12C[0] &= 0xFE;
         if ((mode & BYTE_MASK) != 0) {
-            if ((g_Characters[g_BattlePartyBattlers[i].character_index].status & STATUS_POISONED) != 0) {
+            if ((g_SaveData.characters[g_BattlePartyBattlers[i].character_index].status & STATUS_POISONED) != 0) {
                 GFX_AllocPaletteFade((void*)g_Task, -4, -8, 0, 0);
             }
         } else {

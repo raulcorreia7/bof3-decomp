@@ -36,8 +36,6 @@
         *(second) = temp;              \
     } while (0)
 
-/* D_80144F50 */
-extern u32 g_Zenny;
 /* Stored character id -> character-record slot (Observed:
  * `sel = map[party_order[slot]]`). */
 

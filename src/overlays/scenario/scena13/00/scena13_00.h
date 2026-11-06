@@ -8,6 +8,7 @@
 #define GAME_SCRATCH_BASE_SCALAR
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
+#include "work/save.h"
 
 extern u8       D_80144908[];
 extern u8       D_8014490B[];

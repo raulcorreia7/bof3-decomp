@@ -35,7 +35,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s3
     val9      = character_index;
     val5      = equip_slot;
     val4      = 0;
-    character = &g_Characters[val9 & BYTE_MASK];
+    character = &g_SaveData.characters[val9 & BYTE_MASK];
     tmp3      = val5 & BYTE_MASK;
     val11     = item_id;
     switch (tmp3) {

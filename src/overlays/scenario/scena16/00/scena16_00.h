@@ -7,6 +7,7 @@
 
 #define GAME_SCRATCH_BASE_SCALAR
 #include "overlays/scenario/scenario.h"
+#include "work/save.h"
 
 #define SCENA16_PALETTE_SRC MEM_PTR(const volatile u16, 0x80033800u)
 #define SCENA16_VRAM_BASE   (0x80010000u)

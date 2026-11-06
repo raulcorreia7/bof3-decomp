@@ -6,6 +6,7 @@
 
 #include "overlays/boss/boss.h"
 #include "battle/ram.h"
+#include "work/save.h"
 
 extern Callback D_800C1804[];
 extern u8       D_800C1B34[];

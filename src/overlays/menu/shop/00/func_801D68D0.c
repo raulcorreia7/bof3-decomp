@@ -10,7 +10,7 @@ MATCH void func_801D68D0(s32 reset_slots) {
     index = 0;
     do {
         id   = index & BYTE_MASK;
-        slot = &g_Characters[id];
+        slot = &g_SaveData.characters[id];
         if (reset_slots & BYTE_MASK) {
             slot->fatigue = 0;
             Char_ClearStatus(id, 0xA0, 0);
@@ -26,8 +26,8 @@ MATCH void func_801D68D0(s32 reset_slots) {
         Char_ClearStatus(id, 0x2000, 0);
         index += 1;
     } while ((index & BYTE_MASK) < 8U);
-    if ((SYS_TestFlag((u8*)g_Characters + 0xBE4, 4) != 0) && (SYS_TestFlag((u8*)g_Characters + 0xBE7, 4) == 0) &&
-        (((u8*)g_Characters)[0xB8B] < 0x1EU)) {
-        ((u8*)g_Characters)[0xB8B] = 0;
+    if ((SYS_TestFlag((u8*)g_SaveData.characters + 0xBE4, 4) != 0) &&
+        (SYS_TestFlag((u8*)g_SaveData.characters + 0xBE7, 4) == 0) && (((u8*)g_SaveData.characters)[0xB8B] < 0x1EU)) {
+        ((u8*)g_SaveData.characters)[0xB8B] = 0;
     }
 }

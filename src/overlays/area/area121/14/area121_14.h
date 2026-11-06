@@ -8,6 +8,7 @@
 #include "work/actor.h"
 #include "overlays/area/world03.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 #include <rand.h>
 
 /* One spawn point in the area's spawn table: x then y, four bytes. */

@@ -9,7 +9,7 @@ MATCH s32 func_801B6470(void) {
     s32 x;
     s32 y;
 
-    if ((g_GameFlags & 0x4000) == 0 && (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 0xC) {
+    if ((g_GameFlags & 0x4000) == 0 && (g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK) != 0xC) {
         if (LOHU(g_GameAreaId) != 0xBD) {
             if ((func_801B6610(D_80145EC6, D_80145ECA) & BYTE_MASK) != 0) {
                 return 0;

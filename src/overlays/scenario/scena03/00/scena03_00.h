@@ -7,6 +7,7 @@
 #define GAME_SCRATCH_BASE_SCALAR
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
+#include "work/save.h"
 
 extern SVECTOR  D_1F800014[];
 extern s8       D_80144EA0;

@@ -1,7 +1,7 @@
 #include "area141_13.h"
 
 MATCH void func_801F3A38(void) {
-    SYS_SetFlag(g_SceneEventFlags, 0x7D);
+    SYS_SetFlag(g_SaveData.scene_event_flags, 0x7D);
     if (D_801490C7 == 0) {
         Game_SetScriptActive();
         func_801C601C(3);

@@ -7,7 +7,7 @@ MATCH void func_801F2E74(void) {
     if (MENU_SELECTION_IDLE()) {
         g_MessageRequest = 0x6F;
         D_801448ED       = 0;
-    } else if (g_Zenny >= 500u) {
+    } else if (g_SaveData.zenny >= 500u) {
         g_MessageRequest = 0x7D;
         D_801448ED       = 1;
     } else {

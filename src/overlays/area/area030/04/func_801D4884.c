@@ -21,7 +21,7 @@ MATCH void func_801D4884(void) {
     scan                          = record;
 loop:
     index = scan->bounce_3C.half.key_3E;
-    if (g_FishBestCatch[index] == 0) {
+    if (g_SaveData.fish_best_catch[index] == 0) {
         next                        = index + 1;
         scan->bounce_3C.half.key_3E = next;
         if (next >= 0x20) {

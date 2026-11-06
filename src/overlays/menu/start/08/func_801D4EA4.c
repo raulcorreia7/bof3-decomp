@@ -13,7 +13,7 @@ MATCH void func_801D4EA4(void) {
 
     func_801D4A44();
     for (i = 0; i < INV_SLOTS_PER_CATEGORY - 1; i++) {
-        ids  = g_InventoryIds[2];
+        ids  = g_SaveData.inventory_ids[2];
         qtys = ids + 0x200;
         for (j = 0; j < INV_SLOTS_PER_CATEGORY - 1 - i; j++) {
             cur = *ids;

@@ -2,6 +2,7 @@
 #define OVERLAY_BATTLE_BATL_END_00_H
 
 #include "overlays/battle/battle.h"
+#include "work/save.h"
 #include <stdio.h>
 
 extern u8           D_80145F16[][BATTLE_PARTY_STRIDE];

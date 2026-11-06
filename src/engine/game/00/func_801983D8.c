@@ -2,7 +2,7 @@
 
 MATCH void func_801983D8(void) {
     g_EmiStreamFlags = 0x20;
-    EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_LoaderIsReady() == 0) {
         func_801992B8();
         CallbackWait(1u);

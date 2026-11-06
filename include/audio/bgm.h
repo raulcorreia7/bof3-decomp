@@ -8,7 +8,7 @@
 #define BGM_TRACK_SIZE  0x04
 
 /* One row of the selection table at 0x80181EB8, indexed by the selection id
- * (g_SndBgmId). SND_RequestBgm compares bank_slot with the active
+ * (g_SaveData.snd_bgm_id). SND_RequestBgm compares bank_slot with the active
  * row and starts that archive through EMI_LoaderStreamInitSlot; the music
  * archives sit at EMI_SLOT_BGM and up. The selection effects read sep_slot as
  * the index into the SEP package table g_SelectionFxVoices and sequence as the sequence

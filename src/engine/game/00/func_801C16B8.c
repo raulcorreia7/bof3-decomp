@@ -13,15 +13,15 @@ MATCH void func_801C16B8(void) {
 
     buffer_ptr = buffer;
     count      = 0;
-    record     = g_Characters;
+    record     = g_SaveData.characters;
     do {
-        if (g_Characters[count].unk_07 & 1) {
-            g_Characters[count].fatigue = 0;
+        if (g_SaveData.characters[count].unk_07 & 1) {
+            g_SaveData.characters[count].fatigue = 0;
             Char_RebuildStats(record);
-            g_Characters[count].status    = 0;
-            g_Characters[count].willpower = g_Characters[count].stats.willpower;
-            g_Characters[count].hp        = g_Characters[count].stats.max_hp;
-            g_Characters[count].ap        = g_Characters[count].stats.max_ap;
+            g_SaveData.characters[count].status    = 0;
+            g_SaveData.characters[count].willpower = g_SaveData.characters[count].stats.willpower;
+            g_SaveData.characters[count].hp        = g_SaveData.characters[count].stats.max_hp;
+            g_SaveData.characters[count].ap        = g_SaveData.characters[count].stats.max_ap;
         }
         record += 1;
         count += 1;
@@ -30,7 +30,7 @@ MATCH void func_801C16B8(void) {
     /* Signed gate: retail tests the party byte with blez. */
     count = 0;
     if ((s16)g_PartySize > 0) {
-        src_base = g_Characters;
+        src_base = g_SaveData.characters;
         dst_base = D_80145F04;
         dst_off  = 0;
         do {

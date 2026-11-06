@@ -9,7 +9,7 @@ MATCH void func_801F23A4(void) {
     variant = &D_801448EC;
     switch (*variant) {
         case 0:
-            D_801F2945 = g_SndBgmId;
+            D_801F2945 = g_SaveData.snd_bgm_id;
             SND_StopSequence(((u8*)g_SelectionCues)[D_801F2945 * 4], D_80181EBB[D_801F2945 * 4]);
             SND_StartXAStream(D_801F2944 == 0 ? 8 : 10, 1);
             /* FAKE: the original spells this increment off the neighboring mode

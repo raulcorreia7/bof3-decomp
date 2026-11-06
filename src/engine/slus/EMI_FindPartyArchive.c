@@ -34,7 +34,7 @@ NON_MATCHING u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     const u8* val19;
     const u8* val20;
 
-    hp              = &g_EmiLoadedCharacterIndex;
+    hp              = &g_SaveData.emi_loaded_character_index;
     q               = D_1F800000;
     *q              = member_a;
     SP_REF(s8, 0x1) = member_b;
@@ -55,7 +55,7 @@ NON_MATCHING u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
             }
         }
         if (i >= 3) {
-            return g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK;
+            return g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK;
         }
     }
     val4 = 0;

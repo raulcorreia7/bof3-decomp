@@ -10,7 +10,7 @@ MATCH u8* Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode) {
 
     i = character_index & BYTE_MASK;
     if ((mode & BYTE_MASK) == 0) {
-        record = &g_Characters[i];
+        record = &g_SaveData.characters[i];
     } else {
         record = (Character*)(D_80145F04 + i * 0x140);
     }

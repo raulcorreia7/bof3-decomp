@@ -13,7 +13,7 @@ MATCH void func_801D4C68(void) {
 
     func_801D4A44();
     for (i = 0; (i & BYTE_MASK) < INV_SLOTS_PER_CATEGORY - 1; i++) {
-        a = g_InventoryIds[0];
+        a = g_SaveData.inventory_ids[0];
         c = a + 0x200;
         n = INV_SLOTS_PER_CATEGORY - 1 - (i & BYTE_MASK);
         j = 0;

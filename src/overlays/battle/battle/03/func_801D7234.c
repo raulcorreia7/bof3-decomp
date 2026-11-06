@@ -13,7 +13,7 @@ MATCH void func_801D7234(void) {
         g_BattleEndHook();
         if ((g_BattleOptions & BATTLE_OPT_KEEP_BGM) == 0u) {
             SND_StopAllSequences();
-            action = g_SndBgmId;
+            action = g_SaveData.snd_bgm_id;
             if (action != 0xFFu) {
                 unk_02 = D_80181EB8[action].sep_slot;
                 state  = g_EmiStreamFlags;

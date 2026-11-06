@@ -44,10 +44,10 @@ MATCH u8 func_801DB04C(void) {
         member  = D_80144F5A[D_80148658[5]];
         reserve = D_801ED690[D_80148658[1]];
     }
-    if (g_Characters[g_CharSlot[member]].unk_07 & 2) {
+    if (g_SaveData.characters[g_CharSlot[member]].unk_07 & 2) {
         return member;
     }
-    if (g_Characters[g_CharSlot[reserve]].unk_07 & 2) {
+    if (g_SaveData.characters[g_CharSlot[reserve]].unk_07 & 2) {
         return reserve;
     }
     SND_PlayCue(EMI_CUE_ID(1, 3));

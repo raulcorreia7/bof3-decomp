@@ -5,12 +5,12 @@ MATCH void func_801985C8(void) {
 
     g_EmiStreamFlags = 0x20;
     g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-    EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_LoaderIsReady() == 0) {
         func_801E0C40();
         CallbackWait(1);
     }
-    selection = g_SndBgmId;
+    selection = g_SaveData.snd_bgm_id;
     if (selection != GAME_NONE && g_GamePrevSelection != selection) {
         SND_StartDecrescendo(g_SelectionCues[selection * 4], D_80181EBB[selection * 4], 100, 16);
     }
@@ -20,7 +20,7 @@ MATCH void func_801985C8(void) {
         CallbackWait(1);
     }
     Game_RequestAreaChange(*(u16*)&D_80143F04, *(u32*)&D_80143F08, *(u32*)&D_80143F0C, 4);
-    selection = g_SndBgmId;
+    selection = g_SaveData.snd_bgm_id;
     if (selection != GAME_NONE && g_GamePrevSelection != selection) {
         SND_StopSequence(g_SelectionCues[selection * 4], D_80181EBB[selection * 4]);
     }

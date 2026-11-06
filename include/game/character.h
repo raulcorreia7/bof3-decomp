@@ -263,8 +263,6 @@ ASSERT_OFFSET(CharacterBankSection, palette_offset, 0x04);
 
 /* The party's character records, one per CHAR_INDEX_*. Every field/menu reader
  * indexes it through the g_CharSlot slot of a stored character id. */
-/* D_80144968 */
-extern Character   g_Characters[PARTY_RECORD_COUNT];
 /* D_801CB8DC */
 extern LevelGrowth g_LevelGrowth[LEVEL_GROWTH_CHARACTER_COUNT][LEVEL_GROWTH_LEVEL_COUNT];
 

@@ -12,7 +12,7 @@ MATCH void func_801D3560(u16* result_code) {
         /* Shift form: it keeps the table symbol in the load's immediate field,
          * which `i * 0x140` does not. */
         item  = D_80145FCC[i][0];
-        entry = &g_Characters[item];
+        entry = &g_SaveData.characters[item];
         if (entry->equip.accessories[0] == ACCESSORY_COUPONS) {
             *result_code = 0x50;
             break;

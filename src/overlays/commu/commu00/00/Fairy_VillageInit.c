@@ -27,11 +27,11 @@ MATCH void Fairy_VillageInit(void) {
             D_801455C4 = 0;
             D_801455C5 = 0;
             D_801455C6 = 0;
-            D_801455AC = g_BattleCount;
-            D_801455B0 = g_BattleCount;
-            D_801455B4 = g_BattleCount;
-            D_801455B8 = g_BattleCount;
-            D_801455BC = g_BattleCount;
+            D_801455AC = g_SaveData.battle_count;
+            D_801455B0 = g_SaveData.battle_count;
+            D_801455B4 = g_SaveData.battle_count;
+            D_801455B8 = g_SaveData.battle_count;
+            D_801455BC = g_SaveData.battle_count;
             D_801455C0 = g_GameAreaId;
         } else {
             Fairy_VillageQueueRooms();

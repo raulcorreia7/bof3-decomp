@@ -22,7 +22,7 @@ MATCH void func_801DD08C(void) {
 
         work_offset    = index * 0x140u;
         template_index = g_BattlePartyBattlers[index].character_index;
-        src            = (BattleTemplateBlock*)(&g_Characters[template_index]);
+        src            = (BattleTemplateBlock*)(&g_SaveData.characters[template_index]);
         dst            = (BattleTemplateBlock*)(D_80145F04 + work_offset);
         end            = src + 10;
         do {

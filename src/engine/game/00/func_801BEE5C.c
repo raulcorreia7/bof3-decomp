@@ -48,7 +48,7 @@ found:
         g_GameState = (GameState*)rec;
         TASK_SET(rec);
         kind  = rec[0x13C];
-        flags = g_Characters[kind].status;
+        flags = g_SaveData.characters[kind].status;
         if ((flags & 0x4000) != 0) {
             Actor_StageScriptRecord(rec[0x4B], 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
             g_Task->unk_0B = 0;

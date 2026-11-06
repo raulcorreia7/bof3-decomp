@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "shared/etc.h"
+#include "work/save.h"
 
 extern OverlayHeader D_801D0C00;
 /* The overlay's step and sub-step handler pools; the tables are views into one

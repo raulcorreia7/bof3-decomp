@@ -35,7 +35,7 @@ case_1:
     mapped_character = g_CharSlot[D_80144F5A[(u8)ch]];
     character_offset = (u32)mapped_character * PARTY_RECORD_STRIDE;
     required_level   = Char_GetAbilityCost((u8)mapped_character, (u8)kind, 0u) & BYTE_MASK;
-    learned_level    = g_Characters[mapped_character].ap;
+    learned_level    = g_SaveData.characters[mapped_character].ap;
     if (learned_level < required_level)
         return 0;
     if (ability[0xC] & 1u)
@@ -53,9 +53,9 @@ case_2:
         return 0;
     if ((u8)kind == ABILITY_DISEMBOWEL && *(const u8*)(D_80145F1E + (u32)(u8)ch * BATTLE_PARTY_STRIDE) >= 5u)
         return 0;
-    if ((u8)kind == ABILITY_BONEBREAK && *(u32*)&g_GameBonebreakTimer != 0u)
+    if ((u8)kind == ABILITY_BONEBREAK && *(u32*)&g_SaveData.bonebreak_timer != 0u)
         return 0;
-    if ((u8)kind == ABILITY_CELERITY && *(u32*)&g_GameCelerityTimer != 0u)
+    if ((u8)kind == ABILITY_CELERITY && *(u32*)&g_SaveData.celerity_timer != 0u)
         return 0;
     if ((u8)kind == ABILITY_TRUMP && *(const u16*)(D_80145F1A + (u32)(u8)ch * BATTLE_PARTY_STRIDE) != 0u)
         return 0;

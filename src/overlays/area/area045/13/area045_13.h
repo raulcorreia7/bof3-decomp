@@ -6,6 +6,7 @@
 
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 
 #define AREA_SCENE_RECORD     0x3B
 

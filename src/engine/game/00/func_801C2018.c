@@ -32,12 +32,12 @@ MATCH void func_801C2018(void) {
             counter_word   = gate_byte_ptr - 0x1B;
         loop_7:
             /* Retail passes the full s32 selector despite the helpers' u8 prototypes. */
-            if (((s32 (*)(void*, s32))SYS_TestFlag)(&g_SceneEventFlags, bit_index) == 0) {
+            if (((s32 (*)(void*, s32))SYS_TestFlag)(&g_SaveData.scene_event_flags, bit_index) == 0) {
                 kind_10_count         = 0;
                 selected_record_count = 0;
                 for (record_byte_offset = 0; record_byte_offset < 480; record_byte_offset += 8) {
-                    if (((u8*)g_FairyJobs)[record_byte_offset] != 0) {
-                        record_kind = ((u8*)g_FairyJobs)[record_byte_offset + 1];
+                    if (((u8*)g_SaveData.fairy_jobs)[record_byte_offset] != 0) {
+                        record_kind = ((u8*)g_SaveData.fairy_jobs)[record_byte_offset + 1];
                         if (record_kind == record_kind_10) {
                             kind_10_count += 1;
                         } else if (record_kind == record_kind_11) {
@@ -81,7 +81,7 @@ MATCH void func_801C2018(void) {
             func_801C1F4C(0xB);
         }
     }
-    if ((SYS_TestFlag(g_SceneEventFlags, 0xF5U) == 0) && (D_801455C4 >= 4U)) {
-        SYS_SetFlag(g_SceneEventFlags, 0xF5U);
+    if ((SYS_TestFlag(g_SaveData.scene_event_flags, 0xF5U) == 0) && (D_801455C4 >= 4U)) {
+        SYS_SetFlag(g_SaveData.scene_event_flags, 0xF5U);
     }
 }

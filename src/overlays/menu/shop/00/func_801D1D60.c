@@ -21,7 +21,7 @@ MATCH void func_801D1D60(void) {
             u32* zenny;
 
             SND_PlayCue(EMI_CUE_ID(1, 4));
-            zenny = &g_Zenny;
+            zenny = &g_SaveData.zenny;
             *zenny -= g_ShopItemPrice * g_ShopItemCount;
             Item_Add(g_ShopItemCategory, g_ShopItemId, g_ShopItemCount, 0);
             stock = Item_GetKind(g_ShopItemCategory, g_ShopItemId);

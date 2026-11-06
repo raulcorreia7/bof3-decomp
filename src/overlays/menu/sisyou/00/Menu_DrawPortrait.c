@@ -1,6 +1,6 @@
 #include "sisyou_00.h"
 
-/* g_EmiLoadedCharacterIndex, the front-end mode byte owned by the main executable:
+/* g_SaveData.emi_loaded_character_index, the front-end mode byte owned by the main executable:
  * the low 7 bits select the current mode. */
 
 /* Panel atlas records: u, v, clut x, clut y (4-byte stride). */
@@ -12,8 +12,8 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
     s32                 tpage;
     u16                 clut;
 
-    if ((sprite_id & BYTE_MASK) == 4 && (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 5 &&
-        (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 0xC) {
+    if ((sprite_id & BYTE_MASK) == 4 && (g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK) != 5 &&
+        (g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK) != 0xC) {
         sprite_id = 0xB;
     }
     entry = &D_801D4058[sprite_id & BYTE_MASK];

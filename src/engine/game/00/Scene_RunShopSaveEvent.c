@@ -15,7 +15,7 @@ MATCH void Scene_RunShopSaveEvent(void) {
             }
             g_AreaDrawFlags = 0;
             func_801C16B8();
-            SND_PauseBgm(g_SndBgmId);
+            SND_PauseBgm(g_SaveData.snd_bgm_id);
             SND_StartXAStream(0, 1);
             D_801448EC = 2;
             break;
@@ -23,7 +23,7 @@ MATCH void Scene_RunShopSaveEvent(void) {
             if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
                 break;
             }
-            SND_ResumeBgm(g_SndBgmId);
+            SND_ResumeBgm(g_SaveData.snd_bgm_id);
             UI_SetMode(1);
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             D_801448EC      = 3;
@@ -83,7 +83,7 @@ MATCH void Scene_RunShopSaveEvent(void) {
             }
             g_AreaDrawFlags = 0;
             func_801C16B8();
-            SND_PauseBgm(g_SndBgmId);
+            SND_PauseBgm(g_SaveData.snd_bgm_id);
             SND_StartXAStream(0, 1);
             D_801448EC = 22;
             break;
@@ -91,7 +91,7 @@ MATCH void Scene_RunShopSaveEvent(void) {
             if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
                 break;
             }
-            SND_ResumeBgm(g_SndBgmId);
+            SND_ResumeBgm(g_SaveData.snd_bgm_id);
             UI_SetMode(1);
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             D_801448EC      = 23;

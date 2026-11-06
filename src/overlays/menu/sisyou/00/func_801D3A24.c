@@ -33,9 +33,9 @@ NON_MATCHING void func_801D3A24(void) {
     }
     battler_offset = g_MasterMenuCursor * BATTLE_PARTY_STRIDE;
     rec            = D_80145FCC.bytes[battler_offset];
-    chr_master     = g_Characters[rec].master_id;
+    chr_master     = g_SaveData.characters[rec].master_id;
     if (chr_master == D_801448ED) {
-        diff = g_Characters[rec].level - g_Characters[rec].master_level;
+        diff = g_SaveData.characters[rec].level - g_SaveData.characters[rec].master_level;
         switch (chr_master) {
             case 0xB:
                 if (diff >= 3 && !(D_80144F59 & 8)) {

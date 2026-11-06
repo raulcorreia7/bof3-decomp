@@ -23,7 +23,8 @@ MATCH void func_801EF214(void) {
                 room_next  = room + 1;
                 weight_off = 0;
                 for (rec_off = 0; rec_off < 480; rec_off += 8) {
-                    if (((u8*)g_FairyJobs)[rec_off] != 0 && ((u8*)g_FairyJobs)[rec_off + 1] == room_next) {
+                    if (((u8*)g_SaveData.fairy_jobs)[rec_off] != 0 &&
+                        ((u8*)g_SaveData.fairy_jobs)[rec_off + 1] == room_next) {
                         count += 1;
                         total += D_801F2708[weight_off];
                     }
@@ -37,7 +38,7 @@ MATCH void func_801EF214(void) {
             if (wait <= 0) {
                 wait = 1;
             }
-            if ((g_BattleCount - D_801455B8) >= wait) {
+            if ((g_SaveData.battle_count - D_801455B8) >= wait) {
                 (*level) += 1;
                 D_801455B8 += wait;
                 D_80145E60[g_FairyVillageUpdateCount * 2] = 7;

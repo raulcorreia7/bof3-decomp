@@ -25,7 +25,7 @@ loop:
     cnt = Party_CountOrder(0);
     if ((s1 & BYTE_MASK) < (cnt & BYTE_MASK)) {
         id = D_80145FCC[(s1 & BYTE_MASK)][0];
-        if (g_Characters[id].inoculations != 0) {
+        if (g_SaveData.characters[id].inoculations != 0) {
             Menu_DrawCharacterWindow(s0 & HALF_MASK, (((s1 & BYTE_MASK) * 0x36) + 0x3E) & 0xFFFE, id, 1, 0);
         } else {
             Menu_DrawCharacterWindow(s0 & HALF_MASK, (((s1 & BYTE_MASK) * 0x36) + 0x3E) & 0xFFFE, id, 0, 0);
@@ -33,5 +33,5 @@ loop:
         s1 += 1;
         goto loop; /* try the next entry */
     }
-    Menu_DrawZennyWindow((s2 << 5) + 0xB4, 0x26, 0, g_Zenny);
+    Menu_DrawZennyWindow((s2 << 5) + 0xB4, 0x26, 0, g_SaveData.zenny);
 }

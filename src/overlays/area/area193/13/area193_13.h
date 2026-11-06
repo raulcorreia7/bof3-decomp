@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world04.h"
+#include "work/save.h"
 
 /* The published field work row and the scene bytes the request paths write. */
 

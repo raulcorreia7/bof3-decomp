@@ -6,6 +6,7 @@
 
 #include "overlays/area/world02.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 
 extern Callback D_801F3B44[];
 

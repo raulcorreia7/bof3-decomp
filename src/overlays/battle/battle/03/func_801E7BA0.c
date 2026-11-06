@@ -124,7 +124,7 @@ NON_MATCHING void func_801E7BA0(void) {
             *(D_80145F1A + temp_a0_363)                  = D_801EB4C8;
             *(D_80145F10 + (temp_a1_349->slot * 0x140))  = D_801EB4CC;
             temp_a0_392                                  = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
-            *(D_80145F1E + temp_a0_392)                  = g_Characters[*(D_80145FCC + temp_a0_392)].fatigue;
+            *(D_80145F1E + temp_a0_392)                  = g_SaveData.characters[*(D_80145FCC + temp_a0_392)].fatigue;
             temp_a0_409                                  = g_Task;
             var_s0                                       = 0;
             *(&D_80145FB4 + (temp_a0_409->slot * 0x140)) = D_801EB4D0;

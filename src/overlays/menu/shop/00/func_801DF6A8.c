@@ -19,9 +19,9 @@ NON_MATCHING void func_801DF6A8(void) {
         do {
             record = g_CharSlot[D_80144F5A[slot]];
             Menu_DrawCharacterWindow(0x11, (slot * 0x36 + 0x3E) & 0xFFFE, record,
-                                     (g_Characters[record].unk_07 >> 1) & 1, 0);
+                                     (g_SaveData.characters[record].unk_07 >> 1) & 1, 0);
             sprintf((char*)g_UiFormatBuffer, (char*)D_801D0E60, slot + 1);
-            UI_DrawGlyphString(26, (s16)(slot * 54 + 67), -((g_Characters[record].unk_07 & 2) != 0) & 7,
+            UI_DrawGlyphString(26, (s16)(slot * 54 + 67), -((g_SaveData.characters[record].unk_07 & 2) != 0) & 7,
                                g_UiFormatBuffer);
             slot += 1;
         } while (slot < count);

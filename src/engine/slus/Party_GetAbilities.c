@@ -9,7 +9,7 @@ MATCH u8* Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode) {
 
     if ((mode & BYTE_MASK) == 0) {
         slot   = g_CharSlot[D_80144F5A[formation_index & BYTE_MASK]];
-        record = &g_Characters[slot];
+        record = &g_SaveData.characters[slot];
     } else {
         record = (Character*)(D_80145F04 + (formation_index & BYTE_MASK) * 0x140);
     }

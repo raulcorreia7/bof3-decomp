@@ -1,0 +1,1 @@
+g_SaveData = { addr = 0x801448D8, size = 0x10B0, source = "SYS_StartFrontend clears these 0x10B0 bytes at boot, SAVE_BuildSlotImage copies them to the memory card file payload at file offset 0x200 (checksum 4,272 bytes), SAVE_RunLoadRestore copies them back; the wiki save layout lists its fields" }

@@ -8,7 +8,7 @@ MATCH s32 func_801E87F0(s32 record_index, s32 use_battle_record) {
     u16        limit;
 
     if ((use_battle_record & BYTE_MASK) == 0) {
-        rec = &g_Characters[record_index & BYTE_MASK];
+        rec = &g_SaveData.characters[record_index & BYTE_MASK];
     } else {
         rec = (Character*)&D_80145F04[(record_index & BYTE_MASK) * BATTLE_PARTY_STRIDE];
     }

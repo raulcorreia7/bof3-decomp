@@ -25,6 +25,7 @@ ASSERT_OFFSET(CameraAngleOffset, x, 0x00);
 ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 
 #include "data.h"
+#include "work/save.h"
 #include <stdio.h>
 
 #define TILE_RUN_SIZE          0x8
@@ -1526,7 +1527,7 @@ static inline void GameRunMapLoadHandshake(void) {
     CallbackWait(1U);
     CallbackWait(1U);
     g_EmiStreamFlags = 0x20;
-    EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_LoaderIsReady() == 0) {
         CallbackWait(1U);
     }

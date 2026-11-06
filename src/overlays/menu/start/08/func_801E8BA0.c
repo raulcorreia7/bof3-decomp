@@ -9,7 +9,7 @@ MATCH s32 func_801E8BA0(void) {
 
     Item_Add(ITEM_CAT_ITEM, ITEM_FAERIE_TIARA, 1, 0);
     bit_index       = 255;
-    bitset          = g_SceneEventFlags;
+    bitset          = g_SaveData.scene_event_flags;
     counter_address = &D_8014869D;
     /* FAKE: keep pointer in register. */
     MATCH_FAKE_USE(counter_address);

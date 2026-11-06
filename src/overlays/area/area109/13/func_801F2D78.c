@@ -13,15 +13,15 @@ MATCH s32 func_801F2D78(s32 arg0, s32 arg1) {
     if (g_BattlePartyBattlers[0].facing != 3) {
         return 0;
     }
-    if (SYS_TestFlag(g_SceneEventFlags, 0x1C) != 0) {
+    if (SYS_TestFlag(g_SaveData.scene_event_flags, 0x1C) != 0) {
         return 0;
     }
     flag_id = D_801F2E90;
     roll    = func_801F2D04() % 6;
     do {
-        SYS_ClearFlag(g_SceneEventFlags, *flag_id);
+        SYS_ClearFlag(g_SaveData.scene_event_flags, *flag_id);
         if (roll & 1) {
-            SYS_SetFlag(g_SceneEventFlags, *flag_id);
+            SYS_SetFlag(g_SaveData.scene_event_flags, *flag_id);
         }
         flag_id += 1;
         roll >>= 1;

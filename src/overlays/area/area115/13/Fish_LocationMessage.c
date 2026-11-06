@@ -52,7 +52,7 @@ MATCH void Fish_LocationMessage(void) {
             next:
                 id = *from;
                 if ((id & BYTE_MASK) != GAME_NONE) {
-                    if (g_FishBestCatch[id & BYTE_MASK] != 0) {
+                    if (g_SaveData.fish_best_catch[id & BYTE_MASK] != 0) {
                         if ((id & BYTE_MASK) == 0x16) {
                             src = D_801F4F3C;
                         } else {

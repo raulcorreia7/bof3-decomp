@@ -38,14 +38,14 @@ NON_MATCHING void func_801DAE14(void) {
     *flags = 0;
     offset = 0;
     for (i = 0; i < 8; i++) {
-        if (((u8*)&g_Characters[0].unk_07)[offset] & 1) {
+        if (((u8*)&g_SaveData.characters[0].unk_07)[offset] & 1) {
             for (index = 0; index < (count & BYTE_MASK); index++) {
-                if (g_Characters[i].character_index == D_80144F5A[index]) {
+                if (g_SaveData.characters[i].character_index == D_80144F5A[index]) {
                     break;
                 }
             }
             if (index == (count & BYTE_MASK)) {
-                D_801ED690[(*flags)++] = g_Characters[i].character_index;
+                D_801ED690[(*flags)++] = g_SaveData.characters[i].character_index;
             }
         }
         offset += 0xA4;

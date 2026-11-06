@@ -14,7 +14,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32
     u8         category;
     u8         i;
 
-    stats = &g_Characters[character_index & BYTE_MASK];
+    stats = &g_SaveData.characters[character_index & BYTE_MASK];
     switch (equip_slot & BYTE_MASK) {
         default:
             category = 0;

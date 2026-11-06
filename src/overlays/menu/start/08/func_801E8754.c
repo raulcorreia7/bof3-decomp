@@ -6,7 +6,7 @@ MATCH s32 func_801E8754(s32 character_index, s32 record_index) {
     u8         b;
 
     if ((record_index & BYTE_MASK) == 0) {
-        rec = &g_Characters[character_index & BYTE_MASK];
+        rec = &g_SaveData.characters[character_index & BYTE_MASK];
     } else {
         rec = (Character*)&D_80145F04[(character_index & BYTE_MASK) * BATTLE_PARTY_STRIDE];
     }

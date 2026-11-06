@@ -37,13 +37,4 @@ ASSERT_SIZE(GameClock, GAME_CLOCK_SIZE);
 ASSERT_OFFSET(GameClock, hours_00, 0x00);
 ASSERT_OFFSET(GameClock, thirtieths_03, 0x03);
 
-/* D_80144FC0 */
-extern GameClock g_PlayClock;
-/* The countdown timers of the celerity and bonebreak abilities. Both lie in the saved block, at save offsets
- * SAVE_CELERITY_TIMER and SAVE_BONEBREAK_TIMER. */
-/* D_80145554 */
-extern GameClock g_GameCelerityTimer;
-/* D_80145558 */
-extern GameClock g_GameBonebreakTimer;
-
 #endif

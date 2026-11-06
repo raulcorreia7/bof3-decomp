@@ -6,7 +6,7 @@ MATCH s32 func_801E7934(u8 character_index, u8 target_index, u8 record_index) {
     u8  updated;
     s32 result;
 
-    value   = g_Characters[character_index].stats.intellect;
+    value   = g_SaveData.characters[character_index].stats.intellect;
     amount  = (value + 0x64) / 5;
     updated = Char_RestoreHP(target_index, amount, record_index) & BYTE_MASK;
     result  = 4;

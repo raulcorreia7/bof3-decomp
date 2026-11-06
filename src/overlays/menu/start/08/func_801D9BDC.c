@@ -105,8 +105,8 @@ NON_MATCHING void func_801D9BDC(void) {
             D_801ED678 = 0x7F;
             D_801ED67C = 0x7F;
         } else if (D_80148660 != 1) {
-            D_80148654       = 0;
-            g_PartyFormation = ((u8)D_801ED674 * 2) + ((u8)D_801ED670 - 1);
+            D_80148654                 = 0;
+            g_SaveData.party_formation = ((u8)D_801ED674 * 2) + ((u8)D_801ED670 - 1);
             SND_PlayCue(EMI_CUE_ID(1, 2));
             val7 = 0;
             val3 = 0 << 0x18;
@@ -174,7 +174,7 @@ NON_MATCHING void func_801D9BDC(void) {
     if (((val4 >> 0x18) != D_801ED668) || ((s8)val11 != (s8)D_801ED66C)) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
-    g_PartyFormation = ((u8)D_801ED670 + ((u8)D_801ED674 * 2)) - 1;
+    g_SaveData.party_formation = ((u8)D_801ED670 + ((u8)D_801ED674 * 2)) - 1;
 }
 #else
 INCLUDE_ASM(func_801D9BDC);

@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "shared/etc.h"
+#include "work/save.h"
 #include <stdio.h>
 
 #define g_SceneState (*(struct SceneState*)&g_SceneState)

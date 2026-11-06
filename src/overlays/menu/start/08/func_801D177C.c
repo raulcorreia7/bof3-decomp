@@ -17,7 +17,7 @@ MATCH void func_801D177C(void) {
         ((s8*)&D_80148668)[i] = 0;
     }
     for (i = 0; i < g_PartySize; i++) {
-        Char_RebuildStats(&g_Characters[g_CharSlot[D_80144F5A[i]]]);
+        Char_RebuildStats(&g_SaveData.characters[g_CharSlot[D_80144F5A[i]]]);
     }
     i = 0;
     while (i < (Party_CountOrder(0) & BYTE_MASK)) {
@@ -31,7 +31,7 @@ MATCH void func_801D177C(void) {
     }
     D_80148661 = 0;
     i          = 0;
-    chr        = g_Characters;
+    chr        = g_SaveData.characters;
     for (; i < 8; i++) {
         if (chr->hp < (chr->stats.max_hp >> 2)) {
             chr->status |= STATUS_LOW_HP;

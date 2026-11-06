@@ -1,13 +1,13 @@
 #include "engine/slus/slus.h"
 
 /* stores item_id in the first empty slot of the 0x20-byte table at
- * g_VitalItemIds, returning 1, or 0 when the table is full.
+ * g_SaveData.vital_item_ids, returning 1, or 0 when the table is full.
  */
 MATCH s32 Item_VitalAdd(u8 item_id) {
     u8* entry;
     u32 index;
 
-    entry = g_VitalItemIds;
+    entry = g_SaveData.vital_item_ids;
     index = 0;
     while ((index & BYTE_MASK) < 32U) {
         if (*entry == 0) {

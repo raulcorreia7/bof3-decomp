@@ -99,7 +99,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     if (g_BattleState & BATTLE_STATE_CRITICAL) {
         damage = damage * 2 + (s16)Battle_RollBaseDamage(attacker, target, 1) / 4;
     }
-    if (BATTLER_IS_PLAYER(target) && g_PartyFormation == 2) {
+    if (BATTLER_IS_PLAYER(target) && g_SaveData.party_formation == 2) {
         damage -= damage >> 2;
     }
     if (status & STATUS_POISONED) {

@@ -21,6 +21,7 @@
 #include "scenario/effect.h"
 #include "scenario/runtime.h"
 #include "slus/facing.h"
+#include "work/save.h"
 #include <strings.h>
 
 extern s8           D_801448EA[1];

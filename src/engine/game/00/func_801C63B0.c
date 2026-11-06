@@ -14,7 +14,7 @@ MATCH s32 func_801C63B0(void) {
     /* FAKE: retail frame reserves 8 bytes no statement uses. */
     STACK_PADS(u8, 8);
 
-    mode  = g_PartyFormation;
+    mode  = g_SaveData.party_formation;
     count = Party_CountOrder(1);
     slot  = D_801CD944;
     i     = 0;

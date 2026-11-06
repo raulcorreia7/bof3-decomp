@@ -67,7 +67,4 @@ typedef struct FairyJob {
 
 ASSERT_SIZE(FairyJob, FAIRY_JOB_STRIDE);
 
-/* D_801455C8 */
-extern FairyJob g_FairyJobs[FAIRY_JOB_COUNT];
-
 #endif

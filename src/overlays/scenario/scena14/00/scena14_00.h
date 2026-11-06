@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
+#include "work/save.h"
 
 extern u16 g_GameAreaId;
 extern u8  D_80144908[];

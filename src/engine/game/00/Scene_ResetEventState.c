@@ -18,6 +18,6 @@ MATCH void Scene_ResetEventState(void) {
         index = i & BYTE_MASK;
         value = s_EventFlagsReset[index];
         i += 1;
-        *(&g_SceneEventFlags[0] + index) = value;
+        *(&g_SaveData.scene_event_flags[0] + index) = value;
     } while ((i & BYTE_MASK) < 16U);
 }

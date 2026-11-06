@@ -12,9 +12,9 @@ MATCH void func_8019CEDC(void) {
     if (work->unk_09 == 0) {
         if (LOHU(g_GameAreaId) == 0x54) {
             if ((work->pos.x.fixed == 0x118000) && (moved == 0x4A8000)) {
-                SYS_SetFlag(g_SceneEventFlags, 0x36);
+                SYS_SetFlag(g_SaveData.scene_event_flags, 0x36);
             } else {
-                SYS_ClearFlag(g_SceneEventFlags, 0x36);
+                SYS_ClearFlag(g_SaveData.scene_event_flags, 0x36);
             }
         }
         func_8019D270();

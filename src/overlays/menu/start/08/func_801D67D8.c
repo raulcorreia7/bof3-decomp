@@ -13,7 +13,7 @@ NON_MATCHING void func_801D67D8(u8 party_slot) {
     u8         j;
 
     character  = g_CharSlot[D_80144F5A[party_slot & BYTE_MASK]];
-    record     = &g_Characters[character];
+    record     = &g_SaveData.characters[character];
     slots[0]   = &record->equip.weapon;
     slots[1]   = &record->equip.shield;
     slots[2]   = &record->equip.helmet;

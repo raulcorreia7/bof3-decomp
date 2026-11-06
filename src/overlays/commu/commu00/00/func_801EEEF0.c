@@ -23,13 +23,13 @@ NON_MATCHING void func_801EEEF0(u32 row_index) {
     tmp0 = tmp2 * 4;
     if (tmp0 < D_801455C2) {
         val4 = tmp2 < 0x14U;
-        if ((u32)(g_BattleCount - D_801455B0) >= 0x15U) {
-            D_801455B0 = g_BattleCount - 0x14;
+        if ((u32)(g_SaveData.battle_count - D_801455B0) >= 0x15U) {
+            D_801455B0 = g_SaveData.battle_count - 0x14;
             val4       = tmp2 < 0x14U;
         }
         if (val4 != 0) {
             tmp1 = ((s32)(D_801455C2 - tmp0) >> 2) + 1;
-            val1 = (g_BattleCount - D_801455AC) / 10;
+            val1 = (g_SaveData.battle_count - D_801455AC) / 10;
             if (tmp1 < val1) {
                 val1 = tmp1;
             }
@@ -49,17 +49,17 @@ NON_MATCHING void func_801EEEF0(u32 row_index) {
                         }
                     }
                 }
-                D_801455AC = g_BattleCount;
+                D_801455AC = g_SaveData.battle_count;
             }
         }
     } else if (D_801455C2 == 0) {
         val5 = tmp2 < 2U;
-        if ((u32)(g_BattleCount - D_801455AC) >= 0xBU) {
-            D_801455AC = g_BattleCount - 0xA;
+        if ((u32)(g_SaveData.battle_count - D_801455AC) >= 0xBU) {
+            D_801455AC = g_SaveData.battle_count - 0xA;
             val5       = tmp2 < 2U;
         }
         if (val5 == 0) {
-            val1 = (g_BattleCount - D_801455B0) / 20;
+            val1 = (g_SaveData.battle_count - D_801455B0) / 20;
             if (val1 != 0) {
                 val0 = 0;
                 if (val1 != 0) {
@@ -76,16 +76,16 @@ NON_MATCHING void func_801EEEF0(u32 row_index) {
                         }
                     }
                 }
-                val7 = g_BattleCount;
+                val7 = g_SaveData.battle_count;
                 goto block_25; /* retail branch */
             }
         }
     } else {
-        if ((u32)(g_BattleCount - D_801455AC) >= 0xBU) {
-            D_801455AC = g_BattleCount - 0xA;
+        if ((u32)(g_SaveData.battle_count - D_801455AC) >= 0xBU) {
+            D_801455AC = g_SaveData.battle_count - 0xA;
         }
-        val7 = g_BattleCount - 0x14;
-        if ((u32)(g_BattleCount - D_801455B0) >= 0x15U) {
+        val7 = g_SaveData.battle_count - 0x14;
+        if ((u32)(g_SaveData.battle_count - D_801455B0) >= 0x15U) {
         block_25:
             D_801455B0 = val7;
         }

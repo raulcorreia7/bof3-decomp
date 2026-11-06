@@ -243,8 +243,8 @@ MATCH void func_801F7D50(void) {
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     func_801C16B8();
     func_801C1DF0(0);
-    SYS_SetFlag(g_SceneEventFlags, 67);
-    SYS_ClearFlag(g_SceneEventFlags, 66);
+    SYS_SetFlag(g_SaveData.scene_event_flags, 67);
+    SYS_ClearFlag(g_SaveData.scene_event_flags, 66);
     D_80146872 = 1;
 }
 

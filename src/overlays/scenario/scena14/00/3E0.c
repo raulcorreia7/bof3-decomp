@@ -167,7 +167,7 @@ MATCH void Scene_SetPartyRyuAdultMomoPeco(void) {
 INCLUDE_ASM(func_801FBE10);
 
 MATCH void func_801FBF18(void) {
-    g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
+    g_SaveData.characters[g_CharSlot[10]].unk_07 &= 0xFE;
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);

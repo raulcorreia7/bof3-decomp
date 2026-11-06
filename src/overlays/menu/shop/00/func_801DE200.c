@@ -32,12 +32,12 @@ MATCH void func_801DE200(void) {
      * pointer. */
     count         = ((s32 (*)(u8))Party_CountOrder)(0);
     search_limit  = count & BYTE_MASK;
-    record        = &g_Characters[0].character_id;
+    record        = &g_SaveData.characters[0].character_id;
     record_offset = 0;
     D_801E6250    = 0;
     do {
         order_index = 0;
-        if (((u8*)&g_Characters[0].unk_07)[record_offset] & 1) {
+        if (((u8*)&g_SaveData.characters[0].unk_07)[record_offset] & 1) {
             limit = search_limit;
             if (search_limit != 0) {
             loop_4:
@@ -56,7 +56,7 @@ MATCH void func_801DE200(void) {
         }
         record += 0xA4;
         record_offset += 0xA4;
-    } while ((s32)record < (s32)&g_Characters[PARTY_RECORD_COUNT].character_id);
+    } while ((s32)record < (s32)&g_SaveData.characters[PARTY_RECORD_COUNT].character_id);
     party_count = count & BYTE_MASK;
     marked      = 0;
     if (party_count > 0) {

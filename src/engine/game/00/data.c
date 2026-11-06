@@ -377,9 +377,9 @@ ActorWorkFunc D_801C890C[11] = {(ActorWorkFunc)func_801ACEBC, (ActorWorkFunc)fun
 
 u8 s_SceneMessages[4] = {0x00, 0x00, 0x01, 0x0A};
 
-u8 *D_801C893C[5] = {g_InventoryIds[0], g_InventoryIds[1], g_InventoryIds[2], g_InventoryIds[3], g_VitalItemIds};
+u8 *D_801C893C[5] = {g_SaveData.inventory_ids[0], g_SaveData.inventory_ids[1], g_SaveData.inventory_ids[2], g_SaveData.inventory_ids[3], g_SaveData.vital_item_ids};
 
-u8 *D_801C8950[5] = {g_InventoryCounts[0], g_InventoryCounts[1], g_InventoryCounts[2], g_InventoryCounts[3], (u8 *)0};
+u8 *D_801C8950[5] = {g_SaveData.inventory_counts[0], g_SaveData.inventory_counts[1], g_SaveData.inventory_counts[2], g_SaveData.inventory_counts[3], (u8 *)0};
 
 volatile Item g_Items[ITEM_COUNT] = {
     ITEM_OBJECT("Nothing", 0, 0x4000, 0),

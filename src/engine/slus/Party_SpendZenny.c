@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* subtracts amount from the g_Zenny counter when it is large enough,
+/* subtracts amount from the g_SaveData.zenny counter when it is large enough,
  * reporting success. unused is unused; every caller passes 0.
  */
 MATCH s32 Party_SpendZenny(u32 amount, s32 unused) {
@@ -8,7 +8,7 @@ MATCH s32 Party_SpendZenny(u32 amount, s32 unused) {
     s32  result;
     u32* zenny;
 
-    zenny = &g_Zenny;
+    zenny = &g_SaveData.zenny;
 
     value = zenny[0];
     if (value >= amount) {

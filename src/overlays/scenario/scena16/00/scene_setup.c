@@ -191,7 +191,7 @@ MATCH void func_801F7188(void) {
         func_801F845C();
         SND_PlayCue(EMI_CUE_ID(2, 19));
         SND_PlayCue(EMI_CUE_ID(2, 20));
-        sel_ptr   = &g_SndBgmId;
+        sel_ptr   = &g_SaveData.snd_bgm_id;
         selection = *sel_ptr;
 
         if (selection != 0xFFu) {

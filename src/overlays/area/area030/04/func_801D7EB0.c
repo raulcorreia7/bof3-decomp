@@ -43,7 +43,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
         if (D_80145E94[0] == 2 && !(work->counter_07 & 1) && work->pos_x_0C == row) {
             UI_DrawText(x + 5, (s16)icon_y, 7, 0xC, (u8*)&g_Accessories[id]);
             UI_DrawText(x + 5, y + 0x17 + icon_y - (y + 0x19), 0, 0xC, (u8*)&g_Accessories[id]);
-            qty = g_InventoryCounts[3][slot];
+            qty = g_SaveData.inventory_counts[3][slot];
             if (qty >= 2) {
                 sprintf((char*)buffer, D_801D0C14, qty);
                 UI_DrawGlyphString(x + 0x68, y + 0x1D + icon_y - (y + 0x19), 7, buffer);
@@ -51,7 +51,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
             }
         } else {
             UI_DrawText(x + 5, (s16)icon_y, 0, 0xC, (u8*)&g_Accessories[id]);
-            qty = g_InventoryCounts[3][slot];
+            qty = g_SaveData.inventory_counts[3][slot];
             if (qty >= 2) {
                 sprintf((char*)buffer, D_801D0C14, qty);
                 UI_DrawGlyphString(x + 0x68, y + 0x1D + icon_y - (y + 0x19), 0, buffer);

@@ -99,7 +99,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
         slot += 1;
         col = slot & HALF_MASK;
     } while ((u32)(slot & HALF_MASK) < 3U);
-    src                                = g_SceneEventFlags;
+    src                                = g_SaveData.scene_event_flags;
     SHOP_WORK_RECORD(0xCA0u)->field_08 = src_text[6];
     SHOP_WORK_RECORD(0xCA0u)->field_0C = SHOP_WORK->field_6E8;
     SHOP_WORK_RECORD(0xCA0u)->field_09 = SHOP_WORK->field_7A;
@@ -107,9 +107,9 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     SHOP_WORK_RECORD(0xCA0u)->field_14 = *(s32*)(src_text + 8);
     sum                                = 0;
     dst                                = g_SaveBuffer;
-    src                                = g_SceneEventFlags - 0x650;
+    src                                = g_SaveData.scene_event_flags - 0x650;
     i                                  = 0;
-    SHOP_WORK_RECORD(0xCA0u)->field_14 = SYS_TestFlag(g_SceneEventFlags, 0x92U);
+    SHOP_WORK_RECORD(0xCA0u)->field_14 = SYS_TestFlag(g_SaveData.scene_event_flags, 0x92U);
     D_80145025                         = (u8)g_GameFlags;
     do {
         i += 1;

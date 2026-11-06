@@ -6,6 +6,7 @@
 
 #include "overlays/area/world02.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 
 extern u8 D_801F407C[];
 extern u8 D_801F4084[];

@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world04.h"
+#include "work/save.h"
 
 /* The area flag word the gate reads. */
 

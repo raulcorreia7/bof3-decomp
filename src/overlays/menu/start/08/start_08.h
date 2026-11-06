@@ -3,6 +3,7 @@
 
 #include "game/character.h"
 #include "shared/etc.h"
+#include "work/save.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -617,7 +618,7 @@ void             func_801EA1F0(MenuPanelTask* task);
  * Character, any other is the Character copy inside the battle row. */
 static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_index) {
     if ((record_index & BYTE_MASK) == 0) {
-        return &g_Characters[character_index & BYTE_MASK];
+        return &g_SaveData.characters[character_index & BYTE_MASK];
     } else {
         return &g_BattlePartyBattlers[character_index & BYTE_MASK].chr;
     }

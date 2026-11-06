@@ -8,6 +8,7 @@
 #include "sys/scene.h"
 #include "gfx/prim.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 
 /* The scratchpad quad vertices the map arrow draws through. */
 extern SVECTOR D_1F800014[];

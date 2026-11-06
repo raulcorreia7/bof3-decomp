@@ -6,7 +6,7 @@ MATCH void func_801F3BE0(void) {
     MATCH_REG(u8*, flag, "v0");
     u8 counter;
 
-    flag = g_SceneEventFlags;
+    flag = g_SaveData.scene_event_flags;
     if (SYS_TestFlag(flag, 0x77)) {
         /* FAKE: Retail keeps the scene flag byte in a0 through the delay slot. */
         MATCH_REG(u8, flag_value, "a0");

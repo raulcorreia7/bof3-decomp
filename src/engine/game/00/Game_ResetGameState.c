@@ -29,10 +29,10 @@ MATCH void Game_ResetGameState(void) {
     g_AreaWalkFlags   = world_flags | (0x4000u | AREA_WALK_ENTRY_PENDING);
     Game_RequestAreaChange(selection_seed, context_a, context_b, context_kind);
 
-    if (*(u32*)&g_PlayClock != 0u) {
-        g_GamePrevSelection = g_SndBgmId;
+    if (*(u32*)&g_SaveData.play_clock != 0u) {
+        g_GamePrevSelection = g_SaveData.snd_bgm_id;
     }
 
-    g_SndBgmId       = 0xFFu;
-    g_GameEntryState = 1u;
+    g_SaveData.snd_bgm_id = 0xFFu;
+    g_GameEntryState      = 1u;
 }

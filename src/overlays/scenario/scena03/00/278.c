@@ -490,13 +490,13 @@ MATCH void func_801FC5FC(void) {
     Item_VitalAdd(VITAL_ITEM_FLIER);
     Message_StartAreaMessage(0x2F);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    SND_PauseBgm(g_SndBgmId);
+    SND_PauseBgm(g_SaveData.snd_bgm_id);
     SND_StartXAStream(2, 1);
     while (!(SND_IsXAIdle() & 0xFF)) {
         func_801992B8();
         CallbackWait(1U);
     }
-    SND_ResumeBgm(g_SndBgmId);
+    SND_ResumeBgm(g_SaveData.snd_bgm_id);
 }
 
 MATCH void func_801FC688(void) {

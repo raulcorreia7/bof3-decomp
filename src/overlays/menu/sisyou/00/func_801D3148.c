@@ -14,7 +14,7 @@ MATCH void func_801D3148(void) {
         return;
     }
     for (i = 0; i < g_PartySize; i++) {
-        if (g_Characters[D_80145FCC.rows[i][0]].master_id != D_801448ED) {
+        if (g_SaveData.characters[D_80145FCC.rows[i][0]].master_id != D_801448ED) {
             break;
         }
     }

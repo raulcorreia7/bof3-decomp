@@ -33,8 +33,8 @@ MATCH s32 func_8015B870(u32 kind) {
         case 11:
             return D_80145F09;
         case 12:
-            /* FAKE: retail reads g_SceneEventFlags as u32. */
-            return (*(u32*)g_SceneEventFlags);
+            /* FAKE: retail reads g_SaveData.scene_event_flags as u32. */
+            return (*(u32*)g_SaveData.scene_event_flags);
         case 13:
             return 1;
         default:

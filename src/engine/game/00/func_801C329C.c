@@ -23,14 +23,14 @@ MATCH void func_801C329C(void) {
         if ((s16)total > 0) {
             do {
                 sel = g_CharSlot[D_80144F5A[index]];
-                if (g_Characters[sel].status & STATUS_POISONED) {
+                if (g_SaveData.characters[sel].status & STATUS_POISONED) {
                     found = 1;
                 }
                 index++;
             } while (index < (s16)total);
         }
     } else {
-        if (g_Characters[g_GameState->slot_13C].status & STATUS_POISONED) {
+        if (g_SaveData.characters[g_GameState->slot_13C].status & STATUS_POISONED) {
             found = 1;
         }
     }
@@ -46,7 +46,8 @@ MATCH void func_801C329C(void) {
                     do {
                         id  = D_80144F5A[index];
                         sel = g_CharSlot[id];
-                        if ((g_Characters[sel].status & STATUS_POISONED) && ((Char_LoseHP(1, id) & HALF_MASK) != 0)) {
+                        if ((g_SaveData.characters[sel].status & STATUS_POISONED) &&
+                            ((Char_LoseHP(1, id) & HALF_MASK) != 0)) {
                             found = 1;
                         }
                         index++;

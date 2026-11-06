@@ -69,7 +69,7 @@ NON_MATCHING void func_801B21E8(void) {
                 if (g_GameState->flags_12C.u8_value & 1) {
                     FIELD(s8, g_Task, 0x29u) = 4;
                 }
-                val11 = (u8*)g_Characters;
+                val11 = (u8*)g_SaveData.characters;
                 val12 = (u8*)g_GameState + 0x74;
                 val11 += g_CharSlot[g_GameState->slot_index_79] * 0xA4;
                 tmp11 = val11 + 0xA0;

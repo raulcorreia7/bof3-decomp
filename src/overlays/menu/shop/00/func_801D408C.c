@@ -10,7 +10,7 @@ MATCH void func_801D408C(void) {
     func_801D6D6C(*counter * 48 + 0x6E, 0x4C);
     Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     if (D_8014865C != -1) {
-        Menu_DrawZennyWindow(0x62, 0x28, 0, g_Zenny);
+        Menu_DrawZennyWindow(0x62, 0x28, 0, g_SaveData.zenny);
     }
     count    = *counter;
     count    = count + 1;

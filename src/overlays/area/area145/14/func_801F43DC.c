@@ -9,7 +9,7 @@ MATCH s32 func_801F43DC(s32 entry_x, s32 entry_y) {
         return 1;
     }
     if (D_80143F03 == 4) {
-        if ((SYS_TestFlag(g_SceneEventFlags, 0x2D) != 0) && (((entry_x >> 0x10) - 9) < 3U)) {
+        if ((SYS_TestFlag(g_SaveData.scene_event_flags, 0x2D) != 0) && (((entry_x >> 0x10) - 9) < 3U)) {
             if ((((entry_y >> 0x10) - 0x62) < 3U) &&
                 ((g_BattlePartyBattlers[0].facing == 0) || ((g_BattlePartyBattlers[0].facing - 6) < 2U))) {
                 *g_ScriptVars = 0;

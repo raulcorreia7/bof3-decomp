@@ -13,8 +13,8 @@ MATCH void func_801D7960(void) {
         if (D_8014865B != 0) {
             u8 turns;
 
-            turns_left = &g_Zenny;
-            turns      = g_Characters[D_80145FCC[(s8)state[0]][0]].level;
+            turns_left = &g_SaveData.zenny;
+            turns      = g_SaveData.characters[D_80145FCC[(s8)state[0]][0]].level;
             D_8014865B = 0xC;
             D_80148654 = 0x3C;
             D_80148651 += 2;

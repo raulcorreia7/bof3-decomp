@@ -72,7 +72,7 @@ NON_MATCHING void func_801E05E0(void) {
     if (D_801483CD == 0) {
         if (D_80145AC2 & g_InputPressed) {
             slot     = D_8014546C[D_801483CB];
-            item_ptr = &g_Characters[D_801483A6].abilities.skill[D_801483A7];
+            item_ptr = &g_SaveData.characters[D_801483A6].abilities.skill[D_801483A7];
             if ((slot != 0) || (*item_ptr != 0)) {
                 swapped                = *item_ptr;
                 *item_ptr              = slot;

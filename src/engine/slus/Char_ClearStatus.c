@@ -12,7 +12,7 @@ MATCH u32 Char_ClearStatus(u8 index, u16 mask, u8 mode) {
 
     i = index & BYTE_MASK;
     if ((mode & BYTE_MASK) == 0) {
-        record = &g_Characters[i];
+        record = &g_SaveData.characters[i];
     } else {
         record = (Character*)(D_80145F04 + i * 0x140);
     }

@@ -40,11 +40,11 @@ MATCH void func_801D5048(void) {
 draw:
     FISHING_STATE->step_timer_09++;
     func_801E0ED0((-(FISHING_STATE->step_timer_09 * 0x500000) >> 0x10), FISHING_BAR_Y);
-    if (g_FishBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
+    if (g_SaveData.fish_best_catch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
         func_801E0F4C(FISHING_STATE->step_timer_09 * 0x30 + FISHING_ICON_X, FISHING_ICON_Y,
                       FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK);
         func_801E1004(FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK,
-                      g_FishBestCatch[FISHING_STATE->bounce_3C.half.key_3E], FISHING_STATE->step_timer_09);
+                      g_SaveData.fish_best_catch[FISHING_STATE->bounce_3C.half.key_3E], FISHING_STATE->step_timer_09);
     } else {
         func_801E0F4C(FISHING_STATE->step_timer_09 * 0x30 + FISHING_ICON_X, FISHING_ICON_Y, 0xFF);
         func_801E1004(0xFF, 0, FISHING_STATE->step_timer_09);

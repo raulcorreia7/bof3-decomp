@@ -6,6 +6,7 @@
 
 #include "overlays/area/world02.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 #include <rand.h>
 
 /* The variant byte the cancel path stores in the game-overlay state. */

@@ -22,11 +22,11 @@ MATCH void SAVE_RunLoadRestore(void) {
             D_80145ABE   = PADselect;
         }
         g_PartySize = Party_CountOrder(0U);
-        EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
+        EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);
         }
-        EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+        EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);
         }

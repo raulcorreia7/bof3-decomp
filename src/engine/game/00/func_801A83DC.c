@@ -18,8 +18,8 @@ MATCH void func_801A83DC(void) {
                 D_801490E0 = 0;
                 Resource_RequestArea(0xFA);
                 *game_state = GAME_REQUEST_MESSAGE;
-                if (g_SndBgmId != GAME_NONE) {
-                    SND_PauseBgm(g_SndBgmId);
+                if (g_SaveData.snd_bgm_id != GAME_NONE) {
+                    SND_PauseBgm(g_SaveData.snd_bgm_id);
                 }
                 SND_StartXAStream(9, 1);
                 *state = 1;
@@ -29,8 +29,8 @@ MATCH void func_801A83DC(void) {
         }
         case 1:
             if ((SND_IsXAIdle() & BYTE_MASK) && (g_GameStateIndex != GAME_REQUEST_MESSAGE)) {
-                if (g_SndBgmId != GAME_NONE) {
-                    SND_ResumeBgm(g_SndBgmId);
+                if (g_SaveData.snd_bgm_id != GAME_NONE) {
+                    SND_ResumeBgm(g_SaveData.snd_bgm_id);
                 }
                 g_ScriptWorkRecord->header.flags = 0;
                 Game_ClearScriptActive();

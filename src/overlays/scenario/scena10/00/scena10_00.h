@@ -6,6 +6,7 @@
 
 #include "overlays/scenario/scenario.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 
 extern u8       D_80144908[];
 extern u32      D_801F6C00;

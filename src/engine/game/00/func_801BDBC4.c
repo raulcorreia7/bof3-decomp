@@ -16,7 +16,7 @@ MATCH void func_801BDBC4(void) {
             count  = g_PartySize;
             offset = 0;
         loop:
-            if (g_Characters[D_80145FCC[offset]].status & STATUS_CONFUSED) {
+            if (g_SaveData.characters[D_80145FCC[offset]].status & STATUS_CONFUSED) {
                 found = 1;
             }
             i++;
@@ -26,7 +26,7 @@ MATCH void func_801BDBC4(void) {
                 goto loop;
             }
         }
-    } else if (g_Characters[g_BattlePartyBattlers[0].character_index].status & STATUS_CONFUSED) {
+    } else if (g_SaveData.characters[g_BattlePartyBattlers[0].character_index].status & STATUS_CONFUSED) {
         found = 1;
     }
     if (found != 0) {

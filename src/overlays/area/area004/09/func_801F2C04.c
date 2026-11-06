@@ -1,7 +1,7 @@
 #include "area004_09.h"
 
 MATCH void func_801F2C04(void) {
-    /* FAKE: retail reaches g_SceneEventFlags as D_801448EB + 0x63D, so the step byte address is kept in a register. */
+    /* FAKE: retail reaches g_SaveData.scene_event_flags as D_801448EB + 0x63D, so the step byte address is kept in a register. */
     u8* step;
 
     MESSAGE_REQUEST_CLEAR();
