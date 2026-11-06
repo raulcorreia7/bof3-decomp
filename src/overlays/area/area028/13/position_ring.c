@@ -195,21 +195,21 @@ MATCH void func_801F2D3C(void) {
     u16           x_base;
 
     work           = D_801F3E00;
-    ratio_x        = (work->offset_x << 7) / work->scale;
+    ratio_x        = (work->offset.x << 7) / work->scale;
     x_base         = D_800E4A00.x;
     i              = 0;
-    work->screen_x = (x_base + ratio_x);
-    ratio_y        = (work->offset_y << 7) / work->scale;
+    work->screen.x = (x_base + ratio_x);
+    ratio_y        = (work->offset.y << 7) / work->scale;
     y_base         = D_800E4A00.y;
     w              = work;
-    work->screen_y = (y_base + ratio_y);
+    work->screen.y = (y_base + ratio_y);
 
     do {
         next = i + 1u;
         d.x  = (WORLD_RING_HALFWORD(next & (32u - 1u), 0x4A04u) - WORLD_RING_HALFWORD(i, 0x4A04u));
         d.y  = (WORLD_RING_HALFWORD(next & (32u - 1u), 0x4A06u) - WORLD_RING_HALFWORD(i, 0x4A06u));
-        c.x  = (w->screen_x - WORLD_RING_HALFWORD(i, 0x4A04u));
-        c.y  = (w->screen_y - WORLD_RING_HALFWORD(i, 0x4A06u));
+        c.x  = (w->screen.x - WORLD_RING_HALFWORD(i, 0x4A04u));
+        c.y  = (w->screen.y - WORLD_RING_HALFWORD(i, 0x4A06u));
         i    = next;
         if (((d.x * c.y) - (d.y * c.x)) < 0) {
             return;
@@ -219,7 +219,7 @@ MATCH void func_801F2D3C(void) {
     prim = (TILE_1*)g_GfxPrimCursor;
     SetTile1(prim);
     SetSemiTrans(prim, 0);
-    setXY0(prim, D_801F3E00->screen_x, D_801F3E00->screen_y);
+    setXY0(prim, D_801F3E00->screen.x, D_801F3E00->screen.y);
     shade    = -0x40 - (D_801F3E00->scale - 0x80) * 0xC0 / 512;
     prim->b0 = (prim->g0 = (prim->r0 = shade));
     GFX_AddPrim(3u, 0x0Cu);
@@ -245,8 +245,8 @@ MATCH void func_801F2FB0(void* slot) {
 
     work            = slot;
     work->unk_00[0] = 1u;
-    work->offset_x  = ((RANDOM_MASK(0xFF)) - 0x80);
-    work->offset_y  = ((RANDOM_MASK(0xFF)) - 0x80);
+    work->offset.x  = ((RANDOM_MASK(0xFF)) - 0x80);
+    work->offset.y  = ((RANDOM_MASK(0xFF)) - 0x80);
     work->scale     = 0x280;
 }
 

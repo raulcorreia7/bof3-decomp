@@ -13,9 +13,9 @@ MATCH void func_801D0C0C(void) {
 }
 
 MATCH void func_801D0C48(void) {
-    g_Task->pos_x      = 0x308000;
-    g_Task->pos_y      = 0x740000;
-    g_Task->pos_z      = Area_SampleHeight(g_Task->pos_x, 0x740000) << 16;
+    g_Task->pos.x      = 0x308000;
+    g_Task->pos.y      = 0x740000;
+    g_Task->pos.z      = Area_SampleHeight(g_Task->pos.x, 0x740000) << 16;
     g_Task->counter_0C = 0x308000;
     g_Task->counter_10 = 0x718000;
     g_Task->field_14   = 0xFEC00000;
@@ -30,8 +30,8 @@ MATCH void func_801D0CEC(void) {
 
     work->color_r += 8;
     work->origin_x += 0x10;
-    func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos_x, g_Task->origin_x, 2);
+    func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 0x3C;
@@ -41,8 +41,8 @@ MATCH void func_801D0CEC(void) {
 }
 
 MATCH void func_801D0DB0(void) {
-    func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos_x, g_Task->origin_x, 2);
+    func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->color_g = 0;
@@ -57,8 +57,8 @@ INCLUDE_ASM(func_801D0E5C);
 MATCH void func_801D0F44(void) {
     g_Task->color_g -= 0x40;
     func_801D1220(g_Task->color_g);
-    func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos_x, g_Task->origin_x, 2);
+    func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(0x40);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -68,8 +68,8 @@ MATCH void func_801D0F44(void) {
 }
 
 MATCH void func_801D101C(void) {
-    func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos_x, g_Task->origin_x, 2);
+    func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(0x40);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -86,8 +86,8 @@ MATCH void func_801D10C4(void) {
     if ((s8)g_Task->color_r > 0) {
         g_Task->color_r -= 8;
     }
-    func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos_x, g_Task->origin_x, 2);
+    func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
+    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(0x40);
 
     if (TIMER_EXPIRED(g_Task->timer)) {

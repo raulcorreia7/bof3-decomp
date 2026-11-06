@@ -7,9 +7,9 @@ MATCH void func_801F30FC(void) {
     work           = (AreaSprite*)D_801F63EC;
     count          = (work->flags_02 - 1u);
     work->flags_02 = count;
-    work->origin_x += (work->normal.vx * 2);
-    work->origin_y += (work->normal.vy * 2);
-    work->origin_z += (work->normal.vz * 2);
+    work->origin.x += (work->normal.vx * 2);
+    work->origin.y += (work->normal.vy * 2);
+    work->origin.z += (work->normal.vz * 2);
     work->half_size = (work->half_size + 0x80u);
     if (!(count & BYTE_MASK)) {
         ((AreaSprite*)D_801F63EC)->flags_02 = 0x40u;

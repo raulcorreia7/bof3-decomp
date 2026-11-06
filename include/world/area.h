@@ -264,17 +264,15 @@ ASSERT_OFFSET(AreaSpawnSlot, rim_shade_17, 0x17);
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with
  * that stride) and the ring projection reads the active one. */
 typedef struct AreaSlotWork {
-    u8           unk_00[4];
-    s16          offset_x; /* 0x04 - the random position offset x */
-    s16          offset_y; /* 0x06 - the random position offset y */
-    s16          scale;    /* 0x08 - the projection scale */
-    s16          unk_0A;
-    volatile u16 screen_x; /* 0x0C - the projected screen x */
-    volatile u16 screen_y; /* 0x0E - the projected screen y */
+    u8               unk_00[4];
+    Vec2S16          offset;
+    s16              scale; /* 0x08 - the projection scale */
+    s16              unk_0A;
+    volatile Vec2U16 screen;
 } AreaSlotWork;
 
 ASSERT_SIZE(AreaSlotWork, WORLD_SLOT_WORK_SIZE);
-ASSERT_OFFSET(AreaSlotWork, screen_x, 0x0C);
+ASSERT_OFFSET(AreaSlotWork, screen, 0x0C);
 
 typedef struct PartyMemberMessages {
     u8  tags[PARTY_MEMBER_MESSAGE_COUNT];     /* 0x00 */

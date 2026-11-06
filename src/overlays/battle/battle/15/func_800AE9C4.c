@@ -1,19 +1,18 @@
+#include "common/vector.h"
 #include "battle_15.h"
 
 /* The panel geometry the draw code reads: the origin x and y place the quad
  * on screen and the height is the quad's row count. */
 typedef struct BattlePanelGeometry {
-    u8  pad_00[0x0A];
-    u8  height;
-    u8  pad_0B[0x23];
-    u16 origin_x;
-    u16 origin_y;
+    u8      pad_00[0x0A];
+    u8      height;
+    u8      pad_0B[0x23];
+    Vec2U16 origin;
 } BattlePanelGeometry;
 
 ASSERT_SIZE(BattlePanelGeometry, 0x32);
 ASSERT_OFFSET(BattlePanelGeometry, height, 0x0A);
-ASSERT_OFFSET(BattlePanelGeometry, origin_x, 0x2E);
-ASSERT_OFFSET(BattlePanelGeometry, origin_y, 0x30);
+ASSERT_OFFSET(BattlePanelGeometry, origin, 0x2E);
 
 /* Each panel texture entry is four bytes: the u pair then the v pair. */
 #define BATTLE_PANEL_TEX_STRIDE 4
@@ -52,9 +51,9 @@ MATCH void func_800AE9C4(u8 arg0) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     panel = (BattlePanelGeometry*)BATTLE_WORK;
-    setXY4(primitive, panel->origin_x + 1, panel->origin_y + 1, panel->origin_x + 49, panel->origin_y + 1,
-           panel->origin_x + 1, panel->origin_y + (panel->height + 1), panel->origin_x + 0x31,
-           panel->origin_y + (panel->height + 1));
+    setXY4(primitive, panel->origin.x + 1, panel->origin.y + 1, panel->origin.x + 49, panel->origin.y + 1,
+           panel->origin.x + 1, panel->origin.y + (panel->height + 1), panel->origin.x + 0x31,
+           panel->origin.y + (panel->height + 1));
     primitive->tpage = GetTPage(0, 0, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
     primitive->clut  = GetClut(BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
     /* The texture entry is read through the table symbol at every use: the retail
@@ -71,9 +70,9 @@ MATCH void func_800AE9C4(u8 arg0) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     panel2 = (BattlePanelGeometry*)BATTLE_WORK;
-    setXY4(primitive, panel2->origin_x, panel2->origin_y, panel2->origin_x + BATTLE_PANEL_WIDTH, panel2->origin_y,
-           panel2->origin_x, panel2->origin_y + panel2->height, panel2->origin_x + BATTLE_PANEL_WIDTH,
-           panel2->origin_y + panel2->height);
+    setXY4(primitive, panel2->origin.x, panel2->origin.y, panel2->origin.x + BATTLE_PANEL_WIDTH, panel2->origin.y,
+           panel2->origin.x, panel2->origin.y + panel2->height, panel2->origin.x + BATTLE_PANEL_WIDTH,
+           panel2->origin.y + panel2->height);
     primitive->tpage = GetTPage(0, 0, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
     primitive->clut  = GetClut(BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
     /* The second texture block reads the work record again for its last row, the

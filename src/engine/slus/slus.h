@@ -7,6 +7,7 @@
  * this file. */
 
 #define GAME_SCRATCH_BASE_SCALAR
+#include "common/vector.h"
 #include "game.h"
 #include "sys/cd.h"
 #include "sys/exe.h"
@@ -221,23 +222,19 @@ typedef union ScenePart {
 
 /* The text, panel and cue handlers share this state block. */
 typedef struct MenuState {
-    u16 text_x;          /* 0x00 */
-    u16 text_y;          /* 0x02 */
-    u16 origin_x;        /* 0x04 */
-    u16 origin_y;        /* 0x06 */
-    u8  step_id;         /* 0x08 */
-    u8  panel_index;     /* 0x09 */
-    s8  last_row;        /* 0x0A */
-    s8  selection_index; /* 0x0B */
-    s16 cue_counter;     /* 0x0C */
-    s16 cue_timer;       /* 0x0E */
+    Vec2U16 text;
+    Vec2U16 origin;
+    u8      step_id;         /* 0x08 */
+    u8      panel_index;     /* 0x09 */
+    s8      last_row;        /* 0x0A */
+    s8      selection_index; /* 0x0B */
+    s16     cue_counter;     /* 0x0C */
+    s16     cue_timer;       /* 0x0E */
 } MenuState;
 
 ASSERT_SIZE(MenuState, 0x10);
-ASSERT_OFFSET(MenuState, text_x, 0x00);
-ASSERT_OFFSET(MenuState, text_y, 0x02);
-ASSERT_OFFSET(MenuState, origin_x, 0x04);
-ASSERT_OFFSET(MenuState, origin_y, 0x06);
+ASSERT_OFFSET(MenuState, text, 0x00);
+ASSERT_OFFSET(MenuState, origin, 0x04);
 ASSERT_OFFSET(MenuState, step_id, 0x08);
 ASSERT_OFFSET(MenuState, panel_index, 0x09);
 ASSERT_OFFSET(MenuState, last_row, 0x0A);
