@@ -13,7 +13,7 @@ MATCH void func_801E6D28(void) {
     field = &D_801EB4E0->slot;
     index = *field;
     if (index < 3U) {
-        if ((Battle_SlotIsBlocked(index) & 0xFF) != 0) {
+        if ((Battle_SlotIsBlocked(index) & BYTE_MASK) != 0) {
             return;
         }
         field     = &D_801EB4E0->slot;
@@ -21,7 +21,7 @@ MATCH void func_801E6D28(void) {
         row_flags = (u16*)((u8*)&D_80145F10 + index * BATTLE_PARTY_STRIDE);
         flags     = *row_flags & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
     } else {
-        if ((Battle_SlotIsBlocked(index) & 0xFF) != 0) {
+        if ((Battle_SlotIsBlocked(index) & BYTE_MASK) != 0) {
             return;
         }
         field     = &D_801EB4E0->slot;

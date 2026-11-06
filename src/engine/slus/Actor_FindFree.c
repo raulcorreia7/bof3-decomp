@@ -8,10 +8,10 @@ MATCH s32 Actor_FindFree(void) {
     s32 offset;
 
     index = 0;
-    while ((index & 0xFF) < 30U) {
-        offset = (index & 0xFF) * ACTOR_SIZE;
+    while ((index & BYTE_MASK) < 30U) {
+        offset = (index & BYTE_MASK) * ACTOR_SIZE;
         if (((u8*)g_Actors)[offset] == 0) {
-            return index & 0xFF;
+            return index & BYTE_MASK;
         }
         index++;
     }

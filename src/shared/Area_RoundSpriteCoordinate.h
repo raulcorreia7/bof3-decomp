@@ -9,7 +9,7 @@ MATCH s32 Area_RoundSpriteCoordinate(s32 pair, s32 step) {
 
     if ((step >= 0) && ((u16)pair != 0)) {
         high = pair >> 16;
-        pair &= 0xFFFF;
+        pair &= HALF_MASK;
         pair |= (high + 1) << 16;
     }
     return pair >> 16;

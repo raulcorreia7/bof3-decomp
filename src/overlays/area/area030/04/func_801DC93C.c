@@ -30,7 +30,7 @@ NON_MATCHING void func_801DC93C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         next       = D_80144286 + 1;
         D_80144286 = next;
-        if ((u32)(next & 0xFF) >= 3U) {
+        if ((u32)(next & BYTE_MASK) >= 3U) {
             D_80144286 = 0;
         }
     } else {
@@ -38,7 +38,7 @@ NON_MATCHING void func_801DC93C(void) {
             SND_FadeInSequence(0, 0, 0x14, 0x10);
             SND_PlayCue(EMI_CUE_ID(1, 6));
             new_cmd = 5;
-            if (((u32)(D_80144281 - 3) < 2U) || (cmd = D_80144281 & 0xFF, new_cmd = 0xB, (cmd == 8)) ||
+            if (((u32)(D_80144281 - 3) < 2U) || (cmd = D_80144281 & BYTE_MASK, new_cmd = 0xB, (cmd == 8)) ||
                 (new_cmd = 0xF, (cmd == 0xE))) {
                 D_80144281 = new_cmd;
             }
@@ -64,7 +64,7 @@ NON_MATCHING void func_801DC93C(void) {
                     target_cmd = 5;
                     goto block_26; /* shared selection join */
                 }
-                if ((D_80144281 & 0xFF) == 0xE) {
+                if ((D_80144281 & BYTE_MASK) == 0xE) {
                     SND_PlayCue(EMI_CUE_ID(1, 2));
                     target_cmd = 0xF;
                     goto block_26; /* shared selection join */
@@ -75,7 +75,7 @@ NON_MATCHING void func_801DC93C(void) {
                     target_cmd = 5;
                     goto block_26; /* shared selection join */
                 }
-                if ((D_80144281 & 0xFF) == 8) {
+                if ((D_80144281 & BYTE_MASK) == 8) {
                 block_25:
                     SND_PlayCue(EMI_CUE_ID(1, 2));
                     target_cmd = 0xB;

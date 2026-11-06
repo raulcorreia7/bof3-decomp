@@ -24,7 +24,7 @@ MATCH s32 func_801A1A58(Actor* actor) {
     /* FAKE: retail loads the x bound after the delta. */
     MATCH_BARRIER();
     bound_x = entity->ext.bounds.half_width;
-    dx      = ABS(dx);
+    dx = ABS(dx);
     /* The comparison result reuses bound_x's register in retail. */
     bound_x = (bound_x < dx);
     if (bound_x != 0) {

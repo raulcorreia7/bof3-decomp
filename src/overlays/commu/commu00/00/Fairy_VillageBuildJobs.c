@@ -40,7 +40,7 @@ MATCH void Fairy_VillageBuildJobs(void) {
                 if (variant >= 6) {
                     variant -= 5;
                 }
-                label = ((variant & 0xFF) + 0xB6);
+                label = ((variant & BYTE_MASK) + 0xB6);
             }
 
             D_80146904[task * ACTOR_SIZE / 2] = label;
@@ -55,7 +55,7 @@ MATCH void Fairy_VillageBuildJobs(void) {
                 if (variant >= 6) {
                     variant -= 5;
                 }
-                label = ((variant & 0xFF) + 0xBC);
+                label = ((variant & BYTE_MASK) + 0xBC);
             }
 
             D_80146904[task * ACTOR_SIZE / 2] = label;

@@ -71,7 +71,7 @@ MATCH void func_801EF37C(void) {
 
     func_8014DAEC();
     func_8014DAEC();
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         func_800AFC98(2, 0);
         func_801E257C(g_BattleActiveBattler, 0xB);
         work         = g_Task;
@@ -99,7 +99,7 @@ MATCH void func_801EF468(void) {
 
     func_8014DAEC();
     func_8014DAEC();
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         SND_QueueSelectionFx(0x203);
         func_801E257C(g_BattleActiveBattler, 0xC);
         timer          = g_Task->unk_09 - 1;

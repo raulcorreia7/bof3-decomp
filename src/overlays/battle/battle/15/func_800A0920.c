@@ -13,7 +13,7 @@ MATCH void func_800A0920(void) {
     g_BattlePartyBattlers[g_BattleTarget].turn.action_flags.volatile_value |= COMBATANT_FLAG_SUPPRESSION_EXEMPT;
     base               = D_80146322 - 1;
     g_BattleActionLock = 4;
-    slot               = base & 0xFF;
+    slot               = base & BYTE_MASK;
     if (D_80146323 >= slot) {
         do {
             if (D_8014630C[slot] != GAME_NONE) {
@@ -21,7 +21,7 @@ MATCH void func_800A0920(void) {
                 D_8014630C[slot] = 0xFF;
             }
             base += 1;
-            slot = base & 0xFF;
+            slot = base & BYTE_MASK;
         } while (D_80146323 >= slot);
     }
 }

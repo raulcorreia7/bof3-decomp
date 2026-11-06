@@ -25,7 +25,7 @@ MATCH void func_801EED2C(void) {
 
     saved  = g_Task;
     g_Task = D_801EC2E0->target.party;
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         g_Task        = saved;
         saved->unk_09 = 0x78;
         g_Task->header.mode++;
@@ -40,7 +40,7 @@ INCLUDE_ASM(func_801EEDB0);
 MATCH void func_801EEE34(void) {
     u16* flags;
 
-    if ((func_801EF118() & 0xFF) == 0) {
+    if ((func_801EF118() & BYTE_MASK) == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         func_801E5988();
     }

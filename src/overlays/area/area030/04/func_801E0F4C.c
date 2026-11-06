@@ -9,7 +9,7 @@ MATCH void func_801E0F4C(s16 sprite_x, s16 sprite_y, u8 icon_index) {
 
     func_801E0C80(1, 1);
     sprite       = (SPRT*)func_801E0DCC(2, 1, sprite_x, sprite_y);
-    sprite_index = icon_index & 0xFF;
+    sprite_index = icon_index & BYTE_MASK;
     if (sprite_index != GAME_NONE) {
         /* FAKE: base-hoist retains CLUT construction register order. */
         clut = (((icon_index >> 4) + 0x1EB) << 6);

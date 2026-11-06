@@ -16,7 +16,7 @@ MATCH void func_801E05EC(void) {
         if (battle->turn.target_flags & 0x10) {
             func_800AAC88(battle->turn.hp_change, work->slot);
         } else {
-            slot                               = Battle_AllocEffect(0U, 1U) & 0xFF;
+            slot                               = Battle_AllocEffect(0U, 1U) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_Task;
             g_BattleEffects[slot].unk_07       = 3;
             g_BattleEffects[slot].unk_27       = 0;

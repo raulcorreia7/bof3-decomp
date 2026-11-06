@@ -8,12 +8,12 @@ MATCH void func_8009AAE8(void) {
 
     saveBuf   = D_801485A1;
     selectBit = g_CharSlot[D_80144F5D[D_801485C4]];
-    if (((Item_GetEquipability(D_8014859C, saveBuf) & 0xFF) >> selectBit) & 1) {
+    if (((Item_GetEquipability(D_8014859C, saveBuf) & BYTE_MASK) >> selectBit) & 1) {
         D_801485C5 = 0;
-        bitIndex   = selectBit & 0xFF;
+        bitIndex   = selectBit & BYTE_MASK;
     } else {
         D_801485C5 = 1;
-        bitIndex   = selectBit & 0xFF;
+        bitIndex   = selectBit & BYTE_MASK;
     }
     record                             = bitIndex;
     s_BattleEquipment[0]               = g_Characters[record].equip.weapon;

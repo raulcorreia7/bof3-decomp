@@ -313,7 +313,7 @@ MATCH void func_801F318C(s16 radius) {
     s32          angle = 65408;
     s8           i     = 0;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y) & 0xFFFF, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
     GFX_AddPrim(3u, 0x0Cu);
     Area_SetCameraMatrix(scratch);
 
@@ -367,7 +367,7 @@ MATCH void func_801F3424(void) {
     s32        actor_slot;
     ActorSlot* slot;
 
-    actor_slot = Actor_FindFreeSlot() & 0xFF;
+    actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (actor_slot == GAME_NONE) {
         return;
     }

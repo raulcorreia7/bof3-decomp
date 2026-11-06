@@ -58,5 +58,5 @@ MATCH s32 Area_CanStartEncounter(void) {
     x     = rec->unk_09;
     dy    = rec->vy * x;
     x     = rec->pos.x.fixed + rec->vx * x;
-    return (AREA_CELL_CODE_S16(x >> 16, (value + dy) >> 16) & 0xFF) == 0;
+    return (AREA_CELL_CODE_S16(x >> 16, (value + dy) >> 16) & BYTE_MASK) == 0;
 }

@@ -58,7 +58,7 @@ NON_MATCHING void func_80161454(u32 index) {
             if (tmp1 >= 0x169) {
                 val7 = 0x64;
             }
-            val7 &= 0xFF;
+            val7 &= BYTE_MASK;
             val1 = (val1 * val7) / 100;
             val0 = (val0 * (0x64 - val7)) / 100;
         }
@@ -81,7 +81,7 @@ NON_MATCHING void func_80161454(u32 index) {
                 q = (a1 * (s16)val1) / 480;
                 q = ABS(q);
                 if (q < (s16)val1) {
-                    a1   = ABS(a1);
+                    a1 = ABS(a1);
                     val1 = val1 - (a1 * (s16)val1) / 480;
                 } else {
                     val1 = 0;
@@ -106,7 +106,7 @@ NON_MATCHING void func_80161454(u32 index) {
     }
     val2 = 0x1F;
     do {
-        val5 = val4 & 0xFF;
+        val5 = val4 & BYTE_MASK;
         tmp4 = ((s32)g_Task->unk_70 >> val5) & 0x1F;
         if (tmp4 != 0x1F) {
             val8 = 1 << tmp4;
@@ -118,7 +118,7 @@ NON_MATCHING void func_80161454(u32 index) {
             }
         }
         val4 += 5;
-    } while ((u32)(val4 & 0xFF) < 0x18U);
+    } while ((u32)(val4 & BYTE_MASK) < 0x18U);
     voice.mask   = val3;
     voice.attr   = SPU_VOICE_VOLL | SPU_VOICE_VOLR;
     voice.volume = val0;

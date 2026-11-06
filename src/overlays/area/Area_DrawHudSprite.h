@@ -10,7 +10,7 @@ MATCH void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id) {
 
     sprt = GfxBeginSprite(x, y, WORLD_SPRITE_CLUT);
 
-    index = (sprite_id & 0xFF) << 2;
+    index = (sprite_id & BYTE_MASK) << 2;
     setWH(sprt, AREA_HUD_SPRITE_CELLS[index], AREA_HUD_SPRITE_CELLS[index + 1]);
     setUV0(sprt, AREA_HUD_SPRITE_CELLS[index + 2], AREA_HUD_SPRITE_CELLS[index + 3]);
 

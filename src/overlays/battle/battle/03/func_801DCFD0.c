@@ -19,7 +19,7 @@ MATCH void func_801DCFD0(void) {
     index = 0;
     if (g_PartySize != 0) {
         do {
-            row         = index & 0xFF;
+            row         = index & BYTE_MASK;
             slot_offset = row * BATTLE_PARTY_STRIDE;
             dst         = (BattleRecordChunk*)(&g_Characters[g_BattlePartyBattlers[row].character_index]);
             src         = (BattleRecordChunk*)(D_80145F04 + slot_offset);
@@ -33,6 +33,6 @@ MATCH void func_801DCFD0(void) {
             /* FAKE: the order lock holds this store in place; without it the match is 63.83%. */
             ORDER_LOCK(*((s32*)dst) = *((s32*)src));
             index += 1;
-        } while (((index & 0xFF)) < (g_PartySize));
+        } while (((index & BYTE_MASK)) < (g_PartySize));
     }
 }

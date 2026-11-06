@@ -54,7 +54,7 @@ found:
             g_Task->unk_0B = 0;
         } else {
             sel = rec[0x08];
-            if ((sel & 0xFF) == s_RouteIndexByMode[g_BattleScrollDir]) {
+            if ((sel & BYTE_MASK) == s_RouteIndexByMode[g_BattleScrollDir]) {
                 if (rec[0x0B] != 0) {
                     Actor_StageScriptRecord(sel, 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
                     g_Task->unk_0B = 0;

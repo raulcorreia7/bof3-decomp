@@ -12,7 +12,7 @@ MATCH void func_801E51DC(void) {
     timer  = &g_BattleLivingEnemyCount;
     count  = *timer - 1;
     *timer = count;
-    if ((count & 0xFF) == 0) {
+    if ((count & BYTE_MASK) == 0) {
         g_BattleResult |= BATTLE_RESULT_VICTORY;
     }
     GFX_FreePaletteFadeTarget((void*)g_Task);

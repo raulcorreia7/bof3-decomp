@@ -7,7 +7,7 @@
 MATCH void func_801D3CC4(void) {
     u8 i;
 
-    for (i = 0; (i & 0xFF) < BATTLE_PARTY_SLOT_COUNT; i += 1) {
+    for (i = 0; (i & BYTE_MASK) < BATTLE_PARTY_SLOT_COUNT; i += 1) {
         if (((g_BattlePartyBattlers[i].turn.damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) &&
             (g_BattlePartyBattlers[i].header.mode != 6)) {
             g_BattlePartyBattlers[i].header.mode = 6;
@@ -17,7 +17,7 @@ MATCH void func_801D3CC4(void) {
             Battle_SetSlotPending(i);
         }
     }
-    for (i = 3; (i & 0xFF) < COMBATANT_COUNT; i += 1) {
+    for (i = 3; (i & BYTE_MASK) < COMBATANT_COUNT; i += 1) {
         if (((ENEMY_COMBATANT(i).turn.damage_flags.value & COMBATANT_FLAG_DAMAGED) != 0) &&
             (ENEMY_COMBATANT(i).header.mode != 6)) {
             ENEMY_COMBATANT(i).header.mode = 6;
@@ -27,7 +27,8 @@ MATCH void func_801D3CC4(void) {
             Battle_SetSlotPending(i);
         }
     }
-    if (((func_800A99AC() & 0xFF) == 0) && (D_801463C2 == 0) && ((g_BattleState & BATTLE_STATE_EFFECT_PLAYING) != 0)) {
+    if (((func_800A99AC() & BYTE_MASK) == 0) && (D_801463C2 == 0) &&
+        ((g_BattleState & BATTLE_STATE_EFFECT_PLAYING) != 0)) {
         g_BattleSubStep += 1;
     }
 }

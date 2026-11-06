@@ -26,7 +26,7 @@ MATCH void func_801DBBAC(void) {
         if ((u8)fish == 0x16) {
             FISHING_STATE->step_timer_09  = 4;
             FISHING_STATE->saved_index_0B = 1;
-        } else if (!(Item_Add(ITEM_CAT_ITEM, (fish + 0x38) & 0xFF, 1, 0) & 0xFF)) {
+        } else if (!(Item_Add(ITEM_CAT_ITEM, (fish + 0x38) & BYTE_MASK, 1, 0) & BYTE_MASK)) {
             FISHING_STATE->step_timer_09  = 4;
             FISHING_STATE->saved_index_0B = 2;
         } else {

@@ -10,9 +10,9 @@ MATCH u8* func_801E0DCC(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite_y) {
     SetSprt(sprite);
     setRGB0(sprite, 128, 128, 128);
     setXY0(sprite, sprite_x, sprite_y);
-    sprite->clut = getClut(D_801E2424[icon_index & 0xFF].unk_00, D_801E2424[icon_index & 0xFF].unk_04);
-    setWH(sprite, D_801E2424[icon_index & 0xFF].width, D_801E2424[icon_index & 0xFF].height);
-    setUV0(sprite, D_801E2424[icon_index & 0xFF].u, D_801E2424[icon_index & 0xFF].v);
+    sprite->clut = getClut(D_801E2424[icon_index & BYTE_MASK].unk_00, D_801E2424[icon_index & BYTE_MASK].unk_04);
+    setWH(sprite, D_801E2424[icon_index & BYTE_MASK].width, D_801E2424[icon_index & BYTE_MASK].height);
+    setUV0(sprite, D_801E2424[icon_index & BYTE_MASK].u, D_801E2424[icon_index & BYTE_MASK].v);
     GFX_AddPrim((u8)layer, 0x14);
     return (u8*)sprite;
 }

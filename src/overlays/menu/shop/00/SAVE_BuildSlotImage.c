@@ -81,15 +81,15 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     src_text = work + 0x90;
     strncpy((s8*)dst_text, (s8*)src_text, 5);
     slot = 0;
-    col  = 0 & 0xFFFF;
+    col  = 0 & HALF_MASK;
     do {
-        name_index = slot & 0xFFFF;
+        name_index = slot & HALF_MASK;
         if (D_80144F5A[col] == 4) {
             mode = SHOP_WORK->field_74C & 0x7F;
             if ((mode != 5) && (mode != 0xC)) {
                 dst_text[col + 5] = 0xB;
             } else {
-                name_index = slot & 0xFFFF;
+                name_index = slot & HALF_MASK;
                 goto store_row; /* the kind-4 arm reaches the same store with its own index */
             }
         } else {
@@ -97,8 +97,8 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
             dst_text[name_index + 5] = (u8)D_80144F5A[name_index];
         }
         slot += 1;
-        col = slot & 0xFFFF;
-    } while ((u32)(slot & 0xFFFF) < 3U);
+        col = slot & HALF_MASK;
+    } while ((u32)(slot & HALF_MASK) < 3U);
     src                                = g_SceneEventFlags;
     SHOP_WORK_RECORD(0xCA0u)->field_08 = src_text[6];
     SHOP_WORK_RECORD(0xCA0u)->field_0C = SHOP_WORK->field_6E8;
@@ -113,7 +113,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     D_80145025                         = (u8)g_GameFlags;
     do {
         i += 1;
-        count = i & 0xFFFF;
+        count = i & HALF_MASK;
         *dst  = *src;
         dst += 1;
         sum += *src;
@@ -124,7 +124,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
             *dst = 0;
             i += 1;
             dst += 1;
-        } while ((u32)(i & 0xFFFF) < 7680U);
+        } while ((u32)(i & HALF_MASK) < 7680U);
     }
     D_800C1A70 = sum;
     if (g_SaveSlotFirst == g_SaveSlotCount) {

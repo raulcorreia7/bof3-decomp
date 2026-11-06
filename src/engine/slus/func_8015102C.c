@@ -20,7 +20,7 @@ MATCH void func_8015102C(void) {
     D_801490A0.count_06 = one;
     phase               = D_801490A0.phase_18 + 1;
     D_801490A0.phase_18 = phase;
-    if ((phase & 0xFF) == 7) {
+    if ((phase & BYTE_MASK) == 7) {
         if ((D_801490A0.state_00 == 4) || (D_801490A0.state_00 == 5)) {
             Message_StartRequest();
         } else {

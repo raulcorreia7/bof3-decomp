@@ -14,8 +14,8 @@ MATCH void func_801DD978(void) {
 
     max = 0u;
     for (slot = 3u; slot < 11u; slot += 1u) {
-        if (Battle_SlotIsBlocked(slot & 0xFF) == 0u) {
-            value = ENEMY_COMBATANT((slot & 0xFF)).power;
+        if (Battle_SlotIsBlocked(slot & BYTE_MASK) == 0u) {
+            value = ENEMY_COMBATANT((slot & BYTE_MASK)).power;
             if (max < value) {
                 max = value;
             }
@@ -25,10 +25,10 @@ MATCH void func_801DD978(void) {
     min    = 0xFFFFu;
     result = 0u;
     for (slot = 3u; slot < 11u; slot += 1u) {
-        if (Battle_SlotIsBlocked(slot & 0xFF) == 0u) {
-            first = ENEMY_COMBATANT((slot & 0xFF)).power;
+        if (Battle_SlotIsBlocked(slot & BYTE_MASK) == 0u) {
+            first = ENEMY_COMBATANT((slot & BYTE_MASK)).power;
             if (max == first) {
-                base = ENEMY_COMBATANT((slot & 0xFF)).hp;
+                base = ENEMY_COMBATANT((slot & BYTE_MASK)).hp;
                 if (base <= min) {
                     min    = base;
                     result = slot;

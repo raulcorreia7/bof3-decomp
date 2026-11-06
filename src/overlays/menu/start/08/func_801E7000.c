@@ -18,7 +18,7 @@ MATCH void func_801E7000(void) {
     if (TASK_BYTES[9] >= 0xA) {
         TASK_BYTES[9] = 0;
         TASK_BYTES[6] = (TASK_BYTES[6] + 1) & 7;
-        Actor_SelectScript((TASK_BYTES[6] + 8) & 0xFF);
+        Actor_SelectScript((TASK_BYTES[6] + 8) & BYTE_MASK);
     }
     Area_AddActor();
     func_8014D978();

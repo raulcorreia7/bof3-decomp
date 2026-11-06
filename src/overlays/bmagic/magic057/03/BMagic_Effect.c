@@ -33,7 +33,7 @@ MATCH void func_801EED98(void) {
     g_Task  = D_801EC2E0->target.party;
     Actor_SelectScript(3U);
     g_Task                             = temp_s0;
-    slot                               = Battle_AllocEffect(1, 0x41) & 0xFF;
+    slot                               = Battle_AllocEffect(1, 0x41) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].header.step  = 0;
     g_BattleEffects[slot].target.party = g_Task;

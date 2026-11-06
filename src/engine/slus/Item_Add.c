@@ -12,8 +12,8 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
     s32 i;
     u8  cur;
 
-    key = (item & 0xFF);
-    add = (amount & 0xFF);
+    key = (item & BYTE_MASK);
+    add = (amount & BYTE_MASK);
     if (key == 0) {
         return false;
     }
@@ -22,8 +22,8 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
     }
     limit         = 99;
     D_1F800000[0] = 0;
-    keys          = D_801C893C[category & 0xFF];
-    vals          = D_801C8950[category & 0xFF];
+    keys          = D_801C893C[category & BYTE_MASK];
+    vals          = D_801C8950[category & BYTE_MASK];
     i             = 0;
     do {
         if (*keys == key) {
@@ -38,10 +38,10 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
         keys++;
         i++;
         vals++;
-    } while ((i & 0xFF) < 128U);
+    } while ((i & BYTE_MASK) < 128U);
     i    = 0;
-    keys = D_801C893C[category & 0xFF];
-    vals = D_801C8950[category & 0xFF];
+    keys = D_801C893C[category & BYTE_MASK];
+    vals = D_801C8950[category & BYTE_MASK];
     do {
         if ((*keys == 0) || (*vals == 0)) {
             *keys         = item;
@@ -52,6 +52,6 @@ MATCH bool Item_Add(s32 category, u8 item, u8 amount, s32 unused) {
         keys++;
         i++;
         vals++;
-    } while ((i & 0xFF) < 128U);
+    } while ((i & BYTE_MASK) < 128U);
     return false;
 }

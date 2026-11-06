@@ -8,12 +8,12 @@ MATCH void func_801D6FBC(void) {
 
     index     = g_MenuPanelTasks[14].flags;
     bit_index = g_CharSlot[D_80144F5A[g_MenuPanelTasks[13].unk_0C]];
-    if (((s32)(Item_GetEquipability(g_MenuPanelTasks[14].unk_08, index) & 0xFF) >> bit_index) & 1) {
+    if (((s32)(Item_GetEquipability(g_MenuPanelTasks[14].unk_08, index) & BYTE_MASK) >> bit_index) & 1) {
         g_MenuPanelTasks[13].flags = 0;
-        record_index               = bit_index & 0xFF;
+        record_index               = bit_index & BYTE_MASK;
     } else {
         g_MenuPanelTasks[13].flags = 1;
-        record_index               = bit_index & 0xFF;
+        record_index               = bit_index & BYTE_MASK;
     }
     record                                     = record_index;
     D_801ED63C                                 = g_Characters[record].equip.weapon;

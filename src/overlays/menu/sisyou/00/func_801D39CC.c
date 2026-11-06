@@ -5,7 +5,7 @@ MATCH void func_801D39CC(u32 entry) {
     u8* name;
 
     i    = 0;
-    name = g_Characters[entry & 0xFF].name;
+    name = g_Characters[entry & BYTE_MASK].name;
     do {
         g_TextVariables[0][i] = name[i];
         i += 1;

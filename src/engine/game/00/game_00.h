@@ -94,7 +94,8 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
  * the bytes move. */
 #define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                                       \
     if ((g_GameFlags & 0x400) == 0) {                                                                                \
-        if ((func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & 0xFF) != 0) { \
+        if ((func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != \
+            0) {                                                                                                     \
             g_Task->header.mode = 2;                                                                                 \
             g_Task->header.step = flags;                                                                             \
             g_Task->unk_03      = 0;                                                                                 \
@@ -112,9 +113,9 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
         u8 value;                                                                                      \
                                                                                                        \
         if (flag != 0) {                                                                               \
-            value = flagged_test(pos_x, pos_y, (u8)(wanted_code & 0xFF), mask_cells);                  \
+            value = flagged_test(pos_x, pos_y, (u8)(wanted_code & BYTE_MASK), mask_cells);             \
         } else {                                                                                       \
-            value = unflagged_test(pos_x, pos_y, (u8)(wanted_code & 0xFF), mask_cells);                \
+            value = unflagged_test(pos_x, pos_y, (u8)(wanted_code & BYTE_MASK), mask_cells);           \
         }                                                                                              \
         return value;                                                                                  \
     } while (0)
@@ -1563,7 +1564,7 @@ static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 fla
     if (flags != 0) {
         if (actor->unk_7B != 0u) {
             work      = (u8*)g_Task;
-            work[9]   = (u8)(0x20 / (s32)(value_b & 0xFF));
+            work[9]   = (u8)(0x20 / (s32)(value_b & BYTE_MASK));
             work      = (u8*)g_Task;
             work[0xA] = (u8)(work[9] >> 1);
         }

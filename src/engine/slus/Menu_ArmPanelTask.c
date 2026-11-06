@@ -8,7 +8,7 @@ MATCH s32 Menu_ArmPanelTask(u8 menu_id, u8 mode) {
     /* FAKE: retail holds the success status in $v0 from the branch target. */
     MATCH_REG(s32, status, "v0");
 
-    offset = (menu_id & 0xFF) * 0x24;
+    offset = (menu_id & BYTE_MASK) * 0x24;
     if (((u8*)g_MenuPanelTasks)[offset] != 0) {
         return 0xFF;
     }

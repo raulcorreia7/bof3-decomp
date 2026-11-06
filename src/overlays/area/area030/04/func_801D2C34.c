@@ -31,7 +31,7 @@ MATCH void func_801D2C34(s16 arg0, s16 arg1, s8 arg2, u8 arg3) {
     primitive->y2 = primitive->y0 + 8;
     primitive->y3 = primitive->y2;
 
-    if ((arg2 & 0xFF) == 0) {
+    if ((arg2 & BYTE_MASK) == 0) {
         primitive->u0 = 40;
         primitive->u1 = 56;
     } else {
@@ -46,5 +46,5 @@ MATCH void func_801D2C34(s16 arg0, s16 arg1, s8 arg2, u8 arg3) {
     primitive->v2 = primitive->v0 + 8;
     primitive->v3 = primitive->v2;
 
-    GFX_AddPrim(arg3 & 0xFF, 0x28);
+    GFX_AddPrim(arg3 & BYTE_MASK, 0x28);
 }

@@ -9,8 +9,8 @@ MATCH s32 Item_VitalRemove(s32 item_id) {
 
     entry = g_VitalItemIds;
     index = 0;
-    while ((index & 0xFF) < 32U) {
-        if (*entry == (item_id & 0xFF)) {
+    while ((index & BYTE_MASK) < 32U) {
+        if (*entry == (item_id & BYTE_MASK)) {
             *entry = 0;
             return 1;
         }

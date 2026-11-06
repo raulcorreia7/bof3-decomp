@@ -20,7 +20,7 @@ MATCH void func_801A0AE4(Actor* record) {
         mode  = record->unk_78;
         param = g_RouteSpeedScale[mode];
         if (record->unk_7B == 0) {
-            if ((mode != 0) && (D_801C83BC[spad_b->header.step](record, param, 2) & 0xFF)) {
+            if ((mode != 0) && (D_801C83BC[spad_b->header.step](record, param, 2) & BYTE_MASK)) {
                 func_801A2C10(record);
                 if (g_Task->unk_09 != 0) {
                     timer = (rand() & 3) + 3;
@@ -35,7 +35,7 @@ MATCH void func_801A0AE4(Actor* record) {
             record->unk_7B = timer;
         }
         result = func_801A2A04(record);
-        if (((result & 0xFF) != GAME_NONE) && (g_Task->unk_09 != 0)) {
+        if (((result & BYTE_MASK) != GAME_NONE) && (g_Task->unk_09 != 0)) {
             spad_c               = g_Task;
             spad_c->unk_03       = spad_c->header.mode;
             g_Task->header.mode  = 0xAU;

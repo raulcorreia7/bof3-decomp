@@ -47,7 +47,7 @@ NON_MATCHING void func_801BFB34(void) {
     if (cnt_a != 0) {
         val3 = 0;
         do {
-            tmp3  = cnt_a & 0xFF;
+            tmp3  = cnt_a & BYTE_MASK;
             val10 = 0;
             if (tmp3 > 0) {
             loop_7:
@@ -89,7 +89,7 @@ NON_MATCHING void func_801BFB34(void) {
         val2 = &D_1F800000;
         val5 = 0;
         do {
-            tmp1 = tmp7 & 0xFF;
+            tmp1 = tmp7 & BYTE_MASK;
             val8 = 0;
             if (tmp1 > 0) {
             loop_18:

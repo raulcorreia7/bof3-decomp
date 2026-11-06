@@ -13,20 +13,20 @@ MATCH void func_800C20CC(void) {
     u32              index;
 
     index = Battle_AllocEffect(3, 6);
-    if ((index & 0xFF) != GAME_NONE) {
-        slot                                        = (BattleWorkImage*)&g_BattleEffects[index & 0xFF];
-        *slot                                       = *(BattleWorkImage*)g_Task;
-        g_BattleEffects[index & 0xFF].unk_06        = 3;
-        g_BattleEffects[index & 0xFF].handler_index = 6;
-        g_BattleEffects[index & 0xFF].header.mode   = 1;
-        g_BattleEffects[index & 0xFF].header.step   = 0;
-        g_BattleEffects[index & 0xFF].unk_03        = 0;
-        g_BattleEffects[index & 0xFF].unk_04        = 0;
-        g_BattleEffects[index & 0xFF].header.flags  = g_BattleEffects[index & 0xFF].header.flags & 0xBF;
-        work                                        = TASK_BYTES;
-        g_BattleEffects[index & 0xFF].target.bytes  = work;
-        g_BattleEffects[index & 0xFF].unk_0B        = work[0xB];
-        work                                        = TASK_BYTES;
+    if ((index & BYTE_MASK) != GAME_NONE) {
+        slot                                             = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
+        *slot                                            = *(BattleWorkImage*)g_Task;
+        g_BattleEffects[index & BYTE_MASK].unk_06        = 3;
+        g_BattleEffects[index & BYTE_MASK].handler_index = 6;
+        g_BattleEffects[index & BYTE_MASK].header.mode   = 1;
+        g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+        g_BattleEffects[index & BYTE_MASK].unk_03        = 0;
+        g_BattleEffects[index & BYTE_MASK].unk_04        = 0;
+        g_BattleEffects[index & BYTE_MASK].header.flags  = g_BattleEffects[index & BYTE_MASK].header.flags & 0xBF;
+        work                                             = TASK_BYTES;
+        g_BattleEffects[index & BYTE_MASK].target.bytes  = work;
+        g_BattleEffects[index & BYTE_MASK].unk_0B        = work[0xB];
+        work                                             = TASK_BYTES;
         if (work[0xB] != 0) {
             work[0xB]--;
         }

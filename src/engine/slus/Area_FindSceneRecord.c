@@ -20,7 +20,7 @@ MATCH bool Area_FindSceneRecord(s32 wanted_id) {
     i      = 0;
     count  = D_800E3800;
     if (count > 0) {
-        wanted_id &= 0xFFFF;
+        wanted_id &= HALF_MASK;
         mask      = ~0xFF;
         count_ptr = (u8*)SCENE_TABLE_BASE;
         do {

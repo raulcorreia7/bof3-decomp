@@ -11,15 +11,15 @@ MATCH void func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shad
     GFX_AddDrawMode(0xF);
     sprite = (SPRT_8*)g_GfxPrimCursor;
     SetSprt8(sprite);
-    if ((shade_mode & 0xFF) == 0) {
+    if ((shade_mode & BYTE_MASK) == 0) {
         setRGB0(sprite, 0x80, 0x80, 0x80);
     } else {
         setRGB0(sprite, 0x40, 0x40, 0x40);
     }
 
     setXY0(sprite, sprite_x, sprite_y);
-    setUV0(sprite, (((texture_index & 0xFF) * 8) + 56), 248);
-    switch (texture_index & 0xFF) {
+    setUV0(sprite, (((texture_index & BYTE_MASK) * 8) + 56), 248);
+    switch (texture_index & BYTE_MASK) {
         case 1:
         case 3:
         case 0xF:

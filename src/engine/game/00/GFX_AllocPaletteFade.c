@@ -19,7 +19,7 @@ loop_1:
         if ((color_data[0x28] == 0) && ((color_data[0x24] & 4) == 0)) {
             ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = flagged;
         }
-        result                                                   = slot & 0xFF;
+        result                                                   = slot & BYTE_MASK;
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->step         = GFX_MarkPaletteCells(color_data[0x28], result, 1);
         tmp_a                                                    = color_data[0x27];
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->saved_byte   = tmp_a;

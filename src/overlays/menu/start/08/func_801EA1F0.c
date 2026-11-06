@@ -5,7 +5,7 @@ MATCH void func_801EA1F0(MenuPanelTask* task) {
     s16 row;
     u8  i;
     u32 color;
-    UI_DrawWindow((task->x + 3) & 0xFFFF, (task->y + 3) & 0xFFFF, 101, (D_801ED560[task->unk_0A][0] * 16) + 25, 0,
+    UI_DrawWindow((task->x + 3) & HALF_MASK, (task->y + 3) & HALF_MASK, 101, (D_801ED560[task->unk_0A][0] * 16) + 25, 0,
                   D_80144952);
     UI_DrawText((task->x + 39), (task->y + 7), 0, 0xFFU, (u8*)D_801ED534[0]);
     UI_DrawSpriteRun(task->x, task->y, D_801ED468, 1);

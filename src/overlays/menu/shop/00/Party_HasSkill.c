@@ -11,7 +11,7 @@ MATCH s32 Party_HasSkill(s32 item_id) {
     for (j = 0; j < 7; j++) {
         row = g_Characters[0].abilities.skill + j * sizeof(Character);
         for (i = 0; i < CHARACTER_ABILITY_COUNT; i++) {
-            if (*row == (item_id & 0xFF)) {
+            if (*row == (item_id & BYTE_MASK)) {
                 return 1;
             }
             row++;
@@ -19,7 +19,7 @@ MATCH s32 Party_HasSkill(s32 item_id) {
     }
     row = D_8014546C;
     for (i = 0; i < 128; i++) {
-        if (*row == (item_id & 0xFF)) {
+        if (*row == (item_id & BYTE_MASK)) {
             return 1;
         }
         row++;

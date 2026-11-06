@@ -12,11 +12,11 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
     s32                 tpage;
     u16                 clut;
 
-    if ((sprite_id & 0xFF) == 4 && (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 5 &&
+    if ((sprite_id & BYTE_MASK) == 4 && (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 5 &&
         (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 0xC) {
         sprite_id = 0xB;
     }
-    entry = &D_801D4058[sprite_id & 0xFF];
+    entry = &D_801D4058[sprite_id & BYTE_MASK];
 
     tpage = getTPage(0, 0, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -25,7 +25,7 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
 
-    shade_value = shade & 0xFF;
+    shade_value = shade & BYTE_MASK;
     /* Retail writes b0, g0, r0 as one block in the first two arms. */
     if (shade_value == 0) {
         sprt->b0 = 0x80;

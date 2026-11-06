@@ -39,7 +39,7 @@ NON_MATCHING void func_801E5E2C(void) {
 loop:
     if ((slot->word_60 / divisor) <= 0) {
         digits -= 1;
-        divisor = (divisor & 0xFF) / 10;
+        divisor = (divisor & BYTE_MASK) / 10;
         if (digits != 0) {
             goto loop; /* back to the shorter divisor */
         }

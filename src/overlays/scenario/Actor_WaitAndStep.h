@@ -7,7 +7,7 @@ MATCH void Actor_WaitAndStep(Actor* actor) {
 
     wait               = actor->header.step - 1;
     actor->header.step = wait;
-    if (!(wait & 0xFF)) {
+    if (!(wait & BYTE_MASK)) {
         actor->header.step = 32;
         actor->header.mode = actor->header.mode + 1;
     }

@@ -25,13 +25,13 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     val5 = x;
     val1 = y;
     val4 = shaded;
-    val6 = val4 & 0xFF;
+    val6 = val4 & BYTE_MASK;
     val9 = -(val6 != 0) & 7;
-    UI_DrawWindow((val5 + 3) & 0xFFFF, (val1 + 3) & 0xFFFF, 125, 48, val6, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow((val5 + 3) & HALF_MASK, (val1 + 3) & HALF_MASK, 125, 48, val6, CHARACTER_BLOCK->window_style);
     val7 = val5;
     val2 = val1;
     val5 += 0x56;
-    tmp1 = val5 & 0xFFFF;
+    tmp1 = val5 & HALF_MASK;
     val1 += 2;
     character = &g_Characters[character_index];
     if (val6 == 0) {
@@ -39,8 +39,8 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     } else {
         val11 = 1;
     }
-    val5 = val9 & 0xFF;
-    Menu_DrawCharacterPortrait(tmp1, val1 & 0xFFFF, character->character_id, val11);
+    val5 = val9 & BYTE_MASK;
+    Menu_DrawCharacterPortrait(tmp1, val1 & HALF_MASK, character->character_id, val11);
     UI_DrawText((s16)(val7 + 20), (s16)(val2 + 3), val5, 5U, (u8*)character);
     val10 = g_UiFormatBuffer;
     val10 = g_UiFormatBuffer;
@@ -84,7 +84,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
         val8 = character->status & ~STATUS_LOW_HP;
     }
     character->status = val8;
-    if (!(val4 & 0xFF)) {
+    if (!(val4 & BYTE_MASK)) {
         if (character->status & STATUS_LOW_HP) {
             val9 = 4;
         }
@@ -98,7 +98,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     val10 = g_UiFormatBuffer;
     sprintf((char*)g_UiFormatBuffer, D_801D0C50, character->hp);
     UI_DrawGlyphString((s16)(val7 + 22), (s16)(val2 + 31), val9, g_UiFormatBuffer);
-    if (!(val4 & 0xFF)) {
+    if (!(val4 & BYTE_MASK)) {
         val9 = (character->fatigue != 0) * 4;
     } else {
         val9 = 7;
@@ -107,7 +107,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     val10 = g_UiFormatBuffer;
     sprintf((char*)g_UiFormatBuffer, D_801D0C58, character->stats.max_hp);
     UI_DrawGlyphString((s16)(val7 + 22), (s16)(val2 + 31), val9, g_UiFormatBuffer);
-    tmp0 = val4 & 0xFF;
+    tmp0 = val4 & BYTE_MASK;
     val9 = -(tmp0 != 0) & 7;
     if (tmp0 == 0) {
         tmp3 = character->ap;
@@ -130,11 +130,12 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     val10 = (u8*)((s32)val10 << 0x10);
     val10 = (u8*)((s32)val10 >> 0x10);
     UI_DrawGlyphString((s16)val5, (s16)val10, val9, (u8*)val1);
-    val9 = -((val4 & 0xFF) != 0) & 7;
+    val9 = -((val4 & BYTE_MASK) != 0) & 7;
     sprintf((char*)val1, D_801D0C58, character->stats.max_ap);
     UI_DrawGlyphString((s16)val5, (s16)val10, val9, (u8*)val1);
     UI_DrawSpriteRun((s16)val7, val2, &D_801EC598, 0);
-    func_801DD6D0((val7 + 0x14) & 0xFFFF, (val2 + 0x12) & 0xFFFF, character_index, character->level, character->exp);
+    func_801DD6D0((val7 + 0x14) & HALF_MASK, (val2 + 0x12) & HALF_MASK, character_index, character->level,
+                  character->exp);
 }
 #else
 /* blocker: register homes (py in s2, shaded byte in s3). */

@@ -13,7 +13,7 @@ MATCH s32 func_801A1AE4(Actor* arg) {
     pos_y = arg->pos.y.fixed + D_80181B98[route * 2];
     y     = pos_y;
 
-    if ((func_801A1BC0(arg) & 0xFF) != 0u) {
+    if ((func_801A1BC0(arg) & BYTE_MASK) != 0u) {
         return 1;
     }
 

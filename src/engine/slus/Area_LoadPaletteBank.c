@@ -25,8 +25,8 @@ MATCH void Area_LoadPaletteBank(u8* palette_list) {
             entry = *(u32*)ptr;
             if (id == (entry >> 24)) {
                 count = 0;
-                dst   = (s32*)((((entry >> 4) & 0xFF) << 9) + (((entry & 0xF) << 5) + base));
-                src   = (s32*)((((entry >> 16) & 0xFF) << 9) + (((entry >> 7) & 0x1E0) + base));
+                dst   = (s32*)((((entry >> 4) & BYTE_MASK) << 9) + (((entry & 0xF) << 5) + base));
+                src   = (s32*)((((entry >> 16) & BYTE_MASK) << 9) + (((entry >> 7) & 0x1E0) + base));
                 do {
                     *dst = *src;
                     src += 1;

@@ -64,7 +64,7 @@ NON_MATCHING void func_801B21E8(void) {
                 tmp5        = (u8*)g_BattlePartyBattlers + val5;
                 g_Task      = tmp5;
                 g_GameState = tmp5;
-                func_801C1254(FIELD(u8, tmp5, 0x79u), val4 & 0xFF);
+                func_801C1254(FIELD(u8, tmp5, 0x79u), val4 & BYTE_MASK);
                 g_GameState->flags_12C.u8_value = val14;
                 if (g_GameState->flags_12C.u8_value & 1) {
                     FIELD(s8, g_Task, 0x29u) = 4;
@@ -99,13 +99,13 @@ NON_MATCHING void func_801B21E8(void) {
                         func_801B1B2C(FIELD(s32, val13, -0xF8) + (*(s32*)(s_EntityPlacementOffsets + tmp1 * 4) << 0xF),
                                       FIELD(s32, val13, -0xF4) + (*(s32*)(D_801CD08D + tmp1 * 4) << 0xF), (s32)tmp10,
                                       FIELD(u8, tmp4, 0x70u));
-                    val8 = val3 & 0xFF;
+                    val8 = val3 & BYTE_MASK;
                     val9 = 0;
                     if (val8 != 0) {
                         val9 = func_801B1C18(*(s32*)val0, FIELD(s32, val0, 0x4u), g_Task->state_70.byte);
-                        val8 = val3 & 0xFF;
+                        val8 = val3 & BYTE_MASK;
                     }
-                    if ((val8 == 0) || !(val9 & 0xFF)) {
+                    if ((val8 == 0) || !(val9 & BYTE_MASK)) {
                         val1 = D_80145EC4;
                         val2 = D_80145EC8;
                         goto block_26; /* retail branch */
@@ -143,8 +143,8 @@ NON_MATCHING void func_801B21E8(void) {
     }
     g_AreaScrollTargetX = D_80145EC4;
     g_AreaScrollTargetY = D_80145EC8;
-    val7                = MAX(val7, val10);
-    tmp0                = ((u32)val7 >> 0xD) & 0xFF;
+    val7 = MAX(val7, val10);
+    tmp0 = ((u32)val7 >> 0xD) & BYTE_MASK;
     if (tmp0 != 0) {
         g_AreaCameraHeightStep = (s16)((s16)((u16)D_80145ECE - g_AreaCameraHeight) / tmp0);
     } else {

@@ -4,5 +4,5 @@
  * and forwards it, with the caller's effect id, to SsSepStop.
  */
 MATCH void SND_StopSequence(s32 group, s16 sequence) {
-    SsSepStop(g_SelectionFxVoices[group & 0xFFFF], sequence);
+    SsSepStop(g_SelectionFxVoices[group & HALF_MASK], sequence);
 }

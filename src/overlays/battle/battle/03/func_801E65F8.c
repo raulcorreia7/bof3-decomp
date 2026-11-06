@@ -10,7 +10,7 @@ MATCH void func_801E65F8(void) {
     if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
         /* Replicates the slot's +0x10 cell into all three 5-bit color channels. */
         value = D_801EC2E0->unk_10;
-        func_801D9DBC(0, 0, 0xB, ((value << 0xA) + (value << 5) + value) & 0xFFFF, 1);
+        func_801D9DBC(0, 0, 0xB, ((value << 0xA) + (value << 5) + value) & HALF_MASK, 1);
     } else {
         /* Only the red channel of the scaled color is kept. */
         func_801D9DBC(0, 0, 0xB, (D_801EC2E0->unk_10 << 0xA) & 0xFC00, 1);

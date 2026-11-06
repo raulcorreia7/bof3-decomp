@@ -6,9 +6,9 @@ MATCH void Party_ResetBattlers(void) {
     s32 index;
 
     index = 0;
-    while ((index & 0xFF) < 3U) {
-        g_BattlePartyBattlers[index & 0xFF].header.flags = 0;
-        Party_ClearBattlerState(index & 0xFF);
+    while ((index & BYTE_MASK) < 3U) {
+        g_BattlePartyBattlers[index & BYTE_MASK].header.flags = 0;
+        Party_ClearBattlerState(index & BYTE_MASK);
         index++;
     }
 }

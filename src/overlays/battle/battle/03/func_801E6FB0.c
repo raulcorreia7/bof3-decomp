@@ -42,7 +42,7 @@ MATCH void func_801E6FB0(void) {
     func_801E8DD8();
     func_8014D978();
     Area_AddActor();
-    if ((Battle_SlotIsBlocked(D_801EB4E0->slot) & 0xFF) && !ACTOR_IN_USE(*D_801EB4E0)) {
+    if ((Battle_SlotIsBlocked(D_801EB4E0->slot) & BYTE_MASK) && !ACTOR_IN_USE(*D_801EB4E0)) {
         g_Task->header.mode = 0;
     }
 }

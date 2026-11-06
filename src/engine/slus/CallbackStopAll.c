@@ -14,7 +14,7 @@ MATCH void CallbackStopAll(void) {
 
     do {
         if (g_CallbackSlot->state != CALLBACK_SLOT_EMPTY) {
-            CallbackCloseThread(callback_slot & 0xFF);
+            CallbackCloseThread(callback_slot & BYTE_MASK);
         }
 
         next_slot      = g_CallbackSlot + 1;

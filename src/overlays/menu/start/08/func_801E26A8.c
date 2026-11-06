@@ -11,19 +11,19 @@ NON_MATCHING void func_801E26A8(s32 x, s32 y) {
     u8  marker;
 
     Menu_DrawWindowFrame((s16)x, (s16)y, 0x21, 0xD);
-    x = (x + 5) & 0xFFFF;
+    x = (x + 5) & HALF_MASK;
     y += 9;
     for (i = 0; i < 6; i++, y += 0xF) {
         marker = 0;
         if ((s8)D_80148655 - 2 == i) {
             marker = D_80148654;
         }
-        Menu_DrawOptionRow(x, y & 0xFFFF, i & 0xFF, marker);
+        Menu_DrawOptionRow(x, y & HALF_MASK, i & BYTE_MASK, marker);
         marker = 0;
         if ((s8)D_80148655 - 2 == i) {
             marker = D_80148654;
         }
-        func_801E2C00(x, y & 0xFFFF, pairs[i][0], pairs[i][1], marker);
+        func_801E2C00(x, y & HALF_MASK, pairs[i][0], pairs[i][1], marker);
     }
 }
 #else

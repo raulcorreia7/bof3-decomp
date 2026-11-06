@@ -7,8 +7,8 @@ MATCH void func_800AE2D4(u32 selection) {
     u8*           row;
     u16           value;
 
-    row   = D_800B6AB0[(selection >> 8) & 0xFF];
-    value = g_BattleSelections[row[selection & 0xFF]].id;
+    row   = D_800B6AB0[(selection >> 8) & BYTE_MASK];
+    value = g_BattleSelections[row[selection & BYTE_MASK]].id;
     if (value != 0xFFFF) {
         EMI_LoaderStreamInitSlot(value);
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_LOADING);

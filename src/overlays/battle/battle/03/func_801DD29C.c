@@ -10,11 +10,11 @@ MATCH void func_801DD29C(void) {
         r = p;
         while (*r < 3) {
             v = D_801462F6[*r];
-            if ((v & 0xFF) == GAME_NONE) {
+            if ((v & BYTE_MASK) == GAME_NONE) {
                 break;
             }
             ((u8*)r)[-0x15]                                            = v;
-            g_BattlePartyBattlers[(v & 0xFF)].turn.command.type        = BATTLE_COMMAND_ATTACK;
+            g_BattlePartyBattlers[(v & BYTE_MASK)].turn.command.type   = BATTLE_COMMAND_ATTACK;
             g_BattlePartyBattlers[((u8*)r)[-0x15]].turn.command.target = 3;
             ((u8*)r)[0] += 1;
         }

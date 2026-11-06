@@ -13,7 +13,7 @@ MATCH void GFX_FreePaletteSlotOwner(s32 match_key) {
     offset = 0;
     do {
         if (*(u32*)(((u8*)&D_80145DA0) + offset) == key) {
-            GFX_FreePaletteSlot(index & 0xFF);
+            GFX_FreePaletteSlot(index & BYTE_MASK);
         }
         index += 1;
         offset += 0x10;

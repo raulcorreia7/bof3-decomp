@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 MATCH void func_8009CF80(u8* record, s32 index, s32 new_value) {
-    switch (index & 0xFF) {
+    switch (index & BYTE_MASK) {
         case 0:
             record[0xCF] = new_value;
             break;

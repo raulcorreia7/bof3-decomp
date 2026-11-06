@@ -22,8 +22,8 @@ NON_MATCHING void func_8015A554(void) {
     row    = 0;
     if (D_801490BC.last_row >= 0) {
         do {
-            D_801490CF[row & 0xFF] = count;
-            flag                   = 1;
+            D_801490CF[row & BYTE_MASK] = count;
+            flag                        = 1;
             do {
                 switch (*cursor) {
                     case 0:
@@ -45,7 +45,7 @@ NON_MATCHING void func_8015A554(void) {
                 cursor++;
             } while (flag);
             row++;
-        } while (D_801490BC.last_row >= (row & 0xFF));
+        } while (D_801490BC.last_row >= (row & BYTE_MASK));
     }
 
     rows                          = &D_801490BC.last_row;
@@ -65,9 +65,9 @@ NON_MATCHING void func_8015A554(void) {
     i                             = 0;
     if (*rows >= 0) {
         do {
-            D_801490CF[i & 0xFF] = base + D_801490CF[i & 0xFF] * 0xD + (i & 0xFF) * 2;
+            D_801490CF[i & BYTE_MASK] = base + D_801490CF[i & BYTE_MASK] * 0xD + (i & BYTE_MASK) * 2;
             i++;
-        } while (*rows >= (i & 0xFF));
+        } while (*rows >= (i & BYTE_MASK));
     }
 }
 #else

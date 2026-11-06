@@ -12,7 +12,7 @@ NON_MATCHING void func_801D67D8(u8 party_slot) {
     u8         i;
     u8         j;
 
-    character  = g_CharSlot[D_80144F5A[party_slot & 0xFF]];
+    character  = g_CharSlot[D_80144F5A[party_slot & BYTE_MASK]];
     record     = &g_Characters[character];
     slots[0]   = &record->equip.weapon;
     slots[1]   = &record->equip.shield;
@@ -23,8 +23,9 @@ NON_MATCHING void func_801D67D8(u8 party_slot) {
     for (i = 0; i < 128; i++) {
         item  = D_801C8940[i];
         power = g_Weapons[item].stats.power;
-        if ((((Item_GetEquipability(ITEM_CAT_WEAPON, item) & 0xFF) >> character) & 1) &&
-            (((best & 0xFFFF) < (power & 0xFFFF)) || (((best & 0xFFFF) == (power & 0xFFFF)) && (item < D_801ED63C)))) {
+        if ((((Item_GetEquipability(ITEM_CAT_WEAPON, item) & BYTE_MASK) >> character) & 1) &&
+            (((best & HALF_MASK) < (power & HALF_MASK)) ||
+             (((best & HALF_MASK) == (power & HALF_MASK)) && (item < D_801ED63C)))) {
             D_801ED63C = item;
             best       = power;
         }
@@ -36,9 +37,9 @@ NON_MATCHING void func_801D67D8(u8 party_slot) {
             item  = D_801C8944[j];
             power = g_Armors[item].stats.power;
             if ((g_Armors[item].equip_type == i + 1) &&
-                (((Item_GetEquipability(ITEM_CAT_ARMOR, item) & 0xFF) >> character) & 1) &&
-                (((best & 0xFFFF) < (power & 0xFFFF)) ||
-                 (((best & 0xFFFF) == (power & 0xFFFF)) && (item < (&D_801ED63C)[i])))) {
+                (((Item_GetEquipability(ITEM_CAT_ARMOR, item) & BYTE_MASK) >> character) & 1) &&
+                (((best & HALF_MASK) < (power & HALF_MASK)) ||
+                 (((best & HALF_MASK) == (power & HALF_MASK)) && (item < (&D_801ED63C)[i])))) {
                 (&D_801ED63C)[i] = item;
                 best             = power;
             }

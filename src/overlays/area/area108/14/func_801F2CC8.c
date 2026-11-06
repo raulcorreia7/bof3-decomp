@@ -7,7 +7,7 @@ MATCH void func_801F2CC8(void) {
     STACK_PADS(u8, 16);
 
     func_801F34B8();
-    if ((func_801F3034() & 0xFF) == 0) {
+    if ((func_801F3034() & BYTE_MASK) == 0) {
         work = TASK_BYTES;
         work[1]++;
     }

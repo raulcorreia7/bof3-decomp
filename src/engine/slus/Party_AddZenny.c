@@ -11,7 +11,7 @@ MATCH s32 Party_AddZenny(s32 amount, s32 skip_earned) {
 
     sum      = zenny[0] + amount;
     zenny[0] = sum;
-    if ((skip_earned & 0xFF) == 0) {
+    if ((skip_earned & BYTE_MASK) == 0) {
         D_80145030 = D_80145030 + amount;
     }
     if (0x98967Fu < sum) {

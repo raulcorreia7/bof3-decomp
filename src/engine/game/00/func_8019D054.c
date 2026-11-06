@@ -14,7 +14,7 @@ MATCH bool func_8019D054(s32 point_x, s32 point_y) {
 
     x     = point_x;
     y     = point_y;
-    index = func_801BDE14(x, y, 1) & 0xFF;
+    index = func_801BDE14(x, y, 1) & BYTE_MASK;
     if (index != GAME_NONE) {
         g_Actors[index].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
     }
@@ -22,22 +22,22 @@ MATCH bool func_8019D054(s32 point_x, s32 point_y) {
     y &= 0xFFFF0000;
     xi = (s16)(x >> 16);
     yi = (y >> 16);
-    if (func_8019D20C(xi, yi) & 0xFF) {
+    if (func_8019D20C(xi, yi) & BYTE_MASK) {
         return true;
     }
     dist[0] = Area_SampleHeight(x, y);
     xp      = (xi + 1);
-    if (func_8019D20C(xp, yi) & 0xFF) {
+    if (func_8019D20C(xp, yi) & BYTE_MASK) {
         return true;
     }
     dist[1] = Area_SampleHeight(x + 0x10000, y);
     yp      = (yi + 1);
-    if (func_8019D20C(xi, yp) & 0xFF) {
+    if (func_8019D20C(xi, yp) & BYTE_MASK) {
         return true;
     }
     y2      = y + 0x10000;
     dist[2] = Area_SampleHeight(x, y2);
-    if (func_8019D20C(xp, yp) & 0xFF) {
+    if (func_8019D20C(xp, yp) & BYTE_MASK) {
         return true;
     }
     dist[3] = Area_SampleHeight(x + 0x10000, y2);

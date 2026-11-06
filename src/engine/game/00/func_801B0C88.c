@@ -10,7 +10,7 @@ MATCH void func_801B0C88(void) {
 
     total = Party_CountOrder(0);
     index = 0;
-    if ((total & 0xFF) > 0) {
+    if ((total & BYTE_MASK) > 0) {
         do {
             sel = g_CharSlot[D_80144F5A[index]];
             if (g_Characters[sel].status & STATUS_POISONED) {
@@ -18,7 +18,7 @@ MATCH void func_801B0C88(void) {
                 goto store3;
             }
             index++;
-        } while (index < (total & 0xFF));
+        } while (index < (total & BYTE_MASK));
     }
     if (!(g_GameFlags & 0x200)) {
         flag = D_80144956;

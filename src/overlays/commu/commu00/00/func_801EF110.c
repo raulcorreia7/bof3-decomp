@@ -13,7 +13,7 @@ MATCH void func_801EF110(s32 battle_count) {
 
     dec = (g_BattleCount - D_801455B4) / 5u;
     if ((u16)dec != 0u) {
-        doubled_battle_count = (battle_count & 0xFF) * 2;
+        doubled_battle_count = (battle_count & BYTE_MASK) * 2;
         total                = 0;
         /* FAKE: the local copy of the compared kind is required; the bare
          * literal measures 98.46. */

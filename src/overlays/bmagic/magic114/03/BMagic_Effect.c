@@ -168,7 +168,7 @@ MATCH void func_801F0D6C(void) {
 }
 
 MATCH void func_801F0E4C(void) {
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         func_801E5988();
         return;
     }

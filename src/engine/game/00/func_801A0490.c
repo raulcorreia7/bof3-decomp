@@ -6,9 +6,9 @@ MATCH u8* func_801A0490(s32 map_x, s32 map_y, s32 table_index) {
     u8* entry;
     u8* cursor;
 
-    entry  = D_80181164[table_index & 0xFFFF];
-    x      = map_x & 0xFF;
-    y      = map_y & 0xFF;
+    entry  = D_80181164[table_index & HALF_MASK];
+    x      = map_x & BYTE_MASK;
+    y      = map_y & BYTE_MASK;
     cursor = entry + 3;
 loop_1:
     if (x < *entry) {

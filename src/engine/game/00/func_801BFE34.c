@@ -8,7 +8,7 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
     u8  key;
     u8* record;
 
-    mode              = D_801CD78D[(work_mode & 0xFF) * 4];
+    mode              = D_801CD78D[(work_mode & BYTE_MASK) * 4];
     D_80143F24        = work_kind;
     D_80143F28        = work_index;
     g_BattleScrollDir = mode;
@@ -22,13 +22,13 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
             TASK_SET(record);
             key = record[0x79];
             while (1) {
-                if (D_80144F5D[kind & 0xFF] == key)
+                if (D_80144F5D[kind & BYTE_MASK] == key)
                     break;
                 kind += 1;
-                if ((kind & 0xFF) >= 3U)
+                if ((kind & BYTE_MASK) >= 3U)
                     break;
             }
-            kind &= 0xFF;
+            kind &= BYTE_MASK;
             func_801BF5A8(D_80143F24, D_80143F28, kind);
             kind <<= 3;
             FIELD(s32, D_80143F2C, kind) = g_Task->pos.x.fixed;

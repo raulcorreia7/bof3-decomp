@@ -5,7 +5,7 @@ MATCH void func_801B690C(void) {
     Actor* work;
     u16    value;
 
-    if ((Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & 0xFF) != 0xA0) {
+    if ((Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) != 0xA0) {
         return;
     }
 

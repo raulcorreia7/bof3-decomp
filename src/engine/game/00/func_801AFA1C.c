@@ -32,10 +32,10 @@ NON_MATCHING void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4,
     stack_28 = (u8)arg6;
     if (val8 != 0) {
         val7 = stack_28;
-        val3 = val8 & 0xFF;
+        val3 = val8 & BYTE_MASK;
         val6 = val8;
         do {
-            val2 = val4 & 0xFFFF;
+            val2 = val4 & HALF_MASK;
             if (stack_10[val2] != 0) {
                 val5 = &g_GfxPrimCursor;
                 val5 = (u8**)g_GfxPrimCursor;
@@ -51,12 +51,12 @@ NON_MATCHING void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4,
                 GFX_AddPrim(1U, 0x10U);
             }
             val4 += 1;
-        } while ((u32)(val4 & 0xFFFF) < val6);
+        } while ((u32)(val4 & HALF_MASK) < val6);
     }
     val5 = &g_GfxPrimCursor;
     val5 = (u8**)g_GfxPrimCursor;
     SetPolyFT4((POLY_FT4*)val5);
-    tmp2                    = val8 & 0xFF;
+    tmp2                    = val8 & BYTE_MASK;
     FIELD(u8, val5, 0x14u)  = 0x60;
     FIELD(u8, val5, 0x24u)  = 0x60;
     FIELD(s16, val5, 0x8u)  = val0;
@@ -70,7 +70,7 @@ NON_MATCHING void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4,
     FIELD(u8, val5, 0x15u)  = 0x98;
     FIELD(u8, val5, 0x1Du)  = 0x9F;
     FIELD(u8, val5, 0x25u)  = 0x9F;
-    tmp3                    = val1 + ((((s32)((stack_28 * stack_18 * 2) + tmp2) / (s32)(tmp2 * 2)) & 0xFF) + 3);
+    tmp3                    = val1 + ((((s32)((stack_28 * stack_18 * 2) + tmp2) / (s32)(tmp2 * 2)) & BYTE_MASK) + 3);
     FIELD(u16, val5, 0xAu)  = tmp3;
     FIELD(u16, val5, 0x12u) = tmp3;
     tmp1                    = tmp3 + ((s32)(stack_20 * stack_28) / tmp2);

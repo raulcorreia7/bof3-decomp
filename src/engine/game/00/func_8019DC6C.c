@@ -40,7 +40,7 @@ MATCH void func_8019DC6C(void) {
         }
         rec += 1;
         i++;
-    } while ((i & 0xFF) < 8u);
+    } while ((i & BYTE_MASK) < 8u);
     if (g_Task->unk_09 >= 12u) {
         state->offset_02 += 0x80;
     } else {

@@ -8,7 +8,7 @@ MATCH void func_800A8BD0(void) {
     work  = (u8*)D_801EB4E0;
     saved = TASK_BYTES;
     TASK_SET(work);
-    Actor_SelectScript((work[8] + 4) & 0xFF);
+    Actor_SelectScript((work[8] + 4) & BYTE_MASK);
     TASK_SET(saved);
     func_801E5988();
 }

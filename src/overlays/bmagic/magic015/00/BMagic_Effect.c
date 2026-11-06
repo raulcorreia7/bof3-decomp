@@ -72,7 +72,7 @@ INCLUDE_ASM(func_801EFA28);
 INCLUDE_ASM(func_801EFAE4);
 
 MATCH void func_801EFB90(void) {
-    if ((func_8014DAEC() & 0xFF) != 0u) {
+    if ((func_8014DAEC() & BYTE_MASK) != 0u) {
         g_Task->header.step += 1u;
     }
 }
@@ -112,7 +112,7 @@ MATCH void func_801EFF1C(void) {
 INCLUDE_ASM(func_801EFFC0);
 
 MATCH void func_801F014C(void) {
-    if ((func_8014DAEC() & 0xFF) != 0u) {
+    if ((func_8014DAEC() & BYTE_MASK) != 0u) {
         g_Task->header.step += 1u;
     }
 }

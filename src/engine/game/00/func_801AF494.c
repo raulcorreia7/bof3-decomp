@@ -20,7 +20,7 @@ MATCH bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 re
             if (index != ITEM_FAERIE_TIARA) {
                 return true;
             }
-            if ((Area_GetCellCode(D_80145EC6, D_80145ECA) & 0xFF) == 0xAE) {
+            if ((Area_GetCellCode(D_80145EC6, D_80145ECA) & BYTE_MASK) == 0xAE) {
                 /* probe matched: the predicate holds */
                 goto ret1;
             }
@@ -38,7 +38,7 @@ MATCH bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 re
             }
             return false;
         case 4:
-            if (((Item_GetEquipability(record_kind, record_index) & 0xFF) >> record_bit) & 1) {
+            if (((Item_GetEquipability(record_kind, record_index) & BYTE_MASK) >> record_bit) & 1) {
                 /* selected record bit set */
                 goto ret1;
             }

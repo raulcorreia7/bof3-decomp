@@ -27,7 +27,7 @@ NON_MATCHING void func_801EEC70(void) {
     g_Task->pos.z.raw = span;
     g_Task->unk_0B    = 0;
     g_Task->header.mode += 1;
-    offset  = (Battle_AllocEffect(1, 0xA) & 0xFF) * BATTLE_EFFECT_STRIDE;
+    offset  = (Battle_AllocEffect(1, 0xA) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     counter = 0;
     value   = 1;
     do {

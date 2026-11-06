@@ -423,10 +423,10 @@ MATCH void func_801F2D5C(const s32* center, s32 radius) {
     tbl33fc = (s32*)D_801F33FC;
     tbl340c = (s32*)D_801F340C;
     do {
-        table_index = i & 0xFF;
+        table_index = i & BYTE_MASK;
         func_801F2E04(center, radius, (table_index << 10), tbl33fc[table_index], tbl340c[table_index]);
         i += 1;
-    } while (((i & 0xFF)) < 4u);
+    } while (((i & BYTE_MASK)) < 4u);
 }
 
 MATCH void func_801F2E04(const s32* center, s32 radius, u16 angle, s32 offset_x, s32 offset_y) {
@@ -445,7 +445,7 @@ MATCH void func_801F2E04(const s32* center, s32 radius, u16 angle, s32 offset_x,
 
     i = 0;
     do {
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 2, 896, 256) & 0xFFFF, 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 2, 896, 256) & HALF_MASK, 0);
         Area_AddCellPrim(((s32*)center)[0] + offset_x, ((s32*)center)[1] + offset_y, 0, 0x18);
         packet = (POLY_F3*)g_GfxPrimCursor;
         SetPolyF3(packet);
@@ -460,7 +460,7 @@ MATCH void func_801F2E04(const s32* center, s32 radius, u16 angle, s32 offset_x,
         packet->y2 = screen1[1];
         setRGB0(packet, 128, 128, 128);
         Area_AddCellPrim(((s32*)center)[0] + offset_x, ((s32*)center)[1] + offset_y, 0, 0x18);
-    } while (((i & 0xFF)) < 4u);
+    } while (((i & BYTE_MASK)) < 4u);
 }
 
 MATCH void func_801F300C(void) {
@@ -566,7 +566,7 @@ MATCH void func_801F3360(void) {
     s32        actor_slot;
     ActorSlot* slot;
 
-    actor_slot = Actor_FindFreeSlot() & 0xFF;
+    actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (actor_slot == GAME_NONE) {
         return;
     }

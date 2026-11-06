@@ -26,22 +26,22 @@ MATCH void func_801B3768(void) {
         selector = packed;
         low      = selector;
         if (low == GAME_NONE) {
-            func_801B5E58((high & 0xFF) * 0x28);
+            func_801B5E58((high & BYTE_MASK) * 0x28);
             current_kind = g_Actors[g_GameState->slot_12D].unk_05;
             if (current_kind != low) {
                 SYS_SetFlag(D_80144FC4, current_kind);
             }
             D_80145038 += 1;
         } else {
-            row   = Item_GetRecord(low, high & 0xFF);
+            row   = Item_GetRecord(low, high & BYTE_MASK);
             index = 0;
             do {
-                byte_index                     = index & 0xFF;
+                byte_index                     = index & BYTE_MASK;
                 g_TextVariables[0][byte_index] = row[byte_index];
                 index += 1;
-            } while ((index & 0xFF) < 0xCU);
+            } while ((index & BYTE_MASK) < 0xCU);
             D_801490E4[0] = 0;
-            if (Item_Add(selector, high & 0xFF, 1, 0) & 0xFF) {
+            if (Item_Add(selector, high & BYTE_MASK, 1, 0) & BYTE_MASK) {
                 kind = g_Actors[g_GameState->slot_12D].unk_05;
                 if (kind != GAME_NONE) {
                     SYS_SetFlag(D_80144FC4, kind);

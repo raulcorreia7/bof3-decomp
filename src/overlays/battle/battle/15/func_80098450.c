@@ -82,7 +82,7 @@ MATCH void func_80098450(void) {
     if (old_cursor != panel->group_cursor) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    handle = Resource_GetText(Item_GetDescription(D_8014857A, D_801C893C[D_8014857A][D_8014857C]) & 0xFFFF);
+    handle = Resource_GetText(Item_GetDescription(D_8014857A, D_801C893C[D_8014857A][D_8014857C]) & HALF_MASK);
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = handle;
     if (((MenuChoicePanel*)g_BattleChoicePanel)->confirm_gate != 0) {
         return;
@@ -115,7 +115,7 @@ MATCH void func_80098450(void) {
     if ((g_InputPressed & D_80145AC2) != 0u) {
         value                          = D_801C893C[D_8014857A][D_8014857C] + (D_8014857A << 8);
         *(u16*)((char*)D_801EB4D8 + 2) = value;
-        if ((func_801AF494(D_80148578, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & 0xFF) == 0) {
+        if ((func_801AF494(D_80148578, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;
         }

@@ -7,6 +7,6 @@ MATCH void GFX_FreeAllPaletteSlots(void) {
     s32 index;
 
     for (index = 0; index < 8; index++) {
-        GFX_FreePaletteSlot(index & 0xFF);
+        GFX_FreePaletteSlot(index & BYTE_MASK);
     }
 }

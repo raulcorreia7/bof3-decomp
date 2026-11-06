@@ -11,7 +11,7 @@ MATCH s32 func_801C7064(s32 x, s32 y, s32 reach, s32 height) {
     s32 base_x;
     s32 base_y;
 
-    step  = ((reach & 0xFF) + 1) << 14;
+    step  = ((reach & BYTE_MASK) + 1) << 14;
     prev  = step;
     count = 0;
     do {
@@ -31,9 +31,9 @@ MATCH s32 func_801C7064(s32 x, s32 y, s32 reach, s32 height) {
         } else {
             return 0;
         }
-    } while ((count & 0xFF) < 4);
+    } while ((count & BYTE_MASK) < 4);
     base_x = x + prev;
     base_y = y + step;
     func_801C71C4(halves, base_x, base_y, Area_SampleHeight(base_x, base_y) << 0x10);
-    return ((s16)halves[1] - (height & 0xFF)) >= 8;
+    return ((s16)halves[1] - (height & BYTE_MASK)) >= 8;
 }

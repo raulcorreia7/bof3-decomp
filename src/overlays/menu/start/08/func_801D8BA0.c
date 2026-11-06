@@ -12,11 +12,11 @@ MATCH void func_801D8BA0(void) {
     cell  = &D_80148654;
     temp  = *cell - 1;
     *cell = temp;
-    if (!(temp & 0xFF)) {
+    if (!(temp & BYTE_MASK)) {
         func_801D96D4();
         i   = 0;
         off = 0x90;
-        while (i < (Party_CountOrder(0) & 0xFF)) {
+        while (i < (Party_CountOrder(0) & BYTE_MASK)) {
             i++;
             temp             = off;
             D_80148333[temp] = 4;

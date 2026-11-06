@@ -26,10 +26,10 @@ loop_top:
     route  = (work->direction_08 + route) & 7;
     word   = VOL(u32, FIELD(u32, work, 0x70u));
     offset = route * 2;
-    pos_x  = work->pos.x.fixed + g_FacingSteps[route].x * (steps = (word & 0xFF) + 1);
+    pos_x  = work->pos.x.fixed + g_FacingSteps[route].x * (steps = (word & BYTE_MASK) + 1);
     pos_y  = work->pos.y.fixed + D_80181B98[offset] * steps;
-    if ((func_801C3E40(pos_x, pos_y, (u8)word, COORD_INT(g_Task->pos.z)) & 0xFF) != 0u ||
-        (func_801C472C(pos_x, pos_y, g_Task->state_70.byte, 0xD0, 0) & 0xFF) == 0u) {
+    if ((func_801C3E40(pos_x, pos_y, (u8)word, COORD_INT(g_Task->pos.z)) & BYTE_MASK) != 0u ||
+        (func_801C472C(pos_x, pos_y, g_Task->state_70.byte, 0xD0, 0) & BYTE_MASK) == 0u) {
         count++;
         if (count < 8) {
             /* Retry the probe from the next direction. */
@@ -40,9 +40,10 @@ loop_top:
         vals[0] = COORD_INT(g_Task->pos.z);
         for (iter = 0; iter < 4; iter++) {
             index_copy = iter * 2 + 1;
-            px         = &g_FacingSteps[(index_copy & 0xFF)].x;
-            py         = &D_80181B98[(index_copy & 0xFF) * 2];
-            if ((func_801B8C64(g_Task->pos.x.fixed + *px, g_Task->pos.y.fixed + *py, &vals[found], 1) & 0xFF) != 0u) {
+            px         = &g_FacingSteps[(index_copy & BYTE_MASK)].x;
+            py         = &D_80181B98[(index_copy & BYTE_MASK) * 2];
+            if ((func_801B8C64(g_Task->pos.x.fixed + *px, g_Task->pos.y.fixed + *py, &vals[found], 1) & BYTE_MASK) !=
+                0u) {
                 found++;
             }
             if (found == 2) {

@@ -16,8 +16,8 @@ MATCH void func_801D4B44(void) {
         row    = g_InventoryIds[0];
         mirror = row + 0x200;
         j      = 0;
-        if (127 - (i & 0xFF) > 0) {
-            n   = 127 - (i & 0xFF);
+        if (127 - (i & BYTE_MASK) > 0) {
+            n   = 127 - (i & BYTE_MASK);
             nxt = row + 1;
             do {
                 c0 = *row;

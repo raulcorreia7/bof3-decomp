@@ -13,6 +13,6 @@ MATCH void func_801E8DB4(MenuPanelTask* task) {
         GetGraphType();
     }
     GFX_AddDrawMode(0xF);
-    Menu_DrawPanelIcon((task->x + 9) & 0xFFFF, (task->y + 5) & 0xFFFF, (task->unk_0A + 3) & 0xFF, 0x1E,
-                       (GetClut(16, 480) & 0xFFFF), 128);
+    Menu_DrawPanelIcon((task->x + 9) & HALF_MASK, (task->y + 5) & HALF_MASK, (task->unk_0A + 3) & BYTE_MASK, 0x1E,
+                       (GetClut(16, 480) & HALF_MASK), 128);
 }

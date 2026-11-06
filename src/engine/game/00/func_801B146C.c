@@ -38,8 +38,8 @@ MATCH void func_801B146C(void) {
     }
     func_801C3598();
     func_801C2BEC();
-    if (!(func_801C3790(0) & 0xFF) && !(func_801C37DC(0) & 0xFF) && !(func_801C2AAC() & 0xFF)) {
-        if (func_801C2B4C() & 0xFF) {
+    if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(func_801C2AAC() & BYTE_MASK)) {
+        if (func_801C2B4C() & BYTE_MASK) {
             work_b = g_Task;
             Area_SetCellPalette(COORD_INT(work_b->pos.x), COORD_INT(work_b->pos.y));
             return;
@@ -47,7 +47,7 @@ MATCH void func_801B146C(void) {
         state_flags = g_GameRequestFlags;
         if (state_flags & 1) {
             work_c = g_Task;
-            if ((Area_GetCellCode(COORD_INT(work_c->pos.x), COORD_INT(work_c->pos.y)) & 0xFF) == 0xAF) {
+            if ((Area_GetCellCode(COORD_INT(work_c->pos.x), COORD_INT(work_c->pos.y)) & BYTE_MASK) == 0xAF) {
                 func_801B5BDC(g_Task->direction_08);
                 Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
                 g_GameEntryMode   = 0;
@@ -60,7 +60,7 @@ MATCH void func_801B146C(void) {
                 goto block_46; /* re-arm the frame flags */
             }
             work_d = g_Task;
-            if ((Area_GetCellCode(COORD_INT(work_d->pos.x), COORD_INT(work_d->pos.y)) & 0xFF) == 0xC0) {
+            if ((Area_GetCellCode(COORD_INT(work_d->pos.x), COORD_INT(work_d->pos.y)) & BYTE_MASK) == 0xC0) {
                 work_e = g_Task;
                 func_801A0048(COORD_INT(work_e->pos.x), COORD_INT(work_e->pos.y));
             }
@@ -78,7 +78,7 @@ MATCH void func_801B146C(void) {
         }
     block_24:
         work_g = g_Task;
-        if (func_801C39D8(work_g->pos.x.fixed, work_g->pos.y.fixed, work_g->state_70.byte, 0xA7, 0U) & 0xFF) {
+        if (func_801C39D8(work_g->pos.x.fixed, work_g->pos.y.fixed, work_g->state_70.byte, 0xA7, 0U) & BYTE_MASK) {
             work_h = g_Task;
             func_801A0048(COORD_INT(work_h->pos.x), COORD_INT(work_h->pos.y));
             g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
@@ -86,7 +86,7 @@ MATCH void func_801B146C(void) {
             goto block_46; /* re-arm the frame flags */
         }
         work_i = g_Task;
-        if (!(func_801C472C(work_i->pos.x.fixed, work_i->pos.y.fixed, work_i->state_70.byte, 0xA6, 0U) & 0xFF)) {
+        if (!(func_801C472C(work_i->pos.x.fixed, work_i->pos.y.fixed, work_i->state_70.byte, 0xA6, 0U) & BYTE_MASK)) {
             Actor_RequestScript(g_Task->direction_08);
             D_8014504A = 0;
             Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, 4U);
@@ -112,7 +112,7 @@ MATCH void func_801B146C(void) {
         g_AreaCameraStep       = 0;
         g_AreaCameraHeightStep = 0;
         if (!(g_GameRequestFlags & 1) && !(g_AreaWalkFlags & (0x20 | AREA_WALK_ENTRY_PENDING))) {
-            if (Area_CanStartEncounter() & 0xFF) {
+            if (Area_CanStartEncounter() & BYTE_MASK) {
                 g_GameState->counter_11C.u8_value = 3U;
                 Actor_RequestScript(g_Task->direction_08);
                 g_AreaWalkFlags |= AREA_WALK_TRANSITION;
@@ -124,7 +124,7 @@ MATCH void func_801B146C(void) {
         }
     block_38:
         g_GameState->counter_11C.u8_value = 3U;
-        if (!(func_801B5F68(level_flag) & 0xFF)) {
+        if (!(func_801B5F68(level_flag) & BYTE_MASK)) {
             work_k = g_Task;
             if (((s32 (*)(s32, s32))func_801A79A4)(work_k->pos.x.fixed, work_k->pos.y.fixed) != 0) {
                 func_801B5BDC(g_Task->direction_08);

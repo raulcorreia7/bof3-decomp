@@ -45,7 +45,7 @@ INCLUDE_ASM(func_801EFDD4);
 
 MATCH void func_801F0008(void) {
     func_8014D290();
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         func_801E5988();
     }
 }

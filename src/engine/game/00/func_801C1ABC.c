@@ -24,7 +24,7 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
     func_801C1840();
     slot = 0;
     if ((s32)g_PartySize > 0) {
-        key   = character_id & 0xFF;
+        key   = character_id & BYTE_MASK;
         limit = g_PartySize;
     search1:
         if (D_80144F5D[slot] == key)
@@ -50,7 +50,7 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
     }
     slot = 0;
     if ((s32)g_PartySize > 0) {
-        key   = character_id & 0xFF;
+        key   = character_id & BYTE_MASK;
         limit = g_PartySize;
     search2:
         if (D_80144F5A[slot] == key)
@@ -100,7 +100,7 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
         } while (slot < (s32)g_PartySize - 1);
     }
     ((u8*)g_BattlePartyBattlers)[((s32)g_PartySize - 1) * BATTLE_PARTY_STRIDE] = 0;
-    Party_ClearBattlerState(((s32)g_PartySize - 1) & 0xFF);
+    Party_ClearBattlerState(((s32)g_PartySize - 1) & BYTE_MASK);
     if (g_PartySize == 3) {
         if (g_PartyFormation >= 3u)
             g_PartyFormation = 0;

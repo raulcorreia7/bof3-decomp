@@ -5,5 +5,5 @@
  * that owns the g_AreaCameraAngle.vy state cell; the returned status is masked to a byte.
  */
 MATCH s32 Area_TurnCameraY(s16 target_degrees, s8 step_degrees) {
-    return Area_StepCameraY(DEG(target_degrees) & ANGLE_MASK, DEG(step_degrees)) & 0xFF;
+    return Area_StepCameraY(DEG(target_degrees) & ANGLE_MASK, DEG(step_degrees)) & BYTE_MASK;
 }

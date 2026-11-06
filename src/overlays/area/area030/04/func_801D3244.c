@@ -24,7 +24,7 @@ MATCH void func_801D3244(s16 panel_x, s16 panel_y, u8 panel_width, s8 u_offset, 
 
     func_801E0C80(0, layer);
     sprite     = (SPRT*)func_801E0DCC(0x1C, layer, x, y);
-    w          = width & 0xFF;
+    w          = width & BYTE_MASK;
     sprite->w  = w;
     sprite->u0 = sprite->u0 + u_shift;
 

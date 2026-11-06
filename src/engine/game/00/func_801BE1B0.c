@@ -22,7 +22,7 @@ NON_MATCHING s32 func_801BE1B0(u32 index) {
     STACK_PADS(u8, 16);
 
     lists   = FIELD_PTR(u8*, GAME_TILE_RUN(g_GameAreaId), 0x14);
-    ids     = lists[index & 0xFF];
+    ids     = lists[index & BYTE_MASK];
     command = *ids++;
     kind    = command & 0xC0;
     count   = command & 0xF;

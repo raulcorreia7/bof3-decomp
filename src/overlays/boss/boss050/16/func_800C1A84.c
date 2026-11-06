@@ -5,7 +5,7 @@ MATCH void func_800C1A84(void) {
 
     saved = (PartyBattler*)g_Task;
     TASK_SET((D_801EC2E0->target.bytes));
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         saved->header.mode++;
     }
     TASK_SET(saved);

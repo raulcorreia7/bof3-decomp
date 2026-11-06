@@ -45,7 +45,7 @@ MATCH void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u1
     }
     Char_RebuildStats(&preview);
     for (i = 0; i < 4; i++) {
-        j         = i & 0xFF;
+        j         = i & BYTE_MASK;
         flags[j]  = 0;
         values[j] = *after[j];
         if (*before[j] < *after[j])

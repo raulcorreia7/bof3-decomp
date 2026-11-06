@@ -7,7 +7,7 @@ MATCH void func_801F2CF0(void) {
     actor         = g_Task;
     timer         = actor->unk_2C - 1;
     actor->unk_2C = timer;
-    if (!(timer & 0xFFFF)) {
+    if (!(timer & HALF_MASK)) {
         actor->unk_2C      = 12;
         actor->header.mode = actor->header.mode + 1;
     }

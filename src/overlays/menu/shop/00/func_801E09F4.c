@@ -29,13 +29,13 @@ MATCH void func_801E09F4(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         next       = D_801483EE + 1;
         D_801483EE = next;
-        if ((next & 0xFF) >= 3U) {
+        if ((next & BYTE_MASK) >= 3U) {
             D_801483EE = 0;
         }
     }
     if (g_InputPressed & D_80145AC2) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
-        raw = D_801483EE & 0xFF;
+        raw = D_801483EE & BYTE_MASK;
         if (raw == 0) {
             flag       = &D_80148652;
             count      = *flag;

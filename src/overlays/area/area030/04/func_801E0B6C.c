@@ -12,5 +12,5 @@ MATCH s32 func_801E0B6C(void) {
             total += func_801E0ABC(i, g_FishBestCatch[i]);
         }
     }
-    return total & 0xFFFF;
+    return total & HALF_MASK;
 }

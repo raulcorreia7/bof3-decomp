@@ -45,12 +45,12 @@ NON_MATCHING void func_8015A9A4(void) {
     FIELD(u16, temp_a1_42, 0x32u) = temp_a0_51;
     if (g_AreaDrawMode == 4) {
         if (D_8014933F != 0) {
-            var_v0_66 = ((s32)FIELD(u16, temp_a1_42, 0x34u) >> 0xF) & 0xFF;
+            var_v0_66 = ((s32)FIELD(u16, temp_a1_42, 0x34u) >> 0xF) & BYTE_MASK;
         } else {
-            var_v0_66 = ((s32)FIELD(u16, temp_a1_42, 0x38u) >> 0xF) & 0xFF;
+            var_v0_66 = ((s32)FIELD(u16, temp_a1_42, 0x38u) >> 0xF) & BYTE_MASK;
         }
     } else {
-        var_v0_66 = (((u16)FIELD(u16, temp_a1_42, 0x3Eu) >> 5) & 0xFF) ^ 0x80;
+        var_v0_66 = (((u16)FIELD(u16, temp_a1_42, 0x3Eu) >> 5) & BYTE_MASK) ^ 0x80;
     }
     FIELD(u16, temp_a1_42, 0x32u) = (u16)(temp_a0_51 | var_v0_66);
     if (!(FIELD(u8, (*(void**)((u8*)(g_Task) + 0x54)), 0x3u) & 0x10)) {
@@ -76,7 +76,7 @@ NON_MATCHING void func_8015A9A4(void) {
         return;
     }
     *(u8*)(temp_a1_132) = (u8)(*(u8*)(temp_a1_132) & 0x7F);
-    temp_a0_192         = D_8014832D & 0xFF;
+    temp_a0_192         = D_8014832D & BYTE_MASK;
     if (temp_a0_192 < 0x28U) {
         D_8014832D += 1;
         D_8014828C[temp_a0_192] = (s32)g_Task;

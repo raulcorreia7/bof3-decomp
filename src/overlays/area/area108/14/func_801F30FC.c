@@ -11,7 +11,7 @@ MATCH void func_801F30FC(void) {
     work->origin_y += (work->normal.vy * 2);
     work->origin_z += (work->normal.vz * 2);
     work->half_size = (work->half_size + 0x80u);
-    if (!(count & 0xFF)) {
+    if (!(count & BYTE_MASK)) {
         ((AreaSprite*)D_801F63EC)->flags_02 = 0x40u;
         ((AreaSprite*)D_801F63EC)->flags_01 = (((AreaSprite*)D_801F63EC)->flags_01 + 1u);
     }

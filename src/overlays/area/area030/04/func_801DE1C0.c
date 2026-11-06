@@ -64,7 +64,7 @@ NON_MATCHING void func_801DE1C0(void) {
                 ROW_ROLL    = roll;
                 roll        = ROW_ROLL;
                 limit       = *(LIMIT_TABLE + (g_Task->unk_06 * FISHING_KIND_STRIDE));
-                roll_masked = roll & 0xFFFF;
+                roll_masked = roll & HALF_MASK;
                 if (limit < roll_masked) {
                     roll = roll - (limit >> 1);
                     goto loop_4; /* retry the roll store after subtracting the kind's half limit */
@@ -84,7 +84,7 @@ NON_MATCHING void func_801DE1C0(void) {
                 if (kind != 0x15) {
                     limits = MEM_PTR(u8, D_801E2AD7) + (kind * FISHING_KIND_STRIDE);
                     if (ROW_ROLL == *limits) {
-                        steps = (*limits / 10) & 0xFF;
+                        steps = (*limits / 10) & BYTE_MASK;
                         walk  = 0;
                         if (steps >= 0) {
                             walk_limit = steps;

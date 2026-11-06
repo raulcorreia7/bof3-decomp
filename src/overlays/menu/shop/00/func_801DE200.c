@@ -31,7 +31,7 @@ MATCH void func_801DE200(void) {
      * Party_CountOrder as u8(u8), so the call is made through a word-typed
      * pointer. */
     count         = ((s32 (*)(u8))Party_CountOrder)(0);
-    search_limit  = count & 0xFF;
+    search_limit  = count & BYTE_MASK;
     record        = &g_Characters[0].character_id;
     record_offset = 0;
     D_801E6250    = 0;
@@ -49,15 +49,15 @@ MATCH void func_801DE200(void) {
                 }
             }
             if (order_index == search_limit) {
-                standby_total                    = D_801E6250;
-                D_801E6250                       = standby_total + 1;
-                D_801E6244[standby_total & 0xFF] = *record;
+                standby_total                         = D_801E6250;
+                D_801E6250                            = standby_total + 1;
+                D_801E6244[standby_total & BYTE_MASK] = *record;
             }
         }
         record += 0xA4;
         record_offset += 0xA4;
     } while ((s32)record < (s32)&g_Characters[PARTY_RECORD_COUNT].character_id);
-    party_count = count & 0xFF;
+    party_count = count & BYTE_MASK;
     marked      = 0;
     if (party_count > 0) {
         flag_value = 1;

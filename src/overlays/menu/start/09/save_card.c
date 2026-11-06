@@ -173,7 +173,7 @@ MATCH void CardPollInfo(void) { /* func_801EF040 */
             g_SaveCardStatus = status;
             count -= 1;
         }
-    } while (count & 0xFF);
+    } while (count & BYTE_MASK);
 }
 
 /* Retries card load for up to 60 frames and stores its event result. */
@@ -193,7 +193,7 @@ MATCH void CardPollLoad(void) { /* func_801EF0B4 */
             g_SaveCardStatus = CARD_EVENT_PENDING;
             count -= 1;
         }
-    } while (count & 0xFF);
+    } while (count & BYTE_MASK);
 }
 
 /* Retries card clear for up to 60 frames and stores its event handle. */
@@ -212,7 +212,7 @@ MATCH void func_801EF148(void) {
             g_SaveCardStatus = status;
             count -= 1;
         }
-    } while (count & 0xFF);
+    } while (count & BYTE_MASK);
 }
 
 /* Clears the selected card and records its event result. */
@@ -263,7 +263,7 @@ MATCH void CardBuildFileHeader(s8 magic_lo, s8 magic_hi, char* kind_name) { /* f
     }
     strcpy(MEM_PTR(char, SAVE_FRAME_ADDR + 4), kind_name);
     *MEM_PTR(SaveIconPalette, 0x800C1860) = *MEM_PTR(SaveIconPalette, D_801EFE68);
-    switch (magic_hi & 0xFF) {
+    switch (magic_hi & BYTE_MASK) {
         case 17:
             *MEM_PTR(SaveIconFrame, 0x800C1880) = *MEM_PTR(SaveIconFrame, D_801EFE68 + 0x2C);
             *MEM_PTR(SaveIconFrame, 0x800C1900) = *MEM_PTR(SaveIconFrame, D_801EFE94);
@@ -308,7 +308,7 @@ MATCH s32 CardOpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
         }
         VSync(1);
         retries++;
-    } while ((retries & 0xFF) < 120U);
+    } while ((retries & BYTE_MASK) < 120U);
     CardPollInfo();
     CardPollSoftwareEvents();
     if (g_SaveCardStatus != CARD_EVENT_OK) {
@@ -322,14 +322,14 @@ MATCH s32 CardOpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
     CardScanDirectory(D_801EEC14, 6);
     retries = 0;
     do {
-        total += D_8018E990[retries & 0xFF].size;
+        total += D_8018E990[retries & BYTE_MASK].size;
         if ((total + (port << 13)) > 0x1E000U) {
             g_SaveCardStatus = CARD_EVENT_CAPACITY;
         } else {
             g_SaveCardStatus = CARD_EVENT_ERROR;
         }
         retries++;
-    } while ((retries & 0xFF) < 15U);
+    } while ((retries & BYTE_MASK) < 15U);
     return -1;
 }
 
@@ -360,7 +360,7 @@ loop:
         if (mode == 2) {
             goto write_path; /* the mode 2 branch writes the frame */
         }
-        remain = count & 0xFF;
+        remain = count & BYTE_MASK;
         goto check; /* an unknown mode reuses the counter test */
     }
 read_path:
@@ -385,12 +385,12 @@ retry:
         close(fd);
         return -1;
     }
-    if ((count & 0xFF) == 0) {
+    if ((count & BYTE_MASK) == 0) {
         close(fd);
         return -1;
     }
     count--;
-    remain = count & 0xFF;
+    remain = count & BYTE_MASK;
 check:
     if (remain == 0) {
         return 0;

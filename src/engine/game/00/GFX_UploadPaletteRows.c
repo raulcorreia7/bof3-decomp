@@ -35,8 +35,8 @@ MATCH void GFX_UploadPaletteRows(void) {
     }
     color_index = 1u;
     if (color_index < (s_PaletteFadeColorCounts[table_index] << 4)) {
-        colors    = g_GraphicsPaletteDst + (start & 0xFF) * 256u;
-        cell_base = product & 0xFF;
+        colors    = g_GraphicsPaletteDst + (start & BYTE_MASK) * 256u;
+        cell_base = product & BYTE_MASK;
         loop_work = work;
         do {
             colors[cell_base + color_index] |= 0x8000u;

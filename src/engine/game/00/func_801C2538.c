@@ -17,7 +17,7 @@ MATCH void func_801C2538(void) {
         step           = 0x10;
         g_Task->unk_09 = step;
     }
-    g_Task->unk_09 = (g_Task->unk_09 / (rate & 0xFF));
+    g_Task->unk_09 = (g_Task->unk_09 / (rate & BYTE_MASK));
     if ((g_GameFlags & 0x1000) != 0) {
         g_Task->unk_09 *= 2;
     }

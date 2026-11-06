@@ -13,7 +13,7 @@ MATCH void func_801E9390(void) {
      * byte on every iteration; a plain scalar read repeats lui plus the load. */
     mode = &g_BattlePanelSlot;
     do {
-        index = i & 0xFF;
+        index = i & BYTE_MASK;
         if (*mode == index) {
             grow = g_BattlePanelWidths[index];
             if (grow < 8u) {
@@ -26,7 +26,7 @@ MATCH void func_801E9390(void) {
             }
         }
         i += 1;
-    } while ((i & 0xFF) < 7u);
+    } while ((i & BYTE_MASK) < 7u);
     task = g_MenuCurrentPanel;
     func_801D7A40(task->x, task->y);
 }

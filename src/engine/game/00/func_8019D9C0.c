@@ -26,7 +26,7 @@ loop:
     *dst2 = *dst2 << 9;
     dst += 8;
     dst2 += 8;
-    if (((count & 0xFF)) < 8U) {
+    if (((count & BYTE_MASK)) < 8U) {
         goto loop;
     }
 }

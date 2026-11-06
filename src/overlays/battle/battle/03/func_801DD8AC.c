@@ -9,7 +9,7 @@ MATCH void func_801DD8AC(u32 battler_index) {
     s32 character_offset;
     u16 flags;
 
-    battler_index &= 0xFF;
+    battler_index &= BYTE_MASK;
     off = battler_index * 320u;
     if ((((u8*)(g_BattlePartyBattlers))[off] & 1u) != 0u) {
         character_offset = g_BattlePartyBattlers[battler_index].character_index * PARTY_RECORD_STRIDE;

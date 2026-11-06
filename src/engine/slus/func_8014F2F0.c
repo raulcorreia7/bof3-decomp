@@ -26,7 +26,7 @@ MATCH void func_8014F2F0(void) {
         iteration++;
     } while (iteration < 5);
 
-    active_result = result & 0xFF;
+    active_result = result & BYTE_MASK;
     position      = (u16*)&g_AreaCameraAngle.vx;
     next_position = position + 2;
     for (;;) {
@@ -50,7 +50,7 @@ MATCH void func_8014F2F0(void) {
             break;
         }
         CallbackWait(1U);
-        active_result = result & 0xFF;
+        active_result = result & BYTE_MASK;
     }
 
     *(s16*)position          = -0x2AA;

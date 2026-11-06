@@ -31,7 +31,7 @@ MATCH void func_801EF214(void) {
                 }
             }
         }
-        if ((count & 0xFF) != 0) {
+        if ((count & BYTE_MASK) != 0) {
             level = &D_801455C4;
             wait  = (D_801F2514[*level] - total);
             if (wait <= 0) {

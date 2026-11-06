@@ -22,7 +22,7 @@ MATCH s32 func_801C7824(s16 from_x, s16 from_y, s16 to_x, s16 to_y) {
         while (total >= 0) {
             moved = 0;
             if ((s16)x != to_x) {
-                if (func_801C7608(x, y, x + step_x, y) & 0xFF) {
+                if (func_801C7608(x, y, x + step_x, y) & BYTE_MASK) {
                     x += step_x;
                     total--;
                     moved = 1;
@@ -32,7 +32,7 @@ MATCH s32 func_801C7824(s16 from_x, s16 from_y, s16 to_x, s16 to_y) {
                 return 1;
             }
             if ((s16)y != to_y) {
-                if (func_801C7608(x, y, x, y + step_y) & 0xFF) {
+                if (func_801C7608(x, y, x, y + step_y) & BYTE_MASK) {
                     y += step_y;
                     total--;
                     moved = 1;

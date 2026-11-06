@@ -14,14 +14,14 @@ MATCH void func_8019E5D4(void) {
     value = rand();
     {
         Actor* coord = g_Task;
-        coord->pos.x.fixed += value & 0xFFFF;
+        coord->pos.x.fixed += value & HALF_MASK;
     }
     value = rand();
     {
         Actor* record   = g_Task;
         record->gravity = -8;
         record->vz      = 0;
-        record->pos.y.fixed += value & 0xFFFF;
+        record->pos.y.fixed += value & HALF_MASK;
     }
     value = rand() & 3;
 

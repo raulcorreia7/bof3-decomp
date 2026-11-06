@@ -15,7 +15,7 @@ MATCH void func_801D408C(void) {
     count    = *counter;
     count    = count + 1;
     *counter = count;
-    if ((count & 0xFF) == 6) {
+    if ((count & BYTE_MASK) == 6) {
         if (D_801E60F4 != 0) {
             count      = D_80148651;
             *counter   = 0;

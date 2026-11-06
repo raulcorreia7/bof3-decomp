@@ -16,29 +16,29 @@ MATCH void func_801C1254(s32 ability_id, s32 party_slot) {
     Actor* next_5d;
 
     index = 0;
-    key   = ability_id & 0xFF;
+    key   = ability_id & BYTE_MASK;
     hint  = g_EmiLoadedCharacterIndex;
     base  = D_80181B34[0];
     entry = base + (hint & 0x7F) * 3;
     do {
-        if (entry[index & 0xFF] == key) {
+        if (entry[index & BYTE_MASK] == key) {
             /* The mode table hit leaves the loop with index at the match. */
             goto found;
         }
         index++;
-    } while ((index & 0xFF) < 3U);
+    } while ((index & BYTE_MASK) < 3U);
 found:
     GFX_FreePaletteFadeTarget(g_Task);
 
     first                      = g_Task;
-    masked                     = index & 0xFF;
+    masked                     = index & BYTE_MASK;
     first->unk_2C              = masked;
     value                      = MEM(s32, 0x8003B800u + masked * 4);
     first->active_flags        = 1;
     next                       = (u8*)g_Task + 0x27u;
     first->unk_4C              = value + (s32)MEM_PTR(s32, 0x8003B800u);
     next[0]                    = (party_slot + 0x78);
-    slot                       = party_slot & 0xFF;
+    slot                       = party_slot & BYTE_MASK;
     g_Task->unk_28             = 2;
     g_Task->unk_25             = 5;
     g_Task->unk_26             = (slot * 0x50);

@@ -79,14 +79,14 @@ loop_1:
         default:
             UI_DrawText((s16)var_s4, (s16)var_s6, (s32)var_s5, 1U, var_s0);
             temp_v1_122 = *var_s0;
-            if (((u32)(temp_v1_122 - 0x12) < 2U) || (var_v0_130 = var_s1 & 1, ((temp_v1_122 & 0xFF) == 0x15))) {
+            if (((u32)(temp_v1_122 - 0x12) < 2U) || (var_v0_130 = var_s1 & 1, ((temp_v1_122 & BYTE_MASK) == 0x15))) {
                 var_s0 += 1;
                 var_v0_130 = var_s1 & 1;
             }
             temp_v0_136 = var_s3 - 1;
             if (var_v0_130 != 0) {
                 var_s3 = temp_v0_136;
-                if (!(temp_v0_136 & 0xFF)) {
+                if (!(temp_v0_136 & BYTE_MASK)) {
                     var_s0 = var_s2;
                     var_s1 &= 0xFE;
                 }

@@ -27,6 +27,6 @@ MATCH void func_801E4E9C(MenuPanelTask* panel_task) {
         }
         i += 1;
         slot += 0xA4;
-    } while ((i & 0xFF) < 8U);
+    } while ((i & BYTE_MASK) < 8U);
     Menu_DrawPanelFrame(panel_task->x, panel_task->y, 0xD, 0xA);
 }

@@ -54,7 +54,7 @@ NON_MATCHING void func_800A0EC4(void) {
                 ((s32*)&dest->base.max_hp)[5] = ((s32*)&cell->stats.max_hp)[5];
                 ((s32*)&dest->base.max_hp)[6] = ((s32*)&cell->stats.max_hp)[6];
                 ((s32*)&dest->base.max_hp)[7] = ((s32*)&cell->stats.max_hp)[7];
-            } while ((u32)(index & 0xFF) < (u8)g_BattlePartyCount);
+            } while ((u32)(index & BYTE_MASK) < (u8)g_BattlePartyCount);
         }
         index = 0;
         func_800AAA74();
@@ -65,22 +65,22 @@ NON_MATCHING void func_800A0EC4(void) {
                 *(BattleStatBlockPart*)(dest + 0)    = *(BattleStatBlockPart*)(row_offset + (D_80145F20 + 0x20));
                 *(BattleStatBlockPart*)(dest + 0x10) = *(BattleStatBlockPart*)(row_offset + (D_80145F20 + 0x30));
                 index++;
-            } while ((u32)(index & 0xFF) < (u8)g_BattlePartyCount);
+            } while ((u32)(index & BYTE_MASK) < (u8)g_BattlePartyCount);
         }
         index = 0;
         func_800A4458();
         if (g_BattlePartyCount != 0) {
             do {
-                func_800A9BD8(index & 0xFF);
+                func_800A9BD8(index & BYTE_MASK);
                 index++;
-            } while ((u32)(index & 0xFF) < (u8)g_BattlePartyCount);
+            } while ((u32)(index & BYTE_MASK) < (u8)g_BattlePartyCount);
         }
     } else {
         cell_offset = (*state - 3) * 0x118;
         value       = D_801EB6D0[cell_offset];
         if (value != 0xFFFF) {
             rate = ((u16*)&D_800E4068)[D_801EB710[cell_offset] * 68] / 10;
-            if ((u32)(rate & 0xFFFF) < value) {
+            if ((u32)(rate & HALF_MASK) < value) {
                 D_801EB6D0[cell_offset] = value - rate;
                 row_offset              = (*state - 3) * 0x118;
                 D_801EB6F0[row_offset] =
@@ -93,7 +93,7 @@ NON_MATCHING void func_800A0EC4(void) {
             }
         }
     }
-    if (!(func_800A3A10(*(u8*)&g_BattleActiveBattler, g_BattleTarget) & 0xFF)) {
+    if (!(func_800A3A10(*(u8*)&g_BattleActiveBattler, g_BattleTarget) & BYTE_MASK)) {
         if ((u8)g_BattleTarget < 3U) {
             value = D_80145F18[g_BattleTarget][0];
         } else {

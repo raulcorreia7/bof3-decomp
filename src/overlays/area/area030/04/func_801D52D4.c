@@ -11,7 +11,7 @@ MATCH void func_801D52D4(void) {
 
     mask = 0;
     if (D_80145E93[0] >= 3) {
-        mask = (1u << g_Task->unk_06) & 0xFF;
+        mask = (1u << g_Task->unk_06) & BYTE_MASK;
     }
     func_801D7C10(0x58, 0x28, mask);
 

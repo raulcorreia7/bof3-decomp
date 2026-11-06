@@ -15,7 +15,7 @@ MATCH void func_801DD7CC(void) {
         if (g_InputPressed & PADLdown) {
             D_80144288 = 0xFF;
             D_801442BC = D_801442BC + 1;
-            if ((D_801442BC & 0xFFFF) >= 6U) {
+            if ((D_801442BC & HALF_MASK) >= 6U) {
                 D_801442BC = 0;
             }
         } else if (g_InputPressed & PADLup) {

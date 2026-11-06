@@ -16,7 +16,7 @@ MATCH s32 func_801C6DCC(void) {
         if (record->active != 0) {
             inner = 0;
             for (;;) {
-                if (inner >= (Party_CountOrder(1) & 0xFF)) {
+                if (inner >= (Party_CountOrder(1) & BYTE_MASK)) {
                     break;
                 }
                 if ((func_801C7824(D_80143F2E[inner].unk_00, D_80143F2E[inner].unk_04, *(s16*)(field - 4),

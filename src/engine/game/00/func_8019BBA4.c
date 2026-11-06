@@ -46,7 +46,7 @@ MATCH void func_8019BBA4(void) {
     }
     g_Task->vz += g_Task->gravity;
     COORD_INT(g_Task->pos.z) += g_Task->vz;
-    if ((func_8019C028() & 0xFF) == 0) {
+    if ((func_8019C028() & BYTE_MASK) == 0) {
         if ((s16)COORD_INT(g_Task->pos.z) < dist) {
             COORD_INT(g_Task->pos.z) = (u16)Area_SampleHeight(x, y);
             g_Task->vz               = 0;
@@ -62,7 +62,7 @@ MATCH void func_8019BBA4(void) {
                 limit = ABS(limit);
                 if (limit >= 16385) {
                     g_Task->header.mode = 4;
-                } else if ((func_8019C4F0(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & 0xFF) != 0) {
+                } else if ((func_8019C4F0(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) != 0) {
                     g_Task->header.mode = 4;
                 } else {
                     g_Task->option_flags = 0;

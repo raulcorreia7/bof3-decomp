@@ -276,12 +276,12 @@ MATCH void func_801F2C74(void) {
         dst[1]          = 0xC0000;
         dst[2]          = 0xB0000;
         dst[4]          = 0x20000;
-        angle           = (((i & 0xFF) << 12) / 3);
+        angle           = (((i & BYTE_MASK) << 12) / 3);
         ((s16*)dst)[10] = angle;
         func_801F304C((AreaTrail*)dst);
         dst += 0x26;
         i++;
-    } while ((i & 0xFF) < 3u);
+    } while ((i & BYTE_MASK) < 3u);
     SND_PlayCue(EMI_CUE_ID(2, 6));
     g_Task->unk_09 = 0x40;
     g_Task->header.mode++;
@@ -314,15 +314,15 @@ MATCH void func_801F2D5C(void) {
             *(s32*)(void*)(fld - 1) = z - 0x200;
             func_801F2E3C((AreaTrail*)arg);
             inner++;
-        } while ((inner & 0xFF) < 4u);
+        } while ((inner & BYTE_MASK) < 4u);
         func_801F2F0C(arg);
         fld += 0x26;
         outer++;
         arg += 0x26;
-    } while ((outer & 0xFF) < 3u);
+    } while ((outer & BYTE_MASK) < 3u);
     v              = (g_Task->unk_09 - 1);
     g_Task->unk_09 = v;
-    if ((v & 0xFF) == 0) {
+    if ((v & BYTE_MASK) == 0) {
         Actor_Clear();
     }
 }
@@ -334,9 +334,9 @@ MATCH void func_801F2E3C(AreaTrail* trail) {
 
     i = WORLD_TRAIL_MAX - 1;
     do {
-        trail->points[i & 0xFF] = trail->points[(i & 0xFF) - 1];
+        trail->points[i & BYTE_MASK] = trail->points[(i & BYTE_MASK) - 1];
         i--;
-    } while ((i & 0xFF) != 0);
+    } while ((i & BYTE_MASK) != 0);
     out[0] = trail->pos.x + FIXED_MUL(trail->radius, rcos(trail->angle));
     out[1] = trail->pos.y + FIXED_MUL(trail->radius, rsin(trail->angle));
     out[2] = trail->pos.z << 8;
@@ -358,7 +358,7 @@ MATCH void func_801F2F0C(const void* arg0) {
         primitive = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(primitive);
         SetSemiTrans(primitive, 1);
-        index = i & 0xFF;
+        index = i & BYTE_MASK;
 
         setXY2(primitive, *(s16*)(((const u8*)work + (index << 2) + 24)),
                *(s16*)(((const u8*)work + (index << 2) + 26)), *(s16*)(((const u8*)work + ((index + 1) << 2) + 24)),
@@ -389,9 +389,9 @@ MATCH void func_801F304C(AreaTrail* trail) {
     Area_ProjectPoint(out, trail->points);
     i = 1;
     do {
-        trail->points[i & 0xFF] = trail->points[0];
+        trail->points[i & BYTE_MASK] = trail->points[0];
         i++;
-    } while ((i & 0xFF) < 32u);
+    } while ((i & BYTE_MASK) < 32u);
 }
 
 MATCH void func_801F3120(void) {
@@ -593,7 +593,7 @@ MATCH void func_801F3710(void) {
     s32        actor_slot;
     ActorSlot* slot;
 
-    actor_slot = Actor_FindFreeSlot() & 0xFF;
+    actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (actor_slot == GAME_NONE) {
         return;
     }

@@ -25,13 +25,13 @@ MATCH void func_801E10C8(void) {
         current->chr.status &= ~STATUS_KO;
         current->chr.hp                    = current->chr.stats.max_hp;
         current->chr.willpower             = current->chr.stats.willpower;
-        slot                               = Battle_AllocEffect(0, 1) & 0xFF;
+        slot                               = Battle_AllocEffect(0, 1) & BYTE_MASK;
         owner                              = g_Task;
         g_BattleEffects[slot].unk_07       = 2;
         g_BattleEffects[slot].unk_27       = 6;
         work                               = g_Task;
         g_BattleEffects[slot].target.party = owner;
-        Actor_SelectScript((work->facing + 4) & 0xFF);
+        Actor_SelectScript((work->facing + 4) & BYTE_MASK);
         SND_QueueSelectionFx(0x206);
         if (g_BattleEventFlags == 0) {
             func_801D9484();

@@ -11,14 +11,14 @@ MATCH s32 func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach) {
     index       = 0;
     count       = entry_count;
     probe_reach = reach;
-    if (count & 0xFF) {
+    if (count & BYTE_MASK) {
         fields = (u8*)D_801463DC + 8;
     loop_2:
         if (entry->active != 0) {
             u8 slot;
 
             slot = fields[-7];
-            if (!(func_801C7498(pos_x, pos_y, *(s32*)(fields - 4), *(s32*)(fields), probe_reach & 0xFF,
+            if (!(func_801C7498(pos_x, pos_y, *(s32*)(fields - 4), *(s32*)(fields), probe_reach & BYTE_MASK,
                                 ENCOUNTER_ENEMIES[slot].reach) &
                   0xFF)) {
                 return 0;
@@ -30,7 +30,7 @@ MATCH s32 func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach) {
     block_6:
         index += 1;
         entry++;
-        if ((index & 0xFF) >= (u32)(count & 0xFF)) {
+        if ((index & BYTE_MASK) >= (u32)(count & BYTE_MASK)) {
             goto block_7; /* walked every requested entry */
         }
         goto loop_2; /* next entry */

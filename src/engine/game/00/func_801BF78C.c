@@ -18,7 +18,7 @@ MATCH u8 func_801BF78C(void) {
                 break;
             }
         }
-        if (g_Task->unk_0B == 0 && (func_8014DAEC() & 0xFF) != 0) {
+        if (g_Task->unk_0B == 0 && (func_8014DAEC() & BYTE_MASK) != 0) {
             g_Task->unk_0B = 1;
         }
     }

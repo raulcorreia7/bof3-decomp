@@ -14,7 +14,7 @@ MATCH void func_8014F460(void) {
     value = 0;
 
 loop:
-    if ((GFX_StepScreenFade(&value, 0x800, 1, 0, flag) & 0xFF) == 0) {
+    if ((GFX_StepScreenFade(&value, 0x800, 1, 0, flag) & BYTE_MASK) == 0) {
         *level = (*level + 0x20) & ANGLE_MASK;
         CallbackWait(1);
         /* Retail keeps this spin as a goto loop (as in GFX_RunWhiteFade). */

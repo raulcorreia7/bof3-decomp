@@ -43,8 +43,8 @@ MATCH void func_8009B488(void) {
     count = 0;
     if (g_BattlePartyCount != 0) {
         do {
-            index = count & 0xFF;
-            if (!(Battle_SlotIsBlocked(index) & 0xFF)) {
+            index = count & BYTE_MASK;
+            if (!(Battle_SlotIsBlocked(index) & BYTE_MASK)) {
                 g_BattlePartyBattlers[index].turn.command.type = 0;
                 g_BattlePartyBattlers[index].header.mode       = 2;
                 state                                          = g_BattlePartyBattlers[index].facing;
@@ -54,7 +54,7 @@ MATCH void func_8009B488(void) {
                 g_BattlePartyBattlers[index].facing            = state ^ 2;
             }
             count++;
-        } while ((u32)(count & 0xFF) < g_BattlePartyCount);
+        } while ((u32)(count & BYTE_MASK) < g_BattlePartyCount);
     }
     phase = &g_BattleUIState;
     *phase += 1;

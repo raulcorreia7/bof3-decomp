@@ -377,7 +377,7 @@ MATCH void func_801F2D5C(void) {
 
     func_801F3D5C();
     func_801F362C();
-    if ((func_801F30EC() & 0xFF) == 0) {
+    if ((func_801F30EC() & BYTE_MASK) == 0) {
         scratch = (Area024Scratch*)WORLD00_AREA024_SCRATCH_PTR;
         scratch->dispatch++;
     }
@@ -497,7 +497,7 @@ MATCH void func_801F31B4(void) {
     work->origin_y += (work->normal.vy * 2);
     work->origin_z += (work->normal.vz * 2);
     work->half_size = (work->half_size + 0x80u);
-    if (!(count & 0xFF)) {
+    if (!(count & BYTE_MASK)) {
         ((AreaSprite*)D_801F5B00)->flags_02 = 0x40u;
         ((AreaSprite*)D_801F5B00)->flags_01 = (((AreaSprite*)D_801F5B00)->flags_01 + 1u);
     }
@@ -516,7 +516,7 @@ MATCH void func_801F3250(void) {
     work->origin_z += work->normal.vz;
     count                               = (((AreaSprite*)D_801F5B00)->flags_02 - 1u);
     ((AreaSprite*)D_801F5B00)->flags_02 = count;
-    if (!(count & 0xFF)) {
+    if (!(count & BYTE_MASK)) {
         ((AreaSprite*)D_801F5B00)->flags = 0u;
     }
 }
@@ -571,7 +571,7 @@ MATCH void func_801F3314(void) {
         dst++;
         in++;
         count += 1;
-    } while (((count & 0xFF)) < 27u);
+    } while (((count & BYTE_MASK)) < 27u);
 }
 
 MATCH void func_801F362C(void) {
@@ -606,7 +606,7 @@ MATCH void func_801F362C(void) {
         src += 0x28;
         state += 12;
         count += 1;
-        if (((count & 0xFF)) >= 0x1Bu) {
+        if (((count & BYTE_MASK)) >= 0x1Bu) {
             break;
         }
     }

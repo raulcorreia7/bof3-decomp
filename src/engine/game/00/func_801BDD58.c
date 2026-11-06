@@ -17,7 +17,7 @@ NON_MATCHING s32 func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* re
 
     dist_y = COORD_INT(record->depth) - z;
     dist_y = ABS(dist_y);
-    range  = reach + record->state_70.byte;
+    range = reach + record->state_70.byte;
     if (((range << 7) + 0x100) < dist_y) {
         hit = 0;
     } else {
@@ -25,7 +25,7 @@ NON_MATCHING s32 func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* re
         prod_x = record->unk_0C * factor;
         dist_x = pos_x - (record->pos.x.fixed + prod_x);
         dist_x = ABS(dist_x);
-        limit  = (range + 2) << 0xF;
+        limit = (range + 2) << 0xF;
         if (dist_x < limit) {
             hit = pos_y - (record->pos.y.fixed + record->unk_10 * factor);
             hit = ABS(hit);

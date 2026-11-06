@@ -40,7 +40,7 @@ MATCH void func_801D3C74(void) {
         anim_count          = anim->step_index_0A;
         color_offset        = *(D_801E1E80 + (anim->row_4B * FISHING_PALETTE_ROW_STRIDE)) * FISHING_COLOR_ENTRY_SIZE;
         func_801D9740(*(D_801E1F16 + color_offset), color_offset + D_801E1F14,
-                      (FISHING_PALETTE_WIDTH - (anim_count * FISHING_EXPAND_STEP_STRIDE)) & 0xFF,
+                      (FISHING_PALETTE_WIDTH - (anim_count * FISHING_EXPAND_STEP_STRIDE)) & BYTE_MASK,
                       0x125 - ((FISHING_EXPAND_STEP_COUNT - anim_count) * FISHING_EXPAND_STEP_STRIDE));
     } else {
         work->step_timer_09 = (work->step_timer_09 - 1);

@@ -44,8 +44,8 @@ NON_MATCHING s32 func_801530D0(void) {
     u32 word;
 
     func_80153CC4(0);
-    v          = g_AreaCameraAngle.vz - 0x200;
-    v          = ABS(v);
+    v = g_AreaCameraAngle.vz - 0x200;
+    v = ABS(v);
     D_8014933D = 0;
     D_8014933A &= 0xFE;
     tmp        = (0x160 - v) / 50;
@@ -177,7 +177,7 @@ NON_MATCHING s32 func_801530D0(void) {
                                        ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (sp18 < s6)))) {
                                 word          = *(u32*)rec;
                                 D_1F800000[0] = word ^ 0x80;
-                                if ((((word >> 8) & 0xFF) ^ 0x80) < D_1F800000[0]) {
+                                if ((((word >> 8) & BYTE_MASK) ^ 0x80) < D_1F800000[0]) {
                                     D_1F800000[0] = (word >> 8) ^ 0x80;
                                 }
                                 if ((((u8)rec[2]) ^ 0x80) < D_1F800000[0]) {

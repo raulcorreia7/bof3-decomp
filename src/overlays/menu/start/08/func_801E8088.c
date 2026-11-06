@@ -7,8 +7,8 @@ MATCH s32 func_801E8088(s32 character_index, s32 record_index) {
     s32        result;
     Character* record;
 
-    index = character_index & 0xFF;
-    mode  = record_index & 0xFF;
+    index = character_index & BYTE_MASK;
+    mode  = record_index & BYTE_MASK;
     value = Char_RestoreHP(index, 5, mode);
     if (mode == 0) {
         record = &g_Characters[index];
@@ -18,11 +18,11 @@ MATCH s32 func_801E8088(s32 character_index, s32 record_index) {
     if (record->status & (STATUS_POISONED | STATUS_CONFUSED)) {
         value |= 1;
         if ((rand() % 100) < 0x1E) {
-            Char_ClearStatus(character_index & 0xFF, 0xA0U, record_index & 0xFF);
+            Char_ClearStatus(character_index & BYTE_MASK, 0xA0U, record_index & BYTE_MASK);
         }
-        result = value & 0xFF;
+        result = value & BYTE_MASK;
     } else {
-        result = value & 0xFF;
+        result = value & BYTE_MASK;
     }
     return -(result == 0) & 3;
 }

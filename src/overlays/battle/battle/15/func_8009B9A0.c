@@ -9,10 +9,10 @@ MATCH void func_8009B9A0(void) {
         count = 0;
         Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         do {
-            index = (count & 0xFF);
+            index = (count & BYTE_MASK);
             GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[index]);
             count++;
-        } while ((count & 0xFF) < 8U);
+        } while ((count & BYTE_MASK) < 8U);
         func_800ACF80();
         func_801D9484();
         func_801DE560(2u, 0u, 0u, 0x2Du, Resource_GetText(0x10));

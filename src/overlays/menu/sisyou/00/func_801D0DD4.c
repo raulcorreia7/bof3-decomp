@@ -25,11 +25,11 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
     if (pad & D_80145AC2) {
         item = D_80145FCC.bytes[g_MasterMenuCursor * BATTLE_PARTY_STRIDE];
         if (g_Characters[item].master_id == D_801448ED) {
-            if ((confirm & 0xFF) == 0) {
+            if ((confirm & BYTE_MASK) == 0) {
                 goto play_stop; /* both row-state cases share this exit */
             }
         } else {
-            if ((confirm & 0xFF) != 0) {
+            if ((confirm & BYTE_MASK) != 0) {
                 goto play_stop; /* the complementary row state takes the same exit */
             }
         }
@@ -53,7 +53,7 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
             g_MasterMenuCursor = sel - 1;
             SND_PlayCue(EMI_CUE_ID(1, 0));
         } else if (trig & PADLdown) {
-            if ((g_MasterMenuCursor & 0xFF) == g_PartySize - 1) {
+            if ((g_MasterMenuCursor & BYTE_MASK) == g_PartySize - 1) {
                 g_MasterMenuCursor = 0;
             } else {
                 g_MasterMenuCursor = g_MasterMenuCursor + 1;
@@ -80,6 +80,6 @@ after_input:
                          MASTER_MENU_SELECT_WIDTH, MASTER_MENU_SELECT_HEIGHT, 1, 6);
     Menu_DrawHeaderBar(MASTER_MENU_FRAME_X, MASTER_MENU_FRAME_Y, MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT,
                        D_80144952);
-    i = MASTER_MENU_TEXT_BANK + (message_id & 0xFFFF) * 2;
+    i = MASTER_MENU_TEXT_BANK + (message_id & HALF_MASK) * 2;
     UI_DrawText(MASTER_MENU_TEXT_X, MASTER_MENU_TEXT_Y, 0, 255, (u8*)(MEM(u16, i) + MASTER_MENU_TEXT_BANK));
 }

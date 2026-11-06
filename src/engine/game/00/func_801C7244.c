@@ -29,11 +29,11 @@ MATCH void func_801C7244(s32 mode) {
         }
         entry++;
         index += 1;
-    } while ((index & 0xFF) < 8U);
+    } while ((index & BYTE_MASK) < 8U);
 
     index = 0;
 loop_5:
-    if ((u8)index < (Party_CountOrder(1) & 0xFF)) {
+    if ((u8)index < (Party_CountOrder(1) & BYTE_MASK)) {
         count += 1;
         D_801CD954 += Area_SampleHeight(*(s32*)(D_80143F2C + ((u8)index << 3)), *(s32*)(D_80143F30 + ((u8)index << 3)));
         index += 1;
@@ -42,8 +42,8 @@ loop_5:
     rot        = &g_AreaCameraAngle;
     D_801CD954 = ((D_801CD954 / count) >> 5) << 5;
     RotMatrix(rot, &matrix);
-    offset_x = D_801CD778[mode_index & 0xFF].x;
-    offset_y = D_801CD778[mode_index & 0xFF].y;
+    offset_x = D_801CD778[mode_index & BYTE_MASK].x;
+    offset_y = D_801CD778[mode_index & BYTE_MASK].y;
     angle.vz = (D_801CD954 >> 1);
     angle.vx = 0x4000 - ((D_80143F24 + (offset_x << 0x10)) >> 9);
     angle.vy = 0x4000 - ((D_80143F28 + (offset_y << 0x10)) >> 9);

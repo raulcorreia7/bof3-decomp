@@ -3,7 +3,7 @@
 MATCH s8 func_801A8728(s32 entry_x, s32 entry_y) {
     s32 shifted_result;
 
-    if (!(func_801A8A98(entry_x, entry_y) & 0xFF)) {
+    if (!(func_801A8A98(entry_x, entry_y) & BYTE_MASK)) {
         switch (g_GameAreaId) {
             case 0x24:
                 shifted_result = func_801F2C64(entry_x, entry_y) << 0x18;

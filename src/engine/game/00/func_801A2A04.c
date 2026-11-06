@@ -8,7 +8,7 @@ MATCH u8 func_801A2A04(Actor* entity) {
     i     = 0;
 
     while (i < 4u) {
-        if ((func_801A1AE4(entity) & 0xFF) == 0u) {
+        if ((func_801A1AE4(entity) & BYTE_MASK) == 0u) {
             break;
         }
         g_Task->direction_08 = (g_Task->direction_08 + 2) & 7;

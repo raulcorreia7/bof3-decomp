@@ -21,12 +21,12 @@ MATCH void func_801D5574(void) {
         offset = t << 4;
         offset -= t;
         offset += 0x58;
-        offset &= 0xFFFF;
+        offset &= HALF_MASK;
     } else {
         func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         mask = 0;
         if (D_80145E93[0] >= 3) {
-            mask = (1 << FISHING_STATE->cue_index_06) & 0xFF;
+            mask = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;
         }
         offset = 0x58;
         y      = 0x28;

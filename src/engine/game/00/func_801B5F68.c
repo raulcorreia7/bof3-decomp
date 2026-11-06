@@ -9,7 +9,7 @@ MATCH bool func_801B5F68(s32 selection_kind) {
         return false;
     if (!(g_Task->direction_08 & 1))
         return false;
-    if ((selection_kind & 0xFF) != 4)
+    if ((selection_kind & BYTE_MASK) != 4)
         return false;
     result = func_801B5AE4(selection_kind, kind);
     if (result == -1)

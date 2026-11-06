@@ -3,7 +3,7 @@
 MATCH void func_801C0D54(void) {
     u8 arg;
 
-    if (func_801C0E48() & 0xFF) {
+    if (func_801C0E48() & BYTE_MASK) {
         arg = 0x3B;
         if (g_Task->direction_08 == 3)
             arg = 0x3A;

@@ -11,7 +11,7 @@ MATCH void func_801C1E88(s32 key, s32* counter) {
     total = 0;
     outer = 0;
     val   = 4;
-    key &= 0xFF;
+    key &= BYTE_MASK;
     step = 0;
     do {
         if ((*(&g_FairyRooms + step) == val) && (*(&g_FairyRooms + 1 + step) == key)) {
@@ -27,7 +27,7 @@ MATCH void func_801C1E88(s32 key, s32* counter) {
         outer += 1;
         step += 8;
     } while (outer < 8);
-    if (!(total & 0xFF)) {
+    if (!(total & BYTE_MASK)) {
         *counter += 1;
     }
 }

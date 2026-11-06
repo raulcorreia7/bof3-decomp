@@ -27,7 +27,7 @@ NON_MATCHING void func_801D8C58(s16 x, s16 y, u8 index, u8 flag) {
     if (flag == 0) {
         value = FIELD(s32, slot, 0x8);
     } else {
-        value = Char_GetExpForLevel(index, (FIELD(u8, slot, 0x6) + 1) & 0xFF);
+        value = Char_GetExpForLevel(index, (FIELD(u8, slot, 0x6) + 1) & BYTE_MASK);
     }
     if (value != -1) {
         sprintf((s8*)g_UiFormatBuffer, &D_801D0CF8, value);

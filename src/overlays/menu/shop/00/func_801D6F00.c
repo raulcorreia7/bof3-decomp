@@ -31,7 +31,7 @@ MATCH void func_801D6F00(void) {
             count_word = (u32*)((u8*)&D_8018E9A4 + offset);
             value      = *count_word;
             shift      = value >> 13;
-            masked     = count & 0xFF;
+            masked     = count & BYTE_MASK;
             if ((value & 0x1FFF) != 0) {
                 bumped = masked + 1;
                 count  = bumped + shift;

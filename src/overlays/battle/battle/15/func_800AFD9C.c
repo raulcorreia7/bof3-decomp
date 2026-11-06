@@ -20,7 +20,7 @@ MATCH void func_800AFD9C(void) {
     if ((flags & 0xC0) != 0xC0) {
         if (flags & 0x40) {
             for (i = 0; i < 8; i++) {
-                if (Battle_SlotIsBlocked((i + 3) & 0xFF) == 0) {
+                if (Battle_SlotIsBlocked((i + 3) & BYTE_MASK) == 0) {
                     count++;
                     sum_x += g_BattleEnemyBattlers[i].pos.x.fixed >> 9;
                     sum_y += g_BattleEnemyBattlers[i].pos.y.fixed >> 9;
@@ -29,7 +29,7 @@ MATCH void func_800AFD9C(void) {
             }
         } else {
             for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
-                if (Battle_SlotIsBlocked(i & 0xFF) == 0) {
+                if (Battle_SlotIsBlocked(i & BYTE_MASK) == 0) {
                     count++;
                     sum_x += g_BattlePartyBattlers[i].pos.x.fixed >> 9;
                     sum_y += g_BattlePartyBattlers[i].pos.y.fixed >> 9;

@@ -8,5 +8,5 @@ MATCH s32 func_801B9598(void) {
     } else {
         result = func_801BA678();
     }
-    return result & 0xFF;
+    return result & BYTE_MASK;
 }

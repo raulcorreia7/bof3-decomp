@@ -56,7 +56,7 @@ MATCH void func_801F7100(void) {
 }
 
 MATCH void func_801F717C(void) {
-    if (!(func_801F7748() & 0xFF)) {
+    if (!(func_801F7748() & BYTE_MASK)) {
         Actor_Clear();
     }
 }
@@ -85,12 +85,12 @@ MATCH void func_801F783C(void) {
     i    = 0;
     if (g_PartySize != 0) {
         do {
-            battler = &g_BattlePartyBattlers[i & 0xFF];
+            battler = &g_BattlePartyBattlers[i & BYTE_MASK];
             TASK_SET(battler);
             battler->unk_29 = 3;
             func_8014D290();
             i += 1;
-        } while ((u32)(i & 0xFF) < g_PartySize);
+        } while ((u32)(i & BYTE_MASK) < g_PartySize);
     }
     g_Task                  = work;
     tint                    = -0x80;

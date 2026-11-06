@@ -5,7 +5,7 @@
  * for 11-13 and 0xFF otherwise.
  */
 MATCH s32 func_8015B870(u32 kind) {
-    switch (kind & 0xFF) {
+    switch (kind & BYTE_MASK) {
         case 0:
         case 14:
             return g_SceneRecord.sbyte;

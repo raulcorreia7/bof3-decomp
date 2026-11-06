@@ -33,12 +33,12 @@ MATCH void func_801EF398(void) {
             outer += 1;
             step += 8;
         } while (outer < 8);
-        if (count & 0xFF) {
+        if (count & BYTE_MASK) {
             amount = 0x14 - sum;
             if (amount <= 0) {
                 amount = 1;
             }
-            if ((g_BattleCount - D_801455BC) >= amount && D_801455C4 >= D_801F2523[D_801455C3 & 0xFF]) {
+            if ((g_BattleCount - D_801455BC) >= amount && D_801455C4 >= D_801F2523[D_801455C3 & BYTE_MASK]) {
                 D_801455C3 += 1;
                 D_801455BC += amount;
                 D_80145E60[g_FairyVillageUpdateCount * 2] = 6;

@@ -3,12 +3,12 @@
 MATCH void func_801BE574(s32 count, u8* ids) {
     s32 i;
 
-    for (i = 0; i < (count & 0xFF); i++) {
+    for (i = 0; i < (count & BYTE_MASK); i++) {
         TASK_SET(&((u8*)g_BattlePartyBattlers)[i * BATTLE_PARTY_STRIDE]);
         ((u8*)g_BattlePartyBattlers)[i * BATTLE_PARTY_STRIDE] &= 0xDF;
         ACTOR_CLEAR_TINT();
         g_Task->tint.bytes.flags = 2;
-        Party_ClearBattlerState(i & 0xFF);
+        Party_ClearBattlerState(i & BYTE_MASK);
         g_Task->header.mode           = 2;
         g_Task->option_flags          = 0;
         g_Task->unk_09                = 0;

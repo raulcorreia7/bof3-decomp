@@ -47,7 +47,7 @@ MATCH void func_801EF444(void) {
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
     battler      = &g_BattlePartyBattlers[work->unk_04];
-    if (!(timer & 0xFF)) {
+    if (!(timer & BYTE_MASK)) {
         GFX_FreePaletteFadeTarget(battler);
         g_Task->timer  = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
         g_Task->unk_09 = 8;

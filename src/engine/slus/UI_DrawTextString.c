@@ -27,7 +27,7 @@ MATCH const u8* UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* t
     trim  = ((u8*)g_TextRowShades)[index + 1];
 
     while (c != 0) {
-        if ((count & 0xFF) == 0) {
+        if ((count & BYTE_MASK) == 0) {
             break;
         }
         switch (c) {

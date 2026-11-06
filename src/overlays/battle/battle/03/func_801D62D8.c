@@ -14,7 +14,7 @@ MATCH s32 func_801D62D8(void) {
     count = 0;
     index = 0;
     do {
-        if (!(func_801D64C4(index) & 0xFF)) {
+        if (!(func_801D64C4(index) & BYTE_MASK)) {
             flags = g_BattlePartyBattlers[index].turn.action_flags.volatile_value;
             if (flags & 2) {
                 if (flags & 0x20) {
@@ -50,6 +50,6 @@ MATCH s32 func_801D62D8(void) {
             }
         }
         index += 1;
-    } while ((index & 0xFF) < 3);
+    } while ((index & BYTE_MASK) < 3);
     return D_801463C2 != 0;
 }

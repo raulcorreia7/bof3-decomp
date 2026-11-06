@@ -31,7 +31,7 @@ MATCH void func_8019D800(void) {
         dst += 0x1C;
         src += 0x14;
         count += 1;
-        if (((u32)(count & 0xFF)) >= 0x18) {
+        if (((u32)(count & BYTE_MASK)) >= 0x18) {
             break;
         }
     }

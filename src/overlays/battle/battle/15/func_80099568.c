@@ -45,7 +45,7 @@ MATCH void func_80099568(void) {
         return;
     }
     if ((held & PADRleft) != 0u) {
-        if ((func_8009AC18() & 0xFF) != 0) {
+        if ((func_8009AC18() & BYTE_MASK) != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             return;
         }

@@ -21,7 +21,7 @@ MATCH void func_801D1B88(s16 quad_x, s16 quad_y, s16 quad_width, u8 corner_shade
     primitive->x3 = primitive->x1;
     primitive->y2 = primitive->y0 + 4;
     primitive->y3 = primitive->y2;
-    GFX_AddPrim(corner_shade & 0xFF, 0x24);
+    GFX_AddPrim(corner_shade & BYTE_MASK, 0x24);
 
     primitive = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(primitive);
@@ -37,5 +37,5 @@ MATCH void func_801D1B88(s16 quad_x, s16 quad_y, s16 quad_width, u8 corner_shade
     primitive->x3 = primitive->x1;
     primitive->y2 = primitive->y0 + 4;
     primitive->y3 = primitive->y2;
-    GFX_AddPrim(corner_shade & 0xFF, 0x24);
+    GFX_AddPrim(corner_shade & BYTE_MASK, 0x24);
 }

@@ -23,7 +23,7 @@ MATCH bool func_801E0680(void) {
              * pointer load (retail +0x8C before +0x90). */
             MATCH_BARRIER();
             work  = FISHING_STATE;
-            range = (entry_byte - row->unk_0F + 3) & 0xFF;
+            range = (entry_byte - row->unk_0F + 3) & BYTE_MASK;
             /* FAKE: func_801BDD58 reads the slot through the field actor layout. */
             if (func_801BDD58(work->motion_34.unk_34, work->y_38.pos_y, work->bounce_3C.half.key_3E, range,
                               (Actor*)g_ActorSlots) &

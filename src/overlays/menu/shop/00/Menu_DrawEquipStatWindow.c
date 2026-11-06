@@ -14,8 +14,8 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32
     u8         category;
     u8         i;
 
-    stats = &g_Characters[character_index & 0xFF];
-    switch (equip_slot & 0xFF) {
+    stats = &g_Characters[character_index & BYTE_MASK];
+    switch (equip_slot & BYTE_MASK) {
         default:
             category = 0;
             break;
@@ -34,10 +34,10 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32
             break;
     }
     present = ((Item_GetEquipability(category, item_id) >> character_index) ^ 1) & 1;
-    UI_DrawWindow((x + 3) & 0xFFFF, (y + 3) & 0xFFFF, 108, 48, present, D_80144952);
+    UI_DrawWindow((x + 3) & HALF_MASK, (y + 3) & HALF_MASK, 108, 48, present, D_80144952);
     clut = 0;
     if (present == 0) {
-        Char_PreviewEquip(character_index, (equip_slot - 1) & 0xFF, item_id, flags, values);
+        Char_PreviewEquip(character_index, (equip_slot - 1) & BYTE_MASK, item_id, flags, values);
         values[2] = values[3];
         flags[2]  = flags[3];
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
@@ -53,7 +53,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32
         sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->stats.agility);
         UI_DrawGlyphString(x + 44, y + 38, 7, (void*)g_UiFormatBuffer);
     }
-    Menu_DrawCharacterPortrait((x + 0x46) & 0xFFFF, (y + 2) & 0xFFFF, stats->character_id, present);
+    Menu_DrawCharacterPortrait((x + 0x46) & HALF_MASK, (y + 2) & HALF_MASK, stats->character_id, present);
     for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
         UI_DrawText(x + 5, y + i * 15 + 6, clut, 0xFF, &D_801E5A10[i * 6]);
     }

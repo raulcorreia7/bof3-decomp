@@ -14,16 +14,16 @@ MATCH void func_801B0568(void) {
     Actor* tmp8;
     Actor* tmp9;
 
-    if (!GAME_SCRIPT_ACTIVE() && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING) && !(func_801B6258() & 0xFF) &&
-        !(func_801B5684() & 0xFF) && !(func_801B5758() & 0xFF) && !(func_801B5EBC() & 0xFF) &&
-        !(func_801B5884() & 0xFF) && !(func_801B5910() & 0xFF)) {
+    if (!GAME_SCRIPT_ACTIVE() && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING) && !(func_801B6258() & BYTE_MASK) &&
+        !(func_801B5684() & BYTE_MASK) && !(func_801B5758() & BYTE_MASK) && !(func_801B5EBC() & BYTE_MASK) &&
+        !(func_801B5884() & BYTE_MASK) && !(func_801B5910() & BYTE_MASK)) {
         tmp9 = g_Task;
         tmp4 = tmp9->unk_0A;
         if (tmp4 != 0) {
             tmp9->unk_0A = (tmp4 - 1);
             return;
         }
-        if (!(func_801B59B4() & 0xFF)) {
+        if (!(func_801B59B4() & BYTE_MASK)) {
             func_801B5BDC(g_Task->direction_08);
             g_GameState->counter_11C.u8_value = 3U;
             g_GameState->mode_12B.s8_value    = 0;
@@ -36,7 +36,7 @@ MATCH void func_801B0568(void) {
             g_Task->header.step    = 0;
             return;
         }
-        tmp0 = func_801B0E44() & 0xFF;
+        tmp0 = func_801B0E44() & BYTE_MASK;
         if (tmp0 == 3) {
             goto case_3; /* retail branch layout: the case bodies sit after the compare chain */
         }
@@ -84,12 +84,12 @@ MATCH void func_801B0568(void) {
                     tmp2         = tmp5->pos.x.fixed + (tmp5->vx * tmp1);
                     tmp10        = tmp5->pos.y.fixed + (tmp5->vy * tmp1);
                     tmp5->unk_06 = (tmp5->unk_06 - 1);
-                    if ((g_Task->unk_06 == 0) || (Area_GetCellCode((tmp2 >> 0x10), (tmp10 >> 0x10)) & 0xFF)) {
+                    if ((g_Task->unk_06 == 0) || (Area_GetCellCode((tmp2 >> 0x10), (tmp10 >> 0x10)) & BYTE_MASK)) {
                         D_80143F22 = 0;
                         g_AreaWalkFlags &= ~(AREA_WALK_TRANSITION | 0x2000);
                         Area_RollEncounterThreshold(0U);
                     }
-                } else if (Area_CanStartEncounter() & 0xFF) {
+                } else if (Area_CanStartEncounter() & BYTE_MASK) {
                     func_801B6418();
                     g_GameEntryPosX   = 0x190000;
                     g_GameEntryPosY   = 0x190000;
@@ -98,7 +98,7 @@ MATCH void func_801B0568(void) {
                     g_AreaWalkFlags |= AREA_WALK_TRANSITION;
                 }
             }
-            func_801B5BDC((g_Task->direction_08 + 8) & 0xFF);
+            func_801B5BDC((g_Task->direction_08 + 8) & BYTE_MASK);
             tmp6         = g_Task;
             tmp6->unk_09 = (tmp6->unk_09 - 1);
             func_801B0DFC();
@@ -106,7 +106,7 @@ MATCH void func_801B0568(void) {
             g_Task->header.step            = 2;
             return;
         case_1:
-            if (func_801B5F68(g_GameState->counter_11C.u8_value) & 0xFF) {
+            if (func_801B5F68(g_GameState->counter_11C.u8_value) & BYTE_MASK) {
                 return;
             }
             g_GameState->mode_12B.s8_value    = 0;

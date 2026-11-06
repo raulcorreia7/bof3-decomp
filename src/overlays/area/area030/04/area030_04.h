@@ -720,7 +720,7 @@ static inline void FishingDrawCue(u8 accessoryCue) {
     mask = 0;
     if (D_80145E93[0] >= 3u) {
         record = FISHING_STATE;
-        mask   = BIT(record->cue_index_06) & 0xFF;
+        mask   = BIT(record->cue_index_06) & BYTE_MASK;
     }
     func_801D7C10(0x58, 0x28, mask);
     func_801D88E0(0x10, 0x40);

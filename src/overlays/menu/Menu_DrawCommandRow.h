@@ -18,8 +18,8 @@ MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
     s32 col;
     s32 label_width;
 
-    row &= 0xFF;
-    selected &= 0xFF;
+    row &= BYTE_MASK;
+    selected &= BYTE_MASK;
     i = 0;
     if (g_MenuCommandRows[row][0] == 0) {
         return;
@@ -34,13 +34,13 @@ MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
             color = 7;
         }
         if (g_MenuCommandRows[row][1 + i] == 8 && (u8)Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) == 0 &&
-            (Item_Count(ITEM_CAT_ITEM, ITEM_SKILL_INK, 0) & 0xFFFF) == 0) {
+            (Item_Count(ITEM_CAT_ITEM, ITEM_SKILL_INK, 0) & HALF_MASK) == 0) {
             color = 7;
         }
         label       = g_MenuCommandLabels[g_MenuCommandRows[row][1 + i]];
         label_width = func_801AF20C(label);
         col         = i * 0x30;
-        offset      = (4 - (label_width & 0xFF)) * 4 + 6;
+        offset      = (4 - (label_width & BYTE_MASK)) * 4 + 6;
         UI_DrawText((s16)(x + col + offset), (s16)(y + 3), color, 0x10, label);
         UI_DrawSpriteRun((s16)(x + col), (s16)y, (i != selected) ? MENU_COMMAND_FRAME : MENU_COMMAND_FRAME_SELECTED, 0);
         i++;

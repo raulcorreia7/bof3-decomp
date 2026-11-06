@@ -20,7 +20,7 @@ MATCH void func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value) {
         if (temp != ' ') {
             g_UiFormatBuffer[index] = temp - '0';
             packet                  = (SPRT*)g_GfxPrimCursor;
-            clut                    = GetClut((clut_index & 0xFF) << 4, 480);
+            clut                    = GetClut((clut_index & BYTE_MASK) << 4, 480);
             packet->clut            = clut;
             setRGB0(packet, 128, 128, 128);
             setXY0(packet, x, y);

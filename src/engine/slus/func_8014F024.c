@@ -27,7 +27,7 @@ MATCH void func_8014F024(void) {
         iterations++;
     } while (iterations < 5);
 
-    masked_status     = status & 0xFF;
+    masked_status     = status & BYTE_MASK;
     coordinates       = (u16*)&g_AreaCameraAngle.vx;
     second_coordinate = coordinates + 2;
     do {
@@ -50,7 +50,7 @@ MATCH void func_8014F024(void) {
             break;
         }
         CallbackWait(1U);
-        masked_status = status & 0xFF;
+        masked_status = status & BYTE_MASK;
     } while (1);
 
     *(s16*)coordinates       = -0x2AA;

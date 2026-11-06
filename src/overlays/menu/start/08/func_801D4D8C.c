@@ -12,10 +12,10 @@ MATCH void func_801D4D8C(void) {
     u8  right_id;
 
     func_801D4A44();
-    for (ring = 0; (u32)(ring & 0xFF) < 127; ring += 1) {
+    for (ring = 0; (u32)(ring & BYTE_MASK) < 127; ring += 1) {
         left  = g_InventoryIds[1];
         out   = g_InventoryIds[1] + 0x200;
-        limit = 0x7F - (ring & 0xFF);
+        limit = 0x7F - (ring & BYTE_MASK);
         inner = 0;
         if (limit > 0) {
             span  = limit;
@@ -35,7 +35,7 @@ MATCH void func_801D4D8C(void) {
                 left += 1;
                 inner += 1;
                 out += 1;
-            } while ((inner & 0xFF) < span);
+            } while ((inner & BYTE_MASK) < span);
         }
     }
 }

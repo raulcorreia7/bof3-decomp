@@ -35,7 +35,7 @@ s32       stale_a3;
     if (*(u16*)(iy * map[0] * 2 + D_80104002 * 4 + ix * 2 + map) == 0) {
         return 1;
     }
-    stale_a3 &= 0xFFFF;
+    stale_a3 &= HALF_MASK;
     stale_a3 |= (u16)y << 16;
     org.parts.frac = 0;
     org.parts.tile = x;
@@ -47,7 +47,7 @@ s32       stale_a3;
     }
     counter = COORD_INT(((Actor*)SCRATCH_WORK)->pos.z);
     if (counter == dist) {
-        if ((tile & 0xFF) == 0x10 || (tile & 0xF0) == 0x20 || (tile & 0xF0) == 0xA0) {
+        if ((tile & BYTE_MASK) == 0x10 || (tile & 0xF0) == 0x20 || (tile & 0xF0) == 0xA0) {
         found:
             return 1;
         }

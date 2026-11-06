@@ -17,7 +17,7 @@ NON_MATCHING s32 func_801B6674(void) {
         return 0;
     }
     if (g_InputPressed & g_InputMasks) {
-        if ((temp & 0xFF) != 0xAE) {
+        if ((temp & BYTE_MASK) != 0xAE) {
             if ((temp & 0xF0) != 0xA0) {
                 if ((g_AreaWalkFlags & AREA_WALK_TRANSITION) == 0) {
                     return 0;
@@ -45,7 +45,7 @@ NON_MATCHING s32 func_801B6674(void) {
         return 0;
     }
     if (g_InputPressed & PADstart) {
-        if ((func_801B6470(temp, status) & 0xFF) == 0) {
+        if ((func_801B6470(temp, status) & BYTE_MASK) == 0) {
             return 0;
         }
         if (!(g_GameRequestFlags & 0x20)) {

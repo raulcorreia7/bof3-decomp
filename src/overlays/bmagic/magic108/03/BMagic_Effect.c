@@ -14,7 +14,7 @@ MATCH void func_801EEC5C(void) {
     u32           offset;
 
     src                                      = g_BattleSelectedActor;
-    offset                                   = (Battle_AllocEffect(1, 0x1A) & 0xFF) * BATTLE_EFFECT_STRIDE;
+    offset                                   = (Battle_AllocEffect(1, 0x1A) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     FIELD(PartyBattler*, D_801EC3A4, offset) = g_Task;
     FIELD(u8, D_801EC338, offset)            = src->facing;
     FIELD(Coord, D_801EC364, offset)         = src->pos.x.fixed;

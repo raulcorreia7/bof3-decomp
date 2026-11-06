@@ -41,7 +41,7 @@ MATCH bool func_801D527C(void) {
             }
         }
     }
-    if (count & 0xFF) {
+    if (count & BYTE_MASK) {
         func_801D9484();
         func_801DE560(2, 0, 0, 0x2D, Resource_GetText(0x2D));
         return true;

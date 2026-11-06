@@ -45,24 +45,25 @@ NON_MATCHING void func_801B1E24(void) {
                 prev = g_PartySize - 1;
             }
             if (!(rows->flags_12C & 1) && prev != 0) {
-                index  = (prev - 1) * 2 + (value & 0xFF) * 4;
+                index  = (prev - 1) * 2 + (value & BYTE_MASK) * 4;
                 result = func_801B1B2C(rows->pos.x.raw + (s_EntityPlacementOffsets[index] << 15),
-                                       rows->pos.y.raw + (D_801CD08D[index] << 15), value & 0xFF, row->speed_70);
-                if (((result & 0xFF) != 0) &&
+                                       rows->pos.y.raw + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed_70);
+                if (((result & BYTE_MASK) != 0) &&
                     ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), ((BattleWorkSlot*)g_Task)->speed_70) & 0xFF) !=
                      0)) {
                     goto found; /* first position test matched: run the row mark */
                 }
-                if (!(func_801B1B2C(D_80145EC4, D_80145EC8, value & 0xFF, ((BattleWorkSlot*)g_Task)->speed_70) &
+                if (!(func_801B1B2C(D_80145EC4, D_80145EC8, value & BYTE_MASK, ((BattleWorkSlot*)g_Task)->speed_70) &
                       0xFF)) {
                     goto next; /* fallback position rejected: next row */
                 }
-            } else if (!(func_801B1B2C(rows->pos.x.raw, rows->pos.y.raw, value & 0xFF, row->speed_70) & 0xFF)) {
+            } else if (!(func_801B1B2C(rows->pos.x.raw, rows->pos.y.raw, value & BYTE_MASK, row->speed_70) &
+                         BYTE_MASK)) {
                 goto next; /* fallback position rejected: next row */
             }
         found:
             if (i != 0) {
-                Party_ClearBattlerState(i & 0xFF);
+                Party_ClearBattlerState(i & BYTE_MASK);
                 g_Task->header.mode = 3;
                 func_801C2438();
                 g_Task->tint.bytes.flags = 1;

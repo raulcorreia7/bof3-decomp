@@ -14,16 +14,16 @@ MATCH s32 func_801C6A7C(void) {
     sum    = 0;
     base   = MEM_PTR(u8, 0x800E4000u);
     index  = 0;
-    masked = limit & 0xFF;
+    masked = limit & BYTE_MASK;
 loop:
     sum += base[8];
-    if ((sum & 0xFF) < (u32)masked) {
+    if ((sum & BYTE_MASK) < (u32)masked) {
         index += 1;
         base += 9;
-        if ((index & 0xFF) < 8U) {
+        if ((index & BYTE_MASK) < 8U) {
             goto loop; /* try the next weight record */
         }
         return 0;
     }
-    return (index & 0xFF);
+    return (index & BYTE_MASK);
 }

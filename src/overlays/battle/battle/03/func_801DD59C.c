@@ -7,7 +7,7 @@ MATCH s32 func_801DD59C(s32 amount) {
     i = 0;
     if (g_BattlePartyCount != 0u) {
         do {
-            index = i & 0xFF;
+            index = i & BYTE_MASK;
             if (func_801DD704(index) != 0u) {
                 if ((g_Characters[func_801DD7AC(g_BattlePartyBattlers[index].chr.character_id)].exp + amount) <=
                     0x98967Eu) {
@@ -17,7 +17,7 @@ MATCH s32 func_801DD59C(s32 amount) {
                 }
             }
             i += 1u;
-        } while ((i & 0xFF) < g_BattlePartyCount);
+        } while ((i & BYTE_MASK) < g_BattlePartyCount);
     }
     return amount;
 }

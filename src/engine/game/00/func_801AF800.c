@@ -24,11 +24,11 @@ MATCH void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_m
     table_index = Item_GetKind(mode, index);
     row         = record_y + 2;
     ux          = x;
-    func_801AEA80(ux, row & 0xFFFF, s_ItemSpriteIds[table_index], flag);
+    func_801AEA80(ux, row & HALF_MASK, s_ItemSpriteIds[table_index], flag);
     entry = Item_GetRecord(mode, index);
-    kind &= 0xFF;
-    UI_DrawText(x + 10, record_y, kind, func_801AF20C(entry) & 0xFF, entry);
-    shade = shade_byte & 0xFF;
+    kind &= BYTE_MASK;
+    UI_DrawText(x + 10, record_y, kind, func_801AF20C(entry) & BYTE_MASK, entry);
+    shade = shade_byte & BYTE_MASK;
     if (shade >= 2U) {
         buffer = (char*)g_UiFormatBuffer;
         sprintf(buffer, D_80195F90, shade);

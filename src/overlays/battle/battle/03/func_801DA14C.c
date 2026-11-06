@@ -26,7 +26,7 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
     SetPolyFT4(primitive);
     /* FAKE: the volatile typed store keeps tpage ahead of the palette load. */
     *(volatile u16*)&primitive->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    palette_index &= 0xFF;
+    palette_index &= BYTE_MASK;
     /* FAKE: retail reads D_80144952 as s8. */
     primitive->clut = GetClut((((*(s8*)&D_80144952) * 2) + palette_index) * 16, 481);
     start_x         = x;
@@ -34,7 +34,7 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
     start_y = y;
     x += 4;
     y += 4;
-    palette_offset &= 0xFF;
+    palette_offset &= BYTE_MASK;
     palette_offset *= 4;
     setXY4(primitive, start_x, start_y, x, start_y, start_x, y, x, y);
     primitive->u0 = D_801EAF2C[palette_offset];

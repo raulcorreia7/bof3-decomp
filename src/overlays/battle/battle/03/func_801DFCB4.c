@@ -58,7 +58,7 @@ MATCH void func_801DFCB4(void) {
     if (!(g_GameState->turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
         switch (LOBU(g_BattleActionType)) {
             case BATTLE_ACTION_ITEM:
-                if (!(Item_GetFlags(LOHU(g_BattleActionId) >> 8, LOHU(g_BattleActionId) & 0xFF) & 4)) {
+                if (!(Item_GetFlags(LOHU(g_BattleActionId) >> 8, LOHU(g_BattleActionId) & BYTE_MASK) & 4)) {
                     func_801DF34C();
                 }
                 break;

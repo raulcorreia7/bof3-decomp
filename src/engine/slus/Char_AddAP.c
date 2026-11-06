@@ -9,13 +9,13 @@ MATCH void Char_AddAP(s32 amount, s32 char_id) {
     u16        limit;
     u16        next;
 
-    rec   = &g_Characters[g_CharSlot[char_id & 0xFF]];
+    rec   = &g_Characters[g_CharSlot[char_id & BYTE_MASK]];
     cur   = rec->ap;
     limit = rec->stats.max_ap;
     if (cur < limit) {
         next    = cur + amount;
         rec->ap = next;
-        if (rec->stats.max_ap < (next & 0xFFFF)) {
+        if (rec->stats.max_ap < (next & HALF_MASK)) {
             rec->ap = rec->stats.max_ap;
         }
     }

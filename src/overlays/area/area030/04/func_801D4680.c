@@ -20,12 +20,12 @@ MATCH void func_801D4680(void) {
         x     = t << 4;
         x -= t;
         x += 0x58;
-        x &= 0xFFFF;
+        x &= HALF_MASK;
     } else {
         func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
         flags = 0;
         if (D_80145E93[0] >= 3) {
-            flags = (1 << FISHING_STATE->cue_index_06) & 0xFF;
+            flags = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;
         }
         x = 0x58;
         y = 0x28;

@@ -22,8 +22,8 @@ MATCH void func_800AF8F0(BattleSpriteCellRecord* record) {
         base = quotient + 0x10;
     }
     for (i = 1; i < (s_BattleCellRowCount[record->bank_index] << 4); i++) {
-        bank = (u32)g_GraphicsPaletteDst + ((base & 0xFF) << 9);
-        *(u16*)(bank + ((product & 0xFF) + i) * 2) |= 0x8000;
+        bank = (u32)g_GraphicsPaletteDst + ((base & BYTE_MASK) << 9);
+        *(u16*)(bank + ((product & BYTE_MASK) + i) * 2) |= 0x8000;
     }
     g_GfxPalettePending = 1;
 }

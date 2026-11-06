@@ -32,7 +32,7 @@ MATCH void func_801A0CFC(Actor* entity) {
         value = ((s32 (*)(Actor*, s32))func_801A2ED4)(entity, 1);
         entity->unk_7B -= 1;
     }
-    if (((value & 0xFF) != GAME_NONE) && (g_Task->unk_09 != 0)) {
+    if (((value & BYTE_MASK) != GAME_NONE) && (g_Task->unk_09 != 0)) {
         g_Task->unk_03       = g_Task->header.mode;
         g_Task->header.mode  = 0x0A;
         entity->unk_79       = (value & 7);

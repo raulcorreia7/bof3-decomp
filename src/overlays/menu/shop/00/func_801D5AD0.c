@@ -7,7 +7,7 @@ MATCH void func_801D5AD0(void) {
     Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     WinDrawCueText(28, 22, 0x91);
     func_801DDFB0(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
-    if ((Menu_ToggleOption() & 0xFF) != 0) {
+    if ((Menu_ToggleOption() & BYTE_MASK) != 0) {
         flag = &D_8014865B;
         if (*flag != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));

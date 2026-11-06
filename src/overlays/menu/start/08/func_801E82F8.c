@@ -11,5 +11,5 @@ MATCH s32 func_801E82F8(s32 first_index, u8 last_index, s32 update_mask) {
         flags |= Char_ClearStatus(id, 0xA0, last_index);
         flags |= Char_RestoreHP(id, 0, last_index);
     }
-    return (flags & 0xFF) == 0 ? 3 : 0;
+    return (flags & BYTE_MASK) == 0 ? 3 : 0;
 }

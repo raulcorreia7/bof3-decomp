@@ -80,7 +80,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     delta        = SPAD_CURSOR->tint.bytes.unk_5F - 0x80;
     sprite->b0   = delta;
     sprite->clut = sprite_clut;
-    delta        = sprite_mirror & 0xFF;
+    delta        = sprite_mirror & BYTE_MASK;
     if (!delta) {
         sprite->x0 = SPAD_CURSOR->unk_2E + (s8)sprite_cell->x;
     } else {

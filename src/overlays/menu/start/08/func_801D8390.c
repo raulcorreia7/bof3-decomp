@@ -41,7 +41,7 @@ NON_MATCHING void func_801D8390(void) {
     } else if (pad & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         g_MenuPanelTasks[16].unk_0A += 1;
-        if ((s32)(count & 0xFF) - 1 < (s32)(u8)g_MenuPanelTasks[16].unk_0A) {
+        if ((s32)(count & BYTE_MASK) - 1 < (s32)(u8)g_MenuPanelTasks[16].unk_0A) {
             g_MenuPanelTasks[16].unk_0A = 0;
         }
     }

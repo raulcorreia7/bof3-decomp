@@ -29,11 +29,11 @@ MATCH void func_801AE2B0(s16 quad_x, s16 quad_y, s32 quad_width, s32 quad_height
     SetSemiTrans(prim, 1);
     setRGB0(prim, shade, shade, 0);
     setXY0(prim, x, y);
-    width_plus_1  = (width & 0xFF) + 1;
+    width_plus_1  = (width & BYTE_MASK) + 1;
     prim->x1      = width_plus_1 + x;
     prim->y1      = y;
     prim->x2      = x;
-    height_plus_1 = (height & 0xFF) + 1;
+    height_plus_1 = (height & BYTE_MASK) + 1;
     prim->y2      = height_plus_1 + y;
     prim->x3      = width_plus_1 + x;
     prim->y3      = height_plus_1 + y;

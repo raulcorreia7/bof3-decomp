@@ -6,8 +6,8 @@ MATCH u32 func_801C6FD4(s32 map_column, s32 map_row) {
     u16 tile;
     u16 offset;
 
-    row = map_row & 0xFFFF;
-    if (((u32)(map_column & 0xFFFF) >= D_80104000) || (row >= D_80104001)) {
+    row = map_row & HALF_MASK;
+    if (((u32)(map_column & HALF_MASK) >= D_80104000) || (row >= D_80104001)) {
         return 0;
     }
     index  = map_column + (D_80104000 * (s16)map_row);

@@ -27,7 +27,7 @@ MATCH void func_8019CCB8(void) {
             move_x += g_Task->vx * step;
             move_y += g_Task->vy * step;
             func_8019D4BC();
-            if (func_8019D054(move_x, move_y) & 0xFF) {
+            if (func_8019D054(move_x, move_y) & BYTE_MASK) {
                 copy_dst   = (u8*)BATTLE_SCRIPT_BANK;
                 copy_count = *g_Task->range_54.table * 0x28;
                 copy_index = 0;

@@ -10,7 +10,7 @@
 NON_MATCHING void func_8009E500(void) {
     s16 delta;
     u16 limit;
-    if (!(func_800A3A10(g_BattleActiveBattler, g_BattleTarget) & 0xFF)) {
+    if (!(func_800A3A10(g_BattleActiveBattler, g_BattleTarget) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_BattleTarget)) {
             if (g_BattlePartyBattlers[g_BattleTarget].turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
                 g_BattleTargetRecord->ap_change = 0;

@@ -9,15 +9,15 @@ MATCH void func_801ABBA8(void* sub, s32 route) {
     s32 pos_y;
     s16 result;
 
-    masked = route & 0xFF;
-    slot   = route & 0xFF;
+    masked = route & BYTE_MASK;
+    slot   = route & BYTE_MASK;
     rate   = g_RouteSpeedScale[((u8*)sub)[4]];
     if ((masked == 2) || (masked == 6)) {
         g_Task->unk_09 = 0x20;
     } else {
         g_Task->unk_09 = 0x10;
     }
-    g_Task->unk_09 = (g_Task->unk_09 / (rate & 0xFF));
+    g_Task->unk_09 = (g_Task->unk_09 / (rate & BYTE_MASK));
     g_Task->vx     = g_FacingOffsets[slot].x * rate;
     high           = g_FacingOffsets[slot].y * rate;
     g_Task->vy     = high;

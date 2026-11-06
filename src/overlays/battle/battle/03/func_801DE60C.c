@@ -5,7 +5,7 @@ MATCH void func_801DE60C(u32 slot, u8 action_kind, u8 arg2, u8 arg3, u8 arg4, u8
     u8  flag;
     u16 half;
 
-    offset                                      = (slot & 0xFF) * 0xCu;
+    offset                                      = (slot & BYTE_MASK) * 0xCu;
     half                                        = arg4;
     flag                                        = g_BattleEventSlots[offset];
     g_BattleEventSlots[offset + 1u]             = action_kind;

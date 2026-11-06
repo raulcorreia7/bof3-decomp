@@ -14,11 +14,11 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
 
     xh = x >> 16;
     yh = y >> 16;
-    if (func_8019C4F0(xh, yh) & 0xFF) {
+    if (func_8019C4F0(xh, yh) & BYTE_MASK) {
         return 1;
     }
     if (g_Task->vx != 0) {
-        if ((x & 0xFFFF) == 0) {
+        if ((x & HALF_MASK) == 0) {
             goto fail; /* miss: return 0 */
         }
         pos = (xh << 16) | 0x8000;
@@ -34,7 +34,7 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
         next_x = (s16)((x >> 16) + 1);
         next_y = y >> 16;
     } else {
-        if ((y & 0xFFFF) == 0) {
+        if ((y & HALF_MASK) == 0) {
             goto fail; /* miss: return 0 */
         }
         pos = (yh << 16) | 0x8000;
@@ -50,7 +50,7 @@ MATCH s32 func_8019C344(s32 x, s32 y) {
         next_x = x >> 16;
         next_y = (s16)((y >> 16) + 1);
     }
-    if (func_8019C4F0(next_x, next_y) & 0xFF) {
+    if (func_8019C4F0(next_x, next_y) & BYTE_MASK) {
         return 1;
     }
 /* Shared zero return for both miss paths. */

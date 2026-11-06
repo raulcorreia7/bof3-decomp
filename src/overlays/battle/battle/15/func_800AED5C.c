@@ -21,7 +21,7 @@ NON_MATCHING s32 func_800AED5C(s32 arg0, u32 battler_index) {
     ctx       = (BattleSelectionContext*)&g_BattleTarget;
     saved_sel = ctx->sel;
     saved_ptr = (u32)ctx->record;
-    sel       = battler_index & 0xFF;
+    sel       = battler_index & BYTE_MASK;
     if (BATTLER_IS_PLAYER(sel)) {
         src         = &D_80145F20[sel * BATTLE_PARTY_STRIDE];
         ctx->sel    = battler_index;
@@ -33,7 +33,7 @@ NON_MATCHING s32 func_800AED5C(s32 arg0, u32 battler_index) {
     }
     dst                     = D_801EC2E8;
     *(BattleRecordHead*)dst = *(BattleRecordHead*)src;
-    if (func_800A40D0(arg0 & 0xFF) != 0) {
+    if (func_800A40D0(arg0 & BYTE_MASK) != 0) {
         result = 0;
     } else {
         result = 1;

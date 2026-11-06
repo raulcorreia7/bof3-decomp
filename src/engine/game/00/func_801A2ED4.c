@@ -24,13 +24,13 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
         WORK->direction_08++;
     }
     best = 0xFF;
-    if ((route_step & 0xFF) == 0u) {
+    if ((route_step & BYTE_MASK) == 0u) {
         entity->unk_88 = 0x01000000u;
     } else {
         entity->unk_88 = 0u;
     }
     for (i = 0; i < 4; i++) {
-        if ((func_801A1AE4(entity) & 0xFF) == 0) {
+        if ((func_801A1AE4(entity) & BYTE_MASK) == 0) {
             route = WORK->direction_08;
             wx    = WORK->pos.x.fixed;
             wy    = WORK->pos.y.fixed;
@@ -44,9 +44,9 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
             dx -= target_x;
             dx = ABS(dx);
             dy -= target_y;
-            dy   = ABS(dy);
+            dy = ABS(dy);
             dist = (dx + dy);
-            if ((route_step & 0xFF) != 0u) {
+            if ((route_step & BYTE_MASK) != 0u) {
                 if (entity->unk_88 < dist) {
                     entity->unk_88 = dist;
                     best           = WORK->direction_08;

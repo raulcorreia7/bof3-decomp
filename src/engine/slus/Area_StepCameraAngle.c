@@ -20,7 +20,7 @@ NON_MATCHING s32 Area_StepCameraAngle(s32 degrees, s8 duration) {
             if (D_80143F50 != 2 && D_80143F50 != 6)
                 val0 = 8;
             val1       = val0 * tmp2;
-            tmp0       = duration * (0x80 / (s32)(val1 & 0xFF));
+            tmp0       = duration * (0x80 / (s32)(val1 & BYTE_MASK));
             D_801481F0 = g_AreaCameraAngle.vz << 0x10;
             D_801481F4 = tmp0;
             D_80148200 = (s32)((((((degrees << 16) >> 4) / 360) - (g_AreaCameraAngle.vz & 0x7FF))) << 0x10) / tmp0;

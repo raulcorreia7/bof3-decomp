@@ -14,7 +14,7 @@ MATCH void func_801D4B60(void) {
     key  = FISHING_STATE->bounce_3C.half.key_3E;
     fish = g_FishBestCatch[key];
     if (fish != 0) {
-        func_801E1004(key & 0xFF, fish, 0);
+        func_801E1004(key & BYTE_MASK, fish, 0);
         func_801E0F4C(0x80, 0x5B, FISHING_STATE->bounce_3C.half.key_3E);
         func_801E162C(8, 0x94, FISHING_STATE->bounce_3C.half.key_3E);
     } else {
@@ -27,7 +27,7 @@ MATCH void func_801D4B60(void) {
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;
     if (D_80145E93[0] >= 3u) {
-        mask = BIT(FISHING_STATE->cue_index_06) & 0xFF;
+        mask = BIT(FISHING_STATE->cue_index_06) & BYTE_MASK;
     }
     func_801D7C10(0x58, 0x28, mask);
 }

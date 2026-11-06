@@ -4,7 +4,7 @@ MATCH void func_801F4B24(void) {
     s32        slot;
     ActorSlot* row;
 
-    slot = Actor_FindFreeSlot() & 0xFF;
+    slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (slot != GAME_NONE) {
         row               = &g_ActorSlots[slot];
         row->header.flags = 1;

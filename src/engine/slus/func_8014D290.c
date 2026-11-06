@@ -60,12 +60,12 @@ NON_MATCHING void func_8014D290(void) {
     g_Task->unk_32 = sort;
     if (g_AreaDrawMode == 4) {
         if (D_8014933F != 0) {
-            sort |= (g_Task->pos.x.fixed >> 15) & 0xFF;
+            sort |= (g_Task->pos.x.fixed >> 15) & BYTE_MASK;
         } else {
-            sort |= (g_Task->pos.y.fixed >> 15) & 0xFF;
+            sort |= (g_Task->pos.y.fixed >> 15) & BYTE_MASK;
         }
     } else {
-        sort |= (((u16)COORD_INT(g_Task->depth) >> 5) & 0xFF) ^ 0x80;
+        sort |= (((u16)COORD_INT(g_Task->depth) >> 5) & BYTE_MASK) ^ 0x80;
     }
     g_Task->unk_32 = sort;
     Actor_ReadValue();

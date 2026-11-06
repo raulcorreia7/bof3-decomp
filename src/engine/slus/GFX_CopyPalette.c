@@ -14,7 +14,7 @@ MATCH void GFX_CopyPalette(s32 slot) {
     count    = 0u;
     base_dst = MEM_PTR(u16, AREA_PALETTE_WORK);
     base_src = MEM_PTR(const u16, 0x80033800u);
-    offset   = (slot & 0xFF) * 0x100u;
+    offset   = (slot & BYTE_MASK) * 0x100u;
     dst      = base_dst + offset;
     src      = base_src + offset;
     do {

@@ -8,7 +8,7 @@ MATCH void UI_DrawWaitMarker(s16 x, s16 y) {
     SPRT* prim;
 
     if (g_FrameCount & 0x20) {
-        GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & 0xFFFF);
+        GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
         prim = (SPRT*)g_GfxPrimCursor;
         SetSprt(prim);
         prim->clut = GetClut(192, 480);

@@ -28,19 +28,19 @@ NON_MATCHING void func_801D8680(void) {
         tmp3                        = g_MenuPanelTasks[18].unk_0B - 1;
         g_MenuPanelTasks[18].unk_0B = tmp3;
         if (tmp3 & 0x80) {
-            g_MenuPanelTasks[18].unk_0B = *(&D_801EC4A4 + ((val1 & 0xFF) * 6)) - 1;
+            g_MenuPanelTasks[18].unk_0B = *(&D_801EC4A4 + ((val1 & BYTE_MASK) * 6)) - 1;
         }
     } else if (tmp0 & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         tmp2                        = g_MenuPanelTasks[18].unk_0B + 1;
         g_MenuPanelTasks[18].unk_0B = tmp2;
-        if ((*(&D_801EC4A4 + ((val1 & 0xFF) * 6)) - 1) < (tmp2 & 0xFF)) {
+        if ((*(&D_801EC4A4 + ((val1 & BYTE_MASK) * 6)) - 1) < (tmp2 & BYTE_MASK)) {
             g_MenuPanelTasks[18].unk_0B = 0;
         }
     }
     if (D_80145AC2 & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
-        tmp1 = FIELD(u8, (((val1 & 0xFF) * 6) + &D_801EC4A4 + FIELD(u8, (val0), 0xB)), 0x1u);
+        tmp1 = FIELD(u8, (((val1 & BYTE_MASK) * 6) + &D_801EC4A4 + FIELD(u8, (val0), 0xB)), 0x1u);
         if (tmp1 != 0) {
             func_801D9304((s32)tmp1);
             return;

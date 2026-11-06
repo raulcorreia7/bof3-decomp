@@ -15,10 +15,10 @@ MATCH s8 Area_TestCondition(s32 request) {
         return D_8014933C ^ (tag & 1);
     }
     if ((tag & 0xFF00) == 0xFE00) {
-        return ((request & 0xFF) ^ g_AreaSceneMode) == 0;
+        return ((request & BYTE_MASK) ^ g_AreaSceneMode) == 0;
     }
     if ((tag & 0xFF00) == 0xFD00) {
-        return ((request & 0xFF) ^ D_80143F03) != 0;
+        return ((request & BYTE_MASK) ^ D_80143F03) != 0;
     }
     if ((tag & 0xFF00) == 0xFC00) {
         return (tag & 1) ^ ((g_GameStateIndex == GAME_REQUEST_CAMERA_LOOK) | (g_GameEntryState == 7));
@@ -32,13 +32,13 @@ MATCH s8 Area_TestCondition(s32 request) {
         return bit;
     }
     if ((tag & 0xFF00) == 0xFA00) {
-        return ((request & 0xFF) ^ g_SceneRecord.sbyte) == 0;
+        return ((request & BYTE_MASK) ^ g_SceneRecord.sbyte) == 0;
     }
     if ((tag & 0xFF00) < 0x2000) {
-        return SYS_TestFlag(&g_SceneFlagWords[(shifted >> 24) * 8], request & 0xFF);
+        return SYS_TestFlag(&g_SceneFlagWords[(shifted >> 24) * 8], request & BYTE_MASK);
     }
     if ((tag & 0xFF00) < 0x4000) {
-        return SYS_TestFlag(&g_SceneFlagWords[(shifted >> 21) & 0xF8], request & 0xFF) == 0;
+        return SYS_TestFlag(&g_SceneFlagWords[(shifted >> 21) & 0xF8], request & BYTE_MASK) == 0;
     }
     return tag & 1;
 }

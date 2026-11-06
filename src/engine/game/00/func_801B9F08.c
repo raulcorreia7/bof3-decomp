@@ -41,12 +41,12 @@ NON_MATCHING u8 func_801B9F08(u8 arg0, u8 arg1, s8 arg2) {
     buffer[1] = arg1;
     buffer[2] = arg2;
 loop_1:
-    val0 = val1 & 0xFF;
+    val0 = val1 & BYTE_MASK;
     if (*val12 != 0) {
         val12 += 1;
         val1 += 1;
         if ((s32)val12 >= (s32)limit) {
-            val0 = val1 & 0xFF;
+            val0 = val1 & BYTE_MASK;
         } else {
             goto loop_1; /* retail branch */
         }
@@ -60,11 +60,11 @@ loop_1:
             val10 += 1;
         } while (val5 < val0);
     }
-    val2 = val1 & 0xFF;
-    if ((val1 & 0xFF) == 2) {
-        val2 = val1 & 0xFF;
+    val2 = val1 & BYTE_MASK;
+    if ((val1 & BYTE_MASK) == 2) {
+        val2 = val1 & BYTE_MASK;
         if (buffer[0] == 0x70) {
-            val2 = val1 & 0xFF;
+            val2 = val1 & BYTE_MASK;
             if (buffer[1] == buffer[0]) {
                 return 0x70U;
             }
@@ -79,7 +79,7 @@ loop_1:
             val13 += 1;
         } while ((s32)val13 < (s32)(buffer + val2));
     }
-    tmp3 = val1 & 0xFF;
+    tmp3 = val1 & BYTE_MASK;
     if (tmp3 != 0) {
         val14 = buffer;
     loop_18:
@@ -93,7 +93,7 @@ loop_1:
         goto block_42; /* retail branch */
     }
 block_20:
-    tmp2 = val1 & 0xFF;
+    tmp2 = val1 & BYTE_MASK;
     val6 = 0;
     if (tmp2 > 0) {
         val11 = buffer;
@@ -106,7 +106,7 @@ block_20:
             }
         }
     }
-    tmp0 = val1 & 0xFF;
+    tmp0 = val1 & BYTE_MASK;
     if (val6 == tmp0) {
         return 0xB0U;
     }
@@ -134,18 +134,18 @@ block_20:
             }
         }
     block_34:
-        if ((val1 & 0xFF) == 1) {
-            val7 = val1 & 0xFF;
+        if ((val1 & BYTE_MASK) == 1) {
+            val7 = val1 & BYTE_MASK;
             if ((buffer[0] & 0xF0) == 0xA0) {
                 return buffer[0];
             }
             goto block_50; /* retail branch */
         }
-        val7 = val1 & 0xFF;
+        val7 = val1 & BYTE_MASK;
         goto block_50; /* retail branch */
     }
-    if (((buffer[0] & 0xF0) == 0xA0) || (val7 = val1 & 0xFF, ((buffer[1] & 0xF0) == 0xA0))) {
-        tmp4 = buffer[0] & 0xFF;
+    if (((buffer[0] & 0xF0) == 0xA0) || (val7 = val1 & BYTE_MASK, ((buffer[1] & 0xF0) == 0xA0))) {
+        tmp4 = buffer[0] & BYTE_MASK;
         if ((tmp4 == 0xA2) && (buffer[1] == tmp4)) {
             val15 = 0xA2;
             if (!(g_Task->direction_08 & 1)) {
@@ -178,20 +178,20 @@ block_50:
                     tmp7 = *val9;
                     if (((tmp7 & 0xF0) != 0x20) || (val15 = 0x20, (*tmp5 == tmp7))) {
                         val9 += 1;
-                        if ((s32)val9 >= (s32)(buffer + (val1 & 0xFF))) {
+                        if ((s32)val9 >= (s32)(buffer + (val1 & BYTE_MASK))) {
                             goto block_59; /* retail branch */
                         }
                         goto loop_56; /* retail branch */
                     }
                 } else {
                 block_59:
-                    val4 = val1 & 0xFF;
+                    val4 = val1 & BYTE_MASK;
                     goto block_60; /* retail branch */
                 }
             } else {
             block_60:
                 val4 += 1;
-                val7 = val1 & 0xFF;
+                val7 = val1 & BYTE_MASK;
                 if (val4 >= (val7 - 1)) {
                     goto block_61; /* retail branch */
                 }

@@ -77,7 +77,7 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
         case 0xD5:
             tmp             = -(g_CurrentActor - D_80147A58) >> 3;
             SP_REF(s8, 0x1) = tmp;
-            tmp &= 0xFF;
+            tmp &= BYTE_MASK;
             if ((u32)tmp < 4U && (D_80147CBA[tmp * 0x10] + D_80147CB9[tmp * 0x10]) != 0) {
                 goto back;
             }

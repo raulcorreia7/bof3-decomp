@@ -16,12 +16,12 @@ MATCH void Char_ApplyMaster(u8* arg) {
         return;
     }
     op = *pc;
-    if ((op & 0xFF) == 0x0E) {
+    if ((op & BYTE_MASK) == 0x0E) {
         return;
     }
     val = pc + 1;
     do {
-        switch (op & 0xFF) {
+        switch (op & BYTE_MASK) {
             case 0:
                 Char_AddResistance(arg + 0x2B, (s8)*val);
                 break;
@@ -70,5 +70,5 @@ MATCH void Char_ApplyMaster(u8* arg) {
         pc += 2;
         val += 2;
         op = *pc;
-    } while ((op & 0xFF) != 0x0E);
+    } while ((op & BYTE_MASK) != 0x0E);
 }

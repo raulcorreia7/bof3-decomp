@@ -30,7 +30,7 @@ MATCH void func_801D3884(void) {
         g_MenuPanelTasks[13].unk_10 = 0x31;
         step_up                     = g_MenuPanelTasks[13].unk_0A + 1;
         g_MenuPanelTasks[13].unk_0A = step_up;
-        if ((u32)(step_up & 0xFF) >= 4U) {
+        if ((u32)(step_up & BYTE_MASK) >= 4U) {
             g_MenuPanelTasks[13].unk_0A = 0;
         }
     store_selection:

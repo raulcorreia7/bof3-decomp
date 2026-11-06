@@ -14,7 +14,7 @@ MATCH s32 Char_SpendAP(s32 requested, s32 character_id) {
     if ((u16)amount >= gauge) {
         amount = gauge - 1;
     }
-    slot = g_CharSlot[character_id & 0xFF];
+    slot = g_CharSlot[character_id & BYTE_MASK];
     g_Characters[slot].ap -= amount;
     return (u16)amount;
 }

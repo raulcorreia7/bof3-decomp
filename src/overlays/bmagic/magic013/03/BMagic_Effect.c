@@ -17,7 +17,7 @@ MATCH void func_801EEEA0(void) {
 
     selector = (u8*)&g_BattleTargetSelector;
     if (!(Battle_SlotIsBlocked(*selector) & 0xFF) && (func_800AED5C(1, *selector) & 0xFF)) {
-        slot                               = Battle_AllocEffect(1, 0x48) & 0xFF;
+        slot                               = Battle_AllocEffect(1, 0x48) & BYTE_MASK;
         work                               = g_Task;
         g_BattleEffects[slot].unk_04       = 4;
         g_BattleEffects[slot].unk_09       = 0x18;

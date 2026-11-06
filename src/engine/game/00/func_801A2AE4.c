@@ -19,7 +19,7 @@ MATCH void func_801A2AE4(Actor* entity, u8 route_flag) {
         }
         flag = &D_1F800003;
         if (*flag != GAME_NONE) {
-            if ((route_flag & 0xFF) == g_Task->direction_08) {
+            if ((route_flag & BYTE_MASK) == g_Task->direction_08) {
                 entity->interaction_flags &= ~ACTOR_FLAG_MOVING;
             }
         } else {

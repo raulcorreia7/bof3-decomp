@@ -31,8 +31,8 @@ NON_MATCHING bool func_801A0048(s32 cell_x, s32 cell_y) {
     left  = banks[g_GameAreaId]->outer;
     if (left < 0)
         return true;
-    x    = cell_x & 0xFF;
-    y    = cell_y & 0xFF;
+    x    = cell_x & BYTE_MASK;
+    y    = cell_y & BYTE_MASK;
     tab  = g_SceneFlagWords;
     mask = 0xFF8000;
     do {

@@ -29,5 +29,5 @@ MATCH s32 func_801A1BC0(Actor* record) {
     } else {
         result = func_801A1C5C(x, y, route, route);
     }
-    return result & 0xFF;
+    return result & BYTE_MASK;
 }

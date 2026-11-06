@@ -17,16 +17,16 @@ MATCH s32 Char_ProbeFacingCell(void) {
     /* FAKE: retail writes the flag to $v0 and copies it to $s1; keeping the
      * probe result live stops gcc-2.7.2 from coalescing the copy. */
     MATCH_FAKE_USE(found);
-    if ((Area_GetCellCode(cx >> 16, cy >> 16) & 0xFF) == 0xF2) {
+    if ((Area_GetCellCode(cx >> 16, cy >> 16) & BYTE_MASK) == 0xF2) {
         hit = 1;
     }
-    if ((cx & 0xFFFF) != 0) {
-        if ((Area_GetCellCode((s16)((cx >> 16) + 1), cy >> 16) & 0xFF) == 0xF2) {
+    if ((cx & HALF_MASK) != 0) {
+        if ((Area_GetCellCode((s16)((cx >> 16) + 1), cy >> 16) & BYTE_MASK) == 0xF2) {
             hit = 1;
         }
     }
-    if ((cy & 0xFFFF) != 0) {
-        if ((Area_GetCellCode(cx >> 16, (s16)((cy >> 16) + 1)) & 0xFF) == 0xF2) {
+    if ((cy & HALF_MASK) != 0) {
+        if ((Area_GetCellCode(cx >> 16, (s16)((cy >> 16) + 1)) & BYTE_MASK) == 0xF2) {
             hit = 1;
         }
     }

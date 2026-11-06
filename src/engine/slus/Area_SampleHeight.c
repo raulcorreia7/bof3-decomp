@@ -52,7 +52,7 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     tmp1  = tmp5 >> 0x10;
     tmp14 = (u8*)((tmp1 * 4) + ((tmp3 * 4) + (MAP_BUNDLE_BASE + 0x30)));
     tmp13 = (u8*)((g_AreaMapBundle.height_off4_2A * 4) + (tmp1 + base) + tmp3);
-    if (!((tmp5 | tmp6) & 0xFFFF)) {
+    if (!((tmp5 | tmp6) & HALF_MASK)) {
         tmp4  = *(s8*)(tmp13)*D_80149340;
         tmp12 = *(u32*)(tmp14);
         return (s16)((((s32)(tmp12 << 0x10) >> 0x18) + tmp4 + ((s32)(tmp12 << 8) >> 0x18) + tmp4) * 0x10);

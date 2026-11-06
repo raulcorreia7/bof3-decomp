@@ -15,7 +15,7 @@ MATCH u8 func_8019CAB4(void) {
         walkable = 1;
     } else {
         work     = g_Task;
-        walkable = (Area_GetCellCode(COORD_INT(work->pos.x), COORD_INT(work->pos.y)) & 0xFF) == 0x11;
+        walkable = (Area_GetCellCode(COORD_INT(work->pos.x), COORD_INT(work->pos.y)) & BYTE_MASK) == 0x11;
     }
     return walkable;
 }

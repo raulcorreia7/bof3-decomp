@@ -65,10 +65,10 @@ NON_MATCHING void func_801E8684(void) {
         var_a1_247                                   = 0;
         g_BattlePartyBattlers[temp_a0_233->slot].turn.action_flags.volatile_value = D_801EB4D4;
         do {
-            temp_a0_259 = var_a1_247 & 0xFF;
+            temp_a0_259 = var_a1_247 & BYTE_MASK;
             var_a1_247 += 1;
             *(((g_Task)->slot * 0x140) + &D_80145FBC + temp_a0_259) = 0;
-        } while ((u32)(var_a1_247 & 0xFF) < 8U);
+        } while ((u32)(var_a1_247 & BYTE_MASK) < 8U);
         func_801E0B64();
     }
     func_800A9BD8((g_Task)->slot);
@@ -85,7 +85,7 @@ NON_MATCHING void func_801E8684(void) {
     temp_v0_356 = temp_a1_352 * BATTLE_PARTY_STRIDE;
     *D_8014833C[temp_a1_352 + 0xD] =
         (u8)((s32)(*(D_80145F1A + temp_v0_356) * 0x37) / (s32) * (D_80145F22 + temp_v0_356));
-    Actor_SelectScript(((g_Task)->unk_08 + 4) & 0xFF);
+    Actor_SelectScript(((g_Task)->unk_08 + 4) & BYTE_MASK);
     GFX_StagePalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
     func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
     GFX_UploadPaletteRows();

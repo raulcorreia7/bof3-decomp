@@ -13,7 +13,7 @@ MATCH void func_801B2AB4(void) {
             state  = 5;
             offset = BATTLE_PARTY_STRIDE;
             do {
-                Party_ClearBattlerState(index & 0xFF);
+                Party_ClearBattlerState(index & BYTE_MASK);
                 D_80145E91[offset] = state;
                 offset += BATTLE_PARTY_STRIDE;
                 index++;

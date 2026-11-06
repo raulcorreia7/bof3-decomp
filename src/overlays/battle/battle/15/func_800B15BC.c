@@ -5,9 +5,9 @@ MATCH void func_800B15BC(void) {
     s32 slot;
     s32 row;
 
-    for (row = 0; (row & 0xFF) < 3U; row++) {
-        for (slot = 0; (slot & 0xFF) < 3U; slot++) {
-            offset                         = Battle_AllocEffect(0, 0xE) & 0xFF;
+    for (row = 0; (row & BYTE_MASK) < 3U; row++) {
+        for (slot = 0; (slot & BYTE_MASK) < 3U; slot++) {
+            offset                         = Battle_AllocEffect(0, 0xE) & BYTE_MASK;
             g_BattleEffects[offset].unk_0A = slot;
             g_BattleEffects[offset].unk_09 = row;
         }

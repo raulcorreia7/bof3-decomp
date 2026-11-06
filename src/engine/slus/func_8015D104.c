@@ -6,7 +6,7 @@ MATCH void func_8015D104(s32 slot, s32 amount) {
     u32 index;
     s8  value;
 
-    index             = slot & 0xFFFF;
+    index             = slot & HALF_MASK;
     value             = D_80148FF8[index] - amount;
     D_80148FF8[index] = value;
     if (value <= 0) {

@@ -8,7 +8,7 @@ MATCH void func_801A061C(void) {
     index = 0;
 
     do {
-        entity       = (Actor*)((u8*)g_Actors + ((index & 0xFF) * ACTOR_SIZE));
+        entity       = (Actor*)((u8*)g_Actors + ((index & BYTE_MASK) * ACTOR_SIZE));
         SCRATCH_WORK = entity;
         kind         = entity->unk_06;
 
@@ -25,5 +25,5 @@ MATCH void func_801A061C(void) {
             }
         }
         index += 1;
-    } while ((index & 0xFF) < ENTITY_MAX);
+    } while ((index & BYTE_MASK) < ENTITY_MAX);
 }

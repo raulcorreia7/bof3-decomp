@@ -5,7 +5,7 @@ MATCH s32 func_801E4C2C(s32 item_class) {
     u8  value;
     s32 enabled;
 
-    switch (item_class & 0xFF) {
+    switch (item_class & BYTE_MASK) {
         case 11:
             enabled = MEM(u8, PARTY_FLAGS) & 8;
             break;
@@ -29,13 +29,13 @@ MATCH s32 func_801E4C2C(s32 item_class) {
     return 1;
 
 scan:
-    entry = D_801E5FC0[item_class & 0xFF];
+    entry = D_801E5FC0[item_class & BYTE_MASK];
     value = *entry;
     if (value == GAME_NONE) {
         return 1;
     }
     do {
-        if ((Party_HasSkill(value) & 0xFF) == 0) {
+        if ((Party_HasSkill(value) & BYTE_MASK) == 0) {
             /* An entry that misses ends the scan. */
             goto fail;
         }

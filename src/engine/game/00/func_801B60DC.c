@@ -3,7 +3,7 @@
 MATCH void func_801B60DC(s32 actor_index) {
     s32 index;
 
-    index = actor_index & 0xFF;
+    index = actor_index & BYTE_MASK;
     if (D_8014688E[index * ACTOR_SIZE] != 9) {
         g_Actors[index].interaction_flags |= ACTOR_FLAG_SCRIPT_PENDING;
         func_801B5BDC(g_Task->direction_08);

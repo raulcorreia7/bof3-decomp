@@ -5,7 +5,7 @@ MATCH void func_801DDAF0(void) {
     volatile PartyBattler* work_b;
     u32                    index;
 
-    index                               = Battle_AllocEffect(0u, 6u) & 0xFF;
+    index                               = Battle_AllocEffect(0u, 6u) & BYTE_MASK;
     work_a                              = g_Task;
     g_BattleEffects[index].unk_09       = 0u;
     work_b                              = g_Task;

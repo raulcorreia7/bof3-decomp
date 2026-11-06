@@ -329,7 +329,7 @@ MATCH void func_801F0FA4(void) {
 INCLUDE_ASM(func_801F1090);
 
 MATCH void func_801F117C(void) {
-    if ((func_8014DAEC() & 0xFF) != 0u) {
+    if ((func_8014DAEC() & BYTE_MASK) != 0u) {
         g_Task->header.step += 1u;
     }
 }

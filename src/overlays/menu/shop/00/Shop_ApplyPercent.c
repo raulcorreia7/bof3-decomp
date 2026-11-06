@@ -3,7 +3,7 @@
 MATCH s32 Shop_ApplyPercent(s32 value, s32 percent) {
     u32 scaled;
 
-    scaled = (u32)(value * (percent & 0xFFFF)) / 100;
+    scaled = (u32)(value * (percent & HALF_MASK)) / 100;
     if (scaled == 0) {
         scaled = 1;
     }

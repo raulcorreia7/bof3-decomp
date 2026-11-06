@@ -10,5 +10,5 @@ MATCH void Scene_ClearScanBars(void) {
         bar->in_use = 0;
         index += 1;
         bar += 1;
-    } while ((u32)(index & 0xFF) < SCAN_BAR_COUNT);
+    } while ((u32)(index & BYTE_MASK) < SCAN_BAR_COUNT);
 }

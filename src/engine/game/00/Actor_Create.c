@@ -5,7 +5,7 @@
 MATCH void Actor_Create(u8* request) {
     u8 slot;
 
-    slot = Actor_FindFreeSlot() & 0xFF;
+    slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (slot != GAME_NONE) {
         g_ActorSlots[slot].header.flags  = 1;
         g_ActorSlots[slot].type          = request[1];

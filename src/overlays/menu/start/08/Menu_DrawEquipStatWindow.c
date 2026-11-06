@@ -35,8 +35,8 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s3
     val9      = character_index;
     val5      = equip_slot;
     val4      = 0;
-    character = &g_Characters[val9 & 0xFF];
-    tmp3      = val5 & 0xFF;
+    character = &g_Characters[val9 & BYTE_MASK];
+    tmp3      = val5 & BYTE_MASK;
     val11     = item_id;
     switch (tmp3) {
         default:
@@ -56,12 +56,12 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s3
             val8 = 3;
             break;
     }
-    val10    = val9 & 0xFF;
-    stack_28 = (((s32)(Item_GetEquipability(val8, val11) & 0xFF) >> val10) ^ 1) & 1;
+    val10    = val9 & BYTE_MASK;
+    stack_28 = (((s32)(Item_GetEquipability(val8, val11) & BYTE_MASK) >> val10) ^ 1) & 1;
     val9     = stack_28;
-    UI_DrawWindow((val1 + 3) & 0xFFFF, (val0 + 3) & 0xFFFF, 108, 48, (s32)val9, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow((val1 + 3) & HALF_MASK, (val0 + 3) & HALF_MASK, 108, 48, (s32)val9, CHARACTER_BLOCK->window_style);
     if (val9 == 0) {
-        Char_PreviewEquip(val10, (val5 - 1) & 0xFF, val11, &stack_18[0], &stack_20[0]);
+        Char_PreviewEquip(val10, (val5 - 1) & BYTE_MASK, val11, &stack_18[0], &stack_20[0]);
         val10       = 0;
         val6        = g_UiFormatBuffer;
         byte_buffer = stack_18;
@@ -72,12 +72,12 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s3
         stack_20[2] = copy_word;
         stack_18[2] = copy_byte;
         do {
-            val9 = val10 & 0xFF;
+            val9 = val10 & BYTE_MASK;
             val10 += 1;
             sprintf((char*)val6, g_MenuStatFormat, stack_20[val9]);
             tmp0 = val0 + (val9 * 0xF) + 8;
             UI_DrawGlyphString(val7 >> 16, tmp0, byte_buffer[val9], val6);
-        } while ((u32)(val10 & 0xFF) < 3U);
+        } while ((u32)(val10 & BYTE_MASK) < 3U);
         val2 = val1 + 0x46;
     } else {
         val4   = 7;
@@ -93,15 +93,15 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s3
         val2 = val1 + 0x46;
     }
     val10 = 0;
-    Menu_DrawCharacterPortrait(val2 & 0xFFFF, (val0 + 2) & 0xFFFF, character->character_id, stack_28);
+    Menu_DrawCharacterPortrait(val2 & HALF_MASK, (val0 + 2) & HALF_MASK, character->character_id, stack_28);
     tmp1 = val1 + 5;
     val9 = tmp1 << 0x10;
-    val3 = 0 & 0xFF;
+    val3 = 0 & BYTE_MASK;
     do {
-        UI_DrawText(tmp1, (s16)(val0 + (val3 * 15) + 6), val4 & 0xFF, 0xFFU, (D_801ECB2C + (val3 * 6)));
+        UI_DrawText(tmp1, (s16)(val0 + (val3 * 15) + 6), val4 & BYTE_MASK, 0xFFU, (D_801ECB2C + (val3 * 6)));
         val10 += 1;
-        val3 = val10 & 0xFF;
-    } while ((u32)(val10 & 0xFF) < 3U);
+        val3 = val10 & BYTE_MASK;
+    } while ((u32)(val10 & BYTE_MASK) < 3U);
     UI_DrawSpriteRun(val1, val0, D_801EC7F8, 0);
 }
 #else

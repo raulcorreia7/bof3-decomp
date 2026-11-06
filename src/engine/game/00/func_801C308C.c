@@ -24,7 +24,7 @@ MATCH void func_801C308C(s32 arg) {
         page                            = (sel >> 3) << 9;
         addr_dst                        = page + base_dst;
         row                             = (sel & 7) << 6;
-        *(u16*)(off + (row + addr_dst)) = seed.cells[arg & 0xFF];
+        *(u16*)(off + (row + addr_dst)) = seed.cells[arg & BYTE_MASK];
     } while (index < 32);
     g_GfxPalettePending = 1;
     /* FAKE: hold cue arg after store. */

@@ -9,15 +9,15 @@ MATCH u8 Item_Remove(s32 category, u8 item, s32 amount, s32 unused) {
     u8  qty;
     if (item == 0)
         return false;
-    if ((amount & 0xFF) == 0)
+    if ((amount & BYTE_MASK) == 0)
         return false;
-    ids   = D_801C893C[category & 0xFF];
-    qtys  = D_801C8950[category & 0xFF];
+    ids   = D_801C893C[category & BYTE_MASK];
+    qtys  = D_801C8950[category & BYTE_MASK];
     index = 0;
-    while ((index & 0xFF) < INV_SLOTS_PER_CATEGORY) {
+    while ((index & BYTE_MASK) < INV_SLOTS_PER_CATEGORY) {
         if (*ids == item) {
             qty = *qtys;
-            if (qty >= (u32)(amount & 0xFF)) {
+            if (qty >= (u32)(amount & BYTE_MASK)) {
                 *qtys -= amount;
                 if (*qtys == 0)
                     *ids = 0;

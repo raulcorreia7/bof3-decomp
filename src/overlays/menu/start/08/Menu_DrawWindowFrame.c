@@ -34,7 +34,7 @@ NON_MATCHING void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height) {
     stack_18.pos.y.raw = 152;
     stack_18.h         = 8;
     stack_18.w         = 8;
-    tmp0               = GetTPage(0, 0, 832, 256) & 0xFFFF;
+    tmp0               = GetTPage(0, 0, 832, 256) & HALF_MASK;
     stack_50           = &stack_18;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tmp0, (RECT*)&stack_18);
     GFX_AddPrim(1U, 0xCU);
@@ -56,7 +56,7 @@ NON_MATCHING void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height) {
     stack_18.pos.y.raw = 160;
     stack_18.h         = 8;
     stack_18.w         = 8;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256) & 0xFFFF, (RECT*)stack_50);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256) & HALF_MASK, (RECT*)stack_50);
     GFX_AddPrim(1U, 0xCU);
     val7 = (SPRT*)g_GfxPrimCursor;
     SetSprt(val7);
@@ -72,7 +72,7 @@ NON_MATCHING void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height) {
     stack_18.pos.y.raw = 152;
     stack_18.h         = 8;
     stack_18.w         = 8;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256) & 0xFFFF, (RECT*)stack_50);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256) & HALF_MASK, (RECT*)stack_50);
     GFX_AddPrim(1U, 0xCU);
     val7 = (SPRT*)g_GfxPrimCursor;
     SetSprt(val7);
@@ -89,7 +89,7 @@ NON_MATCHING void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height) {
     stack_18.pos.y.raw = 160;
     stack_18.h         = 8;
     stack_18.w         = 8;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256) & 0xFFFF, (RECT*)stack_50);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256) & HALF_MASK, (RECT*)stack_50);
     GFX_AddPrim(1U, 0xCU);
     val7 = (SPRT*)g_GfxPrimCursor;
     SetSprt(val7);
@@ -103,7 +103,7 @@ NON_MATCHING void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height) {
     stack_18.pos.y.raw = 160;
     stack_18.h         = 8;
     stack_18.w         = 8;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256) & 0xFFFF, (RECT*)stack_50);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256) & HALF_MASK, (RECT*)stack_50);
     GFX_AddPrim(1U, 0xCU);
     val7 = (SPRT*)g_GfxPrimCursor;
     SetSprt(val7);
@@ -122,7 +122,7 @@ NON_MATCHING void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height) {
     stack_18.pos.y.raw = 0;
     stack_18.h         = 256;
     stack_18.w         = 256;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256) & 0xFFFF, (RECT*)stack_50);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256) & HALF_MASK, (RECT*)stack_50);
     GFX_AddPrim(1U, 0xCU);
     val1 = val4 << 0x10;
     val1 = val4;

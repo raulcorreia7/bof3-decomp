@@ -12,7 +12,7 @@ MATCH u8 func_8014DAEC(void) {
     result         = 0;
     count          = g_Task->unk_4A - 1;
     g_Task->unk_4A = count;
-    if ((count & 0xFF) == 0) {
+    if ((count & BYTE_MASK) == 0) {
         index = g_Task->script_pc;
         if ((index >> 1) == g_Task->unk_49) {
             g_Task->unk_4A = 1;

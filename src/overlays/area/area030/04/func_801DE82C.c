@@ -12,7 +12,7 @@ MATCH void func_801DE82C(void) {
     s16           turn;
 
     if (FISHING_STATE->step_timer_09 == 0) {
-        if (func_801E0680() & 0xFF) {
+        if (func_801E0680() & BYTE_MASK) {
             FISHING_STATE->handler_index_01 = 3;
         } else {
             roll = rand();

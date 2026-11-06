@@ -20,7 +20,7 @@ MATCH void func_801D177C(void) {
         Char_RebuildStats(&g_Characters[g_CharSlot[D_80144F5A[i]]]);
     }
     i = 0;
-    while (i < (Party_CountOrder(0) & 0xFF)) {
+    while (i < (Party_CountOrder(0) & BYTE_MASK)) {
         s_PartyCharacterIds[i] = D_80144F5A[i];
         D_801ED613[i]          = D_80144F5D[i];
         i++;

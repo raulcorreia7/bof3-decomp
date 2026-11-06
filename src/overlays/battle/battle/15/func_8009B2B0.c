@@ -40,7 +40,7 @@ MATCH void func_8009B2B0(void) {
         }
         player_sum /= g_BattleLivingPartyCount;
 
-        roll = func_8009BACC(player_sum - enemy_sum) & 0xFF;
+        roll = func_8009BACC(player_sum - enemy_sum) & BYTE_MASK;
         if (roll >= (rand() & 0x3F)) {
             /* FAKE: keeps roll live across the compare so the slt result takes v0 as in retail; pure C best 98.06%,
              * no source spelling of the compare moves the result register. */

@@ -10,5 +10,5 @@ MATCH void func_801F39AC(void) {
         FIELD(s16, cell, 0xCu) = 0;
         index += 1;
         cell += 0xE;
-    } while ((index & 0xFF) < 0x80U);
+    } while ((index & BYTE_MASK) < 0x80U);
 }

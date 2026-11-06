@@ -8,13 +8,13 @@ MATCH u32 Char_GetExpProgress(u32 character, u32 level, u32 exp) {
     u32 second;
     u32 result;
 
-    first  = Char_GetExpForLevel(character & 0xFF, level & 0xFF);
-    second = Char_GetExpForLevel(character & 0xFF, (level + 1) & 0xFF);
+    first  = Char_GetExpForLevel(character & BYTE_MASK, level & BYTE_MASK);
+    second = Char_GetExpForLevel(character & BYTE_MASK, (level + 1) & BYTE_MASK);
     /* Compare second against first: the original tests the newer row sum. */
     if (second == first) {
         result = 0;
     } else {
-        result = (((exp - first) * 0x18) / (second - first)) & 0xFF;
+        result = (((exp - first) * 0x18) / (second - first)) & BYTE_MASK;
     }
     return result;
 }

@@ -23,13 +23,13 @@ MATCH void func_801EF14C(void) {
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
-    if (!(timer & 0xFF)) {
+    if (!(timer & BYTE_MASK)) {
         g_Task->unk_2E.half = D_801EB4E0->unk_2E.half;
         g_Task->unk_30.half = D_801EB4E0->unk_30.half;
         if (rand() & 1) {
-            g_Task->unk_14 = D_801EB4E0->unk_14 + (rand() & 0xFF);
+            g_Task->unk_14 = D_801EB4E0->unk_14 + (rand() & BYTE_MASK);
         } else {
-            g_Task->unk_14 = D_801EB4E0->unk_14 - (rand() & 0xFF);
+            g_Task->unk_14 = D_801EB4E0->unk_14 - (rand() & BYTE_MASK);
         }
         g_Task->unk_03 = rand() & 7;
         g_Task->unk_0C = (rand() & 7) + 8;

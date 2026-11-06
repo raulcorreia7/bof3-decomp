@@ -55,21 +55,21 @@ NON_MATCHING s32 func_80155560(u32 part_word, void* prim, s32 mode) {
             tmp14    = (*((val9 * 4) + &g_AreaMapBundle.bank_offsets_04[0][1]) * 4) +
                        (((val8 & 0x7FF) * 8) + (MAP_BUNDLE_BASE + 0x00));
             stack_18 = FIELD(s8, tmp14, 0x3u);
-            stack_1A = FIELD(s16, tmp14, 0x2u) & 0xFF;
+            stack_1A = FIELD(s16, tmp14, 0x2u) & BYTE_MASK;
             stack_20 = FIELD(u8, tmp14, 0x1u);
             tmp15    = tmp14 + 4;
             stack_22 = (u16) * (u8*)(tmp14);
             stack_28 = FIELD(s8, tmp15, 0x3u);
-            stack_2A = FIELD(s16, tmp15, 0x2u) & 0xFF;
+            stack_2A = FIELD(s16, tmp15, 0x2u) & BYTE_MASK;
             stack_30 = FIELD(u8, tmp15, 0x1u);
             stack_32 = FIELD(u8, tmp14, 0x4u);
         } else {
             tmp16    = (*((val9 * 4) + &g_AreaMapBundle.bank_offsets_04[0][0]) * 4) +
-                       (((val8 & 0xFF) * 4) + (MAP_BUNDLE_BASE + 0x00));
+                       (((val8 & BYTE_MASK) * 4) + (MAP_BUNDLE_BASE + 0x00));
             tmp9     = FIELD(s8, tmp16, 0x3u);
             stack_28 = (s16)tmp9;
             stack_18 = (s16)tmp9;
-            tmp12    = FIELD(s16, tmp16, 0x2u) & 0xFF;
+            tmp12    = FIELD(s16, tmp16, 0x2u) & BYTE_MASK;
             stack_22 = tmp12;
             stack_1A = tmp12;
             tmp1     = tmp9 + FIELD(u8, tmp16, 0x1u);

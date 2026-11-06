@@ -16,7 +16,7 @@ MATCH u32 func_800AF6B8(u32 axis_34_bound, u32 axis_38_bound, s32 packed_span, u
     first      = work->range_axis_34 + half_value - axis_34_bound;
     second     = work->range_axis_38 + half_value - axis_38_bound;
     if (extent >= first && extent >= second) {
-        result = (extent >> 8) >= (span & 0xFFFF);
+        result = (extent >> 8) >= (span & HALF_MASK);
     }
     return result;
 }

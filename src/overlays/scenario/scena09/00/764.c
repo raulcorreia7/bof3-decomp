@@ -18,7 +18,7 @@ MATCH void func_801F73A0(void) {
 }
 
 MATCH void func_801F73F0(void) {
-    if (!(func_801F75BC() & 0xFF)) {
+    if (!(func_801F75BC() & BYTE_MASK)) {
         Actor_Clear();
     }
 }

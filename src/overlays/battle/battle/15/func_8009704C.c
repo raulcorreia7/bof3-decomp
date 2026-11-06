@@ -131,7 +131,7 @@ NON_MATCHING void func_8009704C(void) {
     if ((g_InputPressed & D_80145AC2) != 0u) {
         u8* slot;
 
-        if ((func_80097574() & 0xFF) != 0) {
+        if ((func_80097574() & BYTE_MASK) != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;
         }

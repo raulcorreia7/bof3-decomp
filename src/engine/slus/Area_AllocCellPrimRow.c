@@ -8,7 +8,7 @@ MATCH u16 Area_AllocCellPrimRow(void) {
     u16 row_id;
 
     index = g_AreaCellPrimFreeIndex;
-    if ((index & 0xFFFF) == 0) {
+    if ((index & HALF_MASK) == 0) {
         return 0;
     }
     row_id                  = g_AreaCellPrimFreeIds[index];

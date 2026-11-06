@@ -48,7 +48,7 @@ MATCH void func_800B0498(void) {
         } else {
             ((void (*)(u16, u16, s32, s32))Menu_DrawCursorSprite)(
                 ((u16)(g_MenuCurrentPanel->x + 14) + SEL_SLOT * 30),
-                ((u16)(g_MenuCurrentPanel->y + 44) + ((substate_row = row & 0xFF) << 5)), 0, row);
+                ((u16)(g_MenuCurrentPanel->y + 44) + ((substate_row = row & BYTE_MASK) << 5)), 0, row);
         }
     }
 }

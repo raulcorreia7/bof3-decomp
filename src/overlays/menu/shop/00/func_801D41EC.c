@@ -16,7 +16,7 @@ MATCH void func_801D41EC(void) {
     }
     count      = D_80148654 - 1;
     D_80148654 = count;
-    if ((count & 0xFF) == 0) {
+    if ((count & BYTE_MASK) == 0) {
         D_80148652 += 1;
         UI_SetMode(0);
         for (i = 0; i < 4; i++) {

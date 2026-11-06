@@ -10,7 +10,7 @@ MATCH void func_8019B4A0(void) {
     state = (u16*)&g_GameEntryState;
     if (*state != 1) {
         if (g_Task->unk_0A != 0) {
-            if ((func_8019C1E4() & 0xFF) == 0) {
+            if ((func_8019C1E4() & BYTE_MASK) == 0) {
                 Area_SetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), g_Task->unk_0B);
                 g_Task->unk_0A = (u8)((g_Task->unk_0A + 1) >> 1);
                 vx             = g_FacingOffsets[g_Task->direction_08].x;

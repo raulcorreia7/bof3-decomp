@@ -39,7 +39,7 @@ NON_MATCHING void func_80154438(void) {
     if (*record != 0) {
         do {
             header = *record;
-            if ((header & 0xFFFF) == 0x8001) {
+            if ((header & HALF_MASK) == 0x8001) {
                 clean_header = header & ~1u;
                 *record      = clean_header;
                 if (((u8*)record)[7] < 2) {
@@ -53,7 +53,7 @@ NON_MATCHING void func_80154438(void) {
                             width              = *(u8*)MAP_BUNDLE_BASE;
                             stride             = *(u8*)(MAP_BUNDLE_BASE + 1);
                             row_product        = width * stride;
-                            lookup_product     = (value & 0xFF) * width;
+                            lookup_product     = (value & BYTE_MASK) * width;
                             table_offset       = table << 2;
                             row_offset         = entry_row << 1;
                             sum                = table_offset + row_offset;

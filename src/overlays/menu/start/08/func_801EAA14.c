@@ -39,7 +39,7 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
     if (stack_18->unk_0A != 0) {
         val8     = g_UiFormatBuffer;
         val8     = g_UiFormatBuffer;
-        stack_30 = (tmp1 + 0x5D) & 0xFFFF;
+        stack_30 = (tmp1 + 0x5D) & HALF_MASK;
         val0     = tmp1 + 0x37;
         tmp0     = tmp1 + 0x1F;
         stack_38 = tmp0 << 0x10;
@@ -53,18 +53,18 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
                 val10 = 0;
                 val7  = 0;
             }
-            val6 = val4 & 0xFFFF;
-            UI_DrawWindow(val5 & 0xFFFF, val6, 125, 48, (val10 + 0x80) & 0xFF, (s32)D_80144952);
-            if (!(val10 & 0xFF)) {
+            val6 = val4 & HALF_MASK;
+            UI_DrawWindow(val5 & HALF_MASK, val6, 125, 48, (val10 + 0x80) & BYTE_MASK, (s32)D_80144952);
+            if (!(val10 & BYTE_MASK)) {
                 val9 = (FIELD(u16, val11, 0xCu) >> 6) & 2;
             } else {
                 val9 = 1;
             }
-            val3 = val7 & 0xFF;
+            val3 = val7 & BYTE_MASK;
             Menu_DrawCharacterPortrait((u16)stack_30, val6, FIELD(u8, val11, 0x5u), val9);
             UI_DrawText((s16)(val5 + 20), (s16)(val4 + 1), val3, 5U, val11);
             val6 = val4 + 0x15;
-            Menu_DrawIcon((val5 + 2) & 0xFFFF, val6 & 0xFFFF, 3U, val10);
+            Menu_DrawIcon((val5 + 2) & HALF_MASK, val6 & HALF_MASK, 3U, val10);
             sprintf((s8*)g_UiFormatBuffer, &D_801D0F18, FIELD(u8, val11, 0x6u));
             val6 <<= 0x10;
             val6 = (u16)((s32)val6 >> 0x10);
@@ -100,8 +100,8 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
                 UI_DrawTextString(val0, val6, val2, 0x10, D_801ED5DC);
                 val1 = val5 + 2;
             }
-            val6 = val10 & 0xFF;
-            Menu_DrawIcon(val1 & 0xFFFF, (val4 + 0x1D) & 0xFFFF, 0U, (u8)val6);
+            val6 = val10 & BYTE_MASK;
+            Menu_DrawIcon(val1 & HALF_MASK, (val4 + 0x1D) & HALF_MASK, 0U, (u8)val6);
             if (val6 == 0) {
                 if (FIELD(u16, val11, 0xCu) & 0x2000) {
                     val7 = 4;
@@ -114,15 +114,15 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
             }
             sprintf((s8*)g_UiFormatBuffer, &D_801D0F1C, FIELD(u16, val11, 0x14u));
             UI_DrawGlyphString((s16)(stack_38 >> 16), (s16)(val4 + 29), val7, g_UiFormatBuffer);
-            if (!(val10 & 0xFF)) {
+            if (!(val10 & BYTE_MASK)) {
                 val7 = (FIELD(u8, val11, 0x1Au) != 0) * 4;
             } else {
                 val7 = 7;
             }
             sprintf((s8*)g_UiFormatBuffer, &D_801D0F24, FIELD(u16, val11, 0x1Cu));
             UI_DrawGlyphString((s16)(stack_38 >> 16), (s16)(val4 + 29), val7, g_UiFormatBuffer);
-            val6 = val10 & 0xFF;
-            Menu_DrawIcon((val5 + 2) & 0xFFFF, (val4 + 0x25) & 0xFFFF, 1U, (u8)val6);
+            val6 = val10 & BYTE_MASK;
+            Menu_DrawIcon((val5 + 2) & HALF_MASK, (val4 + 0x25) & HALF_MASK, 1U, (u8)val6);
             val7 = -(s32)val6 & 7;
             if (val6 == 0) {
                 tmp3 = FIELD(u16, val11, 0x16u);

@@ -3,8 +3,8 @@
 MATCH void func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode) {
     PartyBattler* dst;
 
-    dst = (PartyBattler*)func_800AC754(entry_id & 0xFF);
-    switch (mode & 0xFF) {
+    dst = (PartyBattler*)func_800AC754(entry_id & BYTE_MASK);
+    switch (mode & BYTE_MASK) {
         case 0:
             dst->unk_4B = source_record->unk_4B;
             dst->unk_50 = source_record->unk_50;

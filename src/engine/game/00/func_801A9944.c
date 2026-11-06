@@ -51,7 +51,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
         block_5:
             next_cursor_e0e3 = state->cursor + 1;
             state->cursor    = next_cursor_e0e3;
-            state->unk_08    = *(target_bytes + (next_cursor_e0e3 & 0xFFFF));
+            state->unk_08    = *(target_bytes + (next_cursor_e0e3 & HALF_MASK));
             func_801A17A0((u8*)state);
             state_flags    = state->flag_00;
             updated_flags  = state_flags & ~ACTOR_FLAG_SCRIPT_REQUEST;
@@ -83,7 +83,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
         case 0xE7:
             next_cursor_e7 = state->cursor + 1;
             state->cursor  = next_cursor_e7;
-            func_801A2788(*(target_bytes + (next_cursor_e7 & 0xFFFF)));
+            func_801A2788(*(target_bytes + (next_cursor_e7 & HALF_MASK)));
             state->unk_07 = 0;
             return 0xFFU;
         case 0xE9:
@@ -121,7 +121,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
         case 0xE8:
             next_cursor_e8 = state->cursor + 1;
             state->cursor  = next_cursor_e8;
-            state->unk_04  = *(target_bytes + (next_cursor_e8 & 0xFFFF));
+            state->unk_04  = *(target_bytes + (next_cursor_e8 & HALF_MASK));
             if (Actor_GetType() == 2) {
                 selection = 0;
                 goto block_29; /* every command that keeps the selection shares the return */
@@ -153,7 +153,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             state->cursor = next_cursor;
         default:
         block_29:
-            result = selection & 0xFF;
+            result = selection & BYTE_MASK;
             return result;
     }
 }

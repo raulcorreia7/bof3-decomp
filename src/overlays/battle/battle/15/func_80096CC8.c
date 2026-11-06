@@ -22,12 +22,12 @@ MATCH void func_80096CC8(void) {
     }
     if ((trigger & PADLright) != 0) {
         D_801EB4D8->command.target = Battle_FindSelectableSlotForward(
-            func_801DD7D8(g_BattlePartyCount - 1, 0, (s8)D_801EB4D8->command.target + 1) & 0xFF);
+            func_801DD7D8(g_BattlePartyCount - 1, 0, (s8)D_801EB4D8->command.target + 1) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if ((trigger & PADLleft) != 0) {
         D_801EB4D8->command.target = Battle_FindSelectableSlotBackward(
-            func_801DD7D8(g_BattlePartyCount - 1, 0, (s8)D_801EB4D8->command.target - 1) & 0xFF);
+            func_801DD7D8(g_BattlePartyCount - 1, 0, (s8)D_801EB4D8->command.target - 1) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

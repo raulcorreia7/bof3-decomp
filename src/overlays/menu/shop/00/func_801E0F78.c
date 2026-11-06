@@ -39,7 +39,7 @@ NON_MATCHING void func_801E0F78(void) {
     D_80148626                    = 3;
     D_8014862E                    = 4;
     D_80148624                    = 0;
-    if (!(Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) & 0xFF)) {
+    if (!(Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) & BYTE_MASK)) {
         D_8014840A = 0x12;
         D_8014840C = BATTLE_PARTY_STRIDE;
         D_80148409 = 7;

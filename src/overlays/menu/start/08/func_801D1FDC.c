@@ -10,7 +10,7 @@ MATCH void func_801D1FDC(void) {
     i = 0;
     for (;;) {
         count = Party_CountOrder(0);
-        index = i & 0xFF;
+        index = i & BYTE_MASK;
         if (index >= count) {
             break;
         }
