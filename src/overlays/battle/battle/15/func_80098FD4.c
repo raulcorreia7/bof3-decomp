@@ -8,7 +8,7 @@ MATCH void func_80098FD4(void) {
     cursor                   = &D_8014857C;
     group                    = cursor - 2;
     g_BattleSelectionLatch   = 0u;
-    D_801EB4D8->command.type = 5u;
+    D_801EB4D8->command.type = BATTLE_COMMAND_ITEM;
     g_BattleMessageSlot[1]   = 2u;
     g_BattleCommandCount += 1u;
     D_801EB5B1[((D_801EC328 - 1) & 0xF) * 8] = 1u;

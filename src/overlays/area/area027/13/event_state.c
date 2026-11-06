@@ -1,4 +1,5 @@
 #include "area027_13.h"
+#include "area/map.h"
 
 MATCH void func_801F394C(void) {
     switch (D_801448EC) {
@@ -24,7 +25,7 @@ MATCH void func_801F394C(void) {
             u8*  flag;
 
             if (TIMER_EXPIRED(*timer)) {
-                Game_RequestAreaChange(27, 0x260000u, 0x380000u, 144);
+                Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, 0x260000u, 0x380000u, 144);
                 D_801448EC = 4;
                 flag       = &g_ScriptVars[3];
                 (*flag)++;

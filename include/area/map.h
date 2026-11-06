@@ -5,7 +5,33 @@
 #include "types.h"
 
 typedef enum AreaId {
-    AREA_ID_DESERT_OF_DEATH_MAP = 189,
+    AREA_ID_DAUNA_MINE_ADULT           = 1,
+    AREA_ID_DAUNA_MINE_WORKER          = 2,
+    AREA_ID_DAUNA_MINE_INTRO           = 4,
+    AREA_ID_CEDAR_WOODS_BEFORE_NUE     = 9,
+    AREA_ID_DAUNA_MINE_WHELP           = 24,
+    AREA_ID_MCNEIL_MANOR_COURTYARD     = 26,
+    AREA_ID_MCNEIL_MANOR               = 27,
+    AREA_ID_TITLE_INTRO                = 31,
+    AREA_ID_MOMO_TOWER_FIRST_FLOOR     = 40,
+    AREA_ID_MOUNT_LEVETT               = 70,
+    AREA_ID_MOUNT_BOUMORE_SECOND       = 71,
+    AREA_ID_BEYD_TRAINING              = 92,
+    AREA_ID_DEIS_ROOM                  = 98,
+    AREA_ID_WYNDIA_BASEMENT_TELEPORTER = 100,
+    AREA_ID_MOUNT_ZUBLO_GISSHAN        = 103,
+    AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON   = 108,
+    AREA_ID_RELAY_POINT_A_PORTAL       = 112,
+    AREA_ID_STEEL_BEACH_MAP            = 121,
+    AREA_ID_BOAT_AFTER_BLACK_SHIP      = 133,
+    AREA_ID_OASIS                      = 150,
+    AREA_ID_MYRIA_STATION_HE_SHELLS    = 170,
+    AREA_ID_ADULT_CAMP                 = 187,
+    AREA_ID_BLACK_SHIP                 = 188,
+    AREA_ID_DESERT_OF_DEATH_MAP        = 189,
+    AREA_ID_DESERT_ENTRANCE_CAMP       = 193,
+    AREA_ID_DESERT_MANMO               = 196,
+    AREA_ID_END_GAME_SAVE              = 199,
 } AreaId;
 
 #define GAME_TABLE_ENTRY_SIZE 0x44

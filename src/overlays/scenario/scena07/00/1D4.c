@@ -1,4 +1,5 @@
 #include "scena07_00.h"
+#include "area/map.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -446,7 +447,7 @@ INCLUDE_ASM(func_801FD67C);
 MATCH s32 func_801FD960(s32 arg0, s32 arg1) {
     s32 value;
 
-    if (g_GameAreaId == 0x67) {
+    if (g_GameAreaId == AREA_ID_MOUNT_ZUBLO_GISSHAN) {
         if ((SYS_TestFlag(g_SceneFlags, 3) == 0) && (arg1 <= 0x200000)) {
             if (((arg0 >> 0x10) - 0x4A) < 2U) {
                 Game_SetScriptActive();

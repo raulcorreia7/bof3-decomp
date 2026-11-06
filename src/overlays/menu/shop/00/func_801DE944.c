@@ -1,4 +1,5 @@
 #include "shop_00.h"
+#include "area/map.h"
 
 /* Refreshes the status-panel rows and the field-camera scroll: fills the row
  * buffer from the party records, then on scene 0x85 copies the per-row scroll
@@ -24,7 +25,8 @@ MATCH void func_801DE944(void) {
     actor = D_80145F09;
     mode  = actor[0];
     EMI_LoaderStreamFamily(party[0], D_80144F5A[1], D_80144F5A[2], 0);
-    if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 0x77) != 0 && g_GameAreaId != 187) || g_GameAreaId == 133) {
+    if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 0x77) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) ||
+        g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         g_PartySize = Party_CountOrder(0);
         Party_BuildBattlers(0);
         i = 0;
@@ -66,7 +68,7 @@ MATCH void func_801DE944(void) {
         TASK_BYTES[3] = 0;
         TASK_BYTES[4] = 0;
     }
-    if (g_GameAreaId == 133) {
+    if (g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         i = 0;
         if (i < g_PartySize) {
             count = g_PartySize;
@@ -86,7 +88,7 @@ MATCH void func_801DE944(void) {
             func_80153DE8();
         }
     }
-    if (g_GameAreaId == 92) {
+    if (g_GameAreaId == AREA_ID_BEYD_TRAINING) {
         if ((i = 0) < g_PartySize) {
             scroll_x = 25 << 16;
             scroll_y = 60 << 16;

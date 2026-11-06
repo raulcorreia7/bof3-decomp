@@ -1,8 +1,5 @@
 #include "engine/slus/slus.h"
 
-/* clears the 56-by-28 halfword lookup table, then maps each record in
- * the g_AreaMapBundle.record_region_24 area-map record region to a wrapped lookup-table cell.
- */
 MATCH void Area_IndexCells(void) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
@@ -49,11 +46,11 @@ MATCH void Area_IndexCells(void) {
             difference = difference - dy;
             if (((u32)raw_row < AREA_CELL_GRID_ROWS) && ((u32)difference < AREA_CELL_GRID_ROWS)) {
                 {
-                    s32 row_step;
+                    s32 row_delta;
                     /* FAKE: Pin wrapped row to a0. */
                     MATCH_FAKE_PIN(s32, table_row, "a0");
-                    row_step = raw_row + 1;
-                    raw_row  = row_offset + row_step;
+                    row_delta = raw_row + 1;
+                    raw_row   = row_offset + row_delta;
                     if (raw_row < AREA_CELL_GRID_ROWS) {
                         table_row = raw_row;
                     } else {
@@ -65,11 +62,11 @@ MATCH void Area_IndexCells(void) {
                 MATCH_FAKE_BARRIER();
                 {
                     /* FAKE: Pin column step to v0 for the retail calculation. */
-                    MATCH_FAKE_PIN(s32, column_step, "v0");
+                    MATCH_FAKE_PIN(s32, column_delta, "v0");
                     /* FAKE: Pin wrapped column to a0 after row use ends. */
                     MATCH_FAKE_PIN(s32, table_column, "a0");
-                    column_step = difference / 2 + 1;
-                    difference  = column_offset + column_step;
+                    column_delta = difference / 2 + 1;
+                    difference   = column_offset + column_delta;
                     if (difference < AREA_CELL_GRID_COLS) {
                         table_column = difference;
                     } else {

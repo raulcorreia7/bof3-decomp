@@ -25,14 +25,14 @@ MATCH void Fairy_VillageBuildJobs(void) {
         }
 
         kind = g_FairyJobs[record].type;
-        if (kind == 0) {
+        if (kind == FAIRY_JOB_IDLE) {
             func_801F0BF4(task);
             func_801F0718(record, task);
             task++;
-        } else if (kind < 9) {
+        } else if (kind < FAIRY_JOB_HUNT) {
             func_801F08D8(record, task);
             task++;
-        } else if (kind == 10) {
+        } else if (kind == FAIRY_JOB_CLEAR) {
             if (g_GameAreaId >= 182) {
                 label = 0xCD;
             } else {
@@ -46,7 +46,7 @@ MATCH void Fairy_VillageBuildJobs(void) {
             D_80146904[task * ACTOR_SIZE / 2] = label;
             func_801F0718(record, task);
             task++;
-        } else if (kind == 11) {
+        } else if (kind == FAIRY_JOB_BUILD) {
             scene = g_GameAreaId;
             if (scene == 175 || scene == 178 || scene == 181 || scene == 185) {
                 label = 0xCE;

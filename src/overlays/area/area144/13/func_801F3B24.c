@@ -9,5 +9,5 @@ MATCH void func_801F3B24(void) {
         g_ScriptState->unk_07 = abs(diff);
         func_801ABBA8(g_ScriptState, g_Task->direction_08);
     }
-    g_GameFlags |= 8;
+    g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
 }

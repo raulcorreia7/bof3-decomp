@@ -1,4 +1,5 @@
 #include "area027_13.h"
+#include "area/map.h"
 
 /* Dispatch handlers, indexed by work byte +0x01. */
 static Callback s_WorkStates[6] = {
@@ -638,7 +639,7 @@ MATCH void func_801F37E4(void) {
             u8*  flag;
 
             if (TIMER_EXPIRED(*timer)) {
-                Game_RequestAreaChange(27, 0x4B0000u, 0x380000u, 143);
+                Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, 0x4B0000u, 0x380000u, 143);
                 D_801448EC = 4;
                 flag       = &g_ScriptVars[3];
                 (*flag)++;

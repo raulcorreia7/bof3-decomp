@@ -4,7 +4,7 @@ MATCH void func_800C2158(void) {
     u16* state;
 
     func_801E3160();
-    if (g_BattleCurrentEnemy->turn.command.type == 4) {
+    if (g_BattleCurrentEnemy->turn.command.type == BATTLE_COMMAND_ABILITY) {
         g_BattleCurrentEnemy->ap -= D_801463C8;
     }
     state = &g_BattleState;
