@@ -1,5 +1,23 @@
 #include "game_00.h"
 
+/* Opcodes 0x60 to 0x66 of the actor script bank: pick the facing animation
+ * script for the task from its facing, lock the route, and select the script.
+ * The bases index the script bank records; their animation roles are not
+ * proven. Named from the case bodies. */
+/* Opcodes 0x60 to 0x66 of the actor script bank: pick the facing animation
+ * script for the task from its facing, lock the route, and select the script.
+ * The bases index the script bank records; their animation roles are not
+ * proven. Named from the case bodies. */
+typedef enum ActorScriptFaceOp {
+    ACTOR_SCRIPT_FACE_SELECT_FACING  = 0x60, /* the script for the current facing */
+    ACTOR_SCRIPT_FACE_SELECT_BASE_14 = 0x61, /* facing + bank base 0x14 */
+    ACTOR_SCRIPT_FACE_SELECT_BASE_1C = 0x62, /* facing + bank base 0x1C */
+    ACTOR_SCRIPT_FACE_SELECT_BASE_24 = 0x63, /* facing + bank base 0x24 */
+    ACTOR_SCRIPT_FACE_SELECT_BASE_2C = 0x64, /* facing + bank base 0x2C */
+    ACTOR_SCRIPT_FACE_AXIS_BASE_34   = 0x65, /* straighten to the axis facing, script base 0x34 + axis */
+    ACTOR_SCRIPT_FACE_AXIS_BASE_10   = 0x66, /* straighten to the axis facing, script base 0x10 + axis */
+} ActorScriptFaceOp;
+
 MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
     u8  action;
     u8  result;
@@ -9,25 +27,25 @@ MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
 
     action = ((u8*)target)[FIELD(u16, sub, 0xAu)];
     switch (action) {
-        case 0x61:
+        case ACTOR_SCRIPT_FACE_SELECT_BASE_14:
             result = (g_Task->direction_08 & 7) + 0x14;
             break;
-        case 0x62:
+        case ACTOR_SCRIPT_FACE_SELECT_BASE_1C:
             result = (g_Task->direction_08 & 7) + 0x1C;
             break;
-        case 0x63:
+        case ACTOR_SCRIPT_FACE_SELECT_BASE_24:
             result = (g_Task->direction_08 & 7) + 0x24;
             break;
-        case 0x64:
+        case ACTOR_SCRIPT_FACE_SELECT_BASE_2C:
             result = (g_Task->direction_08 & 7) + 0x2C;
             break;
-        case 0x65:
+        case ACTOR_SCRIPT_FACE_AXIS_BASE_34:
             work   = g_Task;
             mode   = work->direction_08;
             result = ((mode >> 1) & 3) | 0x34;
             /* 0x65 and 0x66 share the route update at set_route. */
             goto set_route;
-        case 0x66:
+        case ACTOR_SCRIPT_FACE_AXIS_BASE_10:
             work   = g_Task;
             mode   = work->direction_08;
             result = ((mode >> 1) & 3) | 0x10;
@@ -36,7 +54,7 @@ MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
             mode += 1;
             work->direction_08 = mode;
             break;
-        case 0x60:
+        case ACTOR_SCRIPT_FACE_SELECT_FACING:
         default:
             result = g_Task->direction_08 & 7;
             break;
