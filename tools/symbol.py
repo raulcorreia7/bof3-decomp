@@ -34,7 +34,6 @@ import argparse
 import collections
 import re
 import subprocess
-import sys
 from pathlib import Path
 
 from bof3.resolve.ids import source_folder
