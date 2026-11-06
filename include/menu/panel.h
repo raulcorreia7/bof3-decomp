@@ -163,13 +163,6 @@ ASSERT_OFFSET(MenuPanelTask, unk_1A, 0x1A);
 ASSERT_OFFSET(MenuPanelTask, item_table, 0x20);
 ASSERT_SIZE(MenuPanelTask, MENU_PANEL_TASK_SIZE);
 
-/* The panel icon is the PsyQ SDK's 8x8 sprite primitive: the panel writes the
- * sprite fields itself at the primitive cursor 0x8014598C and `SetSprt8` only
- * tags it. The SDK record owns the layout (x0 at 0x08, y0 at 0x0A, u0 and v0
- * at 0x0C and 0x0D, the clut at 0x0E), so the menu uses that record instead of
- * a copy of it. */
-typedef SPRT_8 MenuIconPrim;
-
 /* The shop's choice panel is slot 7 of g_MenuPanelTasks (0x8014842C), built by
  * `emi/etc/shop/00@0x801D2828` and `@0x801D334C`. Its retail symbol is
  * declared in sys/gameui.h, because the same address holds a different byte
@@ -190,10 +183,10 @@ extern u8             D_80148699;
 /* Draw the panel's icon through the PsyQ 8x8 sprite primitive. The panel writes
  * the sprite fields itself at the primitive cursor; SetSprt8 only tags it. */
 static inline void MenuDrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color) {
-    MenuIconPrim* icon;
+    SPRT_8* icon;
 
-    icon = (MenuIconPrim*)g_GfxPrimCursor;
-    SetSprt8((SPRT_8*)icon);
+    icon = (SPRT_8*)g_GfxPrimCursor;
+    SetSprt8(icon);
     icon->x0   = x;
     icon->y0   = y;
     icon->u0   = (u8)(u * 8);

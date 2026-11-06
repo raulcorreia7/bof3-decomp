@@ -83,9 +83,6 @@ typedef struct EnemyBattlerDrop {
 /* Two drops fill 0x98..0xA0 of an EnemyBattler: stats follows drops[2]. */
 ASSERT_SIZE(EnemyBattlerDrop, 0x4);
 
-/* The mode handler an enemy record points at. */
-typedef ModeFunc EnemyBattlerEventFunc;
-
 /* Half of a 0x20-byte battler stat block. The retail copies each half with an
  * unaligned word pair, so the two halves stay one 16-byte type. */
 typedef struct BattleStatBlockPart {
@@ -404,19 +401,19 @@ typedef struct EnemyBattler {
     u8               unk_E1;
     u8               unk_E2; /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
     u8               unk_E3; /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
-    EnemyBattlerEventFunc unk_E4;
-    u16*                  unk_E8;
-    u8*                   script;
-    u8                    unk_F0;
-    u8                    pad_F1[ENEMY_COMBATANT_PAD_F1_SIZE];
-    BattleTurn            turn;             /* +0xF4 the action the enemy has queued and its outcome */
-    StatMultipliers       stat_multipliers; /* +0x108 */
-    u8                    pad_10C[6];
-    u8                    unk_112;
-    u8                    pad_113[0x1];
-    u8                    unk_114;
-    u8                    unk_115;
-    u8                    pad_116[0x2];
+    ModeFunc         unk_E4;
+    u16*             unk_E8;
+    u8*              script;
+    u8               unk_F0;
+    u8               pad_F1[ENEMY_COMBATANT_PAD_F1_SIZE];
+    BattleTurn       turn;             /* +0xF4 the action the enemy has queued and its outcome */
+    StatMultipliers  stat_multipliers; /* +0x108 */
+    u8               pad_10C[6];
+    u8               unk_112;
+    u8               pad_113[0x1];
+    u8               unk_114;
+    u8               unk_115;
+    u8               pad_116[0x2];
 } EnemyBattler;
 
 ASSERT_SIZE(EnemyBattler, 0x118);
@@ -452,7 +449,7 @@ ASSERT_OFFSET(EnemyBattler, turn, 0xF4);
 ASSERT_OFFSET(EnemyBattler, unk_E8, 0xE8);
 
 /* Point a boss enemy at its script, event handler and step table. */
-static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, EnemyBattlerEventFunc handler, u16* steps) {
+static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, ModeFunc handler, u16* steps) {
     enemy->script = script;
     enemy->unk_E4 = handler;
     enemy->unk_E8 = steps;

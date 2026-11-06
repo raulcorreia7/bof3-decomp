@@ -304,14 +304,14 @@ MATCH void func_801F3060(void) {
 }
 
 MATCH void func_801F318C(s16 radius) {
-    ScreenPoint  center;
-    ScreenPoint  point;
-    s32          pos[4];
-    u8           scratch[0x20];
-    POLY_G3*     primitive;
-    ScreenPoint* ring;
-    s32          angle = 65408;
-    s8           i     = 0;
+    Vec2U16  center;
+    Vec2U16  point;
+    s32      pos[4];
+    u8       scratch[0x20];
+    POLY_G3* primitive;
+    Vec2U16* ring;
+    s32      angle = 65408;
+    s8       i     = 0;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
     GFX_AddPrim(3u, 0x0Cu);
@@ -323,7 +323,7 @@ MATCH void func_801F318C(s16 radius) {
     Area_ProjectPoint(pos, &center);
     D_800E4A00 = center;
 
-    ring   = MEM_PTR(ScreenPoint, 0x800E4A00u);
+    ring   = MEM_PTR(Vec2U16, 0x800E4A00u);
     pos[0] = g_Task->pos.x.fixed + ((radius * rcos(65408)) >> 4);
     pos[1] = g_Task->pos.y.fixed + ((radius * rsin(65408)) >> 4);
     pos[2] = g_Task->pos.z.fixed;

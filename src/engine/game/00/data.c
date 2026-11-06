@@ -2517,7 +2517,7 @@ s8 s_EntitySpawnOffsets[100] = {
     3,  2,  3,  1,  3,  0,  3, -1, 3, -2, 3, -3, 3, -3, 2,  -3, 1,  -3, 0,  -3, -1, -3, -2, 0,  0,
 };
 
-PositionOffset D_801CD620[36] = {
+Vec2S32 D_801CD620[36] = {
     GAME_PAIR(0x30000, 0x0),     GAME_PAIR(0x20000, 0x18000), GAME_PAIR(0x20000, -98304),  GAME_PAIR(0x30000, 0x0),
     GAME_PAIR(0x10000, 0x30000), GAME_PAIR(0x10000, -196608), GAME_PAIR(0x40000, 0x18000), GAME_PAIR(0x40000, -98304),
     GAME_PAIR(0x10000, 0x30000), GAME_PAIR(0x10000, -196608), GAME_PAIR(0x10000, 0x0),     GAME_PAIR(0x10000, 0x30000),
@@ -2529,13 +2529,13 @@ PositionOffset D_801CD620[36] = {
     GAME_PAIR(0x38000, 0x18000), GAME_PAIR(0x38000, -98304),  GAME_PAIR(0x38000, 0x48000), GAME_PAIR(0x38000, -294912),
 };
 
-PositionOffset D_801CD740[6] = {GAME_PAIR(0, 0),     GAME_PAIR(65536, 0),  GAME_PAIR(-65536, 0),
-                                GAME_PAIR(0, 65536), GAME_PAIR(0, -65536), GAME_PAIR(0, 0)};
+Vec2S32 D_801CD740[6] = {GAME_PAIR(0, 0),     GAME_PAIR(65536, 0),  GAME_PAIR(-65536, 0),
+                         GAME_PAIR(0, 65536), GAME_PAIR(0, -65536), GAME_PAIR(0, 0)};
 
 u8 s_EntitySpawnChances[8] = {0x10, 0x10, 0x10, 0x0A, 0x08, 0x06, 0x04, 0x02};
 
 /* Camera offsets per mode: x, y pairs. */
-CameraAngleOffset D_801CD778[5] = {
+Vec2S16 D_801CD778[5] = {
     {4, 0}, {0, 4}, {-4, 0}, {0, -4}, {0, 0},
 };
 
