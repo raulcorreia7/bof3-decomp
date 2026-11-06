@@ -6,7 +6,7 @@ MATCH void func_801F3064(void) {
 
     screen_x       = g_Task->unk_2E + 0x18;
     g_Task->unk_2E = screen_x;
-    func_801F36C0(&g_Task->x, (s16)screen_x, 7);
+    func_801F36C0(&g_Task->pos.x, (s16)screen_x, 7);
     mode           = g_Task->unk_09 - 1;
     g_Task->unk_09 = mode;
     if (!(mode & 0xFF)) {

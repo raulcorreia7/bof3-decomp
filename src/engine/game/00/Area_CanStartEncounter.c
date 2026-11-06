@@ -53,10 +53,10 @@ MATCH s32 Area_CanStartEncounter(void) {
         return ok;
     }
     rec   = g_Task;
-    value = rec->y.fixed;
+    value = rec->pos.y.fixed;
     /* x holds the step count, then the x sum */
     x     = rec->unk_09;
     dy    = rec->vy * x;
-    x     = rec->x.fixed + rec->vx * x;
+    x     = rec->pos.x.fixed + rec->vx * x;
     return (AREA_CELL_CODE_S16(x >> 16, (value + dy) >> 16) & BYTE_MASK) == 0;
 }

@@ -14,7 +14,7 @@ MATCH void func_801BD83C(void) {
     mode     = ((u8*)D_80145FBB)[offset];
     screen_y = FIELD(u16, &D_80145ECE, offset);
     if (mode == 3) {
-        value = COORD_INT(g_Task->z);
+        value = COORD_INT(g_Task->pos.z);
         diff  = value - (s16)screen_y;
         if (diff < 0) {
             diff = -diff;
@@ -25,7 +25,7 @@ MATCH void func_801BD83C(void) {
             result = 3;
         }
     } else {
-        alt    = COORD_INT(g_Task->z);
+        alt    = COORD_INT(g_Task->pos.z);
         result = ((s16)screen_y < alt) * 2;
     }
     kind = result & BYTE_MASK;

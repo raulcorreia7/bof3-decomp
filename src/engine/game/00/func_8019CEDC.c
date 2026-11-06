@@ -6,12 +6,12 @@ MATCH void func_8019CEDC(void) {
 
     g_Task->unk_09 = (g_Task->unk_09 - 1);
     work           = g_Task;
-    work->x.fixed += work->vx;
-    moved         = work->y.fixed + work->vy;
-    work->y.fixed = moved;
+    work->pos.x.fixed += work->vx;
+    moved             = work->pos.y.fixed + work->vy;
+    work->pos.y.fixed = moved;
     if (work->unk_09 == 0) {
         if (LOHU(g_GameAreaId) == 0x54) {
-            if ((work->x.fixed == 0x118000) && (moved == 0x4A8000)) {
+            if ((work->pos.x.fixed == 0x118000) && (moved == 0x4A8000)) {
                 SYS_SetFlag(g_SceneEventFlags, 0x36);
             } else {
                 SYS_ClearFlag(g_SceneEventFlags, 0x36);

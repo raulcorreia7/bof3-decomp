@@ -251,7 +251,7 @@ MATCH void func_801F8EA8(void) {
 
     Area_SetCameraMatrix(&matrix);
     work = g_Task;
-    func_801F92F0(&work->x, &work->vx);
+    func_801F92F0(&work->pos.x, &work->vx);
     g_Task->unk_09      = 8;
     g_Task->header.mode = g_Task->header.mode + 1;
     if (!(g_Task->unk_0B & 2)) {

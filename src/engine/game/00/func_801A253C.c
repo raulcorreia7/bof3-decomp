@@ -7,15 +7,15 @@ MATCH void func_801A253C(Actor* entity) {
     u8     state;
     u8     flags;
 
-    start_x = g_Task->x.fixed;
+    start_x = g_Task->pos.x.fixed;
     if (g_Task->unk_09 != 0) {
-        g_Task->x.fixed = start_x + g_Task->vx;
-        g_Task->y.fixed += g_Task->vy;
-        COORD_INT(g_Task->z) += g_Task->vz;
+        g_Task->pos.x.fixed = start_x + g_Task->vx;
+        g_Task->pos.y.fixed += g_Task->vy;
+        COORD_INT(g_Task->pos.z) += g_Task->vz;
         g_Task->unk_09--;
         if (g_Task->unk_09 == 0) {
             if (!(entity->interaction_flags & 0x80)) {
-                COORD_INT(g_Task->z) = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
+                COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
             }
             work            = g_Task;
             entity->roll_90 = 0;

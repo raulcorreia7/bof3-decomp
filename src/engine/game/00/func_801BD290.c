@@ -7,8 +7,8 @@ MATCH void func_801BD290(s32 pos_x, s32 pos_y, s8* direction_out) {
     s8     direction;
 
     work = g_Task;
-    dx   = pos_x - work->x.fixed;
-    dy   = pos_y - work->y.fixed;
+    dx   = pos_x - work->pos.x.fixed;
+    dy   = pos_y - work->pos.y.fixed;
     if (dx < 0 && dy < 0) {
         *direction_out = 0;
         return;

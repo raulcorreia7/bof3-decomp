@@ -35,10 +35,10 @@ MATCH s32 func_801C4040(s32 pos_x, s32 pos_y, s16 probe_range) {
         dist = -dist;
     }
     if (dist < 193) {
-        saved                = COORD_INT(g_Task->z);
-        COORD_INT(g_Task->z) = (u16)probe_range;
-        found                = ~func_801BDE14(pos_x, pos_y, 0) != 0;
-        COORD_INT(g_Task->z) = saved;
+        saved                    = COORD_INT(g_Task->pos.z);
+        COORD_INT(g_Task->pos.z) = (u16)probe_range;
+        found                    = ~func_801BDE14(pos_x, pos_y, 0) != 0;
+        COORD_INT(g_Task->pos.z) = saved;
         return found;
     }
     return 1;

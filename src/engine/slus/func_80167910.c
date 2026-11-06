@@ -61,7 +61,7 @@ MATCH void func_80167910(void) {
     poly->tpage = 0xF;
     poly->clut  = 0x7802;
     if (!(g_Task->unk_0B & 1)) {
-        Area_AddCellPrim(g_Task->x.fixed, g_Task->y.fixed, 1, 0x28);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0x28);
     } else {
         GFX_AddPrim(3, 0x28);
     }
@@ -69,9 +69,9 @@ MATCH void func_80167910(void) {
     axis.vx = 0;
     axis.vy = 0;
     axis.vz = 0;
-    rot.vx  = (s16)((g_Task->x.fixed >> 9) - 0x4000);
-    rot.vy  = (s16)((g_Task->y.fixed >> 9) - 0x4000);
-    rot.vz  = (s16)(-COORD_INT(g_Task->z) / 2);
+    rot.vx  = (s16)((g_Task->pos.x.fixed >> 9) - 0x4000);
+    rot.vy  = (s16)((g_Task->pos.y.fixed >> 9) - 0x4000);
+    rot.vz  = (s16)(-COORD_INT(g_Task->pos.z) / 2);
     RotTrans(&rot, (VECTOR*)mtx.t, &flag);
     RotMatrix(&axis, &mtx);
     MulMatrix2(&g_CameraMatrix, &mtx);
@@ -86,7 +86,7 @@ MATCH void func_80167910(void) {
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
     if (!(g_Task->unk_0B & 1)) {
-        Area_AddCellPrim(g_Task->x.fixed, g_Task->y.fixed, 1, 0xC);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
     } else {
         GFX_AddPrim(3, 0xC);
     }
@@ -122,7 +122,7 @@ MATCH void func_80167910(void) {
         prim[0x15] = 0;
         prim[0x16] = 0;
         if (!(g_Task->unk_0B & 1)) {
-            Area_AddCellPrim(g_Task->x.fixed, g_Task->y.fixed, 1, 0x1C);
+            Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0x1C);
         } else {
             GFX_AddPrim(3, 0x1C);
         }

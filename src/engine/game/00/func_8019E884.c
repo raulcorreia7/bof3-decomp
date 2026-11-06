@@ -7,11 +7,11 @@ MATCH void func_8019E884(void) {
 
     add        = g_Task->vz + g_Task->gravity;
     g_Task->vz = add;
-    COORD_INT(g_Task->z) += add;
+    COORD_INT(g_Task->pos.z) += add;
     func_8014D978();
     work = g_Task;
-    dist = Area_SampleHeight(work->x.fixed, work->y.fixed);
-    if (COORD_INT(work->z) < dist) {
+    dist = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    if (COORD_INT(work->pos.z) < dist) {
         Actor_Clear();
         return;
     }

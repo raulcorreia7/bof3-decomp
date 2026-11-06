@@ -165,17 +165,6 @@ typedef struct BattleSelectionType {
 ASSERT_SIZE(BattleSelectionType, 0x14);
 ASSERT_OFFSET(BattleSelectionType, mask, 0x00);
 
-/* A battler's or effect's place: x and y, and z (its integer half holds the vertical span). */
-typedef struct BattlePosition {
-    Coord x;
-    Coord y;
-    Coord z;
-} BattlePosition;
-
-ASSERT_SIZE(BattlePosition, 0xC);
-ASSERT_OFFSET(BattlePosition, y, 0x4);
-ASSERT_OFFSET(BattlePosition, z, 0x8);
-
 /* The word at +0x60 of a queued slot. battle/battle/15 stores the action's target
  * index there (func_800AAEBC) and battle/battle/03 reads the low halfword of it to
  * draw the capture count (func_801E5CA4 loads it with `lhu` and hands it to
@@ -224,7 +213,7 @@ typedef struct BattleEffect {
     s16                unk_2E;
     s16                unk_30;
     u16                unk_32;
-    BattlePosition     pos; /* +0x34 x, y and z; bmagic stores the z span halfword (+0x3E) */
+    Vec3Coord          pos; /* +0x34 x, y and z; bmagic stores the z span halfword (+0x3E) */
     u8                 pad_40[8];
     u8                 unk_48;
     u8                 pad_49[2];
@@ -362,7 +351,7 @@ typedef struct EnemyBattler {
     s16              unk_2E; /* +0x2E cleared when the slot is armed */
     s16              unk_30; /* +0x30 cleared when the slot is armed */
     s16              unk_32; /* +0x32 cleared when the slot is armed */
-    BattlePosition   pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
+    Vec3Coord        pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
     u8               pad_40[0x8];
     u8               unk_48; /* +0x48 cleared when the slot is armed */
     u8               pad_49[0x2];
@@ -506,7 +495,7 @@ typedef struct PartyBattler {
     BattleScreenCoord unk_2E; /* +0x2E the field overlays read it signed */
     BattleScreenCoord unk_30; /* +0x30 the field overlays read it signed */
     u16               depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
-    BattlePosition    pos;
+    Vec3Coord         pos;
     Vec2S32           scale;  /* +0x40 16.16, 0x10000 at setup */
     u8                unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u8                unk_49;

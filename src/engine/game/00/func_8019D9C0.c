@@ -14,10 +14,10 @@ MATCH void func_8019D9C0(void) {
     /* NOTE: a goto loop; gcc 2.7.2 strength-reduces a do/while here (+20 bytes). */
 loop:
     work        = g_Task;
-    *dst        = work->x.fixed;
-    *(dst2 - 5) = work->y.fixed;
+    *dst        = work->pos.x.fixed;
+    *(dst2 - 5) = work->pos.y.fixed;
     /* Third coord word follows y.fixed with no named field. */
-    *(dst2 - 4) = ((s32*)&work->x.fixed)[2];
+    *(dst2 - 4) = ((s32*)&work->pos.x.fixed)[2];
     count += 1;
     *(dst2 - 2) = (RANDOM_MASK(0xFF)) - 0x80;
     *(dst2 - 1) = (RANDOM_MASK(0xFF)) - 0x80;

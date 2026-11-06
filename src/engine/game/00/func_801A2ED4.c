@@ -32,8 +32,8 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
     for (i = 0; i < 4; i++) {
         if ((func_801A1AE4(entity) & BYTE_MASK) == 0) {
             route = WORK->direction_08;
-            wx    = WORK->x.fixed;
-            wy    = WORK->y.fixed;
+            wx    = WORK->pos.x.fixed;
+            wy    = WORK->pos.y.fixed;
             route &= 7;
             px = &g_FacingSteps[route].x;
             py = &D_80181B98[route * 2];

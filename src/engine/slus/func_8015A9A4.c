@@ -36,7 +36,7 @@ NON_MATCHING void func_8015A9A4(void) {
     }
     temp_v1_31 = x_part + var_v0_28;
     var_v0_38  = temp_v1_31 + 1;
-    if (COORD_FRAC(g_Task->y) == 0) {
+    if (COORD_FRAC(g_Task->pos.y) == 0) {
         var_v0_38 = temp_v1_31;
     }
     temp_a1_42                    = g_Task;

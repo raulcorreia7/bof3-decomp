@@ -15,9 +15,9 @@ MATCH void func_8019DE54(void) {
             g_ActorSlots[index].header.step  = 2;
             g_ActorSlots[index].unk_06       = i;
             work                             = g_Task;
-            g_ActorSlots[index].x.fixed      = work->x.fixed;
-            g_ActorSlots[index].y.fixed      = work->y.fixed;
-            g_ActorSlots[index].z.fixed      = work->z.fixed;
+            g_ActorSlots[index].x.fixed      = work->pos.x.fixed;
+            g_ActorSlots[index].y.fixed      = work->pos.y.fixed;
+            g_ActorSlots[index].z.fixed      = work->pos.z.fixed;
         }
     }
     SND_PlayCue(EMI_CUE_ID(1, 12));

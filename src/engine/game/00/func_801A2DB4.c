@@ -11,12 +11,12 @@ MATCH u8 func_801A2DB4(Actor* entity) {
     work  = g_Task;
     route = work->direction_08;
     delta = D_80145EC4;
-    dx    = work->x.fixed - delta;
+    dx    = work->pos.x.fixed - delta;
     if (dx < 0) {
         dx = -dx;
     }
     if ((dx >> 0x10) < entity->ext.bounds.half_width) {
-        dy    = work->y.fixed;
+        dy    = work->pos.y.fixed;
         delta = D_80145EC8;
         dy -= delta;
         if (dy < 0) {

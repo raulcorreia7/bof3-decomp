@@ -5,10 +5,10 @@ MATCH void func_801F3C5C(void) {
     s32    value;
 
     work            = g_Task;
-    value           = work->z.fixed;
+    value           = work->pos.z.fixed;
     g_AreaSceneMode = 0;
     value += 8;
-    work->z.fixed = value;
+    work->pos.z.fixed = value;
     if (value >= -0x90) {
         g_Task->header.step = 1;
     }

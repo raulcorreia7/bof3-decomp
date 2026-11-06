@@ -34,9 +34,9 @@ MATCH VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_kind) {
     MATCH_BARRIER();
     func_801AC1DC((s32*)&buf.vx, selector_kind);
     cur = g_Task;
-    buf.vx += cur->x.fixed;
-    buf.vy += cur->y.fixed;
-    buf.vz += (s16)COORD_INT(cur->z);
+    buf.vx += cur->pos.x.fixed;
+    buf.vy += cur->pos.y.fixed;
+    buf.vz += (s16)COORD_INT(cur->pos.z);
     g_Task = SAVE_SLOT;
     *out   = buf;
     return out;

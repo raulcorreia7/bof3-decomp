@@ -13,9 +13,9 @@ MATCH void func_801D28DC(void) {
     }
 
     work                        = FISHING_STATE;
-    work->motion_34.unk_34      = g_Actors[D_801E3208].x.fixed;
-    work->y_38.pos_y            = g_Actors[D_801E3208].y.fixed;
-    work->bounce_3C.half.key_3E = COORD_INT(g_Actors[D_801E3208].z);
+    work->motion_34.unk_34      = g_Actors[D_801E3208].pos.x.fixed;
+    work->y_38.pos_y            = g_Actors[D_801E3208].pos.y.fixed;
+    work->bounce_3C.half.key_3E = COORD_INT(g_Actors[D_801E3208].pos.z);
 
     func_8014D978();
     func_801E084C();

@@ -7,10 +7,10 @@ MATCH void func_801F5B24(void) {
     work  = g_Task;
     count = work->unk_0A;
     if (count == 0) {
-        work->x.fixed = D_80145EC4;
+        work->pos.x.fixed = D_80145EC4;
         MATCH_FAKE_BARRIER(); /* FAKE: keeps the y and z loads below the x store */
-        work->y.fixed = D_80145EC8;
-        work->z.fixed = D_80145ECC + 0x800000;
+        work->pos.y.fixed = D_80145EC8;
+        work->pos.z.fixed = D_80145ECC + 0x800000;
         func_801F5BB0(work);
         g_Task->header.mode += 1;
         return;

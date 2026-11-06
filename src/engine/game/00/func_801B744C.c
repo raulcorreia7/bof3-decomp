@@ -16,8 +16,8 @@ MATCH void func_801B744C(void) {
 
             dx                    = g_Task->vx * g_Task->unk_09;
             dy                    = g_Task->vy * g_Task->unk_09;
-            MEM(s32, 0x80149308u) = g_Task->x.fixed + dx;
-            MEM(s32, 0x8014930Cu) = g_Task->y.fixed + dy;
+            MEM(s32, 0x80149308u) = g_Task->pos.x.fixed + dx;
+            MEM(s32, 0x8014930Cu) = g_Task->pos.y.fixed + dy;
             MEM(s16, 0x8014932Eu) = rate * 8;
         }
         Actor_RequestScript((g_Task->direction_08 == 3) ? 0x3AU : 0x3BU);

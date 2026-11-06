@@ -99,7 +99,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                               Area_ReadStepHeight(FIELD(s32, tmp16, 0x34u), tmp3, (u8)stack_10)) &
                 0xFF) {
                 tmp1 = val7 - 1;
-                val5 = g_Task->x.fixed;
+                val5 = g_Task->pos.x.fixed;
                 if (tmp1 > 1) {
                     val8 = tmp1;
                     val4 = val5 + 0xFFFF0000;

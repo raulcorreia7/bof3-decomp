@@ -5,7 +5,7 @@
  * address. */
 /* func_801F2D68 (area136), func_801F4840 (area188) */
 MATCH void Actor_WalkWhileWithinLimit(void) {
-    if ((u32)(g_Task->y.fixed + g_FacingSteps[g_Task->direction_08 & 7].y) <=
+    if ((u32)(g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction_08 & 7].y) <=
         (u32)(AREA_WALK_LIMIT_TABLE[D_801448ED] << 16)) {
         g_ScriptState->unk_07 = 1;
         func_801ABBA8(g_ScriptState, 5);
