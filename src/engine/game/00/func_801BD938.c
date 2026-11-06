@@ -31,7 +31,7 @@ MATCH s32 func_801BD938(void) {
         Actor_RequestScript(g_Task->direction_08);
         g_Task->unk_09 = 2;
         g_Task->mode   = 6;
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
         return 1;
     }
     return 0;

@@ -172,7 +172,7 @@ segments:
       - [0xBEEC, c, Menu_DrawEquipment]
       - [0xC1B8, c, func_801DCDB8]
       - [0xC904, c, Menu_DrawIcon]
-      - [0xCA18, c, func_801DD618]
+      - [0xCA18, c, Menu_DrawPanelIcon]
       - [0xCAD0, c, func_801DD6D0]
       - [0xCBEC, c, Menu_DrawZennyWindow]
       - [0xCD74, c, Menu_DrawPlayTimeWindow]

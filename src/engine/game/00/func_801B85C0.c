@@ -17,7 +17,7 @@ MATCH void func_801B85C0(void) {
             g_Task->vy                        = 0;
             record[0x12B]                     = 0;
             g_Task->mode                      = 1;
-            ACTOR_CLEAR_STATE();
+            ACTOR_CLEAR_STEP();
             g_Task->unk_03 = 0;
             g_Task->unk_09 = 0;
             g_Task->unk_0A = 0;

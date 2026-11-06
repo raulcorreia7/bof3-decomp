@@ -35,5 +35,5 @@ MATCH void func_801B016C(void) {
         func_801B5BDC(g_Task->direction_08);
         g_Task->mode = g_Task->mode + 1;
     }
-    ACTOR_CLEAR_STATE();
+    ACTOR_CLEAR_STEP();
 }

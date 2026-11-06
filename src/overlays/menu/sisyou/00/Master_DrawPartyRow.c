@@ -59,5 +59,5 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
         GetGraphType();
     }
     GFX_AddDrawMode(0xF);
-    Menu_DrawIcon((x + 9), (y + 5), (u8)(icon + 3), 0x1E, GetClut(16, 480), 128);
+    Menu_DrawPanelIcon((x + 9), (y + 5), (u8)(icon + 3), 0x1E, GetClut(16, 480), 128);
 }

@@ -9,6 +9,7 @@ from bof3.source import ctext, decls, index
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import shapes
+import symbol
 import typeloss
 import values
 
@@ -91,3 +92,9 @@ def test_a_prototype_that_differs_from_its_definition_is_a_problem() -> None:
         "int",
         "b;",
     ]
+
+
+def test_tables_with_lists_every_image_that_has_the_row():
+    text = '["a/1"]\nFoo = { addr = 0x1 }\nBar = { addr = 0x2 }\n["b/2"]\nFoo = { addr = 0x1 }\n'
+    assert symbol.tables_with(text, "Foo") == ["a/1", "b/2"]
+    assert symbol.tables_with(text, "Bar") == ["a/1"]

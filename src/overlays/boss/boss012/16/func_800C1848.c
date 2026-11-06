@@ -8,6 +8,6 @@ MATCH void func_800C1848(void) {
     spad = TASK_BYTES;
     EnemyBattler_SetScript(work, D_800C1E14, func_800C1B18, D_800C1E20);
     GFX_StartPaletteAnimation(spad, D_800C1E64);
-    ACTOR_SET_STEP(2);
+    ACTOR_SET_MODE(2);
     func_8014D978();
 }

@@ -1605,10 +1605,12 @@ tools/symbol.py rename func_<ADDR> <Name> --image <target> --local --source "<ev
 tools/symbol.py params <Name> old=new ...     # parameter names: definition and prototypes
 ```
 
-An address name is unique only per image: `--local` limits the rename to that image's `src/` and
-`config/` folders, and `--scope PATH...` names the folders. The resident images
-(`exe/slus_004_22`, `emi/etc/game/00`) rename with no scope. `tools/symbol.py add` writes a row
-without a rename, and `tools/symbol.py refs` ranks the units to name first.
+A named symbol is one name in every image: without `--image`, `rename` changes its row in every
+table that has it. An address name is unique only per image: `--image <target>` once per image that
+holds the twin at that address, `--local` limits the rename to those images' `src/` and `config/`
+folders, and `--scope PATH...` names the folders. A twin at another address is another call. The
+resident images (`exe/slus_004_22`, `emi/etc/game/00`) rename with no scope. `tools/symbol.py add`
+writes a row without a rename, and `tools/symbol.py refs` ranks the units to name first.
 
 ### Symbols and the link
 

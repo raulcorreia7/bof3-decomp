@@ -5,7 +5,7 @@ MATCH void func_801B781C(void) {
         Actor_RequestScript(g_Task->direction_08);
         g_GameState->mode_12B.u8_value = 0;
         g_Task->mode                   = 1;
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
         g_Task->unk_03 = 0;
     }
 }

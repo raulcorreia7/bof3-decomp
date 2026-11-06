@@ -117,7 +117,7 @@ MATCH void func_801B146C(void) {
                 Actor_RequestScript(g_Task->direction_08);
                 g_AreaWalkFlags |= AREA_WALK_TRANSITION;
                 g_Task->mode = 5;
-                ACTOR_CLEAR_STATE();
+                ACTOR_CLEAR_STEP();
                 return;
             }
             goto block_38; /* the request was not made */

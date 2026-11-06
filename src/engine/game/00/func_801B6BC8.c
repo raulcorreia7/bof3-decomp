@@ -23,7 +23,7 @@ MATCH void func_801B6BC8(void) {
             g_GameState->flags_12C.u8_value &= 0xFB;
             func_801C3204();
             g_Task->mode = 1;
-            ACTOR_CLEAR_STATE();
+            ACTOR_CLEAR_STEP();
             g_Task->unk_03       = 0;
             g_Task->unk_04       = 0;
             g_Task->option_flags = 0;

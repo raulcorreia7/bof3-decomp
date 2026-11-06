@@ -27,7 +27,7 @@ MATCH void func_801F0718(u8 source_index, u8 task_index) {
     } else {
         g_Task->mode                = 6;
         g_Actors[task_index].unk_78 = 0;
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
     }
 
     COORD_INT(g_Task->x)  = D_801F2568[task_index][0];

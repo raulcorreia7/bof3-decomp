@@ -142,7 +142,7 @@ void func_801D10AC(u32 message_id);
 void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade);
-void Menu_DrawIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
+void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 void Master_DispatchMenu(void);
 void func_801D2614(void);
 void func_801D2688(void);

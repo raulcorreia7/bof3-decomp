@@ -23,7 +23,7 @@ MATCH void func_801B80B4(void) {
         g_Task->unk_09 = 0;
         g_Task->unk_0A = 0;
         g_Task->mode   = 1;
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
         g_Task->unk_03 = 0;
         g_Task->unk_04 = 0;
     } else {

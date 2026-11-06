@@ -32,7 +32,7 @@ NON_MATCHING s32 func_801B6674(void) {
             return 1;
         }
         D_801448EB = 0x37;
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
         return 1;
     }
     if (g_InputPressed & PADselect) {
@@ -64,7 +64,7 @@ NON_MATCHING s32 func_801B6674(void) {
         if (!(status & 0x20)) {
             func_801B5BDC(g_Task->route_index_08);
         }
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
         return 1;
     }
     return 0;
