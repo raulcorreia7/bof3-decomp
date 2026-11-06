@@ -25,6 +25,7 @@ INCLUDE_ASM(func_801F7028);
  * lhu a1,0(a2)). Round 5: with a do-while inner loop, `entry = (u16*)(index * 2 + (u32)row)` and `grey | (grey << 5) | (grey << 10) | (color & 0x8000)` every instruction matches up to +0x68, where retail holds the grey in v0 and shifts through v1 while the candidate swaps them. */
 INCLUDE_ASM(func_801F7960);
 
+/* needs: declaration D_801FC4C0; m2c draft does not compile. */
 INCLUDE_ASM(func_801F7A18);
 
 MATCH void func_801F7B5C(void) {

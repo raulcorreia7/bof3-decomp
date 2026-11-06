@@ -61,6 +61,7 @@ INCLUDE_ASM(func_801FBC88);
 
 INCLUDE_ASM(func_801FBD88);
 
+/* m2c produced no compiling draft; jump table starts at +0x20. */
 INCLUDE_ASM(func_801FC498);
 
 INCLUDE_ASM(func_801FC718);

@@ -24,7 +24,41 @@ MATCH void func_801F71FC(void) {
     actor->step     = actor->step + 1;
 }
 
-INCLUDE_ASM(func_801F7240);
+#define SCENA12_STEP_COUNTER()                                                            \
+    {                                                                                     \
+        s32    bits;                                                                      \
+        u16    value;                                                                     \
+        u32    high;                                                                      \
+        u32    count;                                                                     \
+        Actor* actor;                                                                     \
+                                                                                          \
+        if (*g_ScriptVars == 1) {                                                         \
+            Actor_Clear();                                                                \
+            return;                                                                       \
+        }                                                                                 \
+        high = (u16)D_801FD288.half >> 0xF;                                               \
+        if ((u32)(D_801FD288.half & 0xFF) >= 0xC8U) {                                     \
+            actor = g_Task;                                                               \
+            actor->step += 1;                                                             \
+            return;                                                                       \
+        }                                                                                 \
+        count = ((u32)(D_801FD288.half & 0x7F00) >> 8) + 1;                               \
+        value = D_801FD288.half;                                                          \
+        if (((high & 0xFF) == 0 && count >= 30) || ((high & 0xFF) != 0 && count >= 40)) { \
+            count = 0;                                                                    \
+            value += 1;                                                                   \
+            if (SYS_TestFlag(g_SceneFlags, 0x14) != 0) {                                  \
+                SND_PlayCue(0x20A);                                                       \
+            }                                                                             \
+        }                                                                                 \
+        bits = high << 15;                                                                \
+        bits |= count << 8;                                                               \
+        D_801FD288.half = (value & 0xFF) | bits;                                          \
+    }
+
+MATCH void func_801F7240(void) {
+    SCENA12_STEP_COUNTER();
+}
 
 /* The statements of func_801F7348 and func_801F7518, byte-identical twins: unless a message is pending, the entry state
  * is 4 or scene flag 0x2E is set, queue script step 5 with D_80146875 = 0x19, raise the script-active flag and clear
@@ -45,7 +79,9 @@ MATCH void func_801F73CC(void) {
     SYS_DISPATCH_TASK(D_801FD190, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801F7410);
+MATCH void func_801F7410(void) {
+    SCENA12_STEP_COUNTER();
+}
 
 MATCH void func_801F7518(void) {
     SCENA12_START_SCRIPT();
