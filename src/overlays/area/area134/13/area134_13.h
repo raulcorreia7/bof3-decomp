@@ -27,12 +27,12 @@ extern u8       D_801F5724[];
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F5744[];
 extern Callback D_801F57A4[];
+extern s32      D_801F5818;
 extern Callback D_801F581C[];
 extern Callback D_801F5828[];
 extern Callback D_801F5838[];
 extern s32      D_801F5848[];
 extern s32      D_801F5858[];
-extern s32      D_801F5818;
 
 /* The shared work-area reset; the executable map has no name for it yet. */
 
@@ -61,14 +61,14 @@ static inline void World_SpawnActorAtFocus(void) {
 
 void Area_ProjectPoint(s32* pos, long* screen_xy);
 
-void func_801F4F0C(const s32* center, s32 radius, u16 angle, s32 offset_x, s32 offset_y);
-
 void func_801F4E64(const s32* center, s32 radius);
 
+void func_801F4F0C(const s32* center, s32 radius, u16 angle, s32 offset_x, s32 offset_y);
+
 extern s32   D_80145EC4;
-extern s32   D_80146954;
-extern Actor D_80146920;
 extern u8    D_80146865;
 extern u8    D_80146866;
+extern Actor D_80146920;
+extern s32   D_80146954;
 
 #endif

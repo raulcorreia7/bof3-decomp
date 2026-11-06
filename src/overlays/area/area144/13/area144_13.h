@@ -15,11 +15,11 @@ extern Callback D_801F3E68[];
 /* The palette-dirty byte the setup step clears. */
 extern u8       D_801F4960;
 
+void func_801F2E18(void);
 /* The palette row clear the setup step enters. */
 void func_801F30CC(void);
-/* The mode gate the step tests. */
-u8   func_801F34FC(void);
 
-void func_801F2E18(void);
+/* The mode gate the step tests. */
+u8 func_801F34FC(void);
 
 #endif

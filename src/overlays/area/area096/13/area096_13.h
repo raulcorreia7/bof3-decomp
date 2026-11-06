@@ -6,9 +6,9 @@
 
 #include "overlays/area/world02.h"
 
-extern u8  D_801F3614[];
 extern s32 D_80145EC4;
 extern s32 D_80145EC8;
+extern u8  D_801F3614[];
 
 void Area_StartDirectionalScript(Actor* actor);
 

@@ -10,13 +10,13 @@
 
 /* The per-scene y limit bytes the walk step reads, in 16.16 units. */
 #define AREA_WALK_LIMIT_TABLE D_801F4400
-extern u8 D_801F4400[];
-
 /* The field step bytes the palette path tests. */
 /* The request value blob the selection handlers index. */
 /* The request value tables indexed by the selection byte. */
 extern u16 D_801F43F8[];
+
 extern u16 D_801F43FC[];
+extern u8  D_801F4400[];
 /* The world slot counter and its active-step byte. */
 /* The request selector and the bytes the cancel path sets. */
 /* The area kind byte the request selector reads. */

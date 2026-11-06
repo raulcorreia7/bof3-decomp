@@ -7,17 +7,17 @@
 #include "overlays/area/world02.h"
 #include "work/area_spad.h"
 
+extern SVECTOR  D_1F800014[];
 extern u8       D_801F5734[];
 extern Callback D_801F576C[];
-extern Callback D_801F57D0[];
 
-u8   func_801F3AAC(void);
 void func_801F3500(void);
+u8   func_801F3AAC(void);
+void func_801F4430(void);
 void func_801F5388(s32 arg0);
+
 void func_801F5428(s32 arg0);
 
-void func_801F4430(void);
-
-extern SVECTOR D_1F800014[];
+extern Callback D_801F57D0[];
 
 #endif

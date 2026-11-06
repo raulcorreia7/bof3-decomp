@@ -10,12 +10,12 @@
 
 s16 Area_SampleHeight(s32 x, s32 y);
 
+extern s16 D_80143F22;
+extern u16 D_80145FB8;
 extern u8  D_801468C6[];
 extern u8  D_801F2DBC[];
 extern u8  D_801F2DBD[];
 extern u8  D_801F2DCC[];
-extern s16 D_80143F22;
-extern u16 D_80145FB8;
 
 MATCH void Area_SpawnWeightedActor(void) {
     u8  roll;
