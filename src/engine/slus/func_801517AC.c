@@ -11,7 +11,7 @@ MATCH void func_801517AC(void) {
     if (D_80148357 == 4) {
         if (g_MessageRequest == MESSAGE_NONE) {
             g_MessageState.state_00 = 2;
-            g_UiWindowStep      = 0;
+            g_UiWindowStep          = 0;
             g_MessageState.flags_04 |= 0x80;
             return;
         }

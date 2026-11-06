@@ -43,7 +43,7 @@ NON_MATCHING void func_8015083C(void) {
                     g_UiWindowChannel &= ~FRONTEND_FLAG_TIMER_ACTIVE;
                     CHAN_CURSOR(chan) = CHAN_RETURN(chan);
                 } else {
-                    loop                = 0;
+                    loop                    = 0;
                     g_MessageState.state_00 = 2;
                 }
                 break;
@@ -55,7 +55,7 @@ NON_MATCHING void func_8015083C(void) {
                 break;
             case 2:
                 g_MessageState.state_00 = 3;
-                loop                = 0;
+                loop                    = 0;
                 break;
             case 3:
                 g_UiWindowChannel |= FRONTEND_FLAG_TIMER_ACTIVE;
@@ -104,7 +104,7 @@ NON_MATCHING void func_8015083C(void) {
                 SND_PlayCue(*D_801490B0 | 0x200);
                 break;
             case 0xB:
-                loop                = 0;
+                loop                    = 0;
                 g_MessageState.state_00 = 1;
                 chan[2] += 8;
                 break;
@@ -122,20 +122,20 @@ NON_MATCHING void func_8015083C(void) {
                 g_UiWindowChannel ^= FRONTEND_FLAG_NO_INPUT_WAIT;
                 break;
             case 0x14:
-                t                   = *(u8**)(s2 - 0x14);
-                *(u8**)(s2 - 0x14)  = t + 3;
-                s2[0]               = t[1];
-                s2[2]               = (*D_801490B0 & 0xF) - 1;
-                loop                = 0;
-                s2[1]               = *D_801490B0 >> 4;
+                t                       = *(u8**)(s2 - 0x14);
+                *(u8**)(s2 - 0x14)      = t + 3;
+                s2[0]                   = t[1];
+                s2[2]                   = (*D_801490B0 & 0xF) - 1;
+                loop                    = 0;
+                s2[1]                   = *D_801490B0 >> 4;
                 g_MessageState.state_00 = (s2[1] == 0) ? 5 : 4;
                 break;
             case 0x16:
-                t                   = *(u8**)(s4 + 0xA);
-                loop                = 0;
-                *(u8**)(s4 + 0xA)   = t + 1;
+                t                       = *(u8**)(s4 + 0xA);
+                loop                    = 0;
+                *(u8**)(s4 + 0xA)       = t + 1;
                 g_MessageState.state_00 = 7;
-                s4[0]               = t[1];
+                s4[0]                   = t[1];
                 break;
             case 0x12:
             case 0x13:

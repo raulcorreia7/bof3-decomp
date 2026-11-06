@@ -30,7 +30,7 @@ MATCH void Area_StepCamera(void) {
             if (dist > 0) {
                 dir = 1;
             }
-            step_x     = dir * g_AreaCameraStep;
+            step_x        = dir * g_AreaCameraStep;
             g_AreaCameraX = value + step_x;
             D_80149336 -= step_x;
             g_AreaTileRemainderY -= step_x;

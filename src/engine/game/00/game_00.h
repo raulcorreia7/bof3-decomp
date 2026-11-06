@@ -389,7 +389,7 @@ extern u8       D_80181E40[]; /* 0x80181E40 */
 extern u8       D_80181E44[]; /* 0x80181E44 */
 extern u8       D_8018214C[]; /* 0x8018214C */
 /* D_8018217C */
-extern u8       g_AreaScriptTests;   /* 0x8018217C */
+extern u8       g_AreaScriptTests; /* 0x8018217C */
 extern TailFunc D_801821C0[];
 extern u8       D_8018E268[];
 extern char     D_80195858[];            /* 0x80195858 */

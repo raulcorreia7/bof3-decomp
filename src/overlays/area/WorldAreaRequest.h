@@ -24,7 +24,7 @@
  * reset sentinel. */
 #define WORLD_SELECT_ANSWER_MESSAGE_ON_VALUE(selection, value) \
     do {                                                       \
-        if (g_MessageChoice == (selection)) {                       \
+        if (g_MessageChoice == (selection)) {                  \
             g_MessageRequest = (value);                        \
         } else {                                               \
             MESSAGE_REQUEST_CLEAR();                           \

@@ -5,13 +5,13 @@
 #define SND_PROXIMITY_BAND(radius, table)         \
     work   = g_Task;                              \
     x      = COORD_INT(work->pos.x);              \
-    target = g_AreaTargetCellX;                          \
+    target = g_AreaTargetCellX;                   \
     edge   = x + (radius);                        \
     if (edge >= target) {                         \
         edge = x - (radius);                      \
         if (target >= edge) {                     \
             y      = COORD_INT(work->pos.y);      \
-            target = g_AreaTargetCellY;                  \
+            target = g_AreaTargetCellY;           \
             edge   = y + (radius);                \
             if (edge >= target) {                 \
                 edge = y - (radius);              \

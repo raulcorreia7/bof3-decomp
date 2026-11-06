@@ -27,15 +27,15 @@ MATCH void UI_DrawMessageScript(void) {
     u8               color;
     u8               drawn;
 
-    flags             = 0;
-    saved             = NULL;
-    count             = 0;
-    drawn             = 0;
-    base              = (u8*)&g_MessageScript;
-    p                 = *(u8**)base;
+    flags                  = 0;
+    saved                  = NULL;
+    count                  = 0;
+    drawn                  = 0;
+    base                   = (u8*)&g_MessageScript;
+    p                      = *(u8**)base;
     g_MessageWindow.text.x = g_MessageWindow.origin.x;
     g_MessageWindow.text.y = g_MessageWindow.origin.y;
-    color             = 0;
+    color                  = 0;
     if (D_801490B9 != 0) {
         cursor = (u16*)(base + 0x10);
         state  = (GameUITextState*)(base - 8);

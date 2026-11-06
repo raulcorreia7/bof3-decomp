@@ -36,9 +36,9 @@ NON_MATCHING void func_80151C00(void) {
             if (g_MessageChoiceTimer != 0xFFFF) {
                 g_MessageChoiceTimer -= 1;
                 if (g_MessageChoiceTimer == 0xFFFF) {
-                    g_MessageChoiceMode    = 0;
-                    D_801490BB[0] = 0;
-                    D_801490BA[0] = 0;
+                    g_MessageChoiceMode = 0;
+                    D_801490BB[0]       = 0;
+                    D_801490BA[0]       = 0;
                 }
             }
         } else {

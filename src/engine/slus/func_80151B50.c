@@ -13,7 +13,7 @@ MATCH void func_80151B50(void) {
             value      = D_801490C8 - 2;
             D_801490C8 = value;
             if ((value << 0x10) < 0) {
-                D_801490C8 = 0;
+                D_801490C8          = 0;
                 g_MessageChoiceMode = 0;
                 g_UiWindowChannel &= ~FRONTEND_FLAG_REQUEST_PENDING;
             }
@@ -21,7 +21,7 @@ MATCH void func_80151B50(void) {
             value      = D_801490C8 + 2;
             D_801490C8 = value;
             if ((value << 0x10) > 0) {
-                D_801490C8 = 0;
+                D_801490C8          = 0;
                 g_MessageChoiceMode = 0;
                 g_UiWindowChannel &= ~FRONTEND_FLAG_REQUEST_PENDING;
             }

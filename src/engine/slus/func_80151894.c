@@ -10,7 +10,7 @@ MATCH void func_80151894(void) {
     int flags;
     u8  advance;
 
-    value         = g_MessageStateTimer[0];
+    value                  = g_MessageStateTimer[0];
     g_MessageStateTimer[0] = value + 0xFF;
     if (value == 0) {
         advance = D_80148333[0] + 1;
