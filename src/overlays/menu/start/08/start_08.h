@@ -643,5 +643,4 @@ s32  Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 void func_801D9304(s32 handler_index);
 u8   func_801DB04C(void);
 
-
 #endif
