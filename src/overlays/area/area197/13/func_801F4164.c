@@ -4,7 +4,7 @@
 MATCH void func_801F4164(void) {
     s8* state;
 
-    state = (s8*)&g_SaveData.scene_event.step;
+    state = (s8*)&g_SceneEventStep;
     switch (*state) {
         case 0:
             func_801BE1B0(0);

@@ -6,7 +6,6 @@
  * includes the file. */
 
 #include "shared/etc.h"
-#include "work/save.h"
 
 #define WIN_POPUP_PENDING_MASK   0x00FFFF00u
 #define WIN_POPUP_PENDING_OPEN   0x00020000u

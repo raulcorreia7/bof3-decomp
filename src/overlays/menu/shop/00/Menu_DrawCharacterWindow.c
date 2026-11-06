@@ -19,7 +19,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
         y = py;
         px += 0x56;
         py += 2;
-        stats     = &g_SaveData.characters[character_index];
+        stats     = &g_Characters[character_index];
         text_clut = px;
         Menu_DrawCharacterPortrait(text_clut & HALF_MASK, py & HALF_MASK, stats->character_id,
                                    (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);

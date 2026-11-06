@@ -34,9 +34,9 @@ MATCH void func_801D3174(void) {
     /* FAKE: keeps the pad load ahead of the panel stores. */
     MATCH_BARRIER();
     g_MenuPanelTasks[21].active = 1;
-    g_MenuPanelTasks[21].x      = (u16)g_MenuPanelTasks[13].x + 7;
+    g_MenuPanelTasks[21].pos.x  = (u16)g_MenuPanelTasks[13].pos.x + 7;
     offset                      = (D_80148510 - g_MenuPanelTasks[13].unk_0B) * 13 + 0x1A;
-    g_MenuPanelTasks[21].y      = (u16)g_MenuPanelTasks[13].y + offset;
+    g_MenuPanelTasks[21].pos.y  = (u16)g_MenuPanelTasks[13].pos.y + offset;
     trigger                     = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (trigger & PADLleft) {
         SND_PlayCue(EMI_CUE_ID(1, 1));

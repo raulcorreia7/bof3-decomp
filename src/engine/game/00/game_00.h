@@ -15,17 +15,7 @@
 #include "common/vector.h"
 #include <string.h>
 
-/* Per-mode signed adjustments to the camera angle inputs. */
-/* x: added to D_80143F24 for angle.vx. */
-/* y: added to D_80143F28 for angle.vy. */
-typedef Vec2S16 CameraAngleOffset;
-
-ASSERT_SIZE(CameraAngleOffset, 4);
-ASSERT_OFFSET(CameraAngleOffset, x, 0x00);
-ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
-
 #include "data.h"
-#include "work/save.h"
 #include <stdio.h>
 
 #define TILE_RUN_SIZE          0x8
@@ -46,7 +36,7 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 /* NOTE: retail reads the window style byte at 0x80144952 signed (`lb`) in func_8019986C and
  * func_801AEBA0 and unsigned (`lbu`) in func_801999F8 and UI_DrawWindowOutline, so exports.h keeps u8 and only
  * the signed readers view it as s8. */
-#define GAME_WINDOW_STYLE      (*(s8*)&g_SaveData.window_style)
+#define GAME_WINDOW_STYLE      (*(s8*)&g_WindowStyle)
 
 /* FAKE: the game images call Area_GetCellCode as s32(s16, s16) and truncate at the call; the area images pass
  * s32 coordinates untruncated, so one prototype cannot serve both (an s16 prototype changes 11 area images). */
@@ -192,10 +182,6 @@ typedef struct GameHandlerTable6 {
     Callback handlers[6];
 } GameHandlerTable6;
 
-/* One game route step: two volatile signed words.
- * dx: x; dy: y. */
-typedef Vec2S32 GameRouteStep;
-
 /* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * func_8019D8C0 rotates and writes out as screen vertices. */
 typedef struct SpinQuad {
@@ -308,9 +294,6 @@ extern u8                 D_80143FBD;
 extern u8                 D_80143FBF;
 extern u8                 D_80143FC1;
 extern u8                 D_80143FC3;
-/* Separate symbols from g_SaveData.scene_event: sharing the record base changes func_801A852C. */
-extern s8                 D_801448EB;
-extern s8                 D_801448EC;
 extern s8                 D_801448E8; /* 0x801448E8 */
 extern s16                D_801448EE; /* 0x801448EE */
 extern s16                D_801448F0; /* 0x801448F0 */
@@ -394,7 +377,7 @@ extern s8                 D_80148656;   /* 0x80148656 */
 extern s8                 D_801490E0;   /* 0x801490E0 */
 extern u8                 D_801581E0[]; /* 0x801581E0 */
 extern u8*                D_80181164[];
-extern FacingStep         g_FacingOffsets[]; /* 0x80181AC0 */
+extern Vec2S32            g_FacingOffsets[]; /* 0x80181AC0 */
 extern s8                 D_80181B00[];
 extern s8                 D_80181B01[];
 extern u8                 D_80181B1C[]; /* 0x80181B1C */
@@ -1530,7 +1513,7 @@ static inline void GameRunMapLoadHandshake(void) {
     CallbackWait(1U);
     CallbackWait(1U);
     g_EmiStreamFlags = 0x20;
-    EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_LoaderIsReady() == 0) {
         CallbackWait(1U);
     }

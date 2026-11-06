@@ -24,7 +24,7 @@
  * - `AreaMapBundle` and its cell rows: map bundle.
  * - `AreaActorDef`, `AreaActorDefs`: scene/step table.
  * - `AreaScriptBank`, `AreaScriptSection`: area script bank.
- * - `AreaTrail`, `AreaSlotWork`, `ScreenPoint`: neighboring buffers; the
+ * - `AreaTrail`, `AreaSlotWork`, `Vec2U16`: neighboring buffers; the
  *   area program owns them.
  *
  * The format sections are in @source: wiki:formats/area.
@@ -105,13 +105,9 @@
 /* The area program's work memory (AreaWorkPointers.work_08). */
 #define AREA_WORK                  0x800E4800u
 
-#define WORLD_POINT_SIZE           0x06
-
 #define WORLD_VERTEX_POINT_SIZE    0x06
 
 #define WORLD_VERTEX_RECORD_SIZE   0x28
-
-#define WORLD_TRAIL_ENTRY_SIZE     0x04
 
 /* The trail row: 0x98 bytes. The AREA027 program keeps three of them at
  * `0x800E4800` (`@0x801F2D5C` walks them with that stride) and stages each
@@ -124,7 +120,6 @@
 #define WORLD_WORK_SLOT_COUNT      32u
 #define WORLD_WORK_SLOT_STRIDE     0x10u
 
-#define WORLD_RING_ENTRY_SIZE      0x04
 #define WORLD_RING_ENTRY_COUNT     32
 
 /* One area slot's message record: WORLD_ShowAreaSlotMessage shows messages[i]
@@ -313,12 +308,6 @@ typedef struct AreaWorkPointers {
 
 ASSERT_SIZE(AreaWorkPointers, AREA_WORK_POINTERS_SIZE);
 
-/* A world position: three signed halves. The AREA027 rotation anchor is read
- * as this shape (`emi/world00/area027/13@0x801F3480` hands it to `RotTrans`).
- */
-typedef Vec3S16 AreaPoint;
-ASSERT_SIZE(AreaPoint, WORLD_POINT_SIZE);
-
 /* One AREA024 vertex row: four packed points at +0x02. The program copies
  * 0x28-byte rows (`emi/world00/area024/14@0x801F3314`) and advances both
  * buffers by 0x28 (`@0x801F362C`). */
@@ -331,19 +320,13 @@ typedef struct AreaVertex {
 ASSERT_SIZE(AreaVertex, WORLD_VERTEX_RECORD_SIZE);
 ASSERT_OFFSET(AreaVertex, points, 0x02);
 
-/* One AREA027 trail entry: two signed halves. The shift loop loads an entry
- * with `lwl/lwr 0x17/0x14(base + 4*i)` and stores it with
- * `swl/swr 0x1b/0x18(base + 4*i)`. */
-typedef Vec2S16 TrailPoint;
-ASSERT_SIZE(TrailPoint, WORLD_TRAIL_ENTRY_SIZE);
-
 typedef struct AreaTrail {
-    Vec3S32    pos;                     /* 0x00 - the head anchor */
-    s32        unk_0C;                  /* 0x0C */
-    s32        radius;                  /* 0x10 - the ring radius */
-    u16        angle;                   /* 0x14 - the rotation angle */
-    u16        pad_16;                  /* 0x16 */
-    TrailPoint points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
+    Vec3S32 pos;                     /* 0x00 - the head anchor */
+    s32     unk_0C;                  /* 0x0C */
+    s32     radius;                  /* 0x10 - the ring radius */
+    u16     angle;                   /* 0x14 - the rotation angle */
+    u16     pad_16;                  /* 0x16 */
+    Vec2S16 points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
 } AreaTrail;
 
 ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);
@@ -374,23 +357,15 @@ ASSERT_OFFSET(AreaSpawnSlot, rim_shade_17, 0x17);
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with
  * that stride) and the ring projection reads the active one. */
 typedef struct AreaSlotWork {
-    u8           unk_00[4];
-    s16          offset_x; /* 0x04 - the random position offset x */
-    s16          offset_y; /* 0x06 - the random position offset y */
-    s16          scale;    /* 0x08 - the projection scale */
-    s16          unk_0A;
-    volatile u16 screen_x; /* 0x0C - the projected screen x */
-    volatile u16 screen_y; /* 0x0E - the projected screen y */
+    u8               unk_00[4];
+    Vec2S16          offset;
+    s16              scale; /* 0x08 - the projection scale */
+    s16              unk_0A;
+    volatile Vec2U16 screen;
 } AreaSlotWork;
 
 ASSERT_SIZE(AreaSlotWork, WORLD_SLOT_WORK_SIZE);
-ASSERT_OFFSET(AreaSlotWork, screen_x, 0x0C);
-
-/* One entry of the AREA028 position ring at `0x800E4A00`: two unsigned
- * halves. The ring walk reads the halves at +0x4A04 and +0x6 per segment
- * (`@0x801F2D3C`). */
-typedef Vec2U16 ScreenPoint;
-ASSERT_SIZE(ScreenPoint, WORLD_RING_ENTRY_SIZE);
+ASSERT_OFFSET(AreaSlotWork, screen, 0x0C);
 
 typedef struct PartyMemberMessages {
     u8  tags[PARTY_MEMBER_MESSAGE_COUNT];     /* 0x00 */

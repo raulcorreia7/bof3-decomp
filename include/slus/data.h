@@ -22,10 +22,17 @@ extern u16         D_80143F04;
 extern s32         g_PartyX; /* 0x80143F7C */
 /* D_80143F80 */
 extern s32         g_PartyY; /* 0x80143F80 */
+/* D_80144E88 */
+extern u8          g_SceneFlagWords[]; /* 0x80144E88 */
 extern s8          D_80144950;
 extern u8          D_80144953;
 extern u8          D_80144954;
 extern u8          D_80144956;
+/* D_80144F28 */
+extern u8          g_SceneEventFlags[];
+/* D_80144F58 */
+extern u8          g_PartyFormation;
+extern u8          g_PartyBattleOrder[];
 extern u32         D_80145040;
 extern u32         D_80145044;
 extern u8          D_8014546C[];

@@ -93,7 +93,7 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
     val4                      = select_step;
     tmp1                      = val4 & BYTE_MASK;
     val6                      = option_index;
-    UI_DrawWindow(val5 & HALF_MASK, (val1 - tmp1) & HALF_MASK, 249, (tmp1 * 2) + 11, 0, g_SaveData.window_style);
+    UI_DrawWindow(val5 & HALF_MASK, (val1 - tmp1) & HALF_MASK, 249, (tmp1 * 2) + 11, 0, CHARACTER_BLOCK->window_style);
     val3 = val1;
     if ((val4 & BYTE_MASK) == 3) {
         val6 &= BYTE_MASK;

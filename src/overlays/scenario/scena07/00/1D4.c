@@ -451,7 +451,7 @@ MATCH s32 func_801FD960(s32 arg0, s32 arg1) {
         if ((SYS_TestFlag(g_SceneFlags, 3) == 0) && (arg1 <= 0x200000)) {
             if (((arg0 >> 0x10) - 0x4A) < 2U) {
                 Game_SetScriptActive();
-                value = g_SaveData.snd_bgm_id * 4;
+                value = g_SndBgmId * 4;
                 SND_StartDecrescendo(*(g_SelectionCues + value), *(D_80181EBB + value), 0x64, 0x20);
                 D_80146874 = 4;
                 D_80146875 = 0;

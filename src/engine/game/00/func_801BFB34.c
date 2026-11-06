@@ -52,7 +52,7 @@ NON_MATCHING void func_801BFB34(void) {
             if (tmp3 > 0) {
             loop_7:
                 val7 = val10 * 4;
-                if ((&D_80145F09)[val3] != g_SaveData.battle_order[val10]) {
+                if ((&D_80145F09)[val3] != g_PartyBattleOrder[val10]) {
                     val10 += 1;
                     if (val10 >= tmp3) {
                         goto block_9; /* retail branch */
@@ -94,7 +94,7 @@ NON_MATCHING void func_801BFB34(void) {
             if (tmp1 > 0) {
             loop_18:
                 val6 = val8 * 4;
-                if ((&D_80145F09)[val5] != g_SaveData.battle_order[val8]) {
+                if ((&D_80145F09)[val5] != g_PartyBattleOrder[val8]) {
                     val8 += 1;
                     if (val8 >= tmp1) {
                         goto block_20; /* retail branch */

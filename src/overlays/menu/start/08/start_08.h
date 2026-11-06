@@ -27,18 +27,18 @@
 /* Step the master panel right and clamp it at the given x. Kept: as an inline
  * the limit is an argument used after the branch and the store moves (tested;
  * bytes differ in the member). */
-#define MENU_CLAMP_PANEL(limit)                  \
-    do {                                         \
-        MenuPanelTask* panel;                    \
-        u16            next;                     \
-                                                 \
-        panel    = g_MenuCurrentPanel;           \
-        next     = panel->x + MENU_PANEL_STEP_X; \
-        panel->x = next;                         \
-        if ((s16)next >= 17) {                   \
-            panel->x     = (limit);              \
-            panel->state = 0;                    \
-        }                                        \
+#define MENU_CLAMP_PANEL(limit)                          \
+    do {                                                 \
+        MenuPanelTask* panel;                            \
+        u16            next;                             \
+                                                         \
+        panel        = g_MenuCurrentPanel;               \
+        next         = panel->pos.x + MENU_PANEL_STEP_X; \
+        panel->pos.x = next;                             \
+        if ((s16)next >= 17) {                           \
+            panel->pos.x = (limit);                      \
+            panel->state = 0;                            \
+        }                                                \
     } while (0)
 
 /* The start menu's skill order screen, which runs in the battle selection
@@ -499,9 +499,9 @@ static inline void Menu_SlidePanelIn(void) {
     MenuPanelTask* task;
 
     task = g_MenuCurrentPanel;
-    task->x += MENU_PANEL_STEP_X;
-    if ((s16)task->x >= 321) {
-        task->x     = 320;
+    task->pos.x += MENU_PANEL_STEP_X;
+    if ((s16)task->pos.x >= 321) {
+        task->pos.x = 320;
         task->state = 0;
     }
 }
@@ -511,10 +511,10 @@ static inline void MenuRetreatPanelXToMinus200(void) {
     MenuPanelTask* task;
 
     task = g_MenuCurrentPanel;
-    task->x -= MENU_PANEL_STEP_X;
-    if ((s16)task->x < -200) {
-        LOH(task->x) = -200;
-        task->state  = 0;
+    task->pos.x -= MENU_PANEL_STEP_X;
+    if ((s16)task->pos.x < -200) {
+        LOH(task->pos.x) = -200;
+        task->state      = 0;
     }
 }
 
@@ -524,12 +524,12 @@ static inline void MenuAdvancePanelYField6(void) {
     u8*            bytes;
     u16            next;
 
-    panel    = g_MenuCurrentPanel;
-    bytes    = (u8*)panel;
-    next     = panel->y + MENU_PANEL_STEP_Y;
-    panel->y = next;
+    panel        = g_MenuCurrentPanel;
+    bytes        = (u8*)panel;
+    next         = panel->pos.y + MENU_PANEL_STEP_Y;
+    panel->pos.y = next;
     if ((s16)next >= bytes[10] * 0x36 + 0x3E) {
-        panel->y     = bytes[10] * 54 + 62;
+        panel->pos.y = bytes[10] * 54 + 62;
         panel->state = 0;
     }
 }
@@ -618,7 +618,7 @@ void             func_801EA1F0(MenuPanelTask* task);
  * Character, any other is the Character copy inside the battle row. */
 static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_index) {
     if ((record_index & BYTE_MASK) == 0) {
-        return &g_SaveData.characters[character_index & BYTE_MASK];
+        return &g_Characters[character_index & BYTE_MASK];
     } else {
         return &g_BattlePartyBattlers[character_index & BYTE_MASK].chr;
     }

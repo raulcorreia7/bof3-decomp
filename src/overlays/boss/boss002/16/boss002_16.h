@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/boss/boss.h"
-#include "work/save.h"
 
 extern u8           D_800C1F9C[];
 extern u16          D_800C1FAC[];

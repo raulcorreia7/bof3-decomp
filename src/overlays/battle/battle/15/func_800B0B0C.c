@@ -18,7 +18,7 @@ NON_MATCHING void func_800B0B0C(s16 base_x, s16 base_y) {
         slot_offset  = (s32)slot * 0x30;
         slot_times_3 = (s32)slot * 3;
 
-        UI_DrawWindow((s32)(u16)(base_x + slot_offset), (s32)y_value, 45u, 20u, 0u, (s32)g_SaveData.window_style);
+        UI_DrawWindow((s32)(u16)(base_x + slot_offset), (s32)y_value, 45u, 20u, 0u, (s32)g_WindowStyle);
 
         selection_byte = g_BattleRowCursor;
 

@@ -11,7 +11,7 @@ MATCH void Scene_Start(u8 scenario_index) {
     state              = &g_SceneState;
     state->scenario_id = scenario_index;
     index8             = ((s8)scenario_index) * 8;
-    base               = g_SaveData.scene_flag_words;
+    base               = g_SceneFlagWords;
     state->mode_02     = 0u;
     state->unk_03      = 0u;
     state->state_04    = 0u;

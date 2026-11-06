@@ -43,7 +43,7 @@ loop_6:
         goto loop_6; /* retail branch */
     }
     UI_DrawWindow((val0->pos.x.raw + 3) & HALF_MASK, (val0->pos.y.raw + 3) & HALF_MASK, 153, 154, 0,
-                  (s32)g_SaveData.window_style);
+                  (s32)g_WindowStyle);
     val4 = func_801AFD10(&val0->unk_0A, &stack_20, &stack_21, &val0->unk_08);
     val5 = val4 & BYTE_MASK;
     val1 = (s8)stack_20 + (val0->pos.y.raw + 0x1A);
@@ -75,7 +75,7 @@ loop_6:
         }
     }
     val4         = 0;
-    flags        = &g_SaveData.window_style;
+    flags        = &g_WindowStyle;
     val0->unk_0C = *(&D_801ED878 + val0->unk_0B);
     UI_DrawWindow((val0->pos.x.raw + 3) & HALF_MASK, (val0->pos.y.raw + 3) & HALF_MASK, 153, 20, 0, (s32)*flags);
     UI_DrawWindow((val0->pos.x.raw + 3) & HALF_MASK, (val0->pos.y.raw + 146) & HALF_MASK, 153, 8, 0, (s32)*flags);

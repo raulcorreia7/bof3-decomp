@@ -25,7 +25,7 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
 
     table = *(MenuPanelRows*)&D_801D0E28;
     tail  = *(PanelTail*)&D_801D0EA8;
-    sel   = &g_SaveData.window_style;
+    sel   = &g_WindowStyle;
     index = row_index & BYTE_MASK;
     row   = table.rows[index];
 

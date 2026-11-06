@@ -7,7 +7,6 @@
 
 #include "overlays/area/world00.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 #include <stdio.h>
 
 #define FISHING_STATE        ((FishingState*)g_Task)
@@ -354,7 +353,7 @@ extern s32                   D_80146898;
 extern FishingSelectionState D_801468A4[];
 extern u8                    D_80146918[];
 /* D_80181AC0 */
-extern FacingStep            g_FacingOffsets[];
+extern Vec2S32               g_FacingOffsets[];
 extern char                  D_801D0C04[];
 extern char                  D_801D0C08[];
 extern char                  D_801D0C10[];

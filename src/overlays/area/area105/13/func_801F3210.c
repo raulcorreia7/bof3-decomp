@@ -11,8 +11,8 @@ MATCH s32 func_801F3210(s32 x, s32 y) {
                 if (facing != 2) {
                     if ((y >> 16) >= 0x1E) {
                         Game_SetScriptActive();
-                        g_SaveData.scene_event.mode = 0x3D;
-                        g_SaveData.scene_event.step = 0;
+                        g_SceneEventMode = 0x3D;
+                        g_SceneEventStep = 0;
                         return 1;
                     }
                     return 0;

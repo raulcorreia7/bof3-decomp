@@ -2,7 +2,7 @@
 
 MATCH void func_801F3F70(void) {
     Game_SetScriptActive();
-    g_SaveData.scene_event.mode      = 0x2C;
-    g_SaveData.scene_event.step      = 0;
-    g_SaveData.scene_event.selection = 5;
+    g_SceneEventMode      = 0x2C;
+    g_SceneEventStep      = 0;
+    g_SceneEventSelection = 5;
 }

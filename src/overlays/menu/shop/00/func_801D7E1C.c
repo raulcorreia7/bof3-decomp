@@ -20,10 +20,10 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
     UI_DrawWindow(x + 3, y + 3, 158, 112, 0, enabled);
     Menu_DrawPanelFrame(x, y, 0x12, 0xD);
     item  = D_80145FCC[slot][0];
-    value = g_SaveData.characters[item].level * 10;
+    value = g_Characters[item].level * 10;
     xpos  = x;
     row_y = y + 6;
-    if (g_SaveData.zenny < value || g_SaveData.characters[item].inoculations != 0) {
+    if (g_Zenny < value || g_Characters[item].inoculations != 0) {
         sel = 7;
     } else {
         sel = -(enabled != 0) & 7;
@@ -34,7 +34,7 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
     rec = item * 0xA4 + x - x;
     gx  = xpos + 8;
     do {
-        if (((((u8*)&g_SaveData.characters[0].inoculations)[rec] >> (u8)i) & 1) || (u8)i == cursor) {
+        if (((((u8*)&g_Characters[0].inoculations)[rec] >> (u8)i) & 1) || (u8)i == cursor) {
             UI_DrawText(gx, row_y, 2, 0xFF, Resource_GetText((i & BYTE_MASK) + 0xDE));
         } else {
             UI_DrawText(gx, row_y, sel & BYTE_MASK, 0xFF, Resource_GetText((i & BYTE_MASK) + 0xDE));

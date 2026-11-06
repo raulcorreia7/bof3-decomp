@@ -4,17 +4,16 @@
 /* The world03/area134/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
+#include "common/vector.h"
 #include "overlays/area/world03.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 
 typedef struct AreaSprite {
-    u8  unk_00[3];
-    u8  flags_03;  /* the shade of the sprite */
-    u16 half_size; /* the projected half-size */
-    u8  unk_06[2];
-    s32 origin_x; /* the camera x */
-    s32 origin_y; /* the camera y */
+    u8      unk_00[3];
+    u8      flags_03;  /* the shade of the sprite */
+    u16     half_size; /* the projected half-size */
+    u8      unk_06[2];
+    Vec2S32 origin;
 } AreaSprite;
 
 /* The row count this overlay clears. */
@@ -54,9 +53,9 @@ static inline void World_SpawnActorAtFocus(void) {
         slot->type         = 0x90;
         slot->header.mode  = 0;
         work               = g_Task;
-        slot->x.fixed      = work->pos.x.fixed;
-        slot->y.fixed      = work->pos.y.fixed;
-        slot->z.fixed      = work->pos.z.fixed;
+        slot->pos.x.fixed  = work->pos.x.fixed;
+        slot->pos.y.fixed  = work->pos.y.fixed;
+        slot->pos.z.fixed  = work->pos.z.fixed;
     }
 }
 

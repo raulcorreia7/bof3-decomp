@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/boss/boss.h"
-#include "work/save.h"
 
 #define BOSS_ENEMY_SCRIPT    D_800C1B44
 #define BOSS_ENEMY_STEP_DATA D_800C1B50

@@ -13,7 +13,7 @@ MATCH void func_801E3F5C(void* arg0) {
 
     count = &D_801E5F0C;
 
-    UI_DrawWindow((PANEL_X + 3), (PANEL_Y + 3), 101, *count * 16 + 25, 0, g_SaveData.window_style);
+    UI_DrawWindow((PANEL_X + 3), (PANEL_Y + 3), 101, *count * 16 + 25, 0, g_WindowStyle);
     UI_DrawText((PANEL_X + 39), (PANEL_Y + 7), 0, 0xFF, (u8*)D_801E5EFC[0]);
     UI_DrawSpriteRun(PANEL_X, PANEL_Y, D_801E5E7C, 1);
     i = 0;

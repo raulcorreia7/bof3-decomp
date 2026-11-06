@@ -9,7 +9,6 @@
 
 #include "shared/etc.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -85,7 +84,7 @@
 /* Unsigned view: the cell is declared s8, but the original reads and writes it
  * unsigned (lbu/sb). */
 /* FAKE: retail reads the state byte unsigned. */
-#define FAIRY_EVENT_STEP                      (*(u8*)&g_SaveData.scene_event.step)
+#define FAIRY_EVENT_STEP                      (*(u8*)&g_SceneEventStep)
 
 /* Variant row: message id and item id followed by the pending count. */
 typedef struct FairyVariant {
@@ -191,9 +190,6 @@ ASSERT_OFFSET(FairyVillageData, labels, 0x434);
 
 /* Retail-address data symbols, in address order. */
 extern u16      g_GameAreaId;
-/* Separate symbols from g_SaveData.scene_event: sharing the record base changes func_801F23A4. */
-extern s8       D_801448EB;
-extern s8       D_801448EC;
 extern u8       D_801448F2;
 extern s32      D_80145030;
 extern s32      D_8014503C;

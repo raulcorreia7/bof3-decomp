@@ -6,7 +6,7 @@ MATCH void func_801D2B64(void) {
     if (*state == 2) {
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SaveData.scene_event.selection] + 4));
+    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + 4));
     *state          = 2;
     g_MasterStep    = 6;
     g_MasterSubStep = 0;

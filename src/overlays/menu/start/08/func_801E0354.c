@@ -16,9 +16,9 @@ MATCH void func_801E0354(MenuPanelTask* task) {
     u8  flags;
     u8  n;
 
-    UI_DrawWindow(task->x + 3, task->y + 3, 154, 160, 0, g_SaveData.window_style);
+    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, 154, 160, 0, g_WindowStyle);
     text = Party_GetAbilities(task->unk_0A, task->unk_0B, 0);
-    y    = task->y;
+    y    = task->pos.y;
     for (n = 0; n < 10; n++, y += 0xD, text++) {
         if (*text != 0) {
             disabled = (u8)func_801AF5B0(task->unk_08, D_80148656, *text) == 0;
@@ -28,21 +28,21 @@ MATCH void func_801E0354(MenuPanelTask* task) {
             }
             level   = Char_GetAbilityElement(*text);
             entry   = (u8*)&g_Abilities[*text];
-            ability = Char_GetAbilityCost(g_CharSlot[g_SaveData.walk_order[(s8)D_80148656]], *text, 0);
+            ability = Char_GetAbilityCost(g_CharSlot[g_PartyWalkOrder[(s8)D_80148656]], *text, 0);
             if (n == task->flags || n == task->unk_0C) {
                 if ((u8)color != 7) {
-                    func_801AF930((s16)(task->x + 7), (s16)(y + 0x1A), 7, level, entry, ability, 1);
+                    func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, entry, ability, 1);
                 }
-                func_801AF930((s16)(task->x + 7), (s16)(y + 0x18), color, level, entry, ability, disabled);
+                func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x18), color, level, entry, ability, disabled);
             } else {
-                func_801AF930((s16)(task->x + 7), (s16)(y + 0x1A), color, level, entry, ability, disabled);
+                func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x1A), color, level, entry, ability, disabled);
             }
         }
     }
-    label_x = task->x + 0x4E - strlen((const char*)D_801ECC98[task->unk_0B]) * 4;
-    UI_DrawText(label_x, (task->y + 7), 0, 0x10, (u8*)(D_801ECC98[task->unk_0B]));
-    UI_DrawSpriteRun(task->x, task->y, (task->unk_09 & 2) ? D_801EC76C : D_801EC754, 1);
-    UI_DrawSpriteRun(task->x, task->y, (task->unk_09 & 1) ? D_801EC790 : D_801EC784, 1);
+    label_x = task->pos.x + 0x4E - strlen((const char*)D_801ECC98[task->unk_0B]) * 4;
+    UI_DrawText(label_x, (task->pos.y + 7), 0, 0x10, (u8*)(D_801ECC98[task->unk_0B]));
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 2) ? D_801EC76C : D_801EC754, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 1) ? D_801EC790 : D_801EC784, 1);
     flags = task->unk_09;
     if (!(flags & 0xF0)) {
         task->unk_09 = 0;
@@ -50,22 +50,22 @@ MATCH void func_801E0354(MenuPanelTask* task) {
         task->unk_09 = flags - 0x10;
     }
     for (n = 0; n < 10; n++) {
-        UI_DrawSprite(task->x + (n + 5) * 8, task->y, 1, 1);
+        UI_DrawSprite(task->pos.x + (n + 5) * 8, task->pos.y, 1, 1);
     }
     for (n = 0; n < 17; n++) {
-        UI_DrawSprite(task->x, task->y + (n + 3) * 8, 4, 1);
+        UI_DrawSprite(task->pos.x, task->pos.y + (n + 3) * 8, 4, 1);
     }
-    UI_DrawSprite(task->x + 144, task->y + 24, 0x20, 1);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y + 24, 0x20, 1);
     for (n = 0; n < 15; n++) {
-        UI_DrawSprite(task->x + 144, task->y + (n + 4) * 8, 0x21, 1);
+        UI_DrawSprite(task->pos.x + 144, task->pos.y + (n + 4) * 8, 0x21, 1);
     }
-    UI_DrawSprite(task->x, task->y + 160, 5, 1);
-    UI_DrawSprite(task->x + 144, task->y + 152, 0x22, 1);
+    UI_DrawSprite(task->pos.x, task->pos.y + 160, 5, 1);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y + 152, 0x22, 1);
     if ((s16)task->unk_10 != 0) {
-        UI_DrawSprite(task->x + 8, task->y, 0x32, 1);
-        UI_DrawSprite(task->x + 144, task->y, 0x34, 1);
+        UI_DrawSprite(task->pos.x + 8, task->pos.y, 0x32, 1);
+        UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x34, 1);
     }
     for (n = 0; n < 17; n++) {
-        UI_DrawSprite(task->x + (n + 1) * 8, task->y + 160, 6, 1);
+        UI_DrawSprite(task->pos.x + (n + 1) * 8, task->pos.y + 160, 6, 1);
     }
 }

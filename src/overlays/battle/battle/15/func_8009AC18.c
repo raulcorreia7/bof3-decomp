@@ -16,7 +16,7 @@ NON_MATCHING s32 func_8009AC18(void) {
     u32 i;
     s32 j;
 
-    base     = &g_SaveData.characters[g_CharSlot[g_SaveData.battle_order[D_801485C4]]];
+    base     = &g_Characters[g_CharSlot[g_PartyBattleOrder[D_801485C4]]];
     slots[0] = base + 0xE;
     slots[1] = base + 0xF;
     slots[2] = base + 0x10;
@@ -32,7 +32,7 @@ NON_MATCHING s32 func_8009AC18(void) {
     if (g_BattlePartyCount != 0) {
         i = 0;
         do {
-            cell                   = &g_SaveData.characters[g_BattlePartyBattlers[i].character_index];
+            cell                   = &g_Characters[g_BattlePartyBattlers[i].character_index];
             row                    = D_80145F04 + i * BATTLE_PARTY_STRIDE;
             FIELD(u8, row, 0xEu)   = FIELD(u8, cell, 0xEu);
             FIELD(u8, row, 0xFu)   = FIELD(u8, cell, 0xFu);

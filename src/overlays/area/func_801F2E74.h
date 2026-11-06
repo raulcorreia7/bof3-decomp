@@ -5,11 +5,11 @@
  * every change here must verify every member address. */
 MATCH void func_801F2E74(void) {
     if (MENU_SELECTION_IDLE()) {
-        g_MessageRequest                 = 0x6F;
-        g_SaveData.scene_event.selection = 0;
-    } else if (g_SaveData.zenny >= 500u) {
-        g_MessageRequest                 = 0x7D;
-        g_SaveData.scene_event.selection = 1;
+        g_MessageRequest      = 0x6F;
+        g_SceneEventSelection = 0;
+    } else if (g_Zenny >= 500u) {
+        g_MessageRequest      = 0x7D;
+        g_SceneEventSelection = 1;
     } else {
         g_MessageRequest                   = 0x7C;
         g_ScriptWorkRecord->callback_index = 0xFF;

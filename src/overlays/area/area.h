@@ -16,7 +16,6 @@
 #include "menu/party.h"
 #include "slus/facing.h"
 #include "scenario/runtime.h"
-#include "work/save.h"
 #include <abs.h>
 
 /* One panel marker row selected by a controller mask: the mask, the panel
@@ -133,7 +132,7 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     s32           result;
 
     g_Task    = (u8*)&g_BattlePartyBattlers[slot];
-    index     = g_SaveData.walk_order[slot];
+    index     = g_PartyWalkOrder[slot];
     y         = g_BattlePartyBattlers[slot].unk_30.signed_half;
     x         = g_BattlePartyBattlers[slot].unk_2E.signed_half;
     selection = table[index];

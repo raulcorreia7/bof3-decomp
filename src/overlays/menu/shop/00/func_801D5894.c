@@ -8,14 +8,14 @@ MATCH void func_801D5894(void) {
     char save_name[0x40];
 
     g_SaveSlotCount = 3;
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     WinDrawCueText(28, 22, D_801E60EC + 0x85);
     SAVE_DrawSlots(0x20, 0x30, 0);
     CardAccessFile(0, 0, 0, 0, 0);
     if (g_SaveCardStatus == CARD_EVENT_OK) {
         sprintf((char*)g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);
-        sprintf((char*)g_UiFormatBuffer, D_801D0C68, g_SaveData.play_clock.hours_00, g_SaveData.play_clock.minutes_01,
-                g_SaveData.play_clock.seconds_02);
+        sprintf((char*)g_UiFormatBuffer, D_801D0C68, g_PlayClock.hours_00, g_PlayClock.minutes_01,
+                g_PlayClock.seconds_02);
         strcpy(save_name, (char*)g_UiFormatBuffer);
         sprintf((char*)g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);
         strcpy(date_label, (char*)g_UiFormatBuffer);

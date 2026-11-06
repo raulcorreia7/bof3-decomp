@@ -4,9 +4,9 @@ MATCH s32 func_801F5698(void) {
     s8* flags;
 
     Game_SetScriptActive();
-    flags                       = &g_SaveData.scene_event.mode;
-    *flags                      = 0x25;
-    g_SaveData.scene_event.step = 0x28;
+    flags            = &g_SceneEventMode;
+    *flags           = 0x25;
+    g_SceneEventStep = 0x28;
     SYS_ClearFlag(flags + 0x63D, 0x7EU);
     return 1;
 }

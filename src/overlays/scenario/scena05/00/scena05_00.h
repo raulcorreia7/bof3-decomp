@@ -5,7 +5,6 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-#include "work/save.h"
 
 extern u8 D_80146874;
 
@@ -19,7 +18,7 @@ extern u16 D_80146876;
     if (SYS_TestFlag(g_SceneFlags, 6) == 0 || SYS_TestFlag(g_SceneFlags, 9) != 0) { \
         return -1;                                                                  \
     }                                                                               \
-    SYS_SetFlag(g_SaveData.scene_event_flags, event_flag);                          \
+    SYS_SetFlag(g_SceneEventFlags, event_flag);                                     \
     Game_SetScriptActive();                                                         \
     D_80146866 = 0;                                                                 \
     D_80146867 = 0;                                                                 \

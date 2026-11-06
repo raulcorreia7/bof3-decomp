@@ -9,7 +9,7 @@ MATCH s32 func_801A8A98(s32 candidate_x, s32 candidate_y) {
         if ((LOBU(g_GameRequestFlags) == 0x40) && (D_80143F03 == 1) &&
             ((Area_GetCellCode((candidate_x >> 0x10), ((value + 0x8000) >> 0x10)) & BYTE_MASK) == 0xA1) &&
             (value > 0x107FFF)) {
-            buf = (u8*)&g_SaveData.scene_event_flags;
+            buf = (u8*)&g_SceneEventFlags;
             if (SYS_TestFlag(buf, 0x77U) != 0) {
                 D_8014504A = 0;
                 SYS_ClearFlag(buf, 0x77U);

@@ -14,9 +14,9 @@ MATCH void func_801D3D00(void) {
     g_MenuPanelTasks[11].unk_10 = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[13].unk_0C]);
     g_MenuPanelTasks[21].active = 1;
     g_MenuPanelTasks[14].unk_0C = 0;
-    g_MenuPanelTasks[21].x      = (u16)g_MenuPanelTasks[13].x + 7;
+    g_MenuPanelTasks[21].pos.x  = (u16)g_MenuPanelTasks[13].pos.x + 7;
     span                        = (D_80148510 - g_MenuPanelTasks[13].unk_0B) * 0xD + 0x1A;
-    g_MenuPanelTasks[21].y      = (u16)g_MenuPanelTasks[13].y + span;
+    g_MenuPanelTasks[21].pos.y  = (u16)g_MenuPanelTasks[13].pos.y + span;
     panel                       = &D_80148504;
     pressed                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
     cursor                      = D_80148510;

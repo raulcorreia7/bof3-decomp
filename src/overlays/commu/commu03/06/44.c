@@ -42,9 +42,9 @@ MATCH void func_801D1058(void) {
 MATCH void func_801D1094(void) {
     s32 temp_v0;
 
-    if (g_SaveData.snd_bgm_id != 0xFF) {
-        if (g_SaveData.snd_bgm_id != D_801D1944) {
-            temp_v0 = g_SaveData.snd_bgm_id * 4;
+    if (g_SndBgmId != 0xFF) {
+        if (g_SndBgmId != D_801D1944) {
+            temp_v0 = g_SndBgmId * 4;
             SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
         }
     }
@@ -84,6 +84,6 @@ INCLUDE_ASM(func_801D1714);
 MATCH void func_801D18AC(void) {
     u8* state;
 
-    state = &g_SaveData.scene_event.step;
+    state = &g_SceneEventStep;
     *state += 1;
 }

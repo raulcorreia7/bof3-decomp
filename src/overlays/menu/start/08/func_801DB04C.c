@@ -16,7 +16,7 @@ MATCH u8 func_801DB04C(void) {
             tmp                              = D_8014833C[D_80148658[1] + 4][0];
             D_8014833C[D_80148658[1] + 4][0] = D_8014833C[D_80148658[5] + 4][0];
             D_8014833C[D_80148658[5] + 4][0] = tmp;
-            Menu_SwapBytes_801DAC08(&g_SaveData.walk_order[D_80148658[1]], &g_SaveData.walk_order[D_80148658[5]]);
+            Menu_SwapBytes_801DAC08(&g_PartyWalkOrder[D_80148658[1]], &g_PartyWalkOrder[D_80148658[5]]);
             for (i = 0; i < 4; i++) {
                 tmp                                   = s_SkillOrderCursors[D_80148658[1]][i];
                 s_SkillOrderCursors[D_80148658[1]][i] = s_SkillOrderCursors[D_80148658[5]][i];
@@ -37,26 +37,26 @@ MATCH u8 func_801DB04C(void) {
     }
     if (D_80148658[0] == 0) {
         row     = D_80148658[1];
-        member  = g_SaveData.walk_order[D_80148658[1]];
+        member  = g_PartyWalkOrder[D_80148658[1]];
         reserve = D_801ED690[D_80148658[5]];
     } else {
         row     = D_80148658[5];
-        member  = g_SaveData.walk_order[D_80148658[5]];
+        member  = g_PartyWalkOrder[D_80148658[5]];
         reserve = D_801ED690[D_80148658[1]];
     }
-    if (g_SaveData.characters[g_CharSlot[member]].unk_07 & 2) {
+    if (g_Characters[g_CharSlot[member]].unk_07 & 2) {
         return member;
     }
-    if (g_SaveData.characters[g_CharSlot[reserve]].unk_07 & 2) {
+    if (g_Characters[g_CharSlot[reserve]].unk_07 & 2) {
         return reserve;
     }
     SND_PlayCue(EMI_CUE_ID(1, 3));
     for (i = 0; i < Party_CountOrder(0); i++) {
-        if (g_SaveData.walk_order[i] == member) {
-            g_SaveData.walk_order[i] = reserve;
+        if (g_PartyWalkOrder[i] == member) {
+            g_PartyWalkOrder[i] = reserve;
         }
-        if (g_SaveData.battle_order[i] == member) {
-            g_SaveData.battle_order[i] = reserve;
+        if (g_PartyBattleOrder[i] == member) {
+            g_PartyBattleOrder[i] = reserve;
         }
     }
     /* FAKE: retail reads g_MenuPanelTasks[12].unk_0A as u8[]. */

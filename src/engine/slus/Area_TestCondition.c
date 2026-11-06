@@ -2,7 +2,7 @@
 
 /* resolves a palette-tint request word (bits 8-15 the class, bit 0 the polarity): classes FA/FF compare the
  * low byte with a reference byte, FC00 folds in the entry-0 UI state, FB00 tests g_AreaCameraAngle.vz against a
- * 0x801-frame window at 0x200, and the low classes read a bit from the 8-byte-stride table g_SaveData.scene_flag_words.
+ * 0x801-frame window at 0x200, and the low classes read a bit from the 8-byte-stride table g_SceneFlagWords.
  */
 MATCH s8 Area_TestCondition(s32 request) {
     s16 tag     = request;
@@ -35,10 +35,10 @@ MATCH s8 Area_TestCondition(s32 request) {
         return ((request & BYTE_MASK) ^ g_SceneRecord.sbyte) == 0;
     }
     if ((tag & 0xFF00) < 0x2000) {
-        return SYS_TestFlag(&g_SaveData.scene_flag_words[(shifted >> 24) * 8], request & BYTE_MASK);
+        return SYS_TestFlag(&g_SceneFlagWords[(shifted >> 24) * 8], request & BYTE_MASK);
     }
     if ((tag & 0xFF00) < 0x4000) {
-        return SYS_TestFlag(&g_SaveData.scene_flag_words[(shifted >> 21) & 0xF8], request & BYTE_MASK) == 0;
+        return SYS_TestFlag(&g_SceneFlagWords[(shifted >> 21) & 0xF8], request & BYTE_MASK) == 0;
     }
     return tag & 1;
 }

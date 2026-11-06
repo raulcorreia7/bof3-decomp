@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world00.h"
-#include "work/save.h"
 
 /* Handler table the step byte selects. */
 extern void (*D_801F3304[])(void);

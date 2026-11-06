@@ -13,7 +13,7 @@ MATCH void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u1
     u8         i;
     s32        j;
 
-    character = &g_SaveData.characters[character_id];
+    character = &g_Characters[character_id];
     before[0] = &character->stats.power;
     before[1] = &character->stats.defense;
     before[2] = &character->stats.intellect;

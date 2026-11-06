@@ -135,7 +135,12 @@ extern u16          g_UiWindowEffectBusy;
 extern u16          g_UiLocalMode;
 /* D_80143F1E */
 extern u8           g_GameEntryMode;
+/* D_80145024 */
+/* D_80145024 */
+extern u8           g_EmiLoadedCharacterIndex;
 extern u8           D_80145025;
+/* D_8014502C */
+extern u32          g_BattleCount;
 extern u16          D_80145A7C;
 /* D_80145AA4 */
 extern u16          g_InputHeld;

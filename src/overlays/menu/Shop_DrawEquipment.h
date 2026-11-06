@@ -11,7 +11,7 @@ MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
     u8                   row;
 
     Menu_DrawFilledPanel(x, y, 9, 0xA);
-    record = &g_SaveData.characters[record_index];
+    record = &g_Characters[record_index];
     UI_DrawText((s16)(x + 46), (s16)(y + 7), 0, 0xFF, g_MenuLabelEquip);
     func_801644D8(0, (s32)(u16)(x + 7), (s32)(u16)(y + 5), 0x10, 0x10, 0x80);
 

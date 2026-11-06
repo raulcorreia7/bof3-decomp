@@ -33,7 +33,7 @@ NON_MATCHING bool func_801A0048(s32 cell_x, s32 cell_y) {
         return true;
     x    = cell_x & BYTE_MASK;
     y    = cell_y & BYTE_MASK;
-    tab  = g_SaveData.scene_flag_words;
+    tab  = g_SceneFlagWords;
     mask = 0xFF8000;
     do {
         entry = &banks[g_GameAreaId]->entries[left];

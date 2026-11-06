@@ -27,13 +27,13 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 
     val4 = shaded;
     val6 = val4 & BYTE_MASK;
     val9 = -(val6 != 0) & 7;
-    UI_DrawWindow((val5 + 3) & HALF_MASK, (val1 + 3) & HALF_MASK, 125, 48, val6, g_SaveData.window_style);
+    UI_DrawWindow((val5 + 3) & HALF_MASK, (val1 + 3) & HALF_MASK, 125, 48, val6, CHARACTER_BLOCK->window_style);
     val7 = val5;
     val2 = val1;
     val5 += 0x56;
     tmp1 = val5 & HALF_MASK;
     val1 += 2;
-    character = &g_SaveData.characters[character_index];
+    character = &g_Characters[character_index];
     if (val6 == 0) {
         val11 = (character->status >> 6) & 2;
     } else {

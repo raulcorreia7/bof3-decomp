@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/boss/boss.h"
-#include "work/save.h"
 
 /* The scratchpad work area is a PartyBattler record in this image. */
 #define g_Task ((PartyBattler*)g_Task)

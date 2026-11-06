@@ -7,7 +7,7 @@ MATCH void func_801F3F08(void) {
     scratch = g_Task;
     scratch->unk_30 -= 0x10;
     if ((s16)scratch->unk_30 <= 0) {
-        SYS_SetFlag(g_SaveData.scene_event_flags, scratch->direction_08);
+        SYS_SetFlag(g_SceneEventFlags, scratch->direction_08);
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(EMI_CUE_ID(2, 1));
         }

@@ -8,7 +8,7 @@ MATCH void func_801D4884(void) {
     g_MenuPanelTasks[11].unk_02 = 9;
     g_MenuPanelTasks[11].state  = 2;
     *ptr                        = 1;
-    g_MenuPanelTasks[11].x      = 0x14;
+    g_MenuPanelTasks[11].pos.x  = 0x14;
     D_801484C2                  = -0x14;
     g_MenuPanelTasks[11].unk_10 = 0;
     ptr += 0x24;
@@ -17,7 +17,7 @@ MATCH void func_801D4884(void) {
     g_MenuPanelTasks[12].state  = 2;
     *ptr                        = 1;
     D_801484E6                  = -0x14;
-    g_MenuPanelTasks[12].x      = 0x40;
+    g_MenuPanelTasks[12].pos.x  = 0x40;
     g_MenuPanelTasks[12].unk_0A = 0;
     {
         /* FAKE: keep the retail byte value in $a0 across both stores. */
@@ -36,7 +36,7 @@ MATCH void func_801D4884(void) {
     }
     value                       = *s_ChoiceMenuValues;
     D_80148508                  = -0xC8;
-    g_MenuPanelTasks[13].y      = 0x3E;
+    g_MenuPanelTasks[13].pos.y  = 0x3E;
     g_MenuPanelTasks[19].unk_02 = 0xA;
     g_MenuPanelTasks[13].unk_0A = 0;
     g_MenuPanelTasks[13].unk_08 = 0;

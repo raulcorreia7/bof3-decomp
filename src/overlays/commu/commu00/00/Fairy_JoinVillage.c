@@ -18,21 +18,21 @@ MATCH void Fairy_JoinVillage(void) {
         index -= 60;
     }
     one       = 1;
-    count_ptr = &g_SaveData.battle_count;
+    count_ptr = &g_BattleCount;
     dst       = (u8*)count_ptr + 0x7BC;
     src       = g_Fairies[0];
     for (;;) {
-        if (g_SaveData.fairy_jobs[index].active == 0) {
-            dst_offset                                   = index * 5;
-            dst                                          = (u8*)(dst_offset + (u32)dst);
-            src_offset                                   = index * 9;
-            copy_src                                     = (u8*)(src_offset + (u32)src);
-            g_SaveData.fairy_jobs[index].active          = one;
-            g_SaveData.fairy_jobs[index].type            = FAIRY_JOB_IDLE;
-            count                                        = *count_ptr;
-            end                                          = dst + 5;
-            g_SaveData.fairy_jobs[index].record_state    = 0;
-            g_SaveData.fairy_jobs[index].progress_anchor = count;
+        if (g_FairyJobs[index].active == 0) {
+            dst_offset                         = index * 5;
+            dst                                = (u8*)(dst_offset + (u32)dst);
+            src_offset                         = index * 9;
+            copy_src                           = (u8*)(src_offset + (u32)src);
+            g_FairyJobs[index].active          = one;
+            g_FairyJobs[index].type            = FAIRY_JOB_IDLE;
+            count                              = *count_ptr;
+            end                                = dst + 5;
+            g_FairyJobs[index].record_state    = 0;
+            g_FairyJobs[index].progress_anchor = count;
 
             do {
                 *dst++ = *copy_src++;

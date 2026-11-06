@@ -43,17 +43,17 @@ NON_MATCHING void func_800A1D84(void) {
     if (row_index < BATTLE_ACTIVE_ROW_COUNT) {
         row_offset   = row_index * BATTLE_PARTY_STRIDE;
         record_index = D_80145FCC[row_offset];
-        timer        = g_SaveData.characters[record_index].fatigue;
+        timer        = g_Characters[record_index].fatigue;
         if (timer < BATTLE_TIMER_MAX) {
-            g_SaveData.characters[record_index].fatigue = timer + 1;
-            row_offset                                  = *active * BATTLE_PARTY_STRIDE;
-            D_80145F1E[row_offset]                      = D_80145F1E[row_offset] + 1;
+            g_Characters[record_index].fatigue = timer + 1;
+            row_offset                         = *active * BATTLE_PARTY_STRIDE;
+            D_80145F1E[row_offset]             = D_80145F1E[row_offset] + 1;
         }
-        Char_RebuildStats(&g_SaveData.characters[g_BattlePartyBattlers[*active].character_index]);
+        Char_RebuildStats(&g_Characters[g_BattlePartyBattlers[*active].character_index]);
         i = 0;
         if (g_BattlePartyCount != 0) {
             do {
-                cell       = &g_SaveData.characters[g_BattlePartyBattlers[i].character_index];
+                cell       = &g_Characters[g_BattlePartyBattlers[i].character_index];
                 dest       = i * BATTLE_PARTY_STRIDE + D_80145F04;
                 dest[0x0E] = cell[0x0E];
                 dest[0x0F] = cell[0x0F];

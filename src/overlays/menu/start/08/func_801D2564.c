@@ -20,11 +20,11 @@ MATCH void func_801D2564(void) {
     selection_index = *selection;
     /* FAKE: preserve flag store after selection read. */
     ORDER_LOCK(D_801485DC = 1);
-    D_801485E0 = g_MenuPanelTasks[selection_index + 4].x;
+    D_801485E0 = g_MenuPanelTasks[selection_index + 4].pos.x;
     /* FAKE: preserve first table store order. */
     MATCH_FAKE_BARRIER();
-    D_801485E2 = g_MenuPanelTasks[selection_index + 4].y;
-    TEXT_SetVariable(0U, 5U, g_CharSlot[g_SaveData.walk_order[selection_index]] * 0xA4 + panel_data);
+    D_801485E2 = g_MenuPanelTasks[selection_index + 4].pos.y;
+    TEXT_SetVariable(0U, 5U, g_CharSlot[g_PartyWalkOrder[selection_index]] * 0xA4 + panel_data);
     g_MenuPanelTasks[11].unk_10 = 0x12;
     input                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     count                       = Party_CountOrder(0U);

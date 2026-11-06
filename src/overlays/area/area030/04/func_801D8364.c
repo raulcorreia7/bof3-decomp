@@ -23,7 +23,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     u8* cursor;
     u8* text;
 
-    UI_DrawWindow(panel_x, (panel_y + 1) & HALF_MASK, 0x8B, 0x9E, 0x80, (s32)g_SaveData.window_style);
+    UI_DrawWindow(panel_x, (panel_y + 1) & HALF_MASK, 0x8B, 0x9E, 0x80, (s32)g_WindowStyle);
     if (FISHING_STATE->step_index_0A != 0) {
         FISHING_STATE->step_index_0A = (u8)(FISHING_STATE->step_index_0A - 1);
         max_count                    = 0xA;
@@ -42,7 +42,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     row    = 0;
     index  = 0;
     text   = g_UiFormatBuffer;
-    cursor = g_SaveData.inventory_ids[3];
+    cursor = g_InventoryIds[3];
     bar_x  = (s16)(panel_x + 5);
     text_y = 0;
     row_y  = -2;
@@ -55,8 +55,8 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                         if (FISHING_STATE->step_14 == index) {
                             UI_DrawText(bar_x, bar_y, 7, 0xCU, (&g_Accessories[accessory]));
                             UI_DrawText(bar_x, (s16)(text_y + row_y), 0, 0xCU, (&g_Accessories[*cursor]));
-                            if (g_SaveData.inventory_counts[3][slot] >= 2U) {
-                                sprintf((s8*)text, D_801D0C14, g_SaveData.inventory_counts[3][slot]);
+                            if (g_InventoryCounts[3][slot] >= 2U) {
+                                sprintf((s8*)text, D_801D0C14, g_InventoryCounts[3][slot]);
                                 text_x = (s16)(panel_x + 0x68);
                                 UI_DrawGlyphString(text_x, (s16)(text_y + (row_y + 4)), 7U, text);
                                 goto drawn; /* joins the shared count-text draw */
@@ -65,8 +65,8 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                     }
                 }
                 UI_DrawText(bar_x, bar_y, 0, 0xCU, (&g_Accessories[*cursor]));
-                if (g_SaveData.inventory_counts[3][slot] >= 2U) {
-                    sprintf((s8*)text, D_801D0C14, g_SaveData.inventory_counts[3][slot]);
+                if (g_InventoryCounts[3][slot] >= 2U) {
+                    sprintf((s8*)text, D_801D0C14, g_InventoryCounts[3][slot]);
                     text_x = (s16)(panel_x + 0x68);
                     UI_DrawGlyphString(text_x, (s16)(text_y + (row_y + 2)), 0U, text);
                 }
@@ -94,7 +94,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     func_801D90FC((s32)panel_x, panel_y);
     count = 0;
     do {
-        if (g_Accessories[g_SaveData.inventory_ids[3][count]].kind == 0xA) {
+        if (g_Accessories[g_InventoryIds[3][count]].kind == 0xA) {
             index += 1;
         }
         count += 1;

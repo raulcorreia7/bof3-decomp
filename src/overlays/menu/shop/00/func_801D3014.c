@@ -22,7 +22,7 @@ MATCH void func_801D3014(void) {
     if (*pad & D_80145AC2) {
         if (*toggle != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
-            wallet  = &g_SaveData.zenny;
+            wallet  = &g_Zenny;
             price   = *wallet + g_ShopItemCount * g_ShopItemPrice;
             *wallet = price;
             if (price > 0x98967F) {

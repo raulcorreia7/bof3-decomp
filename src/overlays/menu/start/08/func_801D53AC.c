@@ -11,9 +11,9 @@ NON_MATCHING void func_801D53AC(void) {
 
     Menu_DrawClutStrip(D_80144953);
     g_MenuPanelTasks[21].active = 1;
-    g_MenuPanelTasks[21].y      = (u16)g_MenuPanelTasks[12].y + 4;
+    g_MenuPanelTasks[21].pos.y  = (u16)g_MenuPanelTasks[12].pos.y + 4;
     g_MenuPanelTasks[13].flags  = 1;
-    g_MenuPanelTasks[21].x      = (u16)g_MenuPanelTasks[12].x + (s8)D_801ED620 * 0x30;
+    g_MenuPanelTasks[21].pos.x  = (u16)g_MenuPanelTasks[12].pos.x + (s8)D_801ED620 * 0x30;
     g_MenuPanelTasks[12].unk_0B = 0xFF;
     g_MenuPanelTasks[11].unk_10 = D_801EC440[(s8)D_801ED620];
     pressed                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));

@@ -7,10 +7,10 @@ MATCH void func_801D3D84(void) {
     u32* gold;
 
     func_801D6D6C(0x6E, 0x4C);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     if (D_8014865C != -1) {
         WinDrawCueText(28, 22, 0xA1);
-        Menu_DrawZennyWindow(0x62, 0x28, 0, g_SaveData.zenny);
+        Menu_DrawZennyWindow(0x62, 0x28, 0, g_Zenny);
     }
     prev = D_801E60F0;
     if (g_InputPressed & PADLup) {
@@ -35,7 +35,7 @@ MATCH void func_801D3D84(void) {
         D_801E60F4 = 0;
         if (mode == 0) {
             rate = &D_80148699;
-            gold = &g_SaveData.zenny;
+            gold = &g_Zenny;
             if (*gold >= *rate * 10) {
                 SND_PlayCue(EMI_CUE_ID(1, 4));
                 *gold -= *rate * 10;

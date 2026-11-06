@@ -6,7 +6,6 @@
 
 #include "overlays/area/world04.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 
 /* The scenario state byte and its flag word. */
 

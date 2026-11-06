@@ -51,11 +51,11 @@ MATCH void Game_StartSelectedGame(void) { /* func_801D0E54 */
         SND_StopSelectionEffect();
         SND_SetBankLayout(0u);
         Actor_ClearAll();
-        g_SaveData.play_clock.thirtieths_03 = 0u;
-        g_SaveData.play_clock.seconds_02    = 0u;
-        g_SaveData.play_clock.minutes_01    = 0u;
-        g_SaveData.play_clock.hours_00      = 0u;
-        g_AreaDrawFlags                     = 0u;
+        g_PlayClock.thirtieths_03 = 0u;
+        g_PlayClock.seconds_02    = 0u;
+        g_PlayClock.minutes_01    = 0u;
+        g_PlayClock.hours_00      = 0u;
+        g_AreaDrawFlags           = 0u;
         Scene_Start(16);
         CallbackRegister(0, Game_RunMainLoop);
         g_UiTitleState = g_UiTitleState + 1u;
@@ -78,7 +78,7 @@ MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
         u16 bank;
         g_SceneState.state_04 = 1u;
         UI_SetMode(4);
-        sel  = g_SaveData.snd_bgm_id;
+        sel  = g_SndBgmId;
         bank = D_80143F20;
         /* FAKE: barrier stages args deferring a2 into slot. */
         MATCH_BARRIER();
@@ -95,8 +95,8 @@ MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
 /* func_801D0FB8 */
 MATCH void UI_UpdateChoicePrompt(void) { /* func_801D0FB8 */
     if (D_80143B40 == 0u) {
-        g_SaveData.emi_loaded_character_index = 0xFFu;
-        g_UiTitleState                        = 0u;
+        g_EmiLoadedCharacterIndex = 0xFFu;
+        g_UiTitleState            = 0u;
     } else {
         UI_DrawChoicePrompt();
     }

@@ -10,7 +10,7 @@ NON_MATCHING void func_801D8C58(s16 x, s16 y, u8 index, u8 flag) {
     s32 value;
     /* FAKE: retail reserves 24 frame bytes (0x18..0x2F) no statement uses. */
     STACK_PADS(u8, 24);
-    slot = &g_SaveData.window_style;
+    slot = &g_WindowStyle;
     UI_DrawWindow(x + 3, y + 3, 101, 37, 0, slot[0]);
     slot += index * 0xA4;
     slot += 0x16;

@@ -329,15 +329,15 @@ INCLUDE_ASM(func_801FE03C);
 INCLUDE_ASM(func_801FE0A4);
 
 MATCH void func_801FE10C(void) {
-    g_SaveData.characters[g_CharSlot[10]].unk_07 &= 0xFE;
+    g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
     EMI_LoaderStreamFamily(CHAR_ID_RYU_PAJAMAS, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
-    g_PartySize                                       = 0;
-    g_SaveData.characters[g_CharSlot[9]].character_id = CHAR_ID_RYU_PAJAMAS;
+    g_PartySize                              = 0;
+    g_Characters[g_CharSlot[9]].character_id = CHAR_ID_RYU_PAJAMAS;
     Party_JoinMember(CHAR_ID_RYU_PAJAMAS);
 }
 
 MATCH void func_801FE1B0(void) {
-    g_SaveData.characters[g_CharSlot[0]].character_id = CHAR_ID_RYU_YOUNG;
+    g_Characters[g_CharSlot[0]].character_id = CHAR_ID_RYU_YOUNG;
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_YOUNG);

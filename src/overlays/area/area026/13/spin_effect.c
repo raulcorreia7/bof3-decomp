@@ -544,7 +544,7 @@ MATCH void func_801F32B8(void) {
     s32    result;
 
     TASK_SET((Actor*)g_BattlePartyBattlers);
-    index     = g_SaveData.walk_order[0];
+    index     = g_PartyWalkOrder[0];
     y         = g_BattlePartyBattlers[0].unk_30.signed_half;
     x         = g_BattlePartyBattlers[0].unk_2E.signed_half;
     selection = D_801F4CE0[index];
@@ -573,7 +573,7 @@ MATCH void func_801F3360(void) {
     slot               = &g_ActorSlots[actor_slot];
     slot->header.flags = 1;
     slot->type         = 0x33;
-    slot->x.fixed      = 0x70000;
-    slot->y.fixed      = 0x68000;
-    slot->z.fixed      = (Area_SampleHeight(slot->x.fixed, 0x68000) << 0x10);
+    slot->pos.x.fixed  = 0x70000;
+    slot->pos.y.fixed  = 0x68000;
+    slot->pos.z.fixed  = (Area_SampleHeight(slot->pos.x.fixed, 0x68000) << 0x10);
 }

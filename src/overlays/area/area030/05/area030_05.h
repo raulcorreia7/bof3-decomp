@@ -8,7 +8,6 @@
 #include "overlays/area/world00.h"
 #include <stdio.h>
 #include "menu/draw.h"
-#include "work/save.h"
 
 /* Work-cost row: two cost bytes followed by two three-byte runs. */
 typedef struct AreaCost {

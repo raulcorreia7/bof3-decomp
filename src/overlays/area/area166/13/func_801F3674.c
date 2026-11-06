@@ -6,9 +6,9 @@ MATCH void func_801F3674(void) {
     MESSAGE_REQUEST_CLEAR();
     if (D_801490C7 == 3) {
         Game_SetScriptActive();
-        g_SaveData.scene_event.mode      = 0xA;
-        g_SaveData.scene_event.step      = 0x5;
-        g_SaveData.scene_event.selection = 0xFF;
+        g_SceneEventMode      = 0xA;
+        g_SceneEventStep      = 0x5;
+        g_SceneEventSelection = 0xFF;
     }
     record                    = (u8*)g_ScriptWorkRecord;
     FIELD(s32, record, 0x18U) = D_801F3940[D_801490C7 * 2];

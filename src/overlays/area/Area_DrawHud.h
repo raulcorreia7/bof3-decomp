@@ -50,7 +50,7 @@ MATCH void Area_DrawHud(s16 x, s16 y) {
     }
 
     if ((func_801B6610(D_8014930A, D_8014930E) & BYTE_MASK) || (g_AreaWalkFlags & AREA_WALK_TRANSITION) ||
-        (g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK) == 0xC || (g_GameFlags & 0x4000)) {
+        (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) == 0xC || (g_GameFlags & 0x4000)) {
         Area_DrawHudSprite((s16)(x + 0x30), (s16)(y + 0x18), 3);
     }
     Area_DrawGradientDiamond(x + 0x18, y + 0x18);

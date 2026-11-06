@@ -12,8 +12,8 @@ NON_MATCHING void func_801D67D8(u8 party_slot) {
     u8         i;
     u8         j;
 
-    character  = g_CharSlot[g_SaveData.walk_order[party_slot & BYTE_MASK]];
-    record     = &g_SaveData.characters[character];
+    character  = g_CharSlot[g_PartyWalkOrder[party_slot & BYTE_MASK]];
+    record     = &g_Characters[character];
     slots[0]   = &record->equip.weapon;
     slots[1]   = &record->equip.shield;
     slots[2]   = &record->equip.helmet;

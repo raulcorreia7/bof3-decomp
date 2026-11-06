@@ -51,7 +51,7 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
     i = 0;
 loop_16:
     if ((i & BYTE_MASK) < (Party_CountOrder(1) & BYTE_MASK)) {
-        kind = g_SaveData.battle_order[i & BYTE_MASK];
+        kind = g_PartyBattleOrder[i & BYTE_MASK];
         x    = *(s32*)(D_80143F2C + (i & BYTE_MASK) * 8);
         y    = *(s32*)(D_80143F30 + (i & BYTE_MASK) * 8);
         if ((kind == 2) || (kind == 6)) {

@@ -20,7 +20,7 @@ NON_MATCHING void func_8009FB38(void) {
     battler                  = *selected_battler_address;
     if (battler < 3U) {
         template_index = g_BattlePartyBattlers[battler].character_index;
-        stat_base      = g_SaveData.characters;
+        stat_base      = g_Characters;
         Char_RebuildStats((u8*)(&stat_base[template_index]));
         row_index = 0;
         if (g_BattlePartyCount != 0) {

@@ -12,7 +12,7 @@ MATCH void EMI_StreamFamilyArchive(u8 index, u8 family) {
 
     archive_index = index;
     if (family != 3u) {
-        hint = &g_SaveData.emi_loaded_character_index;
+        hint = &g_EmiLoadedCharacterIndex;
         if (family == 0u) {
             *hint = index | EMI_LOADED_PL;
         } else {

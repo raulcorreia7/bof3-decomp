@@ -7,7 +7,7 @@ MATCH void func_801D6E6C(void) {
     u8         want;
 
     i       = 0;
-    record  = &g_SaveData.characters[g_CharSlot[g_SaveData.walk_order[g_MenuPanelTasks[13].unk_0C]]];
+    record  = &g_Characters[g_CharSlot[g_PartyWalkOrder[g_MenuPanelTasks[13].unk_0C]]];
     ptrs[0] = &record->equip.weapon;
     ptrs[1] = &record->equip.shield;
     ptrs[2] = &record->equip.helmet;

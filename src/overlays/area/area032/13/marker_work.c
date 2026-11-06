@@ -448,9 +448,9 @@ MATCH void func_801F3A78(void) {
     g_ActorSlots[work[0x0B]].unk_06              = work[0x08];
     slots                                        = SP_PTR(u8*, 0u);
     item                                         = slots[0x11];
-    g_ActorSlots[item[0x0B]].x.fixed             = ((Actor*)item)->pos.x.fixed;
-    g_ActorSlots[item[0x0B]].y.fixed             = ((Actor*)item)->pos.y.fixed + 0x4000;
-    g_ActorSlots[item[0x0B]].z.fixed             = ((Actor*)item)->pos.z.fixed + 0x01000000;
+    g_ActorSlots[item[0x0B]].pos.x.fixed         = ((Actor*)item)->pos.x.fixed;
+    g_ActorSlots[item[0x0B]].pos.y.fixed         = ((Actor*)item)->pos.y.fixed + 0x4000;
+    g_ActorSlots[item[0x0B]].pos.z.fixed         = ((Actor*)item)->pos.z.fixed + 0x01000000;
     g_ActorSlots[item[0x0B]].layer               = 0x78;
 }
 
@@ -512,8 +512,8 @@ MATCH void func_801F3DCC(void) {
     g_ActorSlots[work[0x0B]].unk_06              = work[8];
     slots                                        = SP_PTR(u8*, 0u);
     item                                         = slots[0x11];
-    g_ActorSlots[item[0x0B]].x.fixed             = ((Actor*)item)->pos.x.fixed;
-    g_ActorSlots[item[0x0B]].y.fixed             = ((Actor*)item)->pos.y.fixed + 0x8000;
-    g_ActorSlots[item[0x0B]].z.fixed             = ((Actor*)item)->pos.z.fixed + 0x01000000;
+    g_ActorSlots[item[0x0B]].pos.x.fixed         = ((Actor*)item)->pos.x.fixed;
+    g_ActorSlots[item[0x0B]].pos.y.fixed         = ((Actor*)item)->pos.y.fixed + 0x8000;
+    g_ActorSlots[item[0x0B]].pos.z.fixed         = ((Actor*)item)->pos.z.fixed + 0x01000000;
     g_ActorSlots[item[0x0B]].layer               = 0x3C;
 }

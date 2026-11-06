@@ -4,7 +4,7 @@
 MATCH void Shop_Equip(u8 character_id, u8 slot, u8 item_id) {
     Character* character;
 
-    character = &g_SaveData.characters[character_id];
+    character = &g_Characters[character_id];
     switch (slot) {
         default:
         case EQUIP_SLOT_WEAPON:

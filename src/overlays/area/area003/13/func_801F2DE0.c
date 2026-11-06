@@ -5,8 +5,8 @@ MATCH s32 func_801F2DE0(void) {
     MATCH_REG(s32, action, "v1");
 
     Game_SetScriptActive();
-    action                           = 4;
-    g_SaveData.scene_event.mode      = action;
-    g_SaveData.scene_event.selection = 0;
+    action                = 4;
+    g_SceneEventMode      = action;
+    g_SceneEventSelection = 0;
     return 0;
 }

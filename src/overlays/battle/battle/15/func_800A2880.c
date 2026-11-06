@@ -37,7 +37,7 @@ MATCH s16 func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_
     roll   = RANDOM_MASK(7);
     damage = (damage * D_800B492C[roll]) / 10000;
 
-    if ((BATTLER_IS_PLAYER(g_BattleTarget)) && (g_SaveData.party_formation == 2) && (damage > 0)) {
+    if ((BATTLER_IS_PLAYER(g_BattleTarget)) && (g_PartyFormation == 2) && (damage > 0)) {
         damage -= damage >> 2;
     }
 

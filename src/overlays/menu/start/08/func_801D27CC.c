@@ -8,7 +8,7 @@ MATCH void func_801D27CC(void) {
     panel_data = &D_80144953;
     Menu_DrawClutStrip(*panel_data);
     records = panel_data + 0x15;
-    TEXT_SetVariable(0, 5, g_CharSlot[g_SaveData.walk_order[D_80148656]] * 0xA4 + records);
+    TEXT_SetVariable(0, 5, g_CharSlot[g_PartyWalkOrder[D_80148656]] * 0xA4 + records);
     g_MenuPanelTasks[11].unk_10 = 0x12;
     if (D_80148654 == 0) {
         if (g_InputPressed & D_80145AC4) {

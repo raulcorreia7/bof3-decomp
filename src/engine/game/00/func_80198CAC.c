@@ -8,7 +8,7 @@ MATCH void func_80198CAC(void) {
     u8         hours;
 
     if (g_GameStateIndex != GAME_REQUEST_SCENE_CAMERA) {
-        clock = &g_SaveData.play_clock;
+        clock = &g_PlayClock;
         if ((*(volatile u32*)clock & 0xFFFFFFu) != GAME_CLOCK_STOPPED) {
             if (++clock->thirtieths_03 >= GAME_CLOCK_THIRTIETHS_PER_SECOND) {
                 clock->thirtieths_03 = 0;
@@ -27,7 +27,7 @@ MATCH void func_80198CAC(void) {
                 }
             }
         }
-        timer1 = &g_SaveData.celerity_timer;
+        timer1 = &g_GameCelerityTimer;
         if (*(volatile u32*)timer1 != 0u) {
             next                  = timer1->thirtieths_03 - 1;
             timer1->thirtieths_03 = next;
@@ -52,7 +52,7 @@ MATCH void func_80198CAC(void) {
                 }
             }
         }
-        timer2 = &g_SaveData.bonebreak_timer;
+        timer2 = &g_GameBonebreakTimer;
         if (*(volatile u32*)timer2 != 0u) {
             next                  = timer2->thirtieths_03 - 1;
             timer2->thirtieths_03 = next;

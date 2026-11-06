@@ -28,7 +28,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
     void*    name_table;
 
     UI_DrawWindow((task->pos.x.raw + 3) & HALF_MASK, (task->pos.y.raw + 3) & HALF_MASK, 153, 130, 0,
-                  (s32)g_SaveData.window_style);
+                  (s32)g_WindowStyle);
     selection = func_801AFD10(&task->unk_10, &row_offset, &count, &task->unk_12);
     selection &= BYTE_MASK;
     kinds = Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U) + selection;
@@ -64,8 +64,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
             row_y += 0xD;
         } while ((index & BYTE_MASK) < (count + 7));
     }
-    UI_DrawWindow((task->pos.x.raw + 3) & HALF_MASK, (task->pos.y.raw + 3) & HALF_MASK, 153, 20, 0,
-                  (s32)g_SaveData.window_style);
+    UI_DrawWindow((task->pos.x.raw + 3) & HALF_MASK, (task->pos.y.raw + 3) & HALF_MASK, 153, 20, 0, (s32)g_WindowStyle);
     if ((s16)task->unk_14 != 0) {
         text_table = (char*)&D_800B6ED4;
     } else {

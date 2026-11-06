@@ -9,7 +9,7 @@ MATCH s32 func_801C38F4(s32 record_index, s32 field_mode, s32 wanted_id) {
 
     mode   = field_mode & BYTE_MASK;
     count  = record_index & BYTE_MASK;
-    record = &g_SaveData.characters[g_CharSlot[count]];
+    record = &g_Characters[g_CharSlot[count]];
     count  = 0;
     if (mode == 1) {
         goto mode1; /* mode 1 compares the record's 0x0E byte */

@@ -16,8 +16,8 @@
 
 #define CHARACTER_BLOCK_RECORDS 0x16
 
-/* The window style byte and the character rows behind it; g_SaveData holds both. */
-#define CHARACTER_BLOCK         ((Char_Block*)&g_SaveData.window_style)
+/* The block at its retail address; an image header declares g_WindowStyle. */
+#define CHARACTER_BLOCK         ((Char_Block*)&g_WindowStyle)
 
 /* func_801ADDD4 applies the six stat gains and learns both abilities. */
 #define LEVEL_OBJECT(exp, hp, ap, power, defense, agility, intellect, ability, extra_ability)                   \
@@ -164,6 +164,8 @@ typedef struct Equipment {
     u8 accessories[CHARACTER_ACCESSORY_COUNT];
 } Equipment;
 
+ASSERT_SIZE(Equipment, 0x06);
+
 /* The four learned-ability lists, in ability-type order. */
 typedef struct AbilitySet {
     u8 healing[CHARACTER_ABILITY_COUNT];
@@ -171,6 +173,8 @@ typedef struct AbilitySet {
     u8 attack[CHARACTER_ABILITY_COUNT];
     u8 skill[CHARACTER_ABILITY_COUNT];
 } AbilitySet;
+
+ASSERT_SIZE(AbilitySet, 0x28);
 
 typedef struct Character {
     u8         name[CHARACTER_NAME_LENGTH];
@@ -263,6 +267,8 @@ ASSERT_OFFSET(CharacterBankSection, palette_offset, 0x04);
 
 /* The party's character records, one per CHAR_INDEX_*. Every field/menu reader
  * indexes it through the g_CharSlot slot of a stored character id. */
+/* D_80144968 */
+extern Character   g_Characters[PARTY_RECORD_COUNT];
 /* D_801CB8DC */
 extern LevelGrowth g_LevelGrowth[LEVEL_GROWTH_CHARACTER_COUNT][LEVEL_GROWTH_LEVEL_COUNT];
 

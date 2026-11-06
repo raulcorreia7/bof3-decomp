@@ -9,7 +9,7 @@ MATCH void func_801D60B0(void) {
     counter = &D_80148654;
     cursor  = *counter;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x12 - cursor * 20) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                       g_SaveData.window_style);
+                       g_WindowStyle);
     count = *counter;
     count++;
     *counter = count;

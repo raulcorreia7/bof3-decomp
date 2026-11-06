@@ -5,7 +5,6 @@
  * includes the file. */
 
 #include "shared/etc.h"
-#include "work/save.h"
 #include <stdio.h>
 
 extern u8 D_80148654;

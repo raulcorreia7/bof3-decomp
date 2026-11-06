@@ -61,10 +61,10 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     *(ShopStateHeader*)&D_801448D8 = *(ShopStateHeader*)&g_SceneState;
     j                              = 0;
     D_80144948                     = 0;
-    g_SaveData.script_vars[0]      = g_ScriptVars[0];
-    g_SaveData.script_vars[1]      = g_ScriptVars[1];
-    g_SaveData.script_vars[2]      = g_ScriptVars[2];
-    g_SaveData.script_vars[3]      = g_ScriptVars[3];
+    g_SavedScriptVars[0]           = g_ScriptVars[0];
+    g_SavedScriptVars[1]           = g_ScriptVars[1];
+    g_SavedScriptVars[2]           = g_ScriptVars[2];
+    g_SavedScriptVars[3]           = g_ScriptVars[3];
     D_80144900                     = (u32)D_80145EC4;
     D_80144904                     = (u32)D_80145EC8;
     D_801448FC                     = g_GameAreaId;
@@ -76,7 +76,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
         *(u16*)((j * 2) + (&D_801448D8 + 0xCBC)) = (u16)(&g_InputMasks)[j];
         n                                        = n + 1;
     } while ((u32)n < 9U);
-    work     = &D_801448D8;
+    work     = (u8*)&g_SaveData;
     dst_text = work + 0xCA0;
     src_text = work + 0x90;
     strncpy((s8*)dst_text, (s8*)src_text, 5);
@@ -84,7 +84,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     col  = 0 & HALF_MASK;
     do {
         name_index = slot & HALF_MASK;
-        if (g_SaveData.walk_order[col] == 4) {
+        if (g_PartyWalkOrder[col] == 4) {
             mode = SHOP_WORK->field_74C & 0x7F;
             if ((mode != 5) && (mode != 0xC)) {
                 dst_text[col + 5] = 0xB;
@@ -94,12 +94,12 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
             }
         } else {
         store_row:
-            dst_text[name_index + 5] = (u8)g_SaveData.walk_order[name_index];
+            dst_text[name_index + 5] = (u8)g_PartyWalkOrder[name_index];
         }
         slot += 1;
         col = slot & HALF_MASK;
     } while ((u32)(slot & HALF_MASK) < 3U);
-    src                                = g_SaveData.scene_event_flags;
+    src                                = g_SceneEventFlags;
     SHOP_WORK_RECORD(0xCA0u)->field_08 = src_text[6];
     SHOP_WORK_RECORD(0xCA0u)->field_0C = SHOP_WORK->field_6E8;
     SHOP_WORK_RECORD(0xCA0u)->field_09 = SHOP_WORK->field_7A;
@@ -107,9 +107,9 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     SHOP_WORK_RECORD(0xCA0u)->field_14 = *(s32*)(src_text + 8);
     sum                                = 0;
     dst                                = g_SaveBuffer;
-    src                                = g_SaveData.scene_event_flags - 0x650;
+    src                                = g_SceneEventFlags - 0x650;
     i                                  = 0;
-    SHOP_WORK_RECORD(0xCA0u)->field_14 = SYS_TestFlag(g_SaveData.scene_event_flags, 0x92U);
+    SHOP_WORK_RECORD(0xCA0u)->field_14 = SYS_TestFlag(g_SceneEventFlags, 0x92U);
     D_80145025                         = (u8)g_GameFlags;
     do {
         i += 1;
@@ -130,7 +130,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     if (g_SaveSlotFirst == g_SaveSlotCount) {
         g_SaveSlotCount += 1;
     }
-    func_801D6CE4(g_SaveSlotFirst, &D_801448D8);
+    func_801D6CE4(g_SaveSlotFirst, (u8*)&g_SaveData);
 }
 #else
 INCLUDE_ASM(SAVE_BuildSlotImage);

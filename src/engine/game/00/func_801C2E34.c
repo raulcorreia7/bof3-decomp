@@ -19,16 +19,16 @@ MATCH void func_801C2E34(u8 index) {
         g_GameState->countdown_119 = 0x28;
     }
     record_index1 = g_GameState->slot_13C;
-    if ((u32)(g_SaveData.characters[record_index1].stats.max_hp >> 2) >= g_SaveData.characters[record_index1].hp) {
-        g_SaveData.characters[record_index1].status |= STATUS_LOW_HP;
+    if ((u32)(g_Characters[record_index1].stats.max_hp >> 2) >= g_Characters[record_index1].hp) {
+        g_Characters[record_index1].status |= STATUS_LOW_HP;
         ((PartyBattler*)g_GameState)->chr.status |= STATUS_LOW_HP;
     }
     flags         = entry[2];
     record_index2 = g_GameState->slot_13C;
-    g_SaveData.characters[record_index2].status |= flags;
+    g_Characters[record_index2].status |= flags;
     if ((u8)func_801C38F4(g_GameState->slot_13C, 3, 8) != 0) {
         record_index3 = g_GameState->slot_13C;
-        g_SaveData.characters[record_index3].status &= ~STATUS_CONFUSED;
+        g_Characters[record_index3].status &= ~STATUS_CONFUSED;
         g_GameState->countdown_119 = 0;
     }
 }

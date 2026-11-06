@@ -48,9 +48,9 @@ NON_MATCHING void func_801D9BDC(void) {
         g_MenuPanelTasks[19].unk_0A = D_801EC4D0[tmp2].unk_04 + 1;
     }
     tmp3                            = ((s8)D_801ED66C * 3) + D_801ED668;
-    g_MenuPanelTasks[20].x          = D_801EC4D0[tmp3].flags;
+    g_MenuPanelTasks[20].pos.x      = D_801EC4D0[tmp3].flags;
     FIELD(s8, (&D_801485DC), 0x24u) = 1;
-    g_MenuPanelTasks[20].y          = D_801EC4D0[tmp3].step;
+    g_MenuPanelTasks[20].pos.y      = D_801EC4D0[tmp3].step;
     val8                            = 0;
     g_MenuPanelTasks[20].unk_0B     = 1;
     g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].unk_04 + 1;
@@ -89,7 +89,7 @@ NON_MATCHING void func_801D9BDC(void) {
             D_801ED67C = (s8)D_801ED66C;
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 4));
-            Menu_SwapBytes_801DAC08(&g_SaveData.battle_order[(s8)D_801ED66C], &g_SaveData.battle_order[D_801ED67C]);
+            Menu_SwapBytes_801DAC08(&g_PartyBattleOrder[(s8)D_801ED66C], &g_PartyBattleOrder[D_801ED67C]);
             if ((s8)D_801ED66C != D_801ED67C) {
                 D_801ED660 = (u8)(s8)D_801ED66C;
                 D_801ED664 = (u8)D_801ED67C;
@@ -105,8 +105,8 @@ NON_MATCHING void func_801D9BDC(void) {
             D_801ED678 = 0x7F;
             D_801ED67C = 0x7F;
         } else if (D_80148660 != 1) {
-            D_80148654                 = 0;
-            g_SaveData.party_formation = ((u8)D_801ED674 * 2) + ((u8)D_801ED670 - 1);
+            D_80148654       = 0;
+            g_PartyFormation = ((u8)D_801ED674 * 2) + ((u8)D_801ED670 - 1);
             SND_PlayCue(EMI_CUE_ID(1, 2));
             val7 = 0;
             val3 = 0 << 0x18;
@@ -174,7 +174,7 @@ NON_MATCHING void func_801D9BDC(void) {
     if (((val4 >> 0x18) != D_801ED668) || ((s8)val11 != (s8)D_801ED66C)) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
-    g_SaveData.party_formation = ((u8)D_801ED670 + ((u8)D_801ED674 * 2)) - 1;
+    g_PartyFormation = ((u8)D_801ED670 + ((u8)D_801ED674 * 2)) - 1;
 }
 #else
 INCLUDE_ASM(func_801D9BDC);

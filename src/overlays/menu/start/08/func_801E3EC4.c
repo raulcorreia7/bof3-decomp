@@ -5,7 +5,7 @@ MATCH void func_801E3EC4(void) {
     u8* work;
     u8* tail;
 
-    hint            = &g_SaveData.emi_loaded_character_index;
+    hint            = &g_EmiLoadedCharacterIndex;
     g_GameFlags     = 0;
     g_AreaWalkFlags = 0;
     *hint           = 0;

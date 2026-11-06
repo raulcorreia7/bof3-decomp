@@ -6,7 +6,7 @@ typedef s8 (*SaveProbe)(s32, s32, s32, s32, s32);
 MATCH void func_801D51B8(void) {
     u8* name;
 
-    name = &g_SaveData.window_style;
+    name = &g_WindowStyle;
     Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, *name);
     WinDrawCueText(28, 22, D_801E60EC + 0x85);
     SAVE_DrawSlots(0x20, 0x30, 0);

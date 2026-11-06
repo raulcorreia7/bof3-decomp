@@ -5,7 +5,7 @@ MATCH u8 Party_CountOrder(u8 mode) {
     /* FAKE: pin holds 0xFF sentinel in a2. */
     MATCH_REG(u8, sentinel, "a2") = 0xFF;
     unsigned int masked           = mode & sentinel;
-    u8*          base             = g_SaveData.walk_order;
+    u8*          base             = g_PartyWalkOrder;
     s32          off              = masked * 3;
     u8*          ptr              = base + off;
 

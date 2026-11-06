@@ -6,7 +6,6 @@
 
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 
 void func_801F37A8(s32 arg0, s32 arg1);
 

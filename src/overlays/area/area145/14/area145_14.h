@@ -6,7 +6,6 @@
 
 #include "overlays/area/world03.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 

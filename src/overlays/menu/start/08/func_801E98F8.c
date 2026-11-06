@@ -5,6 +5,6 @@
 
 MATCH void func_801E98F8(void) {
     D_801ED3FC[g_MenuCurrentPanel->state]();
-    Shop_DrawEquipment(g_MenuCurrentPanel->x, g_MenuCurrentPanel->y,
-                       g_CharSlot[g_SaveData.walk_order[g_MenuCurrentPanel->unk_0A]]);
+    Shop_DrawEquipment(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y,
+                       g_CharSlot[g_PartyWalkOrder[g_MenuCurrentPanel->unk_0A]]);
 }

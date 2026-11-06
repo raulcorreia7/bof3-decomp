@@ -1,4 +1,4 @@
-/* Draw the play time window: hours and minutes of g_SaveData.play_clock with a colon that
+/* Draw the play time window: hours and minutes of g_PlayClock with a colon that
  * blinks on the clock's thirtieths count, and the caption row. One definition
  * shared by the start, Bate, Shisu and shop overlays; each overlay includes
  * this file where the function sits and binds g_MenuClockFormat,
@@ -18,12 +18,12 @@ MATCH void Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y) {
     y        = panel_y;
     window_y = y + 3;
     text_y   = y + 4;
-    UI_DrawWindow((u16)(x + 3), (u16)window_y, 85, 16, 0, g_SaveData.window_style);
-    sprintf((char*)g_UiFormatBuffer, g_MenuClockFormat, g_SaveData.play_clock.hours_00);
+    UI_DrawWindow((u16)(x + 3), (u16)window_y, 85, 16, 0, g_WindowStyle);
+    sprintf((char*)g_UiFormatBuffer, g_MenuClockFormat, g_PlayClock.hours_00);
     UI_DrawAsciiString(x + 33, text_y, 0, g_UiFormatBuffer);
-    sprintf((char*)g_UiFormatBuffer, g_MenuClockFormat, g_SaveData.play_clock.minutes_01);
+    sprintf((char*)g_UiFormatBuffer, g_MenuClockFormat, g_PlayClock.minutes_01);
     UI_DrawAsciiString(x + 60, text_y, 0, g_UiFormatBuffer);
-    if (g_SaveData.play_clock.thirtieths_03 < 0xF) {
+    if (g_PlayClock.thirtieths_03 < 0xF) {
         UI_DrawTextString(x + 52, window_y, 0, 0xFF, MENU_CLOCK_COLON);
         UI_DrawTextString(x + 52, y + 7, 0, 0xFF, MENU_CLOCK_COLON);
     }

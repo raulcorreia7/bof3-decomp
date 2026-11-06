@@ -27,7 +27,7 @@ MATCH void func_801D76B8(void) {
     }
     if (g_InputPressed & D_80145AC2) {
         id = D_80145FCC[(s8)D_80148656][0];
-        if (g_SaveData.zenny < (g_SaveData.characters[id].level * 10)) {
+        if (g_Zenny < (g_Characters[id].level * 10)) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             D_8014865B = 0xB;
             D_8014865F = 0xC;

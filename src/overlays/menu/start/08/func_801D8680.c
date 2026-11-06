@@ -19,8 +19,8 @@ NON_MATCHING void func_801D8680(void) {
     val0                        = &D_801484CC + 0xEC;
     g_MenuPanelTasks[18].unk_0C = 0xFF;
     g_MenuPanelTasks[16].unk_0C = 0xFF;
-    g_MenuPanelTasks[21].x      = g_MenuPanelTasks[18].x + 5;
-    g_MenuPanelTasks[21].y      = g_MenuPanelTasks[18].y + ((g_MenuPanelTasks[18].unk_0B * 0x10) + 0x1A);
+    g_MenuPanelTasks[21].pos.x  = g_MenuPanelTasks[18].pos.x + 5;
+    g_MenuPanelTasks[21].pos.y  = g_MenuPanelTasks[18].pos.y + ((g_MenuPanelTasks[18].unk_0B * 0x10) + 0x1A);
     tmp0                        = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
     val1                        = g_MenuPanelTasks[16].unk_0B == 3;
     if (tmp0 & PADLup) {

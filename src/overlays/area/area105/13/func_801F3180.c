@@ -3,7 +3,7 @@
 MATCH void func_801F3180(void) {
     s8* state;
 
-    state = &g_SaveData.scene_event.step;
+    state = &g_SceneEventStep;
     switch (*state) {
         case 0:
             Message_StartAreaMessage(1);
@@ -13,8 +13,8 @@ MATCH void func_801F3180(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SaveData.scene_event.mode = 0;
-                *state                      = 0;
+                g_SceneEventMode = 0;
+                *state           = 0;
             }
             return;
     }

@@ -8,7 +8,6 @@
 #include "work/area_spad.h"
 
 #include "shared/WorldSpin.h"
-#include "work/save.h"
 
 #define AREA_SPIN_PRIM_ORDER 1
 

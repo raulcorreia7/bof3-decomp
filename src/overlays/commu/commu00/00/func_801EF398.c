@@ -22,8 +22,7 @@ MATCH void func_801EF398(void) {
                 off   = 0;
                 inner = 0;
                 do {
-                    if (((&g_SaveData.fairy_jobs[0].active)[inner] != 0) &&
-                        ((&g_SaveData.fairy_jobs[0].active)[inner + 1] == next)) {
+                    if ((((u8*)g_FairyJobs)[inner] != 0) && (((u8*)g_FairyJobs)[inner + 1] == next)) {
                         count += 1;
                         sum += D_801F2708[off];
                     }
@@ -39,7 +38,7 @@ MATCH void func_801EF398(void) {
             if (amount <= 0) {
                 amount = 1;
             }
-            if ((g_SaveData.battle_count - D_801455BC) >= amount && D_801455C4 >= D_801F2523[D_801455C3 & BYTE_MASK]) {
+            if ((g_BattleCount - D_801455BC) >= amount && D_801455C4 >= D_801F2523[D_801455C3 & BYTE_MASK]) {
                 D_801455C3 += 1;
                 D_801455BC += amount;
                 D_80145E60[g_FairyVillageUpdateCount * 2] = 6;

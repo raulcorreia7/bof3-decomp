@@ -7,7 +7,7 @@ MATCH void func_8019CFCC(void) {
     g_Task->unk_09 = value;
     if ((value & BYTE_MASK) == 0) {
         if (LOHU(g_GameAreaId) == 0x92u) {
-            SYS_SetFlag(g_SaveData.scene_event_flags, 0x44);
+            SYS_SetFlag(g_SceneEventFlags, 0x44);
         }
         Actor_Clear();
         return;

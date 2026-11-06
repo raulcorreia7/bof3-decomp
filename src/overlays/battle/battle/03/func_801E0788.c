@@ -22,17 +22,17 @@ MATCH void func_801E0788(void) {
         }
         g_Task->unk_03 = 4;
     } else if (w->chr.equip.accessories[0] == ACCESSORY_SOUL_GEM) {
-        g_SaveData.characters[w->unk_13A[2]].equip.accessories[0] = ACCESSORY_NOTHING;
-        g_Task->unk_09                                            = 30;
-        g_Task->unk_03                                            = 3;
-    } else if (w->chr.equip.accessories[1] == ACCESSORY_SOUL_GEM) {
-        g_SaveData.characters[w->unk_13A[2]].equip.accessories[1] = ACCESSORY_NOTHING;
-        g_Task->unk_09                                            = 30;
-        g_Task->unk_03                                            = 6;
-    } else if (w->chr.equip.armor == ARMOR_MANLY_CLOTHES) {
-        g_SaveData.characters[w->unk_13A[2]].equip.armor = ARMOR_NOTHING;
+        g_Characters[w->unk_13A[2]].equip.accessories[0] = ACCESSORY_NOTHING;
         g_Task->unk_09                                   = 30;
-        g_Task->unk_03                                   = 5;
+        g_Task->unk_03                                   = 3;
+    } else if (w->chr.equip.accessories[1] == ACCESSORY_SOUL_GEM) {
+        g_Characters[w->unk_13A[2]].equip.accessories[1] = ACCESSORY_NOTHING;
+        g_Task->unk_09                                   = 30;
+        g_Task->unk_03                                   = 6;
+    } else if (w->chr.equip.armor == ARMOR_MANLY_CLOTHES) {
+        g_Characters[w->unk_13A[2]].equip.armor = ARMOR_NOTHING;
+        g_Task->unk_09                          = 30;
+        g_Task->unk_03                          = 5;
     } else {
         VOL(u8, g_BattleLivingPartyCount) -= 1;
         for (i = 0; (u8)i < 8; i++) {

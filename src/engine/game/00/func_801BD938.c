@@ -11,7 +11,7 @@ MATCH s32 func_801BD938(void) {
         return 0;
     }
     index = g_GameState->slot_13C;
-    if (g_SaveData.characters[index].status & STATUS_CONFUSED) {
+    if (g_Characters[index].status & STATUS_CONFUSED) {
         return 0;
     }
     g_GameState->step_12A.u8_value++;

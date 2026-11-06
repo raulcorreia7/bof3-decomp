@@ -13,9 +13,9 @@ NON_MATCHING void func_801E0B64(void) {
     s32  slot;
     s32  i;
 
-    Char_RebuildStats(&g_SaveData.characters[g_GameState->unk_13A[2]]);
+    Char_RebuildStats(&g_Characters[g_GameState->unk_13A[2]]);
     for (slot = 0; slot < g_BattlePartyCount; slot++) {
-        src = &g_SaveData.characters[g_BattlePartyBattlers[slot].character_index];
+        src = &g_Characters[g_BattlePartyBattlers[slot].character_index];
         dst = &D_80145F04[slot * BATTLE_PARTY_STRIDE];
         for (i = 14; i < 20; i++) {
             dst[i] = src[i];

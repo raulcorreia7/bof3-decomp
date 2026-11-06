@@ -14,11 +14,11 @@ NON_MATCHING void func_801BF5A8(s32 x, s32 y, s32 party_slot) {
     x = x;
     y = y;
     if (g_PartySize == 2) {
-        base = g_SaveData.party_formation + 1;
+        base = g_PartyFormation + 1;
     } else if (g_PartySize == 3) {
-        base = g_SaveData.party_formation + 4;
+        base = g_PartyFormation + 4;
     } else {
-        base = g_SaveData.party_formation;
+        base = g_PartyFormation;
     }
     if (s_CameraScrollDeltas[g_BattleScrollDir * 2] != 0) {
         rec        = g_Task;

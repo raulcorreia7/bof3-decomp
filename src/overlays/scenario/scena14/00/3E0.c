@@ -167,7 +167,7 @@ MATCH void Scene_SetPartyRyuAdultMomoPeco(void) {
 INCLUDE_ASM(func_801FBE10);
 
 MATCH void func_801FBF18(void) {
-    g_SaveData.characters[g_CharSlot[10]].unk_07 &= 0xFE;
+    g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
@@ -183,9 +183,9 @@ MATCH void func_801FBFA8(void) {
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
-    g_SaveData.battle_order[0] = 7;
-    D_80144F5E                 = 8;
-    D_80144F5F                 = 5;
+    g_PartyBattleOrder[0] = 7;
+    D_80144F5E            = 8;
+    D_80144F5F            = 5;
 }
 
 MATCH void Scene_SetPartyRyuAdultGarrPeco(void) {

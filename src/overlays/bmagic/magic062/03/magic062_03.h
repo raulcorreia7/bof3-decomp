@@ -4,7 +4,6 @@
 /* The bmagic/magic062/03 overlay. Only this image includes the file. */
 
 #include "overlays/bmagic/bmagic.h"
-#include "work/save.h"
 
 /* The effect ticker value below which Effect_NextStep advances the step. */
 #define EFFECT_STEP_LIMIT 2

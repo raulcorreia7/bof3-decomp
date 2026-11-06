@@ -6,7 +6,7 @@ MATCH void Char_DrainFatigue(void) {
     u8         fatigue;
 
     i   = 0;
-    chr = g_SaveData.characters;
+    chr = g_Characters;
 loop:
     fatigue = chr->fatigue;
     if (fatigue < 9U) {

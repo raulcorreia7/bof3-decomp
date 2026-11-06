@@ -6,7 +6,7 @@
 MATCH void func_801D7D68(s16 x, s16 y, u8 column_mode) {
     s32 i;
 
-    UI_DrawWindow((x + 2), (y + 2), 0x28, 0x10, 0, g_SaveData.window_style);
+    UI_DrawWindow((x + 2), (y + 2), 0x28, 0x10, 0, g_WindowStyle);
     func_801E0C80(8, 1);
     func_801E0DCC((u8)(column_mode * 4 + 0x1D), 1, x, y);
     func_801E0DCC((u8)(column_mode * 4 + 0x1E), 1, x, y + 0x10);

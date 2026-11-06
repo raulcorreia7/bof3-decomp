@@ -21,7 +21,7 @@ MATCH void func_801BF448(void) {
             TASK_SET(rec);
             key = rec[0x79];
             while (1) {
-                if (g_SaveData.walk_order[i & BYTE_MASK] == key)
+                if (g_PartyWalkOrder[i & BYTE_MASK] == key)
                     break;
                 i += 1;
                 if ((i & BYTE_MASK) >= 3U)
@@ -32,7 +32,7 @@ MATCH void func_801BF448(void) {
             work                = g_Task;
             work->unk_0B        = 0;
             COORD_INT(work->pos.z) = val;
-            if ((g_SaveData.characters[g_GameState->slot_13C].status & STATUS_KO) != 0)
+            if ((g_Characters[g_GameState->slot_13C].status & STATUS_KO) != 0)
                 Actor_SelectScript((g_BattleScrollDir + 0x1C));
             else
                 Actor_SelectScript(g_BattleScrollDir);

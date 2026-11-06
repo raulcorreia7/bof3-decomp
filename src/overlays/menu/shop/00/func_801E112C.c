@@ -23,8 +23,8 @@ NON_MATCHING void func_801E112C(MenuPanelTask* task) {
     s32      ability;
 
     UI_DrawWindow((task->pos.x.raw + 3) & HALF_MASK, (task->pos.y.raw + 3) & HALF_MASK, 153, 154, 0,
-                  (s32)g_SaveData.window_style);
-    kinds = &g_SaveData.window_style + 0xB1A;
+                  (s32)g_WindowStyle);
+    kinds = &g_WindowStyle + 0xB1A;
     kinds = &kinds[func_801AFD10(&task->unk_10, &row_offset, &count, &task->unk_12) & BYTE_MASK];
     row_y = task->pos.y.raw + (s8)row_offset;
     if ((count + 9) != 0) {
@@ -61,9 +61,9 @@ NON_MATCHING void func_801E112C(MenuPanelTask* task) {
         } while ((index & BYTE_MASK) < (count + 9));
     }
     UI_DrawWindow((task->pos.x.raw + 3) & HALF_MASK, (task->pos.y.raw + 3) & HALF_MASK, 153, 20, (s32)task->unk_09,
-                  (s32)g_SaveData.window_style);
+                  (s32)g_WindowStyle);
     UI_DrawWindow((task->pos.x.raw + 3) & HALF_MASK, (task->pos.y.raw + 146) & HALF_MASK, 153, 8, (s32)task->unk_09,
-                  (s32)g_SaveData.window_style);
+                  (s32)g_WindowStyle);
     UI_DrawText((s16)(task->pos.x.raw - (((func_801AF20C(&D_801E5D1C) & BYTE_MASK) * 4) - 78)),
                 (s16)(task->pos.y.raw + 7), 0, 0x10U, (&D_801E5D1C));
     sprintf((s8*)g_UiFormatBuffer, &D_801D0E7C, Party_CountAbilities(0U, 0xFFU, 0U) & BYTE_MASK, 0x80);

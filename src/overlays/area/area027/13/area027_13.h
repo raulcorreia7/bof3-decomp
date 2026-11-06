@@ -7,7 +7,6 @@
 
 #include "overlays/area/world00.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 
 /* Reset sentinel stored to g_MessageRequest by the request handlers. */
 #define RESET_SENTINEL 0xFFFF
@@ -32,7 +31,7 @@ void      func_801F304C(AreaTrail* trail);
 void      func_801F3164(void);
 void      func_801F31CC(void);
 void      func_801F32B0(void);
-POLY_FT4* func_801F3480(const AreaPoint* point, s32 angle, u32 texture);
+POLY_FT4* func_801F3480(const Vec3S16* point, s32 angle, u32 texture);
 void      func_801F3618(void);
 void      func_801F3650(void);
 void      func_801F3710(void);

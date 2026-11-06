@@ -12,9 +12,9 @@ MATCH void func_801DEE64(void) {
     for (slot = 0; slot < count; slot++) {
         counter = &D_80148654;
         row_y   = slot * 0x36;
-        id      = g_CharSlot[g_SaveData.walk_order[slot]];
+        id      = g_CharSlot[g_PartyWalkOrder[slot]];
         Menu_DrawCharacterWindow((0x11 - (*counter * 0x28)) & HALF_MASK, (row_y + 0x3E) & 0xFFFE, id,
-                                 g_SaveData.characters[id].unk_07 & 2, 0);
+                                 g_Characters[id].unk_07 & 2, 0);
         sprintf((char*)g_UiFormatBuffer, D_801D0E60, slot + 1);
         row_y += 0x43;
         UI_DrawGlyphString(26 - (*counter * 40), row_y, 0U, g_UiFormatBuffer);
@@ -23,5 +23,5 @@ MATCH void func_801DEE64(void) {
     counter_end = &D_80148654;
     func_801DF00C(((*counter_end * 0x2D) + 0x96) & HALF_MASK, 0x3B);
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x12 - (*counter_end * 8)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                       g_SaveData.window_style);
+                       g_WindowStyle);
 }

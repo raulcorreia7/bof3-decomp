@@ -5,7 +5,6 @@
  * includes the file. */
 
 #include "shared/etc.h"
-#include "work/save.h"
 #include <stdio.h>
 
 #define g_SceneState (*(struct SceneState*)&g_SceneState)
@@ -77,12 +76,12 @@ static inline void Menu_SlidePanelUp(void) {
     MenuPanelTask* task;
     u16            y;
 
-    task    = g_MenuCurrentPanel;
-    y       = task->y - MENU_PANEL_STEP_Y;
-    task->y = y;
+    task        = g_MenuCurrentPanel;
+    y           = task->pos.y - MENU_PANEL_STEP_Y;
+    task->pos.y = y;
     if ((s16)y < MENU_PANEL_HIDDEN_Y) {
-        LOH(task->y) = MENU_PANEL_HIDDEN_Y;
-        task->state  = 0;
+        LOH(task->pos.y) = MENU_PANEL_HIDDEN_Y;
+        task->state      = 0;
     }
 }
 

@@ -5,7 +5,6 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-#include "work/save.h"
 
 extern u8       D_80146865;
 extern u8       D_80146866;

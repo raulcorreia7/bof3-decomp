@@ -17,7 +17,6 @@
 #define SCRATCH_COLUMN_COUNT  8
 
 #include "shared/WorldSpin.h"
-#include "work/save.h"
 
 #define AREA_SPIN_PRIM_ORDER 2
 

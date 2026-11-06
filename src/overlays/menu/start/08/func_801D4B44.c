@@ -13,7 +13,7 @@ MATCH void func_801D4B44(void) {
     func_801D4A44();
     i = 0;
     do {
-        row    = g_SaveData.inventory_ids[0];
+        row    = g_InventoryIds[0];
         mirror = row + 0x200;
         j      = 0;
         if (127 - (i & BYTE_MASK) > 0) {

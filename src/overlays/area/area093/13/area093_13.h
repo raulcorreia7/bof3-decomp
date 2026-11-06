@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world02.h"
-#include "work/save.h"
 
 #define AREA_SCRIPT_VARIANT 0xB
 

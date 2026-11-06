@@ -8,13 +8,7 @@
 #include "work/actor.h"
 #include "overlays/area/world03.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 #include <rand.h>
-
-/* One spawn point in the area's spawn table: x then y, four bytes. */
-typedef Vec2U16 AreaSpawnPoint;
-
-ASSERT_SIZE(AreaSpawnPoint, 4);
 
 extern SVECTOR  D_1F800014[];
 extern s32      D_80145EC4[];
@@ -29,19 +23,19 @@ extern u8       D_801F6800[]; /* one four-byte sprite cell per id: w, h, u0, v0 
 #define AREA_HUD_SPRITE_CELLS D_801F6800
 extern WorldMapMarker D_801F6858[6];
 #define AREA_HUD_MASK_TABLE D_801F6858
-extern u16            g_GameAreaId;
-extern s8             g_GameRequestKind;
-extern s16            D_80143F22;
-extern s8             D_80146865;
-extern s8             D_80146866;
-extern s8             D_80146874;
-extern s8             D_80146875;
-extern Callback       D_801F6870[];
-extern AreaSpawnPoint D_801F687C[];
-extern u8             D_801F688C[];
-extern u8             D_801F688D[]; /* the script-argument byte at +1 */
-extern Callback       D_801F6894[];
-extern Callback       D_801F689C[];
+extern u16      g_GameAreaId;
+extern s8       g_GameRequestKind;
+extern s16      D_80143F22;
+extern s8       D_80146865;
+extern s8       D_80146866;
+extern s8       D_80146874;
+extern s8       D_80146875;
+extern Callback D_801F6870[];
+extern Vec2U16  D_801F687C[];
+extern u8       D_801F688C[];
+extern u8       D_801F688D[]; /* the script-argument byte at +1 */
+extern Callback D_801F6894[];
+extern Callback D_801F689C[];
 
 /* func_801F35D0 */
 void Area_Update(void);

@@ -15,7 +15,7 @@ NON_MATCHING void func_801DE4C8(void) {
     if (D_801E6254 == GAME_NONE) {
         resource = Resource_GetText(0x60);
     } else {
-        TEXT_SetVariable(0, 5, g_SaveData.characters[MEM_PTR(u8, g_CharSlot)[D_801E6254]].name);
+        TEXT_SetVariable(0, 5, g_Characters[MEM_PTR(u8, g_CharSlot)[D_801E6254]].name);
         resource = Resource_GetText(0x61);
     }
     UI_DrawText(26, 20, 0, 0xFF, resource);

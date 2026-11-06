@@ -4,7 +4,7 @@ MATCH void func_801F2F0C(void) {
     s32 index;
     u8* item;
 
-    item  = g_SaveData.vital_item_ids;
+    item  = g_VitalItemIds;
     index = 0;
     do {
         if (*item == 0xE) {

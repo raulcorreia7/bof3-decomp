@@ -25,7 +25,7 @@ MATCH void func_801D0EDC(void) {
     count = 0;
 
     /* retail walks the records from the status halfword: +0x8 is current_hp, +0x10 is max_hp */
-    row = &g_SaveData.characters[0];
+    row = &g_Characters[0];
     do {
         need = row->stats.max_hp >> 2;
         have = row->hp;

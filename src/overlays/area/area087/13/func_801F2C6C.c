@@ -17,7 +17,7 @@ MATCH void func_801F2C6C(void) {
     u8             blank;
     u32            id;
 
-    state = &g_SaveData.scene_event.step;
+    state = &g_SceneEventStep;
     switch (*state) {
         case 0:
             Game_SetScriptActive();
@@ -52,7 +52,7 @@ MATCH void func_801F2C6C(void) {
             next:
                 id = *from;
                 if ((id & BYTE_MASK) != GAME_NONE) {
-                    if (g_SaveData.fish_best_catch[id & BYTE_MASK] != 0) {
+                    if (g_FishBestCatch[id & BYTE_MASK] != 0) {
                         if ((id & BYTE_MASK) == 0x16) {
                             src = D_801F5728;
                         } else {
@@ -79,15 +79,15 @@ MATCH void func_801F2C6C(void) {
                 Message_StartAreaMessage((s16)(index + 22));
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            (*(u8*)&g_SaveData.scene_event.step)++;
+            (*(u8*)&g_SceneEventStep)++;
             break;
 
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SaveData.scene_event.mode      = 0;
-                *state                           = 0;
-                g_SaveData.scene_event.selection = 0;
+                g_SceneEventMode      = 0;
+                *state                = 0;
+                g_SceneEventSelection = 0;
             }
             break;
     }

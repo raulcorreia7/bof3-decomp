@@ -243,8 +243,8 @@ MATCH void func_801F7D50(void) {
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     func_801C16B8();
     func_801C1DF0(0);
-    SYS_SetFlag(g_SaveData.scene_event_flags, 67);
-    SYS_ClearFlag(g_SaveData.scene_event_flags, 66);
+    SYS_SetFlag(g_SceneEventFlags, 67);
+    SYS_ClearFlag(g_SceneEventFlags, 66);
     D_80146872 = 1;
 }
 
@@ -338,9 +338,9 @@ MATCH void func_801FB3DC(void) {
 MATCH void func_801FB414(void) {
     SYS_SetFlag(g_SceneFlags, 28);
     Game_SetScriptActive();
-    g_SaveData.scene_event.mode      = 44;
-    g_SaveData.scene_event.step      = 0;
-    g_SaveData.scene_event.selection = 17;
+    g_SceneEventMode      = 44;
+    g_SceneEventStep      = 0;
+    g_SceneEventSelection = 17;
 }
 
 INCLUDE_ASM(func_801FB464);
@@ -359,8 +359,8 @@ MATCH void func_801FBBC4(void) {
     u8 slot;
 
     for (slot = 0; slot < 3; slot++) {
-        D_80144908[slot] = g_SaveData.walk_order[slot];
-        D_8014490B[slot] = g_SaveData.battle_order[slot];
+        D_80144908[slot] = g_PartyWalkOrder[slot];
+        D_8014490B[slot] = g_PartyBattleOrder[slot];
     }
     for (slot = 0; slot < 3; slot++) {
         func_801C1ABC(D_80144908[slot]);
@@ -390,7 +390,7 @@ MATCH void func_801FBCC4(void) {
     Party_JoinMember(ids[1]);
     Party_JoinMember(ids[2]);
     for (slot = 3; slot < 6; slot++) {
-        g_SaveData.walk_order[slot] = D_80144908[slot];
+        g_PartyWalkOrder[slot] = D_80144908[slot];
     }
 }
 

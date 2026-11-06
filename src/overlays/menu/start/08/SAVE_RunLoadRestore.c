@@ -22,11 +22,11 @@ MATCH void SAVE_RunLoadRestore(void) {
             D_80145ABE   = PADselect;
         }
         g_PartySize = Party_CountOrder(0U);
-        EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
+        EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);
         }
-        EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+        EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);
         }
@@ -35,15 +35,15 @@ MATCH void SAVE_RunLoadRestore(void) {
             u8* src;
             s8* dst;
 
-            src = &D_801448D8;
+            src = (u8*)&g_SaveData;
             dst = &g_SceneState;
             memcpy(dst, src, 0x10);
-            g_SceneFlags = (*dst * 8) + (&D_801448D8 + 0x5B0);
+            g_SceneFlags = (*dst * 8) + ((u8*)&g_SaveData + 0x5B0);
         }
-        g_ScriptVars[0] = g_SaveData.script_vars[0];
-        g_ScriptVars[1] = g_SaveData.script_vars[1];
-        g_ScriptVars[2] = g_SaveData.script_vars[2];
-        g_ScriptVars[3] = g_SaveData.script_vars[3];
+        g_ScriptVars[0] = g_SavedScriptVars[0];
+        g_ScriptVars[1] = g_SavedScriptVars[1];
+        g_ScriptVars[2] = g_SavedScriptVars[2];
+        g_ScriptVars[3] = g_SavedScriptVars[3];
         Scene_RequestOverlay();
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);
@@ -56,8 +56,7 @@ MATCH void SAVE_RunLoadRestore(void) {
             D_801ED18C = 1;
         }
         Menu_DrawClutStrip(D_80144953);
-        Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                           g_SaveData.window_style);
+        Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
         SAVE_DrawSlots(0x20, 0x30, 0U);
         UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(0xB1));
     }

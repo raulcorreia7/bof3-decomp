@@ -1,7 +1,7 @@
 #include "area091_13.h"
 
 MATCH void func_801F2DB0(void) {
-    if (*g_SaveData.walk_order != 6 && *g_SaveData.walk_order != 3) {
+    if (*g_PartyWalkOrder != 6 && *g_PartyWalkOrder != 3) {
         g_CurrentActor->interaction_flags &= 0xFE;
         return;
     }

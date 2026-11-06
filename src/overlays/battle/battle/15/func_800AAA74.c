@@ -16,7 +16,7 @@ MATCH void func_800AAA74(void) {
     u16 copy;
     u8  slot;
 
-    switch (g_SaveData.party_formation) {
+    switch (g_PartyFormation) {
         case PARTY_FORMATION_ATTACK:
             Char_AddStat(&g_BattlePartyBattlers[0].chr.base.power, (g_BattlePartyBattlers[0].chr.base.power >> 1u));
             Char_AddStat(&g_BattlePartyBattlers[0].chr.base.defense,

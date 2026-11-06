@@ -8,7 +8,7 @@ MATCH void func_801B036C(void) {
             g_GameState->step_12A.s8_value = 0;
             return;
         }
-        if ((D_8014625C != 0) && !(g_SaveData.characters[g_GameState->slot_13C].status & STATUS_CONFUSED)) {
+        if ((D_8014625C != 0) && !(g_Characters[g_GameState->slot_13C].status & STATUS_CONFUSED)) {
             g_GameState->step_12A.s8_value = 0;
         }
         if (!(func_801B6674() & BYTE_MASK) && !(func_801B6258() & BYTE_MASK) && !(func_801B5684() & BYTE_MASK) &&

@@ -6,7 +6,6 @@
 
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 
 /* The game-overlay state bytes the cancel path resets. */
 

@@ -27,14 +27,14 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
         key   = character_id & BYTE_MASK;
         limit = g_PartySize;
     search1:
-        if (g_SaveData.battle_order[slot] == key)
+        if (g_PartyBattleOrder[slot] == key)
             goto found1;
         slot++;
         if (slot < limit)
             goto search1;
     found1:;
     }
-    g_SaveData.battle_order[slot] = 0xFF;
+    g_PartyBattleOrder[slot] = 0xFF;
     if (slot < (s32)g_PartySize - 1) {
         cur  = &D_80144F5E[slot];
         prev = cur - 1;
@@ -53,14 +53,14 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
         key   = character_id & BYTE_MASK;
         limit = g_PartySize;
     search2:
-        if (g_SaveData.walk_order[slot] == key)
+        if (g_PartyWalkOrder[slot] == key)
             goto found2;
         slot++;
         if (slot < limit)
             goto search2;
     found2:;
     }
-    g_SaveData.walk_order[slot] = 0xFF;
+    g_PartyWalkOrder[slot] = 0xFF;
     if ((s32)g_PartySize - 1 > 0) {
         slot = 0;
         off  = 0;
@@ -102,14 +102,14 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
     ((u8*)g_BattlePartyBattlers)[((s32)g_PartySize - 1) * BATTLE_PARTY_STRIDE] = 0;
     Party_ClearBattlerState(((s32)g_PartySize - 1) & BYTE_MASK);
     if (g_PartySize == 3) {
-        if (g_SaveData.party_formation >= 3u)
-            g_SaveData.party_formation = 0;
+        if (g_PartyFormation >= 3u)
+            g_PartyFormation = 0;
         else
             goto tail;
     } else {
     tail:
         if (g_PartySize == 2)
-            g_SaveData.party_formation = 0;
+            g_PartyFormation = 0;
     }
     g_PartySize = (u8)((s32)g_PartySize - 1);
 }

@@ -15,7 +15,6 @@
 #include "sys/exe.h"
 #include "menu/draw.h"
 #include "menu/clock.h"
-#include "work/save.h"
 
 /* retail addresses */
 
@@ -72,14 +71,14 @@
         return result;                                                                 \
     } while (0)
 
-/* The party formation g_SaveData.party_formation (0x80144F58): func_800AAA74 applies its stat changes. */
+/* The party formation g_PartyFormation (0x80144F58): func_800AAA74 applies its stat changes. */
 typedef enum PartyFormation {
     PARTY_FORMATION_NORMAL  = 0x00,
     PARTY_FORMATION_ATTACK  = 0x01,
     PARTY_FORMATION_DEFENSE = 0x02,
     PARTY_FORMATION_CHAIN   = 0x03,
     PARTY_FORMATION_MAGIC   = 0x04,
-    PARTY_FORMATION_REFUGE  = 0x05, /* battle/battle/03 func_801D5DCC tests g_SaveData.party_formation == 5 */
+    PARTY_FORMATION_REFUGE  = 0x05, /* battle/battle/03 func_801D5DCC tests g_PartyFormation == 5 */
 } PartyFormation;
 
 /* The selection byte g_BattleRowCursor: bit 7 marks an active selection, the low
@@ -100,8 +99,6 @@ typedef volatile struct BattleSelectionPlayer {
     volatile u32 flags; /* +0x128 */
     u8           pad_04[0x13C];
 } BattleSelectionPlayer;
-
-ASSERT_SIZE(BattleScrollDelta, 2);
 
 /* Battle sprite cell record consumed by func_800AF8F0, func_800AF9D4 and
  * func_800AFB48: +0x24 bit 2 selects the second 0x80037800 cell bank, +0x27 is

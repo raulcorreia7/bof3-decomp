@@ -5,7 +5,7 @@ MATCH void func_801E006C(void) {
     /* FAKE: pin keeps the shared 0xFF constant in a0, so its load schedules before the other constants. */
     MATCH_REG(s32, ff, "a0");
 
-    TEXT_SetVariable(0, 5, g_SaveData.characters[D_801E6264[D_801E625C]].name);
+    TEXT_SetVariable(0, 5, g_Characters[D_801E6264[D_801E625C]].name);
     D_80148340 = 0x75;
     if (D_8014839F == 0) {
         D_80148624 = 1;

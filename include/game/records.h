@@ -118,13 +118,11 @@ typedef struct ActorSlot {
     s16        unk_2E;       /* 0x2E */
     u16        unk_30;       /* 0x30 */
     u8         pad_32[2];    /* 0x32-0x33 */
-    Coord      x;            /* 0x34 world x, Area_SampleHeight argument */
-    Coord      y;            /* 0x38 world y, Area_SampleHeight argument */
-    Coord      z;            /* 0x3C Area_SampleHeight(x, y) in the integer half (+2) */
+    Vec3Coord  pos;          /* 0x34 world position */
     u8         pad_40[0x0A]; /* 0x40-0x49 */
     u8         unk_4A;       /* 0x4A */
     u8         pad_4B[0x19]; /* 0x4B-0x63 */
-    Vec3S32    pos;          /* 0x64 scene origin + offset */
+    Vec3S32    camera_angle; /* 0x64 */
     u8         pad_70[4];    /* 0x70-0x73 */
 } ActorSlot;
 
@@ -134,10 +132,8 @@ ASSERT_OFFSET(ActorSlot, type, 0x05);
 ASSERT_OFFSET(ActorSlot, layer, 0x09);
 ASSERT_OFFSET(ActorSlot, scene_step, 0x0C);
 ASSERT_OFFSET(ActorSlot, selection, 0x10);
-ASSERT_OFFSET(ActorSlot, x, 0x34);
-ASSERT_OFFSET(ActorSlot, y, 0x38);
-ASSERT_OFFSET(ActorSlot, z, 0x3C);
-ASSERT_OFFSET(ActorSlot, pos, 0x64);
+ASSERT_OFFSET(ActorSlot, pos, 0x34);
+ASSERT_OFFSET(ActorSlot, camera_angle, 0x64);
 
 extern ActorSlot g_ActorSlots[ACTOR_SLOT_COUNT];
 

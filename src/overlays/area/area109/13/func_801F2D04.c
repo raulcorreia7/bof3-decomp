@@ -7,7 +7,7 @@ MATCH s32 func_801F2D04(void) {
     flags = 0;
     i     = 0;
     do {
-        if (SYS_TestFlag(g_SaveData.scene_event_flags, D_801F2E90[i]) != 0) {
+        if (SYS_TestFlag(g_SceneEventFlags, D_801F2E90[i]) != 0) {
             flags |= 1 << i;
         }
         i++;

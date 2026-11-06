@@ -22,15 +22,15 @@ MATCH void func_801C329C(void) {
         index = 0;
         if ((s16)total > 0) {
             do {
-                sel = g_CharSlot[g_SaveData.walk_order[index]];
-                if (g_SaveData.characters[sel].status & STATUS_POISONED) {
+                sel = g_CharSlot[g_PartyWalkOrder[index]];
+                if (g_Characters[sel].status & STATUS_POISONED) {
                     found = 1;
                 }
                 index++;
             } while (index < (s16)total);
         }
     } else {
-        if (g_SaveData.characters[g_GameState->slot_13C].status & STATUS_POISONED) {
+        if (g_Characters[g_GameState->slot_13C].status & STATUS_POISONED) {
             found = 1;
         }
     }
@@ -44,10 +44,9 @@ MATCH void func_801C329C(void) {
                 index = 0;
                 if ((s16)total > 0) {
                     do {
-                        id  = g_SaveData.walk_order[index];
+                        id  = g_PartyWalkOrder[index];
                         sel = g_CharSlot[id];
-                        if ((g_SaveData.characters[sel].status & STATUS_POISONED) &&
-                            ((Char_LoseHP(1, id) & HALF_MASK) != 0)) {
+                        if ((g_Characters[sel].status & STATUS_POISONED) && ((Char_LoseHP(1, id) & HALF_MASK) != 0)) {
                             found = 1;
                         }
                         index++;
@@ -62,17 +61,17 @@ MATCH void func_801C329C(void) {
         if ((found & BYTE_MASK) != 0) {
             slot = Actor_FindFreeSlot() & BYTE_MASK;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].header.flags = 1;
-                g_ActorSlots[slot].type         = 0x41;
-                g_ActorSlots[slot].unk_08       = g_Task->direction_08;
-                COORD_INT(g_ActorSlots[slot].x) = g_Task->unk_2E;
-                value30                         = g_Task->unk_30;
-                g_ActorSlots[slot].unk_27       = 0;
-                g_ActorSlots[slot].unk_06       = 1;
-                record                          = g_ActorSlots;
-                work                            = g_Task;
-                COORD_INT(record[slot].y)       = value30;
-                g_ActorSlots[slot].link         = work->unk_05;
+                g_ActorSlots[slot].header.flags     = 1;
+                g_ActorSlots[slot].type             = 0x41;
+                g_ActorSlots[slot].unk_08           = g_Task->direction_08;
+                COORD_INT(g_ActorSlots[slot].pos.x) = g_Task->unk_2E;
+                value30                             = g_Task->unk_30;
+                g_ActorSlots[slot].unk_27           = 0;
+                g_ActorSlots[slot].unk_06           = 1;
+                record                              = g_ActorSlots;
+                work                                = g_Task;
+                COORD_INT(record[slot].pos.y)       = value30;
+                g_ActorSlots[slot].link             = work->unk_05;
             }
         }
     }

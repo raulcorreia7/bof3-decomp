@@ -16,7 +16,7 @@ NON_MATCHING void func_801E0F78(void) {
 
     D_801E6258 = 0;
     for (count = 0; count < 8; count++) {
-        if (g_SaveData.characters[count].unk_07 & 1) {
+        if (g_Characters[count].unk_07 & 1) {
             D_801E6264[D_801E6258++] = count;
         }
     }

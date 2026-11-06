@@ -28,8 +28,8 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
     /* the accessory rows step down from the panel's first icon row */
     icon_y    = y + 0x19;
     buffer    = g_UiFormatBuffer;
-    slot_list = (u8*)MEM_PTR(u8, (u8*)&g_SaveData.window_style + FISHING_ACCESSORY_SLOT_OFFSET);
-    UI_DrawWindow(x, (y + 1) & HALF_MASK, 0x8B, 0x9E, 0xF0, g_SaveData.window_style);
+    slot_list = (u8*)MEM_PTR(u8, (u8*)&g_WindowStyle + FISHING_ACCESSORY_SLOT_OFFSET);
+    UI_DrawWindow(x, (y + 1) & HALF_MASK, 0x8B, 0x9E, 0xF0, g_WindowStyle);
     for (slot = 0; slot < FISHING_ACCESSORY_SLOT_COUNT; slot++) {
         id = *slot_list;
         if (g_Accessories[id].header.flags != 0xB) {
@@ -43,7 +43,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
         if (D_80145E94[0] == 2 && !(work->counter_07 & 1) && work->pos_x_0C == row) {
             UI_DrawText(x + 5, (s16)icon_y, 7, 0xC, (u8*)&g_Accessories[id]);
             UI_DrawText(x + 5, y + 0x17 + icon_y - (y + 0x19), 0, 0xC, (u8*)&g_Accessories[id]);
-            qty = g_SaveData.inventory_counts[3][slot];
+            qty = g_InventoryCounts[3][slot];
             if (qty >= 2) {
                 sprintf((char*)buffer, D_801D0C14, qty);
                 UI_DrawGlyphString(x + 0x68, y + 0x1D + icon_y - (y + 0x19), 7, buffer);
@@ -51,7 +51,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
             }
         } else {
             UI_DrawText(x + 5, (s16)icon_y, 0, 0xC, (u8*)&g_Accessories[id]);
-            qty = g_SaveData.inventory_counts[3][slot];
+            qty = g_InventoryCounts[3][slot];
             if (qty >= 2) {
                 sprintf((char*)buffer, D_801D0C14, qty);
                 UI_DrawGlyphString(x + 0x68, y + 0x1D + icon_y - (y + 0x19), 0, buffer);

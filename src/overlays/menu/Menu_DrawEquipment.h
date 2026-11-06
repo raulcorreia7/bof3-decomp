@@ -21,7 +21,7 @@ MATCH void Menu_DrawEquipment(s32 origin_x, s32 origin_y, s32 index, s32 selecti
     record_index = index;
     UI_DrawWindowOutline((s16)(x + 2), (s16)(y + 0x44), 0x87, 0x58, 0xF1);
     icon_x = (s16)(x + 0xF);
-    record = &g_SaveData.characters[record_index];
+    record = &g_Characters[record_index];
     UI_DrawText(icon_x, (s16)(y + 70), palette, 8, (u8*)(&g_Weapons[record->equip.weapon]));
     UI_DrawText(icon_x, (s16)(y + 83), palette, 8, (u8*)(&g_Armors[record->equip.shield]));
     UI_DrawText(icon_x, (s16)(y + 96), palette, 8, (u8*)(&g_Armors[record->equip.helmet]));

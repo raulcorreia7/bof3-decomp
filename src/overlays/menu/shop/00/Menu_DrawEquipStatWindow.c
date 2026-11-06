@@ -14,7 +14,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32
     u8         category;
     u8         i;
 
-    stats = &g_SaveData.characters[character_index & BYTE_MASK];
+    stats = &g_Characters[character_index & BYTE_MASK];
     switch (equip_slot & BYTE_MASK) {
         default:
             category = 0;
@@ -34,7 +34,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32
             break;
     }
     present = ((Item_GetEquipability(category, item_id) >> character_index) ^ 1) & 1;
-    UI_DrawWindow((x + 3) & HALF_MASK, (y + 3) & HALF_MASK, 108, 48, present, g_SaveData.window_style);
+    UI_DrawWindow((x + 3) & HALF_MASK, (y + 3) & HALF_MASK, 108, 48, present, g_WindowStyle);
     clut = 0;
     if (present == 0) {
         Char_PreviewEquip(character_index, (equip_slot - 1) & BYTE_MASK, item_id, flags, values);

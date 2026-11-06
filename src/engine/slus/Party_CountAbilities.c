@@ -11,7 +11,7 @@ MATCH s32 Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode) {
     u8         i;
 
     if (mode == 0) {
-        record = &g_SaveData.characters[character_index];
+        record = &g_Characters[character_index];
     } else {
         record = (Character*)(D_80145F04 + character_index * 0x140);
     }

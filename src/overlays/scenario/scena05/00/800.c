@@ -48,9 +48,9 @@ MATCH void func_801F7554(void) {
             spawned->header.flags = 1;
             spawned->type         = 0x26;
             actor                 = g_Task;
-            spawned->x.fixed      = actor->pos.x.fixed;
-            spawned->y.fixed      = actor->pos.y.fixed;
-            spawned->z.fixed      = Area_SampleHeight(actor->pos.x.fixed, actor->pos.y.fixed) << 16;
+            spawned->pos.x.fixed  = actor->pos.x.fixed;
+            spawned->pos.y.fixed  = actor->pos.y.fixed;
+            spawned->pos.z.fixed  = Area_SampleHeight(actor->pos.x.fixed, actor->pos.y.fixed) << 16;
         }
     }
     actor = g_Task;
@@ -318,7 +318,7 @@ MATCH s32 func_801FD208(void) {
 }
 
 MATCH void func_801FD298(void) {
-    g_SaveData.characters[g_CharSlot[6]].unk_07 |= 1;
+    g_Characters[g_CharSlot[6]].unk_07 |= 1;
     Party_BuildBattlers(0);
     Party_JoinMember(CHAR_ID_MOMO);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);

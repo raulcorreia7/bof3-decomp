@@ -27,7 +27,7 @@ MATCH void func_801D12FC(void) {
         } while (row < g_PartySize);
     }
     Menu_DrawHeaderBar(MASTER_MENU_FRAME_X, (MASTER_MENU_FRAME_Y - (g_MasterScrollOffset * 10)) & 0xFFFE,
-                       MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT, g_SaveData.window_style);
+                       MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT, g_WindowStyle);
     if (g_MasterScrollOffset == 4) {
         g_MasterSubStep += 1;
     }

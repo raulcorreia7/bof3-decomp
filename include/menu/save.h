@@ -6,11 +6,11 @@
 /*
  * Save-image frame and its checksum.
  *
- * The record frame is the RAM image of a save file: `&g_SaveData.zenny - 0x878`, so
+ * The record frame is the RAM image of a save file: `&g_Zenny - 0x878`, so
  * the notes' `+0x878` zenny is frame-relative. The card driver proves the frame
  * by writing the "SC" magic into it, and START.EMI's checksum routine
  * (0x801E5A00) closes the loop by treating `frame + 0x8E8` as the play clock,
- * which is exactly g_SaveData.play_clock at 0x80144FC0.
+ * which is exactly g_PlayClock at 0x80144FC0.
  *
  * Checksum: zero the halfword at `frame + 0x270`, sum
  * `SAVE_CHECKSUM_LENGTH` bytes from `frame + 0x200` in a 32-bit accumulator,

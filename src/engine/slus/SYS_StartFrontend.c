@@ -25,22 +25,22 @@ MATCH void SYS_StartFrontend(void) {
     SsUtSetReverbDepth(0x28, 0x28);
     SsSetRVol(0x28, 0x28);
     SND_Start();
-    clear = &D_801448D8;
+    clear = (u8*)&g_SaveData;
     for (i = 0; i < SAVE_BLOCK_SIZE; i++)
         *clear++ = 0;
-    j                                     = 0;
-    dst                                   = &g_InputMasks;
-    src                                   = D_8017F56C;
-    g_SaveData.emi_loaded_character_index = 0xFF;
-    g_GameFlags                           = 0;
-    g_AreaWalkFlags                       = 0;
-    D_80144950                            = 1;
-    g_SndMono                             = 0;
-    g_SaveData.window_style               = 0;
-    D_80144953                            = 0;
-    D_80144954                            = 0;
-    D_80144955                            = 0;
-    D_80144956                            = 0;
+    j                         = 0;
+    dst                       = &g_InputMasks;
+    src                       = D_8017F56C;
+    g_EmiLoadedCharacterIndex = 0xFF;
+    g_GameFlags               = 0;
+    g_AreaWalkFlags           = 0;
+    D_80144950                = 1;
+    g_SndMono                 = 0;
+    g_WindowStyle             = 0;
+    D_80144953                = 0;
+    D_80144954                = 0;
+    D_80144955                = 0;
+    D_80144956                = 0;
     for (; j < 9U; j++) {
         word = *src;
         src += 1;

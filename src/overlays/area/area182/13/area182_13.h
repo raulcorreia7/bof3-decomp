@@ -6,7 +6,6 @@
 
 #include "overlays/area/world04.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 
 /* Game-overlay state bytes the area request handlers reset. */
 /* The scenario state byte the request writes. */

@@ -6,7 +6,6 @@
 
 #include "overlays/area/world04.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 
 /* The work origin offset, step and threshold this overlay advances. */
 #define AREA_ORIGIN_OFFSET       0x30

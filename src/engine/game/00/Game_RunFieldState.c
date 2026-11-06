@@ -25,7 +25,7 @@ MATCH void Game_RunFieldState(void) {
             D_80145E9B          = 0;
             D_80145FDB          = 0;
             D_8014611B          = 0;
-            counter             = &g_SaveData.battle_count;
+            counter             = &g_BattleCount;
             g_GameEntryState    = 5;
             g_GameEntrySubstate = 0;
             (*counter)++;
@@ -37,7 +37,7 @@ MATCH void Game_RunFieldState(void) {
             u8 selection;
 
             g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-            selection = g_SaveData.snd_bgm_id;
+            selection = g_SndBgmId;
             if (selection != GAME_NONE && g_GamePrevSelection != selection) {
                 SND_StartDecrescendo(g_SelectionCues[selection * 4], D_80181EBB[selection * 4], 100, 16);
             }
@@ -45,7 +45,7 @@ MATCH void Game_RunFieldState(void) {
                 UI_SetMode(g_GameEntryMode);
                 func_80198BC4(0);
             }
-            selection = g_SaveData.snd_bgm_id;
+            selection = g_SndBgmId;
             if (selection != GAME_NONE && g_GamePrevSelection != selection) {
                 SND_StopSequence(g_SelectionCues[selection * 4], D_80181EBB[selection * 4]);
             }

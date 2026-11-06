@@ -59,7 +59,7 @@ NON_MATCHING void func_801E8684(void) {
         *(D_80145F1A + temp_a0_187)                  = D_801EB4C8;
         *(D_80145F10 + (temp_a1_173->slot * 0x140))  = D_801EB4CC;
         temp_a0_216                                  = temp_a1_173->slot * BATTLE_PARTY_STRIDE;
-        *(D_80145F1E + temp_a0_216)                  = g_SaveData.characters[*(D_80145FCC + temp_a0_216)].fatigue;
+        *(D_80145F1E + temp_a0_216)                  = g_Characters[*(D_80145FCC + temp_a0_216)].fatigue;
         temp_a0_233                                  = g_Task;
         *(&D_80145FB4 + (temp_a0_233->slot * 0x140)) = D_801EB4D0;
         var_a1_247                                   = 0;

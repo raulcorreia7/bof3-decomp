@@ -20,11 +20,11 @@ MATCH void Fairy_VillageBuildJobs(void) {
     record = 0;
     task   = 0;
     for (; record < 60; record++) {
-        if (g_SaveData.fairy_jobs[record].active == 0) {
+        if (g_FairyJobs[record].active == 0) {
             continue;
         }
 
-        kind = g_SaveData.fairy_jobs[record].type;
+        kind = g_FairyJobs[record].type;
         if (kind == FAIRY_JOB_IDLE) {
             func_801F0BF4(task);
             func_801F0718(record, task);

@@ -17,7 +17,7 @@ MATCH void func_801C1254(s32 ability_id, s32 party_slot) {
 
     index = 0;
     key   = ability_id & BYTE_MASK;
-    hint  = g_SaveData.emi_loaded_character_index;
+    hint  = g_EmiLoadedCharacterIndex;
     base  = D_80181B34[0];
     entry = base + (hint & 0x7F) * 3;
     do {

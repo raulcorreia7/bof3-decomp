@@ -22,8 +22,8 @@ MATCH void func_801F0320(void) {
     D_801455C6 = 0;
 
     for (i = 0; i < 60; i++) {
-        if (g_SaveData.fairy_jobs[i].active != 0) {
-            kind = g_SaveData.fairy_jobs[i].type;
+        if (g_FairyJobs[i].active != 0) {
+            kind = g_FairyJobs[i].type;
             if (kind == kind_10) {
                 *new_var += D_801F2706[i][0];
             } else if (kind == kind_11) {

@@ -246,7 +246,7 @@ MATCH void func_801F7FF0(void) {
     u32 row;
 
     if (g_UiWindowEffectBusy == 0) {
-        bgm = &g_SaveData.snd_bgm_id;
+        bgm = &g_SndBgmId;
         row = *bgm * 4;
         SND_StopSequence(g_SelectionCues[row], D_80181EBB[row]);
         stage           = &D_80146873;
@@ -414,8 +414,7 @@ MATCH void func_801F8664(void) {
     u8* state;
 
     if ((g_InputPressed & PADRdown) || D_801F9DD8 != 0) {
-        SND_StartDecrescendo(g_SelectionCues[g_SaveData.snd_bgm_id * 4], D_80181EBB[g_SaveData.snd_bgm_id * 4], 100,
-                             16);
+        SND_StartDecrescendo(g_SelectionCues[g_SndBgmId * 4], D_80181EBB[g_SndBgmId * 4], 100, 16);
         UI_SetMode(0xD);
         state = &D_80146874;
         (*state)++;
@@ -429,7 +428,7 @@ MATCH void func_801F8710(void) {
     u8* bgm;
 
     if (g_UiWindowEffectBusy == 0) {
-        bgm = &g_SaveData.snd_bgm_id;
+        bgm = &g_SndBgmId;
         SND_StopSequence(g_SelectionCues[*bgm * 4], D_80181EBB[*bgm * 4]);
         *bgm = GAME_NONE;
         SND_SetBankLayout(0);

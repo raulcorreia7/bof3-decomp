@@ -9,9 +9,9 @@ MATCH s32 func_801F2C04(void) {
     actor->interaction_flags &= 0xFE;
     if (D_80145F09 == 6) {
         Game_SetScriptActive();
-        actor                       = g_CurrentActor;
-        g_SaveData.scene_event.mode = 0x2A;
-        g_SaveData.scene_event.step = 0;
+        actor            = g_CurrentActor;
+        g_SceneEventMode = 0x2A;
+        g_SceneEventStep = 0;
         ORDER_FENCE(); /* FAKE: the order fence keeps the unk_7E load below the byte stores. */
         actor->unk_7E += 1;
     }

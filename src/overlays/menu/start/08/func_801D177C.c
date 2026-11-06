@@ -17,12 +17,12 @@ MATCH void func_801D177C(void) {
         ((s8*)&D_80148668)[i] = 0;
     }
     for (i = 0; i < g_PartySize; i++) {
-        Char_RebuildStats(&g_SaveData.characters[g_CharSlot[g_SaveData.walk_order[i]]]);
+        Char_RebuildStats(&g_Characters[g_CharSlot[g_PartyWalkOrder[i]]]);
     }
     i = 0;
     while (i < (Party_CountOrder(0) & BYTE_MASK)) {
-        s_PartyCharacterIds[i] = g_SaveData.walk_order[i];
-        D_801ED613[i]          = g_SaveData.battle_order[i];
+        s_PartyCharacterIds[i] = g_PartyWalkOrder[i];
+        D_801ED613[i]          = g_PartyBattleOrder[i];
         i++;
     }
     for (; i < BATTLE_PARTY_SLOT_COUNT; i++) {
@@ -31,7 +31,7 @@ MATCH void func_801D177C(void) {
     }
     D_80148661 = 0;
     i          = 0;
-    chr        = g_SaveData.characters;
+    chr        = g_Characters;
     for (; i < 8; i++) {
         if (chr->hp < (chr->stats.max_hp >> 2)) {
             chr->status |= STATUS_LOW_HP;

@@ -9,7 +9,7 @@ MATCH s32 SND_RequestBgm(s32 requested) {
 
     /* Byte-offset form: a plain array index spills the address pseudo and
      * leaves an unused 8-byte frame slot that retail does not have. */
-    current = g_SaveData.snd_bgm_id;
+    current = g_SndBgmId;
     value   = *(u16*)((u8*)D_80181EB8 + ((requested & BYTE_MASK) << 2));
     if ((value != *(u16*)((u8*)D_80181EB8 + (current << 2))) || (current == GAME_NONE)) {
         EMI_LoaderStreamInitSlot(value);

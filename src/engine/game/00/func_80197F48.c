@@ -16,11 +16,11 @@ MATCH void func_80197F48(void) {
         if ((*flags & 2) == 0) {
             Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         }
-        if ((*flags & 0x40) == 0 && (g_BattleResult & BATTLE_RESULT_NO_BGM) == 0 && g_SaveData.snd_bgm_id != 0xFF) {
+        if ((*flags & 0x40) == 0 && (g_BattleResult & BATTLE_RESULT_NO_BGM) == 0 && g_SndBgmId != 0xFF) {
             for (i = 0; i < 1376; i++) {
                 D_80148A50[i] = D_8018E268[i];
             }
-            sel = &g_SaveData.snd_bgm_id;
+            sel = &g_SndBgmId;
             /* NOTE: '<< 2' in place of '* 4' keeps cc1 from reserving 32 unused frame bytes. */
             SsSepReplay(g_SelectionFxVoices[g_SelectionCues[*sel << 2]], D_80181EBB[*sel << 2]);
             SND_SetSequenceVolume((u16)(s8)(u8)g_SelectionFxVoices[g_SelectionCues[*sel << 2]], D_80181EBB[*sel << 2],

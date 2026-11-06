@@ -54,7 +54,7 @@ MATCH void func_801D163C(void) {
         g_ShopItemId       = pick[2];
         g_ShopItemCount    = 1;
         g_ShopItemPrice    = Shop_ApplyPercent(Item_GetPrice(g_ShopItemCategory, g_ShopItemId), g_ShopPricePercent);
-        g_ShopItemCountMax = g_SaveData.zenny / (u32)g_ShopItemPrice;
+        g_ShopItemCountMax = g_Zenny / (u32)g_ShopItemPrice;
         held = Item_Count(g_ShopItemCategory, g_ShopItemId, 0) + Item_Count(g_ShopItemCategory, g_ShopItemId, 1);
         if ((u8)held >= 100) {
             g_ShopItemCount    = 0;
@@ -67,7 +67,7 @@ MATCH void func_801D163C(void) {
                 g_ShopItemCount = 0;
             }
         }
-        if (g_SaveData.zenny >= (u32)g_ShopItemPrice) {
+        if (g_Zenny >= (u32)g_ShopItemPrice) {
             D_8014865B = 1;
             SND_PlayCue(EMI_CUE_ID(1, 3));
             D_80148652 += 1;

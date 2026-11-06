@@ -34,7 +34,7 @@ MATCH void func_801D7444(void) {
         }
     }
     if (g_InputPressed & D_80145AC2) {
-        if (g_SaveData.characters[D_80145FCC[(s8)D_80148656][0]].inoculations != 0) {
+        if (g_Characters[D_80145FCC[(s8)D_80148656][0]].inoculations != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             D_8014865B = 1;
             D_8014865F = 2;

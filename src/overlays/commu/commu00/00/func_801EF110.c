@@ -11,7 +11,7 @@ MATCH void func_801EF110(s32 battle_count) {
     s32 value;
     s32 result;
 
-    dec = (g_SaveData.battle_count - D_801455B4) / 5u;
+    dec = (g_BattleCount - D_801455B4) / 5u;
     if ((u16)dec != 0u) {
         doubled_battle_count = (battle_count & BYTE_MASK) * 2;
         total                = 0;
@@ -21,7 +21,7 @@ MATCH void func_801EF110(s32 battle_count) {
         j                    = 0;
         i                    = 0;
         do {
-            if ((g_SaveData.fairy_jobs[i].active != 0) && (g_SaveData.fairy_jobs[i].type == kind)) {
+            if ((g_FairyJobs[i].active != 0) && (g_FairyJobs[i].type == kind)) {
                 term = *(g_Fairies[0] + 5 + j) + 3;
                 total += term;
             }
@@ -39,6 +39,6 @@ MATCH void func_801EF110(s32 battle_count) {
             result = 0;
         }
         D_801455C2 = result;
-        D_801455B4 = g_SaveData.battle_count;
+        D_801455B4 = g_BattleCount;
     }
 }

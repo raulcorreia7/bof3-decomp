@@ -10,9 +10,9 @@ MATCH void func_801DB554(void) {
     if (D_80144199 == 4) {
         value = g_Actors[D_801E3208].unk_06;
         limit = g_Actors[D_801E3208].roll_90;
-        if (g_SaveData.fish_best_catch[value] < limit) {
-            g_SaveData.fish_best_catch[value] = limit;
-            D_801E3214                        = 1;
+        if (g_FishBestCatch[value] < limit) {
+            g_FishBestCatch[value] = limit;
+            D_801E3214             = 1;
         }
 
         SND_PlayCue(EMI_CUE_ID(1, 2));

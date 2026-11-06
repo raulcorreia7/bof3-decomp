@@ -9,7 +9,7 @@ MATCH void func_801F1110(u8 task_index, u8 record_kind_index) {
     if (variant == 0) {
         g_Actors[task_index].unk_7C = 0xC009;
     } else if (variant == 1) {
-        if (SYS_TestFlag(g_SaveData.scene_event_flags, 0x92)) {
+        if (SYS_TestFlag(g_SceneEventFlags, 0x92)) {
             g_Actors[task_index].unk_7C = 0xC00B;
         } else {
             g_Actors[task_index].unk_7C = 0xD4;

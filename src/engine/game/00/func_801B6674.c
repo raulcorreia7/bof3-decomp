@@ -31,7 +31,7 @@ NON_MATCHING s32 func_801B6674(void) {
             Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
             return 1;
         }
-        g_SaveData.scene_event.mode = 0x37;
+        g_SceneEventMode = 0x37;
         ACTOR_CLEAR_STEP();
         return 1;
     }
@@ -60,7 +60,7 @@ NON_MATCHING s32 func_801B6674(void) {
         return 1;
     }
     if ((g_InputPressed & D_80145AC0) && ((u8)(temp + 0x60) < 2)) {
-        g_SaveData.scene_event.mode = 0x1B;
+        g_SceneEventMode = 0x1B;
         if (!(status & 0x20)) {
             func_801B5BDC(g_Task->route_index_08);
         }

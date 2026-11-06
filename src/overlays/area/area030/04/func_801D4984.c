@@ -12,10 +12,10 @@ MATCH void func_801D4984(void) {
     FISHING_STATE->step_timer_09--;
     func_801E0ED0(-(FISHING_STATE->step_timer_09 * 0x50), 0x4E);
     key = FISHING_STATE->bounce_3C.half.key_3E;
-    if (g_SaveData.fish_best_catch[key] != 0) {
+    if (g_FishBestCatch[key] != 0) {
         func_801E0F4C(FISHING_STATE->step_timer_09 * 0x30 + 0x80, 0x5B, key);
         func_801E1004(FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK,
-                      g_SaveData.fish_best_catch[FISHING_STATE->bounce_3C.half.key_3E], FISHING_STATE->step_timer_09);
+                      g_FishBestCatch[FISHING_STATE->bounce_3C.half.key_3E], FISHING_STATE->step_timer_09);
     } else {
         func_801E0F4C(FISHING_STATE->step_timer_09 * 0x30 + 0x80, 0x5B, 0xFF);
         func_801E1004(0xFF, 0, FISHING_STATE->step_timer_09);

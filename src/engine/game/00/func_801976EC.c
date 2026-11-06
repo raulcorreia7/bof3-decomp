@@ -11,14 +11,14 @@ MATCH void func_801976EC(void) {
     func_80198C38(0u);
     CallbackWait(1u);
     if (D_80148661 != 0u) {
-        EMI_LoaderStreamFamily(g_SaveData.walk_order[0], g_SaveData.walk_order[1], g_SaveData.walk_order[2], 0u);
+        EMI_LoaderStreamFamily(g_PartyWalkOrder[0], g_PartyWalkOrder[1], g_PartyWalkOrder[2], 0u);
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1u);
         }
         D_80148661 = 0u;
     }
     g_EmiStreamFlags = 0x20;
-    EMI_StreamFamilyArchive(g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_LoaderIsReady() == 0) {
         CallbackWait(1u);
     }

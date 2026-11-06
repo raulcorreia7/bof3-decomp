@@ -10,7 +10,7 @@ MATCH void func_801D41EC(void) {
     s16 value;
     u8  count;
 
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     if (D_8014865C != -1) {
         WinDrawCueText(28, 22, 0xA4);
     }

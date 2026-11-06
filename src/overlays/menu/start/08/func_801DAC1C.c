@@ -70,8 +70,8 @@ NON_MATCHING void func_801DAC1C(void) {
     D_801ED67C = 0x7F;
     D_801ED668 = 0;
     D_801ED66C = 0;
-    D_801ED670 = (g_SaveData.party_formation & 1) + 1;
-    D_801ED674 = (u8)g_SaveData.party_formation >> 1;
+    D_801ED670 = (g_PartyFormation & 1) + 1;
+    D_801ED674 = (u8)g_PartyFormation >> 1;
 }
 #else
 INCLUDE_ASM(func_801DAC1C);

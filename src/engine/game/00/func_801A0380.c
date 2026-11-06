@@ -14,7 +14,7 @@ MATCH void func_801A0380(s16 x, s16 y, u16 kind) {
     STACK_PADS(u8, 8);
 
     if (g_GameFlags & 0x80) {
-        result = g_SaveData.snd_bgm_id;
+        result = g_SndBgmId;
     } else {
         record = func_801A0490(x, y, kind);
         if (record[7] == 0) {
@@ -26,7 +26,7 @@ MATCH void func_801A0380(s16 x, s16 y, u16 kind) {
             ORDER_LOCK(done = 0);
             entry = *(u8**)(D_80181E40 + index);
             if (count > 0) {
-                table  = g_SaveData.scene_flag_words;
+                table  = g_SceneFlagWords;
                 limit  = count;
                 cursor = entry + 2;
                 do {

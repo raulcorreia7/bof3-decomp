@@ -12,8 +12,8 @@ MATCH void func_801D2EAC(void) {
     g_MenuPanelTasks[21].active = 1;
     g_MenuPanelTasks[12].unk_0B = 0xFF;
     g_MenuPanelTasks[11].unk_10 = D_801ED618 + 0x13;
-    g_MenuPanelTasks[21].x      = g_MenuPanelTasks[12].x + D_801ED618 * 0x30;
-    g_MenuPanelTasks[21].y      = g_MenuPanelTasks[12].y + 4;
+    g_MenuPanelTasks[21].pos.x  = g_MenuPanelTasks[12].pos.x + D_801ED618 * 0x30;
+    g_MenuPanelTasks[21].pos.y  = g_MenuPanelTasks[12].pos.y + 4;
     pad                         = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
     cursor                      = D_801ED618;
     if (pad & PADLleft) {

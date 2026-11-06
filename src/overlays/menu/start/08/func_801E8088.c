@@ -11,7 +11,7 @@ MATCH s32 func_801E8088(s32 character_index, s32 record_index) {
     mode  = record_index & BYTE_MASK;
     value = Char_RestoreHP(index, 5, mode);
     if (mode == 0) {
-        record = &g_SaveData.characters[index];
+        record = &g_Characters[index];
     } else {
         record = (Character*)&D_80145F04[index * BATTLE_PARTY_STRIDE];
     }

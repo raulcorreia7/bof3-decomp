@@ -11,8 +11,8 @@ MATCH void func_801F5698(void) {
         slot->header.flags = 1;
         slot->type         = 0x99;
         work               = g_Task;
-        slot->x.fixed      = work->pos.x.fixed;
-        slot->y.fixed      = work->pos.y.fixed;
-        slot->z.fixed      = work->pos.z.fixed;
+        slot->pos.x.fixed  = work->pos.x.fixed;
+        slot->pos.y.fixed  = work->pos.y.fixed;
+        slot->pos.z.fixed  = work->pos.z.fixed;
     }
 }

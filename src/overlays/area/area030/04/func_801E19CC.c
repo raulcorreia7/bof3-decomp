@@ -8,7 +8,7 @@ MATCH void func_801E19CC(s32 x, s32 y) {
     s32 i;
 
     panel_x = x;
-    UI_DrawWindow(panel_x, ((y + 1)), 0xB3, 0x42, 0x80, g_SaveData.window_style);
+    UI_DrawWindow(panel_x, ((y + 1)), 0xB3, 0x42, 0x80, g_WindowStyle);
     func_801E0C80(9, 1);
     func_801E0DCC(0x25, 1, sx, sy);
     for (i = 0; i < 15; i++) {

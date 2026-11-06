@@ -26,8 +26,8 @@ MATCH void func_8009EDB4(void) {
     slot       = (*(u8*)&g_BattleActiveBattler);
     *flags     = flag_value | BATTLE_STATE_DAMAGE_APPLIED;
     if (slot < 3u) {
-        action = *(u16*)((u8*)&g_SaveData.characters[0].base.power +
-                         (g_CharSlot[D_80145F09[slot * BATTLE_PARTY_STRIDE]] * 0xA4));
+        action =
+            *(u16*)((u8*)&g_Characters[0].base.power + (g_CharSlot[D_80145F09[slot * BATTLE_PARTY_STRIDE]] * 0xA4));
     } else {
         row    = slot - 3;
         action = *(u16*)((u8*)D_801EB6F4 + row * BATTLE_ENEMY_STRIDE);

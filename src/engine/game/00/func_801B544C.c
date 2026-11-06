@@ -6,7 +6,7 @@ MATCH bool func_801B544C(void) {
     u8   index;
 
     index = g_GameState->slot_13C;
-    if (g_SaveData.characters[index].status & STATUS_CONFUSED) {
+    if (g_Characters[index].status & STATUS_CONFUSED) {
         return false;
     }
     if (g_GameRequestFlags & 1) {

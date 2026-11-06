@@ -7,8 +7,8 @@
 MATCH void Message_Clear(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {
-        g_SaveData.scene_event.mode      = 0xA;
-        g_SaveData.scene_event.step      = 5;
-        g_SaveData.scene_event.selection = 0xFF;
+        g_SceneEventMode      = 0xA;
+        g_SceneEventStep      = 5;
+        g_SceneEventSelection = 0xFF;
     }
 }

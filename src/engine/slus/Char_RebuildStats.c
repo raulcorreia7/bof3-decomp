@@ -59,7 +59,7 @@ MATCH void Char_RebuildStats(Character* record) {
     }
 
     for (index = 0; index < 8; index++) {
-        if (record == &g_SaveData.characters[index]) {
+        if (record == &g_Characters[index]) {
             entry = D_8014866C + index * 5;
             if (record->stats.surprise_chance != 0) {
                 Char_AddPercent(&record->stats.surprise_chance, entry[0]);

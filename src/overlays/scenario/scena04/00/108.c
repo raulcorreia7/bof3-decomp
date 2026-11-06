@@ -279,13 +279,13 @@ MATCH void func_801FA074(void) {
 
 MATCH void func_801FA0B4(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0);
-    g_SaveData.walk_order[0]   = 255;
-    D_80144F5B                 = 255;
-    D_80144F5C                 = 255;
-    g_SaveData.battle_order[0] = 255;
-    D_80144F5E                 = 255;
-    D_80144F5F                 = 255;
-    g_PartySize                = 0;
+    g_PartyWalkOrder      = 255;
+    D_80144F5B            = 255;
+    D_80144F5C            = 255;
+    g_PartyBattleOrder[0] = 255;
+    D_80144F5E            = 255;
+    D_80144F5F            = 255;
+    g_PartySize           = 0;
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }

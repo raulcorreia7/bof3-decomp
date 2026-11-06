@@ -2,6 +2,6 @@
 
 MATCH void func_801F3E54(s32 state) {
     Game_SetScriptActive();
-    g_SaveData.scene_event.mode = 0x24;
-    g_SaveData.scene_event.step = state;
+    g_SceneEventMode = 0x24;
+    g_SceneEventStep = state;
 }

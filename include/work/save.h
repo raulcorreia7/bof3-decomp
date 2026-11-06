@@ -24,7 +24,7 @@ ASSERT_SIZE(SceneEventState, 3);
 
 /* The persistent game state: SYS_StartFrontend clears it, SAVE_BuildSlotImage copies it to the memory card file
  * payload (file offset 0x200, so the frame-relative offsets of menu/save.h are these plus 0x200) and
- * SAVE_RunLoadRestore copies it back. @source: wiki:data/records#save-layout. */
+ * SAVE_RunLoadRestore copies it back. */
 typedef struct SaveData {
     /* 0x000 */ SceneState      scene_state; /* a snapshot of g_SceneState */
     /* 0x010 */ u8              unk_10[3];

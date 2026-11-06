@@ -69,7 +69,7 @@ NON_MATCHING void func_801B21E8(void) {
                 if (g_GameState->flags_12C.u8_value & 1) {
                     FIELD(s8, g_Task, 0x29u) = 4;
                 }
-                val11 = (u8*)g_SaveData.characters;
+                val11 = (u8*)g_Characters;
                 val12 = (u8*)g_GameState + 0x74;
                 val11 += g_CharSlot[g_GameState->slot_index_79] * 0xA4;
                 tmp11 = val11 + 0xA0;
@@ -81,9 +81,9 @@ NON_MATCHING void func_801B21E8(void) {
                     val11 += 0x10;
                     val12 += 0x10;
                 } while (val11 != tmp11);
-                *val12                      = *val11;
-                g_GameState->slot_13C       = (u8)g_CharSlot[g_GameState->slot_index_79];
-                g_SaveData.walk_order[val4] = g_GameState->slot_index_79;
+                *val12                 = *val11;
+                g_GameState->slot_13C  = (u8)g_CharSlot[g_GameState->slot_index_79];
+                g_PartyWalkOrder[val4] = g_GameState->slot_index_79;
                 if (val4 != 0) {
                     func_801C2438();
                     tmp6                            = g_Task;

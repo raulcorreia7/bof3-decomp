@@ -35,7 +35,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s3
     val9      = character_index;
     val5      = equip_slot;
     val4      = 0;
-    character = &g_SaveData.characters[val9 & BYTE_MASK];
+    character = &g_Characters[val9 & BYTE_MASK];
     tmp3      = val5 & BYTE_MASK;
     val11     = item_id;
     switch (tmp3) {
@@ -59,7 +59,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s3
     val10    = val9 & BYTE_MASK;
     stack_28 = (((s32)(Item_GetEquipability(val8, val11) & BYTE_MASK) >> val10) ^ 1) & 1;
     val9     = stack_28;
-    UI_DrawWindow((val1 + 3) & HALF_MASK, (val0 + 3) & HALF_MASK, 108, 48, (s32)val9, g_SaveData.window_style);
+    UI_DrawWindow((val1 + 3) & HALF_MASK, (val0 + 3) & HALF_MASK, 108, 48, (s32)val9, CHARACTER_BLOCK->window_style);
     if (val9 == 0) {
         Char_PreviewEquip(val10, (val5 - 1) & BYTE_MASK, val11, &stack_18[0], &stack_20[0]);
         val10       = 0;

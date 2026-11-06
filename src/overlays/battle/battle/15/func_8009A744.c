@@ -20,7 +20,7 @@ NON_MATCHING void func_8009A744(void) {
     MATCH_REG(u8, i, "s1");
     u8 j;
 
-    base     = &g_SaveData.characters[MEM_PTR(u8, g_CharSlot)[MEM_PTR(u8, PARTY_ORDER_BATTLE)[D_801485C4]]];
+    base     = &g_Characters[MEM_PTR(u8, g_CharSlot)[MEM_PTR(u8, PARTY_ORDER_BATTLE)[D_801485C4]]];
     slots[0] = base + 0xE;
     slots[1] = base + 0xF;
     slots[2] = base + 0x10;
@@ -41,7 +41,7 @@ NON_MATCHING void func_8009A744(void) {
     if (g_BattlePartyCount != 0) {
         i = 0;
         do {
-            cell      = &g_SaveData.characters[g_BattlePartyBattlers[i].character_index];
+            cell      = &g_Characters[g_BattlePartyBattlers[i].character_index];
             row       = D_80145F04 + i * BATTLE_PARTY_STRIDE;
             row[0x0E] = cell[0x0E];
             row[0x0F] = cell[0x0F];

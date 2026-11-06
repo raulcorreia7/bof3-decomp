@@ -6,7 +6,6 @@
 
 #include "overlays/area/world02.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 
 #define g_CurrentActor ((u8*)g_CurrentActor)
 

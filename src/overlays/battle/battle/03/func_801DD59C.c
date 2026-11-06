@@ -9,11 +9,11 @@ MATCH s32 func_801DD59C(s32 amount) {
         do {
             index = i & BYTE_MASK;
             if (func_801DD704(index) != 0u) {
-                if ((g_SaveData.characters[func_801DD7AC(g_BattlePartyBattlers[index].chr.character_id)].exp +
-                     amount) <= 0x98967Eu) {
-                    g_SaveData.characters[func_801DD7AC(g_BattlePartyBattlers[index].chr.character_id)].exp += amount;
+                if ((g_Characters[func_801DD7AC(g_BattlePartyBattlers[index].chr.character_id)].exp + amount) <=
+                    0x98967Eu) {
+                    g_Characters[func_801DD7AC(g_BattlePartyBattlers[index].chr.character_id)].exp += amount;
                 } else {
-                    g_SaveData.characters[func_801DD7AC(g_BattlePartyBattlers[index].chr.character_id)].exp = 0x98967F;
+                    g_Characters[func_801DD7AC(g_BattlePartyBattlers[index].chr.character_id)].exp = 0x98967F;
                 }
             }
             i += 1u;

@@ -150,12 +150,12 @@ MATCH void func_801F6F30(void) {
         D_1F800000[0] = object_index;
 
         if (object_index != 0xFFu) {
-            g_ActorSlots[object_index].header.flags = 1u;
-            g_ActorSlots[D_1F800000[0]].type        = 0x13u;
-            g_ActorSlots[D_1F800000[0]].pos.x       = ((s16)*base - 170);
-            g_ActorSlots[D_1F800000[0]].pos.y       = g_AreaCameraAngle.vy;
-            g_ActorSlots[D_1F800000[0]].pos.z       = g_AreaCameraAngle.vz;
-            g_ActorSlots[D_1F800000[0]].layer       = 0x40u;
+            g_ActorSlots[object_index].header.flags    = 1u;
+            g_ActorSlots[D_1F800000[0]].type           = 0x13u;
+            g_ActorSlots[D_1F800000[0]].camera_angle.x = ((s16)*base - 170);
+            g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+            g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+            g_ActorSlots[D_1F800000[0]].layer          = 0x40u;
         }
 
         Party_HideBattlers();
@@ -191,7 +191,7 @@ MATCH void func_801F7188(void) {
         func_801F845C();
         SND_PlayCue(EMI_CUE_ID(2, 19));
         SND_PlayCue(EMI_CUE_ID(2, 20));
-        sel_ptr   = &g_SaveData.snd_bgm_id;
+        sel_ptr   = &g_SndBgmId;
         selection = *sel_ptr;
 
         if (selection != 0xFFu) {
@@ -349,12 +349,12 @@ MATCH void func_801F7230(void) {
             D_1F800000[0] = object_index;
 
             if (object_index != 0xFFu) {
-                g_ActorSlots[object_index].header.flags = 1u;
-                g_ActorSlots[D_1F800000[0]].type        = 0x13u;
-                g_ActorSlots[D_1F800000[0]].pos.x       = (g_AreaCameraAngle.vx + 384);
-                g_ActorSlots[D_1F800000[0]].pos.y       = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z       = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer       = 0x60u;
+                g_ActorSlots[object_index].header.flags    = 1u;
+                g_ActorSlots[D_1F800000[0]].type           = 0x13u;
+                g_ActorSlots[D_1F800000[0]].camera_angle.x = (g_AreaCameraAngle.vx + 384);
+                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer          = 0x60u;
             }
 
             next  = &g_SceneState.step_05;
@@ -420,12 +420,12 @@ MATCH void func_801F7790(void) {
             D_1F800000[0]   = object_index;
 
             if (object_index != 0xFFu) {
-                g_ActorSlots[object_index].header.flags = 1u;
-                g_ActorSlots[D_1F800000[0]].type        = 0x13u;
-                g_ActorSlots[D_1F800000[0]].pos.x       = (g_AreaCameraAngle.vx + 448);
-                g_ActorSlots[D_1F800000[0]].pos.y       = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z       = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer       = 0xFFu;
+                g_ActorSlots[object_index].header.flags    = 1u;
+                g_ActorSlots[D_1F800000[0]].type           = 0x13u;
+                g_ActorSlots[D_1F800000[0]].camera_angle.x = (g_AreaCameraAngle.vx + 448);
+                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer          = 0xFFu;
             }
 
             state  = &g_SceneState.step_05;
@@ -607,12 +607,12 @@ MATCH void func_801F7CC4(void) {
             object_index  = Actor_FindFreeSlot();
             D_1F800000[0] = object_index;
             if (object_index != 0xFFu) {
-                g_ActorSlots[object_index].header.flags = 1u;
-                g_ActorSlots[D_1F800000[0]].type        = 0x13u;
-                g_ActorSlots[D_1F800000[0]].pos.x       = -842;
-                g_ActorSlots[D_1F800000[0]].pos.y       = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z       = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer       = 0x60u;
+                g_ActorSlots[object_index].header.flags    = 1u;
+                g_ActorSlots[D_1F800000[0]].type           = 0x13u;
+                g_ActorSlots[D_1F800000[0]].camera_angle.x = -842;
+                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer          = 0x60u;
             }
             state  = &g_SceneState.step_05;
             *state = (*state + 1u);
@@ -625,12 +625,12 @@ MATCH void func_801F7CC4(void) {
             object_index  = Actor_FindFreeSlot();
             D_1F800000[0] = object_index;
             if (object_index != 0xFFu) {
-                g_ActorSlots[object_index].header.flags = 1u;
-                g_ActorSlots[D_1F800000[0]].type        = 0x13u;
-                g_ActorSlots[D_1F800000[0]].pos.x       = -684;
-                g_ActorSlots[D_1F800000[0]].pos.y       = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z       = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer       = 0x20u;
+                g_ActorSlots[object_index].header.flags    = 1u;
+                g_ActorSlots[D_1F800000[0]].type           = 0x13u;
+                g_ActorSlots[D_1F800000[0]].camera_angle.x = -684;
+                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer          = 0x20u;
             }
             g_SceneState.timer_06 = 0x200u;
             g_SceneState.step_05  = (g_SceneState.step_05 + 1u);

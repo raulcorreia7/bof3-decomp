@@ -7,7 +7,7 @@ MATCH void Camp_EnterMainLoop(void) {
     if (WINDOW_EFFECT_IDLE()) {
         for (i = 0; i < 8; i++) {
             func_801E7210(i);
-            Char_RebuildStats(&g_SaveData.characters[i]);
+            Char_RebuildStats(&g_Characters[i]);
         }
         if (D_801ED7EC != 0) {
             count               = &g_GameEntryState;

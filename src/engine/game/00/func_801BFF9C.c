@@ -27,13 +27,13 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
     g_GameFlags &= 0xEFFF;
     if (!(g_AreaWalkFlags & AREA_WALK_MAP_LOADING) &&
         (((LOBU(g_GameRequestFlags) & 9) != 0) || (LOHU(g_GameAreaId) == 0xBD) || (LOHU(g_GameAreaId) == 0xBB) ||
-         (((LOBU(g_GameRequestFlags) & 0x40) != 0) && (SYS_TestFlag(g_SaveData.scene_event_flags, 0x77U) == 0)))) {
+         (((LOBU(g_GameRequestFlags) & 0x40) != 0) && (SYS_TestFlag(g_SceneEventFlags, 0x77U) == 0)))) {
         count = Party_CountOrder(0);
         for (i = 0; i < count; i++) {
-            g_SaveData.characters[g_CharSlot[g_SaveData.walk_order[i]]].status &= ~STATUS_CONFUSED;
+            g_Characters[g_CharSlot[g_PartyWalkOrder[i]]].status &= ~STATUS_CONFUSED;
         }
         for (i = 0; i < count; i++) {
-            if (g_SaveData.characters[g_CharSlot[g_SaveData.walk_order[i]]].status & STATUS_POISONED) {
+            if (g_Characters[g_CharSlot[g_PartyWalkOrder[i]]].status & STATUS_POISONED) {
                 D_80145FA8 = 0xA;
                 break;
             }
@@ -41,21 +41,21 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         TASK_SET(g_BattlePartyBattlers);
         g_PartySize                                      = 1;
         g_BattlePartyBattlers[0].slot                    = 0;
-        *(Character*)((u8*)g_BattlePartyBattlers + 0x74) = g_SaveData.characters[0];
+        *(Character*)((u8*)g_BattlePartyBattlers + 0x74) = g_Characters[0];
         g_BattlePartyBattlers[0].character_index         = 0;
         VOL(u8, D_80145FBC) &= 0xFE;
         g_Task->unk_48 = 0;
         if (LOBU(g_GameRequestFlags) & 1) {
-            if (g_SaveData.characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_YOUNG) {
+            if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_YOUNG) {
                 id = 0x52;
                 goto set_mode; /* shared mode dispatch */
             }
-            if (g_SaveData.characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_PAJAMAS) {
+            if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_PAJAMAS) {
                 id = 0xCB;
                 goto set_mode; /* shared mode dispatch */
             }
             id = 0x27A;
-            if (g_SaveData.characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_ADULT) {
+            if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_ADULT) {
             set_mode:
                 Area_FindSceneRecord(id);
             }
@@ -83,7 +83,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             i = 0;
             if (i < g_PartySize) {
                 addr  = g_BattlePartyBattlers;
-                base  = (u8*)g_SaveData.characters;
+                base  = (u8*)g_Characters;
                 order = base + 0x5F2;        /* party order field follows the records */
                 mask  = (u8*)(addr + 0x12C); /* row flag byte */
                 work  = (u8*)addr;

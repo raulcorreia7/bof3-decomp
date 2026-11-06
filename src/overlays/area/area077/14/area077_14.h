@@ -7,7 +7,6 @@
 #include "overlays/area/world02.h"
 
 #include "shared/WorldSpin.h"
-#include "work/save.h"
 
 #define AREA_SPIN_PRIM_ORDER 1
 

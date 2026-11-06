@@ -5,7 +5,7 @@ MATCH void func_801F3BA4(void) {
 
     if (MENU_SELECTION_ARMED()) {
         value = 0x7B;
-    } else if (g_SaveData.zenny < 500u) {
+    } else if (g_Zenny < 500u) {
         value = 0x7C;
     } else {
         g_MessageRequest = 0x7F;

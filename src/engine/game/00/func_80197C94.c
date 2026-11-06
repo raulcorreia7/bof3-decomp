@@ -11,13 +11,12 @@ MATCH void func_80197C94(void) {
     func_801A06D8();
     func_801992B8();
     if ((g_BattleOptions & BATTLE_OPT_KEEP_BGM) == 0) {
-        if (g_SaveData.snd_bgm_id != GAME_NONE) {
-            SsSepPause(g_SelectionFxVoices[g_SelectionCues[g_SaveData.snd_bgm_id * 4]],
-                       D_80181EBB[g_SaveData.snd_bgm_id * 4]);
+        if (g_SndBgmId != GAME_NONE) {
+            SsSepPause(g_SelectionFxVoices[g_SelectionCues[g_SndBgmId * 4]], D_80181EBB[g_SndBgmId * 4]);
             for (i = 0; i < 1376; i++) {
                 D_8018E268[i] = D_80148A50[i];
             }
-            SND_StopSequence(g_SelectionCues[g_SaveData.snd_bgm_id * 4], D_80181EBB[g_SaveData.snd_bgm_id * 4]);
+            SND_StopSequence(g_SelectionCues[g_SndBgmId * 4], D_80181EBB[g_SndBgmId * 4]);
         }
         g_EmiStreamFlags |= 0x40;
     }

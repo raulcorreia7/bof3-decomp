@@ -6,7 +6,6 @@
 
 #include "overlays/area/world02.h"
 #include "work/area_spad.h"
-#include "work/save.h"
 
 extern s32 D_80145EC4;
 

@@ -19,7 +19,7 @@ MATCH u8 func_801E2E30(void) {
         case BATTLE_TWO_TARGET_COUNT:
             for (index = 0; index < BATTLE_TWO_TARGET_COUNT; index++) {
                 if (!Battle_SlotIsBlocked(index)) {
-                    total += s_BattlePartialPartyTargetWeights[g_SaveData.party_formation][index];
+                    total += s_BattlePartialPartyTargetWeights[g_PartyFormation][index];
                 }
             }
             pick = rand() % total;
@@ -27,7 +27,7 @@ MATCH u8 func_801E2E30(void) {
                 if (Battle_SlotIsBlocked(index)) {
                     continue;
                 }
-                running += s_BattlePartialPartyTargetWeights[g_SaveData.party_formation][index];
+                running += s_BattlePartialPartyTargetWeights[g_PartyFormation][index];
                 if (pick < running) {
                     return index;
                 }
@@ -36,7 +36,7 @@ MATCH u8 func_801E2E30(void) {
         case BATTLE_THREE_TARGET_COUNT:
             for (index = 0; index < BATTLE_THREE_TARGET_COUNT; index++) {
                 if (!Battle_SlotIsBlocked(index)) {
-                    total += s_BattleFullPartyTargetWeights[g_SaveData.party_formation][index];
+                    total += s_BattleFullPartyTargetWeights[g_PartyFormation][index];
                 }
             }
             pick = rand() % total;
@@ -44,7 +44,7 @@ MATCH u8 func_801E2E30(void) {
                 if (Battle_SlotIsBlocked(index)) {
                     continue;
                 }
-                running += s_BattleFullPartyTargetWeights[g_SaveData.party_formation][index];
+                running += s_BattleFullPartyTargetWeights[g_PartyFormation][index];
                 if (pick < running) {
                     return index;
                 }

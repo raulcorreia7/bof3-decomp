@@ -7,8 +7,8 @@ MATCH s32 func_801F41F4(s32 entry_x, s32 entry_y) {
             ((entry_x == 0x58000) && (((entry_y >> 0x10) - 0x71) < 3U))) {
             if (Item_VitalHas(0xD) != 0) {
                 Game_SetScriptActive();
-                g_SaveData.scene_event.mode = 0x33;
-                g_SaveData.scene_event.step = 0;
+                g_SceneEventMode = 0x33;
+                g_SceneEventStep = 0;
                 return 1;
             }
         } else if (!((entry_x == 0xD8000) && (((entry_y >> 0x10) - 0x71) < 2U) && (Item_VitalHas(0xD) == 0))) {

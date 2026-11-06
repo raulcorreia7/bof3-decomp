@@ -444,7 +444,7 @@ MATCH void func_801FE12C(void) {
     s32 index;
     u8* item;
 
-    item  = &g_SaveData.vital_item_ids;
+    item  = &g_VitalItemIds;
     index = 0;
     do {
         if (*item == 4) {
@@ -489,7 +489,7 @@ MATCH void func_801FE698(void) {
 }
 
 MATCH void func_801FE6DC(void) {
-    g_SaveData.characters[g_CharSlot[10]].unk_07 &= 0xFE;
+    g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
 }

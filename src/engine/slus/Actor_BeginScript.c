@@ -18,7 +18,7 @@ MATCH void Actor_BeginScript(s32 raw_selector, s32 raw_code) {
     if (raw_selector & 0x80) {
         if (!(g_Task->active_flags & 2)) {
             modes          = (u8(*)[3])D_80181B34;
-            hint           = g_SaveData.emi_loaded_character_index & EMI_LOADED_INDEX_MASK;
+            hint           = g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK;
             g_Task->unk_64 = modes[hint][g_Task->unk_2C];
             g_Task->unk_68 = g_Task->unk_26;
             g_Task->active_flags ^= 3;
