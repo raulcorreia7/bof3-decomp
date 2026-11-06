@@ -7,9 +7,9 @@ MATCH void func_801A3F3C(u8* script) {
     op         = *script;
     while ((u8)op != GAME_NONE) {
         if (op < 0xF0U) {
-            script = func_801A4BF8(script, op);
+            script = ((u8 * (*)(u8*, u8)) func_801A4BF8)(script, op);
         } else {
-            script = func_801A4400(script, op);
+            script = ((u8 * (*)(u8*, u8)) func_801A4400)(script, op);
         }
         op = *script;
     }

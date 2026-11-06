@@ -5,10 +5,10 @@ MATCH u8* func_801A4400(u8* script) {
 
     switch (script[0]) {
         case 0xF0:
-            script = func_801A3FC0(script + 1);
+            script = ((u8 * (*)(u8*)) func_801A3FC0)(script + 1);
             break;
         case 0xF1:
-            script = func_801A4158(script + 1);
+            script = ((u8 * (*)(u8*)) func_801A4158)(script + 1);
             break;
         case 0xF4:
             script = func_801A4518(script + 1);
