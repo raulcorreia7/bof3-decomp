@@ -76,7 +76,7 @@ s32   func_801A1AE4(Actor* arg);
 /* func_801A3A08 */
 void  func_801A3A08(void);
 /* func_801A3D1C */
-void  func_801A3D1C();
+void  func_801A3D1C(void* unused);
 /* func_801A3E50 */
 void  Area_RunSetupStream(u8* cursor);
 /* func_801A4BC0 */
