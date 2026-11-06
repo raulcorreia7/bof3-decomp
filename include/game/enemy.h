@@ -17,6 +17,19 @@
 
 #define ENEMY_AI_BLOCK_SIZE 0x10
 
+/* The family byte of an enemy id: the slayer weapons double damage to their
+ * family (Dragon Blade, Dragon Spear and Dragonfang to dragons; Demonsbane,
+ * Holy Avenger and Aries Spear to demons). The disc records hold only these three
+ * values: 146 enemies with none, 11 dragons, 12 demons. */
+typedef enum EnemyFamily {
+    ENEMY_FAMILY_NONE   = 0,
+    ENEMY_FAMILY_DRAGON = 1,
+    ENEMY_FAMILY_DEMON  = 4,
+} EnemyFamily;
+
+/* An enemy id: the family in the high byte, the enemy number in the low byte. */
+#define ENEMY_ID(family, number) (((family) << 8) | (number))
+
 typedef enum EnemyId {
     ENEMY_ID_BARB_BULB          = 0x01,
     ENEMY_ID_RIPPER             = 0x02,
@@ -169,30 +182,30 @@ typedef enum EnemyId {
     ENEMY_ID_CACTI              = 0xB2,
     ENEMY_ID_BERSERKER          = 0xB4,
     ENEMY_ID_MYRIA              = 0xB5,
-    ENEMY_ID_LIZARDMAN          = 0x108,
-    ENEMY_ID_LIZARD             = 0x114,
-    ENEMY_ID_SCYLLA             = 0x162,
-    ENEMY_ID_CHARYBDIS          = 0x163,
-    ENEMY_ID_D_ZOMBIE           = 0x166,
-    ENEMY_ID_RED_DRAKE          = 0x188,
-    ENEMY_ID_ICE_DRAKE          = 0x189,
-    ENEMY_ID_CLONE              = 0x18A,
-    ENEMY_ID_NEWT               = 0x18E,
-    ENEMY_ID_D_LORD             = 0x1A9,
-    ENEMY_ID_DRAK               = 0x1B3,
-    ENEMY_ID_PHANTOM            = 0x444,
-    ENEMY_ID_NITEMARE           = 0x445,
-    ENEMY_ID_GARR_CONTEST       = 0x454,
-    ENEMY_ID_GARR_ANGEL_TOWER   = 0x465,
-    ENEMY_ID_CEREBUS            = 0x467,
-    ENEMY_ID_MIKBA              = 0x46A,
-    ENEMY_ID_GAIST              = 0x475,
-    ENEMY_ID_VAMPIRE            = 0x479,
-    ENEMY_ID_REAPER             = 0x47D,
-    ENEMY_ID_REVENANT           = 0x47E,
-    ENEMY_ID_SAMPLE_3           = 0x499,
-    ENEMY_ID_SAMPLE_9           = 0x49F,
-    ENEMY_ID_ARWAN              = 0x4A8,
+    ENEMY_ID_LIZARDMAN          = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0x08),
+    ENEMY_ID_LIZARD             = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0x14),
+    ENEMY_ID_SCYLLA             = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0x62),
+    ENEMY_ID_CHARYBDIS          = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0x63),
+    ENEMY_ID_D_ZOMBIE           = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0x66),
+    ENEMY_ID_RED_DRAKE          = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0x88),
+    ENEMY_ID_ICE_DRAKE          = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0x89),
+    ENEMY_ID_CLONE              = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0x8A),
+    ENEMY_ID_NEWT               = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0x8E),
+    ENEMY_ID_D_LORD             = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0xA9),
+    ENEMY_ID_DRAK               = ENEMY_ID(ENEMY_FAMILY_DRAGON, 0xB3),
+    ENEMY_ID_PHANTOM            = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x44),
+    ENEMY_ID_NITEMARE           = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x45),
+    ENEMY_ID_GARR_CONTEST       = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x54),
+    ENEMY_ID_GARR_ANGEL_TOWER   = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x65),
+    ENEMY_ID_CEREBUS            = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x67),
+    ENEMY_ID_MIKBA              = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x6A),
+    ENEMY_ID_GAIST              = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x75),
+    ENEMY_ID_VAMPIRE            = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x79),
+    ENEMY_ID_REAPER             = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x7D),
+    ENEMY_ID_REVENANT           = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x7E),
+    ENEMY_ID_SAMPLE_3           = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x99),
+    ENEMY_ID_SAMPLE_9           = ENEMY_ID(ENEMY_FAMILY_DEMON, 0x9F),
+    ENEMY_ID_ARWAN              = ENEMY_ID(ENEMY_FAMILY_DEMON, 0xA8),
 } EnemyId;
 
 /* Resistance arrays are nine byte slots; slot 8 has no element-mask bit.
