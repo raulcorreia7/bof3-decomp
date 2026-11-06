@@ -1004,6 +1004,8 @@ Actor_Clear = { addr = 0x801F0BF0, type = "func", source = "clears the five lead
 g_BMagicEffectFuncs = { addr = 0x801F0C40, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/boss/boss001/13"]
+Boss_FinishDefeat_800C1900 = { addr = 0x800C1900, type = "func", source = "second copy of Boss_FinishDefeat in this image" }
+Boss_FinishDefeat = { addr = 0x800C1C20, type = "func", source = "same body as Boss_FinishDefeat in boss002, boss004, boss017 and boss022: banks the spoils, then parks the task in the knock-out step" }
 Boss_InstallBattleHooks = { addr = 0x800C1E50, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
 Boss_HandleBattleEvent = { addr = 0x800C1E88, type = "func", source = "func_800C1E50 stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
 Boss_ChooseBattleEnding = { addr = 0x800C1FF8, type = "func", source = "func_800C1E50 stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
@@ -1098,6 +1100,8 @@ Boss_ChooseBattleEnding = { addr = 0x800C1A04, type = "func", source = "func_800
 Boss_EndBattle = { addr = 0x800C1A50, type = "func", source = "func_800C19C4 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
 
 ["emi/boss/boss018/16"]
+Boss_EndEntrance = { addr = 0x800C1940, type = "func", source = "same body as Boss_EndEntrance in boss022: advances the actor to step 2 once func_8014DAEC returns nonzero" }
+Boss_EndEntrance_800C1ADC = { addr = 0x800C1ADC, type = "func", source = "second copy of Boss_EndEntrance in this image" }
 Boss_InstallBattleHooks = { addr = 0x800C2114, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
 Boss_HandleBattleEvent = { addr = 0x800C214C, type = "func", source = "func_800C2114 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
 Boss_ChooseBattleEnding = { addr = 0x800C2258, type = "func", source = "func_800C2114 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
