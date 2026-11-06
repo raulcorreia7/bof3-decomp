@@ -3,18 +3,18 @@
 MATCH void func_801D1FDC(void) {
     s32            i;
     u8             count;
-    u32            idx;
+    u32            index;
     MenuPanelTask* panel;
 
     Menu_ResetPanelTasks();
     i = 0;
     for (;;) {
         count = Party_CountOrder(0);
-        idx   = i & BYTE_MASK;
-        if (idx >= count) {
+        index = i & BYTE_MASK;
+        if (index >= count) {
             break;
         }
-        panel = &g_MenuPanelTasks[4 + idx];
+        panel = &g_MenuPanelTasks[4 + index];
 
         panel->unk_0A = i;
         i += 1;
@@ -23,7 +23,7 @@ MATCH void func_801D1FDC(void) {
         panel->unk_02 = 0;
         panel->state  = 0;
         panel->x      = 0x62;
-        panel->y      = idx * 0x36 + 0x3E;
+        panel->y      = index * 0x36 + 0x3E;
         panel->unk_0B = 0;
         panel->unk_0C = 0;
     }

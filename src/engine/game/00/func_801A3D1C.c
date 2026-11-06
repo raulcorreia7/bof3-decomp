@@ -3,7 +3,7 @@
 MATCH void func_801A3D1C(void) {
     Actor* work;
     s32    slot;
-    s32    idx;
+    s32    index;
     s8     n;
     s8     old_a;
     s8     old_b;
@@ -14,19 +14,19 @@ MATCH void func_801A3D1C(void) {
         if (n < 0) {
             n = 4;
         }
-        idx   = n * 0x10;
-        old_a = D_80147CB9[idx];
+        index = n * 0x10;
+        old_a = D_80147CB9[index];
         if (old_a != 0) {
-            D_80147CB9[idx] = old_a - 1;
-            work            = g_Task;
-            work->unk_64 += *(s32*)((u8*)D_80147CBC + idx);
-            work->unk_68 += *(s32*)((u8*)D_80147CC0 + idx);
+            D_80147CB9[index] = old_a - 1;
+            work              = g_Task;
+            work->unk_64 += *(s32*)((u8*)D_80147CBC + index);
+            work->unk_68 += *(s32*)((u8*)D_80147CC0 + index);
         }
-        old_b = D_80147CBA[idx];
+        old_b = D_80147CBA[index];
         if (old_b != 0) {
-            D_80147CBA[idx] = old_b - 1;
-            work            = g_Task;
-            work->unk_6C += *(s32*)((u8*)D_80147CC4 + idx);
+            D_80147CBA[index] = old_b - 1;
+            work              = g_Task;
+            work->unk_6C += *(s32*)((u8*)D_80147CC4 + index);
         }
     }
 }

@@ -11,7 +11,7 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
     s32    pos_y;
     u8     route_index;
     u32    slot;
-    s32    idx;
+    s32    index;
     s8     old_a;
     s8     old_b;
     s32    reached_x;
@@ -54,17 +54,17 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
             ((pos_y = g_Task->y.fixed, (((pos_y ^ (pos_y + delta)) & 0x8000)) != 0))) {
             func_801A3080(g_CurrentActor, g_Task->direction_08 & 7);
         }
-        idx   = (s32)(slot << 24) >> 20;
-        old_a = D_80147CB9[idx];
+        index = (s32)(slot << 24) >> 20;
+        old_a = D_80147CB9[index];
         if (old_a != 0) {
-            D_80147CB9[idx] = old_a - 1;
-            g_Task->unk_64 += FIELD(s32, D_80147CBC, idx);
-            g_Task->unk_68 += FIELD(s32, D_80147CC0, idx);
+            D_80147CB9[index] = old_a - 1;
+            g_Task->unk_64 += FIELD(s32, D_80147CBC, index);
+            g_Task->unk_68 += FIELD(s32, D_80147CC0, index);
         }
-        old_b = D_80147CBA[idx];
+        old_b = D_80147CBA[index];
         if (old_b != 0) {
-            D_80147CBA[idx] = old_b - 1;
-            g_Task->unk_6C += FIELD(s32, D_80147CC4, idx);
+            D_80147CBA[index] = old_b - 1;
+            g_Task->unk_6C += FIELD(s32, D_80147CC4, index);
         }
     }
     if (step_x < 0) {

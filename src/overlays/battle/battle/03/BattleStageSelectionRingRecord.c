@@ -1,12 +1,12 @@
 #include "battle_03.h"
 
 /* func_801DE8C0 */
-MATCH void BattleStageSelectionRingRecord(s8 slot_index, s8 record_kind, u8* text) {
+MATCH void BattleStageSelectionRingRecord(s8 index, s8 record_kind, u8* text) {
     u8  i;
     int off;
 
     i                 = D_801EC328;
-    D_801EB5B0[i * 8] = slot_index;
+    D_801EB5B0[i * 8] = index;
     i                 = D_801EC328;
     D_801EB5B1[i * 8] = record_kind;
     i                 = D_801EC328;

@@ -456,7 +456,7 @@ typedef union OverlaySlotCursor {
     EmiTocEntry* slots; /* 0x00 */
 } OverlaySlotCursor;
 
-typedef s8 (*GameFunc)(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, s32 flags);
+typedef s8 (*GameFunc)(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags);
 
 struct Vec3W {
     s32 w0;
@@ -1297,7 +1297,7 @@ extern const ObjectFunc
 extern u8  D_8017F90D;
 void       func_801A17A0(u8* entry_record);
 void       func_801A18C8(u8* record);
-void       func_801C1254(s32 ability_id, s32 slot_index, s32 ignored);
+void       func_801C1254(s32 ability_id, s32 party_slot, s32 ignored);
 void       func_801D0C04(void);
 extern s32 func_801F2C04(void);
 

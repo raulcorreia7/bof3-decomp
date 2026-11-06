@@ -10,12 +10,12 @@ MATCH s8 func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
     s32 count;
-    s32 idx;
+    s32 index;
     s32 off;
     u8* ptr;
 
     v     = func_801BDCF8(pos_x, pos_y);
-    idx   = 0;
+    index = 0;
     count = g_PartySize;
     if (count > 0) {
         off = 0;
@@ -24,13 +24,13 @@ MATCH s8 func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode) {
             if (((void*)ptr != (void*)g_Task) && (((u8*)g_BattlePartyBattlers)[off] != 0)) {
                 a1v = pos_y;
                 if ((func_801BDD58(pos_x, a1v, v, range_mode, (Actor*)ptr) & BYTE_MASK) != 0) {
-                    return idx;
+                    return index;
                 }
             }
             limit = g_PartySize;
-            idx += 1;
+            index += 1;
             off += BATTLE_PARTY_STRIDE;
-        } while (idx < limit);
+        } while (index < limit);
     }
     return -1;
 }

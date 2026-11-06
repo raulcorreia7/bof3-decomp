@@ -5,7 +5,7 @@ MATCH void func_8009B160(void) {
     u8  eight;
     u8* slot;
     u8  three;
-    u8  slot_index;
+    u8  entry_index;
     u8  tail_index;
 
     /* FAKE: the order lock steers regalloc */
@@ -22,13 +22,13 @@ MATCH void func_8009B160(void) {
     g_BattlePanelMode   = three;
     g_BattleItemRow     = 0;
     D_801485C3          = 0xFF;
-    slot_index          = slot[5];
+    entry_index         = slot[5];
     D_801485D8          = &s_BattleEquipment[0];
     D_801485BC          = -0xAA;
     D_801485BE          = 0x3F;
     D_801485C5          = one;
     g_BattleChoicePhase = 4;
-    D_801485C4          = slot_index;
+    D_801485C4          = entry_index;
     tail_index          = slot[5];
     D_801485C5          = three;
     D_80148656          = tail_index;

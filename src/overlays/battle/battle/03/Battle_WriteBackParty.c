@@ -21,7 +21,7 @@ MATCH void Battle_WriteBackParty(void) {
             index = i & BYTE_MASK;
             off   = index * BATTLE_PARTY_STRIDE;
             if ((*(u16*)((D_80145F10 + off)) & 0x4000u) != 0u) {
-                rec                         = g_BattlePartyBattlers[index].record_slot;
+                rec                         = g_BattlePartyBattlers[index].character_index;
                 value                       = g_Characters[rec].fatigue;
                 g_Characters[rec].hp        = 1;
                 g_Characters[rec].willpower = 1;

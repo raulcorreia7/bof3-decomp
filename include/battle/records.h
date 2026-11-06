@@ -537,7 +537,7 @@ typedef struct PartyBattler {
     u8           focus_counter; /* +0x138 the Focus counter, 0..2; Battle_CalcDamage spends it as a power bonus */
     u8           unk_139;
     u8           unk_13A[2];
-    u8           record_slot; /* +0x13C the Character slot this battler was built from */
+    u8           character_index; /* +0x13C the Character slot this battler was built from */
     u8           pad_13D[3];
 } PartyBattler;
 
@@ -567,7 +567,7 @@ ASSERT_OFFSET(PartyBattler, action_flags, 0x128);
 ASSERT_OFFSET(PartyBattler, unk_12C, 0x12C);
 ASSERT_OFFSET(PartyBattler, unk_13A, 0x13A);
 ASSERT_OFFSET(PartyBattler, focus_counter, 0x138);
-ASSERT_OFFSET(PartyBattler, record_slot, 0x13C);
+ASSERT_OFFSET(PartyBattler, character_index, 0x13C);
 
 /* The damage/status word: `damage_flags` of the enemy row, `damage_flags` of the
  * player row. Bit 6 marks a marked damage target; bit 7 runs the popup digits

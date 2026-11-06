@@ -7,12 +7,12 @@ extern u16 D_80145F26[][160];
  * panel bytes and applies the element and status modifiers.
  */
 MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
-    s32 slot_index;
+    s32 party_slot;
     s32 row_offset;
     s32 table_row;
 
-    slot_index = slot & BYTE_MASK;
-    row_offset = slot_index * BATTLE_PARTY_STRIDE;
+    party_slot = slot & BYTE_MASK;
+    row_offset = party_slot * BATTLE_PARTY_STRIDE;
 
     rec->unk_20 = func_801DE0AC(rec->unk_40, (FIELD(s8, &D_80145FBC, row_offset) * 2) + 0x64);
     rec->unk_22 = func_801DE0AC(rec->unk_42, (FIELD(s8, &D_80145FBD, row_offset) * 2) + 0x64);
@@ -32,22 +32,22 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
     rec->unk_31 = rec->unk_51;
     rec->unk_33 = rec->unk_53;
 
-    if (g_BattlePartyBattlers[slot_index].action_flags.volatile_value & 1) {
-        D_80145F24[slot_index][0] = D_80145F24[slot_index][0] * 3;
+    if (g_BattlePartyBattlers[party_slot].action_flags.volatile_value & 1) {
+        D_80145F24[party_slot][0] = D_80145F24[party_slot][0] * 3;
     }
-    if (g_BattlePartyBattlers[slot_index].action_flags.volatile_value & COMBATANT_FLAG_CHARGING) {
-        D_80145F24[slot_index][0] = D_80145F24[slot_index][0] * 3;
+    if (g_BattlePartyBattlers[party_slot].action_flags.volatile_value & COMBATANT_FLAG_CHARGING) {
+        D_80145F24[party_slot][0] = D_80145F24[party_slot][0] * 3;
     }
-    if (g_BattlePartyBattlers[slot_index].action_flags.volatile_value & 0x1000) {
+    if (g_BattlePartyBattlers[party_slot].action_flags.volatile_value & 0x1000) {
         u16 total;
         u16 bonus;
 
-        total                     = D_80145F24[slot_index][0];
-        bonus                     = D_80145F26[slot_index][0];
-        D_80145F26[slot_index][0] = 0;
-        D_80145F24[slot_index][0] = total + bonus;
+        total                     = D_80145F24[party_slot][0];
+        bonus                     = D_80145F26[party_slot][0];
+        D_80145F26[party_slot][0] = 0;
+        D_80145F24[party_slot][0] = total + bonus;
     }
-    if (g_BattlePartyBattlers[slot_index].action_flags.volatile_value & 2) {
+    if (g_BattlePartyBattlers[party_slot].action_flags.volatile_value & 2) {
         if (g_DragonForm == 0x16) {
             FIELD(u8, &D_80145F3B, row_offset) = FIELD(u8, &D_80145F3B, row_offset) + 0x1E;
             FIELD(u8, &D_80145F3A, row_offset) = FIELD(u8, &D_80145F3A, row_offset) + 0x1E;

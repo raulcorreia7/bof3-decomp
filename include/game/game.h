@@ -318,7 +318,7 @@ extern void GFX_UploadPaletteRows(void);
 /* func_80196C8C */
 void        GFX_UpdatePaletteAnimations(void);
 /* func_80196D84 */
-void        GFX_StepPaletteAnimation(u8 slot_index);
+void        GFX_StepPaletteAnimation(u8 palette_slot);
 /* func_80196FFC */
 void        Game_LoadCampMenu(void);
 /* func_80197068 */

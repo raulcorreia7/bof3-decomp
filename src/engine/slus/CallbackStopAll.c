@@ -6,18 +6,18 @@
 MATCH void CallbackStopAll(void) {
     CallbackSlot*          slot_end;
     volatile CallbackSlot* next_slot;
-    s32                    slot_index;
+    s32                    callback_slot;
 
-    slot_index     = 0;
+    callback_slot  = 0;
     g_CallbackSlot = D_80143B40;
     slot_end       = D_80143B40 + 4;
 
     do {
         if (g_CallbackSlot->state != CALLBACK_SLOT_EMPTY) {
-            CallbackCloseThread(slot_index & BYTE_MASK);
+            CallbackCloseThread(callback_slot & BYTE_MASK);
         }
 
         next_slot      = g_CallbackSlot + 1;
         g_CallbackSlot = (CallbackSlot*)next_slot;
-    } while ((slot_index += 1, next_slot < slot_end));
+    } while ((callback_slot += 1, next_slot < slot_end));
 }

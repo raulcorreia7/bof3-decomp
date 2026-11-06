@@ -3,18 +3,18 @@
 /* initializes EMI streaming state, refreshes the active LBA, and
  * installs CD callbacks.
  */
-MATCH void EMI_LoaderStreamInitSlot(u32 slot_id) {
+MATCH void EMI_LoaderStreamInitSlot(u32 emi_id) {
     u32 cd_base;
     u32 active_lba;
     u32 current_lba;
     u32 max_lba;
-    u32 slot_index;
+    u32 ring_index;
     u32 new_lba;
     u8  slot;
 
     cd_base              = AREA_WORK;
-    slot_index           = 0;
-    g_EmiRequestedSlotId = slot_id;
+    ring_index           = 0;
+    g_EmiRequestedSlotId = emi_id;
     g_EmiNextSlot        = 0;
     D_80146482           = 0;
     D_80146486           = 0;
@@ -23,9 +23,9 @@ MATCH void EMI_LoaderStreamInitSlot(u32 slot_id) {
     g_EmiRingBase        = cd_base;
 
     do {
-        g_EmiRingStates[slot_index] = 0xFF;
-        slot_index += 1;
-    } while (slot_index < EMI_CALLBACK_SLOT_COUNT);
+        g_EmiRingStates[ring_index] = 0xFF;
+        ring_index += 1;
+    } while (ring_index < EMI_CALLBACK_SLOT_COUNT);
 
     if (g_EmiServiceMode == 2) {
         if (CdSync(1, D_80146498) != CdlNoIntr) {

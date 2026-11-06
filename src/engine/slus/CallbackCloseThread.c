@@ -3,9 +3,9 @@
 /* clears one callback slot and closes its thread inside the scheduler
  * critical section.
  */
-MATCH void CallbackCloseThread(s32 slot_index) {
-    D_80143B40[slot_index].state = 0;
+MATCH void CallbackCloseThread(s32 callback_slot) {
+    D_80143B40[callback_slot].state = 0;
     EnterCriticalSection();
-    CloseTh(D_80143B40[slot_index].thread_id);
+    CloseTh(D_80143B40[callback_slot].thread_id);
     ExitCriticalSection();
 }

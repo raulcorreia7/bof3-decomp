@@ -348,7 +348,7 @@ MATCH void func_801F2F0C(const void* arg0) {
     u8        i;
     LINE_G2*  primitive;
     u16       red;
-    u32       idx;
+    u32       index;
 
     work = (const u8*)arg0;
     GFX_AddDrawMode(GetTPage(0, 1, 896, 256));
@@ -357,14 +357,14 @@ MATCH void func_801F2F0C(const void* arg0) {
         primitive = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(primitive);
         PSX_SET_SEMI_TRANSPARENT(primitive);
-        idx = i & BYTE_MASK;
+        index = i & BYTE_MASK;
 
-        primitive->x0 = *(s16*)(((const u8*)work + (idx << 2) + 24));
-        primitive->y0 = *(s16*)(((const u8*)work + (idx << 2) + 26));
-        primitive->x1 = *(s16*)(((const u8*)work + ((idx + 1) << 2) + 24));
-        primitive->y1 = *(s16*)(((const u8*)work + ((idx + 1) << 2) + 26));
+        primitive->x0 = *(s16*)(((const u8*)work + (index << 2) + 24));
+        primitive->y0 = *(s16*)(((const u8*)work + (index << 2) + 26));
+        primitive->x1 = *(s16*)(((const u8*)work + ((index + 1) << 2) + 24));
+        primitive->y1 = *(s16*)(((const u8*)work + ((index + 1) << 2) + 26));
 
-        red = ((0x20u - idx) * 8u);
+        red = ((0x20u - index) * 8u);
         if (red > 0xFFu) {
             red = 0xFFu;
         }
@@ -372,7 +372,7 @@ MATCH void func_801F2F0C(const void* arg0) {
         primitive->g0 = 0u;
         primitive->b0 = 0u;
 
-        red = ((0x1Fu - idx) * 8u);
+        red = ((0x1Fu - index) * 8u);
         if (red > 0xFFu) {
             red = 0xFFu;
         }
@@ -598,14 +598,14 @@ MATCH void func_801F36D0(void) {
  * arg-less to match. Table is the etc/game/00 ActorSlot table. */
 
 MATCH void func_801F3710(void) {
-    s32        slot_index;
+    s32        actor_slot;
     ActorSlot* slot;
 
-    slot_index = Actor_FindFreeSlot() & BYTE_MASK;
-    if (slot_index == GAME_NONE) {
+    actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
+    if (actor_slot == GAME_NONE) {
         return;
     }
-    slot        = &g_ActorSlots[slot_index];
+    slot        = &g_ActorSlots[actor_slot];
     slot->flags = 1;
     slot->type  = 0x2F;
 }

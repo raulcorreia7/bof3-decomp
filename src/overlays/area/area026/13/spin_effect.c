@@ -416,15 +416,15 @@ MATCH void func_801F2D5C(const s32* center, s32 radius) {
     s32* tbl33fc;
     s32* tbl340c;
     s32  i;
-    s32  idx;
+    s32  table_index;
 
     Area_SetCameraMatrix(scratch);
     i       = 0;
     tbl33fc = (s32*)D_801F33FC;
     tbl340c = (s32*)D_801F340C;
     do {
-        idx = i & BYTE_MASK;
-        func_801F2E04(center, radius, (idx << 10), tbl33fc[idx], tbl340c[idx]);
+        table_index = i & BYTE_MASK;
+        func_801F2E04(center, radius, (table_index << 10), tbl33fc[table_index], tbl340c[table_index]);
         i += 1;
     } while (((i & BYTE_MASK)) < 4u);
 }
@@ -566,14 +566,14 @@ MATCH void func_801F3338(void) {
  * arg-less to match. Table is the etc/game/00 ActorSlot table. */
 
 MATCH void func_801F3360(void) {
-    s32        slot_index;
+    s32        actor_slot;
     ActorSlot* slot;
 
-    slot_index = Actor_FindFreeSlot() & BYTE_MASK;
-    if (slot_index == GAME_NONE) {
+    actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
+    if (actor_slot == GAME_NONE) {
         return;
     }
-    slot          = &g_ActorSlots[slot_index];
+    slot          = &g_ActorSlots[actor_slot];
     slot->flags   = 1;
     slot->type    = 0x33;
     slot->x.fixed = 0x70000;

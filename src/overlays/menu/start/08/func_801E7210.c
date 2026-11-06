@@ -1,15 +1,15 @@
 #include "start_08.h"
 
-MATCH void func_801E7210(u32 slot_index) {
+MATCH void func_801E7210(u32 panel_index) {
     u8* src;
     u8* dst;
     u8  a;
     u8  b;
     u8  c;
 
-    slot_index &= BYTE_MASK;
-    src    = &s_PanelIconSelectors[slot_index * 3];
-    dst    = &D_8014866C[slot_index * 5];
+    panel_index &= BYTE_MASK;
+    src    = &s_PanelIconSelectors[panel_index * 3];
+    dst    = &D_8014866C[panel_index * 5];
     a      = src[0];
     b      = src[1];
     c      = src[2];

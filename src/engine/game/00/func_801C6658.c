@@ -3,7 +3,7 @@
 MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 selection) {
     u8* entry;
     s32 arg2b;
-    s32 idx;
+    s32 index;
     /* FAKE: retail keeps cur_a in s7 while s6 carries sel. */
     MATCH_FAKE_PIN(s32, cur_a, "s7");
     s32 cur_b;
@@ -21,8 +21,8 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
     s32 neg_b;
 
     arg2b = entry_index & BYTE_MASK;
-    idx   = SQ(arg2b) + (table_index & BYTE_MASK);
-    entry = ((table_slot & BYTE_MASK) * 8) + ((u8*)D_80181CA8 + (idx * 0x18));
+    index = SQ(arg2b) + (table_index & BYTE_MASK);
+    entry = ((table_slot & BYTE_MASK) * 8) + ((u8*)D_80181CA8 + (index * 0x18));
     cur_a = *(s32*)entry;
     neg_a = -cur_a;
     cur_b = *(s32*)(entry + 4);

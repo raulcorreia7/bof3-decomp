@@ -90,7 +90,7 @@ static inline void FieldSelectDrawMode(void) {
 static inline void FieldActivateActor(void) {
     Actor* s;
     Actor* e;
-    s32    idx;
+    s32    index;
 
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
         g_Task->mode = 0x0E;
@@ -99,9 +99,9 @@ static inline void FieldActivateActor(void) {
     s = &g_Actors[g_Task->unk_0B];
     s->flags |= 0x40;
     s               = g_Task;
-    idx             = s->unk_0B;
+    index           = s->unk_0B;
     g_ScriptVars[2] = 3;
-    e               = &g_Actors[idx];
+    e               = &g_Actors[index];
     g_Task          = e;
     Actor_SelectScript(1);
     s->mode = 1;

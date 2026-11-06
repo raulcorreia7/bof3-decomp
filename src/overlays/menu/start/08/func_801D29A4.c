@@ -4,24 +4,24 @@ MATCH void func_801D29A4(void) {
     s32            i;
     u32            j;
     u8             count;
-    u32            idx;
+    u32            index;
     MenuPanelTask* panel;
     u16*           entry;
 
     i = 0;
     for (;;) {
         count = Party_CountOrder(0);
-        idx   = i & BYTE_MASK;
-        if (idx >= count) {
+        index = i & BYTE_MASK;
+        if (index >= count) {
             break;
         }
-        panel         = &g_MenuPanelTasks[12 + idx];
+        panel         = &g_MenuPanelTasks[12 + index];
         panel->unk_01 = 6;
         panel->unk_02 = 5;
         panel->state  = 2;
         panel->active = 1;
         panel->x      = 320;
-        j             = idx + 4;
+        j             = index + 4;
         entry         = (u16*)((u8*)&D_80148336 + j * 0x24);
         panel->y      = *entry;
         panel->unk_0A = i;

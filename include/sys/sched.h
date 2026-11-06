@@ -62,12 +62,12 @@ void CallbackInitThreads(void);
 /* func_8014B73C */
 void CallbackRun(void);
 /* func_8014B854 */
-void CallbackRegister(s32 slot_index, Callback callback);
+void CallbackRegister(s32 callback_slot, Callback callback);
 /* func_8014B87C */
 void CallbackWait(u16 countdown);
 /* func_8014B8B0 */
 void CallbackExit(void);
 /* func_8014B900 */
-void CallbackCloseThread(s32 slot_index);
+void CallbackCloseThread(s32 callback_slot);
 
 #endif

@@ -3,11 +3,11 @@
 MATCH void func_801F3344(void) {
     Actor* s;
     Actor* e;
-    u8     idx;
+    u8     index;
 
-    s   = g_Task;
-    idx = ((u8*)s)[0x0B];
-    e   = &g_Actors[idx];
+    s     = g_Task;
+    index = ((u8*)s)[0x0B];
+    e     = &g_Actors[index];
     TASK_SET(e);
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
         s->mode = 0x0E;

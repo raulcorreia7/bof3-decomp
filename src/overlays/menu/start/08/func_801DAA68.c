@@ -8,7 +8,7 @@ NON_MATCHING void func_801DAA68(void) {
     MenuPanelTask* rows;
     u8*            panel;
     u8             i;
-    u32            idx;
+    u32            index;
     u8             count;
 
     record = &D_801484BC;
@@ -33,11 +33,11 @@ NON_MATCHING void func_801DAA68(void) {
     i = 0;
     for (;;) {
         count = Party_CountOrder(0);
-        idx   = i & BYTE_MASK;
-        if ((s32)idx >= (u32)count) {
+        index = i & BYTE_MASK;
+        if ((s32)index >= (u32)count) {
             break;
         }
-        panel      = &D_801483C0 + (idx * 0x24);
+        panel      = &D_801483C0 + (index * 0x24);
         panel[0xA] = i;
         i += 1;
         panel[0x1]       = 6;
@@ -45,7 +45,7 @@ NON_MATCHING void func_801DAA68(void) {
         panel[0x3]       = 0;
         panel[0x0]       = 1;
         ((u16*)panel)[2] = 0x11;
-        ((u16*)panel)[3] = (idx * 0x36) + 0x3E;
+        ((u16*)panel)[3] = (index * 0x36) + 0x3E;
         panel[0xB]       = 1;
         panel[0xC]       = 0;
     }

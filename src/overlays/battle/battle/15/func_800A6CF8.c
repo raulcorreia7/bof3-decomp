@@ -1,11 +1,11 @@
 #include "battle_15.h"
 
-MATCH s32 func_800A6CF8(u8 selection_id, u8 slot_index) {
+MATCH s32 func_800A6CF8(u8 selection_id, u8 column_index) {
     u8 value;
     u8 count;
     u8 index;
 
-    value = D_800B4D58[selection_id][slot_index];
+    value = D_800B4D58[selection_id][column_index];
     if (value == GAME_NONE) {
         return 1;
     }

@@ -686,7 +686,7 @@ u8            func_801DB9E4(u32 battler_index);
 PartyBattler* func_801DBB20(u8 selector);
 /* func_801DBB78 */
 u32           Battle_ApplyDamage(u8 attacker, u8 target);
-u32           func_801DC73C(s16 damage, u32 battler_index, u32 slot_index);
+u32           func_801DC73C(s16 damage, u32 battler_index, u32 target_index);
 u32           func_801DC894(s16 damage, u8 attacker, u8 target);
 u32           Battle_RollBaseDamage(u8 attacker, u8 target, u8 skip_reduction);
 u32           func_801DCCB0(void);
@@ -704,7 +704,7 @@ void          func_801DD8AC(u32 battler_index);
 void          func_801DDAF0(void);
 void          func_801DDB7C(void);
 u8            func_801DDCB4(u32 battler_index);
-u8            func_801DDE7C(u32 slot_index, u32 packed_value);
+u8            func_801DDE7C(u32 counter_index, u32 packed_value);
 u8            func_801DDF50(u16 entry_id, u32 table_kind);
 void          func_801DE1D4(void);
 /* func_801DE43C */
@@ -717,7 +717,7 @@ void          func_801DE7FC(void);
 void          func_801DE804(void);
 u8            func_801DE858(s8 event_kind);
 /* func_801DE8C0 */
-void          BattleStageSelectionRingRecord(s8 slot_index, s8 record_kind, u8* text);
+void          BattleStageSelectionRingRecord(s8 index, s8 record_kind, u8* text);
 u8            func_801DE92C(void);
 void          Battle_SetTextPartyName(u32 party_slot);
 void          Battle_SetTextEnemyName(u32 enemy_index);
