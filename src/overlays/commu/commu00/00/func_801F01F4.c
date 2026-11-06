@@ -13,7 +13,7 @@ MATCH void func_801F01F4(void) {
     start = index;
     for (;;) {
         if (g_FairyJobs[index].active != 0) {
-            if (g_FairyJobs[index].type != 9 || flag != 0) {
+            if (g_FairyJobs[index].type != FAIRY_JOB_HUNT || flag != 0) {
                 g_FairyJobs[index].active = 0;
                 D_80145E30[D_80145E44]    = index;
                 D_80145E44                = D_80145E44 + 1;

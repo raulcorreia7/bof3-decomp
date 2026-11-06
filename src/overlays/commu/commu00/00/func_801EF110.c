@@ -20,7 +20,7 @@ MATCH void func_801EF110(s32 battle_count) {
         total    = 0;
         /* FAKE: the local copy of the compared kind is required; the bare
          * literal measures 98.46. */
-        kind     = 9;
+        kind     = FAIRY_JOB_HUNT;
         j        = 0;
         i        = 0;
         do {
