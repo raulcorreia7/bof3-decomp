@@ -17,6 +17,10 @@
 
 #define ENEMY_AI_BLOCK_SIZE 0x10
 
+typedef enum EnemyId {
+    ENEMY_ID_AMMONITE_ALT = 0x96,
+} EnemyId;
+
 /* Resistance arrays are nine byte slots; slot 8 has no element-mask bit.
  * Order: @source: wiki:data/records#area-data */
 typedef enum ResistanceIndex {
