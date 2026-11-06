@@ -48,7 +48,8 @@ MATCH void Fairy_VillageBuildJobs(void) {
             task++;
         } else if (kind == FAIRY_JOB_BUILD) {
             scene = g_GameAreaId;
-            if (scene == 175 || scene == 178 || scene == 181 || scene == 185) {
+            if (scene == AREA_ID_FAIRY_VILLAGE_DOLPHIN || scene == AREA_ID_FAIRY_VILLAGE_178 ||
+                scene == AREA_ID_FAIRY_VILLAGE_181 || scene == AREA_ID_FAIRY_VILLAGE_185) {
                 label = 0xCE;
             } else {
                 variant = RANDOM_MASK(0x7);
