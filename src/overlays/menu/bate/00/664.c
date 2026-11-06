@@ -174,7 +174,7 @@ INCLUDE_ASM(Menu_DrawWindowFrame);
 /* blocker: per-row (unk_12 >> 4) == 15 test; first diff: +0x138 lhu v1,18(s1) (template andi v1,s0,0xff). */
 INCLUDE_ASM(func_801D6C54);
 
-MATCH void func_801D73B4(BateAbilityPanel* panel) {
+MATCH void func_801D73B4(MenuListPanel* panel) {
     Ability* ability;
     u8*      list;
     s32      level;

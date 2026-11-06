@@ -60,37 +60,16 @@
         }                                            \
     } while (0)
 
-/* The shop's panel record, handed to the panel drawers as a pointer: the
- * ability list (Shop_DrawAbilities) and the item list (Shop_DrawItems) read the
- * same cells. The record's extent is not proven; 0x24 is the last proven
- * cell, the names pointer. */
-typedef struct ShopPanel {
-    u8  pad_00[4];
-    u16 x;        /* 0x04 the panel's x; both drawers add 3 and pass it to UI_DrawWindow */
-    u16 y;        /* 0x06 the panel's y */
-    u8  unk_08;   /* 0x08 the ability list passes it to func_801AF5B0 */
-    u8  flags;    /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
-    u8  unk_0A;   /* 0x0A the list selector, passed to func_80166AE4 */
-    u8  unk_0B;   /* 0x0B the stock row; it indexes the name table at a 4-byte stride */
-    u8  unk_0C;   /* 0x0C a row the drawer draws an icon for */
-    u8  selected; /* 0x0D the selected row; the drawer shades it 2 */
-    u8  pad_0E[2];
-    s16 unk_10; /* 0x10 tested against zero for the extra frame marks */
-    u8  pad_12[0xE];
-    u8* names; /* 0x20 the name table: a row count, then 2-byte rows */
-} ShopPanel;
-
-ASSERT_SIZE(ShopPanel, 0x24);
-ASSERT_OFFSET(ShopPanel, x, 0x04);
-ASSERT_OFFSET(ShopPanel, y, 0x06);
-ASSERT_OFFSET(ShopPanel, unk_08, 0x08);
-ASSERT_OFFSET(ShopPanel, flags, 0x09);
-ASSERT_OFFSET(ShopPanel, unk_0A, 0x0A);
-ASSERT_OFFSET(ShopPanel, unk_0B, 0x0B);
-ASSERT_OFFSET(ShopPanel, unk_0C, 0x0C);
-ASSERT_OFFSET(ShopPanel, selected, 0x0D);
-ASSERT_OFFSET(ShopPanel, unk_10, 0x10);
-ASSERT_OFFSET(ShopPanel, names, 0x20);
+ASSERT_OFFSET(MenuListPanel, x, 0x04);
+ASSERT_OFFSET(MenuListPanel, y, 0x06);
+ASSERT_OFFSET(MenuListPanel, unk_08, 0x08);
+ASSERT_OFFSET(MenuListPanel, flags, 0x09);
+ASSERT_OFFSET(MenuListPanel, unk_0A, 0x0A);
+ASSERT_OFFSET(MenuListPanel, unk_0B, 0x0B);
+ASSERT_OFFSET(MenuListPanel, unk_0C, 0x0C);
+ASSERT_OFFSET(MenuListPanel, selected, 0x0D);
+ASSERT_OFFSET(MenuListPanel, unk_10, 0x10);
+ASSERT_OFFSET(MenuListPanel, names, 0x20);
 
 /* The scratchpad work row behind g_Task while func_801D62DC fills it from
  * the selection table at 0x801E537C (three words per row). */
@@ -569,7 +548,7 @@ void func_801E2DB4(void);
 void func_801E2E30(void);
 void func_801E2E70(void);
 void func_801E2EB0(void);
-void Shop_DrawItems(ShopPanel* panel);
+void Shop_DrawItems(MenuListPanel* panel);
 void func_801E31C4(void);
 void func_801E3204(void);
 void func_801E3244(void);
