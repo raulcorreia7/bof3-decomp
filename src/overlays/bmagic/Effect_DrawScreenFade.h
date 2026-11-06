@@ -1,7 +1,6 @@
 MATCH void Effect_DrawScreenFade(void) {
-    s8 shade;
-    /* FAKE: keep the primitive in the retail register. */
-    MATCH_REG(POLY_G4*, prim, "s4");
+    s8       shade;
+    POLY_G4* prim;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35, NULL);
     GFX_AddPrim(1U, 0xCU);

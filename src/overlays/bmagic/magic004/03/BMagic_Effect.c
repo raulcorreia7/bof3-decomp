@@ -33,7 +33,6 @@ INCLUDE_ASM(func_801EF490);
 /* func_801EF6E0 */
 #include "overlays/bmagic/Effect_DrawScreenFade.h"
 
-
 MATCH void func_801EF8CC(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
 }
