@@ -14,13 +14,13 @@ extern Callback      D_801D4BCC[];
 extern Callback      D_801D4BD8[];
 extern Callback      D_801D4BE4[];
 extern Callback      D_801D4BEC[];
-extern u8            D_801D4E00;
-extern u8            D_801D4E04;
-extern u8            D_801D4E08;
+extern u8            D_801D4DF4;
+extern u8            D_801D4DF8;
+extern u8            D_801D4DFC;
 
-extern u8  D_801D4DF4;
-extern u8  D_801D4DF8;
-extern u8  D_801D4DFC;
+extern u8  D_801D4E00;
+extern u8  D_801D4E04;
+extern u8  D_801D4E08;
 extern u16 D_801D4E0C;
 
 extern u8  D_801D4E10;
