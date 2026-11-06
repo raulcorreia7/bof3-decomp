@@ -39,12 +39,6 @@ extern Callback       D_801F5018[];
 void func_801F34CC(void);
 /* func_801F35BC */
 void Area_Update(void);
-/* func_801F39DC */
-void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
-/* func_801F3B04 */
-void Area_DrawGradientDiamond(s16 x, s16 y);
-/* func_801F40C8 */
-void Area_DrawHudBanner(s16 x, s16 y);
 
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud

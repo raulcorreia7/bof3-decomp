@@ -45,14 +45,7 @@ extern Callback       D_801F689C[];
 void func_8015A944(void);
 /* func_801F35D0 */
 void Area_Update(void);
-/* func_801F39F0 */
-void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
-/* func_801F3B18 */
-void Area_DrawGradientDiamond(s16 x, s16 y);
-/* func_801F40DC */
-void Area_DrawHudBanner(s16 x, s16 y);
 void func_801F5380(void);
-void Area_StepChargeGauge(void);
 void func_801F5B90(void);
 
 /* The value of area update step in the shared Area_Update body. */
@@ -62,10 +55,7 @@ s32 func_801A79A4(s32, s32);
 
 s32 func_801F5028(s32, s32, s32);
 
-/* func_801F5ECC */
-s32  Area_BeginTurnStep(s32 direction, s32 previous);
 void func_801F5C7C(void);
-void Area_FinishTurnStep(void);
 
 #define AREA_TURN_SYNC func_801F5C7C
 

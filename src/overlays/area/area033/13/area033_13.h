@@ -37,8 +37,6 @@ extern u8          D_801F502C[];
 extern u8          D_801F502D[];
 extern void (*D_801F5034[])(void);
 #define AREA_HUD_MASK_TABLE D_801F4FF8
-/* func_801F3E00 */
-void Area_DrawGradientDiamond(s16 x, s16 y);
 
 void func_801F33FC(void);
 /* func_801F34EC */
@@ -46,9 +44,6 @@ void Area_Update(void);
 void func_801F35C0(void);
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud
-
-/* func_801F390C */
-void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 
 void func_801F3FF8(s16 x, s16 y);
 

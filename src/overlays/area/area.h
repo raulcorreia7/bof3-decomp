@@ -53,6 +53,7 @@ extern u8       D_80143F06;
 extern u16      D_801448EE;
 extern u8       D_80146867;
 extern u8       D_80147ACF;
+void            Area_SpawnWeightedActor(void);
 void            func_801F2C14(void);
 void            func_801F2C18(void);
 void            func_801F2C30(void);
@@ -60,6 +61,7 @@ void            func_801F2C30(void);
 void            Fish_LocationMessage(void);
 void            func_801F2C48(void);
 void            func_801F2C5C(void);
+s32             Area_CheckStepTrigger(s32 x, s32 y);
 void            func_801F2C88(void);
 void            func_801F2C8C(void);
 void            func_801F2D18(void);
@@ -83,6 +85,7 @@ void            Actor_ShrinkAndFinish(void);
 void            func_801F33A8(void);
 void            func_801F341C(void);
 extern u8       D_801F2DD4[];
+void            Area_StartDirectionalScript(Actor* actor);
 void            func_801F34A0(void);
 void            func_801F34E0(void);
 void            func_801F358C(void);
@@ -95,14 +98,19 @@ void            func_801F385C(void);
 void            func_801F38DC(void);
 void            func_801F39BC(void);
 void            func_801F39D8(s32 x, s32 y, u32 sprite_id);
+void            Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 void            func_801F3A64(void);
 void            func_801F3A78(void);
 void            func_801F3D28(void);
+void            Area_DrawGradientDiamond(s16 x, s16 y);
+void            Area_DrawHudBanner(s16 x, s16 y);
 s16             func_801F4158(DVECTOR* a, DVECTOR* b, DVECTOR* c);
 void            func_801F4178(void);
 void            func_801F41D8(void);
 void            func_801F4534(void);
 void            func_801F455C(void);
+void            Area_AddCameraOffsetY20(void);
+void            Area_SubCameraOffsetY20(void);
 void            func_801F45CC(void);
 void            func_801F4768(void);
 extern u8       D_801F3424[];
@@ -136,5 +144,12 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
 }
 
 void Area_DrawHud(s16 x, s16 y);
+
+void Area_StepChargeGauge(void);
+void Area_ClaimSpawnSlot(void);
+s32  Area_StepSpawnSlots(void);
+void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
+void Area_FinishTurnStep(void);
+s32  Area_BeginTurnStep(s32 direction, s32 previous);
 
 #endif

@@ -24,7 +24,6 @@ extern EnemyBattler g_BattleEnemyBattlers[];
  * addresses are in [emi/boss/boss002/16] of config/symbols.toml. */
 
 s32  func_800AC7D0(u8 entry_id);
-void func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode);
 /* The enemy-work mode dispatch each installer publishes at unk_E4. */
 void func_800C19C8(s32 mode);
 void func_800C1D00(s32 mode);

@@ -34,6 +34,7 @@ extern Callback            D_800C26CC[];
 extern Callback            D_800C26FC[];
 extern BossBattleEventFunc g_BossBattleEventHook;
 
+void func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode);
 void func_800C1978(s32 mode);
 void func_800C1998(s32 mode);
 /* func_800C1ACC (boss014), func_800C1AE8 (boss024), func_800C1E74 (boss002), func_800C1FE8 (boss004), func_800C20C0 (boss008), func_800C2430 (boss018) */

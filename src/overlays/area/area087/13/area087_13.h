@@ -33,19 +33,12 @@ void func_801F34FC(void);
 void Area_Update(void);
 void func_801F36C0(void);
 /* func_801F3B34 */
-/* func_801F40F8 */
-void Area_DrawHudBanner(s16 x, s16 y);
 
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F57C8[6];
 #define AREA_HUD_MASK_TABLE D_801F57C8
-/* func_801F3F00 */
-void Area_DrawGradientDiamond(s16 x, s16 y);
-
-/* func_801F3A0C */
-void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 
 extern u16 D_801F55D8[9][16];
 extern u8  D_801F5718[28];

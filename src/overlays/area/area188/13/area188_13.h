@@ -41,17 +41,10 @@ extern u8       D_801F68A0;
 
 void Area_SetCellCode(s16 column, s16 row, u8 code);
 
-/* func_801F3E7C */
-s32  Area_StepSpawnSlots(void);
-/* func_801F3F30 */
-void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
-
 #define AREA_SPAWN_SLOT_LIFE        0x10
 #define AREA_SPAWN_SLOT_RADIUS      0x100
 #define AREA_SPAWN_SLOT_CORE_SHADE  0x40
 #define AREA_SPAWN_SLOT_RADIUS_STEP 0x10
-/* func_801F3DE0 */
-void Area_ClaimSpawnSlot(void);
 void func_801F44B4(void);
 
 /* The per-image spawn step Area_AdvanceSpawnTimer runs between the slot claim and the slot pass. */

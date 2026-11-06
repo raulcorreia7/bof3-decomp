@@ -50,12 +50,6 @@ extern u8 D_80146874;
 
 extern u8 D_80146875;
 
-/* func_801F38E8 */
-void Area_ClaimSpawnSlot(void);
-s32  Area_StepSpawnSlots(void);
-/* func_801F3A38 */
-void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
-
 #define AREA_SPAWN_SLOT_LIFE        0x20
 #define AREA_SPAWN_SLOT_RADIUS      0x180
 #define AREA_SPAWN_SLOT_CORE_SHADE  g_Task->tint.bytes.unk_5D

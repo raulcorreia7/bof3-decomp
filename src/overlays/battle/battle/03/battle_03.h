@@ -692,7 +692,6 @@ void          func_801DD350(s32 arg0);
 void          func_801DD3CC(s32 arg0);
 u8            func_801DD448(void);
 extern u8     func_801DD704(u8 battler_index);
-extern u8     func_801DD7AC(s32 selector);
 void          func_801DD800(void);
 void          func_801DD8AC(u32 battler_index);
 void          func_801DDAF0(void);

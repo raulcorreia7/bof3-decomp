@@ -15,7 +15,6 @@ extern char         D_80149118[];
 extern u8*          D_801EB4F4;
 extern bool         Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 u8                  func_801DB524(u32 slot);
-u8                  func_801DD7AC(s32 selector);
 extern const char   D_801EEC04[];
 extern const char   D_801EEC4C[];
 u8                  func_801EEDA8(void);

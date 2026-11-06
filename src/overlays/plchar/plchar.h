@@ -78,6 +78,7 @@ extern Callback D_801CF900[];
 extern Callback D_801CF90C[];
 
 /* func_801CF148 (plp478), func_801CF528 (plp578), func_801CF724 (plp278), func_801CF724 (plp27a), func_801CF744 (plp457), func_801CF940 (plp247), func_801CFD20 (plp257), func_801CFFD4 (plp678), func_801D01F0 (plp467), func_801D05D0 (plp567), func_801D07CC (plp267) */
+s32 func_801B2D00(s32 selector);
 s32 Char_ProbeFacingCell(void);
 
 /* The retail caller passes the cue word unmasked (the delay slot holds the
