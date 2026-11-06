@@ -71,6 +71,44 @@ extern GamePaletteOffset        D_80145BD6[GRAPHICS_PALETTE_FADE_COUNT];
 /* D_80145D94 */
 extern GraphicsPaletteAnimation D_80145D94[8];
 
+/* The game's area state at 0x80143F00: the area being run, the area to return to and the pending area request.
+ * func_8019FAA0 stores the current area, its cell class and the scroll target into last_*, and func_801B146C hands
+ * them back to Game_RequestAreaChange; Game_RequestAreaChange stores the request fields in the order of its
+ * arguments. The members keep their own globals (several images read them with a different width or volatile). */
+typedef struct GameAreaState {
+    /* 0x00 */ u16 area_id;
+    /* 0x02 */ u8  request_flags;
+    /* 0x03 */ u8  cell_class;
+    /* 0x04 */ u16 last_area_id;
+    /* 0x06 */ u16 last_cell_class;
+    /* 0x08 */ u32 last_x;
+    /* 0x0C */ u32 last_y;
+    /* 0x10 */ u16 request_area_id;
+    /* 0x12 */ u8  unk_12[2];
+    /* 0x14 */ u32 request_x;
+    /* 0x18 */ u32 request_y;
+    /* 0x1C */ u8  request_facing;
+    /* 0x1D */ u8  request_kind;
+    /* 0x1E */ u8  entry_mode;
+    /* 0x1F */ u8  prev_selection;
+} GameAreaState;
+
+ASSERT_SIZE(GameAreaState, 0x20);
+ASSERT_OFFSET(GameAreaState, request_flags, 0x02);
+ASSERT_OFFSET(GameAreaState, last_area_id, 0x04);
+ASSERT_OFFSET(GameAreaState, last_x, 0x08);
+ASSERT_OFFSET(GameAreaState, last_y, 0x0C);
+ASSERT_OFFSET(GameAreaState, request_area_id, 0x10);
+ASSERT_OFFSET(GameAreaState, request_x, 0x14);
+ASSERT_OFFSET(GameAreaState, request_y, 0x18);
+ASSERT_OFFSET(GameAreaState, request_facing, 0x1C);
+ASSERT_OFFSET(GameAreaState, request_kind, 0x1D);
+ASSERT_OFFSET(GameAreaState, entry_mode, 0x1E);
+ASSERT_OFFSET(GameAreaState, prev_selection, 0x1F);
+
+/* D_80143F00 */
+extern GameAreaState g_GameArea;
+
 /* GAME.EMI#0 exports: the frontend's data and entry points, in address order. */
 
 /* D_80143F14 */

@@ -3475,6 +3475,7 @@ g_GfxCurrentDisplayFrame = { addr = 0x80143E68, source = "SYS_Main selects a dis
 g_FrameCount = { addr = 0x80143E6C, source = "absolute frame counter" }
 g_SysLastVSync = { addr = 0x80143EF8, source = "SYS_Main stores the VSync return value" }
 g_GameAreaId = { addr = 0x80143F00, source = "func_801971E8 reads the pending area and shop func_801D62DC indexes g_AreaLoads with it" }
+g_GameArea = { addr = 0x80143F00, size = 0x20, alias = true, source = "Game_RequestAreaChange stores its arguments at +0x10, +0x14, +0x18 and +0x1C, func_8019FAA0 stores the current area, cell class and scroll target at +0x04..+0x0F and func_801B146C requests them back; the named globals inside it keep their own rows" }
 g_GameRequestFlags = { addr = 0x80143F02, source = "func_8019FAA0 copies AreaLoad.flag_32 into it, func_801976EC and Game_RunAreaLoadState test its bits" }
 g_GameContextSeed = { addr = 0x80143F10, source = "func_801B6470 writes map_id, func_801976EC passes it to func_8019FA28" }
 g_GameEntryPosX = { addr = 0x80143F14, source = "func_801B6470 writes entry x, func_801976EC passes it to func_8019FA28" }
