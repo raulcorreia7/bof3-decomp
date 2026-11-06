@@ -637,5 +637,6 @@ void func_801E2D84(s16 x, s32 y);
 
 void func_801E3E34(u16 line_index);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
+void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 
 #endif

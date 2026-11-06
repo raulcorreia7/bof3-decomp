@@ -24,7 +24,7 @@ MATCH void func_801F4E3C(void) {
     if ((value3 == 2) || (value3 == 6)) {
         D_80143F22 = value2 + 2;
     }
-    Actor_StopMoving(value2);
+    Actor_StopMoving();
     if (func_801A79A4(g_Task->x.fixed, g_Task->y.fixed) == 0) {
         func_801C329C();
         if (!(g_GameFlags & 0x100) && !(g_AreaWalkFlags & 0x40)) {
