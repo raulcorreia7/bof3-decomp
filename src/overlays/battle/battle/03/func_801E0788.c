@@ -43,7 +43,7 @@ MATCH void func_801E0788(void) {
         w2->action_flags.value &= 0xFFFB84FF;
         g_GameState->counter_136 = 0;
         g_GameState->counter_137 = 0;
-        g_GameState->charge      = 0;
+        g_GameState->focus_counter      = 0;
         g_GameState->unk_139     = 0;
         func_800A9BD8(g_Task->slot);
         if ((func_801E0E0C() & BYTE_MASK) || (g_BattleLivingPartyCount == 0)) {
