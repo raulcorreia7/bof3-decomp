@@ -88,9 +88,7 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
         }
         SP_REF(void*, 0x0) = 1;
         val1               = (sp[0] + sp[1]) - (sp[2] + sp[3]);
-        if (val1 < 0) {
-            val1 = -val1;
-        }
+        val1 = ABS(val1);
         val3 = val1 << 0x14;
         goto block_23; /* retail branch */
     }
@@ -124,9 +122,7 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
         val5  = *(sp + ((tmp18 + 2) & 3));
     }
     val2 = val4 - val5;
-    if (val2 < 0) {
-        val2 = -val2;
-    }
+    val2 = ABS(val2);
     val3 = val2 << 0x15;
 block_23:
     return (s16)(val3 >> 0x10);

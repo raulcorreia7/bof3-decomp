@@ -79,13 +79,9 @@ NON_MATCHING void func_80161454(u32 index) {
             a1   = (s16)work->unk_2E - 0xA0;
             if (a1 < 0) {
                 q = (a1 * (s16)val1) / 480;
-                if (q < 0) {
-                    q = -q;
-                }
+                q = ABS(q);
                 if (q < (s16)val1) {
-                    if (a1 < 0) {
-                        a1 = -a1;
-                    }
+                    a1 = ABS(a1);
                     val1 = val1 - (a1 * (s16)val1) / 480;
                 } else {
                     val1 = 0;

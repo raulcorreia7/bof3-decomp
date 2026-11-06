@@ -45,9 +45,7 @@ NON_MATCHING s32 func_801530D0(void) {
 
     func_80153CC4(0);
     v = g_AreaCameraAngle.vz - 0x200;
-    if (v < 0) {
-        v = -v;
-    }
+    v = ABS(v);
     D_8014933D = 0;
     D_8014933A &= 0xFE;
     tmp        = (0x160 - v) / 50;

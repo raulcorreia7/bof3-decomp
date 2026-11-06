@@ -14,16 +14,12 @@ MATCH u8 func_801A2C94(Actor* actor) {
     route  = work->direction_08;
     delta  = work->x.fixed;
     dx     = D_80145EC4 - delta;
-    if (dx < 0) {
-        dx = -dx;
-    }
+    dx = ABS(dx);
     if ((dx >> 0x10) < entity->ext.bounds.half_width) {
         dy    = D_80145EC8;
         delta = work->y.fixed;
         dy -= delta;
-        if (dy < 0) {
-            dy = -dy;
-        }
+        dy = ABS(dy);
         if ((dy >> 0x10) < entity->ext.bounds.half_height) {
             status = func_801A2ED4(entity, 1U);
             if ((status & BYTE_MASK) == GAME_NONE) {

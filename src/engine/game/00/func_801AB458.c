@@ -48,14 +48,10 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             base = &D_80145EC4;
             if ((g_AreaScrollTargetX != base[0]) || (g_AreaScrollTargetY != base[1])) {
                 delta_x = g_AreaScrollTargetX - base[0];
-                if (delta_x < 0) {
-                    delta_x = -delta_x;
-                }
+                delta_x = ABS(delta_x);
                 sel     = (u32)delta_x >> 15;
                 delta_y = g_AreaScrollTargetY - base[1];
-                if (delta_y < 0) {
-                    delta_y = -delta_y;
-                }
+                delta_y = ABS(delta_y);
                 span_y = (u32)delta_y >> 15;
                 if ((sel & BYTE_MASK) < (span_y & BYTE_MASK)) {
                     sel = span_y;
