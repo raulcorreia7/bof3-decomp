@@ -13,8 +13,8 @@ MATCH void func_801D639C(void) {
     choice = &D_80144953;
     Menu_DrawClutStrip(*choice);
     choice += 0x15;
-    record = (g_CharSlot[D_80144F5A[D_80148510]] * 0xA4) + choice;
-    switch (D_8014850E) {
+    record = (g_CharSlot[D_80144F5A[g_MenuPanelTasks[13].unk_0C]] * 0xA4) + choice;
+    switch (g_MenuPanelTasks[13].unk_0A) {
         case 0:
         default:
             group_index = 1;
@@ -41,25 +41,25 @@ MATCH void func_801D639C(void) {
             choice      = record + 0x13;
             break;
     }
-    D_801484CC = Item_GetDescription(group_index, *choice);
-    one        = 1;
-    D_80148624 = 1;
-    D_80148628 = D_80148508 + 6;
-    D_8014862A = (D_8014850A + (D_8014850E * 0xD + 0x57));
-    input      = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    g_MenuPanelTasks[11].unk_10 = Item_GetDescription(group_index, *choice);
+    one                         = 1;
+    g_MenuPanelTasks[21].active = 1;
+    g_MenuPanelTasks[21].x      = (u16)g_MenuPanelTasks[13].x + 6;
+    g_MenuPanelTasks[21].y      = (u16)(g_MenuPanelTasks[13].y + (g_MenuPanelTasks[13].unk_0A * 0xD + 0x57));
+    input                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        next_slot  = D_8014850E + 1;
-        D_8014850E = next_slot;
-        if ((next_slot & BYTE_MASK) >= 6U) {
-            D_8014850E = 1;
+        next_slot                   = g_MenuPanelTasks[13].unk_0A + 1;
+        g_MenuPanelTasks[13].unk_0A = next_slot;
+        if ((u32)(next_slot & BYTE_MASK) >= 6U) {
+            g_MenuPanelTasks[13].unk_0A = 1;
         }
     } else if (input & PADLup) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        prev_slot  = D_8014850E - 1;
-        D_8014850E = prev_slot;
+        prev_slot                   = g_MenuPanelTasks[13].unk_0A - 1;
+        g_MenuPanelTasks[13].unk_0A = prev_slot;
         if (!(prev_slot & BYTE_MASK)) {
-            D_8014850E = 5;
+            g_MenuPanelTasks[13].unk_0A = 5;
         }
     }
     slot_flag = func_801D70EC() & BYTE_MASK;
@@ -76,10 +76,10 @@ MATCH void func_801D639C(void) {
     }
     if (g_InputPressed & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        D_801485E7 = 1;
-        D_80148624 = 0;
-        D_8014850E = 0xFF;
-        D_80148654 = 0;
+        g_MenuPanelTasks[19].unk_0B = 1;
+        g_MenuPanelTasks[21].active = 0;
+        g_MenuPanelTasks[13].unk_0A = 0xFF;
+        D_80148654                  = 0;
         D_80148651 -= 5;
     }
 }

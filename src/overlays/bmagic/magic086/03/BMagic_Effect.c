@@ -20,7 +20,7 @@ MATCH void func_801EEE44(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEEE0);
+#include "overlays/bmagic/Effect_BrightenPalette.h"
 
 MATCH void func_801EEFF0(void) {
     PartyBattler* work;

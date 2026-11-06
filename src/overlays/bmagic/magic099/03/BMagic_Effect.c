@@ -21,7 +21,7 @@ MATCH void func_801EEF98(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFDC);
+#include "overlays/bmagic/Effect_BrightenPalette.h"
 
 MATCH void func_801EF0EC(void) {
     if (g_Task->unk_0B == 9) {

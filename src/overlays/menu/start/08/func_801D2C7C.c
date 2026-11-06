@@ -22,7 +22,7 @@ MATCH void func_801D2C7C(void) {
         }
         i++;
     }
-    D_8014854F          = 1;
-    g_BattleChoicePhase = 1;
-    D_80148597          = 1;
+    g_MenuPanelTasks[15].state = 1;
+    g_BattleChoicePhase        = 1;
+    D_80148597                 = 1;
 }

@@ -17,7 +17,7 @@ MATCH void func_8015920C(void) {
 
     advanced = 0;
     if (panel->unk_0A < ((s16)panel->unk_10 >> 4)) {
-        switch (panel->unk_00[2]) {
+        switch (panel->unk_02) {
             case 0:
                 if (panel->flags & 2) {
                     next_x = g_MenuPanelOrigins[16 + D_801490CE * 2] * 0x10;
@@ -43,7 +43,7 @@ MATCH void func_8015920C(void) {
     panel->y -= (s16)panel->unk_16 / 2;
 
     if (panel->unk_0B < ((s16)panel->unk_12 >> 4)) {
-        switch (panel->unk_00[2]) {
+        switch (panel->unk_02) {
             case 0:
                 if (panel->flags & 2) {
                     next_y = g_MenuPanelOrigins[17 + D_801490CE * 2] * 0x10;

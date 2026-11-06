@@ -9,7 +9,7 @@ MATCH void func_801D4FCC(void) {
     u32 group;
 
     func_801D4A44();
-    group = D_8014850E;
+    group = g_MenuPanelTasks[13].unk_0A;
     for (i = 0; i < 127; i++) {
         ids    = D_801C893C[group];
         mirror = D_801C8950[group];

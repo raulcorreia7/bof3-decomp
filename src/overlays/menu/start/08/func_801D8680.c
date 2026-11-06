@@ -14,28 +14,28 @@ NON_MATCHING void func_801D8680(void) {
     u8   tmp3;
 
     Menu_DrawClutStrip(D_80144953);
-    *(s16*)(&D_801484CC) = 0x18;
-    D_80148624           = 1;
-    val0                 = &D_801484CC + 0xEC;
-    D_801485C4           = 0xFF;
-    D_8014857C           = 0xFF;
-    D_80148628           = D_801485BC + 5;
-    D_8014862A           = D_801485BE + ((D_801485C3 * 0x10) + 0x1A);
-    tmp0                 = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
-    val1                 = D_8014857B == 3;
+    *(s16*)(&D_801484CC)        = 0x18;
+    g_MenuPanelTasks[21].active = 1;
+    val0                        = &D_801484CC + 0xEC;
+    g_MenuPanelTasks[18].unk_0C = 0xFF;
+    g_MenuPanelTasks[16].unk_0C = 0xFF;
+    g_MenuPanelTasks[21].x      = g_MenuPanelTasks[18].x + 5;
+    g_MenuPanelTasks[21].y      = g_MenuPanelTasks[18].y + ((g_MenuPanelTasks[18].unk_0B * 0x10) + 0x1A);
+    tmp0                        = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+    val1                        = g_MenuPanelTasks[16].unk_0B == 3;
     if (tmp0 & PADLup) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
-        tmp3       = D_801485C3 - 1;
-        D_801485C3 = tmp3;
+        tmp3                        = g_MenuPanelTasks[18].unk_0B - 1;
+        g_MenuPanelTasks[18].unk_0B = tmp3;
         if (tmp3 & 0x80) {
-            D_801485C3 = *(&D_801EC4A4 + ((val1 & BYTE_MASK) * 6)) - 1;
+            g_MenuPanelTasks[18].unk_0B = *(&D_801EC4A4 + ((val1 & BYTE_MASK) * 6)) - 1;
         }
     } else if (tmp0 & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
-        tmp2       = D_801485C3 + 1;
-        D_801485C3 = tmp2;
+        tmp2                        = g_MenuPanelTasks[18].unk_0B + 1;
+        g_MenuPanelTasks[18].unk_0B = tmp2;
         if ((*(&D_801EC4A4 + ((val1 & BYTE_MASK) * 6)) - 1) < (tmp2 & BYTE_MASK)) {
-            D_801485C3 = 0;
+            g_MenuPanelTasks[18].unk_0B = 0;
         }
     }
     if (D_80145AC2 & g_InputPressed) {
@@ -45,9 +45,9 @@ NON_MATCHING void func_801D8680(void) {
             func_801D9304((s32)tmp1);
             return;
         }
-        D_8014857D = 0xFF;
+        g_MenuPanelTasks[16].flags = 0xFF;
         D_80148652 += 1;
-        D_8014857C = s_SkillOrderCursors[D_80148656][D_8014857B];
+        g_MenuPanelTasks[16].unk_0C = s_SkillOrderCursors[D_80148656][g_MenuPanelTasks[16].unk_0B];
         return;
     }
     if (D_80145AC4 & g_InputPressed) {

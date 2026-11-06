@@ -11,7 +11,8 @@ INCLUDE_ASM(func_801EEC94);
 
 #include "overlays/bmagic/Effect_ReplacePaletteFade.h"
 
-INCLUDE_ASM(func_801EEF68);
+/* func_801EEF68 */
+#include "overlays/bmagic/Effect_BrightenPalette.h"
 
 #include "overlays/bmagic/Effect_NextStep.h"
 

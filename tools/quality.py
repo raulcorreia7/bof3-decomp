@@ -11,7 +11,8 @@ Metrics, counted inside ``MATCH`` function bodies unless noted:
 - ``addr``    matched functions still named ``func_<ADDR>``
 - ``names``   ``D_<ADDR>``, ``unk_<hex>`` and ``FIELD(...)`` tokens: an offset access is an unnamed
               member, so turning one into an ``unk_<OFF>`` member keeps the count; the
-              per-function ratchet also counts raw width casts the same way
+              per-function ratchet also counts raw width casts and constant indexes into a
+              byte-pointer local (``panel[0x10]``) the same way
 - ``casts``   lines with a raw width cast: ``*(u8 *)p``, ``((u8 *)p)[n]``, ``(u8 *)p + 0x10``
 - ``harmful`` ``MATCH_FAKE_PIN``, ``MATCH_REG``, ``MATCH_FAKE_OPAQUE``, ``MATCH_FAKE_USE``, ``CLOBBER_*``
 - ``notes``   ``FAKE:`` notes (whole file)
@@ -62,10 +63,12 @@ ADDR_NAME = re.compile(r"func_[0-9A-Fa-f]{8}")
 PLACEHOLDER = re.compile(r"\b(?:D_[0-9A-Fa-f]{8}|unk_[0-9A-Fa-f]+|FIELD(?=\s*\())\b")
 WIDTH = r"(?:volatile\s+)?(?:u|s)(?:8|16|32)\s*\*\s*"
 RAW_CAST = re.compile(
-    rf"\*\s*\(\s*{WIDTH}\)"  # *(u8 *)p
+    rf"\*\s*\(+\s*{WIDTH}\)"  # *(u8 *)p, *((u32 *)((u8 *)p + 4))
     rf"|\(\(\s*{WIDTH}\)[^()]*\)\s*\["  # ((u8 *)p)[n]
     rf"|\(\s*{WIDTH}\)\s*\w+\s*\+\s*(?:0x)?[0-9]"  # (u8 *)p + 0x10
 )
+# A byte-pointer local (`u8* panel`), whose constant indexes are unnamed members.
+BYTE_LOCAL = re.compile(r"\b[us]8\s*\*\s*(\w+)\s*[;=,)]")
 HARMFUL = re.compile(
     r"\b(?:MATCH_FAKE_PIN|MATCH_REG|MATCH_FAKE_OPAQUE|MATCH_FAKE_USE|CLOBBER_\w+)\b"
 )
@@ -235,9 +238,14 @@ def functions(
 
 
 def unnamed(body: str) -> int:
-    """Return the unnamed accesses in ``body``: placeholder tokens plus raw width casts, so a
-    byte view turned into an ``unk_<OFF>`` member keeps the count."""
-    return len(PLACEHOLDER.findall(body)) + len(RAW_CAST.findall(body))
+    """Return the unnamed accesses in ``body``: placeholder tokens, raw width casts and constant
+    indexes into a byte-pointer local, so a byte view turned into an ``unk_<OFF>`` member keeps
+    the count."""
+    views = sum(
+        len(re.findall(rf"\b{name}\s*\[\s*(?:0x[0-9A-Fa-f]+|[0-9]+)\s*\]", body))
+        for name in set(BYTE_LOCAL.findall(body))
+    )
+    return len(PLACEHOLDER.findall(body)) + len(RAW_CAST.findall(body)) + views
 
 
 def placeholders(

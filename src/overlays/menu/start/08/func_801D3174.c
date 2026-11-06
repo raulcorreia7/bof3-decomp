@@ -29,42 +29,42 @@ MATCH void func_801D3174(void) {
     *step = mode;
     base  = step;
     base -= 8;
-    D_801484CC = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][D_80148510]);
-    pad        = g_InputPressed;
+    g_MenuPanelTasks[11].unk_10 = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[13].unk_0C]);
+    pad                         = g_InputPressed;
     /* FAKE: keeps the pad load ahead of the panel stores. */
     MATCH_BARRIER();
-    D_80148624 = 1;
-    D_80148628 = D_80148508 + 7;
-    offset     = (D_80148510 - D_8014850F) * 13 + 0x1A;
-    D_8014862A = D_8014850A + offset;
-    trigger    = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    g_MenuPanelTasks[21].active = 1;
+    g_MenuPanelTasks[21].x      = (u16)g_MenuPanelTasks[13].x + 7;
+    offset                      = (D_80148510 - g_MenuPanelTasks[13].unk_0B) * 13 + 0x1A;
+    g_MenuPanelTasks[21].y      = (u16)g_MenuPanelTasks[13].y + offset;
+    trigger                     = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (trigger & PADLleft) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        D_80148514                      = 0x32;
-        s_ChoiceMenuCursors[D_8014850E] = D_80148510;
-        s_ChoiceMenuValues[D_8014850E]  = D_8014850F;
-        step_down                       = D_8014850E - 1;
-        D_8014850E                      = step_down;
+        g_MenuPanelTasks[13].unk_10                      = 0x32;
+        s_ChoiceMenuCursors[g_MenuPanelTasks[13].unk_0A] = D_80148510;
+        s_ChoiceMenuValues[g_MenuPanelTasks[13].unk_0A]  = g_MenuPanelTasks[13].unk_0B;
+        step_down                                        = g_MenuPanelTasks[13].unk_0A - 1;
+        g_MenuPanelTasks[13].unk_0A                      = step_down;
         if (step_down < 0) {
-            D_8014850E = 3;
+            g_MenuPanelTasks[13].unk_0A = 3;
         }
         /* Both step directions converge on the shared reload block. */
         goto store_selection;
     }
     if (trigger & PADLright) {
-        D_80148514 = 0x31;
+        g_MenuPanelTasks[13].unk_10 = 0x31;
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        s_ChoiceMenuCursors[D_8014850E] = D_80148510;
-        s_ChoiceMenuValues[D_8014850E]  = D_8014850F;
-        step_up                         = D_8014850E + 1;
-        D_8014850E                      = step_up;
-        if ((step_up & BYTE_MASK) >= 4U) {
-            D_8014850E = 0;
+        s_ChoiceMenuCursors[g_MenuPanelTasks[13].unk_0A] = D_80148510;
+        s_ChoiceMenuValues[g_MenuPanelTasks[13].unk_0A]  = g_MenuPanelTasks[13].unk_0B;
+        step_up                                          = g_MenuPanelTasks[13].unk_0A + 1;
+        g_MenuPanelTasks[13].unk_0A                      = step_up;
+        if ((u32)(step_up & BYTE_MASK) >= 4U) {
+            g_MenuPanelTasks[13].unk_0A = 0;
         }
     /* Shared tail of both cursor-step directions. */
     store_selection:
-        D_80148510 = s_ChoiceMenuCursors[D_8014850E];
-        D_8014850F = s_ChoiceMenuValues[D_8014850E];
+        g_MenuPanelTasks[13].unk_0C = s_ChoiceMenuCursors[D_8014850E];
+        g_MenuPanelTasks[13].unk_0B = s_ChoiceMenuValues[D_8014850E];
         return;
     }
     old_cursor = D_80148510;
@@ -72,29 +72,29 @@ MATCH void func_801D3174(void) {
         if (old_cursor != 0) {
             D_80148510 = old_cursor - 1;
         }
-        if (D_80148510 < D_8014850F) {
-            D_80148516 = 0xF0;
+        if (D_80148510 < g_MenuPanelTasks[13].unk_0B) {
+            g_MenuPanelTasks[13].unk_12 = 0xF0;
         }
     } else if (trigger & PADLdown) {
         if (old_cursor < 0x7F) {
             D_80148510 = old_cursor + 1;
         }
-        if (D_80148510 >= D_8014850F + 9) {
-            D_80148516 = 0x10;
+        if (D_80148510 >= g_MenuPanelTasks[13].unk_0B + 9) {
+            g_MenuPanelTasks[13].unk_12 = 0x10;
         }
     } else if (trigger & 4) {
-        u8 group = D_8014850F;
+        u8 group = g_MenuPanelTasks[13].unk_0B;
         if (group == 0) {
             D_80148510 = 0;
         } else if (group < 9) {
-            D_80148510 = old_cursor - group;
-            D_8014850F = 0;
+            D_80148510                  = old_cursor - group;
+            g_MenuPanelTasks[13].unk_0B = 0;
         } else {
             D_80148510 = old_cursor - 9;
             D_8014850F = group - 9;
         }
     } else if (trigger & 8) {
-        u8 group = D_8014850F;
+        u8 group = g_MenuPanelTasks[13].unk_0B;
         if (group == 0x77) {
             D_80148510 = 0x7F;
         } else if (group >= 0x6F) {
@@ -133,10 +133,10 @@ MATCH void func_801D3174(void) {
                             goto fail;
                         }
                     } else {
-                        saved      = base[0xC];
-                        D_80148656 = 0;
-                        D_80148624 = 0;
-                        counter    = D_80148651 + 4;
+                        saved                       = base[0xC];
+                        D_80148656                  = 0;
+                        g_MenuPanelTasks[21].active = 0;
+                        counter                     = D_80148651 + 4;
                         /* Both success arms converge on the commit block. */
                         goto commit;
                     }
