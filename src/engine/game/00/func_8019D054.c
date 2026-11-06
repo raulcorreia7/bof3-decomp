@@ -10,13 +10,13 @@ MATCH bool func_8019D054(s32 point_x, s32 point_y) {
     s32 y;
     s32 y2;
     s32 i;
-    s32 idx;
+    s32 index;
 
-    x   = point_x;
-    y   = point_y;
-    idx = func_801BDE14(x, y, 1) & BYTE_MASK;
-    if (idx != GAME_NONE) {
-        g_Actors[idx].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
+    x     = point_x;
+    y     = point_y;
+    index = func_801BDE14(x, y, 1) & BYTE_MASK;
+    if (index != GAME_NONE) {
+        g_Actors[index].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
     }
     x &= 0xFFFF0000;
     y &= 0xFFFF0000;

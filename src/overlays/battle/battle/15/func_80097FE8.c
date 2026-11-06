@@ -6,7 +6,7 @@ MATCH void func_80097FE8(void) {
     volatile u8* message_slot;
     volatile u8* active_selection_slot;
     u32          active_selection_flags;
-    u8           slot_index;
+    u8           entry_index;
     u8           eight;
 
     work                                = g_BattleChoicePanel;
@@ -18,11 +18,11 @@ MATCH void func_80097FE8(void) {
     g_BattleChoicePanel[0xB]            = 2u;
     message_slot                        = (u8*)(BATTLE_ACTIVE_MESSAGE_SLOT_PTR);
     active_selection_slot               = (u8*)(D_801EB4D8);
-    slot_index                          = message_slot[5];
+    entry_index                         = message_slot[5];
     g_BattleChoicePanel[0xD]            = 0xFFu;
     g_BattleChoicePanel[8]              = 2u;
     g_BattleChoicePanel[9]              = 0u;
-    g_BattleChoicePanel[0xA]            = slot_index;
+    g_BattleChoicePanel[0xA]            = entry_index;
     active_selection_flags              = *(u32*)((active_selection_slot + 0x10));
     VOL(u16, g_BattleChoicePanel[4])    = 0x140u;
     VOL(u16, g_BattleChoicePanel[6])    = 0x3Fu;

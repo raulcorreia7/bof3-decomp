@@ -144,15 +144,15 @@ typedef struct GameResetRecord {
 } GameResetRecord;
 
 typedef struct {
-    u8  cx;   /* 0x00 */
-    u8  cy;   /* 0x01 */
-    u16 key;  /* 0x02 */
-    u16 idx;  /* 0x04 */
-    u16 alt;  /* 0x06 */
-    u8  mode; /* 0x08 */
-    u8  span; /* 0x09 */
-    u8  kind; /* 0x0A */
-    u8  pad;  /* 0x0B */
+    u8  cx;    /* 0x00 */
+    u8  cy;    /* 0x01 */
+    u16 key;   /* 0x02 */
+    u16 index; /* 0x04 */
+    u16 alt;   /* 0x06 */
+    u8  mode;  /* 0x08 */
+    u8  span;  /* 0x09 */
+    u8  kind;  /* 0x0A */
+    u8  pad;   /* 0x0B */
 } GameLocale;
 
 ASSERT_SIZE(GameLocale, 0x0C);
@@ -558,7 +558,7 @@ void func_8015A944();
 s32  func_8015AC8C(s32);
 s32  func_8015B870(u8 value);
 void Party_ShowBattlers(void);
-s8   Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, u8 flags);
+s8   Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags);
 s32  func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 void func_8015D820(u16 cue_id, u8 index);
 void func_80164020(u32 arg0, u32 arg1);
@@ -807,7 +807,7 @@ u8*     func_801A4844(u8* script);
 void    func_801A4914(void);
 void    func_801A4990(u8* script);
 void    func_801A4AA8(void);
-void    func_801A4B80(s32 slot_index);
+void    func_801A4B80(s32 index);
 void    Area_SetCellCode(s16 column, s16 row, u8 code);
 u8*     func_801A4BF8(u8* script);
 void    func_801A50C0(u8* script);
@@ -879,9 +879,9 @@ void    func_801AD734(void);
 void    func_801AD90C(void);
 void    func_801AD9C4(void);
 void    func_801AD9F0(void);
-void    func_801ADAC0(s8 slot_index);
+void    func_801ADAC0(s8 actor_slot);
 s8      func_801ADC98(void);
-void    func_801ADCF4(u8 slot_index);
+void    func_801ADCF4(u8 actor_slot);
 void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend);
 u8*     func_801AF270(u8 sprite_id, u8 flags);
 void    UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
@@ -1079,7 +1079,7 @@ void    func_801C0D34(void);
 void    func_801C0D54(void);
 s32     func_801C0E48(void);
 s32     func_801C0F9C(u8 source_row);
-void    func_801C1254(s32 ability_id, s32 slot_index);
+void    func_801C1254(s32 ability_id, s32 party_slot);
 void    func_801C16B8(void);
 void    func_801C1840(void);
 void    func_801C1E88(s32 key, s32* counter);
@@ -1602,7 +1602,7 @@ static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 fla
 }
 
 /* Roll the selector-chosen setup path. */
-static inline void Game_RollAreaSetup(s32 slot_index) {
+static inline void Game_RollAreaSetup(s32 actor_slot) {
     u32 choice;
 
     choice = (u32)(RANDOM_MASK(0xF));
@@ -1635,7 +1635,7 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
                 g_Task->unk_04 = 2;
                 break;
             default:
-                func_801ADAC0(slot_index);
+                func_801ADAC0(actor_slot);
                 g_Task->unk_04 = 3;
                 break;
         }
@@ -1643,7 +1643,7 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
         if (choice >= 8) {
             func_801ADAC0(1);
         } else {
-            func_801ADAC0(slot_index);
+            func_801ADAC0(actor_slot);
         }
         g_Task->unk_04 = 3;
     }

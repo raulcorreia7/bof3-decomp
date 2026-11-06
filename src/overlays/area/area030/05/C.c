@@ -615,15 +615,15 @@ MATCH void func_800F7094(s32 x, s32 y, s32 kind, s32 value, u8 selected) {
 
 MATCH void func_800F7100(void) {
     s32           i;
-    s32           idx;
+    s32           list_index;
     unsigned char new_var;
     u8*           p;
     for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
-        idx = D_801E3134[g_GameContextKind][(s8)s_ListCursor];
-        if (D_801E2F7E[idx][i] == GAME_NONE) {
+        list_index = D_801E3134[g_GameContextKind][(s8)s_ListCursor];
+        if (D_801E2F7E[list_index][i] == GAME_NONE) {
             break;
         }
-        p       = D_801E2F7E[idx] + 3;
+        p       = D_801E2F7E[list_index] + 3;
         new_var = p[i] * ((s8)s_ListItemId);
         Item_Remove(ITEM_CAT_ITEM,
                     (D_801E2F7E[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]][i] + 0x38) & BYTE_MASK,

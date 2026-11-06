@@ -5,7 +5,7 @@
  * differs. resume: parameter locals in the retail s6/s3/s0/s4 order plus the present stack slot, then re-check the
  * jump-table placement. */
 #ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_slot, s32 equip_slot, u8 item_id) {
+NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32 equip_slot, u8 item_id) {
     Character* stats;
     u8         flags[4];
     u16        values[4];
@@ -14,7 +14,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_slot, s32 
     u8         category;
     u8         i;
 
-    stats = &g_Characters[character_slot & BYTE_MASK];
+    stats = &g_Characters[character_index & BYTE_MASK];
     switch (equip_slot & BYTE_MASK) {
         default:
             category = 0;
@@ -33,11 +33,11 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_slot, s32 
             category = 3;
             break;
     }
-    present = ((Item_GetEquipability(category, item_id) >> character_slot) ^ 1) & 1;
+    present = ((Item_GetEquipability(category, item_id) >> character_index) ^ 1) & 1;
     UI_DrawWindow((x + 3) & HALF_MASK, (y + 3) & HALF_MASK, 108, 48, present, D_80144952);
     clut = 0;
     if (present == 0) {
-        Char_PreviewEquip(character_slot, (equip_slot - 1) & BYTE_MASK, item_id, flags, values);
+        Char_PreviewEquip(character_index, (equip_slot - 1) & BYTE_MASK, item_id, flags, values);
         values[2] = values[3];
         flags[2]  = flags[3];
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {

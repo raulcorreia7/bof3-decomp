@@ -6,7 +6,7 @@
 /* conditionally zeroes one local status bit after a random gate,
  * otherwise passing through the signed damage value unchanged.
  */
-MATCH u32 func_801DC73C(s16 damage, u32 battler_index, u32 slot_index) {
+MATCH u32 func_801DC73C(s16 damage, u32 battler_index, u32 target_index) {
     u16 flags;
     s32 threshold;
     u32 index;
@@ -14,7 +14,7 @@ MATCH u32 func_801DC73C(s16 damage, u32 battler_index, u32 slot_index) {
      * swapped (retail scales in v1, keeps the index in v0). */
     MATCH_FAKE_PIN(u32, enemy_index, "v0");
 
-    index = slot_index;
+    index = target_index;
     if ((g_BattleState & BATTLE_STATE_CRITICAL) != 0u) {
         return (s32)damage;
     }

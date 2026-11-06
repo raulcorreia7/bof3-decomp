@@ -15,14 +15,14 @@
  * entry's `+0x0B` byte. */
 
 MATCH void func_801F4424(void) {
-    u8 slot_index;
+    u8 actor_slot;
 
-    slot_index    = Actor_FindFreeSlot();
-    D_1F800000[0] = slot_index;
-    if (slot_index == GAME_NONE) {
+    actor_slot    = Actor_FindFreeSlot();
+    D_1F800000[0] = actor_slot;
+    if (actor_slot == GAME_NONE) {
         return;
     }
-    g_ActorSlots[slot_index].flags   = 1;
+    g_ActorSlots[actor_slot].flags   = 1;
     g_ActorSlots[D_1F800000[0]].type = 0x54;
     g_ActorSlots[D_1F800000[0]].link = ((s32)(-((g_CurrentActor - (s32)g_Actors) * 0xD79435E5)) >> 3);
 }

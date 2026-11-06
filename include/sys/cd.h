@@ -44,9 +44,9 @@ s32     SND_RequestBgm(s32 requested);
 void    EMI_LoaderInit(void);
 /* EXE-side stream entry points. */
 /* func_80161FDC */
-void    EMI_LoaderStreamInitSlot(u32 slot_id);
+void    EMI_LoaderStreamInitSlot(u32 emi_id);
 /* func_80162160 */
-DiscLba EMI_LoaderSlotLba(EmiSlotId slot_id);
+DiscLba EMI_LoaderSlotLba(EmiSlotId emi_id);
 /* func_80162178 */
 void    EMI_LoaderBeginRead(void);
 /* func_801621E8 */

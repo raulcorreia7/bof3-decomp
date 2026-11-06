@@ -3,7 +3,7 @@
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 76.42%. resume: a lever or header fix that
  * closes the first mismatch. */
 #ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_slot, s32 equip_slot, u8 item_id) {
+NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s32 equip_slot, u8 item_id) {
     u8          stack_18[4];
     u16         stack_20[4];
     u8          stack_28;
@@ -32,7 +32,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_slot, s32
 
     val1      = x;
     val0      = y;
-    val9      = character_slot;
+    val9      = character_index;
     val5      = equip_slot;
     val4      = 0;
     character = &g_Characters[val9 & BYTE_MASK];

@@ -20,7 +20,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     u8  max_count;
     u8  max_rows;
     u8  accessory;
-    u8* slot_table;
+    u8* cursor;
     u8* text;
 
     UI_DrawWindow(panel_x, (panel_y + 1) & HALF_MASK, 0x8B, 0x9E, 0x80, (s32)D_80144952);
@@ -38,23 +38,23 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
         max_rows  = FISHING_STATE->y_38.pos_y;
         offset_y  = 0x19;
     }
-    slot       = 0;
-    row        = 0;
-    index      = 0;
-    text       = g_UiFormatBuffer;
-    slot_table = g_InventoryIds[3];
-    bar_x      = (s16)(panel_x + 5);
-    text_y     = 0;
-    row_y      = -2;
+    slot   = 0;
+    row    = 0;
+    index  = 0;
+    text   = g_UiFormatBuffer;
+    cursor = g_InventoryIds[3];
+    bar_x  = (s16)(panel_x + 5);
+    text_y = 0;
+    row_y  = -2;
     do {
-        accessory = *slot_table;
+        accessory = *cursor;
         if (D_801C9E8A[accessory * 0x14] == 0xA) {
             if ((row >= (s32)max_rows) && (index < (s32)max_count)) {
                 if (*D_80145E94 == 2) {
                     if (FISHING_STATE->counter_07 & 1) {
                         if (FISHING_STATE->step_14 == index) {
                             UI_DrawText(bar_x, bar_y, 7, 0xCU, (&g_Accessories[accessory]));
-                            UI_DrawText(bar_x, (s16)(text_y + row_y), 0, 0xCU, (&g_Accessories[*slot_table]));
+                            UI_DrawText(bar_x, (s16)(text_y + row_y), 0, 0xCU, (&g_Accessories[*cursor]));
                             if (g_InventoryCounts[3][slot] >= 2U) {
                                 sprintf((s8*)text, D_801D0C14, g_InventoryCounts[3][slot]);
                                 text_x = (s16)(panel_x + 0x68);
@@ -64,7 +64,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                         }
                     }
                 }
-                UI_DrawText(bar_x, bar_y, 0, 0xCU, (&g_Accessories[*slot_table]));
+                UI_DrawText(bar_x, bar_y, 0, 0xCU, (&g_Accessories[*cursor]));
                 if (g_InventoryCounts[3][slot] >= 2U) {
                     sprintf((s8*)text, D_801D0C14, g_InventoryCounts[3][slot]);
                     text_x = (s16)(panel_x + 0x68);
@@ -81,7 +81,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
             row += 1;
         }
         slot += 1;
-        slot_table += 1;
+        cursor += 1;
     } while (slot < 128);
     FISHING_STATE->unk_1C = row - 1;
     if (FISHING_STATE->step_14 >= index) {

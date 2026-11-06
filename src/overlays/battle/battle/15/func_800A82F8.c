@@ -1,14 +1,14 @@
 #include "battle_15.h"
 
 MATCH void func_800A82F8(void) {
-    s32 idx;
+    s32 index;
 
-    idx           = 0;
+    index         = 0;
     D_801463B8[0] = 0;
     if (g_BattleGeneCount[0] != 0) {
         do {
-            D_801463B8[0] = (D_801463B8[0] + D_800B4C7C[g_BattleGenes[idx & BYTE_MASK]]);
-            idx++;
-        } while ((u32)(idx & BYTE_MASK) < g_BattleGeneCount[0]);
+            D_801463B8[0] = (D_801463B8[0] + D_800B4C7C[g_BattleGenes[index & BYTE_MASK]]);
+            index++;
+        } while ((u32)(index & BYTE_MASK) < g_BattleGeneCount[0]);
     }
 }

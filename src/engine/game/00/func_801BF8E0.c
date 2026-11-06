@@ -4,7 +4,7 @@ MATCH void func_801BF8E0(void) {
     s32 count;
     s32 limit;
     s32 tmp;
-    s32 idx;
+    s32 index;
     s32 src;
     s32 dst;
     /* FAKE: dx pinned to a0, retail's register for the x delta; pure-C best 81.82%. */
@@ -21,23 +21,23 @@ MATCH void func_801BF8E0(void) {
     /* FAKE: retail frame reserves 16 bytes no statement uses; pure-C best 95.04%. */
     STACK_PADS(u8, 16);
 
-    idx   = 0;
+    index = 0;
     limit = g_PartySize;
     if (limit > 0) {
         count = limit;
         src   = 0;
         dst   = 0;
         do {
-            idx++;
+            index++;
             tmp                               = *(s32*)(D_80143F2C + src);
             *((s32*)((u8*)&D_80145EC4 + dst)) = tmp;
             tmp                               = *(s32*)(D_80143F30 + src);
             *((s32*)((u8*)&D_80145EC8 + dst)) = tmp;
             src += 2 * sizeof(s32);
             dst += BATTLE_PARTY_STRIDE;
-        } while (idx < count);
+        } while (index < count);
     }
-    idx   = 0;
+    index = 0;
     limit = g_PartySize;
     if (limit > 0) {
         key = D_80144F5A[0];
@@ -46,16 +46,16 @@ MATCH void func_801BF8E0(void) {
         dst = 0;
     loop:
         if (key != (&D_80145F09)[dst]) {
-            idx++;
+            index++;
             dst += BATTLE_PARTY_STRIDE;
-            if (idx < src) {
+            if (index < src) {
                 /* Retail tests the key at the loop head; a do/while measures 67.46%. */
                 goto loop;
             }
         }
     }
     if (!(g_BattleOptions & 2)) {
-        row              = idx * BATTLE_PARTY_STRIDE;
+        row              = index * BATTLE_PARTY_STRIDE;
         px               = &g_AreaScrollTargetX;
         dx               = *px;
         x                = *((s32*)((u8*)&D_80145EC4 + row));

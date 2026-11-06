@@ -5,20 +5,20 @@
  * three coordinate fields; a slot index of 0xFF is left untouched.
  */
 MATCH s32 func_8015CC00(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z) {
-    s32 slot_index;
+    s32 actor_slot;
     u32 offset;
 
-    slot_index = Actor_FindFreeSlot() & BYTE_MASK;
-    if (slot_index != GAME_NONE) {
-        offset                              = slot_index * 0x74u;
-        g_ActorSlots[slot_index].flags      = 1;
-        g_ActorSlots[slot_index].type       = 0x19;
-        g_ActorSlots[slot_index].unk_06     = id;
-        g_ActorSlots[slot_index].scene_step = (s8)step;
-        g_ActorSlots[slot_index].selection  = (s8)selection;
-        g_ActorSlots[slot_index].x.fixed    = x;
-        g_ActorSlots[slot_index].y.fixed    = y;
-        g_ActorSlots[slot_index].z.fixed    = z;
+    actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
+    if (actor_slot != GAME_NONE) {
+        offset                              = actor_slot * 0x74u;
+        g_ActorSlots[actor_slot].flags      = 1;
+        g_ActorSlots[actor_slot].type       = 0x19;
+        g_ActorSlots[actor_slot].unk_06     = id;
+        g_ActorSlots[actor_slot].scene_step = (s8)step;
+        g_ActorSlots[actor_slot].selection  = (s8)selection;
+        g_ActorSlots[actor_slot].x.fixed    = x;
+        g_ActorSlots[actor_slot].y.fixed    = y;
+        g_ActorSlots[actor_slot].z.fixed    = z;
     }
-    return slot_index;
+    return actor_slot;
 }

@@ -3,7 +3,7 @@
 /* nonmatching unmeasured: tried do-while(0) AID scope, a search over source rewrites: text_clut reused for the px copy (95.74), y/px/py
  * update orders. resume: py in s2 and the shaded byte in s3. */
 #ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s32 shaded, s32 unused) {
+NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused) {
     Character* stats;
     u32        clut;
     u32        text_clut;
@@ -19,7 +19,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s3
         y = py;
         px += 0x56;
         py += 2;
-        stats     = &g_Characters[character_slot];
+        stats     = &g_Characters[character_index];
         text_clut = px;
         Menu_DrawCharacterPortrait(text_clut & HALF_MASK, py & HALF_MASK, stats->character_id,
                                    (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
@@ -81,7 +81,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s3
     sprintf(g_UiFormatBuffer, D_801D0CF0, stats->stats.max_ap);
     UI_DrawGlyphString(x + 22, y + 39, clut, g_UiFormatBuffer);
     UI_DrawSpriteRun(x, y, D_801E547C, 0);
-    Menu_DrawExperienceLine(x + 0x14, y + 0x12, character_slot, stats->level, stats->exp);
+    Menu_DrawExperienceLine(x + 0x14, y + 0x12, character_index, stats->level, stats->exp);
 }
 #else
 /* blocker: register homes (py in s2, shaded byte in s3). */

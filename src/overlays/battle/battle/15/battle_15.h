@@ -784,7 +784,7 @@ void        func_800A5E54(void);
 void        func_800A5E98(void);
 void        func_800A5F80(void);
 void        func_800A5FF0(void);
-s32         func_800A6CF8(u8 selection_id, u8 slot_index);
+s32         func_800A6CF8(u8 selection_id, u8 column_index);
 u8          func_800A6D84(void);
 void        func_800A6E14(u8 value);
 void        func_800A7C14(u8 slot);
@@ -910,12 +910,12 @@ s32  func_801DD7D8(s32 low_bound, s32 high_bound, s32 current);
 /* Multiplies its inputs and divides by 100. */
 s16  func_801DE144(s32 factor_a, s32 factor_b);
 /* func_801DE8C0 */
-void BattleStageSelectionRingRecord(u32 slot_index, u32 record_kind, u8* text);
+void BattleStageSelectionRingRecord(u32 index, u32 record_kind, u8* text);
 /* PsyQ SDK primitive setup helpers called by this target.
  * SetSprt8 / SetSemiTrans are declared by <libgpu.h> (via common.h);
  * GFX_AddPrim is a game primitive-append helper declared by gfx/prim.h. */
 /* func_801DE94C */
-void BattleStageAttackNameMessage(u32 slot_index, s8 queue_kind);
+void BattleStageAttackNameMessage(u32 index, s8 queue_kind);
 /* func_801DEA64 */
 void BattleStageMessageResource(void* message_slot);
 s32  func_801DEE4C();
@@ -944,7 +944,7 @@ extern u32  func_800AD044(u32 bit_index);
 void        func_800AF2B4(BattleRange* target, s32 step);
 s32         func_800AF5FC(BattleRange* target, u32 extent);
 extern void func_800B1DAC(s16 x, s16 y, u8 sprite_arg);
-s32         func_801DDE7C(u8 slot_index, u16 packed_value);
+s32         func_801DDE7C(u8 index, u16 packed_value);
 extern u8   g_BattleUIStep_nv;
 
 /* Store half the calculated damage and queue its animation. */

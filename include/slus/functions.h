@@ -175,172 +175,172 @@ extern void  Party_HideBattlers(void);
 s32          Actor_GetType(void);
 void         func_8015C214(s32 slot, u8 value);
 /* func_8015C2D4 */
-s8           Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, s32 flags);
+s8          Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags);
 /* func_8015C540 */
-s8           Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, u8 flags);
+s8          Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags);
 /* func_8015C750 */
-s8           Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, s32 flags);
+s8          Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags);
 /* func_8015C940 */
-s32          Actor_RiseToGround(s32 entry, s32 dir_x, s32 dir_y, s32 vz_start, s16 vz_step);
+s32         Actor_RiseToGround(s32 entry, s32 dir_x, s32 dir_y, s32 vz_start, s16 vz_delta);
 /* func_8015C9CC */
-void         Actor_ApplyVelocity(void);
+void        Actor_ApplyVelocity(void);
 /* func_8015CA48 */
-s32          Actor_FindFree(void);
+s32         Actor_FindFree(void);
 /* func_8015CA9C */
-u16          Actor_ReadState(void);
+u16         Actor_ReadState(void);
 /* func_8015CD00 */
-void         SND_Init(void);
+void        SND_Init(void);
 /* func_8015CE70 */
-extern void  SND_Start(void);
+extern void SND_Start(void);
 /* func_8015CEBC */
-void         SND_Exit(void);
+void        SND_Exit(void);
 /* func_8015D300 */
-void         SND_PlaySequence(u16 group, s32 sequence, s32 left_volume, s32 right_volume);
+void        SND_PlaySequence(u16 group, s32 sequence, s32 left_volume, s32 right_volume);
 /* func_8015D404 */
-void         SND_StopSequence(s32 group, s16 sequence);
+void        SND_StopSequence(s32 group, s16 sequence);
 /* func_8015D438 */
-void         SND_SetSequenceVolume(s32 group, s16 sequence, s16 left_volume, s16 right_volume);
+void        SND_SetSequenceVolume(s32 group, s16 sequence, s16 left_volume, s16 right_volume);
 /* func_8015D49C */
-void         SND_FadeInSequence(s32 group, s16 sequence, s16 volume, s32 time);
+void        SND_FadeInSequence(s32 group, s16 sequence, s16 volume, s32 time);
 /* func_8015D4F8 */
-void         SND_StartDecrescendo(s32 group, s16 sequence, s16 volume, s32 time);
+void        SND_StartDecrescendo(s32 group, s16 sequence, s16 volume, s32 time);
 /* func_8015D554 */
-void         SND_FadeOutSequence(u32 effect_group, s32 effect_id, s32 cue_level, s32 cue_shape);
+void        SND_FadeOutSequence(u32 effect_group, s32 effect_id, s32 cue_level, s32 cue_shape);
 /* func_8015D5D8 */
-void         SND_StopAllSequences(void);
+void        SND_StopAllSequences(void);
 /* func_8015D660 */
-s32          SND_FindFreeFxVoice(u8* out_index, u8* out_seq);
+s32         SND_FindFreeFxVoice(u8* out_index, u8* out_seq);
 /* func_8015D71C */
-extern void  SND_QueueSelectionFx(s32 cue_id);
+extern void SND_QueueSelectionFx(s32 cue_id);
 /* func_8015D7C8 */
-void         SND_QueueCueVolume(s32 cue_id, s32 left_index, s32 right_index);
+void        SND_QueueCueVolume(s32 cue_id, s32 left_index, s32 right_index);
 /* func_8015DF18 */
-void         SND_PlayCue(u16 cue_id);
+void        SND_PlayCue(u16 cue_id);
 /* func_80161D20 */
-void         SND_PauseBgm(s32 cue_id);
+void        SND_PauseBgm(s32 cue_id);
 /* func_80161D74 */
-void         SND_ResumeBgm(s32 cue_id);
+void        SND_ResumeBgm(s32 cue_id);
 /* func_80161DC8 */
-void         SND_InstallSequenceFuncs(void);
+void        SND_InstallSequenceFuncs(void);
 /* func_80162D9C */
-void         EMI_LoaderIdle(void);
+void        EMI_LoaderIdle(void);
 /* func_80162DA4 */
-void         EMI_LoaderSetCDSpeed(void);
+void        EMI_LoaderSetCDSpeed(void);
 /* func_80162E18 */
-void         EMI_LoaderSeekCD(void);
+void        EMI_LoaderSeekCD(void);
 /* func_80162E70 */
-void         EMI_LoaderFinishSeek(void);
+void        EMI_LoaderFinishSeek(void);
 /* func_80162E98 */
-void         EMI_LoaderStartRead(void);
+void        EMI_LoaderStartRead(void);
 /* func_80162F04 */
-void         EMI_LoaderFinishRead(void);
+void        EMI_LoaderFinishRead(void);
 /* func_80162F34 */
-void         EMI_LoaderPauseCD(void);
+void        EMI_LoaderPauseCD(void);
 /* func_80162F88 */
-void         EMI_LoaderFinishPause(void);
+void        EMI_LoaderFinishPause(void);
 /* func_8016305C */
-void         EMI_LoaderServiceStream(void);
+void        EMI_LoaderServiceStream(void);
 /* func_80163238 */
-void         EMI_LoaderReadSector(void);
+void        EMI_LoaderReadSector(void);
 /* func_8016327C */
-void         EMI_LoaderStageSector(void);
+void        EMI_LoaderStageSector(void);
 /* func_80163378 */
-void         EMI_LoaderUploadSector(void);
+void        EMI_LoaderUploadSector(void);
 /* func_80163418 */
-void         EMI_LoaderTransferVabBody(void);
+void        EMI_LoaderTransferVabBody(void);
 /* func_80163744 */
-void         SND_ResolveXAStream(s32 stream_id);
+void        SND_ResolveXAStream(s32 stream_id);
 /* func_80163858 */
-void         SND_StoreXASyncResult(s32 intr, u8* result);
+void        SND_StoreXASyncResult(s32 intr, u8* result);
 /* func_801638B0 */
-void         SND_ServiceXA(void);
+void        SND_ServiceXA(void);
 /* func_801639B8 */
-void         SND_XaStateIdle(void);
+void        SND_XaStateIdle(void);
 /* func_801639D0 */
-void         SND_XaStateSeek(void);
+void        SND_XaStateSeek(void);
 /* func_80163A54 */
-void         SND_XaStateSeekResult(void);
+void        SND_XaStateSeekResult(void);
 /* func_80163AF0 */
-void         SND_XaStateRead(void);
+void        SND_XaStateRead(void);
 /* func_80163B74 */
-void         SND_XaStateReadProgress(void);
+void        SND_XaStateReadProgress(void);
 /* func_80163C58 */
-void         SND_XaStateReadResult(void);
+void        SND_XaStateReadResult(void);
 /* func_80163D20 */
-void         SND_XaStatePause(void);
+void        SND_XaStatePause(void);
 /* func_80163D80 */
-void         SND_XaStatePauseResult(void);
+void        SND_XaStatePauseResult(void);
 /* func_80163E3C */
-void         SND_XaStateWaitSync(void);
+void        SND_XaStateWaitSync(void);
 /* func_80163E88 */
-bool         SND_HasXACDError(void);
+bool        SND_HasXACDError(void);
 /* func_80163EB0 */
-void         SND_SetCDVolume(u8 volume);
+void        SND_SetCDVolume(u8 volume);
 /* func_80163F50 */
-void         SND_FadeCDVolume(s32 level);
+void        SND_FadeCDVolume(s32 level);
 /* func_80164028 */
-void         EMI_DecodeBegin(u8* dst);
+void        EMI_DecodeBegin(u8* dst);
 /* func_80164064 */
-s32          EMI_DecodeStep(void);
+s32         EMI_DecodeStep(void);
 /* Main-exe functions called by this overlay. */
 /* func_801647C4 */
-void         Menu_DrawCursorSprite(u16 x, u16 y, s32 unused);
+void        Menu_DrawCursorSprite(u16 x, u16 y, s32 unused);
 /* func_801651DC */
-s32          Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32 mode);
+s32         Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32 mode);
 /* func_801654B0 */
-s32          Char_AddWillpower(u8* value, u16 delta);
+s32         Char_AddWillpower(u8* value, u16 delta);
 /* func_80165E04 */
-s32          Item_GetKind(s32 category, s32 item_id);
+s32         Item_GetKind(s32 category, s32 item_id);
 /* func_80165EC0 */
-u8           Item_GetEquipability(u8 category, u8 item);
+u8          Item_GetEquipability(u8 category, u8 item);
 /* func_80165F68 */
-u32          Item_GetFlags(u32 category, u32 item);
+u32         Item_GetFlags(u32 category, u32 item);
 /* func_801660DC */
-s32          Char_GetAbilityElement(s32 ability_id);
+s32         Char_GetAbilityElement(s32 ability_id);
 /* func_80166140 */
-bool         Item_VitalHas(s32 item_id);
+bool        Item_VitalHas(s32 item_id);
 /* func_8016620C */
-void         TEXT_SetVariable(u8 slot, u8 length, const u8* text);
+void        TEXT_SetVariable(u8 slot, u8 length, const u8* text);
 /* func_80166438 */
-s32          Item_CountHeld(u32 category);
+s32         Item_CountHeld(u32 category);
 /* func_801664A0 */
-s32          Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode);
+s32         Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode);
 /* func_801665A0 */
-u8           Item_Remove(s32 category, u8 item, s32 amount, s32 unused);
+u8          Item_Remove(s32 category, u8 item, s32 amount, s32 unused);
 /* func_8016663C */
-s32          Party_SpendZenny(u32 amount, s32 unused);
+s32         Party_SpendZenny(u32 amount, s32 unused);
 /* func_8016666C */
-s32          Party_AddZenny(s32 amount, s32 skip_earned);
+s32         Party_AddZenny(s32 amount, s32 skip_earned);
 /* func_80166AE4: kind table for (source slot, group, table kind) */
-u8*          Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
+u8*         Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
-u8*          Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
+u8*         Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
 /* func_80166CB0 */
-s32          Area_GetCellCode(s32 x, s32 y);
+s32         Area_GetCellCode(s32 x, s32 y);
 /* func_80166CEC */
-void         Party_ClearBattlerState(s32 character_index);
+void        Party_ClearBattlerState(s32 character_index);
 /* func_80167344 */
-void         Area_DispatchScene(void);
+void        Area_DispatchScene(void);
 /* func_801673AC */
-void         Area_InitScene(void);
+void        Area_InitScene(void);
 /* func_80167848 */
-void         Area_SyncScrollHeight(void);
+void        Area_SyncScrollHeight(void);
 /* func_80167FDC */
-void         Char_AddHP(s32 amount, u8 char_id);
+void        Char_AddHP(s32 amount, u8 char_id);
 /* func_8016813C */
-s32          Char_LoseHP(s32 mode, s32 index);
+s32         Char_LoseHP(s32 mode, s32 index);
 /* func_80168248 */
-s32          Char_SpendAP(s32 requested, s32 character_id);
+s32         Char_SpendAP(s32 requested, s32 character_id);
 /* The libsnd internals have no header in this tree; s16 arguments as retail passes them. */
 /* func_80196CF0 */
-u8           GFX_StartPaletteAnimation(u8* owner, u8* source_table);
+u8          GFX_StartPaletteAnimation(u8* owner, u8* source_table);
 /* PsyQ entry points the LIBCD, LIBGTE, LIBETC and LIBC callers use. */
 /* func_800C3254 (boss055), func_8014CE48 (slus), func_801F3DCC (area198) */
-extern s32   Area_RoundSpriteCoordinate(s32 pair, s32 step);
+extern s32  Area_RoundSpriteCoordinate(s32 pair, s32 step);
 /* func_80167800 (slus), func_801BC3B8 (game) */
-void         Area_StepSceneTimer(void);
+void        Area_StepSceneTimer(void);
 /* func_8016788C (slus), func_801BC400 (game) */
-void         Area_ResetScene(void);
+void        Area_ResetScene(void);
 
 /* Main-exe polygon helper that fills the frame interior. */
 extern void func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);

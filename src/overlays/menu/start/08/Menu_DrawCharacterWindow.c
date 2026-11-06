@@ -3,7 +3,7 @@
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 70.90%. resume: a lever or header fix that
  * closes the first mismatch. */
 #ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 shaded, s32 unused) {
+NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused) {
     s16        val0;
     s16        val1;
     s16        val2;
@@ -33,7 +33,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 s
     val5 += 0x56;
     tmp1 = val5 & HALF_MASK;
     val1 += 2;
-    character = &g_Characters[character_slot];
+    character = &g_Characters[character_index];
     if (val6 == 0) {
         val11 = (character->status >> 6) & 2;
     } else {
@@ -134,7 +134,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 s
     sprintf((char*)val1, D_801D0C58, character->stats.max_ap);
     UI_DrawGlyphString((s16)val5, (s16)val10, val9, (u8*)val1);
     UI_DrawSpriteRun((s16)val7, val2, &D_801EC598, 0);
-    func_801DD6D0((val7 + 0x14) & HALF_MASK, (val2 + 0x12) & HALF_MASK, character_slot, character->level,
+    func_801DD6D0((val7 + 0x14) & HALF_MASK, (val2 + 0x12) & HALF_MASK, character_index, character->level,
                   character->exp);
 }
 #else

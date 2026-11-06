@@ -14,7 +14,7 @@ MATCH void Char_RebuildStats(Character* record) {
     s32 quot;
     s32 next;
     u16 cur;
-    u8  idx;
+    u8  index;
     u8* entry;
 
     *(CharacterAttributes*)&record->stats.max_hp = *(CharacterAttributes*)&record->base.max_hp;
@@ -58,9 +58,9 @@ MATCH void Char_RebuildStats(Character* record) {
         Char_AddResistance(&record->stats.resistances[8], 2);
     }
 
-    for (idx = 0; idx < 8; idx++) {
-        if (record == &g_Characters[idx]) {
-            entry = D_8014866C + idx * 5;
+    for (index = 0; index < 8; index++) {
+        if (record == &g_Characters[index]) {
+            entry = D_8014866C + index * 5;
             if (record->stats.surprise_chance != 0) {
                 Char_AddPercent(&record->stats.surprise_chance, entry[0]);
             }

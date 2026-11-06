@@ -7,7 +7,7 @@
 #include "overlays/scenario/scenario.h"
 
 /* The handler ABI of the dispatch table at D_801FE46C: seven arguments, a byte result. */
-typedef s8 (*Scena06Handler)(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, u8 flags);
+typedef s8 (*Scena06Handler)(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags);
 
 extern u8  D_80144DF2;
 extern u8  D_80144DF5;

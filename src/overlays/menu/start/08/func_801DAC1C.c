@@ -13,7 +13,7 @@ NON_MATCHING void func_801DAC1C(void) {
     u8  count;
     u8  row;
     u8  col;
-    u8  idx;
+    u8  panel_index;
     u32 bit;
     u32 limit;
     u32 group_base;
@@ -34,8 +34,8 @@ NON_MATCHING void func_801DAC1C(void) {
             limit      = 6;
             break;
     }
-    bit = 1;
-    idx = 0;
+    bit         = 1;
+    panel_index = 0;
     for (row = 0; row < 3; row++) {
         table = &D_801ED680[row * 3];
         for (col = 0; col < 3; col++) {
@@ -45,23 +45,23 @@ NON_MATCHING void func_801DAC1C(void) {
                 table[col] = 0;
             }
             if (col != 0) {
-                if ((bit & D_80144F59) != 0 && idx < limit) {
+                if ((bit & D_80144F59) != 0 && panel_index < limit) {
                     table[col]       = 1;
-                    panel            = &D_801484E0 + idx * 0x24;
+                    panel            = &D_801484E0 + panel_index * 0x24;
                     panel[1]         = 6;
                     panel[2]         = 0xB;
                     panel[3]         = 2;
                     ((u16*)panel)[2] = (u16)((col - 1) * 0x4B + 0x140);
-                    panel[0xA]       = (u8)(group_base + idx);
+                    panel[0xA]       = (u8)(group_base + panel_index);
                     panel[0]         = 1;
                     ((u16*)panel)[3] = (u16)(row * 0x36 + 0x3E);
-                    panel[0xB]       = idx;
+                    panel[0xB]       = panel_index;
                     panel[0xC]       = 0;
                     ((u16*)panel)[8] = 0xE00;
                 } else {
                     table[col] = 0;
                 }
-                idx++;
+                panel_index++;
                 bit *= 2;
             }
         }

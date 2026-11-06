@@ -1,11 +1,11 @@
 #include "game_00.h"
 
 MATCH void GFX_UpdatePaletteAnimations(void) {
-    u8 slot_index;
+    u8 palette_slot;
 
-    for (slot_index = 0u; slot_index < 8u; slot_index++) {
-        if ((D_80145D94[slot_index].flags & 1u) != 0u) {
-            GFX_StepPaletteAnimation(slot_index);
+    for (palette_slot = 0u; palette_slot < 8u; palette_slot++) {
+        if ((D_80145D94[palette_slot].flags & 1u) != 0u) {
+            GFX_StepPaletteAnimation(palette_slot);
         }
     }
 }
