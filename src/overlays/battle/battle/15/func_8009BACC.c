@@ -29,8 +29,6 @@ MATCH s32 func_8009BACC(s32 diff) {
             break;
         }
     }
-    if (result > 0x40) {
-        result = 0x40;
-    }
+    result = MIN(result, 0x40);
     return result;
 }

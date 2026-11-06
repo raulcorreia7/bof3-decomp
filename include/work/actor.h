@@ -45,12 +45,10 @@
     g_Task->tint.bytes.unk_5E = 0; \
     g_Task->tint.bytes.unk_5F = 0
 
-/* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the
- * row's palette pair; bit 3 marks selection voices queued on the row
- * (@source: write:SND_QueueSelectionFx@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes the advance-stream tail after the step
- * deltas; bit 5 makes the row's primitives semi-transparent; bit 6 hides the
- * row from the draw, walkability and entity-lookup paths; bit 7 marks a row
- * culled outside the window. */
+/* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the row's palette pair; bit 3 marks selection
+ * voices queued on the row (@source: write:SND_QueueSelectionFx@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes
+ * the advance-stream tail after the step deltas; bit 5 makes the row's primitives semi-transparent; bit 6 hides the row
+ * from the draw, walkability and entity-lookup paths; bit 7 marks a row culled outside the window. */
 typedef enum ActorFlags {
     ACTOR_FLAG_IN_USE             = 1 << 0,
     ACTOR_FLAG_SKIP_PALETTE_STAGE = 1 << 1,
@@ -189,8 +187,8 @@ typedef struct Actor {
     u16            unk_2E;            /* 0x2E - area032 calls it the marker's screen x */
     u16            unk_30;            /* 0x30 - area032 calls it the marker's screen y */
     u16            unk_32;            /* 0x32 */
-    Vec3Coord      pos;               /* 0x34; z integer is ground height */
-    Vec2S32        scale;             /* 0x40 16.16; 0x10000 is full size */
+    WorldPos       pos;               /* 0x34; z integer is ground height */
+    SpriteScale    scale;             /* 0x40 16.16; 0x10000 is full size */
     u8             unk_48;            /* 0x48 - commu00 calls it the reset flag */
     u8             unk_49;            /* 0x49 */
     u8             unk_4A;            /* 0x4A - the world slot mode seed */

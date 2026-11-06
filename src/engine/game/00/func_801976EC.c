@@ -38,7 +38,7 @@ MATCH void func_801976EC(void) {
     if (*request != 0u) {
         pending  = &D_8014504A;
         *request = 0u;
-        if ((*pending == 0u) && ((g_GameRequestFlags & 1u) || (LOHU(g_GameAreaId) == 0xBDu))) {
+        if ((*pending == 0u) && ((g_GameRequestFlags & 1u) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP))) {
             *pending   = 1u;
             D_80145040 = D_80145EC4;
             D_80145044 = D_80145EC8;

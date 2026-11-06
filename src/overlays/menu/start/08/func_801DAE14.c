@@ -18,10 +18,10 @@ extern u8  D_801ED694[][2];
 extern u8  D_801ED695[][2];
 extern u8  D_801ED69C;
 
-/* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to g_MenuPanelTasks[12].unk_0A,
- * for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv (85.21), 15 min of rewrite search
- * (type hacks). resume: j must be a preheader-initialised biv with addiu v1,v1,2 in the branch delay slot and i++ after
- * the volatile load. */
+/* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to
+ * g_MenuPanelTasks[12].unk_0A, for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv
+ * (85.21), 15 min of rewrite search (type hacks). resume: j must be a preheader-initialised biv with addiu v1,v1,2 in
+ * the branch delay slot and i++ after the volatile load. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DAE14(void) {
     s32 count;
@@ -33,7 +33,7 @@ NON_MATCHING void func_801DAE14(void) {
     volatile u8* flags;
     volatile u8* total;
 
-    count  = Party_CountOrder(0);
+    count  = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     flags  = &D_801484EA;
     *flags = 0;
     offset = 0;

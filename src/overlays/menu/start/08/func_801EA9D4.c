@@ -6,7 +6,7 @@ MATCH void func_801EA9D4(void) {
     task = g_MenuCurrentPanel;
     task->pos.x -= MENU_PANEL_STEP_X;
     if ((s16)task->pos.x < 150) {
-        LOH(task->pos.x) = 150;
-        task->state      = 0;
+        task->pos.x = 150;
+        task->state = 0;
     }
 }

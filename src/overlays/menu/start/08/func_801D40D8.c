@@ -13,8 +13,8 @@ extern u16 D_8014862A;
 extern u8* D_801C893C[];
 extern u8* D_801C8950[];
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 75.37%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 75.37%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D40D8(void) {
     u8*  flag;

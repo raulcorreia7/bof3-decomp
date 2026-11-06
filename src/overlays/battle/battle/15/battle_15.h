@@ -535,9 +535,9 @@ extern u8                                D_8014630C[];
 extern BattleSelectionState              D_801462F0_state;
 /* D_80146374 */
 extern volatile u8                       g_BattleActiveBattler;
-/* Per-access views of a symbol at the same address, named by an
- * `alias = true` row in config/symbols.toml (this image's table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for
- * one cell use them; a cast of the canonical symbol merges the pair and changes the bytes. */
+/* Per-access views of a symbol at the same address, named by an `alias = true` row in config/symbols.toml (this image's
+ * table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for one cell use them; a cast of the
+ * canonical symbol merges the pair and changes the bytes. */
 extern u8                                g_BattleActiveBattler_nv;
 /* D_80146394 */
 extern volatile u8                       g_BattleTarget;
@@ -916,7 +916,7 @@ extern u8   g_BattleUIStep_nv;
 static inline void BattleApplyHalfDamage(s32 anim) {
     s32 half;
 
-    half                            = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, 0xFFFF) / 2;
+    half = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, BATTLE_ELEMENT_FROM_WEAPON) / 2;
     g_BattleTargetRecord->hp_change = half;
     if (half != 0) {
         func_800A4238(anim);

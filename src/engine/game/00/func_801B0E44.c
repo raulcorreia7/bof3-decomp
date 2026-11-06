@@ -66,9 +66,7 @@ NON_MATCHING s32 func_801B0E44(void) {
                 y = ((s16*)pos2)[-1];
             } else {
                 diff = COORD_INT(g_Task->depth) - (s16)result;
-                if (diff < 0) {
-                    diff = -diff;
-                }
+                diff = ABS(diff);
                 if (diff >= 0x81) {
                     if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
                         g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;

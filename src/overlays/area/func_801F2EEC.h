@@ -1,4 +1,5 @@
-/* Each image header names its step table in FUNC_801F2EEC_TABLE. One definition shared by the area overlays; every change here must verify every member. */
+/* Each image header names its step table in FUNC_801F2EEC_TABLE. One definition shared by the area overlays; every
+   change here must verify every member. */
 MATCH void func_801F2EEC(void) {
     s32    x;
     s32    y;

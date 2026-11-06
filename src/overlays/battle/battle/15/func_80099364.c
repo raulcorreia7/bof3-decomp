@@ -1,14 +1,13 @@
 #include "battle_15.h"
 
-/* nonmatching 61.07%: tried ternary polarity; panel s1 local sunk to first use (59.23% -> 61.07%); frame/saved-reg
- * set matched; a 3x10min search over source rewrites (best 70.54% with a private unsigned char D_801485E0 extern that narrows battle_15.h's
- * volatile u16; dropped: retail stores halfwords at 0x801485E0/E2 (sh at +0x80099400/+0x8009940c), so that form breaks
- * behavior); a register pin on flag (a0/v0) had no effect at the residual site. a second search (15min, 263k
- * rewrites) from this draft: best 75.00% (99/132, +12), residual moves to +0x00c8 opcode (lhu v0,0(s0) vs li v0,255
- * shape); non-exact and not adopted pending a clean-C89 restatement.
- * resume: restate the rank-1 form as clean C89 and attack the +0x00c8 hunk, or the register-pair form that loads
- * D_80148627 after the D_801EB5B4 store (retail order +0x003c..0x0064), or an approved register pin targeting the
- * s1-setup hoist. */
+/* nonmatching 61.07%: tried ternary polarity; panel s1 local sunk to first use (59.23% -> 61.07%); frame/saved-reg set
+ * matched; a 3x10min search over source rewrites (best 70.54% with a private unsigned char D_801485E0 extern that
+ * narrows battle_15.h's volatile u16; dropped: retail stores halfwords at 0x801485E0/E2 (sh at
+ * +0x80099400/+0x8009940c), so that form breaks behavior); a register pin on flag (a0/v0) had no effect at the residual
+ * site. a second search (15min, 263k rewrites) from this draft: best 75.00% (99/132, +12), residual moves to +0x00c8
+ * opcode (lhu v0,0(s0) vs li v0,255 shape); non-exact and not adopted pending a clean-C89 restatement. resume: restate
+ * the rank-1 form as clean C89 and attack the +0x00c8 hunk, or the register-pair form that loads D_80148627 after the
+ * D_801EB5B4 store (retail order +0x003c..0x0064), or an approved register pin targeting the s1-setup hoist. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80099364(void) {
     u8* state;

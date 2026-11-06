@@ -19,7 +19,7 @@ MATCH u8* func_801A4400(u8* script) {
             (*(s16*)&D_8014820C) = value;
             break;
         case 0xFA:
-            value = LOBU(g_SceneState.scenario_id);
+            value = g_SceneState.scenario_id;
             script += 1;
             (*(s16*)&D_8014820C) = (s8)value;
             break;

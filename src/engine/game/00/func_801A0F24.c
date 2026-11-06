@@ -23,7 +23,7 @@ MATCH void func_801A0F24(Actor* record) {
                 if (D_801C83BC[spad_b->header.step](record, param, 2) & BYTE_MASK) {
                     result = func_801A2DB4(record);
                     if (g_Task->unk_09 != 0) {
-                        record->unk_7B = (RANDOM_MASK(3)) + 3;
+                        record->unk_7B = RANDOM_MASK(3) + 3;
                     }
                 } else {
                     result = 0xFF;

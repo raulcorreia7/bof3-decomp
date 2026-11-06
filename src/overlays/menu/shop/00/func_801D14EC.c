@@ -11,7 +11,7 @@ NON_MATCHING void func_801D14EC(void) {
 
     if (D_801E6058 != 0) {
         i = 0;
-        while (i < (u8)Party_CountOrder(0)) {
+        while (i < (u8)Party_CountOrder(PARTY_ORDER_KIND_WALKING)) {
             panel            = &g_MenuPanelTasks[i + 3];
             panel->pos.y.raw = i * 54 + 62;
             panel->unk_0A    = i;

@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-/* The retail code never reads $a0 or $a1; the callers' arguments are leftover register values kept in the prototypes. */
+/* The retail code never reads $a0 or $a1; the callers' arguments are leftover register values kept in the prototypes.
+*/
 MATCH s32 func_801B6470(void) {
     u16 world_id;
     s32 index;
@@ -10,7 +11,7 @@ MATCH s32 func_801B6470(void) {
     s32 y;
 
     if ((g_GameFlags & 0x4000) == 0 && (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 0xC) {
-        if (LOHU(g_GameAreaId) != 0xBD) {
+        if (LOHU(g_GameAreaId) != AREA_ID_DESERT_OF_DEATH_MAP) {
             if ((func_801B6610(D_80145EC6, D_80145ECA) & BYTE_MASK) != 0) {
                 return 0;
             }

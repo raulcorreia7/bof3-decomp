@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* The flag word is reached through the non-volatile FrontendStep view; the volatile g_UiWindowChannel spelling changes the
- * load/store sequence. */
+/* The flag word is reached through the non-volatile FrontendStep view; the volatile g_UiWindowChannel spelling changes
+ * the load/store sequence. */
 
 /* when D_80148357 is 4, arms the mode byte D_801490A0 with 2, clears
  * g_UiWindowStep and sets bit 7 of g_UiWindowChannel while the shared area request slot

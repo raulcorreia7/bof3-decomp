@@ -1,7 +1,7 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 47.52%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 47.52%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
     s16   val0;
@@ -162,9 +162,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
         }
     block_41:
         val8 = Area_ReadHeight(val3, val4) - val0;
-        if (val8 < 0) {
-            val8 = -val8;
-        }
+        val8 = ABS(val8);
         if (val8 >= 0xC1) {
             return 1;
         }

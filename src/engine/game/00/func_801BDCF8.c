@@ -9,9 +9,7 @@ MATCH s16 func_801BDCF8(s32 x, s32 y) {
     limit = COORD_INT(g_Task->pos.z);
     delta = limit;
     delta -= value;
-    if (delta < 0) {
-        delta = -delta;
-    }
+    delta = ABS(delta);
     delta = delta < 0x101;
     if (!delta) {
         value = limit;

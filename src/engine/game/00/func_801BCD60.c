@@ -1,7 +1,7 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 50.00%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 50.00%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
     s8    stack_10;
@@ -61,9 +61,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         if (tmp7 < 0) {
             val1 = -val1;
         }
-        if (val12 < val1) {
-            val12 = val1;
-        }
+        val12 = MAX(val12, val1);
         if (val12 > 0xFFFFF) {
             val3 = ((s32)(val12 + 0xFFF10000) >> 0x10) + 1;
         } else {
@@ -74,9 +72,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         val0 <<= 0x10;
         val0 = (s16)(val0 >> 0x10);
         val0 -= Area_ReadHeight(stack_18, stack_20);
-        if (val0 < 0) {
-            val0 = -val0;
-        }
+        val0 = ABS(val0);
         val0 = (s16)(val0 >> 8);
         val3 -= val0;
         val6 = val3;
@@ -178,14 +174,10 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         if (val6 != 0) {
             tmp9  = g_Task;
             val10 = FIELD(s32, tmp9, 0x34u) - D_80145EC4;
-            if (val10 < 0) {
-                val10 = -val10;
-            }
+            val10 = ABS(val10);
             if (val10 <= 0x60000) {
                 val11 = FIELD(s32, tmp9, 0x38u) - D_80145EC8;
-                if (val11 < 0) {
-                    val11 = -val11;
-                }
+                val11 = ABS(val11);
                 if (val11 > 0x60000) {
                     goto block_39; /* retail branch */
                 }

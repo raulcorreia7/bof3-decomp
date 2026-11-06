@@ -20,7 +20,7 @@ MATCH void func_801D177C(void) {
         Char_RebuildStats(&g_Characters[g_CharSlot[g_PartyWalkOrder[i]]]);
     }
     i = 0;
-    while (i < (Party_CountOrder(0) & BYTE_MASK)) {
+    while (i < (Party_CountOrder(PARTY_ORDER_KIND_WALKING) & BYTE_MASK)) {
         s_PartyCharacterIds[i] = g_PartyWalkOrder[i];
         D_801ED613[i]          = g_PartyBattleOrder[i];
         i++;
@@ -36,7 +36,7 @@ MATCH void func_801D177C(void) {
         if (chr->hp < (chr->stats.max_hp >> 2)) {
             chr->status |= STATUS_LOW_HP;
         } else {
-            chr->status &= 0xDFFF;
+            chr->status &= ~STATUS_LOW_HP;
         }
         chr++;
     }

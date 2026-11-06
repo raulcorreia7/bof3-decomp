@@ -27,7 +27,5 @@ MATCH void func_800A0D64(void) {
         g_BattleTargetRecord->hp_change -= D_801EB6D6[battler - 3u][0];
     }
     record = g_BattleTargetRecord;
-    if (record->hp_change < 0) {
-        record->hp_change = 0;
-    }
+    CLAMP_MIN(record->hp_change, 0);
 }

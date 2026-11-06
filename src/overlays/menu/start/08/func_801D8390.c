@@ -8,8 +8,8 @@ typedef struct Start08PanelHead {
     u8  unk_110;
 } Start08PanelHead;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 88.89%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 88.89%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8390(void) {
     s16* panel;
@@ -31,7 +31,7 @@ NON_MATCHING void func_801D8390(void) {
     g_MenuPanelTasks[21].pos.y  = g_MenuPanelTasks[16].pos.y + 7;
     pad                         = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
     g_MenuPanelTasks[16].flags  = 0xFF;
-    count                       = Party_CountOrder(0);
+    count                       = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     if (pad & PADLup) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         g_MenuPanelTasks[16].unk_0A -= 1;

@@ -1,4 +1,5 @@
-/* Ages and draws the spawn discs and frees the spent ones; returns whether any was active. Every change here must verify every member. */
+/* Ages and draws the spawn discs and frees the spent ones; returns whether any was active. Every change here must
+   verify every member. */
 /* func_801F5308 (area098), func_801F3E7C (area188), func_801F3984 (area172) */
 MATCH s32 Area_StepSpawnSlots(void) {
     MATRIX         camera;

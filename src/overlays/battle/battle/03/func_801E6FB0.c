@@ -10,7 +10,7 @@ MATCH void func_801E6FB0(void) {
     if ((g_BattleState & BATTLE_STATE_EFFECT_LOADING) &&
         ((D_801EB4E0->slot == g_BattleActiveBattler) ||
          ((LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) &&
-          ((LOHU(g_BattleActionId) == 0x97) || (LOHU(g_BattleActionId) == 0xE1))))) {
+          ((LOHU(g_BattleActionId) == ABILITY_ACCESSION) || (LOHU(g_BattleActionId) == ABILITY_TEMPTATION))))) {
         g_Task->header.mode += 1;
         return;
     }
@@ -29,7 +29,7 @@ MATCH void func_801E6FB0(void) {
     } else {
         g_Task->timer -= 1;
     }
-    slot = LOBU(D_801EB4E0->slot);
+    slot = D_801EB4E0->slot;
     if (BATTLER_IS_PLAYER(slot)) {
         flags = g_BattlePartyBattlers[slot].chr.status;
     } else {

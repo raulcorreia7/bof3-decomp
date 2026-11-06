@@ -28,7 +28,7 @@ MATCH void func_801D543C(void) {
             Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
             panel_timer = 8;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_NO_SAVE_FILE));
-            func_801DDFB0(0x62, 0x4C, D_801E60F8, LOBU(g_SaveCardPort), 1);
+            func_801DDFB0(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
             g_SaveSlotCount             = 3;
             D_801E60FC                  = 0xF;
             D_8014865B                  = 0;
@@ -55,7 +55,7 @@ MATCH void func_801D543C(void) {
             Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
             panel_timer = 8;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_INIT_COMPLETE));
-            func_801DDFB0(0x62, 0x4C, D_801E60F8, LOBU(g_SaveCardPort), 1);
+            func_801DDFB0(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);
             g_SaveSlotCount             = 3;
             D_801E60FC                  = 0xF;
             D_8014865B                  = 0;

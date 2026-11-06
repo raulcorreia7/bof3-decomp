@@ -54,16 +54,12 @@ MATCH void func_8019BBA4(void) {
         }
         if ((g_Task->unk_18 == 0) && (g_Task->vz == 0)) {
             limit = g_Task->vx;
-            if (limit < 0) {
-                limit = -limit;
-            }
+            limit = ABS(limit);
             if (limit >= 16385) {
                 g_Task->header.mode = 4;
             } else {
                 limit = g_Task->vy;
-                if (limit < 0) {
-                    limit = -limit;
-                }
+                limit = ABS(limit);
                 if (limit >= 16385) {
                     g_Task->header.mode = 4;
                 } else if ((func_8019C4F0(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) != 0) {

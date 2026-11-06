@@ -27,8 +27,8 @@ MATCH void func_801DE944(void) {
     EMI_LoaderStreamFamily(party[0], g_PartyWalkOrder[1], g_PartyWalkOrder[2], 0);
     if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 0x77) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) ||
         g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
-        g_PartySize = Party_CountOrder(0);
-        Party_BuildBattlers(0);
+        g_PartySize = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+        Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
         i = 0;
         if (i < g_PartySize) {
             row = 0;

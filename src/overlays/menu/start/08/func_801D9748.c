@@ -14,8 +14,8 @@ extern s16 D_801485BE;
 extern u8  D_80148654;
 extern u8  D_801ED68C;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 92.47%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 92.47%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D9748(void) {
     volatile u8*   record;

@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 28.57%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 28.57%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4) {
     s16       tmp0;

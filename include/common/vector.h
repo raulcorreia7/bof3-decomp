@@ -40,6 +40,12 @@ typedef struct Vec3Coord {
     Coord z;
 } Vec3Coord;
 
+/* Where an actor or effect stands: x, y and z in 16.16 world units. */
+typedef Vec3Coord WorldPos;
+
+/* A sprite's horizontal and vertical size, 16.16; 0x10000 is full size. */
+typedef Vec2S32 SpriteScale;
+
 ASSERT_SIZE(Vec3Coord, 0x0C);
 ASSERT_OFFSET(Vec3Coord, x, 0x00);
 ASSERT_OFFSET(Vec3Coord, y, 0x04);

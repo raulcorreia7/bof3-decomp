@@ -7,9 +7,9 @@ MATCH void func_800A2598(void) {
 
     mode = LOBU(g_BattleTarget);
     if (mode < 3u) {
-        g_BattleTargetRecord->hp_change = Battle_CalcDamage(g_BattleActiveBattler, mode, 0xFFFF);
+        g_BattleTargetRecord->hp_change = Battle_CalcDamage(g_BattleActiveBattler, mode, BATTLE_ELEMENT_FROM_WEAPON);
     } else {
-        g_BattleTargetRecord->hp_change = Battle_CalcDamage(g_BattleActiveBattler, mode, 0xFFFF);
+        g_BattleTargetRecord->hp_change = Battle_CalcDamage(g_BattleActiveBattler, mode, BATTLE_ELEMENT_FROM_WEAPON);
         slot                            = LOBU(g_BattleTarget);
         slot -= 3;
         if (g_BattleEnemyBattlers[slot].enemy_id.byte.family == 4) {

@@ -1,9 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* on the first call zeroes the step index and unpacks three fields from the word at 0x80146458; every call
- * marks slot g_EmiRingSlot ready in g_EmiRingStates, writes the slot's dispatch word into g_EmiStep+76, advances the step
- * index (wrapping and bumping D_8018B4A4 at the limit) and increments the step counter at g_EmiStep.
- */
+/* on the first call zeroes the step index and unpacks three fields from the word at 0x80146458; every call marks slot
+ * g_EmiRingSlot ready in g_EmiRingStates, writes the slot's dispatch word into g_EmiStep+76, advances the step index
+ * (wrapping and bumping D_8018B4A4 at the limit) and increments the step counter at g_EmiStep. */
 MATCH void EMI_LoaderLoadGraphics(void) {
     u32* loader_step;
     u32* dispatches;

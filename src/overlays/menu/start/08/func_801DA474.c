@@ -2,8 +2,8 @@
 
 extern s8 D_80148658;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 75.25%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 75.25%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DA474(void) {
     s32          val0;
@@ -48,7 +48,7 @@ NON_MATCHING void func_801DA474(void) {
     }
     g_MenuPanelTasks[11].unk_10 = val1;
     input_bits                  = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
-    tmp4                        = Party_CountOrder(0U);
+    tmp4                        = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     if ((input_bits & (PADLright | PADLleft)) && (g_MenuPanelTasks[12].unk_0A != 0)) {
         D_80148658 = (u8)D_80148658 ^ 1;
     }

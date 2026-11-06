@@ -9,7 +9,7 @@ MATCH void Game_ResetGameState(void) {
 
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     g_AreaDrawMode  = 6u;
-    Party_BuildBattlers(0u);
+    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
     selection_seed = D_801448FC;
     g_GameAreaId   = 0xFFFFu;
     world_flags    = g_AreaWalkFlags;

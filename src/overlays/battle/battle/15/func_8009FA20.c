@@ -25,6 +25,6 @@ MATCH void func_8009FA20(void) {
     /* FAKE: keeps the whole-mask argument out of the load-delay path so
      * it lands in the jal delay slot as retail has it. */
     MATCH_FAKE_BARRIER();
-    res                             = Battle_CalcDamage(battler_index, selection_kind, 0xFFFF);
+    res                             = Battle_CalcDamage(battler_index, selection_kind, BATTLE_ELEMENT_FROM_WEAPON);
     g_BattleTargetRecord->hp_change = res;
 }

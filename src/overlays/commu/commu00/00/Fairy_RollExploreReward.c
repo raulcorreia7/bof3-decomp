@@ -44,7 +44,7 @@ MATCH void Fairy_RollExploreReward(void) {
             roll -= buf[D_801457A9[offset * 8]].weights[i - 1];
         }
         i      = (i - 1) * 16;
-        offset = (i + (RANDOM_MASK(0xF))) * 2;
+        offset = (i + RANDOM_MASK(0xF)) * 2;
         high   = D_801F2619[offset];
         low    = g_FairyExploreRewards[offset];
         if (!(Item_Add(high, low, 1, 0) & BYTE_MASK)) {

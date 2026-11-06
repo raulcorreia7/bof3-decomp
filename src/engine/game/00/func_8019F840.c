@@ -10,15 +10,15 @@ MATCH void func_8019F840(void) {
     STACK_PADS(u8, 8);
 
     if (!(g_AreaWalkFlags & AREA_WALK_STEP_ACTIVE)) {
-        if (LOHU(g_GameAreaId) == 0x31) {
+        if (LOHU(g_GameAreaId) == AREA_ID_PLANT) {
             func_801F2DCC();
-        } else if (LOHU(g_GameAreaId) == 0x75) {
+        } else if (LOHU(g_GameAreaId) == AREA_ID_HIDDEN_FACTORY_ENTRANCE) {
             func_801F41D8();
-        } else if (LOHU(g_GameAreaId) == 0x76) {
+        } else if (LOHU(g_GameAreaId) == AREA_ID_HIDDEN_FACTORY_ROOMS) {
             func_801F4CD0();
         } else if (LOHU(g_GameAreaId) == 0xA9) {
             func_801F3628();
-        } else if (LOHU(g_GameAreaId) == 0xAB) {
+        } else if (LOHU(g_GameAreaId) == AREA_ID_MYRIA_STATION_PLANT_ROOM) {
             func_801F3868();
         }
         if ((s16)g_PartySize > 0) {

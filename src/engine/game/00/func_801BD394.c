@@ -28,16 +28,12 @@ MATCH void func_801BD394(void) {
         range = 0x20000;
     }
     dx = work->pos.x.fixed - x;
-    if (dx < 0) {
-        dx = -dx;
-    }
+    dx = ABS(dx);
     if (dx > range) {
         flag = 1;
     } else {
         dy = work->pos.y.fixed - y;
-        if (dy < 0) {
-            dy = -dy;
-        }
+        dy = ABS(dy);
         if (dy > range) {
             flag = 1;
         }

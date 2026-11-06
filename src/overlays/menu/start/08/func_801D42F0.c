@@ -21,7 +21,7 @@ MATCH void func_801D42F0(void) {
     D_801485E0                  = 0xB6;
     sel                         = &D_80148656;
     D_801485E2                  = *sel * 0x36 + 0x3E;
-    count                       = Party_CountOrder(0);
+    count                       = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     input                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     old                         = *sel;
     if (input & PADLup) {

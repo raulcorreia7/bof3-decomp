@@ -9,7 +9,7 @@ MATCH u32 Battle_ApplyDamage(u8 attacker, u8 target) {
     } else {
         ENEMY_COMBATANT(target).turn.target_flags = 0x11;
     }
-    damage = Battle_CalcDamage(attacker, target, 0xFFFF);
+    damage = Battle_CalcDamage(attacker, target, BATTLE_ELEMENT_FROM_WEAPON);
     if (BATTLER_IS_PLAYER(target)) {
         if (g_BattlePartyBattlers[target].turn.damage_flags.value & COMBATANT_FLAG_HURT_REACTION) {
             damage = g_BattlePartyBattlers[target].chr.hp;

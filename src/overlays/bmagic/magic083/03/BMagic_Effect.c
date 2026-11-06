@@ -12,7 +12,7 @@ INCLUDE_ASM(func_801EED04);
 
 MATCH s32 func_801EF0CC(void) {
     if (*((u8*)&g_BattleActionType) != BATTLE_ACTION_ABILITY && *((u16*)&g_BattleActionId) == 0x136) {
-        g_BattleActionId = 0x53;
+        g_BattleActionId = ABILITY_SHIELD;
     }
     return 0;
 }

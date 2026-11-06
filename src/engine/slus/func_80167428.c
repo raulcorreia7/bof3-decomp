@@ -2,8 +2,8 @@
 
 /* lifted draft, best score 39.27%; semantics unverified
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 39.27%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 39.27%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80167428(void) {
     s32   tmp0;
@@ -41,10 +41,8 @@ NON_MATCHING void func_80167428(void) {
         }
         g_AreaScrollTargetX = tmp3;
         g_AreaScrollTargetY = FIELD(s32, g_GameState, 0x38u);
-        if (val3 < val1) {
-            val3 = val1;
-        }
-        tmp1 = ((u32)val3 >> 0xD) & BYTE_MASK;
+        val3                = MAX(val3, val1);
+        tmp1                = ((u32)val3 >> 0xD) & BYTE_MASK;
         if (tmp1 != 0) {
             g_AreaCameraHeightStep = (u16)((s16)(FIELD(u16, g_GameState, 0x3Eu) - g_AreaCameraHeight) / tmp1);
         } else {

@@ -33,9 +33,9 @@ typedef struct ShopWork {
 #define SHOP_WORK_RECORD(offset) ((ShopWorkRecord*)(SHOP_WORK_BASE + (offset)))
 #define SHOP_WORK                ((ShopWork*)SHOP_WORK_BASE)
 
-/* nonmatching unmeasured: tried the first draft (39.90%); 16-byte struct copy (49.74%); byte-array copy for the unaligned
- * lwl/lwr (56.85%); u16 loop counter and u16 destination store (63.45%); the FIELD offset views replaced by typed
- * fields and the work-text pointer, the first-draft pointer juggling removed (61.62%). residual is the register
+/* nonmatching unmeasured: tried the first draft (39.90%); 16-byte struct copy (49.74%); byte-array copy for the
+ * unaligned lwl/lwr (56.85%); u16 loop counter and u16 destination store (63.45%); the FIELD offset views replaced by
+ * typed fields and the work-text pointer, the first-draft pointer juggling removed (61.62%). residual is the register
  * allocation of the second row loop: retail homes the work base in s2, the row base in s3 and the constants in
  * t0/t1/a0-a3, the candidate homes them in s0 and v1. resume: a source shape that gives the work base the s2 home and
  * the loop constants their own registers, without keeping the work-text pointer alive past the row loop. */

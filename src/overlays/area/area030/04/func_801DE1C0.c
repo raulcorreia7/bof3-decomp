@@ -18,13 +18,13 @@
 
 /* Spawns the area-030 state rows for the active spawn columns, rolling and clamping each row's hit value into
  * the kind table words. */
-/* nonmatching unmeasured: tried the first draft (54.01%); volatile kind tables (48.66%); fresh-pointer table views (53.48%);
- * non-const table view (57.22%); s32 row index (55.08%); s8 count (43.32%); the count table through a pointer local
- * (53.48%) and the count table named by symbol (53.48%). residual is the register roles: retail homes the row index in
- * s2 and the count in s3, the candidate homes them in s4 and s2, and retail materialises the count table base full
- * (lui+addiu) before adding the index parts while the candidate folds the base into the displacement. resume: a source
- * shape that materialises the count table base full and adds the row offset and the column separately, and that gives
- * the row index the s2 home and the count the s3 home. */
+/* nonmatching unmeasured: tried the first draft (54.01%); volatile kind tables (48.66%); fresh-pointer table views
+ * (53.48%); non-const table view (57.22%); s32 row index (55.08%); s8 count (43.32%); the count table through a pointer
+ * local (53.48%) and the count table named by symbol (53.48%). residual is the register roles: retail homes the row
+ * index in s2 and the count in s3, the candidate homes them in s4 and s2, and retail materialises the count table base
+ * full (lui+addiu) before adding the index parts while the candidate folds the base into the displacement. resume: a
+ * source shape that materialises the count table base full and adds the row offset and the column separately, and that
+ * gives the row index the s2 home and the count the s3 home. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DE1C0(void) {
     s16 hit_value;
@@ -89,7 +89,7 @@ NON_MATCHING void func_801DE1C0(void) {
                         if (steps >= 0) {
                             walk_limit = steps;
                         loop_12:
-                            if (RANDOM_MASK(1)) {
+                            if RANDOM_MASK (1) {
                                 walk += 1;
                                 ROW_ROLL = (u16)(ROW_ROLL + 1);
                                 if (walk_limit >= walk) {
