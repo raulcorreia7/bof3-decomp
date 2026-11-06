@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
 /* samples the bundle's four-corner cell records and height bytes at the 16.16 point (x, y): the half-cell
- * bits pick the corner formula, D_80149340 scales the height byte (cleared by the caller), and the result is the
+ * bits pick the corner formula, g_AreaHeightOffsetEnabled scales the height byte (cleared by the caller), and the result is the
  * larger diagonal sum * 16 or, with both half-cell bits, the largest corner * 32, as s16; outside the grid it returns
  * 0.
  */
@@ -53,7 +53,7 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     tmp14 = (u8*)((tmp1 * 4) + ((tmp3 * 4) + (MAP_BUNDLE_BASE + 0x30)));
     tmp13 = (u8*)((g_AreaMapBundle.height_off4_2A * 4) + (tmp1 + base) + tmp3);
     if (!((tmp5 | tmp6) & HALF_MASK)) {
-        tmp4  = *(s8*)(tmp13)*D_80149340;
+        tmp4  = *(s8*)(tmp13)*g_AreaHeightOffsetEnabled;
         tmp12 = *(u32*)(tmp14);
         return (s16)((((s32)(tmp12 << 0x10) >> 0x18) + tmp4 + ((s32)(tmp12 << 8) >> 0x18) + tmp4) * 0x10);
     }
@@ -62,15 +62,15 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     tmp10 = (s8*)(tmp13 + mw);
     if (fx != fy) {
         if (fx != 0) {
-            v[0] = ((u32) * (u32*)(tmp14) >> 8) + (*(s8*)(tmp13)*D_80149340);
-            v[1] = FIELD(u8, tmp14, 0x3u) + (*(s8*)(tmp13)*D_80149340);
-            v[2] = FIELD(s32, tmp14, 0x4u) + (FIELD(s8, tmp13, 0x1u) * D_80149340);
-            v[3] = FIELD(u16, tmp14, 0x6u) + (FIELD(s8, tmp13, 0x1u) * D_80149340);
+            v[0] = ((u32) * (u32*)(tmp14) >> 8) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
+            v[1] = FIELD(u8, tmp14, 0x3u) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
+            v[2] = FIELD(s32, tmp14, 0x4u) + (FIELD(s8, tmp13, 0x1u) * g_AreaHeightOffsetEnabled);
+            v[3] = FIELD(u16, tmp14, 0x6u) + (FIELD(s8, tmp13, 0x1u) * g_AreaHeightOffsetEnabled);
         } else {
-            v[0] = FIELD(u16, tmp14, 0x2u) + (*(s8*)(tmp13)*D_80149340);
-            v[1] = FIELD(u8, tmp14, 0x3u) + (*(s8*)(tmp13)*D_80149340);
-            v[2] = *tmp11 + (*tmp10 * D_80149340);
-            v[3] = (u16)((u32)*tmp11 >> 8) + (*tmp10 * D_80149340);
+            v[0] = FIELD(u16, tmp14, 0x2u) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
+            v[1] = FIELD(u8, tmp14, 0x3u) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
+            v[2] = *tmp11 + (*tmp10 * g_AreaHeightOffsetEnabled);
+            v[3] = (u16)((u32)*tmp11 >> 8) + (*tmp10 * g_AreaHeightOffsetEnabled);
         }
         tmp2 = v[0] + v[1];
         tmp0 = v[2] + v[3];
@@ -79,10 +79,10 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
         }
         return tmp0 * 0x10;
     }
-    v[0] = FIELD(u8, tmp14, 0x3u) + (*(s8*)(tmp13)*D_80149340);
-    v[1] = FIELD(u16, tmp14, 0x6u) + (FIELD(s8, tmp13, 0x1u) * D_80149340);
-    v[2] = FIELD(s32, (tmp7 + tmp14), 0x4u) + (FIELD(s8, (mw + tmp13), 0x1u) * D_80149340);
-    v[3] = ((u32)*tmp11 >> 8) + (*tmp10 * D_80149340);
+    v[0] = FIELD(u8, tmp14, 0x3u) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
+    v[1] = FIELD(u16, tmp14, 0x6u) + (FIELD(s8, tmp13, 0x1u) * g_AreaHeightOffsetEnabled);
+    v[2] = FIELD(s32, (tmp7 + tmp14), 0x4u) + (FIELD(s8, (mw + tmp13), 0x1u) * g_AreaHeightOffsetEnabled);
+    v[3] = ((u32)*tmp11 >> 8) + (*tmp10 * g_AreaHeightOffsetEnabled);
     if ((v[0] >= v[1]) & (v[0] >= v[2]) & (v[0] >= v[3])) {
         return v[0] << 5;
     }

@@ -3,7 +3,7 @@
 MATCH void func_8015115C(void) {
     u8 count;
 
-    D_801490BC.selection_index = 0;
+    g_MessageWindow.selection_index = 0;
     Menu_ArmPanelTask(1, 0);
     count         = g_UiWindowStep;
     count         = count + 1;

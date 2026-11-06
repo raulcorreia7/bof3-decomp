@@ -2,7 +2,7 @@
 
 MATCH void func_801F4790(void) {
     MESSAGE_REQUEST_CLEAR();
-    if (!(D_801490C7 & 1)) {
+    if (!(g_MessageChoice & 1)) {
         g_ScriptVars[0] = 0xB;
         SND_PlayCue(0x205);
     } else {

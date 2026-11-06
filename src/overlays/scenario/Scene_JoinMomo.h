@@ -7,7 +7,7 @@
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_MOMO, 0U); \
     Party_BuildBattlers(PARTY_ORDER_FIELD);                                          \
     Party_JoinMember(CHAR_ID_MOMO);                                                  \
-    func_801C1630()
+    Party_StagePalettes()
 
 MATCH void Scene_JoinMomo(void) {
     SCENE_JOIN_MOMO();

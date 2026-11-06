@@ -1,12 +1,12 @@
 #include "engine/slus/slus.h"
 
-/* dispatches the selection byte D_801490BC.step_id through the handler table at 0x34 of the current g_AreaLoads bank
+/* dispatches the selection byte g_MessageWindow.step_id through the handler table at 0x34 of the current g_AreaLoads bank
  * record (ids below 0x80) or Message_DispatchBankStep, then sets owner mode 3: a pending area request latches mode 1
  * and advances g_UiWindowStep, a cleared one latches 7; clears D_801490B8. */
 MATCH void Message_DispatchAnswerStep(void) {
     u8 id;
 
-    id = D_801490BC.step_id;
+    id = g_MessageWindow.step_id;
     if (id < 0x80u) {
         ((AreaLoad*)g_AreaLoads[g_GameAreaId])->steps[id]();
     } else {

@@ -50,7 +50,7 @@ NON_MATCHING s32 func_801530D0(void) {
     D_8014933A &= 0xFE;
     tmp        = (0x160 - v) / 50;
     D_1F80000C = tmp;
-    sp18       = (D_8014930A - g_AreaTileOriginX) + (D_8014930E - g_AreaTileOriginY) + 8;
+    sp18       = (g_AreaTargetCellX - g_AreaTileOriginX) + (g_AreaTargetCellY - g_AreaTileOriginY) + 8;
     width      = 0;
     if (tmp > 0) {
         width = tmp - 1;

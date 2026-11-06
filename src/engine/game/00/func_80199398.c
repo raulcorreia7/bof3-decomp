@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_80199398(void) {
-    func_801527E4();
+    Area_StepCamera();
     Area_RunParty();
     func_801BDAB8();
     func_801A0514();

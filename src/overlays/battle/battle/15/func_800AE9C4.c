@@ -29,7 +29,7 @@ ASSERT_OFFSET(BattlePanelGeometry, origin, 0x2E);
 #define BATTLE_PANEL_MODE_DIM   0x15
 
 /* Draws the two panel quads at the active battle-work origin, one normal and one dark. */
-MATCH void func_800AE9C4(u8 arg0) {
+MATCH void func_800AE9C4(u8 texture_index) {
     POLY_FT4*            primitive;
     u32                  tex_offset;
     s32                  mode;
@@ -58,7 +58,7 @@ MATCH void func_800AE9C4(u8 arg0) {
     primitive->clut  = GetClut(BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
     /* The texture entry is read through the table symbol at every use: the retail
      * code materializes the table address again for each access. */
-    tex_offset       = arg0 * BATTLE_PANEL_TEX_STRIDE;
+    tex_offset       = texture_index * BATTLE_PANEL_TEX_STRIDE;
     setUV4(primitive, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y,
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
            ((UPoint2D*)&g_BattlePanelUV[tex_offset])->y, ((UPoint2D*)&g_BattlePanelUV[tex_offset])->x,

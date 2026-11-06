@@ -3,7 +3,7 @@
 MATCH s32 func_801F2C04(void) {
     s8 sel;
 
-    sel = D_801490C7;
+    sel = g_MessageChoice;
     if (sel == 0) {
         g_Zenny          = 0;
         g_MessageRequest = 2;

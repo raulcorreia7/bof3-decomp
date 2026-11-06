@@ -3,7 +3,8 @@
 /* steps the field camera toward its scroll goal, wraps the tile origin when it passes 0x200 either way (each wrap
  * calls one of the four edge refills), then rebuilds the rotation, view translation and projection matrix.
  */
-MATCH void func_801527E4(void) {
+/* func_801527E4 */
+MATCH void Area_StepCamera(void) {
     SVECTOR view;
     VECTOR  trans;
     s32     dist;
@@ -21,7 +22,7 @@ MATCH void func_801527E4(void) {
     /* FAKE: the order lock around the x step and one local for the x position, then the y distance: together they give
      * both steps the retail register homes. */
     ORDER_LOCK_BEGIN
-        value = D_80149310;
+        value = g_AreaCameraX;
         dist  = 0x800000 - ((value + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF);
         if (dist != 0) {
             g_AreaCameraMoving = 1;
@@ -29,13 +30,13 @@ MATCH void func_801527E4(void) {
             if (dist > 0) {
                 dir = 1;
             }
-            step_x     = dir * g_AreaCameraStep;
-            D_80149310 = value + step_x;
+            step_x        = dir * g_AreaCameraStep;
+            g_AreaCameraX = value + step_x;
             D_80149336 -= step_x;
             g_AreaTileRemainderY -= step_x;
         }
     ORDER_LOCK_END;
-    value = 0x800000 - (D_80149314 << 8) - (g_AreaScrollTargetY & ~0x7FFF);
+    value = 0x800000 - (g_AreaCameraY << 8) - (g_AreaScrollTargetY & ~0x7FFF);
     if (value != 0) {
         g_AreaCameraMoving = 1;
         dir                = -1;
@@ -43,7 +44,7 @@ MATCH void func_801527E4(void) {
             dir = 1;
         }
         step_y = dir * g_AreaCameraStep;
-        D_80149314 += step_y;
+        g_AreaCameraY += step_y;
         D_80149336 += step_y;
         g_AreaTileRemainderY -= step_y;
     }
@@ -53,8 +54,8 @@ MATCH void func_801527E4(void) {
             g_AreaTileRemainderY -= g_AreaCameraHeightStep * 2;
         }
         g_AreaCameraRefreshCount = 2;
-        dir                      = ((0x800000 - ((D_80149310 + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF)) |
-                                    (0x800000 - (D_80149314 << 8) - (g_AreaScrollTargetY & ~0x7FFF)));
+        dir                      = ((0x800000 - ((g_AreaCameraX + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF)) |
+                                    (0x800000 - (g_AreaCameraY << 8) - (g_AreaScrollTargetY & ~0x7FFF)));
         if (dir == 0) {
             g_AreaCameraMoving = 0;
         }
@@ -92,8 +93,8 @@ MATCH void func_801527E4(void) {
         *(SVECTOR*)&D_801492E0   = *&g_AreaCameraAngle;
     }
     RotMatrix(&g_AreaCameraAngle, &g_CameraMatrix);
-    view.vx = (u32)D_80149310 >> 1;
-    view.vy = D_80149314 >> 1;
+    view.vx = (u32)g_AreaCameraX >> 1;
+    view.vy = g_AreaCameraY >> 1;
     view.vz = (u32)g_AreaCameraHeight >> 1;
     ApplyMatrix(&g_CameraMatrix, &view, &trans);
     D_801492FC = trans.vx + g_AreaCameraOffsetX;

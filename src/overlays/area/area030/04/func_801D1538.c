@@ -12,7 +12,7 @@ MATCH void func_801D1538(void) {
     } else {
         u8 bit = 1;
 
-        if (D_8014930E >= 0x38) {
+        if (g_AreaTargetCellY >= 0x38) {
             return;
         }
         spike                = FISHING_STATE;

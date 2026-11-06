@@ -4,9 +4,9 @@ MATCH void func_801F3CE0(void) {
     s8 variant;
 
     MESSAGE_REQUEST_CLEAR();
-    if (D_801490C7 != 2) {
+    if (g_MessageChoice != 2) {
         variant = 2;
-        if (D_801490C7 == 0) {
+        if (g_MessageChoice == 0) {
             variant = 1;
         }
         D_80146866 = variant;

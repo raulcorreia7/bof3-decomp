@@ -15,7 +15,7 @@ const u8 s_ScriptCopyBlock[16] = {
     0x00, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x50, 0x50, 0x50, 0x50, 0x64, 0x64, 0xA0, 0x64,
 };
 
-const ScriptFunc D_8018217C[21] = {
+const ScriptFunc g_AreaScriptTests[21] = {
     (ScriptFunc)Game_IsScenarioEqual,
     (ScriptFunc)Game_IsAreaEqual,
     (ScriptFunc)Game_TestSceneFlag,

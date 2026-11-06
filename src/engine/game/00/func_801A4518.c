@@ -8,7 +8,7 @@ MATCH u8* func_801A4518(u8* script) {
 
     flag    = 1;
     lead    = *script;
-    handler = (ScriptFunc*)(&D_8018217C + ((lead << 24) >> 22));
+    handler = (ScriptFunc*)(&g_AreaScriptTests + ((lead << 24) >> 22));
     script += 1;
     for (;;) {
         op = *script;

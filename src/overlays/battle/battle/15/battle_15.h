@@ -730,7 +730,7 @@ extern void func_800A39B4(s16 delta, u8 battler_index);
 u8          func_800A3A10(u8 battler_index, u8 selection_kind);
 u8          func_800A3C9C(u8 battler_index, u8 selection_kind);
 void        func_800A3F28(void);
-u8          func_800A403C(u8 arg0);
+u8          func_800A403C(u8 battler_index);
 u8          func_800A41D8(s32 input_mask);
 u8          func_800A4238(s32 input_mask);
 s16         func_800A4294(s32 input_kind);
@@ -812,7 +812,7 @@ void        func_800ADE6C(void);
 void        func_800ADF9C(void);
 void        func_800AE06C(void);
 void        func_800AE09C(void);
-void        func_800AE9C4(u8 arg0);
+void        func_800AE9C4(u8 texture_index);
 void        func_800B01F0(void);
 void        func_800B0250(void);
 void        func_800B0398(void);
@@ -875,7 +875,7 @@ s32  func_801DD7D8(s32 low_bound, s32 high_bound, s32 current);
  * argument, and every call site in this target passes two words, so the
  * helper takes two parameters. */
 /* Multiplies its inputs and divides by 100. */
-s16  func_801DE144(s32 factor_a, s32 factor_b);
+s16  func_801DE144(s32 amount, s32 percent);
 /* func_801DE8C0 */
 void BattleStageSelectionRingRecord(u32 index, u32 record_kind, u8* text);
 /* PsyQ SDK primitive setup helpers called by this target.
@@ -1088,7 +1088,7 @@ static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
     g_MenuCurrentPanel->state  = (u8)(g_MenuCurrentPanel->state + 1);
 }
 
-u8 func_800A40D0(u8 arg0);
+u8 func_800A40D0(u8 battler_index);
 
 s32 func_800AED5C(s32 arg0, u32 battler_index);
 

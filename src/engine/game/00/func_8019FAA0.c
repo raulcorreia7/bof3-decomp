@@ -53,7 +53,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     g_GfxPalettePending = 1u;
 
     func_801BFF9C(entry_x, entry_y, (u32)entry_facing);
-    D_80143F03 = func_801A0348(D_8014930A, D_8014930E);
+    D_80143F03 = func_801A0348(g_AreaTargetCellX, g_AreaTargetCellY);
     func_80153DE8();
 
     entry  = (AreaLoad*)g_AreaLoads[g_GameAreaId];
@@ -107,7 +107,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
                 goto end;
             func_8019FF88(0, entry_x, entry_y);
             if (((g_GameFlags & 0x800u) == 0) && ((g_AreaWalkFlags & AREA_WALK_MAP_LOADING) == 0))
-                Area_SetCellPalette(D_8014930A, D_8014930E);
+                Area_SetCellPalette(g_AreaTargetCellX, g_AreaTargetCellY);
             goto tail;
         }
         func_8019FF88(mode, entry_x, entry_y);

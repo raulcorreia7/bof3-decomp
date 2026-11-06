@@ -19,20 +19,20 @@ MATCH void UI_ScrollChoice(void) {
     if ((action & PADLup) != 0) {
         s8* index;
 
-        index  = &D_801490BC.selection_index;
+        index  = &g_MessageWindow.selection_index;
         cursor = *index - 1;
         *index = cursor;
         if (cursor < 0) {
-            *index = D_801490BC.last_row;
+            *index = g_MessageWindow.last_row;
         }
     }
     if ((action & PADLdown) != 0) {
         s8* index;
 
-        index  = &D_801490BC.selection_index;
+        index  = &g_MessageWindow.selection_index;
         cursor = *index + 1;
         *index = cursor;
-        if (D_801490BC.last_row < cursor) {
+        if (g_MessageWindow.last_row < cursor) {
             *index = 0;
         }
     }

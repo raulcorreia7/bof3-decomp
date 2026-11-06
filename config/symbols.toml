@@ -1472,7 +1472,9 @@ Party_CountOrder = { addr = 0x801BDB7C, type = "func", source = "counts the lead
 Party_SwapMembers = { addr = 0x801BE738, type = "func", source = "calls Party_SwapBattlerRows, then reloads both g_BattlePartyBattlers rows from g_Characters through g_CharSlot and restages their palette with func_801C1254; func_801BE1B0 calls it to apply the party-order command list" }
 Party_SwapBattlerRows = { addr = 0x801BE920, type = "func", source = "swaps the id byte at +0x79, the words at +0x0C to +0x14 and the bytes at +0x118 and +0x119 between two g_BattlePartyBattlers rows, also +0x08, +0x29, +0x34, +0x38, +0x3C and +0x12C when skip_state is 0, and writes 0xFF to +0x4B of both; Party_SwapMembers and func_801B21E8 call it with row indexes" }
 Party_BuildBattlers = { addr = 0x801C1400, type = "func", source = "its body fills the g_BattlePartyBattlers rows from the order bytes at D_80144F5A + mode * 3; Game_ResetGameState and SAVE_RunLoadRestore call it" }
+Party_StagePalettes = { addr = 0x801C1630, type = "func", source = "runs after every Party_JoinMember/Party_RemoveMember caller (Scene_Join*, Scene_Remove*): frees the fade target and stages the palette block of each of the g_PartySize party battlers" }
 Party_JoinMember = { addr = 0x801C187C, type = "func", source = "its body writes char_id to D_80144F5A and D_80144F5D at g_PartySize and fills that g_BattlePartyBattlers row; when g_PartySize is PARTY_SLOT_COUNT it sets g_GameStateIndex to 6 and returns 1" }
+Party_RemoveMember = { addr = 0x801C1ABC, type = "func", source = "Scene_RemoveGarr/Peco/Nina/Rei and scena08 pass a CHAR_ID_* to it; the body clears the id from the walking and battle orders, compacts the battler rows and shrinks g_PartySize" }
 Actor_ClearVelocity = { addr = 0x801C5798, type = "func", source = "zeroes the g_Task velocity members +0x0C and +0x10 and vz that Actor_ApplyVelocity integrates into x and y and that Actor_InitMovement seeds" }
 Area_BuildEncounter = { addr = 0x801C60E0, type = "func", source = "the body rolls the formation, copies its enemies, places them around the party and returns 0 when none fits" }
 Battle_StartScripted = { addr = 0x801C7A54, type = "func", source = "its body stores mode_byte in g_BattleEncounter, sets D_80145E91 to 5 and copies the first byte of s_BattleModeRecords[mode_byte * 4] to g_BattleOptions; the scena00 script code calls it" }
@@ -1951,7 +1953,7 @@ CardFormatDevice = { addr = 0x801EF200, type = "func", source = "formats the sel
 CardBuildFileHeader = { addr = 0x801EF27C, type = "func", source = "writes the SC save-frame header at 0x800C1800 and copies the icon blocks for the selected save kind" }
 CardOpenFile = { addr = 0x801EF96C, type = "func", source = "opens name under the selected port prefix with 120 retries, a failure reports the directory capacity in g_SaveCardStatus" }
 CardTransferFile = { addr = 0x801EFB44, type = "func", source = "reads or writes the 0x200-byte save frame at 0x800C1800, retrying the card for up to 60 frames" }
-CardScanDirectory = { addr = 0x801EFCA8, type = "func", source = "copies firstfile/nextfile entries matching prefix into the 15-slot D_8018E990 table" }
+CardScanDirectory = { addr = 0x801EFCA8, type = "func", source = "copies firstfile/nextfile entries matching prefix into the 15-slot g_SaveCardDirectory table" }
 
 ["emi/plchar/plp012/00"]
 Char_AdvanceScript = { addr = 0x801CEC30, type = "func", source = "advances the character script phase from the work byte at +0x0B, clearing the +0x2B marker and the panel mode byte on completion" }
@@ -2255,10 +2257,10 @@ Scene_ClearParty = { addr = 0x801FC8FC, type = "func", source = "clears the effe
 
 ["emi/scenario/scena01/00"]
 Area_ClearWorkColumn = { addr = 0x801F7AB8, type = "func", source = "clears one byte of each row in the actor window" }
-Scene_RemoveRei = { addr = 0x801FE244, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_RemoveRei = { addr = 0x801FE244, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena02/00"]
-Scene_RemoveRei = { addr = 0x801FE198, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_RemoveRei = { addr = 0x801FE198, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena03/00"]
 Actor_FreePaletteFades = { addr = 0x801F7334, type = "func", source = "frees the two palette fade targets of the actor slot and resets the area work" }
@@ -2267,7 +2269,7 @@ Actor_FreePaletteFades_801F7A14 = { addr = 0x801F7A14, type = "func", source = "
 Actor_ProjectFocusAndStep = { addr = 0x801F8640, type = "func", source = "projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index" }
 GFX_DrawShadedDisc = { addr = 0x801F8C04, type = "func", source = "fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade" }
 Scene_ShowMessage = { addr = 0x801FCC9C, type = "func", source = "starts the area message of the given index, switches the game state to 2 and sets the script-active flag; byte-equal to func_801F9FD0 of scena04" }
-Scene_RemoveNina = { addr = 0x801FCEFC, type = "func", source = "removes character 1 (CHAR_ID_NINA_YOUNG) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_RemoveNina = { addr = 0x801FCEFC, type = "func", source = "removes character 1 (CHAR_ID_NINA_YOUNG) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena04/00"]
 Scene_ShowMessage = { addr = 0x801F9FD0, type = "func", source = "starts the area message of the given index, switches the game state to 2 and sets the script-active flag; byte-equal to func_801FCC9C of scena03" }
@@ -2276,16 +2278,16 @@ Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FA12C, type = "func", source
 ["emi/scenario/scena05/00"]
 Scene_JoinNina = { addr = 0x801FD460, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers and joins character 1 (CHAR_ID_NINA_YOUNG) with Party_JoinMember, without the palette restage of Scene_JoinAdultNina; one body shared with the other scenario programs" }
 Scene_JoinNina_801FD49C = { addr = 0x801FD49C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers and joins character 1 (CHAR_ID_NINA_YOUNG) with Party_JoinMember, without the palette restage of Scene_JoinAdultNina; one body shared with the other scenario programs" }
-Scene_RemoveNina = { addr = 0x801FD508, type = "func", source = "removes character 1 (CHAR_ID_NINA_YOUNG) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveMomo = { addr = 0x801FD530, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemovePeco = { addr = 0x801FD558, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_RemoveNina = { addr = 0x801FD508, type = "func", source = "removes character 1 (CHAR_ID_NINA_YOUNG) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveMomo = { addr = 0x801FD530, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemovePeco = { addr = 0x801FD558, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena06/00"]
 Scene_JoinNina = { addr = 0x801FE15C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers and joins character 1 (CHAR_ID_NINA_YOUNG) with Party_JoinMember, without the palette restage of Scene_JoinAdultNina; one body shared with the other scenario programs" }
 Scene_JoinNina_801FE1D4 = { addr = 0x801FE1D4, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers and joins character 1 (CHAR_ID_NINA_YOUNG) with Party_JoinMember, without the palette restage of Scene_JoinAdultNina; one body shared with the other scenario programs" }
-Scene_RemoveGarr = { addr = 0x801FE2E4, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemovePeco = { addr = 0x801FE30C, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveMomo = { addr = 0x801FE364, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_RemoveGarr = { addr = 0x801FE2E4, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemovePeco = { addr = 0x801FE30C, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveMomo = { addr = 0x801FE364, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena07/00"]
 Actor_WaitAndStep = { addr = 0x801F8730, type = "func", source = "counts the actor wait byte down reloads it at zero and advances the handler index" }
@@ -2299,55 +2301,55 @@ AngleAverage12 = { addr = 0x801F9420, type = "func", source = "averages two 12-b
 Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FE7AC, type = "func", source = "streams the EMI family for adult Ryu, Garr and adult Nina, empties g_PartySize, joins the three with Party_JoinMember and restages the party palettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena09/00"]
-Scene_JoinAdultNinaAndMomo = { addr = 0x801FDD7C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinMomo = { addr = 0x801FDDC8, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinAdultNina = { addr = 0x801FDE0C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinMomoAndPeco = { addr = 0x801FDE80, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinPeco = { addr = 0x801FDECC, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_JoinAdultNinaAndMomo = { addr = 0x801FDD7C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinMomo = { addr = 0x801FDDC8, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinAdultNina = { addr = 0x801FDE0C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinMomoAndPeco = { addr = 0x801FDE80, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinPeco = { addr = 0x801FDECC, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
 Scene_RebuildRyuGarrParty = { addr = 0x801FDF54, type = "func", source = "clears the three party slots of D_80144908, keeps the last id that is neither adult Ryu (7) nor Garr (2), adult Nina (8) when none is, streams the EMI family for Ryu, Garr and that id and joins all three; byte-equal to func_801FE4F0 of scena10" }
-Scene_RemoveRei = { addr = 0x801FE12C, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveGarr = { addr = 0x801FE184, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveAdultNina = { addr = 0x801FE20C, type = "func", source = "removes character 8 (CHAR_ID_NINA_ADULT) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_StashPartyExceptRyuAdult = { addr = 0x801FE234, type = "func", source = "copies the character ids of the party into D_80144908, removes every listed member except adult Ryu (7) and runs func_801C1630; byte-equal to func_801FE6F4 of scena10" }
-Scene_RemoveMomo = { addr = 0x801FE30C, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemovePeco = { addr = 0x801FE334, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_RemoveRei = { addr = 0x801FE12C, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveGarr = { addr = 0x801FE184, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveAdultNina = { addr = 0x801FE20C, type = "func", source = "removes character 8 (CHAR_ID_NINA_ADULT) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_StashPartyExceptRyuAdult = { addr = 0x801FE234, type = "func", source = "copies the character ids of the party into D_80144908, removes every listed member except adult Ryu (7) and runs Party_StagePalettes; byte-equal to func_801FE6F4 of scena10" }
+Scene_RemoveMomo = { addr = 0x801FE30C, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemovePeco = { addr = 0x801FE334, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena10/00"]
 Scene_JoinPartyRyuAdultGarrNinaAdult = { addr = 0x801FE314, type = "func", source = "streams the EMI family for adult Ryu, Garr and adult Nina, empties g_PartySize and joins the three in that order with Party_JoinMember, without the palette restage of Scene_SetPartyRyuAdultGarrNinaAdult" }
 Scene_RebuildRyuGarrParty = { addr = 0x801FE4F0, type = "func", source = "clears the three party slots of D_80144908, keeps the last id that is neither adult Ryu (7) nor Garr (2), adult Nina (8) when none is, streams the EMI family for Ryu, Garr and that id and joins all three; byte-equal to func_801FDF54 of scena09" }
-Scene_RemoveMomo = { addr = 0x801FE614, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_StashPartyExceptRyuAdult = { addr = 0x801FE6F4, type = "func", source = "copies the character ids of the party into D_80144908, removes every listed member except adult Ryu (7) and runs func_801C1630; byte-equal to func_801FE234 of scena09" }
+Scene_RemoveMomo = { addr = 0x801FE614, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_StashPartyExceptRyuAdult = { addr = 0x801FE6F4, type = "func", source = "copies the character ids of the party into D_80144908, removes every listed member except adult Ryu (7) and runs Party_StagePalettes; byte-equal to func_801FE234 of scena09" }
 
 ["emi/scenario/scena11/00"]
-Scene_JoinAdultNinaAndMomo = { addr = 0x801FAB74, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinAdultNina = { addr = 0x801FABC0, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinMomo = { addr = 0x801FAC04, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_JoinAdultNinaAndMomo = { addr = 0x801FAB74, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinAdultNina = { addr = 0x801FABC0, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinMomo = { addr = 0x801FAC04, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
 Scene_JoinAdultNinaAndMomo_801FAC48 = { addr = 0x801FAC48, type = "func", source = "second copy of Scene_JoinAdultNinaAndMomo in this image" }
-Scene_JoinMomo_801FACD8 = { addr = 0x801FACD8, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinMomoAndPeco = { addr = 0x801FAD1C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinPeco = { addr = 0x801FAD68, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinReiAndGarr = { addr = 0x801FADAC, type = "func", source = "streams the EMI family for adult Ryu, Rei and Garr, rebuilds the battlers, joins Rei then Garr with Party_JoinMember (func_801C187C) and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveRei = { addr = 0x801FADF8, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveGarr = { addr = 0x801FAE20, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemovePeco = { addr = 0x801FAE48, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveMomo = { addr = 0x801FAE70, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveAdultNina = { addr = 0x801FAE98, type = "func", source = "removes character 8 (CHAR_ID_NINA_ADULT) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_JoinMomo_801FACD8 = { addr = 0x801FACD8, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinMomoAndPeco = { addr = 0x801FAD1C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinPeco = { addr = 0x801FAD68, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinReiAndGarr = { addr = 0x801FADAC, type = "func", source = "streams the EMI family for adult Ryu, Rei and Garr, rebuilds the battlers, joins Rei then Garr with Party_JoinMember (func_801C187C) and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveRei = { addr = 0x801FADF8, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveGarr = { addr = 0x801FAE20, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemovePeco = { addr = 0x801FAE48, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveMomo = { addr = 0x801FAE70, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveAdultNina = { addr = 0x801FAE98, type = "func", source = "removes character 8 (CHAR_ID_NINA_ADULT) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena12/00"]
 Menu_DrawHeaderBar = { addr = 0x801F765C, type = "func", source = "draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952); byte-equal copy in the start, sisyou, Bate, Shisu, shop, commu02, scena12 and area008 images" }
-Scene_JoinAdultNinaAndMomo = { addr = 0x801FCDE0, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinAdultNina = { addr = 0x801FCE2C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinMomo = { addr = 0x801FCE70, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinAdultNinaAndMomo_801FCEB4 = { addr = 0x801FCEB4, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinMomo_801FCF44 = { addr = 0x801FCF44, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinMomoAndPeco = { addr = 0x801FCF88, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinPeco = { addr = 0x801FCFD4, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_JoinReiAndGarr = { addr = 0x801FD018, type = "func", source = "streams the EMI family for adult Ryu, Rei and Garr, rebuilds the battlers, joins Rei then Garr with Party_JoinMember (func_801C187C) and restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveRei = { addr = 0x801FD0B0, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveGarr = { addr = 0x801FD0D8, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemovePeco = { addr = 0x801FD100, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveMomo = { addr = 0x801FD128, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
-Scene_RemoveAdultNina = { addr = 0x801FD150, type = "func", source = "removes character 8 (CHAR_ID_NINA_ADULT) from the party through func_801C1ABC, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through func_801C1630; one body shared with the other scenario programs" }
+Scene_JoinAdultNinaAndMomo = { addr = 0x801FCDE0, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinAdultNina = { addr = 0x801FCE2C, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinMomo = { addr = 0x801FCE70, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinAdultNinaAndMomo_801FCEB4 = { addr = 0x801FCEB4, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinMomo_801FCF44 = { addr = 0x801FCF44, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinMomoAndPeco = { addr = 0x801FCF88, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinPeco = { addr = 0x801FCFD4, type = "func", source = "streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_JoinReiAndGarr = { addr = 0x801FD018, type = "func", source = "streams the EMI family for adult Ryu, Rei and Garr, rebuilds the battlers, joins Rei then Garr with Party_JoinMember (func_801C187C) and restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveRei = { addr = 0x801FD0B0, type = "func", source = "removes character 4 (CHAR_ID_REI) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveGarr = { addr = 0x801FD0D8, type = "func", source = "removes character 2 (CHAR_ID_GARR) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemovePeco = { addr = 0x801FD100, type = "func", source = "removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveMomo = { addr = 0x801FD128, type = "func", source = "removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
+Scene_RemoveAdultNina = { addr = 0x801FD150, type = "func", source = "removes character 8 (CHAR_ID_NINA_ADULT) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_PartySize, then restages every party palette through Party_StagePalettes; one body shared with the other scenario programs" }
 
 ["emi/scenario/scena13/00"]
 GFX_CopyPaletteCapped = { addr = 0x801FB0B8, type = "func", source = "copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending" }
@@ -2431,7 +2433,7 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "calls func_8014D978,
 Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
 
 ["emi/world00/area021/13"]
-Message_SetAnswerMessage = { addr = 0x801F2C6C, type = "func", source = "stores the message id the answer table D_801F33B4 holds for the menu choice D_801490C7 in g_MessageRequest" }
+Message_SetAnswerMessage = { addr = 0x801F2C6C, type = "func", source = "stores the message id the answer table D_801F33B4 holds for the menu choice g_MessageChoice in g_MessageRequest" }
 
 ["emi/world00/area023/13"]
 Message_Clear = { addr = 0x801F2C04, type = "func", source = "byte-identical to Message_Clear at emi/world00/area032/13@0x801F36A0" }
@@ -2498,7 +2500,7 @@ Area_SetCameraZOffset = { addr = 0x801F3E00, type = "func", source = "one body s
 Area_ResetCameraOffsetZ = { addr = 0x801F3E20, type = "func", source = "zeroes g_AreaCameraOffsetZ, the Z shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 
 ["emi/world01/area042/13"]
-Message_SetAnswerMessage = { addr = 0x801F3D90, type = "func", source = "stores the message id the answer table D_801F56C4 holds for the menu choice D_801490C7 in g_MessageRequest" }
+Message_SetAnswerMessage = { addr = 0x801F3D90, type = "func", source = "stores the message id the answer table D_801F56C4 holds for the menu choice g_MessageChoice in g_MessageRequest" }
 
 ["emi/world01/area045/13"]
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
@@ -2521,7 +2523,7 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "calls func_8014D978,
 Area_FindFreeWorkRow = { addr = 0x801178C4, type = "func", source = "finds the first work-window row whose byte is zero or returns NULL" }
 
 ["emi/world01/area049/14"]
-Message_SetAnswerMessage = { addr = 0x801F2C54, type = "func", source = "stores the message id D_801F5CD8 holds for the menu choice D_801490C7 in g_MessageRequest" }
+Message_SetAnswerMessage = { addr = 0x801F2C54, type = "func", source = "stores the message id D_801F5CD8 holds for the menu choice g_MessageChoice in g_MessageRequest" }
 Area_AddCameraOffsetY20 = { addr = 0x801F33E8, type = "func", source = "adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_SubCameraOffsetY20 = { addr = 0x801F3410, type = "func", source = "subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetCameraOffsetY = { addr = 0x801F3438, type = "func", source = "one body shared through src/overlays/area/Area_ResetCameraOffsetY.h" }
@@ -2544,7 +2546,7 @@ g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApply
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 
 ["emi/world01/area057/13"]
-Message_SetAnswerMessage = { addr = 0x801F2C04, type = "func", source = "stores the message id the answer table D_801F4AFC holds for the menu choice D_801490C7 in g_MessageRequest" }
+Message_SetAnswerMessage = { addr = 0x801F2C04, type = "func", source = "stores the message id the answer table D_801F4AFC holds for the menu choice g_MessageChoice in g_MessageRequest" }
 
 ["emi/world01/area059/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
@@ -2583,7 +2585,7 @@ Actor_MoveByVelocity = { addr = 0x801F4560, type = "func", source = "moves the a
 Area_StepStreamSetDrawMode = { addr = 0x801F4778, type = "func", source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
 
 ["emi/world01/area067/14"]
-Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "stores the message id the answer table D_801F5390 holds for the menu choice D_801490C7 in g_MessageRequest" }
+Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "stores the message id the answer table D_801F5390 holds for the menu choice g_MessageChoice in g_MessageRequest" }
 
 ["emi/world01/area068/13"]
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
@@ -2602,7 +2604,7 @@ g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the h
 ["emi/world02/area077/14"]
 Area_DrawSpinTriangle = { addr = 0x801F47C8, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
 Area_InitSpin = { addr = 0x801F4A68, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
-Message_SetAnswerMessage = { addr = 0x801F59DC, type = "func", source = "stores the message id the answer table D_801F6B1C holds for the menu choice D_801490C7 in g_MessageRequest" }
+Message_SetAnswerMessage = { addr = 0x801F59DC, type = "func", source = "stores the message id the answer table D_801F6B1C holds for the menu choice g_MessageChoice in g_MessageRequest" }
 Area_AddCameraOffsetY20 = { addr = 0x801F5DC0, type = "func", source = "adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetCameraOffsetY = { addr = 0x801F5DE8, type = "func", source = "zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }
 
@@ -2911,7 +2913,7 @@ g_PartyMemberMessages = { addr = 0x801F6144, size = 0x18, source = "WORLD_ShowAr
 Actor_PlaceAtFocus = { addr = 0x801F2EC4, type = "func", source = "copies the field focus point into the work position" }
 
 ["emi/world03/area150/13"]
-Message_SetAnswerMessage = { addr = 0x801F2CB0, type = "func", source = "stores the message id the answer table D_801F3808 holds for the menu choice D_801490C7 in g_MessageRequest" }
+Message_SetAnswerMessage = { addr = 0x801F2CB0, type = "func", source = "stores the message id the answer table D_801F3808 holds for the menu choice g_MessageChoice in g_MessageRequest" }
 
 ["emi/world03/area151/13"]
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
@@ -3082,47 +3084,47 @@ Actor_BeginScriptFromAreaTable = { addr = 0x801F4100, type = "func", source = "o
 ["emi/world04/area175/13"]
 Area_DrawSpinTriangle = { addr = 0x801F2E2C, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
 Area_InitSpin = { addr = 0x801F30CC, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
-Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area176/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area177/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area178/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area179/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area180/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area181/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area182/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area183/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area184/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area185/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice D_801490C7 selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
 
 ["emi/world04/area187/13"]
 Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
@@ -3154,7 +3156,7 @@ Area_ResumeSceneAfterMessage = { addr = 0x801F2CA8, type = "func", source = "one
 Area_ResumeScriptAndStopInteraction = { addr = 0x801F2E44, type = "func", source = "reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E; one body shared with the other area overlays" }
 
 ["emi/world04/area193/13"]
-Message_SetAnswerMessage = { addr = 0x801F2C70, type = "func", source = "stores the message id the answer table D_801F39FC holds for the menu choice D_801490C7 in g_MessageRequest" }
+Message_SetAnswerMessage = { addr = 0x801F2C70, type = "func", source = "stores the message id the answer table D_801F39FC holds for the menu choice g_MessageChoice in g_MessageRequest" }
 
 ["emi/world04/area196/13"]
 Message_ShowParty = { addr = 0x801F3F90, type = "func", source = "shows the tagged area slot message and enters game state 2" }
@@ -3623,37 +3625,51 @@ D_80148651 = { addr = 0x80148651, source = "font-state substep" }
 D_80148652 = { addr = 0x80148652, source = "font-state substep" }
 D_8014865C = { addr = 0x8014865C, source = "font-state param" }
 g_SelectionFxVoices = { addr = 0x80148FC0, type = "s8", source = "SND_Init (SND_Init.c 22-28) initializes the seven entries to -1, one per SEP/VAB slot SND_Exit (func_8015CEBC) closes each non-(-1) entry func_8015D438 calls" }
+g_MessageState = { addr = 0x801490A0, source = "wiki systems/ui.md: the message state byte (0 to 7) that func_801507BC dispatches its handler table on; UI_TickChoiceTimer clears it" }
 g_UiWindowStep = { addr = 0x801490A1, type = "u8", source = "the window script step index func_801510DC/80150F3C/80151538 dispatch through handler tables on it Message_DispatchAnswerStep/80151710 advance it" }
+g_MessageChoiceMode = { addr = 0x801490A2, source = "wiki systems/ui.md: the selection state; func_801518F4 dispatches its handler table on it, UI_ResetMessage and func_80151B50 clear it when the choice ends" }
+g_MessageChoiceStep = { addr = 0x801490A3, source = "UI_RunChoiceStep and func_80151D3C index their two-entry handler table with it; func_80151B08 and func_80151D8C advance it, func_801519F8/func_80151A48 step it up and down" }
 g_UiWindowChannel = { addr = 0x801490A4, type = "WindowChannel", source = "func_8015083C documents the record (+0 flags, +2 result, +3 repeat, +0xC cursor, +0x10 return cursor) func_8015083C/80150E98/80151B08 run it" }
+g_MessageStateTimer = { addr = 0x801490A6, source = "UI_TickChoiceTimer counts its first byte down and clears g_MessageState at zero; func_8015142C arms it with 0x10" }
 g_MessageRequest = { addr = 0x801490A8, type = "u16", source = "step handlers store a table entry there (func_801523D0/8015253C/80152644) Message_DispatchAnswerStep advances when it is not 0xFFFF world02/area094 func_801F2C04 uses it" }
+g_MessageChoiceTimer = { addr = 0x801490AA, source = "UI_RunChoiceStep counts it down unless 0xFFFF and clears g_MessageChoiceMode at zero; func_80151B50 arms it with 1" }
+g_MessageScript = { addr = 0x801490AC, source = "wiki systems/ui.md: script start pointer; Message_StartRequest, Message_StartAreaMessage and Resource_RequestArea store the entry, UI_DrawMessageScript walks it" }
+g_MessageWindow = { addr = 0x801490BC, source = "MenuState block the text, panel and cue handlers share: text_x/text_y cursor, origin_x/origin_y window origin, selection_index choice; UI_DrawGlyph draws at its text_x/text_y" }
+g_MessageChoice = { addr = 0x801490C7, source = "wiki systems/ui.md: the player's choice; byte 0x0B of g_MessageWindow (selection_index), read by every Message_SetAnswerMessage to index its answer table" }
 g_TextVariables = { addr = 0x801490D8, type = "u8", source = "func_8014F84C draws through its 32-byte rows and TEXT_SetVariable copies names into them" }
 g_AreaCameraAngle = { addr = 0x801492D8, size = 0x8, source = "Area_StepCameraX, Area_StepCameraY and Area_StepCameraZ advance its x, y and z halfwords toward a target, and RotMatrix reads it as the scene rotation" }
-g_CameraMatrix = { addr = 0x801492E8, type = "MATRIX", source = "shared scene camera view matrix rebuilt from g_AreaCameraAngle (src/engine/slus/func_801527E4.c 93-102), composed by world/scenario draw code (func_8015B4B0.c 7," }
-g_AreaScrollTargetX = { addr = 0x80149308, type = "s32", source = "the scroll goal func_801527E4 steps D_80149310 toward (dist = 0x800000 - (D_80149308 & ~0x7FFF) passes through zero) func_80153DE8 seeds the tile origin from it func_8015C2D4 sets" }
-D_8014930A = { addr = 0x8014930A, source = "world param a" }
-g_AreaScrollTargetY = { addr = 0x8014930C, type = "s32", source = "the scroll goal's y in 16.16 func_801527E4 steps D_80149314 toward 0x800000 - (D_8014930C & ~0x7FFF) func_8015C2D4 sets it from g_PartyY" }
-D_8014930E = { addr = 0x8014930E, source = "world param b" }
-g_AreaCameraHeight = { addr = 0x80149318, type = "s32", source = "func_80153DE8 sets it from func_8015477C or the map height func_801527E4 uses view.vz = D_80149318 >> 1 and steps it with D_80149330 ram-map calls the same word the camera z" }
+g_CameraMatrix = { addr = 0x801492E8, type = "MATRIX", source = "shared scene camera view matrix rebuilt from g_AreaCameraAngle (src/engine/slus/Area_StepCamera.c 93-102), composed by world/scenario draw code (func_8015B4B0.c 7," }
+g_AreaScrollTargetX = { addr = 0x80149308, type = "s32", source = "the scroll goal Area_StepCamera steps g_AreaCameraX toward (dist = 0x800000 - (D_80149308 & ~0x7FFF) passes through zero) func_80153DE8 seeds the tile origin from it func_8015C2D4 sets" }
+g_AreaTargetCellX = { addr = 0x8014930A, source = "integer half (+2) of g_AreaScrollTargetX: the cell x func_801A0348, func_801A0048 and Area_SetCellPalette take, stepped by 5 cells in func_8019B704" }
+g_AreaScrollTargetY = { addr = 0x8014930C, type = "s32", source = "the scroll goal's y in 16.16 Area_StepCamera steps g_AreaCameraY toward 0x800000 - (D_8014930C & ~0x7FFF) func_8015C2D4 sets it from g_PartyY" }
+g_AreaTargetCellY = { addr = 0x8014930E, source = "integer half (+2) of g_AreaScrollTargetY: the cell y func_801A0348, func_801A0048 and Area_SetCellPalette take, stepped by 5 cells in func_8019B704" }
+g_AreaCameraX = { addr = 0x80149310, source = "x of the camera position vector: Area_StepCamera and Area_SetCameraMatrix rotate (g_AreaCameraX >> 1, g_AreaCameraY >> 1, g_AreaCameraHeight >> 1) through g_CameraMatrix into the view translation; Area_StepCamera steps it toward g_AreaScrollTargetX" }
+g_AreaCameraY = { addr = 0x80149314, source = "y of the camera position vector next to g_AreaCameraX and g_AreaCameraHeight (the z); Area_StepCamera steps it toward g_AreaScrollTargetY, scena00 and scena16 set it for the cutscene views" }
+g_AreaCameraHeight = { addr = 0x80149318, type = "s32", source = "func_80153DE8 sets it from func_8015477C or the map height Area_StepCamera uses view.vz = D_80149318 >> 1 and steps it with D_80149330 ram-map calls the same word the camera z" }
 g_AreaCellCodes = { addr = 0x8014931C, type = "u8", source = "include/world/area.h 40-51 func_80153DE8 sets it to MAP_BUNDLE_BASE + D_80104014 * 4 Area_GetCellCode and func_801553B8/801576FC read cells through it" }
 g_AreaTileOriginX = { addr = 0x80149320, type = "s16", source = "func_80153DE8 sets it to (D_80149308 >> 16) - 0x18 func_80152C9C/801558F0/801530D0 subtract it" }
 g_AreaTileOriginY = { addr = 0x80149322, type = "s16", source = "func_80153DE8 sets it to (D_8014930C >> 16) + 3 func_80152C9C/801558F0/801530D0 subtract it" }
 g_AreaGridColCursor = { addr = 0x80149324, type = "s16", source = "Area_ProbeCellId and Area_DrawCellLayer add it to a grid column; func_80152C9C and func_80152D9C step it with wrap at 27" }
 g_AreaGridRowCursor = { addr = 0x80149326, type = "s16", source = "Area_ProbeCellId and Area_DrawCellLayer add it to a grid row; func_80152E94 and func_80152FB0 step it with wrap at 55" }
-g_AreaCameraOffsetX = { addr = 0x80149328, type = "s16", source = "the x shift of the camera: Area_SetCameraMatrix, func_801C7244 and func_801527E4 add it to the projected x of the camera translation; the Area_AddCameraOffsetX2 and X20 steppers move it and func_80153DE8 clears it with the y and z shifts; adjacent to g_AreaCameraOffsetY and g_AreaCameraOffsetZ (one clear, one translation sum) but every access is by its own symbol, so it stays three globals" }
-g_AreaCameraOffsetY = { addr = 0x8014932A, type = "s16", source = "the y shift of the camera: Area_SetCameraMatrix, func_801C7244 and func_801527E4 add it to the projected y of the camera translation; the Area_AddCameraOffsetY and Area_SubCameraOffsetY steppers (2, 4, 10 and 20) move it, scena15 340.c adds a shifted offset to it, and func_80153DE8 clears it" }
-g_AreaCameraOffsetZ = { addr = 0x8014932C, type = "s16", source = "the depth shift of the camera: Area_SetCameraMatrix, func_801C7244 and func_801527E4 add it with 0x1194 to the projected z of the camera translation; func_8019ACF4 steps it to a target, func_8014EF80 and func_8014F24C lower it by 0x32 a frame, battle/03 func_801E64B4 and func_801E65F8 move it by the work's step, scena00 8.c and scena17 B1C.c animate it, func_801530D0 divides it by 650 into a grid cell, and func_80153DE8 clears it" }
-g_AreaCameraStep = { addr = 0x8014932E, type = "s16", source = "func_801527E4 multiplies the direction by (s16)D_8014932E for both axes func_8015C2D4 clears it" }
-g_AreaCameraHeightStep = { addr = 0x80149330, type = "s16", source = "added to D_80149318 and twice subtracted from the y remainder in func_801527E4 func_80167428 derives it from the map height" }
-g_AreaCameraMoving = { addr = 0x80149332, type = "u8", source = "func_801527E4 sets it when a camera step is due and clears it when both distances are zero world00/area030 func_801DDB74/801DAE84/801DAE3C and battle/15 func_8009B9A0 test it" }
-g_AreaCameraRefreshCount = { addr = 0x80149333, type = "u8", source = "set 2/3 on a wrap or angle change and decremented in func_801527E4 func_801530D0 runs while nonzero" }
+g_AreaCameraOffsetX = { addr = 0x80149328, type = "s16", source = "the x shift of the camera: Area_SetCameraMatrix, func_801C7244 and Area_StepCamera add it to the projected x of the camera translation; the Area_AddCameraOffsetX2 and X20 steppers move it and func_80153DE8 clears it with the y and z shifts; adjacent to g_AreaCameraOffsetY and g_AreaCameraOffsetZ (one clear, one translation sum) but every access is by its own symbol, so it stays three globals" }
+g_AreaCameraOffsetY = { addr = 0x8014932A, type = "s16", source = "the y shift of the camera: Area_SetCameraMatrix, func_801C7244 and Area_StepCamera add it to the projected y of the camera translation; the Area_AddCameraOffsetY and Area_SubCameraOffsetY steppers (2, 4, 10 and 20) move it, scena15 340.c adds a shifted offset to it, and func_80153DE8 clears it" }
+g_AreaCameraOffsetZ = { addr = 0x8014932C, type = "s16", source = "the depth shift of the camera: Area_SetCameraMatrix, func_801C7244 and Area_StepCamera add it with 0x1194 to the projected z of the camera translation; func_8019ACF4 steps it to a target, func_8014EF80 and func_8014F24C lower it by 0x32 a frame, battle/03 func_801E64B4 and func_801E65F8 move it by the work's step, scena00 8.c and scena17 B1C.c animate it, func_801530D0 divides it by 650 into a grid cell, and func_80153DE8 clears it" }
+g_AreaCameraStep = { addr = 0x8014932E, type = "s16", source = "Area_StepCamera multiplies the direction by (s16)D_8014932E for both axes func_8015C2D4 clears it" }
+g_AreaCameraHeightStep = { addr = 0x80149330, type = "s16", source = "added to D_80149318 and twice subtracted from the y remainder in Area_StepCamera func_80167428 derives it from the map height" }
+g_AreaCameraMoving = { addr = 0x80149332, type = "u8", source = "Area_StepCamera sets it when a camera step is due and clears it when both distances are zero world00/area030 func_801DDB74/801DAE84/801DAE3C and battle/15 func_8009B9A0 test it" }
+g_AreaCameraRefreshCount = { addr = 0x80149333, type = "u8", source = "set 2/3 on a wrap or angle change and decremented in Area_StepCamera func_801530D0 runs while nonzero" }
 g_AreaCellPrimFreeIndex = { addr = 0x80149334, type = "u16", source = "Area_AllocCellPrimRow advances it past the popped id and Area_FreeCellPrimRow steps it back before storing; 0 means no id is left" }
 g_AreaTileRemainderY = { addr = 0x80149338, type = "s16", source = "wrapped at 0x200 with the func_80152E94/80152FB0 refills func_80153DE8 seeds it from the map height" }
 g_AreaSceneMode = { addr = 0x8014933B, type = "u8", source = "Area_TestCondition class FE00 compares the request low byte with it (func_80155E7C) world02/area106 walks 0/1/2" }
 g_AreaDrawMode = { addr = 0x8014933E, type = "u8", source = "the GFX_AddPrim draw mode in func_8015684C/80156C18/801579A8 Area_SetDrawMode stages it into g_Task->unk_29 SYS_StartFrontend sets 6" }
+g_AreaHeightOffsetEnabled = { addr = 0x80149340, source = "0 or 1 multiplier of the signed height offset byte in Area_SampleHeight; Area_EnableHeightOffset sets it to 1, Area_ReadHeight and Area_ReadStepHeight clear it" }
 s__LOGO_LOGO_EXE_1_80149800 = { addr = 0x80149800, size = 0x14, source = "SYS_RunLogo passes this LOGO executable path to SYS_LoadExec" }
 D_80149814 = { addr = 0x80149814, size = 0x11F0 }
 D_80149998 = { addr = 0x80149998, size = 0x178, alias = true }
 g_UiLocalModeFuncs = { addr = 0x801499AC, size = 0x54, alias = true, source = "UI_DispatchLocalMode@0x8014ED6C snapshots its 21 callbacks to the stack and dispatches the entry the game-UI local mode selects; GFX_RunBlackFade starts through four of them" }
+g_MessageStateHandlers = { addr = 0x80149A5C, size = 0x20, alias = true, source = "func_801507BC copies the eight-entry table to the stack and calls the entry g_MessageState.state_00 selects (wiki systems/ui.md)" }
+g_MessageChoiceHandlers = { addr = 0x80149AB4, size = 0x18, alias = true, source = "func_801518F4 copies the six-entry table to the stack and calls the entry g_MessageChoiceMode selects (wiki systems/ui.md)" }
+g_MessageStepBank = { addr = 0x80149ACC, size = 0x40, alias = true, source = "wiki systems/areas.md: the 16-entry shared bank Message_DispatchBankStep calls for answer step ids from 0x80 (entry step_id - 0x80)" }
 g_EmiCDSteps = { addr = 0x80149C3C, alias = true, source = "EMI_LoaderRunCD calls the entry selected by the step byte" }
 g_EmiSlotDrainFuncs = { addr = 0x80149C60, alias = true, source = "EMI_LoaderServiceStream copies it" }
 __main = { addr = 0x8014AA04, type = "func", source = "SLUS entry, C calls it by its func_ name" }
@@ -3734,37 +3750,38 @@ Resource_RequestArea = { addr = 0x80150284, type = "func", source = "resolves an
 Resource_GetText = { addr = 0x801502D0, type = "func", source = "returns the string a resource id selects in the loader-written 0x8001A000 table - every caller passes the result to UI_DrawText, TEXT_SetVariable, strncpy or a message request" }
 UI_ResetMessage = { addr = 0x80150304, type = "func", source = "resets the front-end selection state and requests menu 0 mode 0" }
 UI_UpdateLayout = { addr = 0x801503E0, type = "func", source = "rebuilds the two window cells from D_80148334/D_80148336 and reports the confirm bit" }
-UI_DrawMessageScript = { addr = 0x80150470, type = "func", source = "walks the D_801490AC message script drawing each glyph through func_8014F800" }
-UI_TickChoiceTimer = { addr = 0x80150E14, type = "func", source = "decrements D_801490A6 and clears D_801490A0 at zero" }
+UI_DrawMessageScript = { addr = 0x80150470, type = "func", source = "walks the g_MessageScript message script drawing each glyph through func_8014F800" }
+UI_TickChoiceTimer = { addr = 0x80150E14, type = "func", source = "decrements g_MessageStateTimer and clears g_MessageState at zero" }
 UI_HandleChoiceInput = { addr = 0x80151210, type = "func", source = "handles the D_80145AC4/D_80145AC2 cues and moves the choice cursor on repeat input" }
 Message_DispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "runs the answer step the selection byte names (g_AreaLoads steps below 0x80, Message_DispatchBankStep above), then advances the window step when g_MessageRequest holds a message" }
 Message_StartRequest = { addr = 0x801514D0, type = "func", source = "resolves the message index g_MessageRequest holds into the shared handle pair and rewinds the window step; func_8015142C and func_8015102C call it" }
 UI_ClosePanel = { addr = 0x801515A8, type = "func", source = "clears the panel index - arms panel 1 mode 0 and advances the front-end step" }
 UI_ScrollChoice = { addr = 0x80151628, type = "func", source = "moves the choice cursor 0x1000 back / 0x4000 forward with wraparound" }
-UI_RunChoiceStep = { addr = 0x8015196C, type = "func", source = "runs the D_801490A3-selected handler and counts D_801490AA down" }
-UI_DrawGlyph = { addr = 0x80151E24, type = "func", source = "draws the first character of text as one scaled POLY_FT4 glyph at D_801490BC text_x/text_y with CLUT row color & 0xF, then advances text_x by cue_counter; UI_DrawMessageScript calls it for the flagged glyph path while a frontend request is pending" }
-Message_DispatchBankStep = { addr = 0x801522F8, type = "func", source = "runs entry step_id - 0x80 of the 16-entry answer handler bank D_80149ACC for Message_DispatchAnswerStep and func_80151710" }
-Message_SetAnswerMessage5 = { addr = 0x80152510, type = "func", source = "bank D_80149ACC entry 5 stores pair 5 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage6 = { addr = 0x8015253C, type = "func", source = "bank D_80149ACC entry 6 stores pair 6 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage7 = { addr = 0x80152568, type = "func", source = "bank D_80149ACC entry 7 stores pair 7 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage8 = { addr = 0x80152594, type = "func", source = "bank D_80149ACC entry 8 stores pair 8 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage9 = { addr = 0x801525C0, type = "func", source = "bank D_80149ACC entry 9 stores pair 9 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage10 = { addr = 0x801525EC, type = "func", source = "bank D_80149ACC entry 10 stores pair 10 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage11 = { addr = 0x80152618, type = "func", source = "bank D_80149ACC entry 11 stores pair 11 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage12 = { addr = 0x80152644, type = "func", source = "bank D_80149ACC entry 12 stores pair 12 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage13 = { addr = 0x80152670, type = "func", source = "bank D_80149ACC entry 13 stores pair 13 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage14 = { addr = 0x8015269C, type = "func", source = "bank D_80149ACC entry 14 stores pair 14 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage15 = { addr = 0x801526C8, type = "func", source = "bank D_80149ACC entry 15 stores pair 15 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
+UI_RunChoiceStep = { addr = 0x8015196C, type = "func", source = "runs the g_MessageChoiceStep-selected handler and counts g_MessageChoiceTimer down" }
+UI_DrawGlyph = { addr = 0x80151E24, type = "func", source = "draws the first character of text as one scaled POLY_FT4 glyph at g_MessageWindow text_x/text_y with CLUT row color & 0xF, then advances text_x by cue_counter; UI_DrawMessageScript calls it for the flagged glyph path while a frontend request is pending" }
+Message_DispatchBankStep = { addr = 0x801522F8, type = "func", source = "runs entry step_id - 0x80 of the 16-entry answer handler bank g_MessageStepBank for Message_DispatchAnswerStep and func_80151710" }
+Message_SetAnswerMessage5 = { addr = 0x80152510, type = "func", source = "bank g_MessageStepBank entry 5 stores pair 5 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage6 = { addr = 0x8015253C, type = "func", source = "bank g_MessageStepBank entry 6 stores pair 6 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage7 = { addr = 0x80152568, type = "func", source = "bank g_MessageStepBank entry 7 stores pair 7 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage8 = { addr = 0x80152594, type = "func", source = "bank g_MessageStepBank entry 8 stores pair 8 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage9 = { addr = 0x801525C0, type = "func", source = "bank g_MessageStepBank entry 9 stores pair 9 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage10 = { addr = 0x801525EC, type = "func", source = "bank g_MessageStepBank entry 10 stores pair 10 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage11 = { addr = 0x80152618, type = "func", source = "bank g_MessageStepBank entry 11 stores pair 11 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage12 = { addr = 0x80152644, type = "func", source = "bank g_MessageStepBank entry 12 stores pair 12 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage13 = { addr = 0x80152670, type = "func", source = "bank g_MessageStepBank entry 13 stores pair 13 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage14 = { addr = 0x8015269C, type = "func", source = "bank g_MessageStepBank entry 14 stores pair 14 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage15 = { addr = 0x801526C8, type = "func", source = "bank g_MessageStepBank entry 15 stores pair 15 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
 UI_DrawWaitMarker = { addr = 0x801526F4, type = "func", source = "draws the 8x8 flat sprite when graphics flag 0x20 is set" }
+Area_StepCamera = { addr = 0x801527E4, type = "func", source = "steps g_AreaCameraX/g_AreaCameraY toward g_AreaScrollTargetX/Y by g_AreaCameraStep, wraps the tile origin and rebuilds g_CameraMatrix from g_AreaCameraAngle; Area_RunFrame calls it each field frame" }
 Area_ProbeCell = { addr = 0x801541C0, type = "func", source = "maps panel coordinates into the bundle grid and returns the 16-bit cell through out" }
 Area_UploadCell = { addr = 0x80154294, type = "func", source = "resolves the bundle cell and uploads its word list and +0x4E/+0x46 linked rows to the draw context" }
 Area_AllocCellPrimRow = { addr = 0x8015456C, type = "func", source = "pops the next g_AreaCellPrims row id from the free ring (0 when empty); func_801530D0 stores the result in the cell record prim_id and in the row links at +0x46 and +0x4E, and func_80153DE8 seeds the ring with ids 0 to 0x3FF" }
 Area_RequestCellRows = { addr = 0x801545B4, type = "func", source = "queues the low-12-bit cell id and the +0x46/+0x4E rows of the D_8012D880 pool entry" }
 Area_FreeCellPrimRow = { addr = 0x80154664, type = "func", source = "pushes a g_AreaCellPrims row id back onto the free ring; Area_RequestCellRows frees the row of a cleared cell record and its two linked rows through it, Area_UploadCell frees the second link" }
 Area_RefreshCellGrid = { addr = 0x80154698, type = "func", source = "walks the 0x38 x 0x1C cell grid and refreshes each rotated cell through func_801541C0" }
-Area_SampleHeight = { addr = 0x8015477C, type = "func", source = "samples the map bundle's four signed corner height bytes at the 16.16 point, scales by D_80149340, returns s16 and 0 outside the grid, src/engine/slus/Area_SampleHeight.c, 119 overlay call sites" }
-Area_EnableHeightOffset = { addr = 0x80154ED0, type = "func", source = "latches the active mode's sub-state flag into D_80149340" }
-Area_ReadHeight = { addr = 0x80154F28, type = "func", source = "latches the mode sub-state flag into D_80149340 via Area_EnableHeightOffset, runs Area_SampleHeight for the one point, then clears D_80149340" }
+Area_SampleHeight = { addr = 0x8015477C, type = "func", source = "samples the map bundle's four signed corner height bytes at the 16.16 point, scales by g_AreaHeightOffsetEnabled, returns s16 and 0 outside the grid, src/engine/slus/Area_SampleHeight.c, 119 overlay call sites" }
+Area_EnableHeightOffset = { addr = 0x80154ED0, type = "func", source = "latches the active mode's sub-state flag into g_AreaHeightOffsetEnabled" }
+Area_ReadHeight = { addr = 0x80154F28, type = "func", source = "latches the mode sub-state flag into g_AreaHeightOffsetEnabled via Area_EnableHeightOffset, runs Area_SampleHeight for the one point, then clears g_AreaHeightOffsetEnabled" }
 Area_ReadStepHeight = { addr = 0x80154F78, type = "func", source = "reads the mode's map value for the point through func_80154ABC and clears the flag" }
 Area_AdvanceScroll = { addr = 0x80154FD8, type = "func", source = "records the sampled value and advances the vertical scroll accumulator" }
 Area_StoreHeight = { addr = 0x80155038, type = "func", source = "stores a value in the map bundle at the scaled index" }
@@ -3785,37 +3802,38 @@ Area_DrawCellQuad = { addr = 0x80156ED4, type = "func", source = "copies the sel
 Area_DrawGouraudQuads = { addr = 0x8015707C, type = "func", source = "draws one Gouraud-shaded quadrangle per eight-record part" }
 Area_DrawParts = { addr = 0x80157358, type = "func", source = "draws the textured quads in part_list through the GTE" }
 Area_DrawSceneSprite = { addr = 0x801579A8, type = "func", source = "draws one scene record's sprite as an FT4 quad" }
-Area_RunBundleOpcodes = { addr = 0x80157F98, type = "func", source = "walks the bundle opcode list D_80104020 through the D_8017F8F0 handlers" }
+Area_RunBundleOpcodes = { addr = 0x80157F98, type = "func", source = "walks the bundle opcode list D_80104020 through the g_BundleOpcodeHandlers handlers" }
 Area_CyclePalette = { addr = 0x801580A4, type = "func", source = "copies the selected palette record's eight words to g_GraphicsPaletteDst" }
 Area_ReadTintRecord = { addr = 0x801581B4, type = "func", source = "reads one palette-tint record and forwards its masks and deltas" }
 Area_ApplyPaletteTint = { addr = 0x8015822C, type = "func", source = "offsets the selected palette planes by the signed RGB deltas" }
 Area_WriteCellRecord = { addr = 0x80158400, type = "func", source = "writes one 4-byte cell record into the bundle's cell area" }
-Area_RunBundleRecords = { addr = 0x801584A4, type = "func", source = "walks the bundle record list D_80104022 through the D_8017F8FC handlers" }
+Area_RunBundleRecords = { addr = 0x801584A4, type = "func", source = "walks the bundle record list D_80104022 through the g_BundleRecordHandlers handlers" }
 Area_LoadPaletteBank = { addr = 0x80158550, type = "func", source = "searches the palette records for the id g_FrameCount and copies 0x20 bytes to the palette bank" }
 Area_DrawGouraudQuad = { addr = 0x8015864C, type = "func", source = "draws a Gouraud-shaded quadrangle from the record when inside the draw area" }
 Area_IndexCells = { addr = 0x80158B24, type = "func", source = "clears the 56 x 28 lookup table and maps each area-map record to a wrapped cell" }
 Menu_RunPanelTasks = { addr = 0x80158C80, type = "func", source = "Battle_Update calls it each frame - dispatches the active g_MenuPanelTasks through the nine g_MenuPanels handlers" }
 Menu_ArmPanelTask = { addr = 0x80158DB8, type = "func", source = "Battle_ReserveStagePanels arms a panel by menu id and returns 0xFF when already armed" }
 Menu_ResetPanelTasks = { addr = 0x80158E50, type = "func", source = "SYS_StartFrontend clears the 22 g_MenuPanelTasks slots and g_MenuPanelMode" }
+UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "writes one flat gray LINE_F2 (start, end, gray level) to ordering table 1; func_80159B9C draws a panel's outline bars with it" }
 UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "walks a message control stream from the cursor and draws its glyphs from the start position: control byte 1 resets x and advances y by 0xD, bytes 3-9 select the item, character or party name sources; func_8015A098 and func_8015A170 pass it the panel row positions and thread the returned cursor through successive calls" }
 Area_RunParty = { addr = 0x8015A758, type = "func", source = "Battle_Update calls it - publishes the four D_80147A58 work records and steps the active ones" }
 SYS_SetFlag = { addr = 0x8015B580, type = "func", source = "bit set over a byte array - the scenario script uses it on g_SceneFlags" }
 SYS_ClearFlag = { addr = 0x8015B5A8, type = "func", source = "bit clear over a byte array (the sibling of SYS_SetFlag)" }
 SYS_TestFlag = { addr = 0x8015B5D4, type = "func", source = "bit test over a byte array - Scene_CheckStepTrigger calls it" }
 SYS_ToggleFlag = { addr = 0x8015B5F4, type = "func", source = "bit toggle over a byte array (the sibling of SYS_SetFlag)" }
-Game_IsScenarioEqual = { addr = 0x8015B61C, type = "func", source = "returns 1 when the operand byte equals g_SceneState.scenario_id; entry 0 of the script handler table D_8018217C that func_801A3FC0 and func_801A4518 call" }
-Game_IsAreaEqual = { addr = 0x8015B644, type = "func", source = "returns 1 when the operand byte equals g_GameAreaId; entry 1 of the script handler table D_8018217C" }
-Game_TestSceneFlag = { addr = 0x8015B66C, type = "func", source = "tests the operand bit in the g_SceneFlagWords row selected by D_8014820C with SYS_TestFlag; entry 2 of the script handler table D_8018217C" }
-Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "tests the operand bit of g_SceneEventFlags with SYS_TestFlag; entry 12 of the script handler table D_8018217C" }
-Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "forwards the operand byte to Item_VitalHas; entry 13 of the script handler table D_8018217C" }
-Game_IsScenarioAtLeast = { addr = 0x8015B7C4, type = "func", source = "returns 1 when the operand byte is at or above g_SceneState.scenario_id; entry 14 of the script handler table D_8018217C" }
-Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "returns 1 when the operand byte equals g_ScriptVars[0]; entry 3 of the script handler table D_8018217C" }
-Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "returns 1 when the operand byte equals g_ScriptVars[1]; entry 4 of the script handler table D_8018217C" }
-Game_IsScriptVar2Equal = { addr = 0x8015B9DC, type = "func", source = "returns 1 when the operand byte equals g_ScriptVars[2]; entry 5 of the script handler table D_8018217C" }
-Game_IsScriptVar3Equal = { addr = 0x8015BA04, type = "func", source = "returns 1 when the operand byte equals g_ScriptVars[3]; entry 6 of the script handler table D_8018217C" }
-Game_SetScriptVar = { addr = 0x8015BA2C, type = "func", source = "stores operand[1] in g_ScriptVars[(operand[0] & 0xC) >> 2]; entry 17 of the script handler table D_8018217C" }
-Game_IsScriptVarEqual = { addr = 0x8015BA50, type = "func", source = "compares operand[1] with g_ScriptVars[(operand[0] & 0xC) >> 2]; entry 18 of the script handler table D_8018217C" }
-Game_IncScriptVar = { addr = 0x8015BA84, type = "func", source = "increments g_ScriptVars[(operand[0] & 0xC) >> 2]; entry 19 of the script handler table D_8018217C" }
+Game_IsScenarioEqual = { addr = 0x8015B61C, type = "func", source = "returns 1 when the operand byte equals g_SceneState.scenario_id; entry 0 of the script handler table g_AreaScriptTests that func_801A3FC0 and func_801A4518 call" }
+Game_IsAreaEqual = { addr = 0x8015B644, type = "func", source = "returns 1 when the operand byte equals g_GameAreaId; entry 1 of the script handler table g_AreaScriptTests" }
+Game_TestSceneFlag = { addr = 0x8015B66C, type = "func", source = "tests the operand bit in the g_SceneFlagWords row selected by D_8014820C with SYS_TestFlag; entry 2 of the script handler table g_AreaScriptTests" }
+Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "tests the operand bit of g_SceneEventFlags with SYS_TestFlag; entry 12 of the script handler table g_AreaScriptTests" }
+Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "forwards the operand byte to Item_VitalHas; entry 13 of the script handler table g_AreaScriptTests" }
+Game_IsScenarioAtLeast = { addr = 0x8015B7C4, type = "func", source = "returns 1 when the operand byte is at or above g_SceneState.scenario_id; entry 14 of the script handler table g_AreaScriptTests" }
+Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "returns 1 when the operand byte equals g_ScriptVars[0]; entry 3 of the script handler table g_AreaScriptTests" }
+Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "returns 1 when the operand byte equals g_ScriptVars[1]; entry 4 of the script handler table g_AreaScriptTests" }
+Game_IsScriptVar2Equal = { addr = 0x8015B9DC, type = "func", source = "returns 1 when the operand byte equals g_ScriptVars[2]; entry 5 of the script handler table g_AreaScriptTests" }
+Game_IsScriptVar3Equal = { addr = 0x8015BA04, type = "func", source = "returns 1 when the operand byte equals g_ScriptVars[3]; entry 6 of the script handler table g_AreaScriptTests" }
+Game_SetScriptVar = { addr = 0x8015BA2C, type = "func", source = "stores operand[1] in g_ScriptVars[(operand[0] & 0xC) >> 2]; entry 17 of the script handler table g_AreaScriptTests" }
+Game_IsScriptVarEqual = { addr = 0x8015BA50, type = "func", source = "compares operand[1] with g_ScriptVars[(operand[0] & 0xC) >> 2]; entry 18 of the script handler table g_AreaScriptTests" }
+Game_IncScriptVar = { addr = 0x8015BA84, type = "func", source = "increments g_ScriptVars[(operand[0] & 0xC) >> 2]; entry 19 of the script handler table g_AreaScriptTests" }
 Area_TurnCameraX = { addr = 0x8015BBA4, type = "func", source = "converts a degree target and step to 4096 units and calls func_8015BC14 for D_801492D8" }
 Area_StepCameraX = { addr = 0x8015BC14, type = "func", source = "advances D_801492D8 toward the 12-bit target and rebuilds the D_801481D8 x angle" }
 Area_TurnCameraY = { addr = 0x8015BCA4, type = "func", source = "converts a degree target and step to 4096 units and calls func_8015BD14 for D_801492DA" }
@@ -3839,7 +3857,7 @@ Actor_ReadState = { addr = 0x8015CA9C, type = "func", source = "reads the work r
 SND_Init = { addr = 0x8015CD00, type = "func", source = "SYS_StartFrontend calls it - builds the SE table - starts the ticker and reverb - opens the reserved voice and the seven SEP/VAB slots" }
 SND_Start = { addr = 0x8015CE70, type = "func", source = "SYS_StartFrontend calls it - starts the sound system and sets master and serial volume" }
 SND_Exit = { addr = 0x8015CEBC, type = "func", source = "SYS_Main calls it - stops all keys - closes the seven VAB and SEP banks - turns reverb off and calls SpuQuit" }
-SND_UpdateVoiceStatus = { addr = 0x8015D044, type = "func", source = "SYS_Main calls it - polls SpuGetKeyStatus for voices 0..0x17 into D_8018E140" }
+SND_UpdateVoiceStatus = { addr = 0x8015D044, type = "func", source = "SYS_Main calls it - polls SpuGetKeyStatus for voices 0..0x17 into g_SndVoiceStatus" }
 SND_LowerVoiceLevel = { addr = 0x8015D148, type = "func", source = "subtracts from the D_80149070 accumulator and derives the D_80149040 level" }
 SND_RaiseVoiceLevel = { addr = 0x8015D1BC, type = "func", source = "adds to the D_80149070 accumulator and derives the D_80149040 level" }
 SND_StartVolumeSweep = { addr = 0x8015D228, type = "func", source = "starts a volume sweep from D_80148FC8 to D_80148FF8 on the voice" }
@@ -4494,27 +4512,38 @@ g_SpriteCellRotations = { addr = 0x8017F55C, source = "func_8014D290 picks the c
 g_NumberRowShades = { addr = 0x8017F580, source = "func_8014F84C takes the shade byte and height trim of the number font row" }
 g_TextRowShades = { addr = 0x8017F5A0, source = "func_8014FC90 takes the shade byte and height trim of the window font row" }
 g_TextRowOffsets = { addr = 0x8017F620, source = "UI_DrawGlyph takes the per-row pixel offset of the window text" }
+g_AnswerMessages = { addr = 0x8017F628, source = "Message_SetAnswerMessage5..15 and func_80152370 store g_AnswerMessages[row + g_MessageChoice] in g_MessageRequest: the message index each answer leads to" }
 g_SpriteCellPartCounts = { addr = 0x8017F79C, source = "func_8015642C emits this many sprite parts for the cell index" }
 g_SpriteCellTopV = { addr = 0x8017F894, source = "func_8015642C fills the top sprite vertices' v coordinates from this cell table" }
 g_SpriteCellBottomV = { addr = 0x8017F8A8, source = "func_8015642C fills the bottom sprite vertices' v coordinates from this cell table" }
 g_SpriteCellLeftU = { addr = 0x8017F8BC, source = "func_8015642C fills the left sprite vertices' u coordinates from this cell table" }
 g_SpriteCellRightU = { addr = 0x8017F8C8, source = "func_8015642C fills the right sprite vertices' u coordinates from this cell table" }
 g_SpriteCellCluts = { addr = 0x8017F8D4, source = "func_8015642C builds the sprite CLUT id from this cell table" }
+g_BundleOpcodeHandlers = { addr = 0x8017F8F0, source = "Area_RunBundleOpcodes calls g_BundleOpcodeHandlers[record[3] & 0x3F](record) for each map-bundle record of the +0x20 list; wiki formats/area.md: the dispatch table for the +0x20 lists" }
+g_BundleRecordHandlers = { addr = 0x8017F8FC, source = "interior of g_BundleOpcodeHandlers at index 3; Area_RunBundleRecords calls g_BundleRecordHandlers[record[3] & 0x7F](record); wiki rendering.md and formats/area.md: the dispatch table for the +0x22 lists" }
 g_MenuPanelOrigins = { addr = 0x8017F90C, source = "func_80159050, func_8015920C and func_80159580 place the menu panel from this x, y pair table" }
 g_AreaLoads = { addr = 0x8017F974, type = "AreaLoad", source = "src/engine/slus/D_8017F974.c defines the 200 row pointers; func_8019FAA0 and func_801ACE10 index it by g_GameAreaId" }
-g_AreaEncounterZones = { addr = 0x8017FC94, source = "the zone table behind the index list in src/engine/slus/D_80181164.c, walked by Area_GetCellCode as zones of 0x28 bytes" }
+g_AreaEncounterZones = { addr = 0x8017FC94, source = "the zone table behind the index list in src/engine/slus/g_EncounterZoneLists.c, walked by Area_GetCellCode as zones of 0x28 bytes" }
+g_EncounterZoneLists = { addr = 0x80181164, source = "MAP_ZONE_LIST_COUNT lists of EncounterZone entries, one per map index; func_801A0490 scans list table_index for the entry that covers a cell" }
 g_FacingOffsets = { addr = 0x80181AC0, type = "FacingStep", source = "8 facing offsets of two words each, added to a position by the plchar route walkers" }
 g_CharSlot = { addr = 0x80181B10, size = 12, source = "the 12-byte character-slot map the plchar and field code index" }
 g_FacingSteps = { addr = 0x80181B94, type = "FacingStep", source = "8 facing steps, Char_ProbeFacingCell adds step x and y to a position" }
+g_FacingStepY = { addr = 0x80181B98, source = "address of g_FacingSteps[0].y (0x80181B94 + 4): the plchar walkers add D_80181B98[direction * 2] to pos.y" }
 g_RouteSpeedScale = { addr = 0x80181BD4, source = "8 speed scales the route walkers multiply a step by" }
 s_LoaderRecordBytes = { addr = 0x80181D98, source = "record list bytes the D_80181E40 list and count entries point into" }
 g_SelectionCues = { addr = 0x80181EBA, type = "SelectionCue", source = "SND_PlayBGM/SND_PlaySequence read (D_80181EBA[i], D_80181EBB[i]) with a 4-byte row stride game/00 func_80197F48 and scena16 use it" }
 s_ScriptCopyBlock = { addr = 0x8018216C, source = "the 16-byte copy block the etc/game/00 script interpreter reads" }
+g_AreaScriptTests = { addr = 0x8018217C, source = "wiki systems/areas.md: the 32-entry table of condition tests the setup stream's conditional blocks (kinds 0xF0, 0xF1, 0xF4) select from; func_801A4158 and func_801A4518 call the entry the cursor byte names" }
 g_VabProgramOffsets = { addr = 0x801821E0, source = "4 halfwords - the program block offset" }
 g_VabToneOffsets = { addr = 0x801821E8, source = "80 halfwords - 32 * tone" }
 g_SndCueReaders = { addr = 0x8018232C, source = "SND_PlayCue calls the reader the cue bank nibble selects" }
+g_SndBankSpuAddress = { addr = 0x80182348, source = "wiki systems/audio.md and concepts/memory.md: the SPU RAM start address of each bank per layout ([3][7]); SND_SetBankLayout stores it in the bank's spu_address" }
+g_SndBankHeaderSize = { addr = 0x8018239C, source = "wiki systems/audio.md: the main-RAM header window size of each bank per layout ([3][7]); SND_SetBankLayout adds it first to the 0x8011A000 base" }
+g_SndBankSequenceSize = { addr = 0x801823F0, source = "wiki systems/audio.md: the main-RAM sequence window size of each bank per layout; SND_SetBankLayout adds it after the header window" }
 g_EmiSlotLbas = { addr = 0x80182444, source = "EMI_LoaderSlotLba returns its entry for a slot id" }
 g_EmiHeaderTag = { addr = 0x80183224, source = "the MATH_TBL string tag read by func_80162500" }
+g_XaStreamSlots = { addr = 0x80183230, source = "wiki formats/str.md: the slot ids 0x2A9, 0x1B2, 0x2AA of S_XA00, MAGIC00 and VOICE; SND_ResolveXAStream indexes g_EmiSlotLbas with D_80183230[stream_id >> 12]" }
+g_XaCueTables = { addr = 0x8018323C, source = "wiki systems/audio.md: one u16 cue array per XA stream group; SND_ResolveXAStream reads the array D_8018323C[stream_id >> 12] points to" }
 g_EmiEntryHandlers = { addr = 0x80183248, source = "EMI_OnCDReady calls the entry selected by the active entry type" }
 g_XaStateFuncs = { addr = 0x80183274, source = "SND_ServiceXA calls the entry selected by the XA state" }
 _spu_RXX = { addr = 0x80183AB0, source = "LIBSPU spu.o _spu_RXX, 24 bytes equal retail, the pointer to SPU_V0_VOL_L the sound code drives" }
@@ -4572,6 +4601,7 @@ _svm_voice = { addr = 0x8018DBF0, alias = true }
 _svm_rattr = { addr = 0x8018E0D0, alias = true }
 _svm_sreg_dirty = { addr = 0x8018E0E8, alias = true }
 _svm_vab_pg = { addr = 0x8018E100, alias = true }
+g_SndVoiceStatus = { addr = 0x8018E140, source = "SND_UpdateVoiceStatus stores SpuGetKeyStatus(1 << i) for the 24 voices each frame (wiki systems/audio.md); SND_PlayCue tests the entry of the channel it uses" }
 _svm_vab_vh = { addr = 0x8018E1A0, alias = true }
 _svm_damper = { addr = 0x8018E1E0, alias = true }
 _svm_vab_tn = { addr = 0x8018E1E8, alias = true }
@@ -4589,6 +4619,7 @@ _snd_openflag = { addr = 0x8018E7D0, alias = true }
 _svm_cur = { addr = 0x8018E7D8, alias = true }
 _svm_vab_used = { addr = 0x8018E7F8, alias = true }
 _svm_sreg_buf = { addr = 0x8018E808, alias = true }
+g_SaveCardDirectory = { addr = 0x8018E990, source = "wiki systems/saving.md: the 15-entry card directory table of 24-byte entries (name, size) that the save scan fills; sums sizes for the free-block count" }
 VBLANK_MINUS = { addr = 0x80190300, alias = true }
 _ss_score = { addr = 0x80190308, alias = true }
 _SsMarkCallback = { addr = 0x80190388, alias = true }

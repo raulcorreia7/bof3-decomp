@@ -4,7 +4,7 @@ MATCH void func_801F2C04(void) {
     u8* step;
 
     MESSAGE_REQUEST_CLEAR();
-    switch (D_801490C7) {
+    switch (g_MessageChoice) {
         case 0:
             g_SceneEventSelection = 5;
             break;

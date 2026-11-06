@@ -23,7 +23,7 @@ MATCH void func_80159580(void) {
                 }
                 break;
             case 1:
-                task->pos.x = ((D_8017F930[D_801490BC.panel_index * 4] + (task->unk_0A >> 1)) << 4);
+                task->pos.x = ((D_8017F930[g_MessageWindow.panel_index * 4] + (task->unk_0A >> 1)) << 4);
                 break;
             default:
                 g_MenuCurrentPanel->pos.x = ((D_8017F944[D_801490CE][0] + (g_MenuCurrentPanel->unk_0A >> 1)) << 4);
@@ -45,7 +45,7 @@ MATCH void func_80159580(void) {
                 }
                 break;
             case 1:
-                task->pos.y = ((D_8017F930[1 + D_801490BC.panel_index * 4] + (task->unk_0B >> 1)) << 4);
+                task->pos.y = ((D_8017F930[1 + g_MessageWindow.panel_index * 4] + (task->unk_0B >> 1)) << 4);
                 break;
             default:
                 g_MenuCurrentPanel->pos.y = ((D_8017F944[D_801490CE][1] + (g_MenuCurrentPanel->unk_0B >> 1)) << 4);

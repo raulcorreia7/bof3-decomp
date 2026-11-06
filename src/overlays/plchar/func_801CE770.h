@@ -18,7 +18,7 @@ MATCH void func_801CE770(void) {
         }
     }
     x    = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x;
-    y    = g_Task->pos.y.fixed + D_80181B98[g_Task->direction_08 * 2];
+    y    = g_Task->pos.y.fixed + g_FacingStepY[g_Task->direction_08 * 2];
     dist = Area_ReadStepHeight(x, y, g_Task->direction_08);
     if (SP_REF(u8, 0x0u) != 0 && dist >= 65) {
         Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x46);

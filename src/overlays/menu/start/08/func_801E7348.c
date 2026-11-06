@@ -22,7 +22,7 @@ MATCH s32 func_801E7348(void) {
             total   = 0;
             /* Each 0x18-byte save row holds a name and its packed count word at 0x14. */
             for (i = 0; i < count; i++) {
-                if (strncmp((char*)(D_8018E990 + i * 0x18), g_SaveFileNameFormat, 0x10) == 0) {
+                if (strncmp((char*)(g_SaveCardDirectory + i * 0x18), g_SaveFileNameFormat, 0x10) == 0) {
                     matched += 1;
                 }
                 count_word = (u32*)((u8*)&D_8018E9A4 + i * 0x18);

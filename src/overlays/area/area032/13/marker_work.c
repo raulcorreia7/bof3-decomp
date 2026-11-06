@@ -297,7 +297,7 @@ MATCH void func_801F363C(void) {
     u8* previous;
 
     MESSAGE_REQUEST_CLEAR();
-    if (D_801490C7 == 1) {
+    if (g_MessageChoice == 1) {
         previous = (u8*)g_Task;
         g_Task   = g_BattlePartyBattlers;
         Actor_SelectScript(0x80);

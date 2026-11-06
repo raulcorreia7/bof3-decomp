@@ -19,7 +19,7 @@ MATCH void func_80197AA4(void) {
         SND_SetBankLayout(1);
         flags = &g_BattleOptions;
         if ((*flags & 1) == 0) {
-            coord_a  = (volatile u16*)&D_8014930A;
+            coord_a  = (volatile u16*)&g_AreaTargetCellX;
             index    = g_BattleScrollDir;
             *coord_a = *coord_a + D_801C7B74[index].dx;
             dy       = D_801C7B74[index].dy;
@@ -28,7 +28,7 @@ MATCH void func_80197AA4(void) {
             g_AreaCameraStep       = 0x40;
             span                   = span - g_AreaCameraHeight;
             g_AreaCameraHeightStep = span >> 4;
-            coord_b                = (volatile u16*)&D_8014930E;
+            coord_b                = (volatile u16*)&g_AreaTargetCellY;
             sum                    = *coord_b + dy;
             *coord_b               = sum;
         }

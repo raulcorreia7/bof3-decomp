@@ -145,7 +145,8 @@ extern s8          D_80148659;
 extern s8          D_8014865A;
 extern volatile u8 D_8014865F;
 extern u8*         D_8018E7CC;
-extern u8          D_8018E990[];
+/* D_8018E990 */
+extern u8          g_SaveCardDirectory[];
 extern u8*         D_801C893C[];
 extern u8*         D_801C8950[];
 extern ShopStock   g_GameShopStock[SHOP_COUNT];
@@ -564,7 +565,7 @@ void func_801E3E4C(void);
 void func_801E3EB4(void);
 void func_801E3EF4(void);
 void func_801E3F34(void);
-void func_801E3F5C(void* arg0);
+void func_801E3F5C(void* panel);
 void func_801E4224(void);
 void func_801E4278(void);
 void func_801E42B8(void);

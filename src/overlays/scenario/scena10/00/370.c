@@ -209,7 +209,7 @@ MATCH void func_801FE360(void) {
     u8 i;
 
     for (i = 0; i < g_PartySize; i++) {
-        func_801C1ABC(g_BattlePartyBattlers[i].chr.character_id);
+        Party_RemoveMember(g_BattlePartyBattlers[i].chr.character_id);
     }
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0);
     g_PartySize = 0;
@@ -231,8 +231,8 @@ INCLUDE_ASM(func_801FE438);
 
 MATCH void func_801FE5B0(void) {
     g_Characters[g_CharSlot[5]].unk_07 &= 254;
-    func_801C1ABC(CHAR_ID_MOMO);
-    func_801C1630();
+    Party_RemoveMember(CHAR_ID_MOMO);
+    Party_StagePalettes();
 }
 
 #include "overlays/scenario/Scene_RemoveMomo.h"

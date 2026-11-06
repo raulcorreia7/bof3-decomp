@@ -520,7 +520,7 @@ MATCH POLY_FT4* func_801F3480(const Point3D* point, s32 angle, u32 texture) {
 
 MATCH void func_801F35E0(void) {
     g_MessageRequest = RESET_SENTINEL;
-    if ((D_801490C7 & 1) == 0) {
+    if ((g_MessageChoice & 1) == 0) {
         g_SceneEventMode = 1;
         g_SceneEventStep = 0;
     }
@@ -528,7 +528,7 @@ MATCH void func_801F35E0(void) {
 
 MATCH void func_801F3618(void) {
     g_MessageRequest = RESET_SENTINEL;
-    if ((D_801490C7 & 1) == 0) {
+    if ((g_MessageChoice & 1) == 0) {
         g_SceneEventMode = 2;
         g_SceneEventStep = 0;
     }
@@ -538,7 +538,7 @@ MATCH void func_801F3650(void) {
     u8 value;
 
     g_MessageRequest = RESET_SENTINEL;
-    switch (D_801490C7) {
+    switch (g_MessageChoice) {
         case 0:
             value = 5;
             break;
@@ -555,7 +555,7 @@ MATCH void func_801F3690(void) {
     u8 value;
 
     g_MessageRequest = RESET_SENTINEL;
-    switch (D_801490C7) {
+    switch (g_MessageChoice) {
         case 0:
             value = 0x5B;
             break;
@@ -572,7 +572,7 @@ MATCH void func_801F36D0(void) {
     u8 value;
 
     g_MessageRequest = RESET_SENTINEL;
-    switch (D_801490C7) {
+    switch (g_MessageChoice) {
         case 0:
             value = 92;
             break;

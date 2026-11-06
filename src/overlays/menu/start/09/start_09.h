@@ -180,7 +180,8 @@ extern u8              D_800C1800;
 extern u8              D_800C1801;
 extern u8              D_800C1802;
 extern u8              D_800C1803;
-extern SaveFile        D_8018E990[];
+/* D_8018E990 */
+extern SaveFile        g_SaveCardDirectory[];
 extern const CardNames D_801EEC00;
 extern s32             D_801EEC04;
 extern s32             D_801EEC0C;

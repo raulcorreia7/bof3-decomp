@@ -10,12 +10,12 @@ MATCH void func_8009B794(void) {
     if (g_AreaCameraMoving == 0) {
         index            = g_BattleScrollDir;
         g_AreaCameraStep = 0x40;
-        scroll_a         = &D_8014930A;
+        scroll_a         = &g_AreaTargetCellX;
         *scroll_a += D_800B44C0[index].x;
         counter         = g_BattleUIState;
         delta           = D_800B44C0[index].y;
         g_BattleUIState = counter + 1;
-        scroll_b        = &D_8014930E;
+        scroll_b        = &g_AreaTargetCellY;
         *scroll_b += delta;
     }
 }

@@ -2,7 +2,7 @@
 
 MATCH void func_80199308(void) {
     func_80199440();
-    func_801527E4();
+    Area_StepCamera();
     func_80167910();
     Area_RunParty();
     func_801BDAB8();

@@ -6,7 +6,7 @@ static inline void World_SelectAnswerValue(u16 reset, u8 state0, u8 state1) {
     u8 value;
 
     g_MessageRequest = reset;
-    switch (D_801490C7) {
+    switch (g_MessageChoice) {
         case 0:
             value = state0;
             break;

@@ -322,7 +322,7 @@ MATCH s32 CardOpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
     CardScanDirectory(D_801EEC14, 6);
     retries = 0;
     do {
-        total += D_8018E990[retries & BYTE_MASK].size;
+        total += g_SaveCardDirectory[retries & BYTE_MASK].size;
         if ((total + (port << 13)) > 0x1E000U) {
             g_SaveCardStatus = CARD_EVENT_CAPACITY;
         } else {
@@ -408,9 +408,9 @@ MATCH s32 CardScanDirectory(char* prefix, u8 length) { /* func_801EFCA8 */
 
     for (i = 0; i < 15; i++) {
         for (j = 0; j < 20; j++) {
-            D_8018E990[i].name[j] = 0;
+            g_SaveCardDirectory[i].name[j] = 0;
         }
-        D_8018E990[i].size = 0;
+        g_SaveCardDirectory[i].size = 0;
     }
     i = 0;
     if (g_SaveCardPort == 0) {
@@ -421,8 +421,8 @@ MATCH s32 CardScanDirectory(char* prefix, u8 length) { /* func_801EFCA8 */
     if (firstfile(pattern, &dir) == &dir) {
         do {
             if (strncmp(prefix, D_801EEC2C, 1) == 0 || strncmp(dir.name, prefix, length) == 0) {
-                strcpy(D_8018E990[i].name, dir.name);
-                D_8018E990[i].size = dir.size;
+                strcpy(g_SaveCardDirectory[i].name, dir.name);
+                g_SaveCardDirectory[i].size = dir.size;
                 i++;
             }
         } while (nextfile(&dir) == &dir);
