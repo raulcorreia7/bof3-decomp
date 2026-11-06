@@ -27,7 +27,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Find twins in one image                  | `bin/coddog match <target> <func> -t 0.95`                               | [coddog](../docs/toolchain.md#coddog)                     |
 | Find alike functions across images       | `tools/dups.py near`                                                     | [duplicates](#duplicates-and-names)                       |
 | List same-name groups and split names    | `tools/dups.py shared-names`, `tools/dups.py split-names`                | same                                                      |
-| Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW --image <target> --local`                | [rename steps](../docs/conventions.md#rename-steps)       |
+| Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW` (an address name: `--image <target> --local`) | [rename steps](../docs/conventions.md#rename-steps)       |
 | Rename parameters                        | `tools/symbol.py params <func> old=new ...`                              | same                                                      |
 | Rank units to name first                 | `tools/symbol.py refs src/<path>`                                        | same                                                      |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<evidence>"`     | [symbols](../docs/conventions.md#symbols-and-the-link)    |
