@@ -34,7 +34,7 @@ extern s32 D_80147C30;
 extern s32 D_80147C54;
 extern s32 D_80147C58;
 extern u8  D_80147C90;
-extern s8  D_80149340;
+extern u8  D_80149340;
 
 /* The state handler tables the dispatchers index. */
 extern u8       D_801F61F8[];
