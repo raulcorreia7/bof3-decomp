@@ -175,8 +175,6 @@ extern u8 D_801448FB;
 
 extern s32 D_801457AC;
 
-extern u8 D_80145E95;
-
 /* function-local data for func_801729D0 */
 extern u8 D_8018E9A1;
 

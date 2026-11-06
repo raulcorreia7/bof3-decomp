@@ -12,7 +12,7 @@ MATCH void func_801F2CF8(void) {
     if (D_80145EE8 == 0xC && D_80145EDA == 1) {
         Actor_SelectScript(0x6E);
         g_Task = actor;
-        D_80145E97 &= 0x11;
+        g_BattlePartyBattlers[0].unk_07 &= 0x11;
         actor->mode = 3;
     }
 }

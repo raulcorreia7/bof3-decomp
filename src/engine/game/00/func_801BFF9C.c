@@ -40,7 +40,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         }
         TASK_SET(g_BattlePartyBattlers);
         g_PartySize                                      = 1;
-        D_80145E95                                       = 0;
+        g_BattlePartyBattlers[0].slot                    = 0;
         *(Character*)((u8*)g_BattlePartyBattlers + 0x74) = g_Characters[0];
         g_BattlePartyBattlers[0].record_slot             = 0;
         VOL(u8, D_80145FBC) &= 0xFE;
@@ -72,8 +72,8 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         } else if (LOBU(g_GameRequestFlags) & 0x40) {
             func_801C1254(D_80145F09, 0);
         } else if (LOHU(g_GameAreaId) == 0xBD) {
-            D_80145EBB         = 0;
-            *(s32*)&D_80145F00 = 0;
+            g_BattlePartyBattlers[0].unk_2B = 0;
+            *(s32*)&D_80145F00              = 0;
         }
     } else {
         g_PartySize = Party_CountOrder(0);

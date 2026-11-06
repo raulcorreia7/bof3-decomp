@@ -319,10 +319,7 @@ extern s32                D_8014503C;   /* 0x8014503C */
 extern s8                 D_8014504B;   /* 0x8014504B */
 extern u8                 g_FairyRooms;
 extern u8                 D_801457AB;
-extern u8                 D_80145E97;
 extern u8                 D_80145E9B;
-extern s32                D_80145EA4; /* 0x80145EA4 */
-extern u8                 D_80145EBB;
 extern u16                D_80145EBC; /* 0x80145EBC */
 extern u32                D_80145EDC; /* 0x80145EDC */
 extern u8                 D_80145F00; /* 0x80145F00 */

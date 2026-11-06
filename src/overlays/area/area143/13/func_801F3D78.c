@@ -5,7 +5,8 @@
  * first script variable and calls func_801BE1B0(0). */
 MATCH s32 func_801F3D78(s32 x, s32 y) {
     if (D_80143F03 == 1 && ((x >> 16) - 0x37) < 3U) {
-        if (((y >> 16) - 0x64) < 3U && (g_BattlePartyBattlers[0].facing == 0 || (g_BattlePartyBattlers[0].facing - 6) < 2U)) {
+        if (((y >> 16) - 0x64) < 3U &&
+            (g_BattlePartyBattlers[0].facing == 0 || (g_BattlePartyBattlers[0].facing - 6) < 2U)) {
             *g_ScriptVars = 0;
             func_801BE1B0(0);
             return 1;

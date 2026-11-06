@@ -16,42 +16,47 @@ NON_MATCHING void Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state) 
     FIELD(volatile u8, &D_80145F09, off_a) = FIELD(volatile u8, &D_80145F09, off_b);
     FIELD(volatile u8, &D_80145F09, off_b) = val_b;
     if (!(skip_state & BYTE_MASK)) {
-        val_b                                   = FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_a);
-        FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_a)  = FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_b);
-        FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_b)  = val_b;
-        val_b                                   = FIELD(volatile u8, &D_80145EB9, off_a);
-        FIELD(volatile u8, &D_80145EB9, off_a)  = FIELD(volatile u8, &D_80145EB9, off_b);
-        FIELD(volatile u8, &D_80145EB9, off_b)  = val_b;
-        val_b                                   = FIELD(volatile u8, &D_80145FBC, off_a);
-        FIELD(volatile u8, &D_80145FBC, off_a)  = FIELD(volatile u8, &D_80145FBC, off_b);
-        FIELD(volatile u8, &D_80145FBC, off_b)  = val_b;
-        val_w                                   = FIELD(volatile s32, &D_80145EC4, off_a);
-        FIELD(volatile s32, &D_80145EC4, off_a) = FIELD(volatile s32, &D_80145EC4, off_b);
-        FIELD(volatile s32, &D_80145EC4, off_b) = val_w;
-        val_w                                   = FIELD(volatile s32, &D_80145EC8, off_a);
-        FIELD(volatile s32, &D_80145EC8, off_a) = FIELD(volatile s32, &D_80145EC8, off_b);
-        FIELD(volatile s32, &D_80145EC8, off_b) = val_w;
-        val_w                                   = FIELD(volatile s32, &D_80145ECC, off_a);
-        FIELD(volatile s32, &D_80145ECC, off_a) = FIELD(volatile s32, &D_80145ECC, off_b);
-        FIELD(volatile s32, &D_80145ECC, off_b) = val_w;
+        val_b = FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_a);
+        FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_a) =
+            FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_b);
+        FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_b) = val_b;
+        val_b = FIELD(volatile u8, &g_BattlePartyBattlers[0].unk_29, off_a);
+        FIELD(volatile u8, &g_BattlePartyBattlers[0].unk_29, off_a) =
+            FIELD(volatile u8, &g_BattlePartyBattlers[0].unk_29, off_b);
+        FIELD(volatile u8, &g_BattlePartyBattlers[0].unk_29, off_b) = val_b;
+        val_b                                                       = FIELD(volatile u8, &D_80145FBC, off_a);
+        FIELD(volatile u8, &D_80145FBC, off_a)                      = FIELD(volatile u8, &D_80145FBC, off_b);
+        FIELD(volatile u8, &D_80145FBC, off_b)                      = val_b;
+        val_w                                                       = FIELD(volatile s32, &D_80145EC4, off_a);
+        FIELD(volatile s32, &D_80145EC4, off_a)                     = FIELD(volatile s32, &D_80145EC4, off_b);
+        FIELD(volatile s32, &D_80145EC4, off_b)                     = val_w;
+        val_w                                                       = FIELD(volatile s32, &D_80145EC8, off_a);
+        FIELD(volatile s32, &D_80145EC8, off_a)                     = FIELD(volatile s32, &D_80145EC8, off_b);
+        FIELD(volatile s32, &D_80145EC8, off_b)                     = val_w;
+        val_w                                                       = FIELD(volatile s32, &D_80145ECC, off_a);
+        FIELD(volatile s32, &D_80145ECC, off_a)                     = FIELD(volatile s32, &D_80145ECC, off_b);
+        FIELD(volatile s32, &D_80145ECC, off_b)                     = val_w;
     }
-    val_w                                   = FIELD(volatile s32, &D_80145E9C, off_a);
-    FIELD(volatile s32, &D_80145E9C, off_a) = FIELD(volatile s32, &D_80145E9C, off_b);
-    FIELD(volatile s32, &D_80145E9C, off_b) = val_w;
-    val_w                                   = FIELD(volatile s32, &D_80145EA0, off_a);
-    FIELD(volatile s32, &D_80145EA0, off_a) = FIELD(volatile s32, &D_80145EA0, off_b);
-    FIELD(volatile s32, &D_80145EA0, off_b) = val_w;
-    val_w                                   = FIELD(volatile s32, &D_80145EA4, off_a);
-    FIELD(volatile s32, &D_80145EA4, off_a) = FIELD(volatile s32, &D_80145EA4, off_b);
-    FIELD(volatile s32, &D_80145EA4, off_b) = val_w;
-    val_b                                   = FIELD(volatile u8, &D_80145FA9, off_a);
-    FIELD(volatile u8, &D_80145FA9, off_a)  = FIELD(volatile u8, &D_80145FA9, off_b);
-    FIELD(volatile u8, &D_80145FA9, off_b)  = val_b;
-    val_b                                   = FIELD(volatile u8, &D_80145FA8, off_a);
-    FIELD(volatile u8, &D_80145FA8, off_a)  = FIELD(volatile u8, &D_80145FA8, off_b);
-    FIELD(volatile u8, &D_80145FA8, off_b)  = val_b;
-    FIELD(volatile u8, &D_80145EDB, off_a)  = 0xFF;
-    FIELD(volatile u8, &D_80145EDB, off_b)  = 0xFF;
+    val_w = FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_0C, off_a);
+    FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_0C, off_a) =
+        FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_0C, off_b);
+    FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_0C, off_b) = val_w;
+    val_w = FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_10, off_a);
+    FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_10, off_a) =
+        FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_10, off_b);
+    FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_10, off_b) = val_w;
+    val_w = FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_14, off_a);
+    FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_14, off_a) =
+        FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_14, off_b);
+    FIELD(volatile s32, &g_BattlePartyBattlers[0].unk_14, off_b) = val_w;
+    val_b                                                        = FIELD(volatile u8, &D_80145FA9, off_a);
+    FIELD(volatile u8, &D_80145FA9, off_a)                       = FIELD(volatile u8, &D_80145FA9, off_b);
+    FIELD(volatile u8, &D_80145FA9, off_b)                       = val_b;
+    val_b                                                        = FIELD(volatile u8, &D_80145FA8, off_a);
+    FIELD(volatile u8, &D_80145FA8, off_a)                       = FIELD(volatile u8, &D_80145FA8, off_b);
+    FIELD(volatile u8, &D_80145FA8, off_b)                       = val_b;
+    FIELD(volatile u8, &D_80145EDB, off_a)                       = 0xFF;
+    FIELD(volatile u8, &D_80145EDB, off_b)                       = 0xFF;
 }
 #else
 INCLUDE_ASM(Party_SwapBattlerRows);

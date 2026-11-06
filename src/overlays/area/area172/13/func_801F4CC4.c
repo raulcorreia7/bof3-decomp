@@ -5,7 +5,8 @@
  * queues D_801448EB = 0x23. */
 MATCH s32 func_801F4CC4(s32 x, s32 y) {
     if (D_80143F03 == 0) {
-        if (x == 0x248000 && ((y >> 16) - 0x35) < 3U && ((g_BattlePartyBattlers[0].facing - 6) < 2U || g_BattlePartyBattlers[0].facing == 0)) {
+        if (x == 0x248000 && ((y >> 16) - 0x35) < 3U &&
+            ((g_BattlePartyBattlers[0].facing - 6) < 2U || g_BattlePartyBattlers[0].facing == 0)) {
             Game_SetScriptActive();
             D_801448EB = 0x23;
             D_801448EC = 0;

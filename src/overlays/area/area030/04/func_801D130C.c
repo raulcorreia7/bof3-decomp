@@ -15,7 +15,7 @@ MATCH void func_801D130C(void) {
     FishingState* state_work;
 
     i        = 1;
-    selected = &D_80145EB7;
+    selected = &g_BattlePartyBattlers[0].unk_27;
     palette  = AREA_PALETTE_WORK;
     dst      = MEM_PTR(u16, 0x80039602u);
     do {

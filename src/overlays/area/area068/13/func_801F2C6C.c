@@ -10,7 +10,7 @@ MATCH void func_801F2C6C(void) {
         D_80145FA8 |= 0x40;
         Actor_SelectScript(0x6FU);
         g_Task = temp_s0;
-        D_80145E97 &= 0x11;
+        g_BattlePartyBattlers[0].unk_07 &= 0x11;
         temp_s0->mode = 2;
     }
 }

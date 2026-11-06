@@ -32,8 +32,8 @@ MATCH s32 func_801C090C(s32 anchor_x, s32 anchor_y, s32 anchor_index) {
             }
         }
     } else {
-        D_80145EC4 = anchor_x;
-        D_80145EC8 = anchor_y;
+        D_80145EC4                      = anchor_x;
+        D_80145EC8                      = anchor_y;
         g_BattlePartyBattlers[0].facing = anchor_index;
     }
 }

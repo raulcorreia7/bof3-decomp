@@ -25,7 +25,6 @@ extern u8  D_801F4E0C;
 extern u8  D_801F4E10;
 extern u16 D_801F4E14;
 
-extern u8  D_80145E97;
 extern u8  D_80145EDA;
 extern s32 D_80145EC4;
 extern s32 D_80145EC8;
