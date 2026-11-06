@@ -71,7 +71,6 @@ extern void func_801D2C0C(void);
 extern void func_801D2DA8(void);
 extern void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
-extern void Menu_DrawFilledPanel(s16 x, s16 y, s16 width, s32 height);
 
 /* Slide the master panel up to y -20 and stop it there. */
 static inline void Menu_SlidePanelUp(void) {
@@ -89,9 +88,9 @@ static inline void Menu_SlidePanelUp(void) {
 
 void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 
-void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
+s32 Item_Count(u8 category, u8 item, u8 mode);
 
-s32  Item_Count(u8 category, u8 item, u8 mode);
+void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 void func_801D3320(MenuPanelTask* task);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 
@@ -108,21 +107,21 @@ typedef struct MenuStatusItems {
 ASSERT_OFFSET(MenuStatusItems, used, 0x04);
 ASSERT_SIZE(MenuStatusItems, 12);
 
+extern s8 D_80144E5E;
+
+extern void            func_801D1CA4(void);
+extern s32             func_801D1E60(void);
+extern void            func_801D1EE8(void);
+extern void            func_801D27BC(void);
+extern u8              D_80144FF9;
+extern s8              D_80146867;
+extern s8              D_80146875;
+extern s16             D_80148364;
+extern u8              D_8014839C;
 /* D_801DA028 */
 extern MenuStatusItems g_MenuStatusItems;
-
-extern void func_801D1CA4(void);
-extern s32  func_801D1E60(void);
-extern void func_801D1EE8(void);
-extern void func_801D27BC(void);
-extern s8   D_80144E5E;
-extern s8   D_80146867;
-extern s8   D_80146875;
-extern s32  D_801DA044;
-extern u8   D_801DA04E;
-extern u8   D_801DA0C6;
-extern s16  D_80148364;
-extern u8   D_8014839C;
-extern u8   D_80144FF9;
+extern s32             D_801DA044;
+extern u8              D_801DA04E;
+extern u8              D_801DA0C6;
 
 #endif

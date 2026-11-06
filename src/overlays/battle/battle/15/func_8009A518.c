@@ -11,6 +11,6 @@ MATCH void func_8009A518(void) {
     D_80148574             = -200;
     g_BattleStep           = 4;
     g_BattleSubStep        = mode;
-    g_BattleUiStep         = 1;
-    g_BattleUiState        = 0;
+    g_BattleUIStep         = 1;
+    g_BattleUIState        = 0;
 }

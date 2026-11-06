@@ -23,6 +23,6 @@ MATCH void func_800A5164(void) {
     func_800A82F8();
     g_BattlePanelMode = 2;
     BATTLE_ACTIVE_ROW->action_flags.volatile_value |= 4;
-    counter  = (u8*)&g_BattleUiState;
+    counter  = (u8*)&g_BattleUIState;
     *counter = *counter + 1;
 }

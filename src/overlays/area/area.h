@@ -52,8 +52,7 @@ ASSERT_SIZE(WorldMapKey, 4);
 extern u8       D_80143F06;
 extern u16      D_801448EE;
 extern u8       D_80146867;
-/* D_801D4285 */
-extern u8       g_MasterStep;
+extern u8       D_80147ACF;
 void            func_801F2C14(void);
 void            func_801F2C18(void);
 void            func_801F2C30(void);
@@ -65,7 +64,8 @@ void            func_801F2C88(void);
 void            func_801F2C8C(void);
 void            func_801F2D18(void);
 void            func_801F2D3C(void);
-extern u8       D_801F2DD4[];
+/* D_801D4285 */
+extern u8       g_MasterStep;
 void            func_801F2E1C(void);
 void            func_801F2ED8(void);
 void            func_801F2EEC(void);
@@ -82,7 +82,7 @@ void            Actor_CenterOnScreen(void);
 void            Actor_ShrinkAndFinish(void);
 void            func_801F33A8(void);
 void            func_801F341C(void);
-extern u8       D_801F3424[];
+extern u8       D_801F2DD4[];
 void            func_801F34A0(void);
 void            func_801F34E0(void);
 void            func_801F358C(void);
@@ -105,12 +105,12 @@ void            func_801F4534(void);
 void            func_801F455C(void);
 void            func_801F45CC(void);
 void            func_801F4768(void);
+extern u8       D_801F3424[];
 extern u8       D_801F4624[];
 extern Callback D_801F4F64[];
 extern u8       D_801F5364[];
-extern Callback D_801F5804[];
 
-extern u8 D_80147ACF;
+extern Callback D_801F5804[];
 
 /* Ask func_8015CB18 what the party battler in `slot` finds at its position: aim the task at the battler,
  * look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the

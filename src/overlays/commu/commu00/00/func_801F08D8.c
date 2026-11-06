@@ -13,7 +13,7 @@ MATCH void func_801F08D8(u8 source_index, u8 task_index) {
     g_Task->unk_05              = source_index;
     g_Task->mode                = 6;
     g_Actors[task_index].unk_78 = 0;
-    ACTOR_CLEAR_STATE();
+    ACTOR_CLEAR_STEP();
     /* Each pair is written value half first, then the zero half the caller
      * reads back as one 32-bit coordinate word. */
     COORD_INT(g_Task->x)  = D_801F25A4[index][D_801F2928[index]][0];

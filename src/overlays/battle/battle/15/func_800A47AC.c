@@ -46,6 +46,6 @@ MATCH void func_800A47AC(void) {
     *g_BattleGeneCount   = 0;
     *D_801463B8          = 0;
     func_800A82F8();
-    g_BattleUiState   = 0;
-    g_BattleUiStep_nv = g_BattleUiStep_nv + 1;
+    g_BattleUIState   = 0;
+    g_BattleUIStep_nv = g_BattleUIStep_nv + 1;
 }

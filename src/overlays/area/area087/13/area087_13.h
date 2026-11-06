@@ -34,7 +34,6 @@ void func_801F34FC(void);
 void Area_Update(void);
 void func_801F36C0(void);
 /* func_801F3B34 */
-void Area_DrawHud(s16 x, s16 y);
 /* func_801F40F8 */
 void Area_DrawHudBanner(s16 x, s16 y);
 

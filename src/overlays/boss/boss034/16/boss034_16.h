@@ -7,13 +7,13 @@
 #include "overlays/boss/boss.h"
 
 extern u8       D_800C26B8[];
-extern u8       D_800C2778;
-extern u8       D_80181B14;
 extern u16      D_800C26C4[];
 extern Callback D_800C2714[];
 extern Callback D_800C2730[];
 extern Callback D_800C273C[];
 extern Callback D_800C276C[];
+extern u8       D_800C2778;
+extern u8       D_80181B14;
 
 void func_800C1D60(s32 mode);
 u8   func_800C1F30(u32 mode);

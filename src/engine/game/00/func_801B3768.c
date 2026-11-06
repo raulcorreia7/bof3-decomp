@@ -15,7 +15,7 @@ MATCH void func_801B3768(void) {
     u8*    row;
     u8     kind;
     u8     current_kind;
-    u8     slot_index;
+    u8     actor_slot;
     u32*   spawn_count;
 
     if (SYS_TestFlag(D_80144FC4, g_Actors[g_GameState->slot_12D].unk_05) != 0) {
@@ -55,10 +55,10 @@ MATCH void func_801B3768(void) {
                 Resource_RequestArea(GAME_TEXT_SEARCH_NO_ROOM);
             }
         }
-        slot_index = g_GameState->slot_12D;
-        if (!(g_Actors[slot_index].unk_0B & 1)) {
+        actor_slot = g_GameState->slot_12D;
+        if (!(g_Actors[actor_slot].unk_0B & 1)) {
             saved_work = g_Task;
-            g_Task     = &g_Actors[slot_index];
+            g_Task     = &g_Actors[actor_slot];
             Actor_SelectScript(1U);
             g_Task = saved_work;
         }

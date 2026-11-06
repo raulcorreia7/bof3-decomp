@@ -18,7 +18,7 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D3A24(void) {
-    s32 idx;
+    s32 battler_offset;
     s32 rec;
     u8  chr_master;
     u8  diff;
@@ -31,16 +31,16 @@ NON_MATCHING void func_801D3A24(void) {
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }
-    idx        = g_MasterMenuCursor * BATTLE_PARTY_STRIDE;
-    rec        = D_80145FCC.bytes[idx];
-    chr_master = g_Characters[rec].master_id;
+    battler_offset = g_MasterMenuCursor * BATTLE_PARTY_STRIDE;
+    rec            = D_80145FCC.bytes[battler_offset];
+    chr_master     = g_Characters[rec].master_id;
     if (chr_master == D_801448ED) {
         diff = g_Characters[rec].level - g_Characters[rec].master_level;
         switch (chr_master) {
             case 0xB:
                 if (diff >= 3 && !(D_80144F59 & 8)) {
                     D_80144F59 |= 8;
-                    func_801D39CC(D_80145FCC.bytes[idx]);
+                    func_801D39CC(D_80145FCC.bytes[battler_offset]);
                     done = 1;
                 }
                 break;
@@ -58,14 +58,14 @@ NON_MATCHING void func_801D3A24(void) {
             case 0xD:
                 if (diff >= 3 && !(D_80144F59 & 0x10)) {
                     D_80144F59 |= 0x10;
-                    func_801D39CC(D_80145FCC.bytes[idx]);
+                    func_801D39CC(D_80145FCC.bytes[battler_offset]);
                     done = 1;
                 }
                 break;
             case 0xE:
                 if (diff >= 3 && !(D_80144F59 & 0x20)) {
                     D_80144F59 |= 0x20;
-                    func_801D39CC(D_80145FCC.bytes[idx]);
+                    func_801D39CC(D_80145FCC.bytes[battler_offset]);
                     done = 1;
                 }
                 break;

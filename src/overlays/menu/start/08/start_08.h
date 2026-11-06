@@ -216,7 +216,7 @@ extern u8              D_801ED18C;
 extern u8              s_PanelIconSelectors[24];
 extern u8              s_PanelIconValues[228];
 extern s32 (*D_801ED224[])(u8 caster_index, u8 target_index, u8 use_battle_record);
-extern s32 (*D_801ED24C[])(u8 slot_index, u8 record_value);
+extern s32 (*D_801ED24C[])(u8 save_slot, u8 record_value);
 extern u8       g_SaveRecordTypeCommands[92];
 extern Callback D_801ED330[21];
 extern Callback D_801ED384[11];
@@ -293,8 +293,8 @@ extern Callback g_MenuCampFuncs[5];
  * input, resource and sound helpers, and the game overlay's draw helpers. */
 void        UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 extern bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
-extern bool Char_RestoreHp(s32 character_index, s32 amount, s32 use_battle_copy);
-extern s32  Char_RestoreAp(s32 character_index, s32 amount, s32 use_battle_copy);
+extern bool Char_RestoreHP(s32 character_index, s32 amount, s32 use_battle_copy);
+extern s32  Char_RestoreAP(s32 character_index, s32 amount, s32 use_battle_copy);
 extern s32  Char_AddCappedStat(u16* value, s32 delta);
 extern s16  Char_AddStat(u16* value, s16 delta);
 extern u32  Char_ClearStatus(u8 index, u16 mask, u8 mode);
@@ -303,7 +303,7 @@ void        UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 bool        func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
 s32         func_801B6470(u8 arg0);
 extern u8   Party_CountOrder(u8 mode);
-void        func_801C1254(s32 ability_id, s32 slot_index);
+void        func_801C1254(s32 ability_id, s32 save_slot);
 /* The start overlay's handler tables call these functions. */
 void        func_801D177C(void);
 void        func_801D1B24(void);
@@ -369,23 +369,23 @@ extern void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);
 extern void func_801DC150(s16 x, s16 y, u8 character_index, s32 layout);
 extern s32  func_801DCDB8(u16, u16, u8, u8, s32);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
-void        Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 shaded, s32 unused);
-void        Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_slot, s32 equip_slot, u8 item_id);
+void        Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused);
+void        Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s32 equip_slot, u8 item_id);
 void        Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height);
-void        Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_step);
-u8*         Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph_left, s32 glyph_right);
 extern void func_801DFBF4(MenuPanelTask* task);
 extern void func_801E0354(MenuPanelTask* task);
 extern void func_801E0A70(MenuPanelTask* task);
-void        SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry);
 extern void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active);
 void        func_801E16BC(void);
+void        SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry);
 void        func_801E18D0(void);
 void        func_801E1C20(void);
 void        func_801E206C(void);
 void        func_801E2408(void);
 extern void func_801E2668(s32 icon_kind, s32 icon_x, s32 icon_y);
 extern void func_801E26A8(s32 x, s32 y);
+void        Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_step);
+u8*         Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph_left, s32 glyph_right);
 void        func_801E3EC4(void);
 void        func_801E4024(void);
 void        func_801E4060(void);
@@ -422,9 +422,9 @@ extern void func_801E6388(s32 overlay_x, s32 overlay_y);
 extern void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y);
 extern s32  func_801E6784(u8 page, s32 x, s32 y);
 extern u8   func_801E715C(s32 range_low, s32 range_high, s32 draw_count);
-extern void func_801E7210(u32 slot_index);
+extern void func_801E7210(u32 save_slot);
 s32         func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record);
-s32         func_801E8C9C(u8 slot_index, u8 record_kind, u8 record_value);
+s32         func_801E8C9C(u8 save_slot, u8 record_kind, u8 record_value);
 void        func_801E8D58(void);
 void        func_801E8D60(void);
 extern void func_801E8DB4(MenuPanelTask* task);
@@ -547,7 +547,7 @@ extern u8        D_801485BA;
 extern s8        D_80148659;
 extern u8        D_8014865A;
 extern u8        D_80181B1A;
-extern void      func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
+extern s32       Item_Count(u8 category, u8 item, u8 mode);
 extern u8*       D_801C8940;
 extern u8*       D_801C8944;
 extern char      D_801D0C50[8];
@@ -559,6 +559,7 @@ extern s32       D_801D0EA8;
 extern s8        D_801D0F18;
 extern s8        D_801D0F1C;
 extern s8        D_801D0F24;
+extern void      func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
 void             Party_InitDefaults(void);
 void             func_801D29A4(void);
 extern void      func_801D2C7C(void);
@@ -568,8 +569,8 @@ void             func_801D667C(void);
 void             func_801D71EC(void);
 void             func_801D9664(void);
 void             func_801D96D4(void);
-s32              func_801DAE14(u16);
 void             Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
+s32              func_801DAE14(u16);
 void             func_801DE5D4(u8, u16, u16, s32, s32, MenuPanelTask*);
 extern void      func_801E30FC(u16 row_x, u16 row_y, s32 row_flags);
 void             func_801E6D88(s32 prompt_x);
@@ -578,7 +579,6 @@ void             func_801E7000(void);
 extern s32       func_801E7348(void);
 extern void      func_801E77F0(void);
 void             func_801E9350(void);
-void             func_801EA1F0(MenuPanelTask* task);
 extern u8        D_801EC3E0[]; /* 6-byte rows: entry count, then up to five entries */
 extern s32       D_801EC488;
 extern s32       D_801EC4A4;
@@ -619,7 +619,7 @@ extern s8        D_801ED678;
 extern s8        D_801ED67C;
 extern u8        D_801ED69C;
 extern s32       D_801ED878;
-extern s32       Item_Count(u8 category, u8 item, u8 mode);
+void             func_801EA1F0(MenuPanelTask* task);
 
 /* Pick the party record the record index selects: record 0 is the saved
  * Character, any other is the Character copy inside the battle row. */
@@ -631,14 +631,16 @@ static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_i
     }
 }
 
-void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
+/* func_80164D2C */
+void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
 
-void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 
-/* func_80164D2C */
-void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
+void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
+
+void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 
@@ -649,8 +651,6 @@ void func_801E2C00(u16 x, s32 y, s32 group, s32 selected, s32 mode);
 void func_801E2D84(s16 x, s32 y);
 
 void func_801E3E34(u16 line_index);
-
-void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 
 #endif

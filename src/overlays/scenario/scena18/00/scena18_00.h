@@ -6,10 +6,10 @@
 
 #include "overlays/scenario/scenario.h"
 
-extern u32       D_801F6C00;
-extern Callback  D_801F6D78[];
-extern SceneFunc D_801F6D7C[];
-
+extern u32      D_801F6C00;
 extern Callback D_801F6D6C[];
+extern Callback D_801F6D78[];
+
+extern SceneFunc D_801F6D7C[];
 
 #endif

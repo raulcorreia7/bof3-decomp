@@ -98,7 +98,7 @@ ASSERT_SIZE(DragonPointers, DRAGON_POINTERS_SIZE);
 /* 0x800B4EE0: per-form multipliers plus nine resistances. */
 typedef struct DragonFormStats {
     u8 mult[5];
-    u8 resist[RES_SLOT_COUNT];
+    u8 resist[RES_INDEX_COUNT];
 } DragonFormStats;
 
 ASSERT_SIZE(DragonFormStats, DRAGON_FORM_STATS_SIZE);

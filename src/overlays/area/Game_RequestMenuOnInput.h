@@ -12,6 +12,6 @@ MATCH s32 Game_RequestMenuOnInput(void) {
     }
     SND_PlayCue(EMI_CUE_ID(1, 5));
     g_GameStateIndex = GAME_REQUEST_MENU;
-    ACTOR_CLEAR_STATE();
+    ACTOR_CLEAR_STEP();
     return 1;
 }

@@ -2,7 +2,7 @@
 
 MATCH void func_801EEEE0(void) {
     if (g_InputHeld != 0) {
-        volatile u8* counter = &g_BattleUiState;
+        volatile u8* counter = &g_BattleUIState;
         *counter += 1;
     }
 }

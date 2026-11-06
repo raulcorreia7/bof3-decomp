@@ -16,9 +16,7 @@
  * same 16.16 coordinates as the field actor's (work/actor.h): the
  * ground height from Area_SampleHeight sits in the halfword at +0x3E.
  *
- * "Slot" is the name most claimers give the allocator's result (`slot` 13 times,
- * `slot_index` 7; `index` 17, `id` 6, `object_index` 5). They test it against
- * 0xFF for none. No retail string names the table. */
+ * The allocator's result is the actor slot. Callers test it against 0xFF for none. No retail string names the table. */
 #define ACTOR_SLOT_SIZE                0x74
 #define ACTOR_SLOT_COUNT               20
 

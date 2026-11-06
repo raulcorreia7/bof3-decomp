@@ -6,9 +6,9 @@ MATCH void func_800989FC(void) {
     flags = Item_GetFlags(D_8014857A, D_801C893C[D_8014857A][D_8014857C]);
     if ((flags & 0x40u) != 0u) {
         if ((flags & 0x10u) != 0u) {
-            g_BattleUiStep = 5u;
+            g_BattleUIStep = 5u;
         } else {
-            g_BattleUiStep = 4u;
+            g_BattleUIStep = 4u;
         }
         return;
     }
@@ -23,6 +23,6 @@ MATCH void func_800989FC(void) {
     } else {
         D_801EB4D8[0] = g_BattleMessageSlot[5];
     }
-    g_BattleUiStep  = 4u;
-    g_BattleUiState = 3u;
+    g_BattleUIStep  = 4u;
+    g_BattleUIState = 3u;
 }

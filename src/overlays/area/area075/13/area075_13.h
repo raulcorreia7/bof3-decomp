@@ -20,17 +20,17 @@ extern u8       D_801F5810[];
 extern u8       D_801F5818[];
 extern Callback D_801F5820[];
 extern u8       D_801F58C0;
-extern u8       D_801F58D0;
-extern u8       D_801F58D1;
 extern u8       D_801F58C6;
 extern u8       D_801F58C7;
 extern u8       D_801F58C8;
-extern u8       D_801F58D2;
-extern u8       D_801F58D3;
 extern u16      D_801F58CA;
 extern u16      D_801F58CC;
 extern u8       D_801F58CE;
 extern u8       D_801F58CF;
+extern u8       D_801F58D0;
+extern u8       D_801F58D1;
+extern u8       D_801F58D2;
+extern u8       D_801F58D3;
 
 extern void func_801F4874(void);
 

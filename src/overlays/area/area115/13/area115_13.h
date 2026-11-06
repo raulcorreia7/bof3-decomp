@@ -43,7 +43,6 @@ void Area_Update(void);
 /* func_801F39DC */
 void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 /* func_801F3B04 */
-void Area_DrawHud(s16 x, s16 y);
 void Area_DrawGradientDiamond(s16 x, s16 y);
 /* func_801F40C8 */
 void Area_DrawHudBanner(s16 x, s16 y);

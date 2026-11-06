@@ -35,14 +35,14 @@ MATCH void func_800A5AE4(void) {
 
     if (pad_bits & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        cue_counter  = (u8*)&g_BattleUiState;
+        cue_counter  = (u8*)&g_BattleUIState;
         *cue_counter = *cue_counter + 1;
         return;
     }
     if (pad_bits & D_80145AC2) {
         if (func_800A5D00() & BYTE_MASK) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
-            g_BattleUiState = 5;
+            g_BattleUIState = 5;
             return;
         }
         SND_PlayCue(EMI_CUE_ID(1, 7));

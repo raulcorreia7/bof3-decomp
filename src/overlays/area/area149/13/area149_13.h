@@ -15,10 +15,10 @@ extern u8       D_80146158;
 /* The field focus point the work position copies. */
 /* D_80147A90 */
 extern s32      g_AreaFocusY;
+extern s8       D_80147AD0;
 /* The state handler tables the dispatchers index. */
 extern u8       D_801F37D0[];
 extern Callback D_801F4580[];
-extern s8       D_80147AD0;
 
 /* The intro-controller state byte the request steps advance. */
 

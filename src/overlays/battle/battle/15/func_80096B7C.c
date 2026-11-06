@@ -6,17 +6,17 @@ MATCH void func_80096B7C(void) {
 
     held = g_InputPressed;
     if ((held & D_80145AC4) != 0u) {
-        g_BattleUiState = 4u;
+        g_BattleUIState = 4u;
         return;
     }
     if ((held & D_80145AC2) != 0u) {
-        g_BattleUiState = 3u;
+        g_BattleUIState = 3u;
         return;
     }
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     if ((trigger & (PADLup | PADLdown)) != 0) {
         D_801EB4D8[0] = Battle_FindSelectableSlotForward(0);
-        *(u8*)&g_BattleUiState += 1u;
+        *(u8*)&g_BattleUIState += 1u;
         SND_PlayCue(EMI_CUE_ID(1, 1));
         return;
     }

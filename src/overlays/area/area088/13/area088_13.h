@@ -37,7 +37,6 @@ void func_801F402C(void);
 void Area_Update(void);
 void func_801F41F0(void);
 /* func_801F4664 */
-void Area_DrawHud(s16 x, s16 y);
 /* func_801F4C28 */
 void Area_DrawHudBanner(s16 x, s16 y);
 
@@ -51,15 +50,15 @@ void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 /* func_801F4A30 */
 void Area_DrawGradientDiamond(s16 x, s16 y);
 
+extern u16 D_800E4B3E;
 extern u16 D_801F6090[5][16];
 extern u8  D_801F6170[12];
-extern u8  D_801F6171[];
 extern u8  D_801F6194[]; /* the "Manillo" text at +0x10 */
 
 void func_801F2F28(u8* window);
 
 void func_801F3258(u8* window);
 
-extern u16 D_800E4B3E;
+extern u8 D_801F6171[];
 
 #endif

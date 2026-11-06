@@ -154,11 +154,11 @@ extern void* const g_AreaLoads[200]; /* 0x8017F974 */
 extern u8          D_8014933C;
 /* D_80181B10 */
 extern const u8    g_CharSlot[];
+extern const u8    D_80181B88[12];
 /* D_80181BD4 */
 extern const u8    g_RouteSpeedScale[]; /* 0x80181BD4 */
 
 extern const u8 D_80181B34[20][3];
-extern const u8 D_80181B88[12];
 /* The main executable keeps the interrupt dispatcher table and SPU handles.
  * D_80185690 stores the table address 0x80185670; libetc wrappers load it and
  * fetch one slot: DMACallback 0x04, InterruptCallback 0x08, ResetCallback

@@ -10,7 +10,7 @@ MATCH void func_800A5DE0(void) {
     D_80148626 = 0;
     D_80148627 = 0;
     D_8014862E = 1;
-    counter    = (u8*)&g_BattleUiState;
+    counter    = (u8*)&g_BattleUIState;
     count      = *counter;
     D_801485DF = 2;
     *counter   = (count + 1);

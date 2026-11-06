@@ -15,9 +15,9 @@ MATCH void func_80096FBC(void) {
             D_8014857B = 2u;
         }
     }
-    stage           = g_BattleUiStep;
+    stage           = g_BattleUIStep;
     message_slot    = g_BattleMessageSlot[5];
-    g_BattleUiState = 0u;
-    g_BattleUiStep  = (stage + 1u);
+    g_BattleUIState = 0u;
+    g_BattleUIStep  = (stage + 1u);
     D_80148656      = message_slot;
 }

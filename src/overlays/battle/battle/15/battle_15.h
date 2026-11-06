@@ -207,11 +207,11 @@ typedef struct BattleHandlerQuad {
  * table holds four packets per enemy kind record, at the kind record's +0x34.
  *
  * Evidence: the retail reads the packet's +0x00 with `lbu` and switches on it
- * (Battle_TestAiCondition), its +0x01 with `lbu` and switches on it (func_8009C994),
+ * (Battle_TestAICondition), its +0x01 with `lbu` and switches on it (func_8009C994),
  * its +0x02 and +0x03 with `lbu`, its +0x04 with `lbu`, its +0x06 with `lh`
  * and its +0x08..+0x0F with `lbu` (func_8009C994). */
 typedef struct BattleEventPacket {
-    u8  kind;        /* +0x00 the kind Battle_TestAiCondition switches on to pick the trigger test */
+    u8  kind;        /* +0x00 the kind Battle_TestAICondition switches on to pick the trigger test */
     u8  effect_kind; /* +0x01 the kind func_8009C994 switches on to pick the record update */
     u8  selector;    /* +0x02 the bits that select the cells the packet updates */
     u8  value;       /* +0x03 the value the selected cells take */
@@ -366,6 +366,10 @@ typedef struct EnemyBattlerFlag {
     u8          pad_01[0x117];
 } EnemyBattlerFlag;
 
+/* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's
+ * save/restore keeps the plain word. A second name is the only form that keeps
+ * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols.toml. */
+extern u32                   g_BattleWorkCell;
 extern BattleHandlerTable3   D_80096994;
 extern BattleHandlerTable3   D_800969A0;
 extern BattleHandlerTable3   D_800969AC;
@@ -525,8 +529,6 @@ extern u8                    D_80145FB2;
 extern volatile BattlePlayerDamageStatus D_80145FB4[];
 /* Selection row table: player rows for slots 0-2, indexed by battler slot. */
 extern BattleSelectionPlayer             D_80145FB8[];
-/* D_801462E3 */
-extern volatile u8                       g_BattleUiStep;
 extern s8                                D_80145FBD;
 extern s8                                D_80145FBE;
 extern s8                                D_80145FBF;
@@ -537,14 +539,22 @@ extern s8                                D_80145FC3;
 extern u8                                D_801460E9;
 extern u16                               D_801460EA;
 extern u8                                D_801460F2;
+/* D_801462E3 */
+extern volatile u8                       g_BattleUIStep;
 extern volatile u8                       D_801462E7;
 /* D_801462F0 */
 extern volatile u8                       g_BattlePartyCount; /* u8 active-battler count at 0x801462F0. */
 extern u8                                D_8014630C[];
+extern BattleSelectionState              D_801462F0_state;
 /* D_80146374 */
 extern volatile u8                       g_BattleActiveBattler;
+/* Per-access views of a symbol at the same address, named by an
+ * `alias = true` row in config/symbols.toml (this image's table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for
+ * one cell use them; a cast of the canonical symbol merges the pair and changes the bytes. */
+extern u8                                g_BattleActiveBattler_nv;
 /* D_80146394 */
 extern volatile u8                       g_BattleTarget;
+extern u8                                g_BattleTarget_nv;
 /* g_BattleTargetRecord points at a panel task: its +0x04 and +0x06 cells are the
  * signed x and y halves (BattlePanelTask.x and .y). The declaration stays a
  * volatile s16 pointer: reading the cells through BattlePanelTask changes
@@ -559,6 +569,12 @@ extern u8                               D_801463D6;
 extern u16                              g_BattlePendingStatus;
 /* D_80148570 */
 extern volatile u8                      g_BattleChoicePanel[];
+/* First byte of g_BattleChoicePanel (0x80148570). The original stores it
+ * through a scalar symbol, which emits the direct %lo store form; indexing the
+ * array symbol would materialize its address in a register instead. */
+/* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
+ * direct %lo store form. */
+extern volatile u8                      g_BattleSelectionHead;
 extern u8                               D_80148571;
 extern u8                               D_80148572;
 extern u16                              D_80148576;
@@ -651,22 +667,6 @@ extern u8                               D_801EC357[];
 /* D_801EC364 */
 extern BattleTemplateStats              g_BattleTemplateStats[]; /* 0x801EC364 */
 extern u8                               D_801EC390[];
-/* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's
- * save/restore keeps the plain word. A second name is the only form that keeps
- * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols.toml. */
-extern u32                              g_BattleWorkCell;
-/* First byte of g_BattleChoicePanel (0x80148570). The original stores it
- * through a scalar symbol, which emits the direct %lo store form; indexing the
- * array symbol would materialize its address in a register instead. */
-/* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
- * direct %lo store form. */
-extern volatile u8                      g_BattleSelectionHead;
-/* Per-access views of a symbol at the same address, named by an
- * `alias = true` row in config/symbols.toml (this image's table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for
- * one cell use them; a cast of the canonical symbol merges the pair and changes the bytes. */
-extern u8                               g_BattleActiveBattler_nv;
-extern u8                               g_BattleTarget_nv;
-extern BattleSelectionState             D_801462F0_state;
 
 /* The battle program's handler tables call these functions. */
 void        func_80096F3C(void);
@@ -784,7 +784,7 @@ void        func_800A5E54(void);
 void        func_800A5E98(void);
 void        func_800A5F80(void);
 void        func_800A5FF0(void);
-s32         func_800A6CF8(u8 selection_id, u8 slot_index);
+s32         func_800A6CF8(u8 selection_id, u8 column_index);
 u8          func_800A6D84(void);
 void        func_800A6E14(u8 value);
 void        func_800A7C14(u8 slot);
@@ -910,12 +910,12 @@ s32  func_801DD7D8(s32 low_bound, s32 high_bound, s32 current);
 /* Multiplies its inputs and divides by 100. */
 s16  func_801DE144(s32 factor_a, s32 factor_b);
 /* func_801DE8C0 */
-void BattleStageSelectionRingRecord(u32 slot_index, u32 record_kind, u8* text);
+void BattleStageSelectionRingRecord(u32 index, u32 record_kind, u8* text);
 /* PsyQ SDK primitive setup helpers called by this target.
  * SetSprt8 / SetSemiTrans are declared by <libgpu.h> (via common.h);
  * GFX_AddPrim is a game primitive-append helper declared by gfx/prim.h. */
 /* func_801DE94C */
-void BattleStageAttackNameMessage(u32 slot_index, s8 queue_kind);
+void BattleStageAttackNameMessage(u32 index, s8 queue_kind);
 /* func_801DEA64 */
 void BattleStageMessageResource(void* message_slot);
 s32  func_801DEE4C();
@@ -944,8 +944,8 @@ extern u32  func_800AD044(u32 bit_index);
 void        func_800AF2B4(BattleRange* target, s32 step);
 s32         func_800AF5FC(BattleRange* target, u32 extent);
 extern void func_800B1DAC(s16 x, s16 y, u8 sprite_arg);
-s32         func_801DDE7C(u8 slot_index, u16 packed_value);
-extern u8   g_BattleUiStep_nv;
+s32         func_801DDE7C(u8 index, u16 packed_value);
+extern u8   g_BattleUIStep_nv;
 
 /* Store half the calculated damage and queue its animation. */
 static inline void BattleApplyHalfDamage(s32 anim) {

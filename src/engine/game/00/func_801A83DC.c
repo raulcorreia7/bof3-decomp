@@ -21,14 +21,14 @@ MATCH void func_801A83DC(void) {
                 if (g_SndBgmId != GAME_NONE) {
                     SND_PauseBgm(g_SndBgmId);
                 }
-                SND_StartXaStream(9, 1);
+                SND_StartXAStream(9, 1);
                 *state = 1;
                 return;
             }
             return;
         }
         case 1:
-            if ((SND_IsXaIdle() & BYTE_MASK) && (g_GameStateIndex != GAME_REQUEST_MESSAGE)) {
+            if ((SND_IsXAIdle() & BYTE_MASK) && (g_GameStateIndex != GAME_REQUEST_MESSAGE)) {
                 if (g_SndBgmId != GAME_NONE) {
                     SND_ResumeBgm(g_SndBgmId);
                 }

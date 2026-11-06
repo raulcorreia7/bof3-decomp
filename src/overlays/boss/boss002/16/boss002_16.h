@@ -28,6 +28,6 @@ void func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode);
 /* The enemy-work mode dispatch each installer publishes at unk_E4. */
 void func_800C19C8(s32 mode);
 void func_800C1D00(s32 mode);
-s32  Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, u8 flags);
+s32  Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags);
 
 #endif

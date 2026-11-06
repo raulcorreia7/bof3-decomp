@@ -13,12 +13,15 @@
 
 extern u8       D_800C2C38[];
 extern u8       D_800C2C44[];
+extern u8       D_800C2C50;
 extern u8       D_800C2C5C[];
 extern u8       D_800C2C68[];
 extern u8       D_800C2C74[];
 extern u8       D_800C2C80[];
 extern u16      D_800C2C8C[];
 extern u16      D_800C2C94[];
+extern u16      D_800C2C9C;
+extern u16      D_800C2CA4;
 extern Callback D_800C2CAC[];
 extern Callback D_800C2CDC[];
 extern Callback D_800C2CE8[];
@@ -31,25 +34,22 @@ extern Callback D_800C2DAC[];
 extern Callback D_800C2DB8[];
 extern u8       D_80145F09[];
 extern u8       D_80145FA8;
-extern u16      D_801FD6FE;
-/* Frame-state word owned by the main executable; the boss018 step reads bit 0. */
-extern u16      D_801FD700;
-extern u8       D_800C2C50;
-extern u16      D_800C2C9C;
-extern u16      D_800C2CA4;
-extern u16      D_801FD6FC;
-extern u16      D_801FD702;
 extern s8       D_80146875;
 extern u16      D_801EB6C4;
 extern u16      D_801EB6C6;
 extern u16      D_801EB7DC;
 extern u16      D_801EB8F4;
+extern u16      D_801FD6FC;
+extern u16      D_801FD6FE;
+/* Frame-state word owned by the main executable; the boss018 step reads bit 0. */
+extern u16      D_801FD700;
+extern u16      D_801FD702;
 
 void func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode);
 void func_800C197C(s32 mode);
 void func_800C1C6C(s32 mode);
-void func_800C29AC(s32 arg0, s32 arg1);
-
 void func_800C2074(s32 mode);
+
+void func_800C29AC(s32 arg0, s32 arg1);
 
 #endif

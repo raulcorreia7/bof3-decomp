@@ -9,7 +9,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E25E0(u8 arg0) {
     EnemyBattler* enemy;
-    s32           idx;
+    s32           index;
     s32           idx2;
     s32           row2;
     s32           row3;
@@ -29,14 +29,14 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
                 goto block_17; /* shared state fallback */
             }
         } else if (g_BattleActionType != 2) {
-            idx = slot & BYTE_MASK;
+            index = slot & BYTE_MASK;
             if (g_BattleActionType != 3) {
                 actor = slot & BYTE_MASK;
             } else {
-                actor = idx * 0x118;
-                if (*D_801EB6B0[idx] & 0x20) {
+                actor = index * 0x118;
+                if (*D_801EB6B0[index] & 0x20) {
                     g_BattleActionType = 4;
-                    *D_801EB726[idx]   = D_801EB6BC[actor + (rand() & 7)];
+                    *D_801EB726[index] = D_801EB6BC[actor + (rand() & 7)];
                     actor              = slot & BYTE_MASK;
                 } else {
                     goto block_16; /* shared state fallback */

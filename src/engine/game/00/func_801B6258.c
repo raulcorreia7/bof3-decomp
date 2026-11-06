@@ -24,7 +24,7 @@ MATCH s32 func_801B6258(void) {
     if ((((s32 (*)(s32))func_801B4494)(0x51) & BYTE_MASK) &&
         (((s32 (*)(u16, u16))Game_CallScenarioHandler)(SP_REF(u16, 0x0u), GAME_ENTITY_ENTRY_DATA) != 0)) {
         func_801B5BDC(g_Task->direction_08);
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
         return 1;
     }
     g_Task->direction_08 = saved;
@@ -36,7 +36,7 @@ MATCH s32 func_801B6258(void) {
     work = g_Task;
     if ((work->direction_08 == sel) || (sel == 8)) {
         work->mode = 7;
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
         return 1;
     }
     work->direction_08 = saved;

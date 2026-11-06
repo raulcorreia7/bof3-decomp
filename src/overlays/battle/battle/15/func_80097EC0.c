@@ -27,8 +27,8 @@ MATCH void func_80097EC0(void) {
     u32                      source_slot_offset;
     u32                      active_selection_flags;
     u32                      flag_mask;
-    u8                       slot_index;
-    u8                       slot_byte;
+    u8                       entry_index;
+    u8                       entry_value;
     u8                       tail_byte;
 
     init_work                           = (BattleSelectionInitWork*)g_BattleChoicePanel;
@@ -36,17 +36,17 @@ MATCH void func_80097EC0(void) {
     g_BattleChoicePanel[1]              = 8u;
     g_BattleChoicePanel[2]              = 2u;
     g_BattleChoicePanel[3]              = 2u;
-    slot_index                          = g_BattleMessageSlot[5];
+    entry_index                         = g_BattleMessageSlot[5];
     active_selection_slot               = D_801EB4D8;
-    source_slot_offset                  = slot_index * 3u;
-    g_BattleChoicePanel[0xA]            = slot_index;
+    source_slot_offset                  = entry_index * 3u;
+    g_BattleChoicePanel[0xA]            = entry_index;
     g_BattleChoicePanel[0xB]            = ((u8*)D_801454F4)[source_slot_offset];
     VOL(u16, g_BattleChoicePanel[0x10]) = ((u8*)D_801454F4)[source_slot_offset + 1];
-    slot_byte                           = ((u8*)D_801454F4)[source_slot_offset + 2];
+    entry_value                         = ((u8*)D_801454F4)[source_slot_offset + 2];
     g_BattleChoicePanel[0xD]            = 0xFFu;
     g_BattleChoicePanel[8]              = 2u;
     g_BattleChoicePanel[9]              = 0u;
-    g_BattleChoicePanel[0xC]            = slot_byte;
+    g_BattleChoicePanel[0xC]            = entry_value;
     active_selection_flags              = *(u32*)(active_selection_slot + 0x10);
     flag_mask                           = active_selection_flags & 0x20002u;
     if (flag_mask != 2u) {

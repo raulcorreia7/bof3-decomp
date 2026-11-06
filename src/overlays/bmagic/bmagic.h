@@ -205,15 +205,15 @@ extern Callback          g_BMagicEffectFuncs[];
 extern BmagicEffectWork* D_801F17B0;
 extern BmagicEffectWork* D_801F17B4;
 
+void func_800A9610(u8 selector, u16 flags);
 /* Per-image effect entry points whose name is a different symbol in another
  * overlay; battle/battle/03 keeps its own view. */
 void func_801EEC5C(void);
 void func_801EEEC8(void);
 void func_801EEF38(void);
-void func_801F006C(void);
 void func_801F0068(void);
 
-void func_800A9610(u8 selector, u16 flags);
+void func_801F006C(void);
 
 /* Defined in Effect_SetActorMatrix.h, which a member includes after its first call. */
 void Effect_SetActorMatrix(void);

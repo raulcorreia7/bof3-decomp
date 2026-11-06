@@ -60,7 +60,7 @@ MATCH void func_800A9BD8(u8 slot) {
     }
 
     if (g_BattleEnemyBattlers[slot].action_flags & COMBATANT_FLAG_HOLY_RESIST_ZERO) {
-        g_BattleEnemyBattlers[slot].stats.resistances[RES_SLOT_HOLY] = 0;
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_HOLY] = 0;
     }
     if (g_BattleEnemyBattlers[slot].action_flags & COMBATANT_FLAG_FIRE_RESIST_ZERO) {
         FIELD(u8, D_801EB6D4, slot * BATTLE_ENEMY_STRIDE + 0x0B) = 0;

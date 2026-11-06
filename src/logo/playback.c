@@ -85,11 +85,11 @@ MATCH s32 Logo_FadeInAudio(void) { /* func_801CED48 */
     int level;
 
     for (level = 0; level < 129; level += 2) {
-        s_LogoCdVolume[0] = level;
-        s_LogoCdVolume[1] = 0;
-        s_LogoCdVolume[2] = level;
-        s_LogoCdVolume[3] = 0;
-        CdMix((CdlATV*)s_LogoCdVolume);
+        s_LogoCDVolume[0] = level;
+        s_LogoCDVolume[1] = 0;
+        s_LogoCDVolume[2] = level;
+        s_LogoCDVolume[3] = 0;
+        CdMix((CdlATV*)s_LogoCDVolume);
     }
 }
 
@@ -98,11 +98,11 @@ MATCH void Logo_FadeOutAudio(void) { /* func_801CEDA4 */
     int level;
 
     for (level = 0x80; level >= 0; level -= 2) {
-        s_LogoCdVolume[0] = level;
-        s_LogoCdVolume[1] = 0;
-        s_LogoCdVolume[2] = level;
-        s_LogoCdVolume[3] = 0;
-        CdMix((CdlATV*)s_LogoCdVolume);
+        s_LogoCDVolume[0] = level;
+        s_LogoCDVolume[1] = 0;
+        s_LogoCDVolume[2] = level;
+        s_LogoCDVolume[3] = 0;
+        CdMix((CdlATV*)s_LogoCDVolume);
     }
 }
 

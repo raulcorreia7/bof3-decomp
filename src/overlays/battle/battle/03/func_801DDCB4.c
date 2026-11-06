@@ -34,10 +34,10 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
     rt  = s_BattleStatusRecoveryPenalties;
     id2 = battler_index & BYTE_MASK;
     if (id2 < 3u) {
-        state = g_BattlePartyBattlers[id2].chr.stats.resistances[RES_SLOT_STATUS];
+        state = g_BattlePartyBattlers[id2].chr.stats.resistances[RES_INDEX_STATUS];
     } else {
         enemy_index = id2 - 3u;
-        state       = g_BattleEnemyBattlers[enemy_index].stats.resistances[RES_SLOT_STATUS];
+        state       = g_BattleEnemyBattlers[enemy_index].stats.resistances[RES_INDEX_STATUS];
     }
 
     limit = 10000 - rt[state] * 50;

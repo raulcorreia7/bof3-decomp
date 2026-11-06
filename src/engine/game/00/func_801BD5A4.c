@@ -10,7 +10,7 @@ MATCH void func_801BD5A4(void) {
         case 0:
             if (D_80145FBB[0].mode != 8) {
                 work->mode = 1;
-                ACTOR_CLEAR_STATE();
+                ACTOR_CLEAR_STEP();
             }
             break;
         case 1:
@@ -27,12 +27,12 @@ MATCH void func_801BD5A4(void) {
                 g_ActorSlots[tail->unk_0B].unk_30     = tail->unk_30;
                 tail->step                            = 2;
             } else {
-                ACTOR_CLEAR_STATE();
+                ACTOR_CLEAR_STEP();
             }
             break;
         case 2:
             if (g_ActorSlots[g_Task->unk_0B].flags == 0) {
-                ACTOR_CLEAR_STATE();
+                ACTOR_CLEAR_STEP();
             }
             break;
     }

@@ -20,7 +20,7 @@ MATCH void func_800A60DC(void) {
 
     if (pad & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        g_BattleUiState = 5;
+        g_BattleUIState = 5;
         return;
     }
     if (pad & D_80145AC2) {
@@ -30,7 +30,7 @@ MATCH void func_800A60DC(void) {
             D_801463B4 = 0;
             state      = 3;
         }
-        g_BattleUiState = state;
+        g_BattleUIState = state;
         SND_PlayCue(EMI_CUE_ID(1, 4));
     }
 

@@ -144,15 +144,15 @@ typedef struct GameResetRecord {
 } GameResetRecord;
 
 typedef struct {
-    u8  cx;   /* 0x00 */
-    u8  cy;   /* 0x01 */
-    u16 key;  /* 0x02 */
-    u16 idx;  /* 0x04 */
-    u16 alt;  /* 0x06 */
-    u8  mode; /* 0x08 */
-    u8  span; /* 0x09 */
-    u8  kind; /* 0x0A */
-    u8  pad;  /* 0x0B */
+    u8  cx;    /* 0x00 */
+    u8  cy;    /* 0x01 */
+    u16 key;   /* 0x02 */
+    u16 index; /* 0x04 */
+    u16 alt;   /* 0x06 */
+    u8  mode;  /* 0x08 */
+    u8  span;  /* 0x09 */
+    u8  kind;  /* 0x0A */
+    u8  pad;   /* 0x0B */
 } GameLocale;
 
 ASSERT_SIZE(GameLocale, 0x0C);
@@ -350,8 +350,8 @@ extern u8                 D_8014626C;
 extern u8                 D_8014626E;
 extern u8                 D_8014626F;
 extern u8                 D_80146270;
-extern u8                 g_BattleUiStep;
-extern u8                 g_BattleUiState;
+extern u8                 g_BattleUIStep;
+extern u8                 g_BattleUIState;
 extern u8                 g_BattleScrollDir;
 extern u8                 g_BattlePartyCount;
 extern u8                 D_80146855;
@@ -549,12 +549,13 @@ void func_80117A30(void);
 void func_80117BF4(void);
 void Actor_BeginScript(u8 raw_selector, u8 raw_code);
 s16  func_80154ABC();
+void Area_ClearCell(s32 x, s32 y);
 void func_8015A7E8(void);
 void func_8015A944();
 s32  func_8015AC8C(s32);
 s32  func_8015B870(u8 value);
 void Party_ShowBattlers(void);
-s8   Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, u8 flags);
+s8   Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags);
 s32  func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 void func_8015D820(u16 cue_id, u8 index);
 void func_80164020(u32 arg0, u32 arg1);
@@ -565,8 +566,8 @@ void GFX_StagePalette(u8* dst, s32 field);
 void Party_ResetBattlers(void);
 void Party_ClearActiveBattlers(void);
 void func_80167910(void);
-void func_80167E00(void);
 
+void    func_80167E00(void);
 s32     GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
 void    GFX_FreePaletteFadeTarget(void* target);
 void    GFX_CopyPaletteAnimationColors(GraphicsPaletteAnimation* slot);
@@ -803,7 +804,7 @@ u8*     func_801A4844(u8* script);
 void    func_801A4914(void);
 void    func_801A4990(u8* script);
 void    func_801A4AA8(void);
-void    func_801A4B80(s32 slot_index);
+void    func_801A4B80(s32 index);
 void    Area_SetCellCode(s16 column, s16 row, u8 code);
 u8*     func_801A4BF8(u8* script);
 void    func_801A50C0(u8* script);
@@ -819,12 +820,13 @@ void    func_801A6F58(u8* script);
 void    func_801A72B0(void* packed_selector);
 void    func_801A72E8(void* selector);
 void    func_801A7330(const volatile u8* data);
+s8      Area_IsStepBlocked(s32 handler_x, s32 handler_y);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 void    func_801A7CE8(void);
 void    Master_RunSceneEvent(void);
+void    Message_RunAreaMessage(void);
 void    func_801A7E54(void);
 void    Scene_RunShopSaveEvent(void);
-void    Message_RunAreaMessage(void);
 void    func_801A839C(void);
 void    func_801A83DC(void);
 void    func_801A852C(void);
@@ -874,9 +876,9 @@ void    func_801AD734(void);
 void    func_801AD90C(void);
 void    func_801AD9C4(void);
 void    func_801AD9F0(void);
-void    func_801ADAC0(s8 slot_index);
+void    func_801ADAC0(s8 actor_slot);
 s8      func_801ADC98(void);
-void    func_801ADCF4(u8 slot_index);
+void    func_801ADCF4(u8 actor_slot);
 void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend);
 u8*     func_801AF270(u8 sprite_id, u8 flags);
 void    UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
@@ -895,6 +897,7 @@ void    func_801B036C(void);
 void    func_801B0568(void);
 void    func_801B0C88(void);
 void    func_801B0DA0(void);
+void    func_801B13BC(void);
 void    func_801B146C(void);
 void    func_801B1AE8(void);
 void    func_801B1E24(void);
@@ -1026,11 +1029,14 @@ s32     func_801BB7B0(s32 selector);
 s32     func_801BB86C(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 probe_mode);
 void    func_801BB8E8(u8 arg_a, u8 arg_b, u8 arg_c);
 bool    func_801BB934(s32 first_index, s32 second_index, s8 route_value, s32 expected_value);
+void    func_801BBBC8(s16 from_x, s16 from_y);
 void    func_801BBE48(void);
 void    func_801BBE98(void);
 void    func_801BBFB4(void);
 void    func_801BC000(void);
+s32     func_801BC4D0(void);
 s32     func_801BC760(void);
+void    func_801BCD60(s32 target_x, s32 target_y);
 void    func_801BD290(s32 pos_x, s32 pos_y, s8* direction_out);
 void    func_801BD32C(void);
 void    func_801BD35C(void);
@@ -1070,7 +1076,7 @@ void    func_801C0D34(void);
 void    func_801C0D54(void);
 s32     func_801C0E48(void);
 s32     func_801C0F9C(u8 source_row);
-void    func_801C1254(s32 ability_id, s32 slot_index);
+void    func_801C1254(s32 ability_id, s32 party_slot);
 void    func_801C16B8(void);
 void    func_801C1840(void);
 void    func_801C1E88(s32 key, s32* counter);
@@ -1114,13 +1120,13 @@ bool    func_801C4EC4(void);
 bool    func_801C4F88(void);
 s32     func_801C4FE0(void);
 void    func_801C51B0(void);
+void    Actor_ClearVelocity(void);
 s32     func_801C520C(void);
 bool    func_801C539C(void);
 s32     func_801C5474(void);
 void    func_801C5558(void);
 void    func_801C5620(void);
 void    func_801C56E4(void);
-void    Actor_ClearVelocity(void);
 void    func_801C57B4(void);
 void    func_801C57F4(void);
 void    func_801C5830(void);
@@ -1185,7 +1191,6 @@ void    func_801D0900(void);
 void    func_801D0944(void);
 void    func_801D09CC(void);
 void    func_801D0A10(void);
-void    func_801D0C04(void);
 s32     func_801D0C18();
 void    func_801D0C98(void);
 void    func_801D0D38(void);
@@ -1540,12 +1545,6 @@ void    func_801F8D70(void);
 void    func_801F95D4(void);
 void    func_801F986C(void);
 void    func_801F9DBC(void);
-s8      Area_IsStepBlocked(s32 handler_x, s32 handler_y);
-void    func_801B13BC(void);
-void    func_801BBBC8(s16 from_x, s16 from_y);
-s32     func_801BC4D0(void);
-void    func_801BCD60(s32 target_x, s32 target_y);
-void    Area_ClearCell(s32 x, s32 y);
 
 /* Run the overlay map-load handshake: wait for the loader, switch the window
  * to mode 3, drain the effect loop and run the world/front update slice. */
@@ -1600,7 +1599,7 @@ static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 fla
 }
 
 /* Roll the selector-chosen setup path. */
-static inline void Game_RollAreaSetup(s32 slot_index) {
+static inline void Game_RollAreaSetup(s32 actor_slot) {
     u32 choice;
 
     choice = (u32)(RANDOM_MASK(0xF));
@@ -1633,7 +1632,7 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
                 g_Task->unk_04 = 2;
                 break;
             default:
-                func_801ADAC0(slot_index);
+                func_801ADAC0(actor_slot);
                 g_Task->unk_04 = 3;
                 break;
         }
@@ -1641,7 +1640,7 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
         if (choice >= 8) {
             func_801ADAC0(1);
         } else {
-            func_801ADAC0(slot_index);
+            func_801ADAC0(actor_slot);
         }
         g_Task->unk_04 = 3;
     }
@@ -1649,20 +1648,20 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
 
 s32 func_801A20F8(s16 cell_x, s16 cell_y);
 
-s32 func_801BA278(u8 cell0, u8 cell1, u8 cell2, u8 cell3, u8 cell4);
-
 s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags);
 
 s32 func_801B1C18(s32 x, s32 y, s32 mode);
 
 u8 func_801B4BE4(u8 mode, u8 code);
 
-s32 Area_BuildEncounter(u8 work_mode, s32 work_index);
-
 void func_801B690C(void);
+
+s32 func_801BA278(u8 cell0, u8 cell1, u8 cell2, u8 cell3, u8 cell4);
 
 void func_801BB9B4(s16 probe_x, s16 probe_y);
 
 void func_801BBCCC(s16 from_x, s16 from_y, s16 to_x, s16 to_y);
+
+s32 Area_BuildEncounter(u8 work_mode, s32 work_index);
 
 #endif

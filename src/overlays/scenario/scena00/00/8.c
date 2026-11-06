@@ -1055,7 +1055,7 @@ MATCH void func_801F9178(void) {
 }
 
 MATCH void func_801F92DC(void) {
-    s32  slot_index;
+    s32  actor_slot;
     s8   next_state;
     u16  selection;
     u16* state0;
@@ -1068,9 +1068,9 @@ MATCH void func_801F92DC(void) {
         if (g_ScriptVars[2] == 0) {
             slot        = Actor_FindFreeSlot();
             *D_1F800000 = slot;
-            slot_index  = slot & BYTE_MASK;
-            if (slot_index != GAME_NONE) {
-                g_ActorSlots[slot_index].flags       = 1;
+            actor_slot  = slot & BYTE_MASK;
+            if (actor_slot != GAME_NONE) {
+                g_ActorSlots[actor_slot].flags       = 1;
                 g_ActorSlots[*D_1F800000].type       = 0x10;
                 g_ActorSlots[*D_1F800000].counter_18 = 2;
                 g_ActorSlots[*D_1F800000].counter_1C = 2;
@@ -1181,7 +1181,7 @@ MATCH void func_801F9644(void) {
 MATCH void func_801F9868(void) {
     s32 slot;
     u8  i;
-    u8  slot_byte;
+    u8  free_slot;
 
     if (g_GameAreaId == 24) {
         switch (D_80143F03) {
@@ -1201,9 +1201,9 @@ MATCH void func_801F9868(void) {
                     g_AreaCameraAngle.vz = 848;
                     func_801BE1B0(0U);
                     func_801C601C(0);
-                    slot_byte   = Actor_FindFreeSlot();
-                    slot        = slot_byte & BYTE_MASK;
-                    *D_1F800000 = slot_byte;
+                    free_slot   = Actor_FindFreeSlot();
+                    slot        = free_slot & BYTE_MASK;
+                    *D_1F800000 = free_slot;
                     if (slot != GAME_NONE) {
                         g_ActorSlots[slot].flags          = 1;
                         g_ActorSlots[D_1F800000[0]].type  = 0x13;

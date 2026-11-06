@@ -1,11 +1,11 @@
 #include "game_00.h"
 
-MATCH void GFX_StepPaletteAnimation(u8 slot_index) {
+MATCH void GFX_StepPaletteAnimation(u8 palette_slot) {
     GraphicsPaletteAnimation* slot;
     u8*                       entry;
     u8                        id;
 
-    slot = &D_80145D94[slot_index];
+    slot = &D_80145D94[palette_slot];
     id   = slot->owner[0x4B];
     if (id != slot->unk_02) {
         slot->current_entry = ((u8**)slot->source_table)[id];

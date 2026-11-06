@@ -12,7 +12,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x0, .data, D_80096800]
-      - [0x4, .rodata, Battle_TestAiCondition]
+      - [0x4, .rodata, Battle_TestAICondition]
       - [0x9C, .rodata, func_8009BFC4]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_2
@@ -142,7 +142,7 @@ segments:
       - [0x51A0, c, func_8009B9A0]
       - [0x527C, c, func_8009BA7C]
       - [0x52CC, c, func_8009BACC]
-      - [0x53E8, c, Battle_TestAiCondition]
+      - [0x53E8, c, Battle_TestAICondition]
       - [0x57C4, c, func_8009BFC4]
       - [0x5F94, c, func_8009C794]
       - [0x6068, c, Battle_Unk0E1BitTest]
@@ -549,7 +549,7 @@ segments:
       - [0x1BD8C, c, func_800B258C]
       - [0x1BDC0, c, func_800B25C0]
       - [0x1C490, c, func_800B2C90]
-      - [0x1CA6C, c, Menu_DrawIcon]
+      - [0x1CA6C, c, Menu_DrawPanelIcon]
       - [0x1CB24, c, func_800B3324]
       - [0x1D2E8, c, func_800B3AE8]
       - [0x1DA20, c, func_800B4220]

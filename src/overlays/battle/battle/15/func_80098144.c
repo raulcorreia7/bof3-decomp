@@ -6,11 +6,11 @@ MATCH void func_80098144(void) {
 
     held = g_InputPressed;
     if ((held & D_80145AC4) != 0u) {
-        g_BattleUiStep = 3u;
+        g_BattleUIStep = 3u;
         return;
     }
     if ((held & D_80145AC2) != 0u) {
-        g_BattleUiStep = 2u;
+        g_BattleUIStep = 2u;
         return;
     }
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);

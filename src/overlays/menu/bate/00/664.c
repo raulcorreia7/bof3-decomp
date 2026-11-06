@@ -133,7 +133,8 @@ INCLUDE_ASM(func_801D3E18);
 
 #include "overlays/menu/Menu_DrawIcon.h"
 
-MATCH void func_801D4678(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
+/* func_801D4678 */
+MATCH void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
     MenuDrawPanelIcon(x, y, u, v, clut, color);
 }
 
@@ -262,7 +263,7 @@ MATCH void func_801D8208(u8 index, s32 left, s32 top, MenuListRow* row) {
             GetGraphType();
         }
         GFX_AddDrawMode(0xF);
-        func_801D4678((left + 9), (top + 5), (u8)(index + 3), 0x1E, GetClut(16, 480), 128);
+        Menu_DrawPanelIcon((left + 9), (top + 5), (u8)(index + 3), 0x1E, GetClut(16, 480), 128);
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
             icon = *(row->unk_00 + i + 5);
             if (icon != GAME_NONE) {

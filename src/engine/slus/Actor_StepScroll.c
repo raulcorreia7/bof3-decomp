@@ -4,11 +4,11 @@
  * switches the active stream record when the cursor expires and the limit
  * reaches the next script position.
  */
-MATCH s8 Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, s32 flags) {
+MATCH s8 Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags) {
     s16 limit;
 
     COORD_INT(g_Task->z) += (g_Task->vz >> 8);
-    g_Task->vz = g_Task->vz + vz_step;
+    g_Task->vz = g_Task->vz + vz_delta;
     Area_AdvanceScroll(g_ScrollHeight[0]);
     g_Task->unk_0A = g_Task->unk_0A - 1;
     limit          = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);

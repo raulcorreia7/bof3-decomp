@@ -7,6 +7,7 @@
 #include "shared/etc.h"
 
 extern OverlayHeader D_801D0C00;
+extern u8            D_801DAAA8;
 /* The overlay's step and sub-step handler pools. The tables overlap: each entry
  * stub starts at its own offset into one callback run, so the counts stay open
  * until a data pass proves each reader's range. */
@@ -28,24 +29,23 @@ extern Callback      D_801DAE24[];
 extern Callback      D_801DAE30[];
 extern Callback      D_801DAE44[];
 extern Callback      D_801DAE68[];
-extern Callback      D_801DAE74[];
 extern u8            g_MenuPortraitAtlas[];
 
+extern Callback D_801DAE74[];
+extern s32      D_801DB07C;
 /* The overlay's state byte the guarded step advances. */
-extern s8  D_801DB093;
-extern u8  D_801DB0B4;
-extern s8  D_801DB0C4;
-extern s16 D_801DB0C8;
-extern s8  D_801DB0B8;
-extern u8  D_801F2944;
-extern u8  D_801F2945;
-extern s32 D_801DB07C;
-extern u8  D_801DAAA8;
-extern u8  D_801DB0D0;
-extern u8  D_801DB0D4;
-extern u8  D_801DB0D8;
-extern s8  D_801DB0DC;
-extern u8  D_801DB0CC;
+extern s8       D_801DB093;
+extern u8       D_801DB0B4;
+extern s8       D_801DB0B8;
+extern s8       D_801DB0C4;
+extern s16      D_801DB0C8;
+extern u8       D_801DB0CC;
+extern u8       D_801DB0D0;
+extern u8       D_801DB0D4;
+extern u8       D_801DB0D8;
+extern s8       D_801DB0DC;
+extern u8       D_801F2944;
+extern u8       D_801F2945;
 
 s32 func_801D7EA0(u8);
 

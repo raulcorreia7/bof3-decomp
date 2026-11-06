@@ -44,7 +44,7 @@ segments:
       - [0x628, c, func_801D1228]
       - [0xBC4, c, Battle_DispatchEntrance]
       - [0xC28, c, Battle_ReserveStagePanels]
-      - [0xEB4, c, Battle_WaitUiMode]
+      - [0xEB4, c, Battle_WaitUIMode]
       - [0xEE8, c, Battle_InitPanels]
       - [0xF94, c, Battle_EnterIntro]
       - [0x1054, c, func_801D1C54]

@@ -19,7 +19,7 @@ static GameFunc const s_dispatch[] = {
 /* forwards the caller's seven arguments to the handler the work
  * area's dispatch byte at +0x04 selects and returns the handler's byte result.
  */
-MATCH s8 Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, u8 flags) {
-    return ((GameFunc*)(void*)&D_801821D0)[g_Task->unk_04](entry, dir_x, dir_y, vz_start, vz_step, landing_script,
+MATCH s8 Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
+    return ((GameFunc*)(void*)&D_801821D0)[g_Task->unk_04](entry, dir_x, dir_y, vz_start, vz_delta, landing_script,
                                                            flags);
 }

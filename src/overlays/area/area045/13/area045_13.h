@@ -50,7 +50,6 @@ extern u16 D_801F51BC[9][16];
 extern u8  D_801F531C[28];
 extern u8  D_801F531D[]; /* the record-selector byte at +1 */
 extern u8  D_801F532C[]; /* the "Manillo" text at +0x10 */
-void       Fish_LocationMessage(void);
 
 void func_801F40C4(s16 x, s16 y);
 void Area_Update(void);

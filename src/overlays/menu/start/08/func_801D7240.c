@@ -1,7 +1,6 @@
 #include "shared/etc.h"
 
 void func_801D9110(void);
-void Menu_DrawClutStrip(u8 clut_index);
 
 /* start_08.h cannot be included here: it declares D_80148654 and D_80148665
  * as plain bytes; this unit polls both as volatile. */

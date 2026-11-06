@@ -6,6 +6,6 @@ MATCH void func_80097CBC(void) {
     g_BattleStep           = 4u;
     g_BattleSelectionLatch = 0u;
     g_BattleSubStep        = 1u;
-    g_BattleUiStep         = 0u;
-    g_BattleUiState        = 1u;
+    g_BattleUIStep         = 0u;
+    g_BattleUIState        = 1u;
 }

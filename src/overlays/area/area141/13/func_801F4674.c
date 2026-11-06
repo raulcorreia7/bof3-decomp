@@ -2,8 +2,6 @@
 
 extern u8 D_801F4E2C[];
 
-void func_801A4D54(u8* script);
-
 MATCH void func_801F4674(void) {
     s32 first;
     s32 second;

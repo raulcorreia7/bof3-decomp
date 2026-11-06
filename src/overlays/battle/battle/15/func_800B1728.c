@@ -52,7 +52,7 @@ MATCH void func_800B1728(void) {
             UI_DrawGlyphString((g_MenuCurrentPanel->x + 88), (g_MenuCurrentPanel->y + line_y), clut, g_UiFormatBuffer);
         }
     }
-    if ((*(u8*)&g_BattleUiStep != 6) || (*(u8*)&g_BattleUiState != 5)) {
+    if ((*(u8*)&g_BattleUIStep != 6) || (*(u8*)&g_BattleUIState != 5)) {
         Menu_DrawCursorSprite((g_MenuCurrentPanel->x + 7) & HALF_MASK,
                               (g_MenuCurrentPanel->y + 0x20 + *(s16*)&g_MenuCurrentPanel->unk_10 * 32) & HALF_MASK, 0);
     }

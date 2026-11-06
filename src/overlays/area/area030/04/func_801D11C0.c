@@ -7,7 +7,7 @@
  */
 MATCH void func_801D11C0(void) {
     if (D_80145E92[0] == 1) {
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
         return;
     }
     if (D_8014930E >= 0x39) {

@@ -38,8 +38,8 @@ MATCH void func_80099568(void) {
         D_80148624            = 0;
         D_801483C0            = 1;
         D_801485DC            = 0;
-        g_BattleUiStep        = 1;
-        g_BattleUiState       = 0;
+        g_BattleUIStep        = 1;
+        g_BattleUIState       = 0;
         D_80148574            = D_80148598;
         D_80148576            = D_8014859A;
         return;
@@ -58,7 +58,7 @@ MATCH void func_80099568(void) {
         D_8014859C         = 0;
         D_801485A1         = 0;
         D_80148654         = 0;
-        counter            = (u8*)&g_BattleUiState;
+        counter            = (u8*)&g_BattleUIState;
         counter_value      = *counter + 1;
         selection_value    = g_BattleItemRow;
         g_BattleListCursor = cursor_value;

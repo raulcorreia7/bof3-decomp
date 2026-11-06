@@ -1,0 +1,13 @@
+#include "battle_03.h"
+
+/* func_801D1AB4 */
+MATCH void Battle_WaitUIMode(void) {
+    u8* counter;
+
+    if (D_80148357 == 1) {
+        /* Retail materialises &g_BattleSubStep once and reads and writes the
+         * sub-step byte through it; a direct `+= 1` repeats lui. */
+        counter = &g_BattleSubStep;
+        *counter += 1;
+    }
+}

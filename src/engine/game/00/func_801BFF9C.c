@@ -42,20 +42,20 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         g_PartySize                                      = 1;
         g_BattlePartyBattlers[0].slot                    = 0;
         *(Character*)((u8*)g_BattlePartyBattlers + 0x74) = g_Characters[0];
-        g_BattlePartyBattlers[0].record_slot             = 0;
+        g_BattlePartyBattlers[0].character_index         = 0;
         VOL(u8, D_80145FBC) &= 0xFE;
         g_Task->unk_48 = 0;
         if (LOBU(g_GameRequestFlags) & 1) {
-            if (g_Characters[CHAR_SLOT_RYU].character_id == CHAR_ID_RYU_YOUNG) {
+            if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_YOUNG) {
                 id = 0x52;
                 goto set_mode; /* shared mode dispatch */
             }
-            if (g_Characters[CHAR_SLOT_RYU].character_id == CHAR_ID_RYU_PAJAMAS) {
+            if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_PAJAMAS) {
                 id = 0xCB;
                 goto set_mode; /* shared mode dispatch */
             }
             id = 0x27A;
-            if (g_Characters[CHAR_SLOT_RYU].character_id == CHAR_ID_RYU_ADULT) {
+            if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_ADULT) {
             set_mode:
                 Area_FindSceneRecord(id);
             }

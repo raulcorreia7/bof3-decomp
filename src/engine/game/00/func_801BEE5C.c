@@ -6,7 +6,7 @@ MATCH s32 func_801BEE5C(void) {
     u8  count;
     s32 initial_count;
     s32 phase2_count;
-    s32 idx;
+    s32 index;
     s32 kind;
     u8  sel;
     s32 scan;
@@ -79,18 +79,18 @@ phase2:
     neg = -0x40;
     off = 0;
     do {
-        idx         = 0;
+        index       = 0;
         phase2_base = (u8*)g_BattlePartyBattlers + off;
         phase2_rec  = phase2_base;
         g_GameState = (GameState*)phase2_rec;
         TASK_SET(phase2_rec);
         do {
-            base                 = (u8*)((phase2_rec[0x05] << 6) + (u32)tbl);
-            source_row           = (u16*)base;
-            destination_row      = source_row + 0x60;
-            destination_row[idx] = source_row[idx];
-            idx++;
-        } while (idx < 32);
+            base                   = (u8*)((phase2_rec[0x05] << 6) + (u32)tbl);
+            source_row             = (u16*)base;
+            destination_row        = source_row + 0x60;
+            destination_row[index] = source_row[index];
+            index++;
+        } while (index < 32);
         off += BATTLE_PARTY_STRIDE;
         func_801C2438();
         g_Task->unk_0B            = 0;

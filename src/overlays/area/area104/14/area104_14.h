@@ -23,7 +23,6 @@ extern u8 D_801F6B18[];
 /* func_801F367C */
 void Area_Update(void);
 /* func_801F3BC4 */
-void Area_DrawHud(s16 x, s16 y);
 /* func_801F4188 */
 void Area_DrawHudBanner(s16 x, s16 y);
 void func_801F4E3C(void);
@@ -43,8 +42,8 @@ void Area_FinishTurnStep(void);
 extern WorldMapMarker D_801F6AF8[6];
 #define AREA_HUD_MASK_TABLE D_801F6AF8
 extern u16 g_GameAreaId;
-extern u16 D_80143F22;
 extern s8  g_GameRequestKind;
+extern u16 D_80143F22;
 /* func_801F3A9C */
 void       Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 /* func_801F3F90 */
@@ -52,10 +51,10 @@ void       Area_DrawGradientDiamond(s16 x, s16 y);
 
 void func_8015A944(void);
 
-void func_801F656C(void);
+s32 func_801A79A4(s32 handler_x, s32 handler_y);
 
 s32 func_801F4AE4(s32, s32, s32);
 
-s32 func_801A79A4(s32 handler_x, s32 handler_y);
+void func_801F656C(void);
 
 #endif

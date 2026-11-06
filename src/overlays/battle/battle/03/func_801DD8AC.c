@@ -6,24 +6,25 @@
 
 MATCH void func_801DD8AC(u32 battler_index) {
     u32 off;
-    s32 tidx;
+    s32 character_offset;
     u16 flags;
 
     battler_index &= BYTE_MASK;
     off = battler_index * 320u;
     if ((((u8*)(g_BattlePartyBattlers))[off] & 1u) != 0u) {
-        tidx = g_BattlePartyBattlers[battler_index].record_slot * PARTY_RECORD_STRIDE;
+        character_offset = g_BattlePartyBattlers[battler_index].character_index * PARTY_RECORD_STRIDE;
         /* FAKE: volatile-drop keeps the original load and store order. */
-        *MATCH_VOLATILE_PTR(u16, ((u8*)&g_Characters[0].hp + tidx)) = g_BattlePartyBattlers[battler_index].chr.hp;
+        *MATCH_VOLATILE_PTR(u16, ((u8*)&g_Characters[0].hp + character_offset)) =
+            g_BattlePartyBattlers[battler_index].chr.hp;
         /* FAKE: volatile-drop keeps the original load and store order. */
         /* FAKE: retail reads D_80145F1A as volatile u8[]. */
-        *MATCH_VOLATILE_PTR(u16, ((u8*)&g_Characters[0].ap + tidx)) =
+        *MATCH_VOLATILE_PTR(u16, ((u8*)&g_Characters[0].ap + character_offset)) =
             *MATCH_VOLATILE_PTR(u16, (((volatile u8*)D_80145F1A) + off));
         /* FAKE: volatile-drop keeps the original load and store order. */
-        *MATCH_VOLATILE_PTR(u8, ((u8*)&g_Characters[0].willpower + tidx)) = D_80145F1C[off];
+        *MATCH_VOLATILE_PTR(u8, ((u8*)&g_Characters[0].willpower + character_offset)) = D_80145F1C[off];
         /* FAKE: volatile-drop keeps the original load and store order. */
-        flags                                        = *MATCH_VOLATILE_PTR(u16, (D_80145F10 + off)) & 0x60A0u;
-        *(u16*)((D_80145F10 + off))                  = flags;
-        *(u16*)((u8*)&g_Characters[0].status + tidx) = flags;
+        flags                       = *MATCH_VOLATILE_PTR(u16, (D_80145F10 + off)) & 0x60A0u;
+        *(u16*)((D_80145F10 + off)) = flags;
+        *(u16*)((u8*)&g_Characters[0].status + character_offset) = flags;
     }
 }

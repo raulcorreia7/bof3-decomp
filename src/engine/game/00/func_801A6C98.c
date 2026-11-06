@@ -26,7 +26,7 @@ MATCH void func_801A6C98(u8* record) {
     u32         x;
     u32         y;
     s32         off;
-    u8          idx;
+    u8          index;
     Actor*      tail;
     Actor*      entry;
 
@@ -67,11 +67,11 @@ MATCH void func_801A6C98(u8* record) {
     tail->unk_18           = 0;
     FIELD(s32, tail, 0x70) = *(u8*)((u8*)shared + 2);
 
-    idx                             = data->unk_0B;
-    entry                           = &D_80147A58[idx];
+    index                           = data->unk_0B;
+    entry                           = &D_80147A58[index];
     entry->unk_88                   = 0;
     entry->unk_84                   = 0;
-    D_80147A58[idx].unk_80          = 0;
+    D_80147A58[index].unk_80        = 0;
     D_80147A58[data->unk_0B].unk_77 = data->unk_0A;
     D_80147A58[data->unk_0B].unk_78 = data->unk_06;
     D_80147A58[data->unk_0B].unk_7C = (data->unk_0D | (data->unk_0C << 8));

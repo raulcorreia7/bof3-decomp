@@ -6,7 +6,7 @@
  */
 MATCH void func_8009DAB4(void) {
     /* FAKE: retail keeps the enemy row index in v0. */
-    MATCH_REG(u32, idx, "v0");
+    MATCH_REG(u32, enemy_index, "v0");
     u8  battler;
     u16 value;
     u8  battler_index;
@@ -17,8 +17,8 @@ MATCH void func_8009DAB4(void) {
     if (BATTLER_IS_PLAYER(battler)) {
         value = g_BattlePartyBattlers[battler].chr.stats.power;
     } else {
-        idx   = battler - 3u;
-        value = g_BattleEnemyBattlers[idx].stats.power;
+        enemy_index = battler - 3u;
+        value       = g_BattleEnemyBattlers[enemy_index].stats.power;
     }
     D_801EC30C = value;
     switch (RANDOM_MASK(3)) {

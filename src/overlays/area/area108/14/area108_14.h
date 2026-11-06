@@ -41,6 +41,7 @@ ASSERT_OFFSET(Area108Scratch, pos_x, 0x34);
 ASSERT_OFFSET(Area108Scratch, pos_y, 0x38);
 ASSERT_OFFSET(Area108Scratch, pos_z, 0x3C);
 
+extern u8       D_80145F09;
 /* The game-overlay state bytes the cancel path resets. */
 extern u8       D_80147AF0;
 extern u8       D_801F56E8[];
@@ -49,18 +50,17 @@ extern u8       D_801F56FC[];
 extern u8       D_801F5718[];
 extern u8       D_801F63C4[];
 extern u8*      D_801F63EC;
-extern u8       D_80145F09;
 
 /* func_8019651C */
 s32  GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
+void Area_ProjectPoint(s32* pos, long* screen_xy);
 void func_801F2D40(const void* sprite);
 void func_801F2F1C(void* sprite);
 void func_801F2FC8(void);
 u8   func_801F321C(void);
 void func_801F3BA0(void);
 void func_801F3C84(void);
-void func_801F55F0(s32);
 
-void Area_ProjectPoint(s32* pos, long* screen_xy);
+void func_801F55F0(s32);
 
 #endif

@@ -2,5 +2,5 @@
 
 MATCH void func_80096AB0(void) {
     BattleStageAttackNameMessage(0, 0);
-    *(u8*)&g_BattleUiStep += 1;
+    *(u8*)&g_BattleUIStep += 1;
 }

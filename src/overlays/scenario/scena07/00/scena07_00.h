@@ -10,7 +10,8 @@
 #define SCRATCH_ROW_OFFSET 0x00
 
 void             func_801F3C3C(s32 arg0);
-void             func_801FA38C(void);
+void             func_801F8358(void);
+extern u16       D_800E4C1E;
 extern s8        D_80144EC0;
 extern u32       D_801F6C00;
 extern Callback  D_801FDD3C[];
@@ -28,13 +29,12 @@ extern Callback  D_801FDE1C[];
 extern u8        D_801FDE88[4];
 extern SceneFunc D_801FDF8C[];
 extern u8        D_801FDFC4;
-extern u8        D_801FDFC8;
 
-void       func_801F8358(void);
-void       func_801F83D0(u8* row);
-void       func_801F88B8(void* table);
-void       func_801F8BE8(void* table);
-extern u16 D_800E4C1E;
+void      func_801F83D0(u8* row);
+void      func_801F88B8(void* table);
+void      func_801F8BE8(void* table);
+void      func_801FA38C(void);
+extern u8 D_801FDFC8;
 
 /* The panel fade step func_801F72E0 and func_801F80F0 share: draw the panel table, dim it by 12 and
  * advance the actor when its countdown ends. Every change must keep both members matching. */
@@ -48,9 +48,9 @@ extern u16 D_800E4C1E;
 s32 func_801F85D8(void);
 s32 func_801F9EFC(void);
 
-extern Callback D_801FDD14[];
+extern u16      g_GameAreaId;
 extern s8       D_80146874;
 extern u8       D_80146875;
-extern u16      g_GameAreaId;
+extern Callback D_801FDD14[];
 
 #endif

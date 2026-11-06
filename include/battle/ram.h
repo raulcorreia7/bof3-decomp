@@ -35,9 +35,9 @@
 /* func_801DB434 reads six threshold bytes per row. */
 #define BATTLE_LEVEL_THRESHOLD_COUNT      6u
 
+#define BATTLE_PARTY_SLOT_COUNT           3 /* player slots 0-2; enemy slots start at 3 */
 #define BATTLE_PARTY_STRIDE               0x140
 #define BATTLE_ENEMY_STRIDE               0x118
-#define BATTLE_PARTY_SLOT_COUNT           3 /* player slots 0-2; enemy slots start at 3 */
 #define BATTLE_EFFECT_STRIDE              0x78
 #define BATTLE_RING_STRIDE                0x08
 #define BATTLE_KIND_STRIDE                0x14
@@ -176,10 +176,10 @@ extern u8 g_BattleCommandCount;
 /* D_80146324 */
 extern u8     g_BattleSurprise;
 extern Spoils D_80146326;
-/* D_80146330 */
-extern s32    g_BattleSpoilsZenny;
 /* D_8014632C */
 extern u32    g_BattleSpoilsExp;
+/* D_80146330 */
+extern s32    g_BattleSpoilsZenny;
 
 /* The kind of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
 enum {
@@ -193,6 +193,8 @@ enum {
 extern volatile u8   g_BattleActionType;
 extern u16           D_80146386;
 extern u16           D_8014638A;
+/* The selected battler's row (D_8014638C), stored by func_801D3624. */
+extern PartyBattler* g_BattleSelectedActor;
 extern void*         D_80146390;
 extern s32           D_8014639C;
 extern u16           D_801463B2;
@@ -232,11 +234,9 @@ extern u8            g_BattleEnemies[];
 extern PartyBattler* D_801EB4E0;
 /* The current battler's enemy work row (the row at ENEMY_COMBATANT_BASE that
  * the battle mode is running). battle/battle/03 stores it when it arms a slot
- * (func_801E2170) and battle/battle/15 reads its cells (Battle_TestAiCondition). */
+ * (func_801E2170) and battle/battle/15 reads its cells (Battle_TestAICondition). */
 /* D_801EB4E8 */
 extern EnemyBattler* g_BattleCurrentEnemy;
-/* The selected battler's row (D_8014638C), stored by func_801D3624. */
-extern PartyBattler* g_BattleSelectedActor;
 extern u8            D_801EB6B2[];
 
 #endif

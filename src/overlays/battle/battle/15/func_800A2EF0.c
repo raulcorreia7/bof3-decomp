@@ -8,23 +8,23 @@ MATCH s16 func_800A2EF0(u8 battler_index, u16 element_mask) {
 
     if (BATTLER_IS_PLAYER(battler_index)) {
         if (element_mask & ELEM_PSIONIC) {
-            value = D_800B495C[g_BattlePartyBattlers[battler_index].chr.stats.resistances[RES_SLOT_PSIONIC]];
+            value = D_800B495C[g_BattlePartyBattlers[battler_index].chr.stats.resistances[RES_INDEX_PSIONIC]];
         }
         if (element_mask & ELEM_STATUS) {
-            value = D_800B495C[g_BattlePartyBattlers[battler_index].chr.stats.resistances[RES_SLOT_PSIONIC + 1]];
+            value = D_800B495C[g_BattlePartyBattlers[battler_index].chr.stats.resistances[RES_INDEX_PSIONIC + 1]];
         }
         if (element_mask & 0x100u) {
-            value = D_800B495C[g_BattlePartyBattlers[battler_index].chr.stats.resistances[RES_SLOT_PSIONIC + 2]];
+            value = D_800B495C[g_BattlePartyBattlers[battler_index].chr.stats.resistances[RES_INDEX_PSIONIC + 2]];
         }
     } else {
         if (element_mask & ELEM_PSIONIC) {
-            value = D_800B495C[ENEMY_COMBATANT(battler_index).stats.resistances[RES_SLOT_PSIONIC]];
+            value = D_800B495C[ENEMY_COMBATANT(battler_index).stats.resistances[RES_INDEX_PSIONIC]];
         }
         if (element_mask & ELEM_STATUS) {
-            value = D_800B495C[ENEMY_COMBATANT(battler_index).stats.resistances[RES_SLOT_PSIONIC + 1]];
+            value = D_800B495C[ENEMY_COMBATANT(battler_index).stats.resistances[RES_INDEX_PSIONIC + 1]];
         }
         if (element_mask & 0x100u) {
-            value = D_800B495C[ENEMY_COMBATANT(battler_index).stats.resistances[RES_SLOT_PSIONIC + 2]];
+            value = D_800B495C[ENEMY_COMBATANT(battler_index).stats.resistances[RES_INDEX_PSIONIC + 2]];
         }
     }
     return value;

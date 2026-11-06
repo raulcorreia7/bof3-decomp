@@ -2,7 +2,7 @@
 """Add, rename and inspect symbols everywhere they live.
 
     tools/symbol.py add IMAGE NAME 0xADDR --source TEXT [--type T] [--size N] [--alias]
-    tools/symbol.py rename OLD NEW --image IMAGE (--local | --scope PATH...) [--source TEXT]
+    tools/symbol.py rename OLD NEW [--image IMAGE...] [--local | --scope PATH...] [--source TEXT]
                            [--type T] [--size N] [--dry-run]
     tools/symbol.py params FUNC OLD=NEW...
     tools/symbol.py refs [DIR...]
@@ -13,10 +13,11 @@
 prototype and use, `config/` references, and the unit file `OLD.c` (`git mv`). It writes the
 row of config/symbols.toml: a new row for an address name (`--source` is the evidence), or the
 renamed key of an existing row. An address name (`func_<ADDR>`, `D_<ADDR>`) stays in a comment
-above its definition and declaration. An address name is unique only per image, so for an
-overlay image give `--local` (that image's `src/` and `config/` folders) or `--scope`. The
-resident images (`exe/slus_004_22`, `emi/etc/game/00`) are visible everywhere and rename with
-no scope.
+above its definition and declaration. A named symbol is one name in every image: with no
+`--image` its row is renamed in every table that has it. An address name is unique only per
+image, so give `--image` once per image that holds the twin; `--local` limits the files to those
+images' `src/` and `config/` folders (`--scope` to the given paths). The resident images
+(`exe/slus_004_22`, `emi/etc/game/00`) are visible everywhere and rename with no scope.
 
 `params` renames parameters of one function in its unit file `FUNC.c` and on its prototype
 lines in headers.
@@ -33,7 +34,6 @@ import argparse
 import collections
 import re
 import subprocess
-import sys
 from pathlib import Path
 
 from bof3.resolve.ids import source_folder
@@ -73,14 +73,27 @@ def add(args: argparse.Namespace) -> int:
     return 0
 
 
-def local_scope(image: str) -> list[str]:
-    """Return the folders that belong to one image."""
-    folders = [f"src/{source_folder(image)}", f"config/{image}"]
+def tables_with(text: str, name: str) -> list[str]:
+    """Return the images whose table has a row ``name``."""
+    images, image = [], ""
+    for line in text.split("\n"):
+        if line.startswith('["'):
+            image = line[2:-2]
+        elif line.startswith(name + " = "):
+            images.append(image)
+    return images
+
+
+def local_scope(images: list[str]) -> list[str]:
+    """Return the folders that belong to the images."""
+    folders = [
+        f
+        for image in images
+        for f in (f"src/{source_folder(image)}", f"config/{image}")
+    ]
     missing = [f for f in folders if not (ROOT / f).is_dir()]
     if missing:
-        raise SystemExit(
-            f"symbol: no such folder {', '.join(missing)} for image {image}"
-        )
+        raise SystemExit(f"symbol: no such folder {', '.join(missing)}")
     return folders
 
 
@@ -123,13 +136,19 @@ def rename(args: argparse.Namespace) -> int:
     if not re.fullmatch(r"[A-Za-z_]\w*", new):
         raise SystemExit(f"symbol: {new} is not an identifier")
     address = ADDRESS_NAME.match(old)
+    text = SYMBOLS.read_text(encoding="utf-8")
+    images = args.image or ([] if address else tables_with(text, old))
+    if not images:
+        raise SystemExit(
+            f"symbol: give --image for {old}; no table has a row of that name"
+        )
     if args.local:
-        scope = local_scope(args.image)
+        scope = local_scope(images)
     elif args.scope:
         scope = args.scope
-    elif address and args.image not in RESIDENT:
+    elif address and any(i not in RESIDENT for i in images):
         raise SystemExit(
-            f"symbol: {old} is unique only inside {args.image}. Add --local, or --scope PATH..."
+            f"symbol: {old} is unique only inside its image. Add --local, or --scope PATH..."
         )
     else:
         scope = list(DEFAULT_SCOPE)
@@ -144,7 +163,6 @@ def rename(args: argparse.Namespace) -> int:
     if args.dry_run:
         print("\n".join(files))
         return 0
-    text = SYMBOLS.read_text(encoding="utf-8")
     if address:
         if not args.source:
             raise SystemExit(
@@ -159,16 +177,11 @@ def rename(args: argparse.Namespace) -> int:
             size=int(args.size, 0) if args.size else None,
             source=args.source,
         )
-        text = symtab.add_row(text, args.image, new, row, addr)
+        for image in images:
+            text = symtab.add_row(text, image, new, row, addr)
     else:
-        renamed = symtab.rename_row(text, args.image, old, new)
-        if renamed is None:
-            print(
-                f"symbol: [{args.image}] has no row {old}; the table is unchanged",
-                file=sys.stderr,
-            )
-        else:
-            text = renamed
+        for image in images:
+            text = symtab.rename_row(text, image, old, new) or text
     SYMBOLS.write_text(text, encoding="utf-8")
     pattern = re.compile(r"\b" + re.escape(old) + r"\b")
     for name in files:
@@ -247,8 +260,9 @@ def main(argv: list[str] | None = None) -> int:
     two.add_argument("new")
     two.add_argument(
         "--image",
-        required=True,
-        help="the symbols.toml table, such as emi/battle/battle/03",
+        action="append",
+        help="a symbols.toml table, such as emi/battle/battle/03; repeat it per image "
+        "(default for a named symbol: every table that has it)",
     )
     two.add_argument(
         "--local",

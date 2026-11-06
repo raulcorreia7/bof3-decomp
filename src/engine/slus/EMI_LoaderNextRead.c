@@ -5,7 +5,7 @@
  * stream flag skips a type below 6.
  */
 MATCH s32 EMI_LoaderNextRead(u8 slot) {
-    volatile EmiTocEntry* slot_table;
+    volatile EmiTocEntry* toc_entry;
     s32                   result;
     u32                   first_sector;
 
@@ -29,12 +29,12 @@ MATCH s32 EMI_LoaderNextRead(u8 slot) {
         g_EmiPayloadSector = first_sector;
     } else {
         g_EmiPayloadSector = g_EmiSlotSectors[slot];
-        slot_table         = D_80146844.slots - -slot;
-        g_EmiBytesLeft     = slot_table->size;
-        g_EmiLoadArg       = slot_table->load_arg;
-        g_EmiFirstWord     = slot_table->first_word;
+        toc_entry          = D_80146844.slots - -slot;
+        g_EmiBytesLeft     = toc_entry->size;
+        g_EmiLoadArg       = toc_entry->load_arg;
+        g_EmiFirstWord     = toc_entry->first_word;
         g_EmiStep          = 0;
-        g_EmiEntryType     = slot_table->type;
+        g_EmiEntryType     = toc_entry->type;
         /* FAKE: barrier holds the return constant after the state store. */
         MATCH_BARRIER();
         result = 1;

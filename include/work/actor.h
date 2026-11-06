@@ -30,12 +30,11 @@
  * bit set. Pass the row itself or, for a pointer, its dereference. */
 #define ACTOR_IN_USE(actor)  (((actor).flags & ACTOR_FLAG_IN_USE) != 0)
 
-/* The actor's state step in the scratchpad work cell: the byte
- * SYS_DISPATCH_TASK indexes and the battle step tables read and write. */
-#define ACTOR_SET_STEP(step) (TASK_BYTES[1] = (step))
+/* Set the scratchpad actor's mode: the byte SYS_DISPATCH_TASK dispatches on. */
+#define ACTOR_SET_MODE(mode) (TASK_BYTES[1] = (mode))
 
-/* Clear the actor's state step: the record starts a new task at state 0. */
-#define ACTOR_CLEAR_STATE()  (g_Task->step = 0)
+/* Clear the actor's step: the current mode starts again at step 0. */
+#define ACTOR_CLEAR_STEP()   (g_Task->step = 0)
 
 /* Clear the actor's three tint bytes: the row draws untinted. A bare statement
  * macro: use it as a whole statement, never under an unbraced `if`. */

@@ -100,7 +100,7 @@ NON_MATCHING void func_801DE1C0(void) {
                     }
                 }
                 g_Task->mode = 0;
-                ACTOR_CLEAR_STATE();
+                ACTOR_CLEAR_STEP();
                 row_offset += FISHING_ROW_STRIDE;
                 g_Task->unk_03 = 0;
                 row_index += 1;

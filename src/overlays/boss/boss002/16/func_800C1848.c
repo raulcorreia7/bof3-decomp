@@ -5,6 +5,6 @@ MATCH void func_800C1848(void) {
 
     work = g_BattleCurrentEnemy;
     EnemyBattler_SetScript(work, D_800C1F9C, func_800C19C8, D_800C1FAC);
-    ACTOR_SET_STEP(2);
+    ACTOR_SET_MODE(2);
     func_8014D978();
 }

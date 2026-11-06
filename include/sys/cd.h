@@ -44,15 +44,15 @@ s32     SND_RequestBgm(s32 requested);
 void    EMI_LoaderInit(void);
 /* EXE-side stream entry points. */
 /* func_80161FDC */
-void    EMI_LoaderStreamInitSlot(u32 slot_id);
+void    EMI_LoaderStreamInitSlot(u32 emi_id);
 /* func_80162160 */
-DiscLba EMI_LoaderSlotLba(EmiSlotId slot_id);
+DiscLba EMI_LoaderSlotLba(EmiSlotId emi_id);
 /* func_80162178 */
 void    EMI_LoaderBeginRead(void);
 /* func_801621E8 */
-void    EMI_OnCdSync(s32 status, u8* result);
+void    EMI_OnCDSync(s32 status, u8* result);
 /* func_80162230 */
-void    EMI_OnCdReady(u8 status, u8* result);
+void    EMI_OnCDReady(u8 status, u8* result);
 /* func_80162C14 */
 void    EMI_LoaderCopySector(void);
 /* func_80162CD8 */
@@ -60,13 +60,13 @@ void    EMI_LoaderEndStream(void);
 /* func_80162D00 */
 s32     EMI_LoaderIsReady(void);
 /* func_80162D18 */
-void    EMI_LoaderRunCd(void);
+void    EMI_LoaderRunCD(void);
 /* Starts the key-based CD request for one XA stream file; the key is the file kind in bits 12 and up and an
  * entry count below. Every caller also passes a second word that the loader never reads. */
 /* func_801636A0 */
-void    SND_StartXaStream(s32 key, s32 unused);
+void    SND_StartXAStream(s32 key, s32 unused);
 /* func_80163EA0 */
-s32     SND_IsXaIdle(void);
+s32     SND_IsXAIdle(void);
 /* Arms the loader for a character's family key (three party bytes plus the form flag) and waits for the stream. */
 /* func_80166E88 */
 void    EMI_LoaderStreamFamily(u8 member_a, u8 member_b, u8 member_c, u8 family);

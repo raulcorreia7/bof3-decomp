@@ -16,29 +16,36 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 
 ## Quick reference
 
-| Do                                                                         | Don't                                                         |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| Tag every name: `SND_PlayCue`, `Battle_ApplyDamage`, `g_BattleActors`      | Leave a game name untagged, or write `g_BATTLE_Actors`        |
-| `Tag_VerbObject`; a family of 3+ is `Tag_ObjectVerb`: `Message_WindowOpen` | Glue the subject to the verb: `MessageSelectAnswerOpenMenu`   |
-| Keep the address name above a named definition: `/* func_801F2C04 */`      | Lose the `func_`/`D_` name a search from assembly needs       |
-| `snake_case` locals, parameters and members: `item_id`, `party_slot`       | Hungarian or camelCase: `pItem`, `nCount`, `itemId`           |
-| Name the role: `BattlePanel`, `coord_x`                                    | Name the storage: `BattlePanelRecord`, `half_3A`, `ByteView`  |
-| Keep the address name until a caller proves the role                       | Guess a name from a count, an offset or a tool's output       |
-| Members and typed pointers: `battler->hp`                                  | Casts and offsets: `*(s16*)((u8*)p + 0x1C)`                   |
-| `enum` for closed sets and flag words; `#define` for sizes and limits      | An `enum` type as a member or parameter (it is an `int`)      |
-| Decimal quantities, hex bit patterns: `hp < 100`, `flags & 0x80`           | `hp < 0x64`, `flags & 128`                                    |
-| Named bits: `INPUT_REPEATED(held, (PADLup \| PADLdown))`                   | `INPUT_REPEATED(held, 0x5000)`                                |
-| PsyQ functions and names directly; game macros for sets and checks         | Raw SDK numbers, renamed SDK values, raw hardware addresses   |
-| Restate decompiler output as structured C with named locals                | Keep `temp_v0`, `var_s1`, `goto loop_1` and pointer math      |
-| `BYTE_MASK`, `MIN`, `ARRAY_COUNT` and the other `util.h` helpers           | A local copy of a helper, or a helper that shadows the SDK    |
-| A `static inline` helper for a repeated operation                          | A macro where an inline matches the same bytes                |
-| Reusable helpers, at most two steps from the real thing                    | A `#define` that only renames or forwards, or a chain of them |
-| Braces on every body; parentheses around bitwise operands                  | `if (x) y();`, `if (a & B && c)`                              |
-| `/* FAKE: <reason>. */` beside every fake-match helper                     | A bare `register ... asm()`, `__asm__` or `.word` in C        |
-| One `extern` in the owning header                                          | `extern` in a `.c`, or a second name for one address          |
-| [Header layout](#header-layout): one block per record, in table order      | Enums after their users, or an ID enum sorted by name         |
-| One-line `/* */` comments that say what a name cannot                      | A comment that restates the name, tells history or evidence   |
-| Adjacent globals as one struct, array or union, members by role            | Loose globals at one base or stride                           |
+| Do                                                                                                | Don't                                                         |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Tag every name: `SND_PlayCue`, `Battle_ApplyDamage`, `g_BattleActors`                             | Leave a game name untagged, or write `g_BATTLE_Actors`        |
+| `Tag_VerbObject`; a family of 3+ is `Tag_ObjectVerb`: `Message_WindowOpen`                        | Glue the subject to the verb: `MessageSelectAnswerOpenMenu`   |
+| Keep the address name above a named definition: `/* func_801F2C04 */`                             | Lose the `func_`/`D_` name a search from assembly needs       |
+| `snake_case` locals, parameters and members: `item_id`, `party_slot`                              | Hungarian or camelCase: `pItem`, `nCount`, `itemId`           |
+| Name the role: `BattlePanel`, `coord_x`                                                           | Name the storage: `BattlePanelRecord`, `half_3A`, `ByteView`  |
+| Acronyms keep their capitals: `EnemyAIBlock`, `Char_RestoreHP`, `SYS_ReadCD`                      | Mixed case: `EnemyAiBlock`, `Char_RestoreHp`, `SYS_ReadCd`    |
+| A type is an English noun phrase: `EnemyBattler`, `PartyBattler`                                  | The tag on a type: `BattlerEnemy`, `BattlerParty`             |
+| A slot is a filled position (`party_slot`); a fixed table position is an index (`CharacterIndex`) | `CharacterSlot` for the record array's position               |
+| An id is the value the game stores to identify a thing (`item_id`, `CharacterId`)                 | `slot_id`, `item_index` for the stored value                  |
+| A fixed array position is an index (`element_index`); never abbreviate it                         | `idx`, `slot_index`, `element_slot`                           |
+| `mode`/`step`: state phase, `step++`; `timer` counts down; `tick` counts up per frame             | `tick--`, a `timer` that counts up, a per-frame `_step`       |
+| A per-frame amount is a `_delta` or `speed`: `vz_delta`                                           | `vz_step`                                                     |
+| Keep the address name until a caller proves the role                                              | Guess a name from a count, an offset or a tool's output       |
+| Members and typed pointers: `battler->hp`                                                         | Casts and offsets: `*(s16*)((u8*)p + 0x1C)`                   |
+| `enum` for closed sets and flag words; `#define` for sizes and limits                             | An `enum` type as a member or parameter (it is an `int`)      |
+| Decimal quantities, hex bit patterns: `hp < 100`, `flags & 0x80`                                  | `hp < 0x64`, `flags & 128`                                    |
+| Named bits: `INPUT_REPEATED(held, (PADLup \| PADLdown))`                                          | `INPUT_REPEATED(held, 0x5000)`                                |
+| PsyQ functions and names directly; game macros for sets and checks                                | Raw SDK numbers, renamed SDK values, raw hardware addresses   |
+| Restate decompiler output as structured C with named locals                                       | Keep `temp_v0`, `var_s1`, `goto loop_1` and pointer math      |
+| `BYTE_MASK`, `MIN`, `ARRAY_COUNT` and the other `util.h` helpers                                  | A local copy of a helper, or a helper that shadows the SDK    |
+| A `static inline` helper for a repeated operation                                                 | A macro where an inline matches the same bytes                |
+| Reusable helpers, at most two steps from the real thing                                           | A `#define` that only renames or forwards, or a chain of them |
+| Braces on every body; parentheses around bitwise operands                                         | `if (x) y();`, `if (a & B && c)`                              |
+| `/* FAKE: <reason>. */` beside every fake-match helper                                            | A bare `register ... asm()`, `__asm__` or `.word` in C        |
+| One `extern` in the owning header                                                                 | `extern` in a `.c`, or a second name for one address          |
+| [Header layout](#header-layout): one block per record, in table order                             | Enums after their users, or an ID enum sorted by name         |
+| One-line `/* */` comments that say what a name cannot                                             | A comment that restates the name, tells history or evidence   |
+| Adjacent globals as one struct, array or union, members by role                                   | Loose globals at one base or stride                           |
 
 ## Write it as the original programmer did
 
@@ -1602,10 +1609,12 @@ tools/symbol.py rename func_<ADDR> <Name> --image <target> --local --source "<ev
 tools/symbol.py params <Name> old=new ...     # parameter names: definition and prototypes
 ```
 
-An address name is unique only per image: `--local` limits the rename to that image's `src/` and
-`config/` folders, and `--scope PATH...` names the folders. The resident images
-(`exe/slus_004_22`, `emi/etc/game/00`) rename with no scope. `tools/symbol.py add` writes a row
-without a rename, and `tools/symbol.py refs` ranks the units to name first.
+A named symbol is one name in every image: without `--image`, `rename` changes its row in every
+table that has it. An address name is unique only per image: `--image <target>` once per image that
+holds the twin at that address, `--local` limits the rename to those images' `src/` and `config/`
+folders, and `--scope PATH...` names the folders. A twin at another address is another call. The
+resident images (`exe/slus_004_22`, `emi/etc/game/00`) rename with no scope. `tools/symbol.py add`
+writes a row without a rename, and `tools/symbol.py refs` ranks the units to name first.
 
 ### Symbols and the link
 

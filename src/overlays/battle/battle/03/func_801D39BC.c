@@ -9,6 +9,6 @@ MATCH void func_801D39BC(void) {
         g_BattleMode    = 3;
         g_BattleStep    = 2;
         g_BattleSubStep = 0;
-        g_BattleUiStep  = 0;
+        g_BattleUIStep  = 0;
     }
 }

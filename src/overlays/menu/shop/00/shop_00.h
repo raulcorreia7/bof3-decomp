@@ -53,7 +53,7 @@
                 return;                              \
             }                                        \
         }                                            \
-        if ((SND_IsXaIdle() & BYTE_MASK) != 0) {     \
+        if ((SND_IsXAIdle() & BYTE_MASK) != 0) {     \
             count         = (cue_counter);           \
             (cue_counter) = count + 1;               \
             UI_SetMode(1);                           \
@@ -113,9 +113,9 @@ enum {
 extern u8          g_SaveBuffer[];
 extern u8          D_80143BB4;
 extern u16         g_GameAreaId;
+extern u16         D_80144948;
 extern u16         g_InputRepeatDelay;
 extern u16         g_InputRepeatButtons;
-extern u16         D_80144948;
 extern u8          D_80145F09[];
 extern u8          D_80145FCC[][BATTLE_PARTY_STRIDE];
 extern u8          D_80148331;
@@ -362,12 +362,11 @@ void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
-s32  func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 s32  func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
 u8   Party_CountOrder(u8 mode);
-void func_801C1254(u8 ability_id, u8 slot_index);
+void func_801C1254(u8 ability_id, u8 party_slot);
 void Shop_DispatchStep(void);
 void func_801D0EDC(void);
 void func_801D1000(void);
@@ -472,7 +471,7 @@ void Menu_SwapBytes(u8* first, u8* second);
 void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor);
 void func_801D8050(s32 panel_x);
 s32  func_801D81B4(u8* cursor_byte, s32 palette_index);
-void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s32 shaded, s32 unused);
+void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused);
 void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index);
 void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);
 void func_801D8C58(s16 x, s16 y, u8 index, u8 flag);
@@ -481,14 +480,15 @@ void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 s
 void Menu_DrawTintedLine(s16 line_x0, s16 line_y0, s16 line_x1, s16 line_y1, u8 color_r, u8 color_g, u8 color_b,
                          u8 tpage);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
-void func_801DA120(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
+/* func_801DA120 */
+void Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 void Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
 void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 u16  Item_GetPrice(s32 category, s32 item_id);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style);
 void Menu_DrawRowIcons(u8* row_record, s32 palette_index);
-void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_slot, s32 equip_slot, u8 item_id);
+void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32 equip_slot, u8 item_id);
 void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height);
 void func_801DC6FC(MenuPanelTask* arg0);
 void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);

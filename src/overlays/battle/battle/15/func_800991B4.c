@@ -6,7 +6,7 @@ MATCH void func_800991B4(void) {
     } else {
         *D_801EB4D8 = 0x80;
     }
-    g_BattleUiState        = 1;
+    g_BattleUIState        = 1;
     g_InputRepeatButtons   = 0;
     g_BattleSelectionLatch = 1;
 }

@@ -32,7 +32,7 @@ NON_MATCHING s32 func_8009AC18(void) {
     if (g_BattlePartyCount != 0) {
         i = 0;
         do {
-            cell                   = &g_Characters[g_BattlePartyBattlers[i].record_slot];
+            cell                   = &g_Characters[g_BattlePartyBattlers[i].character_index];
             row                    = D_80145F04 + i * BATTLE_PARTY_STRIDE;
             FIELD(u8, row, 0xEu)   = FIELD(u8, cell, 0xEu);
             FIELD(u8, row, 0xFu)   = FIELD(u8, cell, 0xFu);

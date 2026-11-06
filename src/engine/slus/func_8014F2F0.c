@@ -11,7 +11,7 @@ MATCH void func_8014F2F0(void) {
     u16* next_position;
     u16  first_coordinate;
     u16  second_coordinate;
-    u16  timer;
+    u16  offset_z;
 
     result                   = 0;
     iteration                = 0;
@@ -39,14 +39,14 @@ MATCH void func_8014F2F0(void) {
         g_AreaCameraRefreshCount = 2;
         first_coordinate -= 0xB;
         *position = first_coordinate;
-        /* FAKE: keep timer load ordered. */
+        /* FAKE: keep offset_z load ordered. */
         MATCH_FAKE_BARRIER();
-        timer = g_AreaCameraOffsetZ;
+        offset_z = g_AreaCameraOffsetZ;
         second_coordinate -= 0xB;
         position[2] = second_coordinate;
-        timer += 0x32;
-        g_AreaCameraOffsetZ = timer;
-        if ((s16)timer == 1500) {
+        offset_z += 0x32;
+        g_AreaCameraOffsetZ = offset_z;
+        if ((s16)offset_z == 1500) {
             break;
         }
         CallbackWait(1U);

@@ -18,7 +18,7 @@ BattlePhases g_BattlePhases = {
 /* D_801D0C1C */
 BattleEntrances g_BattleEntrances = {
     (Callback)Battle_ReserveStagePanels,
-    (Callback)Battle_WaitUiMode,
+    (Callback)Battle_WaitUIMode,
     (Callback)Battle_InitPanels,
     (Callback)Battle_EnterIntro,
 };

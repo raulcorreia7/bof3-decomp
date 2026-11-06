@@ -1,3 +1,5 @@
 #include "boss017_16.h"
 
-#include "overlays/boss/Boss_FinishDefeat.h"
+MATCH void Boss_FinishDefeat(void) {
+    BOSS_FINISH_DEFEAT();
+}

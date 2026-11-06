@@ -45,7 +45,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     s32 slot;
     s32 i;
     s32 j;
-    s32 idx;
+    s32 name_index;
     s32 col;
     u16 n;
     u16 sum;
@@ -83,18 +83,18 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     slot = 0;
     col  = 0 & HALF_MASK;
     do {
-        idx = slot & HALF_MASK;
+        name_index = slot & HALF_MASK;
         if (D_80144F5A[col] == 4) {
             mode = SHOP_WORK->field_74C & 0x7F;
             if ((mode != 5) && (mode != 0xC)) {
                 dst_text[col + 5] = 0xB;
             } else {
-                idx = slot & HALF_MASK;
+                name_index = slot & HALF_MASK;
                 goto store_row; /* the kind-4 arm reaches the same store with its own index */
             }
         } else {
         store_row:
-            dst_text[idx + 5] = (u8)D_80144F5A[idx];
+            dst_text[name_index + 5] = (u8)D_80144F5A[name_index];
         }
         slot += 1;
         col = slot & HALF_MASK;

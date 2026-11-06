@@ -22,7 +22,7 @@ NON_MATCHING bool func_801A0048(s32 cell_x, s32 cell_y) {
     s32              span;
     s32              x;
     s32              y;
-    u16              idx;
+    u16              index;
     u8               n;
     u8               kind;
     u8               reread;
@@ -63,12 +63,12 @@ NON_MATCHING bool func_801A0048(s32 cell_x, s32 cell_y) {
 
 found:
     if (entry->key == 0xFFFF) {
-        idx    = entry->idx;
+        index  = entry->index;
         bank   = banks[g_GameAreaId];
         keys   = bank->keys;
         counts = bank->counts;
-        n      = counts[idx];
-        base   = (u8*)keys[idx];
+        n      = counts[index];
+        base   = (u8*)keys[index];
         left   = 0;
         if (n != 0) {
             aux = base + 7;
@@ -93,7 +93,7 @@ found:
         kind            = base[8];
     } else {
         g_GameContextSeed = entry->key;
-        g_GameEntryPosX   = ((u32)entry->idx << 8) & mask;
+        g_GameEntryPosX   = ((u32)entry->index << 8) & mask;
         g_GameEntryPosY   = ((u32)entry->alt << 8) & mask;
         kind              = entry->kind;
     }

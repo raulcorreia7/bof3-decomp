@@ -231,8 +231,8 @@ MATCH void func_801FD29C(void) {
     D_80144E2A = D_801FE469;
 }
 
-MATCH s8 func_801FD34C(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_step, u8 landing_script, u8 flags) {
-    return D_801FE46C[((Actor*)g_Task)->unk_04](entry, dir_x, dir_y, vz_start, vz_step, landing_script, flags);
+MATCH s8 func_801FD34C(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
+    return D_801FE46C[((Actor*)g_Task)->unk_04](entry, dir_x, dir_y, vz_start, vz_delta, landing_script, flags);
 }
 
 INCLUDE_ASM(func_801FD3BC);
