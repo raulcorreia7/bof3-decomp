@@ -7,10 +7,9 @@
 #include "game/fairy.h"
 #include "menu/clock.h"
 #include "menu/inventory.h"
+#include "menu/party.h"
+#include "menu/save.h"
 #include "work/state.h"
-
-#define SAVE_DATA_SIZE        0x10B0
-#define SAVE_PARTY_SLOT_COUNT 3
 
 /* The scene event the overlays step through: mode selects the g_SceneEvents handler, step advances inside it and
  * selection is the entry it works on (a fairy job, a master, a menu cursor). */
@@ -48,8 +47,8 @@ typedef struct SaveData {
     /* 0x67C */ u8              unk_67C[4];
     /* 0x680 */ u8              party_formation;
     /* 0x681 */ u8              unk_681;
-    /* 0x682 */ u8              field_order[SAVE_PARTY_SLOT_COUNT];  /* character ids */
-    /* 0x685 */ u8              battle_order[SAVE_PARTY_SLOT_COUNT]; /* character ids */
+    /* 0x682 */ u8              field_order[PARTY_SLOT_COUNT];  /* character ids */
+    /* 0x685 */ u8              battle_order[PARTY_SLOT_COUNT]; /* character ids */
     /* 0x688 */ u8              unk_688[0x60];
     /* 0x6E8 */ GameClock       play_clock;
     /* 0x6EC */ u8              unk_6EC[0x20];
@@ -72,7 +71,7 @@ typedef struct SaveData {
     /* 0xED0 */ u8              unk_ED0[0x1E0];
 } SaveData;
 
-ASSERT_SIZE(SaveData, SAVE_DATA_SIZE);
+ASSERT_SIZE(SaveData, SAVE_BLOCK_SIZE);
 ASSERT_OFFSET(SaveData, scene_event, 0x013);
 ASSERT_OFFSET(SaveData, script_vars, 0x020);
 ASSERT_OFFSET(SaveData, area_id, 0x024);
