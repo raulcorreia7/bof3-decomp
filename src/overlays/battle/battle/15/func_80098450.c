@@ -114,7 +114,7 @@ MATCH void func_80098450(void) {
     }
     if ((g_InputPressed & D_80145AC2) != 0u) {
         value                        = D_801C893C[D_8014857A][D_8014857C] + (D_8014857A << 8);
-        *(u16*)((u8*)D_801EB4D8 + 2) = value;
+        *(u16*)((char*)D_801EB4D8 + 2) = value;
         if ((func_801AF494(D_80148578, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;
