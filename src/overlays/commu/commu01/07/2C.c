@@ -47,6 +47,7 @@ INCLUDE_ASM(func_801D1E48);
 
 INCLUDE_ASM(func_801D2110);
 
+/* m2c: 26 differences, first s5 saved as s6; change loop register lifetimes. */
 INCLUDE_ASM(func_801D273C);
 
 INCLUDE_ASM(func_801D28A4);
@@ -59,6 +60,7 @@ INCLUDE_ASM(func_801D3594);
 
 INCLUDE_ASM(func_801D36FC);
 
+/* m2c typed: 13 differences, first s2 saved as s1; adjust x and color lifetimes. */
 INCLUDE_ASM(func_801D3984);
 
 INCLUDE_ASM(func_801D3A48);

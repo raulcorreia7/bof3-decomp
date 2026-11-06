@@ -88,5 +88,6 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
     return (sum & BYTE_MASK) != 0;
 }
 #else
+/* 47 differences; first case-3 branch target; widen y locals to reduce duplicated code. */
 INCLUDE_ASM(func_801A1C5C);
 #endif

@@ -49,5 +49,6 @@ NON_MATCHING void func_801D67D8(u8 party_slot) {
     D_801ED641 = record->equip.accessories[1];
 }
 #else
+/* Draft needs Weapon.power and Armor.power; six slot entries move first diff to +0x6C. */
 INCLUDE_ASM(func_801D67D8);
 #endif

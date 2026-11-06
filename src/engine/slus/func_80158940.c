@@ -76,5 +76,6 @@ NON_MATCHING void func_80158940(void* obj) {
     }
 }
 #else
+/* 32 differences, first early bias load; adjust loop initialization and register lifetimes. */
 INCLUDE_ASM(func_80158940);
 #endif
