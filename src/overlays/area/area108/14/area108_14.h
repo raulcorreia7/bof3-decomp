@@ -14,8 +14,8 @@
 #define AREA_RESET_VARIANT 0x04
 
 typedef struct Area108Scratch {
-    u8      unk_00[0x34];
-    Vec3S32 pos;
+    u8       unk_00[0x34];
+    Point3DL pos;
 } Area108Scratch;
 
 ASSERT_SIZE(Area108Scratch, 0x40);

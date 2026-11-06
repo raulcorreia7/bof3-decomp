@@ -10,7 +10,7 @@ MATCH void func_801D29A4(void) {
 
     i = 0;
     for (;;) {
-        count = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+        count = Party_CountOrder(PARTY_ORDER_FIELD);
         index = i & BYTE_MASK;
         if (index >= count) {
             break;

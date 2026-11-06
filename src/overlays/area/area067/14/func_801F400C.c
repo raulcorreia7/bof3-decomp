@@ -9,7 +9,7 @@ MATCH void func_801F400C(void) {
     s32 result;
 
     TASK_SET(&g_BattlePartyBattlers[1]);
-    index     = g_PartyWalkOrder[1];
+    index     = g_PartyFieldOrder[1];
     y         = g_BattlePartyBattlers[1].unk_30.signed_half;
     x         = g_BattlePartyBattlers[1].unk_2E.signed_half;
     selection = D_801F4644[index];

@@ -312,7 +312,7 @@ MATCH void Scene_JoinAdultNinaAndMomo_801FCEB4(void) {
 
 MATCH void func_801FCF00(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
+    Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
 }
@@ -329,7 +329,7 @@ MATCH void Scene_JoinMomo_801FCF44(void) {
 
 MATCH void func_801FD064(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_GARR, 0);
-    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
+    Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_GARR);
     Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();

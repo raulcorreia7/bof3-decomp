@@ -5,7 +5,7 @@
 #include "common/vector.h"
 #include "overlays/scenario/scenario.h"
 #include "work/area_spad.h"
-#include <abs.h>
+#include "common/util.h"
 
 /* func_801F85A8 triangle: the third vertex is `size` rotated by this angle
  * (4096 per turn); the vertices are grey (r = g = b) at these levels. */
@@ -109,7 +109,7 @@ typedef struct SceneEffect {
     u8             pad_24[0x5];
     s8             ot_index;
     u8             pad_2A[0x4];
-    Vec2U16        origin;
+    UPoint2D       origin;
     u8             pad_32[0x2];
     SceneLinePoint pos; /* 0x34 */
     u8             pad_40[0x14];
@@ -119,7 +119,7 @@ typedef struct SceneEffect {
     u8             color_g;
     u8             color_b;
     /* 0x60 */ s32 projected; /* RotTransPers depth result */
-    Vec3S32        angle;
+    Point3DL       angle;
 } SceneEffect;
 
 ASSERT_SIZE(SceneEffect, 0x70);

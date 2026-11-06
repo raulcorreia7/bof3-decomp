@@ -3,23 +3,26 @@
 
 #include "types.h"
 
-#include <abs.h>
-
 /* Small arithmetic, bit and in-place byte-view helpers shared by the game
  * sources. LO/HI read the little-endian halves of an object without copying. */
 
 /* The byte value that means no slot, index or result in a byte field. It is
  * compared, never used as a mask. */
-#define GAME_NONE         0xFF
+#define GAME_NONE 0xFF
 
 /* The low byte and low halfword of a value: `x & BYTE_MASK`. A mask, never a sentinel (GAME_NONE). */
-#define BYTE_MASK         0xFF
-#define HALF_MASK         0xFFFF
+#define BYTE_MASK 0xFF
+#define HALF_MASK 0xFFFF
 
-/* Bits and arithmetic (ABS comes from PsyQ <abs.h>). BIT is a signed int like the open-coded `1 << n`. */
-#define BIT(n)            (1 << (n))
-#define MIN(a, b)         (((a) < (b)) ? (a) : (b))
-#define MAX(a, b)         (((a) > (b)) ? (a) : (b))
+/* Bits and arithmetic. BIT is a signed int like the open-coded `1 << n`. */
+#define BIT(n)    (1 << (n))
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+
+/* The same ABS as PsyQ <abs.h>; whichever header comes first defines it. */
+#ifndef ABS
+#define ABS(x) (((x) >= 0) ? (x) : (-(x)))
+#endif
 
 /* A random value below the next power of two: the mask must be 2^n - 1. */
 #define RANDOM_MASK(mask) (rand() & (mask))

@@ -691,8 +691,8 @@ MATCH void func_801F8360(void) {
 /* func_801F85A8 saves the active effect's rotation across a triangle draw;
  * func_8015B410 passes the three angles to RotMatrix. */
 typedef struct SceneRotation {
-    Vec3S32 angle;
-    s32     unk_0C; /* 0x0C */
+    Point3DL angle;
+    s32      unk_0C; /* 0x0C */
 } SceneRotation;
 
 ASSERT_SIZE(SceneRotation, 0x10);
@@ -1158,7 +1158,7 @@ MATCH void func_801F9868(void) {
         switch (D_80143F03) {
             case 1:
                 if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
-                    SND_RequestBgm(3);
+                    SND_RequestBGM(3);
                 loop_10:
                     if (EMI_LoaderIsReady() == 0) {
                         CallbackWait(1U);
@@ -1254,7 +1254,7 @@ MATCH void func_801F9BE4(void) {
             SsSetMVol(0, 0);
             Message_StartAreaMessage(0x10);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            SND_PlayBgm(6, 0x5A, 8);
+            SND_PlayBGM(6, 0x5A, 8);
             g_SceneState.timer_06 = 0;
             g_SceneState.step_05  = 1;
             g_GameFlags |= 0x80;
@@ -1335,7 +1335,7 @@ MATCH void func_801F9BE4(void) {
             }
             Game_RequestAreaChange(AREA_ID_TITLE_INTRO, TO_COORD(7), TO_COORD(20), FACING_UP_LEFT);
             g_GameRequestKind = 0xFF;
-            SND_FadeOutBgm(6, 0x5A, 0x40);
+            SND_FadeOutBGM(6, 0x5A, 0x40);
             g_SceneState.state_04 = 3;
             g_SceneState.step_05  = 0;
             break;
@@ -1386,7 +1386,7 @@ MATCH void func_801F9FB8(void) {
 
         case 3:
             if (g_ScriptVars[2] == 0x38) {
-                SND_PlayBgm(2, 0x64, 0x20);
+                SND_PlayBGM(2, 0x64, 0x20);
                 Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, TO_COORD(52), TO_COORD(67), FACING_RIGHT);
                 g_SceneState.state_04 = 4;
                 *state                = 0;
@@ -1512,7 +1512,7 @@ MATCH void func_801FA27C(void) {
             g_AreaDrawFlags = 0;
             Message_StartAreaMessage(4);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            SND_FadeOutBgm(2, 0x64, 0x20);
+            SND_FadeOutBGM(2, 0x64, 0x20);
             g_SceneState.step_05 = 0xA;
             break;
 
@@ -1731,7 +1731,7 @@ MATCH void func_801FA7D8(void) {
 
         case 12:
             if ((g_ScriptVarsReq.byte == 4u) && (EMI_LoaderIsReady() != 0)) {
-                SND_PlayBgm(3u, 0x69, 8);
+                SND_PlayBGM(3u, 0x69, 8);
                 g_SceneState.step_05 = 0xDu;
                 return;
             }
@@ -1961,7 +1961,7 @@ MATCH void func_801FB204(void) {
 
         case 7:
             if (g_ScriptVarsReq.byte == 0x24) {
-                SND_PlayBgm(4, 0x69, 8);
+                SND_PlayBGM(4, 0x69, 8);
                 g_SceneState.step_05 = 8;
             }
             break;

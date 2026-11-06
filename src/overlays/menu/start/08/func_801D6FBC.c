@@ -7,7 +7,7 @@ MATCH void func_801D6FBC(void) {
     s32 bit_index;
 
     index     = g_MenuPanelTasks[14].flags;
-    bit_index = g_CharSlot[g_PartyWalkOrder[g_MenuPanelTasks[13].unk_0C]];
+    bit_index = g_CharSlot[g_PartyFieldOrder[g_MenuPanelTasks[13].unk_0C]];
     if (((s32)(Item_GetEquipability(g_MenuPanelTasks[14].unk_08, index) & BYTE_MASK) >> bit_index) & 1) {
         g_MenuPanelTasks[13].flags = 0;
         record_index               = bit_index & BYTE_MASK;

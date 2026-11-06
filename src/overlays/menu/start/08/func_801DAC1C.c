@@ -18,7 +18,7 @@ NON_MATCHING void func_801DAC1C(void) {
     u32 limit;
     u32 group_base;
 
-    count = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+    count = Party_CountOrder(PARTY_ORDER_FIELD);
     switch (count) {
         case 1:
             group_base = 0;

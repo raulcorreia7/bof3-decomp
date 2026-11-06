@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC38(void) {
-    Bmagic_DispatchTaskPair(func_801EEC90, func_801EEDA4);
+    BMagic_DispatchTaskPair(func_801EEC90, func_801EEDA4);
 }
 
 INCLUDE_ASM(func_801EEC90);

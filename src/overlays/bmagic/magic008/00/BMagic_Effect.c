@@ -296,7 +296,7 @@ MATCH void func_801F0B44(void) {
 #include "overlays/bmagic/Effect_DrawScreenFade.h"
 
 MATCH void func_801F0DA8(void) {
-    BmagicEffectFuncs handlers;
+    BMagicEffectFuncs handlers;
 
     handlers = D_801EEC94;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);

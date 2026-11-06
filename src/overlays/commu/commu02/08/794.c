@@ -161,13 +161,13 @@ MATCH void func_801D25CC(void) {
 
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-            temp_v0 = g_SndBgmId * 4;
+            temp_v0 = g_SndBGMId * 4;
             SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
-            SND_RequestBgm(D_801DB0CC);
+            SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
     } else if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBgm(D_801DB0CC, 0x64, 8);
+        SND_PlayBGM(D_801DB0CC, 0x64, 8);
         temp_v1  = &g_SceneEventStep;
         *temp_v1 = *temp_v1 + 1;
     }
@@ -225,7 +225,7 @@ INCLUDE_ASM(func_801D35E0);
 
 MATCH void func_801D364C(void) {
     if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBgm(0x94, 0x64, 8);
+        SND_PlayBGM(0x94, 0x64, 8);
         Message_StartAreaMessage(0x7F);
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
@@ -330,13 +330,13 @@ MATCH void func_801D4840(void) {
 
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-            temp_v0 = g_SndBgmId * 4;
+            temp_v0 = g_SndBGMId * 4;
             SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
-            SND_RequestBgm(D_801DB0CC);
+            SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
     } else if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBgm(D_801DB0CC, 0x64, 8);
+        SND_PlayBGM(D_801DB0CC, 0x64, 8);
         temp_v1  = &g_SceneEventStep;
         *temp_v1 = *temp_v1 + 1;
     }
@@ -385,15 +385,15 @@ MATCH void func_801D5978(void) {
     s32 offset;
 
     if (g_UiWindowEffectBusy == 0) {
-        offset = g_SndBgmId * 4;
+        offset = g_SndBGMId * 4;
         SND_StopSequence(*(g_SelectionCues + offset), *(D_80181EBB + offset));
-        SND_RequestBgm(D_801DB0CC);
+        SND_RequestBGM(D_801DB0CC);
     loop_2:
         if (EMI_LoaderIsReady() == 0) {
             CallbackWait(1U);
             goto loop_2;
         }
-        SND_PlayBgm(D_801DB0CC, 0x64, 8);
+        SND_PlayBGM(D_801DB0CC, 0x64, 8);
         g_AreaDrawFlags = 0x1F;
         UI_SetMode(1U);
         D_801F294D += 1;

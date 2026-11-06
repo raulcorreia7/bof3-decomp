@@ -10,7 +10,7 @@ MATCH void func_801EEC14(void) {
     PartyBattler* swap;
     s32           count;
 
-    Bmagic_DispatchTaskPair(func_801EED1C, Effect_PlayOnZeroTick);
+    BMagic_DispatchTaskPair(func_801EED1C, Effect_PlayOnZeroTick);
     count = 0;
     do {
         if (BMAGIC_EFFECT_SLOTS[(u8)count].header.flags & 1) {

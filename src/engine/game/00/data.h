@@ -22,7 +22,7 @@ typedef struct WorldMapDestination {
     u16 area_id;
     u16 map_id;
 
-    Vec2U16 pos;
+    UPoint2D pos;
 } WorldMapDestination;
 
 /* One of five source slots; func_801C0F9C reads the four bytes. */
@@ -125,9 +125,9 @@ extern UvRect               D_801CCF7C[53];
 extern WorldMapBattlefields D_801CD224;
 extern WorldMapDestination  D_801CD24C[10];
 extern SlotSource           D_801CD4AC[5];
-extern Vec2S32              D_801CD620[36];
-extern Vec2S32              D_801CD740[6];
-extern Vec2S16              D_801CD778[5];
+extern Point2DL             D_801CD620[36];
+extern Point2DL             D_801CD740[6];
+extern Point2D              D_801CD778[5];
 extern PartySlot            D_801CD944[3];
 
 #endif

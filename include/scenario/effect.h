@@ -21,7 +21,7 @@ typedef struct PartyState {
     u8                       pad_0000[0x4f59];
     /* 0x4F59 */ volatile u8 menu_flags; /* sisyou reads it as the master-menu flags byte */
     /* 0x4F5A */ volatile u8
-        walking_order[PARTY_SLOT_COUNT]; /* party order out of battle, 0xFF = empty (FORMATION_SLOT_EMPTY) */
+        field_order[PARTY_SLOT_COUNT]; /* party order out of battle, 0xFF = empty (FORMATION_SLOT_EMPTY) */
     /* 0x4F5D */ volatile u8 battle_order[PARTY_SLOT_COUNT]; /* party order in battle, 0xFF = empty */
     u8                       pad_4F60[0x6254 - 0x4f60];
     /* 0x6254 */ volatile u8
@@ -32,7 +32,7 @@ ASSERT_SIZE(PartyState, 0x6255);
 
 /* The party bytes agree with the addresses menu/party.h owns. */
 ASSERT_OFFSET(PartyState, menu_flags, PARTY_FLAGS - PARTY_STATE_BASE);
-ASSERT_OFFSET(PartyState, walking_order, PARTY_ORDER_WALKING - PARTY_STATE_BASE);
-ASSERT_OFFSET(PartyState, battle_order, PARTY_ORDER_BATTLE - PARTY_STATE_BASE);
+ASSERT_OFFSET(PartyState, field_order, PARTY_FIELD_ORDER_BASE - PARTY_STATE_BASE);
+ASSERT_OFFSET(PartyState, battle_order, PARTY_BATTLE_ORDER_BASE - PARTY_STATE_BASE);
 
 #endif

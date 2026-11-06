@@ -50,7 +50,7 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
     func_801C7244(D_801CD8C8);
     i = 0;
 loop_16:
-    if ((i & BYTE_MASK) < (Party_CountOrder(PARTY_ORDER_KIND_BATTLE) & BYTE_MASK)) {
+    if ((i & BYTE_MASK) < (Party_CountOrder(PARTY_ORDER_BATTLE) & BYTE_MASK)) {
         kind = g_PartyBattleOrder[i & BYTE_MASK];
         x    = *(s32*)(D_80143F2C + (i & BYTE_MASK) * 8);
         y    = *(s32*)(D_80143F30 + (i & BYTE_MASK) * 8);

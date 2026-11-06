@@ -22,7 +22,7 @@ MATCH void func_801D8050(s32 panel_x) {
     s0 = s0 << 5;
     s0 = 0x11 - s0;
 loop:
-    cnt = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+    cnt = Party_CountOrder(PARTY_ORDER_FIELD);
     if ((s1 & BYTE_MASK) < (cnt & BYTE_MASK)) {
         id = D_80145FCC[(s1 & BYTE_MASK)][0];
         if (g_Characters[id].inoculations != 0) {

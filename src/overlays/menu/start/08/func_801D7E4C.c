@@ -32,7 +32,7 @@ MATCH void func_801D7E4C(void) {
         *latch = 0;
     }
     buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
-    count   = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+    count   = Party_CountOrder(PARTY_ORDER_FIELD);
     cursor  = &D_80148658;
     old     = *cursor;
     if (buttons & PADLup) {
@@ -56,7 +56,7 @@ MATCH void func_801D7E4C(void) {
     g_MenuPanelTasks[11].unk_10 = 0x30;
     if (g_InputPressed & D_80145AC2) {
         result = func_801E7D20(
-            g_CharSlot[g_PartyWalkOrder[D_8014857A]], g_CharSlot[g_PartyWalkOrder[*sel]],
+            g_CharSlot[g_PartyFieldOrder[D_8014857A]], g_CharSlot[g_PartyFieldOrder[*sel]],
             Party_GetAbilities(D_8014857A, g_MenuPanelTasks[16].unk_0B, 0)[g_MenuPanelTasks[16].unk_0C], 0);
         D_801ED654 = result;
         if (result == 1 || result == 5) {
@@ -70,7 +70,7 @@ MATCH void func_801D7E4C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         SND_PlayCue(EMI_CUE_ID(1, 2));
         D_801485DC = 0;
-        for (i = 0; i < Party_CountOrder(PARTY_ORDER_KIND_WALKING); i++) {
+        for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
             D_80148333[((i + 0xD) * 9) << 2] = 9;
             D_80148333[((i + 4) * 9) << 2]   = 8;
         }

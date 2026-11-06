@@ -3,7 +3,7 @@
 /* The eight frontend state handlers are indexed by the state byte in
  * Game_RunFrontend. The table ends where the glyph geometry records begin. */
 static Callback s_TitleStates[8] = {
-    Game_BeginTitle,        Game_WaitTitleFade, Game_AdvanceTitleFade, SND_StartTitleBgm,
+    Game_BeginTitle,        Game_WaitTitleFade, Game_AdvanceTitleFade, SND_StartTitleBGM,
     Game_StartSelectedGame, UI_WaitTitleInput,  UI_UpdateChoicePrompt, Game_LeaveTitle,
 };
 
@@ -39,7 +39,7 @@ MATCH void Game_BeginTitle(void) { /* func_801D0C90 */
 
     GFX_ResetPalette();
     g_GfxPalettePending += 1u;
-    SND_PlayBgm(0x8Du, 100u, 8u);
+    SND_PlayBGM(0x8Du, 100u, 8u);
 
     state                   = g_UiTitleState;
     g_UiTitleFadePhase      = 1u;

@@ -24,7 +24,7 @@ MATCH void Game_AdvanceTitleFade(void) { /* func_801D0D94 */
  * `0`, opens selection FX, and advances the title state.
  */
 /* func_801D0DF0 */
-MATCH void SND_StartTitleBgm(void) { /* func_801D0DF0 */
+MATCH void SND_StartTitleBGM(void) { /* func_801D0DF0 */
     volatile u16* timer_ptr;
     u16           timer;
 
@@ -78,11 +78,11 @@ MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
         u16 bank;
         g_SceneState.state_04 = 1u;
         UI_SetMode(4);
-        sel  = g_SndBgmId;
+        sel  = g_SndBGMId;
         bank = D_80143F20;
         /* FAKE: barrier stages args deferring a2 into slot. */
         MATCH_BARRIER();
-        SND_FadeOutBgm(sel, bank, 8);
+        SND_FadeOutBGM(sel, bank, 8);
         g_UiTitleState = g_UiTitleState + 1u;
     }
     UI_DrawChoicePrompt();

@@ -31,7 +31,7 @@ extern s8       D_80146866;
 extern s8       D_80146874;
 extern s8       D_80146875;
 extern Callback D_801F6870[];
-extern Vec2U16  D_801F687C[];
+extern UPoint2D D_801F687C[];
 extern u8       D_801F688C[];
 extern u8       D_801F688D[]; /* the script-argument byte at +1 */
 extern Callback D_801F6894[];

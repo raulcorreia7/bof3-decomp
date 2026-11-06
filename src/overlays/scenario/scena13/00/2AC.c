@@ -359,7 +359,7 @@ MATCH void func_801FBBC4(void) {
     u8 slot;
 
     for (slot = 0; slot < 3; slot++) {
-        D_80144908[slot] = g_PartyWalkOrder[slot];
+        D_80144908[slot] = g_PartyFieldOrder[slot];
         D_8014490B[slot] = g_PartyBattleOrder[slot];
     }
     for (slot = 0; slot < 3; slot++) {
@@ -390,7 +390,7 @@ MATCH void func_801FBCC4(void) {
     Party_JoinMember(ids[1]);
     Party_JoinMember(ids[2]);
     for (slot = 3; slot < 6; slot++) {
-        g_PartyWalkOrder[slot] = D_80144908[slot];
+        g_PartyFieldOrder[slot] = D_80144908[slot];
     }
 }
 

@@ -56,5 +56,5 @@ MATCH void func_801EF7A0(void) {
 
 /* func_801EF850 */
 MATCH void Actor_Clear(void) {
-    Bmagic_ResetLocalWork();
+    BMagic_ResetLocalWork();
 }

@@ -6,7 +6,7 @@ MATCH void func_801D7444(void) {
     u8  index;
     s32 input;
 
-    count = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+    count = Party_CountOrder(PARTY_ORDER_FIELD);
     func_801D8050(0);
     WinDrawCueText(28, 21, 0x63);
     cursor = &D_80148656;

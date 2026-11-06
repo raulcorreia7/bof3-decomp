@@ -41,7 +41,7 @@ MATCH void func_801DC248(void) {
             *counter += 1;
         }
         SND_StopSequence(0, 1);
-        SND_PlayBgm(0x28, 0x64, 8);
+        SND_PlayBGM(0x28, 0x64, 8);
         SND_PlayCue(EMI_CUE_ID(2, 3));
     }
     func_8014D978();

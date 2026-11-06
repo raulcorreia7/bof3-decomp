@@ -19,11 +19,11 @@ MATCH void func_801A96E4(ScriptState* state, u8* base) {
             state->cursor += 1;
             break;
         case 0xB4:
-            SND_PlayBgm(*(base + state->cursor + 1), 0x64, 8);
+            SND_PlayBGM(*(base + state->cursor + 1), 0x64, 8);
             state->cursor += 1;
             break;
         case 0xB5:
-            SND_FadeOutBgm(*(base + state->cursor + 1), 0x64, 8);
+            SND_FadeOutBGM(*(base + state->cursor + 1), 0x64, 8);
             state->cursor += 1;
             break;
         case 0xB8:
@@ -56,7 +56,7 @@ MATCH void func_801A96E4(ScriptState* state, u8* base) {
             state->cursor += 3;
             break;
         case 0xBE:
-            SND_StartBgm(*(base + state->cursor + 1), 0x64, 8);
+            SND_StartBGM(*(base + state->cursor + 1), 0x64, 8);
             state->cursor += 1;
             break;
         default:

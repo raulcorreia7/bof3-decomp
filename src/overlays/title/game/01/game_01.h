@@ -44,7 +44,7 @@ void Game_RunTitle(void);
 void Game_BeginTitle(void);
 void Game_WaitTitleFade(void);
 void Game_AdvanceTitleFade(void);
-void SND_StartTitleBgm(void);
+void SND_StartTitleBGM(void);
 void Game_StartSelectedGame(void);
 void UI_WaitTitleInput(void);
 void UI_UpdateChoicePrompt(void);
