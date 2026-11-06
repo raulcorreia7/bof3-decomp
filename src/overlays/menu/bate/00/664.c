@@ -153,6 +153,7 @@ MATCH void func_801D4678(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
 
 #include "overlays/menu/Char_GetExpProgress.h"
 
+/* First difference: the stack frame, 0x70 bytes against 0x78. */
 INCLUDE_ASM(Menu_DrawHeaderBar);
 
 INCLUDE_ASM(func_801D5634);
@@ -166,7 +167,7 @@ INCLUDE_ASM(Menu_DrawEquipStatWindow);
 
 #include "overlays/menu/Menu_DrawFilledPanel.h"
 
-/* blocker: per-band draw-mode setup. */
+/* blocker: per-band draw-mode setup; first diff: stack frame, 0x88 bytes against 0x80. */
 INCLUDE_ASM(Menu_DrawWindowFrame);
 
 /* blocker: per-row (unk_12 >> 4) == 15 test; first diff: +0x138 lhu v1,18(s1) (template andi v1,s0,0xff). */

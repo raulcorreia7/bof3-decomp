@@ -47,6 +47,7 @@ INCLUDE_ASM(func_801D1E48);
 
 INCLUDE_ASM(func_801D2110);
 
+/* First difference: s5 is saved as s6. */
 INCLUDE_ASM(func_801D273C);
 
 INCLUDE_ASM(func_801D28A4);
@@ -59,6 +60,7 @@ INCLUDE_ASM(func_801D3594);
 
 INCLUDE_ASM(func_801D36FC);
 
+/* First difference: s2 is saved as s1. */
 INCLUDE_ASM(func_801D3984);
 
 INCLUDE_ASM(func_801D3A48);
