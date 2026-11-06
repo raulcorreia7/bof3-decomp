@@ -13,7 +13,7 @@ NON_MATCHING void Battle_AddEnemy(s32 entry_index, s32 enemy_index, s32 entry_va
 
     source = func_800AC754(entry_index & BYTE_MASK);
     if (source != NULL) {
-        words_out = (u32*)&D_801EB630[enemy_index & BYTE_MASK];
+        words_out = (u32*)&g_BattleEnemyBattlers[enemy_index & BYTE_MASK];
         words_in  = (u32*)source;
         words_end = (u32*)(source + 0x70);
         do {
@@ -22,7 +22,7 @@ NON_MATCHING void Battle_AddEnemy(s32 entry_index, s32 enemy_index, s32 entry_va
             words_out += 4;
         } while (words_in != words_end);
         *words_out = *words_in;
-        TASK_SET(&D_801EB630[enemy_index & BYTE_MASK]);
+        TASK_SET(&g_BattleEnemyBattlers[enemy_index & BYTE_MASK]);
         ((EnemyBattler*)g_Task)->mode        = 0;
         ((EnemyBattler*)g_Task)->unk_04      = 0;
         ((EnemyBattler*)g_Task)->unk_03      = 0;

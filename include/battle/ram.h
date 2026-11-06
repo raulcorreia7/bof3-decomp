@@ -75,7 +75,7 @@
 /* The enemy battler row for a battler slot: enemy slots begin after the party
  * slots, so slot 3 is the first enemy row. An lvalue, so reads, writes and
  * member access all use it. */
-#define ENEMY_COMBATANT(slot)             (D_801EB630[(slot) - BATTLE_PARTY_SLOT_COUNT])
+#define ENEMY_COMBATANT(slot)             (g_BattleEnemyBattlers[(slot) - BATTLE_PARTY_SLOT_COUNT])
 /* A battler slot on the player side: slots 0-2 are the party rows. */
 #define BATTLER_IS_PLAYER(slot)           ((slot) < BATTLE_PARTY_SLOT_COUNT)
 

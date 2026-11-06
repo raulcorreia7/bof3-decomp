@@ -13,7 +13,7 @@ MATCH void func_800A042C(void) {
         value = g_BattlePartyBattlers[battler].chr.stats.power;
     } else {
         enemy_index = battler - 3u;
-        value       = D_801EB630[enemy_index].stats.power;
+        value       = g_BattleEnemyBattlers[enemy_index].stats.power;
     }
     D_801EC30C = value;
     switch (RANDOM_MASK(3)) {

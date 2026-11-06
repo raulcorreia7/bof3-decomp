@@ -32,7 +32,8 @@ u8                  Boss_HandleBattleEvent4(u32 mode);
 void                Boss_ChooseBattleEnding4(void);
 void                Boss_EndBattle4(void);
 void                func_800C236C(u8 phase);
-extern EnemyBattler D_801EB630[];
+/* D_801EB630 */
+extern EnemyBattler g_BattleEnemyBattlers[];
 
 /* The end-of-battle setup of one enemy slot. It takes the slot's record into the scratchpad and finds scene
  * record 0x83; the finish plays script 0 and copies the halfwords at +0x58 and +0x5A of the first enemy record. A
@@ -42,9 +43,9 @@ extern EnemyBattler D_801EB630[];
     g_Task = (PartyBattler*)func_800AC754(slot); \
     Area_FindSceneRecord(0x83)
 
-#define BOSS008_END_BATTLE_FINISH()        \
-    Actor_SelectScript(0);                 \
-    g_Task->unk_58 = D_801EB630[0].unk_58; \
-    g_Task->unk_5A = D_801EB630[0].unk_5A
+#define BOSS008_END_BATTLE_FINISH()                   \
+    Actor_SelectScript(0);                            \
+    g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58; \
+    g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A
 
 #endif

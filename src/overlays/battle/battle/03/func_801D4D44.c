@@ -44,12 +44,12 @@ MATCH void func_801D4D44(void) {
     } while (index < 3u);
 
     index       = 3u;
-    enemy_table = D_801EB630;
+    enemy_table = g_BattleEnemyBattlers;
     do {
         if (func_801D64C4(index) == 0u) {
             enemy_index = index - 3u;
-            if ((D_801EB630[enemy_index].action_flags & COMBATANT_FLAG_CHARGING) != 0u) {
-                u8 loaded = D_801EB630[enemy_index].unk_112;
+            if ((g_BattleEnemyBattlers[enemy_index].action_flags & COMBATANT_FLAG_CHARGING) != 0u) {
+                u8 loaded = g_BattleEnemyBattlers[enemy_index].unk_112;
                 u8 count  = loaded;
                 if (count < 3u) {
                     count += 1u;

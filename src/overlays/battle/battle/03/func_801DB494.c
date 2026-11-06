@@ -14,8 +14,8 @@ MATCH void func_801DB494(void) {
 
     index = 0u;
     while (index < 8u) {
-        D_801EB630[index].unk_F5       = 0u;
-        D_801EB630[index].damage_flags = 0u;
+        g_BattleEnemyBattlers[index].unk_F5       = 0u;
+        g_BattleEnemyBattlers[index].damage_flags = 0u;
         index += 1u;
     }
 }
