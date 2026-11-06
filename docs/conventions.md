@@ -728,6 +728,11 @@ never combined, is a state and belongs in its closed-set `enum`.
 Group the accesses by base from the retail assembly and the C casts; the type whose members remove
 the most casts is the next one to prove.
 
+Enums, constant groups (`#define` runs), id lists and value tables are sorted by value, ascending;
+an alias sits next to the value it aliases. An enum is reordered only when its values are explicit
+or implicit-in-order, and a reorder never changes a value. `tools/check_sorted.py` enforces it in
+`pre-push`.
+
 **Do**
 
 ```c
