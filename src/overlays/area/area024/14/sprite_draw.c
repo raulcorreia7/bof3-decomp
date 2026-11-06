@@ -408,7 +408,7 @@ MATCH void func_801F2DF8(const void* sprite) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);
-    PSX_SET_SEMI_TRANSPARENT(primitive);
+    SetSemiTrans(primitive, 1);
 
     Area_ProjectPoint(object, screen);
     size[0] = VOL(u16, work->half_size);
@@ -685,7 +685,7 @@ MATCH void func_801F3944(const void* spin) {
     primitive = (POLY_G3*)g_GfxPrimCursor;
 
     SetPolyG3(primitive);
-    PSX_SET_SEMI_TRANSPARENT(primitive);
+    SetSemiTrans(primitive, 1);
     Area_ProjectPoint(work, &primitive->x0);
 
     point[0] =
@@ -720,12 +720,8 @@ MATCH void func_801F3944(const void* spin) {
     }
 
     setRGB0(primitive, shade, shade, (u8)shade >> 1);
-    primitive->r1 = 0;
-    primitive->g1 = 0;
-    primitive->b1 = 0;
-    primitive->r2 = 0;
-    primitive->g2 = 0;
-    primitive->b2 = 0;
+    setRGB1(primitive, 0, 0, 0);
+    setRGB2(primitive, 0, 0, 0);
 
     GFX_AddPrim(1u, 0x1Cu);
 }
@@ -848,7 +844,7 @@ MATCH s32 func_801F3E48(u8 shade) {
         prim = (LINE_F4*)g_GfxPrimCursor;
         src++;
         SetLineF4(prim);
-        PSX_SET_SEMI_TRANSPARENT(prim);
+        SetSemiTrans(prim, 1);
         setRGB0(prim, shade, shade, shade);
 
         verts[0].vx = *src++;

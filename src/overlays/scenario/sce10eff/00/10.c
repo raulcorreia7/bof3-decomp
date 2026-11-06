@@ -97,7 +97,7 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
 
     RotTrans(&vertex, (VECTOR*)&matrix.t, &flag);
     RotMatrix(&rotation, &matrix);
-    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
+    MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 }
@@ -318,27 +318,15 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
         quad[1].vy = quad[0].vy - band_height;
         primitive  = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(primitive);
-        PSX_SET_SEMI_TRANSPARENT(primitive);
-        primitive->r0 = cell[1];
-        primitive->g0 = cell[1];
-        primitive->b0 = cell[1];
-        primitive->r1 = shade;
-        primitive->g1 = cell[1];
-        primitive->b1 = 1;
+        SetSemiTrans(primitive, 1);
+        setRGB0(primitive, cell[1], cell[1], cell[1]);
+        setRGB1(primitive, shade, cell[1], 1);
         if (i == 1) {
-            primitive->r2 = i;
-            primitive->g2 = i;
-            primitive->b2 = i;
-            primitive->r3 = i;
-            primitive->g3 = i;
-            primitive->b3 = i;
+            setRGB2(primitive, i, i, i);
+            setRGB3(primitive, i, i, i);
         } else {
-            primitive->r2 = cell[1];
-            primitive->g2 = cell[1];
-            primitive->b2 = cell[1];
-            primitive->r3 = shade;
-            primitive->g3 = cell[1];
-            primitive->b3 = 1;
+            setRGB2(primitive, cell[1], cell[1], cell[1]);
+            setRGB3(primitive, shade, cell[1], 1);
         }
         RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)(((u8*)primitive) + 8), (long*)(((u8*)primitive) + 0x10),
                       (long*)(((u8*)primitive) + 0x18), (long*)(((u8*)primitive) + 0x20), &depth, &flag);
@@ -350,27 +338,15 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             D_1F800014[3].vy -= band_height;
             primitive = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(primitive);
-            PSX_SET_SEMI_TRANSPARENT(primitive);
-            primitive->r0 = shade;
-            primitive->g0 = ramp[0];
-            primitive->b0 = 1;
-            primitive->r1 = 1;
-            primitive->g1 = 1;
-            primitive->b1 = 1;
+            SetSemiTrans(primitive, 1);
+            setRGB0(primitive, shade, ramp[0], 1);
+            setRGB1(primitive, 1, 1, 1);
             if (i == 1) {
-                primitive->r2 = 1;
-                primitive->g2 = 1;
-                primitive->b2 = 1;
-                primitive->r3 = 1;
-                primitive->g3 = 1;
-                primitive->b3 = 1;
+                setRGB2(primitive, 1, 1, 1);
+                setRGB3(primitive, 1, 1, 1);
             } else {
-                primitive->r2 = shade;
-                primitive->g2 = ramp[0];
-                primitive->b2 = 1;
-                primitive->r3 = 1;
-                primitive->g3 = 1;
-                primitive->b3 = 1;
+                setRGB2(primitive, shade, ramp[0], 1);
+                setRGB3(primitive, 1, 1, 1);
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)(((u8*)primitive) + 8),
                           (long*)(((u8*)primitive) + 0x10), (long*)(((u8*)primitive) + 0x18),
@@ -382,27 +358,15 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             D_1F800014[3].vy += ((s16)band_height) * 2;
             primitive = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(primitive);
-            PSX_SET_SEMI_TRANSPARENT(primitive);
-            primitive->r0 = shade;
-            primitive->g0 = ramp[0];
-            primitive->b0 = 1;
-            primitive->r1 = ramp[0];
-            primitive->g1 = ramp[0];
-            primitive->b1 = ramp[0];
+            SetSemiTrans(primitive, 1);
+            setRGB0(primitive, shade, ramp[0], 1);
+            setRGB1(primitive, ramp[0], ramp[0], ramp[0]);
             if (i == 1) {
-                primitive->r2 = 1;
-                primitive->g2 = 1;
-                primitive->b2 = 1;
-                primitive->r3 = 1;
-                primitive->g3 = 1;
-                primitive->b3 = 1;
+                setRGB2(primitive, 1, 1, 1);
+                setRGB3(primitive, 1, 1, 1);
             } else {
-                primitive->r2 = shade;
-                primitive->g2 = ramp[0];
-                primitive->b2 = 1;
-                primitive->r3 = ramp[0];
-                primitive->g3 = ramp[0];
-                primitive->b3 = ramp[0];
+                setRGB2(primitive, shade, ramp[0], 1);
+                setRGB3(primitive, ramp[0], ramp[0], ramp[0]);
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)(((u8*)primitive) + 8),
                           (long*)(((u8*)primitive) + 0x10), (long*)(((u8*)primitive) + 0x18),
@@ -414,27 +378,15 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             D_1F800014[3].vy += band_height;
             primitive = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(primitive);
-            PSX_SET_SEMI_TRANSPARENT(primitive);
-            primitive->r0 = 1;
-            primitive->g0 = 1;
-            primitive->b0 = 1;
-            primitive->r1 = shade;
-            primitive->g1 = ramp[0];
-            primitive->b1 = 1;
+            SetSemiTrans(primitive, 1);
+            setRGB0(primitive, 1, 1, 1);
+            setRGB1(primitive, shade, ramp[0], 1);
             if (i == 1) {
-                primitive->r2 = 1;
-                primitive->g2 = 1;
-                primitive->b2 = 1;
-                primitive->r3 = 1;
-                primitive->g3 = 1;
-                primitive->b3 = 1;
+                setRGB2(primitive, 1, 1, 1);
+                setRGB3(primitive, 1, 1, 1);
             } else {
-                primitive->r2 = 1;
-                primitive->g2 = 1;
-                primitive->b2 = 1;
-                primitive->r3 = shade;
-                primitive->g3 = ramp[0];
-                primitive->b3 = 1;
+                setRGB2(primitive, 1, 1, 1);
+                setRGB3(primitive, shade, ramp[0], 1);
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)(((u8*)primitive) + 8),
                           (long*)(((u8*)primitive) + 0x10), (long*)(((u8*)primitive) + 0x18),

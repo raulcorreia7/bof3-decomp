@@ -53,7 +53,7 @@ NON_MATCHING void UI_DrawGlyph(s32 color, u8* text) {
                                               g_TextRowOffsets[D_801490B8[0]]) >>
                                         4)));
         SetPolyFT4((POLY_FT4*)g_GfxPrimCursor);
-        PSX_SET_SEMI_TRANSPARENT(g_GfxPrimCursor);
+        SetSemiTrans(g_GfxPrimCursor, 1);
         GFX_AddPrim(1U, 0x28U);
     }
     D_801490BC.text_x += (u16)D_801490BC.cue_counter;

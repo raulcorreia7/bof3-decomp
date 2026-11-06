@@ -35,9 +35,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         scratch    = work->unk_25;
         draw_value = scratch * 2;
         packed     = draw_value & 0x60;
-        /* FAKE: keep the mode read after its masks. */
-        MATCH_FAKE_BARRIER();
-        scratch = scratch & 0xF;
+        scratch    = scratch & 0xF;
         if (work->unk_28 != 0) {
             draw_value = packed | 0x200;
             draw_value = mode_bit | draw_value;
@@ -56,10 +54,8 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         mode_bit   = mode_bits >> 4;
         packed     = packed & 0xF;
         draw_value = draw_value & 0x200;
-        /* FAKE: keep the mode read after its masks. */
-        MATCH_FAKE_BARRIER();
-        mode_bits = ((Actor*)scratch)->unk_28;
-        scratch   = draw_value * 4;
+        mode_bits  = ((Actor*)scratch)->unk_28;
+        scratch    = draw_value * 4;
         if (mode_bits != 0) {
             draw_value = mode_bit | 0x80;
             draw_value = mode_flags | draw_value;
@@ -73,11 +69,10 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     GFX_AddPrim(SPAD_CURSOR->unk_29, 0xCU);
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
-    sprite->w    = g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][0];
-    sprite->h    = g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][1];
-    sprite->y0   = SPAD_CURSOR->unk_30 + (s8)sprite_cell->y;
-    sprite->u0   = sprite_cell->u;
-    sprite->v0   = SPAD_CURSOR->unk_26 + sprite_cell->v;
+    setWH(sprite, g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][0],
+          g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][1]);
+    sprite->y0 = SPAD_CURSOR->unk_30 + (s8)sprite_cell->y;
+    setUV0(sprite, sprite_cell->u, SPAD_CURSOR->unk_26 + sprite_cell->v);
     delta        = SPAD_CURSOR->tint.bytes.unk_5D - 0x80;
     sprite->r0   = delta;
     delta        = SPAD_CURSOR->tint.bytes.unk_5E - 0x80;

@@ -30,12 +30,6 @@ ASSERT_SIZE(UvRect, 0x4);
 /* First primitive arena: bank n starts at this address + n * 0x9000. */
 #define PRIM_ARENA_BASE              0x80028FCCu
 
-/* Semi-transparent primitive: the PsyQ SetSemiTrans code bit, set. */
-#define PSX_SET_SEMI_TRANSPARENT(p)  SetSemiTrans((p), 1)
-
-/* Neutral full-brightness colour: 0x80 is the midpoint of each 5-bit channel. */
-#define PSX_SET_NEUTRAL_RGB(p)       setRGB0((p), 128, 128, 128)
-
 /* Begin a draw-mode primitive at the shared cursor with the default
  * texture window and no extra argument. */
 #define GFX_SET_DRAW_MODE(tpage)     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (tpage), 0)
@@ -79,10 +73,9 @@ static inline void GFX_AddDrawMode(s32 tpage) {
 static inline SPRT* GfxBeginSprite(s32 x, s32 y, u32 clut) {
     SPRT* sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
-    PSX_SET_SEMI_TRANSPARENT(sprt);
-    PSX_SET_NEUTRAL_RGB(sprt);
-    sprt->x0   = x;
-    sprt->y0   = y;
+    SetSemiTrans(sprt, 1);
+    setRGB0(sprt, 128, 128, 128);
+    setXY0(sprt, x, y);
     sprt->clut = clut;
     return sprt;
 }

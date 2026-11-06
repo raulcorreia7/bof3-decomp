@@ -80,7 +80,7 @@ MATCH void func_801D218C(void) {
             GFX_AddPrim(2, 0x0C);
             primitive = (LINE_G2*)g_GfxPrimCursor;
             SetLineG2(primitive);
-            PSX_SET_SEMI_TRANSPARENT(primitive);
+            SetSemiTrans(primitive, 1);
             RotTransPers((SVECTOR*)D_1F800014, (long*)&primitive->x0, &p, &flag);
             if (RANDOM_MASK(1)) {
                 D_1F800000 = (RANDOM_MASK(0x3F)) + 0x80;
@@ -94,10 +94,8 @@ MATCH void func_801D218C(void) {
             vec[2]  = -(i << 6);
             RotTransPers((SVECTOR*)vec, (long*)&primitive->x1, &p, &flag);
             setRGB0(primitive, cell[1], cell[1], 32);
-            cell[1]       = (rand() + 0x40) & 0x3F;
-            primitive->r1 = cell[1];
-            primitive->g1 = cell[1];
-            primitive->b1 = 0x20;
+            cell[1] = (rand() + 0x40) & 0x3F;
+            setRGB1(primitive, cell[1], cell[1], 0x20);
             GFX_AddPrim(2, 0x14);
             i++;
         } while (i < cell[2]);
@@ -120,10 +118,9 @@ MATCH void func_801D240C(void) {
     do {
         primitive = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(primitive);
-        PSX_SET_SEMI_TRANSPARENT(primitive);
+        SetSemiTrans(primitive, 1);
 
-        primitive->x0 = g_Task->origin_x;
-        primitive->y0 = g_Task->origin_y;
+        setXY0(primitive, g_Task->origin_x, g_Task->origin_y);
         angle         = i << 9;
         primitive->x1 = g_Task->origin_x + FIXED_MUL(rsin(angle), *angle_ptr);
         primitive->y1 = g_Task->origin_y + FIXED_MUL(rcos(angle), *angle_ptr);
@@ -132,12 +129,8 @@ MATCH void func_801D240C(void) {
         primitive->x2 = g_Task->origin_x + FIXED_MUL(rsin(angle), *angle_ptr);
         primitive->y2 = g_Task->origin_y + FIXED_MUL(rcos(angle), *angle_ptr);
         setRGB0(primitive, g_Task->band * 8, g_Task->band * 8, g_Task->band * 6);
-        primitive->r1 = 1;
-        primitive->g1 = 1;
-        primitive->b1 = 1;
-        primitive->r2 = 1;
-        primitive->g2 = 1;
-        primitive->b2 = 1;
+        setRGB1(primitive, 1, 1, 1);
+        setRGB2(primitive, 1, 1, 1);
         GFX_AddPrim(2, 0x1C);
     } while (i < 8);
 }

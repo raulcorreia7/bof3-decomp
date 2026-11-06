@@ -26,12 +26,9 @@ MATCH void func_801AE2B0(s16 quad_x, s16 quad_y, s32 quad_width, s32 quad_height
     GFX_AddDrawMode(0xF);
     prim = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(prim);
-    PSX_SET_SEMI_TRANSPARENT(prim);
-    prim->r0      = shade;
-    prim->g0      = shade;
-    prim->b0      = 0;
-    prim->x0      = x;
-    prim->y0      = y;
+    SetSemiTrans(prim, 1);
+    setRGB0(prim, shade, shade, 0);
+    setXY0(prim, x, y);
     width_plus_1  = (width & BYTE_MASK) + 1;
     prim->x1      = width_plus_1 + x;
     prim->y1      = y;

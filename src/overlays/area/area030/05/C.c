@@ -341,19 +341,10 @@ MATCH void func_800F5E44(void) {
         ((POLY_FT4*)cursor)->y1    = 0;
         ((POLY_FT4*)cursor)->y2    = 240;
         ((POLY_FT4*)cursor)->y3    = 240;
-        ((POLY_FT4*)cursor)->u0    = 0;
-        ((POLY_FT4*)cursor)->v0    = 0;
-        ((POLY_FT4*)cursor)->u1    = 160;
-        ((POLY_FT4*)cursor)->v1    = 0;
-        ((POLY_FT4*)cursor)->u2    = 0;
-        ((POLY_FT4*)cursor)->v2    = 240;
-        ((POLY_FT4*)cursor)->u3    = 160;
-        ((POLY_FT4*)cursor)->v3    = 240;
-        ((POLY_FT4*)cursor)->r0    = 0x40;
-        ((POLY_FT4*)cursor)->g0    = 0x40;
-        ((POLY_FT4*)cursor)->b0    = 0x40;
-        ((POLY_FT4*)cursor)->x2    = ((POLY_FT4*)cursor)->x0;
-        ((POLY_FT4*)cursor)->x3    = ((POLY_FT4*)cursor)->x1;
+        setUV4(((POLY_FT4*)cursor), 0, 0, 160, 0, 0, 240, 160, 240);
+        setRGB0(((POLY_FT4*)cursor), 0x40, 0x40, 0x40);
+        ((POLY_FT4*)cursor)->x2 = ((POLY_FT4*)cursor)->x0;
+        ((POLY_FT4*)cursor)->x3 = ((POLY_FT4*)cursor)->x1;
         GFX_AddPrim(7, 0x28);
     }
     cursor             = g_GfxPrimCursor;

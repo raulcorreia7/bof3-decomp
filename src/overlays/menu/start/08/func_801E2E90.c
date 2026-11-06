@@ -47,7 +47,7 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     line->x1 = (s16)(x + 63);
     line->y0 = (s16)(y + 1);
     line->y1 = (s16)(y + 14);
-    PSX_SET_NEUTRAL_RGB(line);
+    setRGB0(line, 128, 128, 128);
     GFX_AddPrim(1U, 0x10U);
 }
 #else

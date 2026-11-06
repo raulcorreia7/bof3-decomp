@@ -35,19 +35,13 @@ MATCH void func_800B1F04(s16 x, s16 y, s32 width, s16 height, u8 color, u8 mask)
 
     line3 = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(line3);
-    line3->x0 = x;
-    line3->y0 = y;
-    line3->x1 = x;
-    line3->y1 = y;
-    line3->x2 = x;
-    line3->y2 = y + height - 1;
+    setXY3(line3, x, y, x, y, x, y + height - 1);
     setRGB0(line3, rgb[2], rgb[1], rgb[0]);
     GFX_AddPrim(1, sizeof(LINE_F3));
 
     line4 = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line4);
-    line4->x0 = x;
-    line4->y0 = y;
+    setXY0(line4, x, y);
     line4->x3 = x;
     line4->y3 = y + height - 1;
     line4->y1 = y;

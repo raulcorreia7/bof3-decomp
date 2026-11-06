@@ -88,7 +88,7 @@ NON_MATCHING void func_801F4768(void) {
                     primitive = (POLY_FT4*)g_GfxPrimCursor;
                     SetPolyFT4(primitive);
                     SetShadeTex(primitive, 0);
-                    PSX_SET_SEMI_TRANSPARENT(primitive);
+                    SetSemiTrans(primitive, 1);
 
                     LOWU(primitive->x0) = *(const u32*)&source->x0;
                     LOWU(primitive->x1) = *(const u32*)&source->x1;
@@ -98,9 +98,7 @@ NON_MATCHING void func_801F4768(void) {
 
                     tpage            = getTPage(0, 2, 704, 256);
                     primitive->tpage = (u16)tpage;
-                    primitive->r0    = 0x28;
-                    primitive->g0    = 0x28;
-                    primitive->b0    = 0x28;
+                    setRGB0(primitive, 0x28, 0x28, 0x28);
 
                     primitive->u0 = (u8)(D_801F51D8[width] + col * D_801F51E0[width]);
                     uv            = D_801F51E0[width] * COORD_FRAC(g_Task->y);

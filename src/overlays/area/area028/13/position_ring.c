@@ -219,8 +219,7 @@ MATCH void func_801F2D3C(void) {
     prim = (TILE_1*)g_GfxPrimCursor;
     SetTile1(prim);
     SetSemiTrans(prim, 0);
-    prim->x0 = D_801F3E00->screen_x;
-    prim->y0 = D_801F3E00->screen_y;
+    setXY0(prim, D_801F3E00->screen_x, D_801F3E00->screen_y);
     shade    = -0x40 - (D_801F3E00->scale - 0x80) * 0xC0 / 512;
     prim->b0 = (prim->g0 = (prim->r0 = shade));
     GFX_AddPrim(3u, 0x0Cu);
@@ -333,11 +332,8 @@ MATCH void func_801F318C(s16 radius) {
     do {
         primitive = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(primitive);
-        PSX_SET_SEMI_TRANSPARENT(primitive);
-        primitive->x0 = center.x;
-        primitive->y0 = center.y;
-        primitive->x1 = point.x;
-        primitive->y1 = point.y;
+        SetSemiTrans(primitive, 1);
+        setXY2(primitive, center.x, center.y, point.x, point.y);
 
         angle += 128;
         pos[0] = g_Task->x.fixed + ((radius * rcos((u16)angle)) >> 4);
@@ -350,12 +346,8 @@ MATCH void func_801F318C(s16 radius) {
         ring[i + 1]   = point;
 
         setRGB0(primitive, 255u, 255u, 255u);
-        primitive->r1 = 0u;
-        primitive->g1 = 0u;
-        primitive->b1 = 0u;
-        primitive->r2 = 0u;
-        primitive->g2 = 0u;
-        primitive->b2 = 0u;
+        setRGB1(primitive, 0u, 0u, 0u);
+        setRGB2(primitive, 0u, 0u, 0u);
 
         GFX_AddPrim(3u, 0x1Cu);
         i += 1;

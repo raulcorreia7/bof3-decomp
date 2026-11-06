@@ -13,7 +13,7 @@ MATCH void func_801F46EC(const void* sprite) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);
-    PSX_SET_SEMI_TRANSPARENT(primitive);
+    SetSemiTrans(primitive, 1);
 
     Area_ProjectPoint(object, screen);
     size[0] = VOL(u16, work->half_size);

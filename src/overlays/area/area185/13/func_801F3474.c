@@ -21,11 +21,9 @@ MATCH void func_801F3474(void) {
         for (j = 0; j < 8; j++) {
             tile = (TILE_1*)g_GfxPrimCursor;
             SetTile1(tile);
-            PSX_SET_SEMI_TRANSPARENT(tile);
-            value    = (0x17F - ((i << 3) + (g_FrameCount & 7))) >> 1;
-            tile->r0 = value / 4;
-            tile->g0 = value / 4;
-            tile->b0 = value;
+            SetSemiTrans(tile, 1);
+            value = (0x17F - ((i << 3) + (g_FrameCount & 7))) >> 1;
+            setRGB0(tile, value / 4, value / 4, value);
 
             angle            = 256 + j * ANGLE_45;
             D_1F800014[0].vx = D_1F800034[0] + (((rsin(angle) * ((i << 4) + (g_FrameCount & 0xF)) * 5)) >> 16);

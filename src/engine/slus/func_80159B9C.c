@@ -25,22 +25,20 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     GFX_AddDrawMode(0xF);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
-    tile->x0 = x1;
-    tile->y0 = y1;
-    w        = w & BYTE_MASK;
-    tile->w  = w + 1;
-    h        = h & BYTE_MASK;
-    tile->h  = h + 1;
+    setXY0(tile, x1, y1);
+    w       = w & BYTE_MASK;
+    tile->w = w + 1;
+    h       = h & BYTE_MASK;
+    tile->h = h + 1;
     setRGB0(tile, 0, 0, 0);
-    PSX_SET_SEMI_TRANSPARENT(tile);
+    SetSemiTrans(tile, 1);
     GFX_AddPrim(1, 0x10);
 
     rect = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor += 8;
     rect->pos.x.raw = 0;
     rect->pos.y.raw = 240;
-    rect->w         = 16;
-    rect->h         = 16;
+    setWH(rect, 16, 16);
     if (GetGraphType() != 1)
         GetGraphType();
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, rect);
@@ -58,15 +56,14 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     setRGB3(poly, 255, 255, 255);
     setXY4(poly, x1, y1, x2, y1, x1, y2, x2, y2);
     setUV4(poly, 0, 0, w, 0, 0, h, w, h);
-    PSX_SET_SEMI_TRANSPARENT(poly);
+    SetSemiTrans(poly, 1);
     GFX_AddPrim(1, 0x34);
 
     rect = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor += 8;
     rect->pos.x.raw = 0;
     rect->pos.y.raw = 0;
-    rect->w         = 256;
-    rect->h         = 256;
+    setWH(rect, 256, 256);
     if (GetGraphType() != 1)
         GetGraphType();
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 5, rect);

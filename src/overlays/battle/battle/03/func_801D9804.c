@@ -9,13 +9,11 @@ MATCH void func_801D9804(s32 x, s32 y, s32 clut_index, s32 glyph_index) {
     packet       = (SPRT*)g_GfxPrimCursor;
     clut         = GetClut((clut_index & BYTE_MASK) << 4, 480);
     packet->clut = clut;
-    PSX_SET_NEUTRAL_RGB(packet);
-    packet->u0 = ((glyph_index & BYTE_MASK) * 24 + 104);
-    packet->v0 = 208;
-    packet->w  = 24;
-    packet->x0 = x;
-    packet->y0 = y;
-    packet->h  = 8;
+    setRGB0(packet, 128, 128, 128);
+    setUV0(packet, ((glyph_index & BYTE_MASK) * 24 + 104), 208);
+    packet->w = 24;
+    setXY0(packet, x, y);
+    packet->h = 8;
     SetSprt(packet);
     GFX_AddPrim(1, 0x14);
 }

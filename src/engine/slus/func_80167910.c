@@ -48,7 +48,7 @@ MATCH void func_80167910(void) {
     poly->v1 = 155;
     poly->v0 = poly->v1 + 12;
     poly->v2 = poly->v0;
-    PSX_SET_NEUTRAL_RGB(poly);
+    setRGB0(poly, 128, 128, 128);
     poly->y1 = poly->y0;
     poly->y2 = poly->y0 + 24;
     poly->y3 = poly->y2;
@@ -74,7 +74,7 @@ MATCH void func_80167910(void) {
     rot.vz  = (s16)(-COORD_INT(g_Task->z) / 2);
     RotTrans(&rot, (VECTOR*)mtx.t, &flag);
     RotMatrix(&axis, &mtx);
-    MulMatrix2((MATRIX*)g_CameraMatrix, &mtx);
+    MulMatrix2(&g_CameraMatrix, &mtx);
     SetRotMatrix(&mtx);
     SetTransMatrix(&mtx);
     if (GetGraphType() == 1) {
@@ -109,7 +109,7 @@ MATCH void func_80167910(void) {
         prim             = g_GfxPrimCursor;
         prim[3]          = 6;
         prim[7]          = 0x30;
-        PSX_SET_SEMI_TRANSPARENT(prim);
+        SetSemiTrans(prim, 1);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)(prim + 8), (long*)(prim + 0x10),
                       (long*)(prim + 0x18), &p, &sxy2);
         prim[4]    = 0x80;

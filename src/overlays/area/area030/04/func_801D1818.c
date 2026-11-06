@@ -12,11 +12,9 @@ MATCH void func_801D1818(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     func_801E0C80(0, icon_index);
     primitive = (SPRT_16*)g_GfxPrimCursor;
     SetSprt16(primitive);
-    PSX_SET_NEUTRAL_RGB(primitive);
+    setRGB0(primitive, 128, 128, 128);
     primitive->clut = 0x7A40;
-    primitive->x0   = sprite_x;
-    primitive->y0   = sprite_y;
-    primitive->u0   = D_801E1D0C[(g_FrameCount >> 3) & 3];
-    primitive->v0   = 72;
+    setXY0(primitive, sprite_x, sprite_y);
+    setUV0(primitive, D_801E1D0C[(g_FrameCount >> 3) & 3], 72);
     GFX_AddPrim(icon_index, 0x10);
 }

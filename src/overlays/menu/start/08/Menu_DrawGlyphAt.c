@@ -71,16 +71,9 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
             goto block_11; /* retail branch */
         }
         val12 += 1;
-        tmp3      = val2 + ((val13 & BYTE_MASK) - (val6 & BYTE_MASK));
-        tmp0      = val3 + 0xC;
-        val11->x0 = val1;
-        val11->y0 = val0;
-        val11->x1 = tmp3;
-        val11->y1 = val0;
-        val11->x2 = val1;
-        val11->y2 = tmp0;
-        val11->x3 = tmp3;
-        val11->y3 = tmp0;
+        tmp3 = val2 + ((val13 & BYTE_MASK) - (val6 & BYTE_MASK));
+        tmp0 = val3 + 0xC;
+        setXY4(val11, val1, val0, tmp3, val0, val1, tmp0, tmp3, tmp0);
         tmp6      = *val12;
         val11->u0 = (s8)(val7 + (((tmp6 % 21) & BYTE_MASK) * 0xC));
         tmp17     = *val12;
@@ -108,17 +101,10 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
             return val12 + 1;
         }
     block_11:
-        tmp4      = val1 + (val9 - (val6 & BYTE_MASK));
-        tmp1      = val0 + 0xC;
-        val11->x0 = val1;
-        val11->y0 = val0;
-        val11->x1 = tmp4;
-        val11->y1 = val0;
-        val11->x2 = val1;
-        val11->y2 = tmp1;
-        val11->x3 = tmp4;
-        val11->y3 = tmp1;
-        tmp13     = *val12;
+        tmp4 = val1 + (val9 - (val6 & BYTE_MASK));
+        tmp1 = val0 + 0xC;
+        setXY4(val11, val1, val0, tmp4, val0, val1, tmp1, tmp4, tmp1);
+        tmp13 = *val12;
         if (tmp13 < 0x5BU) {
             val11->u0 = (s8)(val6 + (((tmp13 % 21) & BYTE_MASK) * 0xC));
             tmp20     = *val12;
@@ -151,22 +137,12 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph
         goto block_15; /* retail branch */
     }
     val12 += 1;
-    tmp5      = val2 + ((val13 & BYTE_MASK) - (val6 & BYTE_MASK));
-    tmp2      = val3 + 0xC;
-    val11->x0 = val1;
-    val11->y0 = val0;
-    val11->x1 = tmp5;
-    val11->y1 = val0;
-    val11->x2 = val1;
-    val11->y2 = tmp2;
-    val11->x3 = tmp5;
-    val11->y3 = tmp2;
-    val11->u0 = (s8)(val7 + (((*val12 + 0x64) % 21) * 0xC));
-    val11->v0 = (s8)(((*val12 + 0x64) / 21) * 0xC);
-    val11->u1 = (s8)(stack_20 + (((*val12 + 0x64) % 21) * 0xC));
-    val11->v1 = (s8)(((*val12 + 0x64) / 21) * 0xC);
-    val11->u2 = (s8)(val7 + (((*val12 + 0x64) % 21) * 0xC));
-    val11->v2 = (s8)((((*val12 + 0x64) / 21) * 0xC) + 0xC);
+    tmp5 = val2 + ((val13 & BYTE_MASK) - (val6 & BYTE_MASK));
+    tmp2 = val3 + 0xC;
+    setXY4(val11, val1, val0, tmp5, val0, val1, tmp2, tmp5, tmp2);
+    setUV3(val11, (s8)(val7 + (((*val12 + 0x64) % 21) * 0xC)), (s8)(((*val12 + 0x64) / 21) * 0xC),
+           (s8)(stack_20 + (((*val12 + 0x64) % 21) * 0xC)), (s8)(((*val12 + 0x64) / 21) * 0xC),
+           (s8)(val7 + (((*val12 + 0x64) % 21) * 0xC)), (s8)((((*val12 + 0x64) / 21) * 0xC) + 0xC));
     val11->u3 = (s8)((((*val12 + 0x64) % 21) * 0xC) + stack_20);
     val4      = (stack_18 & 0xF) * 0x10;
     setRGB0(val11, 128, 128, 128);

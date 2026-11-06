@@ -6,15 +6,12 @@ MATCH void func_801F4568(s32* pos_a, s32* pos_b, u8 shade) {
 
     prim = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(prim);
-    PSX_SET_SEMI_TRANSPARENT(prim);
+    SetSemiTrans(prim, 1);
     Area_ProjectPoint(pos_a, xy);
-    prim->x0 = xy[0];
-    prim->y0 = xy[1];
+    setXY0(prim, xy[0], xy[1]);
     Area_ProjectPoint(pos_b, xy);
     prim->x1 = xy[0];
     prim->y1 = xy[1];
-    prim->r0 = shade;
-    prim->g0 = shade;
-    prim->b0 = 0;
+    setRGB0(prim, shade, shade, 0);
     GFX_AddPrim(2, 0x10);
 }

@@ -20,15 +20,10 @@ MATCH void func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette) {
             g_UiFormatBuffer[index & BYTE_MASK] = ch - '0';
             sprt                                = (SPRT*)g_GfxPrimCursor;
             sprt->clut                          = GetClut(palette * 16, 480);
-            sprt->r0                            = 0x80;
-            sprt->g0                            = 0x80;
-            sprt->b0                            = 0x80;
-            sprt->x0                            = x;
-            sprt->y0                            = y;
-            sprt->u0                            = g_UiFormatBuffer[index & BYTE_MASK] * 8 - 80;
-            sprt->v0                            = 208;
-            sprt->w                             = 8;
-            sprt->h                             = 8;
+            setRGB0(sprt, 0x80, 0x80, 0x80);
+            setXY0(sprt, x, y);
+            setUV0(sprt, g_UiFormatBuffer[index & BYTE_MASK] * 8 - 80, 208);
+            setWH(sprt, 8, 8);
             SetSprt(sprt);
             GFX_AddPrim(g_Task->unk_29, 0x14U);
         }

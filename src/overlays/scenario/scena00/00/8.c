@@ -102,8 +102,7 @@ MATCH void func_801F6E48(void) {
     TASK_SET(adopted);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
-    ((RECT*)prim)->w = 16;
-    ((RECT*)prim)->h = 16;
+    setWH(((RECT*)prim), 16, 16);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
 
@@ -133,16 +132,10 @@ MATCH void func_801F6E48(void) {
     poly->clut  = GetClut(176, 483);
     poly->tpage = GetTPage(0, 0, 704, 256);
 
-    poly->u0 = 0;
-    poly->v0 = (g_FrameCount >> 2) & 0x15;
-    poly->u1 = 16;
-    poly->v1 = (g_FrameCount >> 2) & 0x15;
-    poly->u2 = 0;
-    poly->v2 = ((g_FrameCount >> 2) & 0x15) + poly->y2;
-    poly->u3 = 16;
-    poly->v3 = ((g_FrameCount >> 2) & 0x15) + poly->y2;
+    setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0,
+           ((g_FrameCount >> 2) & 0x15) + poly->y2, 16, ((g_FrameCount >> 2) & 0x15) + poly->y2);
 
-    PSX_SET_NEUTRAL_RGB(poly);
+    setRGB0(poly, 128, 128, 128);
 
     SetShadeTex(poly, 1);
 
@@ -152,8 +145,7 @@ MATCH void func_801F6E48(void) {
     g_GfxPrimCursor  = prim + 8;
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 0;
-    ((RECT*)prim)->w = 256;
-    ((RECT*)prim)->h = 256;
+    setWH(((RECT*)prim), 256, 256);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
@@ -176,12 +168,9 @@ MATCH void func_801F7134(s32 chapter_id) {
 
     prim = (SPRT*)g_GfxPrimCursor;
     SetSprt(prim);
-    prim->x0   = 32;
-    prim->y0   = 32;
-    prim->u0   = 0;
-    prim->v0   = 32;
-    prim->w    = 256;
-    prim->h    = 1768;
+    setXY0(prim, 32, 32);
+    setUV0(prim, 0, 32);
+    setWH(prim, 256, 1768);
     prim->clut = 0x7A80;
     setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
     SetShadeTex(prim, 0);
@@ -683,13 +672,9 @@ MATCH void func_801F8360(void) {
         }
         shade = -(g_Task->unk_09 << 1);
         setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
-        prim->r1 = shade;
-        prim->g1 = shade;
-        prim->b1 = shade;
-        prim->r2 = shade;
-        prim->g2 = shade;
-        prim->b2 = shade;
-        PSX_SET_SEMI_TRANSPARENT(prim);
+        setRGB1(prim, shade, shade, shade);
+        setRGB2(prim, shade, shade, shade);
+        SetSemiTrans(prim, 1);
         GFX_AddPrim(g_Task->unk_29, sizeof(POLY_G3));
         PopMatrix();
         i = i + 1;
@@ -756,13 +741,9 @@ MATCH void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     func_8015B4B0(&matrix);
     RotTransPers3(&v0, &v1, &v2, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     setRGB0(prim, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0);
-    prim->r1 = SCN_TRI_SHADE_V1;
-    prim->g1 = SCN_TRI_SHADE_V1;
-    prim->b1 = SCN_TRI_SHADE_V1;
-    prim->r2 = SCN_TRI_SHADE_V2;
-    prim->g2 = SCN_TRI_SHADE_V2;
-    prim->b2 = SCN_TRI_SHADE_V2;
-    PSX_SET_SEMI_TRANSPARENT(prim);
+    setRGB1(prim, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1);
+    setRGB2(prim, SCN_TRI_SHADE_V2, SCN_TRI_SHADE_V2, SCN_TRI_SHADE_V2);
+    SetSemiTrans(prim, 1);
     GFX_AddPrim(g_Task->unk_29, sizeof(POLY_G3));
     PopMatrix();
 
@@ -916,7 +897,7 @@ MATCH void func_801F8BCC(void) {
     prim->clut  = GetClut(160, 483);
     prim->tpage = GetTPage(0, 1, 704, 256);
     SetShadeTex(prim, 0);
-    PSX_SET_SEMI_TRANSPARENT(prim);
+    SetSemiTrans(prim, 1);
     if (g_AreaDrawFlags != 0) {
         GFX_AddPrim(3U, 0x28U);
     }
@@ -950,8 +931,7 @@ MATCH void func_801F8D90(void) {
     TASK_SET(first);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
-    ((RECT*)prim)->w = 16;
-    ((RECT*)prim)->h = 16;
+    setWH(((RECT*)prim), 16, 16);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
 
@@ -988,16 +968,11 @@ MATCH void func_801F8D90(void) {
     poly->clut  = GetClut(176, 483);
     poly->tpage = GetTPage(0, 0, 704, 256);
 
-    poly->u0 = 0;
-    poly->v0 = (g_FrameCount >> 2) & 0x15;
-    poly->u1 = 16;
-    poly->v1 = (g_FrameCount >> 2) & 0x15;
-    poly->u2 = 0;
-    poly->v2 = ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0);
-    poly->u3 = 16;
-    poly->v3 = ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0);
+    setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0,
+           ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0), 16,
+           ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0));
 
-    PSX_SET_NEUTRAL_RGB(poly);
+    setRGB0(poly, 128, 128, 128);
 
     SetShadeTex(poly, 1);
 
@@ -1007,8 +982,7 @@ MATCH void func_801F8D90(void) {
     g_GfxPrimCursor  = prim + 8;
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 0;
-    ((RECT*)prim)->w = 256;
-    ((RECT*)prim)->h = 256;
+    setWH(((RECT*)prim), 256, 256);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);

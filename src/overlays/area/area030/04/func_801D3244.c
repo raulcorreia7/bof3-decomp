@@ -32,11 +32,10 @@ MATCH void func_801D3244(s16 panel_x, s16 panel_y, u8 panel_width, s8 u_offset, 
         func_801E0C80(6, 2);
         prim = (TILE*)g_GfxPrimCursor;
         SetTile(prim);
-        PSX_SET_SEMI_TRANSPARENT(prim);
-        prim->h  = 8;
-        prim->x0 = x;
-        prim->y0 = y;
-        prim->w  = w;
+        SetSemiTrans(prim, 1);
+        prim->h = 8;
+        setXY0(prim, x, y);
+        prim->w = w;
         setRGB0(prim, 255, 0, 0);
         GFX_AddPrim(layer, 0x10);
     }

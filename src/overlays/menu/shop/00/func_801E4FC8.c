@@ -36,13 +36,10 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
         sprt->b0 = 0x80;
     }
 
-    sprt->x0   = sprite_x;
-    sprt->y0   = sprite_y;
-    sprt->u0   = entry[0] + 3;
-    sprt->v0   = entry[1] + 5;
-    clut       = getClut(entry[2], entry[3] + 0x1E0);
-    sprt->w    = 36;
-    sprt->h    = 40;
+    setXY0(sprt, sprite_x, sprite_y);
+    setUV0(sprt, entry[0] + 3, entry[1] + 5);
+    clut = getClut(entry[2], entry[3] + 0x1E0);
+    setWH(sprt, 36, 40);
     sprt->clut = clut;
     GFX_AddPrim(1, 0x14);
 }

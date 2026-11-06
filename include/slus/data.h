@@ -1,6 +1,7 @@
 #ifndef SLUS_DATA_H
 #define SLUS_DATA_H
 
+#include "psx/psyq.h"
 #include "types.h"
 
 /* Set: the battle end does not stop the BGM or the sound sequences. */
@@ -116,7 +117,7 @@ extern u8            D_80148625;
 extern u8            D_80148626;
 extern volatile u8   D_80148627;
 /* D_801492E8 */
-extern u8            g_CameraMatrix[];
+extern MATRIX        g_CameraMatrix;
 /* D_80149308 */
 /* A unit that must re-read the target after storing it defines
  * AREA_SCROLL_TARGET_VOLATILE before its first include. */

@@ -10,13 +10,10 @@ MATCH void Menu_DrawCursorSprite(u16 x, u16 y, s32 unused) {
     GFX_AddPrim(0, 0xC);
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
-    sprite->x0 = x - 22;
-    sprite->y0 = y + 2;
-    sprite->u0 = 204;
-    sprite->v0 = 156;
-    sprite->w  = 24;
-    sprite->h  = 12;
-    PSX_SET_NEUTRAL_RGB(sprite);
+    setXY0(sprite, x - 22, y + 2);
+    setUV0(sprite, 204, 156);
+    setWH(sprite, 24, 12);
+    setRGB0(sprite, 128, 128, 128);
     sprite->clut = 0x7802;
     GFX_AddPrim(0, 0x14);
 }

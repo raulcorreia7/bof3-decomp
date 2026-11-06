@@ -12,14 +12,12 @@ MATCH void UI_DrawWaitMarker(s16 x, s16 y) {
         prim = (SPRT*)g_GfxPrimCursor;
         SetSprt(prim);
         prim->clut = GetClut(192, 480);
-        PSX_SET_NEUTRAL_RGB(prim);
-        prim->w  = 8;
-        prim->h  = 8;
+        setRGB0(prim, 128, 128, 128);
+        setWH(prim, 8, 8);
         prim->u0 = 208;
-        prim->x0 = x;
-        prim->y0 = y;
+        setXY0(prim, x, y);
         prim->v0 = 248;
-        PSX_SET_SEMI_TRANSPARENT(prim);
+        SetSemiTrans(prim, 1);
         GFX_AddPrim(1, 0x14);
     }
 }
