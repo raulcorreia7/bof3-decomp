@@ -399,7 +399,7 @@ MATCH void func_801F3120(void) {
 }
 
 MATCH void func_801F3164(void) {
-    if (SYS_TestFlag(D_80144E98, 0x17) != 0) {
+    if (SYS_TestFlag(g_Scenario2Flags, 0x17) != 0) {
         g_Task->header.step = 3u;
         func_801F33A8();
     } else {
@@ -411,7 +411,7 @@ MATCH void func_801F3164(void) {
 MATCH void func_801F31CC(void) {
     s16 point[3];
 
-    if (SYS_TestFlag(D_80144E98, 0x17) != 0) {
+    if (SYS_TestFlag(g_Scenario2Flags, 0x17) != 0) {
         g_Task->header.step += 1u;
         g_Task->vx = 0u;
     }

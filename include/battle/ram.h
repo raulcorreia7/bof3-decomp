@@ -111,6 +111,22 @@ ASSERT_OFFSET(Spoils, count, 0x01);
 ASSERT_OFFSET(Spoils, items, 0x0E);
 ASSERT_OFFSET(Spoils, counts, 0x2E);
 
+/* The battle's phase tuple at 0x801462E0: the mode selects the g_BattlePhases handler, the step runs inside it and
+ * the sub-step inside the step. BattleSetEnding writes the three bytes together; the intro and panel code reset
+ * step and sub-step together and advance the mode through one base. */
+typedef struct BattlePhase {
+    u8 mode;     /* 0x00 */
+    u8 step;     /* 0x01 */
+    u8 sub_step; /* 0x02 */
+} BattlePhase;
+
+ASSERT_SIZE(BattlePhase, 3);
+ASSERT_OFFSET(BattlePhase, step, 0x01);
+ASSERT_OFFSET(BattlePhase, sub_step, 0x02);
+
+/* D_801462E0 */
+extern BattlePhase g_BattlePhase;
+
 /* The battle state word g_BattleState, read and written by both battle overlays
  * and the boss/bmagic handlers. Bit 3 (0x0008) is set by func_801D277C and
  * func_8009B828 and cleared by func_801D656C; no reader is known, so

@@ -10,14 +10,14 @@ MATCH void Game_ResetGameState(void) {
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     g_AreaDrawMode  = 6u;
     Party_BuildBattlers(PARTY_ORDER_FIELD);
-    area_id      = D_801448FC;
+    area_id      = g_SaveAreaId;
     g_GameAreaId = 0xFFFFu;
     world_flags  = g_AreaWalkFlags;
     /* FAKE: retail keeps the flags load ahead of the context loads. */
     MATCH_FAKE_BARRIER();
-    entry_x           = D_80144900;
-    entry_y           = D_80144904;
-    entry_facing      = D_801448FF;
+    entry_x           = g_SaveEntryX;
+    entry_y           = g_SaveEntryY;
+    entry_facing      = g_SaveEntryFacing;
     D_80146256        = 0u;
     D_80143F49        = 0u;
     D_80143F4A        = 0u;

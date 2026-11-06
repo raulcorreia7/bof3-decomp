@@ -999,12 +999,12 @@ MATCH void func_801F9178(void) {
     Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WHELP, TO_COORD(99), TO_COORD(12), FACING_RIGHT);
     /* FAKE: place loop init early. */
     i                     = 0;
-    state                 = &D_801448FC;
+    state                 = &g_SaveAreaId;
     table                 = (u8(*)[4])((u8*)state + 0xC04);
     *state                = 0x18;
-    D_80144900            = 0x630000;
-    D_80144904            = 0xC0000;
-    D_801448FF            = 3;
+    g_SaveEntryX          = 0x630000;
+    g_SaveEntryY          = 0xC0000;
+    g_SaveEntryFacing     = 3;
     g_SceneState.state_04 = 5;
     g_SceneState.step_05  = 0;
     for (i = 0; i < 6; i++) {

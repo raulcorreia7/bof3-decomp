@@ -55,12 +55,12 @@ MATCH void func_801F6CCC(void) {
     func_801C1DF0(0u);
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, TO_COORD(26), TO_COORD(8) + COORD_HALF, FACING_DOWN);
-    D_801448FC  = 4u;
-    D_80144900  = 0x1A0000u;
-    flags       = g_GameFlags;
-    D_80144904  = 0x88000u;
-    D_801448FF  = 5u;
-    g_GameFlags = (flags | GAME_FLAG_RUN_LOCK | 0x200u);
+    g_SaveAreaId      = 4u;
+    g_SaveEntryX      = 0x1A0000u;
+    flags             = g_GameFlags;
+    g_SaveEntryY      = 0x88000u;
+    g_SaveEntryFacing = 5u;
+    g_GameFlags       = (flags | GAME_FLAG_RUN_LOCK | 0x200u);
     SND_RequestBGM(6u);
 
     while (!EMI_LoaderIsReady()) {
