@@ -38,12 +38,12 @@ ASSERT_SIZE(EffectSlot, 0x18);
 
 #define EFFECT_SLOT_COUNT 16
 
-extern EffectSlot D_801D39A8[EFFECT_SLOT_COUNT];
-
-extern void func_801D1B10(EffectSlot* slot);
-
 extern Callback D_801D3918[];
 
 void Area_ProjectPoint(s32* pos, long* screen_xy);
+
+extern EffectSlot D_801D39A8[EFFECT_SLOT_COUNT];
+
+extern void func_801D1B10(EffectSlot* slot);
 
 #endif

@@ -10,41 +10,41 @@
 #define SCRATCH_ROW_STRIDE 0x28
 #define SCRATCH_ROW_OFFSET 0x25
 
-extern u16       g_GameAreaId;
-extern s8        D_80144EA8;
-extern u32       D_801F6C00;
-extern Callback  D_801FA198[];
-extern Callback  D_801FA1E4[];
-extern s8        D_801FA220[];
-extern Callback  D_801FA204[];
-extern Callback  D_801FA210[];
-extern SceneFunc D_801FA224[];
-
-extern Callback D_801FA180[];
-
+extern u16 g_GameAreaId;
+extern s8  D_80144EA8;
+extern u8  D_80144F5A;
+extern u8  D_80144F5B;
+extern u8  D_80144F5C;
+extern u8  D_80144F5E;
+extern u8  D_80144F5F;
 extern s32 D_80146954;
 extern s32 D_80146958;
+
 extern s32 D_8014695C;
-void       func_801F7EC0();
-u8*        func_801F7FF8(void);
-void       func_801F7FCC(void);
-void       func_801F7084(s32* step);
-s8         func_801F9DF4();
 
-extern u8       D_80144F5A;
-extern u8       D_80144F5B;
-extern u8       D_80144F5C;
-extern u8       D_80144F5E;
-extern u8       D_80144F5F;
-extern u8       D_801FA228;
-extern Callback D_801FA230[];
+extern u32      D_801F6C00;
+extern Callback D_801FA180[];
+extern Callback D_801FA198[];
+void            func_80196070(void);
+s8              func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
+void            func_801F7084(s32* step);
+void            func_801F747C(void);
+void            func_801F75BC(s32 arg0, s32 arg1);
 
-void func_80196070(void);
+extern Callback  D_801FA1E4[];
+extern Callback  D_801FA204[];
+extern Callback  D_801FA210[];
+extern s8        D_801FA220[];
+extern SceneFunc D_801FA224[];
+extern u8        D_801FA228;
+extern Callback  D_801FA230[];
 
-s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
+void func_801F7EC0();
 
-void func_801F75BC(s32 arg0, s32 arg1);
+void func_801F7FCC(void);
 
-void func_801F747C(void);
+u8* func_801F7FF8(void);
+
+s8 func_801F9DF4();
 
 #endif

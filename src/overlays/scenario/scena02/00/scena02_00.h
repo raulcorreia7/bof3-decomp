@@ -9,22 +9,22 @@
 /* The four script variable bytes read as one word. */
 #define g_ScriptVarsWord (*(s32*)&g_ScriptVars)
 
+extern u16 g_GameAreaId;
+
+extern s32 D_80145EC4;
+
+extern u8 D_80146865;
+extern u8 D_80146866;
+
+extern u8 D_80146867;
 extern u8 D_80146874;
 
 extern u8 D_80146875;
 
-extern u32      D_801F6C00;
-extern Callback D_801FE294[];
-
+extern u32       D_801F6C00;
 extern Callback  D_801FE288[];
+extern Callback  D_801FE294[];
 extern SceneFunc D_801FE304[66];
-
-extern s32 D_80145EC4;
-
-extern u8  D_80146865;
-extern u8  D_80146866;
-extern u8  D_80146867;
-extern u16 g_GameAreaId;
 
 /* The party-in-range triggers of 5A4.c: while D_80143F03 is 0, start func_801FCB54 when the party
  * position (D_80145EC4, D_80145EC8) lies inside a window around g_Actors[actor_id]. Each macro is one
