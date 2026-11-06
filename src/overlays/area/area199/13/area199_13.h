@@ -25,4 +25,6 @@ void func_801F2E80(s32 entry_x);
 void func_801F3398(void);
 void func_801F400C(void);
 
+void func_801F36DC(void);
+
 #endif

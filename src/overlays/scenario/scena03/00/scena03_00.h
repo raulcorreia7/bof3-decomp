@@ -47,4 +47,6 @@ extern u16 D_80146876;
 
 s8 func_801FCD1C(void);
 
+void func_801F8170(s32 arg0);
+
 #endif

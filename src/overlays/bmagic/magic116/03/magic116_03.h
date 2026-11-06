@@ -14,4 +14,6 @@ u8 func_801EF118(void);
 
 extern u8 D_801EF2A8[];
 
+void func_801EF020(s32 arg0);
+
 #endif

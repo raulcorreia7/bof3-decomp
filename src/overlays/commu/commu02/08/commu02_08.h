@@ -53,4 +53,9 @@ s32 func_801D92F4(u8);
 
 s8 func_801DA114();
 
+void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style);
+void func_801D32A0(s32 arg0, s32 arg1, s32 arg2);
+void func_801D4EA4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801DA8E8(void);
+
 #endif

@@ -51,4 +51,6 @@ void func_800C2074(s32 mode);
 
 void func_800C29AC(s32 arg0, s32 arg1);
 
+void func_800C2A40(void);
+
 #endif

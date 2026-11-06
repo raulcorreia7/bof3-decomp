@@ -42,4 +42,6 @@ static inline void Area_StepSceneFrame(void) {
     func_801F482C();
 }
 
+void func_801F349C(void);
+
 #endif

@@ -19,4 +19,6 @@ void func_801F32C4(void);
 
 void func_801F330C(void);
 
+void func_801F3298(void);
+
 #endif

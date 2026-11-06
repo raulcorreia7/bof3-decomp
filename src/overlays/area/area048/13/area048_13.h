@@ -19,4 +19,7 @@ extern u8 D_801F4D80[];
 
 extern u8 D_801F4E54[];
 
+void func_801F2EC0(void);
+void func_801F41F0(s32 arg0, s32 arg1);
+
 #endif

@@ -60,4 +60,7 @@ void func_801F3C84(void);
 
 void func_801F55F0(s32);
 
+s32  func_801F3034(void);
+void func_801F34B8(void);
+
 #endif

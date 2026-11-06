@@ -20,4 +20,7 @@ extern u8  D_801F5334[];
 extern u8  D_801F534C[];
 extern u16 D_801F56C4[];
 
+void func_801F2DC4(void);
+void func_801F2E78(void* arg0, void* arg1);
+
 #endif

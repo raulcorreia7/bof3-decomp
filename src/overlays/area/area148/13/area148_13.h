@@ -33,4 +33,8 @@ extern Callback            D_801F6160[];
 /* The setup step the selector enters. */
 void func_801F37B8(s32 mode, s32 value);
 
+void func_801F4544(void);
+void func_801F45C8(void);
+void func_801F4798(void* arg0, void* arg1);
+
 #endif

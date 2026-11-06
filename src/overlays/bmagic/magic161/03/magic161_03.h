@@ -7,4 +7,6 @@
 
 extern BattleHandlerTable5 D_801EEC10;
 
+void func_801EF1DC(void);
+
 #endif

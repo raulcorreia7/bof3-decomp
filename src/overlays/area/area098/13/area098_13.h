@@ -50,4 +50,8 @@ extern u8 D_8014554C[];
 
 extern u8 D_80146865;
 
+void func_801F40A4(void);
+void func_801F46EC(void* arg0, s32 arg1, s32 arg2);
+s32  func_801F4E7C(void);
+
 #endif

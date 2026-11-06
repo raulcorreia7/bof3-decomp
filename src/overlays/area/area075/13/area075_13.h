@@ -32,4 +32,6 @@ extern u8       D_801F58D3;
 
 extern void func_801F4874(void);
 
+void func_801F2E64(void* arg0, s32 arg1);
+
 #endif

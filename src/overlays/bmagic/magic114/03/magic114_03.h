@@ -7,4 +7,7 @@
 
 extern Callback D_801F1230[];
 
+void func_801F04D4(void* arg0);
+void func_801F0FBC(void);
+
 #endif

@@ -9,4 +9,6 @@
 
 extern Callback D_801F3B44[];
 
+s32 Item_Count(s32 category, s32 item, s32 mode);
+
 #endif

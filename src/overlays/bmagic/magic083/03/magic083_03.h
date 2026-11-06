@@ -13,4 +13,6 @@ extern BattleEffect D_801F0F1C[];
 void func_801EF844(void);
 void func_801EFB24(void);
 
+void func_801F0BA8(s32 arg0);
+
 #endif
