@@ -6,8 +6,6 @@
 
 #include "overlays/area/world01.h"
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 extern u16 D_801F4AFC[];
 extern u8  D_801F4B08[];
 extern u8  D_801F4B10[];

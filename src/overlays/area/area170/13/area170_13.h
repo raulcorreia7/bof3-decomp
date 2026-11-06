@@ -27,4 +27,7 @@ extern u8  D_801F57BC[];
 
 extern void func_801F3994(void);
 
+s32  Item_Add(s32 category, s32 item, s32 amount, s32 unused);
+void func_801F4640(s32 arg0);
+
 #endif

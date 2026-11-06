@@ -45,7 +45,7 @@ MATCH void func_801EF7C4(void) {
     g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
     g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
     g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed + 0x02000000;
-    func_800AF764(g_Task);
+    func_800AF764();
     SND_QueueSelectionFx(0x100);
     g_Task->unk_0B = 0;
     g_Task->unk_09 = 0xF;

@@ -22,4 +22,6 @@ extern Callback D_801D05BC[];
 extern Callback D_801D05C4[];
 extern Callback D_801D05D0[];
 
+void func_801CF348(void);
+
 #endif

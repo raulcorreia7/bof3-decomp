@@ -7,8 +7,6 @@
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 extern u8    D_80145F09[][BATTLE_PARTY_STRIDE];
 extern u8    D_80146865;
 extern u8    D_80146866;
@@ -21,5 +19,7 @@ extern u8    D_801F4654[];
 extern u16   D_801F5384[];
 extern u16   D_801F5390[];
 extern u16   D_801F539C[];
+
+s32 func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 
 #endif

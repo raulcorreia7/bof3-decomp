@@ -8,8 +8,6 @@
 #define EFFECT_TICK_INCREMENT 1
 #define EFFECT_TICK_LIMIT     0xC0
 
-void func_800AFD9C(void);
-
 extern u8 D_801EC338[];
 
 extern u8       D_801EC364[];

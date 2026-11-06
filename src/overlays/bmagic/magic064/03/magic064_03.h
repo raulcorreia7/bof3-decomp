@@ -27,4 +27,8 @@ void func_801F001C(void);
 void func_801F04A0(void);
 void func_801F05A4(void);
 
+void func_801F03D8(void);
+void func_801F0EEC(s32 arg0, s32 arg1, s32 arg2);
+void func_801F103C(void);
+
 #endif

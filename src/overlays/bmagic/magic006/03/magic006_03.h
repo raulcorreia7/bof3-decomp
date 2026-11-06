@@ -14,4 +14,7 @@ extern BattleHandlerTable4 D_801EEC28;
 
 void func_801EEC90(void);
 
+void func_801F0308(void);
+void func_801F0790(void);
+
 #endif

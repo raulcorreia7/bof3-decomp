@@ -39,8 +39,6 @@ extern u8       D_801F68A0;
 
 /* The game-overlay state bytes the cancel path resets. */
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 #define AREA_SPAWN_SLOT_LIFE        0x10
 #define AREA_SPAWN_SLOT_RADIUS      0x100
 #define AREA_SPAWN_SLOT_CORE_SHADE  0x40
@@ -49,5 +47,9 @@ void func_801F44B4(void);
 
 /* The per-image spawn step Area_AdvanceSpawnTimer runs between the slot claim and the slot pass. */
 #define AREA_SPAWN_TICK func_801F44B4
+
+void func_801F38E0(void* arg0, s32 arg1, s32 arg2);
+void func_801F3ADC(void* arg0, void* arg1, s32 arg2);
+void func_801F40F4(s32 arg0);
 
 #endif

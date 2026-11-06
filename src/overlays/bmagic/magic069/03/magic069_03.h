@@ -7,4 +7,7 @@
 
 void func_801EEE30(void);
 
+void func_801EFA84(void);
+void func_801F0274(void);
+
 #endif

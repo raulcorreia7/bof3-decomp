@@ -9,4 +9,6 @@
 extern s32 D_80145EC4;
 extern u8  D_801F3614[];
 
+void func_801F2ECC(void* arg0, void* arg1);
+
 #endif

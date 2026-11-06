@@ -42,7 +42,6 @@ extern u8             D_801F688D[]; /* the script-argument byte at +1 */
 extern Callback       D_801F6894[];
 extern Callback       D_801F689C[];
 
-void func_8015A944(void);
 /* func_801F35D0 */
 void Area_Update(void);
 void func_801F5380(void);
@@ -58,5 +57,8 @@ s32 func_801F5028(s32, s32, s32);
 void func_801F5C7C(void);
 
 #define AREA_TURN_SYNC func_801F5C7C
+
+void func_801F4B4C(s32 arg0);
+void func_801F60F4(void* arg0);
 
 #endif

@@ -8,6 +8,6 @@
 
 extern Callback D_801F3658[];
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
+void func_801F3070(void);
 
 #endif

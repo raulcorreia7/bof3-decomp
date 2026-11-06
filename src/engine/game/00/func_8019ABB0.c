@@ -5,7 +5,7 @@
 MATCH void func_8019ABB0(s32 mode) {
     u8 index;
 
-    index = Actor_FindFreeSlot(mode) & BYTE_MASK;
+    index = Actor_FindFreeSlot() & BYTE_MASK;
     if (index != GAME_NONE) {
         g_ActorSlots[index].header.flags = 1;
         /* FAKE: block boundary holds the SYS_SetFlag address load between the stores. */

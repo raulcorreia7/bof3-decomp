@@ -11,4 +11,6 @@ extern BattleHandlerTable3 D_801EEC1C;
 
 extern BattleHandlerTable4 D_801EEC28;
 
+void func_801EF670(void);
+
 #endif

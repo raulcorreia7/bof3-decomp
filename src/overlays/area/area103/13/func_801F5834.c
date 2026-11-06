@@ -1,7 +1,7 @@
 #include "area103_13.h"
 
 MATCH void func_801F5834(void) {
-    s32 slot = func_8019601C() & 0xFF;
+    s32 slot = Actor_FindFreeSlot() & 0xFF;
 
     if (slot != 0xFF) {
         g_ActorSlots[slot].header.flags = 1;

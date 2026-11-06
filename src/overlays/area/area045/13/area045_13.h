@@ -11,8 +11,6 @@
 
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F5364 + 0x10)
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 extern SVECTOR     D_1F800014[];
 extern s32         D_80145EC4[];
 extern u8          D_801F4D7C[];

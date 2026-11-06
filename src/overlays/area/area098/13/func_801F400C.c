@@ -15,6 +15,6 @@ MATCH void func_801F400C(void) {
     }
     g_Task->unk_2E -= 1;
     if ((s16)g_Task->unk_2E == 0) {
-        func_80196070();
+        Actor_Clear();
     }
 }

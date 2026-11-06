@@ -42,7 +42,6 @@ extern u8       D_801F6514;
 #define AREA_SPAWN_SLOT_RADIUS      0x100
 #define AREA_SPAWN_SLOT_CORE_SHADE  0x40
 #define AREA_SPAWN_SLOT_RADIUS_STEP 0x10
-void        Area_SetCellCode(s16 column, s16 row, u8 code);
 void        func_801F4D44(void);
 void        func_801F5050(u8 level);
 extern void func_801F5940(void);
@@ -50,5 +49,13 @@ extern void func_801F5940(void);
 extern u8 D_8014554C[];
 
 extern u8 D_80146865;
+
+void func_801F40A4(void);
+void func_801F46EC(void* arg0, s32 arg1, s32 arg2);
+s32  func_801F4E7C(void);
+
+void func_801F48E8(void* arg0, void* arg1, void* arg2);
+void func_801F4DBC(s32 arg0);
+void func_801F5580(s32 arg0);
 
 #endif

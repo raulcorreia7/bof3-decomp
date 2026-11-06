@@ -6,8 +6,6 @@
 
 #include "overlays/area/world01.h"
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 #define g_SceneFlags ((void*)g_SceneFlags)
 
 extern u8 D_80145F09;

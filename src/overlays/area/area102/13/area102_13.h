@@ -15,4 +15,6 @@ s32 func_801F3194();
 
 void func_801F36B4(s32 arg0);
 
+void func_801F2F44(s32 arg0);
+
 #endif

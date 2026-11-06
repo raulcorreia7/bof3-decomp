@@ -63,7 +63,7 @@ MATCH void func_801EF20C(void) {
         g_Task->unk_09 = temp_v0 - 1;
         return;
     }
-    func_80196718(D_801EB4E0);
+    GFX_FreePaletteFadeTarget(D_801EB4E0);
     D_801EB4E0->header.flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
     g_Task->unk_09 = 0;
     g_Task->header.step += 1;

@@ -10,4 +10,7 @@ extern Callback            D_801EFCD4[];
 
 void func_801EF194(void);
 
+void func_801EF6BC(void);
+void func_801EFA1C(void);
+
 #endif

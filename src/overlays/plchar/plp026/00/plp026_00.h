@@ -28,4 +28,6 @@ extern void func_801D0868(void);
 #define PLCHAR_CHECK_FACING func_801D06C4
 #define PLCHAR_PREPARE_TURN func_801D0868
 
+void Actor_BeginScript(s32 raw_selector, s32 raw_code);
+
 #endif

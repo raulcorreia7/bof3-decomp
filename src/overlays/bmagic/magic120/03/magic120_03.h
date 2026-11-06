@@ -5,4 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+void func_801F0274(void);
+void func_801F08AC(void);
+
 #endif

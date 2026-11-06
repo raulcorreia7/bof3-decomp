@@ -9,8 +9,6 @@
 #define AREA_SELECTION_FIRST  D_801F363C
 #define AREA_SELECTION_SECOND D_801F363D
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 extern u8 D_801F363C[];
 extern u8 D_801F363D[];
 

@@ -10,4 +10,9 @@ extern Callback            D_801F08F0[];
 /* The step handlers the draw step dispatches. */
 extern Callback            D_801F0900[];
 
+void func_801EF370(void);
+void func_801EFB2C(void);
+void func_801EFE34(void);
+void func_801F03C4(void);
+
 #endif

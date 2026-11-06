@@ -145,6 +145,10 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
 
 void Area_DrawHud(s16 x, s16 y);
 
+void Actor_StopMoving(void);
+void Area_ClearWorkColumn(void);
+u8*  Area_FindFreeWorkRow(void);
+void Area_InitSpin(void* spin);
 void Area_StepChargeGauge(void);
 void Area_ClaimSpawnSlot(void);
 s32  Area_StepSpawnSlots(void);

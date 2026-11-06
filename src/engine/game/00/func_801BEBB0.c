@@ -29,7 +29,7 @@ MATCH void func_801BEBB0(void) {
         }
         if (slot < g_PartySize) {
             if (g_Characters[g_CharSlot[D_80144F5A[slot]]].stats.surprise_chance >= random) {
-                id = Actor_FindFreeSlot((s16)random) /* (s16): no re-mask of the roll; 99.26% with a plain u8 */;
+                id = Actor_FindFreeSlot();
                 if (id != GAME_NONE) {
                     g_ActorSlots[id].header.flags = one;
                     g_ActorSlots[id].type         = 6;

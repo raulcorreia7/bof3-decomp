@@ -17,4 +17,6 @@ extern s32 D_80145EC4;
 
 /* The game-overlay state bytes the cancel path resets. */
 
+void func_801F2E08(void);
+
 #endif

@@ -21,7 +21,6 @@ extern u8 D_801F507C[];
 
 /* The overlay's flag word. */
 
-extern void Area_SetCellCode(s16 column, s16 row, u8 code);
 extern void func_801F2DF4(s32 arg0);
 void        func_801F4060(s16 step);
 void        func_801F47F0(void);
@@ -37,5 +36,11 @@ extern u8 D_80146875;
 #define AREA_SPAWN_SLOT_RADIUS      0x180
 #define AREA_SPAWN_SLOT_CORE_SHADE  g_Task->tint.bytes.unk_5D
 #define AREA_SPAWN_SLOT_RADIUS_STEP 0xC
+
+void func_801F36C0(void* arg0, s32 arg1, s32 arg2);
+void func_801F3BFC(const void* spin);
+void func_801F3FAC(void);
+
+void func_801F4F70(s32 arg0, s32 arg1);
 
 #endif

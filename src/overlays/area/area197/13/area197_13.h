@@ -27,4 +27,7 @@ extern s8                  D_801F4A88[];
 /* The image's step passes. */
 void func_801F3768(s32 arg0, s32 arg1);
 
+s32 func_801F2FC4(void);
+s32 func_801F3368(void);
+
 #endif

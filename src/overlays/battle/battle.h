@@ -10,6 +10,7 @@
 #include "menu/panel.h"
 #include "scenario/effect.h"
 #include "sys/exe.h"
+#include "battle/functions.h"
 
 /* Reloads g_MenuCurrentPanel on every use, like the panel functions do. */
 #define BATTLE_PANEL_TASK ((BattlePanelTask*)g_MenuCurrentPanel)
@@ -101,50 +102,6 @@ extern u8           D_80145FC8;
 extern BattleEffect g_BattleEffects[];
 extern u8           D_801EC339[];
 extern u8           D_801EC3A4[];
-
-void        func_800975D4(void);
-u8          func_80097EB8(void);
-void        func_800989B4(void);
-u8          func_8009AF7C(void);
-void        func_800A4458(void);
-void        func_800A581C(void);
-u8          func_800A9304(u8 slot);
-/* Stages the selection cell for the next battle step. */
-void        func_800A9820(u8 selector);
-void        func_800A9BD8(u8 slot);
-void        func_800AAA74(void);
-void        func_800AAC88(s16 amount, u8 battler_index);
-void        func_800AAEBC(s16 target_index, u8 battler_index);
-/* func_801E29B4 */
-u8          func_801DD7AC(s32 selector);
-u8          Battle_PickRandomTarget(u8 excluded_slot);
-extern void func_800ACF80(void);
-void        func_800AD26C(void);
-void        func_800AE014(void);
-void        func_800B2218(void);
-void        func_800B22AC(void);
-void        func_800B23B8(void);
-void        func_800B23F8(void);
-/* func_80166A10 */
-u8          Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
-extern void func_801D8270(s32 x, s32 y);
-void        func_801D9484(void);
-void        func_801DAAE4(void);
-/* One hit's damage, defined by the battle/battle/03 overlay at this address. */
-/* func_801DC044 */
-s16         Battle_CalcDamage(u8 attacker, u8 target, u16 element);
-void        func_801DD14C(u8 battler_index);
-void        func_801DD858(u32 effect_index);
-void        func_801DDAB4(u32 arg0);
-void        func_801DDFEC(u32 battler_index);
-s16         func_801DE0AC(s32 factor_a, s32 factor_b);
-void        Battle_SetSlotPending(u32 slot);
-void        func_801DE560(u8 event_kind, u8 arg1, u8 arg2, u8 arg3, u8* payload);
-void        func_801E52F0(u16 effect_id);
-/* func_801E590C */
-u32         Battle_AllocEffect(u32 mode, u32 handler_index);
-void        func_801E5988(void);
-extern void func_801E5A38(void);
 
 extern PanelOwner D_801ED9B0[];
 #endif

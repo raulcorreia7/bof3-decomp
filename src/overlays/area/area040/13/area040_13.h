@@ -7,8 +7,6 @@
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 /* The game-overlay state bytes the cancel path resets. */
 
 extern u8 D_80144EA8[];
@@ -18,5 +16,7 @@ s32       func_801F2E78(void);
 extern u8 D_80146875;
 
 extern u8 D_801F4970[];
+
+void func_801A4BC0(s32 arg0, s32 arg1, s32 arg2);
 
 #endif

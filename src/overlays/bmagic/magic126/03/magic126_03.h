@@ -11,7 +11,6 @@
 extern Callback D_801F1268[];
 
 extern Callback D_801F1278[];
-void            func_800AF764(void);
 
 extern Callback D_801F1288[];
 
@@ -25,5 +24,10 @@ void            func_801F091C(void);
 void                 func_801F0ED0(void);
 void                 func_801F11AC(void);
 extern PartyBattler* D_801F22BC;
+
+void func_801EF7A4(void);
+
+void func_801EF1C8(void);
+void func_801EF438(void);
 
 #endif

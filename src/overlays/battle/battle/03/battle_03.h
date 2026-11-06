@@ -672,8 +672,6 @@ u8            func_801DB3A0(u32 battler_index, u32 average_threshold, u32 max_th
 u8            func_801DB3E4(u32 battler_index, u32 average_threshold, u32 max_threshold);
 u32           func_801DB434(u8 compare_value, u32 row_index);
 void          func_801DB494(void);
-/* func_801DB524 */
-u8            Battle_SlotIsBlocked(u32 slot);
 u8            func_801DB844(u32 battler_index);
 u8            func_801DB9E4(u32 battler_index);
 PartyBattler* func_801DBB20(u8 selector);
@@ -687,7 +685,6 @@ u32           func_801DCD50(u32 unused, u8 battler_index, s32 damage_value);
 void          func_801DCEF8(u32 battler_index);
 void          func_801DD08C(void);
 void          func_801DD29C(void);
-void          func_801DD350(s32 arg0);
 void          func_801DD3CC(s32 arg0);
 u8            func_801DD448(void);
 extern u8     func_801DD704(u8 battler_index);
@@ -1077,4 +1074,7 @@ static inline void BattleDrawPanelFrame(s32 x, s32 y, s32 kind, s32 glyph0, s32 
     func_801DA4B4((s16)(x + width), (s16)(y + 2), (s16)(x + width), (s16)(y + 0x10), r, g, b);
     func_801DA4B4((s16)(x + 2), (s16)(y + 0x10), (s16)(x + width), (s16)(y + 0x10), r, g, b);
 }
+
+u8 Battle_SlotIsBlocked(u32 slot);
+
 #endif

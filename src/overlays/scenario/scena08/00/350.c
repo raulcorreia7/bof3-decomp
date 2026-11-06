@@ -232,7 +232,7 @@ MATCH s32 func_801F8BF8(void) {
     live = 0;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x3C0, 0), 0);
     GFX_AddPrim(1, 0xC);
-    func_801AFE18(buffer);
+    Area_SetCameraMatrix(buffer);
     slot = MEM_PTR(u8, AREA_WORK);
     for (i = 0; i < 8; i += 1, slot += 0x1C) {
         if (slot[0] != 0) {

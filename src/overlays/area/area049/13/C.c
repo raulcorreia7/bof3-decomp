@@ -85,7 +85,7 @@ MATCH void func_80117DF0(void) {
         ((Actor*)g_Task)->unk_09 += 1;
     }
     if (((Actor*)g_Task)->unk_09 >= 0x80U) {
-        func_80196070();
+        Actor_Clear();
     }
     func_80117E78(0x80 - ((Actor*)g_Task)->unk_09, 0);
 }
