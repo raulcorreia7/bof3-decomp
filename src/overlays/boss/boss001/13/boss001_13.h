@@ -10,7 +10,9 @@
 #define g_Task ((PartyBattler*)g_Task)
 
 extern u8           D_800C217C[];
+extern u8           D_800C2188;
 extern u8           D_800C2194[];
+extern u8           D_800C21A0;
 extern u16          D_800C21AC[];
 extern u16          D_800C21B4[];
 extern Callback     D_800C21EC[];
@@ -23,11 +25,9 @@ extern Callback     D_800C2270[];
 /* Battle RAM cell cleared by the mode start; the block around it belongs to
  * include/battle/ram.h, which does not name this halfword yet. */
 extern volatile u16 D_801463BE;
-extern u8           D_800C2188;
+void                func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode);
 /* D_801EB630 */
 extern EnemyBattler g_BattleEnemyBattlers[];
-void                func_800AC870(s32 entry_id, PartyBattler* source_record, s32 mode);
-extern u8           D_800C21A0;
 
 /* The three battle hooks the image installs; the addresses are in
  * [emi/boss/boss001/13] of config/symbols.toml. */

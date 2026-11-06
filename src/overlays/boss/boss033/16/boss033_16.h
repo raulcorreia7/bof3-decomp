@@ -7,9 +7,6 @@
 #include "overlays/boss/boss.h"
 #include "overlays/battle/battle.h"
 
-extern volatile u8 g_BattleActiveBattler;
-extern s32         D_80145EC4;
-extern s8          D_80146875;
 extern u8          D_800C2744[];
 extern u16         D_800C2750[];
 extern Callback    D_800C275C[];
@@ -19,6 +16,9 @@ extern Callback    D_800C27A0[];
 extern Callback    D_800C27AC[];
 extern Callback    D_800C27B4[];
 extern Callback    D_800C27D0[];
+extern s32         D_80145EC4;
+extern volatile u8 g_BattleActiveBattler;
+extern s8          D_80146875;
 
 /* The battle target calls the battle image defines. */
 s32 func_800AF2B4(void* target, s32 step);

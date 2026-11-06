@@ -6,8 +6,8 @@
 
 #include "overlays/boss/boss.h"
 
-extern u8       D_800C272C;
 extern u8       D_800C2720[];
+extern u8       D_800C272C;
 extern u16      D_800C2738[];
 extern Callback D_800C2740[];
 extern Callback D_800C2770[];
