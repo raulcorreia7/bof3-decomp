@@ -135,17 +135,6 @@ typedef struct BattleWork {
     u16 unk_3E;    /* +0x3E vertical span; func_800AF764 projects it negated */
 } BattleWork;
 
-typedef struct BattleRange {
-    u8  unk_00[0x34];
-    u32 range_axis_34;
-    u32 range_axis_38;
-    u8  pad_3C[2]; /* 0x3C */
-    u16 unk3E;     /* 0x3E */
-} BattleRange;
-
-ASSERT_OFFSET(BattleRange, unk3E, 0x3E);
-ASSERT_SIZE(BattleRange, 0x40);
-
 typedef struct BattleStatDisplayTemplate {
     s16 max_hp;         /* 0x00 */
     s16 power;          /* 0x02 */
@@ -811,8 +800,6 @@ u8          func_800AB68C(u8 excluded_slot);
 extern void func_800ABBE0(void);
 extern void func_800ABC30(void);
 extern void Battle_LoadEncounterEnemies(void);
-/* func_800AC218 */
-void        Battle_LoadEnemyBattler(s32 slot, s32 unit_index);
 void        func_800AD0A8(s32 enemy_index, s32 unit_index);
 void        func_800AD2EC(void);
 void        func_800AD434(void);
@@ -833,7 +820,6 @@ void        func_800ADF9C(void);
 void        func_800AE06C(void);
 void        func_800AE09C(void);
 void        func_800AE9C4(u8 arg0);
-extern void func_800AF764(void);
 void        func_800B01F0(void);
 void        func_800B0250(void);
 void        func_800B0398(void);
@@ -886,8 +872,6 @@ extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
 extern void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool        func_801AF494(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
-/* func_801DB524 */
-u8   Battle_SlotIsBlocked(u8 slot);
 /* func_801DB5CC */
 u8   Battle_FindSelectableSlotForward(s32 start_slot);
 /* func_801DB6F4 */
@@ -931,8 +915,6 @@ void        func_800A9FC4(BattlePanelRecord* rec, s32 slot);
 s32         func_800AA5F4(s32 slot);
 s32         func_800AA7A0(u8 slot);
 extern u32  func_800AD044(u32 bit_index);
-void        func_800AF2B4(BattleRange* target, s32 step);
-s32         func_800AF5FC(BattleRange* target, u32 extent);
 extern void func_800B1DAC(s16 x, s16 y, u8 sprite_arg);
 s32         func_801DDE7C(u8 index, u16 packed_value);
 extern u8   g_BattleUIStep_nv;
@@ -1116,5 +1098,7 @@ static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
 u8 func_800A40D0(u8 arg0);
 
 s32 func_800AED5C(s32 arg0, u32 battler_index);
+
+u8 Battle_SlotIsBlocked(u8 slot);
 
 #endif

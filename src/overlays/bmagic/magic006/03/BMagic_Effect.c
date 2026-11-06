@@ -28,7 +28,7 @@ MATCH void func_801EEF28(void) {
         g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
         g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
         g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed + 0x800000;
-        func_800AF764(g_Task);
+        func_800AF764();
         battler        = g_BattleSelectedActor;
         g_Task->unk_0C = ratan2(battler->pos.x.fixed - g_Task->pos.x.fixed, battler->pos.y.fixed - g_Task->pos.y.fixed);
         g_Task->unk_10 = 0;

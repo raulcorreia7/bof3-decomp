@@ -7,7 +7,6 @@
 
 extern Callback D_801F07A0[];
 extern Vec3S32  D_801F07AC[];
-void            func_800AF764(void);
 
 extern Callback D_801F07C4[];
 void            func_801EF1D8(void);

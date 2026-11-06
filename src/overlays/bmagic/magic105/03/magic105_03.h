@@ -9,7 +9,6 @@ extern MagicTaskFuncs D_801EEC04;
 /* The x/y speed pairs the step indexes by the work counter. */
 extern s16            D_801F004C[];
 
-void                func_800AF764(void);
 void                func_801EF880(void);
 void                func_801EFCF0(void);
 extern s16          D_801F004E[];

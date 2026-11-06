@@ -21,8 +21,6 @@ extern volatile u8 g_BattleActiveBattler;
 extern s8          D_80146875;
 
 /* The battle target calls the battle image defines. */
-s32 func_800AF2B4(void* target, s32 step);
-s32 func_800AF5FC(void* target, u32 extent);
 
 void func_800C1CA4(s32 mode);
 

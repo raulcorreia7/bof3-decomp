@@ -11,7 +11,6 @@
 extern Callback D_801F1268[];
 
 extern Callback D_801F1278[];
-void            func_800AF764(void);
 
 extern Callback D_801F1288[];
 

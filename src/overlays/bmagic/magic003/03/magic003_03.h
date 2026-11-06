@@ -9,7 +9,6 @@ extern u8 D_801463D6;
 
 extern BattleHandlerTable5 D_801EEC04;
 
-u8   func_800AFF98(void);
 void func_801EF324(void);
 
 void func_801EF708(void);
