@@ -39,7 +39,7 @@ found:
     first->unk_4C              = value + (s32)MEM_PTR(s32, 0x8003B800u);
     next[0]                    = (party_slot + 0x78);
     slot                       = party_slot & BYTE_MASK;
-    g_Task->unk_28             = 2;
+    g_Task->unk_28             = PALETTE_KIND_CELLS_2;
     g_Task->unk_25             = 5;
     g_Task->unk_26             = (slot * 0x50);
     g_Task->unk_2B             = D_80181B1C[key];

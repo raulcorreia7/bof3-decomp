@@ -79,7 +79,7 @@ MATCH void Area_DrawObjectSprite(void) {
                 clip_y = 0;
             }
             bank = 0;
-            if (g_Task->unk_28 != 0) {
+            if (g_Task->unk_28 != PALETTE_KIND_CELL) {
                 bank = -1;
                 if (cell->u >= 0x28) {
                     bank = cell->u >= 0xA1;
