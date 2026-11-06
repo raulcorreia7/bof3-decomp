@@ -27,17 +27,17 @@ MATCH void func_801E9FDC(void) {
         flags = D_801EB4D8->command.target;
         if ((flags & 0xC0) == 0) {
             if (flags != g_MenuCurrentPanel->unk_0A) {
-                g_MenuCurrentPanel->unk_0F = 0;
+                g_MenuCurrentPanel->layer = 0;
                 g_MenuCurrentPanel->state -= 1;
                 return;
             }
         } else if ((flags & 0x80) == 0) {
-            g_MenuCurrentPanel->unk_0F = 0;
+            g_MenuCurrentPanel->layer = 0;
             g_MenuCurrentPanel->state -= 1;
             return;
         }
     } else {
-        g_MenuCurrentPanel->unk_0F = 0;
+        g_MenuCurrentPanel->layer = 0;
         g_MenuCurrentPanel->state -= 1;
         return;
     }

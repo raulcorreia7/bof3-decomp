@@ -11,5 +11,5 @@ extern BattleHandlerTable6 D_801EEC28;
 MATCH void func_801EFD98(void) {
     BattleHandlerTable6 handlers = D_801EEC28;
 
-    handlers.handlers[g_MenuCurrentPanel->unk_02]();
+    handlers.handlers[g_MenuCurrentPanel->mode]();
 }

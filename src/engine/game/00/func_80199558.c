@@ -3,6 +3,6 @@
 MATCH void func_80199558(void) {
     u8 index;
 
-    index = g_MenuCurrentPanel->unk_02;
+    index = g_MenuCurrentPanel->mode;
     g_MenuPanelHandlers[index]();
 }

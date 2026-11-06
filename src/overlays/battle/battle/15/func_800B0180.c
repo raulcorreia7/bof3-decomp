@@ -4,5 +4,5 @@ MATCH void func_800B0180(void) {
     BattleHandlerTable5 handlers;
 
     handlers = D_800969E4;
-    handlers.handlers[g_MenuCurrentPanel->unk_02]();
+    handlers.handlers[g_MenuCurrentPanel->mode]();
 }

@@ -39,14 +39,14 @@ MATCH void func_801D3884(void) {
     }
     if (g_InputPressed & D_80145AC2) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
-        g_MenuPanelTasks[14].unk_01 = 6;
-        g_MenuPanelTasks[14].unk_02 = 0xF;
-        g_MenuPanelTasks[14].active = 1;
-        g_MenuPanelTasks[14].pos.x  = 0xB4;
-        g_MenuPanelTasks[14].pos.y  = 0x3C;
-        g_MenuPanelTasks[14].unk_0B = 0;
-        g_MenuPanelTasks[14].unk_0C = 0xFF;
-        state                       = &D_80148652;
+        g_MenuPanelTasks[14].handler = 6;
+        g_MenuPanelTasks[14].mode    = 0xF;
+        g_MenuPanelTasks[14].active  = 1;
+        g_MenuPanelTasks[14].pos.x   = 0xB4;
+        g_MenuPanelTasks[14].pos.y   = 0x3C;
+        g_MenuPanelTasks[14].unk_0B  = 0;
+        g_MenuPanelTasks[14].unk_0C  = 0xFF;
+        state                        = &D_80148652;
         /* FAKE: scheduler hoists the state load past the stores. */
         MATCH_BARRIER();
         g_MenuPanelTasks[14].unk_0A = g_MenuPanelTasks[13].unk_0A;

@@ -38,8 +38,8 @@ NON_MATCHING void func_801D3A24(void) {
         diff = g_Characters[rec].level - g_Characters[rec].master_level;
         switch (chr_master) {
             case MASTER_BAIS:
-                if (diff >= 3 && !(D_80144F59 & 8)) {
-                    D_80144F59 |= 8;
+                if (diff >= 3 && !(g_MasterRewardFlags & (1 << CHAR_INDEX_TEEPO))) {
+                    g_MasterRewardFlags |= 1 << CHAR_INDEX_TEEPO;
                     func_801D39CC(D_80145FCC.bytes[battler_offset]);
                     done = 1;
                 }
@@ -56,15 +56,15 @@ NON_MATCHING void func_801D3A24(void) {
                 }
                 break;
             case MASTER_LEE:
-                if (diff >= 3 && !(D_80144F59 & 0x10)) {
-                    D_80144F59 |= 0x10;
+                if (diff >= 3 && !(g_MasterRewardFlags & (1 << CHAR_INDEX_REI))) {
+                    g_MasterRewardFlags |= 1 << CHAR_INDEX_REI;
                     func_801D39CC(D_80145FCC.bytes[battler_offset]);
                     done = 1;
                 }
                 break;
             case MASTER_WYNN:
-                if (diff >= 3 && !(D_80144F59 & 0x20)) {
-                    D_80144F59 |= 0x20;
+                if (diff >= 3 && !(g_MasterRewardFlags & (1 << CHAR_INDEX_MOMO))) {
+                    g_MasterRewardFlags |= 1 << CHAR_INDEX_MOMO;
                     func_801D39CC(D_80145FCC.bytes[battler_offset]);
                     done = 1;
                 }

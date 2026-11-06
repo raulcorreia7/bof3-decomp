@@ -94,7 +94,10 @@ extern u8             g_SavedScriptVars[4];
 extern u8             D_80144955;
 /* D_80144E98 */
 extern u8             g_Scenario2Flags[];
-extern u8             D_80144F59;
+/* Per-character bits (1 << CharacterIndex): the first reward of the character's
+ * special master was given (set in the master menu's completion step; the
+ * start-menu layout arms a choice panel for each character whose bit is set). */
+extern u8             g_MasterRewardFlags;
 /* 0x80145xxx: pad state, shared text buffer and field words. */
 extern u16            D_80145048;
 extern u8             D_801454F2;
