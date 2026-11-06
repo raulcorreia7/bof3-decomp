@@ -95,6 +95,9 @@
         (WORK)->header.step += 1;                                                      \
     }
 
+/* One remembered position of an effect's trail. */
+typedef Vec2S16 BmagicTrailPoint;
+
 #define BMAGIC_TRAIL_LENGTH 32
 
 /* Shift the points of the trail TRAIL[unk_04] from unk_0B up to unk_0A - 1 one
