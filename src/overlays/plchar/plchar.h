@@ -7,7 +7,7 @@
 #include "game.h"
 #include "slus/facing.h"
 #include "sys/exe.h"
-#include <abs.h>
+#include "common/util.h"
 
 /* The two route directions a character program turns between; an image that turns between
  * other directions defines both before including this file. */

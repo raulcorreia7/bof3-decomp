@@ -24,7 +24,7 @@
  * - `AreaMapBundle` and its cell rows: map bundle.
  * - `AreaActorDef`, `AreaActorDefs`: scene/step table.
  * - `AreaScriptBank`, `AreaScriptSection`: area script bank.
- * - `AreaTrail`, `AreaSlotWork`, `Vec2U16`: neighboring buffers; the
+ * - `AreaTrail`, `AreaSlotWork`, `UPoint2D`: neighboring buffers; the
  *   area program owns them.
  *
  * The format sections are in @source: wiki:formats/area.
@@ -313,7 +313,7 @@ ASSERT_SIZE(AreaWorkPointers, AREA_WORK_POINTERS_SIZE);
  * buffers by 0x28 (`@0x801F362C`). */
 typedef struct AreaVertex {
     u16     unk_00;
-    Vec3S16 points[4]; /* 0x02 */
+    Point3D points[4]; /* 0x02 */
     u8      unk_1A[0x0E];
 } AreaVertex;
 
@@ -321,12 +321,12 @@ ASSERT_SIZE(AreaVertex, WORLD_VERTEX_RECORD_SIZE);
 ASSERT_OFFSET(AreaVertex, points, 0x02);
 
 typedef struct AreaTrail {
-    Vec3S32 pos;                     /* 0x00 - the head anchor */
-    s32     unk_0C;                  /* 0x0C */
-    s32     radius;                  /* 0x10 - the ring radius */
-    u16     angle;                   /* 0x14 - the rotation angle */
-    u16     pad_16;                  /* 0x16 */
-    Vec2S16 points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
+    Point3DL pos;                     /* 0x00 - the head anchor */
+    s32      unk_0C;                  /* 0x0C */
+    s32      radius;                  /* 0x10 - the ring radius */
+    u16      angle;                   /* 0x14 - the rotation angle */
+    u16      pad_16;                  /* 0x16 */
+    Point2D  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
 } AreaTrail;
 
 ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);
@@ -357,11 +357,11 @@ ASSERT_OFFSET(AreaSpawnSlot, rim_shade_17, 0x17);
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with
  * that stride) and the ring projection reads the active one. */
 typedef struct AreaSlotWork {
-    u8               unk_00[4];
-    Vec2S16          offset;
-    s16              scale; /* 0x08 - the projection scale */
-    s16              unk_0A;
-    volatile Vec2U16 screen;
+    u8                unk_00[4];
+    Point2D           offset;
+    s16               scale; /* 0x08 - the projection scale */
+    s16               unk_0A;
+    volatile UPoint2D screen;
 } AreaSlotWork;
 
 ASSERT_SIZE(AreaSlotWork, WORLD_SLOT_WORK_SIZE);

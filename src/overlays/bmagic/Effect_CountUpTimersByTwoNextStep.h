@@ -5,6 +5,6 @@ MATCH void Effect_CountUpTimersByTwoNextStep(void) {
     g_Task->unk_09 += 2;
     g_Task->timer += 2;
     if (g_Task->unk_09 == 0x10) {
-        Bmagic_NextStep();
+        BMagic_NextStep();
     }
 }

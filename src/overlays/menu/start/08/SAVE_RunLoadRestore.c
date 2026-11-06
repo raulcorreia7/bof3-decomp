@@ -21,7 +21,7 @@ MATCH void SAVE_RunLoadRestore(void) {
             D_80145AC4   = PADRup;
             D_80145ABE   = PADselect;
         }
-        g_PartySize = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+        g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
         EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);
@@ -30,7 +30,7 @@ MATCH void SAVE_RunLoadRestore(void) {
         while (EMI_LoaderIsReady() == 0) {
             CallbackWait(1);
         }
-        Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
+        Party_BuildBattlers(PARTY_ORDER_FIELD);
         {
             u8* src;
             s8* dst;

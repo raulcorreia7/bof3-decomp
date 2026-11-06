@@ -3,5 +3,5 @@
 MATCH void Effect_ArmCounterNextStep(void) {
     g_Task->unk_09 = 0;
     g_Task->timer  = 0x88;
-    Bmagic_NextStep();
+    BMagic_NextStep();
 }

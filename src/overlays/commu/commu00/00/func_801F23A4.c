@@ -9,7 +9,7 @@ MATCH void func_801F23A4(void) {
     variant = &g_SceneEventStep;
     switch (*variant) {
         case 0:
-            D_801F2945 = g_SndBgmId;
+            D_801F2945 = g_SndBGMId;
             SND_StopSequence(((u8*)g_SelectionCues)[D_801F2945 * 4], D_80181EBB[D_801F2945 * 4]);
             SND_StartXAStream(D_801F2944 == 0 ? 8 : 10, 1);
             /* FAKE: the original spells this increment off the neighboring mode
@@ -26,7 +26,7 @@ MATCH void func_801F23A4(void) {
             break;
         case 2:
             if (g_GameStateIndex != *variant) {
-                SND_PlayBgm(D_801F2945, 100, 8);
+                SND_PlayBGM(D_801F2945, 100, 8);
                 g_AreaWalkFlags &= ~AREA_WALK_BUSY_ALL;
                 func_801F1684();
                 func_801F1638();

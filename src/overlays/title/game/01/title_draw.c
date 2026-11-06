@@ -33,7 +33,7 @@ static const WinGlyphGeometry D_801D1C6C[WIN_GLYPH_GEOMETRY_COUNT] = {
 MATCH void SND_StartSelectionEffect(void) { /* func_801D1134 */
     u8 selection;
 
-    selection = g_SndBgmId;
+    selection = g_SndBGMId;
 
     if (selection != 0xFFu) {
         u32 offset = selection << 2;
@@ -47,7 +47,7 @@ MATCH void SND_StartSelectionEffect(void) { /* func_801D1134 */
  */
 /* func_801D1184 */
 MATCH void SND_StopSelectionEffect(void) { /* func_801D1184 */
-    u8* selection_ptr = &g_SndBgmId;
+    u8* selection_ptr = &g_SndBGMId;
     u8  selection     = *selection_ptr;
 
     if (selection != 0xFFu) {

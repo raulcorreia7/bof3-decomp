@@ -3,14 +3,14 @@
 
 #include "types.h"
 
-#define PARTY_FORMATION     0x80144F58u
-#define PARTY_FLAGS         0x80144F59u
+#define PARTY_FORMATION         0x80144F58u
+#define PARTY_FLAGS             0x80144F59u
 
-#define PARTY_ORDER_WALKING 0x80144F5Au
-#define PARTY_ORDER_BATTLE  0x80144F5Du
-#define PARTY_STANDBY       0x801E6244u
+#define PARTY_FIELD_ORDER_BASE  0x80144F5Au
+#define PARTY_BATTLE_ORDER_BASE 0x80144F5Du
+#define PARTY_STANDBY           0x801E6244u
 
-#define PARTY_SLOT_COUNT    3
+#define PARTY_SLOT_COUNT        3
 
 /*
  * Party ordering, formation, standby, and zenny.

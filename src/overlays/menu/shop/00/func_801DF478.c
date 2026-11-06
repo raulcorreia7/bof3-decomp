@@ -8,17 +8,17 @@ MATCH s32 func_801DF478(void) {
 
     if (D_80148658 == D_8014865A) {
         if (D_80148658 == 0) {
-            Menu_SwapBytes_801DF464(&g_PartyWalkOrder[D_80148659], &g_PartyWalkOrder[(s8)D_8014865D]);
+            Menu_SwapBytes_801DF464(&g_PartyFieldOrder[D_80148659], &g_PartyFieldOrder[(s8)D_8014865D]);
         } else {
             Menu_SwapBytes_801DF464(&D_801E6244[D_80148659], &D_801E6244[(s8)D_8014865D]);
         }
         return 0xFF;
     }
     if (D_80148658 == 0) {
-        field_id   = g_PartyWalkOrder[D_80148659];
+        field_id   = g_PartyFieldOrder[D_80148659];
         standby_id = D_801E6244[(s8)D_8014865D];
     } else {
-        field_id   = g_PartyWalkOrder[(s8)D_8014865D];
+        field_id   = g_PartyFieldOrder[(s8)D_8014865D];
         standby_id = D_801E6244[D_80148659];
     }
     record_off = g_CharSlot[field_id] * 0xA4;
@@ -30,9 +30,9 @@ MATCH s32 func_801DF478(void) {
         return standby_id;
     }
     SND_PlayCue(EMI_CUE_ID(1, 3));
-    for (slot = 0; slot < (Party_CountOrder(PARTY_ORDER_KIND_WALKING) & BYTE_MASK); slot++) {
-        if (g_PartyWalkOrder[slot] == field_id) {
-            g_PartyWalkOrder[slot] = standby_id;
+    for (slot = 0; slot < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK); slot++) {
+        if (g_PartyFieldOrder[slot] == field_id) {
+            g_PartyFieldOrder[slot] = standby_id;
         }
         if (g_PartyBattleOrder[slot] == field_id) {
             g_PartyBattleOrder[slot] = standby_id;

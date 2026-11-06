@@ -18,7 +18,7 @@ MATCH void func_801D163C(void) {
     g_MenuPanelTasks[8].unk_0A = 0;
     g_ShopItemId               = choice;
     panels                     = &g_MenuPanelTasks[3];
-    for (; i < (u8)Party_CountOrder(PARTY_ORDER_KIND_WALKING); i++) {
+    for (; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
         panel         = (MenuPanelTask*)(i * sizeof(MenuPanelTask) + (u32)panels);
         panel->unk_0B = Item_GetKind(g_ShopItemCategory, g_ShopItemId);
         panel->unk_0C = g_ShopItemId;
@@ -76,7 +76,7 @@ MATCH void func_801D163C(void) {
         }
     } else if (g_InputPressed & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_KIND_WALKING); i++) {
+        for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
             g_MenuPanelTasks[i + 3].state = 1;
         }
         D_80148453 = 1;

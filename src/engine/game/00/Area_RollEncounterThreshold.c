@@ -35,7 +35,7 @@ MATCH void Area_RollEncounterThreshold(u32 keep_armed) {
     if (cap < roll)
         roll = cap;
     total += roll;
-    avail = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+    avail = Party_CountOrder(PARTY_ORDER_FIELD);
     limit = avail & BYTE_MASK;
     if (limit > 0) {
         match   = 0;

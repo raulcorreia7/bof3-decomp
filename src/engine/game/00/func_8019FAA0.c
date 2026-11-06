@@ -34,9 +34,9 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
     D_80143F06 = flag;
     D_80143F0C = word_b;
     if (seed == 0xFFu)
-        g_SndBgmId = 0xFFu;
+        g_SndBGMId = 0xFFu;
     else
-        SND_StartBgm(seed, 100, 8);
+        SND_StartBGM(seed, 100, 8);
 
     if (g_GameAreaId != selection_seed) {
         if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {

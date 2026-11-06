@@ -4,5 +4,5 @@ MATCH void func_801F43C8(void) {
     sprintf(g_TextVariables[0], D_801F2C14, g_ScriptVars[3] & 0x7F);
     Message_StartAreaMessage(0x56);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    SND_PlayBgm(0xA, 0x64, 8);
+    SND_PlayBGM(0xA, 0x64, 8);
 }

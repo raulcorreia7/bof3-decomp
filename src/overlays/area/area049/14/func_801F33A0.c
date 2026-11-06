@@ -1,7 +1,7 @@
 #include "area049_14.h"
 
 MATCH void func_801F33A0(void) {
-    if (g_PartyWalkOrder[1] == 4) {
+    if (g_PartyFieldOrder[1] == 4) {
         g_ScriptVars[1] = 1;
     }
 }

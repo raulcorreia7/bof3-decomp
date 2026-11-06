@@ -48,7 +48,7 @@ NON_MATCHING void func_801DA474(void) {
     }
     g_MenuPanelTasks[11].unk_10 = val1;
     input_bits                  = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
-    tmp4                        = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
+    tmp4                        = Party_CountOrder(PARTY_ORDER_FIELD);
     if ((input_bits & (PADLright | PADLleft)) && (g_MenuPanelTasks[12].unk_0A != 0)) {
         D_80148658 = (u8)D_80148658 ^ 1;
     }

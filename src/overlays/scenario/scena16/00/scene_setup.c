@@ -61,7 +61,7 @@ MATCH void func_801F6CCC(void) {
     D_80144904  = 0x88000u;
     D_801448FF  = 5u;
     g_GameFlags = (flags | GAME_FLAG_RUN_LOCK | 0x200u);
-    SND_RequestBgm(6u);
+    SND_RequestBGM(6u);
 
     while (!EMI_LoaderIsReady()) {
         CallbackWait(1u);
@@ -191,7 +191,7 @@ MATCH void func_801F7188(void) {
         func_801F845C();
         SND_PlayCue(EMI_CUE_ID(2, 19));
         SND_PlayCue(EMI_CUE_ID(2, 20));
-        sel_ptr   = &g_SndBgmId;
+        sel_ptr   = &g_SndBGMId;
         selection = *sel_ptr;
 
         if (selection != 0xFFu) {
@@ -221,7 +221,7 @@ MATCH void func_801F7230(void) {
             if (WINDOW_EFFECT_IDLE()) {
                 UI_SetMode(1u);
                 SsSetMVol(0, 0);
-                SND_PlayBgm(6u, 0x50, 8);
+                SND_PlayBGM(6u, 0x50, 8);
                 next  = &g_SceneState.step_05;
                 step  = *next;
                 flags = SCENA16_D_80146258;
@@ -366,7 +366,7 @@ MATCH void func_801F7230(void) {
             if (g_ScriptVars[3] == 0x60u) {
                 Game_RequestAreaChange(AREA_ID_TITLE_INTRO, 0x70000u, 0x140000u, 0u);
                 SCENA16_D_80143F1D = 0xFFu;
-                SND_FadeOutBgm(6u, 0x50, 0x40);
+                SND_FadeOutBGM(6u, 0x50, 0x40);
                 g_ScriptVars[2]       = 0u;
                 g_SceneState.state_04 = 3;
                 g_SceneState.step_05  = 0u;
@@ -488,7 +488,7 @@ MATCH void func_801F7790(void) {
         }
 
         case 9:
-            SND_PlayBgm(2u, 100, 0x20);
+            SND_PlayBGM(2u, 100, 0x20);
             Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, 0x340000u, 0x430000u, 3u);
             g_SceneState.state_04 = 4;
             g_SceneState.step_05  = 0u;
@@ -664,7 +664,7 @@ MATCH void func_801F7CC4(void) {
             }
             g_AreaDrawFlags = 0u;
             UI_SetMode(1u);
-            SND_FadeOutBgm(2u, 0x6E, 0x20);
+            SND_FadeOutBGM(2u, 0x6E, 0x20);
             state  = &g_SceneState.step_05;
             *state = (*state + 1u);
             break;

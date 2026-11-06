@@ -1,8 +1,8 @@
 #include "game_00.h"
 
 MATCH void func_8019AA44(void) {
-    Actor*   work;
-    Vec3S32* angle;
+    Actor*    work;
+    Point3DL* angle;
 
     work = g_Task;
     if (work->unk_09 != 0) {

@@ -134,7 +134,7 @@ MATCH void func_801F02F4(void) {
     if (work->timer == 0) {
         work->unk_09 = 8;
         COORD_INT(work->pos.z) += 0x200;
-        Bmagic_NextStep();
+        BMagic_NextStep();
     } else {
         work->timer = work->timer - 1;
     }

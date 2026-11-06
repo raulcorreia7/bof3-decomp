@@ -3,7 +3,7 @@
  * bmagic overlays; every change here must verify every member. */
 /* func_801EF338 (magic162), func_801EF338 (magic168) */
 MATCH void func_801EF338(void) {
-    BmagicEffectWork* work;
+    BMagicEffectWork* work;
 
     work = D_801F17B0;
     D_801F01AC[work->header.mode]();

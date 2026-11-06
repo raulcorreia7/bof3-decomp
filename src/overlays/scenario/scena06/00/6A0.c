@@ -257,7 +257,7 @@ INCLUDE_ASM(func_801FDEA4);
 
 MATCH void func_801FDFFC(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
+    Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
@@ -265,21 +265,21 @@ MATCH void func_801FDFFC(void) {
 
 MATCH void func_801FE048(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
+    Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
 }
 
 MATCH void func_801FE08C(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
+    Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     func_801C1630();
 }
 
 MATCH void func_801FE0D0(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
+    Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
     func_801C1630();
@@ -297,7 +297,7 @@ MATCH void func_801FE13C(void) {
 
 MATCH void func_801FE198(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0U);
-    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
+    Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_GARR);
 }
 
@@ -307,7 +307,7 @@ MATCH void Scene_JoinNina_801FE1D4(void) {
 
 MATCH void func_801FE210(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0U);
-    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
+    Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_JoinMember(CHAR_ID_GARR);
 }

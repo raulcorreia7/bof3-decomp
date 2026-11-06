@@ -84,7 +84,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     col  = 0 & HALF_MASK;
     do {
         name_index = slot & HALF_MASK;
-        if (g_PartyWalkOrder[col] == 4) {
+        if (g_PartyFieldOrder[col] == 4) {
             mode = SHOP_WORK->field_74C & 0x7F;
             if ((mode != 5) && (mode != 0xC)) {
                 dst_text[col + 5] = 0xB;
@@ -94,7 +94,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
             }
         } else {
         store_row:
-            dst_text[name_index + 5] = (u8)g_PartyWalkOrder[name_index];
+            dst_text[name_index + 5] = (u8)g_PartyFieldOrder[name_index];
         }
         slot += 1;
         col = slot & HALF_MASK;

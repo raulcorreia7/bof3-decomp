@@ -20,7 +20,7 @@ NON_MATCHING void func_8009A744(void) {
     MATCH_REG(u8, i, "s1");
     u8 j;
 
-    base     = &g_Characters[MEM_PTR(u8, g_CharSlot)[MEM_PTR(u8, PARTY_ORDER_BATTLE)[D_801485C4]]];
+    base     = &g_Characters[MEM_PTR(u8, g_CharSlot)[MEM_PTR(u8, PARTY_BATTLE_ORDER_BASE)[D_801485C4]]];
     slots[0] = base + 0xE;
     slots[1] = base + 0xF;
     slots[2] = base + 0x10;

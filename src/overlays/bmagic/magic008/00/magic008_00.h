@@ -13,6 +13,6 @@ extern BattleHandlerTable4 D_801EEC30;
 extern BattleHandlerTable3 D_801EEC40;
 extern BattleHandlerTable3 D_801EEC4C;
 extern BattleHandlerTable4 D_801EEC84;
-extern BmagicEffectFuncs   D_801EEC94;
+extern BMagicEffectFuncs   D_801EEC94;
 
 #endif

@@ -29,7 +29,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         if (byte != 0) {
             flag = 0;
             if (task->unk_09 != 0 ||
-                (func_801AF494(task->unk_08, g_CharSlot[g_PartyWalkOrder[D_80148656]], task->unk_0A, byte) &
+                (func_801AF494(task->unk_08, g_CharSlot[g_PartyFieldOrder[D_80148656]], task->unk_0A, byte) &
                  BYTE_MASK) == 0) {
                 flag = 1;
             }

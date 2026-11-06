@@ -24,7 +24,7 @@
 #include "work/area_spad.h"
 #include "work/save.h"
 #include <stdio.h>
-#include <abs.h>
+#include "common/util.h"
 #include <memory.h>
 
 /* Constants. */
@@ -223,14 +223,14 @@ typedef union ScenePart {
 
 /* The text, panel and cue handlers share this state block. */
 typedef struct MenuState {
-    Vec2U16 text;
-    Vec2U16 origin;
-    u8      step_id;         /* 0x08 */
-    u8      panel_index;     /* 0x09 */
-    s8      last_row;        /* 0x0A */
-    s8      selection_index; /* 0x0B */
-    s16     cue_counter;     /* 0x0C */
-    s16     cue_timer;       /* 0x0E */
+    UPoint2D text;
+    UPoint2D origin;
+    u8       step_id;         /* 0x08 */
+    u8       panel_index;     /* 0x09 */
+    s8       last_row;        /* 0x0A */
+    s8       selection_index; /* 0x0B */
+    s16      cue_counter;     /* 0x0C */
+    s16      cue_timer;       /* 0x0E */
 } MenuState;
 
 ASSERT_SIZE(MenuState, 0x10);
@@ -751,7 +751,7 @@ extern const EncounterZone* const  D_80181164[MAP_ZONE_LIST_COUNT];
 extern const SceneFlagPair         D_80181484[SCENE_FLAG_COUNT];
 extern const ScriptRef             D_80181BDC[40];
 extern const ScriptRef* const      D_80181C7C[11];
-extern const BgmTrack              D_80181EB8[BGM_TRACK_COUNT];
+extern const BGMTrack              D_80181EB8[BGM_TRACK_COUNT];
 extern u8                          D_80182174;
 extern u8                          D_80182175;
 extern u8                          D_80182176;

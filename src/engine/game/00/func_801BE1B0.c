@@ -33,7 +33,7 @@ NON_MATCHING s32 func_801BE1B0(u32 index) {
         slots  = SP_PTR(u8, 0x04);
         taken  = SP_PTR(u8, 0x08);
         for (i = 0; i < g_PartySize; i++)
-            taken[i] = g_PartyWalkOrder[i];
+            taken[i] = g_PartyFieldOrder[i];
         for (i = 0; i < count; i++) {
             if (ids[i] == 0x80) {
                 for (j = 0; j < g_PartySize && taken[j] == GAME_NONE; j++) {
@@ -55,8 +55,8 @@ NON_MATCHING s32 func_801BE1B0(u32 index) {
             taken[j]  = 0xFF;
         }
         for (i = 0; i < count; i++) {
-            row                 = (Actor*)((u8*)g_BattlePartyBattlers + slots[i] * BATTLE_PARTY_STRIDE);
-            g_PartyWalkOrder[i] = row->unk_79;
+            row                  = (Actor*)((u8*)g_BattlePartyBattlers + slots[i] * BATTLE_PARTY_STRIDE);
+            g_PartyFieldOrder[i] = row->unk_79;
         }
         for (i = 0; i + 1 < count; i++) {
             slot = slots[i];

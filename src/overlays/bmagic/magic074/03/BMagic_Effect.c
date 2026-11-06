@@ -15,7 +15,7 @@ MATCH void func_801EEF9C(void) {
 }
 
 MATCH void func_801EEFE0(void) {
-    BmagicEffectFuncs handlers;
+    BMagicEffectFuncs handlers;
 
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.step);
 }

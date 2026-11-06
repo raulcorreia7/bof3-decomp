@@ -22,7 +22,7 @@ MATCH void func_801EEFB0(void) {
 }
 
 MATCH void func_801EEFF4(void) {
-    BmagicEffectFuncs handlers;
+    BMagicEffectFuncs handlers;
 
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.step);
 }

@@ -123,5 +123,5 @@ INCLUDE_ASM(func_801F020C);
 
 /* func_801F0588 */
 MATCH void Actor_Clear(void) {
-    Bmagic_ResetLocalWork();
+    BMagic_ResetLocalWork();
 }
