@@ -2,6 +2,12 @@
 
 extern u8 D_80148656;
 
+typedef struct Start08PanelHead {
+    s16 unk_00;
+    u8  pad_02[0x10E];
+    u8  unk_110;
+} Start08PanelHead;
+
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 88.89%. resume: a lever or header fix that
  * closes the first mismatch. */
 #ifdef NON_MATCHING

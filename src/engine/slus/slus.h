@@ -290,6 +290,24 @@ typedef struct PanelSortDepth {
 
 ASSERT_SIZE(PanelSortDepth, 0xC);
 
+/* The SPU voice record the sound units index: _SsReadDeltaValue walks the byte
+ * stream through cursor at +0x04 and accumulates at +0x80, _SsVmSetSeqVol sets
+ * the rate byte at +0x12 and the volume/pan pair at +0x74/+0x76. Both models
+ * end at 0xAC; the fields they cover do not overlap, so one record keeps both
+ * spellings and the bytes between them stay unnamed. */
+typedef struct SoundSequence {
+    u8  pad_00[4];    /* +0x00 */
+    u8* cursor;       /* +0x04 byte stream cursor */
+    u8  pad_08[0x0A]; /* +0x08 */
+    u8  rate;         /* +0x12 */
+    u8  pad_13[0x61]; /* +0x13 */
+    u16 vol;          /* +0x74 */
+    u16 pan;          /* +0x76 */
+    u8  pad_78[8];    /* +0x78 */
+    s32 accum;        /* +0x80 */
+    u8  pad_84[0x28]; /* +0x84 */
+} SoundSequence;
+
 /* Stack snapshots of the fixed dispatch tables the step handlers copy to the
  * frame and index: func_801507BC/func_801510DC copy the eight-entry tables at
  * D_80149A5C/D_80149A7C, func_80151538/func_801518F4 the six-entry tables at
