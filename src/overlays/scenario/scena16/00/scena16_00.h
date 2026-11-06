@@ -13,10 +13,14 @@
 
 extern volatile u32 g_UiPopupRequest;
 extern u16          g_GameAreaId;
-extern u16          D_801448FC;
-extern u8           D_801448FF;
-extern u32          D_80144900;
-extern u32          D_80144904;
+/* D_801448FC */
+extern u16          g_SaveAreaId;
+/* D_801448FF */
+extern u8           g_SaveEntryFacing;
+/* D_80144900 */
+extern u32          g_SaveEntryX;
+/* D_80144904 */
+extern u32          g_SaveEntryY;
 extern s32          g_AreaFocusY;
 /* Retail-address data symbols, in address order. */
 extern volatile u16 SCENA16_D_80010004;

@@ -7,10 +7,11 @@
 #include "game/fairy.h"
 #include "menu/clock.h"
 #include "menu/inventory.h"
+#include "menu/party.h"
 #include "work/state.h"
 
-#define SAVE_DATA_SIZE        0x10B0
-#define SAVE_PARTY_SLOT_COUNT 3
+/* The persistent block: 4,272 bytes. */
+#define SAVE_BLOCK_SIZE 0x10B0u
 
 /* The scene event the overlays step through: mode selects the g_SceneEvents handler, step advances inside it and
  * selection is the entry it works on (a fairy job, a master, a menu cursor). */
@@ -31,7 +32,12 @@ typedef struct SaveData {
     /* 0x013 */ SceneEventState scene_event;
     /* 0x016 */ u8              unk_16[0xA];
     /* 0x020 */ u8              script_vars[4]; /* a copy of g_ScriptVars[0..3] */
-    /* 0x024 */ u8              unk_24[0x4C];
+    /* 0x024 */ u16             area_id;        /* the area the save resumes in */
+    /* 0x026 */ u8              unk_26;
+    /* 0x027 */ u8              entry_facing;
+    /* 0x028 */ u32             entry_x; /* the party position in the area, 16.16 */
+    /* 0x02C */ u32             entry_y;
+    /* 0x030 */ u8              unk_30[0x40];
     /* 0x070 */ u16             checksum;     /* zeroed while the payload is summed, then holds the sum */
     /* 0x072 */ u8              unk_72[8];    /* holds g_SndMono at 0x79, read through volatile views */
     /* 0x07A */ u8              window_style; /* the last argument of UI_DrawWindow */
@@ -43,8 +49,8 @@ typedef struct SaveData {
     /* 0x67C */ u8              unk_67C[4];
     /* 0x680 */ u8              party_formation;
     /* 0x681 */ u8              unk_681;
-    /* 0x682 */ u8              field_order[SAVE_PARTY_SLOT_COUNT];  /* character ids */
-    /* 0x685 */ u8              battle_order[SAVE_PARTY_SLOT_COUNT]; /* character ids */
+    /* 0x682 */ u8              field_order[PARTY_SLOT_COUNT];  /* character ids */
+    /* 0x685 */ u8              battle_order[PARTY_SLOT_COUNT]; /* character ids */
     /* 0x688 */ u8              unk_688[0x60];
     /* 0x6E8 */ GameClock       play_clock;
     /* 0x6EC */ u8              unk_6EC[0x20];
@@ -67,9 +73,13 @@ typedef struct SaveData {
     /* 0xED0 */ u8              unk_ED0[0x1E0];
 } SaveData;
 
-ASSERT_SIZE(SaveData, SAVE_DATA_SIZE);
+ASSERT_SIZE(SaveData, SAVE_BLOCK_SIZE);
 ASSERT_OFFSET(SaveData, scene_event, 0x013);
 ASSERT_OFFSET(SaveData, script_vars, 0x020);
+ASSERT_OFFSET(SaveData, area_id, 0x024);
+ASSERT_OFFSET(SaveData, entry_facing, 0x027);
+ASSERT_OFFSET(SaveData, entry_x, 0x028);
+ASSERT_OFFSET(SaveData, entry_y, 0x02C);
 ASSERT_OFFSET(SaveData, checksum, 0x070);
 ASSERT_OFFSET(SaveData, window_style, 0x07A);
 ASSERT_OFFSET(SaveData, characters, 0x090);

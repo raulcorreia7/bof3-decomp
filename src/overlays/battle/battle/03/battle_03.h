@@ -38,7 +38,7 @@
 /* FAKE: retail reads D_80140000 as volatile u16[]. */
 #define BATTLE_GLOBAL_RAM_U16          ((volatile u16*)D_80140000)
 /* Additional fixed-base tables and dispatch helpers. */
-#define BATTLE_ENDING_BYTES            ((volatile u8*)&g_BattleMode)
+#define BATTLE_ENDING_BYTES            ((volatile u8*)&g_BattlePhase)
 /* Single fixed-address globals (inline; no symbol binding required). */
 #define BATTLE_GLOBAL_WORD_598C        (*(u32*)&g_GfxPrimCursor)
 /* Party slot the entrance pass is on, and the entrance sub-step byte 0x801462E2. */
