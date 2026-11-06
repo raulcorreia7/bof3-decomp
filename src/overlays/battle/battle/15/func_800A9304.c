@@ -46,8 +46,8 @@ MATCH u8 func_800A9304(u8 slot) {
         (g_BattleEnemyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
         if ((*(u8*)&g_BattleActionType) == BATTLE_ACTION_ABILITY) {
             action = D_801CA718[D_801EB726[slot - BATTLE_PARTY_SLOT_COUNT][0] * BATTLE_KIND_STRIDE];
-            if (action & 0x10) {
-                if (!(action & 0x80)) {
+            if (action & ABILITY_TARGET_ALL) {
+                if (!(action & ABILITY_TARGET_BOTH_SIDES)) {
                     if (D_801463CB >= BATTLE_PARTY_SLOT_COUNT) {
                         g_BattleTargetSelector = 0x80;
                     } else {
@@ -58,7 +58,7 @@ MATCH u8 func_800A9304(u8 slot) {
                 }
                 return true;
             }
-            if (!(action & 0x40)) {
+            if (!(action & ABILITY_TARGET_SELECT)) {
                 (*(u8*)&g_BattleTargetSelector) = slot;
                 return true;
             }

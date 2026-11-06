@@ -29,7 +29,7 @@ MATCH void func_801E414C(void) {
             if ((action_type == BATTLE_ACTION_ABILITY) &&
                 ((FIELD(u16, &D_801CA71C, g_BattleActionId * 0x14) & 0x800) != 0) &&
                 ((func_801E4368() & BYTE_MASK) != 0) &&
-                ((FIELD(u8, &D_801CA718, g_BattleActionId * 0x14) & 0x10) == 0)) {
+                ((FIELD(u8, &D_801CA718, g_BattleActionId * 0x14) & ABILITY_TARGET_ALL) == 0)) {
                 g_BattleState |= BATTLE_STATE_REPRISAL_PENDING;
             }
         }

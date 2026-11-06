@@ -55,7 +55,8 @@ MATCH void func_801E3C14(void) {
             !(Item_GetFlags(LOHU(g_BattleActionId) >> 8, LOHU(g_BattleActionId) & BYTE_MASK) & 4)) {
             func_801E2314(4);
         }
-        if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY && !(D_801CA718[g_BattleActionId][0] & 4)) {
+        if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY &&
+            !(D_801CA718[g_BattleActionId][0] & ABILITY_TARGET_NO_HIT_REACT)) {
             func_801E2314(4);
         }
     }
