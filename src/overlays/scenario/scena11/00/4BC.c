@@ -1,4 +1,5 @@
 #include "scena11_00.h"
+#include "area/map.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -201,7 +202,7 @@ MATCH void func_801FAA24(void) {
 }
 
 MATCH s32 func_801FAA74(s32 arg0) {
-    if (g_GameAreaId == 0x79) {
+    if (g_GameAreaId == AREA_ID_STEEL_BEACH_MAP) {
         if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
             if (arg0 <= 0x160000) {
                 if (((g_BattlePartyBattlers[0].facing - 6) < 2U) || (g_BattlePartyBattlers[0].facing == 0)) {

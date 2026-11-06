@@ -1,4 +1,5 @@
 #include "scena02_00.h"
+#include "area/map.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -26,7 +27,7 @@ MATCH void func_801F7A60(void) {
 }
 
 MATCH void func_801F7A9C(void) {
-    if ((SYS_TestFlag(g_SceneFlags, 0x3F) == 0) && (g_GameAreaId == 0x1A)) {
+    if ((SYS_TestFlag(g_SceneFlags, 0x3F) == 0) && (g_GameAreaId == AREA_ID_MCNEIL_MANOR_COURTYARD)) {
         if (SYS_TestFlag(g_SceneFlags, 0x28) != 0) {
             func_801FC044(0);
         }

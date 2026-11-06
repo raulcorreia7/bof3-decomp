@@ -1,4 +1,5 @@
 #include "scena08_00.h"
+#include "area/map.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -275,7 +276,7 @@ MATCH void func_801F95D4(void) {
 
 MATCH void func_801F9618(void) {
     func_801F9688();
-    if (g_GameAreaId != 2) {
+    if (g_GameAreaId != AREA_ID_DAUNA_MINE_WORKER) {
         g_Task->header.mode += 1;
     }
 }
@@ -457,7 +458,7 @@ MATCH void func_801FE12C(void) {
 }
 
 MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
-    if ((g_GameAreaId == 1) && (arg0 == 0x338000) && (((arg1 >> 0x10) - 0x27) < 2U)) {
+    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_ADULT) && (arg0 == 0x338000) && (((arg1 >> 0x10) - 0x27) < 2U)) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             Game_SetScriptActive();
             D_80146874 = 4;
@@ -474,7 +475,7 @@ MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
         goto block_7;
     }
 block_7:
-    if ((g_GameAreaId == 0x46) && (arg0 == 0x388000) && (((arg1 >> 0x10) - 0x2E) < 4U)) {
+    if ((g_GameAreaId == AREA_ID_MOUNT_LEVETT) && (arg0 == 0x388000) && (((arg1 >> 0x10) - 0x2E) < 4U)) {
         SYS_SetFlag(g_SceneFlags, 0x16U);
     }
     return 0;

@@ -1,4 +1,5 @@
 #include "scena04_00.h"
+#include "area/map.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -247,7 +248,7 @@ MATCH s32 func_801F9DAC(void) {
 }
 
 MATCH s32 func_801F9DB4(void) {
-    if (g_GameAreaId == 40) {
+    if (g_GameAreaId == AREA_ID_MOMO_TOWER_FIRST_FLOOR) {
         return func_801F9DF4();
     }
     return 0;
