@@ -92,6 +92,15 @@ enum {
     SAVE_STATUS_CREATED       = 10, /* a new file was saved */
 };
 
+/* D_801E60EC: the save message shown during the timed wait, named for the step it precedes. */
+enum {
+    SAVE_WAIT_OVERWRITE = 20,
+    SAVE_WAIT_FORMAT    = 21,
+    SAVE_WAIT_CREATE    = 22,
+    SAVE_WAIT_PROBE     = 23,
+    SAVE_WAIT_SCAN      = 25,
+};
+
 extern u8          g_SaveBuffer[];
 extern u8          D_80143BB4;
 extern u16         g_GameAreaId;
