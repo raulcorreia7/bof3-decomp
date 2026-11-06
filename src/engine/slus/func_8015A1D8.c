@@ -16,5 +16,5 @@ MATCH void func_8015A1D8(void) {
     /* The retail call leaves both arguments unconverted; the shared u16 view of
      * Menu_DrawCursorSprite masks each one, so the call goes through the 32-bit view. */
     ((void (*)(s32, s32, s32))Menu_DrawCursorSprite)(
-        ((s16)panel->x >> 4) + 4, ((s16)panel->y >> 4) + D_8017F962[index].row_offset + row_offset, 0);
+        ((s16)panel->pos.x >> 4) + 4, ((s16)panel->pos.y >> 4) + D_8017F962[index].row_offset + row_offset, 0);
 }

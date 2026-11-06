@@ -22,8 +22,8 @@ MATCH s32 func_801B6470(void) {
                 if (world_id == D_801CD24C[i].area_id) {
                     g_GameContextKind = 4;
                     g_GameContextSeed = D_801CD24C[i].map_id;
-                    g_GameEntryPosX   = D_801CD24C[i].x << 16;
-                    g_GameEntryPosY   = D_801CD24C[i].y << 16;
+                    g_GameEntryPosX   = D_801CD24C[i].pos.x << 16;
+                    g_GameEntryPosY   = D_801CD24C[i].pos.y << 16;
                     return 1;
                 }
             }

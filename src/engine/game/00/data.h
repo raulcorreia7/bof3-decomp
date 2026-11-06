@@ -21,8 +21,8 @@
 typedef struct WorldMapDestination {
     u16 area_id;
     u16 map_id;
-    u16 x;
-    u16 y;
+
+    Vec2U16 pos;
 } WorldMapDestination;
 
 /* One of five source slots; func_801C0F9C reads the four bytes. */

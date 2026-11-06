@@ -26,13 +26,13 @@ MATCH void func_801D28D0(void) {
     D_80148435         = 0;
     if (D_8014842F == 0) {
         D_80148624     = 1;
-        panel_x        = panel->x;
+        panel_x        = panel->pos.x;
         initial_cursor = panel->group_cursor;
         initial_first  = panel->group_first;
         D_80148498     = 0;
         D_80148628     = panel_x + 7;
         row_offset     = ((initial_cursor - initial_first) * 0xD) + 0x1B;
-        D_8014862A     = panel->y + row_offset;
+        D_8014862A     = panel->pos.y + row_offset;
     }
     buttons = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (buttons & PADLleft) {
@@ -97,8 +97,8 @@ MATCH void func_801D28D0(void) {
         if ((g_InputPressed & D_80145AC2) != 0) {
             selected_item      = (g_ShopItemId = D_801C893C[panel->group][panel->group_cursor]);
             g_ShopItemCategory = panel->group;
-            D_80148628         = panel->x + 7;
-            D_8014862A = panel->y + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
+            D_80148628         = panel->pos.x + 7;
+            D_8014862A = panel->pos.y + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
             SND_PlayCue(EMI_CUE_ID(1, 3));
             if (func_801AF494(panel->kind, 0, g_ShopItemCategory, g_ShopItemId) & BYTE_MASK) {
                 SND_PlayCue(EMI_CUE_ID(1, 3));

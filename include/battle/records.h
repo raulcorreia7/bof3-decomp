@@ -119,17 +119,15 @@ ASSERT_OFFSET(BattleAction, unk_08, 0x08);
  * The id is the index of one 0x88-byte enemy record (Battle_ArmEnemySlot reads
  * &D_800E405E + id * 0x88), so +0x01 is that index and 0xFF means none. */
 typedef struct EncounterEnemy {
-    u8  active; /* 0x00 - set by the game overlay, cleared when the candidate is out of reach */
-    u8  id;     /* 0x01 - the enemy-record index; 0xFF means none */
-    u8  pad_02[2];
-    s32 x; /* 0x04 - the encounter x, 16.16 */
-    s32 y; /* 0x08 - the encounter y, 16.16 */
+    u8      active; /* 0x00 - set by the game overlay, cleared when the candidate is out of reach */
+    u8      id;     /* 0x01 - the enemy-record index; 0xFF means none */
+    u8      pad_02[2];
+    Vec2S32 pos; /* 0x04 encounter position, 16.16 */
 } EncounterEnemy;
 
 ASSERT_SIZE(EncounterEnemy, 0x0C);
 ASSERT_OFFSET(EncounterEnemy, id, 0x01);
-ASSERT_OFFSET(EncounterEnemy, x, 0x04);
-ASSERT_OFFSET(EncounterEnemy, y, 0x08);
+ASSERT_OFFSET(EncounterEnemy, pos, 0x04);
 
 /* One entry of the panel-owner table at 0x801ED9B0: the owner index, a second
  * byte, and the panel id. */

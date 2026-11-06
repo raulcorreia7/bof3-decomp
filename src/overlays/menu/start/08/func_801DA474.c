@@ -34,9 +34,9 @@ NON_MATCHING void func_801DA474(void) {
     g_MenuPanelTasks[19].unk_0A = FIELD(s32, &D_801EC54C, tmp1);
     if ((s8)D_8014865D != 0x7F) {
         tmp0                        = ((s8)D_8014865A * 8) + ((s8)D_8014865D * 0x10);
-        g_MenuPanelTasks[20].x      = FIELD(u16, &D_801EC548, tmp0);
+        g_MenuPanelTasks[20].pos.x  = FIELD(u16, &D_801EC548, tmp0);
         g_MenuPanelTasks[20].active = 1;
-        g_MenuPanelTasks[20].y      = FIELD(u16, &D_801EC54A, tmp0);
+        g_MenuPanelTasks[20].pos.y  = FIELD(u16, &D_801EC54A, tmp0);
         g_MenuPanelTasks[20].unk_0B = 0;
         g_MenuPanelTasks[20].unk_0A = FIELD(s32, &D_801EC54C, tmp0);
     }

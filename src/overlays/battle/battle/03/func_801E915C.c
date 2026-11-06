@@ -5,12 +5,12 @@ MATCH void func_801E915C(void) {
     s16            value;
 
     panel = g_MenuCurrentPanel;
-    value = panel->y;
+    value = panel->pos.y;
     if (value < 0xC9) {
-        panel->y = 200;
+        panel->pos.y = 200;
         panel->state += 1;
     } else {
-        panel->y = (value - 4);
+        panel->pos.y = (value - 4);
     }
-    func_801D750C((s16)g_MenuCurrentPanel->x, (s16)g_MenuCurrentPanel->y);
+    func_801D750C((s16)g_MenuCurrentPanel->pos.x, (s16)g_MenuCurrentPanel->pos.y);
 }

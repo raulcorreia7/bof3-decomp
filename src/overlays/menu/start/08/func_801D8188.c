@@ -17,8 +17,8 @@ MATCH void func_801D8188(void) {
     g_MenuPanelTasks[11].unk_10 = 0x31;
     toggle                      = &D_8014865B;
     sel                         = 1 - *toggle;
-    g_MenuPanelTasks[21].x      = bar + (sel << 5) + 0xDE;
-    g_MenuPanelTasks[21].y      = g_MenuPanelTasks[11].y + 5;
+    g_MenuPanelTasks[21].pos.x  = bar + (sel << 5) + 0xDE;
+    g_MenuPanelTasks[21].pos.y  = g_MenuPanelTasks[11].pos.y + 5;
     key                         = &g_InputPressed;
     slot -= 0xB4;
     if (*key & (PADLright | PADLleft)) {

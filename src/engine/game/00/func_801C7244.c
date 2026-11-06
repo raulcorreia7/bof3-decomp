@@ -25,7 +25,7 @@ MATCH void func_801C7244(s32 mode) {
     do {
         if (entry->active != 0) {
             count += 1;
-            D_801CD954 += Area_SampleHeight(entry->x, entry->y);
+            D_801CD954 += Area_SampleHeight(entry->pos.x, entry->pos.y);
         }
         entry++;
         index += 1;

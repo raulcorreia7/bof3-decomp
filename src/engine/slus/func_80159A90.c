@@ -14,8 +14,8 @@ MATCH void func_80159A90(void) {
     mode  = &D_801490CE;
     panel = g_MenuCurrentPanel;
 
-    x        = *(u16*)((u8*)&D_8017F944 + (VOL(u8, *mode) * 4));
-    panel->x = ((x + 35) << 4);
+    x            = *(u16*)((u8*)&D_8017F944 + (VOL(u8, *mode) * 4));
+    panel->pos.x = ((x + 35) << 4);
 
     y                          = *(u16*)((u8*)&D_8017F946 + (VOL(u8, *mode) * 4));
     *(u16*)((u8*)panel + 0x14) = 0xE3;
@@ -23,7 +23,7 @@ MATCH void func_80159A90(void) {
     *(u16*)((u8*)panel + 0x10) = 0;
     *(u16*)((u8*)panel + 0x12) = 0;
     *(u8*)((u8*)panel + 0xA)   = 0x47;
-    panel->y                   = ((y + 16) << 4);
+    panel->pos.y               = ((y + 16) << 4);
 
     panel                    = g_MenuCurrentPanel;
     *(u8*)((u8*)panel + 0xB) = 0x20;
