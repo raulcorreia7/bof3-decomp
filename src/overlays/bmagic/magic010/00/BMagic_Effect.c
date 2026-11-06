@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC14(void) {
-    BattleResultRings table = D_801EEC04;
+    BattleHandlerTable4 table = D_801EEC04;
 
     table.handlers[g_Task->header.mode]();
 }

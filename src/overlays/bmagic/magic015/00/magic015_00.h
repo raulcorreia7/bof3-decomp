@@ -5,10 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleResultRings D_801EEC04;
+extern BattleHandlerTable4 D_801EEC04;
 
-extern BattleResultRings   D_801EEC14;
-extern BattleResultRings   D_801EEC24;
+extern BattleHandlerTable4 D_801EEC14;
+extern BattleHandlerTable4 D_801EEC24;
 extern BattleHandlerTable5 D_801EEC54;
 
 #endif

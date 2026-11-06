@@ -134,7 +134,7 @@ MATCH void func_801EF5FC(void) {
 INCLUDE_ASM(func_801EF69C);
 
 MATCH void func_801EF78C(void) {
-    BattleResultRings table;
+    BattleHandlerTable4 table;
 
     table = D_801EEC40;
     SYS_DISPATCH_TASK(table.handlers, 1, g_Task);

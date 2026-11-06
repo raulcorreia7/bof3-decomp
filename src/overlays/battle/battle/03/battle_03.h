@@ -308,7 +308,7 @@ extern BattleHandlerTable3       D_801D0FE0;
 /* D_801D0FEC */
 extern BattlePanelTaskForwarders g_BattlePanelTaskForwarders;
 extern BattleHandlerTable3       D_801D0FF8;
-extern BattleResultRings         D_801D1004;
+extern BattleHandlerTable4       D_801D1004;
 extern Callback                  D_801EABB8[];
 extern s32                       D_801EABCC;
 extern Callback                  D_801EABD8[];

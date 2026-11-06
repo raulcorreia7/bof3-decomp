@@ -5,6 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleResultRings D_801EEC04;
+extern BattleHandlerTable4 D_801EEC04;
 
 #endif
