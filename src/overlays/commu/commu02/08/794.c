@@ -175,12 +175,12 @@ MATCH void func_801D25CC(void) {
 
 INCLUDE_ASM(func_801D269C);
 
-MATCH s32 func_801D2750(s32 arg0) {
+MATCH s32 func_801D2750(s32 limit) {
     s32 roll;
 
     do {
         roll = rand() & 0xF;
-    } while (roll == 0 || roll >= ((arg0 & 0xFF) + 1));
+    } while (roll == 0 || roll >= ((limit & 0xFF) + 1));
     return roll;
 }
 
@@ -413,13 +413,13 @@ MATCH void func_801D5A48(void) {
 
 #include "overlays/commu/Commu_AdvanceStep.h"
 
-MATCH s32 func_801D5AD0(s32 arg0) {
+MATCH s32 func_801D5AD0(s32 limit) {
     s32 var_s1;
 
     var_s1 = rand() & 0x7F;
     ORDER_LOCK_BEGIN
     loop_1:
-        if ((var_s1 & 0xFF) >= (u32)(arg0 & 0xFF)) {
+        if ((var_s1 & 0xFF) >= (u32)(limit & 0xFF)) {
             var_s1 -= rand() & 0xF;
             goto loop_1;
         }
