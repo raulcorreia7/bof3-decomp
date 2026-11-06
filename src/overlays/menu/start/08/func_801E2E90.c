@@ -44,9 +44,8 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
 
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
-    line->x0 = (s16)(x + 63);
+    setXY0(line, (s16)(x + 63), (s16)(y + 1));
     line->x1 = (s16)(x + 63);
-    line->y0 = (s16)(y + 1);
     line->y1 = (s16)(y + 14);
     setRGB0(line, 128, 128, 128);
     GFX_AddPrim(1U, 0x10U);

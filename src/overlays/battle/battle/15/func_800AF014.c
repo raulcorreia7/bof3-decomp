@@ -9,9 +9,8 @@ MATCH void func_800AF014(void) {
         setXY4(prim, 0, 0, 319, 0, 0, 239, 319, 239);
     } else {
         prim->x2 = 319;
-        prim->x0 = 319;
         prim->y1 = 0;
-        prim->y0 = 0;
+        setXY0(prim, 319, 0);
         prim->x3 = 0;
         prim->x1 = 0;
         prim->y3 = 239;

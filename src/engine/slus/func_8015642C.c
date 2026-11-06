@@ -52,11 +52,10 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
                 p->y2 = D_1F800034[1];
                 p->x3 = D_1F800034[2];
                 p->y3 = D_1F800034[3];
-                p->u0 = g_SpriteCellLeftU[index];
+                setUV0(p, g_SpriteCellLeftU[index], g_SpriteCellTopV[off + j]);
                 p->u2 = g_SpriteCellLeftU[index];
                 p->u1 = g_SpriteCellRightU[index];
                 p->u3 = g_SpriteCellRightU[index];
-                p->v0 = g_SpriteCellTopV[off + j];
                 p->v1 = g_SpriteCellTopV[off + j];
                 setRGB0(p, 0x80, 0x80, 0x80);
                 p->v3    = g_SpriteCellBottomV[off + j];

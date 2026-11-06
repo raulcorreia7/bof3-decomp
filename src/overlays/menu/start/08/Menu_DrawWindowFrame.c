@@ -60,11 +60,10 @@ NON_MATCHING void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height) {
     GFX_AddPrim(1U, 0xCU);
     val7 = (SPRT*)g_GfxPrimCursor;
     SetSprt(val7);
-    val7->x0 = val3;
-    val3     = (s16)stack_30;
+    setXY0(val7, val3, (s16)(val5 + ((val3 - 1) * 8)));
+    val3 = (s16)stack_30;
     setUV0(val7, 0, 0);
     setWH(val7, val2, 8);
-    val7->y0   = (s16)(val5 + ((val3 - 1) * 8));
     val7->clut = GetClut(176, 481);
     setRGB0(val7, 128, 128, 128);
     GFX_AddPrim(1U, 0x14U);
@@ -107,12 +106,11 @@ NON_MATCHING void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height) {
     GFX_AddPrim(1U, 0xCU);
     val7 = (SPRT*)g_GfxPrimCursor;
     SetSprt(val7);
-    val7->x0 = (s16)(val4 + 8);
+    setXY0(val7, (s16)(val4 + 8), (s16)(val5 + 8));
     val8 -= 2;
     val8 *= 8;
     val3 -= 2;
     val3 *= 8;
-    val7->y0 = (s16)(val5 + 8);
     setUV0(val7, 0, 0);
     setWH(val7, (s16)val8, val3);
     val7->clut = GetClut(176, 481);

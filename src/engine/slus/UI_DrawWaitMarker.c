@@ -14,9 +14,8 @@ MATCH void UI_DrawWaitMarker(s16 x, s16 y) {
         prim->clut = GetClut(192, 480);
         setRGB0(prim, 128, 128, 128);
         setWH(prim, 8, 8);
-        prim->u0 = 208;
         setXY0(prim, x, y);
-        prim->v0 = 248;
+        setUV0(prim, 208, 248);
         SetSemiTrans(prim, 1);
         GFX_AddPrim(1, 0x14);
     }

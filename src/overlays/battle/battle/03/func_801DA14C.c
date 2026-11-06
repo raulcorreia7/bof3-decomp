@@ -37,9 +37,8 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
     palette_offset &= BYTE_MASK;
     palette_offset *= 4;
     setXY4(primitive, start_x, start_y, x, start_y, start_x, y, x, y);
-    primitive->u0 = D_801EAF2C[palette_offset];
-    v_delta       = palette_index * 8;
-    primitive->v0 = (D_801EAF2D[palette_offset] - v_delta);
+    v_delta = palette_index * 8;
+    setUV0(primitive, D_801EAF2C[palette_offset], (D_801EAF2D[palette_offset] - v_delta));
     primitive->u1 = (D_801EAF2C[palette_offset] + D_801EAF2E[palette_offset]);
     primitive->v1 = (D_801EAF2D[palette_offset] - v_delta);
     primitive->u2 = D_801EAF2C[palette_offset];

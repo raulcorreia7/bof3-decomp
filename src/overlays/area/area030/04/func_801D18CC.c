@@ -9,8 +9,7 @@ MATCH void func_801D18CC(s16 sprite_x, s16 sprite_y, u8 icon_index) {
     SetSprt8(primitive);
     setRGB0(primitive, 128, 128, 128);
     primitive->clut = 0x7A40;
-    primitive->u0   = 184;
     setXY0(primitive, sprite_x, sprite_y);
-    primitive->v0 = 72;
+    setUV0(primitive, 184, 72);
     GFX_AddPrim(icon_index, 0x10);
 }

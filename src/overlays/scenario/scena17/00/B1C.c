@@ -525,10 +525,9 @@ MATCH void func_801F9160(s16 x, s16 y) {
     setRGB0(prim, 0x80, 0x80, 0x80);
     prim->clut = 0x7B85;
     prim->v0   = 0x40;
-    prim->w    = 0x58;
     setXY0(prim, x, y);
     prim->u0 = 0;
-    prim->h  = 0x12;
+    setWH(prim, 0x58, 0x12);
     GFX_AddPrim(1, 0x14);
 }
 

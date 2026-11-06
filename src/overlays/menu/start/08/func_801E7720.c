@@ -9,9 +9,8 @@ MATCH void func_801E7720(s16 tile_x, s8 tile_kind) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    tile->w = 320;
     setXY0(tile, 0, tile_x);
-    tile->h  = 13;
+    setWH(tile, 320, 13);
     tile->b0 = tile_kind;
     tile->g0 = tile_kind;
     tile->r0 = tile_kind;

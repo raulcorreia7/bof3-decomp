@@ -293,9 +293,8 @@ MATCH void func_801F8804(u8 shade) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    tile->w = 320;
     setXY0(tile, 0, 0);
-    tile->h = 240;
+    setWH(tile, 320, 240);
     setRGB0(tile, shade, shade, shade);
     GFX_AddPrim(1, 0x10);
 }
