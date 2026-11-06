@@ -28,7 +28,7 @@ MATCH void func_801B016C(void) {
     if (g_GameRequestFlags & 0x20) {
         g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
         g_Task->header.mode = 0xC;
-    } else if (LOHU(g_GameAreaId) == 0xBD) {
+    } else if (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) {
         g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
         g_Task->header.mode = 0xD;
     } else {
