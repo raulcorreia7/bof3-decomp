@@ -41,8 +41,8 @@ NON_MATCHING void func_80167428(void) {
         }
         g_AreaScrollTargetX = tmp3;
         g_AreaScrollTargetY = FIELD(s32, g_GameState, 0x38u);
-        val3 = MAX(val3, val1);
-        tmp1 = ((u32)val3 >> 0xD) & BYTE_MASK;
+        val3                = MAX(val3, val1);
+        tmp1                = ((u32)val3 >> 0xD) & BYTE_MASK;
         if (tmp1 != 0) {
             g_AreaCameraHeightStep = (u16)((s16)(FIELD(u16, g_GameState, 0x3Eu) - g_AreaCameraHeight) / tmp1);
         } else {

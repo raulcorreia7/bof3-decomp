@@ -6,7 +6,7 @@ MATCH void func_801F01F4(void) {
     u8 flag;
 
     flag  = 0;
-    index = rand() & 0x3F;
+    index = RANDOM_MASK(0x3F);
     if (index >= 60) {
         index -= 0x3C;
     }

@@ -10,11 +10,11 @@ MATCH u32 func_801DC894(s16 damage, u8 attacker, u8 target) {
         return damage;
     }
     if (BATTLER_IS_PLAYER(attacker)) {
-        if (HAS_STATUS(g_BattlePartyBattlers[attacker], STATUS_BLIND) && (rand() & 2)) {
+        if (HAS_STATUS(g_BattlePartyBattlers[attacker], STATUS_BLIND) && RANDOM_MASK(2)) {
             ENEMY_COMBATANT(target).turn.target_flags &= ~0x10;
             return 0;
         }
-    } else if ((ENEMY_COMBATANT(attacker).status & STATUS_BLIND) && (rand() & 2)) {
+    } else if ((ENEMY_COMBATANT(attacker).status & STATUS_BLIND) && RANDOM_MASK(2)) {
         ENEMY_COMBATANT(target).turn.target_flags &= ~0x10;
         return 0;
     }

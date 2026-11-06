@@ -13,7 +13,7 @@ MATCH u32 Battle_RollBaseDamage(u8 attacker, u8 target, u8 skip_reduction) {
             damage = base;
         if (damage < 0)
             damage = 0;
-        damage += rand() & 1;
+        damage += RANDOM_MASK(1);
     } else if (target < PARTY_SLOT_COUNT) {
         s32 base = D_801EC30C;
 
@@ -32,7 +32,7 @@ MATCH u32 Battle_RollBaseDamage(u8 attacker, u8 target, u8 skip_reduction) {
         damage += (ENEMY_COMBATANT(attacker).power << 8) * (((rand() % 2) + 2) << 8) /
                   (s_BattleDamageBandDivisors[band & BYTE_MASK] << 8);
         damage >>= 8;
-        damage += rand() & 1;
+        damage += RANDOM_MASK(1);
     } else {
         s32 base = D_801EC30C;
 
@@ -42,7 +42,7 @@ MATCH u32 Battle_RollBaseDamage(u8 attacker, u8 target, u8 skip_reduction) {
             damage = base;
         if (damage < 0)
             damage = 0;
-        damage += rand() & 1;
+        damage += RANDOM_MASK(1);
     }
     return (s16)(func_801DCD50(attacker, target, damage));
 }

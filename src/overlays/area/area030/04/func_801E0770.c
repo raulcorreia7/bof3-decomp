@@ -40,7 +40,7 @@ MATCH s32 func_801E0770(void) {
     d      = work->y_38.pos_y;
     anchor = g_ActorSlots[0].y.fixed;
     d      = d - anchor;
-    d = ABS(d);
+    d      = ABS(d);
     if (d > limit) {
         return result;
     }

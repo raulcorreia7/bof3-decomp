@@ -32,7 +32,7 @@ have_flags:
         /* no suppression flag: keep the damage value */
         goto after_enemy;
     }
-    if ((rand() & 2u) == 0u) {
+    if (RANDOM_MASK(2u) == 0u) {
         /* random pass: keep the damage value */
         goto after_enemy;
     }

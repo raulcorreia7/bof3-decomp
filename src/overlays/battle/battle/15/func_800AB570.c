@@ -13,7 +13,7 @@ MATCH void func_800AB570(s32 battler_index) {
     if ((rand() % 20) < (s8)value && g_BattleLivingPartyCount != 1) {
         result = func_800AB68C(index);
     } else {
-        result = Battle_FindSelectableSlotForward((rand() & 7) + 3);
+        result = Battle_FindSelectableSlotForward(RANDOM_MASK(7) + 3);
     }
     g_BattleTargetSelector                         = result;
     g_BattlePartyBattlers[index].turn.command.type = BATTLE_COMMAND_ATTACK;

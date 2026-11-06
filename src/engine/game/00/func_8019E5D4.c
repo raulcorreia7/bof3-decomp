@@ -23,7 +23,7 @@ MATCH void func_8019E5D4(void) {
         record->vz      = 0;
         record->pos.y.fixed += value & HALF_MASK;
     }
-    value = rand() & 3;
+    value = RANDOM_MASK(3);
 
     if (value >= 0) {
         sel = value;

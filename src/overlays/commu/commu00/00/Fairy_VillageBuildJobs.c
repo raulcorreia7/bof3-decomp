@@ -36,7 +36,7 @@ MATCH void Fairy_VillageBuildJobs(void) {
             if (g_GameAreaId >= 182) {
                 label = 0xCD;
             } else {
-                variant = rand() & 0x7;
+                variant = RANDOM_MASK(0x7);
                 if (variant >= 6) {
                     variant -= 5;
                 }
@@ -51,7 +51,7 @@ MATCH void Fairy_VillageBuildJobs(void) {
             if (scene == 175 || scene == 178 || scene == 181 || scene == 185) {
                 label = 0xCE;
             } else {
-                variant = rand() & 0x7;
+                variant = RANDOM_MASK(0x7);
                 if (variant >= 6) {
                     variant -= 5;
                 }

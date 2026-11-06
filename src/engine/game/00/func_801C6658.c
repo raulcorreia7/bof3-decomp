@@ -54,7 +54,7 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
             tmp    = cur_a;
         } while (sel != two);
     }
-    flip = rand() & 1;
+    flip = RANDOM_MASK(1);
     sel  = 0;
     sub  = table_slot & BYTE_MASK;
     off  = sub * 8;

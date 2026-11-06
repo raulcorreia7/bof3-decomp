@@ -88,8 +88,8 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
         }
         SP_REF(void*, 0x0) = 1;
         val1               = (sp[0] + sp[1]) - (sp[2] + sp[3]);
-        val1 = ABS(val1);
-        val3 = val1 << 0x14;
+        val1               = ABS(val1);
+        val3               = val1 << 0x14;
         goto block_23; /* retail branch */
     }
     tmp11 = FIELD(u8, tmp23, 0x3u) + (*(s8*)(tmp22)*D_80149340);

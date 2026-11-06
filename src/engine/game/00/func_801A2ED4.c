@@ -44,7 +44,7 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
             dx -= target_x;
             dx = ABS(dx);
             dy -= target_y;
-            dy = ABS(dy);
+            dy   = ABS(dy);
             dist = (dx + dy);
             if ((route_step & BYTE_MASK) != 0u) {
                 if (entity->unk_88 < dist) {

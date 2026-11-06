@@ -36,15 +36,15 @@ NON_MATCHING s32 func_801BC760(void) {
                 g_Task->unk_06 = 0;
             }
         } else if ((u8)g_PartySize >= 3U) {
-            da = g_Task->pos.x.fixed - goal_x;
-            da = ABS(da);
-            db = g_Task->pos.y.fixed - goal_y;
-            db = ABS(db);
+            da   = g_Task->pos.x.fixed - goal_x;
+            da   = ABS(da);
+            db   = g_Task->pos.y.fixed - goal_y;
+            db   = ABS(db);
             dsum = da + db;
             dc   = (D_80146144 + (D_8014611C * D_80146119)) - goal_x;
-            dc = ABS(dc);
-            dd = (D_80146148 + (D_80146120 * D_80146119)) - goal_y;
-            dd = ABS(dd);
+            dc   = ABS(dc);
+            dd   = (D_80146148 + (D_80146120 * D_80146119)) - goal_y;
+            dd   = ABS(dd);
             if ((dc + dd) < dsum) {
                 g_Task->unk_06 = 2;
             } else {
@@ -97,10 +97,10 @@ NON_MATCHING s32 func_801BC760(void) {
     func_801BD290(near_a, near_b, (s8*)g_Task + 8);
     result = func_801BC4D0();
     if ((result & BYTE_MASK) != 1) {
-        dx = SP_REF(s32, 0x8) - near_a;
-        dx = ABS(dx);
-        dy = SP_REF(s32, 0xC) - near_b;
-        dy = ABS(dy);
+        dx     = SP_REF(s32, 0x8) - near_a;
+        dx     = ABS(dx);
+        dy     = SP_REF(s32, 0xC) - near_b;
+        dy     = ABS(dy);
         goal_x = g_Task->pos.x.fixed - near_a;
         goal_x = ABS(goal_x);
         goal_y = g_Task->pos.y.fixed - near_b;

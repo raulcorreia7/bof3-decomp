@@ -13,7 +13,7 @@ MATCH void Fairy_JoinVillage(void) {
     u8  one;
     u32 count;
 
-    index = rand() & 0x3F;
+    index = RANDOM_MASK(0x3F);
     if (index >= 60) {
         index -= 60;
     }

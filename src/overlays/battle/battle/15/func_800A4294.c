@@ -20,7 +20,7 @@ MATCH s16 func_800A4294(s32 input_kind) {
     if ((kind_mask & 0x1Fu) != 0u) {
         mod = func_800A2AE0((*(u8*)&g_BattleTarget), element_mask);
     }
-    mod     = (((base / input_kind) * D_800B498C[rand() & 7]) * mod) / 10000;
+    mod     = (((base / input_kind) * D_800B498C[RANDOM_MASK(7)]) * mod) / 10000;
     battler = (*(u8*)&g_BattleTarget);
     base    = BATTLER_IS_PLAYER(battler);
     if (base) {

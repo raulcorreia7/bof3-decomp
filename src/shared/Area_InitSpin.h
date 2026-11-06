@@ -17,9 +17,9 @@ MATCH void Area_InitSpin(void* spin) {
     work->origin_y = scratch->pos.y.fixed;
     work->origin_z = scratch->pos.z.fixed;
 
-    rot[0] = rand() & 0xFFF;
+    rot[0] = RANDOM_MASK(0xFFF);
     rot[1] = AREA_SPIN_PITCH;
-    rot[2] = rand() & 0xFFF;
+    rot[2] = RANDOM_MASK(0xFFF);
 
     work->vertex_a.vx = rcos(AREA_SPIN_RADIUS);
     work->vertex_a.vy = rsin(AREA_SPIN_RADIUS);
@@ -36,7 +36,7 @@ MATCH void Area_InitSpin(void* spin) {
     ApplyMatrixSV(&matrix, &work->vertex_a, &work->vertex_a);
     ApplyMatrixSV(&matrix, &work->vertex_b, &work->vertex_b);
 
-    work->scale      = (rand() & AREA_SPIN_SCALE_MASK) + AREA_SPIN_SCALE_BASE;
+    work->scale      = RANDOM_MASK(AREA_SPIN_SCALE_MASK) + AREA_SPIN_SCALE_BASE;
     work->angle_lo   = 0;
     work->angle_hi   = 0;
     work->spin_angle = 0;

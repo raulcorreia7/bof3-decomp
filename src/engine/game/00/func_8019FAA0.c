@@ -68,7 +68,7 @@ NON_MATCHING void func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b
     }
 
     if ((g_SceneState.flags_01 & SCENE_STATE_CHAPTER_ADVANCE) != 0) {
-        counter                        = g_SceneState.scenario_id;
+        counter                  = g_SceneState.scenario_id;
         g_SceneState.scenario_id = (u8)(counter + 1);
         if ((s8)(counter + 1) == 16) {
             g_SceneState.scenario_id = (u8)(counter + 2);

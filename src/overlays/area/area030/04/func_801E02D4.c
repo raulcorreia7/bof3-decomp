@@ -35,5 +35,5 @@ MATCH s32 func_801E02D4(u8 current_byte, u8 target_byte) {
     }
 
     masked_flag = flag & BYTE_MASK;
-    return (rand() & 0xF) < masked_flag;
+    return RANDOM_MASK(0xF) < masked_flag;
 }

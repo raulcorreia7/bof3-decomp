@@ -21,6 +21,9 @@
 #define MIN(a, b)         (((a) < (b)) ? (a) : (b))
 #define MAX(a, b)         (((a) > (b)) ? (a) : (b))
 
+/* A random value below the next power of two: the mask must be 2^n - 1. */
+#define RANDOM_MASK(mask) (rand() & (mask))
+
 /* LO/HI name the little-endian half or byte of the object: the expansion is
  * the same cast-and-dereference expression the retail code compiles. The
  * argument stays addressable, so these are lvalues. */

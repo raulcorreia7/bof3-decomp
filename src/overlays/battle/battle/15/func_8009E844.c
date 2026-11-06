@@ -15,7 +15,7 @@ MATCH void func_8009E844(void) {
     battler = LOBU(*slot);
     if (BATTLER_IS_PLAYER(battler)) {
         base = g_BattlePartyBattlers[battler].chr.status;
-        if (((rand() & 3) != 0) && ((base & 0x4000) != 0)) {
+        if ((RANDOM_MASK(3) != 0) && ((base & 0x4000) != 0)) {
             battler = LOBU(*slot);
             if (BATTLER_IS_PLAYER(battler)) {
                 g_BattleTargetRecord->hp_change = (-D_80145F20[battler][0] >> 2);

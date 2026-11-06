@@ -9,18 +9,18 @@ MATCH void func_801DEAE0(void) {
     mode = D_801463D0;
     switch (mode) {
         case 1u:
-            x = local_18[rand() & 1u];
+            x = local_18[RANDOM_MASK(1u)];
             break;
         case 0u:
-            x = local_18[4u + (rand() & 1u)];
+            x = local_18[4u + RANDOM_MASK(1u)];
             break;
         case 2u:
         case 3u:
         case 4u:
-            x = local_18[2u + (rand() & 1u)];
+            x = local_18[2u + RANDOM_MASK(1u)];
             break;
         default:
-            x = local_18[4u + (rand() & 1u)];
+            x = local_18[4u + RANDOM_MASK(1u)];
             break;
     }
 

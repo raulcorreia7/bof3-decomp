@@ -10,13 +10,13 @@ MATCH u8 Battle_PickTarget(void) {
     state = (u16*)&g_BattleActionId;
 
     if (*state == 36) {
-        kind = g_BattleRecallAbilities[rand() & 0x1Fu];
+        kind = g_BattleRecallAbilities[RANDOM_MASK(0x1Fu)];
     } else {
         kind = 0u;
     }
 
     if ((*state == 37) || (*state == 140)) {
-        kind = g_BattleMagicShuffleAbilities[rand() & 0x1Fu];
+        kind = g_BattleMagicShuffleAbilities[RANDOM_MASK(0x1Fu)];
     }
 
     targeting_flags                                  = g_Abilities[kind].targeting_flags;

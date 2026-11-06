@@ -16,7 +16,7 @@ MATCH void func_801BD83C(void) {
     if (mode == 3) {
         value = COORD_INT(g_Task->pos.z);
         diff  = value - (s16)screen_y;
-        diff = ABS(diff);
+        diff  = ABS(diff);
         if (diff >= 0x81) {
             result = (s16)screen_y < value;
         } else {

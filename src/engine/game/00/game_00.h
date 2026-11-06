@@ -1576,7 +1576,7 @@ static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 fla
 static inline void Game_RollAreaSetup(s32 actor_slot) {
     u32 choice;
 
-    choice = (u32)(rand() & 0xF);
+    choice = (u32)RANDOM_MASK(0xF);
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
         func_8015BAC4((u8)((g_BattlePartyBattlers[0].facing ^ 4) & 7));
     }

@@ -21,7 +21,7 @@
 #define AREA_SPIN_PRIM_ORDER 2
 
 #define AREA_SPIN_RADIUS     16
-#define AREA_SPIN_PITCH      ((rand() & 0x7FF) - 0x400)
+#define AREA_SPIN_PITCH      (RANDOM_MASK(0x7FF) - 0x400)
 #define AREA_SPIN_SCALE_MASK 0x2
 #define AREA_SPIN_SCALE_BASE 3
 #define AREA_SPIN_FADE       0x20

@@ -245,8 +245,8 @@ MATCH void func_801F2FB0(void* slot) {
 
     work            = slot;
     work->unk_00[0] = 1u;
-    work->offset_x  = ((rand() & 0xFF) - 0x80);
-    work->offset_y  = ((rand() & 0xFF) - 0x80);
+    work->offset_x  = (RANDOM_MASK(0xFF) - 0x80);
+    work->offset_y  = (RANDOM_MASK(0xFF) - 0x80);
     work->scale     = 0x280;
 }
 

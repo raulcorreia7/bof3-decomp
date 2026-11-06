@@ -48,7 +48,7 @@ MATCH u8 func_8019EEE4(void) {
         }
     }
     if (found) {
-        roll = rand() & 0xF;
+        roll = RANDOM_MASK(0xF);
         if (roll >= 0xD) {
             g_Task->unk_0B = 2;
             if (roll == 0xF) {

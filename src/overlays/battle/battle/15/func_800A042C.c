@@ -16,20 +16,21 @@ MATCH void func_800A042C(void) {
         value       = g_BattleEnemyBattlers[enemy_index].stats.power;
     }
     D_801EC30C = value;
-    switch (rand() & 3) {
-        case 0:
-            LOHU(D_801EC30C) >>= 1;
-            break;
-        case 1:
-            LOHU(D_801EC30C) = LOHU(D_801EC30C);
-            break;
-        case 2:
-            LOHU(D_801EC30C) += LOHU(D_801EC30C) >> 1;
-            break;
-        default:
-            LOHU(D_801EC30C) *= 2;
-            break;
-    }
+    switch
+        RANDOM_MASK(3) {
+            case 0:
+                LOHU(D_801EC30C) >>= 1;
+                break;
+            case 1:
+                LOHU(D_801EC30C) = LOHU(D_801EC30C);
+                break;
+            case 2:
+                LOHU(D_801EC30C) += LOHU(D_801EC30C) >> 1;
+                break;
+            default:
+                LOHU(D_801EC30C) *= 2;
+                break;
+        }
     battler_index  = g_BattleActiveBattler;
     selection_kind = g_BattleTarget;
     /* FAKE: the barrier keeps the kind materialization out of the case exits
