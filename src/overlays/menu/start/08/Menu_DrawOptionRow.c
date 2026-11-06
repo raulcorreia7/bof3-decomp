@@ -111,10 +111,9 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
     SetLineF2(line);
     tmp0     = val5 + 0x74;
     line->x1 = tmp0;
-    line->x0 = tmp0;
+    setXY0(line, tmp0, (s16)((val3 + 1) - tmp2));
     tmp2     = val4 & BYTE_MASK;
     line->y1 = (s16)(val3 + tmp2 + 9);
-    line->y0 = (s16)((val3 + 1) - tmp2);
     setRGB0(line, 128, 128, 128);
     GFX_AddPrim(1U, 0x10U);
 }

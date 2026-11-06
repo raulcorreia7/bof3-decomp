@@ -46,9 +46,8 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     VOL(s16, q3->vz)        = 0;
 
     SetPolyG4((POLY_G4*)primitive);
-    RotTransPers4((SVECTOR*)scratch, (SVECTOR*)(scratch + 1), (SVECTOR*)(scratch + 2), (SVECTOR*)(scratch + 3),
-                  (long*)(primitive + 8), (long*)(primitive + 0x10), (long*)(primitive + 0x18),
-                  (long*)(primitive + 0x20), &depth, &flag);
+    RotTransPers4(scratch, scratch + 1, scratch + 2, scratch + 3, (long*)(primitive + 8), (long*)(primitive + 0x10),
+                  (long*)(primitive + 0x18), (long*)(primitive + 0x20), &depth, &flag);
 
     vx0 = *MATCH_VOLATILE_PTR(s16, (primitive + 8));
 

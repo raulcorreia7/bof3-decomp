@@ -26,9 +26,8 @@ MATCH void func_801D195C(s16 panel_x, s16 panel_y) {
 
     primitive = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(primitive);
-    primitive->x0 = x;
     primitive->x1 = (panel_x + 105);
-    primitive->y0 = (y + 16);
+    setXY0(primitive, x, (y + 16));
     primitive->y1 = (y + 16);
     primitive->y2 = (base + 40);
     primitive->y3 = (base + 40);
