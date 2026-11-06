@@ -19,7 +19,6 @@
 /* The shared flag word the cancel path clears a bit of. */
 
 /* The shared flag byte the request path sets a bit of. */
-extern u8  D_80143FBC;
 /* The request selector and the bytes the cancel path sets. */
 /* The field mode bytes the height steps test. */
 /* The shared camera-position words the view step copies. */

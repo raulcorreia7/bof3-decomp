@@ -263,7 +263,6 @@ extern BgmTrack                  D_80181EB8[BGM_TRACK_COUNT];
 extern void*                     D_801C893C[];
 extern void*                     D_801C8950[];
 extern volatile u8               D_801CA718[][20];
-extern BattleAbilityCategory     D_801CA719[];
 /* D_801D0C04 */
 extern BattlePhases              g_BattlePhases;
 /* D_801D0C1C */
@@ -308,7 +307,7 @@ extern BattleHandlerTable3       D_801D0FE0;
 /* D_801D0FEC */
 extern BattlePanelTaskForwarders g_BattlePanelTaskForwarders;
 extern BattleHandlerTable3       D_801D0FF8;
-extern BattleResultRings         D_801D1004;
+extern BattleHandlerTable4       D_801D1004;
 extern Callback                  D_801EABB8[];
 extern s32                       D_801EABCC;
 extern Callback                  D_801EABD8[];

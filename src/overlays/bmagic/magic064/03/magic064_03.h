@@ -17,7 +17,7 @@ typedef struct BMagic064Steps {
 
 extern u8                  g_BattleActiveBattler;
 extern BMagic064Steps      D_801EEC10;
-extern BattleResultRings   D_801EEC40;
+extern BattleHandlerTable4 D_801EEC40;
 extern BattleHandlerTable3 D_801EEC50;
 extern BattleHandlerTable3 D_801EEC70;
 extern void*               D_801F28B4;

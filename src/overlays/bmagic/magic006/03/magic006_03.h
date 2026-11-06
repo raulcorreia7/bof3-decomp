@@ -10,7 +10,7 @@
 
 extern BattleHandlerTable3 D_801EEC1C;
 
-extern MagicTaskFuncs D_801EEC28;
+extern BattleHandlerTable4 D_801EEC28;
 
 void func_801EEC90(void);
 
