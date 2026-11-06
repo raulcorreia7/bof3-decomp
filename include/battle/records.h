@@ -26,7 +26,7 @@
 
 /* The enemy battler work record (stride 0x118 at 0x801EB630).
  *
- * Both battle overlays declare D_801EB630 as EnemyBattler and read the same
+ * Both battle overlays declare g_BattleEnemyBattlers as EnemyBattler and read the same
  * table, so this is one record: the union of both overlays' halves.
  *
  * The cells from +0x06 to +0x5F are the ones the slot setup (Battle_ArmEnemySlot

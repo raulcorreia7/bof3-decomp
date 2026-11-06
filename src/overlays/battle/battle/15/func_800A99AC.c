@@ -15,7 +15,8 @@ MATCH s32 func_800A99AC(void) {
     for (i = 3; i < COMBATANT_COUNT; i++) {
         u32 index = (i - 3);
 
-        if ((D_801EB630[index].flags & 1u) != 0u && (D_801EB630[index].damage_flags & 0xF0u) != 0u) {
+        if ((g_BattleEnemyBattlers[index].flags & 1u) != 0u &&
+            (g_BattleEnemyBattlers[index].damage_flags & 0xF0u) != 0u) {
             return 1;
         }
     }

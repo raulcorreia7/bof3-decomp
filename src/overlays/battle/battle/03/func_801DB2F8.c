@@ -17,10 +17,10 @@ MATCH u8 func_801DB2F8(u32 battler_index) {
     } else {
         subindex = (battler_index - 3u) & BYTE_MASK;
         offset   = subindex * 280u;
-        if ((D_801EB630[subindex].flags & 1u) == 0u) {
+        if ((g_BattleEnemyBattlers[subindex].flags & 1u) == 0u) {
             return false;
         }
-        if ((D_801EB630[subindex].status & 0x4144u) != 0u) {
+        if ((g_BattleEnemyBattlers[subindex].status & 0x4144u) != 0u) {
             return false;
         }
     }

@@ -33,7 +33,7 @@ MATCH u32 func_801DCD50(u32 unused, u8 battler_index, s32 damage_value) {
                 (damage * D_801EAFC0[g_BattlePartyBattlers[battler_index].chr.stats.resistances[RES_SLOT_HOLY]]) / 100;
         } else {
             slot   = battler_index - 3u;
-            damage = (damage * D_801EAFC0[D_801EB630[slot].stats.resistances[RES_SLOT_HOLY]]) / 100;
+            damage = (damage * D_801EAFC0[g_BattleEnemyBattlers[slot].stats.resistances[RES_SLOT_HOLY]]) / 100;
         }
     }
 

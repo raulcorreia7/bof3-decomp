@@ -29,7 +29,8 @@ extern Callback                     D_800C35EC[];
 extern Callback                     D_800C35F8[];
 extern u16                          D_801463BE;
 extern volatile BattleSelectionType D_801CA71C[];
-extern EnemyBattler                 D_801EB630[];
+/* D_801EB630 */
+extern EnemyBattler                 g_BattleEnemyBattlers[];
 
 void func_800C238C(u8 arg0, u8 arg1);
 void func_800C2780(void);

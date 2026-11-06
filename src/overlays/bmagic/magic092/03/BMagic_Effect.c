@@ -38,7 +38,7 @@ MATCH void func_801EF388(void) {
     }
     if (g_Task->unk_0B == 0x80) {
         if (g_BattleTargetSelector & 0x40) {
-            func_80196718(&D_801EB630[g_Task->unk_03]);
+            func_80196718(&g_BattleEnemyBattlers[g_Task->unk_03]);
             func_800AF814((g_Task->unk_03 + 3) & 0xFF);
             func_800A9820((g_Task->unk_03 + 3) & 0xFF);
         } else {

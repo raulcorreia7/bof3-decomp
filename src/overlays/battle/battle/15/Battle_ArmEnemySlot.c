@@ -21,7 +21,7 @@ NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
     s32           unit_offset;
     s32           enemy_offset;
 
-    enemy = &D_801EB630[slot & BYTE_MASK];
+    enemy = &g_BattleEnemyBattlers[slot & BYTE_MASK];
     TASK_SET(enemy);
     enemy->flags = 1;
     unit_offset  = (unit & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE;

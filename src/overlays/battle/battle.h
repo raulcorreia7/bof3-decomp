@@ -84,8 +84,9 @@ extern u8                           g_BattleEventSlots[];
 extern u8                           D_801EB5A8;
 extern u8                           D_801EB5B1[];
 extern u8*                          D_801EB5B4[];
-/* Enemy battler work record (stride 0x118 at D_801EB630, indexed by slot - 3). */
-extern EnemyBattler                 D_801EB630[];
+/* Enemy battler work record (stride 0x118 at g_BattleEnemyBattlers, indexed by slot - 3). */
+/* D_801EB630 */
+extern EnemyBattler                 g_BattleEnemyBattlers[];
 extern u8                           D_801EB631[];
 extern u8                           D_801EB710[];
 extern volatile u16                 D_801EB726[][140];

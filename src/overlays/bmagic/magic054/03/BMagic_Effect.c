@@ -72,8 +72,8 @@ MATCH void func_801EF534(void) {
 
     if (func_8014DAEC() & 0xFF) {
         if (g_BattleTargetSelector & 0x40) {
-            value2                   = g_Task->unk_0B;
-            D_801EB630[value2].flags = D_801EB630[value2].flags & 0xBF;
+            value2                              = g_Task->unk_0B;
+            g_BattleEnemyBattlers[value2].flags = g_BattleEnemyBattlers[value2].flags & 0xBF;
         } else {
             value                              = g_Task->unk_0B;
             g_BattlePartyBattlers[value].flags = g_BattlePartyBattlers[value].flags & ~PARTY_BATTLER_FLAG_HANDLER_BUSY;

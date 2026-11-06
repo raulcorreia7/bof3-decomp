@@ -49,10 +49,10 @@ MATCH s16 func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_
             damage = 0;
         }
     } else {
-        if (D_801EB630[battler_index - 3u].action_flags & COMBATANT_FLAG_DAMAGE_HALVED) {
+        if (g_BattleEnemyBattlers[battler_index - 3u].action_flags & COMBATANT_FLAG_DAMAGE_HALVED) {
             damage /= 2;
         }
-        if (D_801EB630[battler_index - 3u].damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (g_BattleEnemyBattlers[battler_index - 3u].damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             damage = 0;
         }
     }

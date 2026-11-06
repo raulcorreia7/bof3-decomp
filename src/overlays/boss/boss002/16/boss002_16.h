@@ -17,7 +17,8 @@ extern Callback     D_800C2030[];
 extern Callback     D_800C2048[];
 extern Callback     D_800C2054[];
 extern Callback     D_800C2084[];
-extern EnemyBattler D_801EB630[];
+/* D_801EB630 */
+extern EnemyBattler g_BattleEnemyBattlers[];
 
 /* The mode handler sets the image installs into the battle hooks; the
  * addresses are in [emi/boss/boss002/16] of config/symbols.toml. */

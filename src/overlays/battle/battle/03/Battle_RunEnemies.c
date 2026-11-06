@@ -6,8 +6,8 @@ MATCH void Battle_RunEnemies(void) {
     s32                    i;
 
     for (i = 0; (i & BYTE_MASK) < 8u; i++) {
-        if (D_801EB630[(u8)i].flags != 0u) {
-            enemy = &D_801EB630[(u8)i];
+        if (g_BattleEnemyBattlers[(u8)i].flags != 0u) {
+            enemy = &g_BattleEnemyBattlers[(u8)i];
             TASK_SET((PartyBattler*)enemy);
             g_BattleCurrentEnemy = (EnemyBattler*)enemy;
             if (g_BattleEncounter != 0u) {
