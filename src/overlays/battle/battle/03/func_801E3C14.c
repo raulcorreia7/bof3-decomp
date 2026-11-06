@@ -70,7 +70,7 @@ MATCH void func_801E3C14(void) {
     pending = &g_BattlePendingStatus;
     g_BattleCurrentEnemy->status |= *pending;
     *pending = 0;
-    func_8009BBE8();
+    Battle_TestAiCondition();
     tail_work = g_BattleCurrentEnemy;
     if (tail_work->hp_change > 0) {
         if (tail_work->hp == 0) {

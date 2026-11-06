@@ -4,7 +4,8 @@
  * at least RANDOM_MASK(0xFF); a passing item bumps its spoils count or is appended with count 1 (at most 15 entries),
  * and the row's item is cleared.
  */
-MATCH void func_801E531C(void) {
+/* func_801E531C */
+MATCH void Battle_RollEnemyDrops(void) {
     DropChances chances;
     u8          i;
     u8          j;

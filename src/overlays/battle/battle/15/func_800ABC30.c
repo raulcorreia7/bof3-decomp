@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-void func_800ABCE0(s32 slot, u16 unit, s32 x, s32 y);
+void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y);
 
 MATCH void func_800ABC30(void) {
     s32 loop_count;
@@ -11,7 +11,7 @@ MATCH void func_800ABC30(void) {
     g_BattleEnemyCount = 0;
     do {
         if (D_801463DC[loop_count & BYTE_MASK].active != 0) {
-            func_800ABCE0(count & BYTE_MASK, D_801463DC[loop_count & BYTE_MASK].id,
+            Battle_ArmEnemySlot(count & BYTE_MASK, D_801463DC[loop_count & BYTE_MASK].id,
                           D_801463DC[loop_count & BYTE_MASK].x, D_801463DC[loop_count & BYTE_MASK].y);
             count += 1;
         }

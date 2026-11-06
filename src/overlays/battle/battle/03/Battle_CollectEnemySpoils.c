@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E54EC(void) {
+/* func_801E54EC */
+MATCH void Battle_CollectEnemySpoils(void) {
     u8            count;
     int           new_var;
     volatile u32* acc;
@@ -13,7 +14,7 @@ MATCH void func_801E54EC(void) {
         g_BattleCurrentEnemy->status |= STATUS_KO;
         g_BattleCurrentEnemy->zenny = 0;
         func_801DD14C(g_Task->slot);
-        func_801E531C();
+        Battle_RollEnemyDrops();
         count                    = g_BattleLivingEnemyCount - 1;
         g_BattleLivingEnemyCount = count;
         new_var                  = count == 0;

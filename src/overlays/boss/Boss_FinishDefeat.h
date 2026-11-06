@@ -6,7 +6,7 @@ MATCH void Boss_FinishDefeat(void) {
     EnemyBattler* work;
 
     func_8014DAEC();
-    func_801E54EC();
+    Battle_CollectEnemySpoils();
     work = g_BattleCurrentEnemy;
     work->damage_flags |= COMBATANT_FLAG_SKIP_ACTION_STEP;
     TASK_BYTES[0] &= 0xBF;
