@@ -4,7 +4,7 @@ MATCH void func_801E97A8(void) {
     BattlePanelTask* task;
 
     BATTLE_PANEL_TASK->ratio = (ENEMY_COMBATANT(BATTLE_PANEL_TASK->cell_0A.slot).hp * 0x37 /
-                                    ENEMY_COMBATANT(BATTLE_PANEL_TASK->cell_0A.slot).stats.max_hp);
+                                ENEMY_COMBATANT(BATTLE_PANEL_TASK->cell_0A.slot).stats.max_hp);
     if (ENEMY_COMBATANT(BATTLE_PANEL_TASK->cell_0A.slot).hp != 0 && BATTLE_PANEL_TASK->ratio == 0) {
         BATTLE_PANEL_TASK->ratio = 1;
     }

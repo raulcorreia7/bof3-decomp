@@ -179,8 +179,8 @@ MATCH u8* GFX_BuildGlyphPrimitive(s32 x, s32 y, s32 glyph, s32 palette, u8 flags
     geom         = (u8)glyph * (WIN_GEOMETRY_STRIDE * 2u);
     sprite->x0   = x;
     sprite->y0   = y;
-    sprite->u0   = * (u16*)(((u8*)D_801D1C6C + geom));
-    sprite->v0   = * (u16*)(((u8*)&D_801D1C6E + geom));
+    sprite->u0   = *(u16*)(((u8*)D_801D1C6C + geom));
+    sprite->v0   = *(u16*)(((u8*)&D_801D1C6E + geom));
     sprite->w    = *(u16*)(((u8*)&D_801D1C70 + geom));
     sprite->h    = *(u16*)(((u8*)&D_801D1C72 + geom));
     sprite->clut = (*(u16*)(((u8*)&D_801D1C74 + geom)) << 6);

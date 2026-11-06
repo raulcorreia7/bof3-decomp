@@ -93,7 +93,7 @@ MATCH void func_801DF3F8(void) {
         work->pos.y.fixed = D_80143F28;
     } else {
         actor              = g_Task;
-        actor->pos.x.fixed = * (s32*)(D_801EC364 + (actor->slot * BATTLE_EFFECT_STRIDE));
+        actor->pos.x.fixed = *(s32*)(D_801EC364 + (actor->slot * BATTLE_EFFECT_STRIDE));
         y_pos              = *(s32*)(D_801EC368 + (actor->slot * BATTLE_EFFECT_STRIDE));
     store_coord_y:
         actor->pos.y.fixed = y_pos;

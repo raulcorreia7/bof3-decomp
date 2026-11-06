@@ -12,8 +12,7 @@ MATCH void func_8009BBE8(void) {
     u8                 i;
 
     for (i = 0; i < 4; i++) {
-        packet =
-            (BattleEventPacket*)(MEM_PTR(u8, 0x800E407Cu) + g_BattleCurrentEnemy->kind * 0x88u + i * 0x10u);
+        packet = (BattleEventPacket*)(MEM_PTR(u8, 0x800E407Cu) + g_BattleCurrentEnemy->kind * 0x88u + i * 0x10u);
         switch (packet->kind) {
             case 0:
                 if (func_8009C8AC(1) != 0) {

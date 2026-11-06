@@ -23,10 +23,9 @@ MATCH void func_8009B488(void) {
     *(u16*)&D_8014930E += (s8)value;
     if (g_BattleUiStep == 2) {
         g_AreaCameraHeightStep =
-            (((((s32 (*)(s32, s32))Area_SampleHeight)(g_AreaScrollTargetX, g_AreaScrollTargetY) -
-                         g_AreaCameraHeight)
-                        << 16) >>
-                  21);
+            (((((s32 (*)(s32, s32))Area_SampleHeight)(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight)
+              << 16) >>
+             21);
     } else {
         g_AreaCameraHeightStep = 0;
     }

@@ -63,17 +63,17 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
         volatile u8* battler;
         battler = (u8*)(&g_BattlePartyBattlers[battler_index]);
         GFX_FreePaletteFadeTarget(battler);
-        saved_work                                           = g_BattleWorkCell;
+        saved_work                                      = g_BattleWorkCell;
         g_BattlePartyBattlers[battler_index].chr.status = status;
-        g_BattleWorkCell                                     = battler;
+        g_BattleWorkCell                                = battler;
         func_801DDAB4(g_BattlePartyBattlers[battler_index].chr.status);
     } else {
         volatile u8* battler;
         battler = (u8*)(&((volatile BattleEnemyRecord*)g_BattleEnemies)[battler_index]);
         GFX_FreePaletteFadeTarget(battler);
-        saved_work                                 = g_BattleWorkCell;
+        saved_work                            = g_BattleWorkCell;
         ENEMY_COMBATANT(battler_index).status = status;
-        g_BattleWorkCell                           = battler;
+        g_BattleWorkCell                      = battler;
         func_801DDAB4(ENEMY_COMBATANT(battler_index).status);
     }
 

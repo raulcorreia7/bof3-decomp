@@ -18,8 +18,8 @@ MATCH void func_801E7514(s32 x, s32 y, s32 icon, s32 palette) {
     geom         = (u8)icon * START08_ICON_STRIDE;
     sprite->x0   = x;
     sprite->y0   = y;
-    sprite->u0   = * (u16*)((u8*)D_801ED1FC + geom);
-    sprite->v0   = * (u16*)((u8*)D_801ED1FE + geom);
+    sprite->u0   = *(u16*)((u8*)D_801ED1FC + geom);
+    sprite->v0   = *(u16*)((u8*)D_801ED1FE + geom);
     sprite->w    = *(u16*)((u8*)D_801ED200 + geom);
     sprite->h    = *(u16*)((u8*)D_801ED202 + geom);
     sprite->clut = (*(u16*)((u8*)D_801ED204 + geom) << 6);

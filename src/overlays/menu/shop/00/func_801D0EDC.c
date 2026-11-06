@@ -19,7 +19,7 @@ MATCH void func_801D0EDC(void) {
         /* FAKE: retail reads g_Actors as u8[]. */
         pond       = ((u8*)g_Actors) + (index * ACTOR_SIZE);
         D_80148650 = *(s32*)(pond + 0x18) + 2;
-        D_80148699 = * (s32*)(pond + 0x1C);
+        D_80148699 = *(s32*)(pond + 0x1C);
         TASK_SET(pond);
     }
     count = 0;

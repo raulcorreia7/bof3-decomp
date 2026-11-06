@@ -66,8 +66,7 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     hp_text_y <<= 0x10;
     hp_text_y      = hp_text_y >> 0x10;
     blue_component = color_b;
-    func_801D94D4((s16)(panel_x + 0x14), hp_text_y, status_mode,
-                  (u8)g_BattlePartyBattlers[battler_index].chr.hp);
+    func_801D94D4((s16)(panel_x + 0x14), hp_text_y, status_mode, (u8)g_BattlePartyBattlers[battler_index].chr.hp);
     status_mode = ((u8)g_BattlePartyBattlers[battler_index].chr.status >> 0xD) & 2;
     sprintf((s8*)g_UiFormatBuffer, D_801D0C6C);
     status_label_y <<= 0x10;
@@ -79,10 +78,8 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     panel_left_x <<= 0x10;
     panel_left_x = panel_left_x >> 0x10;
     bar_border_y = panel_y + 2;
-    func_801DA5A8(panel_left_x, bar_border_y, (panel_x + 0x49), bar_border_y, color_r, color_g,
-                  blue_component);
-    func_801DA5A8(panel_left_x, (panel_y + 3), panel_left_x, (panel_y + 0x12), color_r, color_g,
-                  blue_component);
+    func_801DA5A8(panel_left_x, bar_border_y, (panel_x + 0x49), bar_border_y, color_r, color_g, blue_component);
+    func_801DA5A8(panel_left_x, (panel_y + 3), panel_left_x, (panel_y + 0x12), color_r, color_g, blue_component);
     shadow_component = color_r - 0x10;
     if (shadow_component < 0) {
         color_r = 0;
@@ -116,9 +113,7 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     panel_bottom_y = panel_bottom_y >> 0x10;
     shadow_green   = color_g;
     shadow_blue &= BYTE_MASK;
-    func_801DA408(panel_right_x, (panel_y + 2), panel_right_x, panel_bottom_y, color_r,
-                  shadow_green, shadow_blue);
-    func_801DA408((panel_x + 2), panel_bottom_y, panel_right_x, panel_bottom_y, color_r,
-                  shadow_green, shadow_blue);
+    func_801DA408(panel_right_x, (panel_y + 2), panel_right_x, panel_bottom_y, color_r, shadow_green, shadow_blue);
+    func_801DA408((panel_x + 2), panel_bottom_y, panel_right_x, panel_bottom_y, color_r, shadow_green, shadow_blue);
 }
 #endif

@@ -19,19 +19,16 @@ MATCH void func_800B0498(void) {
     s32  substate_row;
     /* FAKE: pin shared fourth argument in a3. */
     MATCH_REG(s32, row, "a3");
-    func_800B06F4(g_MenuCurrentPanel->x, g_MenuCurrentPanel->y, g_MenuCurrentPanel->unk_08,
-                  g_MenuCurrentPanel->unk_09);
+    func_800B06F4(g_MenuCurrentPanel->x, g_MenuCurrentPanel->y, g_MenuCurrentPanel->unk_08, g_MenuCurrentPanel->unk_09);
 
     style = &D_80144952;
     UI_DrawWindow((u16)(g_MenuCurrentPanel->x + 6u), (u16)(g_MenuCurrentPanel->y + 33u),
-                  (u16)(g_MenuCurrentPanel->unk_08 * 8u - 15u),
-                  (u16)(g_MenuCurrentPanel->unk_09 * 8u - 39u), 0, *style);
-
-    UI_DrawWindow((u16)(g_MenuCurrentPanel->x + 54u), (u16)(g_MenuCurrentPanel->y + 6u), 72, 24, 0,
+                  (u16)(g_MenuCurrentPanel->unk_08 * 8u - 15u), (u16)(g_MenuCurrentPanel->unk_09 * 8u - 39u), 0,
                   *style);
 
-    UI_DrawWindow((u16)(g_MenuCurrentPanel->x + 135u), (u16)(g_MenuCurrentPanel->y + 10u), 48, 16, 0,
-                  *style);
+    UI_DrawWindow((u16)(g_MenuCurrentPanel->x + 54u), (u16)(g_MenuCurrentPanel->y + 6u), 72, 24, 0, *style);
+
+    UI_DrawWindow((u16)(g_MenuCurrentPanel->x + 135u), (u16)(g_MenuCurrentPanel->y + 10u), 48, 16, 0, *style);
 
     panel_count = -(BATTLE_ACTIVE_ROW->chr.ap < D_801463B8[0]) & 7;
     UI_DrawAsciiString((u16)(g_MenuCurrentPanel->x + 136u), (u16)(g_MenuCurrentPanel->y + 12u), panel_count,

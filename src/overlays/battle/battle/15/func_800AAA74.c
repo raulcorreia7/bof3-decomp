@@ -18,8 +18,7 @@ MATCH void func_800AAA74(void) {
 
     switch (g_PartyFormation) {
         case PARTY_FORMATION_ATTACK:
-            Char_AddStat(&g_BattlePartyBattlers[0].chr.base.power,
-                         (g_BattlePartyBattlers[0].chr.base.power >> 1u));
+            Char_AddStat(&g_BattlePartyBattlers[0].chr.base.power, (g_BattlePartyBattlers[0].chr.base.power >> 1u));
             Char_AddStat(&g_BattlePartyBattlers[0].chr.base.defense,
                          -((g_BattlePartyBattlers[0].chr.base.defense >> 2u)));
             Char_AddPercent(&g_BattlePartyBattlers[0].chr.base.reprisal_chance,

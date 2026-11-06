@@ -28,8 +28,8 @@ MATCH void func_801E960C(void) {
 
     task = BATTLE_PANEL_TASK;
     row  = D_801EB35C + task->cell_0A.slot * 0x118;
-    func_801EA1E0(&task->ratio, (row + 0x2C), &task->max_hp, &task->hp, (row + 0x20),
-                  &task->cursor, &task->pad_16[2], &task->unk_08);
+    func_801EA1E0(&task->ratio, (row + 0x2C), &task->max_hp, &task->hp, (row + 0x20), &task->cursor, &task->pad_16[2],
+                  &task->unk_08);
 
     if (Battle_SlotIsBlocked(BATTLE_PANEL_TASK->cell_0A.slot) != 0) {
         panel = BATTLE_PANEL_TASK;

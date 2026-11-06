@@ -43,8 +43,7 @@ MATCH void Shop_DrawAbilities(ShopPanel* panel) {
         list++;
     } while (n < 10);
     x = panel->x + 0x4E;
-    UI_DrawText((x - strlen(D_801E5B7C[panel->unk_0B]) * 4), (panel->y + 7), 0, 0x10,
-                (u8*)(D_801E5B7C[panel->unk_0B]));
+    UI_DrawText((x - strlen(D_801E5B7C[panel->unk_0B]) * 4), (panel->y + 7), 0, 0x10, (u8*)(D_801E5B7C[panel->unk_0B]));
     UI_DrawSpriteRun(panel->x, panel->y, (panel->flags & 2) ? D_801E5650 : D_801E5638, 1);
     UI_DrawSpriteRun(panel->x, panel->y, (panel->flags & 1) ? D_801E5674 : D_801E5668, 1);
     flags = panel->flags;

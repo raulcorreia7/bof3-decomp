@@ -45,7 +45,7 @@ MATCH void func_801D1094(void) {
     if (g_SndBgmId != 0xFF) {
         if (g_SndBgmId != D_801D1944) {
             temp_v0 = g_SndBgmId * 4;
-            SND_StopSequence(* (g_SelectionCues + temp_v0), * (D_80181EBB + temp_v0));
+            SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
         }
     }
     SND_RequestBgm(D_801D1944);

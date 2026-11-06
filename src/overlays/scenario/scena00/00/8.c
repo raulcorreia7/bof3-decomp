@@ -1679,9 +1679,8 @@ MATCH void func_801FA7D8(void) {
                 g_ActorSlots[D_1F800000[0]].type    = 0x1Eu;
                 g_ActorSlots[D_1F800000[0]].x.fixed = D_80145EC4;
                 g_ActorSlots[D_1F800000[0]].y.fixed = D_80145EC8;
-                distance                                 = Area_SampleHeight(g_ActorSlots[D_1F800000[0]].x.fixed,
-                                                                             g_ActorSlots[D_1F800000[0]].y.fixed)
-                                                           << 16;
+                distance = Area_SampleHeight(g_ActorSlots[D_1F800000[0]].x.fixed, g_ActorSlots[D_1F800000[0]].y.fixed)
+                           << 16;
                 g_ActorSlots[D_1F800000[0]].z.fixed = distance;
                 g_ActorSlots[D_1F800000[0]].unk_29  = 0;
             }
@@ -1959,7 +1958,7 @@ MATCH void func_801FB204(void) {
                     slot          = Actor_FindFreeSlot();
                     D_1F800000[0] = slot;
                     if ((slot & BYTE_MASK) != GAME_NONE) {
-                        g_ActorSlots[slot].flags               = 1;
+                        g_ActorSlots[slot].flags          = 1;
                         g_ActorSlots[D_1F800000[0]].type  = 0x13;
                         g_ActorSlots[D_1F800000[0]].pos.x = -682;
                         g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;

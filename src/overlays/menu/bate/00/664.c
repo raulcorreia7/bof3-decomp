@@ -213,8 +213,7 @@ MATCH void func_801D73B4(BateAbilityPanel* panel) {
         list++;
     } while (n < 10);
     x = panel->x + 0x4E;
-    UI_DrawText((x - strlen(D_801D8E80[panel->unk_0B]) * 4), (panel->y + 7), 0, 0x10,
-                D_801D8E80[panel->unk_0B]);
+    UI_DrawText((x - strlen(D_801D8E80[panel->unk_0B]) * 4), (panel->y + 7), 0, 0x10, D_801D8E80[panel->unk_0B]);
     UI_DrawSpriteRun(panel->x, panel->y, (panel->flags & 2) ? D_801D8954 : D_801D893C, 1);
     UI_DrawSpriteRun(panel->x, panel->y, (panel->flags & 1) ? D_801D8978 : D_801D896C, 1);
     flags = panel->flags;
