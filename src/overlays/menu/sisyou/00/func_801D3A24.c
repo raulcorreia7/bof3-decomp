@@ -37,14 +37,14 @@ NON_MATCHING void func_801D3A24(void) {
     if (chr_master == g_SceneEventSelection) {
         diff = g_Characters[rec].level - g_Characters[rec].master_level;
         switch (chr_master) {
-            case 0xB:
+            case MASTER_BAIS:
                 if (diff >= 3 && !(D_80144F59 & 8)) {
                     D_80144F59 |= 8;
                     func_801D39CC(D_80145FCC.bytes[battler_offset]);
                     done = 1;
                 }
                 break;
-            case 0xC:
+            case MASTER_LANG:
                 if (diff >= 3) {
                     if (SYS_TestFlag(&g_SceneEventSelection + 0x63B, 0x6C) == 0) {
                         if (Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_CUPIDS_LYRE, 1, 0) & BYTE_MASK) {
@@ -55,14 +55,14 @@ NON_MATCHING void func_801D3A24(void) {
                     }
                 }
                 break;
-            case 0xD:
+            case MASTER_LEE:
                 if (diff >= 3 && !(D_80144F59 & 0x10)) {
                     D_80144F59 |= 0x10;
                     func_801D39CC(D_80145FCC.bytes[battler_offset]);
                     done = 1;
                 }
                 break;
-            case 0xE:
+            case MASTER_WYNN:
                 if (diff >= 3 && !(D_80144F59 & 0x20)) {
                     D_80144F59 |= 0x20;
                     func_801D39CC(D_80145FCC.bytes[battler_offset]);

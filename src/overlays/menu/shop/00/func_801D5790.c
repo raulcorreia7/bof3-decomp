@@ -11,7 +11,7 @@ MATCH void func_801D5790(void) {
         if (D_8014865B != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             prev       = D_80148652;
-            D_801E60EC = 0x16;
+            D_801E60EC = SAVE_WAIT_CREATE;
             D_80148652 = 0x13;
             D_80148654 = 2;
             D_801E6094 = prev + 1;

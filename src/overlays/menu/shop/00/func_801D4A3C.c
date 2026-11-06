@@ -24,7 +24,7 @@ MATCH void func_801D4A3C(void) {
     }
     pad = &g_InputPressed;
     if ((*pad & D_80145AC2) != 0) {
-        D_801E60EC = 0x19;
+        D_801E60EC = SAVE_WAIT_SCAN;
         mode       = &D_80148652;
         count      = *mode;
         *mode      = 0x13;

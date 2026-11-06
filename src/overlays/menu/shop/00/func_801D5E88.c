@@ -5,20 +5,20 @@ MATCH void func_801D5E88(void) {
     u8           val;
 
     switch (D_801E60EC) {
-        case 23:
+        case SAVE_WAIT_PROBE:
             Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
             WinDrawCueText(28, 22, 0x9C);
             break;
         default:
-        case 20:
-        case 22:
+        case SAVE_WAIT_OVERWRITE:
+        case SAVE_WAIT_CREATE:
         case 24:
             Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
             WinDrawCueText(28, 22, D_801E60EC + 0x85);
             SAVE_DrawSlots(0x20, 0x30, 0);
             break;
-        case 21:
-        case 25:
+        case SAVE_WAIT_FORMAT:
+        case SAVE_WAIT_SCAN:
             Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
             WinDrawCueText(28, 22, D_801E60EC + 0x85);
             func_801DDFB0(0x62, 0x4C, D_801E60F8, g_SaveCardPort, 1);

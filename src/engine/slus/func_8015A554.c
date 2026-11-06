@@ -26,19 +26,19 @@ NON_MATCHING void func_8015A554(void) {
             flag                        = 1;
             do {
                 switch (*cursor) {
-                    case 0:
+                    case STRING_END:
                         flag = 0;
                         /* fallthrough */
-                    case 1:
+                    case STRING_NEWLINE:
                         count++;
                         break;
-                    case 4:
-                    case 5:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 18:
-                    case 19:
+                    case STRING_INSERT:
+                    case STRING_COLOR:
+                    case STRING_VAR:
+                    case STRING_LINK:
+                    case STRING_NOP:
+                    case STRING_SKIP:
+                    case STRING_SKIP_ALT:
                         cursor++;
                         break;
                 }

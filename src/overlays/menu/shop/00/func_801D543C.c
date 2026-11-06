@@ -37,10 +37,10 @@ MATCH void func_801D543C(void) {
             g_SaveSlots[1].source_index = 0xFF;
             g_SaveSlots[0].source_index = 0xFF;
             break;
-        case 6:
+        case SAVE_STATUS_WRITE_FAILED:
             resource = 7;
             break;
-        case 7:
+        case SAVE_STATUS_FORMAT_FAILED:
             resource = 8;
             break;
         case SAVE_STATUS_SAVED:
@@ -64,7 +64,7 @@ MATCH void func_801D543C(void) {
             g_SaveSlots[1].source_index = 0xFF;
             g_SaveSlots[0].source_index = 0xFF;
             break;
-        case 10:
+        case SAVE_STATUS_CREATED:
             Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
             panel_timer = 0xB;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(0x96));
@@ -87,10 +87,10 @@ MATCH void func_801D543C(void) {
         UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(resource + 0x85));
     }
     if ((g_InputPressed != 0) ||
-        (((g_SaveCardStatus == 0xA) || (g_SaveCardStatus == SAVE_STATUS_SAVED)) &&
+        (((g_SaveCardStatus == SAVE_STATUS_CREATED) || (g_SaveCardStatus == SAVE_STATUS_SAVED)) &&
          (timer_p = &D_80148654, next = *timer_p - 1, *timer_p = next, ((next & BYTE_MASK) == 0)))) {
         D_80148654 = 0;
-        if ((g_SaveCardStatus != SAVE_STATUS_SAVED) && (g_SaveCardStatus != 0xA)) {
+        if ((g_SaveCardStatus != SAVE_STATUS_SAVED) && (g_SaveCardStatus != SAVE_STATUS_CREATED)) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
         }
         D_80148652 = panel_timer;
