@@ -136,6 +136,7 @@ INCLUDE_ASM(func_801D11A4);
 
 INCLUDE_ASM(func_801D1218);
 
+/* 85 differing rows; first +0x0 stack 0x28 vs 0x38; adjust register and outgoing argument allocation. */
 INCLUDE_ASM(Scene_DrawScanBar);
 
 #include "overlays/scenario/Scene_ClearScanBars.h"

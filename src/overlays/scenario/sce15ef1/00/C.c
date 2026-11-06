@@ -65,6 +65,7 @@ MATCH void func_801D13F4(void) {
     }
 }
 
+/* needs: camera transform declarations and record types; m2c has no typed draft. */
 INCLUDE_ASM(func_801D147C);
 
 INCLUDE_ASM(func_801D1678);
@@ -206,6 +207,7 @@ INCLUDE_ASM(func_801D21B4);
 
 INCLUDE_ASM(func_801D23A0);
 
+/* needs: camera transform declarations and record types; m2c has no typed draft. */
 INCLUDE_ASM(func_801D2474);
 
 INCLUDE_ASM(func_801D26BC);

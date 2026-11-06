@@ -232,6 +232,7 @@ MATCH void func_801F81B4(void) {
     Actor_Clear();
 }
 
+/* needs: camera transform declarations and drawing record type; m2c does not compile. */
 INCLUDE_ASM(func_801F81D4);
 
 MATCH void func_801F8358(void) {
@@ -292,12 +293,15 @@ MATCH void func_801F8804(u8 shade) {
     GFX_AddPrim(1, 0x10);
 }
 
+/* needs: table record type; m2c did not produce a compiling draft. */
 INCLUDE_ASM(func_801F88B8);
 
+/* needs: table record type; m2c draft does not compile. */
 INCLUDE_ASM(func_801F8BE8);
 
 #include "shared/AngleAverage12.h"
 
+/* 4 differing; first +0x0C argument save order; try permuter register ordering. */
 INCLUDE_ASM(func_801F8F90);
 
 INCLUDE_ASM(func_801F90F4);

@@ -70,6 +70,7 @@ INCLUDE_ASM(func_801F7A24);
 
 #include "shared/Area_ClearWorkColumn.h"
 
+/* needs: particle record type at 0x800E4800; m2c draft does not compile. */
 INCLUDE_ASM(func_801F7AE4);
 
 INCLUDE_ASM(func_801F7C54);
@@ -207,6 +208,7 @@ MATCH void func_801FCE30(void) {
 
 INCLUDE_ASM(func_801FCEC0);
 
+/* needs: declaration D_801FE280; m2c draft does not compile. */
 INCLUDE_ASM(func_801FD28C);
 
 MATCH void func_801FD444(void* record) {
