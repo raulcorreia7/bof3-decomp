@@ -5,7 +5,7 @@ MATCH void Area_StartDirectionalScript(Actor* actor) {
     g_ScriptState->unk_04 = 1;
     direction             = g_Task->direction_08 & 7;
     g_ScriptState->flag_00 |= 0x40;
-    g_Task->option_flags |= 8;
+    g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     Actor_SelectScript(direction | 8);
     g_ScriptState->unk_07 = 2;
     if (direction == 7) {
