@@ -11,7 +11,7 @@ MATCH s32 func_800AA5F4(s32 slot) {
     if (!(g_BattlePartyBattlers[slot].damage_flags.volatile_value & 1)) {
         return 0;
     }
-    if (g_BattlePartyBattlers[slot].unk_118 != LOBU(g_BattleActiveBattler)) {
+    if (g_BattlePartyBattlers[slot].command.target != LOBU(g_BattleActiveBattler)) {
         return 0;
     }
     if (func_800AA874(*(u8*)&g_BattleAction->unk_02) & BYTE_MASK) {

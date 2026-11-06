@@ -81,11 +81,11 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
         enemy->unk_E4(0);
     }
     if (g_BattleTargetSelector == GAME_NONE) {
-        g_BattleActionType                             = 0;
-        g_BattleEnemyBattlers[slot & BYTE_MASK].unk_F5 = 0;
+        g_BattleActionType                                   = 0;
+        g_BattleEnemyBattlers[slot & BYTE_MASK].command.type = 0;
         return;
     }
-    g_BattleEnemyBattlers[slot & BYTE_MASK].unk_F5 = g_BattleActionType;
+    g_BattleEnemyBattlers[slot & BYTE_MASK].command.type = g_BattleActionType;
 }
 #else
 INCLUDE_ASM(func_801E25E0);

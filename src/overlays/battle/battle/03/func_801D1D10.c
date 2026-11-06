@@ -29,7 +29,7 @@ NON_MATCHING void func_801D1D10(void) {
                     if (!HAS_STATUS(g_BattlePartyBattlers[index], STATUS_CONFUSED) &&
                         !(g_BattlePartyBattlers[index].action_flags.volatile_value & 0x14001)) {
                         g_BattleMessageSlot = (u8*)&g_BattlePartyBattlers[index];
-                        D_801EB4D8          = &g_BattlePartyBattlers[index].unk_118;
+                        D_801EB4D8          = &g_BattlePartyBattlers[index].command;
                         BattleStageMessageResource((s32)&g_BattlePartyBattlers[index]);
                         ((u8*)slot)[-0x22] += 1;
                         flag        = &g_BattleMessageState;

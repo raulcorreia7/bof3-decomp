@@ -37,15 +37,15 @@ NON_MATCHING void func_801DAAE4(void) {
 
                 D_801EB550[(u8)count].index = (u8)index;
                 D_801EB550[(u8)count].value = 0;
-                if (g_BattlePartyBattlers[(u8)index].mode_119 == 4u) {
-                    mode = D_801CA719[g_BattlePartyBattlers[(u8)index].command].value;
+                if (g_BattlePartyBattlers[(u8)index].command.type == 4u) {
+                    mode = D_801CA719[g_BattlePartyBattlers[(u8)index].command.id].value;
                     if (mode == 1 || mode == 3) {
                         D_801EB550[(u8)count].value = 2;
                     } else if (mode == 0) {
                         D_801EB550[(u8)count].value = 4;
                     }
                 }
-                if (g_BattlePartyBattlers[(u8)index].mode_119 == 5u) {
+                if (g_BattlePartyBattlers[(u8)index].command.type == 5u) {
                     D_801EB550[(u8)count].value = 1;
                 }
                 score                       = D_801EB550[(u8)count].value;

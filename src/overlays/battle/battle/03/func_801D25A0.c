@@ -15,8 +15,8 @@ MATCH void func_801D25A0(void) {
         do {
             rank = D_801462F6[i & BYTE_MASK];
             if ((rank != GAME_NONE) && ((Battle_SlotIsBlocked(rank) & BYTE_MASK) == 0)) {
-                if (g_BattlePartyBattlers[rank].mode_119 == 5) {
-                    func_801DDE7C(g_BattlePartyBattlers[rank].unk_122, g_BattlePartyBattlers[rank].command);
+                if (g_BattlePartyBattlers[rank].command.type == 5) {
+                    func_801DDE7C(g_BattlePartyBattlers[rank].unk_122, g_BattlePartyBattlers[rank].command.id);
                 }
             }
             i += 1;
