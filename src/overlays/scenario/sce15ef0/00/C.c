@@ -31,7 +31,7 @@ MATCH void func_801D0CEC(void) {
     work->color_r += 8;
     work->origin_x += 0x10;
     func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos_x, (s16)g_Task->origin_x, 2);
+    func_801D1A20(&g_Task->pos_x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 0x3C;
@@ -42,7 +42,7 @@ MATCH void func_801D0CEC(void) {
 
 MATCH void func_801D0DB0(void) {
     func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos_x, (s16)g_Task->origin_x, 2);
+    func_801D1A20(&g_Task->pos_x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->color_g = 0;
@@ -60,7 +60,7 @@ MATCH void func_801D0F44(void) {
     g_Task->color_g -= 0x40;
     func_801D1220(g_Task->color_g);
     func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos_x, (s16)g_Task->origin_x, 2);
+    func_801D1A20(&g_Task->pos_x, g_Task->origin_x, 2);
     func_801D1914(0x40);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -71,7 +71,7 @@ MATCH void func_801D0F44(void) {
 
 MATCH void func_801D101C(void) {
     func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos_x, (s16)g_Task->origin_x, 2);
+    func_801D1A20(&g_Task->pos_x, g_Task->origin_x, 2);
     func_801D1914(0x40);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -89,7 +89,7 @@ MATCH void func_801D10C4(void) {
         g_Task->color_r -= 8;
     }
     func_801D1C1C(&g_Task->pos_x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos_x, (s16)g_Task->origin_x, 2);
+    func_801D1A20(&g_Task->pos_x, g_Task->origin_x, 2);
     func_801D1914(0x40);
 
     if (TIMER_EXPIRED(g_Task->timer)) {

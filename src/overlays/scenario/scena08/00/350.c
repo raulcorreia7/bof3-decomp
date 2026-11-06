@@ -164,7 +164,7 @@ MATCH void func_801F7DE8(void) {
         *cell = 0;
         index += 1;
         cell += 0x28;
-    } while ((u32)(index & BYTE_MASK) < 0x40U);
+    } while ((index & BYTE_MASK) < 0x40U);
 }
 
 INCLUDE_ASM(func_801F7E14);
@@ -204,7 +204,7 @@ MATCH void func_801F8AE8(void) {
         *cell = 0;
         index += 1;
         cell += 0x1C;
-    } while ((u32)(index & BYTE_MASK) < 8U);
+    } while ((index & BYTE_MASK) < 8U);
 }
 
 MATCH u8* func_801F8B14(void) {
@@ -455,11 +455,11 @@ MATCH void func_801FE12C(void) {
         }
         index += 1;
         item += 1;
-    } while ((u32)(index & 0xFF) < 0x20U);
+    } while ((index & 0xFF) < 0x20U);
 }
 
 MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
-    if ((g_GameAreaId == 1) && (arg0 == 0x338000) && ((u32)((arg1 >> 0x10) - 0x27) < 2U)) {
+    if ((g_GameAreaId == 1) && (arg0 == 0x338000) && (((arg1 >> 0x10) - 0x27) < 2U)) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             Game_SetScriptActive();
             D_80146874 = 4;
@@ -476,7 +476,7 @@ MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
         goto block_7;
     }
 block_7:
-    if ((g_GameAreaId == 0x46) && (arg0 == 0x388000) && ((u32)((arg1 >> 0x10) - 0x2E) < 4U)) {
+    if ((g_GameAreaId == 0x46) && (arg0 == 0x388000) && (((arg1 >> 0x10) - 0x2E) < 4U)) {
         SYS_SetFlag(g_SceneFlags, 0x16U);
     }
     return 0;

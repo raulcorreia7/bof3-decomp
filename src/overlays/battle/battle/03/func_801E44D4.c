@@ -10,7 +10,7 @@ MATCH void func_801E44D4(void) {
     BATTLE_CURRENT_ENEMY_PTR->hp_change = 0;
     work->unk_0C                        = -0x2000;
     work->unk_10                        = 0;
-    func_801DD350((s32)work);
+    func_801DD350(work);
     g_Task->timer = 4;
     func_801E30F8();
     SND_PlayCue(EMI_CUE_ID(2, 5));

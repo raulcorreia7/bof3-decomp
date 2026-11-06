@@ -47,7 +47,7 @@ MATCH void func_801D7E4C(void) {
         }
     }
     sel = (s8*)&D_80148658;
-    if ((s8)old != (s8)*sel) {
+    if ((s8)old != *sel) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     TEXT_SetVariable(0, 0xC,

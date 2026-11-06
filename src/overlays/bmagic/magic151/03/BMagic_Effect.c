@@ -168,7 +168,7 @@ MATCH void func_801F013C(void) {
     s8 temp_v0;
     u8 temp_v0_2;
 
-    temp_v0 = (s8)g_Task->unk_5D;
+    temp_v0 = g_Task->unk_5D;
     if (temp_v0 != 0) {
         g_Task->unk_5D = temp_v0 - 1;
     }
@@ -210,7 +210,7 @@ MATCH void func_801F0C50(void) {
 
     temp_v0       = g_Task->timer + 4;
     g_Task->timer = temp_v0;
-    if ((u32)(temp_v0 & 0xFF) >= 0x20U) {
+    if ((temp_v0 & 0xFF) >= 0x20U) {
         g_Task->unk_0B = 1;
         g_Task->step += 1;
     }

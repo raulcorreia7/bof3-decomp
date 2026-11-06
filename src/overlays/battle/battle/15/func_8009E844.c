@@ -18,12 +18,12 @@ MATCH void func_8009E844(void) {
         if (((RANDOM_MASK(3)) != 0) && ((base & 0x4000) != 0)) {
             battler = LOBU(*slot);
             if (BATTLER_IS_PLAYER(battler)) {
-                ((s16*)g_BattleTargetRecord)[2] = (s16)(-(s32)D_80145F20[battler][0] >> 2);
+                ((s16*)g_BattleTargetRecord)[2] = (-D_80145F20[battler][0] >> 2);
                 /* FAKE: retail keeps the selection store before the counter update. */
                 MATCH_FAKE_BARRIER();
                 g_BattleLivingPartyCount++;
             } else {
-                ((s16*)g_BattleTargetRecord)[2] = (s16)(-(s32)D_801EB6D0[battler - 3u][0] >> 2);
+                ((s16*)g_BattleTargetRecord)[2] = (-D_801EB6D0[battler - 3u][0] >> 2);
                 /* FAKE: retail keeps the selection store before the counter update. */
                 MATCH_FAKE_BARRIER();
                 g_BattleLivingEnemyCount++;

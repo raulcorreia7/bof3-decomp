@@ -23,7 +23,7 @@ MATCH void Shop_DrawItems(ShopPanel* panel) {
         price    = Shop_ApplyPercent(Item_GetPrice(group, item), panel->unk_0B);
         icon     = Item_GetKind(group, item);
         resource = Item_GetRecord(group, item);
-        if (panel->unk_0A != 0 || g_Zenny < (u32)price) {
+        if (panel->unk_0A != 0 || g_Zenny < price) {
             color = 7;
             dim   = 1;
         } else {

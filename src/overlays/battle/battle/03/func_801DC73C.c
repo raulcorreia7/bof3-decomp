@@ -16,7 +16,7 @@ MATCH u32 func_801DC73C(s16 damage, u32 battler_index, u32 slot_index) {
 
     index = slot_index;
     if ((g_BattleState & BATTLE_STATE_CRITICAL) != 0u) {
-        return (u32)(s32)damage;
+        return (s32)damage;
     }
 
     battler_index &= BYTE_MASK;
@@ -51,7 +51,7 @@ after_enemy:
         /* threshold passed: clear the status instead */
         goto clear;
     }
-    return (u32)(s32)damage;
+    return (s32)damage;
 
 clear:
     g_BattlePartyBattlers[index & BYTE_MASK].unk_120 &= 0xEFu;

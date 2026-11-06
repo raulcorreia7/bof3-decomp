@@ -12,7 +12,7 @@ MATCH void func_801D2C7C(void) {
     u8 i;
 
     i = 0;
-    while ((u8)i < (u8)(Party_CountOrder(0))) {
+    while (i < (Party_CountOrder(0))) {
         if (i == D_80148656) {
             D_80148333[((i + 4) * 9) << 2]   = 6;
             D_80148333[((i + 0xC) * 9) << 2] = 4;

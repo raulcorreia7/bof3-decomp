@@ -10,7 +10,7 @@ MATCH u8 func_801DB9E4(u32 battler_index) {
     u8  mode;
     u32 value;
 
-    index = (u8)battler_index;
+    index = battler_index;
     if (index < 3u) {
         if (ACTOR_IN_USE(g_BattlePartyBattlers[index]) && !HAS_STATUS(g_BattlePartyBattlers[index], 0x4944u) &&
             (g_BattleActionLock == 0u ||
@@ -21,7 +21,7 @@ MATCH u8 func_801DB9E4(u32 battler_index) {
             return false;
         }
     } else {
-        index = (u8)(battler_index - 3u);
+        index = (battler_index - 3u);
         if ((D_801EB630[index].flags & 1u) != 0u && (D_801EB630[index].status & 0x4144u) == 0u &&
             (g_BattleActionLock == 0u || (D_801EB630[index].action_flags & COMBATANT_FLAG_SUPPRESSION_EXEMPT) != 0u)) {
             value = g_BattleSurprise;

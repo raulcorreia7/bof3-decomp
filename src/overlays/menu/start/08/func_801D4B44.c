@@ -32,8 +32,8 @@ MATCH void func_801D4B44(void) {
                 row++;
                 j++;
                 mirror++;
-            } while ((u8)j < n);
+            } while (j < n);
         }
         i++;
-    } while ((u8)i < 127);
+    } while (i < 127);
 }

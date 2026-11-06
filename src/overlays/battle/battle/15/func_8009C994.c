@@ -31,7 +31,7 @@ MATCH void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event) {
             mask = event->selector;
             for (i = 0; i < 8; i++) {
                 if (mask & 0x80) {
-                    func_8009CCBC((u8*)work, (s32)i, event->value);
+                    func_8009CCBC((u8*)work, i, event->value);
                 }
                 mask <<= 1;
             }
@@ -40,7 +40,7 @@ MATCH void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event) {
             mask = event->selector;
             for (i = 0; i < 8; i++) {
                 if (mask & 0x80) {
-                    func_8009CF80((u8*)work, (s32)i, (s32)event->value);
+                    func_8009CF80((u8*)work, i, event->value);
                 }
                 mask <<= 1;
             }
@@ -57,12 +57,12 @@ MATCH void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event) {
             if (event->selector & 2) {
                 factor    = event->value * 100;
                 scaled    = work->exp * factor / 1000;
-                work->exp = (u32)scaled > 0xFFFF ? 0xFFFF : (u16)scaled;
+                work->exp = (u32)scaled > 0xFFFF ? 0xFFFF : scaled;
             }
             if (event->selector & 1) {
                 factor      = event->value * 100;
                 scaled      = work->zenny * factor / 1000;
-                work->zenny = (u32)scaled > 0xFFFF ? 0xFFFF : (u16)scaled;
+                work->zenny = (u32)scaled > 0xFFFF ? 0xFFFF : scaled;
             }
             break;
         case 7:

@@ -27,7 +27,7 @@ MATCH void func_801EEFF0(void) {
 
     work = g_Task;
     if (work->unk_0B == 2) {
-        work->mode = (u8)(work->mode + 1);
+        work->mode = (work->mode + 1);
     }
 }
 
@@ -172,7 +172,7 @@ MATCH void func_801F0154(void) {
 
     temp_a1                  = g_Task->unk_14 + g_Task->unk_20;
     g_Task->unk_14           = temp_a1;
-    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + temp_a1;
+    COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + temp_a1;
     if (g_Task->unk_14 < -0x10) {
         func_801E5988();
     }

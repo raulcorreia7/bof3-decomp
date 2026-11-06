@@ -25,7 +25,7 @@ MATCH void func_801D68D0(s32 reset_slots) {
         slot->ap           = max_ap;
         Char_ClearStatus(id, 0x2000, 0);
         index += 1;
-    } while ((u32)(index & BYTE_MASK) < 8U);
+    } while ((index & BYTE_MASK) < 8U);
     if ((SYS_TestFlag((u8*)g_Characters + 0xBE4, 4) != 0) && (SYS_TestFlag((u8*)g_Characters + 0xBE7, 4) == 0) &&
         (((u8*)g_Characters)[0xB8B] < 0x1EU)) {
         ((u8*)g_Characters)[0xB8B] = 0;

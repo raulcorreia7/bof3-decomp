@@ -46,15 +46,15 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
     primitive->y2 = y;
     primitive->x3 = x;
     primitive->y3 = y;
-    primitive->u0 = (u8)D_801EAF2C[palette_offset];
+    primitive->u0 = D_801EAF2C[palette_offset];
     v_delta       = palette_index * 8;
-    primitive->v0 = (s8)(D_801EAF2D[palette_offset] - v_delta);
-    primitive->u1 = (s8)(D_801EAF2C[palette_offset] + D_801EAF2E[palette_offset]);
-    primitive->v1 = (s8)(D_801EAF2D[palette_offset] - v_delta);
-    primitive->u2 = (u8)D_801EAF2C[palette_offset];
-    primitive->v2 = (s8)(D_801EAF2F[palette_offset] + (D_801EAF2D[palette_offset] - v_delta));
-    primitive->u3 = (s8)(D_801EAF2C[palette_offset] + D_801EAF2E[palette_offset]);
-    primitive->v3 = (s8)(D_801EAF2F[palette_offset] + (D_801EAF2D[palette_offset] - v_delta));
+    primitive->v0 = (D_801EAF2D[palette_offset] - v_delta);
+    primitive->u1 = (D_801EAF2C[palette_offset] + D_801EAF2E[palette_offset]);
+    primitive->v1 = (D_801EAF2D[palette_offset] - v_delta);
+    primitive->u2 = D_801EAF2C[palette_offset];
+    primitive->v2 = (D_801EAF2F[palette_offset] + (D_801EAF2D[palette_offset] - v_delta));
+    primitive->u3 = (D_801EAF2C[palette_offset] + D_801EAF2E[palette_offset]);
+    primitive->v3 = (D_801EAF2F[palette_offset] + (D_801EAF2D[palette_offset] - v_delta));
     SetSemiTrans(primitive, palette_index);
     GFX_AddPrim(1U, 0x28U);
 }

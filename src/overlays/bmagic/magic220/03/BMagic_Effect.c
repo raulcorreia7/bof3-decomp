@@ -50,7 +50,7 @@ INCLUDE_ASM(func_801EF6B8);
 MATCH void func_801EF8CC(void) {
     s8 temp_v0;
 
-    temp_v0 = (s8)g_Task->unk_5D;
+    temp_v0 = g_Task->unk_5D;
     if (temp_v0 != 0) {
         g_Task->unk_5D = temp_v0 - 2;
     }

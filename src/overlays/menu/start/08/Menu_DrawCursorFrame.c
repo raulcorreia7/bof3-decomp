@@ -18,9 +18,9 @@ MATCH void Menu_DrawCursorFrame(u16 x, u16 y, s32 width, s32 height, u8 color, s
     if (color != 0) {
         state = g_FrameCount;
         if (state & 8) {
-            base = (u8)((state & 6) << 5 | 0x3F);
+            base = ((state & 6) << 5 | 0x3F);
         } else {
-            base = (u8)((~state & 6) << 5 | 0x3F);
+            base = ((~state & 6) << 5 | 0x3F);
         }
     } else {
         base = 0xFF;

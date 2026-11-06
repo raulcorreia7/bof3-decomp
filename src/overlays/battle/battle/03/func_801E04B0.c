@@ -14,7 +14,7 @@ MATCH void func_801E04B0(void) {
     *(u16*)(((u32)enemy_work + 0x11Cu)) = 0;
     work->unk_0C                        = 0;
     work->unk_10                        = -0x2000;
-    func_801DD350((s32)work);
+    func_801DD350(work);
     g_Task->timer = 4;
     func_801DEE4C();
     SND_QueueSelectionFx(0x205);

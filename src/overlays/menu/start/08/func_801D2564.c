@@ -42,7 +42,7 @@ MATCH void func_801D2564(void) {
             *selection = 0;
         }
     }
-    if (old_selection != (u8)D_80148656) {
+    if (old_selection != D_80148656) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
     pad_state   = &g_InputPressed;

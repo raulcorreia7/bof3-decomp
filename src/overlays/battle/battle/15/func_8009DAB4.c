@@ -24,13 +24,13 @@ MATCH void func_8009DAB4(void) {
     switch (RANDOM_MASK(3)) {
         case 0: {
             u16* cell = (u16*)&D_801EC30C;
-            *cell     = (u16)(*cell >> 1);
+            *cell     = (*cell >> 1);
             break;
         }
         case 3: {
             volatile u16* cell = &D_801EC30C;
             u16           half = *cell;
-            *cell              = half + (u16)(half >> 1);
+            *cell              = half + (half >> 1);
             break;
         }
     }

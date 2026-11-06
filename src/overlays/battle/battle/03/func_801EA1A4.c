@@ -15,5 +15,5 @@ MATCH void func_801EA1A4(void) {
     task2               = root[-0x1E6E];
     *(u16*)((task + 4)) = value_10;
     *(u16*)((task + 6)) = value_12;
-    task2[3]            = (u8)(task2[3] - 1u);
+    task2[3]            = (task2[3] - 1u);
 }

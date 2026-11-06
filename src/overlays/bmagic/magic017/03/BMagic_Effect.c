@@ -61,7 +61,7 @@ MATCH void func_801EF6EC(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        if ((u8)g_BattleActiveBattler >= 3U) {
+        if (g_BattleActiveBattler >= 3U) {
             func_801E257C(g_BattleActiveBattler, 0);
         }
         g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;

@@ -37,7 +37,7 @@ MATCH void func_8009F0A4(void) {
     if ((shifted + 0x1E) >= 0x65) {
         level = 0x64;
     } else {
-        level = (u8)(shifted + 0x1E);
+        level = (shifted + 0x1E);
     }
     D_801EC324 = level;
     /* FAKE: keep the level store ahead of the counter store. */

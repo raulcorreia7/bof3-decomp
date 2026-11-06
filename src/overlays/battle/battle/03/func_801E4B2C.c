@@ -6,8 +6,7 @@ MATCH void func_801E4B2C(void) {
     if (EMI_LoaderIsReady() != 0) {
         if (((EnemyBattler*)g_BattleCurrentEnemy)->unk_F5 == 4) {
             if (g_BattleEncounter != 0) {
-                if (!(func_801DDF50((((EnemyBattler*)g_BattleCurrentEnemy)->unk_F0 + 0x20) & BYTE_MASK,
-                                    (u32)D_801463CD) &
+                if (!(func_801DDF50((((EnemyBattler*)g_BattleCurrentEnemy)->unk_F0 + 0x20) & BYTE_MASK, D_801463CD) &
                       0xFF)) {
                     g_Task->unk_09 = 0x1EU;
                 } else {
@@ -23,9 +22,9 @@ MATCH void func_801E4B2C(void) {
             g_Task->unk_09 = MEM_PTR(u8, 0x800E40CFu)[((EnemyBattler*)g_BattleCurrentEnemy)->kind * 0x88u];
             func_801E2314(6U);
             work       = g_Task;
-            work->step = (u8)(work->step + 1);
+            work->step = (work->step + 1);
         } else {
-            g_Task->mode = (u8)(g_Task->mode + 1);
+            g_Task->mode = (g_Task->mode + 1);
         }
         func_801E3160();
     }

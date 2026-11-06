@@ -10,7 +10,7 @@ MATCH void func_801E48D4(void) {
     work = g_Task;
     work->unk_44 += work->unk_10;
     work->unk_10 += work->unk_1C;
-    timer = (s32)work->unk_44;
+    timer = work->unk_44;
     if (timer < 0) {
         func_801E54EC();
     }

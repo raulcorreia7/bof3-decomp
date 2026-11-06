@@ -12,9 +12,9 @@ MATCH void func_801E9BEC(void) {
     D_801ED420[ICON_TASK->state]();
     Menu_DrawHeaderBar(ICON_TASK->x, ICON_TASK->y, 0x118, 0x13, D_80144952);
     if (ICON_CURSOR != 0) {
-        WinDrawCueText((s16)(ICON_TASK->x + 7), (s16)(ICON_TASK->y + 3), (u16)ICON_CURSOR);
+        WinDrawCueText((ICON_TASK->x + 7), (ICON_TASK->y + 3), (u16)ICON_CURSOR);
         if (ICON_CURSOR == 0x1A || ICON_CURSOR == 0x31) {
-            WinDrawCueText((s16)(ICON_TASK->x + 7), (s16)(ICON_TASK->y + 3), 0xF);
+            WinDrawCueText((ICON_TASK->x + 7), (ICON_TASK->y + 3), 0xF);
         }
     }
 }

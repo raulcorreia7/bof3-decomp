@@ -9,7 +9,7 @@ MATCH void func_801D2D64(void) {
     D_80148498 = 1;
     D_80148499 = 7;
     D_8014849A = 0xA;
-    D_8014849C = (s16)D_80148430;
+    D_8014849C = D_80148430;
     D_8014849E = (D_80148432 + (g_ShopStockIndex - D_80148437) * 0xD) + 0x14;
     D_801484A2 = g_ShopItemCategory;
     D_801484A3 = g_ShopItemId;

@@ -12,7 +12,7 @@ MATCH void func_801E1494(void) {
 
     PartyBattler* work;
     work  = g_GameState;
-    value = (s16)work->hp_change;
+    value = work->hp_change;
     if (work->chr.hp <= value) {
         work->chr.status = STATUS_KO;
         work->chr.hp     = 0;
@@ -33,11 +33,11 @@ MATCH void func_801E1494(void) {
     }
     work = g_GameState;
     if (work->unk_120 & 1) {
-        func_800AAC88((s16)work->hp_change, g_Task->slot);
+        func_800AAC88(work->hp_change, g_Task->slot);
         work = g_GameState;
     }
     if (work->unk_120 & 2) {
-        func_800AAEBC((s16)work->ap_change, g_Task->slot);
+        func_800AAEBC(work->ap_change, g_Task->slot);
     }
     func_801DEDE4();
     g_Task->unk_03 = g_Task->unk_03 + 1;

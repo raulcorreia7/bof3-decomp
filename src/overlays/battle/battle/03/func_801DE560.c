@@ -20,7 +20,7 @@ MATCH void func_801DE560(u8 event_kind, u8 arg1, u8 arg2, u8 arg3, u8* payload) 
             D_801EB4F3[index][-1] = arg1;
             D_801EB4F3[index][0]  = arg2;
             D_801EB4F8[index][0]  = arg3;
-            D_801EB4F4[index][0]  = (u32)payload;
+            D_801EB4F4[index][0]  = payload;
             D_801EB4FA[index][0]  = 0u;
             return;
         }

@@ -14,7 +14,7 @@ MATCH void func_801E5CA4(void) {
                 if (slot->mode < 3U) {
                     Battle_DrawRollingDigits(slot->unk_27);
                 } else {
-                    Battle_DrawNumber((s16)(COORD_INT(slot->pos.x) - 0xC), COORD_INT(slot->pos.y), slot->unk_27,
+                    Battle_DrawNumber((COORD_INT(slot->pos.x) - 0xC), COORD_INT(slot->pos.y), slot->unk_27,
                                       slot->word_60.capture_count);
                 }
                 break;

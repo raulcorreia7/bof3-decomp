@@ -14,5 +14,5 @@ MATCH void func_801DE60C(u32 slot, u8 action_kind, u8 arg2, u8 arg3, u8 arg4, u8
     g_BattleEventSlots[offset + 0xAu]           = 0u;
     g_BattleEventSlots[offset]                  = flag | 1u;
     *(u16*)((g_BattleEventSlots + offset + 8u)) = half;
-    *(u32*)((g_BattleEventSlots + offset + 4u)) = (u32)payload;
+    *(u32*)((g_BattleEventSlots + offset + 4u)) = payload;
 }

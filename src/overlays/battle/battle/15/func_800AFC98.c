@@ -18,7 +18,7 @@ MATCH void func_800AFC98(s32 effect_0, s32 effect_1) {
     sel   = effect_0;
     other = effect_1;
     if (kind < 3u) {
-        g_GameState = (u32)&g_BattlePartyBattlers[kind];
+        g_GameState = &g_BattlePartyBattlers[kind];
         test        = sel & BYTE_MASK;
         if (test != 0) {
             func_801DD858((effect_0 + 1) & BYTE_MASK);
@@ -29,6 +29,6 @@ MATCH void func_800AFC98(s32 effect_0, s32 effect_1) {
     } else if (g_BattleEncounter != 0u) {
         func_801E52F0(*ENEMY_COMBATANT(kind).unk_E8);
     } else {
-        SND_QueueSelectionFx(((u32)ENEMY_COMBATANT(kind).kind * 2u) | 0x600u);
+        SND_QueueSelectionFx((ENEMY_COMBATANT(kind).kind * 2u) | 0x600u);
     }
 }

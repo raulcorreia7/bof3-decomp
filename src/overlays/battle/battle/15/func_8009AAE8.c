@@ -8,7 +8,7 @@ MATCH void func_8009AAE8(void) {
 
     saveBuf   = D_801485A1;
     selectBit = g_CharSlot[D_80144F5D[D_801485C4]];
-    if (((s32)(Item_GetEquipability(D_8014859C, saveBuf) & BYTE_MASK) >> selectBit) & 1) {
+    if (((Item_GetEquipability(D_8014859C, saveBuf) & BYTE_MASK) >> selectBit) & 1) {
         D_801485C5 = 0;
         bitIndex   = selectBit & BYTE_MASK;
     } else {

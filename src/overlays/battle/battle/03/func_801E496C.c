@@ -5,14 +5,14 @@ MATCH void func_801E496C(void) {
     u16 cap;
 
     /* The bar's cap is read before the damage, so the test is written cap-first. */
-    if ((s32)g_BattleCurrentEnemy->hp <= g_BattleCurrentEnemy->hp_change) {
+    if (g_BattleCurrentEnemy->hp <= g_BattleCurrentEnemy->hp_change) {
         g_BattleCurrentEnemy->hp     = 0;
         g_BattleCurrentEnemy->status = STATUS_KO;
     } else {
         if (g_BattleCurrentEnemy->hp_change < 0) {
             SND_PlayCue(EMI_CUE_ID(2, 6));
         }
-        remainder                = g_BattleCurrentEnemy->hp - (u16)g_BattleCurrentEnemy->hp_change;
+        remainder                = g_BattleCurrentEnemy->hp - g_BattleCurrentEnemy->hp_change;
         cap                      = g_BattleCurrentEnemy->stats.max_hp;
         g_BattleCurrentEnemy->hp = remainder;
         if (cap < remainder) {

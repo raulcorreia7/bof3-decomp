@@ -27,7 +27,7 @@ MATCH void func_801E006C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         D_801483A9 = 0x31;
         D_801E625C += 1;
-        if (((u8)D_801E625C) > (D_801E6258 - 1)) {
+        if ((D_801E625C) > (D_801E6258 - 1)) {
             D_801E625C = 0;
         }
     }
