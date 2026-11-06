@@ -9,7 +9,7 @@
 MATCH void func_801D4850(void) {
     u32 clr;
 
-    if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != 0x27u)) {
+    if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != ABILITY_FOCUS)) {
         if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
             {
                 u32 flags = BATTLE_ACTIVE_PARTY.turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST;
@@ -37,7 +37,7 @@ MATCH void func_801D4850(void) {
         }
     }
 
-    if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != 0xA3u)) {
+    if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != ABILITY_MEDITATION)) {
         if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
             {
                 u32 flags = BATTLE_ACTIVE_PARTY.turn.action_flags.value & 0x80u;

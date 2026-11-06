@@ -20,7 +20,8 @@ MATCH void func_800979E4(void) {
     message = (u8*)&D_80148656;
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     entry   = Party_GetAbilities(message[0], D_8014857B, 1);
-    if ((D_801CA718[entry[D_8014857C] * 0x14] & 0x80u) != 0u && (trigger & (PADLup | PADLdown)) != 0) {
+    if ((D_801CA718[entry[D_8014857C] * 0x14] & ABILITY_TARGET_BOTH_SIDES) != 0u &&
+        (trigger & (PADLup | PADLdown)) != 0) {
         D_801EB4D8->command.target = Battle_FindSelectableSlotForward(3);
         *(u8*)&g_BattleUIState -= 1u;
         SND_PlayCue(EMI_CUE_ID(1, 1));

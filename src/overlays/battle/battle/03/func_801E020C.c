@@ -32,7 +32,7 @@ MATCH void func_801E020C(void) {
                 }
                 if ((LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) &&
                     ((D_801CA71C[g_BattleActionId].mask & 0x800) != 0) && ((func_801DD448() & BYTE_MASK) != 0) &&
-                    ((D_801CA718[g_BattleActionId][0] & 0x10) == 0)) {
+                    ((D_801CA718[g_BattleActionId][0] & ABILITY_TARGET_ALL) == 0)) {
                     g_BattleState |= BATTLE_STATE_REPRISAL_PENDING;
                 }
             }
