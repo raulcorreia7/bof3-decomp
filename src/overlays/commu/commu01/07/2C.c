@@ -75,7 +75,7 @@ INCLUDE_ASM(func_801D4178);
 
 INCLUDE_ASM(func_801D42DC);
 
-/* 2 differences; +0x60 returns early without the retail s16 shift pair; try the result type. */
+/* needs: Area_SampleHeight result type; first diff: +0x60 early return. */
 INCLUDE_ASM(func_801D4474);
 
 INCLUDE_ASM(func_801D44E0);
@@ -92,7 +92,7 @@ MATCH void func_801D47C4(void) {
 
 INCLUDE_ASM(func_801D482C);
 
-/* Needs typed 18-byte lookup data and fairy room access; m2c cannot compile the draft. */
+/* needs: typed 18-byte lookup data and fairy room access. */
 INCLUDE_ASM(func_801D49C4);
 
 INCLUDE_ASM(func_801D4AAC);

@@ -37,9 +37,7 @@ INCLUDE_ASM(func_801EF054);
 
 INCLUDE_ASM(func_801EF23C);
 
-/* Follows sce10eff func_801D218C (160 instructions) but draws through Area_AddCellPrim(x, y, 2, 12) and starts with a
- * 128 base length where the template has 64 (first difference li v0,64 against li v0,128 at +0x18; the frame is also 64
- * bytes against 56). */
+/* blocker: base length 128 against 64; first diff: li v0,64 against li v0,128 at +0x18. */
 INCLUDE_ASM(func_801EF9A4);
 
 INCLUDE_ASM(func_801EFC74);

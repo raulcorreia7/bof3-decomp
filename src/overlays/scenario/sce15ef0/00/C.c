@@ -51,9 +51,7 @@ MATCH void func_801D0DB0(void) {
     }
 }
 
-/* 12 differing; first at +0x34: candidate lb a0,94(v0) against retail lb v0,94(v0) — the fade value
- * must stay in v0 and copy to the call argument in the arms (an s32 unused[2] filler sizes the frame
- * right); next lever: permuter on the fade value register. */
+/* blocker: fade value register; first diff: +0x34 lb a0,94(v0) (candidate) against lb v0,94(v0) (retail). */
 INCLUDE_ASM(func_801D0E5C);
 
 MATCH void func_801D0F44(void) {

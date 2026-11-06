@@ -1,4 +1,4 @@
 #include "area098_13.h"
 
-/* Best 66 diffs: first saved s1 stack slot; type the projected coordinates. */
+/* blocker: register allocation; first diff: saved s1 stack slot. */
 INCLUDE_ASM(func_801F46EC);

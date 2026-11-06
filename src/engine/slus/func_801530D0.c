@@ -247,9 +247,6 @@ NON_MATCHING s32 func_801530D0(void) {
     func_80153D34();
 }
 #else
-/* nonmatching 69.51%: first difference +0x0 retail addiu sp,sp,-0x78 against candidate -0x70; retail keeps 8 reload
- * homes at 0x10-0x4F (used 0x10/0x18/0x20/0x40/0x48), the draft 7 (used 0x10-0x30). resume: a source shape with one
- * more reload home between the map-bundle base pointer and the two OT-stepper locals (unused homes: retail
- * 0x28/0x30/0x38, draft 0x38/0x40; both are reload (use (mem)) placeholder homes). */
+/* blocker: stack frame; first diff: +0x0 addiu sp,sp,-0x78 (retail) against -0x70 (candidate). */
 INCLUDE_ASM(func_801530D0);
 #endif

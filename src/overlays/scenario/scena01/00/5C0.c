@@ -6,8 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801F71C0);
 
-/* 3 differing; first at +0x68: candidate li v0,100 against retail li v1,320 — the 0x140
- * materialization must precede the 0x64 one (v1 holds the long-lived constant); permuter. */
+/* blocker: constant order; first diff: +0x68 li v0,100 (candidate) against li v1,320 (retail). */
 INCLUDE_ASM(func_801F729C);
 
 MATCH void func_801F73B8(void) {
@@ -70,10 +69,10 @@ INCLUDE_ASM(func_801F7A24);
 
 #include "shared/Area_ClearWorkColumn.h"
 
-/* needs: particle record type at 0x800E4800; m2c draft does not compile. */
+/* needs: particle record type at 0x800E4800. */
 INCLUDE_ASM(func_801F7AE4);
 
-/* needs: particle record type at 0x800E4800; m2c draft does not compile. */
+/* needs: particle record type at 0x800E4800. */
 INCLUDE_ASM(func_801F7C54);
 
 INCLUDE_ASM(func_801F7D04);
@@ -209,7 +208,7 @@ MATCH void func_801FCE30(void) {
 
 INCLUDE_ASM(func_801FCEC0);
 
-/* needs: declaration D_801FE280; m2c draft does not compile. */
+/* needs: D_801FE280 declaration. */
 INCLUDE_ASM(func_801FD28C);
 
 MATCH void func_801FD444(void* record) {
@@ -325,9 +324,7 @@ INCLUDE_ASM(func_801FDA6C);
 
 INCLUDE_ASM(func_801FE03C);
 
-/* Returns -1 unless scene flag 3 is set and flag 4 clear, else sets the script active, D_80146874 = 5 and returns 1.
- * Three shapes (early returns, nested ifs, one result local) fail: retail loads the return 1 into the delay slot of
- * Game_SetScriptActive, the C puts li v1,5 there (first differing instruction, +0x40: li v0,1). */
+/* blocker: return 1 in the Game_SetScriptActive delay slot; first diff: +0x40 li v0,1. */
 INCLUDE_ASM(func_801FE0A4);
 
 MATCH void func_801FE10C(void) {

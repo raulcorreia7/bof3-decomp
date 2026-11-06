@@ -1,4 +1,4 @@
 #include "area160_13.h"
 
-/* m2c draft needs the coordinate table declaration before a byte comparison. */
+/* needs: coordinate table declaration. */
 INCLUDE_ASM(func_801F2C48);

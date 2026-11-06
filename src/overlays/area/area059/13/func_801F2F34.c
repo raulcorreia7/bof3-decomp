@@ -43,17 +43,6 @@ NON_MATCHING s32 func_801F2F34(void) {
     return 0;
 }
 #else
-/* Area request handler: Game_SetScriptActive, Actor unk_01/unk_77/unk_7E,
- * the g_Actors row index into D_80146867, then D_801448EB/D_801448ED.
- * Draft is 38/39: the first shift-add multiply temp colors v0 instead of
- * a0 (0x801F2F7C retail `sll a0,a1,3`) and the chain colors follow. Best
- * score 55 (work/permute/nonmatchings/func_801F2F34-3). GCC 2.7.2
- * local-alloc.c closes every other color: the last-use tie gives
- * subu a1,a1,v1, the copy-propagated product copy leaves a fresh temp,
- * and const4 scans to a2 last. The tied {record,row} qty and the first
- * temp must both skip free v0/v1 in the regno scan though no hard reg
- * holds v0 across the chain - that model does not close. Next lever: a
- * shape whose first chain temp takes a0 with v0 free. Then
- * func_801F3F48 (unk_77 = 5, D_801448ED = 3). */
+/* blocker: multiply temp register; first diff: 0x801F2F7C sll a0,a1,3 (retail) uses v0 (candidate). */
 INCLUDE_ASM(func_801F2F34);
 #endif

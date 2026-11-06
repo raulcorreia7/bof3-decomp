@@ -19,13 +19,10 @@ MATCH void func_801F7014(void) {
 
 INCLUDE_ASM(func_801F7028);
 
-/* Greys the 32 palettes of 256 u16 at 0x80037800 (stride 0x200): each channel becomes (r + g + b) / 3 as an unsigned
- * divide, bit 15 kept, then g_GfxPalettePending = 1. Closest form hoists the row (row = base + (palette << 9)) and indexes
- * row[index]; it stays 4 bytes short and puts the color in a0 where retail uses a1 (first differing instruction +0x30:
- * lhu a1,0(a2)). Round 5: with a do-while inner loop, `entry = (u16*)(index * 2 + (u32)row)` and `grey | (grey << 5) | (grey << 10) | (color & 0x8000)` every instruction matches up to +0x68, where retail holds the grey in v0 and shifts through v1 while the candidate swaps them. */
+/* blocker: color register; first diff: +0x30 lhu a1,0(a2). */
 INCLUDE_ASM(func_801F7960);
 
-/* needs: declaration D_801FC4C0; m2c draft does not compile. */
+/* needs: D_801FC4C0 declaration. */
 INCLUDE_ASM(func_801F7A18);
 
 MATCH void func_801F7B5C(void) {
@@ -205,9 +202,7 @@ MATCH void func_801FC0C8(void) {
     func_801C1630();
 }
 
-/* Copies the three party character ids (g_BattlePartyBattlers[i].chr.character_id) into D_80144908, calls func_801C1ABC
- * on each, EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0), g_PartySize = 0, Party_JoinMember(CHAR_ID_RYU_ADULT), func_801C1630(). The body is right but
- * retail's frame is 0x20 against 0x18 (first differing instruction +0x0: addiu sp,sp,-32). */
+/* blocker: frame 0x20 against 0x18; first diff: +0x0 addiu sp,sp,-32. */
 INCLUDE_ASM(func_801FC130);
 
 MATCH void func_801FC1E8(void) {

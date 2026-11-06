@@ -22,7 +22,7 @@ INCLUDE_ASM(func_801CEA94);
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
-/* Draft: 2 differing instructions at +0x13C; try loop initialization order. */
+/* blocker: loop initialization order; first diff: +0x13C. */
 INCLUDE_ASM(func_801CED1C);
 
 #include "overlays/plchar/Char_SpawnActor.h"
@@ -41,7 +41,7 @@ MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801CFDA4, 2, g_Task);
 }
 
-/* Draft differs at +0xE8: SND_PlayCue argument narrows to u16; retail passes the full sum. */
+/* blocker: SND_PlayCue argument narrows to u16; first diff: +0xE8. */
 INCLUDE_ASM(func_801CF37C);
 
 #include "overlays/plchar/Char_ClearModeIfSlotFree.h"

@@ -382,9 +382,7 @@ MATCH void func_801F8404(void) {
     }
 }
 
-/* 7 differing; first at +0x18: candidate addiu v0,v0,2 against retail addiu a1,v0,2. Two
- * tail-merged calls of func_801F8B10 with the +2 sum kept in a1 (their second argument);
- * next lever: permuter on the sum local's register. */
+/* blocker: sum register; first diff: +0x18 addiu v0,v0,2 (candidate) against addiu a1,v0,2 (retail). */
 INCLUDE_ASM(func_801F8480);
 
 /* nonmatching: timer D_80146875 counts up; at 0x80 it sets D_80146867 = 0x3C, the timer to 0x1E, D_801F9DD8 = 0, steps D_80146874, starts EMI_LoaderStreamInitSlot(0x260), then calls func_801F8FAC(0xE0, 0xBE, shade, 1) and func_801F8B10(0x4B0, 0x80). Candidate is 8 bytes short (first differing instruction: bnez at +0x28 targets +0x78 against +0x70): retail sets a0, a1 and a2 inside the branch and ends it with j, and sets only a1 on the other path. */
@@ -408,9 +406,7 @@ MATCH void func_801F84F4(void) {
     func_801F8B10(0x4B0, 0x80);
 }
 
-/* 6 differing; first at +0x2C: candidate beqz v0 targets the shared li against retail's jal (the
- * ready-skip and step-branch delay slots each hold li a0,0x4B0 in retail); next lever: permuter on
- * the arg duplication across paths, or a body where each path has its own func_801F8B10 call. */
+/* blocker: argument duplication across paths; first diff: +0x2C beqz v0 target against jal. */
 INCLUDE_ASM(func_801F8594);
 
 MATCH void func_801F8664(void) {
@@ -517,8 +513,7 @@ MATCH void func_801F8EF0(void) {
 
 INCLUDE_ASM(func_801F8FAC);
 
-/* 13 differing; first at +0x14: candidate move s2,a2 against retail move s2,a3 (retail maps
- * the args s1=pal, s2=tex, s3=x, s4=y); next lever: permuter on the arg locals' use order. */
+/* blocker: argument locals' register order; first diff: +0x14 move s2,a2 (candidate) against move s2,a3 (retail). */
 INCLUDE_ASM(func_801F90BC);
 
 MATCH void func_801F9160(s16 x, s16 y) {

@@ -39,10 +39,8 @@ INCLUDE_ASM(func_801F8F18);
 
 INCLUDE_ASM(func_801F90C0);
 
-/* Stores GAME_REQUEST_ABILITY_MENU to g_GameStateIndex twice (at 0x801F98D8 and 0x801F9ADC). */
 INCLUDE_ASM(func_801F97C0);
 
-/* Stores GAME_REQUEST_ABILITY_MENU to g_GameStateIndex (at 0x801FA1AC). */
 INCLUDE_ASM(func_801F9DF4);
 
 INCLUDE_ASM(func_801FA3D0);
@@ -61,7 +59,7 @@ INCLUDE_ASM(func_801FBC88);
 
 INCLUDE_ASM(func_801FBD88);
 
-/* m2c produced no compiling draft; jump table starts at +0x20. */
+/* needs: compiling draft for the jump table at +0x20. */
 INCLUDE_ASM(func_801FC498);
 
 INCLUDE_ASM(func_801FC718);
@@ -252,7 +250,7 @@ INCLUDE_ASM(func_801FDD7C);
 MATCH void func_801FDE2C(void) {
 }
 
-/* Permuter, 6 min, best score 170: no exact candidate. First diff at 801FDE4C is the scheduled load. */
+/* blocker: scheduled load; first diff: 801FDE4C. */
 INCLUDE_ASM(func_801FDE34);
 
 INCLUDE_ASM(func_801FDEA4);

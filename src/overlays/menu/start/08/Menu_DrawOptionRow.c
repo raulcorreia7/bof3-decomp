@@ -119,6 +119,6 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
     GFX_AddPrim(1U, 0x10U);
 }
 #else
-/* The retail stack work area holds six packed records copied from D_801D0DE0 to D_801D0E14 and a 12-entry string table over them; the packed record types in this file are the blocker. */
+/* blocker: packed record types for the stack work area. */
 INCLUDE_ASM(Menu_DrawOptionRow);
 #endif

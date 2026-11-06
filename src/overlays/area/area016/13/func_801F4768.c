@@ -141,6 +141,6 @@ NON_MATCHING void func_801F4768(void) {
     }
 }
 #else
-/* Best 175 diffs: first lui a1/t0; try stack locals and register lifetimes. */
+/* blocker: register allocation; first diff: lui a1 against t0. */
 INCLUDE_ASM(func_801F4768);
 #endif

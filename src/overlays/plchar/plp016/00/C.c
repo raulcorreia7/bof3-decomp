@@ -83,7 +83,7 @@ INCLUDE_ASM(func_801CF8B4);
 INCLUDE_ASM(func_801CFD24);
 
 /* Exact draft: pin y to s4 and kind to s2, leave x unpinned; shared twins need an evidenced name. */
-/* Draft: first diff +0x04, register allocation; try keeping the shared flag live. */
+/* blocker: shared flag lifetime; first diff: +0x04. */
 INCLUDE_ASM(func_801CFF30);
 
 MATCH void func_801D001C(void) {

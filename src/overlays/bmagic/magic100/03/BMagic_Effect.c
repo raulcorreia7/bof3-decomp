@@ -77,8 +77,7 @@ INCLUDE_ASM(func_801EF0D8);
 
 INCLUDE_ASM(func_801EF1DC);
 
-/* Spin step: moves x/y by unk_0C/unk_10, raises span_3E by 0x40, turns unk_20 by +-0x200 (mod 0x1000, direction unk_0B & 1), counts unk_0A down. Tried the m2c if/else into a s32/u32/u8 local, a ternary and in-place
- * updates: first differing instruction addiu v0,v0,512 retail against addiu a0,v0,512 (retail keeps the angle in v0, the candidate allocates a0). */
+/* blocker: angle register; first diff: addiu v0,v0,512 (retail) against addiu a0,v0,512 (candidate). */
 INCLUDE_ASM(func_801EF358);
 
 MATCH void func_801EF434(void) {

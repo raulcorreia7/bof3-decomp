@@ -514,10 +514,7 @@ MATCH s32 func_801FC690(void) {
     return 0;
 }
 
-/* li v1,30 at 0x801FC6D4: the zero return keeps v0, so both constants need v1 (801FC5A4's
- * return 1 shows the split). Pure C and a temp both stay v0; permuter is zero only with a
- * volatile-return prototype. One MATCH_REG reused for both constants matches, but it is a
- * third pin in this file: needs a removable MATCH_REG elsewhere for the quality gate. */
+/* blocker: both constants need v1; first diff: li v1,30 at 0x801FC6D4. */
 INCLUDE_ASM(func_801FC6C4);
 INCLUDE_ASM(func_801FC704);
 
@@ -632,7 +629,7 @@ MATCH s32 func_801FCCDC(void) {
 
 INCLUDE_ASM(func_801FCD1C);
 
-/* needs: declarations D_801FD030 and D_801FD038; m2c draft does not compile. */
+/* needs: D_801FD030 and D_801FD038 declarations. */
 INCLUDE_ASM(func_801FCDB4);
 
 MATCH void func_801FCE18(void) {

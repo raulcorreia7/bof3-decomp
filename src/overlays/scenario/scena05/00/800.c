@@ -205,7 +205,7 @@ MATCH void func_801FC778(void) {
     }
 }
 
-/* nonmatching: two 3-row loops over D_80144F5A (stores 1 for id 5, 2 for id 6 into D_80146865); retail keeps the store in the delay slot of the bne and hoists &D_80146865 and the compared id into a1 and a2 (first differing instruction: li a2,5 against li a1,5, candidate 8 bytes short). */
+/* blocker: store in the bne delay slot; first diff: li a2,5 against li a1,5. */
 INCLUDE_ASM(func_801FC808);
 
 INCLUDE_ASM(func_801FC8A0);

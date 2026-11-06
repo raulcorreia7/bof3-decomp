@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* Needs split review: entry reads v0 and v1 before setting them. */
+/* blocker: entry reads v0 and v1 before setting them. */
 INCLUDE_ASM(func_801D2AFC);
 
 MATCH void func_801D2C0C(void) {
@@ -67,7 +67,7 @@ MATCH void func_801D2E20(void) {
     func_801D2ADC();
 }
 
-/* 10 differing: +0x54 loads 0x02000000, not 0xFE000000; preserve the intermediate subtraction. */
+/* blocker: intermediate subtraction; first diff: +0x54 loads 0x02000000, not 0xFE000000. */
 INCLUDE_ASM(func_801D2E80);
 
 MATCH void func_801D2F48(void) {
@@ -160,7 +160,7 @@ MATCH void func_801D32E0(void) {
 
 INCLUDE_ASM(func_801D3320);
 
-/* Same body in the shop, start, Bate and Shisu overlays; the shop draft is the closest start, and the retail register homes keep py in s2 and the shaded byte in s3. */
+/* blocker: register homes (py in s2, shaded byte in s3). */
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 
 #include "overlays/menu/Menu_DrawStatPanel.h"
@@ -211,18 +211,17 @@ INCLUDE_ASM(func_801D65DC);
 
 #include "overlays/menu/Menu_DrawRowIcons.h"
 
-/* Same body in the shop, start, Bate and Shisu overlays; the shop draft differs from retail in frame size (0x58 against 0x50) and save order, and the retail parameter locals sit in s6, s3, s0 and s4. */
+/* blocker: frame 0x58 against 0x50 and save order. */
 INCLUDE_ASM(Menu_DrawEquipStatWindow);
 
 INCLUDE_ASM(func_801D7224);
 
 #include "overlays/menu/Menu_DrawFilledPanel.h"
 
-/* Same body in the shop, start, Bate and Shisu overlays; the start draft covers the five SPRT bands and four corner sprites, and the missing piece is a source shape for the retail per-band draw-mode setup. */
+/* blocker: per-band draw-mode setup. */
 INCLUDE_ASM(Menu_DrawWindowFrame);
 
-/* Same shape as bate/00 func_801D6C54: follows etc/game/00 func_801999F8.
- * First differing instruction: +0x138 `lhu v1,18(s1)` (template `andi v1,s0,0xff`). */
+/* blocker: first diff: +0x138 lhu v1,18(s1) (template andi v1,s0,0xff). */
 INCLUDE_ASM(func_801D7BFC);
 
 MATCH void func_801D835C(MenuChoicePanel* panel) {

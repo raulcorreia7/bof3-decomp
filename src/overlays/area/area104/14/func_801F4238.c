@@ -1,4 +1,4 @@
 #include "area104_14.h"
 
-/* Best 97 diffs: first lbu step/lui frame count; try separating load and store. */
+/* blocker: load and store order; first diff: lbu step against lui frame count. */
 INCLUDE_ASM(func_801F4238);

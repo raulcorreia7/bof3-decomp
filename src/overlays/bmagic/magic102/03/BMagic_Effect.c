@@ -31,7 +31,7 @@ INCLUDE_ASM(func_801EFD7C);
 
 INCLUDE_ASM(func_801EFEFC);
 
-/* Template: exe Area_DrawGouraudQuads needs the local i, which this function lacks; compile fails. */
+/* needs: local i for exe Area_DrawGouraudQuads. */
 INCLUDE_ASM(func_801F016C);
 
 INCLUDE_ASM(func_801F0488);

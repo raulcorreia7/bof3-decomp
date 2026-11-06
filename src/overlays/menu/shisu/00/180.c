@@ -161,7 +161,7 @@ MATCH void func_801D1910(void) {
     }
 }
 
-/* 7 differing: the copy block loads D_80148652 and the D_801DA0A7 source late (v0 reused after the D_801DA0C1/D_801DA049 stores); the draft hoists both early (v1/t1). Permuter, 6 min, best score 320: no exact candidate. */
+/* blocker: late loads of D_80148652 and D_801DA0A7 sources. */
 INCLUDE_ASM(func_801D1964);
 
 INCLUDE_ASM(func_801D1A20);
@@ -175,10 +175,7 @@ MATCH void func_801D1CA4(void) {
     g_MenuStatusItems.held[3] = Item_Count(ITEM_CAT_ITEM, 86, 0);
 }
 
-/* Tried: store-seq body with the status block declared in shisu_00.h.
- * GCC loads the first store constant (li v0,20) first; retail hoists
- * li v1,1 and li a0,2 before it. First diff +0x00: li v0,20.
- */
+/* blocker: store constant order; first diff: +0x00 li v0,20. */
 INCLUDE_ASM(func_801D1D1C);
 
 MATCH void func_801D1E34(void) {

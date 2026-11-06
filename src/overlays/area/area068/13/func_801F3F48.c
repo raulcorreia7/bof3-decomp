@@ -43,13 +43,6 @@ NON_MATCHING s32 func_801F3F48(void) {
     return 0;
 }
 #else
-/* Same request-handler family as emi/world01/area059/13 func_801F2F34
- * (unk_77 = 5, D_801448ED = 3 differ) and shares its 38/39 draft shape;
- * the first shift-add multiply temp colors v0 instead of a0. This image
- * also wants the g_Actors address in the third reload's delay slot
- * (0x801F3F80); every tried form (barrier before/after the reload,
- * base assignment after it) schedules it one instruction earlier at
- * 0x801F3F78, ahead of the third reload. First differing instruction
- * 0x801F3F78. */
+/* blocker: g_Actors address load scheduled early; first diff: 0x801F3F78. */
 INCLUDE_ASM(func_801F3F48);
 #endif

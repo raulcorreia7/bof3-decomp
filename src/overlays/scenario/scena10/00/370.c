@@ -95,9 +95,7 @@ MATCH u8 func_801FA5EC(void) {
     return 0;
 }
 
-/* Tests D_80144908 >= 2, D_8014490A >= 3, D_8014490B >= 2, D_8014490D != 0 in turn and returns D_8014490F >= 2, else 0.
- * Five shapes (one condition, nested ifs, early returns, a result local) put the first lui in v0; retail uses v1 and
- * keeps the 0 result in v0 from the first branch delay slot. */
+/* blocker: first lui in v1; first diff: lui v0 (candidate) against lui v1 (retail). */
 INCLUDE_ASM(func_801FA644);
 
 INCLUDE_ASM(func_801FA6BC);

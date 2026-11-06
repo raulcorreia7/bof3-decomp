@@ -446,7 +446,6 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
     } while (i < 18);
 }
 #else
-/* The draft keeps the radius, angle and ramp in the scratchpad cells D_1F800000, D_1F800004 and D_1F800008 and its score is not measured; the next lift measures it first. */
 INCLUDE_ASM(Scene_DrawBands);
 #endif
 

@@ -156,6 +156,6 @@ NON_MATCHING void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height) {
     UI_DrawSprite(val4, val5, 0x29, 1);
 }
 #else
-/* Same body in the shop, start, Bate and Shisu overlays; the start draft covers the five SPRT bands and four corner sprites, and the missing piece is a source shape for the retail per-band draw-mode setup. */
+/* blocker: per-band draw-mode setup. */
 INCLUDE_ASM(Menu_DrawWindowFrame);
 #endif
