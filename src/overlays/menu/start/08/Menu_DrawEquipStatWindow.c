@@ -1,7 +1,7 @@
 #include "start_08.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 76.42%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 76.42%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s32 equip_slot, u8 item_id) {
     u8          stack_18[4];

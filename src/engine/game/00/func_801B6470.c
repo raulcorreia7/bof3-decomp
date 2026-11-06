@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-/* The retail code never reads $a0 or $a1; the callers' arguments are leftover register values kept in the prototypes. */
+/* The retail code never reads $a0 or $a1; the callers' arguments are leftover register values kept in the prototypes.
+*/
 MATCH s32 func_801B6470(void) {
     u16 world_id;
     s32 index;

@@ -25,8 +25,8 @@ typedef struct SceneSlot {
  * kind-10 step, or looks its scene up in the loaded scene table and D_80183A70 and runs the kind step only on a
  * listed scene.
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 72.50%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 72.50%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80167E00(void) {
     EntitySlot* entity;

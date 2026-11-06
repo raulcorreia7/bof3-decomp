@@ -1,11 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* walks the bundle record list g_AreaMapBundle.object_list_28: a header of 0x8001 marks a palette entry whose low flag bit is
- * cleared, and its twelve-byte entries each write their payload word into the map row that the halfword table and the
- * entry's row and bits 14-19 select.
- */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 81.82%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* walks the bundle record list g_AreaMapBundle.object_list_28: a header of 0x8001 marks a palette entry whose low flag
+ * bit is cleared, and its twelve-byte entries each write their payload word into the map row that the halfword table
+ * and the entry's row and bits 14-19 select. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 81.82%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80154438(void) {
     /* FAKE: unused frame, 16 bytes. */

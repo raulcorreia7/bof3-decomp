@@ -53,8 +53,8 @@ extern Record6  D_801D0E04;
 extern Record8  D_801D0E0C;
 extern Record11 D_801D0E14;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 49.08%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 49.08%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_step) {
     WorkArea work;

@@ -29,7 +29,8 @@ FishingIconData D_801D0C3C = {
     },
 };
 
-/* The count thresholds that pick the roster row, read by func_801E1320: 13 halfwords ending in 0xFFFF; the struct is padded to a word. */
+/* The count thresholds that pick the roster row, read by func_801E1320: 13 halfwords ending in 0xFFFF; the struct is
+   padded to a word. */
 FishingThresholdData D_801D0C70 = {
     {100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 7000, 9000, 9500, 0xFFFF},
 };

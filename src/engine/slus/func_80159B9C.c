@@ -3,8 +3,8 @@
 /* draws a translucent textured quad and its outline at the given
  * screen position, then four corner bars around it.
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 69.08%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 69.08%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     s16       w;

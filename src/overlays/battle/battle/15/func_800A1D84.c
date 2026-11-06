@@ -18,13 +18,13 @@ typedef struct BattleBlock {
 /* Advances the player battler: bumps its timer and mirrored work row, copies the battler work rows and effect
  * vectors, and mirrors the active row value into the selection slot.
  */
-/* nonmatching unmeasured: tried the first draft with pointer locals and FIELD views (35.93%); the 16-byte packed block copies
- * (39.51%); the active index read once into a local (40.25%); the u8 loop counter (45.38%); the packed block copies
- * with the u8 counter (48.50%); the second loop's source base computed from the table base (62.55%). residual: the
- * frame - the candidate saves one register too many (s3) and keeps the loop count address in a callee-saved register
- * where retail rematerialises it in t0/t1, and the retail re-materialises the D_80145FCC base inside the loop while the
- * candidate holds it in t2. resume: a source shape with one long-lived value less, so the loop count address is
- * rematerialised per loop and the frame drops from 0x30 to the retail 0x20. */
+/* nonmatching unmeasured: tried the first draft with pointer locals and FIELD views (35.93%); the 16-byte packed block
+ * copies (39.51%); the active index read once into a local (40.25%); the u8 loop counter (45.38%); the packed block
+ * copies with the u8 counter (48.50%); the second loop's source base computed from the table base (62.55%). residual:
+ * the frame - the candidate saves one register too many (s3) and keeps the loop count address in a callee-saved
+ * register where retail rematerialises it in t0/t1, and the retail re-materialises the D_80145FCC base inside the loop
+ * while the candidate holds it in t2. resume: a source shape with one long-lived value less, so the loop count address
+ * is rematerialised per loop and the frame drops from 0x30 to the retail 0x20. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A1D84(void) {
     s32          record_index;

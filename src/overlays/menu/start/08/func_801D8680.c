@@ -2,8 +2,8 @@
 
 extern s8 D_80148656;
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 68.31%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 68.31%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8680(void) {
     s16* val0;

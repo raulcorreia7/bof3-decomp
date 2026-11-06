@@ -1,7 +1,7 @@
 #include "game_00.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 18.24%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 18.24%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
     s32*  val0;
