@@ -3,8 +3,6 @@
 
 #include "types.h"
 
-extern u8 D_80144F5A[];
-
 /* Forwards the selector byte to func_8014D6DC with a zero extra operand.
  * The retail masks the argument with 0xFF before the call
  * (`andi $a0, $a0, 0xFF`, exe/slus_004_22@0x8014D6C0), so the byte is the

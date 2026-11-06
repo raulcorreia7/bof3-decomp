@@ -14,7 +14,7 @@ NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     u8       g;
     u8       b;
 
-    color = ((u16*)&D_80033A08)[(((u32)((*(s8*)&D_80144952) << 6)) | 0x20) >> 1];
+    color = ((u16*)&D_80033A08)[(((u32)((*(s8*)&g_SaveData.window_style) << 6)) | 0x20) >> 1];
     r     = (color & 0x1F) << 3;
     g     = (color >> 2) & 0xF8;
     b     = (color >> 7) & 0xF8;

@@ -28,7 +28,7 @@ MATCH void func_801BEBB0(void) {
         while ((random = RANDOM_MASK(0x7F)) >= 101) {
         }
         if (slot < g_PartySize) {
-            if (g_SaveData.characters[g_CharSlot[D_80144F5A[slot]]].stats.surprise_chance >= random) {
+            if (g_SaveData.characters[g_CharSlot[g_SaveData.walk_order[slot]]].stats.surprise_chance >= random) {
                 id = Actor_FindFreeSlot();
                 if (id != GAME_NONE) {
                     g_ActorSlots[id].header.flags = one;

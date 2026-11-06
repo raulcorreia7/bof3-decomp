@@ -5,7 +5,7 @@ extern u8 g_MenuStartReturnStep; /* local: u8 read; a sibling copy is s8 */
 
 MATCH void func_801E5E30(void) {
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
     switch (D_801ED7FC) {
         case 0:
             break;

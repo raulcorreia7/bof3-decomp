@@ -16,7 +16,7 @@ MATCH void func_801D8050(s32 panel_x) {
         s2 = 0;
     }
     s0        = s2 & BYTE_MASK;
-    call_arg4 = D_80144952;
+    call_arg4 = g_SaveData.window_style;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - (s0 * 0xA)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, call_arg4);
     s1 = 0;
     s0 = s0 << 5;

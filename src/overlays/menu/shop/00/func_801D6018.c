@@ -3,7 +3,7 @@
 MATCH void func_801D6018(void) {
     u8 count;
 
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
     if (g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) {
         if (D_8014865B == 0) {
             count      = D_80148651;

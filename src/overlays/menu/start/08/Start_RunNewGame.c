@@ -26,7 +26,7 @@ MATCH void Start_RunNewGame(void) {
     }
     if (WINDOW_EFFECT_BUSY()) {
         Menu_DrawClutStrip(D_80144953);
-        Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+        Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
         func_801E26A8(0x1C, 0x40);
         func_801E2668(0, 0x70, 0x26);
     }

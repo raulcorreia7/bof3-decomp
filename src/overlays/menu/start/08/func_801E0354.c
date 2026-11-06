@@ -16,7 +16,7 @@ MATCH void func_801E0354(MenuPanelTask* task) {
     u8  flags;
     u8  n;
 
-    UI_DrawWindow(task->x + 3, task->y + 3, 154, 160, 0, D_80144952);
+    UI_DrawWindow(task->x + 3, task->y + 3, 154, 160, 0, g_SaveData.window_style);
     text = Party_GetAbilities(task->unk_0A, task->unk_0B, 0);
     y    = task->y;
     for (n = 0; n < 10; n++, y += 0xD, text++) {
@@ -28,7 +28,7 @@ MATCH void func_801E0354(MenuPanelTask* task) {
             }
             level   = Char_GetAbilityElement(*text);
             entry   = (u8*)&g_Abilities[*text];
-            ability = Char_GetAbilityCost(g_CharSlot[D_80144F5A[(s8)D_80148656]], *text, 0);
+            ability = Char_GetAbilityCost(g_CharSlot[g_SaveData.walk_order[(s8)D_80148656]], *text, 0);
             if (n == task->flags || n == task->unk_0C) {
                 if ((u8)color != 7) {
                     func_801AF930((s16)(task->x + 7), (s16)(y + 0x1A), 7, level, entry, ability, 1);

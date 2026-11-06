@@ -19,7 +19,7 @@ MATCH void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index) {
     u8  i;
     s32 index_off;
 
-    base = &D_80144952;
+    base = &g_SaveData.window_style;
     y15  = panel_x + 5;
     UI_DrawWindow((s32)((u16)y15), (s32)((u16)(panel_y + 3)), 148, 45, 0, (s32)base[0]);
     xb        = panel_x + 0xB;

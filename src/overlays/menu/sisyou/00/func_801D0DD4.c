@@ -79,7 +79,7 @@ after_input:
     MenuDrawSelectionBox(MASTER_MENU_ROW_X, (g_MasterMenuCursor * MASTER_MENU_ROW_PITCH + MASTER_MENU_ROW_TOP) & 0xFFFE,
                          MASTER_MENU_SELECT_WIDTH, MASTER_MENU_SELECT_HEIGHT, 1, 6);
     Menu_DrawHeaderBar(MASTER_MENU_FRAME_X, MASTER_MENU_FRAME_Y, MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT,
-                       D_80144952);
+                       g_SaveData.window_style);
     i = MASTER_MENU_TEXT_BANK + (message_id & HALF_MASK) * 2;
     UI_DrawText(MASTER_MENU_TEXT_X, MASTER_MENU_TEXT_Y, 0, 255, (u8*)(MEM(u16, i) + MASTER_MENU_TEXT_BANK));
 }

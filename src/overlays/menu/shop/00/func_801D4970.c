@@ -9,7 +9,7 @@ MATCH void func_801D4970(void) {
     if (count == 4) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
     }
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
     func_801DDFB0(0x62 - *counter * 48, 0x4C, D_801E60F8, LOBU(g_SaveCardPort), 1);
     count = *counter;
     count--;

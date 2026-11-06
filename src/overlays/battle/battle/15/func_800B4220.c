@@ -7,7 +7,7 @@ MATCH void func_800B4220(s16 x, s16 y, u8 selected) {
     s16 slot_x;
     u8* style;
 
-    style = &D_80144952;
+    style = &g_SaveData.window_style;
     UI_DrawWindow((u16)x, (u16)y, 45u, 20u, 0u, *style);
     UI_DrawText((x + 12), (y + 3), selected != GAME_NONE && selected != 0 ? 7 : 0, 0x10u, (u8*)&s_BattlePanelUseLabel);
     UI_DrawSpriteRun(x, y, selected == 0 ? &s_BattlePanelUnselectedMarker : &s_BattlePanelSelectedMarker, 1u);

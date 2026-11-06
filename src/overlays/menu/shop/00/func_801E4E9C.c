@@ -8,7 +8,7 @@ MATCH void func_801E4E9C(MenuPanelTask* panel_task) {
     /* FAKE: volatile pointer stops extra IV. */
     volatile u8* slot;
 
-    base = &D_80144952;
+    base = &g_SaveData.window_style;
     UI_DrawWindow((u16)(panel_task->x + 3), (u16)(panel_task->y + 3), 114, 88, 0, base[0]);
     col  = 0;
     row  = 0;

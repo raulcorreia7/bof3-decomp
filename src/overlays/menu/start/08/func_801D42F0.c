@@ -41,7 +41,7 @@ MATCH void func_801D42F0(void) {
     }
 
     if (g_InputPressed & D_80145AC2) {
-        result = func_801E8C9C(g_CharSlot[D_80144F5A[*current]], *items, 0) & BYTE_MASK;
+        result = func_801E8C9C(g_CharSlot[g_SaveData.walk_order[*current]], *items, 0) & BYTE_MASK;
         if ((result == 0) || (result == 4)) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             *counts -= 1;

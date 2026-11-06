@@ -45,7 +45,7 @@ NON_MATCHING u8 func_801BF11C(void) {
                 if (func_801C29A0(8) & BYTE_MASK) {
                     val7 = 0 & BYTE_MASK;
                 loop_8:
-                    if (D_80144F5D[val7] != g_GameState->slot_index_79) {
+                    if (g_SaveData.battle_order[val7] != g_GameState->slot_index_79) {
                         val0 += 1;
                         val7 = val0 & BYTE_MASK;
                         if ((u32)(val0 & BYTE_MASK) < 3U) {

@@ -30,10 +30,10 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
          (((LOBU(g_GameRequestFlags) & 0x40) != 0) && (SYS_TestFlag(g_SaveData.scene_event_flags, 0x77U) == 0)))) {
         count = Party_CountOrder(0);
         for (i = 0; i < count; i++) {
-            g_SaveData.characters[g_CharSlot[D_80144F5A[i]]].status &= ~STATUS_CONFUSED;
+            g_SaveData.characters[g_CharSlot[g_SaveData.walk_order[i]]].status &= ~STATUS_CONFUSED;
         }
         for (i = 0; i < count; i++) {
-            if (g_SaveData.characters[g_CharSlot[D_80144F5A[i]]].status & STATUS_POISONED) {
+            if (g_SaveData.characters[g_CharSlot[g_SaveData.walk_order[i]]].status & STATUS_POISONED) {
                 D_80145FA8 = 0xA;
                 break;
             }

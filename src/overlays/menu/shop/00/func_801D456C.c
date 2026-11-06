@@ -3,7 +3,7 @@
 MATCH void func_801D456C(void) {
     s32 confirm;
 
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
     if (D_8014865C != -1) {
         confirm = g_UiWindowChannel & FRONTEND_FLAG_CONFIRM;
     } else {

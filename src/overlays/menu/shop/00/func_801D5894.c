@@ -8,7 +8,7 @@ MATCH void func_801D5894(void) {
     char save_name[0x40];
 
     g_SaveSlotCount = 3;
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
     WinDrawCueText(28, 22, D_801E60EC + 0x85);
     SAVE_DrawSlots(0x20, 0x30, 0);
     CardAccessFile(0, 0, 0, 0, 0);

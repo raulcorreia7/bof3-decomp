@@ -16,7 +16,7 @@ NON_MATCHING s32 func_8009AC18(void) {
     u32 i;
     s32 j;
 
-    base     = &g_SaveData.characters[g_CharSlot[D_80144F5D[D_801485C4]]];
+    base     = &g_SaveData.characters[g_CharSlot[g_SaveData.battle_order[D_801485C4]]];
     slots[0] = base + 0xE;
     slots[1] = base + 0xF;
     slots[2] = base + 0x10;

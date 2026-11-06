@@ -6,13 +6,13 @@
 
 #include "overlays/scenario/scenario.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 
 #define SCRATCH_ROW_STRIDE 0x28
 #define SCRATCH_ROW_OFFSET 0x25
 
 extern u16 g_GameAreaId;
 extern s8  D_80144EA8;
-extern u8  D_80144F5A;
 extern u8  D_80144F5B;
 extern u8  D_80144F5C;
 extern u8  D_80144F5E;

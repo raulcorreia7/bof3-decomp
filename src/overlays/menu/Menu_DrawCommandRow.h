@@ -25,7 +25,7 @@ MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
         return;
     }
     do {
-        UI_DrawWindow((s32)(u16)(x + i * 48), (s32)(u16)y, 45, 20, 0, D_80144952);
+        UI_DrawWindow((s32)(u16)(x + i * 48), (s32)(u16)y, 45, 20, 0, g_SaveData.window_style);
         color = 0;
         if (selected < g_MenuCommandRows[row][0]) {
             color = (i != selected) ? 7 : 0;

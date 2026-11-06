@@ -6,7 +6,7 @@ MATCH void func_801E8DB4(MenuPanelTask* task) {
     u8* table;
     u8* row;
 
-    table = D_80144F5A;
+    table = g_SaveData.walk_order;
     row   = table + task->unk_0B * 3;
     Menu_DrawCharacterWindow(task->x, task->y, g_CharSlot[row[task->unk_0A]], task->unk_0C, 0);
     if (GetGraphType() != 1) {

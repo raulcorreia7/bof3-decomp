@@ -4,7 +4,7 @@ MATCH void func_801E7000(void) {
     s32 resource;
 
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
     resource = 0xBB;
     if (g_FrameCount & 0x40) {
         resource = 0xBA;

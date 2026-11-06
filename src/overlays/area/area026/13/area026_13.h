@@ -6,6 +6,7 @@
  * file. */
 
 #include "overlays/area/world00.h"
+#include "work/save.h"
 
 extern u8 D_801F341C[6336];
 extern u8 D_801F4CE4;

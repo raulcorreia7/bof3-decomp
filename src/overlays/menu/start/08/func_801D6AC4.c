@@ -33,7 +33,7 @@ NON_MATCHING void func_801D6AC4(s32 party_slot) {
     u8     val10;
     Armor* armor;
 
-    val4           = g_CharSlot[D_80144F5A[party_slot & BYTE_MASK]];
+    val4           = g_CharSlot[g_SaveData.walk_order[party_slot & BYTE_MASK]];
     frame.record   = &g_SaveData.characters[val4 & BYTE_MASK];
     frame.slots[0] = frame.record + 0xE;
     frame.slots[1] = frame.record + 0xF;

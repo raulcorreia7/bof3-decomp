@@ -25,7 +25,8 @@ MATCH void func_801D543C(void) {
             resource = 6;
             break;
         case SAVE_STATUS_NO_FILE:
-            Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+            Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+                               g_SaveData.window_style);
             panel_timer = 8;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_NO_SAVE_FILE));
             func_801DDFB0(0x62, 0x4C, D_801E60F8, LOBU(g_SaveCardPort), 1);
@@ -44,7 +45,8 @@ MATCH void func_801D543C(void) {
             resource = 8;
             break;
         case SAVE_STATUS_SAVED:
-            Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+            Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+                               g_SaveData.window_style);
             panel_timer = 0xB;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_SAVE_COMPLETE));
             SAVE_DrawSlots(0x20, 0x30, 0U);
@@ -52,7 +54,8 @@ MATCH void func_801D543C(void) {
             D_801E6110 = 1;
             break;
         case SAVE_STATUS_FORMATTED:
-            Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+            Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+                               g_SaveData.window_style);
             panel_timer = 8;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(GAME_TEXT_INIT_COMPLETE));
             func_801DDFB0(0x62, 0x4C, D_801E60F8, LOBU(g_SaveCardPort), 1);
@@ -65,7 +68,8 @@ MATCH void func_801D543C(void) {
             g_SaveSlots[0].source_index = 0xFF;
             break;
         case 10:
-            Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+            Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+                               g_SaveData.window_style);
             panel_timer = 0xB;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(0x96));
             SAVE_DrawSlots(0x20, 0x30, 0U);
@@ -73,7 +77,8 @@ MATCH void func_801D543C(void) {
             D_801E6110 = 1;
             break;
         case 11:
-            Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+            Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+                               g_SaveData.window_style);
             panel_timer = 8;
             UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(0x8BU));
             SAVE_DrawSlots(0x20, 0x30, 0U);
@@ -83,7 +88,8 @@ MATCH void func_801D543C(void) {
             break;
     }
     if (resource != 0) {
-        Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+        Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+                           g_SaveData.window_style);
         UI_DrawText(28, 22, 0, 0xFFU, Resource_GetText(resource + 0x85));
     }
     if ((g_InputPressed != 0) ||

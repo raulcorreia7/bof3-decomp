@@ -7,7 +7,7 @@ MATCH void func_801D6D6C(s32 strip_x, s32 strip_y) {
 
     x = strip_x;
     y = strip_y;
-    UI_DrawWindow((x + 4), (y + 4), 82, 72, 0, D_80144952);
+    UI_DrawWindow((x + 4), (y + 4), 82, 72, 0, g_SaveData.window_style);
     Menu_DrawPanelFrame(x, y, 9, 8);
     for (i = 0; (i & BYTE_MASK) < 3U; i++) {
         /* The inner u16 cast keeps the sum grouped as the retail code does. */

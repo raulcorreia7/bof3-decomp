@@ -12,7 +12,7 @@ MATCH void SAVE_RunLoadVerify(void) {
     u32 sum;
 
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
     SAVE_DrawSlots(0x20, 0x30, 0);
     CardAccessFile(0, 0, 0, 0, 0);
     if (g_SaveCardStatus != CARD_EVENT_OK) {

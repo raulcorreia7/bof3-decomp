@@ -186,7 +186,7 @@ MATCH void func_801D73B4(MenuListPanel* panel) {
     u8       flags;
     u8       n;
 
-    UI_DrawWindow((panel->x + 3) & HALF_MASK, (panel->y + 3) & HALF_MASK, 154, 160, 0, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow((panel->x + 3) & HALF_MASK, (panel->y + 3) & HALF_MASK, 154, 160, 0, g_SaveData.window_style);
     n    = 0;
     list = Party_GetAbilities(panel->unk_0A, panel->unk_0B, 0);
     y    = panel->y;
@@ -199,7 +199,7 @@ MATCH void func_801D73B4(MenuListPanel* panel) {
             }
             level   = Char_GetAbilityElement(*list);
             ability = (Ability*)&g_Abilities[*list];
-            count   = Char_GetAbilityCost(g_CharSlot[D_80144F5A[(s8)D_80148656]], *list, 0);
+            count   = Char_GetAbilityCost(g_CharSlot[g_SaveData.walk_order[(s8)D_80148656]], *list, 0);
             if (n == panel->selected || n == panel->unk_0C) {
                 if (shade != 7) {
                     func_801AF930((s16)(panel->x + 7), (s16)(y + 0x1A), 7, level, (u8*)ability, count, 1);
@@ -257,7 +257,7 @@ MATCH void func_801D8208(u8 index, s32 left, s32 top, MenuListRow* row) {
 
     x = left;
     y = top;
-    UI_DrawWindow(left + 8, y, 200, 48, 0, D_80144952);
+    UI_DrawWindow(left + 8, y, 200, 48, 0, g_SaveData.window_style);
     if (row != NULL) {
         if (GetGraphType() != 1) {
             GetGraphType();

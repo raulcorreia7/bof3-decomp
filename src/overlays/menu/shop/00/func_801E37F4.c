@@ -29,7 +29,7 @@ MATCH void func_801E37F4(MenuPanelTask* task) {
     price    = Shop_GetSellPrice(kind, index, discount);
     record   = Item_GetRecord(kind, index);
     UI_DrawWindow((task->x + 3) & HALF_MASK, (task->y + 3) & HALF_MASK, SHOP_DESC_PANEL_WIDTH, SHOP_DESC_PANEL_HEIGHT,
-                  0, D_80144952);
+                  0, g_SaveData.window_style);
     func_801AEA80((task->x + 7) & HALF_MASK, (task->y + 6) & HALF_MASK,
                   D_801E5E38[Item_GetKind(kind, index) & BYTE_MASK], 0);
     UI_DrawText(task->x + 17, task->y + 4, 0, func_801AF20C(record) & BYTE_MASK, record);

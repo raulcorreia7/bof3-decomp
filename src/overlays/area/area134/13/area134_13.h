@@ -6,6 +6,7 @@
 
 #include "overlays/area/world03.h"
 #include "work/area_spad.h"
+#include "work/save.h"
 
 typedef struct AreaSprite {
     u8  unk_00[3];

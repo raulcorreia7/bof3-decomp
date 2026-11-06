@@ -19,7 +19,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     u16  field;
     s32  offset;
 
-    UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 3), 153, 154, task->unk_09, D_80144952);
+    UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 3), 153, 154, task->unk_09, g_SaveData.window_style);
     value = func_801AFD10(&task->unk_0B, &row, &count, (u8*)&task->unk_12) & BYTE_MASK;
     y     = task->y + (s8)row;
     src   = D_801C893C[task->unk_0A] + value;
@@ -29,8 +29,8 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         if (byte != 0) {
             flag = 0;
             if (task->unk_09 != 0 ||
-                (func_801AF494(task->unk_08, g_CharSlot[D_80144F5A[D_80148656]], task->unk_0A, byte) & BYTE_MASK) ==
-                    0) {
+                (func_801AF494(task->unk_08, g_CharSlot[g_SaveData.walk_order[D_80148656]], task->unk_0A, byte) &
+                 BYTE_MASK) == 0) {
                 flag = 1;
             }
             visible = flag;
@@ -57,9 +57,10 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         dst++;
         y += 0xD;
     }
-    /* FAKE: retail reads D_80144952 as s8. */
-    UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 3), 153, 20, task->unk_09, *(u8*)((s8*)&D_80144952));
-    UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 146), 153, 8, task->unk_09, *(u8*)((s8*)&D_80144952));
+    /* FAKE: retail reads g_SaveData.window_style as s8. */
+    UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 3), 153, 20, task->unk_09, *(u8*)((s8*)&g_SaveData.window_style));
+    UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 146), 153, 8, task->unk_09,
+                  *(u8*)((s8*)&g_SaveData.window_style));
     slotp  = &D_801C7C5C[task->unk_0A];
     value  = func_801AF20C(*slotp) & BYTE_MASK;
     offset = (value * 4) - 0x4E;

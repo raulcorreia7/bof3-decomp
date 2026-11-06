@@ -81,7 +81,6 @@ extern s8             D_801448E9;
 extern s8             D_801448EB;
 extern s8             D_801448EC;
 extern u8             D_801448ED;
-extern u8             D_80144952;
 extern u8             D_80144955;
 extern u8             D_80144E98[];
 extern u8             D_80144F59;

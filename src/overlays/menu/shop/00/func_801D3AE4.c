@@ -8,7 +8,8 @@ MATCH void func_801D3AE4(void) {
 
     counter = &D_80148654;
     cursor  = *counter;
-    Menu_DrawHeaderBar(MENU_HEADER_X, (0x12 - cursor * 20) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x12 - cursor * 20) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+                       g_SaveData.window_style);
     count = *counter;
     count--;
     *counter = count;

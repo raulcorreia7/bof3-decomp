@@ -56,7 +56,7 @@ MATCH void func_801D7E4C(void) {
     g_MenuPanelTasks[11].unk_10 = 0x30;
     if (g_InputPressed & D_80145AC2) {
         result = func_801E7D20(
-            g_CharSlot[D_80144F5A[D_8014857A]], g_CharSlot[D_80144F5A[*sel]],
+            g_CharSlot[g_SaveData.walk_order[D_8014857A]], g_CharSlot[g_SaveData.walk_order[*sel]],
             Party_GetAbilities(D_8014857A, g_MenuPanelTasks[16].unk_0B, 0)[g_MenuPanelTasks[16].unk_0C], 0);
         D_801ED654 = result;
         if (result == 1 || result == 5) {

@@ -21,10 +21,10 @@ MATCH void func_801DE944(void) {
     s32  count;
 
     func_801DF90C();
-    party = D_80144F5A;
+    party = g_SaveData.walk_order;
     actor = D_80145F09;
     mode  = actor[0];
-    EMI_LoaderStreamFamily(party[0], D_80144F5A[1], D_80144F5A[2], 0);
+    EMI_LoaderStreamFamily(party[0], g_SaveData.walk_order[1], g_SaveData.walk_order[2], 0);
     if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 0x77) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) ||
         g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         g_PartySize = Party_CountOrder(0);

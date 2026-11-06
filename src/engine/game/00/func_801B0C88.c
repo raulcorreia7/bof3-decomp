@@ -12,7 +12,7 @@ MATCH void func_801B0C88(void) {
     index = 0;
     if ((total & BYTE_MASK) > 0) {
         do {
-            sel = g_CharSlot[D_80144F5A[index]];
+            sel = g_CharSlot[g_SaveData.walk_order[index]];
             if (g_SaveData.characters[sel].status & STATUS_POISONED) {
                 /* party member is active: use mode 3 */
                 goto store3;

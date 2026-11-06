@@ -21,7 +21,7 @@ MATCH void func_801D8D70(u16 x, u16 y) {
 
     panel_x = x;
     panel_y = y;
-    palette = &D_80144952;
+    palette = &g_SaveData.window_style;
     UI_DrawWindow(panel_x, ((y + 2)), FISHING_PANEL_WIDTH, 0x3A, 0x80, *palette);
     UI_DrawWindow(panel_x, ((y + 0x42)), FISHING_PANEL_WIDTH, 0x5C, 0x80, *palette);
     func_801E0C80(9, 1);

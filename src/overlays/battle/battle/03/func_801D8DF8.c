@@ -31,7 +31,7 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     draw_x = panel_x + 4;
     draw_x <<= 0x10;
     draw_x       = draw_x >> 0x10;
-    packed_color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + ((D_80144952 << 6) | 0x20));
+    packed_color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + ((g_SaveData.window_style << 6) | 0x20));
     color_r      = (packed_color & 0x1F) * 8;
     color_g      = (packed_color >> 2) & 0xF8;
     color_b      = (packed_color >> 7) & 0xF8;

@@ -9,7 +9,7 @@ MATCH void func_801E18D0(void) {
 
     D_80148654 = 0;
     Menu_DrawClutStrip(D_80144953);
-    Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+    Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
     WinDrawCueText(28, 19, (u16)((s8)D_80148655 + 0xBC));
     func_801E26A8(0x1C, 0x40);
     func_801E2668(0xFF, 0x70, 0x26);
@@ -52,19 +52,19 @@ MATCH void func_801E18D0(void) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
         func_801E2668((u8)*mode, 0x70, 0x26);
         Menu_DrawCursorSprite(((*mode * 0x30) + 0x76) & 0xFFFE, 0x2A, 0);
-        D_80144950   = 1;
-        g_InputMasks = 0x43;
-        D_80145AB6   = 0x20;
-        D_80145AC0   = 0x10;
-        D_80145AB8   = 0x80;
-        D_80145ABA   = 8;
-        D_80144952   = 0;
-        D_80144953   = 0;
-        g_SndMono    = 0;
-        D_80144954   = 0;
-        D_80144955   = 0;
-        D_80144956   = 0;
-        D_80145ABC   = 4;
+        D_80144950              = 1;
+        g_InputMasks            = 0x43;
+        D_80145AB6              = 0x20;
+        D_80145AC0              = 0x10;
+        D_80145AB8              = 0x80;
+        D_80145ABA              = 8;
+        g_SaveData.window_style = 0;
+        D_80144953              = 0;
+        g_SndMono               = 0;
+        D_80144954              = 0;
+        D_80144955              = 0;
+        D_80144956              = 0;
+        D_80145ABC              = 4;
         return;
     }
     if (g_GameEntryState == 2) {

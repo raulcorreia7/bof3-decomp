@@ -36,7 +36,7 @@ MATCH void SYS_StartFrontend(void) {
     g_AreaWalkFlags                       = 0;
     D_80144950                            = 1;
     g_SndMono                             = 0;
-    D_80144952                            = 0;
+    g_SaveData.window_style               = 0;
     D_80144953                            = 0;
     D_80144954                            = 0;
     D_80144955                            = 0;

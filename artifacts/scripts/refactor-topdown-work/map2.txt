@@ -1,0 +1,1 @@
+D_80144F5A=walk_order,D_80144F5D=battle_order,D_80144952=window_style

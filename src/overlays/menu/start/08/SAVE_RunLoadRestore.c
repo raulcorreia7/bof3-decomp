@@ -56,7 +56,8 @@ MATCH void SAVE_RunLoadRestore(void) {
             D_801ED18C = 1;
         }
         Menu_DrawClutStrip(D_80144953);
-        Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+        Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
+                           g_SaveData.window_style);
         SAVE_DrawSlots(0x20, 0x30, 0U);
         UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(0xB1));
     }

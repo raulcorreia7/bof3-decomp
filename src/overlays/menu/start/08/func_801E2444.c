@@ -6,7 +6,7 @@ MATCH void func_801E2444(void) {
 
     Menu_DrawClutStrip(D_80144953);
     if (g_GameEntryState == 2) {
-        Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
+        Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_SaveData.window_style);
         func_801E26A8(0x1C, 0x40);
         func_801E2668(0, 0x70, 0x26);
         UI_SetMode(0);
@@ -16,7 +16,7 @@ MATCH void func_801E2444(void) {
     }
     level = &D_80148654;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - *level * 0x10) & 0xFFF0, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
-                       D_80144952);
+                       g_SaveData.window_style);
     func_801E26A8((*level << 6) | 0x1C, 0x40);
     func_801E2668(0, 0x70, 0x26 - *level * 0x10);
     value  = *level + 1;

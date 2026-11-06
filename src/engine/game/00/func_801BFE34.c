@@ -22,7 +22,7 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
             TASK_SET(record);
             key = record[0x79];
             while (1) {
-                if (D_80144F5D[kind & BYTE_MASK] == key)
+                if (g_SaveData.battle_order[kind & BYTE_MASK] == key)
                     break;
                 kind += 1;
                 if ((kind & BYTE_MASK) >= 3U)

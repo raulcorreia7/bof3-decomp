@@ -35,7 +35,7 @@ MATCH void func_801C16B8(void) {
         dst_off  = 0;
         do {
             /* Destination offset-first addition keeps retail's addu operand order. */
-            *MEM_PTR(Character, dst_off + (u32)dst_base) = src_base[g_CharSlot[D_80144F5A[count]]];
+            *MEM_PTR(Character, dst_off + (u32)dst_base) = src_base[g_CharSlot[g_SaveData.walk_order[count]]];
             dst_off += BATTLE_PARTY_STRIDE;
             count += 1;
         } while (count < g_PartySize);

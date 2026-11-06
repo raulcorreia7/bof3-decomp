@@ -38,17 +38,20 @@ changed = [f for f in files if (record + '.') in pathlib.Path(f).read_text(encod
 inc_of = collections.defaultdict(set)
 cfiles = [f for f in files if f.endswith('.c')]
 for f in changed:
+    text = pathlib.Path(f).read_text(encoding='latin-1')
     if f.endswith('.c'):
         inc_of[f].add(f)
-    elif f.startswith('src/'):
-        base = pathlib.Path(f).name
+    elif f.startswith('src/') and '#ifndef' not in text[:600]:
+        base = pathlib.Path(f).name  # a shared body: its includers take the include
         for c in cfiles:
             if re.search(r'#include "(?:[^"]*/)?%s"' % re.escape(base), pathlib.Path(c).read_text(encoding='latin-1')):
                 inc_of[c].add(f)
-    else:
-        pass
+    elif f.startswith('src/'):
+        inc_of[f].add(f)  # a guarded header takes the include itself
 targets = set()
 for c in inc_of:
+    if c.endswith('.h'):
+        targets.add(pathlib.Path(c)); continue
     m = re.search(r'^#include "([^"]+)"', pathlib.Path(c).read_text(encoding='latin-1'), re.M)
     if not m:
         print('NOINC', c); continue

@@ -16,7 +16,7 @@ MATCH void func_801E3284(MenuPanelTask* task) {
     price = Shop_ApplyPercent(Item_GetPrice(group, key) & HALF_MASK, task->unk_0A);
     icon  = Item_GetRecord(group, key);
 
-    UI_DrawWindow((task->x + 3) & HALF_MASK, (task->y + 3) & HALF_MASK, 170, 60, 0, D_80144952);
+    UI_DrawWindow((task->x + 3) & HALF_MASK, (task->y + 3) & HALF_MASK, 170, 60, 0, g_SaveData.window_style);
     func_801AEA80((task->x + 4) & HALF_MASK, (task->y + 7) & HALF_MASK,
                   D_801E5E1C[Item_GetKind(group, key) & BYTE_MASK], 0);
     UI_DrawText((task->x + 14), (task->y + 4), 0, func_801AF20C(icon) & BYTE_MASK, icon);

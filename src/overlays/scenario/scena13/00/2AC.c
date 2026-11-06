@@ -359,8 +359,8 @@ MATCH void func_801FBBC4(void) {
     u8 slot;
 
     for (slot = 0; slot < 3; slot++) {
-        D_80144908[slot] = D_80144F5A[slot];
-        D_8014490B[slot] = D_80144F5D[slot];
+        D_80144908[slot] = g_SaveData.walk_order[slot];
+        D_8014490B[slot] = g_SaveData.battle_order[slot];
     }
     for (slot = 0; slot < 3; slot++) {
         func_801C1ABC(D_80144908[slot]);
@@ -390,7 +390,7 @@ MATCH void func_801FBCC4(void) {
     Party_JoinMember(ids[1]);
     Party_JoinMember(ids[2]);
     for (slot = 3; slot < 6; slot++) {
-        D_80144F5A[slot] = D_80144908[slot];
+        g_SaveData.walk_order[slot] = D_80144908[slot];
     }
 }
 

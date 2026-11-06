@@ -44,7 +44,7 @@ NON_MATCHING void Battle_DrawTitledFrame(s32 x, s16 y, s32 unused_a, s32 unused_
     temp &= HALF_MASK;
     style  = title_index;
     i      = 0;
-    fill   = &CHARACTER_BLOCK->window_style;
+    fill   = &g_SaveData.window_style;
     y_word = y16 << 0x10;
     UI_DrawWindow(box_x, temp, 137, 130, 0, (s32)fill[0]);
     UI_DrawWindow(box_x, temp, 137, 20, 0, (s32)fill[0]);
