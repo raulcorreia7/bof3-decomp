@@ -1,5 +1,29 @@
 #include "game_00.h"
 
+/* Opcodes 0x80 to 0x8C of the actor script bank: the record group that drives
+ * the scene around the actor - script-active and fade flags, actor placement,
+ * the area camera scroll, palette tints, the XA music stream, and spawning a
+ * helper record. Named from the case bodies. */
+/* Opcodes 0x80 to 0x8C of the actor script bank: the record group that drives
+ * the scene around the actor - script-active and fade flags, actor placement,
+ * the area camera scroll, palette tints, the XA music stream, and spawning a
+ * helper record. Named from the case bodies. */
+typedef enum ActorScriptStageOp {
+    ACTOR_SCRIPT_STAGE_SET_SCRIPT_ACTIVE   = 0x80, /* set GAME_FLAG_SCRIPT_ACTIVE */
+    ACTOR_SCRIPT_STAGE_CLEAR_SCRIPT_ACTIVE = 0x81, /* clear GAME_FLAG_SCRIPT_ACTIVE */
+    ACTOR_SCRIPT_STAGE_FADE_WHITE          = 0x82, /* set ACTOR_FLAG_FADE_WHITE on the cursor */
+    ACTOR_SCRIPT_STAGE_FADE_BLACK          = 0x83, /* set ACTOR_FLAG_FADE_BLACK on the cursor */
+    ACTOR_SCRIPT_STAGE_SET_TARGET_POS      = 0x84, /* args: [sel] [kind]; set SCRATCH_WORK to a position */
+    ACTOR_SCRIPT_STAGE_CAMERA_SCROLL       = 0x85, /* advance the camera scroll to the held cell, ramp height */
+    ACTOR_SCRIPT_STAGE_SET_RECORD_INDEX    = 0x86, /* args: [index]; pick the actor/game record, halt cursor */
+    ACTOR_SCRIPT_STAGE_TINT_DARK           = 0x87, /* tint-darken handler for the actor kind (D_801C8904) */
+    ACTOR_SCRIPT_STAGE_TINT_LIGHT          = 0x88, /* tint-lighten handler for the actor kind (D_801C88FC) */
+    ACTOR_SCRIPT_STAGE_START_XA            = 0x89, /* args: [xa_id_u16]; SND_StartXAStream */
+    ACTOR_SCRIPT_STAGE_SOUND_64020         = 0x8A, /* args: [id_u16]; the empty sound stub func_80164020 */
+    ACTOR_SCRIPT_STAGE_WAIT_XA_IDLE        = 0x8B, /* wait while the XA stream is not idle */
+    ACTOR_SCRIPT_STAGE_SPAWN_HELPER        = 0x8C, /* args: [flag]; func_8015CC00 claims a slot at the actor */
+} ActorScriptStageOp;
+
 /* nonmatching unmeasured: tried 70.14%: single return value exit via break; retail keeps base pointer s2 for base[1]
  * (4(s2)); gcc folds it to the D_80145EC8 symbol. */
 #ifdef NON_MATCHING
@@ -19,19 +43,19 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
 
     byte = table[state->index_0A];
     switch (byte) {
-        case 0x80:
+        case ACTOR_SCRIPT_STAGE_SET_SCRIPT_ACTIVE:
             g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
             break;
-        case 0x81:
+        case ACTOR_SCRIPT_STAGE_CLEAR_SCRIPT_ACTIVE:
             g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             break;
-        case 0x82:
+        case ACTOR_SCRIPT_STAGE_FADE_WHITE:
             state->flags |= ACTOR_FLAG_FADE_WHITE;
             break;
-        case 0x83:
+        case ACTOR_SCRIPT_STAGE_FADE_BLACK:
             state->flags |= ACTOR_FLAG_FADE_BLACK;
             break;
-        case 0x84: {
+        case ACTOR_SCRIPT_STAGE_SET_TARGET_POS: {
             volatile Actor* work;
 
             func_801ABF30(buf, table[state->index_0A + 1], table[state->index_0A + 2]);
@@ -42,7 +66,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             state->index_0A += 2;
             break;
         }
-        case 0x85: {
+        case ACTOR_SCRIPT_STAGE_CAMERA_SCROLL: {
             s32* base;
 
             base = &D_80145EC4;
@@ -78,7 +102,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             Area_AdvanceScroll((s16)span);
             break;
         }
-        case 0x86:
+        case ACTOR_SCRIPT_STAGE_SET_RECORD_INDEX:
             if (Actor_GetType() == 1) {
                 entry                  = g_AreaLoads[g_GameAreaId];
                 byte                   = table[state->index_0A + 1];
@@ -89,27 +113,27 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             }
             state->index_0A = 0xFFFF;
             break;
-        case 0x87:
+        case ACTOR_SCRIPT_STAGE_TINT_DARK:
             func_801ACBC4();
             break;
-        case 0x88:
+        case ACTOR_SCRIPT_STAGE_TINT_LIGHT:
             func_801AC9D0();
             break;
-        case 0x89:
+        case ACTOR_SCRIPT_STAGE_START_XA:
             SND_StartXAStream((table[state->index_0A + 1] << 8) | table[state->index_0A + 2], 1);
             state->index_0A += 2;
             break;
-        case 0x8A:
+        case ACTOR_SCRIPT_STAGE_SOUND_64020:
             func_80164020((table[state->index_0A + 1] << 8) | table[state->index_0A + 2], 1);
             state->index_0A += 2;
             break;
-        case 0x8B:
+        case ACTOR_SCRIPT_STAGE_WAIT_XA_IDLE:
             if ((SND_IsXAIdle() & BYTE_MASK) != 0) {
                 break;
             }
             state->index_0A--;
             break;
-        case 0x8C: {
+        case ACTOR_SCRIPT_STAGE_SPAWN_HELPER: {
             volatile Actor* work;
 
             flag         = table[state->index_0A + 1];
