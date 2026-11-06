@@ -29,7 +29,7 @@ NON_MATCHING void func_801DE5EC(void) {
     }
     FISHING_ROW->facing_92 &= 3;
     FISHING_STATE->motion_34.pos.pos.x.raw = TO_COORD(20) - (RANDOM_MASK(0xF) << 0x10);
-    FISHING_STATE->y_38.pos_y              = TO_COORD(62) - (FISHING_ROW->facing_92 * TO_COORD(12)) - (RANDOM_MASK(0xF) << 0x10);
+    FISHING_STATE->y_38.pos_y = TO_COORD(62) - (FISHING_ROW->facing_92 * TO_COORD(12)) - (RANDOM_MASK(0xF) << 0x10);
     FISHING_STATE->bounce_3C.half.key_3E =
         (s16)((-(FISHING_ENTRY(FISHING_STATE->cue_index_06)->count_0A << 0x18) >> 0x10) - (RANDOM_MASK(7) << 5));
     limit = Area_SampleHeight(FISHING_STATE->motion_34.pos.pos.x.raw, FISHING_STATE->y_38.pos_y);

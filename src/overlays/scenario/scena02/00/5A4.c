@@ -197,7 +197,8 @@ MATCH void func_801FC25C(u8 actor_id) {
 
 MATCH void func_801FC308(u8 actor_id) {
     if (D_80143F03 == 0) {
-        if (D_80145EC8 <= g_Actors[actor_id].pos.y.fixed && D_80145EC8 >= g_Actors[actor_id].pos.y.fixed - TO_COORD(5) &&
+        if (D_80145EC8 <= g_Actors[actor_id].pos.y.fixed &&
+            D_80145EC8 >= g_Actors[actor_id].pos.y.fixed - TO_COORD(5) &&
             D_80145EC4 >= g_Actors[actor_id].pos.x.fixed - TO_COORD(1) &&
             g_Actors[actor_id].pos.x.fixed + TO_COORD(1) >= D_80145EC4) {
             func_801FCB54();

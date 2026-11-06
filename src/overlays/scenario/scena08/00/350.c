@@ -456,7 +456,8 @@ MATCH void func_801FE12C(void) {
 }
 
 MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
-    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_ADULT) && (arg0 == TO_COORD(51) + COORD_HALF) && (((arg1 >> 0x10) - 39) < 2U)) {
+    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_ADULT) && (arg0 == TO_COORD(51) + COORD_HALF) &&
+        (((arg1 >> 0x10) - 39) < 2U)) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             Game_SetScriptActive();
             D_80146874 = 4;
