@@ -95,7 +95,15 @@ INCLUDE_ASM(func_801F70F8);
 
 INCLUDE_ASM(func_801F71C0);
 
-INCLUDE_ASM(func_801F724C);
+MATCH void func_801F724C(void) {
+    func_801F88B8(MEM_PTR(void, 0x800E48E0u));
+    func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
+    D_800E4C1E += 6;
+    if (--g_Task->unk_09 == 0) {
+        g_Task->unk_09 = 0x20;
+        g_Task->step++;
+    }
+}
 
 MATCH void func_801F72E0(void) {
     SCENA07_PANEL_FADE_STEP();
@@ -264,6 +272,7 @@ MATCH u8* func_801F8394(void) {
     return NULL;
 }
 
+/* needs: particle record type; m2c draft does not compile. */
 INCLUDE_ASM(func_801F83D0);
 
 INCLUDE_ASM(func_801F8478);
