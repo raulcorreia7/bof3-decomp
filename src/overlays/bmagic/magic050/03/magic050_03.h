@@ -7,8 +7,6 @@
 
 extern Callback D_801EFAF0[];
 void            func_800AF764(void);
-void            func_801EF1B0(void);
-void            func_801EF4C4(void);
 void            func_801EF898(void);
 
 #endif

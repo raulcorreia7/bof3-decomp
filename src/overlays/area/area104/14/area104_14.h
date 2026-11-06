@@ -23,7 +23,6 @@ extern u8 D_801F6B18[];
 /* func_801F367C */
 void Area_Update(void);
 /* func_801F3BC4 */
-void Area_DrawHud(s16 x, s16 y);
 /* func_801F4188 */
 void Area_DrawHudBanner(s16 x, s16 y);
 void func_801F4E3C(void);

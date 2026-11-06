@@ -13,7 +13,6 @@ extern u8* D_80148500;
 extern u8  D_80148658;
 extern u8  D_80148659;
 extern u8  D_8014865A;
-extern u8  D_8014865D;
 extern u8  D_801ED690[];
 extern u8  D_801ED694[][2];
 extern u8  D_801ED695[][2];

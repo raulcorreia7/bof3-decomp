@@ -72,7 +72,6 @@ void      func_801F3928(void);
 /* func_801F3B00 */
 /* func_801F39D8 */
 void      Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
-void      Area_DrawHud(s16 x, s16 y);
 void      Area_DrawGradientDiamond(s16 x, s16 y);
 void      func_801F40C4(s16 x, s16 y);
 /* func_801F41BC */

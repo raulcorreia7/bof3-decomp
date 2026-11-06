@@ -362,7 +362,6 @@ void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
-s32  func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 s32  func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);

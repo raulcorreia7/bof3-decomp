@@ -8,7 +8,6 @@
 #include "work/area_spad.h"
 
 extern u32        D_801F6C00;
-extern ScratchPad D_1F800000;
 extern Callback   D_801FE820[];
 extern Callback   D_801FE8F4[];
 extern Callback   D_801FE900[];

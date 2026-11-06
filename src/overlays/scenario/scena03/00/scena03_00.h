@@ -20,7 +20,6 @@ extern Callback  D_801FCFD4[];
 extern Callback  D_801FCFE0[];
 extern SceneFunc D_801FD00C[];
 extern SVECTOR   D_1F800014[];
-extern s32       D_80145EC4;
 extern u8        D_801468E4[];
 extern u8        D_801FCF30[];
 extern u8        D_801FCF5C[];

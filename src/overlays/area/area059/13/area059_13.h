@@ -12,7 +12,6 @@
 
 void Area_SetCellCode(s16 column, s16 row, u8 code);
 
-extern u8 D_80146867;
 
 extern u8 D_801F3824[];
 

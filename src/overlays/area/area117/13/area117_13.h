@@ -9,7 +9,6 @@
 
 /* The party position in 16.16 fixed point. */
 extern s32 D_80145EC4;
-extern s32 D_80145EC8;
 
 /* The event-flag table the step checks. */
 extern u8 D_80144ED0[];

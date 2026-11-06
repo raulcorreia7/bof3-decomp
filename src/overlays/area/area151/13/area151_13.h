@@ -39,7 +39,6 @@ void func_801F3438(void);
 void Area_Update(void);
 /* The origin pan step the handler enters. */
 /* func_801F3A70 */
-void Area_DrawHud(s16 x, s16 y);
 /* func_801F4034 */
 void Area_DrawHudBanner(s16 x, s16 y);
 /* The value of area update step in the shared Area_Update body. */

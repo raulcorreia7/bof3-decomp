@@ -13,7 +13,6 @@ extern u8* D_801F05F8;
 
 void func_801EF52C(void);
 void func_801EF5F4(void);
-void func_801EEEE0(void);
 void func_801EECE4(void);
 void Effect_PlayOnZeroTick(void);
 
