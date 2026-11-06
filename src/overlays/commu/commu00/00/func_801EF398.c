@@ -22,8 +22,8 @@ MATCH void func_801EF398(void) {
                 off   = 0;
                 inner = 0;
                 do {
-                    if ((((u8*)g_SaveData.fairy_jobs)[inner] != 0) &&
-                        (((u8*)g_SaveData.fairy_jobs)[inner + 1] == next)) {
+                    if (((&g_SaveData.fairy_jobs[0].active)[inner] != 0) &&
+                        ((&g_SaveData.fairy_jobs[0].active)[inner + 1] == next)) {
                         count += 1;
                         sum += D_801F2708[off];
                     }

@@ -23,8 +23,8 @@ MATCH void func_801EF214(void) {
                 room_next  = room + 1;
                 weight_off = 0;
                 for (rec_off = 0; rec_off < 480; rec_off += 8) {
-                    if (((u8*)g_SaveData.fairy_jobs)[rec_off] != 0 &&
-                        ((u8*)g_SaveData.fairy_jobs)[rec_off + 1] == room_next) {
+                    if ((&g_SaveData.fairy_jobs[0].active)[rec_off] != 0 &&
+                        (&g_SaveData.fairy_jobs[0].active)[rec_off + 1] == room_next) {
                         count += 1;
                         total += D_801F2708[weight_off];
                     }
