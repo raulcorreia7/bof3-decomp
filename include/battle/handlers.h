@@ -9,33 +9,29 @@
  * D_801D0F38 itself is a longer table (twelve pointers measured before it
  * stops), so that extern types a copy, not the whole table. */
 #define BATTLE_HANDLER_TABLE3_SIZE 0x0c
+#define BATTLE_HANDLER_TABLE4_SIZE 0x10
 #define BATTLE_HANDLER_TABLE5_SIZE 0x14
-
-#define BATTLE_RESULT_RING_SIZE    0x10
 
 /* func_801D656C treats 0xFF as pending; battle/battle/03 passes modes 0-6. */
 typedef u8 (*BossBattleEventFunc)(u32 mode);
 
-/* Callback-table views the battle code copies and indexes: three or five
+/* Callback-table views the battle code copies and indexes: three to five
  * Callback slots. */
 typedef struct BattleHandlerTable3 {
     Callback handlers[3];
 } BattleHandlerTable3;
+
+typedef struct BattleHandlerTable4 {
+    Callback handlers[4];
+} BattleHandlerTable4;
 
 typedef struct BattleHandlerTable5 {
     Callback handlers[5];
 } BattleHandlerTable5;
 
 ASSERT_SIZE(BattleHandlerTable3, BATTLE_HANDLER_TABLE3_SIZE);
+ASSERT_SIZE(BattleHandlerTable4, BATTLE_HANDLER_TABLE4_SIZE);
 ASSERT_SIZE(BattleHandlerTable5, BATTLE_HANDLER_TABLE5_SIZE);
-
-/* Fixed four-entry result-ring icon table at 0x801D1004; the battle effects read
- * the same shape from their own module head. */
-typedef struct BattleResultRings {
-    Callback handlers[4];
-} BattleResultRings;
-
-ASSERT_SIZE(BattleResultRings, BATTLE_RESULT_RING_SIZE);
 
 void        func_800AC844(u8 entry_id);
 void        func_800AC934(u8 entry_id);

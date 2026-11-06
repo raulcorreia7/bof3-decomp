@@ -4,12 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC24(void) {
-    MagicTaskFuncs handlers;
-
-    handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
-}
+#include "overlays/bmagic/func_801EEC24.h"
 
 /* blocker: no matched C template (magic010/00 func_801EEC80). */
 INCLUDE_ASM(func_801EEC90);
@@ -21,7 +16,7 @@ INCLUDE_ASM(func_801EEE40);
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF000(void) {
-    MagicTaskFuncs handlers;
+    BattleHandlerTable4 handlers;
 
     handlers = D_801EEC14;
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);

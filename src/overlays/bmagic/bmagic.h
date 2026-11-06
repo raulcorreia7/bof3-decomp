@@ -9,8 +9,6 @@
 #include "overlays/battle/battle.h"
 #include "work/task.h"
 
-#define BMAGIC_HANDLER_TABLE4_SIZE 0x10
-
 /* The statements of Effect_SetActorMatrix after its rotation is set; each
  * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
  * whose vertical span halves into the depth. */
@@ -153,13 +151,6 @@ static inline void Bmagic_DispatchTaskPair(Callback first, Callback second) {
 
     handlers[g_Task->header.mode]();
 }
-
-typedef struct MagicTaskFuncs {
-    Callback handlers[4];
-} MagicTaskFuncs;
-
-ASSERT_SIZE(MagicTaskFuncs, BMAGIC_HANDLER_TABLE4_SIZE);
-ASSERT_OFFSET(MagicTaskFuncs, handlers, 0x00);
 
 typedef struct BmagicEffectFuncs {
     Callback handlers[6];
