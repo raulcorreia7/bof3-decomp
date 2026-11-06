@@ -60,7 +60,6 @@ extern s32           D_801DA0B4;
 extern u8            D_801DA0C1;
 extern s32           D_801DA12C;
 
-void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 extern void func_801D1D1C(void);
@@ -86,11 +85,8 @@ static inline void Menu_SlidePanelUp(void) {
     }
 }
 
-void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
-
 s32 Item_Count(u8 category, u8 item, u8 mode);
 
-void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 void func_801D3320(MenuPanelTask* task);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 

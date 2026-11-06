@@ -350,22 +350,14 @@ extern u8          D_801E625C;
 extern volatile u8 D_801E6260;
 extern u8          D_801E6264[];
 
-void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
-/* func_80164D2C */
-void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
 bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
-u32  Char_ClearStatus(u8 index, u16 mask, u8 mode);
 s32  Item_Count(u8 category, u8 item, u8 mode);
 s32  Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void Area_RunSetupStream(s32 cursor);
-void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
-void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
-s32  func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
-u8   Party_CountOrder(u8 mode);
 void func_801C1254(u8 ability_id, u8 party_slot);
 void Shop_DispatchStep(void);
 void func_801D0EDC(void);

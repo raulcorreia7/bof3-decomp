@@ -116,6 +116,7 @@ void        func_800AAA74(void);
 void        func_800AAC88(s16 amount, u8 battler_index);
 void        func_800AAEBC(s16 target_index, u8 battler_index);
 /* func_801E29B4 */
+u8          func_801DD7AC(s32 selector);
 u8          Battle_PickRandomTarget(u8 excluded_slot);
 extern void func_800ACF80(void);
 void        func_800AD26C(void);

@@ -77,7 +77,6 @@ extern volatile u8 D_80147A58;
 extern VECTOR      D_801F2C04;
 extern Callback    D_801F4214[];
 
-void Matrix_SetIdentity(MATRIX* matrix);
 void func_801F2C58(void);
 void func_801F2CB0(void);
 void func_801F2D5C(void);

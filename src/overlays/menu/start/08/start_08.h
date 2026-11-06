@@ -291,18 +291,11 @@ extern Callback g_MenuCampFuncs[5];
 
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
-void        UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 extern bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
-extern bool Char_RestoreHP(s32 character_index, s32 amount, s32 use_battle_copy);
-extern s32  Char_RestoreAP(s32 character_index, s32 amount, s32 use_battle_copy);
-extern s32  Char_AddCappedStat(u16* value, s32 delta);
 extern s16  Char_AddStat(u16* value, s16 delta);
-extern u32  Char_ClearStatus(u8 index, u16 mask, u8 mode);
 /* Draws one sprite at (x, y); defined in the game overlay (emi/etc/game/00). */
-void        UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 bool        func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
 s32         func_801B6470(u8 arg0);
-extern u8   Party_CountOrder(u8 mode);
 void        func_801C1254(s32 ability_id, s32 save_slot);
 /* The start overlay's handler tables call these functions. */
 void        func_801D177C(void);
@@ -559,7 +552,6 @@ extern s32       D_801D0EA8;
 extern s8        D_801D0F18;
 extern s8        D_801D0F1C;
 extern s8        D_801D0F24;
-extern void      func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
 void             Party_InitDefaults(void);
 void             func_801D29A4(void);
 extern void      func_801D2C7C(void);
@@ -631,11 +623,6 @@ static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_i
     }
 }
 
-/* func_80164D2C */
-void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
-
-void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
-
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
@@ -643,8 +630,6 @@ void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
-
-s32 func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
 
 void func_801E2C00(u16 x, s32 y, s32 group, s32 selected, s32 mode);
 

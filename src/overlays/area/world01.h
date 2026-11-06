@@ -19,6 +19,4 @@
 /* The shop panel step the request sets. */
 #define g_MasterSubStep          (*(s8*)&g_MasterSubStep)
 
-u8 Game_FindAreaHandler(void);
-
 #endif

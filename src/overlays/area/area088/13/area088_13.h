@@ -31,24 +31,17 @@ extern u8          D_801F6268[];
 extern u8          D_801F6269[];
 extern Callback    D_801F6270[];
 
-u8   Game_FindAreaHandler(void);
 void func_801F402C(void);
 /* func_801F411C */
 void Area_Update(void);
 void func_801F41F0(void);
 /* func_801F4664 */
-/* func_801F4C28 */
-void Area_DrawHudBanner(s16 x, s16 y);
 
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F6234[6];
 #define AREA_HUD_MASK_TABLE D_801F6234
-/* func_801F453C */
-void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
-/* func_801F4A30 */
-void Area_DrawGradientDiamond(s16 x, s16 y);
 
 extern u16 D_800E4B3E;
 extern u16 D_801F6090[5][16];

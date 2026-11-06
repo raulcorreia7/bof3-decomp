@@ -28,7 +28,6 @@ extern u8  D_801F6B48[];
 extern u8  D_801F6B50[];
 extern u8  D_801F6B58[];
 
-void Area_ProjectPoint(s32* pos, long* screen_xy);
 void func_801F3778(s32 arg0, void* dst, RECT* rect);
 void func_801F3B48(void* dst, s32 size);
 

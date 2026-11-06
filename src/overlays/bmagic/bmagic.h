@@ -208,9 +208,17 @@ extern BmagicEffectWork* D_801F17B4;
 void func_800A9610(u8 selector, u16 flags);
 /* Per-image effect entry points whose name is a different symbol in another
  * overlay; battle/battle/03 keeps its own view. */
+void func_800AFC54(void);
 void func_801EEC5C(void);
+void func_801EECE4(void);
+void func_801EED1C(void);
+void Effect_PlayOnZeroTick(void);
 void func_801EEEC8(void);
 void func_801EEF38(void);
+void func_801EF240(void);
+void func_801EF79C(void);
+void func_801EF970(void);
+void func_801EFA48(void);
 void func_801F0068(void);
 
 void func_801F006C(void);
@@ -225,5 +233,7 @@ void Effect_SetActorMatrix(void);
             g_Task->step += 1;                    \
         }                                         \
     } while (0)
+
+void func_801F07A8(void);
 
 #endif

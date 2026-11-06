@@ -6,6 +6,4 @@
 
 #include "overlays/area/world02.h"
 
-extern void Area_SpawnWeightedActor(void);
-
 #endif

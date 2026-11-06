@@ -9,7 +9,6 @@ extern BmagicEffectFuncs D_801EEC04;
 
 extern Callback D_801F0478[];
 extern Callback D_801F048C[];
-void            func_801EFA48(void);
 void            func_801EFC98(void);
 
 extern Callback D_801F049C[];

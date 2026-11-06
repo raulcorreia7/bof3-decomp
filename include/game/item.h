@@ -359,6 +359,5 @@ extern u8                 D_801C9E8E;   /* the accessory row's price halfword */
 /* Resolves one GAME.EMI equipment record from its category and key: the
  * category selects the item, weapon, armor, accessory or vital-item table above,
  * the key the record inside it. Retail unit exe/slus_004_22@0x80165D48. */
-u8* Item_GetRecord(s32 category, s32 item);
 
 #endif

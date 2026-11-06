@@ -168,9 +168,6 @@ extern u8             D_80148652;
 extern s8             D_8014865C;
 extern u8             D_80148699;
 
-/* func_800B20D4 (battle), func_80199678 (game), func_801E2B94 (shop), func_801EA198 (start) */
-void Menu_DrawPanelCursor(void);
-
 /* Draw the panel's icon through the PsyQ 8x8 sprite primitive. The panel writes
  * the sprite fields itself at the primitive cursor; SetSprt8 only tags it. */
 static inline void MenuDrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color) {

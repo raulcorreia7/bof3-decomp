@@ -22,8 +22,6 @@ extern Callback D_801D09DC[];
 extern Callback D_801D09E8[];
 extern Callback D_801D09F4[];
 
-s32 func_801B2D00(s32 selector);
-
 extern s32  func_801CF99C(void);
 extern void func_801CFB40(void);
 #define PLCHAR_CHECK_FACING func_801CF99C

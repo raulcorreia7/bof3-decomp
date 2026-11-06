@@ -22,7 +22,6 @@ extern BattleHandlerTable3 D_801EEC50;
 extern BattleHandlerTable3 D_801EEC70;
 extern void*               D_801F28B4;
 
-void GFX_FreePaletteFadeTarget(void* target);
 void func_801EF8F4(void);
 void func_801F001C(void);
 void func_801F04A0(void);

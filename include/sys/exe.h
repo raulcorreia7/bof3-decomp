@@ -21,12 +21,10 @@ extern u8 D_80144F5A[];
  * not part of this function's contract, so they call EXE_Func8014D6B8 through
  * the local macro EXE_CALL_8014D6B8, which names their own two-argument
  * form. */
-/* func_8014D6B8 */
-void Actor_SelectScript(u8 selector);
 /* Claims a free field record and fills its header; returns the slot, or 0xFF when none is free.
  * Retail callers pass whole words, while the callee narrows its own arguments, so the declaration
  * stays unprototyped and each caller keeps its argument widths. */
-s32  func_8015CB18();
+s32 func_8015CB18();
 /* Draws a four-strip textured panel fill.
  *
  * The retail callee takes six words and uses the first four as full 32-bit
@@ -47,7 +45,5 @@ s32  func_8015CB18();
  * loads the flag byte and stores it whole
  * (`sw $v0, 0x14($sp)`, emi/etc/start/08@0x801DDD24), and the callee reads
  * the low byte of the sixth (`lbu $s7, 0x5C($sp)`). */
-/* func_801AE3F0 */
-void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u8 window_style);
 
 #endif

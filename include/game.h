@@ -11,6 +11,7 @@
 #include "battle/ram.h"
 #include "slus/data.h"
 #include "slus/exports.h"
+#include "game/functions.h"
 
 /* The small base every game source reaches: the shared headers and the
  * resident systems all groups use. A group header includes this file and the
