@@ -318,22 +318,13 @@ ASSERT_SIZE(AreaWorkPointers, AREA_WORK_POINTERS_SIZE);
 typedef Vec3s AreaPoint;
 ASSERT_SIZE(AreaPoint, WORLD_POINT_SIZE);
 
-/* The packed vertex point of an AREA024 vertex row: three unsigned halves. */
-typedef struct VertexPoint {
-    u16 x;
-    u16 y;
-    u16 z;
-} VertexPoint;
-
-ASSERT_SIZE(VertexPoint, WORLD_VERTEX_POINT_SIZE);
-
 /* One AREA024 vertex row: four packed points at +0x02. The program copies
  * 0x28-byte rows (`emi/world00/area024/14@0x801F3314`) and advances both
  * buffers by 0x28 (`@0x801F362C`). */
 typedef struct AreaVertex {
-    u16         unk_00;
-    VertexPoint points[4]; /* 0x02 */
-    u8          unk_1A[0x0E];
+    u16   unk_00;
+    Vec3s points[4]; /* 0x02 */
+    u8    unk_1A[0x0E];
 } AreaVertex;
 
 ASSERT_SIZE(AreaVertex, WORLD_VERTEX_RECORD_SIZE);

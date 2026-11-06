@@ -197,9 +197,7 @@ typedef Vec2i GameRouteStep;
 /* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * func_8019D8C0 rotates and writes out as screen vertices. */
 typedef struct SpinQuad {
-    s16     x;
-    s16     y;
-    s16     z;
+    Vec3s   pos;
     u8      unk_06[0x0A];
     SVECTOR rotation; /* 0x10 */
     SVECTOR corners[4];

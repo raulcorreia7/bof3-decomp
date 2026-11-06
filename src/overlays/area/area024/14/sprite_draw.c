@@ -541,16 +541,13 @@ MATCH void func_801F3314(void) {
     count = 0;
     in    = (const AreaVertex*)D_80147AA8;
     do {
-        *dst = *in;
-        state[0] =
-            (((s16)dst->points[0].x + (s16)dst->points[1].x + (s16)dst->points[2].x + (s16)dst->points[3].x) >> 2);
-        state[1] =
-            (((s16)dst->points[0].y + (s16)dst->points[1].y + (s16)dst->points[2].y + (s16)dst->points[3].y) >> 2);
-        state[2] =
-            (((s16)dst->points[0].z + (s16)dst->points[1].z + (s16)dst->points[2].z + (s16)dst->points[3].z) >> 2);
-        args[0] = (s16)state[0];
-        args[1] = (s16)state[1];
-        args[2] = (s16)state[2];
+        *dst     = *in;
+        state[0] = ((dst->points[0].x + dst->points[1].x + dst->points[2].x + dst->points[3].x) >> 2);
+        state[1] = ((dst->points[0].y + dst->points[1].y + dst->points[2].y + dst->points[3].y) >> 2);
+        state[2] = ((dst->points[0].z + dst->points[1].z + dst->points[2].z + dst->points[3].z) >> 2);
+        args[0]  = (s16)state[0];
+        args[1]  = (s16)state[1];
+        args[2]  = (s16)state[2];
         VectorNormalS((VECTOR*)args, (SVECTOR*)(state + 4));
         state[8]         = 0;
         state[9]         = 0;
