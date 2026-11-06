@@ -84,9 +84,12 @@ ASSERT_OFFSET(ShopSelection, unk_34, 0x34);
 
 /* The save menu results g_SaveCardStatus holds beyond the CardEvent codes 0 to 4. */
 enum {
-    SAVE_STATUS_NO_FILE   = 5, /* GAME_TEXT_NO_SAVE_FILE */
-    SAVE_STATUS_SAVED     = 8, /* GAME_TEXT_SAVE_COMPLETE */
-    SAVE_STATUS_FORMATTED = 9, /* GAME_TEXT_INIT_COMPLETE */
+    SAVE_STATUS_NO_FILE       = 5,  /* GAME_TEXT_NO_SAVE_FILE */
+    SAVE_STATUS_WRITE_FAILED  = 6,  /* the write ended in a card error */
+    SAVE_STATUS_FORMAT_FAILED = 7,  /* the card format failed */
+    SAVE_STATUS_SAVED         = 8,  /* GAME_TEXT_SAVE_COMPLETE */
+    SAVE_STATUS_FORMATTED     = 9,  /* GAME_TEXT_INIT_COMPLETE */
+    SAVE_STATUS_CREATED       = 10, /* a new file was saved */
 };
 
 extern u8          g_SaveBuffer[];
