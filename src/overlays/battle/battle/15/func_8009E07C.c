@@ -16,8 +16,8 @@ MATCH void func_8009E07C(void) {
         status = g_BattleEnemyBattlers[battler].status & STATUS_KO;
     }
     if (status != 0) {
-        state                   = &g_BattleTarget;
-        g_BattleTargetRecord[2] = -1;
+        state                           = &g_BattleTarget;
+        g_BattleTargetRecord->hp_change = -1;
         func_800A36F0(*state, 0x4000U);
         if (*state < 3u) {
             g_BattleLivingPartyCount += 1;
@@ -25,6 +25,6 @@ MATCH void func_8009E07C(void) {
             g_BattleLivingEnemyCount += 1;
         }
     } else {
-        g_BattleTargetRecord[2] = 0;
+        g_BattleTargetRecord->hp_change = 0;
     }
 }

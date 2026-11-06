@@ -23,5 +23,5 @@ MATCH void func_8009F1BC(void) {
     /* FAKE: keeps the kind-0x20 materialization in the jal delay slot. */
     MATCH_FAKE_BARRIER();
     res                             = Battle_CalcDamage(battler_index, selection_kind, 0x20);
-    ((s16*)g_BattleTargetRecord)[2] = res;
+    g_BattleTargetRecord->hp_change = res;
 }

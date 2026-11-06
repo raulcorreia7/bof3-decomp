@@ -63,7 +63,7 @@ NON_MATCHING void func_801E8684(void) {
         temp_a0_233                                  = g_Task;
         *(&D_80145FB4 + (temp_a0_233->slot * 0x140)) = D_801EB4D0;
         var_a1_247                                   = 0;
-        g_BattlePartyBattlers[temp_a0_233->slot].action_flags.volatile_value = D_801EB4D4;
+        g_BattlePartyBattlers[temp_a0_233->slot].turn.action_flags.volatile_value = D_801EB4D4;
         do {
             temp_a0_259 = var_a1_247 & BYTE_MASK;
             var_a1_247 += 1;

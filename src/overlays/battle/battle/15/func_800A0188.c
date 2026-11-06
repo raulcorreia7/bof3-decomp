@@ -1,11 +1,11 @@
 #include "battle_15.h"
 
 MATCH void func_800A0188(void) {
-    s16* record;
-    u8   mode;
-    u16  base;
+    BattleTurn* record;
+    u8          mode;
+    u16         base;
 
-    g_BattleTargetRecord[2] = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, 0xFFFF);
+    g_BattleTargetRecord->hp_change = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, 0xFFFF);
     /* FAKE: barrier holds mode load below the store */
     MATCH_FAKE_BARRIER();
     mode = LOBU(g_BattleTarget);
@@ -14,8 +14,8 @@ MATCH void func_800A0188(void) {
     } else {
         base = ENEMY_COMBATANT(mode).hp;
     }
-    record = *(s16**)&g_BattleTargetRecord;
-    if (record[2] >= (s16)base) {
-        record[2] = (base - 1);
+    record = *(BattleTurn**)&g_BattleTargetRecord;
+    if (record->hp_change >= (s16)base) {
+        record->hp_change = (base - 1);
     }
 }

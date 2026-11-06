@@ -86,7 +86,7 @@ NON_MATCHING void func_800A1D84(void) {
                 i += 1;
             } while ((u32)(i & BYTE_MASK) < (u8)g_BattlePartyCount);
         }
-        g_BattleTargetRecord[2] = (s16) - (s16) * (D_80145F20 + (*active * BATTLE_PARTY_STRIDE));
+        g_BattleTargetRecord->hp_change = (s16) - (s16) * (D_80145F20 + (*active * BATTLE_PARTY_STRIDE));
     }
 }
 #else

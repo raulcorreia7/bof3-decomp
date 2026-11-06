@@ -6,7 +6,7 @@ MATCH void func_800C1860(void) {
     work         = g_BattleCurrentEnemy;
     work->script = D_800C1D04;
     work->unk_E4 = func_800C18C4;
-    work->action_flags |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
+    work->turn.action_flags.value |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
     work->unk_E8 = D_800C1D1C;
     ACTOR_SET_MODE(2);
     func_8014D978();

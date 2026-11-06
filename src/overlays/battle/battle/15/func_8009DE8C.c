@@ -12,11 +12,11 @@ MATCH void func_8009DE8C(void) {
     ctx = (BattleSelectionContext*)&g_BattleTarget;
     sel = ctx->sel;
     if (BATTLER_IS_PLAYER(sel)) {
-        ((s16*)g_BattleTargetRecord)[2] = -g_BattlePartyBattlers[sel].chr.stats.max_hp;
+        g_BattleTargetRecord->hp_change = -g_BattlePartyBattlers[sel].chr.stats.max_hp;
     } else {
         value = ENEMY_COMBATANT(sel).stats.max_hp;
         if (value == 0xFFFFu) {
-            ((s16*)g_BattleTargetRecord)[2] = -1;
+            g_BattleTargetRecord->hp_change = -1;
             row_off                         = (ctx->sel - 3u) * BATTLE_ENEMY_STRIDE;
             D_801EB72C[row_off] |= 4u;
             return;
@@ -24,6 +24,6 @@ MATCH void func_8009DE8C(void) {
         /* Negation materialized first, matching the original's evaluation order. */
         /* FAKE: scheduler rows j-target/negu/tail need s64 temp;
          * plain/s32/s16/order/hi-lo ladders miss. */
-        negated = (((s16*)g_BattleTargetRecord)[2] = -value);
+        negated = (g_BattleTargetRecord->hp_change = -value);
     }
 }

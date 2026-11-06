@@ -12,5 +12,5 @@ MATCH void func_8009EACC(void) {
         new_var = g_BattleActiveBattler;
     ORDER_LOCK_END;
     result                          = Battle_CalcDamage(new_var, g_BattleTarget, 0xFFFF);
-    ((s16*)g_BattleTargetRecord)[2] = (result >> 1) + 1;
+    g_BattleTargetRecord->hp_change = (result >> 1) + 1;
 }

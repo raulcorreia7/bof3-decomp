@@ -249,6 +249,28 @@ typedef union BattlerFlags {
     volatile u32 volatile_value;
 } BattlerFlags;
 
+/* One battler's turn: the command it queued, the HP and AP the hit deals, the
+ * target state bits and counter, and the damage and action flag words. Both
+ * battler records embed it as `turn`; D_801EB4D8 and g_BattleTargetRecord
+ * point at it. */
+typedef struct BattleTurn {
+    BattleCommandSlot command;
+    s16               hp_change; /* signed HP delta shown on the hit; negative heals */
+    s16               ap_change; /* signed AP delta, as hp_change */
+    u8                target_flags;
+    u8                counter;
+    u8                choice; /* the menu choice stored with the command */
+    u8                unk_0B;
+    BattlerFlags      damage_flags; /* BattleBattlerDamageFlags */
+    BattlerFlags      action_flags; /* BattleBattlerActionFlags */
+} BattleTurn;
+
+ASSERT_SIZE(BattleTurn, 0x14);
+ASSERT_OFFSET(BattleTurn, hp_change, 0x04);
+ASSERT_OFFSET(BattleTurn, target_flags, 0x08);
+ASSERT_OFFSET(BattleTurn, damage_flags, 0x0C);
+ASSERT_OFFSET(BattleTurn, action_flags, 0x10);
+
 /* A screen coordinate cell: battle/battle/03 and the field overlays read it
  * unsigned, battle/battle/15 reads it signed because the panels slide to
  * negative screen positions (Actor names +0x2E/+0x30 screen_x and
@@ -389,14 +411,7 @@ typedef struct EnemyBattler {
     u8*                   script;
     u8                    unk_F0;
     u8                    pad_F1[ENEMY_COMBATANT_PAD_F1_SIZE];
-    BattleCommandSlot     command;   /* +0xF4 the action the enemy has queued */
-    s16                   hp_change; /* +0xF8 HP dealt this hit; negative heals (func_801E496C) */
-    s16                   ap_change;
-    u8                    target_flags; /* +0xFC battle/battle/15 calls it target_flags */
-    u8                    unk_FD;
-    u8                    pad_FE[0x2];
-    u32                   damage_flags;     /* BattleBattlerDamageFlags */
-    u32                   action_flags;     /* BattleBattlerActionFlags */
+    BattleTurn            turn;             /* +0xF4 the action the enemy has queued and its outcome */
     StatMultipliers       stat_multipliers; /* +0x108 */
     u8                    pad_10C[6];
     u8                    unk_112;
@@ -434,9 +449,8 @@ ASSERT_OFFSET(EnemyBattler, zenny, 0x84);
 ASSERT_OFFSET(EnemyBattler, exp, 0x86);
 ASSERT_OFFSET(EnemyBattler, stats, 0xA0);
 ASSERT_OFFSET(EnemyBattler, base, 0xC0);
-ASSERT_OFFSET(EnemyBattler, hp_change, 0xF8);
-ASSERT_OFFSET(EnemyBattler, ap_change, 0xFA);
 ASSERT_OFFSET(EnemyBattler, kind, 0xE0);
+ASSERT_OFFSET(EnemyBattler, turn, 0xF4);
 ASSERT_OFFSET(EnemyBattler, unk_E8, 0xE8);
 
 /* Point a boss enemy at its script, event handler and step table. */
@@ -445,10 +459,6 @@ static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, Enemy
     enemy->unk_E4 = handler;
     enemy->unk_E8 = steps;
 }
-
-ASSERT_OFFSET(EnemyBattler, target_flags, 0xFC);
-ASSERT_OFFSET(EnemyBattler, damage_flags, 0x100);
-ASSERT_OFFSET(EnemyBattler, action_flags, 0x104);
 
 /* The kind walk: `D_8014833A[i]` is the owner table's record `i` seen at +0x07
  * (0x8014833A = 0x80148333 + 7, stride 0x24). Kept as its own name because the
@@ -510,37 +520,29 @@ typedef struct PartyBattler {
     u8                unk_5D;
     u8                unk_5E;
     u8                unk_5F;
-    s32       unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
-    s32       unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
-    u8        pad_68[8];
-    u8        unk_70;
-    u8        pad_71[3];
+    s32        unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
+    s32        unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
+    u8         pad_68[8];
+    u8         unk_70;
+    u8         pad_71[3];
     /* +0x74..+0x117 is a Character copy: func_801DD08C copies a
      * 0xA4-byte character record to this offset. */
-    Character chr;
-    BattleCommandSlot command;   /* +0x118 the action the player has queued */
-    s16               hp_change; /* +0x11C signed HP delta shown on the hit; func_801D527C seeds it from stats.hp,
-                               func_801DFCB4 tests its sign (ram-map: hp_change) */
-    s16               ap_change; /* +0x11E signed AP delta, as hp_change (ram-map: ap_change) */
-    u8                unk_120;
-    u8                counter_121;
-    u8                unk_122;
-    u8                unk_123;
-    BattlerFlags      damage_flags; /* BattleBattlerDamageFlags */
-    BattlerFlags      action_flags; /* BattleBattlerActionFlags */
-    u8                unk_12C[8];
-    u16               unk_134;
-    u8                counter_136;
-    u8                counter_137;
-    u8                focus_counter; /* +0x138 the Focus counter, 0..2; Battle_CalcDamage spends it as a power bonus */
-    u8                unk_139;
-    u8                unk_13A[2];
-    u8                character_index; /* +0x13C the Character slot this battler was built from */
-    u8                pad_13D[3];
+    Character  chr;
+    BattleTurn turn; /* +0x118 the action the player has queued and its outcome */
+    u8         unk_12C[8];
+    u16        unk_134;
+    u8         counter_136;
+    u8         counter_137;
+    u8         focus_counter; /* +0x138 the Focus counter, 0..2; Battle_CalcDamage spends it as a power bonus */
+    u8         unk_139;
+    u8         unk_13A[2];
+    u8         character_index; /* +0x13C the Character slot this battler was built from */
+    u8         pad_13D[3];
 } PartyBattler;
 
 ASSERT_SIZE(PartyBattler, 0x140);
 ASSERT_OFFSET(PartyBattler, slot, 0x05);
+ASSERT_OFFSET(PartyBattler, turn, 0x118);
 /* The four bytes at +0x08 as one word; the bmagic tests mask it. */
 #define PARTY_BATTLER_WORD_08(battler) (*(u32*)&(battler)->facing)
 
@@ -557,11 +559,6 @@ ASSERT_OFFSET(PartyBattler, unk_2C, 0x2C);
 ASSERT_OFFSET(PartyBattler, depth, 0x32);
 ASSERT_OFFSET(PartyBattler, pos, 0x34);
 ASSERT_OFFSET(PartyBattler, chr, 0x74);
-ASSERT_OFFSET(PartyBattler, hp_change, 0x11C);
-ASSERT_OFFSET(PartyBattler, ap_change, 0x11E);
-ASSERT_OFFSET(PartyBattler, unk_120, 0x120);
-ASSERT_OFFSET(PartyBattler, damage_flags, 0x124);
-ASSERT_OFFSET(PartyBattler, action_flags, 0x128);
 ASSERT_OFFSET(PartyBattler, unk_12C, 0x12C);
 ASSERT_OFFSET(PartyBattler, unk_13A, 0x13A);
 ASSERT_OFFSET(PartyBattler, focus_counter, 0x138);

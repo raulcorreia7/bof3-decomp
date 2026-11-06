@@ -32,13 +32,13 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
     rec->unk_31 = rec->unk_51;
     rec->unk_33 = rec->unk_53;
 
-    if (g_BattlePartyBattlers[party_slot].action_flags.volatile_value & 1) {
+    if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & 1) {
         D_80145F24[party_slot][0] = D_80145F24[party_slot][0] * 3;
     }
-    if (g_BattlePartyBattlers[party_slot].action_flags.volatile_value & COMBATANT_FLAG_CHARGING) {
+    if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & COMBATANT_FLAG_CHARGING) {
         D_80145F24[party_slot][0] = D_80145F24[party_slot][0] * 3;
     }
-    if (g_BattlePartyBattlers[party_slot].action_flags.volatile_value & 0x1000) {
+    if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & 0x1000) {
         u16 total;
         u16 bonus;
 
@@ -47,7 +47,7 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
         D_80145F26[party_slot][0] = 0;
         D_80145F24[party_slot][0] = total + bonus;
     }
-    if (g_BattlePartyBattlers[party_slot].action_flags.volatile_value & 2) {
+    if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & 2) {
         if (g_DragonForm == 0x16) {
             FIELD(u8, &D_80145F3B, row_offset) = FIELD(u8, &D_80145F3B, row_offset) + 0x1E;
             FIELD(u8, &D_80145F3A, row_offset) = FIELD(u8, &D_80145F3A, row_offset) + 0x1E;
@@ -58,10 +58,10 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
 
     table_row = slot & BYTE_MASK;
 
-    if (g_BattlePartyBattlers[table_row].action_flags.volatile_value & COMBATANT_FLAG_HOLY_RESIST_ZERO) {
+    if (g_BattlePartyBattlers[table_row].turn.action_flags.volatile_value & COMBATANT_FLAG_HOLY_RESIST_ZERO) {
         g_BattlePartyBattlers[table_row].chr.stats.resistances[RES_INDEX_HOLY] = 0;
     }
-    if (g_BattlePartyBattlers[table_row].action_flags.volatile_value & COMBATANT_FLAG_FIRE_RESIST_ZERO) {
+    if (g_BattlePartyBattlers[table_row].turn.action_flags.volatile_value & COMBATANT_FLAG_FIRE_RESIST_ZERO) {
         FIELD(u8, &D_80145F2F, table_row * BATTLE_PARTY_STRIDE) = 0;
     }
     D_80145F24[table_row][0] = func_801DE0AC(D_80145F24[table_row][0], 0x64);

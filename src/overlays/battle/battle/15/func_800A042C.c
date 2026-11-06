@@ -35,5 +35,5 @@ MATCH void func_800A042C(void) {
     /* FAKE: the barrier keeps the kind materialization out of the case exits
      * so it lands last, in the jal delay slot as retail has it. */
     MATCH_FAKE_BARRIER();
-    ((s16*)g_BattleTargetRecord)[2] = Battle_CalcDamage(battler_index, selection_kind, 0xFFFFU);
+    g_BattleTargetRecord->hp_change = Battle_CalcDamage(battler_index, selection_kind, 0xFFFFU);
 }

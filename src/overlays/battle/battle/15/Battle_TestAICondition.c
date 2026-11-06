@@ -88,7 +88,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 9:
-                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY && g_BattleCurrentEnemy->hp_change != 0) {
+                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY && g_BattleCurrentEnemy->turn.hp_change != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -96,7 +96,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 10:
-                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK && g_BattleCurrentEnemy->hp_change != 0) {
+                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK && g_BattleCurrentEnemy->turn.hp_change != 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
@@ -143,12 +143,12 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 36:
-                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK && g_BattleCurrentEnemy->hp_change != 0) {
+                if (LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK && g_BattleCurrentEnemy->turn.hp_change != 0) {
                     func_8009C994(g_BattleCurrentEnemy, packet);
                 }
                 break;
             case 37:
-                if (g_BattleCurrentEnemy->hp <= g_BattleCurrentEnemy->hp_change) {
+                if (g_BattleCurrentEnemy->hp <= g_BattleCurrentEnemy->turn.hp_change) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);

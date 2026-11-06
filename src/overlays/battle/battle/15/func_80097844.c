@@ -21,19 +21,19 @@ MATCH void func_80097844(void) {
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     entry   = Party_GetAbilities(message[0], D_8014857B, 1);
     if ((D_801CA718[entry[D_8014857C] * 0x14] & 0x80u) != 0u && (trigger & (PADLup | PADLdown)) != 0) {
-        D_801EB4D8[0] = Battle_FindSelectableSlotForward(0);
+        D_801EB4D8->command.target = Battle_FindSelectableSlotForward(0);
         *(u8*)&g_BattleUIState += 1u;
         SND_PlayCue(EMI_CUE_ID(1, 1));
         return;
     }
     if ((trigger & PADLright) != 0) {
-        D_801EB4D8[0] = Battle_FindSelectableSlotForward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, ((s8*)D_801EB4D8)[0] + 1) & BYTE_MASK);
+        D_801EB4D8->command.target = Battle_FindSelectableSlotForward(
+            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)D_801EB4D8->command.target + 1) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if ((trigger & PADLleft) != 0) {
-        D_801EB4D8[0] = Battle_FindSelectableSlotBackward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, ((s8*)D_801EB4D8)[0] - 1) & BYTE_MASK);
+        D_801EB4D8->command.target = Battle_FindSelectableSlotBackward(
+            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)D_801EB4D8->command.target - 1) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

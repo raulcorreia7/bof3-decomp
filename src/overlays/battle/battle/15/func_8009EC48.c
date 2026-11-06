@@ -22,8 +22,8 @@ MATCH void func_8009EC48(void) {
     *p_flag    = flag | BATTLE_STATE_CRITICAL;
     /* FAKE: statement boundary keeps the retail register order and schedule. */
     ORDER_LOCK(slot_arg = g_BattleActiveBattler);
-    kind_arg                = g_BattleTarget;
-    g_BattleTargetRecord[2] = Battle_CalcDamage(slot_arg, kind_arg, 0xFFFF);
+    kind_arg                        = g_BattleTarget;
+    g_BattleTargetRecord->hp_change = Battle_CalcDamage(slot_arg, kind_arg, 0xFFFF);
     /* FAKE: keeps the slot reload after the pointer store. */
     MATCH_BARRIER();
     slot = (*(u8*)&g_BattleActiveBattler);

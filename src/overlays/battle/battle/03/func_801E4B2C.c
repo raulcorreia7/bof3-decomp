@@ -4,7 +4,7 @@ MATCH void func_801E4B2C(void) {
     PartyBattler* work;
 
     if (EMI_LoaderIsReady() != 0) {
-        if (((EnemyBattler*)g_BattleCurrentEnemy)->command.type == 4) {
+        if (((EnemyBattler*)g_BattleCurrentEnemy)->turn.command.type == 4) {
             if (g_BattleEncounter != 0) {
                 if (!(func_801DDF50((((EnemyBattler*)g_BattleCurrentEnemy)->unk_F0 + 0x20) & BYTE_MASK, D_801463CD) &
                       0xFF)) {

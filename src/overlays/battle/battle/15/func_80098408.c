@@ -1,13 +1,13 @@
 #include "battle_15.h"
 
 MATCH void func_80098408(void) {
-    u8* active_selection_slot;
-    u8* battle_selection_state;
-    u8  selection_root_state;
+    BattleTurn* active_selection_slot;
+    u8*         battle_selection_state;
+    u8          selection_root_state;
 
-    active_selection_slot    = (u8*)D_801EB4D8;
-    battle_selection_state   = (u8*)(u8*)(EFFECT_BANK_80140000);
-    active_selection_slot[1] = 5u;
+    active_selection_slot               = D_801EB4D8;
+    battle_selection_state              = (u8*)(u8*)(EFFECT_BANK_80140000);
+    active_selection_slot->command.type = 5u;
     func_8009AF84();
     selection_root_state            = battle_selection_state[0x62E3u];
     battle_selection_state[0x62E4u] = 0u;

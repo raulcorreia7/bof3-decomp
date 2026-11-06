@@ -66,7 +66,8 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
         }
     }
     row2 = actor * 0x118;
-    if ((*(D_801EB6B2 + row2) & 0x20) || (g_BattleEnemyBattlers[actor].action_flags & COMBATANT_FLAG_CHARGING)) {
+    if ((*(D_801EB6B2 + row2) & 0x20) ||
+        (g_BattleEnemyBattlers[actor].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
         g_BattleActionType = 1;
         if (func_800A9304((slot + 3) & BYTE_MASK) & BYTE_MASK) {
             func_801E2948((s8)actor);
@@ -81,11 +82,11 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
         enemy->unk_E4(0);
     }
     if (g_BattleTargetSelector == GAME_NONE) {
-        g_BattleActionType                                   = 0;
-        g_BattleEnemyBattlers[slot & BYTE_MASK].command.type = 0;
+        g_BattleActionType                                        = 0;
+        g_BattleEnemyBattlers[slot & BYTE_MASK].turn.command.type = 0;
         return;
     }
-    g_BattleEnemyBattlers[slot & BYTE_MASK].command.type = g_BattleActionType;
+    g_BattleEnemyBattlers[slot & BYTE_MASK].turn.command.type = g_BattleActionType;
 }
 #else
 INCLUDE_ASM(func_801E25E0);
