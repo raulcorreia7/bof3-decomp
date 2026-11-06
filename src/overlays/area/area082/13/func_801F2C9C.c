@@ -1,6 +1,6 @@
 #include "area082_13.h"
 
-MATCH void func_801F2C9C(void) {
+MATCH s32 func_801F2C9C(void) {
     u16 remaining;
 
     remaining      = g_Task->unk_2C - 1;

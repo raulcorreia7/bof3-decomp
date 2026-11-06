@@ -7,25 +7,19 @@ MATCH s32 func_801EFEA8(void) {
     s32 active_record_count;
     /* FAKE: retains the group byte offset in a2. */
     MATCH_REG(s32, group_byte_offset, "a2");
-    /* FAKE: retains the one-based group number in t1. */
-    MATCH_REG(s32, group_number, "t1");
-    s32 active_record_offset;
-    s32 queue_record_index;
-    /* FAKE: keeps the first active-record scan's group in a1. */
-    MATCH_REG(s32, record_group_number, "a1");
-    /* FAKE: keeps the final active-record scan's group in a3. */
-    MATCH_REG(s32, queue_group_number, "a3");
-    /* FAKE: keeps the state base in t2 for the row timer pointer. */
-    MATCH_REG(u32*, battle_count_ptr, "t2");
-    /* FAKE: keeps the row timer pointer in t0 for the 8-byte stride. */
-    MATCH_REG(u32*, timer_ptr, "t0");
-    s16 battle_delta;
-    u8  updated_progress;
-    u8  current_progress;
-    u8  progress_or_queue_count;
-    u32 queue_offset;
-    /* FAKE: keeps the post-scan queue offset in v0. */
-    MATCH_REG(u32, queue_entry_offset, "v0");
+    s32  group_number;
+    s32  active_record_offset;
+    s32  queue_record_index;
+    s32  record_group_number;
+    s32  queue_group_number;
+    u32* battle_count_ptr;
+    u32* timer_ptr;
+    s16  battle_delta;
+    u8   updated_progress;
+    u8   current_progress;
+    u8   progress_or_queue_count;
+    u32  queue_offset;
+    u32  queue_entry_offset;
 
     group_number      = 1;
     battle_count_ptr  = &g_BattleCount;

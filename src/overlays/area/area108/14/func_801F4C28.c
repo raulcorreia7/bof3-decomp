@@ -1,6 +1,6 @@
 #include "area108_14.h"
 
-MATCH void func_801F4C28(void) {
+MATCH s32 func_801F4C28(void) {
     s8     tuneA;
     s8     tuneB;
     s8     tuneC;

@@ -5,8 +5,7 @@ NON_MATCHING void func_8019625C(void) {
     /* FAKE: pin carries entry pointer in t1. */
     MATCH_REG(PaletteFade*, entry, "$9");
     s32 entry_index;
-    /* FAKE: pin holds loop counter in t2. */
-    MATCH_REG(s32, color_index, "$10");
+    s32 color_index;
     s32 count;
     u32 value;
     u32 table_index;

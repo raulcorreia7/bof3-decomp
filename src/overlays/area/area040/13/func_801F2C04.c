@@ -1,6 +1,6 @@
 #include "area040_13.h"
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     s16 slot;
 
     slot = SP_REF(s16, 0x0u) = Actor_FindFree();
