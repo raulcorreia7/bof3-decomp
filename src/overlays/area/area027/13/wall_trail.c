@@ -487,7 +487,7 @@ MATCH POLY_FT4* func_801F3480(const AreaPoint* point, s32 angle, u32 texture) {
     PushMatrix();
     RotTrans((SVECTOR*)point, (VECTOR*)&matrix.t, &flag);
     RotMatrix(&rotation, &matrix);
-    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
+    MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 

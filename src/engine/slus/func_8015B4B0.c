@@ -4,7 +4,7 @@
  * place and loads the result as the GTE rotation and translation matrix.
  */
 MATCH void func_8015B4B0(void* matrix) {
-    MulMatrix2((MATRIX*)g_CameraMatrix, matrix);
+    MulMatrix2(&g_CameraMatrix, matrix);
     SetRotMatrix(matrix);
     SetTransMatrix(matrix);
 }

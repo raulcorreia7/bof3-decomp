@@ -91,16 +91,16 @@ MATCH void func_801527E4(void) {
         g_AreaCameraRefreshCount = 3;
         *(SVECTOR*)&D_801492E0   = *&g_AreaCameraAngle;
     }
-    RotMatrix(&g_AreaCameraAngle, (MATRIX*)g_CameraMatrix);
+    RotMatrix(&g_AreaCameraAngle, &g_CameraMatrix);
     view.vx = (u32)D_80149310 >> 1;
     view.vy = D_80149314 >> 1;
     view.vz = (u32)g_AreaCameraHeight >> 1;
-    ApplyMatrix((MATRIX*)g_CameraMatrix, &view, &trans);
+    ApplyMatrix(&g_CameraMatrix, &view, &trans);
     D_801492FC = trans.vx + g_AreaCameraOffsetX;
     D_80149300 = trans.vy + g_AreaCameraOffsetY;
     D_80149304 = trans.vz + g_AreaCameraOffsetZ + 0x1194;
-    SetRotMatrix((MATRIX*)g_CameraMatrix);
-    SetTransMatrix((MATRIX*)g_CameraMatrix);
+    SetRotMatrix(&g_CameraMatrix);
+    SetTransMatrix(&g_CameraMatrix);
     if (g_AreaCameraRefreshCount != 0) {
         func_801530D0();
         g_AreaCameraRefreshCount -= 1;

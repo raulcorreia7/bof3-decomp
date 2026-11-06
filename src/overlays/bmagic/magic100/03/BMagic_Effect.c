@@ -96,7 +96,7 @@ MATCH void func_801EF434(void) {
     pos.vz = -(COORD_INT(g_Task->pos.z) + 0x100) / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
-    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
+    MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 }
@@ -127,7 +127,7 @@ NON_MATCHING void func_801EF8E8(void) {
     pos.vz = height / 2;
     RotTrans(&pos, &matrix.t, &flags);
     RotMatrix(&rot, &matrix);
-    MulMatrix2((MATRIX*)g_CameraMatrix, &matrix);
+    MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 }

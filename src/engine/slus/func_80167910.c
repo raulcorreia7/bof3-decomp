@@ -74,7 +74,7 @@ MATCH void func_80167910(void) {
     rot.vz  = (s16)(-COORD_INT(g_Task->z) / 2);
     RotTrans(&rot, (VECTOR*)mtx.t, &flag);
     RotMatrix(&axis, &mtx);
-    MulMatrix2((MATRIX*)g_CameraMatrix, &mtx);
+    MulMatrix2(&g_CameraMatrix, &mtx);
     SetRotMatrix(&mtx);
     SetTransMatrix(&mtx);
     if (GetGraphType() == 1) {
