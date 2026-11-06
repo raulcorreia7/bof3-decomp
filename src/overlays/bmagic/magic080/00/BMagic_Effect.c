@@ -10,9 +10,7 @@ MATCH void func_801EEC04(void) {
     table[TASK_BYTES[1]]();
 }
 
-/* Scheduling and regalloc residual: the target-Y load stays above the coord_x store while retail
- * pins it below, and the spad pointer and target-X swap v0/v1 (first difference lui v1,0x1f80 at
- * 0x801EEC5C); plain, saved-target and hybrid target forms all give the same schedule. */
+/* blocker: target-Y load schedule; first diff: lui v1,0x1f80 at 0x801EEC5C. */
 INCLUDE_ASM(func_801EEC5C);
 
 /* The two handlers read the variant byte already loaded in a0, so the calls pass no argument: a

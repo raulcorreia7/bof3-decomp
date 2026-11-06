@@ -1,6 +1,4 @@
 #include "area135_14.h"
 
-/* Hand draft matches in shape but the first global's address lands in a2 instead of v1
- * (lui at 0x801F603C); the tried forms (commuted multiplies, a scale survivor local) do not move the
- * allocation. Permuter candidate. */
+/* blocker: register allocation; first diff: first global address in a2 against v1 at 0x801F603C. */
 INCLUDE_ASM(func_801F603C);

@@ -31,8 +31,7 @@ MATCH void func_801F6D44(void) {
     g_Task->mode += 1;
 }
 
-/* 16 differing; first at +4: retail hoists li a0,0x10 ahead of the s0 save and interleaves the
- * loads and the arg build (candidate 0xCC against 0xD0); next lever: permuter on the schedules. */
+/* blocker: schedule; first diff: +4 li a0,0x10 before the s0 save. */
 INCLUDE_ASM(func_801F6DD4);
 
 MATCH void func_801F6EA4(void) {
@@ -52,8 +51,7 @@ MATCH void func_801F6EA4(void) {
     }
 }
 
-/* 10 differing; first at +0x40: candidate lbu a1,9(v0) against retail lbu a0,9(v0) — the unk_09
- * value must sit in a0 and build the func_801F75BC argument in the arms; next lever: permuter. */
+/* blocker: unk_09 value register; first diff: +0x40 lbu a1,9(v0) (candidate) against lbu a0,9(v0) (retail). */
 INCLUDE_ASM(func_801F6F2C);
 
 MATCH void func_801F6FF8(void) {

@@ -18,7 +18,7 @@ MATCH void func_801EEF78(void) {
 
 INCLUDE_ASM(func_801EEFBC);
 
-/* First difference: lui v0 at +0x84; try the work pointer lifetime around the scale and flag stores. */
+/* blocker: work pointer lifetime; first diff: lui v0 at +0x84. */
 INCLUDE_ASM(func_801EF078);
 
 MATCH void func_801EF1F4(void) {
@@ -37,8 +37,7 @@ MATCH void func_801EF1F4(void) {
 
 INCLUDE_ASM(func_801EF294);
 
-/* Orbit step: on odd frames the effect sits at the caster (D_801EB4E0) plus (+unk_0C, -unk_0C), otherwise minus (+unk_0C), then unk_09 counts down and reloads 8 while unk_02 steps back. Tried the m2c
- * merged y local (s32/u32/s16/u8), a work pointer set in each branch and a caster local: first differing instruction lw v0,56(a1) retail against lw v1,56(a1) (retail merges y into v0 and stores through a0; the candidate is 4 bytes shorter). */
+/* blocker: y register merge; first diff: lw v0,56(a1) (retail) against lw v1,56(a1) (candidate). */
 INCLUDE_ASM(func_801EF40C);
 
 INCLUDE_ASM(func_801EF4EC);

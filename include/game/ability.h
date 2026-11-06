@@ -19,11 +19,11 @@
 
 /* Ability flags: what the ability does when the battle code reads it. */
 typedef enum AbilityFlags {
-    ABILITY_AFFECTS_STATS       = 1 << 4,
-    ABILITY_UNKNOWN_3           = 1 << 3,
-    ABILITY_TARGET_ALLY_DEFAULT = 1 << 2,
-    ABILITY_EXAMINABLE          = 1 << 1,
     ABILITY_UNKNOWN_0           = 1 << 0,
+    ABILITY_EXAMINABLE          = 1 << 1,
+    ABILITY_TARGET_ALLY_DEFAULT = 1 << 2,
+    ABILITY_UNKNOWN_3           = 1 << 3,
+    ABILITY_AFFECTS_STATS       = 1 << 4,
 } AbilityFlags;
 
 /*

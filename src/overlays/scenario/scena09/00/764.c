@@ -203,7 +203,7 @@ MATCH s32 func_801FD278(void) {
 
 INCLUDE_ASM(func_801FD280);
 
-/* nonmatching: returns 1 through Game_SetScriptActive delay slots like func_801FDC70; the if/else with one tail is 12 bytes short (first differing instruction: bne at +0x10 targets +0x70 against +0x68): retail repeats li v1,6 in the delay slot of each branch to the shared D_80146874 store. */
+/* blocker: li v1,6 repeated in each branch delay slot; first diff: +0x10 bne targets +0x70 against +0x68. */
 INCLUDE_ASM(func_801FD2E8);
 
 INCLUDE_ASM(func_801FD388);
@@ -228,14 +228,10 @@ INCLUDE_ASM(func_801FDB1C);
 
 INCLUDE_ASM(func_801FDBA8);
 
-/* 1 differing; +0x28: candidate li v1,20 against retail li v0,1 — the return 1 must materialize
- * before the store constants even with direct returns (Game_SetScriptActive family wall); permuter. */
+/* blocker: return 1 materialized before the store constants; first diff: +0x28 li v1,20 against li v0,1. */
 INCLUDE_ASM(func_801FDC1C);
 
-/* Returns -1 when scene flag 0x33 is set; else sets the script active, D_80146875 = 0x32 (0x34 unless D_80145F09 == 4),
- * D_80146874 = 0xF and returns 1. The early-return shape is 4 bytes short: retail puts li v0,1 in the delay slot of each
- * Game_SetScriptActive call (first differing instruction: bnez at +0x18 targets +0x74 against +0x70). Same signature as
- * scena01 func_801FE0A4. */
+/* blocker: li v0,1 in each Game_SetScriptActive delay slot; first diff: +0x18 bnez targets +0x74 against +0x70. */
 INCLUDE_ASM(func_801FDC70);
 
 MATCH void func_801FDCF4(void) {

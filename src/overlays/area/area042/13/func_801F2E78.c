@@ -1,4 +1,4 @@
 #include "area042_13.h"
 
-/* m2c draft needs the color table declaration before a byte comparison. */
+/* needs: color table declaration. */
 INCLUDE_ASM(func_801F2E78);

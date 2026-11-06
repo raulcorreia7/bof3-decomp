@@ -138,6 +138,6 @@ NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_slot, u8 s
                   character->exp);
 }
 #else
-/* Same body in the shop, start, Bate and Shisu overlays; the shop draft is the closest start, and the retail register homes keep py in s2 and the shaded byte in s3. */
+/* blocker: register homes (py in s2, shaded byte in s3). */
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 #endif

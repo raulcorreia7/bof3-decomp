@@ -28,8 +28,7 @@ MATCH void func_801EEEDC(void) {
     }
 }
 
-/* Spawns six queued effects (Battle_AllocEffect(1, 0x10); unk_01 2, unk_0B the loop index, target the work record) after func_801EF148 when unk_0B is 0, then steps. Tried do-while and for loops, s8 and u8 counters and a work local: matches up to
- * the loop; first differing instruction lui a0,0x8014 retail against move s0,zero (retail schedules the counter clear after the selector load, before func_800A9610). */
+/* blocker: counter clear schedule; first diff: lui a0,0x8014 (retail) against move s0,zero (candidate). */
 INCLUDE_ASM(func_801EEF80);
 
 MATCH void func_801EF068(void) {
@@ -70,7 +69,7 @@ MATCH void func_801EF43C(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
-/* First difference: lui v1 at +0x20; try the work pointer lifetime across the coordinate stores. */
+/* blocker: work pointer lifetime; first diff: lui v1 at +0x20. */
 INCLUDE_ASM(func_801EF528);
 
 MATCH void func_801EF648(void) {
@@ -119,7 +118,7 @@ MATCH void func_801EF7B4(void) {
     }
 }
 
-/* First difference: lui v1 at entry; try a work pointer lifetime that keeps a0 across the coordinate loads. */
+/* blocker: work pointer lifetime; first diff: lui v1 at entry. */
 INCLUDE_ASM(func_801EF844);
 
 MATCH void func_801EF8C0(void) {

@@ -1,4 +1,4 @@
 #include "area198_13.h"
 
-/* resume: best 2 differing (the unk_0B byte load lands in v0 where retail keeps v1, the g_Task pointer register; the retail frame carries 8 unused bytes - STACK_PADS(u8, 8) with a FAKE note fixes the frame rows); first `!` +0x44 (lbu v1 vs v0); next lever: the permuter on the load register tie, tried byte local and work local. */
+/* blocker: load register tie; first diff: +0x44 lbu v1 against v0. */
 INCLUDE_ASM(func_801F3600);

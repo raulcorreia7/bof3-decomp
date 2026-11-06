@@ -136,14 +136,14 @@ INCLUDE_ASM(func_801D11A4);
 
 INCLUDE_ASM(func_801D1218);
 
-/* 85 differing rows; first +0x0 stack 0x28 vs 0x38; adjust register and outgoing argument allocation. */
+/* blocker: stack frame; first diff: +0x0 stack 0x28 against 0x38. */
 INCLUDE_ASM(Scene_DrawScanBar);
 
 #include "overlays/scenario/Scene_ClearScanBars.h"
 
 #include "overlays/scenario/Scene_ClaimScanBar.h"
 
-/* Not matched: retail keeps the case constant 1 in v0 apart from the in-use flag in s3; candidates share s3 (first byte difference +0x8C). */
+/* blocker: case constant 1 kept in v0; first diff: +0x8C. */
 INCLUDE_ASM(Scene_StepScanBars);
 
 INCLUDE_ASM(func_801D17A0);

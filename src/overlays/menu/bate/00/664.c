@@ -108,7 +108,7 @@ INCLUDE_ASM(func_801D259C);
 
 INCLUDE_ASM(func_801D26E0);
 
-/* Same body in the shop, start, Bate and Shisu overlays; the shop draft is the closest start, and the retail register homes keep py in s2 and the shaded byte in s3. */
+/* blocker: register homes (py in s2, shaded byte in s3). */
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 
 #include "overlays/menu/Menu_DrawStatPanel.h"
@@ -160,19 +160,17 @@ INCLUDE_ASM(func_801D5634);
 
 #include "overlays/menu/Menu_DrawRowIcons.h"
 
-/* Same body in the shop, start, Bate and Shisu overlays; the shop draft differs from retail in frame size (0x58 against 0x50) and save order, and the retail parameter locals sit in s6, s3, s0 and s4. */
+/* blocker: frame 0x58 against 0x50 and save order. */
 INCLUDE_ASM(Menu_DrawEquipStatWindow);
 
 #include "overlays/menu/Menu_DrawClutStrip.h"
 
 #include "overlays/menu/Menu_DrawFilledPanel.h"
 
-/* Same body in the shop, start, Bate and Shisu overlays; the start draft covers the five SPRT bands and four corner sprites, and the missing piece is a source shape for the retail per-band draw-mode setup. */
-/* First difference: the stack frame, 0x88 bytes against 0x80. */
+/* blocker: per-band draw-mode setup; first diff: stack frame, 0x88 bytes against 0x80. */
 INCLUDE_ASM(Menu_DrawWindowFrame);
 
-/* Follows etc/game/00 func_801999F8 (472 against 443 instructions).
- * First differing instruction: +0x138 `lhu v1,18(s1)` (template `andi v1,s0,0xff`); retail tests (task->unk_12 >> 4) == 15 per row before the flag call, and the tail has an extra `task->unk_0A == 4` sprite pair. */
+/* blocker: per-row (unk_12 >> 4) == 15 test; first diff: +0x138 lhu v1,18(s1) (template andi v1,s0,0xff). */
 INCLUDE_ASM(func_801D6C54);
 
 MATCH void func_801D73B4(BateAbilityPanel* panel) {

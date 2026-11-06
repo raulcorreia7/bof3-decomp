@@ -1,4 +1,4 @@
 #include "area104_14.h"
 
-/* Best 24 differences: first at 0x801F4AE8; adjust loop and argument lifetimes. */
+/* blocker: register allocation; first diff: 0x801F4AE8. */
 INCLUDE_ASM(func_801F4AE4);

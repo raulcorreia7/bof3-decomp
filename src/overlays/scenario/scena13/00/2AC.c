@@ -132,7 +132,7 @@ MATCH void func_801F72A0(void) {
     func_801F7568();
 }
 
-/* nonmatching: the draft with one `work = g_Task` base for the three tint stores is exact except retail compares `andi v1,a1,0xFF` against 0x37 with the area message index in a1 (candidate omits the andi, 0xE4 against 0xE8 bytes); u8, s32, masked and volatile spellings of the index all fold the andi. */
+/* blocker: andi v1,a1,0xFF compare against 0x37; first diff: andi omitted. */
 INCLUDE_ASM(func_801F735C);
 
 MATCH void func_801F7444(void) {

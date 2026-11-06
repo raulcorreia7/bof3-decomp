@@ -84,6 +84,6 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_slot, s3
     Menu_DrawExperienceLine(x + 0x14, y + 0x12, character_slot, stats->level, stats->exp);
 }
 #else
-/* Same body in the shop, start, Bate and Shisu overlays; the shop draft is the closest start, and the retail register homes keep py in s2 and the shaded byte in s3. */
+/* blocker: register homes (py in s2, shaded byte in s3). */
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 #endif

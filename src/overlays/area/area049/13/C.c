@@ -25,10 +25,7 @@ MATCH void func_801170A4(void) {
     }
 }
 
-/* Follows area125/13 func_801F2FC4 (sprite quad with GetClut(80, 483), GFX_AddPrim(2u, 0x28u), channel
- * mask byte at +0x26 selecting which of r, g, b take the +3 shade). The first differing instruction is
- * the hoisted `move` for the zeroed channels before the `sh v0,22(s1)` tpage store; the retail loads
- * the mask once after the tpage store. */
+/* blocker: instruction scheduling; first diff: hoisted move for the zeroed channels before the tpage store. */
 INCLUDE_ASM(func_801170D8);
 
 INCLUDE_ASM(func_801172D0);

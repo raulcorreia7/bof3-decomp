@@ -38,9 +38,7 @@ MATCH void func_801EF164(void) {
     }
 }
 
-/* needs: type g_BattleSelectedActor. Retail rereads it before the second coordinate copy, as a member of an aggregate
- * would (the BattleAction block at 0x80146380 +0x0C); a plain global keeps it in a register. Exact in a scratch build with
- * the pointer declared as an array element; as a plain global the first differing instruction is the bnez target at +0x2C. */
+/* needs: type for g_BattleSelectedActor as a member of the BattleAction block; first diff: bnez target at +0x2C. */
 INCLUDE_ASM(func_801EF1CC);
 
 MATCH void func_801EF280(void) {
@@ -168,9 +166,7 @@ MATCH void func_801EFBEC(void) {
     g_Task->step += 1;
 }
 
-/* needs: type g_BattleSelectedActor. Retail rereads it before the second coordinate copy, as a member of an aggregate
- * would (the BattleAction block at 0x80146380 +0x0C); a plain global keeps it in a register. Exact in a scratch build with
- * the pointer declared as an array element; as a plain global the first differing instruction is the bnez target at +0x4C. */
+/* needs: type for g_BattleSelectedActor as a member of the BattleAction block; first diff: bnez target at +0x4C. */
 INCLUDE_ASM(func_801EFC54);
 
 MATCH void func_801EFD28(void) {

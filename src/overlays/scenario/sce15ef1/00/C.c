@@ -65,7 +65,7 @@ MATCH void func_801D13F4(void) {
     }
 }
 
-/* needs: camera transform declarations and record types; m2c has no typed draft. */
+/* needs: camera transform declarations and record types. */
 INCLUDE_ASM(func_801D147C);
 
 INCLUDE_ASM(func_801D1678);
@@ -205,10 +205,10 @@ MATCH void func_801D2170(void) {
 
 INCLUDE_ASM(func_801D21B4);
 
-/* needs: image rectangle and buffer declarations; m2c draft does not compile. */
+/* needs: image rectangle and buffer declarations. */
 INCLUDE_ASM(func_801D23A0);
 
-/* needs: camera transform declarations and record types; m2c has no typed draft. */
+/* needs: camera transform declarations and record types. */
 INCLUDE_ASM(func_801D2474);
 
 INCLUDE_ASM(func_801D26BC);
@@ -223,18 +223,14 @@ MATCH void func_801D2B64(void) {
     SYS_DISPATCH_TASK(D_801D396C, 1, g_Task);
 }
 
-/* Tried: spad body (five work stores, unk_01++, SND_PlayCue(520)), with
- * direct and local-pointer variants. GCC reloads the work pointer into
- * v0 and hoists the lbu before the zero stores; retail reloads into a0
- * and keeps the first copy for the stores. First diff +0x08: lui v0,0x1f80.
- */
+/* blocker: work pointer reload; first diff: +0x08 lui v0,0x1f80. */
 INCLUDE_ASM(func_801D2BA8);
 
 INCLUDE_ASM(func_801D2C00);
 
 INCLUDE_ASM(func_801D2C94);
 
-/* nonmatching: step of the actor position (func_801D36BC(&x, unk_0C, unk_10)), then unk_0C += unk_18, unk_10 += unk_1C, unk_09--, unk_18 -= 0x100, unk_1C -= 0x200, Actor_Clear at zero. Three statement orders tried; best differs from retail at +0x2C (retail loads lbu a1,9(v1) first, candidate lw v0,12(v1)). */
+/* blocker: statement order; first diff: +0x2C lw v0,12(v1) (candidate) against lbu a1,9(v1) (retail). */
 INCLUDE_ASM(func_801D2D5C);
 
 MATCH void func_801D2DEC(void) {

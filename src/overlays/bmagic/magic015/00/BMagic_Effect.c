@@ -158,11 +158,7 @@ INCLUDE_ASM(func_801F0DB4);
 
 INCLUDE_ASM(func_801F0E54);
 
-/* Scheduling residual in the tail copy: retail loads the spad pointer before the actor pointer and
- * reads unk_02 before the actor word (first difference lui v0,0x8014 at 0x801F1054); a work-local
- * tail, a statement swap and a step temp all give the same schedule; a 5000-iteration permuter
- * search from a fresh decompile stayed at the base score, so the schedule needs a source-side
- * restructure (an extra cell reload sits between the two uses), not another permutation. Permuter, 6 min, best score 275 of 606 errors: no candidate compiles near the retail schedule. */
+/* blocker: tail copy load order; first diff: lui v0,0x8014 at 0x801F1054. */
 INCLUDE_ASM(func_801F0F2C);
 
 INCLUDE_ASM(func_801F1088);

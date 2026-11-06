@@ -728,6 +728,12 @@ never combined, is a state and belongs in its closed-set `enum`.
 Group the accesses by base from the retail assembly and the C casts; the type whose members remove
 the most casts is the next one to prove.
 
+Constants are grouped by domain: one enum per table or concept (`ItemId`, `WeaponId`, `ArmorId`),
+one `#define` run per topic, in the order a reader of that topic expects: ids and flags by value,
+offsets in layout order, steps in flow order, a width beside its height. Within one group the
+values ascend, and an alias sits next to the value it aliases. Reordering never changes a value,
+and the vendor headers under `include/psyq` keep their original text.
+
 **Do**
 
 ```c

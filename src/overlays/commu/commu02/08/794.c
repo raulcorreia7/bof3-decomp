@@ -73,7 +73,7 @@ MATCH void func_801D1938(void) {
 
 INCLUDE_ASM(func_801D1A50);
 
-/* 12 differing: +0x44 loads the index before the counter; change loop register allocation. */
+/* blocker: loop register allocation; first diff: +0x44 index load before the counter. */
 INCLUDE_ASM(func_801D1D68);
 
 INCLUDE_ASM(func_801D1E98);
@@ -220,11 +220,7 @@ MATCH void func_801D35A4(void) {
     SYS_DISPATCH_BYTE(D_801DACC4, D_801F294D);
 }
 
-/* Blocked on a header type: include/sys/gameui.h declares g_SelectionCues and D_80181EBB as
- * const u8[]. The const lets GCC hoist their loads above the D_801DB0CC store. A u8 view matches
- * (tested body: D_801DB0CC = g_SndBgmId; SND_StopSequence(cues[id * 4], D_80181EBB[id * 4]);
- * SND_RequestBgm(0x94); D_801F294D += 1). First diff with const: 0x801D35E0 lui v1 vs v0.
- */
+/* needs: u8 view of const g_SelectionCues and D_80181EBB; first diff: 0x801D35E0 lui v1 against v0. */
 INCLUDE_ASM(func_801D35E0);
 
 MATCH void func_801D364C(void) {
@@ -321,7 +317,7 @@ INCLUDE_ASM(func_801D3E44);
 
 INCLUDE_ASM(func_801D4158);
 
-/* 4 differences; +0x48 call target shifts with a 12-byte short body; try the character selection. */
+/* blocker: call target shifts with a 12-byte short body; first diff: +0x48. */
 INCLUDE_ASM(func_801D42B4);
 
 INCLUDE_ASM(func_801D437C);
@@ -707,7 +703,7 @@ INCLUDE_ASM(func_801D7EA0);
 
 INCLUDE_ASM(func_801D7EF0);
 
-/* 34 differing: +0x00 frame is 0x30, not 0x38; preserve both copies of the x argument. */
+/* blocker: frame is 0x30, not 0x38; first diff: x argument copies. */
 INCLUDE_ASM(func_801D8058);
 
 INCLUDE_ASM(func_801D812C);

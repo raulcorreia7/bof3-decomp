@@ -1,4 +1,4 @@
 #include "area047_13.h"
 
-/* Draft needs func_801F330C return type; no instruction diff yet. */
+/* needs: func_801F330C return type. */
 INCLUDE_ASM(func_801F2D44);

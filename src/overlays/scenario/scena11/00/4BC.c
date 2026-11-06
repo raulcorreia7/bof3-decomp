@@ -49,7 +49,6 @@ INCLUDE_ASM(func_801F82D8);
 
 INCLUDE_ASM(func_801F83C8);
 
-/* Stores GAME_REQUEST_STATUS_MENU to g_GameStateIndex (at 0x801F8D2C). */
 INCLUDE_ASM(func_801F8B84);
 
 MATCH void func_801F917C(void) {

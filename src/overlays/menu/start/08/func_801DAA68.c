@@ -57,8 +57,6 @@ NON_MATCHING void func_801DAA68(void) {
     D_80148654 = 5;
 }
 #else
-/* Best draft 6 instructions off. First diff 0x801DAAE0: retail forms the row address before
- * i++, the draft increments first. while, do-while and a row pointer keep the draft order;
- * the panel base register also swaps (v0/v1). */
+/* blocker: row address formed before i++; first diff: 0x801DAAE0. */
 INCLUDE_ASM(func_801DAA68);
 #endif

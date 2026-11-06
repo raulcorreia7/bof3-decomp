@@ -164,14 +164,10 @@ MATCH void func_801D16DC(void) {
 
 INCLUDE_ASM(func_801D1758);
 
-/* Steps the 256 slots at 0x800E4800 (stride 0x18): speed += 0x20000, position += speed, flip ^= 1, func_801D1758(slot),
- * --life frees at zero, returns 1 when a slot was live. Every form of the speed update hoists the 0x20000 into s4 (frame
- * 0x4C, first differing instruction +0x10: sw ra,64(sp) against 68); retail keeps the lui inside the loop. */
+/* blocker: 0x20000 hoisted into s4; first diff: +0x10 sw ra,64(sp) against 68. */
 INCLUDE_ASM(func_801D18CC);
 
-/* Fills the eight 0x14-byte slots at 0x800E6000 (active = 1, two rand bytes, x and y from the s8 pair table at D_801D27B0
- * shifted 16, z = Area_SampleHeight(x, y) << 16). The loop body matches, but retail's frame is 0x30 against 0x20: it
- * reserves 16 bytes of locals no form of the body produces (first differing instruction +0x0: addiu sp,sp,-48). */
+/* blocker: retail reserves 16 bytes of locals; first diff: +0x0 addiu sp,sp,-48. */
 INCLUDE_ASM(func_801D19A0);
 
 INCLUDE_ASM(func_801D1A60);
@@ -192,5 +188,5 @@ INCLUDE_ASM(Scene_DrawScanBar);
 
 #include "overlays/scenario/Scene_ClaimScanBar.h"
 
-/* Not matched: retail keeps the case constant 1 in v0 apart from the in-use flag in s3; candidates share s3 (first byte difference +0x8C). */
+/* blocker: case constant 1 kept in v0; first diff: +0x8C. */
 INCLUDE_ASM(Scene_StepScanBars);

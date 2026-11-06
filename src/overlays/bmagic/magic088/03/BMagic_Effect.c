@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* Shared Effect_DispatchHandlerSlot1 body: frame 0x30 against retail 0x38 (retail copies 7 table words); first diff 0x801EEC28. */
+/* blocker: frame 0x30 against retail 0x38; first diff: 0x801EEC28. */
 INCLUDE_ASM(func_801EEC20);
 
 INCLUDE_ASM(func_801EECA4);

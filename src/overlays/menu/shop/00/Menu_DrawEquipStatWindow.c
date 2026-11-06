@@ -60,6 +60,6 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_slot, s32 
     UI_DrawSpriteRun(x, y, D_801E56DC, 0);
 }
 #else
-/* Same body in the shop, start, Bate and Shisu overlays; the shop draft differs from retail in frame size (0x58 against 0x50) and save order, and the retail parameter locals sit in s6, s3, s0 and s4. */
+/* blocker: frame 0x58 against 0x50 and save order. */
 INCLUDE_ASM(Menu_DrawEquipStatWindow);
 #endif

@@ -240,7 +240,7 @@ MATCH void func_801F81B4(void) {
     Actor_Clear();
 }
 
-/* needs: camera transform declarations and drawing record type; m2c does not compile. */
+/* needs: camera transform declarations and drawing record type. */
 INCLUDE_ASM(func_801F81D4);
 
 MATCH void func_801F8358(void) {
@@ -272,7 +272,7 @@ MATCH u8* func_801F8394(void) {
     return NULL;
 }
 
-/* needs: particle record type; m2c draft does not compile. */
+/* needs: particle record type. */
 INCLUDE_ASM(func_801F83D0);
 
 INCLUDE_ASM(func_801F8478);
@@ -283,7 +283,7 @@ INCLUDE_ASM(func_801F86BC);
 
 #include "overlays/scenario/Actor_WaitAndStep.h"
 
-/* nonmatching: takes a slide row (ticks at +2, tint at +3, position +8, delta +0x14); every statement order tried is exact except retail keeps the 0x40000 constant in v0 (lui v0,4 first) where the candidate picks a0 or a1. */
+/* blocker: 0x40000 constant register; first diff: lui v0,4 (retail) against a0 or a1 (candidate). */
 INCLUDE_ASM(func_801F8764);
 
 MATCH void func_801F8804(u8 shade) {
@@ -302,15 +302,15 @@ MATCH void func_801F8804(u8 shade) {
     GFX_AddPrim(1, 0x10);
 }
 
-/* needs: table record type; m2c did not produce a compiling draft. */
+/* needs: table record type. */
 INCLUDE_ASM(func_801F88B8);
 
-/* needs: table record type; m2c draft does not compile. */
+/* needs: table record type. */
 INCLUDE_ASM(func_801F8BE8);
 
 #include "shared/AngleAverage12.h"
 
-/* 4 differing; first +0x0C argument save order; try permuter register ordering. */
+/* blocker: argument save order; first diff: +0x0C. */
 INCLUDE_ASM(func_801F8F90);
 
 INCLUDE_ASM(func_801F90F4);
@@ -493,9 +493,5 @@ MATCH void func_801FDBCC(void) {
     func_801C1ABC(D_80146189);
 }
 
-/* Tried: straight body (func_801C1ABC(CHAR_ID_GARR) then four
- * g_Characters[...].unk_07 &= 254). GCC omits the nops retail emits
- * after each load in the slot/index sequences (same pattern as
- * func_801FE1C0). First diff: 0x801FDC30 nop vs lui a0.
- */
+/* blocker: nops after each load; first diff: 0x801FDC30 nop against lui a0. */
 INCLUDE_ASM(func_801FDBF4);

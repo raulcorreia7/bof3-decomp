@@ -58,16 +58,14 @@ INCLUDE_ASM(func_801CF4E0);
 
 INCLUDE_ASM(func_801CF940);
 
-/* Char_SpawnActor variant (shared body in plchar/Char_SpawnActor.h, 57 instructions): this one adds 0x200 to the sampled
- * height and sets link to 1, and keeps the args in $s2/$s3/$s4 with the constant in $s1; the template body with those two
- * edits and MATCH_REG pins still saves $s2 first where retail saves $s3 first (first difference at +0x4). */
+/* blocker: save order; first diff: +0x4 s2 saved first (retail saves s3 first). */
 INCLUDE_ASM(func_801CFB4C);
 
 MATCH void func_801CFC38(void) {
     SYS_DISPATCH_TASK(D_801D0334, 3, g_Task);
 }
 
-/* Template plp016/00 starts with func_801D0444; first diff at +0x0, retail loads g_Task and calls 0x8015DF18 with lhu +0x2C. */
+/* blocker: first diff: +0x0 g_Task load before the 0x8015DF18 call. */
 INCLUDE_ASM(func_801CFC7C);
 
 #include "overlays/plchar/Char_UpdateLinkedFacing.h"

@@ -50,8 +50,7 @@ INCLUDE_ASM(func_801EF5C4);
 
 INCLUDE_ASM(func_801EFE04);
 
-/* Follows sce10eff func_801D218C (160 instructions) but draws through Area_AddCellPrim(x, y, 2, 12) with the vector
- * scaled by sra 3 into the call, so the frame is 64 bytes against 56 (first difference addiu sp at +0x0) */
+/* blocker: frame 64 bytes against 56; first diff: addiu sp at +0x0. */
 INCLUDE_ASM(func_801F0568);
 
 INCLUDE_ASM(func_801F083C);
