@@ -1,11 +1,11 @@
 #include "shop_00.h"
 
-#define PANEL_X    FIELD(u16, arg0, 0x4u)
-#define PANEL_Y    FIELD(u16, arg0, 0x6u)
-#define PANEL_SEL  FIELD(u8, arg0, 0xAu)
-#define PANEL_PREV FIELD(u8, arg0, 0xBu)
+#define PANEL_X    FIELD(u16, panel, 0x4u)
+#define PANEL_Y    FIELD(u16, panel, 0x6u)
+#define PANEL_SEL  FIELD(u8, panel, 0xAu)
+#define PANEL_PREV FIELD(u8, panel, 0xBu)
 
-MATCH void func_801E3F5C(void* arg0) {
+MATCH void func_801E3F5C(void* panel) {
     u32 color;
     u8  i;
     u8* count;

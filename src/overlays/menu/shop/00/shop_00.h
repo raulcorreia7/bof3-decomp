@@ -564,7 +564,7 @@ void func_801E3E4C(void);
 void func_801E3EB4(void);
 void func_801E3EF4(void);
 void func_801E3F34(void);
-void func_801E3F5C(void* arg0);
+void func_801E3F5C(void* panel);
 void func_801E4224(void);
 void func_801E4278(void);
 void func_801E42B8(void);

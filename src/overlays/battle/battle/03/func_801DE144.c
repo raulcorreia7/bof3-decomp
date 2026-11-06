@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
-MATCH s16 func_801DE144(s32 arg0, s32 arg1) {
+MATCH s16 func_801DE144(s32 amount, s32 percent) {
     s32 value;
 
-    value = (arg0 * arg1) / 100;
+    value = (amount * percent) / 100;
     if (value >= 101) {
         value = 100;
     }

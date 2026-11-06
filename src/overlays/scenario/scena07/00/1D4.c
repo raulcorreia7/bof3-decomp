@@ -428,7 +428,7 @@ INCLUDE_ASM(func_801FD524);
 
 INCLUDE_ASM(func_801FD5A0);
 
-MATCH ActorSlot* func_801FD610(u8 arg0) {
+MATCH ActorSlot* func_801FD610(u8 mode) {
     ActorSlot* slot;
     s32        index;
 
@@ -437,7 +437,7 @@ MATCH ActorSlot* func_801FD610(u8 arg0) {
     if (index != 0xFF) {
         slot->header.flags = 1;
         slot->type         = 0x49;
-        slot->header.mode  = arg0;
+        slot->header.mode  = mode;
     }
     return slot;
 }
