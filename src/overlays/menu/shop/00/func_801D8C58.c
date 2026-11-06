@@ -38,6 +38,6 @@ NON_MATCHING void func_801D8C58(s16 x, s16 y, u8 index, u8 flag) {
     UI_DrawSpriteRun(x, y, D_801E5680, 1);
 }
 #else
-/* 17 differences: first early s0 save; delay slot-base load and preserve x in two registers. */
+/* First difference: s0 is saved early. */
 INCLUDE_ASM(func_801D8C58);
 #endif
