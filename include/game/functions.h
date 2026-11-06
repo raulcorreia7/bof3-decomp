@@ -57,16 +57,30 @@ void  Menu_SlidePanelLeft(void);
 void  Actor_DispatchAll(void);
 /* func_8019A194 */
 u8    Game_FindAreaHandler(void);
+/* func_8019ABB0 */
+void  func_8019ABB0(s32 mode);
+/* func_8019F818 */
+void  func_8019F818(Actor* actor);
 /* func_8019FA28 */
 void  Game_RequestAreaChange(u16 selection_seed, u32 context_a, u32 context_b, u8 context_kind);
+/* func_801A0048 */
+bool  func_801A0048(s32 cell_x, s32 cell_y);
 /* func_801A0514 */
 void  func_801A0514(void);
 /* func_801A061C */
 void  func_801A061C(void);
+/* func_801A18C8 */
+void  func_801A18C8(Actor* record);
+/* func_801A1AE4 */
+s32   func_801A1AE4(Actor* arg);
 /* func_801A3A08 */
 void  func_801A3A08(void);
 /* func_801A3D1C */
 void  func_801A3D1C();
+/* func_801A3E50 */
+void  Area_RunSetupStream(u8* cursor);
+/* func_801A4BC0 */
+void  Area_SetCellCode(s16 column, s16 row, u8 code);
 /* func_801A4D54 */
 void  func_801A4D54(u8* script);
 /* func_801A7704 */
@@ -159,10 +173,20 @@ void  func_801C1ABC(s32 character_id);
 void  func_801C1DF0(s32 handler_index);
 /* func_801C2438 */
 void  func_801C2438(void);
+/* func_801C24D0 */
+void  func_801C24D0(void);
 /* func_801C29A0 */
 s32   func_801C29A0(s8 tuning_delta);
+/* func_801C2BEC */
+s32   func_801C2BEC(void);
+/* func_801C329C */
+void  func_801C329C(void);
+/* func_801C3598 */
+void  func_801C3598(void);
 /* func_801C4C48 */
 void  func_801C4C48(void);
+/* func_801C5DFC */
+void  func_801C5DFC(u8 route_index);
 /* func_801C601C */
 void  func_801C601C(s8 route_index);
 /* func_801C7A54 */

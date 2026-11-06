@@ -7,8 +7,6 @@
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 extern u8 D_80144EA0[];
 
 void func_801F2EFC(void);

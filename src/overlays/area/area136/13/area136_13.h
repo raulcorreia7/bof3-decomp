@@ -23,6 +23,5 @@ extern u8  D_801F4400[];
 extern u8  D_801FD288;
 
 /* The map marker the room layout steps draw. */
-void Area_SetCellCode(s16 column, s16 row, u8 code);
 
 #endif

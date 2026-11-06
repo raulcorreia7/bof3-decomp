@@ -6,8 +6,6 @@
 
 #include "overlays/area/world01.h"
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 extern u8 D_801F39C8[];
 
 /* The work window's byte table: 16 rows of 0x18 bytes, the in-use byte at +0x14. */

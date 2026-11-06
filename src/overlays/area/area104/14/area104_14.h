@@ -39,8 +39,6 @@ extern u16 g_GameAreaId;
 extern s8  g_GameRequestKind;
 extern u16 D_80143F22;
 
-void func_8015A944(void);
-
 s32 func_801A79A4(s32 handler_x, s32 handler_y);
 
 s32 func_801F4AE4(s32, s32, s32);

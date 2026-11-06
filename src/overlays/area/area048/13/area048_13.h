@@ -13,7 +13,6 @@ extern u8 D_80146874;
 extern u8 D_80146875;
 extern u8 D_80147CC8;
 extern u8 D_801F4D68[];
-void      Area_SetCellCode(s16 column, s16 row, u8 code);
 s32       func_801F3AE4(s32, s32, s32);
 
 extern u8 D_801F4D80[];

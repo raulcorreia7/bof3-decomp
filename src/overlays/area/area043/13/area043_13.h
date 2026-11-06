@@ -12,7 +12,6 @@ s32 func_8019651C(u8* color_data, s32 palette_base, s32 palette_count, s32 palet
 
 /* func_80196718 */
 void func_80196718(void* target);
-void Area_SetCellCode(s16 column, s16 row, u8 code);
 
 extern u8 D_801F37F8[];
 

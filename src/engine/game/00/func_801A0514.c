@@ -35,7 +35,7 @@ MATCH void func_801A0514(void) {
                     kind    = scratch->unk_06;
                     if (kind == 10) {
                         index += 1;
-                        func_8015A944(entity);
+                        func_8015A944();
                         next_u8 = index & BYTE_MASK;
                     } else {
                         func_8014D290();

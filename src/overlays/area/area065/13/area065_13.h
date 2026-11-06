@@ -7,8 +7,6 @@
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 extern SVECTOR D_1F800014[];
 extern s32     D_80145EC4[];
 extern u8      D_801F4DB4[];

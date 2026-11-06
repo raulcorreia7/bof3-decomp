@@ -17,7 +17,4 @@ extern u16 D_801F5348[];
 extern u16 D_801F5354[];
 extern u8  D_801F536C[];
 
-s32  Item_VitalAdd(u8 arg0);
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 #endif

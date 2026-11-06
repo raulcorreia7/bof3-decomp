@@ -7,7 +7,6 @@
 #include "overlays/area/world01.h"
 
 /* Retail calls it with int-width arguments in this image. */
-s32 Area_SetCellCode(s32, s32, s32);
 
 /* Set three map cells in one column to the same byte. */
 static inline void World01_SetMapCells(s32 column, s32 row0, s32 row1, s32 row2, s32 value) {

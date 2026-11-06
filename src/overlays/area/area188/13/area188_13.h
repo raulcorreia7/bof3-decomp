@@ -39,8 +39,6 @@ extern u8       D_801F68A0;
 
 /* The game-overlay state bytes the cancel path resets. */
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 #define AREA_SPAWN_SLOT_LIFE        0x10
 #define AREA_SPAWN_SLOT_RADIUS      0x100
 #define AREA_SPAWN_SLOT_CORE_SHADE  0x40
