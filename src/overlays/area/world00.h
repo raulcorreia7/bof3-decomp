@@ -19,10 +19,7 @@
 #include "overlays/area/Message_SelectAnswerValue.h"
 
 void func_800F500C(void);
-/* func_8014FF0C */
-void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 void Area_SetCellCode(s16 column, s16 row, u8 code);
-void Area_ProjectPoint(s32* pos, long* screen_xy);
 void func_801E0C80(s32 graphic, s32 layer);
 u8*  func_801E0DCC(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite_y);
 void Area_SpawnWeightedActor(void);

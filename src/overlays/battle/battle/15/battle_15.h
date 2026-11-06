@@ -880,22 +880,12 @@ void        func_800B2C90(MenuPanelTask* task);
 void        func_800B3324(u8, u16, u16, s32, s32, MenuPanelTask*);
 void        func_800B3AE8(MenuPanelTask* task);
 void        func_800B4220(s16 x, s16 y, u8 selected);
-/* func_8014FF0C */
-void        UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 /* func_801650B4 */
 bool        Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
-s16         Char_AddPoints(u16* value, u16 limit, s16 delta);
-u32         Char_AddPercent(u8* value, u8 delta);
-/* func_8019651C */
-extern s32 GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
-/* func_80196718 */
-extern void GFX_FreePaletteFadeTarget(void* target);
 extern void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool        func_801AF494(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
-s32         func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
-s32  func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
 /* func_801DB524 */
 u8   Battle_SlotIsBlocked(u8 slot);
 /* func_801DB5CC */
@@ -1126,7 +1116,5 @@ static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
 u8 func_800A40D0(u8 arg0);
 
 s32 func_800AED5C(s32 arg0, u32 battler_index);
-
-void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 
 #endif

@@ -3,15 +3,40 @@
 
 #include "types.h"
 #include "audio/cue.h"
+#include "sys/cd_format.h"
 #include "common/handler.h"
 
 volatile u8* func_800AC754(u8 entry_id);
 /* Functions. */
 /* Retail functions (one declaration each). */
+/* func_8014AEE0 */
+void         SYS_RunLogo(void);
+/* func_8014AFC0 */
+void         SYS_UpdateKeyState(void);
+/* func_8014B020 */
+void         SYS_PrepareFrame(void);
+/* func_8014B0F0 */
+void         SYS_SubmitFrame(void);
+/* func_8014B17C */
+void         SYS_CaptureDrawTime(void);
 /* func_8014B1A4 */
 extern void  SYS_InitCard(void);
+/* func_8014B33C */
+void         CallbackStopAll(void);
 /* func_8014B3C4 */
 extern void  SYS_ShowException(void);
+/* func_8014B6B4 */
+void         CallbackInitThreads(void);
+/* func_8014B73C */
+void         CallbackRun(void);
+/* func_8014B854 */
+void         CallbackRegister(s32 callback_slot, Callback callback);
+/* func_8014B87C */
+void         CallbackWait(u16 countdown);
+/* func_8014B8B0 */
+void         CallbackExit(void);
+/* func_8014B900 */
+void         CallbackCloseThread(s32 callback_slot);
 /* func_8014B954 */
 extern void  CallbackReplace(Callback entry);
 void         func_8014BA04(void);
@@ -38,6 +63,8 @@ void         Actor_CopyScriptEntry(u32 entry, u8* staging, u32 length);
 void         Actor_SwitchScript(u8 value, u8* dst, s32 size);
 /* func_8014D664 */
 void         Actor_StageScriptRecord(s32 value, s32 position, u8* dst, s32 size);
+/* func_8014D6B8 */
+void         Actor_SelectScript(u8 selector);
 /* func_8014D8D4 */
 u32          Actor_RequestScript(u8 selector);
 /* func_8014D910 */
@@ -46,6 +73,8 @@ u8           func_8014D978(void);
 u8           func_8014DAEC(void);
 /* func_8014DC08 */
 extern void  Actor_SelectScriptBank(u32 record_index);
+/* func_8014DD3C */
+bool         Area_FindSceneRecord(s32 wanted_id);
 /* func_8014E0A8 */
 extern s32   SYS_ReadCD(s32 size, void* buffer, s32 sectors);
 /* func_8014E284 */
@@ -60,16 +89,42 @@ extern void  GFX_FreePaletteSlot(s32 slot);
 void         GFX_FreePaletteSlotOwner(s32 match_key);
 /* func_8014E528 */
 extern void  GFX_FreeAllPaletteSlots(void);
+/* func_8014E564 */
+void         GFX_ClearRect(s16 x, s16 y, s16 width, s16 height);
+/* func_8014E5A0 */
+void         GFX_AddPrim(u32 ot_index, u32 primitive_size);
+/* func_8014E640 */
+s32          INPUT_GetRepeatedButtons(s32 button_mask);
+/* func_8014E6D0 */
+void         GFX_RunTransferQueue(void);
 /* func_8014EA80 */
 void         SYS_StartFrontend(void);
 /* func_8014EC64 */
 void         SYS_EnterFrontend(void);
+/* func_8014ECAC */
+void         UI_SetMode(u16 local_mode);
+/* func_8014F704 */
+s32          GFX_StepScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
+/* func_8014F800 */
+void         UI_DrawText(s16 x, s16 y, s32 flag, u32 color, u8* text);
 /* func_8014F84C */
 u8*          UI_DrawTextGlyphs(u8 flags, u8 len, u8* record);
+/* func_8014FC00 */
+void         func_8014FC00(s32 mode);
+/* func_8014FC90 */
+const u8*    UI_DrawTextString(s16 x, s16 y, s32 flags, u8 count, const u8* text);
+/* func_8014FF0C */
+void         UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 /* func_80150098 */
 void         UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text);
 /* func_801501E4 */
 void         SYS_CopyString(u8* dst, u8* src, s32 limit);
+/* func_80150224 */
+void         Message_StartAreaMessage(s32 message_index);
+/* func_80150284 */
+void         Resource_RequestArea(s32 request_id);
+/* func_801502D0 */
+u8*          Resource_GetText(u32 resource_id);
 /* func_80150304 */
 void         UI_ResetMessage(void);
 /* func_801503E0 */
@@ -112,6 +167,8 @@ s32          Area_ClearCellPalette(s32 x, s32 y);
 extern s32   func_80155560(u32 part_word, void* prim, s32 mode);
 /* func_801558F0 */
 s32          Area_ProbeCellId(s32 x, s32 y);
+/* func_801559AC */
+POLY_FT4*    Area_FindCellQuad(s32 column, s32 row);
 /* func_80155A08 */
 void         Area_AddCellPrim(s32 x, s32 y, s32 depth, s32 size);
 /* func_80155AF8 */
@@ -149,6 +206,8 @@ void         Area_IndexCells(void);
 /* func_80158C80 */
 void         Menu_RunPanelTasks(void);
 void         func_80158E20(void);
+/* func_80158DB8 */
+s32          Menu_ArmPanelTask(u8 menu_id, u8 mode);
 /* func_80158E50 */
 void         Menu_ResetPanelTasks(void);
 /* func_8015A758 */
@@ -156,15 +215,23 @@ void         Area_RunParty(void);
 void         func_8015B410(void* matrix);
 void         func_8015B4B0(void* matrix);
 s8           func_8015B4F4(s32 code);
+/* func_8015B580 */
+void         SYS_SetFlag(void* bits, u8 bit_index);
+/* func_8015B5A8 */
+void         SYS_ClearFlag(void* bits, u8 bit_index);
 /* func_8015B5D4 */
 s32          SYS_TestFlag(void* bits, s32 bit_index);
 extern void  func_8015BAC4(u8 selector);
+/* func_8015B5F4 */
+void         SYS_ToggleFlag(void* bits, u8 bit_index);
 /* func_8015BC14 */
 s32          Area_StepCameraX(s16 target, s8 step);
 /* func_8015BD14 */
 s32          Area_StepCameraY(s16 target, s8 step);
 /* func_8015BE10 */
 s32          Area_StepCameraZ(s16 target, s8 step);
+/* func_8015BEA0 */
+s32          Area_StepCameraAngle(s32 degrees, s8 duration);
 /* func_8015C058 */
 void         Game_ClearScriptActive(void);
 /* func_8015C088 */
@@ -216,12 +283,40 @@ extern void SND_QueueSelectionFx(s32 cue_id);
 void        SND_QueueCueVolume(s32 cue_id, s32 left_index, s32 right_index);
 /* func_8015DF18 */
 void        SND_PlayCue(u16 cue_id);
+/* func_80161808 */
+void        SND_SetBankLayout(u32 layout_bank);
+/* func_80161B24 */
+void        SND_StartBgm(u8 bgm_id, u8 cue_level, u8 cue_shape);
+/* func_80161BBC */
+s32         SND_RequestBgm(s32 requested);
+/* func_80161C20 */
+void        SND_PlayBgm(s32 selection_id, s32 cue_level, s32 cue_shape);
+/* func_80161CD0 */
+void        SND_FadeOutBgm(u8 selection_id, s32 cue_level, s32 cue_shape);
 /* func_80161D20 */
 void        SND_PauseBgm(s32 cue_id);
 /* func_80161D74 */
 void        SND_ResumeBgm(s32 cue_id);
 /* func_80161DC8 */
 void        SND_InstallSequenceFuncs(void);
+/* func_80161F58 */
+void        EMI_LoaderInit(void);
+/* func_80161FDC */
+void        EMI_LoaderStreamInitSlot(u32 emi_id);
+/* func_80162160 */
+DiscLba     EMI_LoaderSlotLba(EmiSlotId emi_id);
+/* func_80162178 */
+void        EMI_LoaderBeginRead(void);
+/* func_801621E8 */
+void        EMI_OnCDSync(s32 status, u8* result);
+/* func_80162230 */
+void        EMI_OnCDReady(u8 status, u8* result);
+/* func_80162C14 */
+void        EMI_LoaderCopySector(void);
+/* func_80162CD8 */
+void        EMI_LoaderEndStream(void);
+/* func_80162D18 */
+void        EMI_LoaderRunCD(void);
 /* func_80162D9C */
 void        EMI_LoaderIdle(void);
 /* func_80162DA4 */
@@ -248,6 +343,8 @@ void        EMI_LoaderStageSector(void);
 void        EMI_LoaderUploadSector(void);
 /* func_80163418 */
 void        EMI_LoaderTransferVabBody(void);
+/* func_801636A0 */
+void        SND_StartXAStream(s32 key, s32 unused);
 /* func_80163744 */
 void        SND_ResolveXAStream(s32 stream_id);
 /* func_80163858 */
@@ -274,6 +371,8 @@ void        SND_XaStatePauseResult(void);
 void        SND_XaStateWaitSync(void);
 /* func_80163E88 */
 bool        SND_HasXACDError(void);
+/* func_80163EA0 */
+s32         SND_IsXAIdle(void);
 /* func_80163EB0 */
 void        SND_SetCDVolume(u8 volume);
 /* func_80163F50 */
@@ -283,12 +382,32 @@ void        EMI_DecodeBegin(u8* dst);
 /* func_80164064 */
 s32         EMI_DecodeStep(void);
 /* Main-exe functions called by this overlay. */
+/* func_801644D8 */
+s32         func_801644D8(s32 arg0, s32 x, s32 y, s32 width, s32 height, s32 shade);
 /* func_801647C4 */
 void        Menu_DrawCursorSprite(u16 x, u16 y, s32 unused);
+/* func_80164A44 */
+void        Char_RebuildStats(Character* record);
+/* func_80164D2C */
+void        Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
 /* func_801651DC */
 s32         Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32 mode);
+/* func_80165280 */
+bool        Char_RestoreHP(s32 character_index, s32 amount, s32 use_battle_copy);
+/* func_8016534C */
+s32         Char_RestoreAP(s32 character_index, s32 amount, s32 use_battle_copy);
+/* func_8016546C */
+s32         Char_AddCappedStat(u16* value, s32 delta);
 /* func_801654B0 */
 s32         Char_AddWillpower(u8* value, u16 delta);
+/* func_80165570 */
+s16         Char_AddPoints(u16* value, u16 limit, s16 delta);
+/* func_80165694 */
+u32         Char_AddPercent(u8* value, u8 delta);
+/* func_801656EC */
+u32         Char_ClearStatus(u8 index, u16 mask, u8 mode);
+/* func_80165D48 */
+u8*         Item_GetRecord(s32 category, s32 item);
 /* func_80165E04 */
 s32         Item_GetKind(s32 category, s32 item_id);
 /* func_80165EC0 */
@@ -311,14 +430,22 @@ u8          Item_Remove(s32 category, u8 item, s32 amount, s32 unused);
 s32         Party_SpendZenny(u32 amount, s32 unused);
 /* func_8016666C */
 s32         Party_AddZenny(s32 amount, s32 skip_earned);
+/* func_801666C8 */
+s32         Item_GetDescription(s32 category, s32 item_id);
 /* func_80166AE4: kind table for (source slot, group, table kind) */
 u8*         Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
 u8*         Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
+/* func_80166C48 */
+void        GFX_StagePalette(u8* dst, s32 field);
 /* func_80166CB0 */
 s32         Area_GetCellCode(s32 x, s32 y);
 /* func_80166CEC */
 void        Party_ClearBattlerState(s32 character_index);
+/* func_80166E88 */
+void        EMI_LoaderStreamFamily(u8 member_a, u8 member_b, u8 member_c, u8 family);
+/* func_8016728C */
+void        EMI_StreamFamilyArchive(u8 index, u8 family);
 /* func_80167344 */
 void        Area_DispatchScene(void);
 /* func_801673AC */
@@ -332,19 +459,12 @@ s32         Char_LoseHP(s32 mode, s32 index);
 /* func_80168248 */
 s32         Char_SpendAP(s32 requested, s32 character_id);
 /* The libsnd internals have no header in this tree; s16 arguments as retail passes them. */
-/* func_80196CF0 */
-u8          GFX_StartPaletteAnimation(u8* owner, u8* source_table);
 /* PsyQ entry points the LIBCD, LIBGTE, LIBETC and LIBC callers use. */
 /* func_800C3254 (boss055), func_8014CE48 (slus), func_801F3DCC (area198) */
 extern s32  Area_RoundSpriteCoordinate(s32 pair, s32 step);
 /* func_80167800 (slus), func_801BC3B8 (game) */
 void        Area_StepSceneTimer(void);
-/* func_8016788C (slus), func_801BC400 (game) */
-void        Area_ResetScene(void);
 
 /* Main-exe polygon helper that fills the frame interior. */
-extern void func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);
-/* func_801AFE18 */
-void*       Area_SetCameraMatrix(void* out_matrix);
 
 #endif

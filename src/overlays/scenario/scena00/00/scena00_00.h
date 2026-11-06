@@ -297,12 +297,7 @@ extern u8             D_801FD5F4;
 extern u8             D_801FD5F8;
 extern u8             D_801FD5FC;
 
-s32  Area_StepCameraAngle(s32 degrees, s8 duration);
 void func_80164020(u32 arg0, u32 arg1);
-void Scene_RequestChapterAdvance(void);
-void Area_ProjectPoint(s32* pos, long* screen_xy);
-void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
-void Battle_StartScripted(u8 mode_byte);
 void func_801F6E04(void);
 void func_801F6E48(void);
 void func_801F7134(s32 chapter_id);

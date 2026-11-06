@@ -35,7 +35,6 @@ extern Callback D_801F5FAC[];
 extern u8       D_801F6510;
 extern u8       D_801F6514;
 
-void        Area_ProjectPoint(s32* pos, long* screen_xy);
 /* func_801F526C */
 extern void Area_ClaimSpawnSlot(void);
 /* func_801F5308 */

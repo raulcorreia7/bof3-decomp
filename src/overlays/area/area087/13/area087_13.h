@@ -28,7 +28,6 @@ extern ScreenPoint D_801F57EC[];
 extern u8          D_801F57FC[];
 extern u8          D_801F57FD[];
 
-u8   Game_FindAreaHandler(void);
 void func_801F34FC(void);
 /* func_801F35EC */
 void Area_Update(void);

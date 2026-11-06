@@ -48,39 +48,36 @@ extern u8          D_801F51D8[4];
 extern u8          D_801F51DC[4];
 extern u8          D_801F51E0[2];
 
-/* func_801559AC */
-POLY_FT4* Area_FindCellQuad(s32 column, s32 row);
-u8        Game_FindAreaHandler(void);
-void      func_801F30EC(void);
-void      func_801F3224(void);
-void      func_801F32A0(void);
+void func_801F30EC(void);
+void func_801F3224(void);
+void func_801F32A0(void);
 /* func_801F3460 */
-void      Actor_NextStep(void);
-void      func_801F34C8(void);
+void Actor_NextStep(void);
+void func_801F34C8(void);
 /* func_801F350C */
-void      Actor_SlideScreenLeft(void);
+void Actor_SlideScreenLeft(void);
 /* func_801F355C */
-void      Actor_SlideScreenX(void);
+void Actor_SlideScreenX(void);
 /* func_801F35B8 */
-void      Area_Update(void);
-void      func_801F3608(void);
-void      func_801F368C(void);
+void Area_Update(void);
+void func_801F3608(void);
+void func_801F368C(void);
 /* func_801F36D0 */
-void      Actor_SetScreenBottom(void);
-void      func_801F3828(void);
-void      func_801F3928(void);
+void Actor_SetScreenBottom(void);
+void func_801F3828(void);
+void func_801F3928(void);
 /* func_801F3B00 */
 /* func_801F39D8 */
-void      Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
-void      Area_DrawGradientDiamond(s16 x, s16 y);
-void      func_801F40C4(s16 x, s16 y);
+void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
+void Area_DrawGradientDiamond(s16 x, s16 y);
+void func_801F40C4(s16 x, s16 y);
 /* func_801F41BC */
-void      Actor_SpawnRandomGroup(void);
-void      func_801F42F8(void);
+void Actor_SpawnRandomGroup(void);
+void func_801F42F8(void);
 /* func_801F4528 */
-void      Actor_MoveByVelocity(void);
-void      func_801F4610(void);
-void      Area_StepStreamSetDrawMode(void);
+void Actor_MoveByVelocity(void);
+void func_801F4610(void);
+void Area_StepStreamSetDrawMode(void);
 
 /* The value of func 801f2eec table in the shared func_801F2EEC body. */
 #define FUNC_801F2EEC_TABLE D_801F5100

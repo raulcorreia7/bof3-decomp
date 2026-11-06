@@ -30,6 +30,4 @@ extern union {
 extern u16  g_GameAreaId;
 extern char D_801F6C04[];
 
-void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
-
 #endif

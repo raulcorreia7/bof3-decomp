@@ -9,7 +9,6 @@
 
 extern Callback D_801F34E8[];
 
-void GFX_FreePaletteFadeTarget(void* target);
 void func_801F2F78(s32 pos[3]);
 
 /* func_801F2DB4 */

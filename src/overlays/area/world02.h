@@ -15,6 +15,4 @@
 
 extern Callback D_801F5750[];
 
-/* func_8015B5F4 */
-void SYS_ToggleFlag(void* bits, u8 bit_index);
 #endif

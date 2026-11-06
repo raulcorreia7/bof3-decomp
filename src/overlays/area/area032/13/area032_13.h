@@ -13,11 +13,6 @@ extern s32      D_80145EC4;
 extern u8       D_801468E4[];
 extern Callback D_801F3F80[];
 
-/* func_8019651C */
-s32  GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
-/* func_80196718 */
-void GFX_FreePaletteFadeTarget(void* target);
-s32  func_801C29A0(s8 tuning_delta);
 void Actor_ProjectFocusAndStep(void);
 void func_801F2DAC(void);
 void func_801F2E64(void);

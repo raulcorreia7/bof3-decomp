@@ -31,7 +31,6 @@ extern u8          D_801F6268[];
 extern u8          D_801F6269[];
 extern Callback    D_801F6270[];
 
-u8   Game_FindAreaHandler(void);
 void func_801F402C(void);
 /* func_801F411C */
 void Area_Update(void);

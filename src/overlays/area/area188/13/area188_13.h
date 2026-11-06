@@ -40,7 +40,6 @@ extern u8       D_801F68A0;
 /* The game-overlay state bytes the cancel path resets. */
 
 void Area_SetCellCode(s16 column, s16 row, u8 code);
-void Area_ProjectPoint(s32* pos, long* screen_xy);
 
 /* func_801F3E7C */
 s32  Area_StepSpawnSlots(void);

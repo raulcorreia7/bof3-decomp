@@ -13,7 +13,6 @@ extern u8           g_BattlePartyCount;
 extern volatile u16 D_801463B0;
 extern char         D_80149118[];
 extern u8*          D_801EB4F4;
-extern void         UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 extern bool         Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 u8                  func_801DB524(u32 slot);
 u8                  func_801DD7AC(s32 selector);

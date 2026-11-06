@@ -40,7 +40,6 @@ extern void (*D_801F5034[])(void);
 /* func_801F3E00 */
 void Area_DrawGradientDiamond(s16 x, s16 y);
 
-u8   Game_FindAreaHandler(void);
 void func_801F33FC(void);
 /* func_801F34EC */
 void Area_Update(void);

@@ -31,7 +31,6 @@ extern s8 D_801F5360[];
 /* The per-count movement step table. */
 extern s8 D_801F5378[];
 
-void Area_ProjectPoint(s32* pos, long* screen_xy);
 /* Fairy_VillageInit in the commu overlay at the same address. */
 void func_801EECA4(void);
 

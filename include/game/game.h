@@ -296,81 +296,12 @@ extern s32       D_801CD954;
 
 /* Finds the first unused slot in the entry table at 0x80143FC8; the retail
  * callee reads no argument and zeroes $a0 before the scan. */
-/* func_8019601C */
-u8          Actor_FindFreeSlot();
-/* func_801960C0 */
-void        Actor_Free(u8 record_index);
-/* func_8019611C */
-void        Actor_ClearAll(void);
-/* func_8019615C */
-void        Actor_Create(u8* request);
-void        func_8019625C(void);
-/* func_80196670 */
-void        GFX_FreePaletteFade(u8 index);
-/* func_80196784 */
-u8          GFX_MarkPaletteCells(u8 mode, u8 value, u8 search);
-/* func_801968BC */
-u8          GFX_AllocPaletteCell(u8 mode);
-/* func_80196B20 */
-u8          GFX_FindPaletteCell(u8 value);
-/* func_80196B9C */
-extern void GFX_UploadPaletteRows(void);
-/* func_80196C8C */
-void        GFX_UpdatePaletteAnimations(void);
-/* func_80196D84 */
-void        GFX_StepPaletteAnimation(u8 palette_slot);
-/* func_80196FFC */
-void        Game_LoadCampMenu(void);
-/* func_80197068 */
-void        Game_RunMainLoop(void);
-/* func_801970EC */
-void        Game_ResetGameState(void);
-void        func_80199440(void);
-/* func_8019A0E4 */
-void        Actor_DispatchAll(void);
-void        func_801A0514(void);
-void        func_801A3A08(void);
 /* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`; `move a0,s4` in Actor_StepMovement) and the
  * callee never reads it; with (void) that instruction is dropped. */
-void        func_801A3D1C();
-void        func_801A4D54(u8* script);
-/* func_801A7704 */
-void        Scene_Start(u8 scenario_index);
-/* func_801A7804 */
-void        Scene_RequestOverlay(void);
-/* func_801A782C */
-void        Game_RunScenarioEntry(void);
-/* func_801A7878 */
-void        Game_DispatchScenarioRecord(void* object);
-/* func_801A7A34 */
-s8          Game_CallScenarioHandler(u16 handler_arg0, u16 handler_arg1);
-/* func_801A7BF0 */
-void        Game_RunSceneUpdate(void);
-/* func_801A7C2C */
-void        Scene_ResetEventState(void);
-/* func_801A7CAC */
-void        Scene_RunEventHandler(void);
-/* func_801A86D4 */
-void        Scene_DispatchObject(void* record);
 /* Selects a route direction away from the work record's current direction:
  * returns -1 when the current index lies in the selector's four-step span,
  * otherwise 1. */
-void        func_801ABBA8(void* sub, s32 route);
-void        func_801AC1DC(s32* out, u8 selector);
-void        func_801AFFD8(const void* world_position, void* screen_xy, void* projection);
-void        func_801B0DFC(void);
-s32         func_801B0E44(void);
-s32         Actor_GetTurnStep(s32 selector);
 /* Awards the proximity reward: sound cue, area request, owned money. */
-void        func_801B5E58(s32 cue_value);
 /* Returns a field record slot holding a body near (pos_x, pos_y), or -1. */
-s32         func_801B6610(s16 map_x, s16 map_y);
-void        func_801BDAB8(void);
-s8          func_801BDE14(s32 pos_x, s32 pos_y, s32 range_mode);
-s8          func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode);
-/* func_800B254C (battle), func_8019973C (game), func_801EA070 (start) */
-void        Menu_SlidePanelLeft(void);
-void        func_801C2438(void);
-void        func_801C4C48(void);
 
 #endif

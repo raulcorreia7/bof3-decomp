@@ -412,7 +412,5 @@ ASSERT_OFFSET(PartyMemberMessages, messages, 0x04);
 
 /* Finds the scene-table record for a wanted scene id and fills its palette and
  * tile fields (exe/slus_004_22@0x8014DD3C). */
-/* func_8014DD3C */
-extern bool Area_FindSceneRecord(s32 wanted_id);
 
 #endif

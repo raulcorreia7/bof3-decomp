@@ -32,7 +32,6 @@ extern Callback    D_801F54FC[];
 
 /* The work-mode steps the request wrapper runs. */
 
-u8   Game_FindAreaHandler(void);
 void func_801F3438(void);
 /* The origin pan step the handler enters. */
 /* func_801F3528 */

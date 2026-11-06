@@ -10,8 +10,6 @@
 extern void (*D_801F3304[])(void);
 
 /* The scratchpad work object's loader hook. */
-/* func_80196718 */
-void GFX_FreePaletteFadeTarget(void* target);
 /* Drains the copied position against the image's wall list. */
 void func_801F2DF0(s32* pos);
 

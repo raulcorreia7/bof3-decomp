@@ -29,8 +29,6 @@ extern ScreenPoint D_801F4E10[];
 extern u8          D_801F4E20[];
 extern u8          D_801F4E21[];
 
-extern u8 Game_FindAreaHandler(void);
-
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud
 

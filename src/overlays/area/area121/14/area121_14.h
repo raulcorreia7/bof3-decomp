@@ -43,7 +43,6 @@ extern Callback       D_801F6894[];
 extern Callback       D_801F689C[];
 
 void func_8015A944(void);
-u8   Game_FindAreaHandler(void);
 /* func_801F35D0 */
 void Area_Update(void);
 /* func_801F39F0 */
