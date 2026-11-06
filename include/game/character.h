@@ -164,6 +164,8 @@ typedef struct Equipment {
     u8 accessories[CHARACTER_ACCESSORY_COUNT];
 } Equipment;
 
+ASSERT_SIZE(Equipment, 0x06);
+
 /* The four learned-ability lists, in ability-type order. */
 typedef struct AbilitySet {
     u8 healing[CHARACTER_ABILITY_COUNT];
@@ -171,6 +173,8 @@ typedef struct AbilitySet {
     u8 attack[CHARACTER_ABILITY_COUNT];
     u8 skill[CHARACTER_ABILITY_COUNT];
 } AbilitySet;
+
+ASSERT_SIZE(AbilitySet, 0x28);
 
 typedef struct Character {
     u8         name[CHARACTER_NAME_LENGTH];

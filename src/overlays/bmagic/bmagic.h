@@ -166,6 +166,8 @@ typedef struct BmagicEffectWork {
     /* 0x22 */ u16        unk_22;
 } BmagicEffectWork;
 
+ASSERT_SIZE(BmagicEffectWork, 0x24);
+
 ASSERT_OFFSET(BmagicEffectWork, unk_03, 0x03);
 ASSERT_OFFSET(BmagicEffectWork, unk_04, 0x04);
 ASSERT_OFFSET(BmagicEffectWork, timer_05, 0x05);

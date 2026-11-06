@@ -52,6 +52,8 @@ typedef struct BattleCommandSlot {
     u16 id;
 } BattleCommandSlot;
 
+ASSERT_SIZE(BattleCommandSlot, 0x04);
+
 /* Battle stat modifiers, one signed byte per stat. */
 typedef struct StatMultipliers {
     s8 power;
@@ -59,6 +61,8 @@ typedef struct StatMultipliers {
     s8 agility;
     s8 intellect;
 } StatMultipliers;
+
+ASSERT_SIZE(StatMultipliers, 0x04);
 
 /* One drop of an enemy: the item id the battle spoils gain when the roll
  * passes, and the index into the 8-byte drop chance table at 0x801D0CB8. */
@@ -98,6 +102,8 @@ typedef struct BattleAction {
     u8  pad_04[4];
     u8  unk_08; /* +0x08 step byte: func_8009E248 sets 1, func_8009E500 sets 2 */
 } BattleAction;
+
+ASSERT_SIZE(BattleAction, 0x0A);
 
 ASSERT_OFFSET(BattleAction, unk_02, 0x02);
 ASSERT_OFFSET(BattleAction, unk_08, 0x08);
