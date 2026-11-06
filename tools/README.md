@@ -170,7 +170,6 @@ Meson, setup or another tool calls these. A contributor does not run them.
 | `cc.py`, `psxdecomp/dmpsx.py`                | The compiler wrapper and the DMPSX rewrite                              |
 | `objdiff_config.py`, `rzproject.py`          | Build the objdiff project and the Rizin projects                        |
 | `check_asm.sh`, `check_hand.sh`, `check_headers.sh`, `check_tree.sh` | The bodies of the `include-asm`, `check-headers` and `check-tree` gates |
-| `check_sorted.py` | Fails on an enum or a `#define` run that is not ascending by value; the `sorted` step of `pre-push` |
 | `format.sh`                                  | The body of `format` and `format-check`                                 |
 
 `bin/coddog` finds twins and `bin/rz` reads retail bytes; no other tool does either. `bin/internal/` holds `find-tool` and the binutils wrappers (`as`, `ld`, `nm`, `objcopy`, `objdump`) that the build uses.

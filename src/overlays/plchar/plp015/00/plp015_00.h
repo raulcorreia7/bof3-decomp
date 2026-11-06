@@ -5,8 +5,8 @@
  * includes the file. */
 
 /* The two route directions this character program turns between. */
-#define CHARACTER_FACING_BACK 1
 #define CHARACTER_FACING_AWAY 7
+#define CHARACTER_FACING_BACK 1
 
 #include "overlays/plchar/plchar.h"
 #include "work/area_spad.h"

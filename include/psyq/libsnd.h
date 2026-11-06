@@ -21,24 +21,24 @@
  * Macro 
  */
 #define SSPLAY_INFINITY  0 
+#define SS_NOTICK	 0x1000
 #define SS_NOTICK0	 0
-#define SSPLAY_PAUSE     0
-#define SS_SOFF          0      
-#define SS_MIX           0    
-#define SS_SERIAL_A      0 
-#define SS_MUTE_OFF      0     
 #define SS_TICK60	 1
-#define SSPLAY_PLAY      1
-#define SS_SON           1     
-#define SS_REV           1   
-#define SS_SERIAL_B      1     
-#define SS_MUTE_ON       1     
 #define SS_TICK240	 2
 #define SS_TICK120	 3
 #define SS_TICK50	 4
 #define SS_TICKVSYNC	 5
 #define SS_TICKMODE_MAX  6
-#define SS_NOTICK	 0x1000
+#define SSPLAY_PAUSE     0
+#define SSPLAY_PLAY      1
+#define SS_SOFF          0      
+#define SS_SON           1     
+#define SS_MIX           0    
+#define SS_REV           1   
+#define SS_SERIAL_A      0 
+#define SS_SERIAL_B      1     
+#define SS_MUTE_OFF      0     
+#define SS_MUTE_ON       1     
 
 #define SS_IMEDIATE 	    0
 #define SS_IMMEDIATE        0

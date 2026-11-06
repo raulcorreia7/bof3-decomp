@@ -8,10 +8,10 @@
 
 /* func_801F85A8 triangle: the third vertex is `size` rotated by this angle
  * (4096 per turn); the vertices are grey (r = g = b) at these levels. */
-#define SCN_TRI_SHADE_V0         0x28
 #define SCN_TRI_APEX_ANGLE       0x4F
-#define SCN_TRI_SHADE_V2         0x64
+#define SCN_TRI_SHADE_V0         0x28
 #define SCN_TRI_SHADE_V1         0x6E
+#define SCN_TRI_SHADE_V2         0x64
 #define SCN_EFFECT               ((SceneEffect*)g_Task)
 #define SPAD_ROW                 ((Actor*)g_Task)
 

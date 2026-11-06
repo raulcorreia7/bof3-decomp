@@ -8,8 +8,8 @@
 #include "work/area_spad.h"
 
 /* The work origin offset, step and threshold this overlay advances. */
-#define ACTOR_SCREEN_X_STEP      0x10
 #define AREA_ORIGIN_OFFSET       0x30
+#define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0xC0
 
 /* The scratchpad cell holding this mode's work pointer. */

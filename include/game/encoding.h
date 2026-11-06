@@ -3,11 +3,11 @@
 
 #include "types.h"
 
-#define PTR_SLOT_EMPTY_LOW   0x00000
-#define ENEMY_COND_UNUSED    0x63
 #define FORMATION_SLOT_EMPTY 0xFF
-#define MASTER_ID_NONE       0xFF
 #define MASTER_SKILL_EMPTY   0xFF63
+#define MASTER_ID_NONE       0xFF
+#define ENEMY_COND_UNUSED    0x63
+#define PTR_SLOT_EMPTY_LOW   0x00000
 #define PTR_SLOT_EMPTY_HIGH  0xFFFFF
 
 /* Element bits as the battle code tests them against the resistance bytes, and

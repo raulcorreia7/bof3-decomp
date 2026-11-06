@@ -31,6 +31,10 @@ typedef enum EmiSlotId {
     EMI_SLOT_BOSS         = 0x1B3,
     EMI_SLOT_BPLD         = 0x1DB,
     EMI_SLOT_BPLU         = 0x1EE,
+    EMI_SLOT_PL           = 0x26A,
+    EMI_SLOT_PLP          = 0x27D,
+    EMI_SLOT_SCENA        = 0x295,
+    EMI_SLOT_AREA         = 0x2AB,
     /* ETC */
     EMI_SLOT_A085SE2      = 0x254,
     EMI_SLOT_A108SE2      = 0x255,
@@ -54,10 +58,6 @@ typedef enum EmiSlotId {
     EMI_SLOT_SISYOU       = 0x267,
     EMI_SLOT_START        = 0x268,
     EMI_SLOT_STATUS       = 0x269,
-    EMI_SLOT_PL           = 0x26A,
-    EMI_SLOT_PLP          = 0x27D,
-    EMI_SLOT_SCENA        = 0x295,
-    EMI_SLOT_AREA         = 0x2AB,
 } EmiSlotId;
 
 /* The family argument of EMI_StreamFamilyArchive selects the numbered series that the

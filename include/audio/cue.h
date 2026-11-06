@@ -23,14 +23,14 @@
 
 /* The field masks the seven bank readers apply to a cue record. */
 #define EMI_CUE_ALIAS_MASK      0x07
+#define EMI_CUE_PROGRAM_MASK    0x7F
 #define EMI_CUE_COMPARE_MASK    0x0F
 #define EMI_CUE_VOICE_MASK      0x1F
 #define EMI_CUE_LAYER_MASK      0x60
-#define EMI_CUE_PROGRAM_MASK    0x7F
 
 /* The cue id: bank in bits 8-11, record index in bits 0-7. */
-#define EMI_CUE_ID_INDEX_MASK   0x00FF
 #define EMI_CUE_ID_BANK_MASK    0x0F00
+#define EMI_CUE_ID_INDEX_MASK   0x00FF
 
 /* Cue id: `(bank << 8) | record_index`. The images call the dispatcher with
  * the constructed id, e.g. `emi/etc/game/00@0x8019B024` passes bank 1,

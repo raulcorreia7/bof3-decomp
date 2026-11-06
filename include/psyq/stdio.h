@@ -8,8 +8,8 @@
 #ifndef _STDIO_H
 #define _STDIO_H
 
-#define EOF (-1)
 #define	BUFSIZ 1024
+#define EOF (-1)
 
 #ifndef SEEK_SET
 #define SEEK_SET 0

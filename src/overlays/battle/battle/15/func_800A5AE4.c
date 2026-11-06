@@ -9,8 +9,8 @@ typedef struct BattleMenuCursor {
 /* Battle menu cursor bounds: the index runs over the three rows of a page and the page over ten pages of three rows;
  * the target's own header declares none of them under these names. */
 #define CURSOR_INDEX_MAX 2
-#define CURSOR_PAGE_STEP 3
 #define CURSOR_PAGE_MAX  9
+#define CURSOR_PAGE_STEP 3
 #define CURSOR_TOTAL_MAX 10
 
 MATCH void func_800A5AE4(void) {

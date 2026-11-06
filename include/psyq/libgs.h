@@ -269,8 +269,8 @@ typedef struct {
 
 
 #define GsDivMODE_NDIV 0
-#define GsLMODE_NORMAL 0
 #define GsDivMODE_DIV  1
+#define GsLMODE_NORMAL 0
 #define GsLMODE_FOG    1
 #define GsLMODE_LOFF   2
 
@@ -278,17 +278,16 @@ typedef struct {
  * libgs macro 
  */
 #define GsOFSGTE 0
+#define GsOFSGPU 4
+#define GsINTER  1
 #define GsNONINTER 0
 #define GsRESET0 0
-#define GsINTER  1
-#define GsOFSGPU 4
 #define GsRESET3 (3<<4)
 
 /*
  * object attribute set macro 
  */
 #define GsLDIM0 0
-#define GsAZERO  (0<<28)
 #define GsLDIM1 1
 #define GsLDIM2 2
 #define GsLDIM3 3
@@ -307,6 +306,7 @@ typedef struct {
 #define GsDIV3   (3<<9)
 #define GsDIV4	 (4<<9)
 #define GsDIV5	 (5<<9)
+#define GsAZERO  (0<<28)
 #define GsAONE   (1<<28)
 #define GsATWO   (2<<28)
 #define GsATHREE (3<<28)

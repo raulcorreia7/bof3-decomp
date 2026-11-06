@@ -32,7 +32,6 @@ struct device_table {
 #define DTTYPE_RAW	0x8	/* raw device that uses fs switch */
 
 /* File structure types */
-#define	DTFS_AUTO	-1	/* determined from partition table */
 #define	DTFS_NONE	0	/* no file structure on device */
 #define	DTFS_BFS	1	/* bfs protocol */
 #define	DTFS_DVH	2	/* disk volume header */
@@ -42,6 +41,7 @@ struct device_table {
 #define	DTFS_SYSV	6	/* System V file system */
 #define	DTFS_BOOTP	7	/* bootp protocol */
 #define	DTFS_EFS	8	/* sgi extent file system */
+#define	DTFS_AUTO	-1	/* determined from partition table */
 
 #if defined(LANGUAGE_C)||defined(_LANGUAGE_C_PLUS_PLUS)||defined(__cplusplus)||defined(c_plusplus)
 struct fs_table {

@@ -13,8 +13,8 @@
 
 /* The work-window byte offset, row stride and row count this overlay clears. */
 #define SCRATCH_COLUMN_OFFSET 0
-#define SCRATCH_COLUMN_COUNT  8
 #define SCRATCH_COLUMN_STRIDE 0x18
+#define SCRATCH_COLUMN_COUNT  8
 
 #include "shared/WorldSpin.h"
 
@@ -47,9 +47,9 @@ extern void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
 #define AREA_SPAWN_TICK             func_801F5940
 
 #define AREA_SPAWN_SLOT_LIFE        0x10
-#define AREA_SPAWN_SLOT_RADIUS_STEP 0x10
-#define AREA_SPAWN_SLOT_CORE_SHADE  0x40
 #define AREA_SPAWN_SLOT_RADIUS      0x100
+#define AREA_SPAWN_SLOT_CORE_SHADE  0x40
+#define AREA_SPAWN_SLOT_RADIUS_STEP 0x10
 extern void func_801F5940(void);
 void        func_801F4D44(void);
 void        func_801F5050(u8 level);

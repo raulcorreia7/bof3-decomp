@@ -14,10 +14,10 @@
 #include "scenario/runtime.h"
 #include "sys/cd.h"
 
-#define SCRATCH_COLUMN_OFFSET 0
-#define SCAN_BAR_COUNT        16
-#define SCRATCH_COLUMN_STRIDE 0x14
 #define SCRATCH_COLUMN_COUNT  0x80
+#define SCRATCH_COLUMN_OFFSET 0
+#define SCRATCH_COLUMN_STRIDE 0x14
+#define SCAN_BAR_COUNT        16
 
 typedef struct ScanBar {
     /* 0x00 */ u8  in_use;

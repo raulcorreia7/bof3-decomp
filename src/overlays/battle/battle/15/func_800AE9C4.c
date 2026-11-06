@@ -27,13 +27,13 @@ ASSERT_SIZE(BattlePanelTexture, BATTLE_PANEL_TEX_SIZE);
 /* The panel quad is 0x30 pixels wide. */
 #define BATTLE_PANEL_WIDTH    0x30
 /* The texture page and the clut the panel quads share. */
-#define BATTLE_PANEL_CLUT_X   0x10
-#define BATTLE_PANEL_TPAGE_Y  0x100
-#define BATTLE_PANEL_CLUT_Y   0x1FA
 #define BATTLE_PANEL_TPAGE_X  0x380
+#define BATTLE_PANEL_TPAGE_Y  0x100
+#define BATTLE_PANEL_CLUT_X   0x10
+#define BATTLE_PANEL_CLUT_Y   0x1FA
 /* The draw mode's texture window: the lit and the dim panel palette. */
-#define BATTLE_PANEL_MODE_DIM 0x15
 #define BATTLE_PANEL_MODE_LIT 0x25
+#define BATTLE_PANEL_MODE_DIM 0x15
 
 /* Draws the two panel quads at the active battle-work origin, one normal and one dark. */
 MATCH void func_800AE9C4(u8 arg0) {

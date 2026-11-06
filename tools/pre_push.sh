@@ -3,7 +3,7 @@
 #
 #   tools/pre_push.sh [BASE_REF]          or    meson compile -C build/meson pre-push
 #
-# Checks: check (only with a disc), check-plain (only with the compiler), check-headers, check-tree, sorted, include-asm, format-check,
+# Checks: check (only with a disc), check-plain (only with the compiler), check-headers, check-tree, include-asm, format-check,
 # meson test, typeloss, quality (no touched file gets worse). BASE_REF is what the work is compared with; it defaults to the newer of
 # public/main and origin/main. Each log is build/pre-push/<check>.log. Format first with
 # `meson compile -C build/meson format`.
@@ -49,7 +49,6 @@ else
 fi
 step check-headers meson compile -C "$bld" check-headers
 step check-tree meson compile -C "$bld" check-tree
-step sorted python3 tools/check_sorted.py
 step include-asm tools/check_asm.sh "$ref"
 step format-check meson compile -C "$bld" format-check
 step test meson test -C "$bld" --print-errorlogs

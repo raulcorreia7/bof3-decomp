@@ -88,10 +88,10 @@
 #define AREA_PALETTE_WORK          0x80037800u
 /* The two script banks g_ScriptBank alternates between: the area bank the field
  * uses and the battle bank the battle handler swaps in. */
-#define AREA_PALETTE_UNIT          0x40u  /* one CLUT entry */
-#define AREA_PALETTE_ROW           0x200u /* one upload row (32 rows) */
 #define AREA_SCRIPT_BANK           0x800D3800u
 #define BATTLE_SCRIPT_BANK         0x800F0800u
+#define AREA_PALETTE_UNIT          0x40u  /* one CLUT entry */
+#define AREA_PALETTE_ROW           0x200u /* one upload row (32 rows) */
 
 #define MAP_BUNDLE_BASE            0x80104000u /* the map bundle */
 
@@ -115,13 +115,13 @@
 /* The trail row: 0x98 bytes. The AREA027 program keeps three of them at
  * `0x800E4800` (`@0x801F2D5C` walks them with that stride) and stages each
  * one through `@0x801F2E3C` and `@0x801F304C`. */
-#define WORLD_TRAIL_COUNT          3
-#define WORLD_TRAIL_MAX            32
 #define WORLD_TRAIL_SIZE           0x98
+#define WORLD_TRAIL_MAX            32
+#define WORLD_TRAIL_COUNT          3
 
 #define WORLD_SLOT_WORK_SIZE       0x10
-#define WORLD_WORK_SLOT_STRIDE     0x10u
 #define WORLD_WORK_SLOT_COUNT      32u
+#define WORLD_WORK_SLOT_STRIDE     0x10u
 
 #define WORLD_RING_ENTRY_SIZE      0x04
 #define WORLD_RING_ENTRY_COUNT     32

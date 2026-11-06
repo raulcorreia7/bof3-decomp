@@ -19,9 +19,9 @@
 /*
  * Geometry Structures:
  */
-#define OUTVTXNUM	10
-#define TMPVTXNUM	16	/* Clip Function Header */
 #define	ONE		4096	/* GTE regards 4096 as 1.0 */
+#define TMPVTXNUM	16	/* Clip Function Header */
+#define OUTVTXNUM	10
 
 #ifdef ASSEMBLER
 /*
@@ -170,44 +170,44 @@ typedef struct {
 
 typedef struct {
 	SVECTOR v;
-	u_char uv[2]; u_short pad;	/*ï¿½@ï¿½@*/  
+	u_char uv[2]; u_short pad;	/*@@*/  
 	CVECTOR c;
 	DVECTOR sxy;		
-	u_long  sz;		/*ï¿½@clip z-dataï¿½@*/		
-} RVECTOR;			/*ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½xï¿½Nï¿½^ï¿½@*/
+	u_long  sz;		/*@clip z-data@*/		
+} RVECTOR;			/*@•ªŠ„’¸“_î•ñƒxƒNƒ^@*/
 
 
 typedef struct {
 	RVECTOR r01,r12,r20;
 	RVECTOR	*r0,*r1,*r2;
 	u_long *rtn;
-} CRVECTOR3;			/*ï¿½@ï¿½Rï¿½pï¿½`ï¿½pï¿½Ä‹Aï¿½xï¿½Nï¿½^ï¿½@*/
+} CRVECTOR3;			/*@‚RŠpŒ`—pÄ‹AƒxƒNƒ^@*/
 
 typedef struct {
-	u_long 	ndiv;		/*ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½@*/
-	u_long 	pih,piv;	/*ï¿½@ï¿½Nï¿½ï¿½ï¿½bï¿½vï¿½Gï¿½ï¿½ï¿½Aï¿½@*/
+	u_long 	ndiv;		/*@•ªŠ„”@*/
+	u_long 	pih,piv;	/*@ƒNƒŠƒbƒvƒGƒŠƒA@*/
 	u_short clut,tpage;
 	CVECTOR	rgbc;
 	u_long	*ot;
 	RVECTOR r0,r1,r2;
 	CRVECTOR3 cr[5];	
-} DIVPOLYGON3;			/*ï¿½@ï¿½Rï¿½pï¿½`ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½oï¿½bï¿½tï¿½@ï¿½@*/
+} DIVPOLYGON3;			/*@‚RŠpŒ`—p•ªŠ„ƒoƒbƒtƒ@@*/
 
 typedef struct {
 	RVECTOR r01,r02,r31,r32,rc;
 	RVECTOR	*r0,*r1,*r2,*r3;
 	u_long *rtn;
-} CRVECTOR4;			/*ï¿½@ï¿½Sï¿½pï¿½`ï¿½pï¿½Ä‹Aï¿½xï¿½Nï¿½^ï¿½@*/
+} CRVECTOR4;			/*@‚SŠpŒ`—pÄ‹AƒxƒNƒ^@*/
 
 typedef struct {
-	u_long 	ndiv;		/*ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½@*/
-	u_long 	pih,piv;	/*ï¿½@ï¿½Nï¿½ï¿½ï¿½bï¿½vï¿½Gï¿½ï¿½ï¿½Aï¿½@*/
+	u_long 	ndiv;		/*@•ªŠ„”@*/
+	u_long 	pih,piv;	/*@ƒNƒŠƒbƒvƒGƒŠƒA@*/
 	u_short clut,tpage;
 	CVECTOR	rgbc;
 	u_long	*ot;
 	RVECTOR r0,r1,r2,r3;
 	CRVECTOR4 cr[5];	
-} DIVPOLYGON4;			/*ï¿½@ï¿½Sï¿½pï¿½`ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½oï¿½bï¿½tï¿½@ï¿½@*/
+} DIVPOLYGON4;			/*@‚SŠpŒ`—p•ªŠ„ƒoƒbƒtƒ@@*/
 
 typedef struct {
         short   xy[3];

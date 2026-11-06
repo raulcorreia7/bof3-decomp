@@ -13,8 +13,8 @@
 #define AREA_RESET_VARIANT    0xFF
 
 /* The work-window byte offset, row stride and row count this overlay clears. */
-#define SCRATCH_COLUMN_OFFSET 0
 #define SCRATCH_COLUMN_COUNT  8
+#define SCRATCH_COLUMN_OFFSET 0
 #define SCRATCH_COLUMN_STRIDE 0x18
 
 extern u16 D_80144F54;

@@ -29,8 +29,8 @@
 #define FISHING_LURE_QTY                   0x80145027u /* lures held; func_8016628C adds it to the lure's item count */
 #define FISHING_ROD                        0x80145028u
 
-#define FISHING_LURE_TABLE                 0x801E2720u
 #define FISHING_ROD_TABLE                  0x801E2748u
+#define FISHING_LURE_TABLE                 0x801E2720u
 
 /* One byte per fish, index order shared with the count table. */
 #define FISHING_CATCH_SAVE_OFFSET          0x90Cu
@@ -40,8 +40,8 @@
 #define FISHING_ROD_COUNT                  6
 #define FISHING_ROD_STRIDE                 0x0a
 #define FISHING_LURE_STRIDE                0x14
-#define FISHING_POND_ROWS                  30   /* the field work table's row count */
 #define FISHING_POND_STRIDE                0x98 /* the field work row size */
+#define FISHING_POND_ROWS                  30   /* the field work table's row count */
 
 /* Lure rows are 20 bytes. The notes span the three float-rate groups as
  * `+1..3`, `+4..7`, and `+8..11` while calling each a 16-bit value, so the

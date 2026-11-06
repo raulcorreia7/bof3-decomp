@@ -4,8 +4,8 @@
 #include "types.h"
 #include "game/records.h"
 
-#define FAIRY_JOB_STRIDE 0x8
 #define FAIRY_JOB_COUNT  60
+#define FAIRY_JOB_STRIDE 0x8
 
 /* The fairy village's data tables: the 720-fairy roster and the reward tables
  * that the communication minigame reads. `FAIRY_*` in game/records.h holds the

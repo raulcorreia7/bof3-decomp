@@ -8,14 +8,14 @@
  */
 
 /* status bits */
-#define SIO_TXRDY	0x1
-#define SIO_RXRDY	0x2
-#define SIO_TXU		0x4
-#define SIO_PERROR	0x8
-#define SIO_OE		0x10
-#define SIO_FE		0x20
-#define SIO_DSR		0x80
 #define SIO_CTS		0x100
+#define SIO_DSR		0x80
+#define SIO_FE		0x20
+#define SIO_OE		0x10
+#define SIO_PERROR	0x8
+#define SIO_TXU		0x4
+#define SIO_RXRDY	0x2
+#define SIO_TXRDY	0x1
 
 
 /* control bits */

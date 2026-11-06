@@ -18,9 +18,9 @@
  * Category codes match ITEM_CAT_* in game/item.h.
  */
 
-#define INV_QTY_PTR_TABLE_COUNT 4
-#define INV_ID_PTR_TABLE_COUNT  5
 #define INV_SLOTS_PER_CATEGORY  128
+#define INV_ID_PTR_TABLE_COUNT  5
+#define INV_QTY_PTR_TABLE_COUNT 4
 
 #define INV_VITAL_ITEM_SLOTS    32
 

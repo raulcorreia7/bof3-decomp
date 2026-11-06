@@ -19,74 +19,74 @@
  * "Slot" is the name most claimers give the allocator's result (`slot` 13 times,
  * `slot_index` 7; `index` 17, `id` 6, `object_index` 5). They test it against
  * 0xFF for none. No retail string names the table. */
-#define ACTOR_SLOT_COUNT               20
 #define ACTOR_SLOT_SIZE                0x74
+#define ACTOR_SLOT_COUNT               20
 
 /* Lengths of the arrays inside the records. */
-#define CHARACTER_ACCESSORY_COUNT      2
-#define MANILLO_FISH_COUNT             3
-#define ENEMY_AI_COUNT                 4
 #define CHARACTER_NAME_LENGTH          5
-#define CHARACTER_LEVEL_MODIFIER_COUNT 6
-#define MASTER_SKILL_COUNT             6
-#define ENEMY_AI_PARAMETER_COUNT       7
-#define ENEMY_NAME_LENGTH              8
-#define ENEMY_SKILL_COUNT              8
-#define ENCOUNTER_ENEMY_COUNT          8
-#define MANILLO_TRADE_COUNT            10
-#define CHARACTER_ABILITY_COUNT        10 /* per ability class: healing, assist, attack, skill */
-#define SHOP_STOCK_MAX                 11
 #define ITEM_NAME_LENGTH               12
 #define ABILITY_NAME_LENGTH            12
+#define SHOP_STOCK_MAX                 11
+#define MANILLO_FISH_COUNT             3
+#define MANILLO_TRADE_COUNT            10
+#define CHARACTER_ACCESSORY_COUNT      2
+#define CHARACTER_ABILITY_COUNT        10 /* per ability class: healing, assist, attack, skill */
+#define CHARACTER_LEVEL_MODIFIER_COUNT 6
+#define MASTER_SKILL_COUNT             6
+#define ENEMY_NAME_LENGTH              8
+#define ENEMY_AI_PARAMETER_COUNT       7
+#define ENEMY_SKILL_COUNT              8
+#define ENEMY_AI_COUNT                 4
+#define ENCOUNTER_ENEMY_COUNT          8
 
 #define PARTY_RECORD_COUNT             8
-#define DRAGON_POINTER_COUNT           10
 #define MASTER_COUNT                   17
+#define DRAGON_POINTER_COUNT           10
 
-#define CHRYSM_COUNT                   13
-#define MANILLO_STOCK_COUNT            16
-#define GENE_COUNT                     17
-#define MANILLO_ITEM_COUNT             165
-#define CHEST_COUNT                    224
-#define FAIRY_COUNT                    720
 #define ENEMY_COUNT                    1400
 #define ENCOUNTER_COUNT                1600
+#define CHEST_COUNT                    224
+#define GENE_COUNT                     17
+#define CHRYSM_COUNT                   13
+#define FAIRY_COUNT                    720
+#define MANILLO_ITEM_COUNT             165
+#define MANILLO_STOCK_COUNT            16
 
 #define FAIRY_GIFT_COUNT               20
 #define FAIRY_EXPLORE_COUNT            48
 #define FAIRY_PRIZE_COUNT              48
 
-#define LEVEL_GROWTH_CHARACTER_COUNT   7
+#define ITEM_COUNT                     92
+#define WEAPON_COUNT                   83
+#define ARMOR_COUNT                    68
+#define ACCESSORY_COUNT                52
 #define VITAL_ITEM_COUNT               16
 #define SHOP_COUNT                     40
-#define ACCESSORY_COUNT                52
-#define ARMOR_COUNT                    68
-#define WEAPON_COUNT                   83
-#define ITEM_COUNT                     92
-#define LEVEL_GROWTH_LEVEL_COUNT       99
 #define ABILITY_COUNT                  228
 #define LEVEL_COUNT                    693
+#define LEVEL_GROWTH_CHARACTER_COUNT   7
+#define LEVEL_GROWTH_LEVEL_COUNT       99
 
+#define PARTY_RECORD_STRIDE            0xa4
+#define MASTER_SKILLS_STRIDE           0x0c
+#define MASTER_STATS_STRIDE            0x06
+#define ENEMY_STRIDE                   0x88
+#define ENCOUNTER_STRIDE               0x09
+#define CHEST_STRIDE                   0x03
+#define FAIRY_STRIDE                   0x09
+#define MANILLO_ITEM_STRIDE            0x08
+#define MANILLO_STOCK_STRIDE           0x0a
+#define FAIRY_GIFT_STRIDE              0x04
 #define FAIRY_EXPLORE_STRIDE           0x02
 #define FAIRY_PRIZE_STRIDE             0x02
-#define CHEST_STRIDE                   0x03
-#define FAIRY_GIFT_STRIDE              0x04
-#define MASTER_STATS_STRIDE            0x06
-#define MANILLO_ITEM_STRIDE            0x08
-#define LEVEL_STRIDE                   0x08
-#define ENCOUNTER_STRIDE               0x09
-#define FAIRY_STRIDE                   0x09
-#define MANILLO_STOCK_STRIDE           0x0a
-#define MASTER_SKILLS_STRIDE           0x0c
-#define VITAL_ITEM_STRIDE              0x10
 #define ITEM_STRIDE                    0x12
-#define ACCESSORY_STRIDE               0x14
-#define ABILITY_STRIDE                 0x14
-#define ARMOR_STRIDE                   0x16
-#define SHOP_STRIDE                    0x17
+#define VITAL_ITEM_STRIDE              0x10
 #define WEAPON_STRIDE                  0x18
-#define ENEMY_STRIDE                   0x88
-#define PARTY_RECORD_STRIDE            0xa4
+#define ARMOR_STRIDE                   0x16
+#define ACCESSORY_STRIDE               0x14
+#define SHOP_STRIDE                    0x17
+#define ABILITY_STRIDE                 0x14
+#define LEVEL_STRIDE                   0x08
 #define LEVEL_GROWTH_CHARACTER_STRIDE  (LEVEL_GROWTH_LEVEL_COUNT * LEVEL_STRIDE)
 
 /* The ActorSlot.type values that have a named handler in g_ActorHandlers. */

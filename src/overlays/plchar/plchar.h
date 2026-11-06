@@ -12,8 +12,8 @@
 /* The two route directions a character program turns between; an image that turns between
  * other directions defines both before including this file. */
 #ifndef CHARACTER_FACING_AWAY
-#define CHARACTER_FACING_BACK 3
 #define CHARACTER_FACING_AWAY 5
+#define CHARACTER_FACING_BACK 3
 #endif
 
 /* The type-0 loader copies the character program to 0x801CE400 and compares

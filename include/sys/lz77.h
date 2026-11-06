@@ -12,9 +12,9 @@
 #define LZ77_HEADER_SIZE                 0x06
 #define LZ77_MARKER                      0xFFFF
 
-#define LZ77_CONTROL_MATCH_LENGTH_MASK   0x0F
 #define LZ77_CONTROL_LITERAL_LENGTH_MASK 0x1F
 #define LZ77_CONTROL_MATCH_DISTANCE_MASK 0xE0
+#define LZ77_CONTROL_MATCH_LENGTH_MASK   0x0F
 #define LZ77_CONTROL_END                 0xFF
 
 /* Decoder control stream (`exe/slus_004_22@0x801640E4`): bit 4 marks a literal
