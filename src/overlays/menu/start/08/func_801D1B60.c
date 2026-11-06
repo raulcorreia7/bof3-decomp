@@ -12,16 +12,16 @@ MATCH void func_801D1B60(void) {
     u8   value;
 
     Menu_DrawClutStrip(D_80144953);
-    saved_work = TASK_BYTES;
-    D_8014847E = (s8)D_80148655;
-    kind       = D_801EC38C[(s8)D_80148655];
+    saved_work                 = TASK_BYTES;
+    g_MenuPanelTasks[9].unk_0A = (s8)D_80148655;
+    kind                       = D_801EC38C[(s8)D_80148655];
     TASK_SET(g_BattlePartyBattlers);
-    D_801484A8 = (s16)kind;
+    g_MenuPanelTasks[10].unk_10 = (s16)kind;
     if ((D_8014504A == 0 && ((g_GameRequestFlags & 1) || g_GameAreaId == 189) && (func_801B6470(kind) & BYTE_MASK)) ||
         (D_8014504A != 0 && (func_801D2190() & BYTE_MASK))) {
-        D_80148480 = 0;
+        g_MenuPanelTasks[9].unk_0C = 0;
     } else {
-        D_80148480 = 1;
+        g_MenuPanelTasks[9].unk_0C = 1;
     }
     TASK_SET(saved_work);
     input = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
@@ -54,7 +54,7 @@ MATCH void func_801D1B60(void) {
     if (g_InputPressed & D_80145AC2) {
         selection = (s8*)&D_80148655;
         if (*selection == 6) {
-            if (D_80148480 == 0) {
+            if (g_MenuPanelTasks[9].unk_0C == 0) {
                 func_801D21F4();
                 D_8014869C = 1;
                 /* FAKE: retail takes the step counter's address before the increment. */
@@ -66,11 +66,11 @@ MATCH void func_801D1B60(void) {
             return;
         }
         SND_PlayCue(EMI_CUE_ID(1, 4));
-        D_80148654 = 5;
-        D_8014842F = 1;
-        D_80148453 = 1;
-        D_80148477 = 1;
-        D_8014849B = 1;
+        D_80148654                 = 5;
+        g_MenuPanelTasks[7].state  = 1;
+        g_MenuPanelTasks[8].state  = 1;
+        g_MenuPanelTasks[9].state  = 1;
+        g_MenuPanelTasks[10].state = 1;
         if (*selection == 0) {
             for (i = 0; i < (Party_CountOrder(0) & BYTE_MASK); i++) {
                 D_80148333[((i + 4) * 9) << 2] = 1;

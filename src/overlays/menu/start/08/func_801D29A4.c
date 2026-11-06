@@ -27,18 +27,18 @@ MATCH void func_801D29A4(void) {
         panel->unk_0A = i;
         i += 1;
     }
-    panel         = &g_MenuPanelTasks[11];
-    D_801484BD    = 6;
-    D_801484BE    = 9;
-    D_801484BF    = 2;
-    panel->active = 1;
-    D_801484C0    = 0x14;
-    D_801484C2    = -0x14;
-    D_801484CC    = 0;
-    D_801485DD    = 6;
-    D_801485DE    = 0xA;
+    panel                       = &g_MenuPanelTasks[11];
+    panel->unk_01               = 6;
+    panel->unk_02               = 9;
+    panel->state                = 2;
+    panel->active               = 1;
+    panel->x                    = 0x14;
+    D_801484C2                  = -0x14;
+    panel->unk_10               = 0;
+    g_MenuPanelTasks[19].unk_01 = 6;
+    g_MenuPanelTasks[19].unk_02 = 0xA;
     panel += 8;
     panel->active = 0;
-    D_801485E6    = 0;
-    D_801485E7    = 1;
+    panel->unk_0A = 0;
+    panel->unk_0B = 1;
 }

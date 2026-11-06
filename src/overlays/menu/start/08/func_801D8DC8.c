@@ -10,15 +10,15 @@ MATCH void func_801D8DC8(void) {
     Menu_DrawClutStrip(D_80144953);
     panel = &g_MenuPanelTasks[17];
     if (D_801485A0 != 0) {
-        D_801484CC = D_801485A0 + 0x4183;
+        g_MenuPanelTasks[11].unk_10 = D_801485A0 + 0x4183;
     } else {
-        D_801484CC = 0;
+        g_MenuPanelTasks[11].unk_10 = 0;
     }
-    D_80148624 = 1;
-    D_80148628 = panel->x + 7;
-    D_8014862A = panel->y + ((panel->unk_0B - panel->unk_0A) * 0xD + 0x1A);
-    buttons    = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
-    old        = panel->unk_0B;
+    g_MenuPanelTasks[21].active = 1;
+    g_MenuPanelTasks[21].x      = panel->x + 7;
+    g_MenuPanelTasks[21].y      = panel->y + ((panel->unk_0B - panel->unk_0A) * 0xD + 0x1A);
+    buttons                     = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
+    old                         = panel->unk_0B;
     if (buttons & PADLup) {
         if (old != 0) {
             panel->unk_0B = old - 1;
@@ -57,15 +57,15 @@ MATCH void func_801D8DC8(void) {
         }
     }
     D_801ED891 = g_BattleListCursor;
-    D_801ED890 = D_8014859E;
+    D_801ED890 = g_MenuPanelTasks[17].unk_0A;
     if (old != panel->unk_0B) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
     if (g_InputPressed & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        D_80148597 = 1;
-        D_80148624 = 0;
-        D_80148654 = 7;
+        D_80148597                  = 1;
+        g_MenuPanelTasks[21].active = 0;
+        D_80148654                  = 7;
         D_80148652 += 1;
     }
 }
