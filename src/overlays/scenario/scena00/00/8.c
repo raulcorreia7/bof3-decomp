@@ -95,10 +95,10 @@ MATCH void func_801F6E48(void) {
     work_cell = (SceneEffect*)work;
     adopted   = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
 
-    work_cell->pos_x         = adopted->pos.x.fixed;
-    work_cell->pos_y         = adopted->pos.y.fixed;
-    work_cell->z.fixed_point = adopted->pos.z.fixed;
-    g_GfxPrimCursor          = prim + 8;
+    work_cell->pos.x             = adopted->pos.x.fixed;
+    work_cell->pos.y             = adopted->pos.y.fixed;
+    work_cell->pos.z.fixed_point = adopted->pos.z.fixed;
+    g_GfxPrimCursor              = prim + 8;
     TASK_SET(adopted);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
@@ -256,12 +256,12 @@ MATCH void func_801F7440(void) {
 MATCH void func_801F7484(void) {
     s16 distance;
 
-    SCN_EFFECT->pos_x          = 0xB0000;
-    SCN_EFFECT->pos_y          = 0xF8000;
-    distance                   = Area_SampleHeight(SCN_EFFECT->pos_x, 0xF8000);
-    SCN_EFFECT->z.parts.height = distance;
-    SCN_EFFECT->ot_index       = 5;
-    SCN_EFFECT->step           = 1;
+    SCN_EFFECT->pos.x              = 0xB0000;
+    SCN_EFFECT->pos.y              = 0xF8000;
+    distance                       = Area_SampleHeight(SCN_EFFECT->pos.x, 0xF8000);
+    SCN_EFFECT->pos.z.parts.height = distance;
+    SCN_EFFECT->ot_index           = 5;
+    SCN_EFFECT->step               = 1;
 }
 
 /* Draws the forward scenario line from the active work point toward the row point in 0x8000 steps. */
@@ -277,11 +277,11 @@ MATCH void func_801F74EC(void) {
     work                    = SCN_EFFECT;
     color                   = D_801F6C04;
     row                     = (Actor*)&g_Actors[work->channel_06];
-    point.x                 = work->pos_x;
+    point.x                 = work->pos.x;
     next.x                  = point.x;
-    point.y                 = work->pos_y;
+    point.y                 = work->pos.y;
     next.y                  = point.y;
-    point.z                 = work->z;
+    point.z                 = work->pos.z;
     next.z                  = point.z;
     row_point.x             = row->pos.x.fixed;
     row_point.y             = row->pos.y.fixed;
@@ -322,9 +322,9 @@ MATCH void func_801F7670(void) {
     work                    = SCN_EFFECT;
     color                   = D_801F6C04;
     row                     = (Actor*)&g_Actors[work->channel_06];
-    point.x                 = work->pos_x;
-    point.y                 = work->pos_y;
-    point.z                 = work->z;
+    point.x                 = work->pos.x;
+    point.y                 = work->pos.y;
+    point.z                 = work->pos.z;
     row_point.x             = row->pos.x.fixed;
     row_point.y             = row->pos.y.fixed;
     row_point.z.fixed_point = row->pos.z.fixed;
@@ -415,29 +415,29 @@ MATCH void func_801F7A5C(void) {
     SceneEffect* work_tail;
     SceneEffect* work_state;
 
-    work_pos                  = SCN_EFFECT;
-    work_pos->pos_x           = 0x638000;
-    work_pos->pos_y           = 0xD0000;
-    work_pos->z.parts.height  = 0x300;
-    work_pos->counter_09      = 0x78;
-    work_tail                 = SCN_EFFECT;
-    work_pos->angle.x         = 0;
-    work_pos->angle.y         = 0;
-    work_pos->angle.z         = 0;
-    *(s8*)&work_tail->color_b = -1;
-    *(s8*)&work_tail->color_g = -1;
-    *(s8*)&work_tail->color_r = -1;
-    work_state                = SCN_EFFECT;
-    work_state->counter_0C    = 1;
-    work_state->counter_10    = 0;
-    work_state->channel_20    = 0;
-    work_state->channel_1C    = 0;
-    work_state->channel_18    = 0;
-    work_state->channel_0A    = 0;
-    work_state->channel_0B    = 0;
-    work_state->channel_08    = 0;
-    work_state->channel_07    = 0;
-    work_state->channel_06    = 0;
+    work_pos                     = SCN_EFFECT;
+    work_pos->pos.x              = 0x638000;
+    work_pos->pos.y              = 0xD0000;
+    work_pos->pos.z.parts.height = 0x300;
+    work_pos->counter_09         = 0x78;
+    work_tail                    = SCN_EFFECT;
+    work_pos->angle.x            = 0;
+    work_pos->angle.y            = 0;
+    work_pos->angle.z            = 0;
+    *(s8*)&work_tail->color_b    = -1;
+    *(s8*)&work_tail->color_g    = -1;
+    *(s8*)&work_tail->color_r    = -1;
+    work_state                   = SCN_EFFECT;
+    work_state->counter_0C       = 1;
+    work_state->counter_10       = 0;
+    work_state->channel_20       = 0;
+    work_state->channel_1C       = 0;
+    work_state->channel_18       = 0;
+    work_state->channel_0A       = 0;
+    work_state->channel_0B       = 0;
+    work_state->channel_08       = 0;
+    work_state->channel_07       = 0;
+    work_state->channel_06       = 0;
     SND_PlayCue(EMI_CUE_ID(2, 14));
     SCN_EFFECT->step = 1;
 }
@@ -828,18 +828,18 @@ MATCH void func_801F89F0(void) {
     SceneEffect* setup_work;
 
     setup_work                    = SCN_EFFECT;
-    VOL(s32, setup_work->pos_x)   = D_80147A8C;
-    VOL(s32, setup_work->pos_y)   = g_AreaFocusY[0];
+    VOL(s32, setup_work->pos.x)   = D_80147A8C;
+    VOL(s32, setup_work->pos.y)   = g_AreaFocusY[0];
     FIELD(s32, setup_work, 0x3Cu) = D_80147A94;
     VOL(s32, setup_work->angle.x) = D_80147ABC;
     VOL(s32, setup_work->angle.y) = D_80147AC0;
     setup_work->angle.z           = D_80147AC4;
     func_801AC1DC(deltas, FIELD(u8, setup_work, 0x1Cu));
-    update_work                 = SCN_EFFECT;
-    update_work->pos_x          = (update_work->pos_x + deltas[0]);
-    update_work->pos_y          = (update_work->pos_y + deltas[1]);
-    update_work->z.parts.height = (update_work->z.parts.height + deltas[2]);
-    update_work->step           = (update_work->step + 1);
+    update_work                     = SCN_EFFECT;
+    update_work->pos.x              = (update_work->pos.x + deltas[0]);
+    update_work->pos.y              = (update_work->pos.y + deltas[1]);
+    update_work->pos.z.parts.height = (update_work->pos.z.parts.height + deltas[2]);
+    update_work->step               = (update_work->step + 1);
 }
 
 MATCH void func_801F8AB8(void) {
@@ -852,10 +852,10 @@ MATCH void func_801F8AB8(void) {
 
     screen = D_1F800034;
     work   = SCN_EFFECT;
-    work->z.parts.height += 0x20;
-    point[0] = work->pos_x;
-    point[1] = work->pos_y;
-    point[2] = work->z.fixed_point;
+    work->pos.z.parts.height += 0x20;
+    point[0] = work->pos.x;
+    point[1] = work->pos.y;
+    point[2] = work->pos.z.fixed_point;
     Area_ProjectPoint(point, screen);
 
     current                     = SCN_EFFECT;
@@ -920,10 +920,10 @@ MATCH void func_801F8D90(void) {
     work_cell = (SceneEffect*)work;
     first     = (Actor*)(D_80147A58 + work_cell->counter_0C * 0x98);
 
-    work_cell->pos_x         = first->pos.x.fixed;
-    work_cell->pos_y         = first->pos.y.fixed;
-    work_cell->z.fixed_point = first->pos.z.fixed;
-    g_GfxPrimCursor          = prim + 8;
+    work_cell->pos.x             = first->pos.x.fixed;
+    work_cell->pos.y             = first->pos.y.fixed;
+    work_cell->pos.z.fixed_point = first->pos.z.fixed;
+    g_GfxPrimCursor              = prim + 8;
     TASK_SET(first);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;

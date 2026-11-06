@@ -91,44 +91,42 @@ ASSERT_OFFSET(SceneLinePoint, z, 0x08);
 /* Scene effects: func_801F7134 draws the actor-relative sprite;
  * func_801F78EC draws its field-space lines and func_801F85A8 its rotated triangles. */
 typedef struct SceneEffect {
-    u8                        pad_00[0x1];
-    /* 0x01 */ u8             step; /* the scenario step byte */
-    u8                        pad_02[0x4];
-    u8                        channel_06; /* the 0x238 animation channel */
-    u8                        channel_07; /* the 0x71C animation channel */
-    u8                        channel_08; /* the 0xE3 animation channel */
-    u8                        counter_09; /* the step counter */
-    u8                        channel_0A; /* the 0x31C animation channel */
-    u8                        channel_0B; /* the third animation channel */
-    s32                       counter_0C; /* a counter bounded by 0x80 */
-    s32                       counter_10; /* a counter bounded by 0xB6 */
-    u8                        pad_14[0x4];
-    s32                       channel_18; /* the first animation channel */
-    s32                       channel_1C; /* the second animation channel */
-    s32                       channel_20; /* the 0xC00 animation channel */
-    u8                        pad_24[0x5];
-    s8                        ot_index;
-    u8                        pad_2A[0x4];
-    Vec2U16                   origin;
-    u8                        pad_32[0x2];
-    /* 0x34 */ s32            pos_x;
-    /* 0x38 */ s32            pos_y;
-    /* 0x3C */ SceneElevation z;
-    u8                        pad_40[0x14];
-    u32                       unk_54;
-    u8                        pad_58[0x5];
-    u8                        color_r; /* +0x5D..0x5F: setRGB0 source, func_801F7134 and func_801F8BCC */
-    u8                        color_g;
-    u8                        color_b;
-    /* 0x60 */ s32            projected; /* RotTransPers depth result */
-    Vec3S32                   angle;
+    u8             pad_00[0x1];
+    /* 0x01 */ u8  step; /* the scenario step byte */
+    u8             pad_02[0x4];
+    u8             channel_06; /* the 0x238 animation channel */
+    u8             channel_07; /* the 0x71C animation channel */
+    u8             channel_08; /* the 0xE3 animation channel */
+    u8             counter_09; /* the step counter */
+    u8             channel_0A; /* the 0x31C animation channel */
+    u8             channel_0B; /* the third animation channel */
+    s32            counter_0C; /* a counter bounded by 0x80 */
+    s32            counter_10; /* a counter bounded by 0xB6 */
+    u8             pad_14[0x4];
+    s32            channel_18; /* the first animation channel */
+    s32            channel_1C; /* the second animation channel */
+    s32            channel_20; /* the 0xC00 animation channel */
+    u8             pad_24[0x5];
+    s8             ot_index;
+    u8             pad_2A[0x4];
+    Vec2U16        origin;
+    u8             pad_32[0x2];
+    SceneLinePoint pos; /* 0x34 */
+    u8             pad_40[0x14];
+    u32            unk_54;
+    u8             pad_58[0x5];
+    u8             color_r; /* +0x5D..0x5F: setRGB0 source, func_801F7134 and func_801F8BCC */
+    u8             color_g;
+    u8             color_b;
+    /* 0x60 */ s32 projected; /* RotTransPers depth result */
+    Vec3S32        angle;
 } SceneEffect;
 
 ASSERT_SIZE(SceneEffect, 0x70);
 ASSERT_OFFSET(SceneEffect, step, 0x01);
 ASSERT_OFFSET(SceneEffect, channel_18, 0x18);
-ASSERT_OFFSET(SceneEffect, pos_x, 0x34);
-ASSERT_OFFSET(SceneEffect, z, 0x3C);
+ASSERT_OFFSET(SceneEffect, pos, 0x34);
+STATIC_ASSERT(SceneEffect_pos_z, DECOMP_OFFSETOF(SceneEffect, pos.z) == 0x3C);
 ASSERT_OFFSET(SceneEffect, unk_54, 0x54);
 ASSERT_OFFSET(SceneEffect, color_r, 0x5D);
 ASSERT_OFFSET(SceneEffect, projected, 0x60);
