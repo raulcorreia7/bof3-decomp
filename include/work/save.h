@@ -8,8 +8,10 @@
 #include "menu/clock.h"
 #include "menu/inventory.h"
 #include "menu/party.h"
-#include "menu/save.h"
 #include "work/state.h"
+
+/* The persistent block: 4,272 bytes. */
+#define SAVE_BLOCK_SIZE 0x10B0u
 
 /* The scene event the overlays step through: mode selects the g_SceneEvents handler, step advances inside it and
  * selection is the entry it works on (a fairy job, a master, a menu cursor). */

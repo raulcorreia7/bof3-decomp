@@ -20,9 +20,6 @@
 
 #define SAVE_FRAME           0x801446D8u
 
-/* The persistent block at D_801448D8 that boot zeroes, the save copies to its payload at frame + 0x200 and the
- * checksum covers whole: 4,272 bytes. */
-#define SAVE_BLOCK_SIZE      0x10B0u
 #define SAVE_CHECKSUM_FIRST  0x200u
 #define SAVE_CHECKSUM_LENGTH SAVE_BLOCK_SIZE
 /* The file the card calls open and transfer on: the payload ends at 0x12B0 (frame + 0x200 + 0x10B0). */
