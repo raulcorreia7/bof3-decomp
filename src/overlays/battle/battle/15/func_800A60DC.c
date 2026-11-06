@@ -42,35 +42,35 @@ MATCH void func_800A60DC(void) {
     cursor_total = cursor_col + cursor_row;
 
     if (input & PADLup) {
-        if ((s16)cursor_col + (s16)cursor_row > 0) {
-            if ((s16)cursor_col == 0) {
+        if (cursor_col + cursor_row > 0) {
+            if (cursor_col == 0) {
                 cursor_words[1] = cursor_row - 1;
             }
-            if ((s16)cursor_col > 0) {
+            if (cursor_col > 0) {
                 cursor_words[0] = cursor_col - 1;
             }
         }
     } else if (input & 4) {
-        if ((s16)cursor_row >= 3) {
+        if (cursor_row >= 3) {
             cursor_words[1] = cursor_row - 3;
-        } else if ((s16)cursor_row == 0) {
+        } else if (cursor_row == 0) {
             cursor_words[0] = 0;
         } else {
             cursor_words[1] = 0;
         }
     } else if (input & PADLdown) {
-        if ((s16)cursor_col + (s16)cursor_row < 11) {
-            if ((s16)cursor_col == 2) {
+        if (cursor_col + cursor_row < 11) {
+            if (cursor_col == 2) {
                 cursor_words[1] = cursor_row + 1;
             }
-            if ((s16)cursor_col < 2) {
+            if (cursor_col < 2) {
                 cursor_words[0] = cursor_col + 1;
             }
         }
     } else if (input & 8) {
-        if ((s16)cursor_row == 9) {
+        if (cursor_row == 9) {
             cursor_words[0] = 2;
-        } else if ((s16)cursor_row + (s16)cursor_col + 3 < 0xA) {
+        } else if (cursor_row + cursor_col + 3 < 0xA) {
             cursor_words[1] = cursor_row + 3;
         } else {
             cursor_words[1] = 9;

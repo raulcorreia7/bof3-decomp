@@ -14,7 +14,7 @@ MATCH u8 func_801E715C(s32 range_low, s32 range_high, s32 draw_count) {
         do {
             i++;
             sum += range_low + rand() % range;
-        } while ((u32)(i & BYTE_MASK) < (u32)count);
+        } while ((i & BYTE_MASK) < count);
     }
-    return (u8)sum;
+    return sum;
 }

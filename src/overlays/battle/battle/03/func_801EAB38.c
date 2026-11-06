@@ -7,8 +7,8 @@ MATCH u8 func_801EAB38(void) {
     u8        index;
     u8        target;
 
-    target_offset      = (s16)0xC328u;
-    index_offset       = (s16)0xBF04u;
+    target_offset      = 0xC328u;
+    index_offset       = 0xBF04u;
     index              = base[index_offset];
     target             = base[target_offset];
     index              = (index + 1u) & 0x0Fu;

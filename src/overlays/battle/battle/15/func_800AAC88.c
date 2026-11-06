@@ -9,7 +9,7 @@ MATCH void func_800AAC88(s16 amount, u8 battler_index) {
     u8  target_flags;
     s32 enemy;
 
-    action_slot = (u8)Battle_AllocEffect(0, 1);
+    action_slot = Battle_AllocEffect(0, 1);
 
     D_801EC33B[action_slot * BATTLE_EFFECT_STRIDE] = 0;
 
@@ -17,9 +17,9 @@ MATCH void func_800AAC88(s16 amount, u8 battler_index) {
         g_BattleEffects[action_slot].target.party = &g_BattlePartyBattlers[battler_index];
         target_flags                              = g_BattlePartyBattlers[battler_index].unk_120;
     } else {
-        enemy                                     = (s32)battler_index - 3;
+        enemy                                     = battler_index - 3;
         g_BattleEffects[action_slot].target.enemy = (EnemyBattler*)g_BattleEnemies + battler_index;
-        target_flags                              = D_801EB72C[((u32)enemy * BATTLE_ENEMY_STRIDE)];
+        target_flags                              = D_801EB72C[(enemy * BATTLE_ENEMY_STRIDE)];
     }
 
     if (amount < 0) {

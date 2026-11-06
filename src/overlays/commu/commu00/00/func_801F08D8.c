@@ -8,7 +8,7 @@ MATCH void func_801F08D8(u8 source_index, u8 task_index) {
     u8  index;
     s16 distance;
     record_index                = g_FairyJobs[source_index].type - 1;
-    index                       = (u8)record_index;
+    index                       = record_index;
     g_Task                      = &g_Actors[task_index];
     g_Task->unk_05              = source_index;
     g_Task->mode                = 6;
@@ -33,15 +33,15 @@ MATCH void func_801F08D8(u8 source_index, u8 task_index) {
             break;
 
         case 4:
-            func_801F0C6C(task_index, (u8)record_index);
+            func_801F0C6C(task_index, record_index);
             break;
 
         case 5:
-            func_801F0D3C(task_index, (u8)record_index);
+            func_801F0D3C(task_index, record_index);
             break;
 
         case 6:
-            func_801F0E1C(task_index, (u8)record_index);
+            func_801F0E1C(task_index, record_index);
             break;
 
         case 7:
@@ -49,23 +49,23 @@ MATCH void func_801F08D8(u8 source_index, u8 task_index) {
             break;
 
         case 8:
-            func_801F0F08(source_index, task_index, (u8)record_index);
+            func_801F0F08(source_index, task_index, record_index);
             break;
 
         case 9:
-            func_801F0FBC(source_index, task_index, (u8)record_index);
+            func_801F0FBC(source_index, task_index, record_index);
             break;
 
         case 10:
-            func_801F1064(task_index, (u8)record_index);
+            func_801F1064(task_index, record_index);
             break;
 
         case 11:
-            func_801F1110(task_index, (u8)record_index);
+            func_801F1110(task_index, record_index);
             break;
 
         case 12:
-            func_801F1204(task_index, (u8)record_index);
+            func_801F1204(task_index, record_index);
             break;
 
         case 13:

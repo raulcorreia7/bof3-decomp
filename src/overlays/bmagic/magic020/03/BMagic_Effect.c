@@ -143,9 +143,9 @@ MATCH void func_801EF928(void) {
     if (!(temp_v0 & 0xFF)) {
         g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C    = 1;
-        g_Task->unk_5D    = (u8) - ((g_Task->unk_0B + 1) * 0x14);
-        g_Task->unk_5E    = (u8) - ((g_Task->unk_0B + 1) * 0x14);
-        g_Task->unk_5F    = (u8) - ((g_Task->unk_0B + 1) * 0x14);
+        g_Task->unk_5D    = -((g_Task->unk_0B + 1) * 0x14);
+        g_Task->unk_5E    = -((g_Task->unk_0B + 1) * 0x14);
+        g_Task->unk_5F    = -((g_Task->unk_0B + 1) * 0x14);
         g_Task->unk_2B    = 0;
         g_Task->unk_27    = D_801EB4E0->unk_27;
         work              = g_Task;

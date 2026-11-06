@@ -4,7 +4,7 @@ MATCH void func_801E64B4(void) {
     BattleEffect* slot;
     s32           value;
 
-    g_AreaCameraOffsetZ -= (u16)D_801EC2E0->unk_0C;
+    g_AreaCameraOffsetZ -= D_801EC2E0->unk_0C;
     GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
         value = D_801EC2E0->unk_10;

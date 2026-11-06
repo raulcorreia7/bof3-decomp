@@ -83,7 +83,7 @@ MATCH void func_801DE200(void) {
         do {
             D_801E6249[standby_index] = standby_value;
             standby_index += 2;
-        } while (++standby_count < (s32)D_801E6250);
+        } while (++standby_count < D_801E6250);
     }
     D_8014865A = 0x7F;
     D_8014865D = 0x7F;

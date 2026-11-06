@@ -30,7 +30,7 @@ MATCH void func_801E0F0C(void) {
         *(&D_801EC337 + offset)      = 1;
         *(&D_801EC357 + offset)      = 6;
         spad2                        = g_Task;
-        *(u32*)(D_801EC3A4 + offset) = (u32)spad;
+        *(u32*)(D_801EC3A4 + offset) = spad;
         Actor_SelectScript((spad2->facing + 4) & BYTE_MASK);
         SND_QueueSelectionFx(0x206);
         if (g_BattleEventFlags == 0) {

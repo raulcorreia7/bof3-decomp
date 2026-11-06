@@ -270,7 +270,7 @@ MATCH void func_801F7E34(void) {
 
     SND_PlayCue(EMI_CUE_ID(2, 9));
     work                  = SP_REF(void*, 0x44);
-    FIELD(u8, work, 0x1u) = (u8)(FIELD(u8, work, 0x1u) + 1);
+    FIELD(u8, work, 0x1u) = (FIELD(u8, work, 0x1u) + 1);
 }
 
 INCLUDE_ASM(func_801F7E6C);
@@ -369,7 +369,7 @@ MATCH void func_801F87A4(void) {
     }
     slots  = SP_PTR(u8*, 0u);
     chk    = slots[0x11];
-    count  = (u8)(chk[9] - 1);
+    count  = (chk[9] - 1);
     chk[9] = count;
     if (count == 0) {
         slots          = SP_PTR(u8*, 0u);
@@ -491,13 +491,13 @@ MATCH void func_801FC5FC(void) {
     Item_VitalAdd(VITAL_ITEM_FLIER);
     Message_StartAreaMessage(0x2F);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    SND_PauseBgm((s32)g_SndBgmId);
+    SND_PauseBgm(g_SndBgmId);
     SND_StartXaStream(2, 1);
     while (!(SND_IsXaIdle() & 0xFF)) {
         func_801992B8();
         CallbackWait(1U);
     }
-    SND_ResumeBgm((s32)g_SndBgmId);
+    SND_ResumeBgm(g_SndBgmId);
 }
 
 MATCH void func_801FC688(void) {
@@ -526,13 +526,13 @@ MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
 
     if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
         if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
-            if ((u32)((arg0 >> 0x10) - 2) < 3U) {
+            if (((arg0 >> 0x10) - 2) < 3U) {
                 if (arg1 == 0x60000) {
                     var_v0 = 2;
                     goto block_9;
                 }
             }
-        } else if ((SYS_TestFlag(g_SceneFlags, 0) != 0) && ((u32)((arg0 >> 0x10) - 3) < 2U)) {
+        } else if ((SYS_TestFlag(g_SceneFlags, 0) != 0) && (((arg0 >> 0x10) - 3) < 2U)) {
             if (arg1 == 0x40000) {
                 var_v0 = 1;
             block_9:
@@ -545,7 +545,7 @@ MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
 
 MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
-        if ((u32)((arg1 >> 0x10) - 7) < 2U) {
+        if (((arg1 >> 0x10) - 7) < 2U) {
             if (arg0 == 0x5C0000) {
                 SYS_SetFlag(g_SceneFlags, 7U);
                 D_80146874 = 3;
@@ -562,7 +562,7 @@ MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
 MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x15) == 0) {
         if (arg1 == 0x418000) {
-            if ((u32)((arg0 >> 0x10) - 0x20) < 4U) {
+            if (((arg0 >> 0x10) - 0x20) < 4U) {
                 D_80146874 = 4;
                 D_80146875 = 5;
                 return Scene_ShowMessage(0x33);
@@ -577,21 +577,21 @@ MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
 MATCH s8 func_801FC9DC(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x18) == 0) {
         if (arg0 == 0x3A8000) {
-            if ((u32)((arg1 >> 0x10) - 0x3C) >= 2U) {
+            if (((arg1 >> 0x10) - 0x3C) >= 2U) {
                 goto block_4;
             }
             goto block_9;
         }
     block_4:
         if (arg1 == 0x28000) {
-            if ((u32)((arg0 >> 0x10) - 0x1F) >= 2U) {
+            if (((arg0 >> 0x10) - 0x1F) >= 2U) {
                 goto block_7;
             }
             goto block_9;
         }
     block_7:
         if (arg1 == 0x4C8000) {
-            if ((u32)((arg0 >> 0x10) - 0x1F) < 2U) {
+            if (((arg0 >> 0x10) - 0x1F) < 2U) {
             block_9:
                 D_80146874 = 5;
                 D_80146875 = 0;
@@ -609,7 +609,7 @@ MATCH s8 func_801FC9DC(s32 arg0, s32 arg1) {
 MATCH s8 func_801FCAB8(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x1A) != 0) {
         if ((arg0 >> 0x10) == 0x15) {
-            if ((u32)((arg1 >> 0x10) - 0x34) < 2U) {
+            if (((arg1 >> 0x10) - 0x34) < 2U) {
                 D_80146874 = 5;
                 D_80146875 = 0x10;
                 return Scene_ShowMessage(0x1F);

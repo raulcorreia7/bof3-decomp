@@ -14,5 +14,5 @@ MATCH void func_800A602C(void) {
     D_801485E2 = 0x3F;
     D_801485EC = 0;
     D_801485EE = 0;
-    *counter   = (u8)(count + 1);
+    *counter   = (count + 1);
 }

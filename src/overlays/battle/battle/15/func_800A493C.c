@@ -36,7 +36,7 @@ MATCH void func_800A493C(void) {
     if ((s8)*state < 0) {
         *state = 2;
     }
-    if ((u8)*state >= 3) {
+    if (*state >= 3) {
         *state = 0;
     }
 }

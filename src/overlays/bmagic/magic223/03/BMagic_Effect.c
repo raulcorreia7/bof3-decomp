@@ -51,8 +51,8 @@ MATCH void func_801EF628(void) {
     s32 offset;
     u8  timer;
 
-    g_Task->unk_2E.half += (s32)(rsin(g_Task->unk_14) * 8) >> 0xC;
-    offset = (s32)(rcos(g_Task->unk_14) * 8) >> 0xC;
+    g_Task->unk_2E.half += (rsin(g_Task->unk_14) * 8) >> 0xC;
+    offset = (rcos(g_Task->unk_14) * 8) >> 0xC;
     g_Task->unk_30.half += offset;
     g_Task->unk_09 += 1;
     timer         = g_Task->timer + 4;
@@ -65,9 +65,9 @@ MATCH void func_801EF628(void) {
 MATCH void func_801EF6E0(void) {
     s32 cosine;
 
-    g_Task->unk_2E.half += (s32)(rsin(g_Task->unk_14) * 0x18) >> 0xC;
+    g_Task->unk_2E.half += (rsin(g_Task->unk_14) * 0x18) >> 0xC;
     cosine = rcos(g_Task->unk_14);
-    g_Task->unk_30.half += (s32)(cosine * 0x18) >> 0xC;
+    g_Task->unk_30.half += (cosine * 0x18) >> 0xC;
     g_Task->unk_09 += 1;
     if (g_Task->unk_09 == 0x14) {
         D_801EB4E0->unk_0B -= 1;

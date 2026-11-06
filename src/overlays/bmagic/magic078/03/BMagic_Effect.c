@@ -72,7 +72,7 @@ MATCH void func_801EF228(void) {
 
 MATCH void func_801EF278(void) {
     g_Task->timer += 8;
-    if ((u8)g_Task->timer >= 0x81U) {
+    if (g_Task->timer >= 0x81U) {
         g_Task->step += 1;
     }
 }
@@ -135,7 +135,7 @@ MATCH void func_801F00EC(void) {
 
 MATCH void func_801F014C(void) {
     func_800AF2B4(D_801EB4E0, 0x30);
-    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + 0x10;
+    COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + 0x10;
     if (func_800AF5FC(D_801EB4E0, 0x1C000) != 0) {
         g_Task->timer = 0x1E;
         g_Task->step += 1;

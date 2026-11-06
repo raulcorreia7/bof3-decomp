@@ -40,20 +40,20 @@ NON_MATCHING void func_801D9BDC(void) {
     Menu_DrawClutStrip(D_80144953);
     *(u8*)(&D_801485DC) = 0;
     if (D_801ED678 != 0x7F) {
-        tmp2                = (D_801ED67C * 3) + D_801ED678;
-        D_801485E0          = D_801EC4D0[tmp2].flags;
-        *(u8*)(&D_801485DC) = 1;
-        D_801485E2          = D_801EC4D0[tmp2].step;
-        D_801485E7          = 0;
-        D_801485E6          = D_801EC4D0[tmp2].unk_04 + 1;
+        tmp2                        = (D_801ED67C * 3) + D_801ED678;
+        D_801485E0                  = D_801EC4D0[tmp2].flags;
+        *(u8*)(&D_801485DC)         = 1;
+        D_801485E2                  = D_801EC4D0[tmp2].step;
+        g_MenuPanelTasks[19].unk_0B = 0;
+        g_MenuPanelTasks[19].unk_0A = D_801EC4D0[tmp2].unk_04 + 1;
     }
     tmp3                            = ((s8)D_801ED66C * 3) + D_801ED668;
-    D_80148604                      = D_801EC4D0[tmp3].flags;
+    g_MenuPanelTasks[20].x          = D_801EC4D0[tmp3].flags;
     FIELD(s8, (&D_801485DC), 0x24u) = 1;
-    D_80148606                      = D_801EC4D0[tmp3].step;
+    g_MenuPanelTasks[20].y          = D_801EC4D0[tmp3].step;
     val8                            = 0;
-    D_8014860B                      = 1;
-    D_8014860A                      = D_801EC4D0[tmp3].unk_04 + 1;
+    g_MenuPanelTasks[20].unk_0B     = 1;
+    g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].unk_04 + 1;
     val5                            = 0 << 0x18;
     do {
         D_8014833C[(val5 >> 0x18) + 0xC][0] = 0;
@@ -72,7 +72,7 @@ NON_MATCHING void func_801D9BDC(void) {
     } else {
         val0 = 0x3B;
     }
-    D_801484CC = val0;
+    g_MenuPanelTasks[11].unk_10 = val0;
     if (D_80145AC2 & g_InputPressed) {
         *(u8*)(&D_801485DC) = 0;
         if (D_801ED668 != 0) {
@@ -98,8 +98,8 @@ NON_MATCHING void func_801D9BDC(void) {
         }
     } else if (D_80145AC4 & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        *(u8*)(&D_801485DC) = 0;
-        D_80148600          = 0;
+        *(u8*)(&D_801485DC)         = 0;
+        g_MenuPanelTasks[20].active = 0;
         if (D_801ED678 != 0x7F) {
         block_20:
             D_801ED678 = 0x7F;

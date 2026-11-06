@@ -12,14 +12,14 @@ MATCH void func_801D8188(void) {
     Menu_DrawClutStrip(D_80144953);
     /* FAKE: hides slot's constant so the bar read stays s1-relative; pure form 87.93%. */
     MATCH_FAKE_OPAQUE(slot);
-    bar        = *(u16*)(slot - 0x164);
-    *slot      = 1;
-    D_801484CC = 0x31;
-    toggle     = &D_8014865B;
-    sel        = 1 - *toggle;
-    D_80148628 = bar + (sel << 5) + 0xDE;
-    D_8014862A = D_801484C2 + 5;
-    key        = &g_InputPressed;
+    bar                         = *(u16*)(slot - 0x164);
+    *slot                       = 1;
+    g_MenuPanelTasks[11].unk_10 = 0x31;
+    toggle                      = &D_8014865B;
+    sel                         = 1 - *toggle;
+    g_MenuPanelTasks[21].x      = bar + (sel << 5) + 0xDE;
+    g_MenuPanelTasks[21].y      = g_MenuPanelTasks[11].y + 5;
+    key                         = &g_InputPressed;
     slot -= 0xB4;
     if (*key & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
@@ -28,8 +28,11 @@ MATCH void func_801D8188(void) {
     if (*key & D_80145AC2) {
         if (*toggle != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
-            Char_AddAbility(*(Party_GetAbilities(D_8014857A, D_8014857B, 0) + D_8014857C), 0, 1, 0);
-            *(Party_GetAbilities(D_8014857A, D_8014857B, 0) + D_8014857C) = 0;
+            Char_AddAbility(*(Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0) +
+                              g_MenuPanelTasks[16].unk_0C),
+                            0, 1, 0);
+            *(Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0) +
+              g_MenuPanelTasks[16].unk_0C) = 0;
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 6));
         }
@@ -39,7 +42,7 @@ MATCH void func_801D8188(void) {
         return;
     }
     if (*key & D_80145AC4) {
-        D_8014857D = 0xFF;
+        g_MenuPanelTasks[16].flags = 0xFF;
         D_80148651 -= 2;
         SND_PlayCue(EMI_CUE_ID(1, 6));
     }

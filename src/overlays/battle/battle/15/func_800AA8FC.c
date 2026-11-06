@@ -12,7 +12,7 @@ MATCH s32 func_800AA8FC(void) {
     u8  slot;
 
     result = 0;
-    for (i = 0; (u32)(i & BYTE_MASK) < 3U; i++) {
+    for (i = 0; (i & BYTE_MASK) < 3U; i++) {
         slot = i;
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) == 0) {
             off   = slot * BATTLE_PARTY_STRIDE;

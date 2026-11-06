@@ -9,7 +9,7 @@ MATCH void Battle_LoadEncounterEnemies(void) {
     s32 count;
 
     g_BattleEnemyCount = 0;
-    entries            = (u8*)(0x800E4000u + (u32)D_801CD78E[(u32)g_BattleEncounter * 4u] * 9u);
+    entries            = (u8*)(0x800E4000u + D_801CD78E[g_BattleEncounter * 4u] * 9u);
     slot               = 0;
     count              = 0;
 
@@ -20,7 +20,7 @@ MATCH void Battle_LoadEncounterEnemies(void) {
             count++;
         }
         slot++;
-    } while ((u32)(slot & BYTE_MASK) < 8u);
+    } while ((slot & BYTE_MASK) < 8u);
 
     g_BattleLivingEnemyCount = g_BattleEnemyCount;
 }

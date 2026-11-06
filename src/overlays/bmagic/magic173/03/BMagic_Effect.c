@@ -27,7 +27,7 @@ INCLUDE_ASM(func_801EF148);
 MATCH void func_801EF3D8(void) {
     u8 timer;
 
-    if ((u8)g_Task->timer < 8U) {
+    if (g_Task->timer < 8U) {
         g_Task->unk_0B += 1;
         g_Task->timer += 1;
         func_800AF764();

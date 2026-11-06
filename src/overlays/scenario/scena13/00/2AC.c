@@ -88,7 +88,7 @@ MATCH void func_801F70DC(void) {
             func_8014D290();
         }
         i += 1;
-    } while ((u32)(i & 0xFF) < 0x1EU);
+    } while ((i & 0xFF) < 0x1EU);
     g_Task = actor;
 }
 
@@ -307,7 +307,7 @@ MATCH void func_801FB164(void) {
         g_GraphicsPaletteDst[i] = MEM_PTR(const volatile u16, 0x80033800u)[i];
         i++;
     } while (i < 16);
-    g_GfxPalettePending = (u8)(g_GfxPalettePending + 1u);
+    g_GfxPalettePending = (g_GfxPalettePending + 1u);
 }
 
 INCLUDE_ASM(func_801FB1B4);
@@ -322,7 +322,7 @@ MATCH void func_801FB350(void* entity) {
 }
 
 MATCH void func_801FB390(void* entity) {
-    ((Actor*)entity)->unk_7E = (u16)(((Actor*)entity)->unk_7E + 1);
+    ((Actor*)entity)->unk_7E = (((Actor*)entity)->unk_7E + 1);
 }
 
 MATCH void func_801FB3A4(void) {

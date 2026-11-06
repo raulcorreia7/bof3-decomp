@@ -32,5 +32,5 @@ MATCH s16 func_800A4294(s32 input_kind) {
             return 0;
         }
     }
-    return (s16)mod;
+    return mod;
 }

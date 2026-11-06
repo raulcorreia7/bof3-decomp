@@ -157,7 +157,7 @@ MATCH void func_801D16DC(void) {
         tail += 0x18;
         index += 1;
         row += 0x18;
-    } while ((u32)(index & HALF_MASK) < 0x100U);
+    } while ((index & HALF_MASK) < 0x100U);
 }
 
 #include "shared/Area_FindFreeSpriteRow.h"

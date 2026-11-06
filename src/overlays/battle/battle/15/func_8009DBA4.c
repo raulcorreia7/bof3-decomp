@@ -19,7 +19,7 @@ MATCH void func_8009DBA4(void) {
         base = ENEMY_COMBATANT(index).hp;
     }
     value = ((s16*)g_BattleTargetRecord)[2];
-    if ((value < (s32)base) && (value != 0)) {
+    if ((value < base) && (value != 0)) {
         func_800A4238(4);
     }
 }

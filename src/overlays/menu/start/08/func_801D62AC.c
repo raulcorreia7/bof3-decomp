@@ -22,13 +22,13 @@ MATCH void func_801D62AC(void) {
             D_80148333[temp] = 4;
             off += 0x24;
         }
-        D_8014842F = 2;
-        D_80148453 = 2;
-        D_80148477 = 2;
-        D_8014849B = 2;
-        D_80148654 = 0;
-        D_80148650 = 1;
-        D_80148651 = 0;
-        D_80148663 = D_80148656;
+        g_MenuPanelTasks[7].state  = 2;
+        g_MenuPanelTasks[8].state  = 2;
+        g_MenuPanelTasks[9].state  = 2;
+        g_MenuPanelTasks[10].state = 2;
+        D_80148654                 = 0;
+        D_80148650                 = 1;
+        D_80148651                 = 0;
+        D_80148663                 = D_80148656;
     }
 }

@@ -33,11 +33,11 @@ MATCH void func_801EF214(void) {
         }
         if ((count & BYTE_MASK) != 0) {
             level = &D_801455C4;
-            wait  = (s16)(D_801F2514[*level] - total);
+            wait  = (D_801F2514[*level] - total);
             if (wait <= 0) {
                 wait = 1;
             }
-            if ((u32)(g_BattleCount - D_801455B8) >= (u32)wait) {
+            if ((g_BattleCount - D_801455B8) >= wait) {
                 (*level) += 1;
                 D_801455B8 += wait;
                 D_80145E60[g_FairyVillageUpdateCount * 2] = 7;

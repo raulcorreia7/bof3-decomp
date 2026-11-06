@@ -31,11 +31,11 @@ MATCH void Shop_DrawAbilities(ShopPanel* panel) {
             count   = Char_GetAbilityCost(g_CharSlot[D_80144F5A[(s8)D_80148656]], *list, 0);
             if (n == panel->selected || n == panel->unk_0C) {
                 if (shade != 7) {
-                    func_801AF930((s16)(panel->x + 7), (s16)(y + 0x1A), 7, (u8)level, ability, (u8)count, 1);
+                    func_801AF930((s16)(panel->x + 7), (s16)(y + 0x1A), 7, level, ability, count, 1);
                 }
-                func_801AF930((s16)(panel->x + 7), (s16)(y + 0x18), shade, (u8)level, ability, (u8)count, locked);
+                func_801AF930((s16)(panel->x + 7), (s16)(y + 0x18), shade, level, ability, count, locked);
             } else {
-                func_801AF930((s16)(panel->x + 7), (s16)(y + 0x1A), shade, (u8)level, ability, (u8)count, locked);
+                func_801AF930((s16)(panel->x + 7), (s16)(y + 0x1A), shade, level, ability, count, locked);
             }
         }
         n++;
@@ -43,8 +43,7 @@ MATCH void Shop_DrawAbilities(ShopPanel* panel) {
         list++;
     } while (n < 10);
     x = panel->x + 0x4E;
-    UI_DrawText((s16)(x - strlen(D_801E5B7C[panel->unk_0B]) * 4), (s16)(panel->y + 7), 0, 0x10,
-                (u8*)(D_801E5B7C[panel->unk_0B]));
+    UI_DrawText((x - strlen(D_801E5B7C[panel->unk_0B]) * 4), (panel->y + 7), 0, 0x10, (u8*)(D_801E5B7C[panel->unk_0B]));
     UI_DrawSpriteRun(panel->x, panel->y, (panel->flags & 2) ? D_801E5650 : D_801E5638, 1);
     UI_DrawSpriteRun(panel->x, panel->y, (panel->flags & 1) ? D_801E5674 : D_801E5668, 1);
     flags = panel->flags;

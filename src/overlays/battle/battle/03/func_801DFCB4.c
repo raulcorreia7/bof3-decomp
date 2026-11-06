@@ -25,7 +25,7 @@ MATCH void func_801DFCB4(void) {
     g_BattlePendingStatus                  = 0;
     slot                                   = g_Task->slot;
     self                                   = g_GameState;
-    D_8014639C                             = (s32)g_Task;
+    D_8014639C                             = g_Task;
     g_BattleTargetRecord                   = (s16*)&self->unk_118;
     g_BattleTarget                         = slot;
     /* Plain pointer stores, not field stores: retail keeps each one ahead
@@ -51,7 +51,7 @@ MATCH void func_801DFCB4(void) {
             break;
     }
     lock_work = g_GameState;
-    if ((lock_work->unk_120 & 1) && (s16)lock_work->hp_change == 0) {
+    if ((lock_work->unk_120 & 1) && lock_work->hp_change == 0) {
         g_Task->step = 3;
         return;
     }
@@ -84,7 +84,7 @@ MATCH void func_801DFCB4(void) {
     tail_work = g_GameState;
     tail_work->chr.status |= *pending;
     *pending = 0;
-    if ((s16)tail_work->hp_change > 0) {
+    if (tail_work->hp_change > 0) {
         if (tail_work->chr.hp == 0) {
             if (tail_work->action_flags.value & 2) {
                 tail_work->chr.status |= STATUS_KO;
@@ -100,7 +100,7 @@ MATCH void func_801DFCB4(void) {
         }
     }
     check_work = g_GameState;
-    if ((s16)check_work->hp_change < 0 || (s16)check_work->ap_change < 0) {
+    if (check_work->hp_change < 0 || check_work->ap_change < 0) {
         SND_QueueSelectionFx(0x206);
     }
     if (!(g_BattleState & BATTLE_STATE_DAMAGE_APPLIED)) {

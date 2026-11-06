@@ -38,7 +38,7 @@ MATCH void func_801D0DE0(void) {
         D_801F294E += 1;
         return;
     }
-    temp_v1    = (u8)D_801DB0C4 - 1;
+    temp_v1    = D_801DB0C4 - 1;
     D_801DB0C4 = temp_v1;
     func_801D3184(0x6E - ((temp_v1 & 0xFF) * 0x28), 0x48);
     func_801D32A0(0x6E - ((u8)D_801DB0C4 * 0x28), 0x74, 1);

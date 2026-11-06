@@ -13,8 +13,8 @@ MATCH void func_801D3014(void) {
     toggle     = &D_8014865B;
     D_80148624 = 1;
     pad        = &g_InputPressed;
-    D_80148628 = (u16)D_80148334 + (1 - *toggle) * 32 + 0xDE;
-    D_8014862A = (u16)D_80148336 + 5;
+    D_80148628 = D_80148334 + (1 - *toggle) * 32 + 0xDE;
+    D_8014862A = D_80148336 + 5;
     if (*pad & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         *toggle ^= 1;

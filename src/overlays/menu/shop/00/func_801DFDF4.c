@@ -16,8 +16,8 @@ MATCH void func_801DFDF4(void) {
     D_80148340 = 0x36;
     D_80148624 = 1;
     side       = 1 - *toggle;
-    D_80148628 = (u16)D_80148334 + (side << 5) + 0xDE;
-    D_8014862A = (u16)D_80148336 + 5;
+    D_80148628 = D_80148334 + (side << 5) + 0xDE;
+    D_8014862A = D_80148336 + 5;
     if (*pad & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         *toggle ^= 1;

@@ -20,7 +20,7 @@ MATCH void func_801DD08C(void) {
         BattleTemplateBlock* dst;
         BattleTemplateBlock* end;
 
-        work_offset    = (u32)index * 0x140u;
+        work_offset    = index * 0x140u;
         template_index = g_BattlePartyBattlers[index].record_slot;
         src            = (BattleTemplateBlock*)(&g_Characters[template_index]);
         dst            = (BattleTemplateBlock*)(D_80145F04 + work_offset);

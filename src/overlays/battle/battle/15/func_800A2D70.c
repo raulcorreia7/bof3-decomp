@@ -18,18 +18,18 @@ MATCH s16 func_800A2D70(u8 battler_index, u16 element_mask) {
         }
     } else {
         if (element_mask & ELEM_PSIONIC) {
-            value = D_800B494C[ENEMY_COMBATANT((u32)battler_index).stats.resistances[RES_SLOT_PSIONIC]];
+            value = D_800B494C[ENEMY_COMBATANT(battler_index).stats.resistances[RES_SLOT_PSIONIC]];
         }
         if (element_mask & ELEM_STATUS) {
-            value = D_800B494C[ENEMY_COMBATANT((u32)battler_index).stats.resistances[RES_SLOT_PSIONIC + 1]];
+            value = D_800B494C[ENEMY_COMBATANT(battler_index).stats.resistances[RES_SLOT_PSIONIC + 1]];
         }
         if (element_mask & 0x100u) {
-            value = D_800B494C[ENEMY_COMBATANT((u32)battler_index).stats.resistances[RES_SLOT_PSIONIC + 2]];
+            value = D_800B494C[ENEMY_COMBATANT(battler_index).stats.resistances[RES_SLOT_PSIONIC + 2]];
         }
     }
 
     if ((element_mask & 0x1C0u) == 0) {
         value = 0xFFFF; /* no element selected: -1 once truncated to s16. */
     }
-    return (s16)value;
+    return value;
 }

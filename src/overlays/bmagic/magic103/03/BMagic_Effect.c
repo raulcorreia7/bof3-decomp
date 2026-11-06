@@ -126,7 +126,7 @@ MATCH void func_801EFD74(void) {
     u8 counter;
 
     func_800AF764();
-    g_Task->unk_30.half -= ((s32)g_Task->unk_09 - 8) / 2;
+    g_Task->unk_30.half -= (g_Task->unk_09 - 8) / 2;
     if ((g_Task->unk_09 & 0xFF) != 0x2C) {
         g_Task->unk_09 = g_Task->unk_09 + 1;
     }

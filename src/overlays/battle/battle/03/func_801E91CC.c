@@ -3,5 +3,5 @@
 MATCH void func_801E91CC(void) {
     MenuPanelTask* panel = g_MenuCurrentPanel;
 
-    func_801D750C((s32)(s16)panel->x, (s32)(s16)panel->y);
+    func_801D750C((s16)panel->x, (s16)panel->y);
 }

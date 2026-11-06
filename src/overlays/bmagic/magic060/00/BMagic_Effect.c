@@ -30,7 +30,7 @@ MATCH void func_801EED68(void) {
 MATCH void func_801EEE00(void) {
     u8 temp_v0;
 
-    if ((u8)g_BattleTargetSelector < 3U) {
+    if (g_BattleTargetSelector < 3U) {
         func_801EF174();
     } else {
         func_801EF2DC();

@@ -12,7 +12,7 @@ MATCH void Game_AdvanceTitleFade(void) { /* func_801D0D94 */
     timer      = *timer_ptr - 1u;
     *timer_ptr = timer;
 
-    if ((s32)(timer << 16) == 0) {
+    if ((timer << 16) == 0) {
         g_UiTitleFadePhase   = 3u;
         g_UiTitleChoicePhase = 1u;
         *timer_ptr           = 900u;
@@ -32,7 +32,7 @@ MATCH void SND_StartTitleBgm(void) { /* func_801D0DF0 */
     timer      = *timer_ptr - 1u;
     *timer_ptr = timer;
 
-    if ((s32)(timer << 0x10) == 0) {
+    if ((timer << 0x10) == 0) {
         UI_SetMode(0);
         SND_StartSelectionEffect();
         g_UiTitleState = g_UiTitleState + 1u;

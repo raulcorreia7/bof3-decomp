@@ -23,10 +23,10 @@ MATCH void func_801E1710(MenuPanelTask* task) {
             shade   = (n == task->unk_0C) * 2;
             ability = (Ability*)&g_Abilities[*list];
             if (n == task->unk_0B || n == task->unk_0C) {
-                func_801AF930((s16)(task->x + 7), (s16)(y + 0x1A), 7, (u8)level, ability, ability->cost, 1);
-                func_801AF930((s16)(task->x + 7), (s16)(y + 0x18), shade, (u8)level, ability, ability->cost, 0);
+                func_801AF930((s16)(task->x + 7), (s16)(y + 0x1A), 7, level, ability, ability->cost, 1);
+                func_801AF930((s16)(task->x + 7), (s16)(y + 0x18), shade, level, ability, ability->cost, 0);
             } else {
-                func_801AF930((s16)(task->x + 7), (s16)(y + 0x1A), 0, (u8)level, ability, ability->cost, 0);
+                func_801AF930((s16)(task->x + 7), (s16)(y + 0x1A), 0, level, ability, ability->cost, 0);
             }
         }
         n++;
@@ -38,7 +38,7 @@ MATCH void func_801E1710(MenuPanelTask* task) {
     if ((u8)name_width >= 6) {
         name_width = 5;
     }
-    UI_DrawText((s16)(task->x - (u32)((u8)name_width * 6 - 72)), (s16)(task->y + 7), 0, 5, record);
+    UI_DrawText((task->x - (u32)((u8)name_width * 6 - 72)), (task->y + 7), 0, 5, record);
     UI_DrawSpriteRun(task->x, task->y, (task->flags & 2) ? D_801E5C90 : (u8*)&D_801E5C78, 1);
     UI_DrawSpriteRun(task->x - 8, task->y, (task->flags & 1) ? D_801E5CB4 : D_801E5CA8, 1);
     flags = task->flags;

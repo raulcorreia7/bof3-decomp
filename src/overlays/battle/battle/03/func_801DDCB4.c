@@ -27,7 +27,7 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
     }
 
     r100 = rand() % 100;
-    if (counter < 3u ? ((s32)s_BattleStatusRecoveryChances[counter] >= r100) : (r100 < 76)) {
+    if (counter < 3u ? (s_BattleStatusRecoveryChances[counter] >= r100) : (r100 < 76)) {
         return 1u;
     }
 
@@ -40,6 +40,6 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
         state       = D_801EB630[enemy_index].stats.resistances[RES_SLOT_STATUS];
     }
 
-    limit = 10000 - (s32)rt[state] * 50;
+    limit = 10000 - rt[state] * 50;
     return (rand() % 10000 <= limit) ? 1u : 0u;
 }

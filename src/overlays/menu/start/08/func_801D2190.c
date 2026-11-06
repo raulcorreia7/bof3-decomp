@@ -10,7 +10,7 @@ MATCH s32 func_801D2190(void) {
     code   = value & 0xF0;
     result = 0;
     /* Code 0xA0 and code 0xAF are walkable. */
-    if ((u32)(u8)(code + 0x60) >= 2U && code != 0xAF) {
+    if ((u8)(code + 0x60) >= 2U && code != 0xAF) {
         result = code != 0x91;
     }
     return result;

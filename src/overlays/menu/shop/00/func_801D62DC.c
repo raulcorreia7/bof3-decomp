@@ -19,7 +19,7 @@ MATCH void func_801D62DC(void) {
         (g_GameAreaId == 191 && g_SceneState.scenario_id == 0xE && SYS_TestFlag(g_SceneFlags[0], 5) != 0)) {
         for (track = 0; track < 4; track++) {
             if (D_801E6100[track] != 0) {
-                SsSepReplay(0, (s16)track);
+                SsSepReplay(0, track);
             }
         }
     } else {

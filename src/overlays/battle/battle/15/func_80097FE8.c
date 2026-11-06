@@ -26,7 +26,7 @@ MATCH void func_80097FE8(void) {
     active_selection_flags              = *(u32*)((active_selection_slot + 0x10));
     VOL(u16, g_BattleChoicePanel[4])    = 0x140u;
     VOL(u16, g_BattleChoicePanel[6])    = 0x3Fu;
-    VOL(u16, g_BattleChoicePanel[0x14]) = (u16)(active_selection_flags & 2u);
+    VOL(u16, g_BattleChoicePanel[0x14]) = (active_selection_flags & 2u);
     D_80148656                          = message_slot[5];
     /* FAKE: alias keeps the work base in the register. */
     MATCH_FAKE_OPAQUE(work);

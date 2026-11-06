@@ -17,7 +17,7 @@ MATCH void func_801DEE64(void) {
                                  g_Characters[id].unk_07 & 2, 0);
         sprintf((char*)g_UiFormatBuffer, D_801D0E60, slot + 1);
         row_y += 0x43;
-        UI_DrawGlyphString(26 - (*counter * 40), (s16)row_y, 0U, g_UiFormatBuffer);
+        UI_DrawGlyphString(26 - (*counter * 40), row_y, 0U, g_UiFormatBuffer);
     }
     /* FAKE: second pointer local for the post-loop use, pure-C best 85.85%. */
     counter_end = &D_80148654;

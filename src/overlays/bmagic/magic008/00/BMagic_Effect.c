@@ -282,7 +282,7 @@ MATCH void func_801F0AC8(void) {
 MATCH void func_801F0B44(void) {
     u16* battle_half;
 
-    if ((u8)g_Task->unk_09 < 0xCU) {
+    if (g_Task->unk_09 < 0xCU) {
         battle_half = (u16*)&g_BattleActionId;
         if (*battle_half != 0xA4) {
             Effect_DrawScreenFade();
