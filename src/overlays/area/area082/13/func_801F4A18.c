@@ -1,6 +1,6 @@
 #include "area082_13.h"
 
-MATCH void func_801F4A18(void) {
+MATCH s32 func_801F4A18(void) {
     s32    x_offset = 0x238000;
     s32    y_offset = 0x1B8000;
     Actor* work     = g_Task;

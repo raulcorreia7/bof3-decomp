@@ -1,6 +1,6 @@
 #include "area068_13.h"
 
-MATCH void func_801F3658(void) {
+MATCH s32 func_801F3658(void) {
     Actor* work;
     u8     step;
 

@@ -1,6 +1,6 @@
 #include "area088_13.h"
 
-MATCH void func_801F2CE4(void) {
+MATCH s32 func_801F2CE4(void) {
     u8  tick;
     s32 x;
 

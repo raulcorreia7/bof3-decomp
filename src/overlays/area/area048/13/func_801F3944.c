@@ -1,6 +1,6 @@
 #include "area048_13.h"
 
-MATCH void func_801F3944(void) {
+MATCH s32 func_801F3944(void) {
     func_801F3AE4(0x400, 0x858000, 0x10);
     func_801F3AE4(0xC00, 0x878000, 0x11);
     g_Task->unk_09 += 1;
