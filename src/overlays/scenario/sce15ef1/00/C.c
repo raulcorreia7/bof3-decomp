@@ -205,6 +205,7 @@ MATCH void func_801D2170(void) {
 
 INCLUDE_ASM(func_801D21B4);
 
+/* needs: image rectangle and buffer declarations; m2c draft does not compile. */
 INCLUDE_ASM(func_801D23A0);
 
 /* needs: camera transform declarations and record types; m2c has no typed draft. */

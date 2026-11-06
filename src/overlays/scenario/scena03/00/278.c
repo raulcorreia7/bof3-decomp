@@ -632,6 +632,7 @@ MATCH s32 func_801FCCDC(void) {
 
 INCLUDE_ASM(func_801FCD1C);
 
+/* needs: declarations D_801FD030 and D_801FD038; m2c draft does not compile. */
 INCLUDE_ASM(func_801FCDB4);
 
 MATCH void func_801FCE18(void) {
