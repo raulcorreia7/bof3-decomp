@@ -20,7 +20,7 @@ NON_MATCHING void func_801DE4C8(void) {
     }
     UI_DrawText(26, 20, 0, 0xFF, resource);
     buttons    = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
-    count      = Party_CountOrder(0);
+    count      = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     prev_side  = D_80148658;
     prev_index = D_80148659;
     if ((buttons & (PADLright | PADLleft)) && D_801E6250 != 0) {

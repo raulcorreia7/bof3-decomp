@@ -27,7 +27,7 @@ NON_MATCHING void func_801EECCC(void) {
     u32 wave;
     u8  facing;
 
-    if (g_BattleTargetSelector & 0x40) {
+    if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
         if (g_BattleActiveBattler >= BATTLE_PARTY_SLOT_COUNT) {
             facing = ((PartyBattler*)D_8014637C)->facing;
             goto have_facing;

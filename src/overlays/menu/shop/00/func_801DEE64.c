@@ -8,7 +8,7 @@ MATCH void func_801DEE64(void) {
     u8* counter;
     u8* counter_end;
 
-    count = Party_CountOrder(0U);
+    count = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     for (slot = 0; slot < count; slot++) {
         counter = &D_80148654;
         row_y   = slot * 0x36;

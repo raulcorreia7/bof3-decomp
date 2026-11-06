@@ -22,7 +22,7 @@ MATCH void func_801D2AC8(void) {
     u8  i;
     s8* panel;
 
-    for (i = 0; i < (Party_CountOrder(0)); i++) {
+    for (i = 0; i < (Party_CountOrder(PARTY_ORDER_KIND_WALKING)); i++) {
         if (i == D_80148656) {
             D_80148333[((i + 4) * 9) << 2]   = 5;
             D_80148333[((i + 0xC) * 9) << 2] = 3;

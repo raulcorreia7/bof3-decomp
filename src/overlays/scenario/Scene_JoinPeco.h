@@ -4,7 +4,7 @@
 /* func_801FDECC (scena09), func_801FAD68 (scena11), func_801FCFD4 (scena12) */
 MATCH void Scene_JoinPeco(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_PECO, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(0);
+    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
     Party_JoinMember(CHAR_ID_PECO);
     func_801C1630();
 }

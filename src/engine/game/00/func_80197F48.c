@@ -9,7 +9,7 @@ MATCH void func_80197F48(void) {
     changed = 0;
     if (g_AreaCameraMoving == 0 && EMI_LoaderIsReady() != 0) {
         g_AreaDrawMode = 6;
-        Party_BuildBattlers(0);
+        Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
         func_801BFB34();
         flags      = &g_BattleOptions;
         D_80143F22 = 0;

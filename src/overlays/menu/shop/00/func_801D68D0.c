@@ -13,7 +13,7 @@ MATCH void func_801D68D0(s32 reset_slots) {
         slot = &g_Characters[id];
         if (reset_slots & BYTE_MASK) {
             slot->fatigue = 0;
-            Char_ClearStatus(id, 0xA0, 0);
+            Char_ClearStatus(id, STATUS_CONFUSED | STATUS_POISONED, 0);
             slot->willpower = slot->stats.willpower;
         }
         slot->inoculations = 0;
@@ -23,7 +23,7 @@ MATCH void func_801D68D0(s32 reset_slots) {
         slot->inoculations = 0;
         slot->hp           = max_hp;
         slot->ap           = max_ap;
-        Char_ClearStatus(id, 0x2000, 0);
+        Char_ClearStatus(id, STATUS_LOW_HP, 0);
         index += 1;
     } while ((index & BYTE_MASK) < 8U);
     if ((SYS_TestFlag((u8*)g_Characters + 0xBE4, 4) != 0) && (SYS_TestFlag((u8*)g_Characters + 0xBE7, 4) == 0) &&

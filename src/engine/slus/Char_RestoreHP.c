@@ -20,7 +20,7 @@ MATCH bool Char_RestoreHP(s32 character_index, s32 amount, s32 use_battle_copy) 
         rec->hp = (u16)limit;
     }
     if (rec->hp >= (u32)(rec->stats.max_hp >> 2)) {
-        Char_ClearStatus(character_index & BYTE_MASK, 0x2000, use_battle_copy & BYTE_MASK);
+        Char_ClearStatus(character_index & BYTE_MASK, STATUS_LOW_HP, use_battle_copy & BYTE_MASK);
     }
     return true;
 }

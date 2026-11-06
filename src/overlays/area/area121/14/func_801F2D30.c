@@ -1,7 +1,7 @@
 #include "area121_14.h"
 
 MATCH void func_801F2D30(void) {
-    g_CurrentActor->interaction_flags &= 0xFE;
+    g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
     g_CurrentActor->unk_77 = 0;
     g_CurrentActor->unk_7E = 0;
     SND_PlayCue(0x217);

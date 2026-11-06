@@ -18,7 +18,7 @@ NON_MATCHING void func_801D20D0(void) {
     g_MenuPanelTasks[20].unk_00[0] = 1;
     D_80148604                     = g_MenuPanelTasks[(s8)*cursor + 3].pos.x.raw;
     D_80148606                     = g_MenuPanelTasks[(s8)*cursor + 3].pos.y.raw;
-    count                          = Party_CountOrder(0);
+    count                          = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     buttons                        = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     old                            = *cursor;
     if (buttons & PADLup) {
@@ -36,7 +36,7 @@ NON_MATCHING void func_801D20D0(void) {
     }
     if (g_InputPressed & D_80145AC2) {
         if ((Item_GetEquipability(g_ShopItemCategory, g_ShopItemId) >> g_CharSlot[D_80144F5A[(s8)*cursor]]) & 1) {
-            for (i = 0; i < (u8)Party_CountOrder(0); i++) {
+            for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_KIND_WALKING); i++) {
                 if (i == (s8)D_80148656) {
                     g_MenuPanelTasks[i + 3].state = 3;
                 } else {

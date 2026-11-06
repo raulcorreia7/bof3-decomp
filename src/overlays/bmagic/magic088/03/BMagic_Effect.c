@@ -52,17 +52,17 @@ MATCH s32 func_801EF34C(void) {
 
     if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) {
         switch (LOHU(g_BattleActionId)) {
-            case 0x5A:
+            case ABILITY_WEAKEN:
             case 0xC0:
                 result = 0;
                 break;
-            case 0x1E:
-            case 0x58:
+            case ABILITY_MOLASSES:
+            case ABILITY_SLOW:
             case 0xBE:
                 result = 1;
                 break;
-            case 0x1F:
-            case 0x59:
+            case ABILITY_TARBABY:
+            case ABILITY_BLUNT:
             case 0xBF:
                 result = 2;
                 break;
@@ -71,7 +71,7 @@ MATCH s32 func_801EF34C(void) {
                 break;
         }
     } else if (LOHU(g_BattleActionId) == 0x112) {
-        g_BattleActionId = 0x5A;
+        g_BattleActionId = ABILITY_WEAKEN;
         result           = 0;
     } else {
         result = 3;

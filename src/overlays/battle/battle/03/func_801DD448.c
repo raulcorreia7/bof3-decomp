@@ -30,7 +30,7 @@ MATCH u8 func_801DD448(void) {
     if (HAS_STATUS(*work, 0x4864u)) {
         return 0u;
     }
-    if ((LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) && (LOHU(g_BattleActionId) == 0xA1u)) {
+    if ((LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) && (LOHU(g_BattleActionId) == ABILITY_TIMED_BLOW)) {
         return 0u;
     }
 

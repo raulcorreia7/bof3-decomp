@@ -63,6 +63,14 @@ typedef enum EquipSlot {
     EQUIP_SLOT_ACCESSORY_2 = 5,
 } EquipSlot;
 
+/* Which party-order array a call reads: the walking order at D_80144F5A or the
+ * battle order at D_80144F5D, three character ids each, 0xFF for an empty
+ * position. Party_CountOrder and Party_BuildBattlers take it as their mode. */
+typedef enum PartyOrderKind {
+    PARTY_ORDER_KIND_WALKING = 0,
+    PARTY_ORDER_KIND_BATTLE  = 1,
+} PartyOrderKind;
+
 /* Playable-character slot: the record's position in the 8-entry base-stat
  * array. Whelp occupies slot 7 but stores 0x0A in its character index field;
  * slot and stored index are different namespaces (@source: wiki:data/records#masks-and-value-ranges). */

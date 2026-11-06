@@ -51,7 +51,7 @@ MATCH u8 func_801DB04C(void) {
         return reserve;
     }
     SND_PlayCue(EMI_CUE_ID(1, 3));
-    for (i = 0; i < Party_CountOrder(0); i++) {
+    for (i = 0; i < Party_CountOrder(PARTY_ORDER_KIND_WALKING); i++) {
         if (D_80144F5A[i] == member) {
             D_80144F5A[i] = reserve;
         }

@@ -36,7 +36,7 @@ MATCH void Game_RunAreaLoadState(void) {
 
     if (LOBU(g_GameRequestFlags) & 1u) {
         g_GameEntryMode = 10u;
-    } else if (LOHU(g_GameAreaId) == 0xBDu) {
+    } else if (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) {
         g_GameEntryMode = 20u;
     } else {
         g_GameEntryMode = 0u;

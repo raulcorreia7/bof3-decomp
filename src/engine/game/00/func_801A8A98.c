@@ -5,7 +5,7 @@ MATCH s32 func_801A8A98(s32 candidate_x, s32 candidate_y) {
     u8* buf;
 
     value = candidate_y;
-    if (LOHU(g_GameAreaId) != 0xBB) {
+    if (LOHU(g_GameAreaId) != AREA_ID_ADULT_CAMP) {
         if ((LOBU(g_GameRequestFlags) == 0x40) && (D_80143F03 == 1) &&
             ((Area_GetCellCode((candidate_x >> 0x10), ((value + 0x8000) >> 0x10)) & BYTE_MASK) == 0xA1) &&
             (value > 0x107FFF)) {
