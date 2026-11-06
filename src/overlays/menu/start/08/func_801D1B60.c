@@ -1,4 +1,5 @@
 #include "start_08.h"
+#include "area/map.h"
 
 MATCH void func_801D1B60(void) {
     u8*  saved_work;
@@ -17,7 +18,8 @@ MATCH void func_801D1B60(void) {
     kind                       = D_801EC38C[(s8)D_80148655];
     TASK_SET(g_BattlePartyBattlers);
     g_MenuPanelTasks[10].unk_10 = (s16)kind;
-    if ((D_8014504A == 0 && ((g_GameRequestFlags & 1) || g_GameAreaId == 189) && (func_801B6470(kind) & BYTE_MASK)) ||
+    if ((D_8014504A == 0 && ((g_GameRequestFlags & 1) || g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP) &&
+         (func_801B6470(kind) & BYTE_MASK)) ||
         (D_8014504A != 0 && (func_801D2190() & BYTE_MASK))) {
         g_MenuPanelTasks[9].unk_0C = 0;
     } else {

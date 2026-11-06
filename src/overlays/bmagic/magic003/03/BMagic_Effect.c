@@ -77,7 +77,7 @@ MATCH void func_801EF268(void) {
     SND_QueueSelectionFx(258);
     D_801463D6 = g_Task->timer;
     func_800A9820(g_BattleTargetSelector);
-    g_BattleState = g_BattleState | 4;
+    g_BattleState = g_BattleState | BATTLE_STATE_EFFECT_PLAYING;
     func_801E5988();
 }
 
