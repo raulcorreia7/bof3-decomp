@@ -31,7 +31,7 @@ MATCH void func_801EF208(void) {
 
 MATCH void func_801EF260(void) {
     if ((u8)g_Task->unk_09 < 0xCU) {
-        func_801EF348();
+        Effect_DrawScreenFade();
         g_Task->unk_09 += 4;
         return;
     }
@@ -49,7 +49,7 @@ MATCH void func_801EF328(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801EF348);
+#include "overlays/bmagic/Effect_DrawScreenFade.h"
 
 MATCH void func_801EF534(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, g_Task);

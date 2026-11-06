@@ -20,7 +20,7 @@ MATCH void func_801EEF5C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF00C);
+#include "overlays/bmagic/Effect_BrightenPalette.h"
 
 /* func_801EF11C */
 #include "overlays/bmagic/Effect_NextStep.h"
