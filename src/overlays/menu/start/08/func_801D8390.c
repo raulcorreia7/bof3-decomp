@@ -19,30 +19,30 @@ NON_MATCHING void func_801D8390(void) {
     u8   count;
 
     Menu_DrawClutStrip(D_80144953);
-    panel                 = &D_801484CC;
-    *panel                = 0x17;
-    *((u8*)panel + 0x110) = 1;
-    D_801485E7            = 1;
-    D_80148624            = 1;
-    slot                  = (u8*)panel + 0xA4;
-    D_801485E0            = D_801483C4;
-    D_801485E2            = D_801483C6 + D_8014857A * 0x36;
-    D_80148628            = D_80148574 + 0x2A;
-    D_8014862A            = D_80148576 + 7;
-    pad                   = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
-    D_8014857D            = 0xFF;
-    count                 = Party_CountOrder(0);
+    panel                       = &D_801484CC;
+    *panel                      = 0x17;
+    *((u8*)panel + 0x110)       = 1;
+    g_MenuPanelTasks[19].unk_0B = 1;
+    g_MenuPanelTasks[21].active = 1;
+    slot                        = (u8*)panel + 0xA4;
+    D_801485E0                  = g_MenuPanelTasks[4].x;
+    D_801485E2                  = g_MenuPanelTasks[4].y + g_MenuPanelTasks[16].unk_0A * 0x36;
+    g_MenuPanelTasks[21].x      = g_MenuPanelTasks[16].x + 0x2A;
+    g_MenuPanelTasks[21].y      = g_MenuPanelTasks[16].y + 7;
+    pad                         = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    g_MenuPanelTasks[16].flags  = 0xFF;
+    count                       = Party_CountOrder(0);
     if (pad & PADLup) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
-        D_8014857A -= 1;
-        if ((s8)D_8014857A < 0) {
-            D_8014857A = count - 1;
+        g_MenuPanelTasks[16].unk_0A -= 1;
+        if ((s8)g_MenuPanelTasks[16].unk_0A < 0) {
+            g_MenuPanelTasks[16].unk_0A = count - 1;
         }
     } else if (pad & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
-        D_8014857A += 1;
-        if ((s32)(count & BYTE_MASK) - 1 < (s32)(u8)D_8014857A) {
-            D_8014857A = 0;
+        g_MenuPanelTasks[16].unk_0A += 1;
+        if ((s32)(count & BYTE_MASK) - 1 < (s32)(u8)g_MenuPanelTasks[16].unk_0A) {
+            g_MenuPanelTasks[16].unk_0A = 0;
         }
     }
     if (pad & PADLleft) {
@@ -63,15 +63,15 @@ NON_MATCHING void func_801D8390(void) {
     D_80148656 = slot[0xA];
     if (g_InputPressed & D_80145AC2) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
-        state           = &D_801485DC;
-        *state          = 0;
-        D_801485B9      = 6;
-        D_801485BA      = 0xF;
-        state[-0x24]    = 1;
-        D_801485BC      = 0x28;
-        D_801485BE      = 0x3C;
-        g_BattleItemRow = (D_8014857B == 3) ? 6 : 5;
-        D_801485C3      = 0;
+        state                       = &D_801485DC;
+        *state                      = 0;
+        g_MenuPanelTasks[18].unk_01 = 6;
+        g_MenuPanelTasks[18].unk_02 = 0xF;
+        state[-0x24]                = 1;
+        g_MenuPanelTasks[18].x      = 0x28;
+        g_MenuPanelTasks[18].y      = 0x3C;
+        g_BattleItemRow             = (g_MenuPanelTasks[16].unk_0B == 3) ? 6 : 5;
+        g_MenuPanelTasks[18].unk_0B = 0;
         D_80148652 += 1;
     } else if (g_InputPressed & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));

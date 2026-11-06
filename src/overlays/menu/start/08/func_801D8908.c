@@ -19,18 +19,18 @@ MATCH void func_801D8908(void) {
     u8*         flag;
 
     Menu_DrawClutStrip(D_80144953);
-    flag       = &D_801485C4;
-    *flag      = 0;
-    D_80148624 = 1;
-    D_80148628 = D_80148574 + 7;
-    D_8014862A = D_80148576 + ((D_8014857C * 0xD) + 0x1A);
-    rec        = (SkillOrder*)((u8*)flag - DECOMP_OFFSETOF(SkillOrder, unk_54));
-    index      = Party_GetAbilities(D_8014857A, D_8014857B, 0);
-    pick       = index + D_8014857C;
-    kind       = *pick;
-    D_801484CC = *(u16*)(D_801CA71E + kind * START08_KIND_STRIDE);
-    buttons    = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
-    value      = D_8014857C;
+    flag                        = &D_801485C4;
+    *flag                       = 0;
+    g_MenuPanelTasks[21].active = 1;
+    g_MenuPanelTasks[21].x      = g_MenuPanelTasks[16].x + 7;
+    g_MenuPanelTasks[21].y      = g_MenuPanelTasks[16].y + ((g_MenuPanelTasks[16].unk_0C * 0xD) + 0x1A);
+    rec                         = (SkillOrder*)((u8*)flag - DECOMP_OFFSETOF(SkillOrder, unk_54));
+    index                       = Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0);
+    pick                        = index + g_MenuPanelTasks[16].unk_0C;
+    kind                        = *pick;
+    g_MenuPanelTasks[11].unk_10 = *(u16*)(D_801CA71E + kind * START08_KIND_STRIDE);
+    buttons                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
+    value                       = g_MenuPanelTasks[16].unk_0C;
     if (buttons & PADLup) {
         if (value != 0) {
             next       = value - 1;
@@ -41,8 +41,8 @@ MATCH void func_801D8908(void) {
         D_8014857C = next;
     }
     table  = s_SkillOrderCursors[D_80148656];
-    entry  = table + D_8014857B;
-    *entry = D_8014857C;
+    entry  = table + g_MenuPanelTasks[16].unk_0B;
+    *entry = g_MenuPanelTasks[16].unk_0C;
     if (value != rec->cursor) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }

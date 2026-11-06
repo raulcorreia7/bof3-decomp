@@ -23,22 +23,22 @@ NON_MATCHING void func_801DA474(void) {
     val4 = &D_80144953;
     val4 = &D_80144953;
     Menu_DrawClutStrip(*val4);
-    flag       = &D_801485DC;
-    *flag      = 0;
-    D_80148600 = 0;
-    tmp1       = (D_80148658 * 8) + (D_80148659 * 0x10);
-    D_801485E0 = FIELD(u16, &D_801EC548, tmp1);
-    D_801485E2 = FIELD(u16, &D_801EC54A, tmp1);
-    *flag      = 1;
-    D_801485E7 = 1;
-    D_801485E6 = FIELD(s32, &D_801EC54C, tmp1);
+    flag                        = &D_801485DC;
+    *flag                       = 0;
+    g_MenuPanelTasks[20].active = 0;
+    tmp1                        = (D_80148658 * 8) + (D_80148659 * 0x10);
+    D_801485E0                  = FIELD(u16, &D_801EC548, tmp1);
+    D_801485E2                  = FIELD(u16, &D_801EC54A, tmp1);
+    *flag                       = 1;
+    g_MenuPanelTasks[19].unk_0B = 1;
+    g_MenuPanelTasks[19].unk_0A = FIELD(s32, &D_801EC54C, tmp1);
     if ((s8)D_8014865D != 0x7F) {
-        tmp0       = ((s8)D_8014865A * 8) + ((s8)D_8014865D * 0x10);
-        D_80148604 = FIELD(u16, &D_801EC548, tmp0);
-        D_80148600 = 1;
-        D_80148606 = FIELD(u16, &D_801EC54A, tmp0);
-        D_8014860B = 0;
-        D_8014860A = FIELD(s32, &D_801EC54C, tmp0);
+        tmp0                        = ((s8)D_8014865A * 8) + ((s8)D_8014865D * 0x10);
+        g_MenuPanelTasks[20].x      = FIELD(u16, &D_801EC548, tmp0);
+        g_MenuPanelTasks[20].active = 1;
+        g_MenuPanelTasks[20].y      = FIELD(u16, &D_801EC54A, tmp0);
+        g_MenuPanelTasks[20].unk_0B = 0;
+        g_MenuPanelTasks[20].unk_0A = FIELD(s32, &D_801EC54C, tmp0);
     }
     if (D_801ED69C == GAME_NONE) {
         val1 = 0x60;
@@ -46,10 +46,10 @@ NON_MATCHING void func_801DA474(void) {
         TEXT_SetVariable(0U, 5U, (g_CharSlot[D_801ED69C] * 0xA4) + (&D_80144953 + 0x15));
         val1 = 0x61;
     }
-    D_801484CC = val1;
-    input_bits = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
-    tmp4       = Party_CountOrder(0U);
-    if ((input_bits & (PADLright | PADLleft)) && (D_801484EA != 0)) {
+    g_MenuPanelTasks[11].unk_10 = val1;
+    input_bits                  = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    tmp4                        = Party_CountOrder(0U);
+    if ((input_bits & (PADLright | PADLleft)) && (g_MenuPanelTasks[12].unk_0A != 0)) {
         D_80148658 = (u8)D_80148658 ^ 1;
     }
     if (D_80148658 == 0) {
@@ -58,8 +58,8 @@ NON_MATCHING void func_801DA474(void) {
             goto block_12; /* retail branch */
         }
     } else {
-        val2 = D_801484EA - 1;
-        if ((D_801484EA - 1) < D_80148659) {
+        val2 = g_MenuPanelTasks[12].unk_0A - 1;
+        if ((g_MenuPanelTasks[12].unk_0A - 1) < D_80148659) {
         block_12:
             D_80148659 = val2;
         }
@@ -70,7 +70,7 @@ NON_MATCHING void func_801DA474(void) {
         if (tmp2 & 0x80) {
             val3 = tmp4 - 1;
             if (D_80148658 != 0) {
-                val3 = D_801484EA - 1;
+                val3 = g_MenuPanelTasks[12].unk_0A - 1;
             }
             D_80148659 = val3;
         }
@@ -81,7 +81,7 @@ NON_MATCHING void func_801DA474(void) {
             if (((tmp4 & BYTE_MASK) - 1) < tmp3) {
                 goto block_23; /* retail branch */
             }
-        } else if ((D_801484EA - 1) < tmp3) {
+        } else if ((g_MenuPanelTasks[12].unk_0A - 1) < tmp3) {
         block_23:
             D_80148659 = 0;
         }
@@ -116,10 +116,10 @@ NON_MATCHING void func_801DA474(void) {
             D_8014865D = 0x7F;
             return;
         }
-        D_80148654 = 5;
-        D_801485DC = 0;
-        D_80148600 = 0;
-        D_801484E3 = 1;
+        D_80148654                  = 5;
+        D_801485DC                  = 0;
+        g_MenuPanelTasks[20].active = 0;
+        g_MenuPanelTasks[12].state  = 1;
         D_80148652 += 1;
     }
 }

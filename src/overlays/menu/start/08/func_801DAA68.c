@@ -16,13 +16,13 @@ NON_MATCHING void func_801DAA68(void) {
     i      = 0;
     record++;
     record--;
-    D_801484BD = 6;
-    D_801484BE = 9;
-    D_801484BF = 2;
-    record[0]  = 1;
-    D_801484C0 = 0x14;
-    D_801484C2 = 0x10;
-    D_801484CC = 0;
+    g_MenuPanelTasks[11].unk_01 = 6;
+    g_MenuPanelTasks[11].unk_02 = 9;
+    g_MenuPanelTasks[11].state  = 2;
+    record[0]                   = 1;
+    g_MenuPanelTasks[11].x      = 0x14;
+    g_MenuPanelTasks[11].y      = 0x10;
+    g_MenuPanelTasks[11].unk_10 = 0;
     for (i = 0; i < 2; i++) {
         rows[i].unk_00[1] = 6;
         rows[i].unk_00[2] = 0xA;

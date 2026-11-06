@@ -7,15 +7,15 @@ MATCH void func_801D2EAC(void) {
     u8  cursor;
 
     Menu_DrawClutStrip(D_80144953);
-    D_80148504.kind         = 0;
-    D_80148504.group_cursor = 0xFF;
-    D_80148624              = 1;
-    D_801484EB              = 0xFF;
-    D_801484CC              = D_801ED618 + 0x13;
-    D_80148628              = D_801484E4 + D_801ED618 * 0x30;
-    D_8014862A              = D_801484E6 + 4;
-    pad                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
-    cursor                  = D_801ED618;
+    D_80148504.kind             = 0;
+    D_80148504.group_cursor     = 0xFF;
+    g_MenuPanelTasks[21].active = 1;
+    g_MenuPanelTasks[12].unk_0B = 0xFF;
+    g_MenuPanelTasks[11].unk_10 = D_801ED618 + 0x13;
+    g_MenuPanelTasks[21].x      = g_MenuPanelTasks[12].x + D_801ED618 * 0x30;
+    g_MenuPanelTasks[21].y      = g_MenuPanelTasks[12].y + 4;
+    pad                         = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    cursor                      = D_801ED618;
     if (pad & PADLleft) {
         D_801ED618--;
         if (D_801ED618 < 0) {
@@ -32,7 +32,7 @@ MATCH void func_801D2EAC(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if (g_InputPressed & D_80145AC2) {
-        D_801484EB = D_801ED618;
+        g_MenuPanelTasks[12].unk_0B = D_801ED618;
         SND_PlayCue(EMI_CUE_ID(1, 4));
         if (D_801ED618 == 1) {
             u8* step = &D_80148651;
@@ -69,10 +69,10 @@ MATCH void func_801D2EAC(void) {
     if (g_InputPressed & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         SND_PlayCue(EMI_CUE_ID(1, 2));
-        D_801484BF = 1;
-        D_801484E3 = 1;
-        D_80148507 = 1;
-        D_80148624 = 0;
+        g_MenuPanelTasks[11].state  = 1;
+        g_MenuPanelTasks[12].state  = 1;
+        g_MenuPanelTasks[13].state  = 1;
+        g_MenuPanelTasks[21].active = 0;
         {
             u8* value = &D_80148654;
 

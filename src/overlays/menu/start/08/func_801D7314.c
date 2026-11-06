@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-/* The header spells D_80148628 a plain s16; this unit keeps the volatile
+/* The header spells g_MenuPanelTasks[21].x a plain s16; this unit keeps the volatile
  * qualifier because the two adjacent halfword stores then keep the retail's
  * order and its measured bytes (58.33% against 57.74% without it). */
 extern volatile s16 D_80148628;
@@ -19,17 +19,17 @@ NON_MATCHING void func_801D7314(void) {
     u8  tmp5;
 
     Menu_DrawClutStrip(D_80144953);
-    D_80148578 = 0;
-    tmp1       = *(&D_801EC488 + ((s8)D_801ED648 * 4));
-    D_80148624 = 1;
-    tmp0       = (u16)D_801484E6 + 4;
-    D_80148628 = (u16)D_801484E4 + ((s8)D_801ED648 * 0x30);
-    D_8014862A = tmp0;
-    D_801484EB = 0xFF;
-    D_801484CC = (s16)tmp1;
-    tmp2       = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
-    tmp3       = D_801ED648;
-    tmp4       = tmp3 - 1;
+    g_MenuPanelTasks[16].unk_08 = 0;
+    tmp1                        = *(&D_801EC488 + ((s8)D_801ED648 * 4));
+    g_MenuPanelTasks[21].active = 1;
+    tmp0                        = (u16)g_MenuPanelTasks[12].y + 4;
+    g_MenuPanelTasks[21].x      = (u16)g_MenuPanelTasks[12].x + ((s8)D_801ED648 * 0x30);
+    g_MenuPanelTasks[21].y      = tmp0;
+    g_MenuPanelTasks[12].unk_0B = 0xFF;
+    g_MenuPanelTasks[11].unk_10 = (s16)tmp1;
+    tmp2                        = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    tmp3                        = D_801ED648;
+    tmp4                        = tmp3 - 1;
     if (tmp2 & PADLleft) {
         D_801ED648 = tmp4;
         val0       = tmp2 & PADLright;
@@ -54,7 +54,7 @@ NON_MATCHING void func_801D7314(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if (D_80145AC2 & g_InputPressed) {
-        D_801484EB = D_801ED648;
+        g_MenuPanelTasks[12].unk_0B = D_801ED648;
         SND_PlayCue(EMI_CUE_ID(1, 4));
         switch ((s8)D_801ED648) { /* irregular */
             case 1:
@@ -68,7 +68,7 @@ NON_MATCHING void func_801D7314(void) {
                 D_80148651 += 7;
                 return;
             case 2:
-                D_8014857B = 3;
+                g_MenuPanelTasks[16].unk_0B = 3;
                 /* fallthrough */
             default:
                 D_80148651 += 1;
@@ -77,11 +77,11 @@ NON_MATCHING void func_801D7314(void) {
     } else if (D_80145AC4 & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        D_801484BF          = 1;
-        D_801484E3          = 1;
-        g_BattleChoicePhase = 1;
-        D_80148624          = 0;
-        D_80148654          = 5;
+        g_MenuPanelTasks[11].state  = 1;
+        g_MenuPanelTasks[12].state  = 1;
+        g_BattleChoicePhase         = 1;
+        g_MenuPanelTasks[21].active = 0;
+        D_80148654                  = 5;
         D_80148651 += 6;
     }
 }

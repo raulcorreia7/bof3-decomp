@@ -25,10 +25,10 @@ MATCH void func_801D2564(void) {
     MATCH_FAKE_BARRIER();
     D_801485E2 = g_MenuPanelTasks[selection_index + 4].y;
     TEXT_SetVariable(0U, 5U, g_CharSlot[D_80144F5A[selection_index]] * 0xA4 + panel_data);
-    D_801484CC    = 0x12;
-    input         = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
-    count         = Party_CountOrder(0U);
-    old_selection = *selection;
+    g_MenuPanelTasks[11].unk_10 = 0x12;
+    input                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    count                       = Party_CountOrder(0U);
+    old_selection               = *selection;
     if ((input & PADLup) != 0) {
         new_selection = old_selection - 1;
         *selection    = new_selection;
@@ -68,9 +68,9 @@ MATCH void func_801D2564(void) {
             g_MenuPanelTasks[i + 12].state = 1;
             i++;
         }
-        D_801484BF = 1;
-        D_801485DC = 0;
-        D_80148654 = 8;
+        g_MenuPanelTasks[11].state = 1;
+        D_801485DC                 = 0;
+        D_80148654                 = 8;
         D_80148651 += 2;
     }
 }

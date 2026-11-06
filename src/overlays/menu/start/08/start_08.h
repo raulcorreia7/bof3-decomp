@@ -86,11 +86,8 @@ extern u8              D_80144F57;
 extern u16             D_80145594[];
 extern s16             D_80145ABE;
 extern u8              D_80145FCC[][BATTLE_PARTY_STRIDE];
-extern u8              D_80148477;
 extern u8              D_80148480;
-extern s16             D_80148484;
 extern u8              D_8014849B;
-extern s16             D_801484A8;
 extern s8              D_801484BD;
 extern s8              D_801484BE;
 extern s8              D_801484BF;
@@ -108,28 +105,12 @@ extern u8              D_801484EB;
  * their own symbols below; each is the cell the shared record names. */
 extern u8*             D_80148500;
 extern MenuChoicePanel D_80148504;
-extern s8              D_80148505;
-extern s8              D_80148506;
-extern s8              D_80148507;
 extern s16             D_80148508; /* signed scalar view of the panel's x */
-extern s16             D_8014850A; /* signed scalar view of the panel's y */
 extern u8              D_8014850E; /* the panel's group */
 extern u8              D_8014850F; /* the panel's group first entry */
 extern u8              D_80148510; /* the panel's group cursor */
 extern s8              D_80148511; /* signed scalar view of the panel's drawn cursor */
-extern s16             D_80148514;
-extern s16             D_80148516;
 extern u8*             D_80148524;
-extern u8              D_80148528;
-extern s8              D_80148529;
-extern s8              D_8014852A;
-extern s16             D_8014852C;
-extern s16             D_8014852E;
-extern u8              D_80148530;
-extern u8              D_80148532;
-extern s8              D_80148533;
-extern u8              D_80148534;
-extern u8              D_80148535;
 extern s8              D_8014854D;
 extern s8              D_8014854E;
 extern s8              D_8014854F;
@@ -561,7 +542,6 @@ static inline void MenuAdvancePanelYField6(void) {
 
 s32              Char_GetExpForLevel(s32 character, s32 level);
 extern s8        D_8014850C;
-extern s8        D_8014850D;
 extern u8        D_801485B9;
 extern u8        D_801485BA;
 extern s8        D_80148659;
