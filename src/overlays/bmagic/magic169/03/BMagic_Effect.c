@@ -48,8 +48,8 @@ MATCH void func_801EF444(void) {
     work->unk_09 = timer;
     battler      = &g_BattlePartyBattlers[work->unk_04];
     if (!(timer & BYTE_MASK)) {
-        func_80196718(battler);
-        g_Task->timer  = func_8019651C(battler, 0, 0, 0, 1);
+        GFX_FreePaletteFadeTarget(battler);
+        g_Task->timer  = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
         g_Task->unk_09 = 8;
         g_Task->header.step += 1;
     }

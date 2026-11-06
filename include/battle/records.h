@@ -616,4 +616,16 @@ extern PartyBattler    g_BattlePartyBattlers[3];
 /* The mode byte of each 0x24-byte owner record; the kind byte sits at +0x07. */
 extern u8              D_80148333[];
 extern BattleOwnerKind D_8014833A[];
+
+typedef struct BattleRange {
+    u8  unk_00[0x34];
+    u32 range_axis_34;
+    u32 range_axis_38;
+    u8  pad_3C[2]; /* 0x3C */
+    u16 unk3E;     /* 0x3E */
+} BattleRange;
+
+ASSERT_OFFSET(BattleRange, unk3E, 0x3E);
+ASSERT_SIZE(BattleRange, 0x40);
+
 #endif

@@ -32,8 +32,8 @@ MATCH void func_801EF078(void) {
     g_Task->unk_09 = timer;
     if (timer == 0x10) {
         actor = &g_BattleSelectedActor;
-        func_80196718(*actor);
-        func_8019651C(*actor, -8, -8, -8, 1);
+        GFX_FreePaletteFadeTarget(*actor);
+        GFX_AllocPaletteFade(*actor, -8, -8, -8, 1);
         func_800A9820(g_BattleTargetSelector);
         g_Task->header.step += 1;
     }
@@ -49,7 +49,7 @@ MATCH void func_801EF154(void) {
         g_Task->unk_09 = count - 1;
     }
     if (g_Task->unk_0B == 0x80) {
-        func_80196718(g_BattleSelectedActor);
+        GFX_FreePaletteFadeTarget(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
         BATTLE_ACTIVE_WORK->unk_0B -= 1;
         func_801E5988();

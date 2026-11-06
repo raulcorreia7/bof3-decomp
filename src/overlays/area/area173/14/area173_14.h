@@ -26,4 +26,6 @@ extern PartyMemberMessages g_PartyMemberMessages[2];
 void func_801F3954(s32 arg0);
 void func_801F3FBC(s32 mode, s32 value);
 
+void func_801F3060(s32 arg0, s32 arg1);
+
 #endif

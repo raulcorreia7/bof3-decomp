@@ -7,8 +7,6 @@
 #include "overlays/area/world01.h"
 #include "overlays/scenario/scenario.h"
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 /* The work-window byte offset and row stride this overlay scans. */
 #define SCRATCH_ROW_OFFSET 0x00
 #define SCRATCH_ROW_STRIDE 0x28
@@ -21,5 +19,8 @@ extern Callback D_801181B4[];
 
 s32  func_80117410();
 void func_80117900(void);
+
+void func_801172D0(void);
+void func_80117E78(s32 arg0, s32 arg1);
 
 #endif

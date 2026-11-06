@@ -33,4 +33,7 @@ extern void func_801F4B0C(void);
 
 extern void func_801F4C68(void);
 
+void func_801F2E5C(void);
+void func_801F3378(s32 arg0);
+
 #endif

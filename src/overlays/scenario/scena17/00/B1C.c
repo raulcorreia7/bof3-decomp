@@ -18,7 +18,7 @@ MATCH void func_801F7750(void) {
     GFX_ResetPalette();
     g_GfxPalettePending = 1;
     g_AreaDrawFlags     = 0x1F;
-    func_8019FA28(0xC7, 0xB60000, 0x128000, 7);
+    Game_RequestAreaChange(0xC7, 0xB60000, 0x128000, 7);
     g_ScriptVarsReq.word = 0;
     D_80146872           = 1;
 }

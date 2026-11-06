@@ -90,4 +90,9 @@ void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_st
 
 void func_801D73B4(MenuListPanel* panel);
 
+s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
+
+void func_801D2304(s32 arg0, s32 arg1);
+void func_801D259C(void);
+
 #endif

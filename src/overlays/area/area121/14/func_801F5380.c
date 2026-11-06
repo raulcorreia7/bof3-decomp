@@ -9,7 +9,7 @@ MATCH void func_801F5380(void) {
     func_801C2BEC();
     if (g_GameRequestFlags & 1) {
         if ((Area_GetCellCode((s32)COORD_INT(g_Task->x), (s32)COORD_INT(g_Task->y)) & 0xFF) == 0xAF) {
-            func_8019FA28(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
+            Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
             g_GameEntryMode   = 0;
             g_GameRequestKind = 0xC;
             return;
@@ -24,7 +24,7 @@ MATCH void func_801F5380(void) {
     if ((value3 == 2) || (value3 == 6)) {
         D_80143F22 = value2 + 2;
     }
-    Actor_StopMoving(value2);
+    Actor_StopMoving();
     if (func_801A79A4(g_Task->x.fixed, g_Task->y.fixed) == 0) {
         func_801C329C();
         if (!(g_GameFlags & 0x100) && !(g_AreaWalkFlags & 0x40)) {

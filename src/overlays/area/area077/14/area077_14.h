@@ -37,4 +37,6 @@ extern void func_801F54B8(void);
 
 void func_801F61F0(s32 type);
 
+void func_801F3198(u8 blend_mode);
+
 #endif

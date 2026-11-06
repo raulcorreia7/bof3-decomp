@@ -9,6 +9,6 @@ MATCH void func_801F2E50(void) {
     work->unk_0B -= 2;
     work->z.fixed += 1;
     if (g_Task->z.fixed >= -0xBF) {
-        func_80196070(g_Task);
+        Actor_Clear();
     }
 }

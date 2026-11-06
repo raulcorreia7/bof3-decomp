@@ -11,7 +11,6 @@ extern Callback     D_801F048C[];
 extern BattleEffect D_801F04A4[];
 #define BMAGIC_EFFECT_SLOTS D_801F04A4
 #define BMAGIC_EFFECT_COUNT 64
-void func_800AF764(void);
 void func_801EF698(void);
 
 #endif

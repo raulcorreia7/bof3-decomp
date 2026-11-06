@@ -15,6 +15,4 @@ extern BattleHandlerTable3 D_801EEC4C;
 extern BattleHandlerTable4 D_801EEC84;
 extern BmagicEffectFuncs   D_801EEC94;
 
-u8 func_800AFF98();
-
 #endif

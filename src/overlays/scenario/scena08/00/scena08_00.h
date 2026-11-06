@@ -41,4 +41,6 @@ extern u16       D_801FE9EC[];
 
 void func_801FE800(void);
 
+void func_801F8964(s32 arg0);
+
 #endif

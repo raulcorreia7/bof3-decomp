@@ -36,4 +36,6 @@ u8   func_800C2138(u32 mode);
 void func_800C2348(void);
 void func_800C243C(void);
 
+void func_801C1254(s32 ability_id, s32 party_slot);
+
 #endif

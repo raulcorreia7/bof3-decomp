@@ -84,7 +84,7 @@ MATCH void func_801EF540(void) {
     g_Task->unk_0C = temp_a0;
     g_Task->pos.x.fixed += (rsin(temp_a0) * 0x7000) >> 0xC;
     g_Task->pos.y.fixed += (rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
-    func_800AF764(g_Task);
+    func_800AF764();
     func_801EF7E8();
     temp_v0_2      = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v0_2;
@@ -104,7 +104,7 @@ MATCH void func_801EF660(void) {
     g_Task->unk_0C = temp_a0;
     g_Task->pos.x.fixed += (rsin(temp_a0) * 0x7000) >> 0xC;
     g_Task->pos.y.fixed += (rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
-    func_800AF764(g_Task);
+    func_800AF764();
     func_801EF7E8();
     g_Task->unk_09 += 1;
     temp_v0_2     = g_Task->timer - 1;

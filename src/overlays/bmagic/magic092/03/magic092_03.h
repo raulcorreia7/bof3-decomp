@@ -6,7 +6,6 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern Callback D_801F07C0[];
-void            func_800AF764(void);
 void            func_801EFB04(void);
 
 extern Callback     D_801F07D8[];

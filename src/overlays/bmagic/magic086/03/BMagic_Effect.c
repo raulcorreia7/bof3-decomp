@@ -13,8 +13,8 @@ MATCH void func_801EEE44(void) {
 
     battler = g_BattleSelectedActor;
     if (g_Task->unk_0B == 1) {
-        func_80196718(battler);
-        g_Task->timer  = func_8019651C(battler, 1, 1, 1, 0);
+        GFX_FreePaletteFadeTarget(battler);
+        g_Task->timer  = GFX_AllocPaletteFade(battler, 1, 1, 1, 0);
         g_Task->unk_09 = 0x10;
         g_Task->header.mode += 1;
     }

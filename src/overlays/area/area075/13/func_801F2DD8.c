@@ -7,7 +7,7 @@ MATCH void func_801F2DD8(void) {
     g_Task->tint.bytes.unk_5D = tint;
     /* FAKE: the shift preserves the retail zero test. */
     if ((tint << 24) == 0) {
-        func_80196070();
+        Actor_Clear();
     }
     if (!(g_Task->tint.bytes.unk_5D & 0x1F)) {
         g_Task->unk_06 += 1;

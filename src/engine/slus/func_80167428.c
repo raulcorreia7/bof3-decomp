@@ -1,7 +1,5 @@
 #include "engine/slus/slus.h"
 
-extern void func_801C24D0(s32 arg0, s32 arg1, void* arg2);
-
 /* lifted draft, best score 39.27%; semantics unverified
  */
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 39.27%. resume: a lever or header fix that
@@ -115,7 +113,7 @@ NON_MATCHING void func_80167428(void) {
                 val5 = 3;
             }
             g_GameState->counter_11C = val5;
-            func_801C24D0(val0, tmp2, tmp8);
+            func_801C24D0();
             func_801C4C48();
             tmp11                  = g_Task;
             FIELD(u8, tmp11, 0x9u) = (u8)(FIELD(u8, tmp11, 0x9u) - 1);

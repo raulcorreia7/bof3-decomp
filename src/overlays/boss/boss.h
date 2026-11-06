@@ -7,6 +7,7 @@
 #include "game.h"
 #include "work/actor.h"
 #include "sys/exe.h"
+#include "battle/functions.h"
 #include <memory.h>
 
 /* A boss module's head. The rest of the head is the per-boss callback block

@@ -177,8 +177,8 @@ MATCH void func_801F082C(void) {
     PartyBattler** actor;
 
     actor = &g_BattleSelectedActor;
-    func_80196718(*actor);
-    g_Task->unk_0B = func_8019651C(*actor, 0, 0, 0, 1);
+    GFX_FreePaletteFadeTarget(*actor);
+    g_Task->unk_0B = GFX_AllocPaletteFade(*actor, 0, 0, 0, 1);
     g_Task->unk_09 = 0;
     g_Task->header.step += 1;
 }

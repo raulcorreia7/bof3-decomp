@@ -20,7 +20,7 @@ MATCH void func_801F3700(void) {
     }
     next = g_Task->unk_09;
     if (next == 0) {
-        func_80196070();
+        Actor_Clear();
         return;
     }
     g_Task->unk_09 = next - 1;

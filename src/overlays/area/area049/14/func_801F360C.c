@@ -13,8 +13,8 @@ MATCH void func_801F360C(void) {
         }
         SND_PlayCue(0x209U);
         g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
-        func_801A4BC0(0xB, 0x55, 0xC0);
-        func_801A4BC0(0xC, 0x55, 0xC0);
+        Area_SetCellCode(0xB, 0x55, 0xC0);
+        Area_SetCellCode(0xC, 0x55, 0xC0);
         D_80146874    = 4;
         *g_ScriptVars = 0;
         D_80146875    = 0x1E;

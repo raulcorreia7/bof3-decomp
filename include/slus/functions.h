@@ -151,6 +151,8 @@ void         func_80153DE8(void);
 extern void  Area_RefreshCellGrid(void);
 /* func_8015477C */
 s16          Area_SampleHeight(s32 x, s32 y);
+/* func_80154ABC */
+s16          func_80154ABC(s32 x, s32 y, u8 mode);
 /* func_80154ED0 */
 extern void  Area_EnableHeightOffset(void);
 /* func_80154F28 */
@@ -217,6 +219,8 @@ void         Area_RunParty(void);
 void         func_8015B410(void* matrix);
 void         func_8015B4B0(void* matrix);
 s8           func_8015B4F4(s32 code);
+/* func_8015A944 */
+void         func_8015A944(void);
 /* func_8015B580 */
 void         SYS_SetFlag(void* bits, u8 bit_index);
 /* func_8015B5A8 */
@@ -317,6 +321,8 @@ void        EMI_OnCDReady(u8 status, u8* result);
 void        EMI_LoaderCopySector(void);
 /* func_80162CD8 */
 void        EMI_LoaderEndStream(void);
+/* func_80162D00 */
+s32         EMI_LoaderIsReady(void);
 /* func_80162D18 */
 void        EMI_LoaderRunCD(void);
 /* func_80162D9C */
@@ -420,6 +426,8 @@ u32         Item_GetFlags(u32 category, u32 item);
 s32         Char_GetAbilityElement(s32 ability_id);
 /* func_80166140 */
 bool        Item_VitalHas(s32 item_id);
+/* func_80166180 */
+s32         Item_VitalAdd(u8 item_id);
 /* func_8016620C */
 void        TEXT_SetVariable(u8 slot, u8 length, const u8* text);
 /* func_80166438 */

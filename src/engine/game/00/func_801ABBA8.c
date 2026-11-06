@@ -24,7 +24,7 @@ MATCH void func_801ABBA8(void* sub, s32 route) {
     pos_x          = g_Task->x.fixed + g_Task->vx * g_Task->unk_09;
     pos_y          = g_Task->y.fixed + high * g_Task->unk_09;
     if ((((u8*)sub)[0] & 0x80) == 0) {
-        result = func_80154ABC(pos_x, pos_y, slot, sub);
+        result = func_80154ABC(pos_x, pos_y, slot);
         if (SP_REF(volatile u8, 0x0u) != 0) {
             result = Area_SampleHeight(pos_x, pos_y);
         }

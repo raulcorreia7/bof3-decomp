@@ -215,6 +215,35 @@ class Tree:
         """Return the ``kind`` declarations of ``name``."""
         return [d for d in self.decls.get(name, ()) if d.kind == kind]
 
+    def views(self) -> dict[str, list[set[str]]]:
+        """Return what each file sees, once per unit that compiles it (a body header is in several)."""
+        included_by: dict[str, list[str]] = collections.defaultdict(list)
+        for name, found in self.includes.items():
+            for inc in found:
+                included_by[inc].append(name)
+        closures: dict[str, set[str]] = {}
+
+        def units(name: str) -> set[str]:
+            seen, stack, found = {name}, [name], set()
+            while stack:
+                current = stack.pop()
+                if current.endswith(".c"):
+                    found.add(current)
+                for parent in included_by.get(current, ()):
+                    if parent not in seen:
+                        seen.add(parent)
+                        stack.append(parent)
+            return found
+
+        result = {}
+        for name in self.texts:
+            result[name] = []
+            for root in sorted(units(name) or {name}):
+                if root not in closures:
+                    closures[root] = self.closure(root)
+                result[name].append(closures[root])
+        return result
+
     def closure(self, name: str) -> set[str]:
         """Return ``name`` and every file it includes, directly or not."""
         seen, stack = {name}, [name]
@@ -234,6 +263,7 @@ def problems(tree: Tree) -> list[Problem]:
         rows.append(Problem(kind, name, file, line, detail))
 
     visible = {name: tree.closure(name) for name in tree.texts}
+    views = tree.views()
     defs = {n: tree.kind(n, "def") for n in tree.decls}
     protos = {n: tree.kind(n, "proto") for n in tree.decls}
     for name, definitions in defs.items():
@@ -244,7 +274,7 @@ def problems(tree: Tree) -> list[Problem]:
     for call in tree.calls:
         callers[call.name].append(call)
     for call in tree.calls:
-        _call_rows(add, tree, call, visible, defs, protos)
+        _call_rows(add, tree, call, views, defs, protos)
     for file, text in tree.stripped.items():
         for m in _CALL_CAST.finditer(text):
             if m.group(3) in tree.decls:
@@ -348,20 +378,20 @@ def _prototype_rows(add, name: str, d: Decl, p: Decl) -> None:
             )
 
 
-def _call_rows(add, tree: Tree, call: Call, visible, defs, protos) -> None:
+def _call_rows(add, tree: Tree, call: Call, views, defs, protos) -> None:
     name = call.name
     if name in tree.macros or name in tree.variables:
         return
     if name in tree.decls:
-        seen = [
-            q
-            for q in tree.decls[name]
-            if q.file in visible[call.file] or q.file == call.file
+        sees = [
+            [q for q in tree.decls[name] if q.file in view or q.file == call.file]
+            for view in views[call.file]
         ]
-        if not seen:
+        if not all(sees):
             add("implicit_decl", name, call.file, call.line, "no proto or def in scope")
             return
-        scope = [q for q in protos[name] if q.file in visible[call.file]] or [
+        view = views[call.file][0]
+        scope = [q for q in protos[name] if q.file in view] or [
             q for q in defs[name] if q.file == call.file
         ]
         for p in scope[:1]:

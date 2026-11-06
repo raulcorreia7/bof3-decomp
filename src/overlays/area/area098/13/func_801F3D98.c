@@ -10,6 +10,6 @@ MATCH void func_801F3D98(void) {
     remaining      = g_Task->unk_09 - 1;
     g_Task->unk_09 = remaining;
     if (!(remaining & 0xFF)) {
-        func_80196070();
+        Actor_Clear();
     }
 }

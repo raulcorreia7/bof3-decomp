@@ -6,6 +6,6 @@
 
 #include "overlays/area/world01.h"
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
+s32 Item_Count(s32 category, s32 item, s32 mode);
 
 #endif

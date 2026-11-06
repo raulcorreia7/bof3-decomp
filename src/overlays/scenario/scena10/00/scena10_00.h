@@ -43,4 +43,6 @@ extern SceneFunc D_801FE97C[];
 
 void func_801F6FAC(void);
 
+s32 Item_Count(s32 category, s32 item, s32 mode);
+
 #endif

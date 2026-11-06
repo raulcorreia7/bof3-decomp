@@ -25,7 +25,7 @@ MATCH void func_801EEF98(void) {
 
 MATCH void func_801EF0EC(void) {
     if (g_Task->unk_0B == 9) {
-        func_80196718(g_BattleSelectedActor);
+        GFX_FreePaletteFadeTarget(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= 4;

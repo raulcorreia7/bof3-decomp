@@ -6,8 +6,6 @@
 
 #include "overlays/area/world01.h"
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
-
 /* The work-window byte offset and row stride this overlay scans. */
 #define SCRATCH_ROW_OFFSET 0x15
 #define SCRATCH_ROW_STRIDE 0x18

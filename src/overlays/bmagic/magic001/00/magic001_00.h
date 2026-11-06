@@ -8,8 +8,6 @@
 extern u8                  g_BattleActiveBattler;
 extern BattleHandlerTable3 D_801EEC3C;
 
-void func_801E257C(u32 enemy_index, u32 script_index);
-
 static inline void BMagic_ClearWorkFlagsAndStep(void) {
     if (g_Task->unk_0B == 0) {
         func_800AFC54();

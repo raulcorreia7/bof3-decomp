@@ -1201,7 +1201,6 @@ extern s32  Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);
 extern u16  Area_AllocCellPrimRow(void);
 extern void Area_RequestCellRows(AreaCell* entry);
 extern void Area_FreeCellPrimRow(u16 row_id);
-extern s16  func_80154ABC(s32 x, s32 y, u8 mode);
 void        Area_DrawPartQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
 void        func_8015642C(u8* obj, s32 x, s32 y);
 void        func_8015684C(u8* record, s32 cell_x, s32 cell_y);
@@ -1240,7 +1239,6 @@ extern void func_8015A264(void);
 void        func_8015A2B0(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray);
 extern u8*  UI_DrawTextAt(s32 x, s32 y, u8* text);
 void        func_8015A554(void);
-extern void func_8015A944(void);
 extern void func_8015A9A4(void);
 s8          func_8015AD00(PanelSortItem* sort_list);
 void        func_8015B2AC(s16* out, s32* in);
@@ -1290,7 +1288,6 @@ extern const ObjectFunc
            D_8017F8FC[]; /* interior of D_8017F8F0 (index 3); a separate symbol keeps func_801584A4 matching */
 extern u8  D_8017F90D;
 void       func_801A17A0(u8* entry_record);
-void       func_801A18C8(u8* record);
 void       func_801C1254(s32 ability_id, s32 party_slot, s32 ignored);
 void       func_801D0C04(void);
 extern s32 func_801F2C04(void);
