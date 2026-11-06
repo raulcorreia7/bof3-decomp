@@ -31,8 +31,8 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
             kind &= BYTE_MASK;
             func_801BF5A8(D_80143F24, D_80143F28, kind);
             kind <<= 3;
-            FIELD(s32, D_80143F2C, kind) = g_Task->x.fixed;
-            FIELD(s32, D_80143F30, kind) = g_Task->y.fixed;
+            FIELD(s32, D_80143F2C, kind) = g_Task->pos.x.fixed;
+            FIELD(s32, D_80143F30, kind) = g_Task->pos.y.fixed;
             g_Task->unk_48               = 0;
             g_Task->direction_08         = s_RouteIndexByMode[g_BattleScrollDir];
             Actor_RequestScript(g_Task->direction_08);

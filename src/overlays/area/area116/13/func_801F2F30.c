@@ -5,8 +5,8 @@ MATCH void func_801F2F30(void) {
     s32    pos[3];
 
     work   = g_Task;
-    pos[0] = work->x.fixed;
-    pos[1] = work->y.fixed;
-    pos[2] = work->z.fixed;
+    pos[0] = work->pos.x.fixed;
+    pos[1] = work->pos.y.fixed;
+    pos[2] = work->pos.z.fixed;
     func_801F2F78(pos);
 }

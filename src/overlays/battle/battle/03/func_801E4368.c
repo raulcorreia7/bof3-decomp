@@ -9,13 +9,13 @@ MATCH u8 func_801E4368(void) {
             return 0u;
         }
         if ((g_BattleActionLock != 0u) &&
-            ((BATTLE_CURRENT_ENEMY_PTR->action_flags & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
+            ((BATTLE_CURRENT_ENEMY_PTR->turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
             return 0u;
         }
         if ((BATTLE_CURRENT_ENEMY_PTR->event_flags & 2u) == 0u) {
             return 0u;
         }
-        if ((BATTLE_CURRENT_ENEMY_PTR->damage_flags & COMBATANT_FLAG_REPRISAL) != 0u) {
+        if ((BATTLE_CURRENT_ENEMY_PTR->turn.damage_flags.value & COMBATANT_FLAG_REPRISAL) != 0u) {
             return 1u;
         }
         if ((rand() % 100) < 0x46) {

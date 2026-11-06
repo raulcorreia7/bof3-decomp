@@ -6,7 +6,7 @@ MATCH void func_801F2D30(void) {
 
     work         = g_Task;
     work->unk_2C = timer = work->unk_2C - 1;
-    work->z.fixed += 0x400000;
+    work->pos.z.fixed += 0x400000;
     work->unk_64 -= 6;
     work->unk_68 += 6;
     if (timer == 0) {

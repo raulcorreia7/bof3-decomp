@@ -24,7 +24,7 @@ MATCH void func_801E0F0C(void) {
         work->chr.hp = one;
         work->chr.status &= ~STATUS_KO;
         work->chr.willpower >>= 1;
-        work->damage_flags.value &= mask;
+        work->turn.damage_flags.value &= mask;
         offset                       = (Battle_AllocEffect(0, 1) & BYTE_MASK) * 0x78;
         spad                         = g_Task;
         *(&D_801EC337 + offset)      = 1;

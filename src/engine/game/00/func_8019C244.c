@@ -7,8 +7,8 @@ MATCH s32 func_8019C244(void) {
     s32    hi;
 
     work = g_Task;
-    x    = work->x.fixed;
-    y    = work->y.fixed;
+    x    = work->pos.x.fixed;
+    y    = work->pos.y.fixed;
     switch (work->direction_08) {
         case 1:
             if ((((u32)y >> 0x0F) & 1) == 0) {

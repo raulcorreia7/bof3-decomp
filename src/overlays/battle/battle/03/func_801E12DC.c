@@ -11,13 +11,13 @@ MATCH void func_801E12DC(void) {
 
     i = 0;
     while (i < g_BattlePartyCount) {
-        if ((g_BattlePartyBattlers[i].damage_flags.value & 0x2000u) != 0u) {
+        if ((g_BattlePartyBattlers[i].turn.damage_flags.value & 0x2000u) != 0u) {
             return;
         }
         i++;
     }
     work = g_GameState;
-    work->damage_flags.value |= 0x2000u;
+    work->turn.damage_flags.value |= 0x2000u;
     if (work->chr.character_id == CHAR_ID_REI) {
         slot = Battle_AllocEffect(0, 0xB) & BYTE_MASK;
     } else {

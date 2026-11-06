@@ -46,7 +46,7 @@ MATCH void func_801DF3F8(void) {
         PartyBattler* battler = g_GameState;
 
         if (HAS_STATUS(*battler, STATUS_CONFUSED)) {
-            if (battler->damage_flags.value & 0x800) {
+            if (battler->turn.damage_flags.value & 0x800) {
                 PartyBattler* work = g_Task;
                 s32           slot_offset;
                 s8            level;
@@ -70,7 +70,7 @@ MATCH void func_801DF3F8(void) {
                 *(D_801EC339 + slot_offset) = level;
                 if (level < -11) {
                 confuse_flip:
-                    g_GameState->damage_flags.value ^= 0x800;
+                    g_GameState->turn.damage_flags.value ^= 0x800;
                 }
             }
             actor = g_Task;
@@ -86,7 +86,7 @@ MATCH void func_801DF3F8(void) {
                 goto store_coord_y;
             }
         }
-    } else if ((g_BattleState & BATTLE_STATE_RELOAD_PARTY) && (g_GameState->action_flags.value & 2)) {
+    } else if ((g_BattleState & BATTLE_STATE_RELOAD_PARTY) && (g_GameState->turn.action_flags.value & 2)) {
         PartyBattler* work = g_Task;
 
         work->pos.x.fixed = D_80143F24;
@@ -98,7 +98,7 @@ MATCH void func_801DF3F8(void) {
     store_coord_y:
         actor->pos.y.fixed = y_pos;
     }
-    if (!(g_GameState->damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
+    if (!(g_GameState->turn.damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
         func_801DEDE4();
     }
 }

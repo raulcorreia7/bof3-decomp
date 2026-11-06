@@ -12,14 +12,14 @@ MATCH void func_801B9210(void) {
         ACTOR_CLEAR_TINT();
     }
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    if ((g_Task->x.fixed & 0x7FFF) != 0 || (g_Task->y.fixed & 0x7FFF) != 0) {
-        g_Task->x.fixed      = (g_Task->x.fixed + 0x4800) & ~0x7FFF;
-        g_Task->y.fixed      = (g_Task->y.fixed + 0x4800) & ~0x7FFF;
-        COORD_INT(g_Task->z) = Area_ReadStepHeight(g_Task->x.fixed, g_Task->y.fixed, g_Task->direction_08);
+    if ((g_Task->pos.x.fixed & 0x7FFF) != 0 || (g_Task->pos.y.fixed & 0x7FFF) != 0) {
+        g_Task->pos.x.fixed      = (g_Task->pos.x.fixed + 0x4800) & ~0x7FFF;
+        g_Task->pos.y.fixed      = (g_Task->pos.y.fixed + 0x4800) & ~0x7FFF;
+        COORD_INT(g_Task->pos.z) = Area_ReadStepHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->direction_08);
         if (g_Task->unk_05 == 0) {
-            v                   = g_Task->x.fixed;
+            v                   = g_Task->pos.x.fixed;
             g_AreaScrollTargetX = v;
-            v                   = g_Task->y.fixed;
+            v                   = g_Task->pos.y.fixed;
             g_AreaScrollTargetY = v;
             func_80153DE8();
         }

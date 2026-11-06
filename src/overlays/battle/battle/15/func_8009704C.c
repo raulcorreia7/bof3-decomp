@@ -43,7 +43,7 @@ NON_MATCHING void func_8009704C(void) {
     D_801485E0 = D_80148574 + 7u;
     D_801485E2 = D_80148576 + ((D_8014857C - D_80148580) * 13 + 0x1A);
     trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
-    if ((FIELD(u32, D_801EB4D8, 0x10) & 0x20002u) != 2u) {
+    if ((D_801EB4D8->action_flags.value & 0x20002u) != 2u) {
         if ((trigger & PADLleft) != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 1));
             D_80148579 = 0x32u;
@@ -146,10 +146,10 @@ NON_MATCHING void func_8009704C(void) {
         g_BattleChoicePhase               = 1u;
         D_801485DC                        = 0u;
         if (*(u16*)(slot + 2) == 0x97u) {
-            g_BattleMessageState = 2u;
-            D_801EB4D8[0]        = g_BattleMessageSlot[5];
-            g_BattleSubStep      = 7u;
-            g_BattleUIStep       = 0u;
+            g_BattleMessageState       = 2u;
+            D_801EB4D8->command.target = g_BattleMessageSlot[5];
+            g_BattleSubStep            = 7u;
+            g_BattleUIStep             = 0u;
             return;
         }
         g_BattleUIStep = 3u;

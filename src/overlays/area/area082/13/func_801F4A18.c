@@ -8,7 +8,7 @@ MATCH s32 func_801F4A18(void) {
     s32    y;
     u8     state;
 
-    work->z.fixed     = -0x4C0;
+    work->pos.z.fixed = -0x4C0;
     x                 = work->vx;
     y                 = work->vy;
     state             = work->header.step + 1;
@@ -17,7 +17,7 @@ MATCH s32 func_801F4A18(void) {
     work->unk_30      = 0x60;
     work->vy          = 0;
     work->vx          = 0;
-    work->x.fixed     = ((x + x_offset) >> 9) - 0x4000;
-    work->y.fixed     = ((y + y_offset) >> 9) - 0x4000;
+    work->pos.x.fixed = ((x + x_offset) >> 9) - 0x4000;
+    work->pos.y.fixed = ((y + y_offset) >> 9) - 0x4000;
     work->header.step = state;
 }

@@ -31,27 +31,27 @@ MATCH void* func_801B5C54(void) {
                 limit = 1;
                 pos   = work->direction_08 * 2;
                 /* FAKE: volatile u8 reads keep retail's lbu + sll/sra pair; an s8 read folds to lb (63.57%). */
-                x     = (u16)COORD_INT(work->x) + (s8)((volatile u8*)D_80181B00)[pos];
-                y     = (u16)COORD_INT(work->y) + (s8)((volatile u8*)D_80181B01)[pos];
-                if (COORD_FRAC(work->x) == 0)
-                    limit = (COORD_FRAC(work->y) != 0);
+                x     = (u16)COORD_INT(work->pos.x) + (s8)((volatile u8*)D_80181B00)[pos];
+                y     = (u16)COORD_INT(work->pos.y) + (s8)((volatile u8*)D_80181B01)[pos];
+                if (COORD_FRAC(work->pos.x) == 0)
+                    limit = (COORD_FRAC(work->pos.y) != 0);
             } else {
                 delta  = D_80181B00[work->direction_08 * 2];
-                origin = COORD_INT(work->x);
+                origin = COORD_INT(work->pos.x);
                 if (delta == 1)
                     x = origin + 2;
                 else
                     x = origin + delta;
                 delta  = D_80181B01[work->direction_08 * 2];
-                origin = COORD_INT(work->y);
+                origin = COORD_INT(work->pos.y);
                 if (delta == 1)
                     y = origin + 2;
                 else
                     y = origin + delta;
                 if ((work->direction_08 == 1) || (work->direction_08 == 5))
-                    limit = (COORD_FRAC(work->x) != 0);
+                    limit = (COORD_FRAC(work->pos.x) != 0);
                 else
-                    limit = (COORD_FRAC(work->y) != 0);
+                    limit = (COORD_FRAC(work->pos.y) != 0);
             }
             for (step = 0; step <= limit; step++) {
                 if (((run->flags & TILE_RUN_VERTICAL) && (x & BYTE_MASK) == run->x &&

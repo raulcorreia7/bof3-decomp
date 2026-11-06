@@ -80,9 +80,9 @@ MATCH void func_801F7050(void) {
     actor->vz  = 0;
     for (i = 0; i < 16; i++) {
         actor->vz += 0x800000;
-        actor->x.fixed += 0x10000;
-        actor->y.fixed += 0;
-        actor->z.fixed += actor->vz;
+        actor->pos.x.fixed += 0x10000;
+        actor->pos.y.fixed += 0;
+        actor->pos.z.fixed += actor->vz;
     }
     SND_PlayCue(0x202);
     g_Task->vz = -g_Task->vz;
@@ -209,10 +209,10 @@ MATCH void func_801F7E68(void) {
 MATCH void func_801F7EF8(void) {
     func_801F88B8(MEM_PTR(void, 0x800E48E0u));
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u));
-    g_Task->x.fixed += g_Task->vx;
-    g_Task->y.fixed += g_Task->vy;
-    g_Task->z.fixed += g_Task->vz;
-    if (g_Task->x.fixed == g_Task->unk_18 && g_Task->y.fixed == g_Task->unk_1C) {
+    g_Task->pos.x.fixed += g_Task->vx;
+    g_Task->pos.y.fixed += g_Task->vy;
+    g_Task->pos.z.fixed += g_Task->vz;
+    if (g_Task->pos.x.fixed == g_Task->unk_18 && g_Task->pos.y.fixed == g_Task->unk_1C) {
         g_Task->unk_09 = 0x2F;
         g_Task->header.step++;
     }

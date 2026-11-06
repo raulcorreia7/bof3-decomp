@@ -17,16 +17,16 @@ MATCH void func_801F73FC(void) {
     Actor* work;
     s32    height;
 
-    work          = g_Task;
-    work->x.fixed = 0x600000;
-    work->y.fixed = 0x110000;
-    height        = Area_SampleHeight(work->x.fixed, work->y.fixed);
+    work              = g_Task;
+    work->pos.x.fixed = 0x600000;
+    work->pos.y.fixed = 0x110000;
+    height            = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
 
-    work          = g_Task;
-    work->z.fixed = height << 16;
-    work->unk_2E  = 0x180;
-    work->unk_30  = 0x500;
-    work->unk_09  = 0;
+    work              = g_Task;
+    work->pos.z.fixed = height << 16;
+    work->unk_2E      = 0x180;
+    work->unk_30      = 0x500;
+    work->unk_09      = 0;
     Area_ClearWorkColumn();
 
     g_Task->header.mode += 1;

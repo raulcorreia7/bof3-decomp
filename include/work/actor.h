@@ -189,9 +189,7 @@ typedef struct Actor {
     u16            unk_2E;            /* 0x2E - area032 calls it the marker's screen x */
     u16            unk_30;            /* 0x30 - area032 calls it the marker's screen y */
     u16            unk_32;            /* 0x32 */
-    Coord          x;                 /* 0x34 */
-    Coord          y;                 /* 0x38 */
-    Coord          z;                 /* 0x3C - the integer half (+2) is the ground height */
+    Vec3Coord      pos;               /* 0x34; z integer is ground height */
     Vec2S32        scale;             /* 0x40 16.16; 0x10000 is full size */
     u8             unk_48;            /* 0x48 - commu00 calls it the reset flag */
     u8             unk_49;            /* 0x49 */
@@ -243,9 +241,7 @@ ASSERT_OFFSET(Actor, vz, 0x14);
 ASSERT_OFFSET(Actor, unk_18, 0x18);
 ASSERT_OFFSET(Actor, gravity, 0x20);
 ASSERT_OFFSET(Actor, active_flags, 0x24);
-ASSERT_OFFSET(Actor, x, 0x34);
-ASSERT_OFFSET(Actor, y, 0x38);
-ASSERT_OFFSET(Actor, z, 0x3C);
+ASSERT_OFFSET(Actor, pos, 0x34);
 ASSERT_OFFSET(Actor, range_54, 0x54);
 ASSERT_OFFSET(Actor, tint, 0x5C);
 ASSERT_OFFSET(Actor, state_70, 0x70);

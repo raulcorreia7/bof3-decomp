@@ -4,8 +4,8 @@ MATCH s32 func_801F3980(s32* x, s32* y) {
     Actor* actor = g_Task;
     s32    y_half;
 
-    *x     = actor->x.fixed - 0x8000;
-    y_half = actor->y.fixed - 0x8000;
+    *x     = actor->pos.x.fixed - 0x8000;
+    y_half = actor->pos.y.fixed - 0x8000;
     *y     = y_half;
     if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
         func_801F3C4C(*x, y_half);

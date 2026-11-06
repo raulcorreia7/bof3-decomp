@@ -10,30 +10,30 @@ MATCH u8 func_801D5BC0(void) {
     count = 0u;
     for (index = 0u; index < BATTLE_PARTY_SLOT_COUNT; index++) {
         if ((func_801D64C4(index) == 0u) && (HAS_STATUS(g_BattlePartyBattlers[index], STATUS_POISONED))) {
-            g_BattlePartyBattlers[index].ap_change = 0u;
-            g_BattlePartyBattlers[index].hp_change = 0u;
+            g_BattlePartyBattlers[index].turn.ap_change = 0u;
+            g_BattlePartyBattlers[index].turn.hp_change = 0u;
             func_801DCEF8(index);
             count += 1u;
-            g_BattlePartyBattlers[index].header.mode = 6u;
-            g_BattlePartyBattlers[index].header.step = 5u;
-            g_BattlePartyBattlers[index].unk_04      = 0u;
-            g_BattlePartyBattlers[index].unk_03      = 0u;
-            g_BattlePartyBattlers[index].unk_120     = 0x11u;
+            g_BattlePartyBattlers[index].header.mode       = 6u;
+            g_BattlePartyBattlers[index].header.step       = 5u;
+            g_BattlePartyBattlers[index].unk_04            = 0u;
+            g_BattlePartyBattlers[index].unk_03            = 0u;
+            g_BattlePartyBattlers[index].turn.target_flags = 0x11u;
             Battle_SetSlotPending(index);
         }
     }
 
     for (index = 3u; index < 11u; index++) {
         if ((func_801D64C4(index) == 0u) && ((ENEMY_COMBATANT(index).status & STATUS_POISONED) != 0u)) {
-            ENEMY_COMBATANT(index).ap_change = 0u;
-            ENEMY_COMBATANT(index).hp_change = 0u;
+            ENEMY_COMBATANT(index).turn.ap_change = 0u;
+            ENEMY_COMBATANT(index).turn.hp_change = 0u;
             func_801DCEF8(index);
             count += 1u;
-            ENEMY_COMBATANT(index).header.mode  = 6u;
-            ENEMY_COMBATANT(index).header.step  = 5u;
-            ENEMY_COMBATANT(index).unk_04       = 0u;
-            ENEMY_COMBATANT(index).unk_03       = 0u;
-            ENEMY_COMBATANT(index).target_flags = 0x11u;
+            ENEMY_COMBATANT(index).header.mode       = 6u;
+            ENEMY_COMBATANT(index).header.step       = 5u;
+            ENEMY_COMBATANT(index).unk_04            = 0u;
+            ENEMY_COMBATANT(index).unk_03            = 0u;
+            ENEMY_COMBATANT(index).turn.target_flags = 0x11u;
             Battle_SetSlotPending(index);
         }
     }

@@ -59,7 +59,8 @@ NON_MATCHING s32 func_801BA678(void) {
     void*  tmp28;
     void*  tmp29;
 
-    if ((0x400 & g_GameFlags) || ((tmp24 = g_Task, val20 = tmp24->direction_08, (tmp24->x == 0)) && (tmp24->y == 0))) {
+    if ((0x400 & g_GameFlags) ||
+        ((tmp24 = g_Task, val20 = tmp24->direction_08, (tmp24->pos.x == 0)) && (tmp24->pos.y == 0))) {
         return 1;
     }
     tmp12 = *(D_80181B00 + (g_Task->direction_08 * 2));
@@ -74,15 +75,15 @@ NON_MATCHING s32 func_801BA678(void) {
     if ((*(D_80181B00 + (g_Task->direction_08 * 2)) + 1) == 2) {
         val4 += 1;
     }
-    val6 = COORD_INT(g_Task->y);
+    val6 = COORD_INT(g_Task->pos.y);
     if ((*(D_80181B01 + (g_Task->direction_08 * 2)) + 1) == 2) {
         val6 += 1;
     }
     func_801BBCCC(val7, val8, val4, val6);
     tmp15 = g_Task->direction_08;
     if (!(tmp15 & 1)) {
-        if (COORD_FRAC(g_Task->x) != 0) {
-            if (COORD_FRAC(g_Task->y) != 0) {
+        if (COORD_FRAC(g_Task->pos.x) != 0) {
+            if (COORD_FRAC(g_Task->pos.y) != 0) {
                 val10   = 5;
                 spad    = SP_PTR(u8, 0x8u);
                 spad[0] = func_801BA278(1U, 2U, 3U, 4U, 5U);
@@ -208,9 +209,9 @@ NON_MATCHING s32 func_801BA678(void) {
                     return 3;
             }
         }
-    } else if (COORD_FRAC(g_Task->x) != 0) {
+    } else if (COORD_FRAC(g_Task->pos.x) != 0) {
         tmp9 = tmp15 & 2;
-        if (COORD_FRAC(g_Task->y) != 0) {
+        if (COORD_FRAC(g_Task->pos.y) != 0) {
             val16 = 2;
             if (tmp9 != 0) {
                 val18 = 3;

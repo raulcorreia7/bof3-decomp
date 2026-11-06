@@ -52,23 +52,23 @@
 /* Pick the battler's step rule row from the flagged, player and enemy tables.
  * Kept: as an inline the enemy table pointer loads into $a0 before the branch
  * (first instruction differs in both members). */
-#define BATTLE_BATTLER_STEP_RULE(flagged, player, enemy)                          \
-    do {                                                                          \
-        u32 row;                                                                  \
-        u8  battler;                                                              \
-        u8  result;                                                               \
-        battler = *(u8*)&g_BattleActiveBattler;                                   \
-        if (battler < 3u) {                                                       \
-            if ((g_BattlePartyBattlers[battler].action_flags.value & 2u) != 0u) { \
-                result = flagged[g_DragonForm];                                   \
-            } else {                                                              \
-                result = player[D_80145F09[battler * BATTLE_PARTY_STRIDE]];       \
-            }                                                                     \
-        } else {                                                                  \
-            row    = (u32)battler - 3u;                                           \
-            result = enemy[(u32)D_801EB710[row * BATTLE_ENEMY_STRIDE] * 0x88u];   \
-        }                                                                         \
-        return result;                                                            \
+#define BATTLE_BATTLER_STEP_RULE(flagged, player, enemy)                               \
+    do {                                                                               \
+        u32 row;                                                                       \
+        u8  battler;                                                                   \
+        u8  result;                                                                    \
+        battler = *(u8*)&g_BattleActiveBattler;                                        \
+        if (battler < 3u) {                                                            \
+            if ((g_BattlePartyBattlers[battler].turn.action_flags.value & 2u) != 0u) { \
+                result = flagged[g_DragonForm];                                        \
+            } else {                                                                   \
+                result = player[D_80145F09[battler * BATTLE_PARTY_STRIDE]];            \
+            }                                                                          \
+        } else {                                                                       \
+            row    = (u32)battler - 3u;                                                \
+            result = enemy[(u32)D_801EB710[row * BATTLE_ENEMY_STRIDE] * 0x88u];        \
+        }                                                                              \
+        return result;                                                                 \
     } while (0)
 
 /* The party formation g_PartyFormation (0x80144F58): func_800AAA74 applies its stat changes. */
@@ -544,12 +544,8 @@ extern u8                                g_BattleActiveBattler_nv;
 /* D_80146394 */
 extern volatile u8                       g_BattleTarget;
 extern u8                                g_BattleTarget_nv;
-/* g_BattleTargetRecord points at a panel task: its +0x04 and +0x06 cells are the
- * signed x and y halves (BattlePanelTask.x and .y). The declaration stays a
- * volatile s16 pointer: reading the cells through BattlePanelTask changes
- * the generated code (func_8009D198 falls from 52.28% to 50.65%). */
 /* D_801463A0 */
-extern volatile s16* volatile g_BattleTargetRecord;
+extern BattleTurn* volatile g_BattleTargetRecord;
 extern u16                              D_801463B4;
 /* D_801463C4 */
 extern u8                               g_BattleGenes[];
@@ -923,7 +919,7 @@ static inline void BattleApplyHalfDamage(s32 anim) {
     s32 half;
 
     half                            = Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, 0xFFFF) / 2;
-    ((u16*)g_BattleTargetRecord)[2] = half;
+    g_BattleTargetRecord->hp_change = half;
     if (half != 0) {
         func_800A4238(anim);
     }
@@ -1027,29 +1023,29 @@ static inline void BattleSelectionDelta(s32 mode) {
      * without the pin GCC rematerialises it after each call and the function
      * measured 0xC short. */
     MATCH_REG(BattleSelectionContext*, ctx, "s0");
-    s16* result;
-    u16  value;
+    BattleTurn* result;
+    u16         value;
 
     ctx = (BattleSelectionContext*)&g_BattleTarget;
     if (ctx->sel < 3u) {
-        value                                       = func_800A4294(mode);
-        (*(volatile s16**)&g_BattleTargetRecord)[2] = (s16)(value - D_80145F18[ctx->sel][7]);
+        value                                                      = func_800A4294(mode);
+        (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change = (s16)(value - D_80145F18[ctx->sel][7]);
     } else {
-        value                                       = func_800A4294(mode);
-        (*(volatile s16**)&g_BattleTargetRecord)[2] = (s16)(value - D_801EB6C4[ctx->sel - 3u][9]);
+        value                                                      = func_800A4294(mode);
+        (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change = (s16)(value - D_801EB6C4[ctx->sel - 3u][9]);
     }
 
-    result = (s16*)g_BattleTargetRecord;
-    if (result[2] < 0) {
-        result[2] = 0;
+    result = g_BattleTargetRecord;
+    if (result->hp_change < 0) {
+        result->hp_change = 0;
     }
 }
 
 /* Set the selection flag on the chosen battler or mark the pending record,
  * then run the panel update. */
 static inline void BattleSetSelectionFlag(u32 flag) {
-    u32 mode;
-    u8* record;
+    u32         mode;
+    BattleTurn* record;
     /* FAKE: Pin the stored constant to $v0; clean C left the
      * delay-slot constant in $v1 while $v0 stayed free. */
     MATCH_REG(u8, one, "v0");
@@ -1057,17 +1053,17 @@ static inline void BattleSetSelectionFlag(u32 flag) {
     if (func_800A3A10(g_BattleActiveBattler, g_BattleTarget) == 0) {
         mode = *(u8*)&g_BattleTarget;
         if (mode < 3u) {
-            g_BattlePartyBattlers[mode].action_flags.value |= flag;
+            g_BattlePartyBattlers[mode].turn.action_flags.value |= flag;
         } else {
-            ENEMY_COMBATANT(mode).action_flags |= flag;
+            ENEMY_COMBATANT(mode).turn.action_flags.value |= flag;
         }
         func_800A9BD8(g_BattleTarget);
     } else {
-        record             = *(u8**)&g_BattleTargetRecord;
+        record               = *(BattleTurn**)&g_BattleTargetRecord;
         /* FAKE: volatile-drop cell read keeps the constant load ahead of
          * the pointer load, so the branch delay slot takes it. */
-        one                = 1;
-        ((u8*)(record))[8] = one;
+        one                  = 1;
+        record->target_flags = one;
         func_800AAC88(0, g_BattleTarget);
     }
     func_800A3F28();

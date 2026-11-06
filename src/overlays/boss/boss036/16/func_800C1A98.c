@@ -3,8 +3,8 @@
 MATCH void func_800C1A98(void) {
     Actor* work = (Actor*)g_Task;
 
-    work->x.fixed -= work->vx;
-    if (work->x.fixed == work->unk_18) {
+    work->pos.x.fixed -= work->vx;
+    if (work->pos.x.fixed == work->unk_18) {
         work->header.step++;
     }
     func_801E30F8();

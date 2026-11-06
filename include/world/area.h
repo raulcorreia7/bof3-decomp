@@ -353,20 +353,19 @@ ASSERT_OFFSET(AreaTrail, points, 0x18);
 
 /* One entry of the spawn table: a shrinking glow disc at an actor position. */
 typedef struct AreaSpawnSlot {
-    u8    active;        /* 0x00 - 0 marks a free slot */
-    u8    unk_01;        /* 0x01 */
-    u8    life_02;       /* 0x02 - frames left; counts down and frees the slot at 0 */
-    u8    unk_03;        /* 0x03 */
-    Coord x;             /* 0x04 */
-    Coord y;             /* 0x08 */
-    Coord z;             /* 0x0C */
-    u8    unk_10[4];     /* 0x10 */
-    u16   radius_14;     /* 0x14 - disc radius, shrinks every frame */
-    u8    core_shade_16; /* 0x16 - shade at the disc centre */
-    u8    rim_shade_17;  /* 0x17 - shade at the disc rim */
+    u8        active;        /* 0x00 - 0 marks a free slot */
+    u8        unk_01;        /* 0x01 */
+    u8        life_02;       /* 0x02 - frames left; counts down and frees the slot at 0 */
+    u8        unk_03;        /* 0x03 */
+    Vec3Coord pos;           /* 0x04 */
+    u8        unk_10[4];     /* 0x10 */
+    u16       radius_14;     /* 0x14 - disc radius, shrinks every frame */
+    u8        core_shade_16; /* 0x16 - shade at the disc centre */
+    u8        rim_shade_17;  /* 0x17 - shade at the disc rim */
 } AreaSpawnSlot;
 
 ASSERT_SIZE(AreaSpawnSlot, 0x18);
+ASSERT_OFFSET(AreaSpawnSlot, pos, 0x04);
 ASSERT_OFFSET(AreaSpawnSlot, radius_14, 0x14);
 ASSERT_OFFSET(AreaSpawnSlot, core_shade_16, 0x16);
 ASSERT_OFFSET(AreaSpawnSlot, rim_shade_17, 0x17);

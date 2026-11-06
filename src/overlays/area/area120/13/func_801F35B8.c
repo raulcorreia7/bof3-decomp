@@ -4,10 +4,10 @@ MATCH void func_801F35B8(void) {
     u8* p;
     u16 i;
 
-    g_Task->x.fixed = 0x250000;
-    g_Task->y.fixed = 0x748000;
-    g_Task->z.fixed = Area_SampleHeight(g_Task->x.fixed, 0x748000) << 16;
-    p               = MEM_PTR(u8, AREA_WORK);
+    g_Task->pos.x.fixed = 0x250000;
+    g_Task->pos.y.fixed = 0x748000;
+    g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, 0x748000) << 16;
+    p                   = MEM_PTR(u8, AREA_WORK);
     for (i = 0; i < AREA_ROW_COUNT; i++) {
         *p = 0;
         p += AREA_ROW_STRIDE;

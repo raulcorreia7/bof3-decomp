@@ -4,7 +4,7 @@ MATCH void func_801F2EC8(void) {
     Actor* work = g_Task;
 
     work->vy += 0x2000;
-    work->y.fixed += work->vy;
+    work->pos.y.fixed += work->vy;
     work->unk_64 -= 6;
     if (work->unk_64 < 8) {
         work->unk_64 = 8;

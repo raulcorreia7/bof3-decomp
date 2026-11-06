@@ -10,8 +10,8 @@ MATCH u8 func_8019EEE4(void) {
     s32 index;
 
     found    = 0;
-    distance = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
-    slot     = func_801BDE14(g_Task->x.fixed, g_Task->y.fixed, 0);
+    distance = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    slot     = func_801BDE14(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0);
     if (slot != -1) {
         g_Actors[slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
         return true;
@@ -22,29 +22,29 @@ MATCH u8 func_8019EEE4(void) {
     if (distance - D_80145ECE >= 0x101) {
         return true;
     }
-    if ((Area_GetCellCode(COORD_INT(WORK->x), COORD_INT(WORK->y)) & BYTE_MASK) == 0x11) {
+    if ((Area_GetCellCode(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y)) & BYTE_MASK) == 0x11) {
         return true;
     }
-    if ((Area_GetCellCode(COORD_INT(WORK->x), COORD_INT(WORK->y)) & BYTE_MASK) == 0xFD) {
+    if ((Area_GetCellCode(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y)) & BYTE_MASK) == 0xFD) {
         found = 1;
-        Area_ClearCell(COORD_INT(WORK->x), COORD_INT(WORK->y));
+        Area_ClearCell(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y));
     }
-    if ((COORD_FRAC(WORK->x) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), COORD_INT(WORK->y)) & BYTE_MASK) == 0xFD) {
+    if ((COORD_FRAC(WORK->pos.x) != 0) && !found) {
+        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), COORD_INT(WORK->pos.y)) & BYTE_MASK) == 0xFD) {
             found = 1;
-            Area_ClearCell((s16)((u16)COORD_INT(WORK->x) + 1), COORD_INT(WORK->y));
+            Area_ClearCell((s16)((u16)COORD_INT(WORK->pos.x) + 1), COORD_INT(WORK->pos.y));
         }
     }
-    if ((COORD_FRAC(WORK->y) != 0) && !found &&
-        ((Area_GetCellCode(COORD_INT(WORK->x), (s16)((u16)COORD_INT(WORK->y) + 1)) & BYTE_MASK) == 0xFD)) {
+    if ((COORD_FRAC(WORK->pos.y) != 0) && !found &&
+        ((Area_GetCellCode(COORD_INT(WORK->pos.x), (s16)((u16)COORD_INT(WORK->pos.y) + 1)) & BYTE_MASK) == 0xFD)) {
         found = 1;
-        Area_ClearCell(COORD_INT(WORK->x), (s16)((u16)COORD_INT(WORK->y) + 1));
+        Area_ClearCell(COORD_INT(WORK->pos.x), (s16)((u16)COORD_INT(WORK->pos.y) + 1));
     }
-    if ((COORD_FRAC(WORK->x) != 0) && (COORD_FRAC(WORK->y) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), (s16)((u16)COORD_INT(WORK->y) + 1)) & BYTE_MASK) ==
-            0xFD) {
+    if ((COORD_FRAC(WORK->pos.x) != 0) && (COORD_FRAC(WORK->pos.y) != 0) && !found) {
+        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), (s16)((u16)COORD_INT(WORK->pos.y) + 1)) &
+             BYTE_MASK) == 0xFD) {
             found = 1;
-            Area_ClearCell((s16)((u16)COORD_INT(WORK->x) + 1), (s16)((u16)COORD_INT(WORK->y) + 1));
+            Area_ClearCell((s16)((u16)COORD_INT(WORK->pos.x) + 1), (s16)((u16)COORD_INT(WORK->pos.y) + 1));
         }
     }
     if (found) {
@@ -61,8 +61,8 @@ MATCH u8 func_8019EEE4(void) {
                 g_ActorSlots[index].header.flags = 1;
                 g_ActorSlots[index].type         = 0x34;
                 g_ActorSlots[index].header.mode  = 1;
-                g_ActorSlots[index].x.fixed      = g_Task->x.fixed;
-                g_ActorSlots[index].y.fixed      = g_Task->y.fixed;
+                g_ActorSlots[index].x.fixed      = g_Task->pos.x.fixed;
+                g_ActorSlots[index].y.fixed      = g_Task->pos.y.fixed;
                 COORD_INT(g_ActorSlots[index].z) =
                     Area_SampleHeight(g_ActorSlots[index].x.fixed, g_ActorSlots[index].y.fixed) + 0x100;
                 g_ActorSlots[index].link = 0;

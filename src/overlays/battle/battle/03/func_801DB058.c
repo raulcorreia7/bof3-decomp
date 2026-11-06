@@ -38,7 +38,7 @@ MATCH u8 func_801DB058(void) {
     index = 0u;
     while ((u8)index < 3u) {
         if ((func_801DB9E4((u8)index) != 0u) && (func_801DB3A0((u8)index, total, maximum) != 0u)) {
-            g_BattlePartyBattlers[(u8)index].action_flags.value |= COMBATANT_FLAG_PREEMPTIVE_TURN;
+            g_BattlePartyBattlers[(u8)index].turn.action_flags.value |= COMBATANT_FLAG_PREEMPTIVE_TURN;
             count += 1u;
         }
         index += 1u;
@@ -74,7 +74,7 @@ MATCH u8 func_801DB058(void) {
             u32 slot;
 
             slot = (u8)index - 3u;
-            g_BattleEnemyBattlers[slot].action_flags |= COMBATANT_FLAG_PREEMPTIVE_TURN;
+            g_BattleEnemyBattlers[slot].turn.action_flags.value |= COMBATANT_FLAG_PREEMPTIVE_TURN;
         }
         index += 1u;
     }

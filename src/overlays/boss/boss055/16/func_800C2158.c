@@ -4,11 +4,11 @@ MATCH void func_800C2158(void) {
     u16* state;
 
     func_801E3160();
-    if (g_BattleCurrentEnemy->command.type == 4) {
+    if (g_BattleCurrentEnemy->turn.command.type == 4) {
         g_BattleCurrentEnemy->ap -= D_801463C8;
     }
     state = &g_BattleState;
     *state |= 0x800;
-    g_BattleCurrentEnemy->command.type = 0;
+    g_BattleCurrentEnemy->turn.command.type = 0;
     ((PartyBattler*)g_Task)->header.step += 1;
 }

@@ -48,9 +48,9 @@ MATCH void func_801F7554(void) {
             spawned->header.flags = 1;
             spawned->type         = 0x26;
             actor                 = g_Task;
-            spawned->x.fixed      = actor->x.fixed;
-            spawned->y.fixed      = actor->y.fixed;
-            spawned->z.fixed      = Area_SampleHeight(actor->x.fixed, actor->y.fixed) << 16;
+            spawned->x.fixed      = actor->pos.x.fixed;
+            spawned->y.fixed      = actor->pos.y.fixed;
+            spawned->z.fixed      = Area_SampleHeight(actor->pos.x.fixed, actor->pos.y.fixed) << 16;
         }
     }
     actor = g_Task;

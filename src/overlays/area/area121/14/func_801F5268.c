@@ -1,9 +1,9 @@
 #include "area121_14.h"
 
 MATCH s32 func_801F5268(void) {
-    if ((g_GameAreaId != 0x79) ||
-        !(func_801F5028(g_Task->x.fixed, g_Task->y.fixed, func_801BDE14(g_Task->x.fixed, g_Task->y.fixed, 1) & 0xFF) &
-          0xFF)) {
+    if ((g_GameAreaId != 0x79) || !(func_801F5028(g_Task->pos.x.fixed, g_Task->pos.y.fixed,
+                                                  func_801BDE14(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1) & 0xFF) &
+                                    0xFF)) {
         return 0;
     }
     func_801C24D0();

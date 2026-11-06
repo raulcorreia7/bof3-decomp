@@ -7,12 +7,12 @@
 MATCH void Area_InitScene(void) {
     Actor* work;
 
-    g_Task->unk_05                = 0;
-    g_Task->unk_0B                = D_80145FBC;
-    *(u8*)&g_GameState->hp_change = 3; /* FAKE: retail stores the byte. */
-    work                          = g_Task;
-    FIELD(u32, work, 0x34u)       = D_80145EC4;
-    FIELD(u32, work, 0x38u)       = D_80145EC8;
-    FIELD(u32, work, 0x3Cu)       = D_80145ECC;
-    work->header.mode             = work->header.mode + 1;
+    g_Task->unk_05                     = 0;
+    g_Task->unk_0B                     = D_80145FBC;
+    *(u8*)&g_GameState->turn.hp_change = 3; /* FAKE: retail stores the byte. */
+    work                               = g_Task;
+    FIELD(u32, work, 0x34u)            = D_80145EC4;
+    FIELD(u32, work, 0x38u)            = D_80145EC8;
+    FIELD(u32, work, 0x3Cu)            = D_80145ECC;
+    work->header.mode                  = work->header.mode + 1;
 }

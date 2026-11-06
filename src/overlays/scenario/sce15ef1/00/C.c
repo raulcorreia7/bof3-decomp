@@ -55,7 +55,7 @@ MATCH void func_801D13F4(void) {
     g_Task->unk_2E -= 0x10;
     g_Task->unk_03 -= 8;
     func_801D1A60();
-    func_801D1678(&g_Task->unk_18, &g_Task->x, g_Task->unk_03);
+    func_801D1678(&g_Task->unk_18, &g_Task->pos.x, g_Task->unk_03);
     remaining      = g_Task->unk_09 - 1;
     g_Task->unk_09 = remaining;
     if (!(remaining & 0xFF)) {
@@ -90,9 +90,9 @@ MATCH void func_801D19C8(void) {
             slot->unk_01        = 0;
             slot->life_02       = 0x10;
             actor               = g_Task;
-            slot->x.fixed       = actor->x.fixed;
-            slot->y.fixed       = actor->y.fixed;
-            slot->z.fixed       = actor->z.fixed;
+            slot->pos.x.fixed   = actor->pos.x.fixed;
+            slot->pos.y.fixed   = actor->pos.y.fixed;
+            slot->pos.z.fixed   = actor->pos.z.fixed;
             slot->radius_14     = 0x100;
             slot->core_shade_16 = 0x60;
             slot->rim_shade_17  = 0;
