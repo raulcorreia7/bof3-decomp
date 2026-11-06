@@ -293,11 +293,10 @@ MATCH void func_801F8804(u8 shade) {
     GFX_AddPrim(1, 0x0C);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
-    PSX_SET_SEMI_TRANSPARENT(tile);
-    tile->w  = 320;
-    tile->x0 = 0;
-    tile->y0 = 0;
-    tile->h  = 240;
+    SetSemiTrans(tile, 1);
+    tile->w = 320;
+    setXY0(tile, 0, 0);
+    tile->h = 240;
     setRGB0(tile, shade, shade, shade);
     GFX_AddPrim(1, 0x10);
 }

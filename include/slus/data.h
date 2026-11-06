@@ -1,6 +1,7 @@
 #ifndef SLUS_DATA_H
 #define SLUS_DATA_H
 
+#include "psx/psyq.h"
 #include "types.h"
 
 /* Set: the battle end does not stop the BGM or the sound sequences. */
