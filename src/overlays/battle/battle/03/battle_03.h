@@ -263,7 +263,6 @@ extern BgmTrack                  D_80181EB8[BGM_TRACK_COUNT];
 extern void*                     D_801C893C[];
 extern void*                     D_801C8950[];
 extern volatile u8               D_801CA718[][20];
-extern BattleAbilityCategory     D_801CA719[];
 /* D_801D0C04 */
 extern BattlePhases              g_BattlePhases;
 /* D_801D0C1C */

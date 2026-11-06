@@ -351,7 +351,6 @@ extern u8                    D_8014688C;
 extern s32                   D_80146892;
 extern s32                   D_80146898;
 extern FishingSelectionState D_801468A4[];
-extern u8                    D_801468C6[];
 extern u8                    D_80146918[];
 /* D_80181AC0 */
 extern FacingStep            g_FacingOffsets[];
