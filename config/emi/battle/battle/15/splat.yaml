@@ -549,7 +549,7 @@ segments:
       - [0x1BD8C, c, func_800B258C]
       - [0x1BDC0, c, func_800B25C0]
       - [0x1C490, c, func_800B2C90]
-      - [0x1CA6C, c, Menu_DrawIcon]
+      - [0x1CA6C, c, Menu_DrawPanelIcon]
       - [0x1CB24, c, func_800B3324]
       - [0x1D2E8, c, func_800B3AE8]
       - [0x1DA20, c, func_800B4220]

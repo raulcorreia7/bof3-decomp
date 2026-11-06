@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-void func_801DD618(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
+void Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 
 MATCH void func_801E8DB4(MenuPanelTask* task) {
     u8* table;
@@ -13,6 +13,6 @@ MATCH void func_801E8DB4(MenuPanelTask* task) {
         GetGraphType();
     }
     GFX_AddDrawMode(0xF);
-    func_801DD618((task->x + 9) & HALF_MASK, (task->y + 5) & HALF_MASK, (task->unk_0A + 3) & BYTE_MASK, 0x1E,
+    Menu_DrawPanelIcon((task->x + 9) & HALF_MASK, (task->y + 5) & HALF_MASK, (task->unk_0A + 3) & BYTE_MASK, 0x1E,
                   (GetClut(16, 480) & HALF_MASK), 128);
 }

@@ -29,7 +29,7 @@ segments:
       - [0x10C0, c, MenuDrawSelectionBox]
       - [0x1254, c, Menu_DrawHeaderBar]
       - [0x17A0, c, Menu_DrawPortrait]
-      - [0x1920, c, Menu_DrawIcon]
+      - [0x1920, c, Menu_DrawPanelIcon]
       - [0x19D8, c, Master_DispatchMenu]
       - [0x1A14, c, func_801D2614]
       - [0x1A88, c, func_801D2688]

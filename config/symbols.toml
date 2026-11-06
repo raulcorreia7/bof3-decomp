@@ -102,7 +102,7 @@ Actor_Clear = { addr = 0x800ACFF4, type = "func", source = "clears the five lead
 Battle_DrawTitledFrame = { addr = 0x800B1A74, type = "func", source = "draws the 137x130 bordered panel of the battle list with the title text chosen by title_index from s_BattleFrameTitles, centered over the panel, and the guide lines and corner sprites; func_800B1728 calls it with the panel position before it draws the list rows" }
 Menu_DrawPanelCursor = { addr = 0x800B20D4, type = "func", source = "draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite" }
 Menu_SlidePanelLeft = { addr = 0x800B254C, type = "func", source = "slides the master panel 0x20 left and clamps its x at 0x98, one body shared with the game and start overlays" }
-Menu_DrawIcon = { addr = 0x800B326C, type = "func", source = "draws one MenuIconPrim from uv/clut" }
+Menu_DrawPanelIcon = { addr = 0x800B326C, type = "func", source = "draws one MenuIconPrim from uv/clut" }
 g_BattleEscapeThresholds = { addr = 0x800B44F0, source = "func_8009BACC indexes it with the bucket (diff+0x20)/16 of the party-minus-enemy mean agility difference from func_8009B2B0" }
 s_BattleAffinityLevelBonus = { addr = 0x800B4E94, source = "func_800A7694 writes this bonus for a gene-step affinity level clamped to 0..4" }
 D_800B50B0 = { addr = 0x800B50B0, size = 0x1C, source = "Seven step handlers held by the overlay data, func_800A8540 calls one by mode" }
@@ -1313,6 +1313,7 @@ Menu_DrawTintedLine = { addr = 0x801D36B8, type = "func", source = "emits a semi
 Menu_DrawItemRow = { addr = 0x801D37AC, type = "func", source = "draws the item row stats and icons, shared name with the shop, start and Shisu overlays" }
 Menu_DrawEquipment = { addr = 0x801D3B4C, type = "func", source = "draws a party member's weapon, shield, helmet, armor and two accessories in the equipment slots, the same body as emi/etc/shop/00 0x801D95F4" }
 Menu_DrawIcon = { addr = 0x801D4564, type = "func", source = "draws one 16x8 icon cell from the fixed D8 atlas row, one body shared with the shop, start and Shisu overlays" }
+Menu_DrawPanelIcon = { addr = 0x801D4678, type = "func", source = "draws one panel icon through the MenuDrawPanelIcon inline; same body as Menu_DrawIcon in battle 15, commu02 and sisyou" }
 Menu_DrawExperienceLine = { addr = 0x801D4730, type = "func", source = "draws a character's experience progress line between the current and next level from the level-growth table, one body shared with the shop and Shisu overlays" }
 Menu_DrawZennyWindow = { addr = 0x801D484C, type = "func", source = "draws the caption string, its icon and the glyph rows, one body shared with the shop, start and Shisu overlays" }
 Menu_DrawPlayTimeWindow = { addr = 0x801D49D4, type = "func", source = "draws the play time window: hours and minutes of g_PlayClock with a colon that blinks on the clock's thirtieths count, one body shared with the start, Bate, Shisu and shop overlays" }
@@ -1377,7 +1378,7 @@ Commu_AdvanceStep_801D7E30 = { addr = 0x801D7E30, type = "func", source = "byte-
 Fairy_VillageCountFairies = { addr = 0x801D7E64, type = "func", source = "counts the active rows of the 60-row fairy roster g_FairyJobs" }
 Menu_DrawHeaderBar = { addr = 0x801D8A40, type = "func", source = "draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952); byte-equal copy in the start, sisyou, Bate, Shisu, shop, commu02, scena12 and area008 images" }
 Menu_DrawPortrait = { addr = 0x801D8F8C, type = "func", source = "draws a 40x48 portrait from the image's 4-byte atlas records with the requested shade, one body shared with the shop, start, Bate and Shisu overlays" }
-Menu_DrawIcon = { addr = 0x801D9AC8, type = "func", source = "draws one MenuIconPrim from uv/clut" }
+Menu_DrawPanelIcon = { addr = 0x801D9AC8, type = "func", source = "draws one MenuIconPrim from uv/clut" }
 g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "the 4-byte portrait atlas records walked by Menu_DrawPortrait.h (twin rule, decomp/layout#shared-bodies)" }
 
 ["emi/etc/commu03/06"]
@@ -1687,6 +1688,7 @@ Menu_DrawTintedLine = { addr = 0x801D4660, type = "func", source = "emits a semi
 Menu_DrawItemRow = { addr = 0x801D4754, type = "func", source = "draws the item row stats and icons, shared name with the shop, start and Bate overlays" }
 Menu_DrawEquipment = { addr = 0x801D4AF4, type = "func", source = "draws a party member's weapon, shield, helmet, armor and two accessories in the equipment slots, the same body as emi/etc/shop/00 0x801D95F4" }
 Menu_DrawIcon = { addr = 0x801D550C, type = "func", source = "draws one 16x8 icon cell from the fixed D8 atlas row, one body shared with the shop, start and Bate overlays" }
+Menu_DrawPanelIcon = { addr = 0x801D5620, type = "func", source = "draws one panel icon through the MenuDrawPanelIcon inline; same body as Menu_DrawIcon in battle 15, commu02 and sisyou" }
 Menu_DrawExperienceLine = { addr = 0x801D56D8, type = "func", source = "draws a character's experience progress line between the current and next level from the level-growth table, one body shared with the shop and Bate overlays" }
 Menu_DrawZennyWindow = { addr = 0x801D57F4, type = "func", source = "draws the caption string, its icon and the glyph rows, one body shared with the shop, start and Bate overlays" }
 Menu_DrawPlayTimeWindow = { addr = 0x801D597C, type = "func", source = "draws the play time window: hours and minutes of g_PlayClock with a colon that blinks on the clock's thirtieths count, one body shared with the start, Bate, Shisu and shop overlays" }
@@ -1750,6 +1752,7 @@ Menu_DrawTintedLine = { addr = 0x801D9160, type = "func", source = "emits a semi
 Menu_DrawItemRow = { addr = 0x801D9254, type = "func", source = "draws the item row stats and icons, shared name with the start, Bate and Shisu overlays" }
 Menu_DrawEquipment = { addr = 0x801D95F4, type = "func", source = "draws a party member's weapon, shield, helmet, armor and two accessories in the equipment slots" }
 Menu_DrawIcon = { addr = 0x801DA00C, type = "func", source = "draws one 16x8 icon cell from the fixed D8 atlas row, one body shared with the start, Bate and Shisu overlays" }
+Menu_DrawPanelIcon = { addr = 0x801DA120, type = "func", source = "draws one panel icon through the MenuDrawPanelIcon inline; same body as Menu_DrawIcon in battle 15, commu02 and sisyou" }
 Menu_DrawExperienceLine = { addr = 0x801DA1D8, type = "func", source = "draws a character's experience progress line between the current and next level from the level-growth table, one body shared with the Bate and Shisu overlays" }
 Menu_DrawZennyWindow = { addr = 0x801DA2F4, type = "func", source = "draws the caption string, its icon and the glyph rows, one body shared with the start, Bate and Shisu overlays" }
 Menu_DrawPlayTimeWindow = { addr = 0x801DA47C, type = "func", source = "draws the play time window: hours and minutes of g_PlayClock with a colon that blinks on the clock's thirtieths count, one body shared with the start, Bate, Shisu and shop overlays" }
@@ -1817,7 +1820,7 @@ Char_GetExpForLevel = { addr = 0x801D1C44, type = "func", source = "sums the fir
 Menu_DrawCursorFrame = { addr = 0x801D1CC0, type = "func", source = "draws the 3/4-line selection border at x,y,width,height with the current shade" }
 Menu_DrawHeaderBar = { addr = 0x801D1E54, type = "func", source = "four callers pass the master menu frame rect 20,16 280x19 (MASTER_MENU_FRAME_*) and D_80144952, the UI_DrawWindow window_style" }
 Menu_DrawPortrait = { addr = 0x801D23A0, type = "func", source = "draws a 40x48 portrait from the panel atlas record D_801D4058[sprite_id]" }
-Menu_DrawIcon = { addr = 0x801D2520, type = "func", source = "draws one MenuIconPrim from uv/clut" }
+Menu_DrawPanelIcon = { addr = 0x801D2520, type = "func", source = "draws one MenuIconPrim from uv/clut" }
 Master_DispatchMenu = { addr = 0x801D25D8, type = "func", source = "dispatches g_MasterMenuFuncs by the panel step byte D_801D4285, etc/game/00 runs it each frame" }
 Master_ApplyMaster = { addr = 0x801D3ED0, type = "func", source = "writes the master value D_801D4270[D_801448ED] into the party record at D_80146889 + slot * 0x98 and closes the panel" }
 g_MenuLabelPower = { addr = 0x801D4038, source = "retail text Pwr, drawn beside the power stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
@@ -1858,6 +1861,7 @@ Menu_DrawTintedLine = { addr = 0x801DC658, type = "func", source = "emits a semi
 Menu_DrawItemRow = { addr = 0x801DC74C, type = "func", source = "draws the item row stats and icons, shared name with the shop, Bate and Shisu overlays" }
 Menu_DrawEquipment = { addr = 0x801DCAEC, type = "func", source = "draws a party member weapon, shield, helmet, armor and two accessories in the equipment slots, one body shared with the shop, Bate and Shisu overlays" }
 Menu_DrawIcon = { addr = 0x801DD504, type = "func", source = "draws one 16x8 icon cell from the fixed D8 atlas row, one body shared with the shop, Bate and Shisu overlays" }
+Menu_DrawPanelIcon = { addr = 0x801DD618, type = "func", source = "draws one panel icon through the MenuDrawPanelIcon inline; same body as Menu_DrawIcon in battle 15, commu02 and sisyou" }
 Menu_DrawZennyWindow = { addr = 0x801DD7EC, type = "func", source = "draws the caption string, its icon and the glyph rows, one body shared with the shop, Bate and Shisu overlays" }
 Menu_DrawPlayTimeWindow = { addr = 0x801DD974, type = "func", source = "draws the play time window: hours and minutes of g_PlayClock with a colon that blinks on the clock's thirtieths count, one body shared with the start, Bate, Shisu and shop overlays" }
 Menu_ToggleOption = { addr = 0x801DDB70, type = "func", source = "moves the selection cursor four rows per flag step and toggles the flag on cancel, one body shared with the shop, Bate and Shisu overlays" }

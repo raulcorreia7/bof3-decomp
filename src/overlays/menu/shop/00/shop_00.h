@@ -481,7 +481,8 @@ void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 s
 void Menu_DrawTintedLine(s16 line_x0, s16 line_y0, s16 line_x1, s16 line_y1, u8 color_r, u8 color_g, u8 color_b,
                          u8 tpage);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
-void func_801DA120(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
+/* func_801DA120 */
+void Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 void Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
 void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 u16  Item_GetPrice(s32 category, s32 item_id);
