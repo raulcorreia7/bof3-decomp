@@ -28,8 +28,8 @@ MATCH void func_801C0758(s32 x, s32 y, u8 kind) {
                 out_y  = y - FIELD(s32, &D_801CD480, tab);
                 *y_ptr = out_y;
             }
-            (&D_80145E98)[index]           = kind;
-            FIELD(s16, &D_80145ECE, index) = Area_ReadHeight(*x_ptr, *y_ptr);
+            (&g_BattlePartyBattlers[0].facing)[index] = kind;
+            FIELD(s16, &D_80145ECE, index)            = Area_ReadHeight(*x_ptr, *y_ptr);
             if (count != 0) {
                 VOL(u8, ((u8*)&g_BattlePartyBattlers[0])[index]) |= 0x40;
             } else {

@@ -376,7 +376,7 @@ segments:
       - [0x146E8, c, func_801E52E8]
       - [0x146F0, c, func_801E52F0]
       - [0x1471C, c, Battle_RollEnemyDrops]
-      - [0x148EC, c, Battle_CollectEnemySpoils]
+      - [0x148EC, c, Battle_DefeatEnemy]
       - [0x14A7C, c, func_801E567C]
       - [0x14B04, c, func_801E5704]
       - [0x14B68, c, func_801E5768]

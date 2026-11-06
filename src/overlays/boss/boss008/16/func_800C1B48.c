@@ -11,7 +11,7 @@ MATCH void func_800C1B48(void) {
         g_Task->unk_48 = 0;
         Area_FindSceneRecord(0x83);
         Actor_SelectScript(0U);
-        Battle_CollectEnemySpoils();
+        Battle_DefeatEnemy();
         g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
         g_Task->mode = 6;
         g_Task->step = 4;
@@ -20,16 +20,16 @@ MATCH void func_800C1B48(void) {
         return;
     }
     g_Task->unk_09 = value3 - 4;
-    value          = g_Task->unk_40;
+    value          = g_Task->scale_x;
     if ((s32)value > 0) {
-        g_Task->unk_40 = value - 0x2000;
+        g_Task->scale_x = value - 0x2000;
     } else {
-        g_Task->unk_40 = 0;
+        g_Task->scale_x = 0;
     }
-    value2 = g_Task->unk_44;
+    value2 = g_Task->scale_y;
     if ((s32)value2 > 0) {
-        g_Task->unk_44 = value2 - 0x2000;
+        g_Task->scale_y = value2 - 0x2000;
         return;
     }
-    g_Task->unk_44 = 0;
+    g_Task->scale_y = 0;
 }

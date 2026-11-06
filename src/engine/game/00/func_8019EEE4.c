@@ -67,7 +67,7 @@ MATCH u8 func_8019EEE4(void) {
                     Area_SampleHeight(g_ActorSlots[index].x.fixed, g_ActorSlots[index].y.fixed) + 0x100;
                 g_ActorSlots[index].link = 0;
             }
-            D_80145E97 = 1;
+            g_BattlePartyBattlers[0].unk_07 = 1;
         } else {
             g_Task->unk_0B = 0;
         }

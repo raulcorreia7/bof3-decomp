@@ -20,7 +20,7 @@ MATCH s32 func_801C090C(s32 anchor_x, s32 anchor_y, s32 anchor_index) {
             *x_ptr     = x + FIELD(s32, &D_801CD47C, (anchor_index * 4) & 0x3F8);
             D_80145EC8 = y + FIELD(s32, &D_801CD480, (anchor_index * 4) & 0x3F8);
         }
-        D_80145E98 = anchor_index;
+        g_BattlePartyBattlers[0].facing = anchor_index;
         for (i = 1, off = BATTLE_PARTY_STRIDE; i < count; i++, off += BATTLE_PARTY_STRIDE) {
             /* FAKE: allocation-steering copy into dead y. */
             y = off;
@@ -32,8 +32,8 @@ MATCH s32 func_801C090C(s32 anchor_x, s32 anchor_y, s32 anchor_index) {
             }
         }
     } else {
-        D_80145EC4 = anchor_x;
-        D_80145EC8 = anchor_y;
-        D_80145E98 = anchor_index;
+        D_80145EC4                      = anchor_x;
+        D_80145EC8                      = anchor_y;
+        g_BattlePartyBattlers[0].facing = anchor_index;
     }
 }

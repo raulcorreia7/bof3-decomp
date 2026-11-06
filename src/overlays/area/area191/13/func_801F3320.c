@@ -14,13 +14,13 @@ MATCH void func_801F3320(void) {
     mode             = scratch->unk_0A - 1;
     x                = scratch->x.fixed;
     step             = scratch->vx;
-    angle            = scratch->unk_40;
+    angle            = scratch->scale_x;
     scratch->x.fixed = x + step;
-    spin             = scratch->unk_44;
-    scratch->unk_40  = angle - 0x2000;
+    spin             = scratch->scale_y;
+    scratch->scale_x = angle - 0x2000;
     scratch->unk_0A  = mode;
     check            = g_Task;
-    scratch->unk_44  = spin - 0x2000;
+    scratch->scale_y = spin - 0x2000;
 
     if ((check->unk_0A & 3) == 0) {
         check->unk_04 = 1;

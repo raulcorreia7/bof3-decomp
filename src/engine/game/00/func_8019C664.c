@@ -5,7 +5,7 @@ MATCH void func_8019C664(void) {
     void*  flags;
     Actor* state;
 
-    g_Task->direction_08 = (u8)D_80145E98;
+    g_Task->direction_08 = (u8)g_BattlePartyBattlers[0].facing;
     func_8019EE10();
     g_Task->unk_27 = 0x7B;
     Actor_SelectScript(((u8)g_Task->direction_08 >> 1) + 0x4A);

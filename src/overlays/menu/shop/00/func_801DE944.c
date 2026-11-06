@@ -45,8 +45,8 @@ MATCH void func_801DE944(void) {
             } while (i < g_PartySize);
         }
         if (mode != 2 && D_80145F09[0] == 2) {
-            D_80145EC4 += FIELD(s16, D_801E5C48, D_80145E98 * 4) << 15;
-            D_80145EC8 += FIELD(s16, D_801E5C48, D_80145E98 * 4 + 2) << 15;
+            D_80145EC4 += FIELD(s16, D_801E5C48, g_BattlePartyBattlers[0].facing * 4) << 15;
+            D_80145EC8 += FIELD(s16, D_801E5C48, g_BattlePartyBattlers[0].facing * 4 + 2) << 15;
         }
         if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
             g_AreaScrollTargetX = D_80145EC4;
@@ -55,10 +55,10 @@ MATCH void func_801DE944(void) {
         }
     } else {
         TASK_SET((actor - 0x79));
-        g_PartySize              = 1;
-        D_80145E95               = 0;
-        *(Character*)(actor - 5) = *(Character*)(party - 0x5F2);
-        TASK_BYTES[0x48]         = 0;
+        g_PartySize                   = 1;
+        g_BattlePartyBattlers[0].slot = 0;
+        *(Character*)(actor - 5)      = *(Character*)(party - 0x5F2);
+        TASK_BYTES[0x48]              = 0;
         func_801C1254(D_80145F09[0], 0);
         Actor_SelectScript(TASK_BYTES[8]);
         ACTOR_SET_MODE(0);

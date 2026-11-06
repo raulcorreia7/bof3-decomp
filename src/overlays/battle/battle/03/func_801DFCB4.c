@@ -26,7 +26,7 @@ MATCH void func_801DFCB4(void) {
     slot                                   = g_Task->slot;
     self                                   = g_GameState;
     D_8014639C                             = g_Task;
-    g_BattleTargetRecord                   = (s16*)&self->unk_118;
+    g_BattleTargetRecord                   = (s16*)&self->command;
     g_BattleTarget                         = slot;
     /* Plain pointer stores, not field stores: retail keeps each one ahead
      * of the next g_BattleTargetRecord reload. */

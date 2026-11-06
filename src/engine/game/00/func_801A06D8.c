@@ -24,7 +24,7 @@ MATCH u32 func_801A06D8(void) {
                         !(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                         g_Actors[i].unk_79 = g_Task->direction_08 & 7;
                         if (!(g_Task->option_flags & ACTOR_OPT_KEEP_FACING)) {
-                            g_Task->direction_08 = (D_80145E98 ^ 4) & 7;
+                            g_Task->direction_08 = (g_BattlePartyBattlers[0].facing ^ 4) & 7;
                             func_8015BAC4(g_Task->direction_08);
                         } else {
                             func_8015BAC4(g_Task->direction_08 & 7);

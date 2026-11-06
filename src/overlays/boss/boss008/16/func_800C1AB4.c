@@ -7,10 +7,10 @@ MATCH void func_800C1AB4(void) {
     func_800C236C(g_Task->unk_09);
     work = g_Task;
     if (work->unk_09 == 0x30) {
-        work->unk_48 = 2;
-        spad         = g_Task;
-        spad->unk_40 = 0x10000;
-        spad->unk_44 = 0x10000;
+        work->unk_48  = 2;
+        spad          = g_Task;
+        spad->scale_x = 0x10000;
+        spad->scale_y = 0x10000;
         SND_PlayCue(EMI_CUE_ID(6, 2));
         g_Task->unk_04++;
     } else {

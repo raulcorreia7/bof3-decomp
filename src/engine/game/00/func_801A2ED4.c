@@ -18,8 +18,8 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
     s32        dy;
     u32        dist;
 
-    target_x = D_80145EC4 + D_80145E9C * D_80145E99;
-    target_y = D_80145EC8 + D_80145EA0 * D_80145E99;
+    target_x = D_80145EC4 + g_BattlePartyBattlers[0].unk_0C * g_BattlePartyBattlers[0].unk_09;
+    target_y = D_80145EC8 + g_BattlePartyBattlers[0].unk_10 * g_BattlePartyBattlers[0].unk_09;
     if ((WORK->direction_08 & 1) == 0) {
         WORK->direction_08++;
     }

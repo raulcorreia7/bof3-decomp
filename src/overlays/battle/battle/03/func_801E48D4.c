@@ -8,10 +8,10 @@ MATCH void func_801E48D4(void) {
     s32           timer;
 
     work = g_Task;
-    work->unk_44 += work->unk_10;
+    work->scale_y += work->unk_10;
     work->unk_10 += work->unk_1C;
-    timer = work->unk_44;
+    timer = work->scale_y;
     if (timer < 0) {
-        Battle_CollectEnemySpoils();
+        Battle_DefeatEnemy();
     }
 }

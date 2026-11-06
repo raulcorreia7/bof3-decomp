@@ -1,7 +1,7 @@
 #include "area030_04.h"
 
 /* Fills the area's 32-entry CLUT working copy from the palette
- * block selected by D_80145EB7: entries 1-30 come from the selected 0x200-byte
+ * block selected by g_BattlePartyBattlers[0].unk_27: entries 1-30 come from the selected 0x200-byte
  * block plus the selected 0x40-byte unit, marked opaque, and entries 0 and 31
  * are cleared. It then publishes the palette serial and either selects the
  * late stage (D_8014930E >= 0x39) or seeds the panel bytes before stepping the
@@ -17,7 +17,7 @@ MATCH void func_801D0F5C(void) {
     s32 i;
 
     i        = 1;
-    selected = &D_80145EB7;
+    selected = &g_BattlePartyBattlers[0].unk_27;
     palette  = AREA_PALETTE_WORK;
     dst      = MEM_PTR(u8, 0x80039602u);
     do {

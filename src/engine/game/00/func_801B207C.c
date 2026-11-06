@@ -23,7 +23,7 @@ MATCH void func_801B207C(void) {
         }
     }
     TASK_SET(g_BattlePartyBattlers);
-    if (D_80145E99 == 4) {
+    if (g_BattlePartyBattlers[0].unk_09 == 4) {
         ((PartyBattler*)g_BattlePartyBattlers)[0].step += 1;
     }
 }

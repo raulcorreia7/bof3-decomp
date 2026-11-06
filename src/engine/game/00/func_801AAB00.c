@@ -142,7 +142,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             break;
         case 0xCE:
             cur  = g_Task->direction_08 & 7;
-            want = D_80145E98 ^ 4;
+            want = g_BattlePartyBattlers[0].facing ^ 4;
             if (cur != want) {
                 val = cur + 1;
                 if (((want - cur) << 0x18) <= 0) {

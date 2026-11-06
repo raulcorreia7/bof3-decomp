@@ -78,8 +78,8 @@ MATCH void func_801EF648(void) {
     g_Task->unk_2E.half = (rand() & 3) + 0x9F;
     work                = g_Task;
     work->unk_30.half -= 2;
-    work->unk_44 += 0x2000;
-    if (work->unk_44 > 0x17FFF) {
+    work->scale_y += 0x2000;
+    if (work->scale_y > 0x17FFF) {
         work->step++;
     }
 }

@@ -58,7 +58,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     SetRotMatrix(&m);
     SetTransMatrix(&m);
     if (g_Task->unk_48 == 0) {
-        normal.vx = normal.vy = normal.vz = g_Task->unk_40;
+        normal.vx = normal.vy = normal.vz = g_Task->scale_x;
         ScaleMatrix(&m, &normal);
     }
     light = m;

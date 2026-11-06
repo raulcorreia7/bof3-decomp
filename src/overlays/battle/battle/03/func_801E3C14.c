@@ -24,7 +24,7 @@ MATCH void func_801E3C14(void) {
     slot                                   = g_Task->slot;
     self                                   = g_BattleCurrentEnemy;
     D_8014639C                             = g_Task;
-    g_BattleTargetRecord                   = (s16*)&self->pad_F1[3];
+    g_BattleTargetRecord                   = (s16*)&self->command;
     g_BattleTarget                         = slot;
     *(s16*)((u8*)self + 0xF8)              = 0;
     *(s16*)((u32)g_BattleTargetRecord + 6) = 0;

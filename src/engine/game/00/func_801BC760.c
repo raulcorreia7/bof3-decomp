@@ -26,8 +26,8 @@ NON_MATCHING s32 func_801BC760(void) {
     GameState*    saved;
 
     dir    = g_Task->route_index_08;
-    goal_x = D_80145EC4 + (D_80145E9C * D_80145E99);
-    goal_y = D_80145EC8 + (D_80145EA0 * D_80145E99);
+    goal_x = D_80145EC4 + (g_BattlePartyBattlers[0].unk_0C * g_BattlePartyBattlers[0].unk_09);
+    goal_y = D_80145EC8 + (g_BattlePartyBattlers[0].unk_10 * g_BattlePartyBattlers[0].unk_09);
     if (D_80145FBB[g_Task->unk_05 ^ 3].mode != 9) {
         if (g_Task->unk_05 == 2) {
             if (D_80145FD6 == 0) {
@@ -139,8 +139,8 @@ NON_MATCHING s32 func_801BC760(void) {
         if (*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN) {
             saved       = g_GameState;
             g_GameState = (GameState*)g_BattlePartyBattlers;
-            near_a      = (D_80145EC4 + (D_80145E9C * D_80145E99)) & ~0x7FFF;
-            near_b      = (D_80145EC8 + (D_80145EA0 * D_80145E99)) & ~0x7FFF;
+            near_a      = (D_80145EC4 + (g_BattlePartyBattlers[0].unk_0C * g_BattlePartyBattlers[0].unk_09)) & ~0x7FFF;
+            near_b      = (D_80145EC8 + (g_BattlePartyBattlers[0].unk_10 * g_BattlePartyBattlers[0].unk_09)) & ~0x7FFF;
             if (!(func_801C3E40(near_a, near_b, g_Task->state_70.byte, Area_ReadHeight(near_a, near_b)) & BYTE_MASK)) {
                 g_GameState = saved;
                 *(u8*)g_Task |= ACTOR_FLAG_HIDDEN;
@@ -149,7 +149,7 @@ NON_MATCHING s32 func_801BC760(void) {
                 g_GameState->flags_12C.s8_value &= 0xFE;
                 g_GameState->flags_12C.s8_value |= (D_80145FBC & 1);
                 COORD_INT(g_Task->depth) = Area_ReadHeight(near_a, near_b);
-                g_Task->unk_29           = D_80145EB9;
+                g_Task->unk_29           = g_BattlePartyBattlers[0].unk_29;
                 FIELD(s8, g_Task, 0x1u)  = 2;
                 FIELD(s8, g_Task, 0x2u)  = 2;
                 return 0xFF;

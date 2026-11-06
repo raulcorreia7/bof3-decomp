@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801E54EC */
-MATCH void Battle_CollectEnemySpoils(void) {
+MATCH void Battle_DefeatEnemy(void) {
     u8            count;
     int           new_var;
     volatile u32* acc;

@@ -106,16 +106,16 @@ MATCH void func_801EF3C8(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        temp_x         = g_Task->pos.x.fixed;
-        temp_a1        = g_Task->pos.y.fixed;
-        temp_a2        = g_Task->pos.z.fixed;
-        g_Task->unk_0C = 0x2000;
-        g_Task->unk_14 = 0x300000;
-        g_Task->unk_10 = 0;
-        g_Task->unk_20 = -0x80000;
-        g_Task->unk_18 = temp_x;
-        g_Task->unk_1C = temp_a1;
-        g_Task->unk_44 = temp_a2;
+        temp_x          = g_Task->pos.x.fixed;
+        temp_a1         = g_Task->pos.y.fixed;
+        temp_a2         = g_Task->pos.z.fixed;
+        g_Task->unk_0C  = 0x2000;
+        g_Task->unk_14  = 0x300000;
+        g_Task->unk_10  = 0;
+        g_Task->unk_20  = -0x80000;
+        g_Task->unk_18  = temp_x;
+        g_Task->unk_1C  = temp_a1;
+        g_Task->scale_y = temp_a2;
         func_801DD350(g_Task);
         g_Task->unk_09 = func_800AFF98();
         g_Task->step += 1;
@@ -144,7 +144,7 @@ MATCH void func_801EF478(void) {
     g_Task->pos.z.fixed += g_Task->unk_14;
     g_Task->unk_14 += g_Task->unk_20;
     func_8014DAEC();
-    if (g_Task->pos.z.fixed == g_Task->unk_44) {
+    if (g_Task->pos.z.fixed == g_Task->scale_y) {
         g_Task->step += 1;
     }
 }
@@ -214,7 +214,7 @@ MATCH void func_801EF918(void) {
     g_Task->pos.z.fixed += g_Task->unk_14;
     g_Task->unk_14 += g_Task->unk_20;
     func_8014DAEC();
-    if (g_Task->pos.z.fixed == g_Task->unk_44) {
+    if (g_Task->pos.z.fixed == g_Task->scale_y) {
         g_Task->step++;
     }
 }
