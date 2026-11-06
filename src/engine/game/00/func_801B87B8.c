@@ -21,28 +21,28 @@ MATCH void func_801B87B8(void) {
             func_801B9598();
         }
         switch (g_InputHeld & INPUT_DIRECTIONAL) {
-            case 0x1000:
+            case PADLup:
                 g_Task->unk_0B = 0;
                 break;
-            case 0x3000:
+            case PADLup | PADLright:
                 g_Task->unk_0B = 1;
                 break;
-            case 0x2000:
+            case PADLright:
                 g_Task->unk_0B = 2;
                 break;
-            case 0x6000:
+            case PADLright | PADLdown:
                 g_Task->unk_0B = 3;
                 break;
-            case 0x4000:
+            case PADLdown:
                 g_Task->unk_0B = 4;
                 break;
-            case 0xC000:
+            case PADLdown | PADLleft:
                 g_Task->unk_0B = 5;
                 break;
-            case 0x8000:
+            case PADLleft:
                 g_Task->unk_0B = 6;
                 break;
-            case 0x9000:
+            case PADLleft | PADLup:
                 g_Task->unk_0B = 7;
                 break;
         }
