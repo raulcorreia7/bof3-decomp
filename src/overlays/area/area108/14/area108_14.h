@@ -63,4 +63,6 @@ void func_801F55F0(s32);
 s32  func_801F3034(void);
 void func_801F34B8(void);
 
+void func_801F4160(s32 arg0, s32 arg1);
+
 #endif

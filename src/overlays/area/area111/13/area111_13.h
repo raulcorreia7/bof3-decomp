@@ -12,4 +12,6 @@ extern u8 D_801F489C[];
 
 void func_801F2DA0(void* arg0, s32 arg1, s32 arg2);
 
+void func_801A4BC0(s32 arg0, s32 arg1, s32 arg2);
+
 #endif

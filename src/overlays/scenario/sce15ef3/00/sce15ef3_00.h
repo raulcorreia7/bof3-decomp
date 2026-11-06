@@ -24,4 +24,6 @@ void        func_801D1A60(void);
 void        func_801D230C(void);
 extern void func_801D23AC(u8 arg);
 
+void func_801D19A0(void);
+
 #endif

@@ -16,4 +16,7 @@ extern Callback      D_801D1758[];
 extern u8            D_801D1774;
 
 /* The overlay's state byte the guarded step advances. */
+
+void func_801D16A4(void);
+
 #endif

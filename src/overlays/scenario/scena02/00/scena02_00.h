@@ -78,4 +78,7 @@ extern SceneFunc D_801FE304[66];
         }                                                                                                         \
     }
 
+void func_801FC7E4(void);
+void func_801FC9CC(void);
+
 #endif

@@ -41,4 +41,6 @@ void func_801F36C0(void* arg0, s32 arg1, s32 arg2);
 void func_801F3BFC(const void* spin);
 void func_801F3FAC(void);
 
+void func_801F4F70(s32 arg0, s32 arg1);
+
 #endif

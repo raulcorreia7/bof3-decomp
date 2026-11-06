@@ -30,4 +30,6 @@ extern u32 g_GameEntryStateWord;
 
 void func_801F3630(void);
 
+void func_801F3F5C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+
 #endif

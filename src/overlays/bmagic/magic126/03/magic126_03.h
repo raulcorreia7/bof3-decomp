@@ -27,4 +27,7 @@ extern PartyBattler* D_801F22BC;
 
 void func_801EF7A4(void);
 
+void func_801EF1C8(void);
+void func_801EF438(void);
+
 #endif

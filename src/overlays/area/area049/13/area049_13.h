@@ -20,4 +20,7 @@ extern Callback D_801181B4[];
 s32  func_80117410();
 void func_80117900(void);
 
+void func_801172D0(void);
+void func_80117E78(s32 arg0, s32 arg1);
+
 #endif

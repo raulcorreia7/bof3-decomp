@@ -58,4 +58,20 @@ void func_801D32A0(s32 arg0, s32 arg1, s32 arg2);
 void func_801D4EA4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_801DA8E8(void);
 
+void func_801D2794(s32 arg0, s32 arg1, s32 arg2);
+void func_801D2870(void);
+void func_801D2AC4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801D2CF8(s32 arg0, s32 arg1, s32 arg2);
+void func_801D3184(s32 arg0, s32 arg1);
+void func_801D4AE0(s32 arg0, s32 arg1, s32 arg2);
+void func_801D4F88(s32 arg0, s32 arg1, s32 arg2);
+void func_801D5B2C(void);
+void func_801D8058(s32 arg0, s32 arg1);
+void func_801D830C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801D90D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801D94D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void func_801D97C8(s32 arg0, s32 arg1, s32 arg2);
+void func_801D9B80(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801DA7A4(void);
+
 #endif

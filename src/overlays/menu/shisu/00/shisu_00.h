@@ -122,4 +122,6 @@ extern u8              D_801DA0C6;
 
 s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 
+void func_801D7224(s32 arg0);
+
 #endif

@@ -37,4 +37,6 @@ void func_801F4544(void);
 void func_801F45C8(void);
 void func_801F4798(void* arg0, void* arg1);
 
+void func_801F4614(void);
+
 #endif

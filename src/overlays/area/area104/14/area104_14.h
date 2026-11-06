@@ -45,4 +45,7 @@ s32 func_801F4AE4(s32, s32, s32);
 
 void func_801F656C(void);
 
+void func_801F4608(s32 arg0);
+void func_801F5BB0(s32 arg0);
+
 #endif
