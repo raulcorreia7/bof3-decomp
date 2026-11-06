@@ -147,4 +147,4 @@ INCLUDE_ASM(Scene_StepScanBars);
 
 INCLUDE_ASM(func_801D17A0);
 
-INCLUDE_ASM(func_801D19A8);
+#include "../../Scene_DrawRedGradient.h"

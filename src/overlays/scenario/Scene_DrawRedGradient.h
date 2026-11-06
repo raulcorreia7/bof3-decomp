@@ -1,0 +1,55 @@
+/* func_801D19A8 (sce15ef2), func_801D1BAC (sce15ef3) */
+MATCH void Scene_DrawRedGradient(s8 red) {
+    POLY_G4* prim;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x380, 0x100) & 0xFFFF, NULL);
+    GFX_AddPrim(7U, 0xCU);
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 0);
+    prim->x0 = 0;
+    prim->y0 = 0;
+    prim->x1 = 0x140;
+    prim->y1 = 0;
+    prim->x2 = 0;
+    prim->y2 = 0x78;
+    prim->x3 = 0x140;
+    prim->y3 = 0x78;
+    prim->r0 = 0;
+    prim->g0 = 0;
+    prim->b0 = 0;
+    prim->r1 = 0;
+    prim->g1 = 0;
+    prim->b1 = 0;
+    prim->r2 = red;
+    prim->g2 = 0;
+    prim->b2 = 0;
+    prim->r3 = red;
+    prim->g3 = 0;
+    prim->b3 = 0;
+    GFX_AddPrim(7U, 0x24U);
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 0);
+    prim->x0 = 0;
+    prim->y0 = 0x78;
+    prim->x1 = 0x140;
+    prim->y1 = 0x78;
+    prim->x2 = 0;
+    prim->y2 = 0xF0;
+    prim->x3 = 0x140;
+    prim->y3 = 0xF0;
+    prim->r0 = red;
+    prim->g0 = 0;
+    prim->b0 = 0;
+    prim->r1 = red;
+    prim->g1 = 0;
+    prim->b1 = 0;
+    prim->r2 = 0;
+    prim->g2 = 0;
+    prim->b2 = 0;
+    prim->r3 = 0;
+    prim->g3 = 0;
+    prim->b3 = 0;
+    GFX_AddPrim(7U, 0x24U);
+}

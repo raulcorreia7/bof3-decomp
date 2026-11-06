@@ -176,7 +176,7 @@ INCLUDE_ASM(func_801D19A0);
 
 INCLUDE_ASM(func_801D1A60);
 
-INCLUDE_ASM(func_801D1BAC);
+#include "../../Scene_DrawRedGradient.h"
 
 INCLUDE_ASM(func_801D1D20);
 
