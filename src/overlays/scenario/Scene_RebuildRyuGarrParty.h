@@ -23,5 +23,5 @@ MATCH void Scene_RebuildRyuGarrParty(void) {
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_GARR);
     Party_JoinMember(character & BYTE_MASK);
-    func_801C1630();
+    Party_StagePalettes();
 }

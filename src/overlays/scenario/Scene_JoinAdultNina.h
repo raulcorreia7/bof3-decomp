@@ -6,5 +6,5 @@ MATCH void Scene_JoinAdultNina(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(0);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
-    func_801C1630();
+    Party_StagePalettes();
 }

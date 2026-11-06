@@ -743,7 +743,8 @@ extern const s16                   D_8017F814[54];
 extern const u16                   D_8017F880[10];
 extern const u32                   D_8017F8E0[4];
 extern void                        func_8014BC70(void);
-extern const ObjectFunc            D_8017F8F0[7];
+/* D_8017F8F0 */
+extern const ObjectFunc            g_BundleOpcodeHandlers[7];
 extern u8                          D_8017F91C;
 extern u8                          D_8017F91D;
 extern const u16                   D_8017F92C[2];
@@ -786,12 +787,17 @@ extern u16                         D_801822CA;
 extern u16                         D_801822EA;
 extern u16                         D_80182308[16];
 extern s8                          D_8018232A;
-extern u32                         D_80182348[3][7];
-extern u32                         D_8018239C[3][7];
-extern u32                         D_801823F0[3][7];
+/* D_80182348 */
+extern u32                         g_SndBankSpuAddress[3][7];
+/* D_8018239C */
+extern u32                         g_SndBankHeaderSize[3][7];
+/* D_801823F0 */
+extern u32                         g_SndBankSequenceSize[3][7];
 extern DiscLba                     g_EmiSlotLbas[];
-extern u32                         D_80183230[3];
-extern u32                         D_8018323C[3];
+/* D_80183230 */
+extern u32                         g_XaStreamSlots[3];
+/* D_8018323C */
+extern u32                         g_XaCueTables[3];
 extern u32                         g_EmiEntryHandlers[11];
 extern u32                         g_XaStateFuncs[55];
 extern u32                         D_80183A1C[17];
@@ -1242,7 +1248,8 @@ extern void func_8015A098(void);
 extern void func_8015A170(void);
 extern void func_8015A1D8(void);
 extern void func_8015A264(void);
-void        func_8015A2B0(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray);
+/* func_8015A2B0 */
+void        UI_DrawLine(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray);
 extern u8*  UI_DrawTextAt(s32 x, s32 y, u8* text);
 void        func_8015A554(void);
 extern void func_8015A9A4(void);
@@ -1291,7 +1298,7 @@ u8          EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);
 extern void func_80167428(void);
 void        func_8016BA04(void);
 extern const ObjectFunc
-           D_8017F8FC[]; /* interior of D_8017F8F0 (index 3); a separate symbol keeps func_801584A4 matching */
+           g_BundleRecordHandlers[]; /* interior of g_BundleOpcodeHandlers (index 3); a separate symbol keeps func_801584A4 matching */
 extern u8  D_8017F90D;
 void       func_801A17A0(u8* entry_record);
 void       func_801C1254(s32 ability_id, s32 party_slot, s32 ignored);

@@ -11,7 +11,7 @@ MATCH void Battle_Update(void) {
     Battle_RunParty();
     Battle_RunEnemies();
     Battle_RunEvents();
-    func_801527E4();
+    Area_StepCamera();
     Battle_RunEffects();
     Battle_UpdatePartyActors();
     Battle_UpdateEnemyActors();

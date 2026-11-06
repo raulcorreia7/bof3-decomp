@@ -2,8 +2,9 @@
 
 /* nonmatching unmeasured: tried frame pad 24 added (65.85%); search-loop limit as signed local gives blez but
  * regresses; prev/cur address order in compaction loop (retail a0=cur, v1=prev via v0-1). */
+/* func_801C1ABC */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801C1ABC(s32 character_id) {
+NON_MATCHING void Party_RemoveMember(s32 character_id) {
     s32  slot;
     s32  limit;
     s32  key;
@@ -114,5 +115,5 @@ NON_MATCHING void func_801C1ABC(s32 character_id) {
     g_PartySize = (u8)((s32)g_PartySize - 1);
 }
 #else
-INCLUDE_ASM(func_801C1ABC);
+INCLUDE_ASM(Party_RemoveMember);
 #endif

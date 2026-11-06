@@ -488,7 +488,7 @@ MATCH void Scene_SetPartyRyuYoungNinaYoungGarr(void) {
 }
 
 MATCH void func_801FDBCC(void) {
-    func_801C1ABC(D_80146189);
+    Party_RemoveMember(D_80146189);
 }
 
 /* blocker: nops after each load; first diff: 0x801FDC30 nop against lui a0. */

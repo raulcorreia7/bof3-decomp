@@ -4,7 +4,7 @@
 MATCH void func_801E0BD0(void) {
     func_80199440();
     func_801DE4AC();
-    func_801527E4();
+    Area_StepCamera();
     func_801BDAB8();
     func_801E09B4();
     Actor_DispatchAll();

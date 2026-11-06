@@ -77,13 +77,13 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     setXY4(line, x1, y1, x2 + 1, y1, x2 + 1, y2 + 1, x1, y2 + 1);
     GFX_AddPrim(1, 0x1C);
 
-    func_8015A2B0(x1, y1, x1, y2 + 1, 0xC8);
+    UI_DrawLine(x1, y1, x1, y2 + 1, 0xC8);
     x3 = x - 2;
-    func_8015A2B0(x3, y, x3, y2, 0x8C);
-    func_8015A2B0(x2 + 2, y, x2 + 2, y2, 0x8C);
+    UI_DrawLine(x3, y, x3, y2, 0x8C);
+    UI_DrawLine(x2 + 2, y, x2 + 2, y2, 0x8C);
     y3 = y - 2;
-    func_8015A2B0(x, y3, x2, y3, 0x8C);
-    func_8015A2B0(x, y2 + 2, x2, y2 + 2, 0x8C);
+    UI_DrawLine(x, y3, x2, y3, 0x8C);
+    UI_DrawLine(x, y2 + 2, x2, y2 + 2, 0x8C);
 }
 #else
 INCLUDE_ASM(func_80159B9C);

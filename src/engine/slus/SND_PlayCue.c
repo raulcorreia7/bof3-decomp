@@ -165,7 +165,7 @@ queue_special0:
     goto queue_update; /* shared active-cue update */
 
 queue_array_guard:
-    if (D_8018E140[D_8018B3F0] != 0) {
+    if (g_SndVoiceStatus[D_8018B3F0] != 0) {
         return;
     }
     if (D_8018B3E4 == 1) {

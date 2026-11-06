@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801C1630(void) {
+/* func_801C1630 */
+MATCH void Party_StagePalettes(void) {
     Actor* work;
     s32    i;
     s32    block;

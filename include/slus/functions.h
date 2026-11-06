@@ -145,7 +145,8 @@ void         UI_ScrollChoice(void);
 void         UI_RunChoiceStep(void);
 /* func_801526F4 */
 extern void  UI_DrawWaitMarker(s16 x, s16 y);
-extern void  func_801527E4(void);
+/* func_801527E4 */
+extern void  Area_StepCamera(void);
 void         func_80153DE8(void);
 /* func_80154698 */
 extern void  Area_RefreshCellGrid(void);

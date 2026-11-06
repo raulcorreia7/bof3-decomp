@@ -363,12 +363,12 @@ MATCH void func_801FBBC4(void) {
         D_8014490B[slot] = D_80144F5D[slot];
     }
     for (slot = 0; slot < 3; slot++) {
-        func_801C1ABC(D_80144908[slot]);
+        Party_RemoveMember(D_80144908[slot]);
     }
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FBC88(void) {
@@ -406,22 +406,22 @@ MATCH void func_801FBDD8(void) {
         ids[slot] = g_BattlePartyBattlers[slot].chr.character_id;
     }
     for (slot = 0; slot < 3; slot++) {
-        func_801C1ABC(ids[slot]);
+        Party_RemoveMember(ids[slot]);
     }
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FBE98(void) {
     Party_JoinMember(CHAR_ID_REI);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FBEC0(void) {
     Party_JoinMember(CHAR_ID_GARR);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FBEE8(void) {

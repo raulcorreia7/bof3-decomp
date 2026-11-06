@@ -265,7 +265,8 @@ extern u8             D_80183A10;
 extern u8             D_80183A18;
 /* D_8018B300 */
 extern u8             g_SysHardwareInitialized;
-extern s32            D_8018E140[];
+/* D_8018E140 */
+extern s32            g_SndVoiceStatus[];
 
 /* Card event result codes, in event order: the software events
  * (EvSpIOE, EvSpTIMOUT, EvSpNEW, EvSpERROR) and the hardware events that

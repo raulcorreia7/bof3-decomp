@@ -163,12 +163,14 @@ s32   func_801BE1B0(u32 index);
 void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
 /* func_801C1400 */
 void  Party_BuildBattlers(u32 mode);
+/* Party_StagePalettes */
 /* func_801C1630 */
-void  func_801C1630(void);
+void  Party_StagePalettes(void);
 /* func_801C187C */
 s32   Party_JoinMember(s32 char_id);
+/* Party_RemoveMember */
 /* func_801C1ABC */
-void  func_801C1ABC(s32 character_id);
+void  Party_RemoveMember(s32 character_id);
 /* func_801C1DF0 */
 void  func_801C1DF0(s32 handler_index);
 /* func_801C2438 */
