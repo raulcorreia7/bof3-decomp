@@ -9,7 +9,7 @@ MATCH void func_801F4E3C(void) {
     func_801C2BEC();
     if (g_GameRequestFlags & 1) {
         if ((Area_GetCellCode((s32)COORD_INT(g_Task->x), (s32)COORD_INT(g_Task->y)) & 0xFF) == 0xAF) {
-            func_8019FA28(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
+            Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
             g_GameEntryMode   = 0;
             g_GameRequestKind = 0xC;
             return;

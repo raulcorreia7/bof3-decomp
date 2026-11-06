@@ -50,7 +50,7 @@ MATCH void func_801F8850(void) {
     flags = &D_80145FF4;
     *flags &= 0xFE;
     D_80146134 &= 0xFE;
-    func_8019FA28(0xC4, 0x298000, 0x168000, 0x80);
+    Game_RequestAreaChange(0xC4, 0x298000, 0x168000, 0x80);
     Game_SetScriptActive();
     D_80146874 = 2;
     D_80146875 = 0;
@@ -196,9 +196,9 @@ MATCH void Scene_SetPartyRyuAdultGarrPeco(void) {
 MATCH void func_801FC0C8(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_REI, *D_80144908, 0U);
     g_PartySize = 0;
-    func_801C187C(CHAR_ID_RYU_ADULT);
-    func_801C187C(CHAR_ID_REI);
-    func_801C187C(*D_80144908);
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_JoinMember(CHAR_ID_REI);
+    Party_JoinMember(*D_80144908);
     func_801C1630();
 }
 
