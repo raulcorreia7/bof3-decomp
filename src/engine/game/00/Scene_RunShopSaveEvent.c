@@ -16,11 +16,11 @@ MATCH void Scene_RunShopSaveEvent(void) {
             g_AreaDrawFlags = 0;
             func_801C16B8();
             SND_PauseBgm(g_SndBgmId);
-            SND_StartXaStream(0, 1);
+            SND_StartXAStream(0, 1);
             D_801448EC = 2;
             break;
         case 2:
-            if ((SND_IsXaIdle() & BYTE_MASK) == 0) {
+            if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
                 break;
             }
             SND_ResumeBgm(g_SndBgmId);
@@ -84,11 +84,11 @@ MATCH void Scene_RunShopSaveEvent(void) {
             g_AreaDrawFlags = 0;
             func_801C16B8();
             SND_PauseBgm(g_SndBgmId);
-            SND_StartXaStream(0, 1);
+            SND_StartXAStream(0, 1);
             D_801448EC = 22;
             break;
         case 22:
-            if ((SND_IsXaIdle() & BYTE_MASK) == 0) {
+            if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
                 break;
             }
             SND_ResumeBgm(g_SndBgmId);

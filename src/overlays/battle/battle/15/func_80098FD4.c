@@ -24,6 +24,6 @@ MATCH void func_80098FD4(void) {
     func_8009B20C();
     g_BattleStep    = 1u;
     g_BattleSubStep = 0u;
-    g_BattleUiStep  = 0u;
-    g_BattleUiState = 0u;
+    g_BattleUIStep  = 0u;
+    g_BattleUIState = 0u;
 }

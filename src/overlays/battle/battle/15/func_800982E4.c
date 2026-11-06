@@ -8,5 +8,5 @@ MATCH void func_800982E4(void) {
     g_BattleSelectionLatch = 0u;
     g_BattleStep           = 2u;
     g_BattleSubStep        = 0u;
-    g_BattleUiStep         = 0u;
+    g_BattleUIStep         = 0u;
 }

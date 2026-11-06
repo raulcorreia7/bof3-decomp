@@ -13,8 +13,8 @@ MATCH void func_80197E54(void) {
         g_BattleMode       = 0;
         g_BattleStep       = 0;
         g_BattleSubStep    = 0;
-        g_BattleUiStep     = 0;
-        g_BattleUiState    = 0;
+        g_BattleUIStep     = 0;
+        g_BattleUIState    = 0;
         g_BattlePartyCount = Party_CountOrder(1);
         state              = &g_GameEntrySubstate;
         (*state)++;

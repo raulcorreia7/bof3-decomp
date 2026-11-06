@@ -221,7 +221,7 @@ extern u8              D_80145FC6;
 extern u8              D_80145FC7;
 extern u8              D_80145FC9;
 /* D_801462E3 */
-extern u8              g_BattleUiStep;
+extern u8              g_BattleUIStep;
 extern u8              D_801462E7;
 /* D_801462F0 */
 extern u8              g_BattlePartyCount;
@@ -464,7 +464,7 @@ void       func_800980A8(void);
 void       func_8009834C(void);
 void       func_8009B274(void);
 /* func_8009BBE8 */
-void       Battle_TestAiCondition(void);
+void       Battle_TestAICondition(void);
 void       func_8009BFC4(void);
 void       func_8009D198(void);
 u16        func_800A2AE0(u8 arg0);
@@ -558,7 +558,7 @@ extern void   func_801D1228(void);
 void          Battle_DispatchEntrance(void);
 extern void   Battle_ReserveStagePanels(void);
 /* func_801D1AB4 */
-void          Battle_WaitUiMode(void);
+void          Battle_WaitUIMode(void);
 /* func_801D1AE8 */
 void          Battle_InitPanels(void);
 /* func_801D1B94 */

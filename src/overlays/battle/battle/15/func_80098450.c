@@ -93,7 +93,7 @@ MATCH void func_80098450(void) {
         D_80148626     = 5u;
         D_80148624     = 1u;
         D_8014862F     = 0xFFu;
-        g_BattleUiStep = 6u;
+        g_BattleUIStep = 6u;
         D_8014862E     = 0u;
         D_801483C0     = 0u;
         D_80148628     = (D_80148574 + 0x20);
@@ -109,7 +109,7 @@ MATCH void func_80098450(void) {
         D_801454FF                               = D_8014857C;
         g_BattleMessageSlot[0x119]               = 0u;
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        *(u8*)&g_BattleUiStep += 1u;
+        *(u8*)&g_BattleUIStep += 1u;
         return;
     }
     if ((g_InputPressed & D_80145AC2) != 0u) {
@@ -125,6 +125,6 @@ MATCH void func_80098450(void) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         g_BattleChoicePhase = 1u;
         D_801485DC          = 0u;
-        g_BattleUiStep      = 3u;
+        g_BattleUIStep      = 3u;
     }
 }

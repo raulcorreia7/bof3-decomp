@@ -21,7 +21,7 @@ MATCH void func_8009B488(void) {
     *(u16*)&D_8014930A += (s8)((u8*)D_800B44C0)[speed_offset];
     value = ((u8*)D_800B44C0)[speed_offset + 1];
     *(u16*)&D_8014930E += (s8)value;
-    if (g_BattleUiStep == 2) {
+    if (g_BattleUIStep == 2) {
         g_AreaCameraHeightStep =
             (((((s32 (*)(s32, s32))Area_SampleHeight)(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight)
               << 16) >>
@@ -56,6 +56,6 @@ MATCH void func_8009B488(void) {
             count++;
         } while ((u32)(count & BYTE_MASK) < g_BattlePartyCount);
     }
-    phase = &g_BattleUiState;
+    phase = &g_BattleUIState;
     *phase += 1;
 }

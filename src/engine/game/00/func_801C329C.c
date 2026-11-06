@@ -46,14 +46,14 @@ MATCH void func_801C329C(void) {
                     do {
                         id  = D_80144F5A[index];
                         sel = g_CharSlot[id];
-                        if ((g_Characters[sel].status & STATUS_POISONED) && ((Char_LoseHp(1, id) & HALF_MASK) != 0)) {
+                        if ((g_Characters[sel].status & STATUS_POISONED) && ((Char_LoseHP(1, id) & HALF_MASK) != 0)) {
                             found = 1;
                         }
                         index++;
                     } while (index < (s16)total);
                 }
             } else {
-                if ((Char_LoseHp(1, g_GameState->slot_index_79) & HALF_MASK) != 0) {
+                if ((Char_LoseHP(1, g_GameState->slot_index_79) & HALF_MASK) != 0) {
                     found = 1;
                 }
             }

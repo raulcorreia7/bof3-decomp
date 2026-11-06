@@ -3,7 +3,7 @@
 /* advances the record halfword toward its limit by delta, clamping
  * at the limit, and notifies once the value reaches a quarter of the limit.
  */
-MATCH bool Char_RestoreHp(s32 character_index, s32 amount, s32 use_battle_copy) {
+MATCH bool Char_RestoreHP(s32 character_index, s32 amount, s32 use_battle_copy) {
     Character* rec;
     s32        cur;
     s32        limit;

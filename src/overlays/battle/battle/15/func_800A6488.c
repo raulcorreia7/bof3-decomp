@@ -4,7 +4,7 @@
  * slot bytes at +0x00..+0x02 index the D_800B4C7C value table. */
 
 MATCH void func_800A6488(void) {
-    u8* counter = (u8*)&g_BattleUiState;
+    u8* counter = (u8*)&g_BattleUIState;
 
     D_80145518[*(s16*)&D_801485EC + D_801485EE].slot_00 =
         g_BattleTargetRows[g_BattleTargetCursorCol + D_801485CA].slot_00;

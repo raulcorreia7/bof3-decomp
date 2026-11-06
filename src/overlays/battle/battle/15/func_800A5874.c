@@ -12,7 +12,7 @@ MATCH void func_800A5874(void) {
         g_BattleSelectionHead = 0;
         D_801485DC            = 0;
         EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_RE2);
-        counter  = &g_BattleUiState;
+        counter  = &g_BattleUIState;
         *counter = *counter + 1;
     }
 }

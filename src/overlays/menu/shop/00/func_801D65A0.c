@@ -4,7 +4,7 @@ MATCH void func_801D65A0(void) {
     u8 count;
 
     func_801D6E94();
-    SND_StartXaStream(0, 1);
+    SND_StartXAStream(0, 1);
     count      = D_80148651;
     D_80148654 = 0x96;
     D_80148651 = count + 1;

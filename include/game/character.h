@@ -66,16 +66,16 @@ typedef enum EquipSlot {
 /* Playable-character slot: the record's position in the 8-entry base-stat
  * array. Whelp occupies slot 7 but stores 0x0A in its character index field;
  * slot and stored index are different namespaces (@source: wiki:data/records#masks-and-value-ranges). */
-typedef enum CharacterSlot {
-    CHAR_SLOT_RYU   = 0,
-    CHAR_SLOT_NINA  = 1,
-    CHAR_SLOT_GARR  = 2,
-    CHAR_SLOT_TEEPO = 3,
-    CHAR_SLOT_REI   = 4,
-    CHAR_SLOT_MOMO  = 5,
-    CHAR_SLOT_PECO  = 6,
-    CHAR_SLOT_WHELP = 7,
-} CharacterSlot;
+typedef enum CharacterIndex {
+    CHAR_INDEX_RYU   = 0,
+    CHAR_INDEX_NINA  = 1,
+    CHAR_INDEX_GARR  = 2,
+    CHAR_INDEX_TEEPO = 3,
+    CHAR_INDEX_REI   = 4,
+    CHAR_INDEX_MOMO  = 5,
+    CHAR_INDEX_PECO  = 6,
+    CHAR_INDEX_WHELP = 7,
+} CharacterIndex;
 
 /* Stored character id. The party-order arrays hold these values, not record
  * slots; menu/party.h owns the map that resolves one to a record slot.
@@ -144,7 +144,7 @@ typedef struct Stats {
     u16 intellect;
     u16 unk_0C;
     u8  willpower;
-    u8  resistances[RES_SLOT_COUNT];
+    u8  resistances[RES_INDEX_COUNT];
     u8  surprise_chance;
     u8  reprisal_chance;
     u8  critical_chance;
@@ -261,7 +261,7 @@ typedef struct CharacterBankSection {
 ASSERT_SIZE(CharacterBank, 0x0C);
 ASSERT_OFFSET(CharacterBankSection, palette_offset, 0x04);
 
-/* The party's character records, one per CHAR_SLOT_*. Every field/menu reader
+/* The party's character records, one per CHAR_INDEX_*. Every field/menu reader
  * indexes it through the g_CharSlot slot of a stored character id. */
 /* D_80144968 */
 extern Character   g_Characters[PARTY_RECORD_COUNT];

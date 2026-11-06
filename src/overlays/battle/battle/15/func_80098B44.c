@@ -6,13 +6,13 @@ MATCH void func_80098B44(void) {
     flags = Item_GetFlags(D_8014857A, D_801C893C[D_8014857A][D_8014857C]);
     if ((flags & 0x20u) != 0u) {
         D_801EB4D8[0]   = Battle_FindSelectableSlotForward(3);
-        g_BattleUiState = 1u;
+        g_BattleUIState = 1u;
     } else if (func_8009AF7C() != 0u) {
         D_801EB4D8[0]   = 0u;
-        g_BattleUiState = 2u;
+        g_BattleUIState = 2u;
     } else {
         D_801EB4D8[0]   = Battle_FindSelectableSlotForward(0);
-        g_BattleUiState = 2u;
+        g_BattleUIState = 2u;
     }
     g_InputRepeatButtons   = 0;
     g_BattleSelectionLatch = 1u;

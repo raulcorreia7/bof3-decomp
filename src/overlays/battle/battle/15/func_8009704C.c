@@ -125,7 +125,7 @@ NON_MATCHING void func_8009704C(void) {
         D_801454F5[D_8014857A * 3]        = D_80148580;
         D_801454F6[D_8014857A * 3]        = group->cursor;
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        *(volatile u8*)&g_BattleUiStep += 1;
+        *(volatile u8*)&g_BattleUIStep += 1;
         return;
     }
     if ((g_InputPressed & D_80145AC2) != 0u) {
@@ -149,10 +149,10 @@ NON_MATCHING void func_8009704C(void) {
             g_BattleMessageState = 2u;
             D_801EB4D8[0]        = g_BattleMessageSlot[5];
             g_BattleSubStep      = 7u;
-            g_BattleUiStep       = 0u;
+            g_BattleUIStep       = 0u;
             return;
         }
-        g_BattleUiStep = 3u;
+        g_BattleUIStep = 3u;
     }
 }
 #else

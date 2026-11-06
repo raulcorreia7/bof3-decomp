@@ -10,6 +10,6 @@ MATCH void func_8009A468(void) {
     func_8009B20C();
     g_BattleStep    = 1;
     g_BattleSubStep = 0;
-    g_BattleUiStep  = 0;
-    g_BattleUiState = 0;
+    g_BattleUIStep  = 0;
+    g_BattleUIState = 0;
 }

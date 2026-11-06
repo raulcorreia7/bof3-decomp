@@ -6,7 +6,7 @@ MATCH s32 func_801E8948(s32 slot_count, u8 record_index) {
 
     changed = 0;
     for (i = 0; i < Party_CountOrder(0); i++) {
-        changed |= Char_RestoreHp(g_CharSlot[D_80144F5A[i]], 0x50, record_index);
+        changed |= Char_RestoreHP(g_CharSlot[D_80144F5A[i]], 0x50, record_index);
     }
     return (changed & BYTE_MASK) == 0 ? 3 : 0;
 }

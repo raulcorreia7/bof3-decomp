@@ -7,11 +7,11 @@ MATCH void func_8009A254(void) {
     /* First word of the record of the slot that owns the message panel. */
     slot_data = D_80145FAA[BATTLE_ACTIVE_ROW->slot * 0xA0];
     if (g_InputPressed & D_80145AC4) {
-        g_BattleUiState = 4;
+        g_BattleUIState = 4;
         return;
     }
     if (g_InputPressed & D_80145AC2) {
-        g_BattleUiState = 3;
+        g_BattleUIState = 3;
         return;
     }
     input = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
@@ -19,7 +19,7 @@ MATCH void func_8009A254(void) {
         if (Item_GetFlags(slot_data >> 8, slot_data & BYTE_MASK) & 0x80) {
             *D_801EB4D8 = Battle_FindSelectableSlotForward(3);
             {
-                u8* state = (u8*)&g_BattleUiState;
+                u8* state = (u8*)&g_BattleUIState;
 
                 *state -= 1;
             }

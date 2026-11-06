@@ -64,5 +64,5 @@ MATCH void func_801D3304(void) {
     if (!(func_800AA368() & BYTE_MASK)) {
         g_BattleState |= 0x20;
     }
-    g_BattleUiStep += 1;
+    g_BattleUIStep += 1;
 }

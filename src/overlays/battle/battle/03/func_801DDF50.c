@@ -28,6 +28,6 @@ no_match:
     return 1u;
 
 call_effect:
-    SND_StartXaStream((*entry & HALF_MASK) + 0x1000u, 1u);
+    SND_StartXAStream((*entry & HALF_MASK) + 0x1000u, 1u);
     return 0u;
 }

@@ -3,5 +3,5 @@
 MATCH void func_80096F78(void) {
     u8* temp = Resource_GetText(0x4000);
     BattleStageSelectionRingRecord(2, 0xFF, temp);
-    *(u8*)&g_BattleUiState += 1;
+    *(u8*)&g_BattleUIState += 1;
 }

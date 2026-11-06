@@ -4,7 +4,7 @@
  * the request, runs the entry lookup, converts the target LBA, and installs
  * the CD sync callback.
  */
-MATCH void SND_StartXaStream(s32 key, s32 unused) {
+MATCH void SND_StartXAStream(s32 key, s32 unused) {
     s16* req;
 
     req               = &D_80146818;
@@ -18,7 +18,7 @@ MATCH void SND_StartXaStream(s32 key, s32 unused) {
     D_8014681C        = 0;
     g_EmiServiceMode  = 2;
     g_EmiStreamState  = 0;
-    SND_ResolveXaStream(key);
+    SND_ResolveXAStream(key);
     CdIntToPos(D_8014680C, (CdlLOC*)((u8*)req + 0x20));
-    CdSyncCallback((CdlCB)SND_StoreXaSyncResult);
+    CdSyncCallback((CdlCB)SND_StoreXASyncResult);
 }

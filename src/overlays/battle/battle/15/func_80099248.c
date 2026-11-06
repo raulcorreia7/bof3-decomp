@@ -5,11 +5,11 @@ MATCH void func_80099248(void) {
 
     held = g_InputPressed;
     if ((held & D_80145AC4) != 0u) {
-        g_BattleUiState = 3u;
+        g_BattleUIState = 3u;
         return;
     }
     if ((held & D_80145AC2) != 0u) {
-        g_BattleUiState = 2u;
+        g_BattleUIState = 2u;
         return;
     }
     if ((INPUT_REPEATED(held, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) == 0) {

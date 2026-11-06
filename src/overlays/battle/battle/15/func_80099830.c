@@ -85,7 +85,7 @@ NON_MATCHING void func_80099830(void) {
             g_BattleListCursor = 0xFF;
             D_801485C3         = 0xFF;
             D_801485C5         = 1;
-            g_BattleUiState -= 1;
+            g_BattleUIState -= 1;
             return;
         }
         SND_PlayCue(EMI_CUE_ID(1, 7));

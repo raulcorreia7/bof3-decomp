@@ -8,7 +8,7 @@ extern u8   Battle_Unk0E1BitTest(volatile u8* entry, s32 bit_index);
  * event dispatcher.
  */
 /* func_8009BBE8 */
-MATCH void Battle_TestAiCondition(void) {
+MATCH void Battle_TestAICondition(void) {
     BattleEventPacket* packet;
     u8                 i;
 

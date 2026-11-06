@@ -53,7 +53,7 @@ MATCH void EMI_LoaderStreamInitSlot(u32 slot_id) {
 
     g_EmiBytesLeft   = 0x800;
     g_EmiStreamState = 0;
-    CdReadyCallback(EMI_OnCdReady);
-    CdSyncCallback((CdlCB)EMI_OnCdSync);
+    CdReadyCallback(EMI_OnCDReady);
+    CdSyncCallback((CdlCB)EMI_OnCDSync);
     EMI_LoaderBeginRead();
 }

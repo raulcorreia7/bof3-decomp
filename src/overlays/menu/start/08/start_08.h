@@ -293,8 +293,8 @@ extern Callback g_MenuCampFuncs[5];
  * input, resource and sound helpers, and the game overlay's draw helpers. */
 void        UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 extern bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
-extern bool Char_RestoreHp(s32 character_index, s32 amount, s32 use_battle_copy);
-extern s32  Char_RestoreAp(s32 character_index, s32 amount, s32 use_battle_copy);
+extern bool Char_RestoreHP(s32 character_index, s32 amount, s32 use_battle_copy);
+extern s32  Char_RestoreAP(s32 character_index, s32 amount, s32 use_battle_copy);
 extern s32  Char_AddCappedStat(u16* value, s32 delta);
 extern s16  Char_AddStat(u16* value, s16 delta);
 extern u32  Char_ClearStatus(u8 index, u16 mask, u8 mode);

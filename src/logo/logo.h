@@ -28,7 +28,7 @@ extern RECT           D_801EB45C; /* MDEC output window (x, y, w, h) */
 extern s32            D_801EB464;
 extern s32            D_801EB468;
 extern volatile s32   D_801EB46C; /* polled move flag; SYSTEM_LogoDecodeSlice writes it from the DecDCTout callback */
-extern u8             s_LogoCdVolume[4];
+extern u8             s_LogoCDVolume[4];
 extern s8             D_801EB474;
 extern s8             D_801EB475;
 extern DISPENV        D_801EB480[2];

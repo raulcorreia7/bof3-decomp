@@ -3,7 +3,7 @@
 /* clamps requested to the selected character's gauge, subtracts the clamped amount and returns it as 16 bits.
  * Both the slot map and the gauge are read twice, so the second lookup carries its own mask spelling.
  */
-MATCH s32 Char_SpendAp(s32 requested, s32 character_id) {
+MATCH s32 Char_SpendAP(s32 requested, s32 character_id) {
     u16 gauge;
     s32 amount;
     s32 slot;

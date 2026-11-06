@@ -3,7 +3,7 @@
 # reads. Every other symbol file is generated from this file.
 
 ["emi/battle/battle/03"]
-Battle_TestAiCondition = { addr = 0x8009BBE8, type = "func", source = "switch on the enemy AI condition id; case 24 tests the first drop row's rate for zero (catalogue 2, medium)" }
+Battle_TestAICondition = { addr = 0x8009BBE8, type = "func", source = "switch on the enemy AI condition id; case 24 tests the first drop row's rate for zero (catalogue 2, medium)" }
 g_BattleSelections = { addr = 0x800B65F8, alias = true }
 g_BattleActionType_nv = { addr = 0x80146375, alias = true }
 g_BattlePhases = { addr = 0x801D0C04, source = "Battle_DispatchMode 0x801D112C indexes it with the battle mode byte 0x801462E0" }
@@ -22,7 +22,7 @@ Battle_DispatchMode = { addr = 0x801D112C, type = "func", source = "runs the six
 Battle_DispatchStep = { addr = 0x801D11D8, type = "func", source = "runs mode 0 two-entry step table indexed by the battle step byte g_BattleStep" }
 Battle_DispatchEntrance = { addr = 0x801D17C4, type = "func", source = "runs the four-entry entrance table g_BattleEntrances selected by the sub-step byte g_BattleSubStep" }
 Battle_ReserveStagePanels = { addr = 0x801D1828, type = "func", source = "reserves the battle stage selection panel entries and fills one selection-ring record per active battler" }
-Battle_WaitUiMode = { addr = 0x801D1AB4, type = "func", source = "holds the entrance until the UI mode byte D_80148357 reads 1" }
+Battle_WaitUIMode = { addr = 0x801D1AB4, type = "func", source = "holds the entrance until the UI mode byte D_80148357 reads 1" }
 Battle_InitPanels = { addr = 0x801D1AE8, type = "func", source = "presets the seven battle panel widths at g_BattlePanelWidths" }
 Battle_EnterIntro = { addr = 0x801D1B94, type = "func", source = "arms the intro panel and advances the battle mode once the loader is ready" }
 Battle_PickTarget = { addr = 0x801D3844, type = "func", source = "picks the target code from the ability's targeting flags, choosing a random ability kind first in battle states 36, 37 and 140" }
@@ -89,7 +89,7 @@ Effect_StartPlaying = { addr = 0x801EF00C, alias = true }
 
 ["emi/battle/battle/15"]
 g_BattleWorkCell = { addr = 0x1F800044, alias = true }
-Battle_TestAiCondition = { addr = 0x8009BBE8, type = "func", source = "switch on the enemy AI condition id; case 24 tests the first drop row's rate for zero (catalogue 2, medium)" }
+Battle_TestAICondition = { addr = 0x8009BBE8, type = "func", source = "switch on the enemy AI condition id; case 24 tests the first drop row's rate for zero (catalogue 2, medium)" }
 Battle_Unk0E1BitTest = { addr = 0x8009C868, type = "func", source = "possible name battle_unk0e1_bit_test" }
 Battle_Unk0E1BitModify = { addr = 0x8009C87C, type = "func", source = "possible name Battle_Unk0E1BitModify" }
 Effect_ShakeScreen = { addr = 0x800A8EB8, type = "func", source = "sets the three screen shake offsets from the effect ticker and counts the effect down" }
@@ -135,7 +135,7 @@ D_801454F4 = { addr = 0x801454F4, source = "Byte table indexed by the source slo
 D_80145F04 = { addr = 0x80145F04 }
 D_80145F2A = { addr = 0x80145F2A, size = 0x2, source = "Halfword cell written by func_800A4458 and read by func_8009F010" }
 D_801461CA = { addr = 0x801461CA }
-g_BattleUiStep_nv = { addr = 0x801462E3, alias = true }
+g_BattleUIStep_nv = { addr = 0x801462E3, alias = true }
 D_801462F0_state = { addr = 0x801462F0, alias = true }
 g_BattleActiveBattler_nv = { addr = 0x80146374, alias = true }
 g_BattleTarget_nv = { addr = 0x80146394, alias = true }
@@ -3432,7 +3432,7 @@ GPU_printf = { addr = 0x801DA1BC, alias = true }
 DCL_DVLC = { addr = 0x801DA424, source = "LIBPRESS table.o DCL_DVLC, 1024 bytes equal retail" }
 DCC_DVLC = { addr = 0x801DA824, source = "LIBPRESS table.o DCC_DVLC, 1024 bytes equal retail" }
 CF_DVLC = { addr = 0x801DAC24, source = "LIBPRESS table.o CF_DVLC, 65536 bytes equal retail" }
-s_LogoCdVolume = { addr = 0x801EB470, source = "playback.c passes these four channel levels to CdMix" }
+s_LogoCDVolume = { addr = 0x801EB470, source = "playback.c passes these four channel levels to CdMix" }
 
 ["exe/slus_004_22"]
 g_Task = { addr = 0x1F800044, size = 0x4, source = "Area_DrawObjectSprite, Area_BuildClut and the battle, field and world steppers read the current work record through it" }
@@ -3478,7 +3478,7 @@ g_PartyX = { addr = 0x80143F7C, type = "s32", source = "func_8015C2D4 seeds the 
 g_PartyY = { addr = 0x80143F80, type = "s32", source = "func_8015C2D4 seeds the scroll from it game/00 func_801A8F94/801AA470 write it" }
 g_ScrollHeight = { addr = 0x80143F86, type = "s16", source = "func_801A8F94/801AA470/801C5874 store func_8015477C(x, y) func_8015C750/801C5874 feed Area_AdvanceScroll" }
 g_ActorSlots = { addr = 0x80143FC8, size = 0x910, source = "Actor_DispatchAll loops its 20 ActorSlot rows of 0x74 bytes; Actor_FindFreeSlot returns the first slot whose flags is 0, else 0xFF" }
-g_SndMono = { addr = 0x80144951, type = "u8", source = "SAVE_RunLoadVerify selects SsSetStereo for 0 and SsSetMono otherwise; SND_SetCdVolume halves the CD mix for nonzero" }
+g_SndMono = { addr = 0x80144951, type = "u8", source = "SAVE_RunLoadVerify selects SsSetStereo for 0 and SsSetMono otherwise; SND_SetCDVolume halves the CD mix for nonzero" }
 g_Characters = { addr = 0x80144968, size = 0x520, source = "func_801C16B8 refills each record's current_hp and current_ap from max_hp and max_ap, func_801ADDD4 raises level, exp and base stats in it, and the shop, status and battle-setup code index it by record slot (8 x 0xA4)" }
 g_SceneFlagWords = { addr = 0x80144E88, type = "u8", source = "the 20 per-scenario 8-byte flag words func_801A7704 indexes it with scenario_id * 8 etc/start/08 func_801E5FD4 uses base+0x5B0 func_80155E7C reads base + (request >> 24) * 8" }
 g_SceneEventFlags = { addr = 0x80144F28, type = "u8", source = "a 0x28-byte event-flag block world areas SYS_SetFlag/TestBit/ToggleBit bits 0x23-0x71 (func_801F3608/801F3B9C/801F2DC4) ram-map names the same bytes factory gate 0x80144F32," }
@@ -3525,8 +3525,8 @@ g_AreaWalkFlags = { addr = 0x8014625A, source = "world flags (bitmask)" }
 g_BattleMode = { addr = 0x801462E0, type = "u8", source = "battle phase selecting g_BattlePhases[D_801462E0] (Battle_DispatchMode.c 12, table src/overlays/battle/battle/03/D_801D0C00.c 14-17), 0 reset..5 end (func_801D656C.c 30, func_801DEFE4.c 13)" }
 g_BattleStep = { addr = 0x801462E1, type = "u8", source = "step inside the current mode, selects the mode's step table (func_801D1C54.c 4, func_801D2740.c 4, func_801D2AA8.c 4) advanced func_801D1228.c 155" }
 g_BattleSubStep = { addr = 0x801462E2, type = "u8", source = "nested step under g_BattleStep, selects g_BattleEntrances (Battle_DispatchEntrance.c 10) and the per-mode tables reused as the panel slot (func_801D1E8C.c 64)" }
-g_BattleUiStep = { addr = 0x801462E3, type = "u8", source = "second-level UI step, selects per-step tables func_801D31C0.c 4 / func_801D32C8.c 4 and the command-window page in battle/15 (func_800B0498.c 9)" }
-g_BattleUiState = { addr = 0x801462E4, type = "u8", source = "UI/sequence state id command-window state indexing D_800B43D4[e4-5] (func_80096AE8.c 4) and battle-end sequence tables D_801F0CA4[e4] (src/overlays/battle/batl_end/00/func_801EEC94.c 6)" }
+g_BattleUIStep = { addr = 0x801462E3, type = "u8", source = "second-level UI step, selects per-step tables func_801D31C0.c 4 / func_801D32C8.c 4 and the command-window page in battle/15 (func_800B0498.c 9)" }
+g_BattleUIState = { addr = 0x801462E4, type = "u8", source = "UI/sequence state id command-window state indexing D_800B43D4[e4-5] (func_80096AE8.c 4) and battle-end sequence tables D_801F0CA4[e4] (src/overlays/battle/batl_end/00/func_801EEC94.c 6)" }
 g_BattleRowCursor = { addr = 0x801462E5, type = "u8", source = "row cursor low 7 bits active row, 0x80 committed (func_800B0B0C.c 25-26) party-row scan bound func_801D409C.c 22" }
 g_BattlePanelEntry = { addr = 0x801462E6, type = "u8", source = "selected entry index in the current panel, 0xFF = none (func_800AD8D8.c 11, func_801D1E8C.c 96)" }
 g_BattleState = { addr = 0x801462E8, type = "u16", source = "u16 state/flag word bit 0x8 battle-start latch (set func_801D277C.c 40, cleared func_801D656C.c 52), 0x2 window busy (src/overlays/boss/func_800C2B2C.h 8), 0x4 effect playing" }
@@ -3563,25 +3563,25 @@ g_BattleGeneCount = { addr = 0x801463C7, type = "u8", source = "length of the se
 g_DragonForm = { addr = 0x801463C9, type = "u8", source = "selected dragon form id index into the per-form step/selection tables (func_800B0118.c 8, func_801E16B4.c 30) stored from the form row (func_800A68A4.c 60) community map dragon" }
 g_BattleActionLock = { addr = 0x801463CE, type = "u8", source = "action-lock countdown in frames while non-zero only 0x10-flagged rows may be selected (func_801D4D44.c 66-85, func_801DB844.c 21) set 4 by func_800A0920.c 15" }
 g_BattlePendingStatus = { addr = 0x801463D8, type = "u16", source = "pending status bits OR'd once into the battler status word and then cleared (func_800A31E0.c 19-88, func_801DFCB4.c 85, func_801E3C14.c 72)" }
-g_EmiPayloadSector = { addr = 0x80146450, source = "EMI_LoaderNextRead loads it from g_EmiSlotSectors[slot]; EMI_OnCdReady checks it against g_EmiSectorCursor on the first sector" }
-g_EmiBytesLeft = { addr = 0x80146454, source = "EMI_LoaderNextRead sets it to the slot size (0x800 for the archive header); EMI_OnCdReady takes 0x800 off per sector and asks for the next read at 0" }
+g_EmiPayloadSector = { addr = 0x80146450, source = "EMI_LoaderNextRead loads it from g_EmiSlotSectors[slot]; EMI_OnCDReady checks it against g_EmiSectorCursor on the first sector" }
+g_EmiBytesLeft = { addr = 0x80146454, source = "EMI_LoaderNextRead sets it to the slot size (0x800 for the archive header); EMI_OnCDReady takes 0x800 off per sector and asks for the next read at 0" }
 g_EmiLoadArg = { addr = 0x80146458, source = "EMI_LoaderNextRead copies EmiTocEntry.load_arg; the VAB, sequence and graphics loaders read it" }
-g_EmiFirstWord = { addr = 0x8014645C, source = "EMI_LoaderNextRead copies EmiTocEntry.first_word; EMI_OnCdReady compares it with the first word of the first sector" }
-g_EmiEntryType = { addr = 0x80146460, source = "EMI_LoaderNextRead copies EmiTocEntry.type; EMI_OnCdReady indexes g_EmiEntryHandlers with it" }
+g_EmiFirstWord = { addr = 0x8014645C, source = "EMI_LoaderNextRead copies EmiTocEntry.first_word; EMI_OnCDReady compares it with the first word of the first sector" }
+g_EmiEntryType = { addr = 0x80146460, source = "EMI_LoaderNextRead copies EmiTocEntry.type; EMI_OnCDReady indexes g_EmiEntryHandlers with it" }
 g_EmiRingBase = { addr = 0x80146464, source = "EMI_LoaderStreamInitSlot stores the CD base and EMI_LoaderCopySector, StageSector and UploadSector index it by sector" }
 g_EmiRequestedSlotId = { addr = 0x80146468, source = "slot id stored by EMI_LoaderStreamInitSlot before stream dispatch" }
-g_EmiStep = { addr = 0x8014646C, source = "EMI_LoaderNextRead clears it; the payload loaders count sectors in it and EMI_OnCdReady checks the first sector at 0" }
-g_EmiReadStatus = { addr = 0x80146480, source = "EMI_LoaderBeginRead clears it; EMI_OnCdReady sets 1 on a sector mismatch and the VAB body loaders set 2; EMI_LoaderServiceStream tests it" }
-g_EmiNextSlot = { addr = 0x80146481, source = "EMI_LoaderStreamInitSlot clears it and EMI_OnCdReady passes it, then increments it, to EMI_LoaderNextRead" }
-g_EmiRingSlot = { addr = 0x80146489, source = "EMI_OnCdReady and the payload loaders index the sector ring with it; EMI_OnCdReady wraps it from 0x18 to 1" }
+g_EmiStep = { addr = 0x8014646C, source = "EMI_LoaderNextRead clears it; the payload loaders count sectors in it and EMI_OnCDReady checks the first sector at 0" }
+g_EmiReadStatus = { addr = 0x80146480, source = "EMI_LoaderBeginRead clears it; EMI_OnCDReady sets 1 on a sector mismatch and the VAB body loaders set 2; EMI_LoaderServiceStream tests it" }
+g_EmiNextSlot = { addr = 0x80146481, source = "EMI_LoaderStreamInitSlot clears it and EMI_OnCDReady passes it, then increments it, to EMI_LoaderNextRead" }
+g_EmiRingSlot = { addr = 0x80146489, source = "EMI_OnCDReady and the payload loaders index the sector ring with it; EMI_OnCDReady wraps it from 0x18 to 1" }
 g_EmiStreamState = { addr = 0x80146494, source = "EMI_LoaderBeginRead, FinishRead, FinishPause and EndStream write it" }
-g_EmiRingStates = { addr = 0x801464A0, source = "EMI_OnCdReady tests bit 7 of the ring slot state; EMI_LoaderLoadGraphics and EMI_LoaderLoadVabBody store 3 and 4" }
+g_EmiRingStates = { addr = 0x801464A0, source = "EMI_OnCDReady tests bit 7 of the ring slot state; EMI_LoaderLoadGraphics and EMI_LoaderLoadVabBody store 3 and 4" }
 g_EmiSlotSectors = { addr = 0x80146678, source = "EMI_LoaderReadToc fills it per slot and EMI_LoaderNextRead reads the slot start sector from it; EMI_LoaderStreamInitSlot stores the archive start in entry 0" }
-g_EmiSectorCursor = { addr = 0x80146808, source = "EMI_LoaderStreamInitSlot sets it to the archive start; EMI_LoaderBeginRead reads from it and EMI_OnCdReady matches the drive position against it, then increments it" }
+g_EmiSectorCursor = { addr = 0x80146808, source = "EMI_LoaderStreamInitSlot sets it to the archive start; EMI_LoaderBeginRead reads from it and EMI_OnCDReady matches the drive position against it, then increments it" }
 g_EmiServiceState = { addr = 0x8014682D, type = "u8", source = "func_801638B0 sets 1/8 in the read loop and func_80163EA0 returns == 0 func_80163AF0/80163C58/80163D20 set 4/6/7" }
-g_SndCdVolume = { addr = 0x80146830, type = "u8", source = "SND_SetCdVolume latches the level; SND_FadeCdVolume steps it toward the requested level" }
-g_SndCdMix = { addr = 0x8014683C, type = "CdlATV", size = 4, source = "api:CdMix SND_SetCdVolume fills the four attenuator bytes" }
-g_EmiServiceMode = { addr = 0x80146840, source = "EMI_LoaderService runs EMI_LoaderServiceStream for 1 and SND_ServiceXa for 2" }
+g_SndCDVolume = { addr = 0x80146830, type = "u8", source = "SND_SetCDVolume latches the level; SND_FadeCDVolume steps it toward the requested level" }
+g_SndCDMix = { addr = 0x8014683C, type = "CdlATV", size = 4, source = "api:CdMix SND_SetCDVolume fills the four attenuator bytes" }
+g_EmiServiceMode = { addr = 0x80146840, source = "EMI_LoaderService runs EMI_LoaderServiceStream for 1 and SND_ServiceXA for 2" }
 g_EmiStreamFlags = { addr = 0x80146854, source = "the area, battle and commu code write 0x20 before streaming" }
 g_ScriptVars = { addr = 0x80146864, type = "u8", size = 0x4, source = "src/engine/slus/func_8015B870 returns g_ScriptVars[0]..g_ScriptVars[3] for kinds 3-6 Game_SetScriptVar/8015BA50/8015BA84 index it with (op & 0xC) >> 2 etc/start/08 func_801E5FD4 loads the four" }
 g_SceneFlags = { addr = 0x8014686C, type = "u32", source = "game/00 func_801A7704 sets it to 0x80144E88 + scenario_id * 8 SYS_SetFlag/TestBit/ToggleBit operate on it (scena09 764.c 130-144, scena00 8.c 1111-1273) etc/start/08" }
@@ -3638,7 +3638,7 @@ s__LOGO_LOGO_EXE_1_80149800 = { addr = 0x80149800, size = 0x14, source = "SYS_Ru
 D_80149814 = { addr = 0x80149814, size = 0x11F0 }
 D_80149998 = { addr = 0x80149998, size = 0x178, alias = true }
 g_UiLocalModeFuncs = { addr = 0x801499AC, size = 0x54, alias = true, source = "UI_DispatchLocalMode@0x8014ED6C snapshots its 21 callbacks to the stack and dispatches the entry the game-UI local mode selects; GFX_RunBlackFade starts through four of them" }
-g_EmiCdSteps = { addr = 0x80149C3C, alias = true, source = "EMI_LoaderRunCd calls the entry selected by the step byte" }
+g_EmiCDSteps = { addr = 0x80149C3C, alias = true, source = "EMI_LoaderRunCD calls the entry selected by the step byte" }
 g_EmiSlotDrainFuncs = { addr = 0x80149C60, alias = true, source = "EMI_LoaderServiceStream copies it" }
 __main = { addr = 0x8014AA04, type = "func", source = "SLUS entry, C calls it by its func_ name" }
 stup2 = { addr = 0x8014AA0C, type = "func", source = "2MBYTE.OBJ 196 bytes; zero-fills the BSS 0x8018B2B8..0x80190C60, then falls into stup1" }
@@ -3684,8 +3684,8 @@ Actor_SeekScript = { addr = 0x8014D910, type = "func", source = "reads the entry
 Actor_SelectScriptBank = { addr = 0x8014DC08, type = "func", source = "selects the 3-byte resource record and points unk_50 at its script" }
 Area_FindSceneRecord = { addr = 0x8014DD3C, type = "func", source = "matches a wanted id in the scene table D_801459F4 and fills the palette/tile fields" }
 Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "publishes a field record's +0x32 halfword into g_Task through func_8015B4F4" }
-SYS_ReadCd = { addr = 0x8014E0A8, type = "func", source = "CdRead then CdReadSync/VSync loop - SYS_RunLogo's EXE read calls it" }
-SYS_LoadExec = { addr = 0x8014E0FC, type = "func", source = "SYS_RunLogo reads LOGO.EXE in two sector steps through SYS_ReadCd and copies its header to D_80143E70" }
+SYS_ReadCD = { addr = 0x8014E0A8, type = "func", source = "CdRead then CdReadSync/VSync loop - SYS_RunLogo's EXE read calls it" }
+SYS_LoadExec = { addr = 0x8014E0FC, type = "func", source = "SYS_RunLogo reads LOGO.EXE in two sector steps through SYS_ReadCD and copies its header to D_80143E70" }
 GFX_UploadPalette = { addr = 0x8014E22C, type = "func", source = "LoadImage of the 0x100 x 0x20 stage palette when g_GfxPalettePending is set - SYS_Main calls it" }
 GFX_ResetPalette = { addr = 0x8014E284, type = "func", source = "clears palette work rows 0x1C-0x1F then copies the 0x80033800 bank to g_GraphicsPaletteDst - Game_BeginTitle and SYS_StartFrontend call it" }
 GFX_CopyPalette = { addr = 0x8014E3A0, type = "func", source = "copies one 0x200-byte palette slot from 0x80033800 to 0x80037800 and raises g_GfxPalettePending" }
@@ -3852,8 +3852,8 @@ EMI_LoaderInit = { addr = 0x80161F58, type = "func", source = "CdInit loop, VSyn
 EMI_LoaderStreamInitSlot = { addr = 0x80161FDC, type = "func", source = "latch slot id, reset ring, install CD callbacks" }
 EMI_LoaderSlotLba = { addr = 0x80162160, type = "func", source = "D_80182444[slot_id], the disc file table" }
 EMI_LoaderBeginRead = { addr = 0x80162178, type = "func", source = "reset transfer counters, LBA to CdlLOC, arm the next CD step" }
-EMI_OnCdSync = { addr = 0x801621E8, type = "func", source = "CD sync callback installed by EMI_LoaderStreamInitSlot" }
-EMI_OnCdReady = { addr = 0x80162230, type = "func", source = "dispatches the active entry by its EMI type (D_80183248)" }
+EMI_OnCDSync = { addr = 0x801621E8, type = "func", source = "CD sync callback installed by EMI_LoaderStreamInitSlot" }
+EMI_OnCDReady = { addr = 0x80162230, type = "func", source = "dispatches the active entry by its EMI type (D_80183248)" }
 EMI_LoaderReadToc = { addr = 0x80162500, type = "func", source = "MATH_TBL check and the entry sector offsets" }
 EMI_LoaderCopyPayload = { addr = 0x801625E4, type = "func", source = "type 0, copy the payload to its destination" }
 EMI_LoaderQueuePayload = { addr = 0x80162618, type = "func", source = "types 1 and 2, queue the payload for the streaming ring" }
@@ -3866,14 +3866,14 @@ EMI_LoaderNextRead = { addr = 0x80162B08, type = "func", source = "advance to th
 EMI_LoaderCopySector = { addr = 0x80162C14, type = "func", source = "copy the next part of the CD sector to its destination" }
 EMI_LoaderEndStream = { addr = 0x80162CD8, type = "func", source = "no next read, enter pause mode 6 and clear progress" }
 EMI_LoaderIsReady = { addr = 0x80162D00, type = "func", source = "loader state is ready" }
-EMI_LoaderRunCd = { addr = 0x80162D18, type = "func", source = "invoke the CD step D_80149C3C[D_8014648A]" }
+EMI_LoaderRunCD = { addr = 0x80162D18, type = "func", source = "invoke the CD step D_80149C3C[D_8014648A]" }
 EMI_LoaderIdle = { addr = 0x80162D9C, type = "func", source = "loader modes 0 and 8, no-op" }
-EMI_LoaderSetCdSpeed = { addr = 0x80162DA4, type = "func", source = "mode 1, CdSync then CdlSetmode 0xA0" }
-EMI_LoaderSeekCd = { addr = 0x80162E18, type = "func", source = "mode 2, CdSeekP to the armed CdlLOC" }
+EMI_LoaderSetCDSpeed = { addr = 0x80162DA4, type = "func", source = "mode 1, CdSync then CdlSetmode 0xA0" }
+EMI_LoaderSeekCD = { addr = 0x80162E18, type = "func", source = "mode 2, CdSeekP to the armed CdlLOC" }
 EMI_LoaderFinishSeek = { addr = 0x80162E70, type = "func", source = "mode 3, latch the seek result" }
 EMI_LoaderStartRead = { addr = 0x80162E98, type = "func", source = "mode 4, CdlReadN from the armed CdlLOC" }
 EMI_LoaderFinishRead = { addr = 0x80162F04, type = "func", source = "mode 5, latch the read result" }
-EMI_LoaderPauseCd = { addr = 0x80162F34, type = "func", source = "mode 6, CdPause" }
+EMI_LoaderPauseCD = { addr = 0x80162F34, type = "func", source = "mode 6, CdPause" }
 EMI_LoaderFinishPause = { addr = 0x80162F88, type = "func", source = "mode 7, latch the pause result and rearm" }
 EMI_LoaderService = { addr = 0x80163010, type = "func", source = "per frame, mode 1 streaming and mode 2 CD requests" }
 EMI_LoaderServiceStream = { addr = 0x8016305C, type = "func", source = "drain the queued reads and rearm" }
@@ -3881,10 +3881,10 @@ EMI_LoaderReadSector = { addr = 0x80163238, type = "func", source = "table D_801
 EMI_LoaderStageSector = { addr = 0x8016327C, type = "func", source = "table D_80149C60 entry 1 copies two 0x400-byte halves of the active CD sector to scratchpad" }
 EMI_LoaderUploadSector = { addr = 0x80163378, type = "func", source = "table D_80149C60 entry 3 programs the stream slot rectangle and LoadImage's the slot image" }
 EMI_LoaderTransferVabBody = { addr = 0x80163418, type = "func", source = "ring state 4 calls SsVabTransBodyPartly of the current sector and SsVabTransCompleted at the last one, after EMI_LoaderLoadVabBody opened the bank" }
-SND_StartXaStream = { addr = 0x801636A0, type = "func", source = "resets the request block for a packed key - resolves its bounds and installs the CdSync callback - etc/game/00 - battle/battle/03 - etc/shop/00 and commu00 call it to load an overlay" }
-SND_ResolveXaStream = { addr = 0x80163744, type = "func", source = "resolves one loader entry from its packed key and latches the base and scaled entry bounds" }
-SND_StoreXaSyncResult = { addr = 0x80163858, type = "func", source = "the CdSync callback installed by SND_StartXaStream - copies the 8-byte result or flags -1" }
-SND_ServiceXa = { addr = 0x801638B0, type = "func", source = "run D_80183274[state] and advance its timer" }
+SND_StartXAStream = { addr = 0x801636A0, type = "func", source = "resets the request block for a packed key - resolves its bounds and installs the CdSync callback - etc/game/00 - battle/battle/03 - etc/shop/00 and commu00 call it to load an overlay" }
+SND_ResolveXAStream = { addr = 0x80163744, type = "func", source = "resolves one loader entry from its packed key and latches the base and scaled entry bounds" }
+SND_StoreXASyncResult = { addr = 0x80163858, type = "func", source = "the CdSync callback installed by SND_StartXAStream - copies the 8-byte result or flags -1" }
+SND_ServiceXA = { addr = 0x801638B0, type = "func", source = "run D_80183274[state] and advance its timer" }
 SND_XaStateIdle = { addr = 0x801639B8, type = "func", source = "state 0, clears the dispatch timer D_8014681C and status D_8014682E" }
 SND_XaStateSeek = { addr = 0x801639D0, type = "func", source = "state 1, sets CD mode 0xC8 and seeks, accepted goes to state 2" }
 SND_XaStateSeekResult = { addr = 0x80163A54, type = "func", source = "state 2, negative status retries state 1 or moves to 8, success goes to state 3" }
@@ -3894,10 +3894,10 @@ SND_XaStateReadResult = { addr = 0x80163C58, type = "func", source = "state 5, c
 SND_XaStatePause = { addr = 0x80163D20, type = "func", source = "state 6, issues CdlPause, accepted goes to state 7" }
 SND_XaStatePauseResult = { addr = 0x80163D80, type = "func", source = "state 7, negative retries state 6 or 8, success resets to state 0 and sets progress 3" }
 SND_XaStateWaitSync = { addr = 0x80163E3C, type = "func", source = "state 8, waits for CdSync, completion returns to state 6" }
-SND_HasXaCdError = { addr = 0x80163E88, type = "func", source = "tests the CD status byte's error bit 0x10 in the retry paths" }
-SND_IsXaIdle = { addr = 0x80163EA0, type = "func", source = "returns whether the CD request state g_EmiServiceState is 0" }
-SND_SetCdVolume = { addr = 0x80163EB0, type = "func", source = "latches the level and halves the four CdMix output bytes when the mode flag is set" }
-SND_FadeCdVolume = { addr = 0x80163F50, type = "func", source = "steps the latched level toward the requested level through SND_SetCdVolume" }
+SND_HasXACDError = { addr = 0x80163E88, type = "func", source = "tests the CD status byte's error bit 0x10 in the retry paths" }
+SND_IsXAIdle = { addr = 0x80163EA0, type = "func", source = "returns whether the CD request state g_EmiServiceState is 0" }
+SND_SetCDVolume = { addr = 0x80163EB0, type = "func", source = "latches the level and halves the four CdMix output bytes when the mode flag is set" }
+SND_FadeCDVolume = { addr = 0x80163F50, type = "func", source = "steps the latched level toward the requested level through SND_SetCDVolume" }
 EMI_DecodeBegin = { addr = 0x80164028, type = "func", source = "EMI_LoaderReadSector calls it with the load argument and stores the destination, the scratchpad input cursor and window end and clears the resume state" }
 EMI_DecodeStep = { addr = 0x80164064, type = "func", source = "EMI_LoaderStageSector calls it per 0x400-byte half and decodes the scratchpad window of the type-1 LZ77 stream" }
 func_801642D0 = { addr = 0x801642D0, type = "func" }
@@ -3907,8 +3907,8 @@ Char_RebuildStats = { addr = 0x80164A44, type = "func", source = "its body copie
 Char_PreviewEquip = { addr = 0x80164D2C, type = "func", source = "copies a party record, puts item_id in its equipment slot, rebuilds the stats and returns the four stat values with up/down flags; the equip stat windows of the start and shop menus call it" }
 Item_Add = { addr = 0x801650B4, type = "func", source = "adds a quantity to the matching D_801C893C/D_801C8950 inventory slot - caps at 99 and inserts a free slot" }
 Char_AddAbility = { addr = 0x801651DC, type = "func", source = "stores the ability id in the first empty byte of the 10-entry panel Char_GetAbilities selects, or of the 128-entry stock D_8014546C when to_stock is set, and returns 0 when the table is full or the id is 0; func_801ADDD4 learns level-up abilities through it and the shop and ability menus put a panel ability back in the stock with to_stock 1" }
-Char_RestoreHp = { addr = 0x80165280, type = "func", source = "adds the amount to current_hp of a g_Characters record (the D_80145F04 battle copy when the mode is set), clamps at max_hp, and amount 0 restores to max_hp; clears the low-HP status once hp reaches a quarter. The start-menu item-use functions pass 0x14, 0x28, 0x50 and 0x64 and report failure when it returns 0" }
-Char_RestoreAp = { addr = 0x8016534C, type = "func", source = "adds the amount to current_ap of a g_Characters record (the D_80145F04 battle copy when the mode is set), clamps at max_ap, and amount 0 restores to max_ap; the start-menu item-use functions test its result" }
+Char_RestoreHP = { addr = 0x80165280, type = "func", source = "adds the amount to current_hp of a g_Characters record (the D_80145F04 battle copy when the mode is set), clamps at max_hp, and amount 0 restores to max_hp; clears the low-HP status once hp reaches a quarter. The start-menu item-use functions pass 0x14, 0x28, 0x50 and 0x64 and report failure when it returns 0" }
+Char_RestoreAP = { addr = 0x8016534C, type = "func", source = "adds the amount to current_ap of a g_Characters record (the D_80145F04 battle copy when the mode is set), clamps at max_ap, and amount 0 restores to max_ap; the start-menu item-use functions test its result" }
 Char_RestoreWillpower = { addr = 0x801653DC, type = "func", source = "adds the amount to current_willpower of a character record, clamps at willpower, and amount 0 restores to willpower" }
 Char_AddCappedStat = { addr = 0x8016546C, type = "func", source = "adds delta to a u16 stat, caps it at 999 and returns 0 when it already held 999; func_801E83AC and func_801E8448 of the start menu call it with 1 on the base_hp, max_hp, base_ap and max_ap members of a Character record" }
 Char_AddWillpower = { addr = 0x801654B0, type = "func", source = "adds a delta to a willpower byte and clamps at 99; the start-menu item-use function passes base_willpower and willpower" }
@@ -3959,10 +3959,10 @@ Area_InitScene = { addr = 0x801673AC, type = "func", source = "seeds the scratch
 Area_StepSceneTimer = { addr = 0x80167800, type = "func", source = "ticks the scene timer and runs Area_ResetScene on expiry" }
 Area_SyncScrollHeight = { addr = 0x80167848, type = "func", source = "feeds the actor height span_3E to Area_AdvanceScroll while g_AreaCameraMoving is clear (src/engine/slus/Area_SyncScrollHeight.c)" }
 Area_ResetScene = { addr = 0x8016788C, type = "func", source = "clears the scroll counters and the work area's +0x0C..+0x14 words" }
-Char_AddHp = { addr = 0x80167FDC, type = "func", source = "adds to current_hp clamped at max_hp and clears the 0x2000 low-HP flag when max_hp >> 2 covers it" }
-Char_AddAp = { addr = 0x801680CC, type = "func", source = "adds to current_ap clamped at max_ap" }
-Char_LoseHp = { addr = 0x8016813C, type = "func", source = "clamps the damage to one below current_hp - debits it and raises the 0x2000 low-HP flag" }
-Char_SpendAp = { addr = 0x80168248, type = "func", source = "clamps the amount to one below current_ap and debits it" }
+Char_AddHP = { addr = 0x80167FDC, type = "func", source = "adds to current_hp clamped at max_hp and clears the 0x2000 low-HP flag when max_hp >> 2 covers it" }
+Char_AddAP = { addr = 0x801680CC, type = "func", source = "adds to current_ap clamped at max_ap" }
+Char_LoseHP = { addr = 0x8016813C, type = "func", source = "clamps the damage to one below current_hp - debits it and raises the 0x2000 low-HP flag" }
+Char_SpendAP = { addr = 0x80168248, type = "func", source = "clamps the amount to one below current_ap and debits it" }
 SpuGetKeyStatus = { addr = 0x801682E0, type = "func" }
 _spu_init = { addr = 0x80168374, type = "func" }
 _spu_writeByIO = { addr = 0x80168608, type = "func" }
@@ -4499,8 +4499,8 @@ g_VabToneOffsets = { addr = 0x801821E8, source = "80 halfwords - 32 * tone" }
 g_SndCueReaders = { addr = 0x8018232C, source = "SND_PlayCue calls the reader the cue bank nibble selects" }
 g_EmiSlotLbas = { addr = 0x80182444, source = "EMI_LoaderSlotLba returns its entry for a slot id" }
 g_EmiHeaderTag = { addr = 0x80183224, source = "the MATH_TBL string tag read by func_80162500" }
-g_EmiEntryHandlers = { addr = 0x80183248, source = "EMI_OnCdReady calls the entry selected by the active entry type" }
-g_XaStateFuncs = { addr = 0x80183274, source = "SND_ServiceXa calls the entry selected by the XA state" }
+g_EmiEntryHandlers = { addr = 0x80183248, source = "EMI_OnCDReady calls the entry selected by the active entry type" }
+g_XaStateFuncs = { addr = 0x80183274, source = "SND_ServiceXA calls the entry selected by the XA state" }
 _spu_RXX = { addr = 0x80183AB0, source = "LIBSPU spu.o _spu_RXX, 24 bytes equal retail, the pointer to SPU_V0_VOL_L the sound code drives" }
 _spu_tsa = { addr = 0x80183AC8, alias = true }
 _spu_transMode = { addr = 0x80183ACC, alias = true }

@@ -3,7 +3,7 @@
 /* syncs the CD reader, sets double-speed mode, and latches ready
  * state 2 when both commands succeed.
  */
-MATCH void EMI_LoaderSetCdSpeed(void) {
+MATCH void EMI_LoaderSetCDSpeed(void) {
     u8  param[8];
     u8* result;
 

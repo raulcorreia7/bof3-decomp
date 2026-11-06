@@ -49,8 +49,8 @@ NON_MATCHING void func_80099B74(void) {
         D_80148624          = 0;
         D_801483C0          = 1;
         D_801485DC          = 0;
-        g_BattleUiStep      = 1;
-        g_BattleUiState     = 0;
+        g_BattleUIStep      = 1;
+        g_BattleUIState     = 0;
         return;
     }
     if (keys & D_80145AC2) {
@@ -70,7 +70,7 @@ NON_MATCHING void func_80099B74(void) {
             D_801485DC                                                               = 0;
             D_80148624                                                               = 0;
             D_801483C0                                                               = 1;
-            g_BattleUiStep                                                           = 7;
+            g_BattleUIStep                                                           = 7;
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 7));
         }

@@ -59,7 +59,7 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
     table_row = slot & BYTE_MASK;
 
     if (g_BattlePartyBattlers[table_row].action_flags.volatile_value & COMBATANT_FLAG_HOLY_RESIST_ZERO) {
-        g_BattlePartyBattlers[table_row].chr.stats.resistances[RES_SLOT_HOLY] = 0;
+        g_BattlePartyBattlers[table_row].chr.stats.resistances[RES_INDEX_HOLY] = 0;
     }
     if (g_BattlePartyBattlers[table_row].action_flags.volatile_value & COMBATANT_FLAG_FIRE_RESIST_ZERO) {
         FIELD(u8, &D_80145F2F, table_row * BATTLE_PARTY_STRIDE) = 0;

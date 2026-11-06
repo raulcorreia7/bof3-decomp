@@ -7,14 +7,14 @@ typedef struct OverlayCallbackGroup {
 /* snapshots the target-local EMI callback table and invokes the
  * callback selected by the current loader mode.
  */
-MATCH void EMI_LoaderRunCd(void) {
+MATCH void EMI_LoaderRunCD(void) {
     OverlayCallbackGroup*       dst;
     const OverlayCallbackGroup* src;
     const OverlayCallbackGroup* end;
     u32                         callbacks[9];
 
     dst = (OverlayCallbackGroup*)callbacks;
-    src = (const OverlayCallbackGroup*)g_EmiCdSteps;
+    src = (const OverlayCallbackGroup*)g_EmiCDSteps;
     end = src + 2;
     do {
         *dst = *src;

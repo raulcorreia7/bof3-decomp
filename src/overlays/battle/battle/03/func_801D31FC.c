@@ -6,5 +6,5 @@ MATCH void func_801D31FC(void) {
     g_BattleMessageState = 1;
     Battle_SetSlotPending(g_BattleActiveBattler);
     D_8014637C[1] = 9;
-    g_BattleUiStep += 1;
+    g_BattleUIStep += 1;
 }

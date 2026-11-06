@@ -3,7 +3,7 @@
 /* runs the active state handler, then advances the timer and
  * steps the state machine forward on expiry.
  */
-MATCH void SND_ServiceXa(void) {
+MATCH void SND_ServiceXA(void) {
     s32 temp;
     s8* mode;
 
@@ -17,7 +17,7 @@ MATCH void SND_ServiceXa(void) {
     }
 
     if (D_8014681C >= 0xB5 &&
-        ((g_EmiServiceState = 1, temp = (s16)D_80146820++ < 6, temp == 0) || SND_HasXaCdError() != 0) &&
+        ((g_EmiServiceState = 1, temp = (s16)D_80146820++ < 6, temp == 0) || SND_HasXACDError() != 0) &&
         g_EmiServiceState < 6) {
         g_EmiServiceState = 8;
     }

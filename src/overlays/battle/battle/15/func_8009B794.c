@@ -12,9 +12,9 @@ MATCH void func_8009B794(void) {
         g_AreaCameraStep = 0x40;
         scroll_a         = &D_8014930A;
         *scroll_a += D_800B44C0[index].x;
-        counter         = g_BattleUiState;
+        counter         = g_BattleUIState;
         delta           = D_800B44C0[index].y;
-        g_BattleUiState = counter + 1;
+        g_BattleUIState = counter + 1;
         scroll_b        = &D_8014930E;
         *scroll_b += delta;
     }

@@ -13,31 +13,31 @@
 #include "psx/mem.h"
 
 /* One byte per resistance slot. */
-#define RES_SLOT_COUNT      9
+#define RES_INDEX_COUNT     9
 
 #define ENEMY_AI_BLOCK_SIZE 0x10
 
 /* Resistance arrays are nine byte slots; slot 8 has no element-mask bit.
  * Order: @source: wiki:data/records#area-data */
-typedef enum ResistanceSlot {
-    RES_SLOT_FIRE     = 0,
-    RES_SLOT_FROST    = 1,
-    RES_SLOT_ELECTRIC = 2,
-    RES_SLOT_EARTH    = 3,
-    RES_SLOT_WIND     = 4,
-    RES_SLOT_HOLY     = 5,
-    RES_SLOT_PSIONIC  = 6,
-    RES_SLOT_STATUS   = 7,
-    RES_SLOT_DEATH    = 8,
-} ResistanceSlot;
+typedef enum ResistanceIndex {
+    RES_INDEX_FIRE     = 0,
+    RES_INDEX_FROST    = 1,
+    RES_INDEX_ELECTRIC = 2,
+    RES_INDEX_EARTH    = 3,
+    RES_INDEX_WIND     = 4,
+    RES_INDEX_HOLY     = 5,
+    RES_INDEX_PSIONIC  = 6,
+    RES_INDEX_STATUS   = 7,
+    RES_INDEX_DEATH    = 8,
+} ResistanceIndex;
 
-typedef struct EnemyAiBlock {
+typedef struct EnemyAIBlock {
     u8 condition;
     u8 parameters[ENEMY_AI_PARAMETER_COUNT];
     u8 skills[ENEMY_SKILL_COUNT];
-} EnemyAiBlock;
+} EnemyAIBlock;
 
-ASSERT_SIZE(EnemyAiBlock, ENEMY_AI_BLOCK_SIZE);
+ASSERT_SIZE(EnemyAIBlock, ENEMY_AI_BLOCK_SIZE);
 
 typedef struct Enemy {
     u8           name[ENEMY_NAME_LENGTH];
@@ -63,9 +63,9 @@ typedef struct Enemy {
     u8           second_item_index;
     u8           second_item_type;
     u16          second_item_rate;
-    EnemyAiBlock ai[ENEMY_AI_COUNT];
+    EnemyAIBlock ai[ENEMY_AI_COUNT];
     u8           unk_74[4];
-    u8           resistances[RES_SLOT_COUNT];
+    u8           resistances[RES_INDEX_COUNT];
     u8           unk_81;
     u8           reach;  /* +0x82: sizes the probe step and the overlap extent of encounter placement */
     u8           height; /* +0x83: the final probe must lie this far plus 8 pixels below the screen top */
