@@ -11,7 +11,7 @@ MATCH void func_801F3C1C(void) {
     slot               = &g_ActorSlots[actor_slot];
     slot->header.flags = 1;
     slot->type         = 0x74;
-    slot->pos.x.fixed  = 0x2B0000;
-    slot->pos.y.fixed  = 0x280000;
-    slot->pos.z.fixed  = Area_SampleHeight(slot->pos.x.fixed, 0x280000) << 16;
+    slot->pos.x.fixed  = TO_COORD(43);
+    slot->pos.y.fixed  = TO_COORD(40);
+    slot->pos.z.fixed  = Area_SampleHeight(slot->pos.x.fixed, TO_COORD(40)) << 16;
 }

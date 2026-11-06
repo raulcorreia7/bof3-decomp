@@ -87,7 +87,7 @@ NON_MATCHING void func_80167428(void) {
         if (tmp5 < 0) {
             val0 = -val0;
         }
-        if ((val2 > 0x60000) || (val0 > 0x60000) || (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE)) {
+        if ((val2 > TO_COORD(6)) || (val0 > TO_COORD(6)) || (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE)) {
             tmp10                    = g_Task;
             FIELD(u8, tmp10, 0x9u)   = 0U;
             FIELD(s32, tmp10, 0xCu)  = 0;

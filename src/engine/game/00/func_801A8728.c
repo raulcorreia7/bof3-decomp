@@ -77,34 +77,34 @@ MATCH s8 func_801A8728(s32 entry_x, s32 entry_y) {
             case AREA_ID_FAIRY_VILLAGE_DOLPHIN:
                 shifted_result = func_801F3F2C(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
-            case 0xB0:
+            case AREA_ID_FAIRY_VILLAGE_176:
                 shifted_result = func_801F33E4(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
-            case 0xB1:
+            case AREA_ID_FAIRY_VILLAGE_177:
                 shifted_result = func_801F33E4(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
-            case 0xB2:
+            case AREA_ID_FAIRY_VILLAGE_178:
                 shifted_result = func_801F33E4(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
-            case 0xB3:
+            case AREA_ID_FAIRY_VILLAGE_179:
                 shifted_result = func_801F33E4(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
-            case 0xB4:
+            case AREA_ID_FAIRY_VILLAGE_180:
                 shifted_result = func_801F33E4(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
-            case 0xB5:
+            case AREA_ID_FAIRY_VILLAGE_181:
                 shifted_result = func_801F33E4(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
-            case 0xB6:
+            case AREA_ID_FAIRY_VILLAGE_182:
                 shifted_result = func_801F33E4(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
-            case 0xB7:
+            case AREA_ID_FAIRY_VILLAGE_183:
                 shifted_result = func_801F33E4(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
-            case 0xB8:
+            case AREA_ID_FAIRY_VILLAGE_184:
                 shifted_result = func_801F33E4(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
-            case 0xB9:
+            case AREA_ID_FAIRY_VILLAGE_185:
                 shifted_result = func_801F33E4(entry_x, entry_y) << 0x18;
                 goto return_result; /* shared return */
             case 0xBF:

@@ -6,8 +6,8 @@
 MATCH void func_801DC74C(void) {
     if (WINDOW_EFFECT_IDLE()) {
         CallbackWait(1);
-        g_AreaScrollTargetX = 0xF0000;
-        g_AreaScrollTargetY = 0x3C0000;
+        g_AreaScrollTargetX = TO_COORD(15);
+        g_AreaScrollTargetY = TO_COORD(60);
         func_80153DE8();
         func_801E0A30();
         UI_SetMode(3);

@@ -7,7 +7,7 @@ MATCH void func_800C1DF4(void) {
     if (work->header.flags & 0x80) {
         work->header.step++;
     } else {
-        work->pos.x.fixed += 0x8000;
+        work->pos.x.fixed += COORD_HALF;
         func_8014D978();
         func_8014D978();
     }

@@ -6,7 +6,7 @@ MATCH void func_801F3068(void) {
         SND_PlayCue(1);
         g_Task->unk_04++;
     }
-    if (D_80147A8C < g_AreaScrollTargetX + 0x20000) {
+    if (D_80147A8C < g_AreaScrollTargetX + TO_COORD(2)) {
         D_80147AD0 = 3;
     }
     func_801F3140(-2);

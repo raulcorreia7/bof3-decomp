@@ -86,9 +86,9 @@ MATCH void func_801FB37C(void* entity) {
 }
 
 /* Starts the area message `message`: the area overlay's own lookup (func_801F326C
- * for area 0xC0, func_801F37AC otherwise) maps it to a message index. */
+ * for the second desert camp, func_801F37AC otherwise) maps it to a message index. */
 #define SCENA14_START_AREA_MESSAGE(message)               \
-    if (g_GameAreaId == 0xC0) {                           \
+    if (g_GameAreaId == AREA_ID_DESERT_CAMP_SECOND) {     \
         Message_StartAreaMessage(func_801F326C(message)); \
     } else {                                              \
         Message_StartAreaMessage(func_801F37AC(message)); \

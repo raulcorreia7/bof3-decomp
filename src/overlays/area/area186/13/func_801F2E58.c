@@ -9,13 +9,13 @@ MATCH void func_801F2E58(s32 state) {
     g_AreaCameraAngle.vy = 0;
     mode                 = 1;
     if ((u8)state == 0) {
-        D_80147A8C   = 0x48000;
-        g_AreaFocusY = 0xA0000;
+        D_80147A8C   = TO_COORD(4) + COORD_HALF;
+        g_AreaFocusY = TO_COORD(10);
         D_80147ACF   = 1;
         mode         = 0;
     } else {
-        D_80147A8C   = 0x48000;
-        g_AreaFocusY = 0x640000;
+        D_80147A8C   = TO_COORD(4) + COORD_HALF;
+        g_AreaFocusY = TO_COORD(100);
         D_80147ACF   = 2;
     }
     func_801C601C(mode);

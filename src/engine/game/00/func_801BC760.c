@@ -55,13 +55,13 @@ NON_MATCHING s32 func_801BC760(void) {
         }
     }
     row    = &g_BattlePartyBattlers[g_Task->unk_06];
-    span   = 0x18000;
+    span   = TO_COORD(1) + COORD_HALF;
     tgt_x  = row->pos.x.raw + (row->unk_0C * row->unk_09);
     near_a = tgt_x - (g_FacingSteps[row->unk_08].pos.x.raw * 2);
     tgt_y  = row->pos.y.raw + (row->unk_10 * row->unk_09);
     near_b = tgt_y - (g_FacingSteps[row->unk_08].pos.y.raw * 2);
     if (row->unk_70 != 0) {
-        span = 0x20000;
+        span = TO_COORD(2);
     }
     dx = g_Task->pos.x.fixed - tgt_x;
     dx = ABS(dx);
@@ -75,8 +75,8 @@ NON_MATCHING s32 func_801BC760(void) {
     func_801BCD60(near_a, near_b);
     dx = g_Task->pos.x.fixed - near_a;
     dx = ABS(dx);
-    if (dx <= 0x60000 && (dy = g_Task->pos.y.fixed - near_b, dy = dy < 0 ? -dy : dy) <= 0x60000) {
-        if (dx > 0x20000 || dy > 0x20000) {
+    if (dx <= TO_COORD(6) && (dy = g_Task->pos.y.fixed - near_b, dy = dy < 0 ? -dy : dy) <= TO_COORD(6)) {
+        if (dx > TO_COORD(2) || dy > TO_COORD(2)) {
             count = *(&D_80145FAC + (g_Task->unk_06 * BATTLE_PARTY_STRIDE)) + 1;
         } else {
             count = *(&D_80145FAC + (g_Task->unk_06 * BATTLE_PARTY_STRIDE));

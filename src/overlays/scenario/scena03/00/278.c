@@ -523,13 +523,13 @@ MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
         if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
             if (((arg0 >> 0x10) - 2) < 3U) {
-                if (arg1 == 0x60000) {
+                if (arg1 == TO_COORD(6)) {
                     var_v0 = 2;
                     goto block_9;
                 }
             }
         } else if ((SYS_TestFlag(g_SceneFlags, 0) != 0) && (((arg0 >> 0x10) - 3) < 2U)) {
-            if (arg1 == 0x40000) {
+            if (arg1 == TO_COORD(4)) {
                 var_v0 = 1;
             block_9:
                 D_80146874 = var_v0;
@@ -542,7 +542,7 @@ MATCH s32 func_801FC7EC(s32 arg0, s32 arg1) {
 MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
         if (((arg1 >> 0x10) - 7) < 2U) {
-            if (arg0 == 0x5C0000) {
+            if (arg0 == TO_COORD(92)) {
                 SYS_SetFlag(g_SceneFlags, 7U);
                 D_80146874 = 3;
                 D_80146875 = 0xA;
@@ -557,8 +557,8 @@ MATCH s32 func_801FC8AC(s32 arg0, s32 arg1) {
 
 MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x15) == 0) {
-        if (arg1 == 0x418000) {
-            if (((arg0 >> 0x10) - 0x20) < 4U) {
+        if (arg1 == TO_COORD(65) + COORD_HALF) {
+            if (((arg0 >> 0x10) - 32) < 4U) {
                 D_80146874 = 4;
                 D_80146875 = 5;
                 return Scene_ShowMessage(0x33);
@@ -572,22 +572,22 @@ MATCH s8 func_801FC944(s32 arg0, s32 arg1) {
 
 MATCH s8 func_801FC9DC(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x18) == 0) {
-        if (arg0 == 0x3A8000) {
-            if (((arg1 >> 0x10) - 0x3C) >= 2U) {
+        if (arg0 == TO_COORD(58) + COORD_HALF) {
+            if (((arg1 >> 0x10) - 60) >= 2U) {
                 goto block_4;
             }
             goto block_9;
         }
     block_4:
-        if (arg1 == 0x28000) {
-            if (((arg0 >> 0x10) - 0x1F) >= 2U) {
+        if (arg1 == TO_COORD(2) + COORD_HALF) {
+            if (((arg0 >> 0x10) - 31) >= 2U) {
                 goto block_7;
             }
             goto block_9;
         }
     block_7:
-        if (arg1 == 0x4C8000) {
-            if (((arg0 >> 0x10) - 0x1F) < 2U) {
+        if (arg1 == TO_COORD(76) + COORD_HALF) {
+            if (((arg0 >> 0x10) - 31) < 2U) {
             block_9:
                 D_80146874 = 5;
                 D_80146875 = 0;
@@ -604,8 +604,8 @@ MATCH s8 func_801FC9DC(s32 arg0, s32 arg1) {
 
 MATCH s8 func_801FCAB8(s32 arg0, s32 arg1) {
     if (SYS_TestFlag(g_SceneFlags, 0x1A) != 0) {
-        if ((arg0 >> 0x10) == 0x15) {
-            if (((arg1 >> 0x10) - 0x34) < 2U) {
+        if ((arg0 >> 0x10) == 21) {
+            if (((arg1 >> 0x10) - 52) < 2U) {
                 D_80146874 = 5;
                 D_80146875 = 0x10;
                 return Scene_ShowMessage(0x1F);

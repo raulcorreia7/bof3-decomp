@@ -257,9 +257,9 @@ MATCH void func_801F7440(void) {
 MATCH void func_801F7484(void) {
     s16 distance;
 
-    SCN_EFFECT->pos.x              = 0xB0000;
-    SCN_EFFECT->pos.y              = 0xF8000;
-    distance                       = Area_SampleHeight(SCN_EFFECT->pos.x, 0xF8000);
+    SCN_EFFECT->pos.x              = TO_COORD(11);
+    SCN_EFFECT->pos.y              = TO_COORD(15) + COORD_HALF;
+    distance                       = Area_SampleHeight(SCN_EFFECT->pos.x, TO_COORD(15) + COORD_HALF);
     SCN_EFFECT->pos.z.parts.height = distance;
     SCN_EFFECT->ot_index           = 5;
     SCN_EFFECT->step               = 1;
@@ -344,16 +344,16 @@ MATCH void func_801F7670(void) {
         point = next;
     } while (stop);
 
-    point.x              = 0xB0000;
-    point.y              = 0x138000;
-    point.z.parts.height = Area_SampleHeight(0xB0000, 0x138000);
+    point.x              = TO_COORD(11);
+    point.y              = TO_COORD(19) + COORD_HALF;
+    point.z.parts.height = Area_SampleHeight(TO_COORD(11), TO_COORD(19) + COORD_HALF);
     color.r              = 0x30;
     color.g              = 0x30;
     color.b              = 0x30;
     stop                 = 1;
     do {
         next.x = point.x;
-        next.y = point.y - 0x8000;
+        next.y = point.y - COORD_HALF;
         if (next.y < row_point.y) {
             next.y = row_point.y;
             next.z = row_point.z;
@@ -417,8 +417,8 @@ MATCH void func_801F7A5C(void) {
     SceneEffect* work_state;
 
     work_pos                     = SCN_EFFECT;
-    work_pos->pos.x              = 0x638000;
-    work_pos->pos.y              = 0xD0000;
+    work_pos->pos.x              = TO_COORD(99) + COORD_HALF;
+    work_pos->pos.y              = TO_COORD(13);
     work_pos->pos.z.parts.height = 0x300;
     work_pos->counter_09         = 0x78;
     work_tail                    = SCN_EFFECT;
@@ -1002,9 +1002,9 @@ MATCH void func_801F9178(void) {
     state                 = &g_SaveAreaId;
     table                 = (u8(*)[4])((u8*)state + 0xC04);
     *state                = 0x18;
-    g_SaveEntryX          = 0x630000;
-    g_SaveEntryY          = 0xC0000;
-    g_SaveEntryFacing     = 3;
+    g_SaveEntryX          = TO_COORD(99);
+    g_SaveEntryY          = TO_COORD(12);
+    g_SaveEntryFacing     = FACING_RIGHT;
     g_SceneState.state_04 = 5;
     g_SceneState.step_05  = 0;
     for (i = 0; i < 6; i++) {
@@ -1083,7 +1083,7 @@ MATCH void func_801F92DC(void) {
         }
     }
     func_801F9868();
-    if (g_GameAreaId == 25) {
+    if (g_GameAreaId == AREA_ID_NO_TEXT_25) {
         D_801468A0 = 2;
         D_801468A4 = 2;
         D_80147BA0 = 1;
@@ -1135,16 +1135,16 @@ MATCH void func_801F9644(void) {
                 g_ActorSlots[D_1F800000[0]].layer          = 0x40;
             }
             Party_HideBattlers();
-            D_80145EC4 = 0x330000;
-            D_80145EC8 = 0x400000;
+            D_80145EC4 = TO_COORD(51);
+            D_80145EC8 = TO_COORD(64);
             SYS_SetFlag(g_SceneFlags, 2U);
             return;
         }
         if (SYS_TestFlag(g_SceneFlags, 0xA) == 0) {
             SYS_SetFlag(g_SceneFlags, 0xAU);
             func_801BE1B0(0U);
-            g_AreaScrollTargetX    = 0x260000;
-            g_AreaScrollTargetY[0] = 0x1B8000;
+            g_AreaScrollTargetX    = TO_COORD(38);
+            g_AreaScrollTargetY[0] = TO_COORD(27) + COORD_HALF;
         }
     }
 }
@@ -1372,9 +1372,9 @@ MATCH void func_801F9FB8(void) {
             } else if (g_AreaCameraY == 0x4400) {
                 g_AreaCameraY = 0x6200;
                 g_AreaTileOriginY -= 0x1E;
-                g_AreaScrollTargetY[0] += 0xFFE20000;
-                g_AreaFocusY[0] += 0xFFE20000;
-                g_PartyY[0] += 0xFFE20000;
+                g_AreaScrollTargetY[0] += TO_COORD(-30);
+                g_AreaFocusY[0] += TO_COORD(-30);
+                g_PartyY[0] += TO_COORD(-30);
                 Area_RefreshCellGrid();
             }
             break;
@@ -1904,12 +1904,12 @@ MATCH void func_801FB204(void) {
                 g_ScriptVarsReq.byte = 0x1E;
                 g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
                 UI_SetMode(3);
-                g_PartyX               = 0x2F0000;
-                g_AreaScrollTargetX    = 0x2F0000;
-                g_PartyY[0]            = 0x1D0000;
-                g_AreaScrollTargetY[0] = 0x1D0000;
+                g_PartyX               = TO_COORD(47);
+                g_AreaScrollTargetX    = TO_COORD(47);
+                g_PartyY[0]            = TO_COORD(29);
+                g_AreaScrollTargetY[0] = TO_COORD(29);
                 func_80153DE8();
-                D_80143F84.raw = 0x5800000;
+                D_80143F84.raw = TO_COORD(1408);
                 Area_AdvanceScroll(0x580);
                 g_AreaCameraAngle.vx  = -778;
                 g_AreaCameraAngle.vz  = 384;
@@ -1926,7 +1926,7 @@ MATCH void func_801FB204(void) {
                 countdown = &g_SceneState.timer_06;
                 if (TIMER_EXPIRED(*countdown)) {
                     func_801C601C(2);
-                    D_80143F84.raw = 0x5800000;
+                    D_80143F84.raw = TO_COORD(1408);
                     Area_AdvanceScroll(D_80143F84.half[1]);
                     slot          = Actor_FindFreeSlot();
                     D_1F800000[0] = slot;
@@ -2034,8 +2034,8 @@ MATCH void func_801FB744(void) {
 
             request = &g_ScriptVars[2];
             if (*request & 1) {
-                D_80147C54 = ((RANDOM_MASK(7) - 3) << 0xA) + 0x1A8000;
-                D_80147C58 = ((RANDOM_MASK(7) - 3) << 0xA) + 0x158000;
+                D_80147C54 = ((RANDOM_MASK(7) - 3) << 0xA) + (TO_COORD(26) + COORD_HALF);
+                D_80147C58 = ((RANDOM_MASK(7) - 3) << 0xA) + (TO_COORD(21) + COORD_HALF);
             }
             if (*request == 3) {
                 if (g_SceneState.timer_06 != 0) {
@@ -2082,13 +2082,13 @@ MATCH void func_801FB924(void) {
     if (g_ScriptVars[2] < 0x14 && g_AreaCameraY == 0x5000) {
         g_AreaCameraY = 0x3000;
         g_AreaTileOriginY += 0x20;
-        g_AreaScrollTargetY[0] += 0x200000;
+        g_AreaScrollTargetY[0] += TO_COORD(32);
         base = g_PartyY;
-        g_AreaFocusY[0] += 0x200000;
+        g_AreaFocusY[0] += TO_COORD(32);
         /* FAKE: barrier keeps the D_80147B28 load after the g_AreaFocusY store. */
         MATCH_BARRIER();
-        D_80147B28 += 0x200000;
-        base[0] += 0x200000;
+        D_80147B28 += TO_COORD(32);
+        base[0] += TO_COORD(32);
         Area_RefreshCellGrid();
     }
 
@@ -2416,13 +2416,13 @@ MATCH void func_801FC810(void) {
 /* Step trigger: entry_08 of the scenario, called by Area_IsStepBlocked with its handler_x (x >> 16 is compared with the
  * column). A hit starts a scripted scene and returns 1; a nonzero result blocks the step. */
 MATCH s32 Scene_CheckStepTrigger(s32 x) { /* func_801FC818 */
-    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) && ((x >> 0x10) == 0x2B) && (SYS_TestFlag(g_SceneFlags, 6) != 0)) {
+    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) && ((x >> 0x10) == 43) && (SYS_TestFlag(g_SceneFlags, 6) != 0)) {
         g_SceneState.state_04 = 7;
         g_SceneState.step_05  = 0;
     }
     if (g_GameAreaId == AREA_ID_DAUNA_MINE_WHELP) {
         if (D_80143F03 == 0) {
-            if ((x >> 0x10) == 0x14) {
+            if ((x >> 0x10) == 20) {
                 if (SYS_TestFlag(g_SceneFlags, 7) != 0) {
                     return 0;
                 }

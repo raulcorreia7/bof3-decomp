@@ -17,9 +17,9 @@ MATCH void func_801D23F4(void) {
 
     height = FISHING_STATE->cursor_10;
     if (height > 0x3BFFFF) {
-        g_AreaScrollTargetY = 0x3C0000;
+        g_AreaScrollTargetY = TO_COORD(60);
     } else if (height <= 0x14FFFF) {
-        g_AreaScrollTargetY = 0x150000;
+        g_AreaScrollTargetY = TO_COORD(21);
     } else {
         g_AreaScrollTargetY = height;
     }
@@ -58,7 +58,7 @@ MATCH void func_801D23F4(void) {
         work_e->motion_34.unk_34 = (work_e->motion_34.unk_34 + work_e->pos_x_0C);
         work_e->y_38.pos_y       = (work_e->y_38.pos_y - 0x4000);
         work_e->bounce_3C.unk_3C = (work_e->bounce_3C.unk_3C + work_e->step_14);
-        if (work_e->y_38.pos_y == 0x3C0000) {
+        if (work_e->y_38.pos_y == TO_COORD(60)) {
             g_AreaCameraStep = 0x40;
         }
         func_8014D978();

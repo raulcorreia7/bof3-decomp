@@ -42,8 +42,8 @@ MATCH void func_801F7924(void) {
     u8* step;
 
     if (g_UiWindowEffectBusy == 0) {
-        g_AreaScrollTargetX = 0xB00000;
-        g_AreaScrollTargetY = 0x138000;
+        g_AreaScrollTargetX = TO_COORD(176);
+        g_AreaScrollTargetY = TO_COORD(19) + COORD_HALF;
         func_80153DE8();
         g_AreaSceneMode = 4;
         SND_RequestBGM(0x96);
@@ -83,7 +83,7 @@ MATCH void func_801F7A84(void) {
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
-        g_AreaScrollTargetX  = 0x940000;
+        g_AreaScrollTargetX  = TO_COORD(148);
         g_AreaCameraStep     = 0x20;
         *timer               = 0x80;
         g_AreaCameraAngle.vx = -0x16A;
@@ -110,7 +110,7 @@ MATCH void func_801F7B88(void) {
 
     if (!g_AreaCameraMoving) {
         step                = &D_80146874;
-        g_AreaScrollTargetX = 0x8C0000;
+        g_AreaScrollTargetX = TO_COORD(140);
         *step += 1;
     }
 }
@@ -121,7 +121,7 @@ MATCH void func_801F7BC0(void) {
     g_AreaCameraAngle.vx -= 5;
     if (g_AreaCameraMoving == 0) {
         step                = &D_80146874;
-        g_AreaScrollTargetX = 0x540000;
+        g_AreaScrollTargetX = TO_COORD(84);
         D_80146867          = 0xA;
         *step += 1;
     }
@@ -133,7 +133,7 @@ MATCH void func_801F7C14(void) {
     if (g_AreaCameraMoving == 0 && D_80146867 == 0x14) {
         step                = &D_80146874;
         g_AreaCameraStep    = 0x10;
-        g_AreaScrollTargetX = 0x3C0000;
+        g_AreaScrollTargetX = TO_COORD(60);
         *step += 1;
     }
 }
@@ -144,7 +144,7 @@ MATCH void func_801F7C6C(void) {
     if (g_AreaCameraMoving == 0) {
         Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         step                = &D_80146874;
-        g_AreaScrollTargetX = 0x2E0000;
+        g_AreaScrollTargetX = TO_COORD(46);
         *step += 1;
     } else if (g_FrameCount & 1) {
         g_AreaCameraHeight -= 1;
@@ -159,7 +159,7 @@ MATCH void func_801F7D08(void) {
 
     if (g_AreaCameraMoving == 0) {
         Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
-        g_AreaScrollTargetX = 0x260000;
+        g_AreaScrollTargetX = TO_COORD(38);
         g_AreaCameraHeightStep =
             ((Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
         var_a0          = &D_80146874;
@@ -181,7 +181,7 @@ MATCH void func_801F7DF4(void) {
         Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         state                  = &D_80146874;
         g_AreaCameraStep       = 0x10;
-        g_AreaScrollTargetX    = 0x190000;
+        g_AreaScrollTargetX    = TO_COORD(25);
         g_AreaCameraHeightStep = 0;
         (*state)++;
     } else {
@@ -306,8 +306,8 @@ MATCH void func_801F81F8(void) {
     s32 unused[2];
     u8* step;
 
-    g_AreaScrollTargetX = 0x258000;
-    g_AreaScrollTargetY = 0x1B0000;
+    g_AreaScrollTargetX = TO_COORD(37) + COORD_HALF;
+    g_AreaScrollTargetY = TO_COORD(27);
     func_80153DE8();
     UI_SetMode(1);
     CallbackWait(1);

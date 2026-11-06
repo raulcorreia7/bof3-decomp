@@ -15,7 +15,7 @@ MATCH bool func_801B8D18(void) {
             if (COORD_FRAC(g_Task->pos.x) != 0) {
                 return false;
             }
-            x     = g_Task->pos.x.fixed + 0x8000;
+            x     = g_Task->pos.x.fixed + COORD_HALF;
             y     = g_Task->pos.y.fixed & 0xFFFF0000;
             value = Area_ReadStepHeight(x, y, 3);
             if (SPAD_ACTIVE == 0 || value < 0x41) {
@@ -34,7 +34,7 @@ MATCH bool func_801B8D18(void) {
                 return false;
             }
             x     = g_Task->pos.x.fixed & 0xFFFF0000;
-            y     = g_Task->pos.y.fixed + 0x8000;
+            y     = g_Task->pos.y.fixed + COORD_HALF;
             value = Area_ReadStepHeight(x, y, 5);
             if (SPAD_ACTIVE == 0 || value < 0x41) {
                 return false;
@@ -54,7 +54,7 @@ MATCH bool func_801B8D18(void) {
         if (COORD_FRAC(g_Task->pos.x) == 0) {
             return false;
         }
-        x     = g_Task->pos.x.fixed + 0x10000;
+        x     = g_Task->pos.x.fixed + TO_COORD(1);
         y     = g_Task->pos.y.fixed & 0xFFFF0000;
         value = Area_ReadStepHeight(x, y, 3);
         if (SPAD_ACTIVE == 0 || value < 0x41) {
@@ -66,7 +66,7 @@ MATCH bool func_801B8D18(void) {
             return false;
         }
         if (COORD_FRAC(g_Task->pos.y) == 0) {
-            value = Area_ReadStepHeight(x, y - 0x10000, 3);
+            value = Area_ReadStepHeight(x, y - TO_COORD(1), 3);
             if (SPAD_ACTIVE == 0 || value < 0x41) {
                 return false;
             }
@@ -78,7 +78,7 @@ MATCH bool func_801B8D18(void) {
             return false;
         }
         x     = g_Task->pos.x.fixed & 0xFFFF0000;
-        y     = g_Task->pos.y.fixed + 0x10000;
+        y     = g_Task->pos.y.fixed + TO_COORD(1);
         value = Area_ReadStepHeight(x, y, 5);
         if (SPAD_ACTIVE == 0 || value < 0x41) {
             return false;
@@ -89,7 +89,7 @@ MATCH bool func_801B8D18(void) {
             return false;
         }
         if (COORD_FRAC(g_Task->pos.x) == 0) {
-            value = Area_ReadStepHeight(x - 0x10000, y, 3);
+            value = Area_ReadStepHeight(x - TO_COORD(1), y, 3);
             if (SPAD_ACTIVE == 0 || value < 0x41) {
                 return false;
             }

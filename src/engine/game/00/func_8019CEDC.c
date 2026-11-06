@@ -11,7 +11,7 @@ MATCH void func_8019CEDC(void) {
     work->pos.y.fixed = moved;
     if (work->unk_09 == 0) {
         if (LOHU(g_GameAreaId) == AREA_ID_ANGEL_TOWER_LOWER) {
-            if ((work->pos.x.fixed == 0x118000) && (moved == 0x4A8000)) {
+            if ((work->pos.x.fixed == TO_COORD(17) + COORD_HALF) && (moved == TO_COORD(74) + COORD_HALF)) {
                 SYS_SetFlag(g_SceneEventFlags, 0x36);
             } else {
                 SYS_ClearFlag(g_SceneEventFlags, 0x36);

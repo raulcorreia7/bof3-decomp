@@ -272,10 +272,10 @@ MATCH void func_801F2C74(void) {
     dst = MEM_PTR(s32, AREA_WORK);
     i   = 0;
     do {
-        dst[0]          = 0x20000;
-        dst[1]          = 0xC0000;
-        dst[2]          = 0xB0000;
-        dst[4]          = 0x20000;
+        dst[0]          = TO_COORD(2);
+        dst[1]          = TO_COORD(12);
+        dst[2]          = TO_COORD(11);
+        dst[4]          = TO_COORD(2);
         angle           = (((i & BYTE_MASK) << 12) / 3);
         ((s16*)dst)[10] = angle;
         func_801F304C((AreaTrail*)dst);
@@ -420,13 +420,13 @@ MATCH void func_801F31CC(void) {
     point[1] = 0xE3C0u;
     point[2] = 0;
     func_801F3480((const Point3D*)point, 0, 0x13500126u);
-    Area_AddCellPrim(0x468000, 0x478000, 0, 0x28);
+    Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(71) + COORD_HALF, 0, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
     func_801F3480((const Point3D*)point, ONE / 2, 0x13510125u);
-    Area_AddCellPrim(0x468000, 0x498000, -1, 0x28);
+    Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(73) + COORD_HALF, -1, 0x28);
 }
 
 /* FAKE: retail passes the low halfword of the angle word (lh). */
@@ -442,13 +442,13 @@ MATCH void func_801F32B0(void) {
     point[1] = 0xE3C0u;
     point[2] = 0;
     func_801F3480((const Point3D*)point, *(s16*)&g_Task->vx, 0x13500126u);
-    Area_AddCellPrim(0x468000, 0x478000, -1, 0x28);
+    Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(71) + COORD_HALF, -1, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
     func_801F3480((const Point3D*)point, (s16)(ONE / 2 - g_Task->vx), 0x13510125u);
-    Area_AddCellPrim(0x468000, 0x498000, -1, 0x28);
+    Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(73) + COORD_HALF, -1, 0x28);
 }
 
 MATCH void func_801F33A8(void) {
@@ -456,8 +456,8 @@ MATCH void func_801F33A8(void) {
     s32 u;
     s32 v;
 
-    u = 0x468000;
-    v = 0x478000;
+    u = TO_COORD(70) + COORD_HALF;
+    v = TO_COORD(71) + COORD_HALF;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 0, 320, 256), 0);
     Area_AddCellPrim(u, v, -1, 0xC);
     point[0] = ((u >> 9) - 0x4000);

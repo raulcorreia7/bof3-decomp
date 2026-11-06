@@ -19,7 +19,7 @@ MATCH void func_801985C8(void) {
         func_801E0C40();
         CallbackWait(1);
     }
-    Game_RequestAreaChange(*(u16*)&D_80143F04, *(u32*)&D_80143F08, *(u32*)&D_80143F0C, 4);
+    Game_RequestAreaChange(*(u16*)&D_80143F04, *(u32*)&D_80143F08, *(u32*)&D_80143F0C, FACING_DOWN_RIGHT);
     selection = g_SndBGMId;
     if (selection != GAME_NONE && g_GamePrevSelection != selection) {
         SND_StopSequence(g_SelectionCues[selection * 4], D_80181EBB[selection * 4]);

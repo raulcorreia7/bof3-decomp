@@ -19,7 +19,7 @@ MATCH s32 func_801C6BB4(void) {
             i    = D_801CD8C8;
             slot = D_801CD8C4 + ((D_801CD8C0 * (D_801CD8C0 - 1)) >> 1);
             y    = D_801CD620[slot].y;
-            x    = D_801CD620[slot].x + 0x50000;
+            x    = D_801CD620[slot].x + TO_COORD(5);
             kind = ENCOUNTER_ENEMIES + entry->id;
             while (i != 0) {
                 tmp = x;

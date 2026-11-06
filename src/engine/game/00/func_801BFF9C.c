@@ -17,7 +17,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
     s32 koff; /* FAKE: retail scales the record index before the base add. */
     /* FAKE: retail holds the three arguments in s7/fp/s6. */
     s32 z;
-    MATCH_FAKE_PIN(s32, c41, "v1"); /* FAKE: 0x410000 materializes in v1. */
+    MATCH_FAKE_PIN(s32, c41, "v1"); /* FAKE: TO_COORD(65) materializes in v1. */
     s32 x;
     s32 y;
 
@@ -137,9 +137,9 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         g_AreaScrollTargetY = D_80145EC8;
         return;
     }
-    c41                 = 0x410000;
-    D_80145EC4          = 0xF0000;
-    g_AreaScrollTargetX = 0xF0000;
+    c41                 = TO_COORD(65);
+    D_80145EC4          = TO_COORD(15);
+    g_AreaScrollTargetX = TO_COORD(15);
     D_80145EC8          = c41;
-    g_AreaScrollTargetY = 0x3C0000;
+    g_AreaScrollTargetY = TO_COORD(60);
 }

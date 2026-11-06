@@ -81,7 +81,7 @@ MATCH void func_801F7050(void) {
     actor->vz  = 0;
     for (i = 0; i < 16; i++) {
         actor->vz += 0x800000;
-        actor->pos.x.fixed += 0x10000;
+        actor->pos.x.fixed += TO_COORD(1);
         actor->pos.y.fixed += 0;
         actor->pos.z.fixed += actor->vz;
     }
@@ -447,8 +447,8 @@ MATCH s32 func_801FD960(s32 arg0, s32 arg1) {
     s32 value;
 
     if (g_GameAreaId == AREA_ID_MOUNT_ZUBLO_GISSHAN) {
-        if ((SYS_TestFlag(g_SceneFlags, 3) == 0) && (arg1 <= 0x200000)) {
-            if (((arg0 >> 0x10) - 0x4A) < 2U) {
+        if ((SYS_TestFlag(g_SceneFlags, 3) == 0) && (arg1 <= TO_COORD(32))) {
+            if (((arg0 >> 0x10) - 74) < 2U) {
                 Game_SetScriptActive();
                 value = g_SndBGMId * 4;
                 SND_StartDecrescendo(*(g_SelectionCues + value), *(D_80181EBB + value), 0x64, 0x20);

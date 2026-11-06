@@ -10,9 +10,9 @@ NON_MATCHING void func_801D210C(void) {
     u32 index;
 
     FISHING_STATE->motion_34.pos.pos.x.raw = D_80145EC4;
-    FISHING_STATE->y_38.pos_y              = D_80145EC8 - 0x8000;
+    FISHING_STATE->y_38.pos_y              = D_80145EC8 - COORD_HALF;
     FISHING_STATE->bounce_3C.half.key_3E =
-        (s16)(Area_SampleHeight(FISHING_STATE->motion_34.pos.pos.x.raw, D_80145EC8 - 0x8000) + 0x100);
+        (s16)(Area_SampleHeight(FISHING_STATE->motion_34.pos.pos.x.raw, D_80145EC8 - COORD_HALF) + 0x100);
 
     value                       = D_801E320C->byte_02 * D_801440BC / 255 + 8;
     FISHING_STATE->cue_index_06 = (u8)(value / 15);
@@ -24,11 +24,11 @@ NON_MATCHING void func_801D210C(void) {
     value                    = FISHING_STATE->y_38.pos_y - (FISHING_STATE->cursor_10 << 15);
     FISHING_STATE->cursor_10 = value;
     if (value > 0x3BFFFF) {
-        g_AreaScrollTargetY = 0x3C0000;
+        g_AreaScrollTargetY = TO_COORD(60);
     } else if (value > 0x14FFFF) {
         g_AreaScrollTargetY = value;
     } else {
-        g_AreaScrollTargetY = 0x150000;
+        g_AreaScrollTargetY = TO_COORD(21);
     }
 
     g_AreaCameraStep              = 0;
