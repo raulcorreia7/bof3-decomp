@@ -23,13 +23,13 @@ MATCH s32 func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s
         return 0;
     }
 
-    if ((u32)((ability_id - 0x46) & BYTE_MASK) < 6) {
+    if ((u32)((ability_id - ABILITY_HEAL) & BYTE_MASK) < 6) {
         cost = ability_id - 0x45;
     } else if ((u32)((ability_id + 0x52) & BYTE_MASK) < 6) {
         cost = ability_id + 0x53;
-    } else if (ability == ABILITY_REMEDY || ability == 0xD7) {
+    } else if (ability == ABILITY_REMEDY || ability == ABILITY_REMEDY_SKILL) {
         cost = 8;
-    } else if (ability == 0x50) {
+    } else if (ability == ABILITY_NOTING_80) {
         cost = 7;
     } else {
         cost = (ability == ABILITY_CURE) ? 9 : 0;

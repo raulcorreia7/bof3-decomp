@@ -4,7 +4,7 @@ MATCH s32 func_800A9A84(void) {
     u32 id;
 
     id = g_BattleAction->unk_02;
-    if (D_801CA718[id * 0x14] & 0x10) {
+    if (D_801CA718[id * 0x14] & ABILITY_TARGET_ALL) {
         return 0;
     }
     if (Battle_SlotIsBlocked(g_BattleTargetSelector)) {

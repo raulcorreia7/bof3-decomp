@@ -4,7 +4,7 @@ MATCH void func_80097D58(void) {
     u16 kind;
 
     kind = D_801EB4D8->command.id;
-    if ((D_801CA718[kind * 0x14] & 0x20) != 0) {
+    if ((D_801CA718[kind * 0x14] & ABILITY_TARGET_OPPONENT) != 0) {
         D_801EB4D8->command.target = 0x40;
     } else {
         D_801EB4D8->command.target = 0x80;
