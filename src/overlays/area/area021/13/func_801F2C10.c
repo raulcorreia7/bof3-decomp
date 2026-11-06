@@ -4,7 +4,7 @@ MATCH void func_801F2C10(void) {
     s8  sel;
     u16 request;
 
-    sel = D_801490C7;
+    sel = g_MessageChoice;
     if (sel == 0) {
         if (g_Zenny < 20) {
             request = 0x17;

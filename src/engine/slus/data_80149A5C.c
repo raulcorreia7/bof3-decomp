@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const Table8 D_80149A5C = {{
+const Table8 g_MessageStateHandlers = {{
     func_8015083C,
     UI_TickChoiceTimer,
     func_80150E48,

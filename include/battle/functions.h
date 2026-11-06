@@ -58,7 +58,7 @@ void        func_801DAAE4(void);
 s16         Battle_CalcDamage(u8 attacker, u8 target, u16 element);
 void        func_801DD14C(u8 battler_index);
 void        func_801DD858(u32 effect_index);
-void        func_801DDAB4(u32 arg0);
+void        func_801DDAB4(u32 status);
 void        func_801DDFEC(u32 battler_index);
 s16         func_801DE0AC(s32 factor_a, s32 factor_b);
 void        Battle_SetSlotPending(u32 slot);

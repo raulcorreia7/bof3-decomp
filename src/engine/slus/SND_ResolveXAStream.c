@@ -27,7 +27,7 @@ MATCH void SND_ResolveXAStream(s32 stream_id) {
     scale      = ((stream_id >> 12) != 0) ? 0x10 : 8;
     counter    = &D_80146835;
     *counter   = 0;
-    entry      = (u16*)D_8018323C[stream_id >> 12];
+    entry      = (u16*)g_XaCueTables[stream_id >> 12];
     count      = stream_id & 0xFFF;
     index      = 0;
     if (count > 0) {
@@ -45,7 +45,7 @@ MATCH void SND_ResolveXAStream(s32 stream_id) {
     *flag = 1;
     /* FAKE: force the flag base back into a2. */
     CLOBBER_A2();
-    base                 = g_EmiSlotLbas[D_80183230[stream_id >> 12]];
+    base                 = g_EmiSlotLbas[g_XaStreamSlots[stream_id >> 12]];
     D_80146810           = base;
     *(s32*)(flag - 0x28) = base;
     extra                = flag[1];

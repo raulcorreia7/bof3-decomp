@@ -13,7 +13,7 @@ MATCH s32 func_801A8A98(s32 candidate_x, s32 candidate_y) {
             if (SYS_TestFlag(buf, 0x77U) != 0) {
                 D_8014504A = 0;
                 SYS_ClearFlag(buf, 0x77U);
-                Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, 4U);
+                Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);
                 return 1;
             }
         }

@@ -2,7 +2,7 @@
 
 MATCH void func_801F2C74(void) {
     MESSAGE_REQUEST_CLEAR();
-    switch (D_801490C7) {
+    switch (g_MessageChoice) {
         case 0:
             g_ScriptVars[0] = 1;
             break;

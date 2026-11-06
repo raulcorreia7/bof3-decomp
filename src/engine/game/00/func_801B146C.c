@@ -69,11 +69,11 @@ MATCH void func_801B146C(void) {
         if ((state_flags & 2) &&
             ((work_f = g_Task, speed = work_f->state_70.byte, route_index2 = work_f->direction_08 * 2,
               pos_x = work_f->pos.x.fixed + ((*(s32*)((u8*)g_FacingSteps + route_index2 * 4)) * speed),
-              pos_y = work_f->pos.y.fixed + (D_80181B98[route_index2] * speed),
+              pos_y = work_f->pos.y.fixed + (g_FacingStepY[route_index2] * speed),
               (pos_x == 0x20000) || (pos_y == 0x20000) || (pos_x == ((D_80104000 - 3) << 0x10)) ||
                   (pos_y == ((D_80104001 - 3) << 0x10))))) {
             Actor_RequestScript(g_Task->direction_08);
-            Game_RequestAreaChange(D_80143F04, D_80143F08, D_80143F0C, 4U);
+            Game_RequestAreaChange(D_80143F04, D_80143F08, D_80143F0C, FACING_DOWN_RIGHT);
             goto block_46; /* re-arm the frame flags */
         }
     block_24:
@@ -89,7 +89,7 @@ MATCH void func_801B146C(void) {
         if (!(func_801C472C(work_i->pos.x.fixed, work_i->pos.y.fixed, work_i->state_70.byte, 0xA6, 0U) & BYTE_MASK)) {
             Actor_RequestScript(g_Task->direction_08);
             D_8014504A = 0;
-            Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, 4U);
+            Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);
             return;
         }
         world_flags = g_AreaWalkFlags;

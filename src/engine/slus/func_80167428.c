@@ -82,7 +82,7 @@ NON_MATCHING void func_80167428(void) {
         if (tmp4 < 0) {
             val2 = -val2;
         }
-        tmp5 = D_80145EC8 - (FIELD(s32, tmp8, 0x38u) + *(D_80181B98 + tmp0));
+        tmp5 = D_80145EC8 - (FIELD(s32, tmp8, 0x38u) + *(g_FacingStepY + tmp0));
         val0 = tmp5;
         if (tmp5 < 0) {
             val0 = -val0;

@@ -18,7 +18,7 @@
         Party_JoinMember(a);                \
         Party_JoinMember(b);                \
         Party_JoinMember(c);                \
-        func_801C1630();                    \
+        Party_StagePalettes();              \
     }
 
 /* As SCENE_SET_PARTY, without the palette restage. */

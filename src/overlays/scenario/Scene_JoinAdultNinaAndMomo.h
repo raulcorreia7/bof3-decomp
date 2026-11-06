@@ -7,7 +7,7 @@
     Party_BuildBattlers(PARTY_ORDER_FIELD);                                          \
     Party_JoinMember(CHAR_ID_NINA_ADULT);                                            \
     Party_JoinMember(CHAR_ID_MOMO);                                                  \
-    func_801C1630()
+    Party_StagePalettes()
 
 MATCH void Scene_JoinAdultNinaAndMomo(void) {
     SCENE_JOIN_ADULT_NINA_AND_MOMO();

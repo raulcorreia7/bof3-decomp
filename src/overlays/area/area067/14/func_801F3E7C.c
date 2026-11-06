@@ -3,7 +3,7 @@
 MATCH void func_801F3E7C(void) {
     s8 sel;
 
-    sel              = D_801490C7;
+    sel              = g_MessageChoice;
     g_MessageRequest = D_801F539C[sel];
     if (sel < 2) {
         if (sel >= 0) {

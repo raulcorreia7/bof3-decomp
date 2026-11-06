@@ -47,7 +47,7 @@ void Area_Update();
  * image's byte. */
 static inline void World04_ResetAnswerAndCopySelection(u8* target) {
     MESSAGE_REQUEST_CLEAR();
-    *target = D_801490C7;
+    *target = g_MessageChoice;
 }
 
 #endif

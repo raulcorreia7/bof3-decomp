@@ -3,7 +3,7 @@
 MATCH void func_801F38C8(void) {
     u16 message;
 
-    if (D_801490C7 == 0) {
+    if (g_MessageChoice == 0) {
         if ((Item_CountHeld(1) & BYTE_MASK) >= 15U) {
             g_MessageRequest = 0x82;
             return;

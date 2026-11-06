@@ -505,7 +505,7 @@ void func_801D2648(void);
 void func_801D28DC(void);
 void func_801D29BC(void);
 void func_801D2AE0(void);
-void func_801D2C34(s16 arg0, s16 arg1, s8 arg2, u8 arg3);
+void func_801D2C34(s16 x, s16 y, s8 flip, u8 ot_index);
 void func_801D2D74(void);
 void func_801D2DC4(void);
 void func_801D3244(s16 panel_x, s16 panel_y, u8 panel_width, s8 u_offset, u8 ot_layer, s8 is_enabled);

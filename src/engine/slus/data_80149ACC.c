@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const HandlerBank D_80149ACC = {{
+const HandlerBank g_MessageStepBank = {{
     func_80152370,
     func_801523D0,
     func_80152420,

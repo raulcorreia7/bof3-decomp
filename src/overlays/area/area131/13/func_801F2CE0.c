@@ -2,7 +2,7 @@
 
 MATCH void func_801F2CE0(void) {
     MESSAGE_REQUEST_CLEAR();
-    if (D_801490C7 == 0) {
+    if (g_MessageChoice == 0) {
         Game_SetScriptActive();
         D_80146874                      = 7;
         g_ScriptVars[0]                 = 0;

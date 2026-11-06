@@ -1,6 +1,6 @@
 #include "area085_13.h"
 
-MATCH void func_801F3C3C(s32 arg0) {
+MATCH void func_801F3C3C(s32 delta) {
     u16* src;
     u16* dst;
     u16  color;
@@ -16,7 +16,7 @@ MATCH void func_801F3C3C(s32 arg0) {
         g     = (color >> 5) & 0x1F;
         b     = (color >> 0xA) & 0x1F;
         if (r != 0) {
-            r += arg0;
+            r += delta;
             if (r <= 0) {
                 r = 0;
             }
@@ -25,7 +25,7 @@ MATCH void func_801F3C3C(s32 arg0) {
             }
         }
         if (g != 0) {
-            g += arg0;
+            g += delta;
             if (g <= 0) {
                 g = 0;
             }
@@ -34,7 +34,7 @@ MATCH void func_801F3C3C(s32 arg0) {
             }
         }
         if (b != 0) {
-            b += arg0;
+            b += delta;
             if (b <= 0) {
                 b = 0;
             }

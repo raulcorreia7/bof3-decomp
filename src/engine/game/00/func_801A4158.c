@@ -6,7 +6,7 @@ MATCH void func_801A4158(u8* cursor) {
 
     count = 0;
     flag  = 0;
-    if (!((*(ScriptFunc*)(&D_8018217C + ((*cursor++ & 0x1F) * 4)))(&cursor) & BYTE_MASK)) {
+    if (!((*(ScriptFunc*)(&g_AreaScriptTests + ((*cursor++ & 0x1F) * 4)))(&cursor) & BYTE_MASK)) {
         count++;
         cursor++;
         if ((count & BYTE_MASK) != 0 || cursor[0] != 0xFE) {

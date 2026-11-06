@@ -485,7 +485,7 @@ MATCH void func_801FE698(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_WHELP, 0);
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_WHELP);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FE6DC(void) {
@@ -503,7 +503,7 @@ MATCH void func_801FE760(void) {
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_GARR);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 #include "overlays/scenario/Scene_SetPartyRyuAdultGarrNinaAdult.h"
@@ -513,7 +513,7 @@ MATCH void func_801FE800(void) {
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
     Party_JoinMember(CHAR_ID_REI);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FE840(void) {
@@ -522,5 +522,5 @@ MATCH void func_801FE840(void) {
 }
 
 MATCH void func_801FE874(void) {
-    func_801C1ABC(CHAR_ID_GARR);
+    Party_RemoveMember(CHAR_ID_GARR);
 }

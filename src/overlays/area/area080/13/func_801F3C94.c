@@ -1,8 +1,8 @@
 #include "area080_13.h"
 
 MATCH void func_801F3C94(void) {
-    g_MessageRequest = D_801F449C[D_801490C7];
-    switch (D_801490C7) {
+    g_MessageRequest = D_801F449C[g_MessageChoice];
+    switch (g_MessageChoice) {
         case 0:
             g_ScriptVars[0] = 1;
             break;

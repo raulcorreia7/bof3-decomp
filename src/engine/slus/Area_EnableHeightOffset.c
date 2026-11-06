@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* latches the active mode's sub-state flag into D_80149340.
+/* latches the active mode's sub-state flag into g_AreaHeightOffsetEnabled.
  */
 MATCH void Area_EnableHeightOffset(void) {
     s32 flag;
@@ -11,6 +11,6 @@ MATCH void Area_EnableHeightOffset(void) {
         flag = g_GameState->unk_12C[0] & 1;
     }
     if (flag != 0) {
-        D_80149340 = 1;
+        g_AreaHeightOffsetEnabled = 1;
     }
 }

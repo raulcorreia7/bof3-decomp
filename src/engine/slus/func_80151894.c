@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* counts D_801490A6 down and, when it reaches zero, advances the mode byte,
+/* counts g_MessageStateTimer down and, when it reaches zero, advances the mode byte,
  * the entry index and bit 2 of g_UiWindowChannel.
  */
 MATCH void func_80151894(void) {
@@ -10,8 +10,8 @@ MATCH void func_80151894(void) {
     int flags;
     u8  advance;
 
-    value         = D_801490A6[0];
-    D_801490A6[0] = value + 0xFF;
+    value                  = g_MessageStateTimer[0];
+    g_MessageStateTimer[0] = value + 0xFF;
     if (value == 0) {
         advance = D_80148333[0] + 1;
         index   = g_UiWindowStep + 1;

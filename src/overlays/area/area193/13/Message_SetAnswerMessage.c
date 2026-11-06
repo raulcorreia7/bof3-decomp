@@ -2,5 +2,5 @@
 
 /* func_801F2C70 */
 MATCH void Message_SetAnswerMessage(void) {
-    g_MessageRequest = D_801F39FC[D_801490C7];
+    g_MessageRequest = D_801F39FC[g_MessageChoice];
 }

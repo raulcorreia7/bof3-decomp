@@ -7,7 +7,7 @@ MATCH void func_801F3260(void) {
     if (MENU_SELECTION_IDLE()) {
         MESSAGE_REQUEST_CLEAR();
         D_801F2944 = 0;
-    } else if (D_801490C7 == 1) {
+    } else if (g_MessageChoice == 1) {
         MESSAGE_REQUEST_CLEAR();
         D_801F2944 = 1;
     } else {

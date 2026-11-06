@@ -9,7 +9,7 @@ MATCH void func_8015A170(void) {
     s32 i;
 
     cursor = D_801490B0;
-    for (i = 0; i <= D_801490BC.last_row; i++) {
+    for (i = 0; i <= g_MessageWindow.last_row; i++) {
         cursor = UI_DrawTextAt(0x3A, D_801490CF[i], cursor);
     }
 }

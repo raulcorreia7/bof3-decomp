@@ -10,10 +10,10 @@ MATCH void func_801F2CAC(void) {
         D_80145E93[0] = 0;
         Area_SetCellPalette(D_80145EC6, D_80145ECA);
     }
-    if (D_801490C7 == 1) {
+    if (g_MessageChoice == 1) {
         SYS_SetFlag(D_80144EA0, 9);
     }
-    if (D_801490C7 != 2) {
+    if (g_MessageChoice != 2) {
         SND_PlayCue(0x208);
     }
 }

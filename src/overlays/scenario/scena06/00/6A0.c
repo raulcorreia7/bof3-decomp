@@ -260,21 +260,21 @@ MATCH void func_801FDFFC(void) {
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FE048(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_MOMO);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FE08C(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FE0D0(void) {
@@ -282,7 +282,7 @@ MATCH void func_801FE0D0(void) {
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FE11C(void) {
@@ -313,21 +313,21 @@ MATCH void func_801FE210(void) {
 }
 
 MATCH void func_801FE254(void) {
-    func_801C1ABC(CHAR_ID_RYU_YOUNG);
-    func_801C1ABC(CHAR_ID_GARR);
-    func_801C1630();
+    Party_RemoveMember(CHAR_ID_RYU_YOUNG);
+    Party_RemoveMember(CHAR_ID_GARR);
+    Party_StagePalettes();
 }
 
 MATCH void func_801FE284(void) {
-    func_801C1ABC(CHAR_ID_RYU_YOUNG);
-    func_801C1ABC(CHAR_ID_MOMO);
-    func_801C1630();
+    Party_RemoveMember(CHAR_ID_RYU_YOUNG);
+    Party_RemoveMember(CHAR_ID_MOMO);
+    Party_StagePalettes();
 }
 
 MATCH void func_801FE2B4(void) {
-    func_801C1ABC(CHAR_ID_RYU_YOUNG);
-    func_801C1ABC(CHAR_ID_PECO);
-    func_801C1630();
+    Party_RemoveMember(CHAR_ID_RYU_YOUNG);
+    Party_RemoveMember(CHAR_ID_PECO);
+    Party_StagePalettes();
 }
 
 #include "overlays/scenario/Scene_RemoveGarr.h"
@@ -335,15 +335,15 @@ MATCH void func_801FE2B4(void) {
 #include "overlays/scenario/Scene_RemovePeco.h"
 
 MATCH void func_801FE334(void) {
-    func_801C1ABC(CHAR_ID_PECO);
-    func_801C1ABC(CHAR_ID_GARR);
-    func_801C1630();
+    Party_RemoveMember(CHAR_ID_PECO);
+    Party_RemoveMember(CHAR_ID_GARR);
+    Party_StagePalettes();
 }
 
 #include "overlays/scenario/Scene_RemoveMomo.h"
 
 MATCH void func_801FE38C(void) {
-    func_801C1ABC(CHAR_ID_MOMO);
-    func_801C1ABC(CHAR_ID_PECO);
-    func_801C1630();
+    Party_RemoveMember(CHAR_ID_MOMO);
+    Party_RemoveMember(CHAR_ID_PECO);
+    Party_StagePalettes();
 }

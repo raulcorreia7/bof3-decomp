@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const Table6 D_80149AB4 = {{
+const Table6 g_MessageChoiceHandlers = {{
     func_80151964,
     UI_RunChoiceStep,
     func_80151A98,

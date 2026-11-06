@@ -27,18 +27,18 @@ MATCH void UI_HandleChoiceInput(void) {
     if ((action & PADLup) != 0) {
         u8* index;
 
-        index  = (u8*)&D_801490BC.selection_index;
+        index  = (u8*)&g_MessageWindow.selection_index;
         *index = *index - 1;
         if ((s8)*index < 0) {
-            *index = D_801490BC.last_row;
+            *index = g_MessageWindow.last_row;
         }
     }
     if ((action & PADLdown) != 0) {
         u8* index;
 
-        index  = (u8*)&D_801490BC.selection_index;
+        index  = (u8*)&g_MessageWindow.selection_index;
         *index = *index + 1;
-        if (D_801490BC.last_row < (s8)*index) {
+        if (g_MessageWindow.last_row < (s8)*index) {
             *index = 0;
         }
     }

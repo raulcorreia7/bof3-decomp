@@ -3,7 +3,7 @@
 MATCH void func_801F381C(void) {
     s8 state;
 
-    state            = D_801490C7;
+    state            = g_MessageChoice;
     g_MessageRequest = D_801F4D64[state];
     switch (state) {
         case 0:

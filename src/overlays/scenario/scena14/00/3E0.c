@@ -51,7 +51,8 @@ MATCH void func_801F8850(void) {
     flags = &D_80145FF4;
     *flags &= 0xFE;
     D_80146134 &= 0xFE;
-    Game_RequestAreaChange(AREA_ID_DESERT_MANMO, 0x298000, 0x168000, 0x80);
+    Game_RequestAreaChange(AREA_ID_DESERT_MANMO, TO_COORD(41) + COORD_HALF, TO_COORD(22) + COORD_HALF,
+                           AREA_ENTRY_MAP_LOADING);
     Game_SetScriptActive();
     D_80146874 = 2;
     D_80146875 = 0;
@@ -173,7 +174,7 @@ MATCH void func_801FBF18(void) {
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 MATCH void func_801FBFA8(void) {
@@ -182,7 +183,7 @@ MATCH void func_801FBFA8(void) {
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
-    func_801C1630();
+    Party_StagePalettes();
     g_PartyBattleOrder[0] = 7;
     D_80144F5E            = 8;
     D_80144F5F            = 5;
@@ -200,7 +201,7 @@ MATCH void func_801FC0C8(void) {
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(*D_80144908);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 /* blocker: frame 0x20 against 0x18; first diff: +0x0 addiu sp,sp,-32. */
@@ -210,7 +211,7 @@ MATCH void func_801FC1E8(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO, 0);
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 #include "overlays/scenario/Scene_SetPartyRyuAdultNinaAdultRei.h"
@@ -230,7 +231,7 @@ MATCH void func_801FC280(void) {
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
     Party_JoinMember(character);
-    func_801C1630();
+    Party_StagePalettes();
 }
 
 INCLUDE_ASM(func_801FC328);

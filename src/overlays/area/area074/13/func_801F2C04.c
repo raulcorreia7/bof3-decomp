@@ -4,7 +4,7 @@ MATCH s32 func_801F2C04(void) {
     s8  sel;
     s32 request;
 
-    sel = D_801490C7;
+    sel = g_MessageChoice;
     if (sel == 0) {
         if (D_80144F94 & 0x20) {
             g_MessageRequest = 0x92;

@@ -2,6 +2,7 @@
 #define GAME_FUNCTIONS_H
 
 #include "types.h"
+#include "area/map.h"
 #include "work/actor.h"
 #include "psx/psyq.h"
 
@@ -62,7 +63,7 @@ void  func_8019ABB0(s32 mode);
 /* func_8019F818 */
 void  func_8019F818(Actor* actor);
 /* func_8019FA28 */
-void  Game_RequestAreaChange(u16 selection_seed, u32 context_a, u32 context_b, u8 context_kind);
+void  Game_RequestAreaChange(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing);
 /* func_801A0048 */
 bool  func_801A0048(s32 cell_x, s32 cell_y);
 /* func_801A0514 */
@@ -163,12 +164,14 @@ s32   func_801BE1B0(u32 index);
 void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
 /* func_801C1400 */
 void  Party_BuildBattlers(u32 mode);
+/* Party_StagePalettes */
 /* func_801C1630 */
-void  func_801C1630(void);
+void  Party_StagePalettes(void);
 /* func_801C187C */
 s32   Party_JoinMember(s32 char_id);
+/* Party_RemoveMember */
 /* func_801C1ABC */
-void  func_801C1ABC(s32 character_id);
+void  Party_RemoveMember(s32 character_id);
 /* func_801C1DF0 */
 void  func_801C1DF0(s32 handler_index);
 /* func_801C2438 */

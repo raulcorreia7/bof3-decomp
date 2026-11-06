@@ -3,7 +3,7 @@
 MATCH void func_801F37F4(void) {
     s8 sel;
 
-    sel = D_801490C7;
+    sel = g_MessageChoice;
     if (sel == 0) {
         MESSAGE_REQUEST_CLEAR();
         g_ScriptVars[3] = 0x64;

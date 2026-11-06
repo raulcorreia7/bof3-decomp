@@ -427,7 +427,7 @@ INCLUDE_ASM(func_801FD524);
 
 INCLUDE_ASM(func_801FD5A0);
 
-MATCH ActorSlot* func_801FD610(u8 arg0) {
+MATCH ActorSlot* func_801FD610(u8 mode) {
     ActorSlot* slot;
     s32        index;
 
@@ -436,7 +436,7 @@ MATCH ActorSlot* func_801FD610(u8 arg0) {
     if (index != 0xFF) {
         slot->header.flags = 1;
         slot->type         = 0x49;
-        slot->header.mode  = arg0;
+        slot->header.mode  = mode;
     }
     return slot;
 }
@@ -487,7 +487,7 @@ MATCH void Scene_SetPartyRyuYoungNinaYoungGarr(void) {
 }
 
 MATCH void func_801FDBCC(void) {
-    func_801C1ABC(D_80146189);
+    Party_RemoveMember(D_80146189);
 }
 
 /* blocker: nops after each load; first diff: 0x801FDC30 nop against lui a0. */

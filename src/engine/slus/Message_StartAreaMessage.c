@@ -10,8 +10,8 @@ MATCH void Message_StartAreaMessage(s32 message_index) { /* func_80150224 */
 
     handle = *(u16*)(SLUS_LOAD_ADDRESS + (s16)message_index * 2);
     handle += SLUS_LOAD_ADDRESS;
-    D_801490AC = handle;
-    D_801490B0 = (u8*)handle;
+    g_MessageScript = handle;
+    D_801490B0      = (u8*)handle;
     UI_ResetMessage();
     g_MessageRequest = message_index;
 }

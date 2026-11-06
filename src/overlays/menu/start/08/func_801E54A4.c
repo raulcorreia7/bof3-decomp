@@ -8,7 +8,7 @@ MATCH void func_801E54A4(void) {
     g_SaveSlotFirst = 0;
     if (g_SaveCardStatus == CARD_EVENT_OK) {
         g_SaveSlotCount = func_801EFCA8(g_SaveFileNameFormat, 0x10);
-        if (D_8018E990[0] != 0) {
+        if (g_SaveCardDirectory[0] != 0) {
             func_801E77F0();
             g_SaveSlotCount  = 3;
             g_MenuStartTimer = 0;

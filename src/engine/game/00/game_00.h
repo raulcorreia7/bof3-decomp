@@ -376,7 +376,7 @@ extern s8                 D_80148654;   /* 0x80148654 */
 extern s8                 D_80148656;   /* 0x80148656 */
 extern s8                 D_801490E0;   /* 0x801490E0 */
 extern u8                 D_801581E0[]; /* 0x801581E0 */
-extern u8*                D_80181164[];
+extern u8*                g_EncounterZoneLists[];
 extern Point2DL           g_FacingOffsets[]; /* 0x80181AC0 */
 extern s8                 D_80181B00[];
 extern s8                 D_80181B01[];
@@ -388,7 +388,8 @@ extern s32      D_80181CAC;
 extern u8       D_80181E40[]; /* 0x80181E40 */
 extern u8       D_80181E44[]; /* 0x80181E44 */
 extern u8       D_8018214C[]; /* 0x8018214C */
-extern u8       D_8018217C;   /* 0x8018217C */
+/* D_8018217C */
+extern u8       g_AreaScriptTests; /* 0x8018217C */
 extern TailFunc D_801821C0[];
 extern u8       D_8018E268[];
 extern char     D_80195858[];            /* 0x80195858 */
@@ -717,7 +718,7 @@ void    func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette);
 void    func_8019F840(void);
 void    func_8019F98C(void);
 void    func_8019F9D0(void);
-void    func_8019FAA0(u16 selection_seed, u32 context_a, u32 context_b, u8 context_kind);
+void    func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing);
 void    func_8019FF88(s32 entry_mode, s32 entry_index, s32 entry_flags);
 void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);

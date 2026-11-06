@@ -40,7 +40,8 @@ NON_MATCHING void func_801F4768(void) {
     }
 
     frame = g_Task;
-    if ((abs(D_8014930A - COORD_INT(frame->pos.x)) < 0x1A) || (abs(D_8014930E - COORD_INT(frame->pos.y)) < 0x1A)) {
+    if ((abs(g_AreaTargetCellX - COORD_INT(frame->pos.x)) < 0x1A) ||
+        (abs(g_AreaTargetCellY - COORD_INT(frame->pos.y)) < 0x1A)) {
         primitive = (POLY_FT4*)g_GfxPrimCursor;
         row       = 0;
         SetPolyFT4(primitive);

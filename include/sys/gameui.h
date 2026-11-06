@@ -35,17 +35,18 @@ ASSERT_OFFSET(ScriptState, cursor, 0x0A);
 
 /* The requested message id: 0xFFFF means no message. ResourceRequestMessage
  * stores a message index in the slot and Message_StartRequest reads the slot as that
- * index; the player's menu choice at D_801490C7 decides the index. */
+ * index; the player's menu choice at g_MessageChoice decides the index. */
 #define MESSAGE_NONE            0xFFFF
 #define MESSAGE_REQUEST_CLEAR() (g_MessageRequest = MESSAGE_NONE)
 
 /* The player's menu choice at 0x801490C7 (MenuState.selection_index): zero
  * while no answer is selected, nonzero once the player picks one. */
-/* An alias byte of D_801490BC.selection_index: the area overlays read it as a plain byte, and the
+/* An alias byte of g_MessageWindow.selection_index: the area overlays read it as a plain byte, and the
  * member access changes their code. */
-extern s8 D_801490C7;
-#define MENU_SELECTION_IDLE()  (D_801490C7 == 0)
-#define MENU_SELECTION_ARMED() (D_801490C7 != 0)
+/* D_801490C7 */
+extern s8 g_MessageChoice;
+#define MENU_SELECTION_IDLE()  (g_MessageChoice == 0)
+#define MENU_SELECTION_ARMED() (g_MessageChoice != 0)
 
 /* The repeatable buttons of a pad mask: INPUT_GetRepeatedButtons sees the held keys
  * filtered to the buttons that repeat. */
@@ -213,14 +214,16 @@ extern s8           D_80148FC5;
 extern s8           D_80148FC6;
 extern s8           D_80148FC8;
 extern u8           D_80148FE0;
-extern u8           D_801490A2;
+/* D_801490A2 */
+extern u8           g_MessageChoiceMode;
 /* Shared selection counter read by etc/game/00 and etc/shop/00. */
 /* D_801490A4 */
 extern volatile u16 g_UiWindowChannel;
 /* Area request slot shared by the area024 and area027 overlays. */
 /* D_801490A8 */
 extern u16          g_MessageRequest;
-extern u16          D_801490AA;
+/* D_801490AA */
+extern u16          g_MessageChoiceTimer;
 extern u8           D_801490CF[];
 /* D_80181D98 */
 extern const u8     s_LoaderRecordBytes[168];

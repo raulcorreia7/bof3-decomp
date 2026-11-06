@@ -3,7 +3,7 @@
 MATCH void func_801F4848(void) {
     u16 message;
 
-    if (D_801490C7 == 0) {
+    if (g_MessageChoice == 0) {
         if (Item_VitalHas(0xC) != 0) {
             g_MessageRequest = 6;
             g_AreaSceneMode |= 1;
