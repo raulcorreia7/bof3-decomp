@@ -5,15 +5,15 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern BattleEffect* volatile D_801EC2E0;
 extern BattleResultRings   D_801EEC10;
 extern BattleHandlerTable3 D_801EEC20;
-extern BattleHandlerTable3 D_801EEC38;
-
-extern u8 D_801EFADC[];
-
-extern BattleEffect* volatile D_801EC2E0;
 
 extern BattleHandlerTable3 D_801EEC2C;
 
+extern BattleHandlerTable3 D_801EEC38;
+
 extern BattleHandlerTable3 D_801EEC44;
+
+extern u8 D_801EFADC[];
 #endif

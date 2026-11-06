@@ -5,15 +5,15 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleHandlerTable5 D_801EEC04;
-
 extern u8 g_BattleActiveBattler;
 
 /* One-field views of the queued-slot record at g_BattleEffects (stride 0x78). */
 extern u8 D_801EC331[];
-extern u8 D_801EC334[];
-extern u8 D_801EC339[];
-extern u8 D_801EC3A4[];
+
+extern u8                  D_801EC334[];
+extern u8                  D_801EC339[];
+extern u8                  D_801EC3A4[];
+extern BattleHandlerTable5 D_801EEC04;
 
 extern u16      D_801EFCC0[];
 extern u16      D_801EFCE0[];

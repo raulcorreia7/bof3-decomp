@@ -7,10 +7,10 @@
 
 extern BattleHandlerTable5 D_801EEC04;
 
-extern Callback D_801F0BCC[];
-void            func_801F0428(void);
-
 extern Callback D_801F0BBC[];
 void            func_801F012C(void);
+
+extern Callback D_801F0BCC[];
+void            func_801F0428(void);
 
 #endif

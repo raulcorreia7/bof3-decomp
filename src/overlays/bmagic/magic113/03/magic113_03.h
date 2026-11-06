@@ -19,10 +19,10 @@ static inline void Effect_CountUpTimer(void) {
     }
 }
 
-extern Callback D_801F0BCC[];
-void            func_801F02CC(void);
-
 extern Callback D_801F0BC0[];
 void            func_801EFDA0(void);
+
+extern Callback D_801F0BCC[];
+void            func_801F02CC(void);
 
 #endif

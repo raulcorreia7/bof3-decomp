@@ -5,8 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 extern Callback D_801F006C[];
-void            Effect_SetActorMatrix(void);
 void            func_801EF158(void);
+void            Effect_SetActorMatrix(void);
 
 extern u8 D_801F00B0[];
 

@@ -68,8 +68,8 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
     }
 }
 
-void func_801F043C(void);
 void func_801EF8F0(s32 arg0, s32 arg1, s16 arg2);
+void func_801F043C(void);
 void func_801F070C(void);
 
 #endif

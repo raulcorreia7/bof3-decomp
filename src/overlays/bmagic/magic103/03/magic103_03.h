@@ -17,16 +17,16 @@ ASSERT_OFFSET(BmagicOffset, x, 0x0);
 ASSERT_OFFSET(BmagicOffset, y, 0x4);
 ASSERT_OFFSET(BmagicOffset, z, 0x8);
 
+extern Callback     D_801F07A0[];
 extern BmagicOffset D_801F07AC[];
-extern Callback     D_801F07C4[];
-void                func_801EFE20(void);
+void                func_800AF764(void);
+
+extern Callback D_801F07C4[];
+void            func_801EF1D8(void);
+
+void func_801EFE20(void);
 
 extern Callback D_801F07D4[];
 void            func_801F04E0(void);
-
-void func_800AF764(void);
-
-extern Callback D_801F07A0[];
-void            func_801EF1D8(void);
 
 #endif

@@ -8,9 +8,9 @@
 /* The amount Effect_CountDownTimer adds to the effect work byte 9. */
 #define EFFECT_TIMER_STEP 8
 
-extern MagicTaskFuncs D_801EEC28;
-
 extern BattleHandlerTable3 D_801EEC1C;
+
+extern MagicTaskFuncs D_801EEC28;
 
 void func_801EEC90(void);
 
