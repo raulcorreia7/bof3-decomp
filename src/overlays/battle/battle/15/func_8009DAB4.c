@@ -21,7 +21,7 @@ MATCH void func_8009DAB4(void) {
         value       = g_BattleEnemyBattlers[enemy_index].stats.power;
     }
     D_801EC30C = value;
-    switch (RANDOM_MASK(3)) {
+    switch (rand() & 3) {
         case 0: {
             u16* cell = (u16*)&D_801EC30C;
             *cell     = (*cell >> 1);

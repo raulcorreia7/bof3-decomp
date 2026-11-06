@@ -22,7 +22,7 @@ MATCH void func_801A0CFC(Actor* entity) {
         if (D_801C83BC[g_Task->header.step](entity, param, 2) != 0) {
             value = ((s32 (*)(Actor*))func_801A2C94)(entity);
             if (g_Task->unk_09 != 0) {
-                entity->unk_7B = ((RANDOM_MASK(3)) + 3);
+                entity->unk_7B = ((rand() & 3) + 3);
             }
         } else {
             value = 0xFF;

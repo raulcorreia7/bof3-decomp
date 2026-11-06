@@ -69,7 +69,7 @@ MATCH void func_801D218C(void) {
     D_1F800004 = ((g_Task->ticker + 2) & 0xF) << 8;
     D_1F80000C = g_Task->band;
     i          = 1;
-    D_1F800008 = RANDOM_MASK(0x3F);
+    D_1F800008 = rand() & 0x3F;
     vec[0]     = 0;
     D_1F800016 = FIXED_MUL(rsin(D_1F800004), d[0]);
     D_1F800018 = 0;
@@ -82,10 +82,10 @@ MATCH void func_801D218C(void) {
             SetLineG2(primitive);
             SetSemiTrans(primitive, 1);
             RotTransPers((SVECTOR*)D_1F800014, (long*)&primitive->x0, &p, &flag);
-            if (RANDOM_MASK(1)) {
-                D_1F800000 = (RANDOM_MASK(0x3F)) + 0x80;
+            if (rand() & 1) {
+                D_1F800000 = (rand() & 0x3F) + 0x80;
             } else {
-                D_1F800000 = 0x80 - (RANDOM_MASK(0x3F));
+                D_1F800000 = 0x80 - (rand() & 0x3F);
             }
             page    = ((g_Task->ticker + i + 2) & 0xF) << 8;
             vec[0]  = 0;
@@ -108,7 +108,7 @@ MATCH void func_801D240C(void) {
     s32      angle;
     s32      i;
 
-    D_1F800000 = (RANDOM_MASK(7)) + g_Task->band * 3;
+    D_1F800000 = (rand() & 7) + g_Task->band * 3;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5, 0);
     i         = 0;

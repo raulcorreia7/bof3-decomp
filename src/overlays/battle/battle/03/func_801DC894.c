@@ -14,14 +14,14 @@ MATCH u32 func_801DC894(s16 damage, u8 attacker, u8 target) {
             ENEMY_COMBATANT(target).target_flags &= ~0x10;
             return 0;
         }
-    } else if ((ENEMY_COMBATANT(attacker).status & STATUS_BLIND) && (RANDOM_MASK(2))) {
+    } else if ((ENEMY_COMBATANT(attacker).status & STATUS_BLIND) && (rand() & 2)) {
         ENEMY_COMBATANT(target).target_flags &= ~0x10;
         return 0;
     }
     if (attacker < 3 && (g_BattlePartyBattlers[attacker].action_flags.value & 0x100)) {
         return damage;
     }
-    if ((ENEMY_COMBATANT(target).event_flags & 4) && (RANDOM_MASK(2))) {
+    if ((ENEMY_COMBATANT(target).event_flags & 4) && (rand() & 2)) {
         ENEMY_COMBATANT(target).target_flags &= ~0x10;
         return 0;
     }

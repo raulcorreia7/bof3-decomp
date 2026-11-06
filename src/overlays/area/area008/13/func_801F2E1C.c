@@ -22,7 +22,7 @@ MATCH void func_801F2E1C(void) {
         WORLD00_AREA008_STATE_PTR = (volatile Actor*)&g_BattlePartyBattlers[1];
         TASK_SET(&g_BattlePartyBattlers[1]);
         Actor_SelectScript(1);
-        D_801F53F4            = D_801F4680[RANDOM_MASK(3)];
+        D_801F53F4            = D_801F4680[rand() & 3];
         g_Task                = previous;
         previous->header.mode = 4;
     }

@@ -119,7 +119,7 @@ MATCH void func_801D1034(void) {
     s32              coord_y;
     s16              distance;
 
-    g_Task->ticker = (RANDOM_MASK(0xF));
+    g_Task->ticker = (rand() & 0xF);
     g_Task->timer  = 0;
     g_Task->band   = 0;
 
@@ -194,7 +194,7 @@ MATCH void func_801D12A8(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_Task->ticker = (RANDOM_MASK(0xF));
+    g_Task->ticker = (rand() & 0xF);
     g_Task->timer  = 0;
     g_Task->band   = 0;
 
@@ -298,7 +298,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
     do {
         work    = g_Task;
         cell[0] = ((work->ticker + i) & 0xF) << 8;
-        if (RANDOM_MASK(1)) {
+        if (rand() & 1) {
             new_var  = (s16)jitter_mask;
             cell[-1] = radius_base + (rand() & new_var);
         } else {
@@ -419,7 +419,7 @@ MATCH void func_801D1DE0(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_Task->ticker = (RANDOM_MASK(0xF));
+    g_Task->ticker = (rand() & 0xF);
     g_Task->timer  = 0;
     g_Task->band   = 0;
 

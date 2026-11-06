@@ -25,7 +25,7 @@ MATCH void func_801BEBB0(void) {
     row    = base + 0x6E;
     offset = 0;
     do {
-        while ((random = RANDOM_MASK(0x7F)) >= 101) {
+        while ((random = (rand() & 0x7F)) >= 101) {
         }
         if (slot < g_PartySize) {
             if (g_Characters[g_CharSlot[D_80144F5A[slot]]].stats.surprise_chance >= random) {

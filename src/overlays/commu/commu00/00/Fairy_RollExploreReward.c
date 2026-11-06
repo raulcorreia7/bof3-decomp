@@ -26,7 +26,7 @@ MATCH void Fairy_RollExploreReward(void) {
         g_FairyJobs[*edp].record_state            = 0;
         ((Actor*)FAIRY_VILLAGE_ACTIVE_UI)->unk_7C = 0x51;
     } else if (state == 2) {
-        roll = RANDOM_MASK(0x7F);
+        roll = rand() & 0x7F;
         if (roll >= 101) {
             roll = 0x64;
         }
@@ -44,7 +44,7 @@ MATCH void Fairy_RollExploreReward(void) {
             roll -= buf[D_801457A9[offset * 8]].weights[i - 1];
         }
         i      = (i - 1) * 16;
-        offset = (i + (RANDOM_MASK(0xF))) * 2;
+        offset = (i + (rand() & 0xF)) * 2;
         high   = D_801F2619[offset];
         low    = g_FairyExploreRewards[offset];
         if (!(Item_Add(high, low, 1, 0) & BYTE_MASK)) {

@@ -59,7 +59,7 @@ NON_MATCHING void func_801DE1C0(void) {
                 *row           = 0x21;
                 g_Task->unk_05 = row_index;
                 g_Task->unk_06 = column;
-                roll           = RANDOM_MASK(0xFF);
+                roll           = rand() & 0xFF;
             loop_4:
                 ROW_ROLL    = roll;
                 roll        = ROW_ROLL;
@@ -89,7 +89,7 @@ NON_MATCHING void func_801DE1C0(void) {
                         if (steps >= 0) {
                             walk_limit = steps;
                         loop_12:
-                            if (RANDOM_MASK(1)) {
+                            if (rand() & 1) {
                                 walk += 1;
                                 ROW_ROLL = (u16)(ROW_ROLL + 1);
                                 if (walk_limit >= walk) {

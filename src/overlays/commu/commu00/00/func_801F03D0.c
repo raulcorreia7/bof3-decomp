@@ -1,6 +1,6 @@
 #include "commu00_00.h"
 
-/* Rolls three distinct labels per row into D_801F2930: each roll is RANDOM_MASK(0x1F), lowered by RANDOM_MASK(0xF)
+/* Rolls three distinct labels per row into D_801F2930: each roll is rand() & 0x1F, lowered by rand() & 0xF
  * until it fits the row's signed cap, then offset by 0x9B; 0x9F and 0xA0 and repeats are skipped. nonmatching 72.22%:
  * the caps are copied as one 3-byte record (retail lb/sb block copy). The retail keeps &caps in s5 across the row loop
  * and leaves the clamp loop unrotated (test at the top, j back); a goto clamp gives the unrotated shape (73.03%).
@@ -34,12 +34,12 @@ NON_MATCHING void func_801F03D0(void) {
         count = 0;
         cap   = (u8*)&limits.cap[row];
         while (count < 3) {
-            value = RANDOM_MASK(0x1F);
+            value = rand() & 0x1F;
             for (;;) {
                 if (*cap >= (u8)value) {
                     break;
                 }
-                value -= RANDOM_MASK(0xF);
+                value -= rand() & 0xF;
             }
             candidate = (u8)value + 0x9B;
             for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {

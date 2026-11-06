@@ -5,7 +5,7 @@ MATCH void func_801AD734(void) {
     u32    choice;
     s8     value;
 
-    choice = (RANDOM_MASK(0xF));
+    choice = (rand() & 0xF);
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
         func_8015BAC4(((g_BattlePartyBattlers[0].facing ^ 4) & 7));
     }

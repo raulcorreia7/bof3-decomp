@@ -3,7 +3,7 @@
 MATCH void func_801F0BF4(u8 task_index) {
     u8 variant;
 
-    variant = RANDOM_MASK(0x7);
+    variant = rand() & 0x7;
     if (variant >= 5) {
         variant -= 4;
     }

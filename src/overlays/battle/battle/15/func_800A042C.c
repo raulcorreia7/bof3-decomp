@@ -16,7 +16,7 @@ MATCH void func_800A042C(void) {
         value       = g_BattleEnemyBattlers[enemy_index].stats.power;
     }
     D_801EC30C = value;
-    switch (RANDOM_MASK(3)) {
+    switch (rand() & 3) {
         case 0:
             LOHU(D_801EC30C) >>= 1;
             break;

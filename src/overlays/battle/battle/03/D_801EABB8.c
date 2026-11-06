@@ -75,7 +75,7 @@ Callback D_801EAC4C[3] = {
 };
 
 /* 0x801EAC58: the abilities `Recall` (ability 36 in GAME.EMI) casts at random.
- * Battle_PickTarget (0x801D3844) picks a slot with RANDOM_MASK(0x1F) and makes that
+ * Battle_PickTarget (0x801D3844) picks a slot with rand() & 0x1F and makes that
  * ability the action's ability. 32 slots, one ability ID each; the repeated
  * Burn entry weights the pick. */
 /* D_801EAC58 */
@@ -85,7 +85,7 @@ volatile u8 g_BattleRecallAbilities[32] = {
 };
 
 /* 0x801EAC78: the abilities `MagicShuffle` (37) and `Trump` (140) cast at
- * random. Battle_PickTarget (0x801D3844) picks a slot with RANDOM_MASK(0x1F) and
+ * random. Battle_PickTarget (0x801D3844) picks a slot with rand() & 0x1F and
  * makes that ability the action's ability. 32 slots, one ability ID each; the
  * repeated Burn entry weights the pick. */
 /* D_801EAC78 */
