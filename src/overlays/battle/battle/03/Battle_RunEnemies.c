@@ -6,12 +6,12 @@ MATCH void Battle_RunEnemies(void) {
     s32                    i;
 
     for (i = 0; (i & BYTE_MASK) < 8u; i++) {
-        if (g_BattleEnemyBattlers[(u8)i].flags != 0u) {
+        if (g_BattleEnemyBattlers[(u8)i].header.flags != 0u) {
             enemy = &g_BattleEnemyBattlers[(u8)i];
             TASK_SET((PartyBattler*)enemy);
             g_BattleCurrentEnemy = (EnemyBattler*)enemy;
             if (g_BattleEncounter != 0u) {
-                if (enemy->mode != 0u) {
+                if (enemy->header.mode != 0u) {
                     enemy->unk_E4(2);
                 }
                 D_801EB298[g_BattleCurrentEnemy->unk_F0]();

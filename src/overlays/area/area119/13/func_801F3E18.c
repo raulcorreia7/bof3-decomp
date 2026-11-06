@@ -5,6 +5,6 @@ MATCH void func_801F3E18(void) {
     g_Task->unk_09 += 1;
     if (g_Task->unk_09 >= 0x1FU) {
         g_Task->unk_09 = 0x1F;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }

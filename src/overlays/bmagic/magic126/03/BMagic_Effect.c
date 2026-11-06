@@ -29,12 +29,12 @@ INCLUDE_ASM(func_801EECE4);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEED0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEF14(void) {
-    SYS_DISPATCH_BYTE(D_801F1268, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F1268, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF438();
         func_801EF7A4();
@@ -66,8 +66,8 @@ INCLUDE_ASM(func_801EF438);
 INCLUDE_ASM(func_801EF7A4);
 
 MATCH void func_801EFAF4(void) {
-    SYS_DISPATCH_BYTE(D_801F1278, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F1278, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_800AF764();
         func_801EFD5C();
     }
@@ -91,7 +91,7 @@ MATCH void func_801EFB74(void) {
         work->pos.z.fixed = z;
         g_Task->unk_09    = 0x14;
         g_Task->timer     = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -103,7 +103,7 @@ MATCH void func_801EFC94(void) {
     timer          = g_Task->unk_09 + 2;
     g_Task->unk_09 = timer;
     if (timer == 150) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -112,8 +112,8 @@ MATCH void func_801EFC94(void) {
 INCLUDE_ASM(func_801EFD5C);
 
 MATCH void func_801F01C0(void) {
-    SYS_DISPATCH_BYTE(D_801F1288, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F1288, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_800AF764();
         func_801F06AC();
     }
@@ -134,8 +134,8 @@ MATCH void func_801F091C(void) {
 }
 
 MATCH void func_801F0960(void) {
-    SYS_DISPATCH_BYTE(D_801F12AC, D_801F22BC->step);
-    if (D_801F22BC->flags != 0 && D_801F22BC->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F12AC, D_801F22BC->header.step);
+    if (D_801F22BC->header.flags != 0 && D_801F22BC->header.step != 0) {
         func_801F11AC();
         func_801F0ED0();
     }
@@ -164,10 +164,10 @@ MATCH u32 func_801F1110(void) {
 }
 
 MATCH void func_801F116C(void) {
-    D_801F22BC->flags  = 0;
-    D_801F22BC->mode   = 0;
-    D_801F22BC->step   = 0;
-    D_801F22BC->unk_03 = 0;
+    D_801F22BC->header.flags = 0;
+    D_801F22BC->header.mode  = 0;
+    D_801F22BC->header.step  = 0;
+    D_801F22BC->unk_03       = 0;
 }
 
 MATCH void func_801F11AC(void) {

@@ -16,7 +16,7 @@ MATCH void func_801EEF5C(void) {
         func_80196718(*selected);
         g_Task->timer  = func_8019651C((u8*)*selected, 0, 0, 0, 1);
         g_Task->unk_09 = 8;
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }
 
@@ -33,12 +33,12 @@ INCLUDE_ASM(func_801EF160);
 INCLUDE_ASM(func_801EF2E8);
 
 MATCH void func_801EF330(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF374(void) {
-    SYS_DISPATCH_BYTE(D_801F048C, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F048C, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_800AF764();
         func_801EF698();
     }

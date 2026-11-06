@@ -9,10 +9,10 @@ MATCH void func_801F3304(void) {
         TASK_SET(g_BattlePartyBattlers);
         D_80145EC8 &= 0xFFFFF000;
         D_80145EC4 &= 0xFFFFF000;
-        g_Task     = work;
-        work->mode = 0xF;
-        D_801F4E04 = 0;
-        D_801F4E10 = 0;
+        g_Task            = work;
+        work->header.mode = 0xF;
+        D_801F4E04        = 0;
+        D_801F4E10        = 0;
     } else {
         switch (D_801F4E14) {
             case 0x1000:
@@ -48,6 +48,6 @@ MATCH void func_801F3304(void) {
                 g_Task = work;
                 break;
         }
-        g_Task->mode = 0xB;
+        g_Task->header.mode = 0xB;
     }
 }

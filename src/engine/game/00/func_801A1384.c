@@ -55,14 +55,14 @@ MATCH void func_801A1384(void* entity) {
                 ((s32*)g_Task)[5] = 0;
             }
             if ((rec[0x74] & ACTOR_FLAG_FADE_WHITE) != 0) {
-                g_Task->unk_03 = g_Task->mode;
-                g_Task->mode   = 8;
-                g_Task->unk_04 = 0;
+                g_Task->unk_03      = g_Task->header.mode;
+                g_Task->header.mode = 8;
+                g_Task->unk_04      = 0;
             }
             if ((rec[0x74] & ACTOR_FLAG_FADE_BLACK) != 0) {
-                g_Task->unk_03 = g_Task->mode;
-                g_Task->mode   = 9;
-                g_Task->unk_04 = 0;
+                g_Task->unk_03      = g_Task->header.mode;
+                g_Task->header.mode = 9;
+                g_Task->unk_04      = 0;
             }
         }
     } else {

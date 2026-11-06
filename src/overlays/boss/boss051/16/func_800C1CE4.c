@@ -9,7 +9,7 @@ MATCH void func_800C1CE4(void) {
         Actor_SelectScript(0);
         ((Actor*)g_Task)->active_flags &= 0x7F;
         ((Actor*)g_Task)->unk_29 = 4;
-        saved->mode++;
+        saved->header.mode++;
     }
     g_Task = saved;
 }

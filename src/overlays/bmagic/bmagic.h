@@ -7,6 +7,7 @@
 #include "game.h"
 #include "gfx/prim.h"
 #include "overlays/battle/battle.h"
+#include "work/task.h"
 
 #define BMAGIC_HANDLER_TABLE4_SIZE 0x10
 
@@ -92,7 +93,7 @@
     (WORK)->unk_22   = (WORK)->unk_22 + (WORK)->unk_0A;                                \
     (WORK)->unk_06   = tick;                                                           \
     if ((tick & 0xFF) == (WORK)->pad_07) {                                             \
-        (WORK)->step += 1;                                                             \
+        (WORK)->header.step += 1;                                                      \
     }
 
 /* One remembered position of an effect's trail; each trail holds
@@ -134,23 +135,23 @@ ASSERT_OFFSET(BmagicTrailPoint, y, 0x02);
 static inline void Bmagic_NextStep(void) {
     PartyBattler* work = g_Task;
 
-    work->step = (u8)(work->step + 1);
+    work->header.step = (u8)(work->header.step + 1);
 }
 
 /* Clear the local effect work. */
 static inline void Bmagic_ResetLocalWork(void) {
-    g_Task->flags  = 0;
-    g_Task->mode   = 0;
-    g_Task->step   = 0;
-    g_Task->unk_03 = 0;
-    g_Task->unk_04 = 0;
+    g_Task->header.flags = 0;
+    g_Task->header.mode  = 0;
+    g_Task->header.step  = 0;
+    g_Task->unk_03       = 0;
+    g_Task->unk_04       = 0;
 }
 
 /* Run the task handler the spad task byte selects. */
 static inline void Bmagic_DispatchTaskPair(Callback first, Callback second) {
     Callback handlers[2] = {first, second};
 
-    handlers[g_Task->mode]();
+    handlers[g_Task->header.mode]();
 }
 
 typedef struct MagicTaskFuncs {
@@ -170,25 +171,20 @@ ASSERT_OFFSET(BmagicEffectFuncs, handlers, 0x00);
 /* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
  * func_801EF33C dispatches on mode. */
 typedef struct BmagicEffectWork {
-    /* 0x00 */ u8  flags;
-    /* 0x01 */ u8  mode;
-    /* 0x02 */ u8  step;
-    /* 0x03 */ u8  unk_03;
-    /* 0x04 */ u8  unk_04;
-    /* 0x05 */ u8  timer_05;
-    /* 0x06 */ u8  unk_06;
-    /* 0x07 */ u8  pad_07;
-    /* 0x08 */ u16 unk_08;
-    /* 0x0A */ u16 unk_0A;
-    /* 0x0C */ u16 phase_0C;
-    /* 0x0E */ u8  pad_0E[0x12];
-    /* 0x20 */ s16 unk_20;
-    /* 0x22 */ u16 unk_22;
+    /* 0x00 */ TaskHeader header;
+    /* 0x03 */ u8         unk_03;
+    /* 0x04 */ u8         unk_04;
+    /* 0x05 */ u8         timer_05;
+    /* 0x06 */ u8         unk_06;
+    /* 0x07 */ u8         pad_07;
+    /* 0x08 */ u16        unk_08;
+    /* 0x0A */ u16        unk_0A;
+    /* 0x0C */ u16        phase_0C;
+    /* 0x0E */ u8         pad_0E[0x12];
+    /* 0x20 */ s16        unk_20;
+    /* 0x22 */ u16        unk_22;
 } BmagicEffectWork;
 
-ASSERT_OFFSET(BmagicEffectWork, flags, 0x00);
-ASSERT_OFFSET(BmagicEffectWork, mode, 0x01);
-ASSERT_OFFSET(BmagicEffectWork, step, 0x02);
 ASSERT_OFFSET(BmagicEffectWork, unk_03, 0x03);
 ASSERT_OFFSET(BmagicEffectWork, unk_04, 0x04);
 ASSERT_OFFSET(BmagicEffectWork, timer_05, 0x05);
@@ -230,7 +226,7 @@ void Effect_SetActorMatrix(void);
     do {                                          \
         g_Task->unk_09 += (increment);            \
         if (g_Task->unk_09 == (limit)) {          \
-            g_Task->step += 1;                    \
+            g_Task->header.step += 1;             \
         }                                         \
     } while (0)
 

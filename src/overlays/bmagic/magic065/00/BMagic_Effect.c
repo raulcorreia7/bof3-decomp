@@ -14,12 +14,12 @@ MATCH void func_801EF08C(void) {
     if (g_Task->unk_0B == 0) {
         if (g_Task->unk_09 == 0x1E) {
             func_800AEF98(4, 0);
-            BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+            BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         }
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
         if (!(counter & 0xFF)) {
-            g_Task->mode += 1;
+            g_Task->header.mode += 1;
         }
     }
 }
@@ -33,7 +33,7 @@ MATCH void func_801EF134(void) {
             BMagic_SetTextItemName(item & 0xFF, item >> 8);
         }
         func_801DE8C0(1, 0x1E, Resource_GetText(g_Task->timer));
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -63,7 +63,7 @@ MATCH void func_801EF328(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         func_800AFC98(0, 4);
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -71,7 +71,7 @@ MATCH void func_801EF394(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800A9820(g_BattleTargetSelector);
         BATTLE_ACTIVE_WORK->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -87,13 +87,13 @@ MATCH void BMagic_SetTextItemName(u8 item_id, u8 category) {
             SYS_CopyString(g_TextVariables[0], g_Items[item_id].name, ITEM_NAME_LENGTH);
             break;
         case ITEM_CAT_WEAPON:
-            SYS_CopyString(g_TextVariables[0], g_Weapons[item_id].name, ITEM_NAME_LENGTH);
+            SYS_CopyString(g_TextVariables[0], g_Weapons[item_id].header.name, ITEM_NAME_LENGTH);
             break;
         case ITEM_CAT_ARMOR:
-            SYS_CopyString(g_TextVariables[0], g_Armors[item_id].name, ITEM_NAME_LENGTH);
+            SYS_CopyString(g_TextVariables[0], g_Armors[item_id].header.name, ITEM_NAME_LENGTH);
             break;
         case ITEM_CAT_ACCESSORY:
-            SYS_CopyString(g_TextVariables[0], g_Accessories[item_id].name, ITEM_NAME_LENGTH);
+            SYS_CopyString(g_TextVariables[0], g_Accessories[item_id].header.name, ITEM_NAME_LENGTH);
             break;
     }
 }

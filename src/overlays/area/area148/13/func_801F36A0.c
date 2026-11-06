@@ -5,7 +5,7 @@ MATCH void func_801F36A0(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x208U);
         }
-        ((Actor*)g_Task)->step += 1;
+        ((Actor*)g_Task)->header.step += 1;
     }
     func_801F37B8(0, 1);
     func_801F37B8(1, 1);

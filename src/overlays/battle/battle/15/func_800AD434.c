@@ -6,11 +6,11 @@ MATCH void func_800AD434(void) {
     u8            two;
 
     work = (PartyBattler*)g_Task;
-    funcs[work->step]();
+    funcs[work->header.step]();
     two = 2u;
     if (!(D_80148624 & 1)) {
-        BATTLE_WORK->mode = two;
-        BATTLE_WORK->step = 0;
+        BATTLE_WORK->header.mode = two;
+        BATTLE_WORK->header.step = 0;
         return;
     }
     func_8014D978();

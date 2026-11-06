@@ -73,6 +73,6 @@ arm:
 tail:
     Actor_SelectScript(mode);
 
-    check       = g_Task;
-    check->mode = window;
+    check              = g_Task;
+    check->header.mode = window;
 }

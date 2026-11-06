@@ -7,7 +7,7 @@ MATCH void func_800C1B40(void) {
     TASK_SET((D_801EC2E0->target.bytes));
     if (func_8014DAEC() & BYTE_MASK) {
         saved->timer = 0;
-        saved->mode++;
+        saved->header.mode++;
     }
     TASK_SET(saved);
 }

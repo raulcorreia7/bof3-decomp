@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEC90);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEE04(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEE48);
@@ -38,7 +38,7 @@ MATCH void func_801EEF28(void) {
                          0xFFF;
         SND_QueueSelectionFx(0x100);
         g_Task->unk_09 = 0x20;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -51,7 +51,7 @@ MATCH void func_801EF0B8(void) {
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 0) {
         SND_QueueSelectionFx(0x101);
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -69,8 +69,8 @@ MATCH void func_801F0064(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_800AF764();
         func_801F0308();
     }
@@ -87,7 +87,7 @@ MATCH void func_801F020C(void) {
     counter        = g_Task->unk_09 + 0x10;
     g_Task->unk_09 = counter;
     if ((counter & 0xFF) == 0x80) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -99,8 +99,8 @@ MATCH void func_801F04F4(void) {
     MagicTaskFuncs handlers;
 
     handlers = D_801EEC28;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801F0790();
         PopMatrix();
@@ -115,7 +115,7 @@ MATCH void func_801F05A4(void) {
     g_Task->pos.y.fixed = src->pos.y.fixed;
     g_Task->pos.z       = src->pos.z;
     g_Task->unk_09      = 0;
-    g_Task->step        = g_Task->step + 1;
+    g_Task->header.step = g_Task->header.step + 1;
 }
 
 MATCH void func_801F05F4(void) {
@@ -124,7 +124,7 @@ MATCH void func_801F05F4(void) {
     timer          = g_Task->unk_09 + 4;
     g_Task->unk_09 = timer;
     if (timer == 16) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 

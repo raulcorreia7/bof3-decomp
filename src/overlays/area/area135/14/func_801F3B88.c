@@ -10,7 +10,7 @@ MATCH void func_801F3B88(void) {
     work->z.fixed   = value;
     if (value < -0x17F) {
         Area_SetCellPalette(0x27, 0x2F);
-        g_Task->step++;
+        g_Task->header.step++;
     }
     func_801F3CA8();
 }

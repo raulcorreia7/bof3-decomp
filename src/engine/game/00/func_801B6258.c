@@ -35,7 +35,7 @@ MATCH s32 func_801B6258(void) {
     sel  = FIELD(u8, func_801B5C54(), 0x2u) & 0xF;
     work = g_Task;
     if ((work->direction_08 == sel) || (sel == 8)) {
-        work->mode = 7;
+        work->header.mode = 7;
         ACTOR_CLEAR_STEP();
         return 1;
     }

@@ -24,15 +24,15 @@ MATCH void func_801EF0A4(void) {
 }
 
 MATCH void func_801EF114(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 extern Callback D_801EFD5C[];
 
 MATCH void func_801EF158(void) {
-    D_801EFD5C[g_Task->step]();
-    if (g_Task->flags != 0 && g_Task->step != 0) {
-        if (g_Task->step >= 2) {
+    D_801EFD5C[g_Task->header.step]();
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        if (g_Task->header.step >= 2) {
             g_Task->timer += 1;
         }
         func_801EF4A4();
@@ -54,7 +54,7 @@ MATCH void func_801EF324(void) {
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
     if (count == 0) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -65,7 +65,7 @@ MATCH void func_801EF388(void) {
     phase          = g_Task->unk_1C + 2;
     g_Task->unk_1C = phase;
     if (phase == 0x80) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -74,7 +74,7 @@ MATCH void func_801EF3E0(void) {
     g_Task->unk_1C -= 2;
     g_Task->unk_20 -= 2;
     if (g_Task->unk_1C == 0x20) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

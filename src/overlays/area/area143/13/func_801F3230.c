@@ -6,5 +6,5 @@ MATCH void func_801F3230(void) {
     }
     g_Task->unk_0B            = 0;
     FIELD(u32, g_Task, 0x3Cu) = 0;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }

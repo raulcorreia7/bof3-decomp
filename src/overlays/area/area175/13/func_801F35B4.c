@@ -5,6 +5,6 @@ MATCH void func_801F35B4(void) {
     g_Task->unk_09 += 1;
     if (g_Task->unk_09 >= 0x1FU) {
         g_Task->unk_09 = 0x1E;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }

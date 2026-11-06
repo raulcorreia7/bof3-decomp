@@ -14,6 +14,6 @@ MATCH void func_801E3A44(void) {
         } else {
             SND_PlayCue((g_BattleCurrentEnemy->kind * 2) | 0x600);
         }
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }

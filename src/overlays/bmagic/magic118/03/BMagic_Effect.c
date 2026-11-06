@@ -8,8 +8,8 @@ MATCH void func_801EEC18(void) {
     BattleHandlerTable5 handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->mode);
-    if (g_Task->flags != 0 && g_Task->mode != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
+    if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
         Effect_SetActorMatrix();
         func_801EF6BC();
         func_801EFA1C();
@@ -26,7 +26,7 @@ MATCH void func_801EEE20(void) {
     g_Task->unk_09 = timer;
     if (timer == 16) {
         func_800A9610(g_BattleTargetSelector, 0x10);
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
@@ -37,8 +37,8 @@ MATCH void func_801EEE20(void) {
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEF6C(void) {
-    SYS_DISPATCH_BYTE(D_801EFCD4, g_Task->mode);
-    if (g_Task->flags != 0 && g_Task->mode != 0) {
+    SYS_DISPATCH_BYTE(D_801EFCD4, g_Task->header.mode);
+    if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
         Effect_SetActorMatrix();
         func_801EF194();
         PopMatrix();

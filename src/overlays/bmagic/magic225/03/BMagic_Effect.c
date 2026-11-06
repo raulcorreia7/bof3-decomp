@@ -15,7 +15,7 @@ INCLUDE_ASM(func_801EEF8C);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF2D8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF31C);
@@ -29,7 +29,7 @@ MATCH void func_801EF578(void) {
     g_Task->timer = temp_v1;
     if ((temp_v1 & 0xFF) == 0x10) {
         g_Task->unk_0B = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -38,7 +38,7 @@ MATCH void func_801EF578(void) {
 MATCH void func_801EF628(void) {
     if (D_801EB4E0->unk_0B < 2U) {
         g_Task->unk_0B = 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -54,8 +54,8 @@ MATCH void func_801EFE0C(void) {
 
 MATCH void func_801EFE50(void) {
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_BYTE(D_801F03AC + 1, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F03AC + 1, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
     g_ScriptBank = AREA_SCRIPT_BANK;
@@ -74,7 +74,7 @@ MATCH void func_801F0140(void) {
     if (g_FrameCount & 1) {
         value = g_Task->unk_0C;
         if (value == 4) {
-            g_Task->step += 1;
+            g_Task->header.step += 1;
             return;
         }
         g_Task->unk_0C = value - 1;

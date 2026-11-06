@@ -5,6 +5,6 @@ MATCH void Effect_NextStepOnWorkLastTick(void) {
 
     work = g_Task;
     if (work->unk_0B == 1) {
-        work->mode = work->mode + 1;
+        work->header.mode = work->header.mode + 1;
     }
 }

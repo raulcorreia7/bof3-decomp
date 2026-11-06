@@ -21,11 +21,11 @@ MATCH void func_801F0718(u8 source_index, u8 task_index) {
     g_Task->unk_06 = 1;
 
     if (D_801F2568[task_index][2] != 0) {
-        g_Task->mode                = 0;
+        g_Task->header.mode         = 0;
         g_Actors[task_index].unk_78 = 2;
-        g_Task->step                = 1;
+        g_Task->header.step         = 1;
     } else {
-        g_Task->mode                = 6;
+        g_Task->header.mode         = 6;
         g_Actors[task_index].unk_78 = 0;
         ACTOR_CLEAR_STEP();
     }

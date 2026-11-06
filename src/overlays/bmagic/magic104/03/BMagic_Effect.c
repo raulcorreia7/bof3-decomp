@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EEC80);
 MATCH void func_801EEE7C(void) {
     if (g_Task->unk_0B == 7) {
         g_Task->unk_09 = 8;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -26,12 +26,12 @@ MATCH void func_801EF03C(void) {
 }
 
 MATCH void func_801EF09C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF0E0(void) {
-    SYS_DISPATCH_BYTE(D_801F08F0, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F08F0, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EFA54();
         func_801EFE34();
         func_801EFB2C();
@@ -54,7 +54,7 @@ MATCH void func_801EF178(void) {
         SND_QueueSelectionFx(var_a0);
         g_Task->unk_09 = 0;
         g_Task->timer  = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -65,7 +65,7 @@ MATCH void func_801EF21C(void) {
     g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 8) {
         g_Task->timer = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -78,7 +78,7 @@ MATCH void func_801EF27C(void) {
     g_Task->unk_09 = temp_v0;
     if ((temp_v0 & 0xFF) == 0x10) {
         g_Task->timer = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -122,7 +122,7 @@ INCLUDE_ASM(func_801EFE34);
 MATCH void func_801F020C(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5, 0);
     GFX_AddPrim(4, 0xC);
-    SYS_DISPATCH_BYTE(D_801F0900, g_Task->step);
+    SYS_DISPATCH_BYTE(D_801F0900, g_Task->header.step);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetGraphType() != 1 ? (GetGraphType() == 2 ? 0xA5 : 0x35) : 0xA5, 0);
     GFX_AddPrim(4, 0xC);
 }

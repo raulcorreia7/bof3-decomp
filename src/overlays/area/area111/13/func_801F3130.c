@@ -6,6 +6,6 @@ MATCH void func_801F3130(void) {
         Actor_Clear();
         return;
     }
-    g_Task->step++;
+    g_Task->header.step++;
     func_801F3244();
 }

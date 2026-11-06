@@ -43,11 +43,11 @@ MATCH void func_8019CCB8(void) {
                 func_8019D648();
                 func_8019D9C0();
                 SND_PlayCue(EMI_CUE_ID(1, 14));
-                g_Task->mode = 3;
+                g_Task->header.mode = 3;
                 goto block_9; /* shared tail */ /* shared tail */
             }
             func_8019CEDC();
-            g_Task->mode += 1;
+            g_Task->header.mode += 1;
             return;
         }
         goto block_9; /* shared tail */

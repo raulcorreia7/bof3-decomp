@@ -17,10 +17,12 @@
  * decides: the comment on each member records which unit reads it. */
 
 #include "common/handler.h"
+#include "common/fixed.h"
 #include "common/vector.h"
 #include "game/character.h"
 #include "game/records.h"
 #include "types.h"
+#include "work/task.h"
 
 #define BATTLE_PANEL_BYTE_CELLS_SIZE 0x1E
 
@@ -199,9 +201,7 @@ typedef union BattleEffectTarget {
  * battle/battle/03 names the head fields, battle/battle/15 the tail, and the merged record
  * names the union of both. */
 typedef struct BattleEffect {
-    u8                 flags;
-    u8                 mode;
-    u8                 step;
+    TaskHeader         header; /* 0x00 */
     u8                 unk_03;
     u8                 unk_04;
     u8                 handler_index; /* +0x05 indexes a mode's handler table; Battle_AllocEffect stores it */
@@ -339,9 +339,7 @@ ASSERT_OFFSET(BattlePanelTask, hp, 0x14);
 ASSERT_OFFSET(BattlePanelTask, max_hp, 0x1C);
 
 typedef struct EnemyBattler {
-    u8               flags;
-    u8               mode;
-    u8               step;
+    TaskHeader       header; /* 0x00 */
     u8               unk_03;
     u8               unk_04;
     u8               slot;   /* +0x05 battler slot; Battle_ArmEnemySlot stores slot + 3 here */
@@ -480,9 +478,7 @@ typedef enum PartyBattlerFlags {
 
 /* Local battler work table (stride 0x140 at 0x80145E90), shared by the battle overlays. */
 typedef struct PartyBattler {
-    u8                flags;
-    u8                mode;
-    u8                step;
+    TaskHeader        header; /* 0x00 */
     u8                unk_03;
     u8                unk_04;
     u8                slot; /* +0x05 battler slot; func_801DC044 passes it to func_800A36F0 */
@@ -511,7 +507,7 @@ typedef struct PartyBattler {
     BattleScreenCoord unk_30; /* +0x30 the field overlays read it signed */
     u16               depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
     BattlePosition    pos;
-    Vec2i             scale;  /* +0x40 16.16, 0x10000 at setup */
+    Vec2S32           scale;  /* +0x40 16.16, 0x10000 at setup */
     u8                unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u8                unk_49;
     u8                unk_4A;

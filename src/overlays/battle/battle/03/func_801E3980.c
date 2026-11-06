@@ -6,6 +6,6 @@ MATCH void func_801E3980(void) {
     func_801E2314(2);
     kind           = *(u8*)(((u32)g_BattleCurrentEnemy + 0xE0u));
     g_Task->unk_09 = *(u8*)(MEM_PTR(u8, 0x800E40CEu) + kind * 0x88u);
-    g_Task->mode += 1;
-    g_Task->step = 0;
+    g_Task->header.mode += 1;
+    g_Task->header.step = 0;
 }

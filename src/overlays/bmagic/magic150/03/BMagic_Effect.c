@@ -16,14 +16,14 @@ MATCH void func_801EED60(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
 MATCH void func_801EEDCC(void) {
     if (func_801EF8EC() == 0) {
-        g_Task->unk_09 = 4;
-        g_Task->mode   = g_Task->mode + 1;
+        g_Task->unk_09      = 4;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
@@ -39,7 +39,7 @@ MATCH void func_801EEEC4(void) {
     g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
         g_Task->unk_09 = 4;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         func_800A9820(g_BattleTargetSelector);
         SND_PlayCue(0x102U);
     }

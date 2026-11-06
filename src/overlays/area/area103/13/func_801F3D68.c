@@ -7,7 +7,7 @@ MATCH void func_801F3D68(void) {
     if (timer < 0x80) {
         g_Task->unk_32 = timer + 1;
     } else {
-        g_Task->step++;
+        g_Task->header.step++;
         *g_ScriptVars = 0xD;
     }
     Area_StepSceneFrame();

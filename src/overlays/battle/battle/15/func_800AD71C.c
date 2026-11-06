@@ -24,9 +24,9 @@ MATCH void func_800AD71C(void) {
     record              = (PartyBattler*)g_Task;
     record->pos.z.fixed = 0;
     record->unk_2E.half = D_80148628 + 0x14;
-    count               = record->mode;
+    count               = record->header.mode;
     label               = D_8014862A;
-    record->mode        = count + 1;
+    record->header.mode = count + 1;
     record->unk_30.half = label + 0x12;
     Actor_SelectScript(0x13);
     Area_AddActor();

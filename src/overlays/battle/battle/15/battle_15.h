@@ -987,7 +987,7 @@ static inline void Battle_DispatchEffect(BattleHandlerTable3* table) {
     handlers     = *table;
     work         = (PartyBattler*)g_Task;
     g_ScriptBank = 0x800F0800;
-    ((Callback*)&handlers)[work->mode]();
+    ((Callback*)&handlers)[work->header.mode]();
     g_ScriptBank = 0x800D3800;
 }
 
@@ -1098,9 +1098,9 @@ static inline void BattleRunHandlerQuad(s32 offset) {
     PartyBattler*     work;
 
     handlers = *(BattleHandlerQuad*)((Callback*)&D_800969B8 + offset);
-    handlers.handlers[BATTLE_WORK->mode]();
+    handlers.handlers[BATTLE_WORK->header.mode]();
     work = (PartyBattler*)g_Task;
-    if ((work->flags != 0u) && (work->mode != 0u)) {
+    if ((work->header.flags != 0u) && (work->header.mode != 0u)) {
         func_800AE9C4(work->unk_04);
     }
 }

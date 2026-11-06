@@ -3,8 +3,8 @@
 MATCH void func_801E72F4(void) {
     PartyBattler* scratch;
 
-    g_Task->flags  = (D_801EB4E0->flags | ACTOR_FLAG_SEMI_TRANSPARENT);
-    g_Task->unk_48 = D_801EB4E0->unk_48;
+    g_Task->header.flags = (D_801EB4E0->header.flags | ACTOR_FLAG_SEMI_TRANSPARENT);
+    g_Task->unk_48       = D_801EB4E0->unk_48;
 
     scratch          = g_Task;
     scratch->scale.x = D_801EB4E0->scale.x;

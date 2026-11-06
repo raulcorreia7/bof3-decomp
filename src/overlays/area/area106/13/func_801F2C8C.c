@@ -5,5 +5,5 @@ MATCH void func_801F2C8C(void) {
 
     actor           = g_Task;
     g_AreaSceneMode = 2;
-    actor->step++;
+    actor->header.step++;
 }

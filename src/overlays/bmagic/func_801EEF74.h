@@ -3,8 +3,8 @@
  * every change here must verify every member. */
 /* func_801EEF74 (magic055), func_801EEF74 (magic091) */
 MATCH void func_801EEF74(void) {
-    SYS_DISPATCH_BYTE(D_801EFC64, g_Task->mode);
-    if (g_Task->flags != 0 && g_Task->mode != 0) {
+    SYS_DISPATCH_BYTE(D_801EFC64, g_Task->header.mode);
+    if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
         Effect_SetActorMatrix();
         func_801EF240();
         PopMatrix();

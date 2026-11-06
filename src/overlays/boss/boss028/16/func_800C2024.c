@@ -13,5 +13,5 @@ MATCH void func_800C2024(void) {
     temp_a1                                   = D_801EB4E0->pos.y.fixed;
     ((PartyBattler*)g_Task)->pos.y.fixed      = temp_a1;
     COORD_INT(((PartyBattler*)g_Task)->pos.z) = Area_SampleHeight(((PartyBattler*)g_Task)->pos.x.fixed, temp_a1);
-    ((PartyBattler*)g_Task)->step += 1;
+    ((PartyBattler*)g_Task)->header.step += 1;
 }

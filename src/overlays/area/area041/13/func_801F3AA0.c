@@ -9,7 +9,7 @@ MATCH void func_801F3AA0(void) {
         value = 0x1E;
     } else {
         func_801BE1B0(4U);
-        g_ScriptWorkRecord->flags = 0;
+        g_ScriptWorkRecord->header.flags = 0;
         ORDER_FENCE(); /* FAKE: the order fence keeps the value store in retail's schedule. */
         value = 0x28;
     }

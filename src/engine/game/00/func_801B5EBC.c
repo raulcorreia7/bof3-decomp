@@ -12,7 +12,7 @@ MATCH s32 func_801B5EBC(void) {
         return 0;
     if (g_GameRequestFlags & 1)
         return 0;
-    g_Task->mode = 0x0A;
+    g_Task->header.mode = 0x0A;
     ACTOR_CLEAR_STEP();
     g_GameState->mode_12B.u8_value = 8;
     return 1;

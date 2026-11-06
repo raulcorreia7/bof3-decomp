@@ -8,5 +8,5 @@ MATCH void func_801F4374(void) {
     g_Task->unk_09       = 0;
     g_Task->unk_0B       = 1;
     Area_SetCellPalette(0x55, 0x19);
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }

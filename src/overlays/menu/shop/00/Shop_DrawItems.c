@@ -1,6 +1,6 @@
 #include "shop_00.h"
 
-MATCH void Shop_DrawItems(ShopPanel* panel) {
+MATCH void Shop_DrawItems(MenuListPanel* panel) {
     u8* names;
     u8* entry;
     s32 y;

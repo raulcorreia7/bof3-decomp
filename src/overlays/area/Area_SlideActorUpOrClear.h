@@ -20,8 +20,8 @@ MATCH void Area_SlideActorUpOrClear(void) {
             Actor_Clear();
             return;
         }
-        check[0x48]  = 0;
-        g_Task->mode = 1;
+        check[0x48]         = 0;
+        g_Task->header.mode = 1;
         return;
     }
 

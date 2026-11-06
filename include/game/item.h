@@ -83,64 +83,64 @@ ASSERT_OFFSET(Item, name, 0x00);
 ASSERT_OFFSET(Item, flags, 0x0c);
 ASSERT_OFFSET(Item, price, 0x10);
 
+/* The run Weapon, Armor and Accessory open with. */
+typedef struct ItemHeader {
+    u8 name[ITEM_NAME_LENGTH];
+    u8 equipability; /* EquipFlags */
+    u8 flags;        /* Item_GetFlags; bit tests in func_801AF494 */
+} ItemHeader;
+
+ASSERT_SIZE(ItemHeader, 0x0E);
+
 typedef struct Weapon {
-    u8  name[ITEM_NAME_LENGTH];
-    u8  equipability; /* EquipFlags */
-    u8  flags;        /* Item_GetFlags; bit tests in func_801AF494 */
-    u8  kind;         /* low nibble selects the icon in func_801AF800 via Item_GetKind */
-    u8  element;      /* ElementFlags */
-    u8  weight;
-    u8  sound; /* cue-table index in battle/battle/15 func_800AB834 and func_800AB910 */
-    u8  power;
-    u8  unk_13;
-    u16 description; /* Item_GetDescription, category ITEM_CAT_WEAPON */
-    u16 price;
+    ItemHeader header;
+    u8         kind;    /* low nibble selects the icon in func_801AF800 via Item_GetKind */
+    u8         element; /* ElementFlags */
+    u8         weight;
+    u8         sound; /* cue-table index in battle/battle/15 func_800AB834 and func_800AB910 */
+    u8         power;
+    u8         unk_13;
+    u16        description; /* Item_GetDescription, category ITEM_CAT_WEAPON */
+    u16        price;
 } Weapon;
 
 ASSERT_OFFSET(Weapon, description, 0x14);
 ASSERT_SIZE(Weapon, WEAPON_STRIDE);
-ASSERT_OFFSET(Weapon, name, 0x00);
-ASSERT_OFFSET(Weapon, equipability, 0x0c);
+ASSERT_OFFSET(Weapon, header, 0x00);
 ASSERT_OFFSET(Weapon, element, 0x0f);
 ASSERT_OFFSET(Weapon, weight, 0x10);
 ASSERT_OFFSET(Weapon, power, 0x12);
 ASSERT_OFFSET(Weapon, price, 0x16);
 
 typedef struct Armor {
-    u8  name[ITEM_NAME_LENGTH];
-    u8  equipability; /* EquipFlags */
-    u8  flags;        /* Item_GetFlags; bit tests in func_801AF494 */
-    u8  equip_type;   /* ArmorType */
-    u8  weight;
-    u8  power;
-    u8  unk_11;
-    u16 description; /* Item_GetDescription, category ITEM_CAT_ARMOR */
-    u16 price;
+    ItemHeader header;
+    u8         equip_type; /* ArmorType */
+    u8         weight;
+    u8         power;
+    u8         unk_11;
+    u16        description; /* Item_GetDescription, category ITEM_CAT_ARMOR */
+    u16        price;
 } Armor;
 
 ASSERT_OFFSET(Armor, description, 0x12);
 ASSERT_SIZE(Armor, ARMOR_STRIDE);
-ASSERT_OFFSET(Armor, name, 0x00);
-ASSERT_OFFSET(Armor, equipability, 0x0c);
+ASSERT_OFFSET(Armor, header, 0x00);
 ASSERT_OFFSET(Armor, equip_type, 0x0e);
 ASSERT_OFFSET(Armor, weight, 0x0f);
 ASSERT_OFFSET(Armor, power, 0x10);
 ASSERT_OFFSET(Armor, price, 0x14);
 
 typedef struct Accessory {
-    u8  name[ITEM_NAME_LENGTH];
-    u8  equipability; /* EquipFlags */
-    u8  flags;        /* Item_GetFlags; bit tests in func_801AF494 */
-    u8  kind;         /* low nibble selects the icon in func_801AF800 via Item_GetKind */
-    u8  weight;
-    u16 description; /* Item_GetDescription, category ITEM_CAT_ACCESSORY */
-    u16 price;
+    ItemHeader header;
+    u8         kind; /* low nibble selects the icon in func_801AF800 via Item_GetKind */
+    u8         weight;
+    u16        description; /* Item_GetDescription, category ITEM_CAT_ACCESSORY */
+    u16        price;
 } Accessory;
 
 ASSERT_OFFSET(Accessory, description, 0x10);
 ASSERT_SIZE(Accessory, ACCESSORY_STRIDE);
-ASSERT_OFFSET(Accessory, name, 0x00);
-ASSERT_OFFSET(Accessory, equipability, 0x0c);
+ASSERT_OFFSET(Accessory, header, 0x00);
 ASSERT_OFFSET(Accessory, weight, 0x0f);
 ASSERT_OFFSET(Accessory, price, 0x12);
 

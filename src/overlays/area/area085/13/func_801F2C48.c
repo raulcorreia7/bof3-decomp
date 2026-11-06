@@ -4,8 +4,8 @@ MATCH void func_801F2C48(void) {
     Actor* work;
 
     g_Task->unk_09          = 0xC;
-    g_Task->mode            = 1;
-    g_Task->step            = 0;
+    g_Task->header.mode     = 1;
+    g_Task->header.step     = 0;
     work                    = g_Task;
     work->tint.bytes.unk_5F = 0;
     work->tint.bytes.unk_5E = 0;

@@ -1,8 +1,8 @@
 #include "area100_13.h"
 
 MATCH void func_801F3108(void) {
-    Actor* actor = g_Task;
-    Vec3i  pos;
+    Actor*  actor = g_Task;
+    Vec3S32 pos;
 
     actor->gravity += 0x100000;
     actor->vz += actor->gravity;
@@ -11,6 +11,6 @@ MATCH void func_801F3108(void) {
     pos.z = actor->z.fixed;
     func_801F31E8(&pos, actor->vz);
     if (g_Task->vz > 0x07FFFFFF) {
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

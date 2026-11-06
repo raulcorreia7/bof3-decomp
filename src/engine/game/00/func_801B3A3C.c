@@ -29,11 +29,11 @@ MATCH void func_801B3A3C(void) {
         }
     }
     if (g_GameRequestFlags & 0x20u) {
-        work       = g_Task;
-        work->mode = 0x0Cu;
+        work              = g_Task;
+        work->header.mode = 0x0Cu;
     } else {
         Actor_RequestScript(g_Task->direction_08);
-        g_Task->mode = 1u;
+        g_Task->header.mode = 1u;
     }
     ACTOR_CLEAR_STEP();
 }

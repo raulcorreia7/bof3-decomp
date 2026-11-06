@@ -36,7 +36,7 @@ MATCH void func_801F6E90(void) {
     }
     func_801F85D8();
     if (--g_Task->vx == 0) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -88,7 +88,7 @@ MATCH void func_801F7050(void) {
     }
     SND_PlayCue(0x202);
     g_Task->vz = -g_Task->vz;
-    g_Task->step++;
+    g_Task->header.step++;
 }
 
 INCLUDE_ASM(func_801F70F8);
@@ -101,7 +101,7 @@ MATCH void func_801F724C(void) {
     D_800E4C1E += 6;
     if (--g_Task->unk_09 == 0) {
         g_Task->unk_09 = 0x20;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -205,7 +205,7 @@ MATCH void func_801F7E68(void) {
     if (g_Task->unk_06 != 0) {
         SND_PlayCue(0x203);
     }
-    g_Task->step++;
+    g_Task->header.step++;
 }
 
 MATCH void func_801F7EF8(void) {
@@ -216,7 +216,7 @@ MATCH void func_801F7EF8(void) {
     g_Task->z.fixed += g_Task->vz;
     if (g_Task->x.fixed == g_Task->unk_18 && g_Task->y.fixed == g_Task->unk_1C) {
         g_Task->unk_09 = 0x2F;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -437,9 +437,9 @@ MATCH ActorSlot* func_801FD610(u8 arg0) {
     index = Actor_FindFreeSlot() & 0xFF;
     slot  = &g_ActorSlots[index];
     if (index != 0xFF) {
-        slot->flags = 1;
-        slot->type  = 0x49;
-        slot->mode  = arg0;
+        slot->header.flags = 1;
+        slot->type         = 0x49;
+        slot->header.mode  = arg0;
     }
     return slot;
 }

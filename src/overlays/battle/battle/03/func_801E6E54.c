@@ -31,7 +31,7 @@ MATCH void func_801E6E54(void) {
         work->timer       = 0x3C;
         func_801E8DD8();
         Actor_SelectScript(s_BattleBattlerStepIds[index]);
-        work       = g_Task;
-        work->mode = (work->mode) + 2;
+        work              = g_Task;
+        work->header.mode = (work->header.mode) + 2;
     }
 }

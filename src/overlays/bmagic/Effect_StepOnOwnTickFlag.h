@@ -5,6 +5,6 @@ MATCH void Effect_StepOnOwnTickFlag(void) {
 
     work = g_Task;
     if (work->unk_0B & 0x80) {
-        work->step++;
+        work->header.step++;
     }
 }

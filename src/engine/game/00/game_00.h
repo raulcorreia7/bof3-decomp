@@ -18,7 +18,7 @@
 /* Per-mode signed adjustments to the camera angle inputs. */
 /* x: added to D_80143F24 for angle.vx. */
 /* y: added to D_80143F28 for angle.vy. */
-typedef Vec2s CameraAngleOffset;
+typedef Vec2S16 CameraAngleOffset;
 
 ASSERT_SIZE(CameraAngleOffset, 4);
 ASSERT_OFFSET(CameraAngleOffset, x, 0x00);
@@ -95,10 +95,10 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 #define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                                    \
     if ((g_GameFlags & 0x400) == 0) {                                                                             \
         if ((func_801C39D8(g_Task->x.fixed, g_Task->y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != 0) { \
-            g_Task->mode   = 2;                                                                                   \
-            g_Task->step   = flags;                                                                               \
-            g_Task->unk_03 = 0;                                                                                   \
-            g_Task->unk_04 = 0;                                                                                   \
+            g_Task->header.mode = 2;                                                                              \
+            g_Task->header.step = flags;                                                                          \
+            g_Task->unk_03      = 0;                                                                              \
+            g_Task->unk_04      = 0;                                                                              \
             return 1;                                                                                             \
         }                                                                                                         \
     }                                                                                                             \
@@ -192,14 +192,12 @@ typedef struct GameHandlerTable6 {
 
 /* One game route step: two volatile signed words.
  * dx: x; dy: y. */
-typedef Vec2i GameRouteStep;
+typedef Vec2S32 GameRouteStep;
 
 /* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * func_8019D8C0 rotates and writes out as screen vertices. */
 typedef struct SpinQuad {
-    s16     x;
-    s16     y;
-    s16     z;
+    Vec3S16 pos;
     u8      unk_06[0x0A];
     SVECTOR rotation; /* 0x10 */
     SVECTOR corners[4];
@@ -383,8 +381,8 @@ extern s32                D_80147CBC[];
 extern s32                D_80147CC0[];
 extern s32                D_80147CC4[];
 extern u16                D_801481D8;
-extern Vec3i              D_801481E8;   /* scene angle, 16.16 fixed point */
-extern Vec3i              D_801481F8;   /* per-frame step of D_801481E8 */
+extern Vec3S32            D_801481E8;   /* scene angle, 16.16 fixed point */
+extern Vec3S32            D_801481F8;   /* per-frame step of D_801481E8 */
 extern s16                D_8014820C;   /* 0x8014820C */
 extern s8                 D_80148654;   /* 0x80148654 */
 extern s8                 D_80148656;   /* 0x80148656 */

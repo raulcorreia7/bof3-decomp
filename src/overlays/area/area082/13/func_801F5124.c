@@ -6,6 +6,6 @@ MATCH void func_801F5124(void) {
     g_Task->unk_32 = (g_Task->unk_32 - g_Task->vz / 10000) & 0xFFD;
     func_801F4430();
     if (*g_ScriptVars == 0x3A) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }

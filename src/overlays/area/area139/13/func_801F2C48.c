@@ -14,5 +14,5 @@ MATCH void func_801F2C48(void) {
         work = g_Task;
         step = 3;
     }
-    work->mode = step;
+    work->header.mode = step;
 }

@@ -5,7 +5,7 @@ MATCH void func_801A4990(u8* script) {
 
     g_Task->option_flags = script[0];
     if (script[0] & ACTOR_OPT_HIDDEN_ON_SPAWN) {
-        g_Task->flags |= ACTOR_FLAG_HIDDEN;
+        g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
     }
     if (script[0] & 4) {
         g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_SCRIPT_PENDING;

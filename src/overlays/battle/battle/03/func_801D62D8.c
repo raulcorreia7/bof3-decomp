@@ -23,9 +23,9 @@ MATCH s32 func_801D62D8(void) {
                 }
                 countdown = g_BattlePartyBattlers[index].chr.ap;
                 if ((s32)countdown < ((s32)(*D_801463B8 + 1) >> 1)) {
-                    g_BattlePartyBattlers[index].mode   = 6;
-                    g_BattlePartyBattlers[index].step   = 4;
-                    g_BattlePartyBattlers[index].unk_03 = 4;
+                    g_BattlePartyBattlers[index].header.mode = 6;
+                    g_BattlePartyBattlers[index].header.step = 4;
+                    g_BattlePartyBattlers[index].unk_03      = 4;
                     Battle_SetSlotPending(index);
                     count += 1;
                 } else {
@@ -35,11 +35,11 @@ MATCH s32 func_801D62D8(void) {
                     step                                   = (*D_801463B8 + 1) >> 1;
                     g_BattlePartyBattlers[index].ap_change = step;
                     if (step != 0) {
-                        g_BattlePartyBattlers[index].step    = 5;
-                        g_BattlePartyBattlers[index].mode    = 6;
-                        g_BattlePartyBattlers[index].unk_04  = 0;
-                        g_BattlePartyBattlers[index].unk_03  = 0;
-                        g_BattlePartyBattlers[index].unk_120 = 2;
+                        g_BattlePartyBattlers[index].header.step = 5;
+                        g_BattlePartyBattlers[index].header.mode = 6;
+                        g_BattlePartyBattlers[index].unk_04      = 0;
+                        g_BattlePartyBattlers[index].unk_03      = 0;
+                        g_BattlePartyBattlers[index].unk_120     = 2;
                         Battle_SetSlotPending(index);
                         count += 1;
                     }

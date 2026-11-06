@@ -8,7 +8,7 @@ MATCH void func_801E1050(void) {
     work                     = g_GameState;
     work->damage_flags.value = work->damage_flags.value & ~0xF0u;
     work->damage_flags.value = work->damage_flags.value & ~0x200u;
-    g_Task->mode             = 3;
-    g_Task->step             = 0;
+    g_Task->header.mode      = 3;
+    g_Task->header.step      = 0;
     g_Task->unk_03           = 0;
 }

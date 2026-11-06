@@ -5,6 +5,6 @@ MATCH void Effect_NextStepOnZeroTick(void) {
 
     work = g_Task;
     if (work->unk_0B == 0) {
-        work->mode++;
+        work->header.mode++;
     }
 }

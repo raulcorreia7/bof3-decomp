@@ -10,7 +10,7 @@ MATCH void func_801F3DB0(void) {
      * one register. */
     work                  = g_Task;
     scratch               = work;
-    scratch->step++;
+    scratch->header.step++;
     COORD_INT(scratch->z) = 0;
     scratch->gravity      = 0x28709126;
     scratch->unk_30       = 0;

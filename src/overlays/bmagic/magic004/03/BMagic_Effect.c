@@ -20,7 +20,7 @@ MATCH void func_801EF158(void) {
         }
         func_800A9820(g_BattleTargetSelector);
         g_Task->unk_09 = 0;
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }
 
@@ -34,7 +34,7 @@ INCLUDE_ASM(func_801EF490);
 #include "overlays/bmagic/Effect_DrawScreenFade.h"
 
 MATCH void func_801EF8CC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF910);

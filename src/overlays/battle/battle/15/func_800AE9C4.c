@@ -20,7 +20,7 @@ ASSERT_OFFSET(BattlePanelGeometry, origin_y, 0x30);
 #define BATTLE_PANEL_TEX_SIZE   4
 
 /* u: x, the quad's left u; v: y, the quad's top v. */
-typedef Vec2us BattlePanelTexture;
+typedef Vec2U16 BattlePanelTexture;
 
 ASSERT_SIZE(BattlePanelTexture, BATTLE_PANEL_TEX_SIZE);
 

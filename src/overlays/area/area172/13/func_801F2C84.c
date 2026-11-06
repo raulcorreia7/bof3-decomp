@@ -14,7 +14,7 @@ MATCH void func_801F2C84(void) {
         work->tint.bytes.unk_5E = shade;
         work->tint.bytes.unk_5D = shade;
     } else {
-        work->mode = 2;
+        work->header.mode = 2;
     }
     func_801F2DF4(2);
     func_801F2ED8();

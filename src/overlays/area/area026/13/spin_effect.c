@@ -376,7 +376,7 @@ MATCH void func_801F2C48(void) {
     work->vx     = v0;
     work->vy     = v1;
     work->vz     = v2;
-    work2->mode++;
+    work2->header.mode++;
 }
 
 /* `work2`/`work3` re-read the slot so each site emits its own address
@@ -396,7 +396,7 @@ MATCH void func_801F2C94(void) {
     if (count == 0) {
         SND_PlayCue(EMI_CUE_ID(2, 13));
         work3 = (Actor*)g_Task;
-        work3->mode++;
+        work3->header.mode++;
     }
 }
 
@@ -573,10 +573,10 @@ MATCH void func_801F3360(void) {
     if (actor_slot == GAME_NONE) {
         return;
     }
-    slot          = &g_ActorSlots[actor_slot];
-    slot->flags   = 1;
-    slot->type    = 0x33;
-    slot->x.fixed = 0x70000;
-    slot->y.fixed = 0x68000;
-    slot->z.fixed = (Area_SampleHeight(slot->x.fixed, 0x68000) << 0x10);
+    slot               = &g_ActorSlots[actor_slot];
+    slot->header.flags = 1;
+    slot->type         = 0x33;
+    slot->x.fixed      = 0x70000;
+    slot->y.fixed      = 0x68000;
+    slot->z.fixed      = (Area_SampleHeight(slot->x.fixed, 0x68000) << 0x10);
 }

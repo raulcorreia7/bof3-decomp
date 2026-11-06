@@ -13,7 +13,7 @@ MATCH void func_800C1A08(void) {
         Actor_SelectScript(1U);
         g_BattleResult |= 4;
         Area_SetCellPalette(0x64, 0x14);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
     func_8014D978();
 }

@@ -27,7 +27,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     func_801A4AA8();
     Area_FindSceneRecord(D_1F800002);
 
-    g_Task->flags = ACTOR_FLAG_IN_USE;
+    g_Task->header.flags = ACTOR_FLAG_IN_USE;
 
     work                    = g_Task;
     D_80146908[*counter][0] = (work->x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
@@ -43,7 +43,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     dist = Area_SampleHeight(work->x.fixed, work->y.fixed);
 
     w2               = g_Task;
-    w2->mode         = 6;
+    w2->header.mode  = 6;
     COORD_INT(w2->z) = (u16)dist;
     ACTOR_CLEAR_STEP();
     /* FAKE: barrier pins the flags store before the route-index load. */
@@ -58,7 +58,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     func_801A4990((u8*)(data + 0xB));
 
     if (data[3] & 0x80) {
-        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     }
 
     g_Task->tint.bytes.unk_5D = 0;
@@ -78,7 +78,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     mode = g_Task->unk_05;
     if ((D_80144FC4[mode >> 3] >> (mode & 7)) & 1) {
         if (data[0xC] & 1) {
-            g_Task->flags = 0;
+            g_Task->header.flags = 0;
             return;
         }
         /* The 16-bit halves of the two position words have no named members. */

@@ -8,8 +8,8 @@ MATCH void Effect_NextStep(void) {
 
     work = g_Task;
     if (work->unk_0B < EFFECT_STEP_LIMIT) {
-        work->unk_09 = 8;
-        work         = g_Task;
-        work->mode   = work->mode + 1;
+        work->unk_09      = 8;
+        work              = g_Task;
+        work->header.mode = work->header.mode + 1;
     }
 }

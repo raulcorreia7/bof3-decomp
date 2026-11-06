@@ -19,6 +19,6 @@ MATCH void func_801DF7EC(void) {
     if ((g_BattleSelectionLatch == 0) ||
         (((value = D_801EB4D8[0]) != g_Task->slot) && ((value & BATTLE_TARGET_PARTY_SIDE) == 0))) {
         GFX_FreePaletteFade(g_Task->unk_07);
-        g_Task->step = 0;
+        g_Task->header.step = 0;
     }
 }

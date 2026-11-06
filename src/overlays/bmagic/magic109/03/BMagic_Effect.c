@@ -14,7 +14,7 @@ MATCH void func_801EEEAC(void) {
     temp_v1        = g_Task->unk_09 + 2;
     g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x54) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         g_Task->timer = 0x40;
     }
     func_801EF0F8(g_Task->unk_64);
@@ -29,7 +29,7 @@ MATCH void func_801EEF30(void) {
     g_Task->timer = timer + 0xFF;
     if (timer == 0) {
         func_800A9610(g_BattleTargetSelector, 0x10U);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
     func_801EF0F8(g_Task->unk_64);
     if (g_Task->unk_0B == 0) {

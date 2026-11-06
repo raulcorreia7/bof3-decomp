@@ -541,16 +541,13 @@ MATCH void func_801F3314(void) {
     count = 0;
     in    = (const AreaVertex*)D_80147AA8;
     do {
-        *dst = *in;
-        state[0] =
-            (((s16)dst->points[0].x + (s16)dst->points[1].x + (s16)dst->points[2].x + (s16)dst->points[3].x) >> 2);
-        state[1] =
-            (((s16)dst->points[0].y + (s16)dst->points[1].y + (s16)dst->points[2].y + (s16)dst->points[3].y) >> 2);
-        state[2] =
-            (((s16)dst->points[0].z + (s16)dst->points[1].z + (s16)dst->points[2].z + (s16)dst->points[3].z) >> 2);
-        args[0] = (s16)state[0];
-        args[1] = (s16)state[1];
-        args[2] = (s16)state[2];
+        *dst     = *in;
+        state[0] = ((dst->points[0].x + dst->points[1].x + dst->points[2].x + dst->points[3].x) >> 2);
+        state[1] = ((dst->points[0].y + dst->points[1].y + dst->points[2].y + dst->points[3].y) >> 2);
+        state[2] = ((dst->points[0].z + dst->points[1].z + dst->points[2].z + dst->points[3].z) >> 2);
+        args[0]  = (s16)state[0];
+        args[1]  = (s16)state[1];
+        args[2]  = (s16)state[2];
         VectorNormalS((VECTOR*)args, (SVECTOR*)(state + 4));
         state[8]         = 0;
         state[9]         = 0;
@@ -678,13 +675,13 @@ MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
 }
 
 MATCH void func_801F3944(const void* spin) {
-    AreaSpin* work;
-    POLY_G3*  primitive;
-    s32       point[3];
-    s16       fade;
-    s16       tmp;
-    s16       shade;
-    work      = (AreaSpin*)spin;
+    WorldSpin* work;
+    POLY_G3*   primitive;
+    s32        point[3];
+    s16        fade;
+    s16        tmp;
+    s16        shade;
+    work      = (WorldSpin*)spin;
     primitive = (POLY_G3*)g_GfxPrimCursor;
 
     SetPolyG3(primitive);
@@ -735,11 +732,11 @@ MATCH void func_801F3944(const void* spin) {
 
 MATCH void func_801F3BE4(void* spin) {
     volatile Area024Scratch* scratch;
-    AreaSpin*                work;
+    WorldSpin*               work;
     MATRIX                   matrix;
     s16                      rot[3];
 
-    work           = (AreaSpin*)spin;
+    work           = (WorldSpin*)spin;
     scratch        = WORLD00_AREA024_SCRATCH_PTR;
     work->origin_x = scratch->pos_x;
     work->origin_y = scratch->pos_y;
@@ -774,10 +771,10 @@ MATCH void func_801F3BE4(void* spin) {
 }
 
 MATCH void func_801F3D0C(void) {
-    AreaSpin* work;
-    u8        i;
+    WorldSpin* work;
+    u8         i;
 
-    work = (AreaSpin*)WORLD00_AREA024_SPIN_WORK_BASE;
+    work = (WorldSpin*)WORLD00_AREA024_SPIN_WORK_BASE;
     i    = 0u;
 
     do {
@@ -788,14 +785,14 @@ MATCH void func_801F3D0C(void) {
 }
 
 MATCH void func_801F3D5C(void) {
-    u8        scratch[0x20];
-    AreaSpin* work;
-    u8        i;
+    u8         scratch[0x20];
+    WorldSpin* work;
+    u8         i;
 
     GFX_AddDrawMode(GetTPage(0, 1, 896, 256));
     Area_SetCameraMatrix(scratch);
 
-    work = (AreaSpin*)WORLD00_AREA024_SPIN_WORK_BASE;
+    work = (WorldSpin*)WORLD00_AREA024_SPIN_WORK_BASE;
     i    = 0u;
 
     do {

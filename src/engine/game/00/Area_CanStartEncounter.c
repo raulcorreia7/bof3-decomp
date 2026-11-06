@@ -33,7 +33,7 @@ MATCH s32 Area_CanStartEncounter(void) {
         return 0;
     }
     for (i = 0; i < g_PartySize; i++) {
-        if (g_BattlePartyBattlers[i].flags & ACTOR_FLAG_HIDDEN) {
+        if (g_BattlePartyBattlers[i].header.flags & ACTOR_FLAG_HIDDEN) {
             return 0;
         }
     }

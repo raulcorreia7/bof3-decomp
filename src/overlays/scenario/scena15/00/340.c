@@ -20,7 +20,7 @@ MATCH void func_801F6F7C(void) {
     work->unk_30 = 1536;
     work->unk_09 = 0;
     Area_ClearWorkColumn();
-    ((Actor*)g_Task)->mode = ((Actor*)g_Task)->mode + 1;
+    ((Actor*)g_Task)->header.mode = ((Actor*)g_Task)->header.mode + 1;
 }
 
 MATCH void func_801F6FCC(void) {
@@ -31,8 +31,8 @@ MATCH void func_801F6FCC(void) {
     func_801F7748();
     g_Task->unk_09 = ((Actor*)g_Task)->unk_09 + 4;
     if (g_Task->unk_09 == 0) {
-        g_Task->unk_09 = 0x20;
-        g_Task->mode   = ((Actor*)g_Task)->mode + 1;
+        g_Task->unk_09      = 0x20;
+        g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
     }
 }
 
@@ -43,8 +43,8 @@ MATCH void func_801F7078(void) {
     }
     func_801F7748();
     if (g_ScriptVars[0] == 0x1F) {
-        g_Task->unk_09 = 0xFC;
-        g_Task->mode   = ((Actor*)g_Task)->mode + 1;
+        g_Task->unk_09      = 0xFC;
+        g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
     }
 }
 
@@ -53,7 +53,7 @@ MATCH void func_801F7100(void) {
     func_801F7748();
     g_Task->unk_09 = ((Actor*)g_Task)->unk_09 - 4;
     if (g_Task->unk_09 == 0) {
-        g_Task->mode = ((Actor*)g_Task)->mode + 1;
+        g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
     }
 }
 
@@ -99,7 +99,7 @@ MATCH void func_801F783C(void) {
     work->tint.bytes.unk_5F = tint;
     work->tint.bytes.unk_5E = tint;
     work->tint.bytes.unk_5D = tint;
-    g_Task->mode            = 1;
+    g_Task->header.mode     = 1;
 }
 
 MATCH void func_801F7900(void) {
@@ -116,9 +116,9 @@ MATCH void func_801F7920(void) {
         g_Task->tint.bytes.unk_5E -= 2;
         g_Task->tint.bytes.unk_5F -= 2;
     } else {
-        counter    = &D_80146875;
-        *counter   = *counter + 1;
-        work->mode = 3;
+        counter           = &D_80146875;
+        *counter          = *counter + 1;
+        work->header.mode = 3;
     }
     func_801F79C4();
 }
@@ -176,7 +176,7 @@ MATCH void func_801F8488(void) {
     work->tint.bytes.unk_5F = 0;             \
     work->tint.bytes.unk_5E = 0;             \
     work->tint.bytes.unk_5D = 0;             \
-    g_Task->mode            = 1
+    g_Task->header.mode     = 1
 
 MATCH void func_801F84CC(void) {
     Actor* work;
@@ -195,9 +195,9 @@ MATCH void func_801F8548(void) {
         g_Task->tint.bytes.unk_5E += 4;
         g_Task->tint.bytes.unk_5F += 4;
     } else {
-        counter    = g_ScriptVars;
-        *counter   = *counter + 1;
-        work->mode = 2;
+        counter           = g_ScriptVars;
+        *counter          = *counter + 1;
+        work->header.mode = 2;
     }
     func_801F79C4();
     func_801F8704();
@@ -252,8 +252,8 @@ MATCH void func_801F8EA8(void) {
     Area_SetCameraMatrix(&matrix);
     work = g_Task;
     func_801F92F0(&work->x, &work->vx);
-    g_Task->unk_09 = 8;
-    g_Task->mode   = g_Task->mode + 1;
+    g_Task->unk_09      = 8;
+    g_Task->header.mode = g_Task->header.mode + 1;
     if (!(g_Task->unk_0B & 2)) {
         cue = 0x203;
         if (!(g_Task->unk_06 & 4)) {

@@ -5,5 +5,5 @@
 MATCH void Effect_DispatchHandlerSlot1(void) {
     BmagicEffectFuncs handlers;
 
-    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, mode);
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.mode);
 }

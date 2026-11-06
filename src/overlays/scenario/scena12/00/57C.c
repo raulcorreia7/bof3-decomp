@@ -19,9 +19,9 @@ MATCH void func_801F71B8(void) {
 MATCH void func_801F71FC(void) {
     Actor* actor;
 
-    D_801FD288.half = (rand() & 1) << 15;
-    actor           = g_Task;
-    actor->step     = actor->step + 1;
+    D_801FD288.half    = (rand() & 1) << 15;
+    actor              = g_Task;
+    actor->header.step = actor->header.step + 1;
 }
 
 #define SCENA12_STEP_COUNTER()                                                            \
@@ -39,7 +39,7 @@ MATCH void func_801F71FC(void) {
         high = (u16)D_801FD288.half >> 0xF;                                               \
         if ((u32)(D_801FD288.half & 0xFF) >= 0xC8U) {                                     \
             actor = g_Task;                                                               \
-            actor->step += 1;                                                             \
+            actor->header.step += 1;                                                      \
             return;                                                                       \
         }                                                                                 \
         count = ((u32)(D_801FD288.half & 0x7F00) >> 8) + 1;                               \
@@ -116,9 +116,9 @@ MATCH void func_801F7BA8(void) {
 MATCH void func_801F7BEC(void) {
     Actor* actor;
 
-    actor         = g_Task;
-    actor->unk_2E = 0;
-    actor->mode   = actor->mode + 1;
+    actor              = g_Task;
+    actor->unk_2E      = 0;
+    actor->header.mode = actor->header.mode + 1;
     SND_PlayCue(EMI_CUE_ID(2, 21));
 }
 

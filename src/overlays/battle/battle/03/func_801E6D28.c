@@ -31,6 +31,6 @@ MATCH void func_801E6D28(void) {
         flags     = *row_flags & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
     }
     if (flags != 0) {
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

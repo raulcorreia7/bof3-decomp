@@ -8,7 +8,7 @@ MATCH void func_801F35E0(void) {
                 if (D_80143BB0 == 0) {
                     SND_PlayCue(EMI_CUE_ID(2, 0));
                 }
-                g_Task->step++;
+                g_Task->header.step++;
             }
         }
     } else {
@@ -18,7 +18,7 @@ MATCH void func_801F35E0(void) {
                 if (D_80143BB0 == 0) {
                     SND_PlayCue(EMI_CUE_ID(2, 0));
                 }
-                g_Task->step++;
+                g_Task->header.step++;
             }
         }
     }

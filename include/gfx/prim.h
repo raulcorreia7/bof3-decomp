@@ -8,6 +8,17 @@
 /* The shared primitive cursor and color packing used by the menu, field and
  * effect drawers. */
 
+/* A sprite rectangle in texture bytes: origin u, v and size w, h. The sprite
+ * drawers copy it into a SPRT. */
+typedef struct UvRect {
+    u8 u;
+    u8 v;
+    u8 w;
+    u8 h;
+} UvRect;
+
+ASSERT_SIZE(UvRect, 0x4);
+
 /* The game's own sprite primitives are the PsyQ SDK's records: the panel icon
  * is an `SPRT_8` (the menu names it `MenuIconPrim` in menu/panel.h), written at
  * the primitive cursor `g_GfxPrimCursor`. */

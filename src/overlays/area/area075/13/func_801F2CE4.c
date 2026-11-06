@@ -6,5 +6,5 @@ MATCH void func_801F2CE4(void) {
     g_Task->vx                             = 0;
     g_Task->unk_06                         = 0x1E;
     g_Task->tint.signed_bytes.unk_5D       = -0x80;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }

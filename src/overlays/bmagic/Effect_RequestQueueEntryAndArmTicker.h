@@ -6,5 +6,5 @@
 MATCH void Effect_RequestQueueEntryAndArmTicker(void) {
     func_800AEEC8(g_Task->unk_04, g_Task->unk_03);
     g_Task->unk_0B = 1;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }

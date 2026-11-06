@@ -36,5 +36,5 @@ MATCH void func_8019B3A8(void) {
     motion->unk_20     = 0;
     g_Task->unk_0A     = 0;
     Actor_SelectScript(0);
-    g_Task->mode++;
+    g_Task->header.mode++;
 }

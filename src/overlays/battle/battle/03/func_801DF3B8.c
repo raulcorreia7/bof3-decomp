@@ -9,5 +9,5 @@ MATCH void func_801DF3B8(void) {
     func_801DEFE4();
     func_801DEDE4();
     work = g_Task;
-    work->mode += 1;
+    work->header.mode += 1;
 }

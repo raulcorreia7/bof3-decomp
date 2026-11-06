@@ -3,7 +3,7 @@
 MATCH void func_801F2E14(void) {
     if (!SYS_TestFlag(g_SceneEventFlags, COORD_FRAC(g_Task->x))) {
         g_Task->unk_09 = 0;
-        g_Task->step++;
+        g_Task->header.step++;
         COORD_INT(g_Task->y) = 8;
         func_801F2EA8();
         SND_PlayCue(0x202);

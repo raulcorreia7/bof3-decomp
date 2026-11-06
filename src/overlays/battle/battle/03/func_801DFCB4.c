@@ -52,7 +52,7 @@ MATCH void func_801DFCB4(void) {
     }
     lock_work = g_GameState;
     if ((lock_work->unk_120 & 1) && lock_work->hp_change == 0) {
-        g_Task->step = 3;
+        g_Task->header.step = 3;
         return;
     }
     if (!(g_GameState->damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {

@@ -16,7 +16,7 @@ MATCH s32 func_8019C028(void) {
             D_80145E92[other * BATTLE_PARTY_STRIDE] = 1;
         }
     }
-    g_Task->mode = 4;
+    g_Task->header.mode = 4;
     func_8014D978();
     Area_SetDrawMode();
     return 1;

@@ -21,7 +21,7 @@ MATCH void func_801EEEF4(void) {
         func_80196718(battler);
         g_Task->timer  = func_8019651C(battler, 0, 0, 0, 1);
         g_Task->unk_09 = 8;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -35,7 +35,7 @@ MATCH void func_801EEFA0(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
@@ -82,12 +82,12 @@ MATCH s32 func_801EF34C(void) {
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF4E0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF524(void) {
-    SYS_DISPATCH_BYTE(D_801F0030, g_Task->step);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(D_801F0030, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
         Effect_SetActorMatrix();
         func_801EF68C();
         PopMatrix();
@@ -103,8 +103,8 @@ MATCH void func_801EF524(void) {
 INCLUDE_ASM(func_801EF68C);
 
 MATCH void func_801EF900(void) {
-    SYS_DISPATCH_BYTE(D_801F005C, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F005C, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFAE8();
         func_801EFB34();
@@ -123,7 +123,7 @@ MATCH void func_801EFA2C(void) {
     g_Task->timer = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         D_801EB4E0->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

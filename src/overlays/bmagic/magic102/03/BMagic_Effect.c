@@ -19,7 +19,7 @@ MATCH void func_801EF218(void) {
     work->unk_09 = tick;
     if (tick >= EFFECT_TICK_LIMIT) {
         g_Task->unk_09 = 0;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
     g_AreaCameraOffsetY      = (((g_FrameCount & 1) * 2) - 1) * (g_Task->unk_09 >> 1);
     g_AreaCameraRefreshCount = 2;

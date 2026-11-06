@@ -9,8 +9,8 @@ MATCH void func_801F5020(void) {
     count        = work->unk_0A;
     work->unk_0A = count + 0xFF;
     if (count == 0) {
-        g_Task->flags  = 0;
-        g_Task->unk_04 = 0;
+        g_Task->header.flags = 0;
+        g_Task->unk_04       = 0;
     } else {
         g_Task->unk_09 = g_Task->unk_0A;
         func_8019F818(work);

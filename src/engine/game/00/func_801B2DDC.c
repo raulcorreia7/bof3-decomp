@@ -42,12 +42,12 @@ MATCH void func_801B2DDC(void) {
                 g_GameState->kind_11E  = g_CurrentActor->callback_index;
                 state                  = g_Task;
                 g_GameState->value_120 = FIELD(u16, sel, 4u);
-                state->step++;
+                state->header.step++;
         }
-        g_Task->step++;
+        g_Task->header.step++;
     } else {
         Resource_RequestArea(0);
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    g_Task->step++;
+    g_Task->header.step++;
 }

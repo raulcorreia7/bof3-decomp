@@ -18,7 +18,7 @@ MATCH void func_801F6F8C(void) {
     func_801F7DE8();
     work     = g_Task;
     work->vx = 0;
-    work->mode += 1;
+    work->header.mode += 1;
 }
 
 INCLUDE_ASM(func_801F6FC4);
@@ -71,9 +71,9 @@ MATCH void func_801F79B0(void) {
     Actor* work;
 
     func_801F8AE8();
-    work         = g_Task;
-    work->unk_5A = 0x40;
-    work->step   = work->step + 1;
+    work              = g_Task;
+    work->unk_5A      = 0x40;
+    work->header.step = work->header.step + 1;
 }
 
 INCLUDE_ASM(func_801F79EC);
@@ -97,8 +97,8 @@ MATCH void func_801F7BA8(void) {
     work->y.fixed += 0x10000;
     work->unk_09 = timer;
     if (timer == 0) {
-        g_Task->unk_09 = 0x10;
-        g_Task->step   = g_Task->step + 1;
+        g_Task->unk_09      = 0x10;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -113,8 +113,8 @@ MATCH void func_801F7C98(void) {
     work->y.fixed -= 0x10000;
     work->unk_09 = timer;
     if (timer == 0) {
-        g_Task->unk_09 = 0x80;
-        g_Task->step   = g_Task->step + 1;
+        g_Task->unk_09      = 0x80;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -124,8 +124,8 @@ MATCH void func_801F7CF8(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->unk_09 = 8;
-        g_Task->step   = g_Task->step + 1;
+        g_Task->unk_09      = 8;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -247,12 +247,12 @@ MATCH s32 func_801F8BF8(void) {
 MATCH void func_801F8CDC(Actor* actor) {
     u8 state;
 
-    state = actor->step - 1;
+    state = actor->header.step - 1;
     actor->unk_03 += 6;
-    actor->step = state;
+    actor->header.step = state;
     if (state == 0) {
-        actor->step = actor->unk_04;
-        actor->mode += 1;
+        actor->header.step = actor->unk_04;
+        actor->header.mode += 1;
     }
 }
 
@@ -276,7 +276,7 @@ MATCH void func_801F95D4(void) {
 MATCH void func_801F9618(void) {
     func_801F9688();
     if (g_GameAreaId != 2) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -318,7 +318,7 @@ MATCH void func_801F9C00(void) {
     work->y.fixed = 0x80000;
     work->z.fixed = 0x8000000;
     work->vz      = 0;
-    work->mode += 1;
+    work->header.mode += 1;
     SND_PlayCue(0x204);
     SND_PlayCue(0x205);
 }
@@ -333,7 +333,7 @@ MATCH void func_801F9CE0(void) {
     work->y.fixed = 0xF0000;
     work->z.fixed = 0x6000000;
     work->vz      = 0;
-    work->mode += 1;
+    work->header.mode += 1;
     SND_PlayCue(0x20A);
 }
 

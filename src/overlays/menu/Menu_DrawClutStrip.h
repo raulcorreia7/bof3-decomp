@@ -4,14 +4,14 @@
  */
 /* func_801DBD24 (shop), func_801DF21C (start) */
 MATCH void Menu_DrawClutStrip(u8 clut_index) {
-    u16             cluts[4];
-    u16*            clut;
-    SPRT*           prim;
-    u8*             entry;
-    MenuSpriteRect* desc;
-    s16             x;
-    s16             y;
-    s32             index;
+    u16     cluts[4];
+    u16*    clut;
+    SPRT*   prim;
+    u8*     entry;
+    UvRect* desc;
+    s16     x;
+    s16     y;
+    s32     index;
     /* FAKE: retail keeps the constant shade byte in s5. */
     MATCH_REG(u8, shade, "s5");
     u8 h;

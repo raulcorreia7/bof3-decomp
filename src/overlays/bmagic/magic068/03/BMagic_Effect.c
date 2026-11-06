@@ -16,15 +16,15 @@ MATCH void func_801EF44C(void) {
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (timer == 0) {
-        g_Task->timer = 0x3E;
-        g_Task->mode  = g_Task->mode + 1;
+        g_Task->timer       = 0x3E;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
 MATCH void func_801EF4A8(void) {
     func_801EF55C();
     if (g_InputPressed != 0) {
-        g_Task->mode = 4;
+        g_Task->header.mode = 4;
     }
 }
 
@@ -33,7 +33,7 @@ INCLUDE_ASM(func_801EF4EC);
 INCLUDE_ASM(func_801EF55C);
 
 MATCH void func_801EF73C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF780(void) {
@@ -50,7 +50,7 @@ MATCH void func_801EF7C4(void) {
     g_Task->unk_0B = 0;
     g_Task->unk_09 = 0xF;
     g_Task->timer  = 3;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF884(void) {
@@ -63,7 +63,7 @@ MATCH void func_801EF884(void) {
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         g_Task->unk_09 = 0xF;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

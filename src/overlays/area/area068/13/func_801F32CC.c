@@ -8,6 +8,6 @@ MATCH void func_801F32CC(void) {
     value   = work[9];
     work[9] = value + 0xFF;
     if (value == 0) {
-        g_Task->mode = 0xD;
+        g_Task->header.mode = 0xD;
     }
 }

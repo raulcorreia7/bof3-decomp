@@ -17,7 +17,7 @@ MATCH void func_801C2438(void) {
         i += 1;
         *table = (value | 0x8000);
     } while (i < 31);
-    g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     field                                                            = g_Task->unk_05;
     g_GfxPalettePending                                              = 1;
     *(u16*)(MEM_PTR(u8, GAME_PALETTE_MIRROR) + (field << 6) + 0x3Eu) = 0;

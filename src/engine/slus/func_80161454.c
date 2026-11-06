@@ -103,7 +103,7 @@ NON_MATCHING void func_80161454(u32 index) {
     work = g_Task;
     val4 = 8;
     if (((s32)work->unk_70 & 0x0FFFFF00) == 0x0FFFFF00) {
-        work->flags        = work->flags & 0xF7;
+        work->header.flags = work->header.flags & 0xF7;
         work               = g_Task;
         (s32) work->unk_70 = (s32)work->unk_70 & 0xF00000FF;
         return;

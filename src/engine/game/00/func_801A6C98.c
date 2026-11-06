@@ -57,8 +57,8 @@ MATCH void func_801A6C98(u8* record) {
     data                 = (WorkScript*)script;
 
     work                   = g_Task;
-    work->mode             = data->unk_05;
-    g_Task->step           = data->unk_07;
+    work->header.mode      = data->unk_05;
+    g_Task->header.step    = data->unk_07;
     g_Task->unk_06         = (data->unk_00 >> 4) - 1;
     tail                   = g_Task;
     shared                 = tail->range_54.table;

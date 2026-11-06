@@ -5,7 +5,7 @@ MATCH void func_801F3944(void) {
     func_801F3AE4(0xC00, 0x878000, 0x11);
     g_Task->unk_09 += 1;
     if (g_Task->unk_09 >= 5U) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
         g_Task->unk_09 = 0;
     }
 }

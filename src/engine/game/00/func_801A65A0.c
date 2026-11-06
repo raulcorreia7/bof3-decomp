@@ -16,10 +16,10 @@ MATCH void func_801A65A0(u8* script) {
         g_CurrentActor = (Actor*)&g_Actors[slot];
         func_801A4AA8();
         func_801C1254(script[1], script[0xF]);
-        g_Task->flags = ACTOR_FLAG_IN_USE;
-        coord_x       = script[5] << 16;
-        slot_off      = *counter * ACTOR_SIZE;
-        work          = g_Task;
+        g_Task->header.flags = ACTOR_FLAG_IN_USE;
+        coord_x              = script[5] << 16;
+        slot_off             = *counter * ACTOR_SIZE;
+        work                 = g_Task;
         if (script[4] != 0) {
             coord_x |= 0x8000;
         }
@@ -34,9 +34,9 @@ MATCH void func_801A65A0(u8* script) {
         dist                    = Area_SampleHeight(work->x.fixed, work->y.fixed);
         record                  = g_Task;
         COORD_INT(record->z)    = (u16)dist;
-        record->mode            = script[8];
+        record->header.mode     = script[8];
 
-        g_Task->step                                   = script[0xA];
+        g_Task->header.step                            = script[0xA];
         g_Task->direction_08                           = script[0] & 0xF;
         g_Task->unk_06                                 = script[0] >> 4;
         FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[2];

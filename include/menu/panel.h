@@ -102,6 +102,28 @@ ASSERT_OFFSET(MenuChoicePanel, group_cursor, 0x0C);
 ASSERT_OFFSET(MenuChoicePanel, drawn_cursor, 0x0D);
 ASSERT_OFFSET(MenuChoicePanel, confirm_gate, 0x12);
 
+/* The list panel record, handed to the panel drawers as a pointer: the
+ * shop's ability and item lists (Shop_DrawAbilities, Shop_DrawItems) and the
+ * ability list of the bate overlay read the same cells. The record's extent
+ * is not proven; 0x24 is the last proven cell, the names pointer. */
+typedef struct MenuListPanel {
+    u8  pad_00[4];
+    u16 x;        /* 0x04 the panel's x; both drawers add 3 and pass it to UI_DrawWindow */
+    u16 y;        /* 0x06 the panel's y */
+    u8  unk_08;   /* 0x08 the ability list passes it to func_801AF5B0 */
+    u8  flags;    /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
+    u8  unk_0A;   /* 0x0A the list selector, passed to func_80166AE4 */
+    u8  unk_0B;   /* 0x0B the stock row; it indexes the name table at a 4-byte stride */
+    u8  unk_0C;   /* 0x0C a row the drawer draws an icon for */
+    u8  selected; /* 0x0D the selected row; the drawer shades it 2 */
+    u8  pad_0E[2];
+    s16 unk_10; /* 0x10 tested against zero for the extra frame marks */
+    u8  pad_12[0xE];
+    u8* names; /* 0x20 the name table: a row count, then 2-byte rows */
+} MenuListPanel;
+
+ASSERT_SIZE(MenuListPanel, 0x24);
+
 /* One of the 22 panel task records: the panel's position, state, layer and
  * item-table base. The battle overlays read the first 0x0C bytes through
  * BattlePanelTask (battle/records.h). */

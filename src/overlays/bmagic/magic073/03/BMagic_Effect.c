@@ -18,13 +18,13 @@ MATCH void func_801EEF50(void) {
 }
 
 MATCH void func_801EEFB0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEFF4(void) {
     BmagicEffectFuncs handlers;
 
-    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, step);
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.step);
 }
 
 INCLUDE_ASM(func_801EF06C);
@@ -78,11 +78,11 @@ INCLUDE_ASM(func_801F00C4);
 INCLUDE_ASM(func_801F03E8);
 
 MATCH void func_801F0454(void) {
-    D_801F21F0->flags  = 0;
-    D_801F21F0->mode   = 0;
-    D_801F21F0->step   = 0;
-    D_801F21F0->unk_03 = 0;
-    D_801F21F0->unk_04 = 0;
+    D_801F21F0->header.flags = 0;
+    D_801F21F0->header.mode  = 0;
+    D_801F21F0->header.step  = 0;
+    D_801F21F0->unk_03       = 0;
+    D_801F21F0->unk_04       = 0;
 }
 
 INCLUDE_ASM(func_801F04A4);

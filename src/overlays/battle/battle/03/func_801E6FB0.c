@@ -11,7 +11,7 @@ MATCH void func_801E6FB0(void) {
         ((D_801EB4E0->slot == g_BattleActiveBattler) ||
          ((LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) &&
           ((LOHU(g_BattleActionId) == 0x97) || (LOHU(g_BattleActionId) == 0xE1))))) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         return;
     }
     if (g_Task->timer == 0) {
@@ -37,12 +37,12 @@ MATCH void func_801E6FB0(void) {
         flags = g_BattleEnemyBattlers[row].status;
     }
     if ((flags & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING)) == 0) {
-        g_Task->mode = 0;
+        g_Task->header.mode = 0;
     }
     func_801E8DD8();
     func_8014D978();
     Area_AddActor();
     if ((Battle_SlotIsBlocked(D_801EB4E0->slot) & BYTE_MASK) && !ACTOR_IN_USE(*D_801EB4E0)) {
-        g_Task->mode = 0;
+        g_Task->header.mode = 0;
     }
 }

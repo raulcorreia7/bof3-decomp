@@ -21,10 +21,10 @@ MATCH void func_801E4B2C(void) {
         if (!(D_801CA71C[g_BattleActionId].mask & 0x800)) {
             g_Task->unk_09 = MEM_PTR(u8, 0x800E40CFu)[((EnemyBattler*)g_BattleCurrentEnemy)->kind * 0x88u];
             func_801E2314(6U);
-            work       = g_Task;
-            work->step = (work->step + 1);
+            work              = g_Task;
+            work->header.step = (work->header.step + 1);
         } else {
-            g_Task->mode = (g_Task->mode + 1);
+            g_Task->header.mode = (g_Task->header.mode + 1);
         }
         func_801E3160();
     }

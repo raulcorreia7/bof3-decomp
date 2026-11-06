@@ -6,7 +6,7 @@ MATCH void func_801F44B0(void) {
     }
     g_Task->unk_09++;
     if (g_Task->unk_09 / 5 == 3) {
-        g_Task->step++;
+        g_Task->header.step++;
         g_Task->unk_09 = 1;
     }
 }

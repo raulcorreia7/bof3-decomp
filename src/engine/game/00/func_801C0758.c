@@ -33,7 +33,7 @@ MATCH void func_801C0758(s32 x, s32 y, u8 kind) {
             if (count != 0) {
                 VOL(u8, ((u8*)&g_BattlePartyBattlers[0])[index]) |= 0x40;
             } else {
-                g_BattlePartyBattlers[count].flags &= ~ACTOR_FLAG_HIDDEN;
+                g_BattlePartyBattlers[count].header.flags &= ~ACTOR_FLAG_HIDDEN;
             }
             y_ptr += 0x50;
             x_ptr += 0x50;

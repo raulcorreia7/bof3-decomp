@@ -9,6 +9,6 @@ MATCH void func_8019F384(void) {
                   (s16)(*(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_30) + offset) + (u16)COORD_INT(g_Task->y)),
                   g_Task->unk_06, g_Task->unk_27);
     if (g_Task->unk_09 == 0) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }

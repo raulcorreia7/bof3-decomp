@@ -10,24 +10,24 @@ INCLUDE_ASM(func_801EEC84);
 
 MATCH void func_801EEE9C(void) {
     if (g_Task->unk_0B == 0) {
-        D_801EB4E0->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        D_801EB4E0->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(0x18, 0);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
 #include "shared/Effect_StartPlaying.h"
 
 MATCH s32 func_801EEF3C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEF80(void) {
     BattleHandlerTable5 handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
 }
@@ -43,7 +43,7 @@ MATCH void func_801EF06C(void) {
     if (!(temp_v0 & 0xFF)) {
         func_800AFC98(2, 4);
         func_800A9820(g_BattleTargetSelector);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -53,7 +53,7 @@ MATCH void func_801EF0E8(void) {
     count = g_Task->unk_09;
     if ((count & 0xFF) == 0x10) {
         SND_QueueSelectionFx(0x100);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     } else {
         g_Task->unk_09 = count + 4;
     }

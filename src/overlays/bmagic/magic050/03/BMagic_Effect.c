@@ -37,19 +37,19 @@ MATCH void func_801EEDF8(void) {
     temp_v1_2      = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v1_2;
     if ((temp_v1_2 & 0xFF) == 0x19) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEF08(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEF4C(void) {
-    SYS_DISPATCH_BYTE(D_801EFAF0, g_Task->step);
-    if (g_Task->step != 0 && g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(D_801EFAF0, g_Task->header.step);
+    if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
         func_800AF764();
         func_801EF1B0();
         func_801EF4C4();

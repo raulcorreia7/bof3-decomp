@@ -18,14 +18,14 @@ MATCH void func_801EEF54(void) {
     if (timer == 0) {
         SND_QueueSelectionFx(0x101);
         func_800A9610(g_BattleTargetSelector, 0x10);
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF024(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF068);
@@ -47,7 +47,7 @@ MATCH void func_801EF530(void) {
     Actor_SelectScript(1);
     g_Task->unk_09 = 0xE;
     g_Task->timer  = 0xC;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF5DC(void) {

@@ -6,7 +6,7 @@ MATCH void Battle_UpdateEnemyActors(void) {
     u8                     i;
 
     for (i = 0; i < 8u; i++) {
-        if (g_BattleEnemyBattlers[i].flags != 0u) {
+        if (g_BattleEnemyBattlers[i].header.flags != 0u) {
             enemy = &g_BattleEnemyBattlers[i];
             TASK_SET((PartyBattler*)enemy);
             BATTLE_CURRENT_ENEMY_PTR = enemy;

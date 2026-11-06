@@ -2,5 +2,5 @@
 
 MATCH void func_801F2F48(void) {
     func_801F3994();
-    g_Task->mode++;
+    g_Task->header.mode++;
 }

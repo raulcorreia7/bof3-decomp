@@ -13,5 +13,5 @@ MATCH void func_8019F310(void) {
     g_Task->vy     = 0x20000;
     g_Task->unk_29 = 3;
     g_Task->unk_09 = 6;
-    g_Task->mode++;
+    g_Task->header.mode++;
 }

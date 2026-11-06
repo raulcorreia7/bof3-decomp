@@ -31,6 +31,7 @@
  */
 
 #include "types.h"
+#include "common/fixed.h"
 #include "common/vector.h"
 
 /* The world overlays' own records. Every area program keeps its scratch in
@@ -315,25 +316,16 @@ ASSERT_SIZE(AreaWorkPointers, AREA_WORK_POINTERS_SIZE);
 /* A world position: three signed halves. The AREA027 rotation anchor is read
  * as this shape (`emi/world00/area027/13@0x801F3480` hands it to `RotTrans`).
  */
-typedef Vec3s AreaPoint;
+typedef Vec3S16 AreaPoint;
 ASSERT_SIZE(AreaPoint, WORLD_POINT_SIZE);
-
-/* The packed vertex point of an AREA024 vertex row: three unsigned halves. */
-typedef struct VertexPoint {
-    u16 x;
-    u16 y;
-    u16 z;
-} VertexPoint;
-
-ASSERT_SIZE(VertexPoint, WORLD_VERTEX_POINT_SIZE);
 
 /* One AREA024 vertex row: four packed points at +0x02. The program copies
  * 0x28-byte rows (`emi/world00/area024/14@0x801F3314`) and advances both
  * buffers by 0x28 (`@0x801F362C`). */
 typedef struct AreaVertex {
-    u16         unk_00;
-    VertexPoint points[4]; /* 0x02 */
-    u8          unk_1A[0x0E];
+    u16     unk_00;
+    Vec3S16 points[4]; /* 0x02 */
+    u8      unk_1A[0x0E];
 } AreaVertex;
 
 ASSERT_SIZE(AreaVertex, WORLD_VERTEX_RECORD_SIZE);
@@ -342,11 +334,11 @@ ASSERT_OFFSET(AreaVertex, points, 0x02);
 /* One AREA027 trail entry: two signed halves. The shift loop loads an entry
  * with `lwl/lwr 0x17/0x14(base + 4*i)` and stores it with
  * `swl/swr 0x1b/0x18(base + 4*i)`. */
-typedef Vec2s TrailPoint;
+typedef Vec2S16 TrailPoint;
 ASSERT_SIZE(TrailPoint, WORLD_TRAIL_ENTRY_SIZE);
 
 typedef struct AreaTrail {
-    Vec3i      pos;                     /* 0x00 - the head anchor */
+    Vec3S32    pos;                     /* 0x00 - the head anchor */
     s32        unk_0C;                  /* 0x0C */
     s32        radius;                  /* 0x10 - the ring radius */
     u16        angle;                   /* 0x14 - the rotation angle */
@@ -398,7 +390,7 @@ ASSERT_OFFSET(AreaSlotWork, screen_x, 0x0C);
 /* One entry of the AREA028 position ring at `0x800E4A00`: two unsigned
  * halves. The ring walk reads the halves at +0x4A04 and +0x6 per segment
  * (`@0x801F2D3C`). */
-typedef Vec2us ScreenPoint;
+typedef Vec2U16 ScreenPoint;
 ASSERT_SIZE(ScreenPoint, WORLD_RING_ENTRY_SIZE);
 
 typedef struct PartyMemberMessages {

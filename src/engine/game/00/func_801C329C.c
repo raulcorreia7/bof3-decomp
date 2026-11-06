@@ -61,7 +61,7 @@ MATCH void func_801C329C(void) {
         if ((found & BYTE_MASK) != 0) {
             slot = Actor_FindFreeSlot() & BYTE_MASK;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].flags        = 1;
+                g_ActorSlots[slot].header.flags = 1;
                 g_ActorSlots[slot].type         = 0x41;
                 g_ActorSlots[slot].unk_08       = g_Task->direction_08;
                 COORD_INT(g_ActorSlots[slot].x) = g_Task->unk_2E;

@@ -29,7 +29,7 @@ static inline void BattleEffectTimerStep(void) {
     } else {
         work->unk_09 = 60;
         work         = g_Task;
-        work->step++;
+        work->header.step++;
     }
 }
 
@@ -64,7 +64,7 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     if (--g_Task->unk_09 == 0) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 

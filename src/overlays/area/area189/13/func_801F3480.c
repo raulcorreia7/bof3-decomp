@@ -6,5 +6,5 @@ MATCH void func_801F3480(void) {
     Actor_SelectScript(0);
     g_Task->unk_29 = 6;
     g_Task->unk_48 = 0;
-    g_Task->step++;
+    g_Task->header.step++;
 }

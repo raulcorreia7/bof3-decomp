@@ -14,7 +14,7 @@ INCLUDE_ASM(func_801EED18);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF004(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF048);
@@ -55,8 +55,8 @@ MATCH void func_801EFD84(void) {
 }
 
 MATCH void func_801EFDC8(void) {
-    SYS_DISPATCH_BYTE(D_801F0C78, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F0C78, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_800AF764();
         func_801F01B8();
     }
@@ -71,8 +71,8 @@ INCLUDE_ASM(func_801F00B0);
 INCLUDE_ASM(func_801F01B8);
 
 MATCH void func_801F04D4(void) {
-    SYS_DISPATCH_BYTE(D_801F0C84, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F0C84, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801F07D4();
         PopMatrix();

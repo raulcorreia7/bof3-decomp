@@ -90,9 +90,9 @@ NON_MATCHING void func_801E8684(void) {
     func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
     GFX_UploadPaletteRows();
     temp_v1_420 = g_Task;
-    temp_v1_420->flags &= ~ACTOR_FLAG_HIDDEN;
+    temp_v1_420->header.flags &= ~ACTOR_FLAG_HIDDEN;
     g_Task = var_s0;
-    var_s0->mode += 1;
+    var_s0->header.mode += 1;
 }
 #else
 INCLUDE_ASM(func_801E8684);

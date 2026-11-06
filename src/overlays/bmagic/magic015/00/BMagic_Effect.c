@@ -51,9 +51,9 @@ INCLUDE_ASM(func_801EF6B0);
 MATCH void func_801EF93C(void) {
     if (g_Task->unk_0B == 0) {
         func_800AFC54();
-        BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -73,7 +73,7 @@ INCLUDE_ASM(func_801EFAE4);
 
 MATCH void func_801EFB90(void) {
     if ((func_8014DAEC() & BYTE_MASK) != 0u) {
-        g_Task->step += 1u;
+        g_Task->header.step += 1u;
     }
 }
 
@@ -87,7 +87,7 @@ MATCH void func_801EFD7C(void) {
         g_Task->scale.y = 0x10000;
         g_Task->unk_48  = 2;
         g_Task->unk_09  = 8;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -103,8 +103,8 @@ MATCH void func_801EFF1C(void) {
     BattleHandlerTable5 handlers;
 
     handlers = D_801EEC54;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
 }
@@ -113,7 +113,7 @@ INCLUDE_ASM(func_801EFFC0);
 
 MATCH void func_801F014C(void) {
     if ((func_8014DAEC() & BYTE_MASK) != 0u) {
-        g_Task->step += 1u;
+        g_Task->header.step += 1u;
     }
 }
 
@@ -151,7 +151,7 @@ MATCH void func_801F0D48(void) {
     g_Task->unk_27 = BATTLE_ACTIVE_WORK->unk_27;
     g_Task->unk_09 = 0x14;
     g_Task->timer  = 7;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 INCLUDE_ASM(func_801F0DB4);
@@ -169,7 +169,7 @@ MATCH void func_801F1180(void) {
     g_Task->unk_5F += 0x10;
     if ((s8)g_Task->unk_5D == -0x40) {
         D_801EB4E0->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

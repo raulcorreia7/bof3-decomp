@@ -11,7 +11,7 @@
 #include <rand.h>
 
 /* One spawn point in the area's spawn table: x then y, four bytes. */
-typedef Vec2us AreaSpawnPoint;
+typedef Vec2U16 AreaSpawnPoint;
 
 ASSERT_SIZE(AreaSpawnPoint, 4);
 

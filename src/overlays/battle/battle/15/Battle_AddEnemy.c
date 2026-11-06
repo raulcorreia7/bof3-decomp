@@ -23,10 +23,10 @@ NON_MATCHING void Battle_AddEnemy(s32 entry_index, s32 enemy_index, s32 entry_va
         } while (words_in != words_end);
         *words_out = *words_in;
         TASK_SET(&g_BattleEnemyBattlers[enemy_index & BYTE_MASK]);
-        ((EnemyBattler*)g_Task)->mode        = 0;
+        ((EnemyBattler*)g_Task)->header.mode = 0;
         ((EnemyBattler*)g_Task)->unk_04      = 0;
         ((EnemyBattler*)g_Task)->unk_03      = 0;
-        ((EnemyBattler*)g_Task)->step        = 0;
+        ((EnemyBattler*)g_Task)->header.step = 0;
         ((EnemyBattler*)g_Task)->unk_29      = 4;
         ((EnemyBattler*)g_Task)->slot        = enemy_index + 3;
         ((EnemyBattler*)g_Task)->unk_5F      = 0;

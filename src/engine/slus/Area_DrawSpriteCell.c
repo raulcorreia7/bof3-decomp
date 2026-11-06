@@ -91,6 +91,6 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     } else {
         sprite->x0 = (SPAD_CURSOR->unk_2E - (s8)sprite_cell->x) - sprite->w;
     }
-    SetSemiTrans(sprite, (SPAD_CURSOR->flags >> 5) & 1);
+    SetSemiTrans(sprite, (SPAD_CURSOR->header.flags >> 5) & 1);
     GFX_AddPrim(SPAD_CURSOR->unk_29, 0x14U);
 }

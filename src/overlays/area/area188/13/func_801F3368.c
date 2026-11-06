@@ -11,7 +11,7 @@ MATCH void func_801F3368(void) {
     g_Task->unk_09 = mode;
     if (!(mode & 0xFF)) {
         g_Task->unk_09 = 0x80;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         SND_PlayCue(EMI_CUE_ID(2, 0x14));
     }
 }

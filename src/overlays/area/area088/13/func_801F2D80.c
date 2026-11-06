@@ -9,6 +9,6 @@ MATCH void func_801F2D80(void) {
     g_Task->unk_09 = remaining;
     if (!(remaining & 0xFF)) {
         g_Task->unk_09 = 0x10;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }

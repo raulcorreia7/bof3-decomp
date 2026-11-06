@@ -22,7 +22,7 @@ MATCH void func_801EEF64(void) {
         SND_QueueSelectionFx(0x101);
         SND_QueueSelectionFx(0x102);
         g_Task->unk_09 = 0x30;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -35,7 +35,7 @@ MATCH void func_801EEFFC(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
@@ -65,18 +65,18 @@ extern Callback D_801F0654[];
 
 MATCH void func_801F0018(void) {
     Effect_SetActorMatrix();
-    D_801F0654[g_Task->mode]();
+    D_801F0654[g_Task->header.mode]();
     PopMatrix();
 }
 
 MATCH void func_801F0070(void) {
     u8 counter;
 
-    if (BATTLE_ACTIVE_WORK->mode == 3) {
+    if (BATTLE_ACTIVE_WORK->header.mode == 3) {
         counter        = g_Task->unk_09 - 1;
         g_Task->unk_09 = counter;
         if (!(counter & 0xFF)) {
-            g_Task->mode += 1;
+            g_Task->header.mode += 1;
         }
     }
 }

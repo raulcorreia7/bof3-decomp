@@ -31,7 +31,7 @@ MATCH void func_801EEFF8(void) {
         g_Task->unk_14      = 0x100;
         g_Task->unk_09      = 0x10;
         g_Task->timer       = 8;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -41,7 +41,7 @@ MATCH void func_801EF0F8(void) {
     work->timer         = timer;
     work->pos.z.fixed += 0xFF800000;
     if (timer == 0) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -56,8 +56,8 @@ INCLUDE_ASM(func_801EF258);
 INCLUDE_ASM(func_801EF508);
 
 MATCH void func_801EF808(void) {
-    SYS_DISPATCH_BYTE(D_801F05EC, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F05EC, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF508();
         PopMatrix();
@@ -80,7 +80,7 @@ MATCH void func_801EF890(void) {
         g_Task->unk_20      = 0x21;
         g_Task->unk_09      = 0x10;
         g_Task->timer       = 0x1E;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

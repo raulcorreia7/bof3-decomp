@@ -10,5 +10,5 @@ MATCH void func_801F3224(void) {
         row += 0xC;
     }
     SND_PlayCue(0x200);
-    g_Task->mode++;
+    g_Task->header.mode++;
 }

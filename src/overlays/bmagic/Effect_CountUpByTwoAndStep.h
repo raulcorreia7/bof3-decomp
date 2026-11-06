@@ -8,6 +8,6 @@ MATCH void Effect_CountUpByTwoAndStep(void) {
     timer          = g_Task->unk_09 + 2;
     g_Task->unk_09 = timer;
     if (timer == 16) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }

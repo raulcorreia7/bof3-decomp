@@ -16,7 +16,7 @@ MATCH void func_800C1D24(void) {
         g_BattleCurrentEnemy->script = &D_800C21A0;
         g_Task->unk_2A               = 0;
         Actor_SelectScript(0U);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
     func_8014D978();
 }

@@ -12,9 +12,9 @@ MATCH void func_801F3744(void) {
     TASK_SET(g_BattlePartyBattlers);
     g_Task = work;
     if (D_80146954 >= D_80145EC4) {
-        work->mode     = 0xD;
-        g_Task->unk_09 = 0;
+        work->header.mode = 0xD;
+        g_Task->unk_09    = 0;
         return;
     }
-    work->mode = 4;
+    work->header.mode = 4;
 }

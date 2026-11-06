@@ -17,6 +17,6 @@ MATCH void func_800C1E7C(void) {
     func_8014D978();
     Area_AddActor();
     if (g_BattleState & BATTLE_STATE_EFFECT_PLAYING) {
-        ((Actor*)g_Task)->step++;
+        ((Actor*)g_Task)->header.step++;
     }
 }

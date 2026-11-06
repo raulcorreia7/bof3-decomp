@@ -19,7 +19,7 @@ MATCH void func_801EF02C(void) {
 }
 
 MATCH void func_801EF080(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF0C4(void) {
@@ -39,7 +39,7 @@ MATCH void func_801EF264(void) {
             func_80196718((EnemyBattler*)&g_BattlePartyBattlers[g_Task->unk_03]);
             func_800AF814(g_Task->unk_03);
         }
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -64,8 +64,8 @@ MATCH void func_801EF710(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->unk_0B == 8) {
-        work       = g_Task;
-        work->step = work->step + 1;
+        work              = g_Task;
+        work->header.step = work->header.step + 1;
     }
 }
 
@@ -88,8 +88,8 @@ INCLUDE_ASM(func_801EF85C);
 INCLUDE_ASM(func_801EFAE8);
 
 MATCH void func_801EFE5C(void) {
-    SYS_DISPATCH_BYTE(D_801F08C4, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_800AF764();
         func_801F01F0();
     }
@@ -103,7 +103,7 @@ MATCH void func_801F00A0(void) {
     timer          = g_Task->unk_09 + 32;
     g_Task->unk_09 = timer;
     if (timer == 192) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -116,7 +116,7 @@ MATCH void func_801F00F0(void) {
     work->timer--;
     if (work->timer == 48) {
         work = g_Task;
-        work->step++;
+        work->header.step++;
     }
 }
 

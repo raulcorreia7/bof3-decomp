@@ -28,24 +28,24 @@ MATCH void func_801F6EB4(void) {
         return;
     }
 
-    slots                          = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][3]].flags = 1;
-    slots                          = SP_PTR(u8*, 0u);
-    slots[0x11][4]                 = Actor_FindFree();
-    slots                          = SP_PTR(u8*, 0u);
+    slots                                 = SP_PTR(u8*, 0u);
+    g_Actors[slots[0x11][3]].header.flags = 1;
+    slots                                 = SP_PTR(u8*, 0u);
+    slots[0x11][4]                        = Actor_FindFree();
+    slots                                 = SP_PTR(u8*, 0u);
     if (slots[0x11][4] == GAME_NONE) {
-        slots                          = SP_PTR(u8*, 0u);
-        g_Actors[slots[0x11][3]].flags = 0;
+        slots                                 = SP_PTR(u8*, 0u);
+        g_Actors[slots[0x11][3]].header.flags = 0;
         return;
     }
 
-    scratch                        = (s16*)D_1F800000;
-    data                           = (u8*)D_801FCF30;
-    slots                          = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].flags = 1;
-    slots                          = SP_PTR(u8*, 0u);
-    work                           = slots[0x11];
-    *scratch                       = work[3];
+    scratch                               = (s16*)D_1F800000;
+    data                                  = (u8*)D_801FCF30;
+    slots                                 = SP_PTR(u8*, 0u);
+    g_Actors[slots[0x11][4]].header.flags = 1;
+    slots                                 = SP_PTR(u8*, 0u);
+    work                                  = slots[0x11];
+    *scratch                              = work[3];
     func_801A65A0(data);
     Actor_BeginScript(0x61, 0xC);
     *scratch = work[4];
@@ -57,9 +57,9 @@ MATCH void func_801F6EB4(void) {
     g_Actors[work[3]].y.fixed -= ONE;
     g_Actors[work[4]].x.fixed -= ONE;
     g_Actors[work[4]].y.fixed += ONE;
-    g_Actors[work[3]].flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots                                     = SP_PTR(u8*, 0u);
     cell                                      = slots[0x11];
     cell4                                     = cell[4];
@@ -76,14 +76,14 @@ MATCH void func_801F6EB4(void) {
 
 MATCH void func_801F7260(void) {
     if (g_Task->unk_09 != 0) {
-        g_BattlePartyBattlers->flags |= 0x40;
+        g_BattlePartyBattlers->header.flags |= 0x40;
         g_Task->unk_09 -= 1;
         return;
     }
-    g_BattlePartyBattlers->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
-    g_Actors[g_Task->unk_03].flags = 0;
-    g_Actors[g_Task->unk_04].flags = 0;
-    g_Task->mode                   = 2;
+    g_BattlePartyBattlers->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+    g_Actors[g_Task->unk_03].header.flags = 0;
+    g_Actors[g_Task->unk_04].header.flags = 0;
+    g_Task->header.mode                   = 2;
 }
 
 #include "shared/Actor_FreePaletteFades.h"
@@ -110,24 +110,24 @@ MATCH void func_801F754C(void) {
         return;
     }
 
-    slots                          = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][3]].flags = 1;
-    slots                          = SP_PTR(u8*, 0u);
-    slots[0x11][4]                 = Actor_FindFree();
-    slots                          = SP_PTR(u8*, 0u);
+    slots                                 = SP_PTR(u8*, 0u);
+    g_Actors[slots[0x11][3]].header.flags = 1;
+    slots                                 = SP_PTR(u8*, 0u);
+    slots[0x11][4]                        = Actor_FindFree();
+    slots                                 = SP_PTR(u8*, 0u);
     if (slots[0x11][4] == GAME_NONE) {
-        slots                          = SP_PTR(u8*, 0u);
-        g_Actors[slots[0x11][3]].flags = 0;
+        slots                                 = SP_PTR(u8*, 0u);
+        g_Actors[slots[0x11][3]].header.flags = 0;
         return;
     }
 
-    scratch                        = (s16*)D_1F800000;
-    data                           = (u8*)D_801FCF5C;
-    slots                          = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].flags = 1;
-    slots                          = SP_PTR(u8*, 0u);
-    work                           = slots[0x11];
-    *scratch                       = work[3];
+    scratch                               = (s16*)D_1F800000;
+    data                                  = (u8*)D_801FCF5C;
+    slots                                 = SP_PTR(u8*, 0u);
+    g_Actors[slots[0x11][4]].header.flags = 1;
+    slots                                 = SP_PTR(u8*, 0u);
+    work                                  = slots[0x11];
+    *scratch                              = work[3];
     func_801A4D54(data);
     *scratch = work[4];
     func_801A4D54(data);
@@ -137,9 +137,9 @@ MATCH void func_801F754C(void) {
     g_Actors[work[3]].y.fixed += ONE;
     g_Actors[work[4]].x.fixed += ONE;
     g_Actors[work[4]].y.fixed -= ONE;
-    g_Actors[work[3]].flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots                                     = SP_PTR(u8*, 0u);
     cell                                      = slots[0x11];
     cell4                                     = cell[4];
@@ -189,7 +189,7 @@ MATCH void func_801F7B10(void) {
     g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
         g_Task->unk_09 = 8;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -207,7 +207,7 @@ MATCH void func_801F7BB0(void) {
     g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
         g_Task->unk_09 = 8;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -222,7 +222,7 @@ MATCH void func_801F7C50(void) {
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         g_Task->unk_09 = 0x80;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -240,7 +240,7 @@ MATCH void func_801F7CE0(void) {
     remaining      = g_Task->unk_09 - 1;
     g_Task->unk_09 = remaining;
     if (!(remaining & 0xFF)) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -289,7 +289,7 @@ MATCH void func_801F82E4(void) {
 
 MATCH void func_801F8328(void) {
     g_Task->unk_09 = 96;
-    g_Task->mode++;
+    g_Task->header.mode++;
     SND_PlayCue(516);
 }
 
@@ -301,15 +301,15 @@ MATCH void func_801F8370(void) {
     if (g_Task->unk_09 & 4) {
         temp_v1 = func_8019601C() & 0xFF;
         if (temp_v1 != 0xFF) {
-            temp_v0        = &g_ActorSlots[temp_v1];
-            temp_v0->flags = 1;
-            temp_v0->type  = 0x24;
+            temp_v0               = &g_ActorSlots[temp_v1];
+            temp_v0->header.flags = 1;
+            temp_v0->type         = 0x24;
         }
     }
     temp_v0_2      = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0_2;
     if (!(temp_v0_2 & 0xFF)) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 

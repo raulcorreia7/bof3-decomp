@@ -6,7 +6,7 @@ MATCH void func_8019C954(void) {
     s16    counter;
 
     index = D_80145E9B;
-    g_Task->flags |= ACTOR_FLAG_SKIP_PALETTE_STAGE;
+    g_Task->header.flags |= ACTOR_FLAG_SKIP_PALETTE_STAGE;
     g_Task->active_flags = 1;
     record               = (Actor*)&g_ActorSlots[index];
     g_Task->unk_2C       = record->unk_2C;
@@ -34,5 +34,5 @@ MATCH void func_8019C954(void) {
     g_Task->tint.bytes.unk_5F = 0;
     g_Task->tint.bytes.flags  = 0;
     Actor_SelectScript(0x4E);
-    g_Task->mode = 2;
+    g_Task->header.mode = 2;
 }

@@ -18,7 +18,7 @@ MATCH void func_801EEDAC(void) {
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         g_Task->unk_09 = 0x1E;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -31,7 +31,7 @@ MATCH void func_801EEE28(void) {
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         g_Task->unk_09 = 0xA;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -45,8 +45,8 @@ MATCH void func_801EF04C(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->unk_09 = 0x1E;
-        g_Task->mode   = g_Task->mode + 1;
+        g_Task->unk_09      = 0x1E;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
@@ -59,7 +59,7 @@ MATCH void func_801EF0A8(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -69,7 +69,7 @@ MATCH void func_801EF1FC(void) {
     if (g_Task->unk_0B == 0) {
         *D_8014637C &= 0xBF;
         func_800AEF98(4, 0);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -91,8 +91,8 @@ MATCH void func_801EF324(void) {
     BattleHandlerTable5 handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->step != 0 && g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
         Area_SetDrawMode();
     }
 }
@@ -118,7 +118,7 @@ MATCH void func_801EF3C8(void) {
         g_Task->scale.y = temp_a2;
         func_801DD350(g_Task);
         g_Task->unk_09 = func_800AFF98();
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -145,7 +145,7 @@ MATCH void func_801EF478(void) {
     g_Task->unk_14 += g_Task->unk_20;
     func_8014DAEC();
     if (g_Task->pos.z.fixed == g_Task->scale.y) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -171,7 +171,7 @@ MATCH void func_801EF578(void) {
         g_Task->unk_0C = -0x2000;
         g_Task->unk_10 = 0;
         func_801DD350(g_Task);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -180,7 +180,7 @@ MATCH void func_801EF644(void) {
     g_Task->pos.y.fixed += g_Task->unk_10;
     func_8014DAEC();
     if (g_Task->pos.x.fixed == g_Task->unk_18 && g_Task->pos.y.fixed == g_Task->unk_1C) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -200,8 +200,8 @@ MATCH void func_801EF708(void) {
     MagicTaskFuncs handlers;
 
     handlers = D_801EEC18;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->step != 0 && g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
         Area_SetDrawMode();
     }
 }
@@ -215,7 +215,7 @@ MATCH void func_801EF918(void) {
     g_Task->unk_14 += g_Task->unk_20;
     func_8014DAEC();
     if (g_Task->pos.z.fixed == g_Task->scale.y) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -224,7 +224,7 @@ MATCH void func_801EF9AC(void) {
     g_Task->unk_10 = 0;
     func_801DD350(g_Task);
     func_8014DAEC();
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF9FC(void) {

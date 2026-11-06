@@ -15,7 +15,7 @@ MATCH void func_801B7EF0(void) {
         g_Task->tint.signed_bytes.unk_5E = -0x80;
         g_Task->tint.signed_bytes.unk_5F = -0x80;
         g_Task->tint.bytes.flags         = 1;
-        g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
+        g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
         g_Task->unk_04 = 7;
     } else {
         g_Task->unk_04 = 8;

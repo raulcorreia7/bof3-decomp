@@ -26,8 +26,8 @@ MATCH void func_801D0CA0(void) {
     work->vx     = work->vx + 0x10;
     work->unk_09 = timer;
     if (timer == 0) {
-        g_Task->unk_09 = 0x20;
-        g_Task->mode   = g_Task->mode + 1;
+        g_Task->unk_09      = 0x20;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
@@ -37,8 +37,8 @@ MATCH void func_801D0D00(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->unk_09 = 0x10;
-        g_Task->mode   = g_Task->mode + 1;
+        g_Task->unk_09      = 0x10;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
@@ -74,11 +74,11 @@ INCLUDE_ASM(func_801D0EF8);
 MATCH void func_801D0F68(void) {
     Actor* work;
 
-    work         = g_Task;
-    work->unk_09 = 10;
-    work->unk_2E = 0;
-    work->unk_30 = 0;
-    g_Task->mode = g_Task->mode + 1;
+    work                = g_Task;
+    work->unk_09        = 10;
+    work->unk_2E        = 0;
+    work->unk_30        = 0;
+    g_Task->header.mode = g_Task->header.mode + 1;
 }
 
 MATCH void func_801D0F9C(void) {
@@ -91,15 +91,15 @@ MATCH void func_801D0F9C(void) {
     work->unk_2E = work->unk_2E + 0x15;
     work->unk_30 = work->unk_30 + 9;
     if (timer == 0) {
-        g_Task->unk_09 = 0x5A;
-        g_Task->mode   = g_Task->mode + 1;
+        g_Task->unk_09      = 0x5A;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
 MATCH void func_801D1008(void) {
     if (g_ScriptVars[0] == 9) {
-        g_Task->unk_09 = 0x1E;
-        g_Task->mode   = g_Task->mode + 1;
+        g_Task->unk_09      = 0x1E;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 

@@ -19,8 +19,10 @@
  * reader uses; a unit whose bytes need the other width casts the member and
  * carries a FAKE comment. */
 
+#include "common/fixed.h"
 #include "common/vector.h"
 #include "types.h"
+#include "work/task.h"
 
 /* The record's size, its stride in the table and the table's row count. */
 #define ACTOR_SIZE           0x98
@@ -28,13 +30,13 @@
 
 /* Ask whether a work row is live: the update walks only rows with the in-use
  * bit set. Pass the row itself or, for a pointer, its dereference. */
-#define ACTOR_IN_USE(actor)  (((actor).flags & ACTOR_FLAG_IN_USE) != 0)
+#define ACTOR_IN_USE(actor)  (((actor).header.flags & ACTOR_FLAG_IN_USE) != 0)
 
 /* Set the scratchpad actor's mode: the byte SYS_DISPATCH_TASK dispatches on. */
 #define ACTOR_SET_MODE(mode) (TASK_BYTES[1] = (mode))
 
 /* Clear the actor's step: the current mode starts again at step 0. */
-#define ACTOR_CLEAR_STEP()   (g_Task->step = 0)
+#define ACTOR_CLEAR_STEP()   (g_Task->header.step = 0)
 
 /* Clear the actor's three tint bytes: the row draws untinted. A bare statement
  * macro: use it as a whole statement, never under an unbraced `if`. */
@@ -156,9 +158,7 @@ typedef union ActorExt {
 ASSERT_SIZE(ActorExt, 0x04);
 
 typedef struct Actor {
-    u8             flags;             /* 0x00 - entity flags; ActorFlags */
-    u8             mode;              /* 0x01 - commu00 calls it the task mode */
-    u8             step;              /* 0x02 - commu00 calls it the task state */
+    TaskHeader     header;            /* 0x00 */
     u8             unk_03;            /* 0x03 */
     u8             unk_04;            /* 0x04 */
     u8             unk_05;            /* 0x05 - region/scene index; commu00 calls it the
@@ -192,7 +192,7 @@ typedef struct Actor {
     Coord          x;                 /* 0x34 */
     Coord          y;                 /* 0x38 */
     Coord          z;                 /* 0x3C - the integer half (+2) is the ground height */
-    Vec2i          scale;             /* 0x40 16.16; 0x10000 is full size */
+    Vec2S32        scale;             /* 0x40 16.16; 0x10000 is full size */
     u8             unk_48;            /* 0x48 - commu00 calls it the reset flag */
     u8             unk_49;            /* 0x49 */
     u8             unk_4A;            /* 0x4A - the world slot mode seed */
@@ -235,7 +235,7 @@ typedef struct Actor {
 } Actor;
 
 ASSERT_SIZE(Actor, ACTOR_SIZE);
-ASSERT_OFFSET(Actor, flags, 0x00);
+ASSERT_OFFSET(Actor, header, 0x00);
 ASSERT_OFFSET(Actor, direction_08, 0x08);
 ASSERT_OFFSET(Actor, vx, 0x0C);
 ASSERT_OFFSET(Actor, vy, 0x10);

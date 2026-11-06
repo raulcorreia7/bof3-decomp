@@ -13,6 +13,6 @@ MATCH void func_801E69C0(void) {
     next           = g_Task->unk_09 + 1;
     g_Task->unk_09 = next;
     if (next == 0xFFu) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }

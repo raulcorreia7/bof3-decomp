@@ -19,7 +19,7 @@ MATCH void func_801B036C(void) {
             g_Task->unk_0A       = 2;
             g_Task->unk_0B       = 0;
             func_801B5BDC(g_Task->direction_08);
-            g_Task->step = 1;
+            g_Task->header.step = 1;
         }
     }
 }

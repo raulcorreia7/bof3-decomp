@@ -27,15 +27,15 @@ MATCH void func_801E1EC0(void) {
     ORDER_LOCK(dst->w0 = src->w0);
     g_BattleEffects[effect_slot & BYTE_MASK].unk_06        = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].handler_index = 0xF;
-    g_BattleEffects[effect_slot & BYTE_MASK].mode          = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].step          = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].header.mode   = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].header.step   = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_03        = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_04        = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_0B        = effect_slot;
     g_BattleEffects[effect_slot & BYTE_MASK].target.party  = g_Task;
-    g_Task->flags |= ACTOR_FLAG_HIDDEN;
-    g_Task->unk_09              = 0x10;
-    g_Task->timer               = 0x10;
-    work                        = g_Task;
-    ((PartyBattler*)work)->step = (((PartyBattler*)work)->step + 1);
+    g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
+    g_Task->unk_09                     = 0x10;
+    g_Task->timer                      = 0x10;
+    work                               = g_Task;
+    ((PartyBattler*)work)->header.step = (((PartyBattler*)work)->header.step + 1);
 }

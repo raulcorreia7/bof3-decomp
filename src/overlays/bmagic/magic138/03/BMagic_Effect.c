@@ -25,7 +25,7 @@ MATCH void func_801EEED8(void) {
 }
 
 MATCH void func_801EEF60(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEFA4(void) {
@@ -34,7 +34,7 @@ MATCH void func_801EEFA4(void) {
     handlers     = D_801EEC10;
     g_ScriptBank = 0x800C3800;
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
-    if (g_Task->flags & 1) {
+    if (g_Task->header.flags & 1) {
         Area_AddActor();
     }
     g_ScriptBank = 0x800D3800;
@@ -65,12 +65,12 @@ MATCH void func_801EF5D0(void) {
     g_Task->unk_2A    = 0;
     Actor_SelectScript(5);
     SND_PlayCue((g_Task->timer & 1) | 0x100);
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF6A4(void) {
     if (func_8014D978() != 0u) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     } else {
         Area_AddActor();
     }

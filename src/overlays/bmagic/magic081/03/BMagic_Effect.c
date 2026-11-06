@@ -14,7 +14,7 @@ MATCH void func_801EEE74(void) {
     saved  = g_Task;
     g_Task = D_801EC2E0->target.party;
     if (func_8014DAEC() & BYTE_MASK) {
-        saved->mode++;
+        saved->header.mode++;
     }
     g_Task = saved;
 }
@@ -36,7 +36,7 @@ MATCH void func_801EEF88(void) {
 }
 
 MATCH void func_801EF014(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF058(void) {
@@ -86,7 +86,7 @@ MATCH void func_801EF44C(void) {
     g_Task->unk_09 = temp_v0_2;
     if ((temp_v0_2 & 0xFF) == 0x10) {
         g_Task->timer = 0x40;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -96,11 +96,11 @@ MATCH void func_801EF614(void) {
     func_800AF764();
     func_801EF6A0();
     BATTLE_ACTIVE_WORK->unk_0B -= 1;
-    g_Task->flags  = 0;
-    g_Task->mode   = 0;
-    g_Task->step   = 0;
-    g_Task->unk_03 = 0;
-    g_Task->unk_04 = 0;
+    g_Task->header.flags = 0;
+    g_Task->header.mode  = 0;
+    g_Task->header.step  = 0;
+    g_Task->unk_03       = 0;
+    g_Task->unk_04       = 0;
 }
 
 INCLUDE_ASM(func_801EF6A0);

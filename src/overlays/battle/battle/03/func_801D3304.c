@@ -15,11 +15,11 @@ MATCH void func_801D3304(void) {
         *battle_half = g_BattleAction->unk_02;
         if (func_800A9A84() & BYTE_MASK) {
             func_801DD14C(g_BattleActiveBattler);
-            BATTLE_ACTIVE_PARTY.mode = 2;
-            BATTLE_ACTIVE_PARTY.step = 0;
-            g_BattleMode             = 3;
-            g_BattleStep             = 0;
-            g_BattleSubStep          = 0;
+            BATTLE_ACTIVE_PARTY.header.mode = 2;
+            BATTLE_ACTIVE_PARTY.header.step = 0;
+            g_BattleMode                    = 3;
+            g_BattleStep                    = 0;
+            g_BattleSubStep                 = 0;
             return;
         }
         if (*battle_half != 0x97) {

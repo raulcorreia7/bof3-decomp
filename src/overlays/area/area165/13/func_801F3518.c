@@ -9,7 +9,7 @@ MATCH void func_801F3518(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(EMI_CUE_ID(2, 1));
         }
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
     Area_Update();
 }

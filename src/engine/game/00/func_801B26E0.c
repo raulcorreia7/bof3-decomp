@@ -12,7 +12,7 @@ MATCH void func_801B26E0(void) {
     if (i < g_PartySize) {
         do {
             TASK_SET(&g_BattlePartyBattlers[i]);
-            if (g_Task->mode == 3) {
+            if (g_Task->header.mode == 3) {
                 g_Task->tint.bytes.unk_5D = -(level << 5);
                 g_Task->tint.bytes.unk_5E = g_Task->tint.bytes.unk_5D;
                 g_Task->tint.bytes.unk_5F = g_Task->tint.bytes.unk_5D;
@@ -25,9 +25,9 @@ MATCH void func_801B26E0(void) {
     if (g_BattlePartyBattlers[0].unk_09 == 0) {
         for (i = 1; i < g_PartySize; i++) {
             TASK_SET(&g_BattlePartyBattlers[i]);
-            if (g_Task->mode == 3) {
+            if (g_Task->header.mode == 3) {
                 GFX_StagePalette(GAME_PALETTE_STAGE + (g_Task->unk_05 << 6), 0);
-                g_Task->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+                g_Task->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
                 ACTOR_CLEAR_TINT();
                 g_Task->tint.bytes.flags = 0;
                 g_Task->unk_09           = 0;
@@ -38,6 +38,6 @@ MATCH void func_801B26E0(void) {
             }
         }
         TASK_SET(g_BattlePartyBattlers);
-        g_BattlePartyBattlers[0].step += 1;
+        g_BattlePartyBattlers[0].header.step += 1;
     }
 }

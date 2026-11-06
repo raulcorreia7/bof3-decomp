@@ -41,8 +41,8 @@ NON_MATCHING void func_801D88E0(s16 arg0, s16 arg1) {
         icon_y = panel_x + 0x1C;
         icon_y <<= 0x10;
         icon_y = icon_y >> 0x10;
-        slot_x = g_Accessories->name;
-        slot_x = g_Accessories->name;
+        slot_x = g_Accessories->header.name;
+        slot_x = g_Accessories->header.name;
         UI_DrawText((s16)icon_y, (s16)(panel_y + 0x1A), 0, 0xCU, ((D_80145028 * 0x14) + slot_x));
         func_800F7094(icon_x, (s16)(panel_y + 0x2C), D_80145026, 3, 0);
         last_x       = icon_y;
@@ -80,8 +80,8 @@ NON_MATCHING void func_801D88E0(s16 arg0, s16 arg1) {
             icon_x = panel_x + 0x1C;
             icon_x <<= 0x10;
             icon_x         = icon_x >> 0x10;
-            accessory_name = g_Accessories->name;
-            accessory_name = g_Accessories->name;
+            accessory_name = g_Accessories->header.name;
+            accessory_name = g_Accessories->header.name;
             UI_DrawText((s16)icon_x, (s16)(panel_y + 0x1A), 0, 0xCU, ((*accessory * 0x14) + accessory_name));
             func_800F7094((s32)slot_x, (s16)(panel_y + 0x2C), D_80145026, 3, 1);
             icon_y = panel_y + 0x2A;

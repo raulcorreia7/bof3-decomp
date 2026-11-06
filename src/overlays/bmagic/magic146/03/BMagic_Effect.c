@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EED18);
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF04C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF090(void) {
@@ -29,8 +29,8 @@ MATCH void func_801EF2FC(void) {
 }
 
 MATCH void func_801EF340(void) {
-    SYS_DISPATCH_BYTE(D_801EF9C4, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801EF9C4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EF604();
     }
 }

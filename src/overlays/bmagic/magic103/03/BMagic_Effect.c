@@ -13,12 +13,12 @@ INCLUDE_ASM(func_801EEC70);
 #include "shared/Effect_StartPlaying.h"
 
 MATCH void func_801EEEC8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEF0C(void) {
-    SYS_DISPATCH_BYTE(D_801F07A0, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F07A0, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF1D8();
         PopMatrix();
@@ -34,7 +34,7 @@ MATCH void func_801EEF94(void) {
     COORD_INT(g_Task->pos.z) = COORD_INT(src->pos.z);
     g_Task->unk_09           = 0;
     g_Task->timer            = 0;
-    g_Task->step             = g_Task->step + 1;
+    g_Task->header.step      = g_Task->header.step + 1;
 }
 
 MATCH void func_801EEFF4(void) {
@@ -47,7 +47,7 @@ MATCH void func_801EEFF4(void) {
     counter        = g_Task->unk_09 + 1;
     g_Task->unk_09 = counter;
     if ((counter & 0xFF) == 0x8) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -71,8 +71,8 @@ INCLUDE_ASM(func_801EF1D8);
 INCLUDE_ASM(func_801EF7CC);
 
 MATCH void func_801EFB10(void) {
-    SYS_DISPATCH_BYTE(D_801F07C4, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F07C4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EFE20();
     }
 }
@@ -90,7 +90,7 @@ MATCH void func_801EFB88(void) {
         work->pos.z.fixed = g_BattleSelectedActor->pos.z.fixed + D_801F07AC[work->unk_0B].z;
         work->unk_09      = 0;
         g_Task->timer     = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -102,7 +102,7 @@ MATCH void func_801EFC70(void) {
     temp_v0        = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v0;
     if ((temp_v0 & 0xFF) == 8) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -118,7 +118,7 @@ MATCH void func_801EFCF4(void) {
     work->unk_09 = counter;
     work->unk_30.half -= drop;
     if ((counter & 0xFF) == 0x1C) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -141,8 +141,8 @@ MATCH void func_801EFD74(void) {
 INCLUDE_ASM(func_801EFE20);
 
 MATCH void func_801F02BC(void) {
-    SYS_DISPATCH_BYTE(D_801F07D4, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F07D4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801F04E0();
         PopMatrix();
@@ -158,7 +158,7 @@ MATCH void func_801F0344(void) {
     g_Task->pos.z       = src->pos.z;
     g_Task->unk_09      = 0;
     g_Task->timer       = 0;
-    g_Task->step        = g_Task->step + 1;
+    g_Task->header.step = g_Task->header.step + 1;
 }
 
 MATCH void func_801F03A4(void) {
@@ -170,7 +170,7 @@ MATCH void func_801F03A4(void) {
     work->unk_09++;
     if (work->unk_09 == 8) {
         work = g_Task;
-        work->step++;
+        work->header.step++;
     }
 }
 

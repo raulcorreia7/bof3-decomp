@@ -15,6 +15,6 @@ MATCH void func_801F4624(void) {
     if (count == 0) {
         SND_PlayCue(EMI_CUE_ID(2, 15));
         work3 = (Actor*)g_Task;
-        work3->mode++;
+        work3->header.mode++;
     }
 }

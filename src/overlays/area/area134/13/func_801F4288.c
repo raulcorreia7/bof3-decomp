@@ -9,7 +9,7 @@ MATCH void func_801F4288(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
     func_801F49A0();
 }

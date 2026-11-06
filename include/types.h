@@ -1,9 +1,11 @@
 #ifndef BASE_TYPES_H
 #define BASE_TYPES_H
 
-#include <stddef.h>
+/* The fixed-width types and compile-time layout checks shared by every game
+ * header. A record asserts its size and each proven member offset where it is
+ * declared, so a wrong layout fails the build. */
 
-/* clang-format on */
+#include <stddef.h>
 
 /*
  * C89-compatible compile-time assertions. The assertion's identifier comes
@@ -24,10 +26,6 @@
 
 #define ASSERT_OFFSET(type, member, expected_offset) \
     STATIC_ASSERT(DECOMP_JOIN(type, DECOMP_JOIN(_offset_, member)), DECOMP_OFFSETOF(type, member) == (expected_offset))
-
-/* The fixed-width types and compile-time layout checks shared by every game
- * header. A record asserts its size and each proven member offset where it is
- * declared, so a wrong layout fails the build. */
 
 #ifndef __cplusplus
 enum {

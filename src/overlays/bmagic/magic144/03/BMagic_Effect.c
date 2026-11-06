@@ -15,8 +15,8 @@ MATCH void func_801EEE9C(void) {
 }
 
 MATCH void func_801EEEE0(void) {
-    SYS_DISPATCH_BYTE(D_801F04D4, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F04D4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF294();
         PopMatrix();
@@ -35,7 +35,7 @@ MATCH void func_801EF078(void) {
         func_80196718(*actor);
         func_8019651C(*actor, -8, -8, -8, 1);
         func_800A9820(g_BattleTargetSelector);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -65,8 +65,8 @@ MATCH void func_801EF510(void) {
 }
 
 MATCH void func_801EF554(void) {
-    SYS_DISPATCH_BYTE(D_801F04EC, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F04EC, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_800AF764();
         func_801EF818();
     }

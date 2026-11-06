@@ -58,22 +58,22 @@ MATCH void func_8019BBA4(void) {
                 limit = -limit;
             }
             if (limit >= 16385) {
-                g_Task->mode = 4;
+                g_Task->header.mode = 4;
             } else {
                 limit = g_Task->vy;
                 if (limit < 0) {
                     limit = -limit;
                 }
                 if (limit >= 16385) {
-                    g_Task->mode = 4;
+                    g_Task->header.mode = 4;
                 } else if ((func_8019C4F0(COORD_INT(g_Task->x), COORD_INT(g_Task->y)) & BYTE_MASK) != 0) {
-                    g_Task->mode = 4;
+                    g_Task->header.mode = 4;
                 } else {
                     g_Task->option_flags = 0;
                     g_Task->unk_0A       = 0;
                     func_8019BF78();
                     Actor_SelectScript(0);
-                    g_Task->mode = 5;
+                    g_Task->header.mode = 5;
                 }
             }
         }

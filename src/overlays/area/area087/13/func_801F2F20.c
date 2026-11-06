@@ -28,5 +28,5 @@ MATCH void func_801F2F20(void) {
         g_Task->unk_0B = 0;
     }
 
-    D_801F5734[g_Task->mode]();
+    D_801F5734[g_Task->header.mode]();
 }

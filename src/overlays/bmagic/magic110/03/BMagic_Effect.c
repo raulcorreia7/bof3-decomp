@@ -23,7 +23,7 @@ MATCH void func_801EEEDC(void) {
         temp_v1_2      = g_Task->unk_09 + 1;
         g_Task->unk_09 = temp_v1_2;
         if ((temp_v1_2 & 0xFF) == 0x10) {
-            g_Task->mode += 1;
+            g_Task->header.mode += 1;
         }
     }
 }
@@ -45,7 +45,7 @@ MATCH void func_801EF068(void) {
         g_Task->unk_09 = temp_v0_2;
         if (!(temp_v0_2 & 0xFF)) {
             func_800A9820(g_BattleTargetSelector);
-            g_Task->mode += 1;
+            g_Task->header.mode += 1;
         }
     }
 }
@@ -55,13 +55,13 @@ MATCH void func_801EF068(void) {
 INCLUDE_ASM(func_801EF148);
 
 MATCH void func_801EF3F8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF43C(void) {
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_BYTE(D_801F0478, g_Task->step);
-    if ((g_Task->flags & 1) && g_Task->step >= 2) {
+    SYS_DISPATCH_BYTE(D_801F0478, g_Task->header.step);
+    if ((g_Task->header.flags & 1) && g_Task->header.step >= 2) {
         func_8014D290();
     }
     g_ScriptBank = 0x800D3800;
@@ -80,7 +80,7 @@ MATCH void func_801EF648(void) {
     work->unk_30.half -= 2;
     work->scale.y += 0x2000;
     if (work->scale.y > 0x17FFF) {
-        work->step++;
+        work->header.step++;
     }
 }
 
@@ -92,7 +92,7 @@ MATCH void func_801EF6B4(void) {
     g_Task->unk_30.half = temp_v1;
     if ((s16)temp_v1 < 0xB2) {
         D_801EB4E0->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -109,8 +109,8 @@ MATCH void func_801EF740(void) {
 }
 
 MATCH void func_801EF7B4(void) {
-    SYS_DISPATCH_BYTE(D_801F048C, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F048C, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFA48();
         func_801EFC98();
@@ -126,7 +126,7 @@ MATCH void func_801EF8C0(void) {
 
     work = g_Task;
     if ((work->unk_14 += 0x40) == 0xC00) {
-        work->step++;
+        work->header.step++;
     }
 }
 
@@ -141,8 +141,8 @@ INCLUDE_ASM(func_801EFA48);
 INCLUDE_ASM(func_801EFC98);
 
 MATCH void func_801EFFB8(void) {
-    SYS_DISPATCH_BYTE(D_801F049C, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F049C, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801F0138();
         func_801F01E8();
         PopMatrix();

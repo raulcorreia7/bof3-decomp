@@ -6,7 +6,7 @@ MATCH void func_801E347C(void) {
     s32           old34;
 
     work = g_Task;
-    work->flags &= ~ACTOR_FLAG_HIDDEN;
+    work->header.flags &= ~ACTOR_FLAG_HIDDEN;
     func_801E2314(0);
     old34          = g_Task->pos.x.fixed;
     old38          = g_Task->pos.y.fixed;
@@ -33,6 +33,6 @@ MATCH void func_801E347C(void) {
         work->pos.x.fixed = depth;
         func_801DD350(work);
     }
-    work       = g_Task;
-    work->step = work->step + 1;
+    work              = g_Task;
+    work->header.step = work->header.step + 1;
 }

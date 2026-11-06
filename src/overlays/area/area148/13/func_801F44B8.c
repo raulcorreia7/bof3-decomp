@@ -6,6 +6,6 @@ MATCH void func_801F44B8(void) {
     ((Actor*)g_Task)->unk_0A -= 1;
     if (((Actor*)g_Task)->unk_0A == 0) {
         ((Actor*)g_Task)->unk_09 += 1;
-        ((Actor*)g_Task)->mode = 1;
+        ((Actor*)g_Task)->header.mode = 1;
     }
 }

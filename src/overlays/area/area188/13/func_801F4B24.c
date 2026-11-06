@@ -6,8 +6,8 @@ MATCH void func_801F4B24(void) {
 
     slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (slot != GAME_NONE) {
-        row        = &g_ActorSlots[slot];
-        row->flags = 1;
-        row->type  = 0xB9;
+        row               = &g_ActorSlots[slot];
+        row->header.flags = 1;
+        row->type         = 0xB9;
     }
 }

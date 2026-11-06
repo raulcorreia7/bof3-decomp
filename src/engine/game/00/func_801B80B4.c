@@ -20,9 +20,9 @@ MATCH void func_801B80B4(void) {
         if (g_Task->unk_05 == 0) {
             g_AreaWalkFlags &= ~AREA_WALK_ENTRY_ACTIVE;
         }
-        g_Task->unk_09 = 0;
-        g_Task->unk_0A = 0;
-        g_Task->mode   = 1;
+        g_Task->unk_09      = 0;
+        g_Task->unk_0A      = 0;
+        g_Task->header.mode = 1;
         ACTOR_CLEAR_STEP();
         g_Task->unk_03 = 0;
         g_Task->unk_04 = 0;

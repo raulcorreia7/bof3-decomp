@@ -10,13 +10,13 @@ MATCH void func_801F3608(void) {
     scratch = g_Task;
     scratch->unk_2E -= 0x10;
     if ((s16)scratch->unk_2E < -0x2F) {
-        scratch->step = 0;
+        scratch->header.step = 0;
     }
 
     if (D_801454F2 != 2) {
-        mode          = 1;
-        scratch       = g_Task;
-        scratch->step = mode;
+        mode                 = 1;
+        scratch              = g_Task;
+        scratch->header.step = mode;
     }
 
     Area_DrawHud(0x10, g_Task->unk_2E);

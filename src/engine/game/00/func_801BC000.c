@@ -21,14 +21,14 @@ MATCH void func_801BC000(void) {
 
     tmp5 = g_Task;
     if (g_GameStateIndex == GAME_REQUEST_SCENE_CAMERA) {
-        tmp5->mode = 0xE;
+        tmp5->header.mode = 0xE;
         goto block_26; /* retail branch */
     }
     if (g_AreaWalkFlags & AREA_WALK_TRANSITION) {
-        tmp5->mode   = 5;
-        g_Task->step = 0;
-        tmp9         = g_Task;
-        tmp9->unk_0B = 0;
+        tmp5->header.mode   = 5;
+        g_Task->header.step = 0;
+        tmp9                = g_Task;
+        tmp9->unk_0B        = 0;
         return;
     }
     bit = g_AreaWalkFlags & AREA_WALK_STEP_ACTIVE;
@@ -45,7 +45,7 @@ MATCH void func_801BC000(void) {
             {
                 if (*D_80145E91 == 0xA) {
                     Actor_RequestScript(g_Task->direction_08);
-                    g_Task->mode = 7;
+                    g_Task->header.mode = 7;
                     goto block_26; /* retail branch */
                 }
                 if ((func_801BD938() & BYTE_MASK) == 0) {
@@ -88,36 +88,36 @@ MATCH void func_801BC000(void) {
                     func_801B0DFC();
                     g_GameState->mode_12B.s8_value = 1;
                     tmp6                           = g_Task;
-                    tmp6->step                     = 1;
+                    tmp6->header.step              = 1;
                     return;
                 case_b:
                     Actor_ClearVelocity();
                     Actor_RequestScript(g_Task->direction_08);
                     g_GameState->mode_12B.s8_value = 0;
                 block_26:
-                    tmp7       = g_Task;
-                    tmp7->step = 0;
+                    tmp7              = g_Task;
+                    tmp7->header.step = 0;
                     return;
                 case_5:
                     g_GameState->counter_11C.s8_value = 3;
                     Actor_RequestScript(g_Task->direction_08);
                     g_GameState->mode_12B.s8_value = 4;
-                    g_Task->mode                   = 2;
+                    g_Task->header.mode            = 2;
                     tmp8                           = g_Task;
-                    tmp8->step                     = 3;
+                    tmp8->header.step              = 3;
                     return;
                 case_6:
                     g_GameState->counter_11C.s8_value = 3;
                     Actor_RequestScript(g_Task->direction_08);
                     g_GameState->mode_12B.s8_value = 3;
-                    g_Task->mode                   = 8;
+                    g_Task->header.mode            = 8;
                     tmp12                          = g_Task;
                     tmp4                           = tmp12->direction_08;
                     if ((tmp4 == 1) || (tmp4 == 7)) {
-                        tmp12->step = 0;
+                        tmp12->header.step = 0;
                         return;
                     }
-                    tmp12->step = 1;
+                    tmp12->header.step = 1;
                     return;
                 }
                 return;

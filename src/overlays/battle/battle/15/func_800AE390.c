@@ -5,5 +5,5 @@ MATCH void func_800AE390(void) {
 
     BATTLE_WORK->unk_09 = 0;
     work                = (PartyBattler*)g_Task;
-    work->mode          = (work->mode + 1);
+    work->header.mode   = (work->header.mode + 1);
 }

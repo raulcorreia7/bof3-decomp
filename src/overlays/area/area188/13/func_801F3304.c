@@ -13,5 +13,5 @@ MATCH void func_801F3304(void) {
     work->unk_09 = 8;
     work->unk_2E = 0;
     work->unk_6C = z;
-    g_Task->mode++;
+    g_Task->header.mode++;
 }

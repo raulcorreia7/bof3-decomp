@@ -32,7 +32,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
     UI_DrawWindow(x, (y + 1) & HALF_MASK, 0x8B, 0x9E, 0xF0, D_80144952);
     for (slot = 0; slot < FISHING_ACCESSORY_SLOT_COUNT; slot++) {
         id = *slot_list;
-        if (g_Accessories[id].flags != 0xB) {
+        if (g_Accessories[id].header.flags != 0xB) {
             slot_list++;
             continue;
         }

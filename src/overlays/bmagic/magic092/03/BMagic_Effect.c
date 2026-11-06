@@ -11,12 +11,12 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EF000(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF044(void) {
-    SYS_DISPATCH_BYTE(D_801F07C0, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F07C0, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF580();
         PopMatrix();
@@ -60,8 +60,8 @@ MATCH void func_801EF7FC(void) {
 }
 
 MATCH void func_801EF840(void) {
-    SYS_DISPATCH_BYTE(D_801F07D8, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F07D8, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_800AF764();
         func_801EFB04();
     }

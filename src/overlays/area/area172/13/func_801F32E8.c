@@ -12,6 +12,6 @@ MATCH void func_801F32E8(void) {
     if (g_UiWindowEffectBusy == 0) {
         UI_SetMode(9);
         g_AreaDrawFlags = 0;
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

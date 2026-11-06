@@ -2,7 +2,7 @@
 
 MATCH void func_801F4AAC(void) {
     Actor* work;
-    g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     g_Task->tint.bytes.flags       = 1;
     work                           = g_Task;
     work->tint.signed_bytes.unk_5F = -0x40;

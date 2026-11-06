@@ -17,8 +17,8 @@ MATCH void Area_SlideActorDown(void) {
     FIELD(s32, work, 0x40) += 0x2000;
 
     if (reload[9] == 0) {
-        reload[0x48] = 0;
-        g_Task->mode = 3;
+        reload[0x48]        = 0;
+        g_Task->header.mode = 3;
     }
 
     Area_AddActor();

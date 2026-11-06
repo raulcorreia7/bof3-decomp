@@ -17,7 +17,7 @@ MATCH void func_801EEFE0(void) {
         timer          = g_Task->unk_09 - 1;
         g_Task->unk_09 = timer;
         if (!(timer & 0xFF)) {
-            g_Task->mode += 1;
+            g_Task->header.mode += 1;
         }
     }
 }
@@ -33,7 +33,7 @@ MATCH void func_801EF210(void) {
 MATCH void func_801EF254(void) {
     BmagicEffectFuncs handlers;
 
-    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC14, step);
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC14, header.step);
 }
 
 INCLUDE_ASM(func_801EF2CC);
@@ -51,7 +51,7 @@ MATCH void func_801EF444(void) {
         func_80196718(battler);
         g_Task->timer  = func_8019651C(battler, 0, 0, 0, 1);
         g_Task->unk_09 = 8;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

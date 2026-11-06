@@ -5,7 +5,7 @@ MATCH void func_800C1848(void) {
     g_BattleCurrentEnemy->unk_E4 = func_800C18EC;
     g_BattleCurrentEnemy->unk_E8 = D_800C1C1C;
     g_BattleCurrentEnemy->action_flags |= 8;
-    g_Task->mode = 2;
+    g_Task->header.mode = 2;
     func_8014D978();
     if (SYS_TestFlag(g_SceneFlags, 2) != 0) {
         Battle_LoadEnemyBattler((g_BattleCurrentEnemy->slot - 3) & 0xFF, func_800AC704(0x96) & 0xFF);

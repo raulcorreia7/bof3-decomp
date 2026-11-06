@@ -8,6 +8,6 @@ MATCH void func_801B3690(void) {
     if (g_GameState->mode_12B.u8_value == 0) {
         Actor_RequestScript(g_Task->direction_08);
         Party_ClearBattlerState(0);
-        g_Task->mode = 1;
+        g_Task->header.mode = 1;
     }
 }

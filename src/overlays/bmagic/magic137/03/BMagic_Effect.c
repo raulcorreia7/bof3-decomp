@@ -24,8 +24,8 @@ MATCH void func_801EEFD4(void) {
 }
 
 MATCH void func_801EF018(void) {
-    SYS_DISPATCH_BYTE(D_801F0104, g_Task->step);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(D_801F0104, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
         func_801EF3B0();
         func_801EF4C4();
         PopMatrix();
@@ -48,7 +48,7 @@ MATCH void func_801EF174(void) {
     count          = g_Task->unk_09 + 2;
     g_Task->unk_09 = count;
     if (count == 0xC0) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -66,7 +66,7 @@ MATCH void func_801EF21C(void) {
     count          = g_Task->unk_09 - 2;
     g_Task->unk_09 = count;
     if (count == 0x60) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -78,7 +78,7 @@ INCLUDE_ASM(func_801EF4C4);
 
 MATCH void func_801EFC58(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 2, g_Task);
-    if (g_Task->flags != 0) {
+    if (g_Task->header.flags != 0) {
         func_801EFDF8();
     }
 }
@@ -101,7 +101,7 @@ MATCH void func_801F001C(void) {
     Actor_SelectScript(3);
     func_8014D978();
     Area_AddActor();
-    g_Task->step++;
+    g_Task->header.step++;
 }
 
 #include "overlays/bmagic/Effect_AddActorStepOnPlaying.h"

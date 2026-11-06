@@ -9,5 +9,5 @@ MATCH void func_801F3C14(void) {
     COORD_INT(work->z) = -0x100;
     work->unk_32       = 0;
     g_Task->unk_0B     = 0;
-    g_Task->step++;
+    g_Task->header.step++;
 }

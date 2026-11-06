@@ -13,7 +13,7 @@ MATCH void func_801EEC14(void) {
     Bmagic_DispatchTaskPair(func_801EED1C, Effect_PlayOnZeroTick);
     count = 0;
     do {
-        if (BMAGIC_EFFECT_SLOTS[(u8)count].flags & 1) {
+        if (BMAGIC_EFFECT_SLOTS[(u8)count].header.flags & 1) {
             saved_work   = g_Task;
             saved_active = D_801EB4E0;
             swap         = BMAGIC_EFFECT_SLOTS[(u8)count].target.party;
@@ -33,15 +33,15 @@ INCLUDE_ASM(func_801EED1C);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEF78(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEFBC(void) {
     MagicTaskFuncs handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 3) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 3) {
         func_801EF2F0();
         func_801EF3A0();
         PopMatrix();
@@ -63,7 +63,7 @@ MATCH void func_801EF06C(void) {
     work->unk_0B      = 0;
     g_Task->unk_09    = 0;
     g_Task->timer     = 0;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 INCLUDE_ASM(func_801EF124);
@@ -74,7 +74,7 @@ MATCH void func_801EF250(void) {
     timer         = g_Task->timer + 1;
     g_Task->timer = timer;
     if (timer == 64) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -108,7 +108,7 @@ MATCH void func_801EF880(void) {
 
 MATCH void func_801EF8C4(void) {
     g_ScriptBank = 0x800C3800u;
-    SYS_DISPATCH_BYTE(D_801F0078, g_Task->step);
+    SYS_DISPATCH_BYTE(D_801F0078, g_Task->header.step);
     func_800AF764();
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
@@ -134,7 +134,7 @@ MATCH void func_801EF930(void) {
     g_Task->unk_26           = 0;
     g_Task->unk_27           = 0xA0;
     g_Task->unk_28           = 0;
-    g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     tint                = -0x40;
     g_Task->unk_5D      = tint;
     g_Task->unk_5E      = tint;
@@ -147,7 +147,7 @@ MATCH void func_801EF930(void) {
     g_Task->unk_2B      = 0;
     Actor_SelectScript((rand() & 1) + 1);
     g_Task->timer = rand() & 0x3F;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EFB68(void) {
@@ -157,9 +157,9 @@ MATCH void func_801EFB68(void) {
     COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) - 8;
     if ((func_8014DAEC() & 0xFF) || (COORD_INT(g_Task->pos.z) < g_Task->unk_14)) {
         D_801EB4E0->unk_0B -= 1;
-        g_Task->flags = 0;
-        g_Task->mode  = 0;
-        g_Task->step  = 0;
+        g_Task->header.flags = 0;
+        g_Task->header.mode  = 0;
+        g_Task->header.step  = 0;
     }
 }
 
