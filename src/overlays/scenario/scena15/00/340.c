@@ -348,7 +348,7 @@ MATCH void func_801FDDC0(void* entity) {
     u8 message;
 
     message = D_801FE71C[((Actor*)entity)->callback_index];
-    if (g_GameAreaId == 0xC0) {
+    if (g_GameAreaId == AREA_ID_DESERT_CAMP_SECOND) {
         Message_StartAreaMessage(func_801F326C(message));
     } else {
         Message_StartAreaMessage(func_801F37AC(message));

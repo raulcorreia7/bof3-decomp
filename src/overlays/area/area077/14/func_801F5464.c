@@ -5,7 +5,7 @@ MATCH void func_801F5464(void) {
 
     work->pos.y.fixed -= 0x2000;
     COORD_INT(work->pos.z) -= 0x10;
-    if (work->pos.y.fixed == 0x340000) {
+    if (work->pos.y.fixed == TO_COORD(52)) {
         work->header.step = 1;
     }
     func_801F54B8();

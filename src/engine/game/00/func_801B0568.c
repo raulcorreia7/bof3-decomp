@@ -91,8 +91,8 @@ MATCH void func_801B0568(void) {
                     }
                 } else if (Area_CanStartEncounter() & BYTE_MASK) {
                     func_801B6418();
-                    g_GameEntryPosX   = 0x190000;
-                    g_GameEntryPosY   = 0x190000;
+                    g_GameEntryPosX   = TO_COORD(25);
+                    g_GameEntryPosY   = TO_COORD(25);
                     g_GameContextKind = 4;
                     g_Task->unk_06    = 4U;
                     g_AreaWalkFlags |= AREA_WALK_TRANSITION;

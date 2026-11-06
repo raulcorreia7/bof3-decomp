@@ -1,8 +1,8 @@
 #include "area103_13.h"
 
 MATCH void func_801F4374(void) {
-    g_Task->pos.x.fixed      = 0x430000;
-    g_Task->pos.y.fixed      = 0x1A0000;
+    g_Task->pos.x.fixed      = TO_COORD(67);
+    g_Task->pos.y.fixed      = TO_COORD(26);
     COORD_INT(g_Task->pos.z) = -0x100;
     g_Task->unk_32           = 0x80;
     g_Task->unk_09           = 0;

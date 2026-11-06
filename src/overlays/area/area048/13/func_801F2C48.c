@@ -13,5 +13,5 @@ MATCH void func_801F2C48(void) {
     }
     work->header.mode = step;
     work              = g_Task;
-    work->pos.z.fixed = 0x1000000;
+    work->pos.z.fixed = TO_COORD(256);
 }

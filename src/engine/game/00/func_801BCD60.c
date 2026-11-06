@@ -63,7 +63,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         }
         val12 = MAX(val12, val1);
         if (val12 > 0xFFFFF) {
-            val3 = ((s32)(val12 + 0xFFF10000) >> 0x10) + 1;
+            val3 = ((s32)(val12 + TO_COORD(-15)) >> 0x10) + 1;
         } else {
             val3 = 1;
         }
@@ -98,8 +98,8 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                 val5 = g_Task->pos.x.fixed;
                 if (tmp1 > 1) {
                     val8 = tmp1;
-                    val4 = val5 + 0xFFFF0000;
-                    val3 = val5 + 0x10000;
+                    val4 = val5 + TO_COORD(-1);
+                    val3 = val5 + TO_COORD(1);
                 loop_21:
                     tmp10                    = g_Task;
                     FIELD(s32, tmp10, 0x34u) = val3;
@@ -113,8 +113,8 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                         if (func_801C3E40(FIELD(s32, tmp19, 0x34u), FIELD(s32, tmp19, 0x38u), FIELD(u8, tmp19, 0x70u),
                                           Area_ReadHeight(val4, FIELD(s32, tmp11, 0x38u))) &
                             0xFF) {
-                            val4 += 0xFFFF0000;
-                            val3 += 0x10000;
+                            val4 += TO_COORD(-1);
+                            val3 += TO_COORD(1);
                             val0 += 1;
                             if (val0 < val8) {
                                 goto loop_21; /* retail branch */
@@ -133,8 +133,8 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                     FIELD(s32, tmp20, 0x34u) = val5;
                     if (val0 < tmp2) {
                         val5 = tmp2;
-                        val4 = tmp4 + 0xFFFF0000;
-                        val3 = tmp4 + 0x10000;
+                        val4 = tmp4 + TO_COORD(-1);
+                        val3 = tmp4 + TO_COORD(1);
                     loop_27:
                         tmp12                    = g_Task;
                         FIELD(s32, tmp12, 0x38u) = val3;
@@ -149,8 +149,8 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                                               FIELD(u8, tmp22, 0x70u),
                                               Area_ReadHeight(FIELD(s32, tmp13, 0x34u), val4)) &
                                 0xFF) {
-                                val4 += 0xFFFF0000;
-                                val3 += 0x10000;
+                                val4 += TO_COORD(-1);
+                                val3 += TO_COORD(1);
                                 val0 += 1;
                                 if (val0 < val5) {
                                     goto loop_27; /* retail branch */
@@ -175,10 +175,10 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             tmp9  = g_Task;
             val10 = FIELD(s32, tmp9, 0x34u) - D_80145EC4;
             val10 = ABS(val10);
-            if (val10 <= 0x60000) {
+            if (val10 <= TO_COORD(6)) {
                 val11 = FIELD(s32, tmp9, 0x38u) - D_80145EC8;
                 val11 = ABS(val11);
-                if (val11 > 0x60000) {
+                if (val11 > TO_COORD(6)) {
                     goto block_39; /* retail branch */
                 }
                 FIELD(s32, tmp9, 0x34u) = val9;

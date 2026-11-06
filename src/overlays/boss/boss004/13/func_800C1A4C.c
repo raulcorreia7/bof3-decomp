@@ -10,10 +10,10 @@ MATCH void func_800C1A4C(void) {
         Area_FindSceneRecord(0x5F);
         if (g_BattleEncounter == 5) {
             ((PartyBattler*)g_Task)->unk_2A = 0;
-            ((PartyBattler*)g_Task)->pos.y.fixed += 0x18000;
+            ((PartyBattler*)g_Task)->pos.y.fixed += TO_COORD(1) + COORD_HALF;
         } else {
             ((PartyBattler*)g_Task)->unk_2A = 1;
-            ((PartyBattler*)g_Task)->pos.x.fixed += 0x18000;
+            ((PartyBattler*)g_Task)->pos.x.fixed += TO_COORD(1) + COORD_HALF;
         }
         COORD_INT(((PartyBattler*)g_Task)->pos.z) =
             Area_SampleHeight(((PartyBattler*)g_Task)->pos.x.fixed, ((PartyBattler*)g_Task)->pos.y.fixed);

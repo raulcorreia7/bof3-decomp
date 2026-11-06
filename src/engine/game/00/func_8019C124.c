@@ -9,7 +9,7 @@ MATCH void func_8019C124(s32 step_byte) {
         vel = work->vx;
         if (vel > 0) {
             if ((step_byte & BYTE_MASK) == 0) {
-                work->unk_18 = (work->pos.x.fixed + 0x10000) & 0xFFFF0000;
+                work->unk_18 = (work->pos.x.fixed + TO_COORD(1)) & 0xFFFF0000;
                 goto set_state; /* the x tile advanced by one */
             }
         } else if (vel < 0) {
@@ -22,7 +22,7 @@ MATCH void func_8019C124(s32 step_byte) {
         vel = work->vy;
         if (vel > 0) {
             if ((step_byte & BYTE_MASK) == 0) {
-                work->unk_18 = (work->pos.y.fixed + 0x10000) & 0xFFFF0000;
+                work->unk_18 = (work->pos.y.fixed + TO_COORD(1)) & 0xFFFF0000;
                 goto set_state; /* the y tile advanced by one */
             }
         } else if (vel < 0) {

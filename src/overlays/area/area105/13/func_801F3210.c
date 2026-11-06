@@ -8,8 +8,8 @@ MATCH s32 func_801F3210(s32 x, s32 y) {
             facing        = g_BattlePartyBattlers[0].facing;
             SP_REF(u8, 0) = g_BattlePartyBattlers[0].facing;
             if (facing >= 2U) {
-                if (facing != 2) {
-                    if ((y >> 16) >= 0x1E) {
+                if (facing != FACING_UP_RIGHT) {
+                    if ((y >> 16) >= 30) {
                         Game_SetScriptActive();
                         g_SceneEventMode = 0x3D;
                         g_SceneEventStep = 0;

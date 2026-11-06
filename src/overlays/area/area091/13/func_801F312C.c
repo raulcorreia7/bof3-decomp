@@ -14,8 +14,8 @@ MATCH void func_801F312C(void) {
             value = 1;
         }
         func_801BE1B0(value);
-        g_AreaScrollTargetX = 0x1F8000;
-        g_AreaScrollTargetY = 0x1A0000;
+        g_AreaScrollTargetX = TO_COORD(31) + COORD_HALF;
+        g_AreaScrollTargetY = TO_COORD(26);
         g_Task              = actor;
         g_AreaCameraStep    = 0x20;
         actor->unk_04 += 1;

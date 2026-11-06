@@ -93,7 +93,7 @@ MATCH void func_801F7BA8(void) {
 
     work  = g_Task;
     timer = work->unk_09 - 1;
-    work->pos.y.fixed += 0x10000;
+    work->pos.y.fixed += TO_COORD(1);
     work->unk_09 = timer;
     if (timer == 0) {
         g_Task->unk_09      = 0x10;
@@ -109,7 +109,7 @@ MATCH void func_801F7C98(void) {
 
     work  = g_Task;
     timer = work->unk_09 - 1;
-    work->pos.y.fixed -= 0x10000;
+    work->pos.y.fixed -= TO_COORD(1);
     work->unk_09 = timer;
     if (timer == 0) {
         g_Task->unk_09      = 0x80;
@@ -313,9 +313,9 @@ MATCH void func_801F9C00(void) {
     Actor* work;
 
     work              = g_Task;
-    work->pos.x.fixed = 0x270000;
-    work->pos.y.fixed = 0x80000;
-    work->pos.z.fixed = 0x8000000;
+    work->pos.x.fixed = TO_COORD(39);
+    work->pos.y.fixed = TO_COORD(8);
+    work->pos.z.fixed = TO_COORD(2048);
     work->vz          = 0;
     work->header.mode += 1;
     SND_PlayCue(0x204);
@@ -328,9 +328,9 @@ MATCH void func_801F9CE0(void) {
     Actor* work;
 
     work              = g_Task;
-    work->pos.x.fixed = 0x190000;
-    work->pos.y.fixed = 0xF0000;
-    work->pos.z.fixed = 0x6000000;
+    work->pos.x.fixed = TO_COORD(25);
+    work->pos.y.fixed = TO_COORD(15);
+    work->pos.z.fixed = TO_COORD(1536);
     work->vz          = 0;
     work->header.mode += 1;
     SND_PlayCue(0x20A);
@@ -456,7 +456,7 @@ MATCH void func_801FE12C(void) {
 }
 
 MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
-    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_ADULT) && (arg0 == 0x338000) && (((arg1 >> 0x10) - 0x27) < 2U)) {
+    if ((g_GameAreaId == AREA_ID_DAUNA_MINE_ADULT) && (arg0 == TO_COORD(51) + COORD_HALF) && (((arg1 >> 0x10) - 39) < 2U)) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             Game_SetScriptActive();
             D_80146874 = 4;
@@ -473,7 +473,7 @@ MATCH s32 func_801FE170(s32 arg0, s32 arg1) {
         goto block_7;
     }
 block_7:
-    if ((g_GameAreaId == AREA_ID_MOUNT_LEVETT) && (arg0 == 0x388000) && (((arg1 >> 0x10) - 0x2E) < 4U)) {
+    if ((g_GameAreaId == AREA_ID_MOUNT_LEVETT) && (arg0 == TO_COORD(56) + COORD_HALF) && (((arg1 >> 0x10) - 46) < 4U)) {
         SYS_SetFlag(g_SceneFlags, 0x16U);
     }
     return 0;

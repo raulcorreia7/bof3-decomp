@@ -19,8 +19,8 @@ MATCH void func_801F73FC(void) {
     s32    height;
 
     work              = g_Task;
-    work->pos.x.fixed = 0x600000;
-    work->pos.y.fixed = 0x110000;
+    work->pos.x.fixed = TO_COORD(96);
+    work->pos.y.fixed = TO_COORD(17);
     height            = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
 
     work              = g_Task;

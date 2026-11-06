@@ -23,9 +23,9 @@ MATCH void func_801BD394(void) {
     count = slot->unk_09;
     x     = slot->pos.x.fixed + slot->vx * count;
     y     = slot->pos.y.fixed + slot->vy * count;
-    range = 0x18000;
+    range = TO_COORD(1) + COORD_HALF;
     if (slot->state_70.byte != 0) {
-        range = 0x20000;
+        range = TO_COORD(2);
     }
     dx = work->pos.x.fixed - x;
     dx = ABS(dx);

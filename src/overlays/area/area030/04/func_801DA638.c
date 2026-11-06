@@ -19,7 +19,7 @@ MATCH void func_801DA638(void) {
         Actor_RequestScript(2);
 
         work                = FISHING_STATE;
-        work->y_38.pos_y    = 0x410000;
+        work->y_38.pos_y    = TO_COORD(65);
         work->step_timer_09 = 0;
 
         tail               = FISHING_STATE;

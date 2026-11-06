@@ -12,9 +12,9 @@ MATCH void func_8011700C(void) {
 }
 
 MATCH void func_80117048(void) {
-    ((Actor*)g_Task)->pos.x.fixed = 0xB8000;
-    ((Actor*)g_Task)->pos.y.fixed = 0x548000;
-    ((Actor*)g_Task)->pos.z.fixed = 0x1000000;
+    ((Actor*)g_Task)->pos.x.fixed = TO_COORD(11) + COORD_HALF;
+    ((Actor*)g_Task)->pos.y.fixed = TO_COORD(84) + COORD_HALF;
+    ((Actor*)g_Task)->pos.z.fixed = TO_COORD(256);
     func_801172D0();
     ((Actor*)g_Task)->header.mode += 1;
 }

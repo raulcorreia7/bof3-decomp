@@ -3,7 +3,7 @@
 MATCH s32 func_801F3F2C(s32 entry_x, s32 entry_y) {
     u8* flag;
 
-    if ((u32)((entry_x >> 16) - 0x41) < 4 && (u32)((entry_y >> 16) - 0x14) < 4) {
+    if ((u32)((entry_x >> 16) - 65) < 4 && (u32)((entry_y >> 16) - 20) < 4) {
         flag = &D_801455C7;
         if (*flag != 0) {
             *flag = 0;

@@ -202,7 +202,7 @@ MATCH void func_801FAA24(void) {
 MATCH s32 func_801FAA74(s32 arg0) {
     if (g_GameAreaId == AREA_ID_STEEL_BEACH_MAP) {
         if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
-            if (arg0 <= 0x160000) {
+            if (arg0 <= TO_COORD(22)) {
                 if (((g_BattlePartyBattlers[0].facing - 6) < 2U) ||
                     (g_BattlePartyBattlers[0].facing == FACING_UP_LEFT)) {
                     Game_SetScriptActive();
@@ -217,7 +217,7 @@ MATCH s32 func_801FAA74(s32 arg0) {
             }
             return 0;
         }
-        if (arg0 <= 0x160000) {
+        if (arg0 <= TO_COORD(22)) {
             Game_SetScriptActive();
             D_80146875 = 0x3C;
             D_80146874 = 1;

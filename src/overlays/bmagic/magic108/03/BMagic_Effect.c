@@ -60,7 +60,7 @@ MATCH void func_801EEE0C(void) {
     }
     g_Task->pos.x.fixed = battler->pos.x.fixed;
     g_Task->pos.y.fixed = battler->pos.y.fixed;
-    g_Task->pos.z.fixed = battler->pos.z.fixed + 0xC00000;
+    g_Task->pos.z.fixed = battler->pos.z.fixed + TO_COORD(192);
     g_Task->unk_0B      = 0;
     g_Task->unk_09      = 0;
     g_Task->timer       = 0;

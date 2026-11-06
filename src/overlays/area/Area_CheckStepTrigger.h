@@ -4,7 +4,7 @@
  * verify every member. */
 /* func_801F2C64 (area036), func_801F2DB4 (area116), func_801F2E80 (area059) */
 MATCH s32 Area_CheckStepTrigger(s32 x, s32 y) {
-    if (D_80143F03 == 2 && SYS_TestFlag(g_SceneEventFlags, 0x33) != 0 && (u32)((x >> 16) - 0x46) < 3U) {
+    if (D_80143F03 == 2 && SYS_TestFlag(g_SceneEventFlags, 0x33) != 0 && (u32)((x >> 16) - 70) < 3U) {
         if ((u32)((y >> 16) - AREA_STEP_TRIGGER_ROW) < 3U &&
             (g_BattlePartyBattlers[0].facing == FACING_UP_LEFT || (u32)(g_BattlePartyBattlers[0].facing - 6) < 2U)) {
             *g_ScriptVars = 0;

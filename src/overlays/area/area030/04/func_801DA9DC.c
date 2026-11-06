@@ -111,15 +111,15 @@ box_16:
     }
     g_AreaCameraStep = (u16)follow;
     if ((s32)g_AreaScrollTargetY > 0x14FFFF) {
-        capped = 0x3C0000;
-        if ((s32)g_AreaScrollTargetY <= 0x3C0000) {
+        capped = TO_COORD(60);
+        if ((s32)g_AreaScrollTargetY <= TO_COORD(60)) {
             capped = g_AreaScrollTargetY;
         }
     } else {
-        capped = 0x150000;
+        capped = TO_COORD(21);
     }
     g_AreaScrollTargetY = capped;
-    if (((g_ActorSlots[0].pos.x.fixed <= 0x80000) && (g_ActorSlots[0].scene_step < 0)) ||
+    if (((g_ActorSlots[0].pos.x.fixed <= TO_COORD(8)) && (g_ActorSlots[0].scene_step < 0)) ||
         ((g_ActorSlots[0].pos.x.fixed > 0x11FFFF) && (g_ActorSlots[0].scene_step > 0))) {
         g_ActorSlots[0].scene_step = 0;
     }

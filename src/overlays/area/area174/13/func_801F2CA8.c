@@ -13,7 +13,7 @@ MATCH void func_801F2CA8(void) {
     if (g_Task->unk_06 != 0) {
         func_801F2EC4();
     }
-    if (D_80147A8C == 0x3C8000) {
+    if (D_80147A8C == TO_COORD(60) + COORD_HALF) {
         g_Task->header.mode += 1;
     }
 }

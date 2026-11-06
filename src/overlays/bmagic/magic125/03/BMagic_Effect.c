@@ -39,7 +39,7 @@ MATCH void func_801EF0F8(void) {
     PartyBattler* work  = g_Task;
     u8            timer = work->timer - 1;
     work->timer         = timer;
-    work->pos.z.fixed += 0xFF800000;
+    work->pos.z.fixed += TO_COORD(-128);
     if (timer == 0) {
         g_Task->header.step += 1;
     }

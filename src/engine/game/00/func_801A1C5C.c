@@ -29,7 +29,7 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
             if (!(sx & HALF_MASK)) {
                 sum = part + func_801A20F8((xhi - 1) & HALF_MASK, y_low);
             }
-            sum += (func_801A21EC(sx, sy) + func_801A21EC(sx + 0x8000, sy)) + func_801A21EC(sx - 0x8000, sy);
+            sum += (func_801A21EC(sx, sy) + func_801A21EC(sx + COORD_HALF, sy)) + func_801A21EC(sx - COORD_HALF, sy);
             break;
 
         case FACING_DOWN:
@@ -52,7 +52,7 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
                     sum = part + func_801A20F8((xhi - 1) & HALF_MASK, yhi);
                 }
             }
-            sum += (func_801A21EC(sx, sy) + func_801A21EC(sx + 0x8000, sy)) + func_801A21EC(sx - 0x8000, sy);
+            sum += (func_801A21EC(sx, sy) + func_801A21EC(sx + COORD_HALF, sy)) + func_801A21EC(sx - COORD_HALF, sy);
             break;
 
         case FACING_RIGHT:
@@ -76,7 +76,7 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
             if (!(sy & HALF_MASK)) {
                 sum = part + func_801A20F8(cell, (y_low_word - 1) & HALF_MASK);
             }
-            sum += (func_801A21EC(sx, sy) + func_801A21EC(sx, sy + 0x8000)) + func_801A21EC(sx, sy - 0x8000);
+            sum += (func_801A21EC(sx, sy) + func_801A21EC(sx, sy + COORD_HALF)) + func_801A21EC(sx, sy - COORD_HALF);
             break;
 
         default:

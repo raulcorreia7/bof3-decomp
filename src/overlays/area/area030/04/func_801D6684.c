@@ -51,13 +51,13 @@ NON_MATCHING void func_801D6684(void) {
     }
     word_ptr   = &D_801E2070;
     word_ptr   = &D_801E2070;
-    y_sel      = 0x9E0000;
-    y_other    = 0x9B0000;
+    y_sel      = TO_COORD(158);
+    y_other    = TO_COORD(155);
     cell_table = &D_801E2050;
     cell_table = &D_801E2050;
     do {
         col      = 0;
-        x_fixed  = 0x840000;
+        x_fixed  = TO_COORD(132);
         cell_ptr = cell_table;
     loop_11:
         cell = *cell_ptr;
@@ -86,7 +86,7 @@ NON_MATCHING void func_801D6684(void) {
             block_19:
                 UI_DrawTextString((s16)x, (s16)y, color, 1, (u32)((kind * 2) + &D_801E2070));
             }
-            x_fixed += 0xC0000;
+            x_fixed += TO_COORD(12);
             col += 1;
             cell_ptr += 1;
             if (col >= 8) {
@@ -94,8 +94,8 @@ NON_MATCHING void func_801D6684(void) {
                 goto loop_11; /* shared cell/row draw join */
             }
         }
-        y_sel += 0xD0000;
-        y_other += 0xD0000;
+        y_sel += TO_COORD(13);
+        y_other += TO_COORD(13);
         row += 1;
         cell_table += 8;
     } while (row < 4);

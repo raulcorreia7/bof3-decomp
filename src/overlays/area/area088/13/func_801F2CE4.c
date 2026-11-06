@@ -11,9 +11,9 @@ MATCH s32 func_801F2CE4(void) {
     }
     func_801F2F28((u8*)AREA_WORK);
     func_801F3258((u8*)AREA_WORK);
-    x                   = g_Task->pos.x.fixed + 0x10000;
+    x                   = g_Task->pos.x.fixed + TO_COORD(1);
     g_Task->pos.x.fixed = x;
-    if (x == 0x170000) {
+    if (x == TO_COORD(23)) {
         g_Task->unk_09 = 0x20;
         g_Task->header.mode++;
     }

@@ -10,8 +10,8 @@ MATCH void func_801F3724(void) {
     if (slot != 0xFF) {
         actor               = &g_ActorSlots[slot];
         actor->type         = 0xB7;
-        actor->pos.x.fixed  = 0x460000;
+        actor->pos.x.fixed  = TO_COORD(70);
         actor->header.flags = 1;
-        actor->pos.y.fixed  = 0x340000;
+        actor->pos.y.fixed  = TO_COORD(52);
     }
 }

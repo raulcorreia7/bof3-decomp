@@ -9,7 +9,7 @@ MATCH void func_801DAE3C(void) {
     if (g_AreaCameraMoving == 0) {
         spad_ptr            = TASK_BYTES;
         g_AreaCameraStep    = 0x40;
-        g_AreaScrollTargetY = 0x3C0000;
+        g_AreaScrollTargetY = TO_COORD(60);
         spad_ptr[3] += 1;
     }
 }

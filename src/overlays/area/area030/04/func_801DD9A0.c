@@ -16,9 +16,9 @@ MATCH void func_801DD9A0(void) {
     LINE_F2* line;
 
     if (g_AreaCameraMoving == 0) {
-        if (((PADRup & g_InputHeld) || (g_AreaScrollTargetY == 0x150000)) && (D_80144125 == 0)) {
+        if (((PADRup & g_InputHeld) || (g_AreaScrollTargetY == TO_COORD(21))) && (D_80144125 == 0)) {
             g_AreaCameraStep            = 0x40;
-            g_AreaScrollTargetY         = 0x3C0000;
+            g_AreaScrollTargetY         = TO_COORD(60);
             FISHING_STATE->sub_index_03 = 1;
         } else {
             u32* work = &g_AreaScrollTargetY;
@@ -33,13 +33,13 @@ MATCH void func_801DD9A0(void) {
         depth_out   = &depth;
         flag_out    = &flag;
         gray        = 0x80;
-        line_offset = 0xA0000;
+        line_offset = TO_COORD(10);
         do {
             line = (LINE_F2*)g_GfxPrimCursor;
             i += 1;
             SetLineF2(line);
             pos.vx = -0x4000;
-            y      = ((0x3E0000 - line_offset) >> 9) - 0x4000;
+            y      = ((TO_COORD(62) - line_offset) >> 9) - 0x4000;
             pos.vy = y;
             pos.vz = 0;
             RotTransPers(&pos, sxy_out, depth_out, flag_out);
@@ -52,7 +52,7 @@ MATCH void func_801DD9A0(void) {
             line->y1 = sxy[1];
             setRGB0(line, gray, gray, gray);
             GFX_AddPrim(2U, 0x10U);
-            line_offset += 0xA0000;
+            line_offset += TO_COORD(10);
         } while (i < 6);
     }
 }

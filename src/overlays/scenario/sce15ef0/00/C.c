@@ -11,9 +11,9 @@ MATCH void func_801D0C0C(void) {
 }
 
 MATCH void func_801D0C48(void) {
-    g_Task->pos.x      = 0x308000;
-    g_Task->pos.y      = 0x740000;
-    g_Task->pos.z      = Area_SampleHeight(g_Task->pos.x, 0x740000) << 16;
+    g_Task->pos.x      = TO_COORD(48) + COORD_HALF;
+    g_Task->pos.y      = TO_COORD(116);
+    g_Task->pos.z      = Area_SampleHeight(g_Task->pos.x, TO_COORD(116)) << 16;
     g_Task->counter_0C = 0x308000;
     g_Task->counter_10 = 0x718000;
     g_Task->field_14   = 0xFEC00000;

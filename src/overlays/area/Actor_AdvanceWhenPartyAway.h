@@ -13,23 +13,23 @@ MATCH void Actor_AdvanceWhenPartyAway(void) {
 
     work = TASK_BYTES;
     if (FIELD(u8, work, 0x08) != 0) {
-        if (abs(D_80145EC8 - ((((s32)FIELD(s16, work, 0x3A) + 1) << 16) | 0x8000)) > 0x20000) {
+        if (abs(D_80145EC8 - ((((s32)FIELD(s16, work, 0x3A) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
             goto advance;
         }
-        if (abs(D_80145EC4 - ((s32)FIELD(s16, work, 0x36) << 16)) <= 0x20000) {
+        if (abs(D_80145EC4 - ((s32)FIELD(s16, work, 0x36) << 16)) <= TO_COORD(2)) {
             goto call;
         }
-        if (abs(D_80145EC4 - (((s32)FIELD(s16, work, 0x36) + 1) << 16)) <= 0x20000) {
+        if (abs(D_80145EC4 - (((s32)FIELD(s16, work, 0x36) + 1) << 16)) <= TO_COORD(2)) {
             goto call;
         }
     } else {
-        if (abs(D_80145EC4 - ((((s32)FIELD(s16, work, 0x36) + 1) << 16) | 0x8000)) > 0x20000) {
+        if (abs(D_80145EC4 - ((((s32)FIELD(s16, work, 0x36) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
             goto advance;
         }
-        if (abs(D_80145EC8 - ((s32)FIELD(s16, work, 0x3A) << 16)) <= 0x20000) {
+        if (abs(D_80145EC8 - ((s32)FIELD(s16, work, 0x3A) << 16)) <= TO_COORD(2)) {
             goto call;
         }
-        if (abs(D_80145EC8 - (((s32)FIELD(s16, work, 0x3A) + 1) << 16)) <= 0x20000) {
+        if (abs(D_80145EC8 - (((s32)FIELD(s16, work, 0x3A) + 1) << 16)) <= TO_COORD(2)) {
             goto call;
         }
     }
