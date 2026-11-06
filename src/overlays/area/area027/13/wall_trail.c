@@ -419,13 +419,13 @@ MATCH void func_801F31CC(void) {
     point[0] = 0xE340u;
     point[1] = 0xE3C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, 0, 0x13500126u);
+    func_801F3480((const Vec3S16*)point, 0, 0x13500126u);
     Area_AddCellPrim(0x468000, 0x478000, 0, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, ONE / 2, 0x13510125u);
+    func_801F3480((const Vec3S16*)point, ONE / 2, 0x13510125u);
     Area_AddCellPrim(0x468000, 0x498000, -1, 0x28);
 }
 
@@ -441,13 +441,13 @@ MATCH void func_801F32B0(void) {
     point[0] = 0xE340u;
     point[1] = 0xE3C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, *(s16*)&g_Task->vx, 0x13500126u);
+    func_801F3480((const Vec3S16*)point, *(s16*)&g_Task->vx, 0x13500126u);
     Area_AddCellPrim(0x468000, 0x478000, -1, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, (s16)(ONE / 2 - g_Task->vx), 0x13510125u);
+    func_801F3480((const Vec3S16*)point, (s16)(ONE / 2 - g_Task->vx), 0x13510125u);
     Area_AddCellPrim(0x468000, 0x498000, -1, 0x28);
 }
 
@@ -463,11 +463,11 @@ MATCH void func_801F33A8(void) {
     point[0] = ((u >> 9) - 0x4000);
     point[1] = ((v >> 9) - 0x4000);
     point[2] = 0;
-    func_801F3480((const AreaPoint*)point, ONE / 4, 0x13500126u);
+    func_801F3480((const Vec3S16*)point, ONE / 4, 0x13500126u);
     Area_AddCellPrim(u, v, -1, 0x28);
 }
 
-MATCH POLY_FT4* func_801F3480(const AreaPoint* point, s32 angle, u32 texture) {
+MATCH POLY_FT4* func_801F3480(const Vec3S16* point, s32 angle, u32 texture) {
     SVECTOR   rotation;
     MATRIX    matrix;
     long      depth;

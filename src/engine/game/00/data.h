@@ -21,8 +21,8 @@
 typedef struct WorldMapDestination {
     u16 area_id;
     u16 map_id;
-    u16 x;
-    u16 y;
+
+    Vec2U16 pos;
 } WorldMapDestination;
 
 /* One of five source slots; func_801C0F9C reads the four bytes. */
@@ -79,10 +79,6 @@ typedef struct GameDelta {
     s8 dy;
 } GameDelta;
 
-/* Eight-byte signed position offset. func_801C63B0 adds the pair to the
- * party position when the slots move. */
-typedef Vec2S32 PositionOffset;
-
 /* Four-byte battle party slot. func_801C63B0 marks it active, stores its sort
  * key and orders the slots by that key. */
 typedef struct PartySlot {
@@ -129,9 +125,9 @@ extern UvRect               D_801CCF7C[53];
 extern WorldMapBattlefields D_801CD224;
 extern WorldMapDestination  D_801CD24C[10];
 extern SlotSource           D_801CD4AC[5];
-extern PositionOffset       D_801CD620[36];
-extern PositionOffset       D_801CD740[6];
-extern CameraAngleOffset    D_801CD778[5];
+extern Vec2S32              D_801CD620[36];
+extern Vec2S32              D_801CD740[6];
+extern Vec2S16              D_801CD778[5];
 extern PartySlot            D_801CD944[3];
 
 #endif

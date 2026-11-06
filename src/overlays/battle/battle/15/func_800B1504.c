@@ -6,10 +6,10 @@ MATCH void func_800B1504(void) {
 
     func_800B1728();
     task = g_MenuCurrentPanel;
-    x    = task->x;
+    x    = task->pos.x;
     if (x >= 347) {
         func_80158E20();
     } else {
-        task->x = x + 32;
+        task->pos.x = x + 32;
     }
 }

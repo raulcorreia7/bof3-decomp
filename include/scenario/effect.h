@@ -28,6 +28,8 @@ typedef struct PartyState {
         party_count; /* func_801667A4 appends to both order arrays at this index while it is below PARTY_SLOT_COUNT */
 } PartyState;
 
+ASSERT_SIZE(PartyState, 0x6255);
+
 /* The party bytes agree with the addresses menu/party.h owns. */
 ASSERT_OFFSET(PartyState, menu_flags, PARTY_FLAGS - PARTY_STATE_BASE);
 ASSERT_OFFSET(PartyState, walking_order, PARTY_ORDER_WALKING - PARTY_STATE_BASE);

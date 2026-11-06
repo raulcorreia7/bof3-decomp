@@ -12,8 +12,8 @@ MATCH void func_801D98BC(void) {
     g_MenuPanelTasks[11].unk_10 = D_801ED68C + 0x1F;
     if (g_BattlePanelMode == 0) {
         g_MenuPanelTasks[21].active = 1;
-        g_MenuPanelTasks[21].x      = g_MenuPanelTasks[18].x + (D_801ED68C * 0x30);
-        g_MenuPanelTasks[21].y      = g_MenuPanelTasks[18].y + 4;
+        g_MenuPanelTasks[21].pos.x  = g_MenuPanelTasks[18].pos.x + (D_801ED68C * 0x30);
+        g_MenuPanelTasks[21].pos.y  = g_MenuPanelTasks[18].pos.y + 4;
     } else {
         g_MenuPanelTasks[21].active = 0;
     }

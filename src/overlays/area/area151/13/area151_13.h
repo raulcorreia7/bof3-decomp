@@ -14,21 +14,21 @@
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
-extern SVECTOR     D_1F800014[];
+extern SVECTOR  D_1F800014[];
 /* The world-area state byte tested by the work handlers. */
-extern s32         D_80145EC4[];
-extern u8          D_801F4CE8[];
+extern s32      D_80145EC4[];
+extern u8       D_801F4CE8[];
 /* The request selector and the area request slot. */
-extern Callback    D_801F542C[];
+extern Callback D_801F542C[];
 /* The state handler tables the dispatchers index. */
-extern Callback    D_801F5440[];
-extern Callback    D_801F5448[];
-extern Callback    D_801F5458[];
-extern Callback    D_801F54D8[];
-extern ScreenPoint D_801F54E4[];
-extern u8          D_801F54F4[];
-extern u8          D_801F54F5[];
-extern Callback    D_801F54FC[];
+extern Callback D_801F5440[];
+extern Callback D_801F5448[];
+extern Callback D_801F5458[];
+extern Callback D_801F54D8[];
+extern Vec2U16  D_801F54E4[];
+extern u8       D_801F54F4[];
+extern u8       D_801F54F5[];
+extern Callback D_801F54FC[];
 
 /* The work-mode steps the request wrapper runs. */
 

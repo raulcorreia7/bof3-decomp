@@ -10,11 +10,6 @@
 #include "work/area_spad.h"
 #include <rand.h>
 
-/* One spawn point in the area's spawn table: x then y, four bytes. */
-typedef Vec2U16 AreaSpawnPoint;
-
-ASSERT_SIZE(AreaSpawnPoint, 4);
-
 extern SVECTOR       D_1F800014[];
 extern s32           D_80145EC4[];
 extern u8            D_801F4D7C[]; /* key rows: u16 key + byte mode, stride 4 */
@@ -30,11 +25,11 @@ extern u8            D_801F4F84[]; /* one four-byte sprite cell per id: w, h, u0
 #define AREA_HUD_SPRITE_CELLS D_801F4F84
 extern WorldMapMarker D_801F4FDC[6];
 #define AREA_HUD_MASK_TABLE D_801F4FDC
-extern Callback       D_801F4FF4[];
-extern AreaSpawnPoint D_801F5000[];
-extern u8             D_801F5010[];
-extern u8             D_801F5011[]; /* the script-argument byte at +1 */
-extern Callback       D_801F5018[];
+extern Callback D_801F4FF4[];
+extern Vec2U16  D_801F5000[];
+extern u8       D_801F5010[];
+extern u8       D_801F5011[]; /* the script-argument byte at +1 */
+extern Callback D_801F5018[];
 
 void func_801F34CC(void);
 /* func_801F35BC */

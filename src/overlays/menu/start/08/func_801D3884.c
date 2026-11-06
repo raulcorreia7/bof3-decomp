@@ -10,8 +10,8 @@ MATCH void func_801D3884(void) {
     Menu_DrawClutStrip(D_80144953);
     g_MenuPanelTasks[11].unk_10 = 0x17;
     g_MenuPanelTasks[21].active = 1;
-    g_MenuPanelTasks[21].x      = (u16)g_MenuPanelTasks[13].x + 0x2A;
-    g_MenuPanelTasks[21].y      = (u16)g_MenuPanelTasks[13].y + 7;
+    g_MenuPanelTasks[21].pos.x  = (u16)g_MenuPanelTasks[13].pos.x + 0x2A;
+    g_MenuPanelTasks[21].pos.y  = (u16)g_MenuPanelTasks[13].pos.y + 7;
     trigger                     = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     g_MenuPanelTasks[13].unk_0C = 0xFF;
     if (trigger & PADLleft) {
@@ -42,8 +42,8 @@ MATCH void func_801D3884(void) {
         g_MenuPanelTasks[14].unk_01 = 6;
         g_MenuPanelTasks[14].unk_02 = 0xF;
         g_MenuPanelTasks[14].active = 1;
-        g_MenuPanelTasks[14].x      = 0xB4;
-        g_MenuPanelTasks[14].y      = 0x3C;
+        g_MenuPanelTasks[14].pos.x  = 0xB4;
+        g_MenuPanelTasks[14].pos.y  = 0x3C;
         g_MenuPanelTasks[14].unk_0B = 0;
         g_MenuPanelTasks[14].unk_0C = 0xFF;
         state                       = &D_80148652;

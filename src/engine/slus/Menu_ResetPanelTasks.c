@@ -11,8 +11,8 @@ MATCH void Menu_ResetPanelTasks(void) {
         g_MenuPanelTasks[i].unk_02 = 0;
         g_MenuPanelTasks[i].state  = 0;
         g_MenuPanelTasks[i].unk_0F = 0;
-        g_MenuPanelTasks[i].x      = 0;
-        g_MenuPanelTasks[i].y      = 0;
+        g_MenuPanelTasks[i].pos.x  = 0;
+        g_MenuPanelTasks[i].pos.y  = 0;
         g_MenuPanelTasks[i].unk_08 = 0;
         g_MenuPanelTasks[i].unk_09 = 0;
         g_MenuPanelTasks[i].unk_0A = 0;

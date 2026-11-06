@@ -4,6 +4,7 @@
 /* Declarations shared by two or more bmagic images; an image header that
  * reads one includes this file. */
 
+#include "common/vector.h"
 #include "game.h"
 #include "gfx/prim.h"
 #include "overlays/battle/battle.h"
@@ -94,16 +95,8 @@
         (WORK)->header.step += 1;                                                      \
     }
 
-/* One remembered position of an effect's trail; each trail holds
- * BMAGIC_TRAIL_LENGTH of them, one trail per work byte unk_04. */
-typedef struct BmagicTrailPoint {
-    s16 x;
-    s16 y;
-} BmagicTrailPoint;
-
-ASSERT_SIZE(BmagicTrailPoint, 0x4);
-ASSERT_OFFSET(BmagicTrailPoint, x, 0x00);
-ASSERT_OFFSET(BmagicTrailPoint, y, 0x02);
+/* One remembered position of an effect's trail. */
+typedef Vec2S16 BmagicTrailPoint;
 
 #define BMAGIC_TRAIL_LENGTH 32
 
@@ -175,6 +168,8 @@ typedef struct BmagicEffectWork {
     /* 0x20 */ s16        unk_20;
     /* 0x22 */ u16        unk_22;
 } BmagicEffectWork;
+
+ASSERT_SIZE(BmagicEffectWork, 0x24);
 
 ASSERT_OFFSET(BmagicEffectWork, unk_03, 0x03);
 ASSERT_OFFSET(BmagicEffectWork, unk_04, 0x04);

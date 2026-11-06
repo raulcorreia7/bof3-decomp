@@ -1,9 +1,5 @@
 #include "battle_15.h"
 
-/* The battle cursor pair: two unsigned halves.
- * first: x; second: y. */
-typedef Vec2U16 BattleCursorPair;
-
 /* The command ring holds sixteen handles. */
 #define BATTLE_RING_SLOT_MASK 0xF
 

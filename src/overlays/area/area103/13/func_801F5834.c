@@ -6,9 +6,9 @@ MATCH void func_801F5834(void) {
     if (slot != 0xFF) {
         g_ActorSlots[slot].header.flags = 1;
         g_ActorSlots[slot].type         = 0x4D;
-        g_ActorSlots[slot].x.fixed      = g_Task->pos.x.fixed;
-        g_ActorSlots[slot].y.fixed      = g_Task->pos.y.fixed;
-        g_ActorSlots[slot].z.fixed      = g_Task->pos.z.fixed;
+        g_ActorSlots[slot].pos.x.fixed  = g_Task->pos.x.fixed;
+        g_ActorSlots[slot].pos.y.fixed  = g_Task->pos.y.fixed;
+        g_ActorSlots[slot].pos.z.fixed  = g_Task->pos.z.fixed;
     } else {
         g_ScriptState->cursor -= 2;
     }

@@ -2,7 +2,7 @@
 
 MATCH void func_801EA774(void) {
     MenuPanelTask* panel = g_MenuCurrentPanel;
-    s16            state = panel->y;
+    s16            state = panel->pos.y;
 
     if (state == -0x16) {
         u8* gate = &g_BattleEventFlags;
@@ -10,6 +10,6 @@ MATCH void func_801EA774(void) {
         *gate &= ~D_801EB4DC->unk_01;
         func_80158E20();
     } else {
-        panel->y = state - 8;
+        panel->pos.y = state - 8;
     }
 }

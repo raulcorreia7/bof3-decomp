@@ -96,10 +96,10 @@ MATCH void func_801F6E48(void) {
     work_cell = (SceneEffect*)work;
     adopted   = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
 
-    work_cell->pos_x         = adopted->pos.x.fixed;
-    work_cell->pos_y         = adopted->pos.y.fixed;
-    work_cell->z.fixed_point = adopted->pos.z.fixed;
-    g_GfxPrimCursor          = prim + 8;
+    work_cell->pos.x             = adopted->pos.x.fixed;
+    work_cell->pos.y             = adopted->pos.y.fixed;
+    work_cell->pos.z.fixed_point = adopted->pos.z.fixed;
+    g_GfxPrimCursor              = prim + 8;
     TASK_SET(adopted);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
@@ -257,12 +257,12 @@ MATCH void func_801F7440(void) {
 MATCH void func_801F7484(void) {
     s16 distance;
 
-    SCN_EFFECT->pos_x          = 0xB0000;
-    SCN_EFFECT->pos_y          = 0xF8000;
-    distance                   = Area_SampleHeight(SCN_EFFECT->pos_x, 0xF8000);
-    SCN_EFFECT->z.parts.height = distance;
-    SCN_EFFECT->ot_index       = 5;
-    SCN_EFFECT->step           = 1;
+    SCN_EFFECT->pos.x              = 0xB0000;
+    SCN_EFFECT->pos.y              = 0xF8000;
+    distance                       = Area_SampleHeight(SCN_EFFECT->pos.x, 0xF8000);
+    SCN_EFFECT->pos.z.parts.height = distance;
+    SCN_EFFECT->ot_index           = 5;
+    SCN_EFFECT->step               = 1;
 }
 
 /* Draws the forward scenario line from the active work point toward the row point in 0x8000 steps. */
@@ -278,11 +278,11 @@ MATCH void func_801F74EC(void) {
     work                    = SCN_EFFECT;
     color                   = D_801F6C04;
     row                     = (Actor*)&g_Actors[work->channel_06];
-    point.x                 = work->pos_x;
+    point.x                 = work->pos.x;
     next.x                  = point.x;
-    point.y                 = work->pos_y;
+    point.y                 = work->pos.y;
     next.y                  = point.y;
-    point.z                 = work->z;
+    point.z                 = work->pos.z;
     next.z                  = point.z;
     row_point.x             = row->pos.x.fixed;
     row_point.y             = row->pos.y.fixed;
@@ -323,9 +323,9 @@ MATCH void func_801F7670(void) {
     work                    = SCN_EFFECT;
     color                   = D_801F6C04;
     row                     = (Actor*)&g_Actors[work->channel_06];
-    point.x                 = work->pos_x;
-    point.y                 = work->pos_y;
-    point.z                 = work->z;
+    point.x                 = work->pos.x;
+    point.y                 = work->pos.y;
+    point.z                 = work->pos.z;
     row_point.x             = row->pos.x.fixed;
     row_point.y             = row->pos.y.fixed;
     row_point.z.fixed_point = row->pos.z.fixed;
@@ -416,29 +416,29 @@ MATCH void func_801F7A5C(void) {
     SceneEffect* work_tail;
     SceneEffect* work_state;
 
-    work_pos                  = SCN_EFFECT;
-    work_pos->pos_x           = 0x638000;
-    work_pos->pos_y           = 0xD0000;
-    work_pos->z.parts.height  = 0x300;
-    work_pos->counter_09      = 0x78;
-    work_tail                 = SCN_EFFECT;
-    work_pos->angle_x         = 0;
-    work_pos->angle_y         = 0;
-    work_pos->angle_z         = 0;
-    *(s8*)&work_tail->color_b = -1;
-    *(s8*)&work_tail->color_g = -1;
-    *(s8*)&work_tail->color_r = -1;
-    work_state                = SCN_EFFECT;
-    work_state->counter_0C    = 1;
-    work_state->counter_10    = 0;
-    work_state->channel_20    = 0;
-    work_state->channel_1C    = 0;
-    work_state->channel_18    = 0;
-    work_state->channel_0A    = 0;
-    work_state->channel_0B    = 0;
-    work_state->channel_08    = 0;
-    work_state->channel_07    = 0;
-    work_state->channel_06    = 0;
+    work_pos                     = SCN_EFFECT;
+    work_pos->pos.x              = 0x638000;
+    work_pos->pos.y              = 0xD0000;
+    work_pos->pos.z.parts.height = 0x300;
+    work_pos->counter_09         = 0x78;
+    work_tail                    = SCN_EFFECT;
+    work_pos->angle.x            = 0;
+    work_pos->angle.y            = 0;
+    work_pos->angle.z            = 0;
+    *(s8*)&work_tail->color_b    = -1;
+    *(s8*)&work_tail->color_g    = -1;
+    *(s8*)&work_tail->color_r    = -1;
+    work_state                   = SCN_EFFECT;
+    work_state->counter_0C       = 1;
+    work_state->counter_10       = 0;
+    work_state->channel_20       = 0;
+    work_state->channel_1C       = 0;
+    work_state->channel_18       = 0;
+    work_state->channel_0A       = 0;
+    work_state->channel_0B       = 0;
+    work_state->channel_08       = 0;
+    work_state->channel_07       = 0;
+    work_state->channel_06       = 0;
     SND_PlayCue(EMI_CUE_ID(2, 14));
     SCN_EFFECT->step = 1;
 }
@@ -629,7 +629,7 @@ MATCH void func_801F8360(void) {
     POLY_G3*     prim;
 
     work          = SCN_EFFECT;
-    work->angle_z = (work->counter_09 << 12) / 360;
+    work->angle.z = (work->counter_09 << 12) / 360;
     angle         = work->counter_10;
     size          = work->counter_0C;
 
@@ -679,7 +679,7 @@ MATCH void func_801F8360(void) {
         GFX_AddPrim(g_Task->unk_29, sizeof(POLY_G3));
         PopMatrix();
         i = i + 1;
-        SCN_EFFECT->angle_z += 170;
+        SCN_EFFECT->angle.z += 170;
     } while (i < 24);
 }
 
@@ -690,17 +690,13 @@ MATCH void func_801F8360(void) {
 
 /* func_801F85A8 saves the active effect's rotation across a triangle draw;
  * func_8015B410 passes the three angles to RotMatrix. */
-typedef struct {
-    s32 angle_x;
-    s32 angle_y;
-    s32 angle_z;
-    s32 unk_0C; /* 0x0C */
+typedef struct SceneRotation {
+    Vec3S32 angle;
+    s32     unk_0C; /* 0x0C */
 } SceneRotation;
 
 ASSERT_SIZE(SceneRotation, 0x10);
-ASSERT_OFFSET(SceneRotation, angle_x, 0x00);
-ASSERT_OFFSET(SceneRotation, angle_y, 0x04);
-ASSERT_OFFSET(SceneRotation, angle_z, 0x08);
+ASSERT_OFFSET(SceneRotation, angle, 0x00);
 
 MATCH void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     MATRIX        matrix;
@@ -717,9 +713,9 @@ MATCH void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
 
     saved         = *(SceneRotation*)&g_Task->unk_64;
     work          = SCN_EFFECT;
-    work->angle_x = angle_x;
-    work->angle_y = angle_y;
-    work->angle_z = angle_z;
+    work->angle.x = angle_x;
+    work->angle.y = angle_y;
+    work->angle.z = angle_z;
 
     v2x = (u32)(size * rcos(SCN_TRI_APEX_ANGLE)) >> 8;
     v2y = (u32)(size * rsin(SCN_TRI_APEX_ANGLE)) >> 8;
@@ -762,7 +758,7 @@ MATCH void func_801F878C(void) {
 
     work                    = SCN_EFFECT;
     FIELD(s16, work, 0x2Eu) = (D_80147A86 + D_801FC9E8);
-    work->origin_y          = (D_80147A88 + D_801FC9E9);
+    work->origin.y          = (D_80147A88 + D_801FC9E9);
     work->counter_09        = 0;
     SCN_EFFECT->channel_06  = 0x20;
     tail                    = SCN_EFFECT;
@@ -780,8 +776,8 @@ MATCH void func_801F882C(void) {
     s8           shade;
 
     work = SCN_EFFECT;
-    work->origin_x -= 4;
-    work->origin_y += D_801FC9EC[work->counter_09 >> 2];
+    work->origin.x -= 4;
+    work->origin.y += D_801FC9EC[work->counter_09 >> 2];
     shade = *(s8*)&work->color_r;
 
     if (shade != 0) {
@@ -808,7 +804,7 @@ MATCH void func_801F8930(void) {
     s8           shade;
 
     work = SCN_EFFECT;
-    work->origin_y -= 2;
+    work->origin.y -= 2;
     shade = *(s8*)&work->color_r;
 
     if (shade != 0) {
@@ -833,18 +829,18 @@ MATCH void func_801F89F0(void) {
     SceneEffect* setup_work;
 
     setup_work                    = SCN_EFFECT;
-    VOL(s32, setup_work->pos_x)   = D_80147A8C;
-    VOL(s32, setup_work->pos_y)   = g_AreaFocusY[0];
+    VOL(s32, setup_work->pos.x)   = D_80147A8C;
+    VOL(s32, setup_work->pos.y)   = g_AreaFocusY[0];
     FIELD(s32, setup_work, 0x3Cu) = D_80147A94;
-    VOL(s32, setup_work->angle_x) = D_80147ABC;
-    VOL(s32, setup_work->angle_y) = D_80147AC0;
-    setup_work->angle_z           = D_80147AC4;
+    VOL(s32, setup_work->angle.x) = D_80147ABC;
+    VOL(s32, setup_work->angle.y) = D_80147AC0;
+    setup_work->angle.z           = D_80147AC4;
     func_801AC1DC(deltas, FIELD(u8, setup_work, 0x1Cu));
-    update_work                 = SCN_EFFECT;
-    update_work->pos_x          = (update_work->pos_x + deltas[0]);
-    update_work->pos_y          = (update_work->pos_y + deltas[1]);
-    update_work->z.parts.height = (update_work->z.parts.height + deltas[2]);
-    update_work->step           = (update_work->step + 1);
+    update_work                     = SCN_EFFECT;
+    update_work->pos.x              = (update_work->pos.x + deltas[0]);
+    update_work->pos.y              = (update_work->pos.y + deltas[1]);
+    update_work->pos.z.parts.height = (update_work->pos.z.parts.height + deltas[2]);
+    update_work->step               = (update_work->step + 1);
 }
 
 MATCH void func_801F8AB8(void) {
@@ -857,15 +853,15 @@ MATCH void func_801F8AB8(void) {
 
     screen = D_1F800034;
     work   = SCN_EFFECT;
-    work->z.parts.height += 0x20;
-    point[0] = work->pos_x;
-    point[1] = work->pos_y;
-    point[2] = work->z.fixed_point;
+    work->pos.z.parts.height += 0x20;
+    point[0] = work->pos.x;
+    point[1] = work->pos.y;
+    point[2] = work->pos.z.fixed_point;
     Area_ProjectPoint(point, screen);
 
     current                     = SCN_EFFECT;
-    VOL(u16, current->origin_x) = screen[0];
-    current->origin_y           = SP_REF(u16, 0x36u);
+    VOL(u16, current->origin.x) = screen[0];
+    current->origin.y           = SP_REF(u16, 0x36u);
     shade                       = *(s8*)&current->color_r;
 
     if (shade != 0) {
@@ -891,7 +887,7 @@ MATCH void func_801F8BCC(void) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     half = SCN_EFFECT->channel_06 >> 1;
     SetPolyFT4(prim);
-    setXYWH(prim, SCN_EFFECT->origin_x - half, SCN_EFFECT->origin_y - half, SCN_EFFECT->channel_06,
+    setXYWH(prim, SCN_EFFECT->origin.x - half, SCN_EFFECT->origin.y - half, SCN_EFFECT->channel_06,
             SCN_EFFECT->channel_06);
     setUVWH(prim, 0xE0, 0x30, 0x1F, 0x20);
     setRGB0(prim, SCN_EFFECT->color_r, SCN_EFFECT->color_g, SCN_EFFECT->color_b);
@@ -925,10 +921,10 @@ MATCH void func_801F8D90(void) {
     work_cell = (SceneEffect*)work;
     first     = (Actor*)(D_80147A58 + work_cell->counter_0C * 0x98);
 
-    work_cell->pos_x         = first->pos.x.fixed;
-    work_cell->pos_y         = first->pos.y.fixed;
-    work_cell->z.fixed_point = first->pos.z.fixed;
-    g_GfxPrimCursor          = prim + 8;
+    work_cell->pos.x             = first->pos.x.fixed;
+    work_cell->pos.y             = first->pos.y.fixed;
+    work_cell->pos.z.fixed_point = first->pos.z.fixed;
+    g_GfxPrimCursor              = prim + 8;
     TASK_SET(first);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
@@ -1131,12 +1127,12 @@ MATCH void func_801F9644(void) {
             slot        = id & BYTE_MASK;
             *D_1F800000 = id;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].header.flags   = 1;
-                g_ActorSlots[D_1F800000[0]].type  = 0x13;
-                g_ActorSlots[D_1F800000[0]].pos.x = *timer - 170;
-                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer = 0x40;
+                g_ActorSlots[slot].header.flags            = 1;
+                g_ActorSlots[D_1F800000[0]].type           = 0x13;
+                g_ActorSlots[D_1F800000[0]].camera_angle.x = *timer - 170;
+                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer          = 0x40;
             }
             Party_HideBattlers();
             D_80145EC4 = 0x330000;
@@ -1180,12 +1176,12 @@ MATCH void func_801F9868(void) {
                     slot        = free_slot & BYTE_MASK;
                     *D_1F800000 = free_slot;
                     if (slot != GAME_NONE) {
-                        g_ActorSlots[slot].header.flags   = 1;
-                        g_ActorSlots[D_1F800000[0]].type  = 0x13;
-                        g_ActorSlots[D_1F800000[0]].pos.x = g_AreaCameraAngle.vx;
-                        g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
-                        g_ActorSlots[D_1F800000[0]].pos.z = 0x200;
-                        g_ActorSlots[D_1F800000[0]].layer = 0x90;
+                        g_ActorSlots[slot].header.flags            = 1;
+                        g_ActorSlots[D_1F800000[0]].type           = 0x13;
+                        g_ActorSlots[D_1F800000[0]].camera_angle.x = g_AreaCameraAngle.vx;
+                        g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                        g_ActorSlots[D_1F800000[0]].camera_angle.z = 0x200;
+                        g_ActorSlots[D_1F800000[0]].layer          = 0x90;
                         return;
                     }
                 } else {
@@ -1323,12 +1319,12 @@ MATCH void func_801F9BE4(void) {
             }
             D_1F800000[0] = Actor_FindFreeSlot();
             if ((D_1F800000[0] & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[D_1F800000[0]].header.flags = 1;
-                g_ActorSlots[D_1F800000[0]].type         = 0x13;
-                g_ActorSlots[D_1F800000[0]].pos.x        = g_AreaCameraAngle.vx + 384;
-                g_ActorSlots[D_1F800000[0]].pos.y        = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z        = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer        = 0x60;
+                g_ActorSlots[D_1F800000[0]].header.flags   = 1;
+                g_ActorSlots[D_1F800000[0]].type           = 0x13;
+                g_ActorSlots[D_1F800000[0]].camera_angle.x = g_AreaCameraAngle.vx + 384;
+                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer          = 0x60;
             }
             g_SceneState.step_05 = 7;
             break;
@@ -1359,12 +1355,12 @@ MATCH void func_801F9FB8(void) {
                 id            = Actor_FindFreeSlot();
                 D_1F800000[0] = id;
                 if ((id & BYTE_MASK) != GAME_NONE) {
-                    g_ActorSlots[id].header.flags     = 1;
-                    g_ActorSlots[D_1F800000[0]].type  = 0x13;
-                    g_ActorSlots[D_1F800000[0]].pos.x = g_AreaCameraAngle.vx + 448;
-                    g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
-                    g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
-                    g_ActorSlots[D_1F800000[0]].layer = 0xFF;
+                    g_ActorSlots[id].header.flags              = 1;
+                    g_ActorSlots[D_1F800000[0]].type           = 0x13;
+                    g_ActorSlots[D_1F800000[0]].camera_angle.x = g_AreaCameraAngle.vx + 448;
+                    g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                    g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                    g_ActorSlots[D_1F800000[0]].layer          = 0xFF;
                 }
                 *state = 1;
             }
@@ -1460,12 +1456,12 @@ MATCH void func_801FA27C(void) {
             id            = Actor_FindFreeSlot();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].header.flags     = 1;
-                g_ActorSlots[D_1F800000[0]].type  = 0x13;
-                g_ActorSlots[D_1F800000[0]].pos.x = -842;
-                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer = 0x60;
+                g_ActorSlots[id].header.flags              = 1;
+                g_ActorSlots[D_1F800000[0]].type           = 0x13;
+                g_ActorSlots[D_1F800000[0]].camera_angle.x = -842;
+                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer          = 0x60;
             }
             g_SceneState.step_05 = 6;
             break;
@@ -1477,12 +1473,12 @@ MATCH void func_801FA27C(void) {
             id            = Actor_FindFreeSlot();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].header.flags     = 1;
-                g_ActorSlots[D_1F800000[0]].type  = 0x13;
-                g_ActorSlots[D_1F800000[0]].pos.x = -684;
-                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer = 0x20;
+                g_ActorSlots[id].header.flags              = 1;
+                g_ActorSlots[D_1F800000[0]].type           = 0x13;
+                g_ActorSlots[D_1F800000[0]].camera_angle.x = -684;
+                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].layer          = 0x20;
             }
             g_SceneState.timer_06 = 0x200;
             g_SceneState.step_05  = 7;
@@ -1652,12 +1648,13 @@ MATCH void func_801FA7D8(void) {
             if (id != 0xFFu) {
                 g_ActorSlots[D_1F800000[0]].header.flags = 1;
                 g_ActorSlots[D_1F800000[0]].type         = 0x1Eu;
-                g_ActorSlots[D_1F800000[0]].x.fixed      = D_80145EC4;
-                g_ActorSlots[D_1F800000[0]].y.fixed      = D_80145EC8;
-                distance = Area_SampleHeight(g_ActorSlots[D_1F800000[0]].x.fixed, g_ActorSlots[D_1F800000[0]].y.fixed)
-                           << 16;
-                g_ActorSlots[D_1F800000[0]].z.fixed = distance;
-                g_ActorSlots[D_1F800000[0]].unk_29  = 0;
+                g_ActorSlots[D_1F800000[0]].pos.x.fixed  = D_80145EC4;
+                g_ActorSlots[D_1F800000[0]].pos.y.fixed  = D_80145EC8;
+                distance =
+                    Area_SampleHeight(g_ActorSlots[D_1F800000[0]].pos.x.fixed, g_ActorSlots[D_1F800000[0]].pos.y.fixed)
+                    << 16;
+                g_ActorSlots[D_1F800000[0]].pos.z.fixed = distance;
+                g_ActorSlots[D_1F800000[0]].unk_29      = 0;
             }
             *counter             = 0x84u;
             g_SceneState.step_05 = 7u;
@@ -1933,12 +1930,12 @@ MATCH void func_801FB204(void) {
                     slot          = Actor_FindFreeSlot();
                     D_1F800000[0] = slot;
                     if ((slot & BYTE_MASK) != GAME_NONE) {
-                        g_ActorSlots[slot].header.flags   = 1;
-                        g_ActorSlots[D_1F800000[0]].type  = 0x13;
-                        g_ActorSlots[D_1F800000[0]].pos.x = -682;
-                        g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
-                        g_ActorSlots[D_1F800000[0]].pos.z = 0x200;
-                        g_ActorSlots[D_1F800000[0]].layer = 0x20;
+                        g_ActorSlots[slot].header.flags            = 1;
+                        g_ActorSlots[D_1F800000[0]].type           = 0x13;
+                        g_ActorSlots[D_1F800000[0]].camera_angle.x = -682;
+                        g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                        g_ActorSlots[D_1F800000[0]].camera_angle.z = 0x200;
+                        g_ActorSlots[D_1F800000[0]].layer          = 0x20;
                     }
                     *countdown           = 0x20;
                     g_SceneState.step_05 = 6;

@@ -22,8 +22,8 @@ MATCH void func_801D8908(void) {
     flag                        = &D_801485C4;
     *flag                       = 0;
     g_MenuPanelTasks[21].active = 1;
-    g_MenuPanelTasks[21].x      = g_MenuPanelTasks[16].x + 7;
-    g_MenuPanelTasks[21].y      = g_MenuPanelTasks[16].y + ((g_MenuPanelTasks[16].unk_0C * 0xD) + 0x1A);
+    g_MenuPanelTasks[21].pos.x  = g_MenuPanelTasks[16].pos.x + 7;
+    g_MenuPanelTasks[21].pos.y  = g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C * 0xD) + 0x1A);
     rec                         = (SkillOrder*)((u8*)flag - DECOMP_OFFSETOF(SkillOrder, unk_54));
     index                       = Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0);
     pick                        = index + g_MenuPanelTasks[16].unk_0C;

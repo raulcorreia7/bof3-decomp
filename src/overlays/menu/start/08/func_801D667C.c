@@ -9,7 +9,7 @@ MATCH void func_801D667C(void) {
     panel->state  = 2;
     panel->active = 1;
     panel++;
-    g_MenuPanelTasks[11].x      = 0x14;
+    g_MenuPanelTasks[11].pos.x  = 0x14;
     D_801484C2                  = -0x14;
     g_MenuPanelTasks[11].unk_10 = 0;
     panel->unk_01               = 6;
@@ -26,8 +26,8 @@ MATCH void func_801D667C(void) {
     panel->state  = 2;
     panel->active = 1;
     panel += 6;
-    D_80148504.x            = 320;
-    D_80148504.y            = 62;
+    D_80148504.pos.x        = 320;
+    D_80148504.pos.y        = 62;
     D_80148524              = &D_801ED63C;
     panel->unk_02           = 0xA;
     D_80148504.group_cursor = 0;
