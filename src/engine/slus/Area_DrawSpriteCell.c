@@ -35,9 +35,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         scratch    = work->unk_25;
         draw_value = scratch * 2;
         packed     = draw_value & 0x60;
-        /* FAKE: keep the mode read after its masks. */
-        MATCH_FAKE_BARRIER();
-        scratch = scratch & 0xF;
+        scratch    = scratch & 0xF;
         if (work->unk_28 != 0) {
             draw_value = packed | 0x200;
             draw_value = mode_bit | draw_value;
@@ -56,10 +54,8 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         mode_bit   = mode_bits >> 4;
         packed     = packed & 0xF;
         draw_value = draw_value & 0x200;
-        /* FAKE: keep the mode read after its masks. */
-        MATCH_FAKE_BARRIER();
-        mode_bits = ((Actor*)scratch)->unk_28;
-        scratch   = draw_value * 4;
+        mode_bits  = ((Actor*)scratch)->unk_28;
+        scratch    = draw_value * 4;
         if (mode_bits != 0) {
             draw_value = mode_bit | 0x80;
             draw_value = mode_flags | draw_value;

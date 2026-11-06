@@ -52,8 +52,6 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     primitive->v1 = 0u;
     primitive->u2 = 0u;
     setRGB0(primitive, 0xACu, 0xACu, 0xACu);
-    /* FAKE: barrier keeps cursor-math below color stores here. */
-    MATCH_BARRIER();
     bottom_v      = (u8)(height + 1);
     bottom_y      = (s16)((s32)(u16)y + bottom_v);
     primitive->y2 = bottom_y;
