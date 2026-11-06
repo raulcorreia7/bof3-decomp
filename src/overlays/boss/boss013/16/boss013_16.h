@@ -10,6 +10,7 @@
 #define g_Task ((PartyBattler*)g_Task)
 
 extern u8           D_800C25F0[];
+extern u8           D_800C25FC;
 extern u16          D_800C2618[];
 extern Callback     D_800C2620[];
 extern Callback     D_800C2650[];
@@ -18,13 +19,12 @@ extern Callback     D_800C268C[];
 extern Callback     D_800C2698[];
 extern Callback     D_800C26C8[];
 extern Callback     D_800C26D4[];
-extern u8           D_800C25FC;
 extern u8           D_800C26E0;
-extern u8           D_80181B11;
 extern u8           D_80146322;
 /* The selection-kind byte: battle/ram.h names the cell as g_BattleActiveBattler but
  * declares only the 6375 byte. */
 extern u8           g_BattleActiveBattler;
+extern u8           D_80181B11;
 extern u16          D_801EB6B6;
 extern u16          D_801EB7CE;
 extern PartyBattler D_801EB860;
