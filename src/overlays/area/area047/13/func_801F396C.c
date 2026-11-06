@@ -8,7 +8,7 @@ MATCH void func_801F396C(void) {
     if (actor_slot == GAME_NONE) {
         return;
     }
-    slot        = &g_ActorSlots[actor_slot];
-    slot->flags = 1;
-    slot->type  = 0x3D;
+    slot               = &g_ActorSlots[actor_slot];
+    slot->header.flags = 1;
+    slot->type         = 0x3D;
 }

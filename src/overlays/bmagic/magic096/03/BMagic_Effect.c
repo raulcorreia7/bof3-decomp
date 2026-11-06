@@ -15,14 +15,14 @@ MATCH void func_801EEDD8(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         func_800A9610(g_BattleTargetSelector, 0x200);
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEEA0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEEE4);

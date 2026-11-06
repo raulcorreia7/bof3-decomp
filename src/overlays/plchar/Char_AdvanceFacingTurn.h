@@ -18,7 +18,7 @@ MATCH void Char_AdvanceFacingTurn(void) {
                 Actor_RequestScript(0x40);
                 break;
         }
-        g_Task->step++;
+        g_Task->header.step++;
     } else {
         g_Task->unk_09--;
         if (g_Task->unk_09 == 0) {

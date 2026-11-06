@@ -19,7 +19,7 @@ MATCH void func_801EF00C(void) {
 
 MATCH void func_801EF050(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 1, 2, g_Task);
-    if (g_Task->flags != 0) {
+    if (g_Task->header.flags != 0) {
         func_801EF1E8();
     }
 }
@@ -39,8 +39,8 @@ MATCH void func_801EF3C0(void) {
 }
 
 MATCH void func_801EF404(void) {
-    SYS_DISPATCH_BYTE(D_801EFC44, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801EFC44, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EF7A8();
     }
 }
@@ -58,7 +58,7 @@ MATCH void func_801EF628(void) {
     timer         = g_Task->timer + 4;
     g_Task->timer = timer;
     if ((timer & BYTE_MASK) == 0x10) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

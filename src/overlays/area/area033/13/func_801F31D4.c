@@ -16,9 +16,9 @@ MATCH void func_801F31D4(void) {
                 goto tail;
             }
         }
-        g_Task->unk_48 = 2;
-        g_Task->unk_09 = 8;
-        g_Task->mode   = 4;
+        g_Task->unk_48      = 2;
+        g_Task->unk_09      = 8;
+        g_Task->header.mode = 4;
     }
 tail:
     Area_AddActor();

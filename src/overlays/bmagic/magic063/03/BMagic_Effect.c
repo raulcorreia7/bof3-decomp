@@ -34,7 +34,7 @@ INCLUDE_ASM(func_801EECF8);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEF30(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEF74(void) {
@@ -63,8 +63,8 @@ MATCH void func_801EF340(void) {
 }
 
 MATCH void func_801EF384(void) {
-    SYS_DISPATCH_BYTE(D_801F040C, D_801F1054->step);
-    if (D_801F1054->flags != 0 && D_801F1054->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F040C, D_801F1054->header.step);
+    if (D_801F1054->header.flags != 0 && D_801F1054->header.step != 0) {
         func_801EF994();
         func_801EFA5C();
         PopMatrix();
@@ -104,8 +104,8 @@ MATCH void func_801EF994(void) {
 INCLUDE_ASM(func_801EFA5C);
 
 MATCH void func_801EFD7C(void) {
-    SYS_DISPATCH_BYTE(D_801F0440, D_801F1054->step);
-    if (D_801F1054->flags != 0 && D_801F1054->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F0440, D_801F1054->header.step);
+    if (D_801F1054->header.flags != 0 && D_801F1054->header.step != 0) {
         func_801EF994();
         func_801EFA5C();
         PopMatrix();
@@ -135,9 +135,9 @@ MATCH u32 func_801F0354(void) {
 }
 
 MATCH void func_801F03B0(void) {
-    D_801F1054->flags  = 0;
-    D_801F1054->mode   = 0;
-    D_801F1054->step   = 0;
-    D_801F1054->unk_03 = 0;
-    D_801F1054->unk_04 = 0;
+    D_801F1054->header.flags = 0;
+    D_801F1054->header.mode  = 0;
+    D_801F1054->header.step  = 0;
+    D_801F1054->unk_03       = 0;
+    D_801F1054->unk_04       = 0;
 }

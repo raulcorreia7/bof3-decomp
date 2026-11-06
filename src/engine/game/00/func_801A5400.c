@@ -22,7 +22,7 @@ MATCH void func_801A5400(u8* script) {
         FIELD(u16, counter, 0x2u) = data[0x2] | (data[0x1] << 8);
         func_801A4AA8();
         Area_FindSceneRecord(FIELD(u16, counter, 0x2u));
-        g_Task->flags           = ACTOR_FLAG_IN_USE;
+        g_Task->header.flags    = ACTOR_FLAG_IN_USE;
         coord_record            = g_Task;
         D_80146908[*counter][0] = coord_record->x.fixed = (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
@@ -34,8 +34,8 @@ MATCH void func_801A5400(u8* script) {
         dist                      = Area_SampleHeight(coord_record->x.fixed, coord_record->y.fixed);
         dist_record               = g_Task;
         COORD_INT(dist_record->z) = dist;
-        dist_record->mode         = data[0x8];
-        g_Task->step              = data[0xA];
+        dist_record->header.mode  = data[0x8];
+        g_Task->header.step       = data[0xA];
         g_Task->direction_08      = data[0] & 0xF;
         g_Task->unk_06            = data[0] >> 4;
         D_80146904[*counter][0]   = 0xFFFF;
@@ -46,7 +46,7 @@ MATCH void func_801A5400(u8* script) {
         func_801A4990(data + 0xB);
         if (data[0x3] & 0x80) {
             flags_record = g_Task;
-            flags_record->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+            flags_record->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         }
         g_Task->tint.bytes.unk_5D = 0;
         g_Task->tint.bytes.unk_5F = 0;

@@ -5,7 +5,7 @@ MATCH void func_801F36FC(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(EMI_CUE_ID(2, 0));
         }
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
     Area_Update();
 }

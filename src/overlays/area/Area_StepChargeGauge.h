@@ -40,7 +40,7 @@ MATCH void Area_StepChargeGauge(void) {
                         step = 2;
                     }
                 }
-                if (g_Task->step != 0) {
+                if (g_Task->header.step != 0) {
                     g_Task->unk_0B -= step >> 1;
                     if (g_FrameCount & 1) {
                         g_Task->unk_0B -= step & 1;

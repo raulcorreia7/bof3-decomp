@@ -92,7 +92,7 @@ NON_MATCHING void func_8019B704(void) {
                         g_Task->unk_07 = 0;
                         g_Task->unk_0A = 0;
                         Actor_SelectScript(0);
-                        g_Task->mode = 5;
+                        g_Task->header.mode = 5;
                     } else {
                         func_8019C124(0);
                     }

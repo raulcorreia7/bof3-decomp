@@ -5,7 +5,7 @@ MATCH void func_800C1A98(void) {
 
     work->x.fixed -= work->vx;
     if (work->x.fixed == work->unk_18) {
-        work->step++;
+        work->header.step++;
     }
     func_801E30F8();
 }

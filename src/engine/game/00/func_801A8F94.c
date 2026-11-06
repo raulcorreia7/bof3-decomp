@@ -123,9 +123,9 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         state->flag_00 |= 0x40;
                         g_Task->unk_07 |= ACTOR_OPT_ROUTE_LOCKED;
                         if ((base[state->cursor + 3] & 1) != 0)
-                            g_Task->flags |= ACTOR_FLAG_STEP_MOVE;
+                            g_Task->header.flags |= ACTOR_FLAG_STEP_MOVE;
                         else
-                            g_Task->flags &= ~ACTOR_FLAG_STEP_MOVE;
+                            g_Task->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
                         g_Task->unk_2A = base[state->cursor + 2];
                         if ((base[state->cursor + 3] & 2) != 0) {
                             Actor_BeginScript((u8)(left & BYTE_MASK), base[state->cursor + 4]);
@@ -140,9 +140,9 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         state->flag_00 |= 0x40;
                         g_Task->unk_07 |= ACTOR_OPT_ROUTE_LOCKED;
                         if ((base[state->cursor + 3] & 1) != 0)
-                            g_Task->flags |= ACTOR_FLAG_STEP_MOVE;
+                            g_Task->header.flags |= ACTOR_FLAG_STEP_MOVE;
                         else
-                            g_Task->flags &= ~ACTOR_FLAG_STEP_MOVE;
+                            g_Task->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
                         g_Task->unk_2A = base[state->cursor + 2];
                         if ((base[state->cursor + 3] & 2) != 0) {
                             Actor_BeginScript((u8)(left & BYTE_MASK), base[state->cursor + 4]);

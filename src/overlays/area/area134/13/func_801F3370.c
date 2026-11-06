@@ -8,8 +8,8 @@ MATCH void func_801F3370(void) {
     step    = work[2];
     work[2] = step + 1;
     if (step >= 15) {
-        g_Task->mode = 0xD;
+        g_Task->header.mode = 0xD;
     } else {
-        g_Task->mode = 0x14;
+        g_Task->header.mode = 0x14;
     }
 }

@@ -9,10 +9,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC7C(void) {
     PartyBattler* work;
 
-    g_Task->unk_09 = 8;
-    g_Task->timer  = 4;
-    work           = g_Task;
-    work->mode     = work->mode + 1;
+    g_Task->unk_09    = 8;
+    g_Task->timer     = 4;
+    work              = g_Task;
+    work->header.mode = work->header.mode + 1;
 }
 
 INCLUDE_ASM(func_801EECBC);
@@ -60,15 +60,15 @@ MATCH void func_801EEF84(void) {
     }
     SND_QueueSelectionFx(var_a0);
     Actor_SelectScript(5U);
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF070(void) {
     PartyBattler* work;
 
     if (func_8014D978() != 0u) {
-        work       = g_Task;
-        work->step = work->step + 1;
+        work              = g_Task;
+        work->header.step = work->header.step + 1;
     } else {
         Area_AddActor();
     }

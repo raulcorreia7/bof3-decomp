@@ -19,6 +19,6 @@ MATCH void Area_ResetScene(void) {
     if (D_8014625C & INPUT_DIRECTIONAL) {
         func_80167428();
     } else {
-        g_Task->mode = 1;
+        g_Task->header.mode = 1;
     }
 }

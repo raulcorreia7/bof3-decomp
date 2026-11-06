@@ -15,12 +15,12 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEE18(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEE5C(void) {
-    SYS_DISPATCH_BYTE(D_801EF774, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801EF774, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF250();
         PopMatrix();
@@ -40,7 +40,7 @@ MATCH void func_801EEEE4(void) {
         dst->unk_5D      = 0x10;
         g_Task->unk_09   = 0x10;
         g_Task->timer    = 4;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 

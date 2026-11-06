@@ -6,9 +6,9 @@ MATCH void func_801F4708(void) {
     work = (u8*)g_Task;
     work[9]--;
     if (work[9] == 0) {
-        g_Task->mode = 2;
+        g_Task->header.mode = 2;
     }
     if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
-        g_Task->mode = 2;
+        g_Task->header.mode = 2;
     }
 }

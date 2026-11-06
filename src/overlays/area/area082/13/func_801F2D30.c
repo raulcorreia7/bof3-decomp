@@ -11,6 +11,6 @@ MATCH void func_801F2D30(void) {
     work->unk_68 += 6;
     if (timer == 0) {
         work->unk_2C = 0x18;
-        work->mode++;
+        work->header.mode++;
     }
 }

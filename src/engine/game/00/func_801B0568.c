@@ -33,7 +33,7 @@ MATCH void func_801B0568(void) {
             g_Task->unk_0B         = 0;
             g_AreaCameraStep       = 0;
             g_AreaCameraHeightStep = 0;
-            g_Task->step           = 0;
+            g_Task->header.step    = 0;
             return;
         }
         tmp0 = func_801B0E44() & BYTE_MASK;
@@ -103,7 +103,7 @@ MATCH void func_801B0568(void) {
             tmp6->unk_09 = (tmp6->unk_09 - 1);
             func_801B0DFC();
             g_GameState->mode_12B.s8_value = 1;
-            g_Task->step                   = 2;
+            g_Task->header.step            = 2;
             return;
         case_1:
             if (func_801B5F68(g_GameState->counter_11C.u8_value) & BYTE_MASK) {
@@ -115,16 +115,16 @@ MATCH void func_801B0568(void) {
             func_801B5BDC(g_Task->direction_08);
             g_GameState->mode_12B.s8_value = 0;
         block_35:
-            g_Task->step = 1;
+            g_Task->header.step = 1;
             func_801B6044();
             return;
         case_2:
             g_GameState->counter_11C.u8_value = 3U;
             Actor_RequestScript(g_Task->direction_08);
-            g_Task->mode = 2;
-            g_Task->step = 4;
-            tmp7         = g_Task;
-            tmp2         = tmp7->direction_08;
+            g_Task->header.mode = 2;
+            g_Task->header.step = 4;
+            tmp7                = g_Task;
+            tmp2                = tmp7->direction_08;
             if ((tmp2 == 1) || (tmp2 == 7)) {
                 tmp7->unk_03 = 0;
             } else {
@@ -138,8 +138,8 @@ MATCH void func_801B0568(void) {
             val0                              = 2;
             g_GameState->counter_11C.u8_value = 2U;
             Actor_RequestScript(g_Task->direction_08);
-            g_Task->mode                    = 2;
-            g_Task->step                    = 5;
+            g_Task->header.mode             = 2;
+            g_Task->header.step             = 5;
             g_GameState->mode_12B.s8_value  = 2;
             g_GameState->flags_12C.u8_value = (g_GameState->flags_12C.u8_value | 2);
             g_AreaWalkFlags |= 0x100;
@@ -149,22 +149,22 @@ MATCH void func_801B0568(void) {
             g_GameState->counter_11C.u8_value = 3U;
             Actor_RequestScript(g_Task->direction_08);
             g_GameState->mode_12B.s8_value = 4;
-            g_Task->mode                   = 2;
-            g_Task->step                   = 3;
+            g_Task->header.mode            = 2;
+            g_Task->header.step            = 3;
             return;
         case_6:
             val0                              = 3;
             g_GameState->counter_11C.u8_value = 3U;
             Actor_RequestScript(g_Task->direction_08);
             g_GameState->mode_12B.s8_value = 3;
-            g_Task->mode                   = 8;
+            g_Task->header.mode            = 8;
             tmp8                           = g_Task;
             tmp3                           = tmp8->direction_08;
             if ((tmp3 == 1) || (tmp3 == 7)) {
-                tmp8->step = 0;
+                tmp8->header.step = 0;
                 return;
             }
-            tmp8->step = 1;
+            tmp8->header.step = 1;
             return;
         case_255:
             g_GameState->mode_12B.s8_value    = 0;

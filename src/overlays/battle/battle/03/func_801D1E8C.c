@@ -33,9 +33,9 @@ NON_MATCHING void func_801D1E8C(void) {
         temp_v0_50           = (u8)g_BattleCommandCount - 1;
         g_BattleCommandCount = temp_v0_50;
         g_BattleStep -= 1;
-        temp_v0_66          = &g_BattlePartyBattlers[D_801462F6[temp_v0_50]];
-        g_BattleMessageSlot = &temp_v0_66->flags;
-        temp_v0_66->mode    = 2;
+        temp_v0_66              = &g_BattlePartyBattlers[D_801462F6[temp_v0_50]];
+        g_BattleMessageSlot     = &temp_v0_66->header.flags;
+        temp_v0_66->header.mode = 2;
         temp_v0_66->action_flags.value &= ~4;
         if (FIELD(u8, g_BattleMessageSlot, 0x119u) == 5) {
             temp_v1_80 = FIELD(s32, g_BattleMessageSlot, 0x124u);

@@ -5,10 +5,10 @@ MATCH void func_800C19C0(void) {
     g_Task->unk_2A = 0;
     func_8014DAEC();
     Battle_DefeatEnemy();
-    g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
-    g_Task->mode   = 3;
-    g_Task->step   = 0;
-    g_Task->unk_03 = 0;
+    g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
+    g_Task->header.mode = 3;
+    g_Task->header.step = 0;
+    g_Task->unk_03      = 0;
     if (g_BattleEncounter == 0x19) {
         g_MenuPanelMode = 2;
         Message_StartAreaMessage(0x20);

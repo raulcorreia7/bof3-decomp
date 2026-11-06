@@ -20,6 +20,6 @@ MATCH void func_801DF914(void) {
     }
     Actor_RequestScript((g_Task->facing + 0xC) & BYTE_MASK);
     func_801DEDE4();
-    work       = g_Task;
-    work->mode = work->mode + 1;
+    work              = g_Task;
+    work->header.mode = work->header.mode + 1;
 }

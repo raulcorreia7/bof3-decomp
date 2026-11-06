@@ -9,6 +9,6 @@ MATCH void Effect_CountUpTimersAndStep(void) {
     work->timer++;
     if (work->timer == 16) {
         work = g_Task;
-        work->step++;
+        work->header.step++;
     }
 }

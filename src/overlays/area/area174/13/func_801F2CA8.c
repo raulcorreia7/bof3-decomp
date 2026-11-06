@@ -14,6 +14,6 @@ MATCH void func_801F2CA8(void) {
         func_801F2EC4();
     }
     if (D_80147A8C == 0x3C8000) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }

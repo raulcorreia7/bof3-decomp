@@ -5,14 +5,14 @@
 MATCH void func_801F2E68(void) {
     if (--D_801F4DFC == 0) {
         SND_PlayCue(0x200);
-        D_801F4DFC   = 0;
-        D_801F4E08   = D_801F4E04;
-        g_Task->mode = 0xA;
+        D_801F4DFC          = 0;
+        D_801F4E08          = D_801F4E04;
+        g_Task->header.mode = 0xA;
     } else if (g_InputPressed == PADRup) {
         D_801F4E0C = 0;
         D_801F4E04 += 1;
-        g_Task->mode = 3;
+        g_Task->header.mode = 3;
     } else {
-        g_Task->mode = 1;
+        g_Task->header.mode = 1;
     }
 }

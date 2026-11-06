@@ -5,6 +5,6 @@ MATCH void func_800C1EF4(void) {
 
     work = g_BattleCurrentEnemy;
     EnemyBattler_SetScript(work, D_800C264C, func_800C1F4C, D_800C2658);
-    g_Task->mode = 2;
+    g_Task->header.mode = 2;
     func_8014D978();
 }

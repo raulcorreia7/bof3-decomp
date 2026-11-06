@@ -54,8 +54,8 @@ NON_MATCHING void func_801D210C(void) {
     Actor_SelectScript(1);
     index = (u32)Actor_FindFreeSlot() & BYTE_MASK;
     if (index != GAME_NONE) {
-        g_ActorSlots[index].flags = 1;
-        g_ActorSlots[index].type  = 10;
+        g_ActorSlots[index].header.flags = 1;
+        g_ActorSlots[index].type         = 10;
     }
     FISHING_STATE->counter_07       = D_801E3210->unk_0F;
     FISHING_STATE->handler_index_01 = (u8)(FISHING_STATE->handler_index_01 + 1);

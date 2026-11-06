@@ -10,7 +10,7 @@ MATCH void func_801F405C(void) {
         if (g_Task->unk_09 >= 0x6DU) {
             g_AreaSceneMode = 1;
             *g_ScriptVars   = 0xF;
-            g_Task->step += 1;
+            g_Task->header.step += 1;
         }
     }
 }

@@ -19,7 +19,7 @@ MATCH void func_801EEEF0(void) {
         func_80196718(battler);
         g_Task->timer  = func_8019651C(battler, 0, 0, 0, 1);
         g_Task->unk_09 = 4;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -30,12 +30,12 @@ INCLUDE_ASM(func_801EF0B4);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF360(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF3A4(void) {
-    SYS_DISPATCH_BYTE(D_801EFC8C, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801EFC8C, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EF72C();
         func_801EF7F8();
         PopMatrix();
@@ -56,7 +56,7 @@ MATCH void func_801EF5E0(void) {
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
     if (count == 24) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 

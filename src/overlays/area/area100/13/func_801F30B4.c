@@ -9,5 +9,5 @@ MATCH void func_801F30B4(void) {
     work->z.fixed = value;
     work->vz      = 0;
     work->gravity = 0;
-    work->mode++;
+    work->header.mode++;
 }

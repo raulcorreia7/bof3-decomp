@@ -29,7 +29,7 @@ MATCH void func_801A57F0(u8* script) {
     func_801A4AA8();
     Area_FindSceneRecord(D_1F800002);
 
-    g_Task->flags = ACTOR_FLAG_IN_USE;
+    g_Task->header.flags = ACTOR_FLAG_IN_USE;
 
     /* The outer shadow assignment forms the slot offset before the position
      * flag test, as retail schedules it. */
@@ -45,8 +45,8 @@ MATCH void func_801A57F0(u8* script) {
     D_80146910[*counter][0] = 0;
 
     COORD_INT(g_Task->z) = Area_SampleHeight(work->x.fixed, work->y.fixed);
-    g_Task->mode         = script[0xA];
-    g_Task->step         = script[0xC];
+    g_Task->header.mode  = script[0xA];
+    g_Task->header.step  = script[0xC];
     g_Task->unk_18       = script[0x11];
     g_Task->unk_1C       = script[0x12];
     g_Task->direction_08 = script[0] & 0xF;
@@ -64,7 +64,7 @@ MATCH void func_801A57F0(u8* script) {
     func_801A4990(script + 0xD);
 
     if (script[3] & 0x80) {
-        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     }
 
     g_Task->tint.bytes.unk_5D = 0;

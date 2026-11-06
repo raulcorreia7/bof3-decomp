@@ -12,7 +12,7 @@ static inline void World_AdvanceWhenPartyNear(void) {
                 if (D_80143BB0 == 0) {
                     SND_PlayCue(EMI_CUE_ID(2, 0));
                 }
-                g_Task->step++;
+                g_Task->header.step++;
             }
         }
     } else {
@@ -22,7 +22,7 @@ static inline void World_AdvanceWhenPartyNear(void) {
                 if (D_80143BB0 == 0) {
                     SND_PlayCue(EMI_CUE_ID(2, 0));
                 }
-                g_Task->step++;
+                g_Task->header.step++;
             }
         }
     }

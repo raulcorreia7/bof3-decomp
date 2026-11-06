@@ -11,6 +11,6 @@ MATCH void func_801F2F84(void) {
         rect.w = D_801F43BC;
         rect.h = D_801F43BE;
         StoreImage(&rect, (u32*)AREA_WORK);
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

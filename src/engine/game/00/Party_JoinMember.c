@@ -8,9 +8,9 @@ MATCH s32 Party_JoinMember(s32 char_id) {
     /* FAKE: retail reads g_CharSlot as u8[]. */
     g_Characters[((u8*)g_CharSlot)[id]].unk_07 |= 1;
     if (g_PartySize < PARTY_SLOT_COUNT) {
-        D_80144F5A[g_PartySize]                  = char_id;
-        D_80144F5D[g_PartySize]                  = char_id;
-        g_BattlePartyBattlers[g_PartySize].flags = PARTY_BATTLER_FLAG_OCCUPIED;
+        D_80144F5A[g_PartySize]                         = char_id;
+        D_80144F5D[g_PartySize]                         = char_id;
+        g_BattlePartyBattlers[g_PartySize].header.flags = PARTY_BATTLER_FLAG_OCCUPIED;
         Party_ClearBattlerState(g_PartySize);
         TASK_SET(&g_BattlePartyBattlers[g_PartySize]);
         g_Task->active_flags = 1;

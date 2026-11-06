@@ -26,14 +26,14 @@ MATCH void func_801B016C(void) {
     g_GameState->flags_12C.s8_value   = 0;
     g_Task->unk_4B                    = 0xFF;
     if (g_GameRequestFlags & 0x20) {
-        g_Task->flags |= ACTOR_FLAG_HIDDEN;
-        g_Task->mode = 0xC;
+        g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
+        g_Task->header.mode = 0xC;
     } else if (LOHU(g_GameAreaId) == 0xBD) {
-        g_Task->flags |= ACTOR_FLAG_HIDDEN;
-        g_Task->mode = 0xD;
+        g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
+        g_Task->header.mode = 0xD;
     } else {
         func_801B5BDC(g_Task->direction_08);
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
     ACTOR_CLEAR_STEP();
 }

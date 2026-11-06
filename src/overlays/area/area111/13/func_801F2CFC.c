@@ -10,6 +10,6 @@ MATCH void func_801F2CFC(void) {
     actor->unk_2E += 0x40;
     actor->unk_30 += 0x40;
     if (remaining == 0) {
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

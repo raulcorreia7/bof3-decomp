@@ -28,8 +28,8 @@ MATCH void func_801D2648(void) {
             FISHING_STATE->step_limit_20 = -0x8000;
             slot                         = Actor_FindFreeSlot() & BYTE_MASK;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].flags = 1;
-                g_ActorSlots[slot].type  = 0xA;
+                g_ActorSlots[slot].header.flags = 1;
+                g_ActorSlots[slot].type         = 0xA;
             }
         }
     } else {

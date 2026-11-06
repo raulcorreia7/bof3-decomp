@@ -11,6 +11,6 @@ MATCH void Effect_ReplacePaletteFade(void) {
         GFX_FreePaletteFadeTarget(actor);
         g_Task->timer  = GFX_AllocPaletteFade((u8*)actor, 0, 0, 0, 1);
         g_Task->unk_09 = 8;
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

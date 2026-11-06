@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EED30);
 MATCH void func_801EEE78(void) {
     if (g_Task->unk_0B == 0) {
         func_801DE8C0(1, 0x3C, Resource_GetText(0x14U));
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -24,15 +24,15 @@ MATCH void func_801EEEDC(void) {
 }
 
 MATCH void func_801EEF30(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEF74(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
         Effect_SetActorMatrix();
         func_801EF74C();
         PopMatrix();
@@ -53,7 +53,7 @@ MATCH void func_801EF008(void) {
     work->timer       = 0x10;
     work->unk_0C      = 8;
     work->pos.z.fixed = z;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 INCLUDE_ASM(func_801EF080);
@@ -68,8 +68,8 @@ MATCH void func_801EF3B0(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFA78();
         PopMatrix();
@@ -84,7 +84,7 @@ MATCH void func_801EF5D4(void) {
     work         = g_Task;
     work->unk_0C = work->unk_0C + work->unk_18;
     if (--work->unk_18 == 0x10) {
-        work->step++;
+        work->header.step++;
     }
 }
 

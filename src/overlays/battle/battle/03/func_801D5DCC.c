@@ -56,11 +56,11 @@ MATCH u8 func_801D5DCC(void) {
                 g_BattlePartyBattlers[slot].hp_change -= g_BattlePartyBattlers[slot].chr.stats.max_hp >> 1;
             }
             if ((s16)g_BattlePartyBattlers[slot].hp_change != 0) {
-                g_BattlePartyBattlers[slot].mode    = 6;
-                g_BattlePartyBattlers[slot].step    = 5;
-                g_BattlePartyBattlers[slot].unk_04  = 0;
-                g_BattlePartyBattlers[slot].unk_03  = 0;
-                g_BattlePartyBattlers[slot].unk_120 = 0x11;
+                g_BattlePartyBattlers[slot].header.mode = 6;
+                g_BattlePartyBattlers[slot].header.step = 5;
+                g_BattlePartyBattlers[slot].unk_04      = 0;
+                g_BattlePartyBattlers[slot].unk_03      = 0;
+                g_BattlePartyBattlers[slot].unk_120     = 0x11;
                 Battle_SetSlotPending(slot);
             }
         }
@@ -68,8 +68,8 @@ MATCH u8 func_801D5DCC(void) {
     for (slot = 3; slot < COMBATANT_COUNT; slot++) {
         if (!(func_801D64C4(slot) & BYTE_MASK)) {
             if (ENEMY_COMBATANT(slot).status & 1) {
-                ENEMY_COMBATANT(slot).mode         = 6;
-                ENEMY_COMBATANT(slot).step         = 5;
+                ENEMY_COMBATANT(slot).header.mode  = 6;
+                ENEMY_COMBATANT(slot).header.step  = 5;
                 ENEMY_COMBATANT(slot).unk_04       = 0;
                 ENEMY_COMBATANT(slot).unk_03       = 0;
                 ENEMY_COMBATANT(slot).target_flags = 0x11;

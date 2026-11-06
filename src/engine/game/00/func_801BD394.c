@@ -51,8 +51,8 @@ MATCH void func_801BD394(void) {
         Actor_RequestScript(g_Task->direction_08);
         g_Task->unk_09 = 0;
         Party_ClearBattlerState(g_Task->unk_05);
-        g_Task->mode   = 1;
-        g_Task->unk_0B = 0;
+        g_Task->header.mode = 1;
+        g_Task->unk_0B      = 0;
         func_801BC000();
     }
 }

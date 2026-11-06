@@ -19,9 +19,9 @@ MATCH void func_801F32A0(void) {
                 goto tail; /* skips the arming stores: run the step only */
             }
         }
-        g_Task->unk_48 = 2;
-        g_Task->unk_09 = 8;
-        g_Task->mode   = 4;
+        g_Task->unk_48      = 2;
+        g_Task->unk_09      = 8;
+        g_Task->header.mode = 4;
     }
 tail:
     Area_AddActor();

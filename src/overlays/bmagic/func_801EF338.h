@@ -6,5 +6,5 @@ MATCH void func_801EF338(void) {
     BmagicEffectWork* work;
 
     work = D_801F17B0;
-    D_801F01AC[work->mode]();
+    D_801F01AC[work->header.mode]();
 }

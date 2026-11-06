@@ -11,8 +11,8 @@ MATCH void Battle_UpdatePartyActors(void) {
         g_GameState = battle_work;
         g_Task      = battle_work;
 
-        if ((((battle_work->flags & PARTY_BATTLER_FLAG_OCCUPIED) != 0)) &&
-            ((battle_work->flags & PARTY_BATTLER_FLAG_HANDLER_BUSY) == 0u)) {
+        if ((((battle_work->header.flags & PARTY_BATTLER_FLAG_OCCUPIED) != 0)) &&
+            ((battle_work->header.flags & PARTY_BATTLER_FLAG_HANDLER_BUSY) == 0u)) {
             func_8014D290();
         }
     }

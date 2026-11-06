@@ -19,7 +19,7 @@ MATCH void func_801A253C(Actor* entity) {
             }
             work            = g_Task;
             entity->roll_90 = 0;
-            mode            = work->step;
+            mode            = work->header.step;
             if (mode - 1 < 3) {
                 entity->timer_75 = (mode & 3) * 0x1E;
                 if ((entity->timer_75 & 0xFE) != 0) {

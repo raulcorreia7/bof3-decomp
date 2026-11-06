@@ -18,5 +18,5 @@ MATCH void func_8019EB38(void) {
     work->vy                = step;
     flags->unk_0B           = 0;
     state                   = g_Task;
-    state->mode             = (u8)(state->mode + 1);
+    state->header.mode      = (u8)(state->header.mode + 1);
 }

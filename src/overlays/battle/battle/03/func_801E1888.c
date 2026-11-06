@@ -15,7 +15,7 @@ MATCH void func_801E1888(void) {
             ((u32)((short)g_DragonForm - 7) >= 2)) {
             func_801DD858(3);
         }
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     } else {
         g_Task->unk_09 = count - 1;
     }

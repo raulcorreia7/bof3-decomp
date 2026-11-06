@@ -9,8 +9,8 @@ MATCH void func_801F40D8(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(EMI_CUE_ID(2, 3));
         }
-        scratch       = g_Task;
-        scratch->step = 1;
+        scratch              = g_Task;
+        scratch->header.step = 1;
     }
     func_801F4158_area168(0, 1);
     func_801F4158_area168(1, 2);

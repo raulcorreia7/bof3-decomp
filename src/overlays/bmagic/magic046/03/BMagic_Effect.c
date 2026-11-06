@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EED28);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEF70(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEFB4(void) {
@@ -35,7 +35,7 @@ MATCH void func_801EF014(void) {
     work->unk_0B      = 0;
     work->pos.z.fixed = z;
     g_Task->unk_09    = 0;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 INCLUDE_ASM(func_801EF090);
@@ -49,8 +49,8 @@ MATCH void func_801EF250(void) {
     BATTLE_ACTIVE_WORK->unk_0B = 0;
     g_Task->unk_09             = 0;
     Actor_SelectScript(2U);
-    g_Task->mode = 1;
-    g_Task->step = 1;
+    g_Task->header.mode = 1;
+    g_Task->header.step = 1;
 }
 
 #include "overlays/bmagic/Effect_AddActorStepOnPlaying.h"
@@ -63,8 +63,8 @@ MATCH void func_801EF324(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
         func_801EFB90();
         func_801EFC48();
         PopMatrix();
@@ -89,7 +89,7 @@ MATCH void func_801EF540(void) {
     temp_v0_2      = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v0_2;
     if ((temp_v0_2 & 0xFF) == 0x10) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -111,11 +111,11 @@ MATCH void func_801EF660(void) {
     g_Task->timer = temp_v0_2;
     if (!(temp_v0_2 & 0xFF)) {
         D_801EB4E0->unk_0B -= 1;
-        g_Task->flags  = 0;
-        g_Task->mode   = 0;
-        g_Task->step   = 0;
-        g_Task->unk_03 = 0;
-        g_Task->unk_04 = 0;
+        g_Task->header.flags = 0;
+        g_Task->header.mode  = 0;
+        g_Task->header.step  = 0;
+        g_Task->unk_03       = 0;
+        g_Task->unk_04       = 0;
     }
 }
 

@@ -14,9 +14,9 @@ MATCH void func_801C56E4(void) {
     Actor_RequestScript(index);
     GFX_StagePalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
     Actor_ClearVelocity();
-    state          = g_Task;
-    state->gravity = -8;
-    state->mode    = 2;
-    g_Task->step   = 3;
-    g_Task->unk_03 = 3;
+    state               = g_Task;
+    state->gravity      = -8;
+    state->header.mode  = 2;
+    g_Task->header.step = 3;
+    g_Task->unk_03      = 3;
 }

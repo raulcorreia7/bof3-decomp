@@ -1,8 +1,8 @@
 #include "battle_03.h"
 
 MATCH void func_801E567C(void) {
-    g_Task->mode = 2u;
-    g_Task->step = 0u;
+    g_Task->header.mode = 2u;
+    g_Task->header.step = 0u;
     Battle_ClearSlotPending(g_Task->slot);
 
     {

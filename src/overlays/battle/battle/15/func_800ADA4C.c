@@ -33,7 +33,7 @@ MATCH void func_800ADA4C(void) {
     if (slot != GAME_NONE) {
         Actor_SelectScript(slot);
     }
-    D_801485D6 = *pair;
-    work       = (PartyBattler*)g_Task;
-    work->mode = work->mode + 1;
+    D_801485D6        = *pair;
+    work              = (PartyBattler*)g_Task;
+    work->header.mode = work->header.mode + 1;
 }

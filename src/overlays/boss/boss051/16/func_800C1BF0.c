@@ -22,10 +22,10 @@ MATCH void func_800C1BF0(void) {
     }
     value3 = g_Task->timer;
     if (value3 == 0) {
-        D_801EB4E0->mode = 5;
-        D_801EB4E0->step = 0;
+        D_801EB4E0->header.mode = 5;
+        D_801EB4E0->header.step = 0;
         func_800A9820(g_BattleTargetSelector);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         return;
     }
     g_Task->timer = value3 - 1;

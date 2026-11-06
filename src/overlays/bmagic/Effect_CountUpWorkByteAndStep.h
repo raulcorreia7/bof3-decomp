@@ -8,6 +8,6 @@ MATCH void Effect_CountUpWorkByteAndStep(void) {
     timer          = g_Task->unk_04 + 2;
     g_Task->unk_04 = timer;
     if (timer == 16) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }

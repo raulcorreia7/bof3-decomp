@@ -14,6 +14,6 @@ MATCH void func_801F2E88(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count == 0) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }

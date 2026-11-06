@@ -8,6 +8,6 @@ MATCH void func_800C1F0C(void) {
     g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
         func_801E52F0(*g_BattleCurrentEnemy->unk_E8);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }

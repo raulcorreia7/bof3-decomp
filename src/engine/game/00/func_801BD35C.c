@@ -2,6 +2,6 @@
 
 MATCH void func_801BD35C(void) {
     if (!(g_AreaWalkFlags & AREA_WALK_RUN_ACTIVE)) {
-        g_Task->mode = 1;
+        g_Task->header.mode = 1;
     }
 }

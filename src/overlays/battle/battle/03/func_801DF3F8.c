@@ -18,7 +18,7 @@ MATCH void func_801DF3F8(void) {
     {
         PartyBattler* work = g_Task;
 
-        D_801EB154[work->step]();
+        D_801EB154[work->header.step]();
     }
     {
         PartyBattler* work = g_Task;

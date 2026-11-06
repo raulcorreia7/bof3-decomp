@@ -32,29 +32,29 @@ extern SceneFunc D_801FBFB8[];
 /* Reserve two actor slots and start the same pair of scripts on them; the
  * second script sits 0x10 bytes after the first. Every change must verify
  * every member. */
-#define SCENE_START_SCRIPT_PAIR(script)                       \
-    do {                                                      \
-        s32 first;                                            \
-        s32 second;                                           \
-        s32 first_index;                                      \
-        s32 second_index;                                     \
-                                                              \
-        first       = Actor_FindFree();                       \
-        first_index = first & BYTE_MASK;                      \
-        if (first_index != GAME_NONE) {                       \
-            g_Actors[first_index].flags = 1;                  \
-            second                      = Actor_FindFree();   \
-            second_index                = second & BYTE_MASK; \
-            if (second_index == GAME_NONE) {                  \
-                g_Actors[first_index].flags = 0;              \
-                return;                                       \
-            }                                                 \
-            g_Actors[second_index].flags = 1;                 \
-            *(s16*)D_1F800000            = (u8)first;         \
-            func_801A65A0(script);                            \
-            *(s16*)D_1F800000 = (u8)second;                   \
-            func_801A65A0((script) + 0x10);                   \
-        }                                                     \
+#define SCENE_START_SCRIPT_PAIR(script)                              \
+    do {                                                             \
+        s32 first;                                                   \
+        s32 second;                                                  \
+        s32 first_index;                                             \
+        s32 second_index;                                            \
+                                                                     \
+        first       = Actor_FindFree();                              \
+        first_index = first & BYTE_MASK;                             \
+        if (first_index != GAME_NONE) {                              \
+            g_Actors[first_index].header.flags = 1;                  \
+            second                             = Actor_FindFree();   \
+            second_index                       = second & BYTE_MASK; \
+            if (second_index == GAME_NONE) {                         \
+                g_Actors[first_index].header.flags = 0;              \
+                return;                                              \
+            }                                                        \
+            g_Actors[second_index].header.flags = 1;                 \
+            *(s16*)D_1F800000                   = (u8)first;         \
+            func_801A65A0(script);                                   \
+            *(s16*)D_1F800000 = (u8)second;                          \
+            func_801A65A0((script) + 0x10);                          \
+        }                                                            \
     } while (0)
 
 #endif

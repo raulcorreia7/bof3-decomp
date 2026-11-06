@@ -9,5 +9,5 @@ MATCH void func_801DFC20(void) {
     work                 = g_GameState;
     work->unk_134        = scratch_work->unk_58;
     scratch_work->unk_04 = 0;
-    g_Task->step         = 1;
+    g_Task->header.step  = 1;
 }

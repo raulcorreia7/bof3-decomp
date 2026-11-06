@@ -16,5 +16,5 @@ MATCH void func_801E4E10(void) {
     if ((D_801CA71C[g_BattleActionId].mask & 0x800u) == 0u) {
         func_801E3160();
     }
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }

@@ -15,7 +15,7 @@ MATCH void func_801EEF34(void) {
 #include "shared/Effect_StartPlaying.h"
 
 MATCH void func_801EEFD8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF01C);
@@ -25,7 +25,7 @@ MATCH void func_801EF0E8(void) {
     g_Task->unk_27 = D_801EB4E0->unk_27;
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF164(void) {
@@ -34,7 +34,7 @@ MATCH void func_801EF164(void) {
         func_801E257C(g_BattleActiveBattler, 0xBU);
         g_Task->unk_14 = 0x100;
         g_Task->unk_20 = -8;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -55,14 +55,14 @@ MATCH void func_801EF280(void) {
         func_801E257C(g_BattleActiveBattler, 0xC);
         func_800A9610(g_BattleTargetSelector, 0x10);
         g_Task->unk_09 = 3;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
 MATCH void func_801EF324(void) {
     if (func_8014DAEC() != 0u) {
         func_801E257C(g_BattleActiveBattler, 0xA);
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -78,7 +78,7 @@ MATCH void func_801EF37C(void) {
         work->unk_14 = 0x140;
         work->timer  = 9;
         work->unk_20 = -0x40;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -90,7 +90,7 @@ MATCH void func_801EF408(void) {
     work->unk_14        = value;
     COORD_INT(work->pos.z) += value;
     if (timer == 0) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -105,9 +105,9 @@ MATCH void func_801EF468(void) {
         timer          = g_Task->unk_09 - 1;
         g_Task->unk_09 = timer;
         if (timer != 0) {
-            g_Task->step -= 3;
+            g_Task->header.step -= 3;
         } else {
-            g_Task->step++;
+            g_Task->header.step++;
         }
     }
 }
@@ -115,12 +115,12 @@ MATCH void func_801EF468(void) {
 MATCH void func_801EF518(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800A9820(g_BattleTargetSelector);
-        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
         g_Task->unk_5D = 0;
         g_Task->unk_5E = 0;
         g_Task->unk_5F = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -163,7 +163,7 @@ MATCH void func_801EFBEC(void) {
     g_Task->unk_20 = -0x10;
     g_Task->unk_09 = 0;
     g_Task->timer  = 0x10;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 /* needs: type for g_BattleSelectedActor as a member of the BattleAction block; first diff: bnez target at +0x4C. */
@@ -194,7 +194,7 @@ MATCH void func_801EFD28(void) {
         MATCH_FAKE_BARRIER();
         func_800A9820(g_BattleTargetSelector);
         g_Task->unk_09 = 0x10;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -217,7 +217,7 @@ MATCH void func_801EFE38(void) {
     value2         = g_Task->unk_09 - 1;
     g_Task->unk_09 = value2;
     if (!(value2 & 0xFF)) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -245,7 +245,7 @@ MATCH void func_801EFFCC(void) {
         work->pos.x.fixed = source->pos.x.fixed;
         work->pos.y.fixed = source->pos.y.fixed;
         work->pos.z.fixed = source->pos.z.fixed;
-        work->step += 1;
+        work->header.step += 1;
     }
 }
 

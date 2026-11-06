@@ -283,7 +283,7 @@ MATCH void func_801F2C74(void) {
     } while ((i & BYTE_MASK) < 3u);
     SND_PlayCue(EMI_CUE_ID(2, 6));
     g_Task->unk_09 = 0x40;
-    g_Task->mode++;
+    g_Task->header.mode++;
 }
 
 MATCH void func_801F2D5C(void) {
@@ -408,10 +408,10 @@ MATCH void func_801F3120(void) {
 
 MATCH void func_801F3164(void) {
     if (SYS_TestFlag(D_80144E98, 0x17) != 0) {
-        g_Task->step = 3u;
+        g_Task->header.step = 3u;
         func_801F33A8();
     } else {
-        g_Task->step += 1u;
+        g_Task->header.step += 1u;
         func_801F31CC();
     }
 }
@@ -420,7 +420,7 @@ MATCH void func_801F31CC(void) {
     s16 point[3];
 
     if (SYS_TestFlag(D_80144E98, 0x17) != 0) {
-        g_Task->step += 1u;
+        g_Task->header.step += 1u;
         g_Task->vx = 0u;
     }
 
@@ -442,7 +442,7 @@ MATCH void func_801F32B0(void) {
     s16 point[3];
 
     if (g_Task->vx >= ONE / 4) {
-        g_Task->step += 1u;
+        g_Task->header.step += 1u;
     }
     g_Task->vx += 32;
 
@@ -605,9 +605,9 @@ MATCH void func_801F3710(void) {
     if (actor_slot == GAME_NONE) {
         return;
     }
-    slot        = &g_ActorSlots[actor_slot];
-    slot->flags = 1;
-    slot->type  = 0x2F;
+    slot               = &g_ActorSlots[actor_slot];
+    slot->header.flags = 1;
+    slot->type         = 0x2F;
 }
 
 MATCH void func_801F376C(void) {

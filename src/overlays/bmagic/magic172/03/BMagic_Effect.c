@@ -15,7 +15,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEE38(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEE7C);
@@ -37,7 +37,7 @@ MATCH void func_801EF3A4(void) {
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -50,7 +50,7 @@ MATCH void func_801EF430(void) {
     if (!(temp_v0 & 0xFF)) {
         SND_QueueSelectionFx(0x102);
         g_Task->unk_09 = 0x10;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -59,8 +59,8 @@ extern Callback D_801F0B90[];
 void            func_801F0908(void);
 
 MATCH void func_801EF518(void) {
-    D_801F0B90[g_Task->step]();
-    if (g_Task->flags & g_Task->step) {
+    D_801F0B90[g_Task->header.step]();
+    if (g_Task->header.flags & g_Task->header.step) {
         func_800AF764();
         func_801F0908();
     }

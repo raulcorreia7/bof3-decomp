@@ -5,7 +5,7 @@ MATCH void func_801A3A08(void) {
     u16    mode;
 
     work = g_Task;
-    if (!(work->flags & ACTOR_FLAG_HIDDEN)) {
+    if (!(work->header.flags & ACTOR_FLAG_HIDDEN)) {
         mode = work->unk_06;
         /* Retail shares one dispatch tail for both mode tests. */
         if ((u8)mode == 1 || (u32)(mode - 3) < 2)

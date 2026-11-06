@@ -12,13 +12,13 @@ MATCH void func_801E020C(void) {
 
     func_801DEE4C();
     work = g_Task;
-    if ((work->step != 3) && (HAS_STATUS(*g_GameState, STATUS_KO))) {
+    if ((work->header.step != 3) && (HAS_STATUS(*g_GameState, STATUS_KO))) {
         /* FAKE: half pointer; the direct global scores 97.37%. */
         u16* half;
         half = &g_BattleState;
         *half &= ~BATTLE_STATE_REPRISAL_PENDING;
-        g_Task->mode = 6;
-        g_Task->step = 4;
+        g_Task->header.mode = 6;
+        g_Task->header.step = 4;
     } else {
         /* FAKE: half pointer; the direct global scores 82.24%. */
         u16* half;
@@ -48,8 +48,8 @@ MATCH void func_801E020C(void) {
             *flag |= 1;
         }
         g_GameState->damage_flags.value &= ~0x200;
-        g_Task->mode = 2;
-        g_Task->step = 0;
+        g_Task->header.mode = 2;
+        g_Task->header.step = 0;
     }
     g_Task->unk_03 = 0;
 }

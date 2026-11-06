@@ -22,7 +22,7 @@ MATCH void func_800C1A4C(void) {
         result = &g_BattleResult;
         *result |= 4;
         g_BattleBossFlags |= 1 << ((PartyBattler*)g_Task)->slot;
-        ((PartyBattler*)g_Task)->step += 1;
+        ((PartyBattler*)g_Task)->header.step += 1;
     }
     func_8014D978();
 }

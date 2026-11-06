@@ -11,7 +11,7 @@ MATCH void func_801D11C0(void) {
         return;
     }
     if (D_8014930E >= 0x39) {
-        g_Task->step = 3;
+        g_Task->header.step = 3;
     }
     g_Task->unk_2A              = g_BattlePartyBattlers[0].unk_2A;
     g_Task->unk_49              = D_80145ED9;

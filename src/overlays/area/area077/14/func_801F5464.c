@@ -6,7 +6,7 @@ MATCH void func_801F5464(void) {
     work->y.fixed -= 0x2000;
     COORD_INT(work->z) -= 0x10;
     if (work->y.fixed == 0x340000) {
-        work->step = 1;
+        work->header.step = 1;
     }
     func_801F54B8();
 }

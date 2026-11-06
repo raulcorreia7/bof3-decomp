@@ -18,7 +18,7 @@ MATCH void func_801EF234(void) {
         timer          = g_Task->unk_09 - 1;
         g_Task->unk_09 = timer;
         if (timer == 0) {
-            g_Task->mode = g_Task->mode + 1;
+            g_Task->header.mode = g_Task->header.mode + 1;
         }
     }
 }
@@ -26,9 +26,9 @@ MATCH void func_801EF234(void) {
 MATCH void func_801EF2A8(void) {
     if (g_Task->unk_0B == 0xFF) {
         func_800AFC54();
-        BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -37,7 +37,7 @@ MATCH void func_801EF2A8(void) {
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF398(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF3DC);
@@ -52,7 +52,7 @@ MATCH void func_801EF518(void) {
     if (func_800AF66C(*selected, 0x20000)) {
         g_Task->unk_09             = func_800AFF98();
         BATTLE_ACTIVE_WORK->unk_0B = 0xFF;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -63,14 +63,14 @@ MATCH void func_801EF5A4(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
 MATCH void func_801EF608(void) {
     if ((BATTLE_ACTIVE_WORK->unk_0B == 0) && (func_8014DAEC() & 0xFF)) {
         g_Task->unk_09 = 0x10;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -82,13 +82,13 @@ MATCH void func_801EF678(void) {
     if (!(temp_v0 & 0xFF)) {
         s8 tone;
 
-        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C = 1;
         tone           = -0x40;
         g_Task->unk_5D = tone;
         g_Task->unk_5E = tone;
         g_Task->unk_5F = tone;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -105,7 +105,7 @@ MATCH void func_801EF720(void) {
         work->pos.x.fixed = source->pos.x.fixed;
         work->pos.y.fixed = source->pos.y.fixed;
         work->pos.z.fixed = source->pos.z.fixed;
-        work->step += 1;
+        work->header.step += 1;
     }
 }
 
@@ -115,7 +115,7 @@ MATCH void func_801EF7D0(void) {
     g_Task->unk_5F += 0x10;
     if ((s8)g_Task->unk_5D == 0) {
         BATTLE_ACTIVE_WORK->unk_0B = 0xFF;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -127,8 +127,8 @@ MATCH void func_801EF894(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC3C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
 }
@@ -141,7 +141,7 @@ MATCH void func_801EF928(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         g_Task->unk_5C    = 1;
         g_Task->unk_5D    = -((g_Task->unk_0B + 1) * 0x14);
         g_Task->unk_5E    = -((g_Task->unk_0B + 1) * 0x14);
@@ -153,7 +153,7 @@ MATCH void func_801EF928(void) {
         work->pos.x.fixed = source->pos.x.fixed;
         work->pos.y.fixed = source->pos.y.fixed;
         work->pos.z.fixed = source->pos.z.fixed;
-        work->step += 1;
+        work->header.step += 1;
     }
 }
 
@@ -163,7 +163,7 @@ MATCH void func_801EFA70(void) {
     selected = &g_BattleSelectedActor;
     func_800AF2B4(*selected, 0x60);
     if (func_800AF66C(*selected, 0x20000)) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 

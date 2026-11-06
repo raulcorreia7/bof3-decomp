@@ -5,7 +5,7 @@ MATCH void func_8019A6AC(void) {
 
     g_Task->unk_09--;
     if (g_Task->unk_09 == 0) {
-        g_Task->mode++;
+        g_Task->header.mode++;
         return;
     }
     g_Task->tint.bytes.unk_5D -= 6;

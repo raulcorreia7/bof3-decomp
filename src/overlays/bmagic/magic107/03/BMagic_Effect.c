@@ -28,14 +28,14 @@ MATCH void func_801EEC5C(void) {
     FIELD(s32, D_801EC36C, offset)           = work->pos.z.fixed + 0x04000000;
     SND_QueueSelectionFx(0x100);
     g_Task->unk_0B = 0;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EEDA0(void) {
-    SYS_DISPATCH_BYTE(D_801F048C, g_Task->mode);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(D_801F048C, g_Task->header.mode);
+    if (g_Task->header.flags != 0) {
         func_801EEFD4();
         func_801EF0E4();
         func_801EF544();
@@ -53,14 +53,14 @@ MATCH void func_801EEE50(void) {
     g_Task->unk_0B = 0;
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
-    g_Task->mode++;
+    g_Task->header.mode++;
 }
 
 MATCH void func_801EEEA0(void) {
     g_Task->unk_09 += 1;
     g_Task->timer += 1;
     if (g_Task->unk_09 == 0x20) {
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 

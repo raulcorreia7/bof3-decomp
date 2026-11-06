@@ -11,6 +11,6 @@ MATCH void func_801F2DE0(void) {
     ((Actor*)g_Task)->unk_09 = remaining;
     if (!(remaining & 0xFF)) {
         ((Actor*)g_Task)->unk_09 = 0x1E;
-        ((Actor*)g_Task)->mode += 1;
+        ((Actor*)g_Task)->header.mode += 1;
     }
 }

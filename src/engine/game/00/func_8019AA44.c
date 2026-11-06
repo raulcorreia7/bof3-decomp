@@ -16,5 +16,5 @@ MATCH void func_8019AA44(void) {
         work->unk_09--;
         return;
     }
-    work->mode = 2;
+    work->header.mode = 2;
 }

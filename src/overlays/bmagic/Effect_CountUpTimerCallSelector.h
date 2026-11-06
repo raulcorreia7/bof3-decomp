@@ -11,7 +11,7 @@ MATCH void Effect_CountUpTimerCallSelector(void) {
     work->unk_09 = timer;
     if (timer == 24) {
         func_800A9610(g_BattleTargetSelector, 0x10);
-        work       = g_Task;
-        work->step = work->step + 1;
+        work              = g_Task;
+        work->header.step = work->header.step + 1;
     }
 }

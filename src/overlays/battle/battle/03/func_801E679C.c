@@ -24,8 +24,8 @@ MATCH void func_801E679C(void) {
     } else {
         g_Task->unk_2A = 0;
     }
-    g_Task->mode = g_Task->mode + 1;
-    table        = D_801EB4B0 + (g_Task->unk_07 << 1);
+    g_Task->header.mode = g_Task->header.mode + 1;
+    table               = D_801EB4B0 + (g_Task->unk_07 << 1);
     Actor_SelectScript(table[g_Task->facing >> 1]);
     Area_AddActor();
 }

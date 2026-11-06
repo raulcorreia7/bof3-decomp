@@ -3,9 +3,9 @@
 MATCH void func_800C227C(void) {
     if (g_BattleState & 4) {
         if (LOHU(g_BattleActionId) == 0x81) {
-            ((PartyBattler*)g_Task)->unk_0B = 1;
-            D_801463BE                      = 8;
-            ((PartyBattler*)g_Task)->step   = 3;
+            ((PartyBattler*)g_Task)->unk_0B      = 1;
+            D_801463BE                           = 8;
+            ((PartyBattler*)g_Task)->header.step = 3;
             return;
         }
         func_801E567C();

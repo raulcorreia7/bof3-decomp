@@ -20,6 +20,6 @@ MATCH void func_8019E2A8(void) {
     other->tint.signed_bytes.unk_5E  = 0;
     g_Task->tint.signed_bytes.unk_5F = 0;
     Actor_SelectScript(8);
-    flags       = g_Task;
-    flags->step = (flags->step + 1);
+    flags              = g_Task;
+    flags->header.step = (flags->header.step + 1);
 }

@@ -79,7 +79,7 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
     }
     slot = selection_kind;
     if (BATTLER_IS_PLAYER(slot)) {
-        GFX_FreePaletteFadeTarget(&g_BattlePartyBattlers[slot].flags);
+        GFX_FreePaletteFadeTarget(&g_BattlePartyBattlers[slot].header.flags);
         merged                                 = g_BattlePartyBattlers[slot].chr.status;
         merged                                 = merged | g_BattlePendingStatus;
         g_BattlePartyBattlers[slot].chr.status = merged;

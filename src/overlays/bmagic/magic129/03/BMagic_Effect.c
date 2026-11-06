@@ -66,7 +66,7 @@ MATCH void func_801F00D4(void) {
         g_Task->unk_5F      = (rand() & 7) + 5;
         g_Task->unk_09      = 0x10;
         g_Task->timer       = 0x10;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -78,7 +78,7 @@ MATCH void func_801F023C(void) {
     work->unk_14        = value;
     work->pos.z.fixed += value;
     if (timer == 0) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

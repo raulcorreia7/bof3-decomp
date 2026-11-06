@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEF84(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEFC8);
@@ -38,7 +38,7 @@ MATCH void func_801EF324(void) {
             func_80196718((EnemyBattler*)&g_BattlePartyBattlers[g_Task->unk_03]);
             func_800AF814(g_Task->unk_03);
         }
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

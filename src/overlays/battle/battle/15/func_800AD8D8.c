@@ -11,6 +11,6 @@ MATCH void func_800AD8D8(void) {
     if (flag == GAME_NONE) {
         Actor_SelectScript(0x13);
         work = (PartyBattler*)g_Task;
-        work->step++;
+        work->header.step++;
     }
 }

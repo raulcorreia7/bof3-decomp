@@ -25,7 +25,7 @@ MATCH void func_801D0CC0(void) {
     g_Task->unk_09 = mode;
     if (!(mode & 0xFF)) {
         g_Task->unk_09 = 0x40;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -37,7 +37,7 @@ MATCH void func_801D0D54(void) {
     g_Task->unk_09 = mode;
     if (!(mode & 0xFF)) {
         g_Task->unk_09 = 0x20;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 

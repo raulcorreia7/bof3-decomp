@@ -13,6 +13,6 @@ MATCH void func_801F2CF8(void) {
         Actor_SelectScript(0x6E);
         g_Task = actor;
         g_BattlePartyBattlers[0].unk_07 &= 0x11;
-        actor->mode = 3;
+        actor->header.mode = 3;
     }
 }

@@ -8,14 +8,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/BMagic_RunStep.h"
 
 MATCH void func_801EECDC(void) {
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }
 
 MATCH void func_801EECFC(void) {
     BMagic064Steps steps;
 
     steps = D_801EEC10;
-    steps.handlers[g_Task->step]();
+    steps.handlers[g_Task->header.step]();
 }
 
 MATCH void func_801EED7C(void) {
@@ -29,7 +29,7 @@ MATCH void func_801EED7C(void) {
     g_Task = temp_s0;
     SND_PlayCue(0x100U);
     g_Task->unk_0B = 0;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EEE1C(void) {
@@ -43,7 +43,7 @@ MATCH void func_801EEE1C(void) {
         return;
     }
     g_Task = battler;
-    battler->step += 1;
+    battler->header.step += 1;
 }
 
 INCLUDE_ASM(func_801EEEA8);
@@ -64,9 +64,9 @@ MATCH void func_801EF20C(void) {
         return;
     }
     func_80196718(D_801EB4E0);
-    D_801EB4E0->flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
+    D_801EB4E0->header.flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
     g_Task->unk_09 = 0;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF29C(void) {
@@ -95,7 +95,7 @@ MATCH void func_801EF2A4(void) {
         }
     }
     EMI_LoaderStreamInitSlot(value);
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 INCLUDE_ASM(func_801EF3C8);
@@ -110,7 +110,7 @@ MATCH void func_801EF570(void) {
         return;
     }
     g_Task = battler;
-    battler->step += 1;
+    battler->header.step += 1;
 }
 
 MATCH void func_801EF5FC(void) {
@@ -124,10 +124,10 @@ MATCH void func_801EF5FC(void) {
         MATCH_FAKE_BARRIER();
         g_AreaCameraHeight = COORD_INT(work->pos.z);
         func_801F103C();
-        g_Task->unk_09 = 0x40;
-        g_Task->timer  = 1;
-        g_Task->mode   = 2;
-        g_Task->step   = 0;
+        g_Task->unk_09      = 0x40;
+        g_Task->timer       = 1;
+        g_Task->header.mode = 2;
+        g_Task->header.step = 0;
     }
 }
 
@@ -144,14 +144,14 @@ MATCH void func_801EF7F8(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC50;
-    handlers.handlers[g_Task->step]();
-    if (g_Task->flags) {
+    handlers.handlers[g_Task->header.step]();
+    if (g_Task->header.flags) {
         func_8014D290();
     }
 }
 
 MATCH void func_801EF87C(void) {
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF89C(void) {
@@ -164,8 +164,8 @@ INCLUDE_ASM(func_801EF8F4);
 
 MATCH void func_801F001C(void) {
     func_8014DAEC();
-    D_801EB4E0->step += 1;
-    g_Task->step += 1;
+    D_801EB4E0->header.step += 1;
+    g_Task->header.step += 1;
     g_Task->unk_03 = 0;
 }
 
@@ -179,7 +179,7 @@ MATCH void func_801F01C4(void) {
     g_Task->unk_0B = 0;
     g_Task->unk_09 = 64;
     func_801F03D8();
-    g_Task->step++;
+    g_Task->header.step++;
 }
 
 MATCH void func_801F0214(void) {
@@ -189,7 +189,7 @@ MATCH void func_801F0214(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -200,8 +200,8 @@ MATCH void func_801F0278(void) {
     if (!(g_FrameCount & 1)) {
         temp_v1 = g_Task->unk_0B;
         if (temp_v1 >= 0x18U) {
-            D_801EB4E0->step += 1;
-            g_Task->step += 1;
+            D_801EB4E0->header.step += 1;
+            g_Task->header.step += 1;
             return;
         }
         g_Task->unk_0B = temp_v1 + 1;
@@ -209,8 +209,8 @@ MATCH void func_801F0278(void) {
 }
 
 MATCH void func_801F0310(void) {
-    if (D_801EB4E0->step == 0xA) {
-        g_Task->step += 1;
+    if (D_801EB4E0->header.step == 0xA) {
+        g_Task->header.step += 1;
     }
     func_801F03D8();
 }
@@ -235,8 +235,8 @@ MATCH void func_801F0C38(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC70;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
         func_8014D290();
     }
 }
@@ -245,11 +245,11 @@ MATCH void func_801F0CBC(void) {
     Actor_RequestScript(g_Task->unk_0B);
     do {
     } while (!(func_8014DAEC() & 0xFF));
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801F0D14(void) {
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801F0D34(void) {
@@ -271,7 +271,7 @@ MATCH void func_801F0DD8(void) {
     counter      = work->unk_09 - 1;
     work->unk_09 = counter;
     if (counter == -6) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
     Area_UpdatePaletteTint((s8)g_Task->unk_09);
 }
@@ -281,9 +281,9 @@ MATCH void func_801F0E50(void) {
     PartyBattler* work;
 
     active = BATTLE_ACTIVE_WORK;
-    if (active->step == 10) {
-        work       = g_Task;
-        work->step = work->step + 1;
+    if (active->header.step == 10) {
+        work              = g_Task;
+        work->header.step = work->header.step + 1;
     }
 }
 

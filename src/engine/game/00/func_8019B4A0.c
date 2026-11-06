@@ -46,12 +46,12 @@ MATCH void func_8019B4A0(void) {
                 }
                 g_Task->gravity = 0;
                 Actor_SelectScript(1);
-                g_Task->unk_09 = 0;
-                g_Task->mode   = g_Task->mode + 1;
+                g_Task->unk_09      = 0;
+                g_Task->header.mode = g_Task->header.mode + 1;
             } else {
                 ((void (*)(s16, s16, s32))Area_SetCellCode)(COORD_INT(g_Task->x), COORD_INT(g_Task->y), g_Task->unk_0B);
-                g_Task->unk_09 = 0;
-                g_Task->mode   = 4;
+                g_Task->unk_09      = 0;
+                g_Task->header.mode = 4;
             }
         } else if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
             ((void (*)(s16, s16, s32))Area_SetCellCode)(COORD_INT(g_Task->x), COORD_INT(g_Task->y), g_Task->unk_0B);

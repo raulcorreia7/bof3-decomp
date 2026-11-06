@@ -9,5 +9,5 @@ MATCH void func_801E4DD8(void) {
 
     func_801E3160();
     work = g_Task;
-    work->step += 1;
+    work->header.step += 1;
 }

@@ -99,7 +99,7 @@ MATCH void func_801B146C(void) {
             work_j         = g_Task;
             work_j->unk_09 = (work_j->unk_09 - 1);
             func_801B0DFC();
-            g_Task->step = 2;
+            g_Task->header.step = 2;
             goto block_end; /* leave the frame flags alone */
         }
         counter    = D_80143F22;
@@ -116,7 +116,7 @@ MATCH void func_801B146C(void) {
                 g_GameState->counter_11C.u8_value = 3U;
                 Actor_RequestScript(g_Task->direction_08);
                 g_AreaWalkFlags |= AREA_WALK_TRANSITION;
-                g_Task->mode = 5;
+                g_Task->header.mode = 5;
                 ACTOR_CLEAR_STEP();
                 return;
             }
@@ -139,7 +139,7 @@ MATCH void func_801B146C(void) {
             func_801B5BDC(g_Task->direction_08);
             g_GameState->mode_12B.u8_value = 0;
         block_46:
-            g_Task->step = 1;
+            g_Task->header.step = 1;
         block_end:;
         }
     }

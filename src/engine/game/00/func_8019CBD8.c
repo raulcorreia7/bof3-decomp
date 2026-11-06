@@ -20,8 +20,8 @@ MATCH void func_8019CBD8(void) {
     work->vz                         = 0;
     work->unk_09                     = 0;
     func_8019D270();
-    g_Task->unk_0B = 0U;
-    counter        = g_Task;
-    counter->mode  = (counter->mode + 1);
+    g_Task->unk_0B       = 0U;
+    counter              = g_Task;
+    counter->header.mode = (counter->header.mode + 1);
     func_8015A944();
 }

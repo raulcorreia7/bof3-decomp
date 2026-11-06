@@ -14,7 +14,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EEE68(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEEAC);
@@ -27,7 +27,7 @@ MATCH void func_801EF218(void) {
     timer         = g_Task->timer + 8;
     g_Task->timer = timer;
     if (timer == 32) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -38,7 +38,7 @@ MATCH void func_801EF268(void) {
     g_Task->unk_0B = timer;
     if (timer == 8) {
         func_800A9610(g_BattleTargetSelector, 0x10);
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -49,7 +49,7 @@ MATCH void func_801EF324(void) {
 
     work = g_Task;
     if (++work->unk_0C == 0x2E) {
-        work->step++;
+        work->header.step++;
     }
 }
 
@@ -59,7 +59,7 @@ MATCH void func_801EF35C(void) {
     timer          = g_Task->unk_04 - 2;
     g_Task->unk_04 = timer;
     if (timer == 0) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 

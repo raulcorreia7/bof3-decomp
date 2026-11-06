@@ -6,6 +6,6 @@
 MATCH void Effect_MarkTargetDamagedOnTickerZero(void) {
     if (g_Task->unk_0B == 0) {
         func_800A9820(g_BattleTargetSelector);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }

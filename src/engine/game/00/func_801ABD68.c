@@ -24,7 +24,7 @@ MATCH u8 func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas) {
         work2->unk_09  = count;
         g_Task->unk_0A = count + 1;
         work3          = g_Task;
-        work3->flags |= ACTOR_FLAG_STEP_MOVE;
+        work3->header.flags |= ACTOR_FLAG_STEP_MOVE;
         work3->vx = dx / count;
         work3->vy = dy / count;
         work3->vz = dz / count;

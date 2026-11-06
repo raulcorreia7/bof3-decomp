@@ -43,7 +43,7 @@
                 Actor_RequestScript(SECOND_SCRIPT);                                   \
                 break;                                                                \
         }                                                                             \
-        g_Task->step++;                                                               \
+        g_Task->header.step++;                                                        \
     } else {                                                                          \
         g_Task->unk_09--;                                                             \
         if (g_Task->unk_09 == 0) {                                                    \
@@ -69,7 +69,7 @@
         g_Task->unk_03 = FACING_BACK;                                                        \
     }                                                                                        \
     g_Task->unk_09 = 2;                                                                      \
-    g_Task->step++
+    g_Task->header.step++
 
 #define CHAR_LAUNCH_SCRIPT_PC 10
 

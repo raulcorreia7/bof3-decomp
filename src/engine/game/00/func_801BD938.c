@@ -29,8 +29,8 @@ MATCH s32 func_801BD938(void) {
     if (slot == ((RANDOM_MASK(1)) + 1)) {
         g_GameState->mode_12B.u8_value = 9;
         Actor_RequestScript(g_Task->direction_08);
-        g_Task->unk_09 = 2;
-        g_Task->mode   = 6;
+        g_Task->unk_09      = 2;
+        g_Task->header.mode = 6;
         ACTOR_CLEAR_STEP();
         return 1;
     }

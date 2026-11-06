@@ -14,7 +14,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EEE5C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEEA0);
@@ -30,7 +30,7 @@ MATCH void func_801EF158(void) {
     work->unk_09++;
     if (work->unk_09 == 8) {
         work = g_Task;
-        work->step++;
+        work->header.step++;
     }
 }
 

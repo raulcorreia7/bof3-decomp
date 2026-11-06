@@ -6,7 +6,7 @@ MATCH void func_801F2CB4(void) {
     if (g_AreaSceneMode == 1) {
         FIELD(u8, g_Task, 0x9u) = 0;
         work                    = g_Task;
-        work->step++;
+        work->header.step++;
         func_801F2F38(0, 0);
     }
 }

@@ -20,7 +20,7 @@ MATCH void func_801DB140(void) {
         D_8014419E                                             = 4;
         D_8014403D                                             = 4;
         D_80144125                                             = 7;
-        g_ActorSlots[0].mode                                   = 0;
+        g_ActorSlots[0].header.mode                            = 0;
         D_8014420D                                             = 0;
         D_80146889[D_801E3208 * sizeof(FishingSelectionState)] = 6;
         SND_PlayCue(EMI_CUE_ID(2, 3));

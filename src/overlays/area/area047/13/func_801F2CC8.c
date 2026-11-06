@@ -11,6 +11,6 @@ MATCH void func_801F2CC8(void) {
     work = g_Task;
     if (--work->vx == 0) {
         work->vx = 0x10;
-        work->mode++;
+        work->header.mode++;
     }
 }

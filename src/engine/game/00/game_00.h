@@ -95,10 +95,10 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 #define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                                    \
     if ((g_GameFlags & 0x400) == 0) {                                                                             \
         if ((func_801C39D8(g_Task->x.fixed, g_Task->y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != 0) { \
-            g_Task->mode   = 2;                                                                                   \
-            g_Task->step   = flags;                                                                               \
-            g_Task->unk_03 = 0;                                                                                   \
-            g_Task->unk_04 = 0;                                                                                   \
+            g_Task->header.mode = 2;                                                                              \
+            g_Task->header.step = flags;                                                                          \
+            g_Task->unk_03      = 0;                                                                              \
+            g_Task->unk_04      = 0;                                                                              \
             return 1;                                                                                             \
         }                                                                                                         \
     }                                                                                                             \

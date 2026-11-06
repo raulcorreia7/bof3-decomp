@@ -16,8 +16,8 @@ INCLUDE_ASM(func_801EED5C);
 MATCH void func_801EEF6C(void) {
     if (g_Task->unk_0B == 0xFF) {
         func_800AEF98(4, 0);
-        BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
-        g_Task->mode += 1;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -78,9 +78,9 @@ INCLUDE_ASM(func_801EF7C8);
 
 MATCH void func_801EF9D4(void) {
     if (g_Task->unk_0B == 0xFF) {
-        BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -101,9 +101,9 @@ INCLUDE_ASM(func_801EFAD4);
 
 MATCH void func_801EFC90(void) {
     if (g_Task->unk_0B == 0xFF) {
-        BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -141,7 +141,7 @@ MATCH void func_801F0330(void) {
     g_Task->scale.y = 0x10000;
     g_Task->unk_48  = 2;
     g_Task->unk_09  = 0x1E;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 INCLUDE_ASM(func_801F037C);
@@ -155,7 +155,7 @@ MATCH void func_801F03FC(void) {
     if (!(counter & 0xFF)) {
         func_800A9820(g_BattleTargetSelector);
         func_800AFC98(2, 4);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -163,7 +163,7 @@ MATCH void func_801F047C(void) {
     if (func_8014DAEC() & 0xFF) {
         SND_QueueSelectionFx(0x101);
         g_Task->unk_09 = 0xF;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -178,7 +178,7 @@ MATCH void func_801F04DC(void) {
     work->scale.y = work->scale.y - 0x1000;
     if (timer == 0) {
         D_801EB4E0->unk_0B = 0xFF;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -200,7 +200,7 @@ MATCH void func_801F0710(void) {
     g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
         g_Task->unk_09 = func_800AFF98();
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -214,7 +214,7 @@ MATCH void func_801F07D4(void) {
         func_800A9820(g_BattleTargetSelector);
         func_800AFC98(2, 4);
         g_Task->unk_09 = 0x20;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -222,7 +222,7 @@ MATCH void func_801F0864(void) {
     if (func_8014DAEC() & 0xFF) {
         SND_QueueSelectionFx(0x101);
         g_Task->unk_09 = 0x20;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -248,8 +248,8 @@ MATCH void func_801F0964(void) {
 }
 
 MATCH void func_801F09D0(void) {
-    g_Task->unk_09 = func_800AFF98();
-    g_Task->step   = g_Task->step + 1;
+    g_Task->unk_09      = func_800AFF98();
+    g_Task->header.step = g_Task->header.step + 1;
     func_8014D290();
 }
 
@@ -261,11 +261,11 @@ MATCH void func_801F0A20(void) {
     if (!(value & 0xFF)) {
         func_8014DAEC();
         func_800AFC98(2, 4);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     } else if (func_8014DAEC() & 0xFF) {
         func_800AFC98(2, 4);
         g_Task->unk_09 = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
     func_8014D290();
 }
@@ -274,7 +274,7 @@ MATCH void func_801F0AC8(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800A9820(g_BattleTargetSelector);
         BATTLE_ACTIVE_WORK->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
     func_8014D290();
 }
@@ -299,8 +299,8 @@ MATCH void func_801F0DA8(void) {
     BmagicEffectFuncs handlers;
 
     handlers = D_801EEC94;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
 }
@@ -318,7 +318,7 @@ MATCH void func_801F0FA4(void) {
         g_Task->unk_09 = value;
         if (!(value & 0xFF)) {
             g_Task->unk_09 = g_Task->unk_0B + 4;
-            g_Task->step += 1;
+            g_Task->header.step += 1;
         }
     } else {
         g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed + g_Task->unk_0C;
@@ -330,7 +330,7 @@ INCLUDE_ASM(func_801F1090);
 
 MATCH void func_801F117C(void) {
     if ((func_8014DAEC() & BYTE_MASK) != 0u) {
-        g_Task->step += 1u;
+        g_Task->header.step += 1u;
     }
 }
 
@@ -340,7 +340,7 @@ MATCH void func_801F11C4(void) {
     g_Task->unk_5F -= 3;
     if ((s8)g_Task->unk_5D == -0x80) {
         D_801EB4E0->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -361,16 +361,16 @@ MATCH void func_801F1384(void) {
     if (!(temp_v0 & 0xFF)) {
         func_800AFC98(2, 0);
         func_800A9820(g_BattleTargetSelector);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801F1400(void) {
     if (func_8014DAEC() & 0xFF) {
-        if (g_Task->step == 5) {
+        if (g_Task->header.step == 5) {
             D_801EB4E0->unk_0B = 0xFF;
         }
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -395,16 +395,16 @@ MATCH void func_801F1804(void) {
     if (!(temp_v0 & 0xFF)) {
         func_800AFC98(2, 0);
         func_800A9820(g_BattleTargetSelector);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801F1880(void) {
     if (func_8014DAEC() & 0xFF) {
-        if (g_Task->step == 8) {
+        if (g_Task->header.step == 8) {
             D_801EB4E0->unk_0B = 0xFF;
         }
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

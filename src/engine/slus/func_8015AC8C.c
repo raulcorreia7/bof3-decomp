@@ -9,7 +9,7 @@ MATCH void func_8015AC8C(u8* panel) {
     s32    value;
     u8     index;
 
-    g_Task->flags        = ACTOR_FLAG_IN_USE;
+    g_Task->header.flags = ACTOR_FLAG_IN_USE;
     g_Task->active_flags = ACTOR_FLAG_ACTIVE;
     g_Task->unk_48       = 1;
     work                 = g_Task;

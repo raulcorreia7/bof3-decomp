@@ -22,13 +22,13 @@ MATCH void func_8019C794(void) {
         code = 0x4F;
     report:
         Actor_SelectScript(code);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     } else if ((g_Task->unk_0A & 1) == 0) {
         index = Actor_FindFreeSlot();
         if (index != GAME_NONE) {
-            g_ActorSlots[index].flags = 1;
-            g_ActorSlots[index].type  = 0x1B;
-            g_ActorSlots[index].mode  = 3;
+            g_ActorSlots[index].header.flags = 1;
+            g_ActorSlots[index].type         = 0x1B;
+            g_ActorSlots[index].header.mode  = 3;
         }
     }
     func_8014D978();

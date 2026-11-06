@@ -8,5 +8,5 @@ MATCH void func_801F2CD0(void) {
     value                = *(s32*)(D_80147AAC + actor->unk_18 * ACTOR_SIZE);
     actor->unk_09        = 0;
     actor->range_54.word = value;
-    g_Task->mode         = 1;
+    g_Task->header.mode  = 1;
 }

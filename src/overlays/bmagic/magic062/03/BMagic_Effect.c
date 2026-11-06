@@ -34,12 +34,12 @@ INCLUDE_ASM(func_801EF2F0);
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF4C4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF508(void) {
-    SYS_DISPATCH_BYTE(D_801F0C18, g_Task->step);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(D_801F0C18, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
         Effect_SetActorMatrix();
         func_801EF678();
         func_801EF934();
@@ -102,7 +102,7 @@ MATCH void func_801EFF68(void) {
             g_Task->unk_10 = 8;
             g_Task->unk_14 = 8;
             g_Task->unk_20 = 8;
-            g_Task->step += 1;
+            g_Task->header.step += 1;
         }
     }
 }

@@ -26,8 +26,8 @@ NON_MATCHING void func_801DE1D4(void) {
             g_Task                                  = &g_BattlePartyBattlers[index];
             g_BattleEffects[(u8)slot].handler_index = 7;
             g_BattleEffects[(u8)slot].unk_06        = 0;
-            g_BattleEffects[(u8)slot].mode          = 0;
-            g_BattleEffects[(u8)slot].step          = 0;
+            g_BattleEffects[(u8)slot].header.mode   = 0;
+            g_BattleEffects[(u8)slot].header.step   = 0;
             g_BattleEffects[(u8)slot].unk_29        = 3;
             g_BattleEffects[(u8)slot].unk_5C        = 0;
             g_BattleEffects[(u8)slot].unk_5D        = 0;
@@ -46,8 +46,8 @@ NON_MATCHING void func_801DE1D4(void) {
             TASK_SET((g_BattleEnemies + index * 0x118));
             g_BattleEffects[(u8)slot].handler_index = 7;
             g_BattleEffects[(u8)slot].unk_06        = 0;
-            g_BattleEffects[(u8)slot].mode          = 0;
-            g_BattleEffects[(u8)slot].step          = 0;
+            g_BattleEffects[(u8)slot].header.mode   = 0;
+            g_BattleEffects[(u8)slot].header.step   = 0;
             g_BattleEffects[(u8)slot].unk_29        = 3;
             g_BattleEffects[(u8)slot].unk_5C        = 0;
             g_BattleEffects[(u8)slot].unk_5D        = 0;

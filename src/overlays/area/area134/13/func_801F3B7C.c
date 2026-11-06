@@ -8,6 +8,6 @@ MATCH void func_801F3B7C(void) {
     timer   = work[9];
     work[9] = timer + 0xFF;
     if (timer == 0) {
-        g_Task->mode = 0xF;
+        g_Task->header.mode = 0xF;
     }
 }

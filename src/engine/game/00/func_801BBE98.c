@@ -35,6 +35,6 @@ MATCH void func_801BBE98(void) {
     Actor_SelectScript(g_Task->direction_08);
 
     work = g_Task;
-    work->mode++;
+    work->header.mode++;
     ACTOR_CLEAR_STEP();
 }

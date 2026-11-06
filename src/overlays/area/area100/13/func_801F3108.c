@@ -11,6 +11,6 @@ MATCH void func_801F3108(void) {
     pos.z = actor->z.fixed;
     func_801F31E8(&pos, actor->vz);
     if (g_Task->vz > 0x07FFFFFF) {
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

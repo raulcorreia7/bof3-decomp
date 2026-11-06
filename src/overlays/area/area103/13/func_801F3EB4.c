@@ -5,7 +5,7 @@ MATCH void func_801F3EB4(void) {
         g_Task->x.fixed -= 0x800;
         g_Task->y.fixed += 0x800;
     } else {
-        g_Task->step++;
+        g_Task->header.step++;
     }
     Area_StepSceneFrame();
 }

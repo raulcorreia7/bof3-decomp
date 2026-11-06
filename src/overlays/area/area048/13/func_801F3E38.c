@@ -5,6 +5,6 @@ MATCH void func_801F3E38(void) {
         ((COORD_INT(g_Task->x) != 0) && (D_8014686B != 0))) {
         SND_PlayCue(0x20DU);
         g_Task->unk_09 = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }

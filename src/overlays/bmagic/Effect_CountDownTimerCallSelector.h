@@ -7,6 +7,6 @@ MATCH void Effect_CountDownTimerCallSelector(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         func_800A9610(g_BattleTargetSelector, 0x20);
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

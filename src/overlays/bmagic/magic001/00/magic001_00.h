@@ -14,8 +14,8 @@ void func_801E257C(u32 enemy_index, u32 script_index);
 static inline void BMagic_ClearWorkFlagsAndStep(void) {
     if (g_Task->unk_0B == 0) {
         func_800AFC54();
-        BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
-        g_Task->mode += 1;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        g_Task->header.mode += 1;
     }
 }
 

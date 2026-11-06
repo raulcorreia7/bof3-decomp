@@ -46,11 +46,11 @@ MATCH void func_801EF2A0(void) {
     saved_work = g_Task;
     battler    = &g_BattlePartyBattlers[g_BattleActiveBattler];
     g_Task     = battler;
-    battler->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+    battler->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
     g_Task = saved_work;
-    saved_work->mode += 1;
-    g_Task->step   = 0;
-    g_Task->unk_03 = 0;
+    saved_work->header.mode += 1;
+    g_Task->header.step = 0;
+    g_Task->unk_03      = 0;
 }
 
 MATCH void func_801EF318(void) {
@@ -73,7 +73,7 @@ MATCH void func_801EF9F0(void) {
 MATCH void func_801EFA34(void) {
     BmagicEffectFuncs handlers;
 
-    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC38, step);
+    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC38, header.step);
 }
 
 INCLUDE_ASM(func_801EFAAC);
@@ -89,7 +89,7 @@ MATCH void func_801EFD24(void) {
     g_Task->unk_09 = count;
     if (count == 0) {
         BATTLE_ACTIVE_WORK->unk_0B = 1;
-        g_Task->step               = g_Task->step + 1;
+        g_Task->header.step        = g_Task->header.step + 1;
     }
 }
 
@@ -98,9 +98,9 @@ MATCH void func_801EFD80(void) {
     PartyBattler* work;
 
     active = BATTLE_ACTIVE_WORK;
-    if (active->mode == 2) {
-        work       = SP_REF(PartyBattler*, 0x44u);
-        work->step = work->step + 1;
+    if (active->header.mode == 2) {
+        work              = SP_REF(PartyBattler*, 0x44u);
+        work->header.step = work->header.step + 1;
     }
 }
 
@@ -112,8 +112,8 @@ MATCH void func_801EFDC0(void) {
 }
 
 MATCH void func_801EFE00(void) {
-    SYS_DISPATCH_BYTE(D_801F24B8, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F24B8, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801F026C();
         func_801F0648();
@@ -137,7 +137,7 @@ MATCH void func_801EFE90(void) {
     g_Task->unk_0B    = 0;
     g_Task->unk_09    = 0;
     g_Task->timer     = 0x1E;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EFF44(void) {
@@ -146,7 +146,7 @@ MATCH void func_801EFF44(void) {
     timer          = g_Task->unk_09 + 2;
     g_Task->unk_09 = timer;
     if (timer == 32) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -160,7 +160,7 @@ MATCH void func_801F00E8(void) {
     temp_v1        = g_Task->unk_5D - 1;
     g_Task->unk_5D = temp_v1;
     if ((s8)temp_v1 == 8) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -202,7 +202,7 @@ MATCH void func_801F0BA8(void) {
     g_Task->unk_0B      = 0;
     g_Task->unk_09      = 0;
     g_Task->timer       = 4;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801F0C50(void) {
@@ -212,7 +212,7 @@ MATCH void func_801F0C50(void) {
     g_Task->timer = temp_v0;
     if ((temp_v0 & 0xFF) >= 0x20U) {
         g_Task->unk_0B = 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -246,7 +246,7 @@ MATCH void func_801F11E0(void) {
         g_Task->unk_0B      = rand() & 0xF;
         g_Task->unk_09      = 0;
         g_Task->timer       = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -255,7 +255,7 @@ MATCH void func_801F129C(void) {
     g_Task->timer += 4;
     if (g_Task->timer == 0x10) {
         g_Task->unk_09 = 8;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -268,8 +268,8 @@ MATCH void func_801F129C(void) {
 INCLUDE_ASM(func_801F14D0);
 
 MATCH void func_801F1C3C(void) {
-    SYS_DISPATCH_BYTE(D_801F250C, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F250C, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801F1DC0();
         func_801F1E70();
         func_801F2188();
@@ -288,7 +288,7 @@ MATCH void func_801F1CCC(void) {
     work->unk_09      = 0x10;
     work->unk_14      = 0x100;
     work->pos.z.fixed = z;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801F1D28(void) {
@@ -299,7 +299,7 @@ MATCH void func_801F1D28(void) {
     value        = work->unk_14 + 0x80;
     work->unk_14 = value;
     if (value == 0x400) {
-        work->step++;
+        work->header.step++;
     }
 }
 

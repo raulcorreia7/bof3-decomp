@@ -7,6 +7,6 @@ MATCH void func_801F3E64(void) {
     work         = g_Task;
     work->unk_2E = 0x40;
     work->unk_30 = 0;
-    work->mode++;
+    work->header.mode++;
     SND_PlayCue(0x200);
 }

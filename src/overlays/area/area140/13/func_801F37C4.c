@@ -12,7 +12,7 @@ MATCH void func_801F37C4(void) {
     replay:
         Area_SetCellPalette((s32)COORD_INT(g_Task->x), (s32)COORD_INT(g_Task->y));
         Area_SetCellPalette((s32)(s16)((u16)COORD_INT(g_Task->x) + 1), (s32)(s16)((u16)COORD_INT(g_Task->y) + 1));
-        g_Task->step += 1;
+        g_Task->header.step += 1;
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x205U);
         }

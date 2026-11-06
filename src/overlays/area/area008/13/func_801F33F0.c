@@ -12,7 +12,7 @@ MATCH void func_801F33F0(void) {
     e    = &g_Actors[((u8*)s)[0x0B]];
     TASK_SET(e);
     if ((step & 0x80u) != 0u) {
-        s->mode = 0x0E;
+        s->header.mode = 0x0E;
     } else if (g_ScriptVars[1] == 1) {
         u8 next = (step + 1);
 
@@ -23,10 +23,10 @@ MATCH void func_801F33F0(void) {
             D_80146876[0] = 0xFF;
         }
         Actor_SelectScript(2);
-        s->mode = 7;
+        s->header.mode = 7;
     } else if (e->script_pc == 8 && e->unk_4A == 1) {
         Actor_SelectScript(4);
-        s->mode = 4;
+        s->header.mode = 4;
     }
     g_Task = s;
 }

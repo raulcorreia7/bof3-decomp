@@ -19,11 +19,11 @@ MATCH void func_800A87D4(void) {
         *slot                                            = *(BattleWorkImage*)g_BattleWorkCell;
         g_BattleEffects[index & BYTE_MASK].unk_06        = 0;
         g_BattleEffects[index & BYTE_MASK].handler_index = 0x12;
-        g_BattleEffects[index & BYTE_MASK].mode          = 0;
-        g_BattleEffects[index & BYTE_MASK].step          = 0;
+        g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
+        g_BattleEffects[index & BYTE_MASK].header.step   = 0;
         g_BattleEffects[index & BYTE_MASK].unk_03        = 0;
         g_BattleEffects[index & BYTE_MASK].unk_04        = 0;
-        g_BattleEffects[index & BYTE_MASK].flags         = g_BattleEffects[index & BYTE_MASK].flags & 0xBF;
+        g_BattleEffects[index & BYTE_MASK].header.flags  = g_BattleEffects[index & BYTE_MASK].header.flags & 0xBF;
         work                                             = TASK_BYTES;
         g_BattleEffects[index & BYTE_MASK].target.bytes  = work;
         g_BattleEffects[index & BYTE_MASK].unk_0B        = work[0xB];

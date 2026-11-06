@@ -29,7 +29,7 @@ MATCH void func_801E50C0(void) {
                 }
                 func_801E30F8();
             } else {
-                g_Task->step += 1;
+                g_Task->header.step += 1;
             }
         }
     }

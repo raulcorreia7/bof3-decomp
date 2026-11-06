@@ -42,6 +42,6 @@ MATCH void func_800AE574(void) {
     FIELD(u16, third, 0x30) = base;
     flag->timer             = 1;
 
-    last       = (PartyBattler*)g_Task;
-    last->mode = (last->mode + 1);
+    last              = (PartyBattler*)g_Task;
+    last->header.mode = (last->header.mode + 1);
 }

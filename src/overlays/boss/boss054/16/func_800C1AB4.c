@@ -8,7 +8,7 @@ MATCH void func_800C1AB4(void) {
     ((PartyBattler*)g_Task)->unk_0C = timer;
     if (timer == 0) {
         SND_PlayCue(0x601U);
-        ((PartyBattler*)g_Task)->mode += 1;
+        ((PartyBattler*)g_Task)->header.mode += 1;
     }
     saved_work              = ((PartyBattler*)g_Task);
     ((PartyBattler*)g_Task) = D_801EC2E0->target.party;

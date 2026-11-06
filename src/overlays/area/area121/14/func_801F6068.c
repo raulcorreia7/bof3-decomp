@@ -10,7 +10,7 @@ MATCH void func_801F6068(void) {
         g_Task->y.fixed = D_80145EC8;
         g_Task->z.fixed = D_80145ECC + 0x800000;
         func_801F60F4(g_Task);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         return;
     }
     g_Task->unk_0A = temp_v0 - 1;

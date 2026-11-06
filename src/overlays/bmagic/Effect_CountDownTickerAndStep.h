@@ -6,6 +6,6 @@ MATCH void Effect_CountDownTickerAndStep(void) {
     timer          = g_Task->unk_0B - 1;
     g_Task->unk_0B = timer;
     if (timer == 0) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }

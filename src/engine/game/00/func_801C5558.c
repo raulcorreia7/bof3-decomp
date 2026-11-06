@@ -36,7 +36,7 @@ MATCH void func_801C5558(void) {
 
     work = g_Task;
     if ((s16)COORD_INT(work->z) >= result - threshold) {
-        work->step = 3;
+        work->header.step = 3;
     }
 
     func_8014D978();

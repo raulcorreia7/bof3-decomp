@@ -29,7 +29,7 @@ MATCH void func_801D0C48(void) {
 
 MATCH void func_801D0CC4(void) {
     if (g_AreaDrawFlags == 0) {
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     } else {
         func_801D1A60();
         func_801D18CC();
@@ -109,9 +109,9 @@ MATCH void func_801D13DC(void) {
 }
 
 MATCH void func_801D1420(void) {
-    g_Task->unk_09 = 0;
-    g_Task->unk_06 = 0x10;
-    g_Task->mode   = g_Task->mode + 1;
+    g_Task->unk_09      = 0;
+    g_Task->unk_06      = 0x10;
+    g_Task->header.mode = g_Task->header.mode + 1;
 }
 
 INCLUDE_ASM(func_801D1460);
@@ -125,7 +125,7 @@ MATCH void func_801D14DC(void) {
         if (g_AreaDrawFlags == 0) {
             Actor_Clear();
         } else {
-            g_Task->mode--;
+            g_Task->header.mode--;
         }
     }
 }

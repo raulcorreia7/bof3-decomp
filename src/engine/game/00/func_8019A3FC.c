@@ -32,7 +32,7 @@ MATCH void func_8019A3FC(void) {
     work->unk_29 = 2;
 
     if (g_Task->unk_06 == 3) {
-        g_Task->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         work                           = g_Task;
         work->tint.bytes.flags         = 1;
         work                           = g_Task;
@@ -53,5 +53,5 @@ MATCH void func_8019A3FC(void) {
 
     ((void (*)(u8, Actor*))Actor_SelectScript)(s_SceneHandlerIds[g_Task->unk_06], other);
 
-    g_Task->mode = 1;
+    g_Task->header.mode = 1;
 }

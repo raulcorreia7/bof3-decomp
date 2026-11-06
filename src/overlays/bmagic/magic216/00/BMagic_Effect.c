@@ -19,7 +19,7 @@ MATCH void func_801EEC70(void) {
     z                 = actor->pos.z.fixed;
     work->unk_0B      = 0;
     work->pos.z.fixed = z;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }
 
 INCLUDE_ASM(func_801EECDC);

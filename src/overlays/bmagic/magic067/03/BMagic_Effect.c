@@ -19,7 +19,7 @@ MATCH void func_801EEFA4(void) {
     if (g_Task->unk_0B == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_Task->unk_09 = 0x1E;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -28,12 +28,12 @@ INCLUDE_ASM(func_801EF010);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EF2D0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF314(void) {
-    SYS_DISPATCH_BYTE(D_801F04C8, g_Task->step);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(D_801F04C8, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
         func_801EF688();
         func_801EF79C();
         PopMatrix();
@@ -55,7 +55,7 @@ MATCH void func_801EF44C(void) {
     temp_v1        = g_Task->unk_09 + 2;
     g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0xC0) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -72,7 +72,7 @@ MATCH void func_801EF4F4(void) {
     temp_v1        = g_Task->unk_09 - 2;
     g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x60) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -83,8 +83,8 @@ INCLUDE_ASM(func_801EF688);
 INCLUDE_ASM(func_801EF79C);
 
 MATCH void func_801EFF24(void) {
-    D_801F04D8[g_Task->step]();
-    if (g_Task->flags != 0) {
+    D_801F04D8[g_Task->header.step]();
+    if (g_Task->header.flags != 0) {
         func_801F00C4();
     }
 }
@@ -118,7 +118,7 @@ MATCH void func_801F03EC(void) {
     g_Task->unk_0B = 0;
     g_Task->unk_09 = 0;
     Actor_SelectScript(3);
-    g_Task->step++;
+    g_Task->header.step++;
 }
 
 #include "overlays/bmagic/Effect_AddActorStepOnPlaying.h"

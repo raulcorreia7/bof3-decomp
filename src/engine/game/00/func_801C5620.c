@@ -17,7 +17,7 @@ MATCH void func_801C5620(void) {
         Actor_SelectScript(g_Task->direction_08);
         GFX_StagePalette(0x80035600u + g_Task->unk_05 * 0x40u, 0);
         g_GameState->mode_12B.u8_value = 0;
-        g_Task->mode                   = 1;
+        g_Task->header.mode            = 1;
         ACTOR_CLEAR_STEP();
     }
 

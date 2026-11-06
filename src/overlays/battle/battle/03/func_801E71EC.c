@@ -14,9 +14,9 @@ MATCH void func_801E71EC(void) {
             flags = ENEMY_COMBATANT(index).status & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
         }
         if (flags == 0) {
-            g_Task->mode = 0;
+            g_Task->header.mode = 0;
             return;
         }
-        g_Task->mode = g_Task->mode - 1;
+        g_Task->header.mode = g_Task->header.mode - 1;
     }
 }

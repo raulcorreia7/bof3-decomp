@@ -13,9 +13,9 @@ MATCH void Party_BuildBattlers(u32 mode) {
         battler     = &g_BattlePartyBattlers[i];
         g_GameState = (GameState*)battler;
         TASK_SET(battler);
-        battler->flags = PARTY_BATTLER_FLAG_OCCUPIED;
-        entry_table    = D_80144F5A;
-        g_Task->unk_05 = i;
+        battler->header.flags = PARTY_BATTLER_FLAG_OCCUPIED;
+        entry_table           = D_80144F5A;
+        g_Task->unk_05        = i;
         ((void (*)(u8, u8))func_801C1254)(*((entry_table + ((mode & BYTE_MASK) * 3)) + i), i);
         g_Task->unk_48                           = 0;
         g_Task->scale.x                          = 0x10000;

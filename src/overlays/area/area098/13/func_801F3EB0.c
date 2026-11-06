@@ -16,6 +16,6 @@ MATCH void func_801F3EB0(void) {
     g_Task->unk_2E = timer;
     if (timer == 0) {
         g_Task->unk_09 = 0;
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

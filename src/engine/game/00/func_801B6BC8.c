@@ -22,7 +22,7 @@ MATCH void func_801B6BC8(void) {
             Actor_RequestScript(g_Task->direction_08);
             g_GameState->flags_12C.u8_value &= 0xFB;
             func_801C3204();
-            g_Task->mode = 1;
+            g_Task->header.mode = 1;
             ACTOR_CLEAR_STEP();
             g_Task->unk_03       = 0;
             g_Task->unk_04       = 0;

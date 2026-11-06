@@ -8,17 +8,17 @@ MATCH void func_800C1C18(void) {
     if (((PartyBattler*)g_Task)->timer == 0) {
         selector = (u8*)&g_BattleTargetSelector;
         if (Battle_SlotIsBlocked(*selector) & 0xFF) {
-            ((PartyBattler*)g_Task)->mode = 9;
+            ((PartyBattler*)g_Task)->header.mode = 9;
             return;
         }
         slot = *selector;
         if (slot < BATTLE_PARTY_SLOT_COUNT) {
-            step = g_BattlePartyBattlers[slot].mode;
+            step = g_BattlePartyBattlers[slot].header.mode;
         } else {
-            step = ENEMY_COMBATANT(slot).mode;
+            step = ENEMY_COMBATANT(slot).header.mode;
         }
         if (step != 6) {
-            ((PartyBattler*)g_Task)->mode += 1;
+            ((PartyBattler*)g_Task)->header.mode += 1;
         }
     }
 }

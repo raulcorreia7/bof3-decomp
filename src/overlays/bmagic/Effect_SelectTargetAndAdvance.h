@@ -6,5 +6,5 @@ MATCH void Effect_SelectTargetAndAdvance(void) {
     func_80196718(*actor);
     g_Task->unk_0B = func_8019651C(*actor, 0, 0, 0, 1);
     g_Task->unk_09 = 0;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }

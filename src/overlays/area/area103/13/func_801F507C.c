@@ -13,6 +13,6 @@ MATCH void func_801F507C(void) {
     g_Task->unk_09 += 1;
     if (g_Task->unk_09 >= 0x19U) {
         g_Task->unk_09 = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }

@@ -12,6 +12,6 @@ MATCH void func_801F4F88(void) {
     func_801F5428(0x10001805);
     g_Task->unk_09++;
     if (g_Task->unk_09 >= 8) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }

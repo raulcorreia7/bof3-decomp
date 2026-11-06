@@ -11,10 +11,10 @@ MATCH void Effect_CountDownByTwoFinishAtOne(void) {
     }
     if (g_Task->unk_09 == 1) {
         BATTLE_ACTIVE_WORK->unk_0B -= 1;
-        g_Task->flags  = 0;
-        g_Task->mode   = 0;
-        g_Task->step   = 0;
-        g_Task->unk_03 = 0;
-        g_Task->unk_04 = 0;
+        g_Task->header.flags = 0;
+        g_Task->header.mode  = 0;
+        g_Task->header.step  = 0;
+        g_Task->unk_03       = 0;
+        g_Task->unk_04       = 0;
     }
 }

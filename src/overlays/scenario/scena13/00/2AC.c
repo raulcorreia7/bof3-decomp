@@ -36,7 +36,7 @@ MATCH void func_801F6F24(void) {
         g_Task->tint.bytes.unk_5E += 7;
         g_Task->tint.bytes.unk_5F += 7;
     } else {
-        g_Task->mode = 2;
+        g_Task->header.mode = 2;
     }
     func_801F6FF8();
     func_801F70DC();
@@ -83,7 +83,7 @@ MATCH void func_801F70DC(void) {
     do {
         actor2 = &g_Actors[i & 0xFF];
         g_Task = actor2;
-        if ((actor2->flags & 1) && (actor2->unk_06 == 6)) {
+        if ((actor2->header.flags & 1) && (actor2->unk_06 == 6)) {
             actor2->unk_29 = 5;
             func_8014D290();
         }
@@ -105,14 +105,14 @@ MATCH void func_801F71DC(void) {
     work->tint.bytes.unk_5D = 0;
     g_Task->unk_0B          = 0x33;
     Message_StartAreaMessage(g_Task->unk_0B);
-    g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    g_Task->mode     = 1;
+    g_GameStateIndex    = GAME_REQUEST_MESSAGE;
+    g_Task->header.mode = 1;
 }
 
 MATCH void func_801F7248(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        g_Task->unk_09 = 0x1E;
-        g_Task->mode   = 2;
+        g_Task->unk_09      = 0x1E;
+        g_Task->header.mode = 2;
     }
     func_801F7484();
     func_801F7568();
@@ -125,8 +125,8 @@ MATCH void func_801F72A0(void) {
         g_Task->tint.bytes.unk_5E += 2;
         g_Task->tint.bytes.unk_5F += 2;
     } else {
-        g_Task->unk_09 = 0x1E;
-        g_Task->mode   = 3;
+        g_Task->unk_09      = 0x1E;
+        g_Task->header.mode = 3;
     }
     func_801F7484();
     func_801F7568();
@@ -182,24 +182,24 @@ MATCH void func_801F763C(void) {
         return;
     }
 
-    slots                          = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][3]].flags = 1;
-    slots                          = SP_PTR(u8*, 0u);
-    slots[0x11][4]                 = Actor_FindFree();
-    slots                          = SP_PTR(u8*, 0u);
+    slots                                 = SP_PTR(u8*, 0u);
+    g_Actors[slots[0x11][3]].header.flags = 1;
+    slots                                 = SP_PTR(u8*, 0u);
+    slots[0x11][4]                        = Actor_FindFree();
+    slots                                 = SP_PTR(u8*, 0u);
     if (slots[0x11][4] == GAME_NONE) {
-        slots                          = SP_PTR(u8*, 0u);
-        g_Actors[slots[0x11][3]].flags = 0;
+        slots                                 = SP_PTR(u8*, 0u);
+        g_Actors[slots[0x11][3]].header.flags = 0;
         return;
     }
 
-    scratch                        = (s16*)D_1F800000;
-    data                           = (u8*)D_801FBF20;
-    slots                          = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].flags = 1;
-    slots                          = SP_PTR(u8*, 0u);
-    work                           = slots[0x11];
-    *scratch                       = work[3];
+    scratch                               = (s16*)D_1F800000;
+    data                                  = (u8*)D_801FBF20;
+    slots                                 = SP_PTR(u8*, 0u);
+    g_Actors[slots[0x11][4]].header.flags = 1;
+    slots                                 = SP_PTR(u8*, 0u);
+    work                                  = slots[0x11];
+    *scratch                              = work[3];
     func_801A4D54(data);
     *scratch = work[4];
     func_801A4D54(data);
@@ -207,9 +207,9 @@ MATCH void func_801F763C(void) {
 
     g_Actors[work[3]].y.fixed -= 0x10000;
     g_Actors[work[4]].y.fixed += 0x10000;
-    g_Actors[work[3]].flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots = SP_PTR(u8*, 0u);
-    g_Actors[slots[0x11][4]].flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots                                     = SP_PTR(u8*, 0u);
     cell                                      = slots[0x11];
     cell4                                     = cell[4];
@@ -229,8 +229,8 @@ INCLUDE_ASM(func_801F7958);
 INCLUDE_ASM(func_801F7A1C);
 
 MATCH void func_801F7C24(void) {
-    g_Actors[g_Task->unk_03].flags = 0;
-    g_Actors[g_Task->unk_04].flags = 0;
+    g_Actors[g_Task->unk_03].header.flags = 0;
+    g_Actors[g_Task->unk_04].header.flags = 0;
     func_80196718(&g_Actors[g_Task->unk_03]);
     func_80196718(&g_Actors[g_Task->unk_04]);
     func_80196070();

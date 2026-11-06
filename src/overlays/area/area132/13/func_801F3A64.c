@@ -6,12 +6,12 @@ MATCH void func_801F3A64(void) {
 
     temp_v1 = Actor_FindFreeSlot() & 0xFF;
     if (temp_v1 != 0xFF) {
-        temp_s0          = &g_ActorSlots[temp_v1];
-        temp_s0->flags   = 1;
-        temp_s0->type    = 0x73;
-        temp_s0->x.fixed = 0x2A0000;
-        temp_s0->mode    = 0;
-        temp_s0->y.fixed = 0x1D0000;
-        temp_s0->z.fixed = Area_SampleHeight(temp_s0->x.fixed, 0x1D0000) << 0x10;
+        temp_s0               = &g_ActorSlots[temp_v1];
+        temp_s0->header.flags = 1;
+        temp_s0->type         = 0x73;
+        temp_s0->x.fixed      = 0x2A0000;
+        temp_s0->header.mode  = 0;
+        temp_s0->y.fixed      = 0x1D0000;
+        temp_s0->z.fixed      = Area_SampleHeight(temp_s0->x.fixed, 0x1D0000) << 0x10;
     }
 }

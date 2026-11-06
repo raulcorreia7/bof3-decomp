@@ -7,6 +7,6 @@ MATCH void Effect_StepWhileTickUnderThree(void) {
 
     work = (PartyBattler*)D_801EB4E0;
     if (work->unk_0B < 3) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }

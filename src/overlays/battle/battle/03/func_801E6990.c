@@ -5,5 +5,5 @@ MATCH void func_801E6990(void) {
 
     g_Task->unk_09 = 0;
     work           = g_Task;
-    work->mode++;
+    work->header.mode++;
 }

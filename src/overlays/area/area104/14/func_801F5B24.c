@@ -12,7 +12,7 @@ MATCH void func_801F5B24(void) {
         work->y.fixed = D_80145EC8;
         work->z.fixed = D_80145ECC + 0x800000;
         func_801F5BB0(work);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         return;
     }
     work->unk_0A = count - 1;

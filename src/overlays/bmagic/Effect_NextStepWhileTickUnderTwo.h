@@ -5,6 +5,6 @@ MATCH void Effect_NextStepWhileTickUnderTwo(void) {
 
     work = g_Task;
     if (work->unk_0B < 2) {
-        work->mode++;
+        work->header.mode++;
     }
 }

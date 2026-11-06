@@ -163,7 +163,7 @@ NON_MATCHING void func_801E7BA0(void) {
         }
         g_Task = var_s1;
         *(u16*)(&g_BattleState) &= ~BATTLE_STATE_RELOAD_PARTY;
-        var_s1->mode += 1;
+        var_s1->header.mode += 1;
     }
 }
 #else

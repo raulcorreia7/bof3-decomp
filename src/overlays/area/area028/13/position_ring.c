@@ -159,7 +159,7 @@ MATCH void func_801F2C80(void) {
     u16 next;
 
     if (g_ScriptVars[0] == 0x19) {
-        g_Task->mode += 1u;
+        g_Task->header.mode += 1u;
         return;
     }
     func_801F318C(g_Task->unk_2E);
@@ -379,10 +379,10 @@ MATCH void func_801F3424(void) {
     if (actor_slot == GAME_NONE) {
         return;
     }
-    slot          = &g_ActorSlots[actor_slot];
-    slot->flags   = 1;
-    slot->type    = 0x40;
-    slot->x.fixed = 0x150000;
-    slot->y.fixed = 0x5B0000;
-    slot->z.fixed = Area_SampleHeight(slot->x.fixed, 0x5B0000) << 16;
+    slot               = &g_ActorSlots[actor_slot];
+    slot->header.flags = 1;
+    slot->type         = 0x40;
+    slot->x.fixed      = 0x150000;
+    slot->y.fixed      = 0x5B0000;
+    slot->z.fixed      = Area_SampleHeight(slot->x.fixed, 0x5B0000) << 16;
 }

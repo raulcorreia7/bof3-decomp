@@ -11,7 +11,7 @@ MATCH void func_8019BEFC(void) {
     if (g_AreaCameraMoving == 0) {
         work = g_Task;
         if (work->unk_09 == 0) {
-            work->mode = 1;
+            work->header.mode = 1;
             func_8019BFD4();
         }
     }

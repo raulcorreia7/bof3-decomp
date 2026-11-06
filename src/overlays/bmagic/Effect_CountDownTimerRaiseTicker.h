@@ -9,6 +9,6 @@ MATCH void Effect_CountDownTimerRaiseTicker(void) {
     work->unk_09--;
     if (work->unk_09 == 0) {
         work = g_Task;
-        work->step++;
+        work->header.step++;
     }
 }

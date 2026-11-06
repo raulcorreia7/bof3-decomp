@@ -7,6 +7,6 @@ MATCH void Effect_CountDownTimerQueueFx(void) {
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 0) {
         SND_QueueSelectionFx(0x100);
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

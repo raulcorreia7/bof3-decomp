@@ -24,5 +24,5 @@ MATCH void func_8019E95C(void) {
     other->tint.bytes.unk_5E  = 0;
     g_Task->tint.bytes.unk_5F = 0;
     Actor_SelectScript(0);
-    g_Task->step = (g_Task->step + 1);
+    g_Task->header.step = (g_Task->header.step + 1);
 }

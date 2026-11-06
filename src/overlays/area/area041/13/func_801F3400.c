@@ -7,6 +7,6 @@ MATCH void func_801F3400(void) {
         SND_PlayCue(0x205);
         g_Task->unk_09       = 0;
         COORD_INT(g_Task->z) = -0x88;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }

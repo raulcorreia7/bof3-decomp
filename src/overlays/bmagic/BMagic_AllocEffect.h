@@ -7,8 +7,8 @@ MATCH u32 BMagic_AllocEffect(void) {
     u8 index;
 
     for (index = 0u; index < BMAGIC_EFFECT_COUNT; index++) {
-        if ((BMAGIC_EFFECT_SLOTS[index].flags & 1u) == 0u) {
-            BMAGIC_EFFECT_SLOTS[index].flags |= 1u;
+        if ((BMAGIC_EFFECT_SLOTS[index].header.flags & 1u) == 0u) {
+            BMAGIC_EFFECT_SLOTS[index].header.flags |= 1u;
             return index;
         }
     }

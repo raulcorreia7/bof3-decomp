@@ -6,7 +6,7 @@ MATCH void func_8019A630(void) {
 
     if (func_8014DAEC() != 0u) {
         work = g_Task;
-        work->mode++;
+        work->header.mode++;
     }
 
     next = g_Task;

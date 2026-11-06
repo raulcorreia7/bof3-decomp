@@ -7,10 +7,10 @@ MATCH void func_800AD930(void) {
     flag = *MEM_PTR(u8, &g_BattlePanelEntry);
     if (flag != GAME_NONE) {
         work = (PartyBattler*)g_Task;
-        work->step--;
+        work->header.step--;
     }
     if (!(D_80148624 & 1)) {
-        BATTLE_WORK->mode++;
-        BATTLE_WORK->step = 0;
+        BATTLE_WORK->header.mode++;
+        BATTLE_WORK->header.step = 0;
     }
 }

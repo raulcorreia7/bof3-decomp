@@ -2,6 +2,7 @@
 #define GAME_RECORDS_H
 
 #include "types.h"
+#include "work/task.h"
 #include "common/fixed.h"
 #include "common/vector.h"
 
@@ -94,43 +95,41 @@ typedef enum ActorType {
 } ActorType;
 
 typedef struct ActorSlot {
-    u8      flags;        /* 0x00 set to 1 when the slot is claimed */
-    u8      mode;         /* 0x01 the kind the caller passes to Char_SpawnActor */
-    u8      step;         /* 0x02 */
-    u8      unk_03;       /* 0x03 */
-    u8      unk_04;       /* 0x04 */
-    u8      type;         /* 0x05 actor type: 0x0F/0x10/0x1E/0x32/0x69; handler index; accessory count */
-    u8      unk_06;       /* 0x06 area id in area030; slot index in game00 */
-    u8      unk_07;       /* 0x07 */
-    u8      unk_08;       /* 0x08 */
-    u8      layer;        /* 0x09 layer: 0x20/0x40/0x60/0x90/0xFF */
-    u8      unk_0A;       /* 0x0A */
-    u8      link;         /* 0x0B index of the linked slot */
-    s32     scene_step;   /* 0x0C scenario step */
-    s32     selection;    /* 0x10 frontend selection */
-    s32     unk_14;       /* 0x14 */
-    s32     counter_18;   /* 0x18 */
-    s32     counter_1C;   /* 0x1C */
-    u8      pad_20[7];    /* 0x20-0x26 */
-    u8      unk_27;       /* 0x27 */
-    u8      unk_28;       /* 0x28 */
-    u8      unk_29;       /* 0x29 cleared when the slot is rebuilt */
-    u8      pad_2A[4];    /* 0x2A-0x2D */
-    s16     unk_2E;       /* 0x2E */
-    u16     unk_30;       /* 0x30 */
-    u8      pad_32[2];    /* 0x32-0x33 */
-    Coord   x;            /* 0x34 world x, Area_SampleHeight argument */
-    Coord   y;            /* 0x38 world y, Area_SampleHeight argument */
-    Coord   z;            /* 0x3C Area_SampleHeight(x, y) in the integer half (+2) */
-    u8      pad_40[0x0A]; /* 0x40-0x49 */
-    u8      unk_4A;       /* 0x4A */
-    u8      pad_4B[0x19]; /* 0x4B-0x63 */
-    Vec3S32 pos;          /* 0x64 scene origin + offset */
-    u8      pad_70[4];    /* 0x70-0x73 */
+    TaskHeader header;       /* 0x00 */
+    u8         unk_03;       /* 0x03 */
+    u8         unk_04;       /* 0x04 */
+    u8         type;         /* 0x05 actor type: 0x0F/0x10/0x1E/0x32/0x69; handler index; accessory count */
+    u8         unk_06;       /* 0x06 area id in area030; slot index in game00 */
+    u8         unk_07;       /* 0x07 */
+    u8         unk_08;       /* 0x08 */
+    u8         layer;        /* 0x09 layer: 0x20/0x40/0x60/0x90/0xFF */
+    u8         unk_0A;       /* 0x0A */
+    u8         link;         /* 0x0B index of the linked slot */
+    s32        scene_step;   /* 0x0C scenario step */
+    s32        selection;    /* 0x10 frontend selection */
+    s32        unk_14;       /* 0x14 */
+    s32        counter_18;   /* 0x18 */
+    s32        counter_1C;   /* 0x1C */
+    u8         pad_20[7];    /* 0x20-0x26 */
+    u8         unk_27;       /* 0x27 */
+    u8         unk_28;       /* 0x28 */
+    u8         unk_29;       /* 0x29 cleared when the slot is rebuilt */
+    u8         pad_2A[4];    /* 0x2A-0x2D */
+    s16        unk_2E;       /* 0x2E */
+    u16        unk_30;       /* 0x30 */
+    u8         pad_32[2];    /* 0x32-0x33 */
+    Coord      x;            /* 0x34 world x, Area_SampleHeight argument */
+    Coord      y;            /* 0x38 world y, Area_SampleHeight argument */
+    Coord      z;            /* 0x3C Area_SampleHeight(x, y) in the integer half (+2) */
+    u8         pad_40[0x0A]; /* 0x40-0x49 */
+    u8         unk_4A;       /* 0x4A */
+    u8         pad_4B[0x19]; /* 0x4B-0x63 */
+    Vec3S32    pos;          /* 0x64 scene origin + offset */
+    u8         pad_70[4];    /* 0x70-0x73 */
 } ActorSlot;
 
 ASSERT_SIZE(ActorSlot, ACTOR_SLOT_SIZE);
-ASSERT_OFFSET(ActorSlot, flags, 0x00);
+ASSERT_OFFSET(ActorSlot, header, 0x00);
 ASSERT_OFFSET(ActorSlot, type, 0x05);
 ASSERT_OFFSET(ActorSlot, layer, 0x09);
 ASSERT_OFFSET(ActorSlot, scene_step, 0x0C);

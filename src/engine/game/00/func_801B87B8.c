@@ -11,8 +11,8 @@ MATCH void func_801B87B8(void) {
         func_801B8A9C();
         if (func_801B8D18() & BYTE_MASK) {
             Actor_RequestScript(g_Task->direction_08);
-            g_Task->step   = 3;
-            g_Task->unk_03 = 0;
+            g_Task->header.step = 3;
+            g_Task->unk_03      = 0;
             return;
         }
         if ((func_801B9598() & BYTE_MASK) == 0) {

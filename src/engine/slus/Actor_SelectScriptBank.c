@@ -19,7 +19,7 @@ MATCH void Actor_SelectScriptBank(u32 record_index) {
     base0  = header + ((s32*)header)[0];
     base8  = header + ((s32*)header)[2];
     entry  = header + ((s32*)header)[3] + (record_index & BYTE_MASK) * 3;
-    if (!(work->flags & ACTOR_FLAG_SKIP_PALETTE_STAGE)) {
+    if (!(work->header.flags & ACTOR_FLAG_SKIP_PALETTE_STAGE)) {
         level = work->unk_25;
         if (level > 16) {
             D_80145A54[D_80145A00]    = (level - 0x10) << 6;
