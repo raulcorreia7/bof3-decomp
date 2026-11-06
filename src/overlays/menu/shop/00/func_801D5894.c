@@ -14,8 +14,7 @@ MATCH void func_801D5894(void) {
     CardAccessFile(0, 0, 0, 0, 0);
     if (g_SaveCardStatus == CARD_EVENT_OK) {
         sprintf((char*)g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);
-        sprintf((char*)g_UiFormatBuffer, D_801D0C68, g_PlayClock.hours_00, g_PlayClock.minutes_01,
-                g_PlayClock.seconds_02);
+        sprintf((char*)g_UiFormatBuffer, D_801D0C68, g_PlayClock.hours, g_PlayClock.minutes, g_PlayClock.seconds);
         strcpy(save_name, (char*)g_UiFormatBuffer);
         sprintf((char*)g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);
         strcpy(date_label, (char*)g_UiFormatBuffer);

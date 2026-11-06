@@ -51,11 +51,11 @@ MATCH void Game_StartSelectedGame(void) { /* func_801D0E54 */
         SND_StopSelectionEffect();
         SND_SetBankLayout(0u);
         Actor_ClearAll();
-        g_PlayClock.thirtieths_03 = 0u;
-        g_PlayClock.seconds_02    = 0u;
-        g_PlayClock.minutes_01    = 0u;
-        g_PlayClock.hours_00      = 0u;
-        g_AreaDrawFlags           = 0u;
+        g_PlayClock.thirtieths = 0u;
+        g_PlayClock.seconds    = 0u;
+        g_PlayClock.minutes    = 0u;
+        g_PlayClock.hours      = 0u;
+        g_AreaDrawFlags        = 0u;
         Scene_Start(16);
         CallbackRegister(0, Game_RunMainLoop);
         g_UiTitleState = g_UiTitleState + 1u;
