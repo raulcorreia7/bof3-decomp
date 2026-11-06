@@ -10,15 +10,15 @@ void Area_SetCellCode(s16 column, s16 row, u8 code);
 
 #define g_SceneFlags ((void*)g_SceneFlags)
 
-extern u8  D_801F398C[];
-extern u16 D_801F5CD4[];
-extern u16 D_801F5CD8[];
-
 extern u8 D_80145F09;
-
 extern u8 D_80146874;
-
 extern u8 D_80146875;
+
+extern u8 D_801F398C[];
+
+extern u16 D_801F5CD4[];
+
+extern u16 D_801F5CD8[];
 
 /* A bare statement macro, used as a member's whole body. Clear the interaction bit; when the party confirmed (D_80145F09 is 6), run the script and store the
  * two step bytes. */

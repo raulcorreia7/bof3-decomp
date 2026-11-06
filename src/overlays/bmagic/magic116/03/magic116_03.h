@@ -5,13 +5,13 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern BattleEffect*  D_801EC2E0;
 extern MagicTaskFuncs D_801EEC04;
-extern u8             D_801EF2A8[];
 
 /* The guard the record reset waits on, the battle flag it raises, and the
  * request hand-off that follows. */
 u8 func_801EF118(void);
 
-extern BattleEffect* D_801EC2E0;
+extern u8 D_801EF2A8[];
 
 #endif

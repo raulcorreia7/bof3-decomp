@@ -8,9 +8,9 @@
 
 extern BattleHandlerTable3 D_801EEC10;
 
-void func_801EFDF8(void);
+void func_801EF3B0(void);
 
 extern Callback D_801F0104[];
-void            func_801EF3B0(void);
+void            func_801EFDF8(void);
 
 #endif

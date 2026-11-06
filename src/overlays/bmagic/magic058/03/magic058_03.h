@@ -5,12 +5,12 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleHandlerTable3 D_801EEC1C;
+extern u8 D_801EC2E4;
 
 extern BattleHandlerTable3 D_801EEC10;
+extern BattleHandlerTable3 D_801EEC1C;
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect        D_801EFEF4[];
-extern u8                  D_801EC2E4;
 #define BMAGIC_EFFECT_SLOTS D_801EFEF4
 #define BMAGIC_EFFECT_COUNT 36
 

@@ -14,12 +14,12 @@ extern u8 D_801F43B8[];
 extern u16 D_801F43BC;
 extern u16 D_801F43BE;
 
-s32  func_801F36B0(void);
 void func_801F35B8(void);
-
-extern u16 D_801F4FD4;
+s32  func_801F36B0(void);
 
 extern u8 D_801F43E4;
+
+extern u16 D_801F4FD4;
 
 /* The work window's rows: a byte table of 0x1C-byte rows. */
 #define AREA_ROW_COUNT  0x100

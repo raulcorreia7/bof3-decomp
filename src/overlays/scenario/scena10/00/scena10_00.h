@@ -7,22 +7,23 @@
 #include "overlays/scenario/scenario.h"
 #include "work/area_spad.h"
 
+extern ScratchPad D_1F800000;
+extern u8         D_80144908[];
 extern u32        D_801F6C00;
+extern Callback   D_801FE80C[];
 extern Callback   D_801FE820[];
 extern Callback   D_801FE8F4[];
-extern Callback   D_801FE900[];
-extern SceneFunc  D_801FE97C[];
 
-extern Callback D_801FE80C[];
+extern Callback D_801FE900[];
 extern u8       D_801FE938[];
 
-extern u8  D_80144908[];
-extern u8  D_801FE950[4];
-extern u16 D_801FE954[4];
-extern u8  D_801FE95C[5];
-extern u16 D_801FE964[5];
-extern u8  D_801FE970[3];
-extern u16 D_801FE974[3];
+extern u8        D_801FE950[4];
+extern u16       D_801FE954[4];
+extern u8        D_801FE95C[5];
+extern u16       D_801FE964[5];
+extern u8        D_801FE970[3];
+extern u16       D_801FE974[3];
+extern SceneFunc D_801FE97C[];
 
 /* The party lookups of 370.c: return the value paired with the first id in `ids` that a party member
  * holds, else `none`. The members differ only in table and count. Every change must verify every member. */

@@ -366,6 +366,10 @@ typedef struct EnemyBattlerFlag {
     u8          pad_01[0x117];
 } EnemyBattlerFlag;
 
+/* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's
+ * save/restore keeps the plain word. A second name is the only form that keeps
+ * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols.toml. */
+extern u32                   g_BattleWorkCell;
 extern BattleHandlerTable3   D_80096994;
 extern BattleHandlerTable3   D_800969A0;
 extern BattleHandlerTable3   D_800969AC;
@@ -525,8 +529,6 @@ extern u8                    D_80145FB2;
 extern volatile BattlePlayerDamageStatus D_80145FB4[];
 /* Selection row table: player rows for slots 0-2, indexed by battler slot. */
 extern BattleSelectionPlayer             D_80145FB8[];
-/* D_801462E3 */
-extern volatile u8                       g_BattleUiStep;
 extern s8                                D_80145FBD;
 extern s8                                D_80145FBE;
 extern s8                                D_80145FBF;
@@ -537,14 +539,22 @@ extern s8                                D_80145FC3;
 extern u8                                D_801460E9;
 extern u16                               D_801460EA;
 extern u8                                D_801460F2;
+/* D_801462E3 */
+extern volatile u8                       g_BattleUiStep;
 extern volatile u8                       D_801462E7;
 /* D_801462F0 */
 extern volatile u8                       g_BattlePartyCount; /* u8 active-battler count at 0x801462F0. */
 extern u8                                D_8014630C[];
+extern BattleSelectionState              D_801462F0_state;
 /* D_80146374 */
 extern volatile u8                       g_BattleActiveBattler;
+/* Per-access views of a symbol at the same address, named by an
+ * `alias = true` row in config/symbols.toml (this image's table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for
+ * one cell use them; a cast of the canonical symbol merges the pair and changes the bytes. */
+extern u8                                g_BattleActiveBattler_nv;
 /* D_80146394 */
 extern volatile u8                       g_BattleTarget;
+extern u8                                g_BattleTarget_nv;
 /* g_BattleTargetRecord points at a panel task: its +0x04 and +0x06 cells are the
  * signed x and y halves (BattlePanelTask.x and .y). The declaration stays a
  * volatile s16 pointer: reading the cells through BattlePanelTask changes
@@ -559,6 +569,12 @@ extern u8                               D_801463D6;
 extern u16                              g_BattlePendingStatus;
 /* D_80148570 */
 extern volatile u8                      g_BattleChoicePanel[];
+/* First byte of g_BattleChoicePanel (0x80148570). The original stores it
+ * through a scalar symbol, which emits the direct %lo store form; indexing the
+ * array symbol would materialize its address in a register instead. */
+/* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
+ * direct %lo store form. */
+extern volatile u8                      g_BattleSelectionHead;
 extern u8                               D_80148571;
 extern u8                               D_80148572;
 extern u16                              D_80148576;
@@ -651,22 +667,6 @@ extern u8                               D_801EC357[];
 /* D_801EC364 */
 extern BattleTemplateStats              g_BattleTemplateStats[]; /* 0x801EC364 */
 extern u8                               D_801EC390[];
-/* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's
- * save/restore keeps the plain word. A second name is the only form that keeps
- * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols.toml. */
-extern u32                              g_BattleWorkCell;
-/* First byte of g_BattleChoicePanel (0x80148570). The original stores it
- * through a scalar symbol, which emits the direct %lo store form; indexing the
- * array symbol would materialize its address in a register instead. */
-/* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
- * direct %lo store form. */
-extern volatile u8                      g_BattleSelectionHead;
-/* Per-access views of a symbol at the same address, named by an
- * `alias = true` row in config/symbols.toml (this image's table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for
- * one cell use them; a cast of the canonical symbol merges the pair and changes the bytes. */
-extern u8                               g_BattleActiveBattler_nv;
-extern u8                               g_BattleTarget_nv;
-extern BattleSelectionState             D_801462F0_state;
 
 /* The battle program's handler tables call these functions. */
 void        func_80096F3C(void);

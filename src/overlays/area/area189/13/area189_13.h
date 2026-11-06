@@ -17,19 +17,19 @@
 
 /* The game-overlay state bytes the cancel paths reset. */
 
+extern u16      D_801492DC;
 /* The key-state word and its mask partner (gameui.h names it g_InputPressed). */
 /* The state handler banks the step dispatchers index. */
 extern Callback D_801F6238[];
-extern Callback D_801F62F4[];
 
 /* The image's step passes. */
 void func_801F3514(void);
 void func_801F3800(void);
 void func_801F559C(void);
-void func_801F5600(void);
 /* func_801F5F20 */
 void Actor_ClearVelocity(void);
+void func_801F5600(void);
 
-extern u16 D_801492DC;
+extern Callback D_801F62F4[];
 
 #endif

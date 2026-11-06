@@ -17,8 +17,8 @@ extern u8 D_801F39C8[];
 
 void func_801F31F4(s32);
 
-void func_801F330C(void);
-
 void func_801F32C4(void);
+
+void func_801F330C(void);
 
 #endif

@@ -5,8 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleHandlerTable3 D_801EEC3C;
 extern u8                  g_BattleActiveBattler;
+extern BattleHandlerTable3 D_801EEC3C;
 
 void func_800AFC54(void);
 void func_801E257C(u32 enemy_index, u32 script_index);

@@ -13,16 +13,16 @@
 
 /* The area-flag bit store. */
 extern u8                  D_80144EF8[];
+extern s8                  D_80146874;
+extern s8                  D_80146875;
+/* D_801F4A2C */
+extern PartyMemberMessages g_PartyMemberMessages[7];
 /* The state handler banks the step dispatchers index. */
 extern u8                  D_801F431C[];
 extern Callback            D_801F4368[];
-/* D_801F4A2C */
-extern PartyMemberMessages g_PartyMemberMessages[7];
 extern Callback            D_801F4A80[];
 /* The two-byte step table the falling path indexes. */
 extern s8                  D_801F4A88[];
-extern s8                  D_80146874;
-extern s8                  D_80146875;
 
 /* The image's step passes. */
 void func_801F3768(s32 arg0, s32 arg1);

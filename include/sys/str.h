@@ -8,13 +8,13 @@
  * reader decodes CAPCOM30.STR with this geometry (@source: wiki:formats/str). */
 /* [XA subheader 8][payload 2324][EDC 4] = 2336 bytes.
  * Raw CD sectors add a 16-byte outer header for 2352 bytes. */
-#define STR_SECTOR_SIZE       2336
-#define STR_RAW_SECTOR_SIZE   2352
 #define STR_RAW_HEADER_SIZE   16
-#define STR_XA_SUB_SIZE       8 /* two XA subheaders */
 #define STR_XA_SUBHEADER_SIZE 4
+#define STR_XA_SUB_SIZE       8 /* two XA subheaders */
 #define STR_PAYLOAD_SIZE      2324
 #define STR_EDC_SIZE          4
+#define STR_SECTOR_SIZE       2336
+#define STR_RAW_SECTOR_SIZE   2352
 
 /* An XA subheader: the 4-byte frame header of an XA sector; the sector's
  * 8-byte subheader holds two (psx-spx: "CDROM XA Subheader, File, Channel,

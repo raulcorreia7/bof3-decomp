@@ -11,6 +11,8 @@
 /* The global state byte this entry tests. */
 /* The object pointer whose palette field this entry updates. */
 
+/* The current map row in the field-loader table. */
+extern u16      g_GameAreaId;
 /* The scratchpad work pointer the palette pass reads. */
 /* The state handler banks the step dispatchers index. */
 extern u8       D_801F3DFC[];
@@ -18,14 +20,12 @@ extern u8       D_801F3DFC[];
 extern Callback D_801F4324[17];
 /* The palette source bytes passed to the slot claim. */
 extern u8       D_801F4368[];
+
+void            Actor_BeginScript(u8 raw_selector, u16 raw_code);
 extern Callback D_801F43EC[];
 
 /* The state update's fallback handler. */
 /* The image's setup pass. */
-void       func_801F2D28(s32 arg0);
-/* The current map row in the field-loader table. */
-extern u16 g_GameAreaId;
-
-void Actor_BeginScript(u8 raw_selector, u16 raw_code);
+void func_801F2D28(s32 arg0);
 
 #endif

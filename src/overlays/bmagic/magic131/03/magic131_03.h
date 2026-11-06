@@ -5,18 +5,18 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern PartyBattler* D_801F24E0;
-
 extern Callback D_801F1BF4[];
+
+extern Callback D_801F1C08[];
 void            func_801F030C(void);
 
 extern Callback D_801F1C24[];
-void            func_801F0D44(void);
-void            func_801F0DF4(void);
-
-extern Callback D_801F1C08[];
-extern Callback D_801F1C48[];
 void            func_801F06B4(void);
+void            func_801F0D44(void);
+
+extern Callback      D_801F1C48[];
+extern PartyBattler* D_801F24E0;
+void                 func_801F0DF4(void);
 
 void func_801F1844(void);
 

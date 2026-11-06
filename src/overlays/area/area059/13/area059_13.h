@@ -10,13 +10,13 @@
  * is a byte cursor, so this image views it as the record it addresses. */
 #define g_ScriptWorkRecord ((Actor*)g_ScriptWorkRecord)
 
-void Area_SetCellCode(s16 column, s16 row, u8 code);
+/* func_80196718 */
+void GFX_FreePaletteFadeTarget(void* target);
 
 
 extern u8 D_801F3824[];
 
-/* func_80196718 */
-void GFX_FreePaletteFadeTarget(void* target);
+void Area_SetCellCode(s16 column, s16 row, u8 code);
 void func_801F30A8(s32* pos);
 
 /* func_801F2E80 */

@@ -12,16 +12,16 @@
  * @source: wiki:formats/emi. */
 
 /* Container layout, measured over all 880 US Breath of Fire III (USA) archives (@source: wiki:formats/emi#padding). */
-#define EMI_SECTOR_SIZE             0x800  /* payload alignment; also the first payload offset */
-#define EMI_MAGIC_OFFSET            0x08   /* archive header magic offset, before the TOC at 0x10 */
-#define EMI_MAGIC_SIZE              8      /* archive header magic size; see EMI_MAGIC_STR */
+#define EMI_SECTOR_SIZE             0x800 /* payload alignment; also the first payload offset */
+#define EMI_DATA_OFFSET             0x800u
+#define EMI_MAGIC_OFFSET            0x08 /* archive header magic offset, before the TOC at 0x10 */
+#define EMI_MAGIC_SIZE              8    /* archive header magic size; see EMI_MAGIC_STR */
+#define EMI_MAGIC_STR               "MATH_TBL"
+#define EMI_ARCHIVE_HEADER_SIZE     0x10
 #define EMI_TOC_ENTRY_SIZE          0x10   /* TOC row size; the header is 0x10 + entry_count * 0x10 bytes */
 #define EMI_TOC_ENTRY_PAD           0x2e2e /* fill of the TOC entry u16 at 0x0e */
 #define EMI_HEADER_FILL             0x2e   /* fill from the TOC end up to EMI_SECTOR_SIZE */
 #define EMI_PAYLOAD_FILL            0x5f   /* fill from a payload end to the next EMI_SECTOR_SIZE boundary */
-
-#define EMI_MAGIC_STR               "MATH_TBL"
-#define EMI_DATA_OFFSET             0x800u
 
 /* Entry slots inside one archive, by archive kind (disc names; @source: wiki:formats/emi). The bank
  * selectors are the load_arg of the VAB entries. BENEMY, BGM and the first BPLCHAR bank hold a VAB
@@ -54,8 +54,6 @@
 #define EMI_PLCHAR_SLOT_CONTAINER   3 /* PLxxx: the character bank, LZ77 */
 #define EMI_PLCHAR_SLOT_PROGRAM     0 /* PLPxxx: the character program */
 #define EMI_PLCHAR_BANK             1
-
-#define EMI_ARCHIVE_HEADER_SIZE     0x10
 
 /* Entry type ids (@source: wiki:formats/emi#entry-types): what the loader does with a payload.
  * EmiLoaderState holds the two internal loader states. */

@@ -8,24 +8,24 @@
 /* The amount Effect_CountDownTimer adds to the effect work byte 9. */
 #define EFFECT_TIMER_STEP 1
 
-extern PartyBattler* D_801F22BC;
+extern Callback D_801F1268[];
 
 extern Callback D_801F1278[];
 void            func_800AF764(void);
-void            func_801EFD5C(void);
+void            func_801EECE4(void);
 
 extern Callback D_801F1288[];
-void            func_801F06AC(void);
+void            Effect_PlayOnZeroTick(void);
 
 extern Callback D_801F12AC[];
-extern Callback D_801F1268[];
 extern u8       D_801F12BC[];
-void            func_801F11AC(void);
-void            func_801F0ED0(void);
+extern u8       D_801F12D8[];
+void            func_801EFD5C(void);
+void            func_801F06AC(void);
 void            func_801F091C(void);
 
-void      func_801EECE4(void);
-void      Effect_PlayOnZeroTick(void);
-extern u8 D_801F12D8[];
+void                 func_801F0ED0(void);
+void                 func_801F11AC(void);
+extern PartyBattler* D_801F22BC;
 
 #endif

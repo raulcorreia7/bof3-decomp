@@ -27,15 +27,15 @@ ASSERT_OFFSET(ScriptState, cursor, 0x0A);
 
 /* retail addresses */
 
-/* The requested message id: 0xFFFF means no message. ResourceRequestMessage
- * stores a message index in the slot and Message_StartRequest reads the slot as that
- * index; the player's menu choice at D_801490C7 decides the index. */
 /* The menu header bar every screen draws at the top: geometry in pixels, y at its resting row. */
 #define MENU_HEADER_X           0x14
 #define MENU_HEADER_Y           0x12
 #define MENU_HEADER_WIDTH       0x118
 #define MENU_HEADER_HEIGHT      0x13
 
+/* The requested message id: 0xFFFF means no message. ResourceRequestMessage
+ * stores a message index in the slot and Message_StartRequest reads the slot as that
+ * index; the player's menu choice at D_801490C7 decides the index. */
 #define MESSAGE_NONE            0xFFFF
 #define MESSAGE_REQUEST_CLEAR() (g_MessageRequest = MESSAGE_NONE)
 
@@ -231,6 +231,13 @@ extern u8           D_80181D99;
 extern const u8     g_SelectionCues[];
 extern const u8     D_80181EBB[];
 
+/* Resource and pad-input helpers the overlays call: resolve a resource id to
+ * its data pointer, look up a group choice's resource id, and decode the
+ * repeatable buttons of an input mask.  The resource id is taken whole: the
+ * retail callee shifts the incoming $a0 logically (srl $v0,$a0,12 at
+ * 0x801502D8) and masks it itself (andi $a0,$a0,0x3FFF at 0x801502E4), and
+ * the eight callers pass a 32-bit word. */
+s32              INPUT_GetRepeatedButtons(s32 button_mask);
 /* Game-front dispatchers: mode, layout bank, and cue entry points. */
 /* func_8014ECAC */
 void             UI_SetMode(u16 local_mode);
@@ -256,18 +263,11 @@ void             SND_PlayBgm(s32 selection_id, s32 cue_level, s32 cue_shape);
 void             SND_FadeOutBgm(u8 selection_id, s32 cue_level, s32 cue_shape);
 /* func_80164A44 */
 void             Char_RebuildStats(Character* record);
-/* func_801666C8 */
-s32              Item_GetDescription(s32 category, s32 item_id);
 /* func_80196070 */
 void             Actor_Clear(void);
+/* func_801666C8 */
+s32              Item_GetDescription(s32 category, s32 item_id);
 /* func_80196F78 */
 void             Game_RunCampMenuLoop(void);
-/* Resource and pad-input helpers the overlays call: resolve a resource id to
- * its data pointer, look up a group choice's resource id, and decode the
- * repeatable buttons of an input mask.  The resource id is taken whole: the
- * retail callee shifts the incoming $a0 logically (srl $v0,$a0,12 at
- * 0x801502D8) and masks it itself (andi $a0,$a0,0x3FFF at 0x801502E4), and
- * the eight callers pass a 32-bit word. */
-s32              INPUT_GetRepeatedButtons(s32 button_mask);
 
 #endif

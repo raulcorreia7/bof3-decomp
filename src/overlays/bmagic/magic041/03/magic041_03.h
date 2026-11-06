@@ -5,10 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern MagicTaskFuncs D_801EEC28;
+extern BmagicEffectFuncs D_801EEC04;
 
 extern BattleHandlerTable3 D_801EEC1C;
 
-extern BmagicEffectFuncs D_801EEC04;
+extern MagicTaskFuncs D_801EEC28;
 
 #endif
