@@ -35,8 +35,6 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`                           | [quality](#quality)                                       |
 | Check type loss between two revisions    | `tools/typeloss.py HEAD~5 HEAD`                                          | [type loss](#type-loss)                                   |
 | Scan prototypes against definitions      | `tools/sigs.py scan`                                                     | [signatures](#signatures)                                 |
-| Scan arrays for text and struct shapes   | `tools/shapes.py text`, `tools/shapes.py strided`, `tools/shapes.py types` | [data shapes](#data-shapes)                             |
-| Write decimal for quantities             | `tools/values.py fields`                                                 | [values](#values)                                         |
 | Format                                   | `meson compile -C build/meson format` (or `tools/format.sh`)             | [toolchain: commands](../docs/toolchain.md#commands)      |
 | Write the progress report                | `meson compile -C build/meson report`                                    | [toolchain: commands](../docs/toolchain.md#commands)      |
 | Set up a worktree for parallel work      | `tools/worktree.sh --from <checkout> <branch>`                           | [worktrees](#worktrees)                                   |
@@ -105,9 +103,7 @@ several names. All print tab-separated rows.
 ## Signatures
 
 `sigs.py scan` prints one row per prototype that disagrees with its definition, implicit
-declaration, call-through cast or return cast (`--kind` selects one). `cross` and `sync` find and
-rewrite a prototype that differs from a definition in another file. `uncast` removes the call cast of
-one function. Every edit is a lead: run `check` afterwards.
+declaration, call-through cast or return cast (`--kind` selects one). Run `check` after any edit it prompts.
 
 ## Type loss
 
@@ -125,18 +121,6 @@ files worst first. `--diff BASE` compares BASE with `--to` (default `HEAD`) and 
 present before and after holds more `D_`/`unk_` tokens (`names`), or when a body named before is now `func_<ADDR>`
 (`addr`); a new `MATCH` body is exempt from both. `BASE` is compared at its merge-base with `--to`. `--gate` picks
 other metrics. Old debt in an untouched file never fails. `report` stores the totals under `quality` in `report.json`.
-
-## Data shapes
-
-`shapes.py text` finds byte arrays written as hex that hold text; `strided` finds arrays read with a
-stride or a wider cast; `types` finds one role name declared with several types; `literal` rewrites a
-hex initializer as string rows. The reader of the array decides its type.
-
-## Values
-
-`values.py fields` and `values.py compare` list hex literals that are quantities (coordinates,
-primitive macro arguments, compares with named variables). `--write` rewrites them after you review
-the lines.
 
 ## Worklist
 

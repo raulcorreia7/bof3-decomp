@@ -226,38 +226,6 @@ class Tree:
         return seen
 
 
-def _compare(d: Decl, p: Decl) -> str | None:
-    """Return why a prototype disagrees with a definition, or None."""
-    if d.ret != p.ret:
-        return f"ret {d.ret} vs {p.ret}"
-    if p.unspecified and not d.unspecified:
-        return f"unspecified vs {len(d.params)} args"
-    if d.unspecified and p.unspecified:
-        return None
-    if len(d.params) != len(p.params):
-        return f"argc {len(d.params)} vs {len(p.params)}"
-    for i, (a, b) in enumerate(zip(d.params, p.params, strict=True)):
-        if a[0] != b[0]:
-            return f"arg{i} {a[0]} vs {b[0]}"
-    return None
-
-
-def cross_image(tree: Tree) -> list[tuple[str, Decl, Decl, str]]:
-    """Return every prototype that disagrees with a definition in another file.
-
-    Visibility is ignored: the same name in two images is compared as one function.
-    """
-    rows = []
-    for name in sorted(tree.decls):
-        for proto in tree.kind(name, "proto"):
-            for definition in tree.kind(name, "def"):
-                if definition.file != proto.file:
-                    why = _compare(definition, proto)
-                    if why:
-                        rows.append((name, proto, definition, why))
-    return rows
-
-
 def problems(tree: Tree) -> list[Problem]:
     """Compare every definition with the prototypes it sees, and every call with its callee."""
     rows: list[Problem] = []
@@ -408,44 +376,3 @@ def _call_rows(add, tree: Tree, call: Call, visible, defs, protos) -> None:
                 )
     elif name != "INCLUDE_ASM" and not name.isupper() and name not in _TYPES:
         add("implicit_decl", name, call.file, call.line, "no declaration anywhere")
-
-
-def declares(text: str, name: str) -> bool:
-    """Return True when ``text`` holds a prototype statement of ``name``."""
-    clean = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
-    pattern = (
-        r"^(?:extern\s+)?[A-Za-z_][\w \t\*]*?[ \t\*]"
-        + re.escape(name)
-        + r"\s*\([^;{}]*\)\s*;"
-    )
-    return re.search(pattern, clean, re.M) is not None
-
-
-def implicit_coverage(
-    tree: Tree, rows: list[Problem]
-) -> list[tuple[str, str, int, int, int]]:
-    """Classify each ``implicit_decl`` row by translation unit.
-
-    Returns ``(name, file, line, units, uncovered)``: how many ``.c`` files include ``file``,
-    and how many of them see no prototype of the callee. ``uncovered == 0`` with ``units > 0``
-    means every unit that compiles the call already has a declaration through another path.
-    """
-    roots = [f for f in tree.texts if f.endswith(".c")]
-    roots_of: dict[str, list[str]] = collections.defaultdict(list)
-    closures = {r: tree.closure(r) for r in roots}
-    for r in roots:
-        for g in closures[r]:
-            roots_of[g].append(r)
-    names = {r.name for r in rows if r.kind == "implicit_decl"}
-    holders = {
-        n: [f for f, text in tree.texts.items() if n in text and declares(text, n)]
-        for n in names
-    }
-    out = []
-    for r in rows:
-        if r.kind != "implicit_decl":
-            continue
-        units = roots_of.get(r.file, [])
-        bad = [u for u in units if not any(h in closures[u] for h in holders[r.name])]
-        out.append((r.name, r.file, r.line, len(units), len(bad)))
-    return out
