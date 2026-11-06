@@ -44,7 +44,7 @@ NON_MATCHING void func_8015083C(void) {
                     CHAN_CURSOR(chan) = CHAN_RETURN(chan);
                 } else {
                     loop                = 0;
-                    D_801490A0.state_00 = 2;
+                    g_MessageState.state_00 = 2;
                 }
                 break;
             case 1:
@@ -54,7 +54,7 @@ NON_MATCHING void func_8015083C(void) {
             case 0xE:
                 break;
             case 2:
-                D_801490A0.state_00 = 3;
+                g_MessageState.state_00 = 3;
                 loop                = 0;
                 break;
             case 3:
@@ -105,7 +105,7 @@ NON_MATCHING void func_8015083C(void) {
                 break;
             case 0xB:
                 loop                = 0;
-                D_801490A0.state_00 = 1;
+                g_MessageState.state_00 = 1;
                 chan[2] += 8;
                 break;
             case 0xF:
@@ -128,13 +128,13 @@ NON_MATCHING void func_8015083C(void) {
                 s2[2]               = (*D_801490B0 & 0xF) - 1;
                 loop                = 0;
                 s2[1]               = *D_801490B0 >> 4;
-                D_801490A0.state_00 = (s2[1] == 0) ? 5 : 4;
+                g_MessageState.state_00 = (s2[1] == 0) ? 5 : 4;
                 break;
             case 0x16:
                 t                   = *(u8**)(s4 + 0xA);
                 loop                = 0;
                 *(u8**)(s4 + 0xA)   = t + 1;
-                D_801490A0.state_00 = 7;
+                g_MessageState.state_00 = 7;
                 s4[0]               = t[1];
                 break;
             case 0x12:
@@ -153,9 +153,9 @@ NON_MATCHING void func_8015083C(void) {
                         chan[2] = 3;
                     }
                     if (chan[2] == 0) {
-                        D_801490A0.state_00 = 0;
+                        g_MessageState.state_00 = 0;
                     } else {
-                        D_801490A0.state_00 = 1;
+                        g_MessageState.state_00 = 1;
                     }
                     loop = 0;
                 }

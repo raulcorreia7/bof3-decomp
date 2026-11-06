@@ -20,7 +20,7 @@ NON_MATCHING void func_8015A554(void) {
     count  = 0;
     cursor = D_801490B0;
     row    = 0;
-    if (D_801490BC.last_row >= 0) {
+    if (g_MessageWindow.last_row >= 0) {
         do {
             D_801490CF[row & BYTE_MASK] = count;
             flag                        = 1;
@@ -45,10 +45,10 @@ NON_MATCHING void func_8015A554(void) {
                 cursor++;
             } while (flag);
             row++;
-        } while (D_801490BC.last_row >= (row & BYTE_MASK));
+        } while (g_MessageWindow.last_row >= (row & BYTE_MASK));
     }
 
-    rows                          = &D_801490BC.last_row;
+    rows                          = &g_MessageWindow.last_row;
     height                        = count * 0xD;
     g_MenuCurrentPanel->unk_0A    = 0xDC;
     g_MenuCurrentPanel->unk_0B    = height + 8 + *rows * 2;

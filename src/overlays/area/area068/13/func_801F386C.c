@@ -4,7 +4,7 @@ MATCH void func_801F386C(void) {
     s32 sel;
     u8  value;
 
-    sel              = D_801490C7;
+    sel              = g_MessageChoice;
     g_MessageRequest = D_801F4D68[sel];
     switch (sel) {
         case 0:

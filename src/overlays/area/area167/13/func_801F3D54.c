@@ -2,8 +2,8 @@
 
 MATCH void func_801F3D54(void) {
     MESSAGE_REQUEST_CLEAR();
-    if (D_801490C7 != 2) {
-        if (D_801490C7 == 0) {
+    if (g_MessageChoice != 2) {
+        if (g_MessageChoice == 0) {
             D_80146866 = 0;
         } else {
             D_80146866 = 2;

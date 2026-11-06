@@ -5,7 +5,7 @@ MATCH s32 func_801F2C04(void) {
     s32 value;
 
     MESSAGE_REQUEST_CLEAR();
-    sel = D_801490C7;
+    sel = g_MessageChoice;
     switch (sel) {
         case 0:
             value = 0x14;

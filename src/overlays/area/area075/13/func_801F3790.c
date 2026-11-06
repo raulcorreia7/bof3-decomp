@@ -3,7 +3,7 @@
 MATCH void func_801F3790(void) {
     s8 sel;
 
-    sel = D_801490C7;
+    sel = g_MessageChoice;
     if (sel == 0) {
         MESSAGE_REQUEST_CLEAR();
         D_801448EC      = 0xF;

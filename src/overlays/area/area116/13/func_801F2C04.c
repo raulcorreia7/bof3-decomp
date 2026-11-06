@@ -4,7 +4,7 @@ MATCH s32 func_801F2C04(void) {
     s32  message;
     u32* zenny;
 
-    if (D_801490C7 != 0) {
+    if (g_MessageChoice != 0) {
         message = 4;
     } else {
         zenny = &g_Zenny;

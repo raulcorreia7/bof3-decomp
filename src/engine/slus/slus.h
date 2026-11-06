@@ -58,8 +58,8 @@
     do {                                                                   \
         u16 value;                                                         \
                                                                            \
-        g_MessageRequest = D_8017F628[(row) + D_801490BC.selection_index]; \
-        switch (D_801490BC.selection_index) {                              \
+        g_MessageRequest = D_8017F628[(row) + g_MessageWindow.selection_index]; \
+        switch (g_MessageWindow.selection_index) {                              \
             case 0:                                                        \
                 value = (delay0);                                          \
                 break;                                                     \
@@ -421,7 +421,7 @@ typedef union RecordKey {
     u8 ubyte; /* 0x00 */
 } RecordKey;
 
-/* The front-end step record behind D_801490A0: func_8015102C walks the timer,
+/* The front-end step record behind g_MessageState: func_8015102C walks the timer,
  * phase, cursor and flag fields; the other units read only its first byte. */
 typedef struct FrontendStep {
     u8  state_00;     /* 0x00 */
@@ -676,16 +676,21 @@ extern u8                          D_80148FF8[];
 extern u16                         D_80149010[];
 extern u16                         D_80149040[];
 extern u16                         D_80149070[];
-extern FrontendStep                D_801490A0;
-extern u8                          D_801490A3;
-extern u8                          D_801490A6[];
-extern u32                         D_801490AC;
+/* D_801490A0 */
+extern FrontendStep                g_MessageState;
+/* D_801490A3 */
+extern u8                          g_MessageChoiceStep;
+/* D_801490A6 */
+extern u8                          g_MessageStateTimer[];
+/* D_801490AC */
+extern u32                         g_MessageScript;
 extern u8*                         D_801490B0;
 extern u8                          D_801490B8[]; /* base form: UI_DrawGlyph takes its address and reads [0] */
 extern u8                          D_801490B9;
 extern s8                          D_801490BA[];
 extern u8                          D_801490BB[];
-extern MenuState                   D_801490BC;
+/* D_801490BC */
+extern MenuState                   g_MessageWindow;
 extern s16                         D_801490C8; /* cue counter; reads sign at the < 9 test and zero-extends elsewhere */
 extern s16                         D_801490CA;
 extern u8                          D_801490CE;
@@ -702,7 +707,8 @@ extern s16                         g_AreaGridRowCursor;
 extern u16                         g_AreaCellPrimFreeIndex;
 extern u16                         D_80149336;
 extern u8                          D_8014933D;
-extern u8                          D_80149340;
+/* D_80149340 */
+extern u8                          g_AreaHeightOffsetEnabled;
 extern u8                          D_80149341;
 extern const char                  D_80149990[];
 extern const u32                   g_UiLocalModeFuncs[];

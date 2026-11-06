@@ -466,7 +466,7 @@ MATCH void func_801F2E04(const s32* center, s32 radius, u16 angle, s32 offset_x,
 MATCH void func_801F300C(void) {
     s8 state;
 
-    state            = D_801490C7;
+    state            = g_MessageChoice;
     g_MessageRequest = D_801F4CDC[state];
     switch (state) {
         case 0:

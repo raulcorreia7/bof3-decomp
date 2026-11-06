@@ -3,7 +3,7 @@
 MATCH void func_801F3BCC(void) {
     u16 value;
 
-    if (D_801490C7 == 0) {
+    if (g_MessageChoice == 0) {
         if ((Item_Count(ITEM_CAT_ITEM, ITEM_ANGLER, 0) & 0xFFFF) &&
             (Item_Count(ITEM_CAT_ITEM, ITEM_MARTIAN_SQUID, 0) & 0xFFFF) &&
             (Item_Count(ITEM_CAT_ITEM, ITEM_BEEF_JERKY, 0) & 0xFFFF) &&

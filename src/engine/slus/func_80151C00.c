@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* steps the menu cursor bob: the cursor offset D_801490BA walks between -3 and 3 (the direction is D_801490A3), and at
- * each end the D_801490BB blink counter runs, reloading the D_801490CA timer and, at zero, counting D_801490AA down.
+/* steps the menu cursor bob: the cursor offset D_801490BA walks between -3 and 3 (the direction is g_MessageChoiceStep), and at
+ * each end the D_801490BB blink counter runs, reloading the D_801490CA timer and, at zero, counting g_MessageChoiceTimer down.
  */
 /* nonmatching 48.78%: branch@+0x0030; the retail merges both direction arms into one pos store through v0 and
  * keeps D_801490BA and D_801490BB as lui/at accesses, while this source pointerizes them. resume: a source shape
@@ -9,7 +9,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_80151C00(void) {
     s8  pos;
-    u8* step = &D_801490A3;
+    u8* step = &g_MessageChoiceStep;
 
     if (*step != 0) {
         if (D_801490BA[0] == 3) {
@@ -33,10 +33,10 @@ NON_MATCHING void func_80151C00(void) {
         } else if ((s8)D_801490BB[0] == 0) {
             D_801490CA = 0xF;
             D_801490C8 = -1;
-            if (D_801490AA != 0xFFFF) {
-                D_801490AA -= 1;
-                if (D_801490AA == 0xFFFF) {
-                    D_801490A2    = 0;
+            if (g_MessageChoiceTimer != 0xFFFF) {
+                g_MessageChoiceTimer -= 1;
+                if (g_MessageChoiceTimer == 0xFFFF) {
+                    g_MessageChoiceMode    = 0;
                     D_801490BB[0] = 0;
                     D_801490BA[0] = 0;
                 }

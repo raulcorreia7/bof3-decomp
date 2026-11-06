@@ -7,8 +7,8 @@
 MATCH s32 UI_UpdateLayout(void) {
     u16 confirm;
 
-    D_801490BC.origin_x = (D_80148334 >> 4) + 10;
-    D_801490BC.origin_y = ((s16)D_80148336 >> 4) + 6;
+    g_MessageWindow.origin_x = (D_80148334 >> 4) + 10;
+    g_MessageWindow.origin_y = ((s16)D_80148336 >> 4) + 6;
     func_801507BC();
     func_801518F4();
     if ((g_UiWindowChannel & FRONTEND_FLAG_SELECTION) == 0) {

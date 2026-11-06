@@ -82,7 +82,7 @@ NON_MATCHING void func_80153DE8(void) {
     D_80149336               = 0;
     g_AreaCameraStep         = 0;
     g_AreaCameraHeightStep   = 0;
-    D_80149340               = 0;
+    g_AreaHeightOffsetEnabled               = 0;
     g_AreaSceneMode          = 0;
     g_AreaCameraRefreshCount = 3;
     g_AreaCellCodes          = (g_AreaMapBundle.byte_code_off4_14 * 4) + (MAP_BUNDLE_BASE + 0x00);

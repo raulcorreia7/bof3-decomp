@@ -3,7 +3,7 @@
 MATCH void func_801F3988(void) {
     s32 message;
 
-    if (D_801490C7 != 0) {
+    if (g_MessageChoice != 0) {
         message = 0x54;
     } else if (D_80145548 != 0x3FFFF) {
         message = 0x53;

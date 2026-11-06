@@ -16,6 +16,6 @@ MATCH void func_80151DCC(void) {
     D_801490CA = D_801490CA + delta;
     if ((s8)value >= 0) {
         bb[0]      = 0;
-        D_801490A2 = 0;
+        g_MessageChoiceMode = 0;
     }
 }

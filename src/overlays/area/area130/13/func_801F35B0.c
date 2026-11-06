@@ -1,8 +1,8 @@
 #include "area130_13.h"
 
 MATCH void func_801F35B0(void) {
-    g_MessageRequest = D_801F5058[D_801490C7];
-    switch (D_801490C7) {
+    g_MessageRequest = D_801F5058[g_MessageChoice];
+    switch (g_MessageChoice) {
         case 0:
             g_SceneState.step_05  = 0xA;
             *g_ScriptVars         = 0;

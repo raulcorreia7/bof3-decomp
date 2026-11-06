@@ -8,6 +8,6 @@ MATCH s16 Area_ReadHeight(s32 x, s32 y) {
 
     Area_EnableHeightOffset();
     dist       = Area_SampleHeight(x, y);
-    D_80149340 = 0;
+    g_AreaHeightOffsetEnabled = 0;
     return dist;
 }

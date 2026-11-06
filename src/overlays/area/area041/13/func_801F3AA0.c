@@ -4,7 +4,7 @@ MATCH void func_801F3AA0(void) {
     s8 value;
 
     MESSAGE_REQUEST_CLEAR();
-    if (D_801490C7 == 0) {
+    if (g_MessageChoice == 0) {
         func_801BE1B0(3U);
         value = 0x1E;
     } else {

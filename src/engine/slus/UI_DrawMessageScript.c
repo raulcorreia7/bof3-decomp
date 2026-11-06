@@ -13,7 +13,7 @@ typedef struct GameUITextState {
     u16          y;       /* 0x1A */
 } GameUITextState;
 
-/* walks the message script at D_801490AC, drawing each glyph
+/* walks the message script at g_MessageScript, drawing each glyph
  * through func_8014F800 until D_801490B9 characters were drawn.
  */
 MATCH void UI_DrawMessageScript(void) {
@@ -31,10 +31,10 @@ MATCH void UI_DrawMessageScript(void) {
     saved             = NULL;
     count             = 0;
     drawn             = 0;
-    base              = (u8*)&D_801490AC;
+    base              = (u8*)&g_MessageScript;
     p                 = *(u8**)base;
-    D_801490BC.text_x = D_801490BC.origin_x;
-    D_801490BC.text_y = D_801490BC.origin_y;
+    g_MessageWindow.text_x = g_MessageWindow.origin_x;
+    g_MessageWindow.text_y = g_MessageWindow.origin_y;
     color             = 0;
     if (D_801490B9 != 0) {
         cursor = (u16*)(base + 0x10);

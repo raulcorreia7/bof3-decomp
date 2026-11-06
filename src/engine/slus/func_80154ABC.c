@@ -58,7 +58,7 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
     tmp22 = (u8*)((g_AreaMapBundle.height_off4_2A * 4) + (tmp0 + (MAP_BUNDLE_BASE + 0x00)) + tmp2);
     if (!((tmp4 | tmp5) & HALF_MASK)) {
         SP_REF(void*, 0x0) = 0;
-        tmp3               = *(s8*)(tmp22)*D_80149340;
+        tmp3               = *(s8*)(tmp22)*g_AreaHeightOffsetEnabled;
         tmp19              = *(u32*)(tmp23);
         val3               = (((s32)(tmp19 << 0x10) >> 0x18) + tmp3 + ((s32)(tmp19 << 8) >> 0x18) + tmp3) << 0x14;
         goto block_23; /* retail branch */
@@ -69,16 +69,16 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
     tmp9  = (s8*)(tmp22 + tmp21);
     if (tmp1 != (tmp5 & HALF_MASK)) {
         if (tmp1 != 0) {
-            sp[0] = ((u32) * (u32*)(tmp23) >> 8) + (*(s8*)(tmp22)*D_80149340);
-            sp[1] = FIELD(u8, tmp23, 0x3u) + (*(s8*)(tmp22)*D_80149340);
-            sp[2] = FIELD(s32, tmp23, 0x4u) + (FIELD(s8, tmp22, 0x1u) * D_80149340);
-            val0  = FIELD(s8, tmp22, 0x1u) * D_80149340;
+            sp[0] = ((u32) * (u32*)(tmp23) >> 8) + (*(s8*)(tmp22)*g_AreaHeightOffsetEnabled);
+            sp[1] = FIELD(u8, tmp23, 0x3u) + (*(s8*)(tmp22)*g_AreaHeightOffsetEnabled);
+            sp[2] = FIELD(s32, tmp23, 0x4u) + (FIELD(s8, tmp22, 0x1u) * g_AreaHeightOffsetEnabled);
+            val0  = FIELD(s8, tmp22, 0x1u) * g_AreaHeightOffsetEnabled;
             val6  = FIELD(u16, tmp23, 0x6u);
         } else {
-            sp[0] = FIELD(u16, tmp23, 0x2u) + (*(s8*)(tmp22)*D_80149340);
-            sp[1] = FIELD(u8, tmp23, 0x3u) + (*(s8*)(tmp22)*D_80149340);
-            sp[2] = *tmp15 + (*tmp9 * D_80149340);
-            val0  = *tmp9 * D_80149340;
+            sp[0] = FIELD(u16, tmp23, 0x2u) + (*(s8*)(tmp22)*g_AreaHeightOffsetEnabled);
+            sp[1] = FIELD(u8, tmp23, 0x3u) + (*(s8*)(tmp22)*g_AreaHeightOffsetEnabled);
+            sp[2] = *tmp15 + (*tmp9 * g_AreaHeightOffsetEnabled);
+            val0  = *tmp9 * g_AreaHeightOffsetEnabled;
             val6  = (u16)((u32)*tmp15 >> 8);
         }
         sp[3] = val6 + val0;
@@ -94,13 +94,13 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
         val3 = val1 << 0x14;
         goto block_23; /* retail branch */
     }
-    tmp11 = FIELD(u8, tmp23, 0x3u) + (*(s8*)(tmp22)*D_80149340);
+    tmp11 = FIELD(u8, tmp23, 0x3u) + (*(s8*)(tmp22)*g_AreaHeightOffsetEnabled);
     sp[0] = tmp11;
-    tmp13 = FIELD(u16, tmp23, 0x6u) + (FIELD(s8, tmp22, 0x1u) * D_80149340);
+    tmp13 = FIELD(u16, tmp23, 0x6u) + (FIELD(s8, tmp22, 0x1u) * g_AreaHeightOffsetEnabled);
     sp[1] = tmp13;
-    tmp10 = FIELD(s32, (tmp6 + tmp23), 0x4u) + (FIELD(s8, (tmp21 + tmp22), 0x1u) * D_80149340);
+    tmp10 = FIELD(s32, (tmp6 + tmp23), 0x4u) + (FIELD(s8, (tmp21 + tmp22), 0x1u) * g_AreaHeightOffsetEnabled);
     sp[2] = tmp10;
-    tmp12 = ((u32)*tmp15 >> 8) + (*tmp9 * D_80149340);
+    tmp12 = ((u32)*tmp15 >> 8) + (*tmp9 * g_AreaHeightOffsetEnabled);
     sp[3] = tmp12;
     if ((tmp11 == tmp13) & (tmp11 == tmp10) & (tmp11 == tmp12)) {
         SP_REF(void*, 0x0) = 0;

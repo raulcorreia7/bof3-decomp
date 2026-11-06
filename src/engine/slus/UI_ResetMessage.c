@@ -15,11 +15,11 @@ MATCH void UI_ResetMessage(void) {
     MATCH_FAKE_OPAQUE(base);
     base[-4]       = 0;
     g_UiWindowStep = 0;
-    D_801490A2     = 0;
-    D_801490A3     = 0;
+    g_MessageChoiceMode     = 0;
+    g_MessageChoiceStep     = 0;
     *D_801490BA    = 0;
     *D_801490BB    = 0;
-    D_801490AA     = 0;
+    g_MessageChoiceTimer     = 0;
     stream         = D_801490B0;
     *(u16*)base &= 0x40;
     if (*stream == 0xC) {
@@ -31,7 +31,7 @@ MATCH void UI_ResetMessage(void) {
     } else {
         D_801490CE = 0;
     }
-    D_801490A6[0] = 0;
+    g_MessageStateTimer[0] = 0;
     D_801490B9    = 0;
     D_801490C8    = 0;
     D_801490B8[0] = 0;

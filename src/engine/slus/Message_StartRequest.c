@@ -7,11 +7,11 @@ MATCH void Message_StartRequest(void) {
     s32 entry;
 
     entry               = *(u16*)(SLUS_LOAD_ADDRESS + g_MessageRequest * 2);
-    D_801490A6[0]       = 8;
-    D_801490A0.state_00 = 1;
+    g_MessageStateTimer[0]       = 8;
+    g_MessageState.state_00 = 1;
     D_801490B9          = 0;
     g_UiWindowStep      = 0;
     entry += SLUS_LOAD_ADDRESS;
-    D_801490AC = entry;
+    g_MessageScript = entry;
     D_801490B0 = (u8*)entry;
 }

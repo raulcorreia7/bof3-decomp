@@ -4,7 +4,7 @@ MATCH void func_801F3DB8(void) {
     u8 selection;
 
     /* The caller stores the selected slot as an unsigned byte. */
-    selection = MEM(u8, &D_801490C7);
+    selection = MEM(u8, &g_MessageChoice);
     MESSAGE_REQUEST_CLEAR();
     D_801F2945 = selection;
 }

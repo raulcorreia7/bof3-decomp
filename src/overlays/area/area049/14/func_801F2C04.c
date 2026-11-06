@@ -3,7 +3,7 @@
 MATCH s32 func_801F2C04(void) {
     s8 sel;
 
-    sel              = D_801490C7;
+    sel              = g_MessageChoice;
     g_MessageRequest = D_801F5CD4[sel];
     if (sel == 0) {
         SYS_SetFlag(g_SceneFlags, 0x3B);

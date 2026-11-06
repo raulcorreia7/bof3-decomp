@@ -23,7 +23,7 @@ MATCH void func_8015A098(void) {
     state  = (u8*)&D_801490B0;
     cursor = *(u8**)state;
     i      = 0;
-    if (D_801490BC.last_row >= 0) {
+    if (g_MessageWindow.last_row >= 0) {
         rowp = (PanelRowIndex*)(state + 0x15);
         do {
             row          = rowp->row;

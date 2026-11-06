@@ -6,7 +6,7 @@
 MATCH void UI_ClosePanel(void) {
     u8 count;
 
-    D_801490BC.selection_index = 0;
+    g_MessageWindow.selection_index = 0;
     Menu_ArmPanelTask(1, 0);
     count          = g_UiWindowStep;
     D_80148356     = 2;

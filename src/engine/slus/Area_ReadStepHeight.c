@@ -8,6 +8,6 @@ MATCH s16 Area_ReadStepHeight(s32 x, s32 y, u8 mode) {
 
     Area_EnableHeightOffset();
     dist       = func_80154ABC(x, y, mode);
-    D_80149340 = 0;
+    g_AreaHeightOffsetEnabled = 0;
     return dist;
 }
