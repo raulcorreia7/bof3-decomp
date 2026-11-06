@@ -137,10 +137,10 @@ MATCH void func_801F0250(void) {
 INCLUDE_ASM(func_801F0294);
 
 MATCH void func_801F0330(void) {
-    g_Task->unk_40 = 0x10000;
-    g_Task->unk_44 = 0x10000;
-    g_Task->unk_48 = 2;
-    g_Task->unk_09 = 0x1E;
+    g_Task->scale_x = 0x10000;
+    g_Task->scale_y = 0x10000;
+    g_Task->unk_48  = 2;
+    g_Task->unk_09  = 0x1E;
     g_Task->step += 1;
 }
 
@@ -171,11 +171,11 @@ MATCH void func_801F04DC(void) {
     Actor* work;
     u8     timer;
 
-    work         = g_Task;
-    timer        = work->unk_09 - 1;
-    work->unk_09 = timer;
-    work->unk_40 = work->unk_40 - 0x800;
-    work->unk_44 = work->unk_44 - 0x1000;
+    work          = g_Task;
+    timer         = work->unk_09 - 1;
+    work->unk_09  = timer;
+    work->scale_x = work->scale_x - 0x800;
+    work->scale_y = work->scale_y - 0x1000;
     if (timer == 0) {
         D_801EB4E0->unk_0B = 0xFF;
         g_Task->step += 1;

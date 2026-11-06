@@ -12,9 +12,9 @@ MATCH void func_801E8D04(void) {
     u32 value;
 
     BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
-    value = BATTLE_ACTIVE_WORK->unk_40;
+    value = BATTLE_ACTIVE_WORK->scale_x;
     if (value != 0x10000) {
-        BATTLE_ACTIVE_WORK->unk_40 = value + 0x2000;
+        BATTLE_ACTIVE_WORK->scale_x = value + 0x2000;
         return;
     }
     BATTLE_ACTIVE_WORK->unk_48 = 0;

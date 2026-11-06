@@ -8,8 +8,8 @@ MATCH void func_801E47A4(void) {
     work          = scratch_slots[0x11];
     work->unk_48  = 2;
     work          = scratch_slots[0x11];
-    work->unk_44  = 0x10000u;
-    work->unk_40  = 0x10000u;
+    work->scale_y = 0x10000u;
+    work->scale_x = 0x10000u;
     work->unk_18  = 0x666u;
     work->unk_0C  = 0;
     work->unk_03  = 1;

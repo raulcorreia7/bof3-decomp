@@ -8,12 +8,12 @@ MATCH void func_801E3334(void) {
 
     g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
     func_801E2314(0);
-    work         = g_Task;
-    work->unk_48 = 2u;
-    work         = g_Task;
-    work->unk_18 = 0x666u;
-    work->unk_44 = 0u;
-    work->unk_40 = 0u;
-    work->unk_0C = 0u;
-    work->unk_03 = 1u;
+    work          = g_Task;
+    work->unk_48  = 2u;
+    work          = g_Task;
+    work->unk_18  = 0x666u;
+    work->scale_y = 0u;
+    work->scale_x = 0u;
+    work->unk_0C  = 0u;
+    work->unk_03  = 1u;
 }
