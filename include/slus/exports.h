@@ -92,7 +92,8 @@ extern u8             g_SceneEventSelection;
 extern u8             g_WindowStyle;
 extern u8             g_SavedScriptVars[4];
 extern u8             D_80144955;
-extern u8             D_80144E98[];
+/* D_80144E98 */
+extern u8             g_Scenario2Flags[];
 extern u8             D_80144F59;
 /* 0x80145xxx: pad state, shared text buffer and field words. */
 extern u16            D_80145048;

@@ -24,10 +24,14 @@
 #include <strings.h>
 
 extern s8           D_801448EA[1];
-extern volatile u16 D_801448FC; /* 0x801448FC */
-extern volatile u8  D_801448FF; /* 0x801448FF */
-extern volatile u32 D_80144900; /* 0x80144900 */
-extern volatile u32 D_80144904; /* 0x80144904 */
+/* D_801448FC */
+extern volatile u16 g_SaveAreaId; /* 0x801448FC */
+/* D_801448FF */
+extern volatile u8  g_SaveEntryFacing; /* 0x801448FF */
+/* D_80144900 */
+extern volatile u32 g_SaveEntryX; /* 0x80144900 */
+/* D_80144904 */
+extern volatile u32 g_SaveEntryY; /* 0x80144904 */
 /* The game state the overlay tests. */
 extern u32          D_80145034; /* 0x80145034 */
 extern u32          D_80145038;

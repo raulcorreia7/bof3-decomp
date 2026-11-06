@@ -207,10 +207,14 @@ extern s16* volatile D_1F800010;
 extern u16            g_GameAreaId;
 extern u8             g_GameRequestKind;
 extern AreaScroll     D_80143F84;
-extern volatile u16   D_801448FC;
-extern volatile u8    D_801448FF;
-extern volatile u32   D_80144900;
-extern volatile u32   D_80144904;
+/* D_801448FC */
+extern volatile u16   g_SaveAreaId;
+/* D_801448FF */
+extern volatile u8    g_SaveEntryFacing;
+/* D_80144900 */
+extern volatile u32   g_SaveEntryX;
+/* D_80144904 */
+extern volatile u32   g_SaveEntryY;
 extern u8             D_80145518[][4];
 extern s32            D_80145EC4;
 extern u8             D_80146890;

@@ -65,10 +65,10 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     g_SavedScriptVars[1]           = g_ScriptVars[1];
     g_SavedScriptVars[2]           = g_ScriptVars[2];
     g_SavedScriptVars[3]           = g_ScriptVars[3];
-    D_80144900                     = (u32)D_80145EC4;
-    D_80144904                     = (u32)D_80145EC8;
-    D_801448FC                     = g_GameAreaId;
-    D_801448FF                     = g_BattlePartyBattlers[0].facing;
+    g_SaveEntryX                   = (u32)D_80145EC4;
+    g_SaveEntryY                   = (u32)D_80145EC8;
+    g_SaveAreaId                   = g_GameAreaId;
+    g_SaveEntryFacing              = g_BattlePartyBattlers[0].facing;
     n                              = 0;
     j                              = 0;
     do {

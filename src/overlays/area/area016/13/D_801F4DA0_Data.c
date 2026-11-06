@@ -1,8 +1,9 @@
 #include "area016_13.h"
 
-/* Map point rows (x, y, class, pad), 137 of them. Fish_LocationMessage walks them until x and y match the party cell;
- * func_801F4610 marks the cell of the row chosen by the work byte 0x0B. Rows past the first ones hold other records
- * that the stage readers (D_801F4FC4 and the map scripts) walk at the same stride; none is proven. */
+/* The first three rows are the fishing spots: x, y, the fishing area (AREA_ID_FISHING_YRAAL) and the spot selector
+ * Fish_LocationMessage matches against D_801F50E4; it walks the rows until x and y equal the party cell. func_801F4610
+ * marks the cell of the row chosen by the work byte 0x0B. The rows after them hold other records at the same stride
+ * (the stage readers and map scripts); none is proven to be a node or link graph. */
 WorldMapPoint D_801F4DA0[137] = {
     {0x27, 0x2C, 0x1E, 0x00},
     {0x30, 0x24, 0x1E, 0x01},

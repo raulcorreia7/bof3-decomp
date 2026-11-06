@@ -31,7 +31,12 @@ typedef struct SaveData {
     /* 0x013 */ SceneEventState scene_event;
     /* 0x016 */ u8              unk_16[0xA];
     /* 0x020 */ u8              script_vars[4]; /* a copy of g_ScriptVars[0..3] */
-    /* 0x024 */ u8              unk_24[0x4C];
+    /* 0x024 */ u16             area_id;        /* the area the save resumes in */
+    /* 0x026 */ u8              unk_26;
+    /* 0x027 */ u8              entry_facing;
+    /* 0x028 */ u32             entry_x; /* the party position in the area, 16.16 */
+    /* 0x02C */ u32             entry_y;
+    /* 0x030 */ u8              unk_30[0x40];
     /* 0x070 */ u16             checksum;     /* zeroed while the payload is summed, then holds the sum */
     /* 0x072 */ u8              unk_72[8];    /* holds g_SndMono at 0x79, read through volatile views */
     /* 0x07A */ u8              window_style; /* the last argument of UI_DrawWindow */
@@ -70,6 +75,10 @@ typedef struct SaveData {
 ASSERT_SIZE(SaveData, SAVE_DATA_SIZE);
 ASSERT_OFFSET(SaveData, scene_event, 0x013);
 ASSERT_OFFSET(SaveData, script_vars, 0x020);
+ASSERT_OFFSET(SaveData, area_id, 0x024);
+ASSERT_OFFSET(SaveData, entry_facing, 0x027);
+ASSERT_OFFSET(SaveData, entry_x, 0x028);
+ASSERT_OFFSET(SaveData, entry_y, 0x02C);
 ASSERT_OFFSET(SaveData, checksum, 0x070);
 ASSERT_OFFSET(SaveData, window_style, 0x07A);
 ASSERT_OFFSET(SaveData, characters, 0x090);

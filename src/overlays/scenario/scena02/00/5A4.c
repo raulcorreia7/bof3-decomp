@@ -15,9 +15,9 @@ MATCH void func_801F71A4(void) {
 }
 
 MATCH void func_801F71D8(void) {
-    *D_80144E98      = 0;
-    g_ScriptVarsWord = 0;
-    D_80146872       = 1;
+    *g_Scenario2Flags = 0;
+    g_ScriptVarsWord  = 0;
+    D_80146872        = 1;
 }
 
 INCLUDE_ASM(func_801F71FC);
@@ -258,7 +258,7 @@ INCLUDE_ASM(func_801FCD14);
 INCLUDE_ASM(func_801FCECC);
 
 MATCH void func_801FD084(void* record) {
-    D_801FE304[((Actor*)record)->callback_index](record, &D_80144E98);
+    D_801FE304[((Actor*)record)->callback_index](record, &g_Scenario2Flags);
 }
 
 MATCH void func_801FD0C4(void) {
