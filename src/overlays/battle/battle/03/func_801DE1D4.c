@@ -17,7 +17,7 @@ NON_MATCHING void func_801DE1D4(void) {
             if (!ACTOR_IN_USE(g_BattlePartyBattlers[index])) {
                 continue;
             }
-            if (g_BattlePartyBattlers[index].action_flags.value & COMBATANT_FLAG_MODE_HANDLER_ACTION) {
+            if (g_BattlePartyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_MODE_HANDLER_ACTION) {
                 continue;
             }
             slot = Battle_AllocEffect(0, 7);
@@ -37,7 +37,7 @@ NON_MATCHING void func_801DE1D4(void) {
             if (Battle_SlotIsBlocked(index) & BYTE_MASK) {
                 continue;
             }
-            if (ENEMY_COMBATANT(index).action_flags & COMBATANT_FLAG_MODE_HANDLER_ACTION) {
+            if (ENEMY_COMBATANT(index).turn.action_flags.value & COMBATANT_FLAG_MODE_HANDLER_ACTION) {
                 continue;
             }
             slot = Battle_AllocEffect(0, 7);

@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
 MATCH void func_8009E200(void) {
-    *((u8*)(g_BattleTargetRecord) + 8)       = 2;
-    (*(s16*)((u32)g_BattleTargetRecord + 6)) = -0x14;
+    g_BattleTargetRecord->target_flags = 2;
+    g_BattleTargetRecord->ap_change    = -0x14;
 }

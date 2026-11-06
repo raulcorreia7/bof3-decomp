@@ -24,7 +24,7 @@ MATCH void func_801E9FDC(void) {
         g_BattlePartyBattlers[g_MenuCurrentPanel->unk_0A].unk_30.half + g_BattlePanelOffsets[b1 * 8 + b0 * 2 + 1] + 12;
 
     if (g_BattleSelectionLatch != 0) {
-        flags = *D_801EB4D8;
+        flags = D_801EB4D8->command.target;
         if ((flags & 0xC0) == 0) {
             if (flags != g_MenuCurrentPanel->unk_0A) {
                 g_MenuCurrentPanel->unk_0F = 0;

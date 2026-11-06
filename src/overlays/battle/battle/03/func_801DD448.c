@@ -21,7 +21,7 @@ MATCH u8 func_801DD448(void) {
     }
 
     work = g_GameState;
-    if ((work->damage_flags.value & 1u) != 0u) {
+    if ((work->turn.damage_flags.value & 1u) != 0u) {
         return 0u;
     }
     if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
@@ -34,12 +34,13 @@ MATCH u8 func_801DD448(void) {
         return 0u;
     }
 
-    if ((g_BattleActionLock != 0u) && ((g_GameState->action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
+    if ((g_BattleActionLock != 0u) &&
+        ((g_GameState->turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
         return 0u;
     }
 
     work = g_GameState;
-    if ((work->damage_flags.value & COMBATANT_FLAG_REPRISAL) == 0u) {
+    if ((work->turn.damage_flags.value & COMBATANT_FLAG_REPRISAL) == 0u) {
         threshold = work->chr.stats.reprisal_chance;
         return (rand() % 100) < threshold;
     }

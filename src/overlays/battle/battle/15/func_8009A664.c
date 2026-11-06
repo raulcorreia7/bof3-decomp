@@ -14,7 +14,7 @@ MATCH void func_8009A664(void) {
     }
     if ((INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) &&
         (Item_GetFlags(entry >> 8, entry & BYTE_MASK) & 0x80)) {
-        *D_801EB4D8 ^= 0xC0;
+        D_801EB4D8->command.target ^= 0xC0;
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

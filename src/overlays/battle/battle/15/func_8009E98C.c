@@ -13,12 +13,12 @@ MATCH void func_8009E98C(void) {
     if (battler < 3u) {
         if (HAS_STATUS(g_BattlePartyBattlers[battler], STATUS_KO)) {
             ORDER_LOCK(selection = -0x2710);
-            g_BattleTargetRecord[2] = selection;
+            g_BattleTargetRecord->hp_change = selection;
             /* FAKE: retail schedules the call arguments after the count store. */
             ORDER_LOCK(g_BattleLivingPartyCount += 1);
             func_800A36F0(*state, 0x4000);
             return;
         }
-        g_BattleTargetRecord[2] = 0;
+        g_BattleTargetRecord->hp_change = 0;
     }
 }

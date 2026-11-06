@@ -26,5 +26,5 @@ MATCH void func_8009FA20(void) {
      * it lands in the jal delay slot as retail has it. */
     MATCH_FAKE_BARRIER();
     res                             = Battle_CalcDamage(battler_index, selection_kind, 0xFFFF);
-    ((s16*)g_BattleTargetRecord)[2] = res;
+    g_BattleTargetRecord->hp_change = res;
 }

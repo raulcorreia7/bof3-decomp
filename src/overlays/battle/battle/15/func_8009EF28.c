@@ -12,7 +12,7 @@ MATCH void func_8009EF28(void) {
     /* FAKE: pin the halfword address to v0. */
     MATCH_REG(volatile u16*, half, "v0");
     /* FAKE: pin the record base to v1 in the else path. */
-    MATCH_REG(u8*, record, "v1");
+    MATCH_REG(BattleTurn*, record, "v1");
     u16 updated;
     u8  battler_index;
     u8  selection_kind;
@@ -24,11 +24,11 @@ MATCH void func_8009EF28(void) {
         selection_kind                  = g_BattleTarget;
         updated                         = flag_value | BATTLE_STATE_CRITICAL;
         *(u16*)half                     = updated;
-        ((s16*)g_BattleTargetRecord)[2] = Battle_CalcDamage(battler_index, selection_kind, 0xFFFF);
+        g_BattleTargetRecord->hp_change = Battle_CalcDamage(battler_index, selection_kind, 0xFFFF);
         return;
     }
-    record    = (u8*)g_BattleTargetRecord;
-    record[8] = 1;
+    record               = g_BattleTargetRecord;
+    record->target_flags = 1;
     func_800AAC88(0, g_BattleTarget);
     func_800A3F28();
 }

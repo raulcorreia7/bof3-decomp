@@ -17,22 +17,23 @@ NON_MATCHING void func_8009E248(void) {
     id = g_BattleActiveBattler;
     if (!(func_800A3A10(id, g_BattleTarget) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_BattleTarget)) {
-            if (!(g_BattlePartyBattlers[g_BattleTarget].damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE)) {
+            if (!(g_BattlePartyBattlers[g_BattleTarget].turn.damage_flags.volatile_value &
+                  COMBATANT_FLAG_DAMAGE_IMMUNE)) {
                 hp = D_80145F18[g_BattleTarget][0];
             } else {
                 hp = 0;
             }
         } else {
             enemy = g_BattleTarget - 3;
-            if (g_BattleEnemyBattlers[enemy].damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+            if (g_BattleEnemyBattlers[enemy].turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
                 hp = 0;
             } else {
                 hp = D_801EB6C4[enemy][0];
             }
         }
-        hp_bar                  = hp / 5;
-        g_BattleTargetRecord[2] = hp_bar;
-        g_BattleAction->unk_08  = 1;
+        hp_bar                          = hp / 5;
+        g_BattleTargetRecord->hp_change = hp_bar;
+        g_BattleAction->unk_08          = 1;
         if (id < 3) {
             if (D_80145F20[id][0] < D_80145F18[id][0] + hp_bar) {
                 g_BattleAction->unk_08 |= 4;
@@ -48,7 +49,7 @@ NON_MATCHING void func_8009E248(void) {
         g_BattleAction->unk_08 = 0;
         return;
     }
-    FIELD(s8, g_BattleTargetRecord, 0x8) = 1;
+    g_BattleTargetRecord->target_flags = 1;
 }
 #else
 INCLUDE_ASM(func_8009E248);

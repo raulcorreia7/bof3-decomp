@@ -238,7 +238,7 @@ extern u16             D_80146388;
 extern u8              g_BattleTarget;
 /* The active record's 0x118 result cells. */
 /* D_801463A0 */
-extern s16* volatile g_BattleTargetRecord;
+extern BattleTurn* volatile g_BattleTargetRecord;
 /* Shared step callback: returns a u8 result byte (func_801D656C masks it with
  * 0xFF and compares it with 0xFF). */
 /* D_801463AC */

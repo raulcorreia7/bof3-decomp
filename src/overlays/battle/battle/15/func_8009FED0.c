@@ -2,6 +2,6 @@
 
 /* Sets the panel task's unk_08 byte to 2 and its y half to -40. */
 MATCH void func_8009FED0(void) {
-    *((u8*)(g_BattleTargetRecord) + 8)       = 2;
-    (*(s16*)((u32)g_BattleTargetRecord + 6)) = -0x28;
+    g_BattleTargetRecord->target_flags = 2;
+    g_BattleTargetRecord->ap_change    = -0x28;
 }
