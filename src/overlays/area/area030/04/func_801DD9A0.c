@@ -12,7 +12,7 @@ MATCH void func_801DD9A0(void) {
     long*    depth_out;
     long*    sxy_out;
     s32      y;
-    s32      line_step;
+    s32      line_offset;
     s32      i;
     s32      gray;
     LINE_F2* line;
@@ -31,17 +31,17 @@ MATCH void func_801DD9A0(void) {
     }
     i = 1;
     if (4 & g_FrameCount) {
-        sxy_out   = (long*)sxy;
-        depth_out = &depth;
-        flag_out  = &flag;
-        gray      = 0x80;
-        line_step = 0xA0000;
+        sxy_out     = (long*)sxy;
+        depth_out   = &depth;
+        flag_out    = &flag;
+        gray        = 0x80;
+        line_offset = 0xA0000;
         do {
             line = (LINE_F2*)g_GfxPrimCursor;
             i += 1;
             SetLineF2(line);
             pos.vx = -0x4000;
-            y      = ((0x3E0000 - line_step) >> 9) - 0x4000;
+            y      = ((0x3E0000 - line_offset) >> 9) - 0x4000;
             pos.vy = y;
             pos.vz = 0;
             RotTransPers(&pos, sxy_out, depth_out, flag_out);
@@ -54,7 +54,7 @@ MATCH void func_801DD9A0(void) {
             line->y1 = sxy[1];
             setRGB0(line, gray, gray, gray);
             GFX_AddPrim(2U, 0x10U);
-            line_step += 0xA0000;
+            line_offset += 0xA0000;
         } while (i < 6);
     }
 }
