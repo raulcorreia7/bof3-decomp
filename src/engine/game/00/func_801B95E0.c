@@ -58,20 +58,20 @@ NON_MATCHING s32 func_801B95E0(void) {
                     }
                     if (!(g_GameRequestFlags & 1)) {
                         if ((PAD_B & 0xF0) == 0xA0 && (WDIR == 1 || WDIR == 5)) {
-                            return func_801BB7B0(9) & BYTE_MASK;
+                            return func_801BB7B0(9) & 0xFF;
                         }
                         if ((PAD_C & 0xF0) == 0xA0 && (WDIR == 3 || WDIR == 7)) {
-                            return func_801BB7B0(0xA) & BYTE_MASK;
+                            return func_801BB7B0(0xA) & 0xFF;
                         }
                         if ((PAD_B & 0xF0) == 0xA0) {
                             WDIR = dir;
                             func_801BB8E8(4, 6, 5);
-                            return func_801BB7B0(9) & BYTE_MASK;
+                            return func_801BB7B0(9) & 0xFF;
                         }
                         if ((PAD_C & 0xF0) == 0xA0) {
                             WDIR = dir;
                             func_801BB8E8(2, 4, 3);
-                            return func_801BB7B0(0xA) & BYTE_MASK;
+                            return func_801BB7B0(0xA) & 0xFF;
                         }
                     }
                     ret = 3;
@@ -117,7 +117,7 @@ NON_MATCHING s32 func_801B95E0(void) {
             if (!(WDIR & 1)) {
                 func_801BB8E8(4, 6, 5);
             }
-            return func_801BB7B0(8) & BYTE_MASK;
+            return func_801BB7B0(8) & 0xFF;
         }
     north_south:
         v     = func_801B9F08(3, 5, 0);
@@ -138,7 +138,7 @@ NON_MATCHING s32 func_801B95E0(void) {
         if (!(WDIR & 1)) {
             func_801BB8E8(2, 4, 3);
         }
-        return func_801BB7B0(8) & BYTE_MASK;
+        return func_801BB7B0(8) & 0xFF;
     }
 
     if (COORD_FRAC(g_Task->pos.x) == 0) {
@@ -152,7 +152,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                 return 0;
             }
             if ((v & 0xF0) == 0xA0) {
-                return func_801BB7B0(8) & BYTE_MASK;
+                return func_801BB7B0(8) & 0xFF;
             }
             return 3;
         }
@@ -174,25 +174,25 @@ NON_MATCHING s32 func_801B95E0(void) {
             return 0;
         }
         if (v == 0x10) {
-            if (func_801BB934(2, 4, 3, 0xFF) & BYTE_MASK) {
+            if (func_801BB934(2, 4, 3, 0xFF) & 0xFF) {
                 return 0;
             }
-            if (func_801BB934(2, 4, 3, 0x70) & BYTE_MASK) {
+            if (func_801BB934(2, 4, 3, 0x70) & 0xFF) {
                 return 0;
             }
-            if (func_801BB934(2, 4, 7, 0xA0) & BYTE_MASK) {
+            if (func_801BB934(2, 4, 7, 0xA0) & 0xFF) {
                 return 0;
             }
-            if (func_801BB934(2, 4, 7, 0xA1) & BYTE_MASK) {
+            if (func_801BB934(2, 4, 7, 0xA1) & 0xFF) {
                 return 0;
             }
-            if (func_801BB934(2, 4, 7, 0xA2) & BYTE_MASK) {
+            if (func_801BB934(2, 4, 7, 0xA2) & 0xFF) {
                 return 0;
             }
-            return (func_801BB934(2, 4, 7, 0xA3) & BYTE_MASK) == 0;
+            return (func_801BB934(2, 4, 7, 0xA3) & 0xFF) == 0;
         }
         if ((v & 0xF0) == 0xA0) {
-            return func_801BB7B0(8) & BYTE_MASK;
+            return func_801BB7B0(8) & 0xFF;
         }
         probe = Area_ReadStepHeight(((((s16)FIELD(u16, g_Task, 0x36u) * 2) + 1) << 0x10) >> 1, y_arg << 0x10, 1)
                 << 0x10;
@@ -222,25 +222,25 @@ diag_south:
         return 0;
     }
     if (v == 0x10) {
-        if (func_801BB934(3, 5, 5, 0xFF) & BYTE_MASK) {
+        if (func_801BB934(3, 5, 5, 0xFF) & 0xFF) {
             return 0;
         }
-        if (func_801BB934(3, 5, 5, 0x70) & BYTE_MASK) {
+        if (func_801BB934(3, 5, 5, 0x70) & 0xFF) {
             return 0;
         }
-        if (func_801BB934(3, 5, 1, 0xA0) & BYTE_MASK) {
+        if (func_801BB934(3, 5, 1, 0xA0) & 0xFF) {
             return 0;
         }
-        if (func_801BB934(3, 5, 1, 0xA1) & BYTE_MASK) {
+        if (func_801BB934(3, 5, 1, 0xA1) & 0xFF) {
             return 0;
         }
-        if (func_801BB934(3, 5, 1, 0xA2) & BYTE_MASK) {
+        if (func_801BB934(3, 5, 1, 0xA2) & 0xFF) {
             return 0;
         }
-        return -((func_801BB934(3, 5, 1, 0xA3) & BYTE_MASK) == 0) & 3;
+        return -((func_801BB934(3, 5, 1, 0xA3) & 0xFF) == 0) & 3;
     }
     if ((v & 0xF0) == 0xA0) {
-        return func_801BB7B0(8) & BYTE_MASK;
+        return func_801BB7B0(8) & 0xFF;
     }
     probe = Area_ReadStepHeight(x << 0x10, ((((s16)FIELD(u16, g_Task, 0x3Au) * 2) + 1) << 0x10) >> 1, 1) << 0x10;
     if (PAD_FLAG != 0) {

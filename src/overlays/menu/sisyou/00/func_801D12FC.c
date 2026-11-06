@@ -19,7 +19,7 @@ MATCH void func_801D12FC(void) {
         entryp = D_80145FCC.bytes;
         y      = MASTER_MENU_ROW_TOP;
         do {
-            Master_DrawPartyRow((MASTER_MENU_ROW_X - (g_MasterScrollOffset * 36)) & HALF_MASK, y, *entryp, row);
+            Master_DrawPartyRow((MASTER_MENU_ROW_X - (g_MasterScrollOffset * 36)) & 0xFFFF, y, *entryp, row);
             Menu_DrawStatPanel((g_MasterScrollOffset * 40) + MASTER_MENU_STAT_PANEL_X, y, *entryp);
             entryp += BATTLE_PARTY_STRIDE;
             y += MASTER_MENU_ROW_PITCH;

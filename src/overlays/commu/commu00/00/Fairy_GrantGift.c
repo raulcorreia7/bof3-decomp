@@ -27,7 +27,7 @@ MATCH void Fairy_GrantGift(void) {
         }
         D_801490E4[0] = 0;
         Message_StartAreaMessage(0x96);
-        if (!(Item_Add(buf[i].item_type, buf[i].item_index, 1, 0) & BYTE_MASK)) {
+        if (!(Item_Add(buf[i].item_type, buf[i].item_index, 1, 0) & 0xFF)) {
             FAIRY_EVENT_STEP = FAIRY_EVENT_STEP + 1;
         } else {
             g_FairyJobs[D_801448ED].progress_anchor = g_BattleCount;

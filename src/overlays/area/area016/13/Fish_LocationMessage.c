@@ -23,7 +23,7 @@ MATCH void Fish_LocationMessage(void) {
         case 0:
             Game_SetScriptActive();
             pos = &D_80145EC6;
-            if ((Area_GetCellCode(pos[0], D_80145ECA) & BYTE_MASK) == 0xA1) {
+            if ((Area_GetCellCode(pos[0], D_80145ECA) & 0xFF) == 0xA1) {
                 for (index = 0; index < 9; index++) {
                     if (g_GameContextSeed == D_801F4FC4[index][0]) {
                         break;
@@ -52,12 +52,12 @@ MATCH void Fish_LocationMessage(void) {
                 from  = D_801F50E5 + index * 5;
             next:
                 id = *from;
-                if ((id & BYTE_MASK) != GAME_NONE) {
-                    if (g_FishBestCatch[id & BYTE_MASK] != 0) {
-                        if ((id & BYTE_MASK) == 0x16) {
+                if ((id & 0xFF) != GAME_NONE) {
+                    if (g_FishBestCatch[id & 0xFF] != 0) {
+                        if ((id & 0xFF) == 0x16) {
                             src = D_801F50F4;
                         } else {
-                            src = Item_GetRecord(ITEM_CAT_ITEM, (id + 0x38) & BYTE_MASK);
+                            src = Item_GetRecord(ITEM_CAT_ITEM, (id + 0x38) & 0xFF);
                         }
                         for (i = 0; i < 12; i++) {
                             dst[i] = src[i];

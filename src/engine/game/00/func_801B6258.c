@@ -18,18 +18,18 @@ MATCH s32 func_801B6258(void) {
     cur  = func_801B4150();
     prev = cur;
     if ((prev != -1) || (g_Task->direction_08 = saved, cur = func_801B4150(), (s8)cur != prev)) {
-        func_801B60DC(cur & BYTE_MASK);
+        func_801B60DC(cur & 0xFF);
         return 1;
     }
-    if ((((s32 (*)(s32))func_801B4494)(0x51) & BYTE_MASK) &&
+    if ((((s32 (*)(s32))func_801B4494)(0x51) & 0xFF) &&
         (((s32 (*)(u16, u16))Game_CallScenarioHandler)(SP_REF(u16, 0x0u), GAME_ENTITY_ENTRY_DATA) != 0)) {
         func_801B5BDC(g_Task->direction_08);
         ACTOR_CLEAR_STEP();
         return 1;
     }
     g_Task->direction_08 = saved;
-    if (!((((s32 (*)(s32))func_801B4494)(0x50) & BYTE_MASK) || (((s32 (*)(s32))func_801B4494)(0x53) & BYTE_MASK) ||
-          (((s32 (*)(s32))func_801B4494)(0x55) & BYTE_MASK) || (((s32 (*)(s32))func_801B4494)(0x52) & BYTE_MASK))) {
+    if (!((((s32 (*)(s32))func_801B4494)(0x50) & 0xFF) || (((s32 (*)(s32))func_801B4494)(0x53) & 0xFF) ||
+          (((s32 (*)(s32))func_801B4494)(0x55) & 0xFF) || (((s32 (*)(s32))func_801B4494)(0x52) & 0xFF))) {
         return 0;
     }
     sel  = FIELD(u8, func_801B5C54(), 0x2u) & 0xF;

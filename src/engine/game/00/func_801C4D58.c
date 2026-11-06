@@ -14,7 +14,7 @@ MATCH void func_801C4D58(void) {
     state         = g_Task;
     work->vz      = 0;
     state->unk_0A = (state->unk_09 >> 1);
-    Actor_RequestScript((g_Task->direction_08 + 8) & BYTE_MASK);
+    Actor_RequestScript((g_Task->direction_08 + 8) & 0xFF);
     func_801C57B4();
     reload         = g_Task;
     reload->unk_09 = (reload->unk_09 - 1);

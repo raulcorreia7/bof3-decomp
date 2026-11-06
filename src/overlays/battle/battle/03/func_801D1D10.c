@@ -23,7 +23,7 @@ NON_MATCHING void func_801D1D10(void) {
             slot = cursor;
             for (; *slot < BATTLE_PARTY_SLOT_COUNT; ((u8*)slot)[0] += 1) {
                 id    = D_801462F6[*slot];
-                index = id & BYTE_MASK;
+                index = id & 0xFF;
                 if (index != GAME_NONE) {
                     ((u8*)slot)[-0x15] = id;
                     if (!HAS_STATUS(g_BattlePartyBattlers[index], STATUS_CONFUSED) &&

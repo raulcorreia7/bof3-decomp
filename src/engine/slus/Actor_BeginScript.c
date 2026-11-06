@@ -32,7 +32,7 @@ MATCH void Actor_BeginScript(s32 raw_selector, s32 raw_code) {
         flags = g_Task->active_flags;
         if (flags & 2) {
             flags &= 0xFC;
-            func_801C1254((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, raw_selector);
+            func_801C1254((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & 0xFF, raw_selector);
             g_Task->active_flags = g_Task->active_flags | flags;
         }
         g_Task->unk_4B = selector;

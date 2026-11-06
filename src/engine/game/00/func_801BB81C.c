@@ -7,11 +7,11 @@ MATCH s32 func_801BB81C(s32 first_slot, s32 second_slot) {
     /* FAKE: result pinned to v0; allocator picks v1 without it. */
     MATCH_REG(s32, result, "v0");
 
-    value_a = ((u8*)&D_1F800000)[first_slot & BYTE_MASK];
+    value_a = ((u8*)&D_1F800000)[first_slot & 0xFF];
     class_a = value_a & 0xF0;
     result  = 0;
     if (class_a == 0x20) {
-        value_b = ((u8*)&D_1F800000)[second_slot & BYTE_MASK];
+        value_b = ((u8*)&D_1F800000)[second_slot & 0xFF];
         if ((value_b & 0xF0) == class_a) {
             result = value_a ^ value_b;
             result = result != 0;

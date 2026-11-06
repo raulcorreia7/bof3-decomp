@@ -13,7 +13,7 @@ MATCH void func_800B0250(void) {
     for (j = 0; j < BATTLE_PARTY_SLOT_COUNT; j++) {
         for (i = 0; i < 6; i++) {
             if (D_800B7070[j][i] != 0) {
-                slot                         = Battle_AllocEffect(0, 9) & BYTE_MASK;
+                slot                         = Battle_AllocEffect(0, 9) & 0xFF;
                 g_BattleEffects[slot].unk_4B = i + j * 6;
                 g_BattleEffects[slot].unk_0B = i + j * 6;
             }

@@ -9,7 +9,7 @@ MATCH s32 Item_VitalAdd(u8 item_id) {
 
     entry = g_VitalItemIds;
     index = 0;
-    while ((index & BYTE_MASK) < 32U) {
+    while ((index & 0xFF) < 32U) {
         if (*entry == 0) {
             *entry = item_id;
             return 1;

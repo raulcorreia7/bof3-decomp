@@ -175,7 +175,7 @@ MATCH void func_801F7134(s32 chapter_id) {
     prim->clut = 0x7A80;
     setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
     SetShadeTex(prim, 0);
-    SetSemiTrans(prim, chapter_id & BYTE_MASK);
+    SetSemiTrans(prim, chapter_id & 0xFF);
     GFX_AddPrim(g_Task->unk_29, 0x14);
 }
 
@@ -1043,7 +1043,7 @@ MATCH void func_801F92DC(void) {
         if (g_ScriptVars[2] == 0) {
             slot        = Actor_FindFreeSlot();
             *D_1F800000 = slot;
-            actor_slot  = slot & BYTE_MASK;
+            actor_slot  = slot & 0xFF;
             if (actor_slot != GAME_NONE) {
                 g_ActorSlots[actor_slot].header.flags = 1;
                 g_ActorSlots[*D_1F800000].type        = 0x10;
@@ -1128,7 +1128,7 @@ MATCH void func_801F9644(void) {
             timer       = &g_AreaCameraAngle.vx;
             *timer      = (*timer + 0xAA);
             id          = Actor_FindFreeSlot();
-            slot        = id & BYTE_MASK;
+            slot        = id & 0xFF;
             *D_1F800000 = id;
             if (slot != GAME_NONE) {
                 g_ActorSlots[slot].header.flags   = 1;
@@ -1177,7 +1177,7 @@ MATCH void func_801F9868(void) {
                     func_801BE1B0(0U);
                     func_801C601C(0);
                     free_slot   = Actor_FindFreeSlot();
-                    slot        = free_slot & BYTE_MASK;
+                    slot        = free_slot & 0xFF;
                     *D_1F800000 = free_slot;
                     if (slot != GAME_NONE) {
                         g_ActorSlots[slot].header.flags   = 1;
@@ -1322,7 +1322,7 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             D_1F800000[0] = Actor_FindFreeSlot();
-            if ((D_1F800000[0] & BYTE_MASK) != GAME_NONE) {
+            if ((D_1F800000[0] & 0xFF) != GAME_NONE) {
                 g_ActorSlots[D_1F800000[0]].header.flags = 1;
                 g_ActorSlots[D_1F800000[0]].type         = 0x13;
                 g_ActorSlots[D_1F800000[0]].pos.x        = g_AreaCameraAngle.vx + 384;
@@ -1358,7 +1358,7 @@ MATCH void func_801F9FB8(void) {
                 UI_SetMode(1);
                 id            = Actor_FindFreeSlot();
                 D_1F800000[0] = id;
-                if ((id & BYTE_MASK) != GAME_NONE) {
+                if ((id & 0xFF) != GAME_NONE) {
                     g_ActorSlots[id].header.flags     = 1;
                     g_ActorSlots[D_1F800000[0]].type  = 0x13;
                     g_ActorSlots[D_1F800000[0]].pos.x = g_AreaCameraAngle.vx + 448;
@@ -1459,7 +1459,7 @@ MATCH void func_801FA27C(void) {
             }
             id            = Actor_FindFreeSlot();
             D_1F800000[0] = id;
-            if ((id & BYTE_MASK) != GAME_NONE) {
+            if ((id & 0xFF) != GAME_NONE) {
                 g_ActorSlots[id].header.flags     = 1;
                 g_ActorSlots[D_1F800000[0]].type  = 0x13;
                 g_ActorSlots[D_1F800000[0]].pos.x = -842;
@@ -1476,7 +1476,7 @@ MATCH void func_801FA27C(void) {
             }
             id            = Actor_FindFreeSlot();
             D_1F800000[0] = id;
-            if ((id & BYTE_MASK) != GAME_NONE) {
+            if ((id & 0xFF) != GAME_NONE) {
                 g_ActorSlots[id].header.flags     = 1;
                 g_ActorSlots[D_1F800000[0]].type  = 0x13;
                 g_ActorSlots[D_1F800000[0]].pos.x = -684;
@@ -1542,7 +1542,7 @@ MATCH void func_801FA7D8(void) {
     if (((g_SceneState.step_05 - 4) < 3U) && ((g_FrameCount & 0xFu) == 0u)) {
         bit             = (1 << (rand() % 3));
         g_ScriptVars[3] = bit;
-        if ((bit & BYTE_MASK) >= 2u) {
+        if ((bit & 0xFF) >= 2u) {
             D_80146866 += 0x10;
         }
     }
@@ -1932,7 +1932,7 @@ MATCH void func_801FB204(void) {
                     Area_AdvanceScroll(D_80143F84.half[1]);
                     slot          = Actor_FindFreeSlot();
                     D_1F800000[0] = slot;
-                    if ((slot & BYTE_MASK) != GAME_NONE) {
+                    if ((slot & 0xFF) != GAME_NONE) {
                         g_ActorSlots[slot].header.flags   = 1;
                         g_ActorSlots[D_1F800000[0]].type  = 0x13;
                         g_ActorSlots[D_1F800000[0]].pos.x = -682;

@@ -26,9 +26,9 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     setXY0(tile, x1, y1);
-    w       = w & BYTE_MASK;
+    w       = w & 0xFF;
     tile->w = w + 1;
-    h       = h & BYTE_MASK;
+    h       = h & 0xFF;
     tile->h = h + 1;
     setRGB0(tile, 0, 0, 0);
     SetSemiTrans(tile, 1);

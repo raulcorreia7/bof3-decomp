@@ -26,7 +26,7 @@ MATCH void func_8019D648(void) {
         count   = 0;
         aux[-8] = ((src[-9] + src[-6] + src[-3] + src[0]) >> 2);
         do {
-            out     = (s16*)(dst + (count & BYTE_MASK) * 4);
+            out     = (s16*)(dst + (count & 0xFF) * 4);
             out[12] = (cur[0] - *dst);
             cur += 1;
             out[13] = (cur[0] - aux[-9]);
@@ -34,7 +34,7 @@ MATCH void func_8019D648(void) {
             out[14] = (cur[0] - aux[-8]);
             count += 1;
             cur += 1;
-        } while ((count & BYTE_MASK) < 4u);
+        } while ((count & 0xFF) < 4u);
         src += 20;
         base += 20;
         args[0]  = (s16)*dst;
@@ -52,5 +52,5 @@ MATCH void func_8019D648(void) {
         aux[-5] = ((aux[-5] << 0x10) >> 0x16);
         aux[-4] = ((aux[-4] << 0x10) >> 0x16);
         aux += 28;
-    } while ((row & BYTE_MASK) < 24u);
+    } while ((row & 0xFF) < 24u);
 }

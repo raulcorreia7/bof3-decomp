@@ -11,7 +11,7 @@ MATCH s32 func_801C7518(s32 pos_x, s32 pos_y, s32 reach) {
     u16 fracy;
 
     xa    = pos_x + 0x8000;
-    off   = ((reach & BYTE_MASK) + 1) << 0xF;
+    off   = ((reach & 0xFF) + 1) << 0xF;
     off   = -off;
     xa    = off + xa;
     ya    = pos_y + 0x8000;
@@ -20,18 +20,18 @@ MATCH s32 func_801C7518(s32 pos_x, s32 pos_y, s32 reach) {
     py    = ya;
     xa    = xa >> 0x10;
     ya    = ya >> 0x10;
-    tile  = func_801C6FD4(xa, ya) & BYTE_MASK;
-    index = ((reach << 2) | 1) & BYTE_MASK;
+    tile  = func_801C6FD4(xa, ya) & 0xFF;
+    index = ((reach << 2) | 1) & 0xFF;
     if (tile < index) {
         return 0;
     }
     if (tile >= index + 4) {
         goto accept; /* a tile past the four neighbours is accepted */
     }
-    if (px & HALF_MASK) {
+    if (px & 0xFFFF) {
         goto px_case; /* frac_x != 0 */
     }
-    if (py & HALF_MASK) {
+    if (py & 0xFFFF) {
         goto py_case; /* frac_x == 0, frac_y != 0 */
     }
     if (tile != index) {
@@ -41,7 +41,7 @@ accept:
     MATCH_BARRIER(); /* FAKE: keep the shared return-1 block distinct from px_case's. */
     return 1;
 px_case:
-    if (py & HALF_MASK) {
+    if (py & 0xFFFF) {
         return 0;
     }
     if (tile == index + 1) {

@@ -30,7 +30,7 @@ MATCH s32 func_801B1C18(s32 x, s32 y, s32 mode) {
         if (abs(FIELD(s16, &D_80145EC4, 0xA) - value) >= 0x41) {
             return 0;
         }
-        if (func_801C3E40(px, y, mode & BYTE_MASK, value) & BYTE_MASK) {
+        if (func_801C3E40(px, y, mode & 0xFF, value) & 0xFF) {
             return 0;
         }
     }
@@ -40,7 +40,7 @@ MATCH s32 func_801B1C18(s32 x, s32 y, s32 mode) {
         if (abs(FIELD(s16, &D_80145EC8, 0x6) - value) >= 0x41) {
             return 0;
         }
-        if (func_801C3E40(x, py, mode & BYTE_MASK, value) & BYTE_MASK) {
+        if (func_801C3E40(x, py, mode & 0xFF, value) & 0xFF) {
             return 0;
         }
     }

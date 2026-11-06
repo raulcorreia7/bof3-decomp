@@ -12,13 +12,13 @@ MATCH void func_800A5164(void) {
     do {
         row   = MEM(s16, (u32)&g_BattleTargetCursorCol) + FIELD(s16, (&g_BattleTargetCursorCol), 0x2u);
         slot  = (u8*)&g_BattleTargetRows[row];
-        value = slot[i & BYTE_MASK];
+        value = slot[i & 0xFF];
         if (value != GAME_NONE) {
-            g_BattleGenes[i & BYTE_MASK] = value;
-            g_BattleGeneCount[0]         = g_BattleGeneCount[0] + 1;
+            g_BattleGenes[i & 0xFF] = value;
+            g_BattleGeneCount[0]    = g_BattleGeneCount[0] + 1;
         }
         i = i + 1;
-    } while ((i & BYTE_MASK) < 3U);
+    } while ((i & 0xFF) < 3U);
 
     func_800A82F8();
     g_BattlePanelMode = 2;

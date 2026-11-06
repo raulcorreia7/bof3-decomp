@@ -7,8 +7,8 @@ MATCH void SAVE_RunLoadRestore(void) {
     countdown        = g_MenuStartTimer;
     g_MenuStartTimer = countdown - 1;
     if (countdown == 0) {
-        for (i = 0; (i & BYTE_MASK) < 9U; i++) {
-            (&g_InputMasks)[i & BYTE_MASK] = D_80145594[i & BYTE_MASK];
+        for (i = 0; (i & 0xFF) < 9U; i++) {
+            (&g_InputMasks)[i & 0xFF] = D_80145594[i & 0xFF];
         }
         if (D_801ED18C != 0) {
             D_80145AB6   = PADRright;

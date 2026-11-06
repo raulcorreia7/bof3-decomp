@@ -52,7 +52,7 @@ NON_MATCHING void func_801D210C(void) {
 
     Area_FindSceneRecord(D_801E3210->unk_0C);
     Actor_SelectScript(1);
-    index = (u32)Actor_FindFreeSlot() & BYTE_MASK;
+    index = (u32)Actor_FindFreeSlot() & 0xFF;
     if (index != GAME_NONE) {
         g_ActorSlots[index].header.flags = 1;
         g_ActorSlots[index].type         = 10;

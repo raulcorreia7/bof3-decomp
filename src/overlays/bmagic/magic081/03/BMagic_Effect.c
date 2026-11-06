@@ -13,7 +13,7 @@ MATCH void func_801EEE74(void) {
 
     saved  = g_Task;
     g_Task = D_801EC2E0->target.party;
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (func_8014DAEC() & 0xFF) {
         saved->header.mode++;
     }
     g_Task = saved;

@@ -12,13 +12,13 @@ MATCH s32 func_800AA8FC(void) {
     u8  slot;
 
     result = 0;
-    for (i = 0; (i & BYTE_MASK) < 3U; i++) {
+    for (i = 0; (i & 0xFF) < 3U; i++) {
         slot = i;
-        if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) == 0) {
+        if ((Battle_SlotIsBlocked(slot) & 0xFF) == 0) {
             off   = slot * BATTLE_PARTY_STRIDE;
             flags = g_BattlePartyBattlers[slot].turn.damage_flags.value;
             if (flags & 8) {
-                if ((func_800AA874((u8)g_BattleAction->unk_02) & BYTE_MASK) == 0) {
+                if ((func_800AA874((u8)g_BattleAction->unk_02) & 0xFF) == 0) {
                     kind = g_BattleAction->unk_02;
                     if (D_801CA71C[kind].mask & 0x200) {
                         Char_AddAbility(kind, slot, 0, 1);

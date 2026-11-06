@@ -56,7 +56,7 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
     tmp0  = tmp4 >> 0x10;
     tmp23 = (u8*)((tmp0 * 4) + ((tmp2 * 4) + (MAP_BUNDLE_BASE + 0x30)));
     tmp22 = (u8*)((g_AreaMapBundle.height_off4_2A * 4) + (tmp0 + (MAP_BUNDLE_BASE + 0x00)) + tmp2);
-    if (!((tmp4 | tmp5) & HALF_MASK)) {
+    if (!((tmp4 | tmp5) & 0xFFFF)) {
         SP_REF(void*, 0x0) = 0;
         tmp3               = *(s8*)(tmp22)*D_80149340;
         tmp19              = *(u32*)(tmp23);
@@ -65,9 +65,9 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
     }
     tmp6  = tmp21 * 4;
     tmp15 = (u32*)(tmp23 + tmp6);
-    tmp1  = tmp4 & HALF_MASK;
+    tmp1  = tmp4 & 0xFFFF;
     tmp9  = (s8*)(tmp22 + tmp21);
-    if (tmp1 != (tmp5 & HALF_MASK)) {
+    if (tmp1 != (tmp5 & 0xFFFF)) {
         if (tmp1 != 0) {
             sp[0] = ((u32) * (u32*)(tmp23) >> 8) + (*(s8*)(tmp22)*D_80149340);
             sp[1] = FIELD(u8, tmp23, 0x3u) + (*(s8*)(tmp22)*D_80149340);
@@ -88,8 +88,8 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
         }
         SP_REF(void*, 0x0) = 1;
         val1               = (sp[0] + sp[1]) - (sp[2] + sp[3]);
-        val1 = ABS(val1);
-        val3 = val1 << 0x14;
+        val1               = ABS(val1);
+        val3               = val1 << 0x14;
         goto block_23; /* retail branch */
     }
     tmp11 = FIELD(u8, tmp23, 0x3u) + (*(s8*)(tmp22)*D_80149340);
@@ -105,7 +105,7 @@ NON_MATCHING s16 func_80154ABC(s32 x, s32 y, u8 mode) {
         return tmp11 << 5;
     }
     SP_REF(void*, 0x0) = 1;
-    tmp17              = mode & BYTE_MASK;
+    tmp17              = mode & 0xFF;
     if (mode & 1) {
         tmp16 = tmp17 >> 1;
         tmp20 = (u8*)(sp + tmp16);

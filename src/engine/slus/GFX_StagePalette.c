@@ -13,7 +13,7 @@ MATCH void GFX_StagePalette(u8* dst, s32 field) {
 
     record = (u8*)g_Task->unk_4C;
     table  = record + *(u32*)(record + 4);
-    src    = table + *(u32*)(table + (field & BYTE_MASK) * 4);
+    src    = table + *(u32*)(table + (field & 0xFF) * 4);
     second = dst + 0x4000;
     for (index = 0; index < 32; index++) {
         value      = *(u16*)src;

@@ -27,19 +27,19 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s1 = y;
     var_s0 = slot;
     var_s4 = var_s0 - 3;
-    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y) & 0xFFFF);
     var_s0 = var_s2 + 4;
     var_s0 <<= 0x10;
     var_s0     = var_s0 >> 0x10;
     temp_v0_57 = *(u16*)((u8*)&D_80033A08 + ((D_80144952 << 6) | 0x20));
-    temp_v0_61 = temp_v0_57 & HALF_MASK;
+    temp_v0_61 = temp_v0_57 & 0xFFFF;
     var_s6     = (temp_v0_61 >> 2) & 0xF8;
     var_s5     = (temp_v0_61 >> 7) & 0xF8;
     sp20       = (temp_v0_57 & 0x1F) * 8;
     func_801D9C80((s16)var_s0, (s16)(var_s1 + 8), 8U, 1U);
     func_801D9AB4((s16)var_s0, (s16)(var_s1 + 6), 2, 1);
     func_801D9AB4((s16)var_s0, (s16)(var_s1 + 0x19), 3, 1);
-    GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & 0xFFFF);
     var_s0 = var_s2 << 0x10;
     var_s0 = (s32)(s16)var_s2;
     func_801D9C80((s16)var_s0, (s16)(var_s1 + 2), 8U, 0U);
@@ -48,7 +48,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     func_801D9AB4((s16)var_s0, (s16)var_s1, 2, 0);
     func_801D9AB4((s16)var_s0, (s16)(var_s1 + 0x13), 3, 0);
     var_fp      = var_s2;
-    temp_v1_139 = *((u8*)&D_801EB6AF + ((var_s4 & BYTE_MASK) * 0x118));
+    temp_v1_139 = *((u8*)&D_801EB6AF + ((var_s4 & 0xFF) * 0x118));
     var_s7      = var_s1;
     if (temp_v1_139 == 1) {
         func_801D9E9C(var_s3, (s16)(var_s1 + 0xA), (u16)g_MenuCurrentPanel->unk_0B, (u16)g_MenuCurrentPanel->flags,
@@ -61,14 +61,14 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s1 = var_s7 + 3;
     var_s1 <<= 0x10;
     var_s1 = var_s1 >> 0x10;
-    UI_DrawTextString(var_a0_154, (s16)var_s1, 0, 8U, D_801EB6A4[var_s4 & BYTE_MASK]);
+    UI_DrawTextString(var_a0_154, (s16)var_s1, 0, 8U, D_801EB6A4[var_s4 & 0xFF]);
     var_s0 = var_fp + 2;
     var_s0 <<= 0x10;
     var_s0      = var_s0 >> 0x10;
     temp_a1_190 = var_s7 + 2;
-    var_s3      = var_s6 & BYTE_MASK;
+    var_s3      = var_s6 & 0xFF;
     var_s4      = sp20;
-    var_s2      = var_s5 & BYTE_MASK;
+    var_s2      = var_s5 & 0xFF;
     func_801DA5A8((s16)var_s0, temp_a1_190, (s16)(var_fp + 0x49), temp_a1_190, (u8)(s32)var_s4, (u8)(s32)var_s3,
                   (u8)var_s2);
     func_801DA5A8((s16)var_s0, (s16)var_s1, (s16)var_s0, (s16)(var_s7 + 0x12), (u8)(s32)var_s4, (u8)(s32)var_s3,
@@ -108,9 +108,9 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s1 = var_s7 + 0x12;
     var_s1 <<= 0x10;
     var_s1 = var_s1 >> 0x10;
-    var_s3 = var_s6 & BYTE_MASK;
+    var_s3 = var_s6 & 0xFF;
     var_s4 = sp20;
-    var_s2 &= BYTE_MASK;
+    var_s2 &= 0xFF;
     func_801DA408((s16)var_s0, (s16)(var_s7 + 2), (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3,
                   (u8)var_s2);
     func_801DA408((s16)(var_fp + 2), (s16)var_s1, (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3,

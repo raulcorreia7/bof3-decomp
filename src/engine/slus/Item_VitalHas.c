@@ -9,8 +9,8 @@ MATCH bool Item_VitalHas(s32 item_id) {
 
     entry = g_VitalItemIds;
     index = 0;
-    while ((index & BYTE_MASK) < 32U) {
-        if ((item_id & BYTE_MASK) == *entry) {
+    while ((index & 0xFF) < 32U) {
+        if ((item_id & 0xFF) == *entry) {
             return true;
         }
         index += 1;

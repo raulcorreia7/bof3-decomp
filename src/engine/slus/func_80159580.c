@@ -54,7 +54,7 @@ MATCH void func_80159580(void) {
         count++;
         g_MenuCurrentPanel->unk_12 = 0;
     }
-    if ((count & BYTE_MASK) == 2) {
+    if ((count & 0xFF) == 2) {
         g_MenuCurrentPanel->state++;
         return;
     }

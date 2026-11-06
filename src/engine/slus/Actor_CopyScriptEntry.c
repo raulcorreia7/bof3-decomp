@@ -12,8 +12,8 @@ MATCH void Actor_CopyScriptEntry(u32 entry, u8* staging, u32 length) {
     s32 size;
     s32 i;
 
-    Actor_SelectScriptBank(entry & BYTE_MASK);
-    count = length & HALF_MASK;
+    Actor_SelectScriptBank(entry & 0xFF);
+    count = length & 0xFFFF;
     size  = count * g_Task->unk_05;
     dst   = staging + size;
     i     = 0;

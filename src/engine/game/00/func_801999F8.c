@@ -20,7 +20,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     s32  offset;
 
     UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 3), 153, 154, task->unk_09, D_80144952);
-    value = func_801AFD10(&task->unk_0B, &row, &count, (u8*)&task->unk_12) & BYTE_MASK;
+    value = func_801AFD10(&task->unk_0B, &row, &count, (u8*)&task->unk_12) & 0xFF;
     y     = task->y + (s8)row;
     src   = D_801C893C[task->unk_0A] + value;
     dst   = D_801C8950[task->unk_0A] + value;
@@ -29,8 +29,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         if (byte != 0) {
             flag = 0;
             if (task->unk_09 != 0 ||
-                (func_801AF494(task->unk_08, g_CharSlot[D_80144F5A[D_80148656]], task->unk_0A, byte) & BYTE_MASK) ==
-                    0) {
+                (func_801AF494(task->unk_08, g_CharSlot[D_80144F5A[D_80148656]], task->unk_0A, byte) & 0xFF) == 0) {
                 flag = 1;
             }
             visible = flag;
@@ -61,10 +60,10 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 3), 153, 20, task->unk_09, *(u8*)((s8*)&D_80144952));
     UI_DrawWindow((u16)(task->x + 3), (u16)(task->y + 146), 153, 8, task->unk_09, *(u8*)((s8*)&D_80144952));
     slotp  = &D_801C7C5C[task->unk_0A];
-    value  = func_801AF20C(*slotp) & BYTE_MASK;
+    value  = func_801AF20C(*slotp) & 0xFF;
     offset = (value * 4) - 0x4E;
     UI_DrawText((task->x - offset), (task->y + 7), -(task->unk_09 != 0) & 7, 0x10, *slotp);
-    sprintf((char*)g_UiFormatBuffer, (const char*)D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK,
+    sprintf((char*)g_UiFormatBuffer, (const char*)D_80195858, Item_CountHeld(task->unk_0A) & 0xFF,
             (task->unk_0A != 4) ? 0x80 : 0x20);
     UI_DrawGlyphString((task->x + 85), (task->y + 146), -(task->unk_09 != 0) & 7, g_UiFormatBuffer);
     UI_DrawSpriteRun(task->x, task->y, (task->unk_10 & 2) != 0 ? s_MenuLine1FlagRun : s_MenuLine1Run, 1);

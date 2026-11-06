@@ -19,7 +19,7 @@ MATCH void func_80164EF8(s32 index, u8* patch, u8* flags, u16* values) {
     u8   i;
 
     dst    = (s32*)&copy;
-    record = (s32*)(&g_Characters[index & BYTE_MASK]);
+    record = (s32*)(&g_Characters[index & 0xFF]);
     src    = record;
     end    = record + 0x28;
     org[0] = &((Character*)src)->stats.power;

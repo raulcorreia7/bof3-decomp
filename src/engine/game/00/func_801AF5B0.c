@@ -20,7 +20,7 @@ NON_MATCHING s32 func_801AF5B0(s32 item_category, s32 character_index, s32 abili
         return 0;
     }
     ability  = (const u8*)&g_Abilities[(u8)kind];
-    category = item_category & BYTE_MASK;
+    category = item_category & 0xFF;
     if (category == 1) {
         goto case_1;
     }
@@ -34,7 +34,7 @@ NON_MATCHING s32 func_801AF5B0(s32 item_category, s32 character_index, s32 abili
 case_1:
     mapped_character = g_CharSlot[D_80144F5A[(u8)ch]];
     character_offset = (u32)mapped_character * PARTY_RECORD_STRIDE;
-    required_level   = Char_GetAbilityCost((u8)mapped_character, (u8)kind, 0u) & BYTE_MASK;
+    required_level   = Char_GetAbilityCost((u8)mapped_character, (u8)kind, 0u) & 0xFF;
     learned_level    = g_Characters[mapped_character].ap;
     if (learned_level < required_level)
         return 0;
@@ -43,7 +43,7 @@ case_1:
     return 0;
 case_2:
     character_offset = (u32)(u8)ch * BATTLE_PARTY_STRIDE;
-    required_level   = Char_GetAbilityCost((u8)ch, (u8)kind, 1u) & BYTE_MASK;
+    required_level   = Char_GetAbilityCost((u8)ch, (u8)kind, 1u) & 0xFF;
     learned_level    = *(const u16*)(D_80145F1A + character_offset);
     if (learned_level < required_level)
         return 0;

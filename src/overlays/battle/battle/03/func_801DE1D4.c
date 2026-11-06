@@ -34,7 +34,7 @@ NON_MATCHING void func_801DE1D4(void) {
             g_BattleEffects[(u8)slot].unk_5F        = 0;
             g_BattleEffects[(u8)slot].unk_5E        = 0;
         } else {
-            if (Battle_SlotIsBlocked(index) & BYTE_MASK) {
+            if (Battle_SlotIsBlocked(index) & 0xFF) {
                 continue;
             }
             if (ENEMY_COMBATANT(index).turn.action_flags.value & COMBATANT_FLAG_MODE_HANDLER_ACTION) {

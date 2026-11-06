@@ -8,7 +8,7 @@ MATCH s32 INPUT_GetRepeatedButtons(s32 button_mask) {
     u16 repeat_mask;
     u16 counter;
 
-    if (button_mask & HALF_MASK) {
+    if (button_mask & 0xFFFF) {
         g_InputRepeatDelay   = 12;
         g_InputRepeatButtons = g_InputHeld;
         return g_InputHeld;

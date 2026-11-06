@@ -46,7 +46,7 @@ have_facing:
     g_Task->header.mode += 1;
     counter = 0;
     do {
-        offset                                   = (Battle_AllocEffect(1, 0x1B) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+        offset                                   = (Battle_AllocEffect(1, 0x1B) & 0xFF) * BATTLE_EFFECT_STRIDE;
         wave                                     = (counter >> 2) * 3;
         wave                                     = (wave << 2) + 1;
         FIELD(u8, D_801EC331, offset)            = 0;

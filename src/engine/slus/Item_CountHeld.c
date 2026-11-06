@@ -9,8 +9,8 @@ MATCH s32 Item_CountHeld(u32 category) {
     u8  limit;
 
     count = 0;
-    p     = D_801C893C[category & BYTE_MASK];
-    if ((category & BYTE_MASK) < 4u) {
+    p     = D_801C893C[category & 0xFF];
+    if ((category & 0xFF) < 4u) {
         limit = 0x80;
     } else {
         limit = 0x20;

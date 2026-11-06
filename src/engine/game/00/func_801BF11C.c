@@ -42,19 +42,19 @@ NON_MATCHING u8 func_801BF11C(void) {
             tmp9        = FIELD(u8, tmp6, 0xBu);
             if (tmp9 == 0) {
                 val0 = 0;
-                if (func_801C29A0(8) & BYTE_MASK) {
-                    val7 = 0 & BYTE_MASK;
+                if (func_801C29A0(8) & 0xFF) {
+                    val7 = 0 & 0xFF;
                 loop_8:
                     if (D_80144F5D[val7] != g_GameState->slot_index_79) {
                         val0 += 1;
-                        val7 = val0 & BYTE_MASK;
-                        if ((u32)(val0 & BYTE_MASK) < 3U) {
+                        val7 = val0 & 0xFF;
+                        if ((u32)(val0 & 0xFF) < 3U) {
                             goto loop_8; /* retail branch */
                         }
                     }
                     g_GameState->flags_12C.u8_value = (u8)(g_GameState->flags_12C.u8_value & 0xFE);
                     g_Task->unk_29                  = (u8)g_AreaDrawMode;
-                    tmp4                            = (val0 & BYTE_MASK) * 8;
+                    tmp4                            = (val0 & 0xFF) * 8;
                     tmp5                            = g_Task;
                     FIELD(s32, tmp5, 0x34u)         = (s32) * (D_80143F2C + tmp4);
                     tmp2                            = *(D_80143F30 + tmp4);
@@ -67,7 +67,7 @@ NON_MATCHING u8 func_801BF11C(void) {
                 }
             } else if (tmp9 == 1) {
                 val1 = 0;
-                if (func_801C2894(8) & BYTE_MASK) {
+                if (func_801C2894(8) & 0xFF) {
                     val8 = 0 * 2;
                     do {
                         val1 += 1;

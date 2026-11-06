@@ -9,7 +9,7 @@ MATCH void SND_LowerVoiceLevel(s32 voice, s32 amount) {
     s16  value;
     s16  level;
 
-    index             = voice & HALF_MASK;
+    index             = voice & 0xFFFF;
     value             = D_80149070[index] - amount;
     D_80149070[index] = value;
     level_ptr         = &D_80149040[index];

@@ -8,10 +8,10 @@ MATCH s32 Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32
     s32 index;
     s32 kind;
 
-    kind = ability_id & BYTE_MASK;
+    kind = ability_id & 0xFF;
     if (kind == 0)
         return 0;
-    if ((to_stock & BYTE_MASK) == 0) {
+    if ((to_stock & 0xFF) == 0) {
         limit = 10;
         table = Char_GetAbilities(character_index, kind, mode);
     } else {
@@ -19,7 +19,7 @@ MATCH s32 Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32
         table = D_8014546C;
     }
     index = 0;
-    if ((limit & BYTE_MASK) != 0) {
+    if ((limit & 0xFF) != 0) {
         do {
             if (*table == 0) {
                 *table = ability_id;
@@ -27,7 +27,7 @@ MATCH s32 Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32
             }
             table++;
             index++;
-        } while ((index & BYTE_MASK) < (u32)(limit & BYTE_MASK));
+        } while ((index & 0xFF) < (u32)(limit & 0xFF));
     }
     return 0;
 }

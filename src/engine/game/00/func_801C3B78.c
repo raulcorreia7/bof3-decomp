@@ -26,13 +26,13 @@ MATCH s32 func_801C3B78(s32 pos_x, s32 pos_y, s32 wanted_code, s32 mask_cells) {
     cells[2] = AREA_CELL_CODE_S16(x_hi, y_next);
     cells[3] = AREA_CELL_CODE_S16(x_next, y_next);
     cell     = cells;
-    if (mask & BYTE_MASK) {
+    if (mask & 0xFF) {
         do {
             *cell &= 0xF0;
             cell += 1;
         } while ((s32)cell < (s32)(cells + 4));
     }
-    if (cells[0] != (wanted & BYTE_MASK)) {
+    if (cells[0] != (wanted & 0xFF)) {
         return 0;
     }
     if (cells[1] != cells[0]) {
@@ -44,56 +44,56 @@ MATCH s32 func_801C3B78(s32 pos_x, s32 pos_y, s32 wanted_code, s32 mask_cells) {
     if (cells[3] != cells[2]) {
         return 0;
     }
-    if (!(pos_x & HALF_MASK)) {
+    if (!(pos_x & 0xFFFF)) {
         x_prev   = (pos_x >> 0x10) - 1;
         y_raw    = pos_y >> 0x10;
         cells[0] = AREA_CELL_CODE_S16(x_prev, y_raw);
         cells[1] = AREA_CELL_CODE_S16(x_prev, y_raw + 1);
         cell     = cells;
-        if (mask & BYTE_MASK) {
+        if (mask & 0xFF) {
             do {
                 *cell &= 0xF0;
                 cell += 1;
             } while ((s32)cell < (s32)(cells + 2));
         }
-        if (cells[0] != (wanted & BYTE_MASK)) {
+        if (cells[0] != (wanted & 0xFF)) {
             return 0;
         }
         if (cells[1] != cells[0]) {
             return 0;
         }
     }
-    if ((pos_y & HALF_MASK) == 0) {
+    if ((pos_y & 0xFFFF) == 0) {
         x_raw    = pos_x >> 0x10;
         y_prev   = (pos_y >> 0x10) - 1;
         cells[0] = AREA_CELL_CODE_S16(x_raw, y_prev);
         cells[1] = AREA_CELL_CODE_S16(x_raw + 1, y_prev);
         cell     = cells;
-        if (mask & BYTE_MASK) {
+        if (mask & 0xFF) {
             do {
                 *cell &= 0xF0;
                 cell += 1;
             } while ((s32)cell < (s32)(cells + 2));
         }
-        if (cells[0] != (wanted & BYTE_MASK)) {
+        if (cells[0] != (wanted & 0xFF)) {
             return 0;
         }
         if (cells[1] != cells[0]) {
             return 0;
         }
     }
-    if ((pos_x & HALF_MASK) != 0) {
+    if ((pos_x & 0xFFFF) != 0) {
         return 1;
     }
-    if (pos_y & HALF_MASK) {
+    if (pos_y & 0xFFFF) {
         return 1;
     }
     single   = AREA_CELL_CODE_S16((pos_x >> 0x10) - 1, (pos_y >> 0x10) - 1);
     cells[0] = single;
-    if (mask & BYTE_MASK) {
+    if (mask & 0xFF) {
         cells[0] = single & 0xF0;
     }
-    if (cells[0] == (wanted & BYTE_MASK)) {
+    if (cells[0] == (wanted & 0xFF)) {
         return 1;
     }
     /* Distinct local keeps the compare above a branch; `return 0` is

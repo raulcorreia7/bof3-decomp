@@ -6,7 +6,7 @@ MATCH u8 Battle_SlotIsBlocked(u32 slot) {
     u32 subindex;
     u32 offset;
 
-    index = slot & BYTE_MASK;
+    index = slot & 0xFF;
     if (index < 3u) {
         offset = index * 320u;
         if ((g_BattlePartyBattlers[index].header.flags & PARTY_BATTLER_FLAG_OCCUPIED) == 0) {
@@ -16,7 +16,7 @@ MATCH u8 Battle_SlotIsBlocked(u32 slot) {
             return true;
         }
     } else {
-        subindex = (slot - 3u) & BYTE_MASK;
+        subindex = (slot - 3u) & 0xFF;
         offset   = subindex * 280u;
         if ((g_BattleEnemyBattlers[subindex].header.flags & 1u) == 0u) {
             return true;

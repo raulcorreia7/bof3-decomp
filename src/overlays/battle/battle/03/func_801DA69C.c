@@ -5,7 +5,7 @@ MATCH u8 func_801DA69C(u32 enemy_index) {
     s8 scan_index;
     u8 slot_kind;
 
-    enemy_index &= BYTE_MASK;
+    enemy_index &= 0xFF;
     slot_kind   = g_BattleEnemyBattlers[enemy_index].enemy_id.byte.kind;
     owner_index = 7;
     while (owner_index >= 0) {

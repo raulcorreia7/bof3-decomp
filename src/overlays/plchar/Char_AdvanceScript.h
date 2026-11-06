@@ -10,7 +10,7 @@ MATCH void Char_AdvanceScript(void) {
     done = 0;
     if (g_Task->unk_0B != 0) {
         if (g_Task->unk_0B == 1) {
-            if (func_8014DAEC() & BYTE_MASK) {
+            if (func_8014DAEC() & 0xFF) {
                 Actor_SelectScript(g_Task->direction_08);
                 g_Task->unk_0B = 2;
             }
@@ -21,11 +21,11 @@ MATCH void Char_AdvanceScript(void) {
             }
         }
     } else {
-        if (func_8014DAEC() & BYTE_MASK) {
+        if (func_8014DAEC() & 0xFF) {
             done = 1;
         }
     }
-    if (done & BYTE_MASK) {
+    if (done & 0xFF) {
         g_Task->unk_2B                 = 0;
         g_GameState->mode_12B.u8_value = 0;
     }

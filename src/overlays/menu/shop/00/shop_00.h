@@ -20,19 +20,19 @@
  * arrival. A bare statement macro: the member declares `counter` and `count`
  * and returns its result. Kept: as an inline the frame grows 4 bytes (0xBC, retail
  * 0xB8) and the do/while form moves bytes. */
-#define ETC_DRAW_CURSOR(row_y, icon, frame)                \
-    WinDrawCueText(28, (row_y), *cursor_byte + (icon));    \
-    counter = &D_80148654;                                 \
-    count   = *counter;                                    \
-    count--;                                               \
-    *counter = count;                                      \
-    if (count == 0 || g_InputPressed != 0) {               \
-        *counter = (frame);                                \
-        *cursor_byte += 1;                                 \
-        if (*cursor_byte == (palette_index & BYTE_MASK)) { \
-            return 1;                                      \
-        }                                                  \
-    }                                                      \
+#define ETC_DRAW_CURSOR(row_y, icon, frame)             \
+    WinDrawCueText(28, (row_y), *cursor_byte + (icon)); \
+    counter = &D_80148654;                              \
+    count   = *counter;                                 \
+    count--;                                            \
+    *counter = count;                                   \
+    if (count == 0 || g_InputPressed != 0) {            \
+        *counter = (frame);                             \
+        *cursor_byte += 1;                              \
+        if (*cursor_byte == (palette_index & 0xFF)) {   \
+            return 1;                                   \
+        }                                               \
+    }                                                   \
     return 0
 
 /* Tick the request counter and switch the window to mode 1 when the stream
@@ -53,7 +53,7 @@
                 return;                              \
             }                                        \
         }                                            \
-        if ((SND_IsXAIdle() & BYTE_MASK) != 0) {     \
+        if ((SND_IsXAIdle() & 0xFF) != 0) {          \
             count         = (cue_counter);           \
             (cue_counter) = count + 1;               \
             UI_SetMode(1);                           \

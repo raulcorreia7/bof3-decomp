@@ -5,7 +5,7 @@ MATCH void func_801DDFEC(u32 battler_index) {
     u32 battler;
     u32 substate;
 
-    if ((battler_index & BYTE_MASK) >= 3u) {
+    if ((battler_index & 0xFF) >= 3u) {
         return;
     }
     index = D_80146322 - 1u;
@@ -13,8 +13,8 @@ MATCH void func_801DDFEC(u32 battler_index) {
     goto check;
     for (;;) {
     body:
-        battler = *(u8*)((char*)&D_8014630C + (index & BYTE_MASK));
-        if (battler == (battler_index & BYTE_MASK)) {
+        battler = *(u8*)((char*)&D_8014630C + (index & 0xFF));
+        if (battler == (battler_index & 0xFF)) {
             if (g_BattlePartyBattlers[battler].turn.command.type != BATTLE_COMMAND_ITEM) {
                 return;
             }
@@ -27,7 +27,7 @@ MATCH void func_801DDFEC(u32 battler_index) {
         }
         index += 1u;
     check:
-        if ((index & BYTE_MASK) < D_80146323) {
+        if ((index & 0xFF) < D_80146323) {
             /* next ranked owner */
             goto body;
         }

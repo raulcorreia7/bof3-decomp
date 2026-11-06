@@ -34,5 +34,5 @@ MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
         default:
             break;
     }
-    return value & BYTE_MASK;
+    return value & 0xFF;
 }

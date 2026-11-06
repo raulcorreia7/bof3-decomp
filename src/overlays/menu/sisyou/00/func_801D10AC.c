@@ -33,7 +33,7 @@ MATCH void func_801D10AC(u32 message_id) {
         g_MasterBannerLock = 1;
         g_MasterSubStep    = g_MasterSubStep - 1;
         SND_PlayCue(EMI_CUE_ID(1, 6));
-    } else if (trig & HALF_MASK) {
+    } else if (trig & 0xFFFF) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         g_MasterBannerLock ^= 1;
     }
@@ -56,7 +56,7 @@ MATCH void func_801D10AC(u32 message_id) {
                          MASTER_MENU_SELECT_WIDTH, MASTER_MENU_SELECT_HEIGHT, 0, 6);
     Menu_DrawHeaderBar(MASTER_MENU_FRAME_X, MASTER_MENU_FRAME_Y, MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT,
                        D_80144952);
-    i = MASTER_MENU_TEXT_BANK + (message_id & HALF_MASK) * 2;
+    i = MASTER_MENU_TEXT_BANK + (message_id & 0xFFFF) * 2;
     UI_DrawText(MASTER_MENU_TEXT_X, MASTER_MENU_TEXT_Y, 0, 255, (u8*)(MEM(u16, i) + MASTER_MENU_TEXT_BANK));
     Menu_DrawCursorSprite((g_MasterBannerLock << 5) + 0xF3, 0x15, 0);
 }

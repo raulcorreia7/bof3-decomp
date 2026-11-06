@@ -237,7 +237,7 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
     u8       flags;
     u8       n;
 
-    UI_DrawWindow((panel->x + 3) & HALF_MASK, (panel->y + 3) & HALF_MASK, 154, 160, 0, D_80144952);
+    UI_DrawWindow((panel->x + 3) & 0xFFFF, (panel->y + 3) & 0xFFFF, 154, 160, 0, D_80144952);
     n    = 0;
     list = Party_GetAbilities(panel->group, panel->group_first, 0);
     y    = panel->y;

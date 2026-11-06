@@ -21,10 +21,10 @@ MATCH void func_801BF448(void) {
             TASK_SET(rec);
             key = rec[0x79];
             while (1) {
-                if (D_80144F5A[i & BYTE_MASK] == key)
+                if (D_80144F5A[i & 0xFF] == key)
                     break;
                 i += 1;
-                if ((i & BYTE_MASK) >= 3U)
+                if ((i & 0xFF) >= 3U)
                     break;
             }
             g_Task->pos.x.fixed = *(s32*)(D_80143F2C + tab);

@@ -17,7 +17,7 @@ MATCH void func_801EEC5C(void) {
 
     g_Task->unk_0B = 0;
     for (i = 0; i < 4; i++) {
-        slot                               = Battle_AllocEffect(1, 0x2B) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, 0x2B) & 0xFF;
         work                               = g_Task;
         g_BattleEffects[slot].header.mode  = i;
         g_BattleEffects[slot].header.step  = 0;

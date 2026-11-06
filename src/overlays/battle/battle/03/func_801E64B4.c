@@ -8,7 +8,7 @@ MATCH void func_801E64B4(void) {
     GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
         value = D_801EC2E0->unk_10;
-        func_801D9DBC(0, 0, 0xB, ((value << 10) + (value << 5) + value) & HALF_MASK, 1);
+        func_801D9DBC(0, 0, 0xB, ((value << 10) + (value << 5) + value) & 0xFFFF, 1);
     } else {
         func_801D9DBC(0, 0, 0xB, (D_801EC2E0->unk_10 << 10) & 0xFC00, 1);
     }

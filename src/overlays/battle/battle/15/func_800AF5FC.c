@@ -16,7 +16,7 @@ MATCH s32 func_800AF5FC(BattleRange* target, u32 extent) {
     first      = work->range_axis_34 + half_value - target->range_axis_34;
     second     = work->range_axis_38 + half_value - target->range_axis_38;
     if (extent >= first && extent >= second) {
-        result = (extent >> 8) >= (span & HALF_MASK);
+        result = (extent >> 8) >= (span & 0xFFFF);
     }
     return result;
 }

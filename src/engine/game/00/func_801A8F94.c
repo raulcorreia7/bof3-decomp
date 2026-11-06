@@ -128,10 +128,10 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             g_Task->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
                         g_Task->unk_2A = base[state->cursor + 2];
                         if ((base[state->cursor + 3] & 2) != 0) {
-                            Actor_BeginScript((u8)(left & BYTE_MASK), base[state->cursor + 4]);
+                            Actor_BeginScript((u8)(left & 0xFF), base[state->cursor + 4]);
                             state->cursor += 1;
                         } else {
-                            Actor_SelectScript((u8)(left & BYTE_MASK));
+                            Actor_SelectScript((u8)(left & 0xFF));
                         }
                         state->cursor += 4;
                         break;
@@ -145,10 +145,10 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             g_Task->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
                         g_Task->unk_2A = base[state->cursor + 2];
                         if ((base[state->cursor + 3] & 2) != 0) {
-                            Actor_BeginScript((u8)(left & BYTE_MASK), base[state->cursor + 4]);
+                            Actor_BeginScript((u8)(left & 0xFF), base[state->cursor + 4]);
                             state->cursor += 1;
                         } else {
-                            Actor_SelectScript((u8)(left & BYTE_MASK));
+                            Actor_SelectScript((u8)(left & 0xFF));
                         }
                         state->cursor += 4;
                         break;
@@ -158,7 +158,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                 dist = D_801821C0[base[state->cursor] & 3](base + state->cursor);
                 step = (s8)dist;
                 if (step < 0)
-                    return (u8)(sel & BYTE_MASK);
+                    return (u8)(sel & 0xFF);
                 state->cursor = (u16)(state->cursor + step + 1);
                 break;
             case 0xB0:
@@ -166,7 +166,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                 state->cursor += 1;
                 break;
             default:
-                return (u8)(sel & BYTE_MASK);
+                return (u8)(sel & 0xFF);
         }
     }
 }

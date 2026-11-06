@@ -15,7 +15,7 @@ MATCH s32 Char_LoseHP(s32 mode, s32 index) {
         mode = count - 1;
     }
 
-    slot                  = g_CharSlot[index & BYTE_MASK];
+    slot                  = g_CharSlot[index & 0xFF];
     count                 = g_Characters[slot].hp;
     g_Characters[slot].hp = count - mode;
 
@@ -25,5 +25,5 @@ MATCH s32 Char_LoseHP(s32 mode, s32 index) {
         g_Characters[slot].status |= STATUS_LOW_HP;
         block->chr.status |= STATUS_LOW_HP;
     }
-    return mode & HALF_MASK;
+    return mode & 0xFFFF;
 }

@@ -9,14 +9,14 @@ MATCH void func_801E16B4(void) {
         state = work->turn.command.type;
         if (state == 4) {
             if (!(work->turn.action_flags.value & 2)) {
-                if (!(func_801DDF50(work->chr.character_id, D_801463CD) & BYTE_MASK)) {
+                if (!(func_801DDF50(work->chr.character_id, D_801463CD) & 0xFF)) {
                     g_Task->unk_09 = 0x1E;
                 } else {
                     /* shared exit: the armed step clears the phase byte */
                     goto block_8;
                 }
             } else if (((g_DragonForm == state) || ((g_DragonForm - 7) < 2U)) &&
-                       (func_801DDF50(work->chr.character_id, D_801463CD) & BYTE_MASK)) {
+                       (func_801DDF50(work->chr.character_id, D_801463CD) & 0xFF)) {
                 /* shared exit: the armed step clears the phase byte */
                 goto block_8;
             }
@@ -31,7 +31,7 @@ MATCH void func_801E16B4(void) {
             } else {
                 g_Task->unk_09 = s_BattleCharacterStepIds[work->chr.character_id];
             }
-            Actor_RequestScript((g_Task->facing + 0x2C) & BYTE_MASK);
+            Actor_RequestScript((g_Task->facing + 0x2C) & 0xFF);
             g_Task->header.step = g_Task->header.step + 1;
         } else {
             g_Task->header.mode = g_Task->header.mode + 1;

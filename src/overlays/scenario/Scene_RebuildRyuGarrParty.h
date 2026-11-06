@@ -11,17 +11,17 @@ MATCH void Scene_RebuildRyuGarrParty(void) {
 
     slot      = 0;
     character = CHAR_ID_NINA_ADULT;
-    for (; (u32)(slot & BYTE_MASK) < 3U; slot++) {
-        id = D_80144908[slot & BYTE_MASK];
+    for (; (u32)(slot & 0xFF) < 3U; slot++) {
+        id = D_80144908[slot & 0xFF];
         if (id != CHAR_ID_RYU_ADULT && id != CHAR_ID_GARR) {
             character = id;
         }
-        D_80144908[slot & BYTE_MASK] = 0;
+        D_80144908[slot & 0xFF] = 0;
     }
-    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, character & BYTE_MASK, 0);
+    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, character & 0xFF, 0);
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_GARR);
-    Party_JoinMember(character & BYTE_MASK);
+    Party_JoinMember(character & 0xFF);
     func_801C1630();
 }

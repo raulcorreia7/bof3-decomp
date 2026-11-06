@@ -23,7 +23,7 @@ MATCH void Menu_DrawClutStrip(u8 clut_index) {
     cluts[1] = GetClut(80, 482);
     cluts[2] = GetClut(64, 482);
     cluts[3] = GetClut(96, 482);
-    index    = clut_index & BYTE_MASK;
+    index    = clut_index & 0xFF;
     clut     = (u16*)((index << 1) + (u32)cluts);
     x        = 0;
     for (row = 0; row < 5; row++) {

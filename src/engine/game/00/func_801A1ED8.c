@@ -13,41 +13,41 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
     MATCH_REG(s32, s4, "s4");
     sx = x;
     sy = y;
-    switch (route & BYTE_MASK) {
+    switch (route & 0xFF) {
         case 1:
             s3     = (s16)(sx >> 16);
             s4     = ((u32)sy) >> 16;
-            result = func_801A20F8(s3 & HALF_MASK, s4);
-            if (sx & HALF_MASK) {
-                result += (func_801A20F8((s3 + 1) & HALF_MASK, s4) + func_801A223C(sx & 0xFFFF0000, sy)) +
+            result = func_801A20F8(s3 & 0xFFFF, s4);
+            if (sx & 0xFFFF) {
+                result += (func_801A20F8((s3 + 1) & 0xFFFF, s4) + func_801A223C(sx & 0xFFFF0000, sy)) +
                           func_801A223C(sx + 0x8000, sy);
             }
             break;
 
         case 5:
-            if (sy & HALF_MASK) {
+            if (sy & 0xFFFF) {
                 s4     = (s16)(sx >> 16);
-                s3     = ((sy >> 16) + 1) & HALF_MASK;
-                result = func_801A20F8(s4 & HALF_MASK, s3);
-                if (sx & HALF_MASK) {
-                    s3 = ((sy >> 16) + 1) & HALF_MASK;
-                    result += (func_801A20F8((s4 + 1) & HALF_MASK, s3) + func_801A223C(sx & 0xFFFF0000, sy)) +
+                s3     = ((sy >> 16) + 1) & 0xFFFF;
+                result = func_801A20F8(s4 & 0xFFFF, s3);
+                if (sx & 0xFFFF) {
+                    s3 = ((sy >> 16) + 1) & 0xFFFF;
+                    result += (func_801A20F8((s4 + 1) & 0xFFFF, s3) + func_801A223C(sx & 0xFFFF0000, sy)) +
                               func_801A223C(sx + 0x8000, sy);
                 }
             } else {
                 s3     = (s16)(sx >> 16);
                 s4     = ((u32)sy) >> 16;
-                result = func_801A20F8(s3 & HALF_MASK, s4);
-                if (sx & HALF_MASK) {
-                    result += (func_801A20F8((s3 + 1) & HALF_MASK, s4) + func_801A223C(sx & 0xFFFF0000, sy)) +
+                result = func_801A20F8(s3 & 0xFFFF, s4);
+                if (sx & 0xFFFF) {
+                    result += (func_801A20F8((s3 + 1) & 0xFFFF, s4) + func_801A223C(sx & 0xFFFF0000, sy)) +
                               func_801A223C(sx + 0x8000, sy);
                 }
             }
             break;
 
         case 3:
-            if (sx & HALF_MASK) {
-                s4 = ((sx >> 16) + 1) & HALF_MASK;
+            if (sx & 0xFFFF) {
+                s4 = ((sx >> 16) + 1) & 0xFFFF;
             } else {
                 s4 = ((u32)sx) >> 16;
             }
@@ -59,9 +59,9 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
         body_7:
             s3 = (s16)(sy >> 16);
 
-            result = func_801A20F8(s4, s3 & HALF_MASK);
-            if (sy & HALF_MASK) {
-                result += (func_801A20F8(s4, (s3 + 1) & HALF_MASK) + func_801A223C(sx, sy & 0xFFFF0000)) +
+            result = func_801A20F8(s4, s3 & 0xFFFF);
+            if (sy & 0xFFFF) {
+                result += (func_801A20F8(s4, (s3 + 1) & 0xFFFF) + func_801A223C(sx, sy & 0xFFFF0000)) +
                           func_801A223C(sx, sy + 0x8000);
             }
             break;
@@ -71,7 +71,7 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
     }
 
     result += func_801A21EC(sx, sy);
-    return (result & BYTE_MASK) != 0;
+    return (result & 0xFF) != 0;
 }
 #else
 INCLUDE_ASM(func_801A1ED8);

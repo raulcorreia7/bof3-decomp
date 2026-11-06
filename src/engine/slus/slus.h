@@ -76,10 +76,10 @@
  * bare statement macro: the member declares `word`. The do/while form moves
  * bytes. Kept: as an inline the bundle tag is an argument and the mask
  * loads into $a1 instead of $v1 (2 of 2 members differ). */
-#define SLUS_RETAG_BUNDLE_AND_RUN(bundle_tag)                                                         \
-    word    = (*record & 0x00FFFFFF) | (bundle_tag);                                                  \
-    *record = word;                                                                                   \
-    func_801576FC((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.object_list_28 * 4 + (word & HALF_MASK) * 4)
+#define SLUS_RETAG_BUNDLE_AND_RUN(bundle_tag)                                                      \
+    word    = (*record & 0x00FFFFFF) | (bundle_tag);                                               \
+    *record = word;                                                                                \
+    func_801576FC((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.object_list_28 * 4 + (word & 0xFFFF) * 4)
 
 /* Bank cue reader: loads cue D_8018B404 of the bank's cue table into voice slot 0, fills one more slot per
  * layer on the next voices (wrapping at 24), then lets an alias bank supply the tone and voice. One body for the
@@ -1294,8 +1294,8 @@ extern s32 func_801F2C04(void);
 
 /* Pause or replay the sequence player for the selected sound entry. */
 static inline void Snd_ToggleSequencePlayer(void (*action)(short, short), s32 cue_id) {
-    if ((cue_id & BYTE_MASK) != 0xFF) {
-        action(g_SelectionFxVoices[g_SelectionCues[(cue_id & BYTE_MASK) * 4]], D_80181EBB[(cue_id & BYTE_MASK) * 4]);
+    if ((cue_id & 0xFF) != 0xFF) {
+        action(g_SelectionFxVoices[g_SelectionCues[(cue_id & 0xFF) * 4]], D_80181EBB[(cue_id & 0xFF) * 4]);
     }
 }
 

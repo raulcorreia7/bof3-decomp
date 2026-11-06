@@ -22,27 +22,27 @@ MATCH u8 func_8019EEE4(void) {
     if (distance - D_80145ECE >= 0x101) {
         return true;
     }
-    if ((Area_GetCellCode(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y)) & BYTE_MASK) == 0x11) {
+    if ((Area_GetCellCode(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y)) & 0xFF) == 0x11) {
         return true;
     }
-    if ((Area_GetCellCode(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y)) & BYTE_MASK) == 0xFD) {
+    if ((Area_GetCellCode(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y)) & 0xFF) == 0xFD) {
         found = 1;
         Area_ClearCell(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y));
     }
     if ((COORD_FRAC(WORK->pos.x) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), COORD_INT(WORK->pos.y)) & BYTE_MASK) == 0xFD) {
+        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), COORD_INT(WORK->pos.y)) & 0xFF) == 0xFD) {
             found = 1;
             Area_ClearCell((s16)((u16)COORD_INT(WORK->pos.x) + 1), COORD_INT(WORK->pos.y));
         }
     }
     if ((COORD_FRAC(WORK->pos.y) != 0) && !found &&
-        ((Area_GetCellCode(COORD_INT(WORK->pos.x), (s16)((u16)COORD_INT(WORK->pos.y) + 1)) & BYTE_MASK) == 0xFD)) {
+        ((Area_GetCellCode(COORD_INT(WORK->pos.x), (s16)((u16)COORD_INT(WORK->pos.y) + 1)) & 0xFF) == 0xFD)) {
         found = 1;
         Area_ClearCell(COORD_INT(WORK->pos.x), (s16)((u16)COORD_INT(WORK->pos.y) + 1));
     }
     if ((COORD_FRAC(WORK->pos.x) != 0) && (COORD_FRAC(WORK->pos.y) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), (s16)((u16)COORD_INT(WORK->pos.y) + 1)) &
-             BYTE_MASK) == 0xFD) {
+        if ((Area_GetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), (s16)((u16)COORD_INT(WORK->pos.y) + 1)) & 0xFF) ==
+            0xFD) {
             found = 1;
             Area_ClearCell((s16)((u16)COORD_INT(WORK->pos.x) + 1), (s16)((u16)COORD_INT(WORK->pos.y) + 1));
         }

@@ -21,7 +21,7 @@ MATCH void func_8019D8C0(SpinQuad* quad, s16* out) {
     SetRotMatrix(&rot);
     index = 0;
     do {
-        RotTrans(&quad->corners[index & BYTE_MASK], &vtx, &flag);
+        RotTrans(&quad->corners[index & 0xFF], &vtx, &flag);
         index += 1;
         *dst = quad->pos.x + vtx.vx;
         dst += 1;
@@ -29,6 +29,6 @@ MATCH void func_8019D8C0(SpinQuad* quad, s16* out) {
         dst += 1;
         *dst = quad->pos.z + vtx.vz;
         dst += 1;
-    } while (((index & BYTE_MASK)) < 4U);
+    } while (((index & 0xFF)) < 4U);
     PopMatrix();
 }

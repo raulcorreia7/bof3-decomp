@@ -31,7 +31,7 @@ MATCH void func_801976EC(void) {
     }
     UI_SetMode(3u);
     func_80198BC4(1u);
-    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeFxVoice(&sp10, &sp11) & BYTE_MASK)) {
+    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeFxVoice(&sp10, &sp11) & 0xFF)) {
         SND_FadeInSequence(sp10, sp11, 0x14, 0x10);
     }
     request = &D_8014869C;

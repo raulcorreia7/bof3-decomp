@@ -5,10 +5,10 @@ MATCH void func_8019B1E8(void) {
     s32    count;
     u8     flag;
 
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (func_8014DAEC() & 0xFF) {
         count          = g_Task->unk_09 - 1;
         g_Task->unk_09 = count;
-        if ((count & BYTE_MASK) == 0) {
+        if ((count & 0xFF) == 0) {
             g_Task->header.mode = 2;
         }
     }

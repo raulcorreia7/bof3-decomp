@@ -31,8 +31,8 @@ MATCH s32 func_801C6BB4(void) {
                 off      = i * 2;
                 entry->x = D_80143F24 + x + (s_EntitySpawnOffsets[off] << 15);
                 entry->y = D_80143F28 + y + (D_801CD5BD[off] << 15);
-                if ((func_801C7518(entry->x, entry->y, kind->reach) & BYTE_MASK) &&
-                    (func_801C6EE0((u8)index, entry->x, entry->y, kind->reach) & BYTE_MASK)) {
+                if ((func_801C7518(entry->x, entry->y, kind->reach) & 0xFF) &&
+                    (func_801C6EE0((u8)index, entry->x, entry->y, kind->reach) & 0xFF)) {
                     D_801CD8C4++;
                     break;
                 }

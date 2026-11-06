@@ -51,18 +51,18 @@ MATCH void func_801D639C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         next_slot                   = g_MenuPanelTasks[13].unk_0A + 1;
         g_MenuPanelTasks[13].unk_0A = next_slot;
-        if ((u32)(next_slot & BYTE_MASK) >= 6U) {
+        if ((u32)(next_slot & 0xFF) >= 6U) {
             g_MenuPanelTasks[13].unk_0A = 1;
         }
     } else if (input & PADLup) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         prev_slot                   = g_MenuPanelTasks[13].unk_0A - 1;
         g_MenuPanelTasks[13].unk_0A = prev_slot;
-        if (!(prev_slot & BYTE_MASK)) {
+        if (!(prev_slot & 0xFF)) {
             g_MenuPanelTasks[13].unk_0A = 5;
         }
     }
-    slot_flag = func_801D70EC() & BYTE_MASK;
+    slot_flag = func_801D70EC() & 0xFF;
     if (g_InputPressed & D_80145AC2) {
         if (slot_flag != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));

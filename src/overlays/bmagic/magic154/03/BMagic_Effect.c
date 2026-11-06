@@ -32,7 +32,7 @@ MATCH void func_801EF1EC(void) {
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
-    if (!(timer & BYTE_MASK)) {
+    if (!(timer & 0xFF)) {
         g_Task->facing = D_801EB4E0->facing;
         g_Task->unk_0C = 0;
         g_Task->unk_10 = g_Task->unk_0B << 0xF;
@@ -117,7 +117,7 @@ MATCH void func_801EF58C(void) {
 }
 
 MATCH void func_801EF648(void) {
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (func_8014DAEC() & 0xFF) {
         BATTLE_ACTIVE_WORK->unk_09--;
         g_Task->header.step++;
     }

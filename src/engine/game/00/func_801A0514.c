@@ -9,7 +9,7 @@ MATCH void func_801A0514(void) {
     index = 0;
 
     do {
-        slot_u8 = index & BYTE_MASK;
+        slot_u8 = index & 0xFF;
 
         entity = (Actor*)((u8*)g_Actors + (slot_u8 * ACTOR_SIZE));
 
@@ -36,7 +36,7 @@ MATCH void func_801A0514(void) {
                     if (kind == 10) {
                         index += 1;
                         func_8015A944();
-                        next_u8 = index & BYTE_MASK;
+                        next_u8 = index & 0xFF;
                     } else {
                         func_8014D290();
                         goto block_10; /* the kind is not 10, step the slot */
@@ -48,7 +48,7 @@ MATCH void func_801A0514(void) {
         } else {
         block_10:
             index += 1;
-            next_u8 = index & BYTE_MASK;
+            next_u8 = index & 0xFF;
         }
     } while (next_u8 < ENTITY_MAX);
 }

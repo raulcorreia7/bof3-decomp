@@ -23,7 +23,7 @@ MATCH void Area_ReadTintRecord(u8* record) {
     record += 4;
     masks = *(u32*)record;
     record += 4;
-    lo = masks & HALF_MASK;
+    lo = masks & 0xFFFF;
     hi = masks >> 16;
     if (found) {
         value.raw = *(u32*)record;

@@ -7,8 +7,8 @@ MATCH s32 func_801E7F8C(s32 slot_count, s32 record_index) {
     s32 result;
 
     result = 0;
-    for (i = 0; i < (Party_CountOrder(0) & BYTE_MASK); i++) {
-        result |= Char_RestoreHP(g_CharSlot[D_80144F5A[i]], 0x64, record_index & BYTE_MASK);
+    for (i = 0; i < (Party_CountOrder(0) & 0xFF); i++) {
+        result |= Char_RestoreHP(g_CharSlot[D_80144F5A[i]], 0x64, record_index & 0xFF);
     }
-    return -((result & BYTE_MASK) == 0) & 3;
+    return -((result & 0xFF) == 0) & 3;
 }

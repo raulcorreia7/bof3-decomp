@@ -12,11 +12,11 @@ MATCH void func_801F4400(void) {
     s32 second_index;
 
     first       = Actor_FindFree();
-    first_index = first & BYTE_MASK;
+    first_index = first & 0xFF;
     if (first_index != GAME_NONE) {
         g_Actors[first_index].header.flags = 1;
         second                             = Actor_FindFree();
-        second_index                       = second & BYTE_MASK;
+        second_index                       = second & 0xFF;
         if (second_index == GAME_NONE) {
             g_Actors[first_index].header.flags = 0;
             return;

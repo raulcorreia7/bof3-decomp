@@ -15,7 +15,7 @@ MATCH void Shop_DrawAbilities(MenuListPanel* panel) {
     u8       flags;
     u8       n;
 
-    UI_DrawWindow((panel->x + 3) & HALF_MASK, (panel->y + 3) & HALF_MASK, 154, 160, 0, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow((panel->x + 3) & 0xFFFF, (panel->y + 3) & 0xFFFF, 154, 160, 0, CHARACTER_BLOCK->window_style);
     n    = 0;
     list = Party_GetAbilities(panel->unk_0A, panel->unk_0B, 0);
     y    = panel->y;

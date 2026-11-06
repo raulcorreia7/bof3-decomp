@@ -11,7 +11,7 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
     s32 row_offset;
     s32 table_row;
 
-    party_slot = slot & BYTE_MASK;
+    party_slot = slot & 0xFF;
     row_offset = party_slot * BATTLE_PARTY_STRIDE;
 
     rec->unk_20 = func_801DE0AC(rec->unk_40, (FIELD(s8, &D_80145FBC, row_offset) * 2) + 0x64);
@@ -56,7 +56,7 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
         }
     }
 
-    table_row = slot & BYTE_MASK;
+    table_row = slot & 0xFF;
 
     if (g_BattlePartyBattlers[table_row].turn.action_flags.volatile_value & COMBATANT_FLAG_HOLY_RESIST_ZERO) {
         g_BattlePartyBattlers[table_row].chr.stats.resistances[RES_INDEX_HOLY] = 0;

@@ -26,17 +26,17 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     table = *(MenuPanelRows*)&D_801D0E28;
     tail  = *(PanelTail*)&D_801D0EA8;
     sel   = &D_80144952;
-    index = row_index & BYTE_MASK;
+    index = row_index & 0xFF;
     row   = table.rows[index];
 
-    UI_DrawWindow(x & HALF_MASK, y & HALF_MASK, 84, 16, 0, sel[0]);
+    UI_DrawWindow(x & 0xFFFF, y & 0xFFFF, 84, 16, 0, sel[0]);
     icon = *row;
     row++;
     UI_DrawText((s16)((x + 32) - icon * 4), (s16)(y + 1), 0, 6U, row);
     if (index != 1) {
         Resource_GetText((index + 0xCA));
     } else if (sel[4] == 0) {
-        Resource_GetText((index + 0xCA) & HALF_MASK);
+        Resource_GetText((index + 0xCA) & 0xFFFF);
     } else {
         Resource_GetText(0xD0);
     }

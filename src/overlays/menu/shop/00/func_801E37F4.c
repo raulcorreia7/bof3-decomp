@@ -28,11 +28,10 @@ MATCH void func_801E37F4(MenuPanelTask* task) {
     index    = task->unk_0B;
     price    = Shop_GetSellPrice(kind, index, discount);
     record   = Item_GetRecord(kind, index);
-    UI_DrawWindow((task->x + 3) & HALF_MASK, (task->y + 3) & HALF_MASK, SHOP_DESC_PANEL_WIDTH, SHOP_DESC_PANEL_HEIGHT,
-                  0, D_80144952);
-    func_801AEA80((task->x + 7) & HALF_MASK, (task->y + 6) & HALF_MASK,
-                  D_801E5E38[Item_GetKind(kind, index) & BYTE_MASK], 0);
-    UI_DrawText(task->x + 17, task->y + 4, 0, func_801AF20C(record) & BYTE_MASK, record);
+    UI_DrawWindow((task->x + 3) & 0xFFFF, (task->y + 3) & 0xFFFF, SHOP_DESC_PANEL_WIDTH, SHOP_DESC_PANEL_HEIGHT, 0,
+                  D_80144952);
+    func_801AEA80((task->x + 7) & 0xFFFF, (task->y + 6) & 0xFFFF, D_801E5E38[Item_GetKind(kind, index) & 0xFF], 0);
+    UI_DrawText(task->x + 17, task->y + 4, 0, func_801AF20C(record) & 0xFF, record);
     buffer = (char*)g_UiFormatBuffer;
     sprintf(buffer, D_801D0E88, price);
     UI_DrawGlyphString(task->x + 113, task->y + 7, 0, buffer);
@@ -40,7 +39,7 @@ MATCH void func_801E37F4(MenuPanelTask* task) {
     UI_DrawGlyphString(task->x + 105, task->y + 18, 0, buffer);
     sprintf(buffer, D_801D0E98, task->unk_0C);
     UI_DrawGlyphString(task->x + 14, task->y + 18, 0, buffer);
-    GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & 0xFFFF);
     for (i = 0; i < SHOP_DESC_BORDER_COLUMNS; i++) {
         offset = (i + 1) * SHOP_DESC_BORDER_STRIDE;
         UI_DrawSprite(task->x + offset, task->y, 0x29, 0);

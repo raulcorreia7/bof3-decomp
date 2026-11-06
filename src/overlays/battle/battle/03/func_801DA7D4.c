@@ -38,7 +38,7 @@ NON_MATCHING void func_801DA7D4(void) {
     i   = 3;
     do {
         if ((D_801463BA == 0) || (ENEMY_COMBATANT(i).turn.action_flags.value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
-            if (func_801DB9E4(i) & BYTE_MASK) {
+            if (func_801DB9E4(i) & 0xFF) {
                 value = ENEMY_COMBATANT(i).stats.agility;
                 sum += value;
                 if (max < (u32)value) {
@@ -53,7 +53,7 @@ NON_MATCHING void func_801DA7D4(void) {
     do {
         if ((D_801463BA == 0) ||
             (g_BattlePartyBattlers[i].turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
-            if (func_801DB844(i) & BYTE_MASK) {
+            if (func_801DB844(i) & 0xFF) {
                 total        = sum;
                 entry        = &entries[total];
                 entry->index = (s16)i;
@@ -64,7 +64,7 @@ NON_MATCHING void func_801DA7D4(void) {
         i++;
     } while ((u32)i < BATTLE_COMMAND_MAX);
     max   = sum;
-    count = sum & BYTE_MASK;
+    count = sum & 0xFF;
     if (count >= 2) {
         sum = 0;
         if ((count - 1) > 0) {
@@ -87,7 +87,7 @@ NON_MATCHING void func_801DA7D4(void) {
                     } while (scan_index < (u32)max);
                 }
                 sum++;
-                count = max & BYTE_MASK;
+                count = max & 0xFF;
                 i     = sum + 1;
             } while (sum < (count - 1));
         }
@@ -100,14 +100,14 @@ NON_MATCHING void func_801DA7D4(void) {
     cursor  = &g_BattleCommandCount;
     *cursor = 0;
     i       = 0;
-    if (max & BYTE_MASK) {
+    if (max & 0xFF) {
         do {
-            if (func_801DB844((u8)entries[i].index) & BYTE_MASK) {
+            if (func_801DB844((u8)entries[i].index) & 0xFF) {
                 D_801462F6[*cursor] = (u8)entries[i].index;
                 *cursor             = (s8)(*cursor + 1);
             }
             i++;
-        } while ((u32)i < (u32)(max & BYTE_MASK));
+        } while ((u32)i < (u32)(max & 0xFF));
     }
 }
 #else

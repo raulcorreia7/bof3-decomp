@@ -18,46 +18,46 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
     s16  y_low_word;
     sx = x;
     sy = y;
-    switch (route & BYTE_MASK) {
+    switch (route & 0xFF) {
         case 1:
             xhi   = sx >> 16;
             yhi   = ((u32)sy) >> 16;
             y_low = yhi;
-            sum   = func_801A20F8(xhi & HALF_MASK, y_low);
-            part  = sum + func_801A20F8((xhi + 1) & HALF_MASK, y_low);
+            sum   = func_801A20F8(xhi & 0xFFFF, y_low);
+            part  = sum + func_801A20F8((xhi + 1) & 0xFFFF, y_low);
             sum   = part;
-            if (!(sx & HALF_MASK)) {
-                sum = part + func_801A20F8((xhi - 1) & HALF_MASK, y_low);
+            if (!(sx & 0xFFFF)) {
+                sum = part + func_801A20F8((xhi - 1) & 0xFFFF, y_low);
             }
             sum += (func_801A21EC(sx, sy) + func_801A21EC(sx + 0x8000, sy)) + func_801A21EC(sx - 0x8000, sy);
             break;
 
         case 5:
-            if (sy & HALF_MASK) {
+            if (sy & 0xFFFF) {
                 xcell = sx >> 16;
-                ycell = ((sy >> 16) + 1) & HALF_MASK;
-                sum   = func_801A20F8(xcell & HALF_MASK, ycell);
-                part  = sum + func_801A20F8((xcell + 1) & HALF_MASK, ycell);
+                ycell = ((sy >> 16) + 1) & 0xFFFF;
+                sum   = func_801A20F8(xcell & 0xFFFF, ycell);
+                part  = sum + func_801A20F8((xcell + 1) & 0xFFFF, ycell);
                 sum   = part;
-                if (!(sx & HALF_MASK)) {
-                    sum = part + func_801A20F8((xcell - 1) & HALF_MASK, ycell);
+                if (!(sx & 0xFFFF)) {
+                    sum = part + func_801A20F8((xcell - 1) & 0xFFFF, ycell);
                 }
             } else {
                 xhi  = sx >> 16;
                 yhi  = ((u32)sy) >> 16;
-                sum  = func_801A20F8(xhi & HALF_MASK, yhi);
-                part = sum + func_801A20F8((xhi + 1) & HALF_MASK, yhi);
+                sum  = func_801A20F8(xhi & 0xFFFF, yhi);
+                part = sum + func_801A20F8((xhi + 1) & 0xFFFF, yhi);
                 sum  = part;
-                if (!(sx & HALF_MASK)) {
-                    sum = part + func_801A20F8((xhi - 1) & HALF_MASK, yhi);
+                if (!(sx & 0xFFFF)) {
+                    sum = part + func_801A20F8((xhi - 1) & 0xFFFF, yhi);
                 }
             }
             sum += (func_801A21EC(sx, sy) + func_801A21EC(sx + 0x8000, sy)) + func_801A21EC(sx - 0x8000, sy);
             break;
 
         case 3:
-            if (sx & HALF_MASK) {
-                cell = ((sx >> 16) + 1) & HALF_MASK;
+            if (sx & 0xFFFF) {
+                cell = ((sx >> 16) + 1) & 0xFFFF;
             } else {
                 cell = ((u32)sx) >> 16;
             }
@@ -69,12 +69,12 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
         check_y:
             yhi = sy >> 16;
 
-            sum        = func_801A20F8(cell, yhi & HALF_MASK);
+            sum        = func_801A20F8(cell, yhi & 0xFFFF);
             y_low_word = yhi;
-            part       = sum + func_801A20F8(cell, (y_low_word + 1) & HALF_MASK);
+            part       = sum + func_801A20F8(cell, (y_low_word + 1) & 0xFFFF);
             sum        = part;
-            if (!(sy & HALF_MASK)) {
-                sum = part + func_801A20F8(cell, (y_low_word - 1) & HALF_MASK);
+            if (!(sy & 0xFFFF)) {
+                sum = part + func_801A20F8(cell, (y_low_word - 1) & 0xFFFF);
             }
             sum += (func_801A21EC(sx, sy) + func_801A21EC(sx, sy + 0x8000)) + func_801A21EC(sx, sy - 0x8000);
             break;
@@ -84,7 +84,7 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
             break;
     }
 
-    return (sum & BYTE_MASK) != 0;
+    return (sum & 0xFF) != 0;
 }
 #else
 /* First difference: the case-3 branch target. */

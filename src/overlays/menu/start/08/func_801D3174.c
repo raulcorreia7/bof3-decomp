@@ -58,7 +58,7 @@ MATCH void func_801D3174(void) {
         s_ChoiceMenuValues[g_MenuPanelTasks[13].unk_0A]  = g_MenuPanelTasks[13].unk_0B;
         step_up                                          = g_MenuPanelTasks[13].unk_0A + 1;
         g_MenuPanelTasks[13].unk_0A                      = step_up;
-        if ((u32)(step_up & BYTE_MASK) >= 4U) {
+        if ((u32)(step_up & 0xFF) >= 4U) {
             g_MenuPanelTasks[13].unk_0A = 0;
         }
     /* Shared tail of both cursor-step directions. */
@@ -119,10 +119,10 @@ MATCH void func_801D3174(void) {
         if (*row != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             if (D_801ED618 == 0) {
-                if ((func_801AF494(base[8], 0, base[0xA], *row) & BYTE_MASK) != 0) {
+                if ((func_801AF494(base[8], 0, base[0xA], *row) & 0xFF) != 0) {
                     entry = *row;
                     if (g_Items[entry].flags & 0x10) {
-                        result = func_801E8C9C(0, entry, 0) & BYTE_MASK;
+                        result = func_801E8C9C(0, entry, 0) & 0xFF;
                         if (result == 0 || result == 4) {
                             SND_PlayCue(EMI_CUE_ID(1, 4));
                             if (TIMER_EXPIRED(*pair)) {
@@ -145,7 +145,7 @@ MATCH void func_801D3174(void) {
                     goto fail;
                 }
             } else {
-                if ((func_801AF494(base[8], 0, base[0xA], D_801C893C[base[0xA]][base[0xC]]) & BYTE_MASK) != 0) {
+                if ((func_801AF494(base[8], 0, base[0xA], D_801C893C[base[0xA]][base[0xC]]) & 0xFF) != 0) {
                     saved      = base[0xC];
                     D_8014865B = 0;
                     counter    = D_80148651 + 3;

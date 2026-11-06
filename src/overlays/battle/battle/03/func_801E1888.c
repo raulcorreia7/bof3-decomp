@@ -11,7 +11,7 @@ MATCH void func_801E1888(void) {
     count = work->unk_09;
     if (count == 0) {
         func_801DD858(5);
-        if ((g_GameState->turn.action_flags.value & 2) && ((g_DragonForm & BYTE_MASK) != 4) &&
+        if ((g_GameState->turn.action_flags.value & 2) && ((g_DragonForm & 0xFF) != 4) &&
             ((u32)((short)g_DragonForm - 7) >= 2)) {
             func_801DD858(3);
         }

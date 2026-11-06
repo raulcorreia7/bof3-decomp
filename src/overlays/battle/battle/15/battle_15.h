@@ -933,9 +933,9 @@ static inline void BattleFillEffectGrid(s32 kind) {
     s32 slot;
     s32 row;
 
-    for (row = 0; (u32)(row & BYTE_MASK) < 3U; row++) {
-        for (slot = 0; (u32)(slot & BYTE_MASK) < 3U; slot++) {
-            offset                         = Battle_AllocEffect(0, kind) & BYTE_MASK;
+    for (row = 0; (u32)(row & 0xFF) < 3U; row++) {
+        for (slot = 0; (u32)(slot & 0xFF) < 3U; slot++) {
+            offset                         = Battle_AllocEffect(0, kind) & 0xFF;
             g_BattleEffects[offset].unk_0A = slot;
             g_BattleEffects[offset].unk_09 = row;
         }
@@ -949,9 +949,9 @@ static inline s32 BattleCompareStatusByte(s32 battler_index, s32 compare_value, 
     s32          result;
 
     result = 1;
-    if ((u32)(battler_index & BYTE_MASK) < 3U) {
+    if ((u32)(battler_index & 0xFF) < 3U) {
         entry  = (u8*)(g_GameState);
-        result = (*(entry + offset)) != (compare_value & BYTE_MASK);
+        result = (*(entry + offset)) != (compare_value & 0xFF);
     }
     return result;
 }
@@ -1007,7 +1007,7 @@ static inline u8 BattleRollHitChance(u8 selection_kind, s16 (*hit_rate)(s32, s32
     rate = *(u16*)&D_801EC2F2;
     rate = BATTLE_HIT_RATE_BASE - (rate / 5);
     CLAMP_MIN(rate, BATTLE_HIT_RATE_MIN);
-    temp = hit_rate((s32)(selection_kind & BYTE_MASK), (s32)(D_801CA71C[g_BattleActionId].mask & 0x1FF));
+    temp = hit_rate((s32)(selection_kind & 0xFF), (s32)(D_801CA71C[g_BattleActionId].mask & 0x1FF));
     if (temp == -1) {
         ret = 0;
     } else {

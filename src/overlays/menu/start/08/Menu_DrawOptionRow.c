@@ -91,19 +91,19 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
     work.fields.strings[11]   = (char*)&work.fields.unk_40;
     val5                      = val2;
     val4                      = select_step;
-    tmp1                      = val4 & BYTE_MASK;
+    tmp1                      = val4 & 0xFF;
     val6                      = option_index;
-    UI_DrawWindow(val5 & HALF_MASK, (val1 - tmp1) & HALF_MASK, 249, (tmp1 * 2) + 11, 0, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(val5 & 0xFFFF, (val1 - tmp1) & 0xFFFF, 249, (tmp1 * 2) + 11, 0, CHARACTER_BLOCK->window_style);
     val3 = val1;
-    if ((val4 & BYTE_MASK) == 3) {
-        val6 &= BYTE_MASK;
+    if ((val4 & 0xFF) == 3) {
+        val6 &= 0xFF;
         UI_DrawText((s16)((val2 + 58) - (strlen(work.fields.strings[val6]) * 4)), (s16)(val1 - 1), 0, 0xFFU,
                     work.fields.strings[val6]);
         if (D_80148652 != 1) {
-            Menu_DrawCursorSprite((val2 + 4) & HALF_MASK, val3 & HALF_MASK, 0);
+            Menu_DrawCursorSprite((val2 + 4) & 0xFFFF, val3 & 0xFFFF, 0);
         }
     } else {
-        val6 &= BYTE_MASK;
+        val6 &= 0xFF;
         UI_DrawTextString((s16)((val2 + 58) - (strlen(work.fields.strings[val6]) * 4)), (s16)(val1 + 2), 0, 0xFF,
                           work.fields.strings[val6]);
     }
@@ -112,7 +112,7 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
     tmp0     = val5 + 0x74;
     line->x1 = tmp0;
     line->x0 = tmp0;
-    tmp2     = val4 & BYTE_MASK;
+    tmp2     = val4 & 0xFF;
     line->y1 = (s16)(val3 + tmp2 + 9);
     line->y0 = (s16)((val3 + 1) - tmp2);
     setRGB0(line, 128, 128, 128);

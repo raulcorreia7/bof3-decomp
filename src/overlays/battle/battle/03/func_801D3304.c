@@ -13,7 +13,7 @@ MATCH void func_801D3304(void) {
 
         battle_half  = (u16*)&g_BattleActionId;
         *battle_half = g_BattleAction->unk_02;
-        if (func_800A9A84() & BYTE_MASK) {
+        if (func_800A9A84() & 0xFF) {
             func_801DD14C(g_BattleActiveBattler);
             BATTLE_ACTIVE_PARTY.header.mode = 2;
             BATTLE_ACTIVE_PARTY.header.step = 0;
@@ -46,9 +46,9 @@ MATCH void func_801D3304(void) {
     action = *(u16*)&g_BattleActionId;
     if (action != 0x97) {
         if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
-            D_801463C8 = Char_GetAbilityCost(BATTLE_ACTIVE_PARTY.slot, action & BYTE_MASK, 1);
+            D_801463C8 = Char_GetAbilityCost(BATTLE_ACTIVE_PARTY.slot, action & 0xFF, 1);
         } else {
-            D_801463C8 = Char_GetAbilityCost(ENEMY_COMBATANT(g_BattleActiveBattler).slot, action & BYTE_MASK, 1);
+            D_801463C8 = Char_GetAbilityCost(ENEMY_COMBATANT(g_BattleActiveBattler).slot, action & 0xFF, 1);
         }
     } else {
         D_801463C8 = D_801463B8[0];
@@ -61,7 +61,7 @@ MATCH void func_801D3304(void) {
         return;
     }
     g_BattleRowCursor = 0;
-    if (!(func_800AA368() & BYTE_MASK)) {
+    if (!(func_800AA368() & 0xFF)) {
         g_BattleState |= 0x20;
     }
     g_BattleUIStep += 1;

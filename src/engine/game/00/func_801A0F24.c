@@ -20,7 +20,7 @@ MATCH void func_801A0F24(Actor* record) {
         param = g_RouteSpeedScale[mode];
         if (record->unk_7B == 0) {
             if (mode != 0) {
-                if (D_801C83BC[spad_b->header.step](record, param, 2) & BYTE_MASK) {
+                if (D_801C83BC[spad_b->header.step](record, param, 2) & 0xFF) {
                     result = func_801A2DB4(record);
                     if (g_Task->unk_09 != 0) {
                         record->unk_7B = (rand() & 3) + 3;
@@ -36,7 +36,7 @@ MATCH void func_801A0F24(Actor* record) {
             result = func_801A2ED4(record, 0U);
             record->unk_7B -= 1;
         block_8:
-            if (((result & BYTE_MASK) != GAME_NONE) && (spad_c = g_Task, (spad_c->unk_09 != 0))) {
+            if (((result & 0xFF) != GAME_NONE) && (spad_c = g_Task, (spad_c->unk_09 != 0))) {
                 spad_c->unk_03       = spad_c->header.mode;
                 g_Task->header.mode  = 0xAU;
                 record->unk_79       = result & 7;

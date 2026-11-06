@@ -7,7 +7,7 @@ MATCH void func_801B85C0(void) {
     if (g_Task->unk_09 == 0) {
         delay          = g_Task->unk_0A - 1;
         g_Task->unk_0A = delay;
-        if ((delay & BYTE_MASK) == 0) {
+        if ((delay & 0xFF) == 0) {
             if (g_Task->unk_05 == 0) {
                 g_AreaWalkFlags &= ~AREA_WALK_ENTRY_ACTIVE;
             }

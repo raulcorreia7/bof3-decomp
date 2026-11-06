@@ -17,5 +17,5 @@ MATCH s32 func_801B43D0(s32 x, s32 y, s32 dir) {
             slot = -1;
         }
     }
-    return slot & BYTE_MASK;
+    return slot & 0xFF;
 }

@@ -33,7 +33,7 @@ NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4)
     }
     val7->clut = GetClut(val2, 480);
     val3       = 0x80;
-    tmp2       = val1 + (val5 & BYTE_MASK);
+    tmp2       = val1 + (val5 & 0xFF);
     tmp4       = val0 + 7;
     setRGB0(val7, 0x80, 0x80, 0x80);
     setXY4(val7, val1, val0, tmp2, val0, val1, tmp4, tmp2, tmp4);
@@ -57,8 +57,8 @@ NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4)
     val7->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     val7->clut  = GetClut(176, 480);
     setRGB0(val7, 0x80, 0x80, 0x80);
-    tmp0     = val1 + (val5 & BYTE_MASK);
-    tmp3     = (val6 & BYTE_MASK) + tmp0;
+    tmp0     = val1 + (val5 & 0xFF);
+    tmp3     = (val6 & 0xFF) + tmp0;
     val7->x0 = tmp0;
     val7->x2 = tmp0;
     tmp1     = val0 + 7;

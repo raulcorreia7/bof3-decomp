@@ -20,7 +20,7 @@ MATCH void func_800A8678(void) {
             offset                 = (g_BattleScrollDir ^ 2) * 2;
         }
         FIELD(s32, work, 0x38) = g_AreaScrollTargetY + ((s8*)D_800B44C0)[offset + 1];
-        Actor_SelectScript((BATTLE_WORK->facing + 0x40) & BYTE_MASK);
+        Actor_SelectScript((BATTLE_WORK->facing + 0x40) & 0xFF);
         BATTLE_WORK->header.mode++;
     }
     func_801DEE4C();

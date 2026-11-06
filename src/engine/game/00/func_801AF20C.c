@@ -14,7 +14,7 @@ MATCH s32 func_801AF20C(u8* command_stream) {
     extended_command = 0x15;
 loop:
     value   = *cursor;
-    command = value & BYTE_MASK;
+    command = value & 0xFF;
     if (command != 0) {
         count++;
         if (((value - 0x12) < 2U) || (command == extended_command)) {
@@ -24,9 +24,9 @@ loop:
             cursor += 1;
         }
         index++;
-        if ((index & BYTE_MASK) < 0xCU) {
+        if ((index & 0xFF) < 0xCU) {
             goto loop; /* read the next command */
         }
     }
-    return count & BYTE_MASK;
+    return count & 0xFF;
 }

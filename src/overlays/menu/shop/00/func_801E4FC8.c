@@ -12,7 +12,7 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
     if (atlas_index == 4 && g_SceneState.scenario_id >= 8) {
         atlas_index = 0xB;
     }
-    entry = D_801E600C + (atlas_index & BYTE_MASK) * 4;
+    entry = D_801E600C + (atlas_index & 0xFF) * 4;
 
     tpage = getTPage(0, 0, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -21,7 +21,7 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
 
-    shade = shade_mode & BYTE_MASK;
+    shade = shade_mode & 0xFF;
     if (shade == 0) {
         sprt->b0 = 0x80;
         sprt->g0 = 0x80;

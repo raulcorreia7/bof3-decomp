@@ -13,7 +13,7 @@ MATCH s32 func_801C6AEC(s32 candidate_id) {
     entry    = D_801463DC;
     index    = 0;
     do {
-        slot      = index & BYTE_MASK;
+        slot      = index & 0xFF;
         id        = *(u8*)(id_table + slot);
         entry->id = id;
         if (id != GAME_NONE) {
@@ -28,6 +28,6 @@ MATCH s32 func_801C6AEC(s32 candidate_id) {
         }
         index += 1;
         entry++;
-    } while ((index & BYTE_MASK) < 8U);
-    return kept & BYTE_MASK;
+    } while ((index & 0xFF) < 8U);
+    return kept & 0xFF;
 }

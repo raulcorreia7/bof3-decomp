@@ -8,5 +8,5 @@ MATCH s32 func_80097574(void) {
     u8* entry;
 
     entry = Party_GetAbilities(*slot, D_8014857B, 1);
-    return (func_801AF5B0(2, *slot, entry[D_8014857C]) & BYTE_MASK) == 0;
+    return (func_801AF5B0(2, *slot, entry[D_8014857C]) & 0xFF) == 0;
 }

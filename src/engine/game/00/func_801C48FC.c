@@ -23,7 +23,7 @@ MATCH u8 func_801C48FC(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells) {
         /* @matching single failure exit keeps the four compares ahead of the tail. */
         goto fail;
     }
-    if ((pos_x & HALF_MASK) == 0) {
+    if ((pos_x & 0xFFFF) == 0) {
         cells[0] = Area_GetCellCode((s16)((pos_x >> 16) - 1), pos_y >> 16);
         cells[1] = Area_GetCellCode((s16)((pos_x >> 16) - 1), (s16)((pos_y >> 16) + 1));
         if ((cells[0] & 0xF0) == 0x20) {
@@ -42,7 +42,7 @@ MATCH u8 func_801C48FC(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells) {
             goto fail;
         }
     }
-    if ((pos_y & HALF_MASK) == 0) {
+    if ((pos_y & 0xFFFF) == 0) {
         cells[0] = Area_GetCellCode(pos_x >> 16, (s16)((pos_y >> 16) - 1));
         cells[1] = Area_GetCellCode((s16)((pos_x >> 16) + 1), (s16)((pos_y >> 16) - 1));
         if ((cells[0] & 0xF0) == 0x20) {
@@ -61,7 +61,7 @@ MATCH u8 func_801C48FC(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells) {
             goto fail;
         }
     }
-    if (((pos_x & HALF_MASK) != 0) || ((pos_y & HALF_MASK) != 0)) {
+    if (((pos_x & 0xFFFF) != 0) || ((pos_y & 0xFFFF) != 0)) {
         return 1;
     }
     cells[0] = Area_GetCellCode((s16)((pos_x >> 16) - 1), (s16)((pos_y >> 16) - 1));

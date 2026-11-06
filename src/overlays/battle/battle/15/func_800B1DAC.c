@@ -3,7 +3,7 @@
 MATCH void func_800B1DAC(s16 x, s16 y, u8 sprite_arg) {
     SPRT* sprt;
 
-    GFX_AddDrawMode(GetTPage(0, 1, 832, 256) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(0, 1, 832, 256) & 0xFFFF);
     sprt       = (SPRT*)g_GfxPrimCursor;
     sprt->clut = GetClut(s_BattleAbilityIcon[sprite_arg] * 16, 506);
     setRGB0(sprt, 128, 128, 128);

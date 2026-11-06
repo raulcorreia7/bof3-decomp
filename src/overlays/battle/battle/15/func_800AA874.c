@@ -8,7 +8,7 @@ MATCH u32 func_800AA874(u32 bit_index) {
     u32 bit;
     u32 off;
 
-    bit_index &= BYTE_MASK;
+    bit_index &= 0xFF;
     off  = (bit_index >> 5) * 4U;
     bit  = 1U << (bit_index & 0x1F);
     word = *(u32*)((u8*)D_80144F80 + off);

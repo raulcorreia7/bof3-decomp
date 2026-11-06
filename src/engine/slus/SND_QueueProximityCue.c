@@ -2,26 +2,26 @@
 
 /* One band: the cue fires when the work record's x and y both lie within `radius` of the target point
  * (D_8014930A, D_8014930E); `table` is the cue table the band stores. */
-#define SND_PROXIMITY_BAND(radius, table)         \
-    work   = g_Task;                              \
-    x      = COORD_INT(work->pos.x);              \
-    target = D_8014930A;                          \
-    edge   = x + (radius);                        \
-    if (edge >= target) {                         \
-        edge = x - (radius);                      \
-        if (target >= edge) {                     \
-            y      = COORD_INT(work->pos.y);      \
-            target = D_8014930E;                  \
-            edge   = y + (radius);                \
-            if (edge >= target) {                 \
-                edge = y - (radius);              \
-                if (target >= edge) {             \
-                    D_8018B3D8 = (table);         \
-                    D_8018B3DC = (table);         \
-                    SND_PlayCue(cue & HALF_MASK); \
-                }                                 \
-            }                                     \
-        }                                         \
+#define SND_PROXIMITY_BAND(radius, table)      \
+    work   = g_Task;                           \
+    x      = COORD_INT(work->pos.x);           \
+    target = D_8014930A;                       \
+    edge   = x + (radius);                     \
+    if (edge >= target) {                      \
+        edge = x - (radius);                   \
+        if (target >= edge) {                  \
+            y      = COORD_INT(work->pos.y);   \
+            target = D_8014930E;               \
+            edge   = y + (radius);             \
+            if (edge >= target) {              \
+                edge = y - (radius);           \
+                if (target >= edge) {          \
+                    D_8018B3D8 = (table);      \
+                    D_8018B3DC = (table);      \
+                    SND_PlayCue(cue & 0xFFFF); \
+                }                              \
+            }                                  \
+        }                                      \
     }
 
 /* raises the proximity cue selected by the active work area's

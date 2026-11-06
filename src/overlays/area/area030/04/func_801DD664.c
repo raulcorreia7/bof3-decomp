@@ -18,7 +18,7 @@ MATCH void func_801DD664(void) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
         index      = D_801442BE + 1;
         D_801442BC = index;
-        if ((index & HALF_MASK) >= 0x17) {
+        if ((index & 0xFFFF) >= 0x17) {
             D_801442BC = 0;
         }
         D_80144288 = 0;

@@ -63,7 +63,7 @@ NON_MATCHING void func_80099B74(void) {
                 *(volatile u16*)&g_BattleTargetCursorCol;
             choice                 = *(volatile u16*)&g_BattleTargetCursorCol;
             D_801EB4D8->command.id = choice;
-            resource_id = Resource_GetText(Item_GetDescription((s32)(choice >> 8), choice & BYTE_MASK) & HALF_MASK);
+            resource_id            = Resource_GetText(Item_GetDescription((s32)(choice >> 8), choice & 0xFF) & 0xFFFF);
             BATTLE_SELECTION_RECORD_HANDLE((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK) = resource_id;
             D_80148597                                                               = 2;
             g_BattlePanelMode                                                        = 1;

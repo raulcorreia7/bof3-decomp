@@ -8,13 +8,13 @@ MATCH u8* Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode) {
     Character* record;
     u8         i;
 
-    i = character_index & BYTE_MASK;
-    if ((mode & BYTE_MASK) == 0) {
+    i = character_index & 0xFF;
+    if ((mode & 0xFF) == 0) {
         record = &g_Characters[i];
     } else {
         record = (Character*)(D_80145F04 + i * 0x140);
     }
-    switch (D_801CA719[ability_id & BYTE_MASK].value & 0x3) {
+    switch (D_801CA719[ability_id & 0xFF].value & 0x3) {
         default:
             return record->abilities.healing;
         case ABILITY_TYPE_HEAL:

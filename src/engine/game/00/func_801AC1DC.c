@@ -19,9 +19,9 @@ MATCH void func_801AC1DC(s32* out, u8 selector) {
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
     world  = g_GameAreaId;
-    rot.vx = *(u16*)(((AreaLoad*)g_AreaLoads[world])->unk_0C + (selector & BYTE_MASK) * 6);
-    rot.vy = *(u16*)(((AreaLoad*)g_AreaLoads[world])->unk_0C + (selector & BYTE_MASK) * 6 + 2);
-    rot.vz = *(u16*)(((AreaLoad*)g_AreaLoads[world])->unk_0C + (selector & BYTE_MASK) * 6 + 4);
+    rot.vx = *(u16*)(((AreaLoad*)g_AreaLoads[world])->unk_0C + (selector & 0xFF) * 6);
+    rot.vy = *(u16*)(((AreaLoad*)g_AreaLoads[world])->unk_0C + (selector & 0xFF) * 6 + 2);
+    rot.vz = *(u16*)(((AreaLoad*)g_AreaLoads[world])->unk_0C + (selector & 0xFF) * 6 + 4);
     RotTrans(&rot, &trans, &flags);
     out[0] = trans.vx << 9;
     out[1] = trans.vy << 9;

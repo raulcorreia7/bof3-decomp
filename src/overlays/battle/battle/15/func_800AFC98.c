@@ -19,9 +19,9 @@ MATCH void func_800AFC98(s32 effect_0, s32 effect_1) {
     other = effect_1;
     if (kind < 3u) {
         g_GameState = &g_BattlePartyBattlers[kind];
-        test        = sel & BYTE_MASK;
+        test        = sel & 0xFF;
         if (test != 0) {
-            func_801DD858((effect_0 + 1) & BYTE_MASK);
+            func_801DD858((effect_0 + 1) & 0xFF);
         }
         if ((u8)other != 0u) {
             func_801DD858((u8)other);

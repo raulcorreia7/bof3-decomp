@@ -10,11 +10,11 @@ MATCH void func_800AE108(s32 battler_index, s32 work_ptr) {
     work_cell                                   = work_ptr;
     action_id                                   = battler_index;
     active_index                                = &g_BattleActionId;
-    *active_index                               = action_id & BYTE_MASK;
-    queued_slot                                 = Battle_AllocEffect(2, D_800B6510[action_id & BYTE_MASK]) & BYTE_MASK;
+    *active_index                               = action_id & 0xFF;
+    queued_slot                                 = Battle_AllocEffect(2, D_800B6510[action_id & 0xFF]) & 0xFF;
     g_BattleEffects[queued_slot].target.address = work_cell;
     if (D_801CA71C[*active_index].mask & 0x1000) {
-        linked_slot                                = Battle_AllocEffect(1, 0x43U) & BYTE_MASK;
+        linked_slot                                = Battle_AllocEffect(1, 0x43U) & 0xFF;
         g_BattleEffects[linked_slot].target.effect = &g_BattleEffects[queued_slot];
         g_BattleEffects[linked_slot].unk_0B        = action_id;
     }

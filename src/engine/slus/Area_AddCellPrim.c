@@ -18,7 +18,7 @@ MATCH void Area_AddCellPrim(s32 x, s32 y, s32 depth, s32 size) {
 
     index = (x >> 16) - g_AreaTileOriginX;
     value = (y >> 16) - g_AreaTileOriginY;
-    if (x & HALF_MASK) {
+    if (x & 0xFFFF) {
         value += 1;
     }
     /* FAKE: keeps index in its own pseudo so the sum lands in a fresh register; pure C best 93.33. */
@@ -27,7 +27,7 @@ MATCH void Area_AddCellPrim(s32 x, s32 y, s32 depth, s32 size) {
     cell = index;
     cell += value;
     seed = (s8)depth;
-    if (y & HALF_MASK) {
+    if (y & 0xFFFF) {
         addend = seed + 1;
         count  = cell + addend;
     } else {
@@ -36,7 +36,7 @@ MATCH void Area_AddCellPrim(s32 x, s32 y, s32 depth, s32 size) {
     if ((u32)count < 56) {
         cursor = g_GfxPrimCursor;
         limit  = g_FrameBufferIndex * 0x9000 + PRIM_ARENA_BASE;
-        next   = cursor + (size & BYTE_MASK);
+        next   = cursor + (size & 0xFF);
         if (next < limit) {
             offset = (g_FrameBufferIndex + 4) * 8 + count * 0x30;
             packet = *(u8**)(D_80142CC4 + offset);

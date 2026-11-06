@@ -10,7 +10,7 @@ MATCH void func_801E590C(void) {
     Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
     WinDrawCueText(28, 21, 0xB9);
     SAVE_DrawSlots(0x20, 0x30, 0);
-    if ((Menu_ToggleOption() & BYTE_MASK) != 0) {
+    if ((Menu_ToggleOption() & 0xFF) != 0) {
         if (D_8014865B != 0) {
             count                 = g_MenuStartStep;
             D_801ED7FC            = 0xA;

@@ -9,7 +9,7 @@ MATCH void func_801A852C(void) {
     switch (*state) {
         case 0:
             Game_SetScriptActive();
-            Message_StartAreaMessage((Item_Count(ITEM_CAT_ITEM, ITEM_FAERIE_TIARA, 0) & HALF_MASK) ? 0x21 : 0x20);
+            Message_StartAreaMessage((Item_Count(ITEM_CAT_ITEM, ITEM_FAERIE_TIARA, 0) & 0xFFFF) ? 0x21 : 0x20);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             (&D_801448EB)[1] += 1;
             break;
@@ -38,7 +38,7 @@ MATCH void func_801A852C(void) {
                 D_80145040 = D_80145EC4;
                 D_80145044 = D_80145EC8;
                 D_80145048 = g_GameAreaId;
-                Game_RequestAreaChange(seed & HALF_MASK, 0x430000, 0x160000, 4);
+                Game_RequestAreaChange(seed & 0xFFFF, 0x430000, 0x160000, 4);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
                 Game_ClearScriptActive();
                 D_801448EB = 0;

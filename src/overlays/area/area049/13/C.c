@@ -20,7 +20,7 @@ MATCH void func_80117048(void) {
 }
 
 MATCH void func_801170A4(void) {
-    if (!(func_80117410() & BYTE_MASK)) {
+    if (!(func_80117410() & 0xFF)) {
         Actor_Clear();
     }
 }

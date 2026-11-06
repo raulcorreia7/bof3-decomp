@@ -48,7 +48,7 @@ NON_MATCHING void func_801576FC(u8* record) {
             tmp4 = *(u32*)(val9);
             tmp6 = FIELD(u8, val9, 0x1u);
             tmp5 = tmp4 >> 0x18;
-            tmp1 = tmp4 & BYTE_MASK;
+            tmp1 = tmp4 & 0xFF;
             switch (tmp5) { /* switch 1; irregular */
                 case 0:     /* switch 1 */
                     tmp7 = *val10;

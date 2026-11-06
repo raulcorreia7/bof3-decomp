@@ -9,10 +9,10 @@ MATCH void Area_SwapActors(s32 first, s32 second) {
     s32     ib;
     Actor*  temp;
 
-    ib    = second & BYTE_MASK;
+    ib    = second & 0xFF;
     table = D_80148214;
     b     = &table[ib];
-    a     = &table[first & BYTE_MASK];
+    a     = &table[first & 0xFF];
     temp  = *b;
     *b    = *a;
     *a    = temp;

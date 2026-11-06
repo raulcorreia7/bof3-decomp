@@ -28,7 +28,7 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
         *acc |= 2;
     }
     if (input_mask & STATUS_SLEEPING) {
-        if (func_800A3638(selection_kind, 6) & BYTE_MASK) {
+        if (func_800A3638(selection_kind, 6) & 0xFF) {
             if (!(status & (0x800 | STATUS_SLEEPING))) {
                 func_800A36F0(selection_kind, 0x38);
                 acc = &g_BattlePendingStatus;
@@ -38,7 +38,7 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
             }
         }
     }
-    if ((input_mask & STATUS_CONFUSED) && (func_800A3638(selection_kind, 8) & BYTE_MASK) &&
+    if ((input_mask & STATUS_CONFUSED) && (func_800A3638(selection_kind, 8) & 0xFF) &&
         !(status & (0x800 | STATUS_SLEEPING | STATUS_CONFUSED | STATUS_PARALYZED))) {
         acc = &g_BattlePendingStatus;
         *acc |= STATUS_CONFUSED;
@@ -54,8 +54,8 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
             D_801EB730[row].flags &= ~2;
         }
     }
-    if ((input_mask & STATUS_BLIND) && (func_800A3638(selection_kind, 9) & BYTE_MASK) &&
-        (func_800A36BC(selection_kind, 0x2B) & BYTE_MASK) && !(status & (0x800 | STATUS_BLIND | STATUS_PARALYZED))) {
+    if ((input_mask & STATUS_BLIND) && (func_800A3638(selection_kind, 9) & 0xFF) &&
+        (func_800A36BC(selection_kind, 0x2B) & 0xFF) && !(status & (0x800 | STATUS_BLIND | STATUS_PARALYZED))) {
         acc = &g_BattlePendingStatus;
         *acc |= STATUS_BLIND;
     }

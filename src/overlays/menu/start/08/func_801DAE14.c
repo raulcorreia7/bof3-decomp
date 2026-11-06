@@ -39,12 +39,12 @@ NON_MATCHING void func_801DAE14(void) {
     offset = 0;
     for (i = 0; i < 8; i++) {
         if (((u8*)&g_Characters[0].unk_07)[offset] & 1) {
-            for (index = 0; index < (count & BYTE_MASK); index++) {
+            for (index = 0; index < (count & 0xFF); index++) {
                 if (g_Characters[i].character_index == D_80144F5A[index]) {
                     break;
                 }
             }
-            if (index == (count & BYTE_MASK)) {
+            if (index == (count & 0xFF)) {
                 D_801ED690[(*flags)++] = g_Characters[i].character_index;
             }
         }
@@ -59,7 +59,7 @@ NON_MATCHING void func_801DAE14(void) {
     g_MenuPanelTasks[12].y      = 0x3B;
     D_80148500                  = D_801ED690;
 
-    for (i = 0; i < (count & BYTE_MASK); i++) {
+    for (i = 0; i < (count & 0xFF); i++) {
         D_801ED694[i][0] = 1;
     }
     for (; i < BATTLE_PARTY_SLOT_COUNT; i++) {

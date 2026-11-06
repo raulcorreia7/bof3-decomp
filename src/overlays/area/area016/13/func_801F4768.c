@@ -90,11 +90,11 @@ NON_MATCHING void func_801F4768(void) {
                     SetShadeTex(primitive, 0);
                     SetSemiTrans(primitive, 1);
 
-                    primitive->x0 = *(const u32*)&source->x0;
-                    primitive->x1 = *(const u32*)&source->x1;
-                    primitive->x2 = *(const u32*)&source->x2;
-                    primitive->clut     = 0x78CB;
-                    primitive->x3 = *(const u32*)&source->x3;
+                    primitive->x0   = *(const u32*)&source->x0;
+                    primitive->x1   = *(const u32*)&source->x1;
+                    primitive->x2   = *(const u32*)&source->x2;
+                    primitive->clut = 0x78CB;
+                    primitive->x3   = *(const u32*)&source->x3;
 
                     tpage            = getTPage(0, 2, 704, 256);
                     primitive->tpage = (u16)tpage;
@@ -115,7 +115,7 @@ NON_MATCHING void func_801F4768(void) {
                     primitive->v1 = (u8)((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16));
 
                     primitive->u2 = (u8)(D_801F51D8[width] + col * D_801F51E0[width]);
-                    uv            = (D_801F51E0[width] & BYTE_MASK) * COORD_FRAC(g_Task->pos.y);
+                    uv            = (D_801F51E0[width] & 0xFF) * COORD_FRAC(g_Task->pos.y);
                     if (uv < 0) {
                         uv += 0xFFFF;
                     }
@@ -123,7 +123,7 @@ NON_MATCHING void func_801F4768(void) {
                         (u8)(D_801F51E0[width] + ((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16)));
 
                     primitive->u3 = (u8)(D_801F51E0[width] + (D_801F51D8[width] + col * D_801F51E0[width]));
-                    uv            = (D_801F51E0[width] & BYTE_MASK) * COORD_FRAC(g_Task->pos.y);
+                    uv            = (D_801F51E0[width] & 0xFF) * COORD_FRAC(g_Task->pos.y);
                     if (uv < 0) {
                         uv += 0xFFFF;
                     }

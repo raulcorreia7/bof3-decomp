@@ -30,7 +30,7 @@ NON_MATCHING void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 
     val4  = y;
     val2  = width;
     tmp3  = *(u16*)(((D_80144952 << 6) | 0x20) + (u8*)&D_80033A08);
-    tmp4  = tmp3 & HALF_MASK;
+    tmp4  = tmp3 & 0xFFFF;
     tmp1  = flags & 1;
     if (tmp1 == 0) {
         val11 = 1;
@@ -42,19 +42,19 @@ NON_MATCHING void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 
     val6 = 1;
     val5 = 0;
     do {
-        tmp2 = val5 & BYTE_MASK;
-        if (val6 & ((u32)(flags & BYTE_MASK) >> 4)) {
+        tmp2 = val5 & 0xFF;
+        if (val6 & ((u32)(flags & 0xFF) >> 4)) {
             stack_20[tmp2] = 3;
         } else {
             stack_20[tmp2] = 0;
         }
         val5 += 1;
         val6 *= 2;
-    } while ((u32)(val5 & BYTE_MASK) < 4U);
-    val10 = ((tmp3 & 0x1F) * 8) & BYTE_MASK;
-    val9  = (tmp4 >> 2) & 0xF8 & BYTE_MASK;
-    val7  = (tmp4 >> 7) & 0xF8 & BYTE_MASK;
-    tmp0  = val11 & BYTE_MASK;
+    } while ((u32)(val5 & 0xFF) < 4U);
+    val10 = ((tmp3 & 0x1F) * 8) & 0xFF;
+    val9  = (tmp4 >> 2) & 0xF8 & 0xFF;
+    val7  = (tmp4 >> 7) & 0xF8 & 0xFF;
+    tmp0  = val11 & 0xFF;
     val3  = val4 + height;
     GFX_DrawLine(val0, (s16)(val4 + stack_20[0]), val0, (s16)(val3 - (stack_20[2] + 1)), (u8)val10, (u8)val9, (u8)val7,
                  tmp0);
@@ -63,7 +63,7 @@ NON_MATCHING void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 
                      (u8)val7, val8);
     }
     val1 = val3;
-    val8 &= BYTE_MASK;
+    val8 &= 0xFF;
     val2 += val0;
     GFX_DrawLine((s16)(val0 + stack_20[2]), val1, (s16)(val2 - (stack_20[3] + 1)), val1, (u8)val10, (u8)val9, (u8)val7,
                  val8);

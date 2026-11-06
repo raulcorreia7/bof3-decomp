@@ -20,9 +20,9 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
     s32 mask_a;
     s32 neg_b;
 
-    arg2b = entry_index & BYTE_MASK;
-    index = arg2b * arg2b + (table_index & BYTE_MASK);
-    entry = ((table_slot & BYTE_MASK) * 8) + ((u8*)D_80181CA8 + (index * 0x18));
+    arg2b = entry_index & 0xFF;
+    index = arg2b * arg2b + (table_index & 0xFF);
+    entry = ((table_slot & 0xFF) * 8) + ((u8*)D_80181CA8 + (index * 0x18));
     cur_a = *(s32*)entry;
     neg_a = -cur_a;
     cur_b = *(s32*)(entry + 4);
@@ -41,7 +41,7 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
         step_b = 0x8000;
     }
     sel = selection;
-    if ((sel & BYTE_MASK) != 2) {
+    if ((sel & 0xFF) != 2) {
         s32 two = 2;
         tmp     = cur_a;
         do {
@@ -56,7 +56,7 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
     }
     flip = rand() & 1;
     sel  = 0;
-    sub  = table_slot & BYTE_MASK;
+    sub  = table_slot & 0xFF;
     off  = sub * 8;
     do {
         new_var                   = D_80143F28;
@@ -64,18 +64,18 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
         *(s32*)(D_80143F2C + off) = D_80143F24 + cur_a;
         *(s32*)(D_80143F30 + off) = new_var + cur_b;
         do {
-            if (((func_801C6888(sub) & BYTE_MASK) != 0) && ((func_801C69C8(sub) & BYTE_MASK) != 0)) {
+            if (((func_801C6888(sub) & 0xFF) != 0) && ((func_801C69C8(sub) & 0xFF) != 0)) {
                 D_801CD944[sub].active = 1;
                 return 1;
             }
-            if ((sel & BYTE_MASK) != flip) {
+            if ((sel & 0xFF) != flip) {
                 *(s32*)(D_80143F2C + off) = *(s32*)(D_80143F2C + off) + step_a;
             } else {
                 *(s32*)(D_80143F30 + off) = *(s32*)(D_80143F30 + off) + step_b;
             }
             count += 1;
-        } while ((count & BYTE_MASK) < 8U);
+        } while ((count & 0xFF) < 8U);
         sel += 1;
-    } while ((sel & BYTE_MASK) < 2U);
+    } while ((sel & 0xFF) < 2U);
     return 0;
 }

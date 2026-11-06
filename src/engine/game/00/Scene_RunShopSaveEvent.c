@@ -20,7 +20,7 @@ MATCH void Scene_RunShopSaveEvent(void) {
             D_801448EC = 2;
             break;
         case 2:
-            if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
+            if ((SND_IsXAIdle() & 0xFF) == 0) {
                 break;
             }
             SND_ResumeBgm(g_SndBgmId);
@@ -88,7 +88,7 @@ MATCH void Scene_RunShopSaveEvent(void) {
             D_801448EC = 22;
             break;
         case 22:
-            if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
+            if ((SND_IsXAIdle() & 0xFF) == 0) {
                 break;
             }
             SND_ResumeBgm(g_SndBgmId);

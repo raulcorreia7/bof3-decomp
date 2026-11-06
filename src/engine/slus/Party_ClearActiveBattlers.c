@@ -7,9 +7,9 @@ MATCH void Party_ClearActiveBattlers(void) {
     s32 index;
 
     index = 0;
-    while ((index & BYTE_MASK) < 3U) {
-        if (g_BattlePartyBattlers[index & BYTE_MASK].header.flags != 0) {
-            Party_ClearBattlerState(index & BYTE_MASK);
+    while ((index & 0xFF) < 3U) {
+        if (g_BattlePartyBattlers[index & 0xFF].header.flags != 0) {
+            Party_ClearBattlerState(index & 0xFF);
         }
         index++;
     }

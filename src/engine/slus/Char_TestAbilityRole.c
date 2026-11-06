@@ -7,7 +7,7 @@
 MATCH s32 Char_TestAbilityRole(s32 bit, s32 role, s32 kind_id, s32 index) {
     s32 kind;
 
-    switch (Item_GetKind(kind_id & BYTE_MASK, index & BYTE_MASK) & BYTE_MASK) {
+    switch (Item_GetKind(kind_id & 0xFF, index & 0xFF) & 0xFF) {
         case 1:
             kind = 0;
             break;
@@ -26,11 +26,11 @@ MATCH s32 Char_TestAbilityRole(s32 bit, s32 role, s32 kind_id, s32 index) {
         default:
             return 0;
     }
-    if ((((Item_GetEquipability(kind_id & BYTE_MASK, index & BYTE_MASK) & BYTE_MASK) >> bit) & 1) != 0) {
-        if ((kind & BYTE_MASK) < 4u && (kind & BYTE_MASK) == (role & BYTE_MASK)) {
+    if ((((Item_GetEquipability(kind_id & 0xFF, index & 0xFF) & 0xFF) >> bit) & 1) != 0) {
+        if ((kind & 0xFF) < 4u && (kind & 0xFF) == (role & 0xFF)) {
             return 1;
         }
-        if ((kind & BYTE_MASK) == 4 && ((role & BYTE_MASK) == (kind & BYTE_MASK) || (role & BYTE_MASK) == 5)) {
+        if ((kind & 0xFF) == 4 && ((role & 0xFF) == (kind & 0xFF) || (role & 0xFF) == 5)) {
             return 1;
         }
     }

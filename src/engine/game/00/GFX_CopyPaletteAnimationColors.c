@@ -41,11 +41,11 @@ MATCH void GFX_CopyPaletteAnimationColors(GraphicsPaletteAnimation* slot) {
     }
     i = 0u;
     if (entry[2] != 0u) {
-        base = g_GraphicsPaletteDst + ((start & BYTE_MASK) << 8);
+        base = g_GraphicsPaletteDst + ((start & 0xFF) << 8);
         do {
-            base[(dst & BYTE_MASK) + (i & BYTE_MASK)] = base[(src & BYTE_MASK) + (i & BYTE_MASK)];
+            base[(dst & 0xFF) + (i & 0xFF)] = base[(src & 0xFF) + (i & 0xFF)];
             i++;
-        } while ((i & BYTE_MASK) < slot_copy->current_entry[2]);
+        } while ((i & 0xFF) < slot_copy->current_entry[2]);
     }
     g_GfxPalettePending = 1u;
 }

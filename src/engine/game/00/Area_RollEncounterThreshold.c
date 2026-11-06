@@ -23,10 +23,10 @@ MATCH void Area_RollEncounterThreshold(u32 keep_armed) {
         D_80145FB8 = 0;
         return;
     }
-    if ((keep_armed & BYTE_MASK) != 0) {
+    if ((keep_armed & 0xFF) != 0) {
         if (D_80145FB8 == 0)
             keep_armed = 0;
-        if ((keep_armed & BYTE_MASK) != 0)
+        if ((keep_armed & 0xFF) != 0)
             goto check;
     }
     roll = rand();
@@ -36,38 +36,38 @@ MATCH void Area_RollEncounterThreshold(u32 keep_armed) {
         roll = cap;
     total += roll;
     avail = Party_CountOrder(0);
-    limit = avail & BYTE_MASK;
+    limit = avail & 0xFF;
     if (limit > 0) {
         match   = 0;
         bound_a = limit;
         off     = 0;
         do {
-            if ((func_801C38F4(D_80145FCC[off], 3, 0x15) & BYTE_MASK) != 0)
+            if ((func_801C38F4(D_80145FCC[off], 3, 0x15) & 0xFF) != 0)
                 break;
             match++;
             off += BATTLE_PARTY_STRIDE;
         } while (match < bound_a);
-        if (match < (avail & BYTE_MASK))
+        if (match < (avail & 0xFF))
             total *= 2;
     }
-    limit = avail & BYTE_MASK;
+    limit = avail & 0xFF;
     if (limit > 0) {
         match   = 0;
         bound_b = limit;
         off     = 0;
         do {
-            if ((func_801C38F4(D_80145FCC[off], 3, 0x14) & BYTE_MASK) != 0)
+            if ((func_801C38F4(D_80145FCC[off], 3, 0x14) & 0xFF) != 0)
                 break;
             match++;
             off += BATTLE_PARTY_STRIDE;
         } while (match < bound_b);
-        if (match < (avail & BYTE_MASK))
-            total = (total & BYTE_MASK) >> 1;
+        if (match < (avail & 0xFF))
+            total = (total & 0xFF) >> 1;
     }
     goto store;
 check:
-    if (D_80145FB8 < (total & BYTE_MASK))
+    if (D_80145FB8 < (total & 0xFF))
         return;
 store:
-    D_80145FB8 = total & BYTE_MASK;
+    D_80145FB8 = total & 0xFF;
 }

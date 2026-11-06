@@ -39,7 +39,7 @@ NON_MATCHING void func_80099830(void) {
             D_801485A4 = 0x10;
         }
     } else if (pad & 4) {
-        scroll_lo = D_8014859E & BYTE_MASK;
+        scroll_lo = D_8014859E & 0xFF;
         if (scroll_lo == 0) {
             g_BattleListCursor = 0;
         } else if (scroll_lo < 7U) {
@@ -51,7 +51,7 @@ NON_MATCHING void func_80099830(void) {
             goto block_25; /* shared scroll/confirm join */
         }
     } else if (pad & 8) {
-        scroll_hi = D_8014859E & BYTE_MASK;
+        scroll_hi = D_8014859E & 0xFF;
         if (scroll_hi == 0x79) {
             g_BattleListCursor = 0x7F;
         } else {
@@ -71,7 +71,7 @@ NON_MATCHING void func_80099830(void) {
     }
     choice = (u8*)D_801485A1;
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] =
-        Resource_GetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
+        Resource_GetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & 0xFFFF);
     if (D_80145AC4 & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         goto block_33; /* shared scroll/confirm join */

@@ -9,7 +9,7 @@ MATCH void func_800AB4F8(s32 excluded_id) {
     u8 result;
 
     if (((rand() & 7) >= 4) && (g_BattleLivingPartyCount != 1)) {
-        result = func_800AB68C(excluded_id & BYTE_MASK);
+        result = func_800AB68C(excluded_id & 0xFF);
     } else {
         result = Battle_FindSelectableSlotForward((rand() & 7) + 3);
     }

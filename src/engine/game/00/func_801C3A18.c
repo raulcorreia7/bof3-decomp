@@ -20,13 +20,13 @@ MATCH u8 func_801C3A18(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells) {
     if (cells[0] != wanted_code) {
         return 0;
     }
-    if (((pos_x & HALF_MASK) != 0) && (cells[1] != cells[0])) {
+    if (((pos_x & 0xFFFF) != 0) && (cells[1] != cells[0])) {
         return 0;
     }
-    if (((pos_y & HALF_MASK) != 0) && (cells[2] != wanted_code)) {
+    if (((pos_y & 0xFFFF) != 0) && (cells[2] != wanted_code)) {
         return 0;
     }
-    if (((pos_x & HALF_MASK) == 0) || ((pos_y & HALF_MASK) == 0) || (cells[3] == wanted_code)) {
+    if (((pos_x & 0xFFFF) == 0) || ((pos_y & 0xFFFF) == 0) || (cells[3] == wanted_code)) {
         return 1;
     }
     return 0;

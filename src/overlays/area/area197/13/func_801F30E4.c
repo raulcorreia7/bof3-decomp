@@ -10,5 +10,5 @@ MATCH void func_801F30E4(void) {
         *p = 0;
         i += 1;
         p += 0x28;
-    } while ((i & HALF_MASK) < 0x80U);
+    } while ((i & 0xFFFF) < 0x80U);
 }

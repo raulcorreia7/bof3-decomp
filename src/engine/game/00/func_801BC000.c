@@ -33,11 +33,11 @@ MATCH void func_801BC000(void) {
     }
     bit = g_AreaWalkFlags & AREA_WALK_STEP_ACTIVE;
     if (!bit && !(g_AreaWalkFlags & AREA_WALK_RUN_ACTIVE)) {
-        ret = func_801C3790(1) & BYTE_MASK;
+        ret = func_801C3790(1) & 0xFF;
         if (ret != 0) {
             return;
         }
-        ret = func_801C37DC(1) & BYTE_MASK;
+        ret = func_801C37DC(1) & 0xFF;
         if (ret != 0) {
             return;
         }
@@ -48,8 +48,8 @@ MATCH void func_801BC000(void) {
                     g_Task->header.mode = 7;
                     goto block_26; /* retail branch */
                 }
-                if ((func_801BD938() & BYTE_MASK) == 0) {
-                    tmp2 = func_801BC760() & BYTE_MASK;
+                if ((func_801BD938() & 0xFF) == 0) {
+                    tmp2 = func_801BC760() & 0xFF;
                     if (tmp2 < 5) {
                         not_zero = tmp2 != 0;
                         if (not_zero) {
@@ -77,7 +77,7 @@ MATCH void func_801BC000(void) {
                     }
                     func_801C2538();
                     func_801C4C48();
-                    Actor_RequestScript((g_Task->direction_08 + 8) & BYTE_MASK);
+                    Actor_RequestScript((g_Task->direction_08 + 8) & 0xFF);
                     if (g_GameState->slot_index_79 == 2) {
                         tmp10 = g_Task;
                         tmp3  = tmp10->unk_09;

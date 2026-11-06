@@ -23,11 +23,11 @@ MATCH void Area_DrawSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     D_1F800014->vz = FIELD(s32, record, 4);
     /* FAKE: retail reads D_1F800034 as u16[]. */
     z              = RotTransPers(D_1F800014, (long*)((u16*)D_1F800034), &depth, &flag);
-    if (((u32)(((u16*)D_1F800034)[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
+    if (((u32)(((u16*)D_1F800034)[0] + 0x3C) & 0xFFFF) >= 0x1B9) {
         return;
     }
     /* FAKE: retail reads D_1F800034 as u16[]. */
-    if (((u32)(((u16*)D_1F800034)[1] + 0x96) & HALF_MASK) >= 0x1C3) {
+    if (((u32)(((u16*)D_1F800034)[1] + 0x96) & 0xFFFF) >= 0x1C3) {
         return;
     }
     i = 0;

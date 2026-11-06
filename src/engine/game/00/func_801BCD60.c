@@ -185,7 +185,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                 FIELD(s32, tmp9, 0x38u) = val2;
             } else {
             block_39:
-                if (func_801C6FD4(FIELD(s16, tmp9, 0x36u), FIELD(s16, tmp9, 0x3Au)) & BYTE_MASK) {
+                if (func_801C6FD4(FIELD(s16, tmp9, 0x36u), FIELD(s16, tmp9, 0x3Au)) & 0xFF) {
                     g_GameState->flags_12C.u8_value = (u8)(g_GameState->flags_12C.u8_value & 0xFE);
                     g_Task->unk_29                  = (u8)g_AreaDrawMode;
                     g_Task->direction_08            = (u8)stack_10;

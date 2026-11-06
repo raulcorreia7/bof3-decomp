@@ -616,10 +616,10 @@ void             func_801EA1F0(MenuPanelTask* task);
 /* Pick the party record the record index selects: record 0 is the saved
  * Character, any other is the Character copy inside the battle row. */
 static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_index) {
-    if ((record_index & BYTE_MASK) == 0) {
-        return &g_Characters[character_index & BYTE_MASK];
+    if ((record_index & 0xFF) == 0) {
+        return &g_Characters[character_index & 0xFF];
     } else {
-        return &g_BattlePartyBattlers[character_index & BYTE_MASK].chr;
+        return &g_BattlePartyBattlers[character_index & 0xFF].chr;
     }
 }
 

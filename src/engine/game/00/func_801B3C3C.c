@@ -7,8 +7,8 @@ MATCH u8* func_801B3C3C(s32 bounds_x, s32 bounds_y) {
     u8* cursor;
 
     entry  = D_80181164[g_GameAreaId];
-    x      = bounds_x & BYTE_MASK;
-    y      = bounds_y & BYTE_MASK;
+    x      = bounds_x & 0xFF;
+    y      = bounds_y & 0xFF;
     cursor = entry + 3;
 loop_1: /* scan each 8-byte bounds entry until one contains (x, y) */
     if (x < *entry) {

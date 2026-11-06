@@ -11,7 +11,7 @@ MATCH void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 sh
     s32   tpage;
     u16   clut;
 
-    entry = g_MenuPortraitAtlas + (atlas_index & BYTE_MASK) * 4;
+    entry = g_MenuPortraitAtlas + (atlas_index & 0xFF) * 4;
 
     tpage = getTPage(0, 0, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -20,7 +20,7 @@ MATCH void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 sh
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
 
-    shade = shade_mode & BYTE_MASK;
+    shade = shade_mode & 0xFF;
     if (shade == 0) {
         sprt->b0 = 0x80;
         sprt->g0 = 0x80;

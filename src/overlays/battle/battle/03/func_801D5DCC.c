@@ -9,7 +9,7 @@ MATCH u8 func_801D5DCC(void) {
     s16 delta;
 
     for (slot = 0; slot < BATTLE_PARTY_SLOT_COUNT; slot++) {
-        if (!(func_801D64C4(slot) & BYTE_MASK)) {
+        if (!(func_801D64C4(slot) & 0xFF)) {
             g_BattlePartyBattlers[slot].turn.hp_change = 0;
             g_BattlePartyBattlers[slot].turn.ap_change = 0;
             /* FAKE: keeps the mode byte load after the two stores (the scheduler hoists it above them). */
@@ -66,7 +66,7 @@ MATCH u8 func_801D5DCC(void) {
         }
     }
     for (slot = 3; slot < COMBATANT_COUNT; slot++) {
-        if (!(func_801D64C4(slot) & BYTE_MASK)) {
+        if (!(func_801D64C4(slot) & 0xFF)) {
             if (ENEMY_COMBATANT(slot).status & 1) {
                 ENEMY_COMBATANT(slot).header.mode       = 6;
                 ENEMY_COMBATANT(slot).header.step       = 5;

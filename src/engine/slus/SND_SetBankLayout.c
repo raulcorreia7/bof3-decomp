@@ -23,7 +23,7 @@ MATCH void SND_SetBankLayout(u32 layout_bank) {
     MATCH_FAKE_PIN(s32, last, "a3");
 
     s32 fixed             = 0x8011A000;
-    off                   = (layout_bank & BYTE_MASK) * 0x1C;
+    off                   = (layout_bank & 0xFF) * 0x1C;
     D_8014678C            = 0;
     v                     = FIELD(s32, D_8018239C, off);
     layer2                = D_8014871C;

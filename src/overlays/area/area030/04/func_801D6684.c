@@ -34,19 +34,19 @@ NON_MATCHING void func_801D6684(void) {
 
     spad0 = g_Task;
     if (FIELD(u8, spad0, 0xAu) != 0) {
-        func_801D2034(0xD4, 0x8A, 0U, (FIELD(u8, spad0, 0xBu) + 1) & BYTE_MASK);
+        func_801D2034(0xD4, 0x8A, 0U, (FIELD(u8, spad0, 0xBu) + 1) & 0xFF);
         page = g_Task->unk_09 / 12;
     } else {
         FIELD(u8, spad0, 0x9u) = (u8)(FIELD(u8, spad0, 0x9u) + 1);
         spad5                  = g_Task;
         page                   = FIELD(u8, spad5, 0x9u) / 12;
-        if (*((FIELD(u8, spad5, 0xBu) * 8) + &D_801E2050 + (page & BYTE_MASK)) == GAME_NONE) {
+        if (*((FIELD(u8, spad5, 0xBu) * 8) + &D_801E2050 + (page & 0xFF)) == GAME_NONE) {
             FIELD(u8, spad5, 0xAu) = 0x32U;
         }
     }
     row = 0;
-    if ((g_Task->unk_0A == 0) && (*((g_Task->unk_0B * 8) + &D_801E2050 + (page & BYTE_MASK)) == 1) &&
-        ((u32)((g_Task->unk_09 % 12) & BYTE_MASK) < 0xAU)) {
+    if ((g_Task->unk_0A == 0) && (*((g_Task->unk_0B * 8) + &D_801E2050 + (page & 0xFF)) == 1) &&
+        ((u32)((g_Task->unk_09 % 12) & 0xFF) < 0xAU)) {
         func_8014D978();
     }
     word_ptr   = &D_801E2070;
@@ -61,13 +61,13 @@ NON_MATCHING void func_801D6684(void) {
         cell_ptr = cell_table;
     loop_11:
         cell = *cell_ptr;
-        kind = cell & BYTE_MASK;
+        kind = cell & 0xFF;
         if (kind != GAME_NONE) {
             spad1 = g_Task;
             if (row == FIELD(u8, spad1, 0xBu)) {
-                if ((u32)((FIELD(u8, spad1, 0x9u) % 12) & BYTE_MASK) < 0xAU) {
+                if ((u32)((FIELD(u8, spad1, 0x9u) % 12) & 0xFF) < 0xAU) {
                     x = x_fixed >> 0x10;
-                    if (col == (page & BYTE_MASK)) {
+                    if (col == (page & 0xFF)) {
                         UI_DrawText((s16)x, (s16)(y_other >> 0x10), kind, 1U, ((kind * 2) + &D_801E2070));
                     } else {
                         goto block_17; /* shared cell/row draw join */
@@ -76,13 +76,13 @@ NON_MATCHING void func_801D6684(void) {
                     x = x_fixed >> 0x10;
                 block_17:
                     y     = y_sel >> 0x10;
-                    color = (*cell_ptr * 3) & BYTE_MASK;
+                    color = (*cell_ptr * 3) & 0xFF;
                     goto block_19; /* shared cell/row draw join */
                 }
             } else {
                 x     = x_fixed >> 0x10;
                 y     = y_sel >> 0x10;
-                color = (7 - cell) & BYTE_MASK;
+                color = (7 - cell) & 0xFF;
             block_19:
                 UI_DrawTextString((s16)x, (s16)y, color, 1, (u32)((kind * 2) + &D_801E2070));
             }

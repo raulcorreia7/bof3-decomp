@@ -28,9 +28,9 @@ MATCH void func_801E30FC(u16 row_x, u16 row_y, s32 row_flags) {
             GetGraphType();
         }
         GFX_AddDrawMode(0xF);
-        y = (y + 3) & HALF_MASK;
-        Menu_DrawPanelIcon(row_x + 1, y, 6, 2, GetClut(0, 480) & HALF_MASK, 128);
-        Menu_DrawPanelIcon(row_x + 9, y, 7, 2, GetClut(0, 480) & HALF_MASK, 128);
-        Menu_DrawPanelIcon(row_x + 0x11, y, 8, 2, GetClut(0, 480) & HALF_MASK, 128);
+        y = (y + 3) & 0xFFFF;
+        Menu_DrawPanelIcon(row_x + 1, y, 6, 2, GetClut(0, 480) & 0xFFFF, 128);
+        Menu_DrawPanelIcon(row_x + 9, y, 7, 2, GetClut(0, 480) & 0xFFFF, 128);
+        Menu_DrawPanelIcon(row_x + 0x11, y, 8, 2, GetClut(0, 480) & 0xFFFF, 128);
     }
 }

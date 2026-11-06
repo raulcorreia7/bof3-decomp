@@ -7,7 +7,7 @@ MATCH void func_801D3A64(void) {
     u16 packed;
 
     g_BattleActionId = g_BattleAction->unk_02;
-    if ((func_800A9B44() & BYTE_MASK) != 0) {
+    if ((func_800A9B44() & 0xFF) != 0) {
         func_801DDFEC(g_BattleActiveBattler);
         func_801DD14C(g_BattleActiveBattler);
         BATTLE_ACTIVE_PARTY.header.mode = 2;
@@ -18,7 +18,7 @@ MATCH void func_801D3A64(void) {
         return;
     }
     packed = g_BattleAction->unk_02;
-    SYS_CopyString((u8*)&D_80149298, Item_GetRecord(packed >> 8, packed & BYTE_MASK), 0xC);
+    SYS_CopyString((u8*)&D_80149298, Item_GetRecord(packed >> 8, packed & 0xFF), 0xC);
     func_801DE560(1, 1, 0, 0x1E, (u8*)&D_80149298);
     g_BattleRowCursor    = 0;
     g_BattleMessageState = 1;

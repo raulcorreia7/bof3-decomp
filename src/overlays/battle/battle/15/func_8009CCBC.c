@@ -10,8 +10,8 @@ MATCH void func_8009CCBC(void* battler, s32 rate_type, s32 rate_percent) {
     u8  kind;
     s32 scale;
 
-    kind    = rate_type & BYTE_MASK;
-    percent = rate_percent & BYTE_MASK;
+    kind    = rate_type & 0xFF;
+    percent = rate_percent & 0xFF;
     switch (kind) {
         case 0:
             scale = percent * 100;

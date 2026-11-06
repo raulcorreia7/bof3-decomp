@@ -27,7 +27,7 @@ MATCH void func_800AFAB8(u8* record) {
     if (flags & 4) {
         row = quotient + 0x10;
     }
-    bank                               = g_GraphicsPaletteDst + ((row & BYTE_MASK) << 8);
-    bank[(product & BYTE_MASK) + 0x1F] = 0;
-    g_GfxPalettePending                = 1;
+    bank                          = g_GraphicsPaletteDst + ((row & 0xFF) << 8);
+    bank[(product & 0xFF) + 0x1F] = 0;
+    g_GfxPalettePending           = 1;
 }

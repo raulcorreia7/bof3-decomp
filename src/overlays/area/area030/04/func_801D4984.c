@@ -14,7 +14,7 @@ MATCH void func_801D4984(void) {
     key = FISHING_STATE->bounce_3C.half.key_3E;
     if (g_FishBestCatch[key] != 0) {
         func_801E0F4C(FISHING_STATE->step_timer_09 * 0x30 + 0x80, 0x5B, key);
-        func_801E1004(FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK,
+        func_801E1004(FISHING_STATE->bounce_3C.half.key_3E & 0xFF,
                       g_FishBestCatch[FISHING_STATE->bounce_3C.half.key_3E], FISHING_STATE->step_timer_09);
     } else {
         func_801E0F4C(FISHING_STATE->step_timer_09 * 0x30 + 0x80, 0x5B, 0xFF);
@@ -25,7 +25,7 @@ MATCH void func_801D4984(void) {
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;
     if (D_80145E93[0] >= 3u) {
-        mask = BIT(FISHING_STATE->cue_index_06) & BYTE_MASK;
+        mask = BIT(FISHING_STATE->cue_index_06) & 0xFF;
     }
     func_801D7C10(0x58, 0x28, mask);
     if (FISHING_STATE->step_timer_09 == 0) {

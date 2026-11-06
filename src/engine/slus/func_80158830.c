@@ -61,7 +61,7 @@ MATCH void func_80158830(void* obj) {
         control = row->control;
         SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect,
                     (((row->control >> 0xD) & 0x780) + SCREEN_WIDTH) + ((control >> 9) & 0x7F),
-                    (row->control & BYTE_MASK) | 0x100);
+                    (row->control & 0xFF) | 0x100);
         GFX_AddPrim(6U, 0x18U);
     }
 }

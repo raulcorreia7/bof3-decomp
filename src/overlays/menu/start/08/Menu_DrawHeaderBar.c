@@ -89,7 +89,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     }
     FIELD(s16, val7, 0x16u) = 0xF;
     GFX_AddPrim(1U, 0x28U);
-    val3     = (u16)((s32)((val3 & HALF_MASK) - 4) >> 1);
+    val3     = (u16)((s32)((val3 & 0xFFFF) - 4) >> 1);
     val7     = g_GfxPrimCursor;
     stack_48 = (stack_28 - 3) & 1;
     SetPolyFT4((POLY_FT4*)val7);

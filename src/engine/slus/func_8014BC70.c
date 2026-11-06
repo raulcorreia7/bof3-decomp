@@ -46,8 +46,8 @@ NON_MATCHING void func_8014BC70(void) {
     if ((count - 1) > 0) {
         do {
             var_s4    = count - 1;
-            var_t0_34 = var_s4 & BYTE_MASK;
-            tmp       = (s8)((var_s7 & BYTE_MASK) + 1);
+            var_t0_34 = var_s4 & 0xFF;
+            tmp       = (s8)((var_s7 & 0xFF) + 1);
             if (var_t0_34 >= tmp) {
                 var_s0 = tmp;
                 do {
@@ -58,14 +58,14 @@ NON_MATCHING void func_8014BC70(void) {
                          ((sum_a = *(s32*)(a2 + 0x34) + *(s32*)(a2 + 0x38),
                            sum_b = *(s32*)(a3 + 0x34) + *(s32*)(a3 + 0x38), (sum_a < sum_b)) ||
                           ((sum_a == sum_b) && (*(s32*)(a2 + 0x3C) < *(s32*)(a3 + 0x3C)))))) {
-                        Area_SwapObjects(var_t0_34, (var_s4 - 1) & BYTE_MASK);
+                        Area_SwapObjects(var_t0_34, (var_s4 - 1) & 0xFF);
                     }
                     var_s4 -= 1;
-                    var_t0_34 = var_s4 & BYTE_MASK;
+                    var_t0_34 = var_s4 & 0xFF;
                 } while (var_t0_34 >= var_s0);
             }
             var_s7 += 1;
-        } while ((var_s7 & BYTE_MASK) < (D_8014832D - 1));
+        } while ((var_s7 & 0xFF) < (D_8014832D - 1));
     }
     draw_mode = 0x225;
     if (GetGraphType() != 1) {
@@ -81,10 +81,10 @@ NON_MATCHING void func_8014BC70(void) {
     GFX_AddPrim(6U, 0xCU);
     do {
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
-            Area_DrawCellLayer(var_s7 & BYTE_MASK);
+            Area_DrawCellLayer(var_s7 & 0xFF);
         }
         if (g_AreaDrawFlags & AREA_DRAW_APPEND_AREA_PRIMITIVES) {
-            tmp  = ((g_FrameBufferIndex + 4) * 8) + ((var_s7 & BYTE_MASK) * 0x30);
+            tmp  = ((g_FrameBufferIndex + 4) * 8) + ((var_s7 & 0xFF) * 0x30);
             word = *(u32*)(D_80142CC0 + tmp);
             if (word != 0) {
                 u32** slot = &D_801459D0[g_AreaDrawMode];
@@ -93,19 +93,19 @@ NON_MATCHING void func_8014BC70(void) {
                 *slot      = *(u32**)(D_80142CC4 + tmp);
             }
         }
-        sp28 = var_s7 & BYTE_MASK;
+        sp28 = var_s7 & 0xFF;
     loop_22:
-        var_v1_169 = var_s4 & BYTE_MASK;
+        var_v1_169 = var_s4 & 0xFF;
     loop_23:
         if ((OBJ_KEY(var_v1_169) >> 8) == sp28) {
-            var_a0_187 = var_fp & BYTE_MASK;
+            var_a0_187 = var_fp & 0xFF;
             if (var_v1_169 < D_8014832D) {
             block_27:
                 word = D_80143740[var_a0_187];
                 if ((((word >> 0x18) == sp28) && (var_a0_187 < D_8014933D) &&
-                     (OBJ_KEY(var_s4 & BYTE_MASK) >= (word >> 0x10))) ||
-                    ((var_s4 & BYTE_MASK) == D_8014832D)) {
-                    var_s0 = var_fp & BYTE_MASK;
+                     (OBJ_KEY(var_s4 & 0xFF) >= (word >> 0x10))) ||
+                    ((var_s4 & 0xFF) == D_8014832D)) {
+                    var_s0 = var_fp & 0xFF;
                     if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
                         u32* pk  = &D_80143740[var_s0];
                         u8*  pkt = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + (*pk & 0xFFF) * 0x50;
@@ -114,13 +114,13 @@ NON_MATCHING void func_8014BC70(void) {
                     }
                     var_fp += 1;
                 }
-                var_s0 = var_fp & BYTE_MASK;
+                var_s0 = var_fp & 0xFF;
                 var_s3 = &D_80143740[var_s0];
-                var_s2 = OBJ_KEY(var_s4 & BYTE_MASK);
+                var_s2 = OBJ_KEY(var_s4 & 0xFF);
                 var_s1 = 0;
                 merged = var_s2 < *(u16*)((u8*)var_s3 + 2);
             loop_45:
-                tmp = var_s4 & BYTE_MASK;
+                tmp = var_s4 & 0xFF;
                 if (merged == 0) {
                     if (var_s0 != D_8014933D) {
                         goto block_47;
@@ -154,7 +154,7 @@ NON_MATCHING void func_8014BC70(void) {
                                 D_80147D0C[i].depth     = *(s32*)(obj + 0x60) | WORD_SIGN_BIT;
                             }
                             var_s4 += 1;
-                            merged = OBJ_KEY(var_s4 & BYTE_MASK) < *(u16*)((u8*)var_s3 + 2);
+                            merged = OBJ_KEY(var_s4 & 0xFF) < *(u16*)((u8*)var_s3 + 2);
                             goto loop_45;
                         }
                     } else {
@@ -202,24 +202,24 @@ NON_MATCHING void func_8014BC70(void) {
                         }
                         i = (s8)(i + 1);
                     } while (i < limit);
-                    var_v1_169 = var_s4 & BYTE_MASK;
+                    var_v1_169 = var_s4 & 0xFF;
                 } else {
                     goto loop_22;
                 }
                 goto loop_23;
             }
         }
-        var_a0_187 = var_fp & BYTE_MASK;
+        var_a0_187 = var_fp & 0xFF;
         if ((D_80143740[var_a0_187] >> 0x18) == sp28) {
             if (var_a0_187 < D_8014933D) {
                 goto block_27;
             }
         }
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
-            Area_AddScenePrim(var_s7 & BYTE_MASK);
+            Area_AddScenePrim(var_s7 & 0xFF);
         }
         var_s7 += 1;
-    } while ((var_s7 & BYTE_MASK) < 0x37U);
+    } while ((var_s7 & 0xFF) < 0x37U);
 }
 #else
 INCLUDE_ASM(func_8014BC70);

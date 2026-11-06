@@ -7,8 +7,8 @@ MATCH bool func_800A3638(s32 battler_index, s32 compare_value) {
     volatile u8* entry;
     s32          compare_byte;
 
-    compare_byte = compare_value & BYTE_MASK;
-    if ((battler_index & BYTE_MASK) < 3U) {
+    compare_byte = compare_value & 0xFF;
+    if ((battler_index & 0xFF) < 3U) {
         entry = (u8*)(g_GameState);
         if (*(entry + 0x86) == compare_byte || *(entry + 0x87) == compare_byte) {
             return false;

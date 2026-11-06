@@ -5,7 +5,7 @@ MATCH void func_800C1CE4(void) {
 
     saved  = g_Task;
     g_Task = D_801EB4E0;
-    if (func_8014DAEC() & BYTE_MASK) {
+    if (func_8014DAEC() & 0xFF) {
         Actor_SelectScript(0);
         ((Actor*)g_Task)->active_flags &= 0x7F;
         ((Actor*)g_Task)->unk_29 = 4;

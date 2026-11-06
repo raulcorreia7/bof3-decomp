@@ -17,8 +17,8 @@ MATCH void GFX_CopyPaletteCapped(u32 intensity) {
     u32                 scratch;
     u32                 value;
 
-    intensity &= BYTE_MASK;
-    limit      = intensity & HALF_MASK;
+    intensity &= 0xFF;
+    limit      = intensity & 0xFFFF;
     dst_offset = 0u;
     src        = (const u16*)MEM_PTR(const volatile u16, 0x80033800u);
     src_end    = MEM_PTR(const volatile u16, 0x80033800u) + 0x10;
@@ -40,7 +40,7 @@ MATCH void GFX_CopyPaletteCapped(u32 intensity) {
         scratch      = AREA_PALETTE_WORK;
         value        = dst_offset + scratch;
         *(u16*)value = (u16)packed;
-        scratch      = packed & HALF_MASK;
+        scratch      = packed & 0xFFFF;
         if (scratch != 0u) {
             scratch      = merged | 0x8000u;
             *(u16*)value = (u16)scratch;

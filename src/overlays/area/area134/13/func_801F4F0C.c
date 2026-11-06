@@ -16,7 +16,7 @@ MATCH void func_801F4F0C(const s32* center, s32 radius, u16 angle, s32 offset_x,
 
     i = 0;
     do {
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 2, 896, 256) & HALF_MASK, 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 2, 896, 256) & 0xFFFF, 0);
         Area_AddCellPrim(((s32*)center)[0] + offset_x, ((s32*)center)[1] + offset_y, 0, 0x18);
         packet = (POLY_F3*)g_GfxPrimCursor;
         SetPolyF3(packet);
@@ -31,5 +31,5 @@ MATCH void func_801F4F0C(const s32* center, s32 radius, u16 angle, s32 offset_x,
         packet->y2 = screen1[1];
         setRGB0(packet, 128, 128, 128);
         Area_AddCellPrim(((s32*)center)[0] + offset_x, ((s32*)center)[1] + offset_y, 0, 0x18);
-    } while (((i & BYTE_MASK)) < 4u);
+    } while (((i & 0xFF)) < 4u);
 }

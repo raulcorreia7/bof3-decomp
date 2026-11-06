@@ -5,5 +5,5 @@
  * that owns the g_AreaCameraAngle.vz state cell; the returned status is masked to a byte.
  */
 MATCH s32 Area_TurnCameraZ(s16 target_degrees, s8 step_degrees) {
-    return Area_StepCameraZ(DEG(target_degrees) & ANGLE_MASK, DEG(step_degrees)) & BYTE_MASK;
+    return Area_StepCameraZ(DEG(target_degrees) & ANGLE_MASK, DEG(step_degrees)) & 0xFF;
 }

@@ -63,8 +63,8 @@ NON_MATCHING void func_801D2B58(void) {
     if (cursor[0] < (u8)D_80146323) {
         table = &D_8014630C;
         do {
-            value = table[cursor[0] & BYTE_MASK];
-            kind  = value & BYTE_MASK;
+            value = table[cursor[0] & 0xFF];
+            kind  = value & 0xFF;
             if (kind == GAME_NONE) {
                 cursor[0] += 1;
                 if (cursor[0] >= cursor[1]) {
@@ -76,7 +76,7 @@ NON_MATCHING void func_801D2B58(void) {
             if (kind < 3U) {
                 func_800AB0B8(kind, cursor[0], &D_80146322);
             } else {
-                func_801E25E0((index - 3) & BYTE_MASK);
+                func_801E25E0((index - 3) & 0xFF);
             }
             row           = row1;
             row->index_00 = index;

@@ -5,7 +5,7 @@ MATCH u8 func_801DB2F8(u32 battler_index) {
     u32 subindex;
     u32 offset;
 
-    index = battler_index & BYTE_MASK;
+    index = battler_index & 0xFF;
     if (index < 3u) {
         offset = index * 320u;
         if (!ACTOR_IN_USE(g_BattlePartyBattlers[index])) {
@@ -15,7 +15,7 @@ MATCH u8 func_801DB2F8(u32 battler_index) {
             return false;
         }
     } else {
-        subindex = (battler_index - 3u) & BYTE_MASK;
+        subindex = (battler_index - 3u) & 0xFF;
         offset   = subindex * 280u;
         if ((g_BattleEnemyBattlers[subindex].header.flags & 1u) == 0u) {
             return false;

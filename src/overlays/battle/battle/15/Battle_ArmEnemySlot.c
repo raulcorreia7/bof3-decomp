@@ -21,10 +21,10 @@ NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
     s32           unit_offset;
     s32           enemy_offset;
 
-    enemy = &g_BattleEnemyBattlers[slot & BYTE_MASK];
+    enemy = &g_BattleEnemyBattlers[slot & 0xFF];
     TASK_SET(enemy);
     enemy->header.flags = 1;
-    unit_offset         = (unit & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE;
+    unit_offset         = (unit & 0xFFFF) * BATTLE_ENEMY_RECORD_SIZE;
     unit_id             = FIELD(u16, &D_800E405E, unit_offset);
     if (unit_id == 717 || unit_id == 737) {
         ((EnemyBattler*)g_Task)->header.flags = 0x21;
@@ -63,10 +63,10 @@ NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
     COORD_INT(enemy->pos.z)              = Area_SampleHeight(enemy->pos, y);
     enemy->unk_2B                        = 0;
     Area_FindSceneRecord(FIELD(u16, &D_800E405E, unit_offset));
-    enemy_offset                          = (slot & BYTE_MASK) * BATTLE_ENEMY_STRIDE;
+    enemy_offset                          = (slot & 0xFF) * BATTLE_ENEMY_STRIDE;
     FIELD(u16, &D_801EB6BA, enemy_offset) = FIELD(u16, &D_800E405E, unit_offset);
-    Battle_LoadEnemyBattler(slot & BYTE_MASK, unit & BYTE_MASK);
-    func_800AD0A8(slot & BYTE_MASK, unit & HALF_MASK);
+    Battle_LoadEnemyBattler(slot & 0xFF, unit & 0xFF);
+    func_800AD0A8(slot & 0xFF, unit & 0xFFFF);
     FIELD(u8, &D_801EB6AF, enemy_offset) = func_800AD044(FIELD(u8, &D_800E4050, unit_offset));
     g_BattleEnemyCount += 1;
 }

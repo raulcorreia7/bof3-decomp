@@ -17,33 +17,33 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
     u8            slot;
 
     slot               = arg0;
-    g_BattleActionType = ((s32)D_800B51F8[g_BattleEnemyBattlers[slot & BYTE_MASK].choice_ai] >> ((rand() & 3) * 2)) & 3;
-    if ((g_BattleState & BATTLE_STATE_OVER) && (g_BattleEnemyBattlers[slot & BYTE_MASK].stats.intellect < 2U)) {
+    g_BattleActionType = ((s32)D_800B51F8[g_BattleEnemyBattlers[slot & 0xFF].choice_ai] >> ((rand() & 3) * 2)) & 3;
+    if ((g_BattleState & BATTLE_STATE_OVER) && (g_BattleEnemyBattlers[slot & 0xFF].stats.intellect < 2U)) {
         g_BattleActionType = 0;
     }
     if (g_BattleActionType != 1) {
         if ((s32)g_BattleActionType < 2) {
             if (g_BattleActionType != 0) {
-                actor = slot & BYTE_MASK;
+                actor = slot & 0xFF;
             } else {
                 goto block_17; /* shared state fallback */
             }
         } else if (g_BattleActionType != 2) {
-            index = slot & BYTE_MASK;
+            index = slot & 0xFF;
             if (g_BattleActionType != 3) {
-                actor = slot & BYTE_MASK;
+                actor = slot & 0xFF;
             } else {
                 actor = index * 0x118;
                 if (*D_801EB6B0[index] & 0x20) {
                     g_BattleActionType = 4;
                     *D_801EB726[index] = D_801EB6BC[actor + (rand() & 7)];
-                    actor              = slot & BYTE_MASK;
+                    actor              = slot & 0xFF;
                 } else {
                     goto block_16; /* shared state fallback */
                 }
             }
         } else {
-            if (*D_801EB6B0[slot & BYTE_MASK] & 0x40) {
+            if (*D_801EB6B0[slot & 0xFF] & 0x40) {
                 g_BattleActionType = 3;
             } else {
                 goto block_16; /* shared state fallback */
@@ -51,42 +51,42 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
             goto block_18; /* shared state fallback */
         }
     } else {
-        idx2 = slot & BYTE_MASK;
+        idx2 = slot & 0xFF;
         row3 = idx2 * 0x118;
         if (*D_801EB6B0[idx2] & 0x80) {
             g_BattleActionType   = 2;
             *(D_801EB730 + row3) = *(D_801EB730 + row3) | 2;
-            actor                = slot & BYTE_MASK;
+            actor                = slot & 0xFF;
         } else {
         block_16:
         block_17:
             g_BattleActionType = 1;
         block_18:
-            actor = slot & BYTE_MASK;
+            actor = slot & 0xFF;
         }
     }
     row2 = actor * 0x118;
     if ((*(D_801EB6B2 + row2) & 0x20) ||
         (g_BattleEnemyBattlers[actor].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
         g_BattleActionType = 1;
-        if (func_800A9304((slot + 3) & BYTE_MASK) & BYTE_MASK) {
+        if (func_800A9304((slot + 3) & 0xFF) & 0xFF) {
             func_801E2948((s8)actor);
         }
-    } else if (func_800A9304((slot + 3) & BYTE_MASK) & BYTE_MASK) {
+    } else if (func_800A9304((slot + 3) & 0xFF) & 0xFF) {
         g_BattleTargetSelector = Battle_PickEnemyTarget(actor);
     }
     if (g_BattleEncounter != 0) {
-        enemy                = &g_BattleEnemyBattlers[slot & BYTE_MASK];
+        enemy                = &g_BattleEnemyBattlers[slot & 0xFF];
         g_BattleCurrentEnemy = enemy;
         g_Task               = enemy;
         enemy->unk_E4(0);
     }
     if (g_BattleTargetSelector == GAME_NONE) {
-        g_BattleActionType                                        = 0;
-        g_BattleEnemyBattlers[slot & BYTE_MASK].turn.command.type = 0;
+        g_BattleActionType                                   = 0;
+        g_BattleEnemyBattlers[slot & 0xFF].turn.command.type = 0;
         return;
     }
-    g_BattleEnemyBattlers[slot & BYTE_MASK].turn.command.type = g_BattleActionType;
+    g_BattleEnemyBattlers[slot & 0xFF].turn.command.type = g_BattleActionType;
 }
 #else
 INCLUDE_ASM(func_801E25E0);

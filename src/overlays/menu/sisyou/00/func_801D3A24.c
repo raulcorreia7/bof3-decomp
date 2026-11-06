@@ -47,7 +47,7 @@ NON_MATCHING void func_801D3A24(void) {
             case 0xC:
                 if (diff >= 3) {
                     if (SYS_TestFlag(&D_801448ED + 0x63B, 0x6C) == 0) {
-                        if (Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_CUPIDS_LYRE, 1, 0) & BYTE_MASK) {
+                        if (Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_CUPIDS_LYRE, 1, 0) & 0xFF) {
                             SYS_SetFlag(&D_801448ED + 0x63B, 0x6C);
                             func_801D39CC(D_80145FCC.bytes[g_MasterMenuCursor * BATTLE_PARTY_STRIDE]);
                             done = 1;

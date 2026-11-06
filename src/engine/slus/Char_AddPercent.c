@@ -7,7 +7,7 @@ MATCH u32 Char_AddPercent(u8* value, u8 delta) {
     u8 cur;
 
     cur = *value;
-    if ((cur & BYTE_MASK) == 0x64) {
+    if ((cur & 0xFF) == 0x64) {
         return 0;
     }
     cur    = (cur + delta);

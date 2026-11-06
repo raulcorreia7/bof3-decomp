@@ -25,7 +25,7 @@ MATCH void func_801D9E40(void) {
                 FISHING_STATE->sub_index_03  = 0;
                 break;
             }
-            if (func_801E1C10() & BYTE_MASK) {
+            if (func_801E1C10() & 0xFF) {
                 if (D_801E3204 == 0) {
                     D_801E3204                  = 1;
                     D_8014403D                  = 4;

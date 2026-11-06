@@ -23,7 +23,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     u8* cursor;
     u8* text;
 
-    UI_DrawWindow(panel_x, (panel_y + 1) & HALF_MASK, 0x8B, 0x9E, 0x80, (s32)D_80144952);
+    UI_DrawWindow(panel_x, (panel_y + 1) & 0xFFFF, 0x8B, 0x9E, 0x80, (s32)D_80144952);
     if (FISHING_STATE->step_index_0A != 0) {
         FISHING_STATE->step_index_0A = (u8)(FISHING_STATE->step_index_0A - 1);
         max_count                    = 0xA;
@@ -112,7 +112,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
             }
         }
     }
-    func_801D8248((s16)(panel_x + 0x80), (s16)(panel_y + (text_y & BYTE_MASK)), 0x72 & 0xFE);
+    func_801D8248((s16)(panel_x + 0x80), (s16)(panel_y + (text_y & 0xFF)), 0x72 & 0xFE);
     UI_DrawText((s16)(panel_x + 0x37), (s16)(panel_y + 7), 0, 4U, (&D_801E21D0));
 }
 #else

@@ -16,11 +16,11 @@ MATCH void func_801F2E20(void) {
 
     /* The step stores re-read the work cell: the compiler must assume a call
      * may have changed it. */
-    if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA1) {
+    if ((Area_GetCellCode(x, y) & 0xFF) == 0xA1) {
         TASK_BYTES[0x0B] = 1;
-    } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA0) {
+    } else if ((Area_GetCellCode(x, y) & 0xFF) == 0xA0) {
         TASK_BYTES[0x0B] = 2;
-    } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xAE) {
+    } else if ((Area_GetCellCode(x, y) & 0xFF) == 0xAE) {
         TASK_BYTES[0x0B] = 3;
     } else if (g_AreaWalkFlags & AREA_WALK_TRANSITION) {
         TASK_BYTES[0x0B] = 4;

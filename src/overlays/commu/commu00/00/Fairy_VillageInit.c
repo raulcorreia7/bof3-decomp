@@ -13,7 +13,7 @@ MATCH void Fairy_VillageInit(void) {
     if (g_GameAreaId != D_80143F04) {
         active_count = Fairy_VillageCountFairies();
         func_801F03D0();
-        active_count &= BYTE_MASK;
+        active_count &= 0xFF;
         D_80145E44                      = 0;
         g_FairyVillagePendingQueueCount = 0;
         g_FairyVillageUpdateCount       = 0;

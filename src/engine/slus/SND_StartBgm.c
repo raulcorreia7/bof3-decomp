@@ -5,7 +5,7 @@
  */
 MATCH void SND_StartBgm(u8 bgm_id, u8 cue_level, u8 cue_shape) {
     if (bgm_id != GAME_NONE) {
-        if ((SND_RequestBgm(bgm_id) & BYTE_MASK) != 0) {
+        if ((SND_RequestBgm(bgm_id) & 0xFF) != 0) {
             while (!EMI_LoaderIsReady()) {
                 CallbackWait(1);
             }

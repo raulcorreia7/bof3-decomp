@@ -15,5 +15,5 @@ MATCH void func_801F2D3C(void) {
         tail += 0x18;
         index += 1;
         row += 0x18;
-    } while ((index & HALF_MASK) < 0x100U);
+    } while ((index & 0xFFFF) < 0x100U);
 }

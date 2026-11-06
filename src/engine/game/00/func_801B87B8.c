@@ -4,18 +4,18 @@ MATCH void func_801B87B8(void) {
     Actor* work;
 
     if (g_Task->unk_09 == 0) {
-        if (func_801C472C(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0xD0, 0) & BYTE_MASK) {
+        if (func_801C472C(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0xD0, 0) & 0xFF) {
             func_801B8A0C();
             return;
         }
         func_801B8A9C();
-        if (func_801B8D18() & BYTE_MASK) {
+        if (func_801B8D18() & 0xFF) {
             Actor_RequestScript(g_Task->direction_08);
             g_Task->header.step = 3;
             g_Task->unk_03      = 0;
             return;
         }
-        if ((func_801B9598() & BYTE_MASK) == 0) {
+        if ((func_801B9598() & 0xFF) == 0) {
             work               = g_Task;
             work->direction_08 = (work->direction_08 + 1);
             func_801B9598();
@@ -46,7 +46,7 @@ MATCH void func_801B87B8(void) {
                 g_Task->unk_0B = 7;
                 break;
         }
-        Actor_RequestScript((g_Task->unk_0B + 8) & BYTE_MASK);
+        Actor_RequestScript((g_Task->unk_0B + 8) & 0xFF);
         func_801C24D0();
     }
     g_Task->unk_09 -= 1;

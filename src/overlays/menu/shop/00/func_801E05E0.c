@@ -38,7 +38,7 @@ NON_MATCHING void func_801E05E0(void) {
             D_801483CD = 0x10;
         }
     } else if (pad & 4) {
-        scroll = D_801483CA & BYTE_MASK;
+        scroll = D_801483CA & 0xFF;
         if (scroll == 0) {
             D_801483CB = 0;
         } else if (scroll < 9U) {
@@ -50,7 +50,7 @@ NON_MATCHING void func_801E05E0(void) {
             goto block_22; /* shared confirm join */
         }
     } else if (pad & 8) {
-        scroll_hi = D_801483CA & BYTE_MASK;
+        scroll_hi = D_801483CA & 0xFF;
         if (scroll_hi == 0x77) {
             D_801483CB = 0x7F;
         } else {

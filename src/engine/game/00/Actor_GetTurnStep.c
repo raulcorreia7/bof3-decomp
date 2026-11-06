@@ -5,11 +5,11 @@ MATCH s32 Actor_GetTurnStep(s32 selector) {
     s32 value;
 
     field = g_Task->direction_08;
-    selector &= BYTE_MASK;
-    value = field & BYTE_MASK;
+    selector &= 0xFF;
+    value = field & 0xFF;
     if ((u32)field < selector) {
         field += 8;
-        value = field & BYTE_MASK;
+        value = field & 0xFF;
     }
     if ((value >= selector + 1) && (selector + 4 >= value)) {
         return -1;

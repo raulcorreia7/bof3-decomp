@@ -10,9 +10,9 @@ MATCH u32 func_801DCCB0(void) {
     i     = 0;
     if (g_BattlePartyCount != 0u) {
         do {
-            total += g_BattlePartyBattlers[i & BYTE_MASK].chr.stats.defense;
+            total += g_BattlePartyBattlers[i & 0xFF].chr.stats.defense;
             i = i + 1u;
-        } while ((i & BYTE_MASK) < g_BattlePartyCount);
+        } while ((i & 0xFF) < g_BattlePartyCount);
     }
     half = total;
     sum  = half / g_BattlePartyCount;

@@ -33,8 +33,8 @@ NON_MATCHING void func_801D6AC4(s32 party_slot) {
     u8     val10;
     Armor* armor;
 
-    val4           = g_CharSlot[D_80144F5A[party_slot & BYTE_MASK]];
-    frame.record   = &g_Characters[val4 & BYTE_MASK];
+    val4           = g_CharSlot[D_80144F5A[party_slot & 0xFF]];
+    frame.record   = &g_Characters[val4 & 0xFF];
     frame.slots[0] = frame.record + 0xE;
     frame.slots[1] = frame.record + 0xF;
     frame.slots[2] = frame.record + 0x10;
@@ -45,56 +45,55 @@ NON_MATCHING void func_801D6AC4(s32 party_slot) {
     val5           = g_Weapons[tmp14].power;
     val10          = g_Weapons[tmp14].weight;
     do {
-        val8        = D_801C8940[val3 & BYTE_MASK];
-        val6        = val8 & BYTE_MASK;
+        val8        = D_801C8940[val3 & 0xFF];
+        val6        = val8 & 0xFF;
         val9        = g_Weapons[val6].power;
         val7        = g_Weapons[val6].weight;
         frame.value = (s32)val4;
-        if ((((s32)(Item_GetEquipability(ITEM_CAT_WEAPON, val6) & BYTE_MASK) >> val4) & 1) &&
-            ((tmp7 = val10 & BYTE_MASK, (D_801ED63C == 0)) || (tmp11 = val7 & BYTE_MASK, ((tmp11 < tmp7) != 0)) ||
-             ((tmp4 = val5 & HALF_MASK, (tmp7 == tmp11)) &&
-              ((tmp8 = val9 & HALF_MASK, ((tmp4 < tmp8) != 0)) || ((tmp4 == tmp8) && (val6 < (u8)D_801ED63C)))))) {
+        if ((((s32)(Item_GetEquipability(ITEM_CAT_WEAPON, val6) & 0xFF) >> val4) & 1) &&
+            ((tmp7 = val10 & 0xFF, (D_801ED63C == 0)) || (tmp11 = val7 & 0xFF, ((tmp11 < tmp7) != 0)) ||
+             ((tmp4 = val5 & 0xFFFF, (tmp7 == tmp11)) &&
+              ((tmp8 = val9 & 0xFFFF, ((tmp4 < tmp8) != 0)) || ((tmp4 == tmp8) && (val6 < (u8)D_801ED63C)))))) {
             D_801ED63C = val8;
             val5       = g_Weapons[val8].power;
             val10      = g_Weapons[val8].weight;
         }
         val3 += 1;
-    } while ((u32)(val3 & BYTE_MASK) < 0x80U);
+    } while ((u32)(val3 & 0xFF) < 0x80U);
     val3 = 1;
-    val0 = 1 & BYTE_MASK;
+    val0 = 1 & 0xFF;
     do {
         val1                = 0;
         tmp13               = *frame.slots[val0];
         val2                = val0;
         (&D_801ED63C)[val2] = tmp13;
-        val5                = g_Armors[tmp13 & BYTE_MASK].power;
-        val10               = g_Armors[tmp13 & BYTE_MASK].weight;
+        val5                = g_Armors[tmp13 & 0xFF].power;
+        val10               = g_Armors[tmp13 & 0xFF].weight;
     loop_12:
-        val8  = D_801C8944[val1 & BYTE_MASK];
-        val6  = val8 & BYTE_MASK;
+        val8  = D_801C8944[val1 & 0xFF];
+        val6  = val8 & 0xFF;
         armor = &g_Armors[val6];
         val9  = armor->power;
         val7  = armor->weight;
         if ((armor->equip_type - 2) == (val2 - 1)) {
             frame.value = (s32)val4;
-            if ((((s32)(Item_GetEquipability(ITEM_CAT_ARMOR, val6) & BYTE_MASK) >> val4) & 1) &&
-                ((tmp5 = val10 & BYTE_MASK, ((&D_801ED63C)[val2] == 0)) ||
-                 (tmp9 = val7 & BYTE_MASK, ((tmp9 < tmp5) != 0)) ||
-                 ((tmp6 = val5 & HALF_MASK, (tmp5 == tmp9)) && ((tmp10 = val9 & HALF_MASK, ((tmp6 < tmp10) != 0)) ||
-                                                                ((tmp6 == tmp10) && (val6 < (u8)D_801ED63C)))))) {
+            if ((((s32)(Item_GetEquipability(ITEM_CAT_ARMOR, val6) & 0xFF) >> val4) & 1) &&
+                ((tmp5 = val10 & 0xFF, ((&D_801ED63C)[val2] == 0)) || (tmp9 = val7 & 0xFF, ((tmp9 < tmp5) != 0)) ||
+                 ((tmp6 = val5 & 0xFFFF, (tmp5 == tmp9)) &&
+                  ((tmp10 = val9 & 0xFFFF, ((tmp6 < tmp10) != 0)) || ((tmp6 == tmp10) && (val6 < (u8)D_801ED63C)))))) {
                 (&D_801ED63C)[val2] = val8;
-                tmp12               = g_Armors[val8 & BYTE_MASK].weight;
-                val5                = tmp12 & BYTE_MASK;
+                tmp12               = g_Armors[val8 & 0xFF].weight;
+                val5                = tmp12 & 0xFF;
                 val10               = tmp12;
             }
         }
         val1 += 1;
-        if ((u32)(val1 & BYTE_MASK) < 0x80U) {
+        if ((u32)(val1 & 0xFF) < 0x80U) {
             goto loop_12; /* retail branch */
         }
         val3 += 1;
-        val0 = val3 & BYTE_MASK;
-    } while ((u32)(val3 & BYTE_MASK) < 4U);
+        val0 = val3 & 0xFF;
+    } while ((u32)(val3 & 0xFF) < 4U);
     D_801ED640 = FIELD(u8, frame.record, 0x12u);
     D_801ED641 = FIELD(u8, frame.record, 0x13u);
 }

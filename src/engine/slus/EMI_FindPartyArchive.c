@@ -91,16 +91,16 @@ NON_MATCHING u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     val9  = 0;
     val10 = 0xFF;
     val3  = 0;
-    val0  = 0 & BYTE_MASK;
+    val0  = 0 & 0xFF;
 loop_24:
-    val6 = val10 & BYTE_MASK;
-    if (val0 < (val7 & BYTE_MASK)) {
+    val6 = val10 & 0xFF;
+    if (val0 < (val7 & 0xFF)) {
         val17 = &D_1F800000[val9];
         val19 = (val0 * 3) + D_80181B34[0];
     loop_26:
         tmp1 = *val17;
         if (tmp1 == *(val19 + val3)) {
-            if (val9 == ((val8 & BYTE_MASK) - 1)) {
+            if (val9 == ((val8 & 0xFF) - 1)) {
                 val10 = val0;
             } else {
                 val11 = val0;
@@ -125,15 +125,15 @@ loop_24:
         block_34:
             val0 += 1;
             val19 += 3;
-            if (val0 < (val7 & BYTE_MASK)) {
+            if (val0 < (val7 & 0xFF)) {
                 goto loop_26; /* retail branch */
             }
         }
-        val6 = val10 & BYTE_MASK;
+        val6 = val10 & 0xFF;
     }
     val3 += 1;
     if (val6 == GAME_NONE) {
-        val0 = val11 & BYTE_MASK;
+        val0 = val11 & 0xFF;
         if (val3 >= 3) {
             SYS_ShowFileNotFound();
         } else {

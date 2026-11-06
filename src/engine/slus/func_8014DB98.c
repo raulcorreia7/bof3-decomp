@@ -18,7 +18,7 @@ MATCH void func_8014DB98(void) {
     entries                 = current_work->script;
     next_index              = index + 1;
     current_work->script_pc = next_index;
-    selected                = *(entries + (next_index & HALF_MASK));
+    selected                = *(entries + (next_index & 0xFFFF));
     table                   = current_work->range_54.table;
     current_work->script_pc = index + 2;
     current_work->unk_5A    = *(u16*)(table + selected * 2);

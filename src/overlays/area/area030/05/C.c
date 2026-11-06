@@ -129,7 +129,7 @@ MATCH void func_800F550C(void) {
     u8  s3;
 
     s0 = 0;
-    switch (INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL) & HALF_MASK) {
+    switch (INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL) & 0xFFFF) {
         case 0x2000:
             s0 = 1;
             break;
@@ -162,7 +162,7 @@ MATCH void func_800F550C(void) {
                     D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_00, 0) +
          Item_Count(D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_01,
                     D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_00, 1);
-    s0 &= BYTE_MASK;
+    s0 &= 0xFF;
     while (1) {
         if (s0 + (s8)s_ListItemId < 100) {
             break;
@@ -364,31 +364,31 @@ MATCH void func_800F606C(s32 arg0) {
     s32 i;
     int new_var;
     u8  n;
-    n = arg0 & BYTE_MASK;
+    n = arg0 & 0xFF;
     func_800F63CC(0x14, 0x38, n);
     UI_DrawText(0x36, 0x3E, (u8)(n * 7), 0xFF, (u8*)((D_8001008E) + 0x80010000u));
     for (i = 0; i < D_800F7240; i++) {
         h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)],
                            ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
-        w = func_800F65A8(i & BYTE_MASK, 1);
-        if ((arg0 & BYTE_MASK) != 0) {
-            UI_DrawText(0x25, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+        w = func_800F65A8(i & 0xFF, 1);
+        if ((arg0 & 0xFF) != 0) {
+            UI_DrawText(0x25, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & 0xFF, (u8*)h);
             func_800F7094(0x1C, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
                           D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
         } else if (i == ((s8)s_ListCursor)) {
-            if ((w & BYTE_MASK) == 0) {
-                UI_DrawText(0x25, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+            if ((w & 0xFF) == 0) {
+                UI_DrawText(0x25, (0x51 + (i * 13)), 7, func_801AF20C((u8*)h) & 0xFF, (u8*)h);
                 func_800F7094(0x1C, (s16)(0x54 + (i * 13)),
                               ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
                               D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
             }
-            UI_DrawText(0x25, (0x4F + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+            UI_DrawText(0x25, (0x4F + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & 0xFF, (u8*)h);
             func_800F7094(0x1C, (s16)(0x52 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
-                          D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
+                          D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & 0xFF);
         } else {
-            UI_DrawText(0x25, (0x51 + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & BYTE_MASK, (u8*)h);
+            UI_DrawText(0x25, (0x51 + (i * 13)), (u8)(w * 7), func_801AF20C((u8*)h) & 0xFF, (u8*)h);
             func_800F7094(0x1C, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var],
-                          D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
+                          D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & 0xFF);
         }
     }
 }
@@ -434,13 +434,13 @@ MATCH u8 func_800F65A8(s32 slot, s32 amount) {
     u8(*limit)[8];
 
     for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
-        value = D_801E2F7E[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i];
+        value = D_801E2F7E[D_801E3134[g_GameContextKind][slot & 0xFF]][i];
         if (value == GAME_NONE) {
             return false;
         }
         limit = (u8(*)[8]) & D_801E2F7E[0][3];
-        if ((Item_Count(ITEM_CAT_ITEM, (value + 0x38), 0) & HALF_MASK) <
-            limit[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i] * (amount & BYTE_MASK)) {
+        if ((Item_Count(ITEM_CAT_ITEM, (value + 0x38), 0) & 0xFFFF) <
+            limit[D_801E3134[g_GameContextKind][slot & 0xFF]][i] * (amount & 0xFF)) {
             return true;
         }
     }
@@ -476,19 +476,18 @@ MATCH void func_800F6730(void) {
         if (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] == GAME_NONE) {
             break;
         }
-        value = Item_GetRecord(ITEM_CAT_ITEM,
-                               (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
-        UI_DrawText(0xAD, (0x58 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+        value = Item_GetRecord(ITEM_CAT_ITEM, (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & 0xFF));
+        UI_DrawText(0xAD, (0x58 + i * 13), 0, func_801AF20C((u8*)value) & 0xFF, (u8*)value);
         sprintf(g_UiFormatBuffer, D_800F5000.format,
                 D_801E2F81[D_801E3134[g_GameContextKind][slot]][i] * (s8)s_ListItemId);
         UI_DrawGlyphString(0x110, (0x5C + i * 13), 0, g_UiFormatBuffer);
-        cost = Item_Count(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK, 0);
+        cost = Item_Count(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & 0xFF, 0);
         if (cost < D_801E2F81[D_801E3134[g_GameContextKind][slot]][i]) {
-            UI_DrawText(0xAD, (0xA4 + i * 13), 7, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+            UI_DrawText(0xAD, (0xA4 + i * 13), 7, func_801AF20C((u8*)value) & 0xFF, (u8*)value);
             sprintf(g_UiFormatBuffer, D_800F5000.format, cost);
             UI_DrawGlyphString(0x110, (0xA8 + i * 13), 7, g_UiFormatBuffer);
         } else {
-            UI_DrawText(0xAD, (0xA4 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+            UI_DrawText(0xAD, (0xA4 + i * 13), 0, func_801AF20C((u8*)value) & 0xFF, (u8*)value);
             sprintf(g_UiFormatBuffer, D_800F5000.format, cost);
             UI_DrawGlyphString(0x110, (0xA8 + i * 13), 0, g_UiFormatBuffer);
         }
@@ -544,7 +543,7 @@ MATCH void func_800F6C5C(void) {
 
     entry = D_801E3134[g_GameContextKind][slot];
     value = Item_GetRecord(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00);
-    UI_DrawText(0x21, 0x68, 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
+    UI_DrawText(0x21, 0x68, 0, func_801AF20C((u8*)value) & 0xFF, (u8*)value);
 
     sprintf(g_UiFormatBuffer, D_800F5000.format, (s8)s_ListItemId);
     UI_DrawGlyphString(0x84, 0x6C, 0, g_UiFormatBuffer);
@@ -556,14 +555,14 @@ MATCH void func_800F6C5C(void) {
 
     entry = D_801E3134[g_GameContextKind][slot];
     sprintf(g_UiFormatBuffer, D_800F5000.format,
-            Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 0) & HALF_MASK);
+            Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 0) & 0xFFFF);
     UI_DrawGlyphString(0x84, 0x80, 0, g_UiFormatBuffer);
 
     UI_DrawText(0x21, 0x88, 0, 0xFF, (u8*)(D_80010098 + 0x80010000u));
 
     entry = D_801E3134[g_GameContextKind][slot];
     sprintf(g_UiFormatBuffer, D_800F5000.format,
-            Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 1) & HALF_MASK);
+            Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 1) & 0xFFFF);
     UI_DrawGlyphString(0x84, 0x8C, 0, g_UiFormatBuffer);
 }
 
@@ -598,9 +597,9 @@ MATCH void func_800F6EE0(u16 x, u16 y) {
 }
 
 MATCH void func_800F7094(s32 x, s32 y, s32 kind, s32 value, u8 selected) {
-    kind &= BYTE_MASK;
+    kind &= 0xFF;
     if (kind != 0) {
-        func_801AEA80((u16)x, (u16)y, D_800F722C[Item_GetKind(value & BYTE_MASK, kind) & BYTE_MASK], selected);
+        func_801AEA80((u16)x, (u16)y, D_800F722C[Item_GetKind(value & 0xFF, kind) & 0xFF], selected);
     }
 }
 
@@ -616,8 +615,7 @@ MATCH void func_800F7100(void) {
         }
         p       = D_801E2F7E[list_index] + 3;
         new_var = p[i] * ((s8)s_ListItemId);
-        Item_Remove(ITEM_CAT_ITEM,
-                    (D_801E2F7E[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]][i] + 0x38) & BYTE_MASK,
-                    new_var & BYTE_MASK, 0);
+        Item_Remove(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]][i] + 0x38) & 0xFF,
+                    new_var & 0xFF, 0);
     }
 }

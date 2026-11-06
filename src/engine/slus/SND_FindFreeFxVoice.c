@@ -10,11 +10,11 @@ MATCH s32 SND_FindFreeFxVoice(u8* out_index, u8* out_seq) {
     s16 value;
     s8  sep;
 
-    for (i = 0; (i & BYTE_MASK) == 0; i++) {
-        for (j = 0; (j & BYTE_MASK) < 4U; j++) {
-            sep = g_SelectionFxVoices[i & BYTE_MASK];
+    for (i = 0; (i & 0xFF) == 0; i++) {
+        for (j = 0; (j & 0xFF) < 4U; j++) {
+            sep = g_SelectionFxVoices[i & 0xFF];
             if (sep != -1) {
-                value = SsIsEos(sep, j & BYTE_MASK);
+                value = SsIsEos(sep, j & 0xFF);
                 if (value != 0) {
                     *out_index = i;
                     *out_seq   = j;

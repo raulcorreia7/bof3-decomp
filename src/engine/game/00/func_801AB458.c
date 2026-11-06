@@ -52,8 +52,8 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
                 sel     = (u32)delta_x >> 15;
                 delta_y = g_AreaScrollTargetY - base[1];
                 delta_y = ABS(delta_y);
-                span_y = (u32)delta_y >> 15;
-                if ((sel & BYTE_MASK) < (span_y & BYTE_MASK)) {
+                span_y  = (u32)delta_y >> 15;
+                if ((sel & 0xFF) < (span_y & 0xFF)) {
                     sel = span_y;
                 }
                 Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
@@ -61,7 +61,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
                 g_AreaScrollTargetY = base[1];
                 span                = Area_SampleHeight(base[0], base[1]);
                 g_AreaCameraStep    = 0x20;
-                step                = sel & BYTE_MASK;
+                step                = sel & 0xFF;
                 if (step == 0) {
                     g_AreaCameraHeightStep = 0;
                 } else {
@@ -104,7 +104,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             state->index_0A += 2;
             break;
         case 0x8B:
-            if ((SND_IsXAIdle() & BYTE_MASK) != 0) {
+            if ((SND_IsXAIdle() & 0xFF) != 0) {
                 break;
             }
             state->index_0A--;

@@ -11,7 +11,7 @@ MATCH void func_801DA078(s32 x, s32 y, s32 u_index) {
 
     GFX_AddDrawMode(GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y));
 
-    texture_u = (u_index & BYTE_MASK) << 4;
+    texture_u = (u_index & 0xFF) << 4;
     sprite    = (SPRT*)g_GfxPrimCursor;
     setWH(sprite, 16, 8);
     sprite->clut = 0x7800;

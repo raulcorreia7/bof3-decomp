@@ -143,7 +143,7 @@ NON_MATCHING void func_801E4744(void) {
     } else {
         if (g_InputPressed & PADRup) {
             D_801ED105 = 0;
-            tmp0       = D_801ED7DC & BYTE_MASK;
+            tmp0       = D_801ED7DC & 0xFF;
             if ((tmp0 != 0) && ((tmp16 = s_CampMenuState[tmp0], (tmp16 == 0xFF)) || (tmp16 == 0))) {
                 D_801ED7DC -= 1;
             }
@@ -164,7 +164,7 @@ NON_MATCHING void func_801E4744(void) {
                     goto loop_63; /* retail branch */
                 }
             }
-            tmp8 = val6 & HALF_MASK;
+            tmp8 = val6 & 0xFFFF;
             if (tmp8 == 0) {
                 val8 = 0;
                 val3 = 0 << 0x18;

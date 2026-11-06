@@ -19,7 +19,7 @@ MATCH u32 func_801DC73C(s16 damage, u32 battler_index, u32 target_index) {
         return (s32)damage;
     }
 
-    battler_index &= BYTE_MASK;
+    battler_index &= 0xFF;
     if (BATTLER_IS_PLAYER(battler_index)) {
         flags = g_BattlePartyBattlers[battler_index].chr.status;
     } else {
@@ -54,6 +54,6 @@ after_enemy:
     return (s32)damage;
 
 clear:
-    g_BattlePartyBattlers[index & BYTE_MASK].turn.target_flags &= 0xEFu;
+    g_BattlePartyBattlers[index & 0xFF].turn.target_flags &= 0xEFu;
     return 0u;
 }

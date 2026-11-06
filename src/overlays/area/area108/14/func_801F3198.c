@@ -13,7 +13,7 @@ MATCH void func_801F3198(void) {
     work->origin_z += work->normal.vz;
     count                               = (((AreaSprite*)D_801F63EC)->flags_02 - 1u);
     ((AreaSprite*)D_801F63EC)->flags_02 = count;
-    if (!(count & BYTE_MASK)) {
+    if (!(count & 0xFF)) {
         ((AreaSprite*)D_801F63EC)->flags = 0u;
     }
 }

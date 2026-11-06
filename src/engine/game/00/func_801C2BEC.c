@@ -11,34 +11,26 @@ MATCH s32 func_801C2BEC(void) {
     if (flags & 0x400) {
         index = 0xFF;
     } else {
-        if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x80, 0) & BYTE_MASK) {
+        if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x80, 0) & 0xFF) {
             index = 0;
-        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x81, 0) &
-                   BYTE_MASK) {
+        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x81, 0) & 0xFF) {
             index = 1;
-        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x82, 0) &
-                   BYTE_MASK) {
+        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x82, 0) & 0xFF) {
             index = 2;
-        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x83, 0) &
-                   BYTE_MASK) {
+        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x83, 0) & 0xFF) {
             index = 3;
-        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x84, 0) &
-                   BYTE_MASK) {
+        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x84, 0) & 0xFF) {
             index = 4;
-        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x85, 0) &
-                   BYTE_MASK) {
+        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x85, 0) & 0xFF) {
             index = 5;
-        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x86, 0) &
-                   BYTE_MASK) {
+        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x86, 0) & 0xFF) {
             index = 6;
-        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x87, 0) &
-                   BYTE_MASK) {
+        } else if (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x87, 0) & 0xFF) {
             index = 7;
         } else {
-            index =
-                (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x88, 0) & BYTE_MASK)
-                    ? 8
-                    : 0xFF;
+            index = (func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0x88, 0) & 0xFF)
+                        ? 8
+                        : 0xFF;
         }
     }
     if (index != GAME_NONE) {

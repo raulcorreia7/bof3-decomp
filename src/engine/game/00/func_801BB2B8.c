@@ -63,22 +63,22 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
             if (key < 0x11) {
                 if (key == 0x00)
                     goto block43;
-                return code1 & BYTE_MASK;
+                return code1 & 0xFF;
             }
             if (key == 0x20)
                 goto case20;
-            return code1 & BYTE_MASK;
+            return code1 & 0xFF;
         }
         if (key == 0x50)
             goto shared52compute;
         if (key < 0x51) {
             if (key == 0x40)
                 goto case40;
-            return code1 & BYTE_MASK;
+            return code1 & 0xFF;
         }
         if (key == 0x60)
             goto block43;
-        return code1 & BYTE_MASK;
+        return code1 & 0xFF;
     }
     if (key == 0xB0)
         goto block43;
@@ -88,38 +88,38 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
         if (key < 0x91) {
             if (key == 0x80)
                 goto case80;
-            return code1 & BYTE_MASK;
+            return code1 & 0xFF;
         }
         if (key == 0xA0)
             goto caseA0;
-        return code1 & BYTE_MASK;
+        return code1 & 0xFF;
     }
     if (key == 0xD0)
         goto block43;
     if (key < 0xD1) {
         if (key == 0xC0)
             goto block43;
-        return code1 & BYTE_MASK;
+        return code1 & 0xFF;
     }
     if (key == 0xE0)
         goto block43;
     if (key == 0xF0)
         return 0xFF;
-    return code1 & BYTE_MASK;
+    return code1 & 0xFF;
 
 case80:
     work = g_Task;
     if (work->unk_05 != 0)
         return 0xFF;
 block43:
-    if ((func_801BB6F0(code2 & BYTE_MASK) & BYTE_MASK) != 0)
+    if ((func_801BB6F0(code2 & 0xFF) & 0xFF) != 0)
         return 0xB0;
-    if ((func_801BB760(hx0, hy0) & BYTE_MASK) == 0)
-        return code1 & BYTE_MASK;
+    if ((func_801BB760(hx0, hy0) & 0xFF) == 0)
+        return code1 & 0xFF;
     return 0xFF;
 
 case10:
-    low = code1 & BYTE_MASK;
+    low = code1 & 0xFF;
     if (low != 0x11)
         return 0xFF;
     work = g_Task;
@@ -132,27 +132,27 @@ case10:
     goto shared52compute;
 
 case40:
-    low = code1 & BYTE_MASK;
+    low = code1 & 0xFF;
     goto shared52use;
 
 shared52compute:
-    low = code1 & BYTE_MASK;
+    low = code1 & 0xFF;
 shared52use:
     if (low != 0x52)
         return 0xFF;
-    if ((func_801BB760(hx0, hy0) & BYTE_MASK) == 0)
+    if ((func_801BB760(hx0, hy0) & 0xFF) == 0)
         return 0;
     return 0xFF;
 
 case70:
-    if ((code2 & BYTE_MASK) != key)
+    if ((code2 & 0xFF) != key)
         goto tail76;
-    if ((func_801BB760(hx0, hy0) & BYTE_MASK) == 0)
+    if ((func_801BB760(hx0, hy0) & 0xFF) == 0)
         goto tail76;
     return 0x70;
 
 case20:
-    if ((func_801BB760(hx0, hy0) & BYTE_MASK) != 0)
+    if ((func_801BB760(hx0, hy0) & 0xFF) != 0)
         return 0xFF;
     low = code1 & 0xF1;
     if ((code2 & 0xF0) != key)
@@ -165,16 +165,16 @@ retFF:
     return 0xFF;
 
 caseA0:
-    if ((code2 & BYTE_MASK) == 0xC0) {
-        low = code1 & BYTE_MASK;
+    if ((code2 & 0xFF) == 0xC0) {
+        low = code1 & 0xFF;
         if ((g_GameRequestFlags & 1) != 0) {
             if (low == key)
                 return 0;
-            low = code1 & BYTE_MASK;
+            low = code1 & 0xFF;
             if (low == 0xAE)
                 return 0;
         } else {
-            low = code1 & BYTE_MASK;
+            low = code1 & 0xFF;
         }
         if (low == 0xAF)
             return 0xA1;
@@ -183,13 +183,13 @@ caseA0:
             return 0xFF;
         return low;
     }
-    low = code1 & BYTE_MASK;
+    low = code1 & 0xFF;
     if (low == 0xA2)
         goto retFF;
     if (low == 0xA3)
         goto retFF;
 tail76:
-    return -((func_801BB760(hx0, hy0) & BYTE_MASK) != 0) & BYTE_MASK;
+    return -((func_801BB760(hx0, hy0) & 0xFF) != 0) & 0xFF;
 }
 #else
 INCLUDE_ASM(func_801BB2B8);

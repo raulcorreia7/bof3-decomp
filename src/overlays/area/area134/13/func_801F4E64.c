@@ -8,8 +8,8 @@ MATCH void func_801F4E64(const s32* center, s32 radius) {
     Area_SetCameraMatrix(scratch);
     i = 0;
     do {
-        index = i & BYTE_MASK;
+        index = i & 0xFF;
         func_801F4F0C(center, radius, (index << 10), D_801F5848[index], D_801F5858[index]);
         i += 1;
-    } while (((i & BYTE_MASK)) < 4u);
+    } while (((i & 0xFF)) < 4u);
 }

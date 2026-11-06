@@ -40,7 +40,7 @@ MATCH void func_800A5AE4(void) {
         return;
     }
     if (pad_bits & D_80145AC2) {
-        if (func_800A5D00() & BYTE_MASK) {
+        if (func_800A5D00() & 0xFF) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             g_BattleUIState = 5;
             return;

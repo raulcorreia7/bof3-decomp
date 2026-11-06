@@ -6,8 +6,8 @@ MATCH void func_801D3E80(void) {
     u32 entry_index;
     u8* counter;
 
-    for (voice = 16; (voice & BYTE_MASK) < 24u; voice++) {
-        SsUtKeyOffV(voice & BYTE_MASK);
+    for (voice = 16; (voice & 0xFF) < 24u; voice++) {
+        SsUtKeyOffV(voice & 0xFF);
     }
 
     if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) {
@@ -17,7 +17,7 @@ MATCH void func_801D3E80(void) {
     }
     if (LOBU(g_BattleActionType) == BATTLE_ACTION_ITEM) {
         selection   = g_BattleAction->unk_02;
-        entry_index = D_800B6AB0[selection >> 8][selection & BYTE_MASK];
+        entry_index = D_800B6AB0[selection >> 8][selection & 0xFF];
     check_entry:
         if (g_BattleSelections[entry_index].id != 0xFFFFu) {
             EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_RET);

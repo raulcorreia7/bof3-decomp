@@ -12,8 +12,8 @@ MATCH void func_801AC768(GameCursorState* cursor_state, s32 mode_byte, s32 value
         g_Task->header.mode = mode_byte;
         slot                = g_Task;
         if (slot->header.mode == 7) {
-            slot->unk_18 = value_18 & BYTE_MASK;
-            slot->unk_1C = value_1C & BYTE_MASK;
+            slot->unk_18 = value_18 & 0xFF;
+            slot->unk_1C = value_1C & 0xFF;
             if (cursor_state->unk_04 != 0) {
                 func_801AC0A0(extra_value);
             }
@@ -23,11 +23,11 @@ MATCH void func_801AC768(GameCursorState* cursor_state, s32 mode_byte, s32 value
         if (g_Task->header.step == status) {
             func_801ABEE0();
         }
-        if ((mode_byte & BYTE_MASK) == 7) {
+        if ((mode_byte & 0xFF) == 7) {
             g_Task->header.step = 1;
             slot                = g_Task;
-            slot->unk_18        = value_18 & BYTE_MASK;
-            slot->unk_1C        = value_1C & BYTE_MASK;
+            slot->unk_18        = value_18 & 0xFF;
+            slot->unk_1C        = value_1C & 0xFF;
             if (cursor_state->unk_04 != 0) {
                 func_801AC0A0(extra_value);
                 cursor_state->unk_07 = 1;

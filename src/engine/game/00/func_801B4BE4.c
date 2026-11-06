@@ -22,7 +22,7 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
         cells = (s16*)D_1F800000;
         want  = code;
         do {
-            if ((Area_GetCellCode(cells[0], cells[1]) & BYTE_MASK) == want) {
+            if ((Area_GetCellCode(cells[0], cells[1]) & 0xFF) == want) {
                 g_Task->direction_08 = mode;
                 return true;
             }
@@ -36,7 +36,7 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
         cells = (s16*)D_1F800000;
         want  = code;
         do {
-            if ((Area_GetCellCode(cells[0], cells[1]) & BYTE_MASK) == want) {
+            if ((Area_GetCellCode(cells[0], cells[1]) & 0xFF) == want) {
                 g_Task->direction_08 = mode;
                 return true;
             }

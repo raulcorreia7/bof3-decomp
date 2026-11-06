@@ -17,7 +17,7 @@ MATCH void func_8014EF80(void) {
     value       = 0;
 
 loop:
-    if ((GFX_StepScreenFade(&value, 0x400, 1, 0, flag) & BYTE_MASK) == 0) {
+    if ((GFX_StepScreenFade(&value, 0x400, 1, 0, flag) & 0xFF) == 0) {
         coordinate               = coordinates[0];
         countdown                = g_AreaCameraOffsetZ;
         g_AreaCameraRefreshCount = flag;

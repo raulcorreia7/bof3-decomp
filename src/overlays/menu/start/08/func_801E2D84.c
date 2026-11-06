@@ -18,9 +18,9 @@ MATCH void func_801E2D84(s16 x, s32 y) {
         s32 cell_y;
 
         cell   = i;
-        cell_y = (row_y + cell * 0x12) & HALF_MASK;
+        cell_y = (row_y + cell * 0x12) & 0xFFFF;
         func_801E2E90((u16)(x + 5), cell_y, cell);
         func_801E30FC((x + 0x44), cell_y, flag_table[data[cell]]);
         i += 1;
-    } while ((i & BYTE_MASK) < 6U);
+    } while ((i & 0xFF) < 6U);
 }

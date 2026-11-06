@@ -34,7 +34,7 @@ MATCH void func_801C329C(void) {
             found = 1;
         }
     }
-    if ((found & BYTE_MASK) != 0) {
+    if ((found & 0xFF) != 0) {
         g_GameState->flags_118--;
         found = 0;
         if (g_GameState->flags_118 == 0) {
@@ -46,20 +46,20 @@ MATCH void func_801C329C(void) {
                     do {
                         id  = D_80144F5A[index];
                         sel = g_CharSlot[id];
-                        if ((g_Characters[sel].status & STATUS_POISONED) && ((Char_LoseHP(1, id) & HALF_MASK) != 0)) {
+                        if ((g_Characters[sel].status & STATUS_POISONED) && ((Char_LoseHP(1, id) & 0xFFFF) != 0)) {
                             found = 1;
                         }
                         index++;
                     } while (index < (s16)total);
                 }
             } else {
-                if ((Char_LoseHP(1, g_GameState->slot_index_79) & HALF_MASK) != 0) {
+                if ((Char_LoseHP(1, g_GameState->slot_index_79) & 0xFFFF) != 0) {
                     found = 1;
                 }
             }
         }
-        if ((found & BYTE_MASK) != 0) {
-            slot = Actor_FindFreeSlot() & BYTE_MASK;
+        if ((found & 0xFF) != 0) {
+            slot = Actor_FindFreeSlot() & 0xFF;
             if (slot != GAME_NONE) {
                 g_ActorSlots[slot].header.flags = 1;
                 g_ActorSlots[slot].type         = 0x41;

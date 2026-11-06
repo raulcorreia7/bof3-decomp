@@ -30,7 +30,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
         return;
     }
 
-    dir = type & BYTE_MASK;
+    dir = type & 0xFF;
     if ((work->vx + work->vy) != 0) {
         value = (s16)(Area_SampleHeight(work->pos.x.fixed + g_FacingSteps[dir].pos.x.raw,
                                         work->pos.y.fixed + D_80181B98[dir * 2]) -
@@ -57,10 +57,10 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
         work                             = g_Task;
         FIELD(s32, D_80147CBC, n * 0x10) = (angle_x - FIELD(s32, work, 0x64u)) / (FIELD(u8, work, 0x0Au) * 2);
         FIELD(s32, D_80147CC0, n * 0x10) = (angle_y - FIELD(s32, work, 0x68u)) / (FIELD(u8, work, 0x0Au) * 2);
-        if ((((type - 5) & BYTE_MASK) < 2) && (D_801C842A[0] < (FIELD(s32, work, 0x6Cu) & ANGLE_MASK))) {
-            angle = D_801C842A[(facing & BYTE_MASK) - 3] + ONE;
+        if ((((type - 5) & 0xFF) < 2) && (D_801C842A[0] < (FIELD(s32, work, 0x6Cu) & ANGLE_MASK))) {
+            angle = D_801C842A[(facing & 0xFF) - 3] + ONE;
         } else {
-            angle = D_801C8424[type & BYTE_MASK];
+            angle = D_801C8424[type & 0xFF];
         }
         FIELD(s32, D_80147CC4, n * 0x10) = ((s16)angle - (g_Task->unk_6C & ANGLE_MASK)) / (g_Task->unk_0A * 4);
         return;
@@ -70,7 +70,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
     *(s32*)(shadow + 0xC)            = 0;
     *(s32*)(shadow + 0x8)            = 0;
     FIELD(s32, D_80147CBC, n * 0x10) = 0;
-    FIELD(s32, work, 0x6Cu)          = D_801C8424[type & BYTE_MASK];
+    FIELD(s32, work, 0x6Cu)          = D_801C8424[type & 0xFF];
 }
 #else
 INCLUDE_ASM(func_801A3080);

@@ -11,7 +11,7 @@ MATCH void func_801D29A4(void) {
     i = 0;
     for (;;) {
         count = Party_CountOrder(0);
-        index = i & BYTE_MASK;
+        index = i & 0xFF;
         if (index >= count) {
             break;
         }

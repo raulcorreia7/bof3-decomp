@@ -8,7 +8,7 @@ MATCH void SYS_CopyString(u8* dst, u8* src, s32 limit) {
     u32 index;
     u8  value;
 
-    count = limit & BYTE_MASK;
+    count = limit & 0xFF;
     index = 0;
     if (count != 0) {
         do {
@@ -20,7 +20,7 @@ MATCH void SYS_CopyString(u8* dst, u8* src, s32 limit) {
             src += 1;
             index += 1;
             dst += 1;
-        } while ((index & BYTE_MASK) < count);
+        } while ((index & 0xFF) < count);
     }
     *dst = 0;
 }

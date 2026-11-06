@@ -16,33 +16,33 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
 
     result = 1;
     TASK_SET(D_801CD8D0);
-    if ((work_mode & BYTE_MASK) >= 4U) {
+    if ((work_mode & 0xFF) >= 4U) {
         D_801CD8C8 = (D_801CD8C8 + 1) & 3;
     } else {
         D_801CD8C8 = work_mode;
     }
-    if ((work_index & BYTE_MASK) == 0) {
+    if ((work_index & 0xFF) == 0) {
         D_80143F24 = g_AreaScrollTargetX & 0xFFFF8000;
         D_80143F28 = g_AreaScrollTargetY & 0xFFFF8000;
     }
-    D_801CD8CC = ((func_801C6A7C() & BYTE_MASK) * 9) + ENCOUNTER_TABLE_BASE;
+    D_801CD8CC = ((func_801C6A7C() & 0xFF) * 9) + ENCOUNTER_TABLE_BASE;
     D_801CD8C0 = func_801C6AEC(D_801CD8CC);
-    if (!(D_801CD8C0 & BYTE_MASK)) {
+    if (!(D_801CD8C0 & 0xFF)) {
         return 0;
     }
     g_BattleScrollDir = D_801CD8C8;
-    if (result & BYTE_MASK) {
-        if (!(func_801C63B0() & BYTE_MASK)) {
+    if (result & 0xFF) {
+        if (!(func_801C63B0() & 0xFF)) {
             result = 0;
         }
     }
-    if (result & BYTE_MASK) {
+    if (result & 0xFF) {
         if ((func_801C6BB4() << 0x18) == 0) {
             result = 0;
         }
     }
-    if (result & BYTE_MASK) {
-        if (!(func_801C6DCC() & BYTE_MASK)) {
+    if (result & 0xFF) {
+        if (!(func_801C6DCC() & 0xFF)) {
             result = 0;
         }
     }
@@ -50,16 +50,16 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
     func_801C7244(D_801CD8C8);
     i = 0;
 loop_16:
-    if ((i & BYTE_MASK) < (Party_CountOrder(1) & BYTE_MASK)) {
-        kind = D_80144F5D[i & BYTE_MASK];
-        x    = *(s32*)(D_80143F2C + (i & BYTE_MASK) * 8);
-        y    = *(s32*)(D_80143F30 + (i & BYTE_MASK) * 8);
+    if ((i & 0xFF) < (Party_CountOrder(1) & 0xFF)) {
+        kind = D_80144F5D[i & 0xFF];
+        x    = *(s32*)(D_80143F2C + (i & 0xFF) * 8);
+        y    = *(s32*)(D_80143F30 + (i & 0xFF) * 8);
         if ((kind == 2) || (kind == 6)) {
             reach = 1;
         } else {
             reach = 0;
         }
-        if (!(func_801C7064(x, y, reach, 0x20) & BYTE_MASK)) {
+        if (!(func_801C7064(x, y, reach, 0x20) & 0xFF)) {
             goto block_29; /* the scan found its entry */
         }
         i += 1;
@@ -85,7 +85,7 @@ loop_18:
 block_2:
     i += 1;
     entry++;
-    if ((u32)(i & BYTE_MASK) < 8U) {
+    if ((u32)(i & 0xFF) < 8U) {
         goto loop_18; /* the scan reached its end */
     }
     if (D_801CD8C4 != 0) {

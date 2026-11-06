@@ -12,10 +12,10 @@ MATCH void func_801A27C4(Actor* entity) {
         saved = g_Task->direction_08;
         for (i = 0; i < 4; i++) {
             g_Task->direction_08 = s_EntityRouteIndices[g_BattlePartyBattlers[0].facing & 7][i];
-            if ((func_801A1AE4(entity) & BYTE_MASK) != 0) {
+            if ((func_801A1AE4(entity) & 0xFF) != 0) {
                 continue;
             }
-            if ((g_Task->header.mode == 3 || g_Task->unk_03 == 3) && (func_801A1A58((Actor*)entity) & BYTE_MASK) == 0) {
+            if ((g_Task->header.mode == 3 || g_Task->unk_03 == 3) && (func_801A1A58((Actor*)entity) & 0xFF) == 0) {
                 continue;
             }
             break;

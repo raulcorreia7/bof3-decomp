@@ -16,7 +16,7 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags) {
     work         = g_Task;
     saved        = work->unk_09;
     work->unk_09 = 0U;
-    if (func_801C3E40(px, py, mode & BYTE_MASK, value) & BYTE_MASK) {
+    if (func_801C3E40(px, py, mode & 0xFF, value) & 0xFF) {
         return 0;
     }
     distance = D_80145ECE - value;

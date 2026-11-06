@@ -10,10 +10,10 @@ MATCH s32 func_8009C794(s32 skip_slot, s32 row_index) {
     u8  index;
 
     count = 0;
-    row   = row_index & BYTE_MASK;
+    row   = row_index & 0xFF;
     do {
-        index = (count & BYTE_MASK);
-        if (index != (skip_slot & BYTE_MASK)) {
+        index = (count & 0xFF);
+        if (index != (skip_slot & 0xFF)) {
             slot    = MEM_PTR(u8, 0x800E4048u) + g_BattleEnemyBattlers[row].kind * 0x88u;
             battler = slot + index * 0x10u;
             if (battler[0x34] == 0x63) {
@@ -24,6 +24,6 @@ MATCH s32 func_8009C794(s32 skip_slot, s32 row_index) {
             }
         }
         count++;
-    } while ((count & BYTE_MASK) < 4U);
+    } while ((count & 0xFF) < 4U);
     return 1;
 }

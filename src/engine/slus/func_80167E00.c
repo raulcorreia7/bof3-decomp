@@ -43,7 +43,7 @@ NON_MATCHING void func_80167E00(void) {
     four  = 4;
     list  = D_80183A70;
     do {
-        slot   = index & BYTE_MASK;
+        slot   = index & 0xFF;
         entity = (EntitySlot*)((u8*)g_Actors + slot * ACTOR_SIZE);
         g_Task = entity;
         if (ACTOR_IN_USE(*entity)) {
@@ -63,7 +63,7 @@ NON_MATCHING void func_80167E00(void) {
             if (entity->unk_06 == 0xA) {
                 index += 1;
                 func_8015A944();
-                next = index & BYTE_MASK;
+                next = index & 0xFF;
             } else {
                 u16 end = 0xFFFF;
 
@@ -84,7 +84,7 @@ NON_MATCHING void func_80167E00(void) {
                         if (scene_id == list[i]) {
                             index += 1;
                             func_8014D290();
-                            next = index & BYTE_MASK;
+                            next = index & 0xFF;
                             goto next_slot; /* retail branch */
                         }
                         i += 1;
@@ -92,7 +92,7 @@ NON_MATCHING void func_80167E00(void) {
                 }
             block_10:
                 index += 1;
-                next = index & BYTE_MASK;
+                next = index & 0xFF;
             }
         } else {
             goto block_10; /* retail branch */

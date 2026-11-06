@@ -7,8 +7,8 @@ MATCH s32 func_801C38F4(s32 record_index, s32 field_mode, s32 wanted_id) {
     s32        target;
     s32        count;
 
-    mode   = field_mode & BYTE_MASK;
-    count  = record_index & BYTE_MASK;
+    mode   = field_mode & 0xFF;
+    count  = record_index & 0xFF;
     record = &g_Characters[g_CharSlot[count]];
     count  = 0;
     if (mode == 1) {
@@ -25,12 +25,12 @@ MATCH s32 func_801C38F4(s32 record_index, s32 field_mode, s32 wanted_id) {
     }
     goto done; /* an unknown mode counts nothing */
 mode1:
-    if (record->equip.weapon == (wanted_id & BYTE_MASK)) {
+    if (record->equip.weapon == (wanted_id & 0xFF)) {
         count = 1;
     }
     goto done; /* the mode-1 compare is done */
 mode2:
-    target = wanted_id & BYTE_MASK;
+    target = wanted_id & 0xFF;
     if (record->equip.shield == target) {
         count = 1;
     }
@@ -42,7 +42,7 @@ mode2:
     }
     goto done; /* the mode-2 compares are done */
 mode3:
-    target = wanted_id & BYTE_MASK;
+    target = wanted_id & 0xFF;
     if (record->equip.accessories[0] == target) {
         count = 1;
     }
@@ -50,5 +50,5 @@ mode3:
         count += 1;
     }
 done:
-    return count & BYTE_MASK;
+    return count & 0xFF;
 }

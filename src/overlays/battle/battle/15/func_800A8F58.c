@@ -27,7 +27,7 @@ NON_MATCHING s32 func_800A8F58(void) {
     if (g_BattleTargetSelector & BATTLE_TARGET_BOTH_SIDES) {
         if (g_BattleTargetSelector & BATTLE_TARGET_PARTY_SIDE) {
             for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
-                if (!(Battle_SlotIsBlocked(i) & BYTE_MASK)) {
+                if (!(Battle_SlotIsBlocked(i) & 0xFF)) {
                     off = i * BATTLE_PARTY_STRIDE;
                     if (FIELD(u8, &D_80145F37, off) < 6) {
                         roll = rand();
@@ -40,7 +40,7 @@ NON_MATCHING s32 func_800A8F58(void) {
             }
         } else {
             for (i = 3; i < 11; i++) {
-                if (!(Battle_SlotIsBlocked(i) & BYTE_MASK)) {
+                if (!(Battle_SlotIsBlocked(i) & 0xFF)) {
                     off = (i - 3) * 0x118;
                     if (FIELD(u8, &D_801EB6E7, off) < 6) {
                         roll = rand();
@@ -58,7 +58,7 @@ NON_MATCHING s32 func_800A8F58(void) {
         return 0;
     }
     if (g_BattleTargetSelector < 3) {
-        if (!(Battle_SlotIsBlocked(g_BattleTargetSelector) & BYTE_MASK) &&
+        if (!(Battle_SlotIsBlocked(g_BattleTargetSelector) & 0xFF) &&
             (FIELD(u8, &D_80145F37, g_BattleTargetSelector * BATTLE_PARTY_STRIDE) < 6)) {
             roll = rand();
             if (roll == (roll / 12) * 12) {
@@ -69,7 +69,7 @@ NON_MATCHING s32 func_800A8F58(void) {
         }
         return 0;
     }
-    if (!(Battle_SlotIsBlocked(g_BattleTargetSelector) & BYTE_MASK) &&
+    if (!(Battle_SlotIsBlocked(g_BattleTargetSelector) & 0xFF) &&
         (FIELD(u8, &D_801EB6E7, (g_BattleTargetSelector - 3) * 0x118) < 6)) {
         roll = rand();
         if (roll == (roll / 12) * 12) {

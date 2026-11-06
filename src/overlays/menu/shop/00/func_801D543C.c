@@ -88,7 +88,7 @@ MATCH void func_801D543C(void) {
     }
     if ((g_InputPressed != 0) ||
         (((g_SaveCardStatus == 0xA) || (g_SaveCardStatus == SAVE_STATUS_SAVED)) &&
-         (timer_p = &D_80148654, next = *timer_p - 1, *timer_p = next, ((next & BYTE_MASK) == 0)))) {
+         (timer_p = &D_80148654, next = *timer_p - 1, *timer_p = next, ((next & 0xFF) == 0)))) {
         D_80148654 = 0;
         if ((g_SaveCardStatus != SAVE_STATUS_SAVED) && (g_SaveCardStatus != 0xA)) {
             SND_PlayCue(EMI_CUE_ID(1, 4));

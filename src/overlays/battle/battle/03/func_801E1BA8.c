@@ -5,7 +5,7 @@ MATCH void func_801E1BA8(void) {
     PartyBattler* work;
     PartyBattler* current;
 
-    slot              = &g_BattleEffects[Battle_AllocEffect(0, 5) & BYTE_MASK];
+    slot              = &g_BattleEffects[Battle_AllocEffect(0, 5) & 0xFF];
     work              = g_Task;
     current           = g_GameState;
     slot->unk_2E      = work->unk_2E.half - (s8)s_LoaderRecordBytes[current->chr.character_id * 2];

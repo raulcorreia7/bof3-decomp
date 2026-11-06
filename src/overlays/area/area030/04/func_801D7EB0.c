@@ -29,7 +29,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
     icon_y    = y + 0x19;
     buffer    = g_UiFormatBuffer;
     slot_list = (u8*)MEM_PTR(u8, (u8*)&D_80144952 + FISHING_ACCESSORY_SLOT_OFFSET);
-    UI_DrawWindow(x, (y + 1) & HALF_MASK, 0x8B, 0x9E, 0xF0, D_80144952);
+    UI_DrawWindow(x, (y + 1) & 0xFFFF, 0x8B, 0x9E, 0xF0, D_80144952);
     for (slot = 0; slot < FISHING_ACCESSORY_SLOT_COUNT; slot++) {
         id = *slot_list;
         if (g_Accessories[id].header.flags != 0xB) {

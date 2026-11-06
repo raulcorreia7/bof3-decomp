@@ -28,9 +28,9 @@ MATCH void func_800AEF98(s32 step, s32 payload) {
     kind  = *(u8*)&g_BattleActiveBattler;
     TASK_SET(work);
     if (kind < 3u) {
-        Actor_SelectScript_keep_a1((step + work[8]) & BYTE_MASK, payload);
+        Actor_SelectScript_keep_a1((step + work[8]) & 0xFF, payload);
     } else {
-        func_801E24F8(kind, payload & BYTE_MASK);
+        func_801E24F8(kind, payload & 0xFF);
     }
     TASK_SET(saved);
 }

@@ -9,12 +9,12 @@ MATCH s32 Char_AddWillpower(u8* value, u16 delta) {
     u8 next;
 
     cur = *value;
-    if ((cur & BYTE_MASK) == 0x63) {
+    if ((cur & 0xFF) == 0x63) {
         return 0;
     }
     next   = (cur + delta);
     *value = next;
-    if ((next & BYTE_MASK) >= 0x64U) {
+    if ((next & 0xFF) >= 0x64U) {
         *value = 0x63;
     }
     return 1;

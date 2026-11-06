@@ -12,7 +12,7 @@ MATCH void func_801E0A30(void) {
         g_ActorSlots[i].unk_04      = 0;
     }
     for (i = 7; i < 20; i++) {
-        Actor_Free(i & BYTE_MASK);
+        Actor_Free(i & 0xFF);
     }
     D_8014403D = 2;
 }

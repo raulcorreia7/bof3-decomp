@@ -32,7 +32,7 @@ NON_MATCHING void func_801D4564(void) {
             g_MenuPanelTasks[13].unk_12 = 0x10;
         }
     } else if (tmp0 & 4) {
-        tmp1 = g_MenuPanelTasks[13].unk_0B & BYTE_MASK;
+        tmp1 = g_MenuPanelTasks[13].unk_0B & 0xFF;
         if (tmp1 == 0) {
             g_MenuPanelTasks[13].unk_0C = 0;
         } else if (tmp1 < 9U) {
@@ -44,7 +44,7 @@ NON_MATCHING void func_801D4564(void) {
             goto block_22; /* retail branch */
         }
     } else if (tmp0 & 8) {
-        tmp2 = g_MenuPanelTasks[13].unk_0B & BYTE_MASK;
+        tmp2 = g_MenuPanelTasks[13].unk_0B & 0xFF;
         if (tmp2 == 0x17) {
             g_MenuPanelTasks[13].unk_0C = 0x1F;
         } else {

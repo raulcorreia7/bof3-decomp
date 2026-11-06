@@ -4,8 +4,8 @@ MATCH void func_800AF814(u32 battler_index) {
     u8  index;
     u32 offset;
 
-    index = battler_index & BYTE_MASK;
-    if (Battle_SlotIsBlocked(index) & BYTE_MASK) {
+    index = battler_index & 0xFF;
+    if (Battle_SlotIsBlocked(index) & 0xFF) {
         return;
     }
     if (index < 3) {

@@ -26,12 +26,12 @@ MATCH void func_801E020C(void) {
         if ((*half & BATTLE_STATE_REPRISAL_PENDING) == 0) {
             if ((g_BattleTargetSelector & BATTLE_TARGET_BOTH_SIDES) == 0) {
                 if (LOBU(g_BattleActionType) == BATTLE_ACTION_ATTACK) {
-                    if ((func_801DD448() & BYTE_MASK) != 0) {
+                    if ((func_801DD448() & 0xFF) != 0) {
                         *half |= BATTLE_STATE_REPRISAL_PENDING;
                     }
                 }
                 if ((LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) &&
-                    ((D_801CA71C[g_BattleActionId].mask & 0x800) != 0) && ((func_801DD448() & BYTE_MASK) != 0) &&
+                    ((D_801CA71C[g_BattleActionId].mask & 0x800) != 0) && ((func_801DD448() & 0xFF) != 0) &&
                     ((D_801CA718[g_BattleActionId][0] & 0x10) == 0)) {
                     g_BattleState |= BATTLE_STATE_REPRISAL_PENDING;
                 }
@@ -41,7 +41,7 @@ MATCH void func_801E020C(void) {
         }
         Battle_ClearSlotPending(g_Task->slot);
         g_GameState->turn.damage_flags.value &= ~0x70;
-        if ((func_801E0E0C() & BYTE_MASK) != 0) {
+        if ((func_801E0E0C() & 0xFF) != 0) {
             /* FAKE: flag pointer; the direct store scores 97.37%. */
             volatile u8* flag;
             flag = &g_BattleResult;

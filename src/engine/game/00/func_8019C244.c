@@ -13,7 +13,7 @@ MATCH s32 func_8019C244(void) {
         case 1:
             if ((((u32)y >> 0x0F) & 1) == 0) {
                 hi = y >> 0x10;
-                y &= HALF_MASK;
+                y &= 0xFFFF;
                 hi -= 1;
                 y |= hi << 0x10;
             }
@@ -21,7 +21,7 @@ MATCH s32 func_8019C244(void) {
         case 3:
             if ((((u32)x >> 0x0F) & 1) != 0) {
                 hi = x >> 0x10;
-                x &= HALF_MASK;
+                x &= 0xFFFF;
                 hi += 1;
                 x |= hi << 0x10;
             }
@@ -29,7 +29,7 @@ MATCH s32 func_8019C244(void) {
         case 5:
             if ((((u32)y >> 0x0F) & 1) != 0) {
                 hi = y >> 0x10;
-                y &= HALF_MASK;
+                y &= 0xFFFF;
                 hi += 1;
                 y |= hi << 0x10;
             }
@@ -37,11 +37,11 @@ MATCH s32 func_8019C244(void) {
         case 7:
             if ((((u32)x >> 0x0F) & 1) == 0) {
                 hi = x >> 0x10;
-                x &= HALF_MASK;
+                x &= 0xFFFF;
                 hi -= 1;
                 x |= hi << 0x10;
             }
             break;
     }
-    return func_8019C344(x, y) & BYTE_MASK;
+    return func_8019C344(x, y) & 0xFF;
 }

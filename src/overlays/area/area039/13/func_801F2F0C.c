@@ -13,6 +13,6 @@ MATCH void func_801F2F0C(void) {
         }
         index += 1;
         item += 1;
-    } while ((index & BYTE_MASK) < 0x20U);
+    } while ((index & 0xFF) < 0x20U);
     Item_VitalAdd(4);
 }

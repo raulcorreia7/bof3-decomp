@@ -19,9 +19,9 @@ MATCH void func_801E12DC(void) {
     work = g_GameState;
     work->turn.damage_flags.value |= 0x2000u;
     if (work->chr.character_id == CHAR_ID_REI) {
-        slot = Battle_AllocEffect(0, 0xB) & BYTE_MASK;
+        slot = Battle_AllocEffect(0, 0xB) & 0xFF;
     } else {
-        slot = Battle_AllocEffect(0, 0xC) & BYTE_MASK;
+        slot = Battle_AllocEffect(0, 0xC) & 0xFF;
     }
     slot_work                          = g_Task;
     g_BattleEffects[slot].target.party = slot_work;

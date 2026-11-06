@@ -45,28 +45,28 @@ NON_MATCHING void func_801E7BA0(void) {
             g_BattlePartyCount       = D_801463CF;
             var_s0                   = 0;
             if (D_801463CF != 0) {
-                var_v0_49 = 0 & BYTE_MASK;
+                var_v0_49 = 0 & 0xFF;
                 do {
                     if (!(*(&D_801EBFA0 + (var_v0_49 * BATTLE_PARTY_STRIDE)) & 0x4000)) {
                         FIELD(u8, (&g_BattleState), 0x9u) = (u8)(FIELD(u8, (&g_BattleState), 0x9u) + 1);
                     }
                     var_s0 += 1;
-                    var_v0_49 = var_s0 & BYTE_MASK;
-                } while ((u32)(var_s0 & BYTE_MASK) < (u8)FIELD(u8, (&g_BattleState), 0x8u));
+                    var_v0_49 = var_s0 & 0xFF;
+                } while ((u32)(var_s0 & 0xFF) < (u8)FIELD(u8, (&g_BattleState), 0x8u));
             }
             D_8014835E = g_BattlePartyCount;
-            temp_v0_76 = g_BattlePartyCount & BYTE_MASK;
+            temp_v0_76 = g_BattlePartyCount & 0xFF;
             D_80148358 = (s16) * (&D_801EB4BF + temp_v0_76);
             var_s0     = 1;
             if (temp_v0_76 > 1U) {
                 var_s1 = g_BattlePartyBattlers;
                 var_s1 = g_BattlePartyBattlers;
                 do {
-                    temp_a0_92 = var_s0 & BYTE_MASK;
+                    temp_a0_92 = var_s0 & 0xFF;
                     var_s0 += 1;
-                    *(u32*)(D_801EC3A4 + ((Battle_AllocEffect(0U, 0x11U) & BYTE_MASK) * 0x78)) =
+                    *(u32*)(D_801EC3A4 + ((Battle_AllocEffect(0U, 0x11U) & 0xFF) * 0x78)) =
                         (u32)&g_BattlePartyBattlers[temp_a0_92];
-                } while ((u32)(var_s0 & BYTE_MASK) < (u8)g_BattlePartyCount);
+                } while ((u32)(var_s0 & 0xFF) < (u8)g_BattlePartyCount);
             }
         }
         var_s1 = SP_PTR(PartyBattler, 0x0);
@@ -130,10 +130,10 @@ NON_MATCHING void func_801E7BA0(void) {
             *(&D_80145FB4 + (temp_a0_409->slot * 0x140)) = D_801EB4D0;
             g_BattlePartyBattlers[temp_a0_409->slot].turn.action_flags.volatile_value = D_801EB4D4;
             do {
-                temp_a0_435 = var_s0 & BYTE_MASK;
+                temp_a0_435 = var_s0 & 0xFF;
                 var_s0 += 1;
                 *(((g_Task)->slot * 0x140) + &D_80145FBC + temp_a0_435) = 0;
-            } while ((u32)(var_s0 & BYTE_MASK) < 8U);
+            } while ((u32)(var_s0 & 0xFF) < 8U);
             func_801E0B64();
         }
         func_800A9BD8((g_Task)->slot);
@@ -150,7 +150,7 @@ NON_MATCHING void func_801E7BA0(void) {
         temp_v0_532 = temp_a1_528 * BATTLE_PARTY_STRIDE;
         *D_8014833C[temp_a1_528 + 0xD] =
             (u8)((s32)(*(D_80145F1A + temp_v0_532) * 0x37) / (s32) * (D_80145F22 + temp_v0_532));
-        Actor_SelectScript(((g_Task)->unk_08 + 4) & BYTE_MASK);
+        Actor_SelectScript(((g_Task)->unk_08 + 4) & 0xFF);
         GFX_StagePalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
         func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
         GFX_UploadPaletteRows();

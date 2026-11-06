@@ -69,7 +69,7 @@ MATCH void func_801EF890(void) {
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
-    if (!(timer & BYTE_MASK)) {
+    if (!(timer & 0xFF)) {
         g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
         g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
         g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;

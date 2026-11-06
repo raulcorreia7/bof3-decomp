@@ -19,7 +19,7 @@ MATCH void func_801E1320(s16 x, s16 y) {
     value = func_801E0B6C();
     index = 0;
     while (1) {
-        if ((value & HALF_MASK) < thresholds.thresholds[index]) {
+        if ((value & 0xFFFF) < thresholds.thresholds[index]) {
             break;
         }
         index++;
@@ -35,7 +35,7 @@ MATCH void func_801E1320(s16 x, s16 y) {
         }
     }
 
-    sprintf((char*)g_UiFormatBuffer, D_801D0C8C, value & HALF_MASK);
+    sprintf((char*)g_UiFormatBuffer, D_801D0C8C, value & 0xFFFF);
     for (i = 0; i < 5; i++) {
         if (g_UiFormatBuffer[i] == ' ') {
             g_UiFormatBuffer[i] = STRING_SPACE;

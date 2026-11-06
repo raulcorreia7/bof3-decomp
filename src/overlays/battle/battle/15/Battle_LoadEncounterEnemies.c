@@ -14,13 +14,13 @@ MATCH void Battle_LoadEncounterEnemies(void) {
     count              = 0;
 
     do {
-        value = entries[slot & BYTE_MASK];
+        value = entries[slot & 0xFF];
         if (value != 0xFFu) {
-            (void)Battle_AddEnemy(slot & BYTE_MASK, count & BYTE_MASK, value);
+            (void)Battle_AddEnemy(slot & 0xFF, count & 0xFF, value);
             count++;
         }
         slot++;
-    } while ((slot & BYTE_MASK) < 8u);
+    } while ((slot & 0xFF) < 8u);
 
     g_BattleLivingEnemyCount = g_BattleEnemyCount;
 }

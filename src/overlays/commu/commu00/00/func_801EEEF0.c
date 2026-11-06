@@ -19,7 +19,7 @@ NON_MATCHING void func_801EEEF0(u32 row_index) {
     /* FAKE: unused frame, 16 bytes. */
     STACK_PADS(u32, 4);
 
-    tmp2 = row_index & BYTE_MASK;
+    tmp2 = row_index & 0xFF;
     tmp0 = tmp2 * 4;
     if (tmp0 < D_801455C2) {
         val4 = tmp2 < 0x14U;

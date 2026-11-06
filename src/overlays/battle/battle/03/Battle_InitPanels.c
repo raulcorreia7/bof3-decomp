@@ -11,16 +11,16 @@ MATCH void Battle_InitPanels(void) {
     if (g_BattleSurprise >= 2u) {
         D_8014837B = 2u;
         do {
-            index                      = i & BYTE_MASK;
+            index                      = i & 0xFF;
             g_BattlePanelWidths[index] = 0;
             i += 1;
-        } while ((i & BYTE_MASK) < 7u);
+        } while ((i & 0xFF) < 7u);
     } else {
         do {
-            index                      = i & BYTE_MASK;
+            index                      = i & 0xFF;
             g_BattlePanelWidths[index] = 0x10;
             i += 1;
-        } while ((i & BYTE_MASK) < 7u);
+        } while ((i & 0xFF) < 7u);
     }
     /* Retail keeps the sub-step byte's address in a register for the increment;
      * a direct `+= 1` repeats lui. */

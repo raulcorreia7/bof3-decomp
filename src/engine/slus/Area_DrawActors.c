@@ -17,25 +17,25 @@ MATCH void Area_DrawActors(void) {
         if ((count - 1) > 0) {
             do {
                 j     = count - 1;
-                index = j & BYTE_MASK;
-                if (index >= (i & BYTE_MASK) + 1) {
-                    start = (i & BYTE_MASK) + 1;
+                index = j & 0xFF;
+                if (index >= (i & 0xFF) + 1) {
+                    start = (i & 0xFF) + 1;
                     do {
                         if (COORD_INT(D_80148214[index]->pos.z) < COORD_INT(D_80148214[index - 1]->pos.z)) {
-                            Area_SwapActors(index, (j - 1) & BYTE_MASK);
+                            Area_SwapActors(index, (j - 1) & 0xFF);
                         }
                         j--;
-                        index = j & BYTE_MASK;
+                        index = j & 0xFF;
                     } while (index >= start);
                 }
                 i++;
                 count = D_8014832C;
-            } while ((i & BYTE_MASK) < (count - 1));
+            } while ((i & 0xFF) < (count - 1));
         }
         if (D_8014832C != 0) {
             i = 0;
             do {
-                TASK_SET(D_80148214[i & BYTE_MASK]);
+                TASK_SET(D_80148214[i & 0xFF]);
                 i++;
                 Area_DrawObjectSprite();
             } while ((u8)i < D_8014832C);

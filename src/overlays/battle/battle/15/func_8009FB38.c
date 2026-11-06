@@ -28,7 +28,7 @@ NON_MATCHING void func_8009FB38(void) {
             src_base     = stat_base;
             active_count = (volatile u8*)(selected_battler_address - 0xA4);
             do {
-                row_offset    = (row_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
+                row_offset    = (row_index & 0xFF) * BATTLE_PARTY_STRIDE;
                 src           = (Character*)((D_80145FCC[row_offset] * PARTY_RECORD_STRIDE) + ((u8*)src_base));
                 dst_row       = dst_base + row_offset;
                 dst_row[0x0E] = src->equip.weapon;
@@ -39,13 +39,13 @@ NON_MATCHING void func_8009FB38(void) {
                 dst_row[0x13] = src->equip.accessories[1];
                 memcpy(dst_row + 0x3C, &src->stats.max_hp, 0x20);
                 row_index++;
-            } while (((u32)(row_index & BYTE_MASK)) < (*active_count));
+            } while (((u32)(row_index & 0xFF)) < (*active_count));
         }
         func_800AAA74();
         active_count = &g_BattlePartyCount;
         ORDER_LOCK_BEGIN
-            for (row_index = 0; ((u32)(row_index & BYTE_MASK)) < (*active_count); row_index++) {
-                row_offset = (row_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
+            for (row_index = 0; ((u32)(row_index & 0xFF)) < (*active_count); row_index++) {
+                row_offset = (row_index & 0xFF) * BATTLE_PARTY_STRIDE;
                 memcpy(&D_80145F04[row_offset + 0x1C], &D_80145F04[row_offset + 0x3C], 0x20);
             }
             row_index = 0;
@@ -55,7 +55,7 @@ NON_MATCHING void func_8009FB38(void) {
             do {
                 func_800A9BD8(row_index);
                 row_index++;
-            } while (((u32)(row_index & BYTE_MASK)) < g_BattlePartyCount);
+            } while (((u32)(row_index & 0xFF)) < g_BattlePartyCount);
         }
     }
 }

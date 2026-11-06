@@ -18,7 +18,7 @@ MATCH void func_801EEC5C(void) {
     u32           offset;
 
     func_800AFD9C();
-    offset                                   = (Battle_AllocEffect(1, 0x19) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
+    offset                                   = (Battle_AllocEffect(1, 0x19) & 0xFF) * BATTLE_EFFECT_STRIDE;
     FIELD(PartyBattler*, D_801EC3A4, offset) = g_Task;
     FIELD(u8, D_801EC338, offset)            = ((PartyBattler*)D_8014637C)->facing;
     scroll_x                                 = g_AreaScrollTargetX;

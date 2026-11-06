@@ -13,7 +13,7 @@ MATCH s32 Party_AddMember(u8 char_id) {
     u8  i;
     u8  j;
 
-    char_rec                      = g_CharSlot[char_id & BYTE_MASK];
+    char_rec                      = g_CharSlot[char_id & 0xFF];
     g_Characters[char_rec].unk_07 = g_Characters[char_rec].unk_07 | 0x3;
     i                             = 0;
     if (g_PartySize < PARTY_SLOT_COUNT) {
@@ -23,7 +23,7 @@ MATCH s32 Party_AddMember(u8 char_id) {
         return 1;
     }
     do {
-        field_slot = i & BYTE_MASK;
+        field_slot = i & 0xFF;
         field_id   = D_80144F5A[field_slot];
         field_rec  = g_CharSlot[field_id];
         if (!(g_Characters[field_rec].unk_07 & 0x2)) {

@@ -113,7 +113,7 @@ MATCH void func_801F0034(void) {
     work->timer = timer;
     work->unk_2E.half += work->unk_0C;
     work->unk_30.half += work->unk_10;
-    if (!(timer & BYTE_MASK)) {
+    if (!(timer & 0xFF)) {
         D_801EB4E0->unk_0B -= 1;
         func_801E5988();
     }

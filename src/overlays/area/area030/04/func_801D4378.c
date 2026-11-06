@@ -25,7 +25,7 @@ MATCH void func_801D4378(void) {
         func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         mask = 0;
         if (D_80145E93[0] >= 3) {
-            mask = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;
+            mask = (1 << FISHING_STATE->cue_index_06) & 0xFF;
         }
         func_801D7C10(0x58, 0x28, mask);
     }

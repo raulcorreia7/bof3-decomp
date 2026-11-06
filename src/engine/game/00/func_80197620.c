@@ -16,7 +16,7 @@ MATCH void func_80197620(void) {
     /* FAKE: keep the mode argument in the call delay slot. */
     ORDER_LOCK(UI_SetMode(3));
     func_80198C38(1u);
-    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeFxVoice(&sep_index, &seq_index) & BYTE_MASK)) {
+    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeFxVoice(&sep_index, &seq_index) & 0xFF)) {
         SND_StartDecrescendo(sep_index, seq_index, 0x14, 0x10);
     }
     {

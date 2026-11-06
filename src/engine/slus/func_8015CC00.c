@@ -8,7 +8,7 @@ MATCH s32 func_8015CC00(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z) {
     s32 actor_slot;
     u32 offset;
 
-    actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
+    actor_slot = Actor_FindFreeSlot() & 0xFF;
     if (actor_slot != GAME_NONE) {
         offset                                = actor_slot * 0x74u;
         g_ActorSlots[actor_slot].header.flags = 1;

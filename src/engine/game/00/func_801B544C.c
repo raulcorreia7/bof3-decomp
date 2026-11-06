@@ -22,7 +22,7 @@ MATCH bool func_801B544C(void) {
             found = true;
         }
     }
-    if (!(found & BYTE_MASK)) {
+    if (!(found & 0xFF)) {
         if (rand() & 1) {
             g_GameState->mode_12B.u8_value = 9;
             Actor_RequestScript(g_Task->direction_08);

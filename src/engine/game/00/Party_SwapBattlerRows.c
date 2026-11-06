@@ -10,12 +10,12 @@ NON_MATCHING void Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state) 
     u8  val_b;
     s32 val_w;
 
-    off_a                                  = (slot_a & BYTE_MASK) * BATTLE_PARTY_STRIDE;
-    off_b                                  = (slot_b & BYTE_MASK) * BATTLE_PARTY_STRIDE;
+    off_a                                  = (slot_a & 0xFF) * BATTLE_PARTY_STRIDE;
+    off_b                                  = (slot_b & 0xFF) * BATTLE_PARTY_STRIDE;
     val_b                                  = FIELD(volatile u8, &D_80145F09, off_a);
     FIELD(volatile u8, &D_80145F09, off_a) = FIELD(volatile u8, &D_80145F09, off_b);
     FIELD(volatile u8, &D_80145F09, off_b) = val_b;
-    if (!(skip_state & BYTE_MASK)) {
+    if (!(skip_state & 0xFF)) {
         val_b = FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_a);
         FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_a) =
             FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_b);

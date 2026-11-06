@@ -40,7 +40,7 @@ MATCH void func_801F6E90(void) {
 }
 
 MATCH void func_801F6F14(void) {
-    if (!(func_801F85D8() & BYTE_MASK)) {
+    if (!(func_801F85D8() & 0xFF)) {
         Actor_Clear();
     }
 }
@@ -129,7 +129,7 @@ INCLUDE_ASM(func_801F7408);
 INCLUDE_ASM(func_801F7480);
 
 MATCH void func_801F75C0(void) {
-    if (!(func_801F9EFC() & BYTE_MASK)) {
+    if (!(func_801F9EFC() & 0xFF)) {
         Actor_Clear();
     }
 }
@@ -163,7 +163,7 @@ INCLUDE_ASM(func_801F7A30);
 INCLUDE_ASM(func_801F7AB0);
 
 MATCH void func_801F7B68(void) {
-    if (!(func_801F85D8() & BYTE_MASK)) {
+    if (!(func_801F85D8() & 0xFF)) {
         Actor_Clear();
     }
 }
@@ -331,7 +331,7 @@ MATCH void func_801F9DA8(void) {
         *row = 0;
         index += 1;
         row += 0x20;
-    } while ((index & BYTE_MASK) < 0x40U);
+    } while ((index & 0xFF) < 0x40U);
 }
 
 MATCH u8* func_801F9DD4(void) {

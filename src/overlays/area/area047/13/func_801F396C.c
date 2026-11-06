@@ -4,7 +4,7 @@ MATCH void func_801F396C(void) {
     s32        actor_slot;
     ActorSlot* slot;
 
-    actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
+    actor_slot = Actor_FindFreeSlot() & 0xFF;
     if (actor_slot == GAME_NONE) {
         return;
     }

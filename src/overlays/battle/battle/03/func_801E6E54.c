@@ -9,7 +9,7 @@ MATCH void func_801E6E54(void) {
 
     g_Task->unk_0B = 0;
     slot           = func_801E8FA8();
-    index          = slot & BYTE_MASK;
+    index          = slot & 0xFF;
     if ((index != GAME_NONE) && (s_BattleBattlerStepIds[index] != 0xFF)) {
         g_Task->unk_0B    = slot;
         g_Task->unk_29    = 2;

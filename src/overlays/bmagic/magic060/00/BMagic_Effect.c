@@ -18,7 +18,7 @@ MATCH void func_801EED68(void) {
     PartyBattler* work;
 
     if (g_Task->unk_0B == 2) {
-        slot                               = Battle_AllocEffect(1, 0x12) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, 0x12) & 0xFF;
         work                               = g_Task;
         g_BattleEffects[slot].header.mode  = 2;
         g_BattleEffects[slot].target.party = work;

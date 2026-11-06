@@ -10,7 +10,7 @@ MATCH void func_801E2024(void) {
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {
-        if ((func_800A8F58() & BYTE_MASK) == 0) {
+        if ((func_800A8F58() & 0xFF) == 0) {
             chance = g_GameState->chr.stats.critical_chance;
             if ((rand() % 100) < chance) {
                 gate = &g_BattleState;

@@ -337,7 +337,7 @@ MATCH void func_801F378C(void) {
     Actor* slot;
     u16    counter;
 
-    if ((func_801C29A0(8) & BYTE_MASK) == 0) {
+    if ((func_801C29A0(8) & 0xFF) == 0) {
         counter              = (g_GameState->unk_122 - 2);
         slot                 = SP_REF(Actor*, 0x44);
         g_GameState->unk_122 = counter;

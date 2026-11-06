@@ -58,8 +58,8 @@ MATCH void Area_DrawCellLayer(s32 layer) {
                 record = (u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_region_24 * 4 + cell * 4;
                 header = *(u32*)(record - 4);
                 end    = record + ((header >> 16) * 4 - 4);
-                cell_x = (header >> 8) & BYTE_MASK;
-                cell_y = header & BYTE_MASK;
+                cell_x = (header >> 8) & 0xFF;
+                cell_y = header & 0xFF;
                 while (record != end) {
                     D_8017F668[record[3]](record, cell_x, cell_y);
                     record += record[2] * 4;

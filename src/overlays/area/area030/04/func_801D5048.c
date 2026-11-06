@@ -26,13 +26,13 @@ MATCH void func_801D5048(void) {
         func_801D9534(FISHING_PANEL_X, (FISHING_PANEL_Y - (FISHING_STATE->step_timer_09 * FISHING_FRAME_STEP)) & 0xFFFE,
                       FISHING_PANEL_WIDTH, height, 0);
         mask = 0;
-        func_801D7C10(((FISHING_STATE->step_timer_09 * FISHING_CURSOR_STEP) + FISHING_CURSOR_ORIGIN) & HALF_MASK,
+        func_801D7C10(((FISHING_STATE->step_timer_09 * FISHING_CURSOR_STEP) + FISHING_CURSOR_ORIGIN) & 0xFFFF,
                       FISHING_CURSOR_Y, 0);
         goto draw; /* the shared tail draws the row once, from either arm */
     }
     func_801D9534(FISHING_PANEL_X, FISHING_PANEL_Y, FISHING_PANEL_WIDTH, height, 0);
     if (D_80145E93[0] >= 3) {
-        mask = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;
+        mask = (1 << FISHING_STATE->cue_index_06) & 0xFF;
     } else {
         mask = 0;
     }
@@ -42,8 +42,8 @@ draw:
     func_801E0ED0((-(FISHING_STATE->step_timer_09 * 0x500000) >> 0x10), FISHING_BAR_Y);
     if (g_FishBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
         func_801E0F4C(FISHING_STATE->step_timer_09 * 0x30 + FISHING_ICON_X, FISHING_ICON_Y,
-                      FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK);
-        func_801E1004(FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK,
+                      FISHING_STATE->bounce_3C.half.key_3E & 0xFF);
+        func_801E1004(FISHING_STATE->bounce_3C.half.key_3E & 0xFF,
                       g_FishBestCatch[FISHING_STATE->bounce_3C.half.key_3E], FISHING_STATE->step_timer_09);
     } else {
         func_801E0F4C(FISHING_STATE->step_timer_09 * 0x30 + FISHING_ICON_X, FISHING_ICON_Y, 0xFF);

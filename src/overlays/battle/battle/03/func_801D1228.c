@@ -24,11 +24,11 @@ NON_MATCHING void func_801D1228(void) {
     g_BattleLivingPartyCount = 0;
     if (g_BattlePartyCount != 0) {
         do {
-            if (!(Battle_SlotIsBlocked(slot & BYTE_MASK) & BYTE_MASK)) {
+            if (!(Battle_SlotIsBlocked(slot & 0xFF) & 0xFF)) {
                 g_BattleLivingPartyCount += 1;
             }
             slot += 1;
-        } while ((u32)(slot & BYTE_MASK) < (u8)g_BattlePartyCount);
+        } while ((u32)(slot & 0xFF) < (u8)g_BattlePartyCount);
     }
     work_row               = (u8*)g_BattlePartyBattlers;
     *g_BattlePanelWidths   = 8;
@@ -76,7 +76,7 @@ NON_MATCHING void func_801D1228(void) {
             }
             *(u16*)(D_80145F10 + row_offset)                     = flags;
             count                                                = 0;
-            index                                                = slot & BYTE_MASK;
+            index                                                = slot & 0xFF;
             src                                                  = work_row + 0x90 + index * BATTLE_PARTY_STRIDE;
             g_BattlePartyBattlers[index].turn.damage_flags.value = 0;
             g_BattlePartyBattlers[index].turn.action_flags.volatile_value = 0;
@@ -90,11 +90,11 @@ NON_MATCHING void func_801D1228(void) {
             do {
                 *(work_row + 0x12C + index * 0x140 + count) = 0;
                 count += 1;
-            } while ((u32)(count & BYTE_MASK) < 8U);
+            } while ((u32)(count & 0xFF) < 8U);
         }
         slot += 1;
-        index = slot & BYTE_MASK;
-    } while ((u32)(slot & BYTE_MASK) < 3U);
+        index = slot & 0xFF;
+    } while ((u32)(slot & 0xFF) < 3U);
     slot = 0;
     func_800AAA74();
     index = 0;
@@ -107,16 +107,16 @@ NON_MATCHING void func_801D1228(void) {
             *(BattleStatBlockPart*)(dest + 0x10) = *(BattleStatBlockPart*)(src + 0x10);
         }
         slot += 1;
-        index = slot & BYTE_MASK;
-    } while ((u32)(slot & BYTE_MASK) < 3U);
+        index = slot & 0xFF;
+    } while ((u32)(slot & 0xFF) < 3U);
     slot  = 0;
     index = 0;
     do {
         slot += 1;
         row_offset                                   = index * 2;
         MEM_PTR(u16, 0x80039600u)[0xF0 + row_offset] = MEM_PTR(u16, 0x80035600u)[0xF0 + row_offset];
-        index                                        = slot & BYTE_MASK;
-    } while ((u32)(slot & BYTE_MASK) < 0x10U);
+        index                                        = slot & 0xFF;
+    } while ((u32)(slot & 0xFF) < 0x10U);
     GFX_CopyPalette(0x1A);
     GFX_CopyPalette(0x1B);
     slot = 0;
@@ -127,24 +127,24 @@ NON_MATCHING void func_801D1228(void) {
                 g_Task = g_BattlePartyBattlers + row_offset;
                 goto found; /* joins the shared work-pointer exit */
             }
-        } else if (!(Battle_SlotIsBlocked((u32)slot) & BYTE_MASK) && (g_BattleEncounter != 37)) {
+        } else if (!(Battle_SlotIsBlocked((u32)slot) & 0xFF) && (g_BattleEncounter != 37)) {
             g_Task = (((((s32)(((s32)slot * 8) + slot) * 4) - slot) * 8) + g_BattleEnemies);
         found: /* the live battler's work pointer */
             GFX_UploadPaletteRows();
         }
         slot += 1;
-    } while ((u32)(slot & BYTE_MASK) < 0xBU);
+    } while ((u32)(slot & 0xFF) < 0xBU);
     slot = 0;
     if (g_BattleEncounter == 0) {
         EMI_LoaderStreamInitSlot(g_GameAreaId + EMI_SLOT_ENEMY);
         slot = 0;
     }
-    index = slot & BYTE_MASK;
+    index = slot & 0xFF;
     do {
         *(s32*)(D_80146364 + index) = 0;
         slot += 1;
-        index = slot & BYTE_MASK;
-    } while ((u32)(slot & BYTE_MASK) < 0x10U);
+        index = slot & 0xFF;
+    } while ((u32)(slot & 0xFF) < 0x10U);
     if (g_BattleEncounter != 0) {
         g_BossBattleEventHook(6U);
     }

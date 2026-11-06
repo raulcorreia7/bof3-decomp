@@ -26,30 +26,30 @@ loop:
         goto loop;
 done:
 
-    for (index = 0; index < (count & BYTE_MASK); index++)
+    for (index = 0; index < (count & 0xFF); index++)
         cells[index] = ((u8*)&D_1F800000)[cells[index]];
 
-    if ((count & BYTE_MASK) == 2 && cells[0] == 0x70 && cells[1] == cells[0])
+    if ((count & 0xFF) == 2 && cells[0] == 0x70 && cells[1] == cells[0])
         return 0x70;
 
-    for (index = 0; index < (count & BYTE_MASK); index++) {
+    for (index = 0; index < (count & 0xFF); index++) {
         if (cells[index] == 0x70)
             cells[index] = 0xFF;
     }
 
-    for (index = 0; index < (count & BYTE_MASK); index++) {
+    for (index = 0; index < (count & 0xFF); index++) {
         if (cells[index] == GAME_NONE)
             return 0x10;
     }
 
-    for (index = 0; index < (count & BYTE_MASK); index++) {
+    for (index = 0; index < (count & 0xFF); index++) {
         if (cells[index] != 0xB0)
             break;
     }
-    if (index == (count & BYTE_MASK))
+    if (index == (count & 0xFF))
         return 0xB0;
 
-    if ((count & BYTE_MASK) == 2) {
+    if ((count & 0xFF) == 2) {
         if (cells[0] == 0xA0)
             return 0x10;
         if (cells[1] == 0xA0)
@@ -68,7 +68,7 @@ done:
                 return cells[0];
             return 0x10;
         }
-    } else if ((count & BYTE_MASK) == 3) {
+    } else if ((count & 0xFF) == 3) {
         if (cells[0] == 0xA3 || cells[1] == 0xA3 || cells[2] == 0xA3)
             return 0x10;
         if (cells[0] == 0xA2 || cells[1] == 0xA2 || cells[2] == 0xA2) {
@@ -85,18 +85,18 @@ done:
             return 0x10;
         }
     } else {
-        for (index = 0; index < (count & BYTE_MASK); index++) {
+        for (index = 0; index < (count & 0xFF); index++) {
             if ((cells[index] & 0xF0) == 0xA0)
                 return 0x10;
         }
     }
 
-    for (index = 0; index < (count & BYTE_MASK); index++) {
+    for (index = 0; index < (count & 0xFF); index++) {
         if ((cells[index] & 0xF0) == 0x20) {
             inner = index + 1;
-            if (inner >= (count & BYTE_MASK))
+            if (inner >= (count & 0xFF))
                 return 0;
-            for (; inner < (count & BYTE_MASK); inner++) {
+            for (; inner < (count & 0xFF); inner++) {
                 if ((cells[inner] & 0xF0) == 0x20 && cells[index] != cells[inner])
                     return 0x20;
             }

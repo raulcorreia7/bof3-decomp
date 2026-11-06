@@ -98,16 +98,16 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                     kind                = g_CharSlot[*order];
                     feed                = D_80145F04;
                     dst                 = feed + off;
-                    koff                = (kind & BYTE_MASK) * PARTY_RECORD_STRIDE;
+                    koff                = (kind & 0xFF) * PARTY_RECORD_STRIDE;
                     rec                 = (Character*)(koff + (u32)base);
                     D_80145FCC[off]     = kind;
                     *(Character*)dst    = *rec;
                     if (!(g_Task->active_flags & 1)) {
-                        func_801C1254(*order, i & BYTE_MASK);
+                        func_801C1254(*order, i & 0xFF);
                         MATCH_FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */
                         order++;
                     } else {
-                        func_801C1254(*order, i & BYTE_MASK);
+                        func_801C1254(*order, i & 0xFF);
                         order++;
                         GFX_FreePaletteFadeTarget(g_Task);
                         g_Task->unk_27 = (g_Task->unk_05 + 0x78);
@@ -128,9 +128,9 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             return;
         }
         if (!(g_GameFlags & 0x800)) {
-            func_801C0758(x, y, z & BYTE_MASK);
+            func_801C0758(x, y, z & 0xFF);
         } else {
-            func_801C090C(x, y, z & BYTE_MASK);
+            func_801C090C(x, y, z & 0xFF);
         }
         g_AreaScrollTargetX = D_80145EC4;
         g_AreaScrollTargetY = D_80145EC8;

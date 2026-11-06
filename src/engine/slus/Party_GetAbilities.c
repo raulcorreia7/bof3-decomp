@@ -7,11 +7,11 @@ MATCH u8* Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode) {
     Character* record;
     u32        slot;
 
-    if ((mode & BYTE_MASK) == 0) {
-        slot   = g_CharSlot[D_80144F5A[formation_index & BYTE_MASK]];
+    if ((mode & 0xFF) == 0) {
+        slot   = g_CharSlot[D_80144F5A[formation_index & 0xFF]];
         record = &g_Characters[slot];
     } else {
-        record = (Character*)(D_80145F04 + (formation_index & BYTE_MASK) * 0x140);
+        record = (Character*)(D_80145F04 + (formation_index & 0xFF) * 0x140);
     }
     switch ((u8)ability_type) {
         default:

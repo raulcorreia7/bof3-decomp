@@ -2,7 +2,7 @@
 
 MATCH s32 func_8019D20C(s16 map_x, s16 map_y) {
     s32 value                    = Area_GetCellCode(map_x, map_y);
-    s32 low                      = value & BYTE_MASK;
+    s32 low                      = value & 0xFF;
     /* FAKE: result pinned to v0; retail keeps the return value live. */
     MATCH_REG(s32, result, "v0") = 0;
 

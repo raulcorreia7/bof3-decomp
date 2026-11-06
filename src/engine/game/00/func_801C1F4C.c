@@ -9,7 +9,7 @@ MATCH void func_801C1F4C(s32 key) {
     s32 inner;
 
     outer = 0;
-    key &= BYTE_MASK;
+    key &= 0xFF;
     counter = &D_801448D8;
     step    = 0;
     do {
@@ -23,7 +23,7 @@ MATCH void func_801C1F4C(s32 key) {
                 }
                 inner += 8;
             } while (inner < 480);
-            if (!(total & BYTE_MASK)) {
+            if (!(total & 0xFF)) {
                 *(s32*)(counter + 0xED4) = *(s32*)((u8*)&D_801457AC + step) + 1;
             }
         }

@@ -64,13 +64,13 @@ MATCH void func_8015920C(void) {
     }
 
     if ((g_MenuCurrentPanel->flags & 1) == 0) {
-        u32 width  = (g_MenuCurrentPanel->unk_10 >> 4) & BYTE_MASK;
-        u32 height = (g_MenuCurrentPanel->unk_12 >> 4) & BYTE_MASK;
+        u32 width  = (g_MenuCurrentPanel->unk_10 >> 4) & 0xFF;
+        u32 height = (g_MenuCurrentPanel->unk_12 >> 4) & 0xFF;
 
         func_80159FA0((s16)g_MenuCurrentPanel->x >> 4, (s16)g_MenuCurrentPanel->y >> 4, width, height);
     }
 
-    if ((advanced & BYTE_MASK) == 2) {
+    if ((advanced & 0xFF) == 2) {
         g_MenuCurrentPanel->state += 1;
     }
 }

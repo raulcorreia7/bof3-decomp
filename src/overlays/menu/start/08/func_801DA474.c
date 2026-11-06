@@ -54,7 +54,7 @@ NON_MATCHING void func_801DA474(void) {
     }
     if (D_80148658 == 0) {
         val2 = tmp4 - 1;
-        if (((tmp4 & BYTE_MASK) - 1) < D_80148659) {
+        if (((tmp4 & 0xFF) - 1) < D_80148659) {
             goto block_12; /* retail branch */
         }
     } else {
@@ -78,7 +78,7 @@ NON_MATCHING void func_801DA474(void) {
         tmp3       = (u8)D_80148659 + 1;
         D_80148659 = tmp3;
         if (D_80148658 == 0) {
-            if (((tmp4 & BYTE_MASK) - 1) < tmp3) {
+            if (((tmp4 & 0xFF) - 1) < tmp3) {
                 goto block_23; /* retail branch */
             }
         } else if ((g_MenuPanelTasks[12].unk_0A - 1) < tmp3) {
@@ -101,7 +101,7 @@ NON_MATCHING void func_801DA474(void) {
         tmp5       = func_801DB04C();
         D_801ED69C = tmp5;
         val0       = 0x107;
-        if ((tmp5 & BYTE_MASK) == GAME_NONE) {
+        if ((tmp5 & 0xFF) == GAME_NONE) {
             val0 = 0x103;
         }
         SND_PlayCue(val0);

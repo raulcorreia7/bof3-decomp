@@ -9,9 +9,9 @@ MATCH void func_801D6D6C(s32 strip_x, s32 strip_y) {
     y = strip_y;
     UI_DrawWindow((x + 4), (y + 4), 82, 72, 0, D_80144952);
     Menu_DrawPanelFrame(x, y, 9, 8);
-    for (i = 0; (i & BYTE_MASK) < 3U; i++) {
+    for (i = 0; (i & 0xFF) < 3U; i++) {
         /* The inner u16 cast keeps the sum grouped as the retail code does. */
-        WinDrawCueText(x + 28, (u16)((u8)i * 20 + 11 + y), (i & BYTE_MASK) + 0xD2);
+        WinDrawCueText(x + 28, (u16)((u8)i * 20 + 11 + y), (i & 0xFF) + 0xD2);
     }
-    Menu_DrawCursorSprite((x + 0x1C) & HALF_MASK, (y + 0xD + D_801E60F0 * 0x14) & HALF_MASK, 0);
+    Menu_DrawCursorSprite((x + 0x1C) & 0xFFFF, (y + 0xD + D_801E60F0 * 0x14) & 0xFFFF, 0);
 }

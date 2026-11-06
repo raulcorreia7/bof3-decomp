@@ -14,7 +14,7 @@ NON_MATCHING void func_801E206C(void) {
     func_801E26A8(0x1C, 0x40);
     func_801E2668(D_80148655, 0x70, 0x26);
     if ((s8)D_80148655 != 9) {
-        WinDrawCueText(28, 19, ((s8)D_80148655 + 0xBC) & HALF_MASK);
+        WinDrawCueText(28, 19, ((s8)D_80148655 + 0xBC) & 0xFFFF);
     } else if (D_80144956 != 0) {
         WinDrawCueText(28, 19, 0xCA);
     } else {

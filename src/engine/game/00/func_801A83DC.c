@@ -28,7 +28,7 @@ MATCH void func_801A83DC(void) {
             return;
         }
         case 1:
-            if ((SND_IsXAIdle() & BYTE_MASK) && (g_GameStateIndex != GAME_REQUEST_MESSAGE)) {
+            if ((SND_IsXAIdle() & 0xFF) && (g_GameStateIndex != GAME_REQUEST_MESSAGE)) {
                 if (g_SndBgmId != GAME_NONE) {
                     SND_ResumeBgm(g_SndBgmId);
                 }

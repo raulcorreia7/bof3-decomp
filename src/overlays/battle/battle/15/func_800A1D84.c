@@ -64,7 +64,7 @@ NON_MATCHING void func_800A1D84(void) {
                 dest[0x13]                   = cell[0x13];
                 *(BattleBlock*)(dest + 0x3C) = *(BattleBlock*)(cell + 0x1C);
                 *(BattleBlock*)(dest + 0x4C) = *(BattleBlock*)(cell + 0x2C);
-            } while ((u32)(i & BYTE_MASK) < (u8)g_BattlePartyCount);
+            } while ((u32)(i & 0xFF) < (u8)g_BattlePartyCount);
         }
         i = 0;
         func_800AAA74();
@@ -75,15 +75,15 @@ NON_MATCHING void func_800A1D84(void) {
                 *(BattleBlock*)(dst + 0x00) = *(BattleBlock*)(src + 0x00);
                 *(BattleBlock*)(dst + 0x10) = *(BattleBlock*)(src + 0x10);
                 i += 1;
-            } while ((u32)(i & BYTE_MASK) < (u8)g_BattlePartyCount);
+            } while ((u32)(i & 0xFF) < (u8)g_BattlePartyCount);
         }
         i = 0;
         func_800A4458();
         if (g_BattlePartyCount != 0) {
             do {
-                func_800A9BD8(i & BYTE_MASK);
+                func_800A9BD8(i & 0xFF);
                 i += 1;
-            } while ((u32)(i & BYTE_MASK) < (u8)g_BattlePartyCount);
+            } while ((u32)(i & 0xFF) < (u8)g_BattlePartyCount);
         }
         g_BattleTargetRecord->hp_change = (s16) - (s16) * (D_80145F20 + (*active * BATTLE_PARTY_STRIDE));
     }

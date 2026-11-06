@@ -11,9 +11,9 @@ NON_MATCHING void Battle_AddEnemy(s32 entry_index, s32 enemy_index, s32 entry_va
     u32*         words_out;
     u32*         words_end;
 
-    source = func_800AC754(entry_index & BYTE_MASK);
+    source = func_800AC754(entry_index & 0xFF);
     if (source != NULL) {
-        words_out = (u32*)&g_BattleEnemyBattlers[enemy_index & BYTE_MASK];
+        words_out = (u32*)&g_BattleEnemyBattlers[enemy_index & 0xFF];
         words_in  = (u32*)source;
         words_end = (u32*)(source + 0x70);
         do {
@@ -22,7 +22,7 @@ NON_MATCHING void Battle_AddEnemy(s32 entry_index, s32 enemy_index, s32 entry_va
             words_out += 4;
         } while (words_in != words_end);
         *words_out = *words_in;
-        TASK_SET(&g_BattleEnemyBattlers[enemy_index & BYTE_MASK]);
+        TASK_SET(&g_BattleEnemyBattlers[enemy_index & 0xFF]);
         ((EnemyBattler*)g_Task)->header.mode = 0;
         ((EnemyBattler*)g_Task)->unk_04      = 0;
         ((EnemyBattler*)g_Task)->unk_03      = 0;
@@ -44,9 +44,9 @@ NON_MATCHING void Battle_AddEnemy(s32 entry_index, s32 enemy_index, s32 entry_va
         ((EnemyBattler*)g_Task)->unk_2B      = 0;
         ((EnemyBattler*)g_Task)->unk_08      = g_BattleScrollDir ^ 2;
         ((EnemyBattler*)g_Task)->base.unk_0C = 0;
-        Battle_LoadEnemyBattler(enemy_index & BYTE_MASK, entry_value & BYTE_MASK);
-        func_800AD0A8(enemy_index & BYTE_MASK, entry_value & BYTE_MASK);
-        FIELD(u8, &D_801EB6AF, (enemy_index & BYTE_MASK) * 0x118) = 0;
+        Battle_LoadEnemyBattler(enemy_index & 0xFF, entry_value & 0xFF);
+        func_800AD0A8(enemy_index & 0xFF, entry_value & 0xFF);
+        FIELD(u8, &D_801EB6AF, (enemy_index & 0xFF) * 0x118) = 0;
         *source |= 0x40;
         g_BattleEnemyCount += 1;
     }

@@ -17,7 +17,7 @@ MATCH u16 func_801AC8F0(ScriptState* state, u8 wanted_id, u8* base) {
 loop:
     record = base + (u16)offset;
     opcode = record[0];
-    if ((opcode & BYTE_MASK) == 0xF8) {
+    if ((opcode & 0xFF) == 0xF8) {
         if (record[1] == 7) {
             offset += 5;
         } else {
@@ -30,7 +30,7 @@ loop:
             offset += 4;
         }
     } else {
-        offset += s_ScriptOpcodeOffsets[opcode & BYTE_MASK];
+        offset += s_ScriptOpcodeOffsets[opcode & 0xFF];
     }
     if (base[(u16)offset] != 0x0A || base[(u16)offset + 1] != wanted_id) {
         /* not the wanted id pair yet: keep seeking */

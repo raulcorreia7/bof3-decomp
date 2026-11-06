@@ -10,7 +10,7 @@ MATCH void Menu_DrawPanelFrame(s16 x, s16 y, s32 width, s32 height) {
     w = width;
     h = height;
 
-    GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & 0xFFFF);
 
     for (i = 0; i < w; i++) {
         px = x + ((i + 1) * 8);

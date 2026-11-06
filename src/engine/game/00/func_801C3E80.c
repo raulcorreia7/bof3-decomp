@@ -5,28 +5,28 @@ MATCH s32 func_801C3E80(s32 pos_x, s32 pos_y, s32 probe_flag) {
 
     i = 0;
     while (s_AreaProbeCellCodes[i] != 0xFF) {
-        if ((func_801C472C(pos_x, pos_y, probe_flag, s_AreaProbeCellCodes[i], 1) & BYTE_MASK) == 0) {
+        if ((func_801C472C(pos_x, pos_y, probe_flag, s_AreaProbeCellCodes[i], 1) & 0xFF) == 0) {
             return 1;
         }
         i++;
     }
-    if ((func_801C472C(pos_x, pos_y, probe_flag, 0x10, 0) & BYTE_MASK) == 0) {
+    if ((func_801C472C(pos_x, pos_y, probe_flag, 0x10, 0) & 0xFF) == 0) {
         return 1;
     }
     if ((g_GameState->flags_12C.u8_value & 1) == 0) {
-        if ((func_801C472C(pos_x, pos_y, probe_flag, 0x11, 0) & BYTE_MASK) == 0) {
+        if ((func_801C472C(pos_x, pos_y, probe_flag, 0x11, 0) & 0xFF) == 0) {
             return 1;
         }
     }
-    if ((func_801C472C(pos_x, pos_y, probe_flag, 0x20, 0) & BYTE_MASK) == 0) {
-        if ((func_801C472C(pos_x, pos_y, probe_flag, 0x21, 0) & BYTE_MASK) == 0) {
+    if ((func_801C472C(pos_x, pos_y, probe_flag, 0x20, 0) & 0xFF) == 0) {
+        if ((func_801C472C(pos_x, pos_y, probe_flag, 0x21, 0) & 0xFF) == 0) {
             return 1;
         }
     }
-    if ((func_801C472C(pos_x, pos_y, probe_flag, 0xC0, 0) & BYTE_MASK) == 0) {
-        if ((func_801C472C(pos_x, pos_y, probe_flag, 0xA0, 1) & BYTE_MASK) == 0) {
+    if ((func_801C472C(pos_x, pos_y, probe_flag, 0xC0, 0) & 0xFF) == 0) {
+        if ((func_801C472C(pos_x, pos_y, probe_flag, 0xA0, 1) & 0xFF) == 0) {
             return 1;
         }
     }
-    return (func_801C472C(pos_x, pos_y, probe_flag, 0xA2, 0) & BYTE_MASK) == 0;
+    return (func_801C472C(pos_x, pos_y, probe_flag, 0xA2, 0) & 0xFF) == 0;
 }

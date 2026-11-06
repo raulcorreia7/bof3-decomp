@@ -38,7 +38,7 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | Named bits: `INPUT_REPEATED(held, (PADLup \| PADLdown))`                                          | `INPUT_REPEATED(held, 0x5000)`                                |
 | PsyQ functions and names directly; game macros for sets and checks                                | Raw SDK numbers, renamed SDK values, raw hardware addresses   |
 | Restate decompiler output as structured C with named locals                                       | Keep `temp_v0`, `var_s1`, `goto loop_1` and pointer math      |
-| `BYTE_MASK`, `MIN`, `ARRAY_COUNT` and the other `util.h` helpers                                  | A local copy of a helper, or a helper that shadows the SDK    |
+| `MIN`, `BIT` and the other `util.h` helpers                                                       | A local copy of a helper, or a helper that shadows the SDK    |
 | A `static inline` helper for a repeated operation                                                 | A macro where an inline matches the same bytes                |
 | Reusable helpers, at most two steps from the real thing                                           | A `#define` that only renames or forwards, or a chain of them |
 | Braces on every body; parentheses around bitwise operands                                         | `if (x) y();`, `if (a & B && c)`                              |
@@ -116,7 +116,7 @@ while (i < 3) { Party_ResetMember(i); i++; }
 | file static                              | `s_` + tag word + name      | `s_BattleDamageScale`                    |
 | type                                     | PascalCase, no tag, no `_t` | `Battler`, `PartyBattler`, `ScreenPoint` |
 | constant, enum value, macro              | `TAG_UPPER_SNAKE`           | `BATTLE_ACTOR_MAX`, `SYS_DISPATCH_BYTE`  |
-| generic helper (`include/common/util.h`) | untagged capitals           | `ABS`, `MIN`, `CLAMP`, `BYTE_MASK`       |
+| generic helper (`include/common/util.h`) | untagged capitals           | `ABS`, `MIN`, `CLAMP_MIN`, `BIT`         |
 | local, parameter, member                 | `snake_case`                | `item_id`, `party_slot`, `hp`            |
 | SDK, BIOS, hardware                      | unchanged                   | `CdControl`, `PADLup`, `GPU_GP0`         |
 
@@ -769,7 +769,7 @@ addresses. The access decides: find the reader in the retail assembly before cho
 | The users                                                 | Write                                                                                      | Example                       |
 | --------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ----------------------------- |
 | test, set or clear bits (`&`, `\|`, `^`, `~`, `<<`, `>>`) | a named flag when the bit has one meaning, else hex                                        | `ITEM_FLAG_VITAL`, `0x80`     |
-| byte or halfword mask                                     | `BYTE_MASK`, `HALF_MASK`                                                                   | `id & BYTE_MASK`              |
+| byte or halfword mask                                     | hex at the width: `0xFF`, `0xFFFF`                                                         | `id & 0xFF`                   |
 | other mask or field extraction                            | named for its field, else hex at the width of the field                                    | `0x0F`                        |
 | count, index, loop bound, size in elements, timer         | decimal                                                                                    | `8`, `24`                     |
 | coordinate, pixels, speed, HP, damage, price, color value | decimal, signed when negative                                                              | `-4`, `320`, `128`            |
@@ -799,7 +799,7 @@ used once stays literal, with a comment when its meaning is not plain.
 **Do**
 
 ```c
-item_id = word & BYTE_MASK;
+item_id = word & 0xFF;
 trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
 actor->angle += ANGLE_90;
 actor->speed  = FIX_HALF;
@@ -1047,11 +1047,9 @@ Battle_AllocEffect();
 | ---------------------------------------------------------- | ---------------------------------------------------------------- |
 | `ARRAY_COUNT(x)`, `OFF(type, field)`                       | element count of an array; member offset                         |
 | `ALIGN(x, n)`                                              | round up to a power of two                                       |
-| `BYTE_MASK`, `HALF_MASK`                                   | the low byte or halfword of a value; a mask, never a sentinel    |
 | `GAME_NONE`                                                | no slot, index or result in a byte field; compared, never a mask |
 | `BIT(n)`                                                   | one bit, a signed `int` like `1 << n`                            |
-| `MIN`, `MAX`, `CLAMP`, `ABS`, `SQ`                         | arithmetic; `ABS` keeps the PsyQ spelling                        |
-| `RANDOM_MASK(mask)`                                        | `rand()` below a power of two                                    |
+| `MIN`, `MAX`, `CLAMP_MIN`, `FIXED_MUL`, `ABS`              | arithmetic; `ABS` keeps the PsyQ spelling                        |
 | `LOB`, `LOBU`, `LOH`, `LOHU`, `HIH`, `HIHU`, `LOW`, `LOWU` | one byte, half or word of an object, in place (an lvalue)        |
 
 `include/sys/math.h` owns `ONE`; `include/common/vector.h` owns the vector types.

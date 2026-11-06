@@ -14,7 +14,7 @@ MATCH u8 func_801A2C94(Actor* actor) {
     route  = work->direction_08;
     delta  = work->pos.x.fixed;
     dx     = D_80145EC4 - delta;
-    dx = ABS(dx);
+    dx     = ABS(dx);
     if ((dx >> 0x10) < entity->ext.bounds.half_width) {
         dy    = D_80145EC8;
         delta = work->pos.y.fixed;
@@ -22,11 +22,11 @@ MATCH u8 func_801A2C94(Actor* actor) {
         dy = ABS(dy);
         if ((dy >> 0x10) < entity->ext.bounds.half_height) {
             status = func_801A2ED4(entity, 1U);
-            if ((status & BYTE_MASK) == GAME_NONE) {
+            if ((status & 0xFF) == GAME_NONE) {
                 g_Task->unk_09 = 0;
                 return 0xFFU;
             }
-            if ((route & 7) != (status & BYTE_MASK)) {
+            if ((route & 7) != (status & 0xFF)) {
                 /* FAKE: basic-block boundary pins handler status. */
                 /* FAKE: ORDER_LOCK keeps this statement in place; without it the match is 93.06%. */
                 ORDER_LOCK(g_Task->direction_08 = status);
@@ -38,5 +38,5 @@ MATCH u8 func_801A2C94(Actor* actor) {
     }
 block_11:
     func_801A2C10(entity);
-    return func_801A2A04(entity) & BYTE_MASK;
+    return func_801A2A04(entity) & 0xFF;
 }

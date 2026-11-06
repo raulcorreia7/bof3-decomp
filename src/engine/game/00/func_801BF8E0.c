@@ -70,7 +70,7 @@ MATCH void func_801BF8E0(void) {
         adx = MAX(adx, dy);
         ret = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight;
         adx = (u32)adx >> 13;
-        adx &= BYTE_MASK;
+        adx &= 0xFF;
         if (adx != 0) {
             g_AreaCameraHeightStep = ret / adx;
         } else {

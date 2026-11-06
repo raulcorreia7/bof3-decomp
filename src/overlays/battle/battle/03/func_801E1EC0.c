@@ -15,7 +15,7 @@ MATCH void func_801E1EC0(void) {
     volatile PartyBattler* work;
 
     effect_slot = Battle_AllocEffect(0, 0xF);
-    dst         = (WorkChunk*)&g_BattleEffects[effect_slot & BYTE_MASK];
+    dst         = (WorkChunk*)&g_BattleEffects[effect_slot & 0xFF];
     src         = (WorkChunk*)&BATTLE_ACTIVE_PARTY;
     end         = src + 7;
     do {
@@ -25,14 +25,14 @@ MATCH void func_801E1EC0(void) {
     } while (src != end);
     /* FAKE: hold tail store before tail. */
     ORDER_LOCK(dst->w0 = src->w0);
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_06        = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].handler_index = 0xF;
-    g_BattleEffects[effect_slot & BYTE_MASK].header.mode   = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_03        = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_04        = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_0B        = effect_slot;
-    g_BattleEffects[effect_slot & BYTE_MASK].target.party  = g_Task;
+    g_BattleEffects[effect_slot & 0xFF].unk_06        = 0;
+    g_BattleEffects[effect_slot & 0xFF].handler_index = 0xF;
+    g_BattleEffects[effect_slot & 0xFF].header.mode   = 0;
+    g_BattleEffects[effect_slot & 0xFF].header.step   = 0;
+    g_BattleEffects[effect_slot & 0xFF].unk_03        = 0;
+    g_BattleEffects[effect_slot & 0xFF].unk_04        = 0;
+    g_BattleEffects[effect_slot & 0xFF].unk_0B        = effect_slot;
+    g_BattleEffects[effect_slot & 0xFF].target.party  = g_Task;
     g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
     g_Task->unk_09                     = 0x10;
     g_Task->timer                      = 0x10;

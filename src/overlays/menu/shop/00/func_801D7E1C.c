@@ -16,7 +16,7 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
     s16 row_y;
     s32 i;
 
-    enabled = style & BYTE_MASK;
+    enabled = style & 0xFF;
     UI_DrawWindow(x + 3, y + 3, 158, 112, 0, enabled);
     Menu_DrawPanelFrame(x, y, 0x12, 0xD);
     item  = D_80145FCC[slot][0];
@@ -35,13 +35,13 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
     gx  = xpos + 8;
     do {
         if (((((u8*)&g_Characters[0].inoculations)[rec] >> (u8)i) & 1) || (u8)i == cursor) {
-            UI_DrawText(gx, row_y, 2, 0xFF, Resource_GetText((i & BYTE_MASK) + 0xDE));
+            UI_DrawText(gx, row_y, 2, 0xFF, Resource_GetText((i & 0xFF) + 0xDE));
         } else {
-            UI_DrawText(gx, row_y, sel & BYTE_MASK, 0xFF, Resource_GetText((i & BYTE_MASK) + 0xDE));
+            UI_DrawText(gx, row_y, sel & 0xFF, 0xFF, Resource_GetText((i & 0xFF) + 0xDE));
         }
-        sprintf((char*)g_UiFormatBuffer, D_801D0CDC, value & HALF_MASK);
+        sprintf((char*)g_UiFormatBuffer, D_801D0CDC, value & 0xFFFF);
         g_UiFormatBuffer[3] = 0x60;
-        UI_DrawAsciiString((xpos + 112), row_y, sel & BYTE_MASK, g_UiFormatBuffer);
+        UI_DrawAsciiString((xpos + 112), row_y, sel & 0xFF, g_UiFormatBuffer);
         i++;
         row_y += 0xD;
     } while ((u8)i < 8);

@@ -19,8 +19,8 @@ MATCH void func_801D1B60(void) {
     TASK_SET(g_BattlePartyBattlers);
     g_MenuPanelTasks[10].unk_10 = (s16)kind;
     if ((D_8014504A == 0 && ((g_GameRequestFlags & 1) || g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP) &&
-         (func_801B6470(kind) & BYTE_MASK)) ||
-        (D_8014504A != 0 && (func_801D2190() & BYTE_MASK))) {
+         (func_801B6470(kind) & 0xFF)) ||
+        (D_8014504A != 0 && (func_801D2190() & 0xFF))) {
         g_MenuPanelTasks[9].unk_0C = 0;
     } else {
         g_MenuPanelTasks[9].unk_0C = 1;
@@ -74,15 +74,15 @@ MATCH void func_801D1B60(void) {
         g_MenuPanelTasks[9].state  = 1;
         g_MenuPanelTasks[10].state = 1;
         if (*selection == 0) {
-            for (i = 0; i < (Party_CountOrder(0) & BYTE_MASK); i++) {
+            for (i = 0; i < (Party_CountOrder(0) & 0xFF); i++) {
                 D_80148333[((i + 4) * 9) << 2] = 1;
             }
         } else if ((s8)D_80148655 == 5) {
-            for (i = 0; i < (Party_CountOrder(0) & BYTE_MASK); i++) {
+            for (i = 0; i < (Party_CountOrder(0) & 0xFF); i++) {
                 D_80148333[((i + 4) * 9) << 2] = 7;
             }
         } else {
-            for (i = 0; i < (Party_CountOrder(0) & BYTE_MASK); i++) {
+            for (i = 0; i < (Party_CountOrder(0) & 0xFF); i++) {
                 D_80148333[((i + 4) * 9) << 2] = 2;
             }
         }

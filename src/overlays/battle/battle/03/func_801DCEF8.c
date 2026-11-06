@@ -3,7 +3,7 @@
 MATCH void func_801DCEF8(u32 battler_index) {
     s32 value;
 
-    battler_index &= BYTE_MASK;
+    battler_index &= 0xFF;
     if (BATTLER_IS_PLAYER(battler_index)) {
         if (HAS_STATUS(g_BattlePartyBattlers[battler_index], STATUS_POISONED)) {
             value = (g_BattlePartyBattlers[battler_index].chr.hp + 5) / 10;

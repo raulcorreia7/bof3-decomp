@@ -8,7 +8,7 @@ MATCH void func_801D57B0(void) {
     FishingState* other;
     s32           index;
 
-    index = Actor_FindFreeSlot() & BYTE_MASK;
+    index = Actor_FindFreeSlot() & 0xFF;
     if (index != GAME_NONE) {
         g_ActorSlots[index].header.flags = 1;
         g_ActorSlots[index].type         = 0x1A;
@@ -16,7 +16,7 @@ MATCH void func_801D57B0(void) {
         g_ActorSlots[index].unk_03       = 2;
     }
 
-    index = Actor_FindFreeSlot() & BYTE_MASK;
+    index = Actor_FindFreeSlot() & 0xFF;
     if (index != GAME_NONE) {
         g_ActorSlots[index].header.flags = 1;
         g_ActorSlots[index].type         = 0x1A;

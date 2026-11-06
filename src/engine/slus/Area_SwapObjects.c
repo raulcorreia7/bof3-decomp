@@ -10,10 +10,10 @@ MATCH void Area_SwapObjects(s32 first, s32 second) {
     s32  idx0;
     s32  temp;
 
-    idx1 = second & BYTE_MASK;
+    idx1 = second & 0xFF;
     base = D_8014828C;
     b    = &base[idx1];
-    idx0 = first & BYTE_MASK;
+    idx0 = first & 0xFF;
     a    = &base[idx0];
     temp = *b;
     *b   = *a;

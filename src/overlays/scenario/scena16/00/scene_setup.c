@@ -576,14 +576,14 @@ MATCH void func_801F7CC4(void) {
             if (*progress < 191u) {
                 UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
                 if (*progress < 32u) {
-                    GFX_CopyPaletteCapped((*progress & BYTE_MASK));
+                    GFX_CopyPaletteCapped((*progress & 0xFF));
                 } else if (*progress == 32u) {
                     func_801F845C();
                 } else if (*progress > 159u) {
                     u16 inverted;
 
                     inverted = (0xBFu - *progress);
-                    GFX_CopyPaletteCapped((inverted & BYTE_MASK));
+                    GFX_CopyPaletteCapped((inverted & 0xFF));
                 }
             } else if (*progress == 191u) {
                 func_801F845C();

@@ -12,7 +12,7 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
             i            = 0;
             player_flags = flags;
             do {
-                slot = i & BYTE_MASK;
+                slot = i & 0xFF;
                 if (!Battle_SlotIsBlocked(slot)) {
                     s32 offset;
 
@@ -22,13 +22,13 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
                     Battle_SetSlotPending(slot);
                 }
                 i++;
-            } while ((u32)(i & BYTE_MASK) < BATTLE_PARTY_SLOT_COUNT);
+            } while ((u32)(i & 0xFF) < BATTLE_PARTY_SLOT_COUNT);
         }
         if (selector & 0x40) {
             i           = BATTLE_PARTY_SLOT_COUNT;
             enemy_flags = flags;
             do {
-                slot = i & BYTE_MASK;
+                slot = i & 0xFF;
                 if (!Battle_SlotIsBlocked(slot)) {
                     s32 offset;
 
@@ -38,10 +38,10 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
                     Battle_SetSlotPending(slot);
                 }
                 i++;
-            } while ((u32)(i & BYTE_MASK) < COMBATANT_COUNT);
+            } while ((u32)(i & 0xFF) < COMBATANT_COUNT);
         }
     } else {
-        slot = selector & BYTE_MASK;
+        slot = selector & 0xFF;
         if (!Battle_SlotIsBlocked(slot)) {
             if (slot < BATTLE_PARTY_SLOT_COUNT) {
                 s32 offset;

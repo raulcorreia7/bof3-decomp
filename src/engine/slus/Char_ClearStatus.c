@@ -10,8 +10,8 @@ MATCH u32 Char_ClearStatus(u8 index, u16 mask, u8 mode) {
     Character* store;
     char       i;
 
-    i = index & BYTE_MASK;
-    if ((mode & BYTE_MASK) == 0) {
+    i = index & 0xFF;
+    if ((mode & 0xFF) == 0) {
         record = &g_Characters[i];
     } else {
         record = (Character*)(D_80145F04 + i * 0x140);

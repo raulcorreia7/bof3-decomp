@@ -13,7 +13,7 @@ MATCH void func_801E1710(MenuPanelTask* task) {
     u8       flags;
     u8       n;
 
-    UI_DrawWindow((task->x + 3) & HALF_MASK, (task->y + 3) & HALF_MASK, 146, 160, 0, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow((task->x + 3) & 0xFFFF, (task->y + 3) & 0xFFFF, 146, 160, 0, CHARACTER_BLOCK->window_style);
     n    = 0;
     y    = task->y;
     list = &CHARACTER_BLOCK->records[task->unk_0A][DECOMP_OFFSETOF(Character, abilities.skill)];

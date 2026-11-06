@@ -31,7 +31,7 @@ MATCH void func_801D42F0(void) {
         }
     } else if (input & PADLdown) {
         *sel = old + 1;
-        if ((s8)(old + 1) > ((count & BYTE_MASK) - 1)) {
+        if ((s8)(old + 1) > ((count & 0xFF) - 1)) {
             *sel = 0;
         }
     }
@@ -41,7 +41,7 @@ MATCH void func_801D42F0(void) {
     }
 
     if (g_InputPressed & D_80145AC2) {
-        result = func_801E8C9C(g_CharSlot[D_80144F5A[*current]], *items, 0) & BYTE_MASK;
+        result = func_801E8C9C(g_CharSlot[D_80144F5A[*current]], *items, 0) & 0xFF;
         if ((result == 0) || (result == 4)) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             *counts -= 1;

@@ -8,7 +8,7 @@ MATCH void func_8019DE54(void) {
     Actor* work;
 
     for (i = 0; i < 10; i++) {
-        index = Actor_FindFreeSlot() & BYTE_MASK;
+        index = Actor_FindFreeSlot() & 0xFF;
         if (index != GAME_NONE) {
             g_ActorSlots[index].header.flags = 1;
             g_ActorSlots[index].type         = 0x34;

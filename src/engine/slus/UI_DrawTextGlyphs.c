@@ -53,7 +53,7 @@ MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
                 break;
             case STRING_VAR:
                 str++;
-                UI_DrawTextGlyphs(palette & BYTE_MASK, 0x20, &g_TextVariables[*str][0]);
+                UI_DrawTextGlyphs(palette & 0xFF, 0x20, &g_TextVariables[*str][0]);
                 break;
             case STRING_SPACE:
                 D_80145ACA += 8;
@@ -70,6 +70,6 @@ MATCH u8* UI_DrawTextGlyphs(u8 flags, u8 len, u8* record) {
                 break;
         }
         str++;
-    } while (*str != STRING_END && (--count & BYTE_MASK) != 0);
+    } while (*str != STRING_END && (--count & 0xFF) != 0);
     return str + 1;
 }

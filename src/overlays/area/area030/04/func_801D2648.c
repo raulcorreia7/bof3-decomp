@@ -26,7 +26,7 @@ MATCH void func_801D2648(void) {
         } else {
             FISHING_STATE->step_14       = 0x40000;
             FISHING_STATE->step_limit_20 = -0x8000;
-            slot                         = Actor_FindFreeSlot() & BYTE_MASK;
+            slot                         = Actor_FindFreeSlot() & 0xFF;
             if (slot != GAME_NONE) {
                 g_ActorSlots[slot].header.flags = 1;
                 g_ActorSlots[slot].type         = 0xA;

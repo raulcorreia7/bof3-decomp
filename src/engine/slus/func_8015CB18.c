@@ -15,7 +15,7 @@ u16       y;
     s16 half_value;
     s32 slot;
 
-    slot       = Actor_FindFreeSlot() & BYTE_MASK;
+    slot       = Actor_FindFreeSlot() & 0xFF;
     byte_value = id;
     half_value = x;
     if (slot != GAME_NONE) {

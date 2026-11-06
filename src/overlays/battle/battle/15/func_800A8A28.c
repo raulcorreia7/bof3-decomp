@@ -8,7 +8,7 @@ MATCH void func_800A8A28(void) {
     s32           delta_y;
     s32           delta_z;
 
-    if ((func_801DEE4C() & BYTE_MASK) != 0) {
+    if ((func_801DEE4C() & 0xFF) != 0) {
         battler = &g_BattleActiveBattler;
         index   = *battler;
         work    = (PartyBattler*)g_Task;

@@ -20,8 +20,8 @@ MATCH s32 func_801E02D4(u8 current_byte, u8 target_byte) {
 
     /* FAKE: holds the masked remainder out of the abs branch delay slot. */
     MATCH_BARRIER();
-    diff      = distance & BYTE_MASK;
-    threshold = raw & BYTE_MASK;
+    diff      = distance & 0xFF;
+    threshold = raw & 0xFF;
     if (diff < (threshold >> 2)) {
         flag = 1;
     } else if (diff < (threshold >> 1)) {
@@ -34,6 +34,6 @@ MATCH s32 func_801E02D4(u8 current_byte, u8 target_byte) {
         flag = 0xE;
     }
 
-    masked_flag = flag & BYTE_MASK;
+    masked_flag = flag & 0xFF;
     return (rand() & 0xF) < masked_flag;
 }

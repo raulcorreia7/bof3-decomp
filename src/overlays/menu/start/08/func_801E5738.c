@@ -25,7 +25,7 @@ MATCH void func_801E5738(void) {
     } else {
         if (pressed & PADLdown) {
             g_SaveSlotFirst = prev_row + 1;
-            if ((g_SaveSlotFirst & BYTE_MASK) >= g_SaveSlotCount) {
+            if ((g_SaveSlotFirst & 0xFF) >= g_SaveSlotCount) {
                 g_SaveSlotFirst = 0;
             }
         }

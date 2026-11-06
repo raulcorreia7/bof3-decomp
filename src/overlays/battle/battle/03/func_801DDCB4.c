@@ -16,11 +16,11 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
     /* FAKE: retail keeps the enemy row index in v0 and scales it in v1. */
     MATCH_REG(u32, enemy_index, "v0");
 
-    id = battler_index & BYTE_MASK;
+    id = battler_index & 0xFF;
     if (id < 3u) {
-        counter = g_BattlePartyBattlers[id].turn.counter & BYTE_MASK;
+        counter = g_BattlePartyBattlers[id].turn.counter & 0xFF;
     } else {
-        counter = ENEMY_COMBATANT(id).turn.counter & BYTE_MASK;
+        counter = ENEMY_COMBATANT(id).turn.counter & 0xFF;
     }
     if (counter == 0u) {
         return 0u;
@@ -32,7 +32,7 @@ MATCH u8 func_801DDCB4(u32 battler_index) {
     }
 
     rt  = s_BattleStatusRecoveryPenalties;
-    id2 = battler_index & BYTE_MASK;
+    id2 = battler_index & 0xFF;
     if (id2 < 3u) {
         state = g_BattlePartyBattlers[id2].chr.stats.resistances[RES_INDEX_STATUS];
     } else {

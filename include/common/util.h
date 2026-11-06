@@ -10,26 +10,22 @@
 
 /* The byte value that means no slot, index or result in a byte field. It is
  * compared, never used as a mask. */
-#define GAME_NONE         0xFF
-
-/* The low byte and low halfword of a value: `x & BYTE_MASK`. A mask, never a sentinel (GAME_NONE). */
-#define BYTE_MASK         0xFF
-#define HALF_MASK         0xFFFF
+#define GAME_NONE 0xFF
 
 /* Bits and arithmetic (ABS comes from PsyQ <abs.h>). BIT is a signed int like the open-coded `1 << n`. */
-#define BIT(n)            (1 << (n))
-#define MIN(a, b)         (((a) < (b)) ? (a) : (b))
-#define MAX(a, b)         (((a) > (b)) ? (a) : (b))
+#define BIT(n)    (1 << (n))
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
 /* LO/HI name the little-endian half or byte of the object: the expansion is
  * the same cast-and-dereference expression the retail code compiles. The
  * argument stays addressable, so these are lvalues. */
-#define LOB(x)            (*(s8*)&(x))
-#define LOBU(x)           (*(u8*)&(x))
-#define LOH(x)            (*(s16*)&(x))
-#define LOHU(x)           (*(u16*)&(x))
-#define HIH(x)            (((s16*)&(x))[1])
-#define LOW(x)            (*(s32*)&(x))
-#define LOWU(x)           (*(u32*)&(x))
+#define LOB(x)    (*(s8*)&(x))
+#define LOBU(x)   (*(u8*)&(x))
+#define LOH(x)    (*(s16*)&(x))
+#define LOHU(x)   (*(u16*)&(x))
+#define HIH(x)    (((s16*)&(x))[1])
+#define LOW(x)    (*(s32*)&(x))
+#define LOWU(x)   (*(u32*)&(x))
 
 #endif
