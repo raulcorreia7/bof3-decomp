@@ -6,6 +6,7 @@
  * file. */
 
 #include "overlays/area/world00.h"
+#include "shared/WorldSpin.h"
 
 #define WORLD00_AREA024_WORK_BASE      MEM_PTR(volatile AreaSprite, AREA_WORK)
 #define WORLD00_AREA024_SPIN_WORK_BASE MEM_PTR(u8, 0x800E5000u)
@@ -55,23 +56,6 @@ typedef struct AreaTransform {
 } AreaTransform;
 
 ASSERT_SIZE(AreaTransform, 0x18);
-
-typedef struct AreaSpin {
-    /* 0x00 */ s32     origin_x; /* the camera x, copied from the scratch record */
-    /* 0x04 */ s32     origin_y; /* the camera y */
-    /* 0x08 */ s32     origin_z; /* the camera z */
-    u8                 unk_0C[4];
-    /* 0x10 */ SVECTOR vertex_a;   /* the first rotated vertex offset */
-    /* 0x18 */ SVECTOR vertex_b;   /* the second rotated vertex offset */
-    /* 0x20 */ s16     angle_lo;   /* the angle accumulator's low half */
-    /* 0x22 */ s16     angle_hi;   /* the angle accumulator's high half */
-    /* 0x24 */ s16     spin_angle; /* the spin angle */
-    s16                unk_26;
-    /* 0x28 */ s16     scale; /* the vertex scale */
-    /* 0x2A */ s16     fade;  /* the triangle fade */
-} AreaSpin;
-
-ASSERT_SIZE(AreaSpin, 0x2C);
 
 extern volatile u8 D_80147A58;
 extern VECTOR      D_801F2C04;
