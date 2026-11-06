@@ -1196,7 +1196,7 @@ void    func_801E0BD0(void);
 void    func_801E0C20(void);
 void    func_801E0C40(void);
 void    func_801E3E88(void);
-s32     func_801F2C04();
+s32     func_801F2C04(void);
 void    func_801F2C14(void);
 void    func_801F2C18(void);
 void    func_801F2C1C(void);

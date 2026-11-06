@@ -1,6 +1,6 @@
 #include "area050_13.h"
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     u16 request;
 
     if (MENU_SELECTION_ARMED()) {
