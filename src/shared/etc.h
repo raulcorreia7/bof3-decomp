@@ -120,6 +120,7 @@ extern u8             D_801F294E;
 /* Bate and Shisu read scenario_id from the resident scenario record. */
 struct SceneState;
 
+s32         func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 void        func_801D0C04(void);
 void        func_801D0C10(void);
 void        func_801D0C2C(void);
@@ -127,11 +128,10 @@ void        func_801D0C44(void);
 void        func_801D0C50(void);
 void        func_801D0D80(void);
 void        func_801D0D9C(void);
-void        func_801D12FC(void);
 /* func_801DA1D8 */
 void        Menu_DrawExperienceLine(u16 x, u16 y, u8 char_id, u8 level, u32 exp);
+void        func_801D12FC(void);
 void        func_801D2B64(void);
-void        func_801D3310(void);
 /* func_801D4754 */
 extern void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection);
 /* func_801D95F4 */
@@ -152,6 +152,7 @@ void        SAVE_DrawSlots(s16 panel_x, s16 panel_y, u8 row_cursor);
 void        Menu_DrawPanelFrame(s16 x, s16 y, s32 width, s32 height);
 /* func_801DBD24 */
 void        Menu_DrawClutStrip(u8 clut_index);
+void        func_801D3310(void);
 void        func_801E1680(void);
 s32         CardScanDirectory(char* prefix, u8 length);
 void        func_801F03D0(void);
@@ -162,7 +163,6 @@ void        func_801F1E74(void);
 void        func_801F1F9C(void);
 void        func_801F2020(void);
 void        func_801F228C(void);
-void        func_801F23A4(void);
 int         abs(int); /* SDK libc, no staged abs.h */
 
 extern u8 D_801448F8;
@@ -182,6 +182,6 @@ extern u8 D_8018E9A1;
 
 extern s32 D_8018E9A4;
 
-s32 func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
+void func_801F23A4(void);
 
 #endif
