@@ -4,6 +4,8 @@
 #include "types.h"
 #include "audio/cue.h"
 #include "sys/cd_format.h"
+#include "psx/psyq.h"
+#include "game/character.h"
 #include "common/handler.h"
 
 volatile u8* func_800AC754(u8 entry_id);
