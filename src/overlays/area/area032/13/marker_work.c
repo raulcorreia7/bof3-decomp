@@ -268,10 +268,10 @@ MATCH void func_801F30EC(void) {
     func_801A4D54(data);
     slots[0x11] = work;
 
-    g_Actors[work[3]].pos.x.fixed -= 0x1000;
-    g_Actors[work[3]].pos.y.fixed += 0x1000;
-    g_Actors[work[4]].pos.x.fixed += 0x1000;
-    g_Actors[work[4]].pos.y.fixed -= 0x1000;
+    g_Actors[work[3]].pos.x.fixed -= ONE;
+    g_Actors[work[3]].pos.y.fixed += ONE;
+    g_Actors[work[4]].pos.x.fixed += ONE;
+    g_Actors[work[4]].pos.y.fixed -= ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots = SP_PTR(u8*, 0u);
     g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;

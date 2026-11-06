@@ -60,15 +60,15 @@ box_16:
     if (g_ActorSlots[0].link == 0) {
         limit = 6;
         if (g_InputHeld & PADLleft) {
-            g_ActorSlots[0].scene_step = -0x1000;
-            g_ActorSlots[0].selection  = 0x1000;
+            g_ActorSlots[0].scene_step = -ONE;
+            g_ActorSlots[0].selection  = ONE;
             g_ActorSlots[0].unk_14     = D_801E3210->unk_08;
             D_801E31F8                 = 1;
         } else {
             limit = 5;
             if (g_InputHeld & PADLright) {
-                g_ActorSlots[0].scene_step = 0x1000;
-                g_ActorSlots[0].selection  = 0x1000;
+                g_ActorSlots[0].scene_step = ONE;
+                g_ActorSlots[0].selection  = ONE;
                 D_801E31F8                 = 1;
                 g_ActorSlots[0].unk_14     = D_801E3210->unk_08;
             } else if (g_InputHeld & PADRdown) {
@@ -80,7 +80,7 @@ box_16:
                     g_ActorSlots[0].unk_14    = D_801E3210->unk_08;
                 } else {
                     limit                     = 3;
-                    g_ActorSlots[0].selection = 0x1000;
+                    g_ActorSlots[0].selection = ONE;
                     D_801E31F8                = 1;
                     g_ActorSlots[0].unk_14    = D_801E3210->unk_04;
                 }
@@ -88,7 +88,7 @@ box_16:
                 limit = 4;
                 if (SP_REF(void*, 0x0) != 0) {
                     g_ActorSlots[0].scene_step = 0;
-                    g_ActorSlots[0].selection  = 0x1000;
+                    g_ActorSlots[0].selection  = ONE;
                     D_801E31F8                 = 2;
                     g_ActorSlots[0].unk_14     = D_801E3210->unk_08;
                 } else {

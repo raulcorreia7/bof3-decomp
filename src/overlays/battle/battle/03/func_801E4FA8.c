@@ -3,7 +3,7 @@
 MATCH void func_801E4FA8(void) {
     PartyBattler* work;
 
-    g_Task->unk_18 = -0x1000;
+    g_Task->unk_18 = -ONE;
     g_Task->unk_1C = 0;
     func_801DD3CC(g_Task);
     work          = g_Task;
