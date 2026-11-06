@@ -21,12 +21,12 @@ extern s8 D_801F5D68[];
 /* One of the three effect rows the area program keeps at the work window; the
  * rows are 0x4BC bytes apart and func_801F349C seeds the first 0x16 bytes. */
 typedef struct AreaEffectRow {
-    Vec3i pos;    /* 0x00 - actor position, z plus 0x03800000 */
-    s32   unk_0C; /* 0x0C */
-    s16   angle;  /* 0x10 - row index * 0x1000 / 3 */
-    s16   scale;  /* 0x12 */
-    s16   unk_14; /* 0x14 */
-    u8    pad_16[0x4BC - 0x16];
+    Vec3S32 pos;    /* 0x00 - actor position, z plus 0x03800000 */
+    s32     unk_0C; /* 0x0C */
+    s16     angle;  /* 0x10 - row index * 0x1000 / 3 */
+    s16     scale;  /* 0x12 */
+    s16     unk_14; /* 0x14 */
+    u8      pad_16[0x4BC - 0x16];
 } AreaEffectRow;
 
 /* The shared frame tail of the scripted scene steps: every fifth frame it

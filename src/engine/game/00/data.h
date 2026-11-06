@@ -93,7 +93,7 @@ typedef struct GameDelta {
 
 /* Eight-byte signed position offset. func_801C63B0 adds the pair to the
  * party position when the slots move. */
-typedef Vec2i PositionOffset;
+typedef Vec2S32 PositionOffset;
 
 /* Four-byte battle party slot. func_801C63B0 marks it active, stores its sort
  * key and orders the slots by that key. */

@@ -17,6 +17,7 @@
  * decides: the comment on each member records which unit reads it. */
 
 #include "common/handler.h"
+#include "common/fixed.h"
 #include "common/vector.h"
 #include "game/character.h"
 #include "game/records.h"
@@ -511,7 +512,7 @@ typedef struct PartyBattler {
     BattleScreenCoord unk_30; /* +0x30 the field overlays read it signed */
     u16               depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
     BattlePosition    pos;
-    Vec2i             scale;  /* +0x40 16.16, 0x10000 at setup */
+    Vec2S32           scale;  /* +0x40 16.16, 0x10000 at setup */
     u8                unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u8                unk_49;
     u8                unk_4A;

@@ -2,7 +2,7 @@
 
 /* The cross product of (first - origin) and (second - first): its sign tells which side of the
  * line origin-first the point second lies on. */
-MATCH s16 func_801AFF90(Vec2s* origin, Vec2s* first_point, Vec2s* second_point) {
+MATCH s16 func_801AFF90(Vec2S16* origin, Vec2S16* first_point, Vec2S16* second_point) {
     s16 first_x;
     s16 first_y;
 
