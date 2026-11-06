@@ -11,7 +11,7 @@ MATCH s32 func_801BB86C(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 p
     MATCH_REG(s32, result, "v0");
 
     (void)work;
-    value  = ((s32 (*)(s32, s32, u8, s16))Area_ReadStepHeight)(((from_x0 + from_x1) << 16) >> 1,
+    value  = Area_ReadStepHeight(((from_x0 + from_x1) << 16) >> 1,
                                                                ((from_y0 + from_y1) << 16) >> 1, probe_mode, from_y1);
     result = 0;
     if (SP_REF(u8, 0x0u) != 0) {

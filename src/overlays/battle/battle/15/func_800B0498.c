@@ -43,10 +43,10 @@ MATCH void func_800B0498(void) {
         sel_substate = SEL_SUBSTATE;
         row          = sel_substate;
         if (sel_substate == -1) {
-            ((void (*)(u16, u16, s32, s32))Menu_DrawCursorSprite)((g_MenuCurrentPanel->x + 14),
+            Menu_DrawCursorSprite((g_MenuCurrentPanel->x + 14),
                                                                   (g_MenuCurrentPanel->y + 12), 0, row);
         } else {
-            ((void (*)(u16, u16, s32, s32))Menu_DrawCursorSprite)(
+            Menu_DrawCursorSprite(
                 ((u16)(g_MenuCurrentPanel->x + 14) + SEL_SLOT * 30),
                 ((u16)(g_MenuCurrentPanel->y + 44) + ((substate_row = row & BYTE_MASK) << 5)), 0, row);
         }
