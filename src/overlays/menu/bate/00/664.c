@@ -153,6 +153,7 @@ MATCH void func_801D4678(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
 
 #include "overlays/menu/Char_GetExpProgress.h"
 
+/* First difference: the stack frame, 0x70 bytes against 0x78. */
 INCLUDE_ASM(Menu_DrawHeaderBar);
 
 INCLUDE_ASM(func_801D5634);
@@ -167,6 +168,7 @@ INCLUDE_ASM(Menu_DrawEquipStatWindow);
 #include "overlays/menu/Menu_DrawFilledPanel.h"
 
 /* Same body in the shop, start, Bate and Shisu overlays; the start draft covers the five SPRT bands and four corner sprites, and the missing piece is a source shape for the retail per-band draw-mode setup. */
+/* First difference: the stack frame, 0x88 bytes against 0x80. */
 INCLUDE_ASM(Menu_DrawWindowFrame);
 
 /* Follows etc/game/00 func_801999F8 (472 against 443 instructions).

@@ -76,5 +76,6 @@ NON_MATCHING void func_80158940(void* obj) {
     }
 }
 #else
+/* First difference: the bias load is scheduled early. */
 INCLUDE_ASM(func_80158940);
 #endif
