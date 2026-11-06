@@ -723,12 +723,8 @@ MATCH void func_801F3944(const void* spin) {
     }
 
     setRGB0(primitive, shade, shade, (u8)shade >> 1);
-    primitive->r1 = 0;
-    primitive->g1 = 0;
-    primitive->b1 = 0;
-    primitive->r2 = 0;
-    primitive->g2 = 0;
-    primitive->b2 = 0;
+    setRGB1(primitive, 0, 0, 0);
+    setRGB2(primitive, 0, 0, 0);
 
     GFX_AddPrim(1u, 0x1Cu);
 }

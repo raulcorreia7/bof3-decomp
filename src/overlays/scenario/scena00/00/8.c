@@ -102,8 +102,7 @@ MATCH void func_801F6E48(void) {
     TASK_SET(adopted);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
-    ((RECT*)prim)->w = 16;
-    ((RECT*)prim)->h = 16;
+    setWH(((RECT*)prim), 16, 16);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
 
@@ -146,8 +145,7 @@ MATCH void func_801F6E48(void) {
     g_GfxPrimCursor  = prim + 8;
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 0;
-    ((RECT*)prim)->w = 256;
-    ((RECT*)prim)->h = 256;
+    setWH(((RECT*)prim), 256, 256);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
@@ -933,8 +931,7 @@ MATCH void func_801F8D90(void) {
     TASK_SET(first);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
-    ((RECT*)prim)->w = 16;
-    ((RECT*)prim)->h = 16;
+    setWH(((RECT*)prim), 16, 16);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
 
@@ -985,8 +982,7 @@ MATCH void func_801F8D90(void) {
     g_GfxPrimCursor  = prim + 8;
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 0;
-    ((RECT*)prim)->w = 256;
-    ((RECT*)prim)->h = 256;
+    setWH(((RECT*)prim), 256, 256);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
     Area_AddCellPrim(SPAD_ROW->x.fixed, SPAD_ROW->y.fixed, 0x11, 0x0C);
