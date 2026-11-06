@@ -145,9 +145,9 @@ MATCH void func_801D1CD4(const void* spin) {
     point[1] =
         ((rsin(work->spin_angle) * work->vertex_a.vx + rcos(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;
     point[2] = (work->vertex_a.vz << 12) * work->scale;
-    point[0] += work->origin_x;
-    point[1] += work->origin_y;
-    point[2] += work->origin_z;
+    point[0] += work->origin.x;
+    point[1] += work->origin.y;
+    point[2] += work->origin.z;
     Area_ProjectPoint(point, &primitive->x1);
 
     point[0] =
@@ -155,9 +155,9 @@ MATCH void func_801D1CD4(const void* spin) {
     point[1] =
         ((rsin(work->spin_angle) * work->vertex_b.vx + rcos(work->spin_angle) * work->vertex_b.vy) >> 8) * work->scale;
     point[2] = (work->vertex_b.vz << 12) * work->scale;
-    point[0] += work->origin_x;
-    point[1] += work->origin_y;
-    point[2] += work->origin_z;
+    point[0] += work->origin.x;
+    point[1] += work->origin.y;
+    point[2] += work->origin.z;
     Area_ProjectPoint(point, &primitive->x2);
 
     fade = work->fade;

@@ -13,9 +13,9 @@ MATCH void Shop_DrawItems(MenuListPanel* panel) {
     u8  color;
     u8  dim;
 
-    UI_DrawWindow(panel->x + 3, panel->y + 3, 173, 159, panel->unk_0A, D_80144952);
+    UI_DrawWindow(panel->pos.x + 3, panel->pos.y + 3, 173, 159, panel->unk_0A, D_80144952);
     names = panel->names;
-    y     = panel->y + 8;
+    y     = panel->pos.y + 8;
     for (index = 0; index < names[0]; index++) {
         entry    = names + index * 2;
         group    = entry[1];
@@ -33,19 +33,19 @@ MATCH void Shop_DrawItems(MenuListPanel* panel) {
         sprintf((s8*)g_UiFormatBuffer, D_801D0E88, price);
         if (index == panel->unk_0C) {
             if (color == 0) {
-                func_801AEA80((u16)(panel->x + 4), (u16)(y + 3), D_801E5E0C[(u8)icon], 1);
-                UI_DrawText(panel->x + 14, y, 7, (u8)func_801AF20C(resource), resource);
-                UI_DrawGlyphString(panel->x + 113, y + 3, 7, g_UiFormatBuffer);
+                func_801AEA80((u16)(panel->pos.x + 4), (u16)(y + 3), D_801E5E0C[(u8)icon], 1);
+                UI_DrawText(panel->pos.x + 14, y, 7, (u8)func_801AF20C(resource), resource);
+                UI_DrawGlyphString(panel->pos.x + 113, y + 3, 7, g_UiFormatBuffer);
             }
             y -= 2;
         }
-        func_801AEA80((u16)(panel->x + 4), (u16)(y + 3), D_801E5E0C[(u8)icon], dim);
-        UI_DrawText(panel->x + 14, y, color, (u8)func_801AF20C(resource), resource);
-        UI_DrawGlyphString(panel->x + 113, y + 3, color, g_UiFormatBuffer);
+        func_801AEA80((u16)(panel->pos.x + 4), (u16)(y + 3), D_801E5E0C[(u8)icon], dim);
+        UI_DrawText(panel->pos.x + 14, y, color, (u8)func_801AF20C(resource), resource);
+        UI_DrawGlyphString(panel->pos.x + 113, y + 3, color, g_UiFormatBuffer);
         if (index == panel->unk_0C) {
             y += 2;
         }
         y += 0xD;
     }
-    Menu_DrawPanelFrame(panel->x, panel->y, 0x14, 0x13);
+    Menu_DrawPanelFrame(panel->pos.x, panel->pos.y, 0x14, 0x13);
 }

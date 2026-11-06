@@ -15,8 +15,8 @@ MATCH void func_801D3A98(void) {
     g_MenuPanelTasks[13].unk_0C = 0xFF;
     task                        = &g_MenuPanelTasks[14];
     task->unk_0C                = 0xFF;
-    g_MenuPanelTasks[21].x      = task->x + 5;
-    g_MenuPanelTasks[21].y      = task->y + (task->unk_0B * 16 + 26);
+    g_MenuPanelTasks[21].pos.x  = task->pos.x + 5;
+    g_MenuPanelTasks[21].pos.y  = task->pos.y + (task->unk_0B * 16 + 26);
 
     input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLup) {

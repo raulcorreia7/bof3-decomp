@@ -15,15 +15,6 @@
 #include "common/vector.h"
 #include <string.h>
 
-/* Per-mode signed adjustments to the camera angle inputs. */
-/* x: added to D_80143F24 for angle.vx. */
-/* y: added to D_80143F28 for angle.vy. */
-typedef Vec2S16 CameraAngleOffset;
-
-ASSERT_SIZE(CameraAngleOffset, 4);
-ASSERT_OFFSET(CameraAngleOffset, x, 0x00);
-ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
-
 #include "data.h"
 #include <stdio.h>
 
@@ -190,10 +181,6 @@ ASSERT_OFFSET(TileRunSet, last_run, 0x31);
 typedef struct GameHandlerTable6 {
     Callback handlers[6];
 } GameHandlerTable6;
-
-/* One game route step: two volatile signed words.
- * dx: x; dy: y. */
-typedef Vec2S32 GameRouteStep;
 
 /* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * func_8019D8C0 rotates and writes out as screen vertices. */
@@ -390,7 +377,7 @@ extern s8                 D_80148656;   /* 0x80148656 */
 extern s8                 D_801490E0;   /* 0x801490E0 */
 extern u8                 D_801581E0[]; /* 0x801581E0 */
 extern u8*                D_80181164[];
-extern FacingStep         g_FacingOffsets[]; /* 0x80181AC0 */
+extern Vec2S32            g_FacingOffsets[]; /* 0x80181AC0 */
 extern s8                 D_80181B00[];
 extern s8                 D_80181B01[];
 extern u8                 D_80181B1C[]; /* 0x80181B1C */

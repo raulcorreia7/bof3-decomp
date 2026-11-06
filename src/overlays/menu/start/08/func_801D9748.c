@@ -29,8 +29,8 @@ NON_MATCHING void func_801D9748(void) {
     g_MenuPanelTasks[11].unk_02 = 9;
     g_MenuPanelTasks[11].state  = 2;
     record[0]                   = 1;
-    g_MenuPanelTasks[11].x      = 0x14;
-    g_MenuPanelTasks[11].y      = -0x14;
+    g_MenuPanelTasks[11].pos.x  = 0x14;
+    g_MenuPanelTasks[11].pos.y  = -0x14;
     g_MenuPanelTasks[11].unk_10 = 0;
     while (i < 2) {
         rows[i].unk_00[1] = 6;
@@ -44,8 +44,8 @@ NON_MATCHING void func_801D9748(void) {
     D_801485B8                  = 1;
     g_BattleItemRow             = 7;
     g_MenuPanelTasks[18].unk_0B = 0xFF;
-    g_MenuPanelTasks[18].x      = 0x70;
-    g_MenuPanelTasks[18].y      = -0x14;
+    g_MenuPanelTasks[18].pos.x  = 0x70;
+    g_MenuPanelTasks[18].pos.y  = -0x14;
     g_MenuPanelTasks[18].unk_01 = 6;
     g_MenuPanelTasks[21].unk_01 = 6;
     g_MenuPanelTasks[21].unk_02 = 0xE;

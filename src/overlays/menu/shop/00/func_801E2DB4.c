@@ -2,6 +2,6 @@
 
 MATCH void func_801E2DB4(void) {
     D_801E5DF0[g_MenuCurrentPanel->state]();
-    Shop_DrawEquipment(g_MenuCurrentPanel->x, g_MenuCurrentPanel->y,
+    Shop_DrawEquipment(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y,
                        g_CharSlot[D_80144F5A[g_MenuCurrentPanel->unk_0A]]);
 }

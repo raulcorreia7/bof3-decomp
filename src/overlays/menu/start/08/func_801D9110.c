@@ -9,7 +9,7 @@ MATCH void func_801D9110(void) {
     panel->state  = 2;
     panel->active = 1;
     panel++;
-    g_MenuPanelTasks[11].x      = 0x14;
+    g_MenuPanelTasks[11].pos.x  = 0x14;
     D_801484C2                  = -0x14;
     g_MenuPanelTasks[11].unk_10 = 0;
     panel->unk_01               = 6;

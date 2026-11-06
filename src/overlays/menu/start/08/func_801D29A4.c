@@ -20,10 +20,10 @@ MATCH void func_801D29A4(void) {
         panel->unk_02 = 5;
         panel->state  = 2;
         panel->active = 1;
-        panel->x      = 320;
+        panel->pos.x  = 320;
         j             = index + 4;
         entry         = (u16*)((u8*)&D_80148336 + j * 0x24);
-        panel->y      = *entry;
+        panel->pos.y  = *entry;
         panel->unk_0A = i;
         i += 1;
     }
@@ -32,7 +32,7 @@ MATCH void func_801D29A4(void) {
     panel->unk_02               = 9;
     panel->state                = 2;
     panel->active               = 1;
-    panel->x                    = 0x14;
+    panel->pos.x                = 0x14;
     D_801484C2                  = -0x14;
     panel->unk_10               = 0;
     g_MenuPanelTasks[19].unk_01 = 6;

@@ -9,10 +9,10 @@
         MenuPanelTask* task = g_MenuCurrentPanel; \
         s16            val;                       \
                                                   \
-        val     = task->x - 0x20;                 \
-        task->x = val;                            \
+        val         = task->pos.x - 0x20;         \
+        task->pos.x = val;                        \
         if (val < 0x98) {                         \
-            task->x     = 152;                    \
+            task->pos.x = 152;                    \
             task->state = 0;                      \
         }                                         \
     } while (0)

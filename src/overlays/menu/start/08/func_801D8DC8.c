@@ -15,8 +15,8 @@ MATCH void func_801D8DC8(void) {
         g_MenuPanelTasks[11].unk_10 = 0;
     }
     g_MenuPanelTasks[21].active = 1;
-    g_MenuPanelTasks[21].x      = panel->x + 7;
-    g_MenuPanelTasks[21].y      = panel->y + ((panel->unk_0B - panel->unk_0A) * 0xD + 0x1A);
+    g_MenuPanelTasks[21].pos.x  = panel->pos.x + 7;
+    g_MenuPanelTasks[21].pos.y  = panel->pos.y + ((panel->unk_0B - panel->unk_0A) * 0xD + 0x1A);
     buttons                     = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
     old                         = panel->unk_0B;
     if (buttons & PADLup) {

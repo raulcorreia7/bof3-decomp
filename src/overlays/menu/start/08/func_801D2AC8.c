@@ -37,15 +37,15 @@ MATCH void func_801D2AC8(void) {
     g_MenuPanelTasks[15].state  = 2;
     *panel                      = 1;
     panel += 0x24;
-    g_MenuPanelTasks[15].x      = BATTLE_PARTY_STRIDE;
-    g_MenuPanelTasks[15].y      = 0x74;
+    g_MenuPanelTasks[15].pos.x  = BATTLE_PARTY_STRIDE;
+    g_MenuPanelTasks[15].pos.y  = 0x74;
     g_MenuPanelTasks[16].unk_02 = 7;
     g_MenuPanelTasks[16].unk_01 = 6;
     g_BattleChoicePhase         = 2;
     g_MenuPanelTasks[15].unk_0A = D_80148656;
     *panel                      = 1;
     D_80148574                  = -100;
-    g_MenuPanelTasks[16].y      = 0x78;
+    g_MenuPanelTasks[16].pos.y  = 0x78;
     g_MenuPanelTasks[17].unk_02 = 8;
     g_MenuPanelTasks[16].unk_0A = D_80148656;
     g_MenuPanelTasks[17].unk_01 = 6;
@@ -53,6 +53,6 @@ MATCH void func_801D2AC8(void) {
     panel += 0x24;
     *panel                      = 1;
     D_80148598                  = -100;
-    g_MenuPanelTasks[17].y      = 0xA8;
+    g_MenuPanelTasks[17].pos.y  = 0xA8;
     g_MenuPanelTasks[17].unk_0A = D_80148656;
 }

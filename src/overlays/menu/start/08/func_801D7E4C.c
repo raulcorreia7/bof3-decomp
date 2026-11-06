@@ -22,12 +22,12 @@ MATCH void func_801D7E4C(void) {
     latch = flag - 0x48;
     *flag = 0;
     if (state == 0) {
-        x                           = g_MenuPanelTasks[13].x;
+        x                           = g_MenuPanelTasks[13].pos.x;
         y                           = (s8)D_80148658 * 0x36;
         *latch                      = 1;
         g_MenuPanelTasks[19].unk_0B = 1;
         D_801485E0                  = x;
-        D_801485E2                  = g_MenuPanelTasks[13].y + y;
+        D_801485E2                  = g_MenuPanelTasks[13].pos.y + y;
     } else {
         *latch = 0;
     }

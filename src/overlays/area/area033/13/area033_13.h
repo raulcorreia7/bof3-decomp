@@ -31,10 +31,10 @@ extern u8             D_801F4FA3[];
 /* The world map marker rows the step handler selects by a controller mask. */
 extern WorldMapMarker D_801F4FF8[6];
 extern void (*D_801F5010[])(void);
-extern ScreenPoint D_801F501C[];
+extern Vec2U16 D_801F501C[];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
-extern u8          D_801F502C[];
-extern u8          D_801F502D[];
+extern u8      D_801F502C[];
+extern u8      D_801F502D[];
 extern void (*D_801F5034[])(void);
 #define AREA_HUD_MASK_TABLE D_801F4FF8
 

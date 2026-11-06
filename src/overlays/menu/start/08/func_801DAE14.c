@@ -55,8 +55,8 @@ NON_MATCHING void func_801DAE14(void) {
     g_MenuPanelTasks[12].unk_01 = 6;
     g_MenuPanelTasks[12].unk_02 = 0x13;
     g_MenuPanelTasks[12].state  = 2;
-    g_MenuPanelTasks[12].x      = BATTLE_PARTY_STRIDE;
-    g_MenuPanelTasks[12].y      = 0x3B;
+    g_MenuPanelTasks[12].pos.x  = BATTLE_PARTY_STRIDE;
+    g_MenuPanelTasks[12].pos.y  = 0x3B;
     D_80148500                  = D_801ED690;
 
     for (i = 0; i < (count & BYTE_MASK); i++) {

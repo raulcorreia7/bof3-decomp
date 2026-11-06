@@ -20,16 +20,16 @@ extern Callback D_801F61BC[];
 extern Callback D_801F61CC[];
 extern u8       D_801F61DC[];
 #define AREA_HUD_SPRITE_CELLS D_801F61DC
-extern u8          D_801F61DD[];
-extern u8          D_801F61DE[];
-extern u8          D_801F61DF[];
-extern Callback    D_801F624C[];
+extern u8       D_801F61DD[];
+extern u8       D_801F61DE[];
+extern u8       D_801F61DF[];
+extern Callback D_801F624C[];
 /* The signed spawn focus offsets, one (x, y) pair per spawn row. */
-extern ScreenPoint D_801F6258[];
+extern Vec2U16  D_801F6258[];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
-extern u8          D_801F6268[];
-extern u8          D_801F6269[];
-extern Callback    D_801F6270[];
+extern u8       D_801F6268[];
+extern u8       D_801F6269[];
+extern Callback D_801F6270[];
 
 void func_801F402C(void);
 /* func_801F411C */

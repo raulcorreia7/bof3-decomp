@@ -14,8 +14,8 @@ MATCH void func_801ADAC0(s8 actor_slot) {
         g_ActorSlots[g_Task->unk_0B].scene_step   = 0;
         value                                     = func_801ADC98();
         g_ActorSlots[g_Task->unk_0B].selection    = value + 0x28;
-        g_ActorSlots[g_Task->unk_0B].x.fixed      = g_Task->pos.x.fixed;
-        g_ActorSlots[g_Task->unk_0B].y.fixed      = g_Task->pos.y.fixed;
-        g_ActorSlots[g_Task->unk_0B].z.fixed      = g_Task->pos.z.fixed;
+        g_ActorSlots[g_Task->unk_0B].pos.x.fixed  = g_Task->pos.x.fixed;
+        g_ActorSlots[g_Task->unk_0B].pos.y.fixed  = g_Task->pos.y.fixed;
+        g_ActorSlots[g_Task->unk_0B].pos.z.fixed  = g_Task->pos.z.fixed;
     }
 }

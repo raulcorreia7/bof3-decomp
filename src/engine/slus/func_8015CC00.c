@@ -16,9 +16,9 @@ MATCH s32 func_8015CC00(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z) {
         g_ActorSlots[actor_slot].unk_06       = id;
         g_ActorSlots[actor_slot].scene_step   = (s8)step;
         g_ActorSlots[actor_slot].selection    = (s8)selection;
-        g_ActorSlots[actor_slot].x.fixed      = x;
-        g_ActorSlots[actor_slot].y.fixed      = y;
-        g_ActorSlots[actor_slot].z.fixed      = z;
+        g_ActorSlots[actor_slot].pos.x.fixed  = x;
+        g_ActorSlots[actor_slot].pos.y.fixed  = y;
+        g_ActorSlots[actor_slot].pos.z.fixed  = z;
     }
     return actor_slot;
 }
