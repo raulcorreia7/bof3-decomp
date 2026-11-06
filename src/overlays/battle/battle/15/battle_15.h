@@ -100,7 +100,6 @@ typedef volatile struct BattleSelectionPlayer {
     u8           pad_04[0x13C];
 } BattleSelectionPlayer;
 
-
 /* Battle sprite cell record consumed by func_800AF8F0, func_800AF9D4 and
  * func_800AFB48: +0x24 bit 2 selects the second 0x80037800 cell bank, +0x27 is
  * the quotient/remainder source and +0x28 indexes D_800B6C28/D_800B6C30/
