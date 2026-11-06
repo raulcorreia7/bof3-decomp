@@ -17,8 +17,8 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
     u8            slot;
 
     slot               = arg0;
-    g_BattleActionType = ((s32)D_800B51F8[D_801EB630[slot & BYTE_MASK].choice_ai] >> ((rand() & 3) * 2)) & 3;
-    if ((g_BattleState & BATTLE_STATE_OVER) && (D_801EB630[slot & BYTE_MASK].stats.intellect < 2U)) {
+    g_BattleActionType = ((s32)D_800B51F8[g_BattleEnemyBattlers[slot & BYTE_MASK].choice_ai] >> ((rand() & 3) * 2)) & 3;
+    if ((g_BattleState & BATTLE_STATE_OVER) && (g_BattleEnemyBattlers[slot & BYTE_MASK].stats.intellect < 2U)) {
         g_BattleActionType = 0;
     }
     if (g_BattleActionType != 1) {
@@ -66,7 +66,7 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
         }
     }
     row2 = actor * 0x118;
-    if ((*(D_801EB6B2 + row2) & 0x20) || (D_801EB630[actor].action_flags & COMBATANT_FLAG_CHARGING)) {
+    if ((*(D_801EB6B2 + row2) & 0x20) || (g_BattleEnemyBattlers[actor].action_flags & COMBATANT_FLAG_CHARGING)) {
         g_BattleActionType = 1;
         if (func_800A9304((slot + 3) & BYTE_MASK) & BYTE_MASK) {
             func_801E2948((s8)actor);
@@ -75,17 +75,17 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
         g_BattleTargetSelector = Battle_PickEnemyTarget(actor);
     }
     if (g_BattleEncounter != 0) {
-        enemy                = &D_801EB630[slot & BYTE_MASK];
+        enemy                = &g_BattleEnemyBattlers[slot & BYTE_MASK];
         g_BattleCurrentEnemy = enemy;
         g_Task               = enemy;
         enemy->unk_E4(0);
     }
     if (g_BattleTargetSelector == GAME_NONE) {
-        g_BattleActionType                  = 0;
-        D_801EB630[slot & BYTE_MASK].unk_F5 = 0;
+        g_BattleActionType                             = 0;
+        g_BattleEnemyBattlers[slot & BYTE_MASK].unk_F5 = 0;
         return;
     }
-    D_801EB630[slot & BYTE_MASK].unk_F5 = g_BattleActionType;
+    g_BattleEnemyBattlers[slot & BYTE_MASK].unk_F5 = g_BattleActionType;
 }
 #else
 INCLUDE_ASM(func_801E25E0);

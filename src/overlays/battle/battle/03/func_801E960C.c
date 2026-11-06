@@ -40,7 +40,7 @@ MATCH void func_801E960C(void) {
 
     slot   = BATTLE_PANEL_TASK->cell_0A.slot - 3;
     offset = slot * 0x118;
-    if (D_801EB630[slot].hp < (D_801EB630[slot].stats.max_hp >> 2)) {
+    if (g_BattleEnemyBattlers[slot].hp < (g_BattleEnemyBattlers[slot].stats.max_hp >> 2)) {
         flags = *(u16*)(D_801EB6B2 + offset) | 0x2000;
     } else {
         flags = *(u16*)(D_801EB6B2 + offset) & 0xDFFF;

@@ -6,7 +6,7 @@ MATCH void func_800C18FC(void) {
     Actor_RequestScript(4);
     ((Actor*)g_Task)->unk_2A = 0;
     func_8014DAEC();
-    func_801E54EC();
+    Battle_CollectEnemySpoils();
     work = g_BattleCurrentEnemy;
     work->damage_flags |= COMBATANT_FLAG_SKIP_ACTION_STEP;
     TASK_BYTES[0] &= ~ACTOR_FLAG_HIDDEN;

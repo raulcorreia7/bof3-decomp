@@ -26,8 +26,8 @@ MATCH s16 Battle_CalcDamage(u8 attacker, u8 target, u16 element) {
     if (BATTLER_IS_PLAYER(attacker)) {
         if (g_BattlePartyBattlers[attacker].action_flags.value & COMBATANT_FLAG_POWER_BOOST) {
             power = &D_801EC30C;
-            *power += (*power * g_BattlePartyBattlers[attacker].charge) >> 1;
-            g_BattlePartyBattlers[attacker].charge = 0;
+            *power += (*power * g_BattlePartyBattlers[attacker].focus_counter) >> 1;
+            g_BattlePartyBattlers[attacker].focus_counter = 0;
             g_BattlePartyBattlers[attacker].action_flags.value &= ~0x40;
         }
     } else if (ENEMY_COMBATANT(attacker).action_flags & COMBATANT_FLAG_POWER_BOOST) {

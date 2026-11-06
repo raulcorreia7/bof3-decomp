@@ -22,7 +22,7 @@ MATCH u8 func_801DB058(void) {
             u16 value;
 
             slot  = (u8)index - 3u;
-            value = D_801EB630[slot].stats.agility;
+            value = g_BattleEnemyBattlers[slot].stats.agility;
             total += value;
             CLAMP_MIN(maximum, value);
             count += 1u;
@@ -74,7 +74,7 @@ MATCH u8 func_801DB058(void) {
             u32 slot;
 
             slot = (u8)index - 3u;
-            D_801EB630[slot].action_flags |= COMBATANT_FLAG_PREEMPTIVE_TURN;
+            g_BattleEnemyBattlers[slot].action_flags |= COMBATANT_FLAG_PREEMPTIVE_TURN;
         }
         index += 1u;
     }

@@ -16,7 +16,7 @@ MATCH void func_801D4850(void) {
                 clr       = 0xFFFFFFBFu;
 
                 if (flags != 0u) {
-                    BATTLE_ACTIVE_PARTY.charge = 0u;
+                    BATTLE_ACTIVE_PARTY.focus_counter = 0u;
                     BATTLE_ACTIVE_PARTY.action_flags.value &= clr;
                 }
             }

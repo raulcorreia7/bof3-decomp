@@ -12,6 +12,6 @@ MATCH void func_801E48D4(void) {
     work->unk_10 += work->unk_1C;
     timer = work->unk_44;
     if (timer < 0) {
-        func_801E54EC();
+        Battle_CollectEnemySpoils();
     }
 }

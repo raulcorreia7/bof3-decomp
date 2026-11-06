@@ -24,7 +24,7 @@ NON_MATCHING void func_8009E248(void) {
             }
         } else {
             enemy = g_BattleTarget - 3;
-            if (D_801EB630[enemy].damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+            if (g_BattleEnemyBattlers[enemy].damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
                 hp = 0;
             } else {
                 hp = D_801EB6C4[enemy][0];

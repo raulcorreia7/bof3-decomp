@@ -59,10 +59,10 @@ MATCH void func_800A9BD8(u8 slot) {
         FIELD(u16, D_801EB6D4, row_offset + 0x02) = func_801DE0AC(FIELD(u16, D_801EB6D4, row_offset + 0x02), 0x64);
     }
 
-    if (D_801EB630[slot].action_flags & COMBATANT_FLAG_HOLY_RESIST_ZERO) {
-        D_801EB630[slot].stats.resistances[RES_SLOT_HOLY] = 0;
+    if (g_BattleEnemyBattlers[slot].action_flags & COMBATANT_FLAG_HOLY_RESIST_ZERO) {
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_SLOT_HOLY] = 0;
     }
-    if (D_801EB630[slot].action_flags & COMBATANT_FLAG_FIRE_RESIST_ZERO) {
+    if (g_BattleEnemyBattlers[slot].action_flags & COMBATANT_FLAG_FIRE_RESIST_ZERO) {
         FIELD(u8, D_801EB6D4, slot * BATTLE_ENEMY_STRIDE + 0x0B) = 0;
     }
 }

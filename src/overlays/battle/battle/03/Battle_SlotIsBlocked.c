@@ -18,10 +18,10 @@ MATCH u8 Battle_SlotIsBlocked(u32 slot) {
     } else {
         subindex = (slot - 3u) & BYTE_MASK;
         offset   = subindex * 280u;
-        if ((D_801EB630[subindex].flags & 1u) == 0u) {
+        if ((g_BattleEnemyBattlers[subindex].flags & 1u) == 0u) {
             return true;
         }
-        if ((D_801EB630[subindex].status & STATUS_KO) != 0u) {
+        if ((g_BattleEnemyBattlers[subindex].status & STATUS_KO) != 0u) {
             return true;
         }
     }

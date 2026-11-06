@@ -29,7 +29,7 @@
 
 /* The party rows 0-2 and enemy rows 3-10 share one battler index space. */
 #define COMBATANT_COUNT                   11
-/* The drop list cap func_801E531C walks. */
+/* The drop list cap Battle_RollEnemyDrops walks. */
 #define BATTLE_SPOILS_COUNT_MAX           15
 
 /* func_801DB434 reads six threshold bytes per row. */
@@ -75,7 +75,7 @@
 /* The enemy battler row for a battler slot: enemy slots begin after the party
  * slots, so slot 3 is the first enemy row. An lvalue, so reads, writes and
  * member access all use it. */
-#define ENEMY_COMBATANT(slot)             (D_801EB630[(slot) - BATTLE_PARTY_SLOT_COUNT])
+#define ENEMY_COMBATANT(slot)             (g_BattleEnemyBattlers[(slot) - BATTLE_PARTY_SLOT_COUNT])
 /* A battler slot on the player side: slots 0-2 are the party rows. */
 #define BATTLER_IS_PLAYER(slot)           ((slot) < BATTLE_PARTY_SLOT_COUNT)
 
@@ -97,7 +97,7 @@
 
 /* The battle spoils record at 0x80146326: the base byte is the escape-attempt
  * counter the battle/battle/15 units read, the count of listed drops sits at +0x01,
- * the dropped item ids at +0x0E and their counts at +0x2E (func_801E531C). */
+ * the dropped item ids at +0x0E and their counts at +0x2E (Battle_RollEnemyDrops). */
 typedef struct Spoils {
     u8  attempts; /* +0x00 escape attempts; battle/battle/15 reads this byte */
     u8  count;    /* +0x01 listed drops, capped at 15 */
@@ -203,7 +203,7 @@ extern u16           D_801463C2;
 extern u8            D_801463C8;
 /* The slot that owns the pending panel: battle/battle/15 latches the selected slot
  * into it (func_8009FAE4), battle/battle/03 clears the 0x4000 event bit when the
- * active row's slot matches it (func_801E54EC). */
+ * active row's slot matches it (Battle_CollectEnemySpoils). */
 extern u8            D_801463CA;
 extern u8            D_801463CD;
 extern u8            D_801463CF;
@@ -232,7 +232,7 @@ extern u8            g_BattleEnemies[];
 extern PartyBattler* D_801EB4E0;
 /* The current battler's enemy work row (the row at ENEMY_COMBATANT_BASE that
  * the battle mode is running). battle/battle/03 stores it when it arms a slot
- * (func_801E2170) and battle/battle/15 reads its cells (func_8009BBE8). */
+ * (func_801E2170) and battle/battle/15 reads its cells (Battle_TestAiCondition). */
 /* D_801EB4E8 */
 extern EnemyBattler* g_BattleCurrentEnemy;
 /* The selected battler's row (D_8014638C), stored by func_801D3624. */

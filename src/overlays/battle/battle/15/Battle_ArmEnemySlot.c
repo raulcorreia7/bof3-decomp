@@ -13,14 +13,15 @@
  * percent, 628 bytes against the retail's 636). residual is the callee-saved set: retail saves s2,s0,ra,s3,s1 with
  * slot in s2 and unit in s0; the candidate saves s1,s0,s3,ra,s2. resume: a source shape that homes slot in s2 and unit
  * in s0, or a register pin that this compiler honours on a parameter. */
+/* func_800ABCE0 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_800ABCE0(s32 slot, u16 unit, s32 x, s32 y) {
+NON_MATCHING void Battle_ArmEnemySlot(s32 slot, u16 unit, s32 x, s32 y) {
     EnemyBattler* enemy;
     u16           unit_id;
     s32           unit_offset;
     s32           enemy_offset;
 
-    enemy = &D_801EB630[slot & BYTE_MASK];
+    enemy = &g_BattleEnemyBattlers[slot & BYTE_MASK];
     TASK_SET(enemy);
     enemy->flags = 1;
     unit_offset  = (unit & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE;
@@ -64,11 +65,11 @@ NON_MATCHING void func_800ABCE0(s32 slot, u16 unit, s32 x, s32 y) {
     Area_FindSceneRecord(FIELD(u16, &D_800E405E, unit_offset));
     enemy_offset                          = (slot & BYTE_MASK) * BATTLE_ENEMY_STRIDE;
     FIELD(u16, &D_801EB6BA, enemy_offset) = FIELD(u16, &D_800E405E, unit_offset);
-    func_800AC218(slot & BYTE_MASK, unit & BYTE_MASK);
+    Battle_LoadEnemyBattler(slot & BYTE_MASK, unit & BYTE_MASK);
     func_800AD0A8(slot & BYTE_MASK, unit & HALF_MASK);
     FIELD(u8, &D_801EB6AF, enemy_offset) = func_800AD044(FIELD(u8, &D_800E4050, unit_offset));
     g_BattleEnemyCount += 1;
 }
 #else
-INCLUDE_ASM(func_800ABCE0);
+INCLUDE_ASM(Battle_ArmEnemySlot);
 #endif

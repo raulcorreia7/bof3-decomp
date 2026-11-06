@@ -62,17 +62,18 @@ NON_MATCHING void func_801DAAE4(void) {
 
     index = 3u;
     while ((u8)index < 11u) {
-        if ((D_801463BA == 0u) || ((D_801EB630[(u8)index - 3u].action_flags & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
+        if ((D_801463BA == 0u) ||
+            ((g_BattleEnemyBattlers[(u8)index - 3u].action_flags & COMBATANT_FLAG_PREEMPTIVE_TURN) != 0u)) {
             if (func_801DB9E4((u8)index) != 0u) {
                 u32 slot;
                 u32 rank;
 
                 slot                        = (u8)index - 3u;
-                rank                        = func_801DB434(D_801EB630[slot].unk_88, 0u);
+                rank                        = func_801DB434(g_BattleEnemyBattlers[slot].unk_88, 0u);
                 D_801EB550[(u8)count].index = (u8)index;
                 count += 1u;
                 D_801EB550[(u8)count - 1u].value =
-                    D_801EB630[slot].stats.agility + D_801EAF48[((u8)rank * 0x10u) + (RANDOM_MASK(0xFu))];
+                    g_BattleEnemyBattlers[slot].stats.agility + D_801EAF48[((u8)rank * 0x10u) + (RANDOM_MASK(0xFu))];
             }
         }
         index += 1u;

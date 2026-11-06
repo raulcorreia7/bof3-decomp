@@ -207,11 +207,11 @@ typedef struct BattleHandlerQuad {
  * table holds four packets per enemy kind record, at the kind record's +0x34.
  *
  * Evidence: the retail reads the packet's +0x00 with `lbu` and switches on it
- * (func_8009BBE8), its +0x01 with `lbu` and switches on it (func_8009C994),
+ * (Battle_TestAiCondition), its +0x01 with `lbu` and switches on it (func_8009C994),
  * its +0x02 and +0x03 with `lbu`, its +0x04 with `lbu`, its +0x06 with `lh`
  * and its +0x08..+0x0F with `lbu` (func_8009C994). */
 typedef struct BattleEventPacket {
-    u8  kind;        /* +0x00 the kind func_8009BBE8 switches on to pick the trigger test */
+    u8  kind;        /* +0x00 the kind Battle_TestAiCondition switches on to pick the trigger test */
     u8  effect_kind; /* +0x01 the kind func_8009C994 switches on to pick the record update */
     u8  selector;    /* +0x02 the bits that select the cells the packet updates */
     u8  value;       /* +0x03 the value the selected cells take */
@@ -811,7 +811,8 @@ u8          func_800AB68C(u8 excluded_slot);
 extern void func_800ABBE0(void);
 extern void func_800ABC30(void);
 extern void Battle_LoadEncounterEnemies(void);
-void        func_800AC218(s32 slot, s32 unit_index);
+/* func_800AC218 */
+void        Battle_LoadEnemyBattler(s32 slot, s32 unit_index);
 void        func_800AD0A8(s32 enemy_index, s32 unit_index);
 void        func_800AD2EC(void);
 void        func_800AD434(void);
