@@ -270,7 +270,7 @@ typedef struct BattleTurn {
     s16               ap_change; /* signed AP delta, as hp_change */
     u8                target_flags;
     u8                counter;
-    u8                unk_0A;
+    u8                choice; /* the menu choice stored with the command */
     u8                unk_0B;
     BattlerFlags      damage_flags; /* BattleBattlerDamageFlags */
     BattlerFlags      action_flags; /* BattleBattlerActionFlags */

@@ -22,7 +22,7 @@ MATCH void func_801DDFEC(u32 battler_index) {
             if ((substate >> 8) != 0u) {
                 return;
             }
-            func_801DDE7C(g_BattlePartyBattlers[battler].turn.unk_0A, substate);
+            func_801DDE7C(g_BattlePartyBattlers[battler].turn.choice, substate);
             return;
         }
         index += 1u;

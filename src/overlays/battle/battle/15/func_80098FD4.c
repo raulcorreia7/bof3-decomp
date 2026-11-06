@@ -12,7 +12,7 @@ MATCH void func_80098FD4(void) {
     g_BattleMessageSlot[1]   = 2u;
     g_BattleCommandCount += 1u;
     D_801EB5B1[((D_801EC328 - 1) & 0xF) * 8] = 1u;
-    D_801EB4D8->unk_0A                       = *cursor;
+    D_801EB4D8->choice                       = *cursor;
     if (D_801C8950[*group][*cursor] >= 2u) {
         D_801C8950[*group][*cursor] -= 1u;
     } else {
