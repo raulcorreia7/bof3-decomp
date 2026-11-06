@@ -41,7 +41,7 @@ typedef enum AreaId {
     AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE           = 33,
     AREA_ID_DAUNA_MINE_BAIS                      = 34,
     AREA_ID_OGRE_ROAD                            = 35,
-    AREA_ID_UNUSED_36                            = 36,
+    AREA_ID_NO_SCRIPT_36                         = 36,
     AREA_ID_WYNDIA_LOWER                         = 37,
     AREA_ID_WYNDIA_UPPER                         = 38,
     AREA_ID_WYNDIA_CASTLE                        = 39,

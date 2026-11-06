@@ -128,27 +128,27 @@ Callback g_ActorHandlers[187] = {
 
 AreaHandler D_801C7F5C[11] = {
     GAME_INDEX_HANDLER((Callback)func_801F2EEC, (Callback)func_801F45CC, (Callback)func_801F4178,
-                       (Callback)func_801F341C, (Callback)func_801F4768, &D_801F4DA0, 16),
+                       (Callback)func_801F341C, (Callback)func_801F4768, &D_801F4DA0, AREA_ID_YRAAL_WORLD_MAP),
     GAME_INDEX_HANDLER((Callback)func_801F2E20, (Callback)func_801F4500, (Callback)func_801F40AC,
-                       (Callback)func_801F3350, (Callback)func_801F469C, &D_801F4CC8, 33),
+                       (Callback)func_801F3350, (Callback)func_801F469C, &D_801F4CC8, AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE),
     GAME_INDEX_HANDLER((Callback)func_801F2EEC, (Callback)func_801F45CC, (Callback)func_801F4178,
-                       (Callback)func_801F341C, (Callback)func_801F4768, &D_801F4DA4, 45),
+                       (Callback)func_801F341C, (Callback)func_801F4768, &D_801F4DA4, AREA_ID_WYNDIA_WORLD_MAP),
     GAME_INDEX_HANDLER((Callback)func_801F2F24, (Callback)func_801F4604, (Callback)func_801F41B0,
-                       (Callback)func_801F3454, (Callback)func_801F47A0, &D_801F4DE0, 65),
+                       (Callback)func_801F3454, (Callback)func_801F47A0, &D_801F4DE0, AREA_ID_MOMO_TOWER_WORLD_MAP),
     GAME_INDEX_HANDLER((Callback)func_801F2F20, (Callback)func_801F45FC, (Callback)func_801F41A8,
-                       (Callback)func_801F3450, (Callback)func_801F4798, &D_801F4DD4, 87),
+                       (Callback)func_801F3450, (Callback)func_801F4798, &D_801F4DD4, AREA_ID_RHAPALA_WORLD_MAP),
     GAME_INDEX_HANDLER((Callback)func_801F3A50, (Callback)func_801F512C, (Callback)func_801F4CD8,
-                       (Callback)func_801F3F80, (Callback)func_801F52C8, &D_801F591C, 88),
+                       (Callback)func_801F3F80, (Callback)func_801F52C8, &D_801F591C, AREA_ID_URKAN_TAPA_WORLD_MAP),
     GAME_INDEX_HANDLER((Callback)func_801F2FB0, (Callback)0, (Callback)0, (Callback)func_801F34E0,
                        (Callback)func_801F4238, (s32)0x00000000u, 104),
     GAME_INDEX_HANDLER((Callback)func_801F2EF0, (Callback)func_801F45CC, (Callback)func_801F4178,
-                       (Callback)func_801F3420, (Callback)func_801F4768, &D_801F4D90, 115),
+                       (Callback)func_801F3420, (Callback)func_801F4768, &D_801F4D90, AREA_ID_DAUNA_WORLD_MAP),
     GAME_INDEX_HANDLER((Callback)func_801F2F04, (Callback)func_801F45E0, (Callback)func_801F418C,
-                       (Callback)func_801F3434, (Callback)func_801F477C, &D_801F64E8, 121),
+                       (Callback)func_801F3434, (Callback)func_801F477C, &D_801F64E8, AREA_ID_STEEL_BEACH_MAP),
     GAME_INDEX_HANDLER((Callback)func_801F2E5C, (Callback)func_801F4538, (Callback)func_801F40E4,
-                       (Callback)func_801F338C, (Callback)func_801F46D4, &D_801F4D04, 151),
+                       (Callback)func_801F338C, (Callback)func_801F46D4, &D_801F4D04, AREA_ID_KOMBINAT_WORLD_MAP),
     GAME_INDEX_HANDLER((Callback)func_801F2DB0, (Callback)func_801F448C, (Callback)func_801F4038,
-                       (Callback)func_801F32E0, (Callback)func_801F4628, &D_801F4C48, 152),
+                       (Callback)func_801F32E0, (Callback)func_801F4628, &D_801F4C48, AREA_ID_DRAGNIER_WORLD_MAP),
 };
 
 Callback D_801C8090[3] = {(Callback)func_8019A3FC, (Callback)func_8019A53C, (Callback)func_8019A7D4};
@@ -193,7 +193,7 @@ Callback D_801C8164[6] = {(Callback)func_8019DE10, (Callback)func_8019E264, (Cal
 Callback D_801C817C[4] = {(Callback)func_8019DE54, (Callback)func_8019DF8C, (Callback)func_8019DFB4,
                           (Callback)func_8019E1A0};
 
-u8 s_AreaCueIds[12] = {0x07, 0x08, 0x09, 0x0A, 0x0E, 0x11, 0x13, 0x1D, 0x60, 0x00, 0x00, 0x00};
+u8 s_AreaCueIds[12] = {AREA_ID_MCNEIL_BEFORE_NUE, AREA_ID_CEDAR_WOODS_BUNYAN_BEFORE_NUE, AREA_ID_CEDAR_WOODS_BEFORE_NUE, AREA_ID_CEDAR_WOODS_HOUSE_BEFORE_NUE, AREA_ID_FARM_BEFORE_NUE, AREA_ID_MCNEIL_MANOR_AREA_BEFORE_NUE, AREA_ID_YRAAL_ROAD_BEFORE_NUE, AREA_ID_YRAAL_BATTLEFIELD_BEFORE_NUE, AREA_ID_BEFORE_MOUNT_GLAUS_BEFORE_NUE, 0x00, 0x00, 0x00};
 
 Callback D_801C8198[2] = {(Callback)func_8019E2A8, (Callback)func_8019E36C};
 
@@ -326,20 +326,20 @@ SceneFunc g_SceneObjects[66] = {
     (SceneFunc)&D_801F4288, (SceneFunc)&D_801F3184,   (SceneFunc)&D_801F15B8,   (SceneFunc)func_801F2CA8,
     (SceneFunc)&D_801F4594, (SceneFunc)&D_801F3C9C};
 
-AreaHooks D_801C86F8 = {{MAP_HOOK(44, (Callback)func_801F33A8),  MAP_HOOK(108, (Callback)func_801F4F60),
-                         MAP_HOOK(49, (Callback)func_801F3194),  MAP_HOOK(77, (Callback)func_801F5880),
-                         MAP_HOOK(86, (Callback)func_801F3350),  MAP_HOOK(52, (Callback)func_801F3E14),
-                         MAP_HOOK(135, (Callback)func_801F5130), MAP_HOOK(145, (Callback)func_801F4504),
-                         MAP_HOOK(175, (Callback)func_801F4528), MAP_HOOK(176, (Callback)func_801F3378),
-                         MAP_HOOK(177, (Callback)func_801F3378), MAP_HOOK(178, (Callback)func_801F3378),
-                         MAP_HOOK(179, (Callback)func_801F3378), MAP_HOOK(180, (Callback)func_801F3378),
-                         MAP_HOOK(181, (Callback)func_801F3378), MAP_HOOK(182, (Callback)func_801F3378),
-                         MAP_HOOK(183, (Callback)func_801F3378), MAP_HOOK(184, (Callback)func_801F3378),
-                         MAP_HOOK(185, (Callback)func_801F3378), MAP_HOOK(109, (Callback)func_801F2D78),
-                         MAP_HOOK(112, (Callback)func_801F3A14), MAP_HOOK(167, (Callback)func_801F4914),
-                         MAP_HOOK(139, (Callback)func_801F4364), MAP_HOOK(140, (Callback)func_801F4380),
-                         MAP_HOOK(148, (Callback)func_801F41A0), MAP_HOOK(141, (Callback)func_801F4158),
-                         MAP_HOOK(117, (Callback)func_801F4534), MAP_HOOK(118, (Callback)func_801F502C)}};
+AreaHooks D_801C86F8 = {{MAP_HOOK(AREA_ID_MOMO_TOWER_UPPER, (Callback)func_801F33A8),  MAP_HOOK(AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, (Callback)func_801F4F60),
+                         MAP_HOOK(AREA_ID_PLANT, (Callback)func_801F3194),  MAP_HOOK(AREA_ID_LIGHTHOUSE_INSIDE, (Callback)func_801F5880),
+                         MAP_HOOK(AREA_ID_STEEL_BEACH_FREIGHTER, (Callback)func_801F3350),  MAP_HOOK(AREA_ID_DUMP, (Callback)func_801F3E14),
+                         MAP_HOOK(AREA_ID_BLACK_SHIP_EARLY, (Callback)func_801F5130), MAP_HOOK(AREA_ID_COLONY_OUTSIDE, (Callback)func_801F4504),
+                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_DOLPHIN, (Callback)func_801F4528), MAP_HOOK(AREA_ID_FAIRY_VILLAGE_176, (Callback)func_801F3378),
+                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_177, (Callback)func_801F3378), MAP_HOOK(AREA_ID_FAIRY_VILLAGE_178, (Callback)func_801F3378),
+                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_179, (Callback)func_801F3378), MAP_HOOK(AREA_ID_FAIRY_VILLAGE_180, (Callback)func_801F3378),
+                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_181, (Callback)func_801F3378), MAP_HOOK(AREA_ID_FAIRY_VILLAGE_182, (Callback)func_801F3378),
+                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_183, (Callback)func_801F3378), MAP_HOOK(AREA_ID_FAIRY_VILLAGE_184, (Callback)func_801F3378),
+                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_185, (Callback)func_801F3378), MAP_HOOK(AREA_ID_DAUNA_MINE_NO_TEXT, (Callback)func_801F2D78),
+                         MAP_HOOK(AREA_ID_RELAY_POINT_A_PORTAL, (Callback)func_801F3A14), MAP_HOOK(AREA_ID_MYRIA_STATION_WORKERS, (Callback)func_801F4914),
+                         MAP_HOOK(AREA_ID_FACTORY_OUTSIDE_SECOND, (Callback)func_801F4364), MAP_HOOK(AREA_ID_FACTORY_BLOCK_ROOM, (Callback)func_801F4380),
+                         MAP_HOOK(AREA_ID_CAER_XHAN_LIFT_AREA, (Callback)func_801F41A0), MAP_HOOK(AREA_ID_RYU_DREAM_FIRST, (Callback)func_801F4158),
+                         MAP_HOOK(AREA_ID_HIDDEN_FACTORY_ENTRANCE, (Callback)func_801F4534), MAP_HOOK(AREA_ID_HIDDEN_FACTORY_ROOMS, (Callback)func_801F502C)}};
 
 u8 s_TalkMessageIds[36] = {0x53, 0x00, 0x00, 0x5B, 0x6C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x54,
                            0x00, 0x00, 0x5C, 0x6D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x00,
@@ -2382,14 +2382,14 @@ Callback D_801CD1D8[19] = {
     (Callback)func_801CF564, (Callback)func_801CF878, (Callback)func_801D0324, (Callback)func_801CF650,
     (Callback)func_801D0704, (Callback)func_801CFA30, (Callback)func_801D04DC};
 
-WorldMapBattlefields D_801CD224 = {{GAME_MAP(16, 20), GAME_MAP(33, 29), GAME_MAP(45, 63), GAME_MAP(65, 64),
-                                    GAME_MAP(87, 72), GAME_MAP(88, 73), GAME_MAP(115, 110), GAME_MAP(121, 20),
-                                    GAME_MAP(151, 124), GAME_MAP(152, 125)}};
+WorldMapBattlefields D_801CD224 = {{GAME_MAP(AREA_ID_YRAAL_WORLD_MAP, AREA_ID_YRAAL_BATTLEFIELD), GAME_MAP(AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, AREA_ID_YRAAL_BATTLEFIELD_BEFORE_NUE), GAME_MAP(AREA_ID_WYNDIA_WORLD_MAP, AREA_ID_WYNDIA_CENTRAL_BATTLEFIELD), GAME_MAP(AREA_ID_MOMO_TOWER_WORLD_MAP, AREA_ID_WYNDIA_EASTERN_BATTLEFIELD),
+                                    GAME_MAP(AREA_ID_RHAPALA_WORLD_MAP, AREA_ID_RHAPALA_BATTLEFIELD), GAME_MAP(AREA_ID_URKAN_TAPA_WORLD_MAP, AREA_ID_URKAN_BATTLEFIELD), GAME_MAP(AREA_ID_DAUNA_WORLD_MAP, AREA_ID_DAUNA_HILLS_BATTLEFIELD), GAME_MAP(AREA_ID_STEEL_BEACH_MAP, AREA_ID_YRAAL_BATTLEFIELD),
+                                    GAME_MAP(AREA_ID_KOMBINAT_WORLD_MAP, AREA_ID_LOST_SHORE_BATTLEFIELD), GAME_MAP(AREA_ID_DRAGNIER_WORLD_MAP, AREA_ID_DESERT_BATTLEFIELD)}};
 
 WorldMapDestination D_801CD24C[10] = {
-    {0x10, 0x5A, {0x13, 0x16}}, {0x21, 0x5A, {0x13, 0x16}}, {0x2D, 0x5A, {0x13, 0x16}}, {0x41, 0x5A, {0x13, 0x16}},
-    {0x57, 0x5A, {0x13, 0x16}}, {0x58, 0x5A, {0x13, 0x16}}, {0x73, 0x5A, {0x13, 0x16}}, {0x79, 0xBB, {0x24, 0x2C}},
-    {0x97, 0x99, {0x13, 0x16}}, {0x98, 0x9A, {0x13, 0x16}},
+    {AREA_ID_YRAAL_WORLD_MAP, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}}, {AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}}, {AREA_ID_WYNDIA_WORLD_MAP, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}}, {AREA_ID_MOMO_TOWER_WORLD_MAP, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}},
+    {AREA_ID_RHAPALA_WORLD_MAP, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}}, {AREA_ID_URKAN_TAPA_WORLD_MAP, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}}, {AREA_ID_DAUNA_WORLD_MAP, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}}, {AREA_ID_STEEL_BEACH_MAP, AREA_ID_ADULT_CAMP, {0x24, 0x2C}},
+    {AREA_ID_KOMBINAT_WORLD_MAP, AREA_ID_CAMP_MORE, {0x13, 0x16}}, {AREA_ID_DRAGNIER_WORLD_MAP, AREA_ID_CAMP_EVEN_MORE, {0x13, 0x16}},
 };
 
 u8 s_AreaScenePositions[8] = {

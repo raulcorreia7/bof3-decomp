@@ -10,7 +10,7 @@ MATCH void func_8019CEDC(void) {
     moved             = work->pos.y.fixed + work->vy;
     work->pos.y.fixed = moved;
     if (work->unk_09 == 0) {
-        if (LOHU(g_GameAreaId) == 0x54) {
+        if (LOHU(g_GameAreaId) == AREA_ID_ANGEL_TOWER_LOWER) {
             if ((work->pos.x.fixed == 0x118000) && (moved == 0x4A8000)) {
                 SYS_SetFlag(g_SceneEventFlags, 0x36);
             } else {
