@@ -1618,7 +1618,8 @@ MATCH void func_801FA7D8(void) {
             if (D_80146866 == 0u) {
                 break;
             }
-            /* FAKE: the index read gets its own statement and is locked, so the scheduler cannot hoist the accum address above it. */
+            /* FAKE: the index read gets its own statement and is locked, so the scheduler cannot hoist the accum
+               address above it. */
             /* FAKE: the lock holds the retail load order around the index read. */
             ORDER_LOCK(index_raw = g_FrameCount);
             accum      = &D_80147A96;

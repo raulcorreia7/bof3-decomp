@@ -6,9 +6,9 @@
 /* nonmatching unmeasured: tried 55.15% at the control flow: mode switch with case 1, 4 and default, positive-polarity
  * flag chains, func_801E2D90 takes the slot index (branch-delay-slot a0 setup), non-volatile mode byte; falsified:
  * flags-first and kind-index-first load order through locals (44.44), flat kind*20 offset (44.44), a0/v1 pins on flags
- * and targeting_flags (54.81), declaration order and enemy_index + 3 (55.15 unchanged), 20 min random search run (type hacks
- * only). resume: case 4 header: kind index load, flags load into a0, targeting flags into v1, row in v0, index copy in
- * a1 and parameter copy in a2. */
+ * and targeting_flags (54.81), declaration order and enemy_index + 3 (55.15 unchanged), 20 min random search run (type
+ * hacks only). resume: case 4 header: kind index load, flags load into a0, targeting flags into v1, row in v0, index
+ * copy in a1 and parameter copy in a2. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 Battle_PickEnemyTarget(u8 enemy_index) {
     u16 flags;

@@ -6,7 +6,8 @@
  * One definition shared by the plchar character programs; each program includes
  * it where the function sits, and a change must keep every member matching.
  */
-/* func_801D0204 (plp016), func_801D0628 (plp026), func_801D042C (plp056), func_801CF900 (plp267), func_801CF324 (plp467), func_801CF704 (plp567), func_801CF108 (plp678) */
+/* func_801D0204 (plp016), func_801D0628 (plp026), func_801D042C (plp056), func_801CF900 (plp267), func_801CF324
+   (plp467), func_801CF704 (plp567), func_801CF108 (plp678) */
 MATCH void Char_ClearModeIfUnused(void) {
     Actor* work = g_Task;
 

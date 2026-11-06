@@ -19,7 +19,8 @@ MATCH s32 EMI_LoaderNextRead(u8 slot) {
     if (slot == 0u) {
         first_sector   = g_EmiSlotSectors[0];
         g_EmiBytesLeft = 0x800;
-        /* FAKE: statement boundary keeps the retail register order and schedule; the plain form without barriers is 12 bytes short. */
+        /* FAKE: statement boundary keeps the retail register order and schedule; the plain form without barriers is 12
+           bytes short. */
         ORDER_LOCK(g_EmiEntryType = EMI_LOADER_STATE_ARCHIVE_HEADER);
         /* FAKE: barrier holds the return constant after the loader stores.
          */

@@ -1,7 +1,7 @@
 #include "start_08.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 55.84%. resume: a lever or header fix that
- * closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 55.84%. resume: a lever or header
+ * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph_left, s32 glyph_right) {
     s32       stack_18;

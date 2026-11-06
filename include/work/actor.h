@@ -45,12 +45,10 @@
     g_Task->tint.bytes.unk_5E = 0; \
     g_Task->tint.bytes.unk_5F = 0
 
-/* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the
- * row's palette pair; bit 3 marks selection voices queued on the row
- * (@source: write:SND_QueueSelectionFx@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes the advance-stream tail after the step
- * deltas; bit 5 makes the row's primitives semi-transparent; bit 6 hides the
- * row from the draw, walkability and entity-lookup paths; bit 7 marks a row
- * culled outside the window. */
+/* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the row's palette pair; bit 3 marks selection
+ * voices queued on the row (@source: write:SND_QueueSelectionFx@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes
+ * the advance-stream tail after the step deltas; bit 5 makes the row's primitives semi-transparent; bit 6 hides the row
+ * from the draw, walkability and entity-lookup paths; bit 7 marks a row culled outside the window. */
 typedef enum ActorFlags {
     ACTOR_FLAG_IN_USE             = 1 << 0,
     ACTOR_FLAG_SKIP_PALETTE_STAGE = 1 << 1,

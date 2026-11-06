@@ -1,9 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* probes the bundle cell grid: the (x, y) delta becomes a row/column pair (both outside 0x38 reject),
- * rotated by the cursor offsets g_AreaGridRowCursor/g_AreaGridColCursor; when the low 12 bits of the prim_id of the rotated g_AreaCells entry are set
- * they go to func_80156ED4 with the slot byte minus 0x10.
- */
+/* probes the bundle cell grid: the (x, y) delta becomes a row/column pair (both outside 0x38 reject), rotated by the
+ * cursor offsets g_AreaGridRowCursor/g_AreaGridColCursor; when the low 12 bits of the prim_id of the rotated
+ * g_AreaCells entry are set they go to func_80156ED4 with the slot byte minus 0x10. */
 
 MATCH void func_80156E00(u8* unit, s32 x, s32 y) {
     s32 dx;

@@ -291,8 +291,8 @@ extern s32       D_801CD954;
 
 /* Finds the first unused slot in the entry table at 0x80143FC8; the retail
  * callee reads no argument and zeroes $a0 before the scan. */
-/* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`; `move a0,s4` in Actor_StepMovement) and the
- * callee never reads it; with (void) that instruction is dropped. */
+/* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`; `move a0,s4` in Actor_StepMovement) and
+ * the callee never reads it; with (void) that instruction is dropped. */
 /* Selects a route direction away from the work record's current direction:
  * returns -1 when the current index lies in the selector's four-step span,
  * otherwise 1. */

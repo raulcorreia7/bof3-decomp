@@ -2,8 +2,8 @@
 
 /* lifted draft, best score 48.50%; semantics unverified
  */
-/* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned draft; best
- * score 48.50%. resume: a lever or header fix that closes the first mismatch. */
+/* nonmatching unmeasured: tried the first draft cleaned to compiling C; register pins dropped, score is the pinned
+ * draft; best score 48.50%. resume: a lever or header fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80161454(u32 index) {
     struct {

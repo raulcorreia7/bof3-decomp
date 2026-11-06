@@ -3,7 +3,8 @@
  * shared by the world area overlays; every change here must verify every
  * member.
  */
-/* func_801F314C (area167), func_801F38A4 (area168), func_801F3078 (area169), func_801F4080 (area170), func_801F4570 (area173), func_801F38E8 (area174) */
+/* func_801F314C (area167), func_801F38A4 (area168), func_801F3078 (area169), func_801F4080 (area170), func_801F4570
+   (area173), func_801F38E8 (area174) */
 MATCH void Actor_SlideScreenDown16(void) {
     Actor* work;
 

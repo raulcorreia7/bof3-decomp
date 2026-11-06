@@ -1,7 +1,7 @@
 #include "shop_00.h"
 
-/* nonmatching unmeasured: tried the first draft cleaned with a typed row loop and FIELD cursor cells. resume: close the +0xC
- * insert (extra store) in the row loop. */
+/* nonmatching unmeasured: tried the first draft cleaned with a typed row loop and FIELD cursor cells. resume: close the
+ * +0xC insert (extra store) in the row loop. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DF6A8(void) {
     u8* cell;

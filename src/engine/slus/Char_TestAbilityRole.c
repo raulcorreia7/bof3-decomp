@@ -1,9 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* maps the record's value byte (Item_GetKind, kind kind_id, index index) to a role 0..4 for values 1..5, else
- * 0; when bit bit of the flag byte (Item_GetEquipability) is set it returns 1 if role equals the role (roles 0..3) or is
- * 4/5 (role 4), else 0.
- */
+/* maps the record's value byte (Item_GetKind, kind kind_id, index index) to a role 0..4 for values 1..5, else 0; when
+ * bit bit of the flag byte (Item_GetEquipability) is set it returns 1 if role equals the role (roles 0..3) or is 4/5
+ * (role 4), else 0. */
 MATCH s32 Char_TestAbilityRole(s32 bit, s32 role, s32 kind_id, s32 index) {
     s32 kind;
 
