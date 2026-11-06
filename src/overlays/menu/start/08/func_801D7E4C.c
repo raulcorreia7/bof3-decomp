@@ -32,7 +32,7 @@ MATCH void func_801D7E4C(void) {
         *latch = 0;
     }
     buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
-    count   = Party_CountOrder(0);
+    count   = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     cursor  = &D_80148658;
     old     = *cursor;
     if (buttons & PADLup) {
@@ -70,7 +70,7 @@ MATCH void func_801D7E4C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         SND_PlayCue(EMI_CUE_ID(1, 2));
         D_801485DC = 0;
-        for (i = 0; i < Party_CountOrder(0); i++) {
+        for (i = 0; i < Party_CountOrder(PARTY_ORDER_KIND_WALKING); i++) {
             D_80148333[((i + 0xD) * 9) << 2] = 9;
             D_80148333[((i + 4) * 9) << 2]   = 8;
         }

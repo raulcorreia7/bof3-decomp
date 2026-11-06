@@ -33,7 +33,7 @@ NON_MATCHING void func_801DAE14(void) {
     volatile u8* flags;
     volatile u8* total;
 
-    count  = Party_CountOrder(0);
+    count  = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     flags  = &D_801484EA;
     *flags = 0;
     offset = 0;

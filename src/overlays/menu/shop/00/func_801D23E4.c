@@ -35,7 +35,7 @@ MATCH void func_801D23E4(void) {
         D_80148652 += 1;
     } else if (g_InputPressed & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        for (index = 0; index < Party_CountOrder(0); index++) {
+        for (index = 0; index < Party_CountOrder(PARTY_ORDER_KIND_WALKING); index++) {
             if (index == (s8)D_80148656) {
                 g_MenuPanelTasks[index + 3].state = 4;
             } else {

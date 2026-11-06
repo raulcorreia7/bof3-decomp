@@ -17,7 +17,7 @@ MATCH void func_801C329C(void) {
 
     scratch_ptr = scratch;
     found       = 0;
-    total       = Party_CountOrder(0);
+    total       = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     if (g_GameRequestFlags & 1) {
         index = 0;
         if ((s16)total > 0) {

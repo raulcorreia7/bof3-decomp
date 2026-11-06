@@ -29,7 +29,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         (((LOBU(g_GameRequestFlags) & 9) != 0) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) ||
          (LOHU(g_GameAreaId) == AREA_ID_ADULT_CAMP) ||
          (((LOBU(g_GameRequestFlags) & 0x40) != 0) && (SYS_TestFlag(g_SceneEventFlags, 0x77U) == 0)))) {
-        count = Party_CountOrder(0);
+        count = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
         for (i = 0; i < count; i++) {
             g_Characters[g_CharSlot[D_80144F5A[i]]].status &= ~STATUS_CONFUSED;
         }
@@ -77,9 +77,9 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             *(s32*)&D_80145F00              = 0;
         }
     } else {
-        g_PartySize = Party_CountOrder(0);
+        g_PartySize = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
         if (!(g_AreaWalkFlags & AREA_WALK_MAP_LOADING)) {
-            Party_BuildBattlers(0);
+            Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
         } else {
             i = 0;
             if (i < g_PartySize) {

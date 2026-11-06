@@ -30,7 +30,7 @@ MATCH s32 func_801DF478(void) {
         return standby_id;
     }
     SND_PlayCue(EMI_CUE_ID(1, 3));
-    for (slot = 0; slot < (Party_CountOrder(0) & BYTE_MASK); slot++) {
+    for (slot = 0; slot < (Party_CountOrder(PARTY_ORDER_KIND_WALKING) & BYTE_MASK); slot++) {
         if (D_80144F5A[slot] == field_id) {
             D_80144F5A[slot] = standby_id;
         }

@@ -8,7 +8,7 @@ MATCH void func_801B0C88(void) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
 
-    total = Party_CountOrder(0);
+    total = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     index = 0;
     if ((total & BYTE_MASK) > 0) {
         do {

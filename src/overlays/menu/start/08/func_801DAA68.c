@@ -32,7 +32,7 @@ NON_MATCHING void func_801DAA68(void) {
 
     i = 0;
     for (;;) {
-        count = Party_CountOrder(0);
+        count = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
         index = i & BYTE_MASK;
         if ((s32)index >= (u32)count) {
             break;

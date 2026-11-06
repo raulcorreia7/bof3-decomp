@@ -27,7 +27,7 @@ MATCH void func_801D2564(void) {
     TEXT_SetVariable(0U, 5U, g_CharSlot[D_80144F5A[selection_index]] * 0xA4 + panel_data);
     g_MenuPanelTasks[11].unk_10 = 0x12;
     input                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
-    count                       = Party_CountOrder(0U);
+    count                       = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
     old_selection               = *selection;
     if ((input & PADLup) != 0) {
         new_selection = old_selection - 1;
@@ -64,7 +64,7 @@ MATCH void func_801D2564(void) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         SND_PlayCue(EMI_CUE_ID(1, 2));
         i = 0;
-        while (i < Party_CountOrder(0U)) {
+        while (i < Party_CountOrder(PARTY_ORDER_KIND_WALKING)) {
             g_MenuPanelTasks[i + 12].state = 1;
             i++;
         }

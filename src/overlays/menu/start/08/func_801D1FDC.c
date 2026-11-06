@@ -9,7 +9,7 @@ MATCH void func_801D1FDC(void) {
     Menu_ResetPanelTasks();
     i = 0;
     for (;;) {
-        count = Party_CountOrder(0);
+        count = Party_CountOrder(PARTY_ORDER_KIND_WALKING);
         index = i & BYTE_MASK;
         if (index >= count) {
             break;

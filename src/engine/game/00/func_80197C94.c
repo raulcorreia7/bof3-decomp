@@ -6,7 +6,7 @@ MATCH void func_80197C94(void) {
     u32  arg;
     u32  i;
 
-    Party_BuildBattlers(1);
+    Party_BuildBattlers(PARTY_ORDER_KIND_BATTLE);
     func_801BF448();
     func_801A06D8();
     func_801992B8();

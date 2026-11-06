@@ -4,7 +4,7 @@
 /* func_801FDE0C (scena09), func_801FABC0 (scena11), func_801FCE2C (scena12) */
 MATCH void Scene_JoinAdultNina(void) {
     EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(0);
+    Party_BuildBattlers(PARTY_ORDER_KIND_WALKING);
     Party_JoinMember(CHAR_ID_NINA_ADULT);
     func_801C1630();
 }
