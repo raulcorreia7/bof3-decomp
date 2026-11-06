@@ -16,7 +16,7 @@ NON_MATCHING void func_8019B704(void) {
         acc            = saved + g_Task->unk_18;
         g_Task->unk_0C = acc;
         acc = ABS(acc);
-        if (acc < ONE) {
+        if (acc < 0x1000) {
             g_Task->unk_0C = saved;
             g_Task->unk_18 = 0;
         }
@@ -28,7 +28,7 @@ NON_MATCHING void func_8019B704(void) {
         acc            = saved + g_Task->unk_1C;
         g_Task->unk_1C = acc;
         acc = ABS(acc);
-        if (acc < ONE) {
+        if (acc < 0x1000) {
             g_Task->unk_10 = saved;
             g_Task->unk_1C = 0;
         }
