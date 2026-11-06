@@ -14,7 +14,7 @@ MATCH void func_801F2C04(void) {
             if (*result == 2) {
                 Game_ClearScriptActive();
                 *result          = 0;
-                g_SceneEventMode = 0;
+                g_SceneEventMode = SCENE_EVENT_NONE;
                 *state           = 0;
             }
             break;

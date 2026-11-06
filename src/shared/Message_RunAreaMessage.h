@@ -14,7 +14,7 @@ MATCH void Message_RunAreaMessage(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode      = 0;
+                g_SceneEventMode      = SCENE_EVENT_NONE;
                 *state                = 0;
                 g_SceneEventSelection = 0;
             }

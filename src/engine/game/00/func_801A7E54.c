@@ -47,7 +47,7 @@ MATCH void func_801A7E54(void) {
                 Game_ClearScriptActive();
                 SYS_ClearFlag(g_SceneEventFlags, 0x1E);
                 SYS_ClearFlag(g_SceneEventFlags, 0x1F);
-                g_SceneEventMode      = 0;
+                g_SceneEventMode      = SCENE_EVENT_NONE;
                 g_SceneEventStep      = 0;
                 g_SceneEventSelection = 0;
             }

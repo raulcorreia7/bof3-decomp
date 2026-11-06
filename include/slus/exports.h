@@ -12,6 +12,14 @@
 #include "common/handler.h"
 #include "sys/sched.h"
 
+/* The g_SceneEvents handlers with a known role; the other handlers stay numeric. */
+typedef enum SceneEventMode {
+    SCENE_EVENT_NONE      = 0,
+    SCENE_EVENT_MASTER    = 4,
+    SCENE_EVENT_MESSAGE   = 6,
+    SCENE_EVENT_SHOP_SAVE = 10,
+} SceneEventMode;
+
 /* 0x80010000: overlay text and image offsets. */
 extern u16            D_80010008;
 extern u16            D_8001008A;

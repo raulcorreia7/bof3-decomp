@@ -647,7 +647,7 @@ MATCH void func_801F37E4(void) {
                 *flag = 0;
                 Game_ClearScriptActive();
                 SYS_ClearFlag(g_SceneEventFlags, 1);
-                g_SceneEventMode = 0;
+                g_SceneEventMode = SCENE_EVENT_NONE;
                 g_SceneEventStep = 0;
             }
         } break;
