@@ -4,7 +4,7 @@
 MATCH void Battle_Update(void) {
     s32 status = g_BattleState;
 
-    if (!(status & BATTLE_STATE_WINDOW_BUSY) && ((g_MenuPanelTasks[0].unk_00[0] == 0) || (g_BattleMode == 5)) &&
+    if (!(status & BATTLE_STATE_WINDOW_BUSY) && ((g_MenuPanelTasks[0].active == 0) || (g_BattleMode == 5)) &&
         ((g_BattleEventFlags & 2) == 0 || (g_BattleMode == 5))) {
         Battle_DispatchMode();
     }
