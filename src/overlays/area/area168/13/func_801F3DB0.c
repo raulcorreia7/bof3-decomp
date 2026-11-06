@@ -5,7 +5,7 @@ MATCH void func_801F3DB0(void) {
     Actor* work;
 
     scratch               = g_Task;
-    scratch->direction_08 = 1;
+    scratch->direction_08 = FACING_N;
     /* FAKE: retail splits the re-read across the copy so the row stays in
      * one register. */
     work                  = g_Task;

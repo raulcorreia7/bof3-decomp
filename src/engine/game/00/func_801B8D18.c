@@ -11,7 +11,7 @@ MATCH bool func_801B8D18(void) {
     s32 y;
 
     if (g_Task->state_70.byte == 0) {
-        if (g_Task->direction_08 == 3) {
+        if (g_Task->direction_08 == FACING_E) {
             if (COORD_FRAC(g_Task->pos.x) != 0) {
                 return false;
             }
@@ -29,7 +29,7 @@ MATCH bool func_801B8D18(void) {
             }
             return true;
         }
-        if (g_Task->direction_08 == 5) {
+        if (g_Task->direction_08 == FACING_S) {
             if (COORD_FRAC(g_Task->pos.y) != 0) {
                 return false;
             }
@@ -50,7 +50,7 @@ MATCH bool func_801B8D18(void) {
         return false;
     }
 
-    if (g_Task->direction_08 == 3) {
+    if (g_Task->direction_08 == FACING_E) {
         if (COORD_FRAC(g_Task->pos.x) == 0) {
             return false;
         }
@@ -73,7 +73,7 @@ MATCH bool func_801B8D18(void) {
         }
         return true;
     }
-    if (g_Task->direction_08 == 5) {
+    if (g_Task->direction_08 == FACING_S) {
         if (COORD_FRAC(g_Task->pos.y) == 0) {
             return false;
         }

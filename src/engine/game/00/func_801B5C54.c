@@ -48,7 +48,7 @@ MATCH void* func_801B5C54(void) {
                     y = origin + 2;
                 else
                     y = origin + delta;
-                if ((work->direction_08 == 1) || (work->direction_08 == 5))
+                if ((work->direction_08 == FACING_N) || (work->direction_08 == FACING_S))
                     limit = (COORD_FRAC(work->pos.x) != 0);
                 else
                     limit = (COORD_FRAC(work->pos.y) != 0);
@@ -58,7 +58,7 @@ MATCH void* func_801B5C54(void) {
                      (y & BYTE_MASK) == run->y + sub) ||
                     (!(run->flags & TILE_RUN_VERTICAL) && (x & BYTE_MASK) == run->x + sub && (y & BYTE_MASK) == run->y))
                     return run;
-                if ((work->direction_08 == 1) || (work->direction_08 == 5))
+                if ((work->direction_08 == FACING_N) || (work->direction_08 == FACING_S))
                     x += 1;
                 else
                     y += 1;

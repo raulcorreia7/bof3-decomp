@@ -274,12 +274,12 @@ NON_MATCHING s32 func_801BA678(void) {
                                                 tmp6 = FIELD(u16, g_Task, 0x3Au);
                                                 val7 = 1;
                                                 if (func_801BB86C(val0, val0, tmp6, tmp6 + 1, val7) & BYTE_MASK) {
-                                                    g_Task->direction_08 = 1U;
+                                                    g_Task->direction_08 = FACING_N;
                                                     return 1;
                                                 }
                                                 tmp7 = FIELD(u16, g_Task, 0x3Au);
                                                 if (func_801BB86C(val0, val0, tmp7, tmp7 + (-1), val7) & BYTE_MASK) {
-                                                    g_Task->direction_08 = 5U;
+                                                    g_Task->direction_08 = FACING_S;
                                                     return 1;
                                                 }
                                                 goto block_114; /* retail branch */
@@ -333,12 +333,12 @@ NON_MATCHING s32 func_801BA678(void) {
                                             val0 = val8;
                                             tmp2 = FIELD(u16, g_Task, 0x36u);
                                             if (func_801BB86C(tmp2, (s16)(tmp2 + 1), val0, val0, val7) & BYTE_MASK) {
-                                                g_Task->direction_08 = 7U;
+                                                g_Task->direction_08 = FACING_W;
                                                 return 1;
                                             }
                                             tmp3 = FIELD(u16, g_Task, 0x36u);
                                             if (func_801BB86C(tmp3, (s16)(tmp3 - 1), val0, val0, val7) & BYTE_MASK) {
-                                                g_Task->direction_08 = 3U;
+                                                g_Task->direction_08 = FACING_E;
                                                 return 1;
                                             }
                                         block_114:

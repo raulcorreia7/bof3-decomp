@@ -21,6 +21,7 @@
 #include "common/vector.h"
 #include "game/character.h"
 #include "game/records.h"
+#include "slus/facing.h"
 #include "types.h"
 #include "work/task.h"
 

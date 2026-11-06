@@ -5,7 +5,7 @@
 
 /* Advance the work state when the party position is inside the work cell. */
 static inline void World_AdvanceWhenPartyNear(void) {
-    if (g_Task->direction_08 != 0) {
+    if (g_Task->direction_08 != FACING_NW) {
         if (abs(D_80145EC8 - ((((s32)COORD_INT(g_Task->pos.y) + 1) << 16) | 0x8000)) <= 0x8000) {
             if (abs(D_80145EC4 - ((s32)COORD_INT(g_Task->pos.x) << 16)) <= 0x10000 ||
                 abs(D_80145EC4 - (((s32)COORD_INT(g_Task->pos.x) + 1) << 16)) <= 0x10000) {

@@ -8,7 +8,7 @@ MATCH void func_801B80B4(void) {
         return;
     }
     g_Task->unk_0A = (g_Task->unk_0A + 1);
-    if (g_Task->direction_08 == 3) {
+    if (g_Task->direction_08 == FACING_E) {
         next_step = 7;
         next_step -= g_Task->unk_0A;
     } else {

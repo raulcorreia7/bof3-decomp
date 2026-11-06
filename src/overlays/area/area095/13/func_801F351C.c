@@ -6,11 +6,11 @@ MATCH void func_801F351C(void) {
     if (COORD_INT(actor->pos.y) == 0x3A) {
         switch ((u16)(COORD_INT(actor->pos.x) - 0x40)) {
             case 0:
-                actor->direction_08 = 3;
+                actor->direction_08 = FACING_E;
                 Area_StartDirectionalScript(actor);
                 return;
             case 2:
-                actor->direction_08 = 7;
+                actor->direction_08 = FACING_W;
                 Area_StartDirectionalScript(actor);
                 return;
         }

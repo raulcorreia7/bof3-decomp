@@ -14,7 +14,7 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
     sx = x;
     sy = y;
     switch (route & BYTE_MASK) {
-        case 1:
+        case FACING_N:
             s3     = (s16)(sx >> 16);
             s4     = ((u32)sy) >> 16;
             result = func_801A20F8(s3 & HALF_MASK, s4);
@@ -24,7 +24,7 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
             }
             break;
 
-        case 5:
+        case FACING_S:
             if (sy & HALF_MASK) {
                 s4     = (s16)(sx >> 16);
                 s3     = ((sy >> 16) + 1) & HALF_MASK;
@@ -45,7 +45,7 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
             }
             break;
 
-        case 3:
+        case FACING_E:
             if (sx & HALF_MASK) {
                 s4 = ((sx >> 16) + 1) & HALF_MASK;
             } else {
@@ -54,7 +54,7 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
             /* cases 3 and 7 share the y-axis accumulation. */
             goto body_7;
 
-        case 7:
+        case FACING_W:
             s4 = ((u32)sx) >> 16;
         body_7:
             s3 = (s16)(sy >> 16);

@@ -6,7 +6,7 @@
 MATCH s32 func_801F4CC4(s32 x, s32 y) {
     if (D_80143F03 == 0) {
         if (x == 0x248000 && ((y >> 16) - 0x35) < 3U &&
-            ((g_BattlePartyBattlers[0].facing - 6) < 2U || g_BattlePartyBattlers[0].facing == 0)) {
+            ((g_BattlePartyBattlers[0].facing - 6) < 2U || g_BattlePartyBattlers[0].facing == FACING_NW)) {
             Game_SetScriptActive();
             g_SceneEventMode = 0x23;
             g_SceneEventStep = 0;
