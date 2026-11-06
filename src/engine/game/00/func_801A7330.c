@@ -45,7 +45,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     w2               = g_Task;
     w2->mode         = 6;
     COORD_INT(w2->z) = (u16)dist;
-    ACTOR_CLEAR_STATE();
+    ACTOR_CLEAR_STEP();
     /* FAKE: barrier pins the flags store before the route-index load. */
     MATCH_BARRIER();
 

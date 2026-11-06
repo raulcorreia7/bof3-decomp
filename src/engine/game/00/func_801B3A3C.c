@@ -35,5 +35,5 @@ MATCH void func_801B3A3C(void) {
         Actor_RequestScript(g_Task->direction_08);
         g_Task->mode = 1u;
     }
-    ACTOR_CLEAR_STATE();
+    ACTOR_CLEAR_STEP();
 }

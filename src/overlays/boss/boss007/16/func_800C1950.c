@@ -8,6 +8,6 @@ MATCH void func_800C1950(void) {
     spad = TASK_BYTES;
     EnemyBattler_SetScript(work, D_800C1D84, func_800C19B4, D_800C1D98);
     spad[8] = 0;
-    ACTOR_SET_STEP(2);
+    ACTOR_SET_MODE(2);
     func_8014D978();
 }

@@ -5,7 +5,7 @@ MATCH s32 func_801B5884(void) {
         g_GameStateIndex = GAME_REQUEST_CAMERA_LOOK;
         func_801B5BDC(g_Task->direction_08);
         g_Task->mode = 1;
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
         return 1;
     }
     return 0;

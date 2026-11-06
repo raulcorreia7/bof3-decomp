@@ -11,7 +11,7 @@ MATCH s32 func_801C5474(void) {
         Actor_ClearVelocity();
         g_GameState->mode_12B.u8_value = 0;
         g_Task->mode                   = 1;
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
         g_Task->unk_03 = 0;
         g_Task->unk_04 = 0;
         return 1;

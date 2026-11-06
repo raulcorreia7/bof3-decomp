@@ -36,6 +36,6 @@ MATCH void func_801AC768(GameCursorState* cursor_state, s32 mode_byte, s32 value
             cursor_state->index_0A = cursor_state->index_0A + 3;
             return;
         }
-        ACTOR_CLEAR_STATE();
+        ACTOR_CLEAR_STEP();
     }
 }

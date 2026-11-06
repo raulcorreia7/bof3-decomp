@@ -35,7 +35,7 @@ MATCH void func_801DE944(void) {
                 func_801C1254(D_80145F09[row], i);
                 Actor_SelectScript(TASK_BYTES[8]);
                 if (D_8014504A != 0) {
-                    ACTOR_SET_STEP(0);
+                    ACTOR_SET_MODE(0);
                     TASK_BYTES[2] = 0;
                     TASK_BYTES[3] = 0;
                     TASK_BYTES[4] = 0;
@@ -61,7 +61,7 @@ MATCH void func_801DE944(void) {
         TASK_BYTES[0x48]         = 0;
         func_801C1254(D_80145F09[0], 0);
         Actor_SelectScript(TASK_BYTES[8]);
-        ACTOR_SET_STEP(0);
+        ACTOR_SET_MODE(0);
         TASK_BYTES[2] = 0;
         TASK_BYTES[3] = 0;
         TASK_BYTES[4] = 0;

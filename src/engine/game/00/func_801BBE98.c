@@ -36,5 +36,5 @@ MATCH void func_801BBE98(void) {
 
     work = g_Task;
     work->mode++;
-    ACTOR_CLEAR_STATE();
+    ACTOR_CLEAR_STEP();
 }
