@@ -9,14 +9,14 @@ MATCH void func_801D3A98(void) {
     u8*            rows;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[13].unk_0C    = 0xFF;
-    g_MenuPanelTasks[11].unk_10    = 0x18;
-    g_MenuPanelTasks[21].unk_00[0] = 1;
-    g_MenuPanelTasks[13].unk_0C    = 0xFF;
-    task                           = &g_MenuPanelTasks[14];
-    task->unk_0C                   = 0xFF;
-    g_MenuPanelTasks[21].x         = task->x + 5;
-    g_MenuPanelTasks[21].y         = task->y + (task->unk_0B * 16 + 26);
+    g_MenuPanelTasks[13].unk_0C = 0xFF;
+    g_MenuPanelTasks[11].unk_10 = 0x18;
+    g_MenuPanelTasks[21].active = 1;
+    g_MenuPanelTasks[13].unk_0C = 0xFF;
+    task                        = &g_MenuPanelTasks[14];
+    task->unk_0C                = 0xFF;
+    g_MenuPanelTasks[21].x      = task->x + 5;
+    g_MenuPanelTasks[21].y      = task->y + (task->unk_0B * 16 + 26);
 
     input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLup) {
@@ -47,7 +47,7 @@ MATCH void func_801D3A98(void) {
         (&D_80148651)[1]++;
     } else if (g_InputPressed & D_80145AC4) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        task->unk_00[0] = 0;
+        task->active = 0;
         (&D_80148651)[1]--;
     }
 }

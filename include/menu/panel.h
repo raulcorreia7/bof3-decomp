@@ -106,7 +106,9 @@ ASSERT_OFFSET(MenuChoicePanel, confirm_gate, 0x12);
  * item-table base. The battle overlays read the first 0x0C bytes through
  * BattlePanelTask (battle/records.h). */
 typedef struct MenuPanelTask {
-    u8  unk_00[3];
+    u8  active; /* set to open the panel, cleared to close it */
+    u8  unk_01;
+    u8  unk_02;
     u8  state;
     /* x and y are screen positions. Most readers load them with lhu; the slide
      * code compares them as s16 and stores signed constants through LOH, so the

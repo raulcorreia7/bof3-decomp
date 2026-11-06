@@ -28,10 +28,10 @@ MATCH void func_801D163C(void) {
     if (D_80148453 == 0) {
         /* FAKE: block boundary keeps the panel-task stores base-relative off one la. */
         ORDER_FENCE();
-        g_MenuPanelTasks[21].unk_00[0] = 1;
-        D_80148628                     = (u16)D_80148454 + 4;
-        D_8014862A                     = (u16)D_80148456 + g_ShopStockIndex * 0xD + 0xA;
-        D_80148644                     = D_8018E7CC;
+        g_MenuPanelTasks[21].active = 1;
+        D_80148628                  = (u16)D_80148454 + 4;
+        D_8014862A                  = (u16)D_80148456 + g_ShopStockIndex * 0xD + 0xA;
+        D_80148644                  = D_8018E7CC;
     }
     input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     old   = g_ShopStockIndex;
