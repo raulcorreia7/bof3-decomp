@@ -10,7 +10,7 @@ MATCH void func_801F37C4(void) {
     TASK_SET(&g_Actors[1]);
     row = &g_Actors[1];
     do {
-        row->x.fixed += 0x4000;
+        row->pos.x.fixed += 0x4000;
         i++;
     } while ((u8)i < 4);
     work[1] = 5;

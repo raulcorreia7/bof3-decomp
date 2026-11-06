@@ -7,9 +7,9 @@ MATCH void func_8019E1A0(void) {
     Actor* record;
 
     work = g_Task;
-    work->x.fixed += work->vx;
-    work->y.fixed += work->vy;
-    work->z.fixed += work->vz;
+    work->pos.x.fixed += work->vx;
+    work->pos.y.fixed += work->vy;
+    work->pos.z.fixed += work->vz;
     func_8014D978();
     record     = g_Task;
     sceneTimer = record->unk_09;

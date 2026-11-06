@@ -3,8 +3,8 @@
 MATCH void func_801F34AC(void) {
     Actor* actor = g_Task;
 
-    if (COORD_INT(actor->y) == 0x3A) {
-        switch ((u16)(COORD_INT(actor->x) - 0x40)) {
+    if (COORD_INT(actor->pos.y) == 0x3A) {
+        switch ((u16)(COORD_INT(actor->pos.x) - 0x40)) {
             case 0:
                 actor->direction_08 = 3;
                 Area_StartDirectionalScript(actor);

@@ -30,22 +30,22 @@ NON_MATCHING void func_8014D290(void) {
     }
     work = g_Task;
 
-    col = COORD_INT(g_Task->y) - g_AreaTileOriginY;
-    row = COORD_INT(g_Task->x) - g_AreaTileOriginX;
-    if (COORD_FRAC(g_Task->x) != 0) {
+    col = COORD_INT(g_Task->pos.y) - g_AreaTileOriginY;
+    row = COORD_INT(g_Task->pos.x) - g_AreaTileOriginX;
+    if (COORD_FRAC(g_Task->pos.x) != 0) {
         col++;
     }
     key = row + col;
 
-    zero  = (COORD_FRAC(g_Task->x) == 0);
+    zero  = (COORD_FRAC(g_Task->pos.x) == 0);
     table = &g_SpriteCellRotations[g_Task->unk_2B * 3];
-    if (COORD_FRAC(g_Task->y) == 0) {
+    if (COORD_FRAC(g_Task->pos.y) == 0) {
         table += 1 + zero;
     } else {
         table += zero;
     }
     offset = *table;
-    if (COORD_FRAC(g_Task->y) != 0) {
+    if (COORD_FRAC(g_Task->pos.y) != 0) {
         key += (offset + 1);
     } else {
         key += offset;
@@ -60,9 +60,9 @@ NON_MATCHING void func_8014D290(void) {
     g_Task->unk_32 = sort;
     if (g_AreaDrawMode == 4) {
         if (D_8014933F != 0) {
-            sort |= (g_Task->x.fixed >> 15) & BYTE_MASK;
+            sort |= (g_Task->pos.x.fixed >> 15) & BYTE_MASK;
         } else {
-            sort |= (g_Task->y.fixed >> 15) & BYTE_MASK;
+            sort |= (g_Task->pos.y.fixed >> 15) & BYTE_MASK;
         }
     } else {
         sort |= (((u16)COORD_INT(g_Task->depth) >> 5) & BYTE_MASK) ^ 0x80;
@@ -70,8 +70,8 @@ NON_MATCHING void func_8014D290(void) {
     g_Task->unk_32 = sort;
     Actor_ReadValue();
 
-    vec.vx = (g_Task->x.fixed >> 9) - 0x4000;
-    vec.vy = (g_Task->y.fixed >> 9) - 0x4000;
+    vec.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
+    vec.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
     vec.vz = -COORD_INT(g_Task->depth) / 2;
     rot    = RotTransPers(&vec, &sxy, &p, &flag);
 

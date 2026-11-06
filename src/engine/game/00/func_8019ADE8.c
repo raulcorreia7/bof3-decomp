@@ -20,12 +20,12 @@ MATCH void func_8019ADE8(void) {
     g_Task->unk_2A       = 0;
     Actor_SelectScript(8);
     work                     = g_Task;
-    work->x.fixed            = g_Actors[work->unk_06].x.fixed;
-    work->y.fixed            = g_Actors[work->unk_06].y.fixed;
+    work->pos.x.fixed        = g_Actors[work->unk_06].pos.x.fixed;
+    work->pos.y.fixed        = g_Actors[work->unk_06].pos.y.fixed;
     z                        = FIELD(s32, &g_Actors[work->unk_06], 0x3Cu);
     work->tint.bytes.flags   = 0;
     work2                    = g_Task;
-    work->z.fixed            = z;
+    work->pos.z.fixed        = z;
     work2->tint.bytes.unk_5F = 0;
     work2->tint.bytes.unk_5E = 0;
     work2->tint.bytes.unk_5D = 0;

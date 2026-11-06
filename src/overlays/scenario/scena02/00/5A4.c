@@ -170,8 +170,10 @@ MATCH void func_801FC044(u8 actor_id) {
 
 MATCH void func_801FC0F4(u8 actor_id) {
     if (D_80143F03 == 0) {
-        if (g_Actors[actor_id].x.fixed + 0x18000 >= D_80145EC4 && D_80145EC4 >= g_Actors[actor_id].x.fixed - 0x18000 &&
-            D_80145EC8 >= g_Actors[actor_id].y.fixed + 0x10000 && g_Actors[actor_id].y.fixed + 0x40000 >= D_80145EC8) {
+        if (g_Actors[actor_id].pos.x.fixed + 0x18000 >= D_80145EC4 &&
+            D_80145EC4 >= g_Actors[actor_id].pos.x.fixed - 0x18000 &&
+            D_80145EC8 >= g_Actors[actor_id].pos.y.fixed + 0x10000 &&
+            g_Actors[actor_id].pos.y.fixed + 0x40000 >= D_80145EC8) {
             func_801FCB54();
         }
     }
@@ -179,8 +181,10 @@ MATCH void func_801FC0F4(u8 actor_id) {
 
 MATCH void func_801FC1A4(u8 actor_id) {
     if (D_80143F03 == 0) {
-        if (g_Actors[actor_id].y.fixed + 0x10000 >= D_80145EC8 && D_80145EC8 >= g_Actors[actor_id].y.fixed - 0x40000 &&
-            D_80145EC4 >= g_Actors[actor_id].x.fixed - 0x18000 && g_Actors[actor_id].x.fixed + 0x18000 >= D_80145EC4) {
+        if (g_Actors[actor_id].pos.y.fixed + 0x10000 >= D_80145EC8 &&
+            D_80145EC8 >= g_Actors[actor_id].pos.y.fixed - 0x40000 &&
+            D_80145EC4 >= g_Actors[actor_id].pos.x.fixed - 0x18000 &&
+            g_Actors[actor_id].pos.x.fixed + 0x18000 >= D_80145EC4) {
             func_801FCB54();
         }
     }
@@ -192,8 +196,9 @@ MATCH void func_801FC25C(u8 actor_id) {
 
 MATCH void func_801FC308(u8 actor_id) {
     if (D_80143F03 == 0) {
-        if (D_80145EC8 <= g_Actors[actor_id].y.fixed && D_80145EC8 >= g_Actors[actor_id].y.fixed - 0x50000 &&
-            D_80145EC4 >= g_Actors[actor_id].x.fixed - 0x10000 && g_Actors[actor_id].x.fixed + 0x10000 >= D_80145EC4) {
+        if (D_80145EC8 <= g_Actors[actor_id].pos.y.fixed && D_80145EC8 >= g_Actors[actor_id].pos.y.fixed - 0x50000 &&
+            D_80145EC4 >= g_Actors[actor_id].pos.x.fixed - 0x10000 &&
+            g_Actors[actor_id].pos.x.fixed + 0x10000 >= D_80145EC4) {
             func_801FCB54();
         }
     }

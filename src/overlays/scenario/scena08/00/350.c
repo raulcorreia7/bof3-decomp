@@ -94,7 +94,7 @@ MATCH void func_801F7BA8(void) {
 
     work  = g_Task;
     timer = work->unk_09 - 1;
-    work->y.fixed += 0x10000;
+    work->pos.y.fixed += 0x10000;
     work->unk_09 = timer;
     if (timer == 0) {
         g_Task->unk_09      = 0x10;
@@ -110,7 +110,7 @@ MATCH void func_801F7C98(void) {
 
     work  = g_Task;
     timer = work->unk_09 - 1;
-    work->y.fixed -= 0x10000;
+    work->pos.y.fixed -= 0x10000;
     work->unk_09 = timer;
     if (timer == 0) {
         g_Task->unk_09      = 0x80;
@@ -313,11 +313,11 @@ INCLUDE_ASM(func_801F9B68);
 MATCH void func_801F9C00(void) {
     Actor* work;
 
-    work          = g_Task;
-    work->x.fixed = 0x270000;
-    work->y.fixed = 0x80000;
-    work->z.fixed = 0x8000000;
-    work->vz      = 0;
+    work              = g_Task;
+    work->pos.x.fixed = 0x270000;
+    work->pos.y.fixed = 0x80000;
+    work->pos.z.fixed = 0x8000000;
+    work->vz          = 0;
     work->header.mode += 1;
     SND_PlayCue(0x204);
     SND_PlayCue(0x205);
@@ -328,11 +328,11 @@ INCLUDE_ASM(func_801F9C58);
 MATCH void func_801F9CE0(void) {
     Actor* work;
 
-    work          = g_Task;
-    work->x.fixed = 0x190000;
-    work->y.fixed = 0xF0000;
-    work->z.fixed = 0x6000000;
-    work->vz      = 0;
+    work              = g_Task;
+    work->pos.x.fixed = 0x190000;
+    work->pos.y.fixed = 0xF0000;
+    work->pos.z.fixed = 0x6000000;
+    work->vz          = 0;
     work->header.mode += 1;
     SND_PlayCue(0x20A);
 }

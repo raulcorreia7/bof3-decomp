@@ -10,12 +10,13 @@ MATCH void func_801F37C4(void) {
         }
     } else if (direction != 0) {
     replay:
-        Area_SetCellPalette((s32)COORD_INT(g_Task->x), (s32)COORD_INT(g_Task->y));
-        Area_SetCellPalette((s32)(s16)((u16)COORD_INT(g_Task->x) + 1), (s32)(s16)((u16)COORD_INT(g_Task->y) + 1));
+        Area_SetCellPalette((s32)COORD_INT(g_Task->pos.x), (s32)COORD_INT(g_Task->pos.y));
+        Area_SetCellPalette((s32)(s16)((u16)COORD_INT(g_Task->pos.x) + 1),
+                            (s32)(s16)((u16)COORD_INT(g_Task->pos.y) + 1));
         g_Task->header.step += 1;
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x205U);
         }
-        func_801F3950(g_Task->direction_08, COORD_INT(g_Task->z));
+        func_801F3950(g_Task->direction_08, COORD_INT(g_Task->pos.z));
     }
 }

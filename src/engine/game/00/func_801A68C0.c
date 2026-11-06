@@ -34,14 +34,14 @@ MATCH void func_801A68C0(u8* script) {
     if (script[1] != 0) {
         x |= 0x8000;
     }
-    work->x.fixed = x;
-    y             = script[4] << 16;
+    work->pos.x.fixed = x;
+    y                 = script[4] << 16;
     if (script[3] != 0) {
         y |= 0x8000;
     }
-    work->y.fixed = y;
+    work->pos.y.fixed = y;
 
-    COORD_INT(g_Task->z)      = Area_SampleHeight(work->x.fixed, y);
+    COORD_INT(g_Task->pos.z)  = Area_SampleHeight(work->pos.x.fixed, y);
     g_Task->header.mode       = script[5];
     g_Task->header.step       = script[7];
     g_Task->unk_06            = script[0] >> 4;
@@ -66,15 +66,15 @@ MATCH void func_801A68C0(u8* script) {
     g_Task->tint.bytes.flags         = 2;
 
     if (D_80146900[*counter][0] == 0) {
-        Area_SetCellCode(COORD_INT(WORK->x), COORD_INT(WORK->y), 0x10);
-        if (COORD_FRAC(WORK->x) != 0) {
-            Area_SetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), COORD_INT(WORK->y), 0x10);
+        Area_SetCellCode(COORD_INT(WORK->pos.x), COORD_INT(WORK->pos.y), 0x10);
+        if (COORD_FRAC(WORK->pos.x) != 0) {
+            Area_SetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), COORD_INT(WORK->pos.y), 0x10);
         }
-        if (COORD_FRAC(WORK->y) != 0) {
-            Area_SetCellCode(COORD_INT(WORK->x), (s16)((u16)COORD_INT(WORK->y) + 1), 0x10);
+        if (COORD_FRAC(WORK->pos.y) != 0) {
+            Area_SetCellCode(COORD_INT(WORK->pos.x), (s16)((u16)COORD_INT(WORK->pos.y) + 1), 0x10);
         }
-        if ((COORD_FRAC(WORK->x) != 0) && (COORD_FRAC(WORK->y) != 0)) {
-            Area_SetCellCode((s16)((u16)COORD_INT(WORK->x) + 1), (s16)((u16)COORD_INT(WORK->y) + 1), 0x10);
+        if ((COORD_FRAC(WORK->pos.x) != 0) && (COORD_FRAC(WORK->pos.y) != 0)) {
+            Area_SetCellCode((s16)((u16)COORD_INT(WORK->pos.x) + 1), (s16)((u16)COORD_INT(WORK->pos.y) + 1), 0x10);
         }
     }
 

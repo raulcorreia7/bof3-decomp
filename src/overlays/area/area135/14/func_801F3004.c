@@ -14,5 +14,5 @@ MATCH void func_801F3004(s32 x, s32 y, s32 width, s32 height) {
     rect[3]         = height;
     SetTexWindow((DR_TWIN*)next, (RECT*)rect);
     work = g_Task;
-    Area_AddCellPrim(work->x.fixed, work->y.fixed, 0, 0xC);
+    Area_AddCellPrim(work->pos.x.fixed, work->pos.y.fixed, 0, 0xC);
 }

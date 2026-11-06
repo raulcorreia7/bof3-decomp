@@ -10,8 +10,8 @@ MATCH void func_801C22D8(void) {
         return;
     }
     work = g_Task;
-    dx   = D_801462A0 - work->x.fixed;
-    dy   = D_801462A4 - work->y.fixed;
+    dx   = D_801462A0 - work->pos.x.fixed;
+    dy   = D_801462A4 - work->pos.y.fixed;
     if (dx < 0 && dy < 0) {
         work->direction_08 = 0;
     } else if (dx > 0 && dy > 0) {

@@ -19,25 +19,25 @@ MATCH void Char_WalkStep(void) {
             }
         }
     }
-    x    = g_Task->x.fixed + g_FacingSteps[g_Task->direction_08].x;
-    y    = g_Task->y.fixed + D_80181B98[g_Task->direction_08 * 2];
-    dist = Area_ReadHeight(x, y) - COORD_INT(g_Task->z);
+    x    = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x;
+    y    = g_Task->pos.y.fixed + D_80181B98[g_Task->direction_08 * 2];
+    dist = Area_ReadHeight(x, y) - COORD_INT(g_Task->pos.z);
     Area_ReadStepHeight(x, y, g_Task->direction_08);
     if (SP_REF(u8, 0x0u) != 0 && dist >= 65) {
         Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x46);
         g_Task->header.step++;
     } else {
         g_Task->unk_2B = 1;
-        x              = g_Task->x.fixed + g_FacingSteps[3].x;
-        y              = g_Task->y.fixed + g_FacingSteps[3].y;
+        x              = g_Task->pos.x.fixed + g_FacingSteps[3].x;
+        y              = g_Task->pos.y.fixed + g_FacingSteps[3].y;
         dist           = Area_ReadStepHeight(x, y, 3);
-        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->z) < Area_ReadHeight(x, y)) {
+        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_ReadHeight(x, y)) {
             g_Task->unk_2B = 0;
         }
-        x    = g_Task->x.fixed + g_FacingSteps[5].x;
-        y    = g_Task->y.fixed + g_FacingSteps[5].y;
+        x    = g_Task->pos.x.fixed + g_FacingSteps[5].x;
+        y    = g_Task->pos.y.fixed + g_FacingSteps[5].y;
         dist = Area_ReadStepHeight(x, y, 5);
-        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->z) < Area_ReadHeight(x, y)) {
+        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_ReadHeight(x, y)) {
             g_Task->unk_2B = 0;
         }
         /* FAKE: retail reads SND_PlayCue as void(s32). */

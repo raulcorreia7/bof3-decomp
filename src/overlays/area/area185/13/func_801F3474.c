@@ -15,7 +15,7 @@ MATCH void func_801F3474(void) {
 
     mode = getTPage(1, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
-    Area_AddCellPrim(g_Task->x.fixed, g_Task->y.fixed, 1, 0xC);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
 
     for (i = 0; i < 32; i++) {
         for (j = 0; j < 8; j++) {
@@ -31,11 +31,11 @@ MATCH void func_801F3474(void) {
             D_1F800014[0].vz = -0x340 - (rsin(((i << 4) + (g_FrameCount & 0xF)) * 5) >> 5);
             RotTransPers(D_1F800014, (long*)&tile->x0, (long*)&p, (long*)&flag);
 
-            Area_AddCellPrim(g_Task->x.fixed, g_Task->y.fixed, 1, 0xC);
+            Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
         }
     }
 
     mode = getTPage(1, 1, 320, 256);
     GFX_SET_DRAW_MODE(mode);
-    Area_AddCellPrim(g_Task->x.fixed, g_Task->y.fixed, 1, 0xC);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
 }

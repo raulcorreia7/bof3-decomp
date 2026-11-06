@@ -26,9 +26,9 @@ loop_top:
     route  = (work->direction_08 + route) & 7;
     word   = VOL(u32, FIELD(u32, work, 0x70u));
     offset = route * 2;
-    pos_x  = work->x.fixed + g_FacingSteps[route].x * (steps = (word & BYTE_MASK) + 1);
-    pos_y  = work->y.fixed + D_80181B98[offset] * steps;
-    if ((func_801C3E40(pos_x, pos_y, (u8)word, COORD_INT(g_Task->z)) & BYTE_MASK) != 0u ||
+    pos_x  = work->pos.x.fixed + g_FacingSteps[route].x * (steps = (word & BYTE_MASK) + 1);
+    pos_y  = work->pos.y.fixed + D_80181B98[offset] * steps;
+    if ((func_801C3E40(pos_x, pos_y, (u8)word, COORD_INT(g_Task->pos.z)) & BYTE_MASK) != 0u ||
         (func_801C472C(pos_x, pos_y, g_Task->state_70.byte, 0xD0, 0) & BYTE_MASK) == 0u) {
         count++;
         if (count < 8) {
@@ -37,12 +37,13 @@ loop_top:
         }
         found   = 1;
         route   = g_Task->direction_08;
-        vals[0] = COORD_INT(g_Task->z);
+        vals[0] = COORD_INT(g_Task->pos.z);
         for (iter = 0; iter < 4; iter++) {
             index_copy = iter * 2 + 1;
             px         = &g_FacingSteps[(index_copy & BYTE_MASK)].x;
             py         = &D_80181B98[(index_copy & BYTE_MASK) * 2];
-            if ((func_801B8C64(g_Task->x.fixed + *px, g_Task->y.fixed + *py, &vals[found], 1) & BYTE_MASK) != 0u) {
+            if ((func_801B8C64(g_Task->pos.x.fixed + *px, g_Task->pos.y.fixed + *py, &vals[found], 1) & BYTE_MASK) !=
+                0u) {
                 found++;
             }
             if (found == 2) {

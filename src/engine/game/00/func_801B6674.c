@@ -11,7 +11,7 @@ NON_MATCHING s32 func_801B6674(void) {
     u8  status;
     u8* counter;
 
-    temp   = Area_GetCellCode(COORD_INT(g_Task->x), COORD_INT(g_Task->y));
+    temp   = Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
     status = g_GameRequestFlags;
     if (!(status & 1)) {
         return 0;
@@ -54,8 +54,8 @@ NON_MATCHING s32 func_801B6674(void) {
         D_8014504A += 1;
         g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;
         D_80145048 = g_GameAreaId;
-        D_80145044 = g_Task->y.fixed;
-        D_80145040 = g_Task->x.fixed;
+        D_80145044 = g_Task->pos.y.fixed;
+        D_80145040 = g_Task->pos.x.fixed;
         Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
         return 1;
     }

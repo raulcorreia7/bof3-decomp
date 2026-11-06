@@ -20,22 +20,22 @@ MATCH void func_801C5558(void) {
     s32    result;
     s16    threshold;
 
-    work               = g_Task;
-    count              = COORD_INT(work->z) + 16;
-    route              = work->direction_08;
-    COORD_INT(work->z) = count;
+    work                   = g_Task;
+    count                  = COORD_INT(work->pos.z) + 16;
+    route                  = work->direction_08;
+    COORD_INT(work->pos.z) = count;
 
     work   = g_Task;
     step   = work->state_70.byte + 2;
     /* FAKE: non-const view of the step table on the first read keeps retail's store order. */
     offs_x = (*(FacingStep(*)[8])g_FacingSteps)[route].x * step;
     offs_y = g_FacingSteps[route].y * step;
-    result = Area_ReadHeight(work->x.fixed + offs_x, work->y.fixed + offs_y);
+    result = Area_ReadHeight(work->pos.x.fixed + offs_x, work->pos.y.fixed + offs_y);
 
     threshold = D_80181B70[g_GameState->slot_index_79];
 
     work = g_Task;
-    if ((s16)COORD_INT(work->z) >= result - threshold) {
+    if ((s16)COORD_INT(work->pos.z) >= result - threshold) {
         work->header.step = 3;
     }
 

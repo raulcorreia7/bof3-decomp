@@ -4,7 +4,7 @@ MATCH void func_800C1ED8(void) {
     Actor* work;
 
     work          = (Actor*)g_Task;
-    work->gravity = work->z.fixed + 0x4000000;
+    work->gravity = work->pos.z.fixed + 0x4000000;
     Actor_SelectScript(2);
     TASK_BYTES[0xB] = 0x10;
     TASK_BYTES[2]++;
