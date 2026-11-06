@@ -359,26 +359,21 @@ MATCH void func_801F2F0C(const void* arg0) {
         PSX_SET_SEMI_TRANSPARENT(primitive);
         index = i & BYTE_MASK;
 
-        primitive->x0 = *(s16*)(((const u8*)work + (index << 2) + 24));
-        primitive->y0 = *(s16*)(((const u8*)work + (index << 2) + 26));
-        primitive->x1 = *(s16*)(((const u8*)work + ((index + 1) << 2) + 24));
-        primitive->y1 = *(s16*)(((const u8*)work + ((index + 1) << 2) + 26));
+        setXY2(primitive, *(s16*)(((const u8*)work + (index << 2) + 24)),
+               *(s16*)(((const u8*)work + (index << 2) + 26)), *(s16*)(((const u8*)work + ((index + 1) << 2) + 24)),
+               *(s16*)(((const u8*)work + ((index + 1) << 2) + 26)));
 
         red = ((0x20u - index) * 8u);
         if (red > 0xFFu) {
             red = 0xFFu;
         }
-        primitive->r0 = red;
-        primitive->g0 = 0u;
-        primitive->b0 = 0u;
+        setRGB0(primitive, red, 0u, 0u);
 
         red = ((0x1Fu - index) * 8u);
         if (red > 0xFFu) {
             red = 0xFFu;
         }
-        primitive->r1 = red;
-        primitive->g1 = 0u;
-        primitive->b1 = 0u;
+        setRGB1(primitive, red, 0u, 0u);
 
         GFX_AddPrim(1u, 0x14u);
         i += 1u;

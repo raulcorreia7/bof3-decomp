@@ -40,8 +40,7 @@ MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
             sprite->h  = 12;
             sprite->u0 = (((*str - '0') % 31) * 8);
             value      = ((*str - '0') / 31) * 0xC + 0x48;
-            sprite->x0 = x;
-            sprite->y0 = y;
+            setXY0(sprite, x, y);
             sprite->v0 = value;
             SetSprt(sprite);
             PSX_SET_SEMI_TRANSPARENT(sprite);

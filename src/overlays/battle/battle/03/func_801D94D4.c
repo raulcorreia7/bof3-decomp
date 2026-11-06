@@ -23,12 +23,10 @@ MATCH void func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value) {
             clut                    = GetClut((clut_index & BYTE_MASK) << 4, 480);
             packet->clut            = clut;
             PSX_SET_NEUTRAL_RGB(packet);
-            packet->x0 = x;
-            packet->y0 = y;
+            setXY0(packet, x, y);
             digit      = g_UiFormatBuffer[index];
             packet->v0 = 216;
-            packet->w  = 6;
-            packet->h  = 5;
+            setWH(packet, 6, 5);
             packet->u0 = digit * 6u - 80u;
             SetSprt(packet);
             GFX_AddPrim(1, 0x14);

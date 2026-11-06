@@ -19,9 +19,8 @@ MATCH void Menu_DrawExperienceLine(u16 x, u16 y, u8 char_id, u8 level, u32 exp) 
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
     SetSemiTrans(line, 0);
-    x0        = x;
-    line->x0  = x0;
-    line->y0  = y;
+    x0 = x;
+    setXY0(line, x0, y);
     level_exp = Char_GetExpForLevel(char_id, level);
     next_exp  = Char_GetExpForLevel(char_id, level + 1);
     if (next_exp != level_exp) {

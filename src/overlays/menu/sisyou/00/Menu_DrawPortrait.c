@@ -41,13 +41,10 @@ MATCH void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade) {
         sprt->b0 = 0x80;
     }
 
-    sprt->x0   = x;
-    sprt->y0   = y;
-    sprt->u0   = entry->u;
-    sprt->v0   = entry->v;
-    clut       = getClut(entry->clut_x, entry->clut_y + 0x1E0);
-    sprt->w    = 40;
-    sprt->h    = 48;
+    setXY0(sprt, x, y);
+    setUV0(sprt, entry->u, entry->v);
+    clut = getClut(entry->clut_x, entry->clut_y + 0x1E0);
+    setWH(sprt, 40, 48);
     sprt->clut = clut;
     GFX_AddPrim(1, 0x14);
 }

@@ -10,13 +10,10 @@ MATCH void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags) {
     SetSprt(sprt);
     SetSemiTrans(sprt, 0);
 
-    sprt->x0 = x;
-    sprt->y0 = y;
+    setXY0(sprt, x, y);
 
-    sprt->u0 = rect[0];
-    sprt->v0 = rect[1];
-    sprt->w  = rect[2];
-    sprt->h  = rect[3];
+    setUV0(sprt, rect[0], rect[1]);
+    setWH(sprt, rect[2], rect[3]);
 
     if (!(flags & 2)) {
         sprt->clut = GetClut(176, 481);
@@ -24,8 +21,6 @@ MATCH void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags) {
         sprt->clut = GetClut(128, 482);
     }
 
-    sprt->r0 = 128;
-    sprt->g0 = 128;
-    sprt->b0 = 128;
+    setRGB0(sprt, 128, 128, 128);
     GFX_AddPrim(1, 20);
 }

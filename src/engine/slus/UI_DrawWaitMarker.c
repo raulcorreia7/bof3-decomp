@@ -13,11 +13,9 @@ MATCH void UI_DrawWaitMarker(s16 x, s16 y) {
         SetSprt(prim);
         prim->clut = GetClut(192, 480);
         PSX_SET_NEUTRAL_RGB(prim);
-        prim->w  = 8;
-        prim->h  = 8;
+        setWH(prim, 8, 8);
         prim->u0 = 208;
-        prim->x0 = x;
-        prim->y0 = y;
+        setXY0(prim, x, y);
         prim->v0 = 248;
         PSX_SET_SEMI_TRANSPARENT(prim);
         GFX_AddPrim(1, 0x14);

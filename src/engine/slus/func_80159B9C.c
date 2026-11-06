@@ -25,12 +25,11 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     GFX_AddDrawMode(0xF);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
-    tile->x0 = x1;
-    tile->y0 = y1;
-    w        = w & BYTE_MASK;
-    tile->w  = w + 1;
-    h        = h & BYTE_MASK;
-    tile->h  = h + 1;
+    setXY0(tile, x1, y1);
+    w       = w & BYTE_MASK;
+    tile->w = w + 1;
+    h       = h & BYTE_MASK;
+    tile->h = h + 1;
     setRGB0(tile, 0, 0, 0);
     PSX_SET_SEMI_TRANSPARENT(tile);
     GFX_AddPrim(1, 0x10);
@@ -39,8 +38,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     g_GfxPrimCursor += 8;
     rect->pos.x.raw = 0;
     rect->pos.y.raw = 240;
-    rect->w         = 16;
-    rect->h         = 16;
+    setWH(rect, 16, 16);
     if (GetGraphType() != 1)
         GetGraphType();
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, rect);
@@ -65,8 +63,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     g_GfxPrimCursor += 8;
     rect->pos.x.raw = 0;
     rect->pos.y.raw = 0;
-    rect->w         = 256;
-    rect->h         = 256;
+    setWH(rect, 256, 256);
     if (GetGraphType() != 1)
         GetGraphType();
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 5, rect);

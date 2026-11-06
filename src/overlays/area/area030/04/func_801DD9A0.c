@@ -45,11 +45,10 @@ MATCH void func_801DD9A0(void) {
             pos.vy = y;
             pos.vz = 0;
             RotTransPers(&pos, sxy_out, depth_out, flag_out);
-            line->x0 = sxy[0];
-            line->y0 = sxy[1];
-            pos.vx   = -0x3100;
-            pos.vy   = y;
-            pos.vz   = 0;
+            setXY0(line, sxy[0], sxy[1]);
+            pos.vx = -0x3100;
+            pos.vy = y;
+            pos.vz = 0;
             RotTransPers(&pos, sxy_out, depth_out, flag_out);
             line->x1 = sxy[0];
             line->y1 = sxy[1];

@@ -17,8 +17,7 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
     g_GfxPrimCursor   = (u8*)(texture_window + 1);
     texture_window->y = 240;
     texture_window->x = 0;
-    texture_window->w = 16;
-    texture_window->h = 16;
+    setWH(texture_window, 16, 16);
     if (GetGraphType() != 1) {
         GetGraphType();
     }

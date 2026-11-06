@@ -8,13 +8,8 @@ MATCH void GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 bl
     GFX_AddDrawMode(tpage);
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
-    line->x0 = x0;
-    line->y0 = y0;
-    line->x1 = x1;
-    line->y1 = y1;
-    line->r0 = r;
-    line->g0 = g;
-    line->b0 = b;
+    setXY2(line, x0, y0, x1, y1);
+    setRGB0(line, r, g, b);
     PSX_SET_SEMI_TRANSPARENT(line);
     GFX_AddPrim(1U, 0x10U);
 }

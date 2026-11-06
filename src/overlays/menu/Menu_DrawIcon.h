@@ -10,9 +10,8 @@ MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mo
 
     tpage = getTPage(0, 1, 960, 0);
     GFX_AddDrawMode(tpage);
-    sprt       = (SPRT*)g_GfxPrimCursor;
-    sprt->w    = 16;
-    sprt->h    = 8;
+    sprt = (SPRT*)g_GfxPrimCursor;
+    setWH(sprt, 16, 8);
     sprt->clut = 0x7800;
     if ((shade_mode & BYTE_MASK) == 0) {
         sprt->r0 = sprt->g0 = sprt->b0 = 0x80;
@@ -22,8 +21,7 @@ MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mo
     sprt->v0 = 216;
     u        = (icon_column & BYTE_MASK) << 4;
     sprt->u0 = u;
-    sprt->x0 = sprite_x;
-    sprt->y0 = sprite_y;
+    setXY0(sprt, sprite_x, sprite_y);
     SetSprt(sprt);
     PSX_SET_SEMI_TRANSPARENT(sprt);
     GFX_AddPrim(1, 0x14);

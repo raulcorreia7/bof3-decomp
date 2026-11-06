@@ -27,12 +27,7 @@ MATCH void Menu_DrawTintedLine(s16 line_x0, s16 line_y0, s16 line_x1, s16 line_y
     primitive = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(primitive);
     SetSemiTrans(primitive, 1);
-    primitive->r0 = color0;
-    primitive->g0 = color1;
-    primitive->b0 = color2;
-    primitive->x0 = x0;
-    primitive->y0 = y0;
-    primitive->x1 = x1;
-    primitive->y1 = y1;
+    setRGB0(primitive, color0, color1, color2);
+    setXY2(primitive, x0, y0, x1, y1);
     GFX_AddPrim(1, 0x10);
 }

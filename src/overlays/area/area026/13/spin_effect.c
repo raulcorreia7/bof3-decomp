@@ -450,10 +450,7 @@ MATCH void func_801F2E04(const s32* center, s32 radius, u16 angle, s32 offset_x,
         packet = (POLY_F3*)g_GfxPrimCursor;
         SetPolyF3(packet);
         PSX_SET_SEMI_TRANSPARENT(packet);
-        packet->x0 = screen0[0];
-        packet->y0 = screen0[1];
-        packet->x1 = screen1[0];
-        packet->y1 = screen1[1];
+        setXY2(packet, screen0[0], screen0[1], screen1[0], screen1[1]);
         angle += 0x100;
         point[0] = ((s32*)center)[0] + FIXED_MUL(radius, rcos(angle));
         point[1] = ((s32*)center)[1] + FIXED_MUL(radius, rsin(angle));

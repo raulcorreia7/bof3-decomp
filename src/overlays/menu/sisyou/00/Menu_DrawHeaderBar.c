@@ -28,8 +28,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     g_GfxPrimCursor           = (u8*)(texture_window + 1);
     texture_window->pos.y.raw = 240;
     texture_window->pos.x.raw = 0;
-    texture_window->w         = 16;
-    texture_window->h         = 16;
+    setWH(texture_window, 16, 16);
     if (GetGraphType() != 1) {
         GetGraphType();
     }
@@ -40,19 +39,15 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     PSX_SET_SEMI_TRANSPARENT(primitive);
     clut_x = (((s32)window_style) << 5) + 0x10;
     ;
-    primitive->x0 = left;
-    primitive->y0 = top;
+    setXY0(primitive, left, top);
     primitive->y1 = top;
     primitive->x2 = left;
     primitive->x1 = (s16)(x + 2);
     primitive->x3 = (s16)(x + 2);
-    primitive->u0 = 0;
-    primitive->v0 = 0;
+    setUV0(primitive, 0, 0);
     primitive->v1 = 0;
     primitive->u2 = 0;
-    primitive->r0 = 0xAC;
-    primitive->g0 = 0xAC;
-    primitive->b0 = 0xAC;
+    setRGB0(primitive, 0xAC, 0xAC, 0xAC);
     bottom_v      = (u8)(height + 1);
     bottom_y      = (s16)(y + bottom_v);
     primitive->y2 = bottom_y;
@@ -78,25 +73,10 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     odd_width  = (width - 3) & 1;
     SetPolyFT4(primitive);
     PSX_SET_SEMI_TRANSPARENT(primitive);
-    primitive->x0   = (s16)(x + 2);
-    primitive->y0   = top;
-    primitive->x1   = (s16)(((s16)(x + 2)) + half_width);
-    primitive->y1   = top;
-    primitive->x2   = (s16)(x + 2);
-    primitive->y2   = bottom_y;
-    primitive->x3   = (s16)(((s16)(x + 2)) + half_width);
-    primitive->y3   = bottom_y;
-    primitive->u0   = 0;
-    primitive->v0   = 0;
-    primitive->u1   = (u8)half_inner;
-    primitive->v1   = 0;
-    primitive->u2   = 0;
-    primitive->v2   = bottom_v;
-    primitive->u3   = (u8)half_inner;
-    primitive->v3   = bottom_v;
-    primitive->r0   = 0xAC;
-    primitive->g0   = 0xAC;
-    primitive->b0   = 0xAC;
+    setXY4(primitive, (s16)(x + 2), top, (s16)(((s16)(x + 2)) + half_width), top, (s16)(x + 2), bottom_y,
+           (s16)(((s16)(x + 2)) + half_width), bottom_y);
+    setUV4(primitive, 0, 0, (u8)half_inner, 0, 0, bottom_v, (u8)half_inner, bottom_v);
+    setRGB0(primitive, 0xAC, 0xAC, 0xAC);
     primitive->clut = GetClut(clut_x, 481);
     if (GetGraphType() != 1) {
         GetGraphType();
@@ -107,26 +87,18 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive     = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     PSX_SET_SEMI_TRANSPARENT(primitive);
-    primitive->y0   = top;
-    base_x          = (s16)(x + half_width);
-    primitive->x0   = (s16)(base_x + 2);
-    primitive->x1   = (s16)(base_x + ((half_width + odd_width) + 2));
-    primitive->y1   = top;
-    primitive->x2   = (s16)(base_x + 2);
-    primitive->y2   = bottom_y;
-    primitive->x3   = (s16)(base_x + ((half_width + odd_width) + 2));
-    primitive->y3   = bottom_y;
-    primitive->u0   = 0;
-    primitive->v0   = 0;
-    primitive->u1   = (u8)(half_inner + odd_width_u16);
-    primitive->v1   = 0;
-    primitive->u2   = 0;
-    primitive->v2   = bottom_v;
-    primitive->u3   = (u8)(half_inner + odd_width_u16);
-    primitive->v3   = bottom_v;
-    primitive->r0   = 0xAC;
-    primitive->g0   = 0xAC;
-    primitive->b0   = 0xAC;
+    primitive->y0 = top;
+    base_x        = (s16)(x + half_width);
+    primitive->x0 = (s16)(base_x + 2);
+    primitive->x1 = (s16)(base_x + ((half_width + odd_width) + 2));
+    primitive->y1 = top;
+    primitive->x2 = (s16)(base_x + 2);
+    primitive->y2 = bottom_y;
+    primitive->x3 = (s16)(base_x + ((half_width + odd_width) + 2));
+    primitive->y3 = bottom_y;
+    setUV4(primitive, 0, 0, (u8)(half_inner + odd_width_u16), 0, 0, bottom_v, (u8)(half_inner + odd_width_u16),
+           bottom_v);
+    setRGB0(primitive, 0xAC, 0xAC, 0xAC);
     primitive->clut = GetClut(clut_x, 481);
     if (GetGraphType() != 1) {
         GetGraphType();
@@ -147,16 +119,13 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->x2 = (s16)(edge_x - 2);
     primitive->y3 = bottom_y;
     primitive->y0 = top;
-    primitive->u0 = 0;
-    primitive->v0 = 0;
+    setUV0(primitive, 0, 0);
     primitive->u1 = 2;
     primitive->v1 = 0;
     primitive->u2 = 0;
     primitive->u3 = 2;
     primitive->v3 = bottom_v;
-    primitive->r0 = 0xAC;
-    primitive->g0 = 0xAC;
-    primitive->b0 = 0xAC;
+    setRGB0(primitive, 0xAC, 0xAC, 0xAC);
     primitive->y1 += 2;
     primitive->y3 -= 3;
     primitive->y2--;
@@ -173,8 +142,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     g_GfxPrimCursor           = (u8*)(texture_window + 1);
     texture_window->pos.x.raw = 0;
     texture_window->pos.y.raw = 0;
-    texture_window->w         = 256;
-    texture_window->h         = 256;
+    setWH(texture_window, 256, 256);
     if (GetGraphType() != 1) {
         GetGraphType();
     }

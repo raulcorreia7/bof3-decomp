@@ -49,8 +49,7 @@ MATCH void Area_DrawObjectSprite(void) {
         g_GfxPrimCursor += sizeof(RECT);
         rect->x = 832;
         rect->y = 256;
-        rect->w = 192;
-        rect->h = 256;
+        setWH(rect, 192, 256);
         SetDrawArea((DR_AREA*)(rect + 1), rect);
         GFX_AddPrim(g_Task->unk_29, sizeof(DR_AREA));
         g_Task->unk_2E += 0x340;

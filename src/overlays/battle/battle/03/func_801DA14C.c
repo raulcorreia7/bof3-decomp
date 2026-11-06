@@ -30,22 +30,13 @@ MATCH void func_801DA14C(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_i
     /* FAKE: retail reads D_80144952 as s8. */
     primitive->clut = GetClut((((*(s8*)&D_80144952) * 2) + palette_index) * 16, 481);
     start_x         = x;
-    primitive->r0   = 0x80;
-    primitive->g0   = 0x80;
-    primitive->b0   = 0x80;
-    start_y         = y;
+    setRGB0(primitive, 0x80, 0x80, 0x80);
+    start_y = y;
     x += 4;
     y += 4;
     palette_offset &= BYTE_MASK;
     palette_offset *= 4;
-    primitive->x0 = start_x;
-    primitive->y0 = start_y;
-    primitive->x1 = x;
-    primitive->y1 = start_y;
-    primitive->x2 = start_x;
-    primitive->y2 = y;
-    primitive->x3 = x;
-    primitive->y3 = y;
+    setXY4(primitive, start_x, start_y, x, start_y, start_x, y, x, y);
     primitive->u0 = D_801EAF2C[palette_offset];
     v_delta       = palette_index * 8;
     primitive->v0 = (D_801EAF2D[palette_offset] - v_delta);

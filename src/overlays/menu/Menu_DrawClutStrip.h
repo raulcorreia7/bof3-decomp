@@ -35,14 +35,12 @@ MATCH void Menu_DrawClutStrip(u8 clut_index) {
                 prim = (SPRT*)g_GfxPrimCursor;
                 SetSprt(prim);
                 SetSemiTrans(prim, 0);
-                prim->x0   = x;
-                prim->y0   = y;
+                setXY0(prim, x, y);
                 prim->clut = *clut;
                 desc       = &MENU_CLUT_STRIP_CELLS[*entry];
-                prim->u0   = desc->u;
-                prim->v0   = desc->v;
-                prim->w    = desc->w;
-                h          = desc->h;
+                setUV0(prim, desc->u, desc->v);
+                prim->w = desc->w;
+                h       = desc->h;
                 setRGB0(prim, shade, shade, shade);
                 prim->h = h;
                 GFX_AddPrim(1, 0x14);

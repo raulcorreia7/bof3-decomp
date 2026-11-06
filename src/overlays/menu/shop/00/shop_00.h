@@ -637,10 +637,9 @@ static inline void MenuClearScreenTile(void) {
 
     SetTile(prim);
     SetSemiTrans(prim, 0);
-    prim->w  = 320;
-    prim->x0 = 0;
-    prim->y0 = 0;
-    prim->h  = 240;
+    prim->w = 320;
+    setXY0(prim, 0, 0);
+    prim->h = 240;
     setRGB0(prim, 0, 0, 0);
     GFX_AddPrim(1, 0x10);
 }

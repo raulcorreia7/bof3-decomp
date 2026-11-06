@@ -81,8 +81,7 @@ static inline SPRT* GfxBeginSprite(s32 x, s32 y, u32 clut) {
     SetSprt(sprt);
     PSX_SET_SEMI_TRANSPARENT(sprt);
     PSX_SET_NEUTRAL_RGB(sprt);
-    sprt->x0   = x;
-    sprt->y0   = y;
+    setXY0(sprt, x, y);
     sprt->clut = clut;
     return sprt;
 }

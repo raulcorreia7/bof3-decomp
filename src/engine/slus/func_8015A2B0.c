@@ -19,12 +19,7 @@ MATCH void func_8015A2B0(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray
     x1        = end_x;
     y1        = end_y;
     SetLineF2(primitive);
-    primitive->r0 = color;
-    primitive->g0 = color;
-    primitive->b0 = color;
-    primitive->x0 = x0;
-    primitive->y0 = y0;
-    primitive->x1 = x1;
-    primitive->y1 = y1;
+    setRGB0(primitive, color, color, color);
+    setXY2(primitive, x0, y0, x1, y1);
     GFX_AddPrim(1u, 0x10u);
 }

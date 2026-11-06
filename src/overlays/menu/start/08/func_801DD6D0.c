@@ -9,11 +9,10 @@ MATCH void func_801DD6D0(s16 x, s16 y, u8 kind, u8 level, u32 exp) {
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
     SetSemiTrans(line, 0);
-    x0       = x;
-    line->x0 = x0;
-    line->y0 = y;
-    first    = Char_GetExpForLevel(kind, level);
-    second   = Char_GetExpForLevel(kind, (u8)(level + 1));
+    x0 = x;
+    setXY0(line, x0, y);
+    first  = Char_GetExpForLevel(kind, level);
+    second = Char_GetExpForLevel(kind, (u8)(level + 1));
     if (second != first) {
         line->x1 = x + (exp - first) * 57 / (second - first);
     } else {

@@ -9,14 +9,11 @@ MATCH u8* func_801E0DCC(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite_y) {
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     PSX_SET_NEUTRAL_RGB(sprite);
-    sprite->x0 = sprite_x;
-    sprite->y0 = sprite_y;
+    setXY0(sprite, sprite_x, sprite_y);
     sprite->clut =
         ((D_801E2424[icon_index & BYTE_MASK].unk_04 << 6) | ((D_801E2424[icon_index & BYTE_MASK].unk_00 >> 4) & 0x3F));
-    sprite->w  = D_801E2424[icon_index & BYTE_MASK].width;
-    sprite->h  = D_801E2424[icon_index & BYTE_MASK].height;
-    sprite->u0 = D_801E2424[icon_index & BYTE_MASK].u;
-    sprite->v0 = D_801E2424[icon_index & BYTE_MASK].v;
+    setWH(sprite, D_801E2424[icon_index & BYTE_MASK].width, D_801E2424[icon_index & BYTE_MASK].height);
+    setUV0(sprite, D_801E2424[icon_index & BYTE_MASK].u, D_801E2424[icon_index & BYTE_MASK].v);
     GFX_AddPrim((u8)layer, 0x14);
     return (u8*)sprite;
 }

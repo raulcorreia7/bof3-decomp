@@ -35,13 +35,10 @@ MATCH void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 sh
         sprt->b0 = 0x80;
     }
 
-    sprt->x0   = sprite_x;
-    sprt->y0   = sprite_y;
-    sprt->u0   = entry[0];
-    sprt->v0   = entry[1];
-    clut       = getClut(entry[2], entry[3] + 0x1E0);
-    sprt->w    = 40;
-    sprt->h    = 48;
+    setXY0(sprt, sprite_x, sprite_y);
+    setUV0(sprt, entry[0], entry[1]);
+    clut = getClut(entry[2], entry[3] + 0x1E0);
+    setWH(sprt, 40, 48);
     sprt->clut = clut;
     GFX_AddPrim(1, 0x14);
 }

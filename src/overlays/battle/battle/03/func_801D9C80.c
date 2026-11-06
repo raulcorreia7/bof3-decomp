@@ -6,10 +6,8 @@ MATCH void func_801D9C80(s16 x, s16 y, u8 template_index, u8 shade) {
 
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
-    tile->x0 = x;
-    tile->y0 = y;
-    tile->w  = D_801EAE50[template_index * 2];
-    tile->h  = D_801EAE52[template_index * 2];
+    setXY0(tile, x, y);
+    setWH(tile, D_801EAE50[template_index * 2], D_801EAE52[template_index * 2]);
     selector = &D_80144952;
     setRGB0(tile, PSX_COLOR_R(*(volatile u16*)(MEM_PTR(u8, 0x80033A08u) + ((*selector * 2 + shade) << 5))) << 3,
             PSX_COLOR_G(*(volatile u16*)(MEM_PTR(u8, 0x80033A08u) + ((*selector * 2 + shade) << 5))) << 3,
