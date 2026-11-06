@@ -1,9 +1,7 @@
 #include "game_00.h"
 
 MATCH s8 func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode) {
-    /* FAKE: the call result and the pos_y copy for the callee sit in the retail registers; without the a1 pin the
-     * party-array base is hoisted into s6. */
-    MATCH_REG(s16, v, "s4");
+    s16 v;
     MATCH_REG(s32, a1v, "a1");
     /* FAKE: loop bound in the retail register. */
     MATCH_REG(s32, limit, "v0");

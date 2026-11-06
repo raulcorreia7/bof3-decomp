@@ -24,9 +24,8 @@ extern u8  D_801ED69C;
  * the volatile load. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DAE14(void) {
-    s32 count;
-    /* FAKE: pin keeps the row offset in the retail a3 home. */
-    MATCH_REG(s32, offset, "a3");
+    s32          count;
+    s32          offset;
     s32          i;
     s32          index;
     s32          j;

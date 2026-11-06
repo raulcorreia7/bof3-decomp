@@ -5,9 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F70BC(void) {
-    /* FAKE: retail reads the handler record from entry $v0; the pin is the
-       entry-register residual (identical bytes to the unpinned 84.46%). */
-    MATCH_REG(u8*, entity, "v0");
+    u8* entity;
 
     D_801FAEC0[entity[1]]();
     g_AreaCameraRefreshCount = 2;

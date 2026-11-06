@@ -62,22 +62,14 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     *MATCH_VOLATILE_PTR(u8, (primitive + 0x16)) = 0x80u;
     vy0                                         = *MATCH_VOLATILE_PTR(s16, (primitive + 10));
 
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 4))    = 0xFFu;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 5))    = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 6))    = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0xD))  = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0x15)) = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0x1C)) = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0x1D)) = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *MATCH_VOLATILE_PTR(u8, (primitive + 0x1E)) = 0xFFu;
+    *(u8*)((primitive + 4))    = 0xFFu;
+    *(u8*)((primitive + 5))    = 0u;
+    *(u8*)((primitive + 6))    = 0u;
+    *(u8*)((primitive + 0xD))  = 0u;
+    *(u8*)((primitive + 0x15)) = 0u;
+    *(u8*)((primitive + 0x1C)) = 0u;
+    *(u8*)((primitive + 0x1D)) = 0u;
+    *(u8*)((primitive + 0x1E)) = 0xFFu;
 
     setXY4(((POLY_G4*)primitive), (s16)(vx0 - 0x9E) + x, (s16)(vy0 - 0x76) + y,
            (s16)((s16)((POLY_G4*)primitive)->x1 - 0x9E) + x, (s16)((s16)((POLY_G4*)primitive)->y1 - 0x76) + y,
