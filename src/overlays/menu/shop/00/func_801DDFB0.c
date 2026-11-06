@@ -16,20 +16,20 @@ MATCH void func_801DDFB0(s16 x, s16 y, u32 flags, u8 row, u8 variant) {
         shade = 0x1B;
     }
     texture = Resource_GetText(shade);
-    left    = (s16)(x + 6);
-    UI_DrawText((s16)(x + 42), (s16)(y + 7), 0, 0xFF, texture);
+    left    = (x + 6);
+    UI_DrawText((x + 42), (y + 7), 0, 0xFF, texture);
 
     color = (flags & 1) ? 0 : 7;
-    UI_DrawText(left, (s16)(y + 25), color, 0xFF, Resource_GetText(0x85));
-    right  = (s16)(x + 94);
-    text_y = (s16)(y + 25);
+    UI_DrawText(left, (y + 25), color, 0xFF, Resource_GetText(0x85));
+    right  = (x + 94);
+    text_y = (y + 25);
     UI_DrawAsciiString(right, text_y, color, &D_801D0E58);
 
     color = (flags & 2) ? 0 : 7;
-    UI_DrawText(left, (s16)(y + 41), color, 0xFF, Resource_GetText(0x85));
-    text_y = (s16)(y + 41);
+    UI_DrawText(left, (y + 41), color, 0xFF, Resource_GetText(0x85));
+    text_y = (y + 41);
     UI_DrawAsciiString(right, text_y, color, &D_801D0E5C);
 
-    row_offset = (u16)((u32)row << 4);
-    Menu_DrawCursorSprite((u16)(x + 8), (u16)(row_offset + y + 28), 0);
+    row_offset = (row << 4);
+    Menu_DrawCursorSprite((x + 8), (row_offset + y + 28), 0);
 }

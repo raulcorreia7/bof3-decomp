@@ -21,7 +21,7 @@ MATCH void func_801EEFD8(void) {
 INCLUDE_ASM(func_801EF01C);
 
 MATCH void func_801EF0E8(void) {
-    func_801E257C((u32)g_BattleActiveBattler, 0xAU);
+    func_801E257C(g_BattleActiveBattler, 0xAU);
     g_Task->unk_27 = D_801EB4E0->unk_27;
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
@@ -31,7 +31,7 @@ MATCH void func_801EF0E8(void) {
 MATCH void func_801EF164(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800AFC98(2, 0);
-        func_801E257C((u32)g_BattleActiveBattler, 0xBU);
+        func_801E257C(g_BattleActiveBattler, 0xBU);
         g_Task->unk_14 = 0x100;
         g_Task->unk_20 = -8;
         g_Task->step += 1;
@@ -181,7 +181,7 @@ MATCH void func_801EFD28(void) {
     temp_a1                  = g_Task->timer;
     temp_v1                  = g_Task->unk_14 + g_Task->unk_20;
     g_Task->unk_14           = temp_v1;
-    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + temp_v1;
+    COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + temp_v1;
     if (temp_a1 < 8U) {
         g_Task->timer = temp_a1 + 1;
     }
@@ -207,12 +207,12 @@ MATCH void func_801EFE38(void) {
     u8  value2;
     u8  value3;
 
-    g_Task->pos.x.fixed += (s32)(rsin(g_Task->unk_0C) << 0xD) >> 0xC;
-    g_Task->pos.y.fixed += (s32)(rcos(g_Task->unk_0C) << 0xD) >> 0xC;
+    g_Task->pos.x.fixed += (rsin(g_Task->unk_0C) << 0xD) >> 0xC;
+    g_Task->pos.y.fixed += (rcos(g_Task->unk_0C) << 0xD) >> 0xC;
     value                    = g_Task->unk_14 + g_Task->unk_20;
     g_Task->unk_14           = value;
-    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) + value;
-    if ((u8)g_Task->unk_09 < 8U) {
+    COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + value;
+    if (g_Task->unk_09 < 8U) {
         value3 = g_Task->timer;
         if (value3 < 0x10U) {
             g_Task->timer = value3 + 1;
@@ -233,7 +233,7 @@ MATCH void func_801EFFCC(void) {
     s8            temp_v0;
     u8            temp_v0_2;
 
-    temp_v0 = (s8)g_Task->unk_5D;
+    temp_v0 = g_Task->unk_5D;
     if (temp_v0 != -0x80) {
         g_Task->unk_5D = temp_v0 - 0x10;
         g_Task->unk_5E -= 0x10;

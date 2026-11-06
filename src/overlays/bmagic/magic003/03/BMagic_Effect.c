@@ -115,7 +115,7 @@ MATCH void func_801EF3C8(void) {
         g_Task->unk_20 = -0x80000;
         g_Task->unk_18 = temp_x;
         g_Task->unk_1C = temp_a1;
-        g_Task->unk_44 = (s32)temp_a2;
+        g_Task->unk_44 = temp_a2;
         func_801DD350(g_Task);
         g_Task->unk_09 = func_800AFF98();
         g_Task->step += 1;

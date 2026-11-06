@@ -16,12 +16,12 @@ MATCH void func_801EA254(u8* scale, s16* max_value, s16* last_max, s16* value, s
             *target = *max_value;
         }
         if (*value == *target) {
-            *scale = (u8)(*value * BATTLE_BAR_SCALE_MAX / *max_value);
+            *scale = (*value * BATTLE_BAR_SCALE_MAX / *max_value);
             if (*target != 0 && *scale == 0) {
                 *scale = 1;
             }
         } else {
-            *scale = (u8)(*value * BATTLE_BAR_SCALE_MAX / *max_value);
+            *scale = (*value * BATTLE_BAR_SCALE_MAX / *max_value);
             if (*scale >= BATTLE_BAR_SCALE_FULL) {
                 *scale = BATTLE_BAR_SCALE_MAX;
                 *value = *target;
@@ -35,13 +35,13 @@ MATCH void func_801EA254(u8* scale, s16* max_value, s16* last_max, s16* value, s
             *scale = 0;
         } else {
             SP_REF(u8, 0x0) = *scale;
-            *scale          = (u8)(*target * BATTLE_BAR_SCALE_MAX / *max_value);
+            *scale          = (*target * BATTLE_BAR_SCALE_MAX / *max_value);
             if (*target != 0 && *scale == 0) {
                 *scale = 1;
             }
             *delta = SP_REF(u8, 0x0) - *scale;
         }
-        *steps     = (u8)*delta >> BATTLE_BAR_STEP_SHIFT;
+        *steps     = *delta >> BATTLE_BAR_STEP_SHIFT;
         *direction = 1;
     } else if (*value < *target) {
         s32 step;

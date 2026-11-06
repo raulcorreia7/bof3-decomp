@@ -146,9 +146,9 @@ MATCH void func_801D2658(void) {
     s16     vec[3];
     TILE_1* primitive;
 
-    vec[0]    = (s16)(g_Task->proj_x >> 9) - 0x4000;
+    vec[0]    = (g_Task->proj_x >> 9) - 0x4000;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = (s16)(g_Task->proj_y >> 9) - 0x4000;
+    vec[1]    = (g_Task->proj_y >> 9) - 0x4000;
     vec[2]    = -(g_Task->proj_z / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);

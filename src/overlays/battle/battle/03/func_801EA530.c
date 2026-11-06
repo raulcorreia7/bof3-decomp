@@ -7,7 +7,7 @@ MATCH void func_801EA530(u8* active_flag, u32 arg1, u32 arg2, u32 arg3, s16* sha
 
     counter_value = *counter;
     budget_value  = *budget;
-    if (counter_value < (s32)budget_value) {
+    if (counter_value < budget_value) {
         *budget = budget_value - counter_value;
     } else {
         *budget     = 0u;

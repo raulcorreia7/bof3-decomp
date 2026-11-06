@@ -19,7 +19,7 @@ extern u8  D_801ED694[][2];
 extern u8  D_801ED695[][2];
 extern u8  D_801ED69C;
 
-/* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to D_801484EA,
+/* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to g_MenuPanelTasks[12].unk_0A,
  * for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv (85.21), 15 min of rewrite search
  * (type hacks). resume: j must be a preheader-initialised biv with addiu v1,v1,2 in the branch delay slot and i++ after
  * the volatile load. */
@@ -52,13 +52,13 @@ NON_MATCHING void func_801DAE14(void) {
         offset += 0xA4;
     }
 
-    D_801484E0 = 1;
-    D_801484E1 = 6;
-    D_801484E2 = 0x13;
-    D_801484E3 = 2;
-    D_801484E4 = BATTLE_PARTY_STRIDE;
-    D_801484E6 = 0x3B;
-    D_80148500 = D_801ED690;
+    g_MenuPanelTasks[12].active = 1;
+    g_MenuPanelTasks[12].unk_01 = 6;
+    g_MenuPanelTasks[12].unk_02 = 0x13;
+    g_MenuPanelTasks[12].state  = 2;
+    g_MenuPanelTasks[12].x      = BATTLE_PARTY_STRIDE;
+    g_MenuPanelTasks[12].y      = 0x3B;
+    D_80148500                  = D_801ED690;
 
     for (i = 0; i < (count & BYTE_MASK); i++) {
         D_801ED694[i][0] = 1;

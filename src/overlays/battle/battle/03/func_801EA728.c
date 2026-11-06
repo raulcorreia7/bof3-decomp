@@ -2,7 +2,7 @@
 
 MATCH void func_801EA728(void) {
     MenuPanelTask* panel = g_MenuCurrentPanel;
-    s16            state = (s16)panel->y;
+    s16            state = panel->y;
 
     if (state == 0x12) {
         panel->state++;

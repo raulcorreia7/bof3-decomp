@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEDD8);
 MATCH void func_801EEFF0(void) {
     u8 temp_v0;
 
-    if ((u8)g_Task->unk_0B < 3U) {
+    if (g_Task->unk_0B < 3U) {
         temp_v0       = g_Task->timer - 1;
         g_Task->timer = temp_v0;
         if (!(temp_v0 & 0xFF)) {
@@ -58,7 +58,7 @@ MATCH void func_801EF5D8(void) {
 MATCH void func_801EF654(void) {
     u8 timer;
 
-    g_Task->timer  = ((s32)(rsin((g_Task->unk_0B & 0x3F) << 6) * 4) >> 0xC) + 0x10;
+    g_Task->timer  = ((rsin((g_Task->unk_0B & 0x3F) << 6) * 4) >> 0xC) + 0x10;
     timer          = g_Task->unk_09 - 2;
     g_Task->unk_09 = timer;
     if (!(timer & 0xFF)) {

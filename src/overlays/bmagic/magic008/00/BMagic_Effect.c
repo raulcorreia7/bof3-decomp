@@ -282,10 +282,10 @@ MATCH void func_801F0AC8(void) {
 MATCH void func_801F0B44(void) {
     u16* battle_half;
 
-    if ((u8)g_Task->unk_09 < 0xCU) {
+    if (g_Task->unk_09 < 0xCU) {
         battle_half = (u16*)&g_BattleActionId;
         if (*battle_half != 0xA4) {
-            func_801F0BBC();
+            Effect_DrawScreenFade();
         }
         g_Task->unk_09 += 4;
         return;
@@ -293,7 +293,7 @@ MATCH void func_801F0B44(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801F0BBC);
+#include "overlays/bmagic/Effect_DrawScreenFade.h"
 
 MATCH void func_801F0DA8(void) {
     BmagicEffectFuncs handlers;

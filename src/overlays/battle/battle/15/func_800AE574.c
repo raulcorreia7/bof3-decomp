@@ -43,5 +43,5 @@ MATCH void func_800AE574(void) {
     flag->timer             = 1;
 
     last       = (PartyBattler*)g_Task;
-    last->mode = (u8)(last->mode + 1);
+    last->mode = (last->mode + 1);
 }

@@ -91,9 +91,9 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
         rotation.vz = 0;
     }
 
-    vertex.vx = (s16)(scratch->proj_x >> 9) - 0x4000;
-    vertex.vy = (s16)(scratch->proj_y >> 9) - 0x4000;
-    vertex.vz = (s16)(-scratch->proj_z / 2);
+    vertex.vx = (scratch->proj_x >> 9) - 0x4000;
+    vertex.vy = (scratch->proj_y >> 9) - 0x4000;
+    vertex.vz = (-scratch->proj_z / 2);
 
     RotTrans(&vertex, (VECTOR*)&matrix.t, &flag);
     RotMatrix(&rotation, &matrix);
@@ -119,7 +119,7 @@ MATCH void func_801D1034(void) {
     s32              coord_y;
     s16              distance;
 
-    g_Task->ticker = (u8)(RANDOM_MASK(0xF));
+    g_Task->ticker = (RANDOM_MASK(0xF));
     g_Task->timer  = 0;
     g_Task->band   = 0;
 
@@ -194,7 +194,7 @@ MATCH void func_801D12A8(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_Task->ticker = (u8)(RANDOM_MASK(0xF));
+    g_Task->ticker = (RANDOM_MASK(0xF));
     g_Task->timer  = 0;
     g_Task->band   = 0;
 
@@ -214,7 +214,7 @@ MATCH void func_801D12A8(void) {
     source          = D_801D2744;
     scratch         = g_Task;
     scratch->proj_y = source->proj_y + velocity;
-    scratch->proj_z = (u16)source->proj_z;
+    scratch->proj_z = source->proj_z;
     scratch->step_index++;
 }
 
@@ -468,7 +468,7 @@ MATCH void func_801D1DE0(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_Task->ticker = (u8)(RANDOM_MASK(0xF));
+    g_Task->ticker = (RANDOM_MASK(0xF));
     g_Task->timer  = 0;
     g_Task->band   = 0;
 
@@ -486,6 +486,6 @@ MATCH void func_801D1DE0(void) {
     velocity       = rsin(*angle_cell) * D_1F800000;
     g_Task->proj_y = D_801D2744->proj_y + velocity;
 
-    g_Task->proj_z = (u16)D_801D2744->proj_z;
+    g_Task->proj_z = D_801D2744->proj_z;
     g_Task->step_index++;
 }

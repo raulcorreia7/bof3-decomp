@@ -15,6 +15,6 @@ MATCH void func_8009F6EC(void) {
         battler_index = g_BattleActiveBattler;
     ORDER_LOCK_END;
     result                        = Battle_CalcDamage(battler_index, g_BattleTarget, 0xFFFF);
-    g_BattleTargetRecord[2]       = (s16)((s32)result * 2);
+    g_BattleTargetRecord[2]       = (result * 2);
     g_GameBonebreakTimer.hours_00 = 5;
 }

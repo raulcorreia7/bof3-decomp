@@ -205,7 +205,7 @@ MATCH s32 func_801FAA74(s32 arg0) {
     if (g_GameAreaId == 0x79) {
         if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
             if (arg0 <= 0x160000) {
-                if (((u32)(D_80145E98 - 6) < 2U) || (D_80145E98 == 0)) {
+                if (((D_80145E98 - 6) < 2U) || (D_80145E98 == 0)) {
                     Game_SetScriptActive();
                     D_80146875 = 0;
                     D_80146874 = 1;

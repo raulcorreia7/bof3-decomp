@@ -182,7 +182,7 @@ MATCH void func_801F7FCC(void) {
         FIELD(s8, cell, 0x25u) = 0;
         index += 1;
         cell += 0x28;
-    } while ((u32)(index & BYTE_MASK) < 0x80U);
+    } while ((index & BYTE_MASK) < 0x80U);
 }
 
 MATCH u8* func_801F7FF8(void) {

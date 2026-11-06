@@ -46,7 +46,7 @@ MATCH void func_801EF3A0(void) {
 
     work = g_Task;
     if (work->unk_0B == 0x80) {
-        work->mode = (u8)(work->mode + 1);
+        work->mode = (work->mode + 1);
     }
 }
 
@@ -182,12 +182,12 @@ MATCH void func_801F0A80(void) {
     if (func_8014DAEC() & 0xFF) {
         value          = g_Task->unk_09 + 1;
         g_Task->unk_09 = value;
-        if ((u32)(value & 0xFF) >= 3U) {
+        if ((value & 0xFF) >= 3U) {
             D_801EB4E0->unk_0B += 1;
             func_801E5988();
             return;
         }
-        g_Task->unk_2A = ((u8)g_Task->unk_2A + 1) & 1;
+        g_Task->unk_2A = (g_Task->unk_2A + 1) & 1;
         Actor_SelectScript(g_Task->unk_0B);
         func_8014D290();
         if (g_Task->unk_0B == 0) {

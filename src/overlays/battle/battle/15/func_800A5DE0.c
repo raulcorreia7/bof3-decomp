@@ -13,5 +13,5 @@ MATCH void func_800A5DE0(void) {
     counter    = (u8*)&g_BattleUiState;
     count      = *counter;
     D_801485DF = 2;
-    *counter   = (u8)(count + 1);
+    *counter   = (count + 1);
 }

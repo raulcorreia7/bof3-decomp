@@ -85,12 +85,12 @@ MATCH void func_801EF2A4(void) {
     g_Task = battler;
     if (D_801EB4E0->unk_2C.half == 0) {
         value = 0x242;
-        if ((u8)D_801EB4E0->facing < 2U) {
+        if (D_801EB4E0->facing < 2U) {
             value = 0x240;
         }
     } else {
         value = 0x243;
-        if ((u8)D_801EB4E0->facing < 2U) {
+        if (D_801EB4E0->facing < 2U) {
             value = 0x241;
         }
     }

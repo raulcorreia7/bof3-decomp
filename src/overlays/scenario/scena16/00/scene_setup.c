@@ -59,7 +59,7 @@ MATCH void func_801F6CCC(void) {
     flags       = g_GameFlags;
     D_80144904  = 0x88000u;
     D_801448FF  = 5u;
-    g_GameFlags = (u16)(flags | GAME_FLAG_RUN_LOCK | 0x200u);
+    g_GameFlags = (flags | GAME_FLAG_RUN_LOCK | 0x200u);
     SND_RequestBgm(6u);
 
     while (!EMI_LoaderIsReady()) {
@@ -109,7 +109,7 @@ MATCH void func_801F6E30(void) {
     Party_HideBattlers();
 
     if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
-        state           = (u32)g_SceneFlags;
+        state           = g_SceneFlags;
         g_AreaDrawFlags = 0u;
         SYS_SetFlag((void*)state, 1);
         g_SceneState.state_04 = 3;
@@ -144,16 +144,16 @@ MATCH void func_801F6F30(void) {
         /* The cell is advanced through an unsigned view and read back signed
          * for x: the two views of g_AreaCameraAngle.vx are not interchangeable. */
         base          = (u16*)&g_AreaCameraAngle.vx;
-        base[0]       = (u16)(base[0] + 0xAAu);
+        base[0]       = (base[0] + 0xAAu);
         object_index  = Actor_FindFreeSlot();
         D_1F800000[0] = object_index;
 
         if (object_index != 0xFFu) {
             g_ActorSlots[object_index].flags  = 1u;
             g_ActorSlots[D_1F800000[0]].type  = 0x13u;
-            g_ActorSlots[D_1F800000[0]].pos.x = (s32)((s16)*base - 170);
-            g_ActorSlots[D_1F800000[0]].pos.y = (s32)g_AreaCameraAngle.vy;
-            g_ActorSlots[D_1F800000[0]].pos.z = (s32)g_AreaCameraAngle.vz;
+            g_ActorSlots[D_1F800000[0]].pos.x = ((s16)*base - 170);
+            g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+            g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
             g_ActorSlots[D_1F800000[0]].layer = 0x40u;
         }
 
@@ -232,30 +232,30 @@ MATCH void func_801F7230(void) {
         }
 
         case 1:
-            UI_DrawText(0x7A, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010020));
+            UI_DrawText(0x7A, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
             if (WINDOW_EFFECT_IDLE()) {
                 g_SceneState.timer_06 = 0u;
-                g_SceneState.step_05  = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
             }
             break;
 
         case 2: {
             u16* timer = &g_SceneState.timer_06;
 
-            *timer = (u16)(*timer + 1u);
-            SsSetMVol((s32)(s16)*timer, (s32)(s16)*timer);
-            UI_DrawText(0x7A, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010020));
+            *timer = (*timer + 1u);
+            SsSetMVol((s16)*timer, (s16)*timer);
+            UI_DrawText(0x7A, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
             if (*timer == 127u) {
                 UI_SetMode(0u);
                 *timer               = 0u;
-                g_SceneState.step_05 = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
             }
             break;
         }
 
         case 3:
             if (WINDOW_EFFECT_BUSY()) {
-                UI_DrawText(0x7A, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010020));
+                UI_DrawText(0x7A, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
                 break;
             }
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
@@ -264,7 +264,7 @@ MATCH void func_801F7230(void) {
             UI_SetMode(1u);
             g_ScriptVars[3]       = 1u;
             g_SceneState.timer_06 = 0u;
-            g_SceneState.step_05  = (u8)(g_SceneState.step_05 + 1u);
+            g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
             break;
 
         case 4: {
@@ -273,7 +273,7 @@ MATCH void func_801F7230(void) {
             if (g_ScriptVars[3] == 0x54u) {
                 UI_SetMode(0u);
                 next  = &g_SceneState.step_05;
-                *next = (u8)(*next + 1u);
+                *next = (*next + 1u);
             }
             break;
         }
@@ -285,27 +285,27 @@ MATCH void func_801F7230(void) {
                 g_AreaDrawFlags = 0u;
                 UI_SetMode(1u);
                 next  = &g_SceneState.step_05;
-                *next = (u8)(*next + 1u);
+                *next = (*next + 1u);
             }
             break;
         }
 
         case 6:
-            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010022));
+            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
             if (WINDOW_EFFECT_IDLE()) {
                 g_SceneState.timer_06 = 0x7Fu;
-                g_SceneState.step_05  = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
             }
             break;
 
         case 7: {
             u16* timer = &g_SceneState.timer_06;
 
-            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010022));
-            *timer = (u16)(*timer - 1u);
+            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
+            *timer = (*timer - 1u);
             if (*timer == 0u) {
                 UI_SetMode(0u);
-                g_SceneState.step_05 = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
             }
             break;
         }
@@ -314,12 +314,12 @@ MATCH void func_801F7230(void) {
             u8* next;
 
             if (WINDOW_EFFECT_BUSY()) {
-                UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010022));
+                UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
                 break;
             }
             Game_RequestAreaChange(4u, 0x440000u, 0x80000u, 5u);
             next  = &g_SceneState.step_05;
-            *next = (u8)(*next + 1u);
+            *next = (*next + 1u);
             break;
         }
 
@@ -331,7 +331,7 @@ MATCH void func_801F7230(void) {
                 next            = &g_SceneState.step_05;
                 step            = *next;
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-                *next           = (u8)(step + 1u);
+                *next           = (step + 1u);
             }
             break;
         }
@@ -350,14 +350,14 @@ MATCH void func_801F7230(void) {
             if (object_index != 0xFFu) {
                 g_ActorSlots[object_index].flags  = 1u;
                 g_ActorSlots[D_1F800000[0]].type  = 0x13u;
-                g_ActorSlots[D_1F800000[0]].pos.x = (s32)(g_AreaCameraAngle.vx + 384);
-                g_ActorSlots[D_1F800000[0]].pos.y = (s32)g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z = (s32)g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].pos.x = (g_AreaCameraAngle.vx + 384);
+                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
                 g_ActorSlots[D_1F800000[0]].layer = 0x60u;
             }
 
             next  = &g_SceneState.step_05;
-            *next = (u8)(*next + 1u);
+            *next = (*next + 1u);
             break;
         }
 
@@ -383,32 +383,32 @@ MATCH void func_801F7790(void) {
             if (WINDOW_EFFECT_IDLE()) {
                 UI_SetMode(1u);
                 state  = &g_SceneState.step_05;
-                *state = (u8)(*state + 1u);
+                *state = (*state + 1u);
             }
             break;
 
         case 1:
-            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010004));
+            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
             if (WINDOW_EFFECT_IDLE()) {
                 g_SceneState.timer_06 = 0x7Fu;
-                g_SceneState.step_05  = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
             }
             break;
 
         case 2: {
             u16* timer;
-            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010004));
+            UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
             timer = &g_SceneState.timer_06;
             if (--*timer == 0u) {
                 UI_SetMode(0u);
-                g_SceneState.step_05 = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
             }
             break;
         }
 
         case 3:
             if (WINDOW_EFFECT_BUSY()) {
-                UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010004));
+                UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
                 break;
             }
 
@@ -421,43 +421,43 @@ MATCH void func_801F7790(void) {
             if (object_index != 0xFFu) {
                 g_ActorSlots[object_index].flags  = 1u;
                 g_ActorSlots[D_1F800000[0]].type  = 0x13u;
-                g_ActorSlots[D_1F800000[0]].pos.x = (s32)(g_AreaCameraAngle.vx + 448);
-                g_ActorSlots[D_1F800000[0]].pos.y = (s32)g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z = (s32)g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].pos.x = (g_AreaCameraAngle.vx + 448);
+                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
                 g_ActorSlots[D_1F800000[0]].layer = 0xFFu;
             }
 
             state  = &g_SceneState.step_05;
-            *state = (u8)(*state + 1u);
+            *state = (*state + 1u);
             break;
 
         case 4:
             if (WINDOW_EFFECT_IDLE()) {
                 g_SceneState.timer_06 = 0u;
-                g_SceneState.step_05  = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
             }
             break;
 
         case 5: {
             u16* timer;
-            UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010006));
+            UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
             timer = &g_SceneState.timer_06;
             if (++*timer == 32u) {
                 func_801F845C();
                 *timer               = 0x7Fu;
-                g_SceneState.step_05 = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
                 break;
             }
-            GFX_CopyPaletteCapped((u32)((u8)*timer));
+            GFX_CopyPaletteCapped(((u8)*timer));
             break;
         }
 
         case 6: {
             u16* timer;
-            UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010006));
+            UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
             timer = &g_SceneState.timer_06;
             if (--*timer == 0u) {
-                g_SceneState.step_05 = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
                 *timer               = 0x20u;
             }
             break;
@@ -467,13 +467,13 @@ MATCH void func_801F7790(void) {
             u16* timer;
             timer = &g_SceneState.timer_06;
             if (--*timer != 0u) {
-                UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010006));
-                GFX_CopyPaletteCapped((u32)(u8)*timer);
+                UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
+                GFX_CopyPaletteCapped((u8)*timer);
                 break;
             }
             func_801F845C();
             *timer               = 0x1Eu;
-            g_SceneState.step_05 = (u8)(g_SceneState.step_05 + 1u);
+            g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
             break;
         }
 
@@ -481,7 +481,7 @@ MATCH void func_801F7790(void) {
             u16* timer;
             timer = &g_SceneState.timer_06;
             if (--*timer == 0u) {
-                g_SceneState.step_05 = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
             }
             break;
         }
@@ -505,7 +505,7 @@ MATCH void func_801F7790(void) {
         pos                = &SCENA16_D_8014930C;
         other              = &g_AreaFocusY;
         plane              = &SCENA16_D_80143F80;
-        SCENA16_D_80149322 = (u16)(SCENA16_D_80149322 - 0x1Eu);
+        SCENA16_D_80149322 = (SCENA16_D_80149322 - 0x1Eu);
         *pos += -0x1E0000;
         *other += -0x1E0000;
         *plane += -0x1E0000;
@@ -531,7 +531,7 @@ MATCH void func_801F7CC4(void) {
                 u8* next_state;
 
                 next_state  = &g_SceneState.step_05;
-                *next_state = (u8)(*next_state + 1u);
+                *next_state = (*next_state + 1u);
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             break;
@@ -541,7 +541,7 @@ MATCH void func_801F7CC4(void) {
                 return;
             }
             state  = &g_SceneState.step_05;
-            *state = (u8)(*state + 1u);
+            *state = (*state + 1u);
             break;
 
         case 2:
@@ -554,7 +554,7 @@ MATCH void func_801F7CC4(void) {
                 u8* next_state;
 
                 next_state  = &g_SceneState.step_05;
-                *next_state = (u8)(*next_state + 1u);
+                *next_state = (*next_state + 1u);
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             break;
@@ -562,7 +562,7 @@ MATCH void func_801F7CC4(void) {
         case 3:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE && g_ScriptVars[0] == 4u) {
                 g_SceneState.timer_06 = 0x130u;
-                g_SceneState.step_05  = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
             }
             break;
 
@@ -571,18 +571,18 @@ MATCH void func_801F7CC4(void) {
             u16* timer;
 
             progress  = (u16*)D_1F800000;
-            *progress = (u16)(0x130u - g_SceneState.timer_06);
+            *progress = (0x130u - g_SceneState.timer_06);
             if (*progress < 191u) {
-                UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010006));
+                UI_DrawText(0x48, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
                 if (*progress < 32u) {
-                    GFX_CopyPaletteCapped((u32)(*progress & BYTE_MASK));
+                    GFX_CopyPaletteCapped((*progress & BYTE_MASK));
                 } else if (*progress == 32u) {
                     func_801F845C();
                 } else if (*progress > 159u) {
                     u16 inverted;
 
-                    inverted = (u16)(0xBFu - *progress);
-                    GFX_CopyPaletteCapped((u32)(inverted & BYTE_MASK));
+                    inverted = (0xBFu - *progress);
+                    GFX_CopyPaletteCapped((inverted & BYTE_MASK));
                 }
             } else if (*progress == 191u) {
                 func_801F845C();
@@ -590,12 +590,12 @@ MATCH void func_801F7CC4(void) {
 
             timer = &g_SceneState.timer_06;
             if (*timer == 0u) {
-                g_SceneState.step_05 = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
                 break;
             }
 
-            *timer             = (u16)(*timer - 1u);
-            SCENA16_D_8014932C = (u16)((((u32)(0x130u - (u32)*timer)) * 0x57943u) >> 16);
+            *timer             = (*timer - 1u);
+            SCENA16_D_8014932C = ((((0x130u - *timer)) * 0x57943u) >> 16);
             return;
         }
 
@@ -609,12 +609,12 @@ MATCH void func_801F7CC4(void) {
                 g_ActorSlots[object_index].flags  = 1u;
                 g_ActorSlots[D_1F800000[0]].type  = 0x13u;
                 g_ActorSlots[D_1F800000[0]].pos.x = -842;
-                g_ActorSlots[D_1F800000[0]].pos.y = (s32)g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z = (s32)g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
                 g_ActorSlots[D_1F800000[0]].layer = 0x60u;
             }
             state  = &g_SceneState.step_05;
-            *state = (u8)(*state + 1u);
+            *state = (*state + 1u);
             break;
 
         case 6:
@@ -627,12 +627,12 @@ MATCH void func_801F7CC4(void) {
                 g_ActorSlots[object_index].flags  = 1u;
                 g_ActorSlots[D_1F800000[0]].type  = 0x13u;
                 g_ActorSlots[D_1F800000[0]].pos.x = -684;
-                g_ActorSlots[D_1F800000[0]].pos.y = (s32)g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].pos.z = (s32)g_AreaCameraAngle.vz;
+                g_ActorSlots[D_1F800000[0]].pos.y = g_AreaCameraAngle.vy;
+                g_ActorSlots[D_1F800000[0]].pos.z = g_AreaCameraAngle.vz;
                 g_ActorSlots[D_1F800000[0]].layer = 0x20u;
             }
             g_SceneState.timer_06 = 0x200u;
-            g_SceneState.step_05  = (u8)(g_SceneState.step_05 + 1u);
+            g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
             break;
 
         case 7: {
@@ -640,11 +640,11 @@ MATCH void func_801F7CC4(void) {
 
             timer = &g_SceneState.timer_06;
             if (*timer == 0u) {
-                g_SceneState.step_05 = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
                 break;
             }
 
-            SCENA16_D_8014932C = (u16)((*timer * 0xDu) >> 2);
+            SCENA16_D_8014932C = ((*timer * 0xDu) >> 2);
             (*timer)--;
             return;
         }
@@ -653,7 +653,7 @@ MATCH void func_801F7CC4(void) {
             if (g_ScriptVars[0] == 0x0Bu) {
                 UI_SetMode(0u);
                 g_SceneState.timer_06 = 0u;
-                g_SceneState.step_05  = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
             }
             break;
 
@@ -665,28 +665,28 @@ MATCH void func_801F7CC4(void) {
             UI_SetMode(1u);
             SND_FadeOutBgm(2u, 0x6E, 0x20);
             state  = &g_SceneState.step_05;
-            *state = (u8)(*state + 1u);
+            *state = (*state + 1u);
             break;
 
         case 10:
-            UI_DrawText(0x46, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010008));
+            UI_DrawText(0x46, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
             if (WINDOW_EFFECT_IDLE()) {
                 g_SceneState.timer_06 = 0x7Fu;
-                g_SceneState.step_05  = (u8)(g_SceneState.step_05 + 1u);
+                g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
             }
             break;
 
         case 11: {
             u16* timer;
 
-            UI_DrawText(0x46, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010008));
+            UI_DrawText(0x46, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
             timer  = &g_SceneState.timer_06;
-            *timer = (u16)(*timer - 1u);
+            *timer = (*timer - 1u);
             if (*timer != 0u) {
                 return;
             }
             UI_SetMode(0u);
-            g_SceneState.step_05 = (u8)(g_SceneState.step_05 + 1u);
+            g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
             break;
         }
 
@@ -695,7 +695,7 @@ MATCH void func_801F7CC4(void) {
                 g_SceneState.state_04 = 1;
                 g_SceneState.step_05  = 0u;
             } else {
-                UI_DrawText(0x46, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + (u32)SCENA16_D_80010008));
+                UI_DrawText(0x46, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
             }
             break;
     }
@@ -705,7 +705,7 @@ MATCH void func_801F8358(void* record) {
     u8 callback_index;
 
     callback_index = ((Actor*)record)->callback_index;
-    D_801F8538.event.handlers[callback_index](record, (u32)g_SceneFlags);
+    D_801F8538.event.handlers[callback_index](record, g_SceneFlags);
 }
 
 MATCH s32 func_801F8398(void) {
@@ -730,7 +730,7 @@ MATCH void func_801F845C(void) {
         g_GraphicsPaletteDst[i] = SCENA16_PALETTE_SRC[i];
         i++;
     } while (i < 16);
-    SCENA16_D_80145988 = (u8)(SCENA16_D_80145988 + 1u);
+    SCENA16_D_80145988 = (SCENA16_D_80145988 + 1u);
 }
 
 #include "overlays/scenario/Scene_ClearParty.h"

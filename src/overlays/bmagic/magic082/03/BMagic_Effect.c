@@ -10,7 +10,7 @@ INCLUDE_ASM(func_801EEC94);
 
 #include "overlays/bmagic/Effect_ReplacePaletteFade.h"
 
-INCLUDE_ASM(func_801EEFB4);
+#include "overlays/bmagic/Effect_BrightenPalette.h"
 
 #include "overlays/bmagic/Effect_NextStep.h"
 
@@ -64,7 +64,7 @@ MATCH void func_801F00DC(void) {
     u8  value3;
 
     func_800AF764();
-    if ((g_Task->unk_0C == 4) && ((u8)g_Task->timer < 5U)) {
+    if ((g_Task->unk_0C == 4) && (g_Task->timer < 5U)) {
         value2 = (rand() & 3) | 0x40;
     } else {
         value2 = (rand() & 3) | 0x18;

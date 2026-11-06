@@ -29,7 +29,7 @@ MATCH void func_801E09F4(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         next       = D_801483EE + 1;
         D_801483EE = next;
-        if ((u32)(next & BYTE_MASK) >= 3U) {
+        if ((next & BYTE_MASK) >= 3U) {
             D_801483EE = 0;
         }
     }

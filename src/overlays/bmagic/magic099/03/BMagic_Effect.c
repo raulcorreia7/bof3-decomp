@@ -21,7 +21,7 @@ MATCH void func_801EEF98(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFDC);
+#include "overlays/bmagic/Effect_BrightenPalette.h"
 
 MATCH void func_801EF0EC(void) {
     if (g_Task->unk_0B == 9) {
@@ -156,7 +156,7 @@ MATCH void func_801F0090(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_Task->unk_0B = (u8)(RANDOM_MASK(0xF));
+    g_Task->unk_0B = (RANDOM_MASK(0xF));
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
 
@@ -174,7 +174,7 @@ MATCH void func_801F0090(void) {
     velocity            = rsin(*angle_cell) * D_1F800000;
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
-    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(BATTLE_ACTIVE_WORK->pos.z);
+    COORD_INT(g_Task->pos.z) = COORD_INT(BATTLE_ACTIVE_WORK->pos.z);
     g_Task->step++;
 }
 

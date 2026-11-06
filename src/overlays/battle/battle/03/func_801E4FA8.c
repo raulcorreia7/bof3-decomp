@@ -5,7 +5,7 @@ MATCH void func_801E4FA8(void) {
 
     g_Task->unk_18 = -ONE;
     g_Task->unk_1C = 0;
-    func_801DD3CC((s32)g_Task);
+    func_801DD3CC(g_Task);
     work          = g_Task;
     work->facing  = work->facing ^ 2;
     work          = g_Task;

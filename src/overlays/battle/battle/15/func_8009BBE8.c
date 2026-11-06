@@ -12,8 +12,7 @@ MATCH void func_8009BBE8(void) {
     u8                 i;
 
     for (i = 0; i < 4; i++) {
-        packet =
-            (BattleEventPacket*)(MEM_PTR(u8, 0x800E407Cu) + (u32)g_BattleCurrentEnemy->kind * 0x88u + (u32)i * 0x10u);
+        packet = (BattleEventPacket*)(MEM_PTR(u8, 0x800E407Cu) + g_BattleCurrentEnemy->kind * 0x88u + i * 0x10u);
         switch (packet->kind) {
             case 0:
                 if (func_8009C8AC(1) != 0) {
@@ -148,7 +147,7 @@ MATCH void func_8009BBE8(void) {
                 }
                 break;
             case 37:
-                if ((s32)g_BattleCurrentEnemy->hp <= (s32)g_BattleCurrentEnemy->hp_change) {
+                if (g_BattleCurrentEnemy->hp <= g_BattleCurrentEnemy->hp_change) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);

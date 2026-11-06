@@ -33,6 +33,6 @@ MATCH void func_801DCFD0(void) {
             /* FAKE: the order lock holds this store in place; without it the match is 63.83%. */
             ORDER_LOCK(*((s32*)dst) = *((s32*)src));
             index += 1;
-        } while (((u32)(index & BYTE_MASK)) < ((u8)g_PartySize));
+        } while (((index & BYTE_MASK)) < (g_PartySize));
     }
 }

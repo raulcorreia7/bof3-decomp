@@ -4,10 +4,10 @@ MATCH void SAVE_RunLoadRestore(void) {
     u8  countdown;
     s32 i;
 
-    countdown        = (u8)g_MenuStartTimer;
+    countdown        = g_MenuStartTimer;
     g_MenuStartTimer = countdown - 1;
     if (countdown == 0) {
-        for (i = 0; (u32)(i & BYTE_MASK) < 9U; i++) {
+        for (i = 0; (i & BYTE_MASK) < 9U; i++) {
             (&g_InputMasks)[i & BYTE_MASK] = D_80145594[i & BYTE_MASK];
         }
         if (D_801ED18C != 0) {
@@ -56,7 +56,7 @@ MATCH void SAVE_RunLoadRestore(void) {
             D_801ED18C = 1;
         }
         Menu_DrawClutStrip(D_80144953);
-        Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, (s32)D_80144952);
+        Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, D_80144952);
         SAVE_DrawSlots(0x20, 0x30, 0U);
         UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(0xB1));
     }

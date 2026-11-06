@@ -18,7 +18,7 @@ MATCH void Menu_DrawStatPanel(s16 panel_x, s16 panel_y, u8 palette_index) {
     u8         i;
     base = &D_80144952;
     y15  = panel_x + 5;
-    UI_DrawWindow((s32)((u16)y15), (s32)((u16)(panel_y + 3)), 148, 45, 0, (s32)base[0]);
+    UI_DrawWindow((y15), ((panel_y + 3)), 148, 45, 0, base[0]);
     xb     = panel_x + 0xB;
     y8     = panel_y + 8;
     entryp = (Character*)(&D_80144952 + 0x16 + palette_index * 0xA4);

@@ -39,9 +39,9 @@ MATCH void func_801D942C(void) {
                 next++;
                 j++;
                 list++;
-            } while ((u8)j < n);
+            } while (j < n);
         }
         i++;
         j = 0;
-    } while ((u8)i < 9);
+    } while (i < 9);
 }

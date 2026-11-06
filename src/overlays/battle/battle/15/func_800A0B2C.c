@@ -19,6 +19,6 @@ MATCH void func_800A0B2C(void) {
         record                     = *(s16**)&g_BattleTargetRecord;
         /* FAKE: volatile-drop cell read keeps the decrement ahead of the pointer
          * load, as the shipped code orders them. */
-        ((volatile s16*)record)[2] = (s16)(base - 1);
+        ((volatile s16*)record)[2] = (base - 1);
     }
 }

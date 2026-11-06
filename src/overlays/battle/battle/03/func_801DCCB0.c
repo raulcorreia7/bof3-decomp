@@ -14,7 +14,7 @@ MATCH u32 func_801DCCB0(void) {
             i = i + 1u;
         } while ((i & BYTE_MASK) < g_BattlePartyCount);
     }
-    half = (u16)total;
-    sum  = half / (s32)g_BattlePartyCount;
+    half = total;
+    sum  = half / g_BattlePartyCount;
     return (sum + D_801EC2EE) >> 1u;
 }

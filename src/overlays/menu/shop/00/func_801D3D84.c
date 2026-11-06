@@ -22,7 +22,7 @@ MATCH void func_801D3D84(void) {
     } else if (g_InputPressed & PADLdown) {
         mode       = prev + 1;
         D_801E60F0 = mode;
-        if ((u8)mode >= 3) {
+        if (mode >= 3) {
             D_801E60F0 = 0;
         }
     }

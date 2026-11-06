@@ -120,13 +120,13 @@ MATCH void func_801EF930(void) {
     PartyBattler* work;
 
     cell                                = &D_1F800000.view.area.entry_data;
-    *cell                               = (u16)((u32)(rsin(g_Task->unk_09 << 6) * 3) >> 4);
+    *cell                               = ((u32)(rsin(g_Task->unk_09 << 6) * 3) >> 4);
     D_1F800000.view.area.entity_counter = (g_Task->unk_09 << 6) + 0x40;
     g_Task->pos.x.fixed =
         BATTLE_ACTIVE_WORK->pos.x.fixed + ((rsin(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
     g_Task->pos.y.fixed =
         BATTLE_ACTIVE_WORK->pos.y.fixed + ((rcos(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
-    COORD_INT(g_Task->pos.z) = (u16)((u16)COORD_INT(BATTLE_ACTIVE_WORK->pos.z) + *cell) - 0x20;
+    COORD_INT(g_Task->pos.z) = (COORD_INT(BATTLE_ACTIVE_WORK->pos.z) + *cell) - 0x20;
     height                   = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
     work                     = g_Task;
     work->unk_25             = 0x1D;
@@ -152,9 +152,9 @@ MATCH void func_801EF930(void) {
 
 MATCH void func_801EFB68(void) {
     g_Task->timer += 1;
-    g_Task->pos.x.fixed += (s32)(rsin((g_Task->timer & 0x3F) << 8) * 8) >> 3;
-    g_Task->pos.y.fixed += (s32)(rcos((g_Task->timer & 0x3F) << 8) * 8) >> 3;
-    COORD_INT(g_Task->pos.z) = (u16)COORD_INT(g_Task->pos.z) - 8;
+    g_Task->pos.x.fixed += (rsin((g_Task->timer & 0x3F) << 8) * 8) >> 3;
+    g_Task->pos.y.fixed += (rcos((g_Task->timer & 0x3F) << 8) * 8) >> 3;
+    COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) - 8;
     if ((func_8014DAEC() & 0xFF) || (COORD_INT(g_Task->pos.z) < g_Task->unk_14)) {
         D_801EB4E0->unk_0B -= 1;
         g_Task->flags = 0;

@@ -23,8 +23,8 @@ MATCH void func_80098450(void) {
     g_BattlePartyBattlers[slot].damage_flags.volatile_value &= 0xBFFFu;
     if (*phase == 0u) {
         D_801485DC = 1u;
-        D_801485E0 = (u16)(D_80148574 + 7);
-        D_801485E2 = (u16)(D_80148576 + ((D_8014857C - D_8014857B) * 0xD + 0x1A));
+        D_801485E0 = (D_80148574 + 7);
+        D_801485E2 = (D_80148576 + ((D_8014857C - D_8014857B) * 0xD + 0x1A));
     }
     panel   = (MenuChoicePanel*)g_BattleChoicePanel;
     trigger = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
@@ -39,21 +39,21 @@ MATCH void func_80098450(void) {
         D_80148580 = 0x31;
         SND_PlayCue(EMI_CUE_ID(1, 1));
         D_8014857A += 1;
-        if ((u8)D_8014857A >= 4u) {
+        if (D_8014857A >= 4u) {
             D_8014857A = 0;
         }
     }
     old_cursor = panel->group_cursor;
     if ((trigger & PADLup) != 0) {
         if (old_cursor != 0u) {
-            panel->group_cursor = (u8)(old_cursor - 1);
+            panel->group_cursor = (old_cursor - 1);
         }
         if (panel->group_cursor < panel->group_first) {
             panel->confirm_gate = 0xF0;
         }
     } else if ((trigger & PADLdown) != 0) {
         if (old_cursor < 0x7Fu) {
-            panel->group_cursor = (u8)(old_cursor + 1);
+            panel->group_cursor = (old_cursor + 1);
         }
         if (panel->group_first + 7 <= panel->group_cursor) {
             panel->confirm_gate = 0x10;
@@ -62,20 +62,20 @@ MATCH void func_80098450(void) {
         if (panel->group_first == 0u) {
             panel->group_cursor = 0u;
         } else if (panel->group_first < 7u) {
-            panel->group_cursor = (u8)(old_cursor - panel->group_first);
+            panel->group_cursor = (old_cursor - panel->group_first);
             panel->group_first  = 0u;
         } else {
-            panel->group_cursor = (u8)(old_cursor - 7);
+            panel->group_cursor = (old_cursor - 7);
             panel->group_first -= 7;
         }
     } else if ((trigger & 0x8) != 0) {
         if (panel->group_first == 0x79u) {
             panel->group_cursor = 0x7Fu;
         } else if (panel->group_first >= 0x73u) {
-            panel->group_cursor = (u8)(old_cursor + (0x79 - panel->group_first));
+            panel->group_cursor = (old_cursor + (0x79 - panel->group_first));
             panel->group_first  = 0x79u;
         } else {
-            panel->group_cursor = (u8)(old_cursor + 7);
+            panel->group_cursor = (old_cursor + 7);
             panel->group_first += 7;
         }
     }
@@ -96,8 +96,8 @@ MATCH void func_80098450(void) {
         g_BattleUiStep = 6u;
         D_8014862E     = 0u;
         D_801483C0     = 0u;
-        D_80148628     = (s16)(D_80148574 + 0x20);
-        D_8014862A     = (u16)(D_80148576 - 0x16);
+        D_80148628     = (D_80148574 + 0x20);
+        D_8014862A     = (D_80148576 - 0x16);
         return;
     }
     if ((g_InputPressed & D_80145AC4) != 0u) {
@@ -114,9 +114,8 @@ MATCH void func_80098450(void) {
     }
     if ((g_InputPressed & D_80145AC2) != 0u) {
         value                   = D_801C893C[D_8014857A][D_8014857C] + (D_8014857A << 8);
-        *(u16*)(D_801EB4D8 + 2) = (u16)value;
-        if ((func_801AF494(D_80148578, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, (u8)value) & BYTE_MASK) ==
-            0) {
+        *(u16*)(D_801EB4D8 + 2) = value;
+        if ((func_801AF494(D_80148578, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;
         }

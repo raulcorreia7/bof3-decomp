@@ -40,5 +40,5 @@ MATCH u32 func_801DCD50(u32 unused, u8 battler_index, s32 damage_value) {
     if ((damage & BYTE_MASK) >= 0x80) {
         damage += 0x100;
     }
-    return (u32)((damage << 8) >> 16);
+    return ((damage << 8) >> 16);
 }

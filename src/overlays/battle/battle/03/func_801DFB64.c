@@ -10,7 +10,7 @@ MATCH void func_801DFB64(void) {
             Battle_AllocEffect(0, 2);
         }
         func_800A9820(g_BattleTargetSelector);
-        half        = (u16)(*gate | BATTLE_STATE_EFFECT_PLAYING);
+        half        = (*gate | BATTLE_STATE_EFFECT_PLAYING);
         *(u16*)gate = half;
         func_801E1DD4();
     }

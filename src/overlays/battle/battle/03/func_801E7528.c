@@ -5,5 +5,5 @@ MATCH void func_801E7528(void) {
 
     D_801EB4E0->unk_48 = 2;
     work               = *(void**)(SP(0x44u)) + 1;
-    *work              = (u8)(*work + 1);
+    *work              = (*work + 1);
 }

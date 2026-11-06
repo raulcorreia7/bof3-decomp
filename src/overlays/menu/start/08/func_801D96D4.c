@@ -7,10 +7,10 @@ extern s8          D_8014854C; /* local: s8 read; a sibling copy is u8 */
 extern volatile u8 D_80148594; /* local: volatile access; the shared copy is plain */
 
 MATCH void func_801D96D4(void) {
-    D_80148504.active      = 0;
-    D_80148528             = 0;
-    D_8014854C             = 0;
-    g_BattleChoicePanel[0] = 0;
-    D_80148594             = 0;
-    D_801485B8             = 0;
+    D_80148504.active           = 0;
+    g_MenuPanelTasks[14].active = 0;
+    D_8014854C                  = 0;
+    g_BattleChoicePanel[0]      = 0;
+    g_MenuPanelTasks[17].active = 0;
+    D_801485B8                  = 0;
 }

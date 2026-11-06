@@ -115,8 +115,6 @@ extern s8            D_801484EA;
 /* D_80148573 */
 extern u8            g_BattleChoicePhase;
 extern volatile u8   D_80148597;
-extern s8            D_801485E6;
-extern s8            D_801485E7;
 extern u8            D_80148624;
 extern u8            D_80148625;
 extern u8            D_80148626;
