@@ -2,6 +2,6 @@
 
 MATCH void func_800A2560(void) {
     g_BattleActionType = BATTLE_ACTION_ABILITY;
-    g_BattleActionId   = 0x4E;
+    g_BattleActionId   = ABILITY_LEECH_POWER;
     func_8009E500();
 }
