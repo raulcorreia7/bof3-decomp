@@ -69,7 +69,7 @@ MATCH void func_801B146C(void) {
         if ((state_flags & 2) &&
             ((work_f = g_Task, speed = work_f->state_70.byte, route_index2 = work_f->direction_08 * 2,
               pos_x = work_f->pos.x.fixed + ((*(s32*)((u8*)g_FacingSteps + route_index2 * 4)) * speed),
-              pos_y = work_f->pos.y.fixed + (D_80181B98[route_index2] * speed),
+              pos_y = work_f->pos.y.fixed + (g_FacingStepY[route_index2] * speed),
               (pos_x == 0x20000) || (pos_y == 0x20000) || (pos_x == ((D_80104000 - 3) << 0x10)) ||
                   (pos_y == ((D_80104001 - 3) << 0x10))))) {
             Actor_RequestScript(g_Task->direction_08);

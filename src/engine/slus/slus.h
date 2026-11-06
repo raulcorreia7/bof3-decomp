@@ -40,7 +40,7 @@
 #define AREA_CELL_GRID_ROWS   56                   /* rows of the cell grids: g_AreaCellGrid and g_AreaCells */
 #define AREA_CELL_GRID_COLS   28                   /* columns of the cell grids */
 #define MAP_ZONE_COUNT        666                  /* records in g_AreaEncounterZones */
-#define MAP_ZONE_LIST_COUNT   200                  /* lists in D_80181164, one per map index */
+#define MAP_ZONE_LIST_COUNT   200                  /* lists in g_EncounterZoneLists, one per map index */
 #define MAP_ZONE_SIZE         0x08
 /* The tone a cue reader looked up last: D_8018B40C is the tone's offset inside
  * the VAB header at `vab_header` (one of the words D_80148A18-D_80148A30). */
@@ -58,7 +58,7 @@
     do {                                                                   \
         u16 value;                                                         \
                                                                            \
-        g_MessageRequest = D_8017F628[(row) + g_MessageWindow.selection_index]; \
+        g_MessageRequest = g_AnswerMessages[(row) + g_MessageWindow.selection_index]; \
         switch (g_MessageWindow.selection_index) {                              \
             case 0:                                                        \
                 value = (delay0);                                          \
@@ -313,9 +313,9 @@ typedef struct SoundSequence {
 
 /* Stack snapshots of the fixed dispatch tables the step handlers copy to the
  * frame and index: func_801507BC/func_801510DC copy the eight-entry tables at
- * D_80149A5C/D_80149A7C, func_80151538/func_801518F4 the six-entry tables at
- * D_80149A9C/D_80149AB4, func_8015196C/func_80151A98 build the two-entry
- * tables on the stack, and D_80149ACC is the sixteen-entry handler bank
+ * g_MessageStateHandlers/D_80149A7C, func_80151538/func_801518F4 the six-entry tables at
+ * D_80149A9C/g_MessageChoiceHandlers, func_8015196C/func_80151A98 build the two-entry
+ * tables on the stack, and g_MessageStepBank is the sixteen-entry handler bank
  * Message_DispatchBankStep copies. One type per table size, shared by every copier. */
 typedef struct {
     Callback handlers[8];
@@ -712,14 +712,17 @@ extern u8                          g_AreaHeightOffsetEnabled;
 extern u8                          D_80149341;
 extern const char                  D_80149990[];
 extern const u32                   g_UiLocalModeFuncs[];
-extern const Table8                D_80149A5C;
+/* D_80149A5C */
+extern const Table8                g_MessageStateHandlers;
 extern const Table8                D_80149A7C;
 extern const Table6                D_80149A9C;
-extern const Table6                D_80149AB4;
+/* D_80149AB4 */
+extern const Table6                g_MessageChoiceHandlers;
 /* The 16-entry handler bank (code addresses 0x80152370..0x801526C8, the step
  * handlers that follow Message_DispatchBankStep): the shared step byte's indices at and
  * above 0x80 dispatch through it. */
-extern const HandlerBank           D_80149ACC;
+/* D_80149ACC */
+extern const HandlerBank           g_MessageStepBank;
 extern const struct CallbackTable3 D_80149B30;
 extern const struct CallbackTable5 D_80149B3C;
 extern const struct CallbackTable5 D_80149B50;
@@ -736,7 +739,8 @@ extern const void* const           D_8017F470[];
 /* Retail data D_80170000-D_8017FFFF (one declaration each). */
 extern const u16                   D_8017F56C[10];
 extern const Rec_8017F5B4          D_8017F5B4[27];
-extern const u16                   D_8017F628[32];
+/* D_8017F628 */
+extern const u16                   g_AnswerMessages[32];
 extern const CellFunc              D_8017F668[77];
 extern const s16                   D_8017F7A8[54];
 extern const s16                   D_8017F814[54];
@@ -756,7 +760,8 @@ extern PanelRowWindow              D_8017F962[];
 extern s16                         D_8017F964;
 extern const u16                   D_8017F972;
 extern const EncounterZone         g_AreaEncounterZones[MAP_ZONE_COUNT];
-extern const EncounterZone* const  D_80181164[MAP_ZONE_LIST_COUNT];
+/* D_80181164 */
+extern const EncounterZone* const  g_EncounterZoneLists[MAP_ZONE_LIST_COUNT];
 extern const SceneFlagPair         D_80181484[SCENE_FLAG_COUNT];
 extern const ScriptRef             D_80181BDC[40];
 extern const ScriptRef* const      D_80181C7C[11];

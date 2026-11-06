@@ -389,7 +389,8 @@ extern s8                 D_80148654;   /* 0x80148654 */
 extern s8                 D_80148656;   /* 0x80148656 */
 extern s8                 D_801490E0;   /* 0x801490E0 */
 extern u8                 D_801581E0[]; /* 0x801581E0 */
-extern u8*                D_80181164[];
+/* D_80181164 */
+extern u8*                g_EncounterZoneLists[];
 extern FacingStep         g_FacingOffsets[]; /* 0x80181AC0 */
 extern s8                 D_80181B00[];
 extern s8                 D_80181B01[];

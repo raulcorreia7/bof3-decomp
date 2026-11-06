@@ -36,7 +36,7 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
             wy    = WORK->pos.y.fixed;
             route &= 7;
             px = &g_FacingSteps[route].x;
-            py = &D_80181B98[route * 2];
+            py = &g_FacingStepY[route * 2];
             dx = wx + *px;
             dy = wy + *py;
             /* FAKE: retail forms the y sum before the x subtraction. */

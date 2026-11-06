@@ -1373,8 +1373,8 @@ MATCH void func_801F9FB8(void) {
         case 1:
             if (g_ScriptVars[2] == 0x35) {
                 *state = 2;
-            } else if (D_80149314 == 0x4400) {
-                D_80149314 = 0x6200;
+            } else if (g_AreaCameraY == 0x4400) {
+                g_AreaCameraY = 0x6200;
                 g_AreaTileOriginY -= 0x1E;
                 g_AreaScrollTargetY[0] += 0xFFE20000;
                 g_AreaFocusY[0] += 0xFFE20000;
@@ -2081,8 +2081,8 @@ MATCH void func_801FB924(void) {
         g_ScriptVars[3] = RANDOM_MASK(0x7);
     }
 
-    if (g_ScriptVars[2] < 0x14 && D_80149314 == 0x5000) {
-        D_80149314 = 0x3000;
+    if (g_ScriptVars[2] < 0x14 && g_AreaCameraY == 0x5000) {
+        g_AreaCameraY = 0x3000;
         g_AreaTileOriginY += 0x20;
         g_AreaScrollTargetY[0] += 0x200000;
         base = g_PartyY;

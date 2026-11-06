@@ -3,5 +3,5 @@
 /* stores table entry g_MessageChoice of the D_8017F654 row in g_MessageRequest.
  */
 MATCH void Message_SetAnswerMessage11(void) {
-    g_MessageRequest = D_8017F628[22 + g_MessageWindow.selection_index];
+    g_MessageRequest = g_AnswerMessages[22 + g_MessageWindow.selection_index];
 }

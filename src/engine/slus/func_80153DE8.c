@@ -59,8 +59,8 @@ NON_MATCHING void func_80153DE8(void) {
     g_AreaCameraOffsetZ            = 0;
     g_AreaCameraOffsetY            = 0;
     g_AreaCameraOffsetX            = 0;
-    D_80149310                     = 0x7FFF - ((s32)g_AreaScrollTargetX >> 8);
-    D_80149314                     = 0x8000 - ((s32)g_AreaScrollTargetY >> 8);
+    g_AreaCameraX                     = 0x7FFF - ((s32)g_AreaScrollTargetX >> 8);
+    g_AreaCameraY                     = 0x8000 - ((s32)g_AreaScrollTargetY >> 8);
     g_AreaTileOriginX              = ((s32)g_AreaScrollTargetX >> 0x10) - 0x18;
     g_AreaTileOriginY              = ((s32)g_AreaScrollTargetY >> 0x10) + 3;
     if (g_GameRequestFlags & 8) {

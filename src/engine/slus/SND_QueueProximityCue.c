@@ -1,17 +1,17 @@
 #include "engine/slus/slus.h"
 
 /* One band: the cue fires when the work record's x and y both lie within `radius` of the target point
- * (D_8014930A, D_8014930E); `table` is the cue table the band stores. */
+ * (g_AreaTargetCellX, g_AreaTargetCellY); `table` is the cue table the band stores. */
 #define SND_PROXIMITY_BAND(radius, table)         \
     work   = g_Task;                              \
     x      = COORD_INT(work->pos.x);              \
-    target = D_8014930A;                          \
+    target = g_AreaTargetCellX;                          \
     edge   = x + (radius);                        \
     if (edge >= target) {                         \
         edge = x - (radius);                      \
         if (target >= edge) {                     \
             y      = COORD_INT(work->pos.y);      \
-            target = D_8014930E;                  \
+            target = g_AreaTargetCellY;                  \
             edge   = y + (radius);                \
             if (edge >= target) {                 \
                 edge = y - (radius);              \

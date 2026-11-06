@@ -14,8 +14,8 @@ MATCH void Area_DrawGouraudQuad(u32* record) {
     src = (u8*)record;
     if (D_8014933A != 0) {
         src += 4;
-        x_limit = (u32)(0x7FFF - D_80149310) >> 8;
-        y_limit = (0x8000 - D_80149314) >> 8;
+        x_limit = (u32)(0x7FFF - g_AreaCameraX) >> 8;
+        y_limit = (0x8000 - g_AreaCameraY) >> 8;
         packed  = *(u32*)src;
         if (((s32)x_limit >= (s32)(packed & BYTE_MASK)) && ((s32)y_limit >= (s32)((packed >> 8) & BYTE_MASK)) &&
             ((s32)((packed >> 16) & BYTE_MASK) >= (s32)x_limit) && ((s32)(packed >> 24) >= (s32)y_limit)) {

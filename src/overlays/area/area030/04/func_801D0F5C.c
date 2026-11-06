@@ -4,7 +4,7 @@
  * block selected by g_BattlePartyBattlers[0].unk_27: entries 1-30 come from the selected 0x200-byte
  * block plus the selected 0x40-byte unit, marked opaque, and entries 0 and 31
  * are cleared. It then publishes the palette serial and either selects the
- * late stage (D_8014930E >= 0x39) or seeds the panel bytes before stepping the
+ * late stage (g_AreaTargetCellY >= 0x39) or seeds the panel bytes before stepping the
  * scratchpad state byte 0x03. */
 MATCH void func_801D0F5C(void) {
     u8* selected;
@@ -35,7 +35,7 @@ MATCH void func_801D0F5C(void) {
     g_GfxPalettePending   = 1;
     FISHING_STATE->unk_5C = 1;
 
-    if (D_8014930E >= 0x39) {
+    if (g_AreaTargetCellY >= 0x39) {
         FISHING_STATE->mode_index_02 = 3;
         FISHING_STATE->sub_index_03  = 2;
     } else {

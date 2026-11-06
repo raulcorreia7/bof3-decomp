@@ -91,7 +91,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             tmp0                     = (u8)stack_10 * 8;
             tmp16                    = g_Task;
             FIELD(s32, tmp16, 0x34u) = (s32)(val9 + (((s32*)g_FacingSteps)[tmp0] * 2 * val6));
-            tmp3                     = val2 + (*(D_80181B98 + tmp0) * 2 * val6);
+            tmp3                     = val2 + (*(g_FacingStepY + tmp0) * 2 * val6);
             FIELD(s32, tmp16, 0x38u) = tmp3;
             tmp17                    = g_Task;
             val0                     = 1;

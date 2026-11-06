@@ -17,7 +17,7 @@ MATCH s32 func_801BDF08(void) {
     work   = g_Task;
     found  = 0;
     step_x = g_FacingSteps[work->direction_08].x;
-    step_y = D_80181B98[work->direction_08 * 2];
+    step_y = g_FacingStepY[work->direction_08 * 2];
     pos_x  = work->pos.x.fixed + step_x;
     pos_y  = work->pos.y.fixed + step_y;
     if (g_GameFlags & 0x1000) {

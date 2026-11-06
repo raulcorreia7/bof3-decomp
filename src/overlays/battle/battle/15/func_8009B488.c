@@ -18,9 +18,9 @@ MATCH void func_8009B488(void) {
     g_BattleMessageState = 1;
     speed_offset         = g_BattleScrollDir * index;
     g_AreaCameraStep     = 0x20;
-    *(u16*)&D_8014930A += (s8)((u8*)D_800B44C0)[speed_offset];
+    *(u16*)&g_AreaTargetCellX += (s8)((u8*)D_800B44C0)[speed_offset];
     value = ((u8*)D_800B44C0)[speed_offset + 1];
-    *(u16*)&D_8014930E += (s8)value;
+    *(u16*)&g_AreaTargetCellY += (s8)value;
     if (g_BattleUIStep == 2) {
         g_AreaCameraHeightStep =
             (((((s32 (*)(s32, s32))Area_SampleHeight)(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight)

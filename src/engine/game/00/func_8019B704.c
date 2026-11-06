@@ -53,13 +53,13 @@ NON_MATCHING void func_8019B704(void) {
     if ((g_AreaCameraMoving == 0) && (delta > 0x40000) && (g_AreaScrollTargetX == D_80145EC4) &&
         (g_AreaScrollTargetY == D_80145EC8)) {
         if (g_Task->unk_0C > 0) {
-            D_8014930A = (s16)(D_8014930A + 5);
+            g_AreaTargetCellX = (s16)(g_AreaTargetCellX + 5);
         } else if (g_Task->unk_0C < 0) {
-            D_8014930A = (s16)(D_8014930A - 5);
+            g_AreaTargetCellX = (s16)(g_AreaTargetCellX - 5);
         } else if (g_Task->unk_10 > 0) {
-            D_8014930E = (s16)(D_8014930E + 5);
+            g_AreaTargetCellY = (s16)(g_AreaTargetCellY + 5);
         } else if (g_Task->unk_10 < 0) {
-            D_8014930E = (s16)(D_8014930E - 5);
+            g_AreaTargetCellY = (s16)(g_AreaTargetCellY - 5);
         }
         temp                   = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
         g_AreaCameraHeightStep = 0;

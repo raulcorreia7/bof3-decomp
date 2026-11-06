@@ -147,7 +147,8 @@ extern s8              D_8014866A;
 extern u8              D_80148694;
 /* The save/card probe's result word; the start rows read its low byte with
  * LOBU, and etc/start/09 and etc/shop/00 test and store the whole word. */
-extern u8              D_8018E990[];
+/* D_8018E990 */
+extern u8              g_SaveCardDirectory[];
 extern u8*             D_801C893C[];
 extern u8*             D_801C8950[];
 extern char            g_MenuStatFormat[4];

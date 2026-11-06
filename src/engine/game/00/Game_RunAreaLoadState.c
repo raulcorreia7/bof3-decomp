@@ -28,7 +28,7 @@ MATCH void Game_RunAreaLoadState(void) {
         UI_SetMode(request_kind);
         func_80198BC4(1u);
         if (LOBU(g_GameRequestFlags) & 1u) {
-            func_801A0048(D_8014930A, D_8014930E);
+            func_801A0048(g_AreaTargetCellX, g_AreaTargetCellY);
         }
     } else if (request_kind == 0xFEu) {
         g_AreaDrawFlags = 0u;

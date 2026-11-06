@@ -10,7 +10,7 @@ MATCH void func_801D11C0(void) {
         ACTOR_CLEAR_STEP();
         return;
     }
-    if (D_8014930E >= 0x39) {
+    if (g_AreaTargetCellY >= 0x39) {
         g_Task->header.step = 3;
     }
     g_Task->unk_2A              = g_BattlePartyBattlers[0].unk_2A;

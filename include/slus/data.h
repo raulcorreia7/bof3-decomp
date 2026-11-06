@@ -128,7 +128,8 @@ extern s32 g_AreaScrollTargetX;
 #endif
 /* D_8014930C */
 extern s32         g_AreaScrollTargetY; /* 0x8014930C */
-extern s32         D_80149310;
+/* D_80149310 */
+extern s32         g_AreaCameraX;
 /* D_80149318 */
 extern s32         g_AreaCameraHeight;
 /* D_80149320 */

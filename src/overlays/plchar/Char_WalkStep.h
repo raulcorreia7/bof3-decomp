@@ -20,7 +20,7 @@ MATCH void Char_WalkStep(void) {
         }
     }
     x    = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x;
-    y    = g_Task->pos.y.fixed + D_80181B98[g_Task->direction_08 * 2];
+    y    = g_Task->pos.y.fixed + g_FacingStepY[g_Task->direction_08 * 2];
     dist = Area_ReadHeight(x, y) - COORD_INT(g_Task->pos.z);
     Area_ReadStepHeight(x, y, g_Task->direction_08);
     if (SP_REF(u8, 0x0u) != 0 && dist >= 65) {

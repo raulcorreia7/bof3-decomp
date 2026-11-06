@@ -1953,7 +1953,7 @@ CardFormatDevice = { addr = 0x801EF200, type = "func", source = "formats the sel
 CardBuildFileHeader = { addr = 0x801EF27C, type = "func", source = "writes the SC save-frame header at 0x800C1800 and copies the icon blocks for the selected save kind" }
 CardOpenFile = { addr = 0x801EF96C, type = "func", source = "opens name under the selected port prefix with 120 retries, a failure reports the directory capacity in g_SaveCardStatus" }
 CardTransferFile = { addr = 0x801EFB44, type = "func", source = "reads or writes the 0x200-byte save frame at 0x800C1800, retrying the card for up to 60 frames" }
-CardScanDirectory = { addr = 0x801EFCA8, type = "func", source = "copies firstfile/nextfile entries matching prefix into the 15-slot D_8018E990 table" }
+CardScanDirectory = { addr = 0x801EFCA8, type = "func", source = "copies firstfile/nextfile entries matching prefix into the 15-slot g_SaveCardDirectory table" }
 
 ["emi/plchar/plp012/00"]
 Char_AdvanceScript = { addr = 0x801CEC30, type = "func", source = "advances the character script phase from the work byte at +0x0B, clearing the +0x2B marker and the panel mode byte on completion" }
@@ -3631,10 +3631,12 @@ g_MessageChoice = { addr = 0x801490C7, source = "wiki systems/ui.md: the player'
 g_TextVariables = { addr = 0x801490D8, type = "u8", source = "func_8014F84C draws through its 32-byte rows and TEXT_SetVariable copies names into them" }
 g_AreaCameraAngle = { addr = 0x801492D8, size = 0x8, source = "Area_StepCameraX, Area_StepCameraY and Area_StepCameraZ advance its x, y and z halfwords toward a target, and RotMatrix reads it as the scene rotation" }
 g_CameraMatrix = { addr = 0x801492E8, type = "MATRIX", source = "shared scene camera view matrix rebuilt from g_AreaCameraAngle (src/engine/slus/Area_StepCamera.c 93-102), composed by world/scenario draw code (func_8015B4B0.c 7," }
-g_AreaScrollTargetX = { addr = 0x80149308, type = "s32", source = "the scroll goal Area_StepCamera steps D_80149310 toward (dist = 0x800000 - (D_80149308 & ~0x7FFF) passes through zero) func_80153DE8 seeds the tile origin from it func_8015C2D4 sets" }
-D_8014930A = { addr = 0x8014930A, source = "world param a" }
-g_AreaScrollTargetY = { addr = 0x8014930C, type = "s32", source = "the scroll goal's y in 16.16 Area_StepCamera steps D_80149314 toward 0x800000 - (D_8014930C & ~0x7FFF) func_8015C2D4 sets it from g_PartyY" }
-D_8014930E = { addr = 0x8014930E, source = "world param b" }
+g_AreaScrollTargetX = { addr = 0x80149308, type = "s32", source = "the scroll goal Area_StepCamera steps g_AreaCameraX toward (dist = 0x800000 - (D_80149308 & ~0x7FFF) passes through zero) func_80153DE8 seeds the tile origin from it func_8015C2D4 sets" }
+g_AreaTargetCellX = { addr = 0x8014930A, source = "integer half (+2) of g_AreaScrollTargetX: the cell x func_801A0348, func_801A0048 and Area_SetCellPalette take, stepped by 5 cells in func_8019B704" }
+g_AreaScrollTargetY = { addr = 0x8014930C, type = "s32", source = "the scroll goal's y in 16.16 Area_StepCamera steps g_AreaCameraY toward 0x800000 - (D_8014930C & ~0x7FFF) func_8015C2D4 sets it from g_PartyY" }
+g_AreaTargetCellY = { addr = 0x8014930E, source = "integer half (+2) of g_AreaScrollTargetY: the cell y func_801A0348, func_801A0048 and Area_SetCellPalette take, stepped by 5 cells in func_8019B704" }
+g_AreaCameraX = { addr = 0x80149310, source = "x of the camera position vector: Area_StepCamera and Area_SetCameraMatrix rotate (g_AreaCameraX >> 1, g_AreaCameraY >> 1, g_AreaCameraHeight >> 1) through g_CameraMatrix into the view translation; Area_StepCamera steps it toward g_AreaScrollTargetX" }
+g_AreaCameraY = { addr = 0x80149314, source = "y of the camera position vector next to g_AreaCameraX and g_AreaCameraHeight (the z); Area_StepCamera steps it toward g_AreaScrollTargetY, scena00 and scena16 set it for the cutscene views" }
 g_AreaCameraHeight = { addr = 0x80149318, type = "s32", source = "func_80153DE8 sets it from func_8015477C or the map height Area_StepCamera uses view.vz = D_80149318 >> 1 and steps it with D_80149330 ram-map calls the same word the camera z" }
 g_AreaCellCodes = { addr = 0x8014931C, type = "u8", source = "include/world/area.h 40-51 func_80153DE8 sets it to MAP_BUNDLE_BASE + D_80104014 * 4 Area_GetCellCode and func_801553B8/801576FC read cells through it" }
 g_AreaTileOriginX = { addr = 0x80149320, type = "s16", source = "func_80153DE8 sets it to (D_80149308 >> 16) - 0x18 func_80152C9C/801558F0/801530D0 subtract it" }
@@ -3657,6 +3659,9 @@ s__LOGO_LOGO_EXE_1_80149800 = { addr = 0x80149800, size = 0x14, source = "SYS_Ru
 D_80149814 = { addr = 0x80149814, size = 0x11F0 }
 D_80149998 = { addr = 0x80149998, size = 0x178, alias = true }
 g_UiLocalModeFuncs = { addr = 0x801499AC, size = 0x54, alias = true, source = "UI_DispatchLocalMode@0x8014ED6C snapshots its 21 callbacks to the stack and dispatches the entry the game-UI local mode selects; GFX_RunBlackFade starts through four of them" }
+g_MessageStateHandlers = { addr = 0x80149A5C, size = 0x20, alias = true, source = "func_801507BC copies the eight-entry table to the stack and calls the entry g_MessageState.state_00 selects (wiki systems/ui.md)" }
+g_MessageChoiceHandlers = { addr = 0x80149AB4, size = 0x18, alias = true, source = "func_801518F4 copies the six-entry table to the stack and calls the entry g_MessageChoiceMode selects (wiki systems/ui.md)" }
+g_MessageStepBank = { addr = 0x80149ACC, size = 0x40, alias = true, source = "wiki systems/areas.md: the 16-entry shared bank Message_DispatchBankStep calls for answer step ids from 0x80 (entry step_id - 0x80)" }
 g_EmiCDSteps = { addr = 0x80149C3C, alias = true, source = "EMI_LoaderRunCD calls the entry selected by the step byte" }
 g_EmiSlotDrainFuncs = { addr = 0x80149C60, alias = true, source = "EMI_LoaderServiceStream copies it" }
 __main = { addr = 0x8014AA04, type = "func", source = "SLUS entry, C calls it by its func_ name" }
@@ -3746,20 +3751,20 @@ UI_ClosePanel = { addr = 0x801515A8, type = "func", source = "clears the panel i
 UI_ScrollChoice = { addr = 0x80151628, type = "func", source = "moves the choice cursor 0x1000 back / 0x4000 forward with wraparound" }
 UI_RunChoiceStep = { addr = 0x8015196C, type = "func", source = "runs the g_MessageChoiceStep-selected handler and counts g_MessageChoiceTimer down" }
 UI_DrawGlyph = { addr = 0x80151E24, type = "func", source = "draws the first character of text as one scaled POLY_FT4 glyph at g_MessageWindow text_x/text_y with CLUT row color & 0xF, then advances text_x by cue_counter; UI_DrawMessageScript calls it for the flagged glyph path while a frontend request is pending" }
-Message_DispatchBankStep = { addr = 0x801522F8, type = "func", source = "runs entry step_id - 0x80 of the 16-entry answer handler bank D_80149ACC for Message_DispatchAnswerStep and func_80151710" }
-Message_SetAnswerMessage5 = { addr = 0x80152510, type = "func", source = "bank D_80149ACC entry 5 stores pair 5 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage6 = { addr = 0x8015253C, type = "func", source = "bank D_80149ACC entry 6 stores pair 6 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage7 = { addr = 0x80152568, type = "func", source = "bank D_80149ACC entry 7 stores pair 7 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage8 = { addr = 0x80152594, type = "func", source = "bank D_80149ACC entry 8 stores pair 8 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage9 = { addr = 0x801525C0, type = "func", source = "bank D_80149ACC entry 9 stores pair 9 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage10 = { addr = 0x801525EC, type = "func", source = "bank D_80149ACC entry 10 stores pair 10 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage11 = { addr = 0x80152618, type = "func", source = "bank D_80149ACC entry 11 stores pair 11 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage12 = { addr = 0x80152644, type = "func", source = "bank D_80149ACC entry 12 stores pair 12 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage13 = { addr = 0x80152670, type = "func", source = "bank D_80149ACC entry 13 stores pair 13 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage14 = { addr = 0x8015269C, type = "func", source = "bank D_80149ACC entry 14 stores pair 14 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
-Message_SetAnswerMessage15 = { addr = 0x801526C8, type = "func", source = "bank D_80149ACC entry 15 stores pair 15 of the answer table D_8017F628 selected by the menu choice in g_MessageRequest" }
+Message_DispatchBankStep = { addr = 0x801522F8, type = "func", source = "runs entry step_id - 0x80 of the 16-entry answer handler bank g_MessageStepBank for Message_DispatchAnswerStep and func_80151710" }
+Message_SetAnswerMessage5 = { addr = 0x80152510, type = "func", source = "bank g_MessageStepBank entry 5 stores pair 5 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage6 = { addr = 0x8015253C, type = "func", source = "bank g_MessageStepBank entry 6 stores pair 6 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage7 = { addr = 0x80152568, type = "func", source = "bank g_MessageStepBank entry 7 stores pair 7 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage8 = { addr = 0x80152594, type = "func", source = "bank g_MessageStepBank entry 8 stores pair 8 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage9 = { addr = 0x801525C0, type = "func", source = "bank g_MessageStepBank entry 9 stores pair 9 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage10 = { addr = 0x801525EC, type = "func", source = "bank g_MessageStepBank entry 10 stores pair 10 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage11 = { addr = 0x80152618, type = "func", source = "bank g_MessageStepBank entry 11 stores pair 11 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage12 = { addr = 0x80152644, type = "func", source = "bank g_MessageStepBank entry 12 stores pair 12 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage13 = { addr = 0x80152670, type = "func", source = "bank g_MessageStepBank entry 13 stores pair 13 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage14 = { addr = 0x8015269C, type = "func", source = "bank g_MessageStepBank entry 14 stores pair 14 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
+Message_SetAnswerMessage15 = { addr = 0x801526C8, type = "func", source = "bank g_MessageStepBank entry 15 stores pair 15 of the answer table g_AnswerMessages selected by the menu choice in g_MessageRequest" }
 UI_DrawWaitMarker = { addr = 0x801526F4, type = "func", source = "draws the 8x8 flat sprite when graphics flag 0x20 is set" }
-Area_StepCamera = { addr = 0x801527E4, type = "func", source = "steps D_80149310/D_80149314 toward g_AreaScrollTargetX/Y by g_AreaCameraStep, wraps the tile origin and rebuilds g_CameraMatrix from g_AreaCameraAngle; Area_RunFrame calls it each field frame" }
+Area_StepCamera = { addr = 0x801527E4, type = "func", source = "steps g_AreaCameraX/g_AreaCameraY toward g_AreaScrollTargetX/Y by g_AreaCameraStep, wraps the tile origin and rebuilds g_CameraMatrix from g_AreaCameraAngle; Area_RunFrame calls it each field frame" }
 Area_ProbeCell = { addr = 0x801541C0, type = "func", source = "maps panel coordinates into the bundle grid and returns the 16-bit cell through out" }
 Area_UploadCell = { addr = 0x80154294, type = "func", source = "resolves the bundle cell and uploads its word list and +0x4E/+0x46 linked rows to the draw context" }
 Area_AllocCellPrimRow = { addr = 0x8015456C, type = "func", source = "pops the next g_AreaCellPrims row id from the free ring (0 when empty); func_801530D0 stores the result in the cell record prim_id and in the row links at +0x46 and +0x4E, and func_80153DE8 seeds the ring with ids 0 to 0x3FF" }
@@ -4499,6 +4504,7 @@ g_SpriteCellRotations = { addr = 0x8017F55C, source = "func_8014D290 picks the c
 g_NumberRowShades = { addr = 0x8017F580, source = "func_8014F84C takes the shade byte and height trim of the number font row" }
 g_TextRowShades = { addr = 0x8017F5A0, source = "func_8014FC90 takes the shade byte and height trim of the window font row" }
 g_TextRowOffsets = { addr = 0x8017F620, source = "UI_DrawGlyph takes the per-row pixel offset of the window text" }
+g_AnswerMessages = { addr = 0x8017F628, source = "Message_SetAnswerMessage5..15 and func_80152370 store g_AnswerMessages[row + g_MessageChoice] in g_MessageRequest: the message index each answer leads to" }
 g_SpriteCellPartCounts = { addr = 0x8017F79C, source = "func_8015642C emits this many sprite parts for the cell index" }
 g_SpriteCellTopV = { addr = 0x8017F894, source = "func_8015642C fills the top sprite vertices' v coordinates from this cell table" }
 g_SpriteCellBottomV = { addr = 0x8017F8A8, source = "func_8015642C fills the bottom sprite vertices' v coordinates from this cell table" }
@@ -4509,10 +4515,12 @@ g_BundleOpcodeHandlers = { addr = 0x8017F8F0, source = "Area_RunBundleOpcodes ca
 g_BundleRecordHandlers = { addr = 0x8017F8FC, source = "interior of g_BundleOpcodeHandlers at index 3; Area_RunBundleRecords calls g_BundleRecordHandlers[record[3] & 0x7F](record); wiki rendering.md and formats/area.md: the dispatch table for the +0x22 lists" }
 g_MenuPanelOrigins = { addr = 0x8017F90C, source = "func_80159050, func_8015920C and func_80159580 place the menu panel from this x, y pair table" }
 g_AreaLoads = { addr = 0x8017F974, type = "AreaLoad", source = "src/engine/slus/D_8017F974.c defines the 200 row pointers; func_8019FAA0 and func_801ACE10 index it by g_GameAreaId" }
-g_AreaEncounterZones = { addr = 0x8017FC94, source = "the zone table behind the index list in src/engine/slus/D_80181164.c, walked by Area_GetCellCode as zones of 0x28 bytes" }
+g_AreaEncounterZones = { addr = 0x8017FC94, source = "the zone table behind the index list in src/engine/slus/g_EncounterZoneLists.c, walked by Area_GetCellCode as zones of 0x28 bytes" }
+g_EncounterZoneLists = { addr = 0x80181164, source = "MAP_ZONE_LIST_COUNT lists of EncounterZone entries, one per map index; func_801A0490 scans list table_index for the entry that covers a cell" }
 g_FacingOffsets = { addr = 0x80181AC0, type = "FacingStep", source = "8 facing offsets of two words each, added to a position by the plchar route walkers" }
 g_CharSlot = { addr = 0x80181B10, size = 12, source = "the 12-byte character-slot map the plchar and field code index" }
 g_FacingSteps = { addr = 0x80181B94, type = "FacingStep", source = "8 facing steps, Char_ProbeFacingCell adds step x and y to a position" }
+g_FacingStepY = { addr = 0x80181B98, source = "address of g_FacingSteps[0].y (0x80181B94 + 4): the plchar walkers add D_80181B98[direction * 2] to pos.y" }
 g_RouteSpeedScale = { addr = 0x80181BD4, source = "8 speed scales the route walkers multiply a step by" }
 s_LoaderRecordBytes = { addr = 0x80181D98, source = "record list bytes the D_80181E40 list and count entries point into" }
 g_SelectionCues = { addr = 0x80181EBA, type = "SelectionCue", source = "SND_PlayBgm/SND_PlaySequence read (D_80181EBA[i], D_80181EBB[i]) with a 4-byte row stride game/00 func_80197F48 and scena16 use it" }
@@ -4603,6 +4611,7 @@ _snd_openflag = { addr = 0x8018E7D0, alias = true }
 _svm_cur = { addr = 0x8018E7D8, alias = true }
 _svm_vab_used = { addr = 0x8018E7F8, alias = true }
 _svm_sreg_buf = { addr = 0x8018E808, alias = true }
+g_SaveCardDirectory = { addr = 0x8018E990, source = "wiki systems/saving.md: the 15-entry card directory table of 24-byte entries (name, size) that the save scan fills; sums sizes for the free-block count" }
 VBLANK_MINUS = { addr = 0x80190300, alias = true }
 _ss_score = { addr = 0x80190308, alias = true }
 _SsMarkCallback = { addr = 0x80190388, alias = true }

@@ -7,6 +7,6 @@
 MATCH void Message_DispatchBankStep(void) {
     HandlerBank bank;
 
-    bank = D_80149ACC;
+    bank = g_MessageStepBank;
     bank.handlers[g_MessageWindow.step_id - 0x80]();
 }
