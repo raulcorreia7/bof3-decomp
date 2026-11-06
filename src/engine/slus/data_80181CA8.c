@@ -29,19 +29,9 @@ const u8 s_LoaderRecordBytes[168] = {
 };
 
 const Rec8_80181E40 D_80181E40[15] = {
-    {s_LoaderRecordBytes + 0x18, 1},
-    {s_LoaderRecordBytes + 0x24, 1},
-    {s_LoaderRecordBytes + 0x2C, 1},
-    {s_LoaderRecordBytes + 0x34, 1},
-    {s_LoaderRecordBytes + 0x3C, 1},
-    {s_LoaderRecordBytes + 0x44, 3},
-    {s_LoaderRecordBytes + 0x50, 2},
-    {s_LoaderRecordBytes + 0x5C, 1},
-    {s_LoaderRecordBytes + 0x64, 1},
-    {s_LoaderRecordBytes + 0x6C, 1},
-    {s_LoaderRecordBytes + 0x74, 2},
-    {s_LoaderRecordBytes + 0x80, 2},
-    {s_LoaderRecordBytes + 0x8C, 2},
-    {s_LoaderRecordBytes + 0x98, 1},
-    {s_LoaderRecordBytes + 0xA0, 1},
+    {s_LoaderRecordBytes + 0x18, 1}, {s_LoaderRecordBytes + 0x24, 1}, {s_LoaderRecordBytes + 0x2C, 1},
+    {s_LoaderRecordBytes + 0x34, 1}, {s_LoaderRecordBytes + 0x3C, 1}, {s_LoaderRecordBytes + 0x44, 3},
+    {s_LoaderRecordBytes + 0x50, 2}, {s_LoaderRecordBytes + 0x5C, 1}, {s_LoaderRecordBytes + 0x64, 1},
+    {s_LoaderRecordBytes + 0x6C, 1}, {s_LoaderRecordBytes + 0x74, 2}, {s_LoaderRecordBytes + 0x80, 2},
+    {s_LoaderRecordBytes + 0x8C, 2}, {s_LoaderRecordBytes + 0x98, 1}, {s_LoaderRecordBytes + 0xA0, 1},
 };
