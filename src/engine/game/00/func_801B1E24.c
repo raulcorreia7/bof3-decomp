@@ -32,7 +32,7 @@ NON_MATCHING void func_801B1E24(void) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
 
-    base  = (u8*)&D_80145E98;
+    base  = (u8*)&g_BattlePartyBattlers[0].facing;
     value = *base;
     i     = 0;
     if (g_PartySize != 0) {

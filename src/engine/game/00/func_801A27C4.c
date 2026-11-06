@@ -11,7 +11,7 @@ MATCH void func_801A27C4(Actor* entity) {
         func_801A225C(entity, g_RouteSpeedScale[mode], 2);
         saved = g_Task->direction_08;
         for (i = 0; i < 4; i++) {
-            g_Task->direction_08 = s_EntityRouteIndices[D_80145E98 & 7][i];
+            g_Task->direction_08 = s_EntityRouteIndices[g_BattlePartyBattlers[0].facing & 7][i];
             if ((func_801A1AE4(entity) & BYTE_MASK) != 0) {
                 continue;
             }

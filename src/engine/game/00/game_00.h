@@ -1608,7 +1608,7 @@ static inline void Game_RollAreaSetup(s32 slot_index) {
 
     choice = (u32)(RANDOM_MASK(0xF));
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-        func_8015BAC4((u8)((D_80145E98 ^ 4) & 7));
+        func_8015BAC4((u8)((g_BattlePartyBattlers[0].facing ^ 4) & 7));
     }
     g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
     if ((g_CurrentActor->unk_94 & 0x80) == 0) {

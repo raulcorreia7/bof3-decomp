@@ -16,9 +16,9 @@ NON_MATCHING void Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state) 
     FIELD(volatile u8, &D_80145F09, off_a) = FIELD(volatile u8, &D_80145F09, off_b);
     FIELD(volatile u8, &D_80145F09, off_b) = val_b;
     if (!(skip_state & BYTE_MASK)) {
-        val_b                                   = FIELD(volatile u8, &D_80145E98, off_a);
-        FIELD(volatile u8, &D_80145E98, off_a)  = FIELD(volatile u8, &D_80145E98, off_b);
-        FIELD(volatile u8, &D_80145E98, off_b)  = val_b;
+        val_b                                   = FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_a);
+        FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_a)  = FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_b);
+        FIELD(volatile u8, &g_BattlePartyBattlers[0].facing, off_b)  = val_b;
         val_b                                   = FIELD(volatile u8, &D_80145EB9, off_a);
         FIELD(volatile u8, &D_80145EB9, off_a)  = FIELD(volatile u8, &D_80145EB9, off_b);
         FIELD(volatile u8, &D_80145EB9, off_b)  = val_b;
