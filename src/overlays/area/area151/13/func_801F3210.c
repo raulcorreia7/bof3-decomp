@@ -1,6 +1,6 @@
 #include "area151_13.h"
 
-MATCH void func_801F3210(void) {
+MATCH s32 func_801F3210(void) {
     Actor* scratch;
     u8     step;
 

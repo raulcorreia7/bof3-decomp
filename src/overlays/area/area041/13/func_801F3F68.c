@@ -1,7 +1,7 @@
 #include "area041_13.h"
 #include "work/area_spad.h"
 
-MATCH void func_801F3F68(void) {
+MATCH s32 func_801F3F68(void) {
     Actor* actor;
     s32    speed;
 

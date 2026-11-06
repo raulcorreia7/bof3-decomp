@@ -50,7 +50,7 @@ typedef struct WorldMapKey {
 ASSERT_SIZE(WorldMapKey, 4);
 
 extern u8       D_80143F06;
-extern u16      D_801448EE;
+extern s16      D_801448EE;
 extern u8       D_80146867;
 extern u8       D_80147ACF;
 void            Area_SpawnWeightedActor(void);

@@ -1,6 +1,6 @@
 #include "area056_13.h"
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {
         D_80145E91[0] = 2;

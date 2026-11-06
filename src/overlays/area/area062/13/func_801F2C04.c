@@ -2,7 +2,7 @@
 
 extern u8 D_80145F09;
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     Actor* actor;
 
     actor = g_CurrentActor;

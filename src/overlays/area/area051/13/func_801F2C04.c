@@ -1,6 +1,6 @@
 #include "area051_13.h"
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     u8 code;
 
     code = func_801BE0C0(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.word);

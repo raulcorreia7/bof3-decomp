@@ -1,6 +1,6 @@
 #include "area108_14.h"
 
-MATCH void func_801F3A6C(void) {
+MATCH s32 func_801F3A6C(void) {
     g_Task->unk_09 -= 1;
     if (g_Task->unk_09 != 0) {
         g_Task->tint.bytes.unk_5D -= 6;

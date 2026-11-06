@@ -26,8 +26,7 @@ NON_MATCHING void Battle_DrawTitledFrame(s32 x, s16 y, s32 unused_a, s32 unused_
     MATCH_REG(s32, temp, "s0");
     /* FAKE: retain the title index from the caller in retail $s5; pure C measured 50.49%. */
     MATCH_REG(u8, style, "s5");
-    /* FAKE: retain the sprite loop counter in retail $s6; pure C measured 50.49%. */
-    MATCH_REG(s32, i, "s6");
+    s32 i;
     /* FAKE: retain the fill-byte base in retail $s4; pure C measured 50.49%. */
     MATCH_REG(u8*, fill, "s4");
     s32 col_x;

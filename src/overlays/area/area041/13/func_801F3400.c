@@ -1,6 +1,6 @@
 #include "area041_13.h"
 
-MATCH void func_801F3400(void) {
+MATCH s32 func_801F3400(void) {
     func_801F387C(D_801F4308[g_Task->unk_09] << 4);
     g_Task->unk_09 += 1;
     if (g_Task->unk_09 >= 0x29U) {

@@ -30,7 +30,7 @@ extern WorldMapMarker D_801F6858[6];
 #define AREA_HUD_MASK_TABLE D_801F6858
 extern u16            g_GameAreaId;
 extern s8             g_GameRequestKind;
-extern u16            D_80143F22;
+extern s16            D_80143F22;
 extern s8             D_80146865;
 extern s8             D_80146866;
 extern s8             D_80146874;

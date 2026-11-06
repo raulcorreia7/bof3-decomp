@@ -9,7 +9,7 @@
 
 #define g_ScanBars ((ScanBar*)(AREA_WORK + 0x18A0))
 
-extern u32      D_80145EC4;
+extern s32      D_80145EC4;
 extern u32      D_801D0C00;
 extern Callback D_801D27C0[];
 extern Callback D_801D27CC[];
