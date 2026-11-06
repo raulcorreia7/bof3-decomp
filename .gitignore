@@ -23,6 +23,7 @@ dist/
 /report.json
 /work/
 /src/**/out/
+/artifacts/
 
 # Debug artifacts
 debug_*.o
