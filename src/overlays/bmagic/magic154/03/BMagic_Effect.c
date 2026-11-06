@@ -40,8 +40,8 @@ MATCH void func_801EF1EC(void) {
         g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed + g_Task->unk_10;
         g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
-        g_Task->scale_x     = 0x8000;
-        g_Task->scale_y     = 0x8000;
+        g_Task->scale.x     = 0x8000;
+        g_Task->scale.y     = 0x8000;
         g_Task->unk_48      = 2;
         g_Task->unk_25      = 0x1D;
         g_Task->unk_26      = 0;
@@ -64,10 +64,10 @@ MATCH void func_801EF380(void) {
     u8            count;
 
     work = g_Task;
-    work->scale_x += 0x4000;
-    count         = work->unk_09 + 1;
-    work->unk_09  = count;
-    work->scale_y = work->scale_y + 0x8000;
+    work->scale.x += 0x4000;
+    count        = work->unk_09 + 1;
+    work->unk_09 = count;
+    work->scale.y += 0x8000;
     if (count == 4) {
         g_Task->step++;
     }
@@ -76,10 +76,10 @@ MATCH void func_801EF380(void) {
 MATCH void func_801EF3E4(void) {
     PartyBattler* work = g_Task;
     u8            timer;
-    work->scale_x -= 0x4000;
+    work->scale.x -= 0x4000;
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
-    work->scale_y -= 0x8000;
+    work->scale.y -= 0x8000;
     if (timer == 0) {
         D_801EB4E0->unk_0B -= 1;
         func_801E5988();
@@ -87,7 +87,7 @@ MATCH void func_801EF3E4(void) {
 }
 
 MATCH void func_801EF454(void) {
-    g_Task->scale_y -= 0x1000;
+    g_Task->scale.y -= 0x1000;
     if ((s8)g_Task->unk_5F == -0x80) {
         D_801EB4E0->unk_0B -= 1;
         func_801E5988();

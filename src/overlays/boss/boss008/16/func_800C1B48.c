@@ -20,16 +20,16 @@ MATCH void func_800C1B48(void) {
         return;
     }
     g_Task->unk_09 = value3 - 4;
-    value          = g_Task->scale_x;
+    value          = g_Task->scale.x;
     if ((s32)value > 0) {
-        g_Task->scale_x = value - 0x2000;
+        g_Task->scale.x = value - 0x2000;
     } else {
-        g_Task->scale_x = 0;
+        g_Task->scale.x = 0;
     }
-    value2 = g_Task->scale_y;
+    value2 = g_Task->scale.y;
     if ((s32)value2 > 0) {
-        g_Task->scale_y = value2 - 0x2000;
+        g_Task->scale.y = value2 - 0x2000;
         return;
     }
-    g_Task->scale_y = 0;
+    g_Task->scale.y = 0;
 }

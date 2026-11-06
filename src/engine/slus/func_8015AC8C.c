@@ -13,8 +13,8 @@ MATCH void func_8015AC8C(u8* panel) {
     g_Task->active_flags = ACTOR_FLAG_ACTIVE;
     g_Task->unk_48       = 1;
     work                 = g_Task;
-    work->scale_x        = ONE;
-    work->scale_y        = ONE;
+    work->scale.x        = ONE;
+    work->scale.y        = ONE;
     value                = FIELD(s32, panel, 0x4u);
     index                = work->direction_08;
     work->range_54.table = panel;

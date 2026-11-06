@@ -67,8 +67,8 @@ MATCH void func_801F0140(void) {
     s32 value;
 
     func_8014D978();
-    g_Task->scale_x += 0x800;
-    g_Task->scale_y += 0x800;
+    g_Task->scale.x += 0x800;
+    g_Task->scale.y += 0x800;
     g_Task->pos.x.fixed += rsin(g_Task->unk_14) * g_Task->unk_0C;
     g_Task->pos.y.fixed += rcos(g_Task->unk_14) * g_Task->unk_0C;
     if (g_FrameCount & 1) {
