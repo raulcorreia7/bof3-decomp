@@ -64,6 +64,7 @@ INCLUDE_ASM(func_801CF3DC);
 
 #include "overlays/plchar/Char_AdvanceScript.h"
 
+/* Draft: 2 differing instructions at +0x13C; try loop initialization order. */
 INCLUDE_ASM(func_801CF664);
 
 #include "overlays/plchar/Char_SpawnActor.h"
