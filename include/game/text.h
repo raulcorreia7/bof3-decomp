@@ -105,16 +105,21 @@ typedef enum TextCommand {
     STRING_BACKSPACE = 0x90,
 } TextCommand;
 
+/* Battle text record ids. */
 enum {
     BATTLE_TEXT_INITIATIVE_PARTY    = 22,
     BATTLE_TEXT_INITIATIVE_OPPONENT = 23,
     BATTLE_TEXT_CANT_LEARN          = 35,
     BATTLE_TEXT_LEARNED             = 36,
-    GAME_TEXT_SEARCH_FOUND          = 2,
-    GAME_TEXT_SEARCH_NO_ROOM        = 3,
-    GAME_TEXT_SAVE_COMPLETE         = 143,
-    GAME_TEXT_INIT_COMPLETE         = 149,
-    GAME_TEXT_NO_SAVE_FILE          = 151,
+};
+
+/* Game text record ids. */
+enum {
+    GAME_TEXT_SEARCH_FOUND   = 2,
+    GAME_TEXT_SEARCH_NO_ROOM = 3,
+    GAME_TEXT_SAVE_COMPLETE  = 143,
+    GAME_TEXT_INIT_COMPLETE  = 149,
+    GAME_TEXT_NO_SAVE_FILE   = 151,
 };
 
 #endif
