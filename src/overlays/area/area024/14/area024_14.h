@@ -5,6 +5,7 @@
  * work records, handler table and prototypes. Only this image includes the
  * file. */
 
+#include "common/vector.h"
 #include "overlays/area/world00.h"
 #include "shared/WorldSpin.h"
 
@@ -24,9 +25,7 @@ typedef struct AreaSprite {
     u8                flags_01;
     u8                flags_02; /* set to 4 */
     u8                flags_03; /* set to 0x40 */
-    /* 0x04 */ s32    origin_x; /* the camera x, copied from the scratch record */
-    /* 0x08 */ s32    origin_y; /* the camera y */
-    /* 0x0C */ s32    origin_z; /* the camera z */
+    Vec3S32           origin;
     u8                unk_10[4];
     /* 0x14 */ VECTOR normal;    /* the sprite's normal */
     /* 0x24 */ u16    half_size; /* the projected half-size */
@@ -35,15 +34,16 @@ typedef struct AreaSprite {
 ASSERT_SIZE(AreaSprite, 0x28);
 
 typedef struct Area024Scratch {
-    u8             unk_00[0x01]; /* byte 0x00 */
-    /* 0x01 */ u8  dispatch;     /* indexes the D_801F4200 handler table */
-    u8             unk_02[0x07];
-    /* 0x09 */ u8  step_count; /* the step counter */
-    u8             unk_0A[0x2A];
-    /* 0x34 */ s32 pos_x;
-    /* 0x38 */ s32 pos_y;
-    /* 0x3C */ s32 pos_z;
+    u8            unk_00[0x01]; /* byte 0x00 */
+    /* 0x01 */ u8 dispatch;     /* indexes the D_801F4200 handler table */
+    u8            unk_02[0x07];
+    /* 0x09 */ u8 step_count; /* the step counter */
+    u8            unk_0A[0x2A];
+    Vec3S32       pos;
 } Area024Scratch;
+
+ASSERT_SIZE(Area024Scratch, 0x40);
+ASSERT_OFFSET(Area024Scratch, pos, 0x34);
 
 /* Per-sprite transform state at 0x800E4940 (0x18-byte stride): the halfword
  * translation base at +0x00 and the rotation angles at +0x10. */

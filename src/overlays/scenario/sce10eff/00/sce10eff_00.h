@@ -3,6 +3,7 @@
 
 /* The scratchpad base here is the 32-bit depth word. */
 #define GAME_SCRATCH_BASE_WORD
+#include "common/vector.h"
 #include "overlays/scenario/scenario.h"
 #include "sys/gameui.h"
 
@@ -31,10 +32,10 @@
                                                                    \
     velocity     = rcos(angle) * D_1F800000;                       \
     work         = g_Task;                                         \
-    work->proj_x = D_801D2744->proj_x + velocity;                  \
+    work->proj.x = D_801D2744->proj.x + velocity;                  \
                                                                    \
     velocity       = rsin(*angle_cell) * D_1F800000;               \
-    g_Task->proj_y = D_801D2744->proj_y + velocity;                \
+    g_Task->proj.y = D_801D2744->proj.y + velocity;                \
                                                                    \
     if (TIMER_EXPIRED(g_Task->timer)) {                            \
         g_Task->step_index++;                                      \
@@ -55,11 +56,9 @@ typedef struct SceneBandEffect {
     /* 0x0B */ u8  ticker;        /* a random nibble that is bumped */
     /* 0x0C */ s32 orbit_counter; /* the orbit counter */
     u8             pad_10[0x1E];
-    /* 0x2E */ u16 origin_x; /* the primitive's x origin */
-    /* 0x30 */ u16 origin_y; /* the primitive's y origin */
+    Vec2U16        origin;
     u8             pad_32[0x02];
-    /* 0x34 */ s32 proj_x; /* the projected x, 16.16 */
-    /* 0x38 */ s32 proj_y; /* the projected y, 16.16 */
+    Vec2S32        proj;
     u8             pad_3c[0x02];
     /* 0x3E */ s16 proj_z; /* the projected z; the GTE vertex takes it halved */
 } SceneBandEffect;
@@ -68,10 +67,8 @@ ASSERT_SIZE(SceneBandEffect, 0x40);
 ASSERT_OFFSET(SceneBandEffect, state, 0x02);
 ASSERT_OFFSET(SceneBandEffect, step_index, 0x03);
 ASSERT_OFFSET(SceneBandEffect, orbit_counter, 0x0C);
-ASSERT_OFFSET(SceneBandEffect, origin_x, 0x2E);
-ASSERT_OFFSET(SceneBandEffect, origin_y, 0x30);
-ASSERT_OFFSET(SceneBandEffect, proj_x, 0x34);
-ASSERT_OFFSET(SceneBandEffect, proj_y, 0x38);
+ASSERT_OFFSET(SceneBandEffect, origin, 0x2E);
+ASSERT_OFFSET(SceneBandEffect, proj, 0x34);
 ASSERT_OFFSET(SceneBandEffect, proj_z, 0x3E);
 
 /* Data, in address order. */

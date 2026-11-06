@@ -421,9 +421,9 @@ MATCH void func_801F7A5C(void) {
     work_pos->z.parts.height  = 0x300;
     work_pos->counter_09      = 0x78;
     work_tail                 = SCN_EFFECT;
-    work_pos->angle_x         = 0;
-    work_pos->angle_y         = 0;
-    work_pos->angle_z         = 0;
+    work_pos->angle.x         = 0;
+    work_pos->angle.y         = 0;
+    work_pos->angle.z         = 0;
     *(s8*)&work_tail->color_b = -1;
     *(s8*)&work_tail->color_g = -1;
     *(s8*)&work_tail->color_r = -1;
@@ -628,7 +628,7 @@ MATCH void func_801F8360(void) {
     POLY_G3*     prim;
 
     work          = SCN_EFFECT;
-    work->angle_z = (work->counter_09 << 12) / 360;
+    work->angle.z = (work->counter_09 << 12) / 360;
     angle         = work->counter_10;
     size          = work->counter_0C;
 
@@ -678,7 +678,7 @@ MATCH void func_801F8360(void) {
         GFX_AddPrim(g_Task->unk_29, sizeof(POLY_G3));
         PopMatrix();
         i = i + 1;
-        SCN_EFFECT->angle_z += 170;
+        SCN_EFFECT->angle.z += 170;
     } while (i < 24);
 }
 
@@ -689,17 +689,13 @@ MATCH void func_801F8360(void) {
 
 /* func_801F85A8 saves the active effect's rotation across a triangle draw;
  * func_8015B410 passes the three angles to RotMatrix. */
-typedef struct {
-    s32 angle_x;
-    s32 angle_y;
-    s32 angle_z;
-    s32 unk_0C; /* 0x0C */
+typedef struct SceneRotation {
+    Vec3S32 angle;
+    s32     unk_0C; /* 0x0C */
 } SceneRotation;
 
 ASSERT_SIZE(SceneRotation, 0x10);
-ASSERT_OFFSET(SceneRotation, angle_x, 0x00);
-ASSERT_OFFSET(SceneRotation, angle_y, 0x04);
-ASSERT_OFFSET(SceneRotation, angle_z, 0x08);
+ASSERT_OFFSET(SceneRotation, angle, 0x00);
 
 MATCH void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     MATRIX        matrix;
@@ -716,9 +712,9 @@ MATCH void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
 
     saved         = *(SceneRotation*)&g_Task->unk_64;
     work          = SCN_EFFECT;
-    work->angle_x = angle_x;
-    work->angle_y = angle_y;
-    work->angle_z = angle_z;
+    work->angle.x = angle_x;
+    work->angle.y = angle_y;
+    work->angle.z = angle_z;
 
     v2x = (u32)(size * rcos(SCN_TRI_APEX_ANGLE)) >> 8;
     v2y = (u32)(size * rsin(SCN_TRI_APEX_ANGLE)) >> 8;
@@ -761,7 +757,7 @@ MATCH void func_801F878C(void) {
 
     work                    = SCN_EFFECT;
     FIELD(s16, work, 0x2Eu) = (D_80147A86 + D_801FC9E8);
-    work->origin_y          = (D_80147A88 + D_801FC9E9);
+    work->origin.y          = (D_80147A88 + D_801FC9E9);
     work->counter_09        = 0;
     SCN_EFFECT->channel_06  = 0x20;
     tail                    = SCN_EFFECT;
@@ -779,8 +775,8 @@ MATCH void func_801F882C(void) {
     s8           shade;
 
     work = SCN_EFFECT;
-    work->origin_x -= 4;
-    work->origin_y += D_801FC9EC[work->counter_09 >> 2];
+    work->origin.x -= 4;
+    work->origin.y += D_801FC9EC[work->counter_09 >> 2];
     shade = *(s8*)&work->color_r;
 
     if (shade != 0) {
@@ -807,7 +803,7 @@ MATCH void func_801F8930(void) {
     s8           shade;
 
     work = SCN_EFFECT;
-    work->origin_y -= 2;
+    work->origin.y -= 2;
     shade = *(s8*)&work->color_r;
 
     if (shade != 0) {
@@ -835,9 +831,9 @@ MATCH void func_801F89F0(void) {
     VOL(s32, setup_work->pos_x)   = D_80147A8C;
     VOL(s32, setup_work->pos_y)   = g_AreaFocusY[0];
     FIELD(s32, setup_work, 0x3Cu) = D_80147A94;
-    VOL(s32, setup_work->angle_x) = D_80147ABC;
-    VOL(s32, setup_work->angle_y) = D_80147AC0;
-    setup_work->angle_z           = D_80147AC4;
+    VOL(s32, setup_work->angle.x) = D_80147ABC;
+    VOL(s32, setup_work->angle.y) = D_80147AC0;
+    setup_work->angle.z           = D_80147AC4;
     func_801AC1DC(deltas, FIELD(u8, setup_work, 0x1Cu));
     update_work                 = SCN_EFFECT;
     update_work->pos_x          = (update_work->pos_x + deltas[0]);
@@ -863,8 +859,8 @@ MATCH void func_801F8AB8(void) {
     Area_ProjectPoint(point, screen);
 
     current                     = SCN_EFFECT;
-    VOL(u16, current->origin_x) = screen[0];
-    current->origin_y           = SP_REF(u16, 0x36u);
+    VOL(u16, current->origin.x) = screen[0];
+    current->origin.y           = SP_REF(u16, 0x36u);
     shade                       = *(s8*)&current->color_r;
 
     if (shade != 0) {
@@ -890,7 +886,7 @@ MATCH void func_801F8BCC(void) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     half = SCN_EFFECT->channel_06 >> 1;
     SetPolyFT4(prim);
-    setXYWH(prim, SCN_EFFECT->origin_x - half, SCN_EFFECT->origin_y - half, SCN_EFFECT->channel_06,
+    setXYWH(prim, SCN_EFFECT->origin.x - half, SCN_EFFECT->origin.y - half, SCN_EFFECT->channel_06,
             SCN_EFFECT->channel_06);
     setUVWH(prim, 0xE0, 0x30, 0x1F, 0x20);
     setRGB0(prim, SCN_EFFECT->color_r, SCN_EFFECT->color_g, SCN_EFFECT->color_b);

@@ -2,6 +2,7 @@
 #define OVERLAY_SCENARIO_SCENA00_00_H
 
 #define GAME_SCRATCH_BASE_SCALAR
+#include "common/vector.h"
 #include "overlays/scenario/scenario.h"
 #include "work/area_spad.h"
 #include <abs.h>
@@ -108,8 +109,7 @@ typedef struct SceneEffect {
     u8                        pad_24[0x5];
     s8                        ot_index;
     u8                        pad_2A[0x4];
-    /* 0x2E */ u16            origin_x;
-    /* 0x30 */ u16            origin_y;
+    Vec2U16                   origin;
     u8                        pad_32[0x2];
     /* 0x34 */ s32            pos_x;
     /* 0x38 */ s32            pos_y;
@@ -121,9 +121,7 @@ typedef struct SceneEffect {
     u8                        color_g;
     u8                        color_b;
     /* 0x60 */ s32            projected; /* RotTransPers depth result */
-    /* 0x64 */ s32            angle_x;   /* the X rotation angle */
-    /* 0x68 */ s32            angle_y;   /* the Y rotation angle */
-    /* 0x6C */ s32            angle_z;   /* the Z rotation angle */
+    Vec3S32                   angle;
 } SceneEffect;
 
 ASSERT_SIZE(SceneEffect, 0x70);
@@ -134,8 +132,7 @@ ASSERT_OFFSET(SceneEffect, z, 0x3C);
 ASSERT_OFFSET(SceneEffect, unk_54, 0x54);
 ASSERT_OFFSET(SceneEffect, color_r, 0x5D);
 ASSERT_OFFSET(SceneEffect, projected, 0x60);
-ASSERT_OFFSET(SceneEffect, angle_x, 0x64);
-ASSERT_OFFSET(SceneEffect, angle_z, 0x6C);
+ASSERT_OFFSET(SceneEffect, angle, 0x64);
 
 /* Camera scroll word at 0x80143F84; the halfword at +2 is read signed. */
 typedef union AreaScroll {
