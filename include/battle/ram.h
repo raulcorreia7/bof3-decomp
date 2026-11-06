@@ -176,10 +176,10 @@ extern u8 g_BattleCommandCount;
 /* D_80146324 */
 extern u8     g_BattleSurprise;
 extern Spoils D_80146326;
-/* D_80146330 */
-extern s32    g_BattleSpoilsZenny;
 /* D_8014632C */
 extern u32    g_BattleSpoilsExp;
+/* D_80146330 */
+extern s32    g_BattleSpoilsZenny;
 
 /* The kind of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
 enum {
@@ -193,6 +193,8 @@ enum {
 extern volatile u8   g_BattleActionType;
 extern u16           D_80146386;
 extern u16           D_8014638A;
+/* The selected battler's row (D_8014638C), stored by func_801D3624. */
+extern PartyBattler* g_BattleSelectedActor;
 extern void*         D_80146390;
 extern s32           D_8014639C;
 extern u16           D_801463B2;
@@ -235,8 +237,6 @@ extern PartyBattler* D_801EB4E0;
  * (func_801E2170) and battle/battle/15 reads its cells (Battle_TestAiCondition). */
 /* D_801EB4E8 */
 extern EnemyBattler* g_BattleCurrentEnemy;
-/* The selected battler's row (D_8014638C), stored by func_801D3624. */
-extern PartyBattler* g_BattleSelectedActor;
 extern u8            D_801EB6B2[];
 
 #endif
