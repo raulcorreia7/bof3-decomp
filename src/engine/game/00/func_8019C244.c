@@ -10,7 +10,7 @@ MATCH s32 func_8019C244(void) {
     x    = work->pos.x.fixed;
     y    = work->pos.y.fixed;
     switch (work->direction_08) {
-        case FACING_N:
+        case FACING_UP:
             if ((((u32)y >> 0x0F) & 1) == 0) {
                 hi = y >> 0x10;
                 y &= HALF_MASK;
@@ -18,7 +18,7 @@ MATCH s32 func_8019C244(void) {
                 y |= hi << 0x10;
             }
             break;
-        case FACING_E:
+        case FACING_RIGHT:
             if ((((u32)x >> 0x0F) & 1) != 0) {
                 hi = x >> 0x10;
                 x &= HALF_MASK;
@@ -26,7 +26,7 @@ MATCH s32 func_8019C244(void) {
                 x |= hi << 0x10;
             }
             break;
-        case FACING_S:
+        case FACING_DOWN:
             if ((((u32)y >> 0x0F) & 1) != 0) {
                 hi = y >> 0x10;
                 y &= HALF_MASK;
@@ -34,7 +34,7 @@ MATCH s32 func_8019C244(void) {
                 y |= hi << 0x10;
             }
             break;
-        case FACING_W:
+        case FACING_LEFT:
             if ((((u32)x >> 0x0F) & 1) == 0) {
                 hi = x >> 0x10;
                 x &= HALF_MASK;

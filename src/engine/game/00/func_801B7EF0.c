@@ -5,7 +5,7 @@ MATCH void func_801B7EF0(void) {
 
     COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x200;
     value                    = 0x3D;
-    if (g_Task->direction_08 == FACING_E) {
+    if (g_Task->direction_08 == FACING_RIGHT) {
         value = 0x3C;
     }
     Actor_RequestScript(value);

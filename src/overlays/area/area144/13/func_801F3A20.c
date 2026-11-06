@@ -7,9 +7,9 @@ MATCH void func_801F3A20(void) {
     if (diff != 0) {
         g_ScriptState->unk_07 = abs(diff);
         if (diff < 0) {
-            g_Task->direction_08 = FACING_N;
+            g_Task->direction_08 = FACING_UP;
         } else {
-            g_Task->direction_08 = FACING_S;
+            g_Task->direction_08 = FACING_DOWN;
         }
         func_801ABBA8(g_ScriptState, g_Task->direction_08);
     }

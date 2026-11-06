@@ -209,12 +209,12 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                                 }
                                 goto loop_74; /* retail branch */
                             }
-                            g_Task->direction_08 = FACING_E;
+                            g_Task->direction_08 = FACING_RIGHT;
                             return 1U;
                         }
                         goto loop_71; /* retail branch */
                     }
-                    g_Task->direction_08 = FACING_W;
+                    g_Task->direction_08 = FACING_LEFT;
                     return 1U;
                 }
                 return val7;
@@ -284,12 +284,12 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                             }
                             goto loop_50; /* retail branch */
                         }
-                        g_Task->direction_08 = FACING_S;
+                        g_Task->direction_08 = FACING_DOWN;
                         return 1U;
                     }
                     goto loop_47; /* retail branch */
                 }
-                g_Task->direction_08 = FACING_N;
+                g_Task->direction_08 = FACING_UP;
                 return 1U;
             }
             return val7;

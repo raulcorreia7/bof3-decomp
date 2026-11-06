@@ -13,22 +13,22 @@ MATCH void func_801C22D8(void) {
     dx   = D_801462A0 - work->pos.x.fixed;
     dy   = D_801462A4 - work->pos.y.fixed;
     if (dx < 0 && dy < 0) {
-        work->direction_08 = FACING_NW;
+        work->direction_08 = FACING_UP_LEFT;
     } else if (dx > 0 && dy > 0) {
-        g_Task->direction_08 = FACING_SE;
+        g_Task->direction_08 = FACING_DOWN_RIGHT;
     } else if (dx < 0 && dy > 0) {
-        g_Task->direction_08 = FACING_SW;
+        g_Task->direction_08 = FACING_DOWN_LEFT;
     } else if (dx > 0 && dy < 0) {
-        g_Task->direction_08 = FACING_NE;
+        g_Task->direction_08 = FACING_UP_RIGHT;
     } else if (dx > 0 && dy == 0) {
-        g_Task->direction_08 = FACING_E;
+        g_Task->direction_08 = FACING_RIGHT;
     } else if (dx < 0 && dy == 0) {
-        g_Task->direction_08 = FACING_W;
+        g_Task->direction_08 = FACING_LEFT;
     } else if (dx == 0) {
         if (dy > 0) {
-            g_Task->direction_08 = FACING_S;
+            g_Task->direction_08 = FACING_DOWN;
         } else if (dy < 0) {
-            g_Task->direction_08 = FACING_N;
+            g_Task->direction_08 = FACING_UP;
         }
     }
     Actor_RequestScript(g_Task->direction_08);

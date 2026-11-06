@@ -24,7 +24,7 @@ MATCH s32 func_801C520C(void) {
     } else {
         COORD_INT(g_Task->pos.z) = Area_ReadHeight(targetX, targetY);
         transitionId             = 0x3F;
-        if (g_Task->direction_08 == FACING_W) {
+        if (g_Task->direction_08 == FACING_LEFT) {
             transitionId = 0x3E;
         }
         done = 1;

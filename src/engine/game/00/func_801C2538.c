@@ -10,7 +10,7 @@ MATCH void func_801C2538(void) {
 
     /* Step size from route kind; rate from the shared selector bundle. */
     rate = g_RouteSpeedScale[g_GameState->counter_11C.u8_value];
-    if ((g_Task->direction_08 == FACING_NE) || (g_Task->direction_08 == FACING_SW)) {
+    if ((g_Task->direction_08 == FACING_UP_RIGHT) || (g_Task->direction_08 == FACING_DOWN_LEFT)) {
         step           = 0x20;
         g_Task->unk_09 = step;
     } else {

@@ -9,7 +9,7 @@ MATCH s32 func_801BC4D0(void) {
     STACK_PADS(u8, 0x20); /* FAKE: retail frame reserves 32 unused bytes. */
     saved = g_Task->direction_08;
     kind  = func_801B9598();
-    if ((g_Task->direction_08 == FACING_NE) || (g_Task->direction_08 == FACING_SW)) {
+    if ((g_Task->direction_08 == FACING_UP_RIGHT) || (g_Task->direction_08 == FACING_DOWN_LEFT)) {
         g_Task->unk_09 = 0x20;
     } else {
         g_Task->unk_09 = 0x10;
