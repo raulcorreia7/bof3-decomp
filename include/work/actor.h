@@ -189,8 +189,8 @@ typedef struct Actor {
     u16            unk_2E;            /* 0x2E - area032 calls it the marker's screen x */
     u16            unk_30;            /* 0x30 - area032 calls it the marker's screen y */
     u16            unk_32;            /* 0x32 */
-    Vec3Coord      pos;               /* 0x34; z integer is ground height */
-    Vec2S32        scale;             /* 0x40 16.16; 0x10000 is full size */
+    WorldPos       pos;               /* 0x34; z integer is ground height */
+    SpriteScale    scale;             /* 0x40 16.16; 0x10000 is full size */
     u8             unk_48;            /* 0x48 - commu00 calls it the reset flag */
     u8             unk_49;            /* 0x49 */
     u8             unk_4A;            /* 0x4A - the world slot mode seed */

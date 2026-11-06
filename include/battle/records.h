@@ -222,7 +222,7 @@ typedef struct BattleEffect {
     s16                unk_2E;
     s16                unk_30;
     u16                unk_32;
-    Vec3Coord          pos; /* +0x34 x, y and z; bmagic stores the z span halfword (+0x3E) */
+    WorldPos           pos; /* +0x34 x, y and z; bmagic stores the z span halfword (+0x3E) */
     u8                 pad_40[8];
     u8                 unk_48;
     u8                 pad_49[2];
@@ -382,7 +382,7 @@ typedef struct EnemyBattler {
     s16              unk_2E; /* +0x2E cleared when the slot is armed */
     s16              unk_30; /* +0x30 cleared when the slot is armed */
     s16              unk_32; /* +0x32 cleared when the slot is armed */
-    Vec3Coord        pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
+    WorldPos         pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
     u8               pad_40[0x8];
     u8               unk_48; /* +0x48 cleared when the slot is armed */
     u8               pad_49[0x2];
@@ -514,8 +514,8 @@ typedef struct PartyBattler {
     BattleScreenCoord unk_2E; /* +0x2E the field overlays read it signed */
     BattleScreenCoord unk_30; /* +0x30 the field overlays read it signed */
     u16               depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
-    Vec3Coord         pos;
-    Vec2S32           scale;  /* +0x40 16.16, 0x10000 at setup */
+    WorldPos          pos;
+    SpriteScale       scale;  /* +0x40 16.16, 0x10000 at setup */
     u8                unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u8                unk_49;
     u8                unk_4A;
