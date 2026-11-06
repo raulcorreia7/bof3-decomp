@@ -7,11 +7,11 @@
 #include "overlays/scenario/scenario.h"
 #include "work/area_spad.h"
 
-extern u8         D_80144908[];
-extern u32        D_801F6C00;
-extern Callback   D_801FE80C[];
-extern Callback   D_801FE820[];
-extern Callback   D_801FE8F4[];
+extern u8       D_80144908[];
+extern u32      D_801F6C00;
+extern Callback D_801FE80C[];
+extern Callback D_801FE820[];
+extern Callback D_801FE8F4[];
 
 extern Callback D_801FE900[];
 extern u8       D_801FE938[];

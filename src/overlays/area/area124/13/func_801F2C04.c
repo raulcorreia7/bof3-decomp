@@ -10,7 +10,6 @@ extern u8  D_801F2DD8[];
 extern s16 D_80143F22;
 extern u16 D_80145FB8;
 
-
 MATCH void Area_SpawnWeightedActor(void) {
     u8  roll;
     s32 count;

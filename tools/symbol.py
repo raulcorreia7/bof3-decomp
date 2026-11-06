@@ -88,13 +88,13 @@ def tables_with(text: str, name: str) -> list[str]:
 def local_scope(images: list[str]) -> list[str]:
     """Return the folders that belong to the images."""
     folders = [
-        f for image in images for f in (f"src/{source_folder(image)}", f"config/{image}")
+        f
+        for image in images
+        for f in (f"src/{source_folder(image)}", f"config/{image}")
     ]
     missing = [f for f in folders if not (ROOT / f).is_dir()]
     if missing:
-        raise SystemExit(
-            f"symbol: no such folder {', '.join(missing)}"
-        )
+        raise SystemExit(f"symbol: no such folder {', '.join(missing)}")
     return folders
 
 
@@ -140,7 +140,9 @@ def rename(args: argparse.Namespace) -> int:
     text = SYMBOLS.read_text(encoding="utf-8")
     images = args.image or ([] if address else tables_with(text, old))
     if not images:
-        raise SystemExit(f"symbol: give --image for {old}; no table has a row of that name")
+        raise SystemExit(
+            f"symbol: give --image for {old}; no table has a row of that name"
+        )
     if args.local:
         scope = local_scope(images)
     elif args.scope:

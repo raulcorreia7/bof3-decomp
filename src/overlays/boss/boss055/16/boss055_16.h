@@ -15,19 +15,19 @@ typedef union Boss055Scripts {
 
 ASSERT_SIZE(Boss055Scripts, 10);
 
-extern Boss055Scripts               D_800C1804;
-extern Boss055Scripts               D_800C1810;
-extern Boss055Scripts               D_800C181C;
-extern Callback                     D_800C184C[];
-extern Callback                     D_800C356C[];
-extern Callback                     D_800C359C[];
-extern Callback                     D_800C35A4[];
-extern Callback                     D_800C35AC[];
-extern Callback                     D_800C35B4[];
-extern Callback                     D_800C35CC[];
-extern Callback                     D_800C35EC[];
-extern Callback                     D_800C35F8[];
-extern u16                          D_801463BE;
+extern Boss055Scripts D_800C1804;
+extern Boss055Scripts D_800C1810;
+extern Boss055Scripts D_800C181C;
+extern Callback       D_800C184C[];
+extern Callback       D_800C356C[];
+extern Callback       D_800C359C[];
+extern Callback       D_800C35A4[];
+extern Callback       D_800C35AC[];
+extern Callback       D_800C35B4[];
+extern Callback       D_800C35CC[];
+extern Callback       D_800C35EC[];
+extern Callback       D_800C35F8[];
+extern u16            D_801463BE;
 /* D_801EB630 */
 
 void func_800C238C(u8 arg0, u8 arg1);

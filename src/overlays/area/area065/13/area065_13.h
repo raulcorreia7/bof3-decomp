@@ -27,7 +27,7 @@ extern u8          D_801F533D[];
 extern u8          D_801F5344[];
 
 /* func_801F3A10 */
-void        Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
+void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
 
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud
