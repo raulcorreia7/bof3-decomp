@@ -2,6 +2,7 @@
 #define AREA_MAP_H
 
 #include "common/handler.h"
+#include "slus/facing.h"
 #include "types.h"
 
 typedef enum AreaId {
@@ -206,19 +207,6 @@ typedef enum AreaId {
     AREA_ID_MYRIA_STATION_MYRIA_FIGHT            = 198,
     AREA_ID_END_GAME_SAVE                        = 199,
 } AreaId;
-
-/* The party's facing on entering an area: the eight rows of g_FacingSteps,
- * named by the grid step each row takes (y grows downward). */
-typedef enum Facing {
-    FACING_UP_LEFT    = 0,
-    FACING_UP         = 1,
-    FACING_UP_RIGHT   = 2,
-    FACING_RIGHT      = 3,
-    FACING_DOWN_RIGHT = 4,
-    FACING_DOWN       = 5,
-    FACING_DOWN_LEFT  = 6,
-    FACING_LEFT       = 7,
-} Facing;
 
 /* Or-ed into the facing of an area request: only the scroll target is placed
  * (func_801BFF9C) and the map-loading walk flag is set (func_8019FAA0). */

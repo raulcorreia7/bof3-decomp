@@ -10,7 +10,7 @@
 MATCH void Message_ClearRequest(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {
-        g_SceneEventMode      = 0xA;
+        g_SceneEventMode      = SCENE_EVENT_SHOP_SAVE;
         g_SceneEventStep      = 0;
         g_SceneEventSelection = AREA_RESET_VARIANT;
     }

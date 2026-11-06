@@ -13,7 +13,7 @@ MATCH void func_801F4D14(void) {
         } else {
             Game_RequestAreaChange(AREA_ID_DESERT_ENTRANCE_CAMP, TO_COORD(26) + COORD_HALF, TO_COORD(28), FACING_UP);
         }
-        g_SceneEventMode = 0;
+        g_SceneEventMode = SCENE_EVENT_NONE;
         g_SceneEventStep = 0;
     }
 }

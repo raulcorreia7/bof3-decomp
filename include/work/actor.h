@@ -21,6 +21,7 @@
 
 #include "common/fixed.h"
 #include "common/vector.h"
+#include "slus/facing.h"
 #include "types.h"
 #include "work/task.h"
 

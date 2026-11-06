@@ -27,7 +27,7 @@ MATCH s32 func_801C4FE0(void) {
         COORD_INT(g_Task->pos.z) -= D_80181B88[slot];
     } else {
         COORD_INT(g_Task->pos.z) = Area_ReadHeight(x, y) - D_80181B70[FIELD(volatile u8, g_GameState, 0x79u)];
-        if (g_Task->direction_08 == 7) {
+        if (g_Task->direction_08 == FACING_LEFT) {
             Actor_RequestScript(0x3C);
         } else {
             Actor_RequestScript(0x3D);

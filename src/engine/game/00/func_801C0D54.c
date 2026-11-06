@@ -5,7 +5,7 @@ MATCH void func_801C0D54(void) {
 
     if (func_801C0E48() & BYTE_MASK) {
         arg = 0x3B;
-        if (g_Task->direction_08 == 3)
+        if (g_Task->direction_08 == FACING_RIGHT)
             arg = 0x3A;
         Actor_RequestScript(arg);
         g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;

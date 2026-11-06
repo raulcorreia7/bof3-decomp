@@ -11,10 +11,10 @@
 MATCH void Char_AdvanceFacingTurn(void) {
     if (g_Task->direction_08 == g_Task->unk_03) {
         switch (g_Task->direction_08) {
-            case 5:
+            case FACING_DOWN:
                 Actor_RequestScript(0x41);
                 break;
-            case 3:
+            case FACING_RIGHT:
                 Actor_RequestScript(0x40);
                 break;
         }

@@ -34,7 +34,7 @@ MATCH void Master_RunSceneEvent(void) {
             if (EMI_LoaderIsReady() != 0) {
                 g_AreaWalkFlags &= ~AREA_WALK_BUSY_ALL;
                 Game_ClearScriptActive();
-                g_SceneEventMode      = 0;
+                g_SceneEventMode      = SCENE_EVENT_NONE;
                 g_SceneEventStep      = 0;
                 g_SceneEventSelection = 0;
                 return;

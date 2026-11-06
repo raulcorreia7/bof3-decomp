@@ -11,7 +11,7 @@ MATCH void func_801F5E1C(void) {
         D_80145048 = g_GameAreaId;
         Game_RequestAreaChange(AREA_ID_DEIS_ROOM, TO_COORD(56), TO_COORD(44), FACING_UP);
         Game_ClearScriptActive();
-        g_SceneEventMode = 0;
+        g_SceneEventMode = SCENE_EVENT_NONE;
         *flag            = 0;
     }
 }

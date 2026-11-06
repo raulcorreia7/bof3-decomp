@@ -6,11 +6,11 @@ MATCH bool func_801C4EC4(void) {
     g_Task->unk_0A = (g_Task->unk_0A - 1);
     count          = g_Task->unk_0A;
     if (count == 0) {
-        Actor_RequestScript(g_Task->direction_08 == 3 ? 0x37 : 0x34);
+        Actor_RequestScript(g_Task->direction_08 == FACING_RIGHT ? 0x37 : 0x34);
         g_Task->direction_08 ^= 4;
         return true;
     }
-    if (g_Task->direction_08 == 3) {
+    if (g_Task->direction_08 == FACING_RIGHT) {
         Actor_RequestScript((7 - count));
     } else {
         Actor_RequestScript((count + 1));

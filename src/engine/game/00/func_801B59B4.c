@@ -6,28 +6,28 @@ MATCH s32 func_801B59B4(void) {
     kind = D_8014625C & INPUT_DIRECTIONAL;
     switch (kind) {
         case PADLup:
-            g_Task->direction_08 = 0;
+            g_Task->direction_08 = FACING_UP_LEFT;
             break;
         case PADLup | PADLright:
-            g_Task->direction_08 = 1;
+            g_Task->direction_08 = FACING_UP;
             break;
         case PADLright:
-            g_Task->direction_08 = 2;
+            g_Task->direction_08 = FACING_UP_RIGHT;
             break;
         case PADLright | PADLdown:
-            g_Task->direction_08 = 3;
+            g_Task->direction_08 = FACING_RIGHT;
             break;
         case PADLdown:
-            g_Task->direction_08 = 4;
+            g_Task->direction_08 = FACING_DOWN_RIGHT;
             break;
         case PADLdown | PADLleft:
-            g_Task->direction_08 = 5;
+            g_Task->direction_08 = FACING_DOWN;
             break;
         case PADLleft:
-            g_Task->direction_08 = 6;
+            g_Task->direction_08 = FACING_DOWN_LEFT;
             break;
         case PADLleft | PADLup:
-            g_Task->direction_08 = 7;
+            g_Task->direction_08 = FACING_LEFT;
             break;
         default:
             return 0;

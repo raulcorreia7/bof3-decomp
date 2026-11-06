@@ -3,7 +3,7 @@
 MATCH s32 func_801F2E68(void) {
     /* FAKE: retail reads Game_SetScriptActive as s32(void). */
     ((s32 (*)(void))Game_SetScriptActive)();
-    g_SceneEventMode      = 4;
+    g_SceneEventMode      = SCENE_EVENT_MASTER;
     g_SceneEventSelection = 8;
     return 0;
 }

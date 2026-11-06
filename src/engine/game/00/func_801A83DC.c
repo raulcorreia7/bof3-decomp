@@ -34,7 +34,7 @@ MATCH void func_801A83DC(void) {
                 }
                 g_ScriptWorkRecord->header.flags = 0;
                 Game_ClearScriptActive();
-                g_SceneEventMode      = 0;
+                g_SceneEventMode      = SCENE_EVENT_NONE;
                 *state                = 0;
                 g_SceneEventSelection = 0;
             }

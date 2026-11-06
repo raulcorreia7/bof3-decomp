@@ -20,7 +20,7 @@ MATCH void func_801B744C(void) {
             MEM(s32, 0x8014930Cu) = g_Task->pos.y.fixed + dy;
             MEM(s16, 0x8014932Eu) = rate * 8;
         }
-        Actor_RequestScript((g_Task->direction_08 == 3) ? 0x3AU : 0x3BU);
+        Actor_RequestScript((g_Task->direction_08 == FACING_RIGHT) ? 0x3AU : 0x3BU);
         SND_PlayCue(EMI_CUE_ID(1, 4));
         g_Task->unk_09 -= 1;
         g_Task->vz += g_Task->gravity;

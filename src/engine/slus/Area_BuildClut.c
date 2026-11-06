@@ -10,26 +10,26 @@ MATCH void Area_BuildClut(u16* dst) {
 
     base = ((g_Task->active_flags & 4) != 0) ? 0x1F0 : 0x1E0;
     switch (g_Task->unk_28) {
-        case 0:
+        case PALETTE_KIND_CELL:
             sel  = g_Task->unk_27;
             *dst = (((base + (sel >> 4)) << 6) | (sel & 0xF));
             break;
-        case 1: {
+        case PALETTE_KIND_ROW: {
             u32 n;
 
             n    = g_Task->unk_27;
             *dst = ((base + n) << 6);
             break;
         }
-        case 2:
+        case PALETTE_KIND_CELLS_2:
             sel  = g_Task->unk_27;
             *dst = (((base + (sel >> 3)) << 6) | ((sel & 7) * 2));
             break;
-        case 3:
+        case PALETTE_KIND_CELLS_4:
             sel  = g_Task->unk_27;
             *dst = (((base + (sel >> 2)) << 6) | ((sel & 3) * 4));
             break;
-        case 4:
+        case PALETTE_KIND_CELLS_8:
         default:
             sel  = g_Task->unk_27;
             *dst = (((base + (sel >> 1)) << 6) | ((sel & 1) * 8));

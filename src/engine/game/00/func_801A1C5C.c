@@ -19,7 +19,7 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
     sx = x;
     sy = y;
     switch (route & BYTE_MASK) {
-        case 1:
+        case FACING_UP:
             xhi   = sx >> 16;
             yhi   = ((u32)sy) >> 16;
             y_low = yhi;
@@ -32,7 +32,7 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
             sum += (func_801A21EC(sx, sy) + func_801A21EC(sx + 0x8000, sy)) + func_801A21EC(sx - 0x8000, sy);
             break;
 
-        case 5:
+        case FACING_DOWN:
             if (sy & HALF_MASK) {
                 xcell = sx >> 16;
                 ycell = ((sy >> 16) + 1) & HALF_MASK;
@@ -55,7 +55,7 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
             sum += (func_801A21EC(sx, sy) + func_801A21EC(sx + 0x8000, sy)) + func_801A21EC(sx - 0x8000, sy);
             break;
 
-        case 3:
+        case FACING_RIGHT:
             if (sx & HALF_MASK) {
                 cell = ((sx >> 16) + 1) & HALF_MASK;
             } else {
@@ -64,7 +64,7 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
             /* cases 3 and 7 share the y-axis accumulation. */
             goto check_y;
 
-        case 7:
+        case FACING_LEFT:
             cell = ((u32)sx) >> 16;
         check_y:
             yhi = sy >> 16;

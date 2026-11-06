@@ -11,7 +11,7 @@ MATCH void func_8019C954(void) {
     record               = (Actor*)&g_ActorSlots[index];
     g_Task->unk_2C       = record->unk_2C;
     g_Task->unk_27       = 0x7B;
-    g_Task->unk_28       = 2;
+    g_Task->unk_28       = PALETTE_KIND_CELLS_2;
     g_Task->unk_25       = 0x1D;
     g_Task->unk_26       = 0;
     g_Task->unk_4C       = record->unk_4C;

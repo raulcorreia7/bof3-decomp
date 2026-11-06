@@ -12,6 +12,7 @@
 #include "spawn.h"
 #include "ability.h"
 #include "text.h"
+#include "gfx/vram.h"
 #include "common/handler.h"
 #include "types.h"
 

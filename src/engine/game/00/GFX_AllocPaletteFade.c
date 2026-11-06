@@ -16,7 +16,7 @@ MATCH s32 GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_cou
 loop_1:
     if ((((PaletteFade*)((u8*)D_80145BD4 + offset))->flags & PALETTE_FADE_ACTIVE) == 0) {
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = value;
-        if ((color_data[0x28] == 0) && ((color_data[0x24] & 4) == 0)) {
+        if ((color_data[0x28] == PALETTE_KIND_CELL) && ((color_data[0x24] & 4) == 0)) {
             ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = flagged;
         }
         result                                                   = slot & BYTE_MASK;
