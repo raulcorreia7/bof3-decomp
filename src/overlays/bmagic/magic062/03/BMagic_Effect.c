@@ -22,8 +22,8 @@ MATCH void func_801EF2A0(void) {
     u16* flags;
 
     if (g_Task->unk_0B == 0) {
-        flags                        = &g_BattleState;
-        g_GameCelerityTimer.hours_00 = 5;
+        flags                     = &g_BattleState;
+        g_GameCelerityTimer.hours = 5;
         *flags |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
