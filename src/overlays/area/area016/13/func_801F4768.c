@@ -24,7 +24,7 @@ NON_MATCHING void func_801F4768(void) {
 
     frame = g_Task;
     if (frame->flags_02 == 0) {
-        COORD_INT(frame->y) += (g_FrameCount & 0xF);
+        COORD_INT(frame->pos.y) += (g_FrameCount & 0xF);
         frame->flags_02 = (u8)(frame->flags_02 + 1);
     }
 
@@ -34,13 +34,13 @@ NON_MATCHING void func_801F4768(void) {
 
     frame = g_Task;
     width = frame->unk_0B - 2;
-    frame->y.fixed += 0x800 + (width << 10);
-    if ((D_80104001 + 8) < COORD_INT(frame->y)) {
-        COORD_INT(frame->y) = -8;
+    frame->pos.y.fixed += 0x800 + (width << 10);
+    if ((D_80104001 + 8) < COORD_INT(frame->pos.y)) {
+        COORD_INT(frame->pos.y) = -8;
     }
 
     frame = g_Task;
-    if ((abs(D_8014930A - COORD_INT(frame->x)) < 0x1A) || (abs(D_8014930E - COORD_INT(frame->y)) < 0x1A)) {
+    if ((abs(D_8014930A - COORD_INT(frame->pos.x)) < 0x1A) || (abs(D_8014930E - COORD_INT(frame->pos.y)) < 0x1A)) {
         primitive = (POLY_FT4*)g_GfxPrimCursor;
         row       = 0;
         SetPolyFT4(primitive);
@@ -58,8 +58,8 @@ NON_MATCHING void func_801F4768(void) {
         frame  = g_Task;
         offset = (2 - width) << 8;
         offset += abs(0xF - (g_FrameCount & 0x1F));
-        x_high = (frame->x.fixed >> 9) - 0x3FC0;
-        y_high = ((s32)frame->y.fixed >> 9) - 0x3FC0;
+        x_high = (frame->pos.x.fixed >> 9) - 0x3FC0;
+        y_high = ((s32)frame->pos.y.fixed >> 9) - 0x3FC0;
         x_low  = x_high - offset;
         y_low  = y_high - offset;
         x_high += offset;
@@ -81,9 +81,9 @@ NON_MATCHING void func_801F4768(void) {
 
         for (row = 0; row < (2 - width) * 4 + 1; row++) {
             for (col = 0; col < (2 - width) * 4; col++) {
-                frame = g_Task;
-                source =
-                    Area_FindCellQuad(COORD_INT(frame->x) - 2 + width + col, COORD_INT(frame->y) - 2 + width + row);
+                frame  = g_Task;
+                source = Area_FindCellQuad(COORD_INT(frame->pos.x) - 2 + width + col,
+                                           COORD_INT(frame->pos.y) - 2 + width + row);
                 if (source != NULL) {
                     primitive = (POLY_FT4*)g_GfxPrimCursor;
                     SetPolyFT4(primitive);
@@ -101,21 +101,21 @@ NON_MATCHING void func_801F4768(void) {
                     setRGB0(primitive, 0x28, 0x28, 0x28);
 
                     primitive->u0 = (u8)(D_801F51D8[width] + col * D_801F51E0[width]);
-                    uv            = D_801F51E0[width] * COORD_FRAC(g_Task->y);
+                    uv            = D_801F51E0[width] * COORD_FRAC(g_Task->pos.y);
                     if (uv < 0) {
                         uv += 0xFFFF;
                     }
                     primitive->v0 = (u8)((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16));
 
                     primitive->u1 = (u8)(D_801F51E0[width] + (D_801F51D8[width] + col * D_801F51E0[width]));
-                    uv            = D_801F51E0[width] * COORD_FRAC(g_Task->y);
+                    uv            = D_801F51E0[width] * COORD_FRAC(g_Task->pos.y);
                     if (uv < 0) {
                         uv += 0xFFFF;
                     }
                     primitive->v1 = (u8)((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16));
 
                     primitive->u2 = (u8)(D_801F51D8[width] + col * D_801F51E0[width]);
-                    uv            = (D_801F51E0[width] & BYTE_MASK) * COORD_FRAC(g_Task->y);
+                    uv            = (D_801F51E0[width] & BYTE_MASK) * COORD_FRAC(g_Task->pos.y);
                     if (uv < 0) {
                         uv += 0xFFFF;
                     }
@@ -123,7 +123,7 @@ NON_MATCHING void func_801F4768(void) {
                         (u8)(D_801F51E0[width] + ((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16)));
 
                     primitive->u3 = (u8)(D_801F51E0[width] + (D_801F51D8[width] + col * D_801F51E0[width]));
-                    uv            = (D_801F51E0[width] & BYTE_MASK) * COORD_FRAC(g_Task->y);
+                    uv            = (D_801F51E0[width] & BYTE_MASK) * COORD_FRAC(g_Task->pos.y);
                     if (uv < 0) {
                         uv += 0xFFFF;
                     }
@@ -131,8 +131,8 @@ NON_MATCHING void func_801F4768(void) {
                         (u8)(D_801F51E0[width] + ((D_801F51DC[width] + row * D_801F51E0[width]) - (uv >> 16)));
 
                     frame = g_Task;
-                    Area_AddCellPrim((COORD_INT(frame->x) - 2 + width + col) << 16,
-                                     (COORD_INT(frame->y) - 2 + width + row) << 16, 1, 0x28);
+                    Area_AddCellPrim((COORD_INT(frame->pos.x) - 2 + width + col) << 16,
+                                     (COORD_INT(frame->pos.y) - 2 + width + row) << 16, 1, 0x28);
                 }
             }
         }

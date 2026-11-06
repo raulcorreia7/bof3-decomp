@@ -13,9 +13,9 @@ MATCH void Area_InitSpin(void* spin) {
 
     work           = (WorldSpin*)spin;
     scratch        = g_Task;
-    work->origin_x = scratch->x.fixed;
-    work->origin_y = scratch->y.fixed;
-    work->origin_z = scratch->z.fixed;
+    work->origin_x = scratch->pos.x.fixed;
+    work->origin_y = scratch->pos.y.fixed;
+    work->origin_z = scratch->pos.z.fixed;
 
     rot[0] = rand() & 0xFFF;
     rot[1] = AREA_SPIN_PITCH;

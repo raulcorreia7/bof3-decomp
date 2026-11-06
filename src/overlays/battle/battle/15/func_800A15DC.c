@@ -12,14 +12,14 @@ MATCH void func_800A15DC(void) {
     func_800A3F28();
     battlerPtr = &g_BattleActiveBattler;
     if ((battler = LOBU(*battlerPtr)) < 3U) {
-        g_BattlePartyBattlers[battler].action_flags.value |= 0x80u;
+        g_BattlePartyBattlers[battler].turn.action_flags.value |= 0x80u;
         playerIndex = *battlerPtr;
         counter     = g_BattlePartyBattlers[playerIndex].unk_139;
         if (counter < 2U) {
             g_BattlePartyBattlers[playerIndex].unk_139 = counter + 1;
         }
     } else {
-        ENEMY_COMBATANT(battler).action_flags |= 0x80u;
+        ENEMY_COMBATANT(battler).turn.action_flags.value |= 0x80u;
         enemyRowOffset = (*battlerPtr - 3) * BATTLE_ENEMY_STRIDE;
         counter        = D_801EB745[enemyRowOffset];
         if (counter < 2U) {

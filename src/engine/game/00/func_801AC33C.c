@@ -17,18 +17,18 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
     s32    reached_x;
     s32    reached_y;
 
-    work                 = g_Task;
-    route_index          = work->direction_08 & 7;
-    step_x               = g_FacingOffsets[route_index].x * g_RouteSpeedScale[g_CurrentActor->unk_78];
-    step_y               = g_FacingOffsets[route_index].y * g_RouteSpeedScale[g_CurrentActor->unk_78];
-    reached_y            = 0;
-    COORD_INT(g_Task->z) = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
-    reached_x            = 0;
+    work                     = g_Task;
+    route_index              = work->direction_08 & 7;
+    step_x                   = g_FacingOffsets[route_index].x * g_RouteSpeedScale[g_CurrentActor->unk_78];
+    step_y                   = g_FacingOffsets[route_index].y * g_RouteSpeedScale[g_CurrentActor->unk_78];
+    reached_y                = 0;
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    reached_x                = 0;
     if ((g_Task->unk_18 + g_Task->unk_1C) == 0) {
         g_CurrentActor->unk_80 =
-            g_Task->x.fixed + (g_FacingSteps[g_Task->direction_08 & 7].x << 1) * (arg1 & BYTE_MASK);
+            g_Task->pos.x.fixed + (g_FacingSteps[g_Task->direction_08 & 7].x << 1) * (arg1 & BYTE_MASK);
         g_CurrentActor->unk_84 =
-            g_Task->y.fixed + (g_FacingSteps[g_Task->direction_08 & 7].y << 1) * (arg1 & BYTE_MASK);
+            g_Task->pos.y.fixed + (g_FacingSteps[g_Task->direction_08 & 7].y << 1) * (arg1 & BYTE_MASK);
         if ((ease_in & BYTE_MASK) != 0) {
             g_Task->unk_18 = step_x >> (arg1 & BYTE_MASK);
             g_Task->unk_1C = step_y >> (arg1 & BYTE_MASK);
@@ -42,16 +42,16 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
         }
         g_Task->vz = 0;
     }
-    g_Task->x.fixed += g_Task->vx;
-    g_Task->y.fixed += g_Task->vy;
+    g_Task->pos.x.fixed += g_Task->vx;
+    g_Task->pos.y.fixed += g_Task->vy;
     g_Task->vx += g_Task->unk_18;
     g_Task->vy += g_Task->unk_1C;
     delta = g_Task->vy;
     if (g_Task->unk_06 == 0x0A) {
-        pos_x = g_Task->x.fixed;
+        pos_x = g_Task->pos.x.fixed;
         slot  = (-(((s32)g_CurrentActor - (s32)D_80147A58) * 0xD79435E5)) >> 3;
         if ((((pos_x ^ (pos_x + g_Task->vx)) & 0x8000) != 0) ||
-            ((pos_y = g_Task->y.fixed, (((pos_y ^ (pos_y + delta)) & 0x8000)) != 0))) {
+            ((pos_y = g_Task->pos.y.fixed, (((pos_y ^ (pos_y + delta)) & 0x8000)) != 0))) {
             func_801A3080(g_CurrentActor, g_Task->direction_08 & 7);
         }
         index = (s32)(slot << 24) >> 20;
@@ -68,30 +68,30 @@ MATCH s32 func_801AC33C(s32 ease_in, s32 arg1) {
         }
     }
     if (step_x < 0) {
-        if (!(g_Task->x.fixed > g_CurrentActor->unk_80)) {
+        if (!(g_Task->pos.x.fixed > g_CurrentActor->unk_80)) {
             reached_x = 1;
         }
     } else {
-        if (!(g_Task->x.fixed < g_CurrentActor->unk_80)) {
+        if (!(g_Task->pos.x.fixed < g_CurrentActor->unk_80)) {
             reached_x = 1;
         }
     }
     if (step_y < 0) {
-        if (!(g_Task->y.fixed > g_CurrentActor->unk_84)) {
+        if (!(g_Task->pos.y.fixed > g_CurrentActor->unk_84)) {
             reached_y = 1;
         }
     } else {
-        if (!(g_Task->y.fixed < g_CurrentActor->unk_84)) {
+        if (!(g_Task->pos.y.fixed < g_CurrentActor->unk_84)) {
             reached_y = 1;
         }
     }
     if ((reached_x & reached_y) != 0) {
-        g_Task->x.fixed = g_CurrentActor->unk_80;
-        g_Task->y.fixed = g_CurrentActor->unk_84;
-        g_Task->vx      = step_x;
-        g_Task->vy      = step_y;
-        g_Task->unk_1C  = 0;
-        g_Task->unk_18  = 0;
+        g_Task->pos.x.fixed = g_CurrentActor->unk_80;
+        g_Task->pos.y.fixed = g_CurrentActor->unk_84;
+        g_Task->vx          = step_x;
+        g_Task->vy          = step_y;
+        g_Task->unk_1C      = 0;
+        g_Task->unk_18      = 0;
         return 0;
     }
     return 1;

@@ -7,12 +7,12 @@
 MATCH s32 Actor_RiseToGround(s32 entry, s32 dir_x, s32 dir_y, s32 vz_start, s16 vz_delta) {
     s16 distance;
 
-    COORD_INT(g_Task->z) += (g_Task->vz >> 8);
+    COORD_INT(g_Task->pos.z) += (g_Task->vz >> 8);
     g_Task->vz = g_Task->vz + vz_delta;
-    distance   = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
-    if (COORD_INT(g_Task->z) < distance) {
-        COORD_INT(g_Task->z) = (u16)distance;
-        g_Task->unk_04       = 0;
+    distance   = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    if (COORD_INT(g_Task->pos.z) < distance) {
+        COORD_INT(g_Task->pos.z) = (u16)distance;
+        g_Task->unk_04           = 0;
         return 0;
     }
     return 1;

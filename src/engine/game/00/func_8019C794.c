@@ -7,12 +7,12 @@ MATCH void func_8019C794(void) {
     u8             index;
 
     work = g_Task;
-    work->x.fixed += work->vx;
+    work->pos.x.fixed += work->vx;
     work->unk_0A -= 1;
-    work->y.fixed += work->vy;
+    work->pos.y.fixed += work->vy;
     if (g_Task->unk_0A == 0 ||
         (map = (AreaMapBundle*)MAP_BUNDLE_BASE,
-         *(u16*)(COORD_INT(g_Task->x) * 2 + (COORD_INT(g_Task->y) * map->width_00 * 2 + map->grid_off4_02 * 4) +
+         *(u16*)(COORD_INT(g_Task->pos.x) * 2 + (COORD_INT(g_Task->pos.y) * map->width_00 * 2 + map->grid_off4_02 * 4) +
                  (u32)map) == 0)) {
         code = 0x4E;
         /* Both reports share one call block. */

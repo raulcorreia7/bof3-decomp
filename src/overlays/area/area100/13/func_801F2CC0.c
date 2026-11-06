@@ -1,6 +1,6 @@
 #include "area100_13.h"
 
-MATCH void func_801F2CC0(void) {
+MATCH s32 func_801F2CC0(void) {
     s32 value;
 
     FIELD(s32, g_Task, 0x34u) = 0xA0000;

@@ -43,7 +43,7 @@ MATCH u8 func_800A9304(u8 slot) {
     }
     index = slot - BATTLE_PARTY_SLOT_COUNT;
     if (g_BattleEnemyBattlers[index].stats.intellect < 2 || (g_BattleEnemyBattlers[index].status & STATUS_CONFUSED) ||
-        (g_BattleEnemyBattlers[index].action_flags & COMBATANT_FLAG_CHARGING)) {
+        (g_BattleEnemyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
         if ((*(u8*)&g_BattleActionType) == BATTLE_ACTION_ABILITY) {
             action = D_801CA718[D_801EB726[slot - BATTLE_PARTY_SLOT_COUNT][0] * BATTLE_KIND_STRIDE];
             if (action & 0x10) {

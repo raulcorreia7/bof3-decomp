@@ -7,9 +7,9 @@ MATCH void func_80096FBC(void) {
     u8  stage;
     u8  message_slot;
 
-    D_801EB4D8[1] = 4;
+    D_801EB4D8->command.type = 4;
     func_80097EC0();
-    flags = *(u32*)((D_801EB4D8 + 0x10));
+    flags = D_801EB4D8->action_flags.value;
     if (flags & 2) {
         if (!(flags & 0x20000)) {
             D_8014857B = 2u;

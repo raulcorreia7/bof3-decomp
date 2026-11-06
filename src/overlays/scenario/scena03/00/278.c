@@ -5,9 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F6E78(void) {
-    /* FAKE: retail reads the handler record from entry $v0; the pin is the
-       entry-register residual (identical bytes to the unpinned 84.46%). */
-    MATCH_REG(u8*, entity, "v0");
+    u8* entity;
 
     D_801FCF24[entity[1]]();
 }
@@ -53,10 +51,10 @@ MATCH void func_801F6EB4(void) {
     Actor_BeginScript(0x61, 0xC);
     slots[0x11] = work;
 
-    g_Actors[work[3]].x.fixed += 0x1000;
-    g_Actors[work[3]].y.fixed -= 0x1000;
-    g_Actors[work[4]].x.fixed -= 0x1000;
-    g_Actors[work[4]].y.fixed += 0x1000;
+    g_Actors[work[3]].pos.x.fixed += ONE;
+    g_Actors[work[3]].pos.y.fixed -= ONE;
+    g_Actors[work[4]].pos.x.fixed -= ONE;
+    g_Actors[work[4]].pos.y.fixed += ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots = SP_PTR(u8*, 0u);
     g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
@@ -133,10 +131,10 @@ MATCH void func_801F754C(void) {
     func_801A4D54(data);
     slots[0x11] = work;
 
-    g_Actors[work[3]].x.fixed -= 0x1000;
-    g_Actors[work[3]].y.fixed += 0x1000;
-    g_Actors[work[4]].x.fixed += 0x1000;
-    g_Actors[work[4]].y.fixed -= 0x1000;
+    g_Actors[work[3]].pos.x.fixed -= ONE;
+    g_Actors[work[3]].pos.y.fixed += ONE;
+    g_Actors[work[4]].pos.x.fixed += ONE;
+    g_Actors[work[4]].pos.y.fixed -= ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots = SP_PTR(u8*, 0u);
     g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;

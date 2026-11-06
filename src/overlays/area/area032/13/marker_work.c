@@ -151,7 +151,7 @@ static const Callback D_801F4908[2] = {
     func_801F3920,
 };
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     SYS_DISPATCH_BYTE(s_WorkStates, TASK_BYTES[0x1]);
 }
 
@@ -268,10 +268,10 @@ MATCH void func_801F30EC(void) {
     func_801A4D54(data);
     slots[0x11] = work;
 
-    g_Actors[work[3]].x.fixed -= 0x1000;
-    g_Actors[work[3]].y.fixed += 0x1000;
-    g_Actors[work[4]].x.fixed += 0x1000;
-    g_Actors[work[4]].y.fixed -= 0x1000;
+    g_Actors[work[3]].pos.x.fixed -= ONE;
+    g_Actors[work[3]].pos.y.fixed += ONE;
+    g_Actors[work[4]].pos.x.fixed += ONE;
+    g_Actors[work[4]].pos.y.fixed -= ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     slots = SP_PTR(u8*, 0u);
     g_Actors[slots[0x11][4]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
@@ -324,12 +324,12 @@ MATCH void func_801F3728(void) {
     flag                     = 1;
     g_Task->tint.bytes.flags = flag;
     work                     = (u8*)g_Task;
-    value                    = ((Actor*)work)->x.fixed;
+    value                    = ((Actor*)work)->pos.x.fixed;
     work[4]                  = flag;
     next                     = work + 0xC;
     counter                  = &g_GameState->unk_122;
     value += *(s32*)next;
-    ((Actor*)work)->x.fixed = value;
+    ((Actor*)work)->pos.x.fixed = value;
     *counter -= 2;
 }
 
@@ -341,7 +341,7 @@ MATCH void func_801F378C(void) {
         counter              = (g_GameState->unk_122 - 2);
         slot                 = SP_REF(Actor*, 0x44);
         g_GameState->unk_122 = counter;
-        slot->x.fixed += slot->vx;
+        slot->pos.x.fixed += slot->vx;
         return;
     }
     SP_REF(Actor*, 0x44)->unk_04 = 0;
@@ -367,21 +367,21 @@ MATCH void func_801F3844(void) {
     slots = SP_PTR(u8*, 0u);
     work  = slots[0x11];
     work[0] &= 0xBF;
-    slots                   = SP_PTR(u8*, 0u);
-    slots[0x11][0x5C]       = 1;
-    slots                   = SP_PTR(u8*, 0u);
-    swords                  = (s8*)slots[0x11];
-    swords[0x5F]            = -0x80;
-    swords[0x5E]            = -0x80;
-    swords[0x5D]            = -0x80;
-    slots                   = SP_PTR(u8*, 0u);
-    work                    = slots[0x11];
-    value                   = 0x2000;
-    *(s32*)(work + 0xC)     = value;
-    value                   = ((Actor*)work)->x.fixed;
-    work[4]                 = 1;
-    base                    = g_CurrentActor;
-    ((Actor*)work)->x.fixed = value + 0x2000;
+    slots                       = SP_PTR(u8*, 0u);
+    slots[0x11][0x5C]           = 1;
+    slots                       = SP_PTR(u8*, 0u);
+    swords                      = (s8*)slots[0x11];
+    swords[0x5F]                = -0x80;
+    swords[0x5E]                = -0x80;
+    swords[0x5D]                = -0x80;
+    slots                       = SP_PTR(u8*, 0u);
+    work                        = slots[0x11];
+    value                       = 0x2000;
+    *(s32*)(work + 0xC)         = value;
+    value                       = ((Actor*)work)->pos.x.fixed;
+    work[4]                     = 1;
+    base                        = g_CurrentActor;
+    ((Actor*)work)->pos.x.fixed = value + 0x2000;
     base->unk_7E -= 2;
 }
 
@@ -419,7 +419,7 @@ MATCH void func_801F3920(void) {
         slots[0x11][4]         = 0;
         g_CurrentActor->unk_78 = 2;
     } else {
-        work->x.fixed += work->vx;
+        work->pos.x.fixed += work->vx;
         g_CurrentActor->unk_7E -= 2;
     }
 }
@@ -448,9 +448,9 @@ MATCH void func_801F3A78(void) {
     g_ActorSlots[work[0x0B]].unk_06              = work[0x08];
     slots                                        = SP_PTR(u8*, 0u);
     item                                         = slots[0x11];
-    g_ActorSlots[item[0x0B]].x.fixed             = ((Actor*)item)->x.fixed;
-    g_ActorSlots[item[0x0B]].y.fixed             = ((Actor*)item)->y.fixed + 0x4000;
-    g_ActorSlots[item[0x0B]].z.fixed             = ((Actor*)item)->z.fixed + 0x01000000;
+    g_ActorSlots[item[0x0B]].x.fixed             = ((Actor*)item)->pos.x.fixed;
+    g_ActorSlots[item[0x0B]].y.fixed             = ((Actor*)item)->pos.y.fixed + 0x4000;
+    g_ActorSlots[item[0x0B]].z.fixed             = ((Actor*)item)->pos.z.fixed + 0x01000000;
     g_ActorSlots[item[0x0B]].layer               = 0x78;
 }
 
@@ -512,8 +512,8 @@ MATCH void func_801F3DCC(void) {
     g_ActorSlots[work[0x0B]].unk_06              = work[8];
     slots                                        = SP_PTR(u8*, 0u);
     item                                         = slots[0x11];
-    g_ActorSlots[item[0x0B]].x.fixed             = ((Actor*)item)->x.fixed;
-    g_ActorSlots[item[0x0B]].y.fixed             = ((Actor*)item)->y.fixed + 0x8000;
-    g_ActorSlots[item[0x0B]].z.fixed             = ((Actor*)item)->z.fixed + 0x01000000;
+    g_ActorSlots[item[0x0B]].x.fixed             = ((Actor*)item)->pos.x.fixed;
+    g_ActorSlots[item[0x0B]].y.fixed             = ((Actor*)item)->pos.y.fixed + 0x8000;
+    g_ActorSlots[item[0x0B]].z.fixed             = ((Actor*)item)->pos.z.fixed + 0x01000000;
     g_ActorSlots[item[0x0B]].layer               = 0x3C;
 }

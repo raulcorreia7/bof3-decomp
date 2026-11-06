@@ -7,12 +7,12 @@ MATCH void func_801E4E10(void) {
 
     expected = 4;
     enemy    = g_BattleCurrentEnemy;
-    if (enemy->command.type == expected) {
+    if (enemy->turn.command.type == expected) {
         enemy->ap = enemy->ap - D_801463C8;
     }
     battle_flags = &g_BattleState;
     *battle_flags |= 0x800;
-    g_BattleCurrentEnemy->command.type = 0;
+    g_BattleCurrentEnemy->turn.command.type = 0;
     if ((D_801CA71C[g_BattleActionId].mask & 0x800u) == 0u) {
         func_801E3160();
     }

@@ -140,7 +140,7 @@ static u8 D_801F34B4[2380] = {
 /* Current work slot; the payload starts null. */
 static AreaSlotWork* D_801F3E00 = 0;
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     SYS_DISPATCH_BYTE(s_WorkStates, TASK_BYTES[0x1]);
 }
 
@@ -317,16 +317,16 @@ MATCH void func_801F318C(s16 radius) {
     GFX_AddPrim(3u, 0x0Cu);
     Area_SetCameraMatrix(scratch);
 
-    pos[0] = g_Task->x.fixed;
-    pos[1] = g_Task->y.fixed;
-    pos[2] = g_Task->z.fixed;
+    pos[0] = g_Task->pos.x.fixed;
+    pos[1] = g_Task->pos.y.fixed;
+    pos[2] = g_Task->pos.z.fixed;
     Area_ProjectPoint(pos, &center);
     D_800E4A00 = center;
 
     ring   = MEM_PTR(ScreenPoint, 0x800E4A00u);
-    pos[0] = g_Task->x.fixed + ((radius * rcos(65408)) >> 4);
-    pos[1] = g_Task->y.fixed + ((radius * rsin(65408)) >> 4);
-    pos[2] = g_Task->z.fixed;
+    pos[0] = g_Task->pos.x.fixed + ((radius * rcos(65408)) >> 4);
+    pos[1] = g_Task->pos.y.fixed + ((radius * rsin(65408)) >> 4);
+    pos[2] = g_Task->pos.z.fixed;
     Area_ProjectPoint(pos, &point);
 
     do {
@@ -336,9 +336,9 @@ MATCH void func_801F318C(s16 radius) {
         setXY2(primitive, center.x, center.y, point.x, point.y);
 
         angle += 128;
-        pos[0] = g_Task->x.fixed + ((radius * rcos((u16)angle)) >> 4);
-        pos[1] = g_Task->y.fixed + ((radius * rsin((u16)angle)) >> 4);
-        pos[2] = g_Task->z.fixed;
+        pos[0] = g_Task->pos.x.fixed + ((radius * rcos((u16)angle)) >> 4);
+        pos[1] = g_Task->pos.y.fixed + ((radius * rsin((u16)angle)) >> 4);
+        pos[2] = g_Task->pos.z.fixed;
         Area_ProjectPoint(pos, &point);
 
         primitive->x2 = point.x;

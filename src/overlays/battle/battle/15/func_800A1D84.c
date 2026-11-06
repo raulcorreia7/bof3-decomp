@@ -27,17 +27,16 @@ typedef struct BattleBlock {
  * rematerialised per loop and the frame drops from 0x30 to the retail 0x20. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A1D84(void) {
-    s32 record_index;
-    s32 row_offset;
-    u8  i;
-    u8  row_index;
-    /* FAKE: pin keeps the active index address in the retail s2 home. */
-    MATCH_FAKE_PIN(volatile u8*, active, "s2");
-    u8* cell;
-    u8* dest;
-    u8* src;
-    u8* dst;
-    u8  timer;
+    s32          record_index;
+    s32          row_offset;
+    u8           i;
+    u8           row_index;
+    volatile u8* active;
+    u8*          cell;
+    u8*          dest;
+    u8*          src;
+    u8*          dst;
+    u8           timer;
 
     active    = &g_BattleTarget;
     row_index = *active;
@@ -86,7 +85,7 @@ NON_MATCHING void func_800A1D84(void) {
                 i += 1;
             } while ((u32)(i & BYTE_MASK) < (u8)g_BattlePartyCount);
         }
-        g_BattleTargetRecord[2] = (s16) - (s16) * (D_80145F20 + (*active * BATTLE_PARTY_STRIDE));
+        g_BattleTargetRecord->hp_change = (s16) - (s16) * (D_80145F20 + (*active * BATTLE_PARTY_STRIDE));
     }
 }
 #else

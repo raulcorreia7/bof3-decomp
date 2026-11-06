@@ -46,15 +46,15 @@ MATCH void func_801A6C98(u8* record) {
     if (script[1] != 0) {
         x |= 0x8000;
     }
-    work->x.fixed = x;
+    work->pos.x.fixed = x;
 
     y = script[4] << 16;
     if (script[3] != 0) {
         y |= 0x8000;
     }
-    work->y.fixed        = y;
-    COORD_INT(g_Task->z) = Area_SampleHeight(work->x.fixed, y);
-    data                 = (WorkScript*)script;
+    work->pos.y.fixed        = y;
+    COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, y);
+    data                     = (WorkScript*)script;
 
     work                   = g_Task;
     work->header.mode      = data->unk_05;

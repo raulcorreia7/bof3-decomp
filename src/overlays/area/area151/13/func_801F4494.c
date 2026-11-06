@@ -15,8 +15,8 @@ MATCH void func_801F4494(void) {
     }
 
     work = (Actor*)g_Task;
-    work->x.fixed += work->vx;
-    work->y.fixed += work->vy;
+    work->pos.x.fixed += work->vx;
+    work->pos.y.fixed += work->vy;
     func_8014D978();
     func_8014D290();
 }

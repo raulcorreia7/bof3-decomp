@@ -8,14 +8,14 @@ MATCH void func_801F5380(void) {
     func_801C3598();
     func_801C2BEC();
     if (g_GameRequestFlags & 1) {
-        if ((Area_GetCellCode((s32)COORD_INT(g_Task->x), (s32)COORD_INT(g_Task->y)) & 0xFF) == 0xAF) {
+        if ((Area_GetCellCode((s32)COORD_INT(g_Task->pos.x), (s32)COORD_INT(g_Task->pos.y)) & 0xFF) == 0xAF) {
             Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
             g_GameEntryMode   = 0;
             g_GameRequestKind = 0xC;
             return;
         }
-        if ((Area_GetCellCode((s32)COORD_INT(g_Task->x), (s32)COORD_INT(g_Task->y)) & 0xFF) == 0xC0) {
-            func_801A0048(COORD_INT(g_Task->x), COORD_INT(g_Task->y));
+        if ((Area_GetCellCode((s32)COORD_INT(g_Task->pos.x), (s32)COORD_INT(g_Task->pos.y)) & 0xFF) == 0xC0) {
+            func_801A0048(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
         }
     }
     value2     = D_80143F22;
@@ -25,9 +25,9 @@ MATCH void func_801F5380(void) {
         D_80143F22 = value2 + 2;
     }
     Actor_StopMoving();
-    if (func_801A79A4(g_Task->x.fixed, g_Task->y.fixed) == 0) {
+    if (func_801A79A4(g_Task->pos.x.fixed, g_Task->pos.y.fixed) == 0) {
         func_801C329C();
-        if (!(g_GameFlags & 0x100) && !(g_AreaWalkFlags & 0x40)) {
+        if (!(g_GameFlags & GAME_FLAG_SCRIPT_ACTIVE) && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING)) {
             value = D_8014625C & (D_80145AB6 | (g_InputMasks | 0xF000));
             if (value != 0) {
                 func_801F4B4C(value);

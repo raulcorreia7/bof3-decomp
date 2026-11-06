@@ -5,5 +5,5 @@ MATCH void func_8009F758(void) {
         g_BattleState |= BATTLE_STATE_DAMAGE_APPLIED;
     }
     *(s16*)&D_801EC2EE              = 0;
-    ((s16*)g_BattleTargetRecord)[2] = (Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, 0xFFFF) / 4);
+    g_BattleTargetRecord->hp_change = (Battle_CalcDamage(g_BattleActiveBattler, g_BattleTarget, 0xFFFF) / 4);
 }

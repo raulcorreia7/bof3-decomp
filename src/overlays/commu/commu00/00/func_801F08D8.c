@@ -16,15 +16,15 @@ MATCH void func_801F08D8(u8 source_index, u8 task_index) {
     ACTOR_CLEAR_STEP();
     /* Each pair is written value half first, then the zero half the caller
      * reads back as one 32-bit coordinate word. */
-    COORD_INT(g_Task->x)  = D_801F25A4[index][D_801F2928[index]][0];
-    COORD_FRAC(g_Task->x) = 0;
-    variant_index         = index;
-    COORD_INT(g_Task->y)  = D_801F25A4[index][D_801F2928[index]][1];
-    COORD_FRAC(g_Task->y) = 0;
-    distance              = Area_SampleHeight(*((u32*)(&COORD_FRAC(g_Task->x))), *((u32*)(&COORD_FRAC(g_Task->y))));
-    COORD_INT(g_Task->z)  = distance;
-    g_Task->direction_08  = D_801F25A4[variant_index][D_801F2928[variant_index]][2];
-    g_Task->unk_48        = 0;
+    COORD_INT(g_Task->pos.x)  = D_801F25A4[index][D_801F2928[index]][0];
+    COORD_FRAC(g_Task->pos.x) = 0;
+    variant_index             = index;
+    COORD_INT(g_Task->pos.y)  = D_801F25A4[index][D_801F2928[index]][1];
+    COORD_FRAC(g_Task->pos.y) = 0;
+    distance = Area_SampleHeight(*((u32*)(&COORD_FRAC(g_Task->pos.x))), *((u32*)(&COORD_FRAC(g_Task->pos.y))));
+    COORD_INT(g_Task->pos.z) = distance;
+    g_Task->direction_08     = D_801F25A4[variant_index][D_801F2928[variant_index]][2];
+    g_Task->unk_48           = 0;
     Area_FindSceneRecord(D_801F24FC[g_Task->unk_05 % 6]);
     func_8015BAC4(g_Task->direction_08);
     switch (g_FairyRooms[variant_index * 8]) {

@@ -5,9 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F6D08(void) {
-    /* FAKE: retail reads the handler record from entry $v0; the pin is the
-       entry-register residual (identical bytes to the unpinned 84.46%). */
-    MATCH_REG(u8*, entity, "v0");
+    u8* entity;
 
     D_801FA180[entity[1]]();
 }
@@ -24,8 +22,8 @@ MATCH void func_801F6D44(void) {
     work->gravity          = 0x2200000;
     FIELD(s32, work, 0x24) = 0x568000;
     FIELD(s32, work, 0x28) = 0x128000;
-    work->x.fixed          = 0x4000;
-    work->y.fixed          = 0x2200000;
+    work->pos.x.fixed      = 0x4000;
+    work->pos.y.fixed      = 0x2200000;
     func_801F747C();
     g_Task->unk_09 = 8;
     g_Task->header.mode += 1;

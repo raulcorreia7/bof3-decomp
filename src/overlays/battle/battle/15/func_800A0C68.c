@@ -6,8 +6,7 @@
 MATCH void func_800A0C68(void) {
     /* FAKE: retail reserves 8 stack bytes that no statement uses. */
     STACK_PADS(u8, 8);
-    /* FAKE: p stays in retail v1. */
-    MATCH_REG(u8*, p, "v1");
+    u8* p;
     u8* base;
     s32 total;
     MATCH_REG(u8, i, "s2");
@@ -36,5 +35,5 @@ MATCH void func_800A0C68(void) {
     if (total < -9999) {
         total = -9999;
     }
-    ((s16*)g_BattleTargetRecord)[2] = total;
+    g_BattleTargetRecord->hp_change = total;
 }

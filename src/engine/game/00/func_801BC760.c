@@ -36,15 +36,23 @@ NON_MATCHING s32 func_801BC760(void) {
                 g_Task->unk_06 = 0;
             }
         } else if ((u8)g_PartySize >= 3U) {
-            da = g_Task->x.fixed - goal_x;
-            da = ABS(da);
-            db = g_Task->y.fixed - goal_y;
-            db = ABS(db);
+            da = g_Task->pos.x.fixed - goal_x;
+            if (da < 0) {
+                da = -da;
+            }
+            db = g_Task->pos.y.fixed - goal_y;
+            if (db < 0) {
+                db = -db;
+            }
             dsum = da + db;
             dc   = (D_80146144 + (D_8014611C * D_80146119)) - goal_x;
-            dc = ABS(dc);
+            if (dc < 0) {
+                dc = -dc;
+            }
             dd = (D_80146148 + (D_80146120 * D_80146119)) - goal_y;
-            dd = ABS(dd);
+            if (dd < 0) {
+                dd = -dd;
+            }
             if ((dc + dd) < dsum) {
                 g_Task->unk_06 = 2;
             } else {
@@ -63,19 +71,25 @@ NON_MATCHING s32 func_801BC760(void) {
     if (row->unk_70 != 0) {
         span = 0x20000;
     }
-    dx = g_Task->x.fixed - tgt_x;
-    dx = ABS(dx);
+    dx = g_Task->pos.x.fixed - tgt_x;
+    if (dx < 0) {
+        dx = -dx;
+    }
     if (span >= dx) {
-        dy = g_Task->y.fixed - tgt_y;
-        dy = ABS(dy);
+        dy = g_Task->pos.y.fixed - tgt_y;
+        if (dy < 0) {
+            dy = -dy;
+        }
         if (span >= dy) {
             return 1;
         }
     }
     func_801BCD60(near_a, near_b);
-    dx = g_Task->x.fixed - near_a;
-    dx = ABS(dx);
-    if (dx <= 0x60000 && (dy = g_Task->y.fixed - near_b, dy = ABS(dy)) <= 0x60000) {
+    dx = g_Task->pos.x.fixed - near_a;
+    if (dx < 0) {
+        dx = -dx;
+    }
+    if (dx <= 0x60000 && (dy = g_Task->pos.y.fixed - near_b, dy = dy < 0 ? -dy : dy) <= 0x60000) {
         if (dx > 0x20000 || dy > 0x20000) {
             count = *(&D_80145FAC + (g_Task->unk_06 * BATTLE_PARTY_STRIDE)) + 1;
         } else {
@@ -98,13 +112,21 @@ NON_MATCHING s32 func_801BC760(void) {
     result = func_801BC4D0();
     if ((result & BYTE_MASK) != 1) {
         dx = SP_REF(s32, 0x8) - near_a;
-        dx = ABS(dx);
+        if (dx < 0) {
+            dx = -dx;
+        }
         dy = SP_REF(s32, 0xC) - near_b;
-        dy = ABS(dy);
-        goal_x = g_Task->x.fixed - near_a;
-        goal_x = ABS(goal_x);
-        goal_y = g_Task->y.fixed - near_b;
-        goal_y = ABS(goal_y);
+        if (dy < 0) {
+            dy = -dy;
+        }
+        goal_x = g_Task->pos.x.fixed - near_a;
+        if (goal_x < 0) {
+            goal_x = -goal_x;
+        }
+        goal_y = g_Task->pos.y.fixed - near_b;
+        if (goal_y < 0) {
+            goal_y = -goal_y;
+        }
         if ((goal_x + goal_y) < (dx + dy)) {
             g_Task->route_index_08 = dir;
             result                 = 1;
@@ -122,8 +144,8 @@ NON_MATCHING s32 func_801BC760(void) {
             if (!(func_801C3E40(near_a, near_b, g_Task->state_70.byte, Area_ReadHeight(near_a, near_b)) & BYTE_MASK)) {
                 g_GameState = saved;
                 *(u8*)g_Task |= ACTOR_FLAG_HIDDEN;
-                g_Task->x.fixed = near_a;
-                g_Task->y.fixed = near_b;
+                g_Task->pos.x.fixed = near_a;
+                g_Task->pos.y.fixed = near_b;
                 g_GameState->flags_12C.s8_value &= 0xFE;
                 g_GameState->flags_12C.s8_value |= (D_80145FBC & 1);
                 COORD_INT(g_Task->depth) = Area_ReadHeight(near_a, near_b);

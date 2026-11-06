@@ -21,19 +21,23 @@ MATCH void func_801BD394(void) {
     work  = g_Task;
     slot  = (Actor*)((u8*)g_BattlePartyBattlers + work->unk_06 * BATTLE_PARTY_STRIDE);
     count = slot->unk_09;
-    x     = slot->x.fixed + slot->vx * count;
-    y     = slot->y.fixed + slot->vy * count;
+    x     = slot->pos.x.fixed + slot->vx * count;
+    y     = slot->pos.y.fixed + slot->vy * count;
     range = 0x18000;
     if (slot->state_70.byte != 0) {
         range = 0x20000;
     }
-    dx = work->x.fixed - x;
-    dx = ABS(dx);
+    dx = work->pos.x.fixed - x;
+    if (dx < 0) {
+        dx = -dx;
+    }
     if (dx > range) {
         flag = 1;
     } else {
-        dy = work->y.fixed - y;
-        dy = ABS(dy);
+        dy = work->pos.y.fixed - y;
+        if (dy < 0) {
+            dy = -dy;
+        }
         if (dy > range) {
             flag = 1;
         }

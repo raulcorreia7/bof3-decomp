@@ -16,9 +16,9 @@ MATCH s32 func_801A1A58(Actor* actor) {
     route  = entity->direction_08;
     /* FAKE: retail loads the route byte before the coordinate loads. */
     MATCH_BARRIER();
-    dx = entity->x.fixed;
+    dx = entity->pos.x.fixed;
     dx += g_FacingSteps[(route & 7)].x;
-    dy_sum = entity->y.fixed;
+    dy_sum = entity->pos.y.fixed;
     dy_sum += D_80181B98[(route & 7) * 2];
     dx = (dx >> 16) - FIELD(s16, entity, 0x82u);
     /* FAKE: retail loads the x bound after the delta. */

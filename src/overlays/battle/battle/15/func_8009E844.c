@@ -18,12 +18,12 @@ MATCH void func_8009E844(void) {
         if (((rand() & 3) != 0) && ((base & 0x4000) != 0)) {
             battler = LOBU(*slot);
             if (BATTLER_IS_PLAYER(battler)) {
-                ((s16*)g_BattleTargetRecord)[2] = (-D_80145F20[battler][0] >> 2);
+                g_BattleTargetRecord->hp_change = (-D_80145F20[battler][0] >> 2);
                 /* FAKE: retail keeps the selection store before the counter update. */
                 MATCH_FAKE_BARRIER();
                 g_BattleLivingPartyCount++;
             } else {
-                ((s16*)g_BattleTargetRecord)[2] = (-D_801EB6D0[battler - 3u][0] >> 2);
+                g_BattleTargetRecord->hp_change = (-D_801EB6D0[battler - 3u][0] >> 2);
                 /* FAKE: retail keeps the selection store before the counter update. */
                 MATCH_FAKE_BARRIER();
                 g_BattleLivingEnemyCount++;
@@ -31,6 +31,6 @@ MATCH void func_8009E844(void) {
             func_800A36F0(g_BattleTarget, 0x4000);
             return;
         }
-        ((s8*)g_BattleTargetRecord)[8] = 1;
+        g_BattleTargetRecord->target_flags = 1;
     }
 }

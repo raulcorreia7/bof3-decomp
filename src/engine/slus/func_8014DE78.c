@@ -30,19 +30,25 @@ NON_MATCHING s8 func_8014DE78(void) {
             continue;
         }
         range = (s8)g_Actors[i].range_54.table[2] << 15;
-        dist  = g_Actors[i].x.fixed - self->x.fixed;
-        dist = ABS(dist);
+        dist  = g_Actors[i].pos.x.fixed - self->pos.x.fixed;
+        if (dist < 0) {
+            dist = -dist;
+        }
         if (range < dist) {
             continue;
         }
-        dist = g_Actors[i].y.fixed - self->y.fixed;
-        dist = ABS(dist);
+        dist = g_Actors[i].pos.y.fixed - self->pos.y.fixed;
+        if (dist < 0) {
+            dist = -dist;
+        }
         if (range < dist) {
             continue;
         }
         range = COORD_INT(self->depth);
         dist  = range - COORD_INT(g_Actors[i].depth);
-        dist = ABS(dist);
+        if (dist < 0) {
+            dist = -dist;
+        }
         if (dist < 769) {
             return i;
         }

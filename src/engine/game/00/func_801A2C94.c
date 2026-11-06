@@ -12,12 +12,12 @@ MATCH u8 func_801A2C94(Actor* actor) {
     entity = actor;
     work   = g_Task;
     route  = work->direction_08;
-    delta  = work->x.fixed;
+    delta  = work->pos.x.fixed;
     dx     = D_80145EC4 - delta;
     dx = ABS(dx);
     if ((dx >> 0x10) < entity->ext.bounds.half_width) {
         dy    = D_80145EC8;
-        delta = work->y.fixed;
+        delta = work->pos.y.fixed;
         dy -= delta;
         dy = ABS(dy);
         if ((dy >> 0x10) < entity->ext.bounds.half_height) {

@@ -56,7 +56,7 @@ NON_MATCHING void func_801D43EC(void) {
             index              = g_BattleActiveBattler;
             if ((u8)index < 3U) {
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_80145F20 + index * 0x140 + 3);
-                flags = g_BattlePartyBattlers[index].damage_flags.value & COMBATANT_FLAG_REPRISAL;
+                flags = g_BattlePartyBattlers[index].turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
             } else {
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_801EB6D0 + 3);
                 flags                         = *(u32*)(D_801EB730 + (index - 3) * 0x118) & 0x8000;

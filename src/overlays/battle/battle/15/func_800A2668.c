@@ -11,7 +11,7 @@ MATCH void func_800A2668(void) {
     /* FAKE: statement boundary keeps the retail register order and schedule. */
     ORDER_LOCK(selection_kind = g_BattleTarget);
     half                            = Battle_CalcDamage(battler_index, selection_kind, 0xFFFF) / 2;
-    ((u16*)g_BattleTargetRecord)[2] = half;
+    g_BattleTargetRecord->hp_change = half;
     if (half != 0 && func_800A3A10(*battler, g_BattleTarget) == 0) {
         func_800A4238(4);
     }

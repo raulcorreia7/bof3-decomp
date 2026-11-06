@@ -20,9 +20,9 @@ NON_MATCHING void func_8019B704(void) {
             g_Task->unk_0C = saved;
             g_Task->unk_18 = 0;
         }
-        total           = g_Task->x.fixed + g_Task->unk_0C;
-        g_Task->x.fixed = total;
-        delta           = total - D_80145EC4;
+        total               = g_Task->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.x.fixed = total;
+        delta               = total - D_80145EC4;
     } else {
         saved          = g_Task->unk_10;
         acc            = saved + g_Task->unk_1C;
@@ -32,9 +32,9 @@ NON_MATCHING void func_8019B704(void) {
             g_Task->unk_10 = saved;
             g_Task->unk_1C = 0;
         }
-        total           = g_Task->y.fixed + g_Task->unk_10;
-        g_Task->y.fixed = total;
-        delta           = total - D_80145EC8;
+        total               = g_Task->pos.y.fixed + g_Task->unk_10;
+        g_Task->pos.y.fixed = total;
+        delta               = total - D_80145EC8;
     }
     delta = ABS(delta);
     if ((g_Task->unk_18 == 0) && (g_Task->unk_1C == 0)) {
@@ -63,7 +63,7 @@ NON_MATCHING void func_8019B704(void) {
         g_AreaCameraStep = 0x40;
         g_Task->unk_09   = 0x14;
     }
-    dist = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed);
+    dist = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (dist < (s16)COORD_INT(g_Task->depth)) {
         g_Task->unk_20 = -8;
     } else {
@@ -72,7 +72,7 @@ NON_MATCHING void func_8019B704(void) {
         COORD_INT(g_Task->depth) = (u16)dist;
     }
     if ((func_8019C028() & BYTE_MASK) == 0) {
-        if ((func_8019C344(g_Task->x.fixed, g_Task->y.fixed) & BYTE_MASK) != 0) {
+        if ((func_8019C344(g_Task->pos.x.fixed, g_Task->pos.y.fixed) & BYTE_MASK) != 0) {
             g_Task->unk_06 = 1;
             g_Task->unk_07 = 2;
         } else if ((func_8019C1E4() & BYTE_MASK) != 0) {
@@ -82,7 +82,7 @@ NON_MATCHING void func_8019B704(void) {
         if (g_Task->unk_06 != 0) {
             switch (g_Task->unk_07) {
                 case 0:
-                    if ((COORD_FRAC(g_Task->x) == 0) && (COORD_FRAC(g_Task->y) == 0)) {
+                    if ((COORD_FRAC(g_Task->pos.x) == 0) && (COORD_FRAC(g_Task->pos.y) == 0)) {
                         g_Task->unk_07 = 0;
                         g_Task->unk_0A = 0;
                         Actor_SelectScript(0);

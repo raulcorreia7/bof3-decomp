@@ -80,7 +80,7 @@ extern u8                           D_801463CB;
 extern volatile BattleSelectionType D_801CA71C[];
 /* D_801EB0B0 */
 extern s8                           g_BattlePanelOffsets[];
-extern u8*                          D_801EB4D8;
+extern BattleTurn*                  D_801EB4D8;
 extern u8                           g_BattleEventSlots[];
 extern u8                           D_801EB5A8;
 extern u8                           D_801EB5B1[];

@@ -18,12 +18,12 @@ MATCH void func_801BBE98(void) {
     work2->option_flags = 0;
 
     work2 = g_Task;
-    ret   = Area_ReadHeight(work2->x.fixed, work2->y.fixed);
+    ret   = Area_ReadHeight(work2->pos.x.fixed, work2->pos.y.fixed);
 
     work                      = g_Task;
     work->tint.bytes.unk_5D   = 0;
     ptr                       = g_Task;
-    COORD_INT(work->z)        = ret;
+    COORD_INT(work->pos.z)    = ret;
     ptr->tint.bytes.unk_5E    = 0;
     g_Task->tint.bytes.unk_5F = 0;
     g_Task->tint.bytes.flags  = 2;

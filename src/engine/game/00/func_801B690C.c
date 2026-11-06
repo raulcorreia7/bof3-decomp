@@ -5,18 +5,18 @@ MATCH void func_801B690C(void) {
     Actor* work;
     u16    value;
 
-    if ((Area_GetCellCode(COORD_INT(g_Task->x), COORD_INT(g_Task->y)) & BYTE_MASK) != 0xA0) {
+    if ((Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) != 0xA0) {
         return;
     }
 
     entry = func_8019A1D4();
     work  = g_Task;
     for (;;) {
-        if (COORD_INT(work->x) != entry[0]) {
+        if (COORD_INT(work->pos.x) != entry[0]) {
             entry += 4;
             continue;
         }
-        if (COORD_INT(work->y) != entry[1]) {
+        if (COORD_INT(work->pos.y) != entry[1]) {
             entry += 4;
             continue;
         }

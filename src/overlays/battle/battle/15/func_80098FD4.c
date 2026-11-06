@@ -5,14 +5,14 @@ MATCH void func_80098FD4(void) {
     u8* group;
 
     SND_PlayCue(EMI_CUE_ID(1, 4));
-    cursor                 = &D_8014857C;
-    group                  = cursor - 2;
-    g_BattleSelectionLatch = 0u;
-    D_801EB4D8[1]          = 5u;
-    g_BattleMessageSlot[1] = 2u;
+    cursor                   = &D_8014857C;
+    group                    = cursor - 2;
+    g_BattleSelectionLatch   = 0u;
+    D_801EB4D8->command.type = 5u;
+    g_BattleMessageSlot[1]   = 2u;
     g_BattleCommandCount += 1u;
     D_801EB5B1[((D_801EC328 - 1) & 0xF) * 8] = 1u;
-    D_801EB4D8[0xA]                          = *cursor;
+    D_801EB4D8->choice                       = *cursor;
     if (D_801C8950[*group][*cursor] >= 2u) {
         D_801C8950[*group][*cursor] -= 1u;
     } else {

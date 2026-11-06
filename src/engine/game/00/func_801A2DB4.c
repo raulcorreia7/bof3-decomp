@@ -11,13 +11,17 @@ MATCH u8 func_801A2DB4(Actor* entity) {
     work  = g_Task;
     route = work->direction_08;
     delta = D_80145EC4;
-    dx    = work->x.fixed - delta;
-    dx = ABS(dx);
+    dx    = work->pos.x.fixed - delta;
+    if (dx < 0) {
+        dx = -dx;
+    }
     if ((dx >> 0x10) < entity->ext.bounds.half_width) {
-        dy    = work->y.fixed;
+        dy    = work->pos.y.fixed;
         delta = D_80145EC8;
         dy -= delta;
-        dy = ABS(dy);
+        if (dy < 0) {
+            dy = -dy;
+        }
         if ((dy >> 0x10) < entity->ext.bounds.half_height) {
             status = func_801A2ED4(entity, 0U);
             if ((status & BYTE_MASK) == GAME_NONE) {

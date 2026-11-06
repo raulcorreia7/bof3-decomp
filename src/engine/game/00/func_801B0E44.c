@@ -25,14 +25,14 @@ NON_MATCHING s32 func_801B0E44(void) {
     g_Task->unk_09 = (u8)(g_Task->unk_09 / (u32)(divisor & BYTE_MASK));
     if (g_Task->state_70.byte == 0) {
         SP_REF(s32, 0x8) =
-            g_Task->x.fixed + g_FacingOffsets[g_Task->route_index_08].pos.x.raw * divisor * g_Task->unk_09;
+            g_Task->pos.x.fixed + g_FacingOffsets[g_Task->route_index_08].pos.x.raw * divisor * g_Task->unk_09;
         SP_REF(s32, 0xC) =
-            g_Task->y.fixed + g_FacingOffsets[g_Task->route_index_08].pos.y.raw * divisor * g_Task->unk_09;
+            g_Task->pos.y.fixed + g_FacingOffsets[g_Task->route_index_08].pos.y.raw * divisor * g_Task->unk_09;
     } else {
         SP_REF(s32, 0x8) =
-            g_Task->x.fixed + g_FacingOffsets[g_Task->route_index_08].pos.x.raw * divisor * g_Task->unk_09 * 2;
+            g_Task->pos.x.fixed + g_FacingOffsets[g_Task->route_index_08].pos.x.raw * divisor * g_Task->unk_09 * 2;
         SP_REF(s32, 0xC) =
-            g_Task->y.fixed + g_FacingOffsets[g_Task->route_index_08].pos.y.raw * divisor * g_Task->unk_09 * 2;
+            g_Task->pos.y.fixed + g_FacingOffsets[g_Task->route_index_08].pos.y.raw * divisor * g_Task->unk_09 * 2;
     }
     if (g_GameStateIndex != GAME_REQUEST_SCENE_CAMERA) {
         if (Area_IsStepBlocked(SP_REF(s32, 0x8), SP_REF(s32, 0xC)) != 0) {

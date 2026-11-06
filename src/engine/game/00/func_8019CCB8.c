@@ -22,8 +22,8 @@ MATCH void func_8019CCB8(void) {
             g_Task->vy           = g_FacingOffsets[g_Task->direction_08].y * 2;
             g_Task->unk_09       = 0x10;
             step                 = g_Task->unk_09;
-            move_x               = g_Task->x.fixed;
-            move_y               = g_Task->y.fixed;
+            move_x               = g_Task->pos.x.fixed;
+            move_y               = g_Task->pos.y.fixed;
             move_x += g_Task->vx * step;
             move_y += g_Task->vy * step;
             func_8019D4BC();

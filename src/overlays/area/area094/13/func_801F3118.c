@@ -1,6 +1,6 @@
 #include "area094_13.h"
 
-MATCH void func_801F3118(void) {
+MATCH s32 func_801F3118(void) {
     u8  index;
     s16 y;
     s16 x;

@@ -99,7 +99,7 @@ NON_MATCHING void func_800A0EC4(void) {
         } else {
             value = D_801EB6C4[g_BattleTarget - 3][0];
         }
-        *(s16*)(g_BattleTargetRecord + 2) = (s16)(value - 1);
+        g_BattleTargetRecord->hp_change = (s16)(value - 1);
     }
 }
 #else

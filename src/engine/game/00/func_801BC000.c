@@ -81,7 +81,8 @@ MATCH void func_801BC000(void) {
                     if (g_GameState->slot_index_79 == 2) {
                         tmp10 = g_Task;
                         tmp3  = tmp10->unk_09;
-                        Area_ReadHeight(tmp10->x.fixed + (tmp10->vx * tmp3), tmp10->y.fixed + (tmp10->vy * tmp3));
+                        Area_ReadHeight(tmp10->pos.x.fixed + (tmp10->vx * tmp3),
+                                        tmp10->pos.y.fixed + (tmp10->vy * tmp3));
                     }
                     tmp11         = g_Task;
                     tmp11->unk_09 = (tmp11->unk_09 - 1);

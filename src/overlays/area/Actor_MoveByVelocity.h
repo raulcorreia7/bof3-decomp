@@ -17,8 +17,8 @@ MATCH void Actor_MoveByVelocity(void) {
     }
 
     work = g_Task;
-    work->x.fixed += work->vx;
-    work->y.fixed += work->vy;
+    work->pos.x.fixed += work->vx;
+    work->pos.y.fixed += work->vy;
     func_8014D978();
     func_8014D290();
 }

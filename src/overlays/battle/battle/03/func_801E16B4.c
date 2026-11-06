@@ -6,9 +6,9 @@ MATCH void func_801E16B4(void) {
 
     if (EMI_LoaderIsReady() != 0) {
         work  = g_GameState;
-        state = work->command.type;
+        state = work->turn.command.type;
         if (state == 4) {
-            if (!(work->action_flags.value & 2)) {
+            if (!(work->turn.action_flags.value & 2)) {
                 if (!(func_801DDF50(work->chr.character_id, D_801463CD) & BYTE_MASK)) {
                     g_Task->unk_09 = 0x1E;
                 } else {
@@ -26,7 +26,7 @@ MATCH void func_801E16B4(void) {
         }
         if (!(D_801CA71C[g_BattleActionId].mask & 0x800)) {
             work = g_GameState;
-            if (work->action_flags.value & 2) {
+            if (work->turn.action_flags.value & 2) {
                 g_Task->unk_09 = D_801EB23C[g_DragonForm];
             } else {
                 g_Task->unk_09 = s_BattleCharacterStepIds[work->chr.character_id];

@@ -3,12 +3,12 @@
 /* advances the record halfword toward its limit by delta, clamping
  * at the limit.
  */
-MATCH s32 Char_RestoreAP(s32 character_index, s32 amount, s32 mode) {
+MATCH s32 Char_RestoreAP(s32 character_index, s32 amount, s32 use_battle_copy) {
     Character* rec;
     s32        cur;
     s32        limit;
 
-    if ((mode & BYTE_MASK) == 0) {
+    if ((use_battle_copy & BYTE_MASK) == 0) {
         rec = &g_Characters[character_index & BYTE_MASK];
     } else {
         rec = (Character*)&D_80145F04[(character_index & BYTE_MASK) * 0x140];

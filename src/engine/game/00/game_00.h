@@ -92,16 +92,17 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 /* Run the gated cell test and arm the work record on a hit. Kept: it returns
  * from the member and takes the flag value after a branch; tested as an inline,
  * the bytes move. */
-#define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                                    \
-    if ((g_GameFlags & 0x400) == 0) {                                                                             \
-        if ((func_801C39D8(g_Task->x.fixed, g_Task->y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != 0) { \
-            g_Task->header.mode = 2;                                                                              \
-            g_Task->header.step = flags;                                                                          \
-            g_Task->unk_03      = 0;                                                                              \
-            g_Task->unk_04      = 0;                                                                              \
-            return 1;                                                                                             \
-        }                                                                                                         \
-    }                                                                                                             \
+#define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                                       \
+    if ((g_GameFlags & 0x400) == 0) {                                                                                \
+        if ((func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != \
+            0) {                                                                                                     \
+            g_Task->header.mode = 2;                                                                                 \
+            g_Task->header.step = flags;                                                                             \
+            g_Task->unk_03      = 0;                                                                                 \
+            g_Task->unk_04      = 0;                                                                                 \
+            return 1;                                                                                                \
+        }                                                                                                            \
+    }                                                                                                                \
     return 0;
 
 /* Test the map cells around a 16.16 point for the wanted code. Kept: the two
@@ -757,7 +758,7 @@ void    func_801A253C(Actor* entity);
 void    func_801A271C(void* record);
 /* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`) and the callee never reads it; with (void)
  * that instruction is dropped (func_801A253C) or the frame shrinks by 8 bytes (func_801A1384). */
-void    func_801A275C();
+void    func_801A275C(void* unused);
 void    func_801A2788(s32 handler_index);
 void    func_801A27C4(Actor* entity);
 u8      func_801A2A04(Actor* entity);
@@ -1196,7 +1197,7 @@ void    func_801E0BD0(void);
 void    func_801E0C20(void);
 void    func_801E0C40(void);
 void    func_801E3E88(void);
-s32     func_801F2C04();
+s32     func_801F2C04(void);
 void    func_801F2C14(void);
 void    func_801F2C18(void);
 void    func_801F2C1C(void);

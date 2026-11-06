@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801A3D1C(void) {
+MATCH void func_801A3D1C(void* unused) {
     Actor* work;
     s32    slot;
     s32    index;
