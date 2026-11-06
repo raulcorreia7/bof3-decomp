@@ -408,7 +408,7 @@ MATCH void func_801F2DF8(const void* sprite) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);
-    PSX_SET_SEMI_TRANSPARENT(primitive);
+    SetSemiTrans(primitive, 1);
 
     Area_ProjectPoint(object, screen);
     size[0] = VOL(u16, work->half_size);
@@ -688,7 +688,7 @@ MATCH void func_801F3944(const void* spin) {
     primitive = (POLY_G3*)g_GfxPrimCursor;
 
     SetPolyG3(primitive);
-    PSX_SET_SEMI_TRANSPARENT(primitive);
+    SetSemiTrans(primitive, 1);
     Area_ProjectPoint(work, &primitive->x0);
 
     point[0] =
@@ -851,7 +851,7 @@ MATCH s32 func_801F3E48(u8 shade) {
         prim = (LINE_F4*)g_GfxPrimCursor;
         src++;
         SetLineF4(prim);
-        PSX_SET_SEMI_TRANSPARENT(prim);
+        SetSemiTrans(prim, 1);
         setRGB0(prim, shade, shade, shade);
 
         verts[0].vx = *src++;

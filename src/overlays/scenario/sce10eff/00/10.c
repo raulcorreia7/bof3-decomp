@@ -318,7 +318,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
         quad[1].vy = quad[0].vy - band_height;
         primitive  = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(primitive);
-        PSX_SET_SEMI_TRANSPARENT(primitive);
+        SetSemiTrans(primitive, 1);
         setRGB0(primitive, cell[1], cell[1], cell[1]);
         setRGB1(primitive, shade, cell[1], 1);
         if (i == 1) {
@@ -338,7 +338,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             D_1F800014[3].vy -= band_height;
             primitive = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(primitive);
-            PSX_SET_SEMI_TRANSPARENT(primitive);
+            SetSemiTrans(primitive, 1);
             setRGB0(primitive, shade, ramp[0], 1);
             setRGB1(primitive, 1, 1, 1);
             if (i == 1) {
@@ -358,7 +358,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             D_1F800014[3].vy += ((s16)band_height) * 2;
             primitive = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(primitive);
-            PSX_SET_SEMI_TRANSPARENT(primitive);
+            SetSemiTrans(primitive, 1);
             setRGB0(primitive, shade, ramp[0], 1);
             setRGB1(primitive, ramp[0], ramp[0], ramp[0]);
             if (i == 1) {
@@ -378,7 +378,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             D_1F800014[3].vy += band_height;
             primitive = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(primitive);
-            PSX_SET_SEMI_TRANSPARENT(primitive);
+            SetSemiTrans(primitive, 1);
             setRGB0(primitive, 1, 1, 1);
             setRGB1(primitive, shade, ramp[0], 1);
             if (i == 1) {

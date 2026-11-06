@@ -48,7 +48,7 @@ NON_MATCHING void func_801D934C(s32 x, s32 y, s32 width, s32 height) {
     FIELD(s8, val8, 0x5u)   = (s8)val7;
     FIELD(s8, val8, 0x6u)   = (s8)val2;
     FIELD(u16, val8, 0xCu)  = (u16)stack_20;
-    PSX_SET_SEMI_TRANSPARENT(val8);
+    SetSemiTrans(val8, 1);
     GFX_AddPrim(2U, 0x18U);
     val8 = &g_GfxPrimCursor;
     val8 = (u8**)g_GfxPrimCursor;
@@ -60,7 +60,7 @@ NON_MATCHING void func_801D934C(s32 x, s32 y, s32 width, s32 height) {
     FIELD(s8, val8, 0x5u)  = (s8)val7;
     FIELD(s8, val8, 0x6u)  = (s8)val2;
     FIELD(u16, val8, 0xEu) = (u16)(stack_10 - 4);
-    PSX_SET_SEMI_TRANSPARENT(val8);
+    SetSemiTrans(val8, 1);
     GFX_AddPrim(2U, 0x10U);
     val8 = &g_GfxPrimCursor;
     val8 = (u8**)g_GfxPrimCursor;
@@ -78,7 +78,7 @@ NON_MATCHING void func_801D934C(s32 x, s32 y, s32 width, s32 height) {
     FIELD(s8, val8, 0x4u)   = val0;
     FIELD(s8, val8, 0x5u)   = (s8)val7;
     FIELD(s8, val8, 0x6u)   = (s8)val2;
-    PSX_SET_SEMI_TRANSPARENT(val8);
+    SetSemiTrans(val8, 1);
     GFX_AddPrim(2U, 0x18U);
 }
 #else

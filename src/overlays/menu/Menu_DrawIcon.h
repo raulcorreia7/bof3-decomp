@@ -23,6 +23,6 @@ MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mo
     sprt->u0 = u;
     setXY0(sprt, sprite_x, sprite_y);
     SetSprt(sprt);
-    PSX_SET_SEMI_TRANSPARENT(sprt);
+    SetSemiTrans(sprt, 1);
     GFX_AddPrim(1, 0x14);
 }

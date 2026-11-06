@@ -16,7 +16,7 @@ MATCH void Battle_DrawNumber(s16 x, s16 y, u8 palette, u16 value) {
             g_UiFormatBuffer[i] -= '0';
             prim       = (SPRT*)g_GfxPrimCursor;
             prim->clut = GetClut(palette * 16, 480);
-            PSX_SET_NEUTRAL_RGB(prim);
+            setRGB0(prim, 128, 128, 128);
             setXY0(prim, x, y);
             setUV0(prim, (g_UiFormatBuffer[i] * 8) - 80, 208);
             setWH(prim, 8, 8);

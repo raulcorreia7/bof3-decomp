@@ -15,7 +15,7 @@ MATCH void func_801DA078(s32 x, s32 y, s32 u_index) {
     sprite    = (SPRT*)g_GfxPrimCursor;
     setWH(sprite, 16, 8);
     sprite->clut = 0x7800;
-    PSX_SET_NEUTRAL_RGB(sprite);
+    setRGB0(sprite, 128, 128, 128);
     sprite->v0 = 216;
     sprite->u0 = texture_u;
     setXY0(sprite, x, y);

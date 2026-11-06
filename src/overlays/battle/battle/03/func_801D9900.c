@@ -9,6 +9,6 @@ MATCH void func_801D9900(void) {
     setWH(tile, 960, 240);
     setXY0(tile, 0, 0);
     setRGB0(tile, 40, 40, 40);
-    PSX_SET_SEMI_TRANSPARENT(tile);
+    SetSemiTrans(tile, 1);
     GFX_AddPrim(1, 0x10);
 }

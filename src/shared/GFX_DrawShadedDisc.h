@@ -16,7 +16,7 @@ MATCH void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_
     do {
         packet = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(packet);
-        PSX_SET_SEMI_TRANSPARENT(packet);
+        SetSemiTrans(packet, 1);
         next  = angle + 128;
         other = (next & ANGLE_MASK);
         setXY2(packet, x, y, (s16)(x + ((radius * rcos((u16)angle)) >> 0x0C)),

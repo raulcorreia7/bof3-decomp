@@ -43,7 +43,7 @@ MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
             setXY0(sprite, x, y);
             sprite->v0 = value;
             SetSprt(sprite);
-            PSX_SET_SEMI_TRANSPARENT(sprite);
+            SetSemiTrans(sprite, 1);
             GFX_AddPrim(1, 0x14);
             sprite = (SPRT*)g_GfxPrimCursor;
         }

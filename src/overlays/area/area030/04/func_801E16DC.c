@@ -14,6 +14,6 @@ MATCH void func_801E16DC(void) {
     primitive->w  = 320;
     setXY0(primitive, 0, 0);
     primitive->h = 240;
-    PSX_SET_SEMI_TRANSPARENT(primitive);
+    SetSemiTrans(primitive, 1);
     GFX_AddPrim(2, 0x10);
 }

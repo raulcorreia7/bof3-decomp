@@ -88,7 +88,7 @@ NON_MATCHING void func_801F4768(void) {
                     primitive = (POLY_FT4*)g_GfxPrimCursor;
                     SetPolyFT4(primitive);
                     SetShadeTex(primitive, 0);
-                    PSX_SET_SEMI_TRANSPARENT(primitive);
+                    SetSemiTrans(primitive, 1);
 
                     LOWU(primitive->x0) = *(const u32*)&source->x0;
                     LOWU(primitive->x1) = *(const u32*)&source->x1;

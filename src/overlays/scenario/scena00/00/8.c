@@ -136,7 +136,7 @@ MATCH void func_801F6E48(void) {
     setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0,
            ((g_FrameCount >> 2) & 0x15) + poly->y2, 16, ((g_FrameCount >> 2) & 0x15) + poly->y2);
 
-    PSX_SET_NEUTRAL_RGB(poly);
+    setRGB0(poly, 128, 128, 128);
 
     SetShadeTex(poly, 1);
 
@@ -676,7 +676,7 @@ MATCH void func_801F8360(void) {
         setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
         setRGB1(prim, shade, shade, shade);
         setRGB2(prim, shade, shade, shade);
-        PSX_SET_SEMI_TRANSPARENT(prim);
+        SetSemiTrans(prim, 1);
         GFX_AddPrim(g_Task->unk_29, sizeof(POLY_G3));
         PopMatrix();
         i = i + 1;
@@ -745,7 +745,7 @@ MATCH void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     setRGB0(prim, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0);
     setRGB1(prim, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1);
     setRGB2(prim, SCN_TRI_SHADE_V2, SCN_TRI_SHADE_V2, SCN_TRI_SHADE_V2);
-    PSX_SET_SEMI_TRANSPARENT(prim);
+    SetSemiTrans(prim, 1);
     GFX_AddPrim(g_Task->unk_29, sizeof(POLY_G3));
     PopMatrix();
 
@@ -899,7 +899,7 @@ MATCH void func_801F8BCC(void) {
     prim->clut  = GetClut(160, 483);
     prim->tpage = GetTPage(0, 1, 704, 256);
     SetShadeTex(prim, 0);
-    PSX_SET_SEMI_TRANSPARENT(prim);
+    SetSemiTrans(prim, 1);
     if (g_AreaDrawFlags != 0) {
         GFX_AddPrim(3U, 0x28U);
     }
@@ -975,7 +975,7 @@ MATCH void func_801F8D90(void) {
            ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0), 16,
            ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0));
 
-    PSX_SET_NEUTRAL_RGB(poly);
+    setRGB0(poly, 128, 128, 128);
 
     SetShadeTex(poly, 1);
 

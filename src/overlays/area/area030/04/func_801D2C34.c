@@ -24,7 +24,7 @@ MATCH void func_801D2C34(s16 arg0, s16 arg1, s8 arg2, u8 arg3) {
     primitive->x0   = (arg0 - 8);
     primitive->x1   = (arg0 + 8);
     primitive->y0   = arg1;
-    PSX_SET_NEUTRAL_RGB(primitive);
+    setRGB0(primitive, 128, 128, 128);
     primitive->y1 = arg1;
     primitive->x2 = primitive->x0;
     primitive->x3 = primitive->x1;

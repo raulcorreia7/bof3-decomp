@@ -12,7 +12,7 @@ MATCH void func_801F3BFC(const void* spin) {
     primitive = (POLY_G3*)g_GfxPrimCursor;
 
     SetPolyG3(primitive);
-    PSX_SET_SEMI_TRANSPARENT(primitive);
+    SetSemiTrans(primitive, 1);
     Area_ProjectPoint(work, &primitive->x0);
 
     point[0] =

@@ -21,7 +21,7 @@ MATCH void func_801F3474(void) {
         for (j = 0; j < 8; j++) {
             tile = (TILE_1*)g_GfxPrimCursor;
             SetTile1(tile);
-            PSX_SET_SEMI_TRANSPARENT(tile);
+            SetSemiTrans(tile, 1);
             value = (0x17F - ((i << 3) + (g_FrameCount & 7))) >> 1;
             setRGB0(tile, value / 4, value / 4, value);
 

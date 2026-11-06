@@ -51,7 +51,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     GFX_AddPrim(1U, 0xCU);
     val7 = g_GfxPrimCursor;
     SetPolyFT4((POLY_FT4*)val7);
-    PSX_SET_SEMI_TRANSPARENT(val7);
+    SetSemiTrans(val7, 1);
     val1                    = (val8 << 5) + 0x10;
     FIELD(u16, val7, 0x8u)  = val3;
     FIELD(u16, val7, 0xAu)  = val6;
@@ -93,7 +93,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     val7     = g_GfxPrimCursor;
     stack_48 = (stack_28 - 3) & 1;
     SetPolyFT4((POLY_FT4*)val7);
-    PSX_SET_SEMI_TRANSPARENT(val7);
+    SetSemiTrans(val7, 1);
     tmp3                    = val3 + val2;
     val5                    = val3;
     FIELD(u16, val7, 0x8u)  = val2;
@@ -124,7 +124,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     GFX_AddPrim(1U, 0x28U);
     val7 = g_GfxPrimCursor;
     SetPolyFT4((POLY_FT4*)val7);
-    PSX_SET_SEMI_TRANSPARENT(val7);
+    SetSemiTrans(val7, 1);
     FIELD(u16, val7, 0xAu)  = val6;
     tmp0                    = stack_18 + val3;
     tmp2                    = tmp0 + 2;
@@ -156,7 +156,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     GFX_AddPrim(1U, 0x28U);
     val7 = g_GfxPrimCursor;
     SetPolyFT4((POLY_FT4*)val7);
-    PSX_SET_SEMI_TRANSPARENT(val7);
+    SetSemiTrans(val7, 1);
     tmp4                    = stack_18 + stack_40;
     FIELD(u16, val7, 0x1Au) = val4;
     tmp6                    = tmp4 - 2;

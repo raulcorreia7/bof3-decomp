@@ -332,7 +332,7 @@ MATCH void func_801F318C(s16 radius) {
     do {
         primitive = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(primitive);
-        PSX_SET_SEMI_TRANSPARENT(primitive);
+        SetSemiTrans(primitive, 1);
         setXY2(primitive, center.x, center.y, point.x, point.y);
 
         angle += 128;

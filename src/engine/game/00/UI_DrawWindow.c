@@ -29,7 +29,7 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
     if (style == 2) {
         clut_x = (window_style << 5) | 0x10;
         clut_y = 0x1E1;
-        PSX_SET_SEMI_TRANSPARENT(primitive);
+        SetSemiTrans(primitive, 1);
     } else {
         clut_x = window_style << 5;
         clut_y = 0x1E1;

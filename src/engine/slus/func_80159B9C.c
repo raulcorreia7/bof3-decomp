@@ -31,7 +31,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     h       = h & BYTE_MASK;
     tile->h = h + 1;
     setRGB0(tile, 0, 0, 0);
-    PSX_SET_SEMI_TRANSPARENT(tile);
+    SetSemiTrans(tile, 1);
     GFX_AddPrim(1, 0x10);
 
     rect = (RECT*)g_GfxPrimCursor;
@@ -56,7 +56,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     setRGB3(poly, 255, 255, 255);
     setXY4(poly, x1, y1, x2, y1, x1, y2, x2, y2);
     setUV4(poly, 0, 0, w, 0, 0, h, w, h);
-    PSX_SET_SEMI_TRANSPARENT(poly);
+    SetSemiTrans(poly, 1);
     GFX_AddPrim(1, 0x34);
 
     rect = (RECT*)g_GfxPrimCursor;

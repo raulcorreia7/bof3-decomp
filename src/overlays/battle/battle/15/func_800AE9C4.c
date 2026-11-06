@@ -94,6 +94,6 @@ MATCH void func_800AE9C4(u8 arg0) {
            ((BattlePanelGeometry*)BATTLE_WORK)->height + ((BattlePanelTexture*)&g_BattlePanelUV[tex_offset])->y,
            ((BattlePanelTexture*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
            ((BattlePanelGeometry*)BATTLE_WORK)->height + ((BattlePanelTexture*)&g_BattlePanelUV[tex_offset])->y);
-    PSX_SET_NEUTRAL_RGB(primitive);
+    setRGB0(primitive, 128, 128, 128);
     GFX_AddPrim(2, 0x28);
 }

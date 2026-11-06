@@ -80,7 +80,7 @@ MATCH void func_801D218C(void) {
             GFX_AddPrim(2, 0x0C);
             primitive = (LINE_G2*)g_GfxPrimCursor;
             SetLineG2(primitive);
-            PSX_SET_SEMI_TRANSPARENT(primitive);
+            SetSemiTrans(primitive, 1);
             RotTransPers((SVECTOR*)D_1F800014, (long*)&primitive->x0, &p, &flag);
             if (RANDOM_MASK(1)) {
                 D_1F800000 = (RANDOM_MASK(0x3F)) + 0x80;
@@ -118,7 +118,7 @@ MATCH void func_801D240C(void) {
     do {
         primitive = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(primitive);
-        PSX_SET_SEMI_TRANSPARENT(primitive);
+        SetSemiTrans(primitive, 1);
 
         setXY0(primitive, g_Task->origin_x, g_Task->origin_y);
         angle         = i << 9;
