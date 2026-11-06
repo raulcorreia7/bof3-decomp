@@ -10,8 +10,6 @@ MATCH void func_801D4D8C(void) {
     u8* out;
     u8  left_id;
     u8  right_id;
-    s32 left_off;
-    s32 right_off;
 
     func_801D4A44();
     for (ring = 0; (u32)(ring & BYTE_MASK) < 127; ring += 1) {
@@ -27,9 +25,7 @@ MATCH void func_801D4D8C(void) {
                 if (left_id != 0) {
                     right_id = *right;
                     if (right_id != 0) {
-                        left_off  = (left_id * 3) * 0x8;
-                        right_off = (right_id * 3) * 0x8;
-                        if (D_801C90EE[left_off] < D_801C90EE[right_off]) {
+                        if (g_Weapons[left_id].power < g_Weapons[right_id].power) {
                             Menu_SwapBytes(left, right);
                             Menu_SwapBytes(out, out + 1);
                         }

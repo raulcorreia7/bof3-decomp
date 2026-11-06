@@ -71,8 +71,8 @@ ASSERT_OFFSET(VitalItem, name, 0x00);
 
 typedef struct Item {
     u8  name[ITEM_NAME_LENGTH];
-    u8  flags; /* ItemFlags */
-    u8  unk_0D;
+    u8  flags;       /* ItemFlags */
+    u8  kind;        /* low nibble selects the icon via Item_GetKind */
     u16 description; /* Item_GetDescription, category ITEM_CAT_ITEM */
     u16 price;
 } Item;

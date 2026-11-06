@@ -16,8 +16,8 @@ MATCH void Char_ApplyArmor(void* character) {
     i             = 0;
     kind_bytes[2] = ((u8*)character)[0x11];
     do {
-        Char_AddStat((u16*)(record + 6), D_801C98B4[*kind * 0x16]);
-        Char_AddStat((u16*)(record + 8), -D_801C98B3[*kind * 0x16]);
+        Char_AddStat((u16*)(record + 6), g_Armors[*kind].power);
+        Char_AddStat((u16*)(record + 8), -g_Armors[*kind].weight);
         switch (*kind) {
             case ARMOR_ASBESTOS_ARMOR:
                 Char_AddResistance(record + 0xF, 2);
