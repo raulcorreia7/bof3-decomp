@@ -35,9 +35,9 @@
 /* func_801DB434 reads six threshold bytes per row. */
 #define BATTLE_LEVEL_THRESHOLD_COUNT      6u
 
+#define BATTLE_PARTY_SLOT_COUNT           3 /* player slots 0-2; enemy slots start at 3 */
 #define BATTLE_PARTY_STRIDE               0x140
 #define BATTLE_ENEMY_STRIDE               0x118
-#define BATTLE_PARTY_SLOT_COUNT           3 /* player slots 0-2; enemy slots start at 3 */
 #define BATTLE_EFFECT_STRIDE              0x78
 #define BATTLE_RING_STRIDE                0x08
 #define BATTLE_KIND_STRIDE                0x14
