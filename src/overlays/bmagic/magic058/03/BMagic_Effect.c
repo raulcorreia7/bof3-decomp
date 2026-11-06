@@ -18,7 +18,7 @@ MATCH void func_801EEE78(void) {
 MATCH void func_801EEEDC(void) {
     if (D_801EC2E4 == 0) {
         func_800A9820(g_BattleTargetSelector);
-        g_BattleState |= 4;
+        g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
 }

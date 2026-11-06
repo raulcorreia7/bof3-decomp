@@ -21,9 +21,8 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
     u8     low_byte;
     u8     selection;
     u8     result;
-    /* FAKE: keep the E9 command pointer in the retail a3 register. */
-    MATCH_REG(u8*, target_entry_e9, "a3");
-    u8* target_entry_ea;
+    u8*    target_entry_e9;
+    u8*    target_entry_ea;
     /* FAKE: keep the E2 command pointer in the retail v1 register. */
     MATCH_REG(u8*, target_entry_e2, "v1");
     ScriptState* state;

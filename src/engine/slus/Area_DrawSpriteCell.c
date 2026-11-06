@@ -2,7 +2,7 @@
 
 /* FAKE: reload the scratch cursor cell through v0. */
 #define SPAD_CURSOR     ((Actor*)SPAD_CURSOR_REF)
-#define SPAD_CURSOR_REF (scratch_base = (u8*)SP(0u), *(MATCH_VOLATILE_PTR(void* volatile, scratch_base + 0x44u)))
+#define SPAD_CURSOR_REF (scratch_base = (u8*)SP(0u), *((void* volatile*)(scratch_base + 0x44u)))
 
 /* draws one status sprite from the scratch cursor: selects the draw
  * mode by graph type, sets the texture from the cell record, offsets x by mirror,

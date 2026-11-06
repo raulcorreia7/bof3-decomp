@@ -415,7 +415,7 @@ extern void func_801E6388(s32 overlay_x, s32 overlay_y);
 extern void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y);
 extern s32  func_801E6784(u8 page, s32 x, s32 y);
 extern u8   func_801E715C(s32 range_low, s32 range_high, s32 draw_count);
-extern void func_801E7210(u32 save_slot);
+extern void func_801E7210(u32 panel_index);
 s32         func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record);
 s32         func_801E8C9C(u8 save_slot, u8 record_kind, u8 record_value);
 void        func_801E8D58(void);

@@ -151,7 +151,7 @@ static const Callback D_801F4908[2] = {
     func_801F3920,
 };
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     SYS_DISPATCH_BYTE(s_WorkStates, TASK_BYTES[0x1]);
 }
 

@@ -340,7 +340,7 @@ extern u8                    D_80145026;
 extern u8                    D_80145027;
 extern u8                    D_80145028;
 extern u8                    D_801454EC[];
-extern u32                   D_80145EC4;
+extern s32                   D_80145EC4;
 extern u8                    D_80145ED9;
 extern u8                    D_80145EDA;
 extern s32                   D_80145EE0;

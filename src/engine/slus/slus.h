@@ -512,7 +512,7 @@ extern u16                         D_80145ACA;
 extern u16                         D_80145ACC;
 extern s32                         D_80145DA0;
 extern u8                          D_80145E9B[];
-extern u32                         D_80145EC4;
+extern s32                         D_80145EC4;
 extern u8                          D_80145F03;
 extern u8                          D_80145F09;
 extern u8                          D_8014626C[];

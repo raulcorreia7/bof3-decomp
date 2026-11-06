@@ -14,7 +14,7 @@ MATCH void func_801527E4(void) {
     s32     refilled;
 
     refilled = 0;
-    if (g_GameAreaId == 189) {
+    if (g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP) {
         func_801F2C04();
         return;
     }

@@ -1,6 +1,6 @@
 #include "area061_13.h"
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     s8 sel;
 
     sel = D_801490C7;

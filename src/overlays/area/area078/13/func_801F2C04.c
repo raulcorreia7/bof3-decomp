@@ -1,6 +1,6 @@
 #include "area078_13.h"
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     s32 bit;
 
     MESSAGE_REQUEST_CLEAR();

@@ -140,7 +140,7 @@ static u8 D_801F34B4[2380] = {
 /* Current work slot; the payload starts null. */
 static AreaSlotWork* D_801F3E00 = 0;
 
-MATCH void func_801F2C04(void) {
+MATCH s32 func_801F2C04(void) {
     SYS_DISPATCH_BYTE(s_WorkStates, TASK_BYTES[0x1]);
 }
 

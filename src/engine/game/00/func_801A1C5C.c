@@ -5,12 +5,11 @@
 NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
     /* FAKE: register pins reproduce retail's s2/s4/s0/s5/s1/s3 assignment; pinned 94.41%. */
     MATCH_REG(s32, sx, "s2");
-    MATCH_REG(s32, sy, "s4");
+    s32 sy;
     /* FAKE: pins continue the assignment from the note above. */
     MATCH_REG(s32, sum, "s0");
     MATCH_REG(s32, part, "s5");
-    /* FAKE: pins continue the assignment from the note above. */
-    MATCH_REG(s32, xhi, "s1");
+    s32 xhi;
     MATCH_REG(s32, yhi, "s3");
     char y_low;
     s32  xcell;
