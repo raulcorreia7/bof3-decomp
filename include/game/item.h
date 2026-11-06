@@ -157,6 +157,29 @@ typedef struct ShopStock {
 ASSERT_SIZE(ShopItemRef, SHOP_ITEM_REF_SIZE);
 ASSERT_SIZE(ShopStock, SHOP_STRIDE);
 
+typedef struct Chest {
+    u8 memory;
+    u8 item_index;
+    u8 item_type;
+} Chest;
+
+ASSERT_SIZE(Chest, CHEST_STRIDE);
+
+typedef struct ManilloTrade {
+    u8 item_index;
+    u8 item_type;
+    u8 fish_indexes[MANILLO_FISH_COUNT];
+    u8 fish_quantities[MANILLO_FISH_COUNT];
+} ManilloTrade;
+
+ASSERT_SIZE(ManilloTrade, MANILLO_ITEM_STRIDE);
+
+typedef struct ManilloStock {
+    u8 trade_indexes[MANILLO_TRADE_COUNT];
+} ManilloStock;
+
+ASSERT_SIZE(ManilloStock, MANILLO_STOCK_STRIDE);
+
 /* The item table ids (category ITEM_CAT_ITEM). Names from the GAME.EMI record tables. */
 typedef enum ItemId {
     ITEM_HEALING_HERB  = 3,

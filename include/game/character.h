@@ -217,6 +217,12 @@ typedef struct Char_Block {
 ASSERT_OFFSET(Char_Block, records, CHARACTER_BLOCK_RECORDS);
 ASSERT_SIZE(Char_Block, CHARACTER_BLOCK_RECORDS + 8 * PARTY_RECORD_STRIDE);
 
+typedef struct MasterSkills {
+    u8 skill_levels[MASTER_SKILL_COUNT][2];
+} MasterSkills;
+
+ASSERT_SIZE(MasterSkills, MASTER_SKILLS_STRIDE);
+
 typedef struct MasterStats {
     s8 hp_bonus;
     s8 ap_bonus;
@@ -246,6 +252,18 @@ ASSERT_OFFSET(LevelGrowth, power_defense, 0x04);
 ASSERT_OFFSET(LevelGrowth, agility_intellect, 0x05);
 ASSERT_OFFSET(LevelGrowth, ability, 0x06);
 ASSERT_OFFSET(LevelGrowth, extra_ability, 0x07);
+
+typedef struct CharacterBank {
+    u32 section_offset[CHARACTER_BANK_SECTION_COUNT]; /* 0x00 from the container base */
+} CharacterBank;
+
+typedef struct CharacterBankSection {
+    u32 unk_00;         /* 0x00 16 in the sampled sections; no reader */
+    u32 palette_offset; /* 0x04 section-relative offset of the palette table */
+} CharacterBankSection;
+
+ASSERT_SIZE(CharacterBank, 0x0C);
+ASSERT_OFFSET(CharacterBankSection, palette_offset, 0x04);
 
 /* The party's character records, one per CHAR_INDEX_*. Every field/menu reader
  * indexes it through the g_CharSlot slot of a stored character id. */

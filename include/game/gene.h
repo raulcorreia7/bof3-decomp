@@ -88,6 +88,22 @@ typedef struct Chrysm {
 
 ASSERT_SIZE(Chrysm, CHRYSM_OBJECT_SIZE);
 
+/* The ten per-gene pointers. Their owner and consumer are unverified. */
+typedef struct DragonPointers {
+    u32 pointer[10];
+} DragonPointers;
+
+ASSERT_SIZE(DragonPointers, DRAGON_POINTERS_SIZE);
+
+/* 0x800B4EE0: per-form multipliers plus nine resistances. */
+typedef struct DragonFormStats {
+    u8 mult[5];
+    u8 resist[RES_INDEX_COUNT];
+} DragonFormStats;
+
+ASSERT_SIZE(DragonFormStats, DRAGON_FORM_STATS_SIZE);
+ASSERT_OFFSET(DragonFormStats, resist, 0x05);
+
 /* 0x800B4C7C: per-gene AP cost, 8-bit entries. */
 extern const u8 D_800B4C7C[GENE_TYPE_COUNT];
 /* 0x800B4D4C / 0x800B4D58: 11 predetermined forms; 0xFF is a wildcard gene and

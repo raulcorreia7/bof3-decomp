@@ -41,6 +41,14 @@ typedef struct FairyExploreReward {
 
 ASSERT_SIZE(FairyExploreReward, FAIRY_EXPLORE_STRIDE);
 
+/* A `COMMU02.EMI` prize row: the same two bytes as an exploration reward. */
+typedef struct FairyPrize {
+    u8 item_index;
+    u8 item_type;
+} FairyPrize;
+
+ASSERT_SIZE(FairyPrize, FAIRY_PRIZE_STRIDE);
+
 /* One of the village's 60 job slots: the slot is live while `active` is set,
  * `type` is the job being worked, and `progress_anchor` is the battle count when
  * the job last advanced. */

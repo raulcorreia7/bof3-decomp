@@ -14,4 +14,14 @@ typedef struct InterruptHooks {
 
 ASSERT_SIZE(InterruptHooks, 0x0C);
 
+/* The dispatch table behind D_80185690. */
+typedef struct IntrDispatch {
+    u32 unk_00;
+    s32 (*unk_04)();
+    s32 (*unk_08)();
+    s32 (*unk_0C)();
+    s32 (*unk_10)();
+    s32 (*unk_14)();
+} IntrDispatch;
+
 #endif
