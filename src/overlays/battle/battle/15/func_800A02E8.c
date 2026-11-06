@@ -9,7 +9,7 @@ MATCH void func_800A02E8(void) {
     u32 battler;
 
     battler = *(u8*)&g_BattleTarget;
-    if ((g_BattlePartyBattlers[battler].action_flags.value & 3u) == 0u) {
+    if ((g_BattlePartyBattlers[battler].turn.action_flags.value & 3u) == 0u) {
         if (BATTLER_IS_PLAYER(battler)) {
             g_BattlePartyBattlers[battler].counter_137 = 0u;
         }
@@ -18,5 +18,5 @@ MATCH void func_800A02E8(void) {
             return;
         }
     }
-    *((u8*)(g_BattleTargetRecord) + 8) = 1;
+    g_BattleTargetRecord->target_flags = 1;
 }

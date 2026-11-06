@@ -49,12 +49,12 @@ MATCH void func_801DEFE4(void) {
         }
         return;
     }
-    if (work->damage_flags.value & 2) {
+    if (work->turn.damage_flags.value & 2) {
         Actor_RequestScript(g_Task->facing + 0x14);
         return;
     }
 
-    state = work->command.type;
+    state = work->turn.command.type;
     switch (state) {
         case 0:
             if (HAS_STATUS(*g_GameState, 0x20C0)) {
@@ -71,9 +71,9 @@ MATCH void func_801DEFE4(void) {
             return;
         case 4:
             battler = g_GameState;
-            if (battler->action_flags.value & 4) {
+            if (battler->turn.action_flags.value & 4) {
                 Actor_RequestScript(g_Task->facing + 0x38);
-            } else if (D_801CA71C[battler->command.id].mask & 0x800) {
+            } else if (D_801CA71C[battler->turn.command.id].mask & 0x800) {
                 Actor_RequestScript(g_Task->facing + 0x8);
             } else {
                 Actor_RequestScript(g_Task->facing + 0x28);

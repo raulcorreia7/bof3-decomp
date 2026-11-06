@@ -51,5 +51,5 @@ MATCH void func_8009EDB4(void) {
     /* FAKE: keeps the 0xFFFF load in the jal delay slot. */
     MATCH_FAKE_BARRIER();
     result                          = Battle_CalcDamage(battler_index, selection_kind, 0xFFFF);
-    ((s16*)g_BattleTargetRecord)[2] = result;
+    g_BattleTargetRecord->hp_change = result;
 }

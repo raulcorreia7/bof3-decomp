@@ -18,7 +18,7 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
 
                     offset             = slot * BATTLE_PARTY_STRIDE;
                     D_80145E91[offset] = 0xB;
-                    g_BattlePartyBattlers[slot].damage_flags.volatile_value |= player_flags;
+                    g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value |= player_flags;
                     Battle_SetSlotPending(slot);
                 }
                 i++;
@@ -34,7 +34,7 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
 
                     offset             = (slot - BATTLE_PARTY_SLOT_COUNT) * BATTLE_ENEMY_STRIDE;
                     D_801EB631[offset] = 0xB;
-                    ENEMY_COMBATANT(slot).damage_flags |= enemy_flags;
+                    ENEMY_COMBATANT(slot).turn.damage_flags.value |= enemy_flags;
                     Battle_SetSlotPending(slot);
                 }
                 i++;
@@ -49,7 +49,7 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
                 battler            = slot;
                 offset             = battler * BATTLE_PARTY_STRIDE;
                 D_80145E91[offset] = 0xB;
-                g_BattlePartyBattlers[battler].damage_flags.volatile_value |= flags;
+                g_BattlePartyBattlers[battler].turn.damage_flags.volatile_value |= flags;
                 Battle_SetSlotPending(battler);
             } else {
                 s32 offset;
@@ -57,7 +57,7 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
                 battler            = slot;
                 offset             = (battler - BATTLE_PARTY_SLOT_COUNT) * BATTLE_ENEMY_STRIDE;
                 D_801EB631[offset] = 0xB;
-                ENEMY_COMBATANT(battler).damage_flags |= flags;
+                ENEMY_COMBATANT(battler).turn.damage_flags.value |= flags;
                 Battle_SetSlotPending(battler);
             }
         }

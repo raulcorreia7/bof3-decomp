@@ -12,19 +12,19 @@ NON_MATCHING void func_8009E500(void) {
     u16 limit;
     if (!(func_800A3A10(g_BattleActiveBattler, g_BattleTarget) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_BattleTarget)) {
-            if (g_BattlePartyBattlers[g_BattleTarget].damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
-                g_BattleTargetRecord[3] = 0;
+            if (g_BattlePartyBattlers[g_BattleTarget].turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+                g_BattleTargetRecord->ap_change = 0;
             } else {
-                g_BattleTargetRecord[3] = D_80145F1A[g_BattleTarget * 160] / 5;
+                g_BattleTargetRecord->ap_change = D_80145F1A[g_BattleTarget * 160] / 5;
             }
-        } else if (ENEMY_COMBATANT(g_BattleTarget).damage_flags & COMBATANT_FLAG_DAMAGE_IMMUNE) {
-            g_BattleTargetRecord[3] = 0;
+        } else if (ENEMY_COMBATANT(g_BattleTarget).turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+            g_BattleTargetRecord->ap_change = 0;
         } else {
-            g_BattleTargetRecord[3] = D_801EB6C4[g_BattleTarget - 3][1] / 5;
+            g_BattleTargetRecord->ap_change = D_801EB6C4[g_BattleTarget - 3][1] / 5;
         }
         g_BattleAction->unk_08  = 2;
         g_BattleTargetRecord[4] = 2;
-        delta                   = g_BattleTargetRecord[3];
+        delta                   = g_BattleTargetRecord->ap_change;
         if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
             limit = D_80145F1A[g_BattleActiveBattler * 160 + 4];
             if (limit < D_80145F1A[g_BattleActiveBattler * 160] + delta) {

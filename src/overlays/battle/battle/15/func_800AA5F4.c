@@ -8,10 +8,10 @@ MATCH s32 func_800AA5F4(s32 slot) {
         return 0;
     }
     record = slot * BATTLE_PARTY_STRIDE;
-    if (!(g_BattlePartyBattlers[slot].damage_flags.volatile_value & 1)) {
+    if (!(g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value & 1)) {
         return 0;
     }
-    if (g_BattlePartyBattlers[slot].command.target != LOBU(g_BattleActiveBattler)) {
+    if (g_BattlePartyBattlers[slot].turn.command.target != LOBU(g_BattleActiveBattler)) {
         return 0;
     }
     if (func_800AA874(*(u8*)&g_BattleAction->unk_02) & BYTE_MASK) {

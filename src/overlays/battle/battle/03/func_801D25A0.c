@@ -15,8 +15,8 @@ MATCH void func_801D25A0(void) {
         do {
             rank = D_801462F6[i & BYTE_MASK];
             if ((rank != GAME_NONE) && ((Battle_SlotIsBlocked(rank) & BYTE_MASK) == 0)) {
-                if (g_BattlePartyBattlers[rank].command.type == 5) {
-                    func_801DDE7C(g_BattlePartyBattlers[rank].unk_122, g_BattlePartyBattlers[rank].command.id);
+                if (g_BattlePartyBattlers[rank].turn.command.type == 5) {
+                    func_801DDE7C(g_BattlePartyBattlers[rank].turn.unk_0A, g_BattlePartyBattlers[rank].turn.command.id);
                 }
             }
             i += 1;
@@ -26,7 +26,7 @@ MATCH void func_801D25A0(void) {
     if (g_BattlePartyCount != 0) {
         do {
             if (((Battle_SlotIsBlocked(i & BYTE_MASK) & BYTE_MASK) == 0) &&
-                ((g_BattleActionLock == 0) || ((g_BattlePartyBattlers[i & BYTE_MASK].action_flags.value &
+                ((g_BattleActionLock == 0) || ((g_BattlePartyBattlers[i & BYTE_MASK].turn.action_flags.value &
                                                 COMBATANT_FLAG_SUPPRESSION_EXEMPT) != 0))) {
                 g_BattlePartyBattlers[i & BYTE_MASK].header.mode = 2;
             }

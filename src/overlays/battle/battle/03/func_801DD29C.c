@@ -13,9 +13,9 @@ MATCH void func_801DD29C(void) {
             if ((v & BYTE_MASK) == GAME_NONE) {
                 break;
             }
-            ((u8*)r)[-0x15]                                       = v;
-            g_BattlePartyBattlers[(v & BYTE_MASK)].command.type   = 1;
-            g_BattlePartyBattlers[((u8*)r)[-0x15]].command.target = 3;
+            ((u8*)r)[-0x15]                                            = v;
+            g_BattlePartyBattlers[(v & BYTE_MASK)].turn.command.type   = 1;
+            g_BattlePartyBattlers[((u8*)r)[-0x15]].turn.command.target = 3;
             ((u8*)r)[0] += 1;
         }
     }

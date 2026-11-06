@@ -8,7 +8,7 @@ MATCH u8 func_801E30F8(void) {
         return 1u;
     }
 
-    if ((battle_global[0x63CEu] != 0u) && ((ew->action_flags & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
+    if ((battle_global[0x63CEu] != 0u) && ((ew->turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
         return 1u;
     }
 

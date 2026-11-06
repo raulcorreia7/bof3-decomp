@@ -19,10 +19,10 @@ MATCH u8 func_801DB844(u32 battler_index) {
             return false;
         }
         if (g_BattleActionLock != 0u &&
-            (g_BattlePartyBattlers[index].action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
+            (g_BattlePartyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
             return false;
         }
-        if ((g_BattlePartyBattlers[index].action_flags.value & 0x14001u) != 0u) {
+        if ((g_BattlePartyBattlers[index].turn.action_flags.value & 0x14001u) != 0u) {
             return false;
         }
         group = 2u;
@@ -39,10 +39,10 @@ MATCH u8 func_801DB844(u32 battler_index) {
             return false;
         }
         if (g_BattleActionLock != 0u &&
-            (g_BattleEnemyBattlers[index].action_flags & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
+            (g_BattleEnemyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
             return false;
         }
-        if ((g_BattleEnemyBattlers[index].action_flags & COMBATANT_FLAG_CHARGING) != 0u) {
+        if ((g_BattleEnemyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_CHARGING) != 0u) {
             return false;
         }
         group = 1u;
