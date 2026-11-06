@@ -26,6 +26,10 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | Acronyms keep their capitals: `EnemyAIBlock`, `Char_RestoreHP`, `SYS_ReadCD`                      | Mixed case: `EnemyAiBlock`, `Char_RestoreHp`, `SYS_ReadCd`    |
 | A type is an English noun phrase: `EnemyBattler`, `PartyBattler`                                  | The tag on a type: `BattlerEnemy`, `BattlerParty`             |
 | A slot is a filled position (`party_slot`); a fixed table position is an index (`CharacterIndex`) | `CharacterSlot` for the record array's position               |
+| An id is the value the game stores to identify a thing (`item_id`, `CharacterId`)                 | `slot_id`, `item_index` for the stored value                  |
+| A fixed array position is an index (`element_index`); never abbreviate it                         | `idx`, `slot_index`, `element_slot`                           |
+| `mode`/`step`: state phase, `step++`; `timer` counts down; `tick` counts up per frame             | `tick--`, a `timer` that counts up, a per-frame `_step`       |
+| A per-frame amount is a `_delta` or `speed`: `vz_delta`                                           | `vz_step`                                                     |
 | Keep the address name until a caller proves the role                                              | Guess a name from a count, an offset or a tool's output       |
 | Members and typed pointers: `battler->hp`                                                         | Casts and offsets: `*(s16*)((u8*)p + 0x1C)`                   |
 | `enum` for closed sets and flag words; `#define` for sizes and limits                             | An `enum` type as a member or parameter (it is an `int`)      |
