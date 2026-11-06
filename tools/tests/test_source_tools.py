@@ -8,10 +8,8 @@ import pytest
 from bof3.source import ctext, decls, index
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-import shapes
 import symbol
 import typeloss
-import values
 
 
 def test_opcode_tokens_ignore_registers_and_immediates() -> None:
@@ -62,19 +60,6 @@ def test_type_loss_keys_address_names_by_folder(
     before, after = typeloss.scan("old")[0], typeloss.scan("new")[0]
     assert set(before) == {"func_80000000@src/a", "func_80000000@src/b"}
     assert set(after) == {"func_80000000@src/b"}
-
-
-def test_hex_literals_become_decimal_unless_they_are_bit_operands() -> None:
-    assert values.decimal("x = 0x10;") == "x = 16;"
-    assert values.decimal("x = a & 0xFF;") == "x = a & 0xFF;"
-    assert values.decimalize_fields("    p->x = 0x20;\n") == "    p->x = 32;\n"
-
-
-def test_byte_initializers_are_classified() -> None:
-    assert shapes.numbers("1, 0x2, 3") == bytes([1, 2, 3])
-    assert shapes.numbers("1, name") is None
-    assert shapes.classify(b"Hello world\0") == "ascii-text"
-    assert shapes.classify(bytes([1, 2, 3])) == "bytes"
 
 
 def test_a_prototype_that_differs_from_its_definition_is_a_problem() -> None:

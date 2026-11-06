@@ -3,7 +3,7 @@
 MATCH void Area_FinishTurnStep(void) {
     u8* heading;
 
-    heading = &D_80145E98;
+    heading = &g_BattlePartyBattlers[0].facing;
     if (g_Task->direction_08 != *heading) {
         if ((u8)Area_BeginTurnStep(g_Task->direction_08, *heading) != 0) {
             return;

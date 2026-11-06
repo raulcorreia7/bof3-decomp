@@ -11,7 +11,7 @@ MATCH void func_801F3194(void) {
     timer           = scratch->unk_09;
     scratch->unk_09 = timer - 1;
     scratch2        = (Actor*)g_Task;
-    scratch->unk_40 += 0x2000;
+    scratch->scale.x += 0x2000;
 
     if (scratch2->unk_09 == 0) {
         scratch2->unk_48 = 0;

@@ -45,7 +45,7 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
         func_801DDFEC(selection_kind);
         D_801EC339[selection_kind * 0x78] = 0;
         if (selection_kind < 3) {
-            g_BattlePartyBattlers[selection_kind].mode_119 = 0;
+            g_BattlePartyBattlers[selection_kind].command.type = 0;
             D_80145FB4[selection_kind].flags &= ~2;
             D_80145FB8[selection_kind].flags &= ~4;
         } else {

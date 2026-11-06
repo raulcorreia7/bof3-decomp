@@ -48,8 +48,8 @@ MATCH void func_801EF5F8(void) {
 MATCH void func_801EF690(void) {
     g_Task->unk_25      = 0x1D;
     g_Task->unk_26      = 0;
-    g_Task->unk_40      = 0x10000;
-    g_Task->unk_44      = 0x10000;
+    g_Task->scale.x     = 0x10000;
+    g_Task->scale.y     = 0x10000;
     g_Task->unk_48      = 1;
     g_Task->unk_27      = 0xA0;
     g_Task->unk_28      = 0;

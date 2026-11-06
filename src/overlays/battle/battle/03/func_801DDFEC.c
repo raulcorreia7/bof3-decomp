@@ -15,10 +15,10 @@ MATCH void func_801DDFEC(u32 battler_index) {
     body:
         battler = *(u8*)((char*)&D_8014630C + (index & BYTE_MASK));
         if (battler == (battler_index & BYTE_MASK)) {
-            if (g_BattlePartyBattlers[battler].mode_119 != 5u) {
+            if (g_BattlePartyBattlers[battler].command.type != 5u) {
                 return;
             }
-            substate = g_BattlePartyBattlers[battler].command;
+            substate = g_BattlePartyBattlers[battler].command.id;
             if ((substate >> 8) != 0u) {
                 return;
             }

@@ -40,16 +40,16 @@ MATCH void func_801F30EC(void) {
     }
 
 found:
-    window_span     = 0x10000;
-    scratch         = g_Task;
-    window          = 2;
-    scratch->unk_18 = key;
-    scratch->unk_40 = 0;
-    scratch->unk_44 = window_span;
-    scratch->unk_48 = window;
-    scratch         = g_Task;
-    scratch->unk_09 = 8;
-    mode            = MEM(WorldMapKey, (u8*)D_801F4D7C + i).mode;
+    window_span      = 0x10000;
+    scratch          = g_Task;
+    window           = 2;
+    scratch->unk_18  = key;
+    scratch->scale.x = 0;
+    scratch->scale.y = window_span;
+    scratch->unk_48  = window;
+    scratch          = g_Task;
+    scratch->unk_09  = 8;
+    mode             = MEM(WorldMapKey, (u8*)D_801F4D7C + i).mode;
     goto tail;
 
 check4:
@@ -60,13 +60,13 @@ check4:
     }
 
 arm:
-    window_span     = 0x10000;
-    scratch->unk_40 = 0;
-    scratch->unk_44 = window_span;
-    window          = 2;
-    scratch->unk_48 = window;
-    scratch         = g_Task;
-    scratch->unk_09 = 8;
+    window_span      = 0x10000;
+    scratch->scale.x = 0;
+    scratch->scale.y = window_span;
+    window           = 2;
+    scratch->unk_48  = window;
+    scratch          = g_Task;
+    scratch->unk_09  = 8;
 tail:
     Actor_SelectScript(mode);
 

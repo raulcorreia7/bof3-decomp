@@ -31,8 +31,8 @@ MATCH void func_801EF3A4(void) {
     func_8014D978();
     g_Task->unk_0C += g_Task->unk_18;
     g_Task->unk_10 += g_Task->unk_1C;
-    g_Task->unk_40 += g_Task->unk_0C;
-    g_Task->unk_44 += g_Task->unk_10;
+    g_Task->scale.x += g_Task->unk_0C;
+    g_Task->scale.y += g_Task->unk_10;
     if (g_Task->unk_0C == 0) {
         g_Task->unk_09 = 0x10;
         g_Task->step += 1;
@@ -59,8 +59,8 @@ MATCH void func_801EF4A8(void) {
     work = g_Task;
     work->unk_0C += work->unk_18;
     work->unk_10 += work->unk_1C;
-    work->unk_40 += work->unk_0C;
-    work->unk_44 += work->unk_10;
+    work->scale.x += work->unk_0C;
+    work->scale.y += work->unk_10;
     if (work->unk_0C == 0xC00) {
         work->step++;
     }

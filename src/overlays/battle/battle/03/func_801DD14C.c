@@ -8,11 +8,11 @@ MATCH void func_801DD14C(u8 battler_index) {
 
     if (BATTLER_IS_PLAYER(battler_index)) {
         g_BattlePartyBattlers[battler_index].damage_flags.value &= ~2u;
-        g_BattlePartyBattlers[battler_index].mode_119 = 0u;
+        g_BattlePartyBattlers[battler_index].command.type = 0u;
         g_BattlePartyBattlers[battler_index].action_flags.value &= ~4u;
     } else {
         u32 f                                       = ENEMY_COMBATANT(battler_index).damage_flags;
-        ENEMY_COMBATANT(battler_index).unk_F5       = 0u;
+        ENEMY_COMBATANT(battler_index).command.type = 0u;
         ENEMY_COMBATANT(battler_index).damage_flags = f & ~2u;
     }
 

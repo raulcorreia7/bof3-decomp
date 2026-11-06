@@ -89,7 +89,7 @@ NON_MATCHING void func_801B21E8(void) {
                     tmp6                            = g_Task;
                     *(u8*)(tmp6)                    = (u8)(*(u8*)(tmp6) & 0xBF);
                     g_Task->tint.signed_bytes.flags = 1;
-                    g_Task->direction_08            = (u8)(D_80145E98 ^ 4);
+                    g_Task->direction_08            = (u8)(g_BattlePartyBattlers[0].facing ^ 4);
                 }
                 if (!(*val13 & 1) && (val4 != 0)) {
                     tmp4  = g_Task;

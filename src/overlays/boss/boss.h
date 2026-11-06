@@ -67,7 +67,7 @@ void Boss_EndBattle3(void);
         EnemyBattler* work;                                    \
                                                                \
         func_8014DAEC();                                       \
-        Battle_CollectEnemySpoils();                           \
+        Battle_DefeatEnemy();                                  \
         work = g_BattleCurrentEnemy;                           \
         work->damage_flags |= COMBATANT_FLAG_SKIP_ACTION_STEP; \
         TASK_BYTES[0] &= ~ACTOR_FLAG_HIDDEN;                   \

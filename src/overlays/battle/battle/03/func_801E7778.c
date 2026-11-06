@@ -12,9 +12,9 @@ MATCH void func_801E7778(void) {
 
     D_801EB4E0->flags &= ~ACTOR_FLAG_HIDDEN;
     work = D_801EB4E0;
-    step = work->unk_40;
+    step = work->scale.x;
     if (step != 0x10000) {
-        work->unk_40 = step + 0x2000;
+        work->scale.x = step + 0x2000;
     } else {
         work->unk_48                                    = 0;
         index                                           = D_801EB4E0->slot;

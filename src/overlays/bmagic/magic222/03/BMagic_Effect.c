@@ -42,7 +42,7 @@ MATCH void func_801EF4F0(void) {
     g_Task->unk_5D -= 0x10;
     g_Task->unk_5E -= 0x10;
     g_Task->unk_5F -= 0x10;
-    g_Task->unk_40 += 0x1800;
+    g_Task->scale.x += 0x1800;
     if ((s8)g_Task->unk_5D == -0x80) {
         D_801EB4E0->unk_0B -= 1;
         func_801E5988();

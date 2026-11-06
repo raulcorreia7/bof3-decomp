@@ -7,10 +7,10 @@ MATCH void func_801D0CDC(void) {
     FishingState* blank;
     FishingState* state;
 
-    FISHING_STATE->saved_25       = D_80145EB5;
-    FISHING_STATE->saved_26       = D_80145EB6;
-    FISHING_STATE->saved_value_27 = D_80145EB7;
-    FISHING_STATE->saved_value_28 = D_80145EB8;
+    FISHING_STATE->saved_25       = g_BattlePartyBattlers[0].unk_25;
+    FISHING_STATE->saved_26       = g_BattlePartyBattlers[0].unk_26;
+    FISHING_STATE->saved_value_27 = g_BattlePartyBattlers[0].unk_27;
+    FISHING_STATE->saved_value_28 = g_BattlePartyBattlers[0].unk_28;
     FISHING_STATE->state_29       = 2;
     FISHING_STATE->active_flags   = 0x80;
 

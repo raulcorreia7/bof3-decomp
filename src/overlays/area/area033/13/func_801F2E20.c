@@ -6,9 +6,9 @@ MATCH void func_801F2E20(void) {
     s32 scaled;
     u8* scratch;
 
-    scaled = D_80145E9C * D_80145E99;
+    scaled = g_BattlePartyBattlers[0].unk_0C * g_BattlePartyBattlers[0].unk_09;
     x      = (D_80145EC4[0] + scaled) >> 16;
-    y      = (D_80145EC8 + D_80145EA0 * D_80145E99) >> 16;
+    y      = (D_80145EC8 + g_BattlePartyBattlers[0].unk_10 * g_BattlePartyBattlers[0].unk_09) >> 16;
 
     scratch                 = (u8*)g_Task;
     *(s32*)(scratch + 0x0C) = x;

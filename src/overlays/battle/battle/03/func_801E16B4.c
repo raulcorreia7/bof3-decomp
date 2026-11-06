@@ -6,7 +6,7 @@ MATCH void func_801E16B4(void) {
 
     if (EMI_LoaderIsReady() != 0) {
         work  = g_GameState;
-        state = work->mode_119;
+        state = work->command.type;
         if (state == 4) {
             if (!(work->action_flags.value & 2)) {
                 if (!(func_801DDF50(work->chr.character_id, D_801463CD) & BYTE_MASK)) {

@@ -32,12 +32,12 @@ MATCH void Area_DrawObjectSprite(void) {
     }
     if (!(g_Task->active_flags & 0x80) && g_Task->unk_48 == 1) {
         if (g_Task->unk_60 == 0) {
-            g_Task->unk_40 = 0;
-            g_Task->unk_44 = 0;
+            g_Task->scale.x = 0;
+            g_Task->scale.y = 0;
             return;
         }
-        g_Task->unk_40 = (0x4650000 / g_Task->unk_60) & ~0xFF;
-        g_Task->unk_44 = (0x4650000 / g_Task->unk_60) & ~0xFF;
+        g_Task->scale.x = (0x4650000 / g_Task->unk_60) & ~0xFF;
+        g_Task->scale.y = (0x4650000 / g_Task->unk_60) & ~0xFF;
     }
     if ((u16)(g_Task->unk_2E + 0x40) > 0x1C0 || (u16)(g_Task->unk_30 + 0x40) > 0x170) {
         g_Task->flags |= ACTOR_FLAG_OFFSCREEN;
@@ -73,8 +73,8 @@ MATCH void Area_DrawObjectSprite(void) {
             Area_DrawSpriteCell(mode, cell, clut);
         } else {
             if (g_Task->unk_48 != 0) {
-                clip_x = (u32)(g_Task->unk_40 + 0x1E000) > 0x3C000;
-                clip_y = (u32)(g_Task->unk_44 + 0x1E000) > 0x3C000;
+                clip_x = (u32)(g_Task->scale.x + 0x1E000) > 0x3C000;
+                clip_y = (u32)(g_Task->scale.y + 0x1E000) > 0x3C000;
             } else {
                 clip_x = 0;
                 clip_y = 0;
@@ -103,23 +103,23 @@ MATCH void Area_DrawObjectSprite(void) {
                 prim->u0 = cell->u - bank * 128 - 1;
                 prim->u1 = prim->u0 + width;
             } else if (mode == 4) {
-                prim->x0 = g_Task->unk_2E + Area_RoundSpriteCoordinate((s8)cell->x * g_Task->unk_40, g_Task->unk_40);
-                prim->x1 = prim->x0 + Area_RoundSpriteCoordinate(width * g_Task->unk_40, g_Task->unk_40);
+                prim->x0 = g_Task->unk_2E + Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
+                prim->x1 = prim->x0 + Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
                 prim->u0 = cell->u - bank * 128;
                 prim->u1 = prim->u0 + width - clip_x;
             } else if (mode == 6) {
-                prim->x1 = g_Task->unk_2E - Area_RoundSpriteCoordinate((s8)cell->x * g_Task->unk_40, g_Task->unk_40);
-                prim->x0 = prim->x1 - Area_RoundSpriteCoordinate(width * g_Task->unk_40, g_Task->unk_40);
+                prim->x1 = g_Task->unk_2E - Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
+                prim->x0 = prim->x1 - Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
                 prim->u1 = clip_x + (cell->u - bank * 128 - 1);
                 prim->u0 = prim->u1 + width - clip_x;
             } else if (mode == 5) {
-                prim->x0 = g_Task->unk_2E + Area_RoundSpriteCoordinate((s8)cell->x * g_Task->unk_40, g_Task->unk_40);
-                prim->x1 = prim->x0 + Area_RoundSpriteCoordinate(width * g_Task->unk_40, g_Task->unk_40);
+                prim->x0 = g_Task->unk_2E + Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
+                prim->x1 = prim->x0 + Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
                 prim->u1 = clip_x + (cell->u - bank * 128 - 1);
                 prim->u0 = prim->u1 + width - clip_x;
             } else if (mode == 7) {
-                prim->x1 = g_Task->unk_2E - Area_RoundSpriteCoordinate((s8)cell->x * g_Task->unk_40, g_Task->unk_40);
-                prim->x0 = prim->x1 - Area_RoundSpriteCoordinate(width * g_Task->unk_40, g_Task->unk_40);
+                prim->x1 = g_Task->unk_2E - Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
+                prim->x0 = prim->x1 - Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
                 prim->u0 = cell->u - bank * 128;
                 prim->u1 = prim->u0 + width - clip_x;
             }
@@ -128,8 +128,8 @@ MATCH void Area_DrawObjectSprite(void) {
             prim->u2 = prim->u0;
             prim->u3 = prim->u1;
             if (mode & 4) {
-                prim->y0 = g_Task->unk_30 + Area_RoundSpriteCoordinate((s8)cell->y * g_Task->unk_44, g_Task->unk_44);
-                prim->y2 = prim->y0 + Area_RoundSpriteCoordinate(height * g_Task->unk_44, g_Task->unk_44);
+                prim->y0 = g_Task->unk_30 + Area_RoundSpriteCoordinate((s8)cell->y * g_Task->scale.y, g_Task->scale.y);
+                prim->y2 = prim->y0 + Area_RoundSpriteCoordinate(height * g_Task->scale.y, g_Task->scale.y);
             } else {
                 y        = g_Task->unk_30 + (s8)cell->y;
                 prim->y0 = y;

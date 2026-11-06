@@ -48,7 +48,7 @@ void        func_801E2314(u32 script_index);
 u8          func_801E30F8(void);
 u8          func_801E3160(void);
 /* func_801E54EC */
-void        Battle_CollectEnemySpoils(void);
+void        Battle_DefeatEnemy(void);
 void        func_801E567C(void);
 void        func_801E5704(void);
 extern void func_801EF318(void);

@@ -14,7 +14,7 @@ MATCH void func_801F3224(void) {
     timer                      = *(u8*)(((u8*)scratch + 9));
     *(u8*)(((u8*)scratch + 9)) = timer - 1;
     scratch2                   = g_Task;
-    scratch->unk_40 += 0x2000;
+    scratch->scale.x += 0x2000;
 
     if (((u8*)scratch2)[9] == 0) {
         scratch2->unk_48 = 0;

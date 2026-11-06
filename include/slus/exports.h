@@ -115,8 +115,6 @@ extern u8             g_FairyVillagePendingQueueCount;
 /* D_80145E5D */
 extern u8             g_FairyVillageUpdateCount;
 extern u8             D_80145E94[];
-extern u8             D_80145EB7;
-extern u8             D_80145EB9;
 extern u8             D_80145F1E[];
 extern u8             D_80146189;
 /* D_80146258 */

@@ -319,10 +319,7 @@ extern s32                D_8014503C;   /* 0x8014503C */
 extern s8                 D_8014504B;   /* 0x8014504B */
 extern u8                 g_FairyRooms;
 extern u8                 D_801457AB;
-extern u8                 D_80145E97;
 extern u8                 D_80145E9B;
-extern s32                D_80145EA4; /* 0x80145EA4 */
-extern u8                 D_80145EBB;
 extern u16                D_80145EBC; /* 0x80145EBC */
 extern u32                D_80145EDC; /* 0x80145EDC */
 extern u8                 D_80145F00; /* 0x80145F00 */
@@ -1595,7 +1592,7 @@ static inline void Game_RollAreaSetup(s32 actor_slot) {
 
     choice = (u32)(RANDOM_MASK(0xF));
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-        func_8015BAC4((u8)((D_80145E98 ^ 4) & 7));
+        func_8015BAC4((u8)((g_BattlePartyBattlers[0].facing ^ 4) & 7));
     }
     g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
     if ((g_CurrentActor->unk_94 & 0x80) == 0) {

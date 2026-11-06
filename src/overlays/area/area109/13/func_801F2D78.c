@@ -10,7 +10,7 @@ MATCH s32 func_801F2D78(s32 arg0, s32 arg1) {
     if ((arg1 & 0xFF) != 6) {
         return 0;
     }
-    if (D_80145E98 != 3) {
+    if (g_BattlePartyBattlers[0].facing != 3) {
         return 0;
     }
     if (SYS_TestFlag(g_SceneEventFlags, 0x1C) != 0) {

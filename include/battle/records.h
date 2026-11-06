@@ -32,7 +32,7 @@
  * The cells from +0x06 to +0x5F are the ones the slot setup (Battle_ArmEnemySlot
  * and Battle_AddEnemy) clears when it arms an enemy slot; their widths follow
  * those accesses. No reader names them yet, so they keep the address names. */
-#define ENEMY_COMBATANT_PAD_F1_SIZE  4 /* the pad between the +0xF0 byte and +0xF5 */
+#define ENEMY_COMBATANT_PAD_F1_SIZE  3 /* the pad between the +0xF0 byte and the command */
 
 /* Ask whether the battler's status word carries the flag, a STATUS_* value or a
  * mask. Pass the row itself or, for a pointer, its dereference. */
@@ -42,10 +42,26 @@
  * byte itself, so the macro expands where it is used. */
 #define BATTLE_ACTIVE_PARTY          (g_BattlePartyBattlers[g_BattleActiveBattler])
 
+/* The action a battler has queued: whom it targets, what kind it is (examine 0, attack 1, defend 2, ability 4, item 5)
+ * and the ability or item id. */
+typedef struct BattleCommandSlot {
+    u8  target;
+    u8  type;
+    u16 id;
+} BattleCommandSlot;
+
+/* Battle stat modifiers, one signed byte per stat. */
+typedef struct StatMultipliers {
+    s8 power;
+    s8 defense;
+    s8 agility;
+    s8 intellect;
+} StatMultipliers;
+
 /* One drop of an enemy: the item id the battle spoils gain when the roll
  * passes, and the index into the 8-byte drop chance table at 0x801D0CB8. */
 /* The enemy id as the record stores it, read as two bytes: the low byte tells
- * enemies apart (func_801DA69C, func_8009CFEC, Battle_CollectEnemySpoils) and the high byte is the
+ * enemies apart (func_801DA69C, func_8009CFEC, Battle_DefeatEnemy) and the high byte is the
  * family the slayer weapons test (Battle_CalcDamage, func_800A2598). */
 typedef union EnemyBattlerId {
     u16 value;
@@ -323,79 +339,79 @@ ASSERT_OFFSET(BattlePanelTask, hp, 0x14);
 ASSERT_OFFSET(BattlePanelTask, max_hp, 0x1C);
 
 typedef struct EnemyBattler {
-    u8             flags;
-    u8             mode;
-    u8             step;
-    u8             unk_03;
-    u8             unk_04;
-    u8             slot;   /* +0x05 battler slot; Battle_ArmEnemySlot stores slot + 3 here */
-    u8             unk_06; /* +0x06 cleared when the slot is armed */
-    u8             unk_07; /* +0x07 cleared when the slot is armed */
-    u8             unk_08; /* +0x08 the battle index with its low bit flipped */
-    u8             pad_09[0x3];
-    s32            unk_0C; /* +0x0C cleared when the slot is armed */
-    s32            unk_10; /* +0x10 cleared when the slot is armed */
-    s32            unk_14; /* +0x14 cleared when the slot is armed */
-    s32            unk_18; /* +0x18 cleared when the slot is armed */
-    s32            unk_1C; /* +0x1C cleared when the slot is armed */
-    s32            unk_20; /* +0x20 cleared when the slot is armed */
-    u8             unk_24; /* +0x24 cleared when the slot is armed */
-    u8             pad_25[0x4];
-    u8             unk_29; /* +0x29 set to 4 when the slot is armed */
-    u8             pad_2A[0x1];
-    u8             unk_2B; /* +0x2B cleared when the slot is armed */
-    u8             pad_2C[0x2];
-    s16            unk_2E; /* +0x2E cleared when the slot is armed */
-    s16            unk_30; /* +0x30 cleared when the slot is armed */
-    s16            unk_32; /* +0x32 cleared when the slot is armed */
-    BattlePosition pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
-    u8             pad_40[0x8];
-    u8             unk_48; /* +0x48 cleared when the slot is armed */
-    u8             pad_49[0x2];
-    u8             unk_4B; /* +0x4B set to 0xFF when the slot is armed */
-    u8             pad_4C[0xC];
-    u16            unk_58; /* +0x58 the halfword the boss end-of-battle setup copies to the spad record */
-    u16            unk_5A; /* +0x5A the halfword the boss end-of-battle setup copies to the spad record */
-    u8             unk_5C; /* +0x5C cleared when the slot is armed */
-    u8             unk_5D; /* +0x5D cleared when the slot is armed */
-    u8             unk_5E; /* +0x5E cleared when the slot is armed */
-    u8             unk_5F; /* +0x5F cleared when the slot is armed */
-    u8             pad_60[0x14];
-    u8             name[8]; /* +0x74 the 8-character enemy name, drawn as text by Battle_DrawEnemyNamePanel */
-    EnemyBattlerId enemy_id;
-    u8             choice_ai;
-    u8             unk_7F;      /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16            event_flags; /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16 status; /* +0x82 StatusFlags; Battle_CollectEnemySpoils sets STATUS_KO when the enemy leaves the field */
-    u16 zenny;  /* +0x84 banked in the spoils by Battle_CollectEnemySpoils */
-    u16 exp;    /* +0x86 banked in the spoils by Battle_CollectEnemySpoils */
-    u16 power;  /* +0x88 read by the turn-order ranking */
-    u8  pad_8A[2];
-    u8  skills[8]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
-    u16 hp;
-    u16 ap; /* +0x96 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    EnemyBattlerDrop      drops[2];
-    Stats                 stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
-    Stats                 base;  /* +0xC0 the stats before buffs */
-    u8                    kind;
-    u8                    unk_E1;
-    u8                    unk_E2; /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
-    u8                    unk_E3; /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
+    u8               flags;
+    u8               mode;
+    u8               step;
+    u8               unk_03;
+    u8               unk_04;
+    u8               slot;   /* +0x05 battler slot; Battle_ArmEnemySlot stores slot + 3 here */
+    u8               unk_06; /* +0x06 cleared when the slot is armed */
+    u8               unk_07; /* +0x07 cleared when the slot is armed */
+    u8               unk_08; /* +0x08 the battle index with its low bit flipped */
+    u8               pad_09[0x3];
+    s32              unk_0C; /* +0x0C cleared when the slot is armed */
+    s32              unk_10; /* +0x10 cleared when the slot is armed */
+    s32              unk_14; /* +0x14 cleared when the slot is armed */
+    s32              unk_18; /* +0x18 cleared when the slot is armed */
+    s32              unk_1C; /* +0x1C cleared when the slot is armed */
+    s32              unk_20; /* +0x20 cleared when the slot is armed */
+    u8               unk_24; /* +0x24 cleared when the slot is armed */
+    u8               pad_25[0x4];
+    u8               unk_29; /* +0x29 set to 4 when the slot is armed */
+    u8               pad_2A[0x1];
+    u8               unk_2B; /* +0x2B cleared when the slot is armed */
+    u8               pad_2C[0x2];
+    s16              unk_2E; /* +0x2E cleared when the slot is armed */
+    s16              unk_30; /* +0x30 cleared when the slot is armed */
+    s16              unk_32; /* +0x32 cleared when the slot is armed */
+    BattlePosition   pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
+    u8               pad_40[0x8];
+    u8               unk_48; /* +0x48 cleared when the slot is armed */
+    u8               pad_49[0x2];
+    u8               unk_4B; /* +0x4B set to 0xFF when the slot is armed */
+    u8               pad_4C[0xC];
+    u16              unk_58; /* +0x58 the halfword the boss end-of-battle setup copies to the spad record */
+    u16              unk_5A; /* +0x5A the halfword the boss end-of-battle setup copies to the spad record */
+    u8               unk_5C; /* +0x5C cleared when the slot is armed */
+    u8               unk_5D; /* +0x5D cleared when the slot is armed */
+    u8               unk_5E; /* +0x5E cleared when the slot is armed */
+    u8               unk_5F; /* +0x5F cleared when the slot is armed */
+    u8               pad_60[0x14];
+    u8               name[8]; /* +0x74 the 8-character enemy name, drawn as text by Battle_DrawEnemyNamePanel */
+    EnemyBattlerId   enemy_id;
+    u8               choice_ai;
+    u8               unk_7F;      /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
+    u16              event_flags; /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    u16              status; /* +0x82 StatusFlags; Battle_DefeatEnemy sets STATUS_KO when the enemy leaves the field */
+    u16              zenny;  /* +0x84 banked in the spoils by Battle_DefeatEnemy */
+    u16              exp;    /* +0x86 banked in the spoils by Battle_DefeatEnemy */
+    u16              power;  /* +0x88 read by the turn-order ranking */
+    u8               pad_8A[2];
+    u8               skills[8]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
+    u16              hp;
+    u16              ap; /* +0x96 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    EnemyBattlerDrop drops[2];
+    Stats            stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
+    Stats            base;  /* +0xC0 the stats before buffs */
+    u8               kind;
+    u8               unk_E1;
+    u8               unk_E2; /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
+    u8               unk_E3; /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
     EnemyBattlerEventFunc unk_E4;
     u16*                  unk_E8;
     u8*                   script;
     u8                    unk_F0;
     u8                    pad_F1[ENEMY_COMBATANT_PAD_F1_SIZE];
-    u8                    unk_F5;
-    u16                   technique;
+    BattleCommandSlot     command;   /* +0xF4 the action the enemy has queued */
     s16                   hp_change; /* +0xF8 HP dealt this hit; negative heals (func_801E496C) */
     s16                   ap_change;
     u8                    target_flags; /* +0xFC battle/battle/15 calls it target_flags */
     u8                    unk_FD;
     u8                    pad_FE[0x2];
-    u32                   damage_flags; /* BattleBattlerDamageFlags */
-    u32                   action_flags; /* BattleBattlerActionFlags */
-    u8                    pad_108[0xA];
+    u32                   damage_flags;     /* BattleBattlerDamageFlags */
+    u32                   action_flags;     /* BattleBattlerActionFlags */
+    StatMultipliers       stat_multipliers; /* +0x108 */
+    u8                    pad_10C[6];
     u8                    unk_112;
     u8                    pad_113[0x1];
     u8                    unk_114;
@@ -495,8 +511,7 @@ typedef struct PartyBattler {
     BattleScreenCoord unk_30; /* +0x30 the field overlays read it signed */
     u16               depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
     BattlePosition    pos;
-    u32               unk_40; /* +0x40 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    s32               unk_44; /* +0x44 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    Vec2i             scale;  /* +0x40 16.16, 0x10000 at setup */
     u8                unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
     u8                unk_49;
     u8                unk_4A;
@@ -510,35 +525,33 @@ typedef struct PartyBattler {
     u8                unk_5D;
     u8                unk_5E;
     u8                unk_5F;
-    s32          unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
-    s32          unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
-    u8           pad_68[8];
-    u8           unk_70;
-    u8           pad_71[3];
+    s32       unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
+    s32       unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
+    u8        pad_68[8];
+    u8        unk_70;
+    u8        pad_71[3];
     /* +0x74..+0x117 is a Character copy: func_801DD08C copies a
      * 0xA4-byte character record to this offset. */
-    Character    chr;
-    u8           unk_118;
-    u8           mode_119;
-    u16          command;
-    s16          hp_change; /* +0x11C signed HP delta shown on the hit; func_801D527C seeds it from stats.hp,
+    Character chr;
+    BattleCommandSlot command;   /* +0x118 the action the player has queued */
+    s16               hp_change; /* +0x11C signed HP delta shown on the hit; func_801D527C seeds it from stats.hp,
                                func_801DFCB4 tests its sign (ram-map: hp_change) */
-    s16          ap_change; /* +0x11E signed AP delta, as hp_change (ram-map: ap_change) */
-    u8           unk_120;
-    u8           counter_121;
-    u8           unk_122;
-    u8           unk_123;
-    BattlerFlags damage_flags; /* BattleBattlerDamageFlags */
-    BattlerFlags action_flags; /* BattleBattlerActionFlags */
-    u8           unk_12C[8];
-    u16          unk_134;
-    u8           counter_136;
-    u8           counter_137;
-    u8           focus_counter; /* +0x138 the Focus counter, 0..2; Battle_CalcDamage spends it as a power bonus */
-    u8           unk_139;
-    u8           unk_13A[2];
-    u8           character_index; /* +0x13C the Character slot this battler was built from */
-    u8           pad_13D[3];
+    s16               ap_change; /* +0x11E signed AP delta, as hp_change (ram-map: ap_change) */
+    u8                unk_120;
+    u8                counter_121;
+    u8                unk_122;
+    u8                unk_123;
+    BattlerFlags      damage_flags; /* BattleBattlerDamageFlags */
+    BattlerFlags      action_flags; /* BattleBattlerActionFlags */
+    u8                unk_12C[8];
+    u16               unk_134;
+    u8                counter_136;
+    u8                counter_137;
+    u8                focus_counter; /* +0x138 the Focus counter, 0..2; Battle_CalcDamage spends it as a power bonus */
+    u8                unk_139;
+    u8                unk_13A[2];
+    u8                character_index; /* +0x13C the Character slot this battler was built from */
+    u8                pad_13D[3];
 } PartyBattler;
 
 ASSERT_SIZE(PartyBattler, 0x140);

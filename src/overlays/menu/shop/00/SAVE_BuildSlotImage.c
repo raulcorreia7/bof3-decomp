@@ -68,7 +68,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     D_80144900                     = (u32)D_80145EC4;
     D_80144904                     = (u32)D_80145EC8;
     D_801448FC                     = g_GameAreaId;
-    D_801448FF                     = D_80145E98;
+    D_801448FF                     = g_BattlePartyBattlers[0].facing;
     n                              = 0;
     j                              = 0;
     do {

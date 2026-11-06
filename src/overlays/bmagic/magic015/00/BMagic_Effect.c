@@ -83,10 +83,10 @@ INCLUDE_ASM(func_801EFCC4);
 
 MATCH void func_801EFD7C(void) {
     if (D_801EB4E0->unk_0B == 1) {
-        g_Task->unk_40 = 0x10000;
-        g_Task->unk_44 = 0x10000;
-        g_Task->unk_48 = 2;
-        g_Task->unk_09 = 8;
+        g_Task->scale.x = 0x10000;
+        g_Task->scale.y = 0x10000;
+        g_Task->unk_48  = 2;
+        g_Task->unk_09  = 8;
         g_Task->step += 1;
     }
 }

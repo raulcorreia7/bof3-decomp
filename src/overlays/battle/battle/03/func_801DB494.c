@@ -7,14 +7,14 @@ MATCH void func_801DB494(void) {
 
     index = 0u;
     while (index < 3u) {
-        g_BattlePartyBattlers[index].mode_119           = 0u;
+        g_BattlePartyBattlers[index].command.type       = 0u;
         g_BattlePartyBattlers[index].damage_flags.value = 0u;
         index += 1u;
     }
 
     index = 0u;
     while (index < 8u) {
-        g_BattleEnemyBattlers[index].unk_F5       = 0u;
+        g_BattleEnemyBattlers[index].command.type = 0u;
         g_BattleEnemyBattlers[index].damage_flags = 0u;
         index += 1u;
     }

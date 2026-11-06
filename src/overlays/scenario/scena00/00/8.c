@@ -2097,7 +2097,7 @@ MATCH void func_801FB744(void) {
 /* Advances the scena00 transition sequence, handling input, camera state and audio cues. */
 MATCH void func_801FB924(void) {
     u16* counter;
-    /* FAKE: keep the D_80145EB4 address for its masked load/store. */
+    /* FAKE: keep the g_BattlePartyBattlers[0].unk_24 address for its masked load/store. */
     u8*  flags;
     /* FAKE: hold the g_PartyY base before g_AreaFocusY. */
     u32* base;
@@ -2249,7 +2249,7 @@ MATCH void func_801FB924(void) {
         case 9:
             if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0;
-                flags           = &D_80145EB4;
+                flags           = &g_BattlePartyBattlers[0].unk_24;
                 g_GameFlags &= ~(GAME_FLAG_SCROLL_LOCK | GAME_FLAG_RUN_LOCK);
                 *flags &= 0xDF;
                 Game_RequestAreaChange(9, 0x570000, 0x40000, 7);

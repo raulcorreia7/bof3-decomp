@@ -20,10 +20,10 @@ MATCH void func_801D277C(void) {
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) != 0) {
             continue;
         }
-        if (g_BattlePartyBattlers[slot].mode_119 != 5) {
+        if (g_BattlePartyBattlers[slot].command.type != 5) {
             continue;
         }
-        rank = g_BattlePartyBattlers[slot].command;
+        rank = g_BattlePartyBattlers[slot].command.id;
         if ((rank >> 8) == 0) {
             continue;
         }

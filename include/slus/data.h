@@ -49,10 +49,6 @@ extern u8 g_GfxPalettePending; /* 0x80145988 */
 extern u8  D_80145E91[];
 extern u8  D_80145E92[];
 extern u8  D_80145E93[];
-extern u8  D_80145E98;
-extern u8  D_80145E99;
-extern s32 D_80145E9C;
-extern s32 D_80145EA0;
 extern s16 D_80145EC6;
 extern s32 D_80145EC8;
 extern s16 D_80145ECA;
