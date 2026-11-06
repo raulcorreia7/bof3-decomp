@@ -51,9 +51,6 @@ extern u8       D_801F5718[];
 extern u8       D_801F63C4[];
 extern u8*      D_801F63EC;
 
-/* func_8019651C */
-s32  GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
-void Area_ProjectPoint(s32* pos, long* screen_xy);
 void func_801F2D40(const void* sprite);
 void func_801F2F1C(void* sprite);
 void func_801F2FC8(void);

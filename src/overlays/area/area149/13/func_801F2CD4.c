@@ -16,7 +16,7 @@ MATCH void func_801F2CD4(void) {
         }
     } else {
         g_AreaCameraOffsetZ = 0x400;
-        g_Task->mode        = 3;
+        g_Task->header.mode = 3;
     }
     g_AreaCameraRefreshCount = 2;
     func_801F2DE0();

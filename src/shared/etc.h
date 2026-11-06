@@ -88,39 +88,24 @@ extern u8           g_MenuLabelDefense[4];
 /* D_801EC948 */
 extern u8           g_MenuLabelIntellect[4];
 
-/* One sprite cell of the CLUT strip: texture origin and size in bytes. */
-typedef struct MenuSpriteRect {
-    u8 u;
-    u8 v;
-    u8 w;
-    u8 h;
-} MenuSpriteRect;
-
-ASSERT_SIZE(MenuSpriteRect, 4);
-ASSERT_OFFSET(MenuSpriteRect, u, 0);
-ASSERT_OFFSET(MenuSpriteRect, v, 1);
-ASSERT_OFFSET(MenuSpriteRect, w, 2);
-ASSERT_OFFSET(MenuSpriteRect, h, 3);
-
 /* D_801E5A24 (shop), D_801ECB40 (start) */
-extern MenuSpriteRect MENU_CLUT_STRIP_CELLS[];
+extern UvRect      MENU_CLUT_STRIP_CELLS[];
 /* D_801E5AD0 (shop), D_801ECBEC (start) */
-extern u8             MENU_CLUT_STRIP_ENTRIES[];
+extern u8          MENU_CLUT_STRIP_ENTRIES[];
 /* D_801E5B1C (shop), D_801ECC38 (start) */
-extern u8             MENU_CLUT_STRIP_PALETTES[];
+extern u8          MENU_CLUT_STRIP_PALETTES[];
 /* D_801E6074 (shop), D_801ED804 (start) */
-extern u8             g_SaveSlotFirst;
+extern u8          g_SaveSlotFirst;
 /* D_801E6078 (shop), D_801ED808 (start) */
-extern u8             g_SaveSlotCount;
+extern u8          g_SaveSlotCount;
 /* D_801E6098 (shop), D_801ED80C (start) */
-extern MenuListRow    g_SaveSlots[];
-extern u8             D_801F294C;
-extern u8             D_801F294D;
-extern u8             D_801F294E;
+extern MenuListRow g_SaveSlots[];
+extern u8          D_801F294C;
+extern u8          D_801F294D;
+extern u8          D_801F294E;
 /* Bate and Shisu read scenario_id from the resident scenario record. */
 struct SceneState;
 
-s32         func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 void        func_801D0C04(void);
 void        func_801D0C10(void);
 void        func_801D0C2C(void);

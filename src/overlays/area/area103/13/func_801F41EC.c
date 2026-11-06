@@ -10,7 +10,7 @@ MATCH void func_801F41EC(void) {
     if (remaining > 0) {
         g_Task->unk_32 = remaining - 1;
     } else if (!((g_Task->unk_09 / 5) & 0xFF)) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
     if (!((g_Task->unk_09 % 5) & 0xFF)) {
         func_801F4E70(((g_Task->unk_09 / 5) & 0xFF) + 7);

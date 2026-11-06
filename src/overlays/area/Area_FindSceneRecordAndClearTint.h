@@ -8,5 +8,5 @@ MATCH void Area_FindSceneRecordAndClearTint(void) {
     g_Task->unk_29 = 5;
     g_Task->unk_2A = 0;
     ACTOR_CLEAR_TINT();
-    g_Task->mode = 1;
+    g_Task->header.mode = 1;
 }

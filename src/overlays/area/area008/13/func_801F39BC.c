@@ -6,7 +6,7 @@ MATCH void func_801F39BC(void) {
     s32    index;
 
     s = (Actor*)&g_Actors[TASK_BYTES[0x0B]];
-    s->flags |= ACTOR_FLAG_HIDDEN;
+    s->header.flags |= ACTOR_FLAG_HIDDEN;
     s     = g_Task;
     index = ((u8*)s)[0x0B];
     e     = &g_Actors[index];

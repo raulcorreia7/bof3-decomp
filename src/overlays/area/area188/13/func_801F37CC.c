@@ -20,7 +20,7 @@ MATCH void func_801F37CC(void) {
         g_Task->unk_09 = mode;
         if (!(mode & 0xFF)) {
             g_Task->unk_03 = 0x80;
-            g_Task->mode += 1;
+            g_Task->header.mode += 1;
         }
     }
 }

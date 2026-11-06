@@ -21,5 +21,5 @@ MATCH void func_801B2AB4(void) {
         }
         g_Task->unk_0B = 0xFF;
     }
-    g_Task->step = 1;
+    g_Task->header.step = 1;
 }

@@ -10,7 +10,7 @@ MATCH void func_800C244C(void) {
     work->pos.z.fixed += work->unk_18;
     work->unk_14 += work->unk_20;
     if (work->unk_14 == -0x40) {
-        work->step++;
+        work->header.step++;
     }
     func_8014DAEC();
 }

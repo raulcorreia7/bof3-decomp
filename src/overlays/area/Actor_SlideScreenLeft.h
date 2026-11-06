@@ -10,6 +10,6 @@ MATCH void Actor_SlideScreenLeft(void) {
         work         = g_Task;
         origin       = -0x30;
         work->unk_2E = origin;
-        work->step++;
+        work->header.step++;
     }
 }

@@ -10,9 +10,9 @@ MATCH void func_801F385C(void) {
     e     = &g_Actors[index];
     TASK_SET(e);
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
-        s->mode = 0x0E;
+        s->header.mode = 0x0E;
     } else if ((e->script_pc == 2) && (e->unk_4A == 1)) {
-        s->mode = 12;
+        s->header.mode = 12;
     }
     g_Task = s;
 }

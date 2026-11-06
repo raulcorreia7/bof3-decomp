@@ -6,7 +6,7 @@
 MATCH void func_801E3334(void) {
     PartyBattler* work;
 
-    g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
+    g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
     func_801E2314(0);
     work          = g_Task;
     work->unk_48  = 2u;

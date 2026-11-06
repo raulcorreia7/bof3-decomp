@@ -9,7 +9,7 @@ MATCH void func_801CE628(void) {
         } else {
             Actor_SelectScript(g_Task->unk_04);
         }
-        g_Task->step++;
+        g_Task->header.step++;
     } else {
         g_Task->unk_09--;
         if (g_Task->unk_09 == 0) {

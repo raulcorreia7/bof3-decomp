@@ -23,11 +23,11 @@ MATCH void func_8019D8C0(SpinQuad* quad, s16* out) {
     do {
         RotTrans(&quad->corners[index & BYTE_MASK], &vtx, &flag);
         index += 1;
-        *dst = quad->x + vtx.vx;
+        *dst = quad->pos.x + vtx.vx;
         dst += 1;
-        *dst = quad->y + vtx.vy;
+        *dst = quad->pos.y + vtx.vy;
         dst += 1;
-        *dst = quad->z + vtx.vz;
+        *dst = quad->pos.z + vtx.vz;
         dst += 1;
     } while (((index & BYTE_MASK)) < 4U);
     PopMatrix();

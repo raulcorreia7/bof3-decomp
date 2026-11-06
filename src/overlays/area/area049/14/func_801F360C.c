@@ -7,9 +7,9 @@ MATCH void func_801F360C(void) {
     if (D_80145F09 == 5) {
         actor_index = func_8019601C() & 0xFF;
         if (actor_index != 0xFF) {
-            actor_slot        = &g_ActorSlots[actor_index];
-            actor_slot->flags = ACTOR_FLAG_IN_USE;
-            actor_slot->type  = 0x6C;
+            actor_slot               = &g_ActorSlots[actor_index];
+            actor_slot->header.flags = ACTOR_FLAG_IN_USE;
+            actor_slot->type         = 0x6C;
         }
         SND_PlayCue(0x209U);
         g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;

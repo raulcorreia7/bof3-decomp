@@ -23,7 +23,7 @@ MATCH void func_801D0CC0(void) {
     g_Task->unk_09 = mode;
     if (!(mode & 0xFF)) {
         g_Task->unk_09 = 0x40;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -35,7 +35,7 @@ MATCH void func_801D0D54(void) {
     g_Task->unk_09 = mode;
     if (!(mode & 0xFF)) {
         g_Task->unk_09 = 0x20;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -69,8 +69,8 @@ INCLUDE_ASM(func_801D147C);
 INCLUDE_ASM(func_801D1678);
 
 MATCH void func_801D199C(void) {
-    u8          i;
-    EffectSlot* slot;
+    u8             i;
+    AreaSpawnSlot* slot;
 
     slot = D_801D39A8;
     for (i = 0; i < EFFECT_SLOT_COUNT; i++, slot++) {
@@ -79,33 +79,33 @@ MATCH void func_801D199C(void) {
 }
 
 MATCH void func_801D19C8(void) {
-    u8          i;
-    EffectSlot* slot;
-    Actor*      actor;
+    u8             i;
+    AreaSpawnSlot* slot;
+    Actor*         actor;
 
     slot = D_801D39A8;
     for (i = 0; i < EFFECT_SLOT_COUNT; slot++, i++) {
         if (slot->active == 0) {
-            slot->active = 1;
-            slot->unk_01 = 0;
-            slot->life   = 0x10;
-            actor        = g_Task;
-            slot->x      = actor->x.fixed;
-            slot->y      = actor->y.fixed;
-            slot->z      = actor->z.fixed;
-            slot->size   = 0x100;
-            slot->unk_16 = 0x60;
-            slot->unk_17 = 0;
+            slot->active        = 1;
+            slot->unk_01        = 0;
+            slot->life_02       = 0x10;
+            actor               = g_Task;
+            slot->x.fixed       = actor->x.fixed;
+            slot->y.fixed       = actor->y.fixed;
+            slot->z.fixed       = actor->z.fixed;
+            slot->radius_14     = 0x100;
+            slot->core_shade_16 = 0x60;
+            slot->rim_shade_17  = 0;
             return;
         }
     }
 }
 
 MATCH s32 func_801D1A60(void) {
-    MATRIX      matrix;
-    u8          i;
-    s32         alive;
-    EffectSlot* slot;
+    MATRIX         matrix;
+    u8             i;
+    s32            alive;
+    AreaSpawnSlot* slot;
 
     alive = 0;
     Area_SetCameraMatrix(&matrix);
@@ -113,8 +113,8 @@ MATCH s32 func_801D1A60(void) {
     for (i = 0; i < EFFECT_SLOT_COUNT; slot++, i++) {
         if (slot->active != 0) {
             alive = 1;
-            slot->size -= 0x10;
-            if (--slot->life == 0) {
+            slot->radius_14 -= 0x10;
+            if (--slot->life_02 == 0) {
                 slot->active = 0;
             }
             func_801D1B10(slot);

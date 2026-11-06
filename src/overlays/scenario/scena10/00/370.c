@@ -31,7 +31,7 @@ MATCH void func_801F7518(void) {
 MATCH void func_801F755C(void) {
     g_Task->unk_06 = 0x4E;
     func_801F6FAC();
-    g_Task->step = 0;
+    g_Task->header.step = 0;
 }
 
 INCLUDE_ASM(func_801F7590);

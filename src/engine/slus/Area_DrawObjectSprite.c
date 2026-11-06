@@ -27,7 +27,7 @@ MATCH void Area_DrawObjectSprite(void) {
     s32         tint;
     u16         clut;
 
-    if (g_Task->flags & ACTOR_FLAG_HIDDEN) {
+    if (g_Task->header.flags & ACTOR_FLAG_HIDDEN) {
         return;
     }
     if (!(g_Task->active_flags & 0x80) && g_Task->unk_48 == 1) {
@@ -40,10 +40,10 @@ MATCH void Area_DrawObjectSprite(void) {
         g_Task->scale.y = (0x4650000 / g_Task->unk_60) & ~0xFF;
     }
     if ((u16)(g_Task->unk_2E + 0x40) > 0x1C0 || (u16)(g_Task->unk_30 + 0x40) > 0x170) {
-        g_Task->flags |= ACTOR_FLAG_OFFSCREEN;
+        g_Task->header.flags |= ACTOR_FLAG_OFFSCREEN;
         return;
     }
-    g_Task->flags &= ~ACTOR_FLAG_OFFSCREEN;
+    g_Task->header.flags &= ~ACTOR_FLAG_OFFSCREEN;
     if (g_Task->active_flags & 8) {
         RECT* rect = (RECT*)g_GfxPrimCursor;
         g_GfxPrimCursor += sizeof(RECT);
@@ -156,7 +156,7 @@ MATCH void Area_DrawObjectSprite(void) {
             }
             prim->tpage = tpage;
             prim->clut  = clut;
-            SetSemiTrans(prim, (g_Task->flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0);
+            SetSemiTrans(prim, (g_Task->header.flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0);
             GFX_AddPrim(g_Task->unk_29, sizeof(POLY_FT4));
         }
     }

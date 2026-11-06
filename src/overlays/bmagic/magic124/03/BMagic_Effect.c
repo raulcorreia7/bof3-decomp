@@ -17,7 +17,7 @@ MATCH void func_801EEFF0(void) {
         temp_v0       = g_Task->timer - 1;
         g_Task->timer = temp_v0;
         if (!(temp_v0 & 0xFF)) {
-            g_Task->mode += 1;
+            g_Task->header.mode += 1;
         }
     }
 }
@@ -43,7 +43,7 @@ MATCH void func_801EF588(void) {
     timer         = g_Task->timer + 4;
     g_Task->timer = timer;
     if (timer == 16) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -51,7 +51,7 @@ MATCH void func_801EF5D8(void) {
     g_Task->timer = 0x10 + (rsin((g_Task->unk_0B & 0x3F) << 6) * 4 >> 12);
     g_Task->unk_0C++;
     if (g_Task->unk_0C == 0x10) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -70,8 +70,8 @@ MATCH void func_801EF654(void) {
 INCLUDE_ASM(func_801EF6E8);
 
 MATCH void func_801F020C(void) {
-    SYS_DISPATCH_BYTE(D_801F08F4, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F08F4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801F03E0();
         func_801F05B4();
     }
@@ -83,7 +83,7 @@ MATCH void func_801F028C(void) {
     g_Task->unk_5F = 15;
     g_Task->unk_09 = 0;
     g_Task->timer  = 2;
-    g_Task->step++;
+    g_Task->header.step++;
 }
 
 MATCH void func_801F02FC(void) {
@@ -95,7 +95,7 @@ MATCH void func_801F02FC(void) {
     work->unk_09 += 4;
     if (work->unk_09 == 16) {
         work = g_Task;
-        work->step++;
+        work->header.step++;
     }
 }
 

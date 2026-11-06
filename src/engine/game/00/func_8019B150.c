@@ -15,5 +15,5 @@ MATCH void func_8019B150(void) {
     work->unk_2A = (work->unk_06 >> 7);
 
     Actor_SelectScript((g_Task->unk_06 & 0x7F));
-    g_Task->mode = flag;
+    g_Task->header.mode = flag;
 }

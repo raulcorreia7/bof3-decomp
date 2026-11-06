@@ -29,7 +29,7 @@ MATCH u32 func_801A06D8(void) {
                         } else {
                             func_8015BAC4(g_Task->direction_08 & 7);
                         }
-                        if (g_Task->mode == 0xA) {
+                        if (g_Task->header.mode == 0xA) {
                             g_Actors[i].unk_79 |= 1;
                         }
                     }
@@ -42,7 +42,7 @@ MATCH u32 func_801A06D8(void) {
             } else if (g_Actors[i].roll_90 >= 0x1F && g_Task->unk_09 == 0) {
                 func_801A27C4(&g_Actors[i]);
             } else {
-                D_801C83D8[g_Task->mode](&g_Actors[i]);
+                D_801C83D8[g_Task->header.mode](&g_Actors[i]);
             }
             if (g_Task->unk_06 == 0xA) {
                 continue;
@@ -61,7 +61,7 @@ MATCH u32 func_801A06D8(void) {
                     } while (j <= n);
                 }
             } else if (!(g_Task->option_flags & ACTOR_OPT_WAIT_STREAM)) {
-                if (g_Task->flags & ACTOR_FLAG_STEP_MOVE) {
+                if (g_Task->header.flags & ACTOR_FLAG_STEP_MOVE) {
                     func_8014D978();
                 } else {
                     func_8014DAEC();

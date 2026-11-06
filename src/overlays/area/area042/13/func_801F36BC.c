@@ -7,6 +7,6 @@ MATCH void func_801F36BC(void) {
     work = g_Task;
     work->z.fixed += 4;
     if (work->z.fixed >= -0xFF) {
-        work->step++;
+        work->header.step++;
     }
 }

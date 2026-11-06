@@ -10,6 +10,6 @@ MATCH s32 func_801F4D24(void) {
     g_Task->unk_09 -= 1;
     func_801B0DFC();
     g_GameState->mode_12B.s8_value = 1;
-    g_Task->step                   = 1;
+    g_Task->header.step            = 1;
     return 1;
 }

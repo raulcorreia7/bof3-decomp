@@ -24,6 +24,6 @@ MATCH void func_801F342C(void) {
     check           = (Actor*)g_Task;
     scratch->vx     = 0x100;
     scratch->vy     = 0x100;
-    check->mode++;
+    check->header.mode++;
     g_AreaDrawFlags = 0x1F;
 }

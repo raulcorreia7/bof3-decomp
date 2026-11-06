@@ -25,18 +25,18 @@ MATCH void func_801EEEA0(void) {
         g_BattleEffects[slot].target.party = work;
         g_Task->unk_0B += 1;
     }
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEFD0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF014(void) {
-    SYS_DISPATCH_BYTE(D_801F03C0, g_Task->step);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(D_801F03C0, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
         func_801EF4F0();
         func_801EF79C();
         PopMatrix();
@@ -82,8 +82,8 @@ MATCH void func_801EFDB4(void) {
 }
 
 MATCH void func_801EFDF8(void) {
-    SYS_DISPATCH_BYTE(D_801F03DC, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->unk_09 != 0) {
+    SYS_DISPATCH_BYTE(D_801F03DC, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->unk_09 != 0) {
         func_801F00A8();
         func_801F0164();
         PopMatrix();

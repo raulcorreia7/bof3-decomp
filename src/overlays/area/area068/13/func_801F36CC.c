@@ -6,13 +6,13 @@ MATCH void func_801F36CC(void) {
     timer      = D_801F4E00 - 1;
     D_801F4E00 = timer;
     if (timer == 0) {
-        D_801F4E00   = 0;
-        g_Task->mode = 0x14;
+        D_801F4E00          = 0;
+        g_Task->header.mode = 0x14;
     } else if (g_InputPressed == PADRdown) {
         D_801F4E0C = 0;
         D_801F4E04++;
-        g_Task->mode = 0x10;
+        g_Task->header.mode = 0x10;
     } else {
-        g_Task->mode = 0x11;
+        g_Task->header.mode = 0x11;
     }
 }

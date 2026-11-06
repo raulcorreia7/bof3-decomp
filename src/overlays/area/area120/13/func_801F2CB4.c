@@ -13,6 +13,6 @@ MATCH void func_801F2CB4(void) {
     if (timer == 0) {
         g_Task->unk_06 = 1;
         g_Task->unk_32 = 0x3C;
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

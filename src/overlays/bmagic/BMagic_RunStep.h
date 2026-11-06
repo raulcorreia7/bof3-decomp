@@ -7,5 +7,5 @@ MATCH void BMagic_RunStep(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC00.steps;
-    handlers.handlers[g_Task->mode]();
+    handlers.handlers[g_Task->header.mode]();
 }

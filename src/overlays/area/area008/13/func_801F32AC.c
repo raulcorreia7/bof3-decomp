@@ -11,7 +11,7 @@ MATCH void func_801F32AC(void) {
     if (g_ScriptVars[2] == 1) {
         index = TASK_BYTES[0x0B];
         e     = &g_Actors[index];
-        e->flags &= ~ACTOR_FLAG_HIDDEN;
+        e->header.flags &= ~ACTOR_FLAG_HIDDEN;
         TASK_BYTES[0x01] = 2;
     }
 }

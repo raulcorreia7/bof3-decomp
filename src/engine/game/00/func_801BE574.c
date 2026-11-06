@@ -9,7 +9,7 @@ MATCH void func_801BE574(s32 count, u8* ids) {
         ACTOR_CLEAR_TINT();
         g_Task->tint.bytes.flags = 2;
         Party_ClearBattlerState(i & BYTE_MASK);
-        g_Task->mode                  = 2;
+        g_Task->header.mode           = 2;
         g_Task->option_flags          = 0;
         g_Task->unk_09                = 0;
         *(u32*)&D_80145FB4[i * 0x140] = ((u32*)FIELD(s32, g_AreaLoads[g_GameAreaId], 0x18u))[ids[i]];

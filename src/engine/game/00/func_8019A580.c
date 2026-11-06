@@ -8,7 +8,7 @@ MATCH void func_8019A580(void) {
     work->unk_09--;
     next = g_Task;
     if (next->unk_09 == 0) {
-        next->mode++;
+        next->header.mode++;
         return;
     }
     func_8014D978();

@@ -9,5 +9,5 @@ MATCH void Scene_ClearScanBarsAndAdvance(void) {
     work->unk_2E = 300;
     work->unk_09 = 0;
     Scene_ClearScanBars();
-    g_Task->mode = g_Task->mode + 1;
+    g_Task->header.mode = g_Task->header.mode + 1;
 }

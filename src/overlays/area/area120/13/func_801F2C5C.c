@@ -7,6 +7,6 @@ MATCH void func_801F2C5C(void) {
     actor         = g_Task;
     actor->unk_06 = 0;
     actor->unk_32 = 0x78;
-    g_Task->mode++;
+    g_Task->header.mode++;
     SND_PlayCue(0x201);
 }

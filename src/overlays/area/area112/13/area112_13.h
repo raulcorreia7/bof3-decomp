@@ -18,7 +18,6 @@ extern u8                  D_801F41F8[];
 extern PartyMemberMessages g_PartyMemberMessages[1];
 extern u8                  D_801F493C[];
 
-void GFX_FreePaletteFadeTarget(void* target);
 void func_801F2EA8(void);
 void func_801F3274(void);
 void func_801F3EEC(void*);

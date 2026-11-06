@@ -4,8 +4,8 @@ MATCH void func_800C1DF4(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->flags & 0x80) {
-        work->step++;
+    if (work->header.flags & 0x80) {
+        work->header.step++;
     } else {
         work->pos.x.fixed += 0x8000;
         func_8014D978();

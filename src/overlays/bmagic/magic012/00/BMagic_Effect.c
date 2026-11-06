@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEC5C);
 INCLUDE_ASM(func_801EEEAC);
 
 MATCH void func_801EEFF8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF03C(void) {
@@ -36,7 +36,7 @@ MATCH void func_801EF080(void) {
         g_Task->unk_0B           = rand() & 7;
         g_Task->unk_09           = 0x10;
         g_Task->timer            = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

@@ -10,6 +10,6 @@ MATCH void func_801EF09C(void) {
     counter        = g_Task->unk_09 - 2;
     g_Task->unk_09 = counter;
     if ((counter & 0xFF) == 0x10) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }

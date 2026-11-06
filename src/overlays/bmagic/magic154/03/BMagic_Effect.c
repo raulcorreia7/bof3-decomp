@@ -13,9 +13,9 @@ INCLUDE_ASM(func_801EEE94);
 MATCH void func_801EEFE0(void) {
     if (g_Task->unk_09 == 0) {
         func_800AEF98(4, 0);
-        BATTLE_ACTIVE_WORK->flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800A9610(g_BattleTargetSelector, 0x10U);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -55,7 +55,7 @@ MATCH void func_801EF1EC(void) {
         Actor_SelectScript(0U);
         func_8014D978();
         g_Task->unk_09 = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -69,7 +69,7 @@ MATCH void func_801EF380(void) {
     work->unk_09 = count;
     work->scale.y += 0x8000;
     if (count == 4) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -107,19 +107,19 @@ MATCH void func_801EF58C(void) {
         func_8014DAEC();
         func_800AFC98(2, 4);
         D_801EB4E0->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     } else if (func_8014DAEC() & 0xFF) {
         func_800AFC98(2, 4);
         g_Task->unk_09 = 0;
         D_801EB4E0->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801EF648(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         BATTLE_ACTIVE_WORK->unk_09--;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 

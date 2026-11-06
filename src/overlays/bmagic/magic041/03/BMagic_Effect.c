@@ -18,7 +18,7 @@ MATCH void func_801EEE14(void) {
         selected = &g_BattleSelectedActor;
         func_80196718(*selected);
         g_Task->unk_09 = func_8019651C(*selected, 0, 0, 0, 1);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -31,15 +31,15 @@ INCLUDE_ASM(func_801EEFF8);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF190(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF1D4(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (ACTOR_IN_USE(*g_Task) && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF670();
         PopMatrix();
@@ -58,7 +58,7 @@ MATCH void func_801EF27C(void) {
         dst->pos.z       = src->pos.z;
         dst->unk_09      = 0;
         g_Task->timer    = 0;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -68,7 +68,7 @@ MATCH void func_801EF308(void) {
     timer         = g_Task->timer + 4;
     g_Task->timer = timer;
     if (timer == 32) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -93,8 +93,8 @@ MATCH void func_801EF3D0(void) {
     MagicTaskFuncs handlers;
 
     handlers = D_801EEC28;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (ACTOR_IN_USE(*g_Task) && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFAB8();
         PopMatrix();
@@ -109,7 +109,7 @@ MATCH void func_801EF484(void) {
     g_Task->pos.y.fixed = src->pos.y.fixed;
     g_Task->pos.z       = src->pos.z;
     g_Task->unk_09      = 0;
-    g_Task->step        = g_Task->step + 1;
+    g_Task->header.step = g_Task->header.step + 1;
 }
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"

@@ -18,7 +18,7 @@ MATCH void func_801A6F58(u8* script) {
     func_801A4AA8();
     Area_FindSceneRecord(D_1F800002);
 
-    g_Task->flags = ACTOR_FLAG_IN_USE;
+    g_Task->header.flags = ACTOR_FLAG_IN_USE;
 
     work                    = g_Task;
     D_80146908[*counter][0] = work->x.fixed = (script[6] << 16) | (script[5] != 0 ? 0x8000 : 0);
@@ -32,8 +32,8 @@ MATCH void func_801A6F58(u8* script) {
     D_80146910[*counter][0] = 0;
 
     COORD_INT(g_Task->z) = Area_SampleHeight(work->x.fixed, work->y.fixed);
-    g_Task->mode         = script[9];
-    g_Task->step         = script[0xB];
+    g_Task->header.mode  = script[9];
+    g_Task->header.step  = script[0xB];
     g_Task->direction_08 = script[0] & 0xF;
     g_Task->unk_06       = script[0] >> 4;
     g_Task->unk_18       = script[0x10];

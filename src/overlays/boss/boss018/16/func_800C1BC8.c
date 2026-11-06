@@ -7,9 +7,9 @@ MATCH void func_800C1BC8(void) {
     } else {
         SYS_SetFlag(g_SceneFlags, 0x37U);
     }
-    g_BattleCurrentEnemy->script  = &D_800C2C50;
-    g_BattleCurrentEnemy->unk_E4  = func_800C1C6C;
-    g_BattleCurrentEnemy->unk_E8  = &D_800C2C9C;
-    ((PartyBattler*)g_Task)->mode = 2;
+    g_BattleCurrentEnemy->script         = &D_800C2C50;
+    g_BattleCurrentEnemy->unk_E4         = func_800C1C6C;
+    g_BattleCurrentEnemy->unk_E8         = &D_800C2C9C;
+    ((PartyBattler*)g_Task)->header.mode = 2;
     func_8014D978();
 }

@@ -13,13 +13,13 @@ MATCH void Area_SlideHudBannerLeft(void) {
     origin_x     = work->unk_2E - 0x10;
     work->unk_2E = origin_x;
     if (origin_x < -47) {
-        work->step = 0;
+        work->header.step = 0;
     }
 
     if (D_801454F2 != 2) {
-        mode       = 1;
-        work       = g_Task;
-        work->step = mode;
+        mode              = 1;
+        work              = g_Task;
+        work->header.step = mode;
     }
 
     Area_DrawHud(0x10, g_Task->unk_2E);

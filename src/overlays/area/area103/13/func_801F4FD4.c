@@ -11,6 +11,6 @@ MATCH void func_801F4FD4(void) {
     g_Task->unk_09 += 1;
     if (g_Task->unk_09 >= 0x20U) {
         g_Task->unk_09 = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }

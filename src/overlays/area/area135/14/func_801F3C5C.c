@@ -10,7 +10,7 @@ MATCH void func_801F3C5C(void) {
     value += 8;
     work->z.fixed = value;
     if (value >= -0x90) {
-        g_Task->step = 1;
+        g_Task->header.step = 1;
     }
     func_801F3CA8();
 }

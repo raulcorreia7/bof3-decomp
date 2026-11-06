@@ -53,7 +53,7 @@ NON_MATCHING void func_8014D290(void) {
     work->unk_32 = key;
 
     if (g_Task->unk_32 >= 0x37) {
-        g_Task->flags |= ACTOR_FLAG_OFFSCREEN;
+        g_Task->header.flags |= ACTOR_FLAG_OFFSCREEN;
         return;
     }
     sort           = g_Task->unk_32 << 8;
@@ -81,7 +81,7 @@ NON_MATCHING void func_8014D290(void) {
     if (D_8014832D < 0x28) {
         D_8014828C[D_8014832D] = (s32)g_Task;
         D_8014832D++;
-        if (g_Task->flags & ACTOR_FLAG_SELECTION_FX) {
+        if (g_Task->header.flags & ACTOR_FLAG_SELECTION_FX) {
             func_80161454((u32)g_Task);
         }
     }

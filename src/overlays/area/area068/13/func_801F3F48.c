@@ -16,13 +16,13 @@ NON_MATCHING s32 func_801F3F48(void) {
     MATCH_FAKE_PIN(s32, base, "v1");
 
     Game_SetScriptActive();
-    record1         = g_ScriptWorkRecord;
-    request         = 4;
-    record1->mode   = request;
-    record2         = g_ScriptWorkRecord;
-    record2->unk_77 = 5;
-    record          = g_ScriptWorkRecord;
-    base            = (s32)g_Actors;
+    record1              = g_ScriptWorkRecord;
+    request              = 4;
+    record1->header.mode = request;
+    record2              = g_ScriptWorkRecord;
+    record2->unk_77      = 5;
+    record               = g_ScriptWorkRecord;
+    base                 = (s32)g_Actors;
     /* FAKE: use keeps the g_Actors row materialized; retail fills the
      * third reload's delay slot with it here. */
     MATCH_FAKE_USE(base);

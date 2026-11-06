@@ -5,6 +5,6 @@ MATCH void Effect_StepOnZeroTick(void) {
 
     work = g_Task;
     if (work->unk_0B == 0) {
-        work->step++;
+        work->header.step++;
     }
 }

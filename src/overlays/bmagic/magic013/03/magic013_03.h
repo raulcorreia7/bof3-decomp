@@ -16,7 +16,6 @@ s32  func_800AED5C(s32 arg0, u32 battler_index);
 u8   Battle_SlotIsBlocked(u32 slot);
 void func_801EF4F0(void);
 void func_801EF648(void);
-void func_801EF79C(void);
 void func_801EFAA8(void);
 void func_801F00A8(void);
 void func_801F0164(void);

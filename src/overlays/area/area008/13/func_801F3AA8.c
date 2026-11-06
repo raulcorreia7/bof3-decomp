@@ -6,5 +6,5 @@
 MATCH void func_801F3AA8(void) {
     ((Actor*)g_Task)->tint.signed_bytes.unk_5D = 0;
     ((Actor*)g_Task)->tint.signed_bytes.unk_5E = 30;
-    ((Actor*)g_Task)->mode                     = ((Actor*)g_Task)->mode + 1;
+    ((Actor*)g_Task)->header.mode              = ((Actor*)g_Task)->header.mode + 1;
 }

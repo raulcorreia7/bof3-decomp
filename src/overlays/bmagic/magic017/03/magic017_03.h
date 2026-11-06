@@ -7,6 +7,4 @@
 
 extern u8 g_BattleActiveBattler;
 
-void func_800AFC54(void);
-
 #endif

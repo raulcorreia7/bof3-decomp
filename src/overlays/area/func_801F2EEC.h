@@ -27,5 +27,5 @@ MATCH void func_801F2EEC(void) {
         g_Task->unk_0B = 0;
     }
 
-    FUNC_801F2EEC_TABLE[g_Task->mode]();
+    FUNC_801F2EEC_TABLE[g_Task->header.mode]();
 }

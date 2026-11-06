@@ -7,7 +7,7 @@ MATCH void Actor_AdvanceTimer(void) {
 
     work = g_Task;
     if (work->unk_09 >= 8) {
-        work->step++;
+        work->header.step++;
     }
     work = g_Task;
     work->unk_09++;

@@ -11,8 +11,8 @@ MATCH void func_800AD808(void) {
         return;
     }
     if (!(D_80148624 & 1)) {
-        work[0x01]        = 2;
-        BATTLE_WORK->step = 0;
+        work[0x01]               = 2;
+        BATTLE_WORK->header.step = 0;
         return;
     }
     *(u16*)(work + 0x2E) = D_80148628 + 0x14;

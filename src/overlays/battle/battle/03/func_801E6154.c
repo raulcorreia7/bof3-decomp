@@ -7,7 +7,7 @@ MATCH void func_801E6154(void) {
     work = D_801EC2E0;
     if ((COORD_INT(work->pos.y) >= work->unk_1C) && (work->unk_18 != COORD_INT(work->pos.x))) {
         work->unk_09 = 10;
-        D_801EC2E0->mode++;
+        D_801EC2E0->header.mode++;
     } else {
         work = new_var = D_801EC2E0;
         work->pos.x.fixed += work->unk_0C;

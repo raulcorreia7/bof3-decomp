@@ -22,7 +22,8 @@ MATCH u8 func_801DB9E4(u32 battler_index) {
         }
     } else {
         index = (battler_index - 3u);
-        if ((g_BattleEnemyBattlers[index].flags & 1u) != 0u && (g_BattleEnemyBattlers[index].status & 0x4144u) == 0u &&
+        if ((g_BattleEnemyBattlers[index].header.flags & 1u) != 0u &&
+            (g_BattleEnemyBattlers[index].status & 0x4144u) == 0u &&
             (g_BattleActionLock == 0u ||
              (g_BattleEnemyBattlers[index].action_flags & COMBATANT_FLAG_SUPPRESSION_EXEMPT) != 0u)) {
             value = g_BattleSurprise;

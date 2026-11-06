@@ -11,5 +11,5 @@ MATCH void func_801E7888(void) {
     g_BattlePartyBattlers[selection].damage_flags.value |= 0x2000u;
     D_801EB4E0->unk_48 = 2u;
     work               = g_Task;
-    work->mode++;
+    work->header.mode++;
 }

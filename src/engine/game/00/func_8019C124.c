@@ -35,5 +35,5 @@ MATCH void func_8019C124(s32 step_byte) {
         return;
     }
 set_state:
-    g_Task->mode = 3;
+    g_Task->header.mode = 3;
 }

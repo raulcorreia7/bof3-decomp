@@ -31,7 +31,7 @@ MATCH void func_801EEF1C(void) {
     func_800A9610(g_BattleTargetSelector, 32);
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
-    g_Task->mode++;
+    g_Task->header.mode++;
 }
 
 INCLUDE_ASM(func_801EEF7C);
@@ -48,7 +48,7 @@ MATCH void func_801EF078(void) {
     g_Task->unk_09 = temp_v1_2;
     if ((temp_v1_2 & 0xFF) == 0x10) {
         g_Task->unk_09 = 0;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 

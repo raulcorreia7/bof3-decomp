@@ -28,7 +28,7 @@ MATCH void func_801F6D44(void) {
     work->y.fixed          = 0x2200000;
     func_801F747C();
     g_Task->unk_09 = 8;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }
 
 /* blocker: schedule; first diff: +4 li a0,0x10 before the s0 save. */
@@ -47,7 +47,7 @@ MATCH void func_801F6EA4(void) {
     actor->unk_09 = mode;
     if (mode == 0) {
         g_Task->unk_09 = 4;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -61,7 +61,7 @@ MATCH void func_801F6FF8(void) {
     work = g_Task;
     work->unk_09--;
     if (work->unk_09 == 0) {
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }
 
@@ -98,7 +98,7 @@ MATCH void func_801F7AC8(void) {
 
     func_801F7FCC();
     work = g_Task;
-    work->mode += 1;
+    work->header.mode += 1;
 }
 
 MATCH void func_801F7B00(void) {

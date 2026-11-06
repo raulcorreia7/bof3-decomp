@@ -8,7 +8,8 @@
 MATCH void Char_ClearSlotRefIfUnused(void) {
     Actor* work = g_Task;
 
-    if ((g_ActorSlots[work->unk_06].flags == 0 || g_ActorSlots[work->unk_06].mode == 1) && g_AreaCameraMoving == 0) {
+    if ((g_ActorSlots[work->unk_06].header.flags == 0 || g_ActorSlots[work->unk_06].header.mode == 1) &&
+        g_AreaCameraMoving == 0) {
         work->unk_06 = 0;
         g_Task->unk_03 -= 2;
     }

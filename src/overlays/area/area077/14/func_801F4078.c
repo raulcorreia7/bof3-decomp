@@ -9,5 +9,5 @@ MATCH void func_801F4078(void) {
     g_Task->y.fixed = 0x60000;
     g_Task->z.fixed = Area_SampleHeight(g_Task->x.fixed, g_Task->y.fixed) << 16;
     g_Task->vx      = 300;
-    g_Task->mode++;
+    g_Task->header.mode++;
 }

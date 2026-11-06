@@ -14,6 +14,6 @@ MATCH void func_800AE6C8(void) {
     work->unk_10    = value;
     work->unk_30    = total;
     if (counter == 16) {
-        BATTLE_WORK->mode++;
+        BATTLE_WORK->header.mode++;
     }
 }

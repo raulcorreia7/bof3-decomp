@@ -16,7 +16,7 @@ MATCH void func_801B207C(void) {
         g_Task = work;
         awake  = 3;
         limit  = -(frames << 5);
-        if (work->mode == awake && limit < (s8)work->tint.bytes.unk_5D) {
+        if (work->header.mode == awake && limit < (s8)work->tint.bytes.unk_5D) {
             work->tint.bytes.unk_5D   = limit;
             g_Task->tint.bytes.unk_5E = g_Task->tint.bytes.unk_5D;
             g_Task->tint.bytes.unk_5F = g_Task->tint.bytes.unk_5D;
@@ -24,6 +24,6 @@ MATCH void func_801B207C(void) {
     }
     TASK_SET(g_BattlePartyBattlers);
     if (g_BattlePartyBattlers[0].unk_09 == 4) {
-        ((PartyBattler*)g_BattlePartyBattlers)[0].step += 1;
+        ((PartyBattler*)g_BattlePartyBattlers)[0].header.step += 1;
     }
 }

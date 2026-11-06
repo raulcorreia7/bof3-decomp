@@ -9,5 +9,5 @@ MATCH void func_801E6420(void) {
     slot->unk_09         = 2;
     slot->unk_0C         = 0x100;
     slot->unk_10         = 0;
-    D_801EC2E0->mode++;
+    D_801EC2E0->header.mode++;
 }

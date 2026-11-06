@@ -18,8 +18,8 @@ MATCH void Actor_GrowAndSetStep3(void) {
     scratch->scale.x += 0x2000;
 
     if (scratch2->unk_09 == 0) {
-        scratch2->unk_48 = 0;
-        g_Task->mode     = 3;
+        scratch2->unk_48    = 0;
+        g_Task->header.mode = 3;
     }
 
     Area_AddActor();

@@ -25,7 +25,7 @@ MATCH void Char_WalkStep(void) {
     Area_ReadStepHeight(x, y, g_Task->direction_08);
     if (SP_REF(u8, 0x0u) != 0 && dist >= 65) {
         Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x46);
-        g_Task->step++;
+        g_Task->header.step++;
     } else {
         g_Task->unk_2B = 1;
         x              = g_Task->x.fixed + g_FacingSteps[3].x;
@@ -46,5 +46,5 @@ MATCH void Char_WalkStep(void) {
         g_Task->unk_0A = 5;
     }
     g_Task->unk_0B = 0;
-    g_Task->step++;
+    g_Task->header.step++;
 }

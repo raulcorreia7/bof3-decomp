@@ -32,7 +32,7 @@ MATCH u8 func_801DB844(u32 battler_index) {
     } else {
         index  = (battler_index - 3u) & BYTE_MASK;
         offset = index * 280u;
-        if ((g_BattleEnemyBattlers[index].flags & 1u) == 0u) {
+        if ((g_BattleEnemyBattlers[index].header.flags & 1u) == 0u) {
             return false;
         }
         if ((g_BattleEnemyBattlers[index].status & 0x4164u) != 0u) {

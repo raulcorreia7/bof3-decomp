@@ -60,8 +60,8 @@ MATCH void func_801E0788(void) {
             w                     = g_GameState;
             flags                 = w->damage_flags.value & ~0x70;
             w->damage_flags.value = flags & ~0x200;
-            g_Task->mode          = 3;
-            g_Task->step          = 0;
+            g_Task->header.mode   = 3;
+            g_Task->header.step   = 0;
             g_Task->unk_03        = 0;
         }
     }

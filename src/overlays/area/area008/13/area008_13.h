@@ -64,10 +64,6 @@ void func_801F43C8(void);
 void func_801F4424(void);
 /* func_801F450C */
 void Area_AddCameraOffsetX20(void);
-/* func_801F4578 */
-void Area_AddCameraOffsetY20(void);
-/* func_801F45A0 */
-void Area_SubCameraOffsetY20(void);
 void Area_ResetCameraOffsetY(void);
 void func_801F45E4(void);
 void func_801F4600(void);
@@ -77,11 +73,11 @@ void func_801F461C(void);
  * else mode 5 when the second byte is 3. */
 static inline void FieldSelectDrawMode(void) {
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
-        g_Task->mode = 9;
+        g_Task->header.mode = 9;
         return;
     }
     if (g_ScriptVars[2] == 3) {
-        g_Task->mode = 5;
+        g_Task->header.mode = 5;
     }
 }
 
@@ -93,19 +89,19 @@ static inline void FieldActivateActor(void) {
     s32    index;
 
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
-        g_Task->mode = 0x0E;
+        g_Task->header.mode = 0x0E;
         return;
     }
     s = &g_Actors[g_Task->unk_0B];
-    s->flags |= 0x40;
+    s->header.flags |= 0x40;
     s               = g_Task;
     index           = s->unk_0B;
     g_ScriptVars[2] = 3;
     e               = &g_Actors[index];
     g_Task          = e;
     Actor_SelectScript(1);
-    s->mode = 1;
-    g_Task  = s;
+    s->header.mode = 1;
+    g_Task         = s;
 }
 
 #endif

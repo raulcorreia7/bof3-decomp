@@ -14,5 +14,5 @@ MATCH void func_801E6B28(void) {
     } else {
         Actor_SelectScript(2);
     }
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }

@@ -8,11 +8,11 @@ MATCH void Actor_MoveByVelocity(void) {
 
     scratch = g_Task;
     if (scratch->unk_0B != 0) {
-        if ((scratch->flags & 0x80) != 0) {
+        if ((scratch->header.flags & 0x80) != 0) {
             Actor_Clear();
             return;
         }
-    } else if ((scratch->flags & 0x80) == 0) {
+    } else if ((scratch->header.flags & 0x80) == 0) {
         scratch->unk_0B = 1;
     }
 

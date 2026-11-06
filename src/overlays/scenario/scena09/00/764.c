@@ -16,7 +16,7 @@ MATCH void func_801F73A0(void) {
     func_801F7574();
     func_801F76D0();
     g_Task->unk_09 = 0xFF;
-    g_Task->mode++;
+    g_Task->header.mode++;
 }
 
 MATCH void func_801F73F0(void) {

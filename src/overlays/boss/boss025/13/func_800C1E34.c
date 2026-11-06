@@ -11,5 +11,5 @@ MATCH void func_800C1E34(void) {
         Actor_RequestScript(0xC);
     }
     func_801E30F8();
-    g_Task->mode++;
+    g_Task->header.mode++;
 }

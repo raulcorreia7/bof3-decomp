@@ -17,7 +17,7 @@ MATCH void func_801EF000(void) {
     if (g_Task->unk_0B == 3) {
         slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK;
         work                                   = g_Task;
-        g_BattleEffects[slot].mode             = 1;
+        g_BattleEffects[slot].header.mode      = 1;
         g_BattleEffects[slot].target.party     = work;
         facing                                 = D_801EB4E0->facing;
         g_BattleEffects[slot].unk_09           = 0;
@@ -26,7 +26,7 @@ MATCH void func_801EF000(void) {
         g_BattleEffects[slot].pos.x            = g_Task->pos.x;
         g_BattleEffects[slot].pos.y            = g_Task->pos.y;
         COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(g_Task->pos.z);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -37,7 +37,7 @@ INCLUDE_ASM(func_801EF1F8);
 MATCH void func_801EF35C(void) {
     if (g_Task->unk_0B == 6) {
         g_Task->unk_0B = 0x84;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -46,7 +46,7 @@ MATCH void func_801EF3A0(void) {
 
     work = g_Task;
     if (work->unk_0B == 0x80) {
-        work->mode = (work->mode + 1);
+        work->header.mode = (work->header.mode + 1);
     }
 }
 
@@ -57,7 +57,7 @@ MATCH void func_801EF3A0(void) {
 INCLUDE_ASM(func_801EF4F0);
 
 MATCH void func_801EF75C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF7A0);
@@ -69,7 +69,7 @@ MATCH void func_801EF844(void) {
     g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x21) {
         D_801EB4E0->unk_0B = 3;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -79,8 +79,8 @@ MATCH void func_801EF8A4(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->unk_0B == 132) {
-        work       = g_Task;
-        work->step = work->step + 1;
+        work              = g_Task;
+        work->header.step = work->header.step + 1;
     }
 }
 
@@ -91,8 +91,8 @@ MATCH void func_801EF8E4(void) {
 INCLUDE_ASM(func_801EF944);
 
 MATCH void func_801EFC28(void) {
-    SYS_DISPATCH_BYTE(D_801F0BC0, g_Task->step);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(D_801F0BC0, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
         Effect_SetActorMatrix();
         func_801EFDA0();
         PopMatrix();
@@ -106,7 +106,7 @@ MATCH void func_801EFCA0(void) {
     g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x28) {
         D_801EB4E0->unk_0B = 4;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -116,8 +116,8 @@ MATCH void func_801EFD00(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->unk_0B == 132) {
-        work       = g_Task;
-        work->step = work->step + 1;
+        work              = g_Task;
+        work->header.step = work->header.step + 1;
     }
 }
 
@@ -128,8 +128,8 @@ MATCH void func_801EFD40(void) {
 INCLUDE_ASM(func_801EFDA0);
 
 MATCH void func_801F0140(void) {
-    SYS_DISPATCH_BYTE(D_801F0BCC, g_Task->step);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(D_801F0BCC, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
         Effect_SetActorMatrix();
         func_801F02CC();
         PopMatrix();
@@ -143,14 +143,14 @@ MATCH void func_801F01B8(void) {
     g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x31) {
         D_801EB4E0->unk_0B = 5;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801F0218(void) {
     if (D_801EB4E0->unk_0B == 0x84) {
         SND_PlayCue(0x103U);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

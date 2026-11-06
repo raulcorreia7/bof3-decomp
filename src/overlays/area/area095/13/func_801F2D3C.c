@@ -7,7 +7,7 @@ MATCH void func_801F2D3C(void) {
         g_Task->z.fixed = -0x100;
         g_Task->unk_0B  = 0x80;
         g_Task->unk_09  = 0xA;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
         func_801F2F3C(-0x100, 0x80);
     }
 }

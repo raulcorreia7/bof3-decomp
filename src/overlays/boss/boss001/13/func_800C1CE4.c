@@ -6,5 +6,5 @@ MATCH void func_800C1CE4(void) {
     func_801E2314(4);
     work       = g_Task;
     D_801463BE = 0x3C;
-    work->step++;
+    work->header.step++;
 }

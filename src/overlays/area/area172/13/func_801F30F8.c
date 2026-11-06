@@ -19,6 +19,6 @@ MATCH void func_801F30F8(void) {
         g_Task->unk_06            = 0;
         g_Task->tint.bytes.unk_5D = 8;
         g_Task->unk_09            = 0x78;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }

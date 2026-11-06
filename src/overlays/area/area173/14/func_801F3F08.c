@@ -11,8 +11,8 @@ MATCH void func_801F3F08(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(EMI_CUE_ID(2, 1));
         }
-        scratch       = g_Task;
-        scratch->step = 1;
+        scratch              = g_Task;
+        scratch->header.step = 1;
     }
     if ((s16)g_Task->unk_30 >= 0x80) {
         delta = -2;

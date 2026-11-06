@@ -11,23 +11,6 @@ extern u8 D_80148654;
 
 #define g_SceneState (*(struct SceneState*)&g_SceneState)
 
-/* The ability-list record. @source: read:func_801D73B4 */
-typedef struct BateAbilityPanel {
-    u8  pad_00[4];
-    u16 x;
-    u16 y;
-    u8  unk_08;
-    u8  flags;
-    u8  unk_0A;
-    u8  unk_0B;
-    u8  unk_0C;
-    u8  selected;
-    u8  pad_0E[2];
-    s16 unk_10;
-    u8  pad_12[0xE];
-    u8* names;
-} BateAbilityPanel;
-
 extern s8            D_80144DE4;
 extern u8            D_80144DF2;
 extern u8            D_80144DF3;
@@ -96,18 +79,15 @@ typedef struct BateState {
 extern s8        D_80148659;
 extern BateState D_801D8ED4;
 
-void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 s32  Item_Count(u8 category, u8 item, u8 mode);
-void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 s32  Char_GetExpForLevel(s32 character, s32 level);
-void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 
-void func_801D73B4(BateAbilityPanel* panel);
+void func_801D73B4(MenuListPanel* panel);
 
 #endif

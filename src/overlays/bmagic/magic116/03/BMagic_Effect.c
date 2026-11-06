@@ -17,7 +17,7 @@ MATCH void func_801EEC80(void) {
     g_Task     = D_801EC2E0->target.party;
     Actor_SelectScript(1U);
     g_Task = saved_work;
-    saved_work->mode += 1;
+    saved_work->header.mode += 1;
 }
 
 MATCH void func_801EED2C(void) {
@@ -28,7 +28,7 @@ MATCH void func_801EED2C(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         g_Task        = saved;
         saved->unk_09 = 0x78;
-        g_Task->mode++;
+        g_Task->header.mode++;
         SND_PlayCue(0x100);
     }
     g_Task = saved;

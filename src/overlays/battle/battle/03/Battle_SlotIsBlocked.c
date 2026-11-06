@@ -9,7 +9,7 @@ MATCH u8 Battle_SlotIsBlocked(u32 slot) {
     index = slot & BYTE_MASK;
     if (index < 3u) {
         offset = index * 320u;
-        if ((g_BattlePartyBattlers[index].flags & PARTY_BATTLER_FLAG_OCCUPIED) == 0) {
+        if ((g_BattlePartyBattlers[index].header.flags & PARTY_BATTLER_FLAG_OCCUPIED) == 0) {
             return true;
         }
         if (HAS_STATUS(g_BattlePartyBattlers[index], STATUS_KO)) {
@@ -18,7 +18,7 @@ MATCH u8 Battle_SlotIsBlocked(u32 slot) {
     } else {
         subindex = (slot - 3u) & BYTE_MASK;
         offset   = subindex * 280u;
-        if ((g_BattleEnemyBattlers[subindex].flags & 1u) == 0u) {
+        if ((g_BattleEnemyBattlers[subindex].header.flags & 1u) == 0u) {
             return true;
         }
         if ((g_BattleEnemyBattlers[subindex].status & STATUS_KO) != 0u) {

@@ -12,9 +12,9 @@ MATCH void func_800C1B48(void) {
         Area_FindSceneRecord(0x83);
         Actor_SelectScript(0U);
         Battle_DefeatEnemy();
-        g_Task->flags &= ~ACTOR_FLAG_HIDDEN;
-        g_Task->mode = 6;
-        g_Task->step = 4;
+        g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
+        g_Task->header.mode = 6;
+        g_Task->header.step = 4;
         g_Task->unk_03 += 1;
         g_Task->unk_04 = 0;
         return;

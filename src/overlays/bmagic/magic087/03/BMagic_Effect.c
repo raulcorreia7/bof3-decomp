@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF0A8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF0EC(void) {
@@ -25,7 +25,7 @@ MATCH void func_801EF2C0(void) {
         g_Task->unk_04 = 0;
         g_Task->unk_09 = 8;
         g_Task->timer  = 0x10;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -37,7 +37,7 @@ MATCH void func_801EF4A0(void) {
     counter        = g_Task->unk_09 + 1;
     g_Task->unk_09 = counter;
     if ((counter & 0xFF) == 0x10) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
         return;
     }
     g_Task->unk_04 += 1;
@@ -72,7 +72,7 @@ MATCH void func_801EFA2C(void) {
     if (!(value & 0xFF)) {
         g_Task->unk_0C = 0x100;
         g_Task->unk_18 = 4;
-        if (g_Task->mode != 0) {
+        if (g_Task->header.mode != 0) {
             g_Task->unk_0B = 0;
             g_Task->unk_09 = 0;
         } else {
@@ -80,7 +80,7 @@ MATCH void func_801EFA2C(void) {
             g_Task->unk_09 = 0x1F;
         }
         g_Task->timer = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -92,8 +92,8 @@ MATCH void func_801EFCA0(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->unk_0B == 130) {
-        work       = SP_REF(PartyBattler*, 0x44u);
-        work->step = work->step + 1;
+        work              = SP_REF(PartyBattler*, 0x44u);
+        work->header.step = work->header.step + 1;
     }
 }
 
@@ -104,17 +104,17 @@ MATCH void func_801EFCE0(void) {
     g_Task->timer = timer;
     if (!(timer & 0xFF)) {
         BATTLE_ACTIVE_WORK->unk_0B -= 1;
-        g_Task->flags  = 0;
-        g_Task->mode   = 0;
-        g_Task->step   = 0;
-        g_Task->unk_03 = 0;
-        g_Task->unk_04 = 0;
+        g_Task->header.flags = 0;
+        g_Task->header.mode  = 0;
+        g_Task->header.step  = 0;
+        g_Task->unk_03       = 0;
+        g_Task->unk_04       = 0;
     }
 }
 
 MATCH void func_801EFD7C(void) {
-    SYS_DISPATCH_BYTE(D_801F0540, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F0540, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EFF50();
         func_801F0014();
         PopMatrix();
@@ -125,14 +125,14 @@ MATCH void func_801EFE04(void) {
     g_Task->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed;
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed;
     g_Task->pos.z.fixed = BATTLE_ACTIVE_WORK->pos.z.fixed;
-    if (g_Task->mode == 2) {
+    if (g_Task->header.mode == 2) {
         g_Task->unk_0B = 0;
     } else {
         g_Task->unk_0B = 8;
     }
     g_Task->unk_09 = 0;
     g_Task->timer  = 0x20;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 INCLUDE_ASM(func_801EFE90);

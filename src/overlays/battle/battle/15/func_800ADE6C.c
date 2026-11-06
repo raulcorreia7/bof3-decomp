@@ -7,12 +7,12 @@ MATCH void func_800ADE6C(void) {
     s32           slot;
 
     if ((g_MenuPanelTasks[19].active & 1) == 0) {
-        BATTLE_WORK->mode = 2;
-        BATTLE_WORK->step = 0;
+        BATTLE_WORK->header.mode = 2;
+        BATTLE_WORK->header.step = 0;
         return;
     }
     if ((s16)g_MenuPanelTasks[19].unk_1E != (s16)g_MenuPanelTasks[19].unk_12) {
-        BATTLE_WORK->mode = 0;
+        BATTLE_WORK->header.mode = 0;
         return;
     }
     work              = BATTLE_WORK;

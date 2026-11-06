@@ -15,7 +15,5 @@ void            func_801F0168(void);
 void            func_801F0218(void);
 
 extern Callback D_801F0D98[];
-void            func_801F07A8(void);
-void            func_801F07A8(void);
 
 #endif

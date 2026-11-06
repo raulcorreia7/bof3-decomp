@@ -21,7 +21,7 @@ MATCH void func_801B60DC(s32 actor_index) {
             }
         }
         g_GameState->slot_12D = actor_index;
-        g_Task->mode          = 0xB;
+        g_Task->header.mode   = 0xB;
         ACTOR_CLEAR_STEP();
     }
 }

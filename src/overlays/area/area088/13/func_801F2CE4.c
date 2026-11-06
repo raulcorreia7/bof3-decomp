@@ -15,6 +15,6 @@ MATCH void func_801F2CE4(void) {
     g_Task->x.fixed = x;
     if (x == 0x170000) {
         g_Task->unk_09 = 0x20;
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

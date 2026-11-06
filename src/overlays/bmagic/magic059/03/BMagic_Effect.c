@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EED0C);
 INCLUDE_ASM(func_801EF118);
 
 MATCH void func_801EF1E0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF224);
@@ -34,7 +34,7 @@ MATCH void func_801EF504(void) {
     work->timer += 2;
     if (work->timer == 32) {
         work = g_Task;
-        work->step++;
+        work->header.step++;
     }
 }
 
@@ -44,7 +44,7 @@ MATCH void func_801EF570(void) {
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
     if (timer == 0xA0) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -94,7 +94,7 @@ MATCH void func_801F0070(void) {
     work->timer++;
     if (work->timer == 32) {
         work = g_Task;
-        work->step++;
+        work->header.step++;
     }
 }
 
@@ -104,7 +104,7 @@ MATCH void func_801F00DC(void) {
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
     if (timer == 160) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 

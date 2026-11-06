@@ -8,5 +8,5 @@ MATCH void func_801F2CC4(void) {
     work->tint.bytes.unk_5E = 0;
     work->tint.bytes.unk_5D = 0;
     g_Task->unk_09          = 0x3C;
-    g_Task->mode            = 1;
+    g_Task->header.mode     = 1;
 }

@@ -7,8 +7,8 @@ MATCH void Effect_NextStepUnderTickLimit(void) {
 
     work = g_Task;
     if (work->unk_0B < 5) {
-        work->unk_09 = 8;
-        work         = g_Task;
-        work->step   = work->step + 1;
+        work->unk_09      = 8;
+        work              = g_Task;
+        work->header.step = work->header.step + 1;
     }
 }

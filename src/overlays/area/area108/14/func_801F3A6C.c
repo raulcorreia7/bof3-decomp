@@ -7,7 +7,7 @@ MATCH void func_801F3A6C(void) {
         g_Task->tint.bytes.unk_5E -= 6;
         g_Task->tint.bytes.unk_5F -= 6;
     } else {
-        g_Task->mode = 6;
+        g_Task->header.mode = 6;
     }
     func_801F3BA0();
     func_801F3C84();

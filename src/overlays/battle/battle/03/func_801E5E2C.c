@@ -53,7 +53,7 @@ loop:
     slot->unk_0A = digits;
     slot->unk_09 = 8;
     slot->unk_32 = 0;
-    slot->mode += 1;
+    slot->header.mode += 1;
 }
 #else
 INCLUDE_ASM(func_801E5E2C);

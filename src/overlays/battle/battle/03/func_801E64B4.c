@@ -19,6 +19,6 @@ MATCH void func_801E64B4(void) {
         slot->unk_09 -= 1;
         return;
     }
-    slot->mode += 1;
+    slot->header.mode += 1;
     D_801EC2E0->unk_09 = 2;
 }

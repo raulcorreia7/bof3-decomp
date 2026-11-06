@@ -15,9 +15,9 @@ MATCH void func_801EEF98(void) {
 
     work = g_Task;
     if (work->unk_0B != 0) {
-        work->unk_09 = 8;
-        work         = g_Task;
-        work->mode   = work->mode + 1;
+        work->unk_09      = 8;
+        work              = g_Task;
+        work->header.mode = work->header.mode + 1;
     }
 }
 
@@ -34,15 +34,15 @@ MATCH void func_801EF0EC(void) {
 }
 
 MATCH void func_801EF16C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 #include "overlays/bmagic/Effect_SetActorMatrixRolled.h"
 
 MATCH void func_801EF264(void) {
-    D_801F09A0[g_Task->step]();
+    D_801F09A0[g_Task->header.step]();
     func_800AF764();
-    if (g_Task->step != 0) {
+    if (g_Task->header.step != 0) {
         Effect_SetActorMatrixRolled();
         func_801EF8F0(0x60, 0x20, 7);
         PopMatrix();
@@ -56,7 +56,7 @@ MATCH void func_801EF2EC(void) {
     g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
     g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
     g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF374(void) {
@@ -86,9 +86,9 @@ MATCH void func_801EF4C4(void) {
     PartyBattler* work;
 
     work = g_Task;
-    D_801F09B0[work->step]();
+    D_801F09B0[work->header.step]();
     func_800AF764();
-    if (g_Task->flags != 0) {
+    if (g_Task->header.flags != 0) {
         Effect_SetActorMatrixRolled();
         func_801EF8F0(0x20, 0x50, 0xF);
         func_801F070C();
@@ -139,9 +139,9 @@ MATCH void func_801EF7D8(void) {
 INCLUDE_ASM(func_801EF8F0);
 
 MATCH void func_801F0008(void) {
-    D_801F09C0[g_Task->step]();
+    D_801F09C0[g_Task->header.step]();
     func_800AF764();
-    if (g_Task->step != 0) {
+    if (g_Task->header.step != 0) {
         Effect_SetActorMatrixRolled();
         func_801F043C();
         func_801F070C();
@@ -175,7 +175,7 @@ MATCH void func_801F0090(void) {
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     COORD_INT(g_Task->pos.z) = COORD_INT(BATTLE_ACTIVE_WORK->pos.z);
-    g_Task->step++;
+    g_Task->header.step++;
 }
 
 MATCH void func_801F01AC(void) {
@@ -187,7 +187,7 @@ MATCH void func_801F01AC(void) {
     } else {
         work->unk_09 = 60;
         work         = g_Task;
-        work->step++;
+        work->header.step++;
     }
 }
 

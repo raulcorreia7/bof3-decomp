@@ -14,7 +14,7 @@ MATCH void func_801EEE84(void) {
     temp_v0       = g_Task->timer + 1;
     g_Task->timer = temp_v0;
     if ((temp_v0 & 0xFF) >= 0x21U) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         g_Task->unk_09 = 0;
     }
 }
@@ -25,7 +25,7 @@ MATCH void func_801EEEE4(void) {
     temp_v0        = g_Task->unk_09 + 1;
     g_Task->unk_09 = temp_v0;
     if ((temp_v0 & 0xFF) >= 0x21U) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         g_Task->unk_09 = 0;
     }
 }
@@ -38,7 +38,7 @@ MATCH void func_801EEFFC(void) {
     temp_v0        = g_Task->unk_09 - 1;
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         return;
     }
     func_801F0FBC();
@@ -50,7 +50,7 @@ MATCH void func_801EF060(void) {
     temp_v0       = g_Task->timer - 1;
     g_Task->timer = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
         g_Task->unk_09 = 0x40;
     }
 }
@@ -98,8 +98,8 @@ INCLUDE_ASM(func_801EF8C0);
 INCLUDE_ASM(func_801EFA80);
 
 MATCH void func_801EFDD8(void) {
-    SYS_DISPATCH_BYTE(D_801F1230, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F1230, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801F093C();
         func_801F04D4(g_Task->unk_0B);
         func_801F0004();
@@ -121,7 +121,7 @@ MATCH void func_801EFF1C(void) {
     g_Task->unk_14 = value;
     if (value == 0xC0) {
         g_Task->unk_0B = 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -144,7 +144,7 @@ INCLUDE_ASM(func_801F093C);
 
 MATCH void func_801F0D08(void) {
     g_ScriptBank = 0x800C3800;
-    SYS_DISPATCH_BYTE(D_801F1230 + 3, g_Task->step);
+    SYS_DISPATCH_BYTE(D_801F1230 + 3, g_Task->header.step);
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
@@ -162,7 +162,7 @@ MATCH void func_801F0D6C(void) {
     work->unk_2B      = 0;
     work->unk_2C.half = 0;
     g_Task->unk_09    = 0;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
     Actor_SelectScript(0);
     func_8014D290();
 }

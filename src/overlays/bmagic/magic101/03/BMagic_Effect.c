@@ -8,8 +8,8 @@ MATCH void func_801EEC18(void) {
     BattleHandlerTable5 handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->mode);
-    if (g_Task->timer != 0 && g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
+    if (g_Task->timer != 0 && g_Task->header.flags != 0) {
         Effect_SetActorMatrix();
         func_801EF07C();
         PopMatrix();
@@ -43,7 +43,7 @@ have_facing:
     g_Task->unk_0B = 0;
     g_Task->unk_09 = 0x30;
     g_Task->timer  = 0;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
     counter = 0;
     do {
         offset                                   = (Battle_AllocEffect(1, 0x1B) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
@@ -69,7 +69,7 @@ MATCH void func_801EEE68(void) {
     g_Task->timer = timer;
     if (timer == 16) {
         func_800A9610(g_BattleTargetSelector, 0x10);
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
@@ -81,7 +81,7 @@ MATCH void func_801EEF20(void) {
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (timer == 0) {
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
@@ -92,12 +92,12 @@ MATCH void func_801EEF20(void) {
 INCLUDE_ASM(func_801EF07C);
 
 MATCH void func_801EF310(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF354(void) {
-    SYS_DISPATCH_BYTE(D_801EFCE8, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801EFCE8, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EF78C();
         func_801EF88C();
         PopMatrix();
@@ -113,20 +113,20 @@ NON_MATCHING void func_801EF3DC(void) {
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
-        g_Task->facing    = D_801EB4E0->facing;
-        g_Task->pos.x.raw = D_801EB4E0->pos.x.raw;
-        angle             = g_Task->unk_04;
-        g_Task->pos.y.raw = D_801EB4E0->pos.y.raw;
-        g_Task->unk_0B    = angle * 4 & 0x3F;
-        g_Task->pos.z.raw = D_801EB4E0->pos.z.raw + 0x01800000;
-        value             = D_801EFCC0[g_Task->unk_04];
-        g_Task->unk_10    = 0x60;
-        angle             = g_Task->unk_04;
-        g_Task->unk_14    = 0x20;
-        g_Task->unk_09    = angle * 4 + 1;
-        g_Task->unk_0C    = value << 8;
-        g_Task->timer     = 0;
-        g_Task->step      = g_Task->step + 1;
+        g_Task->facing      = D_801EB4E0->facing;
+        g_Task->pos.x.raw   = D_801EB4E0->pos.x.raw;
+        angle               = g_Task->unk_04;
+        g_Task->pos.y.raw   = D_801EB4E0->pos.y.raw;
+        g_Task->unk_0B      = angle * 4 & 0x3F;
+        g_Task->pos.z.raw   = D_801EB4E0->pos.z.raw + 0x01800000;
+        value               = D_801EFCC0[g_Task->unk_04];
+        g_Task->unk_10      = 0x60;
+        angle               = g_Task->unk_04;
+        g_Task->unk_14      = 0x20;
+        g_Task->unk_09      = angle * 4 + 1;
+        g_Task->unk_0C      = value << 8;
+        g_Task->timer       = 0;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 #else
@@ -147,7 +147,7 @@ MATCH void func_801EF690(void) {
     counter      = work->unk_09 - 1;
     work->unk_09 = counter;
     if (!(counter & 0xFF)) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

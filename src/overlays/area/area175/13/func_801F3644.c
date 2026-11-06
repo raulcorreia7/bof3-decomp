@@ -7,6 +7,6 @@ MATCH void func_801F3644(void) {
     mode           = g_Task->unk_09 - 1;
     g_Task->unk_09 = mode;
     if (!(mode & 0xFF)) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }

@@ -44,7 +44,7 @@ MATCH void func_801E3C14(void) {
     }
     lock_work = g_BattleCurrentEnemy;
     if ((lock_work->target_flags & 1) && lock_work->hp_change == 0) {
-        g_Task->step = 3;
+        g_Task->header.step = 3;
         return;
     }
     if (!(g_BattleCurrentEnemy->damage_flags & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {

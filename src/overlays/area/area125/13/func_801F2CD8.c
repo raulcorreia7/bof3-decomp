@@ -7,6 +7,6 @@ MATCH void func_801F2CD8(void) {
     actor = g_Task;
     actor->unk_09--;
     if (actor->unk_09 == 0) {
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }

@@ -6,6 +6,6 @@ MATCH void func_801F2E28(void) {
     if ((u8)((Actor*)g_Task)->unk_09 >= 0x1FU) {
         func_801A4BC0(COORD_INT(((Actor*)g_Task)->x), COORD_INT(((Actor*)g_Task)->y), 0);
         ((Actor*)g_Task)->unk_09 = 0x1F;
-        ((Actor*)g_Task)->step += 1;
+        ((Actor*)g_Task)->header.step += 1;
     }
 }

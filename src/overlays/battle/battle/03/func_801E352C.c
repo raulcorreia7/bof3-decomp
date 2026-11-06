@@ -16,9 +16,9 @@ MATCH void func_801E352C(void) {
     COORD_INT(work2->pos.z) = value;
     if (work2->pos.x.fixed == work2->unk_18) {
         if (work2->pos.y.fixed == work2->unk_1C) {
-            work2->mode    = 3;
-            g_Task->step   = 0;
-            g_Task->unk_03 = 0;
+            work2->header.mode  = 3;
+            g_Task->header.step = 0;
+            g_Task->unk_03      = 0;
         }
     }
 }

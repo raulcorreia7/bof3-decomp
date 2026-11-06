@@ -2,6 +2,6 @@
 
 MATCH void func_801F30E4(void) {
     if (g_ScriptVars[3] == 0xA) {
-        g_Task->mode = 2;
+        g_Task->header.mode = 2;
     }
 }

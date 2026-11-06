@@ -19,25 +19,25 @@ MATCH void func_801EEC5C(void) {
     for (i = 0; i < 4; i++) {
         slot                               = Battle_AllocEffect(1, 0x2B) & BYTE_MASK;
         work                               = g_Task;
-        g_BattleEffects[slot].mode         = i;
-        g_BattleEffects[slot].step         = 0;
+        g_BattleEffects[slot].header.mode  = i;
+        g_BattleEffects[slot].header.step  = 0;
         g_BattleEffects[slot].unk_09       = 0x10;
         g_BattleEffects[slot].target.party = work;
         g_Task->unk_0B                     = g_Task->unk_0B + 1;
     }
     SND_QueueSelectionFx(0x100);
-    g_Task->mode = g_Task->mode + 1;
+    g_Task->header.mode = g_Task->header.mode + 1;
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EED98(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEDDC(void) {
-    SYS_DISPATCH_BYTE(D_801F02B4, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F02B4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF458();
         PopMatrix();
@@ -60,7 +60,7 @@ MATCH void func_801EEF34(void) {
     g_Task->timer = temp_v1;
     if ((temp_v1 & 0xFF) == 0x30) {
         g_Task->unk_09 = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -76,7 +76,7 @@ MATCH void func_801EEFB8(void) {
     g_Task->timer = temp_v1;
     if ((temp_v1 & 0xFF) == 0x10) {
         D_801EB4E0->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -93,8 +93,8 @@ MATCH void func_801EF048(void) {
 }
 
 MATCH void func_801EF0A8(void) {
-    SYS_DISPATCH_BYTE(D_801F02C8, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F02C8, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EF458();
         PopMatrix();
@@ -112,8 +112,8 @@ MATCH void func_801EF1DC(void) {
     COORD_INT(work->pos.z) -= 0x40;
     work->unk_09 = timer;
     if (timer == 0) {
-        g_Task->unk_09 = 0x20;
-        g_Task->step   = g_Task->step + 1;
+        g_Task->unk_09      = 0x20;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -129,7 +129,7 @@ MATCH void func_801EF23C(void) {
     g_Task->timer = temp_v1;
     if ((temp_v1 & 0xFF) == 0x80) {
         g_Task->unk_09 = 0x20;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -145,7 +145,7 @@ MATCH void func_801EF2BC(void) {
     g_Task->timer = temp_v1;
     if ((temp_v1 & 0xFF) == 0xA0) {
         D_801EB4E0->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -166,8 +166,8 @@ MATCH void func_801EF348(void) {
 INCLUDE_ASM(func_801EF458);
 
 MATCH void func_801EFBEC(void) {
-    SYS_DISPATCH_BYTE(D_801F035C, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F035C, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801F002C();
         PopMatrix();
@@ -183,15 +183,15 @@ MATCH void func_801EFC74(void) {
     g_Task->pos.z       = src->pos.z;
     g_Task->unk_09      = 4;
     g_Task->timer       = 0xB0;
-    g_Task->step        = g_Task->step + 1;
+    g_Task->header.step = g_Task->header.step + 1;
 }
 
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
 
 MATCH void func_801EFD2C(void) {
     g_Task->timer -= 1;
-    if (D_801EB4E0->unk_0B == g_Task->mode) {
-        g_Task->step += 1;
+    if (D_801EB4E0->unk_0B == g_Task->header.mode) {
+        g_Task->header.step += 1;
     }
 }
 
@@ -211,8 +211,8 @@ MATCH void func_801EFD84(void) {
 }
 
 MATCH void func_801EFE00(void) {
-    SYS_DISPATCH_BYTE(D_801F036C, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F036C, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801F002C();
         PopMatrix();
@@ -231,7 +231,7 @@ MATCH void func_801EFE88(void) {
         g_Task->pos.y.fixed = src->pos.y.fixed;
         g_Task->pos.z       = src->pos.z;
         g_Task->unk_09      = 4;
-        g_Task->step        = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -241,8 +241,8 @@ MATCH void Effect_CountUpAndStep_801EFF08(void) {
 
 MATCH void func_801EFF58(void) {
     g_Task->timer += 1;
-    if (D_801EB4E0->unk_0B == g_Task->mode) {
-        g_Task->step += 1;
+    if (D_801EB4E0->unk_0B == g_Task->header.mode) {
+        g_Task->header.step += 1;
     }
 }
 

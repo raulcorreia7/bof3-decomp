@@ -44,7 +44,7 @@ MATCH void func_801EFB64(void) {
     work->unk_30.half += work->unk_10;
     if (timer == 0) {
         g_Task->unk_09 = 0x24;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -57,7 +57,7 @@ MATCH void func_801EFBF8(void) {
     if (!(temp_v0 & 0xFF)) {
         Actor_SelectScript(1U);
         g_Task->unk_09 = 0x29;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -65,8 +65,8 @@ INCLUDE_ASM(func_801EFC74);
 
 MATCH void func_801EFEF0(void) {
     if (func_8014DAEC() != 0u) {
-        g_Task->unk_09 = 0xF;
-        g_Task->step   = g_Task->step + 1;
+        g_Task->unk_09      = 0xF;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -92,7 +92,7 @@ MATCH void func_801EFF48(void) {
         }
         g_Task->unk_09 = 0;
         g_Task->timer  = 0x1E;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -120,8 +120,8 @@ MATCH void func_801F0034(void) {
 }
 
 MATCH void func_801F0100(void) {
-    SYS_DISPATCH_BYTE(D_801F1BF4, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F1BF4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801F030C();
     }
 }
@@ -133,7 +133,7 @@ MATCH void func_801F0100(void) {
 MATCH void func_801F01F8(void) {
     if ((BATTLE_ACTIVE_WORK->unk_09 == 0) && (EMI_LoaderIsReady() != 0)) {
         g_Task->timer = 8;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -144,8 +144,8 @@ MATCH void func_801F01F8(void) {
 INCLUDE_ASM(func_801F030C);
 
 MATCH void func_801F0438(void) {
-    SYS_DISPATCH_BYTE(D_801F1C08, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F1C08, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801F06B4();
         PopMatrix();
@@ -181,8 +181,8 @@ MATCH void func_801F058C(void) {
 INCLUDE_ASM(func_801F06B4);
 
 MATCH void func_801F0B44(void) {
-    SYS_DISPATCH_BYTE(D_801F1C24, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F1C24, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801F0D44();
         func_801F0DF4();
         PopMatrix();
@@ -199,7 +199,7 @@ MATCH void func_801F0C4C(void) {
     g_Task->unk_14 = value;
     if (value == 0x200) {
         g_Task->unk_0B = 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -227,8 +227,8 @@ MATCH void func_801F10F4(void) {
 }
 
 MATCH void func_801F1138(void) {
-    SYS_DISPATCH_BYTE(D_801F1C48, D_801F24E0->step);
-    if (D_801F24E0->flags != 0 && D_801F24E0->step != 0) {
+    SYS_DISPATCH_BYTE(D_801F1C48, D_801F24E0->header.step);
+    if (D_801F24E0->header.flags != 0 && D_801F24E0->header.step != 0) {
         func_801F1B14();
         func_801F1844();
     }
@@ -253,11 +253,11 @@ INCLUDE_ASM(func_801F1844);
 INCLUDE_ASM(func_801F1A58);
 
 MATCH void func_801F1AC4(void) {
-    D_801F24E0->flags  = 0;
-    D_801F24E0->mode   = 0;
-    D_801F24E0->step   = 0;
-    D_801F24E0->unk_03 = 0;
-    D_801F24E0->unk_04 = 0;
+    D_801F24E0->header.flags = 0;
+    D_801F24E0->header.mode  = 0;
+    D_801F24E0->header.step  = 0;
+    D_801F24E0->unk_03       = 0;
+    D_801F24E0->unk_04       = 0;
 }
 
 MATCH void func_801F1B14(void) {

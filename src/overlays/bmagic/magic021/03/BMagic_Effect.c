@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EED30);
 #include "shared/Effect_StartPlaying.h"
 
 MATCH void func_801EEFDC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF020);
@@ -25,7 +25,7 @@ INCLUDE_ASM(func_801EF104);
 MATCH void func_801EF208(void) {
     if (func_8014DAEC() != 0u) {
         func_800A9820(g_BattleTargetSelector);
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -35,13 +35,13 @@ MATCH void func_801EF260(void) {
         g_Task->unk_09 += 4;
         return;
     }
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF2CC(void) {
     if (g_Task->unk_0B == 0) {
         D_801EB4E0->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -56,8 +56,8 @@ MATCH void func_801EF534(void) {
 }
 
 MATCH void func_801EF578(void) {
-    SYS_DISPATCH_BYTE(D_801EFE08, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801EFE08, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_800AF764();
         func_801EF7FC();
         func_801EFA48();

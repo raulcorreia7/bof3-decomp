@@ -18,8 +18,6 @@ extern Callback D_801FE5A0[];
 extern Callback D_801FE5B0[];
 extern Callback D_801FE5C0[];
 
-s16              func_801F326C(s32 message);
-s16              func_801F37AC(s32 message);
 void             func_801F71B0(u8 arg);
 void             func_801F75D8(void);
 s32              func_801F7748(void);

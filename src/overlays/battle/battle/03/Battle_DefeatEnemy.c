@@ -6,8 +6,8 @@ MATCH void Battle_DefeatEnemy(void) {
     int           new_var;
     volatile u32* acc;
 
-    g_Task->flags = g_Task->flags | ACTOR_FLAG_HIDDEN;
-    acc           = &g_BattleSpoilsExp;
+    g_Task->header.flags = g_Task->header.flags | ACTOR_FLAG_HIDDEN;
+    acc                  = &g_BattleSpoilsExp;
     *acc += g_BattleCurrentEnemy->exp;
     ORDER_LOCK_BEGIN
         g_BattleSpoilsZenny += g_BattleCurrentEnemy->zenny;
@@ -28,8 +28,8 @@ MATCH void Battle_DefeatEnemy(void) {
         GFX_FreePaletteFadeTarget(g_Task);
         g_BattleCurrentEnemy->damage_flags &= ~0x70;
         Battle_ClearSlotPending(g_Task->slot);
-        g_Task->mode = 2;
-        g_Task->step = 0;
+        g_Task->header.mode = 2;
+        g_Task->header.step = 0;
     ORDER_LOCK_END;
     g_Task->unk_03 = 0;
 }

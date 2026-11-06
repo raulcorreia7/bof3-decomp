@@ -8,10 +8,10 @@ MATCH void func_801F3724(void) {
     Area_SetCellPalette(0x4A, 0x2F);
     slot = Actor_FindFreeSlot() & 0xFF;
     if (slot != 0xFF) {
-        actor          = &g_ActorSlots[slot];
-        actor->type    = 0xB7;
-        actor->x.fixed = 0x460000;
-        actor->flags   = 1;
-        actor->y.fixed = 0x340000;
+        actor               = &g_ActorSlots[slot];
+        actor->type         = 0xB7;
+        actor->x.fixed      = 0x460000;
+        actor->header.flags = 1;
+        actor->y.fixed      = 0x340000;
     }
 }

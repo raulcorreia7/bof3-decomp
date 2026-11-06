@@ -5,7 +5,7 @@ MATCH void func_801F3D8C(void) {
     if (g_Task->unk_09 >= 0x11) {
         g_Task->unk_09 = 0;
         SND_PlayCue(0x201U);
-        g_Task->step++;
+        g_Task->header.step++;
     }
     func_801F4430();
 }

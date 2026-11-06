@@ -10,5 +10,5 @@ MATCH void func_801F4214(void) {
     temp_v0        = D_801F5818 + 1;
     D_801F5818     = temp_v0;
     g_Task->unk_06 = temp_v0;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }

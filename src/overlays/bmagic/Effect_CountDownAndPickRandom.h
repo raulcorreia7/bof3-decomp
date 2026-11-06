@@ -11,6 +11,6 @@ MATCH void Effect_CountDownAndPickRandom(void) {
         g_Task->unk_0B = rand() & 0xF;
         g_Task->unk_09 = 0;
         g_Task->timer  = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }

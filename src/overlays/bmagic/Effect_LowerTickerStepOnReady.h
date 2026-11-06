@@ -3,6 +3,6 @@
 MATCH void Effect_LowerTickerStepOnReady(void) {
     if (func_8014DAEC() & BYTE_MASK) {
         BATTLE_ACTIVE_WORK->unk_0B--;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }

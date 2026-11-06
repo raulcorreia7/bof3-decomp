@@ -6,6 +6,6 @@ MATCH void func_801EEE3C(void) {
     g_Task->unk_09 += 1;
     g_Task->timer += 1;
     if (g_Task->unk_09 == 0x10) {
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

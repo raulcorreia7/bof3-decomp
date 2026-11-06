@@ -18,5 +18,5 @@ MATCH void func_8019A904(void) {
     D_801481F8.z             = ((work->unk_6C - pos_z) << 0x10) / work->unk_09;
     g_AreaCameraRefreshCount = work->unk_09;
     g_SceneState.flags_01 |= SCENE_STATE_CAMERA_MOVING;
-    work->mode = 1;
+    work->header.mode = 1;
 }

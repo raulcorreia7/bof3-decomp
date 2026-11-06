@@ -23,8 +23,8 @@ MATCH void func_801DEF0C(void) {
     tail                     = g_Task;
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(tail->pos.x.fixed, tail->pos.y.fixed);
     g_Task->unk_2B           = 0;
-    g_Task->mode             = 2;
-    g_Task->step             = 0;
+    g_Task->header.mode      = 2;
+    g_Task->header.step      = 0;
     g_Task->unk_03           = 0;
     g_Task->unk_04           = 0;
 }

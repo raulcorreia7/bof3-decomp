@@ -15,7 +15,7 @@ MATCH void Area_AdvanceCountdown(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x201U);
         }
-        ((Actor*)g_Task)->step = 1;
+        ((Actor*)g_Task)->header.step = 1;
     }
     if ((s16)((Actor*)g_Task)->unk_32 != 0) {
         Area_Update(0);

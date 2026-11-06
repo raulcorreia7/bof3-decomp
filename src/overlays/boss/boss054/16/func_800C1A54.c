@@ -8,5 +8,5 @@ MATCH void func_800C1A54(void) {
     Actor_SelectScript(2);
     g_Task        = saved;
     saved->unk_0C = 8;
-    saved->mode++;
+    saved->header.mode++;
 }

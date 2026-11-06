@@ -15,7 +15,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEE90(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEED4);
@@ -32,7 +32,7 @@ MATCH void func_801EF034(void) {
         dst->unk_30.half = src->unk_30.half - 0x10;
         dst->unk_09      = 0;
         g_Task->timer    = 0x20;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -45,7 +45,7 @@ MATCH void func_801EF0C4(void) {
     if (g_Task->unk_0C == 0) {
         if (g_Task->unk_0B == 0) {
             SND_QueueSelectionFx(0x103);
-            g_Task->step += 1;
+            g_Task->header.step += 1;
             return;
         }
         D_801EB4E0->unk_0B -= 1;
@@ -61,7 +61,7 @@ MATCH void func_801EF15C(void) {
     if ((temp_v1 & 0xFF) == 0x10) {
         func_801F0274();
         g_Task->unk_0B = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -85,7 +85,7 @@ MATCH void func_801EF1D0(void) {
     if (D_801EB4E0->unk_0B == 1) {
         SND_QueueSelectionFx(0x101);
         g_Task->unk_09 = 0x10;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -116,7 +116,7 @@ MATCH void func_801EF430(void) {
         dst->unk_30.half = src->unk_30.half - 0x10;
         dst->unk_09      = 0;
         g_Task->timer    = 0x20;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -154,7 +154,7 @@ MATCH void func_801EF9C4(void) {
     counter        = g_Task->unk_09 + 1;
     g_Task->unk_09 = counter;
     if ((counter & 0xFF) == 0x14) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

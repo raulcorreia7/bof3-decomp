@@ -24,12 +24,12 @@ MATCH void func_801EF09C(void) {
 }
 
 MATCH void func_801EF0DC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EF120(void) {
-    SYS_DISPATCH_BYTE(D_801EF8A4, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801EF8A4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EF3B8();
     }
 }
@@ -60,7 +60,7 @@ MATCH void func_801EF788(void) {
     }
     if (func_8014DAEC() & 0xFF) {
         g_Task->unk_09 = 8;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -71,7 +71,7 @@ MATCH void func_801EF814(void) {
     g_Task->unk_09 = temp_v0;
     if (!(temp_v0 & 0xFF)) {
         D_801EB4E0->unk_0B -= 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

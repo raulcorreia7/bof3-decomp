@@ -6,11 +6,11 @@ MATCH void func_801F4494(void) {
 
     scratch = (Actor*)g_Task;
     if (scratch->unk_0B != 0) {
-        if ((scratch->flags & ACTOR_FLAG_OFFSCREEN) != 0) {
+        if ((scratch->header.flags & ACTOR_FLAG_OFFSCREEN) != 0) {
             Actor_Clear();
             return;
         }
-    } else if ((scratch->flags & ACTOR_FLAG_OFFSCREEN) == 0) {
+    } else if ((scratch->header.flags & ACTOR_FLAG_OFFSCREEN) == 0) {
         scratch->unk_0B = 1;
     }
 

@@ -13,7 +13,7 @@ MATCH void func_801EECB0(void) {
     g_Task->pos.z.fixed = BATTLE_ACTIVE_WORK->pos.z.fixed;
     GFX_CopyPalette(0x1A);
     g_GfxPalettePending += 1;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }
 
 MATCH void func_801EED2C(void) {
@@ -34,10 +34,10 @@ MATCH void func_801EED98(void) {
     Actor_SelectScript(3U);
     g_Task                             = temp_s0;
     slot                               = Battle_AllocEffect(1, 0x41) & BYTE_MASK;
-    g_BattleEffects[slot].mode         = 1;
-    g_BattleEffects[slot].step         = 0;
+    g_BattleEffects[slot].header.mode  = 1;
+    g_BattleEffects[slot].header.step  = 0;
     g_BattleEffects[slot].target.party = g_Task;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EEE50(void) {
@@ -56,8 +56,8 @@ INCLUDE_ASM(func_801EEEB0);
 
 MATCH void func_801EEFA4(void) {
     if (g_Task->unk_09 == g_Task->timer) {
-        g_Task->mode += 1;
-        g_Task->step = 0;
+        g_Task->header.mode += 1;
+        g_Task->header.step = 0;
     }
 }
 
@@ -83,7 +83,7 @@ MATCH void func_801EF08C(void) {
     handlers     = D_801EEC2C;
     g_ScriptBank = 0x800C3800;
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
-    if (g_Task->flags & 1) {
+    if (g_Task->header.flags & 1) {
         func_8014D290();
     }
     g_ScriptBank = 0x800D3800;
@@ -115,7 +115,7 @@ MATCH void func_801EF5BC(void) {
     g_Task->timer  = D_801EFADC[g_Task->unk_09];
     SND_QueueSelectionFx(256);
     g_Task->unk_10 = 0;
-    g_Task->step++;
+    g_Task->header.step++;
 }
 
 /* blocker: body 2-3 instructions fat; first diff: linked table constants +8 and +C. */
@@ -153,7 +153,7 @@ MATCH void func_801EF83C(void) {
     handlers     = D_801EEC44;
     g_ScriptBank = 0x800C3800;
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
-    if ((g_Task->flags & 1) && (D_801EB4E0->timer == 0)) {
+    if ((g_Task->header.flags & 1) && (D_801EB4E0->timer == 0)) {
         func_8014D290();
     }
     g_ScriptBank = 0x800D3800;
@@ -186,7 +186,7 @@ MATCH void func_801EF900(void) {
     g_Task->unk_29         = 4;
     g_Task->unk_2C.half    = 0;
     Actor_SelectScript(0U);
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EFA38(void) {
@@ -196,8 +196,8 @@ MATCH void func_801EFA38(void) {
     g_Task->pos.y.fixed      = D_801EB4E0->pos.y.fixed - 1;
     temp_a0                  = g_Task->pos.x.fixed;
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(temp_a0, temp_a0);
-    if (!(1 & D_801EB4E0->flags)) {
-        g_Task->step += 1;
+    if (!(1 & D_801EB4E0->header.flags)) {
+        g_Task->header.step += 1;
     }
 }
 

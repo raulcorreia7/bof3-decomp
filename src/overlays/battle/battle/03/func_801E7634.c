@@ -21,6 +21,6 @@ MATCH void func_801E7634(void) {
         g_GameState->action_flags.value &= ~1;
         func_801E0B64();
         g_Task = saved;
-        saved->mode++;
+        saved->header.mode++;
     }
 }

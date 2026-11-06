@@ -64,7 +64,7 @@ NON_MATCHING void func_801B1E24(void) {
         found:
             if (i != 0) {
                 Party_ClearBattlerState(i & BYTE_MASK);
-                g_Task->mode = 3;
+                g_Task->header.mode = 3;
                 func_801C2438();
                 g_Task->tint.bytes.flags = 1;
             }

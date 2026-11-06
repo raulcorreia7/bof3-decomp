@@ -27,7 +27,7 @@ MATCH void func_801EF270(void) {
     g_Task->unk_09 = counter;
     if ((counter & 0xFF) == 8) {
         D_801EB4E0->unk_0B = 1;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -69,7 +69,7 @@ MATCH void func_801F009C(void) {
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
     if (timer == 0x60) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -91,7 +91,7 @@ MATCH void func_801F0158(void) {
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
     if (timer == 0x10) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -102,7 +102,7 @@ MATCH void func_801F01C0(void) {
     count         = g_Task->timer - 1;
     g_Task->timer = count;
     if (count == 0) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 

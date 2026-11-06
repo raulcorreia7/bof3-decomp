@@ -12,6 +12,6 @@ MATCH void func_801F3AE8(void) {
     if (((Actor*)g_Task)->tint.signed_bytes.unk_5E < 0) {
         ((Actor*)g_Task)->tint.signed_bytes.unk_5D = 0;
         ((Actor*)g_Task)->tint.signed_bytes.unk_5E = 0;
-        g_Task->mode                               = (g_Task->mode + 1);
+        g_Task->header.mode                        = (g_Task->header.mode + 1);
     }
 }

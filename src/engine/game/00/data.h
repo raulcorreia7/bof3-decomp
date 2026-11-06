@@ -16,18 +16,6 @@
 #define GAME_INDEX_HANDLER(h00, h04, h08, h0C, h10, selector, key)    \
     {(h00), (h04), (h08), (h0C), (h10), (selector), (key), {0, 0, 0}}
 
-/* Four-byte sprite rectangle: u, v, width, height. UI_DrawSprite copies it
- * into a SPRT. */
-typedef struct UvRect {
-    u8 u;
-    u8 v;
-    u8 w;
-    u8 h;
-} UvRect;
-
-/* D_801CCE84[62] spans 0xF8 bytes up to D_801CCF7C. */
-ASSERT_SIZE(UvRect, 0x4);
-
 /* Eight-byte area entry: the area id it applies to, then the map id and the
  * x and y that func_801B6470 stages for the transition. */
 typedef struct WorldMapDestination {
@@ -93,7 +81,7 @@ typedef struct GameDelta {
 
 /* Eight-byte signed position offset. func_801C63B0 adds the pair to the
  * party position when the slots move. */
-typedef Vec2i PositionOffset;
+typedef Vec2S32 PositionOffset;
 
 /* Four-byte battle party slot. func_801C63B0 marks it active, stores its sort
  * key and orders the slots by that key. */

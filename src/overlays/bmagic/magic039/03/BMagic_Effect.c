@@ -26,7 +26,7 @@ MATCH s32 func_801EEF3C(void) {
 }
 
 MATCH void func_801EEF64(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEFA8);
@@ -40,7 +40,7 @@ MATCH void func_801EF070(void) {
     g_Task->pos.z       = src->pos.z;
     g_Task->unk_09      = 0;
     g_Task->timer       = 1;
-    g_Task->step        = g_Task->step + 1;
+    g_Task->header.step = g_Task->header.step + 1;
 }
 
 MATCH void func_801EF0D4(void) {
@@ -50,7 +50,7 @@ MATCH void func_801EF0D4(void) {
     g_Task->unk_09 = temp_v1;
     if ((temp_v1 & 0xFF) == 0x10) {
         g_Task->timer = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -65,7 +65,7 @@ MATCH void func_801EF134(void) {
         selected = &g_BattleSelectedActor;
         func_80196718(*selected);
         g_Task->unk_0B = func_8019651C(*selected, 0, 0, 0, 1);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -91,8 +91,8 @@ MATCH void func_801EF4E4(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC28;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->step);
-    if (ACTOR_IN_USE(*g_Task) && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
         func_800AF764();
         func_801EF758();
     }
@@ -106,7 +106,7 @@ MATCH void func_801EF690(void) {
     timer          = g_Task->unk_09 + 16;
     g_Task->unk_09 = timer;
     if (timer == 128) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 

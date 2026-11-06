@@ -42,7 +42,7 @@ MATCH void func_801D656C(void) {
         func_801DB494();
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
             if (!Battle_SlotIsBlocked(i)) {
-                g_BattlePartyBattlers[i].mode = 2;
+                g_BattlePartyBattlers[i].header.mode = 2;
             }
         }
         g_BattleSurprise = 0;

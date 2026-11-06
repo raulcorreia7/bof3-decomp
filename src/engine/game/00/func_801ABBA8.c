@@ -30,5 +30,5 @@ MATCH void func_801ABBA8(void* sub, s32 route) {
         }
         g_Task->vz = (result - COORD_INT(g_Task->z)) / g_Task->unk_09;
     }
-    g_Task->flags |= ACTOR_FLAG_STEP_MOVE;
+    g_Task->header.flags |= ACTOR_FLAG_STEP_MOVE;
 }

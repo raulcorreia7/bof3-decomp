@@ -5,6 +5,6 @@
 MATCH void Effect_CountUpTimerByTwoAndStep(void) {
     g_Task->timer += 2;
     if (g_Task->timer == 0x10) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }

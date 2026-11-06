@@ -23,6 +23,6 @@ MATCH void Char_StartFacingTurn(void) {
             g_Task->unk_03 = 3;
         }
         g_Task->unk_09 = 2;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }

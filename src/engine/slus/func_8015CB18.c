@@ -19,13 +19,13 @@ u16       y;
     byte_value = id;
     half_value = x;
     if (slot != GAME_NONE) {
-        g_ActorSlots[slot].flags      = 1;
-        g_ActorSlots[slot].type       = 6;
-        g_ActorSlots[slot].scene_step = step;
-        g_ActorSlots[slot].unk_06     = byte_value;
-        g_ActorSlots[slot].selection  = selection;
-        g_ActorSlots[slot].unk_2E     = half_value;
-        g_ActorSlots[slot].unk_30     = y;
+        g_ActorSlots[slot].header.flags = 1;
+        g_ActorSlots[slot].type         = 6;
+        g_ActorSlots[slot].scene_step   = step;
+        g_ActorSlots[slot].unk_06       = byte_value;
+        g_ActorSlots[slot].selection    = selection;
+        g_ActorSlots[slot].unk_2E       = half_value;
+        g_ActorSlots[slot].unk_30       = y;
     }
     return slot;
 }

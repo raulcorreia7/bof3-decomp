@@ -58,11 +58,11 @@ MATCH u8 func_8019EEE4(void) {
             }
             index = (s8)Actor_FindFreeSlot();
             if (index != -1) {
-                g_ActorSlots[index].flags   = 1;
-                g_ActorSlots[index].type    = 0x34;
-                g_ActorSlots[index].mode    = 1;
-                g_ActorSlots[index].x.fixed = g_Task->x.fixed;
-                g_ActorSlots[index].y.fixed = g_Task->y.fixed;
+                g_ActorSlots[index].header.flags = 1;
+                g_ActorSlots[index].type         = 0x34;
+                g_ActorSlots[index].header.mode  = 1;
+                g_ActorSlots[index].x.fixed      = g_Task->x.fixed;
+                g_ActorSlots[index].y.fixed      = g_Task->y.fixed;
                 COORD_INT(g_ActorSlots[index].z) =
                     Area_SampleHeight(g_ActorSlots[index].x.fixed, g_ActorSlots[index].y.fixed) + 0x100;
                 g_ActorSlots[index].link = 0;

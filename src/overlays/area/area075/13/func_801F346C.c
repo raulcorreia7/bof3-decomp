@@ -13,6 +13,6 @@ MATCH void func_801F346C(void) {
         COORD_INT(g_Task->z) += g_Task->vz;
         g_ScriptState->cursor -= 2;
     } else {
-        g_Task->flags = 0;
+        g_Task->header.flags = 0;
     }
 }

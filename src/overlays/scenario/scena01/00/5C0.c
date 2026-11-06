@@ -29,7 +29,7 @@ MATCH void func_801F73FC(void) {
     work->unk_09  = 0;
     Area_ClearWorkColumn();
 
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
     SND_PlayCue(0x202);
 }
 
@@ -41,8 +41,8 @@ MATCH void func_801F7480(void) {
     func_801F7C54();
     g_Task->unk_09 = ((Actor*)g_Task)->unk_09 + 4;
     if (g_Task->unk_09 == 0) {
-        g_Task->unk_09 = 0x20;
-        g_Task->mode   = ((Actor*)g_Task)->mode + 1;
+        g_Task->unk_09      = 0x20;
+        g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
     }
 }
 
@@ -53,7 +53,7 @@ MATCH void func_801F75C8(void) {
     func_801F7C54();
     g_Task->unk_09 = ((Actor*)g_Task)->unk_09 - 4;
     if (g_Task->unk_09 == 0) {
-        g_Task->mode = ((Actor*)g_Task)->mode + 1;
+        g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
     }
 }
 

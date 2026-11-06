@@ -18,23 +18,23 @@ MATCH void func_801EEDB8(void) {
     if (timer == 0) {
         slot                               = Battle_AllocEffect(1, 0x11) & BYTE_MASK;
         work                               = g_Task;
-        g_BattleEffects[slot].mode         = 1;
+        g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = work;
         /* FAKE: keeps the target selector read after the slot stores, as retail orders it. */
         MATCH_FAKE_BARRIER();
         func_800A9610(g_BattleTargetSelector, 0x20);
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EEEBC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEF00(void) {
-    SYS_DISPATCH_BYTE(D_801F006C, g_Task->step);
+    SYS_DISPATCH_BYTE(D_801F006C, g_Task->header.step);
     if (BATTLE_ACTIVE_WORK->unk_0B != 0xFF) {
         Effect_SetActorMatrix();
         func_801EF158();
@@ -53,7 +53,7 @@ MATCH void func_801EF04C(void) {
     phase          = g_Task->unk_10 + 2;
     g_Task->unk_10 = phase;
     if (phase == 0x80) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -62,7 +62,7 @@ MATCH void func_801EF0A4(void) {
     g_Task->unk_14 -= 2;
     g_Task->unk_10 -= 2;
     if (g_Task->unk_10 == 0x20) {
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }
 
@@ -93,7 +93,7 @@ MATCH void func_801EF878(void) {
         D_801F00B0[i] = 0;
     }
     g_Task->unk_09 = 0;
-    g_Task->step += 1;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF8C8(void) {
@@ -103,7 +103,7 @@ MATCH void func_801EF8C8(void) {
     timer          = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer;
     if (timer == 0x60) {
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 

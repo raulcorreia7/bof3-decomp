@@ -14,8 +14,6 @@ extern u8           D_801F3D2C[];
 extern Callback     D_801F3D40[];
 extern u8           D_801F4330[];
 
-/* func_80196718 */
-void GFX_FreePaletteFadeTarget(void* target);
 void func_801F2FCC(void);
 void func_801F3C3C(s32 arg0);
 

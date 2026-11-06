@@ -23,6 +23,6 @@ MATCH void func_801E2024(void) {
             func_801DD858(3);
         }
         func_801DD858(4);
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }

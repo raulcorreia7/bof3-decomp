@@ -4,7 +4,7 @@ MATCH void func_800A8DE8(void) {
     PartyBattler* work;
 
     work = (PartyBattler*)g_Task;
-    work->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    work->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     work         = (PartyBattler*)g_Task;
     work->unk_5C = 3u;
     work         = (PartyBattler*)g_Task;
@@ -16,6 +16,6 @@ MATCH void func_800A8DE8(void) {
     work         = (PartyBattler*)g_Task;
     work->unk_09 = 8u;
     work         = (PartyBattler*)g_Task;
-    work->mode++;
+    work->header.mode++;
     func_8014DAEC();
 }

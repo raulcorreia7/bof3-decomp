@@ -9,6 +9,6 @@ MATCH void func_801F4030(void) {
     if (g_Task->unk_09 / 5 == 3) {
         g_AreaSceneMode = 0;
         g_Task->unk_09  = 1;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }

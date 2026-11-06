@@ -7,7 +7,7 @@ MATCH void func_801C05AC(void) {
     if (!(g_AreaWalkFlags & AREA_WALK_MAP_LOADING)) {
         Party_ClearActiveBattlers();
         if (g_GameRequestFlags & 8) {
-            g_BattlePartyBattlers[0].mode = 9;
+            g_BattlePartyBattlers[0].header.mode = 9;
         } else {
             for (i = 0; i < g_PartySize; i++) {
                 g_BattlePartyBattlers[i].unk_29 = 6;
@@ -27,7 +27,7 @@ MATCH void func_801C05AC(void) {
         }
     } else {
         for (i = 0; i < g_PartySize; i++) {
-            g_BattlePartyBattlers[i].flags &= ~ACTOR_FLAG_HIDDEN;
+            g_BattlePartyBattlers[i].header.flags &= ~ACTOR_FLAG_HIDDEN;
         }
     }
     g_AreaWalkFlags &= 0xBFFF;

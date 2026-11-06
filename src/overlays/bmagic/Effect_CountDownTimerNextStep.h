@@ -8,6 +8,6 @@ MATCH void Effect_CountDownTimerNextStep(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

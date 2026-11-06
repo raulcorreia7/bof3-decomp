@@ -14,5 +14,5 @@ MATCH void Area_InitScene(void) {
     FIELD(u32, work, 0x34u)       = D_80145EC4;
     FIELD(u32, work, 0x38u)       = D_80145EC8;
     FIELD(u32, work, 0x3Cu)       = D_80145ECC;
-    work->mode                    = work->mode + 1;
+    work->header.mode             = work->header.mode + 1;
 }

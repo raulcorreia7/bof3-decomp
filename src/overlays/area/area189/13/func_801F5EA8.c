@@ -8,7 +8,7 @@ MATCH s32 func_801F5EA8(void) {
         return 0;
     }
     SND_PlayCue(EMI_CUE_ID(1, 5));
-    g_GameStateIndex = GAME_REQUEST_MENU;
-    g_Task->step     = 2;
+    g_GameStateIndex    = GAME_REQUEST_MENU;
+    g_Task->header.step = 2;
     return 1;
 }

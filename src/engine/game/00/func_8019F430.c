@@ -12,10 +12,10 @@ MATCH void func_8019F430(void) {
     record->y.fixed += step;
     record->vy = step;
     if (COORD_INT(record->y) >= 0) {
-        record->unk_09 = 6;
-        work           = g_Task;
-        record->vy     = (s32)-record->vy;
-        work->mode     = (u8)(work->mode + 1);
+        record->unk_09    = 6;
+        work              = g_Task;
+        record->vy        = (s32)-record->vy;
+        work->header.mode = (u8)(work->header.mode + 1);
     }
     slot         = g_Task;
     heightOffset = slot->unk_0B * BATTLE_PARTY_STRIDE;

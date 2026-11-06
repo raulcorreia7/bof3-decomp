@@ -6,7 +6,7 @@ MATCH void func_801F32FC(void) {
     if (g_Task->unk_09 >= 8U) {
         g_Task->unk_09  = 0;
         g_Task->x.fixed = -0x2B80;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
     func_801F2EFC();
     func_801F3064();

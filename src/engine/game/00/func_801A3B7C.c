@@ -17,7 +17,7 @@ MATCH void func_801A3B7C(Actor* entity) {
     target  = entity->unk_79;
     current = g_Task->direction_08;
     if (target == current) {
-        g_Task->mode = g_Task->unk_03;
+        g_Task->header.mode = g_Task->unk_03;
         if (!(g_Task->option_flags & ACTOR_OPT_NO_TARGET)) {
             if ((func_801A1AE4(entity) & BYTE_MASK) != 0u) {
                 g_Task->direction_08 &= 7u;

@@ -48,18 +48,16 @@ static inline void World_SpawnActorAtFocus(void) {
 
     index = Actor_FindFreeSlot();
     if (index != GAME_NONE) {
-        slot          = &g_ActorSlots[index];
-        slot->flags   = 1;
-        slot->type    = 0x90;
-        slot->mode    = 0;
-        work          = g_Task;
-        slot->x.fixed = work->x.fixed;
-        slot->y.fixed = work->y.fixed;
-        slot->z.fixed = work->z.fixed;
+        slot               = &g_ActorSlots[index];
+        slot->header.flags = 1;
+        slot->type         = 0x90;
+        slot->header.mode  = 0;
+        work               = g_Task;
+        slot->x.fixed      = work->x.fixed;
+        slot->y.fixed      = work->y.fixed;
+        slot->z.fixed      = work->z.fixed;
     }
 }
-
-void Area_ProjectPoint(s32* pos, long* screen_xy);
 
 void func_801F4E64(const s32* center, s32 radius);
 

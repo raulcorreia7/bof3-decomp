@@ -63,7 +63,7 @@ MATCH void func_801B3768(void) {
             g_Task = saved_work;
         }
     }
-    work             = g_Task;
-    g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    work->step       = (work->step + 1);
+    work              = g_Task;
+    g_GameStateIndex  = GAME_REQUEST_MESSAGE;
+    work->header.step = (work->header.step + 1);
 }

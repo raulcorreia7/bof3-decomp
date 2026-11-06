@@ -3,10 +3,10 @@
 MATCH void func_801F2FF0(void) {
     if (D_80143F03 == 2 && !SYS_TestFlag(g_SceneEventFlags, 0x5C)) {
         SND_PlayCue(0x206);
-        g_Task->mode = 0;
+        g_Task->header.mode = 0;
     }
     if (D_80143F03 == 3 && SYS_TestFlag(g_SceneEventFlags, 0x5D)) {
         SND_PlayCue(0x206);
-        g_Task->mode = 0;
+        g_Task->header.mode = 0;
     }
 }

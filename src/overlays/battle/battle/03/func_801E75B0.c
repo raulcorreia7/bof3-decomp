@@ -15,5 +15,5 @@ MATCH void func_801E75B0(void) {
         }
     }
     EMI_LoaderStreamInitSlot(slot);
-    g_Task->mode++;
+    g_Task->header.mode++;
 }

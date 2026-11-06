@@ -18,7 +18,7 @@
 /* Per-mode signed adjustments to the camera angle inputs. */
 /* x: added to D_80143F24 for angle.vx. */
 /* y: added to D_80143F28 for angle.vy. */
-typedef Vec2s CameraAngleOffset;
+typedef Vec2S16 CameraAngleOffset;
 
 ASSERT_SIZE(CameraAngleOffset, 4);
 ASSERT_OFFSET(CameraAngleOffset, x, 0x00);
@@ -95,10 +95,10 @@ ASSERT_OFFSET(CameraAngleOffset, y, 0x02);
 #define GAME_ARM_WORK_ON_CELL_HIT(code, flags)                                                                    \
     if ((g_GameFlags & 0x400) == 0) {                                                                             \
         if ((func_801C39D8(g_Task->x.fixed, g_Task->y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != 0) { \
-            g_Task->mode   = 2;                                                                                   \
-            g_Task->step   = flags;                                                                               \
-            g_Task->unk_03 = 0;                                                                                   \
-            g_Task->unk_04 = 0;                                                                                   \
+            g_Task->header.mode = 2;                                                                              \
+            g_Task->header.step = flags;                                                                          \
+            g_Task->unk_03      = 0;                                                                              \
+            g_Task->unk_04      = 0;                                                                              \
             return 1;                                                                                             \
         }                                                                                                         \
     }                                                                                                             \
@@ -192,14 +192,12 @@ typedef struct GameHandlerTable6 {
 
 /* One game route step: two volatile signed words.
  * dx: x; dy: y. */
-typedef Vec2i GameRouteStep;
+typedef Vec2S32 GameRouteStep;
 
 /* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * func_8019D8C0 rotates and writes out as screen vertices. */
 typedef struct SpinQuad {
-    s16     x;
-    s16     y;
-    s16     z;
+    Vec3S16 pos;
     u8      unk_06[0x0A];
     SVECTOR rotation; /* 0x10 */
     SVECTOR corners[4];
@@ -383,8 +381,8 @@ extern s32                D_80147CBC[];
 extern s32                D_80147CC0[];
 extern s32                D_80147CC4[];
 extern u16                D_801481D8;
-extern Vec3i              D_801481E8;   /* scene angle, 16.16 fixed point */
-extern Vec3i              D_801481F8;   /* per-frame step of D_801481E8 */
+extern Vec3S32            D_801481E8;   /* scene angle, 16.16 fixed point */
+extern Vec3S32            D_801481F8;   /* per-frame step of D_801481E8 */
 extern s16                D_8014820C;   /* 0x8014820C */
 extern s8                 D_80148654;   /* 0x80148654 */
 extern s8                 D_80148656;   /* 0x80148656 */
@@ -562,14 +560,11 @@ void func_80164020(u32 arg0, u32 arg1);
 bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 s32  Item_Count(u8 category, u8 item, u8 mode);
 u8   Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
-void GFX_StagePalette(u8* dst, s32 field);
 void Party_ResetBattlers(void);
 void Party_ClearActiveBattlers(void);
 void func_80167910(void);
 
 void    func_80167E00(void);
-s32     GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
-void    GFX_FreePaletteFadeTarget(void* target);
 void    GFX_CopyPaletteAnimationColors(GraphicsPaletteAnimation* slot);
 void    Game_RunAreaLoadState(void);
 void    Game_RunFieldState(void);
@@ -631,7 +626,6 @@ void    func_80199938(void);
 void    func_80199978(void);
 void    func_801999B8(void);
 void    func_801999F8(MenuPanelTask* task);
-u8      Game_FindAreaHandler(void);
 u8*     func_8019A1D4(void);
 void    func_8019A210(void);
 void    func_8019A258(void);
@@ -881,15 +875,11 @@ s8      func_801ADC98(void);
 void    func_801ADCF4(u8 actor_slot);
 void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend);
 u8*     func_801AF270(u8 sprite_id, u8 flags);
-void    UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 void    UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool    func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
 void    func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
                       s32 sprite_flag);
 void    func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
-s32     func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
-void    Area_ProjectPoint(s32* pos, long* screen_xy);
-void    Matrix_SetIdentity(MATRIX* matrix);
 void    func_801B00F8(void);
 void    func_801B016C(void);
 void    func_801B0320(void);
@@ -950,7 +940,6 @@ s32     func_801B5684(void);
 s32     func_801B5758(void);
 s32     func_801B5884(void);
 s32     func_801B5910(void);
-s32     func_801B59B4(void);
 s8      func_801B5AE4(s32 route_index, s32 route_flags);
 void    func_801B5BDC(u8 route_index);
 void*   func_801B5C54(void);
@@ -1046,10 +1035,8 @@ void    func_801BD5A4(void);
 void    func_801BD7F8(void);
 void    func_801BD83C(void);
 s32     func_801BD938(void);
-u8      Party_CountOrder(u8 mode);
 void    func_801BDBC4(void);
 s16     func_801BDCF8(s32 x, s32 y);
-s32     func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
 s32     func_801BDF08(void);
 void    func_801BE574(s32 count, u8* ids);
 void    func_801BE710(GameResetRecord* record);
@@ -1088,7 +1075,6 @@ void    func_801C2538(void);
 void    func_801C2710(void);
 bool    func_801C27E0(s8 tuning_delta);
 s32     func_801C2894(s8 tuning_delta);
-s32     func_801C29A0(s8 tuning_delta);
 s32     func_801C2AAC(void);
 s32     func_801C2B4C(void);
 s32     func_801C2BEC(void);

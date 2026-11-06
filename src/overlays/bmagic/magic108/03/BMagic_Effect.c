@@ -21,14 +21,14 @@ MATCH void func_801EEC5C(void) {
     FIELD(Coord, D_801EC368, offset)         = src->pos.y.fixed;
     FIELD(Coord, D_801EC36C, offset)         = src->pos.z;
     g_Task->unk_0B                           = 0;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }
 
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EED7C(void) {
-    SYS_DISPATCH_BYTE(D_801EFC9C, g_Task->mode);
-    if (g_Task->flags != 0) {
+    SYS_DISPATCH_BYTE(D_801EFC9C, g_Task->header.mode);
+    if (g_Task->header.flags != 0) {
         func_801EF5C0();
         func_801EF6C0();
         PopMatrix();
@@ -64,7 +64,7 @@ MATCH void func_801EEE0C(void) {
     g_Task->unk_0B      = 0;
     g_Task->unk_09      = 0;
     g_Task->timer       = 0;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
     SND_QueueSelectionFx(0x100);
 }
 
@@ -78,7 +78,7 @@ MATCH void func_801EEF48(void) {
     /* The retail build passes the never-written slot after the vector. */
     func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x20);
     if (func_800AF6B8(g_Task->unk_18, g_Task->unk_1C, g_Task->unk_20, 0x8000) != 0) {
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -90,7 +90,7 @@ MATCH void func_801EF020(void) {
     if (!(temp_v0 & 0x1F)) {
         SND_QueueSelectionFx(0x101);
         g_Task->timer = 0;
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
@@ -102,7 +102,7 @@ MATCH void func_801EF0E0(void) {
     timer         = g_Task->timer + 1;
     g_Task->timer = timer;
     if (timer == 96) {
-        g_Task->mode = g_Task->mode + 1;
+        g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 

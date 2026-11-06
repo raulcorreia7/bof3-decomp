@@ -9,7 +9,7 @@ MATCH void func_801F3EEC(void) {
             0xA1;
         (g_AreaCellCodes +
          (COORD_INT(g_Task->y) + 1) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width_00)[COORD_INT(g_Task->x)] = 0xA1;
-        g_Task->step                                                                                     = 2;
+        g_Task->header.step                                                                              = 2;
     }
     func_801F381C(1);
 }

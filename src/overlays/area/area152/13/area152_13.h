@@ -29,22 +29,14 @@ extern ScreenPoint D_801F4E10[];
 extern u8          D_801F4E20[];
 extern u8          D_801F4E21[];
 
-extern u8 Game_FindAreaHandler(void);
-
 /* The value of area update step in the shared Area_Update body. */
 #define AREA_UPDATE_STEP Area_DrawHud
 
 extern WorldMapMarker D_801F4DEC[6];
 #define AREA_HUD_MASK_TABLE D_801F4DEC
-/* func_801F389C */
-void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id);
-/* func_801F3D90 */
-void Area_DrawGradientDiamond(s16 x, s16 y);
 
 void func_801F338C(void);
 
 void func_801F3550(void);
-/* func_801F3F88 */
-void Area_DrawHudBanner(s16 x, s16 y);
 
 #endif

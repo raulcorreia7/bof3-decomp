@@ -16,7 +16,7 @@ MATCH void func_801EEE88(void) {
         GFX_FreePaletteFadeTarget(*selected);
         g_Task->timer  = GFX_AllocPaletteFade((u8*)*selected, 0, 0, 0, 1);
         g_Task->unk_09 = 8;
-        g_Task->mode++;
+        g_Task->header.mode++;
     }
 }
 
@@ -31,7 +31,7 @@ INCLUDE_ASM(func_801EF080);
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF2D8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF31C);
@@ -54,8 +54,8 @@ MATCH void func_801EFA70(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->timer = 0x1;
-        g_Task->step  = g_Task->step + 1;
+        g_Task->timer       = 0x1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
@@ -69,7 +69,7 @@ MATCH void func_801EFACC(void) {
         g_Task->timer = timer + 1;
     }
     if (g_Task->unk_09 == 0x18) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -78,7 +78,7 @@ MATCH void func_801EFB5C(void) {
     g_Task->unk_09 += 1;
     g_Task->timer -= 1;
     if (g_Task->unk_09 == 0x28) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 

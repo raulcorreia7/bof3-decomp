@@ -4,7 +4,7 @@ MATCH void func_801F2CF0(void) {
     u8 temp_v1;
 
     if (g_AreaSceneMode == 2) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
     temp_v1 = g_Task->unk_09;
     if (temp_v1 < 0x20U) {

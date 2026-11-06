@@ -4,13 +4,13 @@ MATCH void func_801F3F98(void) {
     if (((COORD_INT(g_Task->x) == 0) && (SYS_TestFlag(g_SceneEventFlags, 0xD) == 0)) ||
         ((COORD_INT(g_Task->x) != 0) && (D_8014686B == 0))) {
         g_Task->unk_09 = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
     g_Task->unk_09 += 1;
     if (g_Task->unk_09 >= 0x41U) {
         g_Task->unk_09 = 0;
         if (rand() & 1) {
-            g_Task->step = 5;
+            g_Task->header.step = 5;
         }
     }
     func_801F4258(COORD_INT(g_Task->x));

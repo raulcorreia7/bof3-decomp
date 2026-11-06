@@ -26,7 +26,7 @@ NON_MATCHING void func_801EEC70(void) {
     g_Task->unk_09    = 0;
     g_Task->pos.z.raw = span;
     g_Task->unk_0B    = 0;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
     offset  = (Battle_AllocEffect(1, 0xA) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     counter = 0;
     value   = 1;
@@ -49,19 +49,19 @@ INCLUDE_ASM(func_801EEC70);
 MATCH void func_801EED9C(void) {
     if (g_Task->unk_09 != 0) {
         func_800A9610(g_BattleTargetSelector, 0x10U);
-        g_Task->mode += 1;
+        g_Task->header.mode += 1;
     }
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEE58(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 MATCH void func_801EEE9C(void) {
-    SYS_DISPATCH_BYTE(D_801EFDD0, g_Task->step);
-    if (g_Task->flags != 0 && g_Task->step != 0) {
+    SYS_DISPATCH_BYTE(D_801EFDD0, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EF434();
         func_801EF4E8();
         PopMatrix();
@@ -119,7 +119,7 @@ NON_MATCHING void func_801EF8E8(void) {
     rot.vz = 0;
     pos.vx = (work->pos.x.raw >> 9) - 0x4000;
     pos.vy = (work->pos.y.raw >> 9) - 0x4000;
-    if (work->step < 3) {
+    if (work->header.step < 3) {
         height = -COORD_INT(work->pos.z);
     } else {
         height = -(s16)Area_SampleHeight(work->pos.x.raw, work->pos.y.raw);

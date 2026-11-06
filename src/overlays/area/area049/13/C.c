@@ -16,7 +16,7 @@ MATCH void func_80117048(void) {
     ((Actor*)g_Task)->y.fixed = 0x548000;
     ((Actor*)g_Task)->z.fixed = 0x1000000;
     func_801172D0();
-    ((Actor*)g_Task)->mode += 1;
+    ((Actor*)g_Task)->header.mode += 1;
 }
 
 MATCH void func_801170A4(void) {
@@ -45,7 +45,7 @@ MATCH void func_8011765C(void) {
     g_GameFlags |= 0x40;
     func_801172D0();
     ((Actor*)g_Task)->unk_09 = 0xB4;
-    ((Actor*)g_Task)->mode += 1;
+    ((Actor*)g_Task)->header.mode += 1;
 }
 
 INCLUDE_ASM(func_801176B8);

@@ -11,5 +11,5 @@ MATCH void func_801F364C(void) {
     func_801F44B4();
     Area_StepSpawnSlots();
     g_Task->unk_09 = 0x20;
-    g_Task->mode += 1;
+    g_Task->header.mode += 1;
 }

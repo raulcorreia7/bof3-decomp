@@ -36,5 +36,5 @@ MATCH void func_801F4E3C(void) {
         }
         g_GameState->mode_12B.s8_value = 0;
     }
-    g_Task->step = 0;
+    g_Task->header.step = 0;
 }

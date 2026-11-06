@@ -74,12 +74,12 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             state->unk_08   = (low_byte | (high_byte << 8));
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE6:
-            g_Task->flags = 0;
+            g_Task->header.flags = 0;
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE5:
             spad_work_e5 = g_Task;
             g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
-            spad_work_e5->mode = spad_work_e5->unk_03;
+            spad_work_e5->header.mode = spad_work_e5->unk_03;
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE7:
             next_cursor_e7 = state->cursor + 1;
@@ -105,7 +105,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             goto block_28; /* E9 and EA share the cursor store */
         case 0xEB:
             spad_work_eb = g_Task;
-            spad_work_eb->flags ^= ACTOR_FLAG_HIDDEN;
+            spad_work_eb->header.flags ^= ACTOR_FLAG_HIDDEN;
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xEC:
             spad_work_ec               = g_Task;

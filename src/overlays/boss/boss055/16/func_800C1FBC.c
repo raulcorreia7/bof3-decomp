@@ -9,7 +9,7 @@ MATCH void func_800C1FBC(void) {
         if ((D_801463BE == 3) || (D_801463BE == 5)) {
             SND_PlayCue(0x602U);
         }
-        ((PartyBattler*)g_Task)->step += 1;
+        ((PartyBattler*)g_Task)->header.step += 1;
     } else {
         ((PartyBattler*)g_Task)->unk_09 = count - 1;
     }

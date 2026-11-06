@@ -6,7 +6,7 @@ MATCH void func_801C22D8(void) {
     Actor* work;
 
     if (g_GameStateIndex != GAME_REQUEST_SCENE_CAMERA) {
-        g_Task->mode = 1;
+        g_Task->header.mode = 1;
         return;
     }
     work = g_Task;

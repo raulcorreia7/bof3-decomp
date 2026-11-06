@@ -4,16 +4,16 @@ MATCH void func_801F3578(void) {
     u8* counter;
 
     if (--D_801F4E00 == 0) {
-        g_Task->mode = 0x14;
+        g_Task->header.mode = 0x14;
     } else if (g_InputPressed == PADRdown) {
         D_801F4E0C = 0;
         D_801F4E04 += 1;
-        g_Task->mode = 0x11;
-        counter      = &D_80146865;
+        g_Task->header.mode = 0x11;
+        counter             = &D_80146865;
         *counter += 1;
     } else if (++D_801F4E0C >= 0x1C) {
-        g_Task->mode = 0x16;
+        g_Task->header.mode = 0x16;
     } else {
-        g_Task->mode = 0x10;
+        g_Task->header.mode = 0x10;
     }
 }

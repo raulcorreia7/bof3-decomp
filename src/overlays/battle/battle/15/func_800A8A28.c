@@ -29,7 +29,7 @@ MATCH void func_800A8A28(void) {
             delta_z += 0xF;
         }
         work->unk_18 = delta_z >> 4;
-        work->mode++;
+        work->header.mode++;
         func_801DEE4C();
     }
 }

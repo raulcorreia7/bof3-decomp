@@ -4,7 +4,7 @@ MATCH void Area_Update(void) {
     Actor* scratch;
 
     if (D_801454F2 == 2) {
-        g_Task->step = 3;
+        g_Task->header.step = 3;
     }
 
     scratch = g_Task;

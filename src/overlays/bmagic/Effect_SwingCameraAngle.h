@@ -14,6 +14,6 @@ MATCH void Effect_SwingCameraAngle(void) {
     if (--g_Task->unk_09 == 0) {
         g_AreaCameraAngle.vx = -0x2AA;
         g_Task->unk_09       = BMAGIC_CAMERA_SWING_TICKS;
-        g_Task->step++;
+        g_Task->header.step++;
     }
 }

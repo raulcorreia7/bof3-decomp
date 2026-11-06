@@ -6,12 +6,12 @@ MATCH void func_801E5CA4(void) {
     BattleEffect*       work;
 
     handlers = D_801D0EF4;
-    handlers.handlers[D_801EC2E0->mode]();
+    handlers.handlers[D_801EC2E0->header.mode]();
     if (ACTOR_IN_USE(*g_Task)) {
         switch (D_801EC2E0->unk_07) {
             case 0:
                 slot = D_801EC2E0;
-                if (slot->mode < 3U) {
+                if (slot->header.mode < 3U) {
                     Battle_DrawRollingDigits(slot->unk_27);
                 } else {
                     Battle_DrawNumber((COORD_INT(slot->pos.x) - 0xC), COORD_INT(slot->pos.y), slot->unk_27,

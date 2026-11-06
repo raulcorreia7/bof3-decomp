@@ -7,7 +7,7 @@
 MATCH void func_801E3638(void) {
     PartyBattler* work;
 
-    D_801EB3FC[g_Task->step]();
+    D_801EB3FC[g_Task->header.step]();
     if (g_BattleCurrentEnemy->status & STATUS_CONFUSED) {
         if (g_BattleCurrentEnemy->damage_flags & 0x800) {
             if ((s8)++g_BattleEffects[g_Task->slot].unk_09 >= 12) {

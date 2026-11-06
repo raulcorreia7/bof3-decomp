@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EECFC);
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EEEE4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEF28);
@@ -22,7 +22,7 @@ MATCH void func_801EF08C(void) {
     temp_a1 = g_Task->unk_09;
     if ((temp_a1 & 0xFF) == 0xC) {
         g_Task->timer = 0xF;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
         return;
     }
     g_Task->unk_09 = temp_a1 + 1;
@@ -48,7 +48,7 @@ MATCH void func_801EF12C(void) {
     }
     if (var_v1 == (var_v0 >> 6)) {
         g_Task->timer = 0xF;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -59,21 +59,21 @@ MATCH void func_801EF1CC(void) {
     g_Task->timer = count;
     if (count == 0) {
         BATTLE_ACTIVE_WORK->unk_0B = 1;
-        g_Task->step               = g_Task->step + 1;
+        g_Task->header.step        = g_Task->header.step + 1;
     }
 }
 
 MATCH void func_801EF228(void) {
     if (D_801EB4E0->unk_0B == 2) {
         g_Task->timer = 0;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801EF278(void) {
     g_Task->timer += 8;
     if (g_Task->timer >= 0x81U) {
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -127,7 +127,7 @@ MATCH void func_801F00EC(void) {
     temp_a0 = g_Task->unk_09;
     if ((temp_a0 & 0xFF) == 8) {
         SND_QueueSelectionFx(0x101);
-        g_Task->step += 1;
+        g_Task->header.step += 1;
         return;
     }
     g_Task->unk_09 = temp_a0 + 1;
@@ -138,7 +138,7 @@ MATCH void func_801F014C(void) {
     COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + 0x10;
     if (func_800AF5FC(D_801EB4E0, 0x1C000) != 0) {
         g_Task->timer = 0x1E;
-        g_Task->step += 1;
+        g_Task->header.step += 1;
     }
 }
 
@@ -149,7 +149,7 @@ MATCH void func_801F01D0(void) {
     work->timer = work->timer - 1;
     if (work->timer == 0) {
         SND_QueueSelectionFx(0x102);
-        g_Task->step = g_Task->step + 1;
+        g_Task->header.step = g_Task->header.step + 1;
     }
 }
 
