@@ -191,8 +191,9 @@ def merge_base(base: str, to: str) -> str:
 
 
 def touched(base: str, to: str) -> set[str]:
-    """Return the paths that differ between ``base`` and ``to``."""
-    cmd = ["git", "diff", "--name-only", base] + ([] if to == "WORK" else [to])
+    """Return the paths that differ between ``base`` and ``to``; a renamed file lists both paths,
+    so its metrics move with it."""
+    cmd = ["git", "diff", "--name-only", "--no-renames", base] + ([] if to == "WORK" else [to])
     out = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, check=True)
     return set(out.stdout.split())
 
