@@ -475,7 +475,39 @@ MATCH void func_801D5E94(void) {
 
 INCLUDE_ASM(func_801D5F7C);
 
-INCLUDE_ASM(func_801D6124);
+MATCH void func_801D6124(void) {
+    u16 cue;
+
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (D_801DB0B8 == 1) {
+            cue = 0x104;
+            goto play_cue;
+        }
+        D_801DB0C8 = -1;
+        SND_PlayCue(0x104);
+        SND_PlayCue(0x102);
+        D_801DB0C4 = 0;
+        D_801F294D += 1;
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        cue = 0x106;
+play_cue:
+        D_801DB0C8 = 0xF0;
+        SND_PlayCue(cue);
+        D_801F294D -= 1;
+    } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & 0xFFFF) {
+        D_801DB0B8 ^= 1;
+        SND_PlayCue(0x100);
+    }
+    if (D_801DB0C8 != 0xFFFF) {
+        func_801D812C();
+        if (D_801DB0C8 == 0xF1) {
+            Menu_DrawCursorSprite(((s32)D_801DB0B8 * 32 + 0xF4) & 0xFFFC, 0x15, 0);
+        }
+        func_801D8058(0x4A, 0x64);
+        func_801D88A4(((s8) D_801DB0B4 * 8) + 0x55, 0x6D, 1);
+    }
+    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
+}
 
 MATCH void func_801D62C8(void) {
     s8 step;

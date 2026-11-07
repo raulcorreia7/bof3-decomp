@@ -75,7 +75,7 @@ extern s8       D_801DB093;
 extern u8       D_801DB0B4;
 extern s8       D_801DB0B8;
 extern s8       D_801DB0C4;
-extern s16      D_801DB0C8;
+extern u16      D_801DB0C8;
 extern u8       D_801DB0CC;
 extern u8       D_801DB0D0;
 extern u8       D_801DB0D4;
