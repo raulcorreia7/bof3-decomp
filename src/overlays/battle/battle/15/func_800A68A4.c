@@ -19,7 +19,10 @@ MATCH void func_800A68A4(void) {
     battler = &g_BattleActiveBattler;
     g_BattlePartyBattlers[*battler].turn.damage_flags.volatile_value &=
         ~(COMBATANT_FLAG_REPRISAL | COMBATANT_FLAG_DAMAGE_IMMUNE);
-    g_BattlePartyBattlers[*battler].turn.action_flags.volatile_value &= 0xFFFB84FF;
+    g_BattlePartyBattlers[*battler].turn.action_flags.volatile_value &=
+        ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO |
+          COMBATANT_FLAG_SELECTION_BONUS | COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING |
+          COMBATANT_FLAG_SELECTED);
     func_800A9BD8(*battler);
     index      = *battler;
     flags      = g_BattlePartyBattlers[index].turn.action_flags.volatile_value;

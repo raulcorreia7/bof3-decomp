@@ -135,6 +135,7 @@ typedef enum BattleStateFlags {
     BATTLE_STATE_WINDOW_BUSY      = 1 << 1,
     BATTLE_STATE_EFFECT_PLAYING   = 1 << 2,
     BATTLE_STATE_COMMAND_ARMED    = 1 << 4,
+    BATTLE_STATE_UNK_5            = 1 << 5,
     BATTLE_STATE_REPRISAL_PENDING = 1 << 6,
     BATTLE_STATE_CRITICAL         = 1 << 7,
     BATTLE_STATE_EFFECT_LOADING   = 1 << 10,

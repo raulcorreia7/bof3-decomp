@@ -20,7 +20,8 @@ MATCH u8 func_801DB2F8(u32 battler_index) {
         if ((g_BattleEnemyBattlers[subindex].header.flags & 1u) == 0u) {
             return false;
         }
-        if ((g_BattleEnemyBattlers[subindex].status & 0x4144u) != 0u) {
+        if ((g_BattleEnemyBattlers[subindex].status &
+             (STATUS_PARALYZED | STATUS_SLEEPING | STATUS_UNK_8 | STATUS_KO)) != 0u) {
             return false;
         }
     }

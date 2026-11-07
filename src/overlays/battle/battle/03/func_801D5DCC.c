@@ -22,7 +22,7 @@ MATCH u8 func_801D5DCC(void) {
             }
             if (g_BattlePartyBattlers[slot].chr.character_id == CHAR_ID_RYU_ADULT ||
                 g_BattlePartyBattlers[slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
-                if (g_BattlePartyBattlers[slot].turn.action_flags.volatile_value & 2) {
+                if (g_BattlePartyBattlers[slot].turn.action_flags.volatile_value & COMBATANT_FLAG_DRAGON_FORM) {
                     if (g_DragonForm == 0x12) {
                         g_BattlePartyBattlers[slot].turn.hp_change -=
                             (g_BattlePartyBattlers[slot].chr.stats.max_hp + 10) / 20;
@@ -67,7 +67,7 @@ MATCH u8 func_801D5DCC(void) {
     }
     for (slot = 3; slot < COMBATANT_COUNT; slot++) {
         if (!(func_801D64C4(slot) & BYTE_MASK)) {
-            if (ENEMY_COMBATANT(slot).status & 1) {
+            if (ENEMY_COMBATANT(slot).status & STATUS_UNK_0) {
                 ENEMY_COMBATANT(slot).header.mode       = 6;
                 ENEMY_COMBATANT(slot).header.step       = 5;
                 ENEMY_COMBATANT(slot).unk_04            = 0;

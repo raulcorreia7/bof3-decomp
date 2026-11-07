@@ -7,8 +7,9 @@ MATCH s32 func_800A99AC(void) {
     u8 i;
 
     for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
-        if (ACTOR_IN_USE(g_BattlePartyBattlers[i]) &&
-            (g_BattlePartyBattlers[i].turn.damage_flags.value & 0xF0u) != 0u) {
+        if (ACTOR_IN_USE(g_BattlePartyBattlers[i]) && (g_BattlePartyBattlers[i].turn.damage_flags.value &
+                                                       (COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 |
+                                                        COMBATANT_FLAG_DAMAGED | COMBATANT_FLAG_DAMAGE_NUMBER)) != 0u) {
             return 1;
         }
     }
@@ -17,7 +18,9 @@ MATCH s32 func_800A99AC(void) {
         u32 index = (i - 3);
 
         if ((g_BattleEnemyBattlers[index].header.flags & 1u) != 0u &&
-            (g_BattleEnemyBattlers[index].turn.damage_flags.value & 0xF0u) != 0u) {
+            (g_BattleEnemyBattlers[index].turn.damage_flags.value &
+             (COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED | COMBATANT_FLAG_DAMAGE_NUMBER)) !=
+                0u) {
             return 1;
         }
     }

@@ -5,7 +5,7 @@ MATCH s32 func_800AA5F4(s32 slot) {
     if (Battle_SlotIsBlocked(slot) & BYTE_MASK) {
         return 0;
     }
-    if (!(g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value & 1)) {
+    if (!(g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value & COMBATANT_FLAG_COMMAND_ENTERED)) {
         return 0;
     }
     if (g_BattlePartyBattlers[slot].turn.command.target != LOBU(g_BattleActiveBattler)) {

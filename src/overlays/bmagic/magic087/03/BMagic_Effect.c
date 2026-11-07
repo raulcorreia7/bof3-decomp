@@ -73,7 +73,6 @@ MATCH void func_801EF99C(void) {
     }
 }
 
-
 MATCH void func_801EFA2C(void) {
     u8 value;
 

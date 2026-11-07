@@ -564,12 +564,17 @@ typedef enum BattleBattlerDamageFlags {
     COMBATANT_FLAG_COMMAND_ENTERED     = 1 << 0,
     COMBATANT_FLAG_DEFENDING           = 1 << 1,
     COMBATANT_FLAG_WILLPOWER_SURVIVED  = 1 << 2,
+    COMBATANT_FLAG_UNK_3               = 1 << 3,
+    COMBATANT_FLAG_UNK_4               = 1 << 4,
+    COMBATANT_FLAG_UNK_5               = 1 << 5,
     COMBATANT_FLAG_DAMAGED             = 1 << 6,
     COMBATANT_FLAG_DAMAGE_NUMBER       = 1 << 7,
     COMBATANT_FLAG_HURT_REACTION       = 1 << 8,
     COMBATANT_FLAG_DAMAGE_ROW_PRESENT  = 1 << 9,
+    COMBATANT_FLAG_UNK_11              = 1 << 11,
     COMBATANT_FLAG_SKIP_ACTION_STEP    = 1 << 12,
     COMBATANT_FLAG_FORM_EFFECT_PLAYING = 1 << 13,
+    COMBATANT_FLAG_UNK_14              = 1 << 14,
     COMBATANT_FLAG_REPRISAL            = 1 << 15,
     COMBATANT_FLAG_DAMAGE_IMMUNE       = 1 << 16,
 } BattleBattlerDamageFlags;
@@ -587,6 +592,7 @@ typedef enum BattleBattlerActionFlags {
     COMBATANT_FLAG_ABILITY_ALT_POSE       = 1 << 2,
     COMBATANT_FLAG_MODE_HANDLER_ACTION    = 1 << 3,
     COMBATANT_FLAG_SUPPRESSION_EXEMPT     = 1 << 4,
+    COMBATANT_FLAG_ACTION_UNK_5           = 1 << 5,
     COMBATANT_FLAG_POWER_BOOST            = 1 << 6,
     COMBATANT_FLAG_MEDITATION             = 1 << 7,
     COMBATANT_FLAG_ALWAYS_HITS            = 1 << 8,
@@ -601,6 +607,18 @@ typedef enum BattleBattlerActionFlags {
     COMBATANT_FLAG_DRAGON_FORM_CONTROLLED = 1 << 17,
     COMBATANT_FLAG_SELECTED               = 1 << 18,
 } BattleBattlerActionFlags;
+
+/* BattleTurn.target_flags: what a hit did to its target. The HP bits (0, 2, 4) and the AP bits (1, 3, 5)
+ * mirror each other: a hit starts with HIT_HP and HIT_HP_LANDED set, the miss rolls clear the LANDED bit, and a heal that
+ * stops at the maximum sets the MAX bit. */
+typedef enum BattleHitFlags {
+    BATTLE_HIT_HP        = 1 << 0,
+    BATTLE_HIT_AP        = 1 << 1,
+    BATTLE_HIT_HP_MAX    = 1 << 2,
+    BATTLE_HIT_AP_MAX    = 1 << 3,
+    BATTLE_HIT_HP_LANDED = 1 << 4,
+    BATTLE_HIT_AP_LANDED = 1 << 5,
+} BattleHitFlags;
 
 /* The three mode work records; g_GameState points at the current one. */
 /* D_80145E90 */

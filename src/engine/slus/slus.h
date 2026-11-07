@@ -1088,26 +1088,39 @@ extern void func_8014DB98(void);
 s8          func_8014DE78(void);
 extern void GFX_ExpandRgb555(u32* pixels, RECT rect);
 extern void GFX_DecodeLzss(u32* packed, RECT rect);
-void        func_8014EDF0(void);
-void        func_8014EE18(void);
-void        func_8014EE40(void);
-void        func_8014EE68(void);
-void        func_8014EE90(void);
-void        func_8014EEB8(void);
+/* func_8014EDF0 */
+void        GFX_FadeToBlack(void);
+/* func_8014EE18 */
+void        GFX_FadeFromBlack(void);
+/* func_8014EE40 */
+void        GFX_FadeToBlackFast(void);
+/* func_8014EE68 */
+void        GFX_FadeFromBlackFast(void);
+/* func_8014EE90 */
+void        GFX_FadeToBlackSlow(void);
+/* func_8014EEB8 */
+void        GFX_FadeFromBlackSlow(void);
 void        func_8014EEE0(void);
 void        func_8014EF08(void);
-void        func_8014EF30(void);
-void        func_8014EF58(void);
+/* func_8014EF30 */
+void        GFX_FadeToWhite(void);
+/* func_8014EF58 */
+void        GFX_FadeFromWhite(void);
 void        func_8014EF80(void);
 void        func_8014F024(void);
 void        func_8014F16C(void);
-void        func_8014F1AC(void);
-void        func_8014F1D4(void);
-void        func_8014F1FC(void);
-void        func_8014F224(void);
+/* func_8014F1AC */
+void        GFX_FadeToBlackSlower(void);
+/* func_8014F1D4 */
+void        GFX_FadeFromBlackSlower(void);
+/* func_8014F1FC */
+void        GFX_FadeToWhiteSlower(void);
+/* func_8014F224 */
+void        GFX_FadeFromWhiteSlower(void);
 void        func_8014F24C(void);
 void        func_8014F2F0(void);
-void        func_8014F438(void);
+/* func_8014F438 */
+void        GFX_FadeToBlackSlowest(void);
 void        func_8014F460(void);
 extern void func_8014FB80(s16 x, s16 y, u16 clut, u8 shade);
 extern void func_801507BC(void);
@@ -1235,13 +1248,20 @@ s32         Game_SetScriptVar(u8* operand);
 s32         Game_IsScriptVarEqual(u8* record);
 s32         Game_IncScriptVar(u8* operand);
 s32         func_8015BABC(void);
-void        func_8015E994(void);
-void        func_8015EFAC(void);
-void        func_8015F5C8(void);
-void        func_8015FBE4(void);
-void        func_80160200(void);
-void        func_8016081C(void);
-void        func_80160E38(void);
+/* func_8015E994 */
+void        SND_ReadCueBank0(void);
+/* func_8015EFAC */
+void        SND_ReadCueBank1(void);
+/* func_8015F5C8 */
+void        SND_ReadCueBank2(void);
+/* func_8015FBE4 */
+void        SND_ReadCueBank3(void);
+/* func_80160200 */
+void        SND_ReadCueBank4(void);
+/* func_8016081C */
+void        SND_ReadCueBank5(void);
+/* func_80160E38 */
+void        SND_ReadCueBank6(void);
 extern void func_80161454(u32 index);
 void        func_80163230(void);
 void        func_80163698(void);
@@ -1256,7 +1276,8 @@ void        EMI_ArmPartyPlp(u8 member_a, u8 member_b, u8 member_c);
 void        EMI_ArmPartyFamily(u8 member_a, u8 member_b, u8 member_c, u8 family);
 u8          EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);
 extern void func_80167428(void);
-void        func_8016BA04(void);
+/* func_8016BA04 */
+void        SND_QuitSpu(void);
 extern const ObjectFunc
     g_BundleRecordOpcodes[]; /* interior of g_BundleOpcodes (index 3); a separate symbol keeps func_801584A4 matching */
 extern u8  D_8017F90D;

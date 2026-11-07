@@ -111,12 +111,16 @@ typedef enum CharacterId {
  * unverified: the code only clears and restores that bit, and a battle/battle/15
  * comment calls it magic-defense. */
 typedef enum StatusFlags {
+    STATUS_UNK_0     = 1 << 0,
+    STATUS_UNK_1     = 1 << 1,
     STATUS_PARALYZED = 1 << 2,
     STATUS_BLIND     = 1 << 3,
     STATUS_SILENCED  = 1 << 4,
     STATUS_CONFUSED  = 1 << 5,
     STATUS_SLEEPING  = 1 << 6,
     STATUS_POISONED  = 1 << 7,
+    STATUS_UNK_8     = 1 << 8,
+    STATUS_UNK_11    = 1 << 11,
     STATUS_LOW_HP    = 1 << 13,
     STATUS_KO        = 1 << 14,
 } StatusFlags;

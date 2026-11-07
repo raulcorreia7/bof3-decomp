@@ -8,7 +8,7 @@ MATCH void func_801DF8AC(void) {
     PartyBattler* battle_work = g_GameState;
     Callback      handler;
 
-    if ((battle_work->turn.action_flags.volatile_value & 1u) != 0u) {
+    if ((battle_work->turn.action_flags.volatile_value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) {
         handler = D_801EB188[0];
     } else {
         handler = D_801EB15C[BATTLE_LOCAL_BYTE_79(battle_work)];

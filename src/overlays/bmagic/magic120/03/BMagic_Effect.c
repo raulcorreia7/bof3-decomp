@@ -25,7 +25,6 @@ MATCH void func_801EF054(void) {
     }
 }
 
-
 INCLUDE_ASM(func_801EF0D8);
 
 MATCH void func_801EF270(void) {

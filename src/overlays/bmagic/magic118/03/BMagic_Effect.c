@@ -59,8 +59,8 @@ MATCH void func_801EF108(void) {
     u8            timer;
 
     g_Task->param.unk_0B--;
-    work        = g_Task;
-    timer       = work->unk_09 - 1;
+    work         = g_Task;
+    timer        = work->unk_09 - 1;
     work->unk_09 = timer;
     work->unk_20 += work->timer;
     work->unk_14 += work->unk_20;
@@ -69,7 +69,6 @@ MATCH void func_801EF108(void) {
         func_801E5988();
     }
 }
-
 
 INCLUDE_ASM(BMagic_DrawBurnSprites);
 
