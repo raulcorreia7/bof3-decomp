@@ -38,11 +38,11 @@ Totals from `tools/quality.py`, which rewrites the table below on every `pre-pus
 | Battle           |               898 |    849 |    2287 |     208 |        81 |       0 |        0 |
 | Battle magic     |              1083 |    965 |    2392 |      10 |         0 |       8 |        0 |
 | Boss             |               654 |    518 |     579 |       6 |         0 |       4 |        0 |
-| Fairy Village    |               151 |    140 |     502 |      17 |         3 |       0 |        0 |
-| Menu             |               648 |    576 |    2299 |      58 |        18 |       0 |        0 |
+| Fairy Village    |               151 |    140 |     473 |      17 |         3 |       0 |        0 |
+| Menu             |               647 |    575 |    2281 |      58 |        18 |       0 |        0 |
 | Player character |               263 |    188 |     274 |       0 |         5 |       0 |        0 |
 | Scenario         |               833 |    783 |    1022 |      16 |         4 |       6 |        0 |
 | Title            |                20 |      0 |      12 |       3 |         0 |       0 |        0 |
-| Total            |              7989 |   6921 |   17121 |     851 |       237 |      39 |        0 |
+| Total            |              7988 |   6920 |   17074 |     851 |       237 |      39 |        0 |
 
 <!-- quality:end -->
