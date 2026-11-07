@@ -230,7 +230,21 @@ MATCH void func_801FC734(u8 actor_id) {
     SCENA02_TRIGGER_NEAR_X(actor_id, TO_COORD(1) + COORD_HALF, TO_COORD(4));
 }
 
-INCLUDE_ASM(func_801FC7E4);
+MATCH void func_801FC7E4(void) {
+    if ((g_PartyFieldOrder[0] == 0) || (g_PartyFieldOrder[0] == 3)) {
+        if (((u16)(D_80145EC6 - 0x44) < 2) && (D_80145ECA == 0x3F) && (D_80145EDB == 0x42) && (D_80145E98 == 1)) {
+            SCENA02_START_SCRIPT_1A();
+        }
+        if (D_80145EC6 == 0x46) {
+            if ((D_80145ECA == 0x3E) && (D_80145EDB == 0x45) && (D_80145E98 == 7)) {
+                SCENA02_START_SCRIPT_1A();
+            }
+        }
+        if ((D_80145EC6 == 0x44) && (D_80145ECA == 0x3E) && (D_80145EDB == 0x43) && (D_80145E98 == 3)) {
+            SCENA02_START_SCRIPT_1A();
+        }
+    }
+}
 
 INCLUDE_ASM(func_801FC9CC);
 
@@ -252,7 +266,48 @@ MATCH void func_801FCB94(void) {
     SND_PlayCue(EMI_CUE_ID(2, 2));
 }
 
-INCLUDE_ASM(func_801FCBDC);
+MATCH void func_801FCBDC(s32 arg0) {
+    u8* state;
+    s32 amount;
+    s32 amount_2;
+    u8  frame;
+    u8  frame_2;
+
+    state = &D_80146865;
+    switch (*state) {
+        case 0:
+            amount                   = arg0 & 0xFF;
+            g_AreaCameraRefreshCount = 2;
+            frame                    = D_80146867 + 1;
+            D_80146867               = frame;
+            g_AreaCameraOffsetY      = g_AreaCameraOffsetY + amount;
+            g_AreaCameraOffsetY      = g_AreaCameraOffsetX + amount;
+            if (frame == 2) {
+                g_AreaCameraOffsetY      = 0;
+                g_AreaCameraOffsetX      = 0;
+                g_AreaCameraRefreshCount = 2;
+                *state                   = 1;
+                D_80146867               = 0;
+                return;
+            }
+            return;
+        case 1:
+            amount_2                 = arg0 & 0xFF;
+            g_AreaCameraRefreshCount = 2;
+            frame_2                  = D_80146867 + 1;
+            D_80146867               = frame_2;
+            g_AreaCameraOffsetY      = g_AreaCameraOffsetY - amount_2;
+            g_AreaCameraOffsetY      = g_AreaCameraOffsetX + amount_2;
+            if (frame_2 == 2) {
+                g_AreaCameraOffsetY      = 0;
+                g_AreaCameraOffsetX      = 0;
+                g_AreaCameraRefreshCount = 2;
+                D_80146867               = 0;
+                *state                   = 0;
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801FCD14);
 

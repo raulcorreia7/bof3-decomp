@@ -224,20 +224,9 @@ INCLUDE_ASM(func_801F0770);
 INCLUDE_ASM(func_801F0864);
 
 MATCH void func_801F0A94(void) {
-    s8 temp_v0;
+    s8 tint;
 
-    temp_v0 = (s8)g_Task->unk_5D;
-    if (temp_v0 != -0x80) {
-        g_Task->unk_5D = temp_v0 - 0x10;
-        g_Task->unk_5E -= 0x10;
-        g_Task->unk_5F -= 0x10;
-    }
-    if ((g_BattleEffectBattler->param.unk_0B == 1) && ((s8)g_Task->unk_5D == -0x80) && (func_8014DAEC() & 0xFF)) {
-        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
-        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
-        g_Task->header.step++;
-    }
+    EFFECT_APPEAR_AT_BATTLER();
 }
 
 #include "overlays/bmagic/Effect_RampTintAndFinish.h"
@@ -290,20 +279,9 @@ MATCH void func_801F0F2C(void) {
 }
 
 MATCH void func_801F1088(void) {
-    s8 temp_v0;
+    s8 tint;
 
-    temp_v0 = (s8)g_Task->unk_5D;
-    if (temp_v0 != -0x80) {
-        g_Task->unk_5D = temp_v0 - 0x10;
-        g_Task->unk_5E -= 0x10;
-        g_Task->unk_5F -= 0x10;
-    }
-    if ((g_BattleEffectBattler->param.unk_0B == 1) && ((s8)g_Task->unk_5D == -0x80) && (func_8014DAEC() & 0xFF)) {
-        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
-        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
-        g_Task->header.step++;
-    }
+    EFFECT_APPEAR_AT_BATTLER();
 }
 
 MATCH void func_801F1180(void) {
