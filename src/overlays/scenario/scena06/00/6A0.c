@@ -245,12 +245,14 @@ INCLUDE_ASM(func_801FD800);
 
 INCLUDE_ASM(func_801FDD14);
 
+/* m2c draft: 10 differing, size 0xA8 against retail 0xB0; the first branch sense differs. */
 INCLUDE_ASM(func_801FDD7C);
 
 MATCH void func_801FDE2C(void) {
 }
 
 /* blocker: scheduled load; first diff: 801FDE4C. */
+/* Early-return draft leaves one difference: retail loads li v0,1 before li v3,0xD. */
 INCLUDE_ASM(func_801FDE34);
 
 INCLUDE_ASM(func_801FDEA4);
