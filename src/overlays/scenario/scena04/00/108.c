@@ -198,17 +198,18 @@ MATCH u8* func_801F7FF8(void) {
 
 /* Area_AddCellPrim with the caller's tag stored in the slot and an unmasked size. */
 MATCH void func_801F8034(s32 x, s32 y, s32 depth, s32 size, u32 tag) {
-    u8* cursor;
-    u8* next;
-    u8* packet;
-    u32 offset;
-    u32 limit;
-    s32 index;
-    s32 value;
-    s32 cell;
-    s32 seed;
-    s32 count;
-    s32 addend;
+    u8*  cursor;
+    u8*  next;
+    u8*  packet;
+    u32* slot;
+    u32  offset;
+    u32  limit;
+    s32  index;
+    s32  value;
+    s32  cell;
+    s32  seed;
+    s32  count;
+    s32  addend;
 
     index = (x >> 16) - g_AreaTileOriginX;
     value = (y >> 16) - g_AreaTileOriginY;
@@ -235,8 +236,9 @@ MATCH void func_801F8034(s32 x, s32 y, s32 depth, s32 size, u32 tag) {
             offset = (g_FrameBufferIndex + 4) * 8 + count * 0x30;
             packet = *(u8**)(D_80142CC4 + offset);
             setaddr(packet, cursor);
-            g_GfxPrimCursor              = next;
-            *(u32*)(D_80142CC4 + offset) = tag;
+            g_GfxPrimCursor = next;
+            slot            = (u32*)(D_80142CC4 + offset);
+            *slot           = tag;
         }
     }
 }
