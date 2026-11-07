@@ -1,46 +1,44 @@
 #include "start_08.h"
 
-extern s32 D_801ECDBC;
-
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 81.20%. resume: a lever or header
  * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E4744(void) {
-    s32* val0;
-    s32  tmp0;
-    s32  tmp1;
-    s32  tmp2;
-    s32  tmp3;
-    s32  tmp4;
-    s32  val1;
-    s32  val2;
-    s32  val3;
-    s32  val4;
-    s32  val5;
-    s32  val6;
-    s8   tmp5;
-    s8   tmp6;
-    s8   tmp7;
-    s8   val7;
-    s8   val8;
-    s8   val9;
-    u32  tmp8;
-    u8*  val10;
-    u8   tmp9;
-    u8   tmp10;
-    u8   tmp11;
-    u8   tmp12;
-    u8   tmp13;
-    u8   tmp14;
-    u8   tmp15;
-    u8   tmp16;
-    u8   val11;
+    u8* val0;
+    s32 tmp0;
+    s32 tmp1;
+    s32 tmp2;
+    s32 tmp3;
+    s32 tmp4;
+    s32 val1;
+    s32 val2;
+    s32 val3;
+    s32 val4;
+    s32 val5;
+    s32 val6;
+    s8  tmp5;
+    s8  tmp6;
+    s8  tmp7;
+    s8  val7;
+    s8  val8;
+    s8  val9;
+    u32 tmp8;
+    u8* val10;
+    u8  tmp9;
+    u8  tmp10;
+    u8  tmp11;
+    u8  tmp12;
+    u8  tmp13;
+    u8  tmp14;
+    u8  tmp15;
+    u8  tmp16;
+    u8  val11;
 
     func_801E7000();
-    val0  = &D_801ECDBC;
-    val0  = &D_801ECDBC;
+    val0  = D_801ECDBC;
+    val0  = D_801ECDBC;
     val2  = INPUT_GetRepeatedButtons(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
-    val10 = (D_801ED7E8 * 0x60) + (((s8)D_801ED7E4 * 0xC) + &D_801ECDBC) + (s8)D_801ED7E0;
+    val10 = (D_801ED7E8 * 0x60) + (((s8)D_801ED7E4 * 0xC) + D_801ECDBC) + (s8)D_801ED7E0;
     if (val2 & PADLup) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         do {
@@ -49,7 +47,7 @@ NON_MATCHING void func_801E4744(void) {
             if (tmp13 & 0x80) {
                 D_801ED7E4 = 7;
             }
-        } while (*(((s8)D_801ED7E4 * 0xC) + ((D_801ED7E8 * 0x60) + &D_801ECDBC) + (s8)D_801ED7E0) == 0);
+        } while (*(((s8)D_801ED7E4 * 0xC) + ((D_801ED7E8 * 0x60) + D_801ECDBC) + (s8)D_801ED7E0) == 0);
     } else if (val2 & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         do {
@@ -58,7 +56,7 @@ NON_MATCHING void func_801E4744(void) {
             if ((s8)tmp14 >= 8) {
                 D_801ED7E4 = 0;
             }
-        } while (*(((s8)D_801ED7E4 * 0xC) + ((D_801ED7E8 * 0x60) + &D_801ECDBC) + (s8)D_801ED7E0) == 0);
+        } while (*(((s8)D_801ED7E4 * 0xC) + ((D_801ED7E8 * 0x60) + D_801ECDBC) + (s8)D_801ED7E0) == 0);
     } else if (val2 & PADLleft) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         tmp9 = *val10;
@@ -71,7 +69,7 @@ NON_MATCHING void func_801E4744(void) {
                 if (tmp10 & 0x80) {
                     D_801ED7E0 = 0xB;
                 }
-            } while (*(((s8)D_801ED7E4 * 0xC) + ((D_801ED7E8 * 0x60) + &D_801ECDBC) + (s8)D_801ED7E0) == 0);
+            } while (*(((s8)D_801ED7E4 * 0xC) + ((D_801ED7E8 * 0x60) + D_801ECDBC) + (s8)D_801ED7E0) == 0);
         }
     } else if (val2 & PADLright) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
@@ -85,11 +83,11 @@ NON_MATCHING void func_801E4744(void) {
                 if ((s8)tmp12 >= 0xC) {
                     D_801ED7E0 = 0;
                 }
-            } while (*(((s8)D_801ED7E4 * 0xC) + ((D_801ED7E8 * 0x60) + &D_801ECDBC) + (s8)D_801ED7E0) == 0);
+            } while (*(((s8)D_801ED7E4 * 0xC) + ((D_801ED7E8 * 0x60) + D_801ECDBC) + (s8)D_801ED7E0) == 0);
         }
     }
     if (g_InputPressed & PADRdown) {
-        val10 = (D_801ED7E8 * 0x60) + (((s8)D_801ED7E4 * 0xC) + &D_801ECDBC) + (s8)D_801ED7E0;
+        val10 = (D_801ED7E8 * 0x60) + (((s8)D_801ED7E4 * 0xC) + D_801ECDBC) + (s8)D_801ED7E0;
         tmp15 = *val10;
         switch (tmp15) { /* irregular */
             case 1:
