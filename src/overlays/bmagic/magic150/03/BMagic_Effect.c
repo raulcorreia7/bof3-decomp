@@ -80,6 +80,7 @@ MATCH void func_801EF6B0(void) {
     } while (i < 8);
 }
 
+/* blocker: the cursor walk needs a table entry type (eight 8-byte rows with halfword fields); first diff: the cursor load at 0x801EF71C. */
 INCLUDE_ASM(func_801EF6F8);
 
 INCLUDE_ASM(func_801EF790);
