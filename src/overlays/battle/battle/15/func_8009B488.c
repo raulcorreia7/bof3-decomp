@@ -32,7 +32,7 @@ MATCH void func_8009B488(void) {
     EMI_LoaderStreamInitSlot(EMI_SLOT_BATL_SE);
     index = 5;
     if (g_BattlePartyBattlers[0].turn.command.type == BATTLE_COMMAND_ITEM) {
-        func_801DDE7C(D_80145FB2, D_80145FAA[0]);
+        func_801DDE7C(D_80145FB2, g_BattlePartyBattlers[0].turn.command.id);
     }
     if (D_801460E9 == 5) {
         func_801DDE7C(D_801460F2, D_801460EA);

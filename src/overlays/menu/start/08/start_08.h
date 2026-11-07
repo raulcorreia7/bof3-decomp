@@ -146,7 +146,6 @@ extern u8              D_801ECDBC[];
 
 extern u8              D_80144F57;
 extern u16             D_80145594[];
-extern u8              D_80145FCC[][BATTLE_PARTY_STRIDE];
 extern u8              D_80148480;
 extern u8              D_8014849B;
 extern s8              D_801484BD;

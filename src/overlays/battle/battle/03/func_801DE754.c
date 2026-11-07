@@ -18,7 +18,7 @@ MATCH void func_801DE754(void) {
     if (panel2->unk_08 == 0u) {
         panel2->unk_00 = 0;
         if (func_801DE858(4) != 0u) {
-            D_80148333[0] = 2;
+            g_MenuPanelTasks[0].state = 2;
         }
     } else {
         sp                    = SPAD(0u);

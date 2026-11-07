@@ -14,7 +14,7 @@ MATCH u32 Char_ClearStatus(u8 index, u16 mask, u8 mode) {
     if ((mode & BYTE_MASK) == 0) {
         record = &g_Characters[i];
     } else {
-        record = (Character*)(D_80145F04 + i * 0x140);
+        record = &g_BattlePartyBattlers[i].chr;
     }
     status = record->status;
     store  = record;

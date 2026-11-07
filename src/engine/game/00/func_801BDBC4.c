@@ -16,7 +16,7 @@ MATCH void func_801BDBC4(void) {
             count  = g_PartySize;
             offset = 0;
         loop:
-            if (g_Characters[D_80145FCC[offset]].status & STATUS_CONFUSED) {
+            if (g_Characters[(&g_BattlePartyBattlers[0].character_index)[offset]].status & STATUS_CONFUSED) {
                 found = 1;
             }
             i++;

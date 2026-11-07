@@ -5,7 +5,7 @@ MATCH void func_801F3558(void) {
 
     g_CurrentActor->interaction_flags &= 0xFE;
 
-    if (D_80145F09[0][0] == 5) {
+    if (g_BattlePartyBattlers[0].chr.character_id == 5) {
         state = &D_80144CAA;
         if (*state != 0x4B) {
             return;
@@ -18,7 +18,7 @@ MATCH void func_801F3558(void) {
         g_CurrentActor->unk_7E += 1;
     }
 
-    if (D_80145F09[0][0] == 7) {
+    if (g_BattlePartyBattlers[0].chr.character_id == 7) {
         Game_SetScriptActive();
         g_SceneEventMode = 0x30;
         g_SceneEventStep = 0xA;

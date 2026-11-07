@@ -3,7 +3,7 @@
 /* Advances the active enemy battler's AI state: rolls the next state from its behavior row, gates it on
  * health and flags, then dispatches the state update and records it.
  */
-/* nonmatching unmeasured: the byte widths of D_800B51F8, D_801EB6AE, D_801EB6BC and D_801EB725 are corrected and
+/* nonmatching unmeasured: the byte width of D_800B51F8 is corrected and
  * the enemy-work reads use the EnemyBattler members; candidate 46.94%. resume: the retail homes the slot in s1 (the
  * candidate keeps it in s2) and stores g_BattleActionType through a pointer materialised before the rand() call. */
 #ifdef NON_MATCHING
@@ -11,8 +11,6 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
     EnemyBattler* enemy;
     s32           index;
     s32           idx2;
-    s32           row2;
-    s32           row3;
     u8            actor;
     u8            slot;
 
@@ -33,17 +31,16 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
             if (g_BattleActionType != 3) {
                 actor = slot & BYTE_MASK;
             } else {
-                actor = index * 0x118;
-                if (*D_801EB6B0[index] & 0x20) {
-                    g_BattleActionType = 4;
-                    *D_801EB726[index] = D_801EB6BC[actor + (rand() & 7)];
-                    actor              = slot & BYTE_MASK;
+                if (g_BattleEnemyBattlers[index].event_flags & 0x20) {
+                    g_BattleActionType                           = 4;
+                    g_BattleEnemyBattlers[index].turn.command.id = g_BattleEnemyBattlers[index].skills[rand() & 7];
+                    actor                                        = slot & BYTE_MASK;
                 } else {
                     goto block_16; /* shared state fallback */
                 }
             }
         } else {
-            if (*D_801EB6B0[slot & BYTE_MASK] & 0x40) {
+            if (g_BattleEnemyBattlers[slot & BYTE_MASK].event_flags & 0x40) {
                 g_BattleActionType = 3;
             } else {
                 goto block_16; /* shared state fallback */
@@ -52,11 +49,10 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
         }
     } else {
         idx2 = slot & BYTE_MASK;
-        row3 = idx2 * 0x118;
-        if (*D_801EB6B0[idx2] & 0x80) {
-            g_BattleActionType   = 2;
-            *(D_801EB730 + row3) = *(D_801EB730 + row3) | 2;
-            actor                = slot & BYTE_MASK;
+        if (g_BattleEnemyBattlers[idx2].event_flags & 0x80) {
+            g_BattleActionType = 2;
+            g_BattleEnemyBattlers[idx2].turn.damage_flags.value |= 2;
+            actor = slot & BYTE_MASK;
         } else {
         block_16:
         block_17:
@@ -65,8 +61,7 @@ NON_MATCHING void func_801E25E0(u8 arg0) {
             actor = slot & BYTE_MASK;
         }
     }
-    row2 = actor * 0x118;
-    if ((*(D_801EB6B2 + row2) & 0x20) ||
+    if ((g_BattleEnemyBattlers[actor].status & 0x20) ||
         (g_BattleEnemyBattlers[actor].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
         g_BattleActionType = 1;
         if (func_800A9304((slot + 3) & BYTE_MASK) & BYTE_MASK) {

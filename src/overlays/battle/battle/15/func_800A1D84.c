@@ -42,7 +42,7 @@ NON_MATCHING void func_800A1D84(void) {
     row_index = *active;
     if (row_index < BATTLE_ACTIVE_ROW_COUNT) {
         row_offset   = row_index * BATTLE_PARTY_STRIDE;
-        record_index = D_80145FCC[row_offset];
+        record_index = (&g_BattlePartyBattlers[0].character_index)[row_offset];
         timer        = g_Characters[record_index].fatigue;
         if (timer < BATTLE_TIMER_MAX) {
             g_Characters[record_index].fatigue = timer + 1;

@@ -69,7 +69,7 @@
             }                                                                                                  \
         } else {                                                                                               \
             row    = (u32)battler - 3u;                                                                        \
-            result = enemy[(u32)D_801EB710[row * BATTLE_ENEMY_STRIDE] * 0x88u];                                \
+            result = enemy[(u32)g_BattleEnemyBattlers[row].kind * 0x88u];                                      \
         }                                                                                                      \
         return result;                                                                                         \
     } while (0)
@@ -160,14 +160,6 @@ typedef struct BattlePlayerDamageStatus {
 } BattlePlayerDamageStatus;
 
 ASSERT_SIZE(BattlePlayerDamageStatus, 0x140);
-
-typedef struct BattleEnemyDamageStatus {
-    volatile u32 flags;
-    volatile u32 flags_04;
-    u8           pad_08[0x110];
-} BattleEnemyDamageStatus;
-
-ASSERT_SIZE(BattleEnemyDamageStatus, 0x118);
 
 typedef struct BattleLocalOffsetPair {
     s16 values[4][2];
@@ -275,62 +267,6 @@ ASSERT_OFFSET(BattlePanelRecord, unk_35, 0x35);
 ASSERT_OFFSET(BattlePanelRecord, unk_40, 0x40);
 ASSERT_OFFSET(BattlePanelRecord, unk_55, 0x55);
 
-/* The enemy row's panel block (D_801EB6D4, the row's +0xA4 cell): the panel
- * block of the enemy work row, the counterpart of the player battler's
- * BattlePanelRecord.
- *
- * func_800A9BD8 scales the four halfwords at +0x20 into the four halfwords at
- * +0x00, scales the four bytes at +0x35 into the four bytes at +0x15, and
- * mirrors the bytes at +0x2B..+0x33 into +0x0B..+0x13. The row's flags word
- * and factor bytes follow at +0x60 and +0x64. */
-typedef struct EnemyBattlerPanel {
-    u16 unk_00; /* the scaled stat quotes */
-    u16 unk_02;
-    u16 unk_04;
-    u16 unk_06;
-    u8  pad_08[3];
-    u8  unk_0B; /* the mirrored panel bytes */
-    u8  unk_0C;
-    u8  unk_0D;
-    u8  unk_0E;
-    u8  unk_0F;
-    u8  unk_10;
-    u8  unk_11;
-    u8  pad_12[1];
-    u8  unk_13;
-    u8  pad_14[1];
-    u8  unk_15; /* the scaled element gauges */
-    u8  unk_16;
-    u8  unk_17;
-    u8  unk_18;
-    u8  pad_19[7];
-    u16 unk_20; /* the stat quotes the panel scales */
-    u16 unk_22;
-    u16 unk_24;
-    u16 unk_26;
-    u8  pad_28[3];
-    u8  unk_2B; /* the panel bytes the record mirrors */
-    u8  unk_2C;
-    u8  unk_2D;
-    u8  unk_2E;
-    u8  unk_2F;
-    u8  unk_30;
-    u8  unk_31;
-    u8  pad_32[1];
-    u8  unk_33;
-    u8  pad_34[0x2C];
-    u32 unk_60;    /* the row's +0x104 flags word */
-    s8  unk_64[8]; /* the row's +0x108..+0x10F factor bytes */
-    u8  pad_6C[0xAC];
-} EnemyBattlerPanel;
-
-ASSERT_SIZE(EnemyBattlerPanel, 0x118);
-ASSERT_OFFSET(EnemyBattlerPanel, unk_00, 0x00);
-ASSERT_OFFSET(EnemyBattlerPanel, unk_15, 0x15);
-ASSERT_OFFSET(EnemyBattlerPanel, unk_20, 0x20);
-ASSERT_OFFSET(EnemyBattlerPanel, unk_60, 0x60);
-ASSERT_OFFSET(EnemyBattlerPanel, unk_64, 0x64);
-
 typedef struct BattleSelectionState {
     volatile u8 active_count; /* +0x00 */
     volatile u8 unk_01[0xA3];
@@ -348,13 +284,6 @@ typedef struct BattleTemplateStats {
 typedef struct BattleEnemyRecord {
     u8 unk_00[0x118];
 } BattleEnemyRecord;
-
-/* One-field view of the enemy row flag byte (stride 0x118): the original
- * clears the row flag through the record type, not a flat byte index. */
-typedef struct EnemyBattlerFlag {
-    volatile u8 flag;
-    u8          pad_01[0x117];
-} EnemyBattlerFlag;
 
 /* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's
  * save/restore keeps the plain word. A second name is the only form that keeps
@@ -538,106 +467,91 @@ extern volatile u8                       g_BattleTarget;
 extern u8                                g_BattleTarget_nv;
 /* D_801463A0 */
 extern BattleTurn* volatile g_BattleTargetRecord;
-extern u16                              D_801463B4;
+extern u16                 D_801463B4;
 /* D_801463C4 */
-extern u8                               g_BattleGenes[];
-extern u8                               D_801463D6;
+extern u8                  g_BattleGenes[];
+extern u8                  D_801463D6;
 /* D_801463D8 */
 /* D_80148570 */
-extern volatile u8                      g_BattleChoicePanel[];
+extern volatile u8         g_BattleChoicePanel[];
 /* First byte of g_BattleChoicePanel (0x80148570). The original stores it
  * through a scalar symbol, which emits the direct %lo store form; indexing the
  * array symbol would materialize its address in a register instead. */
 /* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
  * direct %lo store form. */
-extern volatile u8                      g_BattleSelectionHead;
-extern u8                               D_80148571;
-extern u8                               D_80148572;
-extern u16                              D_80148576;
-extern s16                              D_80148582;
-extern u8                               D_80148594;
-extern u8                               D_80148595;
-extern u8                               D_80148596;
-extern u16                              D_80148598;
-extern u16                              D_8014859A;
-extern u8                               D_8014859D;
-extern u8                               D_801485A1;
-extern volatile u8                      D_801485B8;
-extern s8                               D_801485B9;
-extern s8                               D_801485BA;
-extern s16                              D_801485BC;
-extern s16                              D_801485BE;
-extern s8                               D_801485C5;
-extern s16                              D_801485CA;
-extern u8*                              D_801485D8;
-extern volatile u8                      D_801485DD;
-extern volatile u8                      D_801485DE;
-extern volatile u8                      D_801485DF;
-extern volatile u16                     D_801485EC;
-extern s16                              D_801485EE;
-extern volatile s16                     D_80148628;
-extern volatile u16                     D_8014862A;
-extern volatile u8                      D_8014862F;
-extern volatile u8                      D_80148654;
-extern volatile u8                      D_80148656;
+extern volatile u8         g_BattleSelectionHead;
+extern u8                  D_80148571;
+extern u8                  D_80148572;
+extern u16                 D_80148576;
+extern s16                 D_80148582;
+extern u8                  D_80148594;
+extern u8                  D_80148595;
+extern u8                  D_80148596;
+extern u16                 D_80148598;
+extern u16                 D_8014859A;
+extern u8                  D_8014859D;
+extern u8                  D_801485A1;
+extern volatile u8         D_801485B8;
+extern s8                  D_801485B9;
+extern s8                  D_801485BA;
+extern s16                 D_801485BC;
+extern s16                 D_801485BE;
+extern s8                  D_801485C5;
+extern s16                 D_801485CA;
+extern u8*                 D_801485D8;
+extern volatile u8         D_801485DD;
+extern volatile u8         D_801485DE;
+extern volatile u8         D_801485DF;
+extern volatile u16        D_801485EC;
+extern s16                 D_801485EE;
+extern volatile s16        D_80148628;
+extern volatile u16        D_8014862A;
+extern volatile u8         D_8014862F;
+extern volatile u8         D_80148654;
+extern u8                  D_80148656;
 /* Proven game-RAM base for battle state (0x80140000). func_800A4458 already
  * references it through a local extern of this exact type. */
 /* Handle ring slot array: one u32 per 8-byte record (func_800A60DC writes
  * D_801EB5B4 + ((D_801EC328 - 1) & 0xF) * 8). */
-extern volatile u8                      D_80150000[];
-extern u8*                              D_801C893C[];
-extern u8*                              D_801C8950[];
-extern u8                               D_801C90ED[];
+extern volatile u8         D_80150000[];
+extern u8*                 D_801C893C[];
+extern u8*                 D_801C8950[];
+extern u8*                 g_MenuInventoryTitles[5];
+extern char                g_MenuInventoryCountFormat[];
+extern u8                  D_801C90ED[];
 /* Selection-kind table base; byte 0 of each stride-0x14 entry holds the flags.
  */
 /* Selection-kind flag table base: byte 0 of the kind entry holds the flags. */
-extern u8                               D_801CA718[];
-extern u8                               D_801CA719[];
-extern u8                               D_801CAF13;
-extern u8                               D_801CD78E[];
-extern u32                              D_801EB082;
-extern u16                              D_801EB37C[][0x8C];
-extern u8                               D_801EB3DC[];
-extern u8                               D_801EB638[];
-extern u8                               D_801EB6AF; /* +0x7F of the same enemy rows: the armed flag byte. */
-extern u16                              D_801EB6BA;
+extern u8                  D_801CA718[];
+extern u8                  D_801CA719[];
+extern u8                  D_801CAF13;
+extern u8                  D_801CD78E[];
+extern u32                 D_801EB082;
+extern u8                  D_801EB3DC[];
 /* Battler base halfwords, one u16 per 0x118-byte enemy row. */
-extern volatile u16                     D_801EB6C4[][140];
-extern u8                               D_801EB6CA[];
-extern u8                               D_801EB6CE[];
-extern EnemyBattlerPanel                D_801EB6D4[];
-extern u8                               D_801EB6E7;
-extern u8                               D_801EB6F0[];
-extern u8                               D_801EB6F4[];
-extern u8                               D_801EB721[];
-/* D_801EB72C */
-extern EnemyBattlerFlag                 D_801EB72C_rows[];
-extern volatile BattleEnemyDamageStatus D_801EB730[];
-extern u8                               D_801EB744[];
-extern u8                               D_801EB745[];
-extern u8                               D_801EBEFA; /* Nine-slot affinity mirror in the high battle block. */
-extern u8                               D_801EBEFB;
-extern u8                               D_801EBEFC;
-extern u8                               D_801EBEFD;
-extern u8                               D_801EBEFE;
-extern u8                               D_801EBEFF;
-extern u8                               D_801EBF00;
-extern u8                               D_801EBF01;
-extern u8                               D_801EBF02;
+extern u8                  D_801EBEFA; /* Nine-slot affinity mirror in the high battle block. */
+extern u8                  D_801EBEFB;
+extern u8                  D_801EBEFC;
+extern u8                  D_801EBEFD;
+extern u8                  D_801EBEFE;
+extern u8                  D_801EBEFF;
+extern u8                  D_801EBF00;
+extern u8                  D_801EBF01;
+extern u8                  D_801EBF02;
 /* Alternate local work entries (stride 0x140) and their paired status words. */
-extern u8                               D_801EC2E8[];
-extern volatile s16                     D_801EC2EE;
-extern volatile u16                     D_801EC2F2;
-extern volatile u16                     D_801EC30C;
-extern u16                              D_801EC30E;
-extern volatile u16                     D_801EC310;
-extern volatile u16                     D_801EC312;
-extern u8                               D_801EC337[];
-extern u8                               D_801EC33B[];
-extern u8                               D_801EC357[];
+extern u8                  D_801EC2E8[];
+extern volatile s16        D_801EC2EE;
+extern volatile u16        D_801EC2F2;
+extern volatile u16        D_801EC30C;
+extern u16                 D_801EC30E;
+extern volatile u16        D_801EC310;
+extern volatile u16        D_801EC312;
+extern u8                  D_801EC337[];
+extern u8                  D_801EC33B[];
+extern u8                  D_801EC357[];
 /* D_801EC364 */
-extern BattleTemplateStats              g_BattleTemplateStats[]; /* 0x801EC364 */
-extern u8                               D_801EC390[];
+extern BattleTemplateStats g_BattleTemplateStats[]; /* 0x801EC364 */
+extern u8                  D_801EC390[];
 
 /* The battle program's handler tables call these functions. */
 void        func_80096F3C(void);
@@ -843,7 +757,8 @@ void        func_800B2438(void);
 void        func_800B2478(void);
 void        func_800B250C(void);
 void        func_800B258C(void);
-void        func_800B25C0(MenuPanelTask* task);
+/* func_800B25C0 */
+void        Menu_DrawInventoryWindow(MenuPanelTask* task);
 void        func_800B2C90(MenuPanelTask* task);
 void        func_800B3324(u8, u16, u16, s32, s32, MenuPanelTask*);
 void        func_800B3AE8(MenuPanelTask* task);
@@ -854,6 +769,9 @@ extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
 extern void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool        func_801AF494(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
+                   s32 sprite_flag);
+void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 /* func_801DB5CC */
 u8   Battle_FindSelectableSlotForward(s32 start_slot);
 /* func_801DB6F4 */
@@ -1021,8 +939,9 @@ static inline void BattleSelectionDelta(s32 mode) {
         (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change =
             (s16)(value - g_BattlePartyBattlers[ctx->sel].chr.stats.defense);
     } else {
-        value                                                      = func_800A4294(mode);
-        (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change = (s16)(value - D_801EB6C4[ctx->sel - 3u][9]);
+        value = func_800A4294(mode);
+        (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change =
+            (s16)(value - ENEMY_COMBATANT(ctx->sel).stats.defense);
     }
 
     result = g_BattleTargetRecord;

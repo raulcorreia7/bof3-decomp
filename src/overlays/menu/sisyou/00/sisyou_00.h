@@ -104,17 +104,9 @@ typedef struct MasterSkill {
 ASSERT_SIZE(MasterSkill, MASTER_SKILL_SIZE);
 ASSERT_OFFSET(MasterSkill, ability, 0x01);
 
-/* The shared stock tables are read as rows (2-D) in the master walkers and
- * as raw bytes in the stock-row printers. */
-typedef union MasterStock {
-    u8 bytes[1];
-    u8 rows[1][BATTLE_PARTY_STRIDE];
-} MasterStock;
-
 /* Retail addresses. */
 
 /* Data, in address order. */
-extern MasterStock        D_80145FCC;
 extern u8                 D_801D0C04[];
 extern u8                 D_801D0C08[];
 extern u8                 D_801D0C10[];

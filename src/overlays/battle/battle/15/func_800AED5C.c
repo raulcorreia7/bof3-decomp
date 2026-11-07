@@ -6,7 +6,6 @@ typedef struct BattleRecordHead {
 } BattleRecordHead;
 
 extern u8 D_80145F20[];
-extern u8 D_801EB6D0[];
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_800AED5C(s32 arg0, u32 battler_index) {
@@ -25,10 +24,10 @@ NON_MATCHING s32 func_800AED5C(s32 arg0, u32 battler_index) {
     if (BATTLER_IS_PLAYER(sel)) {
         src         = &D_80145F20[sel * BATTLE_PARTY_STRIDE];
         ctx->sel    = battler_index;
-        ctx->record = (s16*)&D_80145FA8[sel * BATTLE_PARTY_STRIDE];
+        ctx->record = (s16*)&g_BattlePartyBattlers[sel].turn.command.target;
     } else {
         ctx->record = (s16*)&D_801EB3DC[sel * BATTLE_ENEMY_STRIDE];
-        src         = &D_801EB6D0[(sel - 3) * BATTLE_ENEMY_STRIDE];
+        src         = (u8*)&ENEMY_COMBATANT(sel).stats;
         ctx->sel    = battler_index;
     }
     dst                     = D_801EC2E8;

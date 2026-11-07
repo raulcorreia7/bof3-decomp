@@ -205,7 +205,6 @@ extern BattleSelection g_BattleSelections[];
 /* D_80143F00 */
 extern s32             D_80145ED0;
 extern volatile u8     D_80145F18[];
-extern volatile u8     D_80145F1C[];
 extern u8              D_80145F20[];
 extern u8              D_80145F22[];
 /* One-field views of the same rows: the local rows (stride 0x140) and the
@@ -436,24 +435,13 @@ extern volatile u16     D_801EB4F8[][6];
 extern u8               D_801EB4FA[][12];
 extern BattleRank       D_801EB550[];
 extern u8               D_801EB5B0[];
-extern u8               D_801EB635[][280];
-extern u8               D_801EB638[][280];
-extern s16              D_801EB65E[][140];
-extern u16              D_801EB660[][140];
-extern u8               D_801EB6A4[][0x118];
 /* D_801EBF20 */
 extern u8  s_BattleBattlerTemplates[]; /* Alternate local work entries (stride 0x140) and their paired status words. */
 /* D_801EC048 */
 extern u8  s_BattleBattlerTemplateTails[];
-extern s32 D_801EB6AF;
-extern volatile u16 D_801EB6B0[][140];
-extern u8           D_801EB6BC[];
-extern u8           D_801EB6D0[];
-extern s8           D_801EB712[];
-extern s8           D_801EB713[];
-extern u8           D_801EB730[];
-extern u8           D_801EBF04;
-extern s32          D_801EBFA0;
+extern u8  D_801EB6D0[];
+extern u8  D_801EBF04;
+extern s32 D_801EBFA0;
 extern BattleEffect* volatile D_801EC2E0;
 extern u8              D_801EC2E4;
 extern BattleStatBlock D_801EC2E8;

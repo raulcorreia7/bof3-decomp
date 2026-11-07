@@ -58,7 +58,7 @@ loop_1:
             var_s0 += 1;
             var_s2 = var_s0;
             var_s3 = 5;
-            var_s0 = (*var_s2 * 0xA4) + &D_80144967;
+            var_s0 = (*var_s2 * PARTY_RECORD_STRIDE) + &D_80144967;
             goto block_20;
         case 5:
             var_s0 += 1;

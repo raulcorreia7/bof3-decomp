@@ -21,9 +21,9 @@ NON_MATCHING void func_801E5E2C(void) {
         source = slot->target.party;
         offset = (g_BattlePanelOffsets + 1)[(source->unk_08 * 2) + (source->unk_2C.half * 8)];
     } else {
-        COORD_INT(slot->pos.x) = source->unk_2E.half + (s8)D_801EB712[(kind - 3) * 0x118];
+        COORD_INT(slot->pos.x) = source->unk_2E.half + ENEMY_COMBATANT(kind).panel_offset_x;
         source                 = slot->target.party;
-        offset                 = D_801EB713[(source->slot - 3) * 0x118];
+        offset                 = ENEMY_COMBATANT(source->slot).panel_offset_y;
     }
     COORD_INT(slot->pos.y) = source->unk_30.half + offset;
     divisor                = 0x64;
@@ -44,7 +44,7 @@ loop:
     if (kind < 3) {
         g_BattlePartyBattlers[kind].turn.damage_flags.value |= COMBATANT_FLAG_DAMAGE_NUMBER;
     } else {
-        D_801EB730[(kind - 3) * 0x118] |= 0x80;
+        ENEMY_COMBATANT(kind).turn.damage_flags.value |= 0x80;
     }
     slot->unk_0A = digits;
     slot->unk_09 = 8;

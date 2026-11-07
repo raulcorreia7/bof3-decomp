@@ -100,11 +100,26 @@ INCLUDE_ASM(func_801FA6BC);
 
 INCLUDE_ASM(func_801FA98C);
 
-INCLUDE_ASM(func_801FC220);
+MATCH void func_801FC220(void) {
+    if (D_801FE9DC != 0) {
+        s8 step                  = D_801FE94C[g_FrameCount & 3];
+        g_AreaCameraRefreshCount = 2;
+        g_AreaCameraOffsetY += step * 4;
+    }
+}
 
 INCLUDE_ASM(func_801FC280);
 
-INCLUDE_ASM(func_801FC830);
+MATCH void func_801FC830(void) {
+    if (g_SceneState.step_05 == 1) {
+        if (g_GameStateIndex != 2) {
+            func_801BE1B0(2);
+            SYS_SetFlag(g_SceneFlags, 0x34);
+            g_SceneState.state_04 = 0;
+            g_SceneState.step_05  = 0;
+        }
+    }
+}
 
 MATCH void func_801FC8A0(void) {
     if (g_SceneState.step_05 == 0x23) {

@@ -376,17 +376,17 @@ typedef struct EnemyBattler {
     u16         zenny;       /* +0x84 banked in the spoils by Battle_DefeatEnemy */
     u16         exp;         /* +0x86 banked in the spoils by Battle_DefeatEnemy */
     u16         level;       /* +0x88 the turn-order ranking and the base damage read it */
-    u8          pad_8A[2];
-    u8          skills[8]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
+    u16         unk_8A;      /* +0x8A set from the area scene record when the slot is armed */
+    u8          skills[8];   /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
     u16         hp;
     u16         ap; /* +0x96 battle/battle/03's cell; battle/battle/15 leaves it padded */
     EnemyDrop   drops[2];
     Stats       stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
     Stats       base;  /* +0xC0 the stats before buffs */
     u8          kind;
-    u8          fired_events; /* +0xE1 one bit per event packet already applied */
-    u8          unk_E2;       /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
-    u8          unk_E3;       /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
+    u8          fired_events;   /* +0xE1 one bit per event packet already applied */
+    s8          panel_offset_x; /* +0xE2 added to the panel's screen x, as the party's g_BattlePanelOffsets entry */
+    s8          panel_offset_y; /* +0xE3 added to the panel's screen y */
     ModeFunc    unk_E4;
     u16*        unk_E8;
     u8*         script;
@@ -424,6 +424,7 @@ ASSERT_OFFSET(EnemyBattler, unk_5A, 0x5A);
 ASSERT_OFFSET(EnemyBattler, unk_5C, 0x5C);
 ASSERT_OFFSET(EnemyBattler, unk_5F, 0x5F);
 ASSERT_OFFSET(EnemyBattler, status, 0x82);
+ASSERT_OFFSET(EnemyBattler, unk_8A, 0x8A);
 ASSERT_OFFSET(EnemyBattler, skills, 0x8C);
 ASSERT_OFFSET(EnemyBattler, hp, 0x94);
 ASSERT_OFFSET(EnemyBattler, enemy_id, 0x7C);

@@ -14,11 +14,11 @@ MATCH void func_801D2C7C(void) {
     i = 0;
     while (i < (Party_CountOrder(PARTY_ORDER_FIELD))) {
         if (i == D_80148656) {
-            D_80148333[((i + 4) * 9) << 2]   = 6;
-            D_80148333[((i + 0xC) * 9) << 2] = 4;
+            g_MenuPanelTasks[i + 4].state   = 6;
+            g_MenuPanelTasks[i + 0xC].state = 4;
         } else {
-            D_80148333[((i + 4) * 9) << 2]   = 8;
-            D_80148333[((i + 0xC) * 9) << 2] = 6;
+            g_MenuPanelTasks[i + 4].state   = 8;
+            g_MenuPanelTasks[i + 0xC].state = 6;
         }
         i++;
     }

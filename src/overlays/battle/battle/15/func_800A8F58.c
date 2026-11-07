@@ -41,12 +41,11 @@ NON_MATCHING s32 func_800A8F58(void) {
         } else {
             for (i = 3; i < 11; i++) {
                 if (!(Battle_SlotIsBlocked(i) & BYTE_MASK)) {
-                    off = (i - 3) * 0x118;
-                    if (FIELD(u8, &D_801EB6E7, off) < 6) {
+                    if (ENEMY_COMBATANT(i).stats.resistances[RES_INDEX_DEATH] < 6) {
                         roll = rand();
                         if (roll == (roll / 12) * 12) {
                             count += 1;
-                            FIELD(u32, D_801EB730, off) |= 0x100;
+                            ENEMY_COMBATANT(i).turn.damage_flags.value |= 0x100;
                         }
                     }
                 }
@@ -70,10 +69,10 @@ NON_MATCHING s32 func_800A8F58(void) {
         return 0;
     }
     if (!(Battle_SlotIsBlocked(g_BattleTargetSelector) & BYTE_MASK) &&
-        (FIELD(u8, &D_801EB6E7, (g_BattleTargetSelector - 3) * 0x118) < 6)) {
+        (ENEMY_COMBATANT(g_BattleTargetSelector).stats.resistances[RES_INDEX_DEATH] < 6)) {
         roll = rand();
         if (roll == (roll / 12) * 12) {
-            FIELD(u32, D_801EB730, (g_BattleTargetSelector - 3) * 0x118) |= 0x100;
+            ENEMY_COMBATANT(g_BattleTargetSelector).turn.damage_flags.value |= 0x100;
             return 1;
         }
     }

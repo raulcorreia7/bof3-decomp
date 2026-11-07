@@ -5,7 +5,6 @@
  * it or a blocking status, then the merged word is stored back and published. */
 MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
     u16  status;
-    u32  row;
     u8   slot;
     u32  merged;
     u16* acc;
@@ -46,12 +45,11 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
         D_801EC339[selection_kind * 0x78] = 0;
         if (selection_kind < 3) {
             g_BattlePartyBattlers[selection_kind].turn.command.type = 0;
-            D_80145FB4[selection_kind].flags &= ~2;
-            D_80145FB8[selection_kind].flags &= ~4;
+            g_BattlePartyBattlers[selection_kind].turn.damage_flags.volatile_value &= ~2;
+            g_BattlePartyBattlers[selection_kind].turn.action_flags.volatile_value &= ~4;
         } else {
-            row                         = selection_kind - 3;
-            D_801EB721[row * 0x118 + 4] = 0;
-            D_801EB730[row].flags &= ~2;
+            ENEMY_COMBATANT(selection_kind).turn.command.type = 0;
+            ENEMY_COMBATANT(selection_kind).turn.damage_flags.value &= ~2;
         }
     }
     if ((input_mask & STATUS_BLIND) && (func_800A3638(selection_kind, 9) & BYTE_MASK) &&

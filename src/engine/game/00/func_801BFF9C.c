@@ -35,7 +35,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         }
         for (i = 0; i < count; i++) {
             if (g_Characters[g_CharSlot[g_PartyFieldOrder[i]]].status & STATUS_POISONED) {
-                D_80145FA8 = 0xA;
+                g_BattlePartyBattlers[0].turn.command.target = 0xA;
                 break;
             }
         }
@@ -44,6 +44,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         g_BattlePartyBattlers[0].slot                    = 0;
         *(Character*)((u8*)g_BattlePartyBattlers + 0x74) = g_Characters[0];
         g_BattlePartyBattlers[0].character_index         = 0;
+        /* D_80145FBC stays an address symbol: VOL takes a plain lvalue and the member view changes the code. */
         VOL(u8, D_80145FBC) &= 0xFE;
         g_Task->unk_48 = 0;
         if (LOBU(g_GameRequestFlags) & 1) {
@@ -93,16 +94,16 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                     TASK_SET(work);
                     *work |= 1;
                     *mask &= 0xFE;
-                    g_Task->pos.x.fixed = 0;
-                    g_Task->pos.y.fixed = 0;
-                    g_Task->pos.z.fixed = 0;
-                    kind                = g_CharSlot[*order];
-                    feed                = D_80145F04;
-                    dst                 = feed + off;
-                    koff                = (kind & BYTE_MASK) * PARTY_RECORD_STRIDE;
-                    rec                 = (Character*)(koff + (u32)base);
-                    D_80145FCC[off]     = kind;
-                    *(Character*)dst    = *rec;
+                    g_Task->pos.x.fixed                              = 0;
+                    g_Task->pos.y.fixed                              = 0;
+                    g_Task->pos.z.fixed                              = 0;
+                    kind                                             = g_CharSlot[*order];
+                    feed                                             = D_80145F04;
+                    dst                                              = feed + off;
+                    koff                                             = (kind & BYTE_MASK) * PARTY_RECORD_STRIDE;
+                    rec                                              = (Character*)(koff + (u32)base);
+                    (&g_BattlePartyBattlers[0].character_index)[off] = kind;
+                    *(Character*)dst                                 = *rec;
                     if (!(g_Task->active_flags & 1)) {
                         func_801C1254(*order, i & BYTE_MASK);
                         MATCH_FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */

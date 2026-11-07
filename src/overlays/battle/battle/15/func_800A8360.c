@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-/* D_8014857x stay address views here: a g_MenuPanelTasks[16] view changes the register allocation. */
+/* D_80148572, D_8014857D and D_80148574 stay address symbols: a g_MenuPanelTasks[16] view changes the code. */
 MATCH void func_800A8360(void) {
     volatile u8* work;
     volatile u8* work_base;
@@ -18,14 +18,14 @@ MATCH void func_800A8360(void) {
         g_BattleChoicePhase = 2u;
         D_8014857D          = 0xFFu;
     ORDER_LOCK_END;
-    D_80148574 = -0xAA;
-    D_80148571 = eight;
-    D_8014857A = 0u;
-    D_8014857B = 0u;
-    D_8014857C = 0u;
-    D_80148579 = 0u;
-    D_80148580 = 0;
-    D_80148576 = 0x3Fu;
+    D_80148574                   = -0xAA;
+    g_MenuPanelTasks[16].handler = eight;
+    g_MenuPanelTasks[16].unk_0A  = 0u;
+    g_MenuPanelTasks[16].unk_0B  = 0u;
+    g_MenuPanelTasks[16].unk_0C  = 0u;
+    g_MenuPanelTasks[16].unk_09  = 0u;
+    g_MenuPanelTasks[16].unk_10  = 0;
+    g_MenuPanelTasks[16].pos.y   = 0x3Fu;
     work += 0x6C;
     *work      = 0u;
     D_801485DD = eight;

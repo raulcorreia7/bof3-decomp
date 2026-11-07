@@ -27,6 +27,7 @@ MATCH void func_801EEF24(void) {
     g_ScriptBank = 0x800D3800;
 }
 
+/* hint: g_Task loads before the effect battler for the position copy and the battler z loads before the unk_25 store; the candidate loads the two in the other order. First differing instruction: lui v1,0x1f80 at +0x2C. */
 INCLUDE_ASM(func_801EEFC8);
 
 INCLUDE_ASM(func_801EF148);
@@ -105,7 +106,25 @@ MATCH void func_801EFDEC(void) {
 
 INCLUDE_ASM(func_801EFE74);
 
-INCLUDE_ASM(func_801EFF7C);
+MATCH void func_801EFF7C(void) {
+    PartyBattler* task;
+    s16*          angle_cell;
+    s32           direction;
+    s32           velocity;
+
+    task       = g_Task;
+    angle_cell = &D_1F800004;
+    direction  = task->param.unk_0B;
+    task->unk_0C += 1;
+    *angle_cell         = direction << 9;
+    velocity            = rsin((s16)(direction << 9)) * g_Task->unk_0C;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + velocity;
+    velocity            = rcos(*angle_cell) * g_Task->unk_0C;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + velocity;
+    if (--g_Task->unk_09 == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F0070);
 
