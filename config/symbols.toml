@@ -510,6 +510,7 @@ Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the e
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_BrightenPaletteThenStep = { addr = 0x801EF3D4, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.step (byte 0x02) when the effect timer (byte 0x09) reaches zero in magic073 (Vitalize)." }
 Effect_NextStepUnderTickLimit = { addr = 0x801EF4E4, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.step (byte 0x02) in magic073 (Vitalize)." }
+BMagic_AllocEffect = { addr = 0x801F03E8, type = "func", source = "Claims the first free row of the 160 effect slots D_801F0670 (bit 0 of header.flags) and returns its index, or 0xFF when every row is in use in magic073 (Vitalize)." }
 g_BMagicEffectFuncs = { addr = 0x801F0668, source = "Handlers of magic073 (Vitalize), run by header.mode (byte 0x01)." }
 D_801F21F0 = { addr = 0x801F21F0, source = "Work record of the magic073 sway effect, which its handlers advance by header.mode (byte 0x01) and clear at the end." }
 
@@ -518,6 +519,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 Effect_StartOnZeroTick = { addr = 0x801EEF50, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic074 (Vigor)." }
 Effect_BrightenPaletteThenStep = { addr = 0x801EF3C0, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.step (byte 0x02) when the effect timer (byte 0x09) reaches zero in magic074 (Vigor)." }
 Effect_NextStepUnderTickLimit = { addr = 0x801EF4D0, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.step (byte 0x02) in magic074 (Vigor)." }
+BMagic_AllocEffect = { addr = 0x801F03D4, type = "func", source = "Claims the first free row of the 160 effect slots D_801F055C (bit 0 of header.flags) and returns its index, or 0xFF when every row is in use in magic074 (Vigor)." }
 g_BMagicEffectFuncs = { addr = 0x801F0554, source = "Handlers of magic074 (Vigor), run by header.mode (byte 0x01)." }
 D_801F20DC = { addr = 0x801F20DC, source = "Work record of the magic074 sway effect, which its handlers advance by header.mode (byte 0x01) and clear at the end." }
 
@@ -994,6 +996,7 @@ Effect_ReplacePaletteFade = { addr = 0x801EEFA0, type = "func", source = "frees 
 Effect_BrightenPalette = { addr = 0x801EF048, type = "func", source = "increments the selected palette fade RGB offsets each tick until the timer ends" }
 Effect_NextStep = { addr = 0x801EF158, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
 Effect_PlayOnZeroTick = { addr = 0x801EF2D8, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+BMagic_AllocEffect = { addr = 0x801EFFFC, type = "func", source = "Claims the first free row of the 128 effect slots D_801F01B0 (bit 0 of header.flags) and returns its index, or 0xFF when every row is in use in magic162." }
 
 ["emi/bmagic/magic166/03"]
 Effect_PlayOnZeroTick = { addr = 0x801EEE90, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
@@ -1018,6 +1021,7 @@ Effect_ReplacePaletteFade = { addr = 0x801EEFA0, type = "func", source = "frees 
 Effect_BrightenPalette = { addr = 0x801EF048, type = "func", source = "increments the selected palette fade RGB offsets each tick until the timer ends" }
 Effect_NextStep = { addr = 0x801EF158, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
 Effect_PlayOnZeroTick = { addr = 0x801EF2D8, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+BMagic_AllocEffect = { addr = 0x801EFFFC, type = "func", source = "Claims the first free row of the 128 effect slots D_801F01B0 (bit 0 of header.flags) and returns its index, or 0xFF when every row is in use in magic168." }
 
 ["emi/bmagic/magic169/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
