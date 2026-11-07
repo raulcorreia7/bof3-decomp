@@ -10,6 +10,6 @@ MATCH void FairyCasino_AnswerGameChoice(void) {
         g_SceneEventSelection = 1;
     } else {
         g_MessageRequest                   = FAIRY_MESSAGE_CASINO_NOT_ENOUGH_ZENNY;
-        g_ScriptWorkRecord->callback_index = 0xFF;
+        g_ScriptWorkRecord->callback_index = GAME_NONE;
     }
 }
