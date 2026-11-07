@@ -44,7 +44,7 @@ MATCH void func_801EEFF4(void) {
 
 INCLUDE_ASM(func_801EF06C);
 
-INCLUDE_ASM(func_801EF2DC);
+#include "overlays/bmagic/Effect_ReplaceSlotPaletteFade.h"
 
 #include "overlays/bmagic/Effect_BrightenPaletteThenStep.h"
 

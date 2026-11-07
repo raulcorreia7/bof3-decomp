@@ -31,7 +31,24 @@ MATCH void func_801EF14C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF1DC);
+MATCH void func_801EF1DC(void) {
+    void* battler;
+    u8    count;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
+            battler = &g_BattleEnemyBattlers[g_Task->unk_03];
+        } else {
+            battler = &g_BattlePartyBattlers[g_Task->unk_03];
+        }
+        GFX_FreePaletteFadeTarget(battler);
+        g_Task->timer  = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
+        g_Task->unk_09 = 0;
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF2F8);
 
@@ -59,6 +76,7 @@ INCLUDE_ASM(func_801EFEDC);
 
 INCLUDE_ASM(func_801F0010);
 
+/* blocker: pos halfword load order; first diff: +0x6C lhu a0,62(v0) hoisted above the timer store (retail) against after it (candidate). */
 INCLUDE_ASM(func_801F0104);
 
 MATCH void func_801F01F8(void) {
