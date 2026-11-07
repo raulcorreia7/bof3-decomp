@@ -9,7 +9,7 @@ MATCH void func_801DA8E0(void) {
     if (TIMER_EXPIRED(*timer)) {
         i = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
-            D_8014833C[i + 4][0] = 0;
+            g_MenuPanelTasks[i + 4].unk_0C = 0;
             i++;
         }
         timer = &D_80148651;
