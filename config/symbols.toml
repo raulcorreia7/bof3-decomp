@@ -418,65 +418,65 @@ g_BMagicEffectFuncs = { addr = 0x801EF510, source = "the module dispatcher index
 ["emi/bmagic/magic066/03"]
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
-BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs one step of a battle magic effect." }
-Effect_PlayOnIdleTick = { addr = 0x801EEE5C, type = "func", source = "Plays the chosen effect when the effect ticker is idle." }
-Effect_SetActorMatrix = { addr = 0x801EF784, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its height span, times the camera." }
-g_BMagicEffectFuncs = { addr = 0x801F0064, source = "Step handlers of a battle magic effect." }
+BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic066 (Tsunami)." }
+Effect_PlayOnIdleTick = { addr = 0x801EEE5C, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic066 (Tsunami)." }
+Effect_SetActorMatrix = { addr = 0x801EF784, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic066 (Tsunami)." }
+g_BMagicEffectFuncs = { addr = 0x801F0064, source = "Handlers of magic066 (Tsunami), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic067/03"]
-Effect_CountDownTimerCallSelector = { addr = 0x801EEF3C, type = "func", source = "Counts the effect timer down, then selects the targets and advances the effect step." }
-Effect_StartOnZeroTick = { addr = 0x801EF284, type = "func", source = "Raises the effect playing flag and runs the effect step when the effect ticker is zero." }
-Effect_DriftStep = { addr = 0x801EF59C, type = "func", source = "Drifts the effect actor and ends the effect when the timer runs low." }
-Effect_ArmCounterNextStep = { addr = 0x801EFF8C, type = "func", source = "Arms the effect counter and advances the effect step." }
-Effect_CountUpAndStep = { addr = 0x801EFFCC, type = "func", source = "Counts the effect timer up and advances the effect step." }
-Effect_CountDownAndStep = { addr = 0x801F001C, type = "func", source = "Counts the effect counter down and advances the effect step at zero." }
-Effect_TickOnTimerZero = { addr = 0x801F0068, type = "func", source = "Counts the effect timer down and ticks the effect at zero." }
-Effect_RequestQueueEntryAndArmTicker = { addr = 0x801F02E4, type = "func", source = "Queues a battle entry and arms the effect ticker." }
-Effect_TickOnZeroTick = { addr = 0x801F033C, type = "func", source = "When the effect ticker is zero, ticks the other battler's ticker down and runs the effect step." }
-Effect_AddActorStepOnPlaying = { addr = 0x801F043C, type = "func", source = "Adds an actor and advances the effect step once the effect is playing." }
-g_BMagicEffectFuncs = { addr = 0x801F04B8, source = "Step handlers of a battle magic effect." }
+Effect_CountDownTimerCallSelector = { addr = 0x801EEF3C, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (func_800A9610 with 0x20) and advances header.mode (byte 0x01) in magic067 (Chill)." }
+Effect_StartOnZeroTick = { addr = 0x801EF284, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic067 (Chill)." }
+Effect_DriftStep = { addr = 0x801EF59C, type = "func", source = "Drifts the effect actor each frame along its phase (header.param.phase) and at effect timer (byte 0x09) value 0x30 lowers the ticker (byte 0x0B) of battler D_801EB4E0 and clears the effect in magic067 (Chill)." }
+Effect_ArmCounterNextStep = { addr = 0x801EFF8C, type = "func", source = "Clears the effect timer (byte 0x09), loads the effect counter (byte 0x0A) with 0x88 and runs the next-step routine in magic067 (Chill)." }
+Effect_CountUpAndStep = { addr = 0x801EFFCC, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic067 (Chill)." }
+Effect_CountDownAndStep = { addr = 0x801F001C, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic067 (Chill)." }
+Effect_TickOnTimerZero = { addr = 0x801F0068, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of battler D_801EB4E0 and clears the effect in magic067 (Chill)." }
+Effect_RequestQueueEntryAndArmTicker = { addr = 0x801F02E4, type = "func", source = "Writes a battle queue entry from bytes 0x04 and 0x03 (func_800AEEC8), sets the effect ticker (byte 0x0B) to 1 and advances header.step (byte 0x02) in magic067 (Chill)." }
+Effect_TickOnZeroTick = { addr = 0x801F033C, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of battler D_801EB4E0 and clears the effect in magic067 (Chill)." }
+Effect_AddActorStepOnPlaying = { addr = 0x801F043C, type = "func", source = "Adds the effect's actor and advances header.step (byte 0x02) once BATTLE_STATE_EFFECT_PLAYING is set in magic067 (Chill)." }
+g_BMagicEffectFuncs = { addr = 0x801F04B8, source = "Handlers of magic067 (Chill), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic068/03"]
-Effect_SetActorMatrix = { addr = 0x801EFBE8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its height span, times the camera." }
-g_BMagicEffectFuncs = { addr = 0x801EFCC8, source = "Step handlers of a battle magic effect." }
+Effect_SetActorMatrix = { addr = 0x801EFBE8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic068 (Foretell)." }
+g_BMagicEffectFuncs = { addr = 0x801EFCC8, source = "Handlers of magic068 (Foretell), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic069/03"]
-Effect_PlayOnZeroTick = { addr = 0x801EEE30, type = "func", source = "Plays the effect the target selector chose when the effect ticker is zero." }
-g_BMagicEffectFuncs = { addr = 0x801F04F8, source = "Step handlers of a battle magic effect." }
+Effect_PlayOnZeroTick = { addr = 0x801EEE30, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic069 (Influence)." }
+g_BMagicEffectFuncs = { addr = 0x801F04F8, source = "Handlers of magic069 (Influence), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
-Effect_TickDownAndClear = { addr = 0x801EFA50, type = "func", source = "Ends the effect by lowering the battler ticker and clearing the effect work." }
+Effect_TickDownAndClear = { addr = 0x801EFA50, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic069 (Influence)." }
 ["emi/bmagic/magic070/03"]
-Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "Replaces the palette fade of the effect." }
-Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Increments the selected palette fade RGB offsets each tick until the timer ends." }
-Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "Advances the effect step and reloads the effect timer while the effect ticker is under 5." }
-Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "Plays the effect the target selector chose when the effect ticker is zero." }
+Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic070 (Absorb, Heal)." }
+Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic070 (Absorb, Heal)." }
+Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.mode (byte 0x01) in magic070 (Absorb, Heal)." }
+Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic070 (Absorb, Heal)." }
 
 ["emi/bmagic/magic071/03"]
-Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "Replaces the palette fade of the effect." }
-Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Increments the selected palette fade RGB offsets each tick until the timer ends." }
-Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "Advances the effect step and reloads the effect timer while the effect ticker is under 5." }
-Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "Plays the effect the target selector chose when the effect ticker is zero." }
+Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic071 (Healing Herb, Rejuvenate)." }
+Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic071 (Healing Herb, Rejuvenate)." }
+Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.mode (byte 0x01) in magic071 (Healing Herb, Rejuvenate)." }
+Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic071 (Healing Herb, Rejuvenate)." }
 
 ["emi/bmagic/magic072/03"]
-Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "Replaces the palette fade of the effect." }
-Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Increments the selected palette fade RGB offsets each tick until the timer ends." }
-Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "Advances the effect step and reloads the effect timer while the effect ticker is under 5." }
-Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "Plays the effect the target selector chose when the effect ticker is zero." }
+Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic072 (Restore)." }
+Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic072 (Restore)." }
+Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.mode (byte 0x01) in magic072 (Restore)." }
+Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic072 (Restore)." }
 
 ["emi/bmagic/magic073/03"]
-Effect_NextStepUnderTickLimit = { addr = 0x801EF4E4, type = "func", source = "Reloads the effect timer and advances the effect step while the effect ticker is under 5." }
-g_BMagicEffectFuncs = { addr = 0x801F0668, source = "Step handlers of a battle magic effect." }
-D_801F21F0 = { addr = 0x801F21F0, source = "Task work pointer of the effect." }
+Effect_NextStepUnderTickLimit = { addr = 0x801EF4E4, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.step (byte 0x02) in magic073 (Vitalize)." }
+g_BMagicEffectFuncs = { addr = 0x801F0668, source = "Handlers of magic073 (Vitalize), run by header.mode (byte 0x01)." }
+D_801F21F0 = { addr = 0x801F21F0, source = "Work record of the magic073 sway effect, which its handlers advance by header.mode (byte 0x01) and clear at the end." }
 
 ["emi/bmagic/magic074/03"]
-Effect_StartOnZeroTick = { addr = 0x801EEF50, type = "func", source = "Raises the effect playing flag and runs the effect step when the effect ticker is zero." }
-Effect_NextStepUnderTickLimit = { addr = 0x801EF4D0, type = "func", source = "Reloads the effect timer and advances the effect step while the effect ticker is under 5." }
-g_BMagicEffectFuncs = { addr = 0x801F0554, source = "Step handlers of a battle magic effect." }
-D_801F20DC = { addr = 0x801F20DC, source = "Task work pointer of the effect." }
+Effect_StartOnZeroTick = { addr = 0x801EEF50, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic074 (Vigor)." }
+Effect_NextStepUnderTickLimit = { addr = 0x801EF4D0, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.step (byte 0x02) in magic074 (Vigor)." }
+g_BMagicEffectFuncs = { addr = 0x801F0554, source = "Handlers of magic074 (Vigor), run by header.mode (byte 0x01)." }
+D_801F20DC = { addr = 0x801F20DC, source = "Work record of the magic074 sway effect, which its handlers advance by header.mode (byte 0x01) and clear at the end." }
 
 ["emi/bmagic/magic075/03"]
-BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs one step of a battle magic effect." }
-g_BMagicEffectFuncs = { addr = 0x801EF7A0, source = "Step handlers of a battle magic effect." }
+BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic075 (Purify)." }
+g_BMagicEffectFuncs = { addr = 0x801EF7A0, source = "Handlers of magic075 (Purify), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic076/03"]
 Effect_BrightenPalette = { addr = 0x801EF00C, type = "func", source = "increments the selected palette fade RGB offsets each tick until the timer ends" }
