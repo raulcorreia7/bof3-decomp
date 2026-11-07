@@ -34,7 +34,7 @@ INCLUDE_ASM(func_801EECF8);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEF30(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EEF74(void) {
@@ -46,7 +46,20 @@ MATCH void func_801EEF74(void) {
 
 INCLUDE_ASM(func_801EEFE4);
 
-INCLUDE_ASM(func_801EF110);
+MATCH void func_801EF110(void) {
+    u8 timer;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        if (g_BattleEffectBattler->param.unk_0B == 1) {
+            g_Task->header.step = 3;
+        } else {
+            g_BattleEffectBattler->param.unk_0B -= 1;
+            g_Task->header.step += 1;
+        }
+    }
+}
 
 MATCH void func_801EF190(void) {
     if (g_Task->param.unk_0B == 0) {
@@ -59,7 +72,7 @@ INCLUDE_ASM(func_801EF1C8);
 #include "overlays/bmagic/Effect_FinishOnZeroTick.h"
 
 MATCH void func_801EF340(void) {
-    SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 1, 1, D_801F1054);
+    SYS_DISPATCH_TASK(g_BMagicEffectModes + 1, 1, D_801F1054);
 }
 
 MATCH void func_801EF384(void) {

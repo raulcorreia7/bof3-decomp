@@ -67,7 +67,7 @@ INCLUDE_ASM(func_801EF484);
 INCLUDE_ASM(func_801EF938);
 
 MATCH void func_801EF9F0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
 MATCH void func_801EFA34(void) {
@@ -259,7 +259,7 @@ MATCH void func_801F129C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerRaiseTicker.h"
+#include "overlays/bmagic/Effect_Wait.h"
 
 #include "overlays/bmagic/Effect_CountDownByTwoAndFinish.h"
 

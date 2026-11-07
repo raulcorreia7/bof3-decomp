@@ -2,7 +2,7 @@
 
 /*
  * per-map rectangle lists: each record is a tile rectangle (x0,y0)-(x1,y1) plus the encounter row,
- * kind, seed and picker flag the field code reads once the rectangle covers the party; g_EncounterZoneLists selects
+ * kind, seed and picker flag the field code reads once the rectangle covers the party; g_EncounterZones selects
  * the first record of each list and the scan ends at the rectangle that covers the point.
  */
 const EncounterZone g_AreaEncounterZones[MAP_ZONE_COUNT] = {

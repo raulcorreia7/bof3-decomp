@@ -2,7 +2,7 @@
  * the work battler.
  */
 /* func_801EF1F0, func_801EFFBC */
-MATCH void Effect_DispatchHandlerSlot2(void) {
+MATCH void Effect_DispatchStep(void) {
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC10;

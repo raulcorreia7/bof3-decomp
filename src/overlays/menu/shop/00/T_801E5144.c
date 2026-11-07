@@ -1,6 +1,6 @@
 #include "shop_00.h"
 
-Callback g_ShopStepFuncs[SHOP_STEP_COUNT] = {
+Callback g_ShopStates[SHOP_STEP_COUNT] = {
     func_801D0EDC, func_801D1000, func_801D10E4, func_801D39BC, func_801D1000, func_801D7344,
     func_801DE188, func_801DF978, func_801D3310, func_801E200C, func_801D6184,
 };

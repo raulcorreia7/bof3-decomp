@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEEC0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
 INCLUDE_ASM(func_801EEF04);
@@ -115,7 +115,7 @@ MATCH void func_801EFAB0(void) {
 }
 
 MATCH void func_801EFB48(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 8), 1, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 8), 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EFB8C);

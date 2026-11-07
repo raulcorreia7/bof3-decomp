@@ -132,7 +132,7 @@ MATCH void func_801D1588(void) {
     SYS_DISPATCH_TASK(D_801D280C, 1, g_Task);
 }
 
-#include "../../Scene_ClearScanBarsAndAdvance.h"
+#include "../../Scene_EndScan.h"
 
 INCLUDE_ASM(func_801D1614);
 

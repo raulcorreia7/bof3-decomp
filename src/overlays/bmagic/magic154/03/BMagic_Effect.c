@@ -22,7 +22,7 @@ MATCH void func_801EEFE0(void) {
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF0C0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
 INCLUDE_ASM(func_801EF104);
@@ -96,7 +96,7 @@ MATCH void func_801EF454(void) {
 
 INCLUDE_ASM(func_801EF4B4);
 
-#include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
+#include "overlays/bmagic/Effect_SetDuration.h"
 
 MATCH void func_801EF58C(void) {
     u8 timer;
