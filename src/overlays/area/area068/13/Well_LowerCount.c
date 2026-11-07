@@ -1,20 +1,20 @@
 #include "area068_13.h"
 
-/* func_801F3658 */
-MATCH s32 Well_WaitRaisePress(void) {
+/* func_801F2F24 */
+MATCH void Well_LowerCount(void) {
     Actor* work;
     u8     step;
 
-    if (g_InputPressed == PADRdown) {
+    if (g_InputPressed == PADRup) {
         g_WellPressCount++;
     }
     g_WellIdleFrames++;
     if (g_WellIdleFrames >= WELL_IDLE_FRAMES_MAX) {
         work = g_Task;
-        step = 0x16;
+        step = WELL_MODE_FAIL;
     } else {
         work = g_Task;
-        step = 0x12;
+        step = WELL_MODE_LOWER_REPEAT;
     }
     work->header.mode = step;
 }

@@ -11,7 +11,7 @@ MATCH void Well_ReadSwishInput(void) {
         g_InputPressed == (PADLdown | PADLleft)) {
         input              = &g_InputPressed;
         g_WellSwishButtons = *input;
-        SND_PlayCue(0x202);
+        SND_PlayCue(WELL_CUE_SWISH);
         switch (*input) {
             case 0x1000:
             case 0x3000:
@@ -46,7 +46,7 @@ MATCH void Well_ReadSwishInput(void) {
                 g_Task = work;
                 break;
         }
-        g_Task->header.mode = 0xC;
-        g_Task->timer       = 0xC;
+        g_Task->header.mode = WELL_MODE_SWISH_DELAY;
+        g_Task->timer       = WELL_SWISH_DELAY_FRAMES;
     }
 }

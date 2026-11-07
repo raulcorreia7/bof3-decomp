@@ -11,7 +11,7 @@ MATCH void Well_StepSwish(void) {
         D_80145EC8 &= 0xFFFFF000;
         D_80145EC4 &= 0xFFFFF000;
         g_Task            = work;
-        work->header.mode = 0xF;
+        work->header.mode = WELL_MODE_RAISE_BEGIN;
         g_WellPressCount  = 0;
         g_WellSwishStep   = 0;
     } else {
@@ -49,6 +49,6 @@ MATCH void Well_StepSwish(void) {
                 g_Task = work;
                 break;
         }
-        g_Task->header.mode = 0xB;
+        g_Task->header.mode = WELL_MODE_SWISH_INPUT;
     }
 }

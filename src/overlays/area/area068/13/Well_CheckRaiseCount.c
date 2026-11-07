@@ -2,20 +2,15 @@
 
 /* func_801F3764 */
 MATCH void Well_CheckRaiseCount(void) {
-    u8* p;
-    s32 value;
-    u16 a;
-    u16 b;
+    u16 lower;
+    u16 raise;
 
-    a = g_WellLowerCount;
-    b = g_WellPressCount;
-    if (b >= a - 1 && b <= a + 1) {
-        p                = TASK_BYTES;
-        g_WellIdleFrames = 0;
-        value            = 0x15;
+    lower = g_WellLowerCount;
+    raise = g_WellPressCount;
+    if (raise >= lower - 1 && raise <= lower + 1) {
+        g_WellIdleFrames    = 0;
+        g_Task->header.mode = WELL_MODE_SUCCESS;
     } else {
-        p     = TASK_BYTES;
-        value = 0x16;
+        g_Task->header.mode = WELL_MODE_FAIL;
     }
-    p[0x1] = value;
 }
