@@ -64,8 +64,7 @@
 ASSERT_OFFSET(MenuListPanel, pos, 0x04);
 ASSERT_OFFSET(MenuListPanel, unk_08, 0x08);
 ASSERT_OFFSET(MenuListPanel, flags, 0x09);
-ASSERT_OFFSET(MenuListPanel, unk_0A, 0x0A);
-ASSERT_OFFSET(MenuListPanel, unk_0B, 0x0B);
+ASSERT_OFFSET(MenuListPanel, source, 0x0A);
 ASSERT_OFFSET(MenuListPanel, unk_0C, 0x0C);
 ASSERT_OFFSET(MenuListPanel, selected, 0x0D);
 ASSERT_OFFSET(MenuListPanel, unk_10, 0x10);
