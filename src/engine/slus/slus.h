@@ -1266,7 +1266,8 @@ static inline void Slus_DrawPanelBox(void) {
     MenuPanelTask* panel;
 
     panel = g_MenuCurrentPanel;
-    func_80159B9C((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->unk_10 >> 4), (u8)(panel->unk_12 >> 4));
+    func_80159B9C((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->u.grow.width >> 4),
+                  (u8)(panel->u.grow.height >> 4));
 }
 
 void SYS_Main(void);

@@ -11,7 +11,7 @@ MATCH void func_800ADB74(void) {
         BATTLE_WORK->header.step = 0;
         return;
     }
-    if ((s16)g_MenuPanelTasks[18].unk_1E != (s16)g_MenuPanelTasks[18].unk_12) {
+    if ((s16)g_MenuPanelTasks[18].u.addr.unk_1E != (s16)g_MenuPanelTasks[18].u.battle.row_base) {
         BATTLE_WORK->header.mode = 0;
         return;
     }
@@ -19,7 +19,7 @@ MATCH void func_800ADB74(void) {
     work->unk_2E.half = g_MenuPanelTasks[18].pos.x + (work->timer * 0x16 + 0x44);
     work->unk_30.half = g_MenuPanelTasks[18].pos.y + (work->unk_09 * 0x20 + 0x22);
     rows              = g_BattleTargetRows;
-    row               = &rows[(s16)g_MenuPanelTasks[18].unk_12 + work->unk_09];
+    row               = &rows[(s16)g_MenuPanelTasks[18].u.battle.row_base + work->unk_09];
     slot              = (&row->slot_00)[work->timer];
     if (slot != GAME_NONE) {
         Actor_RequestScript(slot);

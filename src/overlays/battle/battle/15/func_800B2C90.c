@@ -27,7 +27,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
 
     UI_DrawWindow((task->pos.x.raw + 3) & HALF_MASK, (task->pos.y.raw + 3) & HALF_MASK, 153, 130, 0,
                   (s32)g_WindowStyle);
-    selection = func_801AFD10(&task->unk_10, &row_offset, &count, &task->unk_12);
+    selection = func_801AFD10(&task->u.battle.cursor, &row_offset, &count, &task->u.battle.row_base);
     selection &= BYTE_MASK;
     kinds = Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U) + selection;
     row_y = task->pos.y.raw + (s8)row_offset;
@@ -43,7 +43,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
                 ability_kind = Char_GetAbilityCost(D_80148656, *kinds, 1U);
                 ability_id   = (u8)(Char_GetAbilityElement((s32)*kinds));
                 ability_obj  = &g_Abilities[*kinds];
-                icon_x       = (s16)task->unk_10 + (index & BYTE_MASK);
+                icon_x       = (s16)task->u.battle.cursor + (index & BYTE_MASK);
                 if ((icon_x == task->flags) || (icon_x == task->unk_0C)) {
                     icon &= BYTE_MASK;
                     if (icon != 7) {
@@ -63,7 +63,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
         } while ((index & BYTE_MASK) < (count + 7));
     }
     UI_DrawWindow((task->pos.x.raw + 3) & HALF_MASK, (task->pos.y.raw + 3) & HALF_MASK, 153, 20, 0, (s32)g_WindowStyle);
-    if ((s16)task->unk_14 != 0) {
+    if ((s16)task->u.addr.unk_14 != 0) {
         text_table = (char*)&D_800B6ED4;
     } else {
         text_table = (char*)(&D_800B6EC4 + (task->unk_0B * 4));
@@ -116,11 +116,11 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
         index += 1;
         UI_DrawSprite((s16)(task->pos.x.raw + ((selection + 1) * 8)), (s16)(task->pos.y.raw + 120), 0x1A, 1);
     } while ((index & BYTE_MASK) < 0x11U);
-    if ((s16)task->unk_14 != 0) {
+    if ((s16)task->u.addr.unk_14 != 0) {
         UI_DrawSprite((s16)(task->pos.x.raw + 8), (s16)task->pos.y.raw, 0x32, 1);
         UI_DrawSprite((s16)(task->pos.x.raw + 144), (s16)task->pos.y.raw, 0x33, 1);
     }
-    func_801AFA1C(Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U), (u8)task->unk_10,
+    func_801AFA1C(Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U), (u8)task->u.battle.cursor,
                   (s16)(task->pos.x.raw + 0x90), (s16)(task->pos.y.raw + 0x18), 7, 0xA, 0x5C);
 }
 #else

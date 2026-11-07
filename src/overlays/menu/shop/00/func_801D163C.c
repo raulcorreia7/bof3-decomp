@@ -23,8 +23,8 @@ MATCH void func_801D163C(void) {
         panel->unk_0B = Item_GetKind(g_ShopItemCategory, g_ShopItemId);
         panel->unk_0C = g_ShopItemId;
     }
-    g_MenuPanelTasks[0].unk_10 = Item_GetDescription(g_ShopItemCategory, g_ShopItemId);
-    D_80148474                 = 0;
+    g_MenuPanelTasks[0].u.message.id = Item_GetDescription(g_ShopItemCategory, g_ShopItemId);
+    D_80148474                       = 0;
     if (D_80148453 == 0) {
         /* FAKE: block boundary keeps the panel-task stores base-relative off one la. */
         ORDER_FENCE();

@@ -12,14 +12,14 @@ MATCH void func_801D8188(void) {
     Menu_DrawClutStrip(D_80144953);
     /* FAKE: hides slot's constant so the bar read stays s1-relative; pure form 87.93%. */
     MATCH_FAKE_OPAQUE(slot);
-    bar                                                   = *(u16*)(slot - 0x164);
-    *slot                                                 = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0x31;
-    toggle                                                = &D_8014865B;
-    sel                                                   = 1 - *toggle;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x       = bar + (sel << 5) + 0xDE;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y       = g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y + 5;
-    key                                                   = &g_InputPressed;
+    bar                                                         = *(u16*)(slot - 0x164);
+    *slot                                                       = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x31;
+    toggle                                                      = &D_8014865B;
+    sel                                                         = 1 - *toggle;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = bar + (sel << 5) + 0xDE;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y = g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y + 5;
+    key                                             = &g_InputPressed;
     slot -= 0xB4;
     if (*key & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
