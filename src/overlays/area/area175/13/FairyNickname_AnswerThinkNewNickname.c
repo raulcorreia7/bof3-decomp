@@ -1,6 +1,7 @@
 #include "area175_13.h"
 
-MATCH void func_801F3D94(void) {
+/* func_801F3D94 */
+MATCH void FairyNickname_AnswerThinkNewNickname(void) {
     u8 selection;
 
     /* The caller stores the selected slot as an unsigned byte. */
