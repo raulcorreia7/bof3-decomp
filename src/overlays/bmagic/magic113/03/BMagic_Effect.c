@@ -174,7 +174,42 @@ INCLUDE_ASM(func_801F0764);
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
 /* blocker: self-copy semantics; first diff: coordinate loads reversed at 0x801F08C4. */
-INCLUDE_ASM(func_801F08B4);
+MATCH void func_801F08B4(void) {
+    PartyBattler* task;
+    s8            tint;
+
+    g_Task->pos.x.fixed        = g_Task->pos.x.fixed;
+    g_Task->pos.y.fixed        = g_Task->pos.y.fixed;
+    g_Task->pos.z.part.integer = (s16)g_Task->pos.z.part.integer;
+    if (g_Task->param.unk_0B == 2) {
+        g_Task->pos.z.fixed += 0x01800000;
+    }
+    if (g_Task->unk_04 != 0) {
+        g_Task->pos.z.fixed += 0x02000000;
+    }
+    g_Task->unk_25 = 0x1D;
+    g_Task->unk_26 = 0;
+    g_Task->unk_27 = 0xA0;
+    g_Task->unk_28 = 0;
+    g_Task->header.flags |= 0x20;
+    tint              = -0x40;
+    g_Task->unk_5D    = tint;
+    g_Task->unk_5E    = tint;
+    g_Task->unk_5F    = tint;
+    g_Task->unk_5C    = 1;
+    g_Task->unk_2A    = g_Task->unk_04;
+    g_Task->unk_29    = 4;
+    g_Task->unk_24    = 4;
+    task              = g_Task;
+    task->unk_2B      = 1;
+    task->unk_2C.half = 0;
+    g_Task->unk_09    = 0;
+    g_Task->header.step += 1;
+    if (g_Task->param.unk_0B == 0) {
+        SND_PlayCue(0x100);
+    }
+    Actor_SelectScript(g_Task->param.unk_0B);
+}
 
 MATCH void func_801F0A80(void) {
     u8 value;
