@@ -77,6 +77,7 @@ MATCH void func_801F04F0(void) {
 /* blocker: retail reloads g_Task after rand() for the 0x09 update; first diff: lhu v0 against lbu v0 at 0x801F05C8. */
 INCLUDE_ASM(func_801F05AC);
 
+/* blocker: retail reloads g_Task after rand() for both the 0x2E and timer updates; first diff: lui v1 against a0 at 0x801F0664. */
 INCLUDE_ASM(func_801F0638);
 
 INCLUDE_ASM(func_801F06D8);

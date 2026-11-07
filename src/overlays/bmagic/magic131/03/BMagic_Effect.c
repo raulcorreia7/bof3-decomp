@@ -8,8 +8,7 @@ INCLUDE_ASM(func_801EEC24);
 
 INCLUDE_ASM(func_801EEDEC);
 
-/* Best 1 difference: slti at 0x801EEFA0; adjust signed form comparison. */
-/* blocker: signed switch comparison; first diff: +0x3C sltiu (candidate) against slti (retail). */
+/* blocker: dragon-form switch layout; first diff: bnez v0 at 0x801EEF88 (signed compare slti in retail). */
 INCLUDE_ASM(func_801EEF64);
 
 INCLUDE_ASM(func_801EF000);
