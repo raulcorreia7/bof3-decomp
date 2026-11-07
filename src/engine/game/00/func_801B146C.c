@@ -132,7 +132,7 @@ MATCH void func_801B146C(void) {
             }
             func_801C329C();
             if (!GAME_SCRIPT_ACTIVE() && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING) &&
-                (D_8014625C & (g_InputMasks[INPUT_SLOT_ACTION] | INPUT_DIRECTIONAL))) {
+                (D_8014625C & (g_InputMasks[INPUT_SLOT_EXAMINE] | INPUT_DIRECTIONAL))) {
                 func_801B0568();
                 return;
             }

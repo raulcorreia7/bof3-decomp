@@ -142,6 +142,8 @@ extern volatile u8 g_GameRequestFlags;
 #else
 extern u8 g_GameRequestFlags;
 #endif
+/* Map kind bit of g_GameRequestFlags: the area runs the world map. */
+#define GAME_REQUEST_FLAG_WORLD_MAP 0x01
 /* Not volatile: the qualifier changes the generated order in the scena00 drawer. */
 /* D_80143C40 */
 extern u16 g_UiWindowEffectBusy;
@@ -184,8 +186,8 @@ extern u16 g_InputHeld;
 /* Pad masks of the remappable buttons, indexed by InputSlot (the defaults are
  * D_8017F56C). */
 typedef enum InputSlot {
-    INPUT_SLOT_ACTION,
-    INPUT_SLOT_INTERACT,
+    INPUT_SLOT_EXAMINE,
+    INPUT_SLOT_DASH,
     INPUT_SLOT_MENU,
     INPUT_SLOT_LOOK,
     INPUT_SLOT_SWITCH_LEADER,

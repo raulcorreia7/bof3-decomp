@@ -11,10 +11,10 @@ MATCH s32 Game_RequestCharacterFieldAction(void) {
         return 0;
     if (!(g_InputPressed & g_InputMasks[INPUT_SLOT_CHARACTER_FIELD_ACTION]))
         return 0;
-    if (g_GameRequestFlags & 1)
+    if (g_GameRequestFlags & GAME_REQUEST_FLAG_WORLD_MAP)
         return 0;
-    g_Task->header.mode = 0x0A;
+    g_Task->header.mode = FIELD_MODE_CHARACTER_FIELD_ACTION;
     ACTOR_CLEAR_STEP();
-    g_GameState->mode_12B.u8_value = 8;
+    g_GameState->mode_12B.u8_value = GAME_PANEL_MODE_CHARACTER_FIELD_ACTION;
     return 1;
 }

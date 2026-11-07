@@ -9,7 +9,7 @@ MATCH void func_8019F840(void) {
     /* FAKE: unused frame, 8 bytes. */
     STACK_PADS(u8, 8);
 
-    if (!(g_AreaWalkFlags & AREA_WALK_STEP_ACTIVE)) {
+    if (!(g_AreaWalkFlags & AREA_WALK_LEADER_SWITCH_ACTIVE)) {
         if (LOHU(g_GameAreaId) == AREA_ID_PLANT) {
             func_801F2DCC();
         } else if (LOHU(g_GameAreaId) == AREA_ID_HIDDEN_FACTORY_ENTRANCE) {

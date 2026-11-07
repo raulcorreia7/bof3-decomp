@@ -97,7 +97,7 @@ NON_MATCHING void func_80167428(void) {
             g_AreaCameraHeightStep   = 0;
             val4                     = 1;
         } else {
-            if (g_InputMasks[INPUT_SLOT_INTERACT] & D_8014625C) {
+            if (g_InputMasks[INPUT_SLOT_DASH] & D_8014625C) {
                 if ((D_80144956 ^ 1) != 0) {
                     goto block_28; /* retail branch */
                 }

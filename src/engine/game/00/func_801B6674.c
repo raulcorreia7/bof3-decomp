@@ -13,10 +13,10 @@ NON_MATCHING s32 func_801B6674(void) {
 
     temp   = Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
     status = g_GameRequestFlags;
-    if (!(status & 1)) {
+    if (!(status & GAME_REQUEST_FLAG_WORLD_MAP)) {
         return 0;
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_ACTION]) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_EXAMINE]) {
         if ((temp & BYTE_MASK) != 0xAE) {
             if ((temp & 0xF0) != 0xA0) {
                 if ((g_AreaWalkFlags & AREA_WALK_TRANSITION) == 0) {

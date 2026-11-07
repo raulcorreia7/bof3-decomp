@@ -31,8 +31,8 @@ MATCH void func_801BC000(void) {
         tmp9->param.unk_0B  = 0;
         return;
     }
-    bit = g_AreaWalkFlags & AREA_WALK_STEP_ACTIVE;
-    if (!bit && !(g_AreaWalkFlags & AREA_WALK_RUN_ACTIVE)) {
+    bit = g_AreaWalkFlags & AREA_WALK_LEADER_SWITCH_ACTIVE;
+    if (!bit && !(g_AreaWalkFlags & AREA_WALK_MENU_ACTIVE)) {
         ret = func_801C3790(1) & BYTE_MASK;
         if (ret != 0) {
             return;
