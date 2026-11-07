@@ -4,10 +4,10 @@
 MATCH s32 Game_RequestPersonalAction(void) {
     u8 kind;
 
-    kind = g_GameState->slot_index_79;
-    if (kind == 2 || kind == 4)
+    kind = g_GameState->leader_id;
+    if (kind == CHAR_ID_GARR || kind == CHAR_ID_REI)
         return 0;
-    if (kind == 9 || kind == 10)
+    if (kind == CHAR_ID_RYU_PAJAMAS || kind == CHAR_ID_WHELP)
         return 0;
     if (!(g_InputPressed & g_InputMasks[FIELD_INPUT_PERSONAL_ACTION]))
         return 0;

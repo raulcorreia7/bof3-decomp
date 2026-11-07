@@ -78,7 +78,7 @@ MATCH void func_801BC000(void) {
                     func_801C2538();
                     func_801C4C48();
                     Actor_RequestScript((g_Task->direction_08 + 8) & BYTE_MASK);
-                    if (g_GameState->slot_index_79 == 2) {
+                    if (g_GameState->leader_id == CHAR_ID_GARR) {
                         tmp10 = g_Task;
                         tmp3  = tmp10->unk_09;
                         Area_ReadHeight(tmp10->pos.x.fixed + (tmp10->vx * tmp3),
