@@ -338,9 +338,12 @@ extern Callback g_MenuCampSubFuncs[5];
 extern Callback g_MenuCampFuncs[5];
 
 /* The name entry command labels, the grid's dot string and the control window's sprite table. */
-extern u8* D_801ED1B8[];
-extern u8* D_801ED1D4;
-extern u8  D_801ED05C[];
+/* D_801ED1B8 */
+extern u8* g_NameEntryCommandLabels[];
+/* D_801ED1D4 */
+extern u8* g_NameEntryGridDot;
+/* D_801ED05C */
+extern u8  g_NameEntryControlsFrame[];
 
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
@@ -622,6 +625,7 @@ void             func_801D9664(void);
 void             func_801D96D4(void);
 void             Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
 s32              func_801DAE14(u16);
+void             Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 void             func_801DE5D4(u8, u16, u16, s32, s32, MenuPanelTask*);
 extern void      func_801E30FC(u16 row_x, u16 row_y, s32 row_flags);
 void             func_801E6D88(s32 prompt_x);
