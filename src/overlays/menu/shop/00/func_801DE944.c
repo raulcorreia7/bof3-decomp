@@ -107,7 +107,7 @@ MATCH void func_801DE944(void) {
         g_AreaScrollTargetY = D_80145EC8;
         func_80153DE8();
     }
-    UI_SetMode(3);
+    UI_SetMode(UI_MODE_FAST_FADE_IN);
     step = &D_80148652;
     (*step)++;
 }

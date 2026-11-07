@@ -9,7 +9,7 @@ MATCH void func_801DE3C8(void) {
     u8           count;
 
     if (WINDOW_EFFECT_IDLE()) {
-        UI_SetMode(3);
+        UI_SetMode(UI_MODE_FAST_FADE_IN);
         counter  = &D_80148652;
         count    = *counter;
         *counter = count + 1;

@@ -88,7 +88,7 @@ MATCH void func_801D47C4(void) {
     D_801D4DF4 = D_801D4E00;
     D_801D4DF8 = D_801D4E04;
     D_801D4DFC = D_801D4E08;
-    SND_PlayCue(262);
+    SND_PlayCue(EMI_CUE_ID(1, 6));
     D_801F294D--;
 }
 
@@ -102,7 +102,7 @@ INCLUDE_ASM(func_801D4AAC);
 MATCH void func_801D4B58(void) {
     D_801D4E10 = D_801F294D;
     D_801D4E14 = D_801D4E0C;
-    SND_PlayCue(259);
+    SND_PlayCue(EMI_CUE_ID(1, 3));
     D_801D4E0C = 61;
     D_801D4E18 = 0;
     D_801F294D = 5;

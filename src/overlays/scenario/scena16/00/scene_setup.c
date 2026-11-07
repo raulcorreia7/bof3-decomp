@@ -219,7 +219,7 @@ MATCH void func_801F7230(void) {
             u16 flags;
 
             if (WINDOW_EFFECT_IDLE()) {
-                UI_SetMode(1u);
+                UI_SetMode(UI_MODE_FADE_IN);
                 SsSetMVol(0, 0);
                 SND_PlayBGM(6u, 0x50, 8);
                 next  = &g_SceneState.step_05;
@@ -247,7 +247,7 @@ MATCH void func_801F7230(void) {
             SsSetMVol((s16)*timer, (s16)*timer);
             UI_DrawText(0x7A, 100, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
             if (*timer == 127u) {
-                UI_SetMode(0u);
+                UI_SetMode(UI_MODE_FADE_OUT);
                 *timer               = 0u;
                 g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
             }
@@ -262,7 +262,7 @@ MATCH void func_801F7230(void) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             Game_SetScriptActive();
             Party_HideBattlers();
-            UI_SetMode(1u);
+            UI_SetMode(UI_MODE_FADE_IN);
             g_ScriptVars[3]       = 1u;
             g_SceneState.timer_06 = 0u;
             g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
@@ -272,7 +272,7 @@ MATCH void func_801F7230(void) {
             u8* next;
 
             if (g_ScriptVars[3] == 0x54u) {
-                UI_SetMode(0u);
+                UI_SetMode(UI_MODE_FADE_OUT);
                 next  = &g_SceneState.step_05;
                 *next = (*next + 1u);
             }
@@ -284,7 +284,7 @@ MATCH void func_801F7230(void) {
 
             if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0u;
-                UI_SetMode(1u);
+                UI_SetMode(UI_MODE_FADE_IN);
                 next  = &g_SceneState.step_05;
                 *next = (*next + 1u);
             }
@@ -305,7 +305,7 @@ MATCH void func_801F7230(void) {
             UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
             *timer = (*timer - 1u);
             if (*timer == 0u) {
-                UI_SetMode(0u);
+                UI_SetMode(UI_MODE_FADE_OUT);
                 g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
             }
             break;
@@ -382,7 +382,7 @@ MATCH void func_801F7790(void) {
     switch (g_SceneState.step_05) {
         case 0:
             if (WINDOW_EFFECT_IDLE()) {
-                UI_SetMode(1u);
+                UI_SetMode(UI_MODE_FADE_IN);
                 state  = &g_SceneState.step_05;
                 *state = (*state + 1u);
             }
@@ -401,7 +401,7 @@ MATCH void func_801F7790(void) {
             UI_DrawText(0x50, 0x50, 0, 0xFFu, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
             timer = &g_SceneState.timer_06;
             if (--*timer == 0u) {
-                UI_SetMode(0u);
+                UI_SetMode(UI_MODE_FADE_OUT);
                 g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
             }
             break;
@@ -413,7 +413,7 @@ MATCH void func_801F7790(void) {
                 break;
             }
 
-            UI_SetMode(1u);
+            UI_SetMode(UI_MODE_FADE_IN);
             g_ScriptVars[2] = 0x30u;
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             object_index    = Actor_FindFreeSlot();
@@ -652,7 +652,7 @@ MATCH void func_801F7CC4(void) {
 
         case 8:
             if (g_ScriptVars[0] == 0x0Bu) {
-                UI_SetMode(0u);
+                UI_SetMode(UI_MODE_FADE_OUT);
                 g_SceneState.timer_06 = 0u;
                 g_SceneState.step_05  = (g_SceneState.step_05 + 1u);
             }
@@ -663,7 +663,7 @@ MATCH void func_801F7CC4(void) {
                 return;
             }
             g_AreaDrawFlags = 0u;
-            UI_SetMode(1u);
+            UI_SetMode(UI_MODE_FADE_IN);
             SND_FadeOutBGM(2u, 0x6E, 0x20);
             state  = &g_SceneState.step_05;
             *state = (*state + 1u);
@@ -686,7 +686,7 @@ MATCH void func_801F7CC4(void) {
             if (*timer != 0u) {
                 return;
             }
-            UI_SetMode(0u);
+            UI_SetMode(UI_MODE_FADE_OUT);
             g_SceneState.step_05 = (g_SceneState.step_05 + 1u);
             break;
         }

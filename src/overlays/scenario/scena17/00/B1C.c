@@ -47,7 +47,7 @@ MATCH void func_801F7924(void) {
         func_80153DE8();
         g_AreaSceneMode = 4;
         SND_RequestBGM(0x96);
-        UI_SetMode(1);
+        UI_SetMode(UI_MODE_FADE_IN);
         func_801F88CC(0, 0x80);
         step = &D_80146874;
         *step += 1;
@@ -235,7 +235,7 @@ MATCH void func_801F7F94(void) {
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
-        UI_SetMode(13);
+        UI_SetMode(UI_MODE_LONG_FADE_OUT);
         D_80146874 = D_80146874 + 1;
     }
 }
@@ -279,7 +279,7 @@ MATCH void func_801F8110(void) {
 
     ready = func_801F938C();
     if ((u8)SND_IsXAIdle() && ready) {
-        UI_SetMode(0xD);
+        UI_SetMode(UI_MODE_LONG_FADE_OUT);
         step  = &D_80146874;
         *step = *step + 1;
     }
@@ -309,7 +309,7 @@ MATCH void func_801F81F8(void) {
     g_AreaScrollTargetX = TO_COORD(37) + COORD_HALF;
     g_AreaScrollTargetY = TO_COORD(27);
     func_80153DE8();
-    UI_SetMode(1);
+    UI_SetMode(UI_MODE_FADE_IN);
     CallbackWait(1);
     g_AreaDrawFlags = 0x1F;
     SND_PlayBGM(0xA0, 0x64, 0x8);
@@ -419,7 +419,7 @@ MATCH void func_801F8664(void) {
 
     if ((g_InputPressed & PADRdown) || D_801F9DD8 != 0) {
         SND_StartDecrescendo(g_SelectionCues[g_SndBGMId * 4], D_80181EBB[g_SndBGMId * 4], 100, 16);
-        UI_SetMode(0xD);
+        UI_SetMode(UI_MODE_LONG_FADE_OUT);
         state = &D_80146874;
         (*state)++;
     }
