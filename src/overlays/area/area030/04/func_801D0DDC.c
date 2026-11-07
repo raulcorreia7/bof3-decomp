@@ -15,5 +15,5 @@ MATCH void func_801D0DDC(void) {
         work->cursor_10        = 0xAE;
         work->handler_index_01 = state + 1;
     }
-    func_801D159C(0xC, FISHING_STATE->cursor_10);
+    Fishing_DrawHud(0xC, FISHING_STATE->cursor_10);
 }

@@ -4,7 +4,7 @@
 #define FISHING_PALETTE_ROW_STRIDE 0xC
 /* A palette colour entry spans this many bytes in D_801E1F14 and D_801E1F16. */
 #define FISHING_COLOR_ENTRY_SIZE   3
-/* The queue table D_801E1F20 holds this many column slots per row. */
+/* The queue table g_FishingPromptSets holds this many column slots per row. */
 #define FISHING_QUEUE_COLUMN_COUNT 3
 /* The palette entry is drawn this many pixels wide. */
 #define FISHING_PALETTE_WIDTH      8
@@ -50,7 +50,7 @@ MATCH void func_801D3C74(void) {
             queue            = FISHING_STATE;
             queue_pos        = queue->column_4A;
             if ((queue_pos >= FISHING_QUEUE_COLUMN_COUNT) ||
-                (D_801E1F20[queue->cue_index_06][queue_pos] == GAME_NONE)) {
+                (g_FishingPromptSets[queue->cue_index_06][queue_pos] == GAME_NONE)) {
                 queue->column_4A = 0U;
             }
             if (D_80144125 != 7) {

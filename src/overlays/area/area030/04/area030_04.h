@@ -11,7 +11,7 @@
 
 #define FISHING_STATE        ((FishingState*)g_Task)
 #define FISHING_ROW          ((Actor*)g_CurrentActor)
-#define FISHING_ENTRY(index) (&((FishingSceneCue*)D_801E2AC8)[(index)])
+#define FISHING_ENTRY(index) (&((FishingSceneCue*)g_FishSpecies)[(index)])
 
 /* The main-executable text bank at 0x80010000. D_80010000[] is its u16
  * record-offset table; the panel draws pass `0x80010000 + offset` to
@@ -58,8 +58,8 @@ ASSERT_SIZE(FishingStateSlot, 4);
 
 /* The cell at 0x38 is read as a word, as a byte and, at 0x3A, as a halfword
  * of its own.  The word holds the work record's y position in 16.16 fixed
- * point: func_801DE5EC writes 0x3E0000 - facing * 0xC0000, func_801DA638
- * writes 0x410000, func_801D23F4 subtracts 0x4000 and func_801E03F8 calls
+ * point: Fishing_FishAppear writes 0x3E0000 - facing * 0xC0000, Fishing_CastInput
+ * writes 0x410000, Fishing_LureFly subtracts 0x4000 and func_801E03F8 calls
  * it pos_y while calling 0x34 pos_x.  The accessory drawer func_801D8364
  * stores the accessory slot of the selected row in the 0x3A halfword. */
 typedef union FishingStateY {
@@ -70,7 +70,7 @@ typedef union FishingStateY {
 ASSERT_SIZE(FishingStateY, 4);
 
 /* One cue row of D_801E1D58: the 16.16 fixed-point height offset and the
- * per-step delta; four rows, indexed by cue_index_06 (func_801D23F4). */
+ * per-step delta; four rows, indexed by cue_index_06 (Fishing_LureFly). */
 typedef struct FishingCueStep {
     s32 offset_00;
     s32 step_04;
@@ -78,9 +78,9 @@ typedef struct FishingCueStep {
 
 ASSERT_SIZE(FishingCueStep, 0x08);
 
-/* One 10-byte character record row inside the PanelIcon table; D_801E320C is
- * stepped to the selected row by func_801DDE2C. Bytes 0x04 through 0x07 are
- * read as signed (func_801DB140). */
+/* One 10-byte character record row inside the PanelIcon table; g_FishingRodRow is
+ * stepped to the selected row by Fishing_SelectGear. Bytes 0x04 through 0x07 are
+ * read as signed (Fishing_HookedReel). */
 typedef struct FishingCharRow {
     u8 byte_00;   /* 0x00 */
     u8 byte_01;   /* 0x01 */
@@ -177,8 +177,8 @@ typedef struct FishingState {
 ASSERT_OFFSET(FishingState, y_38, 0x38);
 STATIC_ASSERT(FishingState_slot_3A, DECOMP_OFFSETOF(FishingState, y_38.half.slot_3A) == 0x3A);
 
-/* The 0x24-byte fishing scene cue rows at D_801E2AC8, indexed by the work's
- * cue_index_06 and selected by the D_801E1F20 queue table. value_00 is the
+/* The 0x24-byte fishing scene cue rows at g_FishSpecies, indexed by the work's
+ * cue_index_06 and selected by the g_FishingPromptSets queue table. value_00 is the
  * scene id func_8014DD3C resolves; count_0A limits the spawn facing. The rest
  * is not modelled. */
 typedef struct FishingSceneCue {
@@ -193,7 +193,7 @@ ASSERT_OFFSET(FishingSceneCue, value_00, 0x00);
 ASSERT_OFFSET(FishingSceneCue, count_0A, 0x0A);
 
 /* The world panel's selection state word at the head of each 0x98-byte field
- * work row; func_801DB140 latches the pad state here and the byte at +1 is the
+ * work row; Fishing_HookedReel latches the pad state here and the byte at +1 is the
  * world mode. The rest of the row is the field work record. */
 typedef struct FishingSelectionState {
     s32 state; /* 0x00 */
@@ -218,7 +218,7 @@ ASSERT_OFFSET(PanelIcon, height, 0x0A);
 ASSERT_OFFSET(PanelIcon, u, 0x0C);
 ASSERT_OFFSET(PanelIcon, v, 0x0D);
 
-/* D_801E3210 selects a 0x14-byte row from D_801E2720. */
+/* g_FishingLureRow selects a 0x14-byte row from D_801E2720. */
 typedef struct FishingTarget {
     s32 unk_00;    /* 0x00 */
     s32 unk_04;    /* 0x04 */
@@ -336,9 +336,12 @@ extern u8                    D_8014428B;
 extern u16                   D_801442AC;
 extern u16                   D_801442BC;
 extern u16                   D_801442BE;
-extern u8                    D_80145026;
-extern u8                    D_80145027;
-extern u8                    D_80145028;
+/* D_80145026 */
+extern u8                    g_FishingLure;
+/* D_80145027 */
+extern u8                    g_FishingLureQty;
+/* D_80145028 */
+extern u8                    g_FishingRod;
 extern u8                    D_801454EC[];
 extern s32                   D_80145EC4;
 extern u8                    D_80145ED9;
@@ -360,7 +363,8 @@ extern char                  D_801D0C10[];
 extern char                  D_801D0C14[];
 extern FishingAnchors        D_801D0C30;
 extern char                  D_801D0C38[];
-extern FishingIconData       D_801D0C3C;
+/* D_801D0C3C */
+extern FishingIconData       g_FishingRankIcons;
 extern FishingThresholdData  D_801D0C70;
 extern u8                    D_801D0C8C[];
 extern Callback              D_801E1CD4[];
@@ -368,14 +372,17 @@ extern Callback              D_801E1CE8[];
 extern Callback              D_801E1CF8[];
 extern Callback              D_801E1D00[];
 extern u8                    D_801E1D0C[];
-extern Callback              D_801E1D10[];
-extern Callback              D_801E1D20[];
+/* D_801E1D10 */
+extern Callback              g_FishingCastGaugeStates[];
+/* D_801E1D20 */
+extern Callback              g_FishingLureStates[];
 extern u8                    D_801E1D38[];
 extern u8                    D_801E1D3C[];
 extern FishingCueStep        D_801E1D58[];
 extern s32                   D_801E1D5C;
 extern Callback              D_801E1D78[];
-extern Callback              D_801E1D80[];
+/* D_801E1D80 */
+extern Callback              g_FishingReelGaugeStates[];
 extern Callback              D_801E1D8C[];
 extern u16                   D_801E1DA0[];
 extern u8                    D_801E1E78[];
@@ -383,9 +390,12 @@ extern u32                   D_801E1E7C[];
 extern u8                    D_801E1E80[];
 extern u8                    D_801E1F14[];
 extern u8                    D_801E1F16[];
-extern u8                    D_801E1F20[][4];
-extern Callback              D_801E1F44[];
-extern Callback              D_801E1F78[];
+/* D_801E1F20 */
+extern u8                    g_FishingPromptSets[][4];
+/* D_801E1F44 */
+extern Callback              g_FishingPromptStates[];
+/* D_801E1F78 */
+extern Callback              g_FishingDataStates[];
 extern Callback              D_801E1FBC[];
 extern Callback              D_801E1FD4[];
 extern u8                    D_801E1FE8[];
@@ -413,12 +423,17 @@ extern u8                    D_801E21CC[];
 extern s32                   D_801E21D0;
 extern u8                    D_801E21D4[];
 extern u8                    D_801E21D9[];
-extern Callback              D_801E21E0[];
-extern Callback              D_801E2210[];
-extern Callback              D_801E221C[];
-extern Callback              D_801E2248[];
+/* D_801E21E0 */
+extern Callback              g_FishingSceneModes[];
+/* D_801E2210 */
+extern Callback              g_FishingEntryStates[];
+/* D_801E221C */
+extern Callback              g_FishingReadyStates[];
+/* D_801E2248 */
+extern Callback              g_FishingCastStates[];
 extern Callback              D_801E2258[];
-extern Callback              D_801E2268[];
+/* D_801E2268 */
+extern Callback              g_FishingHookedStates[];
 extern Callback              D_801E22A4[];
 extern Callback              D_801E22B0[];
 extern Callback              D_801E22BC[];
@@ -428,7 +443,7 @@ extern Callback              D_801E22E4[];
 extern Callback              D_801E22F0[];
 extern Callback              D_801E22FC[];
 extern Callback              D_801E2304[];
-extern void (*D_801E2314[])(void);
+extern void (*g_FishModes[])(void);
 extern u8                    D_801E2330[];
 extern u8                    D_801E2331[];
 extern Callback              D_801E2340[];
@@ -446,14 +461,16 @@ extern u8                    D_801E28D0[];
 extern u8                    D_801E28F4[];
 extern s8                    D_801E28F8[];
 extern u8                    D_801E2AB8[];
-extern u8                    D_801E2AC8[];
+/* D_801E2AC8 */
+extern u8                    g_FishSpecies[];
 extern u8                    D_801E2ACA[];
 extern u8                    D_801E2AD2[];
 extern u8                    D_801E2AD3[];
 extern u8                    D_801E2AD5[];
 extern u8                    D_801E2AD7[];
 extern u8                    D_801E2ADA[];
-extern s8                    D_801E2DF4[];
+/* D_801E2DF4 */
+extern s8                    g_FishSpawnCounts[];
 extern u8                    D_801E3044[30][8];
 extern FishingCompanionCells D_801E3134;
 extern u8                    D_801E31E0[];
@@ -465,10 +482,14 @@ extern u8                    D_801E31F8;
 extern u8                    D_801E31FC;
 extern u8                    D_801E3200;
 extern u8                    D_801E3204;
-extern u8                    D_801E3208;
-extern FishingCharRow*       D_801E320C;
-extern FishingTarget*        D_801E3210;
-extern u8                    D_801E3214;
+/* D_801E3208 */
+extern u8                    g_FishingHookedFish;
+/* D_801E320C */
+extern FishingCharRow*       g_FishingRodRow;
+/* D_801E3210 */
+extern FishingTarget*        g_FishingLureRow;
+/* D_801E3214 */
+extern u8                    g_FishingNewRecord;
 
 s32  func_800F7094(s32 arg0, s16 arg1, u8 arg2, s32 arg3, s32 arg4);
 /* func_8014D6DC */
@@ -488,38 +509,54 @@ void func_801D12C8(void);
 void func_801D130C(void);
 void func_801D1434(void);
 void func_801D1538(void);
-void func_801D159C(s16 panel_x, s16 panel_y);
+/* func_801D159C */
+void Fishing_DrawHud(s16 panel_x, s16 panel_y);
 void func_801D1744(s16 panel_x, s16 panel_y, u8 column_shade);
 void func_801D1818(s16 sprite_x, s16 sprite_y, u8 icon_index);
 void func_801D18CC(s16 sprite_x, s16 sprite_y, u8 icon_index);
-void func_801D195C(s16 panel_x, s16 panel_y);
-void func_801D1B54(void);
-void func_801D1B88(s16 quad_x, s16 quad_y, s16 quad_width, u8 corner_shade);
-void func_801D1CF0(void);
+/* func_801D195C */
+void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y);
+/* func_801D1B54 */
+void Fishing_CastGaugeInit(void);
+/* func_801D1B88 */
+void Fishing_DrawGaugeFill(s16 quad_x, s16 quad_y, s16 quad_width, u8 corner_shade);
+/* func_801D1CF0 */
+void Fishing_CastGaugeSweep(void);
 void func_801D1F38(void);
 void func_801D2034(s16 strip_x, s16 strip_y, u8 icon_mode, s32 icon_count);
-void func_801D210C(void);
-void func_801D23F4(void);
-void func_801D25F0(void);
-void func_801D2648(void);
-void func_801D28DC(void);
+/* func_801D210C */
+void Fishing_LureCast(void);
+/* func_801D23F4 */
+void Fishing_LureFly(void);
+/* func_801D25F0 */
+void Fishing_LureSettle(void);
+/* func_801D2648 */
+void Fishing_LureFloat(void);
+/* func_801D28DC */
+void Fishing_LureHooked(void);
 void func_801D29BC(void);
 void func_801D2AE0(void);
-void func_801D2C34(s16 x, s16 y, s8 flip, u8 ot_index);
-void func_801D2D74(void);
-void func_801D2DC4(void);
-void func_801D3244(s16 panel_x, s16 panel_y, u8 panel_width, s8 u_offset, u8 ot_layer, s8 is_enabled);
+/* func_801D2C34 */
+void Fishing_DrawFishArrow(s16 x, s16 y, s8 flip, u8 ot_index);
+/* func_801D2D74 */
+void Fishing_ReelGaugeInit(void);
+/* func_801D2DC4 */
+void Fishing_ReelGaugeUpdate(void);
+/* func_801D3244 */
+void Fishing_DrawReelCursor(s16 panel_x, s16 panel_y, u8 panel_width, s8 u_offset, u8 ot_layer, s8 is_enabled);
 void func_801D339C(void);
 void func_801D34A0(void);
 void func_801D3510(void);
 void func_801D3574(void);
 void func_801D3650(void);
-void func_801D3684(void);
+/* func_801D3684 */
+void Fishing_PromptSlideIn(void);
 void func_801D36F8(void);
 void func_801D3824(void);
 void func_801D3898(void);
 void func_801D3908(void);
-void func_801D3938(void);
+/* func_801D3938 */
+void Fishing_PromptSlideOut(void);
 void func_801D39B8(void);
 void func_801D3A54(void);
 void func_801D3C74(void);
@@ -530,7 +567,8 @@ void func_801D4378(void);
 void func_801D4570(void);
 void func_801D45F8(void);
 void func_801D4680(void);
-void func_801D4884(void);
+/* func_801D4884 */
+void Fishing_DataNextFish(void);
 void func_801D4984(void);
 void func_801D4B60(void);
 void func_801D4C84(void);
@@ -581,14 +619,17 @@ void func_801D934C(s32 x, s32 y, s32 width, s32 height);
 s32  func_801D9534(s16 frame_x, u16 frame_y, s16 frame_width, s16 frame_height, u8 frame_mode);
 void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade);
 void func_801D9740(s32 arg0, u8* arg1, s32 arg2, s32 arg3);
-void func_801D9B58(void);
+/* func_801D9B58 */
+void Fishing_EntryRun(void);
 void func_801D9B9C(void);
 void func_801D9C4C(void);
 void func_801D9C9C(void);
-void func_801D9CF4(void);
+/* func_801D9CF4 */
+void Fishing_ReadyRun(void);
 void func_801D9D38(void);
 void func_801D9E08(void);
-void func_801D9E40(void);
+/* func_801D9E40 */
+void Fishing_ChooseAction(void);
 void func_801D9FE8(void);
 void func_801DA058(void);
 void func_801DA168(void);
@@ -596,9 +637,11 @@ void func_801DA2A0(void);
 void func_801DA3F4(void);
 void func_801DA498(void);
 void func_801DA508(void);
-void func_801DA5B4(void);
+/* func_801DA5B4 */
+void Fishing_CastRun(void);
 void func_801DA5F8(void);
-void func_801DA638(void);
+/* func_801DA638 */
+void Fishing_CastInput(void);
 void func_801DA714(void);
 void func_801DA78C(void);
 void func_801DA8E8(void);
@@ -606,19 +649,23 @@ void func_801DA92C(void);
 void func_801DA9DC(void);
 void func_801DAE3C(void);
 void func_801DAE84(void);
-void func_801DAED4(void);
+/* func_801DAED4 */
+void Fishing_HookedRun(void);
 void func_801DAF18(void);
 void func_801DAFBC(void);
 void func_801DB04C(void);
 void func_801DB0AC(void);
-void func_801DB140(void);
-void func_801DB554(void);
+/* func_801DB140 */
+void Fishing_HookedReel(void);
+/* func_801DB554 */
+void Fishing_CatchRecord(void);
 void func_801DB620(void);
 void func_801DB738(void);
 void func_801DB808(void);
 void func_801DB8F0(void);
 void func_801DBA94(void);
-void func_801DBBAC(void);
+/* func_801DBBAC */
+void Fishing_CatchPage(void);
 void func_801DBD6C(void);
 void func_801DBEDC(void);
 void func_801DBFC8(void);
@@ -657,15 +704,19 @@ void func_801DDCB8(void);
 void func_801DDCF8(void);
 void func_801DDD4C(void);
 void func_801DDDBC(void);
-void func_801DDE2C(void);
+/* func_801DDE2C */
+void Fishing_SelectGear(void);
 void func_801DDE94(s8 request);
 void func_801DDEEC(void);
 s32  func_801DDF7C(u16 request);
 void func_801DDFD4(void);
 void func_801DE018(void);
-void func_801DE4AC(void);
-void func_801DE5EC(void);
-void func_801DE82C(void);
+/* func_801DE4AC */
+void Fishing_UpdateFish(void);
+/* func_801DE5EC */
+void Fishing_FishAppear(void);
+/* func_801DE82C */
+void Fishing_FishSwim(void);
 void func_801DEBC4(void);
 void func_801DECDC(void);
 void func_801DF334(void);
@@ -676,20 +727,25 @@ void func_801E00E0(void);
 void func_801E0124(void);
 void func_801E01DC(void);
 void func_801E023C(void);
-void func_801E026C(s8 delta);
+/* func_801E026C */
+void Fishing_FishStaminaAdd(s8 delta);
 s32  func_801E02D4(u8 current_byte, u8 target_byte);
 void func_801E0394(void);
 void func_801E03F8(void);
-bool func_801E0680(void);
+/* func_801E0680 */
+bool Fishing_LureInRange(void);
 void func_801E084C(void);
 void func_801E09B4(void);
 void func_801E0A30(void);
-s32  func_801E0ABC(u8 row_index, u16 value);
-s32  func_801E0B6C(void);
+/* func_801E0ABC */
+s32  Fishing_CatchScore(u8 row_index, u16 value);
+/* func_801E0B6C */
+s32  Fishing_TotalScore(void);
 void func_801E0ED0(s16 panel_x, s16 panel_y);
 void func_801E0F4C(s16 sprite_x, s16 sprite_y, u8 icon_index);
 void func_801E1004(s32 item, s32 count, s32 column);
-void func_801E1320(s16 x, s16 y);
+/* func_801E1320 */
+void Fishing_DrawRank(s16 x, s16 y);
 void func_801E162C(s16 cell_x, s16 cell_y, u16 icon_index);
 void func_801E16DC(void);
 void func_801E1758(s32 x, s32 y);

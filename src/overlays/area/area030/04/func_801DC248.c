@@ -17,11 +17,11 @@ MATCH void func_801DC248(void) {
 
     FISHING_PAGE_STEP += 1;
     func_801E0ED0((-(FISHING_PAGE_STEP * 0x500000) >> 16), 0x4E);
-    func_801E0F4C((FISHING_PAGE_STEP * 0x30) + 0x80, 0x5B, D_8014688E[D_801E3208 * 0x98]);
+    func_801E0F4C((FISHING_PAGE_STEP * 0x30) + 0x80, 0x5B, D_8014688E[g_FishingHookedFish * 0x98]);
 
-    offset = D_801E3208 * 0x98;
+    offset = g_FishingHookedFish * 0x98;
     func_801E1004(D_8014688E[offset], D_80146918[offset], FISHING_PAGE_STEP);
-    func_801E1320(0xB0, (FISHING_PAGE_STEP * 0x1E) + 0x9C);
+    Fishing_DrawRank(0xB0, (FISHING_PAGE_STEP * 0x1E) + 0x9C);
 
     if (FISHING_PAGE_CATEGORY == 1) {
         func_801E162C(8, (FISHING_PAGE_STEP * 0x1E) + 0x94, 0x44);

@@ -13,7 +13,7 @@ MATCH void func_801DB620(void) {
     record->step_timer_09 = (record->step_timer_09 - 1);
     func_801E0ED0((-(FISHING_STATE->step_timer_09 * 0x280000) >> 16), 0x4E);
     if (FISHING_STATE->step_timer_09 == 0) {
-        slot = D_8014688E[D_801E3208 * 0x98];
+        slot = D_8014688E[g_FishingHookedFish * 0x98];
         cue  = 0x20B;
         if (D_801E2AD5[slot * 0x24] >= 2) {
             cue = 0x20C;
