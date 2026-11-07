@@ -401,9 +401,9 @@ typedef struct {
 
 ASSERT_SIZE(EncounterZone, MAP_ZONE_SIZE);
 
-/* The bank record table at D_8014677C seen from its second symbol, 0x80146780 (EmiBank + 4):
+/* The bank record table at D_8014677C seen from its second symbol, 0x80146780 (EMIBank + 4):
  * EMI_LoaderLoadVabHeader and SND_SetBankLayout reach it through this symbol and a typed
- * EmiBank access moves their register allocation. */
+ * EMIBank access moves their register allocation. */
 typedef struct EmiAudioLink {
     u32 word;
     u8  unk_04[8];
@@ -563,7 +563,7 @@ extern u8                          D_80146498[];
 extern volatile u8                 g_EmiRingStates[];
 extern s32                         D_80146518[];
 extern u32                         g_EmiSlotSectors[];
-extern EmiBank                     D_8014677C[];
+extern EMIBank                     D_8014677C[];
 extern volatile EmiAudioLink       D_80146780[];
 extern s32                         D_80146784;
 extern u32                         D_80146788[];

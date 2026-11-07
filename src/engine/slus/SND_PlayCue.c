@@ -7,9 +7,9 @@ MATCH void SND_PlayCue(u16 cue_id) {
     s32 scaled;
     s32 next;
 
-    D_8018B408 = (cue_id & EMI_CUE_ID_BANK_MASK) >> 8;
+    D_8018B408 = (cue_id & EMI_CUE_ID_BANK_MASK) >> EMI_CUE_ID_BANK_SHIFT;
     D_8018B404 = cue_id & EMI_CUE_ID_INDEX_MASK;
-    ((void (*)(void))g_SndCueReaders[(cue_id & EMI_CUE_ID_BANK_MASK) >> 8])();
+    ((void (*)(void))g_SndCueReaders[(cue_id & EMI_CUE_ID_BANK_MASK) >> EMI_CUE_ID_BANK_SHIFT])();
 
     if (D_8018B3F4 == 0x80) {
         switch (D_8018B3E4) {
