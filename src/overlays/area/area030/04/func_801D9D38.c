@@ -6,9 +6,9 @@ MATCH void func_801D9D38(void) {
     u8* record;
     s32 mode;
 
-    func_801DDE2C();
+    Fishing_SelectGear();
 
-    D_801E3208                  = 0xFF;
+    g_FishingHookedFish         = 0xFF;
     /* FAKE: typed word stores let the scheduler hoist the later byte store; retail keeps them in order. */
     *(u32*)((u8*)g_Task + 0x0C) = 0;
     *(u32*)((u8*)g_Task + 0x10) = 0;
@@ -18,7 +18,7 @@ MATCH void func_801D9D38(void) {
     *(u32*)((u8*)g_Task + 0x20) = 0;
     g_Task->timer               = 0;
 
-    mode = (D_80145026 && D_80145028) ? 0 : 6;
+    mode = (g_FishingLure && g_FishingRod) ? 0 : 6;
     func_801DDE94(mode);
 
     if (g_GameState->leader_id == CHAR_ID_RYU_YOUNG) {

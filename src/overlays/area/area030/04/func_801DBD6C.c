@@ -14,11 +14,11 @@ MATCH void func_801DBD6C(void) {
     work->step_timer_09 = (work->step_timer_09 - 1);
 
     func_801E0ED0(0, 0x4E);
-    func_801E0F4C(0x80, 0x5B, D_8014688E[D_801E3208 * 0x98]);
+    func_801E0F4C(0x80, 0x5B, D_8014688E[g_FishingHookedFish * 0x98]);
 
-    offset = D_801E3208 * 0x98;
+    offset = g_FishingHookedFish * 0x98;
     func_801E1004(D_8014688E[offset], D_80146918[offset], 0);
-    func_801E1320(0xB0, 0x9C);
+    Fishing_DrawRank(0xB0, 0x9C);
 
     work  = FISHING_STATE;
     state = work->saved_index_0B;
