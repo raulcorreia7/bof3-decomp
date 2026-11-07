@@ -94,7 +94,14 @@ MATCH void func_801EF454(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4B4);
+MATCH void func_801EF4B4(void) {
+    BattleHandlerTable4 handlers = D_801EEC14;
+
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetDuration.h"
 

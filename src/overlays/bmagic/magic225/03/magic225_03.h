@@ -5,6 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern Callback     D_801F0398[];
 extern Callback     D_801F03AC[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect D_801F03BC[];
