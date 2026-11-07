@@ -1,5 +1,5 @@
 /* Chooses a direction and requests its script. Check every including image after changes. */
-MATCH void Char_TurnAndRequestScript(void) {
+MATCH void Char_FaceFreeDirection(void) {
     u8 direction;
 
     direction = g_Task->direction_08;

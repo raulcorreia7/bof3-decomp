@@ -2,7 +2,7 @@
  * with 5, clears the tint bytes and moves the handler to state 1.
  */
 /* func_801F3124 (area104), func_801F3078 (area121) */
-MATCH void Area_FindSceneRecordAndClearTint(void) {
+MATCH void Area_InitSceneActor(void) {
     g_Task->active_flags = 0x80;
     Area_FindSceneRecord(0x158);
     g_Task->unk_29 = 5;

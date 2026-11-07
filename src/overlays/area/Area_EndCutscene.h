@@ -3,7 +3,7 @@
  * member.
  */
 /* func_801F39A4 (area148), func_801F3F28 (area167) */
-MATCH void Area_ClearSceneFlag46AndResetMode(void) {
+MATCH void Area_EndCutscene(void) {
     SYS_ClearFlag(g_SceneEventFlags, 0x46);
     g_AreaSceneMode = 0;
 }
