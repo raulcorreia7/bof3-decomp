@@ -4,7 +4,7 @@
 MATCH void FairyMusician_AnswerPlaySongs(void) {
     if (g_MessageChoice == 1) {
         g_MessageRequest                   = FAIRY_MESSAGE_MUSICIAN_THANKS;
-        g_ScriptWorkRecord->callback_index = 0xFF;
+        g_ScriptWorkRecord->callback_index = GAME_NONE;
     } else {
         MESSAGE_REQUEST_CLEAR();
     }
