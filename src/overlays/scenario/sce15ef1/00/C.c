@@ -43,7 +43,16 @@ INCLUDE_ASM(func_801D0DD8);
 
 INCLUDE_ASM(func_801D0F10);
 
-INCLUDE_ASM(func_801D0FEC);
+MATCH void func_801D0FEC(void) {
+    if ((g_Task->unk_06++ & 3) == 0) {
+        func_801D19C8();
+    }
+    func_801D2088();
+    func_801D1A60();
+    g_Task->timer = 0x20;
+    g_Task->header.mode += 1;
+    SND_PlayCue(0x209);
+}
 
 INCLUDE_ASM(func_801D106C);
 

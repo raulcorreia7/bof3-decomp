@@ -210,7 +210,25 @@ MATCH s32 func_801FD278(void) {
 INCLUDE_ASM(func_801FD280);
 
 /* blocker: li v1,6 repeated in each branch delay slot; first diff: +0x10 bne targets +0x70 against +0x68. */
-INCLUDE_ASM(func_801FD2E8);
+MATCH s32 func_801FD2E8(void) {
+    if (D_80145F09 == 5) {
+        if (SYS_TestFlag(g_SceneFlags, 0xC) == 0) {
+            Game_SetScriptActive();
+            g_SceneState.step_05  = 0x14;
+            g_SceneState.state_04 = 6;
+            return 1;
+        } else {
+            Game_SetScriptActive();
+            g_SceneState.step_05  = 5;
+            g_SceneState.state_04 = 6;
+            return 1;
+        }
+    }
+    Game_SetScriptActive();
+    g_SceneState.step_05  = 0;
+    g_SceneState.state_04 = 6;
+    return 1;
+}
 
 INCLUDE_ASM(func_801FD388);
 
@@ -255,7 +273,7 @@ MATCH s32 func_801FDC1C(void) {
     return -1;
 }
 
-/* blocker: li v0,1 in each Game_SetScriptActive delay slot; first diff: +0x18 bnez targets +0x74 against +0x70. */
+/* Hint: retail loads li v0,-1 in the flag test branch delay slot before the test; both the == 0 form and the early return put it after. */
 INCLUDE_ASM(func_801FDC70);
 
 MATCH void func_801FDCF4(void) {
