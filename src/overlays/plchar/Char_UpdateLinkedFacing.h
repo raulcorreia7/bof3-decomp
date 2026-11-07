@@ -2,7 +2,7 @@
 MATCH void Char_UpdateLinkedFacing(void) {
     u8 timer;
 
-    if (func_8014DAEC() & 0xFF) {
+    if (func_8014DAEC() & BYTE_MASK) {
         Actor_RequestScript(g_Task->direction_08);
         g_Task->unk_03 = 2;
         return;

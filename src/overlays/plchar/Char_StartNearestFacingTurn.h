@@ -14,16 +14,16 @@ MATCH void Char_StartNearestFacingTurn(void) {
     if (g_SceneState.scenario_id == 15) {
         g_GameState->mode_12B.s8_value = 0;
     } else {
-        to_back = g_Task->direction_08 - 3;
+        to_back = g_Task->direction_08 - FACING_RIGHT;
         to_back = ABS(to_back);
-        to_away = g_Task->direction_08 - 5;
+        to_away = g_Task->direction_08 - FACING_DOWN;
         to_away = ABS(to_away);
         if (to_away < to_back) {
-            g_Task->param.turn_step = func_801B2D00(5);
-            g_Task->unk_03          = 5;
+            g_Task->param.turn_step = func_801B2D00(FACING_DOWN);
+            g_Task->unk_03          = FACING_DOWN;
         } else {
-            g_Task->param.turn_step = func_801B2D00(3);
-            g_Task->unk_03          = 3;
+            g_Task->param.turn_step = func_801B2D00(FACING_RIGHT);
+            g_Task->unk_03          = FACING_RIGHT;
         }
         g_Task->unk_09 = 2;
         g_Task->header.step++;
