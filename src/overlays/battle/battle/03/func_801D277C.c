@@ -7,7 +7,7 @@ MATCH void func_801D277C(void) {
     u32  flags;
     u16* half_flags;
 
-    func_801DAAE4();
+    Battle_BuildTurnOrder();
     index = 0;
     if ((g_BattleState & BATTLE_STATE_COMMAND_ARMED) == 0) {
         g_BattleMessageState = 2;

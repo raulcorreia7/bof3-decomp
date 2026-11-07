@@ -8,7 +8,7 @@ MATCH void func_801E51DC(void) {
     volatile u8* timer;
     u8           count;
 
-    func_801DD14C(g_Task->slot);
+    Battle_CancelTurn(g_Task->slot);
     timer  = &g_BattleLivingEnemyCount;
     count  = *timer - 1;
     *timer = count;
