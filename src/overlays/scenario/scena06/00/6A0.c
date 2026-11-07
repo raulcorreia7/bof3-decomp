@@ -250,8 +250,19 @@ INCLUDE_ASM(func_801FDD7C);
 MATCH void func_801FDE2C(void) {
 }
 
-/* blocker: scheduled load; first diff: 801FDE4C. */
-INCLUDE_ASM(func_801FDE34);
+MATCH s32 func_801FDE34(void) {
+    if (!SYS_TestFlag(g_SceneFlags, 0x27)) {
+        Game_SetScriptActive();
+        g_ScriptVars[0]       = 0;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[2]       = 0;
+        g_ScriptVars[3]       = 0;
+        g_SceneState.step_05  = 0;
+        g_SceneState.state_04 = 0xD;
+        return 1;
+    }
+    return 1;
+}
 
 INCLUDE_ASM(func_801FDEA4);
 
