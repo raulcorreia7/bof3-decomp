@@ -88,9 +88,10 @@ extern u8       g_MenuListTab2OnSprites[];
 extern u8*      D_801C893C[];
 extern u8*      D_801C8950[];
 extern u8*      g_MenuInventoryTitles[5];
-extern char     g_MenuInventoryCountFormat[];
 extern u8       g_MenuInventoryTab1OffSprites[];
 extern u8*      g_MenuEquipTitles[5];
+extern u8       g_MenuEquipStatLabels[];
+extern u8       g_MenuEquipStatSprites[];
 extern u8       g_MenuEquipChoiceIds[];
 extern u8       g_MenuEquipChoiceCounts[];
 extern u8       g_MenuInventoryTab1OnSprites[];
@@ -103,6 +104,8 @@ extern u8       D_801D8B84[];
 /* D_801D8E80 */
 extern u8*      g_MenuAbilityListNames[];
 extern u8       D_801D8EE0[5];
+
+extern const char g_MenuInventoryCountFormat[];
 
 typedef struct BateState {
     u8 unk_00;

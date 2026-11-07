@@ -1613,6 +1613,7 @@ g_MenuListTab2OnSprites = { addr = 0x801D8954, source = "the sprite run of the l
 g_MenuInventoryTab1OnSprites = { addr = 0x801D8960, source = "the sprite run of the inventory panel's first tab while its flag is set" }
 g_MenuListTab1OffSprites = { addr = 0x801D896C, source = "the sprite run of the list panel's first tab while its flag is clear" }
 g_MenuListTab1OnSprites = { addr = 0x801D8978, source = "the sprite run of the list panel's first tab while its flag is set" }
+g_MenuEquipStatSprites = { addr = 0x801D89E0, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
 g_MenuLabelPower = { addr = 0x801D8B28, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D8B2C, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntellect = { addr = 0x801D8B30, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
@@ -1625,6 +1626,7 @@ MENU_CAPTION_ICON = { addr = 0x801D8BB4, source = "Icon and label record drawn a
 MENU_CLOCK_COLON = { addr = 0x801D8BB8, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801D8C68, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
 g_MenuCommandRows = { addr = 0x801D8CC4, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuEquipStatLabels = { addr = 0x801D8D14, source = "Labels of the equip stat window rows (Pwr, Def, Agl), six bytes each; Menu_DrawEquipStatWindow draws them shaded when the party member cannot equip the item." }
 MENU_CLUT_STRIP_CELLS = { addr = 0x801D8D28, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D8DD4, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D8E20, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
@@ -2062,6 +2064,7 @@ g_MenuListTab2OffSprites = { addr = 0x801D9960, source = "the sprite run of the 
 g_MenuInventoryTab1OffSprites = { addr = 0x801D996C, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
 g_MenuListTab2OnSprites = { addr = 0x801D9978, source = "the sprite run of the list panel's second tab while its flag is set" }
 g_MenuInventoryTab1OnSprites = { addr = 0x801D9984, source = "the sprite run of the inventory panel's first tab while its flag is set" }
+g_MenuEquipStatSprites = { addr = 0x801D9A04, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
 g_MenuLabelPower = { addr = 0x801D9B4C, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D9B50, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntellect = { addr = 0x801D9B54, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
@@ -2074,6 +2077,7 @@ MENU_CAPTION_ICON = { addr = 0x801D9BD8, source = "Icon and label record drawn a
 MENU_CLOCK_COLON = { addr = 0x801D9BDC, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801D9C8C, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
 g_MenuCommandRows = { addr = 0x801D9CE8, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuEquipStatLabels = { addr = 0x801D9D38, source = "Labels of the equip stat window rows (Pwr, Def, Agl), six bytes each; Menu_DrawEquipStatWindow draws them shaded when the party member cannot equip the item." }
 MENU_CLUT_STRIP_CELLS = { addr = 0x801D9D4C, source = "Cell rectangles that Menu_DrawClutStrip draws, indexed by the strip entry." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D9DF8, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D9E44, source = "Entry offset of each clut strip palette, indexed by the clut index." }
@@ -2189,6 +2193,7 @@ g_MenuListTab2OnSprites = { addr = 0x801E5650, source = "the sprite run of the l
 g_MenuInventoryTab1OnSprites = { addr = 0x801E565C, source = "the sprite run of the inventory panel's first tab while its flag is set" }
 g_MenuListTab1OffSprites = { addr = 0x801E5668, source = "the sprite run of the list panel's first tab while its flag is clear" }
 g_MenuListTab1OnSprites = { addr = 0x801E5674, source = "the sprite run of the list panel's first tab while its flag is set" }
+g_MenuEquipStatSprites = { addr = 0x801E56DC, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
 g_MenuLabelPower = { addr = 0x801E5824, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801E5828, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntellect = { addr = 0x801E582C, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
@@ -2201,6 +2206,7 @@ MENU_CAPTION_ICON = { addr = 0x801E58B0, source = "Icon and label record drawn a
 MENU_CLOCK_COLON = { addr = 0x801E58B4, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801E5964, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
 g_MenuCommandRows = { addr = 0x801E59C0, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuEquipStatLabels = { addr = 0x801E5A10, source = "Labels of the equip stat window rows (Pwr, Def, Agl), six bytes each; Menu_DrawEquipStatWindow draws them shaded when the party member cannot equip the item." }
 MENU_CLUT_STRIP_CELLS = { addr = 0x801E5A24, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801E5AD0, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801E5B1C, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
@@ -2392,6 +2398,7 @@ g_MenuListTab2OnSprites = { addr = 0x801EC76C, source = "the sprite run of the l
 g_MenuInventoryTab1OnSprites = { addr = 0x801EC778, source = "the sprite run of the inventory panel's first tab while its flag is set" }
 g_MenuListTab1OffSprites = { addr = 0x801EC784, source = "the sprite run of the list panel's first tab while its flag is clear" }
 g_MenuListTab1OnSprites = { addr = 0x801EC790, source = "the sprite run of the list panel's first tab while its flag is set" }
+g_MenuEquipStatSprites = { addr = 0x801EC7F8, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
 g_MenuLabelPower = { addr = 0x801EC940, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801EC944, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntellect = { addr = 0x801EC948, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
@@ -2404,6 +2411,7 @@ MENU_CAPTION_ICON = { addr = 0x801EC9CC, source = "Icon and label record drawn a
 MENU_CLOCK_COLON = { addr = 0x801EC9D0, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801ECA80, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
 g_MenuCommandRows = { addr = 0x801ECADC, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuEquipStatLabels = { addr = 0x801ECB2C, source = "Labels of the equip stat window rows (Pwr, Def, Agl), six bytes each; Menu_DrawEquipStatWindow draws them shaded when the party member cannot equip the item." }
 MENU_CLUT_STRIP_CELLS = { addr = 0x801ECB40, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801ECBEC, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801ECC38, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }

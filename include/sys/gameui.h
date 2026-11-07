@@ -52,6 +52,8 @@ extern AreaDrawState g_AreaDrawState;
 #define MENU_CHARACTER_WINDOW_HEIGHT  48
 #define MENU_EQUIP_STAT_WINDOW_WIDTH  108
 #define MENU_EQUIP_STAT_WINDOW_HEIGHT 48
+#define MENU_EQUIP_STAT_ROWS          3 /* power, defense and agility */
+#define MENU_EQUIP_STAT_LABEL_SIZE    6 /* bytes per label of g_MenuEquipStatLabels */
 #define MENU_ZENNY_WINDOW_WIDTH       101
 #define MENU_ZENNY_WINDOW_HEIGHT      16
 #define MENU_PLAY_TIME_WINDOW_WIDTH   85

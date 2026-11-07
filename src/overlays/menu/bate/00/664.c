@@ -161,8 +161,10 @@ INCLUDE_ASM(func_801D5634);
 
 #include "overlays/menu/Menu_DrawRowIcons.h"
 
-/* blocker: frame 0x58 against 0x50 and save order. */
-INCLUDE_ASM(Menu_DrawEquipStatWindow);
+#include "overlays/menu/Menu_DrawEquipStatWindow.h"
+
+const char g_MenuInventoryCountFormat[8] = "%3d/%3d";
+const u8   D_801D0D64[4]                 = {0, 0, 0, 0};
 
 #include "overlays/menu/Menu_DrawClutStrip.h"
 
