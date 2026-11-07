@@ -1649,6 +1649,9 @@ Area_SetCameraMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GT
 Area_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
 Matrix_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }
 Actor_GetTurnStep = { addr = 0x801B2D00, type = "func", source = "Returns -1 when the target facing lies 1 to 4 steps past the current selector, else 1; the caller adds it to direction_08 each step." }
+Field_Climb = { addr = 0x801B3260, type = "func", source = "runs g_FieldClimbSteps[header.step] in field task mode 8 (FIELD_TASK_MODE_CLIMB, entered from cell code 6 by func_801B0568 and func_801BC000); in that mode the up and down pad move the actor 16 units and Interact turns it round and drops it to mode 2, the field ladder" }
+Field_ClimbMount = { addr = 0x801B32D0, type = "func", source = "runs g_FieldClimbMountSteps[unk_03], the approach to the ladder; its last step hands over to step 2 of g_FieldClimbSteps" }
+Field_ClimbDismount = { addr = 0x801B3540, type = "func", source = "runs g_FieldClimbDismountSteps[unk_03], the walk off the ladder; step 3 of g_FieldClimbSteps calls it" }
 Area_RollEncounterThreshold = { addr = 0x801B3CCC, type = "func", source = "Rolls the steps until the next encounter: s_EncounterStepThresholds[entry[4] * 2] plus a random roll capped at D_801CD1B9, stored in D_80145FB8." }
 Area_CanStartEncounter = { addr = 0x801B3EB0, type = "func", source = "Returns 0 when D_80145FB8 is 0 or above the limit; otherwise starts an encounter with Area_BuildEncounter(4, 0)." }
 Party_CanSwitchLeader = { addr = 0x801B55C0, type = "func", source = "Reports whether the leader may be switched: false while a walk-busy flag is set or a party row of kind 2 holds none of s_MenuBattlerKinds" }
@@ -1774,9 +1777,9 @@ D_801CD0FC = { addr = 0x801CD0FC, size = 0x14 }
 D_801CD110 = { addr = 0x801CD110, size = 0x8 }
 D_801CD118 = { addr = 0x801CD118, size = 0x8 }
 D_801CD120 = { addr = 0x801CD120, size = 0x10 }
-D_801CD130 = { addr = 0x801CD130, size = 0x10 }
-D_801CD140 = { addr = 0x801CD140, size = 0x14 }
-D_801CD154 = { addr = 0x801CD154, size = 0x10 }
+g_FieldClimbSteps = { addr = 0x801CD130, size = 0x10, source = "the four step handlers of field task mode 8 (Field_Climb) indexed by header.step: grab, mount (Field_ClimbMount), climb with up, down and Interact, dismount (Field_ClimbDismount)" }
+g_FieldClimbMountSteps = { addr = 0x801CD140, size = 0x14, source = "the five unk_03 steps of Field_ClimbMount, walking the actor onto the ladder before step 2 of g_FieldClimbSteps" }
+g_FieldClimbDismountSteps = { addr = 0x801CD154, size = 0x10, source = "the four unk_03 steps of Field_ClimbDismount, walking the actor off the ladder" }
 g_PersonalActions = { addr = 0x801CD164, size = 0x4C, source = "The personal action dispatcher of each party combination module (plchar/plp*), indexed by the loaded party row &0x7F; it picks the leader's member position in the row (work byte unk_2C). FIELD_TASK_MODE_PERSONAL_ACTION calls it; started by Game_RequestPersonalAction, Game_RequestGarrPush and Game_RequestRockKick" }
 D_801CD1B0 = { addr = 0x801CD1B0, size = 0x8 }
 s_EncounterStepThresholds = { addr = 0x801CD1B8, size = 0x10, source = "Pairs of total steps and random cap per menu entry, read by Area_RollEncounterThreshold." }
