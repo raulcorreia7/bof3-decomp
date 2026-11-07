@@ -8,7 +8,7 @@ segments:
     vram: 0x801F2C00
     align: 4
     subsegments:
-      - [0x0, .data, D_801F2C00]
+      - [0x0, .data, g_AreaModuleId]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: main
     type: code
