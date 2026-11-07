@@ -7,6 +7,5 @@
  * because the scene-matrix unit cannot include the full image header:
  * slus/functions.h declares its own Area_SetCameraMatrix with a caller-only
  * void return. */
-extern u8 D_80145FCC[];
 
 #endif

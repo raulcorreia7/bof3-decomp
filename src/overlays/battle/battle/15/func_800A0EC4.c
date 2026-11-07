@@ -25,19 +25,21 @@ NON_MATCHING void func_800A0EC4(void) {
 
     state = &g_BattleActiveBattler;
     if (*state < 3U) {
-        record_index = *(D_80145FCC + (*state * BATTLE_PARTY_STRIDE));
+        record_index = (&g_BattlePartyBattlers[0].character_index)[(*state * BATTLE_PARTY_STRIDE)];
         timer        = g_Characters[record_index].fatigue;
         if (timer < 5U) {
             g_Characters[record_index].fatigue = timer + 1;
             row_offset                         = *state * BATTLE_PARTY_STRIDE;
             D_80145F1E[row_offset]             = D_80145F1E[row_offset] + 1;
         }
-        Char_RebuildStats((*(D_80145FCC + (*state * BATTLE_PARTY_STRIDE)) * 0xA4) + (u8*)&g_Characters);
+        Char_RebuildStats(((&g_BattlePartyBattlers[0].character_index)[(*state * BATTLE_PARTY_STRIDE)] * 0xA4) +
+                          (u8*)&g_Characters);
         index = 0;
         if (g_BattlePartyCount != 0) {
             do {
-                row_offset                 = index * BATTLE_PARTY_STRIDE;
-                cell                       = (Character*)((*(D_80145FCC + row_offset) * 0xA4) + (u8*)&g_Characters);
+                row_offset = index * BATTLE_PARTY_STRIDE;
+                cell =
+                    (Character*)(((&g_BattlePartyBattlers[0].character_index)[row_offset] * 0xA4) + (u8*)&g_Characters);
                 dest                       = (Character*)(row_offset + D_80145F04);
                 dest->equip.weapon         = cell->equip.weapon;
                 dest->equip.shield         = cell->equip.shield;

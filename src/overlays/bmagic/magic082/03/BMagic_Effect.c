@@ -54,9 +54,59 @@ MATCH void func_801EFD30(void) {
 
 INCLUDE_ASM(func_801EFDC0);
 
-INCLUDE_ASM(func_801EFEF4);
+MATCH void func_801EFEF4(void) {
+    s32           timer;
+    s32           vel;
+    PartyBattler* task;
+    PartyBattler* reset;
 
-INCLUDE_ASM(func_801EFFE8);
+    func_800AF764();
+    func_801F0A84((rand() & 3) | 0x18);
+    Effect_SetActorMatrix();
+    func_801F03E0();
+    PopMatrix();
+    if (g_FrameCount & 1) {
+        g_Task->unk_09 += 1;
+    }
+    task         = g_Task;
+    timer        = task->timer - 1;
+    vel          = task->unk_14 + task->unk_20;
+    task->timer  = timer;
+    task->unk_14 = vel;
+    task->pos.z.part.integer += vel;
+    if ((timer & 0xFF) == 0) {
+        reset         = g_Task;
+        reset->unk_14 = -0x10;
+        reset->timer  = 8;
+        reset->unk_20 = 4;
+        g_Task->header.step += 1;
+    }
+}
+
+MATCH void func_801EFFE8(void) {
+    s32           timer;
+    s32           vel;
+    PartyBattler* task;
+
+    func_800AF764();
+    func_801F0A84((rand() & 3) | 0x18);
+    Effect_SetActorMatrix();
+    func_801F03E0();
+    PopMatrix();
+    if (g_FrameCount & 1) {
+        g_Task->unk_09 += 1;
+    }
+    task         = g_Task;
+    timer        = task->timer - 1;
+    vel          = task->unk_14 + task->unk_20;
+    task->timer  = timer;
+    task->unk_14 = vel;
+    task->pos.z.part.integer += vel;
+    if ((timer & 0xFF) == 0) {
+        g_Task->timer = 0x1C - g_Task->param.unk_0B;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801F00DC(void) {
     s32 value;

@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-extern void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
-
 /* Draws the ability panel: the ability icons of every row, their
  * names and the frame behind them.
  */

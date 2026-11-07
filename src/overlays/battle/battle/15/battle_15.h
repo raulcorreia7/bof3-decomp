@@ -579,7 +579,7 @@ extern volatile s16                     D_80148628;
 extern volatile u16                     D_8014862A;
 extern volatile u8                      D_8014862F;
 extern volatile u8                      D_80148654;
-extern volatile u8                      D_80148656;
+extern u8                               D_80148656;
 /* Proven game-RAM base for battle state (0x80140000). func_800A4458 already
  * references it through a local extern of this exact type. */
 /* Handle ring slot array: one u32 per 8-byte record (func_800A60DC writes
@@ -587,6 +587,8 @@ extern volatile u8                      D_80148656;
 extern volatile u8                      D_80150000[];
 extern u8*                              D_801C893C[];
 extern u8*                              D_801C8950[];
+extern u8*                              g_MenuInventoryTitles[5];
+extern char                             g_MenuInventoryCountFormat[];
 extern u8                               D_801C90ED[];
 /* Selection-kind table base; byte 0 of each stride-0x14 entry holds the flags.
  */
@@ -843,7 +845,8 @@ void        func_800B2438(void);
 void        func_800B2478(void);
 void        func_800B250C(void);
 void        func_800B258C(void);
-void        func_800B25C0(MenuPanelTask* task);
+/* func_800B25C0 */
+void        Menu_DrawInventoryWindow(MenuPanelTask* task);
 void        func_800B2C90(MenuPanelTask* task);
 void        func_800B3324(u8, u16, u16, s32, s32, MenuPanelTask*);
 void        func_800B3AE8(MenuPanelTask* task);
@@ -854,6 +857,9 @@ extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
 extern void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool        func_801AF494(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
+                   s32 sprite_flag);
+void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 /* func_801DB5CC */
 u8   Battle_FindSelectableSlotForward(s32 start_slot);
 /* func_801DB6F4 */

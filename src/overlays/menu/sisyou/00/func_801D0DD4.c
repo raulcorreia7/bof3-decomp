@@ -23,7 +23,7 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
     pad  = *padp;
 
     if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        item = D_80145FCC.bytes[g_MasterMenuCursor * BATTLE_PARTY_STRIDE];
+        item = g_BattlePartyBattlers[g_MasterMenuCursor].character_index;
         if (g_Characters[item].master_id == g_SceneEventSelection) {
             if ((confirm & BYTE_MASK) == 0) {
                 goto play_stop; /* both row-state cases share this exit */
@@ -65,7 +65,7 @@ after_input:
     count = g_PartySize;
     i     = 0;
     if (count > 0) {
-        entryp = D_80145FCC.bytes;
+        entryp = &g_BattlePartyBattlers[0].character_index;
         y      = MASTER_MENU_ROW_TOP;
         do {
             Master_DrawPartyRow(MASTER_MENU_ROW_X, y, *entryp, i);

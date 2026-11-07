@@ -24,7 +24,7 @@ MATCH void func_801D8050(s32 panel_x) {
 loop:
     cnt = Party_CountOrder(PARTY_ORDER_FIELD);
     if ((s1 & BYTE_MASK) < (cnt & BYTE_MASK)) {
-        id = D_80145FCC[(s1 & BYTE_MASK)][0];
+        id = g_BattlePartyBattlers[(s1 & BYTE_MASK)].character_index;
         if (g_Characters[id].inoculations != 0) {
             Menu_DrawCharacterWindow(s0 & HALF_MASK, (((s1 & BYTE_MASK) * 0x36) + 0x3E) & 0xFFFE, id, 1, 0);
         } else {

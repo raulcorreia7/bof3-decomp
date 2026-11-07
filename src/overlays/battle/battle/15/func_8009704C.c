@@ -40,26 +40,26 @@ NON_MATCHING void func_8009704C(void) {
     }
     sel        = (BattleSelectionScratch*)((u8*)&g_BattleChoicePhase - 3);
     D_801485DC = 1u;
-    D_801485E0 = D_80148574 + 7u;
-    D_801485E2 = D_80148576 + ((D_8014857C - D_80148580) * 13 + 0x1A);
+    D_801485E0 = g_MenuPanelTasks[16].pos.x + 7u;
+    D_801485E2 = g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - g_MenuPanelTasks[16].unk_10) * 13 + 0x1A);
     trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
     if ((g_BattleActorTurn->action_flags.value &
          (COMBATANT_FLAG_DRAGON_FORM | COMBATANT_FLAG_DRAGON_FORM_CONTROLLED)) != (u32)COMBATANT_FLAG_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 1));
-            D_80148579 = 0x32u;
-            cursor     = D_8014857B - 1;
-            D_8014857B = cursor;
+            g_MenuPanelTasks[16].unk_09 = 0x32u;
+            cursor                      = g_MenuPanelTasks[16].unk_0B - 1;
+            g_MenuPanelTasks[16].unk_0B = cursor;
             if ((s8)cursor < 0) {
-                D_8014857B = 3u;
+                g_MenuPanelTasks[16].unk_0B = 3u;
             }
         } else if ((trigger & PADLright) != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 1));
-            D_80148579 = 0x31u;
-            cursor     = D_8014857B + 1;
-            D_8014857B = cursor;
+            g_MenuPanelTasks[16].unk_09 = 0x31u;
+            cursor                      = g_MenuPanelTasks[16].unk_0B + 1;
+            g_MenuPanelTasks[16].unk_0B = cursor;
             if ((u8)cursor >= 4u) {
-                D_8014857B = 0u;
+                g_MenuPanelTasks[16].unk_0B = 0u;
             }
         }
     }
@@ -115,16 +115,16 @@ NON_MATCHING void func_8009704C(void) {
     handle                     = Resource_GetText(*(u16*)(D_801CA71E + kind * 0x14));
     ring_index                 = (D_801EC328 - 1) & 0xF;
     D_801EB5B4[ring_index * 2] = handle;
-    if (D_80148582 != 0) {
+    if (g_MenuPanelTasks[16].unk_12 != 0) {
         return;
     }
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
-        g_BattleChoicePhase               = 1u;
-        D_801485DC                        = 0u;
-        D_801EB5B1[ring_index * 8]        = 1u;
-        ((u8*)D_801454F4)[D_8014857A * 3] = group->index;
-        D_801454F5[D_8014857A * 3]        = D_80148580;
-        D_801454F6[D_8014857A * 3]        = group->cursor;
+        g_BattleChoicePhase                                = 1u;
+        D_801485DC                                         = 0u;
+        D_801EB5B1[ring_index * 8]                         = 1u;
+        ((u8*)D_801454F4)[g_MenuPanelTasks[16].unk_0A * 3] = group->index;
+        D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].unk_10;
+        D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;
         SND_PlayCue(EMI_CUE_ID(1, 6));
         *(volatile u8*)&g_BattleUIStep += 1;
         return;
@@ -137,15 +137,15 @@ NON_MATCHING void func_8009704C(void) {
             return;
         }
         SND_PlayCue(EMI_CUE_ID(1, 3));
-        ((u8*)D_801454F4)[D_8014857A * 3] = group->index;
-        D_801454F5[D_8014857A * 3]        = D_80148580;
-        D_801454F6[D_8014857A * 3]        = group->cursor;
-        entry                             = Party_GetAbilities(message[0], group->index, 1);
-        kind                              = entry[group->cursor];
-        turn                              = g_BattleActorTurn;
-        turn->command.id                  = kind;
-        g_BattleChoicePhase               = 1u;
-        D_801485DC                        = 0u;
+        ((u8*)D_801454F4)[g_MenuPanelTasks[16].unk_0A * 3] = group->index;
+        D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].unk_10;
+        D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;
+        entry                                              = Party_GetAbilities(message[0], group->index, 1);
+        kind                                               = entry[group->cursor];
+        turn                                               = g_BattleActorTurn;
+        turn->command.id                                   = kind;
+        g_BattleChoicePhase                                = 1u;
+        D_801485DC                                         = 0u;
         if (turn->command.id == 0x97u) {
             g_BattleMessageState              = 2u;
             g_BattleActorTurn->command.target = g_BattleMessageSlot[5];

@@ -31,17 +31,17 @@ MATCH void func_80099568(void) {
     held                                     = *input;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        g_BattlePanelMode     = 1;
-        g_BattleChoicePhase   = 3;
-        g_BattleSelectionHead = 1;
-        D_80148594            = 0;
-        D_80148624            = 0;
-        D_801483C0            = 1;
-        D_801485DC            = 0;
-        g_BattleUIStep        = 1;
-        g_BattleUIState       = 0;
-        D_80148574            = D_80148598;
-        D_80148576            = D_8014859A;
+        g_BattlePanelMode          = 1;
+        g_BattleChoicePhase        = 3;
+        g_BattleSelectionHead      = 1;
+        D_80148594                 = 0;
+        D_80148624                 = 0;
+        D_801483C0                 = 1;
+        D_801485DC                 = 0;
+        g_BattleUIStep             = 1;
+        g_BattleUIState            = 0;
+        g_MenuPanelTasks[16].pos.x = D_80148598;
+        g_MenuPanelTasks[16].pos.y = D_8014859A;
         return;
     }
     if ((held & PADRleft) != 0u) {
