@@ -28,3 +28,4 @@ extern void func_801CFB40(void);
 #define PLCHAR_PREPARE_TURN func_801CFB40
 
 #endif
+void func_801CF62C(s32 kind, s32 x, s32 y, s32 code);
