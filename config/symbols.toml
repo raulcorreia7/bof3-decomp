@@ -774,6 +774,7 @@ Effect_TickOnTimerZero = { addr = 0x801EF2D4, type = "func", source = "Counts th
 Effect_CountUpByTwoAndStep = { addr = 0x801EF8C4, type = "func", source = "Counts the effect timer (byte 0x09) up by two and advances header.step (byte 0x02) at 16 in magic111." }
 Effect_TickOnTimerZero_801EF914 = { addr = 0x801EF914, type = "func", source = "Counts the effect timer (byte 0x09) down by 2 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic111." }
 g_BMagicEffectModes = { addr = 0x801EFA9C, source = "Handlers of magic111, run by header.mode (byte 0x01)." }
+D_801EFAA8 = { addr = 0x801EFAA8, source = "Step handlers of the effect, run by header.step (byte 0x02) through SYS_DISPATCH_BYTE." }
 
 ["emi/bmagic/magic113/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }

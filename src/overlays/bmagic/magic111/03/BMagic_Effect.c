@@ -58,7 +58,15 @@ MATCH void func_801EF138(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801EF158);
+MATCH void func_801EF158(void) {
+    SYS_DISPATCH_BYTE(D_801EFAA8, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        g_Task->unk_0C++;
+        g_Task->unk_10++;
+        func_801EF330();
+    }
+}
+
 
 MATCH void func_801EF1D4(void) {
     s32 start;
