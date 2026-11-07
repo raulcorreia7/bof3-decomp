@@ -9,7 +9,6 @@ extern BMagicEffectFuncs D_801EEC04;
 extern BMagicEffectWork* D_801F20DC;
 
 void func_801EED18(void);
-void Effect_StartOnZeroTick(void);
 void func_801EF710(void);
 void func_801F0440(void);
 
