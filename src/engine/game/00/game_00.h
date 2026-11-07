@@ -22,8 +22,6 @@
 
 /* Fixed retail addresses the units dereference. */
 #define ENCOUNTER_TABLE_BASE   0x800E4000u /* formations and enemy records (@source: wiki:formats/area) */
-#define GAME_PALETTE_STAGE     0x80035600u /* 0x40-byte palette staging entries; GFX_StagePalette copies them out */
-#define GAME_PALETTE_MIRROR    0x80039600u /* GAME_PALETTE_STAGE + 0x4000, GFX_StagePalette's second copy */
 #define GAME_AREA_ID_ADDR      0x80143F00  /* the u16 world id; MEM reads it non-volatile to match retail */
 #define AREA_MESSAGE_REQUEST   0xD8        /* the message Message_RunAreaMessage starts */
 

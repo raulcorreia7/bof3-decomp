@@ -11,7 +11,8 @@ extern u16 D_801EFAB0;
 extern u8  D_801EFAB4[];
 extern u8* D_801EFAF4;
 
-u8 func_801EF8EC(void);
+void func_801EF254(void);
+u8   func_801EF8EC(void);
 
 void func_801AFE18(void);
 void func_801EF040(void);
