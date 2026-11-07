@@ -25,7 +25,19 @@ MATCH void func_801EED60(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEE4C);
+MATCH void func_801EEE4C(void) {
+    SYS_DISPATCH_BYTE(D_801EF988, g_Task->header.mode);
+    if (g_BattleEffectBattler->param.unk_0B != 0xFF) {
+        func_801EF654();
+        func_801EF14C();
+        func_801EF710();
+        PopMatrix();
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1,
+                (GetGraphType() == 1 || GetGraphType() == 2) ? 0x25 : 0x15, 0);
+    GFX_AddPrim(3, 0xC);
+}
+
 
 MATCH void func_801EEF1C(void) {
     func_800A9610(g_BattleTargetSelector, 32);
