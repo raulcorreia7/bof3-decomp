@@ -35,6 +35,9 @@ typedef enum ArmorType {
     ARMOR_TYPE_BODY    = 4,
 } ArmorType;
 
+/* The armor type that fits equipment slot EQUIP_SLOT_SHIELD..EQUIP_SLOT_ARMOR. */
+#define ARMOR_TYPE_OF_SLOT(slot) ((slot) + 1)
+
 /* The inventory category code Item_GetRecord resolves a record from. */
 typedef enum ItemCategory {
     ITEM_CAT_ITEM      = 0,
@@ -504,11 +507,11 @@ extern u8                 D_801C8974;   /* the item row's price halfword */
 /* D_801C8FDC */
 extern volatile VitalItem g_VitalItems[];
 /* D_801C90DC */
-extern volatile Weapon    g_Weapons[];
+extern Weapon             g_Weapons[];
 extern u8                 D_801C90E9[]; /* the weapon row's flags byte */
 extern u8                 D_801C90F2;   /* the weapon row's price halfword */
 /* D_801C98A4 */
-extern volatile Armor     g_Armors[];
+extern Armor              g_Armors[];
 extern u8                 D_801C98B1[]; /* the armor row's flags byte */
 extern u8                 D_801C98B8;   /* the armor row's price halfword */
 /* D_801C9E7C */

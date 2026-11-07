@@ -38,8 +38,11 @@ MATCH void func_801D3624(void) {
             g_BattleSelectedActor = work;
             /* Retail builds this pointer as base + 0x118 + row * 0x140. */
             D_80146390            = &g_BattlePartyBattlers[kind_index].turn.command;
-            D_80146386 = work->unk_2E.half + g_BattlePanelOffsets[D_80145F09[kind_index][0] * 8 + work->facing * 2];
-            D_80146388 = work->unk_30.half + D_801EB0B1[D_80145F09[kind_index][0] * 8 + work->facing * 2];
+            D_80146386 =
+                work->unk_2E.half +
+                g_BattlePanelOffsets[g_BattlePartyBattlers[kind_index].chr.character_id * 8 + work->facing * 2];
+            D_80146388 = work->unk_30.half +
+                         D_801EB0B1[g_BattlePartyBattlers[kind_index].chr.character_id * 8 + work->facing * 2];
         } else {
             row_offset            = kind_index * 0x118;
             work                  = (PartyBattler*)(g_BattleEnemies + row_offset);
