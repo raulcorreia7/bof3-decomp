@@ -7,13 +7,13 @@ MATCH void func_8019BE28(void) {
     work           = g_Task;
     work->scale.x += 0x4000;
     work->scale.y += 0x4000;
-    if (work->unk_09 != 0) {
+    if (work->timer != 0) {
         if (g_AreaCameraMoving == 0) {
-            work->unk_09 = (work->unk_09 - 1);
+            work->timer = (work->timer - 1);
         }
     }
     if (g_Task->scale.x > 0x1FFFF) {
-        if ((g_AreaCameraMoving == 0) && (g_Task->unk_09 == 0)) {
+        if ((g_AreaCameraMoving == 0) && (g_Task->timer == 0)) {
             func_8019BFD4();
             Actor_Clear();
         }

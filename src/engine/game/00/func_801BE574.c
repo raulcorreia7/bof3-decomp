@@ -11,7 +11,7 @@ MATCH void func_801BE574(s32 count, u8* ids) {
         Party_ClearBattlerState(i & BYTE_MASK);
         g_Task->header.mode           = 2;
         g_Task->option_flags          = 0;
-        g_Task->unk_09                = 0;
+        g_Task->timer                 = 0;
         *(u32*)&D_80145FB4[i * 0x140] = ((u32*)FIELD(s32, g_AreaLoads[g_GameAreaId], 0x18u))[ids[i]];
         func_801BE710((GameResetRecord*)&((u8*)g_BattlePartyBattlers)[i * BATTLE_PARTY_STRIDE + 0x118]);
         GFX_StagePalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);

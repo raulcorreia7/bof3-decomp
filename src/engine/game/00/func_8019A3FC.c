@@ -19,13 +19,13 @@ MATCH void func_8019A3FC(void) {
 
     work               = g_Task;
     delta              = work->vx;
-    total              = *(u16*)&work->unk_2E + delta;
+    total              = *(u16*)&work->screen_x + delta;
     delta              = work->vy;
     work->active_flags = 0;
-    work->unk_2E       = total;
-    total              = *(u16*)&work->unk_30;
+    work->screen_x     = total;
+    total              = *(u16*)&work->screen_y;
     other              = g_Task;
-    work->unk_30       = (total - delta);
+    work->screen_y     = (total - delta);
     other->unk_2A      = 0;
 
     work         = g_Task;
@@ -40,7 +40,7 @@ MATCH void func_8019A3FC(void) {
         work->tint.signed_bytes.unk_5E = -8;
         work->tint.signed_bytes.unk_5D = -8;
         work                           = g_Task;
-        work->unk_09                   = 0x14;
+        work->timer                    = 0x14;
     } else {
         g_Task->tint.bytes.flags = 0;
         ptr                      = g_Task;
@@ -48,7 +48,7 @@ MATCH void func_8019A3FC(void) {
         ptr->tint.bytes.unk_5E   = 0;
         ptr->tint.bytes.unk_5D   = 0;
         work                     = g_Task;
-        work->unk_09             = 0x10;
+        work->timer              = 0x10;
     }
 
     ((void (*)(u8, Actor*))Actor_SelectScript)(s_SceneHandlerIds[g_Task->unk_06], other);

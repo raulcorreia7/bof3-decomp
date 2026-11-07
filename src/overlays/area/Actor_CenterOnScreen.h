@@ -6,7 +6,7 @@
 MATCH void Actor_CenterOnScreen(void) {
     Actor* actor;
 
-    actor         = g_Task;
-    actor->unk_2E = 0xA0;
-    actor->unk_30 = 0x50;
+    actor           = g_Task;
+    actor->screen_x = 0xA0;
+    actor->screen_y = 0x50;
 }

@@ -1,8 +1,5 @@
 #include "start_08.h"
 
-extern u8 D_801ED7FC;            /* local: u8 read; a sibling copy is s8 */
-extern u8 g_MenuStartReturnStep; /* local: u8 read; a sibling copy is s8 */
-
 MATCH void func_801E4FFC(void) {
     Menu_DrawClutStrip(D_80144953);
     Menu_DrawHeaderBar(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);

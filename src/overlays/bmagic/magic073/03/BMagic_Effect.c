@@ -31,7 +31,7 @@ INCLUDE_ASM(func_801EF06C);
 
 INCLUDE_ASM(func_801EF2DC);
 
-INCLUDE_ASM(func_801EF3D4);
+#include "overlays/bmagic/Effect_BrightenPaletteThenStep.h"
 
 /* func_801EF4E4 */
 #include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"

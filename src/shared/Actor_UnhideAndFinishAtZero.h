@@ -11,7 +11,7 @@ MATCH void Actor_UnhideAndFinishAtZero(void) {
     work = (u8*)g_Task;
     if (work[9] != 0) {
         g_Actors[work[11]].header.flags |= ACTOR_FLAG_HIDDEN;
-        g_Task->unk_09 -= 1;
+        g_Task->timer -= 1;
     } else {
         g_Actors[work[11]].header.flags &= ~ACTOR_FLAG_HIDDEN;
         g_Actors[g_Task->unk_03].header.flags = 0;

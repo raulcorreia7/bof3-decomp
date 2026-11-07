@@ -11,11 +11,11 @@ MATCH void func_801E0788(void) {
     func_801DDFEC(g_Task->slot);
     func_801DD14C(g_Task->slot);
     w = g_GameState;
-    if (w->turn.damage_flags.value & 4) {
+    if (w->turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) {
         g_Task->unk_09 = 30;
         g_Task->unk_03 = 1;
         g_Task->unk_04 = 0;
-    } else if (w->turn.action_flags.value & 2) {
+    } else if (w->turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
         half = &g_BattleState;
         if ((*half & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half &= 0xBFFF;
@@ -53,7 +53,7 @@ MATCH void func_801E0788(void) {
         if ((*half2 & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half2 &= 0xBFFF;
         }
-        if (g_GameState->turn.action_flags.value & 1) {
+        if (g_GameState->turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) {
             g_Task->unk_03 = 4;
         } else {
             Battle_ClearSlotPending(g_Task->slot);

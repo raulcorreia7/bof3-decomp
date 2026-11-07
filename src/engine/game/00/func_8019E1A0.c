@@ -12,9 +12,9 @@ MATCH void func_8019E1A0(void) {
     work->pos.z.fixed += work->vz;
     func_8014D978();
     record     = g_Task;
-    sceneTimer = record->unk_09;
+    sceneTimer = record->timer;
     if (sceneTimer != 0) {
-        record->unk_09 = (u8)(sceneTimer - 1);
+        record->timer = (u8)(sceneTimer - 1);
         Area_SetDrawMode();
         return;
     }

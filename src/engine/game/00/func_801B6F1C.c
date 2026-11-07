@@ -6,9 +6,9 @@ MATCH void func_801B6F1C(void) {
     u8  flags;
     u32 saved;
 
-    count = g_Task->unk_09;
+    count = g_Task->timer;
     if (count != 0) {
-        g_Task->unk_09 = (count - 1);
+        g_Task->timer = (count - 1);
         func_801B0DFC();
         return;
     }
@@ -24,7 +24,7 @@ MATCH void func_801B6F1C(void) {
     if (flags & 0x80) {
         g_Task->vz = saved;
     }
-    count          = g_Task->unk_09;
-    g_Task->unk_09 = (count - 1);
+    count         = g_Task->timer;
+    g_Task->timer = (count - 1);
     func_801B0DFC();
 }

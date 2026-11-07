@@ -21,7 +21,7 @@ MATCH u8 func_801DD448(void) {
     }
 
     work = g_GameState;
-    if ((work->turn.damage_flags.value & 1u) != 0u) {
+    if ((work->turn.damage_flags.value & COMBATANT_FLAG_COMMAND_ENTERED) != 0u) {
         return 0u;
     }
     if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {

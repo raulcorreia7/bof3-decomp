@@ -64,8 +64,8 @@ MATCH void func_801C329C(void) {
                 g_ActorSlots[slot].header.flags     = 1;
                 g_ActorSlots[slot].type             = 0x41;
                 g_ActorSlots[slot].unk_08           = g_Task->direction_08;
-                COORD_INT(g_ActorSlots[slot].pos.x) = g_Task->unk_2E;
-                value30                             = g_Task->unk_30;
+                COORD_INT(g_ActorSlots[slot].pos.x) = g_Task->screen_x;
+                value30                             = g_Task->screen_y;
                 g_ActorSlots[slot].unk_27           = 0;
                 g_ActorSlots[slot].unk_06           = 1;
                 record                              = g_ActorSlots;

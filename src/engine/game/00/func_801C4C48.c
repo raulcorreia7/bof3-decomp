@@ -7,7 +7,7 @@ MATCH void func_801C4C48(void) {
     s32    y;
 
     work = g_Task;
-    step = work->unk_09;
+    step = work->timer;
     x    = work->pos.x.fixed + (work->vx * step);
     y    = work->pos.y.fixed + (work->vy * step);
     Area_ReadStepHeight(x, y, work->direction_08);

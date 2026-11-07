@@ -13,7 +13,7 @@ MATCH void func_801F3CDC(void) {
     func_801F48E8(&g_Task->unk_18, &g_Task->pos.x, 0x40);
     if (*g_ScriptVars == 0x18) {
         g_Task->unk_03 = 0x80;
-        g_Task->unk_09 = 8;
+        g_Task->timer  = 8;
         g_Task->header.mode += 1;
         SND_PlayCue(0x208U);
     }

@@ -40,7 +40,7 @@ MATCH void func_801D4850(void) {
     if (((LOBU(g_BattleActionType)) != BATTLE_ACTION_ABILITY) || ((LOHU(g_BattleActionId)) != ABILITY_MEDITATION)) {
         if (BATTLER_IS_PLAYER(g_BattleActiveBattler)) {
             {
-                u32 flags = BATTLE_ACTIVE_PARTY.turn.action_flags.value & 0x80u;
+                u32 flags = BATTLE_ACTIVE_PARTY.turn.action_flags.value & COMBATANT_FLAG_MEDITATION;
                 clr       = 0xFFFFFF7Fu;
 
                 if (flags != 0u) {
@@ -50,7 +50,7 @@ MATCH void func_801D4850(void) {
             }
         } else {
             {
-                u32 flags = ENEMY_COMBATANT(g_BattleActiveBattler).turn.action_flags.value & 0x80u;
+                u32 flags = ENEMY_COMBATANT(g_BattleActiveBattler).turn.action_flags.value & COMBATANT_FLAG_MEDITATION;
                 clr       = 0xFFFFFF7Fu;
 
                 if (flags != 0u) {

@@ -10,7 +10,7 @@ MATCH void func_801A4AA8(void) {
     g_Task->active_flags           = 0;
     step                           = g_Task;
     step->unk_0A                   = 0;
-    step->unk_09                   = 0;
+    step->timer                    = 0;
     motion                         = g_Task;
     animation                      = g_CurrentActor;
     motion->scale.y                = 0x10000;

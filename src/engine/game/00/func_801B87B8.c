@@ -3,7 +3,7 @@
 MATCH void func_801B87B8(void) {
     Actor* work;
 
-    if (g_Task->unk_09 == 0) {
+    if (g_Task->timer == 0) {
         if (func_801C472C(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, 0xD0, 0) & BYTE_MASK) {
             func_801B8A0C();
             return;
@@ -49,7 +49,7 @@ MATCH void func_801B87B8(void) {
         Actor_RequestScript((g_Task->param.unk_0B + 8) & BYTE_MASK);
         func_801C24D0();
     }
-    g_Task->unk_09 -= 1;
+    g_Task->timer -= 1;
     func_801B0DFC();
     func_8014D978();
 }
