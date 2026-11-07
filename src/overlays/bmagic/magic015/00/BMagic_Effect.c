@@ -75,13 +75,12 @@ MATCH void func_801EFAE4(void) {
     } else {
         g_Task->header.step += 2;
     }
-    g_Task->unk_27 = g_BattleEffectBattler->unk_27;
-    g_Task->unk_2B = 1;
+    g_Task->unk_27      = g_BattleEffectBattler->unk_27;
+    g_Task->unk_2B      = 1;
     g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
     g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
 }
-
 
 MATCH void func_801EFB90(void) {
     if ((func_8014DAEC() & BYTE_MASK) != 0u) {

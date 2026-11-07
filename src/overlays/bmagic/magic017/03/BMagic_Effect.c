@@ -124,7 +124,6 @@ MATCH void func_801EF7E0(void) {
     }
 }
 
-
 MATCH void func_801EF8B4(void) {
     u8 count;
 
