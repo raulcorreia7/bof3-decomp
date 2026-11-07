@@ -26,13 +26,13 @@ MATCH void func_801EF080(void) {
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
-        g_Task->facing = D_801EB4E0->facing;
+        g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = 0x20000;
         g_Task->unk_10 = 0;
         func_801DD350(g_Task);
-        g_Task->pos.x.fixed      = D_801EB4E0->pos.x.fixed + g_Task->unk_0C;
-        g_Task->pos.y.fixed      = D_801EB4E0->pos.y.fixed + g_Task->unk_10;
-        COORD_INT(g_Task->pos.z) = COORD_INT(D_801EB4E0->pos.z) + 0x100;
+        g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
+        COORD_INT(g_Task->pos.z) = COORD_INT(g_BattleEffectBattler->pos.z) + 0x100;
         g_Task->param.unk_0B     = RANDOM_MASK(7);
         g_Task->unk_09           = 0x10;
         g_Task->timer            = 0;

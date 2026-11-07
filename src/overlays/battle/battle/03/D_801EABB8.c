@@ -588,7 +588,7 @@ BattleTurn* g_BattleActorTurn = 0;
 BattleEventSlot* D_801EB4DC = 0;
 
 /* 0x801EB4E0 */
-PartyBattler* D_801EB4E0 = 0;
+PartyBattler* g_BattleEffectBattler = 0;
 
 /* 0x801EB4E4 */
 static u8 s_gap_801EB4E4[0x6C] = {0};

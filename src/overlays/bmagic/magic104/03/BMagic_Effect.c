@@ -152,7 +152,7 @@ MATCH void func_801F034C(void) {
     COORD_INT(work->pos.z) -= 0x40;
     work->unk_09 = next;
     if (next == 0) {
-        D_801EB4E0->param.unk_0B = g_Task->param.unk_0B;
+        g_BattleEffectBattler->param.unk_0B = g_Task->param.unk_0B;
         func_801E5988();
     }
 }

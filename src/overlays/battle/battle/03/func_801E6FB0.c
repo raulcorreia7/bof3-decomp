@@ -8,7 +8,7 @@ MATCH void func_801E6FB0(void) {
     u8  id;
 
     if ((g_BattleState & BATTLE_STATE_EFFECT_LOADING) &&
-        ((D_801EB4E0->slot == g_BattleActiveBattler) ||
+        ((g_BattleEffectBattler->slot == g_BattleActiveBattler) ||
          ((LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) &&
           ((LOHU(g_BattleActionId) == ABILITY_ACCESSION) || (LOHU(g_BattleActionId) == ABILITY_TEMPTATION))))) {
         g_Task->header.mode += 1;
@@ -29,7 +29,7 @@ MATCH void func_801E6FB0(void) {
     } else {
         g_Task->timer -= 1;
     }
-    slot = D_801EB4E0->slot;
+    slot = g_BattleEffectBattler->slot;
     if (BATTLER_IS_PLAYER(slot)) {
         flags = g_BattlePartyBattlers[slot].chr.status;
     } else {
@@ -42,7 +42,7 @@ MATCH void func_801E6FB0(void) {
     func_801E8DD8();
     func_8014D978();
     Area_AddActor();
-    if ((Battle_SlotIsBlocked(D_801EB4E0->slot) & BYTE_MASK) && !ACTOR_IN_USE(*D_801EB4E0)) {
+    if ((Battle_SlotIsBlocked(g_BattleEffectBattler->slot) & BYTE_MASK) && !ACTOR_IN_USE(*g_BattleEffectBattler)) {
         g_Task->header.mode = 0;
     }
 }

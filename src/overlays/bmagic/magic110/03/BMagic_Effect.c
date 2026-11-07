@@ -91,7 +91,7 @@ MATCH void func_801EF6B4(void) {
     position            = g_Task->unk_30.half - 4;
     g_Task->unk_30.half = position;
     if ((s16)position < 0xB2) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
 }
@@ -103,7 +103,7 @@ MATCH void func_801EF740(void) {
     position            = g_Task->unk_30.half - 2;
     g_Task->unk_30.half = position;
     if ((s16)position < 0x80) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }

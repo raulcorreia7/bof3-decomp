@@ -20,7 +20,7 @@ MATCH void func_800AEF98(s32 step, s32 payload) {
     u8* saved;
     u32 kind;
 
-    work  = (u8*)D_801EB4E0;
+    work  = (u8*)g_BattleEffectBattler;
     saved = TASK_BYTES;
     kind  = *(u8*)&g_BattleActiveBattler;
     TASK_SET(work);

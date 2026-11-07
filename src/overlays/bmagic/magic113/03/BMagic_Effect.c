@@ -19,7 +19,7 @@ MATCH void func_801EF000(void) {
         work                                   = g_Task;
         g_BattleEffects[slot].header.mode      = 1;
         g_BattleEffects[slot].target.party     = work;
-        facing                                 = D_801EB4E0->facing;
+        facing                                 = g_BattleEffectBattler->facing;
         g_BattleEffects[slot].unk_09           = 0;
         g_BattleEffects[slot].unk_0A           = 0;
         g_BattleEffects[slot].unk_08           = (facing + 2) & 3;
@@ -68,7 +68,7 @@ MATCH void func_801EF844(void) {
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0x21) {
-        D_801EB4E0->param.unk_0B = 3;
+        g_BattleEffectBattler->param.unk_0B = 3;
         g_Task->header.step += 1;
     }
 }
@@ -105,7 +105,7 @@ MATCH void func_801EFCA0(void) {
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0x28) {
-        D_801EB4E0->param.unk_0B = 4;
+        g_BattleEffectBattler->param.unk_0B = 4;
         g_Task->header.step += 1;
     }
 }
@@ -142,13 +142,13 @@ MATCH void func_801F01B8(void) {
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0x31) {
-        D_801EB4E0->param.unk_0B = 5;
+        g_BattleEffectBattler->param.unk_0B = 5;
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801F0218(void) {
-    if (D_801EB4E0->param.unk_0B == 0x84) {
+    if (g_BattleEffectBattler->param.unk_0B == 0x84) {
         SND_PlayCue(0x103U);
         g_Task->header.step += 1;
     }
@@ -183,7 +183,7 @@ MATCH void func_801F0A80(void) {
         value          = g_Task->unk_09 + 1;
         g_Task->unk_09 = value;
         if ((value & 0xFF) >= 3U) {
-            D_801EB4E0->param.unk_0B += 1;
+            g_BattleEffectBattler->param.unk_0B += 1;
             func_801E5988();
             return;
         }

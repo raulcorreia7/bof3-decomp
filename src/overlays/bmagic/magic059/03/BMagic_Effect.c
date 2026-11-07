@@ -58,7 +58,7 @@ MATCH void func_801EF638(void) {
     long          flags;
 
     PushMatrix();
-    src                      = (PartyBattler*)D_801EB4E0;
+    src                      = (PartyBattler*)g_BattleEffectBattler;
     rot.vx                   = 0;
     rot.vy                   = 0;
     rot.vz                   = 0;
