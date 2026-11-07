@@ -87,7 +87,28 @@ MATCH void func_801F7260(void) {
 
 #include "shared/Actor_FreePaletteFades.h"
 
-INCLUDE_ASM(func_801F73BC);
+MATCH void func_801F73BC(void) {
+    RECT     rect;
+    DR_MOVE* prim;
+
+    if (g_Task->timer == 0) {
+        prim   = (DR_MOVE*)g_GfxPrimCursor;
+        rect.x = *(&D_801FCF40 + g_Task->header.mode * 2) / 4 + 0x2C0;
+        rect.y = *(&D_801FCF42 + g_Task->header.mode * 2) + 0x100;
+        rect.w = 0x10;
+        rect.h = 0x28;
+        SetDrawMove(prim, &rect, D_801FCF40 / 4 + 0x2C0, D_801FCF42 + 0x100);
+        g_Task->header.mode++;
+        g_Task->unk_29 = 0;
+        g_Task->timer  = g_Task->header.mode;
+        GFX_AddPrim(g_Task->unk_29, 0x18);
+        if (g_Task->header.mode == 4) {
+            func_80196070();
+        }
+    } else {
+        g_Task->timer--;
+    }
+}
 
 MATCH void func_801F7508(void) {
     SYS_DISPATCH_TASK(D_801FCF50, 1, g_Task);
