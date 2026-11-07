@@ -27,11 +27,11 @@ NON_MATCHING u8 func_801BF11C(void) {
     if (g_BattleOptions & 4) {
         return 1U;
     }
-    tmp1       = g_BattleScrollDir;
+    tmp1                     = g_BattleScrollDir;
     g_EncounterOriginX.fixed = g_AreaScrollTargetX + (s_CameraScrollDeltas[tmp1].dx << 0x10);
     g_EncounterOriginY.fixed = g_AreaScrollTargetY + (s_CameraScrollDeltas[tmp1].dy << 0x10);
-    val2       = 0;
-    cnt        = g_PartySize;
+    val2                     = 0;
+    cnt                      = g_PartySize;
     if (cnt > 0) {
         val6 = 1;
         val3 = 0;

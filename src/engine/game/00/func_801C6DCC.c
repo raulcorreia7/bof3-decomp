@@ -19,9 +19,8 @@ MATCH s32 func_801C6DCC(void) {
                 if (inner >= (Party_CountOrder(PARTY_ORDER_BATTLE) & BYTE_MASK)) {
                     break;
                 }
-                if ((func_801C7824(COORD_INT(g_EncounterParty[inner].x),
-                                   COORD_INT(g_EncounterParty[inner].y), *(s16*)(field - 4),
-                                   *(s16*)field) &
+                if ((func_801C7824(COORD_INT(g_EncounterParty[inner].x), COORD_INT(g_EncounterParty[inner].y),
+                                   *(s16*)(field - 4), *(s16*)field) &
                      0xFF) != 0) {
                     flag = 1;
                     D_801CD8C4 += 1;

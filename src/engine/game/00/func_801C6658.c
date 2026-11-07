@@ -57,8 +57,8 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
     sel  = 0;
     sub  = table_slot & BYTE_MASK;
     do {
-        new_var                   = g_EncounterOriginY.fixed;
-        count                     = 0;
+        new_var                       = g_EncounterOriginY.fixed;
+        count                         = 0;
         g_EncounterParty[sub].x.fixed = g_EncounterOriginX.fixed + cur_a;
         g_EncounterParty[sub].y.fixed = new_var + cur_b;
         do {
