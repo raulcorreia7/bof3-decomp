@@ -76,7 +76,7 @@ NON_MATCHING void func_801DE4C8(void) {
         }
         D_80148652 = 0;
         D_80148651 += 1;
-        UI_SetMode(2);
+        UI_SetMode(UI_MODE_FAST_FADE_OUT);
     }
 }
 #else
