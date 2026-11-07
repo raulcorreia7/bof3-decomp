@@ -196,7 +196,50 @@ MATCH u8* func_801F7FF8(void) {
     return NULL;
 }
 
-INCLUDE_ASM(func_801F8034);
+/* Area_AddCellPrim with the caller's tag stored in the slot and an unmasked size. */
+MATCH void func_801F8034(s32 x, s32 y, s32 depth, s32 size, u32 tag) {
+    u8* cursor;
+    u8* next;
+    u8* packet;
+    u32 offset;
+    u32 limit;
+    s32 index;
+    s32 value;
+    s32 cell;
+    s32 seed;
+    s32 count;
+    s32 addend;
+
+    index = (x >> 16) - g_AreaTileOriginX;
+    value = (y >> 16) - g_AreaTileOriginY;
+    if (x & HALF_MASK) {
+        value += 1;
+    }
+    /* FAKE: keeps index in its own pseudo so the sum lands in a fresh register, as in Area_AddCellPrim. */
+    index++;
+    index--;
+    cell = index;
+    cell += value;
+    seed = (s8)depth;
+    if (y & HALF_MASK) {
+        addend = seed + 1;
+        count  = cell + addend;
+    } else {
+        count = cell + seed;
+    }
+    if ((u32)count < 56) {
+        cursor = g_GfxPrimCursor;
+        limit  = g_FrameBufferIndex * 0x9000 + PRIM_ARENA_BASE;
+        next   = cursor + size;
+        if (next < limit) {
+            offset = (g_FrameBufferIndex + 4) * 8 + count * 0x30;
+            packet = *(u8**)(D_80142CC4 + offset);
+            setaddr(packet, cursor);
+            g_GfxPrimCursor              = next;
+            *(u32*)(D_80142CC4 + offset) = tag;
+        }
+    }
+}
 
 MATCH void func_801F8124(void) {
     SYS_DISPATCH_BYTE(D_801FA204, D_80146872);

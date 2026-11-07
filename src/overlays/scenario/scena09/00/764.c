@@ -64,11 +64,87 @@ INCLUDE_ASM(func_801F8770);
 
 INCLUDE_ASM(func_801F8D30);
 
-INCLUDE_ASM(func_801F9354);
+MATCH void func_801F9354(void) {
+    u8* step = &D_80146875;
+    u8* vars;
+
+    switch (*step) {
+        case 0:
+            if (g_GameStateIndex != 2) {
+                *g_ScriptVars = 1;
+                func_801BE1B0(0xC);
+                *step = 1;
+            }
+            break;
+        case 1:
+            if (*g_ScriptVars == 9) {
+                SYS_SetFlag(g_SceneFlags, 0x3F);
+                Game_ClearScriptActive();
+                D_80146865 = 0;
+                D_80146866 = 0;
+                D_80146867 = 0;
+                *step      = 0;
+                D_80146874 = 0;
+            }
+            break;
+        case 5:
+            if (g_GameStateIndex != 2) {
+                *g_ScriptVars = 1;
+                *step         = 6;
+            }
+            break;
+        case 6:
+            vars = g_ScriptVars;
+            if (*vars == 2) {
+                Game_ClearScriptActive();
+                *vars      = 0;
+                D_80146865 = 0;
+                D_80146866 = 0;
+                D_80146867 = 0;
+                *step      = 0;
+                D_80146874 = 0;
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801F9498);
 
-INCLUDE_ASM(func_801FA08C);
+MATCH void func_801FA08C(void) {
+    u8* step = &D_80146875;
+
+    switch (*step) {
+        case 0:
+            if (D_8014623B != 2) {
+                func_801BE1B0(0);
+                *step = 1;
+            }
+            break;
+        case 1:
+            if (g_GameStateIndex != 2) {
+                SYS_SetFlag(g_SceneFlags, 0x13);
+                Game_ClearScriptActive();
+                *step      = 0;
+                D_80146874 = 0;
+            }
+            break;
+        case 5:
+            if (!(g_InputPressed & g_InputMasks[INPUT_SLOT_MENU]) && g_GameStateIndex == 0) {
+                *g_ScriptVars = 0;
+                *step         = 6;
+                Game_RequestAreaChange(0x76, 0x490000, 0x188000, 0x81);
+            }
+            break;
+        case 6:
+            if (*g_ScriptVars == 1 && g_GameStateIndex != 2) {
+                *g_ScriptVars = 0;
+                Game_ClearScriptActive();
+                *step      = 0;
+                D_80146874 = 0;
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801FA1F0);
 
@@ -230,9 +306,67 @@ MATCH s32 func_801FD2E8(void) {
     return 1;
 }
 
-INCLUDE_ASM(func_801FD388);
+MATCH s32 func_801FD388(void) {
+    if (D_80145F09 == 5) {
+        if (SYS_TestFlag(g_SceneFlags, 0xC) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 2;
+            D_80146874 = 6;
+            return 1;
+        } else if (SYS_TestFlag(g_SceneFlags, 0xE) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 3;
+            D_80146874 = 6;
+            return 1;
+        } else if (SYS_TestFlag(g_SceneFlags, 0xD) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 0x1E;
+            D_80146874 = 6;
+            return 1;
+        } else {
+            Game_SetScriptActive();
+            D_80146875 = 5;
+            D_80146874 = 6;
+            return 1;
+        }
+    } else {
+        Game_SetScriptActive();
+        D_80146875 = 0;
+        D_80146874 = 6;
+        return 1;
+    }
+}
 
-INCLUDE_ASM(func_801FD498);
+MATCH s32 func_801FD498(void) {
+    if (D_80145F09 == 5) {
+        if (SYS_TestFlag(g_SceneFlags, 0xE) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 2;
+            D_80146874 = 6;
+            return 1;
+        } else if (SYS_TestFlag(g_SceneFlags, 0x10) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 3;
+            D_80146874 = 6;
+            return 1;
+        } else if (SYS_TestFlag(g_SceneFlags, 0xF) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 0x28;
+            D_80146874 = 6;
+            return 1;
+        } else {
+            Game_SetScriptActive();
+            D_80146875 = 5;
+            D_80146874 = 6;
+            return 1;
+        }
+    } else {
+        Game_SetScriptActive();
+        D_80146875 = 0;
+        D_80146874 = 6;
+        return 1;
+    }
+}
 
 INCLUDE_ASM(func_801FD5A8);
 
