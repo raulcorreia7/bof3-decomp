@@ -1,7 +1,6 @@
 #include "start_08.h"
 
 extern s32 D_801ECDBC;
-extern s8  D_801ED105;
 
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 81.20%. resume: a lever or header
  * fix that closes the first mismatch. */
