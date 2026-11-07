@@ -447,7 +447,7 @@ MATCH void func_801F7B0C(void) {
     s32          step;
     SceneEffect* work;
 
-    func_801F85A8(SCN_EFFECT->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SCN_EFFECT->channel_18, 0x200, 0, 0);
     work             = SCN_EFFECT;
     step             = work->channel_18 + 8;
     work->channel_18 = step;
@@ -461,8 +461,8 @@ MATCH void func_801F7B80(void) {
     s32          channel;
     SceneEffect* work;
 
-    func_801F85A8(SCN_EFFECT->channel_18, 0x200, 0, 0);
-    func_801F85A8(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SCN_EFFECT->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
     work             = SCN_EFFECT;
     channel          = work->channel_1C + 0x10;
     work->channel_1C = channel;
@@ -478,9 +478,9 @@ MATCH void func_801F7B80(void) {
 MATCH void func_801F7C34(void) {
     SceneEffect* work;
 
-    func_801F85A8(SCN_EFFECT->channel_18, 0x200, 0, 0);
-    func_801F85A8(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
-    func_801F85A8(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SCN_EFFECT->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
     work             = SCN_EFFECT;
     work->channel_0B = (work->channel_0B + 0x10);
     if (SCN_EFFECT->channel_0B == 0x60) {
@@ -492,10 +492,10 @@ MATCH void func_801F7C34(void) {
 MATCH void func_801F7CF0(void) {
     SceneEffect* work;
 
-    func_801F85A8(SCN_EFFECT->channel_18, 0x200, 0, 0);
-    func_801F85A8(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
-    func_801F85A8(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
-    func_801F85A8(SCN_EFFECT->channel_08, 0xE3, 0, 0xE38);
+    Scene_DrawTriangle(SCN_EFFECT->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SCN_EFFECT->channel_08, 0xE3, 0, 0xE38);
     work             = SCN_EFFECT;
     work->channel_08 = (work->channel_08 + 8);
     if (SCN_EFFECT->channel_08 == 0x60) {
@@ -507,11 +507,11 @@ MATCH void func_801F7CF0(void) {
 MATCH void func_801F7DC8(void) {
     SceneEffect* work;
 
-    func_801F85A8(SCN_EFFECT->channel_18, 0x200, 0, 0);
-    func_801F85A8(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
-    func_801F85A8(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
-    func_801F85A8(SCN_EFFECT->channel_08, 0xE3, 0, 0xE38);
-    func_801F85A8(SCN_EFFECT->channel_0A, 0x31C, 0, 0x555);
+    Scene_DrawTriangle(SCN_EFFECT->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SCN_EFFECT->channel_08, 0xE3, 0, 0xE38);
+    Scene_DrawTriangle(SCN_EFFECT->channel_0A, 0x31C, 0, 0x555);
     work             = SCN_EFFECT;
     work->channel_0A = (work->channel_0A + 8);
     if (SCN_EFFECT->channel_0A == 0x10) {
@@ -526,12 +526,12 @@ MATCH void func_801F7DC8(void) {
 MATCH void func_801F7EE0(void) {
     SceneEffect* work;
 
-    func_801F85A8(SCN_EFFECT->channel_18, 0x200, 0, 0);
-    func_801F85A8(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
-    func_801F85A8(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
-    func_801F85A8(SCN_EFFECT->channel_08, 0xE3, 0, 0xE38);
-    func_801F85A8(SCN_EFFECT->channel_0A, 0x31C, 0, 0x555);
-    func_801F85A8(SCN_EFFECT->channel_06, 0x238, 0, 0xAAA);
+    Scene_DrawTriangle(SCN_EFFECT->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SCN_EFFECT->channel_08, 0xE3, 0, 0xE38);
+    Scene_DrawTriangle(SCN_EFFECT->channel_0A, 0x31C, 0, 0x555);
+    Scene_DrawTriangle(SCN_EFFECT->channel_06, 0x238, 0, 0xAAA);
     work             = SCN_EFFECT;
     work->channel_06 = (work->channel_06 + 8);
     if (SCN_EFFECT->channel_06 == 0x10) {
@@ -546,13 +546,13 @@ MATCH void func_801F7EE0(void) {
 MATCH void func_801F8014(void) {
     SceneEffect* work;
 
-    func_801F85A8(SCN_EFFECT->channel_18, 0x200, 0, 0);
-    func_801F85A8(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
-    func_801F85A8(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
-    func_801F85A8(SCN_EFFECT->channel_08, 0xE3, 0, 0xE38);
-    func_801F85A8(SCN_EFFECT->channel_0A, 0x31C, 0, 0x555);
-    func_801F85A8(SCN_EFFECT->channel_06, 0x238, 0, 0xAAA);
-    func_801F85A8(SCN_EFFECT->channel_07, 0, 0, 0x71C);
+    Scene_DrawTriangle(SCN_EFFECT->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SCN_EFFECT->channel_08, 0xE3, 0, 0xE38);
+    Scene_DrawTriangle(SCN_EFFECT->channel_0A, 0x31C, 0, 0x555);
+    Scene_DrawTriangle(SCN_EFFECT->channel_06, 0x238, 0, 0xAAA);
+    Scene_DrawTriangle(SCN_EFFECT->channel_07, 0, 0, 0x71C);
     work             = SCN_EFFECT;
     work->channel_07 = (work->channel_07 + 8);
     if (SCN_EFFECT->channel_07 == 0x60) {
@@ -565,14 +565,14 @@ MATCH void func_801F8140(void) {
     s32          channel;
     SceneEffect* work;
 
-    func_801F85A8(SCN_EFFECT->channel_18, 0x200, 0, 0);
-    func_801F85A8(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
-    func_801F85A8(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
-    func_801F85A8(SCN_EFFECT->channel_08, 0xE3, 0, 0xE38);
-    func_801F85A8(SCN_EFFECT->channel_0A, 0x31C, 0, 0x555);
-    func_801F85A8(SCN_EFFECT->channel_06, 0x238, 0, 0xAAA);
-    func_801F85A8(SCN_EFFECT->channel_07, 0, 0, 0x71C);
-    func_801F85A8(SCN_EFFECT->channel_20, 0, 0, 0xC00);
+    Scene_DrawTriangle(SCN_EFFECT->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SCN_EFFECT->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SCN_EFFECT->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SCN_EFFECT->channel_08, 0xE3, 0, 0xE38);
+    Scene_DrawTriangle(SCN_EFFECT->channel_0A, 0x31C, 0, 0x555);
+    Scene_DrawTriangle(SCN_EFFECT->channel_06, 0x238, 0, 0xAAA);
+    Scene_DrawTriangle(SCN_EFFECT->channel_07, 0, 0, 0x71C);
+    Scene_DrawTriangle(SCN_EFFECT->channel_20, 0, 0, 0xC00);
     work             = SCN_EFFECT;
     channel          = work->channel_20 + 8;
     work->channel_20 = channel;
@@ -688,7 +688,7 @@ MATCH void func_801F8360(void) {
 /* The current scenario work object. The cell is a volatile pointer so every
  * read of it stays its own load, as in the shipped image. */
 
-/* func_801F85A8 saves the active effect's rotation across a triangle draw;
+/* Scene_DrawTriangle saves the active effect's rotation across a triangle draw;
  * func_8015B410 passes the three angles to RotMatrix. */
 typedef struct SceneRotation {
     Point3DL angle;
@@ -698,7 +698,8 @@ typedef struct SceneRotation {
 ASSERT_SIZE(SceneRotation, 0x10);
 ASSERT_OFFSET(SceneRotation, angle, 0x00);
 
-MATCH void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
+/* func_801F85A8 */
+MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     MATRIX        matrix;
     SVECTOR       v0;
     SVECTOR       v1;
