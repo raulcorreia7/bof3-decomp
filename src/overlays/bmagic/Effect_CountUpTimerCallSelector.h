@@ -1,5 +1,4 @@
-/* Lowers the ticker and counts the timer up; at 24 selects the target (0x10) and advances the step. Every change here
-   must verify every member. */
+/* Marks the selected battlers pending. Every change must verify every member. */
 /* func_801EF2EC (magic120), func_801EF1C4 (magic122) */
 MATCH void Effect_CountUpTimerCallSelector(void) {
     PartyBattler* work;
