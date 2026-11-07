@@ -326,6 +326,7 @@ INCLUDE_ASM(func_801FDA6C);
 INCLUDE_ASM(func_801FE03C);
 
 /* blocker: return 1 in the Game_SetScriptActive delay slot; first diff: +0x40 li v0,1. */
+/* m2c draft: 11 differing, size 0x74 against 0x68; the frame save differs. */
 INCLUDE_ASM(func_801FE0A4);
 
 MATCH void func_801FE10C(void) {
