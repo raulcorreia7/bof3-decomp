@@ -19,6 +19,7 @@ MATCH void func_801EEE74(void) {
     g_Task = saved;
 }
 
+/* blocker: D_801EC331 is indexed by a 0x78-byte record (index times 15, shifted by 3), and no record type is declared for it; the first diff is that multiply. */
 INCLUDE_ASM(func_801EEEDC);
 
 MATCH void func_801EEF88(void) {
