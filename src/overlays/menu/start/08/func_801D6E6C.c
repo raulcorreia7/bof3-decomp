@@ -15,12 +15,12 @@ MATCH void func_801D6E6C(void) {
     ptrs[4] = &record->equip.accessories[0];
     ptrs[5] = &record->equip.accessories[1];
     do {
-        want = (&D_801ED63C)[i & BYTE_MASK];
+        want = g_EquipPreview[i & BYTE_MASK];
         if (want != 0) {
             if (want != *ptrs[i & BYTE_MASK]) {
                 Item_Remove(s_EquipSlotCategories[i & BYTE_MASK], want, 1, 0);
                 Item_Add(s_EquipSlotCategories[i & BYTE_MASK], *ptrs[i & BYTE_MASK], 1, 0);
-                *ptrs[i & BYTE_MASK] = (&D_801ED63C)[i & BYTE_MASK];
+                *ptrs[i & BYTE_MASK] = g_EquipPreview[i & BYTE_MASK];
             }
         }
         i++;
