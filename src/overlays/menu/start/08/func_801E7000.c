@@ -11,7 +11,7 @@ MATCH void func_801E7000(void) {
     }
     WinDrawCueText(28, 21, resource);
     func_801E6388(0x20, 0x2B);
-    func_801E6784(D_801ED7E8, 0xA8, 0x2B);
+    Start_DrawNameEntryControls(D_801ED7E8, 0xA8, 0x2B);
     Menu_DrawWindowFrame(0x12, 0x61, 0x24, 0x11);
     Start_DrawNameEntryGrid(D_801ED7E8, 0x18, 0x67);
     TASK_BYTES[9] = TASK_BYTES[9] + 1;
