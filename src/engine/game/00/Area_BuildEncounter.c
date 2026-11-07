@@ -22,8 +22,8 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
         D_801CD8C8 = work_mode;
     }
     if ((work_index & BYTE_MASK) == 0) {
-        D_80143F24 = g_AreaScrollTargetX & 0xFFFF8000;
-        D_80143F28 = g_AreaScrollTargetY & 0xFFFF8000;
+        g_EncounterOriginX = g_AreaScrollTargetX & 0xFFFF8000;
+        g_EncounterOriginY = g_AreaScrollTargetY & 0xFFFF8000;
     }
     D_801CD8CC = ((func_801C6A7C() & BYTE_MASK) * 9) + ENCOUNTER_TABLE_BASE;
     D_801CD8C0 = func_801C6AEC(D_801CD8CC);
@@ -52,8 +52,8 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
 loop_16:
     if ((i & BYTE_MASK) < (Party_CountOrder(PARTY_ORDER_BATTLE) & BYTE_MASK)) {
         kind = g_PartyBattleOrder[i & BYTE_MASK];
-        x    = *(s32*)(D_80143F2C + (i & BYTE_MASK) * 8);
-        y    = *(s32*)(D_80143F30 + (i & BYTE_MASK) * 8);
+        x    = g_EncounterParty[i & BYTE_MASK].x.fixed;
+        y    = g_EncounterParty[i & BYTE_MASK].y.fixed;
         if ((kind == 2) || (kind == 6)) {
             reach = 1;
         } else {
