@@ -85,6 +85,19 @@ void Boss_ChooseBattleEnding3(void);
 /* func_800C1F94 (boss002), func_800C2210 (boss008), func_800C25A4 (boss004), func_800C292C (boss018) */
 void Boss_EndBattle3(void);
 
+/* The ending hooks of both sets send each live party battler into its ending pose: KO'd battlers
+ * take the down script, the rest the stand script for their facing. */
+#define BOSS_SEND_PARTY_TO_ENDING_POSE(n)                                                                 \
+    if (g_BattlePartyBattlers[n].header.flags & 1) {                                                      \
+        Battle_CancelTurn(g_BattlePartyBattlers[n].slot);                                                 \
+        TASK_SET(&g_BattlePartyBattlers[n]);                                                              \
+        if (g_BattlePartyBattlers[n].chr.status & STATUS_KO) {                                            \
+            Actor_SwitchScript(g_BattlePartyBattlers[n].facing + 0x1C, MEM_PTR(u8, 0x800F0800u), 0x1800); \
+        } else {                                                                                          \
+            Actor_SwitchScript(g_BattlePartyBattlers[n].facing + 4, MEM_PTR(u8, 0x800F0800u), 0x1800);    \
+        }                                                                                                 \
+    }
+
 /* Finishes the boss's defeat: banks the spoils, shows the task again and parks it in mode 3.
  * Boss_FinishDefeat (boss001, boss002, boss004, boss017, boss022) and Boss_FinishDefeat_800C1900 (boss001). */
 #define BOSS_FINISH_DEFEAT()                                              \
