@@ -22,7 +22,7 @@ NON_MATCHING void func_801E0F78(void) {
     }
     g_MenuPanelTasks[0].unk_00[1] = 7;
     D_80148332                    = 0;
-    D_80148333[0]                 = 2;
+    g_MenuPanelTasks[0].state     = 2;
     g_MenuPanelTasks[0].unk_00[0] = 1;
     D_80148334                    = 0x14;
     D_8014835F                    = 0xFF;

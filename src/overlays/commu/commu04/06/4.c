@@ -44,7 +44,7 @@ MATCH void func_801D11DC(void) {
     }
     UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 0xC)) & 0xFFFE, 0x118, 0x13, 0xF2, g_WindowStyle);
     UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 0xC), 0x113, 0xF, 0);
-    if (*D_80148333 == 0) {
+    if (g_MenuPanelTasks[0].state == 0) {
         Menu_ResetPanelTasks();
         Message_StartAreaMessage(0x5F);
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
