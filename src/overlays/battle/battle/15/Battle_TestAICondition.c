@@ -120,7 +120,7 @@ MATCH void Battle_TestAICondition(void) {
                 }
                 break;
             case 24:
-                if (g_BattleCurrentEnemy->drops[0].rate_02 == 0) {
+                if (g_BattleCurrentEnemy->drops[0].rate == 0) {
                     if (Battle_Unk0E1BitTest(g_BattleCurrentEnemy, i) == 0) {
                         func_8009C994(g_BattleCurrentEnemy, packet);
                         Battle_Unk0E1BitModify(g_BattleCurrentEnemy, i, 1);
