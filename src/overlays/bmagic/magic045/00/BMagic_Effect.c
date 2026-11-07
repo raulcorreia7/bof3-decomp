@@ -27,6 +27,7 @@ MATCH void func_801EEEE8(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
+// hint: retail stores scale.x/scale.y through the same base as unk_48 before the unk_27 store; z store goes before unk_25 (matches up to +0x10).
 INCLUDE_ASM(func_801EEF80);
 
 INCLUDE_ASM(func_801EF118);
@@ -68,7 +69,32 @@ MATCH void func_801EF40C(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
-INCLUDE_ASM(func_801EF4A4);
+void func_801EF4A4(void) {
+    s8 c                       = -0x40;
+    g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.part.integer = g_BattleEffectBattler->pos.z.part.integer;
+    g_Task->unk_25             = 0x1D;
+    g_Task->unk_26             = 0;
+    g_Task->scale.x            = 0x10000;
+    g_Task->scale.y            = 0x10000;
+    g_Task->unk_48             = 1;
+    g_Task->unk_27             = 0xA0;
+    g_Task->unk_28             = 0;
+    g_Task->unk_24             = 4;
+    g_Task->header.flags |= 0x20;
+    g_Task->unk_5C      = 2;
+    g_Task->unk_5D      = c;
+    g_Task->unk_5E      = c;
+    g_Task->unk_5F      = c;
+    g_Task->unk_2A      = 0;
+    g_Task->unk_29      = 4;
+    g_Task->unk_2C.half = 0;
+    g_Task->unk_2B      = 0;
+    Actor_SelectScript(0U);
+    g_Task->unk_09 = 0;
+    g_Task->header.step += 1;
+}
 
 INCLUDE_ASM(func_801EF608);
 
