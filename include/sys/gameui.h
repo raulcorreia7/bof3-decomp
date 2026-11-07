@@ -25,6 +25,19 @@ ASSERT_OFFSET(ScriptState, unk_07, 0x07);
 ASSERT_OFFSET(ScriptState, unk_08, 0x08);
 ASSERT_OFFSET(ScriptState, cursor, 0x0A);
 
+typedef struct AreaDrawState {
+    u8 actor_count;
+    u8 unk_01;
+    u8 flags;
+    u8 unk_03;
+} AreaDrawState;
+
+ASSERT_SIZE(AreaDrawState, 4);
+ASSERT_OFFSET(AreaDrawState, actor_count, 0x00);
+ASSERT_OFFSET(AreaDrawState, flags, 0x02);
+
+extern AreaDrawState g_AreaDrawState;
+
 /* retail addresses */
 
 /* The menu header bar every screen draws at the top: geometry in pixels, y at its resting row. */
