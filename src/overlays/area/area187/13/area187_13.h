@@ -14,4 +14,5 @@ extern u8 D_801F35CC[];
 extern u8 D_801F35CD[];
 
 /* The game-overlay state bytes the reset paths write. */
+extern s8 D_8014504A;
 #endif
