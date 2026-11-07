@@ -7,6 +7,7 @@
 
 extern Callback   D_801F0A2C[];
 extern TrailPoint D_801F0A38[][BMAGIC_TRAIL_LENGTH];
+void              func_801F0390(void);
 void              func_801F06D8(void);
 
 #endif

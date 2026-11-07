@@ -135,7 +135,7 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     u8            selection;
     s32           result;
 
-    g_Task    = (u8*)&g_BattlePartyBattlers[slot];
+    TASK_SET(&g_BattlePartyBattlers[slot]);
     index     = g_PartyFieldOrder[slot];
     y         = g_BattlePartyBattlers[slot].unk_30.signed_half;
     x         = g_BattlePartyBattlers[slot].unk_2E.signed_half;

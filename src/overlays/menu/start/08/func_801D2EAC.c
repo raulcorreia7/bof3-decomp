@@ -31,7 +31,7 @@ MATCH void func_801D2EAC(void) {
     if ((s8)cursor != D_801ED618) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         g_MenuPanelTasks[12].unk_0B = D_801ED618;
         SND_PlayCue(EMI_CUE_ID(1, 4));
         if (D_801ED618 == 1) {
@@ -66,7 +66,7 @@ MATCH void func_801D2EAC(void) {
             return;
         }
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         SND_PlayCue(EMI_CUE_ID(1, 2));
         g_MenuPanelTasks[11].state  = 1;

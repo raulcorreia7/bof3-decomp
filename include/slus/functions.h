@@ -447,34 +447,37 @@ s32         Item_GetDescription(s32 category, s32 item_id);
 u8*         Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
 u8*         Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
+/* 0x40-byte palette staging entries; GFX_StagePalette copies them out, the second copy lands 0x4000 above. */
+#define GAME_PALETTE_STAGE  MEM_PTR(u8, 0x80035600u)
+#define GAME_PALETTE_MIRROR MEM_PTR(u8, 0x80039600u)
 /* func_80166C48 */
-void        GFX_StagePalette(u8* dst, s32 field);
+void       GFX_StagePalette(u8* dst, s32 field);
 /* func_80166CB0 */
-s32         Area_GetCellCode(s32 x, s32 y);
+s32        Area_GetCellCode(s32 x, s32 y);
 /* func_80166CEC */
-void        Party_ClearBattlerState(s32 character_index);
+void       Party_ClearBattlerState(s32 character_index);
 /* func_80166E88 */
-void        EMI_LoaderStreamFamily(u8 member_a, u8 member_b, u8 member_c, u8 family);
+void       EMI_LoaderStreamFamily(u8 member_a, u8 member_b, u8 member_c, u8 family);
 /* func_8016728C */
-void        EMI_StreamFamilyArchive(u8 index, u8 family);
+void       EMI_StreamFamilyArchive(u8 index, u8 family);
 /* func_80167344 */
-void        Area_DispatchScene(void);
+void       Area_DispatchScene(void);
 /* func_801673AC */
-void        Area_InitScene(void);
+void       Area_InitScene(void);
 /* func_80167848 */
-void        Area_SyncScrollHeight(void);
+void       Area_SyncScrollHeight(void);
 /* func_80167FDC */
-void        Char_AddHP(s32 amount, u8 char_id);
+void       Char_AddHP(s32 amount, u8 char_id);
 /* func_8016813C */
-s32         Char_LoseHP(s32 mode, s32 index);
+s32        Char_LoseHP(s32 mode, s32 index);
 /* func_80168248 */
-s32         Char_SpendAP(s32 requested, s32 character_id);
+s32        Char_SpendAP(s32 requested, s32 character_id);
 /* The libsnd internals have no header in this tree; s16 arguments as retail passes them. */
 /* PsyQ entry points the LIBCD, LIBGTE, LIBETC and LIBC callers use. */
 /* func_800C3254 (boss055), func_8014CE48 (slus), func_801F3DCC (area198) */
-extern s32  Area_RoundSpriteCoordinate(s32 pair, s32 step);
+extern s32 Area_RoundSpriteCoordinate(s32 pair, s32 step);
 /* func_80167800 (slus), func_801BC3B8 (game) */
-void        Area_StepSceneTimer(void);
+void       Area_StepSceneTimer(void);
 
 /* Main-exe polygon helper that fills the frame interior. */
 

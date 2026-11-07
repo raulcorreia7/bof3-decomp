@@ -1017,7 +1017,7 @@ MATCH void func_801F9178(void) {
             D_80145518[i][j] = 0xFF;
         }
     }
-    g_GameFlags |= GAME_FLAG_RUN_LOCK;
+    g_GameFlags |= GAME_FLAG_MENU_LOCK;
     while (EMI_LoaderIsReady() == 0) {
         CallbackWait(1U);
     }
@@ -2223,7 +2223,7 @@ MATCH void func_801FB924(void) {
             if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0;
                 flags           = &g_BattlePartyBattlers[0].unk_24;
-                g_GameFlags &= ~(GAME_FLAG_SCROLL_LOCK | GAME_FLAG_RUN_LOCK);
+                g_GameFlags &= ~(GAME_FLAG_SCROLL_LOCK | GAME_FLAG_MENU_LOCK);
                 *flags &= 0xDF;
                 Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_BEFORE_NUE, TO_COORD(87), TO_COORD(4), FACING_LEFT);
                 Scene_RequestChapterAdvance();

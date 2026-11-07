@@ -33,7 +33,7 @@ MATCH void func_801E5738(void) {
     if (prev_row != g_SaveSlotFirst) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*(&g_SaveSlots[0].source_index + (g_SaveSlotFirst * SHOP_ROW_STRIDE)) != GAME_NONE) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             D_8014865B = 1;
@@ -43,7 +43,7 @@ MATCH void func_801E5738(void) {
         SND_PlayCue(EMI_CUE_ID(1, 7));
         return;
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         g_MenuStartStep = 0xC;
     }
