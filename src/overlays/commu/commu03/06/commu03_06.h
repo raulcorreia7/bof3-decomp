@@ -7,14 +7,22 @@
 #include "shared/etc.h"
 
 extern OverlayHeader D_801D0C00;
-/* The overlay's step and sub-step handler pools; the tables are views into one
- * callback run, so the counts stay open until a data pass proves each range. */
-extern Callback      D_801D18C8[];
-extern Callback      D_801D18D4[];
-extern Callback      D_801D18DC[];
-extern Callback      D_801D18E4[];
-extern u8            D_801D1944;
-extern u8            D_801D1948;
+/* Entries of the handler tables. */
+#define COMMU03_STEP_COUNT  3
+#define COMMU03_STEP0_COUNT 2
+#define COMMU03_STEP1_COUNT 2
+#define COMMU03_STEP2_COUNT 4
+
+/* D_801D18C8 */
+extern Callback g_Commu03StepFuncs[COMMU03_STEP_COUNT];
+/* D_801D18D4 */
+extern Callback g_Commu03Step0Funcs[COMMU03_STEP0_COUNT];
+/* D_801D18DC */
+extern Callback g_Commu03Step1Funcs[COMMU03_STEP1_COUNT];
+/* D_801D18E4 */
+extern Callback g_Commu03Step2Funcs[COMMU03_STEP2_COUNT];
+extern u8       D_801D1944;
+extern u8       D_801D1948;
 
 /* The overlay's state byte the guarded step advances. */
 

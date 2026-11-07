@@ -17,5 +17,5 @@ segments:
     vram: 0x801D18C8
     align: 4
     subsegments:
-      - [0xCC8, bin, D_801D18C8]
+      - [0xCC8, bin, g_Commu03StepFuncs]
   - [0xD4C]

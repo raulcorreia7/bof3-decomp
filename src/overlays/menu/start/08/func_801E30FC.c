@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-void Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
-
 MATCH void func_801E30FC(u16 row_x, u16 row_y, s32 row_flags) {
     u8 data[0x18];
     /* FAKE: retail keeps the row y in s0. */

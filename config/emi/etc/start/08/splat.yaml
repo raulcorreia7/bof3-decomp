@@ -250,7 +250,7 @@ segments:
       - [0x156A8, c, Camp_EnterMainLoop]
       - [0x15788, c, func_801E6388]
       - [0x15890, c, Start_DrawNameEntryGrid]
-      - [0x15B84, c, func_801E6784]
+      - [0x15B84, c, Start_DrawNameEntryControls]
       - [0x16068, c, SAVE_DrawSlots]
       - [0x16188, c, func_801E6D88]
       - [0x16218, c, func_801E6E18]
