@@ -5,7 +5,7 @@
  * scenario overlays; every change here must verify every member.
  */
 /* func_801F3480 (area032), func_801F78E0 (scena03) */
-MATCH void Actor_UnhideAndFinishAtZero(void) {
+MATCH void Actor_Reveal(void) {
     u8* work;
 
     work = (u8*)g_Task;

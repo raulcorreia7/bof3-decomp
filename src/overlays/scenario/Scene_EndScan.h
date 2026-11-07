@@ -2,7 +2,7 @@
  * scan bars and steps the handler.
  */
 /* func_801D15CC (sce15ef3), func_801D0DE8 (sce15ef2) */
-MATCH void Scene_ClearScanBarsAndAdvance(void) {
+MATCH void Scene_EndScan(void) {
     Actor* work;
 
     work           = g_Task;

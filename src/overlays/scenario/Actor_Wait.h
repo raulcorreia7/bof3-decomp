@@ -2,7 +2,7 @@
  * index. One definition shared by the two scenario overlays; every change here
  * must verify every member. */
 /* func_801F8730 (scena07), func_801F8D18 (scena08) */
-MATCH void Actor_WaitAndStep(Actor* actor) {
+MATCH void Actor_Wait(Actor* actor) {
     u8 wait;
 
     wait               = actor->header.step - 1;
