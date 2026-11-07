@@ -92,8 +92,8 @@ MATCH void func_801F068C(void) {
 
     g_Task->unk_09 += 1;
     g_Task->timer -= 2;
-    battler = g_BattleEffectBattler;
-    task = g_Task;
+    battler           = g_BattleEffectBattler;
+    task              = g_Task;
     task->pos.x.fixed = battler->pos.x.fixed;
     task->pos.y.fixed = battler->pos.y.fixed;
     task->pos.z.fixed -= task->unk_14;
@@ -102,7 +102,6 @@ MATCH void func_801F068C(void) {
         Actor_Clear();
     }
 }
-
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 

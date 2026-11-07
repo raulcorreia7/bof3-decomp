@@ -96,7 +96,6 @@ MATCH void func_801F0488(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
-
 MATCH void func_801F0540(void) {
     g_Task->unk_25      = 0x1D;
     g_Task->unk_26      = 0;
