@@ -44,6 +44,7 @@ MATCH void func_801EEF00(void) {
 
 INCLUDE_ASM(func_801EEF78);
 
+/* blocker: timer and y registers swap (retail timer in v1, y in v0); first diff: lbu v1 against v0 at 0x801EF008. */
 INCLUDE_ASM(func_801EEFF8);
 
 MATCH void func_801EF04C(void) {
