@@ -1,7 +1,5 @@
 #include "battle_03.h"
 
-extern s8 D_801EAEA4;
-
 /* positions the active menu panel from its entry's script offsets and
  * the cursor state, then either reports the hit to the script handler or walks
  * the panel one state down.
@@ -18,7 +16,7 @@ MATCH void func_801E9FDC(void) {
     b0           = g_BattlePartyBattlers[index].facing;
     b1           = D_80145F09[index][0];
     panel->pos.x = g_BattlePartyBattlers[index].unk_2E.signed_half + *(s8*)&g_BattlePanelOffsets[b1 * 8 + b0 * 2] +
-                   (b0 == 0 || b0 == 3 ? D_801EAEA4 : D_801EAEA6);
+                   (b0 == 0 || b0 == 3 ? D_801EAEA4[0] : D_801EAEA4[2]);
 
     *(s16*)&g_MenuCurrentPanel->pos.y =
         g_BattlePartyBattlers[g_MenuCurrentPanel->unk_0A].unk_30.half + g_BattlePanelOffsets[b1 * 8 + b0 * 2 + 1] + 12;

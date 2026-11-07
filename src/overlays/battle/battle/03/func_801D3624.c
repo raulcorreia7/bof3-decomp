@@ -1,7 +1,5 @@
 #include "battle_03.h"
 
-extern s8 D_801EB713[];
-
 /* Non-volatile view of the battle mode word (0x801463C0): ram.h declares it
  * volatile, and a volatile 16-bit load cannot be narrowed to the byte the
  * slot-selection call takes. */
