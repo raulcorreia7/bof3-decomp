@@ -51,7 +51,7 @@ extern u8            D_801D0D98[];
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step bytes. */
 /* D_801D86E0 */
-extern Callback g_MenuBateStepFuncs[MENU_BATE_STEP_COUNT];
+extern Callback g_MenuBateStates[MENU_BATE_STEP_COUNT];
 extern s8       D_801D86F0;
 extern u8       g_MenuLabelAgility[];
 /* D_801D8B38 */

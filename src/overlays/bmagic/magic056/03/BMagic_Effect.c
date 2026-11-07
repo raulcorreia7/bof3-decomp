@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEF3C);
 #include "shared/Effect_StartPlaying.h"
 
 MATCH void func_801EF1B0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF1F4(void) {

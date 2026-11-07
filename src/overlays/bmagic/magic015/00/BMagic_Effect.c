@@ -64,7 +64,7 @@ MATCH void Effect_StartPlaying_801EF9B0(void) {
 }
 
 MATCH void func_801EF9E4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
 INCLUDE_ASM(func_801EFA28);

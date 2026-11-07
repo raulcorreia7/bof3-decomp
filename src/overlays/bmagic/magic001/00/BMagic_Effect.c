@@ -15,7 +15,7 @@ MATCH void func_801EEF34(void) {
 #include "shared/Effect_StartPlaying.h"
 
 MATCH void func_801EEFD8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF01C);
@@ -152,7 +152,7 @@ MATCH void Effect_StartPlaying_801EFA84(void) {
 }
 
 MATCH void func_801EFAB8(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, g_Task);
 }
 
 INCLUDE_ASM(func_801EFAFC);

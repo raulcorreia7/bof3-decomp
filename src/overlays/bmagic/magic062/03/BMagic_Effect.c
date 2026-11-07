@@ -34,7 +34,7 @@ INCLUDE_ASM(func_801EF2F0);
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF4C4(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF508(void) {
@@ -58,7 +58,7 @@ INCLUDE_ASM(func_801EF678);
 INCLUDE_ASM(func_801EF934);
 
 MATCH void func_801EFBBC(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 5), 2, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 5), 2, g_Task);
 }
 
 #include "overlays/bmagic/Effect_CountDownAndStep.h"

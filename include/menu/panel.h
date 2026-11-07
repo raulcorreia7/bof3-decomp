@@ -165,10 +165,10 @@ ASSERT_SIZE(MenuListPanel, 0x24);
  * item-table base. The battle overlays read the first 0x0C bytes through
  * BattlePanelTask (battle/records.h). */
 typedef struct MenuPanelTask {
-    u8 active;  /* set to open the panel, cleared to close it */
-    u8 handler; /* Menu_RunPanelTasks calls g_MenuPanels.handlers[handler] */
-    u8 mode;    /* the panel's own mode: g_MenuPanelHandlers[mode], the slide target choice, and the battle mode_00 */
-    u8 state;
+    u8       active;  /* set to open the panel, cleared to close it */
+    u8       handler; /* Menu_RunPanelTasks calls g_MenuPanels.handlers[handler] */
+    u8       mode; /* the panel's own mode: g_MenuPanelModes[mode], the slide target choice, and the battle mode_00 */
+    u8       state;
     /* x and y are screen positions. Most readers load them with lhu; the slide
      * code compares them as s16 and stores signed constants through LOH, so the
      * field stays u16 and each slide keeps its s16 view. */

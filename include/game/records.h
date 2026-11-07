@@ -89,7 +89,7 @@
 #define LEVEL_STRIDE                   0x08
 #define LEVEL_GROWTH_CHARACTER_STRIDE  (LEVEL_GROWTH_LEVEL_COUNT * LEVEL_STRIDE)
 
-/* The ActorSlot.type values that have a named handler in g_ActorHandlers. */
+/* The ActorSlot.type values that have a named handler in g_ActorTypes. */
 typedef enum ActorType {
     ACTOR_TYPE_FACING_PROBE = 0x3A,
 } ActorType;
