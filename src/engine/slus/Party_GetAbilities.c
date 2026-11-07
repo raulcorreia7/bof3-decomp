@@ -11,7 +11,7 @@ MATCH u8* Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode) {
         slot   = g_CharSlot[g_PartyFieldOrder[formation_index & BYTE_MASK]];
         record = &g_Characters[slot];
     } else {
-        record = (Character*)(D_80145F04 + (formation_index & BYTE_MASK) * 0x140);
+        record = &g_BattlePartyBattlers[formation_index & BYTE_MASK].chr;
     }
     switch ((u8)ability_type) {
         default:

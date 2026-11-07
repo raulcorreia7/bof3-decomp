@@ -205,7 +205,6 @@ extern BattleSelection g_BattleSelections[];
 /* D_80143F00 */
 extern s32             D_80145ED0;
 extern volatile u8     D_80145F18[];
-extern volatile u8     D_80145F1C[];
 extern u8              D_80145F20[];
 extern u8              D_80145F22[];
 /* One-field views of the same rows: the local rows (stride 0x140) and the

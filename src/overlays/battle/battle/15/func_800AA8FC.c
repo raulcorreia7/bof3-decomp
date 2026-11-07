@@ -22,7 +22,7 @@ MATCH s32 func_800AA8FC(void) {
                     kind = g_BattleAction->unk_02;
                     if (D_801CA71C[kind].mask & 0x200) {
                         Char_AddAbility(kind, slot, 0, 1);
-                        Char_AddAbility(g_BattleAction->unk_02, D_80145FCC[off], 0, 0);
+                        Char_AddAbility(g_BattleAction->unk_02, (&g_BattlePartyBattlers[0].character_index)[off], 0, 0);
                         kind = g_BattleAction->unk_02;
                         D_80144F80[kind >> 5] |= 1 << (kind & 0x1F);
                     }
