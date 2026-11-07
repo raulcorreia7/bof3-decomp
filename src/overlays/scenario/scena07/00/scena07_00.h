@@ -46,6 +46,17 @@ extern u8 D_801FDFC8;
     if (--g_Task->timer == 0) {                \
         g_Task->header.step++;                 \
     }
+
+/* The panel brighten step func_801F724C and func_801F805C share: draw the panel table, brighten it by 6
+ * and re-arm the countdown to 0x20 when it ends. Every change must keep both members matching. */
+#define SCENA07_PANEL_BRIGHTEN_STEP()          \
+    func_801F88B8(MEM_PTR(void, 0x800E48E0u)); \
+    func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \
+    D_800E4C1E += 6;                           \
+    if (--g_Task->timer == 0) {                \
+        g_Task->timer = 0x20;                  \
+        g_Task->header.step++;                 \
+    }
 s32 func_801F85D8(void);
 s32 func_801F9EFC(void);
 

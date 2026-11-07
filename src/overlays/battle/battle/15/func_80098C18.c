@@ -15,7 +15,9 @@ MATCH void func_80098C18(void) {
     }
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     if ((trigger & (PADLup | PADLdown)) != 0) {
-        if ((Item_GetFlags(D_8014857A, D_801C893C[D_8014857A][D_8014857C]) & 0x80u) != 0u) {
+        if ((Item_GetFlags(g_MenuPanelTasks[16].unk_0A,
+                           D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) &
+             0x80u) != 0u) {
             if (func_8009AF7C() != 0u) {
                 g_BattleActorTurn->command.target = 0u;
             } else {
