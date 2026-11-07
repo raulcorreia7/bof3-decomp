@@ -608,14 +608,12 @@ extern u16                              D_801EB37C[][0x8C];
 extern u8                               D_801EB3DC[];
 extern u8                               D_801EB638[];
 extern u8                               D_801EB6AF; /* +0x7F of the same enemy rows: the armed flag byte. */
-extern u16                              D_801EB6B4[][140];
 extern u16                              D_801EB6BA;
 /* Battler base halfwords, one u16 per 0x118-byte enemy row. */
 extern volatile u16                     D_801EB6C4[][140];
 extern u8                               D_801EB6CA[];
 extern u8                               D_801EB6CE[];
 extern EnemyBattlerPanel                D_801EB6D4[];
-extern volatile u16                     D_801EB6D6[][140];
 extern u8                               D_801EB6E7;
 extern u8                               D_801EB6F0[];
 extern u8                               D_801EB6F4[];
