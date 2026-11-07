@@ -9,7 +9,7 @@ MATCH void func_801F2CDC(void) {
             Game_SetScriptActive();
             Message_StartAreaMessage(2);
             g_GameStateIndex = 2;
-            *state = (u8)*state + 1;
+            *state           = (u8)*state + 1;
             break;
 
         case 1:
