@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC28_2.h"
 
-INCLUDE_ASM(func_801EED38);
+#include "overlays/bmagic/func_801EED38.h"
 
 #include "overlays/bmagic/Effect_ReplacePaletteFade.h"
 
