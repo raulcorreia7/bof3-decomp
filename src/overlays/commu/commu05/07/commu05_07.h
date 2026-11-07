@@ -10,6 +10,16 @@
  * by the commu step byte commu00 owns. */
 #define COMMU05_STEP_COUNT 3
 
+typedef struct {
+    s8 unk_00;
+    s8 unk_01;
+    s8 unk_02;
+    s8 unk_03;
+    s8 unk_04;
+} Commu05State;
+
+extern Commu05State D_801D19F0;
+
 extern OverlayHeader D_801D0C00;
 /* D_801D1950 */
 extern Callback      g_Commu05States[COMMU05_STEP_COUNT];
