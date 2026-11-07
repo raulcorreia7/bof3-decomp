@@ -32,7 +32,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Rank units to name first                 | `tools/symbol.py refs src/<path>`                                        | same                                                      |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/conventions.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
-| Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`, `--markdown`                         | [quality](#quality)                                       |
+| Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`, `--markdown [--update]`                         | [quality](#quality)                                       |
 | Check type loss between two revisions    | `tools/typeloss.py HEAD~5 HEAD`                                          | [type loss](#type-loss)                                   |
 | Scan prototypes against definitions      | `tools/sigs.py scan`                                                     | [signatures](#signatures)                                 |
 | Format                                   | `meson compile -C build/meson format` (or `tools/format.sh`)             | [toolchain: commands](../docs/toolchain.md#commands)      |
@@ -134,7 +134,7 @@ format the rows. It reads the function index, so build first.
 ## Pre-push
 
 `pre_push.sh [BASE_REF]` (Meson target `pre-push`) runs `check` (with a disc), `check-headers`,
-`check-tree`, `externs`, `include-asm`, `format-check`, `meson test`, `typeloss`, `quality` and `subsystems` (rewrites the table in `docs/subsystems.md`), prints one line each and
+`check-tree`, `externs`, `include-asm`, `format-check`, `meson test`, `typeloss`, `quality` and `subsystems` (writes the table to `build/subsystems.md`; never fails), prints one line each and
 keeps the logs in `build/pre-push/`. CI runs it too.
 
 ## Worktrees
