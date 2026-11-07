@@ -156,6 +156,7 @@ MATCH void func_801EFFB8(void) {
     }
 }
 
+/* blocker: two offset tables D_801F04A4 and D_801F04A8 (stride 8, indexed by param.unk_0B) have no symbol row or type in this image; needs: type. */
 INCLUDE_ASM(func_801F0040);
 
 MATCH void func_801F00D8(void) {
