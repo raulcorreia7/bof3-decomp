@@ -16,8 +16,8 @@ MATCH void func_800A07D0(void) {
     func_800A3F28();
     ctx           = (BattleSelectionContext*)&g_BattleTarget;
     index         = ctx->sel - 3u;
-    first         = D_801EB6B4[index][0];
-    second        = D_801EB6B4[index][1];
+    first         = g_BattleEnemyBattlers[index].zenny;
+    second        = g_BattleEnemyBattlers[index].exp;
     first_doubled = first * 2;
     first         = first_doubled;
     if (first_doubled > 0xFFFF) {
@@ -28,6 +28,6 @@ MATCH void func_800A07D0(void) {
     if (second_doubled > 0xFFFF) {
         second = 0xFFFF;
     }
-    D_801EB6B4[index][0]         = first;
-    D_801EB6B4[ctx->sel - 3u][1] = second;
+    g_BattleEnemyBattlers[index].zenny       = first;
+    g_BattleEnemyBattlers[ctx->sel - 3u].exp = second;
 }

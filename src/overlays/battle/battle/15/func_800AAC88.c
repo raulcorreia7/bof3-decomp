@@ -5,9 +5,8 @@
  *           sets the action state from the target's flag byte.
  */
 MATCH void func_800AAC88(s16 amount, u8 battler_index) {
-    u8  action_slot;
-    u8  target_flags;
-    s32 enemy;
+    u8 action_slot;
+    u8 target_flags;
 
     action_slot = Battle_AllocEffect(0, 1);
 
@@ -17,9 +16,8 @@ MATCH void func_800AAC88(s16 amount, u8 battler_index) {
         g_BattleEffects[action_slot].target.party = &g_BattlePartyBattlers[battler_index];
         target_flags                              = g_BattlePartyBattlers[battler_index].turn.target_flags;
     } else {
-        enemy                                     = battler_index - 3;
         g_BattleEffects[action_slot].target.enemy = (EnemyBattler*)g_BattleEnemies + battler_index;
-        target_flags                              = D_801EB72C[(enemy * BATTLE_ENEMY_STRIDE)];
+        target_flags                              = ENEMY_COMBATANT(battler_index).turn.target_flags;
     }
 
     if (amount < 0) {
