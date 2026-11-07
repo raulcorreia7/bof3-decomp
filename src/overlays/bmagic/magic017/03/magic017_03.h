@@ -5,6 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern BattleHandlerTable8 D_801EEC10;
 extern u8 g_BattleActiveBattler;
 
 #endif

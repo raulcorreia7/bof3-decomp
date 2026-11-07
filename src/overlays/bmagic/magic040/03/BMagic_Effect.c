@@ -16,7 +16,19 @@ MATCH void func_801EEF48(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EEF8C);
+MATCH void func_801EEF8C(void) {
+    BattleHandlerTable4 handlers = D_801EEC10;
+    u8                  next_09;
+
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
+        func_801EF7FC();
+        func_801EF600(g_Task->unk_09, g_Task->timer * 3);
+        next_09 = g_Task->unk_09 + 4;
+        func_801EF600(next_09, g_Task->timer * 2);
+    }
+}
+
 
 MATCH void func_801EF074(void) {
     g_Task->facing      = BATTLE_ACTIVE_WORK->facing;

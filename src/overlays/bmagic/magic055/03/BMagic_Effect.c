@@ -4,7 +4,20 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC10);
+MATCH void func_801EEC10(void) {
+    BattleHandlerTable3 handlers = D_801EEC04;
+
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
+    if (g_Task->header.flags != 0) {
+        func_800AF764();
+        g_Task->unk_30.half -= 0x10;
+        func_801EF7B0();
+        Effect_SetActorMatrix();
+        func_801EF9E4();
+        PopMatrix();
+    }
+}
+
 
 INCLUDE_ASM(func_801EECCC);
 

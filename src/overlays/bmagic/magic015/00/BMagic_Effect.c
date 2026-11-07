@@ -67,7 +67,15 @@ MATCH void func_801EF9E4(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
-INCLUDE_ASM(func_801EFA28);
+MATCH void func_801EFA28(void) {
+    BattleHandlerTable8 handlers = D_801EEC34;
+
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_8014D290();
+    }
+}
+
 
 MATCH void func_801EFAE4(void) {
     if (g_BattleActiveBattler < BATTLE_PARTY_SLOT_COUNT) {
@@ -88,7 +96,7 @@ MATCH void func_801EFB90(void) {
     }
 }
 
-/* hint: first differing instruction is the beqz at +0x2C (candidate one instruction short); retail reloads the g_Task pointer (lui/lw 0x1F800044) at +0xB8 before the header.step byte, and the candidate reuses it. A MATCH_FAKE_BARRIER before the step line makes it longer. */
+/* hint: a MATCH_FAKE_BARRIER before the unk_20 store reloads g_Task as retail does; first differing instruction is li v0,-8 at +0xC0 (candidate nop in the load delay slot). */
 INCLUDE_ASM(func_801EFBD8);
 
 /* Blocker: the z halfword at +0x3E is loaded unsigned (lhu) and summed with the 0x14 cell; COORD_INT is s16, so it gives lh. Same blocker as func_801F0DB4. */
@@ -165,7 +173,7 @@ MATCH void func_801F014C(void) {
     }
 }
 
-/* hint: cached &g_BattleSelectedActor (s0) matches the prologue; first differing instruction at +0x2C (beqz): retail reloads g_Task (lui/lw 0x1F800044) for the header.step byte after the unk_20 store, and the candidate does not. */
+/* hint: a MATCH_FAKE_BARRIER before the unk_20 store reloads g_Task as retail does; first differing instruction is li v0,-8 at +0x88 (candidate nop in the load delay slot). */
 INCLUDE_ASM(func_801F0194);
 
 /* hint: blocker is the z halfword at +0x3E, read and stored unsigned (lhu/sh) by this function; COORD_INT is s16 (lh). Needs an unsigned view of pos.z. */
@@ -205,6 +213,7 @@ MATCH void func_801F045C(void) {
     }
 }
 
+/* hint: blocker is the z halfword at +0x3E, read unsigned (lhu at +0x3C and +0x9C) and stored with sh; COORD_INT is s16. Needs the unsigned z view. */
 INCLUDE_ASM(func_801F0570);
 
 MATCH void func_801F0654(void) {
@@ -265,6 +274,7 @@ MATCH void func_801F0D48(void) {
 /* Blocker: retail reads the z halfword at +0x3E unsigned (lhu) and loads the 0x14 cell before the 0x09 decrement; COORD_INT is s16 (lh). Needs an unsigned halfword view of pos.z. */
 INCLUDE_ASM(func_801F0DB4);
 
+/* hint: first differing instruction is the beqz at +0x50 (candidate one instruction short): retail reloads g_Task (lui/lw) before the unk_14 store; a MATCH_FAKE_BARRIER there moves the li 0x48 out of the branch delay slot. */
 INCLUDE_ASM(func_801F0E54);
 
 MATCH void func_801F0F2C(void) {
