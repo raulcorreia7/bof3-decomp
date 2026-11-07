@@ -17,6 +17,4 @@ void                 func_801EF340(void);
 void                 func_801EF994(void);
 void                 func_801EFA5C(void);
 
-void Effect_StartOnZeroTick(void);
-
 #endif
