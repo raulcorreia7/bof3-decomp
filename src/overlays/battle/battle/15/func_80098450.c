@@ -25,19 +25,20 @@ MATCH void func_80098450(void) {
     if (*phase == 0u) {
         D_801485DC = 1u;
         D_801485E0 = (g_MenuPanelTasks[16].pos.x + 7);
-        D_801485E2 = (g_MenuPanelTasks[16].pos.y + ((D_8014857C - D_8014857B) * 0xD + 0x1A));
+        D_801485E2 = (g_MenuPanelTasks[16].pos.y + ((D_8014857C - g_MenuPanelTasks[16].unk_0B) * 0xD + 0x1A));
     }
     panel   = (MenuChoicePanel*)g_BattleChoicePanel;
     trigger = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if ((trigger & PADLleft) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        D_80148580 = 0x32;
+        g_MenuPanelTasks[16].unk_10 = 0x32;
+        /* D_8014857A and D_8014857C stay address symbols: a g_MenuPanelTasks[16] view changes the code. */
         D_8014857A -= 1;
         if ((s8)D_8014857A < 0) {
             D_8014857A = 3;
         }
     } else if ((trigger & PADLright) != 0) {
-        D_80148580 = 0x31;
+        g_MenuPanelTasks[16].unk_10 = 0x31;
         SND_PlayCue(EMI_CUE_ID(1, 1));
         D_8014857A += 1;
         if (D_8014857A >= 4u) {
@@ -106,7 +107,7 @@ MATCH void func_80098450(void) {
         D_801485DC                               = 0u;
         D_801EB5B1[((D_801EC328 - 1) & 0xF) * 8] = 1u;
         D_801454FD                               = D_8014857A;
-        D_801454FE                               = D_8014857B;
+        D_801454FE                               = g_MenuPanelTasks[16].unk_0B;
         D_801454FF                               = D_8014857C;
         g_BattleMessageSlot[0x119]               = 0u;
         SND_PlayCue(EMI_CUE_ID(1, 6));
@@ -116,12 +117,13 @@ MATCH void func_80098450(void) {
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         value                                 = D_801C893C[D_8014857A][D_8014857C] + (D_8014857A << 8);
         *(u16*)((char*)g_BattleActorTurn + 2) = value;
-        if ((func_801AF494(D_80148578, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {
+        if ((func_801AF494(g_MenuPanelTasks[16].unk_08, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) &
+             BYTE_MASK) == 0) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;
         }
         D_801454FD = D_8014857A;
-        D_801454FE = D_8014857B;
+        D_801454FE = g_MenuPanelTasks[16].unk_0B;
         D_801454FF = D_8014857C;
         SND_PlayCue(EMI_CUE_ID(1, 3));
         g_BattleChoicePhase = 1u;
