@@ -1525,7 +1525,10 @@ Area_RollEncounterThreshold = { addr = 0x801B3CCC, type = "func", source = "its 
 Area_CanStartEncounter = { addr = 0x801B3EB0, type = "func", source = "its body returns 0 when D_80145FB8 is 0 or above the limit and calls Area_BuildEncounter(4, 0); func_801B0568 and func_801B146C call it" }
 Party_CanSwitchLeader = { addr = 0x801B55C0, type = "func", source = "Reports whether the leader may be switched: false while a walk-busy flag is set or a party row of kind 2 holds none of s_MenuBattlerKinds" }
 Game_RequestLeaderSwitch = { addr = 0x801B5684, type = "func", source = "Starts the leader switch when FIELD_INPUT_SWITCH_LEADER is pressed with two or more party members: sets FIELD_TASK_MODE_LEADER_SWITCH, whose last step scrolls to the new lead" }
-Game_RequestPersonalAction = { addr = 0x801B5EBC, type = "func", source = "Starts the lead character's personal action when FIELD_INPUT_PERSONAL_ACTION is pressed outside the world map: sets FIELD_TASK_MODE_PERSONAL_ACTION, whose handler is picked from g_PersonalActions" }
+Game_FindRockAhead = { addr = 0x801B5AE4, type = "func", source = "Returns the g_ActorSlots index of the type 0x17 rock actor on the cell the leader faces, or -1" }
+Game_RequestPersonalAction = { addr = 0x801B5EBC, type = "func", source = "Starts the lead character's personal action when FIELD_INPUT_PERSONAL_ACTION is pressed outside the world map, except for Garr, Rei, Ryu in pajamas and Whelp: sets FIELD_TASK_MODE_PERSONAL_ACTION, whose handler is picked from g_PersonalActions" }
+Game_RequestRockKick = { addr = 0x801B5F68, type = "func", source = "Starts the Teepo or Peco personal action when the leader runs (walk speed index 4) into a rock actor (a type 0x17 actor) on the facing cell: records its actor slot in the work byte +0x0B and sets FIELD_TASK_MODE_PERSONAL_ACTION at step 1 (Teepo Kick, Peco Bump)" }
+Game_RequestGarrPush = { addr = 0x801B6044, type = "func", source = "Starts Garr's personal action when the leader is Garr and has walked 16 frames against an object facing a cardinal direction: counts the frames in the work byte +0x0B, then sets FIELD_TASK_MODE_PERSONAL_ACTION at step 0 (Garr Push)" }
 Area_StepSceneTimer = { addr = 0x801BC3B8, type = "func", source = "ticks the scene timer and runs Area_ResetScene on expiry, one body shared with exe/slus_004_22" }
 Area_ResetScene = { addr = 0x801BC400, type = "func", source = "clears the scroll counters and the work area +0x0C..+0x14 words, one body shared with exe/slus_004_22" }
 Party_CountOrder = { addr = 0x801BDB7C, type = "func", source = "counts the leading non-0xFF entries of the field order (mode 0) or battle order (mode 1); the body walks three bytes at D_80144F5A + mode * 3 up to 0xFF" }
@@ -1646,7 +1649,7 @@ D_801CD120 = { addr = 0x801CD120, size = 0x10 }
 D_801CD130 = { addr = 0x801CD130, size = 0x10 }
 D_801CD140 = { addr = 0x801CD140, size = 0x14 }
 D_801CD154 = { addr = 0x801CD154, size = 0x10 }
-g_PersonalActions = { addr = 0x801CD164, size = 0x4C, source = "The personal action of each field character module (plchar/plp*), indexed by the loaded character index &0x7F; FIELD_TASK_MODE_PERSONAL_ACTION calls the row" }
+g_PersonalActions = { addr = 0x801CD164, size = 0x4C, source = "The personal action dispatcher of each party combination module (plchar/plp*), indexed by the loaded party row &0x7F; it picks the leader's member position in the row (work byte unk_2C). FIELD_TASK_MODE_PERSONAL_ACTION calls it; started by Game_RequestPersonalAction, Game_RequestGarrPush and Game_RequestRockKick" }
 D_801CD1B0 = { addr = 0x801CD1B0, size = 0x8 }
 s_EncounterStepThresholds = { addr = 0x801CD1B8, size = 0x10, source = "func_801B3CCC takes the total and random cap pair for a menu entry" }
 D_801CD1B9 = { addr = 0x801CD1B9, size = 0x1, alias = true }
