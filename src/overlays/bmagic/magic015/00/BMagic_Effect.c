@@ -91,6 +91,7 @@ MATCH void func_801EFB90(void) {
 
 INCLUDE_ASM(func_801EFBD8);
 
+/* Blocker: the z halfword at +0x3E is loaded unsigned (lhu) and summed with the 0x14 cell; COORD_INT is s16, so it gives lh. Same blocker as func_801F0DB4. */
 INCLUDE_ASM(func_801EFCC4);
 
 MATCH void func_801EFD7C(void) {
