@@ -3,35 +3,35 @@
 MATCH void func_801E72F4(void) {
     PartyBattler* scratch;
 
-    g_Task->header.flags = (D_801EB4E0->header.flags | ACTOR_FLAG_SEMI_TRANSPARENT);
-    g_Task->unk_48       = D_801EB4E0->unk_48;
+    g_Task->header.flags = (g_BattleEffectBattler->header.flags | ACTOR_FLAG_SEMI_TRANSPARENT);
+    g_Task->unk_48       = g_BattleEffectBattler->unk_48;
 
     scratch          = g_Task;
-    scratch->scale.x = D_801EB4E0->scale.x;
-    scratch->scale.y = D_801EB4E0->scale.y;
-    scratch->unk_58  = D_801EB4E0->unk_58;
+    scratch->scale.x = g_BattleEffectBattler->scale.x;
+    scratch->scale.y = g_BattleEffectBattler->scale.y;
+    scratch->unk_58  = g_BattleEffectBattler->unk_58;
     scratch->unk_5A  = BATTLE_ACTIVE_WORK->unk_5A;
-    scratch->unk_4B  = D_801EB4E0->unk_4B;
+    scratch->unk_4B  = g_BattleEffectBattler->unk_4B;
 
-    g_Task->unk_4A = D_801EB4E0->unk_4A;
-    g_Task->unk_49 = D_801EB4E0->unk_49;
+    g_Task->unk_4A = g_BattleEffectBattler->unk_4A;
+    g_Task->unk_49 = g_BattleEffectBattler->unk_49;
 
     scratch         = g_Task;
     scratch->unk_4C = BATTLE_ACTIVE_WORK->unk_4C;
     scratch->unk_50 = BATTLE_ACTIVE_WORK->unk_50;
     scratch->unk_54 = BATTLE_ACTIVE_WORK->unk_54;
-    scratch->unk_27 = D_801EB4E0->unk_27;
+    scratch->unk_27 = g_BattleEffectBattler->unk_27;
 
-    g_Task->unk_28 = D_801EB4E0->unk_28;
-    g_Task->unk_2A = D_801EB4E0->unk_2A;
+    g_Task->unk_28 = g_BattleEffectBattler->unk_28;
+    g_Task->unk_2A = g_BattleEffectBattler->unk_2A;
 
     scratch              = g_Task;
-    scratch->pos.x.fixed = D_801EB4E0->pos.x.fixed;
-    scratch->pos.y.fixed = D_801EB4E0->pos.y.fixed;
-    scratch->pos.z.fixed = D_801EB4E0->pos.z.fixed;
+    scratch->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+    scratch->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+    scratch->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
 
     func_8014D290();
-    if (!ACTOR_IN_USE(*D_801EB4E0)) {
+    if (!ACTOR_IN_USE(*g_BattleEffectBattler)) {
         func_801E5988();
     }
     if (g_BattleMode != 1) {

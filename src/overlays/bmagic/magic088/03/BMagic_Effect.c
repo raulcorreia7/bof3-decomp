@@ -122,7 +122,7 @@ MATCH void func_801EFA2C(void) {
     timer_next    = g_Task->timer - 1;
     g_Task->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
 }

@@ -104,7 +104,7 @@ MATCH void func_801F0030(void) {
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0x10) {
-        D_801EB4E0->param.unk_0B = 1;
+        g_BattleEffectBattler->param.unk_0B = 1;
         g_Task->header.step += 1;
     }
 }
@@ -112,7 +112,7 @@ MATCH void func_801F0030(void) {
 MATCH void func_801F0090(void) {
     PartyBattler* work;
 
-    work = (PartyBattler*)D_801EB4E0;
+    work = (PartyBattler*)g_BattleEffectBattler;
     if (work->param.unk_0B == 0x83) {
         g_Task->header.step++;
     }
@@ -130,7 +130,7 @@ MATCH void func_801F0254(void) {
 }
 
 MATCH void func_801F02CC(void) {
-    if (D_801EB4E0->param.unk_0B == 1) {
+    if (g_BattleEffectBattler->param.unk_0B == 1) {
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }
@@ -142,7 +142,7 @@ MATCH void func_801F031C(void) {
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0x1E) {
-        D_801EB4E0->param.unk_0B = 2;
+        g_BattleEffectBattler->param.unk_0B = 2;
         g_Task->header.step += 1;
     }
 }
@@ -150,7 +150,7 @@ MATCH void func_801F031C(void) {
 MATCH void func_801F037C(void) {
     PartyBattler* work;
 
-    work = (PartyBattler*)D_801EB4E0;
+    work = (PartyBattler*)g_BattleEffectBattler;
     if (work->param.unk_0B == 0x83) {
         g_Task->header.step++;
     }

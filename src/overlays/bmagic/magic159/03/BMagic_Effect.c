@@ -25,7 +25,7 @@ MATCH void func_801EEEC8(void) {
     PartyBattler* dst;
 
     if (--g_Task->unk_09 == 0) {
-        src              = D_801EB4E0;
+        src              = g_BattleEffectBattler;
         dst              = g_Task;
         dst->pos.x.fixed = src->pos.x.fixed;
         dst->pos.y.fixed = src->pos.y.fixed;

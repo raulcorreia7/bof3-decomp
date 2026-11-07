@@ -2,8 +2,8 @@
 
 MATCH void func_800C2E04(void) {
     if (func_801E3160() & 0xFF) {
-        D_801EB4E0->header.mode += 1;
-        D_801EB4E0->header.step = 0;
+        g_BattleEffectBattler->header.mode += 1;
+        g_BattleEffectBattler->header.step = 0;
         func_801E5988();
         return;
     }

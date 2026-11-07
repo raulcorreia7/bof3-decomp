@@ -19,10 +19,10 @@ MATCH void func_801EEDA4(void) {
 INCLUDE_ASM(func_801EEDE8);
 
 MATCH void func_801EEF08(void) {
-    g_Task->facing      = D_801EB4E0->facing;
-    g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
-    g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
-    g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
+    g_Task->facing      = g_BattleEffectBattler->facing;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
     func_801EF1B0();
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
@@ -80,7 +80,7 @@ MATCH void func_801EF118(void) {
     timer_next    = g_Task->timer - 4;
     g_Task->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }

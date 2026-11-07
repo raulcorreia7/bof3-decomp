@@ -90,7 +90,7 @@ MATCH void func_801EFBE4(void) {
     next        = work->timer + 1;
     work->timer = next;
     if (next == 0x18) {
-        D_801EB4E0->param.unk_0B--;
+        g_BattleEffectBattler->param.unk_0B--;
         func_801E5988();
     }
 }

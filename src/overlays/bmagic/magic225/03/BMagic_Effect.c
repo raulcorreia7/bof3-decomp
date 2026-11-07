@@ -36,7 +36,7 @@ MATCH void func_801EF578(void) {
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
 
 MATCH void func_801EF628(void) {
-    if (D_801EB4E0->param.unk_0B < 2U) {
+    if (g_BattleEffectBattler->param.unk_0B < 2U) {
         g_Task->param.unk_0B = 1;
         g_Task->header.step += 1;
     }

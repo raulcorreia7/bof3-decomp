@@ -6,7 +6,7 @@ MATCH void func_801E71EC(void) {
     u8  index;
 
     if ((g_BattleState & BATTLE_STATE_EFFECT_PLAYING) != 0) {
-        field = &D_801EB4E0->slot;
+        field = &g_BattleEffectBattler->slot;
         index = *field;
         if (index < 3) {
             flags = g_BattlePartyBattlers[index].chr.status & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);

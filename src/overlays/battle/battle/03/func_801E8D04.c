@@ -4,7 +4,7 @@
  * threshold, clears the slot's paired flag words before running the shared
  * battle step; otherwise advances the counter.
  *
- * The non-volatile view of D_801EB4E0 is load-bearing: retail's counter store
+ * The non-volatile view of g_BattleEffectBattler is load-bearing: retail's counter store
  * sits in the return-jump delay slot, which the assembler's delay-slot
  * filling only moves for a non-volatile store.
  */

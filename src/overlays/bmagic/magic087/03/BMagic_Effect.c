@@ -50,7 +50,7 @@ MATCH void func_801EF530(void) {
     PartyBattler* work;
 
     if (g_Task->param.unk_0B == 0x80) {
-        work               = (PartyBattler*)D_801EB4E0;
+        work               = (PartyBattler*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         func_801E5988();
     }

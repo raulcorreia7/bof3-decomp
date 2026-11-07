@@ -10,14 +10,14 @@ MATCH void func_801E7778(void) {
     u32           step;
     u32           value;
 
-    D_801EB4E0->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    work = D_801EB4E0;
+    g_BattleEffectBattler->header.flags &= ~ACTOR_FLAG_HIDDEN;
+    work = g_BattleEffectBattler;
     step = work->scale.x;
     if (step != 0x10000) {
         work->scale.x = step + 0x2000;
     } else {
         work->unk_48 = 0;
-        index        = D_801EB4E0->slot;
+        index        = g_BattleEffectBattler->slot;
         value        = g_BattlePartyBattlers[index].turn.damage_flags.value & 0xFFFFDFFFu;
         g_BattlePartyBattlers[index].turn.damage_flags.value = value;
         func_801E5988();

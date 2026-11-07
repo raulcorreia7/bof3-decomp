@@ -46,7 +46,7 @@ MATCH void func_801EF388(void) {
             func_800AF814(g_Task->unk_03);
             func_800A9820(g_Task->unk_03);
         }
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }
