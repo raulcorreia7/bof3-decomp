@@ -13,18 +13,18 @@ MATCH void func_801EF47C(void) {
         D_801F17B4->pos.z  = battler->pos.z;
         D_801F17B4->unk_20 = battler->unk_2E.half;
         D_801F17B4->unk_22 = battler->unk_30.half;
-        if (D_801F00BC[D_801F17B4->unk_07 & 0x1F].x < 0) {
-            D_801F17B4->unk_20 += D_801F00BC[D_801F17B4->unk_07 & 0x1F].x - (rand() & 7);
+        if (D_801F00BC[D_801F17B4->unk_07 & EFFECT_SPARKLE_ROW_MASK].x < 0) {
+            D_801F17B4->unk_20 += D_801F00BC[D_801F17B4->unk_07 & EFFECT_SPARKLE_ROW_MASK].x - RANDOM_MASK(7);
         } else {
-            D_801F17B4->unk_20 += D_801F00BC[D_801F17B4->unk_07 & 0x1F].x + (rand() & 7);
+            D_801F17B4->unk_20 += D_801F00BC[D_801F17B4->unk_07 & EFFECT_SPARKLE_ROW_MASK].x + RANDOM_MASK(7);
         }
-        D_801F17B4->unk_22 -= D_801F00BC[D_801F17B4->unk_07 & 0x1F].y + (rand() & 7);
+        D_801F17B4->unk_22 -= D_801F00BC[D_801F17B4->unk_07 & EFFECT_SPARKLE_ROW_MASK].y + RANDOM_MASK(7);
         /* FAKE: reread the work pointer after the y store. */
         MATCH_FAKE_BARRIER();
         D_801F17B4->unk_08   = D_801F17B4->unk_20;
-        D_801F17B4->unk_0A   = rand() & 1;
+        D_801F17B4->unk_0A   = RANDOM_MASK(1);
         D_801F17B4->phase_0C = rand();
-        D_801F17B4->unk_07   = D_801F01A8[D_801F17B4->unk_04] + (rand() & 6);
+        D_801F17B4->unk_07   = D_801F01A8[D_801F17B4->unk_04] + RANDOM_MASK(6);
         D_801F17B4->timer_05 = 16;
         D_801F17B4->unk_06   = 0;
         D_801F17B4->header.step++;
