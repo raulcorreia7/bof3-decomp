@@ -58,7 +58,7 @@ segments:
       - [0x2978, c, func_801F5578]
       - [0x29EC, c, func_801F55EC]
       - [0x2A4C, c, Actor_StopMoving]
-      - [0x2A84, c, func_801F5684]
+      - [0x2A84, c, Actor_TurnByPad]
       - [0x2B34, c, func_801F5734]
       - [0x2B98, c, Area_StepRunGauge]
       - [0x2D18, c, func_801F5918]
