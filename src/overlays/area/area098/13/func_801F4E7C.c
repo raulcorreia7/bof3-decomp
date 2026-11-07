@@ -1,8 +1,5 @@
 #include "area098_13.h"
 
-extern void (*D_801F5FBC[])(void* slot);
-void func_801F4BC0(void* slot);
-
 MATCH s32 func_801F4E7C(void) {
     u8  i;
     s32 live;

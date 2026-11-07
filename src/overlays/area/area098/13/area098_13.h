@@ -31,8 +31,9 @@ extern Callback D_801F5F68[];
 extern Callback D_801F5F7C[];
 extern Callback D_801F5F88[];
 extern Callback D_801F5FAC[];
-extern u8       D_801F6510;
-extern u8       D_801F6514;
+extern void (*D_801F5FBC[])(void* slot);
+extern u8 D_801F6510;
+extern u8 D_801F6514;
 
 /* The per-image spawn step Area_AdvanceSpawnTimer runs between the slot claim and the slot pass. */
 #define AREA_SPAWN_TICK             func_801F5940
@@ -54,6 +55,7 @@ void func_801F46EC(void* arg0, s32 arg1, s32 arg2);
 s32  func_801F4E7C(void);
 
 void func_801F48E8(void* arg0, void* arg1, void* arg2);
+void func_801F4BC0(void* slot);
 void func_801F4DBC(s32 arg0);
 void func_801F5580(s32 arg0);
 
