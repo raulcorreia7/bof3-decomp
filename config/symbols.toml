@@ -1389,8 +1389,16 @@ Fairy_ShowPlayRecordMessage = { addr = 0x801F1318, type = "func", source = "form
 Scene_ClearEventState = { addr = 0x801F1684, type = "func", source = "clears the script-active flag and the three scene event state bytes at D_801448EB" }
 Fairy_GrantGift = { addr = 0x801F18F8, type = "func", source = "claims the gift-shop row earned by the fairy's battle count and queues its item and message 0x96" }
 Fairy_RollExploreReward = { addr = 0x801F1BC8, type = "func", source = "rolls the weighted D_801EEC98 reward table for the fairy's job and queues the item or its message" }
+g_FairyCommu01StepFuncs = { addr = 0x801F25EC, source = "the 6 step handlers of the commu01 scene that the village runs through func_801F16BC, indexed by g_SceneEventStep; entry 3 is the commu01 overlay entry" }
+g_FairyGiftStepFuncs = { addr = 0x801F2604, source = "the 3 step handlers of the fairy gift event, starting with Fairy_GrantGift, run through func_801F18BC and indexed by g_SceneEventStep" }
+g_FairyExploreRewardStepFuncs = { addr = 0x801F2610, source = "the step handler of the fairy explore-reward event, Fairy_RollExploreReward, run through func_801F1B8C and indexed by g_SceneEventStep" }
 g_FairyExploreRewards = { addr = 0x801F2618, source = "Fairy_RollExploreReward reads the FairyExploreReward table" }
 
+g_FairyCommu02StepFuncs = { addr = 0x801F2678, source = "the 5 step handlers of the commu02 scene that the village runs through func_801F1E74, indexed by g_SceneEventStep" }
+g_FairyCommu02EntryFuncs = { addr = 0x801F268C, source = "the 4 overlay entries of the commu02 scene events 0 to 3, called by func_801F1F10 and indexed by g_SceneEventSelection" }
+g_FairyCommu03StepFuncs = { addr = 0x801F269C, source = "the 5 step handlers of the commu03 scene that the village runs through func_801F1F9C, indexed by g_SceneEventStep; entry 2 is the commu03 overlay entry" }
+g_FairyCommu04StepFuncs = { addr = 0x801F26B0, source = "the 7 step handlers of the commu04 scene that the village runs through func_801F2020, indexed by g_SceneEventStep; entry 4 is the commu04 overlay entry" }
+g_FairyCommu05StepFuncs = { addr = 0x801F26EC, source = "the 5 step handlers of the commu05 scene that the village runs through func_801F228C, indexed by g_SceneEventStep; entry 2 is the commu05 overlay entry" }
 g_Fairies = { addr = 0x801F2700, source = "Fairy_JoinVillage copies the 5-byte name of a 9-byte roster row" }
 ["emi/etc/commu01/07"]
 func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "overlay entry loads D_801F294C and calls D_801D4BCC[step]" }
@@ -1834,7 +1842,11 @@ Menu_DrawAbilityList = { addr = 0x801DCE5C, type = "func", source = "draws the a
 Menu_DrawPanelFrame = { addr = 0x801DD350, type = "func", source = "draws the tiled border of a menu panel, called by Shop_DrawItems in emi/etc/shop/00" }
 SAVE_DrawSlot = { addr = 0x801DDCB0, type = "func", source = "draws one stock row window, icons, name and formatted values, shared name with the start overlay" }
 Menu_SwapBytes_801DF464 = { addr = 0x801DF464, type = "func", source = "byte-identical to Menu_SwapBytes at emi/etc/shop/00@0x801D7E08" }
+Menu_RunAbilityStockSort = { addr = 0x801E1B80, type = "func", source = "runs the stock command the cursor row selects through g_AbilityStockSortFuncs" }
 Menu_SwapBytes_801E1BB8 = { addr = 0x801E1BB8, type = "func", source = "byte-identical to Menu_SwapBytes at emi/etc/shop/00@0x801D7E08" }
+Menu_PackAbilityStock = { addr = 0x801E1BCC, type = "func", source = "moves the empty slots of the 128-entry ability stock to its end" }
+Menu_SortAbilityStockByCostDescending = { addr = 0x801E1C88, type = "func", source = "packs the ability stock, then orders it by the ability cost, highest first" }
+Menu_SortAbilityStockByCostAscending = { addr = 0x801E1D84, type = "func", source = "packs the ability stock, then orders it by the ability cost, lowest first" }
 Menu_DrawPanelCursor = { addr = 0x801E2B94, type = "func", source = "draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite" }
 Shop_DrawItems = { addr = 0x801E2F04, type = "func", source = "draws the shop's item rows with price, icon, name and the affordable/selected shading" }
 Party_HasSkill = { addr = 0x801E4D4C, type = "func", source = "searches the seven character item rows and the 128-entry item list for item_id" }
@@ -1886,6 +1898,7 @@ g_ShopStep6Sub3Funcs = { addr = 0x801E5C08, source = "handler table: dispatched 
 g_ShopStep7Funcs = { addr = 0x801E5CE8, source = "handler table: dispatched through the table position of its owning step function" }
 g_ShopStep7Sub2Funcs = { addr = 0x801E5CFC, source = "handler table: dispatched through the table position of its owning step function" }
 g_ShopStep7Sub3Funcs = { addr = 0x801E5D10, source = "handler table: dispatched through the table position of its owning step function" }
+g_AbilityStockSortFuncs = { addr = 0x801E5D2C, source = "the stock commands of the ability menu, indexed by its cursor row: pack, sort by cost highest first, sort by cost lowest first" }
 g_ShopStep9Funcs = { addr = 0x801E5D3C, source = "handler table: dispatched through the table position of its owning step function" }
 g_ShopStep9Sub0Funcs = { addr = 0x801E5D48, source = "handler table: dispatched through the table position of its owning step function" }
 g_ShopStep9Sub1Funcs = { addr = 0x801E5D50, source = "handler table: dispatched through the table position of its owning step function" }
