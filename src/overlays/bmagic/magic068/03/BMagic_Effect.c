@@ -28,6 +28,7 @@ MATCH void func_801EF4A8(void) {
     }
 }
 
+/* blocker: g_BattleState kept as an address (lui/addiu, lhu 0, sh 0); first diff: lhu at 0x801EF508 folds into the global. */
 INCLUDE_ASM(func_801EF4EC);
 
 INCLUDE_ASM(func_801EF55C);
