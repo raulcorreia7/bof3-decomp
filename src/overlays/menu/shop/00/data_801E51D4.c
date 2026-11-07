@@ -1,6 +1,6 @@
 #include "shop_00.h"
 
-Callback D_801E51D4[5] = {
+Callback g_ShopStep8Sub2Funcs[SHOP_STEP8_SUB2_COUNT] = {
     func_801D2828,
     func_801D28D0,
     func_801D2D64,

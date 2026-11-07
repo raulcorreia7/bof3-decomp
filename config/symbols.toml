@@ -1784,6 +1784,20 @@ Menu_SwapBytes_801E1BB8 = { addr = 0x801E1BB8, type = "func", source = "byte-ide
 Menu_DrawPanelCursor = { addr = 0x801E2B94, type = "func", source = "draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite" }
 Shop_DrawItems = { addr = 0x801E2F04, type = "func", source = "draws the shop's item rows with price, icon, name and the affordable/selected shading" }
 Party_HasSkill = { addr = 0x801E4D4C, type = "func", source = "searches the seven character item rows and the 128-entry item list for item_id" }
+g_ShopStepFuncs = { addr = 0x801E5144, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep2Funcs = { addr = 0x801E5170, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep2Sub0Funcs = { addr = 0x801E5184, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep2Sub1Funcs = { addr = 0x801E518C, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep2Sub2Funcs = { addr = 0x801E5190, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep2Sub3Funcs = { addr = 0x801E51B0, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep8Funcs = { addr = 0x801E51C4, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep8Sub2Funcs = { addr = 0x801E51D4, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep3Funcs = { addr = 0x801E52C4, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep3Sub1Funcs = { addr = 0x801E52D8, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep3Sub2Funcs = { addr = 0x801E52F0, source = "handler table: dispatched through the table position of its owning step function" }
+g_SaveStateFuncs = { addr = 0x801E530C, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep10Funcs = { addr = 0x801E5360, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep5Funcs = { addr = 0x801E545C, source = "handler table: dispatched through the table position of its owning step function" }
 MENU_STAT_GLYPH_0 = { addr = 0x801E550C, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_0 in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
 MENU_STAT_GLYPH_1 = { addr = 0x801E5538, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_1 in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
 MENU_STAT_GLYPH_2 = { addr = 0x801E5544, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_2 in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
@@ -1807,6 +1821,16 @@ g_MenuCommandRows = { addr = 0x801E59C0, source = "5-byte rows (button count, fo
 MENU_CLUT_STRIP_CELLS = { addr = 0x801E5A24, source = "the 4-byte sprite cells the CLUT strip body walks, shared name with emi/etc/start/08" }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801E5AD0, source = "the sprite-cell indices the CLUT strip body walks, shared name with emi/etc/start/08" }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801E5B1C, source = "the four per-clut entry offsets the CLUT strip body reads, shared name with emi/etc/start/08" }
+g_ShopStep6Funcs = { addr = 0x801E5BEC, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep6Sub0Funcs = { addr = 0x801E5BFC, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep6Sub3Funcs = { addr = 0x801E5C08, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep7Funcs = { addr = 0x801E5CE8, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep7Sub2Funcs = { addr = 0x801E5CFC, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep7Sub3Funcs = { addr = 0x801E5D10, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep9Funcs = { addr = 0x801E5D3C, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep9Sub0Funcs = { addr = 0x801E5D48, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep9Sub1Funcs = { addr = 0x801E5D50, source = "handler table: dispatched through the table position of its owning step function" }
+g_ShopStep9Sub2Funcs = { addr = 0x801E5D5C, source = "handler table: dispatched through the table position of its owning step function" }
 g_ShopStockIndex = { addr = 0x801E6044, source = "read:func_801D163C@0x801D163C indexes the shop stock rows at D_8018E7CC (count byte, then category and item pairs) with it and wraps it at the count" }
 g_ShopItemCategory = { addr = 0x801E6048, source = "read:func_801D1D60@0x801D1D60 passes it as the Item_Add and Item_GetKind category; func_801D163C@0x801D163C loads it from the shop stock row" }
 g_ShopItemId = { addr = 0x801E604C, source = "read:func_801D1D60@0x801D1D60 passes it as the Item_Add item; func_801D163C@0x801D163C loads it from the shop stock row" }
@@ -1836,9 +1860,15 @@ g_MenuLabelPower = { addr = 0x801D4038, source = "retail text Pwr, drawn beside 
 g_MenuLabelDefense = { addr = 0x801D403C, source = "retail text Def, drawn beside the defense stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelIntellect = { addr = 0x801D4040, source = "retail text Int, drawn beside the intellect stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelAgility = { addr = 0x801D4044, source = "retail text Agl, drawn beside the agility stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
+g_MenuLabelPoison = { addr = 0x801D4048, source = "Master_DrawPartyRow draws it for STATUS_POISONED; its text is Pois" }
+g_MenuLabelConfusion = { addr = 0x801D4050, source = "Master_DrawPartyRow draws it for STATUS_CONFUSED; its text is Conf" }
 g_MasterSkills = { addr = 0x801D4088, source = "read:func_801D3A24@0x801D3A24 compares the level of each row of the current master and teaches the row's ability" }
 g_MasterStats = { addr = 0x801D4154, source = "write:func_801D2CA4@0x801D2CA4 copies the row of the current master into the character's level_up_modifiers" }
 g_MasterMessageIds = { addr = 0x801D41BC, source = "read:func_801D2CA4@0x801D2CA4 adds an offset to the entry of the current master and passes it to Message_StartAreaMessage" }
+g_MasterStep2Funcs = { addr = 0x801D4204, source = "sub-handler table dispatched by func_801D278C, entry 2 of g_MasterMenuFuncs" }
+g_MasterStep3Funcs = { addr = 0x801D421C, source = "sub-handler table dispatched by func_801D2BE8, entry 3 of g_MasterMenuFuncs" }
+g_MasterStep4Funcs = { addr = 0x801D4240, source = "sub-handler table dispatched by func_801D32D4, entry 4 of g_MasterMenuFuncs" }
+g_MasterStep5Funcs = { addr = 0x801D4264, source = "sub-handler table dispatched by func_801D3924, entry 5 of g_MasterMenuFuncs" }
 g_MasterBannerLock = { addr = 0x801D4284, source = "set when the info banner owns the panel" }
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
@@ -1898,7 +1928,12 @@ Menu_SlidePanelLeft = { addr = 0x801EA070, type = "func", source = "slides the m
 Menu_DrawPanelCursor = { addr = 0x801EA198, type = "func", source = "draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite" }
 Menu_SlidePanelLeft_801EA900 = { addr = 0x801EA900, type = "func", source = "byte-identical to Menu_SlidePanelLeft at emi/etc/start/08@0x801EA070" }
 s_CampMenuPanelIds = { addr = 0x801EC354, source = "func_801E9350 draws the seven start-menu panel slots with these panel ids" }
+g_MenuStartStepFuncs = { addr = 0x801EC35C, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuStartStep6Funcs = { addr = 0x801EC394, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuStartStep2Funcs = { addr = 0x801EC3A8, source = "handler table: dispatched through the table position of its owning step function" }
 s_EquipSlotCategories = { addr = 0x801EC458, source = "func_801D6E6C uses these cue ids for the six party slot sound updates" }
+g_MenuStartStep5Funcs = { addr = 0x801EC518, source = "handler table: dispatched through the table position of its owning step function" }
+g_MenuStartStep5Sub2Funcs = { addr = 0x801EC530, source = "handler table: dispatched through the table position of its owning step function" }
 MENU_STAT_GLYPH_0 = { addr = 0x801EC628, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_0 in emi/etc/start/08 (twin rule, decomp/layout#shared-bodies)" }
 MENU_STAT_GLYPH_1 = { addr = 0x801EC654, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_1 in emi/etc/start/08 (twin rule, decomp/layout#shared-bodies)" }
 MENU_STAT_GLYPH_2 = { addr = 0x801EC660, source = "Menu_DrawStatPanel.h binds MENU_STAT_GLYPH_2 in emi/etc/start/08 (twin rule, decomp/layout#shared-bodies)" }
