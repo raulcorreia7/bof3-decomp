@@ -23,6 +23,8 @@ extern u8 D_801F0194[];
 /* The launch delay between each group of four sparkles, per kind. */
 extern u8 D_801F019C[];
 
-u32 BMagic_AllocEffect(void);
+u32                      BMagic_AllocEffect(void);
+extern BMagicEffectFuncs D_801EEC04;
+void                     func_801EF338(void);
 
 #endif
