@@ -11,9 +11,9 @@ MATCH void func_801E7634(void) {
 
     if (EMI_LoaderIsReady() != 0) {
         saved       = g_Task;
-        g_Task      = D_801EB4E0;
-        g_GameState = &g_BattlePartyBattlers[D_801EB4E0->slot];
-        Actor_SelectScript((D_801EB4E0->facing + 4) & BYTE_MASK);
+        g_Task      = g_BattleEffectBattler;
+        g_GameState = &g_BattlePartyBattlers[g_BattleEffectBattler->slot];
+        Actor_SelectScript((g_BattleEffectBattler->facing + 4) & BYTE_MASK);
         GFX_FreePaletteFadeTarget(&g_BattlePartyBattlers[g_Task->slot]);
         GFX_StagePalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
         func_801DDAB4(g_BattlePartyBattlers[g_Task->slot].chr.status);

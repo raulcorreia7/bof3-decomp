@@ -33,13 +33,13 @@ MATCH void func_801EF1EC(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        g_Task->facing = D_801EB4E0->facing;
+        g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = 0;
         g_Task->unk_10 = g_Task->param.unk_0B << 0xF;
         func_801DD350(g_Task);
-        g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed + g_Task->unk_0C;
-        g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed + g_Task->unk_10;
-        g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
         g_Task->scale.x     = 0x8000;
         g_Task->scale.y     = 0x8000;
         g_Task->unk_48      = 2;
@@ -81,7 +81,7 @@ MATCH void func_801EF3E4(void) {
     work->unk_09 = timer;
     work->scale.y -= 0x8000;
     if (timer == 0) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -89,7 +89,7 @@ MATCH void func_801EF3E4(void) {
 MATCH void func_801EF454(void) {
     g_Task->scale.y -= 0x1000;
     if ((s8)g_Task->unk_5F == -0x80) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -106,12 +106,12 @@ MATCH void func_801EF58C(void) {
     if (!(timer & 0xFF)) {
         func_8014DAEC();
         func_800AFC98(2, 4);
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
     } else if (func_8014DAEC() & 0xFF) {
         func_800AFC98(2, 4);
         g_Task->unk_09 = 0;
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
 }

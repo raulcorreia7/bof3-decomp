@@ -9,7 +9,7 @@
  * source tables and writes them into the current queued object.
  */
 MATCH void func_801E8DD8(void) {
-    u8* slot = (u8*)D_801EB4E0;
+    u8* slot = (u8*)g_BattleEffectBattler;
     s8  offset_x;
     u8  offset_y;
     s32 row;
@@ -28,7 +28,7 @@ MATCH void func_801E8DD8(void) {
             offset_y = D_801EB109[D_80145F09[row][0] * 2u];
         }
         dst->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
-        g_Task->depth    = *(u16*)(((u8*)D_801EB4E0 + 0x32u));
+        g_Task->depth    = *(u16*)(((u8*)g_BattleEffectBattler + 0x32u));
     } else {
         row = slot[5];
         row -= 3;

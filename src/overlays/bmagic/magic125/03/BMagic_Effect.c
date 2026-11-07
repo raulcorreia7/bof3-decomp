@@ -22,9 +22,9 @@ MATCH void func_801EEFF8(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & 0xFF)) {
-        g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
-        g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
-        g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed + 0x04000000;
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x04000000;
         g_Task->unk_5D      = (rand() & 3) + 4;
         g_Task->unk_5E      = (rand() & 3) + 4;
         g_Task->unk_5F      = (rand() & 3) + 4;
@@ -70,9 +70,9 @@ MATCH void func_801EF890(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
-        g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
-        g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
         g_Task->unk_5D      = 0xF;
         g_Task->unk_5E      = 0xF;
         g_Task->unk_5F      = 0xF;

@@ -963,7 +963,7 @@ void               func_801EEEC8(void);
 static inline void BattleDrainWorkCounter(void) {
     PartyBattler* work;
 
-    work = D_801EB4E0;
+    work = g_BattleEffectBattler;
     if (work->scale.x != 0) {
         work->scale.x -= 0x2000;
     } else {

@@ -39,7 +39,7 @@ MATCH void func_801EF698(void) {
     g_Task->unk_5E -= 8;
     g_Task->unk_5F -= 8;
     if ((s8)g_Task->unk_5D == -0x80) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }

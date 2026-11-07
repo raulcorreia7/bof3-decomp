@@ -72,7 +72,7 @@ MATCH void func_801EF6A8(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = ((g_Task->timer & 0x1F) - 2) << 7;
-    src    = (PartyBattler*)D_801EB4E0;
+    src    = (PartyBattler*)g_BattleEffectBattler;
     pos.vx = (src->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (src->pos.y.fixed >> 9) - 0x4000;
     pos.vz = -(COORD_INT(src->pos.z) + 0x200) / 2;

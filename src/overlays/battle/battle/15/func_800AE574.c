@@ -18,7 +18,7 @@ MATCH void func_800AE574(void) {
         return;
     }
 
-    source              = D_801EB4E0;
+    source              = g_BattleEffectBattler;
     second              = (PartyBattler*)g_Task;
     second->pos.x.fixed = source->pos.x.fixed;
     second->pos.y.fixed = source->pos.y.fixed;

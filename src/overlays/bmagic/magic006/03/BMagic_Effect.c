@@ -25,9 +25,9 @@ MATCH void func_801EEF28(void) {
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
     if (!(value & 0xFF)) {
-        g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
-        g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
-        g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed + TO_COORD(128);
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(128);
         func_800AF764();
         battler        = g_BattleSelectedActor;
         g_Task->unk_0C = ratan2(battler->pos.x.fixed - g_Task->pos.x.fixed, battler->pos.y.fixed - g_Task->pos.y.fixed);

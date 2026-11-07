@@ -7,7 +7,7 @@ MATCH void func_800C1BF0(void) {
     u8            value3;
 
     battler = g_Task;
-    g_Task  = D_801EB4E0;
+    g_Task  = g_BattleEffectBattler;
     func_8014DAEC();
     g_Task = battler;
     value2 = battler->unk_09;
@@ -22,8 +22,8 @@ MATCH void func_800C1BF0(void) {
     }
     value3 = g_Task->timer;
     if (value3 == 0) {
-        D_801EB4E0->header.mode = 5;
-        D_801EB4E0->header.step = 0;
+        g_BattleEffectBattler->header.mode = 5;
+        g_BattleEffectBattler->header.step = 0;
         func_800A9820(g_BattleTargetSelector);
         g_Task->header.mode += 1;
         return;

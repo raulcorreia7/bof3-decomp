@@ -39,7 +39,7 @@ NON_MATCHING void func_801E7BA0(void) {
     void*         var_a2_201;
 
     if (EMI_LoaderIsReady() != 0) {
-        GFX_FreePaletteFadeTarget(&g_BattlePartyBattlers[D_801EB4E0->slot]);
+        GFX_FreePaletteFadeTarget(&g_BattlePartyBattlers[g_BattleEffectBattler->slot]);
         if (*(u16*)(&g_BattleState) & BATTLE_STATE_RELOAD_PARTY) {
             g_BattleLivingPartyCount = 0;
             g_BattlePartyCount       = D_801463CF;
@@ -71,17 +71,17 @@ NON_MATCHING void func_801E7BA0(void) {
         }
         var_s1 = SP_PTR(PartyBattler, 0x0);
         var_s1 = g_Task;
-        TASK_SET(D_801EB4E0);
-        g_GameState = &g_BattlePartyBattlers[D_801EB4E0->slot];
-        temp_a0_132 = D_801EB4E0->slot * BATTLE_PARTY_STRIDE;
-        temp_v1_135 = g_BattlePartyBattlers[D_801EB4E0->slot].chr.level;
+        TASK_SET(g_BattleEffectBattler);
+        g_GameState = &g_BattlePartyBattlers[g_BattleEffectBattler->slot];
+        temp_a0_132 = g_BattleEffectBattler->slot * BATTLE_PARTY_STRIDE;
+        temp_v1_135 = g_BattlePartyBattlers[g_BattleEffectBattler->slot].chr.level;
         if ((temp_v1_135 == 7) || (temp_v1_135 == 0)) {
             D_801EB4C8  = *(D_80145F1A + temp_a0_132);
-            temp_a0_154 = *(D_80145F10 + (D_801EB4E0->slot * BATTLE_PARTY_STRIDE));
+            temp_a0_154 = *(D_80145F10 + (g_BattleEffectBattler->slot * BATTLE_PARTY_STRIDE));
             D_801EB4CC  = temp_a0_154;
-            temp_v1_165 = *(&D_80145FB4 + (D_801EB4E0->slot * BATTLE_PARTY_STRIDE));
+            temp_v1_165 = *(&D_80145FB4 + (g_BattleEffectBattler->slot * BATTLE_PARTY_STRIDE));
             D_801EB4D0  = temp_v1_165;
-            temp_v0_176 = g_BattlePartyBattlers[D_801EB4E0->slot].turn.action_flags.volatile_value;
+            temp_v0_176 = g_BattlePartyBattlers[g_BattleEffectBattler->slot].turn.action_flags.volatile_value;
             D_801EB4CC  = temp_a0_154 & 0xBFFF;
             D_801EB4D0  = temp_v1_165 & 0xFFFE7FFF;
             D_801EB4D4  = temp_v0_176;

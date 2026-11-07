@@ -233,7 +233,7 @@ MATCH void func_801EF9FC(void) {
     func_8014DAEC();
     if ((g_Task->pos.x.fixed == g_Task->unk_18) && (g_Task->pos.y.fixed == g_Task->unk_1C)) {
         GFX_FreePaletteFadeTarget(g_Task);
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -251,7 +251,7 @@ MATCH void func_801EFCF8(void) {
 
     func_8014DAEC();
     if (func_8014DAEC() != 0u) {
-        work               = (PartyBattler*)D_801EB4E0;
+        work               = (PartyBattler*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         Actor_Clear();
     }

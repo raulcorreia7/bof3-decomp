@@ -106,7 +106,7 @@ MATCH void func_801EFD80(void) {
 
 MATCH void func_801EFDC0(void) {
     if (g_Task->param.unk_0B == 0) {
-        D_801EB4E0->param.unk_0B = 2;
+        g_BattleEffectBattler->param.unk_0B = 2;
         func_801E5988();
     }
 }
@@ -123,7 +123,7 @@ MATCH void func_801EFE00(void) {
 
 MATCH void func_801EFE90(void) {
     PartyBattler* work  = g_Task;
-    PartyBattler* actor = D_801EB4E0;
+    PartyBattler* actor = g_BattleEffectBattler;
     s32           z;
 
     work->pos.x.fixed    = actor->pos.x.fixed;
@@ -175,7 +175,7 @@ MATCH void func_801F013C(void) {
     count_next     = g_Task->unk_5E - 1;
     g_Task->unk_5E = count_next;
     if ((count_next << 0x18) == 0) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -192,9 +192,9 @@ MATCH void func_801F0BA8(void) {
     PartyBattler* work;
     s32           value;
 
-    g_Task->pos.x.fixed  = D_801EB4E0->pos.x.fixed;
-    g_Task->pos.y.fixed  = D_801EB4E0->pos.y.fixed;
-    g_Task->pos.z.fixed  = D_801EB4E0->pos.z.fixed;
+    g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
     value                = RANDOM_MASK(0x1F);
     work                 = g_Task;
     work->unk_5D         = 0x10;
@@ -224,7 +224,7 @@ MATCH void func_801F0CB0(void) {
     timer        = work->unk_5D - 2;
     work->unk_5D = timer;
     if (timer == 0) {
-        work               = D_801EB4E0;
+        work               = g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         func_801E5988();
     }
@@ -240,9 +240,9 @@ MATCH void func_801F11E0(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        g_Task->pos.x.fixed  = D_801EB4E0->pos.x.fixed;
-        g_Task->pos.y.fixed  = D_801EB4E0->pos.y.fixed;
-        g_Task->pos.z.fixed  = D_801EB4E0->pos.z.fixed;
+        g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
         g_Task->param.unk_0B = RANDOM_MASK(0xF);
         g_Task->unk_09       = 0;
         g_Task->timer        = 0;
@@ -279,7 +279,7 @@ MATCH void func_801F1C3C(void) {
 
 MATCH void func_801F1CCC(void) {
     PartyBattler* work  = g_Task;
-    PartyBattler* actor = D_801EB4E0;
+    PartyBattler* actor = g_BattleEffectBattler;
     s32           z;
 
     work->pos.x.fixed = actor->pos.x.fixed;

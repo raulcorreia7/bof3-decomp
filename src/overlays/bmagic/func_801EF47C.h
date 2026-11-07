@@ -7,7 +7,7 @@ MATCH void func_801EF47C(void) {
     PartyBattler* battler;
 
     if (--D_801F17B4->timer_05 == 0) {
-        battler            = D_801EB4E0;
+        battler            = g_BattleEffectBattler;
         D_801F17B4->pos.x  = battler->pos.x;
         D_801F17B4->pos.y  = battler->pos.y;
         D_801F17B4->pos.z  = battler->pos.z;

@@ -64,7 +64,7 @@ MATCH void func_801EF1CC(void) {
 }
 
 MATCH void func_801EF228(void) {
-    if (D_801EB4E0->param.unk_0B == 2) {
+    if (g_BattleEffectBattler->param.unk_0B == 2) {
         g_Task->timer = 0;
         g_Task->header.step += 1;
     }
@@ -83,7 +83,7 @@ MATCH void func_801EF2CC(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        D_801EB4E0->param.unk_0B = 0xFF;
+        g_BattleEffectBattler->param.unk_0B = 0xFF;
         func_801E5988();
     }
 }
@@ -134,9 +134,9 @@ MATCH void func_801F00EC(void) {
 }
 
 MATCH void func_801F014C(void) {
-    func_800AF2B4(D_801EB4E0, 0x30);
+    func_800AF2B4(g_BattleEffectBattler, 0x30);
     COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + 0x10;
-    if (func_800AF5FC(D_801EB4E0, 0x1C000) != 0) {
+    if (func_800AF5FC(g_BattleEffectBattler, 0x1C000) != 0) {
         g_Task->timer = 0x1E;
         g_Task->header.step += 1;
     }

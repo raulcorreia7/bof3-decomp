@@ -5,7 +5,7 @@
 
 MATCH void func_800A8D3C(void) {
     func_801DEE4C();
-    if (D_801EB4E0->header.mode == 5) {
+    if (g_BattleEffectBattler->header.mode == 5) {
         func_801E5988();
     }
 }

@@ -46,7 +46,7 @@ MATCH void func_801EF0F0(void) {
     u8            step;
     PartyBattler* work;
 
-    work = (PartyBattler*)D_801EB4E0;
+    work = (PartyBattler*)g_BattleEffectBattler;
     step = work->param.unk_0B;
     if (step < 2) {
         work->param.unk_0B  = step - 1;
@@ -87,7 +87,7 @@ MATCH void func_801EF7F8(void) {
 }
 
 MATCH void func_801EF870(void) {
-    if (D_801EB4E0->param.unk_0B < 3U) {
+    if (g_BattleEffectBattler->param.unk_0B < 3U) {
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }

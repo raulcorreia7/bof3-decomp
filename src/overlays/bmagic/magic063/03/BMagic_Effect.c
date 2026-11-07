@@ -18,12 +18,12 @@ MATCH void func_801EEC18(void) {
     count = 0;
     do {
         if (D_801F0454[(u8)count << 5] & 1) {
-            saved      = D_801EB4E0;
-            swap       = FIELD(PartyBattler*, D_801F0470, (u8)count << 5);
-            D_801F1054 = D_801F0454 + ((u8)count << 5);
-            D_801EB4E0 = swap;
+            saved                 = g_BattleEffectBattler;
+            swap                  = FIELD(PartyBattler*, D_801F0470, (u8)count << 5);
+            D_801F1054            = D_801F0454 + ((u8)count << 5);
+            g_BattleEffectBattler = swap;
             func_801EF340();
-            D_801EB4E0 = saved;
+            g_BattleEffectBattler = saved;
         }
         count += 1;
     } while ((u8)count < 0x60);
