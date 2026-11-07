@@ -32,10 +32,10 @@ NON_MATCHING void func_801E8684(void) {
     var_s0 = SP_PTR(PartyBattler, 0x0);
     var_s0 = g_Task;
     TASK_SET(g_BattleEffectBattler);
-    g_GameState                       = &g_BattlePartyBattlers[g_BattleEffectBattler->slot];
-    temp_v1_31                        = g_BattleEffectBattler->slot;
-    g_BattleEffectBattler->unk_40     = 0;
-    g_BattlePartyBattlers[temp_v1_31] = *(PartyBattler*)(s_BattleBattlerTemplates + (temp_v1_31 * BATTLE_PARTY_STRIDE));
+    g_GameState                                  = &g_BattlePartyBattlers[g_BattleEffectBattler->slot];
+    temp_v1_31                                   = g_BattleEffectBattler->slot;
+    g_BattleEffectBattler->unk_40                = 0;
+    g_BattlePartyBattlers[temp_v1_31]            = s_BattleBattlerTemplates[temp_v1_31];
     *(D_80145E91 + ((g_Task)->slot * 0x140))     = 6;
     *(D_80145E92 + ((g_Task)->slot * 0x140))     = 4;
     *(D_80145E93 + ((g_Task)->slot * 0x140))     = 4;

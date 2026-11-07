@@ -436,12 +436,10 @@ extern u8               D_801EB4FA[][12];
 extern BattleRank       D_801EB550[];
 extern u8               D_801EB5B0[];
 /* D_801EBF20 */
-extern u8  s_BattleBattlerTemplates[]; /* Alternate local work entries (stride 0x140) and their paired status words. */
-/* D_801EC048 */
-extern u8  s_BattleBattlerTemplateTails[];
-extern u8  D_801EB6D0[];
-extern u8  D_801EBF04;
-extern s32 D_801EBFA0;
+extern PartyBattler     s_BattleBattlerTemplates[BATTLE_PARTY_SLOT_COUNT]; /* Alternate local work entries. */
+extern u8               D_801EB6D0[];
+extern u8               D_801EBF04;
+extern s32              D_801EBFA0;
 extern BattleEffect* volatile D_801EC2E0;
 extern u8              D_801EC2E4;
 extern BattleStatBlock D_801EC2E8;

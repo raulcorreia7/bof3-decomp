@@ -1,10 +1,5 @@
 #include "battle_15.h"
 
-/* needs: type: g_BattlePanelEntry is byte 0 of a two-byte panel cursor (row, then column at 0x801462E7). */
-#define PANEL_CURSOR           (&LOBU(g_BattlePanelEntry))
-#define GENE_CURSOR_ROW        0
-#define GENE_CURSOR_COLUMN     1
-
 /* The Accession gene grid and the most genes one transformation combines. */
 #define GENE_GRID_ROWS         3
 #define GENE_GRID_COLUMNS      6
@@ -32,9 +27,9 @@ NON_MATCHING void func_800A5330(void) {
     s32 text_id;
     s32 buttons;
 
-    row = PANEL_CURSOR[GENE_CURSOR_ROW];
-    if (row != GAME_NONE) {
-        col = PANEL_CURSOR[GENE_CURSOR_COLUMN];
+    row = g_GeneCursor.row;
+    if (row != -1) {
+        col = g_GeneCursor.column;
         if (D_800B7070[row][col] != 0) {
             func_801DE60C(0, 1, 1, 0, GAME_NONE,
                           Resource_GetText((u16)(col + (row * GENE_GRID_COLUMNS + GENE_NAME_TEXT))));
@@ -63,21 +58,20 @@ NON_MATCHING void func_800A5330(void) {
     }
 
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
-        if (PANEL_CURSOR[GENE_CURSOR_ROW] != GAME_NONE) {
-            cell = &D_800B7070[PANEL_CURSOR[GENE_CURSOR_ROW]][PANEL_CURSOR[GENE_CURSOR_COLUMN]];
+        if (g_GeneCursor.row != -1) {
+            cell = &D_800B7070[g_GeneCursor.row][g_GeneCursor.column];
             if (*cell == 0) {
                 SND_PlayCue(EMI_CUE_ID(1, 7));
                 return;
             }
             if (g_BattleGeneCount[0] < GENE_PICK_MAX) {
-                *cell = 0;
-                g_BattleGenes[g_BattleGeneCount[0]] =
-                    PANEL_CURSOR[GENE_CURSOR_ROW] * GENE_GRID_COLUMNS + PANEL_CURSOR[GENE_CURSOR_COLUMN];
+                *cell                               = 0;
+                g_BattleGenes[g_BattleGeneCount[0]] = g_GeneCursor.row * GENE_GRID_COLUMNS + g_GeneCursor.column;
                 g_BattleGeneCount[0]++;
                 func_800A82F8();
                 SND_PlayCue(EMI_CUE_ID(1, 3));
                 if (g_BattleGeneCount[0] == GENE_PICK_MAX) {
-                    PANEL_CURSOR[GENE_CURSOR_ROW] = GAME_NONE;
+                    g_GeneCursor.row = -1;
                 }
             } else {
                 SND_PlayCue(EMI_CUE_ID(1, 6));
@@ -90,7 +84,7 @@ NON_MATCHING void func_800A5330(void) {
         }
     }
 
-    entry = LOB(PANEL_CURSOR[GENE_CURSOR_ROW]);
+    entry = g_GeneCursor.row;
     if (entry == -1) {
         if (g_BattleGeneCount[0] != 0) {
             text_id = GENE_HELP_CONFIRM_TEXT;
@@ -99,7 +93,7 @@ NON_MATCHING void func_800A5330(void) {
         }
     } else {
         gene_row = entry;
-        col      = PANEL_CURSOR[GENE_CURSOR_COLUMN];
+        col      = g_GeneCursor.column;
         if (D_800B7070[gene_row][col] != 0) {
             text_id = col + (gene_row * GENE_GRID_COLUMNS + GENE_HELP_TEXT);
         } else {
@@ -109,22 +103,22 @@ NON_MATCHING void func_800A5330(void) {
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Resource_GetText(text_id);
 
     buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
-    if ((buttons & PADLup) && LOB(PANEL_CURSOR[GENE_CURSOR_ROW]) >= 0) {
+    if ((buttons & PADLup) && g_GeneCursor.row >= 0) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        PANEL_CURSOR[GENE_CURSOR_ROW]--;
+        g_GeneCursor.row--;
     }
-    if ((buttons & PADLdown) && LOB(PANEL_CURSOR[GENE_CURSOR_ROW]) < GENE_GRID_ROWS - 1) {
+    if ((buttons & PADLdown) && g_GeneCursor.row < GENE_GRID_ROWS - 1) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        PANEL_CURSOR[GENE_CURSOR_ROW]++;
+        g_GeneCursor.row++;
     }
-    if (LOB(PANEL_CURSOR[GENE_CURSOR_ROW]) != -1) {
-        if ((buttons & PADLright) && PANEL_CURSOR[GENE_CURSOR_COLUMN] < GENE_GRID_COLUMNS - 1) {
+    if (g_GeneCursor.row != -1) {
+        if ((buttons & PADLright) && g_GeneCursor.column < GENE_GRID_COLUMNS - 1) {
             SND_PlayCue(EMI_CUE_ID(1, 1));
-            PANEL_CURSOR[GENE_CURSOR_COLUMN]++;
+            g_GeneCursor.column++;
         }
-        if ((buttons & PADLleft) && PANEL_CURSOR[GENE_CURSOR_COLUMN] != 0) {
+        if ((buttons & PADLleft) && g_GeneCursor.column != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 1));
-            PANEL_CURSOR[GENE_CURSOR_COLUMN]--;
+            g_GeneCursor.column--;
         }
     }
 }

@@ -623,13 +623,12 @@ static u8 s_gap_801EBF0C[0x14] = {0};
 
 /* 0x801EBF20 */
 /* D_801EBF20 */
-/* Read at [index * BATTLE_PARTY_STRIDE] by func_801E7B34, func_801E7BA0 and func_801E8684, past this 0x128
- * span: the first rows of a battler array. needs: type, the extent. */
-u8 s_BattleBattlerTemplates[0x128] = {0};
+/* The party battler rows func_801E8684 copies into g_BattlePartyBattlers; func_801E7B34 and func_801D6818 read
+ * their header.flags and turn.action_flags. */
+PartyBattler s_BattleBattlerTemplates[BATTLE_PARTY_SLOT_COUNT] = {0};
 
-/* 0x801EC048 */
-/* D_801EC048 */
-u8 s_BattleBattlerTemplateTails[0x2E8] = {0};
+/* 0x801EC2E0 */
+static u8 s_gap_801EC2E0[0x50] = {0};
 
 /* 0x801EC330 */
 BattleEffect g_BattleEffects[48] = {0};
