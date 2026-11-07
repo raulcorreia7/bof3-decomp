@@ -370,20 +370,20 @@ ASSERT_OFFSET(AreaSpawnSlot, radius_14, 0x14);
 ASSERT_OFFSET(AreaSpawnSlot, core_shade_16, 0x16);
 ASSERT_OFFSET(AreaSpawnSlot, rim_shade_17, 0x17);
 
-#define AREA_RING_POINTS 16
+#define AREA_RING_POINTS     16
 #define AREA_RING_ANGLE_STEP 0x100
 
 /* A ring of glow points around `center`: screen positions of the ring points, projected each frame. */
 typedef struct AreaRing {
-    s32     base[3];                     /* 0x00 */
-    s32     unk_0C;                      /* 0x0C */
-    s32     center[3];                   /* 0x10 - the ring centre */
-    s32     unk_1C;                      /* 0x1C */
-    s16     radius;                      /* 0x20 */
-    s16     unk_22;                      /* 0x22 */
-    DVECTOR screen_base;                 /* 0x24 */
-    DVECTOR screen_center;               /* 0x28 */
-    DVECTOR screen[AREA_RING_POINTS];    /* 0x2C - one screen position per ring point */
+    s32     base[3];                  /* 0x00 */
+    s32     unk_0C;                   /* 0x0C */
+    s32     center[3];                /* 0x10 - the ring centre */
+    s32     unk_1C;                   /* 0x1C */
+    s16     radius;                   /* 0x20 */
+    s16     unk_22;                   /* 0x22 */
+    DVECTOR screen_base;              /* 0x24 */
+    DVECTOR screen_center;            /* 0x28 */
+    DVECTOR screen[AREA_RING_POINTS]; /* 0x2C - one screen position per ring point */
 } AreaRing;
 
 ASSERT_OFFSET(AreaRing, radius, 0x20);
