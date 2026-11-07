@@ -299,6 +299,9 @@ extern u8       g_MenuListTab2OnSprites[];
 extern u8*      g_MenuInventoryTitles[5];
 extern char     g_MenuInventoryCountFormat[];
 extern u8       g_MenuInventoryTab1OffSprites[];
+extern u8*      g_MenuEquipTitles[5];
+extern u8       g_MenuEquipChoiceIds[];
+extern u8       g_MenuEquipChoiceCounts[];
 extern u8       g_MenuInventoryTab1OnSprites[];
 /* D_801EC784 */
 extern u8       g_MenuListTab1OffSprites[];
@@ -497,7 +500,8 @@ void        Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DFBF4 */
 extern void Menu_DrawInventoryWindow(MenuPanelTask* task);
 extern void func_801E0354(MenuPanelTask* task);
-extern void func_801E0A70(MenuPanelTask* task);
+/* func_801E0A70 */
+extern void Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 extern void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active);
 void        func_801E16BC(void);
 void        SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry);

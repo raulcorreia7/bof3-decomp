@@ -2009,6 +2009,7 @@ Menu_DrawWindowFrame = { addr = 0x801DC1F4, type = "func", source = "Draws a win
 Menu_DrawInventoryWindow = { addr = 0x801DC6FC, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawAbilityList = { addr = 0x801DCE5C, type = "func", source = "Draws the ten visible rows of the ability list with cost and level, the cursor tabs and the window frame." }
 Menu_DrawPanelFrame = { addr = 0x801DD350, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
+Menu_DrawEquipChoiceWindow = { addr = 0x801DD578, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 SAVE_DrawSlot = { addr = 0x801DDCB0, type = "func", source = "Draws one row of the stock list: its window, icons, name and the values formatted through g_MenuZennyFormat." }
 Menu_SwapBytes_801DF464 = { addr = 0x801DF464, type = "func", source = "Swaps the two bytes that two pointers address; same bytes as Menu_SwapBytes at 0x801D7E08." }
 Menu_RunAbilityStockSort = { addr = 0x801E1B80, type = "func", source = "runs the stock command the cursor row selects through g_AbilityStockCommands" }
@@ -2064,6 +2065,7 @@ MENU_CLUT_STRIP_ENTRIES = { addr = 0x801E5AD0, source = "Cell ids that Menu_Draw
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801E5B1C, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
 g_MenuInventoryTitles = { addr = 0x801E5B48, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_MenuAbilityListNames = { addr = 0x801E5B7C, source = "the list names indexed by the ability type, drawn above the ability list" }
+g_MenuEquipTitles = { addr = 0x801E5BB4, source = "the equip list's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_ShopStep6Funcs = { addr = 0x801E5BEC, source = "4 sub-step handlers of step 6 of the shop, called by func_801DE188 (the step 6 handler) and indexed by the menu sub-step byte D_80148651" }
 g_ShopStep6Sub0Funcs = { addr = 0x801E5BFC, source = "3 handlers of sub-step 0 of step 6 of the shop, called by func_801DE1C4 (the sub-step 0 handler of step 6) and indexed by the menu sub-sub-step byte D_80148652" }
 g_ShopStep6Sub3Funcs = { addr = 0x801E5C08, source = "4 handlers of sub-step 3 of step 6 of the shop, called by func_801DE850 (the sub-step 3 handler of step 6) and indexed by the menu sub-sub-step byte D_80148652" }
@@ -2100,6 +2102,8 @@ g_ShopPricePercent = { addr = 0x801E6064, source = "Price percentage of the shop
 g_SaveSlotFirst = { addr = 0x801E6074, source = "Index of the first visible row of the shop stock list." }
 g_SaveSlotCount = { addr = 0x801E6078, source = "Number of visible rows of the shop stock list." }
 g_SaveSlots = { addr = 0x801E6098, size = 0x54, source = "The three visible rows of the shop stock list." }
+g_MenuEquipChoiceIds = { addr = 0x801E6144, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
+g_MenuEquipChoiceCounts = { addr = 0x801E61C4, source = "the held counts of the g_MenuEquipChoiceIds rows" }
 CardAccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes the save file on the memory card: waits out the card status, loads the directory, opens the save file and transfers it through CardTransferFile (body in start/09)." }
 CardScanDirectory = { addr = 0x801EFCA8, alias = true }
 
@@ -2178,6 +2182,7 @@ Menu_DrawFilledPanel = { addr = 0x801DF410, type = "func", source = "Draws a fil
 Menu_DrawWindowFrame = { addr = 0x801DF6EC, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
 Menu_DrawInventoryWindow = { addr = 0x801DFBF4, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawPanelFrame = { addr = 0x801E0848, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
+Menu_DrawEquipChoiceWindow = { addr = 0x801E0A70, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 SAVE_DrawSlot = { addr = 0x801E11A8, type = "func", source = "Draws one row of the save file list: its window, icons, name and the values formatted through g_MenuZennyFormat." }
 Start_RunNewGame = { addr = 0x801E2584, type = "func", source = "Starts a new game: clears g_GameAreaId, calls Scene_Start(0) and replaces the callback with Game_RunMainLoop." }
 Menu_DrawOptionRow = { addr = 0x801E2898, type = "func", source = "Draws one row of the options menu (rows 0 to 5): a window grown by the selection step, the option name centred at x + 58 (Msg Speed, Window Clr, Background, Sound, Autorun or Controller) and the divider line." }
@@ -2228,6 +2233,7 @@ MENU_CLUT_STRIP_CELLS = { addr = 0x801ECB40, source = "Sprite cells (u, v, w, h)
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801ECBEC, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801ECC38, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
 g_MenuInventoryTitles = { addr = 0x801ECC64, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+g_MenuEquipTitles = { addr = 0x801ECCD0, source = "the equip list's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_NameEntryControlsFrame = { addr = 0x801ED05C, source = "the sprite layout of the name entry control window's frame, drawn by func_801AF390" }
 s_CampMenuState = { addr = 0x801ED100, source = "State bytes of the start menu overlay, kept by func_801E4670, func_801E4744 and func_801E6388." }
 g_NameEntryCommandLabels = { addr = 0x801ED1B8, source = "the name entry screen's four command labels, OK, Del, Next and Back, that its control window draws" }
@@ -2256,6 +2262,8 @@ g_MenuStartPanel19StateFuncs = { addr = 0x801ED5C8, source = "the state handlers
 g_MenuStartPanel20StateFuncs = { addr = 0x801ED5E4, source = "the state handlers of panel mode 20, indexed by the panel task state" }
 s_PartyCharacterIds = { addr = 0x801ED610, source = "The three party character ids that func_801D177C and func_801D21F4 keep." }
 g_EquipPreview = { addr = 0x801ED63C, source = "Six equipment ids of the character being tried on: func_801D6FBC copies them here and replaces the slot being tried, func_801D6E6C commits them." }
+g_MenuEquipChoiceIds = { addr = 0x801ED6D8, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
+g_MenuEquipChoiceCounts = { addr = 0x801ED758, source = "the held counts of the g_MenuEquipChoiceIds rows" }
 g_MenuStartTimer = { addr = 0x801ED7F0, source = "Slide timer of the start menu: func_801E5BCC counts it up to 4 as the slide offset of SAVE_DrawSlots, func_801E5E30 counts it down to 0 and then restores the step." }
 g_MenuStartReturnStep = { addr = 0x801ED800, source = "Step the start menu returns to: func_801E4FFC stores the step plus 1 before jumping to step 14, func_801E5E30 restores it." }
 g_SaveSlotFirst = { addr = 0x801ED804, source = "Index of the first visible row of the save file list." }
