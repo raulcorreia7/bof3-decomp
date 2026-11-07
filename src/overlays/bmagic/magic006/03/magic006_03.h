@@ -8,6 +8,7 @@
 /* The amount Effect_CountDownTimer adds to the effect work byte 9. */
 #define EFFECT_TIMER_STEP 8
 
+extern s16                 D_1F800008;
 extern BattleHandlerTable3 D_801EEC1C;
 
 extern BattleHandlerTable4 D_801EEC28;

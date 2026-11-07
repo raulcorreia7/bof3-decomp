@@ -44,6 +44,7 @@ MATCH void func_801D150C(void) {
     }
 }
 
+// hint: retail keeps D_801DB0C4 unsigned (lbu throughout), counter in s0 and the x position (0x100000, += 0x200000, sra 16) in s1 with a 48-byte frame; plain forms hoist 0x200000 into s2 and drop the extra frame slots
 INCLUDE_ASM(func_801D15A4);
 
 INCLUDE_ASM(func_801D1774);
@@ -343,6 +344,7 @@ MATCH void func_801D4840(void) {
     }
 }
 
+// hint: window frame drawer; natural form with s16 x/y and func_801D2EDC(s16, s16, s32) matches except the draw-mode style: retail sets a3 in branch delay slots with s0 = dx = 8 after the cursor load, the candidate puts dx in s2 and hoists move s1,zero
 INCLUDE_ASM(func_801D4910);
 
 INCLUDE_ASM(func_801D4AE0);
