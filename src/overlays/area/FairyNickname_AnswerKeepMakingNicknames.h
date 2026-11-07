@@ -6,7 +6,7 @@ MATCH void FairyNickname_AnswerKeepMakingNicknames(void) {
         MESSAGE_REQUEST_CLEAR();
         D_801F294C = 0;
     } else {
-        g_MessageRequest = 0xF7;
+        g_MessageRequest = FAIRY_MESSAGE_NICKNAME_GOODBYE;
         D_801F294C       = 4;
     }
 }

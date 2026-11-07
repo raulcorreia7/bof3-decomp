@@ -9,6 +9,40 @@
 #include "overlays/area/Message_ShowParty.h"
 #include "overlays/area/WorldAreaRequest.h"
 
+/* Message ids of the faerie village text bank shared by area175 through area185. */
+enum {
+    FAIRY_MESSAGE_MUSICIAN_THANKS               = 0x5A,
+    FAIRY_MESSAGE_COPY_SHOP_DECLINED            = 0x5F,
+    FAIRY_MESSAGE_COPY_SHOP_WORKING             = 0x62,
+    FAIRY_MESSAGE_COPY_SHOP_CHOOSE_OTHER        = 0x63,
+    FAIRY_MESSAGE_CASINO_NOT_PLAYING            = 0x6E,
+    FAIRY_MESSAGE_HIGH_LOW_RULES_KNOWN          = 0x6F,
+    FAIRY_MESSAGE_HIGH_LOW_RULES                = 0x70,
+    FAIRY_MESSAGE_HIGH_LOW_DECLINED             = 0x72,
+    FAIRY_MESSAGE_HIGH_LOW_QUIT                 = 0x77,
+    FAIRY_MESSAGE_HIGH_LOW_PLAY_AGAIN           = 0x78,
+    FAIRY_MESSAGE_CASINO_CHOOSE_GAME            = 0x7A,
+    FAIRY_MESSAGE_NUMBERS_DECLINED              = 0x7B,
+    FAIRY_MESSAGE_CASINO_NOT_ENOUGH_ZENNY       = 0x7C,
+    FAIRY_MESSAGE_NUMBERS_RULES_NEEDED          = 0x7D,
+    FAIRY_MESSAGE_NUMBERS_RULES                 = 0x7E,
+    FAIRY_MESSAGE_NUMBERS_START                 = 0x7F,
+    FAIRY_MESSAGE_PICK_NUMBERS_DECLINED         = 0x88,
+    FAIRY_MESSAGE_PICK_NUMBERS_RULES_REMEMBERED = 0x89,
+    FAIRY_MESSAGE_PICK_NUMBERS_RULES            = 0x8A,
+    FAIRY_MESSAGE_FORTUNE_TELLER_CONFIRMED      = 0x9F,
+    FAIRY_MESSAGE_FORTUNE_TELLER_REFUTED        = 0xA0,
+    FAIRY_MESSAGE_NICKNAME_PICK_FAIRY           = 0xEF,
+    FAIRY_MESSAGE_NICKNAME_GOODBYE              = 0xF7,
+    FAIRY_MESSAGE_HELP_MENU                     = 0xF8,
+    FAIRY_MESSAGE_HELP_UP_TO_YOU                = 0xF9,
+    FAIRY_MESSAGE_HELP_JOBS                     = 0xFA,
+    FAIRY_MESSAGE_HELP_ASSIGNING                = 0xFB,
+    FAIRY_MESSAGE_HELP_ABILITIES                = 0xFC,
+    FAIRY_MESSAGE_HELP_HOUSING                  = 0xFD,
+    FAIRY_MESSAGE_SINGER_GOODBYE                = 0x2A1,
+};
+
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT    0xFF
 

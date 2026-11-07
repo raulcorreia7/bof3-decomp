@@ -5,13 +5,13 @@ MATCH s32 func_801F48B4(void) {
 
     if (g_MessageChoice == 0) {
         if (Item_VitalHas(0xD) != 0) {
-            g_MessageRequest = 6;
+            g_MessageRequest = AREA168_MESSAGE_ID_CHECK_PASSED;
             g_AreaSceneMode |= 2;
             return;
         }
-        message = 7;
+        message = AREA168_MESSAGE_ID_CHECK_FAILED;
     } else {
-        message = 0xFFFF;
+        message = MESSAGE_NONE;
     }
     g_MessageRequest = message;
 }
