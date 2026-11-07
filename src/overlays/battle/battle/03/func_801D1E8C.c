@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-/* nonmatching unmeasured: tried the first-draft body with the volatile g_InputMasks[INPUT_SLOT_CONFIRM] view and one-member struct views for
+/* nonmatching unmeasured: tried the first-draft body with the volatile g_InputMasks[BATTLE_INPUT_CONFIRM] view and one-member struct views for
  * the pad rows (62.12%). residual: retail keeps s5/s6 live across the draw calls (frame 0x30 against our 0x28) and the
  * body is 20 bytes short. resume: a source shape whose pad cursor and state base stay live across the calls. */
 #ifdef NON_MATCHING
@@ -28,7 +28,7 @@ NON_MATCHING void func_801D1E8C(void) {
     if (*state != 0) {
         --*state;
     }
-    if ((g_InputMasks[INPUT_SLOT_CANCEL] & *pad) && ((s8)g_BattleCommandCount != 0)) {
+    if ((g_InputMasks[BATTLE_INPUT_CANCEL] & *pad) && ((s8)g_BattleCommandCount != 0)) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         temp_v0_50           = (u8)g_BattleCommandCount - 1;
         g_BattleCommandCount = temp_v0_50;
@@ -36,7 +36,7 @@ NON_MATCHING void func_801D1E8C(void) {
         temp_v0_66              = &g_BattlePartyBattlers[D_801462F6[temp_v0_50]];
         g_BattleMessageSlot     = &temp_v0_66->header.flags;
         temp_v0_66->header.mode = 2;
-        temp_v0_66->turn.action_flags.value &= ~4;
+        temp_v0_66->turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
         if (FIELD(u8, g_BattleMessageSlot, 0x119u) == 5) {
             temp_v1_80 = FIELD(s32, g_BattleMessageSlot, 0x124u);
             if (!(temp_v1_80 & 0x4000)) {
@@ -50,8 +50,9 @@ NON_MATCHING void func_801D1E8C(void) {
         FIELD(u8, g_BattleMessageSlot, 0x119u)  = 0U;
         return;
     }
-    if (g_InputMasks[INPUT_SLOT_CONFIRM] & *pad) {
-        if (((u32)(g_BattlePanelSlot - 2) < 2U) && (D_801EB4D8->action_flags.value & 2)) {
+    if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *pad) {
+        if (((u32)(g_BattlePanelSlot - 2) < 2U) &&
+            (g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;
         }
@@ -93,7 +94,8 @@ NON_MATCHING void func_801D1E8C(void) {
                 SND_PlayCue(EMI_CUE_ID(1, 1));
                 if (*(u8*)(&g_BattlePanelEntry) == (var_s1 + 1)) {
                     if (*(u8*)((u8*)(&g_BattlePanelEntry) + -1) != 0) {
-                        if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) || !(D_801EB4D8->action_flags.value & 2)) {
+                        if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) ||
+                            !(g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
                             temp_a0_239                                    = var_s0 + 1;
                             FIELD(s8, (&D_8014837B), 0x24u)                = 2;
                             *(u8*)(&D_8014837B)                            = 2;

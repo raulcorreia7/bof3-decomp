@@ -13,7 +13,7 @@ MATCH void func_801DCDB8(void) {
     input     = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
     pad       = *pad_state;
 
-    if (pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (pad & g_InputMasks[FISHING_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_801442AC = 0xFFFF;
         /* FAKE: volatile access gives retail's register-address RMW; plain u8 pointer stayed at 76.5%. */
@@ -22,7 +22,7 @@ MATCH void func_801DCDB8(void) {
         FISHING_STATE->flag_04 = 0;
         return;
     }
-    if (pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (pad & g_InputMasks[FISHING_INPUT_CAST]) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         /* FAKE: volatile access gives retail's register-address RMW; plain u8 pointer stayed at 76.5%. */
         *MATCH_VOLATILE_PTR(u8, &D_80144287) |= 2;
@@ -43,10 +43,10 @@ MATCH void func_801DCDB8(void) {
 
     if (!(D_80144287 & 0x80)) {
         if (!(D_80144287 & 1)) {
-            value = D_80145028; /* FISHING_ROD */
+            value = g_FishingRod; /* FISHING_ROD */
             value = (value != 0) ? value + 4 : 0xFFFF;
         } else {
-            value = D_80145026; /* FISHING_LURE */
+            value = g_FishingLure; /* FISHING_LURE */
             value = (value != 0) ? value + 4 : 0xFFFF;
         }
         D_801442AC = value;

@@ -26,7 +26,7 @@ MATCH void func_801EF034(void) {
 
     if (--g_Task->unk_09 == 0) {
         dst              = g_Task;
-        src              = D_801EB4E0;
+        src              = g_BattleEffectBattler;
         dst->unk_0C      = 0xB;
         dst->unk_2E.half = src->unk_2E.half + 0x37;
         dst->unk_30.half = src->unk_30.half - 0x10;
@@ -48,7 +48,7 @@ MATCH void func_801EF0C4(void) {
             g_Task->header.step += 1;
             return;
         }
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -82,7 +82,7 @@ MATCH void func_801EF1D0(void) {
             g_Task->param.unk_0B = 1;
         }
     }
-    if (D_801EB4E0->param.unk_0B == 1) {
+    if (g_BattleEffectBattler->param.unk_0B == 1) {
         SND_QueueSelectionFx(0x101);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
@@ -110,7 +110,7 @@ MATCH void func_801EF430(void) {
 
     if (--g_Task->unk_09 == 0) {
         dst              = g_Task;
-        src              = D_801EB4E0;
+        src              = g_BattleEffectBattler;
         dst->unk_0C      = 0xB;
         dst->unk_2E.half = src->unk_2E.half - 0x37;
         dst->unk_30.half = src->unk_30.half - 0x10;

@@ -12,7 +12,7 @@ MATCH void func_801D39B8(void) {
     s32 value;
 
     record         = FISHING_STATE;
-    table          = D_801E1F20;
+    table          = g_FishingPromptSets;
     column         = record->column_4A;
     row            = table[record->cue_index_06];
     record->row_4B = row[column];

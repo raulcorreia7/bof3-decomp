@@ -34,7 +34,7 @@ NON_MATCHING void func_801D20D0(void) {
     if ((s8)old != (s8)*cursor) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if ((Item_GetEquipability(g_ShopItemCategory, g_ShopItemId) >> g_CharSlot[g_PartyFieldOrder[(s8)*cursor]]) &
             1) {
             for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
@@ -59,7 +59,7 @@ NON_MATCHING void func_801D20D0(void) {
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 7));
         }
-    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_80148600 = 0;
         D_80148652 -= 4;

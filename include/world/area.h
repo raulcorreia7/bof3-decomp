@@ -33,6 +33,7 @@
 #include "types.h"
 #include "common/fixed.h"
 #include "common/vector.h"
+#include "psx/psyq.h"
 
 /* The world overlays' own records. Every area program keeps its scratch in
  * the `0x800E4800` window (@source: wiki:formats/area#neighboring-buffers):
@@ -171,24 +172,40 @@ ASSERT_OFFSET(AreaMapBundle, height_off4_2A, 0x2A);
 extern AreaMapBundle g_AreaMapBundle;
 
 /* Word bits of D_80146258, the world input/scheduler lock word. Bit 3 skips
- * Area_AdvanceScroll; bit 6 blocks the run/accept action; bit 8 is set while a
+ * Area_AdvanceScroll; bit 6 blocks the menu request; bit 8 is set while a
  * scenario script owns the field. */
 typedef enum GameFlags {
     GAME_FLAG_SCROLL_LOCK   = 1 << 3,
-    GAME_FLAG_RUN_LOCK      = 1 << 6,
+    GAME_FLAG_MENU_LOCK     = 1 << 6,
     GAME_FLAG_SCRIPT_ACTIVE = 1 << 8,
 } GameFlags;
 
 typedef enum AreaWalkFlags {
-    AREA_WALK_BUSY_ALL      = (1 << 0) | (1 << 1) | (1 << 2),
-    AREA_WALK_ENTRY_ACTIVE  = 1 << 3,
-    AREA_WALK_ACCEPT_LOCK   = 1 << 4,
-    AREA_WALK_ENTRY_PENDING = 1 << 6,
-    AREA_WALK_STEP_ACTIVE   = 1 << 10,
-    AREA_WALK_RUN_ACTIVE    = 1 << 11,
-    AREA_WALK_TRANSITION    = 1 << 12,
-    AREA_WALK_MAP_LOADING   = 1 << 15,
+    AREA_WALK_BUSY_ALL             = (1 << 0) | (1 << 1) | (1 << 2),
+    AREA_WALK_ENTRY_ACTIVE         = 1 << 3,
+    AREA_WALK_ACCEPT_LOCK          = 1 << 4,
+    AREA_WALK_ENTRY_PENDING        = 1 << 6,
+    AREA_WALK_LEADER_SWITCH_ACTIVE = 1 << 10,
+    AREA_WALK_MENU_ACTIVE          = 1 << 11,
+    AREA_WALK_TRANSITION           = 1 << 12,
+    AREA_WALK_MAP_LOADING          = 1 << 15,
 } AreaWalkFlags;
+
+/* Modes of the field task (g_Task->header.mode) that the pad requests start. */
+typedef enum FieldTaskMode {
+    FIELD_TASK_MODE_LEADER_SWITCH   = 3,
+    FIELD_TASK_MODE_MENU            = 4,
+    FIELD_TASK_MODE_PERSONAL_ACTION = 0x0A,
+} FieldTaskMode;
+
+/* g_GameState->mode_12B while the character field action runs. */
+#define GAME_PANEL_MODE_PERSONAL_ACTION 8
+
+/* Garr pushes after walking this many frames against an object. */
+#define GARR_PUSH_HOLD_FRAMES           0x10
+
+/* g_GameState->counter_11C, the walk speed index: Teepo and Peco act on a rock only at the run index. */
+#define FIELD_SPEED_RUN                 4
 
 /* One +0x24 cell record: four signed corner heights, loaded as s8 by
  * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`.
@@ -326,7 +343,7 @@ typedef struct AreaTrail {
     s32      radius;                  /* 0x10 - the ring radius */
     u16      angle;                   /* 0x14 - the rotation angle */
     u16      pad_16;                  /* 0x16 */
-    Point2D  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
+    DVECTOR  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
 } AreaTrail;
 
 ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);

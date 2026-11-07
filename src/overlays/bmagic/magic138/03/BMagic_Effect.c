@@ -14,7 +14,7 @@ MATCH void func_801EEED8(void) {
     PartyBattler* saved_work;
 
     saved_work = g_Task;
-    g_Task     = D_801EB4E0;
+    g_Task     = g_BattleEffectBattler;
     func_8014D978();
     g_Task = saved_work;
     if (saved_work->param.unk_0B == 0) {

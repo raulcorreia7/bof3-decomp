@@ -1,17 +1,4 @@
-#include "shared/etc.h"
-
-extern u8  D_8014850E;
-extern u8  D_80148510;
-extern s16 D_801484CC;
-extern u16 D_801484C0;
-extern u16 D_801484C2;
-/* This unit does not include start_08.h: it reads g_MenuPanelTasks[11].x and g_MenuPanelTasks[11].y
- * unsigned (lhu at 0x801D417C and 0x801D418C) while the header spells them
- * s16. The trio below repeats the header's declarations. */
-extern s16 D_80148628;
-extern u16 D_8014862A;
-extern u8* D_801C893C[];
-extern u8* D_801C8950[];
+#include "start_08.h"
 
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 75.37%. resume: a lever or header
  * fix that closes the first mismatch. */
@@ -37,7 +24,7 @@ NON_MATCHING void func_801D40D8(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         *label ^= 1;
     }
-    if (g_InputMasks[INPUT_SLOT_CONFIRM] & *pad) {
+    if (g_InputMasks[MENU_INPUT_CONFIRM] & *pad) {
         if (*label != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             records[g_MenuPanelTasks[13].unk_0A][g_MenuPanelTasks[13].unk_0C]    = 0;
@@ -50,7 +37,7 @@ NON_MATCHING void func_801D40D8(void) {
         *(s8*)((u8*)flag - 0x113) = -1;
         return;
     }
-    if (g_InputMasks[INPUT_SLOT_CANCEL] & *pad) {
+    if (g_InputMasks[MENU_INPUT_CANCEL] & *pad) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         *(s8*)((u8*)flag - 0x113) = -1;
         D_80148651 -= 3;

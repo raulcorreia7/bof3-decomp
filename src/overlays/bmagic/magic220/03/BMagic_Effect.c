@@ -54,7 +54,7 @@ MATCH void func_801EF8CC(void) {
         g_Task->unk_5D = count - 2;
     }
     if (func_8014DAEC() & BYTE_MASK) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }

@@ -22,8 +22,6 @@
 
 /* Fixed retail addresses the units dereference. */
 #define ENCOUNTER_TABLE_BASE   0x800E4000u /* formations and enemy records (@source: wiki:formats/area) */
-#define GAME_PALETTE_STAGE     0x80035600u /* 0x40-byte palette staging entries; GFX_StagePalette copies them out */
-#define GAME_PALETTE_MIRROR    0x80039600u /* GAME_PALETTE_STAGE + 0x4000, GFX_StagePalette's second copy */
 #define GAME_AREA_ID_ADDR      0x80143F00  /* the u16 world id; MEM reads it non-volatile to match retail */
 #define AREA_MESSAGE_REQUEST   0xD8        /* the message Message_RunAreaMessage starts */
 
@@ -195,13 +193,6 @@ ASSERT_OFFSET(SpinQuad, rotation, 0x10);
 ASSERT_OFFSET(SpinQuad, corners, 0x18);
 ASSERT_SIZE(SpinQuad, 0x38);
 
-typedef struct RoutePoint {
-    s16 unk_00;
-    s16 pad_02;
-    s16 unk_04;
-    s16 pad_06;
-} RoutePoint;
-
 /* Per-slot column views over the 0x98-byte work records: the trailing padding
  * carries the record stride so each column keeps its own field base. */
 typedef struct GameSlotWordColumn {
@@ -271,16 +262,13 @@ extern volatile u32       D_80143F0C; /* 0x80143F0C */
 extern s16                D_80143F16; /* 0x80143F16; signed high halfword of the context bundle */
 extern s16                D_80143F1A; /* 0x80143F1A */
 extern volatile u8        g_GameRequestKind;
-extern s16                D_80143F22;
+extern s16                D_80143F26; /* integer half of g_EncounterOriginX */
+extern s16                D_80143F2A; /* integer half of g_EncounterOriginY */
 /* Scene step byte, countdown halfword and the slot index cached in the
  * scratchpad byte at 0x1F800000. The read-modify-write sites go through a
  * pointer, which is the shape this target's exact siblings use; plain stores
  * keep the scalar spelling.
  */
-extern s16                D_80143F26;
-extern s16                D_80143F2A;
-extern RoutePoint         D_80143F2E[]; /* 0x80143F2E */
-extern s16                D_80143F32;
 extern u8                 D_80143F49;
 extern volatile u8        D_80143F4A;
 extern volatile u8        D_80143F4B; /* 0x80143F4B */
@@ -311,7 +299,6 @@ extern u32                D_80145EDC; /* 0x80145EDC */
 extern u8                 D_80145F00; /* 0x80145F00 */
 extern u8                 D_80145F09; /* 0x80145F09 */
 extern u8                 D_80145FA8; /* 0x80145FA8 */
-extern u8                 D_80145FAC;
 extern u8                 D_80145FB4[];
 extern u16                D_80145FB8; /* 0x80145FB8 */
 extern u8                 D_80145FD1;
@@ -915,17 +902,23 @@ u8      func_801B4494(u8 wanted_code);
 u8      func_801B44DC(u8 wanted_code);
 u8      func_801B4D7C(u8 wanted_code);
 bool    func_801B544C(void);
-bool    func_801B55C0(void);
-s32     func_801B5684(void);
+/* func_801B55C0 */
+bool    Party_CanSwitchLeader(void);
+/* func_801B5684 */
+s32     Game_RequestLeaderSwitch(void);
 s32     func_801B5758(void);
 s32     func_801B5884(void);
 s32     func_801B5910(void);
-s8      func_801B5AE4(s32 route_index, s32 route_flags);
+/* func_801B5AE4 */
+s8      Game_FindRockAhead(s32 route_index, s32 route_flags);
 void    func_801B5BDC(u8 route_index);
 void*   func_801B5C54(void);
-s32     func_801B5EBC(void);
-bool    func_801B5F68(s32 selection_kind);
-s32     func_801B6044(void);
+/* func_801B5EBC */
+s32     Game_RequestPersonalAction(void);
+/* func_801B5F68 */
+bool    Game_RequestRockKick(s32 walk_speed);
+/* func_801B6044 */
+s32     Game_RequestGarrPush(void);
 void    func_801B60DC(s32 actor_index);
 s32     func_801B6258(void);
 void    func_801B6418(void);

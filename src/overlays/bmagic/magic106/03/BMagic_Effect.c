@@ -13,12 +13,12 @@ MATCH void func_801EEC04(void) {
     count = 0;
     do {
         if (D_801EF9F8[(u8)count << 5] & 1) {
-            saved      = D_801EB4E0;
-            swap       = FIELD(PartyBattler*, D_801EFA14, (u8)count << 5);
-            D_801F05F8 = D_801EF9F8 + ((u8)count << 5);
-            D_801EB4E0 = swap;
+            saved                 = g_BattleEffectBattler;
+            swap                  = FIELD(PartyBattler*, D_801EFA14, (u8)count << 5);
+            D_801F05F8            = D_801EF9F8 + ((u8)count << 5);
+            g_BattleEffectBattler = swap;
             func_801EEEE0();
-            D_801EB4E0 = saved;
+            g_BattleEffectBattler = saved;
         }
         count += 1;
     } while ((u8)count < 0x60);
@@ -60,18 +60,18 @@ NON_MATCHING void func_801EF418(void) {
 
     angle                        = (FIELD(u16, D_801F05F8, 0xE) + 0x40) & 0xFFF;
     FIELD(u16, D_801F05F8, 0xE)  = angle;
-    FIELD(s32, D_801F05F8, 0x10) = D_801EB4E0->pos.x.raw + rsin(angle) * FIELD(s16, D_801F05F8, 0xC);
+    FIELD(s32, D_801F05F8, 0x10) = g_BattleEffectBattler->pos.x.raw + rsin(angle) * FIELD(s16, D_801F05F8, 0xC);
     cosTerm                      = rcos((s16)FIELD(u16, D_801F05F8, 0xE)) * FIELD(s16, D_801F05F8, 0xC);
     counter                      = FIELD(u8, D_801F05F8, 0xB) + 1;
     spin                         = FIELD(u8, D_801F05F8, 0xA);
     FIELD(u16, D_801F05F8, 0x1A) = (u16)(FIELD(u16, D_801F05F8, 0x1A) + spin);
     FIELD(u8, D_801F05F8, 0xB)   = counter;
-    FIELD(s32, D_801F05F8, 0x14) = D_801EB4E0->pos.y.raw + cosTerm;
+    FIELD(s32, D_801F05F8, 0x14) = g_BattleEffectBattler->pos.y.raw + cosTerm;
     if (g_FrameCount & 1) {
         timer                    = FIELD(u8, D_801F05F8, 9) - 1;
         FIELD(u8, D_801F05F8, 9) = timer;
         if (!(timer & 0xFF)) {
-            D_801EB4E0->param.unk_0B -= 1;
+            g_BattleEffectBattler->param.unk_0B -= 1;
             func_801EF970();
         }
     }
@@ -95,7 +95,7 @@ MATCH void func_801EF52C(void) {
     pos.vx = (FIELD(s32, D_801F05F8, 0x10) >> 9) - 0x4000;
     pos.vy = (FIELD(s32, D_801F05F8, 0x14) >> 9) - 0x4000;
     pos.vz = -FIELD(s16, D_801F05F8, 0x1A) / 2;
-    RotTrans(&pos, &matrix.t, &flags);
+    RotTransMatrix(&pos, matrix, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);

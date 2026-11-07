@@ -19,7 +19,7 @@ MATCH s32 func_801E0770(void) {
     if (4 != g_ActorSlots[0].header.mode) {
         return result;
     }
-    if (0xFF != D_801E3208) {
+    if (0xFF != g_FishingHookedFish) {
         return result;
     }
     if (0 != D_80144199) {

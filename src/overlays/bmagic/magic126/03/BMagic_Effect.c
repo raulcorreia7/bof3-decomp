@@ -13,12 +13,12 @@ MATCH void func_801EEC04(void) {
     count = 0;
     do {
         if (D_801F12BC[(u8)count << 5] & 1) {
-            saved      = D_801EB4E0;
-            swap       = FIELD(PartyBattler*, D_801F12D8, (u8)count << 5);
-            D_801F22BC = D_801F12BC + ((u8)count << 5);
-            D_801EB4E0 = swap;
+            saved                 = g_BattleEffectBattler;
+            swap                  = FIELD(PartyBattler*, D_801F12D8, (u8)count << 5);
+            D_801F22BC            = D_801F12BC + ((u8)count << 5);
+            g_BattleEffectBattler = swap;
             func_801F091C();
-            D_801EB4E0 = saved;
+            g_BattleEffectBattler = saved;
         }
         count += 1;
     } while ((u8)count < 0x80);
@@ -83,7 +83,7 @@ MATCH void func_801EFB74(void) {
     if (timer == 0) {
         SND_QueueSelectionFx(0x100);
         work               = g_Task;
-        actor              = D_801EB4E0;
+        actor              = g_BattleEffectBattler;
         work->pos.x.fixed  = actor->pos.x.fixed;
         work->pos.y.fixed  = actor->pos.y.fixed;
         z                  = actor->pos.z.fixed;

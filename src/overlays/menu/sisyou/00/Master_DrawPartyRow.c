@@ -15,7 +15,7 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     record = (Character*)(&g_WindowStyle + 0x16) + entry;
     Menu_DrawPortrait((x + 0x56), (y + 2), record->character_id, ((record->status >> 6) & 2));
     UI_DrawText((x + 20), (y + 3), 0, 5, (u8*)record);
-    sprintf((char*)g_UiFormatBuffer, D_801D0C04, record->level);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C04, record->level);
     UI_DrawGlyphString((x + 22), (y + 23), 0, g_UiFormatBuffer);
 
     /* Retail reads the status halfword and the next one as a word. */
@@ -36,28 +36,25 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     if (value < 2U) {
         align = 2;
     }
-    sprintf((char*)g_UiFormatBuffer, D_801D0C08, value);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C08, value);
     text_x = (x + 0x16);
     text_y = (y + 0x1F);
     UI_DrawGlyphString(text_x, text_y, align, g_UiFormatBuffer);
-    sprintf((char*)g_UiFormatBuffer, D_801D0C10, record->stats.max_hp);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C10, record->stats.max_hp);
     UI_DrawGlyphString(text_x, text_y, 0, g_UiFormatBuffer);
 
     align = ((record->stats.max_ap >> 2) >= record->ap) ? 4 : 0;
     if (record->ap == 0) {
         align = 2;
     }
-    sprintf((char*)g_UiFormatBuffer, D_801D0C08, record->ap);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C08, record->ap);
     text_y = (y + 0x27);
     UI_DrawGlyphString(text_x, text_y, align, g_UiFormatBuffer);
-    sprintf((char*)g_UiFormatBuffer, D_801D0C10, record->stats.max_ap);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C10, record->stats.max_ap);
     UI_DrawGlyphString(text_x, text_y, 0, g_UiFormatBuffer);
 
     UI_DrawSpriteRun(x, y, D_801D3F58, 0);
     Menu_DrawExperienceLine((x + 0x14), (y + 0x12), entry, record->level, record->exp);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    GFX_AddDrawMode(0xF);
+    GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     Menu_DrawPanelIcon((x + 9), (y + 5), (u8)(icon + 3), 0x1E, GetClut(16, 480), 128);
 }

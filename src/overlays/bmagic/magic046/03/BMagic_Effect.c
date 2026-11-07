@@ -26,9 +26,9 @@ MATCH void func_801EF014(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_Task->facing     = D_801EB4E0->facing;
+    g_Task->facing     = g_BattleEffectBattler->facing;
     work               = g_Task;
-    actor              = D_801EB4E0;
+    actor              = g_BattleEffectBattler;
     work->pos.x.fixed  = actor->pos.x.fixed;
     work->pos.y.fixed  = actor->pos.y.fixed;
     z                  = actor->pos.z.fixed;
@@ -45,7 +45,7 @@ INCLUDE_ASM(func_801EF090);
 #include "../../Effect_DispatchHandlerSlot2.h"
 
 MATCH void func_801EF250(void) {
-    g_Task                           = D_801EB4E0;
+    g_Task                           = g_BattleEffectBattler;
     BATTLE_ACTIVE_WORK->param.unk_0B = 0;
     g_Task->unk_09                   = 0;
     Actor_SelectScript(2U);
@@ -110,7 +110,7 @@ MATCH void func_801EF660(void) {
     timer_next    = g_Task->timer - 1;
     g_Task->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.flags = 0;
         g_Task->header.mode  = 0;
         g_Task->header.step  = 0;

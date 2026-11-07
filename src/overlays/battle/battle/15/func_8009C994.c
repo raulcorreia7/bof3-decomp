@@ -47,10 +47,10 @@ MATCH void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event) {
             break;
         case 5:
             if (event->selector & 2) {
-                work->drops[0].rate_02 = event->value;
+                work->drops[0].rate = event->value;
             }
             if (event->selector & 1) {
-                work->drops[1].rate_02 = event->value;
+                work->drops[1].rate = event->value;
             }
             break;
         case 6:

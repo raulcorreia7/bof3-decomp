@@ -29,11 +29,11 @@ MATCH void func_801B9210(void) {
     mode                 = func_801B9598();
     if (mode == 1 || mode == 3) {
         if ((func_801BDF08() << 24) != 0) {
-            g_Task->unk_09 = 0;
+            g_Task->timer = 0;
             Actor_ClearVelocity();
         } else {
             func_801C24D0();
-            g_Task->unk_09--;
+            g_Task->timer--;
             func_801C57B4();
         }
     } else {

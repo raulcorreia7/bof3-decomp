@@ -61,7 +61,7 @@ NON_MATCHING void func_801D8390(void) {
         }
     }
     D_80148656 = slot[0xA];
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         state                        = &D_801485DC;
         *state                       = 0;
@@ -73,7 +73,7 @@ NON_MATCHING void func_801D8390(void) {
         g_BattleItemRow              = (g_MenuPanelTasks[16].unk_0B == 3) ? 6 : 5;
         g_MenuPanelTasks[18].unk_0B  = 0;
         D_80148652 += 1;
-    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_801485DC = 0;
         D_80148651 -= 5;

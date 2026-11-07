@@ -24,5 +24,5 @@ MATCH void func_801F3798(void) {
 bump:
     TASK_BYTES[0x03]++;
 done:
-    Area_DrawHudBanner(0x5C, ((Actor*)g_Task)->unk_30);
+    Area_DrawHudBanner(0x5C, ((Actor*)g_Task)->screen_y);
 }

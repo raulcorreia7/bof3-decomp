@@ -7,11 +7,11 @@ MATCH void func_80097844(void) {
     u8* entry;
 
     held = g_InputPressed;
-    if ((held & g_InputMasks[INPUT_SLOT_CANCEL]) != 0u) {
+    if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_BattleUIState = 4u;
         return;
     }
-    if ((held & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0u) {
+    if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         g_BattleUIState = 3u;
         return;
     }
@@ -22,19 +22,19 @@ MATCH void func_80097844(void) {
     entry   = Party_GetAbilities(message[0], D_8014857B, 1);
     if ((D_801CA718[entry[D_8014857C] * 0x14] & ABILITY_TARGET_BOTH_SIDES) != 0u &&
         (trigger & (PADLup | PADLdown)) != 0) {
-        D_801EB4D8->command.target = Battle_FindSelectableSlotForward(0);
+        g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(0);
         *(u8*)&g_BattleUIState += 1u;
         SND_PlayCue(EMI_CUE_ID(1, 1));
         return;
     }
     if ((trigger & PADLright) != 0) {
-        D_801EB4D8->command.target = Battle_FindSelectableSlotForward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)D_801EB4D8->command.target + 1) & BYTE_MASK);
+        g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(
+            func_801DD7D8(g_BattleEnemyCount + 2, 3, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if ((trigger & PADLleft) != 0) {
-        D_801EB4D8->command.target = Battle_FindSelectableSlotBackward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)D_801EB4D8->command.target - 1) & BYTE_MASK);
+        g_BattleActorTurn->command.target = Battle_FindSelectableSlotBackward(
+            func_801DD7D8(g_BattleEnemyCount + 2, 3, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

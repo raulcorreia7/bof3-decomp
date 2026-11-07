@@ -10,4 +10,9 @@
 
 extern void (*D_801F01AC[])(void);
 
+/* The effect slot table BMagic_AllocEffect scans, and its row count. */
+extern BMagicEffectWork D_801F01B0[];
+#define BMAGIC_EFFECT_SLOTS D_801F01B0
+#define BMAGIC_EFFECT_COUNT 128
+
 #endif

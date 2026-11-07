@@ -20,16 +20,16 @@ NON_MATCHING void func_801BF5A8(s32 x, s32 y, s32 party_slot) {
     } else {
         base = g_PartyFormation;
     }
-    if (s_CameraScrollDeltas[g_BattleScrollDir * 2] != 0) {
+    if (s_CameraScrollDeltas[g_BattleScrollDir].dx != 0) {
         rec        = g_Task;
         off        = (((base & BYTE_MASK) * 3) + (party_slot & BYTE_MASK)) * 8;
-        rec->pos.x = x + (FIELD(s32, D_80181CA8, off) * (s_CameraScrollDeltas[g_BattleScrollDir * 2] / 4));
-        rec->pos.y = y + (FIELD(s32, &D_80181CAC, off) * (s_CameraScrollDeltas[g_BattleScrollDir * 2] / 4));
+        rec->pos.x = x + (FIELD(s32, D_80181CA8, off) * (s_CameraScrollDeltas[g_BattleScrollDir].dx / 4));
+        rec->pos.y = y + (FIELD(s32, &D_80181CAC, off) * (s_CameraScrollDeltas[g_BattleScrollDir].dx / 4));
     } else {
         rec        = g_Task;
         off        = (((base & BYTE_MASK) * 3) + (party_slot & BYTE_MASK)) * 8;
-        rec->pos.x = x - (FIELD(s32, &D_80181CAC, off) * (D_801CD459[g_BattleScrollDir * 2] / 4));
-        rec->pos.y = y + (FIELD(s32, D_80181CA8, off) * (D_801CD459[g_BattleScrollDir * 2] / 4));
+        rec->pos.x = x - (FIELD(s32, &D_80181CAC, off) * (s_CameraScrollDeltas[g_BattleScrollDir].dy / 4));
+        rec->pos.y = y + (FIELD(s32, D_80181CA8, off) * (s_CameraScrollDeltas[g_BattleScrollDir].dy / 4));
     }
     COORD_INT(g_Task->depth) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
 }

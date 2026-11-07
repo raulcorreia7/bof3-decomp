@@ -5,7 +5,7 @@ MATCH s32 func_801C5474(void) {
     Actor* state;
     u8     countdown;
     work      = g_Task;
-    countdown = work->unk_09;
+    countdown = work->timer;
     if (countdown == 0) {
         Actor_RequestScript(work->direction_08);
         Actor_ClearVelocity();
@@ -16,11 +16,11 @@ MATCH s32 func_801C5474(void) {
         g_Task->unk_04 = 0;
         return 1;
     }
-    work->unk_09 = (countdown - 1);
+    work->timer = (countdown - 1);
     func_801C57B4();
     state = g_Task;
-    if (state->unk_09 == state->unk_0A) {
-        GFX_StagePalette(((state->unk_05 << 6) + MEM_PTR(u8, 0x80035600u)), 0);
+    if (state->timer == state->unk_0A) {
+        GFX_StagePalette(((state->unk_05 << 6) + GAME_PALETTE_STAGE), 0);
     }
     func_8014D978();
     return 0;

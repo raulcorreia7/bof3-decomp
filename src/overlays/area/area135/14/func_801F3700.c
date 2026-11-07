@@ -11,17 +11,17 @@ MATCH void func_801F3700(void) {
     u8  next;
 
     if (g_Task->unk_06 != 0) {
-        step     = g_Task->unk_09;
+        step     = g_Task->timer;
         sample_w = step * 0x19;
         x        = D_801F6210 + ((0xC8 - sample_w) / 2);
         sample_h = step * 6;
         y        = D_801F6212 + ((0x30 - sample_h) >> 1);
         func_80159FA0(x, y, sample_w, sample_h);
     }
-    next = g_Task->unk_09;
+    next = g_Task->timer;
     if (next == 0) {
         Actor_Clear();
         return;
     }
-    g_Task->unk_09 = next - 1;
+    g_Task->timer = next - 1;
 }

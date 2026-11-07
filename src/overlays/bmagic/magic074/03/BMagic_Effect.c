@@ -24,7 +24,7 @@ INCLUDE_ASM(func_801EF058);
 
 INCLUDE_ASM(func_801EF2C8);
 
-INCLUDE_ASM(func_801EF3C0);
+#include "overlays/bmagic/Effect_BrightenPaletteThenStep.h"
 
 /* func_801EF4D0 */
 #include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"
@@ -68,7 +68,8 @@ INCLUDE_ASM(func_801EFE18);
 
 INCLUDE_ASM(func_801F00B0);
 
-INCLUDE_ASM(func_801F03D4);
+/* func_801F03D4 */
+#include "overlays/bmagic/BMagic_AllocEffect.h"
 
 MATCH void func_801F0440(void) {
     D_801F20DC->header.flags = 0;

@@ -21,7 +21,7 @@ void  Actor_Create(u8* request);
 /* func_8019625C */
 void  func_8019625C(void);
 /* func_8019651C */
-s32   GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
+s32   GFX_AllocPaletteFade(void* target, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
 /* func_80196670 */
 void  GFX_FreePaletteFade(u8 index);
 /* func_80196718 */
@@ -120,16 +120,20 @@ void  func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height,
 void  UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 /* func_801AF20C */
 s32   func_801AF20C(u8* command_stream);
+/* func_801AF270 */
+u8*   func_801AF270(u8 sprite_id, u8 flags);
 /* func_801AF2A0 */
 void  UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
+/* func_801AF390 */
+s32   func_801AF390(s16 x, s16 y, u8* table, s32 flags);
 /* func_801AF5B0 */
-s32   func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
+u8    func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 /* func_801AFD10 */
 s32   func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
 /* func_801AFE18 */
 void* Area_SetCameraMatrix(void* out_matrix);
 /* func_801AFF04 */
-void  Area_ProjectPoint(s32* pos, long* screen_xy);
+void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 /* func_801AFF64 */
 void  Matrix_SetIdentity(MATRIX* matrix);
 /* func_801AFFD8 */

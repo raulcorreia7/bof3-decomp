@@ -44,9 +44,9 @@ MATCH void func_801EF008(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_Task->facing    = D_801EB4E0->facing;
+    g_Task->facing    = g_BattleEffectBattler->facing;
     work              = g_Task;
-    actor             = D_801EB4E0;
+    actor             = g_BattleEffectBattler;
     work->pos.x.fixed = actor->pos.x.fixed;
     work->pos.y.fixed = actor->pos.y.fixed;
     z                 = actor->pos.z.fixed;

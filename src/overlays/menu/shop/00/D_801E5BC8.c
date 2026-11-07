@@ -55,7 +55,7 @@ Callback g_ShopStep7Sub3Funcs[SHOP_STEP7_SUB3_COUNT] = {func_801E0968, func_801E
 u8 D_801E5D1C[8] = "NOTE";
 u8 D_801E5D24[8] = "SKILL";
 
-Callback D_801E5D2C[3] = {func_801E1BCC, func_801E1C88, func_801E1D84};
+Callback g_AbilityStockSortFuncs[3] = {Menu_PackAbilityStock, Menu_SortAbilityStockByCostDescending, Menu_SortAbilityStockByCostAscending};
 
 u8 D_801E5D38[4] = "Ink";
 

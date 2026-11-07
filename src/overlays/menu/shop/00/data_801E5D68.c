@@ -1,6 +1,6 @@
 #include "shop_00.h"
 
-Callback D_801E5D68[19] = {
+Callback g_ShopPanelFuncs[SHOP_PANEL_COUNT] = {
     func_801E2808,
     func_801E2AB0,
     func_801E29C8,

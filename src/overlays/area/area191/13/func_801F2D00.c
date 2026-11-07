@@ -3,8 +3,8 @@
 MATCH void func_801F2D00(void) {
     u8 mode;
 
-    mode           = g_Task->unk_09 - 1;
-    g_Task->unk_09 = mode;
+    mode          = g_Task->timer - 1;
+    g_Task->timer = mode;
     if (mode & 0xFF) {
         g_Task->tint.bytes.unk_5D += 1;
         g_Task->tint.bytes.unk_5E += 1;

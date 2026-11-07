@@ -25,23 +25,23 @@ MATCH void func_80167910(void) {
     if (D_8014626C[0] & 0x40) {
         return;
     }
-    pos.vx         = (s16)((D_801462A0 >> 9) - 0x4000);
-    pos.vy         = (s16)((D_801462A4 >> 9) - 0x4000);
-    pos.vz         = (s16)(-(D_801462AA + 0x80) / 2);
-    g_Task->unk_60 = RotTransPers(&pos, (long*)&sxy, &p, &flag);
-    g_Task->unk_2E = sxy.vx;
-    g_Task->unk_30 = sxy.vy;
-    poly           = (POLY_FT4*)g_GfxPrimCursor;
+    pos.vx           = (s16)((D_801462A0 >> 9) - 0x4000);
+    pos.vy           = (s16)((D_801462A4 >> 9) - 0x4000);
+    pos.vz           = (s16)(-(D_801462AA + 0x80) / 2);
+    g_Task->unk_60   = RotTransPers(&pos, (long*)&sxy, &p, &flag);
+    g_Task->screen_x = sxy.vx;
+    g_Task->screen_y = sxy.vy;
+    poly             = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(poly);
-    sy       = g_Task->unk_2E;
+    sy       = g_Task->screen_x;
     poly->x0 = sy - 6;
     poly->x1 = sy + 7;
     poly->x2 = poly->x0;
     poly->x3 = poly->x1;
     if (g_FrameCount & 8) {
-        poly->y0 = g_Task->unk_30 - 27 + (((u32)g_FrameCount >> 1) & 3);
+        poly->y0 = g_Task->screen_y - 27 + (((u32)g_FrameCount >> 1) & 3);
     } else {
-        poly->y0 = g_Task->unk_30 - 24 - (((u32)g_FrameCount >> 1) & 3);
+        poly->y0 = g_Task->screen_y - 24 - (((u32)g_FrameCount >> 1) & 3);
     }
     poly->u0 = 204;
     poly->u1 = 204;
@@ -72,7 +72,7 @@ MATCH void func_80167910(void) {
     rot.vx  = (s16)((g_Task->pos.x.fixed >> 9) - 0x4000);
     rot.vy  = (s16)((g_Task->pos.y.fixed >> 9) - 0x4000);
     rot.vz  = (s16)(-COORD_INT(g_Task->pos.z) / 2);
-    RotTrans(&rot, (VECTOR*)mtx.t, &flag);
+    RotTransMatrix(&rot, mtx, &flag);
     RotMatrix(&axis, &mtx);
     MulMatrix2(&g_CameraMatrix, &mtx);
     SetRotMatrix(&mtx);

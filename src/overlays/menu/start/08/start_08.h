@@ -82,7 +82,68 @@ enum {
     SAVE_STATUS_NO_CARD      = 8, /* neither port holds a usable card */
 };
 
-extern u16             g_GameAreaId;
+typedef struct {
+    s32 unk_00;
+    s32 unk_04;
+    s8  unk_08;
+    s8  unk_09;
+} __attribute__((packed)) Record10;
+
+typedef struct {
+    s32 unk_00;
+    s32 unk_04;
+    s8  unk_08;
+    s8  unk_09;
+    s8  unk_0A;
+} __attribute__((packed)) Record11;
+
+typedef struct {
+    s32 unk_00;
+    s8  unk_04;
+    s8  unk_05;
+} __attribute__((packed)) Record6;
+
+typedef struct {
+    s32 unk_00;
+    s32 unk_04;
+} __attribute__((packed)) Record8;
+
+extern Record10 D_801D0DE0;
+extern Record11 D_801D0DEC;
+extern Record11 D_801D0DF8;
+extern Record6  D_801D0E04;
+extern Record8  D_801D0E0C;
+extern Record11 D_801D0E14;
+
+typedef struct Start08Rotation {
+    u16 unk_00;
+    u16 unk_02;
+    s32 unk_04;
+} Start08Rotation;
+
+extern Start08Rotation D_801EC4D0[];
+
+/* One 8-byte label row: glyph count, signed x nudge (read through (s8)), then
+ * the text. */
+typedef struct StartLabel {
+    u8 length;
+    u8 offset_x;
+    u8 text[6];
+} StartLabel;
+
+extern StartLabel D_801ECD24[];
+
+/* The four command labels of the grid ("Next", "Back", "Quit", "Start"), five characters each. */
+typedef struct NameEntryLabels {
+    u8 next[5];
+    u8 back[5];
+    u8 quit[5];
+    u8 start[5];
+} NameEntryLabels;
+
+extern NameEntryLabels D_801D0F00;
+extern u8              D_801ECDBC[];
+
 extern u8              D_80144F57;
 extern u16             D_80145594[];
 extern u8              D_80145FCC[][BATTLE_PARTY_STRIDE];
@@ -111,6 +172,7 @@ extern u8              D_8014850F; /* the panel's group first entry */
 extern u8              D_80148510; /* the panel's group cursor */
 extern s8              D_80148511; /* signed scalar view of the panel's drawn cursor */
 extern u8*             D_80148524;
+extern s8              D_8014854C;
 extern s8              D_8014854D;
 extern s8              D_8014854E;
 extern s8              D_8014854F;
@@ -120,13 +182,13 @@ extern u8              D_80148556;
 /* D_80148570: the battle choice panel record, also the skill-order work area. */
 extern u8              g_BattleChoicePanel[];
 extern s8              D_80148571;
-extern u8              D_80148572;
+extern s8              D_80148572;
 extern s16             D_80148576;
 extern u8              D_80148594;
-extern u8              D_80148595;
-extern u8              D_80148596;
-extern u16             D_80148598;
-extern u16             D_8014859A;
+extern s8              D_80148595;
+extern s8              D_80148596;
+extern s16             D_80148598;
+extern s16             D_8014859A;
 extern u16             D_801485BC;
 extern u16             D_801485BE;
 extern u8              D_801485DD;
@@ -135,6 +197,8 @@ extern s16             D_80148628; /* the computed bar length; func_801D8188 sto
 extern u16             D_8014862A; /* the second bar length; func_801D8188 stores it with sh at 0x801D8210 */
 extern u8              D_80148653;
 extern u8              D_80148654;
+/* D_80148656, the party cursor, has no declaration here: its readers split between lb and lbu, so each unit keeps its own view. */
+extern s8              D_80148658[6];
 extern u8              D_8014865F;
 extern u8              D_80148660;
 extern s8              D_80148662;
@@ -169,11 +233,32 @@ extern Character       D_801EB990;
 extern u8              D_801EBA34[][2];
 extern u8              s_CampMenuPanelIds[8];
 /* Entries of the step handler tables. */
-#define MENU_START_STEP_COUNT       9
-#define MENU_START_STEP2_COUNT      11
-#define MENU_START_STEP5_COUNT      6
-#define MENU_START_STEP5_SUB2_COUNT 3
-#define MENU_START_STEP6_COUNT      5
+#define MENU_START_STEP_COUNT          9
+#define MENU_START_STEP2_COUNT         11
+#define MENU_START_STEP5_COUNT         6
+#define MENU_START_STEP5_SUB2_COUNT    3
+#define MENU_START_STEP6_COUNT         5
+
+/* Entries of the panel handler tables. */
+#define MENU_START_PANEL_COUNT         21
+#define MENU_START_PANEL0_STATE_COUNT  11
+#define MENU_START_PANEL1_STATE_COUNT  3
+#define MENU_START_PANEL2_STATE_COUNT  3
+#define MENU_START_PANEL3_STATE_COUNT  3
+#define MENU_START_PANEL4_STATE_COUNT  3
+#define MENU_START_PANEL5_STATE_COUNT  7
+#define MENU_START_PANEL6_STATE_COUNT  3
+#define MENU_START_PANEL7_STATE_COUNT  3
+#define MENU_START_PANEL8_STATE_COUNT  3
+#define MENU_START_PANEL9_STATE_COUNT  3
+#define MENU_START_PANEL11_STATE_COUNT 3
+#define MENU_START_PANEL12_STATE_COUNT 5
+#define MENU_START_PANEL13_STATE_COUNT 3
+#define MENU_START_PANEL16_STATE_COUNT 5
+#define MENU_START_PANEL17_STATE_COUNT 5
+#define MENU_START_PANEL18_STATE_COUNT 5
+#define MENU_START_PANEL19_STATE_COUNT 3
+#define MENU_START_PANEL20_STATE_COUNT 3
 
 /* D_801EC35C */
 extern Callback g_MenuStartStepFuncs[MENU_START_STEP_COUNT];
@@ -231,32 +316,51 @@ extern u8       s_PanelIconValues[228];
 extern s32 (*D_801ED224[])(u8 caster_index, u8 target_index, u8 use_battle_record);
 extern s32 (*D_801ED24C[])(u8 save_slot, u8 record_value);
 extern u8       g_SaveRecordTypeCommands[92];
-extern Callback D_801ED330[21];
-extern Callback D_801ED384[11];
-extern Callback D_801ED3B0[3];
-extern Callback D_801ED3BC[3];
-extern Callback D_801ED3C8[6];
-extern void (*D_801ED3D4[])(void);
-extern Callback D_801ED3E0[7];
-extern Callback D_801ED3FC[3];
-extern Callback D_801ED408[3];
-extern Callback D_801ED414[3];
-extern Callback D_801ED420[3];
+/* D_801ED330 */
+extern Callback g_MenuStartPanelFuncs[MENU_START_PANEL_COUNT];
+/* D_801ED384 */
+extern Callback g_MenuStartPanel0StateFuncs[MENU_START_PANEL0_STATE_COUNT];
+/* D_801ED3B0 */
+extern Callback g_MenuStartPanel1StateFuncs[MENU_START_PANEL1_STATE_COUNT];
+/* D_801ED3BC */
+extern Callback g_MenuStartPanel2StateFuncs[MENU_START_PANEL2_STATE_COUNT];
+/* D_801ED3C8 */
+extern Callback g_MenuStartPanel3StateFuncs[MENU_START_PANEL3_STATE_COUNT];
+/* D_801ED3D4 */
+extern Callback g_MenuStartPanel4StateFuncs[MENU_START_PANEL4_STATE_COUNT];
+/* D_801ED3E0 */
+extern Callback g_MenuStartPanel5StateFuncs[MENU_START_PANEL5_STATE_COUNT];
+/* D_801ED3FC */
+extern Callback g_MenuStartPanel6StateFuncs[MENU_START_PANEL6_STATE_COUNT];
+/* D_801ED408 */
+extern Callback g_MenuStartPanel7StateFuncs[MENU_START_PANEL7_STATE_COUNT];
+/* D_801ED414 */
+extern Callback g_MenuStartPanel8StateFuncs[MENU_START_PANEL8_STATE_COUNT];
+/* D_801ED420 */
+extern Callback g_MenuStartPanel9StateFuncs[MENU_START_PANEL9_STATE_COUNT];
 extern u16      D_801ED42C[1];
 extern u16      D_801ED42E[];
-extern Callback D_801ED43C[3];
-extern Callback D_801ED448[5];
-extern Callback D_801ED45C[];
+/* D_801ED43C */
+extern Callback g_MenuStartPanel11StateFuncs[MENU_START_PANEL11_STATE_COUNT];
+/* D_801ED448 */
+extern Callback g_MenuStartPanel12StateFuncs[MENU_START_PANEL12_STATE_COUNT];
+/* D_801ED45C */
+extern Callback g_MenuStartPanel13StateFuncs[MENU_START_PANEL13_STATE_COUNT];
 extern u8       D_801ED468[];
 extern u8       D_801ED48C[];
 extern u8       D_801ED498[];
 extern u32      D_801ED534[];
 extern u8       D_801ED560[][6];
-extern Callback D_801ED58C[5];
-extern Callback D_801ED5A0[5];
-extern Callback D_801ED5B4[5];
-extern Callback D_801ED5C8[];
-extern Callback D_801ED5E4[];
+/* D_801ED58C */
+extern Callback g_MenuStartPanel16StateFuncs[MENU_START_PANEL16_STATE_COUNT];
+/* D_801ED5A0 */
+extern Callback g_MenuStartPanel17StateFuncs[MENU_START_PANEL17_STATE_COUNT];
+/* D_801ED5B4 */
+extern Callback g_MenuStartPanel18StateFuncs[MENU_START_PANEL18_STATE_COUNT];
+/* D_801ED5C8 */
+extern Callback g_MenuStartPanel19StateFuncs[MENU_START_PANEL19_STATE_COUNT];
+/* D_801ED5E4 */
+extern Callback g_MenuStartPanel20StateFuncs[MENU_START_PANEL20_STATE_COUNT];
 extern u8       s_PartyCharacterIds[3];
 extern u8       D_801ED613[];
 extern s8       D_801ED618;
@@ -283,6 +387,7 @@ extern s8       g_MenuStartTimer;
 extern u8       D_801ED7F4;
 extern u8       D_801ED7F8;
 /* D_801ED860 */
+extern u8       g_MenuStartReturnStep;
 extern u8       g_MenuStartStep;
 extern u8       D_801ED864;
 extern u8       D_801ED868;
@@ -297,6 +402,14 @@ extern u8       s_SkillOrderGroups[4][6];
 extern u8       s_SkillOrderKinds[3][6];
 extern Callback g_MenuCampSubFuncs[5];
 extern Callback g_MenuCampFuncs[5];
+
+/* The name entry command labels, the grid's dot string and the control window's sprite table. */
+/* D_801ED1B8 */
+extern u8* g_NameEntryCommandLabels[];
+/* D_801ED1D4 */
+extern u8* g_NameEntryGridDot;
+/* D_801ED05C */
+extern u8  g_NameEntryControlsFrame[];
 
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
@@ -422,7 +535,8 @@ void        SAVE_RunLoadRestore(void);
 void        Camp_EnterMainLoop(void);
 extern void func_801E6388(s32 overlay_x, s32 overlay_y);
 extern void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y);
-extern s32  func_801E6784(u8 page, s32 x, s32 y);
+/* func_801E6784 */
+extern s32  Start_DrawNameEntryControls(u8 page, s32 x, s32 y);
 extern u8   func_801E715C(s32 range_low, s32 range_high, s32 draw_count);
 extern void func_801E7210(u32 panel_index);
 s32         func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record);
@@ -434,6 +548,7 @@ void        func_801E8EA8(void);
 void        func_801E8EE8(void);
 void        func_801E8F28(void);
 void        func_801E8F68(void);
+void        func_801E8FA8(void);
 void        func_801E8FE8(void);
 void        func_801E9040(void);
 void        func_801E9080(void);
@@ -479,6 +594,8 @@ void        func_801E9FB0(void);
 void        func_801E9FF0(void);
 void        func_801EA030(void);
 void        func_801EA0B0(void);
+void        func_801EA118(void);
+void        func_801EA158(void);
 void        func_801EA1C8(void);
 void        func_801EA50C(void);
 void        func_801EA598(void);
@@ -497,6 +614,8 @@ void        func_801EA8C0(void);
 void        func_801EA900(void);
 void        func_801EA940(void);
 extern void func_801EAA14(MenuPanelTask* task);
+void        func_801EA994(void);
+void        func_801EA9D4(void);
 void        func_801EAEC4(void);
 extern void func_801EAF98(MenuPanelTask* task);
 extern s8   CardAccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
@@ -558,9 +677,9 @@ extern char      g_MenuClockFormat[];
 extern u8        D_801D0E20[];
 extern s32       D_801D0E28;
 extern s32       D_801D0EA8;
-extern s8        D_801D0F18;
-extern s8        D_801D0F1C;
-extern s8        D_801D0F24;
+extern char      D_801D0F18[];
+extern char      D_801D0F1C[];
+extern char      D_801D0F24[];
 void             Party_InitDefaults(void);
 void             func_801D29A4(void);
 extern void      func_801D2C7C(void);
@@ -571,7 +690,8 @@ void             func_801D71EC(void);
 void             func_801D9664(void);
 void             func_801D96D4(void);
 void             Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
-s32              func_801DAE14(u16);
+void             func_801DAE14(u16 buttons);
+void             Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 void             func_801DE5D4(u8, u16, u16, s32, s32, MenuPanelTask*);
 extern void      func_801E30FC(u16 row_x, u16 row_y, s32 row_flags);
 void             func_801E6D88(s32 prompt_x);
@@ -580,6 +700,8 @@ void             func_801E7000(void);
 extern s32       func_801E7348(void);
 extern void      func_801E77F0(void);
 void             func_801E9350(void);
+void             func_801EAF18(void);
+void             func_801EAF58(void);
 extern u8        D_801EC3E0[]; /* 6-byte rows: entry count, then up to five entries */
 extern s32       D_801EC488;
 extern s32       D_801EC4A4;
@@ -620,6 +742,10 @@ extern s8        D_801ED678;
 extern s8        D_801ED67C;
 extern u8        D_801ED69C;
 extern s32       D_801ED878;
+extern u8        D_801ED7FC;
+extern s8        D_801ED66C;
+extern u8        D_801ED105;
+extern u8        D_801485B8;
 void             func_801EA1F0(MenuPanelTask* task);
 
 /* Pick the party record the record index selects: record 0 is the saved

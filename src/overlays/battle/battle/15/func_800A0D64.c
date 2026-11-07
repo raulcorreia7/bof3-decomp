@@ -24,7 +24,7 @@ MATCH void func_800A0D64(void) {
     if (BATTLER_IS_PLAYER(battler)) {
         g_BattleTargetRecord->hp_change -= D_80145F26[battler][0];
     } else {
-        g_BattleTargetRecord->hp_change -= D_801EB6D6[battler - 3u][0];
+        g_BattleTargetRecord->hp_change -= ENEMY_COMBATANT(battler).stats.defense;
     }
     record = g_BattleTargetRecord;
     CLAMP_MIN(record->hp_change, 0);

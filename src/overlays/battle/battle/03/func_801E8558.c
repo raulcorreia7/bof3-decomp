@@ -9,16 +9,16 @@ MATCH void func_801E8558(void) {
     PartyBattler* stage;
     u32           step;
 
-    D_801EB4E0->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    stage = D_801EB4E0;
+    g_BattleEffectBattler->header.flags &= ~ACTOR_FLAG_HIDDEN;
+    stage = g_BattleEffectBattler;
     step  = stage->scale.x;
     if (step != 0x10000) {
         stage->scale.x = step + 0x2000;
         return;
     }
     stage->unk_48 = 0;
-    work          = D_801EB4E0;
-    g_BattlePartyBattlers[work->slot].turn.damage_flags.value &= ~0x2000u;
+    work          = g_BattleEffectBattler;
+    g_BattlePartyBattlers[work->slot].turn.damage_flags.value &= ~COMBATANT_FLAG_FORM_EFFECT_PLAYING;
     g_BattlePartyBattlers[work->slot].turn.action_flags.value &= 0xFFFCFFF9u;
     func_801E5988();
 }

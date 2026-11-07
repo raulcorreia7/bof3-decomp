@@ -5,5 +5,5 @@ MATCH void func_8019AC84(void) {
 
     func_8019A904();
     work     = (Actor*)SCRATCH_WORK;
-    work->vy = ((work->vx - g_AreaCameraOffsetZ) << 0x10) / work->unk_09;
+    work->vy = ((work->vx - g_AreaCameraOffsetZ) << 0x10) / work->timer;
 }

@@ -14,15 +14,15 @@ MATCH void func_801EEC14(void) {
     count = 0;
     do {
         if (BMAGIC_EFFECT_SLOTS[(u8)count].header.flags & 1) {
-            saved_work   = g_Task;
-            saved_active = D_801EB4E0;
-            swap         = BMAGIC_EFFECT_SLOTS[(u8)count].target.party;
-            g_Task       = MEM_PTR(PartyBattler, &BMAGIC_EFFECT_SLOTS[(u8)count]);
-            D_801EB4E0   = swap;
+            saved_work            = g_Task;
+            saved_active          = g_BattleEffectBattler;
+            swap                  = BMAGIC_EFFECT_SLOTS[(u8)count].target.party;
+            g_Task                = MEM_PTR(PartyBattler, &BMAGIC_EFFECT_SLOTS[(u8)count]);
+            g_BattleEffectBattler = swap;
             func_801EF880();
             func_801EFCF0();
-            D_801EB4E0 = saved_active;
-            g_Task     = saved_work;
+            g_BattleEffectBattler = saved_active;
+            g_Task                = saved_work;
         }
         count += 1;
     } while ((u8)count < BMAGIC_EFFECT_COUNT);
@@ -93,7 +93,7 @@ MATCH void func_801EF2F0(void) {
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
     pos.vz = -COORD_INT(g_Task->pos.z) / 2;
-    RotTrans(&pos, &matrix.t, &flags);
+    RotTransMatrix(&pos, matrix, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);
@@ -156,7 +156,7 @@ MATCH void func_801EFB68(void) {
     g_Task->pos.y.fixed += (rcos((g_Task->timer & 0x3F) << 8) * 8) >> 3;
     COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) - 8;
     if ((func_8014DAEC() & 0xFF) || (COORD_INT(g_Task->pos.z) < g_Task->unk_14)) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.flags = 0;
         g_Task->header.mode  = 0;
         g_Task->header.step  = 0;

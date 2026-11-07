@@ -33,7 +33,7 @@ MATCH void func_801E09F4(void) {
             D_801483EE = 0;
         }
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         raw = D_801483EE & BYTE_MASK;
         if (raw == 0) {
@@ -43,10 +43,10 @@ MATCH void func_801E09F4(void) {
             *flag      = count + 1;
             return;
         }
-        func_801E1B80(raw);
+        Menu_RunAbilityStockSort(raw);
         return;
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
         SND_PlayCue(EMI_CUE_ID(1, 6));
         flag2                = &D_80148651;

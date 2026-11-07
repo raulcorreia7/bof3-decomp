@@ -47,7 +47,7 @@ MATCH void func_801E020C(void) {
             flag = &g_BattleResult;
             *flag |= 1;
         }
-        g_GameState->turn.damage_flags.value &= ~0x200;
+        g_GameState->turn.damage_flags.value &= ~COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
         g_Task->header.mode = 2;
         g_Task->header.step = 0;
     }

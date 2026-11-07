@@ -31,10 +31,10 @@ NON_MATCHING void func_801E8684(void) {
 
     var_s0 = SP_PTR(PartyBattler, 0x0);
     var_s0 = g_Task;
-    TASK_SET(D_801EB4E0);
-    g_GameState                       = &g_BattlePartyBattlers[D_801EB4E0->slot];
-    temp_v1_31                        = D_801EB4E0->slot;
-    D_801EB4E0->unk_40                = 0;
+    TASK_SET(g_BattleEffectBattler);
+    g_GameState                       = &g_BattlePartyBattlers[g_BattleEffectBattler->slot];
+    temp_v1_31                        = g_BattleEffectBattler->slot;
+    g_BattleEffectBattler->unk_40     = 0;
     g_BattlePartyBattlers[temp_v1_31] = *(PartyBattler*)(s_BattleBattlerTemplates + (temp_v1_31 * BATTLE_PARTY_STRIDE));
     *(D_80145E91 + ((g_Task)->slot * 0x140))     = 6;
     *(D_80145E92 + ((g_Task)->slot * 0x140))     = 4;
@@ -46,9 +46,9 @@ NON_MATCHING void func_801E8684(void) {
     temp_v1_126                                  = temp_a0_112->slot * BATTLE_PARTY_STRIDE;
     *(&D_80145FB4 + temp_v1_126)                 = *(&D_80145FB4 + temp_v1_126) | 0x2000;
     temp_v0_135                                  = temp_a0_112->slot;
-    *(D_801EC364 + (temp_v0_135 * 0x78))         = *(D_80143F2C + (temp_v0_135 * 8));
+    *(D_801EC364 + (temp_v0_135 * 0x78))         = *(u8*)&g_EncounterParty[temp_v0_135].x;
     temp_v0_147                                  = temp_a0_112->slot;
-    *(D_801EC368 + (temp_v0_147 * 0x78))         = *(D_80143F30 + (temp_v0_147 * 8));
+    *(D_801EC368 + (temp_v0_147 * 0x78))         = *(u8*)&g_EncounterParty[temp_v0_147].y;
     temp_v0_163                                  = temp_a0_112->slot * 0x78;
     temp_a1_173                                  = g_Task;
     *(D_801EC36C + (temp_a1_173->slot * 0x78)) =

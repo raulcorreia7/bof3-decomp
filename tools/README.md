@@ -32,7 +32,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Rank units to name first                 | `tools/symbol.py refs src/<path>`                                        | same                                                      |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/conventions.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
-| Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`                           | [quality](#quality)                                       |
+| Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`, `--markdown [--update]`                         | [quality](#quality)                                       |
 | Check type loss between two revisions    | `tools/typeloss.py HEAD~5 HEAD`                                          | [type loss](#type-loss)                                   |
 | Scan prototypes against definitions      | `tools/sigs.py scan`                                                     | [signatures](#signatures)                                 |
 | Format                                   | `meson compile -C build/meson format` (or `tools/format.sh`)             | [toolchain: commands](../docs/toolchain.md#commands)      |
@@ -134,7 +134,7 @@ format the rows. It reads the function index, so build first.
 ## Pre-push
 
 `pre_push.sh [BASE_REF]` (Meson target `pre-push`) runs `check` (with a disc), `check-headers`,
-`check-tree`, `include-asm`, `format-check`, `meson test`, `typeloss` and `quality`, prints one line each and
+`check-tree`, `externs`, `include-asm`, `format-check`, `meson test`, `typeloss`, `quality` and `subsystems` (writes the table to `build/subsystems.md`; never fails), prints one line each and
 keeps the logs in `build/pre-push/`. CI runs it too.
 
 ## Worktrees
@@ -153,7 +153,7 @@ Meson, setup or another tool calls these. A contributor does not run them.
 | `split.py`, `link_symbols.py`, `decomp_yaml.py` | Split an image, write its link script, and write the coddog settings    |
 | `cc.py`, `psxdecomp/dmpsx.py`                | The compiler wrapper and the DMPSX rewrite                              |
 | `objdiff_config.py`, `rzproject.py`          | Build the objdiff project and the Rizin projects                        |
-| `check_asm.sh`, `check_hand.sh`, `check_headers.sh`, `check_tree.sh` | The bodies of the `include-asm`, `check-headers` and `check-tree` gates |
+| `check_asm.sh`, `check_externs.sh`, `check_hand.sh`, `check_headers.sh`, `check_tree.sh` | The bodies of the `include-asm`, `externs`, `check-headers` and `check-tree` gates |
 | `format.sh`                                  | The body of `format` and `format-check`                                 |
 
 `bin/coddog` finds twins and `bin/rz` reads retail bytes; no other tool does either. `bin/internal/` holds `find-tool` and the binutils wrappers (`as`, `ld`, `nm`, `objcopy`, `objdump`) that the build uses.

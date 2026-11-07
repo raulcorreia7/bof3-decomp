@@ -1,14 +1,5 @@
 #include "start_08.h"
 
-typedef struct Start08Rotation {
-    u16 unk_00;
-    u16 unk_02;
-    s32 unk_04;
-} Start08Rotation;
-
-extern Start08Rotation D_801EC4D0[];
-extern u8              D_801ED66C;
-
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 82.70%. resume: a lever or header
  * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
@@ -73,7 +64,7 @@ NON_MATCHING void func_801D9BDC(void) {
         val0 = 0x3B;
     }
     g_MenuPanelTasks[11].unk_10 = val0;
-    if (g_InputMasks[INPUT_SLOT_CONFIRM] & g_InputPressed) {
+    if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
         *(u8*)(&D_801485DC) = 0;
         if (D_801ED668 != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
@@ -96,7 +87,7 @@ NON_MATCHING void func_801D9BDC(void) {
             }
             goto block_20; /* retail branch */
         }
-    } else if (g_InputMasks[INPUT_SLOT_CANCEL] & g_InputPressed) {
+    } else if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         *(u8*)(&D_801485DC)         = 0;
         g_MenuPanelTasks[20].active = 0;

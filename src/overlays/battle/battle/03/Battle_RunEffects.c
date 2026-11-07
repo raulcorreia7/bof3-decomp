@@ -21,7 +21,7 @@ MATCH void Battle_RunEffects(void) {
             work       = *(u32*)(D_801EC3A4 + offset);
             D_801EC2E0 = (BattleEffect*)slot;
             TASK_SET((PartyBattler*)slot);
-            D_801EB4E0 = (PartyBattler*)(work);
+            g_BattleEffectBattler = (PartyBattler*)(work);
             funcs[slot[0x06]]();
         }
         slot += 0x78;

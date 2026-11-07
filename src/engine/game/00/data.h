@@ -4,14 +4,16 @@
 /* The game overlay's data tables: sprite rectangles, map hooks, world routes and
  * the handler rows its frontend walks. Only this image includes the file. */
 
-#define GAME_AREA_HANDLER_COUNT  11
+#define GAME_AREA_HANDLER_COUNT   11
 
-/* A two-field row: a work step, a delta or a position offset. */
-#define GAME_PAIR(a, b)          {(a), (b)}
-#define MAP_HOOK(map, handler)   {(map), {0, 0, 0}, (handler)}
-#define UV_RECT(u, v, w, h)      {(u), (v), (w), (h)}
-#define GAME_MAP(world, context) {(world), (context)}
-#define PARTY_SLOT(active, key)  {(active), (key), 0, 0}
+/* Cells in the square-spiral search order around a formation: the centre, then rings one to three, and a closing centre. */
+/* Camera directions and the scroll step of one cell quarter. */
+#define CAMERA_DIR_COUNT          4
+#define CAMERA_SCROLL_STEP        4
+
+#define ENTITY_SPAWN_OFFSET_COUNT 50
+#define ENTITY_SPAWN_SEARCH_COUNT (ENTITY_SPAWN_OFFSET_COUNT - 1)
+
 /* Data-table row initializer: no function body, so not a fragment. */
 #define GAME_INDEX_HANDLER(h00, h04, h08, h0C, h10, selector, key)    \
     {(h00), (h04), (h08), (h0C), (h10), (selector), (key), {0, 0, 0}}
@@ -38,7 +40,7 @@ typedef struct SlotSource {
  * offset instead of an index. */
 typedef struct AreaHook {
     u8       map;
-    u8       unk_01[3];
+    u8       pad_01[3];
     Callback handler;
 } AreaHook;
 
@@ -71,13 +73,6 @@ typedef struct SceneSlots {
     s8 (*entry_0C)(s32, s32);
     s8 (*entry_10)(s32, s32);
 } SceneSlots;
-
-/* Two signed coordinate deltas, one row per direction. func_80197AA4 adds the
- * pair to the world coordinates. */
-typedef struct GameDelta {
-    s8 dx;
-    s8 dy;
-} GameDelta;
 
 /* Four-byte battle party slot. func_801C63B0 marks it active, stores its sort
  * key and orders the slots by that key. */
@@ -114,7 +109,8 @@ ASSERT_SIZE(AreaHandler, 0x1C);
 typedef u8 (*ActorActionFunc)(void* entity, u8 param, s32 phase);
 typedef void (*ActorWorkFunc)(s32 fallback_index, s32 index);
 
-extern GameDelta            D_801C7B74[4];
+/* D_801C7B74 */
+extern Offset2DB            s_BattleScrollCellSteps[4];
 extern AreaHandler          D_801C7F5C[11];
 extern ActorActionFunc      D_801C83BC[7];
 extern ObjectFunc           D_801C83D8[11];
@@ -129,8 +125,12 @@ extern UvRect               D_801CCF7C[53];
 extern WorldMapBattlefields D_801CD224;
 extern WorldMapDestination  D_801CD24C[10];
 extern SlotSource           D_801CD4AC[5];
-extern Point2DL             D_801CD620[36];
-extern Point2DL             D_801CD740[6];
+extern Offset2DB            s_CameraScrollDeltas[CAMERA_DIR_COUNT];
+extern Offset2DB            s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT];
+/* D_801CD620 */
+extern Point2DL             s_EncounterEnemyOffsets[36];
+/* D_801CD740 */
+extern Point2DL             s_EncounterOriginNudges[6];
 extern Point2D              D_801CD778[5];
 extern PartySlot            D_801CD944[3];
 

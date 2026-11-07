@@ -53,7 +53,7 @@ NON_MATCHING void func_801D7314(void) {
     if ((val1 >> 0x18) != (s8)D_801ED648) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
-    if (g_InputMasks[INPUT_SLOT_CONFIRM] & g_InputPressed) {
+    if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
         g_MenuPanelTasks[12].unk_0B = D_801ED648;
         SND_PlayCue(EMI_CUE_ID(1, 4));
         switch ((s8)D_801ED648) { /* irregular */
@@ -74,7 +74,7 @@ NON_MATCHING void func_801D7314(void) {
                 D_80148651 += 1;
                 return;
         }
-    } else if (g_InputMasks[INPUT_SLOT_CANCEL] & g_InputPressed) {
+    } else if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
         SND_PlayCue(EMI_CUE_ID(1, 6));
         g_MenuPanelTasks[11].state  = 1;

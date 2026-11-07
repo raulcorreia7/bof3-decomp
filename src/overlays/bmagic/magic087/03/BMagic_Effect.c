@@ -50,7 +50,7 @@ MATCH void func_801EF530(void) {
     PartyBattler* work;
 
     if (g_Task->param.unk_0B == 0x80) {
-        work               = (PartyBattler*)D_801EB4E0;
+        work               = (PartyBattler*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         func_801E5988();
     }
@@ -151,7 +151,7 @@ MATCH void func_801EFF50(void) {
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
     pos.vz = -(COORD_INT(g_Task->pos.z) + 0x200) / 2;
-    RotTrans(&pos, &matrix.t, &flags);
+    RotTransMatrix(&pos, matrix, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);

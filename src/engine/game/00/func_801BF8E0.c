@@ -29,9 +29,9 @@ MATCH void func_801BF8E0(void) {
         dst   = 0;
         do {
             index++;
-            tmp                               = *(s32*)(D_80143F2C + src);
+            tmp                               = *(s32*)((u8*)g_EncounterParty + src);
             *((s32*)((u8*)&D_80145EC4 + dst)) = tmp;
-            tmp                               = *(s32*)(D_80143F30 + src);
+            tmp                               = *(s32*)((u8*)&g_EncounterParty[0].y + src);
             *((s32*)((u8*)&D_80145EC8 + dst)) = tmp;
             src += 2 * sizeof(s32);
             dst += BATTLE_PARTY_STRIDE;

@@ -172,12 +172,12 @@ MATCH void func_801F04DC(void) {
     u8     timer;
 
     work          = g_Task;
-    timer         = work->unk_09 - 1;
-    work->unk_09  = timer;
+    timer         = work->timer - 1;
+    work->timer   = timer;
     work->scale.x = work->scale.x - 0x800;
     work->scale.y = work->scale.y - 0x1000;
     if (timer == 0) {
-        D_801EB4E0->param.unk_0B = 0xFF;
+        g_BattleEffectBattler->param.unk_0B = 0xFF;
         g_Task->header.step += 1;
     }
 }
@@ -311,8 +311,8 @@ MATCH void func_801F0FA4(void) {
     u8 value;
 
     if (g_FrameCount & 1) {
-        g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
-        g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
         func_8014DAEC();
         value          = g_Task->unk_09 - 1;
         g_Task->unk_09 = value;
@@ -321,8 +321,8 @@ MATCH void func_801F0FA4(void) {
             g_Task->header.step += 1;
         }
     } else {
-        g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed + g_Task->unk_0C;
-        g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed + g_Task->unk_10;
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
     }
 }
 
@@ -339,7 +339,7 @@ MATCH void func_801F11C4(void) {
     g_Task->unk_5E -= 3;
     g_Task->unk_5F -= 3;
     if ((s8)g_Task->unk_5D == -0x80) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
 }
@@ -368,7 +368,7 @@ MATCH void func_801F1384(void) {
 MATCH void func_801F1400(void) {
     if (func_8014DAEC() & 0xFF) {
         if (g_Task->header.step == 5) {
-            D_801EB4E0->param.unk_0B = 0xFF;
+            g_BattleEffectBattler->param.unk_0B = 0xFF;
         }
         g_Task->header.step += 1;
     }
@@ -402,7 +402,7 @@ MATCH void func_801F1804(void) {
 MATCH void func_801F1880(void) {
     if (func_8014DAEC() & 0xFF) {
         if (g_Task->header.step == 8) {
-            D_801EB4E0->param.unk_0B = 0xFF;
+            g_BattleEffectBattler->param.unk_0B = 0xFF;
         }
         g_Task->header.step += 1;
     }

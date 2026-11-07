@@ -61,7 +61,7 @@ MATCH void func_801B6BC8(void) {
             return;
         }
         work = g_Task;
-        if (work->unk_09 != 0) {
+        if (work->timer != 0) {
             delay = g_GameState->wait_11F;
             if (delay != 0) {
                 g_GameState->wait_11F = (delay - 1);
@@ -69,7 +69,7 @@ MATCH void func_801B6BC8(void) {
             g_Task->direction_08 = sel;
             g_Task->unk_03       = 2;
             sel += 8;
-            g_Task->unk_09 = (g_Task->unk_09 - 1);
+            g_Task->timer = (g_Task->timer - 1);
             func_801B0DFC();
         } else {
             work->direction_08 = sel;

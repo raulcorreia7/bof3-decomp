@@ -17,11 +17,14 @@ typedef union Coord {
 ASSERT_SIZE(Coord, 0x04);
 
 /* The integer and fraction halves of a Coord, as lvalues: `COORD_INT(pos.z) -= 0x40;`. */
-#define COORD_INT(c)  ((c).part.integer)
-#define COORD_FRAC(c) ((c).part.fraction)
+#define COORD_INT(c)     ((c).part.integer)
+#define COORD_FRAC(c)    ((c).part.fraction)
 
 /* A whole number of cells as a 16.16 coordinate: `TO_COORD(12) + COORD_HALF` is 12.5. */
-#define TO_COORD(n)   ((n) << 16)
-#define COORD_HALF    0x8000
+#define TO_COORD(n)      ((n) << 16)
+#define COORD_HALF       0x8000
+
+/* A whole number of cells plus a half: `TO_COORD_HALF(1)` is 1.5. */
+#define TO_COORD_HALF(n) (TO_COORD(n) + COORD_HALF)
 
 #endif

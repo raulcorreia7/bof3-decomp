@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-extern s8 D_80148658;
-
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 75.25%. resume: a lever or header
  * fix that closes the first mismatch. */
 #ifdef NON_MATCHING
@@ -26,7 +24,7 @@ NON_MATCHING void func_801DA474(void) {
     flag                        = &D_801485DC;
     *flag                       = 0;
     g_MenuPanelTasks[20].active = 0;
-    tmp1                        = (D_80148658 * 8) + (D_80148659 * 0x10);
+    tmp1                        = (D_80148658[0] * 8) + (D_80148659 * 0x10);
     D_801485E0                  = FIELD(u16, &D_801EC548, tmp1);
     D_801485E2                  = FIELD(u16, &D_801EC54A, tmp1);
     *flag                       = 1;
@@ -50,9 +48,9 @@ NON_MATCHING void func_801DA474(void) {
     input_bits                  = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
     tmp4                        = Party_CountOrder(PARTY_ORDER_FIELD);
     if ((input_bits & (PADLright | PADLleft)) && (g_MenuPanelTasks[12].unk_0A != 0)) {
-        D_80148658 = (u8)D_80148658 ^ 1;
+        D_80148658[0] = (u8)D_80148658[0] ^ 1;
     }
-    if (D_80148658 == 0) {
+    if (D_80148658[0] == 0) {
         val2 = tmp4 - 1;
         if (((tmp4 & BYTE_MASK) - 1) < D_80148659) {
             goto block_12; /* retail branch */
@@ -69,7 +67,7 @@ NON_MATCHING void func_801DA474(void) {
         D_80148659 = tmp2;
         if (tmp2 & 0x80) {
             val3 = tmp4 - 1;
-            if (D_80148658 != 0) {
+            if (D_80148658[0] != 0) {
                 val3 = g_MenuPanelTasks[12].unk_0A - 1;
             }
             D_80148659 = val3;
@@ -77,7 +75,7 @@ NON_MATCHING void func_801DA474(void) {
     } else if (input_bits & PADLdown) {
         tmp3       = (u8)D_80148659 + 1;
         D_80148659 = tmp3;
-        if (D_80148658 == 0) {
+        if (D_80148658[0] == 0) {
             if (((tmp4 & BYTE_MASK) - 1) < tmp3) {
                 goto block_23; /* retail branch */
             }
@@ -86,15 +84,15 @@ NON_MATCHING void func_801DA474(void) {
             D_80148659 = 0;
         }
     }
-    if (((u8)D_80148658 != (u8)D_80148658) || ((u8)D_80148659 != (u8)D_80148659)) {
+    if (((u8)D_80148658[0] != (u8)D_80148658[0]) || ((u8)D_80148659 != (u8)D_80148659)) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    if (g_InputMasks[INPUT_SLOT_CONFIRM] & g_InputPressed) {
+    if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
         val4 = &D_8014865A;
         val4 = &D_8014865A;
         if ((s8)D_8014865A == 0x7F) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
-            D_8014865A = (u8)D_80148658;
+            D_8014865A = (u8)D_80148658[0];
             D_8014865D = (u8)D_80148659;
             return;
         }
@@ -109,7 +107,7 @@ NON_MATCHING void func_801DA474(void) {
         D_8014865D = 0x7F;
         return;
     }
-    if (g_InputMasks[INPUT_SLOT_CANCEL] & g_InputPressed) {
+    if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         if ((s8)D_8014865A != 0x7F) {
             D_8014865A = 0x7F;

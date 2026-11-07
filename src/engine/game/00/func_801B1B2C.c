@@ -9,13 +9,13 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags) {
     u8     saved;
     Actor* work;
 
-    px           = x;
-    py           = y;
-    mode         = flags;
-    value        = Area_ReadHeight(x, y);
-    work         = g_Task;
-    saved        = work->unk_09;
-    work->unk_09 = 0U;
+    px          = x;
+    py          = y;
+    mode        = flags;
+    value       = Area_ReadHeight(x, y);
+    work        = g_Task;
+    saved       = work->timer;
+    work->timer = 0U;
     if (func_801C3E40(px, py, mode & BYTE_MASK, value) & BYTE_MASK) {
         return 0;
     }
@@ -27,7 +27,7 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags) {
         SP_REF(s32, 0x8) = px;
         SP_REF(s32, 0xC) = py;
         SP_REF(s16, 0x2) = Area_ReadHeight(px, py);
-        g_Task->unk_09   = saved;
+        g_Task->timer    = saved;
         return 1;
     }
     return 0;

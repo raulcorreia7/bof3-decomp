@@ -20,7 +20,7 @@ MATCH void func_801F32A0(void) {
             }
         }
         g_Task->unk_48      = 2;
-        g_Task->unk_09      = 8;
+        g_Task->timer       = 8;
         g_Task->header.mode = 4;
     }
 tail:

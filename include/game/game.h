@@ -25,17 +25,30 @@ typedef enum PaletteFadeFlags {
     PALETTE_FADE_ACTIVE = 1 << 0,
 } PaletteFadeFlags;
 
+/* The fields of a task record (actor, battler, effect) that a palette fade reads and restores. */
+typedef struct PaletteOwner {
+    u8 pad_00[0x24];
+    u8 flags; /* +0x24 bit 2 is cleared when a fade that flagged its row with 0x80 frees */
+    u8 pad_25[0x2];
+    u8 saved_byte;   /* +0x27 restored from PaletteFade.saved_byte when the fade frees */
+    u8 palette_kind; /* +0x28 a PaletteKind: how many palette cells the owner's fade covers */
+} PaletteOwner;
+
+ASSERT_OFFSET(PaletteOwner, palette_kind, 0x28);
+
+#define PALETTE_OWNER(record) ((PaletteOwner*)(record))
+
 /* One 0xC-byte row of the palette fade table at D_80145BD4. */
 typedef struct PaletteFade {
-    u8  flags;      /* PaletteFadeFlags */
-    u8  saved_byte; /* the target byte at +0x27, restored on free */
-    s8  red_offset;
-    s8  green_offset;
-    s8  blue_offset;
-    u8  table_index;
-    u8  step;
-    u8  unk_07;
-    u8* target;
+    u8            flags;      /* PaletteFadeFlags */
+    u8            saved_byte; /* the target byte at +0x27, restored on free */
+    s8            red_offset;
+    s8            green_offset;
+    s8            blue_offset;
+    u8            table_index;
+    u8            step;
+    u8            unk_07;
+    PaletteOwner* target; /* the record whose palette fades */
 } PaletteFade;
 
 ASSERT_OFFSET(PaletteFade, target, 0x08);
@@ -112,84 +125,90 @@ extern GameAreaState g_GameArea;
 /* GAME.EMI#0 exports: the frontend's data and entry points, in address order. */
 
 /* D_80143F14 */
-extern u32       g_GameEntryPosX;
+extern u32      g_GameEntryPosX;
 /* D_80143F18 */
-extern u32       g_GameEntryPosY;
+extern u32      g_GameEntryPosY;
 /* D_80143F1F */
-extern u8        g_GamePrevSelection;
+extern u8       g_GamePrevSelection;
 /* D_80195FE0 */
-extern u8        s_FairyConstructionThresholds[]; /* 0x80195FE0 */
+extern u8       s_FairyConstructionThresholds[]; /* 0x80195FE0 */
 /* Image-local data, in retail address order. */
 /* D_801C7AC0 */
-extern u8        s_PaletteFadeCounts[8];
+extern u8       s_PaletteFadeCounts[8];
 /* D_801C7AC8 */
-extern u8        s_PaletteFadeDivisors[8];
+extern u8       s_PaletteFadeDivisors[8];
 /* D_801C7AD0 */
-extern u8        s_PaletteFadeScales[8];
+extern u8       s_PaletteFadeScales[8];
 /* D_801C7AD8 */
-extern u8        s_PaletteFadeColorCounts[8];
+extern u8       s_PaletteFadeColorCounts[8];
 /* D_801C7AE0 */
-extern u8        s_PaletteFadeRowDivisors[8];
+extern u8       s_PaletteFadeRowDivisors[8];
 /* D_801C7AE8 */
-extern u8        s_PaletteFadeStrides[16];
+extern u8       s_PaletteFadeStrides[16];
 /* D_801C7AF8 */
-extern u8        s_PaletteSlotDivisors[8];
+extern u8       s_PaletteSlotDivisors[8];
 /* D_801C7B00 */
-extern u8        s_PaletteSlotStrides[8];
+extern u8       s_PaletteSlotStrides[8];
 /* D_801C7B08 */
-extern Callback  g_GameCampMenuLoad[];
+extern Callback g_GameCampMenuLoad[];
 /* D_801C7B14 */
-extern Callback  g_GameStates[];
+extern Callback g_GameStates[];
 /* D_801C7B44 */
-extern Callback  g_GameEntryHandlers[3];
+extern Callback g_GameEntryHandlers[3];
 /* D_801C7B50 */
-extern u8        s_DirectionJitters[4];
+extern u8       s_DirectionJitters[4];
 /* D_801C7B54 */
-extern Callback  g_GameModeHandlers[8];
+extern Callback g_GameModeHandlers[8];
 /* D_801C7B7C */
-extern Callback  g_GameStateHandlers[3];
+extern Callback g_GameStateHandlers[3];
 /* D_801C7B88 */
-extern Callback  g_GameSubstateHandlers[4];
+extern Callback g_GameSubstateHandlers[4];
 /* D_801C7B98 */
-extern Callback  g_MenuAbilityOpen[3];
+extern Callback g_MenuAbilityOpen[3];
 /* D_801C7BA4 */
-extern Callback  g_MenuStatusOpen[3];
+extern Callback g_MenuStatusOpen[3];
 /* D_801C7BB0 */
-extern Callback  g_GameFlowHandlers[3];
+extern Callback g_GameFlowHandlers[3];
 /* D_801C7BBC */
-extern u8        s_MenuLine1Run[12];
+extern u8       s_MenuLine1Run[12];
 /* D_801C7BC8 */
-extern u8        s_MenuLine2Run[12];
+extern u8       s_MenuLine2Run[12];
 /* D_801C7BD4 */
-extern u8        s_MenuLine1FlagRun[12];
+extern u8       s_MenuLine1FlagRun[12];
 /* D_801C7BE0 */
-extern u8        s_MenuLine2FlagRun[12];
+extern u8       s_MenuLine2FlagRun[12];
 /* D_801C7BEC */
-extern Callback  g_MenuPanelHandlers[5];
+extern Callback g_MenuPanelHandlers[5];
 /* D_801C7C00 */
-extern Callback  g_MenuPanelStateHandlers[3];
+extern Callback g_MenuPanelStateHandlers[3];
 /* D_801C7C0C */
-extern Callback  g_MenuOptionHandlers[3];
+extern Callback g_MenuOptionHandlers[3];
 /* D_801C7C18 */
-extern Callback  g_MenuActionHandlers[3];
+extern Callback g_MenuActionHandlers[3];
 /* D_801C7C24 */
-extern Callback  g_MenuTaskHandlers[4];
-extern char      D_801C7C34[5][8];
-extern u8*       D_801C7C5C[5];
+extern Callback g_MenuTaskHandlers[4];
+extern char     D_801C7C34[5][8];
+extern u8*      D_801C7C5C[5];
 /* D_801C7C70 */
-extern Callback  g_ActorHandlers[187];
-extern u8        D_801C7F74[];
-extern Callback  D_801C8090[3];
+extern Callback g_ActorHandlers[187];
+extern u8       D_801C7F74[];
+extern Callback D_801C8090[3];
 /* D_801C809C */
-extern u8        s_SceneHandlerIds[8];
-extern Callback  D_801C80A4[6];
-extern Callback  D_801C80BC[3];
-extern Callback  D_801C80C8[6];
-extern Callback  D_801C80E0[3];
-extern Callback  D_801C80EC[3];
-extern Callback  D_801C80F8[4];
-extern s32       D_801C8108[3][2];
-extern s32       D_801C810C[][2]; /* 0x801C810C */
+extern u8       s_SceneHandlerIds[8];
+extern Callback D_801C80A4[6];
+extern Callback D_801C80BC[3];
+extern Callback D_801C80C8[6];
+extern Callback D_801C80E0[3];
+extern Callback D_801C80EC[3];
+extern Callback D_801C80F8[4];
+
+/* Launch of a tossed actor: initial vertical speed and the gravity pulling it back, both 16.16. */
+typedef struct ActorToss {
+    s32 vz;
+    s32 gravity;
+} ActorToss;
+
+extern ActorToss s_ActorTossArcs[3];
 extern Callback  D_801C8120[3];
 extern Callback  D_801C812C[6];
 extern Callback  D_801C8144[4];
@@ -256,7 +275,8 @@ extern Callback  D_801CD120[4];
 extern Callback  D_801CD130[4];
 extern Callback  D_801CD140[5];
 extern Callback  D_801CD154[4];
-extern Callback  D_801CD164[19];
+/* D_801CD164 */
+extern Callback  g_PersonalActions[19];
 extern Callback  D_801CD1B0[2];
 /* D_801CD1B8 */
 extern u8        s_EncounterStepThresholds[16];
@@ -287,8 +307,6 @@ extern Callback  D_801CD404[15];
 extern Callback  D_801CD440[2];
 extern Callback  D_801CD448[4];
 /* D_801CD458 */
-extern s8        s_CameraScrollDeltas[8];
-extern s8        D_801CD459[];
 /* D_801CD460 */
 extern u8        s_BattleStartOffsets[12][2];
 /* D_801CD478 */
@@ -304,8 +322,6 @@ extern Callback  D_801CD568[2];
 extern Callback  D_801CD570[5];
 extern u8        D_801CD584[56];
 /* D_801CD5BC */
-extern s8        s_EntitySpawnOffsets[100];
-extern s8        D_801CD5BD[];
 /* D_801CD770 */
 extern u8        s_EntitySpawnChances[8];
 /* D_801CD78C */

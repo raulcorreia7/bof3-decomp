@@ -31,7 +31,7 @@ MATCH void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_m
     shade = shade_byte & BYTE_MASK;
     if (shade >= 2U) {
         buffer = (char*)g_UiFormatBuffer;
-        sprintf(buffer, D_80195F90, shade);
+        TEXT_Format(buffer, D_80195F90, shade);
         UI_DrawGlyphString((x + 109), row, kind, (const u8*)buffer);
     }
 }

@@ -16,7 +16,7 @@ MATCH void func_800A4458(void) {
     tpl  = (BattleStatDisplayTemplate*)((u8*)&g_BattleMessageSlot - 0x18);
 
     do {
-        if (g_BattlePartyBattlers[slot].turn.action_flags.value & 2) {
+        if (g_BattlePartyBattlers[slot].turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
             template_hp = tpl->max_hp;
             max_hp      = template_hp - ((template_hp * g_BattlePartyBattlers[slot].chr.fatigue + 5) / 10);
             work        = &g_BattlePartyBattlers[slot];

@@ -6,10 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The overlay entry: the commu state byte selects the step handler. */
 MATCH void func_801D0C10(void) {
-    SYS_DISPATCH_BYTE(D_801D1950, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu05StepFuncs, D_801F294C);
 }
-
-extern u8 D_80145E44;
 
 typedef struct {
     s8 unk_00;

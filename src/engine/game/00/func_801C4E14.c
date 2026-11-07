@@ -8,13 +8,13 @@ MATCH s32 func_801C4E14(void) {
     s32    inactive;
 
     work      = g_Task;
-    countdown = work->unk_09;
+    countdown = work->timer;
     inactive  = 0;
     if (countdown != 0) {
-        work->unk_09 = (countdown - 1);
+        work->timer = (countdown - 1);
         func_801C57B4();
         state = g_Task;
-        if (state->unk_09 == state->unk_0A) {
+        if (state->timer == state->unk_0A) {
             region                                            = state->unk_05;
             g_GfxPalettePending                               = 1;
             *(u16*)(MEM_PTR(u8, 0x8003963Eu) + (region << 6)) = 0;

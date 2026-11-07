@@ -71,7 +71,7 @@ NON_MATCHING void func_801B21E8(void) {
                 }
                 val11 = (u8*)g_Characters;
                 val12 = (u8*)g_GameState + 0x74;
-                val11 += g_CharSlot[g_GameState->slot_index_79] * 0xA4;
+                val11 += g_CharSlot[g_GameState->leader_id] * 0xA4;
                 tmp11 = val11 + 0xA0;
                 do {
                     FIELD(s32, val12, 0)    = FIELD(s32, val11, 0);
@@ -82,8 +82,8 @@ NON_MATCHING void func_801B21E8(void) {
                     val12 += 0x10;
                 } while (val11 != tmp11);
                 *val12                  = *val11;
-                g_GameState->slot_13C   = (u8)g_CharSlot[g_GameState->slot_index_79];
-                g_PartyFieldOrder[val4] = g_GameState->slot_index_79;
+                g_GameState->slot_13C   = (u8)g_CharSlot[g_GameState->leader_id];
+                g_PartyFieldOrder[val4] = g_GameState->leader_id;
                 if (val4 != 0) {
                     func_801C2438();
                     tmp6                            = g_Task;

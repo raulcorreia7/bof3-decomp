@@ -10,9 +10,9 @@ MATCH void func_801D9B9C(void) {
     s16           distance;
     u8            flag;
 
-    D_801E3200 = 0;
-    D_801E3204 = 0;
-    D_801E3214 = 0;
+    D_801E3200         = 0;
+    D_801E3204         = 0;
+    g_FishingNewRecord = 0;
 
     work           = FISHING_STATE;
     work->state_29 = 5;

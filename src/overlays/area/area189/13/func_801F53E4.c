@@ -5,10 +5,10 @@ MATCH void func_801F53E4(void) {
 
     g_GameState->mode_12B.u8_value = 1;
     work                           = g_Task;
-    if (work->unk_09 == 0) {
+    if (work->timer == 0) {
         func_801F5600();
     } else {
-        work->unk_09 = work->unk_09 - 1;
+        work->timer = work->timer - 1;
         func_801F559C();
     }
 }

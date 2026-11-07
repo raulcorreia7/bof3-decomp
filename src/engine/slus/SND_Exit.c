@@ -5,13 +5,13 @@
  */
 MATCH void SND_Exit(void) {
     SsUtAllKeyOff(0);
-    SsVabClose(D_80148FB0);
-    SsVabClose(D_80148FB1);
-    SsVabClose(D_80148FB2);
-    SsVabClose(D_80148FB3);
-    SsVabClose(D_80148FB4);
-    SsVabClose(D_80148FB5);
-    SsVabClose(D_80148FB6);
+    SsVabClose(g_SndVabIds[0]);
+    SsVabClose(g_SndVabIds[1]);
+    SsVabClose(g_SndVabIds[2]);
+    SsVabClose(g_SndVabIds[3]);
+    SsVabClose(g_SndVabIds[4]);
+    SsVabClose(g_SndVabIds[5]);
+    SsVabClose(g_SndVabIds[6]);
     if (g_SelectionFxVoices[0] != -1) {
         SsSepClose(g_SelectionFxVoices[0]);
     }

@@ -21,7 +21,7 @@ void        func_800AAC88(s16 amount, u8 battler_index);
 void        func_800AAEBC(s16 target_index, u8 battler_index);
 /* func_801E29B4 */
 /* func_800AC218 */
-void        Battle_LoadEnemyBattler(s32 slot, s32 unit_index);
+void        Battle_LoadEnemyBattler(u8 slot, u8 enemy_index);
 s32         func_800AC704(s32 entry_id);
 s32         func_800AEEC8(s32 arg0, u8 arg1);
 void        func_800AEF98(s32 step, s32 payload);
@@ -34,7 +34,7 @@ void        func_800AFC98(s32 effect_0, s32 effect_1);
 void        func_800AFD9C(void);
 u8          func_800AFF98(void);
 /* func_801DB524 */
-void        func_801DD350(s32 arg0);
+void        func_801DD350(void* work);
 u8          func_801DD7AC(s32 selector);
 void        func_801E257C(u32 enemy_index, u32 script_index);
 u8          Battle_PickRandomTarget(u8 excluded_slot);

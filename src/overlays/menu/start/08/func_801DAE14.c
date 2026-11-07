@@ -1,29 +1,12 @@
 /* best score 90.14 */
-#include "shared/etc.h"
-
-/* start_08.h declares Party_CountOrder as u8(u8); this unit reads the count as a full register. */
-u8 Party_CountOrder(u8 mode);
-
-extern s8  D_801484E1;
-extern s8  D_801484E2;
-extern s8  D_801484E3;
-extern s16 D_801484E4;
-extern s16 D_801484E6;
-extern u8* D_80148500;
-extern u8  D_80148658;
-extern u8  D_80148659;
-extern u8  D_8014865A;
-extern u8  D_801ED690[];
-extern u8  D_801ED694[][2];
-extern u8  D_801ED695[][2];
-extern u8  D_801ED69C;
+#include "start_08.h"
 
 /* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to
  * g_MenuPanelTasks[12].unk_0A, for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv
  * (85.21), 15 min of rewrite search (type hacks). resume: j must be a preheader-initialised biv with addiu v1,v1,2 in
  * the branch delay slot and i++ after the volatile load. */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801DAE14(void) {
+NON_MATCHING void func_801DAE14(u16 buttons) {
     s32 count;
     /* FAKE: pin keeps the row offset in the retail a3 home. */
     MATCH_REG(s32, offset, "a3");
@@ -40,12 +23,12 @@ NON_MATCHING void func_801DAE14(void) {
     for (i = 0; i < 8; i++) {
         if (((u8*)&g_Characters[0].unk_07)[offset] & 1) {
             for (index = 0; index < (count & BYTE_MASK); index++) {
-                if (g_Characters[i].character_index == g_PartyFieldOrder[index]) {
+                if (g_Characters[i].character_id == g_PartyFieldOrder[index]) {
                     break;
                 }
             }
             if (index == (count & BYTE_MASK)) {
-                D_801ED690[(*flags)++] = g_Characters[i].character_index;
+                D_801ED690[(*flags)++] = g_Characters[i].character_id;
             }
         }
         offset += 0xA4;
@@ -74,11 +57,11 @@ NON_MATCHING void func_801DAE14(void) {
         D_801ED695[i][0] = 0;
     }
 
-    D_8014865A = 0x7F;
-    D_8014865D = 0x7F;
-    D_80148658 = 0;
-    D_80148659 = 0;
-    D_801ED69C = 0xFF;
+    D_8014865A    = 0x7F;
+    D_8014865D    = 0x7F;
+    D_80148658[0] = 0;
+    D_80148659    = 0;
+    D_801ED69C    = 0xFF;
 }
 #else
 INCLUDE_ASM(func_801DAE14);

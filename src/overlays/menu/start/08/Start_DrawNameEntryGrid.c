@@ -1,16 +1,5 @@
 #include "start_08.h"
 
-/* The four command labels of the grid ("Next", "Back", "Quit", "Start"), five characters each. */
-typedef struct NameEntryLabels {
-    u8 next[5];
-    u8 back[5];
-    u8 quit[5];
-    u8 start[5];
-} NameEntryLabels;
-
-extern NameEntryLabels D_801D0F00;
-extern u8              D_801ECDBC[];
-
 /* Character grid of the name entry window: page `page` of D_801ECDBC holds 8 rows of 12 cells. The cells in column 10
  * of rows 3 to 7 hold a command id 1 to 5, drawn as a label; column 11 of those rows is part of that label. The
  * cursor sits at (D_801ED7E0, D_801ED7E4). */

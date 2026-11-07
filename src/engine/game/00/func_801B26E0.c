@@ -4,11 +4,11 @@ MATCH void func_801B26E0(void) {
     u8 i;
     u8 level;
 
-    g_Task->unk_09 -= 1;
+    g_Task->timer -= 1;
     g_Task->direction_08 = (g_Task->direction_08 + 1) & 7;
     Actor_SelectScript(g_Task->direction_08);
     i     = 1;
-    level = g_Task->unk_09;
+    level = g_Task->timer;
     if (i < g_PartySize) {
         do {
             TASK_SET(&g_BattlePartyBattlers[i]);
@@ -30,7 +30,7 @@ MATCH void func_801B26E0(void) {
                 g_Task->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
                 ACTOR_CLEAR_TINT();
                 g_Task->tint.bytes.flags = 0;
-                g_Task->unk_09           = 0;
+                g_Task->timer            = 0;
                 Actor_ClearVelocity();
                 g_Task->unk_18  = 0;
                 g_Task->unk_1C  = 0;

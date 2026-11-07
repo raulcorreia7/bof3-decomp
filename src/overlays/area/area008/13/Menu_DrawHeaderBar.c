@@ -30,11 +30,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     texture_window->pos.x.raw = 0;
     setWH(texture_window, 16, 16);
 
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, texture_window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1u, 0x0Cu);
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -67,11 +63,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     primitive->clut = GetClut(clut_x, 481);
     width_plus_1    = (s32)(width + 1);
 
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-
-    primitive->tpage = 0x0Fu;
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, 0x28u);
 
     /* FAKE: pin signed shift matches original sra computation. */
@@ -90,11 +82,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     setRGB0(primitive, 0xACu, 0xACu, 0xACu);
     primitive->clut = GetClut(clut_x, 481);
 
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-
-    primitive->tpage = 0x0Fu;
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, 0x28u);
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -112,11 +100,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     setRGB0(primitive, 0xACu, 0xACu, 0xACu);
     primitive->clut = GetClut(clut_x, 481);
 
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-
-    primitive->tpage = 0x0Fu;
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, 0x28u);
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -145,11 +129,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     primitive->v3 -= 3;
     primitive->clut = GetClut(clut_x, 481);
 
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-
-    primitive->tpage = 0x0Fu;
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, 0x28u);
 
     texture_window            = (RECT*)g_GfxPrimCursor;
@@ -158,11 +138,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 win
     texture_window->pos.y.raw = 0;
     setWH(texture_window, 256, 256);
 
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, texture_window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1u, 0x0Cu);
     func_801AEBA0((s16)r_s8, (s16)((s32)(u16)y + 2), (s16)(width - 4), (s16)(height - 4), 0);
 }

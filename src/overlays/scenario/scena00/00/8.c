@@ -209,7 +209,7 @@ MATCH void func_801F72A0(void) {
     if (work->color_r == 0x80) {
         g_ScriptVarsReq.byte = 0x14;
         work->step           = 2;
-        g_Task->unk_09       = 0xFF;
+        g_Task->timer        = 0xFF;
     }
 }
 
@@ -590,7 +590,7 @@ MATCH void func_801F8140(void) {
 }
 
 MATCH void func_801F82B4(void) {
-    if (g_Task->unk_09 != 0) {
+    if (g_Task->timer != 0) {
         func_801F8360();
 
         if (SCN_EFFECT->counter_0C < 0x80) {
@@ -603,7 +603,7 @@ MATCH void func_801F82B4(void) {
             SCN_EFFECT->counter_10 = 0xB6;
         }
 
-        g_Task->unk_09--;
+        g_Task->timer--;
     } else {
         Actor_Clear();
     }
@@ -671,7 +671,7 @@ MATCH void func_801F8360(void) {
         } else {
             RotTransPers3(&v3, &v4, &v5, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         }
-        shade = -(g_Task->unk_09 << 1);
+        shade = -(g_Task->timer << 1);
         setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
         setRGB1(prim, shade, shade, shade);
         setRGB2(prim, shade, shade, shade);
@@ -845,14 +845,14 @@ MATCH void func_801F89F0(void) {
 }
 
 MATCH void func_801F8AB8(void) {
-    u16*         screen;
+    DVECTOR*     screen;
     SceneEffect* work;
     SceneEffect* tail;
     SceneEffect* current;
     s8           shade;
     s32          point[3];
 
-    screen = D_1F800034;
+    screen = (DVECTOR*)D_1F800034;
     work   = SCN_EFFECT;
     work->pos.z.parts.height += 0x20;
     point[0] = work->pos.x;
@@ -861,7 +861,7 @@ MATCH void func_801F8AB8(void) {
     Area_ProjectPoint(point, screen);
 
     current                     = SCN_EFFECT;
-    VOL(u16, current->origin.x) = screen[0];
+    VOL(u16, current->origin.x) = (u16)screen->vx;
     current->origin.y           = SP_REF(u16, 0x36u);
     shade                       = *(s8*)&current->color_r;
 
@@ -1018,7 +1018,7 @@ MATCH void func_801F9178(void) {
             D_80145518[i][j] = 0xFF;
         }
     }
-    g_GameFlags |= GAME_FLAG_RUN_LOCK;
+    g_GameFlags |= GAME_FLAG_MENU_LOCK;
     while (EMI_LoaderIsReady() == 0) {
         CallbackWait(1U);
     }
@@ -2224,7 +2224,7 @@ MATCH void func_801FB924(void) {
             if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0;
                 flags           = &g_BattlePartyBattlers[0].unk_24;
-                g_GameFlags &= ~(GAME_FLAG_SCROLL_LOCK | GAME_FLAG_RUN_LOCK);
+                g_GameFlags &= ~(GAME_FLAG_SCROLL_LOCK | GAME_FLAG_MENU_LOCK);
                 *flags &= 0xDF;
                 Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_BEFORE_NUE, TO_COORD(87), TO_COORD(4), FACING_LEFT);
                 Scene_RequestChapterAdvance();

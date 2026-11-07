@@ -43,7 +43,8 @@ NON_MATCHING void func_8009704C(void) {
     D_801485E0 = D_80148574 + 7u;
     D_801485E2 = D_80148576 + ((D_8014857C - D_80148580) * 13 + 0x1A);
     trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
-    if ((D_801EB4D8->action_flags.value & 0x20002u) != 2u) {
+    if ((g_BattleActorTurn->action_flags.value &
+         (COMBATANT_FLAG_DRAGON_FORM | COMBATANT_FLAG_DRAGON_FORM_CONTROLLED)) != (u32)COMBATANT_FLAG_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 1));
             D_80148579 = 0x32u;
@@ -117,7 +118,7 @@ NON_MATCHING void func_8009704C(void) {
     if (D_80148582 != 0) {
         return;
     }
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0u) {
+    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_BattleChoicePhase               = 1u;
         D_801485DC                        = 0u;
         D_801EB5B1[ring_index * 8]        = 1u;
@@ -128,8 +129,8 @@ NON_MATCHING void func_8009704C(void) {
         *(volatile u8*)&g_BattleUIStep += 1;
         return;
     }
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0u) {
-        u8* slot;
+    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
+        BattleTurn* turn;
 
         if ((func_80097574() & BYTE_MASK) != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
@@ -141,15 +142,15 @@ NON_MATCHING void func_8009704C(void) {
         D_801454F6[D_8014857A * 3]        = group->cursor;
         entry                             = Party_GetAbilities(message[0], group->index, 1);
         kind                              = entry[group->cursor];
-        slot                              = D_801EB4D8;
-        *(u16*)(slot + 2)                 = kind;
+        turn                              = g_BattleActorTurn;
+        turn->command.id                  = kind;
         g_BattleChoicePhase               = 1u;
         D_801485DC                        = 0u;
-        if (*(u16*)(slot + 2) == 0x97u) {
-            g_BattleMessageState       = 2u;
-            D_801EB4D8->command.target = g_BattleMessageSlot[5];
-            g_BattleSubStep            = 7u;
-            g_BattleUIStep             = 0u;
+        if (turn->command.id == 0x97u) {
+            g_BattleMessageState              = 2u;
+            g_BattleActorTurn->command.target = g_BattleMessageSlot[5];
+            g_BattleSubStep                   = 7u;
+            g_BattleUIStep                    = 0u;
             return;
         }
         g_BattleUIStep = 3u;

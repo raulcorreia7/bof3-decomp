@@ -25,9 +25,9 @@ MATCH void func_801F73FC(void) {
 
     work              = g_Task;
     work->pos.z.fixed = height << 16;
-    work->unk_2E      = 0x180;
-    work->unk_30      = 0x500;
-    work->unk_09      = 0;
+    work->screen_x    = 0x180;
+    work->screen_y    = 0x500;
+    work->timer       = 0;
     Area_ClearWorkColumn();
 
     g_Task->header.mode += 1;
@@ -35,14 +35,14 @@ MATCH void func_801F73FC(void) {
 }
 
 MATCH void func_801F7480(void) {
-    func_801F7678(g_Task->unk_09);
+    func_801F7678(g_Task->timer);
     if ((g_FrameCount & 1) == 0) {
         func_801F7AE4();
     }
     func_801F7C54();
-    g_Task->unk_09 = ((Actor*)g_Task)->unk_09 + 4;
-    if (g_Task->unk_09 == 0) {
-        g_Task->unk_09      = 0x20;
+    g_Task->timer = ((Actor*)g_Task)->timer + 4;
+    if (g_Task->timer == 0) {
+        g_Task->timer       = 0x20;
         g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
     }
 }
@@ -50,10 +50,10 @@ MATCH void func_801F7480(void) {
 INCLUDE_ASM(func_801F752C);
 
 MATCH void func_801F75C8(void) {
-    func_801F7678(g_Task->unk_09);
+    func_801F7678(g_Task->timer);
     func_801F7C54();
-    g_Task->unk_09 = ((Actor*)g_Task)->unk_09 - 4;
-    if (g_Task->unk_09 == 0) {
+    g_Task->timer = ((Actor*)g_Task)->timer - 4;
+    if (g_Task->timer == 0) {
         g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
     }
 }

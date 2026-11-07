@@ -85,7 +85,7 @@
 
 #define BATTLE_SELECTION_RECORD_HANDLE(i) MEM(u8* volatile, 0x801EB5B4u + (u32)(i) * BATTLE_RING_STRIDE)
 
-#define BATTLE_ACTIVE_WORK                ((PartyBattler*)D_801EB4E0)
+#define BATTLE_ACTIVE_WORK                ((PartyBattler*)g_BattleEffectBattler)
 
 /* A hit's target answers with a reprisal when its reprisal roll passes
  * (Character.stats.reprisal_chance, or the enemy's event_flags bit 2): the hit's
@@ -237,22 +237,25 @@ extern u8            D_801484E0;
 extern u16           D_801485A4;
 extern s16           D_801485D6;
 /* D_801EAF3C */
+extern u16           g_BattlePendingStatus;
 extern volatile u16  g_BattleTurnPriorityMultipliers[6];
 /* D_801EAF88 */
 extern volatile u8   g_BattleLevelThresholds[12];
 /* Enemy battler record base for both battle overlays. */
 /* D_801EB2E8 */
 extern u8            g_BattleEnemies[];
-/* The active battle work row, the pointer battle/battle/03 and the bmagic
+/* The battler the running effect acts on: the pointer battle/battle/03 and the bmagic
  * overlays advance through the effect steps. It is a non-volatile view on
  * purpose: some retail stores rely on the plain form, for example the counter
  * store in the return-jump delay slot of func_801E8D04. */
-extern PartyBattler* D_801EB4E0;
+extern PartyBattler* g_BattleEffectBattler;
 /* The current battler's enemy work row (the row at ENEMY_COMBATANT_BASE that
  * the battle mode is running). battle/battle/03 stores it when it arms a slot
  * (func_801E2170) and battle/battle/15 reads its cells (Battle_TestAICondition). */
 /* D_801EB4E8 */
 extern EnemyBattler* g_BattleCurrentEnemy;
 extern u8            D_801EB6B2[];
+/* Enemy battler work record (stride 0x118, indexed by slot - 3). */
+extern EnemyBattler  g_BattleEnemyBattlers[];
 
 #endif

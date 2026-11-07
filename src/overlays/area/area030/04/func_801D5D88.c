@@ -49,8 +49,8 @@ MATCH void func_801D5D88(void) {
     } else if (mode == 1 && !(g_FrameCount & 1)) {
         work->cue_index_06 = work->cue_index_06 + 1;
     }
-    func_801D1B88(0x39, 0x97, FISHING_STATE->pos_x_0C, 1);
-    sprintf((s8*)g_UiFormatBuffer, (s8*)D_801D0C04, FISHING_STATE->cue_index_06);
+    Fishing_DrawGaugeFill(0x39, 0x97, FISHING_STATE->pos_x_0C, 1);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C04, FISHING_STATE->cue_index_06);
     UI_DrawAsciiString(0xAC, 0x94, 0, g_UiFormatBuffer);
     Area_AddActor();
 }

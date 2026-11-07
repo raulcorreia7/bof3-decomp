@@ -19,15 +19,22 @@ extern volatile u8 D_80140000[];
 extern u8          D_80143BB0;
 extern u16         D_80143F04;
 /* D_80143F7C */
+extern u32         g_UiPopupRequest;
+extern u16         g_GameAreaId;
 extern s32         g_PartyX; /* 0x80143F7C */
 /* D_80143F80 */
 extern s32         g_PartyY; /* 0x80143F80 */
 /* D_80144E88 */
+extern u16         g_SaveAreaId;
+extern u8          g_SaveEntryFacing;
+extern u32         g_SaveEntryX;
+extern u32         g_SaveEntryY;
 extern u8          g_SceneFlagWords[]; /* 0x80144E88 */
 extern s8          D_80144950;
 extern u8          D_80144953;
 extern u8          D_80144954;
-extern u8          D_80144956;
+/* D_80144956 */
+extern u8          g_AutoRun;
 /* D_80144F28 */
 extern u8          g_SceneEventFlags[];
 /* D_80144F58 */
@@ -58,10 +65,11 @@ extern s16 D_80145ECE;
 extern u8  D_80145ED8;
 extern u8  D_80145EDB;
 /* Player battle-record copies (stride 0x140), selected by g_BattleActiveBattler. */
+extern u16 g_InputRepeatDelay;
+extern u16 g_InputRepeatButtons;
 extern u8  D_80145F04[];
 extern u8  D_80145F10[];
 extern u16 D_80145F1A[];
-extern u8  D_80145FA9;
 extern s8  D_80145FBC;
 /* D_801462E0 */
 extern u8  g_BattleMode;
@@ -153,6 +161,7 @@ extern u8          D_8014933A;
 /* D_8014933B */
 extern u8          g_AreaSceneMode;
 /* D_8017F974 */
+extern u8          g_AreaHeightOffsetEnabled;
 extern void* const g_AreaLoads[200]; /* 0x8017F974 */
 extern u8          D_8014933C;
 /* D_80181B10 */
@@ -162,6 +171,8 @@ extern const u8    D_80181B88[12];
 extern const u8    g_RouteSpeedScale[]; /* 0x80181BD4 */
 
 extern const u8 D_80181B34[20][3];
+extern s16      D_80143F22;
+extern u8       D_80145E44;
 /* The main executable keeps the interrupt dispatcher table and SPU handles.
  * D_80185690 stores the table address 0x80185670; libetc wrappers load it and
  * fetch one slot: DMACallback 0x04, InterruptCallback 0x08, ResetCallback

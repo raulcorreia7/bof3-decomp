@@ -13,7 +13,7 @@ MATCH void func_801F2EBC(void) {
     g_Task = work;
     if (FIELD(s32, D_801468BC, 0) >= D_80145EC4) {
         work->header.mode = 0xD;
-        g_Task->unk_09    = 0;
+        g_Task->timer     = 0;
         return;
     }
     work->header.mode = 6;

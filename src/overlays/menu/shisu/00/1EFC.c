@@ -111,7 +111,7 @@ MATCH void func_801D3124(void) {
 }
 
 MATCH void func_801D3164(void) {
-    D_801D9768[g_MenuCurrentPanel->state]();
+    g_MenuStatusTask2StateFuncs[g_MenuCurrentPanel->state]();
     Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A,
                         g_MenuCurrentPanel->unk_0B, 0);
 }
@@ -132,7 +132,7 @@ MATCH void func_801D320C(void) {
 }
 
 MATCH void func_801D324C(void) {
-    D_801D9774[g_MenuCurrentPanel->state]();
+    g_MenuStatusTask3StateFuncs[g_MenuCurrentPanel->state]();
     func_801D3320(g_MenuCurrentPanel);
 }
 
@@ -311,10 +311,7 @@ MATCH void func_801D91B0(u8 index, s32 left, s32 top, MenuListRow* row) {
     y = top;
     UI_DrawWindow(left + 8, y, 200, 48, 0, g_WindowStyle);
     if (row != NULL) {
-        if (GetGraphType() != 1) {
-            GetGraphType();
-        }
-        GFX_AddDrawMode(0xF);
+        GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
         Menu_DrawPanelIcon((left + 9), (top + 5), (u8)(index + 3), 0x1E, GetClut(16, 480), 128);
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
             icon = *(row->unk_00 + i + 5);
@@ -323,9 +320,9 @@ MATCH void func_801D91B0(u8 index, s32 left, s32 top, MenuListRow* row) {
             }
         }
         UI_DrawText((x + 21), (y + 3), 0, 5, (u8*)row);
-        sprintf((char*)g_UiFormatBuffer, D_801D0D64, row->unk_00[8]);
+        TEXT_Format(g_UiFormatBuffer, D_801D0D64, row->unk_00[8]);
         UI_DrawGlyphString((x + 31), (y + 24), 0, g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, D_801D0D68, row->unk_00[0xC], row->unk_00[0xD]);
+        TEXT_Format(g_UiFormatBuffer, D_801D0D68, row->unk_00[0xC], row->unk_00[0xD]);
         label_x = x + 0x27;
         UI_DrawGlyphString(label_x, (y + 37), 0, g_UiFormatBuffer);
         UI_DrawGlyphString(label_x, (y + 36), 0, (u8*)&D_801D0D74);

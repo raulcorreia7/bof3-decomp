@@ -77,9 +77,9 @@ NON_MATCHING s32 func_801BC760(void) {
     dx = ABS(dx);
     if (dx <= TO_COORD(6) && (dy = g_Task->pos.y.fixed - near_b, dy = dy < 0 ? -dy : dy) <= TO_COORD(6)) {
         if (dx > TO_COORD(2) || dy > TO_COORD(2)) {
-            count = *(&D_80145FAC + (g_Task->unk_06 * BATTLE_PARTY_STRIDE)) + 1;
+            count = g_AreaPartySpeed[g_Task->unk_06].level.u8_value + 1;
         } else {
-            count = *(&D_80145FAC + (g_Task->unk_06 * BATTLE_PARTY_STRIDE));
+            count = g_AreaPartySpeed[g_Task->unk_06].level.u8_value;
         }
     } else {
         count = 5;

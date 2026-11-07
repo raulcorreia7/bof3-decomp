@@ -53,6 +53,6 @@ MATCH void func_801D3624(void) {
         }
         D_8014638A = FIELD(u16, work, 0x32);
     }
-    func_800AE1F8((*(u8*)&g_BattleActionId));
+    Battle_LoadSelectionEffect((*(u8*)&g_BattleActionId));
     g_BattleUIStep += 1;
 }

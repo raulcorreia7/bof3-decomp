@@ -51,7 +51,7 @@ MATCH void func_801EF27C(void) {
     PartyBattler* dst;
 
     if (--g_Task->unk_09 == 0) {
-        src              = D_801EB4E0;
+        src              = g_BattleEffectBattler;
         dst              = g_Task;
         dst->pos.x.fixed = src->pos.x.fixed;
         dst->pos.y.fixed = src->pos.y.fixed;
@@ -104,7 +104,7 @@ MATCH void func_801EF3D0(void) {
 MATCH void func_801EF484(void) {
     PartyBattler* src;
 
-    src                 = (PartyBattler*)D_801EB4E0;
+    src                 = (PartyBattler*)g_BattleEffectBattler;
     g_Task->pos.x.fixed = src->pos.x.fixed;
     g_Task->pos.y.fixed = src->pos.y.fixed;
     g_Task->pos.z       = src->pos.z;
