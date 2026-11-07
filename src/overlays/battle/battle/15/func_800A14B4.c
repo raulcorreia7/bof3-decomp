@@ -14,6 +14,7 @@ MATCH void func_800A14B4(void) {
     u32          index;
     u32          count;
     u32          next;
+    u32          enemy_index;
 
     func_800A3F28();
     p    = &g_BattleActiveBattler;
@@ -28,11 +29,11 @@ MATCH void func_800A14B4(void) {
         }
     } else {
         ENEMY_COMBATANT(slot).turn.action_flags.value |= COMBATANT_FLAG_POWER_BOOST;
-        index = (*p - 3u) * 0x118;
-        count = D_801EB744[index];
+        enemy_index = *p - 3u;
+        count       = g_BattleEnemyBattlers[enemy_index].unk_114;
         if (count < 2u) {
-            next              = count + 1;
-            D_801EB744[index] = next;
+            next                                       = count + 1;
+            g_BattleEnemyBattlers[enemy_index].unk_114 = next;
         }
     }
 }

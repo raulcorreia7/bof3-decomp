@@ -156,7 +156,6 @@ D_801C893C = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five it
 g_BattleEnemies = { addr = 0x801EB2E8, source = "The enemy battlers." }
 g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's BattleTurn; the emi/battle/battle/15 target-selection handlers read it for command.target and the action and damage flags (set by emi/battle/battle/03)" }
 D_801EB6DA = { addr = 0x801EB6DA, size = 0x2, source = "Halfword cell written by func_800A9BD8 and read by func_8009F010" }
-D_801EB72C_rows = { addr = 0x801EB72C }
 g_BattleTemplateStats = { addr = 0x801EC364, source = "Template stat rows of the battlers." }
 
 ["emi/bmagic/magic001/00"]

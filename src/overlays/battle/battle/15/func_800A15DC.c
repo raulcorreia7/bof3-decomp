@@ -4,7 +4,7 @@
  */
 MATCH void func_800A15DC(void) {
     u32          playerIndex;
-    s32          enemyRowOffset;
+    s32          enemy_index;
     u8           counter;
     volatile u8* battlerPtr;
     u32          battler;
@@ -20,10 +20,10 @@ MATCH void func_800A15DC(void) {
         }
     } else {
         ENEMY_COMBATANT(battler).turn.action_flags.value |= COMBATANT_FLAG_MEDITATION;
-        enemyRowOffset = (*battlerPtr - 3) * BATTLE_ENEMY_STRIDE;
-        counter        = D_801EB745[enemyRowOffset];
+        enemy_index = *battlerPtr - 3;
+        counter     = g_BattleEnemyBattlers[enemy_index].unk_115;
         if (counter < 2U) {
-            D_801EB745[enemyRowOffset] = counter + 1;
+            g_BattleEnemyBattlers[enemy_index].unk_115 = counter + 1;
         }
     }
 }

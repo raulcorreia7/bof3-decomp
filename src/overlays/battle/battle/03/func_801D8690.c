@@ -48,7 +48,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     func_801D9AB4((s16)var_s0, (s16)var_s1, 2, 0);
     func_801D9AB4((s16)var_s0, (s16)(var_s1 + 0x13), 3, 0);
     var_fp      = var_s2;
-    temp_v1_139 = *((u8*)&D_801EB6AF + ((var_s4 & BYTE_MASK) * 0x118));
+    temp_v1_139 = g_BattleEnemyBattlers[var_s4].unk_7F;
     var_s7      = var_s1;
     if (temp_v1_139 == 1) {
         func_801D9E9C(var_s3, (s16)(var_s1 + 0xA), (u16)g_MenuCurrentPanel->unk_0B, (u16)g_MenuCurrentPanel->flags,
@@ -61,7 +61,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s1 = var_s7 + 3;
     var_s1 <<= 0x10;
     var_s1 = var_s1 >> 0x10;
-    UI_DrawTextString(var_a0_154, (s16)var_s1, 0, 8U, D_801EB6A4[var_s4 & BYTE_MASK]);
+    UI_DrawTextString(var_a0_154, (s16)var_s1, 0, 8U, g_BattleEnemyBattlers[var_s4].name);
     var_s0 = var_fp + 2;
     var_s0 <<= 0x10;
     var_s0      = var_s0 >> 0x10;

@@ -20,7 +20,7 @@ NON_MATCHING void func_8009E500(void) {
         } else if (ENEMY_COMBATANT(g_BattleTarget).turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
             g_BattleTargetRecord->ap_change = 0;
         } else {
-            g_BattleTargetRecord->ap_change = D_801EB6C4[g_BattleTarget - 3][1] / 5;
+            g_BattleTargetRecord->ap_change = ENEMY_COMBATANT(g_BattleTarget).ap / 5;
         }
         g_BattleAction->unk_08  = 2;
         g_BattleTargetRecord[4] = 2;
@@ -33,11 +33,11 @@ NON_MATCHING void func_8009E500(void) {
             func_800AAEBC(-Char_AddPoints(&g_BattlePartyBattlers[g_BattleActiveBattler].chr.ap, limit, delta),
                           g_BattleActiveBattler);
         } else {
-            limit = D_801EB6C4[g_BattleActiveBattler - 3][7];
-            if (limit < D_801EB6C4[g_BattleActiveBattler - 3][1] + delta) {
+            limit = ENEMY_COMBATANT(g_BattleActiveBattler).stats.max_ap;
+            if (limit < ENEMY_COMBATANT(g_BattleActiveBattler).ap + delta) {
                 g_BattleAction->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&D_801EB6C4[g_BattleActiveBattler - 3][1], limit, delta),
+            func_800AAEBC(-Char_AddPoints(&ENEMY_COMBATANT(g_BattleActiveBattler).ap, limit, delta),
                           g_BattleActiveBattler);
         }
         g_BattleAction->unk_08 = 0;

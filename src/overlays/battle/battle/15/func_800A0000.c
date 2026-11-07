@@ -2,34 +2,28 @@
 
 MATCH void func_800A0000(void) {
     s32 index;
-    s32 offset;
-    s32 last;
     u8  flags;
 
     func_800A3F28();
-    index  = g_BattleTarget - 3;
-    offset = (index & BYTE_MASK) * BATTLE_ENEMY_STRIDE;
-    if (D_801EB6CA[offset] != 0) {
-        flags = D_801EB6CA[offset + 1];
+    index = g_BattleTarget - 3;
+    if (g_BattleEnemyBattlers[index & BYTE_MASK].drops[0].rate != 0) {
+        flags = g_BattleEnemyBattlers[index & BYTE_MASK].drops[0].flags;
         if (!(flags & 1)) {
-            D_801EB6CA[offset + 1] = flags | 1;
-            D_801EB6CA[offset] += 2;
+            g_BattleEnemyBattlers[index & BYTE_MASK].drops[0].flags = flags | 1;
+            g_BattleEnemyBattlers[index & BYTE_MASK].drops[0].rate += 2;
         }
     }
-    offset = (index & BYTE_MASK) * BATTLE_ENEMY_STRIDE;
-    if (D_801EB6CE[offset] != 0) {
-        flags = D_801EB6CE[offset + 1];
+    if (g_BattleEnemyBattlers[index & BYTE_MASK].drops[1].rate != 0) {
+        flags = g_BattleEnemyBattlers[index & BYTE_MASK].drops[1].flags;
         if (!(flags & 1)) {
-            D_801EB6CE[offset + 1] = flags | 1;
-            D_801EB6CE[offset] += 1;
+            g_BattleEnemyBattlers[index & BYTE_MASK].drops[1].flags = flags | 1;
+            g_BattleEnemyBattlers[index & BYTE_MASK].drops[1].rate += 1;
         }
     }
-    /* FAKE: statement boundary keeps the retail register order and schedule. */
-    ORDER_LOCK(last = (index & BYTE_MASK) * BATTLE_ENEMY_STRIDE);
-    if (D_801EB6CA[last] >= 8U) {
-        D_801EB6CA[last] = 7;
+    if (g_BattleEnemyBattlers[index & BYTE_MASK].drops[0].rate >= 8U) {
+        g_BattleEnemyBattlers[index & BYTE_MASK].drops[0].rate = 7;
     }
-    if (D_801EB6CE[last] >= 8U) {
-        D_801EB6CE[last] = 7;
+    if (g_BattleEnemyBattlers[index & BYTE_MASK].drops[1].rate >= 8U) {
+        g_BattleEnemyBattlers[index & BYTE_MASK].drops[1].rate = 7;
     }
 }
