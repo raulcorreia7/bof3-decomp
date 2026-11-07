@@ -8,7 +8,7 @@ MATCH u32 func_801A06D8(void) {
     u8     j;
     u8     flags;
 
-    result = g_AreaWalkFlags & AREA_WALK_STEP_ACTIVE;
+    result = g_AreaWalkFlags & AREA_WALK_LEADER_SWITCH_ACTIVE;
     if (result == 0) {
         for (i = 0; i < ENTITY_MAX; i++) {
             row            = &g_Actors[i];
