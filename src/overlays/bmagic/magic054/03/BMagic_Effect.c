@@ -13,7 +13,7 @@ MATCH void func_801EEC2C(void) {
 
 INCLUDE_ASM(func_801EEC98);
 
-#include "overlays/bmagic/Effect_MarkTargetDamagedOnTickerZero.h"
+#include "overlays/bmagic/Effect_Hit.h"
 
 #include "shared/Effect_StartPlaying.h"
 

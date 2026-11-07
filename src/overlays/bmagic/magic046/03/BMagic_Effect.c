@@ -42,7 +42,7 @@ INCLUDE_ASM(func_801EF090);
 
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
-#include "../../Effect_DispatchHandlerSlot2.h"
+#include "../../Effect_DispatchStep.h"
 
 MATCH void func_801EF250(void) {
     g_Task                           = g_BattleEffectBattler;
@@ -53,7 +53,7 @@ MATCH void func_801EF250(void) {
     g_Task->header.step = 1;
 }
 
-#include "overlays/bmagic/Effect_AddActorStepOnPlaying.h"
+#include "overlays/bmagic/Effect_AddActor.h"
 
 MATCH void func_801EF304(void) {
     func_801E5988();

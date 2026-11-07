@@ -63,7 +63,7 @@ MATCH void func_801EF374(void) {
     BattleEffectTimerStep();
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerRaiseTicker.h"
+#include "overlays/bmagic/Effect_Wait.h"
 
 MATCH void func_801EF44C(void) {
     PartyBattler* work;

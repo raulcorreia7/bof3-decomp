@@ -1,3 +1,3 @@
 #include "area104_14.h"
 
-#include "../../Area_FindSceneRecordAndClearTint.h"
+#include "../../Area_InitSceneActor.h"

@@ -74,13 +74,13 @@ MATCH void func_801CFB94(void) {
     SYS_DISPATCH_TASK(D_801D0A94, 3, g_Task);
 }
 
-#include "overlays/plchar/Char_TurnAndRequestScript.h"
+#include "overlays/plchar/Char_FaceFreeDirection.h"
 
 INCLUDE_ASM(func_801CFCD8);
 
 #include "overlays/plchar/Char_AdvancePaletteScript.h"
 
-#include "overlays/plchar/Char_SelectScriptAndStep.h"
+#include "overlays/plchar/Char_StartFacingScript.h"
 
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 

@@ -26,7 +26,7 @@ INCLUDE_ASM(func_801EF310);
 #define BMAGIC_CAMERA_SWING_TICKS 0x3C
 #include "overlays/bmagic/Effect_SwingCameraAngle.h"
 
-#include "../../Effect_CountDownAndSetTint.h"
+#include "../../Effect_StartTint.h"
 
 MATCH void func_801EF698(void) {
     u8 timer_next;
@@ -81,6 +81,7 @@ MATCH void func_801F04D4(void) {
 
 INCLUDE_ASM(func_801F055C);
 
+/* blocker: source pointer register; first diff: lui a2 (retail) against lui a3 (candidate). */
 /* blocker: source pointer register; first diff: lui a2 (retail) against lui a3 (candidate). */
 INCLUDE_ASM(func_801F061C);
 

@@ -5,7 +5,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DispatchHandlerSlot1.h"
+#include "overlays/bmagic/Effect_DispatchMode.h"
 
 INCLUDE_ASM(func_801EEC94);
 

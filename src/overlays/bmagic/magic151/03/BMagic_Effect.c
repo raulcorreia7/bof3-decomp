@@ -259,7 +259,7 @@ MATCH void func_801F129C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerRaiseTicker.h"
+#include "overlays/bmagic/Effect_Wait.h"
 
 #include "overlays/bmagic/Effect_CountDownByTwoAndFinish.h"
 

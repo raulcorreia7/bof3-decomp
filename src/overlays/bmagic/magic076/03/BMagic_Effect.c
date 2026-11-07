@@ -29,7 +29,7 @@ INCLUDE_ASM(func_801EF160);
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-/* blocker: switch and comparisons; first diff: lui v1 at 0x801EF2E8. */
+/* blocker: retail tests id 0x4D first and keeps the type in v1; first diff: lui v1 against v0 at 0x801EF2E8. */
 INCLUDE_ASM(func_801EF2E8);
 
 MATCH void func_801EF330(void) {

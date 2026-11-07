@@ -4,7 +4,7 @@
  * the effect step (work byte 0x01). One definition shared by the bmagic effect
  * modules; every change here must verify every member. */
 /* func_801EEFFC (magic055), func_801EEFFC (magic091) */
-MATCH void Effect_CopyBattlerCoordsOnTimerZero(void) {
+MATCH void Effect_FollowTarget(void) {
     u8            timer;
     PartyBattler* src;
     PartyBattler* work;

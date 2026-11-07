@@ -4,11 +4,18 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DispatchHandlerSlot1.h"
+#include "overlays/bmagic/Effect_DispatchMode.h"
 
 INCLUDE_ASM(func_801EEC94);
 
-INCLUDE_ASM(func_801EEE68);
+MATCH void func_801EEE68(void) {
+    if (g_Task->param.unk_0B == 2) {
+        SND_QueueSelectionFx(0x101);
+        g_Task->unk_09 = 0;
+        g_Task->timer  = 0;
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801EEEDC(void) {
     u8 temp_v1;

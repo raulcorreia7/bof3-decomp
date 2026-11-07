@@ -45,7 +45,7 @@ void Area_Update();
 
 /* Reset the answer message request, then copy the menu selection into the
  * image's byte. */
-static inline void World04_ResetAnswerAndCopySelection(u8* target) {
+static inline void World04_StoreAnswerChoice(u8* target) {
     MESSAGE_REQUEST_CLEAR();
     *target = g_MessageChoice;
 }
