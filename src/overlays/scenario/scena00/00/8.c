@@ -1273,7 +1273,7 @@ MATCH void func_801F9BE4(void) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             Game_SetScriptActive();
             Party_HideBattlers();
-            UI_SetMode(1);
+            UI_SetMode(UI_MODE_FADE_IN);
             g_ScriptVars[3]      = 1;
             *counter             = 0;
             g_SceneState.step_05 = 2;
@@ -1283,7 +1283,7 @@ MATCH void func_801F9BE4(void) {
             if (g_ScriptVars[3] != 0x54) {
                 break;
             }
-            UI_SetMode(0);
+            UI_SetMode(UI_MODE_FADE_OUT);
             g_SceneState.step_05 = 3;
             break;
 
@@ -1351,7 +1351,7 @@ MATCH void func_801F9FB8(void) {
         case 0:
             if (g_ScriptVars[2] == 0x30) {
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-                UI_SetMode(1);
+                UI_SetMode(UI_MODE_FADE_IN);
                 id            = Actor_FindFreeSlot();
                 D_1F800000[0] = id;
                 if ((id & BYTE_MASK) != GAME_NONE) {
@@ -1501,7 +1501,7 @@ MATCH void func_801FA27C(void) {
             if (g_ScriptVarsReq.byte != 0xB) {
                 break;
             }
-            UI_SetMode(0);
+            UI_SetMode(UI_MODE_FADE_OUT);
             g_SceneState.step_05 = 9;
             break;
 
@@ -1903,7 +1903,7 @@ MATCH void func_801FB204(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVarsReq.byte = 0x1E;
                 g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
-                UI_SetMode(3);
+                UI_SetMode(UI_MODE_FAST_FADE_IN);
                 g_PartyX               = TO_COORD(47);
                 g_AreaScrollTargetX    = TO_COORD(47);
                 g_PartyY[0]            = TO_COORD(29);
@@ -2098,7 +2098,7 @@ MATCH void func_801FB924(void) {
             if (TIMER_EXPIRED(*counter)) {
                 g_ScriptVars[2] = 0x10;
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-                UI_SetMode(1);
+                UI_SetMode(UI_MODE_FADE_IN);
                 SND_PlayCue(EMI_CUE_ID(2, 3));
                 *counter             = 60;
                 g_SceneState.step_05 = 3;
@@ -2215,7 +2215,7 @@ MATCH void func_801FB924(void) {
             break;
 
         case 8:
-            UI_SetMode(0);
+            UI_SetMode(UI_MODE_FADE_OUT);
             g_SceneState.step_05 = 9;
             break;
 

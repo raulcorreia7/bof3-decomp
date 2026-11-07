@@ -18,7 +18,7 @@ MATCH void func_801D41EC(void) {
     D_80148654 = count;
     if ((count & BYTE_MASK) == 0) {
         D_80148652 += 1;
-        UI_SetMode(0);
+        UI_SetMode(UI_MODE_FADE_OUT);
         for (i = 0; i < 4; i++) {
             index             = i;
             value             = SsIsEos(0, index);

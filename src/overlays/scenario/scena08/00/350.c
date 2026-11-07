@@ -318,8 +318,8 @@ MATCH void func_801F9C00(void) {
     work->pos.z.fixed = TO_COORD(2048);
     work->vz          = 0;
     work->header.mode += 1;
-    SND_PlayCue(0x204);
-    SND_PlayCue(0x205);
+    SND_PlayCue(EMI_CUE_ID(2, 4));
+    SND_PlayCue(EMI_CUE_ID(2, 5));
 }
 
 INCLUDE_ASM(func_801F9C58);
@@ -333,7 +333,7 @@ MATCH void func_801F9CE0(void) {
     work->pos.z.fixed = TO_COORD(1536);
     work->vz          = 0;
     work->header.mode += 1;
-    SND_PlayCue(0x20A);
+    SND_PlayCue(EMI_CUE_ID(2, 10));
 }
 
 INCLUDE_ASM(func_801F9D30);

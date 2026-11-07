@@ -9,7 +9,7 @@ MATCH void func_801E2444(void) {
         Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
         func_801E26A8(0x1C, 0x40);
         func_801E2668(0, 0x70, 0x26);
-        UI_SetMode(0);
+        UI_SetMode(UI_MODE_FADE_OUT);
         D_8014865F = 0x1E;
         D_80148653 += 1;
         return;
