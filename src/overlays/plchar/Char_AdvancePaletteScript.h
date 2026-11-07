@@ -5,7 +5,7 @@ MATCH void Char_AdvancePaletteScript(void) {
 
     done = 0;
     if (g_Task->param.unk_0B == 1) {
-        GFX_StagePalette((g_Task->unk_05 << 6) + 0x80035600, 0);
+        GFX_StagePalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
         g_Task->param.unk_0B = 2;
     }
     state = g_Task->param.unk_0B;

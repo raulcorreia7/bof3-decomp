@@ -8,7 +8,6 @@
 #include "work/area_spad.h"
 #include "battle/ram.h"
 
-extern u16      g_GameAreaId;
 extern u8       D_80146865;
 extern u8       D_80146875;
 extern u32      D_801F6C00;

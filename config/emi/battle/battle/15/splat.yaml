@@ -455,7 +455,7 @@ segments:
       - [0x1786C, c, func_800AE06C]
       - [0x1789C, c, func_800AE09C]
       - [0x17908, c, func_800AE108]
-      - [0x179F8, c, func_800AE1F8]
+      - [0x179F8, c, Battle_LoadSelectionEffect]
       - [0x17A60, c, func_800AE260]
       - [0x17AD4, c, func_800AE2D4]
       - [0x17B4C, c, func_800AE34C]

@@ -9,6 +9,7 @@ extern BattleHandlerTable4 D_801EEC04;
 /* The x/y speed pairs the step indexes by the work counter. */
 extern s16                 D_801F004C[];
 
+void                func_801EF2F0(void);
 void                func_801EF880(void);
 void                func_801EFCF0(void);
 extern s16          D_801F004E[];

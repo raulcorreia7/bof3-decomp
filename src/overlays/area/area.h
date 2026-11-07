@@ -135,7 +135,7 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     u8            selection;
     s32           result;
 
-    g_Task    = (u8*)&g_BattlePartyBattlers[slot];
+    TASK_SET(&g_BattlePartyBattlers[slot]);
     index     = g_PartyFieldOrder[slot];
     y         = g_BattlePartyBattlers[slot].unk_30.signed_half;
     x         = g_BattlePartyBattlers[slot].unk_2E.signed_half;
@@ -153,7 +153,7 @@ void Actor_StopMoving(void);
 void Area_ClearWorkColumn(void);
 u8*  Area_FindFreeWorkRow(void);
 void Area_InitSpin(void* spin);
-void Area_StepChargeGauge(void);
+void Area_StepRunGauge(void);
 void Area_ClaimSpawnSlot(void);
 s32  Area_StepSpawnSlots(void);
 void Area_DrawSpawnSlot(AreaSpawnSlot* slot);

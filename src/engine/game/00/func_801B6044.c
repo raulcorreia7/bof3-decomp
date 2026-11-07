@@ -4,7 +4,7 @@ MATCH s32 func_801B6044(void) {
     Actor* context;
     Actor* next_context;
 
-    if (g_GameState->slot_index_79 != 2) {
+    if (g_GameState->leader_id != CHAR_ID_GARR) {
         return 0;
     }
     context = g_Task;

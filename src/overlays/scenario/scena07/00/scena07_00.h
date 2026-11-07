@@ -30,6 +30,7 @@ extern u8        D_801FDE88[4];
 extern SceneFunc D_801FDF8C[];
 extern u8        D_801FDFC4;
 
+u8*       func_801F8394(void);
 void      func_801F83D0(u8* row);
 void      func_801F88B8(void* table);
 void      func_801F8BE8(void* table);
@@ -48,7 +49,6 @@ extern u8 D_801FDFC8;
 s32 func_801F85D8(void);
 s32 func_801F9EFC(void);
 
-extern u16      g_GameAreaId;
 extern s8       D_80146874;
 extern u8       D_80146875;
 extern Callback D_801FDD14[];

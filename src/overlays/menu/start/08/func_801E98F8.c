@@ -4,7 +4,7 @@
  * byte lookup tables and the draw helper owned by this overlay. */
 
 MATCH void func_801E98F8(void) {
-    D_801ED3FC[g_MenuCurrentPanel->state]();
+    g_MenuStartPanel6StateFuncs[g_MenuCurrentPanel->state]();
     Shop_DrawEquipment(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y,
                        g_CharSlot[g_PartyFieldOrder[g_MenuCurrentPanel->unk_0A]]);
 }

@@ -27,5 +27,5 @@ segments:
     vram: 0x801D86E0
     align: 4
     subsegments:
-      - [0x7AE0, bin, D_801D86E0]
+      - [0x7AE0, bin, g_MenuBateStepFuncs]
   - [0x8448]

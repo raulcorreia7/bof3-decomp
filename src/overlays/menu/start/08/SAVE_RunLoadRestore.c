@@ -11,15 +11,15 @@ MATCH void SAVE_RunLoadRestore(void) {
             g_InputMasks[i & BYTE_MASK] = D_80145594[i & BYTE_MASK];
         }
         if (D_801ED18C != 0) {
-            g_InputMasks[INPUT_SLOT_INTERACT] = PADRright;
-            g_InputMasks[INPUT_SLOT_ACTION]   = PADRdown;
-            g_InputMasks[INPUT_SLOT_6]        = PADRup;
-            g_InputMasks[INPUT_SLOT_MENU]     = PADRleft;
-            g_InputMasks[INPUT_SLOT_LOOK]     = PADR1;
-            g_InputMasks[INPUT_SLOT_4]        = PADL1;
-            g_InputMasks[INPUT_SLOT_CONFIRM]  = PADRdown;
-            g_InputMasks[INPUT_SLOT_CANCEL]   = PADRup;
-            g_InputMasks[INPUT_SLOT_5]        = PADselect;
+            g_InputMasks[INPUT_SLOT_MOVE]    = PADRright;
+            g_InputMasks[INPUT_SLOT_SPEAK]   = PADRdown;
+            g_InputMasks[INPUT_SLOT_ACTION]  = PADRup;
+            g_InputMasks[INPUT_SLOT_MENU]    = PADRleft;
+            g_InputMasks[INPUT_SLOT_VIEW]    = PADR1;
+            g_InputMasks[INPUT_SLOT_CHANGE]  = PADL1;
+            g_InputMasks[INPUT_SLOT_CONFIRM] = PADRdown;
+            g_InputMasks[INPUT_SLOT_CANCEL]  = PADRup;
+            g_InputMasks[INPUT_SLOT_UNUSED]  = PADselect;
         }
         g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
         EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
