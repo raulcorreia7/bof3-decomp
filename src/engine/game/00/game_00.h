@@ -297,7 +297,6 @@ extern u8                 D_80145E9B;
 extern u16                D_80145EBC; /* 0x80145EBC */
 extern u32                D_80145EDC; /* 0x80145EDC */
 extern u8                 D_80145F00; /* 0x80145F00 */
-extern u8                 D_80145FA8; /* 0x80145FA8 */
 extern u8                 D_80145FB4[];
 extern u16                D_80145FB8; /* 0x80145FB8 */
 extern u8                 D_80145FD1;
