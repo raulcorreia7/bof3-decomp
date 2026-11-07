@@ -29,13 +29,14 @@
 #define EMI_CUE_LAYER_MASK      0x60
 
 /* The cue id: bank in bits 8-11, record index in bits 0-7. */
+#define EMI_CUE_ID_BANK_SHIFT   8
 #define EMI_CUE_ID_BANK_MASK    0x0F00
 #define EMI_CUE_ID_INDEX_MASK   0x00FF
 
 /* Cue id: `(bank << 8) | record_index`. The images call the dispatcher with
  * the constructed id, e.g. `emi/etc/game/00@0x8019B024` passes bank 1,
  * record 6. */
-#define EMI_CUE_ID(bank, index) ((((u32)(bank) & 0x0Fu) << 8) | ((u32)(index) & 0xFFu))
+#define EMI_CUE_ID(bank, index) ((((u32)(bank) & 0x0Fu) << EMI_CUE_ID_BANK_SHIFT) | ((u32)(index) & 0xFFu))
 
 typedef struct EmiCue {
     u8 alias_bank; /* bits 2-0: bank that supplies the voice index and its VAB

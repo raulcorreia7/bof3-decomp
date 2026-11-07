@@ -11,17 +11,17 @@
  * resource_id and spu_address as the three SsVabOpenHeadSticky arguments;
  * EMI_LoaderLoadVabCues and EMI_LoaderLoadSequence copy to destination and
  * sequence_buffer. */
-typedef struct EmiBank {
+typedef struct EMIBank {
     u32 spu_address;     /* 0x00 SPU sound-buffer address, SsVabOpenHeadSticky argument 3 */
     u32 source;          /* 0x04 VAB header address, argument 1; also the next-record link of a free record */
     u32 cue_table;       /* 0x08 cue table chunk (0x801486A0 + 124 * bank) */
     u32 sequence_buffer; /* 0x0C sequence package buffer */
     s16 resource_id;     /* 0x10 VAB id, argument 2 */
     u16 flags;           /* 0x12 bit 1: sequence loaded */
-} EmiBank;
+} EMIBank;
 
-ASSERT_SIZE(EmiBank, EMI_BANK_RECORD_SIZE);
-ASSERT_OFFSET(EmiBank, source, 0x04);
-ASSERT_OFFSET(EmiBank, resource_id, 0x10);
+ASSERT_SIZE(EMIBank, EMI_BANK_RECORD_SIZE);
+ASSERT_OFFSET(EMIBank, source, 0x04);
+ASSERT_OFFSET(EMIBank, resource_id, 0x10);
 
 #endif
