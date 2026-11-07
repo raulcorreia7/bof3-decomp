@@ -12,6 +12,8 @@
 /* The payload's per-state handler table. */
 extern u8 D_801F3F5C[];
 
-void func_801F3070(s32 mode);
+extern u8 D_80144CAA;
+void      func_801A4BC0(s32 arg0, s32 arg1, s32 arg2);
+void      func_801F3070(s32 mode);
 
 #endif

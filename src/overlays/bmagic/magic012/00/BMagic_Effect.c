@@ -44,7 +44,40 @@ INCLUDE_ASM(func_801EF188);
 
 INCLUDE_ASM(func_801EF3C4);
 
-INCLUDE_ASM(func_801EF4B8);
+MATCH void func_801EF4B8(void) {
+    s32 mode;
+    u8  ready;
+
+    ready = 0;
+    if (func_801DB524(g_Task->unk_03) & 0xFF) {
+        g_Task->header.step = 0xA;
+        return;
+    }
+
+    if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
+        mode = g_BattleEnemyBattlers[g_Task->unk_04].header.mode;
+    } else {
+        mode = g_BattlePartyBattlers[g_Task->unk_04].header.mode;
+    }
+
+    if (mode != 6) {
+        ready = 1;
+    }
+
+    if (ready) {
+        g_Task->facing = g_BattleEffectBattler->facing;
+        g_Task->unk_0C = 0x10000;
+        g_Task->unk_10 = 0;
+        func_801DD350(g_Task);
+        g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
+        COORD_INT(g_Task->pos.z) = COORD_INT(g_BattleEffectBattler->pos.z) + 0x100;
+        g_Task->param.unk_0B     = RANDOM_MASK(7);
+        g_Task->unk_09           = 0x10;
+        g_Task->timer            = 0;
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 

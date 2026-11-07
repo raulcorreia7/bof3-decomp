@@ -121,7 +121,35 @@ MATCH void func_801F01C0(void) {
 
 INCLUDE_ASM(func_801F0240);
 
-INCLUDE_ASM(func_801F037C);
+MATCH void func_801F037C(void) {
+    s32 diff;
+    u8  count;
+    u8  scratch[0x10]; /* FAKE: unreferenced local pads the frame to 0x28. */
+
+    count = g_Task->unk_09;
+    if (count < 0x10) {
+        g_Task->unk_09 = count + 4;
+    }
+
+    func_800AF2B4((BattleRange*)g_BattleEffectBattler, 0x60);
+    g_Task->unk_10 = g_Task->unk_0C;
+    g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed,
+                            g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
+
+    if (func_800AF66C((BattleRange*)g_BattleEffectBattler, 0xC000) != 0) {
+        g_Task->header.step += 1;
+        return;
+    }
+
+    diff           = (g_Task->unk_10 & 0xFFF) - (g_Task->unk_0C & 0xFFF);
+    g_Task->unk_10 = diff;
+    if (diff < 0) {
+        g_Task->unk_10 = ~diff + 1;
+    }
+    if ((u32)(g_Task->unk_10 - 0x601) < 0x3FF) {
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F0494);
 
