@@ -44,7 +44,16 @@ MATCH void func_801EEDDC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEE64);
+MATCH void func_801EEE64(void) {
+    g_Task->pos.x.fixed  = g_BattleSelectedActor->pos.x.fixed - 0x4000;
+    g_Task->pos.y.fixed  = g_BattleSelectedActor->pos.y.fixed - 0x4000;
+    g_Task->pos.z.fixed  = g_BattleSelectedActor->pos.z.fixed + 0x04000000;
+    g_Task->param.unk_0B = 0x10;
+    g_Task->unk_09       = 0x10;
+    g_Task->timer        = 0xB0;
+    g_Task->header.step++;
+}
+
 
 MATCH void func_801EEEE4(void) {
     PartyBattler* work = g_Task;
