@@ -226,11 +226,16 @@ extern u8              D_801D0DC4[4];
 extern u8              s_RowCaptionTags[24];
 extern char            g_SaveFileNameFormat[];
 extern char            D_801D0F14[];
+
 /* The party records the New Game screen starts from. */
-extern Character       D_801EB514[7];
-extern Character       D_801EB990;
-extern u8              D_801EBA34[][2];
-extern u8              s_CampMenuPanelIds[8];
+typedef struct WillpowerCurve {
+    u8 level_divisor;
+    u8 base;
+} WillpowerCurve;
+
+extern Character      g_StartCharacters[CHAR_INDEX_COUNT];
+extern WillpowerCurve g_StartWillpowerCurves[CHAR_INDEX_COUNT];
+extern u8             s_CampMenuPanelIds[8];
 /* Entries of the step handler tables. */
 #define MENU_START_STEP_COUNT          9
 #define MENU_START_STEP2_COUNT         11
@@ -679,8 +684,10 @@ extern u8        D_80181B1A;
 extern s32       Item_Count(u8 category, u8 item, u8 mode);
 extern u8*       D_801C8940;
 extern u8*       D_801C8944;
-extern char      D_801D0C50[8];
-extern char      D_801D0C58[8];
+/* D_801D0C50 */
+extern char      g_MenuCurrentValueFormat[8];
+/* D_801D0C58 */
+extern char      g_MenuMaxValueFormat[8];
 extern char      g_MenuClockFormat[];
 extern u8        D_801D0E20[];
 extern s32       D_801D0E28;

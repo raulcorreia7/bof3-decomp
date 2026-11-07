@@ -14,13 +14,17 @@ Callback g_ShopStep6Sub0Funcs[SHOP_STEP6_SUB0_COUNT] = {func_801DE200, func_801D
 
 Callback g_ShopStep6Sub3Funcs[SHOP_STEP6_SUB3_COUNT] = {func_801DE88C, func_801DE8E8, func_801DE944, func_801DEE20};
 
-s32 D_801E5C18[12] = {
-    0x00328000, 0x002C0000, 0x01800000, 0x00000000,
-    0x00348000, 0x002B0000, 0x01800000, 0x00000000,
-    0x00348000, 0x002D0000, 0x01800000, 0x00000000,
+/* Where the party stands on the boat after the Black Ship, one position per party slot; read by func_801DE944 (0x801DE944). */
+BoatPartyPos g_ShopBoatPartyPositions[PARTY_SLOT_COUNT] = {
+    {0x00328000, 0x002C0000, 0x01800000, 0},
+    {0x00348000, 0x002B0000, 0x01800000, 0},
+    {0x00348000, 0x002D0000, 0x01800000, 0},
 };
 
-s16 D_801E5C48[16] = {1, 1, 0, 1, -1, 1, -1, 0, -1, -1, 0, -1, 1, -1, 1, 0};
+/* The step each facing walks, by Facing; read by func_801DE944 (0x801DE944). */
+Point2D g_ShopFacingSteps[8] = {
+    {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0},
+};
 
 u8 D_801E5C68[8] = {0xFF, 0xFF, 0xA0, 0x62, 0x00, 0x00, 0x00, 0x00};
 
