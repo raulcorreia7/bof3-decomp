@@ -1248,13 +1248,20 @@ s32         Game_SetScriptVar(u8* operand);
 s32         Game_IsScriptVarEqual(u8* record);
 s32         Game_IncScriptVar(u8* operand);
 s32         func_8015BABC(void);
-void        func_8015E994(void);
-void        func_8015EFAC(void);
-void        func_8015F5C8(void);
-void        func_8015FBE4(void);
-void        func_80160200(void);
-void        func_8016081C(void);
-void        func_80160E38(void);
+/* func_8015E994 */
+void        SND_ReadCueBank0(void);
+/* func_8015EFAC */
+void        SND_ReadCueBank1(void);
+/* func_8015F5C8 */
+void        SND_ReadCueBank2(void);
+/* func_8015FBE4 */
+void        SND_ReadCueBank3(void);
+/* func_80160200 */
+void        SND_ReadCueBank4(void);
+/* func_8016081C */
+void        SND_ReadCueBank5(void);
+/* func_80160E38 */
+void        SND_ReadCueBank6(void);
 extern void func_80161454(u32 index);
 void        func_80163230(void);
 void        func_80163698(void);
