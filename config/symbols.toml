@@ -1480,6 +1480,7 @@ Area_RoundSpriteCoordinate = { addr = 0x800C3254, type = "func", source = "Round
 g_MenuStatFormat = { addr = 0x801D0C20, source = "Format string of the four stat values of the Bate menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuZennyFormat = { addr = 0x801D0C44, source = "Format string of the Bate menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C48, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
+g_BateFormations = { addr = 0x801D0C50, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
 g_MenuClockFormat = { addr = 0x801D0D1C, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D5C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "Entry of the Bate menu: dispatches on the menu step byte (D_80148650) through g_MenuBateStates." }
@@ -1917,6 +1918,7 @@ UI_UpdateWindowFade = { addr = 0x801D1B00, type = "func", source = "Advances the
 g_MenuStatFormat = { addr = 0x801D0C04, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuZennyFormat = { addr = 0x801D0C28, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C2C, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
+g_ShisuFormations = { addr = 0x801D0C34, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
 g_MenuClockFormat = { addr = 0x801D0D00, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D40, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "Entry of the Shisu menu: dispatches on the menu step byte D_80148650 through the D_801D96DC handlers." }
@@ -2314,6 +2316,7 @@ g_MenuStartEquipmentStates = { addr = 0x801ED3FC, source = "the state handlers o
 g_MenuStartPanel7StateFuncs = { addr = 0x801ED408, source = "the state handlers of panel mode 7, indexed by the panel task state" }
 g_MenuStartPanel8StateFuncs = { addr = 0x801ED414, source = "the state handlers of panel mode 8, indexed by the panel task state" }
 g_MenuStartMessageStates = { addr = 0x801ED420, source = "the state handlers of panel mode 9, indexed by the panel task state" }
+g_StartCursorFrames = { addr = 0x801ED42C, size = 0x10, source = "The width and height of the frame the cursor-frame panel draws, indexed by the panel's frame kind" }
 g_MenuStartPanel11StateFuncs = { addr = 0x801ED43C, source = "the state handlers of panel mode 11, indexed by the panel task state" }
 g_MenuStartInventoryStates = { addr = 0x801ED448, source = "the state handlers of panel mode 12, indexed by the panel task state" }
 g_MenuStartCommandsStates = { addr = 0x801ED45C, source = "the state handlers of panel mode 13, indexed by the panel task state" }
