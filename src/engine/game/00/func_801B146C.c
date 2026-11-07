@@ -124,7 +124,7 @@ MATCH void func_801B146C(void) {
         }
     block_38:
         g_GameState->counter_11C.u8_value = 3U;
-        if (!(func_801B5F68(level_flag) & BYTE_MASK)) {
+        if (!(Game_RequestRockKick(level_flag) & BYTE_MASK)) {
             work_k = g_Task;
             if (((s32 (*)(s32, s32))func_801A79A4)(work_k->pos.x.fixed, work_k->pos.y.fixed) != 0) {
                 func_801B5BDC(g_Task->direction_08);
