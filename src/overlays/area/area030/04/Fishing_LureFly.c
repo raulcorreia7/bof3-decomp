@@ -17,10 +17,10 @@ MATCH void Fishing_LureFly(void) {
     FishingState* work_c;
 
     height = FISHING_STATE->cursor_10;
-    if (height > 0x3BFFFF) {
-        g_AreaScrollTargetY = TO_COORD(60);
-    } else if (height <= 0x14FFFF) {
-        g_AreaScrollTargetY = TO_COORD(21);
+    if (height >= FISHING_CAMERA_Y_MAX) {
+        g_AreaScrollTargetY = FISHING_CAMERA_Y_MAX;
+    } else if (height < FISHING_CAMERA_Y_MIN) {
+        g_AreaScrollTargetY = FISHING_CAMERA_Y_MIN;
     } else {
         g_AreaScrollTargetY = height;
     }
