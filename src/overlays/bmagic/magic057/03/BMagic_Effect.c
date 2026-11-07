@@ -98,7 +98,7 @@ INCLUDE_ASM(func_801EF3C4);
 MATCH void func_801EF528(void) {
     PartyBattler* work;
 
-    work        = (PartyBattler*)D_801EB4E0;
+    work        = (PartyBattler*)g_BattleEffectBattler;
     work->timer = work->timer + 1;
     func_801E5988();
 }
@@ -153,7 +153,7 @@ MATCH void func_801EF83C(void) {
     handlers     = D_801EEC44;
     g_ScriptBank = 0x800C3800;
     SYS_DISPATCH_TASK(handlers.handlers, 2, g_Task);
-    if ((g_Task->header.flags & 1) && (D_801EB4E0->timer == 0)) {
+    if ((g_Task->header.flags & 1) && (g_BattleEffectBattler->timer == 0)) {
         func_8014D290();
     }
     g_ScriptBank = 0x800D3800;
@@ -165,8 +165,8 @@ MATCH void func_801EF900(void) {
     s32           temp_a0;
     s8            tone;
 
-    g_Task->pos.x.fixed    = D_801EB4E0->pos.x.fixed - 1;
-    g_Task->pos.y.fixed    = D_801EB4E0->pos.y.fixed - 1;
+    g_Task->pos.x.fixed    = g_BattleEffectBattler->pos.x.fixed - 1;
+    g_Task->pos.y.fixed    = g_BattleEffectBattler->pos.y.fixed - 1;
     temp_a0                = g_Task->pos.x.fixed;
     temp_v0                = Area_SampleHeight(temp_a0, temp_a0);
     work                   = g_Task;
@@ -192,11 +192,11 @@ MATCH void func_801EF900(void) {
 MATCH void func_801EFA38(void) {
     s32 temp_a0;
 
-    g_Task->pos.x.fixed      = D_801EB4E0->pos.x.fixed - 1;
-    g_Task->pos.y.fixed      = D_801EB4E0->pos.y.fixed - 1;
+    g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed - 1;
+    g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed - 1;
     temp_a0                  = g_Task->pos.x.fixed;
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(temp_a0, temp_a0);
-    if (!(1 & D_801EB4E0->header.flags)) {
+    if (!(1 & g_BattleEffectBattler->header.flags)) {
         g_Task->header.step += 1;
     }
 }

@@ -82,6 +82,68 @@ enum {
     SAVE_STATUS_NO_CARD      = 8, /* neither port holds a usable card */
 };
 
+typedef struct {
+    s32 unk_00;
+    s32 unk_04;
+    s8  unk_08;
+    s8  unk_09;
+} __attribute__((packed)) Record10;
+
+typedef struct {
+    s32 unk_00;
+    s32 unk_04;
+    s8  unk_08;
+    s8  unk_09;
+    s8  unk_0A;
+} __attribute__((packed)) Record11;
+
+typedef struct {
+    s32 unk_00;
+    s8  unk_04;
+    s8  unk_05;
+} __attribute__((packed)) Record6;
+
+typedef struct {
+    s32 unk_00;
+    s32 unk_04;
+} __attribute__((packed)) Record8;
+
+extern Record10 D_801D0DE0;
+extern Record11 D_801D0DEC;
+extern Record11 D_801D0DF8;
+extern Record6  D_801D0E04;
+extern Record8  D_801D0E0C;
+extern Record11 D_801D0E14;
+
+typedef struct Start08Rotation {
+    u16 unk_00;
+    u16 unk_02;
+    s32 unk_04;
+} Start08Rotation;
+
+extern Start08Rotation D_801EC4D0[];
+
+/* One 8-byte label row: glyph count, signed x nudge (read through (s8)), then
+ * the text. */
+typedef struct StartLabel {
+    u8 length;
+    u8 offset_x;
+    u8 text[6];
+} StartLabel;
+
+extern StartLabel D_801ECD24[];
+
+/* The four command labels of the grid ("Next", "Back", "Quit", "Start"), five characters each. */
+typedef struct NameEntryLabels {
+    u8 next[5];
+    u8 back[5];
+    u8 quit[5];
+    u8 start[5];
+} NameEntryLabels;
+
+extern NameEntryLabels D_801D0F00;
+extern u8              D_801ECDBC[];
+
 extern u8              D_80144F57;
 extern u16             D_80145594[];
 extern u8              D_80145FCC[][BATTLE_PARTY_STRIDE];
@@ -110,6 +172,7 @@ extern u8              D_8014850F; /* the panel's group first entry */
 extern u8              D_80148510; /* the panel's group cursor */
 extern s8              D_80148511; /* signed scalar view of the panel's drawn cursor */
 extern u8*             D_80148524;
+extern s8              D_8014854C;
 extern s8              D_8014854D;
 extern s8              D_8014854E;
 extern s8              D_8014854F;
@@ -119,13 +182,13 @@ extern u8              D_80148556;
 /* D_80148570: the battle choice panel record, also the skill-order work area. */
 extern u8              g_BattleChoicePanel[];
 extern s8              D_80148571;
-extern u8              D_80148572;
+extern s8              D_80148572;
 extern s16             D_80148576;
 extern u8              D_80148594;
-extern u8              D_80148595;
-extern u8              D_80148596;
-extern u16             D_80148598;
-extern u16             D_8014859A;
+extern s8              D_80148595;
+extern s8              D_80148596;
+extern s16             D_80148598;
+extern s16             D_8014859A;
 extern u16             D_801485BC;
 extern u16             D_801485BE;
 extern u8              D_801485DD;
@@ -134,6 +197,8 @@ extern s16             D_80148628; /* the computed bar length; func_801D8188 sto
 extern u16             D_8014862A; /* the second bar length; func_801D8188 stores it with sh at 0x801D8210 */
 extern u8              D_80148653;
 extern u8              D_80148654;
+/* D_80148656, the party cursor, has no declaration here: its readers split between lb and lbu, so each unit keeps its own view. */
+extern s8              D_80148658[6];
 extern u8              D_8014865F;
 extern u8              D_80148660;
 extern s8              D_80148662;
@@ -612,9 +677,9 @@ extern char      g_MenuClockFormat[];
 extern u8        D_801D0E20[];
 extern s32       D_801D0E28;
 extern s32       D_801D0EA8;
-extern s8        D_801D0F18;
-extern s8        D_801D0F1C;
-extern s8        D_801D0F24;
+extern char      D_801D0F18[];
+extern char      D_801D0F1C[];
+extern char      D_801D0F24[];
 void             Party_InitDefaults(void);
 void             func_801D29A4(void);
 extern void      func_801D2C7C(void);
@@ -625,7 +690,7 @@ void             func_801D71EC(void);
 void             func_801D9664(void);
 void             func_801D96D4(void);
 void             Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
-s32              func_801DAE14(u16);
+void             func_801DAE14(u16 buttons);
 void             Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 void             func_801DE5D4(u8, u16, u16, s32, s32, MenuPanelTask*);
 extern void      func_801E30FC(u16 row_x, u16 row_y, s32 row_flags);

@@ -107,7 +107,7 @@ MATCH void func_801B0568(void) {
             g_Task->header.step            = 2;
             return;
         case_1:
-            if (func_801B5F68(g_GameState->counter_11C.u8_value) & BYTE_MASK) {
+            if (Game_RequestRockKick(g_GameState->counter_11C.u8_value) & BYTE_MASK) {
                 return;
             }
             g_GameState->mode_12B.s8_value    = 0;
@@ -117,7 +117,7 @@ MATCH void func_801B0568(void) {
             g_GameState->mode_12B.s8_value = 0;
         block_35:
             g_Task->header.step = 1;
-            func_801B6044();
+            Game_RequestGarrPush();
             return;
         case_2:
             g_GameState->counter_11C.u8_value = 3U;

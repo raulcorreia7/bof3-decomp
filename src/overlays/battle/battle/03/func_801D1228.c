@@ -80,7 +80,7 @@ NON_MATCHING void func_801D1228(void) {
             src                                                  = work_row + 0x90 + index * BATTLE_PARTY_STRIDE;
             g_BattlePartyBattlers[index].turn.damage_flags.value = 0;
             g_BattlePartyBattlers[index].turn.action_flags.volatile_value = 0;
-            *(u8*)(&D_80145FA9 + index * 0x140)                           = 0;
+            g_BattlePartyBattlers[index].turn.command.type                = 0;
             *(u8*)(&D_80145FB1 + index * 0x140)                           = 0;
             *(u8*)(&D_80145FC6 + index * 0x140)                           = 0;
             *(u8*)(&D_80145FC7 + index * 0x140)                           = 0;

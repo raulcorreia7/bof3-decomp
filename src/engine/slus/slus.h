@@ -47,10 +47,9 @@
 /* The tone a cue reader looked up last: D_8018B40C is the tone's offset inside
  * the VAB header at `vab_header` (one of the words D_80148A18-D_80148A30). */
 #define CUE_TONE(vab_header)  ((VagAtr*)(D_8018B40C + (vab_header)))
-#define ENCOUNTER_ZONE(x0, y0, x1, y1, rate, kind, seed, pick) {(x0), (y0), (x1), (y1), (rate), (kind), (seed), (pick)}
-#define g_GameState                                            ((PartyBattler*)g_GameState)
-#define g_SceneRecord                                          (*(RecordKey*)&g_SceneState)
-#define g_CurrentActor                                         ((u8*)g_CurrentActor)
+#define g_GameState           ((PartyBattler*)g_GameState)
+#define g_SceneRecord         (*(RecordKey*)&g_SceneState)
+#define g_CurrentActor        ((u8*)g_CurrentActor)
 
 /* Store the row entry the menu selection picks and latch the delay it selects.
  * Kept: as an inline the row literal folds into `addiu` where retail shifts
@@ -562,37 +561,37 @@ extern s32                         D_80146518[];
 extern u32                         g_EmiSlotSectors[];
 extern EMIBank                     D_8014677C[];
 extern volatile EMIAudioLink       D_80146780[];
-extern s32                         D_80146784;
+extern u8*                         D_80146784;
 extern u32                         D_80146788[];
 extern s16                         D_8014678C;
 extern s32                         D_80146790;
 extern s32                         D_80146794;
-extern s32                         D_80146798;
+extern u8*                         D_80146798;
 extern s32                         D_8014679C;
 extern u16                         D_801467A0;
 extern s32                         D_801467A4;
 extern s32                         D_801467A8;
-extern s32                         D_801467AC;
+extern u8*                         D_801467AC;
 extern s32                         D_801467B0;
 extern u16                         D_801467B4;
 extern s32                         D_801467B8;
 extern s32                         D_801467BC;
-extern s32                         D_801467C0;
+extern u8*                         D_801467C0;
 extern s32                         D_801467C4;
 extern u16                         D_801467C8;
 extern s32                         D_801467CC;
 extern s32                         D_801467D0;
-extern s32                         D_801467D4;
+extern u8*                         D_801467D4;
 extern s32                         D_801467D8;
 extern u16                         D_801467DC;
 extern s32                         D_801467E0;
 extern s32                         D_801467E4;
-extern s32                         D_801467E8;
+extern u8*                         D_801467E8;
 extern s32                         D_801467EC;
 extern u16                         D_801467F0;
 extern s32                         D_801467F4;
 extern s32                         D_801467F8;
-extern s32                         D_801467FC;
+extern u8*                         D_801467FC;
 extern s32                         D_80146800;
 extern u16                         D_80146804;
 extern volatile u32                g_EmiSectorCursor;
@@ -869,47 +868,11 @@ extern u8                          D_8018B4A4;
 extern u8                          D_8018B4A8;
 extern u8                          D_8018B4AC;
 extern u32                         D_8018B4B0;
-extern s32                         D_8018DB58;
-extern s32                         D_8018DB5C;
-extern s32                         D_8018DB60;
-extern s32                         D_8018DB64;
-extern s32                         D_8018DB68;
-extern s32                         D_8018DB6C;
-extern s32                         D_8018DB70;
-extern s32                         D_8018DB74;
-extern s32                         D_8018DB78;
-extern s32                         D_8018DB7C;
-extern s32                         D_8018DB80;
-extern s32                         D_8018DB84;
-extern s32                         D_8018DB88;
-extern s32                         D_8018DB8C;
-extern s32                         D_8018DB90;
-extern s32                         D_8018DB94;
-extern s32                         D_8018DB9C;
-extern s32                         D_8018DBA0;
-extern s32                         D_8018DBA4;
-extern s32                         D_8018DBA8;
-extern s32                         D_8018DBAC;
-extern s32                         D_8018DBB0;
-extern s32                         D_8018DBB4;
-extern s32                         D_8018DBB8;
-extern s32                         D_8018DBBC;
-extern s32                         D_8018DBC0;
-extern s32                         D_8018DBC4;
-extern s32                         D_8018DBC8;
-extern s32                         D_8018DBCC;
-extern s32                         D_8018DBD0;
-extern s32                         D_8018DBD4;
-extern s32                         D_8018DBD8;
-extern s32                         D_8018DBDC;
-extern s32                         D_8018DBE0;
-extern s32                         D_8018DBE4;
-extern s32                         D_8018DBE8;
-extern s32                         D_8018E7D4;
-extern s32                         D_8018E988;
-extern s8                          D_8018E98C;
-extern u8                          D_801C839C[];
-extern u8                          D_801C839D[];
+extern void (*D_8018E7D4)();
+extern void (*D_8018E988)();
+extern s8 D_8018E98C;
+extern u8 D_801C839C[];
+extern u8 D_801C839D[];
 extern void (*D_801C83D8[])(u8*);
 extern u8*                   D_801C893C[];
 extern u8*                   D_801C8950[];

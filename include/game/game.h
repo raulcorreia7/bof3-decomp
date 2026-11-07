@@ -25,17 +25,30 @@ typedef enum PaletteFadeFlags {
     PALETTE_FADE_ACTIVE = 1 << 0,
 } PaletteFadeFlags;
 
+/* The fields of a task record (actor, battler, effect) that a palette fade reads and restores. */
+typedef struct PaletteOwner {
+    u8 pad_00[0x24];
+    u8 flags; /* +0x24 bit 2 is cleared when a fade that flagged its row with 0x80 frees */
+    u8 pad_25[0x2];
+    u8 saved_byte;   /* +0x27 restored from PaletteFade.saved_byte when the fade frees */
+    u8 palette_kind; /* +0x28 a PaletteKind: how many palette cells the owner's fade covers */
+} PaletteOwner;
+
+ASSERT_OFFSET(PaletteOwner, palette_kind, 0x28);
+
+#define PALETTE_OWNER(record) ((PaletteOwner*)(record))
+
 /* One 0xC-byte row of the palette fade table at D_80145BD4. */
 typedef struct PaletteFade {
-    u8  flags;      /* PaletteFadeFlags */
-    u8  saved_byte; /* the target byte at +0x27, restored on free */
-    s8  red_offset;
-    s8  green_offset;
-    s8  blue_offset;
-    u8  table_index;
-    u8  step;
-    u8  unk_07;
-    u8* target;
+    u8            flags;      /* PaletteFadeFlags */
+    u8            saved_byte; /* the target byte at +0x27, restored on free */
+    s8            red_offset;
+    s8            green_offset;
+    s8            blue_offset;
+    u8            table_index;
+    u8            step;
+    u8            unk_07;
+    PaletteOwner* target; /* the record whose palette fades */
 } PaletteFade;
 
 ASSERT_OFFSET(PaletteFade, target, 0x08);

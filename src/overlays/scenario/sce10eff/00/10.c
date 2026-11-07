@@ -95,7 +95,7 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
     vertex.vy = (scratch->proj.y >> 9) - 0x4000;
     vertex.vz = (-scratch->proj_z / 2);
 
-    RotTrans(&vertex, (VECTOR*)&matrix.t, &flag);
+    RotTransMatrix(&vertex, matrix, &flag);
     RotMatrix(&rotation, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);

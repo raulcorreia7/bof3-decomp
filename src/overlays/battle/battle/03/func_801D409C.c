@@ -37,7 +37,7 @@ MATCH void func_801D409C(void) {
                     D_801490F8[index] = 0;
                 }
                 for (index = 0; index < 12; index++) {
-                    D_801490F8[index] = ability[D_801EB726[*battler - 3][0]].name[index];
+                    D_801490F8[index] = ability[ENEMY_COMBATANT(*battler).turn.command.id].name[index];
                 }
                 BattleStageSelectionRingRecord(1, 0, Resource_GetText(BATTLE_TEXT_LEARNED));
                 return;

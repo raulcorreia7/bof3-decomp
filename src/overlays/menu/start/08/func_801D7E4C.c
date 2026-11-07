@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-extern u8 D_80148658;
-
 MATCH void func_801D7E4C(void) {
     s32 buttons;
     u8  count;
@@ -23,7 +21,7 @@ MATCH void func_801D7E4C(void) {
     *flag = 0;
     if (state == 0) {
         x                           = g_MenuPanelTasks[13].pos.x;
-        y                           = (s8)D_80148658 * 0x36;
+        y                           = D_80148658[0] * 0x36;
         *latch                      = 1;
         g_MenuPanelTasks[19].unk_0B = 1;
         D_801485E0                  = x;
@@ -33,7 +31,7 @@ MATCH void func_801D7E4C(void) {
     }
     buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
     count   = Party_CountOrder(PARTY_ORDER_FIELD);
-    cursor  = &D_80148658;
+    cursor  = D_80148658;
     old     = *cursor;
     if (buttons & PADLup) {
         *cursor -= 1;
@@ -46,7 +44,7 @@ MATCH void func_801D7E4C(void) {
             *cursor = 0;
         }
     }
-    sel = (s8*)&D_80148658;
+    sel = (s8*)D_80148658;
     if ((s8)old != *sel) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }

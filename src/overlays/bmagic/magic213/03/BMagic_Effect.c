@@ -20,6 +20,7 @@ MATCH void func_801EF004(void) {
 
 INCLUDE_ASM(func_801EF048);
 
+/* nonmatching: same body as Effect_BrightenPaletteThenStep, but retail has no stack frame; the shared body links one (+4 bytes, first difference at +0xE4). */
 INCLUDE_ASM(func_801EF23C);
 
 INCLUDE_ASM(func_801EF348);
@@ -45,7 +46,7 @@ MATCH void func_801EF7A0(void) {
     PartyBattler* work;
 
     if (func_8014DAEC() != 0u) {
-        work               = (PartyBattler*)D_801EB4E0;
+        work               = (PartyBattler*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         Actor_Clear();
     }

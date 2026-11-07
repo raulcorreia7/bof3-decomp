@@ -63,8 +63,8 @@ MATCH void func_801EF20C(void) {
         g_Task->unk_09 = temp_v0 - 1;
         return;
     }
-    GFX_FreePaletteFadeTarget(D_801EB4E0);
-    D_801EB4E0->header.flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
+    GFX_FreePaletteFadeTarget(g_BattleEffectBattler);
+    g_BattleEffectBattler->header.flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
     g_Task->unk_09 = 0;
     g_Task->header.step += 1;
 }
@@ -83,14 +83,14 @@ MATCH void func_801EF2A4(void) {
     func_801F0EEC(3, 2, battler->unk_09);
     func_801F0EEC(2, 1, battler->unk_09);
     g_Task = battler;
-    if (D_801EB4E0->unk_2C.half == 0) {
+    if (g_BattleEffectBattler->unk_2C.half == 0) {
         value = 0x242;
-        if (D_801EB4E0->facing < 2U) {
+        if (g_BattleEffectBattler->facing < 2U) {
             value = 0x240;
         }
     } else {
         value = 0x243;
-        if (D_801EB4E0->facing < 2U) {
+        if (g_BattleEffectBattler->facing < 2U) {
             value = 0x241;
         }
     }
@@ -164,7 +164,7 @@ INCLUDE_ASM(func_801EF8F4);
 
 MATCH void func_801F001C(void) {
     func_8014DAEC();
-    D_801EB4E0->header.step += 1;
+    g_BattleEffectBattler->header.step += 1;
     g_Task->header.step += 1;
     g_Task->unk_03 = 0;
 }
@@ -200,7 +200,7 @@ MATCH void func_801F0278(void) {
     if (!(g_FrameCount & 1)) {
         ticks = g_Task->param.unk_0B;
         if (ticks >= 0x18U) {
-            D_801EB4E0->header.step += 1;
+            g_BattleEffectBattler->header.step += 1;
             g_Task->header.step += 1;
             return;
         }
@@ -209,7 +209,7 @@ MATCH void func_801F0278(void) {
 }
 
 MATCH void func_801F0310(void) {
-    if (D_801EB4E0->header.step == 0xA) {
+    if (g_BattleEffectBattler->header.step == 0xA) {
         g_Task->header.step += 1;
     }
     func_801F03D8();

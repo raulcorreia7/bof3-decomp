@@ -24,12 +24,12 @@ MATCH void func_801EF14C(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        g_Task->unk_2E.half = D_801EB4E0->unk_2E.half;
-        g_Task->unk_30.half = D_801EB4E0->unk_30.half;
+        g_Task->unk_2E.half = g_BattleEffectBattler->unk_2E.half;
+        g_Task->unk_30.half = g_BattleEffectBattler->unk_30.half;
         if RANDOM_MASK (1) {
-            g_Task->unk_14 = D_801EB4E0->unk_14 + RANDOM_MASK(BYTE_MASK);
+            g_Task->unk_14 = g_BattleEffectBattler->unk_14 + RANDOM_MASK(BYTE_MASK);
         } else {
-            g_Task->unk_14 = D_801EB4E0->unk_14 - RANDOM_MASK(BYTE_MASK);
+            g_Task->unk_14 = g_BattleEffectBattler->unk_14 - RANDOM_MASK(BYTE_MASK);
         }
         g_Task->unk_03       = RANDOM_MASK(7);
         g_Task->unk_0C       = RANDOM_MASK(7) + 8;

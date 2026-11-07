@@ -62,7 +62,7 @@ MATCH void func_801EF654(void) {
     timer          = g_Task->unk_09 - 2;
     g_Task->unk_09 = timer;
     if (!(timer & 0xFF)) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         Actor_Clear();
     }
 }

@@ -6,7 +6,7 @@ MATCH u8 func_801E8FA8(void) {
     u16 mask;
     u8  index;
 
-    field = &D_801EB4E0->slot;
+    field = &g_BattleEffectBattler->slot;
     if (*field < 3) {
         mask = g_BattlePartyBattlers[*field].chr.status;
     } else {

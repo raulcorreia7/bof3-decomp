@@ -33,6 +33,7 @@
 #include "types.h"
 #include "common/fixed.h"
 #include "common/vector.h"
+#include "psx/psyq.h"
 
 /* The world overlays' own records. Every area program keeps its scratch in
  * the `0x800E4800` window (@source: wiki:formats/area#neighboring-buffers):
@@ -200,6 +201,12 @@ typedef enum FieldTaskMode {
 /* g_GameState->mode_12B while the character field action runs. */
 #define GAME_PANEL_MODE_PERSONAL_ACTION 8
 
+/* Garr pushes after walking this many frames against an object. */
+#define GARR_PUSH_HOLD_FRAMES           0x10
+
+/* g_GameState->counter_11C, the walk speed index: Teepo and Peco act on a rock only at the run index. */
+#define FIELD_SPEED_RUN                 4
+
 /* One +0x24 cell record: four signed corner heights, loaded as s8 by
  * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`.
  */
@@ -336,7 +343,7 @@ typedef struct AreaTrail {
     s32      radius;                  /* 0x10 - the ring radius */
     u16      angle;                   /* 0x14 - the rotation angle */
     u16      pad_16;                  /* 0x16 */
-    Point2D  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
+    DVECTOR  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
 } AreaTrail;
 
 ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);

@@ -370,7 +370,7 @@ extern volatile u8           D_80096A04[4];
 extern BattleHandlerTable3   D_80096A08;
 extern BattleHandlerTable5   D_80096A14;
 /* Main-executable battle state consumed by target-local lifts. */
-extern s8                    D_80096A2C;
+extern char                  D_80096A2C[];
 extern BattleHandlerTable3   D_80096A34;
 extern BattleHandlerTable3   D_80096A40;
 extern Callback              func_800B43B8[];
@@ -608,14 +608,12 @@ extern u16                              D_801EB37C[][0x8C];
 extern u8                               D_801EB3DC[];
 extern u8                               D_801EB638[];
 extern u8                               D_801EB6AF; /* +0x7F of the same enemy rows: the armed flag byte. */
-extern u16                              D_801EB6B4[][140];
 extern u16                              D_801EB6BA;
 /* Battler base halfwords, one u16 per 0x118-byte enemy row. */
 extern volatile u16                     D_801EB6C4[][140];
 extern u8                               D_801EB6CA[];
 extern u8                               D_801EB6CE[];
 extern EnemyBattlerPanel                D_801EB6D4[];
-extern volatile u16                     D_801EB6D6[][140];
 extern u8                               D_801EB6E7;
 extern u8                               D_801EB6F0[];
 extern u8                               D_801EB6F4[];
@@ -898,6 +896,8 @@ extern void func_8009AAE8(void);
 void        func_8009B03C(void);
 void        func_8009B160(void);
 extern void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event);
+extern u8   Battle_Unk0E1BitTest(volatile EnemyBattler* enemy, s32 bit_index);
+extern void Battle_Unk0E1BitModify(EnemyBattler* enemy, s32 bit, u8 set);
 extern u8   func_800A3B6C(u8 battler_index, u8 selection_kind, u16 input_mask);
 s32         func_800A4FD8(void);
 s32         func_800A5D00(void);

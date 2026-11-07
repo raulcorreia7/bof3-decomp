@@ -59,7 +59,7 @@ MATCH void func_801EF094(void) {
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0x28) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -133,7 +133,7 @@ MATCH void func_801EFD74(void) {
     counter       = g_Task->timer - 1;
     g_Task->timer = counter;
     if (!(counter & 0xFF)) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }

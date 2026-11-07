@@ -29,7 +29,7 @@ MATCH void func_801EF0C4(void) {
 INCLUDE_ASM(func_801EF108);
 
 MATCH void func_801EF264(void) {
-    if (D_801EB4E0->param.unk_0B < 8U) {
+    if (g_BattleEffectBattler->param.unk_0B < 8U) {
         if (g_BattleTargetSelector & BATTLE_TARGET_ENEMY_SIDE) {
             func_800A9820((g_Task->unk_03 + 3) & 0xFF);
             GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[g_Task->unk_03]);
@@ -75,7 +75,7 @@ MATCH void func_801EF750(void) {
     work         = g_Task;
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 0) {
-        work               = (PartyBattler*)D_801EB4E0;
+        work               = (PartyBattler*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         Actor_Clear();
     }
@@ -128,7 +128,7 @@ MATCH void func_801F015C(void) {
     ticks                = g_Task->param.unk_0B - 1;
     g_Task->param.unk_0B = ticks;
     if (!(ticks & BYTE_MASK)) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         Actor_Clear();
     }
 }

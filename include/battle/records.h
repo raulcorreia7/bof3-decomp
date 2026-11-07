@@ -384,9 +384,9 @@ typedef struct EnemyBattler {
     Stats       stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
     Stats       base;  /* +0xC0 the stats before buffs */
     u8          kind;
-    u8          unk_E1;
-    u8          unk_E2; /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
-    u8          unk_E3; /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
+    u8          fired_events; /* +0xE1 one bit per event packet already applied */
+    u8          unk_E2;       /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
+    u8          unk_E3;       /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
     ModeFunc    unk_E4;
     u16*        unk_E8;
     u8*         script;
@@ -577,25 +577,28 @@ typedef enum BattleBattlerDamageFlags {
  * player row. Bit 3 marks a mode handler action installed; bit 4 keeps the row
  * available during the suppression countdown; bit 6 applies the queued power
  * boost; bit 9 halves the damage; bits 11 and 13 zero the holy and fire
- * resistance; bit 14 charges the action; bit 15 marks a preemptive turn. */
+ * resistance; bit 14 charges the action; bit 15 marks a preemptive turn; bit 16
+ * marks the berserk Kaiser form; bit 17 lets the player steer a Kaiser form,
+ * otherwise the command cursor stays locked. */
 typedef enum BattleBattlerActionFlags {
-    COMBATANT_FLAG_DRAGON_FORM_QUEUED        = 1 << 0,
-    COMBATANT_FLAG_DRAGON_FORM               = 1 << 1,
-    COMBATANT_FLAG_ABILITY_ALT_POSE          = 1 << 2,
-    COMBATANT_FLAG_MODE_HANDLER_ACTION       = 1 << 3,
-    COMBATANT_FLAG_SUPPRESSION_EXEMPT        = 1 << 4,
-    COMBATANT_FLAG_POWER_BOOST               = 1 << 6,
-    COMBATANT_FLAG_MEDITATION                = 1 << 7,
-    COMBATANT_FLAG_ALWAYS_HITS               = 1 << 8,
-    COMBATANT_FLAG_SELECT_EXCLUDED           = 1 << 10,
-    COMBATANT_FLAG_DAMAGE_HALVED             = 1 << 9,
-    COMBATANT_FLAG_HOLY_RESIST_ZERO          = 1 << 11,
-    COMBATANT_FLAG_SELECTION_BONUS           = 1 << 12,
-    COMBATANT_FLAG_FIRE_RESIST_ZERO          = 1 << 13,
-    COMBATANT_FLAG_CHARGING                  = 1 << 14,
-    COMBATANT_FLAG_PREEMPTIVE_TURN           = 1 << 15,
-    COMBATANT_FLAG_DRAGON_FORM_CURSOR_LOCKED = 1 << 17,
-    COMBATANT_FLAG_SELECTED                  = 1 << 18,
+    COMBATANT_FLAG_DRAGON_FORM_QUEUED     = 1 << 0,
+    COMBATANT_FLAG_DRAGON_FORM            = 1 << 1,
+    COMBATANT_FLAG_ABILITY_ALT_POSE       = 1 << 2,
+    COMBATANT_FLAG_MODE_HANDLER_ACTION    = 1 << 3,
+    COMBATANT_FLAG_SUPPRESSION_EXEMPT     = 1 << 4,
+    COMBATANT_FLAG_POWER_BOOST            = 1 << 6,
+    COMBATANT_FLAG_MEDITATION             = 1 << 7,
+    COMBATANT_FLAG_ALWAYS_HITS            = 1 << 8,
+    COMBATANT_FLAG_SELECT_EXCLUDED        = 1 << 10,
+    COMBATANT_FLAG_DAMAGE_HALVED          = 1 << 9,
+    COMBATANT_FLAG_HOLY_RESIST_ZERO       = 1 << 11,
+    COMBATANT_FLAG_SELECTION_BONUS        = 1 << 12,
+    COMBATANT_FLAG_FIRE_RESIST_ZERO       = 1 << 13,
+    COMBATANT_FLAG_CHARGING               = 1 << 14,
+    COMBATANT_FLAG_PREEMPTIVE_TURN        = 1 << 15,
+    COMBATANT_FLAG_DRAGON_FORM_BERSERK    = 1 << 16,
+    COMBATANT_FLAG_DRAGON_FORM_CONTROLLED = 1 << 17,
+    COMBATANT_FLAG_SELECTED               = 1 << 18,
 } BattleBattlerActionFlags;
 
 /* The three mode work records; g_GameState points at the current one. */

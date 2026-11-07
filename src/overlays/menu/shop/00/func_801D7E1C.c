@@ -39,7 +39,7 @@ MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
         } else {
             UI_DrawText(gx, row_y, sel & BYTE_MASK, 0xFF, Resource_GetText((i & BYTE_MASK) + 0xDE));
         }
-        sprintf((char*)g_UiFormatBuffer, D_801D0CDC, value & HALF_MASK);
+        TEXT_Format(g_UiFormatBuffer, D_801D0CDC, value & HALF_MASK);
         g_UiFormatBuffer[3] = 0x60;
         UI_DrawAsciiString((xpos + 112), row_y, sel & BYTE_MASK, g_UiFormatBuffer);
         i++;

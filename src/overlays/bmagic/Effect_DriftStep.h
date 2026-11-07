@@ -20,7 +20,7 @@ MATCH void Effect_DriftStep(void) {
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
     if (timer == 0x30) {
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }

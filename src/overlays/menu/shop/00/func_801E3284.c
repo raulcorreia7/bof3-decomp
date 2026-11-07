@@ -1,5 +1,33 @@
 #include "shop_00.h"
 
+/* Layout in pixels: the window, the lines inside it and the frame cells around it. */
+#define SHOP_COUNTS_SHADOW_OFFSET    3
+#define SHOP_COUNTS_WINDOW_WIDTH     170
+#define SHOP_COUNTS_WINDOW_HEIGHT    60
+#define SHOP_COUNTS_ICON_X           4
+#define SHOP_COUNTS_ICON_Y           7
+#define SHOP_COUNTS_NAME_X           14
+#define SHOP_COUNTS_NAME_Y           4
+#define SHOP_COUNTS_TOTAL_X          105
+#define SHOP_COUNTS_TOTAL_Y          18
+#define SHOP_COUNTS_NUMBER_X         137
+#define SHOP_COUNTS_QUANTITY_Y       7
+#define SHOP_COUNTS_HELD_LABEL_Y     32
+#define SHOP_COUNTS_HELD_Y           35
+#define SHOP_COUNTS_EQUIPPED_LABEL_Y 45
+#define SHOP_COUNTS_EQUIPPED_Y       48
+#define SHOP_COUNTS_FRAME_COLUMNS    20
+#define SHOP_COUNTS_FRAME_ROWS       6
+#define SHOP_COUNTS_FRAME_CELL       8
+#define SHOP_COUNTS_FRAME_BOTTOM_Y   56
+#define SHOP_COUNTS_FRAME_RIGHT_X    168
+
+/* The text resources labelling the two count lines, and the Item_Count mode of each. */
+#define SHOP_TEXT_HELD_LABEL         0x27
+#define SHOP_TEXT_EQUIPPED_LABEL     0x28
+#define ITEM_COUNT_MODE_HELD         0
+#define ITEM_COUNT_MODE_EQUIPPED     1
+
 MATCH void func_801E3284(MenuPanelTask* task) {
     u8* row;
     u8* icon;
@@ -16,39 +44,47 @@ MATCH void func_801E3284(MenuPanelTask* task) {
     price = Shop_ApplyPercent(Item_GetPrice(group, key) & HALF_MASK, task->unk_0A);
     icon  = Item_GetRecord(group, key);
 
-    UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, 170, 60, 0, g_WindowStyle);
-    func_801AEA80((task->pos.x + 4) & HALF_MASK, (task->pos.y + 7) & HALF_MASK,
+    UI_DrawWindow((task->pos.x + SHOP_COUNTS_SHADOW_OFFSET) & HALF_MASK,
+                  (task->pos.y + SHOP_COUNTS_SHADOW_OFFSET) & HALF_MASK, SHOP_COUNTS_WINDOW_WIDTH,
+                  SHOP_COUNTS_WINDOW_HEIGHT, 0, g_WindowStyle);
+    func_801AEA80((task->pos.x + SHOP_COUNTS_ICON_X) & HALF_MASK, (task->pos.y + SHOP_COUNTS_ICON_Y) & HALF_MASK,
                   D_801E5E1C[Item_GetKind(group, key) & BYTE_MASK], 0);
-    UI_DrawText((task->pos.x + 14), (task->pos.y + 4), 0, func_801AF20C(icon) & BYTE_MASK, icon);
+    UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_NAME_Y), 0,
+                func_801AF20C(icon) & BYTE_MASK, icon);
 
     text = g_UiFormatBuffer;
-    sprintf((char*)text, D_801D0E90, price * task->unk_0C);
-    UI_DrawGlyphString((task->pos.x + 105), (task->pos.y + 18), 0U, text);
+    TEXT_Format(text, D_801D0E90, price * task->unk_0C);
+    UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_TOTAL_X), (task->pos.y + SHOP_COUNTS_TOTAL_Y), 0U, text);
 
-    sprintf((char*)text, D_801D0E98, task->unk_0C);
-    UI_DrawGlyphString((task->pos.x + 137), (task->pos.y + 7), 0U, text);
-    UI_DrawText((task->pos.x + 14), (task->pos.y + 32), 0, 0xFFU, Resource_GetText(0x27U));
+    TEXT_Format(text, D_801D0E98, task->unk_0C);
+    UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_QUANTITY_Y), 0U, text);
+    UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_HELD_LABEL_Y), 0, 0xFFU,
+                Resource_GetText(SHOP_TEXT_HELD_LABEL));
 
-    sprintf((char*)text, D_801D0E98, Item_Count(group, key, 0U) & HALF_MASK);
-    UI_DrawGlyphString((task->pos.x + 137), (task->pos.y + 35), 0U, text);
-    UI_DrawText((task->pos.x + 14), (task->pos.y + 45), 0, 0xFFU, Resource_GetText(0x28U));
+    TEXT_Format(text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_HELD) & HALF_MASK);
+    UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_HELD_Y), 0U, text);
+    UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_LABEL_Y), 0, 0xFFU,
+                Resource_GetText(SHOP_TEXT_EQUIPPED_LABEL));
 
-    sprintf((char*)text, D_801D0E98, Item_Count(group, key, 1U) & HALF_MASK);
-    UI_DrawGlyphString((task->pos.x + 137), (task->pos.y + 48), 0U, text);
+    TEXT_Format(text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_EQUIPPED) & HALF_MASK);
+    UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_Y), 0U, text);
 
     GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & HALF_MASK);
 
-    for (index = 0; index < 20; index++) {
-        UI_DrawSprite((task->pos.x + (index + 1) * 8), task->pos.y, 0x29, 0);
-        UI_DrawSprite((task->pos.x + (index + 1) * 8), (task->pos.y + 56), 0x3B, 0);
+    for (index = 0; index < SHOP_COUNTS_FRAME_COLUMNS; index++) {
+        UI_DrawSprite((task->pos.x + (index + 1) * SHOP_COUNTS_FRAME_CELL), task->pos.y, MENU_FRAME_SPRITE_TOP, 0);
+        UI_DrawSprite((task->pos.x + (index + 1) * SHOP_COUNTS_FRAME_CELL), (task->pos.y + SHOP_COUNTS_FRAME_BOTTOM_Y),
+                      MENU_FRAME_SPRITE_FLAT_BOTTOM, 0);
     }
-    for (index = 0; index < 6; index++) {
-        UI_DrawSprite(task->pos.x, (task->pos.y + (index + 1) * 8), 0x2B, 0);
-        UI_DrawSprite((task->pos.x + 168), (task->pos.y + (index + 1) * 8), 0x2C, 0);
+    for (index = 0; index < SHOP_COUNTS_FRAME_ROWS; index++) {
+        UI_DrawSprite(task->pos.x, (task->pos.y + (index + 1) * SHOP_COUNTS_FRAME_CELL), MENU_FRAME_SPRITE_LEFT, 0);
+        UI_DrawSprite((task->pos.x + SHOP_COUNTS_FRAME_RIGHT_X), (task->pos.y + (index + 1) * SHOP_COUNTS_FRAME_CELL),
+                      MENU_FRAME_SPRITE_RIGHT, 0);
     }
 
-    UI_DrawSprite(task->pos.x, task->pos.y, 0x28, 0);
-    UI_DrawSprite((task->pos.x + 168), task->pos.y, 0x2A, 0);
-    UI_DrawSprite(task->pos.x, (task->pos.y + 56), 0x3A, 0);
-    UI_DrawSprite((task->pos.x + 168), (task->pos.y + 56), 0x3C, 0);
+    UI_DrawSprite(task->pos.x, task->pos.y, MENU_FRAME_SPRITE_TOP_LEFT, 0);
+    UI_DrawSprite((task->pos.x + SHOP_COUNTS_FRAME_RIGHT_X), task->pos.y, MENU_FRAME_SPRITE_TOP_RIGHT, 0);
+    UI_DrawSprite(task->pos.x, (task->pos.y + SHOP_COUNTS_FRAME_BOTTOM_Y), MENU_FRAME_SPRITE_FLAT_BOTTOM_LEFT, 0);
+    UI_DrawSprite((task->pos.x + SHOP_COUNTS_FRAME_RIGHT_X), (task->pos.y + SHOP_COUNTS_FRAME_BOTTOM_Y),
+                  MENU_FRAME_SPRITE_FLAT_BOTTOM_RIGHT, 0);
 }

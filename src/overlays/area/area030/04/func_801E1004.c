@@ -53,14 +53,14 @@ MATCH void func_801E1004(s32 item, s32 count, s32 column) {
     UI_DrawText(0x70, 0x45 - ((u8)column * 20), 0, 0xF, g_UiFormatBuffer);
 
     if ((item & BYTE_MASK) != GAME_NONE) {
-        sprintf((char*)g_UiFormatBuffer, D_801D0C38, count & BYTE_MASK);
+        TEXT_Format(g_UiFormatBuffer, D_801D0C38, count & BYTE_MASK);
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
             if (g_UiFormatBuffer[i] == ' ') {
                 g_UiFormatBuffer[i] = STRING_SPACE;
             }
         }
         UI_DrawText(0x2F - ((u8)column * 25), 0x73, 0, 3, g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, D_801D0C38, func_801E0ABC(item & BYTE_MASK, count & BYTE_MASK) & HALF_MASK);
+        TEXT_Format(g_UiFormatBuffer, D_801D0C38, Fishing_CatchScore(item & BYTE_MASK, count & BYTE_MASK) & HALF_MASK);
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
             if (g_UiFormatBuffer[i] == ' ') {
                 g_UiFormatBuffer[i] = STRING_SPACE;

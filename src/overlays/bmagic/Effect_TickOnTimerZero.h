@@ -1,5 +1,5 @@
 /* Counts the effect timer (work byte 0x09) down; at zero it ticks the effect
- * ticker (work byte 0x0B) of the battler D_801EB4E0 and runs the effect step.
+ * ticker (work byte 0x0B) of the g_BattleEffectBattler and runs the effect step.
  * One definition shared by the bmagic effect modules; every change here must
  * verify every member. */
 /* Effect_TickOnTimerZero (magic172 and magic173 through EFFECT_TIMER_TICK, magic006, magic041, magic060, magic062,
@@ -12,13 +12,13 @@
 #endif
 /* The statements of Effect_TickOnTimerZero; each member declares work and
  * passes the amount the effect timer drops per tick. */
-#define BMAGIC_TICK_ON_TIMER_ZERO(step)                 \
-    work         = g_Task;                              \
-    work->unk_09 = work->unk_09 - (step);               \
-    if (work->unk_09 == 0) {                            \
-        work               = (PartyBattler*)D_801EB4E0; \
-        work->param.unk_0B = work->param.unk_0B - 1;    \
-        func_801E5988();                                \
+#define BMAGIC_TICK_ON_TIMER_ZERO(step)                            \
+    work         = g_Task;                                         \
+    work->unk_09 = work->unk_09 - (step);                          \
+    if (work->unk_09 == 0) {                                       \
+        work               = (PartyBattler*)g_BattleEffectBattler; \
+        work->param.unk_0B = work->param.unk_0B - 1;               \
+        func_801E5988();                                           \
     }
 
 MATCH void Effect_TickOnTimerZero(void) {

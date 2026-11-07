@@ -51,7 +51,7 @@ MATCH void Shop_DrawItems(MenuListPanel* panel) {
             dim   = SHOP_ITEM_ICON_ENABLED;
         }
 
-        sprintf((s8*)g_UiFormatBuffer, D_801D0E88, price);
+        TEXT_Format(g_UiFormatBuffer, D_801D0E88, price);
         if (index == panel->unk_0C) {
             if (color == 0) {
                 func_801AEA80((u16)(panel->pos.x + SHOP_ITEM_LIST_ICON_X), (u16)(y + SHOP_ITEM_LIST_TEXT_DY),
