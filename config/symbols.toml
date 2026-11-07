@@ -159,14 +159,14 @@ g_BattleTemplateStats = { addr = 0x801EC364, source = "Template stat rows of the
 ["emi/bmagic/magic001/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_RunStep = { addr = 0x801EEC64, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic001 (Nue Stomp, Jump)." }
-Effect_StartPlaying = { addr = 0x801EEFA4, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic001 (Nue Stomp, Jump)." }
-Effect_StartPlaying_801EFA84 = { addr = 0x801EFA84, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic001 (Nue Stomp, Jump)." }
+Effect_StartPlaying = { addr = 0x801EEFA4, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic001 (Nue Stomp, Jump)." }
+Effect_StartPlaying_801EFA84 = { addr = 0x801EFA84, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic001 (Nue Stomp, Jump)." }
 Effect_PrimeTintOnScriptReady = { addr = 0x801EFF28, type = "func", source = "Once the script stream reports ready (func_8014DAEC) makes the actor semi-transparent, starts its tint at zero and advances header.step (byte 0x02) in magic001 (Nue Stomp, Jump)." }
 g_BMagicEffectFuncs = { addr = 0x801F04B4, source = "Handlers of magic001 (Nue Stomp, Jump), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic002/00"]
 BMagic_RunStep = { addr = 0x801EEC18, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic002." }
-Effect_StartPlaying = { addr = 0x801EEE30, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic002." }
+Effect_StartPlaying = { addr = 0x801EEE30, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic002." }
 
 ["emi/bmagic/magic003/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -194,11 +194,11 @@ g_BMagicEffectFuncs = { addr = 0x801F0A24, source = "Handlers of magic006 (Mind 
 
 ["emi/bmagic/magic008/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-Effect_StartPlaying = { addr = 0x801EEFDC, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
+Effect_StartPlaying = { addr = 0x801EEFDC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_PlayOnce = { addr = 0x801EF010, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
-Effect_StartPlaying_801EF728 = { addr = 0x801EF728, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
-Effect_StartPlaying_801EFA40 = { addr = 0x801EFA40, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
-Effect_StartPlaying_801EFCFC = { addr = 0x801EFCFC, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
+Effect_StartPlaying_801EF728 = { addr = 0x801EF728, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
+Effect_StartPlaying_801EFA40 = { addr = 0x801EFA40, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
+Effect_StartPlaying_801EFCFC = { addr = 0x801EFCFC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_StartOnZeroTick = { addr = 0x801F01E4, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_DrawScreenFade = { addr = 0x801F0BBC, type = "func", source = "Draws the two-part screen fade whose shade is the effect timer (byte 0x09) times 16 in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_ReloadTimerAndStep = { addr = 0x801F133C, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic008 (Gambit, Mind Flay, Blind…)." }
@@ -236,10 +236,10 @@ g_BMagicEffectFuncs = { addr = 0x801F03BC, source = "Handlers of magic013 (Snap)
 
 ["emi/bmagic/magic015/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-Effect_StartPlaying = { addr = 0x801EF1CC, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic015 (Flying Kick, Charge)." }
+Effect_StartPlaying = { addr = 0x801EF1CC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic015 (Flying Kick, Charge)." }
 Effect_PlayOnce = { addr = 0x801EF200, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic015 (Flying Kick, Charge)." }
-Effect_StartPlaying_801EF610 = { addr = 0x801EF610, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic015 (Flying Kick, Charge)." }
-Effect_StartPlaying_801EF9B0 = { addr = 0x801EF9B0, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic015 (Flying Kick, Charge)." }
+Effect_StartPlaying_801EF610 = { addr = 0x801EF610, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic015 (Flying Kick, Charge)." }
+Effect_StartPlaying_801EF9B0 = { addr = 0x801EF9B0, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic015 (Flying Kick, Charge)." }
 Effect_TickDownAndClear = { addr = 0x801F0300, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic015 (Flying Kick, Charge)." }
 g_BMagicEffectFuncs = { addr = 0x801F1630, source = "Handlers of magic015 (Flying Kick, Charge), run by header.mode (byte 0x01)." }
 
@@ -252,14 +252,14 @@ g_BMagicEffectFuncs = { addr = 0x801EF990, source = "Handlers of magic017 (Astra
 ["emi/bmagic/magic020/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_DispatchHandlerSlot1 = { addr = 0x801EEC48, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic020 (Disembowel)." }
-Effect_StartPlaying = { addr = 0x801EF31C, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic020 (Disembowel)." }
+Effect_StartPlaying = { addr = 0x801EF31C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic020 (Disembowel)." }
 Effect_PlayOnce = { addr = 0x801EF350, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic020 (Disembowel)." }
 g_BMagicEffectFuncs = { addr = 0x801EFEB8, source = "Handlers of magic020 (Disembowel), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic021/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero advances the active battler's script (func_800AEF98), clears its busy flag and advances header.mode (byte 0x01) in magic021 (Bonebreak)." }
-Effect_StartPlaying = { addr = 0x801EEFA8, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic021 (Bonebreak)." }
+Effect_StartPlaying = { addr = 0x801EEFA8, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic021 (Bonebreak)." }
 Effect_ReloadTimerAndStep = { addr = 0x801EF0BC, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic021 (Bonebreak)." }
 Effect_DrawScreenFade = { addr = 0x801EF348, type = "func", source = "Draws the two-part screen fade whose shade is the effect timer (byte 0x09) times 16 in magic021 (Bonebreak)." }
 Effect_CountUpByTwoAndStep = { addr = 0x801EF750, type = "func", source = "Counts the effect timer (byte 0x09) up by two and advances header.step (byte 0x02) at 16 in magic021 (Bonebreak)." }
@@ -366,7 +366,7 @@ g_BMagicEffectFuncs = { addr = 0x801F0550, source = "Handlers of magic053 (Lavab
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
 Effect_MarkTargetDamagedOnTickerZero = { addr = 0x801EF05C, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the selected targets (func_800A9820) and advances header.mode (byte 0x01) in magic054 (Howling)." }
-Effect_StartPlaying = { addr = 0x801EF0B8, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic054 (Howling)." }
+Effect_StartPlaying = { addr = 0x801EF0B8, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic054 (Howling)." }
 Effect_CountDownAndPlay = { addr = 0x801EF0EC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic054 (Howling)." }
 Effect_TickDownAndClear = { addr = 0x801EF624, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic054 (Howling)." }
 g_BMagicEffectFuncs = { addr = 0x801EF658, source = "Handlers of magic054 (Howling), run by header.mode (byte 0x01)." }
@@ -380,7 +380,7 @@ Effect_SetActorMatrix = { addr = 0x801EF700, type = "func", source = "Sets the a
 ["emi/bmagic/magic056/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_RunStep = { addr = 0x801EEC34, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic056 (Sacrifice)." }
-Effect_StartPlaying = { addr = 0x801EF17C, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic056 (Sacrifice)." }
+Effect_StartPlaying = { addr = 0x801EF17C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic056 (Sacrifice)." }
 Effect_CopyBattlerCoords = { addr = 0x801EF27C, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
 Effect_SetActorMatrix = { addr = 0x801EF410, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic056 (Sacrifice)." }
 Effect_CopyBattlerCoords_801EFAD8 = { addr = 0x801EFAD8, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
@@ -707,7 +707,7 @@ g_BMagicEffectFuncs = { addr = 0x801EFCBC, source = "Handlers of magic101 (Typho
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic103 (Simoon)." }
 Effect_MarkTargetDamagedOnTickerZero = { addr = 0x801EEE38, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the selected targets (func_800A9820) and advances header.mode (byte 0x01) in magic103 (Simoon)." }
-Effect_StartPlaying = { addr = 0x801EEE94, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic103 (Simoon)." }
+Effect_StartPlaying = { addr = 0x801EEE94, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic103 (Simoon)." }
 Effect_SetActorMatrix = { addr = 0x801EF128, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic103 (Simoon)." }
 Effect_CountUpAndStepAt30 = { addr = 0x801F0410, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 30 in magic103 (Simoon)." }
 Effect_CountDownTimerCapped = { addr = 0x801F0460, type = "func", source = "Raises the effect timer (byte 0x09) up to 0x2E, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic103 (Simoon)." }
@@ -746,7 +746,7 @@ Effect_AdvanceOnTick = { addr = 0x801EF090, type = "func", source = "Raises the 
 ["emi/bmagic/magic110/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_DispatchHandlerSlot1 = { addr = 0x801EEC1C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic110 (Ragnarok)." }
-Effect_StartPlaying = { addr = 0x801EF114, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic110 (Ragnarok)." }
+Effect_StartPlaying = { addr = 0x801EF114, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic110 (Ragnarok)." }
 Effect_CountDownTimerStep = { addr = 0x801EF4DC, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.step (byte 0x02) at zero in magic110 (Ragnarok)." }
 Effect_StepWhileTickUnderThree = { addr = 0x801EF8F8, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 3 in magic110 (Ragnarok)." }
 Effect_TickOnTimerZero = { addr = 0x801EF93C, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic110 (Ragnarok)." }
@@ -757,7 +757,7 @@ g_BMagicEffectFuncs = { addr = 0x801F046C, source = "Handlers of magic110 (Ragna
 ["emi/bmagic/magic111/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_RunStep = { addr = 0x801EEC1C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic111." }
-Effect_StartPlaying = { addr = 0x801EEFC4, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic111." }
+Effect_StartPlaying = { addr = 0x801EEFC4, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic111." }
 Effect_CountUpAndStep = { addr = 0x801EF238, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic111." }
 Effect_CountDownAndStep = { addr = 0x801EF288, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic111." }
 Effect_TickOnTimerZero = { addr = 0x801EF2D4, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic111." }
@@ -959,7 +959,7 @@ Actor_Clear = { addr = 0x801EF964, type = "func", source = "Clears the effect wo
 g_BMagicEffectFuncs = { addr = 0x801EF9B4, source = "Handlers of magic146 (Noting), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic150/03"]
-Effect_StartPlaying = { addr = 0x801EF00C, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic150 (Eye Beam)." }
+Effect_StartPlaying = { addr = 0x801EF00C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic150 (Eye Beam)." }
 
 ["emi/bmagic/magic151/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -992,7 +992,7 @@ g_BMagicEffectFuncs = { addr = 0x801EF420, source = "Handlers of magic159 (Gloom
 ["emi/bmagic/magic161/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_RunStep = { addr = 0x801EEC24, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic161 (Timed Blow)." }
-Effect_StartPlaying = { addr = 0x801EEF08, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic161 (Timed Blow)." }
+Effect_StartPlaying = { addr = 0x801EEF08, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic161 (Timed Blow)." }
 Effect_ReloadTimerAndStep = { addr = 0x801EF024, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic161 (Timed Blow)." }
 Effect_LowerTickerStepOnReady = { addr = 0x801EF158, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) once the script stream reports ready (func_8014DAEC) in magic161 (Timed Blow)." }
 g_BMagicEffectFuncs = { addr = 0x801EF3E8, source = "Handlers of magic161 (Timed Blow), run by header.mode (byte 0x01)." }
@@ -1032,7 +1032,7 @@ BMagic_AllocEffect = { addr = 0x801EFFFC, type = "func", source = "Claims the fi
 
 ["emi/bmagic/magic169/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-Effect_StartPlaying = { addr = 0x801EF03C, type = "func", source = "Frees the palette fade of the targeted battler, tells the battle UI and effect player, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic169 (Benediction)." }
+Effect_StartPlaying = { addr = 0x801EF03C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic169 (Benediction)." }
 Effect_NextStepUnderTickLimit = { addr = 0x801EF640, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.step (byte 0x02) in magic169 (Benediction)." }
 BMagic_AllocEffect = { addr = 0x801F0368, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 80 slots are in use in magic169 (Benediction)." }
 Actor_Clear = { addr = 0x801F03CC, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
@@ -1223,167 +1223,167 @@ Boss_ChooseBattleEnding = { addr = 0x800C1930, type = "func", source = "Chooses 
 Boss_EndBattle = { addr = 0x800C197C, type = "func", source = "Ends the boss battle of boss015: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC934(1)." }
 
 ["emi/boss/boss017/16"]
-Boss_FinishDefeat = { addr = 0x800C18E4, type = "func", source = "banks the enemy's EXP and Zenny, counts it off the battle, sets the victory bit when it was the last enemy and parks it in standby" }
-Boss_InstallBattleHooks = { addr = 0x800C19C4, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C19FC, type = "func", source = "func_800C19C4 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1A04, type = "func", source = "func_800C19C4 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1A50, type = "func", source = "func_800C19C4 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_FinishDefeat = { addr = 0x800C18E4, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss017." }
+Boss_InstallBattleHooks = { addr = 0x800C19C4, type = "func", source = "Installs the boss battle hooks of boss017: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C19FC, type = "func", source = "Handles the boss battle events of boss017: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A04, type = "func", source = "Chooses how the boss battle of boss017 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x14, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1A50, type = "func", source = "Ends the boss battle of boss017: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC844(0)." }
 
 ["emi/boss/boss018/16"]
-Boss_EndEntrance = { addr = 0x800C1940, type = "func", source = "same body as Boss_EndEntrance in boss022: advances the actor to step 2 once func_8014DAEC returns nonzero" }
-Boss_EndEntrance_800C1ADC = { addr = 0x800C1ADC, type = "func", source = "second copy of Boss_EndEntrance in this image" }
-Boss_InstallBattleHooks = { addr = 0x800C2114, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C214C, type = "func", source = "func_800C2114 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C2258, type = "func", source = "func_800C2114 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C2378, type = "func", source = "func_800C2114 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
-Boss_InstallBattleHooks2 = { addr = 0x800C23F8, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding2, Boss_EndBattle2 and Boss_HandleBattleEvent2 into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent2 = { addr = 0x800C2430, type = "func", source = "func_800C23F8 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding2 = { addr = 0x800C253C, type = "func", source = "func_800C23F8 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle2 = { addr = 0x800C265C, type = "func", source = "func_800C23F8 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
-Boss_InstallBattleHooks3 = { addr = 0x800C26DC, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding3, Boss_EndBattle3 and Boss_HandleBattleEvent3 into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent3 = { addr = 0x800C2714, type = "func", source = "func_800C26DC stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding3 = { addr = 0x800C2820, type = "func", source = "func_800C26DC stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle3 = { addr = 0x800C292C, type = "func", source = "func_800C26DC stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_EndEntrance = { addr = 0x800C1940, type = "func", source = "Ends the entrance of boss018: once func_8014DAEC reports the actor script ready, sets header.mode (byte 0x01) to 2." }
+Boss_EndEntrance_800C1ADC = { addr = 0x800C1ADC, type = "func", source = "Ends the entrance of boss018: once func_8014DAEC reports the actor script ready, sets header.mode (byte 0x01) to 2." }
+Boss_InstallBattleHooks = { addr = 0x800C2114, type = "func", source = "Installs the boss battle hooks of boss018: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C214C, type = "func", source = "Handles the boss battle events of boss018: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
+Boss_ChooseBattleEnding = { addr = 0x800C2258, type = "func", source = "Chooses how the boss battle of boss018 ends. On victory sets D_80146875 to 0x1A when bit 1 of g_BattleBossFlags is set, else to 0x1B, and runs func_801DDED8. On defeat with bit 0 of g_BattleBossFlags clear, runs func_800C2A40, sets D_80146875 to 0x1C (scene flag 0x23 clear) or 0x3A (flag 0x23 set, 0x24 clear) and runs func_801DDF28; otherwise runs func_801DDF00. Always copies four battler words to D_801FD6FC to D_801FD702." }
+Boss_EndBattle = { addr = 0x800C2378, type = "func", source = "Ends the boss battle of boss018 (g_BattleEndHook): when bit 0x4000 of the halfword at D_801EB6B2 is clear, runs func_800AC870 and func_800AC844 for battle slot 0; always runs both for slots 3 and 4." }
+Boss_InstallBattleHooks2 = { addr = 0x800C23F8, type = "func", source = "Installs the boss battle hooks of boss018 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_HandleBattleEvent2 into g_BossBattleEventHook." }
+Boss_HandleBattleEvent2 = { addr = 0x800C2430, type = "func", source = "Handles the boss battle events of boss018 (set 2): g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C253C, type = "func", source = "Chooses how the boss battle of boss018 (set 2) ends. On victory sets D_80146875 to 0x1A when bit 1 of g_BattleBossFlags is set, else to 0x23, and runs func_801DDED8. On defeat with bit 0 of g_BattleBossFlags clear, runs func_800C2A40, sets D_80146875 to 0x1C (scene flag 0x23 clear) or 0x3A (flag 0x23 set, 0x24 clear) and runs func_801DDF28; otherwise runs func_801DDF00. Always copies four battler words to D_801FD6FC to D_801FD702." }
+Boss_EndBattle2 = { addr = 0x800C265C, type = "func", source = "Ends the boss battle of boss018 (set 2) (g_BattleEndHook): when bit 0x4000 of the halfword at D_801EB6B2 is clear, runs func_800AC870 and func_800AC844 for battle slot 1; always runs both for slots 3 and 4." }
+Boss_InstallBattleHooks3 = { addr = 0x800C26DC, type = "func", source = "Installs the boss battle hooks of boss018 (set 3): Boss_ChooseBattleEnding3 into g_BattleChooseEndingHook, Boss_EndBattle3 into g_BattleEndHook and Boss_HandleBattleEvent3 into g_BossBattleEventHook." }
+Boss_HandleBattleEvent3 = { addr = 0x800C2714, type = "func", source = "Handles the boss battle events of boss018 (set 3): g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
+Boss_ChooseBattleEnding3 = { addr = 0x800C2820, type = "func", source = "Chooses how the boss battle of boss018 (set 3) ends: the ending hook (g_BattleChooseEndingHook) of this set." }
+Boss_EndBattle3 = { addr = 0x800C292C, type = "func", source = "Ends the boss battle of boss018 (set 3) (g_BattleEndHook): when bit 0x4000 of the halfword at D_801EB6B2 is clear, runs func_800AC870 and func_800AC844 for battle slot 2; always runs both for slots 3 and 4." }
 
 ["emi/boss/boss021/16"]
-Boss_InstallBattleHooks = { addr = 0x800C1AD0, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1B08, type = "func", source = "func_800C1AD0 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1C18, type = "func", source = "func_800C1AD0 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1C64, type = "func", source = "func_800C1AD0 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InstallBattleHooks = { addr = 0x800C1AD0, type = "func", source = "Installs the boss battle hooks of boss021: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1B08, type = "func", source = "Handles the boss battle events of boss021: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
+Boss_ChooseBattleEnding = { addr = 0x800C1C18, type = "func", source = "Chooses how the boss battle of boss021 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x0A, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1C64, type = "func", source = "Ends the boss battle of boss021 (g_BattleEndHook): runs func_800AC844(0), clears work byte 0x2A of the actor func_800AC754(0) returns, selects its script 4 and runs func_800AC934 for slots 1 and 2." }
 
 ["emi/boss/boss022/13"]
-Boss_EndEntrance = { addr = 0x800C18B8, type = "func", source = "ends the boss's entrance when its animation script ends and starts its standby animation" }
-Boss_FinishDefeat = { addr = 0x800C1938, type = "func", source = "banks the enemy's EXP and Zenny, counts it off the battle, sets the victory bit when it was the last enemy and parks it in standby" }
-Boss_InstallBattleHooks = { addr = 0x800C1A08, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1A40, type = "func", source = "func_800C1A08 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1A48, type = "func", source = "func_800C1A08 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1ABC, type = "func", source = "func_800C1A08 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_EndEntrance = { addr = 0x800C18B8, type = "func", source = "Ends the entrance of boss022: once func_8014DAEC reports the actor script ready, sets header.mode (byte 0x01) to 2." }
+Boss_FinishDefeat = { addr = 0x800C1938, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss022." }
+Boss_InstallBattleHooks = { addr = 0x800C1A08, type = "func", source = "Installs the boss battle hooks of boss022: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1A40, type = "func", source = "Handles the boss battle events of boss022: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A48, type = "func", source = "Chooses how the boss battle of boss022 ends: the ending hook (g_BattleChooseEndingHook) of this set." }
+Boss_EndBattle = { addr = 0x800C1ABC, type = "func", source = "Ends the boss battle of boss022 (g_BattleEndHook): runs func_800AC844(0), takes the actor func_800AC754(0) returns, finds scene record 0xAA, clears work bytes 0x2A and 0x48 and selects script 6." }
 
 ["emi/boss/boss023/16"]
-Boss_InstallBattleHooks = { addr = 0x800C1984, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C19BC, type = "func", source = "func_800C1984 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C19C4, type = "func", source = "func_800C1984 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1A10, type = "func", source = "func_800C1984 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InstallBattleHooks = { addr = 0x800C1984, type = "func", source = "Installs the boss battle hooks of boss023: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C19BC, type = "func", source = "Handles the boss battle events of boss023: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C19C4, type = "func", source = "Chooses how the boss battle of boss023 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x0A, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1A10, type = "func", source = "Ends the boss battle of boss023 (g_BattleEndHook): runs func_800AC934 for battle slots 0, 1 and 2." }
 
 ["emi/boss/boss024/16"]
-Boss_InstallBattleHooks = { addr = 0x800C19E8, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1A20, type = "func", source = "func_800C19E8 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1A28, type = "func", source = "func_800C19E8 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1A90, type = "func", source = "func_800C19E8 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
-Boss_InstallBattleHooks2 = { addr = 0x800C1AB0, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding2, Boss_EndBattle2 and Boss_HandleBattleEvent2 into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent2 = { addr = 0x800C1AE8, type = "func", source = "func_800C1AB0 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1AF0, type = "func", source = "func_800C1AB0 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle2 = { addr = 0x800C1B3C, type = "func", source = "func_800C1AB0 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InstallBattleHooks = { addr = 0x800C19E8, type = "func", source = "Installs the boss battle hooks of boss024: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1A20, type = "func", source = "Handles the boss battle events of boss024: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A28, type = "func", source = "Chooses how the boss battle of boss024 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 5, sets BATTLE_RESULT_NO_BGM in g_BattleResult, sets g_SndBGMId to 0x44 and runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1A90, type = "func", source = "Ends the boss battle of boss024: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC934(3)." }
+Boss_InstallBattleHooks2 = { addr = 0x800C1AB0, type = "func", source = "Installs the boss battle hooks of boss024 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_HandleBattleEvent2 into g_BossBattleEventHook." }
+Boss_HandleBattleEvent2 = { addr = 0x800C1AE8, type = "func", source = "Handles the boss battle events of boss024 (set 2): ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1AF0, type = "func", source = "Chooses how the boss battle of boss024 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle2 = { addr = 0x800C1B3C, type = "func", source = "Ends the boss battle of boss024 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 
 ["emi/boss/boss025/13"]
-Boss_InstallBattleHooks2 = { addr = 0x800C2710, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding2, Boss_EndBattle2 and Boss_HandleBattleEvent2 into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook, and zeroes D_801FE4F0, D_801FE4E8 and D_801FE4EF; which set the game installs first, this or the unnumbered set at 0x800C2B60, is unproven" }
-Boss_HandleBattleEvent2 = { addr = 0x800C2760, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding2 = { addr = 0x800C2984, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle2 = { addr = 0x800C2B2C, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
-Boss_InstallBattleHooks = { addr = 0x800C2B60, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C2B98, type = "func", source = "func_800C2B60 stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C2D7C, type = "func", source = "func_800C2B60 stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C2F74, type = "func", source = "func_800C2B60 stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InstallBattleHooks2 = { addr = 0x800C2710, type = "func", source = "Installs the boss battle hooks of boss025 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_HandleBattleEvent2 into g_BossBattleEventHook." }
+Boss_HandleBattleEvent2 = { addr = 0x800C2760, type = "func", source = "Handles the boss battle events of boss025 (set 2): g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C2984, type = "func", source = "Chooses how the boss battle of boss025 (set 2) ends: the ending hook (g_BattleChooseEndingHook) of this set." }
+Boss_EndBattle2 = { addr = 0x800C2B2C, type = "func", source = "Ends the boss battle of boss025 (set 2): the battle-end hook (g_BattleEndHook) of this set, which runs ." }
+Boss_InstallBattleHooks = { addr = 0x800C2B60, type = "func", source = "Installs the boss battle hooks of boss025: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C2B98, type = "func", source = "Handles the boss battle events of boss025: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
+Boss_ChooseBattleEnding = { addr = 0x800C2D7C, type = "func", source = "Chooses how the boss battle of boss025 ends: the ending hook (g_BattleChooseEndingHook) of this set." }
+Boss_EndBattle = { addr = 0x800C2F74, type = "func", source = "Ends the boss battle of boss025: the battle-end hook (g_BattleEndHook) of this set." }
 
 ["emi/boss/boss028/16"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-func_800C1AA0 = { addr = 0x800C1AA0, type = "func", source = "runs func_801E5704 and func_801E567C and raises the g_BattleState flag 0x4 when func_801E30F8 reports a transition" }
-Boss_InstallBattleHooks = { addr = 0x800C1B40, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1B78, type = "func", source = "func_800C1B40 stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1B80, type = "func", source = "func_800C1B40 stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1BCC, type = "func", source = "func_800C1B40 stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+func_800C1AA0 = { addr = 0x800C1AA0, type = "func", source = "When func_801E30F8 returns nonzero raises BATTLE_STATE_EFFECT_PLAYING and runs func_801E5704 and func_801E567C in boss028." }
+Boss_InstallBattleHooks = { addr = 0x800C1B40, type = "func", source = "Installs the boss battle hooks of boss028: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1B78, type = "func", source = "Handles the boss battle events of boss028: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1B80, type = "func", source = "Chooses how the boss battle of boss028 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 30, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1BCC, type = "func", source = "Ends the boss battle of boss028: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC934(0)." }
 
 ["emi/boss/boss029/16"]
-Boss_InstallBattleHooks = { addr = 0x800C18F0, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1928, type = "func", source = "func_800C18F0 stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1930, type = "func", source = "func_800C18F0 stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "func_800C18F0 stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InstallBattleHooks = { addr = 0x800C18F0, type = "func", source = "Installs the boss battle hooks of boss029: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1928, type = "func", source = "Handles the boss battle events of boss029: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1930, type = "func", source = "Chooses how the boss battle of boss029 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 0x1C, runs func_801DDED8, sets g_SndBGMId to 0x62; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "Ends the boss battle of boss029: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC934(0)." }
 
 ["emi/boss/boss030/16"]
-Boss_InstallBattleHooks = { addr = 0x800C19DC, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1A14, type = "func", source = "func_800C19DC stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1A1C, type = "func", source = "func_800C19DC stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1A84, type = "func", source = "func_800C19DC stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InstallBattleHooks = { addr = 0x800C19DC, type = "func", source = "Installs the boss battle hooks of boss030: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1A14, type = "func", source = "Handles the boss battle events of boss030: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A1C, type = "func", source = "Chooses how the boss battle of boss030 ends (g_BattleChooseEndingHook). On victory sets visit_count to &g_ScriptVars[0], advances (*visit_count), sets g_SceneState.step_05 to 0xC, runs func_801DDED8, sets g_SndBGMId to 0x5A; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1A84, type = "func", source = "Ends the boss battle of boss030 (g_BattleEndHook): runs func_800AC934 for battle slots 0, 1 and 2." }
 
 ["emi/boss/boss031/13"]
-Boss_InstallBattleHooks = { addr = 0x800C19C8, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1A00, type = "func", source = "func_800C19C8 stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1A08, type = "func", source = "func_800C19C8 stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1A6C, type = "func", source = "func_800C19C8 stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InstallBattleHooks = { addr = 0x800C19C8, type = "func", source = "Installs the boss battle hooks of boss031: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1A00, type = "func", source = "Handles the boss battle events of boss031: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A08, type = "func", source = "Chooses how the boss battle of boss031 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 0x14 and runs func_801DDED8; otherwise clears bit 0x40 of g_BattleOptions and runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1A6C, type = "func", source = "Ends the boss battle of boss031: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC844(0) and func_800AC754(0)." }
 
 ["emi/boss/boss032/16"]
-Boss_InstallBattleHooks = { addr = 0x800C19C8, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1A00, type = "func", source = "func_800C19C8 stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1A08, type = "func", source = "func_800C19C8 stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1BEC, type = "func", source = "func_800C19C8 stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InstallBattleHooks = { addr = 0x800C19C8, type = "func", source = "Installs the boss battle hooks of boss032: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1A00, type = "func", source = "Handles the boss battle events of boss032: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A08, type = "func", source = "Chooses how the boss battle of boss032 ends: the ending hook (g_BattleChooseEndingHook) of this set." }
+Boss_EndBattle = { addr = 0x800C1BEC, type = "func", source = "Ends the boss battle of boss032: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC844(0) and func_800AC754(0)." }
 
 ["emi/boss/boss033/16"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-Boss_InstallBattleHooks = { addr = 0x800C1D70, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1DA8, type = "func", source = "func_800C1D70 stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1DB0, type = "func", source = "func_800C1D70 stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1E24, type = "func", source = "func_800C1D70 stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
-Effect_ShakeScreen = { addr = 0x800C26A4, type = "func", source = "sets the three screen shake offsets from the effect ticker and counts the effect down" }
+Boss_InstallBattleHooks = { addr = 0x800C1D70, type = "func", source = "Installs the boss battle hooks of boss033: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1DA8, type = "func", source = "Handles the boss battle events of boss033: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1DB0, type = "func", source = "Chooses how the boss battle of boss033 ends (g_BattleChooseEndingHook). When a result bit in mask 6 is set runs func_800AC934(0), sets D_80146875 to 8, copies D_80145EC4 and D_80145EC8 into g_AreaScrollTargetX and g_AreaScrollTargetY and runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1E24, type = "func", source = "Ends the boss battle of boss033: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Effect_ShakeScreen = { addr = 0x800C26A4, type = "func", source = "Sets the three screen shake offsets (bytes 0x5D to 0x5F) to -16 times the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) down, clearing the effect at the wrap past zero in the boss033 battle." }
 
 ["emi/boss/boss034/16"]
-Boss_InstallBattleHooks = { addr = 0x800C2340, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C2378, type = "func", source = "func_800C2340 stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C2380, type = "func", source = "func_800C2340 stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C23CC, type = "func", source = "func_800C2340 stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InstallBattleHooks = { addr = 0x800C2340, type = "func", source = "Installs the boss battle hooks of boss034: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C2378, type = "func", source = "Handles the boss battle events of boss034: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C2380, type = "func", source = "Chooses how the boss battle of boss034 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C23CC, type = "func", source = "Ends the boss battle of boss034: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 
 ["emi/boss/boss035/16"]
-Boss_InstallBattleHooks = { addr = 0x800C1B4C, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1B84, type = "func", source = "func_800C1B4C stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1BF0, type = "func", source = "func_800C1B4C stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1C3C, type = "func", source = "func_800C1B4C stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
-Boss_InstallBattleHooks2 = { addr = 0x800C1C70, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding2, Boss_EndBattle2 and Boss_HandleBattleEvent2 into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent2 = { addr = 0x800C1CA8, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1CB0, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle2 = { addr = 0x800C1CFC, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InstallBattleHooks = { addr = 0x800C1B4C, type = "func", source = "Installs the boss battle hooks of boss035: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1B84, type = "func", source = "Handles the boss battle events of boss035: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
+Boss_ChooseBattleEnding = { addr = 0x800C1BF0, type = "func", source = "Chooses how the boss battle of boss035 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 21, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1C3C, type = "func", source = "Ends the boss battle of boss035: the battle-end hook (g_BattleEndHook) of this set, which runs ." }
+Boss_InstallBattleHooks2 = { addr = 0x800C1C70, type = "func", source = "Installs the boss battle hooks of boss035 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_HandleBattleEvent2 into g_BossBattleEventHook." }
+Boss_HandleBattleEvent2 = { addr = 0x800C1CA8, type = "func", source = "Handles the boss battle events of boss035 (set 2): ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1CB0, type = "func", source = "Chooses how the boss battle of boss035 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle2 = { addr = 0x800C1CFC, type = "func", source = "Ends the boss battle of boss035 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 
 ["emi/boss/boss036/16"]
-Boss_InstallBattleHooks = { addr = 0x800C1D78, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1DB0, type = "func", source = "func_800C1D78 stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1DB8, type = "func", source = "func_800C1D78 stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1E04, type = "func", source = "func_800C1D78 stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
-Boss_InstallBattleHooks2 = { addr = 0x800C1E0C, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding2, Boss_EndBattle2 and Boss_HandleBattleEvent2 into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent2 = { addr = 0x800C1E44, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1E4C, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle2 = { addr = 0x800C1E98, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
-Boss_RunSubStep = { addr = 0x800C1EE4, type = "func", source = "copies the overlay three-entry step table D_800C1804 and calls the entry the scratchpad step index selects" }
+Boss_InstallBattleHooks = { addr = 0x800C1D78, type = "func", source = "Installs the boss battle hooks of boss036: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1DB0, type = "func", source = "Handles the boss battle events of boss036: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1DB8, type = "func", source = "Chooses how the boss battle of boss036 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 8, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1E04, type = "func", source = "Ends the boss battle of boss036: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Boss_InstallBattleHooks2 = { addr = 0x800C1E0C, type = "func", source = "Installs the boss battle hooks of boss036 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_HandleBattleEvent2 into g_BossBattleEventHook." }
+Boss_HandleBattleEvent2 = { addr = 0x800C1E44, type = "func", source = "Handles the boss battle events of boss036 (set 2): ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1E4C, type = "func", source = "Chooses how the boss battle of boss036 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle2 = { addr = 0x800C1E98, type = "func", source = "Ends the boss battle of boss036 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Boss_RunSubStep = { addr = 0x800C1EE4, type = "func", source = "Runs the sub-step handler that the actor step byte (byte 0x02) selects from the three callbacks at D_800C1804 in boss036." }
 
 ["emi/boss/boss037/16"]
-Boss_InitEnemy = { addr = 0x800C1848, type = "func", source = "installs the enemy work script, mode and table pointers D_800C1990, func_800C18AC and D_800C199C, raises its 0x8 flag and moves the task work to mode 2" }
-Boss_InstallBattleHooks = { addr = 0x800C18FC, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1934, type = "func", source = "func_800C18FC stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C193C, type = "func", source = "func_800C18FC stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "func_800C18FC stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InitEnemy = { addr = 0x800C1848, type = "func", source = "Sets up the current boss enemy of boss037: points its script at D_800C1990, its mode handler (member 0xE4) at func_800C18AC and its action table (member 0xE8) at D_800C199C, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs func_8014D978." }
+Boss_InstallBattleHooks = { addr = 0x800C18FC, type = "func", source = "Installs the boss battle hooks of boss037: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1934, type = "func", source = "Handles the boss battle events of boss037: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C193C, type = "func", source = "Chooses how the boss battle of boss037 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 28, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "Ends the boss battle of boss037: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 
 ["emi/boss/boss038/16"]
-Battle_LoadEnemyBattler = { addr = 0x800AC218, type = "func", source = "copies the area enemy record at 0x800E4048 + n*0x88 into the 0x118-byte EnemyBattler row; Battle_AddEnemy and Battle_ArmEnemySlot call it (catalogue 1.3, 2, high)" }
-Boss_InstallBattleHooks = { addr = 0x800C1B7C, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1BB4, type = "func", source = "func_800C1B7C stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1BBC, type = "func", source = "func_800C1B7C stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1C08, type = "func", source = "func_800C1B7C stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Battle_LoadEnemyBattler = { addr = 0x800AC218, type = "func", source = "Loads the area enemy record enemy_index into the EnemyBattler row of battle slot slot." }
+Boss_InstallBattleHooks = { addr = 0x800C1B7C, type = "func", source = "Installs the boss battle hooks of boss038: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1BB4, type = "func", source = "Handles the boss battle events of boss038: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1BBC, type = "func", source = "Chooses how the boss battle of boss038 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1C08, type = "func", source = "Ends the boss battle of boss038: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 
 ["emi/boss/boss040/16"]
-Boss_InitEnemy2 = { addr = 0x800C1848, type = "func", source = "installs the enemy work script, mode and table pointers D_800C1B1C, func_800C18AC and D_800C1B28, raises its 0x8 flag and moves the task work to mode 2" }
-Boss_InitEnemy3 = { addr = 0x800C1940, type = "func", source = "installs the enemy work script, battle-task and table pointers D_800C1B1C, func_800C19A4 and D_800C1B28, raises its 0x8 flag and moves the task work to mode 2" }
-Boss_InstallBattleHooks = { addr = 0x800C19F4, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1A2C, type = "func", source = "func_800C19F4 stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C1A34, type = "func", source = "func_800C19F4 stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1A80, type = "func", source = "func_800C19F4 stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
-Boss_InstallBattleHooks2 = { addr = 0x800C1A88, type = "func", source = "publishes the battle hooks Boss_ChooseBattleEnding2, Boss_EndBattle2 and Boss_HandleBattleEvent2 into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent2 = { addr = 0x800C1AC0, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BossBattleEventHook, the boss battle-event hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1AC8, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BattleChooseEndingHook, the battle-ending hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle2 = { addr = 0x800C1B14, type = "func", source = "Boss_InstallBattleHooks2 stores it in g_BattleEndHook, the battle-end hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InitEnemy2 = { addr = 0x800C1848, type = "func", source = "Sets up the current boss enemy of boss040: points its script at D_800C1B1C, its mode handler (member 0xE4) at func_800C18AC and its action table (member 0xE8) at D_800C1B28, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs func_8014D978." }
+Boss_InitEnemy3 = { addr = 0x800C1940, type = "func", source = "Sets up the current boss enemy of boss040: points its script at D_800C1B1C, its mode handler (member 0xE4) at func_800C19A4 and its action table (member 0xE8) at D_800C1B28, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs func_8014D978." }
+Boss_InstallBattleHooks = { addr = 0x800C19F4, type = "func", source = "Installs the boss battle hooks of boss040: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1A2C, type = "func", source = "Handles the boss battle events of boss040: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A34, type = "func", source = "Chooses how the boss battle of boss040 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1A80, type = "func", source = "Ends the boss battle of boss040: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Boss_InstallBattleHooks2 = { addr = 0x800C1A88, type = "func", source = "Installs the boss battle hooks of boss040 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_HandleBattleEvent2 into g_BossBattleEventHook." }
+Boss_HandleBattleEvent2 = { addr = 0x800C1AC0, type = "func", source = "Handles the boss battle events of boss040 (set 2): ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1AC8, type = "func", source = "Chooses how the boss battle of boss040 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 38, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle2 = { addr = 0x800C1B14, type = "func", source = "Ends the boss battle of boss040 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 
 ["emi/boss/boss042/16"]
-Boss_InitEnemy = { addr = 0x800C1848, type = "func", source = "installs the enemy work script, mode and table pointers D_800C1990, func_800C18AC and D_800C199C, raises its 0x8 flag and moves the task work to mode 2" }
-Boss_InstallBattleHooks = { addr = 0x800C18FC, type = "func", source = "publishes the area entry points Boss_ChooseBattleEnding, Boss_EndBattle and Boss_HandleBattleEvent into g_BattleChooseEndingHook, g_BattleEndHook and g_BossBattleEventHook" }
-Boss_HandleBattleEvent = { addr = 0x800C1934, type = "func", source = "func_800C18FC stores it in g_BossBattleEventHook, the mode-step hook battle/battle/03 calls with event codes 0-6" }
-Boss_ChooseBattleEnding = { addr = 0x800C193C, type = "func", source = "func_800C18FC stores it in g_BattleChooseEndingHook, the mode-start hook battle/battle/03 func_801D6A14 calls" }
-Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "func_800C18FC stores it in g_BattleEndHook, the battle-setup hook battle/battle/03 func_801D7234 calls once the EMI loader is ready" }
+Boss_InitEnemy = { addr = 0x800C1848, type = "func", source = "Sets up the current boss enemy of boss042: points its script at D_800C1990, its mode handler (member 0xE4) at func_800C18AC and its action table (member 0xE8) at D_800C199C, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs func_8014D978." }
+Boss_InstallBattleHooks = { addr = 0x800C18FC, type = "func", source = "Installs the boss battle hooks of boss042: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_HandleBattleEvent into g_BossBattleEventHook." }
+Boss_HandleBattleEvent = { addr = 0x800C1934, type = "func", source = "Handles the boss battle events of boss042: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C193C, type = "func", source = "Chooses how the boss battle of boss042 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "Ends the boss battle of boss042: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 
 ["emi/boss/boss049/16"]
 Boss_InitEnemy2 = { addr = 0x800C1848, type = "func", source = "installs the enemy work script, mode and table pointers D_800C1B1C, func_800C18AC and D_800C1B28, raises its 0x8 flag and moves the task work to mode 2" }
