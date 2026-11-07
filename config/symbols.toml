@@ -2944,6 +2944,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world00/area020/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight." }
+g_AreaSpawnPositions = { addr = 0x801F2DC0, source = "Positions for weighted actor spawns." }
+g_AreaSpawnWeights = { addr = 0x801F2DD0, source = "Weights for actor spawns." }
 
 ["emi/world00/area021/13"]
 Message_SetAnswerMessage = { addr = 0x801F2C6C, type = "func", source = "Stores the message id the answer table D_801F33B4 holds for the menu choice g_MessageChoice in g_MessageRequest." }
@@ -2976,6 +2978,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world00/area029/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight." }
+g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
+g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world00/area030/04"]
 g_FishingLure = { addr = 0x80145026, source = "accessory id of the equipped lure; its row is the 0x14-byte entry of the lure table that g_FishingLureRow points at" }
@@ -3210,10 +3214,14 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world01/area063/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
+g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world01/area064/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
+g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world01/area065/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -3271,10 +3279,14 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world01/area072/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
+g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world01/area073/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
+g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world01/area074/13"]
 g_MasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
@@ -3470,6 +3482,8 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world02/area110/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
+g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }
 
 ["emi/world02/area111/13"]
 Message_SelectAnswer = { addr = 0x801F33D0, type = "func", source = "Sets g_MessageRequest to 3 when g_MessageChoice is nonzero, otherwise to 2." }
@@ -3574,12 +3588,16 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 ["emi/world03/area124/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+g_AreaSpawnPositions = { addr = 0x801F2DC8, source = "Positions for weighted actor spawns." }
+g_AreaSpawnWeights = { addr = 0x801F2DD8, source = "Weights for actor spawns." }
 
 ["emi/world03/area125/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_FindFreeWorkRow = { addr = 0x801F3348, type = "func", source = "Finds the first work-window row whose byte is zero or returns NULL." }
 Area_ClearWorkColumn = { addr = 0x801F3384, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
 Area_SpawnWeightedActor = { addr = 0x801F3504, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
+g_AreaSpawnPositions = { addr = 0x801F37D8, source = "Positions for weighted actor spawns." }
+g_AreaSpawnWeights = { addr = 0x801F37E8, source = "Weights for actor spawns." }
 
 ["emi/world03/area127/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
