@@ -382,7 +382,33 @@ INCLUDE_ASM(func_801FB914);
 
 INCLUDE_ASM(func_801FC094);
 
-INCLUDE_ASM(func_801FC1C4);
+MATCH void func_801FC1C4(void) {
+    u8* step;
+
+    step = &D_80146875;
+    switch (*step) {
+        case 0:
+            func_8019FA28(0x35, 0x120000, 0x180000, 1);
+            g_GamePrevSelection = 0x4D;
+            *step               = 1;
+            break;
+        case 1:
+            if (g_UiWindowEffectBusy == 0) {
+                *step = 2;
+            }
+            break;
+        case 2:
+            if (*g_ScriptVars == 9) {
+                SYS_SetFlag(g_SceneFlags, 7);
+                func_8019FA28(0x58, 0x350000, 0x230000, 3);
+                g_GameFlags &= ~GAME_FLAG_SCROLL_LOCK;
+                Game_ClearScriptActive();
+                D_80146874 = 0;
+                *step      = 0;
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801FC2D0);
 

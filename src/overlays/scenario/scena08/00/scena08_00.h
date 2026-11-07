@@ -11,6 +11,10 @@
 
 extern u16      D_800E4C1E;
 extern u8       g_VitalItemIds;
+extern s16      D_801448EE;
+extern u8       D_80146867;
+extern s8       D_80147ACF;
+extern s16      D_80147AD6;
 extern u8       D_80146874;
 extern u8       D_80146875;
 extern u16      D_80146876;
