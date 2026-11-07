@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EEC90);
 MATCH void func_801EF08C(void) {
     u8 counter;
 
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         if (g_Task->unk_09 == 0x1E) {
             func_800AEF98(4, 0);
             BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
@@ -70,7 +70,7 @@ MATCH void func_801EF328(void) {
 MATCH void func_801EF394(void) {
     if (func_8014DAEC() & 0xFF) {
         func_800A9820(g_BattleTargetSelector);
-        BATTLE_ACTIVE_WORK->unk_0B -= 1;
+        BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
 }

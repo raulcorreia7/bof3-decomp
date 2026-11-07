@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EEC7C);
 #include "overlays/bmagic/Effect_CountDownTimerCallSelector.h"
 
 MATCH void func_801EEF64(void) {
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.phase == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_Task->unk_09 = 30;
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
@@ -37,11 +37,11 @@ INCLUDE_ASM(func_801EF090);
 MATCH void func_801EF174(void) {
     PartyBattler* work = g_Task;
     u8            count;
-    u8            phase = work->unk_0B;
+    u8            phase = work->param.phase;
     u8            timer;
     phase += 1;
-    timer        = work->unk_09;
-    work->unk_0B = phase + (timer >> 6);
+    timer             = work->unk_09;
+    work->param.phase = phase + (timer >> 6);
     if (g_FrameCount & 1) {
         g_Task->timer += 1;
     }
@@ -55,11 +55,11 @@ MATCH void func_801EF174(void) {
 MATCH void func_801EF21C(void) {
     PartyBattler* work = g_Task;
     u8            count;
-    u8            phase = work->unk_0B;
+    u8            phase = work->param.phase;
     u8            timer;
     phase += 1;
-    timer        = work->unk_09;
-    work->unk_0B = phase + (timer >> 6);
+    timer             = work->unk_09;
+    work->param.phase = phase + (timer >> 6);
     if (g_FrameCount & 1) {
         g_Task->timer -= 1;
     }
@@ -96,8 +96,8 @@ INCLUDE_ASM(func_801EFDF8);
 #include "../../Effect_DispatchHandlerSlot2.h"
 
 MATCH void func_801F001C(void) {
-    g_Task->unk_0B = 0;
-    g_Task->unk_09 = 0;
+    g_Task->param.phase = 0;
+    g_Task->unk_09      = 0;
     Actor_SelectScript(3);
     func_8014D978();
     Area_AddActor();

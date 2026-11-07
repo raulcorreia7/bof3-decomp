@@ -21,7 +21,7 @@ INCLUDE_ASM(func_801EF0C0);
 MATCH void func_801EF2A0(void) {
     u16* flags;
 
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         flags                     = &g_BattleState;
         g_GameCelerityTimer.hours = 5;
         *flags |= BATTLE_STATE_EFFECT_PLAYING;
@@ -76,9 +76,9 @@ MATCH void func_801EFF68(void) {
 
     func_800AF764();
     if ((g_Task->unk_0C == 4) && (g_Task->timer < 5U)) {
-        value2 = (rand() & 3) | 0x40;
+        value2 = RANDOM_MASK(3) | 0x40;
     } else {
-        value2 = (rand() & 3) | 0x18;
+        value2 = RANDOM_MASK(3) | 0x18;
     }
     func_801F0910(value2);
     Effect_SetActorMatrix();
@@ -96,7 +96,7 @@ MATCH void func_801EFF68(void) {
         value3        = g_Task->timer - 1;
         g_Task->timer = value3;
         if (!(value3 & 0xFF)) {
-            if (g_Task->unk_0B == 0) {
+            if (g_Task->param.unk_0B == 0) {
                 SND_QueueSelectionFx(0x101);
             }
             g_Task->unk_10 = 8;

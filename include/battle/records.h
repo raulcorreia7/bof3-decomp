@@ -487,6 +487,13 @@ typedef enum PartyBattlerFlags {
     PARTY_BATTLER_FLAG_HANDLER_BUSY = 1 << 6,
 } PartyBattlerFlags;
 
+typedef union BattlerParam {
+    u8 unk_0B;
+    u8 phase;
+} BattlerParam;
+
+ASSERT_SIZE(BattlerParam, 1);
+
 /* Local battler work table (stride 0x140 at 0x80145E90), shared by the battle overlays. */
 typedef struct PartyBattler {
     TaskHeader        header; /* 0x00 */
@@ -498,7 +505,7 @@ typedef struct PartyBattler {
     u8                facing; /* +0x08 the direction the battler faces */
     u8                unk_09;
     u8                timer; /* +0x0A frame counter */
-    u8                unk_0B;
+    BattlerParam      param;
     s32               unk_0C;
     s32               unk_10;
     s32               unk_14; /* +0x14 the 32-bit cell both overlays read */
@@ -561,7 +568,7 @@ ASSERT_OFFSET(PartyBattler, turn, 0x118);
 ASSERT_OFFSET(PartyBattler, facing, 0x08);
 ASSERT_OFFSET(PartyBattler, unk_09, 0x09);
 ASSERT_OFFSET(PartyBattler, timer, 0x0A);
-ASSERT_OFFSET(PartyBattler, unk_0B, 0x0B);
+ASSERT_OFFSET(PartyBattler, param, 0x0B);
 ASSERT_OFFSET(PartyBattler, unk_14, 0x14);
 ASSERT_OFFSET(PartyBattler, unk_20, 0x20);
 ASSERT_OFFSET(PartyBattler, unk_60, 0x60);

@@ -29,7 +29,7 @@ MATCH void func_801EF3A4(void) {
     u8 counter;
     u8 timer;
 
-    g_Task->unk_0B += 2;
+    g_Task->param.unk_0B += 2;
     timer = g_Task->timer;
     if (timer < 0x10U) {
         g_Task->timer = timer + 2;
@@ -42,12 +42,12 @@ MATCH void func_801EF3A4(void) {
 }
 
 MATCH void func_801EF430(void) {
-    u8 temp_v0;
+    u8 timer_next;
 
-    g_Task->unk_0B += 4;
-    temp_v0       = g_Task->timer - 2;
-    g_Task->timer = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    g_Task->param.unk_0B += 4;
+    timer_next    = g_Task->timer - 2;
+    g_Task->timer = timer_next;
+    if (!(timer_next & BYTE_MASK)) {
         SND_QueueSelectionFx(0x102);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;

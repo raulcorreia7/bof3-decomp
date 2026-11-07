@@ -7,7 +7,7 @@ MATCH void Effect_CountUpAndMarkBattler(void) {
     g_Task->unk_09 += 1;
     g_Task->timer += 1;
     if (g_Task->unk_09 == 0x19) {
-        BATTLE_ACTIVE_WORK->unk_0B |= 0x80;
+        BATTLE_ACTIVE_WORK->param.unk_0B |= 0x80;
         g_Task->header.step += 1;
     }
 }

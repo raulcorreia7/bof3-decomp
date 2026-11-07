@@ -53,16 +53,16 @@ MATCH void func_801EF06C(void) {
     PartyBattler* work;
     STACK_PADS(u8, 8);
 
-    src               = BATTLE_ACTIVE_WORK;
-    work              = g_Task;
-    work->pos.x.fixed = src->pos.x.fixed;
-    work->pos.y.fixed = src->pos.y.fixed;
-    work->pos.z       = src->pos.z;
-    work->unk_0C      = src->unk_0C + D_801F004C[work->unk_04];
-    work->unk_10      = src->unk_0C + D_801F004E[work->unk_04];
-    work->unk_0B      = 0;
-    g_Task->unk_09    = 0;
-    g_Task->timer     = 0;
+    src                = BATTLE_ACTIVE_WORK;
+    work               = g_Task;
+    work->pos.x.fixed  = src->pos.x.fixed;
+    work->pos.y.fixed  = src->pos.y.fixed;
+    work->pos.z        = src->pos.z;
+    work->unk_0C       = src->unk_0C + D_801F004C[work->unk_04];
+    work->unk_10       = src->unk_0C + D_801F004E[work->unk_04];
+    work->param.unk_0B = 0;
+    g_Task->unk_09     = 0;
+    g_Task->timer      = 0;
     g_Task->header.step += 1;
 }
 
@@ -156,7 +156,7 @@ MATCH void func_801EFB68(void) {
     g_Task->pos.y.fixed += (rcos((g_Task->timer & 0x3F) << 8) * 8) >> 3;
     COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) - 8;
     if ((func_8014DAEC() & 0xFF) || (COORD_INT(g_Task->pos.z) < g_Task->unk_14)) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         g_Task->header.flags = 0;
         g_Task->header.mode  = 0;
         g_Task->header.step  = 0;

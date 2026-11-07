@@ -21,9 +21,9 @@ MATCH void func_801EED38(void) {
     g_Task->pos.y  = battler->pos.y;
     g_Task->pos.z  = battler->pos.z;
     func_800AF764();
-    g_Task->unk_0B = 0;
-    g_Task->unk_09 = 8;
-    g_Task->timer  = 0;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 8;
+    g_Task->timer        = 0;
     g_Task->header.mode++;
 
     for (i = 0; i < D_801F0198[g_Task->unk_04]; i++) {
@@ -37,7 +37,7 @@ MATCH void func_801EED38(void) {
             D_801F01B4[sparkle_index].unk_04      = g_Task->unk_04;
             D_801F01B4[sparkle_index].unk_07      = i;
             D_801F01B4[sparkle_index].timer_05    = D_801F01A0[g_Task->unk_04] * (i >> 2) + 1;
-            g_Task->unk_0B++;
+            g_Task->param.unk_0B++;
         }
     }
     SND_PlayCue(EMI_CUE_ID(1, 0));

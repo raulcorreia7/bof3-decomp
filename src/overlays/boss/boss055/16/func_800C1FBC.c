@@ -3,8 +3,8 @@
 MATCH void func_800C1FBC(void) {
     u8 count;
 
-    ((PartyBattler*)g_Task)->unk_0B = 0;
-    count                           = ((PartyBattler*)g_Task)->unk_09;
+    ((PartyBattler*)g_Task)->param.unk_0B = 0;
+    count                                 = ((PartyBattler*)g_Task)->unk_09;
     if (count == 0) {
         if ((D_801463BE == 3) || (D_801463BE == 5)) {
             SND_PlayCue(0x602U);
