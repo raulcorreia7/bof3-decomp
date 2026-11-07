@@ -15,7 +15,7 @@ MATCH u32 Battle_ApplyDamage(u8 attacker, u8 target) {
             damage = g_BattlePartyBattlers[target].chr.hp;
             func_801DE560(1, 0, 0, 0x1E, D_801EB075);
             g_BattleMessageState = 1;
-            g_BattlePartyBattlers[target].turn.damage_flags.value &= ~0x100;
+            g_BattlePartyBattlers[target].turn.damage_flags.value &= ~COMBATANT_FLAG_HURT_REACTION;
         }
         if (damage > 0) {
             if (damage < g_BattlePartyBattlers[target].chr.hp) {
@@ -41,7 +41,7 @@ MATCH u32 Battle_ApplyDamage(u8 attacker, u8 target) {
             damage = ENEMY_COMBATANT(target).hp;
             func_801DE560(1, 0, 0, 0x1E, D_801EB075);
             g_BattleMessageState = 1;
-            ENEMY_COMBATANT(target).turn.damage_flags.value &= ~0x100;
+            ENEMY_COMBATANT(target).turn.damage_flags.value &= ~COMBATANT_FLAG_HURT_REACTION;
         }
         if (damage > 0) {
             if (damage < ENEMY_COMBATANT(target).hp) {
