@@ -3,11 +3,7 @@
 MATCH void func_801AE984(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 dimmed) {
     SPRT_8* sprite;
 
-    /* GetGraphType() is probed twice; the second result is unused. */
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    GFX_AddDrawMode(0xF);
+    GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     sprite = (SPRT_8*)g_GfxPrimCursor;
     SetSprt8(sprite);
     if ((dimmed & BYTE_MASK) == 0) {
