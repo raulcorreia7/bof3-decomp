@@ -26,15 +26,15 @@ MATCH void func_801EF014(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_Task->facing    = D_801EB4E0->facing;
-    work              = g_Task;
-    actor             = D_801EB4E0;
-    work->pos.x.fixed = actor->pos.x.fixed;
-    work->pos.y.fixed = actor->pos.y.fixed;
-    z                 = actor->pos.z.fixed;
-    work->unk_0B      = 0;
-    work->pos.z.fixed = z;
-    g_Task->unk_09    = 0;
+    g_Task->facing     = D_801EB4E0->facing;
+    work               = g_Task;
+    actor              = D_801EB4E0;
+    work->pos.x.fixed  = actor->pos.x.fixed;
+    work->pos.y.fixed  = actor->pos.y.fixed;
+    z                  = actor->pos.z.fixed;
+    work->param.unk_0B = 0;
+    work->pos.z.fixed  = z;
+    g_Task->unk_09     = 0;
     g_Task->header.step += 1;
 }
 
@@ -45,9 +45,9 @@ INCLUDE_ASM(func_801EF090);
 #include "../../Effect_DispatchHandlerSlot2.h"
 
 MATCH void func_801EF250(void) {
-    g_Task                     = D_801EB4E0;
-    BATTLE_ACTIVE_WORK->unk_0B = 0;
-    g_Task->unk_09             = 0;
+    g_Task                           = D_801EB4E0;
+    BATTLE_ACTIVE_WORK->param.unk_0B = 0;
+    g_Task->unk_09                   = 0;
     Actor_SelectScript(2U);
     g_Task->header.mode = 1;
     g_Task->header.step = 1;
@@ -74,43 +74,43 @@ MATCH void func_801EF324(void) {
 INCLUDE_ASM(func_801EF3B8);
 
 MATCH void func_801EF540(void) {
-    s32 temp_a0;
-    s32 temp_v0;
-    u8  temp_v0_2;
+    s32 angle;
+    s32 phase;
+    u8  count;
 
-    temp_v0        = (g_Task->unk_09 + g_Task->unk_0B) & 0x3F;
-    SP_REF(s16, 2) = (temp_v0 << 6);
-    temp_a0        = g_Task->unk_14 + ((rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
-    g_Task->unk_0C = temp_a0;
-    g_Task->pos.x.fixed += (rsin(temp_a0) * 0x7000) >> 0xC;
+    phase          = (g_Task->unk_09 + g_Task->param.unk_0B) & 0x3F;
+    SP_REF(s16, 2) = BMAGIC_PHASE_ANGLE(phase);
+    angle          = g_Task->unk_14 + ((rsin((s16)BMAGIC_PHASE_ANGLE(phase)) * 0x12C) >> 0xC);
+    g_Task->unk_0C = angle;
+    g_Task->pos.x.fixed += (rsin(angle) * 0x7000) >> 0xC;
     g_Task->pos.y.fixed += (rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
     func_800AF764();
     func_801EF7E8();
-    temp_v0_2      = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v0_2;
-    if ((temp_v0_2 & 0xFF) == 0x10) {
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x10) {
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801EF660(void) {
-    s32 temp_a0;
-    s32 temp_v0;
-    u8  temp_v0_2;
+    s32 angle;
+    s32 phase;
+    u8  timer_next;
 
-    temp_v0        = (g_Task->unk_09 + g_Task->unk_0B) & 0x3F;
-    SP_REF(s16, 2) = (temp_v0 << 6);
-    temp_a0        = g_Task->unk_14 + ((rsin((s16)(temp_v0 << 6)) * 0x12C) >> 0xC);
-    g_Task->unk_0C = temp_a0;
-    g_Task->pos.x.fixed += (rsin(temp_a0) * 0x7000) >> 0xC;
+    phase          = (g_Task->unk_09 + g_Task->param.unk_0B) & 0x3F;
+    SP_REF(s16, 2) = BMAGIC_PHASE_ANGLE(phase);
+    angle          = g_Task->unk_14 + ((rsin((s16)BMAGIC_PHASE_ANGLE(phase)) * 0x12C) >> 0xC);
+    g_Task->unk_0C = angle;
+    g_Task->pos.x.fixed += (rsin(angle) * 0x7000) >> 0xC;
     g_Task->pos.y.fixed += (rcos(g_Task->unk_0C) * 0x7000) >> 0xC;
     func_800AF764();
     func_801EF7E8();
     g_Task->unk_09 += 1;
-    temp_v0_2     = g_Task->timer - 1;
-    g_Task->timer = temp_v0_2;
-    if (!(temp_v0_2 & 0xFF)) {
-        D_801EB4E0->unk_0B -= 1;
+    timer_next    = g_Task->timer - 1;
+    g_Task->timer = timer_next;
+    if (!(timer_next & BYTE_MASK)) {
+        D_801EB4E0->param.unk_0B -= 1;
         g_Task->header.flags = 0;
         g_Task->header.mode  = 0;
         g_Task->header.step  = 0;

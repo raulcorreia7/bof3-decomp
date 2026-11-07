@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC7C);
 
 MATCH void func_801EEF44(void) {
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         func_800AEF98(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800A9820(g_BattleTargetSelector);
@@ -47,9 +47,9 @@ MATCH void func_801EF0F0(void) {
     PartyBattler* work;
 
     work = (PartyBattler*)D_801EB4E0;
-    step = work->unk_0B;
+    step = work->param.unk_0B;
     if (step < 2) {
-        work->unk_0B        = step - 1;
+        work->param.unk_0B  = step - 1;
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -87,7 +87,7 @@ MATCH void func_801EF7F8(void) {
 }
 
 MATCH void func_801EF870(void) {
-    if (D_801EB4E0->unk_0B < 3U) {
+    if (D_801EB4E0->param.unk_0B < 3U) {
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }

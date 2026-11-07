@@ -65,12 +65,12 @@ MATCH void func_801EF788(void) {
 }
 
 MATCH void func_801EF814(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
-        D_801EB4E0->unk_0B -= 1;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        D_801EB4E0->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
 }

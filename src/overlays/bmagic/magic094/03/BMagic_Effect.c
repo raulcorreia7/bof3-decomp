@@ -20,7 +20,7 @@ MATCH void func_801EED60(void) {
 
     g_Task->unk_2E.half = g_BattleSelectedActor->unk_2E.half;
     g_Task->unk_30.half = g_BattleSelectedActor->unk_30.half - 0x10;
-    if (g_Task->unk_0B == 0xFF) {
+    if (g_Task->param.unk_0B == 0xFF) {
         BMAGIC_RELEASE_TARGET_AND_PLAY();
     }
 }
@@ -53,12 +53,12 @@ MATCH void func_801EF078(void) {
 }
 
 MATCH void func_801EF0FC(void) {
-    u8 temp_v1;
+    u8 count;
 
-    temp_v1        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x20) {
-        D_801EB4E0->unk_0B = 0xFF;
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x20) {
+        D_801EB4E0->param.unk_0B = 0xFF;
         func_801E5988();
     }
 }

@@ -4,7 +4,7 @@ MATCH void Effect_StepOnOwnTickFlag(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->unk_0B & 0x80) {
+    if (work->param.unk_0B & 0x80) {
         work->header.step++;
     }
 }

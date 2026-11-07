@@ -36,14 +36,7 @@ extern u32            D_801F6C00;
 extern Callback       D_801FE3D8[];
 extern Callback       D_801FE3E4[];
 extern SceneFunc      D_801FE42C[];
-extern u8             D_801FE464;
-extern u8             D_801FE465;
-extern u8             D_801FE466;
-extern u8             D_801FE467;
-extern u8             D_801FE468;
-extern u8             D_801FE469;
-extern u8             D_801FE46A;
-extern u8             D_801FE46B;
+extern u8             D_801FE464[8];
 extern Scena06Handler D_801FE46C[];
 
 #endif

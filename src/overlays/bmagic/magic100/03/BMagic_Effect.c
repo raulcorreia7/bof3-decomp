@@ -18,14 +18,14 @@ NON_MATCHING void func_801EEC70(void) {
     u32           value;
     s32           span;
 
-    src               = BATTLE_ACTIVE_WORK;
-    g_Task->facing    = src->facing;
-    g_Task->pos.x.raw = src->pos.x.raw;
-    g_Task->pos.y.raw = src->pos.y.raw;
-    span              = g_BattleSelectedActor->pos.z.raw;
-    g_Task->unk_09    = 0;
-    g_Task->pos.z.raw = span;
-    g_Task->unk_0B    = 0;
+    src                  = BATTLE_ACTIVE_WORK;
+    g_Task->facing       = src->facing;
+    g_Task->pos.x.raw    = src->pos.x.raw;
+    g_Task->pos.y.raw    = src->pos.y.raw;
+    span                 = g_BattleSelectedActor->pos.z.raw;
+    g_Task->unk_09       = 0;
+    g_Task->pos.z.raw    = span;
+    g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
     offset  = (Battle_AllocEffect(1, 0xA) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     counter = 0;
@@ -36,7 +36,7 @@ NON_MATCHING void func_801EEC70(void) {
         FIELD(u8, D_801EC339, offset)            = (u8)value;
         work                                     = g_Task;
         FIELD(PartyBattler*, D_801EC3A4, offset) = work;
-        work->unk_0B += 1;
+        work->param.unk_0B += 1;
         counter += 1;
         value += 2;
     } while (counter < 8);

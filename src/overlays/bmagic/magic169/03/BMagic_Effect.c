@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEEB0);
 MATCH void func_801EEFE0(void) {
     u8 timer;
 
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         timer          = g_Task->unk_09 - 1;
         g_Task->unk_09 = timer;
         if (!(timer & 0xFF)) {
@@ -62,8 +62,8 @@ INCLUDE_ASM(func_801EF4FC);
 INCLUDE_ASM(func_801EF688);
 
 MATCH void func_801EF7D0(void) {
-    if (g_Task->unk_0B == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B -= 1;
+    if (g_Task->param.unk_0B == 0) {
+        BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         if (func_801DB524(g_Task->unk_04) & 0xFF) {
             func_800A9820(g_Task->unk_04);
         }

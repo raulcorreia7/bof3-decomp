@@ -55,16 +55,16 @@ MATCH void func_801EF0D4(void) {
 }
 
 MATCH void func_801EF134(void) {
-    u8             temp_v0;
+    u8             timer_next;
     PartyBattler** selected;
 
     g_Task->unk_09 += 1;
-    temp_v0       = g_Task->timer + 2;
-    g_Task->timer = temp_v0;
-    if ((temp_v0 & 0xFF) == 0x18) {
+    timer_next    = g_Task->timer + 2;
+    g_Task->timer = timer_next;
+    if ((timer_next & BYTE_MASK) == 0x18) {
         selected = &g_BattleSelectedActor;
         GFX_FreePaletteFadeTarget(*selected);
-        g_Task->unk_0B = GFX_AllocPaletteFade(*selected, 0, 0, 0, 1);
+        g_Task->param.unk_0B = GFX_AllocPaletteFade(*selected, 0, 0, 0, 1);
         g_Task->header.step += 1;
     }
 }
@@ -74,15 +74,15 @@ INCLUDE_ASM(func_801EF1F4);
 INCLUDE_ASM(func_801EF320);
 
 MATCH void func_801EF44C(void) {
-    u8 temp_v0;
+    u8 timer_next;
 
     g_Task->unk_09 += 1;
-    temp_v0       = g_Task->timer - 2;
-    g_Task->timer = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    timer_next    = g_Task->timer - 2;
+    g_Task->timer = timer_next;
+    if (!(timer_next & BYTE_MASK)) {
         GFX_FreePaletteFadeTarget(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }

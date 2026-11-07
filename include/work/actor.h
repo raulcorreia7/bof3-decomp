@@ -161,6 +161,7 @@ typedef union ActorParam {
     u8 actor_slot;
     u8 facing;
     u8 scene_event_flag;
+    u8 turn_step;
 } ActorParam;
 
 ASSERT_SIZE(ActorParam, 1);

@@ -532,29 +532,12 @@ shipped containers, not code folders. Where each disc label lives in the tree: [
 
 ### Evidence
 
-A name needs a cited reader, writer or API argument.
+A name needs evidence from a reader, writer, API argument or other source. Record the evidence in
+the commit body. A name without evidence stays an address name or `unk_<OFF>`.
 
-- A function or global carries it in its `config/symbols.toml` row's `source`.
-- A member, type or constant carries it in a short comment beside the declaration:
-  `/* 0x1C */ s16 hp; /* 'HP' row; 0 on KO */`.
-- A name with no evidence stays an address name or `unk_<OFF>`. Each `unk_` name and each header
-  alias without a comment is open work.
-
-Write the evidence as `@source: <kind>:<target> [note]`, in a comment beside the thing or in its
-row's evidence text. One line, one source; a second source is a second line.
-
-| Kind    | Target                                         | Means                             |
-| ------- | ---------------------------------------------- | --------------------------------- |
-| `wiki`  | wiki page and anchor, `data/records#area-data` | the wiki documents it             |
-| `read`  | `Name@0xADDR` of a function that reads it      | the reader proves the role        |
-| `write` | `Name@0xADDR` of a function that writes it     | the writer proves the role        |
-| `api`   | the SDK function that takes it                 | an SDK argument types it          |
-| `ref`   | a reference project and its note               | a community note confirms the use |
-
-```c
-/* @source: read:Battle_RunEvents@0x801DE43C */
-/* @source: wiki:data/records#area-data the reward offsets */
-```
+The `source` field of a function or global's `config/symbols.toml` row describes what it does or
+holds in one short present-tense sentence, using game terms. It does not record callers, addresses,
+implementation details or naming evidence. Leave it out when the role is unknown.
 
 An address name (`func_801D73B4`) spells its address and takes no `@`. Offset and address comments (`/* 0x1C */`, `/* D_80148627 */`) keep their own form.
 
@@ -1023,7 +1006,7 @@ only renames or forwards goes.
 
 A `#define` that only aliases a proven name folds into that name: add or fix the name's `config/symbols.toml`
 row, rename the definition and declaration to it, then delete the macro. Only a name with no
-evidence — no row `source` and no fact comment — goes back to the address.
+evidence goes back to the address.
 
 **Do**
 
@@ -1508,11 +1491,11 @@ A shared body follows these rules:
 - A group is a candidate when its members have equal bytes (exact, or equal after relocations).
   Equal text is not enough.
 - One name covers every copy. The same address gives the same `func_<ADDR>`; otherwise a name needs
-  evidence in `config/symbols.toml`, one row per image at that image's address. Two evidence names on
+  evidence and one `config/symbols.toml` row per image at that image's address. Two names on
   one body stay unshared until one name is chosen. A second copy in one image is `<Name>_<ADDR>` at
   its own address; both definitions stay visible, and each body is the group's statement macro.
 - Bodies that differ share a name only as a role: every member fills the same slot (one installer
-  or caller, one signature), and the row's `source` names the slot. Otherwise each body takes its own
+  or caller, one signature), and the row's `source` describes the shared role. Otherwise each body takes its own
   name.
 - A per-unit compile switch (`TASK_VOLATILE`) stays in the thin `.c`, above the image-header
   include.
@@ -1534,7 +1517,7 @@ back the moment one diverges. The macro forms: [helpers and macros](#helpers-and
 
 A comment says what, never how. It is minimal and high signal: one line, only where a name or a type
 cannot carry the meaning. A comment never retells the code, its history, the evidence or the tools.
-Evidence for a name goes in the commit body and in the `source` of its `config/symbols.toml` row.
+Evidence for a name goes in the commit body. A symbol row describes what it is or does.
 Comments are `/* */` blocks in plain present-tense sentences. Delete a comment that restates a name
 or a type.
 
@@ -1607,8 +1590,8 @@ tracked user (definition, prototypes, uses, `config/`), keeps the address name i
 the unit file. Then prove every touched image with `check-<image>`:
 
 ```sh
-tools/symbol.py rename func_<ADDR> <Name> --image <target> --local --source "<evidence>" --dry-run
-tools/symbol.py rename func_<ADDR> <Name> --image <target> --local --source "<evidence>"
+tools/symbol.py rename func_<ADDR> <Name> --image <target> --local --source "<description>" --dry-run
+tools/symbol.py rename func_<ADDR> <Name> --image <target> --local --source "<description>"
 tools/symbol.py params <Name> old=new ...     # parameter names: definition and prototypes
 ```
 
@@ -1630,7 +1613,7 @@ edit: the link finds the address by itself, with no per-image list to extend and
 g_Task = { addr = 0x1F800044, size = 0x4, source = "..." }
 ```
 
-Rows are written in address order. Keys: `addr`; `type` and `size` for splat; `source` (the evidence);
+Rows are written in address order. Keys: `addr`; `type` and `size` for splat; `source` (what the symbol is or does);
 `alias = true` for a name only the link reads (an SDK data name, a `_nv` view, a name inside
 another row), which splat never sees. Rows that overlap fail unless one of the two is an alias.
 The generator (`tools/bof3/link/symbols.py`) fails with the row and the fix for an unknown key, a

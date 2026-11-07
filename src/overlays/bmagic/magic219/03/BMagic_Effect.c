@@ -51,18 +51,18 @@ MATCH void func_801EF530(void) {
 }
 
 MATCH void func_801EF5DC(void) {
-    u8 temp_v0;
-    u8 temp_v0_2;
+    u8 timer_next;
+    u8 count;
 
     func_8014DAEC();
-    temp_v0 = g_Task->timer;
-    if (temp_v0 != 0) {
-        g_Task->timer = temp_v0 - 1;
+    timer_next = g_Task->timer;
+    if (timer_next != 0) {
+        g_Task->timer = timer_next - 1;
     }
-    temp_v0_2      = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0_2;
-    if (!(temp_v0_2 & 0xFF)) {
-        D_801EB4E0->unk_0B -= 1;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        D_801EB4E0->param.unk_0B -= 1;
         Actor_Clear();
     }
 }

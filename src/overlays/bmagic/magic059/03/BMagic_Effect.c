@@ -118,7 +118,7 @@ MATCH void func_801F012C(void) {
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->param.unk_0B--;
         Actor_Clear();
     }
 }

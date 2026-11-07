@@ -6,8 +6,8 @@ MATCH void Effect_DriftStep(void) {
     u8            timer;
     u8            ticks;
 
-    ticks          = g_Task->unk_0B + 1;
-    g_Task->unk_0B = ticks + (g_Task->unk_09 >> 6);
+    ticks               = g_Task->param.phase + 1;
+    g_Task->param.phase = ticks + (g_Task->unk_09 >> 6);
     if (g_FrameCount & 1) {
         g_Task->timer -= 1;
     }
@@ -20,7 +20,7 @@ MATCH void Effect_DriftStep(void) {
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
     if (timer == 0x30) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }

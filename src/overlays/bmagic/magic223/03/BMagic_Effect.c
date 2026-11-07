@@ -70,7 +70,7 @@ MATCH void func_801EF6E0(void) {
     g_Task->unk_30.half += (cosine * 0x18) >> 0xC;
     g_Task->unk_09 += 1;
     if (g_Task->unk_09 == 0x14) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         Actor_Clear();
     }
 }
