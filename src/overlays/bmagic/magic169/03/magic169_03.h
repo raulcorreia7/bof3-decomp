@@ -6,6 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern s16               D_1F800004;
+void                     Actor_Clear(void);
 extern BMagicEffectFuncs D_801EEC14;
 extern Callback          D_801F0420[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */

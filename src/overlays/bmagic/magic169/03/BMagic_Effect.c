@@ -105,9 +105,56 @@ MATCH void func_801EFA18(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFBC4);
+MATCH void func_801EFBC4(void) {
+    s32  phase;
+    s32  b;
+    s16* angle_cell;
+    u8   count;
 
-INCLUDE_ASM(func_801EFCF4);
+    angle_cell = &D_1F800004;
+    phase      = g_Task->param.unk_0B & 0xF;
+    g_Task->unk_0C += 2;
+    *angle_cell         = phase << 8;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_Task->unk_0C;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_Task->unk_0C;
+    if (g_Task->unk_20 < g_Task->unk_14) {
+        b              = g_Task->unk_14 - g_Task->unk_20;
+        g_Task->unk_14 = b;
+        g_Task->pos.z.fixed += b;
+    }
+    count          = g_Task->unk_09 + 2;
+    g_Task->unk_09 = count;
+    if (count == 0x10) {
+        g_Task->header.step++;
+    }
+}
+
+MATCH void func_801EFCF4(void) {
+    s32  phase;
+    s32  b;
+    s16* angle_cell;
+    u8   count;
+
+    angle_cell = &D_1F800004;
+    phase      = g_Task->param.unk_0B & 0xF;
+    g_Task->unk_0C += 1;
+    *angle_cell         = phase << 8;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_Task->unk_0C;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_Task->unk_0C;
+    if (g_Task->unk_20 < g_Task->unk_14) {
+        b              = g_Task->unk_14 - g_Task->unk_20;
+        g_Task->unk_14 = b;
+        g_Task->pos.z.fixed += b;
+    }
+    if (g_FrameCount & 1) {
+        count          = g_Task->unk_09 - 1;
+        g_Task->unk_09 = count;
+        if (count == 0) {
+            g_BattleEffectBattler->param.unk_0B -= 1;
+            Actor_Clear();
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EFE3C);
 
