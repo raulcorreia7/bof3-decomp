@@ -64,6 +64,15 @@ static inline void GFX_AddDrawMode(s32 tpage) {
     GFX_AddPrim(1, 0xC);
 }
 
+/* The same draw mode with dithering on. */
+static inline void GFX_AddDitheredDrawMode(s32 tpage) {
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (tpage), 0);
+    GFX_AddPrim(1, 0xC);
+}
+
+/* The shared cursor viewed as the primitive it is about to receive. */
+#define GFX_CURSOR(type) ((type*)g_GfxPrimCursor)
+
 /* Begin a semi-transparent, neutral-colour sprite at (x, y) on the shared
  * cursor and return it. */
 static inline SPRT* GfxBeginSprite(s32 x, s32 y, u32 clut) {

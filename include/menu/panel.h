@@ -118,6 +118,11 @@ typedef union MenuListSource {
 
 ASSERT_SIZE(MenuListSource, 2);
 
+/* The text shade a menu row is drawn with (UI_DrawText and func_801AF930). */
+#define MENU_SHADE_NORMAL    0
+#define MENU_SHADE_SELECTED  2
+#define MENU_SHADE_DIM       7
+
 /* MenuListPanel.flags: two cursor-tab bits, and a frame countdown in the high
  * nibble that the drawer steps down once per draw. */
 #define MENU_LIST_FLAG_TAB_1 0x01
@@ -131,12 +136,12 @@ ASSERT_SIZE(MenuListSource, 2);
  * is not proven; 0x24 is the last proven cell, the names pointer. */
 typedef struct MenuListPanel {
     u8             pad_00[4];
-    UPoint2D       pos;      /* 0x04 */
-    u8             unk_08;   /* 0x08 the ability list passes it to func_801AF5B0 */
-    u8             flags;    /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
-    MenuListSource source;   /* 0x0A */
-    u8             unk_0C;   /* 0x0C a row the drawer draws an icon for */
-    u8             selected; /* 0x0D the selected row; the drawer shades it 2 */
+    UPoint2D       pos;         /* 0x04 */
+    u8             use_context; /* 0x08 the ability list passes it to func_801AF5B0: 1 outside battle, 2 in battle */
+    u8             flags;       /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
+    MenuListSource source;      /* 0x0A */
+    u8             unk_0C;      /* 0x0C a row the drawer draws an icon for */
+    u8             selected;    /* 0x0D the selected row; the drawer shades it 2 */
     u8             pad_0E[2];
     s16            unk_10; /* 0x10 tested against zero for the extra frame marks */
     u8             pad_12[0xE];
