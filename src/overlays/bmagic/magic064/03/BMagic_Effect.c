@@ -216,6 +216,7 @@ MATCH void func_801F0310(void) {
     func_801F03D8();
 }
 
+/* blocker: a 0x1C-stride record table (D_801F13B4, flags byte at 0, 0xC0 rows) has no record type in this image; needs: type. */
 INCLUDE_ASM(func_801F0364);
 
 /* blocker: the loop keeps the constants 1 and 6 in registers; first diff: addiu a3 against the table address at 0x801F03E0. */

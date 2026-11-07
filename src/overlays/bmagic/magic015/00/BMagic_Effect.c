@@ -69,7 +69,18 @@ MATCH void func_801EF9E4(void) {
 
 INCLUDE_ASM(func_801EFA28);
 
-INCLUDE_ASM(func_801EFAE4);
+MATCH void func_801EFAE4(void) {
+    if (g_BattleActiveBattler < BATTLE_PARTY_SLOT_COUNT) {
+        g_Task->header.step += 1;
+    } else {
+        g_Task->header.step += 2;
+    }
+    g_Task->unk_27      = g_BattleEffectBattler->unk_27;
+    g_Task->unk_2B      = 1;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+}
 
 MATCH void func_801EFB90(void) {
     if ((func_8014DAEC() & BYTE_MASK) != 0u) {
@@ -79,6 +90,7 @@ MATCH void func_801EFB90(void) {
 
 INCLUDE_ASM(func_801EFBD8);
 
+/* Blocker: the z halfword at +0x3E is loaded unsigned (lhu) and summed with the 0x14 cell; COORD_INT is s16, so it gives lh. Same blocker as func_801F0DB4. */
 INCLUDE_ASM(func_801EFCC4);
 
 MATCH void func_801EFD7C(void) {
@@ -91,6 +103,7 @@ MATCH void func_801EFD7C(void) {
     }
 }
 
+/* blocker: the halfword at +0x3E (the z-span halfword, upper half of pos.z) has no PartyBattler member; needs: type. */
 INCLUDE_ASM(func_801EFDE8);
 
 MATCH void func_801EFE84(void) {
@@ -246,6 +259,7 @@ MATCH void func_801F0D48(void) {
     g_Task->header.step += 1;
 }
 
+/* Blocker: retail reads the z halfword at +0x3E unsigned (lhu) and loads the 0x14 cell before the 0x09 decrement; COORD_INT is s16 (lh). Needs an unsigned halfword view of pos.z. */
 INCLUDE_ASM(func_801F0DB4);
 
 INCLUDE_ASM(func_801F0E54);

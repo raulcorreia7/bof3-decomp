@@ -44,6 +44,7 @@ MATCH void func_801EF1E0(void) {
 
 INCLUDE_ASM(func_801EF284);
 
+/* blocker: the table D_801EFA6C (halfword per param.unk_0B) and the stride arithmetic have no symbol row or record type in this image; needs: type. */
 INCLUDE_ASM(func_801EF354);
 
 MATCH void func_801EF3DC(void) {
