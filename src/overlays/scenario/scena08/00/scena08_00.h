@@ -44,4 +44,6 @@ void func_801F8964(s32 arg0);
 
 void func_801FA19C(WorldPos* pos, s32* vx);
 
+void func_801F9F8C(WorldPos* pos, s32 arg1, s32 arg2, s32 arg3);
+
 #endif

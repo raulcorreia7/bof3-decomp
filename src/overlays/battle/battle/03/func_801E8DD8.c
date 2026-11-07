@@ -27,7 +27,7 @@ MATCH void func_801E8DD8(void) {
     } else {
         row = slot[5];
         row -= 3;
-        offset_x            = g_BattleEnemyBattlers[row].unk_E2;
+        offset_x            = g_BattleEnemyBattlers[row].panel_offset_x;
         g_Task->unk_2E.half = *(u16*)((slot + 0x2Eu)) + offset_x;
         row                 = slot[5];
         row -= 3;

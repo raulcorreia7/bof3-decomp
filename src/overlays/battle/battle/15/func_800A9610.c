@@ -30,10 +30,7 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
             do {
                 slot = i & BYTE_MASK;
                 if (!Battle_SlotIsBlocked(slot)) {
-                    s32 offset;
-
-                    offset             = (slot - BATTLE_PARTY_SLOT_COUNT) * BATTLE_ENEMY_STRIDE;
-                    D_801EB631[offset] = 0xB;
+                    ENEMY_COMBATANT(slot).header.mode = 0xB;
                     ENEMY_COMBATANT(slot).turn.damage_flags.value |= enemy_flags;
                     Battle_SetSlotPending(slot);
                 }
@@ -52,11 +49,8 @@ MATCH void func_800A9610(u8 selector, u16 flags) {
                 g_BattlePartyBattlers[battler].turn.damage_flags.volatile_value |= flags;
                 Battle_SetSlotPending(battler);
             } else {
-                s32 offset;
-
-                battler            = slot;
-                offset             = (battler - BATTLE_PARTY_SLOT_COUNT) * BATTLE_ENEMY_STRIDE;
-                D_801EB631[offset] = 0xB;
+                battler                              = slot;
+                ENEMY_COMBATANT(battler).header.mode = 0xB;
                 ENEMY_COMBATANT(battler).turn.damage_flags.value |= flags;
                 Battle_SetSlotPending(battler);
             }

@@ -20,7 +20,16 @@ MATCH void func_801F6F8C(void) {
     work->header.mode += 1;
 }
 
-INCLUDE_ASM(func_801F6FC4);
+MATCH void func_801F6FC4(void) {
+    if ((g_FrameCount & 3) == 0) {
+        func_801F802C();
+    }
+    func_801F7E14();
+    g_Task->vx = (g_Task->vx + 0x80) & 0xFFF;
+    if (--g_Task->timer == 0) {
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801F7048(void) {
     if (func_801F7E14() & BYTE_MASK) {
@@ -36,25 +45,34 @@ INCLUDE_ASM(func_801F70C0);
 
 INCLUDE_ASM(func_801F7164);
 
+/* Hint: reads D_801492DA as lhu for the scroll argument and as lh for the compare, so one signed type fails either way. */
 INCLUDE_ASM(func_801F7200);
 
 INCLUDE_ASM(func_801F7268);
 
 INCLUDE_ASM(func_801F7320);
 
-/* Hint: reads screen_x and screen_y as signed halves (lh); the draft with u16 members loads lhu. The call to func_801F85F0 also lands 4 bytes off. */
+/* Hint: reads screen_x and screen_y as signed halves (lh); the Actor members are u16, so the draft loads lhu. */
 INCLUDE_ASM(func_801F73D4);
 
 INCLUDE_ASM(func_801F743C);
 
 INCLUDE_ASM(func_801F74E0);
 
-INCLUDE_ASM(func_801F757C);
+MATCH void func_801F757C(void) {
+    func_801F8534();
+    g_Task->script_pc += rand() & 0xFF;
+    if (g_ScriptVars[0] == 0xB) {
+        g_Task->unk_5A = 0x20;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F75E4);
 
 INCLUDE_ASM(func_801F7688);
 
+/* Hint: same shape as func_801F73D4 (lh of screen_x and screen_y, u16 members); here the 0x32 update is -0x10. */
 INCLUDE_ASM(func_801F774C);
 
 INCLUDE_ASM(func_801F77B4);
@@ -259,6 +277,7 @@ MATCH void func_801F8CDC(Actor* actor) {
 #include "overlays/scenario/Actor_Wait.h"
 
 /* blocker: row load order; first diff: +0x10 lw v1,20(a2) (candidate) against lbu v1,3(a2) (retail). */
+/* Hint: steps a 3-byte-header record: byte 0x02 counts down, 0x03 adds 6, word 0x08 adds 0x40000, word 0x14 accumulates 0x08; the record type with word 0x08 and 0x14 is not named yet. */
 INCLUDE_ASM(func_801F8D4C);
 
 INCLUDE_ASM(func_801F8D98);
@@ -333,7 +352,15 @@ MATCH void func_801F9C00(void) {
     SND_PlayCue(EMI_CUE_ID(2, 5));
 }
 
-INCLUDE_ASM(func_801F9C58);
+MATCH void func_801F9C58(void) {
+    g_Task->pos.y.fixed += 0x10000;
+    g_Task->pos.z.fixed += g_Task->vz;
+    g_Task->vz -= 0x200000;
+    func_801F9F8C(&g_Task->pos, 0x20, 8, 0);
+    if (g_Task->pos.x.fixed == 0xF0000) {
+        func_80196070();
+    }
+}
 
 MATCH void func_801F9CE0(void) {
     Actor* work;
@@ -347,7 +374,15 @@ MATCH void func_801F9CE0(void) {
     SND_PlayCue(EMI_CUE_ID(2, 10));
 }
 
-INCLUDE_ASM(func_801F9D30);
+MATCH void func_801F9D30(void) {
+    g_Task->pos.y.fixed += 0x10000;
+    g_Task->pos.z.fixed += g_Task->vz;
+    g_Task->vz -= 0x200000;
+    func_801F9F8C(&g_Task->pos, 0x20, 8, 4);
+    if (g_Task->pos.y.fixed > 0x18FFFF) {
+        func_80196070();
+    }
+}
 
 MATCH void func_801F9DBC(void) {
     SYS_DISPATCH_TASK(D_801FE938, 1, g_Task);

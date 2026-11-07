@@ -48,9 +48,8 @@ MATCH void func_801D3624(void) {
             work                  = (PartyBattler*)(g_BattleEnemies + row_offset);
             D_80146390            = g_BattleEnemies + 0xF4 + row_offset;
             g_BattleSelectedActor = work;
-            row_offset            = (kind_index - 3) * 0x118;
-            D_80146386            = work->unk_2E.half + D_801EB712[row_offset];
-            D_80146388            = work->unk_30.half + D_801EB713[row_offset];
+            D_80146386            = work->unk_2E.half + ENEMY_COMBATANT(kind_index).panel_offset_x;
+            D_80146388            = work->unk_30.half + ENEMY_COMBATANT(kind_index).panel_offset_y;
         }
         D_8014638A = FIELD(u16, work, 0x32);
     }

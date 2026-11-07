@@ -51,7 +51,13 @@ MATCH void func_801D0D7C(void) {
     work[1]++;
 }
 
-INCLUDE_ASM(func_801D0DAC);
+MATCH void func_801D0DAC(void) {
+    Scene_DrawRedGradient(-(g_Task->timer << 5) & 0xFF);
+    if (--g_Task->timer == 0) {
+        g_Task->timer = 8;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D0E38);
 
@@ -81,7 +87,14 @@ MATCH void func_801D1068(void) {
 
 INCLUDE_ASM(func_801D10AC);
 
-INCLUDE_ASM(func_801D11C8);
+MATCH void func_801D11C8(void) {
+    g_Task->pos.z.fixed += 0xFF000000;
+    func_801D230C();
+    if (--g_Task->timer == 0) {
+        g_Task->timer = 4;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D1250);
 
@@ -112,7 +125,15 @@ MATCH void func_801D1420(void) {
     g_Task->header.mode = g_Task->header.mode + 1;
 }
 
-INCLUDE_ASM(func_801D1460);
+MATCH void func_801D1460(void) {
+    g_Task->timer += 0x10;
+    if (g_Task->timer == 0) {
+        func_801D23AC(0xFF);
+        g_Task->header.mode += 1;
+    } else {
+        func_801D23AC(g_Task->timer);
+    }
+}
 
 MATCH void func_801D14DC(void) {
     g_Task->timer -= 0x10;
