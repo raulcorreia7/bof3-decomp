@@ -1,5 +1,3 @@
 #include "area185_13.h"
 
-MATCH void func_801F3020(void) {
-    WORLD_SELECT_ANSWER_MESSAGE(0x8A, 0xFFFF);
-}
+#include "overlays/area/FairyCasino_AnswerPickNumbersRulesUnderstood.h"

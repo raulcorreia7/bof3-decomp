@@ -1,6 +1,5 @@
 #include "battle_15.h"
 
-extern u16 D_80145F20[][0xA0];
 extern u16 D_801EB6D0[][0x8C];
 
 /* Shows the selected battler's damage step and adjusts the HP bar.
@@ -19,7 +18,7 @@ NON_MATCHING void func_8009E248(void) {
         if (BATTLER_IS_PLAYER(g_BattleTarget)) {
             if (!(g_BattlePartyBattlers[g_BattleTarget].turn.damage_flags.volatile_value &
                   COMBATANT_FLAG_DAMAGE_IMMUNE)) {
-                hp = D_80145F18[g_BattleTarget][0];
+                hp = g_BattlePartyBattlers[g_BattleTarget].chr.hp;
             } else {
                 hp = 0;
             }
@@ -35,10 +34,12 @@ NON_MATCHING void func_8009E248(void) {
         g_BattleTargetRecord->hp_change = hp_bar;
         g_BattleAction->unk_08          = 1;
         if (id < 3) {
-            if (D_80145F20[id][0] < D_80145F18[id][0] + hp_bar) {
+            if (g_BattlePartyBattlers[id].chr.stats.max_hp < g_BattlePartyBattlers[id].chr.hp + hp_bar) {
                 g_BattleAction->unk_08 |= 4;
             }
-            func_800AAC88((s16)-Char_AddPoints(&D_80145F18[id][0], D_80145F20[id][0], hp_bar), id);
+            func_800AAC88((s16)-Char_AddPoints(&g_BattlePartyBattlers[id].chr.hp,
+                                               g_BattlePartyBattlers[id].chr.stats.max_hp, hp_bar),
+                          id);
         } else {
             enemy = id - 3;
             if (D_801EB6D0[enemy][0] < D_801EB6C4[enemy][0] + hp_bar) {

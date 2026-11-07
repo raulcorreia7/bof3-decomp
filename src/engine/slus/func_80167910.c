@@ -49,16 +49,13 @@ MATCH void func_80167910(void) {
     poly->v0 = poly->v1 + 12;
     poly->v2 = poly->v0;
     setRGB0(poly, 128, 128, 128);
-    poly->y1 = poly->y0;
-    poly->y2 = poly->y0 + 24;
-    poly->y3 = poly->y2;
-    poly->u2 = poly->u0 + 24;
-    poly->u3 = poly->u2;
-    poly->v3 = poly->v1;
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    poly->tpage = 0xF;
+    poly->y1    = poly->y0;
+    poly->y2    = poly->y0 + 24;
+    poly->y3    = poly->y2;
+    poly->u2    = poly->u0 + 24;
+    poly->u3    = poly->u2;
+    poly->v3    = poly->v1;
+    poly->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     poly->clut  = 0x7802;
     if (!(g_Task->param.unk_0B & 1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0x28);

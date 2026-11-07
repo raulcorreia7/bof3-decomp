@@ -1,6 +1,7 @@
 #include "area175_13.h"
 
-MATCH void func_801F3D60(void) {
+/* func_801F3D60 */
+MATCH void FairyNickname_AnswerWhoGivesNicknames(void) {
     if (MENU_SELECTION_ARMED()) {
         D_801F294C = 2;
     } else {

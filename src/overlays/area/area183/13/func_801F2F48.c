@@ -1,4 +1,3 @@
 #include "area183_13.h"
 
-MATCH void func_801F2F48(void) {
-}
+#include "overlays/area/FairyCasino_AnswerNumbersGiveUp.h"

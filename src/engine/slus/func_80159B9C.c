@@ -20,9 +20,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     LINE_F4*  line;
     RECT*     rect;
 
-    if (GetGraphType() != 1)
-        GetGraphType();
-    GFX_AddDrawMode(0xF);
+    GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     setXY0(tile, x1, y1);
@@ -39,9 +37,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     rect->pos.x.raw = 0;
     rect->pos.y.raw = 240;
     setWH(rect, 16, 16);
-    if (GetGraphType() != 1)
-        GetGraphType();
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, rect);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), rect);
     GFX_AddPrim(1, 0xC);
 
     poly = (POLY_GT4*)g_GfxPrimCursor;
@@ -64,9 +60,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, u8 w, u8 h) {
     rect->pos.x.raw = 0;
     rect->pos.y.raw = 0;
     setWH(rect, 256, 256);
-    if (GetGraphType() != 1)
-        GetGraphType();
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 5, rect);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 320, 0), rect);
     GFX_AddPrim(1, 0xC);
 
     line = (LINE_F4*)g_GfxPrimCursor;

@@ -6,8 +6,7 @@
  */
 /* FAKE: _nv weak views avoid the andi and hoist the loads out of the prologue. */
 /* FAKE: a second symbol forces the separate %hi/%lo load retail has. */
-extern u8           D_801CA71B[];
-extern volatile u16 D_80145F26[][160];
+extern u8 D_801CA71B[];
 
 MATCH void func_800A0D64(void) {
     s32         index;
@@ -22,7 +21,7 @@ MATCH void func_800A0D64(void) {
     MATCH_BARRIER();
     battler = g_BattleTarget_nv;
     if (BATTLER_IS_PLAYER(battler)) {
-        g_BattleTargetRecord->hp_change -= D_80145F26[battler][0];
+        g_BattleTargetRecord->hp_change -= g_BattlePartyBattlers[battler].chr.stats.defense;
     } else {
         g_BattleTargetRecord->hp_change -= ENEMY_COMBATANT(battler).stats.defense;
     }
