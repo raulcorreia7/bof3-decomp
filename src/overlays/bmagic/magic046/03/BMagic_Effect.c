@@ -15,6 +15,7 @@ MATCH void func_801EEF70(void) {
 }
 
 MATCH void func_801EEFB4(void) {
+    /* Retail dispatches a stack copy of the handlers. */
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC00.steps;
@@ -60,6 +61,7 @@ MATCH void func_801EF304(void) {
 }
 
 MATCH void func_801EF324(void) {
+    /* Retail dispatches a stack copy of the handlers. */
     BattleHandlerTable3 handlers;
 
     handlers = D_801EEC1C;
