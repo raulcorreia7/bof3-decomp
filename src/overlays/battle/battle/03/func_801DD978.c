@@ -15,7 +15,7 @@ MATCH void func_801DD978(void) {
     max = 0u;
     for (slot = 3u; slot < 11u; slot += 1u) {
         if (Battle_SlotIsBlocked(slot & BYTE_MASK) == 0u) {
-            value = ENEMY_COMBATANT((slot & BYTE_MASK)).power;
+            value = ENEMY_COMBATANT((slot & BYTE_MASK)).level;
             if (max < value) {
                 max = value;
             }
@@ -26,7 +26,7 @@ MATCH void func_801DD978(void) {
     result = 0u;
     for (slot = 3u; slot < 11u; slot += 1u) {
         if (Battle_SlotIsBlocked(slot & BYTE_MASK) == 0u) {
-            first = ENEMY_COMBATANT((slot & BYTE_MASK)).power;
+            first = ENEMY_COMBATANT((slot & BYTE_MASK)).level;
             if (max == first) {
                 base = ENEMY_COMBATANT((slot & BYTE_MASK)).hp;
                 if (base <= min) {
