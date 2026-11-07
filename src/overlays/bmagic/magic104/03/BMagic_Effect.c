@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC80);
 
 MATCH void func_801EEE7C(void) {
-    if (g_Task->unk_0B == 7) {
+    if (g_Task->param.unk_0B == 7) {
         g_Task->unk_09 = 8;
         g_Task->header.mode += 1;
     }
@@ -18,7 +18,7 @@ MATCH void func_801EEE7C(void) {
 INCLUDE_ASM(func_801EEEC0);
 
 MATCH void func_801EF03C(void) {
-    if (g_Task->unk_0B == 7) {
+    if (g_Task->param.unk_0B == 7) {
         func_800A9820(g_BattleTargetSelector);
         g_BattleState |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
@@ -41,17 +41,17 @@ MATCH void func_801EF0E0(void) {
 }
 
 MATCH void func_801EF178(void) {
-    s32 var_a0;
-    u8  temp_v0;
+    s32 cue;
+    u8  timer_next;
 
-    temp_v0       = g_Task->timer - 1;
-    g_Task->timer = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
-        var_a0 = 0x100;
-        if (g_Task->unk_0B & 1) {
-            var_a0 = 0x101;
+    timer_next    = g_Task->timer - 1;
+    g_Task->timer = timer_next;
+    if (!(timer_next & BYTE_MASK)) {
+        cue = 0x100;
+        if (g_Task->param.unk_0B & 1) {
+            cue = 0x101;
         }
-        SND_QueueSelectionFx(var_a0);
+        SND_QueueSelectionFx(cue);
         g_Task->unk_09 = 0;
         g_Task->timer  = 0;
         g_Task->header.step += 1;
@@ -91,8 +91,8 @@ MATCH void func_801EF2F8(void) {
     work         = g_Task;
     work->unk_09 = work->unk_09 + 1;
     if (work->unk_09 == 0x18) {
-        active         = BATTLE_ACTIVE_WORK;
-        active->unk_0B = g_Task->unk_0B;
+        active               = BATTLE_ACTIVE_WORK;
+        active->param.unk_0B = g_Task->param.unk_0B;
         func_801E5988();
     }
 }
@@ -152,7 +152,7 @@ MATCH void func_801F034C(void) {
     COORD_INT(work->pos.z) -= 0x40;
     work->unk_09 = next;
     if (next == 0) {
-        D_801EB4E0->unk_0B = g_Task->unk_0B;
+        D_801EB4E0->param.unk_0B = g_Task->param.unk_0B;
         func_801E5988();
     }
 }

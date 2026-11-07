@@ -11,16 +11,16 @@ MATCH void func_801EEC04(void) {
 
 MATCH void func_801EEC5C(void) {
     PartyBattler* src;
-    u32           offset;
+    u32           slot;
 
-    src                                      = g_BattleSelectedActor;
-    offset                                   = (Battle_AllocEffect(1, 0x1A) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
-    FIELD(PartyBattler*, D_801EC3A4, offset) = g_Task;
-    FIELD(u8, D_801EC338, offset)            = src->facing;
-    FIELD(Coord, D_801EC364, offset)         = src->pos.x.fixed;
-    FIELD(Coord, D_801EC368, offset)         = src->pos.y.fixed;
-    FIELD(Coord, D_801EC36C, offset)         = src->pos.z;
-    g_Task->unk_0B                           = 0;
+    src                                = g_BattleSelectedActor;
+    slot                               = Battle_AllocEffect(1, 0x1A) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].unk_08       = src->facing;
+    g_BattleEffects[slot].pos.x.fixed  = src->pos.x.fixed;
+    g_BattleEffects[slot].pos.y.fixed  = src->pos.y.fixed;
+    g_BattleEffects[slot].pos.z        = src->pos.z;
+    g_Task->param.unk_0B               = 0;
     g_Task->header.mode += 1;
 }
 
@@ -58,12 +58,12 @@ MATCH void func_801EEE0C(void) {
     } else {
         battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
     }
-    g_Task->pos.x.fixed = battler->pos.x.fixed;
-    g_Task->pos.y.fixed = battler->pos.y.fixed;
-    g_Task->pos.z.fixed = battler->pos.z.fixed + TO_COORD(192);
-    g_Task->unk_0B      = 0;
-    g_Task->unk_09      = 0;
-    g_Task->timer       = 0;
+    g_Task->pos.x.fixed  = battler->pos.x.fixed;
+    g_Task->pos.y.fixed  = battler->pos.y.fixed;
+    g_Task->pos.z.fixed  = battler->pos.z.fixed + TO_COORD(192);
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 0;
     g_Task->header.mode += 1;
     SND_QueueSelectionFx(0x100);
 }
@@ -107,12 +107,12 @@ MATCH void func_801EF0E0(void) {
 }
 
 MATCH void func_801EF130(void) {
-    u8 temp_v1;
+    u8 timer_next;
 
-    temp_v1       = g_Task->timer + 1;
-    g_Task->timer = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x80) {
-        D_801EB4E0->unk_0B = 0xFF;
+    timer_next    = g_Task->timer + 1;
+    g_Task->timer = timer_next;
+    if ((timer_next & BYTE_MASK) == 0x80) {
+        D_801EB4E0->param.unk_0B = 0xFF;
         func_801E5988();
     }
 }

@@ -101,8 +101,8 @@ MATCH void func_801F71DC(void) {
     work->tint.bytes.unk_5F = 0;
     work->tint.bytes.unk_5E = 0;
     work->tint.bytes.unk_5D = 0;
-    g_Task->unk_0B          = 0x33;
-    Message_StartAreaMessage(g_Task->unk_0B);
+    g_Task->param.unk_0B    = 0x33;
+    Message_StartAreaMessage(g_Task->param.unk_0B);
     g_GameStateIndex    = GAME_REQUEST_MESSAGE;
     g_Task->header.mode = 1;
 }

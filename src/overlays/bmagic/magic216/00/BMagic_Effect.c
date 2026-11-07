@@ -11,14 +11,14 @@ MATCH void func_801EEC70(void) {
     PartyBattler* actor;
     s32           z;
 
-    g_Task->facing    = D_801EB4E0->facing;
-    work              = g_Task;
-    actor             = D_801EB4E0;
-    work->pos.x.fixed = actor->pos.x.fixed;
-    work->pos.y.fixed = actor->pos.y.fixed;
-    z                 = actor->pos.z.fixed;
-    work->unk_0B      = 0;
-    work->pos.z.fixed = z;
+    g_Task->facing     = D_801EB4E0->facing;
+    work               = g_Task;
+    actor              = D_801EB4E0;
+    work->pos.x.fixed  = actor->pos.x.fixed;
+    work->pos.y.fixed  = actor->pos.y.fixed;
+    z                  = actor->pos.z.fixed;
+    work->param.unk_0B = 0;
+    work->pos.z.fixed  = z;
     g_Task->header.mode += 1;
 }
 

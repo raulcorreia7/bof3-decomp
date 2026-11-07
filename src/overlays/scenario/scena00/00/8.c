@@ -1273,7 +1273,7 @@ MATCH void func_801F9BE4(void) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             Game_SetScriptActive();
             Party_HideBattlers();
-            UI_SetMode(1);
+            UI_SetMode(UI_MODE_FADE_IN);
             g_ScriptVars[3]      = 1;
             *counter             = 0;
             g_SceneState.step_05 = 2;
@@ -1283,7 +1283,7 @@ MATCH void func_801F9BE4(void) {
             if (g_ScriptVars[3] != 0x54) {
                 break;
             }
-            UI_SetMode(0);
+            UI_SetMode(UI_MODE_FADE_OUT);
             g_SceneState.step_05 = 3;
             break;
 
@@ -1351,7 +1351,7 @@ MATCH void func_801F9FB8(void) {
         case 0:
             if (g_ScriptVars[2] == 0x30) {
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-                UI_SetMode(1);
+                UI_SetMode(UI_MODE_FADE_IN);
                 id            = Actor_FindFreeSlot();
                 D_1F800000[0] = id;
                 if ((id & BYTE_MASK) != GAME_NONE) {
@@ -1501,7 +1501,7 @@ MATCH void func_801FA27C(void) {
             if (g_ScriptVarsReq.byte != 0xB) {
                 break;
             }
-            UI_SetMode(0);
+            UI_SetMode(UI_MODE_FADE_OUT);
             g_SceneState.step_05 = 9;
             break;
 
@@ -1903,7 +1903,7 @@ MATCH void func_801FB204(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVarsReq.byte = 0x1E;
                 g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
-                UI_SetMode(3);
+                UI_SetMode(UI_MODE_FAST_FADE_IN);
                 g_PartyX               = TO_COORD(47);
                 g_AreaScrollTargetX    = TO_COORD(47);
                 g_PartyY[0]            = TO_COORD(29);
@@ -2098,7 +2098,7 @@ MATCH void func_801FB924(void) {
             if (TIMER_EXPIRED(*counter)) {
                 g_ScriptVars[2] = 0x10;
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-                UI_SetMode(1);
+                UI_SetMode(UI_MODE_FADE_IN);
                 SND_PlayCue(EMI_CUE_ID(2, 3));
                 *counter             = 60;
                 g_SceneState.step_05 = 3;
@@ -2215,7 +2215,7 @@ MATCH void func_801FB924(void) {
             break;
 
         case 8:
-            UI_SetMode(0);
+            UI_SetMode(UI_MODE_FADE_OUT);
             g_SceneState.step_05 = 9;
             break;
 
@@ -2275,46 +2275,47 @@ MATCH void func_801FC01C(void) {
     i    = 0;
     if (*D_80147BDC > 0) {
         do {
-            shift                          = 0xB - RANDOM_MASK(3);
-            slot                           = i * 0x30;
-            rec                            = (SceneSampleRecord*)(i * 0x28 + (s32)base);
-            SCENE_FX(D_801FD030, slot, 0)  = rec->sample_02 << 16;
-            SCENE_FX(D_801FCA90, slot, 0)  = rec->weight_1A << shift;
-            SCENE_FX(D_801FD030, slot, 1)  = rec->sample_04 << 16;
-            SCENE_FX(D_801FCA90, slot, 1)  = rec->weight_1C << shift;
-            SCENE_FX(D_801FD030, slot, 2)  = rec->sample_06 << 16;
-            SCENE_FX(D_801FCA90, slot, 2)  = rec->weight_1E << shift;
-            SCENE_FX(D_801FD030, slot, 3)  = rec->sample_08 << 16;
-            SCENE_FX(D_801FCA90, slot, 3)  = rec->weight_1A << shift;
-            SCENE_FX(D_801FD030, slot, 4)  = rec->sample_0A << 16;
-            SCENE_FX(D_801FCA90, slot, 4)  = rec->weight_1C << shift;
-            SCENE_FX(D_801FD030, slot, 5)  = rec->sample_0C << 16;
-            SCENE_FX(D_801FCA90, slot, 5)  = rec->weight_1E << shift;
-            SCENE_FX(D_801FD030, slot, 6)  = rec->sample_0E << 16;
-            SCENE_FX(D_801FCA90, slot, 6)  = rec->weight_1A << shift;
-            SCENE_FX(D_801FD030, slot, 7)  = rec->sample_10 << 16;
-            SCENE_FX(D_801FCA90, slot, 7)  = rec->weight_1C << shift;
-            SCENE_FX(D_801FD030, slot, 8)  = rec->sample_12 << 16;
-            SCENE_FX(D_801FCA90, slot, 8)  = rec->weight_1E << shift;
-            SCENE_FX(D_801FD030, slot, 9)  = rec->sample_14 << 16;
-            SCENE_FX(D_801FCA90, slot, 9)  = rec->weight_1A << shift;
-            SCENE_FX(D_801FD030, slot, 10) = rec->sample_16 << 16;
-            SCENE_FX(D_801FCA90, slot, 10) = rec->weight_1C << shift;
-            SCENE_FX(D_801FD030, slot, 11) = rec->sample_18 << 16;
-            SCENE_FX(D_801FCA90, slot, 11) = rec->weight_1E << shift;
-            lifetime                       = RANDOM_MASK(7) + 1;
-            SCENE_FX(D_801FD5D0, slot, 0)  = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 1)  = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 2)  = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 3)  = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 4)  = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 5)  = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 6)  = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 7)  = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 8)  = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 9)  = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 10) = lifetime;
-            SCENE_FX(D_801FD5D0, slot, 11) = lifetime;
+            shift                                    = 0xB - RANDOM_MASK(3);
+            slot                                     = i * sizeof(SceneFxSlot);
+            rec                                      = (SceneSampleRecord*)(i * sizeof(SceneSampleRecord) + (s32)base);
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 0)  = rec->sample[0] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 0)  = rec->weight[0] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 1)  = rec->sample[1] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 1)  = rec->weight[1] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 2)  = rec->sample[2] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 2)  = rec->weight[2] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 3)  = rec->sample[3] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 3)  = rec->weight[0] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 4)  = rec->sample[4] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 4)  = rec->weight[1] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 5)  = rec->sample[5] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 5)  = rec->weight[2] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 6)  = rec->sample[6] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 6)  = rec->weight[0] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 7)  = rec->sample[7] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 7)  = rec->weight[1] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 8)  = rec->sample[8] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 8)  = rec->weight[2] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 9)  = rec->sample[9] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 9)  = rec->weight[0] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 10) = rec->sample[10] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 10) = rec->weight[1] << shift;
+            SCENE_FX_CELL(g_SceneFx.accum, slot, 11) = rec->sample[11] << 16;
+            SCENE_FX_CELL(g_SceneFx.delta, slot, 11) = rec->weight[2] << shift;
+
+            lifetime                                     = RANDOM_MASK(7) + 1;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 0)  = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 1)  = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 2)  = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 3)  = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 4)  = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 5)  = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 6)  = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 7)  = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 8)  = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 9)  = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 10) = lifetime;
+            SCENE_FX_CELL(g_SceneFx.life_step, slot, 11) = lifetime;
             i++;
         } while (i < *D_80147BDC);
     }
@@ -2322,7 +2323,7 @@ MATCH void func_801FC01C(void) {
 
 typedef struct SceneLifeRecord {
     u8  unk_00[2];
-    u16 lifetime[12];
+    u16 lifetime[SCENE_FX_CELL_COUNT];
     u8  unk_1A[0x0E];
 } SceneLifeRecord;
 
@@ -2332,66 +2333,52 @@ MATCH void func_801FC3A0(void) {
     u8*                src_base;
     u8*                dst_base;
     s8                 i;
-    s32                slot;
-    s32                off;
-    s32                acc;
+
     src_base = D_80147BD8;
     dst_base = D_80147AA8;
     i        = 0;
     if ((*D_80147BDC) > 0) {
         do {
-            slot              = i * 0x30;
-            off               = i * 0x28;
-            rec               = (SceneSampleRecord*)(off + ((s32)src_base));
-            acc               = (*((s32*)(((u8*)D_801FD030) + slot)) =
-                                     (*((s32*)(((u8*)D_801FD030) + slot))) + (*((s32*)(((u8*)D_801FCA90) + slot))));
-            rec->sample_02    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD034) + slot)) =
-                                     (*((s32*)((&D_801FD034) + slot))) + (*((s32*)((&D_801FCA94) + slot))));
-            rec->sample_04    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD038) + slot)) =
-                                     (*((s32*)((&D_801FD038) + slot))) + (*((s32*)((&D_801FCA98) + slot))));
-            rec->sample_06    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD03C) + slot)) =
-                                     (*((s32*)((&D_801FD03C) + slot))) + (*((s32*)((&D_801FCA9C) + slot))));
-            rec->sample_08    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD040) + slot)) =
-                                     (*((s32*)((&D_801FD040) + slot))) + (*((s32*)((&D_801FCAA0) + slot))));
-            rec->sample_0A    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD044) + slot)) =
-                                     (*((s32*)((&D_801FD044) + slot))) + (*((s32*)((&D_801FCAA4) + slot))));
-            rec->sample_0C    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD048) + slot)) =
-                                     (*((s32*)((&D_801FD048) + slot))) + (*((s32*)((&D_801FCAA8) + slot))));
-            rec->sample_0E    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD04C) + slot)) =
-                                     (*((s32*)((&D_801FD04C) + slot))) + (*((s32*)((&D_801FCAAC) + slot))));
-            rec->sample_10    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD050) + slot)) =
-                                     (*((s32*)((&D_801FD050) + slot))) + (*((s32*)((&D_801FCAB0) + slot))));
-            rec->sample_12    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD054) + slot)) =
-                                     (*((s32*)((&D_801FD054) + slot))) + (*((s32*)((&D_801FCAB4) + slot))));
-            rec->sample_14    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD058) + slot)) =
-                                     (*((s32*)((&D_801FD058) + slot))) + (*((s32*)((&D_801FCAB8) + slot))));
-            rec->sample_16    = acc >> 16;
-            acc               = (*((s32*)((&D_801FD05C) + slot)) =
-                                     (*((s32*)((&D_801FD05C) + slot))) + (*((s32*)((&D_801FCABC) + slot))));
-            rec->sample_18    = acc >> 16;
-            dst               = (SceneLifeRecord*)(off + ((s32)dst_base));
-            dst->lifetime[0]  = dst->lifetime[0] - (*((s32*)(((u8*)D_801FD5D0) + slot)));
-            dst->lifetime[1]  = dst->lifetime[1] - (*((s32*)((&D_801FD5D4) + slot)));
-            dst->lifetime[2]  = dst->lifetime[2] - (*((s32*)((&D_801FD5D8) + slot)));
-            dst->lifetime[3]  = dst->lifetime[3] - (*((s32*)((&D_801FD5DC) + slot)));
-            dst->lifetime[4]  = dst->lifetime[4] - (*((s32*)((&D_801FD5E0) + slot)));
-            dst->lifetime[5]  = dst->lifetime[5] - (*((s32*)((&D_801FD5E4) + slot)));
-            dst->lifetime[6]  = dst->lifetime[6] - (*((s32*)((&D_801FD5E8) + slot)));
-            dst->lifetime[7]  = dst->lifetime[7] - (*((s32*)((&D_801FD5EC) + slot)));
-            dst->lifetime[8]  = dst->lifetime[8] - (*((s32*)((&D_801FD5F0) + slot)));
-            dst->lifetime[9]  = dst->lifetime[9] - (*((s32*)((&D_801FD5F4) + slot)));
-            dst->lifetime[10] = dst->lifetime[10] - (*((s32*)((&D_801FD5F8) + slot)));
-            dst->lifetime[11] = dst->lifetime[11] - (*((s32*)((&D_801FD5FC) + slot)));
+            rec = (SceneSampleRecord*)(i * sizeof(SceneSampleRecord) + ((s32)src_base));
+            dst = (SceneLifeRecord*)(i * sizeof(SceneLifeRecord) + ((s32)dst_base));
+
+            g_SceneFx.accum[i].cell[0] += g_SceneFx.delta[i].cell[0];
+            rec->sample[0] = g_SceneFx.accum[i].cell[0] >> 16;
+            g_SceneFx.accum[i].cell[1] += g_SceneFx.delta[i].cell[1];
+            rec->sample[1] = g_SceneFx.accum[i].cell[1] >> 16;
+            g_SceneFx.accum[i].cell[2] += g_SceneFx.delta[i].cell[2];
+            rec->sample[2] = g_SceneFx.accum[i].cell[2] >> 16;
+            g_SceneFx.accum[i].cell[3] += g_SceneFx.delta[i].cell[3];
+            rec->sample[3] = g_SceneFx.accum[i].cell[3] >> 16;
+            g_SceneFx.accum[i].cell[4] += g_SceneFx.delta[i].cell[4];
+            rec->sample[4] = g_SceneFx.accum[i].cell[4] >> 16;
+            g_SceneFx.accum[i].cell[5] += g_SceneFx.delta[i].cell[5];
+            rec->sample[5] = g_SceneFx.accum[i].cell[5] >> 16;
+            g_SceneFx.accum[i].cell[6] += g_SceneFx.delta[i].cell[6];
+            rec->sample[6] = g_SceneFx.accum[i].cell[6] >> 16;
+            g_SceneFx.accum[i].cell[7] += g_SceneFx.delta[i].cell[7];
+            rec->sample[7] = g_SceneFx.accum[i].cell[7] >> 16;
+            g_SceneFx.accum[i].cell[8] += g_SceneFx.delta[i].cell[8];
+            rec->sample[8] = g_SceneFx.accum[i].cell[8] >> 16;
+            g_SceneFx.accum[i].cell[9] += g_SceneFx.delta[i].cell[9];
+            rec->sample[9] = g_SceneFx.accum[i].cell[9] >> 16;
+            g_SceneFx.accum[i].cell[10] += g_SceneFx.delta[i].cell[10];
+            rec->sample[10] = g_SceneFx.accum[i].cell[10] >> 16;
+            g_SceneFx.accum[i].cell[11] += g_SceneFx.delta[i].cell[11];
+            rec->sample[11] = g_SceneFx.accum[i].cell[11] >> 16;
+
+            dst->lifetime[0] -= g_SceneFx.life_step[i].cell[0];
+            dst->lifetime[1] -= g_SceneFx.life_step[i].cell[1];
+            dst->lifetime[2] -= g_SceneFx.life_step[i].cell[2];
+            dst->lifetime[3] -= g_SceneFx.life_step[i].cell[3];
+            dst->lifetime[4] -= g_SceneFx.life_step[i].cell[4];
+            dst->lifetime[5] -= g_SceneFx.life_step[i].cell[5];
+            dst->lifetime[6] -= g_SceneFx.life_step[i].cell[6];
+            dst->lifetime[7] -= g_SceneFx.life_step[i].cell[7];
+            dst->lifetime[8] -= g_SceneFx.life_step[i].cell[8];
+            dst->lifetime[9] -= g_SceneFx.life_step[i].cell[9];
+            dst->lifetime[10] -= g_SceneFx.life_step[i].cell[10];
+            dst->lifetime[11] -= g_SceneFx.life_step[i].cell[11];
             i++;
         } while (i < (*D_80147BDC));
     }

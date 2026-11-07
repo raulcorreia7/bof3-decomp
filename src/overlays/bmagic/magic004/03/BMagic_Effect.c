@@ -13,7 +13,7 @@ INCLUDE_ASM(func_801EEF8C);
 MATCH void func_801EF158(void) {
     u16 cue;
 
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         cue = D_801EFE40[g_Task->unk_04];
         if (cue != 0) {
             SND_QueueSelectionFx(cue);
@@ -57,18 +57,18 @@ INCLUDE_ASM(func_801EFAF4);
 INCLUDE_ASM(func_801EFBEC);
 
 MATCH void func_801EFD84(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0 = g_Task->unk_09;
-    if (temp_v0 != 0) {
-        temp_v0 -= 1;
-        g_Task->unk_09 = temp_v0;
-        if (!(temp_v0 & 0xFF)) {
+    count = g_Task->unk_09;
+    if (count != 0) {
+        count -= 1;
+        g_Task->unk_09 = count;
+        if (!(count & BYTE_MASK)) {
             SND_QueueSelectionFx(0x101);
         }
     }
-    if (func_8014DAEC() & 0xFF) {
-        D_801EB4E0->unk_0B -= 1;
+    if (func_8014DAEC() & BYTE_MASK) {
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
         return;
     }

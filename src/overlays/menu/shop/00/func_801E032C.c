@@ -35,7 +35,7 @@ NON_MATCHING void func_801E032C(void) {
     }
     D_801483A8 = 0xFF;
     cell       = &g_Characters[D_801483A6].abilities.skill[D_801483A7];
-    if (D_80145AC2 & g_InputPressed) {
+    if (g_InputMasks[INPUT_SLOT_CONFIRM] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         D_801483A8 = (u8)D_801483A7;
         D_80148652 += 1;
@@ -51,7 +51,7 @@ NON_MATCHING void func_801E032C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 7));
         return;
     }
-    if (D_80145AC4 & g_InputPressed) {
+    if (g_InputMasks[INPUT_SLOT_CANCEL] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_8014837B           = 2;

@@ -16,7 +16,7 @@ MATCH void func_8019EB38(void) {
     work->unk_0A            = 0xE;
     flags                   = g_Task;
     work->vy                = step;
-    flags->unk_0B           = 0;
+    flags->param.unk_0B     = 0;
     state                   = g_Task;
     state->header.mode      = (u8)(state->header.mode + 1);
 }

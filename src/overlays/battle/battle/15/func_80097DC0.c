@@ -6,9 +6,9 @@ MATCH void func_80097DC0(void) {
     u8* entry;
 
     held = g_InputPressed;
-    if ((held & D_80145AC4) != 0u) {
+    if ((held & g_InputMasks[INPUT_SLOT_CANCEL]) != 0u) {
         g_BattleUIState = 3u;
-    } else if ((held & D_80145AC2) != 0u) {
+    } else if ((held & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0u) {
         g_BattleUIState = 2u;
     } else if ((INPUT_REPEATED(held, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) != 0) {
         /* FAKE: plain read of the message-slot selector: the volatile qualifier

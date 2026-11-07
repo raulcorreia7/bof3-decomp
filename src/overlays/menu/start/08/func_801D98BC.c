@@ -23,7 +23,7 @@ MATCH void func_801D98BC(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         D_801ED68C ^= 1;
     }
-    if (*pad & D_80145AC2) {
+    if (*pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (D_801ED68C == 0) {
             func_801DAC1C(*pad);
         } else if (g_GameRequestFlags & 1) {
@@ -43,7 +43,7 @@ MATCH void func_801D98BC(void) {
         *slot                       = D_801ED68C + (prev + 1);
         return;
     }
-    if (*pad & D_80145AC4) {
+    if (*pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
         SND_PlayCue(EMI_CUE_ID(1, 6));
         g_MenuPanelTasks[11].state  = 1;

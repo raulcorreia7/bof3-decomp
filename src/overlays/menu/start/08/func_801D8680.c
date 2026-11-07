@@ -38,7 +38,7 @@ NON_MATCHING void func_801D8680(void) {
             g_MenuPanelTasks[18].unk_0B = 0;
         }
     }
-    if (D_80145AC2 & g_InputPressed) {
+    if (g_InputMasks[INPUT_SLOT_CONFIRM] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         tmp1 = FIELD(u8, (((val1 & BYTE_MASK) * 6) + &D_801EC4A4 + FIELD(u8, (val0), 0xB)), 0x1u);
         if (tmp1 != 0) {
@@ -50,7 +50,7 @@ NON_MATCHING void func_801D8680(void) {
         g_MenuPanelTasks[16].unk_0C = s_SkillOrderCursors[D_80148656][g_MenuPanelTasks[16].unk_0B];
         return;
     }
-    if (D_80145AC4 & g_InputPressed) {
+    if (g_InputMasks[INPUT_SLOT_CANCEL] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         FIELD(s8, (&D_801484CC), 0xECu) = 0;
         D_80148652 -= 1;

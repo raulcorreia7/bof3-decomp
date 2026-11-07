@@ -84,7 +84,7 @@ MATCH void func_801EF358(void) {
     work->timer = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->unk_0B--;
+        active->param.unk_0B--;
         func_801E5988();
     }
 }

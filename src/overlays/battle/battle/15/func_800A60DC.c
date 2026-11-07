@@ -18,12 +18,12 @@ MATCH void func_800A60DC(void) {
     input                                    = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));
     pad                                      = *pad_state;
 
-    if (pad & D_80145AC4) {
+    if (pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         g_BattleUIState = 5;
         return;
     }
-    if (pad & D_80145AC2) {
+    if (pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if ((&D_8014551B)[(*(s16*)&D_801485EC + D_801485EE) * 4] == GAME_NONE) {
             state = 4;
         } else {

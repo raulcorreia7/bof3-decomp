@@ -3,5 +3,5 @@
 /* Handler table dispatched by the shop state counter. */
 
 MATCH void func_801D10E4(void) {
-    SYS_DISPATCH_BYTE(D_801E5170, D_80148651);
+    SYS_DISPATCH_BYTE(g_ShopStep2Funcs, D_80148651);
 }

@@ -35,7 +35,7 @@ MATCH void func_801EEEBC(void) {
 
 MATCH void func_801EEF00(void) {
     SYS_DISPATCH_BYTE(D_801F006C, g_Task->header.step);
-    if (BATTLE_ACTIVE_WORK->unk_0B != 0xFF) {
+    if (BATTLE_ACTIVE_WORK->param.unk_0B != 0xFF) {
         Effect_SetActorMatrix();
         func_801EF158();
         PopMatrix();
@@ -49,16 +49,16 @@ INCLUDE_ASM(func_801EEFF8);
 MATCH void func_801EF04C(void) {
     s32 phase;
 
-    g_Task->unk_0B = (g_Task->unk_0B - 1) & 0x1F;
-    phase          = g_Task->unk_10 + 2;
-    g_Task->unk_10 = phase;
+    g_Task->param.unk_0B = (g_Task->param.unk_0B - 1) & 0x1F;
+    phase                = g_Task->unk_10 + 2;
+    g_Task->unk_10       = phase;
     if (phase == 0x80) {
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801EF0A4(void) {
-    g_Task->unk_0B = (g_Task->unk_0B - 1) & 0x1F;
+    g_Task->param.unk_0B = (g_Task->param.unk_0B - 1) & 0x1F;
     g_Task->unk_14 -= 2;
     g_Task->unk_10 -= 2;
     if (g_Task->unk_10 == 0x20) {
@@ -73,7 +73,7 @@ MATCH void func_801EF108(void) {
     g_Task->unk_14 -= 2;
     g_Task->unk_10 = count;
     if (count == 0) {
-        D_801EB4E0->unk_0B = 0xFF;
+        D_801EB4E0->param.unk_0B = 0xFF;
         func_801E5988();
     }
 }

@@ -28,7 +28,7 @@ MATCH void func_801BC000(void) {
         tmp5->header.mode   = 5;
         g_Task->header.step = 0;
         tmp9                = g_Task;
-        tmp9->unk_0B        = 0;
+        tmp9->param.unk_0B  = 0;
         return;
     }
     bit = g_AreaWalkFlags & AREA_WALK_STEP_ACTIVE;

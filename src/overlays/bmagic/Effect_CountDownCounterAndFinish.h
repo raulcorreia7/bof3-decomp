@@ -9,7 +9,7 @@ MATCH void Effect_CountDownCounterAndFinish(void) {
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
-        BATTLE_ACTIVE_WORK->unk_0B -= 1;
+        BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.flags = 0;
         g_Task->header.mode  = 0;
         g_Task->header.step  = 0;

@@ -63,6 +63,8 @@ typedef enum EquipSlot {
     EQUIP_SLOT_ACCESSORY_2 = 5,
 } EquipSlot;
 
+#define EQUIP_SLOT_COUNT 6
+
 /* Which party-order array a call reads: the walking order g_PartyFieldOrder or the
  * battle order g_PartyBattleOrder, three character ids each, 0xFF for an empty
  * position. Party_CountOrder and Party_BuildBattlers take it as their mode. */

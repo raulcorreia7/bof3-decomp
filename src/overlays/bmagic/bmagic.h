@@ -10,6 +10,9 @@
 #include "overlays/battle/battle.h"
 #include "work/task.h"
 
+#define BMAGIC_PHASE_ANGLE(phase) ((phase) << 6)
+#define BMAGIC_ANGLE_PHASE(angle) (((angle) >> 6) & 0x3F)
+
 /* The statements of Effect_SetActorMatrix after its rotation is set; each
  * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
  * whose vertical span halves into the depth. */
@@ -17,7 +20,7 @@
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000; \
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000; \
     pos.vz = -COORD_INT((SPAN_WORK)->pos.z) / 2;  \
-    RotTrans(&pos, &matrix.t, &flags);            \
+    RotTrans(&pos, (VECTOR*)matrix.t, &flags);    \
     RotMatrix(&rot, &matrix);                     \
     MulMatrix2(&g_CameraMatrix, &matrix);         \
     SetRotMatrix(&matrix);                        \
@@ -71,7 +74,7 @@
     timer            = (WORK)->timer_05 - 1;                                \
     (WORK)->timer_05 = timer;                                               \
     if (timer == 0) {                                                       \
-        D_801EB4E0->unk_0B -= 1;                                            \
+        D_801EB4E0->param.unk_0B -= 1;                                      \
         CLEAR();                                                            \
     }
 
@@ -105,14 +108,14 @@ typedef Point2D TrailPoint;
  * member declares s32 i. */
 #define BMAGIC_SHIFT_TRAIL(TRAIL)                                        \
     i = g_Task->timer - 1;                                               \
-    while (i >= g_Task->unk_0B) {                                        \
+    while (i >= g_Task->param.unk_0B) {                                  \
         (TRAIL)[g_Task->unk_04][i + 1].x = (TRAIL)[g_Task->unk_04][i].x; \
         (TRAIL)[g_Task->unk_04][i + 1].y = (TRAIL)[g_Task->unk_04][i].y; \
         i -= 1;                                                          \
     }
 
 /* Decrement the active effect ticker. */
-#define BMAGIC_TICK_EFFECT_WORK() (BATTLE_ACTIVE_WORK->unk_0B--)
+#define BMAGIC_TICK_EFFECT_WORK() (BATTLE_ACTIVE_WORK->param.unk_0B--)
 
 /* Run the module step handler the task step selects. A bare statement macro:
  * the member declares `handlers`. Kept: as an inline taking the table by value
@@ -233,6 +236,8 @@ void func_801F006C(void);
 
 /* Defined in Effect_SetActorMatrix.h, which a member includes after its first call. */
 void Effect_SetActorMatrix(void);
+/* Defined in Effect_DrawScreenFade.h, which a member includes after its first call. */
+void Effect_DrawScreenFade(void);
 
 #define EFFECT_ADVANCE_AT_COUNT(increment, limit) \
     do {                                          \

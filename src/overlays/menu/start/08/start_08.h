@@ -85,7 +85,6 @@ enum {
 extern u16             g_GameAreaId;
 extern u8              D_80144F57;
 extern u16             D_80145594[];
-extern s16             D_80145ABE;
 extern u8              D_80145FCC[][BATTLE_PARTY_STRIDE];
 extern u8              D_80148480;
 extern u8              D_8014849B;
@@ -169,25 +168,37 @@ extern Character       D_801EB514[7];
 extern Character       D_801EB990;
 extern u8              D_801EBA34[][2];
 extern u8              s_CampMenuPanelIds[8];
-extern Callback        D_801EC35C[9];
-extern Callback        D_801EC380[];
-extern u8              D_801EC38C[];
-extern Callback        D_801EC394[5];
-extern Callback        D_801EC3A8[11];
-extern Callback        D_801EC3D4[];
-extern Callback        D_801EC400[7];
-extern Callback        D_801EC41C[];
-extern u16             D_801EC440[];
-extern u8              s_EquipSlotCategories[8];
-extern Callback        D_801EC460[];
-extern Callback        D_801EC498[];
-extern Callback        D_801EC4B0[5];
-extern Callback        D_801EC4C4[];
-extern Callback        D_801EC518[6];
-extern Callback        D_801EC530[3];
-extern Callback        D_801EC53C[];
-extern Callback        D_801EC578[];
-extern Callback        D_801EC58C[];
+/* Entries of the step handler tables. */
+#define MENU_START_STEP_COUNT       9
+#define MENU_START_STEP2_COUNT      11
+#define MENU_START_STEP5_COUNT      6
+#define MENU_START_STEP5_SUB2_COUNT 3
+#define MENU_START_STEP6_COUNT      5
+
+/* D_801EC35C */
+extern Callback g_MenuStartStepFuncs[MENU_START_STEP_COUNT];
+extern Callback D_801EC380[];
+extern u8       D_801EC38C[];
+/* D_801EC394 */
+extern Callback g_MenuStartStep6Funcs[MENU_START_STEP6_COUNT];
+/* D_801EC3A8 */
+extern Callback g_MenuStartStep2Funcs[MENU_START_STEP2_COUNT];
+extern Callback D_801EC3D4[];
+extern Callback D_801EC400[7];
+extern Callback D_801EC41C[];
+extern u16      D_801EC440[];
+extern u8       s_EquipSlotCategories[8];
+extern Callback D_801EC460[];
+extern Callback D_801EC498[];
+extern Callback D_801EC4B0[5];
+extern Callback D_801EC4C4[];
+/* D_801EC518 */
+extern Callback g_MenuStartStep5Funcs[MENU_START_STEP5_COUNT];
+/* D_801EC530 */
+extern Callback g_MenuStartStep5Sub2Funcs[MENU_START_STEP5_SUB2_COUNT];
+extern Callback D_801EC53C[];
+extern Callback D_801EC578[];
+extern Callback D_801EC58C[];
 /* Panel and caption resources. A glyph row is a run of 3-byte records
  * {s8 dx, s8 dy, u8 glyph} in 8-pixel units that UI_DrawSpriteRun draws until
  * glyph 0xFF; MENU_CAPTION_GLYPH_2 packs several such runs and the label
@@ -196,27 +207,27 @@ extern Callback        D_801EC58C[];
  * arrays: a row's size includes alignment padding past its payload (44 bytes
  * for a 42-byte run, 688 for a 687-byte bank), and a typed record array would
  * need the split data to own that padding. */
-extern u8              MENU_CAPTION_GLYPH_2[688];
-extern u8              D_801EC754[];
-extern u8              D_801EC76C[];
-extern u8              D_801EC784[];
-extern u8              D_801EC790[];
-extern u8              D_801EC854[];
-extern u8              g_MenuLabelAgility[4];
-extern u8              g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:Shop_DrawEquipment */
-extern u8              g_MenuLabelEquip[8];    /* the equipment panel caption. @source: read:Shop_DrawEquipment */
-extern u8              g_MenuPortraitAtlas[96];
-extern u8              MENU_CAPTION_ICON[792];
-extern s32             D_801ECC98[];
-extern Callback        D_801ECCF8[];
-extern Callback        D_801ECD1C[];
-extern u8              s_CampMenuState[8];
-extern Callback        D_801ED11C[7];
-extern Callback        D_801ED138[4];
-extern Callback        D_801ED148[17];
-extern u8              D_801ED18C;
-extern u8              s_PanelIconSelectors[24];
-extern u8              s_PanelIconValues[228];
+extern u8       MENU_CAPTION_GLYPH_2[688];
+extern u8       D_801EC754[];
+extern u8       D_801EC76C[];
+extern u8       D_801EC784[];
+extern u8       D_801EC790[];
+extern u8       D_801EC854[];
+extern u8       g_MenuLabelAgility[4];
+extern u8       g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:Shop_DrawEquipment */
+extern u8       g_MenuLabelEquip[8];    /* the equipment panel caption. @source: read:Shop_DrawEquipment */
+extern u8       g_MenuPortraitAtlas[96];
+extern u8       MENU_CAPTION_ICON[792];
+extern s32      D_801ECC98[];
+extern Callback D_801ECCF8[];
+extern Callback D_801ECD1C[];
+extern u8       s_CampMenuState[8];
+extern Callback D_801ED11C[7];
+extern Callback D_801ED138[4];
+extern Callback D_801ED148[17];
+extern u8       D_801ED18C;
+extern u8       s_PanelIconSelectors[24];
+extern u8       s_PanelIconValues[228];
 extern s32 (*D_801ED224[])(u8 caster_index, u8 target_index, u8 use_battle_record);
 extern s32 (*D_801ED24C[])(u8 save_slot, u8 record_value);
 extern u8       g_SaveRecordTypeCommands[92];
@@ -250,12 +261,8 @@ extern u8       s_PartyCharacterIds[3];
 extern u8       D_801ED613[];
 extern s8       D_801ED618;
 extern u8       D_801ED620;
-extern u8       D_801ED63C;
-extern u8       D_801ED63D;
-extern u8       D_801ED63E;
-extern u8       D_801ED63F;
-extern u8       D_801ED640;
-extern u8       D_801ED641;
+/* D_801ED63C */
+extern u8       g_EquipPreview[EQUIP_SLOT_COUNT];
 extern s8       D_801ED648;
 /* The start overlay's slot rows (three bytes per slot) and its byte table;
  * every reader indexes or walks them as bytes. */

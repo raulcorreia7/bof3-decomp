@@ -4,5 +4,5 @@
  * sub-step byte g_MasterSubStep selects the entry. */
 
 MATCH void func_801D278C(void) {
-    SYS_DISPATCH_BYTE(D_801D4204, g_MasterSubStep);
+    SYS_DISPATCH_BYTE(g_MasterStep2Funcs, g_MasterSubStep);
 }

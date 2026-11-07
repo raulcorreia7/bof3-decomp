@@ -58,13 +58,13 @@ MATCH void func_801EF1CC(void) {
     count         = g_Task->timer - 1;
     g_Task->timer = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B = 1;
-        g_Task->header.step        = g_Task->header.step + 1;
+        BATTLE_ACTIVE_WORK->param.unk_0B = 1;
+        g_Task->header.step              = g_Task->header.step + 1;
     }
 }
 
 MATCH void func_801EF228(void) {
-    if (D_801EB4E0->unk_0B == 2) {
+    if (D_801EB4E0->param.unk_0B == 2) {
         g_Task->timer = 0;
         g_Task->header.step += 1;
     }
@@ -78,12 +78,12 @@ MATCH void func_801EF278(void) {
 }
 
 MATCH void func_801EF2CC(void) {
-    u8 temp_v0;
+    u8 count;
 
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
-        D_801EB4E0->unk_0B = 0xFF;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        D_801EB4E0->param.unk_0B = 0xFF;
         func_801E5988();
     }
 }

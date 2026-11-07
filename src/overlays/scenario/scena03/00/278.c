@@ -289,7 +289,7 @@ MATCH void func_801F82E4(void) {
 MATCH void func_801F8328(void) {
     g_Task->unk_09 = 96;
     g_Task->header.mode++;
-    SND_PlayCue(516);
+    SND_PlayCue(EMI_CUE_ID(2, 4));
 }
 
 MATCH void func_801F8370(void) {

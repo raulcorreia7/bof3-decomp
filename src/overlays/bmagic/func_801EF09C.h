@@ -5,7 +5,7 @@
 MATCH void func_801EF09C(void) {
     u8 counter;
 
-    g_Task->unk_0B += 1;
+    g_Task->param.unk_0B += 1;
     g_Task->timer += 2;
     counter        = g_Task->unk_09 - 2;
     g_Task->unk_09 = counter;

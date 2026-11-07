@@ -152,7 +152,7 @@ static const Callback D_801F4908[2] = {
 };
 
 MATCH s32 func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(s_WorkStates, TASK_BYTES[0x1]);
+    SYS_DISPATCH_BYTE(s_WorkStates, g_Task->header.mode);
 }
 
 #include "shared/Actor_ProjectFocusAndStep.h"
@@ -226,7 +226,7 @@ MATCH void func_801F2EE4(void) {
 #include "shared/GFX_DrawShadedDisc.h"
 
 MATCH void func_801F30A8(void) {
-    SYS_DISPATCH_BYTE(D_801F3F80, TASK_BYTES[0x1]);
+    SYS_DISPATCH_BYTE(D_801F3F80, g_Task->header.mode);
 }
 
 MATCH void func_801F30EC(void) {

@@ -22,31 +22,31 @@ MATCH void func_801B87B8(void) {
         }
         switch (g_InputHeld & INPUT_DIRECTIONAL) {
             case PADLup:
-                g_Task->unk_0B = 0;
+                g_Task->param.unk_0B = 0;
                 break;
             case PADLup | PADLright:
-                g_Task->unk_0B = 1;
+                g_Task->param.unk_0B = 1;
                 break;
             case PADLright:
-                g_Task->unk_0B = 2;
+                g_Task->param.unk_0B = 2;
                 break;
             case PADLright | PADLdown:
-                g_Task->unk_0B = 3;
+                g_Task->param.unk_0B = 3;
                 break;
             case PADLdown:
-                g_Task->unk_0B = 4;
+                g_Task->param.unk_0B = 4;
                 break;
             case PADLdown | PADLleft:
-                g_Task->unk_0B = 5;
+                g_Task->param.unk_0B = 5;
                 break;
             case PADLleft:
-                g_Task->unk_0B = 6;
+                g_Task->param.unk_0B = 6;
                 break;
             case PADLleft | PADLup:
-                g_Task->unk_0B = 7;
+                g_Task->param.unk_0B = 7;
                 break;
         }
-        Actor_RequestScript((g_Task->unk_0B + 8) & BYTE_MASK);
+        Actor_RequestScript((g_Task->param.unk_0B + 8) & BYTE_MASK);
         func_801C24D0();
     }
     g_Task->unk_09 -= 1;

@@ -117,12 +117,12 @@ MATCH void func_801EF900(void) {
 #include "overlays/bmagic/Effect_CountUpAndStepAt32.h"
 
 MATCH void func_801EFA2C(void) {
-    u8 temp_v0;
+    u8 timer_next;
 
-    temp_v0       = g_Task->timer - 1;
-    g_Task->timer = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
-        D_801EB4E0->unk_0B -= 1;
+    timer_next    = g_Task->timer - 1;
+    g_Task->timer = timer_next;
+    if (!(timer_next & BYTE_MASK)) {
+        D_801EB4E0->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
 }

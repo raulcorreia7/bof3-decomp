@@ -11,12 +11,12 @@ INCLUDE_ASM(func_801EEDD8);
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
 MATCH void func_801EEFF0(void) {
-    u8 temp_v0;
+    u8 timer_next;
 
-    if (g_Task->unk_0B < 3U) {
-        temp_v0       = g_Task->timer - 1;
-        g_Task->timer = temp_v0;
-        if (!(temp_v0 & 0xFF)) {
+    if (g_Task->param.unk_0B < 3U) {
+        timer_next    = g_Task->timer - 1;
+        g_Task->timer = timer_next;
+        if (!(timer_next & BYTE_MASK)) {
             g_Task->header.mode += 1;
         }
     }
@@ -48,7 +48,7 @@ MATCH void func_801EF588(void) {
 }
 
 MATCH void func_801EF5D8(void) {
-    g_Task->timer = 0x10 + (rsin((g_Task->unk_0B & 0x3F) << 6) * 4 >> 12);
+    g_Task->timer = 0x10 + (rsin((g_Task->param.unk_0B & 0x3F) << 6) * 4 >> 12);
     g_Task->unk_0C++;
     if (g_Task->unk_0C == 0x10) {
         g_Task->header.step++;
@@ -58,11 +58,11 @@ MATCH void func_801EF5D8(void) {
 MATCH void func_801EF654(void) {
     u8 timer;
 
-    g_Task->timer  = ((rsin((g_Task->unk_0B & 0x3F) << 6) * 4) >> 0xC) + 0x10;
+    g_Task->timer  = ((rsin((g_Task->param.unk_0B & 0x3F) << 6) * 4) >> 0xC) + 0x10;
     timer          = g_Task->unk_09 - 2;
     g_Task->unk_09 = timer;
     if (!(timer & 0xFF)) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         Actor_Clear();
     }
 }
@@ -109,7 +109,7 @@ MATCH void func_801F0368(void) {
     count        = work->unk_09 - 4;
     work->unk_09 = count;
     if (count == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->param.unk_0B--;
         Actor_Clear();
     }
 }

@@ -104,9 +104,6 @@ extern u8             D_801454F2;
 extern u8*            D_801459F4;
 /* D_80145AA8 */
 extern u16            g_InputPressed;
-extern u16            D_80145ABA;
-extern u16            D_80145AC2;
-extern u16            D_80145AC4;
 /* Event descriptors opened by the executable's card setup. */
 extern u8             D_80145D54[][16];
 /* D_80145E14 */

@@ -4,7 +4,7 @@ MATCH void Effect_NextStepWhileTickUnderTwo(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->unk_0B < 2) {
+    if (work->param.unk_0B < 2) {
         work->header.mode++;
     }
 }

@@ -587,8 +587,6 @@ extern volatile u16                     D_8014862A;
 extern volatile u8                      D_8014862F;
 extern volatile u8                      D_80148654;
 extern volatile u8                      D_80148656;
-/* D_80149322 */
-extern s16                              g_AreaTileOriginY;
 /* Proven game-RAM base for battle state (0x80140000). func_800A4458 already
  * references it through a local extern of this exact type. */
 /* Handle ring slot array: one u32 per 8-byte record (func_800A60DC writes

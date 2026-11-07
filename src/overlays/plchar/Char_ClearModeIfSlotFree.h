@@ -4,7 +4,7 @@
  * function sits, and a change must keep every member matching.
  */
 MATCH void Char_ClearModeIfSlotFree(void) {
-    if (g_ActorSlots[g_Task->unk_0B].header.flags == 0) {
+    if (g_ActorSlots[g_Task->param.actor_slot].header.flags == 0) {
         g_GameState->mode_12B.s8_value = 0;
     }
     func_8014D978();

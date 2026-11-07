@@ -9,7 +9,7 @@ MATCH void UI_ScrollChoice(void) {
     s8            cursor;
 
     pad = &g_InputPressed;
-    if ((*pad & D_80145AC2) != 0) {
+    if ((*pad & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0) {
         u8* step;
 
         step  = &g_UiWindowStep;

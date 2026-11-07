@@ -40,7 +40,7 @@ MATCH void func_801D42F0(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         result = func_801E8C9C(g_CharSlot[g_PartyFieldOrder[*current]], *items, 0) & BYTE_MASK;
         if ((result == 0) || (result == 4)) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
@@ -53,7 +53,7 @@ MATCH void func_801D42F0(void) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;
         }
-    } else if (g_InputPressed & D_80145AC4) {
+    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
     } else {
         return;

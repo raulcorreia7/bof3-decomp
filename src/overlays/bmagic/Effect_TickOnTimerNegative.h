@@ -11,8 +11,8 @@ MATCH void Effect_TickOnTimerNegative(void) {
     timer        = work->unk_09 - 2;
     work->unk_09 = timer;
     if (timer < 0) {
-        work         = D_801EB4E0;
-        work->unk_0B = work->unk_0B - 1;
+        work               = D_801EB4E0;
+        work->param.unk_0B = work->param.unk_0B - 1;
         func_801E5988();
     }
 }

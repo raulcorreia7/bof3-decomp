@@ -11,13 +11,7 @@
 void func_800AF3A0(s32, s32, s32, s32, s32);
 u32  func_800AF6B8(u32, u32, s32, u32);
 
-extern u8 g_BattleActiveBattler;
-/* One-field views of the queued-slot record at g_BattleEffects (stride 0x78). */
-extern u8 D_801EC338[];
-
-extern u8       D_801EC364[];
-extern u8       D_801EC368[];
-extern u8       D_801EC36C[];
+extern u8       g_BattleActiveBattler;
 extern Callback D_801EFC9C[];
 
 void func_801EF180(void);

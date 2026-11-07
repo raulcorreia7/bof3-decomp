@@ -18,6 +18,10 @@
 #include "scenario/runtime.h"
 #include "common/util.h"
 
+/* The first payload word of a world area overlay, at its load address: the module id the
+ * loader checks against the archive TOC (@source: wiki:formats/emi#code-overlays). */
+#define AREA_MODULE_ID(area) (52 + (area))
+
 /* One panel marker row selected by a controller mask: the mask, the panel
  * step it selects and an unused byte. */
 typedef struct WorldMapMarker {
@@ -131,15 +135,15 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     u8            selection;
     s32           result;
 
-    g_Task    = (u8*)&g_BattlePartyBattlers[slot];
+    TASK_SET(&g_BattlePartyBattlers[slot]);
     index     = g_PartyFieldOrder[slot];
     y         = g_BattlePartyBattlers[slot].unk_30.signed_half;
     x         = g_BattlePartyBattlers[slot].unk_2E.signed_half;
     selection = table[index];
     result    = func_8015CB18(kind, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        battler         = (PartyBattler*)g_Task;
-        battler->unk_0B = (u8)result;
+        battler               = (PartyBattler*)g_Task;
+        battler->param.unk_0B = (u8)result;
     }
 }
 

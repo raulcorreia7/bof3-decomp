@@ -18,7 +18,7 @@ MATCH void func_801F4610(void) {
     g_Task->unk_2A       = 0;
     ACTOR_CLEAR_TINT();
 
-    row_offset                                                 = g_Task->unk_0B;
+    row_offset                                                 = g_Task->param.unk_0B;
     map_offset                                                 = D_801F4D90[row_offset].y * D_80104000;
     *(g_AreaCellCodes + map_offset + D_801F4D90[row_offset].x) = 0xA0;
     Actor_SelectScript(0);

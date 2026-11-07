@@ -11,8 +11,9 @@ MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
         case 0x93:
         case 0x94:
         case 0x95:
-            g_Task->unk_0B = func_8015CB18(table[state->index_0A] - 0x90, (s8)table[state->index_0A + 1],
-                                           (s8)table[state->index_0A + 2], (s16)g_Task->unk_2E, (s16)g_Task->unk_30);
+            g_Task->param.unk_0B =
+                func_8015CB18(table[state->index_0A] - 0x90, (s8)table[state->index_0A + 1],
+                              (s8)table[state->index_0A + 2], (s16)g_Task->unk_2E, (s16)g_Task->unk_30);
             state->index_0A += 2;
             break;
         case 0x98:
@@ -21,13 +22,13 @@ MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
         case 0x9B:
         case 0x9C:
         case 0x9D:
-            g_Task->unk_0B = func_8015CC00(table[state->index_0A] - 0x98, (s8)table[state->index_0A + 1],
-                                           (s8)table[state->index_0A + 2], g_Task->pos.x.fixed, g_Task->pos.y.fixed,
-                                           g_Task->pos.z.fixed);
+            g_Task->param.unk_0B = func_8015CC00(table[state->index_0A] - 0x98, (s8)table[state->index_0A + 1],
+                                                 (s8)table[state->index_0A + 2], g_Task->pos.x.fixed,
+                                                 g_Task->pos.y.fixed, g_Task->pos.z.fixed);
             state->index_0A += 2;
             break;
         case 0x9F:
-            if (ACTOR_IN_USE(g_ActorSlots[g_Task->unk_0B])) {
+            if (ACTOR_IN_USE(g_ActorSlots[g_Task->param.unk_0B])) {
                 state->index_0A -= 1;
             }
             break;

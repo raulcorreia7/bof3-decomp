@@ -6,7 +6,7 @@ MATCH void func_801F3784(void) {
         g_Task->unk_03++;
     }
 
-    if ((D_801454F2 != 0 && g_Task->unk_0B != 0) || g_GameStateIndex == GAME_REQUEST_MESSAGE ||
+    if ((D_801454F2 != 0 && g_Task->param.unk_0B != 0) || g_GameStateIndex == GAME_REQUEST_MESSAGE ||
         GAME_SCRIPT_ACTIVE() != 0) {
         g_Task->unk_03 = 3;
     }

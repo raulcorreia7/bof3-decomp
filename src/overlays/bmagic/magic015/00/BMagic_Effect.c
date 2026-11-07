@@ -49,7 +49,7 @@ MATCH void func_801EF644(void) {
 INCLUDE_ASM(func_801EF6B0);
 
 MATCH void func_801EF93C(void) {
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         func_800AFC54();
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(4, 0);
@@ -82,7 +82,7 @@ INCLUDE_ASM(func_801EFBD8);
 INCLUDE_ASM(func_801EFCC4);
 
 MATCH void func_801EFD7C(void) {
-    if (D_801EB4E0->unk_0B == 1) {
+    if (D_801EB4E0->param.unk_0B == 1) {
         g_Task->scale.x = 0x10000;
         g_Task->scale.y = 0x10000;
         g_Task->unk_48  = 2;
@@ -168,7 +168,7 @@ MATCH void func_801F1180(void) {
     g_Task->unk_5E += 0x10;
     g_Task->unk_5F += 0x10;
     if ((s8)g_Task->unk_5D == -0x40) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
 }

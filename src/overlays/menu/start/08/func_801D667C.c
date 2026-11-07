@@ -28,7 +28,7 @@ MATCH void func_801D667C(void) {
     panel += 6;
     D_80148504.pos.x        = 320;
     D_80148504.pos.y        = 62;
-    D_80148524              = &D_801ED63C;
+    D_80148524              = g_EquipPreview;
     panel->mode             = 0xA;
     D_80148504.group_cursor = 0;
     D_80148504.group        = 0xFF;

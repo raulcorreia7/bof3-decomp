@@ -2,7 +2,7 @@
 
 MATCH void func_801B876C(void) {
     g_Task->unk_09                    = 0;
-    g_Task->unk_0B                    = g_Task->direction_08;
+    g_Task->param.unk_0B              = g_Task->direction_08;
     g_GameState->counter_11C.u8_value = 4;
     g_Task->unk_03                    = 1;
 }

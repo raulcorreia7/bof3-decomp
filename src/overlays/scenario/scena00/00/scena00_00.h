@@ -9,25 +9,27 @@
 
 /* func_801F85A8 triangle: the third vertex is `size` rotated by this angle
  * (4096 per turn); the vertices are grey (r = g = b) at these levels. */
-#define SCN_TRI_APEX_ANGLE       0x4F
-#define SCN_TRI_SHADE_V0         0x28
-#define SCN_TRI_SHADE_V1         0x6E
-#define SCN_TRI_SHADE_V2         0x64
-#define SCN_EFFECT               ((SceneEffect*)g_Task)
-#define SPAD_ROW                 ((Actor*)g_Task)
+#define SCN_TRI_APEX_ANGLE 0x4F
+#define SCN_TRI_SHADE_V0   0x28
+#define SCN_TRI_SHADE_V1   0x6E
+#define SCN_TRI_SHADE_V2   0x64
+#define SCN_EFFECT         ((SceneEffect*)g_Task)
+#define SPAD_ROW           ((Actor*)g_Task)
 
-/* Cell `k` of the slot whose byte offset is `slot` (slot index * 0x30). */
-#define SCENE_FX(table, slot, k) (((SceneFxCells*)((u8*)(table) + (slot)))->cell[k])
-#define g_PartyX                 (*(u32*)&g_PartyX)
-#define g_PartyY                 ((u32*)&g_PartyY)
+#define g_PartyX           (*(u32*)&g_PartyX)
+#define g_PartyY           ((u32*)&g_PartyY)
 
 /* g_ScriptVars[2] in func_801FA7D8: retail loads every access through its own `lui $r, %hi(D_80146866)`; the array
  * member shares one %hi across the accesses and the function grows by 12 bytes (an absolute address and a local
  * pointer also move bytes). */
 extern u8 D_80146866;
 
-#define g_AreaScrollTargetY ((u32*)&g_AreaScrollTargetY)
-#define g_AreaLoads         ((void**)g_AreaLoads)
+#define g_AreaScrollTargetY   ((u32*)&g_AreaScrollTargetY)
+#define g_AreaLoads           ((void**)g_AreaLoads)
+
+#define SCENE_FX_SLOT_COUNT   30
+#define SCENE_FX_CELL_COUNT   12
+#define SCENE_FX_WEIGHT_COUNT 3
 
 /* One row of the sample table at D_80147BD8: twelve sample offsets and three
  * weights per 0x28-byte record. */
@@ -40,21 +42,8 @@ extern u8 D_80146866;
  * halfwords read here are named, the rest stays unresolved padding. */
 typedef struct SceneSampleRecord {
     u8  unk_00[2];
-    s16 sample_02;
-    s16 sample_04;
-    s16 sample_06;
-    s16 sample_08;
-    s16 sample_0A;
-    s16 sample_0C;
-    s16 sample_0E;
-    s16 sample_10;
-    s16 sample_12;
-    s16 sample_14;
-    s16 sample_16;
-    s16 sample_18;
-    s16 weight_1A;
-    s16 weight_1C;
-    s16 weight_1E;
+    s16 sample[SCENE_FX_CELL_COUNT];
+    s16 weight[SCENE_FX_WEIGHT_COUNT];
     u8  unk_20[8];
 } SceneSampleRecord;
 
@@ -192,14 +181,28 @@ typedef struct Scene00Tables {
 
 ASSERT_SIZE(Scene00Tables, 0x104);
 
-/* Per-slot effect work arrays: twelve s32 cells at a 0x30-byte stride. The
- * scratch source values at D_801FCA90, the accumulators at D_801FD030 and
- * the per-cell lifetimes at D_801FD5D0 share the same slot stride. */
-typedef struct SceneFxCells {
-    s32 cell[12];
-} SceneFxCells;
+/* The twelve s32 cells of one effect slot. */
+typedef struct SceneFxSlot {
+    s32 cell[SCENE_FX_CELL_COUNT];
+} SceneFxSlot;
 
-ASSERT_SIZE(SceneFxCells, 0x30);
+ASSERT_SIZE(SceneFxSlot, 0x30);
+
+/* Cell `k` of the slot at byte offset `slot` in a SceneFx table. Retail addresses each
+ * cell from the slot offset; indexing the table by slot number reorders the frame setup. */
+#define SCENE_FX_CELL(table, slot, k) (((SceneFxSlot*)((u8*)(table) + (slot)))->cell[k])
+
+/* The per-slot sample effect: func_801FC01C seeds it from the sample table at
+ * D_80147BD8 and func_801FC3A0 steps it every frame. `accum` is the 16.16 sample,
+ * `delta` its per-frame step and `life_step` the amount taken off the cell's
+ * lifetime. */
+typedef struct SceneFx {
+    SceneFxSlot delta[SCENE_FX_SLOT_COUNT];
+    SceneFxSlot accum[SCENE_FX_SLOT_COUNT];
+    SceneFxSlot life_step[SCENE_FX_SLOT_COUNT];
+} SceneFx;
+
+ASSERT_SIZE(SceneFx, 0x10E0);
 
 /* One row of the per-slot effect arrays. */
 
@@ -242,7 +245,6 @@ extern s32            D_80147C38;
 extern s32            D_80147C3C;
 extern s32            D_80147C54;
 extern s32            D_80147C58;
-extern s16            g_AreaTileOriginY;
 extern SceneLineColor D_801F6C04;
 extern Callback       D_801FC980[];
 extern Callback       D_801FC988[];
@@ -258,42 +260,8 @@ extern u8             D_801FCA4C[];
 extern u8             D_801FCA5C[];
 extern u8             D_801FCA64[];
 extern u8             D_801FCA65[];
-extern SceneFxCells   D_801FCA90[];
-extern u8             D_801FCA94;
-extern u8             D_801FCA98;
-extern u8             D_801FCA9C;
-extern u8             D_801FCAA0;
-extern u8             D_801FCAA4;
-extern u8             D_801FCAA8;
-extern u8             D_801FCAAC;
-extern u8             D_801FCAB0;
-extern u8             D_801FCAB4;
-extern u8             D_801FCAB8;
-extern u8             D_801FCABC;
-extern SceneFxCells   D_801FD030[];
-extern u8             D_801FD034;
-extern u8             D_801FD038;
-extern u8             D_801FD03C;
-extern u8             D_801FD040;
-extern u8             D_801FD044;
-extern u8             D_801FD048;
-extern u8             D_801FD04C;
-extern u8             D_801FD050;
-extern u8             D_801FD054;
-extern u8             D_801FD058;
-extern u8             D_801FD05C;
-extern SceneFxCells   D_801FD5D0[];
-extern u8             D_801FD5D4;
-extern u8             D_801FD5D8;
-extern u8             D_801FD5DC;
-extern u8             D_801FD5E0;
-extern u8             D_801FD5E4;
-extern u8             D_801FD5E8;
-extern u8             D_801FD5EC;
-extern u8             D_801FD5F0;
-extern u8             D_801FD5F4;
-extern u8             D_801FD5F8;
-extern u8             D_801FD5FC;
+/* D_801FCA90 */
+extern SceneFx        g_SceneFx;
 
 void func_80164020(u32 arg0, u32 arg1);
 void func_801F6E04(void);

@@ -23,7 +23,7 @@ MATCH void Char_AdvanceFacingTurn(void) {
         g_Task->unk_09--;
         if (g_Task->unk_09 == 0) {
             g_Task->unk_09       = 2;
-            g_Task->direction_08 = g_Task->direction_08 + g_Task->unk_0B;
+            g_Task->direction_08 = g_Task->direction_08 + g_Task->param.turn_step;
             g_Task->direction_08 &= 7;
             Actor_RequestScript(g_Task->direction_08);
         }

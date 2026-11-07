@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801EEC84);
 
 MATCH void func_801EEE9C(void) {
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         D_801EB4E0->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
         func_800AEF98(0x18, 0);
         g_Task->header.mode += 1;

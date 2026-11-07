@@ -85,25 +85,25 @@ MATCH void func_801EF648(void) {
 }
 
 MATCH void func_801EF6B4(void) {
-    u16 temp_v1;
+    u16 position;
 
-    g_Task->unk_2E.half = (rand() & 3) + 0x9F;
-    temp_v1             = g_Task->unk_30.half - 4;
-    g_Task->unk_30.half = temp_v1;
-    if ((s16)temp_v1 < 0xB2) {
-        D_801EB4E0->unk_0B -= 1;
+    g_Task->unk_2E.half = RANDOM_MASK(3) + 0x9F;
+    position            = g_Task->unk_30.half - 4;
+    g_Task->unk_30.half = position;
+    if ((s16)position < 0xB2) {
+        D_801EB4E0->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801EF740(void) {
-    u16 temp_v1;
+    u16 position;
 
-    g_Task->unk_2E.half = (rand() & 3) + 0x9F;
-    temp_v1             = g_Task->unk_30.half - 2;
-    g_Task->unk_30.half = temp_v1;
-    if ((s16)temp_v1 < 0x80) {
-        D_801EB4E0->unk_0B -= 1;
+    g_Task->unk_2E.half = RANDOM_MASK(3) + 0x9F;
+    position            = g_Task->unk_30.half - 2;
+    g_Task->unk_30.half = position;
+    if ((s16)position < 0x80) {
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }

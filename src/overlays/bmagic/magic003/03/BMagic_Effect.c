@@ -66,7 +66,7 @@ MATCH void func_801EF0A8(void) {
 INCLUDE_ASM(func_801EF12C);
 
 MATCH void func_801EF1FC(void) {
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         *D_8014637C &= 0xBF;
         func_800AEF98(4, 0);
         g_Task->header.mode += 1;
@@ -189,9 +189,9 @@ MATCH void func_801EF6CC(void) {
     u8            step;
 
     work = BATTLE_ACTIVE_WORK;
-    step = work->unk_0B;
+    step = work->param.unk_0B;
     if (step < 2) {
-        work->unk_0B = step - 1;
+        work->param.unk_0B = step - 1;
         func_801E5988();
     }
 }
@@ -233,7 +233,7 @@ MATCH void func_801EF9FC(void) {
     func_8014DAEC();
     if ((g_Task->pos.x.fixed == g_Task->unk_18) && (g_Task->pos.y.fixed == g_Task->unk_1C)) {
         GFX_FreePaletteFadeTarget(g_Task);
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -251,8 +251,8 @@ MATCH void func_801EFCF8(void) {
 
     func_8014DAEC();
     if (func_8014DAEC() != 0u) {
-        work         = (PartyBattler*)D_801EB4E0;
-        work->unk_0B = work->unk_0B - 1;
+        work               = (PartyBattler*)D_801EB4E0;
+        work->param.unk_0B = work->param.unk_0B - 1;
         Actor_Clear();
     }
 }

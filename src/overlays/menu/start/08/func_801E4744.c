@@ -202,7 +202,7 @@ NON_MATCHING void func_801E4744(void) {
                 g_Characters[tmp3] = s_CampMenuState[tmp3];
                 val5               = val9 << 0x18;
             } while (tmp7 < 5);
-            UI_SetMode(0);
+            UI_SetMode(UI_MODE_FADE_OUT);
             g_MenuStartStep += 1;
         }
     }

@@ -144,26 +144,59 @@ extern u8 g_GameRequestFlags;
 #endif
 /* Not volatile: the qualifier changes the generated order in the scena00 drawer. */
 /* D_80143C40 */
-extern u16          g_UiWindowEffectBusy;
+extern u16 g_UiWindowEffectBusy;
+
+/* The screen effects UI_SetMode starts, by index into g_UiLocalModeFuncs. Each
+ * effect comes as an out/in pair: out takes the screen to black or white, in
+ * brings it back. The indexes not named here run camera spins and distance
+ * resets. */
+typedef enum UiMode {
+    UI_MODE_FADE_OUT       = 0,
+    UI_MODE_FADE_IN        = 1,
+    UI_MODE_FAST_FADE_OUT  = 2,
+    UI_MODE_FAST_FADE_IN   = 3,
+    UI_MODE_SLOW_FADE_OUT  = 4,
+    UI_MODE_SLOW_FADE_IN   = 5,
+    UI_MODE_LAYER_FADE_OUT = 6,
+    UI_MODE_LAYER_FADE_IN  = 7,
+    UI_MODE_WHITE_OUT      = 8,
+    UI_MODE_WHITE_IN       = 9,
+    UI_MODE_LONG_FADE_OUT  = 13,
+    UI_MODE_LONG_FADE_IN   = 14,
+    UI_MODE_LONG_WHITE_OUT = 15,
+    UI_MODE_LONG_WHITE_IN  = 16,
+} UiMode;
+
 /* D_80143C90 */
-extern u16          g_UiLocalMode;
+extern u16 g_UiLocalMode;
 /* D_80143F1E */
-extern u8           g_GameEntryMode;
+extern u8  g_GameEntryMode;
 /* D_80145024 */
 /* D_80145024 */
-extern u8           g_EmiLoadedCharacterIndex;
-extern u8           D_80145025;
+extern u8  g_EmiLoadedCharacterIndex;
+extern u8  D_80145025;
 /* D_8014502C */
-extern u32          g_BattleCount;
-extern u16          D_80145A7C;
+extern u32 g_BattleCount;
+extern u16 D_80145A7C;
 /* D_80145AA4 */
-extern u16          g_InputHeld;
-/* D_80145AB4 */
-extern u16          g_InputMasks;
-extern u16          D_80145AB6;
-extern u16          D_80145AB8;
-extern u16          D_80145ABC;
-extern u16          D_80145AC0;
+extern u16 g_InputHeld;
+
+/* Pad masks of the remappable buttons, indexed by InputSlot (the defaults are
+ * D_8017F56C). */
+typedef enum InputSlot {
+    INPUT_SLOT_ACTION,
+    INPUT_SLOT_INTERACT,
+    INPUT_SLOT_MENU,
+    INPUT_SLOT_LOOK,
+    INPUT_SLOT_4,
+    INPUT_SLOT_5,
+    INPUT_SLOT_6,
+    INPUT_SLOT_CONFIRM,
+    INPUT_SLOT_CANCEL,
+    INPUT_SLOT_COUNT
+} InputSlot;
+
+extern u16          g_InputMasks[INPUT_SLOT_COUNT];
 extern u16          D_80145ACE;
 extern u8           D_80145AD0;
 extern u8           D_80145AE5;
