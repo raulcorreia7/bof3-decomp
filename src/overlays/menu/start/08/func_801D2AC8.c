@@ -28,6 +28,7 @@ MATCH void func_801D2AC8(void) {
     g_BattleChoicePhase          = 2;
     g_MenuPanelTasks[15].unk_0A  = D_80148656;
     *panel                       = 1;
+    /* D_80148574 stays an address symbol: a g_MenuPanelTasks[16] view changes the code. */
     D_80148574                   = -100;
     g_MenuPanelTasks[16].pos.y   = 0x78;
     g_MenuPanelTasks[17].mode    = 8;
