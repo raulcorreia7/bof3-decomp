@@ -3103,6 +3103,7 @@ Actor_Spawn = { addr = 0x801F2E1C, type = "func", source = "spawns an actor reco
 
 ["emi/world02/area080/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+Area_ProjectRing = { addr = 0x801F30B0, type = "func", source = "projects the 16 points of a glow ring onto the screen: each point lies at the ring radius around the centre, 0x100 angle units apart, and its screen position lands in the record's point row; one body shared with the other area overlays" }
 Area_SubCameraOffsetY20 = { addr = 0x801F3CE4, type = "func", source = "subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_AddCameraOffsetY20 = { addr = 0x801F3D0C, type = "func", source = "adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 Area_ResetCameraOffsetY = { addr = 0x801F3D34, type = "func", source = "zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }

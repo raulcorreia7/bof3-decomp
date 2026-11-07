@@ -3,7 +3,7 @@
 MATCH void func_801F2DE0(void) {
     u8 remaining;
 
-    func_801F30B0(D_801F44A0);
+    Area_ProjectRing(D_801F44A0);
     func_801F31A0(D_801F44A0);
     func_801F3870();
     func_801F395C();
