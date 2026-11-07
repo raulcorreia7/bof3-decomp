@@ -265,19 +265,19 @@ u32 g_XaStreamSlots[3] = {
     0x000002AA,
 };
 
-u32 g_XaCueTables[3] = {
+u32 g_XaCues[3] = {
     (u32)&D_801839C4,
     (u32)&D_801832C4,
     (u32)&D_80183298,
 };
 
-u32 g_EmiEntryHandlers[11] = {
+u32 g_EmiEntryTypes[11] = {
     (u32)EMI_LoaderCopyPayload, (u32)EMI_LoaderQueuePayload, (u32)EMI_LoaderQueuePayload,  (u32)EMI_LoaderLoadGraphics,
     (u32)EMI_LoaderReadToc,     (u32)EMI_LoaderReadToc,      (u32)EMI_LoaderLoadVabHeader, (u32)EMI_LoaderLoadVabBody,
     (u32)EMI_LoaderLoadVabCues, (u32)EMI_LoaderLoadSequence, (u32)EMI_LoaderLoadSequence,
 };
 
-u32 g_XaStateFuncs[55] = {
+u32 g_XaStates[55] = {
     (u32)SND_XaStateIdle,
     (u32)SND_XaStateSeek,
     (u32)SND_XaStateSeekResult,

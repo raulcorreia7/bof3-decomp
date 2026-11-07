@@ -33,7 +33,7 @@ MATCH void EMI_OnCDReady(u8 status, u8* result) {
 
     state = g_EmiEntryType;
     if ((state == 0) || (state == 4) || (state == 6) || ((u16)(state - 8) < 2) || (state == 10)) {
-        ((void (*)(void))g_EmiEntryHandlers[g_EmiEntryType])();
+        ((void (*)(void))g_EmiEntryTypes[g_EmiEntryType])();
     } else {
         slot = g_EmiRingSlot;
         if ((g_EmiRingStates[slot] & 0x80) == 0) {
@@ -61,7 +61,7 @@ MATCH void EMI_OnCDReady(u8 status, u8* result) {
             return;
         }
 
-        ((void (*)(void))g_EmiEntryHandlers[g_EmiEntryType])();
+        ((void (*)(void))g_EmiEntryTypes[g_EmiEntryType])();
         cursor = (u8*)&g_EmiRingSlot;
         (*cursor)++;
         if ((s8)*cursor == 0x18) {

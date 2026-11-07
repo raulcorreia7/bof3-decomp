@@ -18,7 +18,7 @@ MATCH s32 func_801EF0CC(void) {
 }
 
 MATCH void func_801EF108(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF14C(void) {
@@ -65,11 +65,11 @@ INCLUDE_ASM(func_801EF844);
 INCLUDE_ASM(func_801EFB24);
 
 MATCH void func_801EFE54(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 6), 1, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 6), 1, g_Task);
 }
 
 MATCH void func_801EFE98(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 2, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 2, g_Task);
 }
 
 INCLUDE_ASM(func_801EFEDC);

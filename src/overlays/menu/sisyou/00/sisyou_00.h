@@ -154,7 +154,7 @@ extern u8                 g_MasterPanelLock;
 extern u8                 D_801D4288;
 extern u8                 g_MasterScrollOffset;
 extern u8                 g_MasterMenuCursor;
-extern Callback           g_MasterMenuFuncs[MASTER_MENU_STEP_COUNT];
+extern Callback           g_MasterMenuStates[MASTER_MENU_STEP_COUNT];
 extern Callback           g_MasterMenuSubFuncs[MASTER_MENU_SUBSTEP_COUNT];
 
 /* Functions, in address order. */

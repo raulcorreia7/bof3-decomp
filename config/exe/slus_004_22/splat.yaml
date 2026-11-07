@@ -1010,7 +1010,7 @@ segments:
       - [0xE9668, .rodata, data_8017F668]
       - [0xE9974, .rodata, D_8017F974]
       - [0xE9C94, .rodata, D_8017FC94]
-      - [0xEB164, .rodata, g_EncounterZoneLists]
+      - [0xEB164, .rodata, g_EncounterZones]
       - [0xEB484, .rodata, D_80181484]
       - [0xEBAC0, .rodata, data_80181AC0]
       - [0xEBC7C, .rodata, D_80181C7C]

@@ -8,7 +8,7 @@ MATCH void SND_ServiceXA(void) {
     s8* mode;
 
     mode = &g_EmiServiceState;
-    ((void (*)(void))g_XaStateFuncs[*mode])();
+    ((void (*)(void))g_XaStates[*mode])();
     D_8014681C++;
 
     if (D_8014682C != 0 && *mode < 6) {
