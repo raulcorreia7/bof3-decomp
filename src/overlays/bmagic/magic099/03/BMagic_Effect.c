@@ -8,7 +8,15 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC88);
 
-INCLUDE_ASM(func_801EEE70);
+MATCH void func_801EEE70(void) {
+    D_80145BD6[g_Task->timer].red_offset--;
+    D_80145BD6[g_Task->timer].green_offset--;
+    D_80145BD6[g_Task->timer].blue_offset--;
+    if (--g_Task->unk_09 == 0) {
+        func_800A9610(g_BattleTargetSelector, 16);
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801EEF98(void) {
     PartyBattler* work;
@@ -96,7 +104,34 @@ MATCH void func_801EF4C4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF554);
+MATCH void func_801EF554(void) {
+    PartyBattler* work;
+    s32           temp;
+    s32           angle;
+    s32*          angle_cell;
+    s32           velocity;
+
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0;
+
+    work                   = g_Task;
+    temp                   = work->unk_03 << 5;
+    angle_cell             = &D_1F800004;
+    angle                  = (temp & 0x7F) << 5;
+    VOL(s32, work->unk_0C) = temp;
+    *angle_cell            = angle;
+    D_1F800000             = 0x28;
+
+    velocity          = rcos(angle) * D_1F800000;
+    work              = g_Task;
+    work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
+
+    velocity            = rsin(*angle_cell) * D_1F800000;
+    g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
+
+    g_Task->pos.z.part.integer = BATTLE_ACTIVE_WORK->pos.z.part.integer;
+    g_Task->header.step++;
+}
 
 MATCH void func_801EF654(void) {
     BattleEffectTimerStep();
