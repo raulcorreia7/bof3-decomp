@@ -31,7 +31,7 @@ MATCH s32 func_8015B870(u32 kind) {
         case 10:
             return g_Task->script_pc;
         case 11:
-            return D_80145F09;
+            return g_BattlePartyBattlers[0].chr.character_id;
         case 12:
             /* FAKE: retail reads g_SceneEventFlags as u32. */
             return (*(u32*)g_SceneEventFlags);
