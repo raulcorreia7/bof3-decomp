@@ -1590,8 +1590,7 @@ D_801CD120 = { addr = 0x801CD120, size = 0x10 }
 D_801CD130 = { addr = 0x801CD130, size = 0x10 }
 D_801CD140 = { addr = 0x801CD140, size = 0x14 }
 D_801CD154 = { addr = 0x801CD154, size = 0x10 }
-g_CharacterFieldActions = { addr = 0x801CD164, size = 0x4C }
-g_CharacterFieldActions = { addr = 0x801CD164, source = "func_801B3690 (task mode 0x0A) calls [g_EmiLoadedCharacterIndex & 0x7F] as the lead character's field action" }
+g_CharacterFieldActions = { addr = 0x801CD164, size = 0x4C, source = "func_801B3690 (task mode 0x0A) calls [g_EmiLoadedCharacterIndex & 0x7F] as the lead character's field action" }
 D_801CD1B0 = { addr = 0x801CD1B0, size = 0x8 }
 s_EncounterStepThresholds = { addr = 0x801CD1B8, size = 0x10, source = "func_801B3CCC takes the total and random cap pair for a menu entry" }
 D_801CD1B9 = { addr = 0x801CD1B9, size = 0x1, alias = true }
