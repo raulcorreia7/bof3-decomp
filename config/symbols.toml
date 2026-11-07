@@ -3,10 +3,16 @@
 # reads. Every other symbol file is generated from this file.
 
 ["emi/battle/battle/03"]
+g_BattleTurnOrder = { addr = 0x8014630C, size = 0xB, source = "Battler index of each turn-order rank, 0xFF for an empty or cancelled entry; Battle_BuildTurnOrder fills it." }
+g_BattleTurnCursor = { addr = 0x80146322, source = "Index into g_BattleTurnOrder of the battler whose turn is next; Battle_BuildTurnOrder resets it to 0 and Battle_InsertTurnFirst steps it back." }
+g_BattleTurnCount = { addr = 0x80146323, source = "Number of battlers ranked in g_BattleTurnOrder, set by Battle_BuildTurnOrder." }
 Battle_RunTurnSetup = { addr = 0x801D2740, type = "func", source = "Battle mode 2: runs the g_BattleStep handler of the turn setup (builds the turn order, announces the enemies, waits for the loader and enters mode 3)." }
 Battle_RunTurns = { addr = 0x801D2AA8, type = "func", source = "Battle mode 3: runs the g_BattleStep handler of the battlers' turns, and clears BATTLE_STATE_COMMAND_ARMED while the cancel button is held." }
 Battle_RunRoundEnd = { addr = 0x801D4AC0, type = "func", source = "Battle mode 4: runs the g_BattleStep handler that closes a round; the last one enters mode 5 once g_BattleResult is set and otherwise returns to mode 1." }
 Battle_RunResult = { addr = 0x801D6774, type = "func", source = "Battle mode 5: runs the g_BattleStep handler of the battle result." }
+Battle_BuildTurnOrder = { addr = 0x801DAAE4, type = "func", source = "Builds the turn order: ranks every active battler by agility, command and a random value, sorts the BattleRank rows high to low and writes the battler indexes into g_BattleTurnOrder." }
+Battle_CancelTurn = { addr = 0x801DD14C, type = "func", source = "Cancels a battler's queued command and removes it from the turn order by overwriting its g_BattleTurnOrder entry with 0xFF." }
+Battle_InsertTurnFirst = { addr = 0x801DD26C, type = "func", source = "Puts battler arg0 at the head of the turn order: steps g_BattleTurnCursor back one and stores the battler there." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Battle_TestAICondition = { addr = 0x8009BBE8, type = "func", source = "Tests an enemy AI condition." }
 g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, alias = true }
@@ -98,6 +104,9 @@ Effect_StartPlaying = { addr = 0x801EF00C, alias = true }
 g_MenuInventoryCountFormat = { addr = 0x80096A4C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 Menu_DrawInventoryWindow = { addr = 0x800B25C0, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 g_MenuInventoryTitles = { addr = 0x800B6E88, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+g_BattleTurnOrder = { addr = 0x8014630C, size = 0xB, source = "Battler index of each turn-order rank, 0xFF for an empty or cancelled entry; Battle_BuildTurnOrder fills it." }
+g_BattleTurnCursor = { addr = 0x80146322, source = "Index into g_BattleTurnOrder of the battler whose turn is next; Battle_BuildTurnOrder resets it to 0 and Battle_InsertTurnFirst steps it back." }
+g_BattleTurnCount = { addr = 0x80146323, source = "Number of battlers ranked in g_BattleTurnOrder, set by Battle_BuildTurnOrder." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleWorkCell = { addr = 0x1F800044, alias = true }
 Battle_TestAICondition = { addr = 0x8009BBE8, type = "func", source = "Tests an enemy AI condition." }
@@ -178,6 +187,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 BMagic_AllocEffect = { addr = 0x801F09C4, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic003 (Super Combo)." }
 Actor_Clear = { addr = 0x801F0A28, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0B00, source = "Handlers of magic003 (Super Combo), run by header.mode (byte 0x01)." }
+D_801F0B38 = { addr = 0x801F0B38, source = "Effect slot table of the magic003 effect, scanned by BMagic_AllocEffect and cleared by a loop over its 0x78-byte records." }
 
 ["emi/bmagic/magic004/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -185,6 +195,7 @@ Effect_DrawScreenFade = { addr = 0x801EF6E0, type = "func", source = "Draws the 
 Effect_SetDuration = { addr = 0x801EF9A0, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic004 (ThundrStrike)." }
 Effect_LowerTickerStepOnReady = { addr = 0x801EFA70, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) once the script stream reports ready (func_8014DAEC) in magic004 (ThundrStrike)." }
 Effect_StepWhileTickUnderTwo = { addr = 0x801EFBA8, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 2 in magic004 (ThundrStrike)." }
+D_801EFE40 = { addr = 0x801EFE40, source = "Sound cue id per effect index of the magic004 effect, read by func_801EF158 with the effect's unk_04 index." }
 g_BMagicEffectModes = { addr = 0x801EFE58, source = "Handlers of magic004 (ThundrStrike), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic006/03"]
@@ -329,6 +340,9 @@ D_801EFC8C = { addr = 0x801EFC8C, source = "Step handlers of the magic043 effect
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnZeroTick = { addr = 0x801EEDA0, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic044 (Evil Eye)." }
 g_BMagicEffectModes = { addr = 0x801F0A14, source = "Handlers of magic044 (Evil Eye), run by header.mode (byte 0x01)." }
+D_801F0A1C = { addr = 0x801F0A1C, source = "Step handlers of the magic044 effect (Evil Eye), run by header.step (byte 0x02) from func_801EEE44; the fourth entry is reached before the table's second half." }
+D_801F0A2C = { addr = 0x801F0A2C, source = "Step handlers of the bmagic/magic044/03 effect, run by header.step from func_801F0478." }
+D_801F0A38 = { addr = 0x801F0A38, source = "Trail points of the magic044 effect, one x and y per trail slot and step, shifted each frame by BMAGIC_SHIFT_TRAIL in func_801F0478." }
 
 ["emi/bmagic/magic045/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -386,6 +400,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 Effect_DecayTimersAndPlay = { addr = 0x801EEEA8, type = "func", source = "Counts the effect timer (byte 0x09) down while the ticker (byte 0x0B) is under 4 and the counter (byte 0x0A) down while it is under 3; once the top halfword of work word 0x08 is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic055 (Ebonfire)." }
 Effect_FollowTarget = { addr = 0x801EEFFC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero copies the active battler's position into the effect, reloads the timer with 0x40, clears the counter (byte 0x0A) and ticker (byte 0x0B) and advances header.mode (byte 0x01) in magic055 (Ebonfire)." }
 Effect_SetActorMatrix = { addr = 0x801EF700, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic055 (Ebonfire)." }
+D_801EFC64 = { addr = 0x801EFC64, source = "Mode handlers of the magic055 effect, run by header.mode (byte 0x01) from func_801EEF74." }
 
 ["emi/bmagic/magic056/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -581,6 +596,7 @@ CardAccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes t
 Effect_TickOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of g_BattleEffectBattler and clears the effect in magic081 (RottenBreath)." }
 BMagic_AllocEffect = { addr = 0x801EFA20, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all effect slots are in use in magic081 (RottenBreath)." }
 g_BMagicEffectModes = { addr = 0x801EFA84, source = "Handlers of magic081 (RottenBreath), run by header.mode (byte 0x01)." }
+D_801EFA8C = { addr = 0x801EFA8C, source = "Effect slot table of the magic081 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic082/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -642,6 +658,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 Effect_DecayTimersAndPlay = { addr = 0x801EEEA8, type = "func", source = "Counts the effect timer (byte 0x09) down while the ticker (byte 0x0B) is under 4 and the counter (byte 0x0A) down while it is under 3; once the top halfword of work word 0x08 is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic091 (Flare)." }
 Effect_FollowTarget = { addr = 0x801EEFFC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero copies the active battler's position into the effect, reloads the timer with 0x40, clears the counter (byte 0x0A) and ticker (byte 0x0B) and advances header.mode (byte 0x01) in magic091 (Flare)." }
 Effect_SetActorMatrix = { addr = 0x801EF700, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic091 (Flare)." }
+D_801EFC64 = { addr = 0x801EFC64, source = "Mode handlers of the magic091 effect, run by header.mode (byte 0x01) from func_801EEF74." }
 
 ["emi/bmagic/magic092/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -686,6 +703,7 @@ Effect_CountDownTickerAndStep = { addr = 0x801EF348, type = "func", source = "Co
 Effect_CountDownTimerStep = { addr = 0x801EF394, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.step (byte 0x02) at zero in magic096 (Blizzard)." }
 Effect_CountDownAndFinish = { addr = 0x801EF3E0, type = "func", source = "Counts the effect counter (byte 0x0A) down; at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic096 (Blizzard)." }
 Effect_SetActorMatrix = { addr = 0x801EFA8C, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic096 (Blizzard)." }
+D_801F0488 = { addr = 0x801F0488, source = "Per-index byte of the magic096 effect, compared with the effect's unk_09 timer in func_801EF2CC and indexed by unk_04." }
 g_BMagicEffectModes = { addr = 0x801F04A8, source = "Handlers of magic096 (Blizzard), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic097/03"]
@@ -799,11 +817,14 @@ Effect_CountDownAndPlay = { addr = 0x801EF3D4, type = "func", source = "Counts t
 Effect_SetActorMatrix = { addr = 0x801EF440, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic113 (Noting)." }
 Effect_CountDownTimerStep = { addr = 0x801F0868, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.step (byte 0x02) at zero in magic113 (Noting)." }
 g_BMagicEffectModes = { addr = 0x801F0B94, source = "Handlers of magic113 (Noting), run by header.mode (byte 0x01)." }
+D_801F0BC0 = { addr = 0x801F0BC0, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801EFC28." }
+D_801F0BCC = { addr = 0x801F0BCC, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801F0140." }
 
 ["emi/bmagic/magic114/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_CountDownAndPlay = { addr = 0x801EF0BC, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic114 (Fire Whip)." }
 g_BMagicEffectModes = { addr = 0x801F121C, source = "Handlers of magic114 (Fire Whip), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
+D_801F1230 = { addr = 0x801F1230, source = "Step handlers of the bmagic/magic114/03 effect, run by header.step from func_801EFDD8." }
 
 ["emi/bmagic/magic115/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -830,6 +851,7 @@ BMagic_DrawBurnSprites = { addr = 0x801EF194, type = "func", source = "draws the
 Effect_SetActorMatrix = { addr = 0x801EF60C, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic118 (Burn)." }
 BMagic_DrawBurnFlameQuads = { addr = 0x801EF6BC, type = "func", source = "draws the Burn flame quads (POLY_G4, semi-transparent) with sine and cosine offsets" }
 BMagic_DrawBurnFlameTris = { addr = 0x801EFA1C, type = "func", source = "draws the Burn flame triangles (POLY_G3, semi-transparent) with the same sine and cosine offsets as the quads" }
+D_801EFCD4 = { addr = 0x801EFCD4, source = "Mode handlers of the bmagic/magic118/03 effect, run by header.mode from BMagic_UpdateBurnSprites." }
 
 ["emi/bmagic/magic120/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -900,6 +922,7 @@ Effect_CountUpTimerByTwoAndStep = { addr = 0x801EF38C, type = "func", source = "
 BMagic_AllocEffect = { addr = 0x801F0500, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 64 slots are in use in magic129 (Holocaust)." }
 Actor_Clear = { addr = 0x801F0564, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F05B4, source = "Handlers of magic129 (Holocaust), run by header.mode (byte 0x01)." }
+D_801F05D8 = { addr = 0x801F05D8, source = "Effect slot table of the magic129 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic130/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -967,6 +990,10 @@ Effect_StepOnTickFlag = { addr = 0x801F00F0, type = "func", source = "Advances h
 Effect_CountDownCounterAndFinish = { addr = 0x801F0134, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic144 (Wall of Fire)." }
 BMagic_AllocEffect = { addr = 0x801F046C, type = "func", source = "Claims the first free slot of the 48-entry effect table (bit 0 of header.flags) and returns its index, or 0xFF when every slot is in use in magic144 (Wall of Fire)." }
 g_BMagicEffectModes = { addr = 0x801F04D0, source = "Handlers of magic144 (Wall of Fire), run by header.mode (byte 0x01)." }
+D_801F04D4 = { addr = 0x801F04D4, source = "Step handlers of the bmagic/magic144/03 effect, run by header.step from func_801EEEE0." }
+D_801F04E4 = { addr = 0x801F04E4, source = "Mode handlers of the bmagic/magic144/03 effect, run by header.mode from func_801EF510." }
+D_801F04EC = { addr = 0x801F04EC, source = "Step handlers of the bmagic/magic144/03 effect, run by header.step from func_801EF554." }
+D_801F050C = { addr = 0x801F050C, source = "Effect slot table of the magic144 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic145/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -1151,6 +1178,8 @@ Effect_CountUpAndStep = { addr = 0x801EF5D8, type = "func", source = "Counts the
 BMagic_AllocEffect = { addr = 0x801F02D4, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic225 (Temptation)." }
 Actor_Clear = { addr = 0x801F0338, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0388, source = "Handlers of magic225 (Temptation), run by header.mode (byte 0x01)." }
+D_801F03AC = { addr = 0x801F03AC, source = "Mode handlers of the magic225 effect, run by header.mode (byte 0x01) from func_801EFE0C; func_801EFE50 reads the same table one entry further along by header.step." }
+D_801F03BC = { addr = 0x801F03BC, source = "Effect slot table of the magic225 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic226/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -1163,6 +1192,10 @@ Effect_SetActorMatrix = { addr = 0x801F0724, type = "func", source = "Sets the a
 BMagic_AllocEffect = { addr = 0x801F0B8C, type = "func", source = "Claims the first free slot of the 48-entry effect table (bit 0 of header.flags) and returns its index, or 0xFF when every slot is in use in magic226 (MeteorStrike)." }
 Actor_Clear = { addr = 0x801F0BF0, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0C40, source = "Handlers of magic226 (MeteorStrike), run by header.mode (byte 0x01)." }
+D_801F0C60 = { addr = 0x801F0C60, source = "Mode handlers of the bmagic/magic226/03 effect, run by header.mode from func_801EFD84." }
+D_801F0C78 = { addr = 0x801F0C78, source = "Step handlers of the bmagic/magic226/03 effect, run by header.step from func_801EFDC8." }
+D_801F0C84 = { addr = 0x801F0C84, source = "Step handlers of the bmagic/magic226/03 effect, run by header.step from func_801F04D4." }
+D_801F0C90 = { addr = 0x801F0C90, source = "Effect slot table of the magic226 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/boss/boss001/13"]
 Boss_FinishDefeat_800C1900 = { addr = 0x800C1900, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss001." }
@@ -2337,6 +2370,7 @@ g_MenuStartEquipmentStates = { addr = 0x801ED3FC, source = "the state handlers o
 g_MenuStartPanel7StateFuncs = { addr = 0x801ED408, source = "the state handlers of panel mode 7, indexed by the panel task state" }
 g_MenuStartPanel8StateFuncs = { addr = 0x801ED414, source = "the state handlers of panel mode 8, indexed by the panel task state" }
 g_MenuStartMessageStates = { addr = 0x801ED420, source = "the state handlers of panel mode 9, indexed by the panel task state" }
+g_StartCursorFrames = { addr = 0x801ED42C, size = 0x10, source = "The width and height of the frame the cursor-frame panel draws, indexed by the panel's frame kind" }
 g_MenuStartPanel11StateFuncs = { addr = 0x801ED43C, source = "the state handlers of panel mode 11, indexed by the panel task state" }
 g_MenuStartInventoryStates = { addr = 0x801ED448, source = "the state handlers of panel mode 12, indexed by the panel task state" }
 g_MenuStartCommandsStates = { addr = 0x801ED45C, source = "the state handlers of panel mode 13, indexed by the panel task state" }
@@ -2754,6 +2788,7 @@ Scene_JoinAdultNinaAndMomo = { addr = 0x801FAB74, type = "func", source = "Strea
 Scene_JoinAdultNina = { addr = 0x801FABC0, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
 Scene_JoinMomo = { addr = 0x801FAC04, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
 Scene_JoinAdultNinaAndMomo_801FAC48 = { addr = 0x801FAC48, type = "func", source = "Second copy of Scene_JoinAdultNinaAndMomo in this image." }
+Scene_JoinMomoWithGarr = { addr = 0x801FAC94, type = "func", source = "Adds Momo to the party and loads the adult Ryu, Garr and Momo resources in scena11." }
 Scene_JoinMomo_801FACD8 = { addr = 0x801FACD8, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
 Scene_JoinMomoAndPeco = { addr = 0x801FAD1C, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
 Scene_JoinPeco = { addr = 0x801FAD68, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
@@ -2770,6 +2805,7 @@ Scene_JoinAdultNinaAndMomo = { addr = 0x801FCDE0, type = "func", source = "Strea
 Scene_JoinAdultNina = { addr = 0x801FCE2C, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
 Scene_JoinMomo = { addr = 0x801FCE70, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
 Scene_JoinAdultNinaAndMomo_801FCEB4 = { addr = 0x801FCEB4, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
+Scene_JoinMomoWithGarr = { addr = 0x801FCF00, type = "func", source = "Adds Momo to the party and loads the adult Ryu, Garr and Momo resources in scena12." }
 Scene_JoinMomo_801FCF44 = { addr = 0x801FCF44, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
 Scene_JoinMomoAndPeco = { addr = 0x801FCF88, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 5 (CHAR_ID_MOMO) then character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
 Scene_JoinPeco = { addr = 0x801FCFD4, type = "func", source = "Streams the party resource family through EMI_LoaderStreamFamily, rebuilds the battlers with Party_BuildBattlers, joins character 6 (CHAR_ID_PECO) with Party_JoinMember and restages every party palette through Party_StagePalettes." }
@@ -2978,6 +3014,7 @@ Fishing_LureInRange = { addr = 0x801E0680, type = "func", source = "true when th
 Fishing_CatchScore = { addr = 0x801E0ABC, type = "func", source = "score of one fish catch: the species row's maximum score (+0x12) scaled by length over the species maximum length (+0x0F), full score from the maximum length up" }
 Fishing_TotalScore = { addr = 0x801E0B6C, type = "func", source = "the player's fishing points: sums Fishing_CatchScore over the 32 g_FishBestCatch lengths" }
 Fishing_DrawRank = { addr = 0x801E1320, type = "func", source = "draws the rank panel: picks the rank row of g_FishingRankIcons by the total fishing points against the rank score bounds at 0x801D0C70 and prints the points in five digits" }
+Fishing_FishStacksFull = { addr = 0x801E1C10, type = "func", source = "reports whether every fish species (ITEM_JELLYFISH through ITEM_MACKEREL) is held at the 99-item stack limit; Fishing_ChooseAction diverts to sub step 7 once before the cast while it is true" }
 g_FishingCastGaugeStates = { addr = 0x801E1D10, source = "cast power gauge steps: idle, start, sweep, label" }
 g_FishingLureStates = { addr = 0x801E1D20, source = "lure actor steps: idle, cast, fly, settle, float, hooked" }
 g_FishingReelGaugeStates = { addr = 0x801E1D80, source = "reel gauge steps: idle, start, update" }
@@ -2992,6 +3029,7 @@ g_FishingHookedStates = { addr = 0x801E2268, source = "hooked steps: start, bite
 g_FishModes = { addr = 0x801E2314, source = "handlers of a pond fish row by its mode byte (0x01): appear, swim, and the later modes" }
 g_FishSpecies = { addr = 0x801E2AC8, source = "fish species rows of 0x24 bytes indexed by fish id: scene id (+0), stamina (+0x0E), maximum length (+0x0F) and maximum score (+0x12); the item id of a catch is the fish id plus 0x38" }
 g_FishSpawnCounts = { addr = 0x801E2DF4, source = "how many fish of each species Fishing_SpawnFish puts in a pond: 0x17 bytes per pond, indexed by g_GameContextKind" }
+g_FishingFullNoticeShown = { addr = 0x801E3204, type = "u8", source = "set when Fishing_ChooseAction has diverted to sub step 7 because the fish stacks are full; cleared when they are not and by the entry reset" }
 g_FishingHookedFish = { addr = 0x801E3208, source = "pond row index of the fish on the line, 0xFF while none is hooked" }
 g_FishingRodRow = { addr = 0x801E320C, source = "the equipped rod's row of the rod table, set by Fishing_SelectGear" }
 g_FishingLureRow = { addr = 0x801E3210, source = "the equipped lure's row of the lure table, set by Fishing_SelectGear" }

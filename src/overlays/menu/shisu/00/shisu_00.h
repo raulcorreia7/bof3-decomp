@@ -7,6 +7,7 @@
 #include "menu/party.h"
 #include "shared/etc.h"
 #include <stdio.h>
+#include "menu/party.h"
 
 #define g_SceneState (*(struct SceneState*)&g_SceneState)
 

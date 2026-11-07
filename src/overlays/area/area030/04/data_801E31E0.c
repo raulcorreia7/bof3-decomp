@@ -22,7 +22,7 @@ u8 D_801E31FC __attribute__((aligned(4))) = 0;
 u8 D_801E3200 __attribute__((aligned(4))) = 0;
 
 /* 0x801E3204 */
-u8 D_801E3204 __attribute__((aligned(4))) = 0;
+u8 g_FishingFullNoticeShown __attribute__((aligned(4))) = 0;
 
 /* 0x801E3208 */
 u8 g_FishingHookedFish __attribute__((aligned(4))) = 0;

@@ -7,6 +7,7 @@
 #include "menu/party.h"
 #include "shared/etc.h"
 #include <stdio.h>
+#include "menu/party.h"
 
 extern u8  D_80148654;
 extern u8  D_80148339;

@@ -3,7 +3,8 @@
 /* clears the small local/enemy action scratch flags for one battler
  * and removes it from the ranked owner list if present.
  */
-MATCH void func_801DD14C(u8 battler_index) {
+/* func_801DD14C */
+MATCH void Battle_CancelTurn(u8 battler_index) {
     u8 index;
 
     if (BATTLER_IS_PLAYER(battler_index)) {
@@ -17,9 +18,9 @@ MATCH void func_801DD14C(u8 battler_index) {
     }
 
     index = 0u;
-    while (index < *(&D_80146323)) {
-        if (battler_index == (&D_8014630C)[index]) {
-            (&D_8014630C)[index] = 0xFFu;
+    while (index < *(&g_BattleTurnCount)) {
+        if (battler_index == g_BattleTurnOrder[index]) {
+            g_BattleTurnOrder[index] = 0xFFu;
         }
         index += 1u;
     }
