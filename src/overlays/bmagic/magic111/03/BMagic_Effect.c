@@ -67,7 +67,6 @@ MATCH void func_801EF158(void) {
     }
 }
 
-
 MATCH void func_801EF1D4(void) {
     s32 start;
 
