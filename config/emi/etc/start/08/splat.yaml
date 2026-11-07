@@ -188,7 +188,7 @@ segments:
       - [0xE61C, c, Menu_DrawClutStrip]
       - [0xE810, c, Menu_DrawFilledPanel]
       - [0xEAEC, c, Menu_DrawWindowFrame]
-      - [0xEFF4, c, func_801DFBF4]
+      - [0xEFF4, c, Menu_DrawInventoryWindow]
       - [0xF754, c, func_801E0354]
       - [0xFC48, c, Menu_DrawPanelFrame]
       - [0xFE70, c, func_801E0A70]

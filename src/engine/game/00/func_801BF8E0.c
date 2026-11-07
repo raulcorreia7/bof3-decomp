@@ -45,7 +45,7 @@ MATCH void func_801BF8E0(void) {
         src = limit;
         dst = 0;
     loop:
-        if (key != (&D_80145F09)[dst]) {
+        if (key != FIELD(u8, &g_BattlePartyBattlers[0].chr.character_id, dst)) {
             index++;
             dst += BATTLE_PARTY_STRIDE;
             if (index < src) {

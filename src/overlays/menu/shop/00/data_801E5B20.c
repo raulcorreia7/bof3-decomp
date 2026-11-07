@@ -6,12 +6,8 @@ char D_801E5B30[8] = "ARMOR";
 char D_801E5B38[8] = "OPTION";
 char D_801E5B40[8] = "VITAL";
 
-const char *D_801E5B48[5] = {
-    D_801E5B20,
-    D_801E5B28,
-    D_801E5B30,
-    D_801E5B38,
-    D_801E5B40,
+u8* g_MenuInventoryTitles[5] = {
+    (u8*)D_801E5B20, (u8*)D_801E5B28, (u8*)D_801E5B30, (u8*)D_801E5B38, (u8*)D_801E5B40,
 };
 
 u8 D_801E5B5C[8] = "HEAL";

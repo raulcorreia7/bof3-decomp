@@ -6,7 +6,6 @@
 
 #include "overlays/scenario/scenario.h"
 
-extern u8  D_80145F09;
 extern u8  D_80146865;
 extern u8  D_80146866;
 extern u8  D_80146867;

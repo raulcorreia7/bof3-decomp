@@ -12,7 +12,6 @@
 /* The per-slot message index. */
 
 /* The battle record rows whose first byte is the slot tag. */
-extern u8                  D_80145F09[][BATTLE_PARTY_STRIDE];
 extern u8                  D_801F41F8[];
 /* D_801F48FC */
 extern PartyMemberMessages g_PartyMemberMessages[1];
