@@ -69,4 +69,5 @@ MATCH void func_801EF0F0(void) {
 
 INCLUDE_ASM(func_801EF250);
 
+/* blocker: the radius is a halfword at D_1F800000 (lh) but spawn.h types it s32; needs: type (a per-file width view is not allowed). */
 INCLUDE_ASM(func_801EF70C);
