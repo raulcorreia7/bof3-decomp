@@ -3,9 +3,9 @@
 MATCH void func_801F3720(void) {
     Actor* work;
 
-    func_801F37A8(g_Task->pos.z.fixed, (g_Task->unk_0B & 0xF8) << 0x10);
+    func_801F37A8(g_Task->pos.z.fixed, (g_Task->param.unk_0B & 0xF8) << 0x10);
     work = g_Task;
-    work->unk_0B -= 4;
+    work->param.unk_0B -= 4;
     work->pos.z.fixed += 4;
     if (g_Task->pos.z.fixed >= -0x7F) {
         g_SceneEventStep = 4;

@@ -6,7 +6,7 @@ MATCH void func_801F34FC(void) {
     u8     index;
 
     s     = g_Task;
-    index = s->unk_0B;
+    index = s->param.unk_0B;
     e     = &g_Actors[index];
     TASK_SET(e);
     if ((g_ScriptVars[3] & 0x80u) != 0u) {

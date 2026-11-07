@@ -1,14 +1,14 @@
 #include "area104_14.h"
 
 MATCH void func_801F38EC(void) {
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         g_Task->unk_09++;
         if (g_Task->unk_09 >= 0x5A) {
-            g_Task->unk_0B++;
+            g_Task->param.unk_0B++;
         }
     }
 
-    if (D_801454F2 != 0 && g_Task->unk_0B != 0) {
+    if (D_801454F2 != 0 && g_Task->param.unk_0B != 0) {
         goto bump; /* skips the 0x100 test: advance state byte 0x03 */
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

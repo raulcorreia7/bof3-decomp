@@ -252,7 +252,7 @@ MATCH void func_801F8EA8(void) {
     func_801F92F0(&work->pos.x, &work->vx);
     g_Task->unk_09      = 8;
     g_Task->header.mode = g_Task->header.mode + 1;
-    if (!(g_Task->unk_0B & 2)) {
+    if (!(g_Task->param.unk_0B & 2)) {
         cue = 0x203;
         if (!(g_Task->unk_06 & 4)) {
             cue = 0x208;

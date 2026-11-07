@@ -18,8 +18,8 @@ MATCH void func_8019CEDC(void) {
             }
         }
         func_8019D270();
-        g_Task->unk_0B      = 0;
-        g_Task->header.mode = 1;
+        g_Task->param.unk_0B = 0;
+        g_Task->header.mode  = 1;
     }
     func_8015A944();
 }

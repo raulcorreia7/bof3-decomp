@@ -17,7 +17,7 @@ MATCH void func_801B036C(void) {
             func_801B59B4();
             g_Task->option_flags = 0;
             g_Task->unk_0A       = 2;
-            g_Task->unk_0B       = 0;
+            g_Task->param.unk_0B = 0;
             func_801B5BDC(g_Task->direction_08);
             g_Task->header.step = 1;
         }

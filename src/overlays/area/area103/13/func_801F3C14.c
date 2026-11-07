@@ -8,6 +8,6 @@ MATCH void func_801F3C14(void) {
     work->pos.y.fixed      = TO_COORD(20);
     COORD_INT(work->pos.z) = -0x100;
     work->unk_32           = 0;
-    g_Task->unk_0B         = 0;
+    g_Task->param.unk_0B   = 0;
     g_Task->header.step++;
 }

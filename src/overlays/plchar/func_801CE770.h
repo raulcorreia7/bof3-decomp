@@ -42,6 +42,6 @@ MATCH void func_801CE770(void) {
         Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42);
         g_Task->unk_0A = 5;
     }
-    g_Task->unk_0B = 0;
+    g_Task->param.unk_0B = 0;
     g_Task->header.step++;
 }

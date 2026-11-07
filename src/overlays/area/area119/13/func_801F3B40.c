@@ -2,8 +2,8 @@
 
 MATCH void func_801F3B40(void) {
     if (g_AreaSceneMode != 0) {
-        g_Task->unk_09 = 1;
-        g_Task->unk_0B = 0;
+        g_Task->unk_09       = 1;
+        g_Task->param.unk_0B = 0;
         g_Task->header.step++;
     }
 }

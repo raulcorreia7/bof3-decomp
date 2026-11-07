@@ -9,15 +9,15 @@ MATCH void Area_CountHudBannerHold(void) {
     Actor* work;
 
     work = g_Task;
-    if (work->unk_0B == 0) {
+    if (work->param.unk_0B == 0) {
         work->unk_09++;
         work = g_Task;
         if (work->unk_09 >= 0x5A) {
-            work->unk_0B++;
+            work->param.unk_0B++;
         }
     }
 
-    if (D_801454F2 != 0 && g_Task->unk_0B != 0) {
+    if (D_801454F2 != 0 && g_Task->param.unk_0B != 0) {
         goto bump;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

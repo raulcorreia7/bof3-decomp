@@ -5,13 +5,13 @@ MATCH void func_801F4494(void) {
     Actor* work;
 
     scratch = (Actor*)g_Task;
-    if (scratch->unk_0B != 0) {
+    if (scratch->param.unk_0B != 0) {
         if ((scratch->header.flags & ACTOR_FLAG_OFFSCREEN) != 0) {
             Actor_Clear();
             return;
         }
     } else if ((scratch->header.flags & ACTOR_FLAG_OFFSCREEN) == 0) {
-        scratch->unk_0B = 1;
+        scratch->param.unk_0B = 1;
     }
 
     work = (Actor*)g_Task;

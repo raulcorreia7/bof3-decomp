@@ -51,13 +51,13 @@ found:
         flags = g_Characters[kind].status;
         if ((flags & 0x4000) != 0) {
             Actor_StageScriptRecord(rec[0x4B], 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
-            g_Task->unk_0B = 0;
+            g_Task->param.unk_0B = 0;
         } else {
             sel = rec[0x08];
             if ((sel & BYTE_MASK) == s_RouteIndexByMode[g_BattleScrollDir]) {
                 if (rec[0x0B] != 0) {
                     Actor_StageScriptRecord(sel, 0, MEM_PTR(u8, 0x800F0800u), 0xA00);
-                    g_Task->unk_0B = 0;
+                    g_Task->param.unk_0B = 0;
                 }
             } else {
                 rec[0x08] = (sel + rec[0x0B]) & 7;
@@ -93,7 +93,7 @@ phase2:
         } while (index < 32);
         off += BATTLE_PARTY_STRIDE;
         func_801C2438();
-        g_Task->unk_0B            = 0;
+        g_Task->param.unk_0B      = 0;
         g_Task->tint.bytes.unk_5D = neg;
         g_Task->tint.bytes.unk_5E = neg;
         g_Task->tint.bytes.unk_5F = neg;

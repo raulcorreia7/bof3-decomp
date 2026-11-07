@@ -136,11 +136,11 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
         case ACTOR_SCRIPT_STAGE_SPAWN_HELPER: {
             volatile Actor* work;
 
-            flag         = table[state->index_0A + 1];
-            slot         = g_GameState->slot_index_79;
-            work         = SCRATCH_WORK;
-            work->unk_0B = func_8015CC00(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]],
-                                         work->pos.x.fixed, work->pos.y.fixed, work->depth.fixed);
+            flag               = table[state->index_0A + 1];
+            slot               = g_GameState->slot_index_79;
+            work               = SCRATCH_WORK;
+            work->param.unk_0B = func_8015CC00(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]],
+                                               work->pos.x.fixed, work->pos.y.fixed, work->depth.fixed);
             state->index_0A += 1;
             break;
         }
