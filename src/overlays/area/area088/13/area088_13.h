@@ -44,8 +44,11 @@ extern WorldMapMarker D_801F6234[6];
 #define AREA_HUD_MASK_TABLE D_801F6234
 
 extern u16 D_800E4B3E;
-extern u16 D_801F6090[5][16];
-extern u8  D_801F6170[12];
+/* Key rows: column 0 is matched against g_GameContextSeed; column g_SceneState is the message Fish_LocationMessage
+ * starts. */
+extern u16 D_801F6090[7][16];
+/* Three fishing spots of 12 bytes: the spot id, then the 11 fish ids its board lists (0xFF ends the list). */
+extern u8  D_801F6170[36];
 extern u8  D_801F6194[]; /* the "Manillo" text at +0x10 */
 
 void func_801F2F28(u8* window);
