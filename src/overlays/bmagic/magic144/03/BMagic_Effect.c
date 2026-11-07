@@ -84,6 +84,7 @@ MATCH void func_801EF654(void) {
 
 INCLUDE_ASM(func_801EF818);
 
+/* hint: first differing instruction is the flags beqz at +0x48 (candidate four instructions longer): retail loads unk_30 inside each arm of the param.unk_0B == 1 test, the candidate loads it after the if. */
 INCLUDE_ASM(func_801EFF74);
 
 #include "overlays/bmagic/Effect_AppearAtTarget.h"
