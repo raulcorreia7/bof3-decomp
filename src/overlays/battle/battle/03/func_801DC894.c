@@ -11,18 +11,18 @@ MATCH u32 func_801DC894(s16 damage, u8 attacker, u8 target) {
     }
     if (BATTLER_IS_PLAYER(attacker)) {
         if (HAS_STATUS(g_BattlePartyBattlers[attacker], STATUS_BLIND) && RANDOM_MASK(2)) {
-            ENEMY_COMBATANT(target).turn.target_flags &= ~0x10;
+            ENEMY_COMBATANT(target).turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
             return 0;
         }
     } else if ((ENEMY_COMBATANT(attacker).status & STATUS_BLIND) && RANDOM_MASK(2)) {
-        ENEMY_COMBATANT(target).turn.target_flags &= ~0x10;
+        ENEMY_COMBATANT(target).turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
         return 0;
     }
     if (attacker < 3 && (g_BattlePartyBattlers[attacker].turn.action_flags.value & COMBATANT_FLAG_ALWAYS_HITS)) {
         return damage;
     }
-    if ((ENEMY_COMBATANT(target).event_flags & 4) && (rand() & 2)) {
-        ENEMY_COMBATANT(target).turn.target_flags &= ~0x10;
+    if ((ENEMY_COMBATANT(target).event_flags & ENEMY_EVENT_EVADE) && (rand() & 2)) {
+        ENEMY_COMBATANT(target).turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
         return 0;
     }
     if (!BATTLER_IS_PLAYER(attacker)) {
@@ -32,6 +32,6 @@ MATCH u32 func_801DC894(s16 damage, u8 attacker, u8 target) {
     if (rand() % 100 < threshold) {
         return damage;
     }
-    ENEMY_COMBATANT(target).turn.target_flags &= ~0x10;
+    ENEMY_COMBATANT(target).turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
     return 0;
 }

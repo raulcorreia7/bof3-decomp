@@ -9,7 +9,7 @@ MATCH void func_801E45DC(void) {
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {
-        if ((g_BattleCurrentEnemy->turn.target_flags & 0x10) != 0) {
+        if ((g_BattleCurrentEnemy->turn.target_flags & BATTLE_HIT_HP_LANDED) != 0) {
             func_800AAC88(g_BattleCurrentEnemy->turn.hp_change, g_Task->slot);
         } else {
             slot                               = Battle_AllocEffect(0, 1) & BYTE_MASK;

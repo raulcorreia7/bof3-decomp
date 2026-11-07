@@ -46,7 +46,7 @@ MATCH void func_801DF3F8(void) {
         PartyBattler* battler = g_GameState;
 
         if (HAS_STATUS(*battler, STATUS_CONFUSED)) {
-            if (battler->turn.damage_flags.value & 0x800) {
+            if (battler->turn.damage_flags.value & COMBATANT_FLAG_UNK_11) {
                 PartyBattler* work = g_Task;
                 s32           slot_offset;
                 s8            level;

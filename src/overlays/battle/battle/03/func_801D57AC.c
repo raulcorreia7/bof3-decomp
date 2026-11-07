@@ -12,7 +12,7 @@ MATCH u8 func_801D57AC(void) {
             if (func_801DDCB4(index) != 0u) {
                 last_index                          = index;
                 ENEMY_COMBATANT(index).turn.counter = 0u;
-                ENEMY_COMBATANT(index).status &= 0xFFBFu;
+                ENEMY_COMBATANT(index).status &= ~STATUS_SLEEPING;
                 count += 1u;
             } else {
                 ENEMY_COMBATANT(index).turn.counter += 1u;
