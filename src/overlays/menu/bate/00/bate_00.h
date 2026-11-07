@@ -7,7 +7,12 @@
 #include "shared/etc.h"
 #include <stdio.h>
 
-extern u8 D_80148654;
+extern u8  D_80148654;
+extern u8  D_80148339;
+extern u8  D_8014835F;
+extern u8  D_80148361;
+extern s16 D_80148388;
+extern s16 D_801483AC;
 
 #define g_SceneState (*(struct SceneState*)&g_SceneState)
 

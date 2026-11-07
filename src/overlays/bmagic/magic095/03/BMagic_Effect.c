@@ -4,6 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+/* blocker: a 0x14-byte constant block D_801EEC04 copied to the stack has no record type in this image; needs: type. */
 INCLUDE_ASM(func_801EEC18);
 
 INCLUDE_ASM(func_801EEC9C);

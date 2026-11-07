@@ -9,16 +9,6 @@ MATCH void func_801D0C10(void) {
     SYS_DISPATCH_BYTE(g_Commu05States, D_801F294C);
 }
 
-typedef struct {
-    s8 unk_00;
-    s8 unk_01;
-    s8 unk_02;
-    s8 unk_03;
-    s8 unk_04;
-} Commu05State;
-
-extern Commu05State D_801D19F0;
-
 MATCH void func_801D0C4C(void) {
     if (D_80145E44 != 0) {
         D_801D19F0.unk_00 = ((D_80145E44 - 1) / 7) + 1;

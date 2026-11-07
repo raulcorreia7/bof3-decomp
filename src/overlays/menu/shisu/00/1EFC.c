@@ -219,8 +219,7 @@ INCLUDE_ASM(Menu_DrawEquipStatWindow);
 
 #include "overlays/menu/Menu_DrawFilledPanel.h"
 
-/* blocker: per-band draw-mode setup. */
-INCLUDE_ASM(Menu_DrawWindowFrame);
+#include "overlays/menu/Menu_DrawWindowFrame.h"
 
 #include "overlays/menu/Menu_DrawInventoryWindow.h"
 
@@ -298,6 +297,8 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
 
 #include "overlays/menu/Menu_DrawPanelFrame.h"
 
+/* The equip list, a twin of overlays/menu/Menu_DrawEquipChoiceWindow.h. needs: split: its jump table (0x801D0D4C) sits
+ * in the D_801D0C04 bin blob ahead of this unit's text, so the unit's .rodata has no place in the split yet. */
 INCLUDE_ASM(func_801D8A78);
 
 MATCH void func_801D91B0(u8 index, s32 left, s32 top, MenuListRow* row) {
@@ -309,7 +310,7 @@ MATCH void func_801D91B0(u8 index, s32 left, s32 top, MenuListRow* row) {
 
     x = left;
     y = top;
-    UI_DrawWindow(left + 8, y, 200, 48, 0, g_WindowStyle);
+    UI_DrawWindow(left + 8, y, MENU_SAVE_SLOT_WINDOW_WIDTH, MENU_SAVE_SLOT_WINDOW_HEIGHT, 0, g_WindowStyle);
     if (row != NULL) {
         GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
         Menu_DrawPanelIcon((left + 9), (top + 5), (u8)(index + 3), 0x1E, GetClut(16, 480), 128);

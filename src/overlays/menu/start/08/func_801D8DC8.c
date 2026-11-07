@@ -23,13 +23,13 @@ MATCH void func_801D8DC8(void) {
     Menu_DrawClutStrip(D_80144953);
     panel = &g_MenuPanelTasks[17];
     if (D_801485A0 != 0) {
-        g_MenuPanelTasks[11].unk_10 = D_801485A0 + START_LIST_DESCRIPTION_ID;
+        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = D_801485A0 + START_LIST_DESCRIPTION_ID;
     } else {
-        g_MenuPanelTasks[11].unk_10 = 0;
+        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0;
     }
-    g_MenuPanelTasks[21].active = 1;
-    g_MenuPanelTasks[21].pos.x  = panel->pos.x + START_LIST_CURSOR_X;
-    g_MenuPanelTasks[21].pos.y =
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = panel->pos.x + START_LIST_CURSOR_X;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y =
         panel->pos.y + ((panel->unk_0B - panel->unk_0A) * START_LIST_ROW_HEIGHT + START_LIST_FIRST_ROW_Y);
     buttons = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
     old     = panel->unk_0B;
@@ -77,9 +77,9 @@ MATCH void func_801D8DC8(void) {
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        D_80148597                  = 1;
-        g_MenuPanelTasks[21].active = 0;
-        D_80148654                  = 7;
+        D_80148597                                       = 1;
+        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
+        D_80148654                                       = 7;
         D_80148652 += 1;
     }
 }

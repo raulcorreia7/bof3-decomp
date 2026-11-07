@@ -39,7 +39,7 @@ char g_MenuLabelConfusion[MASTER_MENU_LABEL_LONG_SIZE] = "Conf";
 
 /* Panel atlas records. */
 // clang-format off
-MenuPortraitSprite D_801D4058[MASTER_MENU_ATLAS_COUNT] = {
+MenuPortraitSprite g_MenuPortraitAtlas[MASTER_MENU_ATLAS_COUNT] = {
     {120, 0, 176, 2},
     {40, 48, 240, 2},
     {80, 0, 32, 2},

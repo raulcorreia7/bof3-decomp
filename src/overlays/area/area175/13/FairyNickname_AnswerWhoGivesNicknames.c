@@ -7,5 +7,5 @@ MATCH void FairyNickname_AnswerWhoGivesNicknames(void) {
     } else {
         D_801F294C = 1;
     }
-    g_MessageRequest = 0xEF;
+    g_MessageRequest = FAIRY_MESSAGE_NICKNAME_PICK_FAIRY;
 }

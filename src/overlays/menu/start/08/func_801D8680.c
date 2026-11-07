@@ -14,15 +14,16 @@ NON_MATCHING void func_801D8680(void) {
     u8   tmp3;
 
     Menu_DrawClutStrip(D_80144953);
-    *(s16*)(&D_801484CC)        = 0x18;
-    g_MenuPanelTasks[21].active = 1;
-    val0                        = &D_801484CC + 0xEC;
-    g_MenuPanelTasks[18].unk_0C = 0xFF;
-    g_MenuPanelTasks[16].unk_0C = 0xFF;
-    g_MenuPanelTasks[21].pos.x  = g_MenuPanelTasks[18].pos.x + 5;
-    g_MenuPanelTasks[21].pos.y  = g_MenuPanelTasks[18].pos.y + ((g_MenuPanelTasks[18].unk_0B * 0x10) + 0x1A);
-    tmp0                        = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
-    val1                        = g_MenuPanelTasks[16].unk_0B == 3;
+    *(s16*)(&D_801484CC)                             = 0x18;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
+    val0                                             = &D_801484CC + 0xEC;
+    g_MenuPanelTasks[18].unk_0C                      = 0xFF;
+    g_MenuPanelTasks[16].unk_0C                      = 0xFF;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = g_MenuPanelTasks[18].pos.x + 5;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y =
+        g_MenuPanelTasks[18].pos.y + ((g_MenuPanelTasks[18].unk_0B * 0x10) + 0x1A);
+    tmp0 = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+    val1 = g_MenuPanelTasks[16].unk_0B == 3;
     if (tmp0 & PADLup) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         tmp3                        = g_MenuPanelTasks[18].unk_0B - 1;

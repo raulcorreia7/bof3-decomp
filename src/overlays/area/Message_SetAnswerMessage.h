@@ -5,19 +5,19 @@
 MATCH void Message_SetAnswerMessage(void) {
     switch (g_MessageChoice) {
         case 0:
-            g_MessageRequest = 0xFA;
+            g_MessageRequest = FAIRY_MESSAGE_HELP_JOBS;
             break;
         case 1:
-            g_MessageRequest = 0xFB;
+            g_MessageRequest = FAIRY_MESSAGE_HELP_ASSIGNING;
             break;
         case 2:
-            g_MessageRequest = 0xFC;
+            g_MessageRequest = FAIRY_MESSAGE_HELP_ABILITIES;
             break;
         case 3:
-            g_MessageRequest = 0xFD;
+            g_MessageRequest = FAIRY_MESSAGE_HELP_HOUSING;
             break;
         case 4:
-            g_MessageRequest = 0xF9;
+            g_MessageRequest = FAIRY_MESSAGE_HELP_UP_TO_YOU;
             break;
     }
 }

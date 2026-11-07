@@ -9,7 +9,7 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     s32        align;
 
     base = &g_WindowStyle;
-    UI_DrawWindow((x + 3), (y + 3), 125, 48, 0, base[0]);
+    UI_DrawWindow((x + 3), (y + 3), MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, 0, base[0]);
     /* FAKE: the record base is formed straight from the byte symbol; folding the offset through the pointer local
      * places the address pair too early. */
     record = (Character*)(&g_WindowStyle + 0x16) + entry;
@@ -36,21 +36,21 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     if (value < 2U) {
         align = 2;
     }
-    TEXT_Format(g_UiFormatBuffer, D_801D0C08, value);
+    TEXT_Format(g_UiFormatBuffer, g_MenuCurrentValueFormat, value);
     text_x = (x + 0x16);
     text_y = (y + 0x1F);
     UI_DrawGlyphString(text_x, text_y, align, g_UiFormatBuffer);
-    TEXT_Format(g_UiFormatBuffer, D_801D0C10, record->stats.max_hp);
+    TEXT_Format(g_UiFormatBuffer, g_MenuMaxValueFormat, record->stats.max_hp);
     UI_DrawGlyphString(text_x, text_y, 0, g_UiFormatBuffer);
 
     align = ((record->stats.max_ap >> 2) >= record->ap) ? 4 : 0;
     if (record->ap == 0) {
         align = 2;
     }
-    TEXT_Format(g_UiFormatBuffer, D_801D0C08, record->ap);
+    TEXT_Format(g_UiFormatBuffer, g_MenuCurrentValueFormat, record->ap);
     text_y = (y + 0x27);
     UI_DrawGlyphString(text_x, text_y, align, g_UiFormatBuffer);
-    TEXT_Format(g_UiFormatBuffer, D_801D0C10, record->stats.max_ap);
+    TEXT_Format(g_UiFormatBuffer, g_MenuMaxValueFormat, record->stats.max_ap);
     UI_DrawGlyphString(text_x, text_y, 0, g_UiFormatBuffer);
 
     UI_DrawSpriteRun(x, y, D_801D3F58, 0);

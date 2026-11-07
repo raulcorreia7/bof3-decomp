@@ -4,9 +4,8 @@
  * three slot flags when its state is not 4, records it in the group slot and advances the selection counters.
  */
 MATCH void func_801D6818(void) {
-    u8  index;
-    u32 offset;
-    u8  slot;
+    u8 index;
+    u8 slot;
 
     if (BATTLE_PARTY_CURSOR < g_BattlePartyCount) {
         do {
@@ -22,8 +21,8 @@ MATCH void func_801D6818(void) {
                         g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[BATTLE_PARTY_CURSOR];
                     } else {
                         for (index = 0u; index < BATTLE_PARTY_SLOT_COUNT; index++) {
-                            offset = (u32)index * BATTLE_PARTY_STRIDE;
-                            *(u32*)((s_BattleBattlerTemplateTails + offset)) &= ~1u;
+                            s_BattleBattlerTemplates[index].turn.action_flags.value &=
+                                ~COMBATANT_FLAG_DRAGON_FORM_QUEUED;
                         }
                         slot                               = (u8)Battle_AllocEffect(0u, 0xCu);
                         g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[BATTLE_PARTY_CURSOR];

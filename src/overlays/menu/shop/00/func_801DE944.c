@@ -47,8 +47,8 @@ MATCH void func_801DE944(void) {
             } while (i < g_PartySize);
         }
         if (mode != 2 && g_BattlePartyBattlers[0].chr.character_id == 2) {
-            D_80145EC4 += FIELD(s16, D_801E5C48, g_BattlePartyBattlers[0].facing * 4) << 15;
-            D_80145EC8 += FIELD(s16, D_801E5C48, g_BattlePartyBattlers[0].facing * 4 + 2) << 15;
+            D_80145EC4 += FIELD(s16, g_ShopFacingSteps, g_BattlePartyBattlers[0].facing * 4) << 15;
+            D_80145EC8 += FIELD(s16, g_ShopFacingSteps, g_BattlePartyBattlers[0].facing * 4 + 2) << 15;
         }
         if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
             g_AreaScrollTargetX = D_80145EC4;
@@ -75,9 +75,9 @@ MATCH void func_801DE944(void) {
             src   = 0;
             dst   = 0;
             for (; i < count; i++) {
-                FIELD(s32, &D_80145EC4, dst) = FIELD(s32, D_801E5C18, src);
-                FIELD(s32, &D_80145EC8, dst) = FIELD(s32, D_801E5C18 + 1, src);
-                FIELD(s32, &D_80145ECC, dst) = FIELD(s32, D_801E5C18 + 2, src);
+                FIELD(s32, &D_80145EC4, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].x, src);
+                FIELD(s32, &D_80145EC8, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].y, src);
+                FIELD(s32, &D_80145ECC, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].z, src);
                 src += 0x10;
                 dst += BATTLE_PARTY_STRIDE;
             }

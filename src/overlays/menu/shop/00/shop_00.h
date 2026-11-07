@@ -163,10 +163,14 @@ extern char        D_801D0C94[];
 extern char        D_801D0C98[];
 extern char        D_801D0CDC[];
 extern char        g_MenuStatFormat[];
-extern char        D_801D0CE8[];
-extern char        D_801D0CF0[];
-extern char        D_801D0CF8[];
-extern char        D_801D0CFC[];
+/* D_801D0CE8 */
+extern char        g_MenuCurrentValueFormat[];
+/* D_801D0CF0 */
+extern char        g_MenuMaxValueFormat[];
+/* D_801D0CF8 */
+extern char        g_MenuExperienceFormat[];
+/* D_801D0CFC */
+extern char        g_MenuExperienceBlank[];
 extern char        g_MenuZennyFormat[];
 /* D_801D0D0C */
 extern char        g_MenuNextExpBlank[];
@@ -213,7 +217,7 @@ extern char        D_801D0E98[];
 #define SAVE_STATE_COUNT         21
 
 /* Entries of the panel handler tables. */
-#define SHOP_PANEL_COUNT         19
+#define SHOP_MODE_COUNT          19
 #define SHOP_PANEL0_STATE_COUNT  3
 #define SHOP_PANEL1_STATE_COUNT  3
 #define SHOP_PANEL2_STATE_COUNT  3
@@ -274,6 +278,9 @@ extern u8          g_MenuListTab2OnSprites[0xC];
 extern u8*         g_MenuInventoryTitles[5];
 extern char        g_MenuInventoryCountFormat[];
 extern u8          g_MenuInventoryTab1OffSprites[];
+extern u8*         g_MenuEquipTitles[5];
+extern u8          g_MenuEquipChoiceIds[];
+extern u8          g_MenuEquipChoiceCounts[];
 extern u8          g_MenuInventoryTab1OnSprites[];
 /* D_801E5668 */
 extern u8          g_MenuListTab1OffSprites[0xC];
@@ -307,125 +314,133 @@ extern Callback    g_ShopStep6Funcs[SHOP_STEP6_COUNT];
 extern Callback    g_ShopStep6Sub0Funcs[SHOP_STEP6_SUB0_COUNT];
 /* D_801E5C08 */
 extern Callback    g_ShopStep6Sub3Funcs[SHOP_STEP6_SUB3_COUNT];
-extern s32         D_801E5C18[]; /* rows of x, y, distance, pad */
-extern s16         D_801E5C48[]; /* rows of x, y shifts */
-extern u8          D_801E5C68[];
-extern u8          D_801E5C70[];
-extern u8          D_801E5C78[];
-extern u8          D_801E5C84[];
-extern u8          D_801E5C90[];
-extern u8          D_801E5CA8[];
-extern u8          D_801E5CB4[];
-extern u8          D_801E5CC0[];
-extern u8          D_801E5CCC[];
-extern u8          D_801E5CD8[];
+
+typedef struct BoatPartyPos {
+    s32 x;
+    s32 y;
+    s32 z;
+    s32 unk_0C;
+} BoatPartyPos;
+
+extern BoatPartyPos g_ShopBoatPartyPositions[PARTY_SLOT_COUNT];
+extern Point2D      g_ShopFacingSteps[8];
+extern u8           D_801E5C68[];
+extern u8           D_801E5C70[];
+extern u8           D_801E5C78[];
+extern u8           D_801E5C84[];
+extern u8           D_801E5C90[];
+extern u8           D_801E5CA8[];
+extern u8           D_801E5CB4[];
+extern u8           D_801E5CC0[];
+extern u8           D_801E5CCC[];
+extern u8           D_801E5CD8[];
 /* D_801E5CE8 */
-extern Callback    g_ShopStep7Funcs[SHOP_STEP7_COUNT];
+extern Callback     g_ShopStep7Funcs[SHOP_STEP7_COUNT];
 /* D_801E5CFC */
-extern Callback    g_ShopStep7Sub2Funcs[SHOP_STEP7_SUB2_COUNT];
+extern Callback     g_ShopStep7Sub2Funcs[SHOP_STEP7_SUB2_COUNT];
 /* D_801E5D10 */
-extern Callback    g_ShopStep7Sub3Funcs[SHOP_STEP7_SUB3_COUNT];
-extern u8          D_801E5D1C[];
+extern Callback     g_ShopStep7Sub3Funcs[SHOP_STEP7_SUB3_COUNT];
+extern u8           D_801E5D1C[];
 /* D_801E5D2C */
-extern Callback    g_AbilityStockCommands[];
-extern u8          D_801E5D38[];
+extern Callback     g_AbilityStockCommands[];
+extern u8           D_801E5D38[];
 /* D_801E5D3C */
-extern Callback    g_ShopStep9Funcs[SHOP_STEP9_COUNT];
+extern Callback     g_ShopStep9Funcs[SHOP_STEP9_COUNT];
 /* D_801E5D48 */
-extern Callback    g_ShopStep9Sub0Funcs[SHOP_STEP9_SUB0_COUNT];
+extern Callback     g_ShopStep9Sub0Funcs[SHOP_STEP9_SUB0_COUNT];
 /* D_801E5D50 */
-extern Callback    g_ShopStep9Sub1Funcs[SHOP_STEP9_SUB1_COUNT];
+extern Callback     g_ShopStep9Sub1Funcs[SHOP_STEP9_SUB1_COUNT];
 /* D_801E5D5C */
-extern Callback    g_ShopStep9Sub2Funcs[SHOP_STEP9_SUB2_COUNT];
+extern Callback     g_ShopStep9Sub2Funcs[SHOP_STEP9_SUB2_COUNT];
 /* D_801E5D68 */
-extern Callback    g_ShopPanelModes[SHOP_PANEL_COUNT];
-extern void (*g_ShopPanel0StateFuncs[SHOP_PANEL0_STATE_COUNT])();
+extern Callback     g_ShopPanelModes[SHOP_MODE_COUNT];
+extern void (*g_ShopMessageStates[SHOP_PANEL0_STATE_COUNT])();
 /* D_801E5DC0 */
-extern Callback    g_ShopPanel2StateFuncs[SHOP_PANEL2_STATE_COUNT];
+extern Callback           g_ShopCommandsStates[SHOP_PANEL2_STATE_COUNT];
 /* D_801E5DCC */
-extern Callback    g_ShopPanel1StateFuncs[SHOP_PANEL1_STATE_COUNT];
-extern u16         D_801E5DD8[];
+extern Callback           g_ShopZennyStates[SHOP_PANEL1_STATE_COUNT];
+extern u16                D_801E5DD8[];
 /* D_801E5DDC */
-extern Callback    g_ShopPanel5StateFuncs[SHOP_PANEL5_STATE_COUNT];
+extern Callback           g_ShopEquipStatStates[SHOP_PANEL5_STATE_COUNT];
 /* D_801E5DF0 */
-extern Callback    g_ShopPanel6StateFuncs[SHOP_PANEL6_STATE_COUNT];
+extern Callback           g_ShopEquipmentStates[SHOP_PANEL6_STATE_COUNT];
 /* D_801E5DFC */
-extern Callback    g_ShopPanel7StateFuncs[SHOP_PANEL7_STATE_COUNT];
-extern u8          D_801E5E0C[];
-extern u8          D_801E5E1C[];
+extern Callback           g_ShopItemsStates[SHOP_PANEL7_STATE_COUNT];
+extern u8                 D_801E5E0C[];
+extern u8                 D_801E5E1C[];
 /* D_801E5E2C */
-extern Callback    g_ShopPanel9StateFuncs[SHOP_PANEL9_STATE_COUNT];
-extern u8          D_801E5E38[];
+extern Callback           g_ShopInventoryStates[SHOP_PANEL9_STATE_COUNT];
+extern u8                 D_801E5E38[];
 /* D_801E5E48 */
-extern Callback    g_ShopPanel11StateFuncs[SHOP_PANEL11_STATE_COUNT];
+extern Callback           g_ShopPanel11StateFuncs[SHOP_PANEL11_STATE_COUNT];
 /* D_801E5E5C */
-extern Callback    g_ShopPanel12StateFuncs[SHOP_PANEL12_STATE_COUNT];
+extern Callback           g_ShopPanel12StateFuncs[SHOP_PANEL12_STATE_COUNT];
 /* D_801E5E70 */
-extern Callback    g_ShopPanel13StateFuncs[SHOP_PANEL13_STATE_COUNT];
-extern u8          D_801E5E7C[];
-extern u8          D_801E5EA0[];
-extern u8          D_801E5EAC[];
-extern u32         D_801E5EFC[];
-extern u8          D_801E5F0C;
-extern u8          D_801E5F0D[];
+extern Callback           g_ShopCharacterStates[SHOP_PANEL13_STATE_COUNT];
+extern u8                 D_801E5E7C[];
+extern u8                 D_801E5EA0[];
+extern u8                 D_801E5EAC[];
+extern u32                D_801E5EFC[];
+extern u8                 D_801E5F0C;
+extern u8                 D_801E5F0D[];
 /* D_801E5F14 */
-extern Callback    g_ShopPanel15StateFuncs[SHOP_PANEL15_STATE_COUNT];
+extern Callback           g_ShopPanel15StateFuncs[SHOP_PANEL15_STATE_COUNT];
 /* D_801E5F24 */
-extern Callback    g_ShopPanel16StateFuncs[SHOP_PANEL16_STATE_COUNT];
+extern Callback           g_ShopPanel16StateFuncs[SHOP_PANEL16_STATE_COUNT];
 /* D_801E5F30 */
-extern Callback    g_ShopPanel17StateFuncs[SHOP_PANEL17_STATE_COUNT];
+extern Callback           g_ShopPanel17StateFuncs[SHOP_PANEL17_STATE_COUNT];
 /* D_801E5F3C */
-extern Callback    g_ShopPanel18StateFuncs[SHOP_PANEL18_STATE_COUNT];
-extern u32         D_801E5F48[3];
-extern u32         D_801E5F54[3];
-extern char        D_801E5F60[];
-extern u32         D_801E5F68;
-extern u8*         D_801E5FC0[];
-extern u8          D_801E600C[];
-extern u8          D_801E603C;
-extern u8          D_801E6040;
+extern Callback           g_ShopPanel18StateFuncs[SHOP_PANEL18_STATE_COUNT];
+extern u32                D_801E5F48[3];
+extern u32                D_801E5F54[3];
+extern char               D_801E5F60[];
+extern u32                D_801E5F68;
+extern u8*                D_801E5FC0[];
+extern MenuPortraitSprite g_ShopPortraitAtlas[12];
+extern u8                 D_801E603C;
+extern u8                 D_801E6040;
 /* D_801E6044 */
-extern s8          g_ShopStockIndex;
+extern s8                 g_ShopStockIndex;
 /* D_801E6048 */
-extern u8          g_ShopItemCategory;
+extern u8                 g_ShopItemCategory;
 /* D_801E604C */
-extern u8          g_ShopItemId;
+extern u8                 g_ShopItemId;
 /* D_801E6050 */
-extern u8          g_ShopItemCount;
-extern u8          D_801E6054;
-extern u8          D_801E6058;
+extern u8                 g_ShopItemCount;
+extern u8                 D_801E6054;
+extern u8                 D_801E6058;
 /* D_801E605C */
-extern s32         g_ShopItemCountMax;
+extern s32                g_ShopItemCountMax;
 /* D_801E6060 */
-extern s32         g_ShopItemPrice;
+extern s32                g_ShopItemPrice;
 /* D_801E6064 */
-extern u16         g_ShopPricePercent;
-extern u8          D_801E606C;
-extern u8          D_801E607C;
-extern u8          D_801E6080;
-extern u8          D_801E6088;
-extern u8          D_801E608C;
-extern u8          D_801E6094;
-extern u8          D_801E60EC;
-extern u8          D_801E60F0;
-extern u8          D_801E60F4;
-extern u8          D_801E60F8;
-extern u8          D_801E60FC;
-extern s16         D_801E6100[];
-extern u8          D_801E6108;
-extern u8          D_801E610C;
-extern u8          D_801E6110;
-extern u8          D_801E6144[0x80];
-extern u8          D_801E61C4[0x80];
-extern u8          D_801E6244[];
-extern u8          D_801E6248[];
-extern u8          D_801E6249[];
-extern u8          D_801E6250;
-extern u8          D_801E6254;
-extern u8          D_801E6258;
-extern u8          D_801E625C;
-extern volatile u8 D_801E6260;
-extern u8          D_801E6264[];
+extern u16                g_ShopPricePercent;
+extern u8                 D_801E606C;
+extern u8                 D_801E607C;
+extern u8                 D_801E6080;
+extern u8                 D_801E6088;
+extern u8                 D_801E608C;
+extern u8                 D_801E6094;
+extern u8                 D_801E60EC;
+extern u8                 D_801E60F0;
+extern u8                 D_801E60F4;
+extern u8                 D_801E60F8;
+extern u8                 D_801E60FC;
+extern s16                D_801E6100[];
+extern u8                 D_801E6108;
+extern u8                 D_801E610C;
+extern u8                 D_801E6110;
+extern u8                 D_801E6144[0x80];
+extern u8                 D_801E61C4[0x80];
+extern u8                 D_801E6244[];
+extern u8                 D_801E6248[];
+extern u8                 D_801E6249[];
+extern u8                 D_801E6250;
+extern u8                 D_801E6254;
+extern u8                 D_801E6258;
+extern u8                 D_801E625C;
+extern volatile u8        D_801E6260;
+extern u8                 D_801E6264[];
 
 bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 s32  Item_Count(u8 category, u8 item, u8 mode);
@@ -560,7 +575,7 @@ s32  Char_GetExpForLevel(s32 character, s32 level);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style);
 void Menu_DrawRowIcons(u8* row_record, s32 palette_index);
 void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32 equip_slot, u8 item_id);
-void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height);
+void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DC6FC */
 void Menu_DrawInventoryWindow(MenuPanelTask* arg0);
 void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);
@@ -626,32 +641,40 @@ void func_801E2650(void);
 void func_801E2724(void);
 void func_801E27BC(void);
 void func_801E2800(void);
-void func_801E2808(void);
+/* func_801E2808 */
+void Menu_MessagePanel(void);
 void func_801E2948(void);
 void func_801E2988(void);
-void func_801E29C8(void);
+/* func_801E29C8 */
+void Menu_CommandsPanel(void);
 void func_801E2A30(void);
 void func_801E2A70(void);
-void func_801E2AB0(void);
+/* func_801E2AB0 */
+void Menu_ZennyPanel(void);
 void func_801E2B14(void);
 void func_801E2B54(void);
-void func_801E2BC4(void);
-void func_801E2C18(void);
+/* func_801E2BC4 */
+void Menu_CursorFramePanel(void);
+/* func_801E2C18 */
+void Menu_EquipStatPanel(void);
 void func_801E2C9C(void);
 void func_801E2CDC(void);
 void func_801E2D1C(void);
 void func_801E2D5C(void);
-void func_801E2DB4(void);
+/* func_801E2DB4 */
+void Menu_EquipmentPanel(void);
 void func_801E2E30(void);
 void func_801E2E70(void);
-void func_801E2EB0(void);
+/* func_801E2EB0 */
+void Menu_ItemsPanel(void);
 void Shop_DrawItems(MenuListPanel* panel);
 void func_801E31C4(void);
 void func_801E3204(void);
 void func_801E3244(void);
 void func_801E3284(MenuPanelTask* task);
 void func_801E36F8(void);
-void func_801E3720(void);
+/* func_801E3720 */
+void Menu_InventoryPanel(void);
 void func_801E3774(void);
 void func_801E37B4(void);
 void func_801E37F4(MenuPanelTask* task);
@@ -666,7 +689,8 @@ void func_801E3D4C(void);
 void func_801E3D8C(void);
 void func_801E3DCC(void);
 void func_801E3E0C(void);
-void func_801E3E4C(void);
+/* func_801E3E4C */
+void Menu_CharacterPanel(void);
 void func_801E3EB4(void);
 void func_801E3EF4(void);
 void func_801E3F34(void);

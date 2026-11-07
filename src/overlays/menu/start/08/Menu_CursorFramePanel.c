@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-MATCH void func_801E9D98(void) {
+/* func_801E9D98 */
+MATCH void Menu_CursorFramePanel(void) {
     MenuPanelTask* panel;
     u8*            bytes;
 

@@ -9,14 +9,14 @@ MATCH void func_801D3A98(void) {
     u8*            rows;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[13].unk_0C = 0xFF;
-    g_MenuPanelTasks[11].unk_10 = 0x18;
-    g_MenuPanelTasks[21].active = 1;
-    g_MenuPanelTasks[13].unk_0C = 0xFF;
-    task                        = &g_MenuPanelTasks[14];
-    task->unk_0C                = 0xFF;
-    g_MenuPanelTasks[21].pos.x  = task->pos.x + 5;
-    g_MenuPanelTasks[21].pos.y  = task->pos.y + (task->unk_0B * 16 + 26);
+    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C       = 0xFF;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0x18;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active      = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C       = 0xFF;
+    task                                                  = &g_MenuPanelTasks[14];
+    task->unk_0C                                          = 0xFF;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x       = task->pos.x + 5;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y       = task->pos.y + (task->unk_0B * 16 + 26);
 
     input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
     if (input & PADLup) {
@@ -40,8 +40,9 @@ MATCH void func_801D3A98(void) {
             func_801D49F8(entry);
             return;
         }
-        g_MenuPanelTasks[13].flags  = 0xFF;
-        g_MenuPanelTasks[13].unk_0C = s_ChoiceMenuCursors[g_MenuPanelTasks[13].unk_0A];
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags = 0xFF;
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C =
+            s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A];
         /* D_80148652 through D_80148651: retail keeps the symbol-relative
          * address in a register for the read-modify-write. */
         (&D_80148651)[1]++;

@@ -16,16 +16,16 @@ NON_MATCHING void func_801DAA68(void) {
     i      = 0;
     record++;
     record--;
-    g_MenuPanelTasks[11].handler = 6;
-    g_MenuPanelTasks[11].mode    = 9;
-    g_MenuPanelTasks[11].state   = 2;
-    record[0]                    = 1;
-    g_MenuPanelTasks[11].pos.x   = 0x14;
-    g_MenuPanelTasks[11].pos.y   = 0x10;
-    g_MenuPanelTasks[11].unk_10  = 0;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].handler = 6;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode    = MENU_START_MODE_MESSAGE;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state   = 2;
+    record[0]                                              = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x   = 0x14;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y   = 0x10;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10  = 0;
     for (i = 0; i < 2; i++) {
         rows[i].handler = 6;
-        rows[i].mode    = 0xA;
+        rows[i].mode    = MENU_START_MODE_CURSOR_FRAME;
         rows[i].active  = 0;
         rows[i].unk_0A  = 0;
     }

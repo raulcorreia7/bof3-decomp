@@ -452,20 +452,28 @@ extern u8                                D_801460F2;
 /* D_801462E3 */
 extern volatile u8                       g_BattleUIStep;
 extern volatile u8                       D_801462E7;
+
+/* The Accession gene picker's cursor over g_BattlePanelEntry (row) and D_801462E7 (column). */
+typedef struct GeneCursor {
+    s8 row;
+    u8 column;
+} GeneCursor;
+
+extern volatile GeneCursor  g_GeneCursor;
 /* D_801462F0 */
-extern volatile u8                       g_BattlePartyCount; /* u8 active-battler count at 0x801462F0. */
+extern volatile u8          g_BattlePartyCount; /* u8 active-battler count at 0x801462F0. */
 /* D_8014630C */
-extern u8                                g_BattleTurnOrder[];
-extern BattleSelectionState              D_801462F0_state;
+extern u8                   g_BattleTurnOrder[];
+extern BattleSelectionState D_801462F0_state;
 /* D_80146374 */
-extern volatile u8                       g_BattleActiveBattler;
+extern volatile u8          g_BattleActiveBattler;
 /* Per-access views of a symbol at the same address, named by an `alias = true` row in config/symbols.toml (this image's
  * table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for one cell use them; a cast of the
  * canonical symbol merges the pair and changes the bytes. */
-extern u8                                g_BattleActiveBattler_nv;
+extern u8                   g_BattleActiveBattler_nv;
 /* D_80146394 */
-extern volatile u8                       g_BattleTarget;
-extern u8                                g_BattleTarget_nv;
+extern volatile u8          g_BattleTarget;
+extern u8                   g_BattleTarget_nv;
 /* D_801463A0 */
 extern BattleTurn* volatile g_BattleTargetRecord;
 extern u16                 D_801463B4;
