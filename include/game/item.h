@@ -38,6 +38,9 @@ typedef enum ArmorType {
 /* The armor type that fits equipment slot EQUIP_SLOT_SHIELD..EQUIP_SLOT_ARMOR. */
 #define ARMOR_TYPE_OF_SLOT(slot) ((slot) + 1)
 
+/* The most of one item an inventory slot holds. */
+#define ITEM_STACK_MAX           99
+
 /* The func_801AF494 predicate that holds when bit record_bit of the item's equipability is set. */
 #define ITEM_TEST_EQUIPPABLE     4
 

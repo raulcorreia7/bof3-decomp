@@ -26,15 +26,15 @@ MATCH void Fishing_ChooseAction(void) {
                 FISHING_STATE->sub_index_03  = 0;
                 break;
             }
-            if (func_801E1C10() & BYTE_MASK) {
-                if (D_801E3204 == 0) {
-                    D_801E3204                  = 1;
+            if (Fishing_FishStacksFull() & BYTE_MASK) {
+                if (g_FishingFullNoticeShown == 0) {
+                    g_FishingFullNoticeShown    = 1;
                     D_8014403D                  = 4;
                     FISHING_STATE->sub_index_03 = 7;
                     break;
                 }
             } else {
-                D_801E3204 = 0;
+                g_FishingFullNoticeShown = 0;
             }
             FISHING_STATE->mode_index_02 = 2;
             /* FAKE: the order lock steers regalloc */

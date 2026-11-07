@@ -260,7 +260,7 @@ segments:
       - [0x10ADC, c, func_801E16DC]
       - [0x10B58, c, func_801E1758]
       - [0x10DCC, c, func_801E19CC]
-      - [0x11010, c, func_801E1C10]
+      - [0x11010, c, Fishing_FishStacksFull]
       - [0x1107C, c, func_801E1C7C]
       - [0x110D4, .data, data]
       - [0x12444, .data, data_801E3044]

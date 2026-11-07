@@ -12,16 +12,8 @@ MATCH void Fishing_DrawFishArrow(s16 x, s16 y, s8 flip, u8 ot_index) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
 
-    if (GetGraphType() != 1) {
-        if (GetGraphType() == 2) {
-            primitive->tpage = 0x229;
-        } else {
-            primitive->tpage = 0x99;
-        }
-    } else {
-        primitive->tpage = 0x229;
-    }
-    primitive->clut = 0x7A40;
+    primitive->tpage = getTPage(1, 0, 576, 256);
+    primitive->clut  = getClut(0, 489);
     setXY0(primitive, (x - 8), y);
     primitive->x1 = (x + 8);
     setRGB0(primitive, 128, 128, 128);
