@@ -263,7 +263,7 @@ typedef union BattlerFlags {
 
 /* One battler's turn: the command it queued, the HP and AP the hit deals, the
  * target state bits and counter, and the damage and action flag words. Both
- * battler records embed it as `turn`; D_801EB4D8 and g_BattleTargetRecord
+ * battler records embed it as `turn`; g_BattleMessageTurn and g_BattleTargetRecord
  * point at it. */
 typedef struct BattleTurn {
     BattleCommandSlot command;

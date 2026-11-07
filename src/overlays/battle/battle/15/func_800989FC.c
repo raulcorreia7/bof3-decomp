@@ -13,15 +13,15 @@ MATCH void func_800989FC(void) {
         return;
     }
     if ((flags & 0x80u) != 0u) {
-        D_801EB4D8->command.target = 0xC0u;
+        g_BattleMessageTurn->command.target = 0xC0u;
     } else if ((flags & 0x10u) != 0u) {
         if ((flags & 0x20u) != 0u) {
-            D_801EB4D8->command.target = 0x40u;
+            g_BattleMessageTurn->command.target = 0x40u;
         } else {
-            D_801EB4D8->command.target = 0x80u;
+            g_BattleMessageTurn->command.target = 0x80u;
         }
     } else {
-        D_801EB4D8->command.target = g_BattleMessageSlot[5];
+        g_BattleMessageTurn->command.target = g_BattleMessageSlot[5];
     }
     g_BattleUIStep  = 4u;
     g_BattleUIState = 3u;

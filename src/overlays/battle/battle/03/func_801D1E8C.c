@@ -51,7 +51,7 @@ NON_MATCHING void func_801D1E8C(void) {
         return;
     }
     if (g_InputMasks[INPUT_SLOT_CONFIRM] & *pad) {
-        if (((u32)(g_BattlePanelSlot - 2) < 2U) && (D_801EB4D8->action_flags.value & 2)) {
+        if (((u32)(g_BattlePanelSlot - 2) < 2U) && (g_BattleMessageTurn->action_flags.value & 2)) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;
         }
@@ -93,7 +93,7 @@ NON_MATCHING void func_801D1E8C(void) {
                 SND_PlayCue(EMI_CUE_ID(1, 1));
                 if (*(u8*)(&g_BattlePanelEntry) == (var_s1 + 1)) {
                     if (*(u8*)((u8*)(&g_BattlePanelEntry) + -1) != 0) {
-                        if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) || !(D_801EB4D8->action_flags.value & 2)) {
+                        if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) || !(g_BattleMessageTurn->action_flags.value & 2)) {
                             temp_a0_239                                    = var_s0 + 1;
                             FIELD(s8, (&D_8014837B), 0x24u)                = 2;
                             *(u8*)(&D_8014837B)                            = 2;

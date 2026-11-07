@@ -4,9 +4,9 @@ MATCH void func_80098254(void) {
     u8 counter;
 
     SND_PlayCue(EMI_CUE_ID(1, 4));
-    g_BattleSelectionLatch   = 0;
-    D_801EB4D8->command.type = 0;
-    D_801EB4D8->damage_flags.value |= 1;
+    g_BattleSelectionLatch            = 0;
+    g_BattleMessageTurn->command.type = 0;
+    g_BattleMessageTurn->damage_flags.value |= 1;
     BATTLE_ACTIVE_ROW->header.mode = 2;
     counter                        = g_BattleCommandCount;
     g_BattleStep                   = 1;

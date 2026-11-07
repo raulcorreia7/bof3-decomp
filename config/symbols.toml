@@ -74,6 +74,7 @@ g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 s_BattlePartialPartyTargetWeights = { addr = 0x801EB394, source = "Target weights for a party with two active members." }
 s_BattleFullPartyTargetWeights = { addr = 0x801EB39C, source = "Target weights for a party with three active members." }
 s_BattleBattlerStepIds = { addr = 0x801EB494, source = "func_801E6E54 and func_801E6FB0 pass the slot's step id to func_8014D6B8" }
+g_BattleMessageTurn = { addr = 0x801EB4D8, source = "command turn of the battler whose message g_BattleMessageSlot shows; set with it in func_801D1D10, read for the target and action flags" }
 g_BattleCurrentEnemy = { addr = 0x801EB4E8, size = 0x4, source = "Enemy whose battle script is running." }
 g_BattleEventSlots = { addr = 0x801EB4F0, source = "Active battle event slots." }
 D_801EB4F0 = { addr = 0x801EB4F0, alias = true, source = "g_BattleEventSlots as 12-byte rows, the one use in func_801DE560 changes the bytes as a cast" }
@@ -144,7 +145,7 @@ D_801485DD = { addr = 0x801485DD, size = 0x1, source = "Work byte, the selection
 D_80148656 = { addr = 0x80148656, size = 0x1, source = "Message slot byte, func_80096FBC stores the slot and func_80097574 reads it" }
 D_801C893C = { addr = 0x801C893C, size = 0x14, source = "Five u8 pointers, one category each, func_80098FD4 writes through them" }
 g_BattleEnemies = { addr = 0x801EB2E8, source = "func_801E257C selects an enemy battler and func_800A36F0 indexes its BattleEnemyRecord" }
-D_801EB4D8 = { addr = 0x801EB4D8, source = "byte cell - func_8009A0A4 resets the active slot to 0" }
+g_BattleMessageTurn = { addr = 0x801EB4D8, source = "command turn of the battler whose message g_BattleMessageSlot shows; set with it in func_801D1D10, read for the target and action flags" }
 D_801EB6DA = { addr = 0x801EB6DA, size = 0x2, source = "Halfword cell written by func_800A9BD8 and read by func_8009F010" }
 D_801EB72C_rows = { addr = 0x801EB72C }
 g_BattleTemplateStats = { addr = 0x801EC364, source = "Battler template stat rows at 0x801EC364, the defence columns restore coordinates" }

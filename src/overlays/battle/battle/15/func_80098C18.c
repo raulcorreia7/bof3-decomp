@@ -17,9 +17,9 @@ MATCH void func_80098C18(void) {
     if ((trigger & (PADLup | PADLdown)) != 0) {
         if ((Item_GetFlags(D_8014857A, D_801C893C[D_8014857A][D_8014857C]) & 0x80u) != 0u) {
             if (func_8009AF7C() != 0u) {
-                D_801EB4D8->command.target = 0u;
+                g_BattleMessageTurn->command.target = 0u;
             } else {
-                D_801EB4D8->command.target = Battle_FindSelectableSlotForward(0);
+                g_BattleMessageTurn->command.target = Battle_FindSelectableSlotForward(0);
             }
             /* FAKE: byte pointer access keeps the address in a register so the
              * store merges into the shared SND_PlayCue delay slot. */
@@ -29,13 +29,13 @@ MATCH void func_80098C18(void) {
         }
     }
     if ((trigger & PADLright) != 0) {
-        D_801EB4D8->command.target = Battle_FindSelectableSlotForward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)D_801EB4D8->command.target + 1) & BYTE_MASK);
+        g_BattleMessageTurn->command.target = Battle_FindSelectableSlotForward(
+            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)g_BattleMessageTurn->command.target + 1) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if ((trigger & PADLleft) != 0) {
-        D_801EB4D8->command.target = Battle_FindSelectableSlotBackward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)D_801EB4D8->command.target - 1) & BYTE_MASK);
+        g_BattleMessageTurn->command.target = Battle_FindSelectableSlotBackward(
+            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)g_BattleMessageTurn->command.target - 1) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

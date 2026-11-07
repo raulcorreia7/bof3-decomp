@@ -57,8 +57,8 @@ NON_MATCHING void func_80099B74(void) {
                 g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value | 0x4000;
             *(u16*)((u8*)D_80145FAA + FIELD(u8, g_BattleMessageSlot, 0x5u) * BATTLE_PARTY_STRIDE) =
                 *(volatile u16*)&g_BattleTargetCursorCol;
-            choice                 = *(volatile u16*)&g_BattleTargetCursorCol;
-            D_801EB4D8->command.id = choice;
+            choice                          = *(volatile u16*)&g_BattleTargetCursorCol;
+            g_BattleMessageTurn->command.id = choice;
             resource_id = Resource_GetText(Item_GetDescription((s32)(choice >> 8), choice & BYTE_MASK) & HALF_MASK);
             BATTLE_SELECTION_RECORD_HANDLE((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK) = resource_id;
             D_80148597                                                               = 2;

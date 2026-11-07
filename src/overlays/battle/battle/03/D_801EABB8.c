@@ -582,7 +582,7 @@ u8 s_BattleBattlerStepIds[48] = {
 static u8 s_gap_801EB4C4[0x14] = {0};
 
 /* 0x801EB4D8 */
-BattleTurn* D_801EB4D8 = 0;
+BattleTurn* g_BattleMessageTurn = 0;
 
 /* 0x801EB4DC */
 BattleEventSlot* D_801EB4DC = 0;

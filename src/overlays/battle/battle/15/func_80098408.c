@@ -5,7 +5,7 @@ MATCH void func_80098408(void) {
     u8*         battle_selection_state;
     u8          selection_root_state;
 
-    active_selection_slot               = D_801EB4D8;
+    active_selection_slot               = g_BattleMessageTurn;
     battle_selection_state              = (u8*)(u8*)(EFFECT_BANK_80140000);
     active_selection_slot->command.type = BATTLE_COMMAND_ITEM;
     func_8009AF84();

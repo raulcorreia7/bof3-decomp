@@ -15,15 +15,15 @@ MATCH void func_8009761C(void) {
         return;
     }
     if ((flags & ABILITY_TARGET_BOTH_SIDES) != 0u) {
-        D_801EB4D8->command.target = 0xC0u;
+        g_BattleMessageTurn->command.target = 0xC0u;
     } else if ((flags & ABILITY_TARGET_ALL) != 0u) {
         if ((flags & ABILITY_TARGET_OPPONENT) != 0u) {
-            D_801EB4D8->command.target = 0x40u;
+            g_BattleMessageTurn->command.target = 0x40u;
         } else {
-            D_801EB4D8->command.target = 0x80u;
+            g_BattleMessageTurn->command.target = 0x80u;
         }
     } else {
-        D_801EB4D8->command.target = g_BattleMessageSlot[5];
+        g_BattleMessageTurn->command.target = g_BattleMessageSlot[5];
     }
     g_BattleUIStep  = 4u;
     g_BattleUIState = 3u;

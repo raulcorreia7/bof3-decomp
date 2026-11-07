@@ -37,7 +37,7 @@ MATCH void func_80097EC0(void) {
     g_BattleChoicePanel[2]              = 2u;
     g_BattleChoicePanel[3]              = 2u;
     entry_index                         = g_BattleMessageSlot[5];
-    active_selection_slot               = D_801EB4D8;
+    active_selection_slot               = g_BattleMessageTurn;
     source_slot_offset                  = entry_index * 3u;
     g_BattleChoicePanel[0xA]            = entry_index;
     g_BattleChoicePanel[0xB]            = ((u8*)D_801454F4)[source_slot_offset];

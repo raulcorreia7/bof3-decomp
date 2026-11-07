@@ -4,10 +4,10 @@ MATCH void func_801D251C(void) {
     u8* counter;
     u8  count;
     u8* otherRecord;
-    D_801EB4D8->command.type   = BATTLE_COMMAND_DEFEND;
-    D_801EB4D8->command.target = g_BattleMessageSlot[5];
-    otherRecord                = g_BattleMessageSlot;
-    D_801EB4D8->damage_flags.value |= 2u;
+    g_BattleMessageTurn->command.type   = BATTLE_COMMAND_DEFEND;
+    g_BattleMessageTurn->command.target = g_BattleMessageSlot[5];
+    otherRecord                         = g_BattleMessageSlot;
+    g_BattleMessageTurn->damage_flags.value |= 2u;
     *(s8*)(otherRecord + 1) = 2;
     counter                 = (u8*)&g_BattleCommandCount;
     count                   = *counter;
