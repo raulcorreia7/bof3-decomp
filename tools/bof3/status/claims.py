@@ -51,24 +51,28 @@ def _own(path: Path) -> tuple[str, tuple[Path, ...]]:
     return text, tuple(found)
 
 
+def _closure(path: Path) -> list[Path]:
+    """Return the file and every header it includes, once each, in include order."""
+    seen: set[Path] = set()
+    pending = [path.resolve()]
+    order = []
+    while pending:
+        current = pending.pop(0)
+        if current in seen:
+            continue
+        seen.add(current)
+        order.append(current)
+        pending.extend(_own(current)[1])
+    return order
+
+
 def source_text(path: Path) -> str:
     """Return the file's text followed by the text of every header it includes, once each.
 
     A shared-body member holds only ``#include "family/Name.h"``; the marker and the
     definition live in that header.
     """
-    seen: set[Path] = set()
-    pending = [path.resolve()]
-    parts = []
-    while pending:
-        current = pending.pop(0)
-        if current in seen:
-            continue
-        seen.add(current)
-        text, includes = _own(current)
-        parts.append(text)
-        pending.extend(includes)
-    return "\n".join(parts)
+    return "\n".join(_own(current)[0] for current in _closure(path))
 
 
 KIND_OF_CLAIM = {MATCH: "matching", NON_MATCHING: "non_matching"}
@@ -84,14 +88,27 @@ class Marker:
     path: Path
 
 
-def read(path: Path, unit_address: int, names: Mapping[str, int] = NO_NAMES) -> Marker:
-    """Read the marker for `unit_address`, preserving single-marker files."""
-    text = source_text(path)
-    found = []
+@cache
+def _own_marker_lines(path: Path) -> tuple[tuple[str, str], ...]:
+    """Return each marker's claim and line in one file's own text."""
+    text = _own(path)[0]
+    lines = []
     for match in MARKER_RE.finditer(text):
         end = text.find("\n", match.start())
-        line = text[match.start() : end if end >= 0 else len(text)]
-        found.append((match.group(1), _named_address(line, names)))
+        lines.append(
+            (match.group(1), text[match.start() : end if end >= 0 else len(text)])
+        )
+    return tuple(lines)
+
+
+def _marker_lines(path: Path) -> list[tuple[str, str]]:
+    """Return the markers of the file and the headers it includes; each file is scanned once."""
+    return [line for current in _closure(path) for line in _own_marker_lines(current)]
+
+
+def read(path: Path, unit_address: int, names: Mapping[str, int] = NO_NAMES) -> Marker:
+    """Read the marker for `unit_address`, preserving single-marker files."""
+    found = [(claim, _named_address(line, names)) for claim, line in _marker_lines(path)]
     if not found:
         return Marker(kind=None, foreign=None, claim=None, path=path)
     for claim, named in found:
