@@ -8,11 +8,11 @@ MATCH void Char_AdvanceScript(void) {
     u8 done;
 
     done = 0;
-    if (g_Task->unk_0B != 0) {
-        if (g_Task->unk_0B == 1) {
+    if (g_Task->param.unk_0B != 0) {
+        if (g_Task->param.unk_0B == 1) {
             if (func_8014DAEC() & BYTE_MASK) {
                 Actor_SelectScript(g_Task->direction_08);
-                g_Task->unk_0B = 2;
+                g_Task->param.unk_0B = 2;
             }
         } else {
             func_8014D978();

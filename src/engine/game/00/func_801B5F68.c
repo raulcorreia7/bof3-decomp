@@ -15,7 +15,7 @@ MATCH bool func_801B5F68(s32 selection_kind) {
     if (result == -1)
         return false;
     g_GameState->mode_12B.u8_value = 8;
-    g_Task->unk_0B                 = result;
+    g_Task->param.unk_0B           = result;
     g_Task->header.mode            = 0x0A;
     g_Task->header.step            = 1;
     g_Task->unk_03                 = 0;

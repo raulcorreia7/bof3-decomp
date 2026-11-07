@@ -60,7 +60,7 @@ MATCH void func_80167910(void) {
     }
     poly->tpage = 0xF;
     poly->clut  = 0x7802;
-    if (!(g_Task->unk_0B & 1)) {
+    if (!(g_Task->param.unk_0B & 1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0x28);
     } else {
         GFX_AddPrim(3, 0x28);
@@ -85,7 +85,7 @@ MATCH void func_80167910(void) {
         mode = 0x5E;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
-    if (!(g_Task->unk_0B & 1)) {
+    if (!(g_Task->param.unk_0B & 1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
     } else {
         GFX_AddPrim(3, 0xC);
@@ -121,7 +121,7 @@ MATCH void func_80167910(void) {
         prim[0x14] = 0;
         prim[0x15] = 0;
         prim[0x16] = 0;
-        if (!(g_Task->unk_0B & 1)) {
+        if (!(g_Task->param.unk_0B & 1)) {
             Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0x1C);
         } else {
             GFX_AddPrim(3, 0x1C);

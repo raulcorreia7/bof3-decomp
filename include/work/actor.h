@@ -156,6 +156,15 @@ typedef union ActorExt {
 
 ASSERT_SIZE(ActorExt, 0x04);
 
+typedef union ActorParam {
+    u8 unk_0B;
+    u8 actor_slot;
+    u8 facing;
+    u8 scene_event_flag;
+} ActorParam;
+
+ASSERT_SIZE(ActorParam, 1);
+
 typedef struct Actor {
     TaskHeader     header;            /* 0x00 */
     u8             unk_03;            /* 0x03 */
@@ -169,7 +178,7 @@ typedef struct Actor {
     u8             direction_08;      /* 0x08 - commu00 calls it the cue resource */
     u8             unk_09;            /* 0x09 - area032 calls it the marker mode byte */
     u8             unk_0A;            /* 0x0A */
-    u8             unk_0B;            /* 0x0B */
+    ActorParam     param;             /* 0x0B */
     s32            vx;                /* 0x0C added to x each step */
     s32            vy;                /* 0x10 added to y each step */
     s32            vz;                /* 0x14 signed vertical speed */
@@ -234,6 +243,7 @@ typedef struct Actor {
 ASSERT_SIZE(Actor, ACTOR_SIZE);
 ASSERT_OFFSET(Actor, header, 0x00);
 ASSERT_OFFSET(Actor, direction_08, 0x08);
+ASSERT_OFFSET(Actor, param, 0x0B);
 ASSERT_OFFSET(Actor, vx, 0x0C);
 ASSERT_OFFSET(Actor, vy, 0x10);
 ASSERT_OFFSET(Actor, vz, 0x14);

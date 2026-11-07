@@ -33,7 +33,7 @@ NON_MATCHING void func_801F4768(void) {
     }
 
     frame = g_Task;
-    width = frame->unk_0B - 2;
+    width = frame->param.unk_0B - 2;
     frame->pos.y.fixed += 0x800 + (width << 10);
     if ((D_80104001 + 8) < COORD_INT(frame->pos.y)) {
         COORD_INT(frame->pos.y) = -8;

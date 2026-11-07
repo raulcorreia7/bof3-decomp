@@ -46,7 +46,7 @@ MATCH void func_801F4E58(void) {
     scratch = (Actor*)slots[0x11];
     COORD_INT(scratch->pos.x) -= (s32)(D_801F6258[scratch->direction_08].x << 16) >> 25;
     y                         = COORD_INT(scratch->pos.y) - ((s32)(D_801F6258[scratch->direction_08].y << 16) >> 25);
-    scratch->unk_0B           = 0;
+    scratch->param.unk_0B     = 0;
     slots                     = SP_PTR(u8*, 0u);
     cell                      = slots[0x11];
     COORD_INT(scratch->pos.y) = y;

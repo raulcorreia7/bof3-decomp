@@ -10,8 +10,8 @@ MATCH void func_801B2C38(void) {
         Actor_RequestScript(g_Task->direction_08);
         g_Task->unk_09 = 0;
         Party_ClearBattlerState(0);
-        g_Task->header.mode = 1;
-        g_Task->unk_0B      = 0;
+        g_Task->header.mode  = 1;
+        g_Task->param.unk_0B = 0;
         func_801B036C();
     }
 }

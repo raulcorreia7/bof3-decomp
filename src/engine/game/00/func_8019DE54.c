@@ -21,7 +21,7 @@ MATCH void func_8019DE54(void) {
         }
     }
     SND_PlayCue(EMI_CUE_ID(1, 12));
-    if (g_Task->unk_0B != 0) {
+    if (g_Task->param.unk_0B != 0) {
         g_AreaCameraRefreshCount = 3;
         g_AreaCameraOffsetZ      = (g_AreaCameraOffsetZ - 0x80);
         g_Task->header.step      = (g_Task->header.step + 1);

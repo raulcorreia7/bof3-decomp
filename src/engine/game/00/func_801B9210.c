@@ -39,7 +39,7 @@ MATCH void func_801B9210(void) {
     } else {
         Actor_ClearVelocity();
     }
-    func_801C2E34(g_Task->unk_0B);
+    func_801C2E34(g_Task->param.unk_0B);
     g_Task->direction_08 = saved;
     g_Task->unk_0A       = 8;
     Actor_RequestScript(g_Task->direction_08);
