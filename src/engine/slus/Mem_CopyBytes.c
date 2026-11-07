@@ -2,7 +2,8 @@
 
 /* copies count bytes from src to dst, front to back.
  */
-MATCH void func_80177CD4(u8* dst_base, u8* src_base, s32 count) {
+/* func_80177CD4 */
+MATCH void Mem_CopyBytes(u8* dst_base, u8* src_base, s32 count) {
     u8* dst;
     u8* src;
     s32 left;

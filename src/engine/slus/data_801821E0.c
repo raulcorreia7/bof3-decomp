@@ -55,8 +55,8 @@ u16 D_80182308[16] = {
 u32 D_80182328 = 0;
 
 u32 g_SndCueReaders[7] = {
-    (u32)func_8015E994, (u32)func_8015EFAC, (u32)func_8015F5C8, (u32)func_8015FBE4,
-    (u32)func_80160200, (u32)func_8016081C, (u32)func_80160E38,
+    (u32)SND_ReadCueBank0, (u32)SND_ReadCueBank1, (u32)SND_ReadCueBank2, (u32)SND_ReadCueBank3,
+    (u32)SND_ReadCueBank4, (u32)SND_ReadCueBank5, (u32)SND_ReadCueBank6,
 };
 
 u32 g_SndBankSpuAddress[3][7] = {
