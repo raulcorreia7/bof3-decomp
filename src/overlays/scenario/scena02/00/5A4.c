@@ -230,7 +230,21 @@ MATCH void func_801FC734(u8 actor_id) {
     SCENA02_TRIGGER_NEAR_X(actor_id, TO_COORD(1) + COORD_HALF, TO_COORD(4));
 }
 
-INCLUDE_ASM(func_801FC7E4);
+MATCH void func_801FC7E4(void) {
+    if ((g_PartyFieldOrder[0] == 0) || (g_PartyFieldOrder[0] == 3)) {
+        if (((u16)(D_80145EC6 - 0x44) < 2) && (D_80145ECA == 0x3F) && (D_80145EDB == 0x42) && (D_80145E98 == 1)) {
+            SCENA02_START_SCRIPT_1A();
+        }
+        if (D_80145EC6 == 0x46) {
+            if ((D_80145ECA == 0x3E) && (D_80145EDB == 0x45) && (D_80145E98 == 7)) {
+                SCENA02_START_SCRIPT_1A();
+            }
+        }
+        if ((D_80145EC6 == 0x44) && (D_80145ECA == 0x3E) && (D_80145EDB == 0x43) && (D_80145E98 == 3)) {
+            SCENA02_START_SCRIPT_1A();
+        }
+    }
+}
 
 INCLUDE_ASM(func_801FC9CC);
 
