@@ -32,7 +32,6 @@ extern Callback D_800C2D60[];
 extern Callback D_800C2D94[];
 extern Callback D_800C2DAC[];
 extern Callback D_800C2DB8[];
-extern u8       D_80145FA8;
 extern s8       D_80146875;
 extern u16      D_801EB6C4;
 extern u16      D_801EB6C6;

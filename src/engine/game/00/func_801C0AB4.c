@@ -18,7 +18,7 @@ MATCH void func_801C0AB4(void) {
         Party_ClearBattlerState(0);
         /* Retail reads the counter before the flag update and stores it after (*counter += 1: 93.48%). */
         count_next = *counter + 1;
-        D_80145FBC &= 0xFD;
+        g_BattlePartyBattlers[0].unk_12C[0] &= 0xFD;
         *counter = count_next;
         flag     = 1;
     } else {

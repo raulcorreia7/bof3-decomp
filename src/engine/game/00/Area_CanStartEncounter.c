@@ -26,7 +26,7 @@ MATCH s32 Area_CanStartEncounter(void) {
     if (value < D_80145FB8) {
         return 0;
     }
-    if (D_80145FBC & 1) {
+    if (g_BattlePartyBattlers[0].unk_12C[0] & 1) {
         return 0;
     }
     if (!(g_GameRequestFlags & 1) && D_80143EFC >= 0xF1) {

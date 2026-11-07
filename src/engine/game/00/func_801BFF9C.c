@@ -35,7 +35,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         }
         for (i = 0; i < count; i++) {
             if (g_Characters[g_CharSlot[g_PartyFieldOrder[i]]].status & STATUS_POISONED) {
-                D_80145FA8 = 0xA;
+                g_BattlePartyBattlers[0].turn.command.target = 0xA;
                 break;
             }
         }
@@ -44,6 +44,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         g_BattlePartyBattlers[0].slot                    = 0;
         *(Character*)((u8*)g_BattlePartyBattlers + 0x74) = g_Characters[0];
         g_BattlePartyBattlers[0].character_index         = 0;
+        /* D_80145FBC stays an address symbol: VOL takes a plain lvalue and the member view changes the code. */
         VOL(u8, D_80145FBC) &= 0xFE;
         g_Task->unk_48 = 0;
         if (LOBU(g_GameRequestFlags) & 1) {

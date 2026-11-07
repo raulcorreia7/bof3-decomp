@@ -8,7 +8,7 @@ MATCH void Area_InitScene(void) {
     Actor* work;
 
     g_Task->unk_05                     = 0;
-    g_Task->param.unk_0B               = D_80145FBC;
+    g_Task->param.unk_0B               = g_BattlePartyBattlers[0].unk_12C[0];
     *(u8*)&g_GameState->turn.hp_change = 3; /* FAKE: retail stores the byte. */
     work                               = g_Task;
     FIELD(u32, work, 0x34u)            = D_80145EC4;
