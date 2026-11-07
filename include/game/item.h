@@ -41,6 +41,9 @@ typedef enum ArmorType {
 /* The most of one item an inventory slot holds. */
 #define ITEM_STACK_MAX           99
 
+/* The func_801AF494 predicate that holds when bit record_bit of the item's equipability is set. */
+#define ITEM_TEST_EQUIPPABLE     4
+
 /* The inventory category code Item_GetRecord resolves a record from. */
 typedef enum ItemCategory {
     ITEM_CAT_ITEM      = 0,
@@ -491,6 +494,8 @@ typedef enum VitalItemId {
     VITAL_ITEM_GUILD_BADGE  = 7,
     VITAL_ITEM_SEA_CHARTS   = 10,
     VITAL_ITEM_KEY          = 11,
+    VITAL_ITEM_CARD_KEY_A   = 12,
+    VITAL_ITEM_CARD_KEY_B   = 13,
     VITAL_ITEM_FOUNTAIN_PEN = 15,
 } VitalItemId;
 

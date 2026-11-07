@@ -17,7 +17,7 @@ MATCH void func_801D2AC8(void) {
     }
     panel                        = &D_8014854C;
     g_MenuPanelTasks[15].handler = 6;
-    g_MenuPanelTasks[15].mode    = 6;
+    g_MenuPanelTasks[15].mode    = MENU_START_MODE_EQUIPMENT;
     g_MenuPanelTasks[15].state   = 2;
     *panel                       = 1;
     panel += 0x24;

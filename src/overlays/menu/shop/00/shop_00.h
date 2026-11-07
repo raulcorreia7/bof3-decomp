@@ -217,7 +217,7 @@ extern char        D_801D0E98[];
 #define SAVE_STATE_COUNT         21
 
 /* Entries of the panel handler tables. */
-#define SHOP_PANEL_COUNT         19
+#define SHOP_MODE_COUNT          19
 #define SHOP_PANEL0_STATE_COUNT  3
 #define SHOP_PANEL1_STATE_COUNT  3
 #define SHOP_PANEL2_STATE_COUNT  3
@@ -278,6 +278,9 @@ extern u8          g_MenuListTab2OnSprites[0xC];
 extern u8*         g_MenuInventoryTitles[5];
 extern char        g_MenuInventoryCountFormat[];
 extern u8          g_MenuInventoryTab1OffSprites[];
+extern u8*         g_MenuEquipTitles[5];
+extern u8          g_MenuEquipChoiceIds[];
+extern u8          g_MenuEquipChoiceCounts[];
 extern u8          g_MenuInventoryTab1OnSprites[];
 /* D_801E5668 */
 extern u8          g_MenuListTab1OffSprites[0xC];
@@ -350,30 +353,30 @@ extern Callback     g_ShopStep9Sub1Funcs[SHOP_STEP9_SUB1_COUNT];
 /* D_801E5D5C */
 extern Callback     g_ShopStep9Sub2Funcs[SHOP_STEP9_SUB2_COUNT];
 /* D_801E5D68 */
-extern Callback     g_ShopPanelModes[SHOP_PANEL_COUNT];
-extern void (*g_ShopPanel0StateFuncs[SHOP_PANEL0_STATE_COUNT])();
+extern Callback     g_ShopPanelModes[SHOP_MODE_COUNT];
+extern void (*g_ShopMessageStates[SHOP_PANEL0_STATE_COUNT])();
 /* D_801E5DC0 */
-extern Callback           g_ShopPanel2StateFuncs[SHOP_PANEL2_STATE_COUNT];
+extern Callback           g_ShopCommandsStates[SHOP_PANEL2_STATE_COUNT];
 /* D_801E5DCC */
-extern Callback           g_ShopPanel1StateFuncs[SHOP_PANEL1_STATE_COUNT];
+extern Callback           g_ShopZennyStates[SHOP_PANEL1_STATE_COUNT];
 extern u16                D_801E5DD8[];
 /* D_801E5DDC */
-extern Callback           g_ShopPanel5StateFuncs[SHOP_PANEL5_STATE_COUNT];
+extern Callback           g_ShopEquipStatStates[SHOP_PANEL5_STATE_COUNT];
 /* D_801E5DF0 */
-extern Callback           g_ShopPanel6StateFuncs[SHOP_PANEL6_STATE_COUNT];
+extern Callback           g_ShopEquipmentStates[SHOP_PANEL6_STATE_COUNT];
 /* D_801E5DFC */
-extern Callback           g_ShopPanel7StateFuncs[SHOP_PANEL7_STATE_COUNT];
+extern Callback           g_ShopItemsStates[SHOP_PANEL7_STATE_COUNT];
 extern u8                 D_801E5E0C[];
 extern u8                 D_801E5E1C[];
 /* D_801E5E2C */
-extern Callback           g_ShopPanel9StateFuncs[SHOP_PANEL9_STATE_COUNT];
+extern Callback           g_ShopInventoryStates[SHOP_PANEL9_STATE_COUNT];
 extern u8                 D_801E5E38[];
 /* D_801E5E48 */
 extern Callback           g_ShopPanel11StateFuncs[SHOP_PANEL11_STATE_COUNT];
 /* D_801E5E5C */
 extern Callback           g_ShopPanel12StateFuncs[SHOP_PANEL12_STATE_COUNT];
 /* D_801E5E70 */
-extern Callback           g_ShopPanel13StateFuncs[SHOP_PANEL13_STATE_COUNT];
+extern Callback           g_ShopCharacterStates[SHOP_PANEL13_STATE_COUNT];
 extern u8                 D_801E5E7C[];
 extern u8                 D_801E5EA0[];
 extern u8                 D_801E5EAC[];
@@ -638,32 +641,40 @@ void func_801E2650(void);
 void func_801E2724(void);
 void func_801E27BC(void);
 void func_801E2800(void);
-void func_801E2808(void);
+/* func_801E2808 */
+void Menu_MessagePanel(void);
 void func_801E2948(void);
 void func_801E2988(void);
-void func_801E29C8(void);
+/* func_801E29C8 */
+void Menu_CommandsPanel(void);
 void func_801E2A30(void);
 void func_801E2A70(void);
-void func_801E2AB0(void);
+/* func_801E2AB0 */
+void Menu_ZennyPanel(void);
 void func_801E2B14(void);
 void func_801E2B54(void);
-void func_801E2BC4(void);
-void func_801E2C18(void);
+/* func_801E2BC4 */
+void Menu_CursorFramePanel(void);
+/* func_801E2C18 */
+void Menu_EquipStatPanel(void);
 void func_801E2C9C(void);
 void func_801E2CDC(void);
 void func_801E2D1C(void);
 void func_801E2D5C(void);
-void func_801E2DB4(void);
+/* func_801E2DB4 */
+void Menu_EquipmentPanel(void);
 void func_801E2E30(void);
 void func_801E2E70(void);
-void func_801E2EB0(void);
+/* func_801E2EB0 */
+void Menu_ItemsPanel(void);
 void Shop_DrawItems(MenuListPanel* panel);
 void func_801E31C4(void);
 void func_801E3204(void);
 void func_801E3244(void);
 void func_801E3284(MenuPanelTask* task);
 void func_801E36F8(void);
-void func_801E3720(void);
+/* func_801E3720 */
+void Menu_InventoryPanel(void);
 void func_801E3774(void);
 void func_801E37B4(void);
 void func_801E37F4(MenuPanelTask* task);
@@ -678,7 +689,8 @@ void func_801E3D4C(void);
 void func_801E3D8C(void);
 void func_801E3DCC(void);
 void func_801E3E0C(void);
-void func_801E3E4C(void);
+/* func_801E3E4C */
+void Menu_CharacterPanel(void);
 void func_801E3EB4(void);
 void func_801E3EF4(void);
 void func_801E3F34(void);

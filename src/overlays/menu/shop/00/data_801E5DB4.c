@@ -1,18 +1,18 @@
 #include "shop_00.h"
 
-void (*g_ShopPanel0StateFuncs[SHOP_PANEL0_STATE_COUNT])() = {
+void (*g_ShopMessageStates[SHOP_PANEL0_STATE_COUNT])() = {
     func_801E2800,
     func_801E2948,
     func_801E2988,
 };
 
-Callback g_ShopPanel2StateFuncs[SHOP_PANEL2_STATE_COUNT] = {
+Callback g_ShopCommandsStates[SHOP_PANEL2_STATE_COUNT] = {
     func_801E2800,
     func_801E2A30,
     func_801E2A70,
 };
 
-Callback g_ShopPanel1StateFuncs[SHOP_PANEL1_STATE_COUNT] = {
+Callback g_ShopZennyStates[SHOP_PANEL1_STATE_COUNT] = {
     func_801E2800,
     func_801E2B14,
     func_801E2B54,
@@ -20,7 +20,7 @@ Callback g_ShopPanel1StateFuncs[SHOP_PANEL1_STATE_COUNT] = {
 
 u16 D_801E5DD8[2] = { 0x0070, 0x0000 };
 
-Callback g_ShopPanel5StateFuncs[SHOP_PANEL5_STATE_COUNT] = {
+Callback g_ShopEquipStatStates[SHOP_PANEL5_STATE_COUNT] = {
     func_801E2800,
     func_801E2C9C,
     func_801E2CDC,
@@ -28,13 +28,13 @@ Callback g_ShopPanel5StateFuncs[SHOP_PANEL5_STATE_COUNT] = {
     func_801E2D5C,
 };
 
-Callback g_ShopPanel6StateFuncs[SHOP_PANEL6_STATE_COUNT] = {
+Callback g_ShopEquipmentStates[SHOP_PANEL6_STATE_COUNT] = {
     func_801E2800,
     func_801E2E30,
     func_801E2E70,
 };
 
-Callback g_ShopPanel7StateFuncs[SHOP_PANEL7_STATE_COUNT] = {
+Callback g_ShopItemsStates[SHOP_PANEL7_STATE_COUNT] = {
     func_801E2800,
     func_801E31C4,
     func_801E3204,
@@ -51,7 +51,7 @@ u8 D_801E5E1C[0x10] = {
     0x16, 0x00, 0x00, 0x00,
 };
 
-Callback g_ShopPanel9StateFuncs[SHOP_PANEL9_STATE_COUNT] = {
+Callback g_ShopInventoryStates[SHOP_PANEL9_STATE_COUNT] = {
     func_801E2800,
     func_801E3774,
     func_801E37B4,
@@ -78,7 +78,7 @@ Callback g_ShopPanel12StateFuncs[SHOP_PANEL12_STATE_COUNT] = {
     func_801E3E0C,
 };
 
-Callback g_ShopPanel13StateFuncs[SHOP_PANEL13_STATE_COUNT] = {
+Callback g_ShopCharacterStates[SHOP_PANEL13_STATE_COUNT] = {
     func_801E2800,
     func_801E3EB4,
     func_801E3EF4,

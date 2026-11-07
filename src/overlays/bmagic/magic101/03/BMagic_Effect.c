@@ -133,6 +133,7 @@ NON_MATCHING void func_801EF3DC(void) {
 INCLUDE_ASM(func_801EF3DC);
 #endif
 
+/* Blocker: retail reloads g_Task after the rsin shift (sll v0,v0,5 at 0x801EF514); the candidate hoists the g_Task load above it. Three drafts (local work, direct reads, split offset) all fail there. */
 INCLUDE_ASM(func_801EF4DC);
 
 INCLUDE_ASM(func_801EF580);

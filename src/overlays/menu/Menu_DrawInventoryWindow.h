@@ -24,7 +24,8 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     s32  title_x;
     u8   scroll_shift;
 
-    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, 153, 154, task->unk_09, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT,
+                  task->unk_09, CHARACTER_BLOCK->window_style);
     first  = func_801AFD10(&task->unk_0B, &scroll_y, &scroll_rows, (u8*)&task->unk_12);
     y      = task->pos.y + (s8)scroll_y;
     ids    = D_801C893C[task->unk_0A] + first;
@@ -68,8 +69,10 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
         y += 13;
     }
 
-    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, 153, 20, task->unk_09, CHARACTER_BLOCK->window_style);
-    UI_DrawWindow(task->pos.x + 3, task->pos.y + 146, 153, 8, task->unk_09, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT,
+                  task->unk_09, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(task->pos.x + 3, task->pos.y + 146, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT,
+                  task->unk_09, CHARACTER_BLOCK->window_style);
     title   = &g_MenuInventoryTitles[task->unk_0A];
     length  = func_801AF20C(*title);
     title_x = length * 4 - 78;
