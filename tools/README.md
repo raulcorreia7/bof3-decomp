@@ -30,7 +30,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW` (an address name: `--image <target> --local`) | [rename steps](../docs/conventions.md#rename-steps)       |
 | Rename parameters                        | `tools/symbol.py params <func> old=new ...`                              | same                                                      |
 | Rank units to name first                 | `tools/symbol.py refs src/<path>`                                        | same                                                      |
-| Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<evidence>"`     | [symbols](../docs/conventions.md#symbols-and-the-link)    |
+| Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/conventions.md#symbols-and-the-link)    |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
 | Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`                           | [quality](#quality)                                       |
 | Check type loss between two revisions    | `tools/typeloss.py HEAD~5 HEAD`                                          | [type loss](#type-loss)                                   |
