@@ -5049,6 +5049,7 @@ SsSeqPause = { addr = 0x8016B940, type = "func", source = "LIBSND.LIB 300 bytes"
 SsSepPause = { addr = 0x8016B968, type = "func", source = "LIBSND.LIB 300 bytes" }
 SsSeqPlay = { addr = 0x8016B994, type = "func", source = "LIBSND.LIB 112 bytes" }
 SsSepPlay = { addr = 0x8016B9CC, type = "func", source = "LIBSND.LIB 112 bytes" }
+SND_QuitSpu = { addr = 0x8016BA04, type = "func", source = "Shuts the SPU down when the sound system exits." }
 SpuQuit = { addr = 0x8016BA24, type = "func", source = "LIBSPU.LIB 124 bytes" }
 _SsSndSetReplayMode = { addr = 0x8016BAA0, type = "func", source = "LIBSND.LIB 248 bytes" }
 SsSeqReplay = { addr = 0x8016BB44, type = "func", source = "LIBSND.LIB 248 bytes" }

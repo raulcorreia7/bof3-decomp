@@ -2,6 +2,7 @@
 
 /* calls SpuQuit with no arguments.
  */
-MATCH void func_8016BA04(void) {
+/* func_8016BA04 */
+MATCH void SND_QuitSpu(void) {
     SpuQuit();
 }

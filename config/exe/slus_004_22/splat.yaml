@@ -627,7 +627,7 @@ segments:
       - [0xD54B8, o, toolchains/psyq/3.7/libsnd/sepinit]
       - [0xD5868, o, toolchains/psyq/3.7/libsnd/sspause]
       - [0xD5994, o, toolchains/psyq/3.7/libsnd/ssplay]
-      - [0xD5A04, c, func_8016BA04]
+      - [0xD5A04, c, SND_QuitSpu]
       - [0xD5A24, o, toolchains/psyq/3.7/libspu/s_q]
       - [0xD5AA0, o, toolchains/psyq/3.7/libsnd/ssreplay]
       - [0xD5B98, o, toolchains/psyq/3.7/libsnd/playmode]

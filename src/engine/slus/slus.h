@@ -1269,7 +1269,8 @@ void        EMI_ArmPartyPlp(u8 member_a, u8 member_b, u8 member_c);
 void        EMI_ArmPartyFamily(u8 member_a, u8 member_b, u8 member_c, u8 family);
 u8          EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);
 extern void func_80167428(void);
-void        func_8016BA04(void);
+/* func_8016BA04 */
+void        SND_QuitSpu(void);
 extern const ObjectFunc
     g_BundleRecordOpcodes[]; /* interior of g_BundleOpcodes (index 3); a separate symbol keeps func_801584A4 matching */
 extern u8  D_8017F90D;

@@ -37,5 +37,5 @@ MATCH void SND_Exit(void) {
     SsUtSetReverbType(SS_REV_TYPE_OFF);
     SsUtSetReverbDepth(0, 0);
     SsEnd();
-    func_8016BA04();
+    SND_QuitSpu();
 }
