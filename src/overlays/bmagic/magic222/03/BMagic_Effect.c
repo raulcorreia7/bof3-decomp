@@ -147,6 +147,7 @@ MATCH void func_801F0504(void) {
     }
 }
 
+/* blocker: candidate loads g_Task into a1 where retail keeps it in a0 (lui a0 at 0x801F058C) across the 2E/30 copy; first diff there. Three draft orders tried. */
 INCLUDE_ASM(func_801F0584);
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"

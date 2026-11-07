@@ -16,6 +16,23 @@
 #define MENU_START_PANEL_ITEMS        13 /* item list */
 #define MENU_START_PANEL_CURSOR_FRAME 19 /* frame drawn around the cursor */
 #define MENU_START_PANEL_CURSOR       21 /* pointing-hand cursor */
+
+/* Panel modes of the start menu: the index into g_MenuStartPanelModes. Modes
+ * whose draw helper is not yet read keep their number. */
+#define MENU_START_MODE_CHARACTER     0
+#define MENU_START_MODE_ZENNY         1
+#define MENU_START_MODE_PLAY_TIME     2
+#define MENU_START_MODE_CAMP_ICONS    3
+#define MENU_START_MODE_TITLE         4
+#define MENU_START_MODE_STATS         5
+#define MENU_START_MODE_EQUIPMENT     6
+#define MENU_START_MODE_MESSAGE       9
+#define MENU_START_MODE_CURSOR_FRAME  10
+#define MENU_START_MODE_INVENTORY     12
+#define MENU_START_MODE_COMMANDS      13
+#define MENU_START_MODE_CURSOR        14
+#define MENU_START_MODE_EQUIP_COMPARE 16
+#define MENU_START_MODE_ABILITIES     17
 #define g_SceneFlags                  ((void*)g_SceneFlags)
 
 /* Draw the scene timer sprite and count down; on zero advance the cue counter.
@@ -251,7 +268,7 @@ extern u8             s_CampMenuPanelIds[8];
 #define MENU_START_STEP6_COUNT         5
 
 /* Entries of the panel handler tables. */
-#define MENU_START_PANEL_COUNT         21
+#define MENU_START_MODE_COUNT          21
 #define MENU_START_PANEL0_STATE_COUNT  11
 #define MENU_START_PANEL1_STATE_COUNT  3
 #define MENU_START_PANEL2_STATE_COUNT  3
@@ -311,6 +328,9 @@ extern u8       g_MenuListTab2OnSprites[];
 extern u8*      g_MenuInventoryTitles[5];
 extern char     g_MenuInventoryCountFormat[];
 extern u8       g_MenuInventoryTab1OffSprites[];
+extern u8*      g_MenuEquipTitles[5];
+extern u8       g_MenuEquipChoiceIds[];
+extern u8       g_MenuEquipChoiceCounts[];
 extern u8       g_MenuInventoryTab1OnSprites[];
 /* D_801EC784 */
 extern u8       g_MenuListTab1OffSprites[];
@@ -336,44 +356,44 @@ extern s32 (*D_801ED224[])(u8 caster_index, u8 target_index, u8 use_battle_recor
 extern s32 (*D_801ED24C[])(u8 save_slot, u8 record_value);
 extern u8       g_SaveRecordTypeCommands[92];
 /* D_801ED330 */
-extern Callback g_MenuStartPanelModes[MENU_START_PANEL_COUNT];
+extern Callback g_MenuStartPanelModes[MENU_START_MODE_COUNT];
 /* D_801ED384 */
-extern Callback g_MenuStartPanel0StateFuncs[MENU_START_PANEL0_STATE_COUNT];
+extern Callback g_MenuStartCharacterStates[MENU_START_PANEL0_STATE_COUNT];
 /* D_801ED3B0 */
-extern Callback g_MenuStartPanel1StateFuncs[MENU_START_PANEL1_STATE_COUNT];
+extern Callback g_MenuStartZennyStates[MENU_START_PANEL1_STATE_COUNT];
 /* D_801ED3BC */
-extern Callback g_MenuStartPanel2StateFuncs[MENU_START_PANEL2_STATE_COUNT];
+extern Callback g_MenuStartPlayTimeStates[MENU_START_PANEL2_STATE_COUNT];
 /* D_801ED3C8 */
-extern Callback g_MenuStartPanel3StateFuncs[MENU_START_PANEL3_STATE_COUNT];
+extern Callback g_MenuStartCampIconsStates[MENU_START_PANEL3_STATE_COUNT];
 /* D_801ED3D4 */
-extern Callback g_MenuStartPanel4StateFuncs[MENU_START_PANEL4_STATE_COUNT];
+extern Callback g_MenuStartTitleStates[MENU_START_PANEL4_STATE_COUNT];
 /* D_801ED3E0 */
-extern Callback g_MenuStartPanel5StateFuncs[MENU_START_PANEL5_STATE_COUNT];
+extern Callback g_MenuStartStatsStates[MENU_START_PANEL5_STATE_COUNT];
 /* D_801ED3FC */
-extern Callback g_MenuStartPanel6StateFuncs[MENU_START_PANEL6_STATE_COUNT];
+extern Callback g_MenuStartEquipmentStates[MENU_START_PANEL6_STATE_COUNT];
 /* D_801ED408 */
 extern Callback g_MenuStartPanel7StateFuncs[MENU_START_PANEL7_STATE_COUNT];
 /* D_801ED414 */
 extern Callback g_MenuStartPanel8StateFuncs[MENU_START_PANEL8_STATE_COUNT];
 /* D_801ED420 */
-extern Callback g_MenuStartPanel9StateFuncs[MENU_START_PANEL9_STATE_COUNT];
+extern Callback g_MenuStartMessageStates[MENU_START_PANEL9_STATE_COUNT];
 extern u16      D_801ED42C[1];
 extern u16      D_801ED42E[];
 /* D_801ED43C */
 extern Callback g_MenuStartPanel11StateFuncs[MENU_START_PANEL11_STATE_COUNT];
 /* D_801ED448 */
-extern Callback g_MenuStartPanel12StateFuncs[MENU_START_PANEL12_STATE_COUNT];
+extern Callback g_MenuStartInventoryStates[MENU_START_PANEL12_STATE_COUNT];
 /* D_801ED45C */
-extern Callback g_MenuStartPanel13StateFuncs[MENU_START_PANEL13_STATE_COUNT];
+extern Callback g_MenuStartCommandsStates[MENU_START_PANEL13_STATE_COUNT];
 extern u8       D_801ED468[];
 extern u8       D_801ED48C[];
 extern u8       D_801ED498[];
 extern u32      D_801ED534[];
 extern u8       D_801ED560[][6];
 /* D_801ED58C */
-extern Callback g_MenuStartPanel16StateFuncs[MENU_START_PANEL16_STATE_COUNT];
+extern Callback g_MenuStartEquipCompareStates[MENU_START_PANEL16_STATE_COUNT];
 /* D_801ED5A0 */
-extern Callback g_MenuStartPanel17StateFuncs[MENU_START_PANEL17_STATE_COUNT];
+extern Callback g_MenuStartAbilitiesStates[MENU_START_PANEL17_STATE_COUNT];
 /* D_801ED5B4 */
 extern Callback g_MenuStartPanel18StateFuncs[MENU_START_PANEL18_STATE_COUNT];
 /* D_801ED5C8 */
@@ -509,7 +529,8 @@ void        Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DFBF4 */
 extern void Menu_DrawInventoryWindow(MenuPanelTask* task);
 extern void func_801E0354(MenuPanelTask* task);
-extern void func_801E0A70(MenuPanelTask* task);
+/* func_801E0A70 */
+extern void Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 extern void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active);
 void        func_801E16BC(void);
 void        SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry);
@@ -562,7 +583,8 @@ extern void func_801E7210(u32 panel_index);
 s32         func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record);
 s32         func_801E8C9C(u8 save_slot, u8 record_kind, u8 record_value);
 void        func_801E8D58(void);
-void        func_801E8D60(void);
+/* func_801E8D60 */
+void        Menu_CharacterPanel(void);
 extern void func_801E8DB4(MenuPanelTask* task);
 void        func_801E8EA8(void);
 void        func_801E8EE8(void);
@@ -574,26 +596,32 @@ void        func_801E9040(void);
 void        func_801E9080(void);
 void        func_801E90C0(void);
 void        func_801E9100(void);
-void        func_801E9140(void);
+/* func_801E9140 */
+void        Menu_ZennyPanel(void);
 void        func_801E91A4(void);
 void        func_801E91E4(void);
-void        func_801E9224(void);
+/* func_801E9224 */
+void        Menu_PlayTimePanel(void);
 void        func_801E9284(void);
 void        func_801E92C4(void);
-void        func_801E9304(void);
+/* func_801E9304 */
+void        Menu_CampIconsPanel(void);
 void        func_801E94D4(void);
 void        func_801E9514(void);
-void        func_801E9554(void);
+/* func_801E9554 */
+void        Menu_TitlePanel(void);
 void        func_801E964C(void);
 void        func_801E968C(void);
-void        func_801E96CC(void);
+/* func_801E96CC */
+void        Menu_StatsPanel(void);
 void        func_801E9748(void);
 void        func_801E9788(void);
 void        func_801E97E0(void);
 void        func_801E9820(void);
 void        func_801E9878(void);
 void        func_801E98B8(void);
-void        func_801E98F8(void);
+/* func_801E98F8 */
+void        Menu_EquipmentPanel(void);
 void        func_801E9974(void);
 void        func_801E99B4(void);
 void        func_801E99F4(void);
@@ -602,27 +630,33 @@ void        func_801E9AB0(void);
 void        func_801E9AF0(void);
 void        func_801E9B6C(void);
 void        func_801E9BAC(void);
-void        func_801E9BEC(void);
+/* func_801E9BEC */
+void        Menu_MessagePanel(void);
 void        func_801E9D18(void);
 void        func_801E9D58(void);
-void        func_801E9D98(void);
+/* func_801E9D98 */
+void        Menu_CursorFramePanel(void);
 void        func_801E9DF4(void);
 void        func_801E9EAC(void);
 void        func_801E9F04(void);
-void        func_801E9F5C(void);
+/* func_801E9F5C */
+void        Menu_InventoryPanel(void);
 void        func_801E9FB0(void);
 void        func_801E9FF0(void);
 void        func_801EA030(void);
-void        func_801EA0B0(void);
+/* func_801EA0B0 */
+void        Menu_CommandsPanel(void);
 void        func_801EA118(void);
 void        func_801EA158(void);
 void        func_801EA1C8(void);
-void        func_801EA50C(void);
+/* func_801EA50C */
+void        Menu_EquipComparePanel(void);
 void        func_801EA598(void);
 void        func_801EA5D8(void);
 void        func_801EA618(void);
 void        func_801EA658(void);
-void        func_801EA698(void);
+/* func_801EA698 */
+void        Menu_AbilitiesPanel(void);
 void        func_801EA6EC(void);
 void        func_801EA72C(void);
 void        func_801EA76C(void);

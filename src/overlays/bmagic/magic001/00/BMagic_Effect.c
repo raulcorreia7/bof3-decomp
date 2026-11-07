@@ -124,6 +124,7 @@ MATCH void func_801EF518(void) {
     }
 }
 
+/* Blocker: retail keeps an 8-byte frame (addiu sp,-8) and loads the -0x80 sentinel after the lb; a signed s8 phase local gives no frame and the constant is hoisted to the top. */
 INCLUDE_ASM(func_801EF5CC);
 
 #include "overlays/bmagic/Effect_RampTintAndFinish.h"
@@ -253,6 +254,7 @@ MATCH void func_801F00A8(void) {
     EFFECT_RAMP_TINT_AND_FINISH();
 }
 
+/* Blocker: GTE path (PushMatrix, RotTrans, RotMatrix) with a stack-built vector set and a z-span halfword from g_BattleSelectedActor or g_BattleEffectBattler by header.step; needs the matrix helpers before a draft. */
 INCLUDE_ASM(func_801F014C);
 
 INCLUDE_ASM(func_801F0238);

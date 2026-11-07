@@ -8,8 +8,8 @@
 #define ICON_TASK   ((MenuPanelTask*)g_MenuCurrentPanel)
 #define ICON_CURSOR (*(s16*)&ICON_TASK->unk_10)
 
-MATCH void func_801E9BEC(void) {
-    g_MenuStartPanel9StateFuncs[ICON_TASK->state]();
+MATCH void Menu_MessagePanel(void) {
+    g_MenuStartMessageStates[ICON_TASK->state]();
     Menu_DrawHeaderBar(ICON_TASK->pos.x, ICON_TASK->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     if (ICON_CURSOR != 0) {
         WinDrawCueText((ICON_TASK->pos.x + 7), (ICON_TASK->pos.y + 3), (u16)ICON_CURSOR);

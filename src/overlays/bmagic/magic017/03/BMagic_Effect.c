@@ -107,7 +107,22 @@ MATCH void func_801EF6EC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF7E0);
+MATCH void func_801EF7E0(void) {
+    u8 timer;
+
+    g_Task->unk_5D -= 8;
+    g_Task->unk_5E -= 8;
+    g_Task->unk_5F -= 8;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+        g_Task->unk_09      = 8;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801EF8B4(void) {
     u8 count;
