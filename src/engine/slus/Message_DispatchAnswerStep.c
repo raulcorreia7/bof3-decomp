@@ -15,8 +15,8 @@ MATCH void Message_DispatchAnswerStep(void) {
 
     D_80148357 = 3;
     if (g_MessageRequest != MESSAGE_NONE) {
-        D_80148333[0]  = 1;
-        g_UiWindowStep = g_UiWindowStep + 1;
+        g_MenuPanelTasks[0].state = 1;
+        g_UiWindowStep            = g_UiWindowStep + 1;
     } else {
         g_UiWindowStep = 7;
     }
