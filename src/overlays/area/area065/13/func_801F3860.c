@@ -24,5 +24,5 @@ MATCH void func_801F3860(void) {
 bump:
     TASK_BYTES[0x03]++;
 done:
-    func_801F40FC(0x5C, g_Task->unk_30);
+    func_801F40FC(0x5C, g_Task->screen_y);
 }

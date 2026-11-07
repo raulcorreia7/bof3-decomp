@@ -12,7 +12,6 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
     s32 sel;
     s32 flip;
     s32 sub;
-    s32 off;
     s32 count;
     s32 new_var;
     s32 tmp;
@@ -57,21 +56,20 @@ MATCH s32 func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 se
     flip = RANDOM_MASK(1);
     sel  = 0;
     sub  = table_slot & BYTE_MASK;
-    off  = sub * 8;
     do {
-        new_var                   = D_80143F28;
-        count                     = 0;
-        *(s32*)(D_80143F2C + off) = D_80143F24 + cur_a;
-        *(s32*)(D_80143F30 + off) = new_var + cur_b;
+        new_var                       = g_EncounterOriginY;
+        count                         = 0;
+        g_EncounterParty[sub].x.fixed = g_EncounterOriginX + cur_a;
+        g_EncounterParty[sub].y.fixed = new_var + cur_b;
         do {
             if (((func_801C6888(sub) & BYTE_MASK) != 0) && ((func_801C69C8(sub) & BYTE_MASK) != 0)) {
                 D_801CD944[sub].active = 1;
                 return 1;
             }
             if ((sel & BYTE_MASK) != flip) {
-                *(s32*)(D_80143F2C + off) = *(s32*)(D_80143F2C + off) + step_a;
+                g_EncounterParty[sub].x.fixed += step_a;
             } else {
-                *(s32*)(D_80143F30 + off) = *(s32*)(D_80143F30 + off) + step_b;
+                g_EncounterParty[sub].y.fixed += step_b;
             }
             count += 1;
         } while ((count & BYTE_MASK) < 8U);

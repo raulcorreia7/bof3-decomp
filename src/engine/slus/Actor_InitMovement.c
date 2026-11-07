@@ -14,10 +14,10 @@ MATCH s8 Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     if (size == 0) {
         return 0;
     }
-    absY           = abs(dir_y);
-    g_Task->unk_09 = 0;
-    span           = absY;
-    absX           = abs(dir_x);
+    absY          = abs(dir_y);
+    g_Task->timer = 0;
+    span          = absY;
+    absX          = abs(dir_x);
     if (absX >= absY) {
         span = absX;
     }

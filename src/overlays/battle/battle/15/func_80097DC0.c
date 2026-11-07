@@ -16,7 +16,7 @@ MATCH void func_80097DC0(void) {
         message = (u8*)&D_80148656;
         entry   = Party_GetAbilities(message[0], D_8014857B, 1);
         if ((D_801CA718[entry[D_8014857C] * 0x14] & ABILITY_TARGET_BOTH_SIDES) != 0u) {
-            D_801EB4D8->command.target ^= 0xC0u;
+            g_BattleActorTurn->command.target ^= BATTLE_TARGET_BOTH_SIDES;
             SND_PlayCue(EMI_CUE_ID(1, 1));
         }
     }

@@ -8,12 +8,12 @@ MATCH void func_801A253C(Actor* entity) {
     u8     flags;
 
     start_x = g_Task->pos.x.fixed;
-    if (g_Task->unk_09 != 0) {
+    if (g_Task->timer != 0) {
         g_Task->pos.x.fixed = start_x + g_Task->vx;
         g_Task->pos.y.fixed += g_Task->vy;
         COORD_INT(g_Task->pos.z) += g_Task->vz;
-        g_Task->unk_09--;
-        if (g_Task->unk_09 == 0) {
+        g_Task->timer--;
+        if (g_Task->timer == 0) {
             if (!(entity->interaction_flags & 0x80)) {
                 COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
             }
@@ -40,7 +40,7 @@ MATCH void func_801A253C(Actor* entity) {
     }
     func_801A3D1C(&entity->interaction_flags);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        if (g_Task->unk_09 <= g_Task->unk_0A) {
+        if (g_Task->timer <= g_Task->unk_0A) {
             flags = entity->interaction_flags | ACTOR_FLAG_SCRIPT_REQUEST;
         } else {
             flags = entity->interaction_flags & ~ACTOR_FLAG_SCRIPT_REQUEST;

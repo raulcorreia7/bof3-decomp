@@ -4,13 +4,13 @@ MATCH void func_801F3064(void) {
     u16 screen_x;
     u8  mode;
 
-    screen_x       = g_Task->unk_2E + 0x18;
-    g_Task->unk_2E = screen_x;
+    screen_x         = g_Task->screen_x + 0x18;
+    g_Task->screen_x = screen_x;
     func_801F36C0(&g_Task->pos.x, (s16)screen_x, 7);
-    mode           = g_Task->unk_09 - 1;
-    g_Task->unk_09 = mode;
+    mode          = g_Task->timer - 1;
+    g_Task->timer = mode;
     if (!(mode & 0xFF)) {
-        g_Task->unk_09 = 0x40;
+        g_Task->timer = 0x40;
         g_Task->header.mode += 1;
     }
 }

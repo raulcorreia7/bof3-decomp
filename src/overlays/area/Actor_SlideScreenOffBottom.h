@@ -6,8 +6,8 @@ MATCH void Actor_SlideScreenOffBottom(void) {
     Actor* work;
 
     work = g_Task;
-    work->unk_30 -= 0x20;
-    if ((s16)work->unk_30 < -0xFF) {
+    work->screen_y -= 0x20;
+    if ((s16)work->screen_y < -0xFF) {
         work->header.step++;
     }
     Area_Update();

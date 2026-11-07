@@ -13,7 +13,7 @@ MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
         case 0x95:
             g_Task->param.unk_0B =
                 func_8015CB18(table[state->index_0A] - 0x90, (s8)table[state->index_0A + 1],
-                              (s8)table[state->index_0A + 2], (s16)g_Task->unk_2E, (s16)g_Task->unk_30);
+                              (s8)table[state->index_0A + 2], (s16)g_Task->screen_x, (s16)g_Task->screen_y);
             state->index_0A += 2;
             break;
         case 0x98:

@@ -4,8 +4,8 @@ MATCH void func_801F3684(void) {
     Actor* scratch;
 
     scratch = g_Task;
-    scratch->unk_30 -= 0xA;
-    if ((s16)scratch->unk_30 < 0xC9) {
+    scratch->screen_y -= 0xA;
+    if ((s16)scratch->screen_y < 0xC9) {
         scratch->unk_03++;
     }
 
@@ -13,5 +13,5 @@ MATCH void func_801F3684(void) {
         (g_GameFlags & GAME_FLAG_SCRIPT_ACTIVE) != 0) {
         TASK_BYTES[0x03] = 3;
     }
-    func_801F3FF8(0x5C, g_Task->unk_30);
+    func_801F3FF8(0x5C, g_Task->screen_y);
 }

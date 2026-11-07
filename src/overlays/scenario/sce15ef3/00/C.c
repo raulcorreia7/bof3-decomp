@@ -91,12 +91,12 @@ MATCH void func_801D1370(void) {
     Actor* work;
     u8     timer;
 
-    work         = g_Task;
-    work->unk_2E = work->unk_2E - 0x10;
-    work->unk_30 = work->unk_30 - 0x10;
+    work           = g_Task;
+    work->screen_x = work->screen_x - 0x10;
+    work->screen_y = work->screen_y - 0x10;
     func_801D230C();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
     if (timer == 0) {
         Actor_Clear();
     }
@@ -107,7 +107,7 @@ MATCH void func_801D13DC(void) {
 }
 
 MATCH void func_801D1420(void) {
-    g_Task->unk_09      = 0;
+    g_Task->timer       = 0;
     g_Task->unk_06      = 0x10;
     g_Task->header.mode = g_Task->header.mode + 1;
 }
@@ -115,11 +115,11 @@ MATCH void func_801D1420(void) {
 INCLUDE_ASM(func_801D1460);
 
 MATCH void func_801D14DC(void) {
-    g_Task->unk_09 -= 0x10;
+    g_Task->timer -= 0x10;
     if (g_AreaDrawFlags != 0) {
-        func_801D23AC(g_Task->unk_09);
+        func_801D23AC(g_Task->timer);
     }
-    if (g_Task->unk_09 == 0) {
+    if (g_Task->timer == 0) {
         if (g_AreaDrawFlags == 0) {
             Actor_Clear();
         } else {

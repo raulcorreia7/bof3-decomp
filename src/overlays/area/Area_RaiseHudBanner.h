@@ -8,9 +8,9 @@ MATCH void Area_RaiseHudBanner(void) {
     Actor* work;
     s16    origin_y;
 
-    work         = g_Task;
-    origin_y     = work->unk_30 - 0xA;
-    work->unk_30 = origin_y;
+    work           = g_Task;
+    origin_y       = work->screen_y - 0xA;
+    work->screen_y = origin_y;
     if (origin_y < 201) {
         work->unk_03++;
     }
@@ -27,5 +27,5 @@ MATCH void Area_RaiseHudBanner(void) {
 force:
     g_Task->unk_03 = 3;
 done:
-    Area_DrawHudBanner(0x5C, g_Task->unk_30);
+    Area_DrawHudBanner(0x5C, g_Task->screen_y);
 }

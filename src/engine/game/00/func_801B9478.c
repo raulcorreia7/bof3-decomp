@@ -5,11 +5,11 @@ MATCH void func_801B9478(void) {
     Actor* flag_work;
     u8     countdown;
 
-    if (g_Task->unk_09 != 0) {
+    if (g_Task->timer != 0) {
         func_801C57B4();
-        work         = g_Task;
-        work->unk_09 = (work->unk_09 - 1);
-        if (g_Task->unk_09 == 0) {
+        work        = g_Task;
+        work->timer = (work->timer - 1);
+        if (g_Task->timer == 0) {
             Actor_ClearVelocity();
         }
     }

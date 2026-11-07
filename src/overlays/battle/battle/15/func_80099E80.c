@@ -17,15 +17,15 @@ MATCH void func_80099E80(void) {
         return;
     }
     if ((flags & 0x80) != 0) {
-        D_801EB4D8->command.target = 0xC0;
+        g_BattleActorTurn->command.target = BATTLE_TARGET_BOTH_SIDES;
     } else if ((flags & 0x10) != 0) {
         if ((flags & 0x20) != 0) {
-            D_801EB4D8->command.target = 0x40;
+            g_BattleActorTurn->command.target = BATTLE_TARGET_ENEMY_SIDE;
         } else {
-            D_801EB4D8->command.target = 0x80;
+            g_BattleActorTurn->command.target = BATTLE_TARGET_PARTY_SIDE;
         }
     } else {
-        D_801EB4D8->command.target = g_BattleMessageSlot[5];
+        g_BattleActorTurn->command.target = g_BattleMessageSlot[5];
     }
     g_BattleUIStep  = 8;
     g_BattleUIState = 3;

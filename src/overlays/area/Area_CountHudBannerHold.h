@@ -10,9 +10,9 @@ MATCH void Area_CountHudBannerHold(void) {
 
     work = g_Task;
     if (work->param.unk_0B == 0) {
-        work->unk_09++;
+        work->timer++;
         work = g_Task;
-        if (work->unk_09 >= 0x5A) {
+        if (work->timer >= 0x5A) {
             work->param.unk_0B++;
         }
     }
@@ -29,5 +29,5 @@ MATCH void Area_CountHudBannerHold(void) {
 bump:
     g_Task->unk_03++;
 done:
-    Area_DrawHudBanner(0x5C, g_Task->unk_30);
+    Area_DrawHudBanner(0x5C, g_Task->screen_y);
 }

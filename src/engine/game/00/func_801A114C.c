@@ -16,13 +16,13 @@ MATCH void func_801A114C(Actor* record) {
     saved  = spad_a->direction_08;
     D_801C83BC[spad_a->header.step](record, 0, 1);
     spad_b = g_Task;
-    if (spad_b->unk_09 == 0) {
+    if (spad_b->timer == 0) {
         mode  = record->unk_78;
         param = g_RouteSpeedScale[mode];
         if (record->unk_7B == 0) {
             if ((mode != 0) && (D_801C83BC[spad_b->header.step](record, param, 2) & BYTE_MASK)) {
                 func_801A2C10(record);
-                if (g_Task->unk_09 != 0) {
+                if (g_Task->timer != 0) {
                     timer = RANDOM_MASK(3) + 3;
                     /* Shared timer update after the random reload. */
                     goto block_7;
@@ -35,7 +35,7 @@ MATCH void func_801A114C(Actor* record) {
             record->unk_7B = timer;
         }
         result = func_801A2A04(record);
-        if (((result & BYTE_MASK) != GAME_NONE) && (g_Task->unk_09 != 0) &&
+        if (((result & BYTE_MASK) != GAME_NONE) && (g_Task->timer != 0) &&
             (func_801A1A58((Actor*)record) & BYTE_MASK)) {
             spad_c               = g_Task;
             spad_c->unk_03       = spad_c->header.mode;
@@ -44,7 +44,7 @@ MATCH void func_801A114C(Actor* record) {
             g_Task->direction_08 = (saved & 7);
             spad_d               = g_Task;
             spad_d->unk_0A       = 0;
-            spad_d->unk_09       = 0U;
+            spad_d->timer        = 0U;
             func_801A3B7C(record);
             spad_e = g_Task;
             if (spad_e->header.mode != 0xA) {
@@ -53,7 +53,7 @@ MATCH void func_801A114C(Actor* record) {
                 goto block_14;
             }
         } else {
-            g_Task->unk_09       = 0U;
+            g_Task->timer        = 0U;
             g_Task->direction_08 = saved;
         block_14:
             func_801A2AE4(record, saved);
