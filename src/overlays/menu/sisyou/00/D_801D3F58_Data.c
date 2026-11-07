@@ -118,7 +118,7 @@ s16 g_MasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT] = {
 };
 
 /* Step and sub-step handlers. */
-Callback g_MasterMenuFuncs[MASTER_MENU_STEP_COUNT] = {
+Callback g_MasterMenuStates[MASTER_MENU_STEP_COUNT] = {
     func_801D2614, func_801D2688, func_801D278C, func_801D2BE8, func_801D32D4, func_801D3924, Master_ApplyMaster,
 };
 

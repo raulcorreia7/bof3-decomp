@@ -25,7 +25,7 @@ MATCH void func_801EEED8(void) {
 }
 
 MATCH void func_801EEF60(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EEFA4(void) {

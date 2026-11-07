@@ -11,7 +11,7 @@ INCLUDE_ASM(func_801EED04);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEFC0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF004(void) {
@@ -20,7 +20,7 @@ MATCH void func_801EF004(void) {
 
 INCLUDE_ASM(func_801EF048);
 
-/* nonmatching: same body as Effect_BrightenPaletteThenStep, but retail has no stack frame; the shared body links one (+4 bytes, first difference at +0xE4). */
+/* nonmatching: same body as Effect_FadePaletteIn, but retail has no stack frame; the shared body links one (+4 bytes, first difference at +0xE4). */
 INCLUDE_ASM(func_801EF23C);
 
 INCLUDE_ASM(func_801EF348);

@@ -36,7 +36,7 @@ MATCH void func_801EEF88(void) {
 }
 
 MATCH void func_801EF014(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF058(void) {
@@ -90,6 +90,7 @@ MATCH void func_801EF44C(void) {
     }
 }
 
+/* blocker: the 0x78-stride queue at 0x801EC330 has no g_BattleEffects row in this image; needs a symbols.toml row first. */
 INCLUDE_ASM(func_801EF57C);
 
 MATCH void func_801EF614(void) {

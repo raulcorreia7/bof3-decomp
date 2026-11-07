@@ -4,7 +4,7 @@ MATCH void func_8009DD50(void) {
     s16              value;
     BattlePanelTask* panel;
 
-    if (D_80145F09[g_BattleActiveBattler * BATTLE_PARTY_STRIDE] == CHAR_ID_WHELP) {
+    if (g_BattlePartyBattlers[g_BattleActiveBattler].chr.character_id == CHAR_ID_WHELP) {
         func_800A3F28();
         ((BattlePanelTask*)g_BattleTargetRecord)->x.signed_half = 0x270F;
     } else {

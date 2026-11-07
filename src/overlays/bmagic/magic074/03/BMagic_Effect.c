@@ -26,7 +26,7 @@ INCLUDE_ASM(func_801EED18);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEF9C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EEFE0(void) {
@@ -37,9 +37,9 @@ MATCH void func_801EEFE0(void) {
 
 INCLUDE_ASM(func_801EF058);
 
-INCLUDE_ASM(func_801EF2C8);
+#include "overlays/bmagic/Effect_ReplaceSlotPaletteFade.h"
 
-#include "overlays/bmagic/Effect_BrightenPaletteThenStep.h"
+#include "overlays/bmagic/Effect_FadePaletteIn.h"
 
 /* func_801EF4D0 */
 #include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"
@@ -55,7 +55,7 @@ MATCH void func_801EF6A4(void) {
 }
 
 MATCH void func_801EF710(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, D_801F20DC);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, D_801F20DC);
 }
 
 INCLUDE_ASM(func_801EF754);

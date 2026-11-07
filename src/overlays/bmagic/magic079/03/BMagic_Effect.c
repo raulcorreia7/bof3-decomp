@@ -32,7 +32,7 @@ MATCH void func_801EEC5C(void) {
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EED98(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EEDDC(void) {
@@ -46,8 +46,18 @@ MATCH void func_801EEDDC(void) {
 
 INCLUDE_ASM(func_801EEE64);
 
-/* blocker: timer and z halfword take v1 and v0 in retail; first diff: lbu base register a0 against v0 at 0x801EEEF0. */
-INCLUDE_ASM(func_801EEEE4);
+MATCH void func_801EEEE4(void) {
+    PartyBattler* work = g_Task;
+    u8            timer;
+
+    work->pos.z.part.integer -= 0x40;
+
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EEF34(void) {
     u8 temp_a0;

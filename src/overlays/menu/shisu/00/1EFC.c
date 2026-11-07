@@ -215,7 +215,7 @@ INCLUDE_ASM(func_801D65DC);
 /* blocker: frame 0x58 against 0x50 and save order. */
 INCLUDE_ASM(Menu_DrawEquipStatWindow);
 
-INCLUDE_ASM(func_801D7224);
+#include "overlays/menu/Menu_DrawClutStrip.h"
 
 #include "overlays/menu/Menu_DrawFilledPanel.h"
 

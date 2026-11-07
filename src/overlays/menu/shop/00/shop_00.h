@@ -232,7 +232,7 @@ extern char        D_801D0E98[];
 #define SHOP_PANEL18_STATE_COUNT 3
 
 /* D_801E5144 */
-extern Callback    g_ShopStepFuncs[SHOP_STEP_COUNT];
+extern Callback    g_ShopStates[SHOP_STEP_COUNT];
 /* D_801E5170 */
 extern Callback    g_ShopStep2Funcs[SHOP_STEP2_COUNT];
 /* D_801E5184 */
@@ -255,7 +255,7 @@ extern Callback    g_ShopStep3Sub1Funcs[SHOP_STEP3_SUB1_COUNT];
 /* D_801E52F0 */
 extern Callback    g_ShopStep3Sub2Funcs[SHOP_STEP3_SUB2_COUNT];
 /* D_801E530C */
-extern Callback    g_SaveStateFuncs[SAVE_STATE_COUNT];
+extern Callback    g_SaveStates[SAVE_STATE_COUNT];
 /* D_801E5360 */
 extern Callback    g_ShopStep10Funcs[SHOP_STEP10_COUNT];
 extern s32         D_801E537C[];
@@ -329,7 +329,7 @@ extern Callback    g_ShopStep7Sub2Funcs[SHOP_STEP7_SUB2_COUNT];
 extern Callback    g_ShopStep7Sub3Funcs[SHOP_STEP7_SUB3_COUNT];
 extern u8          D_801E5D1C[];
 /* D_801E5D2C */
-extern Callback    g_AbilityStockSortFuncs[];
+extern Callback    g_AbilityStockCommands[];
 extern u8          D_801E5D38[];
 /* D_801E5D3C */
 extern Callback    g_ShopStep9Funcs[SHOP_STEP9_COUNT];
@@ -340,7 +340,7 @@ extern Callback    g_ShopStep9Sub1Funcs[SHOP_STEP9_SUB1_COUNT];
 /* D_801E5D5C */
 extern Callback    g_ShopStep9Sub2Funcs[SHOP_STEP9_SUB2_COUNT];
 /* D_801E5D68 */
-extern Callback    g_ShopPanelFuncs[SHOP_PANEL_COUNT];
+extern Callback    g_ShopPanelModes[SHOP_PANEL_COUNT];
 extern void (*g_ShopPanel0StateFuncs[SHOP_PANEL0_STATE_COUNT])();
 /* D_801E5DC0 */
 extern Callback    g_ShopPanel2StateFuncs[SHOP_PANEL2_STATE_COUNT];

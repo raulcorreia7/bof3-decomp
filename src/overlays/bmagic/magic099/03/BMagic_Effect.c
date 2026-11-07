@@ -34,7 +34,7 @@ MATCH void func_801EF0EC(void) {
 }
 
 MATCH void func_801EF16C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 #include "overlays/bmagic/Effect_SetActorMatrixRolled.h"
@@ -63,7 +63,7 @@ MATCH void func_801EF374(void) {
     BattleEffectTimerStep();
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerRaiseTicker.h"
+#include "overlays/bmagic/Effect_Wait.h"
 
 MATCH void func_801EF44C(void) {
     PartyBattler* work;

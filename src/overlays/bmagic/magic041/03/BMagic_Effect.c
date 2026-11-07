@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DispatchHandlerSlot1.h"
+#include "overlays/bmagic/Effect_DispatchMode.h"
 
 INCLUDE_ASM(func_801EECB0);
 
@@ -31,7 +31,7 @@ INCLUDE_ASM(func_801EEFF8);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EF190(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF1D4(void) {

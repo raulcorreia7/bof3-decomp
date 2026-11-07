@@ -39,7 +39,7 @@ MATCH void func_801EEFA0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_NextStepWhileTickUnderTwo.h"
+#include "overlays/bmagic/Effect_Pause.h"
 
 INCLUDE_ASM(func_801EF0A8);
 
@@ -82,7 +82,7 @@ MATCH s32 func_801EF34C(void) {
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF4E0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF524(void) {

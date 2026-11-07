@@ -24,7 +24,7 @@ MATCH void func_801EF09C(void) {
 }
 
 MATCH void func_801EF0DC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF120(void) {
@@ -44,7 +44,7 @@ INCLUDE_ASM(func_801EF3B8);
 
 INCLUDE_ASM(func_801EF6B0);
 
-#include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
+#include "overlays/bmagic/Effect_SetDuration.h"
 
 MATCH void func_801EF788(void) {
     u8 temp_a0;

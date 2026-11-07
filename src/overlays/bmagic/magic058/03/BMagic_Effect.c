@@ -24,7 +24,7 @@ MATCH void func_801EEEDC(void) {
 }
 
 MATCH void func_801EEF30(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EEF74(void) {
@@ -61,7 +61,7 @@ INCLUDE_ASM(func_801EF080);
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF36C(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, g_Task);
 }
 
 MATCH void func_801EF3B0(void) {
@@ -88,6 +88,7 @@ MATCH void func_801EF5D4(void) {
     }
 }
 
+/* blocker: the timer and battler branch layout differs; first diff: beqz v1 against the frame-parity branch at 0x801EF644. */
 INCLUDE_ASM(func_801EF61C);
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"

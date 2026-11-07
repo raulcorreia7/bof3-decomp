@@ -22,7 +22,7 @@ MATCH void func_801EF000(void) {
     SYS_DISPATCH_TASK(handlers.handlers, 1, g_Task);
 }
 
-#include "overlays/bmagic/Effect_SelectTargetAndAdvance.h"
+#include "overlays/bmagic/Effect_StartPaletteFade.h"
 
 INCLUDE_ASM(func_801EF0F8);
 

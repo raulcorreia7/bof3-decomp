@@ -2,5 +2,5 @@
 
 /* func_801E1B80 */
 MATCH void Menu_RunAbilityStockSort(s32 cursor_row) {
-    g_AbilityStockSortFuncs[cursor_row & BYTE_MASK]();
+    g_AbilityStockCommands[cursor_row & BYTE_MASK]();
 }
