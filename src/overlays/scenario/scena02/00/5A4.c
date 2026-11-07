@@ -132,7 +132,7 @@ MATCH void func_801FB300(void) {
     if (*step == 0) {
         Party_AddZenny(0x32, 0);
         SYS_SetFlag(g_SceneFlags, 0x23);
-        SND_PlayCue(0x106);
+        SND_PlayCue(EMI_CUE_ID(1, 6));
         Game_ClearScriptActive();
         *step                 = 0;
         g_SceneState.state_04 = 0;
@@ -249,7 +249,7 @@ MATCH void func_801FCB94(void) {
     D_80146866      = 0;
     D_80146867      = 0;
     D_80146875      = 0;
-    SND_PlayCue(514);
+    SND_PlayCue(EMI_CUE_ID(2, 2));
 }
 
 INCLUDE_ASM(func_801FCBDC);
@@ -427,7 +427,7 @@ MATCH void func_801FD5FC(void) {
     g_ScriptVars[2]       = 0;
     g_ScriptVars[3]       = 0;
     g_SceneState.state_04 = 25;
-    SND_PlayCue(0x106);
+    SND_PlayCue(EMI_CUE_ID(1, 6));
 }
 
 MATCH void func_801FD65C(void) {

@@ -18,7 +18,7 @@ MATCH void func_801D1578(void) {
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
-        UI_SetMode(2);
+        UI_SetMode(UI_MODE_FAST_FADE_OUT);
         D_80148652 += 1;
     }
 }
@@ -72,7 +72,7 @@ MATCH void func_801D20AC(void) {
 MATCH void func_801D20E8(void) {
     u8* count;
 
-    UI_SetMode(3);
+    UI_SetMode(UI_MODE_FAST_FADE_IN);
     count = &D_80148652;
     *count += 1;
 }

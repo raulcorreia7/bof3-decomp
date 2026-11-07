@@ -145,6 +145,28 @@ extern u8 g_GameRequestFlags;
 /* Not volatile: the qualifier changes the generated order in the scena00 drawer. */
 /* D_80143C40 */
 extern u16 g_UiWindowEffectBusy;
+
+/* The screen effects UI_SetMode starts, by index into g_UiLocalModeFuncs. Each
+ * effect comes as an out/in pair: out takes the screen to black or white, in
+ * brings it back. The indexes not named here run camera spins and distance
+ * resets. */
+typedef enum UiMode {
+    UI_MODE_FADE_OUT       = 0,
+    UI_MODE_FADE_IN        = 1,
+    UI_MODE_FAST_FADE_OUT  = 2,
+    UI_MODE_FAST_FADE_IN   = 3,
+    UI_MODE_SLOW_FADE_OUT  = 4,
+    UI_MODE_SLOW_FADE_IN   = 5,
+    UI_MODE_LAYER_FADE_OUT = 6,
+    UI_MODE_LAYER_FADE_IN  = 7,
+    UI_MODE_WHITE_OUT      = 8,
+    UI_MODE_WHITE_IN       = 9,
+    UI_MODE_LONG_FADE_OUT  = 13,
+    UI_MODE_LONG_FADE_IN   = 14,
+    UI_MODE_LONG_WHITE_OUT = 15,
+    UI_MODE_LONG_WHITE_IN  = 16,
+} UiMode;
+
 /* D_80143C90 */
 extern u16 g_UiLocalMode;
 /* D_80143F1E */
