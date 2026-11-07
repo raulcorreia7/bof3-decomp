@@ -1,6 +1,7 @@
 #include "area068_13.h"
 
-MATCH void func_801F30B0(void) {
+/* func_801F30B0 */
+MATCH void Well_ReadSwishInput(void) {
     Actor* work;
     u16*   input;
 
@@ -8,9 +9,9 @@ MATCH void func_801F30B0(void) {
         g_InputPressed == PADLleft || g_InputPressed == (PADLup | PADLright) ||
         g_InputPressed == (PADLdown | PADLright) || g_InputPressed == (PADLup | PADLleft) ||
         g_InputPressed == (PADLdown | PADLleft)) {
-        input      = &g_InputPressed;
-        D_801F4E14 = *input;
-        SND_PlayCue(0x202);
+        input              = &g_InputPressed;
+        g_WellSwishButtons = *input;
+        SND_PlayCue(WELL_CUE_SWISH);
         switch (*input) {
             case 0x1000:
             case 0x3000:
@@ -45,7 +46,7 @@ MATCH void func_801F30B0(void) {
                 g_Task = work;
                 break;
         }
-        g_Task->header.mode = 0xC;
-        g_Task->timer       = 0xC;
+        g_Task->header.mode = WELL_MODE_SWISH_DELAY;
+        g_Task->timer       = WELL_SWISH_DELAY_FRAMES;
     }
 }
