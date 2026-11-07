@@ -5,11 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* Signed here: the exe's Area_ProbeCell reads this cell with `lh`; scena00/00 reads the
- * same address with `lhu`, so its unsigned view stays in that image header. */
-/* D_80149322 */
-extern s16 g_AreaTileOriginY;
-
 /* The twelve step callbacks at D_801EEC10, copied to the stack and indexed by the work state byte. */
 typedef struct BMagic064Steps {
     Callback handlers[12];
