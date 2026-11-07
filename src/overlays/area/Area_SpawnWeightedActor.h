@@ -8,7 +8,6 @@
  * emi/world03/area124/13 carry retargeted-tables copies. Every change here
  * must verify every member. */
 
-extern s16 D_80143F22;
 extern u16 D_80145FB8;
 extern u8  D_801468C6[];
 extern u8  D_801F2DBC[];

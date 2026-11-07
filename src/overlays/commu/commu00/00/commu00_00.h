@@ -208,7 +208,6 @@ extern u8       D_801457AB[];
 extern s32 D_801457EC; /* end of the group table at 0x801457AC; func_801EF52C and func_801EFEA8 compare a row pointer
                            against it */
 extern u8  D_80145E30[];
-extern u8  D_80145E44;
 extern u8  D_80145E48[];
 extern u8  D_80145E60[];
 extern u16 D_80146904[1];
