@@ -12,6 +12,8 @@
 #define EFFECT_SPARKLE_IN_USE   0x01
 /* The rows of the launch offset table D_801F00BC, selected by the sparkle index. */
 #define EFFECT_SPARKLE_ROW_MASK 0x1F
+/* The launch offset row of the current sparkle D_801F17B4. */
+#define EFFECT_SPARKLE_OFFSET() (D_801F00BC[D_801F17B4->unk_07 & EFFECT_SPARKLE_ROW_MASK])
 
 extern BMagicEffectFuncs   D_801EEC04;
 extern BattleHandlerTable3 D_801EEC1C;

@@ -13,12 +13,12 @@ MATCH void func_801EF47C(void) {
         D_801F17B4->pos.z  = battler->pos.z;
         D_801F17B4->unk_20 = battler->unk_2E.half;
         D_801F17B4->unk_22 = battler->unk_30.half;
-        if (D_801F00BC[D_801F17B4->unk_07 & EFFECT_SPARKLE_ROW_MASK].x < 0) {
-            D_801F17B4->unk_20 += D_801F00BC[D_801F17B4->unk_07 & EFFECT_SPARKLE_ROW_MASK].x - RANDOM_MASK(7);
+        if (EFFECT_SPARKLE_OFFSET().x < 0) {
+            D_801F17B4->unk_20 += EFFECT_SPARKLE_OFFSET().x - RANDOM_MASK(7);
         } else {
-            D_801F17B4->unk_20 += D_801F00BC[D_801F17B4->unk_07 & EFFECT_SPARKLE_ROW_MASK].x + RANDOM_MASK(7);
+            D_801F17B4->unk_20 += EFFECT_SPARKLE_OFFSET().x + RANDOM_MASK(7);
         }
-        D_801F17B4->unk_22 -= D_801F00BC[D_801F17B4->unk_07 & EFFECT_SPARKLE_ROW_MASK].y + RANDOM_MASK(7);
+        D_801F17B4->unk_22 -= EFFECT_SPARKLE_OFFSET().y + RANDOM_MASK(7);
         /* FAKE: reread the work pointer after the y store. */
         MATCH_FAKE_BARRIER();
         D_801F17B4->unk_08   = D_801F17B4->unk_20;
