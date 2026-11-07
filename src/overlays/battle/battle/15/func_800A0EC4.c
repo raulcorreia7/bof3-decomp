@@ -95,7 +95,7 @@ NON_MATCHING void func_800A0EC4(void) {
     }
     if (!(func_800A3A10(*(u8*)&g_BattleActiveBattler, g_BattleTarget) & BYTE_MASK)) {
         if ((u8)g_BattleTarget < 3U) {
-            value = D_80145F18[g_BattleTarget][0];
+            value = g_BattlePartyBattlers[g_BattleTarget].chr.hp;
         } else {
             value = D_801EB6C4[g_BattleTarget - 3][0];
         }
