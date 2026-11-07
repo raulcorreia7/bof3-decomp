@@ -1,7 +1,7 @@
 #include "area134_13.h"
 
 MATCH void func_801F46EC(const void* sprite) {
-    s16               screen[2];
+    DVECTOR           screen;
     u16               size[2];
     const AreaSprite* work;
     s32*              object;
@@ -15,15 +15,15 @@ MATCH void func_801F46EC(const void* sprite) {
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
 
-    Area_ProjectPoint(object, screen);
+    Area_ProjectPoint(object, &screen);
     size[0] = VOL(u16, work->half_size);
     size[1] = VOL(u16, work->half_size);
     func_801AFFD8(object, size, size);
 
-    setXY4(primitive, screen[0] - ((s16)size[0] >> 1), screen[1] - ((s16)size[1] >> 1),
-           (screen[0] - ((s16)size[0] >> 1)) + size[0], screen[1] - ((s16)size[1] >> 1),
-           screen[0] - ((s16)size[0] >> 1), (screen[1] - ((s16)size[1] >> 1)) + size[1],
-           (screen[0] - ((s16)size[0] >> 1)) + size[0], (screen[1] - ((s16)size[1] >> 1)) + size[1]);
+    setXY4(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1),
+           (screen.vx - ((s16)size[0] >> 1)) + size[0], screen.vy - ((s16)size[1] >> 1),
+           screen.vx - ((s16)size[0] >> 1), (screen.vy - ((s16)size[1] >> 1)) + size[1],
+           (screen.vx - ((s16)size[0] >> 1)) + size[0], (screen.vy - ((s16)size[1] >> 1)) + size[1]);
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     primitive->clut  = GetClut(160, 483);
     primitive->tpage = GetTPage(0, 1, 704, 256);

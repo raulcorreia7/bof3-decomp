@@ -59,4 +59,7 @@ s32         _patch_pad(void);              /* 0x801D7D6C */
 /* RotTrans into a matrix translation: PsyQ takes a VECTOR, MATRIX.t is long t[3]. */
 #define RotTransMatrix(pos, matrix, flag) RotTrans(pos, (VECTOR*)(matrix).t, flag)
 
+/* The packed x,y pair of vertex n of a primitive, as RotTransPers writes it. */
+#define POLY_XY(prim, n)                  ((DVECTOR*)&(prim)->x##n)
+
 #endif
