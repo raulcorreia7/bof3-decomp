@@ -17,15 +17,18 @@ MATCH void Area_StepRunGauge(void) {
     u8     level;
 
     timer = g_Task->unk_0A;
+
     if (timer != 0) {
         g_Task->unk_0A = timer - 1;
     }
+
     if (g_Task->unk_0A == 0) {
         if (g_InputHeld & g_InputMasks[WORLD_INPUT_RUN]) {
             held = g_Task->param.unk_0B;
             if (held < 0x40U) {
                 g_Task->param.unk_0B = held + 1;
             }
+
             if (g_Task->param.unk_0B == 0x40) {
                 g_Task->unk_0A = 0x1E;
             }
@@ -40,6 +43,7 @@ MATCH void Area_StepRunGauge(void) {
                         step = 2;
                     }
                 }
+
                 if (g_Task->header.step != 0) {
                     g_Task->param.unk_0B -= step >> 1;
                     if (g_FrameCount & 1) {
@@ -50,6 +54,7 @@ MATCH void Area_StepRunGauge(void) {
                 }
             }
         }
+
         w       = g_Task;
         clamped = (s8)w->param.unk_0B;
         if (clamped >= 0) {

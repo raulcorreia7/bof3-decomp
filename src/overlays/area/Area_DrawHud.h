@@ -18,14 +18,14 @@ MATCH void Area_DrawHud(s16 x, s16 y) {
     if ((u8)(type + 0x60) >= 2 && (u8)type != 0xAE && (g_AreaWalkFlags & AREA_WALK_TRANSITION) == 0) {
         Area_DrawHudSprite((s16)(x + 0x30), (s16)y, 1);
         for (i = 0; i < 6; i++) {
-            if (g_InputMasks[WORLD_INPUT_ENTER] & AREA_HUD_MASK_TABLE[i].mask) {
+            if (g_InputMasks[FIELD_INPUT_INTERACT] & AREA_HUD_MASK_TABLE[i].mask) {
                 Area_DrawHudSprite((s16)(x + 0x38), (s16)(y + 8), (u8)(AREA_HUD_MASK_TABLE[i].step + 1));
                 break;
             }
         }
     } else {
         for (i = 0; i < 6; i++) {
-            if (g_InputMasks[WORLD_INPUT_ENTER] & AREA_HUD_MASK_TABLE[i].mask) {
+            if (g_InputMasks[FIELD_INPUT_INTERACT] & AREA_HUD_MASK_TABLE[i].mask) {
                 Area_DrawHudSprite((s16)(x + 0x38), (s16)(y + 8), AREA_HUD_MASK_TABLE[i].step);
                 break;
             }
@@ -35,14 +35,14 @@ MATCH void Area_DrawHud(s16 x, s16 y) {
     if ((u8)(type + 0x60) >= 2) {
         Area_DrawHudSprite((s16)(x + 0x30), (s16)(y + 0x10), 2);
         for (i = 0; i < 8; i++) {
-            if (g_InputMasks[INPUT_SLOT_ACTION] & AREA_HUD_MASK_TABLE[i].mask) {
+            if (g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] & AREA_HUD_MASK_TABLE[i].mask) {
                 Area_DrawHudSprite((s16)(x + 0x38), (s16)(y + 0x10), (u8)(AREA_HUD_MASK_TABLE[i].step + 1));
                 break;
             }
         }
     } else {
         for (i = 0; i < 8; i++) {
-            if (g_InputMasks[INPUT_SLOT_ACTION] & AREA_HUD_MASK_TABLE[i].mask) {
+            if (g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] & AREA_HUD_MASK_TABLE[i].mask) {
                 Area_DrawHudSprite((s16)(x + 0x38), (s16)(y + 0x10), AREA_HUD_MASK_TABLE[i].step);
                 break;
             }
