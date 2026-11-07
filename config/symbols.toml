@@ -709,75 +709,75 @@ Effect_TickDownAndClear_801EF888 = { addr = 0x801EF888, type = "func", source = 
 g_BMagicEffectFuncs = { addr = 0x801EF8BC, source = "the module dispatcher indexes it with the shared spad step byte" }
 
 ["emi/bmagic/magic117/00"]
-Effect_PlayOnce = { addr = 0x801EEFB8, type = "func", source = "byte-identical to Effect_PlayOnce at emi/bmagic/magic008/00@0x801EF010" }
-Effect_SelectTargetAndAdvance = { addr = 0x801EF06C, type = "func", source = "shared body of emi/bmagic/magic010/00@0x801EEC80" }
-Effect_PlayOnce_801EF344 = { addr = 0x801EF344, type = "func", source = "byte-identical to Effect_PlayOnce at emi/bmagic/magic117/00@0x801EEFB8" }
+Effect_PlayOnce = { addr = 0x801EEFB8, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic117 (Rest, Douse, Snooze)." }
+Effect_SelectTargetAndAdvance = { addr = 0x801EF06C, type = "func", source = "Frees the selected actor's palette fade, allocates a new one into the effect ticker (byte 0x0B), clears the effect timer (byte 0x09) and advances header.mode (byte 0x01) in magic117 (Rest, Douse, Snooze)." }
+Effect_PlayOnce_801EF344 = { addr = 0x801EF344, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic117 (Rest, Douse, Snooze)." }
 
 ["emi/bmagic/magic118/03"]
-Effect_NextStepOnWorkLastTick = { addr = 0x801EEE8C, type = "func", source = "advances the step byte at +0x01 when the ticker byte at +0x0B of the record at the scratchpad work pointer (+0x44) is one; one body shared with the other bmagic overlays" }
-Effect_CountDownTimerNextStep = { addr = 0x801EEEC0, type = "func", source = "counts the effect timer down and advances the step byte at zero" }
-Effect_PlayOnZeroTick = { addr = 0x801EEF0C, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
-Effect_SetActorMatrix = { addr = 0x801EF60C, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
+Effect_NextStepOnWorkLastTick = { addr = 0x801EEE8C, type = "func", source = "Advances header.mode (byte 0x01) when the effect ticker (byte 0x0B) is 1 in magic118 (Burn)." }
+Effect_CountDownTimerNextStep = { addr = 0x801EEEC0, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.mode (byte 0x01) at zero in magic118 (Burn)." }
+Effect_PlayOnZeroTick = { addr = 0x801EEF0C, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic118 (Burn)." }
+Effect_SetActorMatrix = { addr = 0x801EF60C, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic118 (Burn)." }
 
 ["emi/bmagic/magic120/03"]
-BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
-Effect_PlayOnIdleTick = { addr = 0x801EEFB0, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
-Effect_CountUpTimerCallSelector = { addr = 0x801EF2EC, type = "func", source = "lowers the effect ticker byte at +0x0B, counts the effect timer at +0x09 up and, at 24, calls func_800A9610 with g_BattleTargetSelector and 0x10 and advances the effect step byte at +0x02; one body shared with the other bmagic overlays" }
-Effect_CountUpAndStepAt120 = { addr = 0x801EF374, type = "func", source = "counts the effect timer at +0x09 up and advances the effect step byte at +0x02 at 120; one body shared with the other bmagic overlays" }
-Effect_CountUpAndFinishAt136 = { addr = 0x801EF3C4, type = "func", source = "raises the effect ticker, lowers the work byte at +0x04 and counts the counter at +0x09; at 136 it sets the active battler's ticker to 0xFF and clears the effect; one body shared with the other bmagic overlays" }
-Effect_SetActorMatrix = { addr = 0x801F0BF8, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
-g_BMagicEffectFuncs = { addr = 0x801F0CA8, source = "the module dispatcher indexes it with the shared spad step byte" }
+BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic120 (Whelp Breath)." }
+Effect_PlayOnIdleTick = { addr = 0x801EEFB0, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic120 (Whelp Breath)." }
+Effect_CountUpTimerCallSelector = { addr = 0x801EF2EC, type = "func", source = "Lowers the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) up; at 24 asks the target selector for targets (func_800A9610 with 0x10) and advances header.step (byte 0x02) in magic120 (Whelp Breath)." }
+Effect_CountUpAndStepAt120 = { addr = 0x801EF374, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 120 in magic120 (Whelp Breath)." }
+Effect_CountUpAndFinishAt136 = { addr = 0x801EF3C4, type = "func", source = "Raises the effect ticker (byte 0x0B), lowers byte 0x04 and counts the effect timer (byte 0x09) up; at 136 sets the active battler's ticker to 0xFF and clears the effect in magic120 (Whelp Breath)." }
+Effect_SetActorMatrix = { addr = 0x801F0BF8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic120 (Whelp Breath)." }
+g_BMagicEffectFuncs = { addr = 0x801F0CA8, source = "Handlers of magic120 (Whelp Breath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic121/03"]
-Effect_PlayOnIdleTick = { addr = 0x801EEE08, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
-Effect_CountUpWorkByteAndStep = { addr = 0x801EF2D4, type = "func", source = "one body shared through overlays/bmagic/Effect_CountUpWorkByteAndStep.h" }
-g_BMagicEffectFuncs = { addr = 0x801F0C38, source = "the module dispatcher indexes it with the shared spad step byte" }
+Effect_PlayOnIdleTick = { addr = 0x801EEE08, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic121 (DragonBreath)." }
+Effect_CountUpWorkByteAndStep = { addr = 0x801EF2D4, type = "func", source = "Counts work byte 0x04 up by two and advances header.step (byte 0x02) at 16 in magic121 (DragonBreath)." }
+g_BMagicEffectFuncs = { addr = 0x801F0C38, source = "Handlers of magic121 (DragonBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic122/03"]
-Effect_PlayOnIdleTick = { addr = 0x801EEDFC, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
-Effect_CountUpTimerCallSelector = { addr = 0x801EF1C4, type = "func", source = "lowers the effect ticker byte at +0x0B, counts the effect timer at +0x09 up and, at 24, calls func_800A9610 with g_BattleTargetSelector and 0x10 and advances the effect step byte at +0x02; one body shared with the other bmagic overlays" }
-Effect_CountUpAndStepAt120 = { addr = 0x801EF24C, type = "func", source = "counts the effect timer at +0x09 up and advances the effect step byte at +0x02 at 120; one body shared with the other bmagic overlays" }
-Effect_CountUpAndFinishAt136 = { addr = 0x801EF29C, type = "func", source = "raises the effect ticker, lowers the work byte at +0x04 and counts the counter at +0x09; at 136 it sets the active battler's ticker to 0xFF and clears the effect; one body shared with the other bmagic overlays" }
-g_BMagicEffectFuncs = { addr = 0x801F02CC, source = "the module dispatcher indexes it with the shared spad step byte" }
+Effect_PlayOnIdleTick = { addr = 0x801EEDFC, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic122 (Flame Breath)." }
+Effect_CountUpTimerCallSelector = { addr = 0x801EF1C4, type = "func", source = "Lowers the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) up; at 24 asks the target selector for targets (func_800A9610 with 0x10) and advances header.step (byte 0x02) in magic122 (Flame Breath)." }
+Effect_CountUpAndStepAt120 = { addr = 0x801EF24C, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 120 in magic122 (Flame Breath)." }
+Effect_CountUpAndFinishAt136 = { addr = 0x801EF29C, type = "func", source = "Raises the effect ticker (byte 0x0B), lowers byte 0x04 and counts the effect timer (byte 0x09) up; at 136 sets the active battler's ticker to 0xFF and clears the effect in magic122 (Flame Breath)." }
+g_BMagicEffectFuncs = { addr = 0x801F02CC, source = "Handlers of magic122 (Flame Breath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic123/03"]
-Effect_PlayOnZeroTick = { addr = 0x801EF064, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
-BMagic_AllocEffect = { addr = 0x801EFCA0, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801EFD04, type = "func", source = "clears the five leading fields of the current g_Task record" }
-g_BMagicEffectFuncs = { addr = 0x801EFD54, source = "the module dispatcher indexes it with the shared spad step byte" }
+Effect_PlayOnZeroTick = { addr = 0x801EF064, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic123 (Frost Breath)." }
+BMagic_AllocEffect = { addr = 0x801EFCA0, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 90 slots are in use in magic123 (Frost Breath)." }
+Actor_Clear = { addr = 0x801EFD04, type = "func", source = "Clears an actor record." }
+g_BMagicEffectFuncs = { addr = 0x801EFD54, source = "Handlers of magic123 (Frost Breath), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic124/03"]
-Effect_RequestTargetOnTimerZero = { addr = 0x801EEF88, type = "func", source = "counts the effect timer down; at zero requests the target selector and advances the step" }
-Effect_PlayOnZeroTick = { addr = 0x801EF050, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
-BMagic_AllocEffect = { addr = 0x801F0828, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F088C, type = "func", source = "clears the five leading fields of the current g_Task record" }
-g_BMagicEffectFuncs = { addr = 0x801F08DC, source = "the module dispatcher indexes it with the shared spad step byte" }
+Effect_RequestTargetOnTimerZero = { addr = 0x801EEF88, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (func_800A9610 with 0x10) and advances header.mode (byte 0x01) in magic124 (ThundrBreath)." }
+Effect_PlayOnZeroTick = { addr = 0x801EF050, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic124 (ThundrBreath)." }
+BMagic_AllocEffect = { addr = 0x801F0828, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 64 slots are in use in magic124 (ThundrBreath)." }
+Actor_Clear = { addr = 0x801F088C, type = "func", source = "Clears an actor record." }
+g_BMagicEffectFuncs = { addr = 0x801F08DC, source = "Handlers of magic124 (ThundrBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic125/03"]
-Effect_PlayOnZeroTick = { addr = 0x801EEE60, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
-Effect_SetActorMatrix = { addr = 0x801EF1A8, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
-BMagic_AllocEffect = { addr = 0x801F0524, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F0588, type = "func", source = "clears the five leading fields of the current g_Task record" }
-g_BMagicEffectFuncs = { addr = 0x801F05D8, source = "the module dispatcher indexes it with the shared spad step byte" }
+Effect_PlayOnZeroTick = { addr = 0x801EEE60, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic125 (DivineBreath)." }
+Effect_SetActorMatrix = { addr = 0x801EF1A8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic125 (DivineBreath)." }
+BMagic_AllocEffect = { addr = 0x801F0524, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 64 slots are in use in magic125 (DivineBreath)." }
+Actor_Clear = { addr = 0x801F0588, type = "func", source = "Clears an actor record." }
+g_BMagicEffectFuncs = { addr = 0x801F05D8, source = "Handlers of magic125 (DivineBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic126/03"]
-Effect_PlayOnZeroTick = { addr = 0x801EEE70, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
-Effect_CopyBattlerCoords = { addr = 0x801EEFAC, type = "func", source = "copies the battler's coordinates and span into the effect work, clears its timer and counter and advances the step" }
-Effect_StepWhileTickUnderTwo = { addr = 0x801EF078, type = "func", source = "advances the effect step while the other battler's effect ticker is under 2" }
-Effect_TickOnTimerZero = { addr = 0x801EF0BC, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
-Effect_SetActorMatrix = { addr = 0x801EF118, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
-Effect_CountUpTimersAndStep = { addr = 0x801EFC28, type = "func", source = "counts the effect timer at +0x09 and the effect counter at +0x0A up by one and advances the effect step byte at +0x02 when the counter reaches 16; one body shared with the other bmagic overlays" }
-Effect_CountDownTimer = { addr = 0x801EFCE4, type = "func", source = "counts the effect timer down and finishes the effect at zero" }
-Effect_TickOnTimerNegative = { addr = 0x801F0650, type = "func", source = "counts the effect timer down by 2 and ticks the effect ticker of D_801EB4E0 once the timer byte is negative" }
-g_BMagicEffectFuncs = { addr = 0x801F125C, source = "the module dispatcher indexes it with the shared spad step byte" }
+Effect_PlayOnZeroTick = { addr = 0x801EEE70, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic126 (ShadowBreath)." }
+Effect_CopyBattlerCoords = { addr = 0x801EEFAC, type = "func", source = "Copies the position of battler D_801EB4E0 into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic126 (ShadowBreath)." }
+Effect_StepWhileTickUnderTwo = { addr = 0x801EF078, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of battler D_801EB4E0 is under 2 in magic126 (ShadowBreath)." }
+Effect_TickOnTimerZero = { addr = 0x801EF0BC, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of battler D_801EB4E0 and clears the effect in magic126 (ShadowBreath)." }
+Effect_SetActorMatrix = { addr = 0x801EF118, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic126 (ShadowBreath)." }
+Effect_CountUpTimersAndStep = { addr = 0x801EFC28, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up and advances header.step (byte 0x02) when the counter reaches 16 in magic126 (ShadowBreath)." }
+Effect_CountDownTimer = { addr = 0x801EFCE4, type = "func", source = "Raises the effect timer (byte 0x09) by 1, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic126 (ShadowBreath)." }
+Effect_TickOnTimerNegative = { addr = 0x801F0650, type = "func", source = "Counts the effect timer (byte 0x09) down by two; once negative lowers the ticker (byte 0x0B) of battler D_801EB4E0 and clears the effect in magic126 (ShadowBreath)." }
+g_BMagicEffectFuncs = { addr = 0x801F125C, source = "Handlers of magic126 (ShadowBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic129/03"]
-Effect_RequestTargetOnTimerZero = { addr = 0x801EEEB8, type = "func", source = "counts the effect timer down; at zero requests the target selector and advances the step" }
-Effect_PlayOnZeroTick = { addr = 0x801EEF20, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
-Effect_CountUpTimerByTwoAndStep = { addr = 0x801EF38C, type = "func", source = "one body shared through overlays/bmagic/Effect_CountUpTimerByTwoAndStep.h" }
-BMagic_AllocEffect = { addr = 0x801F0500, type = "func", source = "claims the first free row of the 48 effect slots, as Battle_AllocEffect does, and returns its index" }
-Actor_Clear = { addr = 0x801F0564, type = "func", source = "clears the five leading fields of the current g_Task record" }
-g_BMagicEffectFuncs = { addr = 0x801F05B4, source = "the module dispatcher indexes it with the shared spad step byte" }
+Effect_RequestTargetOnTimerZero = { addr = 0x801EEEB8, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (func_800A9610 with 0x10) and advances header.mode (byte 0x01) in magic129 (Holocaust)." }
+Effect_PlayOnZeroTick = { addr = 0x801EEF20, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic129 (Holocaust)." }
+Effect_CountUpTimerByTwoAndStep = { addr = 0x801EF38C, type = "func", source = "Counts the effect counter (byte 0x0A) up by two and advances header.step (byte 0x02) at 16 in magic129 (Holocaust)." }
+BMagic_AllocEffect = { addr = 0x801F0500, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 64 slots are in use in magic129 (Holocaust)." }
+Actor_Clear = { addr = 0x801F0564, type = "func", source = "Clears an actor record." }
+g_BMagicEffectFuncs = { addr = 0x801F05B4, source = "Handlers of magic129 (Holocaust), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic130/03"]
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
