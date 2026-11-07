@@ -18,6 +18,7 @@ MATCH void func_801F743C(void) {
     actor->header.mode = actor->header.mode + 1;
 }
 
+/* Hint: a3 is lhu of the low half of vx (0x0C), while 0x0C is also read as a word; the same field needs two widths. */
 INCLUDE_ASM(func_801F745C);
 
 MATCH void func_801F74CC(void) {

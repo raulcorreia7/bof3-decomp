@@ -136,8 +136,10 @@ INCLUDE_ASM(func_801F7638);
 
 INCLUDE_ASM(func_801F76D0);
 
+/* Hint: pointer global D_801FDFBC plus a halfword at +0x10 and a word counter at +0x0C of g_Task; the pointer struct is not typed yet. */
 INCLUDE_ASM(func_801F77AC);
 
+/* Hint: the pointer global D_801FDFBC is read as a word at +0x08; its struct is not typed yet, so the draft needs that type first. */
 INCLUDE_ASM(func_801F7810);
 
 MATCH void func_801F786C(void) {
@@ -274,6 +276,7 @@ INCLUDE_ASM(func_801F8478);
 
 INCLUDE_ASM(func_801F85D8);
 
+/* Hint: operates on a0 as a byte record (bytes 0x02, 0x03, 0x01, 0x04 and a flag at D_801FDFC4); the record type is not declared, so the draft needs it first. */
 INCLUDE_ASM(func_801F86BC);
 
 #include "overlays/scenario/Actor_Wait.h"
