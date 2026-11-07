@@ -41,6 +41,14 @@ extern SceneFunc D_801FE97C[];
         return (none);                                                               \
     } while (0)
 
+/* One row of the party id table at D_80145F09: the character id is the row's first byte. */
+typedef struct Scena10PartyRow {
+    u8 character_id;
+    u8 pad_01[0x13F];
+} Scena10PartyRow;
+
+extern Scena10PartyRow D_80145F09[];
+
 void func_801F6FAC(void);
 
 s32 Item_Count(s32 category, s32 item, s32 mode);
