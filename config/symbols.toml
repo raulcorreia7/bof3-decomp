@@ -2657,7 +2657,6 @@ g_FishingLure = { addr = 0x80145026, source = "accessory id of the equipped lure
 g_FishingLureQty = { addr = 0x80145027, source = "number of equipped lures held" }
 g_FishingRod = { addr = 0x80145028, source = "accessory id of the equipped rod; its row is the 0x0A-byte entry of the rod table that g_FishingRodRow points at" }
 g_FishingRankIcons = { addr = 0x801D0C3C, source = "13 rank rows (Novice through THE FISH) that Fishing_DrawRank indexes by rank: icon id, x offset and the two plus-mark flags" }
-g_FishingRankScores = { addr = 0x801D0C70, source = "fishing points that end each rank, 12 bounds then 0xFFFF for the top rank; Fishing_DrawRank steps rows until the points are below the bound" }
 Fishing_DrawHud = { addr = 0x801D159C, type = "func", source = "draws the fishing HUD: the cast and line panel with the lure's distance from the shore in two digits (flashing at 50 or more while reeling) and the depth gauge" }
 Fishing_DrawDepthGauge = { addr = 0x801D195C, type = "func", source = "draws the depth gauge: the lure's height over the pond floor as a bar with a cursor, and the lure's depth marker in mode 4" }
 Fishing_CastGaugeRun = { addr = 0x801D1B10, type = "func", source = "runs the cast power gauge actor: g_FishingCastGaugeStates[handler_index_01]" }
@@ -2699,7 +2698,7 @@ Fishing_FishStaminaAdd = { addr = 0x801E026C, type = "func", source = "adds delt
 Fishing_LureInRange = { addr = 0x801E0680, type = "func", source = "true when the lure (actor slot 0) is in mode 4 with no fish hooked and the fish at the work position is within the lure row's reach; otherwise puts the fish back to its swim step" }
 Fishing_CatchScore = { addr = 0x801E0ABC, type = "func", source = "score of one fish catch: the species row's maximum score (+0x12) scaled by length over the species maximum length (+0x0F), full score from the maximum length up" }
 Fishing_TotalScore = { addr = 0x801E0B6C, type = "func", source = "the player's fishing points: sums Fishing_CatchScore over the 32 g_FishBestCatch lengths" }
-Fishing_DrawRank = { addr = 0x801E1320, type = "func", source = "draws the rank panel: picks the rank row of g_FishingRankIcons by the total fishing points against g_FishingRankScores and prints the points in five digits" }
+Fishing_DrawRank = { addr = 0x801E1320, type = "func", source = "draws the rank panel: picks the rank row of g_FishingRankIcons by the total fishing points against the rank score bounds at 0x801D0C70 and prints the points in five digits" }
 g_FishingCastGaugeStates = { addr = 0x801E1D10, source = "cast power gauge steps: idle, start, sweep, label" }
 g_FishingLureStates = { addr = 0x801E1D20, source = "lure actor steps: idle, cast, fly, settle, float, hooked" }
 g_FishingReelGaugeStates = { addr = 0x801E1D80, source = "reel gauge steps: idle, start, update" }

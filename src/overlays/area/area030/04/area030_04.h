@@ -365,8 +365,7 @@ extern FishingAnchors        D_801D0C30;
 extern char                  D_801D0C38[];
 /* D_801D0C3C */
 extern FishingIconData       g_FishingRankIcons;
-/* D_801D0C70 */
-extern FishingThresholdData  g_FishingRankScores;
+extern FishingThresholdData  D_801D0C70;
 extern u8                    D_801D0C8C[];
 extern Callback              D_801E1CD4[];
 extern Callback              D_801E1CE8[];

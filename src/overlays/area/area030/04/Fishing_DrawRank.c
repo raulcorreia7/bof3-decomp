@@ -11,7 +11,7 @@ MATCH void Fishing_DrawRank(s16 x, s16 y) {
     s32                  i;
 
     icons      = g_FishingRankIcons;
-    thresholds = g_FishingRankScores;
+    thresholds = D_801D0C70;
 
     func_801E0C80(3, 1);
     func_801E0DCC(6, 1, x, y);
