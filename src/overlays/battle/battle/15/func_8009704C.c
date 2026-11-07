@@ -44,7 +44,7 @@ NON_MATCHING void func_8009704C(void) {
     D_801485E2 = D_80148576 + ((D_8014857C - D_80148580) * 13 + 0x1A);
     trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
     if ((g_BattleActorTurn->action_flags.value &
-         (COMBATANT_FLAG_DRAGON_FORM | COMBATANT_FLAG_DRAGON_FORM_CURSOR_LOCKED)) != (u32)COMBATANT_FLAG_DRAGON_FORM) {
+         (COMBATANT_FLAG_DRAGON_FORM | COMBATANT_FLAG_DRAGON_FORM_CONTROLLED)) != (u32)COMBATANT_FLAG_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 1));
             D_80148579 = 0x32u;

@@ -57,6 +57,23 @@ typedef enum GeneId {
     GENE_EMPTY    = 0xFF,
 } GeneId;
 
+/* Dragon form ids the predetermined gene rows select: D_800B4D58 row + 4. The
+ * genes are the row's combination; Infinity alone, or with any other gene, is
+ * the berserk Kaiser. */
+typedef enum DragonForm {
+    DRAGON_FORM_TRUE_KAISER    = 4,  /* Infinity, Trance, Radiance */
+    DRAGON_FORM_TRYGON         = 5,  /* Flame, Frost, Thunder */
+    DRAGON_FORM_WILDFIRE       = 6,  /* Miracle, Reverse, Thorn */
+    DRAGON_FORM_FAILURE_KAISER = 7,  /* Infinity, Failure */
+    DRAGON_FORM_BERSERK_KAISER = 8,  /* Infinity */
+    DRAGON_FORM_WHELP          = 9,  /* Failure */
+    DRAGON_FORM_HYBRID         = 10, /* Fusion */
+    DRAGON_FORM_TIAMAT         = 11, /* Shadow, Trance */
+    DRAGON_FORM_MYRMIDON       = 12, /* Force, Trance */
+    DRAGON_FORM_MAMMOTH        = 13, /* Miracle, unnamed gene */
+    DRAGON_FORM_PYGMY          = 14, /* Mutant, unnamed gene */
+} DragonForm;
+
 /* Affinity columns, in the order the dragon-id selection reads them: five
  * elements, then five stats, then the four form affinities. */
 typedef enum GeneAffinity {

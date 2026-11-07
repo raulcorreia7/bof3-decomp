@@ -577,7 +577,9 @@ typedef enum BattleBattlerDamageFlags {
  * player row. Bit 3 marks a mode handler action installed; bit 4 keeps the row
  * available during the suppression countdown; bit 6 applies the queued power
  * boost; bit 9 halves the damage; bits 11 and 13 zero the holy and fire
- * resistance; bit 14 charges the action; bit 15 marks a preemptive turn. */
+ * resistance; bit 14 charges the action; bit 15 marks a preemptive turn; bit 16
+ * marks the berserk Kaiser form; bit 17 lets the player steer a Kaiser form,
+ * otherwise the command cursor stays locked. */
 typedef enum BattleBattlerActionFlags {
     COMBATANT_FLAG_DRAGON_FORM_QUEUED        = 1 << 0,
     COMBATANT_FLAG_DRAGON_FORM               = 1 << 1,
@@ -594,7 +596,8 @@ typedef enum BattleBattlerActionFlags {
     COMBATANT_FLAG_FIRE_RESIST_ZERO          = 1 << 13,
     COMBATANT_FLAG_CHARGING                  = 1 << 14,
     COMBATANT_FLAG_PREEMPTIVE_TURN           = 1 << 15,
-    COMBATANT_FLAG_DRAGON_FORM_CURSOR_LOCKED = 1 << 17,
+    COMBATANT_FLAG_DRAGON_FORM_BERSERK       = 1 << 16,
+    COMBATANT_FLAG_DRAGON_FORM_CONTROLLED    = 1 << 17,
     COMBATANT_FLAG_SELECTED                  = 1 << 18,
 } BattleBattlerActionFlags;
 
