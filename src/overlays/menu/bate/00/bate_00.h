@@ -7,7 +7,7 @@
 #include "shared/etc.h"
 #include <stdio.h>
 
-extern u8 D_80148654;
+extern u8  D_80148654;
 extern u8  D_80148339;
 extern u8  D_8014835F;
 extern u8  D_80148361;

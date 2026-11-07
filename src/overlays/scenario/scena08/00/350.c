@@ -441,27 +441,27 @@ MATCH void func_801FB168(void) {
 
     step = &D_80146875;
     switch (*step) {
-    case 0:
-        D_80147ACF = 3;
-        D_80147AD6 = 0;
-        *step = 1;
-        break;
-    case 1:
-        if (D_80146867 == 0x12) {
-            D_80146876 = 0x10;
-            *step = 2;
-        }
-        break;
-    case 2:
-        if (D_80146876-- == 0) {
-            SYS_SetFlag(g_SceneFlags, 3);
-            D_801448EE = 1;
-            g_SceneEventMode = 5;
-            g_SceneEventStep = 3;
-            D_80146874 = 0;
-            *step = 0;
-        }
-        break;
+        case 0:
+            D_80147ACF = 3;
+            D_80147AD6 = 0;
+            *step      = 1;
+            break;
+        case 1:
+            if (D_80146867 == 0x12) {
+                D_80146876 = 0x10;
+                *step      = 2;
+            }
+            break;
+        case 2:
+            if (D_80146876-- == 0) {
+                SYS_SetFlag(g_SceneFlags, 3);
+                D_801448EE       = 1;
+                g_SceneEventMode = 5;
+                g_SceneEventStep = 3;
+                D_80146874       = 0;
+                *step            = 0;
+            }
+            break;
     }
 }
 

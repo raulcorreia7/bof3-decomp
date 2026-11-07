@@ -40,7 +40,7 @@ MATCH void func_801EEF7C(void) {
     PartyBattler* battler;
 
     g_Task->timer++;
-    step = g_Task->unk_09 + 1;
+    step           = g_Task->unk_09 + 1;
     g_Task->unk_09 = step;
     if (step == 0x10) {
         slot = LOBU(g_BattleTargetSelector);
