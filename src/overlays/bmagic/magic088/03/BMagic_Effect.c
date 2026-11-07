@@ -39,7 +39,7 @@ MATCH void func_801EEFA0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_NextStepWhileTickUnderTwo.h"
+#include "overlays/bmagic/Effect_Pause.h"
 
 INCLUDE_ASM(func_801EF0A8);
 

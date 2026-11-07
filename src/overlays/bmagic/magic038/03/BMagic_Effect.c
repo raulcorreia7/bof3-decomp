@@ -39,6 +39,6 @@ MATCH void func_801EF8B8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 11), 2, g_Task);
 }
 
-#include "overlays/bmagic/Effect_RequestQueueEntryAndArmTicker.h"
+#include "overlays/bmagic/Effect_QueueEntry.h"
 
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"

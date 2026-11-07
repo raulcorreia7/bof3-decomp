@@ -2,7 +2,7 @@
  * selector with 1, clears the three tint colours and steps the handler.
  */
 /* func_801EF448, func_801EF5F0 */
-MATCH void Effect_CountDownAndSetTint(void) {
+MATCH void Effect_StartTint(void) {
     u8 count;
 
     count          = g_Task->unk_09 - 1;
