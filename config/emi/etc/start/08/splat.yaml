@@ -180,7 +180,7 @@ segments:
       - [0xBA58, c, Menu_DrawTintedLine]
       - [0xBB4C, c, Menu_DrawItemRow]
       - [0xBEEC, c, Menu_DrawEquipment]
-      - [0xC1B8, c, func_801DCDB8]
+      - [0xC1B8, c, Menu_DrawFormationPreview]
       - [0xC904, c, Menu_DrawIcon]
       - [0xCA18, c, Menu_DrawPanelIcon]
       - [0xCAD0, c, func_801DD6D0]
