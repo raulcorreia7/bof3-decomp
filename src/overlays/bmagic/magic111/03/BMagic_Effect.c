@@ -58,6 +58,7 @@ MATCH void func_801EF138(void) {
     func_801E5988();
 }
 
+/* blocker: the step table D_801EFAA8 (Callback per header.step) has no symbol row in this image; needs: type. */
 INCLUDE_ASM(func_801EF158);
 
 MATCH void func_801EF1D4(void) {
