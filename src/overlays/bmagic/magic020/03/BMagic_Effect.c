@@ -46,17 +46,16 @@ MATCH void func_801EF498(void) {
     PartyBattler* work;
     s32           z;
 
-    g_Task->unk_27 = g_BattleEffectBattler->unk_27;
-    g_Task->unk_2B = 1;
-    work           = g_Task;
+    g_Task->unk_27    = g_BattleEffectBattler->unk_27;
+    g_Task->unk_2B    = 1;
+    work              = g_Task;
     work->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
     work->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-    z              = g_BattleEffectBattler->pos.z.fixed;
-    work->unk_09   = 0x10;
+    z                 = g_BattleEffectBattler->pos.z.fixed;
+    work->unk_09      = 0x10;
     work->pos.z.fixed = z;
     g_Task->header.step++;
 }
-
 
 MATCH void func_801EF518(void) {
     PartyBattler** selected;

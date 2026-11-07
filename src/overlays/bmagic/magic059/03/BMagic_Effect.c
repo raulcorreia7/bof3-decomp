@@ -91,7 +91,6 @@ MATCH void func_801F0018(void) {
     g_Task->header.step++;
 }
 
-
 MATCH void func_801F0070(void) {
     PartyBattler* work;
 

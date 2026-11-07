@@ -53,7 +53,6 @@ MATCH void func_801EEF78(void) {
     g_Task->header.step++;
 }
 
-
 MATCH void func_801EEFF8(void) {
     PartyBattler* work = g_Task;
     u8            timer;
