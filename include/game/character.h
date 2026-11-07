@@ -85,6 +85,7 @@ typedef enum CharacterIndex {
     CHAR_INDEX_MOMO  = 5,
     CHAR_INDEX_PECO  = 6,
     CHAR_INDEX_WHELP = 7,
+    CHAR_INDEX_COUNT = 8,
 } CharacterIndex;
 
 /* Stored character id. The party-order arrays hold these values, not record

@@ -7,8 +7,6 @@ typedef struct StartPartyBlock {
     Character records[8];
 } StartPartyBlock;
 
-/* Per-character willpower divisor and base pair. */
-
 /* D_801448D8 spelled from g_Characters so the block base stays one symbol. */
 #define START_PARTY ((StartPartyBlock*)((u8*)g_Characters - 0x90))
 #define RECORDS     (g_Characters)
@@ -18,11 +16,12 @@ MATCH void Party_InitDefaults(void) {
     u8 willpower;
 
     for (index = 0; index < 7; index++) {
-        RECORDS[index] = D_801EB514[index];
-        willpower      = (g_Characters[index].level << 4) / D_801EBA34[index][0] + D_801EBA34[index][1];
+        RECORDS[index] = g_StartCharacters[index];
+        willpower      = (g_Characters[index].level << 4) / g_StartWillpowerCurves[index].level_divisor +
+                         g_StartWillpowerCurves[index].base;
         START_PARTY->records[index].base.willpower = willpower;
         START_PARTY->records[index].willpower      = willpower;
         g_Characters[index].stats.willpower        = willpower;
     }
-    RECORDS[D_80181B1A] = D_801EB990;
+    RECORDS[D_80181B1A] = g_StartCharacters[CHAR_INDEX_WHELP];
 }

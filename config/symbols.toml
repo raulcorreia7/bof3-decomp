@@ -1969,8 +1969,13 @@ D_801DA12C = { addr = 0x801DA12C, source = "12-bit turn angle of a status menu d
 ["emi/etc/shop/00"]
 g_SaveBuffer = { addr = 0x800C1A00, source = "The resident save image in memory; the start overlay uses the same address as SAVE_IMAGE_ADDR." }
 g_MenuStatFormat = { addr = 0x801D0CE4, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
+g_MenuCurrentValueFormat = { addr = 0x801D0CE8, source = "Format of the current value of an HP or AP pair: the character window prints hp or ap through it, then the maximum through g_MenuMaxValueFormat." }
+g_MenuMaxValueFormat = { addr = 0x801D0CF0, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
+g_MenuExperienceFormat = { addr = 0x801D0CF8, source = "Format of the experience panel value: the character's experience, or the experience of the next level." }
+g_MenuExperienceBlank = { addr = 0x801D0CFC, source = "Dashes the experience panel prints in place of the value when it is -1." }
 g_MenuZennyFormat = { addr = 0x801D0D08, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0D0C, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
+g_ShopFormations = { addr = 0x801D0D14, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
 g_MenuClockFormat = { addr = 0x801D0DE0, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0E20, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "Entry of the shop: dispatches on the menu step byte D_80148650 through the D_801E5144 handlers." }
@@ -2067,6 +2072,8 @@ g_MenuAbilityListNames = { addr = 0x801E5B7C, source = "the list names indexed b
 g_ShopStep6Funcs = { addr = 0x801E5BEC, source = "4 sub-step handlers of step 6 of the shop, called by func_801DE188 (the step 6 handler) and indexed by the menu sub-step byte D_80148651" }
 g_ShopStep6Sub0Funcs = { addr = 0x801E5BFC, source = "3 handlers of sub-step 0 of step 6 of the shop, called by func_801DE1C4 (the sub-step 0 handler of step 6) and indexed by the menu sub-sub-step byte D_80148652" }
 g_ShopStep6Sub3Funcs = { addr = 0x801E5C08, source = "4 handlers of sub-step 3 of step 6 of the shop, called by func_801DE850 (the sub-step 3 handler of step 6) and indexed by the menu sub-sub-step byte D_80148652" }
+g_ShopBoatPartyPositions = { addr = 0x801E5C18, size = 0x30, source = "Where each of the three party members stands on the boat after the Black Ship: x, y and height, read by the field party setup func_801DE944." }
+g_ShopFacingSteps = { addr = 0x801E5C48, size = 0x20, source = "The x and y step of each of the eight facings, added to the scroll target by func_801DE944." }
 g_ShopStep7Funcs = { addr = 0x801E5CE8, source = "5 sub-step handlers of step 7 of the shop, called by func_801DF978 (the step 7 handler) and indexed by the menu sub-step byte D_80148651" }
 g_ShopStep7Sub2Funcs = { addr = 0x801E5CFC, source = "5 handlers of sub-step 2 of step 7 of the shop, called by func_801DFDB8 (the sub-step 2 handler of step 7) and indexed by the menu sub-sub-step byte D_80148652" }
 g_ShopStep7Sub3Funcs = { addr = 0x801E5D10, source = "3 handlers of sub-step 3 of step 7 of the shop, called by func_801E092C (the sub-step 3 handler of step 7) and indexed by the menu sub-sub-step byte D_80148652" }
@@ -2090,6 +2097,7 @@ g_ShopPanel15StateFuncs = { addr = 0x801E5F14, source = "the state handlers of p
 g_ShopPanel16StateFuncs = { addr = 0x801E5F24, source = "the state handlers of panel mode 16, indexed by the panel task state" }
 g_ShopPanel17StateFuncs = { addr = 0x801E5F30, source = "the state handlers of panel mode 17, indexed by the panel task state" }
 g_ShopPanel18StateFuncs = { addr = 0x801E5F3C, source = "the state handlers of panel mode 18, indexed by the panel task state" }
+g_ShopPortraitAtlas = { addr = 0x801E600C, size = 0x30, source = "Portrait cells by portrait index, read by func_801E4FC8: u, v and the palette position of each portrait; the same cells as g_MenuPortraitAtlas." }
 g_ShopStockIndex = { addr = 0x801E6044, source = "Index of the selected row of the shop stock at D_8018E7CC (count byte, then category and item pairs); func_801D163C wraps it at the count." }
 g_ShopItemCategory = { addr = 0x801E6048, source = "Item category of the selected shop row, loaded from the stock row by func_801D163C and passed to Item_Add and Item_GetKind by func_801D1D60." }
 g_ShopItemId = { addr = 0x801E604C, source = "Item id of the selected shop row, loaded from the stock row by func_801D163C and passed to Item_Add by func_801D1D60." }
@@ -2104,6 +2112,8 @@ CardAccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes t
 CardScanDirectory = { addr = 0x801EFCA8, alias = true }
 
 ["emi/etc/sisyou/00"]
+g_MenuCurrentValueFormat = { addr = 0x801D0C08, source = "Format of the current value of an HP or AP pair printed in a party row (Master_DrawPartyRow); the maximum follows through g_MenuMaxValueFormat." }
+g_MenuMaxValueFormat = { addr = 0x801D0C10, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
 Master_ResetPanel = { addr = 0x801D0C18, type = "func", source = "Clears the master panel step, sub-step, lock and scroll bytes D_801D4285 to D_801D4289; the game overlay calls it after streaming slot 0x267." }
 Menu_DrawStatPanel = { addr = 0x801D1444, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Master_DrawPartyRow = { addr = 0x801D177C, type = "func", source = "Draws one party row of the master menu: portrait, name, level and experience line, with the poison and confusion tags." }
@@ -2121,6 +2131,7 @@ g_MenuLabelIntellect = { addr = 0x801D4040, source = "Text of the intellect labe
 g_MenuLabelAgility = { addr = 0x801D4044, source = "Text of the agility label, drawn by Menu_DrawStatPanel at the second column of the second stat row." }
 g_MenuLabelPoison = { addr = 0x801D4048, source = "Master_DrawPartyRow draws it for STATUS_POISONED; its text is Pois" }
 g_MenuLabelConfusion = { addr = 0x801D4050, source = "Master_DrawPartyRow draws it for STATUS_CONFUSED; its text is Conf" }
+g_MenuPortraitAtlas = { addr = 0x801D4058, source = "4-byte portrait atlas records read by Menu_DrawPortrait by portrait index." }
 g_MasterSkills = { addr = 0x801D4088, source = "Ability rows each master teaches: func_801D3A24 compares the level of each row of the current master and teaches the ability." }
 g_MasterStats = { addr = 0x801D4154, source = "Stat growth row of each master; func_801D2CA4 copies the row of the current master into the character level_up_modifiers." }
 g_MasterMessageIds = { addr = 0x801D41BC, source = "Message id of each master; func_801D2CA4 adds an offset to the entry of the current master and starts it with Message_StartAreaMessage." }
@@ -2139,13 +2150,18 @@ g_MasterMenuCursor = { addr = 0x801D428A, source = "indexes the 0x140-byte stock
 ["emi/etc/start/08"]
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).
 g_MenuStatFormat = { addr = 0x801D0C4C, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
+g_MenuCurrentValueFormat = { addr = 0x801D0C50, source = "Format of the current value of an HP or AP pair: the character window prints hp or ap through it, then the maximum through g_MenuMaxValueFormat." }
+g_MenuMaxValueFormat = { addr = 0x801D0C58, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
+g_MenuExperienceFormat = { addr = 0x801D0C60, source = "Format of the experience panel value: the character's experience, or the experience of the next level." }
+g_MenuExperienceBlank = { addr = 0x801D0C64, source = "Dashes the experience panel prints in place of the value when it is -1." }
 g_MenuZennyFormat = { addr = 0x801D0C70, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C74, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
+g_StartFormations = { addr = 0x801D0C7C, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
 g_MenuClockFormat = { addr = 0x801D0D48, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D88, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 s_RowCaptionTags = { addr = 0x801D0EB0, source = "Eight three-byte caption tags; func_801E30FC copies them and hands one to the text draws." }
 g_SaveFileNameFormat = { addr = 0x801D0EC8, source = "Format of the card file name of a save slot: SAVE_RunLoadVerify formats the slot into it, func_801E54A4 filters the card directory with it and func_801E7348 compares directory names against it." }
-Party_InitDefaults = { addr = 0x801D15C0, type = "func", source = "Sets the default party: copies D_801EB514 into g_Characters and sets the willpower of each character." }
+Party_InitDefaults = { addr = 0x801D15C0, type = "func", source = "Sets the default party: copies g_StartCharacters into g_Characters and sets the willpower of each character." }
 Menu_DispatchStep = { addr = 0x801D1740, type = "func", source = "Entry of the start menu: dispatches on the menu step byte D_80148650 through the D_801EC35C handlers." }
 Menu_SwapBytes = { addr = 0x801D4A30, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs." }
 Menu_SwapBytes_801D6668 = { addr = 0x801D6668, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
@@ -2191,6 +2207,8 @@ SAVE_DrawSlots = { addr = 0x801E6C68, type = "func", source = "Draws the visible
 Menu_SlidePanelLeft = { addr = 0x801EA070, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98." }
 Menu_DrawPanelCursor = { addr = 0x801EA198, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
 Menu_SlidePanelLeft_801EA900 = { addr = 0x801EA900, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98; same bytes as Menu_SlidePanelLeft at 0x801EA070." }
+g_StartCharacters = { addr = 0x801EB514, size = 0x520, source = "The eight base character records a new game starts with (Ryu, Nina, Garr, Teepo, Rei, Momo, Peco and Whelp); Party_InitDefaults copies them into g_Characters." }
+g_StartWillpowerCurves = { addr = 0x801EBA34, size = 0x10, source = "Per starting character, the level divisor and base of its starting willpower: Party_InitDefaults computes level * 16 / divisor + base." }
 s_CampMenuPanelIds = { addr = 0x801EC354, source = "Panel ids of the seven start menu panel slots that func_801E9350 draws." }
 g_MenuStartStates = { addr = 0x801EC35C, source = "the 9 step handlers of the start menu, called by Menu_DispatchStep and indexed by the menu step byte D_80148650" }
 g_MenuStartStep6Funcs = { addr = 0x801EC394, source = "5 sub-step handlers of step 6 of the start menu, called by func_801D2410 (the step 6 handler) and indexed by the menu sub-step byte D_80148651" }

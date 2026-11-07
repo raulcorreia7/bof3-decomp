@@ -55,14 +55,14 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiFormatBuffer, D_801D0CE8, stats->hp);
+    TEXT_Format(g_UiFormatBuffer, g_MenuCurrentValueFormat, stats->hp);
     UI_DrawGlyphString(x + 22, y + 31, clut, g_UiFormatBuffer);
     if ((u8)shaded == 0) {
         clut = (stats->fatigue != 0) * 4;
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiFormatBuffer, D_801D0CF0, stats->stats.max_hp);
+    TEXT_Format(g_UiFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_hp);
     UI_DrawGlyphString(x + 22, y + 31, clut, g_UiFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
     if ((u8)shaded == 0) {
@@ -75,10 +75,10 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiFormatBuffer, D_801D0CE8, stats->ap);
+    TEXT_Format(g_UiFormatBuffer, g_MenuCurrentValueFormat, stats->ap);
     UI_DrawGlyphString(x + 22, y + 39, clut, g_UiFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
-    TEXT_Format(g_UiFormatBuffer, D_801D0CF0, stats->stats.max_ap);
+    TEXT_Format(g_UiFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_ap);
     UI_DrawGlyphString(x + 22, y + 39, clut, g_UiFormatBuffer);
     UI_DrawSpriteRun(x, y, D_801E547C, 0);
     Menu_DrawExperienceLine(x + 0x14, y + 0x12, character_index, stats->level, stats->exp);
