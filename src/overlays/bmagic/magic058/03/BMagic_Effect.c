@@ -97,7 +97,7 @@ INCLUDE_ASM(func_801EF74C);
 
 INCLUDE_ASM(func_801EFA78);
 
-/* blocker: the radius is a halfword at D_1F800000 (lh) but spawn.h types it s32; needs: type (same as magic218 func_801EF70C). */
+/* blocker: candidate loads g_Task.y into v0 where retail uses v1; first diff: lw v1,56(a1) at 0x801EFDF4. */
 INCLUDE_ASM(func_801EFDD4);
 
 /* func_801EFE38 */
