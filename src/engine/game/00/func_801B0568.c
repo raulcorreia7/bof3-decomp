@@ -16,7 +16,7 @@ MATCH void func_801B0568(void) {
 
     if (!GAME_SCRIPT_ACTIVE() && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING) && !(func_801B6258() & BYTE_MASK) &&
         !(Game_RequestLeaderSwitch() & BYTE_MASK) && !(func_801B5758() & BYTE_MASK) &&
-        !(Game_RequestCharacterFieldAction() & BYTE_MASK) && !(func_801B5884() & BYTE_MASK) &&
+        !(Game_RequestPersonalAction() & BYTE_MASK) && !(func_801B5884() & BYTE_MASK) &&
         !(func_801B5910() & BYTE_MASK)) {
         tmp9 = g_Task;
         tmp4 = tmp9->unk_0A;

@@ -4,11 +4,11 @@ MATCH void func_80099248(void) {
     u16 held;
 
     held = g_InputPressed;
-    if ((held & g_InputMasks[INPUT_SLOT_CANCEL]) != 0u) {
+    if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_BattleUIState = 3u;
         return;
     }
-    if ((held & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0u) {
+    if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         g_BattleUIState = 2u;
         return;
     }

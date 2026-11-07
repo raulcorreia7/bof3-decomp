@@ -257,7 +257,7 @@ extern Callback  D_801CD130[4];
 extern Callback  D_801CD140[5];
 extern Callback  D_801CD154[4];
 /* D_801CD164 */
-extern Callback  g_CharacterFieldActions[19];
+extern Callback  g_PersonalActions[19];
 extern Callback  D_801CD1B0[2];
 /* D_801CD1B8 */
 extern u8        s_EncounterStepThresholds[16];

@@ -192,13 +192,13 @@ typedef enum AreaWalkFlags {
 
 /* Modes of the field task (g_Task->header.mode) that the pad requests start. */
 typedef enum FieldTaskMode {
-    FIELD_MODE_LEADER_SWITCH          = 3,
-    FIELD_MODE_MENU                   = 4,
-    FIELD_MODE_CHARACTER_FIELD_ACTION = 0x0A,
+    FIELD_TASK_MODE_LEADER_SWITCH   = 3,
+    FIELD_TASK_MODE_MENU            = 4,
+    FIELD_TASK_MODE_PERSONAL_ACTION = 0x0A,
 } FieldTaskMode;
 
 /* g_GameState->mode_12B while the character field action runs. */
-#define GAME_PANEL_MODE_CHARACTER_FIELD_ACTION 8
+#define GAME_PANEL_MODE_PERSONAL_ACTION 8
 
 /* One +0x24 cell record: four signed corner heights, loaded as s8 by
  * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`.

@@ -16,7 +16,7 @@ MATCH void func_801E2474(void) {
         *counter = count - 1;
         return;
     }
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0) {
+    if ((g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         SND_PlayCue(EMI_CUE_ID(1, 2));
         D_80148357 = 2;

@@ -6,7 +6,7 @@ MATCH void func_801B3488(void) {
         func_801C5558();
     } else if (D_8014625C & PADLdown) {
         func_801C5620();
-    } else if (D_8014625C & g_InputMasks[INPUT_SLOT_EXAMINE]) {
+    } else if (D_8014625C & g_InputMasks[FIELD_INPUT_INTERACT]) {
         func_801C56E4();
     }
     if (!((g_GameFlags | g_AreaWalkFlags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {

@@ -29,12 +29,12 @@ NON_MATCHING void func_80099364(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         D_8014862E ^= 1u;
     }
-    if ((held & g_InputMasks[INPUT_SLOT_CANCEL]) != 0u) {
+    if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         D_80148624      = 0u;
         D_801483C0      = 1u;
         g_BattleSubStep = 2u;
         g_BattleUIStep  = 1u;
-    } else if ((held & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0u) {
+    } else if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         *panel = D_8014862E;
         if (D_8014862E == 0u) {

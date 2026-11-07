@@ -183,21 +183,41 @@ extern u16 D_80145A7C;
 /* D_80145AA4 */
 extern u16 g_InputHeld;
 
-/* Pad masks of the remappable buttons, indexed by InputSlot (the defaults are
- * D_8017F56C). */
+/* Pad masks, one slot per game action. The config screen remaps the six
+ * labelled Speak, Move, Action, Menu, View and Change; Confirm and Cancel are
+ * read by the menu-like states. Each game state names the slots it reads. */
 typedef enum InputSlot {
-    INPUT_SLOT_EXAMINE,
-    INPUT_SLOT_DASH,
+    INPUT_SLOT_SPEAK,
+    INPUT_SLOT_MOVE,
     INPUT_SLOT_MENU,
-    INPUT_SLOT_LOOK,
-    INPUT_SLOT_SWITCH_LEADER,
+    INPUT_SLOT_VIEW,
+    INPUT_SLOT_CHANGE,
     INPUT_SLOT_UNUSED, /* only the config screen touches it */
-    INPUT_SLOT_CHARACTER_FIELD_ACTION,
+    INPUT_SLOT_ACTION,
     INPUT_SLOT_CONFIRM,
     INPUT_SLOT_CANCEL,
     INPUT_SLOT_COUNT
 } InputSlot;
 
+/* Field: X talks to people, examines objects and opens chests; the run button
+ * walks or runs by the Auto Run option; the triangle starts the lead
+ * character's personal action. */
+#define FIELD_INPUT_INTERACT        INPUT_SLOT_SPEAK
+#define FIELD_INPUT_RUN             INPUT_SLOT_MOVE
+#define FIELD_INPUT_MENU            INPUT_SLOT_MENU
+#define FIELD_INPUT_VIEW            INPUT_SLOT_VIEW
+#define FIELD_INPUT_SWITCH_LEADER   INPUT_SLOT_CHANGE
+#define FIELD_INPUT_PERSONAL_ACTION INPUT_SLOT_ACTION
+
+/* World map: X enters the location under the party. */
+#define WORLD_INPUT_ENTER           INPUT_SLOT_SPEAK
+
+#define MENU_INPUT_CONFIRM          INPUT_SLOT_CONFIRM
+#define MENU_INPUT_CANCEL           INPUT_SLOT_CANCEL
+#define BATTLE_INPUT_CONFIRM        INPUT_SLOT_CONFIRM
+#define BATTLE_INPUT_CANCEL         INPUT_SLOT_CANCEL
+#define FISHING_INPUT_CAST          INPUT_SLOT_CONFIRM
+#define FISHING_INPUT_CANCEL        INPUT_SLOT_CANCEL
 extern u16          g_InputMasks[INPUT_SLOT_COUNT];
 extern u16          D_80145ACE;
 extern u8           D_80145AD0;

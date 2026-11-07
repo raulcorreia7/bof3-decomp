@@ -21,8 +21,8 @@ MATCH void func_801B0C88(void) {
         } while (index < (total & BYTE_MASK));
     }
     if (!(g_GameFlags & 0x200)) {
-        flag = D_80144956;
-        if (D_8014625C & g_InputMasks[INPUT_SLOT_DASH]) {
+        flag = g_AutoRun;
+        if (D_8014625C & g_InputMasks[FIELD_INPUT_RUN]) {
             if ((flag ^ 1) == 0) {
                 /* confirm pressed with the flag set: use mode 3 */
                 goto store3;

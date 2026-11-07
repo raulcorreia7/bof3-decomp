@@ -54,7 +54,7 @@ NON_MATCHING void func_80167428(void) {
         FIELD(s8, (g_Task), 0x1u) = 3;
         return;
     }
-    if (g_InputMasks[INPUT_SLOT_LOOK] & D_8014625C) {
+    if (g_InputMasks[FIELD_INPUT_VIEW] & D_8014625C) {
         g_GameState->counter_11C = 3;
         g_GameEntrySubstate += 1;
         FIELD(s8, (g_Task), 0x1u) = 1;
@@ -97,13 +97,13 @@ NON_MATCHING void func_80167428(void) {
             g_AreaCameraHeightStep   = 0;
             val4                     = 1;
         } else {
-            if (g_InputMasks[INPUT_SLOT_DASH] & D_8014625C) {
-                if ((D_80144956 ^ 1) != 0) {
+            if (g_InputMasks[FIELD_INPUT_RUN] & D_8014625C) {
+                if ((g_AutoRun ^ 1) != 0) {
                     goto block_28; /* retail branch */
                 }
                 goto block_29; /* retail branch */
             }
-            if (D_80144956 != 0) {
+            if (g_AutoRun != 0) {
             block_28:
                 val5 = 4;
             } else {

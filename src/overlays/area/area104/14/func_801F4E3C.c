@@ -28,7 +28,7 @@ MATCH void func_801F4E3C(void) {
     if (func_801A79A4(g_Task->pos.x.fixed, g_Task->pos.y.fixed) == 0) {
         func_801C329C();
         if (!(g_GameFlags & GAME_FLAG_SCRIPT_ACTIVE) && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING)) {
-            value = D_8014625C & (g_InputMasks[INPUT_SLOT_DASH] | (g_InputMasks[INPUT_SLOT_EXAMINE] | 0xF000));
+            value = D_8014625C & (g_InputMasks[INPUT_SLOT_MOVE] | (g_InputMasks[INPUT_SLOT_SPEAK] | 0xF000));
             if (value != 0) {
                 func_801F4608(value);
                 return;
