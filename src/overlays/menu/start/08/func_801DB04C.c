@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-extern s8 D_80148658[6]; /* local: six s8 cursor bytes; sibling copies read them one by one */
-
 MATCH u8 func_801DB04C(void) {
     u8  i;
     u8  tmp;
