@@ -5,4 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern u16 D_801EFA6C[];
+
 #endif

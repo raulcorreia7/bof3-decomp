@@ -35,7 +35,13 @@ MATCH void func_801EEF80(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
-INCLUDE_ASM(func_801EEFC4);
+MATCH void func_801EEFC4(void) {
+    SYS_DISPATCH_BYTE(D_801F05B8, g_Task->header.step);
+    g_Task->param.unk_0B += 1;
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_801EF54C();
+    }
+}
 
 INCLUDE_ASM(func_801EF058);
 
