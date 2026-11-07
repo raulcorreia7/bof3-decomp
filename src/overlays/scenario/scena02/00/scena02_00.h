@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
+#include "sys/exe.h"
 
 /* The four script variable bytes read as one word. */
 #define g_ScriptVarsWord (*(s32*)&g_ScriptVars)
@@ -12,6 +13,7 @@
 extern s32 D_80145EC4;
 
 extern u8 D_80146865;
+extern u8 D_80145E98;
 extern u8 D_80146866;
 
 extern u8 D_80146867;
@@ -95,5 +97,15 @@ void func_801FC734(u8 actor_id);
 void func_801FC7E4(void);
 void func_801FC9CC(void);
 void func_801FCB54(void);
+
+/* Starts the scene script 0x1A with the camera shake state cleared. */
+#define SCENA02_START_SCRIPT_1A() \
+    Game_SetScriptActive();       \
+    *g_ScriptVars = 0x23;         \
+    D_80146865    = 0;            \
+    D_80146866    = 0;            \
+    D_80146867    = 0;            \
+    D_80146875    = 0;            \
+    D_80146874    = 0x1A
 
 #endif
