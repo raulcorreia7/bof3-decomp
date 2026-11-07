@@ -7,9 +7,9 @@ MATCH void func_80096FBC(void) {
     u8  stage;
     u8  message_slot;
 
-    D_801EB4D8->command.type = BATTLE_COMMAND_ABILITY;
+    g_BattleActorTurn->command.type = BATTLE_COMMAND_ABILITY;
     func_80097EC0();
-    flags = D_801EB4D8->action_flags.value;
+    flags = g_BattleActorTurn->action_flags.value;
     if (flags & 2) {
         if (!(flags & 0x20000)) {
             D_8014857B = 2u;

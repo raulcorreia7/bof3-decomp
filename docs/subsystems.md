@@ -35,14 +35,14 @@ Totals from `tools/quality.py`, which rewrites the table below on every `pre-pus
 | Logo             |                11 |      0 |      54 |       0 |         0 |       0 |        0 |
 | Shared bodies    |                20 |      0 |      18 |       0 |         0 |       0 |        0 |
 | Area             |              2315 |   2197 |    3052 |     177 |        31 |      21 |        0 |
-| Battle           |               898 |    849 |    2285 |     208 |        81 |       0 |        0 |
+| Battle           |               898 |    849 |    2165 |     206 |        81 |       0 |        0 |
 | Battle magic     |              1084 |    965 |    2394 |      10 |         0 |       8 |        0 |
-| Boss             |               654 |    518 |     576 |       6 |         0 |       4 |        0 |
-| Fairy Village    |               151 |    140 |     473 |      17 |         3 |       0 |        0 |
-| Menu             |               647 |    575 |    2281 |      58 |        18 |       0 |        0 |
+| Boss             |               654 |    518 |     574 |       6 |         0 |       4 |        0 |
+| Fairy Village    |               151 |    140 |     502 |      17 |         3 |       0 |        0 |
+| Menu             |               648 |    576 |    2299 |      58 |        18 |       0 |        0 |
 | Player character |               263 |    188 |     260 |       0 |         5 |       0 |        0 |
 | Scenario         |               833 |    783 |     889 |      16 |         4 |       6 |        0 |
 | Title            |                20 |      0 |      12 |       3 |         0 |       0 |        0 |
-| Total            |              7989 |   6920 |   16071 |     838 |       237 |      39 |        0 |
+| Total            |              7990 |   6921 |   15996 |     836 |       237 |      39 |        0 |
 
 <!-- quality:end -->

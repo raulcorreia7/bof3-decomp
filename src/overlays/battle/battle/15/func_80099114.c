@@ -6,6 +6,7 @@ MATCH void func_80099114(void) {
     g_BattleStep           = 4u;
     g_BattleSubStep        = 2u;
     g_BattleSelectionLatch = 0u;
-    g_BattleUIStep         = 0u;
-    g_BattleUIState        = 1u;
+
+    g_BattleUIStep  = 0u;
+    g_BattleUIState = 1u;
 }
