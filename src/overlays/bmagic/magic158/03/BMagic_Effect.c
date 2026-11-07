@@ -43,6 +43,7 @@ MATCH void func_801EF140(void) {
     }
 }
 
+/* magic045 shape with the angle cell as s16* &D_1F800004 reaches 4 bytes short; retail keeps the masked phase in v0 and shifts it twice (sll a0 then sll v0), ours puts it in a0; first diff +0x14 */
 INCLUDE_ASM(func_801EF1C8);
 
 INCLUDE_ASM(func_801EF2F0);
