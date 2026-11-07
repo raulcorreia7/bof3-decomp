@@ -7,7 +7,6 @@
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
 
-extern u8 D_80145F09;
 extern u8 D_8014686B;
 extern u8 D_80146874;
 extern u8 D_80146875;

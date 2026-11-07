@@ -222,8 +222,7 @@ INCLUDE_ASM(Menu_DrawEquipStatWindow);
 /* blocker: per-band draw-mode setup. */
 INCLUDE_ASM(Menu_DrawWindowFrame);
 
-/* blocker: first diff: +0x138 lhu v1,18(s1) (template andi v1,s0,0xff). */
-INCLUDE_ASM(func_801D7BFC);
+#include "overlays/menu/Menu_DrawInventoryWindow.h"
 
 MATCH void func_801D835C(MenuChoicePanel* panel) {
     Ability* ability;
@@ -267,7 +266,8 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
     x = panel->pos.x + 0x4E;
     UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, 0x10,
                 D_801D9EA4[panel->group_first]);
-    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & 2) ? D_801D9978 : D_801D9960, 1);
+    UI_DrawSpriteRun(panel->pos.x, panel->pos.y,
+                     (FIELD(u8, panel, 0x9u) & 2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
     UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & 1) ? D_801D999C : D_801D9990, 1);
     flags = FIELD(u8, panel, 0x9u);
     if (!(flags & 0xF0)) {

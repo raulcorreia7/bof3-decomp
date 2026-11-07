@@ -7,7 +7,7 @@ MATCH u8 Area_FindTaggedPartySlot(void) {
 
     for (slot = 0; slot < 3; slot++) {
         for (member = 0; member < g_PartySize; member++) {
-            if (D_801F5D64[slot] == D_80145F09[member][0]) {
+            if (D_801F5D64[slot] == g_BattlePartyBattlers[member].chr.character_id) {
                 return slot;
             }
         }

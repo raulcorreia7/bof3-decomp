@@ -203,7 +203,7 @@ MATCH s32 func_801FE2B0(void) {
     u8 i;
 
     for (i = 0; i < g_PartySize; i++) {
-        if (D_80145F09[i].character_id == CHAR_ID_GARR) {
+        if (g_BattlePartyBattlers[i].chr.character_id == CHAR_ID_GARR) {
             return 1;
         }
     }

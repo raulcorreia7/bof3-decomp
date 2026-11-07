@@ -41,8 +41,10 @@ MATCH void func_801E0354(MenuPanelTask* task) {
     }
     label_x = task->pos.x + 0x4E - strlen((const char*)D_801ECC98[task->unk_0B]) * 4;
     UI_DrawText(label_x, (task->pos.y + 7), 0, 0x10, (u8*)(D_801ECC98[task->unk_0B]));
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 2) ? D_801EC76C : D_801EC754, 1);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 1) ? D_801EC790 : D_801EC784, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites,
+                     1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 1) ? g_MenuListTab1OnSprites : g_MenuListTab1OffSprites,
+                     1);
     flags = task->unk_09;
     if (!(flags & 0xF0)) {
         task->unk_09 = 0;

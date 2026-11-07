@@ -9,6 +9,4 @@
 
 #define g_CurrentActor ((u8*)g_CurrentActor)
 
-extern u8 D_80145F09;
-
 #endif

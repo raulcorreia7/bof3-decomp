@@ -2,5 +2,5 @@
 
 MATCH void func_801E3720(void) {
     g_ShopPanel9StateFuncs[g_MenuCurrentPanel->state]();
-    func_801DC6FC(g_MenuCurrentPanel);
+    Menu_DrawInventoryWindow(g_MenuCurrentPanel);
 }

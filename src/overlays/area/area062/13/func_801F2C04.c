@@ -1,13 +1,11 @@
 #include "area062_13.h"
 
-extern u8 D_80145F09;
-
 MATCH s32 func_801F2C04(void) {
     Actor* actor;
 
     actor = g_CurrentActor;
     actor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
-    if (D_80145F09 == 6) {
+    if (g_BattlePartyBattlers[0].chr.character_id == 6) {
         Game_SetScriptActive();
         actor            = g_CurrentActor;
         g_SceneEventMode = 0x2A;
