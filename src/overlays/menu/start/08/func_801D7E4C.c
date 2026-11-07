@@ -70,8 +70,8 @@ MATCH void func_801D7E4C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 2));
         D_801485DC = 0;
         for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
-            D_80148333[((i + 0xD) * 9) << 2] = 9;
-            D_80148333[((i + 4) * 9) << 2]   = 8;
+            g_MenuPanelTasks[i + 0xD].state = 9;
+            g_MenuPanelTasks[i + 4].state   = 8;
         }
         g_BattleChoicePhase        = 3;
         g_MenuPanelTasks[16].flags = 0xFF;

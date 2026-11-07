@@ -14,15 +14,15 @@ MATCH void func_801D28C8(void) {
         func_801D2D74();
         i = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
-            D_80148333[((i + 4) * 9) << 2] = 4;
+            g_MenuPanelTasks[i + 4].state = 4;
             i++;
         }
-        D_80148333[0xfc]  = 2;
-        D_80148333[0x120] = 2;
-        D_80148333[0x144] = 2;
-        D_80148333[0x168] = 2;
-        D_80148654        = 0;
-        D_80148650        = 1;
-        D_80148651        = 0;
+        g_MenuPanelTasks[7].state  = 2;
+        g_MenuPanelTasks[8].state  = 2;
+        g_MenuPanelTasks[9].state  = 2;
+        g_MenuPanelTasks[10].state = 2;
+        D_80148654                 = 0;
+        D_80148650                 = 1;
+        D_80148651                 = 0;
     }
 }
