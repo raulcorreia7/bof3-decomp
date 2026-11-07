@@ -4,7 +4,7 @@ MATCH void func_801F30F8(void) {
     s32 i;
     s32 value;
 
-    func_801F36C0(&g_Task->pos.x, (s16)g_Task->unk_2E, 7);
+    func_801F36C0(&g_Task->pos.x, (s16)g_Task->screen_x, 7);
     if (*g_ScriptVars == 0xA) {
         Area_ClearWorkColumn();
         value = 0x800E48C0;
@@ -18,7 +18,7 @@ MATCH void func_801F30F8(void) {
         PopMatrix();
         g_Task->unk_06            = 0;
         g_Task->tint.bytes.unk_5D = 8;
-        g_Task->unk_09            = 0x78;
+        g_Task->timer             = 0x78;
         g_Task->header.mode += 1;
     }
 }

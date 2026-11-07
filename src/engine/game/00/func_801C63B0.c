@@ -42,15 +42,15 @@ MATCH s32 func_801C63B0(void) {
     }
     if (swapped) {
         for (i = 0; i < 6; i++) {
-            x = D_80143F24 + D_801CD740[i].x;
-            y = D_80143F28 + D_801CD740[i].y;
+            x = g_EncounterOriginX + D_801CD740[i].x;
+            y = g_EncounterOriginY + D_801CD740[i].y;
             if (((func_801C7518(x, y, 1) & BYTE_MASK) != 0) &&
                 ((func_801C7824(D_80143F2A, D_80143F2A, x >> 16, y >> 16) & BYTE_MASK) != 0)) {
                 break;
             }
         }
-        D_80143F24 = x;
-        D_80143F28 = y;
+        g_EncounterOriginX = x;
+        g_EncounterOriginY = y;
     }
     for (i = 0; i < count; i++) {
         if ((func_801C6658(mode, s_PartySlotOrder[i], (u8)(count - 1), D_801CD8C8) & BYTE_MASK) == 0) {

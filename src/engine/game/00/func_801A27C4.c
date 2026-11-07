@@ -20,7 +20,7 @@ MATCH void func_801A27C4(Actor* entity) {
             }
             break;
         }
-        if (i < 4 && g_Task->unk_09 != 0) {
+        if (i < 4 && g_Task->timer != 0) {
             if (entity->timer_75 != 0) {
                 if (g_Task->unk_03 == 4) {
                     g_Task->direction_08 = saved;
@@ -36,7 +36,7 @@ MATCH void func_801A27C4(Actor* entity) {
             }
         } else {
             g_Task->direction_08 = saved & 7;
-            g_Task->unk_09       = 0;
+            g_Task->timer        = 0;
         }
     }
 }

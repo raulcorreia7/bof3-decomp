@@ -18,7 +18,7 @@ MATCH void func_8019CBD8(void) {
     work->vx                         = 0;
     work->vy                         = 0;
     work->vz                         = 0;
-    work->unk_09                     = 0;
+    work->timer                      = 0;
     func_8019D270();
     g_Task->param.unk_0B = 0U;
     counter              = g_Task;

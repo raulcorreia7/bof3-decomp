@@ -6,6 +6,6 @@ MATCH void func_8019A848(void) {
     D_801C80C8[g_Task->unk_06]();
 
     work = g_Task;
-    work->unk_2E += work->vx;
-    work->unk_30 -= work->vy;
+    work->screen_x += work->vx;
+    work->screen_y -= work->vy;
 }

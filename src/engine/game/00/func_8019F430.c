@@ -12,7 +12,7 @@ MATCH void func_8019F430(void) {
     record->pos.y.fixed += step;
     record->vy = step;
     if (COORD_INT(record->pos.y) >= 0) {
-        record->unk_09    = 6;
+        record->timer     = 6;
         work              = g_Task;
         record->vy        = (s32)-record->vy;
         work->header.mode = (u8)(work->header.mode + 1);

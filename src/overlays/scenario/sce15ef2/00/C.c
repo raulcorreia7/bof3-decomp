@@ -21,12 +21,12 @@ MATCH void func_801D0CA0(void) {
     Actor* work;
     u8     timer;
 
-    work         = g_Task;
-    timer        = work->unk_09 - 1;
-    work->vx     = work->vx + 0x10;
-    work->unk_09 = timer;
+    work        = g_Task;
+    timer       = work->timer - 1;
+    work->vx    = work->vx + 0x10;
+    work->timer = timer;
     if (timer == 0) {
-        g_Task->unk_09      = 0x20;
+        g_Task->timer       = 0x20;
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
@@ -34,10 +34,10 @@ MATCH void func_801D0CA0(void) {
 MATCH void func_801D0D00(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
     if (timer == 0) {
-        g_Task->unk_09      = 0x10;
+        g_Task->timer       = 0x10;
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
@@ -46,10 +46,10 @@ MATCH void func_801D0D5C(void) {
     Actor* work;
     u8     timer;
 
-    work         = g_Task;
-    timer        = work->unk_09 - 1;
-    work->vx     = work->vx - 0x10;
-    work->unk_09 = timer;
+    work        = g_Task;
+    timer       = work->timer - 1;
+    work->vx    = work->vx - 0x10;
+    work->timer = timer;
     if (timer == 0) {
         Actor_Clear();
     }
@@ -75,9 +75,9 @@ MATCH void func_801D0F68(void) {
     Actor* work;
 
     work                = g_Task;
-    work->unk_09        = 10;
-    work->unk_2E        = 0;
-    work->unk_30        = 0;
+    work->timer         = 10;
+    work->screen_x      = 0;
+    work->screen_y      = 0;
     g_Task->header.mode = g_Task->header.mode + 1;
 }
 
@@ -85,20 +85,20 @@ MATCH void func_801D0F9C(void) {
     Actor* work;
     u8     timer;
 
-    work         = g_Task;
-    timer        = work->unk_09 - 1;
-    work->unk_09 = timer;
-    work->unk_2E = work->unk_2E + 0x15;
-    work->unk_30 = work->unk_30 + 9;
+    work           = g_Task;
+    timer          = work->timer - 1;
+    work->timer    = timer;
+    work->screen_x = work->screen_x + 0x15;
+    work->screen_y = work->screen_y + 9;
     if (timer == 0) {
-        g_Task->unk_09      = 0x5A;
+        g_Task->timer       = 0x5A;
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
 
 MATCH void func_801D1008(void) {
     if (g_ScriptVars[0] == 9) {
-        g_Task->unk_09      = 0x1E;
+        g_Task->timer       = 0x1E;
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }
@@ -107,11 +107,11 @@ MATCH void func_801D1050(void) {
     Actor* work;
     u8     timer;
 
-    work         = g_Task;
-    timer        = work->unk_09 - 1;
-    work->unk_09 = timer;
-    work->unk_2E = work->unk_2E - 7;
-    work->unk_30 = work->unk_30 - 3;
+    work           = g_Task;
+    timer          = work->timer - 1;
+    work->timer    = timer;
+    work->screen_x = work->screen_x - 7;
+    work->screen_y = work->screen_y - 3;
     if (timer == 0) {
         Actor_Clear();
     }

@@ -7,11 +7,11 @@ MATCH void func_801F4F88(void) {
     D_1F800014[1].vx = 0;
     D_1F800014[1].vy = 0;
     D_1F800014[1].vz = g_FrameCount << 5;
-    func_801F46C8(g_Task->unk_09 * 4, 0x1F, 0, 0x18);
+    func_801F46C8(g_Task->timer * 4, 0x1F, 0, 0x18);
     D_8014933A = 0;
     func_801F5428(0x10001805);
-    g_Task->unk_09++;
-    if (g_Task->unk_09 >= 8) {
+    g_Task->timer++;
+    if (g_Task->timer >= 8) {
         g_Task->header.step++;
     }
 }

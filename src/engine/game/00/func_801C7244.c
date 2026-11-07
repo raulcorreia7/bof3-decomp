@@ -35,7 +35,7 @@ MATCH void func_801C7244(s32 mode) {
 loop_5:
     if ((u8)index < (Party_CountOrder(PARTY_ORDER_BATTLE) & BYTE_MASK)) {
         count += 1;
-        D_801CD954 += Area_SampleHeight(*(s32*)(D_80143F2C + ((u8)index << 3)), *(s32*)(D_80143F30 + ((u8)index << 3)));
+        D_801CD954 += Area_SampleHeight(g_EncounterParty[(u8)index].x.fixed, g_EncounterParty[(u8)index].y.fixed);
         index += 1;
         goto loop_5;
     }
@@ -45,8 +45,8 @@ loop_5:
     offset_x = D_801CD778[mode_index & BYTE_MASK].x;
     offset_y = D_801CD778[mode_index & BYTE_MASK].y;
     angle.vz = (D_801CD954 >> 1);
-    angle.vx = 0x4000 - ((D_80143F24 + (offset_x << 0x10)) >> 9);
-    angle.vy = 0x4000 - ((D_80143F28 + (offset_y << 0x10)) >> 9);
+    angle.vx = 0x4000 - ((g_EncounterOriginX + (offset_x << 0x10)) >> 9);
+    angle.vy = 0x4000 - ((g_EncounterOriginY + (offset_y << 0x10)) >> 9);
     ApplyMatrix(&matrix, &angle, &vec);
     matrix.t[0] = vec.vx + g_AreaCameraOffsetX;
     matrix.t[1] = vec.vy + g_AreaCameraOffsetY;
