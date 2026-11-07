@@ -224,7 +224,18 @@ INCLUDE_ASM(func_801FDA90);
 
 INCLUDE_ASM(func_801FDB1C);
 
-INCLUDE_ASM(func_801FDBA8);
+MATCH s32 func_801FDBA8(void) {
+    if (SYS_TestFlag(g_SceneFlags, 0x3D) == 0) {
+        SYS_SetFlag(g_SceneFlags, 0x3D);
+        SND_PlayCue(0x203);
+        return 1;
+    }
+
+    Game_SetScriptActive();
+    g_SceneState.step_05  = 6;
+    g_SceneState.state_04 = 8;
+    return 1;
+}
 
 /* blocker: return 1 materialized before the store constants; first diff: +0x28 li v1,20 against li v0,1. */
 INCLUDE_ASM(func_801FDC1C);

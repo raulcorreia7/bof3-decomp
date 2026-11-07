@@ -66,7 +66,7 @@ NON_MATCHING void func_801E112C(MenuPanelTask* task) {
                   (s32)g_WindowStyle);
     UI_DrawText((s16)(task->pos.x.raw - (((func_801AF20C(&D_801E5D1C) & BYTE_MASK) * 4) - 78)),
                 (s16)(task->pos.y.raw + 7), 0, 0x10U, (&D_801E5D1C));
-    sprintf((s8*)g_UiFormatBuffer, &D_801D0E7C, Party_CountAbilities(0U, 0xFFU, 0U) & BYTE_MASK, 0x80);
+    TEXT_Format(g_UiFormatBuffer, D_801D0E7C, Party_CountAbilities(0U, 0xFFU, 0U) & BYTE_MASK, 0x80);
     UI_DrawGlyphString((s16)(task->pos.x.raw + 85), (s16)(task->pos.y.raw + 146), 0U, g_UiFormatBuffer);
     UI_DrawSpriteRun((s16)task->pos.x.raw, (s16)task->pos.y.raw, &D_801E5C78, 1);
     UI_DrawSpriteRun((s16)task->pos.x.raw, (s16)task->pos.y.raw, &D_801E5C84, 1);

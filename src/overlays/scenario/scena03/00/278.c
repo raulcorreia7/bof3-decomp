@@ -153,7 +153,7 @@ MATCH void func_801F754C(void) {
     slots[0x11][1] = 1;
 }
 
-#include "shared/Actor_UnhideAndFinishAtZero.h"
+#include "shared/Actor_Reveal.h"
 
 MATCH void Actor_FreePaletteFades_801F7A14(void) {
     u8** slots;
@@ -332,7 +332,7 @@ MATCH void func_801F85FC(void) {
     SYS_DISPATCH_TASK(D_801FCFAC, 1, g_Task);
 }
 
-#include "shared/Actor_ProjectFocusAndStep.h"
+#include "shared/Actor_TrackFocus.h"
 
 MATCH void func_801F8710(void) {
     u8**   slots;
@@ -424,7 +424,22 @@ MATCH void func_801F9330(void) {
 
 INCLUDE_ASM(func_801F9338);
 
-INCLUDE_ASM(func_801F97F8);
+MATCH void func_801F97F8(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            func_801BE1B0(1);
+            g_ScriptVars[0]      = 0xA;
+            g_SceneState.step_05 = 1;
+            break;
+
+        case 1:
+            if (g_ScriptVars[0] == 0x28) {
+                g_SceneState.state_04 = 1;
+                g_SceneState.step_05  = 1;
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801F9880);
 

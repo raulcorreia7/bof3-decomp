@@ -8,9 +8,12 @@
 extern BattleHandlerTable5 D_801EEC04;
 extern Callback            D_801EFCD4[];
 
-void func_801EF194(void);
+/* func_801EF194 */
+void BMagic_DrawBurnSprites(void);
 
-void func_801EF6BC(void);
-void func_801EFA1C(void);
+/* func_801EF6BC */
+void BMagic_DrawBurnFlameQuads(void);
+/* func_801EFA1C */
+void BMagic_DrawBurnFlameTris(void);
 
 #endif

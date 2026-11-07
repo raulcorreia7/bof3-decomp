@@ -1,3 +1,3 @@
 #include "area181_13.h"
 
-#include "overlays/area/func_801F2FB4.h"
+#include "overlays/area/FairyCasino_AnswerPickNumbersInvite.h"

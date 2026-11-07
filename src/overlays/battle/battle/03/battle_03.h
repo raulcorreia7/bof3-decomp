@@ -204,7 +204,6 @@ extern void*           D_800B6178[];
 extern BattleSelection g_BattleSelections[];
 /* D_80143F00 */
 extern s32             D_80145ED0;
-extern u8              D_80145F09[][BATTLE_PARTY_STRIDE];
 extern volatile u8     D_80145F18[];
 extern volatile u8     D_80145F1C[];
 extern u8              D_80145F20[];
@@ -336,7 +335,7 @@ extern u16                       D_801EAE50[];
 extern u16                       D_801EAE52[];
 /* D_801EAE94 */
 extern u8                        s_BattlePanelOffsets[][2];
-extern s8                        D_801EAEA6;
+extern s8                        D_801EAEA4[]; /* panel x offsets: [0] for kinds 0 and 3, [2] otherwise */
 extern volatile u32              D_801EAEB0[]; /* panel icon blit table */
 extern BattlePanelFrame          D_801EAEE8[];
 extern u8                        D_801EAF27[];
@@ -428,9 +427,13 @@ extern u16              D_801EB4CC;
 extern s32              D_801EB4D0;
 extern u32              D_801EB4D4;
 extern BattleEventSlot* D_801EB4DC;
+extern volatile u8      D_801EB4F0[][12];
+extern volatile u8      D_801EB4F1[][12];
 extern s8               D_801EB4F2;
 extern volatile u8      D_801EB4F3[][12];
+extern u32              D_801EB4F4[][3];
 extern volatile u16     D_801EB4F8[][6];
+extern u8               D_801EB4FA[][12];
 extern BattleRank       D_801EB550[];
 extern u8               D_801EB5B0[];
 extern u8               D_801EB635[][280];
@@ -447,6 +450,7 @@ extern volatile u16 D_801EB6B0[][140];
 extern u8           D_801EB6BC[];
 extern u8           D_801EB6D0[];
 extern s8           D_801EB712[];
+extern s8           D_801EB713[];
 extern u8           D_801EB730[];
 extern u8           D_801EBF04;
 extern s32          D_801EBFA0;
@@ -683,7 +687,7 @@ u32           func_801DCD50(u32 unused, u8 battler_index, s32 damage_value);
 void          func_801DCEF8(u32 battler_index);
 void          func_801DD08C(void);
 void          func_801DD29C(void);
-void          func_801DD3CC(s32 arg0);
+void          func_801DD3CC(void* work);
 u8            func_801DD448(void);
 extern u8     func_801DD704(u8 battler_index);
 void          func_801DD800(void);
@@ -943,6 +947,7 @@ extern void        func_801EAB64(void);
 u8                 func_801EAB6C(u8* message);
 extern u16         D_801EC2EE;
 extern u8          D_801EC303;
+extern u8          D_801EC308[];
 extern u16         D_801EC30C;
 /* The queued-slot companion tables, one entry per 0x78-byte queued slot: the
  * action kind, the cue byte and the two work-pointer words. The retail

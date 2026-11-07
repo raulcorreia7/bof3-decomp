@@ -59,9 +59,9 @@ static inline void World_SpawnActorAtFocus(void) {
     }
 }
 
-void func_801F4E64(const s32* center, s32 radius);
+void func_801F4E64(s32* center, s32 radius);
 
-void func_801F4F0C(const s32* center, s32 radius, u16 angle, s32 offset_x, s32 offset_y);
+void func_801F4F0C(s32* center, s32 radius, u16 angle, s32 offset_x, s32 offset_y);
 
 extern s32   D_80145EC4;
 extern u8    D_80146865;

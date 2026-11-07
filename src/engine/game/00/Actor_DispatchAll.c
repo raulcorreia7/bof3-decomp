@@ -9,7 +9,7 @@ MATCH void Actor_DispatchAll(void) {
         if (g_ActorSlots[count & BYTE_MASK].header.flags != 0) {
             slot = &g_ActorSlots[count & BYTE_MASK];
             TASK_SET(slot);
-            g_ActorHandlers[slot->type]();
+            g_ActorTypes[slot->type]();
         }
         count++;
     } while ((u32)(count & BYTE_MASK) < ACTOR_SLOT_COUNT);

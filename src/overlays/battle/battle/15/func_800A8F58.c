@@ -29,7 +29,7 @@ NON_MATCHING s32 func_800A8F58(void) {
             for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
                 if (!(Battle_SlotIsBlocked(i) & BYTE_MASK)) {
                     off = i * BATTLE_PARTY_STRIDE;
-                    if (FIELD(u8, &D_80145F37, off) < 6) {
+                    if (g_BattlePartyBattlers[i].chr.stats.resistances[RES_INDEX_DEATH] < 6) {
                         roll = rand();
                         if (roll == (roll / 12) * 12) {
                             count += 1;
@@ -59,7 +59,7 @@ NON_MATCHING s32 func_800A8F58(void) {
     }
     if (g_BattleTargetSelector < 3) {
         if (!(Battle_SlotIsBlocked(g_BattleTargetSelector) & BYTE_MASK) &&
-            (FIELD(u8, &D_80145F37, g_BattleTargetSelector * BATTLE_PARTY_STRIDE) < 6)) {
+            (g_BattlePartyBattlers[g_BattleTargetSelector].chr.stats.resistances[RES_INDEX_DEATH] < 6)) {
             roll = rand();
             if (roll == (roll / 12) * 12) {
                 FIELD(u32, D_80145FB4, g_BattleTargetSelector * BATTLE_PARTY_STRIDE) |= 0x100;

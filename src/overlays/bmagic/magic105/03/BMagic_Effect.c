@@ -33,7 +33,7 @@ INCLUDE_ASM(func_801EED1C);
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEF78(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EEFBC(void) {
@@ -93,7 +93,7 @@ MATCH void func_801EF2F0(void) {
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
     pos.vz = -COORD_INT(g_Task->pos.z) / 2;
-    RotTrans(&pos, &matrix.t, &flags);
+    RotTransMatrix(&pos, matrix, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);
@@ -103,7 +103,7 @@ MATCH void func_801EF2F0(void) {
 INCLUDE_ASM(func_801EF3A0);
 
 MATCH void func_801EF880(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 11), 1, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 11), 1, g_Task);
 }
 
 MATCH void func_801EF8C4(void) {

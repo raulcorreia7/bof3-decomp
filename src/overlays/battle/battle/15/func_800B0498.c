@@ -35,7 +35,7 @@ MATCH void func_800B0498(void) {
     UI_DrawAsciiString((u16)(g_MenuCurrentPanel->pos.x + 136u), (u16)(g_MenuCurrentPanel->pos.y + 12u), panel_count,
                        (const void*)(D_800B6D1C));
 
-    sprintf((char*)g_UiFormatBuffer, (char*)D_80096A04, D_801463B8[0]);
+    TEXT_Format(g_UiFormatBuffer, D_80096A04, D_801463B8[0]);
 
     UI_DrawAsciiString((u16)(g_MenuCurrentPanel->pos.x + 160u), (u16)(g_MenuCurrentPanel->pos.y + 12u), panel_count,
                        (const void*)(g_UiFormatBuffer));

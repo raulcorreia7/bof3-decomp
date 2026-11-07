@@ -70,7 +70,6 @@ extern u16 g_InputRepeatButtons;
 extern u8  D_80145F04[];
 extern u8  D_80145F10[];
 extern u16 D_80145F1A[];
-extern u8  D_80145FA9;
 extern s8  D_80145FBC;
 /* D_801462E0 */
 extern u8  g_BattleMode;

@@ -35,7 +35,7 @@ extern char          D_801D0D7C[];
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step byte. */
 /* D_801D96DC */
-extern Callback g_MenuStatusStepFuncs[MENU_STATUS_STEP_COUNT];
+extern Callback g_MenuStatusStates[MENU_STATUS_STEP_COUNT];
 /* D_801D96F0 */
 extern Callback g_MenuStatusStep1Funcs[MENU_STATUS_STEP1_COUNT];
 /* D_801D96F8 */
@@ -139,6 +139,10 @@ extern u8              D_801DA0C6;
 
 s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 
-void func_801D7224(s32 arg0);
+/* The clut strip tables of this overlay, bound in config/symbols.toml. */
+extern UvRect MENU_CLUT_STRIP_CELLS[];
+extern u8     MENU_CLUT_STRIP_ENTRIES[];
+extern u8     MENU_CLUT_STRIP_PALETTES[];
+void          Menu_DrawClutStrip(u8 clut_index);
 
 #endif

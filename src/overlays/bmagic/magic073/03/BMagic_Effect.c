@@ -4,7 +4,22 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC28);
+MATCH void func_801EEC28(void) {
+    PartyBattler* saved;
+    u8            i;
+
+    BMagic_DispatchTaskPair(func_801EED18, func_801EEF50);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved                 = g_BattleEffectBattler;
+            D_801F21F0            = &BMAGIC_EFFECT_SLOTS[i];
+            g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].battler;
+            func_801EF724();
+            g_BattleEffectBattler = saved;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED18);
 
@@ -18,7 +33,7 @@ MATCH void func_801EEF50(void) {
 }
 
 MATCH void func_801EEFB0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EEFF4(void) {
@@ -29,9 +44,9 @@ MATCH void func_801EEFF4(void) {
 
 INCLUDE_ASM(func_801EF06C);
 
-INCLUDE_ASM(func_801EF2DC);
+#include "overlays/bmagic/Effect_ReplaceSlotPaletteFade.h"
 
-#include "overlays/bmagic/Effect_BrightenPaletteThenStep.h"
+#include "overlays/bmagic/Effect_FadePaletteIn.h"
 
 /* func_801EF4E4 */
 #include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"
@@ -47,7 +62,7 @@ MATCH void func_801EF6B8(void) {
 }
 
 MATCH void func_801EF724(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, D_801F21F0);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, D_801F21F0);
 }
 
 INCLUDE_ASM(func_801EF768);

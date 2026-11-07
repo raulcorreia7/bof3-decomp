@@ -10,7 +10,7 @@ MATCH s16 func_800A4294(s32 input_kind) {
 
     mode = (*(u8*)&g_BattleActiveBattler);
     if (mode < 3u) {
-        base = D_80145F18[mode][0];
+        base = g_BattlePartyBattlers[mode].chr.hp;
     } else {
         base = ENEMY_COMBATANT(mode).hp;
     }

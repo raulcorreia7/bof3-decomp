@@ -35,6 +35,7 @@ MATCH void func_801EED2C(void) {
 }
 
 /* blocker: register allocation; first diff: lui v1 at 0x801EEDF0. */
+/* blocker: the mode update reloads g_Task into the other register; first diff: lui v1 against v0 at 0x801EEDF0. */
 INCLUDE_ASM(func_801EEDB0);
 
 MATCH void func_801EEE34(void) {

@@ -8,7 +8,7 @@ INCLUDE_ASM(func_801EEC14);
 
 INCLUDE_ASM(func_801EED28);
 
-#include "overlays/bmagic/Effect_NextStepWhileTickUnderTwo.h"
+#include "overlays/bmagic/Effect_Pause.h"
 
 MATCH void func_801EEEA0(void) {
     u8*           selector;
@@ -31,7 +31,7 @@ MATCH void func_801EEEA0(void) {
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EEFD0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF014(void) {
@@ -78,7 +78,7 @@ INCLUDE_ASM(func_801EF79C);
 INCLUDE_ASM(func_801EFAA8);
 
 MATCH void func_801EFDB4(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 1, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 1, g_Task);
 }
 
 MATCH void func_801EFDF8(void) {
@@ -107,7 +107,7 @@ MATCH void func_801F00A8(void) {
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
     pos.vz = -COORD_INT(g_Task->pos.z) / 2;
-    RotTrans(&pos, &matrix.t, &flags);
+    RotTransMatrix(&pos, matrix, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);

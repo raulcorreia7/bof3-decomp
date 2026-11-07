@@ -12,6 +12,6 @@
 
 extern OverlayHeader D_801D0C00;
 /* D_801D1950 */
-extern Callback      g_Commu05StepFuncs[COMMU05_STEP_COUNT];
+extern Callback      g_Commu05States[COMMU05_STEP_COUNT];
 
 #endif

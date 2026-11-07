@@ -13,12 +13,12 @@ INCLUDE_ASM(func_801EED30);
 #include "shared/Effect_StartPlaying.h"
 
 MATCH void func_801EEFDC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF020);
 
-#include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
+#include "overlays/bmagic/Effect_SetDuration.h"
 
 INCLUDE_ASM(func_801EF104);
 
@@ -52,7 +52,7 @@ MATCH void func_801EF328(void) {
 #include "overlays/bmagic/Effect_DrawScreenFade.h"
 
 MATCH void func_801EF534(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 1), 1, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, g_Task);
 }
 
 MATCH void func_801EF578(void) {

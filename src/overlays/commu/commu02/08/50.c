@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The commu02 overlay entry: the shared commu step byte selects the handler. */
 MATCH void func_801D0C50(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event0StepFuncs, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu02Event0States, D_801F294C);
 }
 
 MATCH void func_801D0C8C(void) {

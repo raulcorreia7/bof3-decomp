@@ -30,7 +30,7 @@ MATCH void func_801EEDB8(void) {
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EEEBC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EEF00(void) {
@@ -44,7 +44,18 @@ MATCH void func_801EEF00(void) {
 
 INCLUDE_ASM(func_801EEF78);
 
-INCLUDE_ASM(func_801EEFF8);
+MATCH void func_801EEFF8(void) {
+    PartyBattler* work = g_Task;
+    u8            timer;
+
+    work->pos.y.fixed += 0xFFFF4000;
+
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF04C(void) {
     s32 phase;
@@ -83,7 +94,7 @@ INCLUDE_ASM(func_801EF158);
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF834(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 2, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 2, g_Task);
 }
 
 MATCH void func_801EF878(void) {
@@ -135,7 +146,7 @@ MATCH void func_801EFFB0(void) {
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
     pos.vz = -COORD_INT(g_Task->pos.z) / 2;
-    RotTrans(&pos, &matrix.t, &flags);
+    RotTransMatrix(&pos, matrix, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);

@@ -33,6 +33,7 @@
 #include "types.h"
 #include "common/fixed.h"
 #include "common/vector.h"
+#include "psx/psyq.h"
 
 /* The world overlays' own records. Every area program keeps its scratch in
  * the `0x800E4800` window (@source: wiki:formats/area#neighboring-buffers):
@@ -194,6 +195,7 @@ typedef enum AreaWalkFlags {
 typedef enum FieldTaskMode {
     FIELD_TASK_MODE_LEADER_SWITCH   = 3,
     FIELD_TASK_MODE_MENU            = 4,
+    FIELD_TASK_MODE_CLIMB           = 8,
     FIELD_TASK_MODE_PERSONAL_ACTION = 0x0A,
 } FieldTaskMode;
 
@@ -342,7 +344,7 @@ typedef struct AreaTrail {
     s32      radius;                  /* 0x10 - the ring radius */
     u16      angle;                   /* 0x14 - the rotation angle */
     u16      pad_16;                  /* 0x16 */
-    Point2D  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
+    DVECTOR  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
 } AreaTrail;
 
 ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);
@@ -368,6 +370,25 @@ ASSERT_OFFSET(AreaSpawnSlot, pos, 0x04);
 ASSERT_OFFSET(AreaSpawnSlot, radius_14, 0x14);
 ASSERT_OFFSET(AreaSpawnSlot, core_shade_16, 0x16);
 ASSERT_OFFSET(AreaSpawnSlot, rim_shade_17, 0x17);
+
+#define AREA_RING_POINTS     16
+#define AREA_RING_ANGLE_STEP 0x100
+
+/* A ring of glow points around `center`: screen positions of the ring points, projected each frame. */
+typedef struct AreaRing {
+    s32     base[3];                  /* 0x00 */
+    s32     unk_0C;                   /* 0x0C */
+    s32     center[3];                /* 0x10 - the ring centre */
+    s32     unk_1C;                   /* 0x1C */
+    s16     radius;                   /* 0x20 */
+    s16     unk_22;                   /* 0x22 */
+    DVECTOR screen_base;              /* 0x24 */
+    DVECTOR screen_center;            /* 0x28 */
+    DVECTOR screen[AREA_RING_POINTS]; /* 0x2C - one screen position per ring point */
+} AreaRing;
+
+ASSERT_OFFSET(AreaRing, radius, 0x20);
+ASSERT_OFFSET(AreaRing, screen, 0x2C);
 
 /* The AREA028 slot row: 0x10 bytes. The program keeps 32 of them at
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with

@@ -65,7 +65,7 @@
             if ((g_BattlePartyBattlers[battler].turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) { \
                 result = flagged[g_DragonForm];                                                                \
             } else {                                                                                           \
-                result = player[D_80145F09[battler * BATTLE_PARTY_STRIDE]];                                    \
+                result = player[g_BattlePartyBattlers[battler].chr.character_id];                              \
             }                                                                                                  \
         } else {                                                                                               \
             row    = (u32)battler - 3u;                                                                        \
@@ -370,7 +370,7 @@ extern volatile u8           D_80096A04[4];
 extern BattleHandlerTable3   D_80096A08;
 extern BattleHandlerTable5   D_80096A14;
 /* Main-executable battle state consumed by target-local lifts. */
-extern s8                    D_80096A2C;
+extern char                  D_80096A2C[];
 extern BattleHandlerTable3   D_80096A34;
 extern BattleHandlerTable3   D_80096A40;
 extern Callback              func_800B43B8[];
@@ -504,15 +504,7 @@ extern u8                    D_8014551B;
 extern s32                   D_80145EC4;
 /* Byte-addressed player rows: the first byte of each 0x140-byte work row holds
  * the battler's stored character id. */
-extern u8                    D_80145F09[];
-extern u8                    D_80145F12[];
 /* Battler base halfwords, one u16 per 0x140-byte player row. */
-extern volatile u16          D_80145F18[][160];
-extern u16                   D_80145F24[][160];
-extern u8                    D_80145F2F;
-extern u8                    D_80145F37;
-extern u8                    D_80145F3A;
-extern u8                    D_80145F3B;
 extern u16                   D_80145FAA[];
 extern u8                    D_80145FB2;
 extern volatile BattlePlayerDamageStatus D_80145FB4[];
@@ -896,6 +888,8 @@ extern void func_8009AAE8(void);
 void        func_8009B03C(void);
 void        func_8009B160(void);
 extern void func_8009C994(EnemyBattler* work_arg, BattleEventPacket* event);
+extern u8   Battle_Unk0E1BitTest(volatile EnemyBattler* enemy, s32 bit_index);
+extern void Battle_Unk0E1BitModify(EnemyBattler* enemy, s32 bit, u8 set);
 extern u8   func_800A3B6C(u8 battler_index, u8 selection_kind, u16 input_mask);
 s32         func_800A4FD8(void);
 s32         func_800A5D00(void);
@@ -1023,8 +1017,9 @@ static inline void BattleSelectionDelta(s32 mode) {
 
     ctx = (BattleSelectionContext*)&g_BattleTarget;
     if (ctx->sel < 3u) {
-        value                                                      = func_800A4294(mode);
-        (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change = (s16)(value - D_80145F18[ctx->sel][7]);
+        value = func_800A4294(mode);
+        (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change =
+            (s16)(value - g_BattlePartyBattlers[ctx->sel].chr.stats.defense);
     } else {
         value                                                      = func_800A4294(mode);
         (*(volatile BattleTurn**)&g_BattleTargetRecord)->hp_change = (s16)(value - D_801EB6C4[ctx->sel - 3u][9]);

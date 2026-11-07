@@ -19,11 +19,12 @@ MATCH void func_801EEFD8(void) {
 }
 
 MATCH void func_801EF014(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF058);
 
+/* blocker: work pointer reload; first diff: +0xB0 lui v1,0x1f80 (retail reloads g_Task for the unk_27 store and again before the call) against a0 held across both (candidate). */
 INCLUDE_ASM(func_801EF11C);
 
 INCLUDE_ASM(func_801EF248);

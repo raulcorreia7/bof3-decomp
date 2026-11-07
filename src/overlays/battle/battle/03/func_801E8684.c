@@ -83,7 +83,7 @@ NON_MATCHING void func_801E8684(void) {
         (s8)((s32)(*(D_80145F18 + temp_v0_318) * 0x37) / (s32) * (D_80145F20 + temp_v0_318));
     temp_a1_352 = (g_Task)->slot;
     temp_v0_356 = temp_a1_352 * BATTLE_PARTY_STRIDE;
-    *D_8014833C[temp_a1_352 + 0xD] =
+    g_MenuPanelTasks[temp_a1_352 + 0xD].unk_0C =
         (u8)((s32)(*(D_80145F1A + temp_v0_356) * 0x37) / (s32) * (D_80145F22 + temp_v0_356));
     Actor_SelectScript(((g_Task)->unk_08 + 4) & BYTE_MASK);
     GFX_StagePalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);

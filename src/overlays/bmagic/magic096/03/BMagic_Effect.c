@@ -22,14 +22,20 @@ MATCH void func_801EEDD8(void) {
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
 MATCH void func_801EEEA0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEEE4);
 
 INCLUDE_ASM(func_801EEFB8);
 
-INCLUDE_ASM(func_801EF2CC);
+MATCH void func_801EF2CC(void) {
+    g_Task->unk_09 += 2;
+    g_Task->timer += 2;
+    if (g_Task->unk_09 == D_801F0488[g_Task->unk_04]) {
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountDownTickerAndStep.h"
 

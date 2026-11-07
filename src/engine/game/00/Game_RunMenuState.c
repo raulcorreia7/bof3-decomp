@@ -4,7 +4,7 @@ MATCH void Game_RunMenuState(void) {
     Callback* handlers;
     u16       state;
 
-    handlers = (Callback*)g_GameEntryHandlers;
+    handlers = (Callback*)g_GameMenuSubstates;
     state    = g_GameEntrySubstate;
     handlers[state]();
 }

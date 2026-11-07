@@ -53,20 +53,20 @@ MATCH void func_801E3284(MenuPanelTask* task) {
                 func_801AF20C(icon) & BYTE_MASK, icon);
 
     text = g_UiFormatBuffer;
-    sprintf((char*)text, D_801D0E90, price * task->unk_0C);
+    TEXT_Format(text, D_801D0E90, price * task->unk_0C);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_TOTAL_X), (task->pos.y + SHOP_COUNTS_TOTAL_Y), 0U, text);
 
-    sprintf((char*)text, D_801D0E98, task->unk_0C);
+    TEXT_Format(text, D_801D0E98, task->unk_0C);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_QUANTITY_Y), 0U, text);
     UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_HELD_LABEL_Y), 0, 0xFFU,
                 Resource_GetText(SHOP_TEXT_HELD_LABEL));
 
-    sprintf((char*)text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_HELD) & HALF_MASK);
+    TEXT_Format(text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_HELD) & HALF_MASK);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_HELD_Y), 0U, text);
     UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_LABEL_Y), 0, 0xFFU,
                 Resource_GetText(SHOP_TEXT_EQUIPPED_LABEL));
 
-    sprintf((char*)text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_EQUIPPED) & HALF_MASK);
+    TEXT_Format(text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_EQUIPPED) & HALF_MASK);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_Y), 0U, text);
 
     GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & HALF_MASK);

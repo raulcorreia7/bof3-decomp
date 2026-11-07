@@ -148,7 +148,7 @@ extern u8 g_GameRequestFlags;
 /* D_80143C40 */
 extern u16 g_UiWindowEffectBusy;
 
-/* The screen effects UI_SetMode starts, by index into g_UiLocalModeFuncs. Each
+/* The screen effects UI_SetMode starts, by index into g_UiLocalModes. Each
  * effect comes as an out/in pair: out takes the screen to black or white, in
  * brings it back. The indexes not named here run camera spins and distance
  * resets. */
@@ -241,7 +241,6 @@ extern u8           D_8014832D;
 /* D_8014832E */
 extern u8           g_AreaDrawFlags;
 extern u8           D_8014833B;
-extern u8           D_8014833C[][0x24];
 extern u8           D_8014833D;
 extern u8           D_8014833E;
 extern u8           D_8014833F;

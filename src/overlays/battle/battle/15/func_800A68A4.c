@@ -30,14 +30,14 @@ MATCH void func_800A68A4(void) {
     if (slot != GAME_NONE) {
         func_800A7C14(slot);
         D_800B6F58 = slot + 4;
-        if ((u8)(slot + 4) == 8) {
-            g_BattlePartyBattlers[*battler].turn.action_flags.value |= 0x10000;
+        if ((u8)(slot + 4) == DRAGON_FORM_BERSERK_KAISER) {
+            g_BattlePartyBattlers[*battler].turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_BERSERK;
         }
-        if (D_800B6F58 == 7) {
-            g_BattlePartyBattlers[*battler].turn.action_flags.value |= 0x20000;
+        if (D_800B6F58 == DRAGON_FORM_FAILURE_KAISER) {
+            g_BattlePartyBattlers[*battler].turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_CONTROLLED;
         }
-        if (D_800B6F58 == 4) {
-            g_BattlePartyBattlers[*battler].turn.action_flags.value |= 0x20000;
+        if (D_800B6F58 == DRAGON_FORM_TRUE_KAISER) {
+            g_BattlePartyBattlers[*battler].turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_CONTROLLED;
         }
     } else {
         func_800A6E14(0xFF);

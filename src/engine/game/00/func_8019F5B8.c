@@ -8,11 +8,8 @@ MATCH void func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette) {
     u8    ch;
 
     index = 0;
-    sprintf((s8*)g_UiFormatBuffer, &D_80195860, g_Task->unk_06);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, NULL);
+    TEXT_Format(g_UiFormatBuffer, D_80195860, g_Task->unk_06);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), NULL);
     GFX_AddPrim(g_Task->unk_29, 0xCU);
     do {
         ch = g_UiFormatBuffer[index & BYTE_MASK];

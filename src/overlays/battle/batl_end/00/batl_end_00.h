@@ -4,8 +4,6 @@
 #include "overlays/battle/battle.h"
 #include <stdio.h>
 
-extern u8           D_80145F16[][BATTLE_PARTY_STRIDE];
-extern u8           D_80145F17[][BATTLE_PARTY_STRIDE];
 /* D_801462E3 */
 extern u8           g_BattleUIStep;
 /* D_801462F0 */

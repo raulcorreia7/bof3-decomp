@@ -28,7 +28,7 @@ INCLUDE_ASM(func_801EF010);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EF2D0(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF314(void) {
@@ -100,10 +100,10 @@ MATCH void func_801EFF24(void) {
 INCLUDE_ASM(func_801F00C4);
 
 MATCH void func_801F02A0(void) {
-    SYS_DISPATCH_TASK(g_BMagicEffectFuncs + 12, 2, g_Task);
+    SYS_DISPATCH_TASK(g_BMagicEffectModes + 12, 2, g_Task);
 }
 
-#include "overlays/bmagic/Effect_RequestQueueEntryAndArmTicker.h"
+#include "overlays/bmagic/Effect_QueueEntry.h"
 
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
@@ -121,7 +121,7 @@ MATCH void func_801F03EC(void) {
     g_Task->header.step++;
 }
 
-#include "overlays/bmagic/Effect_AddActorStepOnPlaying.h"
+#include "overlays/bmagic/Effect_AddActor.h"
 
 MATCH void func_801F0498(void) {
     func_801E5988();

@@ -20,7 +20,7 @@
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000; \
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000; \
     pos.vz = -COORD_INT((SPAN_WORK)->pos.z) / 2;  \
-    RotTrans(&pos, (VECTOR*)matrix.t, &flags);    \
+    RotTransMatrix(&pos, matrix, &flags);         \
     RotMatrix(&rot, &matrix);                     \
     MulMatrix2(&g_CameraMatrix, &matrix);         \
     SetRotMatrix(&matrix);                        \
@@ -176,6 +176,9 @@ typedef struct BMagicEffectWork {
     /* 0x28 */ PartyBattler* battler;
 } BMagicEffectWork;
 
+/* header.flags bit of a BMagicEffectWork slot that is running. */
+#define BMAGIC_EFFECT_IN_USE 0x01
+
 ASSERT_SIZE(BMagicEffectWork, 0x2C);
 
 ASSERT_OFFSET(BMagicEffectWork, unk_03, 0x03);
@@ -212,7 +215,7 @@ extern MagicModule       D_801EEC00;
    D_801F0BB0 (magic060), D_801F0C10 (magic062), D_801F0C38 (magic121), D_801F0C40 (magic226), D_801F0CA8 (magic120),
    D_801F0D14 (magic082), D_801F0D54 (magic222), D_801F0EEC (magic083), D_801F121C (magic114), D_801F125C (magic126),
    D_801F1394 (magic064), D_801F1630 (magic015), D_801F1BC4 (magic131), D_801F1BEC (magic008), D_801F24A4 (magic151) */
-extern Callback          g_BMagicEffectFuncs[];
+extern Callback          g_BMagicEffectModes[];
 extern BMagicEffectWork* D_801F17B0;
 extern BMagicEffectWork* D_801F17B4;
 

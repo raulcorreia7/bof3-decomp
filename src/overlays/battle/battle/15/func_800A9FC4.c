@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-extern u16 D_80145F26[][160];
-
 /* Rescales the active battler's panel values: blends the four stat
  * quotes and the four element gauges toward their row tables, mirrors the
  * panel bytes and applies the element and status modifiers.
@@ -33,26 +31,30 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
     rec->unk_33 = rec->unk_53;
 
     if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & 1) {
-        D_80145F24[party_slot][0] = D_80145F24[party_slot][0] * 3;
+        g_BattlePartyBattlers[party_slot].chr.stats.power = g_BattlePartyBattlers[party_slot].chr.stats.power * 3;
     }
     if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & COMBATANT_FLAG_CHARGING) {
-        D_80145F24[party_slot][0] = D_80145F24[party_slot][0] * 3;
+        g_BattlePartyBattlers[party_slot].chr.stats.power = g_BattlePartyBattlers[party_slot].chr.stats.power * 3;
     }
     if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & COMBATANT_FLAG_SELECTION_BONUS) {
         u16 total;
         u16 bonus;
 
-        total                     = D_80145F24[party_slot][0];
-        bonus                     = D_80145F26[party_slot][0];
-        D_80145F26[party_slot][0] = 0;
-        D_80145F24[party_slot][0] = total + bonus;
+        total                                               = g_BattlePartyBattlers[party_slot].chr.stats.power;
+        bonus                                               = g_BattlePartyBattlers[party_slot].chr.stats.defense;
+        g_BattlePartyBattlers[party_slot].chr.stats.defense = 0;
+        g_BattlePartyBattlers[party_slot].chr.stats.power   = total + bonus;
     }
     if (g_BattlePartyBattlers[party_slot].turn.action_flags.volatile_value & 2) {
         if (g_DragonForm == 0x16) {
-            FIELD(u8, &D_80145F3B, row_offset) = FIELD(u8, &D_80145F3B, row_offset) + 0x1E;
-            FIELD(u8, &D_80145F3A, row_offset) = FIELD(u8, &D_80145F3A, row_offset) + 0x1E;
-            FIELD(u8, &D_80145F3B, row_offset) = func_801DE144(FIELD(u8, &D_80145F3B, row_offset), 0x64);
-            FIELD(u8, &D_80145F3A, row_offset) = func_801DE144(FIELD(u8, &D_80145F3A, row_offset), 0x64);
+            g_BattlePartyBattlers[party_slot].chr.stats.evasion =
+                g_BattlePartyBattlers[party_slot].chr.stats.evasion + 0x1E;
+            g_BattlePartyBattlers[party_slot].chr.stats.critical_chance =
+                g_BattlePartyBattlers[party_slot].chr.stats.critical_chance + 0x1E;
+            g_BattlePartyBattlers[party_slot].chr.stats.evasion =
+                func_801DE144(g_BattlePartyBattlers[party_slot].chr.stats.evasion, 0x64);
+            g_BattlePartyBattlers[party_slot].chr.stats.critical_chance =
+                func_801DE144(g_BattlePartyBattlers[party_slot].chr.stats.critical_chance, 0x64);
         }
     }
 
@@ -62,8 +64,10 @@ MATCH void func_800A9FC4(BattlePanelRecord* rec, s32 slot) {
         g_BattlePartyBattlers[table_row].chr.stats.resistances[RES_INDEX_HOLY] = 0;
     }
     if (g_BattlePartyBattlers[table_row].turn.action_flags.volatile_value & COMBATANT_FLAG_FIRE_RESIST_ZERO) {
-        FIELD(u8, &D_80145F2F, table_row * BATTLE_PARTY_STRIDE) = 0;
+        g_BattlePartyBattlers[table_row].chr.stats.resistances[RES_INDEX_FIRE] = 0;
     }
-    D_80145F24[table_row][0] = func_801DE0AC(D_80145F24[table_row][0], 0x64);
-    D_80145F26[table_row][0] = func_801DE0AC(D_80145F26[table_row][0], 0x64);
+    g_BattlePartyBattlers[table_row].chr.stats.power =
+        func_801DE0AC(g_BattlePartyBattlers[table_row].chr.stats.power, 0x64);
+    g_BattlePartyBattlers[table_row].chr.stats.defense =
+        func_801DE0AC(g_BattlePartyBattlers[table_row].chr.stats.defense, 0x64);
 }

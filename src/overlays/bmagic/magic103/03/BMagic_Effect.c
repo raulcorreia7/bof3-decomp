@@ -8,12 +8,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC70);
 
-#include "overlays/bmagic/Effect_MarkTargetDamagedOnTickerZero.h"
+#include "overlays/bmagic/Effect_Hit.h"
 
 #include "shared/Effect_StartPlaying.h"
 
 MATCH void func_801EEEC8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EEF0C(void) {

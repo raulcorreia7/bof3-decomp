@@ -25,17 +25,30 @@ typedef enum PaletteFadeFlags {
     PALETTE_FADE_ACTIVE = 1 << 0,
 } PaletteFadeFlags;
 
+/* The fields of a task record (actor, battler, effect) that a palette fade reads and restores. */
+typedef struct PaletteOwner {
+    u8 pad_00[0x24];
+    u8 flags; /* +0x24 bit 2 is cleared when a fade that flagged its row with 0x80 frees */
+    u8 pad_25[0x2];
+    u8 saved_byte;   /* +0x27 restored from PaletteFade.saved_byte when the fade frees */
+    u8 palette_kind; /* +0x28 a PaletteKind: how many palette cells the owner's fade covers */
+} PaletteOwner;
+
+ASSERT_OFFSET(PaletteOwner, palette_kind, 0x28);
+
+#define PALETTE_OWNER(record) ((PaletteOwner*)(record))
+
 /* One 0xC-byte row of the palette fade table at D_80145BD4. */
 typedef struct PaletteFade {
-    u8  flags;      /* PaletteFadeFlags */
-    u8  saved_byte; /* the target byte at +0x27, restored on free */
-    s8  red_offset;
-    s8  green_offset;
-    s8  blue_offset;
-    u8  table_index;
-    u8  step;
-    u8  unk_07;
-    u8* target;
+    u8            flags;      /* PaletteFadeFlags */
+    u8            saved_byte; /* the target byte at +0x27, restored on free */
+    s8            red_offset;
+    s8            green_offset;
+    s8            blue_offset;
+    u8            table_index;
+    u8            step;
+    u8            unk_07;
+    PaletteOwner* target; /* the record whose palette fades */
 } PaletteFade;
 
 ASSERT_OFFSET(PaletteFade, target, 0x08);
@@ -141,21 +154,21 @@ extern Callback g_GameCampMenuLoad[];
 /* D_801C7B14 */
 extern Callback g_GameStates[];
 /* D_801C7B44 */
-extern Callback g_GameEntryHandlers[3];
+extern Callback g_GameMenuSubstates[3];
 /* D_801C7B50 */
 extern u8       s_DirectionJitters[4];
 /* D_801C7B54 */
-extern Callback g_GameModeHandlers[8];
+extern Callback g_GameBattleSubstates[8];
 /* D_801C7B7C */
-extern Callback g_GameStateHandlers[3];
+extern Callback g_GameShopSubstates[3];
 /* D_801C7B88 */
-extern Callback g_GameSubstateHandlers[4];
+extern Callback g_GameFishingSubstates[4];
 /* D_801C7B98 */
 extern Callback g_MenuAbilityOpen[3];
 /* D_801C7BA4 */
 extern Callback g_MenuStatusOpen[3];
 /* D_801C7BB0 */
-extern Callback g_GameFlowHandlers[3];
+extern Callback g_GameSceneCameraSubstates[3];
 /* D_801C7BBC */
 extern u8       s_MenuLine1Run[12];
 /* D_801C7BC8 */
@@ -165,19 +178,19 @@ extern u8       s_MenuLine1FlagRun[12];
 /* D_801C7BE0 */
 extern u8       s_MenuLine2FlagRun[12];
 /* D_801C7BEC */
-extern Callback g_MenuPanelHandlers[5];
+extern Callback g_MenuPanelModes[5];
 /* D_801C7C00 */
-extern Callback g_MenuPanelStateHandlers[3];
+extern Callback g_MenuPanelStates[3];
 /* D_801C7C0C */
-extern Callback g_MenuOptionHandlers[3];
+extern Callback g_MenuOptionStates[3];
 /* D_801C7C18 */
-extern Callback g_MenuActionHandlers[3];
+extern Callback g_MenuActionStates[3];
 /* D_801C7C24 */
-extern Callback g_MenuTaskHandlers[4];
+extern Callback g_MenuTaskStates[4];
 extern char     D_801C7C34[5][8];
 extern u8*      D_801C7C5C[5];
 /* D_801C7C70 */
-extern Callback g_ActorHandlers[187];
+extern Callback g_ActorTypes[187];
 extern u8       D_801C7F74[];
 extern Callback D_801C8090[3];
 /* D_801C809C */
@@ -259,9 +272,12 @@ extern Callback  D_801CD0FC[5];
 extern Callback  D_801CD110[2];
 extern Callback  D_801CD118[2];
 extern Callback  D_801CD120[4];
-extern Callback  D_801CD130[4];
-extern Callback  D_801CD140[5];
-extern Callback  D_801CD154[4];
+/* D_801CD130 */
+extern Callback  g_FieldClimbSteps[4];
+/* D_801CD140 */
+extern Callback  g_FieldClimbMountSteps[5];
+/* D_801CD154 */
+extern Callback  g_FieldClimbDismountSteps[4];
 /* D_801CD164 */
 extern Callback  g_PersonalActions[19];
 extern Callback  D_801CD1B0[2];

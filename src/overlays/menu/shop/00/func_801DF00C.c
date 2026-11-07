@@ -40,7 +40,7 @@ NON_MATCHING void func_801DF00C(s32 panel_x, s32 panel_y) {
             Menu_DrawCharacterPortrait((u16)sprite_x, (u16)row_y, record->character_index, shade);
             UI_DrawText((s16)(base_x + 20), (s16)(base_y + 1), (s32)index, 5U, record);
             Menu_DrawIcon((base_x + 2) & HALF_MASK, (s16)(base_y + 0x15) & HALF_MASK, 3U, D_801D0E78);
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0E64, record->level);
+            TEXT_Format(g_UiFormatBuffer, D_801D0E64, record->level);
             UI_DrawGlyphString((s16)text_x, (s16)(base_y + 21), (u32)index, (void*)g_UiFormatBuffer);
             value = record->status;
             if ((value & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
@@ -82,10 +82,10 @@ NON_MATCHING void func_801DF00C(s32 panel_x, s32 panel_y) {
             if (record->hp < 2U) {
                 clut = 2;
             }
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0E68, record->hp);
+            TEXT_Format(g_UiFormatBuffer, D_801D0E68, record->hp);
             UI_DrawGlyphString((s16)text_x, (s16)(base_y + 29), (u32)clut, (void*)g_UiFormatBuffer);
             clut = (record->fatigue != 0) * 4;
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0E70, record->stats.max_hp);
+            TEXT_Format(g_UiFormatBuffer, D_801D0E70, record->stats.max_hp);
             UI_DrawGlyphString((s16)text_x, (s16)(base_y + 29), (u32)clut, (void*)g_UiFormatBuffer);
             Menu_DrawIcon((base_x + 2) & HALF_MASK, (base_y + 0x25) & HALF_MASK, 1U, 0U);
             clut  = 0;
@@ -97,10 +97,10 @@ NON_MATCHING void func_801DF00C(s32 panel_x, s32 panel_y) {
                 clut = 2;
             }
             row += 1;
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0E68, record->ap);
+            TEXT_Format(g_UiFormatBuffer, D_801D0E68, record->ap);
             UI_DrawGlyphString((s16)text_x, (s16)(base_y + 37), (u32)clut, (void*)g_UiFormatBuffer);
             base_y += 0x34;
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0E70, record->stats.max_ap);
+            TEXT_Format(g_UiFormatBuffer, D_801D0E70, record->stats.max_ap);
             UI_DrawGlyphString((s16)text_x, (s16)(base_y + 37), 0U, (void*)g_UiFormatBuffer);
             clut = 0;
         } while ((u32)(row & BYTE_MASK) < (u8)D_801E6250);

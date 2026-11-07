@@ -13,14 +13,14 @@ MATCH void func_801EEC2C(void) {
 
 INCLUDE_ASM(func_801EEC98);
 
-#include "overlays/bmagic/Effect_MarkTargetDamagedOnTickerZero.h"
+#include "overlays/bmagic/Effect_Hit.h"
 
 #include "shared/Effect_StartPlaying.h"
 
 #include "overlays/bmagic/Effect_CountDownAndPlay.h"
 
 MATCH void func_801EF158(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF19C);

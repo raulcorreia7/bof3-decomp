@@ -19,8 +19,8 @@ MATCH void func_800979E4(void) {
      * makes the scheduler fill the branch delay slot and shifts the call. */
     message = (u8*)&D_80148656;
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
-    entry   = Party_GetAbilities(message[0], D_8014857B, 1);
-    if ((D_801CA718[entry[D_8014857C] * 0x14] & ABILITY_TARGET_BOTH_SIDES) != 0u &&
+    entry   = Party_GetAbilities(message[0], g_MenuPanelTasks[16].unk_0B, 1);
+    if ((D_801CA718[entry[g_MenuPanelTasks[16].unk_0C] * 0x14] & ABILITY_TARGET_BOTH_SIDES) != 0u &&
         (trigger & (PADLup | PADLdown)) != 0) {
         g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(3);
         *(u8*)&g_BattleUIState -= 1u;

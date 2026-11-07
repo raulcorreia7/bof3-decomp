@@ -4,7 +4,7 @@ MATCH void func_8019986C(void) {
     s16 value;
     u8* color;
 
-    g_MenuTaskHandlers[g_MenuCurrentPanel->state]();
+    g_MenuTaskStates[g_MenuCurrentPanel->state]();
     func_801D50E8(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, (s16)g_MenuCurrentPanel->unk_12, 0x13,
                   (s32)GAME_WINDOW_STYLE);
     value = (s16)g_MenuCurrentPanel->unk_10;

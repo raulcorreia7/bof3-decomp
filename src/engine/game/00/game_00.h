@@ -363,7 +363,7 @@ extern s8                 D_80148654;   /* 0x80148654 */
 extern s8                 D_80148656;   /* 0x80148656 */
 extern s8                 D_801490E0;   /* 0x801490E0 */
 extern u8                 D_801581E0[]; /* 0x801581E0 */
-extern u8*                g_EncounterZoneLists[];
+extern u8*                g_EncounterZones[];
 extern Point2DL           g_FacingOffsets[]; /* 0x80181AC0 */
 extern s8                 D_80181B00[];
 extern s8                 D_80181B01[];
@@ -874,16 +874,19 @@ void    func_801B2DDC(void);
 void    func_801B2FC8(void);
 void    func_801B315C(void);
 void    func_801B31F0(void);
-void    func_801B3260(void);
+/* func_801B3260 */
+void    Field_Climb(void);
 void    func_801B32A4(void);
-void    func_801B32D0(void);
+/* func_801B32D0 */
+void    Field_ClimbMount(void);
 void    func_801B3314(void);
 void    func_801B3388(void);
 void    func_801B33C4(void);
 void    func_801B3400(void);
 void    func_801B343C(void);
 void    func_801B3488(void);
-void    func_801B3540(void);
+/* func_801B3540 */
+void    Field_ClimbDismount(void);
 void    func_801B3584(void);
 void    func_801B35B0(void);
 void    func_801B35EC(void);

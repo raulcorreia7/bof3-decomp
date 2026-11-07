@@ -76,7 +76,7 @@ MATCH void func_801EF6A8(void) {
     pos.vx = (src->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (src->pos.y.fixed >> 9) - 0x4000;
     pos.vz = -(COORD_INT(src->pos.z) + 0x200) / 2;
-    RotTrans(&pos, &matrix.t, &flags);
+    RotTransMatrix(&pos, matrix, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);
@@ -84,11 +84,11 @@ MATCH void func_801EF6A8(void) {
 }
 
 MATCH void func_801EF774(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
 MATCH void func_801EF7B8(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 3), 2, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 3), 2, g_Task);
 }
 
 INCLUDE_ASM(func_801EF7FC);

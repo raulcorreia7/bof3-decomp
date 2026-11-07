@@ -14,7 +14,7 @@ typedef struct GameWork {
 MATCH void func_8019977C(void) {
     GameWork* task;
 
-    g_MenuActionHandlers[((GameWork*)g_MenuCurrentPanel)->state]();
+    g_MenuActionStates[((GameWork*)g_MenuCurrentPanel)->state]();
     task = (GameWork*)g_MenuCurrentPanel;
     func_801D5634(7, task->x, task->unk_06, task->unk_20, task->unk_0D, task);
 }

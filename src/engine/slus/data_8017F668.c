@@ -1,7 +1,7 @@
 #include "slus.h"
 
 /*
- * callback table read by func_80155B40, handler table g_BundleOpcodeHandlers and
+ * callback table read by func_80155B40, handler table g_BundleOpcodes and
  * the small value tables read by func_80157CE4 and func_80159580.
  */
 
@@ -134,7 +134,7 @@ const u32 D_8017F8E0[4] = {
     0xBD810006,
 };
 
-const ObjectFunc g_BundleOpcodeHandlers[7] = {
+const ObjectFunc g_BundleOpcodes[7] = {
     (ObjectFunc)Area_ReadTintRecord,  func_801583BC, (ObjectFunc)Area_WriteCellRecord, (ObjectFunc)Area_LoadPaletteBank,
     (ObjectFunc)Area_DrawGouraudQuad, func_80158830, func_80158940,
 };

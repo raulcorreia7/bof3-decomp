@@ -41,16 +41,16 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32
         values[2] = values[3];
         flags[2]  = flags[3];
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
-            sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, values[i]);
+            TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, values[i]);
             UI_DrawGlyphString(x + 44, y + i * 15 + 8, flags[i], (void*)g_UiFormatBuffer);
         }
     } else {
         clut = 7;
-        sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->stats.power);
+        TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->stats.power);
         UI_DrawGlyphString(x + 44, y + 8, 7, (void*)g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->stats.defense);
+        TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->stats.defense);
         UI_DrawGlyphString(x + 44, y + 23, 7, (void*)g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, g_MenuStatFormat, stats->stats.agility);
+        TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->stats.agility);
         UI_DrawGlyphString(x + 44, y + 38, 7, (void*)g_UiFormatBuffer);
     }
     Menu_DrawCharacterPortrait((x + 0x46) & HALF_MASK, (y + 2) & HALF_MASK, stats->character_id, present);
