@@ -26,13 +26,13 @@ Battle_WaitUIMode = { addr = 0x801D1AB4, type = "func", source = "holds the entr
 Battle_InitPanels = { addr = 0x801D1AE8, type = "func", source = "Sets the battle panel widths." }
 Battle_EnterIntro = { addr = 0x801D1B94, type = "func", source = "arms the intro panel and advances the battle mode once the loader is ready" }
 Battle_PickTarget = { addr = 0x801D3844, type = "func", source = "picks the target code from the ability's targeting flags, choosing a random ability kind first in battle states 36, 37 and 140" }
-Battle_StreamEndOverlay = { addr = 0x801D6A14, type = "func", source = "its body picks g_BattleStep from g_BattleResult and streams EMI_SLOT_BATL_END" }
-Battle_WriteBackParty = { addr = 0x801D7350, type = "func", source = "its body writes the knocked-out party back to g_Characters, clears the battle bytes and advances g_GameEntrySubstate" }
+Battle_StreamEndOverlay = { addr = 0x801D6A14, type = "func", source = "Loads the battle end overlay." }
+Battle_WriteBackParty = { addr = 0x801D7350, type = "func", source = "Copies the party's battle state back to the field characters." }
 Battle_DrawEnemyNamePanel = { addr = 0x801D8AE4, type = "func", source = "Draws an enemy name panel." }
 Battle_DrawNumber = { addr = 0x801D9684, type = "func", source = "Draws a number with digit sprites." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, type = "func", source = "1 when the slot is inactive or its 0x4000 bit is set" }
-Battle_FindSelectableSlotForward = { addr = 0x801DB5CC, type = "func", source = "Finds the next selectable battler slot, wrapping around." }
-Battle_FindSelectableSlotBackward = { addr = 0x801DB6F4, type = "func", source = "Finds the previous selectable battler slot, wrapping around." }
+Battle_FindSelectableSlotForward = { addr = 0x801DB5CC, type = "func", source = "Finds a selectable battler slot at or after the start, wrapping around." }
+Battle_FindSelectableSlotBackward = { addr = 0x801DB6F4, type = "func", source = "Finds a selectable battler slot at or before the start, wrapping around." }
 Battle_ApplyDamage = { addr = 0x801DBB78, type = "func", source = "Applies one hit to a target." }
 Battle_CalcDamage = { addr = 0x801DC044, type = "func", source = "Calculates damage for one hit." }
 Battle_RollBaseDamage = { addr = 0x801DCAD8, type = "func", source = "Rolls base damage for a hit." }
