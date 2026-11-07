@@ -41,11 +41,11 @@
  * record 6. */
 #define EMI_CUE_ID(bank, index) ((((u32)(bank) & 0x0Fu) << EMI_CUE_ID_BANK_SHIFT) | ((u32)(index) & 0xFFu))
 
-typedef struct EmiCue {
+typedef struct EMICue {
     u8 alias_bank; /* bits 2-0: bank that supplies the voice index and its VAB
                     * volume, pan and tune; 0 = own bank. 0 in all 8,608 entries;
                     * bits 7-3 are zero in all of them, role unknown. */
-    u8 program;    /* EmiCueProgramFlags; bit 7 use_cue_volume: set follows the key-on with
+    u8 program;    /* EMICueProgramFlags; bit 7 use_cue_volume: set follows the key-on with
                     * SsUtSetDetVVol(voice, cue volL, cue volR); clear keeps the
                     * tone's own volume. Bits 6-0: tone block 0-7, the third
                     * SsUtKeyOnV argument. */
@@ -58,12 +58,12 @@ typedef struct EmiCue {
                     * voices keyed on the cue (0 in 525 entries, 1 in 7,662, 2 in
                     * 248, 3 in 173). Bit 7 is zero in all 8,608 entries, role
                     * unknown. */
-} EmiCue;
+} EMICue;
 
-ASSERT_SIZE(EmiCue, EMI_CUE_RECORD_SIZE);
+ASSERT_SIZE(EMICue, EMI_CUE_RECORD_SIZE);
 
-typedef enum EmiCueProgramFlags {
+typedef enum EMICueProgramFlags {
     EMI_CUE_USE_CUE_VOLUME_FLAG = 1 << 7,
-} EmiCueProgramFlags;
+} EMICueProgramFlags;
 
 #endif

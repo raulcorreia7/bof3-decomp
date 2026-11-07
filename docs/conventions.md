@@ -507,7 +507,7 @@ two systems have their own thing under one noun. `B` in a disc label marks the b
 | `AreaSceneRecord`, `area-scene`                                                               | `AreaActorDef` (`id`, `clut_select`, `texture_page`, `texture_v`, `texture_mode`, `script_section`), `g_AreaActorDefs`, `area-actor-defs`, `SpriteTextureMode` |
 | SHISU, BATE, COMMU00, BATL_END, BATL_OVR, DEMO, FIRST                                         | Status menu, Ability menu, Fairy Village, battle victory, battle defeat, title resources, boot resources                                                       |
 | SCENA `Scenario*`, `ScenarioCallback`, `ScenarioElevation`                                    | `Scene*`, `SceneFunc`, `SceneElevation`                                                                                                                        |
-| `FieldWork`, `WorldVec`, `WorldCost`, `EmiCueRecord`, `AreaVertexRecord`, `EtcOverlayHead/Id` | `Actor`, `Point2D`, `AreaCost`, `EmiCue`, `AreaVertex`, `OverlayHeader`/`OverlayId`                                                                            |
+| `FieldWork`, `WorldVec`, `WorldCost`, `EMICueRecord`, `AreaVertexRecord`, `EtcOverlayHead/Id` | `Actor`, `Point2D`, `AreaCost`, `EMICue`, `AreaVertex`, `OverlayHeader`/`OverlayId`                                                                            |
 | `magic-table`                                                                                 | `bmagic-table`                                                                                                                                                 |
 | `BOF3_1.1`                                                                                    | "Breath of Fire III (USA)": volume `BREATH_OF_FIRE3`, 1998-03-26, boot `SLUS_004.22`                                                                           |
 | COMMU01-05, BATL_DRA/RE2/RET/SE, AFLDKWA, MTEST, RTEST, A085SE2, A108SE2                      | keep the disc label until code shows the job                                                                                                                   |
@@ -1375,11 +1375,11 @@ reads the format includes it. The names match the wiki's format page and the Rus
 
 #define EMI_SECTOR_SIZE 2048
 
-typedef struct EmiEntry {
+typedef struct EMIEntry {
     /* 0x00 */ u32 size;
     /* 0x04 */ u32 offset;
-} EmiEntry;
-ASSERT_SIZE(EmiEntry, 0x8);
+} EMIEntry;
+ASSERT_SIZE(EMIEntry, 0x8);
 ```
 
 **Don't**
@@ -1389,7 +1389,7 @@ ASSERT_SIZE(EmiEntry, 0x8);
 #include "types.h"
 #include "audio/bank.h"           /* another system */
 
-typedef struct EmiEntry { u32 size; u32 offset; } EmiEntry;
+typedef struct EMIEntry { u32 size; u32 offset; } EMIEntry;
 
 extern u8 g_EmiLoaderState;       /* runtime state in a format header */
 void      EMI_LoaderInit(void);   /* code in a format header */
