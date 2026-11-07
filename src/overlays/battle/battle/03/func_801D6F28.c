@@ -6,7 +6,7 @@ MATCH void func_801D6F28(void) {
     i = 0u;
     if (g_BattlePartyCount != 0u) {
         do {
-            if ((g_BattlePartyBattlers[i].turn.damage_flags.value & 0x2000u) != 0u) {
+            if ((g_BattlePartyBattlers[i].turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
                 return;
             }
             i += 1u;

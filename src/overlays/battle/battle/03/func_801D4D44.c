@@ -15,7 +15,7 @@ MATCH void func_801D4D44(void) {
     local_table = g_BattlePartyBattlers;
     do {
         if (func_801D64C4(index) == 0u) {
-            if ((g_BattlePartyBattlers[index].turn.action_flags.value & 1u) != 0u) {
+            if ((g_BattlePartyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) {
                 u8 loaded = g_BattlePartyBattlers[index].counter_136;
                 u8 count  = loaded;
                 if (count < 6u) {

@@ -5,7 +5,8 @@ MATCH void func_80097CBC(void) {
     BattleStageMessageResource((void*)BATTLE_ACTIVE_MESSAGE_SLOT_PTR);
     g_BattleStep           = 4u;
     g_BattleSelectionLatch = 0u;
-    g_BattleSubStep        = 1u;
-    g_BattleUIStep         = 0u;
-    g_BattleUIState        = 1u;
+
+    g_BattleSubStep = 1u;
+    g_BattleUIStep  = 0u;
+    g_BattleUIState = 1u;
 }

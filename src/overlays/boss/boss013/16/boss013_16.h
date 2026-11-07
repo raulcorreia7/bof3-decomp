@@ -25,8 +25,6 @@ extern u8           D_80146322;
  * declares only the 6375 byte. */
 extern u8           g_BattleActiveBattler;
 extern u8           D_80181B11;
-extern u16          D_801EB6B6;
-extern u16          D_801EB7CE;
 extern PartyBattler D_801EB860;
 
 /* The mode handler sets the image installs into the battle hooks; the
