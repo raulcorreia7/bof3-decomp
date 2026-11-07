@@ -25,7 +25,39 @@ MATCH void func_801EF038(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
-INCLUDE_ASM(func_801EF0D0);
+MATCH void func_801EF0D0(void) {
+    s32           angle;
+    s32*          angle_cell;
+    u8            count;
+    PartyBattler* work;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        angle                      = (g_Task->param.unk_0B & 7) << 9;
+        angle_cell                 = &D_1F800000;
+        *angle_cell                = angle;
+        g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + ((rsin(angle) * 0xA000) >> 12);
+        g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle_cell) * 0xA000) >> 12);
+        g_Task->pos.z.part.integer = g_BattleEffectBattler->pos.z.part.integer + 0x180;
+        g_Task->unk_25             = 0x1D;
+        g_Task->unk_26             = 0;
+        g_Task->unk_27             = 0xA0;
+        g_Task->unk_28             = 0;
+        g_Task->unk_5D             = 0;
+        g_Task->unk_5E             = 0;
+        g_Task->unk_5F             = 0;
+        g_Task->unk_5C             = 0;
+        g_Task->unk_2A             = 0;
+        g_Task->unk_29             = 4;
+        g_Task->unk_24             = 4;
+        work                       = g_Task;
+        work->unk_2B               = 1;
+        work->unk_2C.half          = 0;
+        Actor_SelectScript((g_Task->param.unk_0B / 3) & BYTE_MASK);
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801EF2A8(void) {
     PartyBattler* work;

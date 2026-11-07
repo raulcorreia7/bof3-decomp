@@ -372,7 +372,44 @@ MATCH void func_801FAA2C(void) {
 MATCH void func_801FAA68(void) {
 }
 
-INCLUDE_ASM(func_801FAA70);
+MATCH void func_801FAA70(void) {
+    u8* step = &D_80146875;
+
+    switch (*step) {
+        case 0:
+            if (g_UiWindowEffectBusy == 0) {
+                Message_StartAreaMessage(1);
+                g_GameStateIndex = 2;
+                *step            = 1;
+            }
+            break;
+        case 1:
+            if (g_GameStateIndex != 2) {
+                UI_SetMode(1);
+                g_AreaScrollTargetX = 0x2D8000;
+                g_AreaScrollTargetY = 0x5D0000;
+                func_80153DE8();
+                g_AreaDrawFlags = 0x1F;
+                *step           = 2;
+            }
+            break;
+        case 2:
+            if (g_UiWindowEffectBusy == 0) {
+                *g_ScriptVars = 1;
+                *step         = 3;
+            }
+            break;
+        case 3:
+            if (*g_ScriptVars == 0x15) {
+                Game_ClearScriptActive();
+                SYS_SetFlag(g_SceneFlags, 0);
+                *g_ScriptVars = 0;
+                D_80146874    = 0;
+                *step         = 0;
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801FABD8);
 
