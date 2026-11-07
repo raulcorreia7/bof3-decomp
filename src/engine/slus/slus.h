@@ -1088,26 +1088,39 @@ extern void func_8014DB98(void);
 s8          func_8014DE78(void);
 extern void GFX_ExpandRgb555(u32* pixels, RECT rect);
 extern void GFX_DecodeLzss(u32* packed, RECT rect);
-void        func_8014EDF0(void);
-void        func_8014EE18(void);
-void        func_8014EE40(void);
-void        func_8014EE68(void);
-void        func_8014EE90(void);
-void        func_8014EEB8(void);
+/* func_8014EDF0 */
+void        GFX_FadeToBlack(void);
+/* func_8014EE18 */
+void        GFX_FadeFromBlack(void);
+/* func_8014EE40 */
+void        GFX_FadeToBlackFast(void);
+/* func_8014EE68 */
+void        GFX_FadeFromBlackFast(void);
+/* func_8014EE90 */
+void        GFX_FadeToBlackSlow(void);
+/* func_8014EEB8 */
+void        GFX_FadeFromBlackSlow(void);
 void        func_8014EEE0(void);
 void        func_8014EF08(void);
-void        func_8014EF30(void);
-void        func_8014EF58(void);
+/* func_8014EF30 */
+void        GFX_FadeToWhite(void);
+/* func_8014EF58 */
+void        GFX_FadeFromWhite(void);
 void        func_8014EF80(void);
 void        func_8014F024(void);
 void        func_8014F16C(void);
-void        func_8014F1AC(void);
-void        func_8014F1D4(void);
-void        func_8014F1FC(void);
-void        func_8014F224(void);
+/* func_8014F1AC */
+void        GFX_FadeToBlackSlower(void);
+/* func_8014F1D4 */
+void        GFX_FadeFromBlackSlower(void);
+/* func_8014F1FC */
+void        GFX_FadeToWhiteSlower(void);
+/* func_8014F224 */
+void        GFX_FadeFromWhiteSlower(void);
 void        func_8014F24C(void);
 void        func_8014F2F0(void);
-void        func_8014F438(void);
+/* func_8014F438 */
+void        GFX_FadeToBlackSlowest(void);
 void        func_8014F460(void);
 extern void func_8014FB80(s16 x, s16 y, u16 clut, u8 shade);
 extern void func_801507BC(void);

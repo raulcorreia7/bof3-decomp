@@ -4714,6 +4714,19 @@ SYS_EnterFrontend = { addr = 0x8014EC64, type = "func", source = "Loads the fron
 UI_SetMode = { addr = 0x8014ECAC, type = "func", source = "Sets the UI mode." }
 UI_SetModeWait = { addr = 0x8014ECEC, type = "func", source = "Sets the UI mode and waits for the window effect." }
 UI_DispatchLocalMode = { addr = 0x8014ED6C, type = "func", source = "Runs the handler of the current UI mode." }
+GFX_FadeToBlack = { addr = 0x8014EDF0, type = "func", source = "Fades the screen to black at the normal speed (callback thread)." }
+GFX_FadeFromBlack = { addr = 0x8014EE18, type = "func", source = "Fades the screen back in from black at the normal speed (callback thread)." }
+GFX_FadeToBlackFast = { addr = 0x8014EE40, type = "func", source = "Fades the screen to black at the fast speed (callback thread)." }
+GFX_FadeFromBlackFast = { addr = 0x8014EE68, type = "func", source = "Fades the screen back in from black at the fast speed (callback thread)." }
+GFX_FadeToBlackSlow = { addr = 0x8014EE90, type = "func", source = "Fades the screen to black at the slow speed (callback thread)." }
+GFX_FadeFromBlackSlow = { addr = 0x8014EEB8, type = "func", source = "Fades the screen back in from black at the slow speed (callback thread)." }
+GFX_FadeToWhite = { addr = 0x8014EF30, type = "func", source = "Fades the screen to white at the normal speed (callback thread)." }
+GFX_FadeFromWhite = { addr = 0x8014EF58, type = "func", source = "Fades the screen back in from white at the normal speed (callback thread)." }
+GFX_FadeToBlackSlower = { addr = 0x8014F1AC, type = "func", source = "Fades the screen to black at the slower speed (callback thread)." }
+GFX_FadeFromBlackSlower = { addr = 0x8014F1D4, type = "func", source = "Fades the screen back in from black at the slower speed (callback thread)." }
+GFX_FadeToWhiteSlower = { addr = 0x8014F1FC, type = "func", source = "Fades the screen to white at the slower speed (callback thread)." }
+GFX_FadeFromWhiteSlower = { addr = 0x8014F224, type = "func", source = "Fades the screen back in from white at the slower speed (callback thread)." }
+GFX_FadeToBlackSlowest = { addr = 0x8014F438, type = "func", source = "Fades the screen to black at the slowest speed (callback thread)." }
 GFX_RunBlackFade = { addr = 0x8014F514, type = "func", source = "Fades the screen to black." }
 GFX_RunWhiteFade = { addr = 0x8014F5F0, type = "func", source = "Fades the screen to white." }
 GFX_StepScreenFade = { addr = 0x8014F704, type = "func", source = "Draws one step of a screen fade." }
