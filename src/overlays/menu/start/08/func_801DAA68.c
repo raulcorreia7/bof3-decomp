@@ -24,10 +24,10 @@ NON_MATCHING void func_801DAA68(void) {
     g_MenuPanelTasks[11].pos.y   = 0x10;
     g_MenuPanelTasks[11].unk_10  = 0;
     for (i = 0; i < 2; i++) {
-        rows[i].unk_00[1] = 6;
-        rows[i].unk_00[2] = 0xA;
-        rows[i].unk_00[0] = 0;
-        rows[i].unk_0A    = 0;
+        rows[i].handler = 6;
+        rows[i].mode    = 0xA;
+        rows[i].active  = 0;
+        rows[i].unk_0A  = 0;
     }
 
     i = 0;
