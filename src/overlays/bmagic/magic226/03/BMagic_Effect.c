@@ -31,7 +31,6 @@ MATCH void func_801EF048(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
-
 INCLUDE_ASM(func_801EF10C);
 
 INCLUDE_ASM(func_801EF310);
