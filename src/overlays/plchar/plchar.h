@@ -71,6 +71,55 @@
     g_Task->timer = 2;                                                                       \
     g_Task->header.step++
 
+/* The cell-code probe shared by the plchar character programs: the three cell codes
+ * that react start the image's own effect spawner CALLEE. Every change here must
+ * verify every member image. */
+#define CHAR_PROBE_CELL_CODE(CALLEE)                               \
+    s32 cell;                                                      \
+    s32 i;                                                         \
+    u32 roll;                                                      \
+    u8* record;                                                    \
+                                                                   \
+    cell = Area_GetCellCode(x, y);                                 \
+    if ((u8)(cell + 0x10) < 2 || (cell & BYTE_MASK) == 0xF4) {     \
+        CALLEE(0, x, y, cell & BYTE_MASK);                         \
+        if ((rand() & 7) >= 6) {                                   \
+            CALLEE(4, x, y, cell & BYTE_MASK);                     \
+        }                                                          \
+        SND_PlayCue(0x10B);                                        \
+        return 1;                                                  \
+    }                                                              \
+    if ((u8)(cell + 0xA) < 2) {                                    \
+        CALLEE(0, x, y, cell & BYTE_MASK);                         \
+        SND_PlayCue(0x10B);                                        \
+        roll = rand() & 0xF;                                       \
+        if (roll < 7) {                                            \
+            CALLEE(3, x, y, cell & BYTE_MASK);                     \
+            record = Item_GetRecord(ITEM_CAT_ITEM, 0x29);          \
+            for (i = 0; i < 12; i++) {                             \
+                g_TextVariables[0][i] = record[i];                 \
+            }                                                      \
+            D_801490E4[0] = 0;                                     \
+            if (Item_Add(ITEM_CAT_ITEM, 0x29, 1, 0) & BYTE_MASK) { \
+                SND_PlayCue(0x106);                                \
+                Resource_RequestArea(2);                           \
+            } else {                                               \
+                Resource_RequestArea(3);                           \
+            }                                                      \
+            g_Task->param.unk_0B = 2;                              \
+        } else if (roll >= 12) {                                   \
+            CALLEE(2, x, y, cell & BYTE_MASK);                     \
+            func_801C308C(0);                                      \
+            Char_LoseHP(1, g_GameState->leader_id);                \
+            Resource_RequestArea(0xD9);                            \
+            g_GameStateIndex     = 2;                              \
+            g_Task->param.unk_0B = 1;                              \
+        }                                                          \
+        g_GameStateIndex = 2;                                      \
+        return 1;                                                  \
+    }                                                              \
+    return 0;
+
 #define CHAR_LAUNCH_SCRIPT_PC 10
 
 extern u32      D_801CE400;

@@ -84,8 +84,9 @@ INCLUDE_ASM(func_801CFCD8);
 
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
-/* hint: twin of plp016 func_801CFD24 (matched there); sharing the body needs a game name for the cell probe, then one symbols.toml row per image. */
-INCLUDE_ASM(func_801D0148);
+MATCH s32 func_801D0148(s16 x, s16 y) {
+    CHAR_PROBE_CELL_CODE(func_801D0354);
+}
 
 /* blocker: save order; first diff: +0x4 s2 saved first (retail saves s3 first). */
 INCLUDE_ASM(func_801D0354);

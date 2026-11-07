@@ -27,3 +27,4 @@ extern void func_801CF564(void);
 #define PLCHAR_PREPARE_TURN func_801CF564
 
 #endif
+void func_801CF050(s32 kind, s32 x, s32 y, s32 code);
