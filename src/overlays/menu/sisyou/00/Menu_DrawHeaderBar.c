@@ -57,8 +57,8 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->y2 -= 3;
     primitive->v0 += 2;
     primitive->v2 -= 3;
-    primitive->clut = GetClut(clut_x, 481);
-    width_plus_1    = width + 1;
+    primitive->clut  = GetClut(clut_x, 481);
+    width_plus_1     = width + 1;
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, 0x28);
     half_width = (s16)((((u16)width_plus_1) - 4) >> 1);
@@ -71,7 +71,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
            (s16)(((s16)(x + 2)) + half_width), bottom_y);
     setUV4(primitive, 0, 0, (u8)half_inner, 0, 0, bottom_v, (u8)half_inner, bottom_v);
     setRGB0(primitive, 0xAC, 0xAC, 0xAC);
-    primitive->clut = GetClut(clut_x, 481);
+    primitive->clut  = GetClut(clut_x, 481);
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, 0x28);
     odd_width_u16 = (u16)odd_width;
@@ -90,7 +90,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setUV4(primitive, 0, 0, (u8)(half_inner + odd_width_u16), 0, 0, bottom_v, (u8)(half_inner + odd_width_u16),
            bottom_v);
     setRGB0(primitive, 0xAC, 0xAC, 0xAC);
-    primitive->clut = GetClut(clut_x, 481);
+    primitive->clut  = GetClut(clut_x, 481);
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, 0x28);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -119,7 +119,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->v1 += 2;
     primitive->v2--;
     primitive->v3 -= 3;
-    primitive->clut = GetClut(clut_x, 481);
+    primitive->clut  = GetClut(clut_x, 481);
     primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, 0x28);
     texture_window            = (RECT*)g_GfxPrimCursor;
