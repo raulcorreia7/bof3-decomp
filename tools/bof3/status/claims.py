@@ -108,7 +108,9 @@ def _marker_lines(path: Path) -> list[tuple[str, str]]:
 
 def read(path: Path, unit_address: int, names: Mapping[str, int] = NO_NAMES) -> Marker:
     """Read the marker for `unit_address`, preserving single-marker files."""
-    found = [(claim, _named_address(line, names)) for claim, line in _marker_lines(path)]
+    found = [
+        (claim, _named_address(line, names)) for claim, line in _marker_lines(path)
+    ]
     if not found:
         return Marker(kind=None, foreign=None, claim=None, path=path)
     for claim, named in found:
