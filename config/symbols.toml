@@ -708,6 +708,7 @@ g_BMagicEffectModes = { addr = 0x801F0994, source = "Handlers of magic099 (Myoll
 Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true }
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic100 (Cyclone)." }
 Effect_PlayOnZeroTick = { addr = 0x801EEDF8, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic100 (Cyclone)." }
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 g_BMagicEffectModes = { addr = 0x801EFDCC, source = "Handlers of magic100 (Cyclone), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic101/03"]
