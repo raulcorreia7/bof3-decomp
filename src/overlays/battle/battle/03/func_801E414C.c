@@ -34,8 +34,9 @@ MATCH void func_801E414C(void) {
             }
         }
         Battle_ClearSlotPending(FIELD(u8, g_Task, 0x05));
-        enemy                          = g_BattleCurrentEnemy;
-        flags                          = enemy->turn.damage_flags.value & ~0x70;
+        enemy = g_BattleCurrentEnemy;
+        flags =
+            enemy->turn.damage_flags.value & ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
         enemy->turn.damage_flags.value = flags & ~0x200;
         FIELD(s8, g_Task, 0x01)        = 2;
         FIELD(s8, g_Task, 0x02)        = 0;

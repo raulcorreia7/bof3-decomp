@@ -5,8 +5,10 @@ MATCH void func_801E1050(void) {
     PartyBattler* work;
 
     Battle_ClearSlotPending(g_Task->slot);
-    work                          = g_GameState;
-    work->turn.damage_flags.value = work->turn.damage_flags.value & ~0xF0u;
+    work = g_GameState;
+    work->turn.damage_flags.value =
+        work->turn.damage_flags.value &
+        ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED | COMBATANT_FLAG_DAMAGE_NUMBER);
     work->turn.damage_flags.value = work->turn.damage_flags.value & ~COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
     g_Task->header.mode           = 3;
     g_Task->header.step           = 0;

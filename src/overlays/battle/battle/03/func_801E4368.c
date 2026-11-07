@@ -12,7 +12,7 @@ MATCH u8 func_801E4368(void) {
             ((BATTLE_CURRENT_ENEMY_PTR->turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
             return 0u;
         }
-        if ((BATTLE_CURRENT_ENEMY_PTR->event_flags & 2u) == 0u) {
+        if ((BATTLE_CURRENT_ENEMY_PTR->event_flags & ENEMY_EVENT_REPRISAL) == 0u) {
             return 0u;
         }
         if ((BATTLE_CURRENT_ENEMY_PTR->turn.damage_flags.value & COMBATANT_FLAG_REPRISAL) != 0u) {

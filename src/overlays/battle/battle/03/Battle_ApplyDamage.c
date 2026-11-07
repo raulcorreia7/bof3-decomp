@@ -33,7 +33,7 @@ MATCH u32 Battle_ApplyDamage(u8 attacker, u8 target) {
             g_BattlePartyBattlers[target].chr.hp -= damage;
         } else {
             g_BattlePartyBattlers[target].chr.hp = g_BattlePartyBattlers[target].chr.stats.max_hp;
-            g_BattlePartyBattlers[target].turn.target_flags |= 4;
+            g_BattlePartyBattlers[target].turn.target_flags |= BATTLE_HIT_HP_MAX;
         }
     } else if (ENEMY_COMBATANT(target).hp != 0xFFFF) {
         if ((ENEMY_COMBATANT(target).turn.damage_flags.value & COMBATANT_FLAG_HURT_REACTION) &&
@@ -53,7 +53,7 @@ MATCH u32 Battle_ApplyDamage(u8 attacker, u8 target) {
             ENEMY_COMBATANT(target).hp -= damage;
         } else {
             ENEMY_COMBATANT(target).hp = ENEMY_COMBATANT(target).stats.max_hp;
-            ENEMY_COMBATANT(target).turn.target_flags |= 4;
+            ENEMY_COMBATANT(target).turn.target_flags |= BATTLE_HIT_HP_MAX;
         }
     }
     if (attacker < 3 && g_BattlePartyBattlers[attacker].unk_13A[2] == 5 && damage != 0) {

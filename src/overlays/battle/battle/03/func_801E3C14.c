@@ -43,7 +43,7 @@ MATCH void func_801E3C14(void) {
         g_BattleCurrentEnemy->unk_E4(1);
     }
     lock_work = g_BattleCurrentEnemy;
-    if ((lock_work->turn.target_flags & 1) && lock_work->turn.hp_change == 0) {
+    if ((lock_work->turn.target_flags & BATTLE_HIT_HP) && lock_work->turn.hp_change == 0) {
         g_Task->header.step = 3;
         return;
     }
@@ -61,11 +61,11 @@ MATCH void func_801E3C14(void) {
         }
     }
     hit_work = g_BattleCurrentEnemy;
-    if (hit_work->turn.target_flags & 1) {
+    if (hit_work->turn.target_flags & BATTLE_HIT_HP) {
         func_800AAC88(hit_work->turn.hp_change, g_Task->slot);
         hit_work = g_BattleCurrentEnemy;
     }
-    if (hit_work->turn.target_flags & 2) {
+    if (hit_work->turn.target_flags & BATTLE_HIT_AP) {
         func_800AAEBC(hit_work->turn.ap_change, g_Task->slot);
     }
     pending = &g_BattlePendingStatus;

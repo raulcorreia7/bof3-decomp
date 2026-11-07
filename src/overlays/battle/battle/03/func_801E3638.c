@@ -9,7 +9,7 @@ MATCH void func_801E3638(void) {
 
     D_801EB3FC[g_Task->header.step]();
     if (g_BattleCurrentEnemy->status & STATUS_CONFUSED) {
-        if (g_BattleCurrentEnemy->turn.damage_flags.value & 0x800) {
+        if (g_BattleCurrentEnemy->turn.damage_flags.value & COMBATANT_FLAG_UNK_11) {
             if ((s8)++g_BattleEffects[g_Task->slot].unk_09 >= 12) {
                 g_BattleCurrentEnemy->turn.damage_flags.value ^= 0x800;
             }

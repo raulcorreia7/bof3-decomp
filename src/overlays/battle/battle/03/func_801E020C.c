@@ -40,7 +40,7 @@ MATCH void func_801E020C(void) {
             *half = (*half & ~BATTLE_STATE_REPRISAL_PENDING) | BATTLE_STATE_REPRISAL_DONE;
         }
         Battle_ClearSlotPending(g_Task->slot);
-        g_GameState->turn.damage_flags.value &= ~0x70;
+        g_GameState->turn.damage_flags.value &= ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
         if ((func_801E0E0C() & BYTE_MASK) != 0) {
             /* FAKE: flag pointer; the direct store scores 97.37%. */
             volatile u8* flag;

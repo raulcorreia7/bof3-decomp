@@ -16,7 +16,7 @@ MATCH void func_8009DE8C(void) {
         value = ENEMY_COMBATANT(sel).stats.max_hp;
         if (value == 0xFFFFu) {
             g_BattleTargetRecord->hp_change = -1;
-            ENEMY_COMBATANT(ctx->sel).turn.target_flags |= 4u;
+            ENEMY_COMBATANT(ctx->sel).turn.target_flags |= BATTLE_HIT_HP_MAX;
             return;
         }
         /* Negation materialized first, matching the original's evaluation order. */

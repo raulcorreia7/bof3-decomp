@@ -252,6 +252,19 @@ typedef struct EnemyDrop {
 
 ASSERT_SIZE(EnemyDrop, 0x4);
 
+/* Enemy.event_flags and EnemyBattler.event_flags: what the enemy AI may do. The top three bits allow the defend, escape
+ * and ability actions the AI picks from. */
+typedef enum EnemyEventFlags {
+    ENEMY_EVENT_UNK_0    = 1 << 0,
+    ENEMY_EVENT_REPRISAL = 1 << 1,
+    ENEMY_EVENT_EVADE    = 1 << 2,
+    ENEMY_EVENT_CRITICAL = 1 << 3,
+    ENEMY_EVENT_UNK_4    = 1 << 4,
+    ENEMY_EVENT_ABILITY  = 1 << 5,
+    ENEMY_EVENT_ESCAPE   = 1 << 6,
+    ENEMY_EVENT_DEFEND   = 1 << 7,
+} EnemyEventFlags;
+
 typedef struct Enemy {
     u8           name[ENEMY_NAME_LENGTH];
     EnemyIdCode  enemy_id;
