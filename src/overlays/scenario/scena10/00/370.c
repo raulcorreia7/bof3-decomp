@@ -110,7 +110,16 @@ MATCH void func_801FC220(void) {
 
 INCLUDE_ASM(func_801FC280);
 
-INCLUDE_ASM(func_801FC830);
+MATCH void func_801FC830(void) {
+    if (g_SceneState.step_05 == 1) {
+        if (g_GameStateIndex != 2) {
+            func_801BE1B0(2);
+            SYS_SetFlag(g_SceneFlags, 0x34);
+            g_SceneState.state_04 = 0;
+            g_SceneState.step_05  = 0;
+        }
+    }
+}
 
 MATCH void func_801FC8A0(void) {
     if (g_SceneState.step_05 == 0x23) {

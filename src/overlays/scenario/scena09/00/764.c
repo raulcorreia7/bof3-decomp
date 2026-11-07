@@ -25,7 +25,15 @@ MATCH void func_801F73F0(void) {
 
 INCLUDE_ASM(func_801F7424);
 
-INCLUDE_ASM(func_801F7574);
+MATCH void func_801F7574(void) {
+    u8* row;
+    u8  i;
+
+    row = MEM_PTR(u8, 0x800E5000u) + g_Task->unk_06 * 0x500;
+    for (i = 0; i < 0x20; i++, row += 0x28) {
+        *row = 0;
+    }
+}
 
 INCLUDE_ASM(func_801F75BC);
 
@@ -297,8 +305,15 @@ MATCH s32 func_801FDBA8(void) {
     return 1;
 }
 
-/* blocker: return 1 materialized before the store constants; first diff: +0x28 li v1,20 against li v0,1. */
-INCLUDE_ASM(func_801FDC1C);
+MATCH s32 func_801FDC1C(void) {
+    if (SYS_TestFlag(g_SceneFlags, 0x2C) == 0) {
+        Game_SetScriptActive();
+        g_SceneState.step_05  = 0x14;
+        g_SceneState.state_04 = 9;
+        return 1;
+    }
+    return -1;
+}
 
 /* blocker: li v0,1 in each Game_SetScriptActive delay slot; first diff: +0x18 bnez targets +0x74 against +0x70. */
 INCLUDE_ASM(func_801FDC70);

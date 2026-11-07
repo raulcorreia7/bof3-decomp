@@ -310,7 +310,17 @@ MATCH void func_801F98B0(void) {
     slots[0x11][1]++;
 }
 
-INCLUDE_ASM(func_801F98E0);
+MATCH void func_801F98E0(void) {
+    if (--g_Task->timer == 0) {
+        g_Task->pos.x = 0x510000;
+        g_Task->pos.y = 0x420000;
+        g_Task->pos.z = 0x2C00000;
+        g_Task->vz    = 0x800000;
+        g_Task->header.mode += 1;
+        SND_PlayCue(0x202);
+        SND_PlayCue(0x203);
+    }
+}
 
 INCLUDE_ASM(func_801F995C);
 
@@ -358,7 +368,13 @@ INCLUDE_ASM(func_801F9E00);
 
 INCLUDE_ASM(func_801F9E50);
 
-INCLUDE_ASM(func_801F9EC4);
+MATCH void func_801F9EC4(void) {
+    g_Task->vx -= 0x20000;
+    func_801FA19C(&g_Task->pos, &g_Task->vx);
+    if (g_Task->vx == 0x98000) {
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801F9F2C(void) {
     Scene_AdvanceActorStep();

@@ -27,6 +27,7 @@ MATCH void func_801EEF24(void) {
     g_ScriptBank = 0x800D3800;
 }
 
+/* hint: g_Task loads before the effect battler for the position copy and the battler z loads before the unk_25 store; the candidate loads the two in the other order. First differing instruction: lui v1,0x1f80 at +0x2C. */
 INCLUDE_ASM(func_801EEFC8);
 
 INCLUDE_ASM(func_801EF148);
