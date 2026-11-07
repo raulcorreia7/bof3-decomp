@@ -1,8 +1,9 @@
 #include "area068_13.h"
 
-MATCH void func_801F3538(void) {
+/* func_801F3538 */
+MATCH void Well_BeginRaise(void) {
     if (g_InputPressed == PADRdown) {
-        D_801F4E04 += 1;
+        g_WellPressCount += 1;
         g_Task->header.mode = 0x10;
     }
 }

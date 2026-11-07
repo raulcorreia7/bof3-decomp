@@ -2790,6 +2790,25 @@ Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "stores 
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
 g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+Well_Begin = { addr = 0x801F2DE8, type = "func", source = "starts the well minigame: picks the lowering time limit from the random table, clears the press counters and sets task mode 1" }
+Well_TickLowerFrameB = { addr = 0x801F2E68, type = "func", source = "ticks the bucket-lowering timer with the splash cue 0x200; a Triangle press counts and sets task mode 3, running out stores the count and sets mode 0xA" }
+Well_WaitLowerPress = { addr = 0x801F2F24, type = "func", source = "counts a Triangle press and sets task mode 4 until 0x1C idle frames pass, then mode 0x16" }
+Well_TickLowerFrameA = { addr = 0x801F2F98, type = "func", source = "ticks the bucket-lowering timer; a Triangle press counts and sets task mode 1, running out stores the count and sets mode 0xA" }
+Well_FinishLowering = { addr = 0x801F3074, type = "func", source = "sets task mode 0x16 when no press was counted, else clears the idle frames and sets mode 0xB" }
+Well_ReadSwishInput = { addr = 0x801F30B0, type = "func", source = "reads a directional press for the bucket swish, plays cue 0x202, nudges the camera and sets task mode 0xC" }
+Well_StepSwish = { addr = 0x801F3304, type = "func", source = "moves the camera back along the swish for 8 steps, then snaps it and sets task mode 0xF" }
+Well_BeginRaise = { addr = 0x801F3538, type = "func", source = "counts the first X press of the raising phase and sets task mode 0x10" }
+Well_TickRaiseFrameA = { addr = 0x801F3578, type = "func", source = "ticks the bucket-raising timer; an X press counts and sets task mode 0x11, 0x1C idle frames set mode 0x16" }
+Well_WaitRaisePress = { addr = 0x801F3658, type = "func", source = "counts an X press and sets task mode 0x12 until 0x1C idle frames pass, then mode 0x16" }
+Well_TickRaiseFrameB = { addr = 0x801F36CC, type = "func", source = "ticks the bucket-raising timer; an X press counts and sets task mode 0x10, running out sets mode 0x14" }
+Well_CheckRaiseCount = { addr = 0x801F3764, type = "func", source = "sets task mode 0x15 when the raising count is within one of the lowering count, else mode 0x16" }
+g_WellLowerTimer = { addr = 0x801F4DFC, source = "frames left in the well minigame's bucket-lowering phase; the Triangle presses are counted until it runs out" }
+g_WellRaiseTimer = { addr = 0x801F4E00, source = "frames left in the well minigame's bucket-raising phase; the X presses are counted until it runs out" }
+g_WellPressCount = { addr = 0x801F4E04, source = "button presses counted so far in the current well minigame phase" }
+g_WellLowerCount = { addr = 0x801F4E08, source = "Triangle presses counted when the lowering phase ended; the raising phase must match it within one" }
+g_WellIdleFrames = { addr = 0x801F4E0C, source = "frames since the last button press in the well minigame; the phase ends at 0x1C" }
+g_WellSwishStep = { addr = 0x801F4E10, source = "steps taken by the bucket swish in the well minigame; it settles at 8" }
+g_WellSwishButtons = { addr = 0x801F4E14, source = "directional buttons of the last swish input in the well minigame" }
 
 ["emi/world01/area069/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }

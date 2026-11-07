@@ -1,14 +1,15 @@
 #include "area068_13.h"
 
-MATCH s32 func_801F3658(void) {
+/* func_801F3658 */
+MATCH s32 Well_WaitRaisePress(void) {
     Actor* work;
     u8     step;
 
     if (g_InputPressed == PADRdown) {
-        D_801F4E04++;
+        g_WellPressCount++;
     }
-    D_801F4E0C++;
-    if (D_801F4E0C >= 0x1C) {
+    g_WellIdleFrames++;
+    if (g_WellIdleFrames >= WELL_IDLE_FRAMES_MAX) {
         work = g_Task;
         step = 0x16;
     } else {

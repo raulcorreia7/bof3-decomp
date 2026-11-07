@@ -30,19 +30,19 @@ Totals from `tools/quality.py`, which rewrites the table below on every `pre-pus
 
 | Subsystem        | Matched functions | `addr` | `names` | `casts` | `harmful` | `twins` | `pasted` |
 | ---------------- | ----------------: | -----: | ------: | ------: | --------: | ------: | -------: |
-| Executable       |               450 |    135 |    1787 |     190 |        45 |       0 |        0 |
-| Game tables      |               643 |    570 |    2280 |     166 |        50 |       0 |        0 |
+| Executable       |               450 |    135 |    1765 |     190 |        45 |       0 |        0 |
+| Game tables      |               643 |    570 |    2062 |     166 |        50 |       0 |        0 |
 | Logo             |                11 |      0 |      54 |       0 |         0 |       0 |        0 |
-| Shared bodies    |                20 |      0 |      21 |       0 |         0 |       0 |        0 |
-| Area             |              2315 |   2197 |    3612 |     177 |        31 |      21 |        0 |
+| Shared bodies    |                20 |      0 |      18 |       0 |         0 |       0 |        0 |
+| Area             |              2315 |   2185 |    3006 |     177 |        31 |      21 |        0 |
 | Battle           |               898 |    849 |    2287 |     208 |        81 |       0 |        0 |
-| Battle magic     |              1083 |    965 |    2392 |      10 |         0 |       8 |        0 |
-| Boss             |               654 |    518 |     579 |       6 |         0 |       4 |        0 |
+| Battle magic     |              1083 |    965 |    2390 |      10 |         0 |       8 |        0 |
+| Boss             |               654 |    518 |     576 |       6 |         0 |       4 |        0 |
 | Fairy Village    |               151 |    140 |     502 |      17 |         3 |       0 |        0 |
 | Menu             |               648 |    576 |    2299 |      58 |        18 |       0 |        0 |
-| Player character |               263 |    188 |     274 |       0 |         5 |       0 |        0 |
-| Scenario         |               833 |    783 |    1022 |      16 |         4 |       6 |        0 |
+| Player character |               263 |    188 |     260 |       0 |         5 |       0 |        0 |
+| Scenario         |               833 |    783 |     889 |      16 |         4 |       6 |        0 |
 | Title            |                20 |      0 |      12 |       3 |         0 |       0 |        0 |
-| Total            |              7989 |   6921 |   17121 |     851 |       237 |      39 |        0 |
+| Total            |              7989 |   6909 |   16120 |     851 |       237 |      39 |        0 |
 
 <!-- quality:end -->
