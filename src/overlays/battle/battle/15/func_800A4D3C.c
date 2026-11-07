@@ -18,13 +18,13 @@ MATCH void func_800A4D3C(void) {
     padp  = &g_InputPressed;
     input = INPUT_REPEATED(*padp, (PADLup | PADLdown | PADL1 | PADR1));
     pad   = *padp;
-    if (pad & D_80145AC4) {
+    if (pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         state = (u8*)&g_BattleUIState;
         *state += 1;
         return;
     }
-    if (pad & D_80145AC2) {
+    if (pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (func_800A4FD8() & BYTE_MASK) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             g_BattleUIState = 5;

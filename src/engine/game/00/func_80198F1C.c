@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_80198F1C(void) {
-    if ((g_InputHeld & D_80145ABA) == 0) {
+    if ((g_InputHeld & g_InputMasks[INPUT_SLOT_LOOK]) == 0) {
         if (g_AreaCameraAngle.vz >= ANGLE_45 + 1) {
             D_80143BB1 = 0;
         } else if (g_AreaCameraAngle.vz < ANGLE_45) {

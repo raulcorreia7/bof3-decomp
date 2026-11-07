@@ -94,7 +94,7 @@ MATCH void func_801D28D0(void) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
     if (panel->confirm_gate == 0) {
-        if ((g_InputPressed & D_80145AC2) != 0) {
+        if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0) {
             selected_item      = (g_ShopItemId = D_801C893C[panel->group][panel->group_cursor]);
             g_ShopItemCategory = panel->group;
             D_80148628         = panel->pos.x + 7;
@@ -114,7 +114,7 @@ MATCH void func_801D28D0(void) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;
         }
-        if (g_InputPressed & D_80145AC4) {
+        if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
             SND_PlayCue(EMI_CUE_ID(1, 6));
             D_8014842F = 1;
             D_80148654 = 7;

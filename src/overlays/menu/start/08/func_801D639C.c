@@ -63,7 +63,7 @@ MATCH void func_801D639C(void) {
         }
     }
     slot_flag = func_801D70EC() & BYTE_MASK;
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (slot_flag != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             Item_Add(group_index, *choice, 1, 0);
@@ -74,7 +74,7 @@ MATCH void func_801D639C(void) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
         }
     }
-    if (g_InputPressed & D_80145AC4) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         g_MenuPanelTasks[19].unk_0B = 1;
         g_MenuPanelTasks[21].active = 0;

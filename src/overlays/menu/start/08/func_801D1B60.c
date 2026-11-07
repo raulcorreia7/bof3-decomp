@@ -43,7 +43,7 @@ MATCH void func_801D1B60(void) {
             D_80148655 = 0;
         }
     }
-    if (g_InputPressed & D_80145AC4) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         func_801D21F4();
         step     = &D_80148651;
         counter  = &g_GameEntrySubstate;
@@ -53,7 +53,7 @@ MATCH void func_801D1B60(void) {
         *counter = total;
         return;
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         selection = (s8*)&D_80148655;
         if (*selection == 6) {
             if (g_MenuPanelTasks[9].unk_0C == 0) {

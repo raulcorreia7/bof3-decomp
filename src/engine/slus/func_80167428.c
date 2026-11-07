@@ -54,7 +54,7 @@ NON_MATCHING void func_80167428(void) {
         FIELD(s8, (g_Task), 0x1u) = 3;
         return;
     }
-    if (D_80145ABA & D_8014625C) {
+    if (g_InputMasks[INPUT_SLOT_LOOK] & D_8014625C) {
         g_GameState->counter_11C = 3;
         g_GameEntrySubstate += 1;
         FIELD(s8, (g_Task), 0x1u) = 1;
@@ -97,7 +97,7 @@ NON_MATCHING void func_80167428(void) {
             g_AreaCameraHeightStep   = 0;
             val4                     = 1;
         } else {
-            if (D_80145AB6 & D_8014625C) {
+            if (g_InputMasks[INPUT_SLOT_INTERACT] & D_8014625C) {
                 if ((D_80144956 ^ 1) != 0) {
                     goto block_28; /* retail branch */
                 }

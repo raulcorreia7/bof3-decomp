@@ -29,7 +29,7 @@ MATCH void func_801D3D84(void) {
     if (prev != D_801E60F0) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         mode       = D_801E60F0;
         D_80148654 = 0;
         D_801E60F4 = 0;
@@ -50,7 +50,7 @@ MATCH void func_801D3D84(void) {
         D_80148652 += 2;
         return;
     }
-    if ((g_InputPressed & D_80145AC4) == 0) {
+    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) == 0) {
         return;
     }
     SND_PlayCue(EMI_CUE_ID(1, 6));

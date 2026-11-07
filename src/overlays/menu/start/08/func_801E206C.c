@@ -25,8 +25,8 @@ NON_MATCHING void func_801E206C(void) {
     sel = g_InputPressed & (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADR1);
     if (sel != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
-        g_InputMasks &= 0xFFFC;
-        D_80145AC2 &= 0xFFFC;
+        g_InputMasks[INPUT_SLOT_ACTION] &= 0xFFFC;
+        g_InputMasks[INPUT_SLOT_CONFIRM] &= 0xFFFC;
         i = 0;
         while (!((sel >> i) & 1)) {
             i++;
@@ -41,16 +41,16 @@ NON_MATCHING void func_801E206C(void) {
             } while (i < 16);
         }
         for (i = 0; i < 6; i++) {
-            if (((u16*)&g_InputMasks)[D_801ECD14[i]] & sel) {
+            if (g_InputMasks[D_801ECD14[i]] & sel) {
                 break;
             }
         }
         if (i != 6) {
-            ((u16*)&g_InputMasks)[D_801ECD14[i]] = ((u16*)&g_InputMasks)[D_801ECD0C[(s8)D_80148655]];
+            g_InputMasks[D_801ECD14[i]] = g_InputMasks[D_801ECD0C[(s8)D_80148655]];
         }
-        ((u16*)&g_InputMasks)[D_801ECD0C[(s8)D_80148655]] = sel;
-        g_InputMasks |= 3;
-        D_80145AC2 |= 3;
+        g_InputMasks[D_801ECD0C[(s8)D_80148655]] = sel;
+        g_InputMasks[INPUT_SLOT_ACTION] |= 3;
+        g_InputMasks[INPUT_SLOT_CONFIRM] |= 3;
     }
     bits = g_InputPressed;
     keys = INPUT_GetRepeatedButtons(bits & INPUT_DIRECTIONAL);
