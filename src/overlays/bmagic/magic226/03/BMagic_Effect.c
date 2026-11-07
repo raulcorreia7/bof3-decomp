@@ -17,7 +17,19 @@ MATCH void func_801EF004(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EF048);
+MATCH void func_801EF048(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801F0C44, g_Task->header.step);
+    if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
+        func_800AF764();
+        func_8014D290();
+        Effect_SetActiveActorMatrix();
+        func_801EF814();
+        func_801EFA64();
+        PopMatrix();
+    }
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
 
 INCLUDE_ASM(func_801EF10C);
 
@@ -86,7 +98,22 @@ INCLUDE_ASM(func_801F055C);
 /* blocker: source pointer register; first diff: lui a2 (retail) against lui a3 (candidate). */
 INCLUDE_ASM(func_801F061C);
 
-INCLUDE_ASM(func_801F068C);
+MATCH void func_801F068C(void) {
+    PartyBattler* battler;
+    PartyBattler* task;
+
+    g_Task->unk_09 += 1;
+    g_Task->timer -= 2;
+    battler           = g_BattleEffectBattler;
+    task              = g_Task;
+    task->pos.x.fixed = battler->pos.x.fixed;
+    task->pos.y.fixed = battler->pos.y.fixed;
+    task->pos.z.fixed -= task->unk_14;
+    if (task->timer == 0) {
+        battler->unk_04 -= 1;
+        Actor_Clear();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 

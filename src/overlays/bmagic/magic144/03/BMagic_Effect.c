@@ -4,7 +4,25 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC04);
+MATCH void func_801EEC04(void) {
+    PartyBattler* saved_task;
+    PartyBattler* saved_battler;
+    u8            i;
+
+    BMagic_DispatchTaskPair(func_801EED04, Effect_StartOnZeroTick);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (D_801F050C[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_task            = g_Task;
+            saved_battler         = g_BattleEffectBattler;
+            g_Task                = (PartyBattler*)&D_801F050C[i];
+            g_BattleEffectBattler = D_801F050C[i].target.party;
+            func_801EF510();
+            g_BattleEffectBattler = saved_battler;
+            g_Task                = saved_task;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED04);
 
@@ -84,6 +102,7 @@ MATCH void func_801EF654(void) {
 
 INCLUDE_ASM(func_801EF818);
 
+/* hint: first differing instruction is the flags beqz at +0x48 (candidate four instructions longer): retail loads unk_30 inside each arm of the param.unk_0B == 1 test, the candidate loads it after the if. */
 INCLUDE_ASM(func_801EFF74);
 
 #include "overlays/bmagic/Effect_AppearAtTarget.h"

@@ -4,7 +4,26 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC10);
+MATCH void func_801EEC10(void) {
+    BattleHandlerTable3 handlers = D_801EEC04;
+    PartyBattler*       saved_task;
+    PartyBattler*       saved_battler;
+    u8                  i;
+
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (D_801F0578[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_task            = g_Task;
+            saved_battler         = g_BattleEffectBattler;
+            g_Task                = (PartyBattler*)&D_801F0578[i];
+            g_BattleEffectBattler = D_801F0578[i].target.party;
+            func_801EFD50();
+            g_BattleEffectBattler = saved_battler;
+            g_Task                = saved_task;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED18);
 
@@ -85,7 +104,22 @@ MATCH void func_801EFD94(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFE1C);
+void func_801EFE1C(void) {
+    s32  r;
+    s32  temp_v1;
+    s16* angle = &D_1F800004;
+
+    r                   = rand();
+    temp_v1             = g_Task->param.unk_0B;
+    g_Task->unk_0C      = (r & 7) + 8;
+    *angle              = temp_v1 << 9;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin(*angle) * g_Task->unk_0C);
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos(*angle) * g_Task->unk_0C);
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->unk_09      = 8;
+    g_Task->timer       = 0x10;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EFF24(void) {
     PartyBattler* task;

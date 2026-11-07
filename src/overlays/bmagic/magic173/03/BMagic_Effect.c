@@ -18,7 +18,18 @@ MATCH void func_801EEDF0(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EEE34);
+MATCH void func_801EEE34(void) {
+    SYS_DISPATCH_BYTE(D_801F0990, g_Task->header.step);
+    if (g_Task->unk_04 != 0) {
+        if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+            func_801EF4EC();
+        }
+    } else {
+        if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+            func_801EFA34();
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EEEEC);
 
@@ -72,7 +83,18 @@ MATCH void func_801F03A0(void) {
     D_801F09B0[g_Task->unk_04][g_Task->param.unk_0B].y = -1;
 }
 
-INCLUDE_ASM(func_801F0488);
+MATCH void func_801F0488(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801F09A0, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_800AF764();
+        func_801F075C();
+        if (g_Task->header.step < 3) {
+            func_8014D290();
+        }
+    }
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
 
 MATCH void func_801F0540(void) {
     g_Task->unk_25      = 0x1D;

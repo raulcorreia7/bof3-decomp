@@ -14,6 +14,7 @@ extern Actor D_80143F48;
 
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F47E8[];
+extern u8       D_801F4D94;
 extern u8       D_801F4DBC[];
 extern Callback D_801F4DC4[];
 

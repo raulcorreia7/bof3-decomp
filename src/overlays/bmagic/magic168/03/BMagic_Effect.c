@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC28);
+#include "overlays/bmagic/func_801EEC28_3.h"
 
 #include "overlays/bmagic/func_801EED38_2.h"
 
@@ -20,7 +20,7 @@ INCLUDE_ASM(func_801EEC28);
 
 #include "overlays/bmagic/func_801EF338.h"
 
-INCLUDE_ASM(func_801EF37C);
+#include "overlays/bmagic/func_801EF37C.h"
 
 INCLUDE_ASM(func_801EF478);
 

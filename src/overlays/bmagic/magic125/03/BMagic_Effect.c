@@ -4,7 +4,25 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC04);
+MATCH void func_801EEC04(void) {
+    PartyBattler* saved_task;
+    PartyBattler* saved_battler;
+    u8            i;
+
+    BMagic_DispatchTaskPair(func_801EED04, Effect_PlayOnZeroTick);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_task            = g_Task;
+            saved_battler         = g_BattleEffectBattler;
+            g_Task                = (PartyBattler*)&BMAGIC_EFFECT_SLOTS[i];
+            g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
+            func_801EFB48();
+            g_BattleEffectBattler = saved_battler;
+            g_Task                = saved_task;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED04);
 
@@ -14,7 +32,20 @@ MATCH void func_801EEEC0(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
-INCLUDE_ASM(func_801EEF04);
+MATCH void func_801EEF04(void) {
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 2), 2, g_Task);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        if ((g_FrameCount & 1) == 0) {
+            g_Task->unk_5D = (rand() & 3) + 4;
+            g_Task->unk_5E = (rand() & 3) + 4;
+            g_Task->unk_5F = (rand() & 3) + 4;
+        }
+        Effect_SetActorMatrix();
+        func_801EF258();
+        func_801EF508();
+        PopMatrix();
+    }
+}
 
 MATCH void func_801EEFF8(void) {
     u8 count;
@@ -122,6 +153,7 @@ INCLUDE_ASM(func_801EFB8C);
 
 INCLUDE_ASM(func_801EFCE4);
 
+/* hint: matches the plain draft except the angle sum (unk_09 + (unk_0B & 7) * 8) << 6 adds with the operands swapped and the z add loads the work pointer into a1. */
 INCLUDE_ASM(func_801EFE8C);
 
 INCLUDE_ASM(func_801EFFC8);

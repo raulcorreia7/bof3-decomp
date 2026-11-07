@@ -19,5 +19,9 @@ u8 func_801F04A4(void);
 extern BMagicEffectWork D_801F0670[];
 #define BMAGIC_EFFECT_SLOTS D_801F0670
 #define BMAGIC_EFFECT_COUNT 160
+extern BattleHandlerTable3 D_801EEC1C;
+void                       func_801F00C4(void);
+void                       func_801EFBF8(u16 angle, u16 radius);
+void                       func_801EFE2C(u16 angle, u16 radius);
 
 #endif
