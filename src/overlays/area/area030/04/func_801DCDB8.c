@@ -43,10 +43,10 @@ MATCH void func_801DCDB8(void) {
 
     if (!(D_80144287 & 0x80)) {
         if (!(D_80144287 & 1)) {
-            value = D_80145028; /* FISHING_ROD */
+            value = g_FishingRod; /* FISHING_ROD */
             value = (value != 0) ? value + 4 : 0xFFFF;
         } else {
-            value = D_80145026; /* FISHING_LURE */
+            value = g_FishingLure; /* FISHING_LURE */
             value = (value != 0) ? value + 4 : 0xFFFF;
         }
         D_801442AC = value;

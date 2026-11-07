@@ -1,13 +1,13 @@
 #include "engine/slus/slus.h"
 
 /* starts a volume sweep on the voice from the current level in
- * D_80148FC8 to the target level in D_80148FF8, then records the target as the
+ * g_SndVoiceVolume to the target level in g_SndVoiceTargetVolume, then records the target as the
  * current level.
  */
 MATCH void SND_StartVolumeSweep(s32 voice) {
     u16 index;
 
     index = voice;
-    SsUtAutoVol(index, ((s8*)&D_80148FC8)[index], (s8)D_80148FF8[index], 1);
-    ((s8*)&D_80148FC8)[index] = D_80148FF8[index];
+    SsUtAutoVol(index, g_SndVoiceVolume[index], (s8)g_SndVoiceTargetVolume[index], 1);
+    g_SndVoiceVolume[index] = g_SndVoiceTargetVolume[index];
 }

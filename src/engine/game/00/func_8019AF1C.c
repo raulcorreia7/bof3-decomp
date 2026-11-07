@@ -7,8 +7,8 @@ MATCH void func_8019AF1C(void) {
     dist = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     work = g_Task;
     if (dist >= COORD_INT(work->pos.z) || (work->header.flags & ACTOR_FLAG_OFFSCREEN) || work->header.mode == 0) {
-        work->vz      = D_801C8108[work->header.step][0];
-        work->gravity = D_801C810C[work->header.step][0];
+        work->vz      = s_ActorTossArcs[work->header.step].vz;
+        work->gravity = s_ActorTossArcs[work->header.step].gravity;
         work->header.mode++;
     }
     g_Task->pos.x.fixed += g_Task->vx;
