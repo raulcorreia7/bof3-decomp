@@ -345,6 +345,7 @@ MATCH void func_801FB414(void) {
 
 INCLUDE_ASM(func_801FB464);
 
+/* hint: the area-id and scene-flag chain with both u16 area compares is 8 bytes over (0x14C against 0x144); first differing instruction: lui v0,0x8014 at +0x14, because the compiler adds andi 0xFFFF after each lhu of g_GameAreaId where retail compares the loaded value directly. */
 INCLUDE_ASM(func_801FBA34);
 
 MATCH void Scene_JoinPartyRyuAdultPecoMomo(void) {

@@ -37,6 +37,7 @@ MATCH void func_801D1328(void) {
 
 INCLUDE_ASM(func_801D1364);
 
+/* hint: the pressed-button branch with the confirm and cancel masks is 4 bytes over (0x14C against 0x148); first differing instruction: lui v1,0x8014 at +0x0, because retail loads g_InputPressed before the mask and keeps &g_SceneEventSelection in s0 across the two func_801D36FC calls. */
 INCLUDE_ASM(func_801D1630);
 
 INCLUDE_ASM(func_801D1778);
