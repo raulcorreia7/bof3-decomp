@@ -24,7 +24,6 @@ extern u16 D_80146876;
 /* The scenario state byte the request writes. */
 /* The actor-record byte the copy reads. */
 /* The battle record rows whose first byte is a slot tag. */
-extern u8 D_80145F09[][BATTLE_PARTY_STRIDE];
 
 /* The overlay's frame update; the bounds checks and origin step run it. */
 /* func_801F30D4 (area158), func_801F30D4 (area160), func_801F30D4 (area161), func_801F30D4 (area162), func_801F30D4

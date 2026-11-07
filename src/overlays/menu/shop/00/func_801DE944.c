@@ -22,7 +22,7 @@ MATCH void func_801DE944(void) {
 
     func_801DF90C();
     party = g_PartyFieldOrder;
-    actor = D_80145F09;
+    actor = &g_BattlePartyBattlers[0].chr.character_id;
     mode  = actor[0];
     EMI_LoaderStreamFamily(party[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0);
     if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 0x77) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) ||
@@ -34,7 +34,7 @@ MATCH void func_801DE944(void) {
             row = 0;
             do {
                 TASK_SET(((u8*)g_BattlePartyBattlers + row));
-                func_801C1254(D_80145F09[row], i);
+                func_801C1254(FIELD(u8, &g_BattlePartyBattlers[0].chr.character_id, row), i);
                 Actor_SelectScript(TASK_BYTES[8]);
                 if (D_8014504A != 0) {
                     ACTOR_SET_MODE(0);
@@ -46,7 +46,7 @@ MATCH void func_801DE944(void) {
                 i++;
             } while (i < g_PartySize);
         }
-        if (mode != 2 && D_80145F09[0] == 2) {
+        if (mode != 2 && g_BattlePartyBattlers[0].chr.character_id == 2) {
             D_80145EC4 += FIELD(s16, D_801E5C48, g_BattlePartyBattlers[0].facing * 4) << 15;
             D_80145EC8 += FIELD(s16, D_801E5C48, g_BattlePartyBattlers[0].facing * 4 + 2) << 15;
         }
@@ -61,7 +61,7 @@ MATCH void func_801DE944(void) {
         g_BattlePartyBattlers[0].slot = 0;
         *(Character*)(actor - 5)      = *(Character*)(party - 0x5F2);
         TASK_BYTES[0x48]              = 0;
-        func_801C1254(D_80145F09[0], 0);
+        func_801C1254(g_BattlePartyBattlers[0].chr.character_id, 0);
         Actor_SelectScript(TASK_BYTES[8]);
         ACTOR_SET_MODE(0);
         TASK_BYTES[2] = 0;

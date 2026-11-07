@@ -8,7 +8,7 @@ MATCH void func_801F434C(void) {
     i    = 0;
     if (size != 0) {
         do {
-            if (D_80145F09[i][0] == 4) {
+            if (g_BattlePartyBattlers[i].chr.character_id == 4) {
                 g_ScriptState->cursor += 3;
                 return;
             }
