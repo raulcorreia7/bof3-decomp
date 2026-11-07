@@ -7,6 +7,12 @@
 #include "overlays/area/world04.h"
 #include "work/area_spad.h"
 
+/* Message ids of the card-key door: its ID check result. */
+enum {
+    AREA168_MESSAGE_ID_CHECK_PASSED = 6,
+    AREA168_MESSAGE_ID_CHECK_FAILED = 7,
+};
+
 /* The work origin offset, step and threshold this overlay advances. */
 #define AREA_ORIGIN_OFFSET       0x30
 #define ACTOR_SCREEN_X_STEP      0x10
