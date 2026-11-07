@@ -2,6 +2,7 @@
 #define SLUS_FUNCTIONS_H
 
 #include "types.h"
+#include "audio/bgm.h"
 #include "audio/cue.h"
 #include "sys/cd_format.h"
 #include "psx/psyq.h"

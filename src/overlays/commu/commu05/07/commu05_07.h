@@ -11,6 +11,7 @@
 #define COMMU05_STEP_COUNT 3
 
 extern OverlayHeader D_801D0C00;
-extern Callback      D_801D1950[COMMU05_STEP_COUNT];
+/* D_801D1950 */
+extern Callback      g_Commu05StepFuncs[COMMU05_STEP_COUNT];
 
 #endif
