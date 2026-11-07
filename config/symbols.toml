@@ -105,9 +105,9 @@ Menu_SlidePanelLeft = { addr = 0x800B254C, type = "func", source = "Slides the m
 Menu_DrawPanelIcon = { addr = 0x800B326C, type = "func", source = "Draws one MenuIconPrim from uv/clut." }
 g_BattleEscapeThresholds = { addr = 0x800B44F0, source = "Escape chances by party and enemy agility difference." }
 s_BattleAffinityLevelBonus = { addr = 0x800B4E94, source = "Affinity bonus by affinity level." }
-D_800B50B0 = { addr = 0x800B50B0, size = 0x1C, source = "Step handlers of a battle mode." }
-D_800B50CC = { addr = 0x800B50CC, size = 0x8, source = "Step handlers of a battle mode." }
-D_800B50D4 = { addr = 0x800B50D4, source = "Step handlers of a battle mode." }
+D_800B50B0 = { addr = 0x800B50B0, size = 0x1C, source = "Mode handlers of queued battle effect handler 0x0F: select the facing script, close on the target, hop until the vertical speed reaches -0x40, then restore the battler." }
+D_800B50CC = { addr = 0x800B50CC, size = 0x8, source = "Mode handlers of queued battle effect handler 0x10: select the facing script, then run the active effect until its mode 5 releases it." }
+D_800B50D4 = { addr = 0x800B50D4, source = "Mode handlers of queued battle effect handler 0x12: a semi-transparent tint set from the parameter, then Effect_ShakeScreen." }
 D_800B50DC = { addr = 0x800B50DC, size = 0x8, source = "func_800AA5F4 rolls rand() % entry == 0 with the entry the ability high nibble selects (D_800B50E4 for char 6); needs: what the roll decides" }
 g_BattleSelections = { addr = 0x800B65F8, source = "Battle selection rows." }
 g_BattlePanelUV = { addr = 0x800B6C04, type = "BattlePanelTexture", source = "Texture coordinates of the battle panel quads." }
@@ -130,7 +130,7 @@ s_BattlePanelUnselectedMarker = { addr = 0x800B6DD4, source = "Sprite run markin
 s_BattlePanelValueRun = { addr = 0x800B6DDC, source = "Sprite run for the battle panel values." }
 s_BattlePanelUseLabel = { addr = 0x800B6F3C, source = "Label for the use entry of a battle panel." }
 s_BattlePanelEquipLabel = { addr = 0x800B6F40, source = "Label for the equip entry of a battle panel." }
-s_BattleEquipment = { addr = 0x800B6F50, source = "The six selected battler slots." }
+s_BattleEquipment = { addr = 0x800B6F50, source = "The six equipment item ids of the battle panel character: weapon, shield, helmet, armor and two accessories." }
 D_801454F4 = { addr = 0x801454F4, source = "Byte table indexed by the source slot offset in func_80097EC0" }
 D_80145F04 = { addr = 0x80145F04 }
 D_80145F2A = { addr = 0x80145F2A, size = 0x2, source = "Halfword cell written by func_800A4458 and read by func_8009F010" }
