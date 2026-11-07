@@ -26,9 +26,9 @@ MATCH void Menu_RunPanelTasks(void) {
                     g_MenuCurrentPanel = (MenuPanelTask*)task;
                     funcs[task[1]]();
                 }
-                task += 0x24;
+                task += sizeof(MenuPanelTask);
                 i++;
-                offset += 0x24;
+                offset += sizeof(MenuPanelTask);
             } while (i < 22);
             mode++;
             i = 0;
