@@ -46,7 +46,7 @@ MATCH void func_801D8908(void) {
     if (value != rec->cursor) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (rec->swap_cursor == GAME_NONE) {
             if (*(Party_GetAbilities(rec->party_slot, rec->ability_group, 0) + rec->cursor)) {
                 SND_PlayCue(EMI_CUE_ID(1, 3));
@@ -60,7 +60,7 @@ MATCH void func_801D8908(void) {
             Menu_SwapBytes_801D933C(cursor, Party_GetAbilities(rec->party_slot, rec->ability_group, 0) + rec->cursor);
             rec->swap_cursor = 0xFF;
         }
-    } else if (g_InputPressed & D_80145AC4) {
+    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         if (rec->swap_cursor == GAME_NONE) {
             D_80148652 -= 1;

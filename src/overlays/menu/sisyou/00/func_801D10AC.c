@@ -20,7 +20,7 @@ MATCH void func_801D10AC(u32 message_id) {
     trig = INPUT_REPEATED(*padp, (PADLright | PADLleft));
     pad  = *padp;
 
-    if (pad & D_80145AC2) {
+    if (pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (g_MasterBannerLock != 0) {
             handler = g_MasterSubStep - 1;
         } else {
@@ -29,7 +29,7 @@ MATCH void func_801D10AC(u32 message_id) {
         }
         g_MasterSubStep = handler;
         SND_PlayCue(EMI_CUE_ID(1, 4));
-    } else if (pad & D_80145AC4) {
+    } else if (pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
         g_MasterBannerLock = 1;
         g_MasterSubStep    = g_MasterSubStep - 1;
         SND_PlayCue(EMI_CUE_ID(1, 6));

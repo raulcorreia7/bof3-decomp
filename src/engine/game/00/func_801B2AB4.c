@@ -19,7 +19,7 @@ MATCH void func_801B2AB4(void) {
                 index++;
             } while (index < g_PartySize);
         }
-        g_Task->unk_0B = 0xFF;
+        g_Task->param.unk_0B = 0xFF;
     }
     g_Task->header.step = 1;
 }

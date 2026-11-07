@@ -12,7 +12,7 @@ MATCH void func_801D12FC(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         D_801E6040 ^= 1;
     }
-    if (*pad & D_80145AC2) {
+    if (*pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
         SND_PlayCue(EMI_CUE_ID(1, 2));
         D_80148654 = 5;
@@ -23,7 +23,7 @@ MATCH void func_801D12FC(void) {
             D_80148651 += 2;
         }
         D_80148652 = 0;
-    } else if (*pad & D_80145AC4) {
+    } else if (*pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_80148333[0] = 1;
         D_8014837B    = 1;

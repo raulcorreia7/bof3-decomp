@@ -13,12 +13,12 @@ MATCH u8 Menu_ToggleOption(void) {
     flag = &D_8014865B;
     Menu_DrawCursorSprite((u16)(((0x1F - (*flag * 4)) * 8) + 0x1B), 0x18, 0);
     pad = g_InputPressed;
-    if (pad & D_80145AC4) {
+    if (pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         *flag = 0;
         return true;
     }
-    if (pad & D_80145AC2) {
+    if (pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         confirm = 0x106;
         if (*flag != 0) {
             confirm = 0x104;

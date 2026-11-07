@@ -53,7 +53,7 @@ NON_MATCHING void func_801D1A90(void) {
     if (cursor != g_ShopItemCount) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (g_ShopItemCount != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             D_8014865B = 1;
@@ -61,7 +61,7 @@ NON_MATCHING void func_801D1A90(void) {
         } else {
             SND_PlayCue(EMI_CUE_ID(1, 7));
         }
-    } else if (g_InputPressed & D_80145AC4) {
+    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         (*(s8*)&D_80148652)--;
     }

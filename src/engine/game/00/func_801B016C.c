@@ -16,7 +16,7 @@ MATCH void func_801B016C(void) {
 
     g_Task->unk_06       = 0;
     g_Task->option_flags = 0;
-    g_Task->unk_0B       = 0;
+    g_Task->param.unk_0B = 0;
 
     pos                               = g_Task;
     COORD_INT(g_Task->pos.z)          = Area_ReadHeight(pos->pos.x.fixed, pos->pos.y.fixed);

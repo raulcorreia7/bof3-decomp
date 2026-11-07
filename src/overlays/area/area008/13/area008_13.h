@@ -92,10 +92,10 @@ static inline void FieldActivateActor(void) {
         g_Task->header.mode = 0x0E;
         return;
     }
-    s = &g_Actors[g_Task->unk_0B];
+    s = &g_Actors[g_Task->param.unk_0B];
     s->header.flags |= 0x40;
     s               = g_Task;
-    index           = s->unk_0B;
+    index           = s->param.unk_0B;
     g_ScriptVars[2] = 3;
     e               = &g_Actors[index];
     g_Task          = e;

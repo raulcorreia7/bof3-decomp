@@ -16,13 +16,13 @@ MATCH void func_800A65BC(void) {
     pad_state                                = &g_InputPressed;
     input                                    = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));
     pad                                      = *pad_state;
-    if (pad & D_80145AC4) {
+    if (pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         state = (u8*)&g_BattleUIState;
         *state += 1;
         return;
     }
-    if (pad & (D_80145AC2 | PADRup)) {
+    if (pad & (g_InputMasks[INPUT_SLOT_CONFIRM] | PADRup)) {
         if (g_BattleTargetRows[g_BattleTargetCursorCol + D_801485CA].gate_03 == GAME_NONE) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
         } else {

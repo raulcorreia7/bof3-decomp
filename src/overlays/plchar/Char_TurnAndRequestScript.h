@@ -14,7 +14,7 @@ MATCH void Char_TurnAndRequestScript(void) {
     }
     PLCHAR_PREPARE_TURN();
     Actor_RequestScript((((s32)(g_Task->direction_08 - 1) / 2) + 0x42) & 0xFF);
-    g_Task->unk_0B = 0;
-    g_Task->unk_0A = 0xB;
-    g_Task->unk_03 = 1;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_0A       = 0xB;
+    g_Task->unk_03       = 1;
 }

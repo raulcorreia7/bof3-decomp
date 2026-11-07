@@ -6,7 +6,7 @@ MATCH void func_801F35A0(void) {
 
     if (g_Task->unk_09 != 0) {
         battler = &D_801469B8;
-        if (g_Task->unk_0B != 0) {
+        if (g_Task->param.unk_0B != 0) {
             battler = g_BattlePartyBattlers;
         }
         battler->header.flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
@@ -14,7 +14,7 @@ MATCH void func_801F35A0(void) {
         return;
     }
     battler2 = &D_801469B8;
-    if (g_Task->unk_0B != 0) {
+    if (g_Task->param.unk_0B != 0) {
         battler2 = g_BattlePartyBattlers;
     }
     battler2->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
