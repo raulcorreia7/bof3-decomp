@@ -33,7 +33,7 @@
 #define SISYOU_SUB3_HANDLER_COUNT     9
 #define SISYOU_SUB4_HANDLER_COUNT     9
 #define SISYOU_SUB5_HANDLER_COUNT     3
-#define MASTER_MENU_VALUE_COUNT       20
+#define MASTER_ACTOR_MODE_COUNT       20
 #define MASTER_MENU_STATE_COUNT       4
 
 /* The party screen layout, in pixels: the party rows, the stat panel, the
@@ -126,7 +126,8 @@ extern Callback           g_MasterStep3Funcs[SISYOU_SUB3_HANDLER_COUNT];
 extern Callback           g_MasterStep4Funcs[SISYOU_SUB4_HANDLER_COUNT];
 /* D_801D4264 */
 extern Callback           g_MasterStep5Funcs[SISYOU_SUB5_HANDLER_COUNT];
-extern u8                 D_801D4270[MASTER_MENU_VALUE_COUNT];
+/* D_801D4270 */
+extern u8                 g_MasterActorModes[MASTER_ACTOR_MODE_COUNT];
 extern u8                 g_MasterBannerLock;
 extern u8                 g_MasterStep;
 extern u8                 g_MasterSubStep;

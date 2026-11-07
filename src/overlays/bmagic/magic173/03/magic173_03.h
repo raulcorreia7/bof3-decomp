@@ -11,5 +11,7 @@
 extern TrailPoint D_801F09B0[][BMAGIC_TRAIL_LENGTH];
 
 void func_801EED90(void);
+void func_801F02B0(void);
+void func_801F03A0(void);
 
 #endif

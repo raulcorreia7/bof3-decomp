@@ -5,6 +5,7 @@
     tools/quality.py --queue [-n 30]  files worst first, with the score and the metrics
     tools/quality.py --diff BASE      compare BASE with ``--to`` (default HEAD); exit 1 when a
                                       touched file got worse in a gated metric
+    tools/quality.py --markdown       rewrite the debt table of docs/subsystems.md in place
 
 Metrics, counted inside ``MATCH`` function bodies unless noted:
 
@@ -47,6 +48,24 @@ METRICS = ("addr", "names", "casts", "harmful", "notes", "twins", "pasted")
 GATED = ("casts", "harmful", "pasted", "addr", "names")
 PER_FUNCTION = ("addr", "names")
 TOTALS = ("casts", "harmful", "pasted")
+SUBSYSTEMS = (
+    ("Executable", "src/engine/slus"),
+    ("Game tables", "src/engine/game"),
+    ("Logo", "src/logo"),
+    ("Shared bodies", "src/shared"),
+    ("Area", "src/overlays/area"),
+    ("Battle", "src/overlays/battle"),
+    ("Battle magic", "src/overlays/bmagic"),
+    ("Boss", "src/overlays/boss"),
+    ("Fairy Village", "src/overlays/commu"),
+    ("Menu", "src/overlays/menu"),
+    ("Player character", "src/overlays/plchar"),
+    ("Scenario", "src/overlays/scenario"),
+    ("Title", "src/overlays/title"),
+)
+SUBSYSTEMS_DOC = ROOT / "docs" / "subsystems.md"
+TABLE_BEGIN = "<!-- quality:begin (tools/quality.py --markdown) -->"
+TABLE_END = "<!-- quality:end -->"
 WEIGHT = {
     "addr": 1,
     "names": 1,
@@ -318,6 +337,67 @@ def by_image(rows: dict[str, dict[str, int]]) -> dict[str, dict[str, int]]:
     return {image: totals(members) for image, members in grouped.items()}
 
 
+def by_subsystem(rows: dict[str, dict[str, int]]) -> dict[str, dict[str, int]]:
+    """Merge the file rows into one row per subsystem of docs/subsystems.md."""
+    grouped: dict[str, dict[str, dict[str, int]]] = collections.defaultdict(dict)
+    for path, row in rows.items():
+        name = next(
+            (n for n, prefix in SUBSYSTEMS if path.startswith(prefix + "/")), "Other"
+        )
+        grouped[name][path] = row
+    return {name: totals(members) for name, members in grouped.items()}
+
+
+def markdown_table(rows: dict[str, dict[str, int]]) -> str:
+    """Return the debt table of docs/subsystems.md, one row per subsystem, then the total."""
+    cols = ("funcs", "addr", "names", "casts", "harmful", "twins", "pasted")
+    heads = (
+        "Matched functions",
+        "`addr`",
+        "`names`",
+        "`casts`",
+        "`harmful`",
+        "`twins`",
+        "`pasted`",
+    )
+    groups = by_subsystem(rows)
+    order = [n for n, _ in SUBSYSTEMS if n in groups] + (
+        ["Other"] if "Other" in groups else []
+    )
+    body = [[name, *(str(groups[name][c]) for c in cols)] for name in order]
+    total = totals(rows)
+    body.append(["Total", *(str(total[c]) for c in cols)])
+    table = [["Subsystem", *heads], *body]
+    width = [max(len(r[i]) for r in table) for i in range(len(heads) + 1)]
+    lines = [
+        "| "
+        + " | ".join(
+            (cell.ljust(width[i]) if i == 0 else cell.rjust(width[i]))
+            for i, cell in enumerate(r)
+        )
+        + " |"
+        for r in table
+    ]
+    rule = ["-" * width[0], *("-" * (w - 1) + ":" for w in width[1:])]
+    lines.insert(1, "| " + " | ".join(rule) + " |")
+    return "\n".join(lines)
+
+
+def write_markdown(path: Path, rows: dict[str, dict[str, int]]) -> bool:
+    """Replace the table between the markers of ``path``; return True when the file changed."""
+    text = path.read_text()
+    head, _, rest = text.partition(TABLE_BEGIN)
+    _, _, tail = rest.partition(TABLE_END)
+    if not rest or not tail:
+        raise SystemExit(
+            f"quality: {path} lacks the {TABLE_BEGIN} / {TABLE_END} markers"
+        )
+    new = f"{head}{TABLE_BEGIN}\n\n{markdown_table(rows)}\n\n{TABLE_END}{tail}"
+    if new != text:
+        path.write_text(new)
+    return new != text
+
+
 def table(rows: dict[str, dict[str, int]], limit: int, label: str) -> str:
     """Return the rows worst first as aligned text."""
     cols = ("funcs", *METRICS)
@@ -343,6 +423,11 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--to", default="HEAD", help="revision to gate, or WORK (HEAD)")
     parser.add_argument("--queue", action="store_true", help="list files worst first")
+    parser.add_argument(
+        "--markdown",
+        action="store_true",
+        help="rewrite the table of docs/subsystems.md",
+    )
     parser.add_argument("-n", type=int, default=30, help="rows to show (30)")
     parser.add_argument(
         "--gate", default=",".join(GATED), help="metrics the gate checks"
@@ -371,6 +456,12 @@ def main(argv: list[str] | None = None) -> int:
         print(f"quality: no touched file got worse against {args.diff}")
         return 0
     rows = scan(rev_files("WORK"))
+    if args.markdown:
+        changed = write_markdown(SUBSYSTEMS_DOC, rows)
+        print(
+            f"quality: {SUBSYSTEMS_DOC.name} {'updated' if changed else 'is current'}"
+        )
+        return 0
     if args.queue:
         print(table(rows, args.n, "file"))
         return 0

@@ -4,6 +4,6 @@
  * byte 3 and the shop draw helper are owned by this overlay. */
 
 MATCH void func_801E3E4C(void) {
-    D_801E5E70[g_MenuCurrentPanel->state]();
+    g_ShopPanel13StateFuncs[g_MenuCurrentPanel->state]();
     Menu_DrawCharacterWindow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A, 0, 0);
 }

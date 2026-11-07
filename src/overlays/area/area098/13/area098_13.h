@@ -26,7 +26,6 @@
 #define AREA_SPIN_SCALE_BASE 3
 #define AREA_SPIN_FADE       0x20
 
-extern u16      g_GameAreaId;
 extern s32      D_80145EC4[];
 extern Callback D_801F5F68[];
 extern Callback D_801F5F7C[];
