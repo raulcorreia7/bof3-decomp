@@ -13,7 +13,7 @@ MATCH void SAVE_RunLoadRestore(void) {
         if (D_801ED18C != 0) {
             g_InputMasks[INPUT_SLOT_INTERACT]      = PADRright;
             g_InputMasks[INPUT_SLOT_ACTION]        = PADRdown;
-            g_InputMasks[INPUT_SLOT_FIELD_SKILL]   = PADRup;
+            g_InputMasks[INPUT_SLOT_CHARACTER_FIELD_ACTION]   = PADRup;
             g_InputMasks[INPUT_SLOT_MENU]          = PADRleft;
             g_InputMasks[INPUT_SLOT_LOOK]          = PADR1;
             g_InputMasks[INPUT_SLOT_SWITCH_LEADER] = PADL1;

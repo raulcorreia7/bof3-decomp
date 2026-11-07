@@ -642,7 +642,7 @@ segments:
       - [0x203DC, c, func_801B5BDC]
       - [0x20454, c, func_801B5C54]
       - [0x20658, c, func_801B5E58]
-      - [0x206BC, c, Game_RequestFieldSkill]
+      - [0x206BC, c, Game_RequestCharacterFieldAction]
       - [0x20768, c, func_801B5F68]
       - [0x20844, c, func_801B6044]
       - [0x208DC, c, func_801B60DC]

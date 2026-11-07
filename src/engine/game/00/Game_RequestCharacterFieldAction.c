@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 /* func_801B5EBC */
-MATCH s32 Game_RequestFieldSkill(void) {
+MATCH s32 Game_RequestCharacterFieldAction(void) {
     u8 kind;
 
     kind = g_GameState->slot_index_79;
@@ -9,7 +9,7 @@ MATCH s32 Game_RequestFieldSkill(void) {
         return 0;
     if (kind == 9 || kind == 10)
         return 0;
-    if (!(g_InputPressed & g_InputMasks[INPUT_SLOT_FIELD_SKILL]))
+    if (!(g_InputPressed & g_InputMasks[INPUT_SLOT_CHARACTER_FIELD_ACTION]))
         return 0;
     if (g_GameRequestFlags & 1)
         return 0;

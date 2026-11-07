@@ -55,7 +55,7 @@ MATCH void func_801E18D0(void) {
         D_80144950                             = 1;
         g_InputMasks[INPUT_SLOT_ACTION]        = PADRdown | PADL2 | PADR2;
         g_InputMasks[INPUT_SLOT_INTERACT]      = PADRright;
-        g_InputMasks[INPUT_SLOT_FIELD_SKILL]   = PADRup;
+        g_InputMasks[INPUT_SLOT_CHARACTER_FIELD_ACTION]   = PADRup;
         g_InputMasks[INPUT_SLOT_MENU]          = PADRleft;
         g_InputMasks[INPUT_SLOT_LOOK]          = PADR1;
         g_WindowStyle                          = 0;

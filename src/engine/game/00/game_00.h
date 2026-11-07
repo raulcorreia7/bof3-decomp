@@ -926,7 +926,7 @@ s8      func_801B5AE4(s32 route_index, s32 route_flags);
 void    func_801B5BDC(u8 route_index);
 void*   func_801B5C54(void);
 /* func_801B5EBC */
-s32     Game_RequestFieldSkill(void);
+s32     Game_RequestCharacterFieldAction(void);
 bool    func_801B5F68(s32 selection_kind);
 s32     func_801B6044(void);
 void    func_801B60DC(s32 actor_index);

@@ -2386,7 +2386,7 @@ Callback D_801CD140[5] = {(Callback)func_801B3314, (Callback)func_801B3388, (Cal
 Callback D_801CD154[4] = {(Callback)func_801B3584, (Callback)func_801B35B0, (Callback)func_801B35EC,
                           (Callback)func_801B3670};
 
-Callback D_801CD164[19] = {
+Callback g_CharacterFieldActions[19] = {
     (Callback)func_801CFD3C, (Callback)func_801CFB40, (Callback)func_801D05EC, (Callback)func_801CFF64,
     (Callback)func_801D0A10, (Callback)func_801D02B0, (Callback)func_801D0814, (Callback)func_801CFAB8,
     (Callback)func_801CFE98, (Callback)func_801D0944, (Callback)func_801CFC70, (Callback)func_801CF8BC,
