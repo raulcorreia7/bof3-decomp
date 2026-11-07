@@ -418,67 +418,67 @@ g_BMagicEffectFuncs = { addr = 0x801EF510, source = "Handlers of magic065 (Pilfe
 ["emi/bmagic/magic066/03"]
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
-BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
-Effect_PlayOnIdleTick = { addr = 0x801EEE5C, type = "func", source = "plays the effect the target selector chose when the effect ticker is at its 0xFF idle value" }
-Effect_SetActorMatrix = { addr = 0x801EF784, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
-g_BMagicEffectFuncs = { addr = 0x801F0064, source = "the module dispatcher indexes it with the shared spad step byte" }
+BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic066 (Tsunami)." }
+Effect_PlayOnIdleTick = { addr = 0x801EEE5C, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic066 (Tsunami)." }
+Effect_SetActorMatrix = { addr = 0x801EF784, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic066 (Tsunami)." }
+g_BMagicEffectFuncs = { addr = 0x801F0064, source = "Handlers of magic066 (Tsunami), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic067/03"]
-Effect_CountDownTimerCallSelector = { addr = 0x801EEF3C, type = "func", source = "counts the effect timer at +0x09 down and, at zero, calls func_800A9610 with g_BattleTargetSelector and 0x20 and advances the step byte at +0x01; one body shared with the other bmagic overlays" }
-Effect_StartOnZeroTick = { addr = 0x801EF284, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
-Effect_DriftStep = { addr = 0x801EF59C, type = "func", source = "one drift step: raises the effect ticker at +0x0B by one plus the timer at +0x09 / 64, drops the effect counter at +0x0A every second frame, moves the actor by +0x0C and +0x10 and, once the timer falls to 0x30, lowers the active ticker and runs func_801E5988; one body shared with the other bmagic overlays" }
-Effect_ArmCounterNextStep = { addr = 0x801EFF8C, type = "func", source = "zeroes the effect timer at +0x09, loads the effect counter at +0x0A with 0x88 and advances the step byte through BMagic_NextStep; one body shared with the other bmagic overlays" }
-Effect_CountUpAndStep = { addr = 0x801EFFCC, type = "func", source = "counts the effect timer up and advances the effect step at 0x10" }
-Effect_CountDownAndStep = { addr = 0x801F001C, type = "func", source = "counts the effect counter down and advances the effect step at zero" }
-Effect_TickOnTimerZero = { addr = 0x801F0068, type = "func", source = "counts the effect timer down and ticks the effect ticker of D_801EB4E0 at zero" }
-Effect_RequestQueueEntryAndArmTicker = { addr = 0x801F02E4, type = "func", source = "passes the work bytes at +0x04 and +0x03 to the battle queue writer func_800AEEC8, sets the effect ticker at +0x0B and advances the effect step; one body shared with the other bmagic overlays" }
-Effect_TickOnZeroTick = { addr = 0x801F033C, type = "func", source = "when the effect ticker is zero, ticks the other battler's ticker down and runs the effect step" }
-Effect_AddActorStepOnPlaying = { addr = 0x801F043C, type = "func", source = "runs func_8014D978 and Area_AddActor and advances the effect step byte at +0x02 once BATTLE_STATE_EFFECT_PLAYING is set; one body shared with the other bmagic overlays" }
-g_BMagicEffectFuncs = { addr = 0x801F04B8, source = "the module dispatcher indexes it with the shared spad step byte" }
+Effect_CountDownTimerCallSelector = { addr = 0x801EEF3C, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (func_800A9610 with 0x20) and advances header.mode (byte 0x01) in magic067 (Chill)." }
+Effect_StartOnZeroTick = { addr = 0x801EF284, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic067 (Chill)." }
+Effect_DriftStep = { addr = 0x801EF59C, type = "func", source = "Drifts the effect actor each frame along its phase (header.param.phase) and at effect timer (byte 0x09) value 0x30 lowers the ticker (byte 0x0B) of battler D_801EB4E0 and clears the effect in magic067 (Chill)." }
+Effect_ArmCounterNextStep = { addr = 0x801EFF8C, type = "func", source = "Clears the effect timer (byte 0x09), loads the effect counter (byte 0x0A) with 0x88 and runs the next-step routine in magic067 (Chill)." }
+Effect_CountUpAndStep = { addr = 0x801EFFCC, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic067 (Chill)." }
+Effect_CountDownAndStep = { addr = 0x801F001C, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic067 (Chill)." }
+Effect_TickOnTimerZero = { addr = 0x801F0068, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of battler D_801EB4E0 and clears the effect in magic067 (Chill)." }
+Effect_RequestQueueEntryAndArmTicker = { addr = 0x801F02E4, type = "func", source = "Writes a battle queue entry from bytes 0x04 and 0x03 (func_800AEEC8), sets the effect ticker (byte 0x0B) to 1 and advances header.step (byte 0x02) in magic067 (Chill)." }
+Effect_TickOnZeroTick = { addr = 0x801F033C, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of battler D_801EB4E0 and clears the effect in magic067 (Chill)." }
+Effect_AddActorStepOnPlaying = { addr = 0x801F043C, type = "func", source = "Adds the effect's actor and advances header.step (byte 0x02) once BATTLE_STATE_EFFECT_PLAYING is set in magic067 (Chill)." }
+g_BMagicEffectFuncs = { addr = 0x801F04B8, source = "Handlers of magic067 (Chill), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic068/03"]
-Effect_SetActorMatrix = { addr = 0x801EFBE8, type = "func", source = "sets the actor's GTE matrix from its coordinates and half its height span, times the camera" }
-g_BMagicEffectFuncs = { addr = 0x801EFCC8, source = "the module dispatcher indexes it with the shared spad step byte" }
+Effect_SetActorMatrix = { addr = 0x801EFBE8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic068 (Foretell)." }
+g_BMagicEffectFuncs = { addr = 0x801EFCC8, source = "Handlers of magic068 (Foretell), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic069/03"]
-Effect_PlayOnZeroTick = { addr = 0x801EEE30, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
-g_BMagicEffectFuncs = { addr = 0x801F04F8, source = "the module dispatcher indexes it with the shared spad step byte" }
+Effect_PlayOnZeroTick = { addr = 0x801EEE30, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic069 (Influence)." }
+g_BMagicEffectFuncs = { addr = 0x801F04F8, source = "Handlers of magic069 (Influence), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
-Effect_TickDownAndClear = { addr = 0x801EFA50, type = "func", source = "byte-identical to Effect_TickDownAndClear in the shared header overlays/bmagic/Effect_TickDownAndClear.h" }
+Effect_TickDownAndClear = { addr = 0x801EFA50, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic069 (Influence)." }
 ["emi/bmagic/magic070/03"]
-Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "one body shared through overlays/bmagic/Effect_ReplacePaletteFade.h" }
-Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "increments the selected palette fade RGB offsets each tick until the timer ends" }
-Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
-Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic070 (Absorb, Heal)." }
+Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic070 (Absorb, Heal)." }
+Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.mode (byte 0x01) in magic070 (Absorb, Heal)." }
+Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic070 (Absorb, Heal)." }
 
 ["emi/bmagic/magic071/03"]
-Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "one body shared through overlays/bmagic/Effect_ReplacePaletteFade.h" }
-Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "increments the selected palette fade RGB offsets each tick until the timer ends" }
-Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
-Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic071 (Healing Herb, Rejuvenate)." }
+Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic071 (Healing Herb, Rejuvenate)." }
+Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.mode (byte 0x01) in magic071 (Healing Herb, Rejuvenate)." }
+Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic071 (Healing Herb, Rejuvenate)." }
 
 ["emi/bmagic/magic072/03"]
-Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "one body shared through overlays/bmagic/Effect_ReplacePaletteFade.h" }
-Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "increments the selected palette fade RGB offsets each tick until the timer ends" }
-Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "advances the effect step and reloads the effect timer while the effect ticker is under 5" }
-Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "plays the effect the target selector chose when the effect ticker is zero" }
+Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic072 (Restore)." }
+Effect_BrightenPalette = { addr = 0x801EF04C, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic072 (Restore)." }
+Effect_NextStep = { addr = 0x801EF15C, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.mode (byte 0x01) in magic072 (Restore)." }
+Effect_PlayOnZeroTick = { addr = 0x801EF2DC, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic072 (Restore)." }
 
 ["emi/bmagic/magic073/03"]
-Effect_BrightenPaletteThenStep = { addr = 0x801EF3D4, type = "func", source = "increments the selected palette fade RGB offsets each tick and advances the effect step when the effect ticker ends" }
-Effect_NextStepUnderTickLimit = { addr = 0x801EF4E4, type = "func", source = "reloads the effect timer and advances the effect step while the effect ticker is under 5" }
-g_BMagicEffectFuncs = { addr = 0x801F0668, source = "the module dispatcher indexes it with the shared spad step byte" }
-D_801F21F0 = { addr = 0x801F21F0, source = "func_801EF724 loads this word as the task-work pointer" }
+Effect_BrightenPaletteThenStep = { addr = 0x801EF3D4, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.step (byte 0x02) when the effect timer (byte 0x09) reaches zero in magic073 (Vitalize)." }
+Effect_NextStepUnderTickLimit = { addr = 0x801EF4E4, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.step (byte 0x02) in magic073 (Vitalize)." }
+g_BMagicEffectFuncs = { addr = 0x801F0668, source = "Handlers of magic073 (Vitalize), run by header.mode (byte 0x01)." }
+D_801F21F0 = { addr = 0x801F21F0, source = "Work record of the magic073 sway effect, which its handlers advance by header.mode (byte 0x01) and clear at the end." }
 
 ["emi/bmagic/magic074/03"]
-Effect_StartOnZeroTick = { addr = 0x801EEF50, type = "func", source = "raises the effect playing flag and runs the effect step when the effect ticker is zero" }
-Effect_BrightenPaletteThenStep = { addr = 0x801EF3C0, type = "func", source = "increments the selected palette fade RGB offsets each tick and advances the effect step when the effect ticker ends" }
-Effect_NextStepUnderTickLimit = { addr = 0x801EF4D0, type = "func", source = "reloads the effect timer and advances the effect step while the effect ticker is under 5" }
-g_BMagicEffectFuncs = { addr = 0x801F0554, source = "the module dispatcher indexes it with the shared spad step byte" }
-D_801F20DC = { addr = 0x801F20DC, source = "func_801EF710 loads this word as the task-work pointer" }
+Effect_StartOnZeroTick = { addr = 0x801EEF50, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic074 (Vigor)." }
+Effect_BrightenPaletteThenStep = { addr = 0x801EF3C0, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.step (byte 0x02) when the effect timer (byte 0x09) reaches zero in magic074 (Vigor)." }
+Effect_NextStepUnderTickLimit = { addr = 0x801EF4D0, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.step (byte 0x02) in magic074 (Vigor)." }
+g_BMagicEffectFuncs = { addr = 0x801F0554, source = "Handlers of magic074 (Vigor), run by header.mode (byte 0x01)." }
+D_801F20DC = { addr = 0x801F20DC, source = "Work record of the magic074 sway effect, which its handlers advance by header.mode (byte 0x01) and clear at the end." }
 
 ["emi/bmagic/magic075/03"]
-BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "runs the callback D_801EEC00.steps selects with the scratchpad step byte in the bmagic effect module" }
-g_BMagicEffectFuncs = { addr = 0x801EF7A0, source = "the module dispatcher indexes it with the shared spad step byte" }
+BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic075 (Purify)." }
+g_BMagicEffectFuncs = { addr = 0x801EF7A0, source = "Handlers of magic075 (Purify), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic076/03"]
 Effect_BrightenPalette = { addr = 0x801EF00C, type = "func", source = "increments the selected palette fade RGB offsets each tick until the timer ends" }
@@ -2546,7 +2546,7 @@ Actor_SlideScreenX = { addr = 0x801F355C, type = "func", source = "advances the 
 Area_Update = { addr = 0x801F35B8, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 Actor_SetScreenBottom = { addr = 0x801F36D0, type = "func", source = "scrolls the actor screen origin to y 0xF0 and advances its state" }
 Area_DrawHudSprite = { addr = 0x801F39D8, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F3B00, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F3B00, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3ECC, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
 Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "moves the actor by the projected velocity when the tile is classified" }
@@ -2613,7 +2613,7 @@ Actor_SlideScreenX = { addr = 0x801F3490, type = "func", source = "advances the 
 Area_Update = { addr = 0x801F34EC, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 Actor_SetScreenBottom = { addr = 0x801F3604, type = "func", source = "scrolls the actor screen origin to y 0xF0 and advances its state" }
 Area_DrawHudSprite = { addr = 0x801F390C, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F3A34, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F3A34, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3E00, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Actor_SpawnRandomGroup = { addr = 0x801F40F0, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area033)" }
 Area_StepStreamSetDrawMode = { addr = 0x801F4674, type = "func", source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
@@ -2674,7 +2674,7 @@ Actor_SlideScreenX = { addr = 0x801F355C, type = "func", source = "advances the 
 Area_Update = { addr = 0x801F35B8, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 Actor_SetScreenBottom = { addr = 0x801F36D0, type = "func", source = "scrolls the actor screen origin to y 0xF0 and advances its state" }
 Area_DrawHudSprite = { addr = 0x801F39D8, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F3B00, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F3B00, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3ECC, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudSpritesAndText = { addr = 0x801F40C4, type = "func", source = "one body shared through overlays/area/Area_DrawHudSpritesAndText.h" }
 Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
@@ -2776,7 +2776,7 @@ Actor_SlideScreenX = { addr = 0x801F3594, type = "func", source = "advances the 
 Area_Update = { addr = 0x801F35F0, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 Actor_SetScreenBottom = { addr = 0x801F3708, type = "func", source = "scrolls the actor screen origin to y 0xF0 and advances its state" }
 Area_DrawHudSprite = { addr = 0x801F3A10, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F3B38, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F3B38, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3F04, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudSpritesAndText = { addr = 0x801F40FC, type = "func", source = "one body shared through overlays/area/Area_DrawHudSpritesAndText.h" }
 Actor_SpawnRandomGroup = { addr = 0x801F41F4, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
@@ -2866,7 +2866,7 @@ Actor_SetScreenBottom = { addr = 0x801F3704, type = "func", source = "scrolls th
 Area_CountHudBannerHold = { addr = 0x801F385C, type = "func", source = "one body shared through overlays/area/Area_CountHudBannerHold.h" }
 Area_StepHudBannerDown = { addr = 0x801F395C, type = "func", source = "one body shared through overlays/area/Area_StepHudBannerDown.h" }
 Area_DrawHudSprite = { addr = 0x801F3A0C, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F3B34, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F3B34, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3F00, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudBanner = { addr = 0x801F40F8, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
 Actor_SpawnRandomGroup = { addr = 0x801F41EC, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area087)" }
@@ -2890,7 +2890,7 @@ Area_RaiseHudBanner = { addr = 0x801F42B4, type = "func", source = "one body sha
 Area_CountHudBannerHold = { addr = 0x801F438C, type = "func", source = "one body shared through overlays/area/Area_CountHudBannerHold.h" }
 Area_StepHudBannerDown = { addr = 0x801F448C, type = "func", source = "one body shared through overlays/area/Area_StepHudBannerDown.h" }
 Area_DrawHudSprite = { addr = 0x801F453C, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F4664, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F4664, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F4A30, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudBanner = { addr = 0x801F4C28, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
 Actor_SpawnRandomGroup = { addr = 0x801F4D1C, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area088)" }
@@ -2969,13 +2969,13 @@ Area_Update = { addr = 0x801F367C, type = "func", source = "the area frame updat
 Actor_SetScreenBottom = { addr = 0x801F3794, type = "func", source = "byte-identical to Actor_SetScreenBottom at emi/world02/area087/13@0x801F3704" }
 Area_RaiseHudBanner = { addr = 0x801F3814, type = "func", source = "one body shared through overlays/area/Area_RaiseHudBanner.h" }
 Area_DrawHudSprite = { addr = 0x801F3A9C, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F3BC4, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F3BC4, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3F90, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudBanner = { addr = 0x801F4188, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
 Actor_FacingToward = { addr = 0x801F4A34, type = "func", source = "returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)" }
 Game_RequestMenuOnInput = { addr = 0x801F5034, type = "func", source = "one body shared through overlays/area/Game_RequestMenuOnInput.h" }
 Actor_StopMoving = { addr = 0x801F5108, type = "func", source = "clears the actor velocity words and sets the game overlay byte to 3" }
-Area_SetPanelStepOnRun = { addr = 0x801F51F0, type = "func", source = "sets the panel step counter g_GameState counter_11C to 4 while the interact input from g_InputMasks[INPUT_SLOT_MOVE] is held within 0x40 of the actor and back to 3 otherwise; one body shared with the other area overlays" }
+Area_SetPanelStepOnRun = { addr = 0x801F51F0, type = "func", source = "Sets the panel step counter (g_GameState counter_11C) to 4 while the run button (WORLD_INPUT_RUN) is held and the actor's byte 0x0B is under 0x40, and to 3 otherwise." }
 Area_StepRunGauge = { addr = 0x801F5254, type = "func", source = "steps the press-and-hold gauge at g_Task +0x0B between 0 and 0x40 while the re-arm timer at +0x0A is spent: the masked input g_InputMasks[INPUT_SLOT_MOVE] held against g_InputHeld raises it by 1 per frame and a full 0x40 re-arms the timer to 0x1E, releasing lowers it by a level step of 1, 2 or 3, halved per parity when the state byte at +0x02 is set (func_801F5254 in area104/14, func_801F5798 in area121/14)" }
 Area_FinishTurnStep = { addr = 0x801F58E8, type = "func", source = "stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step" }
 Area_BeginTurnStep = { addr = 0x801F5988, type = "func", source = "begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)" }
@@ -3031,7 +3031,7 @@ Area_RaiseHudBanner = { addr = 0x801F3754, type = "func", source = "one body sha
 Area_CountHudBannerHold = { addr = 0x801F382C, type = "func", source = "one body shared through overlays/area/Area_CountHudBannerHold.h" }
 Area_StepHudBannerDown = { addr = 0x801F392C, type = "func", source = "one body shared through overlays/area/Area_StepHudBannerDown.h" }
 Area_DrawHudSprite = { addr = 0x801F39DC, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F3B04, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F3B04, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3ED0, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudBanner = { addr = 0x801F40C8, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
 Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
@@ -3080,7 +3080,7 @@ Area_RaiseHudBanner = { addr = 0x801F3768, type = "func", source = "one body sha
 Area_CountHudBannerHold = { addr = 0x801F3840, type = "func", source = "one body shared through overlays/area/Area_CountHudBannerHold.h" }
 Area_StepHudBannerDown = { addr = 0x801F3940, type = "func", source = "one body shared through overlays/area/Area_StepHudBannerDown.h" }
 Area_DrawHudSprite = { addr = 0x801F39F0, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F3B18, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F3B18, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3EE4, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudBanner = { addr = 0x801F40DC, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
 Actor_SpawnRandomGroup = { addr = 0x801F41D0, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
@@ -3089,7 +3089,7 @@ Area_StepStreamSetDrawMode = { addr = 0x801F4754, type = "func", source = "calls
 Actor_FacingToward = { addr = 0x801F4F78, type = "func", source = "returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)" }
 Game_RequestMenuOnInput = { addr = 0x801F5578, type = "func", source = "one body shared through overlays/area/Game_RequestMenuOnInput.h" }
 Actor_StopMoving = { addr = 0x801F564C, type = "func", source = "clears the actor velocity words and sets the game overlay byte to 3" }
-Area_SetPanelStepOnRun = { addr = 0x801F5734, type = "func", source = "sets the panel step counter g_GameState counter_11C to 4 while the interact input from g_InputMasks[INPUT_SLOT_MOVE] is held within 0x40 of the actor and back to 3 otherwise; one body shared with the other area overlays" }
+Area_SetPanelStepOnRun = { addr = 0x801F5734, type = "func", source = "Sets the panel step counter (g_GameState counter_11C) to 4 while the run button (WORLD_INPUT_RUN) is held and the actor's byte 0x0B is under 0x40, and to 3 otherwise." }
 Area_StepRunGauge = { addr = 0x801F5798, type = "func", source = "steps the press-and-hold gauge at g_Task +0x0B between 0 and 0x40 while the re-arm timer at +0x0A is spent: the masked input g_InputMasks[INPUT_SLOT_MOVE] held against g_InputHeld raises it by 1 per frame and a full 0x40 re-arms the timer to 0x1E, releasing lowers it by a level step of 1, 2 or 3, halved per parity when the state byte at +0x02 is set (func_801F5254 in area104/14, func_801F5798 in area121/14)" }
 Area_FinishTurnStep = { addr = 0x801F5E2C, type = "func", source = "stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step" }
 Area_BeginTurnStep = { addr = 0x801F5ECC, type = "func", source = "begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)" }
@@ -3215,7 +3215,7 @@ Actor_SlideScreenX = { addr = 0x801F34CC, type = "func", source = "advances the 
 Area_Update = { addr = 0x801F3528, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
 Actor_SetScreenBottom = { addr = 0x801F3640, type = "func", source = "byte-identical to Actor_SetScreenBottom at emi/world03/area115/13@0x801F36D4" }
 Area_DrawHudSprite = { addr = 0x801F3948, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F3A70, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F3A70, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3E3C, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudBanner = { addr = 0x801F4034, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
 Actor_SpawnRandomGroup = { addr = 0x801F4128, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area151)" }
@@ -3233,7 +3233,7 @@ Area_Update = { addr = 0x801F347C, type = "func", source = "the area frame updat
 Actor_SetScreenBottom = { addr = 0x801F3594, type = "func", source = "scrolls the actor screen origin to y 0xF0 and advances its state" }
 Area_StepHudBannerDown = { addr = 0x801F37EC, type = "func", source = "one body shared through overlays/area/Area_StepHudBannerDown.h" }
 Area_DrawHudSprite = { addr = 0x801F389C, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
-Area_DrawHud = { addr = 0x801F39C4, type = "func", source = "queues the area screen overlay at (x, y) each frame from Area_Update (AREA_UPDATE_STEP): one sprite per g_InputMasks and g_InputMasks[INPUT_SLOT_ACTION] pad mask hit through the WorldMapMarker mask table, then Area_DrawGradientDiamond at (x + 0x18, y + 0x18); skipped unless g_AreaDrawFlags has a draw bit set" }
+Area_DrawHud = { addr = 0x801F39C4, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3D90, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
 Area_DrawHudBanner = { addr = 0x801F3F88, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
 Actor_SpawnRandomGroup = { addr = 0x801F407C, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets each one's height from the height query (area152)" }
@@ -3816,6 +3816,9 @@ g_GameContextKind = { addr = 0x80143F1C, source = "func_801B6470 writes entry ki
 g_GameRequestKind = { addr = 0x80143F1D, source = "func_801A02E8 writes request kind, func_801971E8 reads it" }
 g_GameEntryMode = { addr = 0x80143F1E, source = "func_801971E8 selects the entry mode and func_80197378 passes it to UI_SetMode" }
 g_GamePrevSelection = { addr = 0x80143F1F, source = "func_80197378 compares the previous selection, func_801A0380 writes it" }
+g_EncounterOriginX = { addr = 0x80143F24, type = "s32", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin x; func_801C6BB4 and func_801C6658 offset party start positions from it" }
+g_EncounterOriginY = { addr = 0x80143F28, type = "s32", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin y; func_801C6BB4 and func_801C6658 offset party start positions from it" }
+g_EncounterParty = { addr = 0x80143F2C, type = "FormationPos", size = 0x18, source = "func_801BFE34 and func_801C6658 store one field-battle start position per party order slot; func_801C6888 and func_801C69C8 test them for overlap and height" }
 g_SysResetHoldFrames = { addr = 0x80143F44, source = "SYS_Main counts held reset-key frames until EMI_LoaderIsReady" }
 g_PartyX = { addr = 0x80143F7C, type = "s32", source = "func_8015C2D4 seeds the scene scroll from it game/00 func_801A8F94 writes it and func_801C5874 moves the player with it" }
 g_PartyY = { addr = 0x80143F80, type = "s32", source = "func_8015C2D4 seeds the scroll from it game/00 func_801A8F94/801AA470 write it" }
