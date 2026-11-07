@@ -47,17 +47,17 @@ NON_MATCHING void func_801D9BDC(void) {
     g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].unk_04 + 1;
     val5                            = 0 << 0x18;
     do {
-        D_8014833C[(val5 >> 0x18) + 0xC][0] = 0;
-        tmp4                                = val8 + 1;
-        val8                                = tmp4;
-        val5                                = val8 << 0x18;
+        g_MenuPanelTasks[(val5 >> 0x18) + 0xC].unk_0C = 0;
+        tmp4                                          = val8 + 1;
+        val8                                          = tmp4;
+        val5                                          = val8 << 0x18;
     } while (tmp4 < 6);
     if (D_801ED668 == 0) {
         val9 = 1 << (s8)D_801ED66C;
     } else {
         val9 = 7;
     }
-    D_8014833C[(D_801ED674 * 2) + (D_801ED670 + 0xB)][0] = val9;
+    g_MenuPanelTasks[(D_801ED674 * 2) + (D_801ED670 + 0xB)].unk_0C = val9;
     if (D_801ED668 != 0) {
         val0 = ((s32)(D_801ED66C << 0x18) >> 0x17) + (D_801ED668 + 0x76);
     } else {
