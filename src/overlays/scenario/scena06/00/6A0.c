@@ -245,7 +245,27 @@ INCLUDE_ASM(func_801FD800);
 
 INCLUDE_ASM(func_801FDD14);
 
-INCLUDE_ASM(func_801FDD7C);
+MATCH s32 func_801FDD7C(void) {
+    if (Item_Count(1, 0x47, 0) == 0) {
+        Game_SetScriptActive();
+        g_ScriptVars[0]       = 0;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[2]       = 0;
+        g_ScriptVars[3]       = 0;
+        g_SceneState.step_05  = 0;
+        g_SceneState.state_04 = 0xB;
+        return 1;
+    }
+
+    Game_SetScriptActive();
+    g_SceneState.step_05  = 5;
+    g_ScriptVars[0]       = 0;
+    g_ScriptVars[1]       = 0;
+    g_ScriptVars[2]       = 0;
+    g_ScriptVars[3]       = 0;
+    g_SceneState.state_04 = 0xB;
+    return 1;
+}
 
 MATCH void func_801FDE2C(void) {
 }

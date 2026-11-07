@@ -13,13 +13,6 @@ extern Callback D_800C2740[];
 extern Callback D_800C2770[];
 extern Callback D_800C2788[];
 extern Callback D_800C2794[];
-extern u16 D_801EB688;
-extern u16 D_801EB68A;
-extern s32 D_801EB77C;
-extern s32 D_801EB780;
-extern s32 D_801EB784;
-extern u16 D_801EB7A0;
-extern u16 D_801EB7A2;
 
 /* The mode handler sets the image installs into the battle hooks; the
  * addresses are in [emi/boss/boss004/13] of config/symbols.toml. */
