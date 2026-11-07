@@ -4,6 +4,6 @@
  * helper owned by this overlay. */
 
 MATCH void func_801E9140(void) {
-    D_801ED3B0[g_MenuCurrentPanel->state]();
+    g_MenuStartPanel1StateFuncs[g_MenuCurrentPanel->state]();
     Menu_DrawZennyWindow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, 0, g_Zenny);
 }
