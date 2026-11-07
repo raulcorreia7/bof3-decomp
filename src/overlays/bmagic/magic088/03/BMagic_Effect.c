@@ -41,6 +41,7 @@ MATCH void func_801EEFA0(void) {
 
 #include "overlays/bmagic/Effect_Pause.h"
 
+/* hint: the two palette-offset adds, the zero test and the actor local leave the frame 8 bytes small (24 against 32); first differing instruction: addiu sp,sp,-24 at +0x8; the retail body also loads the selected actor into a0 before the first store. */
 INCLUDE_ASM(func_801EF0A8);
 
 INCLUDE_ASM(func_801EF1AC);

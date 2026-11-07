@@ -15,7 +15,6 @@ NON_MATCHING void func_801E7BA0(void) {
     s32           temp_a0_392;
     s32           temp_a0_435;
     s32           temp_a0_92;
-    s32           temp_v0_195;
     s32           temp_v0_339;
     s32           temp_v0_494;
     s32           temp_v0_532;
@@ -88,9 +87,8 @@ NON_MATCHING void func_801E7BA0(void) {
             D_801EB4D4  = temp_v0_176 & 0xFFF884FD;
         }
         temp_v1_191 = (g_Task)->slot;
-        temp_v0_195 = temp_v1_191 * BATTLE_PARTY_STRIDE;
         var_a3_198  = &g_BattlePartyBattlers[temp_v1_191];
-        var_a2_201  = temp_v0_195 + s_BattleBattlerTemplates;
+        var_a2_201  = &s_BattleBattlerTemplates[temp_v1_191];
         temp_t0_202 = var_a2_201 + BATTLE_PARTY_STRIDE;
         do {
             *(s32*)(var_a3_198)          = (s32) * (s32*)(var_a2_201);

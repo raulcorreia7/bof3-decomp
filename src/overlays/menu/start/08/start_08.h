@@ -493,7 +493,7 @@ extern s32  func_801DCDB8(u16, u16, u8, u8, s32);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 void        Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused);
 void        Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s32 equip_slot, u8 item_id);
-void        Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height);
+void        Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DFBF4 */
 extern void Menu_DrawInventoryWindow(MenuPanelTask* task);
 extern void func_801E0354(MenuPanelTask* task);

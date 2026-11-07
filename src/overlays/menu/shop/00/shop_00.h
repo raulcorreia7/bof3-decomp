@@ -560,7 +560,7 @@ s32  Char_GetExpForLevel(s32 character, s32 level);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style);
 void Menu_DrawRowIcons(u8* row_record, s32 palette_index);
 void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32 equip_slot, u8 item_id);
-void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height);
+void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DC6FC */
 void Menu_DrawInventoryWindow(MenuPanelTask* arg0);
 void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);

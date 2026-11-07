@@ -219,8 +219,7 @@ INCLUDE_ASM(Menu_DrawEquipStatWindow);
 
 #include "overlays/menu/Menu_DrawFilledPanel.h"
 
-/* blocker: per-band draw-mode setup. */
-INCLUDE_ASM(Menu_DrawWindowFrame);
+#include "overlays/menu/Menu_DrawWindowFrame.h"
 
 #include "overlays/menu/Menu_DrawInventoryWindow.h"
 
