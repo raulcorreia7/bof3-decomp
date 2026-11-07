@@ -64,8 +64,8 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     value  = func_801AF20C(*slotp) & BYTE_MASK;
     offset = (value * 4) - 0x4E;
     UI_DrawText((task->pos.x - offset), (task->pos.y + 7), -(task->unk_09 != 0) & 7, 0x10, *slotp);
-    sprintf((char*)g_UiFormatBuffer, (const char*)D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK,
-            (task->unk_0A != 4) ? 0x80 : 0x20);
+    TEXT_Format(g_UiFormatBuffer, D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK,
+                (task->unk_0A != 4) ? 0x80 : 0x20);
     UI_DrawGlyphString((task->pos.x + 85), (task->pos.y + 146), -(task->unk_09 != 0) & 7, g_UiFormatBuffer);
     UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_10 & 2) != 0 ? s_MenuLine1FlagRun : s_MenuLine1Run, 1);
     UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_10 & 1) != 0 ? s_MenuLine2FlagRun : s_MenuLine2Run, 1);

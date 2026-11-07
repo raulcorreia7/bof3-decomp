@@ -196,11 +196,11 @@ MATCH void func_801F2D3C(void) {
 
     work           = D_801F3E00;
     ratio_x        = (work->offset.x << 7) / work->scale;
-    x_base         = D_800E4A00.x;
+    x_base         = (u16)D_800E4A00.vx;
     i              = 0;
     work->screen.x = (x_base + ratio_x);
     ratio_y        = (work->offset.y << 7) / work->scale;
-    y_base         = D_800E4A00.y;
+    y_base         = (u16)D_800E4A00.vy;
     w              = work;
     work->screen.y = (y_base + ratio_y);
 
@@ -304,14 +304,14 @@ MATCH void func_801F3060(void) {
 }
 
 MATCH void func_801F318C(s16 radius) {
-    UPoint2D  center;
-    UPoint2D  point;
-    s32       pos[4];
-    u8        scratch[0x20];
-    POLY_G3*  primitive;
-    UPoint2D* ring;
-    s32       angle = 65408;
-    s8        i     = 0;
+    DVECTOR  center;
+    DVECTOR  point;
+    s32      pos[4];
+    u8       scratch[0x20];
+    POLY_G3* primitive;
+    DVECTOR* ring;
+    s32      angle = 65408;
+    s8       i     = 0;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
     GFX_AddPrim(3u, 0x0Cu);
@@ -323,7 +323,7 @@ MATCH void func_801F318C(s16 radius) {
     Area_ProjectPoint(pos, &center);
     D_800E4A00 = center;
 
-    ring   = MEM_PTR(UPoint2D, 0x800E4A00u);
+    ring   = MEM_PTR(DVECTOR, 0x800E4A00u);
     pos[0] = g_Task->pos.x.fixed + ((radius * rcos(65408)) >> 4);
     pos[1] = g_Task->pos.y.fixed + ((radius * rsin(65408)) >> 4);
     pos[2] = g_Task->pos.z.fixed;
@@ -333,7 +333,7 @@ MATCH void func_801F318C(s16 radius) {
         primitive = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(primitive);
         SetSemiTrans(primitive, 1);
-        setXY2(primitive, center.x, center.y, point.x, point.y);
+        setXY2(primitive, (u16)center.vx, (u16)center.vy, (u16)point.vx, (u16)point.vy);
 
         angle += 128;
         pos[0] = g_Task->pos.x.fixed + ((radius * rcos((u16)angle)) >> 4);
@@ -341,8 +341,8 @@ MATCH void func_801F318C(s16 radius) {
         pos[2] = g_Task->pos.z.fixed;
         Area_ProjectPoint(pos, &point);
 
-        primitive->x2 = point.x;
-        primitive->y2 = point.y;
+        primitive->x2 = (u16)point.vx;
+        primitive->y2 = (u16)point.vy;
         ring[i + 1]   = point;
 
         setRGB0(primitive, 255u, 255u, 255u);

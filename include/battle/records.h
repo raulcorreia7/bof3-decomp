@@ -384,9 +384,9 @@ typedef struct EnemyBattler {
     Stats       stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
     Stats       base;  /* +0xC0 the stats before buffs */
     u8          kind;
-    u8          unk_E1;
-    u8          unk_E2; /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
-    u8          unk_E3; /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
+    u8          fired_events; /* +0xE1 one bit per event packet already applied */
+    u8          unk_E2;       /* +0xE2 battle/battle/15's cell; battle/battle/03 leaves it padded */
+    u8          unk_E3;       /* +0xE3 battle/battle/15's cell; battle/battle/03 leaves it padded */
     ModeFunc    unk_E4;
     u16*        unk_E8;
     u8*         script;

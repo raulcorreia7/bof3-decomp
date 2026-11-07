@@ -40,7 +40,7 @@ MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
         part_rotation.vx = (rot.vx + (((((ScenePart*)part_list)[part_word_offset].raw) >> 0x12) & 0xFFC)) & ANGLE_MASK;
         part_rotation.vy = (rot.vy + (((((ScenePart*)part_list)[part_word_offset].raw) >> 8) & 0xFFC)) & ANGLE_MASK;
         part_rotation.vz = (rot.vz + (((((ScenePart*)part_list)[part_word_offset].raw) & 0x3FF) * 4)) & ANGLE_MASK;
-        RotTrans(&pos, (VECTOR*)matrix.t, &flag);
+        RotTransMatrix(&pos, matrix, &flag);
         RotMatrix(&part_rotation, &matrix);
         MulMatrix2(&g_CameraMatrix, &matrix);
         SetRotMatrix(&matrix);

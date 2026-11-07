@@ -95,7 +95,7 @@ MATCH void func_801EF52C(void) {
     pos.vx = (FIELD(s32, D_801F05F8, 0x10) >> 9) - 0x4000;
     pos.vy = (FIELD(s32, D_801F05F8, 0x14) >> 9) - 0x4000;
     pos.vz = -FIELD(s16, D_801F05F8, 0x1A) / 2;
-    RotTrans(&pos, &matrix.t, &flags);
+    RotTransMatrix(&pos, matrix, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);

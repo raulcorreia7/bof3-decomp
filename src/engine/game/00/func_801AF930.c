@@ -11,6 +11,6 @@ MATCH void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* comm
     count = func_801AF20C(command_stream) & BYTE_MASK;
     UI_DrawText((x + 10), y, palette_index, count, command_stream);
     buffer = g_UiFormatBuffer;
-    sprintf((char*)buffer, (const char*)D_80195F98, stat_value);
+    TEXT_Format(buffer, D_80195F98, stat_value);
     UI_DrawGlyphString((x + 109), y2, palette_index, buffer);
 }

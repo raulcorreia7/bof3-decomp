@@ -36,7 +36,7 @@ MATCH void Fishing_DrawRank(s16 x, s16 y) {
         }
     }
 
-    sprintf((char*)g_UiFormatBuffer, D_801D0C8C, value & HALF_MASK);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C8C, value & HALF_MASK);
     for (i = 0; i < 5; i++) {
         if (g_UiFormatBuffer[i] == ' ') {
             g_UiFormatBuffer[i] = STRING_SPACE;

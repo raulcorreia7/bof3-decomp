@@ -55,7 +55,7 @@ MATCH void func_801D6F34(void) {
             }
         }
     }
-    sprintf((char*)g_UiFormatBuffer, (const char*)D_801D0C04, FISHING_STATE->saved_index_0B);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C04, FISHING_STATE->saved_index_0B);
     if (g_FrameCount & 4) {
         UI_DrawAsciiString(0xAC, 0xB0, 2, g_UiFormatBuffer);
     } else {

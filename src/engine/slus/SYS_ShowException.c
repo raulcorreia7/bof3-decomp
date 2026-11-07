@@ -53,7 +53,7 @@ MATCH void SYS_ShowException(void) {
 
         for (i = 0; i < 18; i++) {
             UI_DrawGlyphString(x_label, y, 0, (void*)D_8017F470[i]);
-            sprintf((char*)g_UiFormatBuffer, D_80149990, saved_context[i + 2]);
+            TEXT_Format(g_UiFormatBuffer, D_80149990, saved_context[i + 2]);
             UI_DrawGlyphString(x_value, y, 0, (void*)g_UiFormatBuffer);
             y += 8;
         }
@@ -64,7 +64,7 @@ MATCH void SYS_ShowException(void) {
 
         for (i = 18; i < 37; i++) {
             UI_DrawGlyphString(x_label, y, 0, (void*)D_8017F470[i]);
-            sprintf((char*)g_UiFormatBuffer, D_80149990, saved_context[i + 2]);
+            TEXT_Format(g_UiFormatBuffer, D_80149990, saved_context[i + 2]);
             UI_DrawGlyphString(x_value, y, 0, (void*)g_UiFormatBuffer);
             y += 8;
         }
@@ -72,9 +72,9 @@ MATCH void SYS_ShowException(void) {
         UI_DrawGlyphString(20, 20, 0, (void*)PTR_s_EXCEPTION_8017f504);
         UI_DrawGlyphString(100, 20, 2, *(void* const*)((const u8*)PTR_s_INTERRRUPT_8017f508 + (exception_code & 0x3C)));
 
-        sprintf((char*)g_UiFormatBuffer, D_80149990, exception_pc);
+        TEXT_Format(g_UiFormatBuffer, D_80149990, exception_pc);
         UI_DrawGlyphString(70, 36, 3, (void*)g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, D_80149990, exception_pc[0]);
+        TEXT_Format(g_UiFormatBuffer, D_80149990, exception_pc[0]);
         UI_DrawGlyphString(142, 36, 4, (void*)g_UiFormatBuffer);
 
         DrawSync(0);

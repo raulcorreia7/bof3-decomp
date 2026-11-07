@@ -479,17 +479,17 @@ MATCH void func_800F6730(void) {
         value = Item_GetRecord(ITEM_CAT_ITEM,
                                (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
         UI_DrawText(0xAD, (0x58 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
-        sprintf(g_UiFormatBuffer, D_800F5000.format,
-                D_801E2F81[D_801E3134[g_GameContextKind][slot]][i] * (s8)s_ListItemId);
+        TEXT_Format(g_UiFormatBuffer, D_800F5000.format,
+                    D_801E2F81[D_801E3134[g_GameContextKind][slot]][i] * (s8)s_ListItemId);
         UI_DrawGlyphString(0x110, (0x5C + i * 13), 0, g_UiFormatBuffer);
         cost = Item_Count(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK, 0);
         if (cost < D_801E2F81[D_801E3134[g_GameContextKind][slot]][i]) {
             UI_DrawText(0xAD, (0xA4 + i * 13), 7, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
-            sprintf(g_UiFormatBuffer, D_800F5000.format, cost);
+            TEXT_Format(g_UiFormatBuffer, D_800F5000.format, cost);
             UI_DrawGlyphString(0x110, (0xA8 + i * 13), 7, g_UiFormatBuffer);
         } else {
             UI_DrawText(0xAD, (0xA4 + i * 13), 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
-            sprintf(g_UiFormatBuffer, D_800F5000.format, cost);
+            TEXT_Format(g_UiFormatBuffer, D_800F5000.format, cost);
             UI_DrawGlyphString(0x110, (0xA8 + i * 13), 0, g_UiFormatBuffer);
         }
     }
@@ -546,7 +546,7 @@ MATCH void func_800F6C5C(void) {
     value = Item_GetRecord(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00);
     UI_DrawText(0x21, 0x68, 0, func_801AF20C((u8*)value) & BYTE_MASK, (u8*)value);
 
-    sprintf(g_UiFormatBuffer, D_800F5000.format, (s8)s_ListItemId);
+    TEXT_Format(g_UiFormatBuffer, D_800F5000.format, (s8)s_ListItemId);
     UI_DrawGlyphString(0x84, 0x6C, 0, g_UiFormatBuffer);
 
     entry = D_801E3134[g_GameContextKind][slot];
@@ -555,15 +555,15 @@ MATCH void func_800F6C5C(void) {
     UI_DrawText(0x21, 0x7C, 0, 0xFF, (u8*)(D_80010096 + 0x80010000u));
 
     entry = D_801E3134[g_GameContextKind][slot];
-    sprintf(g_UiFormatBuffer, D_800F5000.format,
-            Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 0) & HALF_MASK);
+    TEXT_Format(g_UiFormatBuffer, D_800F5000.format,
+                Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 0) & HALF_MASK);
     UI_DrawGlyphString(0x84, 0x80, 0, g_UiFormatBuffer);
 
     UI_DrawText(0x21, 0x88, 0, 0xFF, (u8*)(D_80010098 + 0x80010000u));
 
     entry = D_801E3134[g_GameContextKind][slot];
-    sprintf(g_UiFormatBuffer, D_800F5000.format,
-            Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 1) & HALF_MASK);
+    TEXT_Format(g_UiFormatBuffer, D_800F5000.format,
+                Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 1) & HALF_MASK);
     UI_DrawGlyphString(0x84, 0x8C, 0, g_UiFormatBuffer);
 }
 

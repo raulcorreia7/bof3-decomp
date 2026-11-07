@@ -34,7 +34,7 @@ void        func_800AFC98(s32 effect_0, s32 effect_1);
 void        func_800AFD9C(void);
 u8          func_800AFF98(void);
 /* func_801DB524 */
-void        func_801DD350(s32 arg0);
+void        func_801DD350(void* work);
 u8          func_801DD7AC(s32 selector);
 void        func_801E257C(u32 enemy_index, u32 script_index);
 u8          Battle_PickRandomTarget(u8 excluded_slot);
