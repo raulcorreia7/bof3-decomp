@@ -1,7 +1,5 @@
 #include "battle_03.h"
 
-extern s8 D_801EAEA4[];
-
 /* Reserves the battle stage's selection panel entries and fills one ring record per active battler
  * from its stage tables.
  */
