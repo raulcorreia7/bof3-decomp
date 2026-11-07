@@ -4,22 +4,24 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC18(void) {
+/* func_801EEC18 */
+MATCH void BMagic_UpdateBurn(void) {
     BattleHandlerTable5 handlers;
 
     handlers = D_801EEC04;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);
     if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
         Effect_SetActorMatrix();
-        func_801EF6BC();
-        func_801EFA1C();
+        BMagic_DrawBurnFlameQuads();
+        BMagic_DrawBurnFlameTris();
         PopMatrix();
     }
 }
 
-INCLUDE_ASM(func_801EECD4);
+INCLUDE_ASM(BMagic_SpawnBurnFlames);
 
-MATCH void func_801EEE20(void) {
+/* func_801EEE20 */
+MATCH void BMagic_SelectBurnTarget(void) {
     u8 timer;
 
     timer          = g_Task->unk_09 + 1;
@@ -36,11 +38,12 @@ MATCH void func_801EEE20(void) {
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
-MATCH void func_801EEF6C(void) {
+/* func_801EEF6C */
+MATCH void BMagic_UpdateBurnSprites(void) {
     SYS_DISPATCH_BYTE(D_801EFCD4, g_Task->header.mode);
     if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
         Effect_SetActorMatrix();
-        func_801EF194();
+        BMagic_DrawBurnSprites();
         PopMatrix();
     }
 }
@@ -52,10 +55,10 @@ INCLUDE_ASM(func_801EF0A4);
 
 INCLUDE_ASM(func_801EF108);
 
-INCLUDE_ASM(func_801EF194);
+INCLUDE_ASM(BMagic_DrawBurnSprites);
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-INCLUDE_ASM(func_801EF6BC);
+INCLUDE_ASM(BMagic_DrawBurnFlameQuads);
 
-INCLUDE_ASM(func_801EFA1C);
+INCLUDE_ASM(BMagic_DrawBurnFlameTris);
