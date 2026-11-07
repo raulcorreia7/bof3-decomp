@@ -16,7 +16,7 @@ MATCH void func_8019C664(void) {
     COORD_INT(work->pos.z)  = (s16)((u16)D_80145ECE + 0xC0);
     work->vx                = (s32)(g_FacingOffsets[work->direction_08].x * 0x10);
     FIELD(s32, work, 0x10u) = (s32)(g_FacingOffsets[work->direction_08].y * 0x10);
-    if (D_80145F09 == 1) {
+    if (g_BattlePartyBattlers[0].chr.character_id == 1) {
         work->unk_0A = 0xA;
     } else {
         work->unk_0A = 0x12;
