@@ -1,11 +1,12 @@
 #include "start_08.h"
 
-MATCH void func_801E9554(void) {
+/* Menu_TitlePanel */
+MATCH void Menu_TitlePanel(void) {
     u8* resource;
     s32 panel_x;
     u32 label_dx;
 
-    g_MenuStartPanel4StateFuncs[g_MenuCurrentPanel->state]();
+    g_MenuStartTitleStates[g_MenuCurrentPanel->state]();
     Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, MENU_HEADER_SHORT_WIDTH,
                        MENU_HEADER_HEIGHT, g_WindowStyle);
     resource = Resource_GetText(g_MenuCurrentPanel->unk_10);

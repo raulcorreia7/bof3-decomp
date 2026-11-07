@@ -5,8 +5,8 @@
 
 #define ICON_CURSOR ((s16)g_MenuCurrentPanel->unk_10)
 
-MATCH void func_801E2808(void) {
-    g_ShopPanel0StateFuncs[g_MenuCurrentPanel->state]();
+MATCH void Menu_MessagePanel(void) {
+    g_ShopMessageStates[g_MenuCurrentPanel->state]();
     Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT,
                        g_WindowStyle);
     if (ICON_CURSOR != 0) {
