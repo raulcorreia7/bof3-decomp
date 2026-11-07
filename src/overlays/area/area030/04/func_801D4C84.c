@@ -28,7 +28,7 @@ MATCH void func_801D4C84(void) {
             func_801E0F4C(FISHING_STATE->step_timer_09 * 0x30 + 0x80, 0x5B, 0xFF);
         }
     }
-    func_801E1320(0xB0, 0x9C);
+    Fishing_DrawRank(0xB0, 0x9C);
     func_801E162C(8, 0x94, 0xFFFF);
     func_801D7B64();
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);

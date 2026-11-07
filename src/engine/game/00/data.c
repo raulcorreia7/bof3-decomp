@@ -38,7 +38,7 @@ Callback g_GameModeHandlers[8] = {(Callback)func_80197A60, (Callback)func_80197A
                                   (Callback)func_80197C94, (Callback)func_80197E54, (Callback)func_801D1014,
                                   (Callback)func_80197EFC, (Callback)func_80197F48};
 
-GameDelta D_801C7B74[4] = {GAME_PAIR(4, 0), GAME_PAIR(0, 4), GAME_PAIR(-4, 0), GAME_PAIR(0, -4)};
+Offset2DB s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
 
 Callback g_GameStateHandlers[3] = {(Callback)Game_LoadShopOverlay, (Callback)func_80199398, (Callback)func_801983D8};
 
@@ -170,10 +170,10 @@ Callback D_801C80EC[3] = {(Callback)func_8019AC84, (Callback)func_8019ACF4, (Cal
 Callback D_801C80F8[4] = {(Callback)func_8019ADE8, (Callback)func_8019AF1C, (Callback)func_8019B024,
                           (Callback)func_8019B0EC};
 
-s32 D_801C8108[3][2] = {
-    GAME_PAIR(0x300000, 0x80000),
-    GAME_PAIR(0x200000, 0x80000),
-    GAME_PAIR(0x100000, 0x80000),
+ActorToss s_ActorTossArcs[3] = {
+    {0x300000, 0x80000},
+    {0x200000, 0x80000},
+    {0x100000, 0x80000},
 };
 
 Callback D_801C8120[3] = {(Callback)func_8019B150, (Callback)func_8019B1E8, (Callback)func_8019B0EC};
@@ -326,20 +326,20 @@ SceneFunc g_SceneObjects[66] = {
     (SceneFunc)&D_801F4288, (SceneFunc)&D_801F3184,   (SceneFunc)&D_801F15B8,   (SceneFunc)func_801F2CA8,
     (SceneFunc)&D_801F4594, (SceneFunc)&D_801F3C9C};
 
-AreaHooks D_801C86F8 = {{MAP_HOOK(AREA_ID_MOMO_TOWER_UPPER, (Callback)func_801F33A8),  MAP_HOOK(AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, (Callback)func_801F4F60),
-                         MAP_HOOK(AREA_ID_PLANT, (Callback)func_801F3194),  MAP_HOOK(AREA_ID_LIGHTHOUSE_INSIDE, (Callback)func_801F5880),
-                         MAP_HOOK(AREA_ID_STEEL_BEACH_FREIGHTER, (Callback)func_801F3350),  MAP_HOOK(AREA_ID_DUMP, (Callback)func_801F3E14),
-                         MAP_HOOK(AREA_ID_BLACK_SHIP_EARLY, (Callback)func_801F5130), MAP_HOOK(AREA_ID_COLONY_OUTSIDE, (Callback)func_801F4504),
-                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_DOLPHIN, (Callback)func_801F4528), MAP_HOOK(AREA_ID_FAIRY_VILLAGE_176, (Callback)func_801F3378),
-                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_177, (Callback)func_801F3378), MAP_HOOK(AREA_ID_FAIRY_VILLAGE_178, (Callback)func_801F3378),
-                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_179, (Callback)func_801F3378), MAP_HOOK(AREA_ID_FAIRY_VILLAGE_180, (Callback)func_801F3378),
-                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_181, (Callback)func_801F3378), MAP_HOOK(AREA_ID_FAIRY_VILLAGE_182, (Callback)func_801F3378),
-                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_183, (Callback)func_801F3378), MAP_HOOK(AREA_ID_FAIRY_VILLAGE_184, (Callback)func_801F3378),
-                         MAP_HOOK(AREA_ID_FAIRY_VILLAGE_185, (Callback)func_801F3378), MAP_HOOK(AREA_ID_DAUNA_MINE_NO_TEXT, (Callback)func_801F2D78),
-                         MAP_HOOK(AREA_ID_RELAY_POINT_A_PORTAL, (Callback)func_801F3A14), MAP_HOOK(AREA_ID_MYRIA_STATION_WORKERS, (Callback)func_801F4914),
-                         MAP_HOOK(AREA_ID_FACTORY_OUTSIDE_SECOND, (Callback)func_801F4364), MAP_HOOK(AREA_ID_FACTORY_BLOCK_ROOM, (Callback)func_801F4380),
-                         MAP_HOOK(AREA_ID_CAER_XHAN_LIFT_AREA, (Callback)func_801F41A0), MAP_HOOK(AREA_ID_RYU_DREAM_FIRST, (Callback)func_801F4158),
-                         MAP_HOOK(AREA_ID_HIDDEN_FACTORY_ENTRANCE, (Callback)func_801F4534), MAP_HOOK(AREA_ID_HIDDEN_FACTORY_ROOMS, (Callback)func_801F502C)}};
+AreaHooks D_801C86F8 = {{{AREA_ID_MOMO_TOWER_UPPER, {0, 0, 0}, (Callback)func_801F33A8},  {AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, {0, 0, 0}, (Callback)func_801F4F60},
+                         {AREA_ID_PLANT, {0, 0, 0}, (Callback)func_801F3194},  {AREA_ID_LIGHTHOUSE_INSIDE, {0, 0, 0}, (Callback)func_801F5880},
+                         {AREA_ID_STEEL_BEACH_FREIGHTER, {0, 0, 0}, (Callback)func_801F3350},  {AREA_ID_DUMP, {0, 0, 0}, (Callback)func_801F3E14},
+                         {AREA_ID_BLACK_SHIP_EARLY, {0, 0, 0}, (Callback)func_801F5130}, {AREA_ID_COLONY_OUTSIDE, {0, 0, 0}, (Callback)func_801F4504},
+                         {AREA_ID_FAIRY_VILLAGE_DOLPHIN, {0, 0, 0}, (Callback)func_801F4528}, {AREA_ID_FAIRY_VILLAGE_176, {0, 0, 0}, (Callback)func_801F3378},
+                         {AREA_ID_FAIRY_VILLAGE_177, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_178, {0, 0, 0}, (Callback)func_801F3378},
+                         {AREA_ID_FAIRY_VILLAGE_179, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_180, {0, 0, 0}, (Callback)func_801F3378},
+                         {AREA_ID_FAIRY_VILLAGE_181, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_182, {0, 0, 0}, (Callback)func_801F3378},
+                         {AREA_ID_FAIRY_VILLAGE_183, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_FAIRY_VILLAGE_184, {0, 0, 0}, (Callback)func_801F3378},
+                         {AREA_ID_FAIRY_VILLAGE_185, {0, 0, 0}, (Callback)func_801F3378}, {AREA_ID_DAUNA_MINE_NO_TEXT, {0, 0, 0}, (Callback)func_801F2D78},
+                         {AREA_ID_RELAY_POINT_A_PORTAL, {0, 0, 0}, (Callback)func_801F3A14}, {AREA_ID_MYRIA_STATION_WORKERS, {0, 0, 0}, (Callback)func_801F4914},
+                         {AREA_ID_FACTORY_OUTSIDE_SECOND, {0, 0, 0}, (Callback)func_801F4364}, {AREA_ID_FACTORY_BLOCK_ROOM, {0, 0, 0}, (Callback)func_801F4380},
+                         {AREA_ID_CAER_XHAN_LIFT_AREA, {0, 0, 0}, (Callback)func_801F41A0}, {AREA_ID_RYU_DREAM_FIRST, {0, 0, 0}, (Callback)func_801F4158},
+                         {AREA_ID_HIDDEN_FACTORY_ENTRANCE, {0, 0, 0}, (Callback)func_801F4534}, {AREA_ID_HIDDEN_FACTORY_ROOMS, {0, 0, 0}, (Callback)func_801F502C}}};
 
 u8 s_TalkMessageIds[36] = {0x53, 0x00, 0x00, 0x5B, 0x6C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x54,
                            0x00, 0x00, 0x5C, 0x6D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x00,
@@ -2308,38 +2308,38 @@ LevelGrowth g_LevelGrowth[LEVEL_GROWTH_CHARACTER_COUNT][LEVEL_GROWTH_LEVEL_COUNT
      LEVEL_OBJECT(0, 0, 0, 0, 0, 0, 0, ABILITY_NONE, ABILITY_NONE)}};
 
 UvRect D_801CCE84[62] = {
-    UV_RECT(120, 144, 24, 16), UV_RECT(144, 144, 8, 16), UV_RECT(120, 160, 24, 40), UV_RECT(144, 160, 8, 8),
-    UV_RECT(144, 168, 8, 16),  UV_RECT(144, 184, 8, 8),  UV_RECT(144, 192, 8, 8),   UV_RECT(112, 192, 8, 16),
-    UV_RECT(152, 144, 8, 56),  UV_RECT(160, 144, 8, 8),  UV_RECT(160, 152, 8, 8),   UV_RECT(160, 160, 8, 8),
-    UV_RECT(160, 168, 8, 8),   UV_RECT(160, 176, 8, 8),  UV_RECT(160, 184, 8, 16),  UV_RECT(168, 144, 8, 8),
-    UV_RECT(168, 152, 8, 8),   UV_RECT(168, 160, 8, 16), UV_RECT(168, 176, 8, 8),   UV_RECT(168, 184, 8, 16),
-    UV_RECT(176, 144, 48, 40), UV_RECT(224, 144, 8, 40), UV_RECT(232, 144, 8, 40),  UV_RECT(240, 0, 8, 56),
-    UV_RECT(248, 0, 8, 56),    UV_RECT(240, 56, 8, 56),  UV_RECT(248, 56, 8, 56),   UV_RECT(240, 112, 8, 56),
-    UV_RECT(176, 184, 8, 8),   UV_RECT(176, 192, 8, 8),  UV_RECT(184, 184, 8, 16),  UV_RECT(192, 184, 8, 24),
-    UV_RECT(200, 184, 8, 16),  UV_RECT(208, 192, 8, 16), UV_RECT(216, 184, 8, 24),  UV_RECT(168, 200, 24, 8),
-    UV_RECT(224, 184, 8, 24),  UV_RECT(232, 184, 8, 24), UV_RECT(240, 184, 8, 24),  UV_RECT(248, 184, 8, 24),
-    UV_RECT(0, 192, 8, 8),     UV_RECT(8, 192, 8, 8),    UV_RECT(16, 192, 8, 8),    UV_RECT(0, 200, 8, 8),
-    UV_RECT(16, 200, 8, 8),    UV_RECT(0, 208, 8, 8),    UV_RECT(8, 208, 8, 8),     UV_RECT(16, 208, 8, 8),
-    UV_RECT(24, 192, 32, 16),  UV_RECT(248, 112, 8, 56), UV_RECT(56, 192, 48, 16),  UV_RECT(24, 208, 8, 8),
-    UV_RECT(32, 208, 8, 8),    UV_RECT(40, 208, 8, 8),   UV_RECT(48, 208, 48, 16),  UV_RECT(96, 208, 8, 8),
-    UV_RECT(104, 208, 8, 8),   UV_RECT(112, 208, 8, 8),  UV_RECT(96, 216, 8, 8),    UV_RECT(104, 216, 8, 8),
-    UV_RECT(112, 216, 8, 8),   UV_RECT(200, 48, 27, 13)};
+    {120, 144, 24, 16}, {144, 144, 8, 16}, {120, 160, 24, 40}, {144, 160, 8, 8},
+    {144, 168, 8, 16},  {144, 184, 8, 8},  {144, 192, 8, 8},   {112, 192, 8, 16},
+    {152, 144, 8, 56},  {160, 144, 8, 8},  {160, 152, 8, 8},   {160, 160, 8, 8},
+    {160, 168, 8, 8},   {160, 176, 8, 8},  {160, 184, 8, 16},  {168, 144, 8, 8},
+    {168, 152, 8, 8},   {168, 160, 8, 16}, {168, 176, 8, 8},   {168, 184, 8, 16},
+    {176, 144, 48, 40}, {224, 144, 8, 40}, {232, 144, 8, 40},  {240, 0, 8, 56},
+    {248, 0, 8, 56},    {240, 56, 8, 56},  {248, 56, 8, 56},   {240, 112, 8, 56},
+    {176, 184, 8, 8},   {176, 192, 8, 8},  {184, 184, 8, 16},  {192, 184, 8, 24},
+    {200, 184, 8, 16},  {208, 192, 8, 16}, {216, 184, 8, 24},  {168, 200, 24, 8},
+    {224, 184, 8, 24},  {232, 184, 8, 24}, {240, 184, 8, 24},  {248, 184, 8, 24},
+    {0, 192, 8, 8},     {8, 192, 8, 8},    {16, 192, 8, 8},    {0, 200, 8, 8},
+    {16, 200, 8, 8},    {0, 208, 8, 8},    {8, 208, 8, 8},     {16, 208, 8, 8},
+    {24, 192, 32, 16},  {248, 112, 8, 56}, {56, 192, 48, 16},  {24, 208, 8, 8},
+    {32, 208, 8, 8},    {40, 208, 8, 8},   {48, 208, 48, 16},  {96, 208, 8, 8},
+    {104, 208, 8, 8},   {112, 208, 8, 8},  {96, 216, 8, 8},    {104, 216, 8, 8},
+    {112, 216, 8, 8},   {200, 48, 27, 13}};
 
 UvRect D_801CCF7C[53] = {
-    UV_RECT(0, 128, 32, 24),   UV_RECT(32, 128, 8, 24),   UV_RECT(40, 128, 16, 24),  UV_RECT(56, 128, 8, 24),
-    UV_RECT(0, 152, 8, 8),     UV_RECT(0, 160, 8, 8),     UV_RECT(8, 160, 8, 8),     UV_RECT(16, 160, 8, 8),
-    UV_RECT(16, 152, 8, 8),    UV_RECT(64, 128, 16, 24),  UV_RECT(80, 128, 8, 24),   UV_RECT(88, 128, 8, 24),
-    UV_RECT(96, 128, 24, 24),  UV_RECT(24, 152, 8, 8),    UV_RECT(32, 152, 8, 8),    UV_RECT(40, 152, 8, 8),
-    UV_RECT(24, 160, 8, 8),    UV_RECT(32, 160, 8, 8),    UV_RECT(40, 160, 8, 8),    UV_RECT(120, 128, 16, 24),
-    UV_RECT(136, 128, 8, 24),  UV_RECT(144, 128, 16, 24), UV_RECT(160, 128, 16, 16), UV_RECT(160, 144, 16, 8),
-    UV_RECT(176, 128, 16, 24), UV_RECT(48, 152, 8, 16),   UV_RECT(56, 152, 8, 16),   UV_RECT(64, 152, 8, 16),
-    UV_RECT(72, 152, 8, 16),   UV_RECT(80, 152, 8, 16),   UV_RECT(88, 152, 8, 8),    UV_RECT(192, 128, 16, 24),
-    UV_RECT(208, 128, 16, 8),  UV_RECT(208, 136, 16, 8),  UV_RECT(224, 128, 16, 16), UV_RECT(96, 152, 16, 16),
-    UV_RECT(112, 152, 8, 8),   UV_RECT(112, 160, 8, 8),   UV_RECT(120, 152, 16, 16), UV_RECT(136, 152, 16, 16),
-    UV_RECT(152, 160, 8, 8),   UV_RECT(160, 152, 16, 16), UV_RECT(176, 152, 8, 8),   UV_RECT(176, 160, 8, 8),
-    UV_RECT(0, 168, 40, 48),   UV_RECT(208, 144, 8, 24),  UV_RECT(216, 144, 16, 24), UV_RECT(232, 144, 16, 24),
-    UV_RECT(40, 168, 48, 24),  UV_RECT(88, 168, 48, 24),  UV_RECT(136, 168, 8, 24),  UV_RECT(144, 168, 16, 24),
-    UV_RECT(160, 168, 16, 24)};
+    {0, 128, 32, 24},   {32, 128, 8, 24},   {40, 128, 16, 24},  {56, 128, 8, 24},
+    {0, 152, 8, 8},     {0, 160, 8, 8},     {8, 160, 8, 8},     {16, 160, 8, 8},
+    {16, 152, 8, 8},    {64, 128, 16, 24},  {80, 128, 8, 24},   {88, 128, 8, 24},
+    {96, 128, 24, 24},  {24, 152, 8, 8},    {32, 152, 8, 8},    {40, 152, 8, 8},
+    {24, 160, 8, 8},    {32, 160, 8, 8},    {40, 160, 8, 8},    {120, 128, 16, 24},
+    {136, 128, 8, 24},  {144, 128, 16, 24}, {160, 128, 16, 16}, {160, 144, 16, 8},
+    {176, 128, 16, 24}, {48, 152, 8, 16},   {56, 152, 8, 16},   {64, 152, 8, 16},
+    {72, 152, 8, 16},   {80, 152, 8, 16},   {88, 152, 8, 8},    {192, 128, 16, 24},
+    {208, 128, 16, 8},  {208, 136, 16, 8},  {224, 128, 16, 16}, {96, 152, 16, 16},
+    {112, 152, 8, 8},   {112, 160, 8, 8},   {120, 152, 16, 16}, {136, 152, 16, 16},
+    {152, 160, 8, 8},   {160, 152, 16, 16}, {176, 152, 8, 8},   {176, 160, 8, 8},
+    {0, 168, 40, 48},   {208, 144, 8, 24},  {216, 144, 16, 24}, {232, 144, 16, 24},
+    {40, 168, 48, 24},  {88, 168, 48, 24},  {136, 168, 8, 24},  {144, 168, 16, 24},
+    {160, 168, 16, 24}};
 
 u8 s_ItemSpriteIds[16] = {0x06, 0x08, 0x0A, 0x09, 0x0B, 0x0C, 0x06, 0x06,
                           0x06, 0x06, 0x14, 0x15, 0x16, 0x00, 0x00, 0x00};
@@ -2410,9 +2410,9 @@ Callback D_801CD1D8[19] = {
     (Callback)func_801CF564, (Callback)func_801CF878, (Callback)func_801D0324, (Callback)func_801CF650,
     (Callback)func_801D0704, (Callback)func_801CFA30, (Callback)func_801D04DC};
 
-WorldMapBattlefields D_801CD224 = {{GAME_MAP(AREA_ID_YRAAL_WORLD_MAP, AREA_ID_YRAAL_BATTLEFIELD), GAME_MAP(AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, AREA_ID_YRAAL_BATTLEFIELD_BEFORE_NUE), GAME_MAP(AREA_ID_WYNDIA_WORLD_MAP, AREA_ID_WYNDIA_CENTRAL_BATTLEFIELD), GAME_MAP(AREA_ID_MOMO_TOWER_WORLD_MAP, AREA_ID_WYNDIA_EASTERN_BATTLEFIELD),
-                                    GAME_MAP(AREA_ID_RHAPALA_WORLD_MAP, AREA_ID_RHAPALA_BATTLEFIELD), GAME_MAP(AREA_ID_URKAN_TAPA_WORLD_MAP, AREA_ID_URKAN_BATTLEFIELD), GAME_MAP(AREA_ID_DAUNA_WORLD_MAP, AREA_ID_DAUNA_HILLS_BATTLEFIELD), GAME_MAP(AREA_ID_STEEL_BEACH_MAP, AREA_ID_YRAAL_BATTLEFIELD),
-                                    GAME_MAP(AREA_ID_KOMBINAT_WORLD_MAP, AREA_ID_LOST_SHORE_BATTLEFIELD), GAME_MAP(AREA_ID_DRAGNIER_WORLD_MAP, AREA_ID_DESERT_BATTLEFIELD)}};
+WorldMapBattlefields D_801CD224 = {{{AREA_ID_YRAAL_WORLD_MAP, AREA_ID_YRAAL_BATTLEFIELD}, {AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, AREA_ID_YRAAL_BATTLEFIELD_BEFORE_NUE}, {AREA_ID_WYNDIA_WORLD_MAP, AREA_ID_WYNDIA_CENTRAL_BATTLEFIELD}, {AREA_ID_MOMO_TOWER_WORLD_MAP, AREA_ID_WYNDIA_EASTERN_BATTLEFIELD},
+                                    {AREA_ID_RHAPALA_WORLD_MAP, AREA_ID_RHAPALA_BATTLEFIELD}, {AREA_ID_URKAN_TAPA_WORLD_MAP, AREA_ID_URKAN_BATTLEFIELD}, {AREA_ID_DAUNA_WORLD_MAP, AREA_ID_DAUNA_HILLS_BATTLEFIELD}, {AREA_ID_STEEL_BEACH_MAP, AREA_ID_YRAAL_BATTLEFIELD},
+                                    {AREA_ID_KOMBINAT_WORLD_MAP, AREA_ID_LOST_SHORE_BATTLEFIELD}, {AREA_ID_DRAGNIER_WORLD_MAP, AREA_ID_DESERT_BATTLEFIELD}}};
 
 WorldMapDestination D_801CD24C[10] = {
     {AREA_ID_YRAAL_WORLD_MAP, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}}, {AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}}, {AREA_ID_WYNDIA_WORLD_MAP, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}}, {AREA_ID_MOMO_TOWER_WORLD_MAP, AREA_ID_CAMP_ANGEL_TOWER, {0x13, 0x16}},
@@ -2488,11 +2488,11 @@ Callback D_801CD440[2] = {(Callback)func_801BC000, (Callback)Area_StepSceneTimer
 Callback D_801CD448[4] = {(Callback)func_801B32A4, (Callback)func_801B32D0, (Callback)func_801BD83C,
                           (Callback)func_801B3540};
 
-GameDelta s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
-    GAME_PAIR(-CAMERA_SCROLL_STEP, 0),
-    GAME_PAIR(0, -CAMERA_SCROLL_STEP),
-    GAME_PAIR(CAMERA_SCROLL_STEP, 0),
-    GAME_PAIR(0, CAMERA_SCROLL_STEP),
+Offset2DB s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
+    {-CAMERA_SCROLL_STEP, 0},
+    {0, -CAMERA_SCROLL_STEP},
+    {CAMERA_SCROLL_STEP, 0},
+    {0, CAMERA_SCROLL_STEP},
 };
 
 u8 s_BattleStartOffsets[12][2] = {
@@ -2539,33 +2539,33 @@ u8 D_801CD584[56] = {0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00, 0x02, 0x01,
                      0x02, 0x03, 0x00, 0x00, 0x03, 0x02, 0x02, 0x03, 0x03, 0x03, 0x00, 0x00, 0x04, 0x03,
                      0x00, 0x00, 0x03, 0x04, 0x00, 0x00, 0x04, 0x03, 0x03, 0x04, 0x04, 0x04, 0x00, 0x00};
 
-GameDelta s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT] = {
-    GAME_PAIR(0, 0), GAME_PAIR(-1, -1), GAME_PAIR(0, -1), GAME_PAIR(1, -1), GAME_PAIR(1, 0),
-    GAME_PAIR(1, 1), GAME_PAIR(0, 1), GAME_PAIR(-1, 1), GAME_PAIR(-1, 0), GAME_PAIR(-2, -2),
-    GAME_PAIR(-1, -2), GAME_PAIR(0, -2), GAME_PAIR(1, -2), GAME_PAIR(2, -2), GAME_PAIR(2, -1),
-    GAME_PAIR(2, 0), GAME_PAIR(2, 1), GAME_PAIR(2, 2), GAME_PAIR(1, 2), GAME_PAIR(0, 2),
-    GAME_PAIR(-1, 2), GAME_PAIR(-2, 2), GAME_PAIR(-2, 1), GAME_PAIR(-2, 0), GAME_PAIR(-2, -1),
-    GAME_PAIR(-3, -3), GAME_PAIR(-2, -3), GAME_PAIR(-1, -3), GAME_PAIR(0, -3), GAME_PAIR(1, -3),
-    GAME_PAIR(2, -3), GAME_PAIR(3, -3), GAME_PAIR(3, -2), GAME_PAIR(3, -1), GAME_PAIR(3, 0),
-    GAME_PAIR(3, 1), GAME_PAIR(3, 2), GAME_PAIR(3, 3), GAME_PAIR(2, 3), GAME_PAIR(1, 3),
-    GAME_PAIR(0, 3), GAME_PAIR(-1, 3), GAME_PAIR(-2, 3), GAME_PAIR(-3, 3), GAME_PAIR(-3, 2),
-    GAME_PAIR(-3, 1), GAME_PAIR(-3, 0), GAME_PAIR(-3, -1), GAME_PAIR(-3, -2), GAME_PAIR(0, 0),
+Offset2DB s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT] = {
+    {0, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0},
+    {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-2, -2},
+    {-1, -2}, {0, -2}, {1, -2}, {2, -2}, {2, -1},
+    {2, 0}, {2, 1}, {2, 2}, {1, 2}, {0, 2},
+    {-1, 2}, {-2, 2}, {-2, 1}, {-2, 0}, {-2, -1},
+    {-3, -3}, {-2, -3}, {-1, -3}, {0, -3}, {1, -3},
+    {2, -3}, {3, -3}, {3, -2}, {3, -1}, {3, 0},
+    {3, 1}, {3, 2}, {3, 3}, {2, 3}, {1, 3},
+    {0, 3}, {-1, 3}, {-2, 3}, {-3, 3}, {-3, 2},
+    {-3, 1}, {-3, 0}, {-3, -1}, {-3, -2}, {0, 0},
 };
 
-Point2DL D_801CD620[36] = {
-    GAME_PAIR(0x30000, 0x0),     GAME_PAIR(0x20000, 0x18000), GAME_PAIR(0x20000, -98304),  GAME_PAIR(0x30000, 0x0),
-    GAME_PAIR(0x10000, 0x30000), GAME_PAIR(0x10000, -196608), GAME_PAIR(0x40000, 0x18000), GAME_PAIR(0x40000, -98304),
-    GAME_PAIR(0x10000, 0x30000), GAME_PAIR(0x10000, -196608), GAME_PAIR(0x10000, 0x0),     GAME_PAIR(0x10000, 0x30000),
-    GAME_PAIR(0x10000, -196608), GAME_PAIR(0x40000, 0x18000), GAME_PAIR(0x40000, -98304),  GAME_PAIR(0x10000, 0x0),
-    GAME_PAIR(0x10000, 0x40000), GAME_PAIR(0x10000, -262144), GAME_PAIR(0x40000, 0x0),     GAME_PAIR(0x40000, 0x30000),
-    GAME_PAIR(0x40000, -196608), GAME_PAIR(0x8000, 0x18000),  GAME_PAIR(0x8000, -98304),   GAME_PAIR(0x8000, 0x48000),
-    GAME_PAIR(0x8000, -294912),  GAME_PAIR(0x38000, 0x0),     GAME_PAIR(0x38000, 0x30000), GAME_PAIR(0x38000, -196608),
-    GAME_PAIR(0x8000, 0x18000),  GAME_PAIR(0x8000, -98304),   GAME_PAIR(0x8000, 0x48000),  GAME_PAIR(0x8000, -294912),
-    GAME_PAIR(0x38000, 0x18000), GAME_PAIR(0x38000, -98304),  GAME_PAIR(0x38000, 0x48000), GAME_PAIR(0x38000, -294912),
+Point2DL s_EncounterEnemyOffsets[36] = {
+    {TO_COORD(3), 0},     {TO_COORD(2), TO_COORD_HALF(1)}, {TO_COORD(2), -TO_COORD_HALF(1)},  {TO_COORD(3), 0},
+    {TO_COORD(1), TO_COORD(3)}, {TO_COORD(1), -TO_COORD(3)}, {TO_COORD(4), TO_COORD_HALF(1)}, {TO_COORD(4), -TO_COORD_HALF(1)},
+    {TO_COORD(1), TO_COORD(3)}, {TO_COORD(1), -TO_COORD(3)}, {TO_COORD(1), 0},     {TO_COORD(1), TO_COORD(3)},
+    {TO_COORD(1), -TO_COORD(3)}, {TO_COORD(4), TO_COORD_HALF(1)}, {TO_COORD(4), -TO_COORD_HALF(1)},  {TO_COORD(1), 0},
+    {TO_COORD(1), TO_COORD(4)}, {TO_COORD(1), -TO_COORD(4)}, {TO_COORD(4), 0},     {TO_COORD(4), TO_COORD(3)},
+    {TO_COORD(4), -TO_COORD(3)}, {COORD_HALF, TO_COORD_HALF(1)},  {COORD_HALF, -TO_COORD_HALF(1)},   {COORD_HALF, TO_COORD_HALF(4)},
+    {COORD_HALF, -TO_COORD_HALF(4)},  {TO_COORD_HALF(3), 0},     {TO_COORD_HALF(3), TO_COORD(3)}, {TO_COORD_HALF(3), -TO_COORD(3)},
+    {COORD_HALF, TO_COORD_HALF(1)},  {COORD_HALF, -TO_COORD_HALF(1)},   {COORD_HALF, TO_COORD_HALF(4)},  {COORD_HALF, -TO_COORD_HALF(4)},
+    {TO_COORD_HALF(3), TO_COORD_HALF(1)}, {TO_COORD_HALF(3), -TO_COORD_HALF(1)},  {TO_COORD_HALF(3), TO_COORD_HALF(4)}, {TO_COORD_HALF(3), -TO_COORD_HALF(4)},
 };
 
-Point2DL D_801CD740[6] = {GAME_PAIR(0, 0),     GAME_PAIR(65536, 0),  GAME_PAIR(-65536, 0),
-                         GAME_PAIR(0, 65536), GAME_PAIR(0, -65536), GAME_PAIR(0, 0)};
+Point2DL s_EncounterOriginNudges[6] = {{0, 0},     {TO_COORD(1), 0},  {-TO_COORD(1), 0},
+                         {0, TO_COORD(1)}, {0, -TO_COORD(1)}, {0, 0}};
 
 u8 s_EntitySpawnChances[8] = {0x10, 0x10, 0x10, 0x0A, 0x08, 0x06, 0x04, 0x02};
 
@@ -2625,9 +2625,9 @@ u8 D_801CD8D0[116] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 PartySlot D_801CD944[3] = {
-    PARTY_SLOT(0, 0),
-    PARTY_SLOT(0, 0),
-    PARTY_SLOT(0, 0),
+    {0, 0},
+    {0, 0},
+    {0, 0},
 };
 
 u8 s_PartySlotOrder[4] = {0x00, 0x00, 0x00, 0x00};
