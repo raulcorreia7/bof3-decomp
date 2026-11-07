@@ -23,7 +23,16 @@ MATCH void func_801EF158(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EF19C);
+MATCH void func_801EF19C(void) {
+    BMagicEffectFuncs handlers;
+
+    handlers = D_801EEC14;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+}
+
 
 INCLUDE_ASM(func_801EF238);
 

@@ -37,7 +37,16 @@ MATCH void func_801EF8CC(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EF910);
+MATCH void func_801EF910(void) {
+    BattleHandlerTable4 handlers;
+
+    handlers = D_801EEC18;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+}
+
 
 #include "overlays/bmagic/Effect_SetDuration.h"
 

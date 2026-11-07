@@ -186,6 +186,7 @@ Effect_StartPlaying = { addr = 0x801EEE30, type = "func", source = "Raises BATTL
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_AllocEffect = { addr = 0x801F09C4, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic003 (Super Combo)." }
 Actor_Clear = { addr = 0x801F0A28, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
+D_801F0A84 = { addr = 0x801F0A84, source = "Timer reload per index of the magic003 effect: func_801EEEA4 reads it at the effect's byte 0x0A and reloads byte 0x09 from it." }
 g_BMagicEffectModes = { addr = 0x801F0B00, source = "Handlers of magic003 (Super Combo), run by header.mode (byte 0x01)." }
 D_801F0B38 = { addr = 0x801F0B38, source = "Effect slot table of the magic003 effect, scanned by BMagic_AllocEffect and cleared by a loop over its 0x78-byte records." }
 
@@ -210,6 +211,7 @@ g_BMagicEffectModes = { addr = 0x801F0A24, source = "Handlers of magic006 (Mind 
 
 ["emi/bmagic/magic008/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+D_801EEC58 = { addr = 0x801EEC58, source = "Six step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0294." }
 Effect_StartPlaying = { addr = 0x801EEFDC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_PlayOnce = { addr = 0x801EF010, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_StartPlaying_801EF728 = { addr = 0x801EF728, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
@@ -475,6 +477,7 @@ g_BMagicEffectModes = { addr = 0x801F1394, source = "Handlers of magic064 (Weret
 
 ["emi/bmagic/magic065/00"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+D_801EC2E4 = { addr = 0x801EC2E4, source = "Byte the magic065 effect tests against zero in func_801EF134 and func_801EF1CC." }
 Effect_SetDuration = { addr = 0x801EF2E0, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic065 (Pilfer)." }
 BMagic_SetTextItemName = { addr = 0x801EF428, type = "func", source = "Copies the name of an equipment item into a text variable." }
 g_BMagicEffectModes = { addr = 0x801EF510, source = "Handlers of magic065 (Pilfer), run by header.mode (byte 0x01)." }
@@ -592,6 +595,7 @@ g_BMagicEffectModes = { addr = 0x801F02A4, source = "Handlers of magic079 (Drain
 
 ["emi/bmagic/magic081/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+D_801EC2E0 = { addr = 0x801EC2E0, source = "Pointer to the battle effect the magic081 effect runs on; func_801EEE74 and func_801EEF88 read its target party record." }
 CardAccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes the save file on the memory card." }
 Effect_TickOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of g_BattleEffectBattler and clears the effect in magic081 (RottenBreath)." }
 BMagic_AllocEffect = { addr = 0x801EFA20, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all effect slots are in use in magic081 (RottenBreath)." }

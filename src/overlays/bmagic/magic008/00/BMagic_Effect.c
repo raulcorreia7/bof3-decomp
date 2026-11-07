@@ -134,7 +134,16 @@ MATCH void func_801F0250(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
-INCLUDE_ASM(func_801F0294);
+MATCH void func_801F0294(void) {
+    BMagicEffectFuncs handlers;
+
+    handlers = D_801EEC58;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+}
+
 
 MATCH void func_801F0330(void) {
     g_Task->scale.x = 0x10000;
