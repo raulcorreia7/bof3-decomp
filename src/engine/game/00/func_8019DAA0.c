@@ -12,7 +12,7 @@ MATCH s32 func_8019DAA0(s32* spawn_record, s16 spawn_offset, u8 spawn_count) {
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
 
-    Area_ProjectPoint(spawn_record, (long*)screen);
+    Area_ProjectPoint(spawn_record, (s16*)screen);
     size[0] = spawn_offset;
     size[1] = spawn_offset;
     func_801AFFD8(spawn_record, size, size);

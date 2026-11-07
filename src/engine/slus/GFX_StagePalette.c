@@ -3,7 +3,8 @@
 /* copies 0x20 halfwords of the selected record field into dst and dst +
  * 0x4000, then marks the copy complete.
  */
-MATCH void GFX_StagePalette(u8* dst, s32 field) {
+MATCH void GFX_StagePalette(u32 address, s32 field) {
+    u8* dst;
     u8* record;
     u8* table;
     u8* src;
@@ -11,6 +12,7 @@ MATCH void GFX_StagePalette(u8* dst, s32 field) {
     s32 index;
     u16 value;
 
+    dst    = MEM_PTR(u8, address);
     record = (u8*)g_Task->unk_4C;
     table  = record + *(u32*)(record + 4);
     src    = table + *(u32*)(table + (field & BYTE_MASK) * 4);
