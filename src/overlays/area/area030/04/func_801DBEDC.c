@@ -8,11 +8,11 @@ MATCH void func_801DBEDC(void) {
     s32 offset;
 
     func_801E0ED0(0, 0x4E);
-    func_801E0F4C(0x80, 0x5B, D_8014688E[D_801E3208 * 0x98]);
+    func_801E0F4C(0x80, 0x5B, D_8014688E[g_FishingHookedFish * 0x98]);
 
-    offset = D_801E3208 * 0x98;
+    offset = g_FishingHookedFish * 0x98;
     func_801E1004(D_8014688E[offset], D_80146918[offset], 0);
-    func_801E1320(0xB0, 0x9C);
+    Fishing_DrawRank(0xB0, 0x9C);
     func_801E162C(8, 0x94, 0x42);
 
     if ((g_InputPressed & (PADRup | PADRdown)) != 0) {
