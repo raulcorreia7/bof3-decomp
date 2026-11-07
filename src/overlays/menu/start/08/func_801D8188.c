@@ -25,7 +25,7 @@ MATCH void func_801D8188(void) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         *toggle ^= 1;
     }
-    if (*key & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (*key & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             Char_AddAbility(*(Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0) +
@@ -41,7 +41,7 @@ MATCH void func_801D8188(void) {
         slot[0xD] = 0xFF;
         return;
     }
-    if (*key & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (*key & g_InputMasks[MENU_INPUT_CANCEL]) {
         g_MenuPanelTasks[16].flags = 0xFF;
         D_80148651 -= 2;
         SND_PlayCue(EMI_CUE_ID(1, 6));

@@ -34,7 +34,7 @@ NON_MATCHING void func_801DC93C(void) {
             D_80144286 = 0;
         }
     } else {
-        if (g_InputMasks[INPUT_SLOT_CANCEL] & g_InputPressed) {
+        if (g_InputMasks[FISHING_INPUT_CANCEL] & g_InputPressed) {
             SND_FadeInSequence(0, 0, 0x14, 0x10);
             SND_PlayCue(EMI_CUE_ID(1, 6));
             new_cmd = 5;
@@ -46,7 +46,7 @@ NON_MATCHING void func_801DC93C(void) {
             frame      = 4;
             goto block_28; /* shared selection join */
         }
-        if (g_InputMasks[INPUT_SLOT_CONFIRM] & g_InputPressed) {
+        if (g_InputMasks[FISHING_INPUT_CAST] & g_InputPressed) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             if (D_80144286 == 0) {
                 if (D_80144281 != 8) {

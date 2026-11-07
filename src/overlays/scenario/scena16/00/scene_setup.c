@@ -60,7 +60,7 @@ MATCH void func_801F6CCC(void) {
     flags             = g_GameFlags;
     g_SaveEntryY      = 0x88000u;
     g_SaveEntryFacing = 5u;
-    g_GameFlags       = (flags | GAME_FLAG_RUN_LOCK | 0x200u);
+    g_GameFlags       = (flags | GAME_FLAG_MENU_LOCK | 0x200u);
     SND_RequestBGM(6u);
 
     while (!EMI_LoaderIsReady()) {

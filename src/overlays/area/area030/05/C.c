@@ -84,7 +84,7 @@ MATCH void func_800F51BC(void) {
         }
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0) {
+    if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
         if (func_800F65A8(s_ListCursor, 1) == 0) {
             total = Item_Count(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3],
                                D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00, 0) +
@@ -105,7 +105,7 @@ MATCH void func_800F51BC(void) {
         }
         goto tail; /* skips the cancel branch: the confirm path shares the tail */
     }
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0) {
+    if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0) {
         D_800F7248 = 1;
         s_ListCursor |= 0x80;
         SND_PlayCue(EMI_CUE_ID(1, 6));
@@ -172,11 +172,11 @@ MATCH void func_800F550C(void) {
     if ((s8)s_ListItemId != (s8)s2) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) {
         D_800F7248 = 0;
         SND_PlayCue(EMI_CUE_ID(1, 4));
         s_Step = s_Step + 1;
-    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    } else if (g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) {
         s_ListItemId = 1;
         s_ListCursor &= 0xBF;
         SND_PlayCue(EMI_CUE_ID(1, 6));
@@ -198,10 +198,10 @@ MATCH void func_800F5828(void) {
     if (INPUT_REPEATED(*pad, (PADLright | PADLleft)) & (PADLright | PADLleft)) {
         D_800F7248 ^= 1;
         SND_PlayCue(EMI_CUE_ID(1, 0));
-    } else if (*pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    } else if (*pad & g_InputMasks[FISHING_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         s_Step -= 1;
-    } else if (*pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    } else if (*pad & g_InputMasks[FISHING_INPUT_CAST]) {
         if (D_800F7248 != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 6));
             s_Step -= 1;
@@ -238,7 +238,7 @@ MATCH void func_800F5828(void) {
 
 MATCH void func_800F5AD8(void) {
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    if ((g_InputPressed & (g_InputMasks[INPUT_SLOT_CONFIRM] | g_InputMasks[INPUT_SLOT_CANCEL])) != 0) {
+    if ((g_InputPressed & (g_InputMasks[FISHING_INPUT_CAST] | g_InputMasks[FISHING_INPUT_CANCEL])) != 0) {
         s_ListItemId = 1;
         SND_PlayCue(EMI_CUE_ID(1, 6));
         s_Step = 0;
@@ -263,7 +263,7 @@ MATCH void func_800F5BE0(void) {
         D_800F7248 ^= 1;
         SND_PlayCue(EMI_CUE_ID(1, 0));
     } else {
-        if ((*keys & g_InputMasks[INPUT_SLOT_CANCEL]) != 0) {
+        if ((*keys & g_InputMasks[FISHING_INPUT_CANCEL]) != 0) {
             D_800F7248 = 1;
             SND_PlayCue(EMI_CUE_ID(1, 6));
             {
@@ -274,7 +274,7 @@ MATCH void func_800F5BE0(void) {
                 D_800F724C   = work;
             }
         }
-        if ((*keys & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0) {
+        if ((*keys & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
             if (D_800F7248 == 0) {
                 UI_SetMode(0);
                 s_Step += 1;
