@@ -27,15 +27,15 @@ typedef enum PaletteFadeFlags {
 
 /* One 0xC-byte row of the palette fade table at D_80145BD4. */
 typedef struct PaletteFade {
-    u8  flags;      /* PaletteFadeFlags */
-    u8  saved_byte; /* the target byte at +0x27, restored on free */
-    s8  red_offset;
-    s8  green_offset;
-    s8  blue_offset;
-    u8  table_index;
-    u8  step;
-    u8  unk_07;
-    u8* target;
+    u8            flags;      /* PaletteFadeFlags */
+    u8            saved_byte; /* the target byte at +0x27, restored on free */
+    s8            red_offset;
+    s8            green_offset;
+    s8            blue_offset;
+    u8            table_index;
+    u8            step;
+    u8            unk_07;
+    struct Actor* target; /* the record whose palette fades; any task record with the actor prefix */
 } PaletteFade;
 
 ASSERT_OFFSET(PaletteFade, target, 0x08);

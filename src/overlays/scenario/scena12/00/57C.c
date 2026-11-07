@@ -102,7 +102,7 @@ MATCH void func_801F75EC(void) {
     Menu_DrawHeaderBar(0x8A, 0x1E, 0x2D, 0x14, 1u);
     value = D_801FD288.bytes[0];
     fmt   = D_801F6C04;
-    sprintf(buffer, fmt, value);
+    TEXT_Format(buffer, fmt, value);
     UI_DrawAsciiString(0x95, 0x22, 0, buffer);
 }
 

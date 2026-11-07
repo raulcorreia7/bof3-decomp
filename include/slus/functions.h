@@ -89,7 +89,7 @@ void         GFX_ResetPaletteFades(void);
 /* func_8014E484 */
 extern void  GFX_FreePaletteSlot(s32 slot);
 /* func_8014E4BC */
-void         GFX_FreePaletteSlotOwner(s32 match_key);
+void         GFX_FreePaletteSlotOwner(void* owner);
 /* func_8014E528 */
 extern void  GFX_FreeAllPaletteSlots(void);
 /* func_8014E564 */
@@ -432,22 +432,25 @@ bool        Item_VitalHas(s32 item_id);
 s32         Item_VitalAdd(u8 item_id);
 /* func_8016620C */
 void        TEXT_SetVariable(u8 slot, u8 length, const u8* text);
+/* formats a game-text buffer; PsyQ declares sprintf on char, the game keeps its text as u8 */
+#define TEXT_Format(dst, fmt, args...) sprintf((char*)(dst), (char*)(fmt), ##args)
+#define TEXT_FormatLiteral(dst, fmt)   sprintf((char*)(dst), (char*)(fmt))
 /* func_80166438 */
-s32         Item_CountHeld(u32 category);
+s32 Item_CountHeld(u32 category);
 /* func_801664A0 */
-s32         Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode);
+s32 Party_CountAbilities(u8 character_index, u8 ability_type, u8 mode);
 /* func_801665A0 */
-u8          Item_Remove(s32 category, u8 item, s32 amount, s32 unused);
+u8  Item_Remove(s32 category, u8 item, s32 amount, s32 unused);
 /* func_8016663C */
-s32         Party_SpendZenny(u32 amount, s32 unused);
+s32 Party_SpendZenny(u32 amount, s32 unused);
 /* func_8016666C */
-s32         Party_AddZenny(s32 amount, s32 skip_earned);
+s32 Party_AddZenny(s32 amount, s32 skip_earned);
 /* func_801666C8 */
-s32         Item_GetDescription(s32 category, s32 item_id);
+s32 Item_GetDescription(s32 category, s32 item_id);
 /* func_80166AE4: kind table for (source slot, group, table kind) */
-u8*         Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
+u8* Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
-u8*         Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
+u8* Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
 /* 0x40-byte palette staging entries; GFX_StagePalette copies them out, the second copy lands 0x4000 above. */
 #define GAME_PALETTE_STAGE  MEM_PTR(u8, 0x80035600u)
 #define GAME_PALETTE_MIRROR MEM_PTR(u8, 0x80039600u)

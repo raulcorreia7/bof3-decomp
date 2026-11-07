@@ -65,7 +65,7 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
             UI_DrawText((s16)(val5 + 20), (s16)(val4 + 1), val3, 5U, val11);
             val6 = val4 + 0x15;
             Menu_DrawIcon((val5 + 2) & HALF_MASK, val6 & HALF_MASK, 3U, val10);
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0F18, FIELD(u8, val11, 0x6u));
+            TEXT_Format(g_UiFormatBuffer, D_801D0F18, FIELD(u8, val11, 0x6u));
             val6 <<= 0x10;
             val6 = (u16)((s32)val6 >> 0x10);
             UI_DrawGlyphString((s16)(stack_38 >> 16), (s16)val6, (u32)val3, g_UiFormatBuffer);
@@ -112,14 +112,14 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
             } else {
                 val7 = 7;
             }
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0F1C, FIELD(u16, val11, 0x14u));
+            TEXT_Format(g_UiFormatBuffer, D_801D0F1C, FIELD(u16, val11, 0x14u));
             UI_DrawGlyphString((s16)(stack_38 >> 16), (s16)(val4 + 29), val7, g_UiFormatBuffer);
             if (!(val10 & BYTE_MASK)) {
                 val7 = (FIELD(u8, val11, 0x1Au) != 0) * 4;
             } else {
                 val7 = 7;
             }
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0F24, FIELD(u16, val11, 0x1Cu));
+            TEXT_Format(g_UiFormatBuffer, D_801D0F24, FIELD(u16, val11, 0x1Cu));
             UI_DrawGlyphString((s16)(stack_38 >> 16), (s16)(val4 + 29), val7, g_UiFormatBuffer);
             val6 = val10 & BYTE_MASK;
             Menu_DrawIcon((val5 + 2) & HALF_MASK, (val4 + 0x25) & HALF_MASK, 1U, (u8)val6);
@@ -137,13 +137,13 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
             }
             stack_20 += 1;
             stack_28 += 1;
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0F1C, FIELD(u16, val11, 0x16u));
+            TEXT_Format(g_UiFormatBuffer, D_801D0F1C, FIELD(u16, val11, 0x16u));
             val6 = val4 + 0x25;
             val6 <<= 0x10;
             val6 = (u16)((s32)val6 >> 0x10);
             UI_DrawGlyphString((s16)stack_40, (s16)val6, val7, g_UiFormatBuffer);
             val7 = -(s32)val10 & 7;
-            sprintf((s8*)g_UiFormatBuffer, &D_801D0F24, FIELD(u16, val11, 0x1Eu));
+            TEXT_Format(g_UiFormatBuffer, D_801D0F24, FIELD(u16, val11, 0x1Eu));
             UI_DrawGlyphString((s16)stack_40, (s16)val6, val7, g_UiFormatBuffer);
             val4 += 0x34;
         } while (stack_28 < (u8)stack_18->unk_0A);

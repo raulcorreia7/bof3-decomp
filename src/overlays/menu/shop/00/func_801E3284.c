@@ -53,21 +53,57 @@ MATCH void func_801E3284(MenuPanelTask* task) {
                 func_801AF20C(icon) & BYTE_MASK, icon);
 
     text = g_UiFormatBuffer;
+<<<<<<< HEAD
     sprintf((char*)text, D_801D0E90, price * task->unk_0C);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_TOTAL_X), (task->pos.y + SHOP_COUNTS_TOTAL_Y), 0U, text);
+||||||| parent of a3a8dc9aa (refactor: type the text formatter, palette fade owner and enemy event bits)
+    sprintf((char*)text, D_801D0E90, price * task->unk_0C);
+    UI_DrawGlyphString((task->pos.x + 105), (task->pos.y + 18), 0U, text);
+=======
+    TEXT_Format(text, D_801D0E90, price * task->unk_0C);
+    UI_DrawGlyphString((task->pos.x + 105), (task->pos.y + 18), 0U, text);
+>>>>>>> a3a8dc9aa (refactor: type the text formatter, palette fade owner and enemy event bits)
 
+<<<<<<< HEAD
     sprintf((char*)text, D_801D0E98, task->unk_0C);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_QUANTITY_Y), 0U, text);
     UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_HELD_LABEL_Y), 0, 0xFFU,
                 Resource_GetText(SHOP_TEXT_HELD_LABEL));
+||||||| parent of a3a8dc9aa (refactor: type the text formatter, palette fade owner and enemy event bits)
+    sprintf((char*)text, D_801D0E98, task->unk_0C);
+    UI_DrawGlyphString((task->pos.x + 137), (task->pos.y + 7), 0U, text);
+    UI_DrawText((task->pos.x + 14), (task->pos.y + 32), 0, 0xFFU, Resource_GetText(0x27U));
+=======
+    TEXT_Format(text, D_801D0E98, task->unk_0C);
+    UI_DrawGlyphString((task->pos.x + 137), (task->pos.y + 7), 0U, text);
+    UI_DrawText((task->pos.x + 14), (task->pos.y + 32), 0, 0xFFU, Resource_GetText(0x27U));
+>>>>>>> a3a8dc9aa (refactor: type the text formatter, palette fade owner and enemy event bits)
 
+<<<<<<< HEAD
     sprintf((char*)text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_HELD) & HALF_MASK);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_HELD_Y), 0U, text);
     UI_DrawText((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_LABEL_Y), 0, 0xFFU,
                 Resource_GetText(SHOP_TEXT_EQUIPPED_LABEL));
+||||||| parent of a3a8dc9aa (refactor: type the text formatter, palette fade owner and enemy event bits)
+    sprintf((char*)text, D_801D0E98, Item_Count(group, key, 0U) & HALF_MASK);
+    UI_DrawGlyphString((task->pos.x + 137), (task->pos.y + 35), 0U, text);
+    UI_DrawText((task->pos.x + 14), (task->pos.y + 45), 0, 0xFFU, Resource_GetText(0x28U));
+=======
+    TEXT_Format(text, D_801D0E98, Item_Count(group, key, 0U) & HALF_MASK);
+    UI_DrawGlyphString((task->pos.x + 137), (task->pos.y + 35), 0U, text);
+    UI_DrawText((task->pos.x + 14), (task->pos.y + 45), 0, 0xFFU, Resource_GetText(0x28U));
+>>>>>>> a3a8dc9aa (refactor: type the text formatter, palette fade owner and enemy event bits)
 
+<<<<<<< HEAD
     sprintf((char*)text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_EQUIPPED) & HALF_MASK);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_Y), 0U, text);
+||||||| parent of a3a8dc9aa (refactor: type the text formatter, palette fade owner and enemy event bits)
+    sprintf((char*)text, D_801D0E98, Item_Count(group, key, 1U) & HALF_MASK);
+    UI_DrawGlyphString((task->pos.x + 137), (task->pos.y + 48), 0U, text);
+=======
+    TEXT_Format(text, D_801D0E98, Item_Count(group, key, 1U) & HALF_MASK);
+    UI_DrawGlyphString((task->pos.x + 137), (task->pos.y + 48), 0U, text);
+>>>>>>> a3a8dc9aa (refactor: type the text formatter, palette fade owner and enemy event bits)
 
     GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & HALF_MASK);
 

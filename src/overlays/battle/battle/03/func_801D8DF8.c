@@ -68,7 +68,7 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     blue_component = color_b;
     func_801D94D4((s16)(panel_x + 0x14), hp_text_y, status_mode, (u8)g_BattlePartyBattlers[battler_index].chr.hp);
     status_mode = ((u8)g_BattlePartyBattlers[battler_index].chr.status >> 0xD) & 2;
-    sprintf((s8*)g_UiFormatBuffer, D_801D0C6C);
+    TEXT_FormatLiteral(g_UiFormatBuffer, D_801D0C6C);
     status_label_y <<= 0x10;
     status_text_y = status_label_y >> 0x10;
     status_value  = status_mode & BYTE_MASK;

@@ -25,9 +25,9 @@ MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry) {
             }
         }
         UI_DrawText((x + 21), (y + 3), 0, 5, entry);
-        sprintf((char*)g_UiFormatBuffer, D_801D0DAC, entry[8]);
+        TEXT_Format(g_UiFormatBuffer, D_801D0DAC, entry[8]);
         UI_DrawGlyphString((x + 31), (y + 24), 0, g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, D_801D0DB0, entry[0xC], entry[0xD]);
+        TEXT_Format(g_UiFormatBuffer, D_801D0DB0, entry[0xC], entry[0xD]);
         label_x = x + 0x27;
         UI_DrawGlyphString(label_x, (y + 37), 0, g_UiFormatBuffer);
         UI_DrawGlyphString(label_x, (y + 36), 0, D_801D0DBC);

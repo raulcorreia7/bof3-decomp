@@ -56,7 +56,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                             UI_DrawText(bar_x, bar_y, 7, 0xCU, (&g_Accessories[accessory]));
                             UI_DrawText(bar_x, (s16)(text_y + row_y), 0, 0xCU, (&g_Accessories[*cursor]));
                             if (g_InventoryCounts[3][slot] >= 2U) {
-                                sprintf((s8*)text, D_801D0C14, g_InventoryCounts[3][slot]);
+                                TEXT_Format(text, D_801D0C14, g_InventoryCounts[3][slot]);
                                 text_x = (s16)(panel_x + 0x68);
                                 UI_DrawGlyphString(text_x, (s16)(text_y + (row_y + 4)), 7U, text);
                                 goto drawn; /* joins the shared count-text draw */
@@ -66,7 +66,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                 }
                 UI_DrawText(bar_x, bar_y, 0, 0xCU, (&g_Accessories[*cursor]));
                 if (g_InventoryCounts[3][slot] >= 2U) {
-                    sprintf((s8*)text, D_801D0C14, g_InventoryCounts[3][slot]);
+                    TEXT_Format(text, D_801D0C14, g_InventoryCounts[3][slot]);
                     text_x = (s16)(panel_x + 0x68);
                     UI_DrawGlyphString(text_x, (s16)(text_y + (row_y + 2)), 0U, text);
                 }

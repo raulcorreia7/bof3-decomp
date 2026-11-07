@@ -49,12 +49,28 @@ MATCH void func_801E37F4(MenuPanelTask* task) {
     UI_DrawText(task->pos.x + SHOP_DESC_NAME_X, task->pos.y + SHOP_DESC_NAME_Y, 0, func_801AF20C(record) & BYTE_MASK,
                 record);
     buffer = (char*)g_UiFormatBuffer;
+<<<<<<< HEAD
     sprintf(buffer, D_801D0E88, price);
     UI_DrawGlyphString(task->pos.x + SHOP_DESC_PRICE_X, task->pos.y + SHOP_DESC_PRICE_Y, 0, buffer);
     sprintf(buffer, D_801D0E90, price * task->unk_0C);
     UI_DrawGlyphString(task->pos.x + SHOP_DESC_TOTAL_X, task->pos.y + SHOP_DESC_LINE2_Y, 0, buffer);
     sprintf(buffer, D_801D0E98, task->unk_0C);
     UI_DrawGlyphString(task->pos.x + SHOP_DESC_QUANTITY_X, task->pos.y + SHOP_DESC_LINE2_Y, 0, buffer);
+||||||| parent of a3a8dc9aa (refactor: type the text formatter, palette fade owner and enemy event bits)
+    sprintf(buffer, D_801D0E88, price);
+    UI_DrawGlyphString(task->pos.x + 113, task->pos.y + 7, 0, buffer);
+    sprintf(buffer, D_801D0E90, price * task->unk_0C);
+    UI_DrawGlyphString(task->pos.x + 105, task->pos.y + 18, 0, buffer);
+    sprintf(buffer, D_801D0E98, task->unk_0C);
+    UI_DrawGlyphString(task->pos.x + 14, task->pos.y + 18, 0, buffer);
+=======
+    TEXT_Format(buffer, D_801D0E88, price);
+    UI_DrawGlyphString(task->pos.x + 113, task->pos.y + 7, 0, buffer);
+    TEXT_Format(buffer, D_801D0E90, price * task->unk_0C);
+    UI_DrawGlyphString(task->pos.x + 105, task->pos.y + 18, 0, buffer);
+    TEXT_Format(buffer, D_801D0E98, task->unk_0C);
+    UI_DrawGlyphString(task->pos.x + 14, task->pos.y + 18, 0, buffer);
+>>>>>>> a3a8dc9aa (refactor: type the text formatter, palette fade owner and enemy event bits)
     GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & HALF_MASK);
     for (i = 0; i < SHOP_DESC_BORDER_COLUMNS; i++) {
         offset = (i + 1) * SHOP_DESC_BORDER_STRIDE;

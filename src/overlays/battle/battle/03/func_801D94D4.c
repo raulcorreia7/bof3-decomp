@@ -9,9 +9,9 @@ MATCH void func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value) {
 
     index = 0;
     if ((u16)text_value == 0xFFFFu) {
-        sprintf(g_UiFormatBuffer, D_801D0C70);
+        TEXT_FormatLiteral(g_UiFormatBuffer, D_801D0C70);
     } else {
-        sprintf(g_UiFormatBuffer, D_801D0C74, (u16)text_value);
+        TEXT_Format(g_UiFormatBuffer, D_801D0C74, (u16)text_value);
     }
     GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
 
