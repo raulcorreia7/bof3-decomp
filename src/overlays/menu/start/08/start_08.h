@@ -322,6 +322,7 @@ extern s8       g_MenuStartTimer;
 extern u8       D_801ED7F4;
 extern u8       D_801ED7F8;
 /* D_801ED860 */
+extern u8       g_MenuStartReturnStep;
 extern u8       g_MenuStartStep;
 extern u8       D_801ED864;
 extern u8       D_801ED868;
@@ -666,6 +667,10 @@ extern s8        D_801ED678;
 extern s8        D_801ED67C;
 extern u8        D_801ED69C;
 extern s32       D_801ED878;
+extern u8        D_801ED7FC;
+extern s8        D_801ED66C;
+extern u8        D_801ED105;
+extern u8        D_801485B8;
 void             func_801EA1F0(MenuPanelTask* task);
 
 /* Pick the party record the record index selects: record 0 is the saved
