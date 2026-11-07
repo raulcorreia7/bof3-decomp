@@ -48,7 +48,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x220, .data, g_MenuInventoryCountFormat]
-      - [0x22C, .rodata, func_801DD578]
+      - [0x22C, .rodata, Menu_DrawEquipChoiceWindow]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: main
     type: code
@@ -203,7 +203,7 @@ segments:
       - [0xBAFC, c, Menu_DrawInventoryWindow]
       - [0xC25C, c, Menu_DrawAbilityList]
       - [0xC750, c, Menu_DrawPanelFrame]
-      - [0xC978, c, func_801DD578]
+      - [0xC978, c, Menu_DrawEquipChoiceWindow]
       - [0xD0B0, c, SAVE_DrawSlot]
       - [0xD3B0, c, func_801DDFB0]
       - [0xD588, c, func_801DE188]
