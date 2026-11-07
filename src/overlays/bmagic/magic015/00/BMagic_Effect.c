@@ -270,6 +270,7 @@ MATCH void func_801F0D48(void) {
     g_Task->header.step += 1;
 }
 
+/* Blocker: retail reads the z halfword at +0x3E unsigned (lhu) and loads the 0x14 cell before the 0x09 decrement; COORD_INT is s16 (lh). Needs an unsigned halfword view of pos.z. */
 INCLUDE_ASM(func_801F0DB4);
 
 INCLUDE_ASM(func_801F0E54);
