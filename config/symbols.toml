@@ -1620,7 +1620,6 @@ D_801CD404 = { addr = 0x801CD404, size = 0x3C }
 D_801CD440 = { addr = 0x801CD440, size = 0x8 }
 D_801CD448 = { addr = 0x801CD448, size = 0x10 }
 s_CameraScrollDeltas = { addr = 0x801CD458, size = 0x8, source = "func_801BF11C and func_801BF5A8 add an x, y pair to the camera work record for g_BattleScrollDir" }
-D_801CD459 = { addr = 0x801CD459, size = 0x1, alias = true }
 s_BattleStartOffsets = { addr = 0x801CD460, size = 0x18, source = "func_801BEBB0 stores the x, y pair for the battle record's row id" }
 D_801CD461 = { addr = 0x801CD461, size = 0x1, alias = true }
 s_RouteIndexByMode = { addr = 0x801CD478, size = 0x4, source = "func_801BFE34 takes the battler route step for g_BattleScrollDir" }
@@ -1635,7 +1634,6 @@ D_801CD568 = { addr = 0x801CD568, size = 0x8 }
 D_801CD570 = { addr = 0x801CD570, size = 0x14 }
 D_801CD584 = { addr = 0x801CD584, size = 0x38 }
 s_EntitySpawnOffsets = { addr = 0x801CD5BC, size = 0x64, source = "func_801C6BB4 searches 49 spawn positions from these s8 x, y pairs around the party" }
-D_801CD5BD = { addr = 0x801CD5BD, size = 0x1, alias = true }
 D_801CD620 = { addr = 0x801CD620, size = 0x120 }
 D_801CD740 = { addr = 0x801CD740, size = 0x30 }
 s_EntitySpawnChances = { addr = 0x801CD770, size = 0x8, source = "func_801C6AEC keeps an entity when a random roll is within this per-slot chance" }
