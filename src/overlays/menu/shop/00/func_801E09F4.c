@@ -43,7 +43,7 @@ MATCH void func_801E09F4(void) {
             *flag      = count + 1;
             return;
         }
-        func_801E1B80(raw);
+        Menu_RunAbilityStockSort(raw);
         return;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {

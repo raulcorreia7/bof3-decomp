@@ -37,7 +37,7 @@ NON_MATCHING void func_801DA9DC(void) {
     }
     if (Area_SampleHeight(g_ActorSlots[0].pos.x.fixed, g_ActorSlots[0].pos.y.fixed) >=
         COORD_INT(g_ActorSlots[0].depth)) {
-        chance = D_801E3210->unk_11;
+        chance = g_FishingLureRow->unk_11;
         if ((RANDOM_MASK(0xF) < chance) && !(g_FrameCount & 0xF)) {
             g_ActorSlots[0].scene_step = 0;
             g_ActorSlots[0].selection  = 0;
@@ -63,7 +63,7 @@ box_16:
         if (g_InputHeld & PADLleft) {
             g_ActorSlots[0].scene_step = -ONE;
             g_ActorSlots[0].selection  = ONE;
-            g_ActorSlots[0].unk_14     = D_801E3210->unk_08;
+            g_ActorSlots[0].unk_14     = g_FishingLureRow->unk_08;
             D_801E31F8                 = 1;
         } else {
             limit = 5;
@@ -71,19 +71,19 @@ box_16:
                 g_ActorSlots[0].scene_step = ONE;
                 g_ActorSlots[0].selection  = ONE;
                 D_801E31F8                 = 1;
-                g_ActorSlots[0].unk_14     = D_801E3210->unk_08;
+                g_ActorSlots[0].unk_14     = g_FishingLureRow->unk_08;
             } else if (g_InputHeld & PADRdown) {
                 g_ActorSlots[0].scene_step = 0;
                 if (SP_REF(u8, 0x0) != 0) {
                     limit                     = 4;
                     g_ActorSlots[0].selection = 0x2000;
                     D_801E31F8                = 2;
-                    g_ActorSlots[0].unk_14    = D_801E3210->unk_08;
+                    g_ActorSlots[0].unk_14    = g_FishingLureRow->unk_08;
                 } else {
                     limit                     = 3;
                     g_ActorSlots[0].selection = ONE;
                     D_801E31F8                = 1;
-                    g_ActorSlots[0].unk_14    = D_801E3210->unk_04;
+                    g_ActorSlots[0].unk_14    = g_FishingLureRow->unk_04;
                 }
             } else {
                 limit = 4;
@@ -91,12 +91,12 @@ box_16:
                     g_ActorSlots[0].scene_step = 0;
                     g_ActorSlots[0].selection  = ONE;
                     D_801E31F8                 = 2;
-                    g_ActorSlots[0].unk_14     = D_801E3210->unk_08;
+                    g_ActorSlots[0].unk_14     = g_FishingLureRow->unk_08;
                 } else {
                     g_ActorSlots[0].scene_step = 0;
                     g_ActorSlots[0].selection  = 0;
                     limit                      = 3;
-                    g_ActorSlots[0].unk_14     = D_801E3210->flags;
+                    g_ActorSlots[0].unk_14     = g_FishingLureRow->flags;
                     D_801E31F8                 = 0;
                 }
             }

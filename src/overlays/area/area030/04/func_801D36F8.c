@@ -7,7 +7,7 @@ MATCH void func_801D36F8(void) {
     u8            area;
 
     record = FISHING_STATE;
-    if (D_801E1F20[record->cue_index_06][3] != 0) {
+    if (g_FishingPromptSets[record->cue_index_06][3] != 0) {
         slot = Actor_FindFreeSlot();
         if (slot != -1) {
             g_ActorSlots[slot].header.flags = 1;
@@ -20,7 +20,7 @@ MATCH void func_801D36F8(void) {
         }
         FISHING_STATE->handler_index_01 = 6;
     } else {
-        record->row_4B                  = D_801E1F20[record->cue_index_06][0];
+        record->row_4B                  = g_FishingPromptSets[record->cue_index_06][0];
         FISHING_STATE->handler_index_01 = FISHING_STATE->handler_index_01 + 1;
     }
     func_801D9534(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
