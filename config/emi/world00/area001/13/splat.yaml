@@ -7,7 +7,7 @@ segments:
     align: 4
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
-      - [0x0, .data, D_801F2C00]
+      - [0x0, .data, g_AreaModuleId]
       - [0x4, c, Message_Clear]
       - [0x48, c, Message_ClearRequest]
       - [0x88, c, func_801F2C88]

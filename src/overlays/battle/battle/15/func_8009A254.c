@@ -6,11 +6,11 @@ MATCH void func_8009A254(void) {
 
     /* First word of the record of the slot that owns the message panel. */
     slot_data = D_80145FAA[BATTLE_ACTIVE_ROW->slot * 0xA0];
-    if (g_InputPressed & D_80145AC4) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         g_BattleUIState = 4;
         return;
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         g_BattleUIState = 3;
         return;
     }

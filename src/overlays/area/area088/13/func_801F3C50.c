@@ -15,10 +15,10 @@ MATCH void func_801F3C50(void) {
     u32 window_span;
 
     scratch               = g_Task;
-    scratch->option_flags = scratch->unk_0B;
+    scratch->option_flags = scratch->param.unk_0B;
 
     check = g_Task;
-    if (check->unk_0B == 1) {
+    if (check->param.unk_0B == 1) {
         key = g_GameContextSeed;
         i   = 0;
     scan:
@@ -30,7 +30,7 @@ MATCH void func_801F3C50(void) {
         goto scan; /* the key is always in the table */
     } else {
         scratch = g_Task;
-        state   = scratch->unk_0B;
+        state   = scratch->param.unk_0B;
         if (state == 2) {
             mode = 3;
             goto arm; /* steps 2 and 3 share the re-arm block */

@@ -71,9 +71,9 @@ MATCH void func_801A7330(const volatile u8* data) {
     D_80146904[*counter][0] = 0;
     /* FAKE: lock keeps the packed store ahead of the record stores. */
     ORDER_LOCK(rec->unk_18 = (data[9] << 8) | ((const u8*)data)[0xA]);
-    g_Task->unk_05 = data[8];
-    g_Task->unk_0B = data[0xC];
-    g_Task->unk_2A = (g_Task->option_flags >> 4) & 1;
+    g_Task->unk_05       = data[8];
+    g_Task->param.unk_0B = data[0xC];
+    g_Task->unk_2A       = (g_Task->option_flags >> 4) & 1;
 
     mode = g_Task->unk_05;
     if ((D_80144FC4[mode >> 3] >> (mode & 7)) & 1) {

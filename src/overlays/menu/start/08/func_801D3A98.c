@@ -32,7 +32,7 @@ MATCH void func_801D3A98(void) {
         }
     }
 
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         rows  = D_801EC3E0;
         entry = (rows + task->unk_0A * 6 + task->unk_0B)[1];
@@ -45,7 +45,7 @@ MATCH void func_801D3A98(void) {
         /* D_80148652 through D_80148651: retail keeps the symbol-relative
          * address in a register for the read-modify-write. */
         (&D_80148651)[1]++;
-    } else if (g_InputPressed & D_80145AC4) {
+    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         task->active = 0;
         (&D_80148651)[1]--;

@@ -10,7 +10,7 @@ MATCH s32 func_801B6258(void) {
     if (D_80146256 != 0) {
         return 0;
     }
-    if ((g_InputPressed & g_InputMasks) == 0) {
+    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_ACTION]) == 0) {
         return 0;
     }
     saved = g_Task->direction_08;

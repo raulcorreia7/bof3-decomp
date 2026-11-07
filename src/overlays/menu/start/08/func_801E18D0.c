@@ -36,7 +36,7 @@ MATCH void func_801E18D0(void) {
         D_80148652 += 1;
         return;
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         s8* mode = (s8*)&D_80148655;
 
         if (*mode == 0) {
@@ -52,19 +52,19 @@ MATCH void func_801E18D0(void) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
         func_801E2668((u8)*mode, 0x70, 0x26);
         Menu_DrawCursorSprite(((*mode * 0x30) + 0x76) & 0xFFFE, 0x2A, 0);
-        D_80144950    = 1;
-        g_InputMasks  = 0x43;
-        D_80145AB6    = 0x20;
-        D_80145AC0    = 0x10;
-        D_80145AB8    = 0x80;
-        D_80145ABA    = 8;
-        g_WindowStyle = 0;
-        D_80144953    = 0;
-        g_SndMono     = 0;
-        D_80144954    = 0;
-        D_80144955    = 0;
-        D_80144956    = 0;
-        D_80145ABC    = 4;
+        D_80144950                        = 1;
+        g_InputMasks[INPUT_SLOT_ACTION]   = 0x43;
+        g_InputMasks[INPUT_SLOT_INTERACT] = 0x20;
+        g_InputMasks[INPUT_SLOT_6]        = 0x10;
+        g_InputMasks[INPUT_SLOT_MENU]     = 0x80;
+        g_InputMasks[INPUT_SLOT_LOOK]     = 8;
+        g_WindowStyle                     = 0;
+        D_80144953                        = 0;
+        g_SndMono                         = 0;
+        D_80144954                        = 0;
+        D_80144955                        = 0;
+        D_80144956                        = 0;
+        g_InputMasks[INPUT_SLOT_4]        = 4;
         return;
     }
     if (g_GameEntryState == 2) {
@@ -72,7 +72,7 @@ MATCH void func_801E18D0(void) {
             /* Both arms converge on the shared advance block. */
             goto advance;
         }
-    } else if (g_InputPressed & D_80145AC4) {
+    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         goto advance; /* Shared advance block, as in retail. */
     }
     return;

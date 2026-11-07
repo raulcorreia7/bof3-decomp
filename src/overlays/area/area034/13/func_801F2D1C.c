@@ -2,12 +2,12 @@
 
 MATCH void func_801F2D1C(void) {
     ActorSlot* slot;
-    u8         value;
+    u8         index;
 
-    g_Task->unk_0B = Actor_FindFreeSlot();
-    value          = g_Task->unk_0B;
-    if (value != 0xFF) {
-        slot               = &g_ActorSlots[value];
+    g_Task->param.actor_slot = Actor_FindFreeSlot();
+    index                    = g_Task->param.actor_slot;
+    if (index != 0xFF) {
+        slot               = &g_ActorSlots[index];
         slot->header.flags = 1;
         slot->type         = 0x51;
         slot->header.mode  = 6;

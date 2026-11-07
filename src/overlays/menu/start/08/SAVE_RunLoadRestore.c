@@ -8,18 +8,18 @@ MATCH void SAVE_RunLoadRestore(void) {
     g_MenuStartTimer = countdown - 1;
     if (countdown == 0) {
         for (i = 0; (i & BYTE_MASK) < 9U; i++) {
-            (&g_InputMasks)[i & BYTE_MASK] = D_80145594[i & BYTE_MASK];
+            g_InputMasks[i & BYTE_MASK] = D_80145594[i & BYTE_MASK];
         }
         if (D_801ED18C != 0) {
-            D_80145AB6   = PADRright;
-            g_InputMasks = PADRdown;
-            D_80145AC0   = PADRup;
-            D_80145AB8   = PADRleft;
-            D_80145ABA   = PADR1;
-            D_80145ABC   = PADL1;
-            D_80145AC2   = PADRdown;
-            D_80145AC4   = PADRup;
-            D_80145ABE   = PADselect;
+            g_InputMasks[INPUT_SLOT_INTERACT] = PADRright;
+            g_InputMasks[INPUT_SLOT_ACTION]   = PADRdown;
+            g_InputMasks[INPUT_SLOT_6]        = PADRup;
+            g_InputMasks[INPUT_SLOT_MENU]     = PADRleft;
+            g_InputMasks[INPUT_SLOT_LOOK]     = PADR1;
+            g_InputMasks[INPUT_SLOT_4]        = PADL1;
+            g_InputMasks[INPUT_SLOT_CONFIRM]  = PADRdown;
+            g_InputMasks[INPUT_SLOT_CANCEL]   = PADRup;
+            g_InputMasks[INPUT_SLOT_5]        = PADselect;
         }
         g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
         EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);

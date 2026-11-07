@@ -33,7 +33,7 @@ MATCH void func_801E006C(void) {
     }
     D_80148382 = D_801E6264[D_801E625C];
     D_801483A6 = D_801E6264[D_801E625C];
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         SND_PlayCue(EMI_CUE_ID(1, 2));
         input                = 1;
@@ -54,7 +54,7 @@ MATCH void func_801E006C(void) {
         (*((s8*)(&D_80148652)))++;
         return;
     }
-    if (g_InputPressed & D_80145AC4) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_8014837B = 1;
         D_8014839F = 1;

@@ -15,7 +15,7 @@
  * each image's own header. */
 
 typedef struct OverlayHeader {
-    EmiModuleId id; /* 0x00 OverlayId, the TOC's cached first payload word */
+    EMIModuleId id; /* 0x00 OverlayId, the TOC's cached first payload word */
 } OverlayHeader;
 
 ASSERT_SIZE(OverlayHeader, 0x4);

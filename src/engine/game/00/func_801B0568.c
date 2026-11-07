@@ -30,7 +30,7 @@ MATCH void func_801B0568(void) {
             Actor_ClearVelocity();
             g_Task->option_flags   = 0;
             g_Task->unk_09         = 0U;
-            g_Task->unk_0B         = 0;
+            g_Task->param.unk_0B   = 0;
             g_AreaCameraStep       = 0;
             g_AreaCameraHeightStep = 0;
             g_Task->header.step    = 0;
@@ -72,11 +72,11 @@ MATCH void func_801B0568(void) {
                 func_801B5BDC(g_Task->direction_08);
                 goto block_35; /* shares the state-1 tail */
             }
-            g_Task->unk_0B = 0;
+            g_Task->param.unk_0B = 0;
             func_801B0C88();
             func_801C24D0();
             func_801C4C48();
-            g_Task->unk_0B = 0;
+            g_Task->param.unk_0B = 0;
             if (g_GameRequestFlags & 1) {
                 if (g_AreaWalkFlags & (AREA_WALK_TRANSITION | 0x2000)) {
                     tmp5         = g_Task;
@@ -170,7 +170,7 @@ MATCH void func_801B0568(void) {
             g_GameState->mode_12B.s8_value    = 0;
             g_GameState->counter_11C.u8_value = 3U;
             g_Task->unk_09                    = 0U;
-            g_Task->unk_0B                    = 0;
+            g_Task->param.unk_0B              = 0;
             func_801B5BDC(g_Task->direction_08);
             g_GameState->mode_12B.s8_value = 0;
             return;

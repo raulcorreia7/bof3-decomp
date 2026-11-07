@@ -72,12 +72,12 @@ NON_MATCHING void func_80099830(void) {
     choice = (u8*)D_801485A1;
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] =
         Resource_GetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
-    if (D_80145AC4 & g_InputPressed) {
+    if (g_InputMasks[INPUT_SLOT_CANCEL] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         goto block_33; /* shared scroll/confirm join */
     }
     func_8009AAE8();
-    if (D_80145AC2 & g_InputPressed) {
+    if (g_InputMasks[INPUT_SLOT_CONFIRM] & g_InputPressed) {
         if (choice != NULL) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             func_8009A744();

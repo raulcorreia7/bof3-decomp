@@ -550,8 +550,8 @@ MATCH void func_801F32B8(void) {
     selection = D_801F4CE0[index];
     result    = func_8015CB18(1, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        work         = (Actor*)g_Task;
-        work->unk_0B = result;
+        work               = (Actor*)g_Task;
+        work->param.unk_0B = result;
     }
 }
 

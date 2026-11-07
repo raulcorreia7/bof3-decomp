@@ -7,7 +7,7 @@ MATCH s32 func_801F3210(void) {
     Actor_CenterOnScreen();
     if (g_GameEntryState != 1) {
         scratch = (Actor*)g_Task;
-        step    = scratch->unk_0B;
+        step    = scratch->param.unk_0B;
         if (step == scratch->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
                 goto tail;

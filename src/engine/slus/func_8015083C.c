@@ -144,7 +144,7 @@ NON_MATCHING void func_8015083C(void) {
                 /* fallthrough */
             default:
                 if (!(g_UiWindowChannel & FRONTEND_FLAG_NO_INPUT_WAIT)) {
-                    if (g_InputMasks & g_InputHeld) {
+                    if (g_InputMasks[INPUT_SLOT_ACTION] & g_InputHeld) {
                         chan[2] = STEP_TABLE[D_80144950 * 4];
                     } else {
                         chan[2] = STEP_TABLE[D_80144950 * 4 + 1];

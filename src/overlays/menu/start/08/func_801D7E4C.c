@@ -54,7 +54,7 @@ MATCH void func_801D7E4C(void) {
                      (const u8*)&g_Abilities[Party_GetAbilities(
                          g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0)[g_MenuPanelTasks[16].unk_0C]]);
     g_MenuPanelTasks[11].unk_10 = 0x30;
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         result = func_801E7D20(
             g_CharSlot[g_PartyFieldOrder[D_8014857A]], g_CharSlot[g_PartyFieldOrder[*sel]],
             Party_GetAbilities(D_8014857A, g_MenuPanelTasks[16].unk_0B, 0)[g_MenuPanelTasks[16].unk_0C], 0);
@@ -66,7 +66,7 @@ MATCH void func_801D7E4C(void) {
         SND_PlayCue(EMI_CUE_ID(1, 7));
         return;
     }
-    if (g_InputPressed & D_80145AC4) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         SND_PlayCue(EMI_CUE_ID(1, 2));
         D_801485DC = 0;

@@ -6,7 +6,7 @@
 MATCH void func_801DD7CC(void) {
     UI_DrawText(0x1D, 0x14, 0, 0xFF, (u8*)(FISHING_TEXT_BANK + D_800100E0));
     if ((D_80144281 == 0xE) && (D_80144288 == 0)) {
-        if (g_InputPressed & D_80145AC4) {
+        if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
             SND_PlayCue(EMI_CUE_ID(1, 6));
             FISHING_STATE->flag_04      = 0;
             FISHING_STATE->sub_index_03 = (FISHING_STATE->sub_index_03 - 1);

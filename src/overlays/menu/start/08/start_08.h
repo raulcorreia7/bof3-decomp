@@ -85,7 +85,6 @@ enum {
 extern u16             g_GameAreaId;
 extern u8              D_80144F57;
 extern u16             D_80145594[];
-extern s16             D_80145ABE;
 extern u8              D_80145FCC[][BATTLE_PARTY_STRIDE];
 extern u8              D_80148480;
 extern u8              D_8014849B;

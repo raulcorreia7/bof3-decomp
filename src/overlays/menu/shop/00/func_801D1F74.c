@@ -20,8 +20,8 @@ MATCH void func_801D1F74(void) {
         *mode = *mode ^ 1;
     }
     pad_state = *pad;
-    if ((pad_state & D_80145AC2) == 0) {
-        if ((pad_state & D_80145AC4) == 0) {
+    if ((pad_state & g_InputMasks[INPUT_SLOT_CONFIRM]) == 0) {
+        if ((pad_state & g_InputMasks[INPUT_SLOT_CANCEL]) == 0) {
             return;
         }
     } else if (*mode != 0) {

@@ -12,7 +12,7 @@ typedef u32 DiscLba;
 /* A loader slot id indexes the disc file table at 0x80182444. A family base
  * is the slot of its first file; the file at base + n is the n-th of its
  * numbered series (ENEMY000, BGM000, PL012, AREA000, ...). */
-typedef enum EmiSlotId {
+typedef enum EMISlotId {
     /* BATTLE */
     EMI_SLOT_BATL_DRA     = 0,
     EMI_SLOT_BATL_END     = 1,
@@ -59,15 +59,15 @@ typedef enum EmiSlotId {
     EMI_SLOT_PLP          = 0x27D,
     EMI_SLOT_SCENA        = 0x295,
     EMI_SLOT_AREA         = 0x2AB,
-} EmiSlotId;
+} EMISlotId;
 
 /* The family argument of EMI_StreamFamilyArchive selects the numbered series that the
  * index counts into. */
-typedef enum EmiFamily {
+typedef enum EMIFamily {
     EMI_FAMILY_PL   = 0,
     EMI_FAMILY_BPLD = 1,
     EMI_FAMILY_BPLU = 2,
     EMI_FAMILY_PLP  = 3,
-} EmiFamily;
+} EMIFamily;
 
 #endif
