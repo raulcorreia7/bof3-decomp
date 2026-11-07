@@ -7,7 +7,6 @@
 #include "overlays/area/world01.h"
 #include "work/area_spad.h"
 
-extern u8    D_80145F09[][BATTLE_PARTY_STRIDE];
 extern u8    D_80146865;
 extern u8    D_80146866;
 extern u8    D_80146874;
