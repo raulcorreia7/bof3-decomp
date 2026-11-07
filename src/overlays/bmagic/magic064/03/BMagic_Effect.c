@@ -98,6 +98,7 @@ MATCH void func_801EF2A4(void) {
     g_Task->header.step += 1;
 }
 
+/* hint: with u8* active = &g_BattleActiveBattler and party = g_BattlePartyBattlers every instruction matches except retail's li a1,2 after the s2 address setup (2 slots late) at +0x8. */
 INCLUDE_ASM(func_801EF3C8);
 
 MATCH void func_801EF570(void) {

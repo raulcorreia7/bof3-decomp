@@ -421,7 +421,47 @@ MATCH void func_801FDFEC(void* entity) {
 
 INCLUDE_ASM(func_801FE024);
 
-INCLUDE_ASM(func_801FE18C);
+MATCH s32 func_801FE18C(s32 x, s32 y) {
+    if (g_GameAreaId == 0xAE) {
+        if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
+            if (x > 0x43FFFF && (u32)((y >> 16) - 3) < 2) {
+                Game_SetScriptActive();
+                D_80146874 = 3;
+                D_80146875 = 0x14;
+            }
+            return 0;
+        }
+        if (SYS_TestFlag(g_SceneFlags, 4) == 0) {
+            if (x <= 0x530000 && (u32)((y >> 16) - 0x2E) < 3) {
+                Game_SetScriptActive();
+                D_80146874 = 3;
+                D_80146875 = 0x1E;
+            }
+            return 0;
+        }
+        if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
+            if (y <= 0x3A0000 && (u32)((x >> 16) - 0x23) < 4) {
+                Game_SetScriptActive();
+                D_80146874 = 3;
+                D_80146875 = 0x28;
+            }
+            return 0;
+        }
+        if (x == 0x310000 && (u32)((y >> 16) - 0x27) < 2) {
+            if (SYS_TestFlag(g_SceneFlags, 0xC) && SYS_TestFlag(g_SceneFlags, 0xE) && SYS_TestFlag(g_SceneFlags, 0xD) &&
+                SYS_TestFlag(g_SceneFlags, 0xF) && SYS_TestFlag(g_SceneFlags, 0x10)) {
+                Game_SetScriptActive();
+                D_80146874 = 5;
+                D_80146875 = 5;
+            } else {
+                Game_SetScriptActive();
+                D_80146874 = 5;
+                D_80146875 = 0;
+            }
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM(func_801FE3C8);
 
