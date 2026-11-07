@@ -7,7 +7,7 @@
 #include "work/area_spad.h"
 #include "common/util.h"
 
-/* func_801F85A8 triangle: the third vertex is `size` rotated by this angle
+/* Scene_DrawTriangle: the third vertex is `size` rotated by this angle
  * (4096 per turn); the vertices are grey (r = g = b) at these levels. */
 #define SCN_TRI_APEX_ANGLE 0x4F
 #define SCN_TRI_SHADE_V0   0x28
@@ -78,7 +78,7 @@ ASSERT_OFFSET(SceneLinePoint, y, 0x04);
 ASSERT_OFFSET(SceneLinePoint, z, 0x08);
 
 /* Scene effects: func_801F7134 draws the actor-relative sprite;
- * func_801F78EC draws its field-space lines and func_801F85A8 its rotated triangles. */
+ * func_801F78EC draws its field-space lines and Scene_DrawTriangle its rotated triangles. */
 typedef struct SceneEffect {
     u8             pad_00[0x1];
     /* 0x01 */ u8  step; /* the scenario step byte */
@@ -286,7 +286,8 @@ void func_801F8014(void);
 void func_801F8140(void);
 void func_801F82B4(void);
 void func_801F8360(void);
-void func_801F85A8(s32 size, s32 angle_x, s32 angle_y, s32 angle_z);
+/* func_801F85A8 */
+void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z);
 void func_801F8748(void);
 void func_801F878C(void);
 void func_801F882C(void);
