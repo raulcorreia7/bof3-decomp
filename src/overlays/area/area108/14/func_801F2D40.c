@@ -5,11 +5,11 @@ MATCH void func_801F2D40(const void* sprite) {
     u16               size[2];
     volatile s16      buf[8];
     const AreaSprite* work;
-    const void*       object;
+    s32*              object;
     POLY_FT4*         primitive;
 
     work      = (const AreaSprite*)sprite;
-    object    = (const void*)((const u8*)sprite + 4u);
+    object    = (s32*)((const u8*)sprite + 4u);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);

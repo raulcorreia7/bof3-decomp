@@ -20,7 +20,7 @@
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000; \
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000; \
     pos.vz = -COORD_INT((SPAN_WORK)->pos.z) / 2;  \
-    RotTrans(&pos, (VECTOR*)matrix.t, &flags);    \
+    RotTransMatrix(&pos, matrix, &flags);         \
     RotMatrix(&rot, &matrix);                     \
     MulMatrix2(&g_CameraMatrix, &matrix);         \
     SetRotMatrix(&matrix);                        \

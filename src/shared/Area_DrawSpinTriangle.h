@@ -15,7 +15,7 @@ MATCH void Area_DrawSpinTriangle(const void* spin) {
 
     SetPolyG3(primitive);
     SetSemiTrans(primitive, 1);
-    Area_ProjectPoint(work, &primitive->x0);
+    Area_ProjectPoint(&work->origin.x, &primitive->x0);
 
     point[0] =
         ((rcos(work->spin_angle) * work->vertex_a.vx - rsin(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;

@@ -56,4 +56,7 @@ s32         SysEnqIntRP(s32, s32*);        /* 0x801D7D24 */
 s32         SysDeqIntRP(s32, s32*);        /* 0x801D7D34 */
 s32         _patch_pad(void);              /* 0x801D7D6C */
 
+/* RotTrans into a matrix translation: PsyQ takes a VECTOR, MATRIX.t is long t[3]. */
+#define RotTransMatrix(pos, matrix, flag) RotTrans(pos, (VECTOR*)(matrix).t, flag)
+
 #endif

@@ -400,11 +400,11 @@ MATCH void func_801F2DF8(const void* sprite) {
     u16               size[2];
     volatile s16      buf[8];
     const AreaSprite* work;
-    const void*       object;
+    s32*              object;
     POLY_FT4*         primitive;
 
     work      = (const AreaSprite*)sprite;
-    object    = (const void*)((const u8*)sprite + 4u);
+    object    = (s32*)((const u8*)sprite + 4u);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);
@@ -686,7 +686,7 @@ MATCH void func_801F3944(const void* spin) {
 
     SetPolyG3(primitive);
     SetSemiTrans(primitive, 1);
-    Area_ProjectPoint(work, &primitive->x0);
+    Area_ProjectPoint(&work->origin.x, &primitive->x0);
 
     point[0] =
         ((rcos(work->spin_angle) * work->vertex_a.vx - rsin(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;

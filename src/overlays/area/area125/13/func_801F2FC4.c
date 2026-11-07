@@ -5,7 +5,7 @@ MATCH void func_801F2FC4(const void* sprite) {
     u16               size[2];
     volatile s16      buf[8];
     const AreaSprite* work;
-    const void*       object;
+    s32*              object;
     POLY_FT4*         primitive;
 
     work      = (const AreaSprite*)sprite;

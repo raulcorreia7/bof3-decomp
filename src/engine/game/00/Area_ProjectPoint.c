@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void Area_ProjectPoint(s32* pos, long* screen_xy) {
+MATCH void Area_ProjectPoint(s32* pos, void* screen_xy) {
     SVECTOR vec;
     long    p;
     long    flag;

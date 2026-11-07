@@ -4,7 +4,7 @@ MATCH void func_801F46EC(const void* sprite) {
     s16               screen[2];
     u16               size[2];
     const AreaSprite* work;
-    const void*       object;
+    s32*              object;
     POLY_FT4*         primitive;
     u8                shade;
 

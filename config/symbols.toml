@@ -4492,7 +4492,7 @@ SND_PlayBGM = { addr = 0x80161C20, type = "func", source = "resolves the BGM's t
 SND_FadeOutBGM = { addr = 0x80161CD0, type = "func", source = "passes the BGM row's two bytes to the duck path func_8015D554" }
 SND_PauseBGM = { addr = 0x80161D20, type = "func", source = "pauses the sequence player for the selected entry" }
 SND_ResumeBGM = { addr = 0x80161D74, type = "func", source = "replays the selected entry's sequence" }
-SND_InstallSequenceFuncs = { addr = 0x80161DC8, type = "func", source = "installs the _Ss* sequence handlers into D_8018DB58..D_8018DBE8" }
+SND_InstallSequenceFuncs = { addr = 0x80161DC8, type = "func", source = "fills SsFCALL, the libsnd note, program, pitch bend, meta event and control-change handler table" }
 EMI_LoaderInit = { addr = 0x80161F58, type = "func", source = "CdInit loop, VSync(3), clears the 24 callback states" }
 EMI_LoaderStreamInitSlot = { addr = 0x80161FDC, type = "func", source = "latch slot id, reset ring, install CD callbacks" }
 EMI_LoaderSlotLba = { addr = 0x80162160, type = "func", source = "D_80182444[emi_id], the disc file table" }
