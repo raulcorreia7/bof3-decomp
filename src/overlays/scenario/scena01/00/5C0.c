@@ -325,9 +325,16 @@ INCLUDE_ASM(func_801FDA6C);
 
 INCLUDE_ASM(func_801FE03C);
 
-/* blocker: return 1 in the Game_SetScriptActive delay slot; first diff: +0x40 li v0,1. */
-/* m2c draft: 11 differing, size 0x74 against 0x68; the frame save differs. */
-INCLUDE_ASM(func_801FE0A4);
+MATCH s32 func_801FE0A4(void) {
+    if (SYS_TestFlag(g_SceneFlags, 3) == 0 || SYS_TestFlag(g_SceneFlags, 4)) {
+        return -1;
+    }
+
+    Game_SetScriptActive();
+    g_SceneState.step_05  = 0;
+    g_SceneState.state_04 = 5;
+    return 1;
+}
 
 MATCH void func_801FE10C(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;

@@ -424,8 +424,22 @@ MATCH void func_801F9330(void) {
 
 INCLUDE_ASM(func_801F9338);
 
-/* m2c draft: 13 differing, size 0x84 against 0x88; the first difference is lui v1 at entry. */
-INCLUDE_ASM(func_801F97F8);
+MATCH void func_801F97F8(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            func_801BE1B0(1);
+            g_ScriptVars[0]      = 0xA;
+            g_SceneState.step_05 = 1;
+            break;
+
+        case 1:
+            if (g_ScriptVars[0] == 0x28) {
+                g_SceneState.state_04 = 1;
+                g_SceneState.step_05  = 1;
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801F9880);
 
