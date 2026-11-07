@@ -9,7 +9,7 @@ MATCH void func_801D2CA4(void) {
     u8* edp;
 
     if (g_MasterBannerLock != 0) {
-        Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + 4));
+        Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_FAREWELL));
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
         g_MasterStep     = 6;
         g_MasterSubStep  = 0;
@@ -38,7 +38,7 @@ MATCH void func_801D2CA4(void) {
             g_MasterStats[*edp].agility_bonus;
         g_Characters[D_80145FCC.bytes[(g_MasterMenuCursor * 5) << 6]].level_up_modifiers[5] =
             g_MasterStats[*edp].intellect_bonus;
-        Message_StartAreaMessage((s16)(g_MasterMessageIds[*edp] + 10));
+        Message_StartAreaMessage((s16)(g_MasterMessageIds[*edp] + MASTER_MESSAGE_ENROLLED));
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
         g_MasterSubStep += 1;
     }

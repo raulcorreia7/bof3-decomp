@@ -6,7 +6,6 @@ MATCH void func_8009DE8C(void) {
     BattleSelectionContext* ctx;
     u32                     sel;
     u16                     value;
-    u32                     row_off;
     s64                     negated;
 
     ctx = (BattleSelectionContext*)&g_BattleTarget;
@@ -17,8 +16,7 @@ MATCH void func_8009DE8C(void) {
         value = ENEMY_COMBATANT(sel).stats.max_hp;
         if (value == 0xFFFFu) {
             g_BattleTargetRecord->hp_change = -1;
-            row_off                         = (ctx->sel - 3u) * BATTLE_ENEMY_STRIDE;
-            D_801EB72C[row_off] |= 4u;
+            ENEMY_COMBATANT(ctx->sel).turn.target_flags |= 4u;
             return;
         }
         /* Negation materialized first, matching the original's evaluation order. */

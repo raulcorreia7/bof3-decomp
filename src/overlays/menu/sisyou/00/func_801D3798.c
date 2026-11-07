@@ -21,7 +21,7 @@ MATCH void func_801D3798(void) {
         g_MasterSubStep = 0;
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + 9));
+    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_NO_PUPILS));
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     g_MasterSubStep++;
 }

@@ -32,11 +32,11 @@ MATCH void func_801E8DD8(void) {
     } else {
         row = slot[5];
         row -= 3;
-        offset_x            = D_801EB712[row * 0x118];
+        offset_x            = g_BattleEnemyBattlers[row].unk_E2;
         g_Task->unk_2E.half = *(u16*)((slot + 0x2Eu)) + offset_x;
         row                 = slot[5];
         row -= 3;
-        offset_y            = ENCOUNTER_ENEMIES[D_801EB710[row * 0x118]].height;
+        offset_y            = ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[row].kind].height;
         g_Task->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
         g_Task->depth       = *(u16*)((slot + 0x32u));
     }

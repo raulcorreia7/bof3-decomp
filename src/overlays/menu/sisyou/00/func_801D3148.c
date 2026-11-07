@@ -22,7 +22,7 @@ MATCH void func_801D3148(void) {
         g_MasterSubStep = 0;
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + 7));
+    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_ALL_ENROLLED));
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     g_MasterSubStep++;
 }
