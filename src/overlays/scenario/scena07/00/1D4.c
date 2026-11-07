@@ -422,7 +422,19 @@ INCLUDE_ASM(func_801FD45C);
 
 INCLUDE_ASM(func_801FD4C4);
 
-INCLUDE_ASM(func_801FD524);
+MATCH void func_801FD524(void) {
+    Game_SetScriptActive();
+    g_ScriptVars[0] = 0;
+    D_80146865      = 0;
+    D_80146866      = 0;
+    D_80146867      = 0;
+    if (SYS_TestFlag(D_80144EB8, 0x22) == 0) {
+        g_SceneState.step_05 = 0;
+    } else {
+        g_SceneState.step_05 = 0x14;
+    }
+    g_SceneState.state_04 = 7;
+}
 
 INCLUDE_ASM(func_801FD5A0);
 
