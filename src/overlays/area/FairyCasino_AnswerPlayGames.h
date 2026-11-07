@@ -6,6 +6,6 @@ MATCH void FairyCasino_AnswerPlayGames(void) {
         g_MessageRequest = FAIRY_MESSAGE_CASINO_CHOOSE_GAME;
     } else {
         g_MessageRequest                   = FAIRY_MESSAGE_CASINO_NOT_PLAYING;
-        g_ScriptWorkRecord->callback_index = 0xFF;
+        g_ScriptWorkRecord->callback_index = GAME_NONE;
     }
 }

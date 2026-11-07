@@ -10,6 +10,6 @@ MATCH void FairySinger_AnswerHearSong(void) {
         D_801F2944 = 1;
     } else {
         g_MessageRequest                   = FAIRY_MESSAGE_SINGER_GOODBYE;
-        g_ScriptWorkRecord->callback_index = 0xFF;
+        g_ScriptWorkRecord->callback_index = GAME_NONE;
     }
 }
