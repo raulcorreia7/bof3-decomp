@@ -189,7 +189,6 @@ ASSERT_OFFSET(FairyVillageData, variant_counter, 0x42C);
 ASSERT_OFFSET(FairyVillageData, labels, 0x434);
 
 /* Retail-address data symbols, in address order. */
-extern u16      g_GameAreaId;
 extern u8       D_801448F2;
 extern s32      D_80145030;
 extern s32      D_8014503C;
