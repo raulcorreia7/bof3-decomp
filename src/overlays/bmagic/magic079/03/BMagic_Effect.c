@@ -112,7 +112,21 @@ MATCH void func_801EF0A8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF130);
+MATCH void func_801EF130(void) {
+    u8 timer;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->pos.x.fixed = D_8014637C->pos.x.fixed - 0x4000;
+        g_Task->pos.y.fixed = D_8014637C->pos.y.fixed - 0x4000;
+        g_Task->pos.z.fixed = D_8014637C->pos.z.fixed + 0x04000000;
+        g_Task->param.unk_0B = 0x10;
+        g_Task->unk_09 = 0x10;
+        g_Task->timer = 0;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF1DC(void) {
     PartyBattler* work;
