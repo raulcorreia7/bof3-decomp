@@ -9,5 +9,5 @@ MATCH void Game_DispatchScenarioRecord(void* object) {
     } else {
         g_SceneScenes[g_SceneState.scenario_id]->entry_04(record);
     }
-    record->callback_index = 0xFF;
+    record->callback_index = GAME_NONE;
 }

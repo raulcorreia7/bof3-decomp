@@ -4,11 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-extern u8 D_801F0470[];
-void      func_801EF340(void);
-void      func_801EECF8(void);
-void      Effect_StartOnZeroTick(void);
-
 MATCH void func_801EEC18(void) {
     PartyBattler* saved;
     PartyBattler* swap;

@@ -6,6 +6,7 @@
  * image includes the file. */
 
 #include "game/character.h"
+#include "menu/party.h"
 #include "shared/etc.h"
 #include "work/save.h"
 #include <string.h>
@@ -278,6 +279,9 @@ extern u8          g_MenuListTab2OnSprites[0xC];
 extern u8*         g_MenuInventoryTitles[5];
 extern char        g_MenuInventoryCountFormat[];
 extern u8          g_MenuInventoryTab1OffSprites[];
+extern u8*         g_MenuEquipTitles[5];
+extern u8          g_MenuEquipChoiceIds[];
+extern u8          g_MenuEquipChoiceCounts[];
 extern u8          g_MenuInventoryTab1OnSprites[];
 /* D_801E5668 */
 extern u8          g_MenuListTab1OffSprites[0xC];
@@ -443,7 +447,17 @@ bool Item_Add(s32 category, u8 item, u8 amount, s32 unused);
 s32  Item_Count(u8 category, u8 item, u8 mode);
 s32  Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
-bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
+
+extern FormationLayout g_MenuFormations[FORMATION_COUNT];
+extern FormationOrder  g_MenuFormationOrder;
+extern s32             g_MenuFormationArrow[3][2];
+extern s32             g_MenuFormationArrowTurned[3][2];
+extern s32             g_MenuFormationSpots[PARTY_SLOT_COUNT][2];
+extern u8              g_MenuFormationFrameLeft[];
+extern u8              g_MenuFormationFrameMiddle[];
+extern u8              g_MenuFormationFrameRight[];
+void                   Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
+bool                   func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
 void func_801AF930(s16 x, s16 y, u8 palette_index, u8 icon_index, volatile Ability* ability, u8 stat_value,
                    u8 sprite_flag);
 void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,

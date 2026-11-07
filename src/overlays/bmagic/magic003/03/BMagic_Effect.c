@@ -36,6 +36,7 @@ MATCH void func_801EEE28(void) {
     }
 }
 
+/* blocker: the table index is the byte at 0x0A (lbu), and g_Task has no byte member there (BMagicEffectWork.unk_0A is u16); first diff: the lbu of byte 0x0A (the table index) has no byte member to read. */
 INCLUDE_ASM(func_801EEEA4);
 
 INCLUDE_ASM(func_801EEF4C);

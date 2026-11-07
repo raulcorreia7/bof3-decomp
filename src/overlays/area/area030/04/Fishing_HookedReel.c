@@ -16,7 +16,7 @@ MATCH void Fishing_HookedReel(void) {
     u8*           counter;
 
     D_801E31FC = D_801E31F8;
-    if (g_ActorSlots[0].pos.y.fixed > 0x3E7FFF) {
+    if (g_ActorSlots[0].pos.y.fixed >= FISHING_CATCH_HEIGHT) {
         D_80144199                                                      = 1;
         D_8014419E                                                      = 4;
         D_8014403D                                                      = 4;

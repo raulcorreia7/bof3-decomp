@@ -8,17 +8,8 @@ INCLUDE_ASM(func_801EEC28);
 
 INCLUDE_ASM(func_801EED48);
 
-MATCH void func_801EEF5C(void) {
-    PartyBattler** selected;
-
-    if (--g_Task->unk_09 == 0) {
-        selected = &g_BattleSelectedActor;
-        GFX_FreePaletteFadeTarget(*selected);
-        g_Task->timer  = GFX_AllocPaletteFade((u8*)*selected, 0, 0, 0, 1);
-        g_Task->unk_09 = 8;
-        g_Task->header.mode++;
-    }
-}
+/* func_801EEF5C */
+#include "overlays/bmagic/Effect_PreparePalette.h"
 
 #include "overlays/bmagic/Effect_BrightenPalette.h"
 

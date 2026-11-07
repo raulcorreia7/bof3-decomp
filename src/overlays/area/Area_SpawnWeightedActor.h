@@ -1,18 +1,15 @@
-/* Weighted random actor spawn: picks a row from the D_801F2DCC weights, hides
- * the first eight Actor rows except the pick, places it at the
- * D_801F2DBC/D_801F2DBD coordinate pair with the Area_SampleHeight height, and
- * steps D_80143F22 from D_80145FB8. One definition shared by nine area
- * overlays: emi/world00/area029/13, emi/world01/area063/13, area064/13,
- * area072/13, area073/13 and emi/world02/area110/13 at 0x801F2C04;
- * emi/world03/area125/13 at 0x801F3504; emi/world00/area020/13 and
- * emi/world03/area124/13 carry retargeted-tables copies. Every change here
- * must verify every member. */
+typedef struct AreaSpawnPosition {
+    u8 x;
+    u8 y;
+} AreaSpawnPosition;
 
-extern u16 D_80145FB8;
-extern u8  D_801468C6[];
-extern u8  D_801F2DBC[];
-extern u8  D_801F2DBD[];
-extern u8  D_801F2DCC[];
+ASSERT_SIZE(AreaSpawnPosition, 2);
+ASSERT_OFFSET(AreaSpawnPosition, x, 0);
+ASSERT_OFFSET(AreaSpawnPosition, y, 1);
+
+extern u16               D_80145FB8;
+extern AreaSpawnPosition g_AreaSpawnPositions[];
+extern u8                g_AreaSpawnWeights[];
 
 MATCH void Area_SpawnWeightedActor(void) {
     u8  roll;
@@ -25,7 +22,7 @@ MATCH void Area_SpawnWeightedActor(void) {
     roll  = rand() & 0x3F;
     count = 0;
 pick_weight:
-    weight = D_801F2DCC[count];
+    weight = g_AreaSpawnWeights[count];
     if (roll >= weight) {
         count += 1;
         roll -= weight;
@@ -40,8 +37,8 @@ pick_weight:
     }
     if (count < 8) {
         pick                             = rand();
-        g_Actors[count].pos.x.fixed      = D_801F2DBC[(pick & 7) * 2] << 16;
-        y                                = D_801F2DBD[(pick & 7) * 2] << 16;
+        g_Actors[count].pos.x.fixed      = g_AreaSpawnPositions[pick & 7].x << 16;
+        y                                = g_AreaSpawnPositions[pick & 7].y << 16;
         g_Actors[count].pos.y.fixed      = y;
         COORD_INT(g_Actors[count].pos.z) = Area_SampleHeight(g_Actors[count].pos.x.fixed, y);
     }

@@ -24,12 +24,12 @@ NON_MATCHING void Fishing_LureCast(void) {
 
     value                    = FISHING_STATE->y_38.pos_y - (FISHING_STATE->cursor_10 << 15);
     FISHING_STATE->cursor_10 = value;
-    if (value > 0x3BFFFF) {
-        g_AreaScrollTargetY = TO_COORD(60);
-    } else if (value > 0x14FFFF) {
+    if (value >= FISHING_CAMERA_Y_MAX) {
+        g_AreaScrollTargetY = FISHING_CAMERA_Y_MAX;
+    } else if (value >= FISHING_CAMERA_Y_MIN) {
         g_AreaScrollTargetY = value;
     } else {
-        g_AreaScrollTargetY = TO_COORD(21);
+        g_AreaScrollTargetY = FISHING_CAMERA_Y_MIN;
     }
 
     g_AreaCameraStep              = 0;

@@ -20,3 +20,4 @@ extern Callback D_801CF62C[];
 extern Callback D_801CF638[];
 
 #endif
+void func_801CEE24(s32 kind, s32 x, s32 y, s32 code);

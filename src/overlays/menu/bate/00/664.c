@@ -129,7 +129,7 @@ INCLUDE_ASM(func_801D31B0);
 
 #include "overlays/menu/Menu_DrawEquipment.h"
 
-INCLUDE_ASM(func_801D3E18);
+#include "overlays/menu/Menu_DrawFormationPreview.h"
 
 #include "overlays/menu/Menu_DrawIcon.h"
 
@@ -177,6 +177,8 @@ INCLUDE_ASM(Menu_DrawEquipStatWindow);
 
 #include "overlays/menu/Menu_DrawPanelFrame.h"
 
+/* The equip list, a twin of overlays/menu/Menu_DrawEquipChoiceWindow.h. needs: split: its jump table (0x801D0D68) sits
+ * in the D_801D0C04 bin blob ahead of this unit's text, so the unit's .rodata has no place in the split yet. */
 INCLUDE_ASM(func_801D7AD0);
 
 MATCH void func_801D8208(u8 index, s32 left, s32 top, MenuListRow* row) {

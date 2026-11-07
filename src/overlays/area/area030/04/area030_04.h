@@ -7,6 +7,7 @@
 
 #include "overlays/area/world00.h"
 #include "work/area_spad.h"
+#include "game/item.h"
 #include <stdio.h>
 
 #define FISHING_STATE        ((FishingState*)g_Task)
@@ -18,6 +19,15 @@
  * func_8014F800, which hands it to func_8014F84C as the text record. */
 #define FISHING_TEXT_BANK    0x80010000
 #define g_CurrentActor       ((u8*)g_CurrentActor)
+
+/* The fish species the pond holds: the fish items from ITEM_JELLYFISH to ITEM_MACKEREL. */
+#define FISHING_FISH_SPECIES (ITEM_MACKEREL - ITEM_JELLYFISH + 1)
+
+/* The pond camera follows the lure between these heights (16.16 cells); a
+ * hooked fish out of the water is at FISHING_CATCH_HEIGHT. */
+#define FISHING_CAMERA_Y_MIN TO_COORD(21)
+#define FISHING_CAMERA_Y_MAX TO_COORD(60)
+#define FISHING_CATCH_HEIGHT TO_COORD_HALF(62)
 #define g_AreaScrollTargetY  (*(u32*)&g_AreaScrollTargetY)
 
 /* The motion word at 0x34 is loaded as a whole, and 0x36 is its upper half. */
@@ -481,7 +491,8 @@ extern u8                    D_801E31F4;
 extern u8                    D_801E31F8;
 extern u8                    D_801E31FC;
 extern u8                    D_801E3200;
-extern u8                    D_801E3204;
+/* D_801E3204 */
+extern u8                    g_FishingFullNoticeShown;
 /* D_801E3208 */
 extern u8                    g_FishingHookedFish;
 /* D_801E320C */
@@ -750,7 +761,8 @@ void func_801E162C(s16 cell_x, s16 cell_y, u16 icon_index);
 void func_801E16DC(void);
 void func_801E1758(s32 x, s32 y);
 void func_801E19CC(s32 x, s32 y);
-s32  func_801E1C10(void);
+/* func_801E1C10 */
+s32  Fishing_FishStacksFull(void);
 void func_801E1C7C(void);
 
 /* When the AREA030 state byte is 3, arm the selection cue and advance the

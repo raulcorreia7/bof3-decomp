@@ -19,6 +19,16 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x4C, .data, D_801D0C4C]
+      - [0x194, .rodata, Menu_DrawEquipChoiceWindow]
+  # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
+  - name: data_2b
+    type: code
+    start: 0x1AC
+    vram: 0x801D0DAC
+    align: 4
+    section_order: [.data, .rodata]
+    subsegments:
+      - [0x1AC, .data, D_801D0DAC]
       - [0x1C8, .rodata, func_801E1C20]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_3
@@ -170,7 +180,7 @@ segments:
       - [0xBA58, c, Menu_DrawTintedLine]
       - [0xBB4C, c, Menu_DrawItemRow]
       - [0xBEEC, c, Menu_DrawEquipment]
-      - [0xC1B8, c, func_801DCDB8]
+      - [0xC1B8, c, Menu_DrawFormationPreview]
       - [0xC904, c, Menu_DrawIcon]
       - [0xCA18, c, Menu_DrawPanelIcon]
       - [0xCAD0, c, func_801DD6D0]
@@ -191,7 +201,7 @@ segments:
       - [0xEFF4, c, Menu_DrawInventoryWindow]
       - [0xF754, c, func_801E0354]
       - [0xFC48, c, Menu_DrawPanelFrame]
-      - [0xFE70, c, func_801E0A70]
+      - [0xFE70, c, Menu_DrawEquipChoiceWindow]
       - [0x105A8, c, SAVE_DrawSlot]
       - [0x108A8, c, func_801E14A8]
       - [0x10A80, c, func_801E1680]

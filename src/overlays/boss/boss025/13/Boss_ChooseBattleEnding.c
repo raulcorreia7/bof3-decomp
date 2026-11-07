@@ -1,3 +1,20 @@
 #include "boss025_13.h"
 
-INCLUDE_ASM(Boss_ChooseBattleEnding);
+MATCH void Boss_ChooseBattleEnding(void) {
+    volatile u8* flags;
+
+    BOSS_SEND_PARTY_TO_ENDING_POSE(0)
+    BOSS_SEND_PARTY_TO_ENDING_POSE(1)
+    BOSS_SEND_PARTY_TO_ENDING_POSE(2)
+    flags = &g_BattleBossFlags;
+    if (*flags & 1) {
+        D_80146875 = 0xF;
+    }
+    if (*flags & 2) {
+        D_80146875 = 7;
+    }
+    if (*flags & 4) {
+        D_80146875 = 0x14;
+    }
+    func_801DDF28();
+}

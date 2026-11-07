@@ -31,7 +31,31 @@ INCLUDE_ASM(func_801EEF80);
 
 INCLUDE_ASM(func_801EF118);
 
-INCLUDE_ASM(func_801EF2B0);
+MATCH void func_801EF2B0(void) {
+    s32           angle;
+    s32           dz;
+    u8            count;
+    PartyBattler* task;
+
+    if (g_FrameCount & 1) {
+        func_8014D978();
+    }
+    g_Task->unk_5D -= 6;
+    g_Task->unk_5E -= 6;
+    g_Task->unk_5F -= 6;
+    g_Task->pos.x.fixed += (rsin(g_Task->unk_0C) << 13) >> 12;
+    angle = (rcos(g_Task->unk_0C) << 13) >> 12;
+    task  = g_Task;
+    task->pos.y.fixed += angle;
+    count        = task->unk_09 - 1;
+    task->unk_09 = count;
+    dz           = task->unk_14 + task->unk_20;
+    task->unk_14 = dz;
+    task->pos.z.part.integer += dz;
+    if (count == 0) {
+        g_Task->header.step++;
+    }
+}
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 

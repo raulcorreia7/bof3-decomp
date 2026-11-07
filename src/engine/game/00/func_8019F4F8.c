@@ -15,7 +15,7 @@ MATCH void func_8019F4F8(void) {
         g_Task->pos.y.fixed += step;
         g_Task->vy = step;
         if (active != 0) {
-            routeOffset = (s32)g_Task->param.unk_0B * BATTLE_PARTY_STRIDE;
+            routeOffset = (s32)g_Task->param.party_index * BATTLE_PARTY_STRIDE;
             func_8019F5B8(
                 *(s16*)(((u8*)&g_BattlePartyBattlers[0].unk_2E) + routeOffset),
                 (s16)(*(u16*)(((u8*)&g_BattlePartyBattlers[0].unk_30) + routeOffset) + (u16)COORD_INT(g_Task->pos.y)),

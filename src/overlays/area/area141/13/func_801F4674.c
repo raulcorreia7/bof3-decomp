@@ -1,7 +1,5 @@
 #include "area141_13.h"
 
-extern u8 D_801F4E2C[];
-
 MATCH void func_801F4674(void) {
     s32 first;
     s32 second;

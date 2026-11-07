@@ -25,7 +25,7 @@ MATCH void func_801A4AA8(void) {
     g_CurrentActor->timer_75       = 0;
     g_CurrentActor->pad_76         = 0;
     g_CurrentActor->unk_79         = 0;
-    g_CurrentActor->callback_index = 0xFF;
+    g_CurrentActor->callback_index = GAME_NONE;
     g_CurrentActor->unk_7B         = 0;
     g_CurrentActor->unk_7E         = 0;
     g_CurrentActor->roll_90        = 0;

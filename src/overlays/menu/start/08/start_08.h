@@ -2,6 +2,7 @@
 #define OVERLAY_ETC_START_08_H
 
 #include "game/character.h"
+#include "menu/party.h"
 #include "shared/etc.h"
 #include "work/save.h"
 #include <string.h>
@@ -328,6 +329,9 @@ extern u8       g_MenuListTab2OnSprites[];
 extern u8*      g_MenuInventoryTitles[5];
 extern char     g_MenuInventoryCountFormat[];
 extern u8       g_MenuInventoryTab1OffSprites[];
+extern u8*      g_MenuEquipTitles[5];
+extern u8       g_MenuEquipChoiceIds[];
+extern u8       g_MenuEquipChoiceCounts[];
 extern u8       g_MenuInventoryTab1OnSprites[];
 /* D_801EC784 */
 extern u8       g_MenuListTab1OffSprites[];
@@ -374,70 +378,77 @@ extern Callback g_MenuStartPanel7StateFuncs[MENU_START_PANEL7_STATE_COUNT];
 extern Callback g_MenuStartPanel8StateFuncs[MENU_START_PANEL8_STATE_COUNT];
 /* D_801ED420 */
 extern Callback g_MenuStartMessageStates[MENU_START_PANEL9_STATE_COUNT];
-extern u16      D_801ED42C[1];
-extern u16      D_801ED42E[];
+
+typedef struct CursorFrameSize {
+    u16 width;
+    u16 height;
+} CursorFrameSize;
+
+ASSERT_SIZE(CursorFrameSize, 4);
+
+extern CursorFrameSize g_StartCursorFrames[4];
 /* D_801ED43C */
-extern Callback g_MenuStartPanel11StateFuncs[MENU_START_PANEL11_STATE_COUNT];
+extern Callback        g_MenuStartPanel11StateFuncs[MENU_START_PANEL11_STATE_COUNT];
 /* D_801ED448 */
-extern Callback g_MenuStartInventoryStates[MENU_START_PANEL12_STATE_COUNT];
+extern Callback        g_MenuStartInventoryStates[MENU_START_PANEL12_STATE_COUNT];
 /* D_801ED45C */
-extern Callback g_MenuStartCommandsStates[MENU_START_PANEL13_STATE_COUNT];
-extern u8       D_801ED468[];
-extern u8       D_801ED48C[];
-extern u8       D_801ED498[];
-extern u32      D_801ED534[];
-extern u8       D_801ED560[][6];
+extern Callback        g_MenuStartCommandsStates[MENU_START_PANEL13_STATE_COUNT];
+extern u8              D_801ED468[];
+extern u8              D_801ED48C[];
+extern u8              D_801ED498[];
+extern u32             D_801ED534[];
+extern u8              D_801ED560[][6];
 /* D_801ED58C */
-extern Callback g_MenuStartEquipCompareStates[MENU_START_PANEL16_STATE_COUNT];
+extern Callback        g_MenuStartEquipCompareStates[MENU_START_PANEL16_STATE_COUNT];
 /* D_801ED5A0 */
-extern Callback g_MenuStartAbilitiesStates[MENU_START_PANEL17_STATE_COUNT];
+extern Callback        g_MenuStartAbilitiesStates[MENU_START_PANEL17_STATE_COUNT];
 /* D_801ED5B4 */
-extern Callback g_MenuStartPanel18StateFuncs[MENU_START_PANEL18_STATE_COUNT];
+extern Callback        g_MenuStartPanel18StateFuncs[MENU_START_PANEL18_STATE_COUNT];
 /* D_801ED5C8 */
-extern Callback g_MenuStartPanel19StateFuncs[MENU_START_PANEL19_STATE_COUNT];
+extern Callback        g_MenuStartPanel19StateFuncs[MENU_START_PANEL19_STATE_COUNT];
 /* D_801ED5E4 */
-extern Callback g_MenuStartPanel20StateFuncs[MENU_START_PANEL20_STATE_COUNT];
-extern u8       s_PartyCharacterIds[3];
-extern u8       D_801ED613[];
-extern s8       D_801ED618;
-extern u8       D_801ED620;
+extern Callback        g_MenuStartPanel20StateFuncs[MENU_START_PANEL20_STATE_COUNT];
+extern u8              s_PartyCharacterIds[3];
+extern u8              D_801ED613[];
+extern s8              D_801ED618;
+extern u8              D_801ED620;
 /* D_801ED63C */
-extern u8       g_EquipPreview[EQUIP_SLOT_COUNT];
-extern s8       D_801ED648;
+extern u8              g_EquipPreview[EQUIP_SLOT_COUNT];
+extern s8              D_801ED648;
 /* The start overlay's slot rows (three bytes per slot) and its byte table;
  * every reader indexes or walks them as bytes. */
-extern u8       D_801ED680[];
-extern u8       D_801ED68C;
-extern u8       D_801ED690[];
-extern u8       D_801ED694[][2];
-extern u8       D_801ED695[][2];
-extern u8       D_801ED6A0;
-extern u8*      D_801ED7D8;
-extern u8       D_801ED7DC;
-extern s8       D_801ED7E0;
-extern s8       D_801ED7E4;
-extern u8       D_801ED7E8;
-extern u8       D_801ED7EC;
+extern u8              D_801ED680[];
+extern u8              D_801ED68C;
+extern u8              D_801ED690[];
+extern u8              D_801ED694[][2];
+extern u8              D_801ED695[][2];
+extern u8              D_801ED6A0;
+extern u8*             D_801ED7D8;
+extern u8              D_801ED7DC;
+extern s8              D_801ED7E0;
+extern s8              D_801ED7E4;
+extern u8              D_801ED7E8;
+extern u8              D_801ED7EC;
 /* D_801ED7F0 */
-extern s8       g_MenuStartTimer;
-extern u8       D_801ED7F4;
-extern u8       D_801ED7F8;
+extern s8              g_MenuStartTimer;
+extern u8              D_801ED7F4;
+extern u8              D_801ED7F8;
 /* D_801ED860 */
-extern u8       g_MenuStartReturnStep;
-extern u8       g_MenuStartStep;
-extern u8       D_801ED864;
-extern u8       D_801ED868;
-extern u8       D_801ED86C;
-extern u8       D_801ED870;
-extern u8       D_801ED890;
-extern u8       D_801ED891;
-extern u8       s_ChoiceMenuValues[8];
-extern u8       s_ChoiceMenuCursors[12];
-extern u8       s_SkillOrderCursors[4][4];
-extern u8       s_SkillOrderGroups[4][6];
-extern u8       s_SkillOrderKinds[3][6];
-extern Callback g_MenuCampSubFuncs[5];
-extern Callback g_MenuCampSubstates[5];
+extern u8              g_MenuStartReturnStep;
+extern u8              g_MenuStartStep;
+extern u8              D_801ED864;
+extern u8              D_801ED868;
+extern u8              D_801ED86C;
+extern u8              D_801ED870;
+extern u8              D_801ED890;
+extern u8              D_801ED891;
+extern u8              s_ChoiceMenuValues[8];
+extern u8              s_ChoiceMenuCursors[12];
+extern u8              s_SkillOrderCursors[4][4];
+extern u8              s_SkillOrderGroups[4][6];
+extern u8              s_SkillOrderKinds[3][6];
+extern Callback        g_MenuCampSubFuncs[5];
+extern Callback        g_MenuCampSubstates[5];
 
 /* The name entry command labels, the grid's dot string and the control window's sprite table. */
 /* D_801ED1B8 */
@@ -518,7 +529,8 @@ void        func_801DB5AC(void);
 /* func_801DBF04 */
 extern void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);
 extern void func_801DC150(s16 x, s16 y, u8 character_index, s32 layout);
-extern s32  func_801DCDB8(u16, u16, u8, u8, s32);
+/* func_801DCDB8 */
+void        Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 void        Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused);
 void        Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s32 equip_slot, u8 item_id);
@@ -526,7 +538,8 @@ void        Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DFBF4 */
 extern void Menu_DrawInventoryWindow(MenuPanelTask* task);
 extern void func_801E0354(MenuPanelTask* task);
-extern void func_801E0A70(MenuPanelTask* task);
+/* func_801E0A70 */
+extern void Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 extern void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active);
 void        func_801E16BC(void);
 void        SAVE_DrawSlot(u8 index, s32 left, s32 top, u8* entry);
@@ -814,6 +827,15 @@ static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_i
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
+
+extern FormationLayout g_MenuFormations[FORMATION_COUNT];
+extern FormationOrder  g_MenuFormationOrder;
+extern s32             g_MenuFormationArrow[3][2];
+extern s32             g_MenuFormationArrowTurned[3][2];
+extern s32             g_MenuFormationSpots[PARTY_SLOT_COUNT][2];
+extern u8              g_MenuFormationFrameLeft[];
+extern u8              g_MenuFormationFrameMiddle[];
+extern u8              g_MenuFormationFrameRight[];
 
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
