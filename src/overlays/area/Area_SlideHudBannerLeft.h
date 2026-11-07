@@ -9,9 +9,9 @@ MATCH void Area_SlideHudBannerLeft(void) {
     s16    origin_x;
     u8     mode;
 
-    work         = g_Task;
-    origin_x     = work->unk_2E - 0x10;
-    work->unk_2E = origin_x;
+    work           = g_Task;
+    origin_x       = work->screen_x - 0x10;
+    work->screen_x = origin_x;
     if (origin_x < -47) {
         work->header.step = 0;
     }
@@ -22,5 +22,5 @@ MATCH void Area_SlideHudBannerLeft(void) {
         work->header.step = mode;
     }
 
-    Area_DrawHud(0x10, g_Task->unk_2E);
+    Area_DrawHud(0x10, g_Task->screen_x);
 }

@@ -74,9 +74,9 @@ MATCH void func_801F6EB4(void) {
 }
 
 MATCH void func_801F7260(void) {
-    if (g_Task->unk_09 != 0) {
+    if (g_Task->timer != 0) {
         g_BattlePartyBattlers->header.flags |= 0x40;
-        g_Task->unk_09 -= 1;
+        g_Task->timer -= 1;
         return;
     }
     g_BattlePartyBattlers->header.flags &= ~PARTY_BATTLER_FLAG_HANDLER_BUSY;
@@ -184,10 +184,10 @@ MATCH void func_801F7B10(void) {
     func_801F7FFC(ptr);
     func_801F8170(ptr);
     actor->tint.halves.unk_5E += 1;
-    value          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = value;
+    value         = g_Task->timer - 1;
+    g_Task->timer = value;
     if (!(value & 0xFF)) {
-        g_Task->unk_09 = 8;
+        g_Task->timer = 8;
         g_Task->header.mode += 1;
     }
 }
@@ -202,10 +202,10 @@ MATCH void func_801F7BB0(void) {
     func_801F7FFC(ptr);
     func_801F8170(ptr);
     actor->script_pc += 4;
-    value          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = value;
+    value         = g_Task->timer - 1;
+    g_Task->timer = value;
     if (!(value & 0xFF)) {
-        g_Task->unk_09 = 8;
+        g_Task->timer = 8;
         g_Task->header.mode += 1;
     }
 }
@@ -217,10 +217,10 @@ MATCH void func_801F7C50(void) {
     temp_s0 = &g_Task->vx;
     func_801F7FFC(temp_s0);
     func_801F8170(temp_s0);
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
+    temp_v0       = g_Task->timer - 1;
+    g_Task->timer = temp_v0;
     if (!(temp_v0 & 0xFF)) {
-        g_Task->unk_09 = 0x80;
+        g_Task->timer = 0x80;
         g_Task->header.mode += 1;
     }
 }
@@ -236,8 +236,8 @@ MATCH void func_801F7CE0(void) {
     func_801F8170(pos);
     work->unk_5A -= 8;
     work->tint.halves.unk_5C -= 0x40;
-    remaining      = g_Task->unk_09 - 1;
-    g_Task->unk_09 = remaining;
+    remaining     = g_Task->timer - 1;
+    g_Task->timer = remaining;
     if (!(remaining & 0xFF)) {
         g_Task->header.mode += 1;
     }
@@ -287,7 +287,7 @@ MATCH void func_801F82E4(void) {
 }
 
 MATCH void func_801F8328(void) {
-    g_Task->unk_09 = 96;
+    g_Task->timer = 96;
     g_Task->header.mode++;
     SND_PlayCue(EMI_CUE_ID(2, 4));
 }
@@ -297,7 +297,7 @@ MATCH void func_801F8370(void) {
     s32        temp_v1;
     u8         temp_v0_2;
 
-    if (g_Task->unk_09 & 4) {
+    if (g_Task->timer & 4) {
         temp_v1 = func_8019601C() & 0xFF;
         if (temp_v1 != 0xFF) {
             temp_v0               = &g_ActorSlots[temp_v1];
@@ -305,8 +305,8 @@ MATCH void func_801F8370(void) {
             temp_v0->type         = 0x24;
         }
     }
-    temp_v0_2      = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0_2;
+    temp_v0_2     = g_Task->timer - 1;
+    g_Task->timer = temp_v0_2;
     if (!(temp_v0_2 & 0xFF)) {
         g_Task->header.mode += 1;
     }
@@ -341,7 +341,7 @@ MATCH void func_801F8710(void) {
 
     slots = SP_PTR(u8*, 0u);
     work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc((s16)work->unk_2E, (s16)work->unk_30, work->unk_09, 0x80, 0);
+    GFX_DrawShadedDisc((s16)work->screen_x, (s16)work->screen_y, work->timer, 0x80, 0);
     slots = SP_PTR(u8*, 0u);
     slots[0x11][9] += 0x0F;
     slots = SP_PTR(u8*, 0u);
@@ -361,7 +361,7 @@ MATCH void func_801F87A4(void) {
 
     slots = SP_PTR(u8*, 0u);
     work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc((s16)work->unk_2E, (s16)work->unk_30, (work->unk_09 & 1) | 0x3C, 0x80, 0);
+    GFX_DrawShadedDisc((s16)work->screen_x, (s16)work->screen_y, (work->timer & 1) | 0x3C, 0x80, 0);
     slots = SP_PTR(u8*, 0u);
     if (slots[0x11][9] == 0xD7) {
         SND_PlayCue(EMI_CUE_ID(2, 8));
@@ -385,7 +385,7 @@ MATCH void func_801F885C(void) {
 
     slots = SP_PTR(u8*, 0u);
     work  = (Actor*)slots[0x11];
-    GFX_DrawShadedDisc((s16)work->unk_2E, (s16)work->unk_30, work->unk_09, 0x80, 0);
+    GFX_DrawShadedDisc((s16)work->screen_x, (s16)work->screen_y, work->timer, 0x80, 0);
     slots = SP_PTR(u8*, 0u);
     slots[0x11][9] -= 1;
     slots = SP_PTR(u8*, 0u);

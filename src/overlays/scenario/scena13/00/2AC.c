@@ -28,8 +28,8 @@ MATCH void func_801F6EE8(void) {
 }
 
 MATCH void func_801F6F24(void) {
-    g_Task->unk_09 -= 1;
-    if (g_Task->unk_09 != 0) {
+    g_Task->timer -= 1;
+    if (g_Task->timer != 0) {
         g_Task->tint.bytes.unk_5D += 7;
         g_Task->tint.bytes.unk_5E += 7;
         g_Task->tint.bytes.unk_5F += 7;
@@ -109,7 +109,7 @@ MATCH void func_801F71DC(void) {
 
 MATCH void func_801F7248(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        g_Task->unk_09      = 0x1E;
+        g_Task->timer       = 0x1E;
         g_Task->header.mode = 2;
     }
     func_801F7484();
@@ -117,13 +117,13 @@ MATCH void func_801F7248(void) {
 }
 
 MATCH void func_801F72A0(void) {
-    g_Task->unk_09 -= 1;
-    if (g_Task->unk_09 != 0) {
+    g_Task->timer -= 1;
+    if (g_Task->timer != 0) {
         g_Task->tint.bytes.unk_5D += 2;
         g_Task->tint.bytes.unk_5E += 2;
         g_Task->tint.bytes.unk_5F += 2;
     } else {
-        g_Task->unk_09      = 0x1E;
+        g_Task->timer       = 0x1E;
         g_Task->header.mode = 3;
     }
     func_801F7484();

@@ -6,12 +6,12 @@ MATCH void func_8019F4F8(void) {
     s32 active;
     s32 routeOffset;
 
-    timer = g_Task->unk_09;
+    timer = g_Task->timer;
     if (timer != 0) {
         timer--;
-        g_Task->unk_09 = timer;
-        step           = g_Task->vy + 0x14000;
-        active         = (s32)(g_FrameCount & 1u);
+        g_Task->timer = timer;
+        step          = g_Task->vy + 0x14000;
+        active        = (s32)(g_FrameCount & 1u);
         g_Task->pos.y.fixed += step;
         g_Task->vy = step;
         if (active != 0) {

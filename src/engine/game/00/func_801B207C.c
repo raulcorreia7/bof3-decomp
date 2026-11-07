@@ -7,10 +7,10 @@ MATCH void func_801B207C(void) {
     u8     frames;
     u8     i;
 
-    g_Task->unk_09 += 1;
+    g_Task->timer += 1;
     g_Task->direction_08 = (g_Task->direction_08 + 1) & 7;
     Actor_SelectScript(g_Task->direction_08);
-    frames = g_Task->unk_09;
+    frames = g_Task->timer;
     for (i = 1; i < g_PartySize; i++) {
         work   = (Actor*)((u8*)g_BattlePartyBattlers + i * BATTLE_PARTY_STRIDE);
         g_Task = work;

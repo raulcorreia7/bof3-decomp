@@ -21,7 +21,7 @@ MATCH u8 func_801A2DB4(Actor* entity) {
         if ((dy >> 0x10) < entity->ext.bounds.half_height) {
             status = func_801A2ED4(entity, 0U);
             if ((status & BYTE_MASK) == GAME_NONE) {
-                g_Task->unk_09 = 0;
+                g_Task->timer = 0;
                 return 0xFFU;
             }
             if ((route & 7) != (status & BYTE_MASK)) {

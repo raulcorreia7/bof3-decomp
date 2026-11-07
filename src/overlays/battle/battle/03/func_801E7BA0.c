@@ -111,9 +111,9 @@ NON_MATCHING void func_801E7BA0(void) {
         temp_v1_302                                  = temp_a0_288->slot * BATTLE_PARTY_STRIDE;
         *(&D_80145FB4 + temp_v1_302)                 = *(&D_80145FB4 + temp_v1_302) | 0x2000;
         temp_v0_311                                  = temp_a0_288->slot;
-        *(D_801EC364 + (temp_v0_311 * 0x78))         = *(D_80143F2C + (temp_v0_311 * 8));
+        *(D_801EC364 + (temp_v0_311 * 0x78))         = *(u8*)&g_EncounterParty[temp_v0_311].x;
         temp_v0_323                                  = temp_a0_288->slot;
-        *(D_801EC368 + (temp_v0_323 * 0x78))         = *(D_80143F30 + (temp_v0_323 * 8));
+        *(D_801EC368 + (temp_v0_323 * 0x78))         = *(u8*)&g_EncounterParty[temp_v0_323].y;
         temp_v0_339                                  = temp_a0_288->slot * 0x78;
         temp_a1_349                                  = g_Task;
         *(D_801EC36C + (temp_a1_349->slot * 0x78)) =

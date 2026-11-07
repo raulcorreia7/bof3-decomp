@@ -67,11 +67,11 @@ MATCH void func_801CF70C(void) {
 INCLUDE_ASM(func_801CF750);
 
 MATCH void func_801CF938(void) {
-    if (g_Task->unk_09 == 0) {
+    if (g_Task->timer == 0) {
         g_GameState->mode_12B.s8_value = 0;
         g_GameFlags &= ~0x1000;
     } else {
-        g_Task->unk_09--;
+        g_Task->timer--;
         func_801B0DFC();
     }
     func_8014D978();

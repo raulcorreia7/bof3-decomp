@@ -7,8 +7,8 @@ MATCH void func_801F3750(void) {
     Actor* scratch;
 
     scratch = g_Task;
-    scratch->unk_30 -= 0xA;
-    if ((s16)scratch->unk_30 < 0xC9) {
+    scratch->screen_y -= 0xA;
+    if ((s16)scratch->screen_y < 0xC9) {
         scratch->unk_03++;
     }
 
@@ -24,5 +24,5 @@ MATCH void func_801F3750(void) {
 force:
     TASK_BYTES[0x03] = 3;
 done:
-    func_801F40C4(0x5C, g_Task->unk_30);
+    func_801F40C4(0x5C, g_Task->screen_y);
 }

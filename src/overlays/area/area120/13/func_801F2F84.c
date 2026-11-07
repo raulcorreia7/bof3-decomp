@@ -4,8 +4,8 @@ MATCH void func_801F2F84(void) {
     Actor* actor = g_Task;
     RECT   rect;
 
-    actor->unk_09--;
-    if (actor->unk_09 == 0) {
+    actor->timer--;
+    if (actor->timer == 0) {
         rect.x = 0x340;
         rect.y = 0x100;
         rect.w = D_801F43BC;

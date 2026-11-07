@@ -1,8 +1,5 @@
 #include "start_08.h"
 
-extern s8 D_801ED7FC;
-extern u8 g_MenuStartReturnStep;
-
 MATCH void func_801E5320(void) {
     u32  prev;
     u8   prev_byte;
