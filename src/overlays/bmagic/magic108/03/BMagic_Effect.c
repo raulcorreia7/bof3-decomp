@@ -20,7 +20,7 @@ MATCH void func_801EEC5C(void) {
     g_BattleEffects[slot].pos.x.fixed  = src->pos.x.fixed;
     g_BattleEffects[slot].pos.y.fixed  = src->pos.y.fixed;
     g_BattleEffects[slot].pos.z        = src->pos.z;
-    g_Task->param.unk_0B                    = 0;
+    g_Task->param.unk_0B               = 0;
     g_Task->header.mode += 1;
 }
 
