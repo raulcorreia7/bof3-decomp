@@ -7,7 +7,11 @@
 #include "overlays/bmagic/bmagic.h"
 
 /* The records in the sparkle pool D_801F01B4. */
-#define EFFECT_SPARKLE_COUNT 128
+#define EFFECT_SPARKLE_COUNT    128
+/* Set in the header flags of a sparkle record that is in use. */
+#define EFFECT_SPARKLE_IN_USE   0x01
+/* The rows of the launch offset table D_801F00BC, selected by the sparkle index. */
+#define EFFECT_SPARKLE_ROW_MASK 0x1F
 
 extern BMagicEffectFuncs   D_801EEC04;
 extern BattleHandlerTable3 D_801EEC1C;

@@ -9,7 +9,7 @@ MATCH void func_801EEC28(void) {
 
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.mode);
     for (i = 0; i < EFFECT_SPARKLE_COUNT; i++) {
-        if (D_801F01B4[i].header.flags & 1) {
+        if (D_801F01B4[i].header.flags & EFFECT_SPARKLE_IN_USE) {
             active     = D_801EB4E0;
             D_801F17B4 = &D_801F01B4[i];
             D_801EB4E0 = D_801F01B4[i].battler;
