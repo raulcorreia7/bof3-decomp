@@ -28,8 +28,8 @@ NON_MATCHING u8 func_801BF11C(void) {
         return 1U;
     }
     tmp1       = g_BattleScrollDir * 2;
-    D_80143F24 = g_AreaScrollTargetX + (s_CameraScrollDeltas[tmp1] << 0x10);
-    D_80143F28 = g_AreaScrollTargetY + (s_CameraScrollDeltas[tmp1 + 1] << 0x10);
+    g_EncounterOriginX.fixed = g_AreaScrollTargetX + (s_CameraScrollDeltas[tmp1] << 0x10);
+    g_EncounterOriginY.fixed = g_AreaScrollTargetY + (s_CameraScrollDeltas[tmp1 + 1] << 0x10);
     val2       = 0;
     cnt        = g_PartySize;
     if (cnt > 0) {
@@ -54,10 +54,10 @@ NON_MATCHING u8 func_801BF11C(void) {
                     }
                     g_GameState->flags_12C.u8_value = (u8)(g_GameState->flags_12C.u8_value & 0xFE);
                     g_Task->unk_29                  = (u8)g_AreaDrawMode;
-                    tmp4                            = (val0 & BYTE_MASK) * 8;
+                    tmp4                            = (val0 & BYTE_MASK) * sizeof(FormationPos);
                     tmp5                            = g_Task;
-                    FIELD(s32, tmp5, 0x34u)         = (s32) * (D_80143F2C + tmp4);
-                    tmp2                            = *(D_80143F30 + tmp4);
+                    FIELD(s32, tmp5, 0x34u)         = *(s32*)((u8*)g_EncounterParty + tmp4);
+                    tmp2                            = *(s32*)((u8*)&g_EncounterParty[0].y + tmp4);
                     FIELD(s32, tmp5, 0x38u)         = tmp2;
                     tmp0                            = Area_ReadHeight(FIELD(s32, tmp5, 0x34u), tmp2);
                     tmp7                            = g_Task;

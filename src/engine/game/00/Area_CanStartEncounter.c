@@ -43,7 +43,7 @@ MATCH s32 Area_CanStartEncounter(void) {
         g_Task = work;
         if (ok != 0) {
             for (i = 0; i < g_PartySize; i++) {
-                ok = func_801C472C(FIELD(s32, D_80143F2C, i << 3), FIELD(s32, D_80143F30, i << 3),
+                ok = func_801C472C(g_EncounterParty[i].x.fixed, g_EncounterParty[i].y.fixed,
                                    D_80181B1C[g_PartyBattleOrder[i]], 0x10, 1);
                 if (ok == 0) {
                     break;

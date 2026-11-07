@@ -6,6 +6,7 @@
  * remaining SLUS_004.22 symbols the overlays read or call. */
 
 #include "types.h"
+#include "common/fixed.h"
 #include "sys/gameui.h"
 #include "slus/functions.h"
 #include "battle/records.h"
@@ -76,10 +77,15 @@ extern u16            g_GameContextSeed;
 extern u8             g_GameContextKind;
 /* 0x80144xxx: party and menu state. */
 extern u16            D_80143F20;
-extern s32            D_80143F24;
-extern s32            D_80143F28;
-extern u8             D_80143F2C[];
-extern u8             D_80143F30[];
+/* Field-battle placement: the formation origin and one start position per party order slot. */
+typedef struct FormationPos {
+    Coord x;
+    Coord y;
+} FormationPos;
+
+extern Coord        g_EncounterOriginX;
+extern Coord        g_EncounterOriginY;
+extern FormationPos g_EncounterParty[3];
 /* D_80143F44 */
 extern u8             g_SysResetHoldFrames;
 extern u8             D_80143F50;
