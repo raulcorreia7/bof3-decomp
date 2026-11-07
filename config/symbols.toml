@@ -92,6 +92,9 @@ g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (str
 Effect_StartPlaying = { addr = 0x801EF00C, alias = true }
 
 ["emi/battle/battle/15"]
+g_MenuInventoryCountFormat = { addr = 0x80096A4C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
+Menu_DrawInventoryWindow = { addr = 0x800B25C0, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
+g_MenuInventoryTitles = { addr = 0x800B6E88, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleWorkCell = { addr = 0x1F800044, alias = true }
 Battle_TestAICondition = { addr = 0x8009BBE8, type = "func", source = "Tests an enemy AI condition." }
@@ -1515,7 +1518,7 @@ g_MenuCommandRows = { addr = 0x801D8CC4, source = "Command rows, 5 bytes each: t
 MENU_CLUT_STRIP_CELLS = { addr = 0x801D8D28, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D8DD4, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D8E20, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
-g_MenuInventoryTitles = { addr = 0x801D8E4C, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, ACCESSORY and VITAL, by ItemCategory" }
+g_MenuInventoryTitles = { addr = 0x801D8E4C, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_MenuAbilityListNames = { addr = 0x801D8E80, source = "the list names indexed by the ability type, drawn above the ability list" }
 
 ["emi/etc/commu00/00"]
@@ -1951,7 +1954,7 @@ g_MenuCommandRows = { addr = 0x801D9CE8, source = "Command rows, 5 bytes each: t
 MENU_CLUT_STRIP_CELLS = { addr = 0x801D9D4C, source = "Cell rectangles that Menu_DrawClutStrip draws, indexed by the strip entry." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D9DF8, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D9E44, source = "Entry offset of each clut strip palette, indexed by the clut index." }
-g_MenuInventoryTitles = { addr = 0x801D9E70, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, ACCESSORY and VITAL, by ItemCategory" }
+g_MenuInventoryTitles = { addr = 0x801D9E70, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_MenuStatusItems = { addr = 0x801DA028, type = "MenuStatusItems", size = 0xC, source = "Item ids the status menu counts into held[] (four items) and passes to Item_Remove when one is used." }
 D_801DA0B4 = { addr = 0x801DA0B4, source = "12-bit turn angle of a status menu display: each frame adds 0x20, and a stop snaps it to a multiple of 0x40." }
 D_801DA12C = { addr = 0x801DA12C, source = "12-bit turn angle of a status menu display: each frame adds or subtracts 0x20, and a stop snaps it to a multiple of 0x40." }
@@ -2052,7 +2055,7 @@ g_MenuCommandRows = { addr = 0x801E59C0, source = "Command rows, 5 bytes each: t
 MENU_CLUT_STRIP_CELLS = { addr = 0x801E5A24, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801E5AD0, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801E5B1C, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
-g_MenuInventoryTitles = { addr = 0x801E5B48, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, ACCESSORY and VITAL, by ItemCategory" }
+g_MenuInventoryTitles = { addr = 0x801E5B48, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_MenuAbilityListNames = { addr = 0x801E5B7C, source = "the list names indexed by the ability type, drawn above the ability list" }
 g_ShopStep6Funcs = { addr = 0x801E5BEC, source = "4 sub-step handlers of step 6 of the shop, called by func_801DE188 (the step 6 handler) and indexed by the menu sub-step byte D_80148651" }
 g_ShopStep6Sub0Funcs = { addr = 0x801E5BFC, source = "3 handlers of sub-step 0 of step 6 of the shop, called by func_801DE1C4 (the sub-step 0 handler of step 6) and indexed by the menu sub-sub-step byte D_80148652" }
@@ -2217,7 +2220,7 @@ g_MenuCommandRows = { addr = 0x801ECADC, source = "Command rows, 5 bytes each: t
 MENU_CLUT_STRIP_CELLS = { addr = 0x801ECB40, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801ECBEC, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801ECC38, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
-g_MenuInventoryTitles = { addr = 0x801ECC64, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, ACCESSORY and VITAL, by ItemCategory" }
+g_MenuInventoryTitles = { addr = 0x801ECC64, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_NameEntryControlsFrame = { addr = 0x801ED05C, source = "the sprite layout of the name entry control window's frame, drawn by func_801AF390" }
 s_CampMenuState = { addr = 0x801ED100, source = "State bytes of the start menu overlay, kept by func_801E4670, func_801E4744 and func_801E6388." }
 g_NameEntryCommandLabels = { addr = 0x801ED1B8, source = "the name entry screen's four command labels, OK, Del, Next and Back, that its control window draws" }
