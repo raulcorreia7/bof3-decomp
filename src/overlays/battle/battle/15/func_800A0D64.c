@@ -21,7 +21,7 @@ MATCH void func_800A0D64(void) {
     MATCH_BARRIER();
     battler = g_BattleTarget_nv;
     if (BATTLER_IS_PLAYER(battler)) {
-        g_BattleTargetRecord->hp_change -= D_80145F26[battler][0];
+        g_BattleTargetRecord->hp_change -= g_BattlePartyBattlers[battler].chr.stats.defense;
     } else {
         g_BattleTargetRecord->hp_change -= ENEMY_COMBATANT(battler).stats.defense;
     }

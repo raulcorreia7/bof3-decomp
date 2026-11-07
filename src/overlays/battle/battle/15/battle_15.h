@@ -506,14 +506,8 @@ extern s32                   D_80145EC4;
  * the battler's stored character id. */
 extern u8                    D_80145F09[];
 extern u8                    D_80145F12[];
-extern volatile u16          D_80145F26[][160];
 /* Battler base halfwords, one u16 per 0x140-byte player row. */
 extern volatile u16          D_80145F18[][160];
-extern u16                   D_80145F24[][160];
-extern u8                    D_80145F2F;
-extern u8                    D_80145F37;
-extern u8                    D_80145F3A;
-extern u8                    D_80145F3B;
 extern u16                   D_80145FAA[];
 extern u8                    D_80145FB2;
 extern volatile BattlePlayerDamageStatus D_80145FB4[];
