@@ -7,6 +7,6 @@ MATCH s32 func_80097574(void) {
     u8* slot = (u8*)&D_80148656;
     u8* entry;
 
-    entry = Party_GetAbilities(*slot, D_8014857B, 1);
-    return (func_801AF5B0(2, *slot, entry[D_8014857C]) & BYTE_MASK) == 0;
+    entry = Party_GetAbilities(*slot, g_MenuPanelTasks[16].unk_0B, 1);
+    return (func_801AF5B0(2, *slot, entry[g_MenuPanelTasks[16].unk_0C]) & BYTE_MASK) == 0;
 }
