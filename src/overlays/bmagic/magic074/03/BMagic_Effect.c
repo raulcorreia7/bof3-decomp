@@ -46,13 +46,8 @@ INCLUDE_ASM(func_801EF058);
 
 INCLUDE_ASM(func_801EF518);
 
-MATCH void func_801EF6A4(void) {
-    if (g_Task->param.unk_0B == 0) {
-        BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        func_800A9820(g_Task->unk_04);
-        func_801E5988();
-    }
-}
+/* func_801EF6A4 */
+#include "overlays/bmagic/Effect_FinishRecovery.h"
 
 MATCH void func_801EF710(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, D_801F20DC);
