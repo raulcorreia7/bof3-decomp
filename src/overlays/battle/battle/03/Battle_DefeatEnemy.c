@@ -13,7 +13,7 @@ MATCH void Battle_DefeatEnemy(void) {
         g_BattleSpoilsZenny += g_BattleCurrentEnemy->zenny;
         g_BattleCurrentEnemy->status |= STATUS_KO;
         g_BattleCurrentEnemy->zenny = 0;
-        func_801DD14C(g_Task->slot);
+        Battle_CancelTurn(g_Task->slot);
         Battle_RollEnemyDrops();
         count                    = g_BattleLivingEnemyCount - 1;
         g_BattleLivingEnemyCount = count;
