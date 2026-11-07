@@ -4,7 +4,7 @@
 /* The game overlay's data tables: sprite rectangles, map hooks, world routes and
  * the handler rows its frontend walks. Only this image includes the file. */
 
-#define GAME_AREA_HANDLER_COUNT  11
+#define GAME_AREA_HANDLER_COUNT   11
 
 /* Cells in the square-spiral search order around a formation: the centre, then rings one to three, and a closing centre. */
 /* Camera directions and the scroll step of one cell quarter. */
@@ -15,11 +15,11 @@
 #define ENTITY_SPAWN_SEARCH_COUNT (ENTITY_SPAWN_OFFSET_COUNT - 1)
 
 /* A two-field row: a work step, a delta or a position offset. */
-#define GAME_PAIR(a, b)          {(a), (b)}
-#define MAP_HOOK(map, handler)   {(map), {0, 0, 0}, (handler)}
-#define UV_RECT(u, v, w, h)      {(u), (v), (w), (h)}
-#define GAME_MAP(world, context) {(world), (context)}
-#define PARTY_SLOT(active, key)  {(active), (key), 0, 0}
+#define GAME_PAIR(a, b)           {(a), (b)}
+#define MAP_HOOK(map, handler)    {(map), {0, 0, 0}, (handler)}
+#define UV_RECT(u, v, w, h)       {(u), (v), (w), (h)}
+#define GAME_MAP(world, context)  {(world), (context)}
+#define PARTY_SLOT(active, key)   {(active), (key), 0, 0}
 /* Data-table row initializer: no function body, so not a fragment. */
 #define GAME_INDEX_HANDLER(h00, h04, h08, h0C, h10, selector, key)    \
     {(h00), (h04), (h08), (h0C), (h10), (selector), (key), {0, 0, 0}}
