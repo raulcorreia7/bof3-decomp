@@ -5,7 +5,7 @@
 MATCH void Party_ClearBattlerState(s32 character_index) {
     u32 index;
 
-    index             = (character_index & BYTE_MASK) * 0x140;
+    index             = (character_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;
     D_80145E91[index] = 0;
     D_80145E92[index] = 0;
     D_80145E93[index] = 0;
