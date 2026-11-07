@@ -6,6 +6,8 @@
 
 #include "overlays/scenario/scenario.h"
 
+#define g_Task ((Actor*)g_Task)
+
 extern s8        D_80146865;
 extern s8        D_80146866;
 extern s8        D_80146867;
