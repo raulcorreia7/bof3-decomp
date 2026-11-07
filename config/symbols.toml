@@ -86,8 +86,7 @@ D_801EB4F4 = { addr = 0x801EB4F4, alias = true, source = "Message text pointer o
 D_801EB4FA = { addr = 0x801EB4FA, alias = true, source = "Text style argument of each battle event slot, zeroed when queued and passed to UI_DrawText by the event panels." }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 g_BattleMessageSlot = { addr = 0x801EBF08, size = 0x4, source = "Pointer to the battler row that the battle messages name; func_801D1D10 sets it to the acting party battler." }
-s_BattleBattlerTemplates = { addr = 0x801EBF20, source = "Work row templates of the party battlers: func_801E8684 copies row n into g_BattlePartyBattlers[n], and bit 0 of a row's first byte marks it active for func_801E7B34." }
-s_BattleBattlerTemplateTails = { addr = 0x801EC048, source = "tail of the three 0x140-byte work-row templates, word 0 at +0x128 of each row is the active mask func_801E7B34 tests" }
+s_BattleBattlerTemplates = { addr = 0x801EBF20, type = "PartyBattler", size = 0x3C0, source = "Work row templates of the party battlers: func_801E8684 copies row n into g_BattlePartyBattlers[n], and bit 0 of a row's first byte marks it active for func_801E7B34." }
 g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 Effect_StartPlaying = { addr = 0x801EF00C, alias = true }
 
@@ -4521,6 +4520,7 @@ g_BattleUIStep = { addr = 0x801462E3, type = "u8", source = "Step of the battle 
 g_BattleUIState = { addr = 0x801462E4, type = "u8", source = "Index of the battle UI state handler that runs each frame (D_801F0CA4[g_BattleUIState] in the battle end overlay)." }
 g_BattleRowCursor = { addr = 0x801462E5, type = "u8", source = "Battle row cursor." }
 g_BattlePanelEntry = { addr = 0x801462E6, type = "u8", source = "Selected entry of the battle panel." }
+g_GeneCursor = { addr = 0x801462E6, size = 2, alias = true, source = "Row and column of the Accession gene picker cursor over the gene grid; row is -1 on the confirm line." }
 g_BattleState = { addr = 0x801462E8, type = "u16", source = "Battle state flags." }
 g_BattleEncounter = { addr = 0x801462EA, type = "u8", source = "Current encounter id." }
 g_BattleScrollDir = { addr = 0x801462EC, type = "u8", source = "Camera scroll direction in battle." }
