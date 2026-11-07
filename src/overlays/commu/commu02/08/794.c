@@ -213,7 +213,7 @@ INCLUDE_ASM(func_801D3184);
 INCLUDE_ASM(func_801D32A0);
 
 MATCH void func_801D3568(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event1StepFuncs, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu02Event1States, D_801F294C);
 }
 
 MATCH void func_801D35A4(void) {
@@ -351,7 +351,7 @@ INCLUDE_ASM(func_801D4EA4);
 INCLUDE_ASM(func_801D4F88);
 
 MATCH void func_801D5034(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event2StepFuncs, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu02Event2States, D_801F294C);
 }
 
 MATCH void func_801D5070(void) {
@@ -430,7 +430,7 @@ MATCH s32 func_801D5AD0(s32 limit) {
 INCLUDE_ASM(func_801D5B2C);
 
 MATCH void func_801D5D5C(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event3StepFuncs, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu02Event3States, D_801F294C);
 }
 
 MATCH void func_801D5D98(void) {

@@ -30,7 +30,7 @@ MATCH void func_801EEDB8(void) {
 #include "overlays/bmagic/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EEEBC(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EEF00(void) {
@@ -84,7 +84,7 @@ INCLUDE_ASM(func_801EF158);
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF834(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectFuncs + 7), 2, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 2, g_Task);
 }
 
 MATCH void func_801EF878(void) {

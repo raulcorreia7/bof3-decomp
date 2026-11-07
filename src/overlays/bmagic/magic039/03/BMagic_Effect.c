@@ -26,7 +26,7 @@ MATCH s32 func_801EEF3C(void) {
 }
 
 MATCH void func_801EEF64(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEFA8);

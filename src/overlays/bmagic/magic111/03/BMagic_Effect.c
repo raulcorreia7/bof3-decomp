@@ -20,7 +20,7 @@ MATCH void func_801EEF44(void) {
 #include "shared/Effect_StartPlaying.h"
 
 MATCH void func_801EEFF8(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 MATCH void func_801EF03C(void) {

@@ -7,6 +7,6 @@
 #include "overlays/area/world00.h"
 
 /* D_80181164 */
-extern u8* g_EncounterZoneLists[];
+extern u8* g_EncounterZones[];
 
 #endif

@@ -153,17 +153,17 @@ typedef struct FairyVillageData {
     u8  task_rows[FAIRY_VILLAGE_TASK_ROW_COUNT][FAIRY_VILLAGE_TASK_ROW_FIELD_COUNT]; /* 0x06C D_801F2568 */
     u8  variant_rows[FAIRY_VILLAGE_VARIANT_ROW_COUNT][FAIRY_VILLAGE_VARIANT_ROW_FIELD_COUNT]
                     [FAIRY_VILLAGE_VARIANT_VARIANT_COUNT];                     /* 0x0A8 D_801F25A4 */
-    /* 0xF0 */ Callback commu01_steps[FAIRY_COMMU01_STEP_COUNT];               /* 0x0F0 g_FairyCommu01StepFuncs */
-    Callback            gift_steps[FAIRY_GIFT_STEP_COUNT];                     /* 0x108 g_FairyGiftStepFuncs */
-    Callback            explore_reward_steps[FAIRY_EXPLORE_REWARD_STEP_COUNT]; /* 0x114 g_FairyExploreRewardStepFuncs */
+    /* 0xF0 */ Callback commu01_steps[FAIRY_COMMU01_STEP_COUNT];               /* 0x0F0 g_FairyCommu01States */
+    Callback            gift_steps[FAIRY_GIFT_STEP_COUNT];                     /* 0x108 g_FairyGiftStates */
+    Callback            explore_reward_steps[FAIRY_EXPLORE_REWARD_STEP_COUNT]; /* 0x114 g_FairyExploreRewardStates */
     u8                  unk_118[4];
     FairyExploreReward  explore_rewards[FAIRY_EXPLORE_COUNT];       /* 0x11C D_801F2618/D_801F2619 */
-    Callback            commu02_steps[FAIRY_COMMU02_STEP_COUNT];    /* 0x17C g_FairyCommu02StepFuncs */
-    const Callback      commu02_entries[FAIRY_COMMU02_ENTRY_COUNT]; /* 0x190 g_FairyCommu02EntryFuncs */
-    Callback            commu03_steps[FAIRY_COMMU03_STEP_COUNT];    /* 0x1A0 g_FairyCommu03StepFuncs */
-    Callback            commu04_steps[FAIRY_COMMU04_STEP_COUNT];    /* 0x1B4 g_FairyCommu04StepFuncs */
+    Callback            commu02_steps[FAIRY_COMMU02_STEP_COUNT];    /* 0x17C g_FairyCommu02States */
+    const Callback      commu02_entries[FAIRY_COMMU02_ENTRY_COUNT]; /* 0x190 g_FairyCommu02Events */
+    Callback            commu03_steps[FAIRY_COMMU03_STEP_COUNT];    /* 0x1A0 g_FairyCommu03States */
+    Callback            commu04_steps[FAIRY_COMMU04_STEP_COUNT];    /* 0x1B4 g_FairyCommu04States */
     u16                 copy_item[FAIRY_VILLAGE_COPY_ITEM_COUNT];   /* 0x1D0 D_801F26CC/D_801F26CE/D_801F26D0 */
-    Callback            commu05_steps[FAIRY_COMMU05_STEP_COUNT];    /* 0x1F0 g_FairyCommu05StepFuncs */
+    Callback            commu05_steps[FAIRY_COMMU05_STEP_COUNT];    /* 0x1F0 g_FairyCommu05States */
     Fairy               fairies[FAIRY_VILLAGE_COUNT]; /* 0x204 g_Fairies/D_801F2705/D_801F2706/D_801F2708 */
     u8                  unk_420[12];                  /* 0x420; no static reader */
     volatile u8         variant_counter[FAIRY_VILLAGE_VARIANT_COUNTER_COUNT];                   /* 0x42C D_801F2928 */
@@ -226,24 +226,24 @@ extern u8             D_801F2560; /* the bar limit byte; func_801EFEA8 reads it 
 extern u8             D_801F2568[][3];
 extern u8             D_801F25A4[][3][3];
 /* D_801F25EC */
-extern Callback       g_FairyCommu01StepFuncs[FAIRY_COMMU01_STEP_COUNT];
+extern Callback       g_FairyCommu01States[FAIRY_COMMU01_STEP_COUNT];
 /* D_801F2604 */
-extern Callback       g_FairyGiftStepFuncs[FAIRY_GIFT_STEP_COUNT];
+extern Callback       g_FairyGiftStates[FAIRY_GIFT_STEP_COUNT];
 /* D_801F2610 */
-extern Callback       g_FairyExploreRewardStepFuncs[FAIRY_EXPLORE_REWARD_STEP_COUNT];
+extern Callback       g_FairyExploreRewardStates[FAIRY_EXPLORE_REWARD_STEP_COUNT];
 extern u8             g_FairyExploreRewards[];
 extern u8             D_801F2619[];
 /* D_801F2678 */
-extern Callback       g_FairyCommu02StepFuncs[FAIRY_COMMU02_STEP_COUNT];
+extern Callback       g_FairyCommu02States[FAIRY_COMMU02_STEP_COUNT];
 /* D_801F268C */
-extern const Callback g_FairyCommu02EntryFuncs[FAIRY_COMMU02_ENTRY_COUNT];
+extern const Callback g_FairyCommu02Events[FAIRY_COMMU02_ENTRY_COUNT];
 /* D_801F269C */
-extern Callback       g_FairyCommu03StepFuncs[FAIRY_COMMU03_STEP_COUNT];
+extern Callback       g_FairyCommu03States[FAIRY_COMMU03_STEP_COUNT];
 /* D_801F26B0 */
-extern Callback       g_FairyCommu04StepFuncs[FAIRY_COMMU04_STEP_COUNT];
+extern Callback       g_FairyCommu04States[FAIRY_COMMU04_STEP_COUNT];
 extern FairyVariant   D_801F26CC[1];
 /* D_801F26EC */
-extern Callback       g_FairyCommu05StepFuncs[FAIRY_COMMU05_STEP_COUNT];
+extern Callback       g_FairyCommu05States[FAIRY_COMMU05_STEP_COUNT];
 extern u8             g_Fairies[][9];
 extern u8             D_801F2706[][9];
 extern u8             D_801F2708[];

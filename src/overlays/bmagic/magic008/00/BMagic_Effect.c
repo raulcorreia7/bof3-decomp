@@ -131,7 +131,7 @@ MATCH u32 func_801F0230(void) {
 }
 
 MATCH void func_801F0250(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, TASK_BYTES[1]);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
 INCLUDE_ASM(func_801F0294);

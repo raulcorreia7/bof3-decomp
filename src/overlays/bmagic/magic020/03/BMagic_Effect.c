@@ -37,7 +37,7 @@ MATCH void func_801EF2A8(void) {
 #include "shared/Effect_PlayOnce.h"
 
 MATCH void func_801EF398(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EF3DC);
