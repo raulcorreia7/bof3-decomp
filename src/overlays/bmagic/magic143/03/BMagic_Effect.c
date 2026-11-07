@@ -15,7 +15,7 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH void func_801EED70(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 INCLUDE_ASM(func_801EEDB4);

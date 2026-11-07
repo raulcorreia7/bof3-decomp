@@ -30,7 +30,7 @@ extern u8            D_801DAAA8;
 #define COMMU02_EVENT3_STEP2_SUB7_COUNT 5
 
 /* D_801DABCC */
-extern Callback g_Commu02Event0StepFuncs[COMMU02_EVENT0_STEP_COUNT];
+extern Callback g_Commu02Event0States[COMMU02_EVENT0_STEP_COUNT];
 /* D_801DABD8 */
 extern Callback g_Commu02Event0Step0Funcs[COMMU02_EVENT0_STEP0_COUNT];
 /* D_801DABE0 */
@@ -40,7 +40,7 @@ extern Callback g_Commu02Event0Step1Sub2Funcs[COMMU02_EVENT0_STEP1_SUB2_COUNT];
 /* D_801DAC20 */
 extern Callback g_Commu02Event0Step1Sub3Funcs[COMMU02_EVENT0_STEP1_SUB3_COUNT];
 /* D_801DACB8 */
-extern Callback g_Commu02Event1StepFuncs[COMMU02_EVENT1_STEP_COUNT];
+extern Callback g_Commu02Event1States[COMMU02_EVENT1_STEP_COUNT];
 /* D_801DACC4 */
 extern Callback g_Commu02Event1Step0Funcs[COMMU02_EVENT1_STEP0_COUNT];
 /* D_801DACD4 */
@@ -48,13 +48,13 @@ extern Callback g_Commu02Event1Step1Funcs[COMMU02_EVENT1_STEP1_COUNT];
 /* D_801DACF8 */
 extern Callback g_Commu02Event1Step1Sub0Funcs[COMMU02_EVENT1_STEP1_SUB0_COUNT];
 /* D_801DAD68 */
-extern Callback g_Commu02Event2StepFuncs[COMMU02_EVENT2_STEP_COUNT];
+extern Callback g_Commu02Event2States[COMMU02_EVENT2_STEP_COUNT];
 /* D_801DAD74 */
 extern Callback g_Commu02Event2Step0Funcs[COMMU02_EVENT2_STEP0_COUNT];
 /* D_801DAD7C */
 extern Callback g_Commu02Event2Step1Funcs[COMMU02_EVENT2_STEP1_COUNT];
 /* D_801DADEC */
-extern Callback g_Commu02Event3StepFuncs[COMMU02_EVENT3_STEP_COUNT];
+extern Callback g_Commu02Event3States[COMMU02_EVENT3_STEP_COUNT];
 /* D_801DAE00 */
 extern Callback g_Commu02Event3Step1Funcs[COMMU02_EVENT3_STEP1_COUNT];
 /* D_801DAE24 */

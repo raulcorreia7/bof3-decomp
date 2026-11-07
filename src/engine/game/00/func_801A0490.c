@@ -6,7 +6,7 @@ MATCH u8* func_801A0490(s32 map_x, s32 map_y, s32 table_index) {
     u8* entry;
     u8* cursor;
 
-    entry  = g_EncounterZoneLists[table_index & HALF_MASK];
+    entry  = g_EncounterZones[table_index & HALF_MASK];
     x      = map_x & BYTE_MASK;
     y      = map_y & BYTE_MASK;
     cursor = entry + 3;

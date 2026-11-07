@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The bate overlay entry: the shared menu step byte selects the handler. */
 MATCH void func_801D0D9C(void) {
-    SYS_DISPATCH_BYTE(g_MenuBateStepFuncs, D_80148650);
+    SYS_DISPATCH_BYTE(g_MenuBateStates, D_80148650);
 }
 
 MATCH void func_801D0DD8(void) {

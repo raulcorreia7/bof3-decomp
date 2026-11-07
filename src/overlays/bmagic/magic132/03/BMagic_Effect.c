@@ -24,7 +24,7 @@ MATCH void func_801EF0A4(void) {
 }
 
 MATCH void func_801EF114(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectFuncs, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
 extern Callback D_801EFD5C[];
