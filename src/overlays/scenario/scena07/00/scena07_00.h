@@ -64,4 +64,9 @@ extern s8       D_80146874;
 extern u8       D_80146875;
 extern Callback D_801FDD14[];
 
+extern u8 D_80144EB8[];
+extern u8 D_80146865;
+extern u8 D_80146866;
+extern u8 D_80146867;
+
 #endif

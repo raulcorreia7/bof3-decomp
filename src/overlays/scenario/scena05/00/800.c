@@ -95,7 +95,19 @@ INCLUDE_ASM(func_801F8564);
 
 INCLUDE_ASM(func_801F87C4);
 
-INCLUDE_ASM(func_801F8B94);
+MATCH void func_801F8B94(void) {
+    if (g_SceneState.step_05 == 0) {
+        if (g_ScriptVars[0] == 0x18) {
+            SYS_SetFlag(g_SceneFlags, 0xA);
+            Game_ClearScriptActive();
+            D_80146865            = 0;
+            D_80146866            = 0;
+            D_80146867            = 0;
+            g_SceneState.step_05  = 0;
+            g_SceneState.state_04 = 0;
+        }
+    }
+}
 
 MATCH void func_801F8C1C(void) {
     u8* state;
