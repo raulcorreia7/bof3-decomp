@@ -16,7 +16,18 @@ MATCH void func_801EEF78(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EEFBC);
+MATCH void func_801EEFBC(void) {
+    g_ScriptBank = 0x800C3800;
+    SYS_DISPATCH_BYTE(D_801F06E0, g_Task->header.step);
+    if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
+        func_8014D290();
+        Effect_SetActiveActorMatrix();
+        func_801EF9F0();
+        func_801EFC40();
+        PopMatrix();
+    }
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
 
 /* blocker: work pointer lifetime; first diff: lui v0 at +0x84. */
 INCLUDE_ASM(func_801EF078);
