@@ -105,7 +105,25 @@ MATCH void func_801EFDEC(void) {
 
 INCLUDE_ASM(func_801EFE74);
 
-INCLUDE_ASM(func_801EFF7C);
+MATCH void func_801EFF7C(void) {
+    PartyBattler* task;
+    s16*          angle_cell;
+    s32           direction;
+    s32           velocity;
+
+    task       = g_Task;
+    angle_cell = &D_1F800004;
+    direction  = task->param.unk_0B;
+    task->unk_0C += 1;
+    *angle_cell         = direction << 9;
+    velocity            = rsin((s16)(direction << 9)) * g_Task->unk_0C;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + velocity;
+    velocity            = rcos(*angle_cell) * g_Task->unk_0C;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + velocity;
+    if (--g_Task->unk_09 == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F0070);
 

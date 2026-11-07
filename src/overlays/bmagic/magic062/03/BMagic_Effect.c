@@ -65,10 +65,59 @@ MATCH void func_801EFBBC(void) {
 
 INCLUDE_ASM(func_801EFC4C);
 
-INCLUDE_ASM(func_801EFD80);
+MATCH void func_801EFD80(void) {
+    s32           timer;
+    s32           vel;
+    PartyBattler* task;
+    PartyBattler* reset;
 
-/* hint: m2c draft is 4 insns short; retail loads timer, unk_14, unk_20, pos.z before the timer store from one g_Task load. */
-INCLUDE_ASM(func_801EFE74);
+    func_800AF764();
+    func_801F0910((rand() & 3) | 0x18);
+    Effect_SetActorMatrix();
+    func_801F026C();
+    PopMatrix();
+    if (g_FrameCount & 1) {
+        g_Task->unk_09 += 1;
+    }
+    task         = g_Task;
+    timer        = task->timer - 1;
+    vel          = task->unk_14 + task->unk_20;
+    task->timer  = timer;
+    task->unk_14 = vel;
+    task->pos.z.part.integer += vel;
+    if ((timer & 0xFF) == 0) {
+        reset         = g_Task;
+        reset->unk_14 = -0x10;
+        reset->timer  = 8;
+        reset->unk_20 = 4;
+        g_Task->header.step += 1;
+    }
+}
+
+MATCH void func_801EFE74(void) {
+    s32           timer;
+    s32           vel;
+    PartyBattler* task;
+
+    func_800AF764();
+    func_801F0910((rand() & 3) | 0x18);
+    Effect_SetActorMatrix();
+    func_801F026C();
+    PopMatrix();
+    if (g_FrameCount & 1) {
+        g_Task->unk_09 += 1;
+    }
+    task         = g_Task;
+    timer        = task->timer - 1;
+    vel          = task->unk_14 + task->unk_20;
+    task->timer  = timer;
+    task->unk_14 = vel;
+    task->pos.z.part.integer += vel;
+    if ((timer & 0xFF) == 0) {
+        g_Task->timer = 0x1C - g_Task->param.unk_0B;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFF68(void) {
     s32 value;
