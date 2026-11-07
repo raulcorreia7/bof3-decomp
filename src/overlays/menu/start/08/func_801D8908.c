@@ -33,12 +33,12 @@ MATCH void func_801D8908(void) {
     value                       = g_MenuPanelTasks[16].unk_0C;
     if (buttons & PADLup) {
         if (value != 0) {
-            next       = value - 1;
-            D_8014857C = next;
+            next                        = value - 1;
+            g_MenuPanelTasks[16].unk_0C = next;
         }
     } else if ((buttons & PADLdown) && value < 9) {
-        next       = value + 1;
-        D_8014857C = next;
+        next                        = value + 1;
+        g_MenuPanelTasks[16].unk_0C = next;
     }
     table  = s_SkillOrderCursors[D_80148656];
     entry  = table + g_MenuPanelTasks[16].unk_0B;
