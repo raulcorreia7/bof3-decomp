@@ -88,7 +88,28 @@ MATCH void func_801F0064(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0100);
+MATCH void func_801F0100(void) {
+    PartyBattler* actor;
+    PartyBattler* work;
+    s16*          angle_cell;
+    u8            count;
+    u8            phase;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        phase                        = g_Task->param.unk_0B;
+        angle_cell                   = &D_1F800008;
+        *angle_cell                  = phase << 9;
+        actor                        = g_BattleSelectedActor;
+        g_Task->pos.x.fixed          = actor->pos.x.fixed + ((rcos((s16)(phase << 9)) * 0xC000) >> 12);
+        (work = g_Task)->pos.y.fixed = actor->pos.y.fixed + ((rsin(*angle_cell) * 0xC000) >> 12);
+        work->pos.z.fixed            = actor->pos.z.fixed;
+        work->unk_09                 = 0;
+        g_Task->timer                = 4;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F020C(void) {
     u8 counter;

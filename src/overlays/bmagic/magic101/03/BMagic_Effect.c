@@ -136,6 +136,7 @@ INCLUDE_ASM(func_801EF3DC);
 /* Blocker: retail reloads g_Task after the rsin shift (sll v0,v0,5 at 0x801EF514); the candidate hoists the g_Task load above it. Three drafts (local work, direct reads, split offset) all fail there. */
 INCLUDE_ASM(func_801EF4DC);
 
+// hint: front half matches (wave local, count local); retail stores unk_10/unk_14 = 0x80 before unk_09 = 0x10 and does sw unk_1C through the old task pointer, but the candidate hoists li 16/sb unk_09 first
 INCLUDE_ASM(func_801EF580);
 
 MATCH void func_801EF690(void) {
