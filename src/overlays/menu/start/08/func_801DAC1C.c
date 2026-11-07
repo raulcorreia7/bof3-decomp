@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-extern s8 D_801ED66C;
-
 /* Lays out the 3x3 start-menu grid: column 0 marks the rows below the member count, and each other cell arms the
  * next choice panel when its character bit is set in g_MasterRewardFlags and the panel index is below the count's limit.
  * nonmatching 88.98%: retail keeps &D_801ED680 in t9 across both loops and computes row < count before the row

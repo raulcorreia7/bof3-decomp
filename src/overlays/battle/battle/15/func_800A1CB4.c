@@ -15,10 +15,10 @@ MATCH void func_800A1CB4(void) {
         if (D_801462F0_state.active_count != 0u) {
             slot = 0;
             do {
-                g_BattlePartyBattlers[slot].turn.action_flags.value |= 0x400u;
+                g_BattlePartyBattlers[slot].turn.action_flags.value |= COMBATANT_FLAG_SELECT_EXCLUDED;
                 slot++;
             } while (slot < D_801462F0_state.active_count);
         }
-        g_BattlePartyBattlers[g_BattleTarget].turn.action_flags.value &= ~0x400u;
+        g_BattlePartyBattlers[g_BattleTarget].turn.action_flags.value &= ~COMBATANT_FLAG_SELECT_EXCLUDED;
     }
 }

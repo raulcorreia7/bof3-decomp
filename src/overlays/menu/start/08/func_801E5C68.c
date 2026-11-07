@@ -1,8 +1,5 @@
 #include "start_08.h"
 
-extern u8 D_801ED7FC;            /* local: u8 write; a sibling copy is s8 */
-extern u8 g_MenuStartReturnStep; /* local: u8 write; a sibling copy is s8 */
-
 MATCH void func_801E5C68(void) {
     u8* timer;
     u16 step;

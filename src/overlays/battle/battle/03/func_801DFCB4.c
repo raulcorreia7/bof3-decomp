@@ -38,7 +38,7 @@ MATCH void func_801DFCB4(void) {
     if (HAS_STATUS(*stats_work, 0x800)) {
         D_801EC2EE = 1;
     }
-    if (stats_work->turn.damage_flags.value & 1) {
+    if (stats_work->turn.damage_flags.value & COMBATANT_FLAG_COMMAND_ENTERED) {
         D_801EC303 = (D_801EC303 + 25 >= 100) ? 100 : D_801EC303 + 25;
     }
     switch (LOBU(g_BattleActionType)) {
@@ -86,12 +86,12 @@ MATCH void func_801DFCB4(void) {
     *pending = 0;
     if (tail_work->turn.hp_change > 0) {
         if (tail_work->chr.hp == 0) {
-            if (tail_work->turn.action_flags.value & 2) {
+            if (tail_work->turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
                 tail_work->chr.status |= STATUS_KO;
             } else {
                 tail_work->chr.status = STATUS_KO;
             }
-            if (!(g_GameState->turn.action_flags.value & 2)) {
+            if (!(g_GameState->turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
                 func_801DD858(1);
             }
             GFX_FreePaletteFadeTarget(g_Task);

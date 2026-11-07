@@ -19,9 +19,9 @@ MATCH void func_8009A0A4(void) {
     if (buttons & (PADLup | PADLdown)) {
         if (Item_GetFlags(kind_index >> 8, kind_index & BYTE_MASK) & 0x80) {
             if (func_8009AF7C() & BYTE_MASK) {
-                D_801EB4D8->command.target = 0;
+                g_BattleActorTurn->command.target = 0;
             } else {
-                D_801EB4D8->command.target = Battle_FindSelectableSlotForward(0);
+                g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(0);
             }
             dest  = &g_BattleUIState;
             value = *dest + 1;
@@ -31,13 +31,13 @@ MATCH void func_8009A0A4(void) {
         }
     }
     if ((buttons & PADLright) != 0) {
-        D_801EB4D8->command.target = Battle_FindSelectableSlotForward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)D_801EB4D8->command.target + 1) & BYTE_MASK);
+        g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(
+            func_801DD7D8(g_BattleEnemyCount + 2, 3, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if (buttons & PADLleft) {
-        D_801EB4D8->command.target = Battle_FindSelectableSlotBackward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)D_801EB4D8->command.target - 1) & BYTE_MASK);
+        g_BattleActorTurn->command.target = Battle_FindSelectableSlotBackward(
+            func_801DD7D8(g_BattleEnemyCount + 2, 3, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

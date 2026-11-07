@@ -4,8 +4,8 @@ MATCH void func_800980E4(void) {
     u8  result;
     u8* game_ram;
 
-    result                     = Battle_FindSelectableSlotForward(3);
-    D_801EB4D8->command.target = result;
+    result                            = Battle_FindSelectableSlotForward(3);
+    g_BattleActorTurn->command.target = result;
 
     BattleStageAttackNameMessage(2, 0);
 
