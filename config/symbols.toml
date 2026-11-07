@@ -1441,6 +1441,7 @@ g_MenuStatFormat = { addr = 0x801D0C20, source = "Format string of the four stat
 g_MenuZennyFormat = { addr = 0x801D0C44, source = "Format string of the Bate menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C48, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
 g_MenuClockFormat = { addr = 0x801D0D1C, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
+g_MenuInventoryCountFormat = { addr = 0x801D0D5C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "Entry of the Bate menu: dispatches on the menu step byte (D_80148650) through g_MenuBateStepFuncs." }
 Menu_DrawCharacterWindow = { addr = 0x801D27C4, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D2C2C, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
@@ -1467,6 +1468,7 @@ Menu_DrawEquipStatWindow = { addr = 0x801D5F48, type = "func", source = "Draws t
 Menu_DrawClutStrip = { addr = 0x801D627C, type = "func", source = "Draws the five-row strip of 0x20-wide sprite cells with the clut at index clut_index of the four strip palettes, covering the screen height of 240." }
 Menu_DrawFilledPanel = { addr = 0x801D6470, type = "func", source = "Draws a filled menu panel at x, y of width and height cells: the window body and its tiled 8-pixel border sprites." }
 Menu_DrawWindowFrame = { addr = 0x801D674C, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
+Menu_DrawInventoryWindow = { addr = 0x801D6C54, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawAbilityList = { addr = 0x801D73B4, type = "func", source = "draws the ability list panel of the shop and bate overlays: ten abilities with cost and level, the list name and the frame" }
 Menu_DrawPanelFrame = { addr = 0x801D78A8, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 g_MenuBateStepFuncs = { addr = 0x801D86E0, source = "the bate overlay step handlers, indexed by the menu step byte" }
@@ -1486,7 +1488,9 @@ MENU_CLOCK_CAPTION = { addr = 0x801D8884, source = "Sprite run of the play time 
 MENU_COMMAND_FRAME = { addr = 0x801D88E0, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801D88F8, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
 g_MenuListTab2OffSprites = { addr = 0x801D893C, source = "the sprite run of the list panel's second tab while its flag is clear" }
+g_MenuInventoryTab1OffSprites = { addr = 0x801D8948, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
 g_MenuListTab2OnSprites = { addr = 0x801D8954, source = "the sprite run of the list panel's second tab while its flag is set" }
+g_MenuInventoryTab1OnSprites = { addr = 0x801D8960, source = "the sprite run of the inventory panel's first tab while its flag is set" }
 g_MenuListTab1OffSprites = { addr = 0x801D896C, source = "the sprite run of the list panel's first tab while its flag is clear" }
 g_MenuListTab1OnSprites = { addr = 0x801D8978, source = "the sprite run of the list panel's first tab while its flag is set" }
 g_MenuLabelPower = { addr = 0x801D8B28, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
@@ -1503,6 +1507,7 @@ g_MenuCommandRows = { addr = 0x801D8CC4, source = "Command rows, 5 bytes each: t
 MENU_CLUT_STRIP_CELLS = { addr = 0x801D8D28, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D8DD4, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D8E20, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
+g_MenuInventoryTitles = { addr = 0x801D8E4C, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, ACCESSORY and VITAL, by ItemCategory" }
 g_MenuAbilityListNames = { addr = 0x801D8E80, source = "the list names indexed by the ability type, drawn above the ability list" }
 
 ["emi/etc/commu00/00"]
@@ -1873,6 +1878,7 @@ g_MenuStatFormat = { addr = 0x801D0C04, source = "Format string of the four stat
 g_MenuZennyFormat = { addr = 0x801D0C28, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C2C, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
 g_MenuClockFormat = { addr = 0x801D0D00, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
+g_MenuInventoryCountFormat = { addr = 0x801D0D40, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "Entry of the Shisu menu: dispatches on the menu step byte D_80148650 through the D_801D96DC handlers." }
 Menu_DrawPanelCursor = { addr = 0x801D2FE8, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
 Menu_DrawCharacterWindow = { addr = 0x801D376C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
@@ -1899,6 +1905,7 @@ Menu_DrawRowIcons = { addr = 0x801D6E38, type = "func", source = "Draws the part
 Menu_DrawEquipStatWindow = { addr = 0x801D6EF0, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
 Menu_DrawFilledPanel = { addr = 0x801D7418, type = "func", source = "Draws a filled menu panel at x, y of width and height cells: the window body and its tiled 8-pixel border sprites." }
 Menu_DrawWindowFrame = { addr = 0x801D76F4, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
+Menu_DrawInventoryWindow = { addr = 0x801D7BFC, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawPanelFrame = { addr = 0x801D8850, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 g_MenuStatusStepFuncs = { addr = 0x801D96DC, source = "the shisu overlay step handlers, indexed by the menu step byte" }
 g_MenuStatusStep1Funcs = { addr = 0x801D96F0, source = "2 sub-step handlers of step 1 of the status menu, called by func_801D0E4C (the step 1 handler) and indexed by the menu sub-step byte D_80148651" }
@@ -1917,6 +1924,10 @@ MENU_CAPTION_GLYPH_2 = { addr = 0x801D989C, source = "Sprite run of the right en
 MENU_CLOCK_CAPTION = { addr = 0x801D98A8, source = "Sprite run of the play time caption, drawn at the left edge of the play time window by Menu_DrawPlayTimeWindow." }
 MENU_COMMAND_FRAME = { addr = 0x801D9904, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801D991C, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
+g_MenuListTab2OffSprites = { addr = 0x801D9960, source = "the sprite run of the list panel's second tab while its flag is clear" }
+g_MenuInventoryTab1OffSprites = { addr = 0x801D996C, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
+g_MenuListTab2OnSprites = { addr = 0x801D9978, source = "the sprite run of the list panel's second tab while its flag is set" }
+g_MenuInventoryTab1OnSprites = { addr = 0x801D9984, source = "the sprite run of the inventory panel's first tab while its flag is set" }
 g_MenuLabelPower = { addr = 0x801D9B4C, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D9B50, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntellect = { addr = 0x801D9B54, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
@@ -1928,6 +1939,7 @@ MENU_CAPTION_ICON = { addr = 0x801D9BD8, source = "Icon and label record drawn a
 MENU_CLOCK_COLON = { addr = 0x801D9BDC, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801D9C8C, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
 g_MenuCommandRows = { addr = 0x801D9CE8, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuInventoryTitles = { addr = 0x801D9E70, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, ACCESSORY and VITAL, by ItemCategory" }
 g_MenuStatusItems = { addr = 0x801DA028, type = "MenuStatusItems", size = 0xC, source = "Item ids the status menu counts into held[] (four items) and passes to Item_Remove when one is used." }
 D_801DA0B4 = { addr = 0x801DA0B4, source = "func_801D2C50 increments this word by 0x20" }
 D_801DA12C = { addr = 0x801DA12C, source = "func_801D2DEC decrements and func_801D2F68 increments this word by 0x20" }
@@ -1938,6 +1950,7 @@ g_MenuStatFormat = { addr = 0x801D0CE4, source = "Format string of the four stat
 g_MenuZennyFormat = { addr = 0x801D0D08, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0D0C, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
 g_MenuClockFormat = { addr = 0x801D0DE0, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
+g_MenuInventoryCountFormat = { addr = 0x801D0E20, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "Entry of the shop: dispatches on the menu step byte D_80148650 through the D_801E5144 handlers." }
 Shop_ApplyPercent = { addr = 0x801D3654, type = "func", source = "Returns value * percent / 100, at least 1; the item list prices its rows through it." }
 Shop_GetSellPrice = { addr = 0x801D3688, type = "func", source = "Returns the sell price of an item: half of Item_GetPrice, with the discount price for category 0 quantities 0x2B to 0x36." }
@@ -1971,6 +1984,7 @@ Menu_DrawEquipStatWindow = { addr = 0x801DB9F0, type = "func", source = "Draws t
 Menu_DrawClutStrip = { addr = 0x801DBD24, type = "func", source = "Draws the five-row strip of 0x20-wide sprite cells with the clut at index clut_index of the four strip palettes, covering the screen height of 240." }
 Menu_DrawFilledPanel = { addr = 0x801DBF18, type = "func", source = "Draws a filled menu panel at x, y of width and height cells: the window body and its tiled 8-pixel border sprites." }
 Menu_DrawWindowFrame = { addr = 0x801DC1F4, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
+Menu_DrawInventoryWindow = { addr = 0x801DC6FC, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawAbilityList = { addr = 0x801DCE5C, type = "func", source = "Draws the ten visible rows of the ability list with cost and level, the cursor tabs and the window frame." }
 Menu_DrawPanelFrame = { addr = 0x801DD350, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 SAVE_DrawSlot = { addr = 0x801DDCB0, type = "func", source = "Draws one row of the stock list: its window, icons, name and the values formatted through g_MenuZennyFormat." }
@@ -2007,7 +2021,9 @@ MENU_CLOCK_CAPTION = { addr = 0x801E5580, source = "Sprite run of the play time 
 MENU_COMMAND_FRAME = { addr = 0x801E55DC, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801E55F4, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
 g_MenuListTab2OffSprites = { addr = 0x801E5638, source = "the sprite run of the list panel's second tab while its flag is clear" }
+g_MenuInventoryTab1OffSprites = { addr = 0x801E5644, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
 g_MenuListTab2OnSprites = { addr = 0x801E5650, source = "the sprite run of the list panel's second tab while its flag is set" }
+g_MenuInventoryTab1OnSprites = { addr = 0x801E565C, source = "the sprite run of the inventory panel's first tab while its flag is set" }
 g_MenuListTab1OffSprites = { addr = 0x801E5668, source = "the sprite run of the list panel's first tab while its flag is clear" }
 g_MenuListTab1OnSprites = { addr = 0x801E5674, source = "the sprite run of the list panel's first tab while its flag is set" }
 g_MenuLabelPower = { addr = 0x801E5824, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
@@ -2024,6 +2040,7 @@ g_MenuCommandRows = { addr = 0x801E59C0, source = "Command rows, 5 bytes each: t
 MENU_CLUT_STRIP_CELLS = { addr = 0x801E5A24, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801E5AD0, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801E5B1C, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
+g_MenuInventoryTitles = { addr = 0x801E5B48, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, ACCESSORY and VITAL, by ItemCategory" }
 g_MenuAbilityListNames = { addr = 0x801E5B7C, source = "the list names indexed by the ability type, drawn above the ability list" }
 g_ShopStep6Funcs = { addr = 0x801E5BEC, source = "4 sub-step handlers of step 6 of the shop, called by func_801DE188 (the step 6 handler) and indexed by the menu sub-step byte D_80148651" }
 g_ShopStep6Sub0Funcs = { addr = 0x801E5BFC, source = "3 handlers of sub-step 0 of step 6 of the shop, called by func_801DE1C4 (the sub-step 0 handler of step 6) and indexed by the menu sub-sub-step byte D_80148652" }
@@ -2103,6 +2120,7 @@ g_MenuStatFormat = { addr = 0x801D0C4C, source = "Format string of the four stat
 g_MenuZennyFormat = { addr = 0x801D0C70, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C74, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
 g_MenuClockFormat = { addr = 0x801D0D48, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
+g_MenuInventoryCountFormat = { addr = 0x801D0D88, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 s_RowCaptionTags = { addr = 0x801D0EB0, source = "Eight three-byte caption tags; func_801E30FC copies them and hands one to the text draws." }
 g_SaveFileNameFormat = { addr = 0x801D0EC8, source = "Format of the card file name of a save slot: SAVE_RunLoadVerify formats the slot into it, func_801E54A4 filters the card directory with it and func_801E7348 compares directory names against it." }
 Party_InitDefaults = { addr = 0x801D15C0, type = "func", source = "Sets the default party: copies D_801EB514 into g_Characters and sets the willpower of each character." }
@@ -2135,6 +2153,7 @@ Menu_DrawEquipStatWindow = { addr = 0x801DEEE8, type = "func", source = "Draws t
 Menu_DrawClutStrip = { addr = 0x801DF21C, type = "func", source = "Draws the five-row strip of 0x20-wide sprite cells with the clut at index clut_index of the four strip palettes, covering the screen height of 240." }
 Menu_DrawFilledPanel = { addr = 0x801DF410, type = "func", source = "Draws a filled menu panel at x, y of width and height cells: the window body and its tiled 8-pixel border sprites." }
 Menu_DrawWindowFrame = { addr = 0x801DF6EC, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
+Menu_DrawInventoryWindow = { addr = 0x801DFBF4, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawPanelFrame = { addr = 0x801E0848, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
 SAVE_DrawSlot = { addr = 0x801E11A8, type = "func", source = "Draws one row of the save file list: its window, icons, name and the values formatted through g_MenuZennyFormat." }
 Start_RunNewGame = { addr = 0x801E2584, type = "func", source = "Starts a new game: clears g_GameAreaId, calls Scene_Start(0) and replaces the callback with Game_RunMainLoop." }
@@ -2165,6 +2184,12 @@ MENU_CAPTION_GLYPH_2 = { addr = 0x801EC690, source = "Sprite run of the right en
 MENU_CLOCK_CAPTION = { addr = 0x801EC69C, source = "Sprite run of the play time caption, drawn at the left edge of the play time window by Menu_DrawPlayTimeWindow." }
 MENU_COMMAND_FRAME = { addr = 0x801EC6F8, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801EC710, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
+g_MenuListTab2OffSprites = { addr = 0x801EC754, source = "the sprite run of the list panel's second tab while its flag is clear" }
+g_MenuInventoryTab1OffSprites = { addr = 0x801EC760, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
+g_MenuListTab2OnSprites = { addr = 0x801EC76C, source = "the sprite run of the list panel's second tab while its flag is set" }
+g_MenuInventoryTab1OnSprites = { addr = 0x801EC778, source = "the sprite run of the inventory panel's first tab while its flag is set" }
+g_MenuListTab1OffSprites = { addr = 0x801EC784, source = "the sprite run of the list panel's first tab while its flag is clear" }
+g_MenuListTab1OnSprites = { addr = 0x801EC790, source = "the sprite run of the list panel's first tab while its flag is set" }
 g_MenuLabelPower = { addr = 0x801EC940, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801EC944, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntellect = { addr = 0x801EC948, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
@@ -2179,6 +2204,7 @@ g_MenuCommandRows = { addr = 0x801ECADC, source = "Command rows, 5 bytes each: t
 MENU_CLUT_STRIP_CELLS = { addr = 0x801ECB40, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in MENU_CLUT_STRIP_ENTRIES." }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801ECBEC, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801ECC38, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
+g_MenuInventoryTitles = { addr = 0x801ECC64, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, ACCESSORY and VITAL, by ItemCategory" }
 g_NameEntryControlsFrame = { addr = 0x801ED05C, source = "the sprite layout of the name entry control window's frame, drawn by func_801AF390" }
 s_CampMenuState = { addr = 0x801ED100, source = "State bytes of the start menu overlay, kept by func_801E4670, func_801E4744 and func_801E6388." }
 g_NameEntryCommandLabels = { addr = 0x801ED1B8, source = "the name entry screen's four command labels, OK, Del, Next and Back, that its control window draws" }

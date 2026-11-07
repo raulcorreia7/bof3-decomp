@@ -293,10 +293,18 @@ extern Callback D_801EC58C[];
  * for a 42-byte run, 688 for a 687-byte bank), and a typed record array would
  * need the split data to own that padding. */
 extern u8       MENU_CAPTION_GLYPH_2[688];
-extern u8       D_801EC754[];
-extern u8       D_801EC76C[];
-extern u8       D_801EC784[];
-extern u8       D_801EC790[];
+/* D_801EC754 */
+extern u8       g_MenuListTab2OffSprites[];
+/* D_801EC76C */
+extern u8       g_MenuListTab2OnSprites[];
+extern u8*      g_MenuInventoryTitles[5];
+extern char     g_MenuInventoryCountFormat[];
+extern u8       g_MenuInventoryTab1OffSprites[];
+extern u8       g_MenuInventoryTab1OnSprites[];
+/* D_801EC784 */
+extern u8       g_MenuListTab1OffSprites[];
+/* D_801EC790 */
+extern u8       g_MenuListTab1OnSprites[];
 extern u8       D_801EC854[];
 extern u8       g_MenuLabelAgility[4];
 extern u8       g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:Shop_DrawEquipment */
@@ -487,7 +495,8 @@ extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 void        Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused);
 void        Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s32 equip_slot, u8 item_id);
 void        Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height);
-extern void func_801DFBF4(MenuPanelTask* task);
+/* func_801DFBF4 */
+extern void Menu_DrawInventoryWindow(MenuPanelTask* task);
 extern void func_801E0354(MenuPanelTask* task);
 extern void func_801E0A70(MenuPanelTask* task);
 extern void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active);
@@ -763,6 +772,8 @@ void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 s
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
+                   s32 sprite_flag);
 
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 
