@@ -122,6 +122,8 @@ void  UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 s32   func_801AF20C(u8* command_stream);
 /* func_801AF2A0 */
 void  UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
+/* func_801AF390 */
+s32   func_801AF390(s16 x, s16 y, u8* table, s32 flags);
 /* func_801AF5B0 */
 s32   func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 /* func_801AFD10 */
