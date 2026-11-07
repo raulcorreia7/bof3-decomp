@@ -3218,164 +3218,164 @@ Area_InitSpin = { addr = 0x801F5820, type = "func", source = "starts one spin-ef
 Area_ResetCameraOffsetZ = { addr = 0x801F2C24, type = "func", source = "zeroes g_AreaCameraOffsetZ, the Z shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
 
 ["emi/world02/area100/13"]
-Actor_RunAreaStep = { addr = 0x801F35D4, type = "func", source = "clears the work reset flag and hands the work pointer to the area step" }
-Area_AddCameraOffsetY4 = { addr = 0x801F3630, type = "func", source = "adds 4 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_SubCameraOffsetY4 = { addr = 0x801F3658, type = "func", source = "subtracts 4 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_ResetCameraOffsetY = { addr = 0x801F3680, type = "func", source = "zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }
-Actor_SnapToGround = { addr = 0x801F3CDC, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
+Actor_RunAreaStep = { addr = 0x801F35D4, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
+Area_AddCameraOffsetY4 = { addr = 0x801F3630, type = "func", source = "Adds 4 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_SubCameraOffsetY4 = { addr = 0x801F3658, type = "func", source = "Subtracts 4 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetY = { addr = 0x801F3680, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Actor_SnapToGround = { addr = 0x801F3CDC, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
 
 ["emi/world02/area102/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area103/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Area_FindTaggedPartySlot = { addr = 0x801F56B0, type = "func", source = "returns the first index 0 to 2 of D_801F5D64 whose tag equals byte 0 of a battle party row, 0xFF when none match; func_801F560C calls it" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_FindTaggedPartySlot = { addr = 0x801F56B0, type = "func", source = "Returns the first index 0 to 2 of D_801F5D64 whose tag equals byte 0 of a battle party row, 0xFF when none match; func_801F560C calls it." }
 
 ["emi/world02/area104/14"]
-Message_RunAreaMessage = { addr = 0x801F2F0C, type = "func", source = "starts message 4 with Message_StartAreaMessage, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the D_801448EB state" }
-Area_FindSceneRecordAndClearTint = { addr = 0x801F3124, type = "func", source = "one body shared through overlays/area/Area_FindSceneRecordAndClearTint.h" }
+Message_RunAreaMessage = { addr = 0x801F2F0C, type = "func", source = "Starts message 4 with Message_StartAreaMessage, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the D_801448EB state." }
+Area_FindSceneRecordAndClearTint = { addr = 0x801F3124, type = "func", source = "Sets active_flags to 0x80, looks up scene record 0x158, sets byte 0x29 to 5, clears byte 0x2A and the tint bytes and sets header.mode (byte 0x01) to 1." }
 Actor_GrowAndSetStep3 = { addr = 0x801F32E8, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
-Actor_ShrinkAndFinish = { addr = 0x801F3424, type = "func", source = "shrinks the actor scale by 0x2000 and finishes or resets the area when the timer expires (area104)" }
-Actor_CenterOnScreen = { addr = 0x801F34C4, type = "func", source = "byte-identical to Actor_CenterOnScreen at emi/world02/area087/13@0x801F3434" }
-Actor_NextStep = { addr = 0x801F3524, type = "func", source = "resets the actor timer and tile class then advances the handler index" }
-Actor_SlideScreenLeft = { addr = 0x801F35D0, type = "func", source = "byte-identical to Actor_SlideScreenLeft at emi/world02/area087/13@0x801F3540" }
-Actor_SlideScreenX = { addr = 0x801F3620, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
-Area_Update = { addr = 0x801F367C, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
-Actor_SetScreenBottom = { addr = 0x801F3794, type = "func", source = "byte-identical to Actor_SetScreenBottom at emi/world02/area087/13@0x801F3704" }
-Area_RaiseHudBanner = { addr = 0x801F3814, type = "func", source = "one body shared through overlays/area/Area_RaiseHudBanner.h" }
+Actor_ShrinkAndFinish = { addr = 0x801F3424, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
+Actor_CenterOnScreen = { addr = 0x801F34C4, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
+Actor_NextStep = { addr = 0x801F3524, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
+Actor_SlideScreenLeft = { addr = 0x801F35D0, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
+Actor_SlideScreenX = { addr = 0x801F3620, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
+Area_Update = { addr = 0x801F367C, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
+Actor_SetScreenBottom = { addr = 0x801F3794, type = "func", source = "Sets the actor screen_y to 0xF0 and adds 1 to byte 0x03, when D_801454F2 is 0 or byte 0x0B is 0, no message is requested and no script is active." }
+Area_RaiseHudBanner = { addr = 0x801F3814, type = "func", source = "Moves the HUD banner screen_y 10 units up per frame and adds 1 to byte 0x03 below y 201; D_801454F2 with the flag at byte 0x0B, a message request or an active script set byte 0x03 to 3; draws banner record 0x5C at screen_y." }
 Area_DrawHudSprite = { addr = 0x801F3A9C, type = "func", source = "Draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; Area_DrawHud calls it with ids 0 to 3 and the WorldMapMarker step." }
 Area_DrawHud = { addr = 0x801F3BC4, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3F90, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
-Area_DrawHudBanner = { addr = 0x801F4188, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
-Actor_FacingToward = { addr = 0x801F4A34, type = "func", source = "returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)" }
-Game_RequestMenuOnInput = { addr = 0x801F5034, type = "func", source = "one body shared through overlays/area/Game_RequestMenuOnInput.h" }
-Actor_StopMoving = { addr = 0x801F5108, type = "func", source = "clears the actor velocity words and sets the game overlay byte to 3" }
+Area_DrawHudBanner = { addr = 0x801F4188, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
+Actor_FacingToward = { addr = 0x801F4A34, type = "func", source = "Returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)." }
+Game_RequestMenuOnInput = { addr = 0x801F5034, type = "func", source = "When the FIELD_INPUT_MENU button is pressed and GAME_FLAG_MENU_LOCK is clear: plays cue EMI_CUE_ID(1, 5), sets g_GameStateIndex to GAME_REQUEST_MENU, clears the actor step and returns 1; otherwise returns 0." }
+Actor_StopMoving = { addr = 0x801F5108, type = "func", source = "Zeroes the actor velocity vx, vy and vz and g_AreaCameraStep and g_AreaCameraHeightStep, and sets g_GameState counter_11C to 3." }
 Area_SetPanelStepOnRun = { addr = 0x801F51F0, type = "func", source = "Sets the panel step counter (g_GameState counter_11C) to 4 while the run button (WORLD_INPUT_RUN) is held and the actor's byte 0x0B is under 0x40, and to 3 otherwise." }
-Area_StepRunGauge = { addr = 0x801F5254, type = "func", source = "steps the press-and-hold gauge at g_Task +0x0B between 0 and 0x40 while the re-arm timer at +0x0A is spent: the masked input g_InputMasks[INPUT_SLOT_MOVE] held against g_InputHeld raises it by 1 per frame and a full 0x40 re-arms the timer to 0x1E, releasing lowers it by a level step of 1, 2 or 3, halved per parity when the state byte at +0x02 is set (func_801F5254 in area104/14, func_801F5798 in area121/14)" }
-Area_FinishTurnStep = { addr = 0x801F58E8, type = "func", source = "stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step" }
-Area_BeginTurnStep = { addr = 0x801F5988, type = "func", source = "begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)" }
-Area_RunTurnStep = { addr = 0x801F5AB4, type = "func", source = "runs one frame of a turning step: adds the velocity at +0x14 to the angle at +0x6C (masked to 0xFFF), counts the timer at +0x09 down and, at zero, sets state_01 to 1 and calls Area_FinishTurnStep, else calls the image's per-frame sync; Area_BeginTurnStep calls it" }
+Area_StepRunGauge = { addr = 0x801F5254, type = "func", source = "Steps the run gauge (byte 0x0B of g_Task, 0 to 0x40) once the re-arm timer at byte 0x0A is spent: while g_InputMasks[WORLD_INPUT_RUN] is held in g_InputHeld it adds 1 per frame and at 0x40 re-arms the timer to 0x1E; on release it lowers the gauge by 3, 2 or 1 for levels from 0x31, from 0x21 and below, halved when header.step (byte 0x02) is nonzero." }
+Area_FinishTurnStep = { addr = 0x801F58E8, type = "func", source = "Stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step." }
+Area_BeginTurnStep = { addr = 0x801F5988, type = "func", source = "Begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)." }
+Area_RunTurnStep = { addr = 0x801F5AB4, type = "func", source = "Runs one frame of a turning step: adds the velocity at +0x14 to the angle at +0x6C (masked to 0xFFF), counts the timer at +0x09 down and, at zero, sets state_01 to 1 and calls Area_FinishTurnStep, else calls the image's per-frame sync; Area_BeginTurnStep calls it." }
 
 ["emi/world02/area105/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area107/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area108/14"]
-GFX_DrawShadedDisc = { addr = 0x801F3D90, type = "func", source = "fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade" }
-Message_ClearRequest = { addr = 0x801F4320, type = "func", source = "clears the area request slot and resets the game-overlay state bytes when the selection byte is clear" }
-Message_Clear = { addr = 0x801F4360, type = "func", source = "clears the message request and sets the game overlay state bytes when the menu choice is zero" }
+GFX_DrawShadedDisc = { addr = 0x801F3D90, type = "func", source = "Fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade." }
+Message_ClearRequest = { addr = 0x801F4320, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
+Message_Clear = { addr = 0x801F4360, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
 
 ["emi/world02/area109/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area110/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
 
 ["emi/world02/area111/13"]
-Message_SelectAnswer = { addr = 0x801F33D0, type = "func", source = "stores the selected or idle area request id the selection byte picks" }
+Message_SelectAnswer = { addr = 0x801F33D0, type = "func", source = "Sets g_MessageRequest to 3 when g_MessageChoice is nonzero, otherwise to 2." }
 
 ["emi/world02/area112/13"]
-Actor_RunAreaStep = { addr = 0x801F3638, type = "func", source = "clears the work reset flag and hands the work pointer to the area step" }
-Message_ShowParty = { addr = 0x801F366C, type = "func", source = "shows the tagged area slot message and enters game state 2" }
-Message_SelectAnswer = { addr = 0x801F3870, type = "func", source = "stores the selected or idle area request id the selection byte picks" }
-Actor_SnapToGround = { addr = 0x801F3E58, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
-g_PartyMemberMessages = { addr = 0x801F48FC, size = 0xC, source = "WORLD_ShowAreaSlotMessage matches tags[i] against a battle record row byte 0 and shows messages[i] through func_80150224" }
+Actor_RunAreaStep = { addr = 0x801F3638, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
+Message_ShowParty = { addr = 0x801F366C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
+Message_SelectAnswer = { addr = 0x801F3870, type = "func", source = "Sets g_MessageRequest to 0x14 when g_MessageChoice is nonzero, otherwise to 0x13." }
+Actor_SnapToGround = { addr = 0x801F3E58, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
+g_PartyMemberMessages = { addr = 0x801F48FC, size = 0xC, source = "Tag and message id pairs of the party member talk: WORLD_ShowAreaSlotMessage matches tags[i] against byte 0 of a battle party row and shows messages[i] through func_80150224." }
 
 ["emi/world02/area113/13"]
-g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
-g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_MasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
+g_MasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world03/area115/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "byte-identical to Message_ClearOnCancel at emi/world00/area016/13@0x801F2C04" }
-Area_SlideActorDown = { addr = 0x801F3228, type = "func", source = "one body shared through overlays/area/Area_SlideActorDown.h" }
-Area_RequestRestartOnContextChange = { addr = 0x801F32A4, type = "func", source = "one body shared through overlays/area/Area_RequestRestartOnContextChange.h" }
-Area_SlideActorUpOrClear = { addr = 0x801F3364, type = "func", source = "one body shared through overlays/area/Area_SlideActorUpOrClear.h" }
-Actor_CenterOnScreen = { addr = 0x801F3404, type = "func", source = "byte-identical to Actor_CenterOnScreen at emi/world02/area087/13@0x801F3434" }
-Actor_NextStep = { addr = 0x801F3464, type = "func", source = "byte-identical to Actor_NextStep at emi/world03/area151/13@0x801F33D0" }
-Actor_SlideScreenLeft = { addr = 0x801F3510, type = "func", source = "byte-identical to Actor_SlideScreenLeft at emi/world02/area087/13@0x801F3540" }
-Actor_SlideScreenX = { addr = 0x801F3560, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
-Area_Update = { addr = 0x801F35BC, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
-Area_SlideHudBannerLeft = { addr = 0x801F360C, type = "func", source = "one body shared through overlays/area/Area_SlideHudBannerLeft.h" }
-Actor_SetScreenBottom = { addr = 0x801F36D4, type = "func", source = "scrolls the actor screen origin to y 0xF0 and advances its state" }
-Area_RaiseHudBanner = { addr = 0x801F3754, type = "func", source = "one body shared through overlays/area/Area_RaiseHudBanner.h" }
-Area_CountHudBannerHold = { addr = 0x801F382C, type = "func", source = "one body shared through overlays/area/Area_CountHudBannerHold.h" }
-Area_StepHudBannerDown = { addr = 0x801F392C, type = "func", source = "one body shared through overlays/area/Area_StepHudBannerDown.h" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
+Area_SlideActorDown = { addr = 0x801F3228, type = "func", source = "Centres the actor and moves its scale at +0x40 up by 0x2000 each frame while counting byte 0x09 down; at 0 clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
+Area_RequestRestartOnContextChange = { addr = 0x801F32A4, type = "func", source = "Outside game entry state 1, when the step byte 0x0B no longer matches option_flags, an area change is requested, or a step-1 actor no longer matches g_GameContextSeed, arms the restart: byte 0x48 to 2, timer to 8, header.mode to 4." }
+Area_SlideActorUpOrClear = { addr = 0x801F3364, type = "func", source = "Centres the actor and moves its scale at +0x40 down by 0x2000 each frame while counting byte 0x09 down; at 0 frees the actor when g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, else clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
+Actor_CenterOnScreen = { addr = 0x801F3404, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
+Actor_NextStep = { addr = 0x801F3464, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
+Actor_SlideScreenLeft = { addr = 0x801F3510, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
+Actor_SlideScreenX = { addr = 0x801F3560, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
+Area_Update = { addr = 0x801F35BC, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
+Area_SlideHudBannerLeft = { addr = 0x801F360C, type = "func", source = "Moves the HUD banner screen_x 16 pixels left per frame and sets header.step (byte 0x02) to 0 below -47; sets it to 1 when D_801454F2 is not 2; draws HUD record 0x10 at the banner x." }
+Actor_SetScreenBottom = { addr = 0x801F36D4, type = "func", source = "Sets the actor screen_y to 0xF0 and adds 1 to byte 0x03, when D_801454F2 is 0 or byte 0x0B is 0, no message is requested and no script is active." }
+Area_RaiseHudBanner = { addr = 0x801F3754, type = "func", source = "Moves the HUD banner screen_y 10 units up per frame and adds 1 to byte 0x03 below y 201; D_801454F2 with the flag at byte 0x0B, a message request or an active script set byte 0x03 to 3; draws banner record 0x5C at screen_y." }
+Area_CountHudBannerHold = { addr = 0x801F382C, type = "func", source = "Counts the hold timer up to 90 frames and then sets the flag at byte 0x0B; with D_801454F2 set and that flag, a message request or an active script it adds 1 to byte 0x03; draws banner record 0x5C at screen_y." }
+Area_StepHudBannerDown = { addr = 0x801F392C, type = "func", source = "Moves the HUD banner screen_y 10 units down per frame and zeroes byte 0x03 from y 240; without D_801454F2, a message request or an active script it sets byte 0x03 to 1; draws banner record 0x5C at screen_y." }
 Area_DrawHudSprite = { addr = 0x801F39DC, type = "func", source = "Draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; Area_DrawHud calls it with ids 0 to 3 and the WorldMapMarker step." }
 Area_DrawHud = { addr = 0x801F3B04, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3ED0, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
-Area_DrawHudBanner = { addr = 0x801F40C8, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
-Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
-Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "moves the actor by the projected velocity when the tile is classified" }
-Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
+Area_DrawHudBanner = { addr = 0x801F40C8, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
+Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
+Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
+Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 
 ["emi/world03/area116/13"]
-g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
-g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Actor_RunAreaStep = { addr = 0x801F2D80, type = "func", source = "byte-identical to Actor_RunAreaStep at emi/world03/area143/13@0x801F3C40" }
-Area_CheckStepTrigger = { addr = 0x801F2DB4, type = "func", source = "the per-game-area step-trigger check func_801A8728 dispatches in Area_IsStepBlocked's path; the scenario entry Scene_CheckStepTrigger fills the same slot" }
-Actor_SnapToGround = { addr = 0x801F2EE4, type = "func", source = "snaps the actor to the ground height func_8015477C and advances its state" }
+g_MasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
+g_MasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Actor_RunAreaStep = { addr = 0x801F2D80, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
+Area_CheckStepTrigger = { addr = 0x801F2DB4, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
+Actor_SnapToGround = { addr = 0x801F2EE4, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
 
 ["emi/world03/area117/13"]
-Message_ClearRequest = { addr = 0x801F3FB0, type = "func", source = "clears the area request slot and resets the game-overlay state bytes when the selection byte is clear" }
-Message_Clear = { addr = 0x801F40CC, type = "func", source = "clears the message request and sets the game overlay state bytes when the menu choice is zero" }
+Message_ClearRequest = { addr = 0x801F3FB0, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
+Message_Clear = { addr = 0x801F40CC, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
 
 ["emi/world03/area118/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world03/area119/13"]
 D_80146920 = { addr = 0x80146920, source = "func_801F2C88 and func_801F2D6C use this four-row field-work base" }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Area_AddCameraOffsetY2 = { addr = 0x801F41B8, type = "func", source = "adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_SubCameraOffsetY2 = { addr = 0x801F41E0, type = "func", source = "subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_ResetCameraOffsetY = { addr = 0x801F4208, type = "func", source = "zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_AddCameraOffsetY2 = { addr = 0x801F41B8, type = "func", source = "Adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_SubCameraOffsetY2 = { addr = 0x801F41E0, type = "func", source = "Subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetY = { addr = 0x801F4208, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 
 ["emi/world03/area120/13"]
 g_GameEntryStateWord = { addr = 0x80143B90, alias = true }
 
 ["emi/world03/area121/14"]
-Message_ClearOnCancel = { addr = 0x801F2C08, type = "func", source = "byte-identical to Message_ClearOnCancel at emi/world03/area151/13@0x801F2C04" }
-Area_FindSceneRecordAndClearTint = { addr = 0x801F3078, type = "func", source = "one body shared through overlays/area/Area_FindSceneRecordAndClearTint.h" }
-Area_SlideActorDown = { addr = 0x801F323C, type = "func", source = "one body shared through overlays/area/Area_SlideActorDown.h" }
-Area_RequestRestartOnContextChange = { addr = 0x801F32B8, type = "func", source = "one body shared through overlays/area/Area_RequestRestartOnContextChange.h" }
-Area_SlideActorUpOrClear = { addr = 0x801F3378, type = "func", source = "one body shared through overlays/area/Area_SlideActorUpOrClear.h" }
-Actor_CenterOnScreen = { addr = 0x801F3418, type = "func", source = "byte-identical to Actor_CenterOnScreen at emi/world02/area087/13@0x801F3434" }
-Actor_NextStep = { addr = 0x801F3478, type = "func", source = "byte-identical to Actor_NextStep at emi/world03/area151/13@0x801F33D0" }
-Actor_SlideScreenLeft = { addr = 0x801F3524, type = "func", source = "byte-identical to Actor_SlideScreenLeft at emi/world02/area087/13@0x801F3540" }
-Actor_SlideScreenX = { addr = 0x801F3574, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
-Area_Update = { addr = 0x801F35D0, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
-Area_SlideHudBannerLeft = { addr = 0x801F3620, type = "func", source = "one body shared through overlays/area/Area_SlideHudBannerLeft.h" }
-Actor_SetScreenBottom = { addr = 0x801F36E8, type = "func", source = "scrolls the actor screen origin to y 0xF0 and advances its state" }
-Area_RaiseHudBanner = { addr = 0x801F3768, type = "func", source = "one body shared through overlays/area/Area_RaiseHudBanner.h" }
-Area_CountHudBannerHold = { addr = 0x801F3840, type = "func", source = "one body shared through overlays/area/Area_CountHudBannerHold.h" }
-Area_StepHudBannerDown = { addr = 0x801F3940, type = "func", source = "one body shared through overlays/area/Area_StepHudBannerDown.h" }
+Message_ClearOnCancel = { addr = 0x801F2C08, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
+Area_FindSceneRecordAndClearTint = { addr = 0x801F3078, type = "func", source = "Sets active_flags to 0x80, looks up scene record 0x158, sets byte 0x29 to 5, clears byte 0x2A and the tint bytes and sets header.mode (byte 0x01) to 1." }
+Area_SlideActorDown = { addr = 0x801F323C, type = "func", source = "Centres the actor and moves its scale at +0x40 up by 0x2000 each frame while counting byte 0x09 down; at 0 clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
+Area_RequestRestartOnContextChange = { addr = 0x801F32B8, type = "func", source = "Outside game entry state 1, when the step byte 0x0B no longer matches option_flags, an area change is requested, or a step-1 actor no longer matches g_GameContextSeed, arms the restart: byte 0x48 to 2, timer to 8, header.mode to 4." }
+Area_SlideActorUpOrClear = { addr = 0x801F3378, type = "func", source = "Centres the actor and moves its scale at +0x40 down by 0x2000 each frame while counting byte 0x09 down; at 0 frees the actor when g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, else clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
+Actor_CenterOnScreen = { addr = 0x801F3418, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
+Actor_NextStep = { addr = 0x801F3478, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
+Actor_SlideScreenLeft = { addr = 0x801F3524, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
+Actor_SlideScreenX = { addr = 0x801F3574, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
+Area_Update = { addr = 0x801F35D0, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
+Area_SlideHudBannerLeft = { addr = 0x801F3620, type = "func", source = "Moves the HUD banner screen_x 16 pixels left per frame and sets header.step (byte 0x02) to 0 below -47; sets it to 1 when D_801454F2 is not 2; draws HUD record 0x10 at the banner x." }
+Actor_SetScreenBottom = { addr = 0x801F36E8, type = "func", source = "Sets the actor screen_y to 0xF0 and adds 1 to byte 0x03, when D_801454F2 is 0 or byte 0x0B is 0, no message is requested and no script is active." }
+Area_RaiseHudBanner = { addr = 0x801F3768, type = "func", source = "Moves the HUD banner screen_y 10 units up per frame and adds 1 to byte 0x03 below y 201; D_801454F2 with the flag at byte 0x0B, a message request or an active script set byte 0x03 to 3; draws banner record 0x5C at screen_y." }
+Area_CountHudBannerHold = { addr = 0x801F3840, type = "func", source = "Counts the hold timer up to 90 frames and then sets the flag at byte 0x0B; with D_801454F2 set and that flag, a message request or an active script it adds 1 to byte 0x03; draws banner record 0x5C at screen_y." }
+Area_StepHudBannerDown = { addr = 0x801F3940, type = "func", source = "Moves the HUD banner screen_y 10 units down per frame and zeroes byte 0x03 from y 240; without D_801454F2, a message request or an active script it sets byte 0x03 to 1; draws banner record 0x5C at screen_y." }
 Area_DrawHudSprite = { addr = 0x801F39F0, type = "func", source = "Draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; Area_DrawHud calls it with ids 0 to 3 and the WorldMapMarker step." }
 Area_DrawHud = { addr = 0x801F3B18, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }
 Area_DrawGradientDiamond = { addr = 0x801F3EE4, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); Area_DrawHud calls it with its x and y plus 0x18." }
-Area_DrawHudBanner = { addr = 0x801F40DC, type = "func", source = "draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank" }
-Actor_SpawnRandomGroup = { addr = 0x801F41D0, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
-Actor_MoveByVelocity = { addr = 0x801F453C, type = "func", source = "moves the actor by the projected velocity when the tile is classified" }
-Area_StepStreamSetDrawMode = { addr = 0x801F4754, type = "func", source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
-Actor_FacingToward = { addr = 0x801F4F78, type = "func", source = "returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)" }
-Game_RequestMenuOnInput = { addr = 0x801F5578, type = "func", source = "one body shared through overlays/area/Game_RequestMenuOnInput.h" }
-Actor_StopMoving = { addr = 0x801F564C, type = "func", source = "clears the actor velocity words and sets the game overlay byte to 3" }
+Area_DrawHudBanner = { addr = 0x801F40DC, type = "func", source = "Draws the HUD banner when a draw flag is set: banner sprites 4 and 5 at x and x+0x80 and the title text at the offset in the first halfword of the executable text bank." }
+Actor_SpawnRandomGroup = { addr = 0x801F41D0, type = "func", source = "Frees itself when g_SceneState flags_01 bit 0 is set; otherwise, every 0x400 frames (g_FrameCount & 0x3FF is 0), spawns one to three (rand() & 3) actor slots of type 0x16 with header.mode 1, at z = Area_SampleHeight at the party position + 0x400." }
+Actor_MoveByVelocity = { addr = 0x801F453C, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
+Area_StepStreamSetDrawMode = { addr = 0x801F4754, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
+Actor_FacingToward = { addr = 0x801F4F78, type = "func", source = "Returns the eight-way facing code (a g_FacingSteps row) that points from the actor row to the given position: the signs of dx and dy against the row's x and y select 0 to 7, and equal positions give 1 (func_801F4A34 in area104/14, func_801F4F78 in area121/14)." }
+Game_RequestMenuOnInput = { addr = 0x801F5578, type = "func", source = "When the FIELD_INPUT_MENU button is pressed and GAME_FLAG_MENU_LOCK is clear: plays cue EMI_CUE_ID(1, 5), sets g_GameStateIndex to GAME_REQUEST_MENU, clears the actor step and returns 1; otherwise returns 0." }
+Actor_StopMoving = { addr = 0x801F564C, type = "func", source = "Zeroes the actor velocity vx, vy and vz and g_AreaCameraStep and g_AreaCameraHeightStep, and sets g_GameState counter_11C to 3." }
 Area_SetPanelStepOnRun = { addr = 0x801F5734, type = "func", source = "Sets the panel step counter (g_GameState counter_11C) to 4 while the run button (WORLD_INPUT_RUN) is held and the actor's byte 0x0B is under 0x40, and to 3 otherwise." }
-Area_StepRunGauge = { addr = 0x801F5798, type = "func", source = "steps the press-and-hold gauge at g_Task +0x0B between 0 and 0x40 while the re-arm timer at +0x0A is spent: the masked input g_InputMasks[INPUT_SLOT_MOVE] held against g_InputHeld raises it by 1 per frame and a full 0x40 re-arms the timer to 0x1E, releasing lowers it by a level step of 1, 2 or 3, halved per parity when the state byte at +0x02 is set (func_801F5254 in area104/14, func_801F5798 in area121/14)" }
-Area_FinishTurnStep = { addr = 0x801F5E2C, type = "func", source = "stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step" }
-Area_BeginTurnStep = { addr = 0x801F5ECC, type = "func", source = "begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)" }
-Area_RunTurnStep = { addr = 0x801F5FF8, type = "func", source = "runs one frame of a turning step: adds the velocity at +0x14 to the angle at +0x6C (masked to 0xFFF), counts the timer at +0x09 down and, at zero, sets state_01 to 1 and calls Area_FinishTurnStep, else calls the image's per-frame sync; Area_BeginTurnStep calls it" }
+Area_StepRunGauge = { addr = 0x801F5798, type = "func", source = "Steps the run gauge (byte 0x0B of g_Task, 0 to 0x40) once the re-arm timer at byte 0x0A is spent: while g_InputMasks[WORLD_INPUT_RUN] is held in g_InputHeld it adds 1 per frame and at 0x40 re-arms the timer to 0x1E; on release it lowers the gauge by 3, 2 or 1 for levels from 0x31, from 0x21 and below, halved when header.step (byte 0x02) is nonzero." }
+Area_FinishTurnStep = { addr = 0x801F5E2C, type = "func", source = "Stores direction_08 into the last-heading byte D_80145E98 unless a turn to it or to its opposite is refused, then runs the image's step." }
+Area_BeginTurnStep = { addr = 0x801F5ECC, type = "func", source = "Begins one turning step: when direction_08 is within two steps of the stored direction D_80145E98, moves direction_08 one step toward it, sets the turn velocity at +0x14 to -0x40 or +0x40, the 8-frame timer at +0x09 and state_01 to 2, stores the new direction in D_80145E98, runs Area_RunTurnStep once and returns 1, else returns 0; Area_FinishTurnStep calls it for the direction and for its opposite (direction ^ 4)." }
+Area_RunTurnStep = { addr = 0x801F5FF8, type = "func", source = "Runs one frame of a turning step: adds the velocity at +0x14 to the angle at +0x6C (masked to 0xFFF), counts the timer at +0x09 down and, at zero, sets state_01 to 1 and calls Area_FinishTurnStep, else calls the image's per-frame sync; Area_BeginTurnStep calls it." }
 
 ["emi/world03/area123/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world03/area124/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight; one body shared through overlays/area/Area_SpawnWeightedActor.h" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Rolls rand() & 0x3F against eight weights to pick one of eight actor slots, clears header.flags of the others, places the picked actor at one of eight random coordinates with its height from Area_SampleHeight, and sets D_80143F22 to D_80145FB8 - 5." }
 
 ["emi/world03/area125/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
