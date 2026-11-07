@@ -6,9 +6,8 @@
 
 #include "overlays/scenario/scenario.h"
 
-extern u16 g_GameAreaId;
-extern u8  D_80144908[];
-extern u8  D_80144F5E;
+extern u8 D_80144908[];
+extern u8 D_80144F5E;
 
 extern u8 D_80144F5F;
 

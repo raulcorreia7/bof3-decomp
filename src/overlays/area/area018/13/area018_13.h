@@ -6,7 +6,6 @@
 
 #include "overlays/area/world00.h"
 
-extern u16 g_GameAreaId;
 /* D_80181164 */
 extern u8* g_EncounterZoneLists[];
 

@@ -8,30 +8,30 @@
  */
 /* func_801F2FB0 (area147/13), func_801F3020 (area148/13), func_801F3F84 (area170/13) */
 MATCH void Actor_AdvanceOutsidePartyCell(void) {
-    u8* work;
+    Actor* work;
 
-    work = TASK_BYTES;
-    if (FIELD(u8, work, 0x08) != 0) {
-        if (abs(D_80145EC8 - ((((s32)FIELD(s16, work, 0x3A) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
+    work = g_Task;
+    if (work->direction_08 != 0) {
+        if (abs(D_80145EC8 - ((((s32)COORD_INT(work->pos.y) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
             goto advance;
         }
-        if (abs(D_80145EC4 - ((s32)FIELD(s16, work, 0x36) << 16)) <= TO_COORD(2)) {
+        if (abs(D_80145EC4 - ((s32)COORD_INT(work->pos.x) << 16)) <= TO_COORD(2)) {
             return;
         }
-        if (abs(D_80145EC4 - (((s32)FIELD(s16, work, 0x36) + 1) << 16)) <= TO_COORD(2)) {
+        if (abs(D_80145EC4 - (((s32)COORD_INT(work->pos.x) + 1) << 16)) <= TO_COORD(2)) {
             return;
         }
     } else {
-        if (abs(D_80145EC4 - ((((s32)FIELD(s16, work, 0x36) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
+        if (abs(D_80145EC4 - ((((s32)COORD_INT(work->pos.x) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
             goto advance;
         }
-        if (abs(D_80145EC8 - ((s32)FIELD(s16, work, 0x3A) << 16)) <= TO_COORD(2)) {
+        if (abs(D_80145EC8 - ((s32)COORD_INT(work->pos.y) << 16)) <= TO_COORD(2)) {
             return;
         }
-        if (abs(D_80145EC8 - (((s32)FIELD(s16, work, 0x3A) + 1) << 16)) <= TO_COORD(2)) {
+        if (abs(D_80145EC8 - (((s32)COORD_INT(work->pos.y) + 1) << 16)) <= TO_COORD(2)) {
             return;
         }
     }
 advance:
-    FIELD(u8, work, 0x02)++;
+    work->header.step++;
 }

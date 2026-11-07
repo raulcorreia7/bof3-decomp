@@ -10,8 +10,8 @@ MATCH void func_801C2E34(u8 index) {
 
     table = D_80195FF8;
     entry = (u8*)table.entries + index * 3;
-    Char_LoseHP(entry[0], g_GameState->slot_index_79);
-    Char_SpendAP(entry[1], g_GameState->slot_index_79);
+    Char_LoseHP(entry[0], g_GameState->leader_id);
+    Char_SpendAP(entry[1], g_GameState->leader_id);
     if (entry[2] & 0x80) {
         g_GameState->flags_118 = 0x0A;
     }

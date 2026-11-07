@@ -10,7 +10,6 @@
 #define SCRATCH_ROW_OFFSET 0x00
 
 extern u16      D_800E4C1E;
-extern u16      g_GameAreaId;
 extern u8       g_VitalItemIds;
 extern u8       D_80146874;
 extern u8       D_80146875;

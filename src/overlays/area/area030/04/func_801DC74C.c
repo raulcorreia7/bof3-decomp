@@ -11,7 +11,7 @@ MATCH void func_801DC74C(void) {
         func_80153DE8();
         func_801E0A30();
         UI_SetMode(3);
-        if (g_GameState->slot_index_79 == 0) {
+        if (g_GameState->leader_id == CHAR_ID_RYU_YOUNG) {
             Actor_BeginScript(0xA, 2);
         } else {
             Actor_SelectScript(0xB);

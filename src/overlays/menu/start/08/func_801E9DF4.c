@@ -3,7 +3,7 @@
 /* Panel handler table and draw helpers owned by this overlay. */
 
 MATCH void func_801E9DF4(void) {
-    D_801ED43C[g_MenuCurrentPanel->state]();
+    g_MenuStartPanel11StateFuncs[g_MenuCurrentPanel->state]();
     func_801DCDB8(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A,
                   g_MenuCurrentPanel->unk_0C, ((s16*)g_MenuCurrentPanel)[8]);
     if (g_MenuCurrentPanel->unk_0C != 0) {

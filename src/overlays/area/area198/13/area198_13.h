@@ -12,7 +12,6 @@
 /* The object pointer whose palette field this entry updates. */
 
 /* The current map row in the field-loader table. */
-extern u16      g_GameAreaId;
 /* The scratchpad work pointer the palette pass reads. */
 /* The state handler banks the step dispatchers index. */
 extern u8       D_801F3DFC[];

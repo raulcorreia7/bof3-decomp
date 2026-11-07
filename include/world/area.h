@@ -171,7 +171,7 @@ ASSERT_OFFSET(AreaMapBundle, height_off4_2A, 0x2A);
 extern AreaMapBundle g_AreaMapBundle;
 
 /* Word bits of D_80146258, the world input/scheduler lock word. Bit 3 skips
- * Area_AdvanceScroll; bit 6 blocks the run/accept action; bit 8 is set while a
+ * Area_AdvanceScroll; bit 6 blocks the menu request; bit 8 is set while a
  * scenario script owns the field. */
 typedef enum GameFlags {
     GAME_FLAG_SCROLL_LOCK   = 1 << 3,

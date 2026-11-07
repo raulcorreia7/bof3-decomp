@@ -1,18 +1,18 @@
 #include "shop_00.h"
 
-void (*D_801E5DB4[3])() = {
+void (*g_ShopPanel0StateFuncs[SHOP_PANEL0_STATE_COUNT])() = {
     func_801E2800,
     func_801E2948,
     func_801E2988,
 };
 
-Callback D_801E5DC0[3] = {
+Callback g_ShopPanel2StateFuncs[SHOP_PANEL2_STATE_COUNT] = {
     func_801E2800,
     func_801E2A30,
     func_801E2A70,
 };
 
-Callback D_801E5DCC[3] = {
+Callback g_ShopPanel1StateFuncs[SHOP_PANEL1_STATE_COUNT] = {
     func_801E2800,
     func_801E2B14,
     func_801E2B54,
@@ -20,7 +20,7 @@ Callback D_801E5DCC[3] = {
 
 u16 D_801E5DD8[2] = { 0x0070, 0x0000 };
 
-Callback D_801E5DDC[5] = {
+Callback g_ShopPanel5StateFuncs[SHOP_PANEL5_STATE_COUNT] = {
     func_801E2800,
     func_801E2C9C,
     func_801E2CDC,
@@ -28,13 +28,13 @@ Callback D_801E5DDC[5] = {
     func_801E2D5C,
 };
 
-Callback D_801E5DF0[3] = {
+Callback g_ShopPanel6StateFuncs[SHOP_PANEL6_STATE_COUNT] = {
     func_801E2800,
     func_801E2E30,
     func_801E2E70,
 };
 
-Callback D_801E5DFC[4] = {
+Callback g_ShopPanel7StateFuncs[SHOP_PANEL7_STATE_COUNT] = {
     func_801E2800,
     func_801E31C4,
     func_801E3204,
@@ -51,7 +51,7 @@ u8 D_801E5E1C[0x10] = {
     0x16, 0x00, 0x00, 0x00,
 };
 
-Callback D_801E5E2C[3] = {
+Callback g_ShopPanel9StateFuncs[SHOP_PANEL9_STATE_COUNT] = {
     func_801E2800,
     func_801E3774,
     func_801E37B4,
@@ -62,7 +62,7 @@ u8 D_801E5E38[0x10] = {
     0x16, 0x00, 0x00, 0x00,
 };
 
-Callback D_801E5E48[5] = {
+Callback g_ShopPanel11StateFuncs[SHOP_PANEL11_STATE_COUNT] = {
     func_801E2800,
     func_801E3BF8,
     func_801E3C38,
@@ -70,7 +70,7 @@ Callback D_801E5E48[5] = {
     func_801E3CB8,
 };
 
-Callback D_801E5E5C[5] = {
+Callback g_ShopPanel12StateFuncs[SHOP_PANEL12_STATE_COUNT] = {
     func_801E2800,
     func_801E3D4C,
     func_801E3D8C,
@@ -78,7 +78,7 @@ Callback D_801E5E5C[5] = {
     func_801E3E0C,
 };
 
-Callback D_801E5E70[3] = {
+Callback g_ShopPanel13StateFuncs[SHOP_PANEL13_STATE_COUNT] = {
     func_801E2800,
     func_801E3EB4,
     func_801E3EF4,
@@ -124,26 +124,26 @@ static struct {
     { 1, 2, 3, 0, 0, 0, 0 },
 };
 
-Callback D_801E5F14[4] = {
+Callback g_ShopPanel15StateFuncs[SHOP_PANEL15_STATE_COUNT] = {
     func_801E2800,
     func_801E4278,
     func_801E42B8,
     func_801E42F8,
 };
 
-Callback D_801E5F24[3] = {
+Callback g_ShopPanel16StateFuncs[SHOP_PANEL16_STATE_COUNT] = {
     func_801E2800,
     func_801E438C,
     func_801E43CC,
 };
 
-Callback D_801E5F30[3] = {
+Callback g_ShopPanel17StateFuncs[SHOP_PANEL17_STATE_COUNT] = {
     func_801E2800,
     func_801E4460,
     func_801E44A0,
 };
 
-Callback D_801E5F3C[3] = {
+Callback g_ShopPanel18StateFuncs[SHOP_PANEL18_STATE_COUNT] = {
     func_801E2800,
     func_801E4540,
     func_801E4580,
