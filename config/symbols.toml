@@ -2901,6 +2901,7 @@ Fishing_LureInRange = { addr = 0x801E0680, type = "func", source = "true when th
 Fishing_CatchScore = { addr = 0x801E0ABC, type = "func", source = "score of one fish catch: the species row's maximum score (+0x12) scaled by length over the species maximum length (+0x0F), full score from the maximum length up" }
 Fishing_TotalScore = { addr = 0x801E0B6C, type = "func", source = "the player's fishing points: sums Fishing_CatchScore over the 32 g_FishBestCatch lengths" }
 Fishing_DrawRank = { addr = 0x801E1320, type = "func", source = "draws the rank panel: picks the rank row of g_FishingRankIcons by the total fishing points against the rank score bounds at 0x801D0C70 and prints the points in five digits" }
+Fishing_FishStacksFull = { addr = 0x801E1C10, type = "func", source = "reports whether every fish species (ITEM_JELLYFISH through ITEM_MACKEREL) is held at the 99-item stack limit; Fishing_ChooseAction diverts to sub step 7 once before the cast while it is true" }
 g_FishingCastGaugeStates = { addr = 0x801E1D10, source = "cast power gauge steps: idle, start, sweep, label" }
 g_FishingLureStates = { addr = 0x801E1D20, source = "lure actor steps: idle, cast, fly, settle, float, hooked" }
 g_FishingReelGaugeStates = { addr = 0x801E1D80, source = "reel gauge steps: idle, start, update" }
@@ -2915,6 +2916,7 @@ g_FishingHookedStates = { addr = 0x801E2268, source = "hooked steps: start, bite
 g_FishModes = { addr = 0x801E2314, source = "handlers of a pond fish row by its mode byte (0x01): appear, swim, and the later modes" }
 g_FishSpecies = { addr = 0x801E2AC8, source = "fish species rows of 0x24 bytes indexed by fish id: scene id (+0), stamina (+0x0E), maximum length (+0x0F) and maximum score (+0x12); the item id of a catch is the fish id plus 0x38" }
 g_FishSpawnCounts = { addr = 0x801E2DF4, source = "how many fish of each species Fishing_SpawnFish puts in a pond: 0x17 bytes per pond, indexed by g_GameContextKind" }
+g_FishingFullNoticeShown = { addr = 0x801E3204, type = "u8", source = "set when Fishing_ChooseAction has diverted to sub step 7 because the fish stacks are full; cleared when they are not and by the entry reset" }
 g_FishingHookedFish = { addr = 0x801E3208, source = "pond row index of the fish on the line, 0xFF while none is hooked" }
 g_FishingRodRow = { addr = 0x801E320C, source = "the equipped rod's row of the rod table, set by Fishing_SelectGear" }
 g_FishingLureRow = { addr = 0x801E3210, source = "the equipped lure's row of the lure table, set by Fishing_SelectGear" }

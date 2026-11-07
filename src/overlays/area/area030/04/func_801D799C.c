@@ -14,7 +14,7 @@ MATCH void func_801D799C(s16 x, s16 y, u8 height, u8 style) {
     tpage       = getTPage(0, 0, D_801E218C[style].tpage, 256);
     prim->tpage = tpage;
 
-    prim->clut = 0x7887;
+    prim->clut = getClut(112, 482);
     prim->x0   = x;
     x1         = x + D_801E218C[style].width;
     prim->x1   = x1;

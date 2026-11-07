@@ -38,6 +38,9 @@ typedef enum ArmorType {
 /* The armor type that fits equipment slot EQUIP_SLOT_SHIELD..EQUIP_SLOT_ARMOR. */
 #define ARMOR_TYPE_OF_SLOT(slot) ((slot) + 1)
 
+/* The most of one item an inventory slot holds. */
+#define ITEM_STACK_MAX           99
+
 /* The inventory category code Item_GetRecord resolves a record from. */
 typedef enum ItemCategory {
     ITEM_CAT_ITEM      = 0,
