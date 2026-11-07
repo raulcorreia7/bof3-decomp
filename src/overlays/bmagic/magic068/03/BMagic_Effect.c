@@ -69,6 +69,7 @@ MATCH void func_801EF884(void) {
     }
 }
 
+/* Blocker: retail stores header.step once after the join (both arms compute it in v0 and share one sb at 0x801EF9BC); a per-arm header.step++/-- writes twice. Candidate also reloads g_Task before each SND call. */
 INCLUDE_ASM(func_801EF908);
 
 MATCH void func_801EF9D0(void) {
