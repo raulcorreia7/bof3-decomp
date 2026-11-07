@@ -32,11 +32,11 @@ MATCH void func_801E1494(void) {
         }
     }
     work = g_GameState;
-    if (work->turn.target_flags & 1) {
+    if (work->turn.target_flags & BATTLE_HIT_HP) {
         func_800AAC88(work->turn.hp_change, g_Task->slot);
         work = g_GameState;
     }
-    if (work->turn.target_flags & 2) {
+    if (work->turn.target_flags & BATTLE_HIT_AP) {
         func_800AAEBC(work->turn.ap_change, g_Task->slot);
     }
     func_801DEDE4();

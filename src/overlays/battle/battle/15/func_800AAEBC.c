@@ -28,13 +28,13 @@ MATCH void func_800AAEBC(s16 target_index, u8 battler_index) {
         g_BattleEffects[action_slot].unk_27               = 2u;
     }
 
-    if (!(target_flags & 0x2u)) {
+    if (!(target_flags & BATTLE_HIT_AP)) {
         g_BattleEffects[action_slot].unk_07 = 4u;
         return;
     }
-    if (target_flags & 0x20u) {
+    if (target_flags & BATTLE_HIT_AP_LANDED) {
         g_BattleEffects[action_slot].unk_07 = 0u;
-    } else if (target_flags & 0x8u) {
+    } else if (target_flags & BATTLE_HIT_AP_MAX) {
         g_BattleEffects[action_slot].unk_27 = 1u;
         g_BattleEffects[action_slot].unk_07 = 2u;
         return;

@@ -28,7 +28,7 @@ MATCH void func_801D409C(void) {
             action_ref = g_BattleAction;
             mask       = D_801CA71C[action_ref->unk_02].mask;
             if (mask & 0x200) {
-                if (!(g_BattlePartyBattlers[*state - 1].turn.damage_flags.value & 8)) {
+                if (!(g_BattlePartyBattlers[*state - 1].turn.damage_flags.value & COMBATANT_FLAG_UNK_3)) {
                     continue;
                 }
                 g_BattlePartyBattlers[*state - 1].turn.damage_flags.value &= clear_flag;
@@ -42,7 +42,7 @@ MATCH void func_801D409C(void) {
                 BattleStageSelectionRingRecord(1, 0, Resource_GetText(BATTLE_TEXT_LEARNED));
                 return;
             }
-            if (g_BattlePartyBattlers[*state - 1].turn.damage_flags.value & 8) {
+            if (g_BattlePartyBattlers[*state - 1].turn.damage_flags.value & COMBATANT_FLAG_UNK_3) {
                 g_BattlePartyBattlers[*state - 1].turn.damage_flags.value &= clear_flag;
                 BattleStageSelectionRingRecord(1, 0, Resource_GetText(BATTLE_TEXT_CANT_LEARN));
                 return;

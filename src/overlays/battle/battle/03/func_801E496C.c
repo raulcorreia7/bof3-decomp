@@ -19,7 +19,7 @@ MATCH void func_801E496C(void) {
             g_BattleCurrentEnemy->hp = cap;
         }
     }
-    if ((g_BattleCurrentEnemy->turn.target_flags & 1) != 0) {
+    if ((g_BattleCurrentEnemy->turn.target_flags & BATTLE_HIT_HP) != 0) {
         func_800AAC88(g_BattleCurrentEnemy->turn.hp_change, g_Task->slot);
     }
     func_801E30F8();

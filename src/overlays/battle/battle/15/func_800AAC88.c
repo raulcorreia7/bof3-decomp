@@ -28,12 +28,12 @@ MATCH void func_800AAC88(s16 amount, u8 battler_index) {
         D_801EC357[action_slot * BATTLE_EFFECT_STRIDE]           = 0u;
     }
 
-    if (!(target_flags & 0x1u)) {
+    if (!(target_flags & BATTLE_HIT_HP)) {
         D_801EC337[action_slot * BATTLE_EFFECT_STRIDE] = 4u;
         return;
     }
-    if (!(target_flags & 0x10u)) {
-        if (target_flags & 0x4u) {
+    if (!(target_flags & BATTLE_HIT_HP_LANDED)) {
+        if (target_flags & BATTLE_HIT_HP_MAX) {
             D_801EC357[action_slot * BATTLE_EFFECT_STRIDE] = 6u;
             D_801EC337[action_slot * BATTLE_EFFECT_STRIDE] = 2u;
             return;
@@ -43,7 +43,7 @@ MATCH void func_800AAC88(s16 amount, u8 battler_index) {
         D_801EC337[action_slot * BATTLE_EFFECT_STRIDE] = 0u;
         return;
     }
-    if (!(target_flags & 0x10u)) {
+    if (!(target_flags & BATTLE_HIT_HP_LANDED)) {
         D_801EC337[action_slot * BATTLE_EFFECT_STRIDE] = 3u;
         return;
     }

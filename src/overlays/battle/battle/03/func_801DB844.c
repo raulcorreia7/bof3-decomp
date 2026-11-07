@@ -22,7 +22,9 @@ MATCH u8 func_801DB844(u32 battler_index) {
             (g_BattlePartyBattlers[index].turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u) {
             return false;
         }
-        if ((g_BattlePartyBattlers[index].turn.action_flags.value & 0x14001u) != 0u) {
+        if ((g_BattlePartyBattlers[index].turn.action_flags.value &
+             (COMBATANT_FLAG_DRAGON_FORM_QUEUED | COMBATANT_FLAG_CHARGING | COMBATANT_FLAG_DRAGON_FORM_BERSERK)) !=
+            0u) {
             return false;
         }
         group = 2u;
@@ -35,7 +37,8 @@ MATCH u8 func_801DB844(u32 battler_index) {
         if ((g_BattleEnemyBattlers[index].header.flags & 1u) == 0u) {
             return false;
         }
-        if ((g_BattleEnemyBattlers[index].status & 0x4164u) != 0u) {
+        if ((g_BattleEnemyBattlers[index].status &
+             (STATUS_PARALYZED | STATUS_CONFUSED | STATUS_SLEEPING | STATUS_UNK_8 | STATUS_KO)) != 0u) {
             return false;
         }
         if (g_BattleActionLock != 0u &&
