@@ -13,7 +13,7 @@ static char s_gap_801D0C34[4] = "%8d";
 static char s_gap_801D0C38[12] = "--------";
 char g_MenuZennyFormat[4] = "%7d";
 char g_MenuNextExpBlank[8] = "-------";
-FormationLayout g_BateFormations[FORMATION_COUNT] = {
+FormationLayout g_MenuFormations[FORMATION_COUNT] = {
     {"Normal", 6, {{0, 0}, {0, 0}, {0, 0}}},
     {"Normal", 6, {{-8, -8}, {8, -8}, {0, 0}}},
     {"Attack", 6, {{0, -8}, {0, 8}, {0, 0}}},
@@ -25,7 +25,7 @@ FormationLayout g_BateFormations[FORMATION_COUNT] = {
     {"Magic", 5, {{-12, -4}, {12, -4}, {0, 4}}},
     {"Refuge", 6, {{0, -12}, {-8, 0}, {8, 12}}},
 };
-u8 D_801D0D18[4] = {0, 1, 2};
+FormationOrder g_MenuFormationOrder = {{0, 1, 2}};
 char g_MenuClockFormat[12] = "%02d";
 static u8 s_gap_801D0D28[52] = {
     0xD8, 0x5F, 0x1D, 0x80, 0xE0, 0x5F, 0x1D, 0x80, 0xE8, 0x5F, 0x1D, 0x80, 0xE8, 0x5F, 0x1D, 0x80,

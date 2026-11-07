@@ -64,6 +64,8 @@ extern AreaDrawState g_AreaDrawState;
 #define MENU_STAT_WINDOW_HEIGHT       45
 #define MENU_SAVE_SLOT_WINDOW_WIDTH   200
 #define MENU_SAVE_SLOT_WINDOW_HEIGHT  48
+#define MENU_FORMATION_WINDOW_WIDTH   69
+#define MENU_FORMATION_WINDOW_HEIGHT  48
 
 /* The requested message id: 0xFFFF means no message. ResourceRequestMessage
  * stores a message index in the slot and Message_StartRequest reads the slot as that
