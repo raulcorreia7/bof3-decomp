@@ -22,6 +22,6 @@ void func_801F3050(void);
 
 s32 func_801F3C44(s32 x, s32 y);
 
-void func_801F3950(s32 arg0, s32 arg1);
+void func_801F3950(void* arg0, s32 arg1);
 
 #endif
