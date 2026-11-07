@@ -16,22 +16,22 @@ MATCH void func_801BD5A4(void) {
         case 1:
             g_Task->param.unk_0B = Actor_FindFreeSlot();
             if (g_Task->param.unk_0B != GAME_NONE) {
-                g_ActorSlots[g_Task->param.unk_0B].header.flags = 1;
-                g_ActorSlots[g_Task->param.unk_0B].type         = 6;
-                g_ActorSlots[g_Task->param.unk_0B].unk_06       = 1;
-                tail                                            = g_Task;
-                ids                                             = (u8*)g_GameState;
-                g_ActorSlots[tail->param.unk_0B].scene_step     = 0;
-                g_ActorSlots[tail->param.unk_0B].selection      = D_80181B28[ids[0x79]];
-                g_ActorSlots[tail->param.unk_0B].unk_2E         = tail->screen_x;
-                g_ActorSlots[tail->param.unk_0B].unk_30         = tail->screen_y;
-                tail->header.step                               = 2;
+                g_ActorSlots[g_Task->param.actor_slot].header.flags = 1;
+                g_ActorSlots[g_Task->param.actor_slot].type         = 6;
+                g_ActorSlots[g_Task->param.actor_slot].unk_06       = 1;
+                tail                                                = g_Task;
+                ids                                                 = (u8*)g_GameState;
+                g_ActorSlots[tail->param.actor_slot].scene_step     = 0;
+                g_ActorSlots[tail->param.actor_slot].selection      = D_80181B28[ids[0x79]];
+                g_ActorSlots[tail->param.actor_slot].unk_2E         = tail->screen_x;
+                g_ActorSlots[tail->param.actor_slot].unk_30         = tail->screen_y;
+                tail->header.step                                   = 2;
             } else {
                 ACTOR_CLEAR_STEP();
             }
             break;
         case 2:
-            if (g_ActorSlots[g_Task->param.unk_0B].header.flags == 0) {
+            if (g_ActorSlots[g_Task->param.actor_slot].header.flags == 0) {
                 ACTOR_CLEAR_STEP();
             }
             break;
