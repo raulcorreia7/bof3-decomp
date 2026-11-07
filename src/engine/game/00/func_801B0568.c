@@ -158,7 +158,7 @@ MATCH void func_801B0568(void) {
             g_GameState->counter_11C.u8_value = 3U;
             Actor_RequestScript(g_Task->direction_08);
             g_GameState->mode_12B.s8_value = 3;
-            g_Task->header.mode            = 8;
+            g_Task->header.mode            = FIELD_TASK_MODE_CLIMB;
             tmp8                           = g_Task;
             tmp3                           = tmp8->direction_08;
             if ((tmp3 == 1) || (tmp3 == 7)) {
