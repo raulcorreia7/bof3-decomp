@@ -31,7 +31,7 @@ Totals from `tools/quality.py`, which rewrites the table below on every `pre-pus
 | Subsystem        | Matched functions | `addr` | `names` | `casts` | `harmful` | `twins` | `pasted` |
 | ---------------- | ----------------: | -----: | ------: | ------: | --------: | ------: | -------: |
 | Executable       |               450 |    135 |    1765 |     190 |        45 |       0 |        0 |
-| Game tables      |               643 |    570 |    2012 |     153 |        50 |       0 |        0 |
+| Game tables      |               643 |    570 |    2004 |     153 |        50 |       0 |        0 |
 | Logo             |                11 |      0 |      54 |       0 |         0 |       0 |        0 |
 | Shared bodies    |                20 |      0 |      18 |       0 |         0 |       0 |        0 |
 | Area             |              2315 |   2197 |    3052 |     177 |        31 |      21 |        0 |
@@ -43,6 +43,6 @@ Totals from `tools/quality.py`, which rewrites the table below on every `pre-pus
 | Player character |               263 |    188 |     260 |       0 |         5 |       0 |        0 |
 | Scenario         |               833 |    783 |     889 |      16 |         4 |       6 |        0 |
 | Title            |                20 |      0 |      12 |       3 |         0 |       0 |        0 |
-| Total            |              7990 |   6921 |   16118 |     838 |       237 |      39 |        0 |
+| Total            |              7990 |   6921 |   16110 |     838 |       237 |      39 |        0 |
 
 <!-- quality:end -->
