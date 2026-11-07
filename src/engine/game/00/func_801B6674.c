@@ -16,7 +16,7 @@ NON_MATCHING s32 func_801B6674(void) {
     if (!(status & 1)) {
         return 0;
     }
-    if (g_InputPressed & g_InputMasks) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_ACTION]) {
         if ((temp & BYTE_MASK) != 0xAE) {
             if ((temp & 0xF0) != 0xA0) {
                 if ((g_AreaWalkFlags & AREA_WALK_TRANSITION) == 0) {
@@ -59,7 +59,7 @@ NON_MATCHING s32 func_801B6674(void) {
         Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
         return 1;
     }
-    if ((g_InputPressed & D_80145AC0) && ((u8)(temp + 0x60) < 2)) {
+    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_6]) && ((u8)(temp + 0x60) < 2)) {
         g_SceneEventMode = 0x1B;
         if (!(status & 0x20)) {
             func_801B5BDC(g_Task->route_index_08);

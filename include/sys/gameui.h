@@ -144,26 +144,37 @@ extern u8 g_GameRequestFlags;
 #endif
 /* Not volatile: the qualifier changes the generated order in the scena00 drawer. */
 /* D_80143C40 */
-extern u16          g_UiWindowEffectBusy;
+extern u16 g_UiWindowEffectBusy;
 /* D_80143C90 */
-extern u16          g_UiLocalMode;
+extern u16 g_UiLocalMode;
 /* D_80143F1E */
-extern u8           g_GameEntryMode;
+extern u8  g_GameEntryMode;
 /* D_80145024 */
 /* D_80145024 */
-extern u8           g_EmiLoadedCharacterIndex;
-extern u8           D_80145025;
+extern u8  g_EmiLoadedCharacterIndex;
+extern u8  D_80145025;
 /* D_8014502C */
-extern u32          g_BattleCount;
-extern u16          D_80145A7C;
+extern u32 g_BattleCount;
+extern u16 D_80145A7C;
 /* D_80145AA4 */
-extern u16          g_InputHeld;
-/* D_80145AB4 */
-extern u16          g_InputMasks;
-extern u16          D_80145AB6;
-extern u16          D_80145AB8;
-extern u16          D_80145ABC;
-extern u16          D_80145AC0;
+extern u16 g_InputHeld;
+
+/* Pad masks of the remappable buttons, indexed by InputSlot (the defaults are
+ * D_8017F56C). */
+typedef enum InputSlot {
+    INPUT_SLOT_ACTION,
+    INPUT_SLOT_INTERACT,
+    INPUT_SLOT_MENU,
+    INPUT_SLOT_LOOK,
+    INPUT_SLOT_4,
+    INPUT_SLOT_5,
+    INPUT_SLOT_6,
+    INPUT_SLOT_CONFIRM,
+    INPUT_SLOT_CANCEL,
+    INPUT_SLOT_COUNT
+} InputSlot;
+
+extern u16          g_InputMasks[INPUT_SLOT_COUNT];
 extern u16          D_80145ACE;
 extern u8           D_80145AD0;
 extern u8           D_80145AE5;

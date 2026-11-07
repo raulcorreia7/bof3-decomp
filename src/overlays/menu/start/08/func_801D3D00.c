@@ -64,7 +64,7 @@ MATCH void func_801D3D00(void) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
     if (panel->confirm_gate == 0) {
-        if (g_InputPressed & D_80145AC2) {
+        if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
             if (panel->drawn_cursor == GAME_NONE) {
                 SND_PlayCue(EMI_CUE_ID(1, 3));
                 if (D_801C893C[panel->group][panel->group_cursor] != 0) {
@@ -80,7 +80,7 @@ MATCH void func_801D3D00(void) {
             Menu_SwapBytes(&D_801C8950[panel->group][panel->drawn_cursor],
                            &D_801C8950[panel->group][panel->group_cursor]);
             panel->drawn_cursor = 0xFF;
-        } else if (g_InputPressed & D_80145AC4) {
+        } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
             SND_PlayCue(EMI_CUE_ID(1, 6));
             if (panel->drawn_cursor == GAME_NONE) {
                 state_counter  = &D_80148652;

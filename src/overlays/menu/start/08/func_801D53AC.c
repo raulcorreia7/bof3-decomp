@@ -33,7 +33,7 @@ NON_MATCHING void func_801D53AC(void) {
     if ((s8)old != (s8)D_801ED620) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         u8* step;
 
         SND_PlayCue(EMI_CUE_ID(1, 4));
@@ -43,7 +43,7 @@ NON_MATCHING void func_801D53AC(void) {
         *step += 1;
         return;
     }
-    if (g_InputPressed & D_80145AC4) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         u8* step;
 
         SND_PlayCue(EMI_CUE_ID(1, 2));

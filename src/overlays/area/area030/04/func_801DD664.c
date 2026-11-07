@@ -38,7 +38,7 @@ MATCH void func_801DD664(void) {
         return;
     }
 
-    if ((g_InputPressed & D_80145AC4) != 0) {
+    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         FISHING_STATE->flag_04      = 0;
         FISHING_STATE->sub_index_03 = (FISHING_STATE->sub_index_03 - 1);

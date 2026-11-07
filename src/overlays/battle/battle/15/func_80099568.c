@@ -29,7 +29,7 @@ MATCH void func_80099568(void) {
     input                                    = &g_InputPressed;
     trigger                                  = INPUT_REPEATED(*input, (PADLup | PADLdown));
     held                                     = *input;
-    if ((held & D_80145AC4) != 0u) {
+    if ((held & g_InputMasks[INPUT_SLOT_CANCEL]) != 0u) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         g_BattlePanelMode     = 1;
         g_BattleChoicePhase   = 3;
@@ -52,7 +52,7 @@ MATCH void func_80099568(void) {
         SND_PlayCue(EMI_CUE_ID(1, 7));
         return;
     }
-    if ((held & D_80145AC2) != 0u) {
+    if ((held & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0u) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         cursor_value       = D_8014859E;
         D_8014859C         = 0;

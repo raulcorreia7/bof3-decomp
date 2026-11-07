@@ -22,7 +22,7 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
     trig = INPUT_REPEATED(*padp, (PADLup | PADLdown));
     pad  = *padp;
 
-    if (pad & D_80145AC2) {
+    if (pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         item = D_80145FCC.bytes[g_MasterMenuCursor * BATTLE_PARTY_STRIDE];
         if (g_Characters[item].master_id == g_SceneEventSelection) {
             if ((confirm & BYTE_MASK) == 0) {
@@ -39,7 +39,7 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
         goto after_input; /* stock cue queued: skip the cursor/selection block */
     play_stop:
         SND_PlayCue(EMI_CUE_ID(1, 7));
-    } else if (pad & D_80145AC4) {
+    } else if (pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
         g_MasterBannerLock = 1;
         SND_PlayCue(EMI_CUE_ID(1, 2));
         SND_PlayCue(EMI_CUE_ID(1, 6));
