@@ -16,5 +16,5 @@ segments:
     vram: 0x801D1750
     align: 4
     subsegments:
-      - [0xB50, bin, g_Commu04States]
+      - [0xB50, .data, g_Commu04States]
   - [0xB78]

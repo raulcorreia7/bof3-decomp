@@ -7,6 +7,6 @@ MATCH void Menu_CursorFramePanel(void) {
 
     panel = g_MenuCurrentPanel;
     bytes = (u8*)panel;
-    Menu_DrawCursorFrame(panel->pos.x, panel->pos.y, D_801ED42C[bytes[0xA] * 2], D_801ED42E[bytes[0xA] * 2], bytes[0xB],
-                         6);
+    Menu_DrawCursorFrame(panel->pos.x, panel->pos.y, g_StartCursorFrames[bytes[0xA]].width,
+                         g_StartCursorFrames[bytes[0xA]].height, bytes[0xB], 6);
 }
