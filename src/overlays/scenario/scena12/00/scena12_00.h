@@ -31,5 +31,6 @@ extern u16  g_GameAreaId;
 extern char D_801F6C04[];
 
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style);
+void func_801F75EC(void);
 
 #endif

@@ -20,7 +20,7 @@ MATCH s32 func_801C5474(void) {
     func_801C57B4();
     state = g_Task;
     if (state->unk_09 == state->unk_0A) {
-        GFX_StagePalette(((state->unk_05 << 6) + MEM_PTR(u8, 0x80035600u)), 0);
+        GFX_StagePalette(((state->unk_05 << 6) + GAME_PALETTE_STAGE), 0);
     }
     func_8014D978();
     return 0;
