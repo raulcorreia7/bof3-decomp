@@ -193,13 +193,6 @@ ASSERT_OFFSET(SpinQuad, rotation, 0x10);
 ASSERT_OFFSET(SpinQuad, corners, 0x18);
 ASSERT_SIZE(SpinQuad, 0x38);
 
-typedef struct RoutePoint {
-    s16 unk_00;
-    s16 pad_02;
-    s16 unk_04;
-    s16 pad_06;
-} RoutePoint;
-
 /* Per-slot column views over the 0x98-byte work records: the trailing padding
  * carries the record stride so each column keeps its own field base. */
 typedef struct GameSlotWordColumn {
@@ -270,15 +263,13 @@ extern s16                D_80143F16; /* 0x80143F16; signed high halfword of the
 extern s16                D_80143F1A; /* 0x80143F1A */
 extern volatile u8        g_GameRequestKind;
 extern s16                D_80143F22;
+extern s16                D_80143F26; /* integer half of g_EncounterOriginX */
+extern s16                D_80143F2A; /* integer half of g_EncounterOriginY */
 /* Scene step byte, countdown halfword and the slot index cached in the
  * scratchpad byte at 0x1F800000. The read-modify-write sites go through a
  * pointer, which is the shape this target's exact siblings use; plain stores
  * keep the scalar spelling.
  */
-extern s16                D_80143F26;
-extern s16                D_80143F2A;
-extern RoutePoint         D_80143F2E[]; /* 0x80143F2E */
-extern s16                D_80143F32;
 extern u8                 D_80143F49;
 extern volatile u8        D_80143F4A;
 extern volatile u8        D_80143F4B; /* 0x80143F4B */
