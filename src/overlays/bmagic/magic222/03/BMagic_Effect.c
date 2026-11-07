@@ -126,7 +126,24 @@ MATCH void func_801EFF7C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0070);
+MATCH void func_801F0070(void) {
+    s16* angle_cell;
+    s32  phase;
+    u8   count;
+
+    angle_cell = &D_1F800004;
+    phase      = g_Task->param.unk_0B;
+    g_Task->unk_0C += 1;
+    *angle_cell         = phase << 9;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(phase << 9)) * g_Task->unk_0C;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_Task->unk_0C;
+    count               = g_Task->timer - 1;
+    g_Task->timer       = count;
+    if (count == 0) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 MATCH void Effect_SetActorMatrix_801F0168(void) {
     SVECTOR pos;

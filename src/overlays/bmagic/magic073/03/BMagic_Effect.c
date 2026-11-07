@@ -96,4 +96,24 @@ MATCH void func_801F0454(void) {
     D_801F21F0->unk_04       = 0;
 }
 
-INCLUDE_ASM(func_801F04A4);
+MATCH u8 func_801F04A4(void) {
+    s32 i;
+    s32 count;
+
+    count = 0;
+    i     = 0;
+    do {
+        if (!(func_801DB524((i + 3) & 0xFF) & 0xFF) && g_BattleEnemyBattlers[(i & 0xFF) + 3].header.mode == 6) {
+            count++;
+        }
+        i++;
+    } while ((u32)(i & 0xFF) < 8);
+    i = 0;
+    do {
+        if (!(func_801DB524(i & 0xFF) & 0xFF) && g_BattlePartyBattlers[i & 0xFF].header.mode == 6) {
+            count++;
+        }
+        i++;
+    } while ((u32)(i & 0xFF) < 3);
+    return count;
+}

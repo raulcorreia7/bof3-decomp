@@ -42,8 +42,28 @@ MATCH void func_801EF080(void) {
 
 INCLUDE_ASM(func_801EF188);
 
-/* exact body (magic045 func_801EF2B0 shape + func_800AF764(); func_801EF79C(param.unk_0B, 1)) blocked: bmagic.h declares func_801EF79C(void), this image's takes (u8, s32) */
-INCLUDE_ASM(func_801EF3C4);
+MATCH void func_801EF3C4(void) {
+    s32           angle;
+    s32           dz;
+    u8            count;
+    PartyBattler* task;
+
+    g_Task->timer += 1;
+    g_Task->pos.x.fixed += (rsin(g_Task->unk_0C) << 13) >> 12;
+    angle = (rcos(g_Task->unk_0C) << 13) >> 12;
+    task  = g_Task;
+    task->pos.y.fixed += angle;
+    count        = task->unk_09 - 1;
+    task->unk_09 = count;
+    dz           = task->unk_14 + task->unk_20;
+    task->unk_14 = dz;
+    task->pos.z.part.integer += dz;
+    if (count == 0) {
+        g_Task->header.step++;
+    }
+    func_800AF764();
+    func_801EF79C(g_Task->param.unk_0B, 1);
+}
 
 MATCH void func_801EF4B8(void) {
     s32 mode;
