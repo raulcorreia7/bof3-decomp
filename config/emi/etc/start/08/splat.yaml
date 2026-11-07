@@ -98,7 +98,7 @@ segments:
       - [0x579C, c, func_801D639C]
       - [0x5A68, c, Menu_SwapBytes_801D6668]
       - [0x5A7C, c, func_801D667C]
-      - [0x5BD8, c, func_801D67D8]
+      - [0x5BD8, c, Menu_PreviewStrongestEquipment]
       - [0x5EC4, c, func_801D6AC4]
       - [0x626C, c, func_801D6E6C]
       - [0x63BC, c, func_801D6FBC]
