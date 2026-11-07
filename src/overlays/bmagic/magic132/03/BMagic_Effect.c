@@ -42,7 +42,32 @@ MATCH void func_801EF158(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF200);
+MATCH void func_801EF200(void) {
+    u8  timer;
+    s32 z;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if ((timer & 0xFF) == 0) {
+        g_Task->facing = g_BattleEffectBattler->facing;
+        g_Task->unk_0C = -0x80000;
+        g_Task->unk_10 = -0xF0000;
+        func_801DD350(g_Task);
+        g_Task->pos.x.fixed = g_AreaScrollTargetX + g_Task->unk_0C;
+        g_Task->pos.y.fixed = g_AreaScrollTargetY + g_Task->unk_10;
+        z                   = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+        g_Task->unk_0C      = 0x8000;
+        g_Task->unk_10      = 0;
+        g_Task->pos.z.fixed = z;
+        func_801DD350(g_Task);
+        g_Task->param.unk_0B = 0x1A;
+        g_Task->unk_09       = 0x2C;
+        g_Task->timer        = 0;
+        g_Task->unk_1C       = 0;
+        g_Task->unk_20       = 0x80;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF324(void) {
     PartyBattler* work;
