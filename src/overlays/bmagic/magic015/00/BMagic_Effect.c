@@ -346,7 +346,6 @@ MATCH void func_801F1250(void) {
     SetTransMatrix(&matrix);
 }
 
-
 MATCH void func_801F131C(void) {
     SVECTOR pos;
     SVECTOR rot;

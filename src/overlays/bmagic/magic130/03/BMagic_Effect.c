@@ -48,16 +48,15 @@ MATCH void func_801EF354(void) {
     PartyBattler* task;
     u16           value;
 
-    task = g_Task;
+    task              = g_Task;
     task->unk_2E.half = task->param.unk_0B * 26 + 0x98;
-    value = D_801EFA6C[task->param.unk_0B];
-    task->unk_14 = 0x20;
-    task->unk_09 = 0x3C;
+    value             = D_801EFA6C[task->param.unk_0B];
+    task->unk_14      = 0x20;
+    task->unk_09      = 0x3C;
     task->unk_30.half = value + 0x50;
-    g_Task->timer = 0;
+    g_Task->timer     = 0;
     g_Task->header.step += 1;
 }
-
 
 MATCH void func_801EF3DC(void) {
     u8 timer;

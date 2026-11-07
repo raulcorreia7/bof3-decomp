@@ -43,7 +43,6 @@ MATCH void func_801EEFC4(void) {
     }
 }
 
-
 INCLUDE_ASM(func_801EF058);
 
 #include "../../Effect_CountUpTimerByTwoAndStep.h"

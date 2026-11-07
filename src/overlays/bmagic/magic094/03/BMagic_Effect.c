@@ -33,11 +33,9 @@ MATCH void func_801EEE4C(void) {
         func_801EF710();
         PopMatrix();
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1,
-                (GetGraphType() == 1 || GetGraphType() == 2) ? 0x25 : 0x15, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x25 : 0x15, 0);
     GFX_AddPrim(3, 0xC);
 }
-
 
 MATCH void func_801EEF1C(void) {
     func_800A9610(g_BattleTargetSelector, 32);
