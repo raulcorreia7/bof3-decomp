@@ -1,0 +1,32 @@
+#ifndef OVERLAY_BMAGIC_SPARKLE_H
+#define OVERLAY_BMAGIC_SPARKLE_H
+
+/* The sparkle pool of magic070, magic071 and magic072. Each image header
+ * defines EFFECT_SPARKLE_KIND, then includes this file. */
+
+#include "overlays/bmagic/bmagic.h"
+
+/* The records in the sparkle pool D_801F01B4. */
+#define EFFECT_SPARKLE_COUNT 128
+
+extern BMagicEffectFuncs   D_801EEC04;
+extern BattleHandlerTable3 D_801EEC1C;
+/* The launch offset of each sparkle row from the screen point of the battler. */
+extern Point2D             D_801F00BC[];
+/* The four colour rows of each kind. */
+extern u8                  D_801F015C[][4][3];
+/* The number of sparkles each kind spawns. */
+extern u8                  D_801F0198[];
+/* The launch delay between each group of four sparkles, per kind. */
+extern u8                  D_801F01A0[];
+/* The shortest rise of each kind. */
+extern u8                  D_801F01A8[];
+extern BMagicEffectWork    D_801F01B4[EFFECT_SPARKLE_COUNT];
+
+void func_801EF33C(void);
+void func_801EF810(u16 angle, u16 radius);
+void func_801EFA44(u16 angle, u16 radius);
+void func_801EFCDC(void);
+u8   func_801F0000(void);
+
+#endif
