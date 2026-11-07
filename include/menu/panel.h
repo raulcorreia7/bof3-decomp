@@ -161,6 +161,52 @@ typedef struct MenuListPanel {
 
 ASSERT_SIZE(MenuListPanel, 0x24);
 
+/* Views of MenuPanelTask cells 0x10..0x1F. */
+typedef struct MenuPanelGrow {
+    u16 width;   /* 0x10 current width, 12.4 fixed point */
+    u16 height;  /* 0x12 current height, 12.4 fixed point */
+    u16 step_x;  /* 0x14 width added per frame */
+    u16 step_y;  /* 0x16 height added per frame */
+    u16 final_x; /* 0x18 the x the panel settles at */
+    u16 final_y; /* 0x1A the y the panel settles at */
+} MenuPanelGrow;
+
+typedef struct MenuPanelMessage {
+    u16 id;    /* 0x10 the message the bar draws, 0 for none */
+    u16 width; /* 0x12 the bar's width */
+} MenuPanelMessage;
+
+typedef struct MenuPanelList {
+    u16 tabs;   /* 0x10 the tab marks; the high nibble counts the frame down */
+    u16 scroll; /* 0x12 the scroll position, row in the high nibbles */
+} MenuPanelList;
+
+typedef struct MenuPanelIcons {
+    u16 grow; /* 0x10 pixels the selected icon is grown by, up to 3 */
+} MenuPanelIcons;
+
+typedef struct MenuPanelBattle {
+    u16 cursor;   /* 0x10 */
+    u16 row_base; /* 0x12 the list's first row */
+    u16 hp;       /* 0x14 */
+    u16 ap;       /* 0x16 */
+    u16 pad_18[2];
+    u16 max_hp; /* 0x1C */
+    u16 max_ap; /* 0x1E */
+} MenuPanelBattle;
+
+/* Cells read by address where the bytes change from use to use. */
+typedef struct MenuPanelAddr {
+    u16 unk_10;
+    u16 unk_12;
+    u16 unk_14;
+    u16 unk_16;
+    u16 unk_18;
+    u16 unk_1A;
+    u16 unk_1C;
+    u16 unk_1E;
+} MenuPanelAddr;
+
 /* One of the 22 panel task records: the panel's position, state, layer and
  * item-table base. The battle overlays read the first 0x0C bytes through
  * BattlePanelTask (battle/records.h). */
@@ -181,24 +227,24 @@ typedef struct MenuPanelTask {
     u8       flags; /* bit 0 tested before the box draw; battle reads it as its cursor */
     u8       unk_0E;
     u8       layer; /* panel layer, tested against the dispatch mode */
-    /* Mode-dependent pair. The slide panel uses 0x10/0x12 as remaining x/y and
-     * 0x14/0x16 as the x/y step; the battle bar uses 0x14/0x16 as current HP/AP
-     * and 0x12 as its row base, so the shared record keeps them unnamed. */
-    u16      unk_10;
-    u16      unk_12;
-    u16      unk_14;
-    u16      unk_16;
-    u16      unk_18;
-    u16      unk_1A;
-    u16      unk_1C;
-    u16      unk_1E;
-    s32      item_table; /* 0x20: the panel's item-table base; the retail loads it with a word */
+
+    /* The cells 0x10..0x1F mean different things to each panel mode; each user
+     * reads the view that names what the mode keeps there. */
+    union {
+        MenuPanelGrow    grow;    /* the window-grow animation (slus) */
+        MenuPanelMessage message; /* the header bar that shows a message */
+        MenuPanelList    list;    /* the list windows: tab marks and scroll */
+        MenuPanelIcons   icons;   /* the camp menu icon row */
+        MenuPanelBattle  battle;  /* the battle panels: cursor, first row and the HP/AP bars */
+        MenuPanelAddr    addr;    /* cells whose purpose is not read yet, by address */
+    } u;
+
+    s32 item_table; /* 0x20: the panel's item-table base; the retail loads it with a word */
 } MenuPanelTask;
 
 ASSERT_OFFSET(MenuPanelTask, pos, 0x04);
 ASSERT_OFFSET(MenuPanelTask, unk_08, 0x08);
-ASSERT_OFFSET(MenuPanelTask, unk_10, 0x10);
-ASSERT_OFFSET(MenuPanelTask, unk_1A, 0x1A);
+ASSERT_OFFSET(MenuPanelTask, u, 0x10);
 ASSERT_OFFSET(MenuPanelTask, item_table, 0x20);
 ASSERT_SIZE(MenuPanelTask, MENU_PANEL_TASK_SIZE);
 

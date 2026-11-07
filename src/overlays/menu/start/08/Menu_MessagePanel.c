@@ -6,7 +6,7 @@
 /* The shared MenuPanelTask view types the icon cursor at 0x10 as unk_10; the
  * accesses here are signed halfword loads. */
 #define ICON_TASK   ((MenuPanelTask*)g_MenuCurrentPanel)
-#define ICON_CURSOR (*(s16*)&ICON_TASK->unk_10)
+#define ICON_CURSOR (*(s16*)&ICON_TASK->u.message.id)
 
 MATCH void Menu_MessagePanel(void) {
     g_MenuStartMessageStates[ICON_TASK->state]();

@@ -9,7 +9,7 @@ MATCH void func_801D98BC(void) {
     u8*  cursor;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = D_801ED68C + 0x1F;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801ED68C + 0x1F;
     if (g_BattlePanelMode == 0) {
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = g_MenuPanelTasks[18].pos.x + (D_801ED68C * 0x30);

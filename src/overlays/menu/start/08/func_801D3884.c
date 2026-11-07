@@ -8,17 +8,17 @@ MATCH void func_801D3884(void) {
     u8* counter;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0x17;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active      = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x       = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 0x2A;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y       = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + 7;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x17;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 0x2A;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + 7;
     trigger = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = 0xFF;
     if (trigger & PADLleft) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_10 = 0x32;
-        step_down                                       = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A - 1;
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = step_down;
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs = 0x32;
+        step_down                                            = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A - 1;
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A      = step_down;
         if (step_down < 0) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 3;
         }
@@ -27,9 +27,9 @@ MATCH void func_801D3884(void) {
     }
     if (trigger & PADLright) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_10 = 0x31;
-        step_up                                         = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = step_up;
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs = 0x31;
+        step_up                                              = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A      = step_up;
         if ((u32)(step_up & BYTE_MASK) >= 4U) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 0;
         }

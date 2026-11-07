@@ -14,9 +14,9 @@ NON_MATCHING void func_801D40D8(void) {
     TEXT_SetVariable(0, 0xC,
                      Item_GetRecord(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A,
                                     D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]));
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0x1A;
-    label                                                 = &D_8014865B;
-    *flag                                                 = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x1A;
+    label                                                       = &D_8014865B;
+    *flag                                                       = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x =
         g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x + ((1 - *label) << 5) + 0xDE;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y = g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y + 5;

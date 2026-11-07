@@ -20,7 +20,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     s32  offset;
 
     UI_DrawWindow((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 153, 154, task->unk_09, g_WindowStyle);
-    value = func_801AFD10(&task->unk_0B, &row, &count, (u8*)&task->unk_12) & BYTE_MASK;
+    value = func_801AFD10(&task->unk_0B, &row, &count, (u8*)&task->u.list.scroll) & BYTE_MASK;
     y     = task->pos.y + (s8)row;
     src   = D_801C893C[task->unk_0A] + value;
     dst   = D_801C8950[task->unk_0A] + value;
@@ -67,13 +67,13 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     TEXT_Format(g_UiFormatBuffer, D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK,
                 (task->unk_0A != 4) ? 0x80 : 0x20);
     UI_DrawGlyphString((task->pos.x + 85), (task->pos.y + 146), -(task->unk_09 != 0) & 7, g_UiFormatBuffer);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_10 & 2) != 0 ? s_MenuLine1FlagRun : s_MenuLine1Run, 1);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_10 & 1) != 0 ? s_MenuLine2FlagRun : s_MenuLine2Run, 1);
-    field = task->unk_10;
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & 2) != 0 ? s_MenuLine1FlagRun : s_MenuLine1Run, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & 1) != 0 ? s_MenuLine2FlagRun : s_MenuLine2Run, 1);
+    field = task->u.list.tabs;
     if ((field & 0xF0) == 0) {
-        task->unk_10 = 0;
+        task->u.list.tabs = 0;
     } else {
-        task->unk_10 = field - 0x10;
+        task->u.list.tabs = field - 0x10;
     }
     for (i = 0; i < 10; i++) {
         UI_DrawSprite((task->pos.x + (i + 5) * 8), task->pos.y, 1, 1);
