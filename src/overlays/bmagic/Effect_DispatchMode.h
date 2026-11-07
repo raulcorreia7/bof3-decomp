@@ -3,7 +3,7 @@
  * modules; every change here must verify every member. */
 /* func_801EEC38 (magic041), func_801EEC48 (magic020), func_801EEC1C (magic062, magic082, magic086, magic110, magic167)
 */
-MATCH void Effect_DispatchHandlerSlot1(void) {
+MATCH void Effect_DispatchMode(void) {
     BMagicEffectFuncs handlers;
 
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.mode);

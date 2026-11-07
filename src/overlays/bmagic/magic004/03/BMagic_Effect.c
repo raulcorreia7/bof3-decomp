@@ -39,7 +39,7 @@ MATCH void func_801EF8CC(void) {
 
 INCLUDE_ASM(func_801EF910);
 
-#include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
+#include "overlays/bmagic/Effect_SetDuration.h"
 
 /* blocker: branch over the g_BattleActionId < 0x85 test; first diff: 0x801EFA18. */
 /* blocker: the zero branch compares the timer with a branch retail places after the table lookup; first diff: bnez v0 at 0x801EFA18. */

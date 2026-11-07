@@ -46,7 +46,7 @@ INCLUDE_ASM(func_801EF06C);
 
 #include "overlays/bmagic/Effect_ReplaceSlotPaletteFade.h"
 
-#include "overlays/bmagic/Effect_BrightenPaletteThenStep.h"
+#include "overlays/bmagic/Effect_FadePaletteIn.h"
 
 /* func_801EF4E4 */
 #include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"

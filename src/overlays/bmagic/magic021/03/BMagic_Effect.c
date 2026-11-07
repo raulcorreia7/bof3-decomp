@@ -18,7 +18,7 @@ MATCH void func_801EEFDC(void) {
 
 INCLUDE_ASM(func_801EF020);
 
-#include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
+#include "overlays/bmagic/Effect_SetDuration.h"
 
 INCLUDE_ASM(func_801EF104);
 

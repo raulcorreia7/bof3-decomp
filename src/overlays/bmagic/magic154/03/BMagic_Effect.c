@@ -96,7 +96,7 @@ MATCH void func_801EF454(void) {
 
 INCLUDE_ASM(func_801EF4B4);
 
-#include "overlays/bmagic/Effect_ReloadTimerAndStep.h"
+#include "overlays/bmagic/Effect_SetDuration.h"
 
 MATCH void func_801EF58C(void) {
     u8 timer;

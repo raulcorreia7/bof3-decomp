@@ -72,7 +72,7 @@ MATCH void func_801EF554(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CopyBattlerCoordsSetTimers.h"
+#include "overlays/bmagic/Effect_StartAtTarget.h"
 
 MATCH void func_801EF654(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x11);
@@ -86,7 +86,7 @@ INCLUDE_ASM(func_801EF818);
 
 INCLUDE_ASM(func_801EFF74);
 
-#include "overlays/bmagic/Effect_CopyBattlerCoordsClearTimer.h"
+#include "overlays/bmagic/Effect_AppearAtTarget.h"
 
 MATCH void func_801F00A0(void) {
     EFFECT_ADVANCE_AT_COUNT(2, 0x10);

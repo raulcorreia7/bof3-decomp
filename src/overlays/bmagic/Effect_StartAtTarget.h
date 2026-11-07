@@ -2,7 +2,7 @@
    the work flags, sets the effect timer (work byte 0x09) and counter (work byte 0x0A) to one and advances the effect
    step (work byte 0x02). One definition shared by the bmagic effect modules; every change here must verify every
    member. */
-MATCH void Effect_CopyBattlerCoordsSetTimers(void) {
+MATCH void Effect_StartAtTarget(void) {
     PartyBattler* work;
     PartyBattler* actor;
     s32           z;

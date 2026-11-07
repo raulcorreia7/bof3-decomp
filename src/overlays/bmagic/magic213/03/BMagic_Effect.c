@@ -20,7 +20,7 @@ MATCH void func_801EF004(void) {
 
 INCLUDE_ASM(func_801EF048);
 
-/* nonmatching: same body as Effect_BrightenPaletteThenStep, but retail has no stack frame; the shared body links one (+4 bytes, first difference at +0xE4). */
+/* nonmatching: same body as Effect_FadePaletteIn, but retail has no stack frame; the shared body links one (+4 bytes, first difference at +0xE4). */
 INCLUDE_ASM(func_801EF23C);
 
 INCLUDE_ASM(func_801EF348);
