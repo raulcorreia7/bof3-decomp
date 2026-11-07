@@ -4,7 +4,7 @@ MATCH void func_801F30B4(void) {
     Actor* work;
     s32    value;
 
-    value             = Area_SampleHeight(FIELD(s32, g_Task, 0x34), FIELD(s32, g_Task, 0x38)) << 16;
+    value             = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
     work              = g_Task;
     work->pos.z.fixed = value;
     work->vz          = 0;
