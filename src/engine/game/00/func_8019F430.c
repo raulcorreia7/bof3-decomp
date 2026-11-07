@@ -18,7 +18,7 @@ MATCH void func_8019F430(void) {
         work->header.mode = (u8)(work->header.mode + 1);
     }
     slot         = g_Task;
-    heightOffset = slot->param.unk_0B * BATTLE_PARTY_STRIDE;
+    heightOffset = slot->param.party_index * BATTLE_PARTY_STRIDE;
     func_8019F5B8(
         *(s16*)((u8*)((u8*)&g_BattlePartyBattlers[0].unk_2E) + heightOffset),
         (s16)(*(u16*)((u8*)((u8*)&g_BattlePartyBattlers[0].unk_30) + heightOffset) + (u16)COORD_INT(slot->pos.y)),

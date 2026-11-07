@@ -18,7 +18,7 @@ MATCH void func_8019B3A8(void) {
     Actor*            work;
     GameMotionFields* motion;
 
-    Area_FindSceneRecord(g_Task->param.unk_0B);
+    Area_FindSceneRecord(g_Task->param.scene_record_id);
     func_8019BF78();
     g_Task->unk_29       = 6;
     g_Task->unk_48       = 1;
