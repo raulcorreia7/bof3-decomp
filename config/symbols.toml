@@ -1550,6 +1550,7 @@ Menu_DrawWindowFrame = { addr = 0x801D674C, type = "func", source = "Draws a win
 Menu_DrawInventoryWindow = { addr = 0x801D6C54, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawAbilityList = { addr = 0x801D73B4, type = "func", source = "draws the ability list panel of the shop and bate overlays: ten abilities with cost and level, the list name and the frame" }
 Menu_DrawPanelFrame = { addr = 0x801D78A8, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
+Menu_DrawEquipChoiceWindow = { addr = 0x801D7AD0, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 g_MenuBateStates = { addr = 0x801D86E0, source = "the bate overlay step handlers, indexed by the menu step byte" }
 g_MenuBateStep2Funcs = { addr = 0x801D8700, source = "3 sub-step handlers of step 2 of the Bate menu, called by func_801D0E38 (the step 2 handler) and indexed by the menu sub-step byte D_80148651" }
 g_MenuBateStep2Sub0Funcs = { addr = 0x801D870C, source = "3 handlers of sub-step 0 of step 2 of the Bate menu, called by func_801D0E74 (the sub-step 0 handler of step 2) and indexed by the menu sub-sub-step byte D_80148652" }
@@ -1592,8 +1593,11 @@ MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D8DD4, source = "Cell ids that Menu_Draw
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D8E20, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
 g_MenuInventoryTitles = { addr = 0x801D8E4C, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_MenuAbilityListNames = { addr = 0x801D8E80, source = "the list names indexed by the ability type, drawn above the ability list" }
+g_MenuEquipTitles = { addr = 0x801D8EB8, source = "the equip list's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_MenuFormationArrowTurned = { addr = 0x801D8F18, source = "The ground arrow corners turned by the preview angle, x at twice the scale of y." }
 g_MenuFormationSpots = { addr = 0x801D8F30, source = "Each party member's formation offset turned by the preview angle; Menu_DrawFormationPreview sorts them back to front with the member order." }
+g_MenuEquipChoiceIds = { addr = 0x801D8F48, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
+g_MenuEquipChoiceCounts = { addr = 0x801D8FC8, source = "the held counts of the g_MenuEquipChoiceIds rows" }
 
 ["emi/etc/commu00/00"]
 # Fairy table extents; the types are in include/game/fairy.h.
@@ -1996,6 +2000,7 @@ Menu_DrawFilledPanel = { addr = 0x801D7418, type = "func", source = "Draws a fil
 Menu_DrawWindowFrame = { addr = 0x801D76F4, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
 Menu_DrawInventoryWindow = { addr = 0x801D7BFC, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawPanelFrame = { addr = 0x801D8850, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
+Menu_DrawEquipChoiceWindow = { addr = 0x801D8A78, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 g_MenuStatusStates = { addr = 0x801D96DC, source = "the shisu overlay step handlers, indexed by the menu step byte" }
 g_MenuStatusStep1Funcs = { addr = 0x801D96F0, source = "2 sub-step handlers of step 1 of the status menu, called by func_801D0E4C (the step 1 handler) and indexed by the menu sub-step byte D_80148651" }
 g_MenuStatusStep3Funcs = { addr = 0x801D96F8, source = "2 sub-step handlers of step 3 of the status menu, called by func_801D0F24 (the step 3 handler) and indexed by the menu sub-step byte D_80148651" }
@@ -2036,8 +2041,11 @@ MENU_CLUT_STRIP_CELLS = { addr = 0x801D9D4C, source = "Cell rectangles that Menu
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D9DF8, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D9E44, source = "Entry offset of each clut strip palette, indexed by the clut index." }
 g_MenuInventoryTitles = { addr = 0x801D9E70, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+g_MenuEquipTitles = { addr = 0x801D9EDC, source = "the equip list's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_MenuFormationArrowTurned = { addr = 0x801D9EF8, source = "The ground arrow corners turned by the preview angle, x at twice the scale of y." }
 g_MenuFormationSpots = { addr = 0x801D9F10, source = "Each party member's formation offset turned by the preview angle; Menu_DrawFormationPreview sorts them back to front with the member order." }
+g_MenuEquipChoiceIds = { addr = 0x801D9F28, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
+g_MenuEquipChoiceCounts = { addr = 0x801D9FA8, source = "the held counts of the g_MenuEquipChoiceIds rows" }
 g_MenuStatusItems = { addr = 0x801DA028, type = "MenuStatusItems", size = 0xC, source = "Item ids the status menu counts into held[] (four items) and passes to Item_Remove when one is used." }
 D_801DA0B4 = { addr = 0x801DA0B4, source = "12-bit turn angle of a status menu display: each frame adds 0x20, and a stop snaps it to a multiple of 0x40." }
 D_801DA12C = { addr = 0x801DA12C, source = "12-bit turn angle of a status menu display: each frame adds or subtracts 0x20, and a stop snaps it to a multiple of 0x40." }
