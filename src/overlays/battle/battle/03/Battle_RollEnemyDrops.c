@@ -12,21 +12,21 @@ MATCH void Battle_RollEnemyDrops(void) {
 
     chances = g_BattleDropChances;
     for (i = 0; i < 2; i++) {
-        if (g_BattleCurrentEnemy->drops[i].item_00 != 0 && g_BattleCurrentEnemy->drops[i].rate_02 != 0) {
-            if (chances.chance[g_BattleCurrentEnemy->drops[i].rate_02] >= (rand() & BYTE_MASK)) {
+        if (g_BattleCurrentEnemy->drops[i].item != 0 && g_BattleCurrentEnemy->drops[i].rate != 0) {
+            if (chances.chance[g_BattleCurrentEnemy->drops[i].rate] >= (rand() & BYTE_MASK)) {
                 for (j = 0; j < D_80146326.count; j++) {
-                    if (D_80146326.items[j] == g_BattleCurrentEnemy->drops[i].item_00) {
+                    if (D_80146326.items[j] == g_BattleCurrentEnemy->drops[i].item) {
                         D_80146326.counts[j]++;
-                        g_BattleCurrentEnemy->drops[i].item_00 = 0;
+                        g_BattleCurrentEnemy->drops[i].item = 0;
                         goto next; /* the item is already listed */
                     }
                 }
-                D_80146326.items[D_80146326.count]  = g_BattleCurrentEnemy->drops[i].item_00;
+                D_80146326.items[D_80146326.count]  = g_BattleCurrentEnemy->drops[i].item;
                 D_80146326.counts[D_80146326.count] = 1;
                 if (D_80146326.count < BATTLE_SPOILS_COUNT_MAX) {
                     D_80146326.count++;
                 }
-                g_BattleCurrentEnemy->drops[i].item_00 = 0;
+                g_BattleCurrentEnemy->drops[i].item = 0;
             }
         }
     next:;

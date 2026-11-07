@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The shisu overlay entry: the shared menu step byte selects the handler. */
 MATCH void func_801D0D80(void) {
-    SYS_DISPATCH_BYTE(D_801D96DC, D_80148650);
+    SYS_DISPATCH_BYTE(g_MenuStatusStepFuncs, D_80148650);
 }
 
 MATCH void func_801D0DBC(void) {
@@ -31,7 +31,7 @@ MATCH void func_801D0DBC(void) {
 }
 
 MATCH void func_801D0E4C(void) {
-    SYS_DISPATCH_BYTE(D_801D96F0, D_80148651);
+    SYS_DISPATCH_BYTE(g_MenuStatusStep1Funcs, D_80148651);
 }
 
 MATCH void func_801D0E88(void) {
@@ -55,7 +55,7 @@ MATCH void func_801D0EC4(void) {
 }
 
 MATCH void func_801D0F24(void) {
-    SYS_DISPATCH_BYTE(D_801D96F8, D_80148651);
+    SYS_DISPATCH_BYTE(g_MenuStatusStep3Funcs, D_80148651);
 }
 
 MATCH void func_801D0F60(void) {
@@ -122,7 +122,7 @@ MATCH void func_801D1018(void) {
 
 MATCH void func_801D11A4(void) {
     func_801D7224(D_80144953);
-    D_801D9700[D_80148651]();
+    g_MenuStatusStep2Funcs[D_80148651]();
 }
 
 INCLUDE_ASM(func_801D11F4);
@@ -132,7 +132,7 @@ INCLUDE_ASM(func_801D14C0);
 MATCH void func_801D1898(void) {
     Callback handler;
 
-    handler = D_801D970C[D_80148652];
+    handler = g_MenuStatusStep2Sub2Funcs[D_80148652];
     handler();
     func_801D2C0C();
     func_801D2DA8();

@@ -230,17 +230,38 @@ typedef struct EnemyAIBlock {
 
 ASSERT_SIZE(EnemyAIBlock, ENEMY_AI_BLOCK_SIZE);
 
+/* The enemy id as the records store it, read as two bytes: the low byte tells
+ * enemies apart (func_801DA69C, func_8009CFEC, Battle_DefeatEnemy) and the high byte is the
+ * family the slayer weapons test (Battle_CalcDamage, func_800A2598). */
+typedef union EnemyIdCode {
+    u16 value;
+
+    struct {
+        u8 kind;
+        u8 family;
+    } byte;
+} EnemyIdCode;
+
+/* One drop of an enemy: the item id (index, then type, as Battle_RollEnemyDrops
+ * compares it) and the index into the 8-byte drop chance table at 0x801D0CB8. */
+typedef struct EnemyDrop {
+    u16 item;
+    u8  rate;
+    u8  pad_03;
+} EnemyDrop;
+
+ASSERT_SIZE(EnemyDrop, 0x4);
+
 typedef struct Enemy {
     u8           name[ENEMY_NAME_LENGTH];
-    u16          enemy_id;
+    EnemyIdCode  enemy_id;
     u8           choice_ai;
     u8           unk_0B[3];
-    u8           target_preference;
-    u8           unk_0F;
+    u16          event_flags; /* +0x0E: the low byte is the target preference */
     u16          zenny;
     u16          exp;
-    u8           level;
-    u8           unk_15[3];
+    u16          level;
+    u8           unk_16[2];
     u8           initial_skills[ENEMY_SKILL_COUNT];
     u16          hp;
     u16          ap;
@@ -248,16 +269,11 @@ typedef struct Enemy {
     u16          defense;
     u16          agility;
     u16          intellect;
-    u8           first_item_index;
-    u8           first_item_type;
-    u16          first_item_rate;
-    u8           second_item_index;
-    u8           second_item_type;
-    u16          second_item_rate;
+    EnemyDrop    drops[2];
     EnemyAIBlock ai[ENEMY_AI_COUNT];
     u8           unk_74[4];
     u8           resistances[RES_INDEX_COUNT];
-    u8           unk_81;
+    u8           status; /* +0x81: the StatusFlags the enemy enters battle with */
     u8           reach;  /* +0x82: sizes the probe step and the overlap extent of encounter placement */
     u8           height; /* +0x83: the final probe must lie this far plus 8 pixels below the screen top */
     u8           unk_84[4];

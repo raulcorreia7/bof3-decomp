@@ -82,7 +82,6 @@ enum {
     SAVE_STATUS_NO_CARD      = 8, /* neither port holds a usable card */
 };
 
-extern u16             g_GameAreaId;
 extern u8              D_80144F57;
 extern u16             D_80145594[];
 extern u8              D_80145FCC[][BATTLE_PARTY_STRIDE];
@@ -169,11 +168,32 @@ extern Character       D_801EB990;
 extern u8              D_801EBA34[][2];
 extern u8              s_CampMenuPanelIds[8];
 /* Entries of the step handler tables. */
-#define MENU_START_STEP_COUNT       9
-#define MENU_START_STEP2_COUNT      11
-#define MENU_START_STEP5_COUNT      6
-#define MENU_START_STEP5_SUB2_COUNT 3
-#define MENU_START_STEP6_COUNT      5
+#define MENU_START_STEP_COUNT          9
+#define MENU_START_STEP2_COUNT         11
+#define MENU_START_STEP5_COUNT         6
+#define MENU_START_STEP5_SUB2_COUNT    3
+#define MENU_START_STEP6_COUNT         5
+
+/* Entries of the panel handler tables. */
+#define MENU_START_PANEL_COUNT         21
+#define MENU_START_PANEL0_STATE_COUNT  11
+#define MENU_START_PANEL1_STATE_COUNT  3
+#define MENU_START_PANEL2_STATE_COUNT  3
+#define MENU_START_PANEL3_STATE_COUNT  3
+#define MENU_START_PANEL4_STATE_COUNT  3
+#define MENU_START_PANEL5_STATE_COUNT  7
+#define MENU_START_PANEL6_STATE_COUNT  3
+#define MENU_START_PANEL7_STATE_COUNT  3
+#define MENU_START_PANEL8_STATE_COUNT  3
+#define MENU_START_PANEL9_STATE_COUNT  3
+#define MENU_START_PANEL11_STATE_COUNT 3
+#define MENU_START_PANEL12_STATE_COUNT 5
+#define MENU_START_PANEL13_STATE_COUNT 3
+#define MENU_START_PANEL16_STATE_COUNT 5
+#define MENU_START_PANEL17_STATE_COUNT 5
+#define MENU_START_PANEL18_STATE_COUNT 5
+#define MENU_START_PANEL19_STATE_COUNT 3
+#define MENU_START_PANEL20_STATE_COUNT 3
 
 /* D_801EC35C */
 extern Callback g_MenuStartStepFuncs[MENU_START_STEP_COUNT];
@@ -231,32 +251,51 @@ extern u8       s_PanelIconValues[228];
 extern s32 (*D_801ED224[])(u8 caster_index, u8 target_index, u8 use_battle_record);
 extern s32 (*D_801ED24C[])(u8 save_slot, u8 record_value);
 extern u8       g_SaveRecordTypeCommands[92];
-extern Callback D_801ED330[21];
-extern Callback D_801ED384[11];
-extern Callback D_801ED3B0[3];
-extern Callback D_801ED3BC[3];
-extern Callback D_801ED3C8[6];
-extern void (*D_801ED3D4[])(void);
-extern Callback D_801ED3E0[7];
-extern Callback D_801ED3FC[3];
-extern Callback D_801ED408[3];
-extern Callback D_801ED414[3];
-extern Callback D_801ED420[3];
+/* D_801ED330 */
+extern Callback g_MenuStartPanelFuncs[MENU_START_PANEL_COUNT];
+/* D_801ED384 */
+extern Callback g_MenuStartPanel0StateFuncs[MENU_START_PANEL0_STATE_COUNT];
+/* D_801ED3B0 */
+extern Callback g_MenuStartPanel1StateFuncs[MENU_START_PANEL1_STATE_COUNT];
+/* D_801ED3BC */
+extern Callback g_MenuStartPanel2StateFuncs[MENU_START_PANEL2_STATE_COUNT];
+/* D_801ED3C8 */
+extern Callback g_MenuStartPanel3StateFuncs[MENU_START_PANEL3_STATE_COUNT];
+/* D_801ED3D4 */
+extern Callback g_MenuStartPanel4StateFuncs[MENU_START_PANEL4_STATE_COUNT];
+/* D_801ED3E0 */
+extern Callback g_MenuStartPanel5StateFuncs[MENU_START_PANEL5_STATE_COUNT];
+/* D_801ED3FC */
+extern Callback g_MenuStartPanel6StateFuncs[MENU_START_PANEL6_STATE_COUNT];
+/* D_801ED408 */
+extern Callback g_MenuStartPanel7StateFuncs[MENU_START_PANEL7_STATE_COUNT];
+/* D_801ED414 */
+extern Callback g_MenuStartPanel8StateFuncs[MENU_START_PANEL8_STATE_COUNT];
+/* D_801ED420 */
+extern Callback g_MenuStartPanel9StateFuncs[MENU_START_PANEL9_STATE_COUNT];
 extern u16      D_801ED42C[1];
 extern u16      D_801ED42E[];
-extern Callback D_801ED43C[3];
-extern Callback D_801ED448[5];
-extern Callback D_801ED45C[];
+/* D_801ED43C */
+extern Callback g_MenuStartPanel11StateFuncs[MENU_START_PANEL11_STATE_COUNT];
+/* D_801ED448 */
+extern Callback g_MenuStartPanel12StateFuncs[MENU_START_PANEL12_STATE_COUNT];
+/* D_801ED45C */
+extern Callback g_MenuStartPanel13StateFuncs[MENU_START_PANEL13_STATE_COUNT];
 extern u8       D_801ED468[];
 extern u8       D_801ED48C[];
 extern u8       D_801ED498[];
 extern u32      D_801ED534[];
 extern u8       D_801ED560[][6];
-extern Callback D_801ED58C[5];
-extern Callback D_801ED5A0[5];
-extern Callback D_801ED5B4[5];
-extern Callback D_801ED5C8[];
-extern Callback D_801ED5E4[];
+/* D_801ED58C */
+extern Callback g_MenuStartPanel16StateFuncs[MENU_START_PANEL16_STATE_COUNT];
+/* D_801ED5A0 */
+extern Callback g_MenuStartPanel17StateFuncs[MENU_START_PANEL17_STATE_COUNT];
+/* D_801ED5B4 */
+extern Callback g_MenuStartPanel18StateFuncs[MENU_START_PANEL18_STATE_COUNT];
+/* D_801ED5C8 */
+extern Callback g_MenuStartPanel19StateFuncs[MENU_START_PANEL19_STATE_COUNT];
+/* D_801ED5E4 */
+extern Callback g_MenuStartPanel20StateFuncs[MENU_START_PANEL20_STATE_COUNT];
 extern u8       s_PartyCharacterIds[3];
 extern u8       D_801ED613[];
 extern s8       D_801ED618;
@@ -434,6 +473,7 @@ void        func_801E8EA8(void);
 void        func_801E8EE8(void);
 void        func_801E8F28(void);
 void        func_801E8F68(void);
+void        func_801E8FA8(void);
 void        func_801E8FE8(void);
 void        func_801E9040(void);
 void        func_801E9080(void);
@@ -479,6 +519,8 @@ void        func_801E9FB0(void);
 void        func_801E9FF0(void);
 void        func_801EA030(void);
 void        func_801EA0B0(void);
+void        func_801EA118(void);
+void        func_801EA158(void);
 void        func_801EA1C8(void);
 void        func_801EA50C(void);
 void        func_801EA598(void);
@@ -497,6 +539,8 @@ void        func_801EA8C0(void);
 void        func_801EA900(void);
 void        func_801EA940(void);
 extern void func_801EAA14(MenuPanelTask* task);
+void        func_801EA994(void);
+void        func_801EA9D4(void);
 void        func_801EAEC4(void);
 extern void func_801EAF98(MenuPanelTask* task);
 extern s8   CardAccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
@@ -580,6 +624,8 @@ void             func_801E7000(void);
 extern s32       func_801E7348(void);
 extern void      func_801E77F0(void);
 void             func_801E9350(void);
+void             func_801EAF18(void);
+void             func_801EAF58(void);
 extern u8        D_801EC3E0[]; /* 6-byte rows: entry count, then up to five entries */
 extern s32       D_801EC488;
 extern s32       D_801EC4A4;

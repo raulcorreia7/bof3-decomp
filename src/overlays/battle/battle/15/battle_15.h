@@ -499,7 +499,6 @@ extern volatile u8           D_801454FF;
 extern BattleSlot            g_BattleTargetRows[];
 extern BattleSlot            D_80145518[];
 extern u8                    D_8014551B;
-extern volatile u16          g_InputRepeatButtons;
 /* State byte (+0x01) of each player row (stride 0x140) and enemy row
  * (stride 0x118), indexed by byte offset. */
 extern s32                   D_80145EC4;
@@ -552,7 +551,6 @@ extern u16                              D_801463B4;
 extern u8                               g_BattleGenes[];
 extern u8                               D_801463D6;
 /* D_801463D8 */
-extern u16                              g_BattlePendingStatus;
 /* D_80148570 */
 extern volatile u8                      g_BattleChoicePanel[];
 /* First byte of g_BattleChoicePanel (0x80148570). The original stores it

@@ -43,7 +43,7 @@ typedef union GameStateCounter {
 
 typedef struct GameState {
     /* 0x00 */ u8                pad_00[0x79];
-    /* 0x79 */ u8                slot_index_79; /* active slot index */
+    /* 0x79 */ u8                leader_id; /* CharacterId of the party leader */
     /* 0x7A */ u8                pad_7A[0x9E];
     /* 0x118 */ u8               flags_118;     /* bit 0x80 restores the saved word */
     /* 0x119 */ u8               countdown_119; /* frame countdown, reloaded with 0x28 or 0x0A */
@@ -66,7 +66,7 @@ typedef struct GameState {
 } GameState;
 
 ASSERT_SIZE(GameState, 0x140);
-ASSERT_OFFSET(GameState, slot_index_79, 0x79);
+ASSERT_OFFSET(GameState, leader_id, 0x79);
 ASSERT_OFFSET(GameState, flags_118, 0x118);
 ASSERT_OFFSET(GameState, countdown_119, 0x119);
 ASSERT_OFFSET(GameState, counter_11C, 0x11C);

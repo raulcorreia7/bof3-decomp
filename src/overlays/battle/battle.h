@@ -56,7 +56,8 @@ typedef struct BattleScrollDelta {
 ASSERT_SIZE(BattleScrollDelta, 0x02);
 
 extern BattleScrollDelta            D_800B44C0[4];
-extern u8                           D_800B6510[232];
+/* D_800B6510 */
+extern u8                           g_BattleActionSelection[232];
 extern u8*                          D_800B6AB0[];
 /* One-field views of the same rows: the local rows (stride 0x140) and the
  * enemy rows (stride 0x118), each anchored at the field the retail symbol

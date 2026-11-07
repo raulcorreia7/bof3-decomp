@@ -123,7 +123,7 @@ typedef struct BattleStatBlock {
     u8 bytes[0x20];
 } BattleStatBlock;
 
-/* Drop chance per EnemyBattlerDrop.rate_02, out of 256: 0, 0, 1, 3, 7, 31, 127, 255. */
+/* Drop chance per EnemyDrop.rate, out of 256: 0, 0, 1, 3, 7, 31, 127, 255. */
 typedef struct DropChances {
     u8 chance[8];
 } DropChances;
@@ -203,7 +203,6 @@ extern void*           D_800B6178[];
 /* D_800B65F8 */
 extern BattleSelection g_BattleSelections[];
 /* D_80143F00 */
-extern u16             g_GameAreaId;
 extern s32             D_80145ED0;
 extern u8              D_80145F09[][BATTLE_PARTY_STRIDE];
 extern volatile u8     D_80145F18[];
@@ -247,7 +246,6 @@ extern volatile u16 D_801463B0;
 extern volatile u8  D_801463BA;
 extern u32          D_801463D0;
 /* D_801463D8 */
-extern u16          g_BattlePendingStatus;
 extern s16          D_801463DA;
 /* The units that must reload the cell after every store read it volatile. */
 extern volatile u8  D_80146855;
@@ -493,7 +491,8 @@ void          func_800AD9CC(void);
 void          func_800ADCC4(void);
 void          func_800ADFBC(void);
 s32           func_800AE108(u8 battler_index, s32 work_ptr);
-void          func_800AE1F8(s32 selection_index); /* defined by the battle/battle/15 chain */
+/* func_800AE1F8 */
+void          Battle_LoadSelectionEffect(s32 selection_index); /* defined by the battle/battle/15 chain */
 extern s32    D_80145FB4;
 s32           func_800AE260(u16 selection, s32 payload);
 void          func_800AE2D4(u32 selection);

@@ -39,34 +39,50 @@ extern u8            MENU_COMMAND_FRAME_SELECTED[];
 extern u8            D_801D0D90[];
 extern u8            D_801D0D94[];
 extern u8            D_801D0D98[];
+/* Entries of the handler tables. */
+#define MENU_BATE_STEP_COUNT       4
+#define MENU_BATE_STEP2_COUNT      3
+#define MENU_BATE_STEP2_SUB0_COUNT 3
+#define MENU_BATE_STEP2_SUB1_COUNT 2
+#define MENU_BATE_STEP2_SUB2_COUNT 2
+#define MENU_BATE_STEP3_COUNT      3
+#define MENU_BATE_STEP3_SUB0_COUNT 2
+
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step bytes. */
-extern Callback      D_801D86E0[];
-extern s8            D_801D86F0;
-extern u8            g_MenuLabelAgility[];
+/* D_801D86E0 */
+extern Callback g_MenuBateStepFuncs[MENU_BATE_STEP_COUNT];
+extern s8       D_801D86F0;
+extern u8       g_MenuLabelAgility[];
 /* D_801D8B38 */
-extern u8            g_MenuEquipRowIcons[];
+extern u8       g_MenuEquipRowIcons[];
 /* D_801D8B40 */
-extern u8            g_MenuLabelEquip[];
-extern u8            g_MenuPortraitAtlas[];
-extern Callback      D_801D8700[];
-extern u8            MENU_CAPTION_ICON[];
-extern u8            MENU_CLOCK_COLON[];
-extern u8*           g_MenuCommandLabels[];
-extern u8            g_MenuCommandRows[][5];
-extern Callback      D_801D870C[];
-extern Callback      D_801D8718[];
-extern Callback      D_801D8720[];
-extern Callback      D_801D8764[];
-extern Callback      D_801D8770[];
-extern u8            D_801D893C[];
-extern u8            D_801D8954[];
-extern u8            D_801D896C[];
-extern u8            D_801D8978[];
-extern u8            D_801D8A3C[];
-extern u8            D_801D8B84[];
-extern u8*           D_801D8E80[];
-extern u8            D_801D8EE0[5];
+extern u8       g_MenuLabelEquip[];
+extern u8       g_MenuPortraitAtlas[];
+/* D_801D8700 */
+extern Callback g_MenuBateStep2Funcs[MENU_BATE_STEP2_COUNT];
+extern u8       MENU_CAPTION_ICON[];
+extern u8       MENU_CLOCK_COLON[];
+extern u8*      g_MenuCommandLabels[];
+extern u8       g_MenuCommandRows[][5];
+/* D_801D870C */
+extern Callback g_MenuBateStep2Sub0Funcs[MENU_BATE_STEP2_SUB0_COUNT];
+/* D_801D8718 */
+extern Callback g_MenuBateStep2Sub1Funcs[MENU_BATE_STEP2_SUB1_COUNT];
+/* D_801D8720 */
+extern Callback g_MenuBateStep2Sub2Funcs[MENU_BATE_STEP2_SUB2_COUNT];
+/* D_801D8764 */
+extern Callback g_MenuBateStep3Funcs[MENU_BATE_STEP3_COUNT];
+/* D_801D8770 */
+extern Callback g_MenuBateStep3Sub0Funcs[MENU_BATE_STEP3_SUB0_COUNT];
+extern u8       D_801D893C[];
+extern u8       D_801D8954[];
+extern u8       D_801D896C[];
+extern u8       D_801D8978[];
+extern u8       D_801D8A3C[];
+extern u8       D_801D8B84[];
+extern u8*      D_801D8E80[];
+extern u8       D_801D8EE0[5];
 
 typedef struct BateState {
     u8 unk_00;

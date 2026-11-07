@@ -9,32 +9,32 @@
    func_801F2F88 (area157), func_801F303C (area167), func_801F3794 (area168), func_801F37D8 (area174), func_801F3E04
    (area139) */
 MATCH void Actor_AdvanceWhenPartyAway(void) {
-    u8* work;
+    Actor* work;
 
-    work = TASK_BYTES;
-    if (FIELD(u8, work, 0x08) != 0) {
-        if (abs(D_80145EC8 - ((((s32)FIELD(s16, work, 0x3A) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
+    work = g_Task;
+    if (work->direction_08 != 0) {
+        if (abs(D_80145EC8 - ((((s32)COORD_INT(work->pos.y) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
             goto advance;
         }
-        if (abs(D_80145EC4 - ((s32)FIELD(s16, work, 0x36) << 16)) <= TO_COORD(2)) {
+        if (abs(D_80145EC4 - ((s32)COORD_INT(work->pos.x) << 16)) <= TO_COORD(2)) {
             goto call;
         }
-        if (abs(D_80145EC4 - (((s32)FIELD(s16, work, 0x36) + 1) << 16)) <= TO_COORD(2)) {
+        if (abs(D_80145EC4 - (((s32)COORD_INT(work->pos.x) + 1) << 16)) <= TO_COORD(2)) {
             goto call;
         }
     } else {
-        if (abs(D_80145EC4 - ((((s32)FIELD(s16, work, 0x36) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
+        if (abs(D_80145EC4 - ((((s32)COORD_INT(work->pos.x) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
             goto advance;
         }
-        if (abs(D_80145EC8 - ((s32)FIELD(s16, work, 0x3A) << 16)) <= TO_COORD(2)) {
+        if (abs(D_80145EC8 - ((s32)COORD_INT(work->pos.y) << 16)) <= TO_COORD(2)) {
             goto call;
         }
-        if (abs(D_80145EC8 - (((s32)FIELD(s16, work, 0x3A) + 1) << 16)) <= TO_COORD(2)) {
+        if (abs(D_80145EC8 - (((s32)COORD_INT(work->pos.y) + 1) << 16)) <= TO_COORD(2)) {
             goto call;
         }
     }
 advance:
-    FIELD(u8, work, 0x02)++;
+    work->header.step++;
 call:
     Area_Update();
 }
