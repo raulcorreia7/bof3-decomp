@@ -34,6 +34,6 @@ INCLUDE_ASM(func_801EFA44);
 
 INCLUDE_ASM(func_801EFCDC);
 
-INCLUDE_ASM(func_801F0000);
+#include "overlays/bmagic/func_801F0000.h"
 
 #include "overlays/bmagic/func_801F006C.h"
