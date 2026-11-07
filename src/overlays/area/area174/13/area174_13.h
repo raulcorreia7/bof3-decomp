@@ -15,7 +15,6 @@
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The current map row in the field-loader table. */
-extern u16      g_GameAreaId;
 /* The party position in 16.16 fixed point. */
 extern s32      D_80145EC4;
 /* The payload's first words: the per-state handler pointers. */
