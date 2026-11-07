@@ -16,7 +16,14 @@ MATCH void func_801EF010(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
-INCLUDE_ASM(func_801EF054);
+MATCH void func_801EF054(void) {
+    SYS_DISPATCH_BYTE(D_801F0CB0, g_Task->header.step);
+    if (g_BattleEffectBattler->param.unk_0B != 0xFF) {
+        if (g_Task->header.step != 0) {
+            func_801EF44C();
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EF0D8);
 
