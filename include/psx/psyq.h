@@ -39,9 +39,9 @@ extern void checkRECT(char* log, RECT* rect);
 /* Game-only: SDK internals the game calls; no staged header declares them. */
 s32         _SpuInit(s32); /* 0x80168F20 */
 extern void SeAutoPan(s16 voice, s16 pan_from, s16 pan_to, s16 delta);
-extern void SetAutoPan(s16 voice, s16 pan_from, s16 pan_to, s16 delta);
+extern void SetAutoPan(s16 voice);
 extern void SeAutoVol(s16 voice, s16 vol_from, s16 vol_to, s16 delta);
-extern void SetAutoVol(s16 voice, s16 vol_from, s16 vol_to, s16 delta);
+extern void SetAutoVol(s16 voice);
 void        _SsVmSetSeqVol(s16 seq, u16 vol_l, u16 vol_r, s32 mode);       /* 0x801729D0 */
 extern s16  SsVabOpenHeadWithMode(s32 arg0, s16 arg1, s32 arg2, s32 arg3); /* 0x80173CB0 */
 void        __main(void);
