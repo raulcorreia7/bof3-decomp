@@ -12,6 +12,7 @@
 #define EFFECT_TIMER_STEP   1
 
 extern BattleHandlerTable5 D_801EEC04;
+extern BattleHandlerTable4 D_801EEC18;
 extern Callback            D_801EF8A4[];
 
 void func_801EF3B8(void);

@@ -13,7 +13,7 @@ MATCH void func_801D8248(s16 x, s16 y, u8 height) {
     tpage       = getTPage(0, 0, 832, 256);
     prim->x0    = x;
     prim->tpage = tpage;
-    prim->clut  = 0x7887;
+    prim->clut  = getClut(112, 482);
     prim->x1    = x + 8;
     prim->u0    = 88;
     prim->u1    = 96;

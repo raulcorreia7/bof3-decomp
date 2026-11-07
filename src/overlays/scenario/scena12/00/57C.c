@@ -311,12 +311,8 @@ MATCH void Scene_JoinAdultNinaAndMomo_801FCEB4(void) {
     SCENE_JOIN_ADULT_NINA_AND_MOMO();
 }
 
-MATCH void func_801FCF00(void) {
-    EMI_LoaderStreamFamily(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_MOMO);
-    Party_StagePalettes();
-}
+/* func_801FCF00 */
+#include "overlays/scenario/Scene_JoinMomoWithGarr.h"
 
 MATCH void Scene_JoinMomo_801FCF44(void) {
     SCENE_JOIN_MOMO();

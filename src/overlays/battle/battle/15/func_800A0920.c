@@ -2,7 +2,7 @@
 
 /* sets flag bit 0x10 on the player row named by g_BattleTarget, marks
  * the battle sub-state byte 4, then walks selection slots from
- * D_80146322-1 up to D_80146323: each slot byte that is not
+ * g_BattleTurnCursor-1 up to g_BattleTurnCount: each slot byte that is not
  * 0xFF is sent to func_801DDFEC and marked 0xFF.
  */
 MATCH void func_800A0920(void) {
@@ -11,17 +11,17 @@ MATCH void func_800A0920(void) {
 
     func_800A3F28();
     g_BattlePartyBattlers[g_BattleTarget].turn.action_flags.volatile_value |= COMBATANT_FLAG_SUPPRESSION_EXEMPT;
-    base               = D_80146322 - 1;
+    base               = g_BattleTurnCursor - 1;
     g_BattleActionLock = 4;
     slot               = base & BYTE_MASK;
-    if (D_80146323 >= slot) {
+    if (g_BattleTurnCount >= slot) {
         do {
-            if (D_8014630C[slot] != GAME_NONE) {
+            if (g_BattleTurnOrder[slot] != GAME_NONE) {
                 func_801DDFEC(slot);
-                D_8014630C[slot] = 0xFF;
+                g_BattleTurnOrder[slot] = 0xFF;
             }
             base += 1;
             slot = base & BYTE_MASK;
-        } while (D_80146323 >= slot);
+        } while (g_BattleTurnCount >= slot);
     }
 }

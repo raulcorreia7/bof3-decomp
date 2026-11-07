@@ -6,6 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC44);
 
+/* Blocker: copies 256 halfword palette entries between unnamed data at 0x80033C00, 0x80036C00, 0x80037C00, 0x8003AC00; the tables need declaring first. */
 INCLUDE_ASM(func_801EEDA0);
 
 MATCH void func_801EEE84(void) {

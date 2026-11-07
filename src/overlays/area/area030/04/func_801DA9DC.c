@@ -27,7 +27,7 @@ NON_MATCHING void func_801DA9DC(void) {
         D_80144125                  = 7;
         return;
     }
-    if (g_ActorSlots[0].pos.y.fixed > 0x3E7FFF) {
+    if (g_ActorSlots[0].pos.y.fixed >= FISHING_CATCH_HEIGHT) {
         SND_PlayCue(EMI_CUE_ID(2, 3));
         D_801440B1                   = 0;
         g_ActorSlots[0].header.mode  = 0;
@@ -110,13 +110,13 @@ box_16:
         follow = 0x10;
     }
     g_AreaCameraStep = (u16)follow;
-    if ((s32)g_AreaScrollTargetY > 0x14FFFF) {
-        capped = TO_COORD(60);
-        if ((s32)g_AreaScrollTargetY <= TO_COORD(60)) {
+    if ((s32)g_AreaScrollTargetY >= FISHING_CAMERA_Y_MIN) {
+        capped = FISHING_CAMERA_Y_MAX;
+        if ((s32)g_AreaScrollTargetY <= FISHING_CAMERA_Y_MAX) {
             capped = g_AreaScrollTargetY;
         }
     } else {
-        capped = TO_COORD(21);
+        capped = FISHING_CAMERA_Y_MIN;
     }
     g_AreaScrollTargetY = capped;
     if (((g_ActorSlots[0].pos.x.fixed <= TO_COORD(8)) && (g_ActorSlots[0].scene_step < 0)) ||

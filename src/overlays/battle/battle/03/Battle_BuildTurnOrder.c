@@ -1,7 +1,8 @@
 #include "battle_03.h"
 
+/* func_801DAAE4 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801DAAE4(void) {
+NON_MATCHING void Battle_BuildTurnOrder(void) {
     u16 total;
     u16 maximum;
     u32 index;
@@ -79,12 +80,12 @@ NON_MATCHING void func_801DAAE4(void) {
         index += 1u;
     }
 
-    D_80146323 = (u8)count;
+    g_BattleTurnCount = (u8)count;
     if ((u8)count > 1u) {
         left = 0u;
-        while ((u8)left < D_80146323 - 1) {
+        while ((u8)left < g_BattleTurnCount - 1) {
             right = left + 1u;
-            while ((u8)right < D_80146323) {
+            while ((u8)right < g_BattleTurnCount) {
                 if (D_801EB550[(u8)left].value < D_801EB550[(u8)right].value) {
                     BattleRank temp;
 
@@ -100,18 +101,18 @@ NON_MATCHING void func_801DAAE4(void) {
 
     index = 0u;
     while ((u8)index < 11u) {
-        BATTLE_GLOBAL_BYTE_630C(index) = 0xFFu;
+        g_BattleTurnOrder[index] = 0xFFu;
         index += 1u;
     }
 
     index = 0u;
-    while ((u8)index < D_80146323) {
-        BATTLE_GLOBAL_BYTE_630C(index) = (u8)D_801EB550[(u8)index].index;
+    while ((u8)index < g_BattleTurnCount) {
+        g_BattleTurnOrder[index] = (u8)D_801EB550[(u8)index].index;
         index += 1u;
     }
 
-    D_80146322 = 0u;
+    g_BattleTurnCursor = 0u;
 }
 #else
-INCLUDE_ASM(func_801DAAE4);
+INCLUDE_ASM(Battle_BuildTurnOrder);
 #endif

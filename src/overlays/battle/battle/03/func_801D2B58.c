@@ -49,7 +49,7 @@ NON_MATCHING void func_801D2B58(void) {
     BattlePanelState*  row1;
     BattlePanelState*  row2;
 
-    cursor    = (u8*)&D_80146322;
+    cursor    = (u8*)&g_BattleTurnCursor;
     fa8       = D_80145FA8;
     fa8_118   = D_80145FA8 - 0x118;
     fa8_88    = D_80145FA8 - 0x88;
@@ -57,8 +57,8 @@ NON_MATCHING void func_801D2B58(void) {
     eb3dc_2f4 = (u8*)&D_801EB3DC + 0x2F4;
     row1      = (BattlePanelState*)(cursor + 0x52);
     row2      = (BattlePanelState*)(cursor + 0x62);
-    if (cursor[0] < (u8)D_80146323) {
-        table = &D_8014630C;
+    if (cursor[0] < (u8)g_BattleTurnCount) {
+        table = g_BattleTurnOrder;
         do {
             value = table[cursor[0] & BYTE_MASK];
             kind  = value & BYTE_MASK;
@@ -71,7 +71,7 @@ NON_MATCHING void func_801D2B58(void) {
             }
             index = value;
             if (kind < 3U) {
-                func_800AB0B8(kind, cursor[0], &D_80146322);
+                func_800AB0B8(kind, cursor[0], &g_BattleTurnCursor);
             } else {
                 func_801E25E0((index - 3) & BYTE_MASK);
             }
