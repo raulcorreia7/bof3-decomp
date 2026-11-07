@@ -1502,9 +1502,9 @@ Fairy_VillageQueueRooms = { addr = 0x801EEDF8, type = "func", source = "queues r
 Fairy_JoinVillage = { addr = 0x801F00D4, type = "func", source = "activates a random free fairy roster slot, copies its 5-byte name and queues the slot index" }
 Fairy_VillageCountFairies = { addr = 0x801F02E4, type = "func", source = "counts the active rows of the 60-row fairy roster g_FairyJobs" }
 Fairy_VillageBuildJobs = { addr = 0x801F0534, type = "func", source = "builds task rows in the first 20 of the 30 g_Actors records from the active fairy records and their room kinds" }
-Fairy_ShowPlayRecordMessage = { addr = 0x801F1318, type = "func", source = "formats the play clock hours and minutes and g_BattleCount into text variables 0-2 (D_80145030 into 3), starts message 0x55 and enters game state 2" }
+Fairy_ShowPlayRecordMessage = { addr = 0x801F1318, type = "func", source = "formats the play clock hours and minutes and g_BattleCount into text variables 0-2 (D_80145030 into 3), starts FAIRY_MESSAGE_PLAY_RECORD and enters game state 2" }
 Scene_ClearEventState = { addr = 0x801F1684, type = "func", source = "clears the script-active flag and the three scene event state bytes at D_801448EB" }
-Fairy_GrantGift = { addr = 0x801F18F8, type = "func", source = "claims the gift-shop row earned by the fairy's battle count and queues its item and message 0x96" }
+Fairy_GrantGift = { addr = 0x801F18F8, type = "func", source = "claims the gift-shop row earned by the fairy's battle count and queues its item and FAIRY_MESSAGE_GIFT_RECEIVED message" }
 Fairy_RollExploreReward = { addr = 0x801F1BC8, type = "func", source = "rolls the weighted D_801EEC98 reward table for the fairy's job and queues the item or its message" }
 g_FairyCommu01StepFuncs = { addr = 0x801F25EC, source = "the 6 step handlers of the commu01 scene that the village runs through func_801F16BC, indexed by g_SceneEventStep; entry 3 is the commu01 overlay entry" }
 g_FairyGiftStepFuncs = { addr = 0x801F2604, source = "the 3 step handlers of the fairy gift event, starting with Fairy_GrantGift, run through func_801F18BC and indexed by g_SceneEventStep" }

@@ -70,6 +70,15 @@
 #define FAIRY_COMMU04_STEP_COUNT              7
 #define FAIRY_COMMU05_STEP_COUNT              5
 #define FAIRY_VILLAGE_COPY_ITEM_COUNT         16
+
+/* The village messages the fairy steps request through Message_StartAreaMessage. */
+#define FAIRY_MESSAGE_EXPLORE_FOUND_ITEM      0x4F
+#define FAIRY_MESSAGE_EXPLORE_BAG_FULL        0x50
+#define FAIRY_MESSAGE_EXPLORE_NO_REWARD       0x52
+#define FAIRY_MESSAGE_PLAY_RECORD             0x55
+#define FAIRY_MESSAGE_PLAY_RECORD_COUNTS                  0x56
+#define FAIRY_MESSAGE_GIFT_RECEIVED           0x96
+#define FAIRY_MESSAGE_NO_GIFT_YET             0x98
 #define FAIRY_VILLAGE_VARIANT_COUNTER_COUNT   8
 #define FAIRY_VILLAGE_LABEL_ROW_COUNT         3
 #define FAIRY_VILLAGE_LABEL_FIELD_COUNT       3
