@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 GFX_AllocPaletteFade(void* target, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value) {
+MATCH s32 GFX_AllocPaletteFade(Actor* target, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value) {
     s32 slot;   /* entry index 0-31 */
     s32 offset; /* byte offset into entry table, slot * 12 */
     s32 result; /* narrowed slot for the step call and return */
@@ -16,14 +16,14 @@ MATCH s32 GFX_AllocPaletteFade(void* target, s32 palette_base, s32 palette_count
 loop_1:
     if ((((PaletteFade*)((u8*)D_80145BD4 + offset))->flags & PALETTE_FADE_ACTIVE) == 0) {
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = value;
-        if ((((Actor*)target)->unk_28 == PALETTE_KIND_CELL) && ((((Actor*)target)->active_flags & 4) == 0)) {
+        if ((target->unk_28 == PALETTE_KIND_CELL) && ((target->active_flags & 4) == 0)) {
             ((PaletteFade*)((u8*)D_80145BD4 + offset))->flags = flagged;
         }
-        result                                           = slot & BYTE_MASK;
-        ((PaletteFade*)((u8*)D_80145BD4 + offset))->step = GFX_MarkPaletteCells(((Actor*)target)->unk_28, result, 1);
-        tmp_a                                            = ((Actor*)target)->unk_27;
+        result                                                   = slot & BYTE_MASK;
+        ((PaletteFade*)((u8*)D_80145BD4 + offset))->step         = GFX_MarkPaletteCells(target->unk_28, result, 1);
+        tmp_a                                                    = target->unk_27;
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->saved_byte   = tmp_a;
-        tmp_b                                                    = ((Actor*)target)->unk_28;
+        tmp_b                                                    = target->unk_28;
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->target       = target;
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->red_offset   = palette_base;
         ((PaletteFade*)((u8*)D_80145BD4 + offset))->green_offset = palette_count;
