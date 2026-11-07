@@ -24,8 +24,7 @@ NON_MATCHING void func_801D67D8(u8 party_slot) {
         item  = D_801C8940[i];
         power = g_Weapons[item].power;
         if ((((Item_GetEquipability(ITEM_CAT_WEAPON, item) & BYTE_MASK) >> character) & 1) &&
-            ((best < power) ||
-             ((best == power) && (item < g_EquipPreview[EQUIP_SLOT_WEAPON])))) {
+            ((best < power) || ((best == power) && (item < g_EquipPreview[EQUIP_SLOT_WEAPON])))) {
             g_EquipPreview[EQUIP_SLOT_WEAPON] = item;
             best                              = g_Weapons[item].power;
         }
@@ -38,8 +37,7 @@ NON_MATCHING void func_801D67D8(u8 party_slot) {
             power = g_Armors[item].power;
             if ((g_Armors[item].equip_type == i + 1) &&
                 (((Item_GetEquipability(ITEM_CAT_ARMOR, item) & BYTE_MASK) >> character) & 1) &&
-                ((best < power) ||
-                 ((best == power) && (item < g_EquipPreview[i])))) {
+                ((best < power) || ((best == power) && (item < g_EquipPreview[i])))) {
                 g_EquipPreview[i] = item;
                 best              = g_Armors[item].power;
             }
