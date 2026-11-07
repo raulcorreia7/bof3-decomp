@@ -44,7 +44,24 @@ MATCH void func_801EF374(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF3F4);
+MATCH void func_801EF3F4(void) {
+    PartyBattler* work;
+    u8            timer;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->unk_04 = g_BattleEffectBattler->unk_04;
+        work           = g_Task;
+        work->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        work->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        work->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x00C00000;
+        g_Task->unk_09 = 0;
+        g_Task->timer  = 0x3C;
+        g_Task->header.step++;
+    }
+}
+
 
 INCLUDE_ASM(func_801EF4A8);
 
