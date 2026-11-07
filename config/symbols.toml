@@ -2655,98 +2655,98 @@ GFX_CopyPaletteCapped = { addr = 0x801F83B0, type = "func", source = "copies 16 
 Scene_ClearParty = { addr = 0x801F84AC, type = "func", source = "one body shared through overlays/scenario/Scene_ClearParty.h" }
 
 ["emi/scenario/scena17/00"]
-Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F96D4, type = "func", source = "streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F96D4, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember." }
 
 ["emi/scenario/scena18/00"]
-Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D04, type = "func", source = "streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D04, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember." }
 
 ["emi/scenario/scena19/00"]
-Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D68, type = "func", source = "streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember; one body shared with the other scenario programs" }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D68, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_PartySize and joins the three with Party_JoinMember." }
 
 ["emi/world00/area000/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Message_SelectAnswerValue = { addr = 0x801F2C4C, type = "func", source = "resets the area request and stores the selection-selected state value" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_SelectAnswerValue = { addr = 0x801F2C4C, type = "func", source = "Selects the answer through World_SelectAnswerValue with answer mask 0xFFFF and this image's pair of reply messages." }
 
 ["emi/world00/area001/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Message_Clear = { addr = 0x801F2C04, type = "func", source = "byte-identical to Message_Clear at emi/world00/area032/13@0x801F36A0" }
-Message_ClearRequest = { addr = 0x801F2C48, type = "func", source = "clears the area request slot and resets the game-overlay state bytes when the selection byte is clear" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_Clear = { addr = 0x801F2C04, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
+Message_ClearRequest = { addr = 0x801F2C48, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
 
 ["emi/world00/area002/09"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world00/area003/13"]
-g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
-g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Message_OpenAnswerMenu = { addr = 0x801F2C04, type = "func", source = "arms the selected or idle area request and the shop panel step" }
+g_MasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
+g_MasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_OpenAnswerMenu = { addr = 0x801F2C04, type = "func", source = "Arms the answer message of the area with idle selection through WORLD_ARM_ANSWER_MESSAGE_IDLE, with this image's pair of message ids." }
 
 ["emi/world00/area004/09"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world00/area005/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world00/area007/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Area_SubCameraOffsetY10 = { addr = 0x801F2F20, type = "func", source = "subtracts 0xA from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_AddCameraOffsetY10 = { addr = 0x801F2F48, type = "func", source = "adds 0xA to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_ResetCameraOffsetY = { addr = 0x801F2F70, type = "func", source = "zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_SubCameraOffsetY10 = { addr = 0x801F2F20, type = "func", source = "Subtracts 0xA from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_AddCameraOffsetY10 = { addr = 0x801F2F48, type = "func", source = "Adds 0xA to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetY = { addr = 0x801F2F70, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 
 ["emi/world00/area008/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Menu_DrawHeaderBar = { addr = 0x801F3D88, type = "func", source = "draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952); byte-equal copy in the start, sisyou, Bate, Shisu, shop, commu02, scena12 and area008 images" }
-Area_AddCameraOffsetX20 = { addr = 0x801F450C, type = "func", source = "adds 0x14 to g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }
-Area_SubCameraOffsetX20 = { addr = 0x801F4534, type = "func", source = "subtracts 0x14 from g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }
-Area_ResetCameraOffsetX = { addr = 0x801F455C, type = "func", source = "zeroes g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_AddCameraOffsetY20 = { addr = 0x801F4578, type = "func", source = "adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_SubCameraOffsetY20 = { addr = 0x801F45A0, type = "func", source = "subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_ResetCameraOffsetY = { addr = 0x801F45C8, type = "func", source = "zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Menu_DrawHeaderBar = { addr = 0x801F3D88, type = "func", source = "Draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952)." }
+Area_AddCameraOffsetX20 = { addr = 0x801F450C, type = "func", source = "Adds 0x14 to g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_SubCameraOffsetX20 = { addr = 0x801F4534, type = "func", source = "Subtracts 0x14 from g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetX = { addr = 0x801F455C, type = "func", source = "Zeroes g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_AddCameraOffsetY20 = { addr = 0x801F4578, type = "func", source = "Adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_SubCameraOffsetY20 = { addr = 0x801F45A0, type = "func", source = "Subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetY = { addr = 0x801F45C8, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 
 ["emi/world00/area010/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world00/area011/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world00/area012/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world00/area013/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world00/area014/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world00/area015/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Message_SelectAnswerValue = { addr = 0x801F2CB8, type = "func", source = "resets the area request and stores the selection-selected state value" }
-Area_SubCameraOffsetY20 = { addr = 0x801F2D0C, type = "func", source = "subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_AddCameraOffsetY20 = { addr = 0x801F2D34, type = "func", source = "adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_ResetCameraOffsetY = { addr = 0x801F2D5C, type = "func", source = "zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_SelectAnswerValue = { addr = 0x801F2CB8, type = "func", source = "Selects the answer through World_SelectAnswerValue with answer mask 0xFFFF and this image's pair of reply messages." }
+Area_SubCameraOffsetY20 = { addr = 0x801F2D0C, type = "func", source = "Subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_AddCameraOffsetY20 = { addr = 0x801F2D34, type = "func", source = "Adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetY = { addr = 0x801F2D5C, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 
 ["emi/world00/area016/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
-Actor_ShrinkAndFinish = { addr = 0x801F3360, type = "func", source = "shrinks the actor scale by 0x2000 and finishes or resets when the timer expires" }
-Actor_CenterOnScreen = { addr = 0x801F3400, type = "func", source = "stores screen origin x 0xA0 and y 0x50 on the actor" }
-Actor_NextStep = { addr = 0x801F3460, type = "func", source = "resets the actor timer and tile class then advances the handler index" }
-Actor_SlideScreenLeft = { addr = 0x801F350C, type = "func", source = "scrolls the actor screen origin left by 0x30 and advances its state" }
-Actor_SlideScreenX = { addr = 0x801F355C, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
-Area_Update = { addr = 0x801F35B8, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
-Actor_SetScreenBottom = { addr = 0x801F36D0, type = "func", source = "scrolls the actor screen origin to y 0xF0 and advances its state" }
-Area_DrawHudSprite = { addr = 0x801F39D8, type = "func", source = "draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
+Actor_ShrinkAndFinish = { addr = 0x801F3360, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it ends the shrink and resets its scratch state." }
+Actor_CenterOnScreen = { addr = 0x801F3400, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50, the screen centre." }
+Actor_NextStep = { addr = 0x801F3460, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
+Actor_SlideScreenLeft = { addr = 0x801F350C, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
+Actor_SlideScreenX = { addr = 0x801F355C, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
+Area_Update = { addr = 0x801F35B8, type = "func", source = "Area frame update that the screen-origin steps (Actor_SlideScreenX and Actor_SlideScreenLeft) run after advancing." }
+Actor_SetScreenBottom = { addr = 0x801F36D0, type = "func", source = "Sets the actor screen_y to 0xF0 and adds 1 to byte 0x03, when D_801454F2 is 0 or byte 0x0B is 0, no message is requested and no script is active." }
+Area_DrawHudSprite = { addr = 0x801F39D8, type = "func", source = "Draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; the screen overlay step calls it with ids 0 to 3 and the pad mask table steps." }
 Area_DrawHud = { addr = 0x801F3B00, type = "func", source = "Draws the area HUD at (x, y) while a draw flag in g_AreaDrawFlags is set: the base sprite, the interact and personal-action button sprites each showing the pad mask held in g_InputMasks (FIELD_INPUT_INTERACT, FIELD_INPUT_PERSONAL_ACTION), a fourth sprite when the target cell is blocked or in transition, then the gradient diamond at (x + 0x18, y + 0x18)." }
-Area_DrawGradientDiamond = { addr = 0x801F3ECC, type = "func", source = "builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18" }
-Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "spawns one to three actor records of random kind at the focus point and sets their distance" }
-Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "moves the actor by the projected velocity when the tile is classified" }
-Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record; one body shared with the other area overlays" }
+Area_DrawGradientDiamond = { addr = 0x801F3ECC, type = "func", source = "Builds the diamond (-10,0), (0,-4), (0,4), (10,0), turns it by g_AreaCameraAngle, projects it and queues one POLY_G4 at (x - 0x9E, y - 0x76); the area HUD function calls it with its x and y plus 0x18." }
+Actor_SpawnRandomGroup = { addr = 0x801F41BC, type = "func", source = "Spawns one to three actor records of random kind at the focus point and sets their distance." }
+Actor_MoveByVelocity = { addr = 0x801F4528, type = "func", source = "Adds vx and vy to the actor position each frame and runs the stream; frees the actor when header.flags bit 0x80 is set after it was seen clear." }
+Area_StepStreamSetDrawMode = { addr = 0x801F4740, source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 
 ["emi/world00/area018/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world00/area019/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world00/area020/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
