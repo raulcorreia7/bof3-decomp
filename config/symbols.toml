@@ -792,10 +792,17 @@ Effect_SelectTargetAndAdvance = { addr = 0x801EF06C, type = "func", source = "Fr
 Effect_PlayOnce_801EF344 = { addr = 0x801EF344, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic117 (Rest, Douse, Snooze)." }
 
 ["emi/bmagic/magic118/03"]
+BMagic_UpdateBurn = { addr = 0x801EEC18, type = "func", source = "per-frame update of the Burn effect: runs the step handler D_801EEC04 selects, then draws the flame quads and triangles while the effect is active" }
+BMagic_SpawnBurnFlames = { addr = 0x801EECD4, type = "func", source = "starts the Burn effect: claims eight flame effect slots with Battle_AllocEffect, each pointing at the effect work record, copies a palette row with the semi-transparent bit set and queues cue 0x100" }
+BMagic_SelectBurnTarget = { addr = 0x801EEE20, type = "func", source = "counts the effect timer at +0x09 up and, at 16, calls func_800A9610 with g_BattleTargetSelector and 0x10, then advances the step byte at +0x01" }
 Effect_NextStepOnWorkLastTick = { addr = 0x801EEE8C, type = "func", source = "Advances header.mode (byte 0x01) when the effect ticker (byte 0x0B) is 1 in magic118 (Burn)." }
 Effect_CountDownTimerNextStep = { addr = 0x801EEEC0, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.mode (byte 0x01) at zero in magic118 (Burn)." }
 Effect_PlayOnZeroTick = { addr = 0x801EEF0C, type = "func", source = "When the effect ticker (byte 0x0B) is zero plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic118 (Burn)." }
+BMagic_UpdateBurnSprites = { addr = 0x801EEF6C, type = "func", source = "updates the Burn sprite phase: runs the handler D_801EFCD4 selects by mode, then draws the textured flame sprites while the effect is active" }
+BMagic_DrawBurnSprites = { addr = 0x801EF194, type = "func", source = "draws the textured flame sprites (POLY_GT4 with the texture page and CLUT of the effect) into the ordering table cells" }
 Effect_SetActorMatrix = { addr = 0x801EF60C, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic118 (Burn)." }
+BMagic_DrawBurnFlameQuads = { addr = 0x801EF6BC, type = "func", source = "draws the Burn flame quads (POLY_G4, semi-transparent) with sine and cosine offsets" }
+BMagic_DrawBurnFlameTris = { addr = 0x801EFA1C, type = "func", source = "draws the Burn flame triangles (POLY_G3, semi-transparent) with the same sine and cosine offsets as the quads" }
 
 ["emi/bmagic/magic120/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
