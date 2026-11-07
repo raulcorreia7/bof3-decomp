@@ -80,15 +80,15 @@ Callback D_801E1D00[3] = {
 u8 D_801E1D0C[4] = {
     0xC0, 0xD0, 0xE0, 0xD0,
 };
-Callback D_801E1D10[4] = {
-    (Callback)func_801D0C90, (Callback)func_801D1B54, (Callback)func_801D1CF0,
+Callback g_FishingCastGaugeStates[4] = {
+    (Callback)func_801D0C90, (Callback)Fishing_CastGaugeInit, (Callback)Fishing_CastGaugeSweep,
     (Callback)func_801D1F38,
 };
-Callback D_801E1D20[6] = {
-    (Callback)func_801D0C90, (Callback)func_801D210C, (Callback)func_801D23F4,
-    (Callback)func_801D25F0, (Callback)func_801D2648, (Callback)func_801D28DC,
+Callback g_FishingLureStates[6] = {
+    (Callback)func_801D0C90, (Callback)Fishing_LureCast, (Callback)Fishing_LureFly,
+    (Callback)Fishing_LureSettle, (Callback)Fishing_LureFloat, (Callback)Fishing_LureHooked,
 };
-/* Stride 8: the row of the cue index, read as [cue_index_06 * 8] by func_801D210C. needs: type. */
+/* Stride 8: the row of the cue index, read as [cue_index_06 * 8] by Fishing_LureCast. needs: type. */
 u8 D_801E1D38[32] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0xFE, 0xFF,
@@ -101,8 +101,8 @@ FishingCueStep D_801E1D58[4] = {
 Callback D_801E1D78[2] = {
     (Callback)func_801D29BC, (Callback)func_801D2AE0,
 };
-Callback D_801E1D80[3] = {
-    (Callback)func_801D0C90, (Callback)func_801D2D74, (Callback)func_801D2DC4,
+Callback g_FishingReelGaugeStates[3] = {
+    (Callback)func_801D0C90, (Callback)Fishing_ReelGaugeInit, (Callback)Fishing_ReelGaugeUpdate,
 };
 Callback D_801E1D8C[5] = {
     (Callback)func_801D0C90, (Callback)func_801D339C, (Callback)func_801D34A0,
@@ -145,7 +145,7 @@ static struct FishingCueColors sCueColors = {
     {0x81, 0x00},
     {0x01, 0x82, 0x00, 0x06, 0x83, 0x00, 0x05, 0x00, 0x00, 0x00},
 };
-u8 D_801E1F20[9][4] = {
+u8 g_FishingPromptSets[9][4] = {
     {0x00, 0x02, 0x01, 0x01},
     {0x03, 0x04, 0x05, 0x01},
     {0x03, 0x04, 0xFF, 0x01},
@@ -156,17 +156,17 @@ u8 D_801E1F20[9][4] = {
     {0x0D, 0xFF, 0xFF, 0x00},
     {0x0E, 0xFF, 0xFF, 0x00},
 };
-Callback D_801E1F44[13] = {
-    (Callback)func_801D0C90, (Callback)func_801D3650, (Callback)func_801D3684,
+Callback g_FishingPromptStates[13] = {
+    (Callback)func_801D0C90, (Callback)func_801D3650, (Callback)Fishing_PromptSlideIn,
     (Callback)func_801D36F8, (Callback)func_801D3824, (Callback)func_801D3898,
-    (Callback)func_801D3908, (Callback)func_801D3938, (Callback)func_801D39B8,
+    (Callback)func_801D3908, (Callback)Fishing_PromptSlideOut, (Callback)func_801D39B8,
     (Callback)func_801D3A54, (Callback)func_801D3C74, (Callback)func_801D3F40,
     (Callback)func_801D41E4,
 };
-Callback D_801E1F78[17] = {
+Callback g_FishingDataStates[17] = {
     (Callback)func_801D0C90, (Callback)func_801D42E4, (Callback)func_801D4378,
     (Callback)func_801D4570, (Callback)func_801D45F8, (Callback)func_801D4680,
-    (Callback)func_801D4884, (Callback)func_801D4984, (Callback)func_801D4B60,
+    (Callback)Fishing_DataNextFish, (Callback)func_801D4984, (Callback)func_801D4B60,
     (Callback)func_801D4C84, (Callback)func_801D4E70, (Callback)func_801D5048,
     (Callback)func_801D52D4, (Callback)func_801D5398, (Callback)func_801D54F8,
     (Callback)func_801D5574, (Callback)func_801D56F4,
@@ -283,34 +283,34 @@ static struct FishingMenuLabels sMenuLabels = {
     "EQUIP",
     "GUIDE",
 };
-Callback D_801E21E0[12] = {
-    (Callback)func_801D9B58, (Callback)func_801D9CF4, (Callback)func_801DA5B4,
-    (Callback)func_801DA8E8, (Callback)func_801DAED4, (Callback)func_801DC474,
+Callback g_FishingSceneModes[12] = {
+    (Callback)Fishing_EntryRun, (Callback)Fishing_ReadyRun, (Callback)Fishing_CastRun,
+    (Callback)func_801DA8E8, (Callback)Fishing_HookedRun, (Callback)func_801DC474,
     (Callback)func_801DC590, (Callback)func_801DC64C, (Callback)func_801DC708,
     (Callback)func_801DC838, (Callback)func_801DD95C, (Callback)func_801DDBC8,
 };
-Callback D_801E2210[3] = {
+Callback g_FishingEntryStates[3] = {
     (Callback)func_801D9B9C, (Callback)func_801D9C4C, (Callback)func_801D9C9C,
 };
-Callback D_801E221C[11] = {
-    (Callback)func_801D9D38, (Callback)func_801D9E08, (Callback)func_801D9E40,
+Callback g_FishingReadyStates[11] = {
+    (Callback)func_801D9D38, (Callback)func_801D9E08, (Callback)Fishing_ChooseAction,
     (Callback)func_801D9FE8, (Callback)func_801DA058, (Callback)func_801DA168,
     (Callback)func_801DA2A0, (Callback)func_801D9FE8, (Callback)func_801DA3F4,
     (Callback)func_801DA498, (Callback)func_801DA508,
 };
-Callback D_801E2248[4] = {
-    (Callback)func_801DA5F8, (Callback)func_801DA638, (Callback)func_801DA714,
+Callback g_FishingCastStates[4] = {
+    (Callback)func_801DA5F8, (Callback)Fishing_CastInput, (Callback)func_801DA714,
     (Callback)func_801DA78C,
 };
 Callback D_801E2258[4] = {
     (Callback)func_801DA92C, (Callback)func_801DA9DC, (Callback)func_801DAE3C,
     (Callback)func_801DAE84,
 };
-Callback D_801E2268[15] = {
-    (Callback)func_801DAF18, (Callback)func_801DAFBC, (Callback)func_801DB140,
-    (Callback)func_801DB554, (Callback)func_801DB620, (Callback)func_801DB738,
+Callback g_FishingHookedStates[15] = {
+    (Callback)func_801DAF18, (Callback)func_801DAFBC, (Callback)Fishing_HookedReel,
+    (Callback)Fishing_CatchRecord, (Callback)func_801DB620, (Callback)func_801DB738,
     (Callback)func_801DB808, (Callback)func_801DB8F0, (Callback)func_801DBA94,
-    (Callback)func_801DBBAC, (Callback)func_801DBD6C, (Callback)func_801DBEDC,
+    (Callback)Fishing_CatchPage, (Callback)func_801DBD6C, (Callback)func_801DBEDC,
     (Callback)func_801DBFC8, (Callback)func_801DC0CC, (Callback)func_801DC248,
 };
 Callback D_801E22A4[3] = {
@@ -342,8 +342,8 @@ Callback D_801E2304[4] = {
     (Callback)func_801DDC0C, (Callback)func_801DDC54, (Callback)func_801DDCB8,
     (Callback)func_801DDCF8,
 };
-void (*D_801E2314[7])(void) = {
-    (void (*)(void))func_801DE5EC, (void (*)(void))func_801DE82C, (void (*)(void))func_801DEBC4,
+void (*g_FishModes[7])(void) = {
+    (void (*)(void))Fishing_FishAppear, (void (*)(void))Fishing_FishSwim, (void (*)(void))func_801DEBC4,
     (void (*)(void))func_801DECDC, (void (*)(void))func_801DF334, (void (*)(void))func_801DFFA8,
     (void (*)(void))func_801E00E0,
 };
@@ -521,7 +521,7 @@ u8 D_801E2AB8[16] = {
     0x04, 0x00, 0x08, 0x10,
 };
 /* The 0x24-byte area cue rows; D_801E2ACA..D_801E2ADA name columns inside. */
-u8 D_801E2AC8[812] = {
+u8 g_FishSpecies[812] = {
     0x04, 0x02, 0xE6, 0x02, 0x00, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x03,
     0x10, 0x00, 0x1E, 0x1E, 0x01, 0x00, 0x64, 0x00, 0x08, 0x10, 0x00, 0x10,
     0x08, 0x10, 0x00, 0x10, 0x00, 0x04, 0x10, 0x10, 0x08, 0x00, 0x10, 0x10,
@@ -591,7 +591,7 @@ u8 D_801E2AC8[812] = {
     0xBC, 0x01, 0xBA, 0x01, 0x09, 0x09, 0x09, 0x09, 0x00, 0x09, 0x01, 0x03,
     0x10, 0x00, 0x1E, 0xC8, 0x00, 0x00, 0xF4, 0x01,
 };
-s8 D_801E2DF4[592] = {
+s8 g_FishSpawnCounts[592] = {
     10, 6, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     10, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0,

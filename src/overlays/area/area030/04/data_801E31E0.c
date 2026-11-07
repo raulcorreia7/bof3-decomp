@@ -25,10 +25,10 @@ u8 D_801E3200 __attribute__((aligned(4))) = 0;
 u8 D_801E3204 __attribute__((aligned(4))) = 0;
 
 /* 0x801E3208 */
-u8 D_801E3208 __attribute__((aligned(4))) = 0;
+u8 g_FishingHookedFish __attribute__((aligned(4))) = 0;
 
 /* 0x801E320C */
-FishingCharRow *D_801E320C = 0;
+FishingCharRow *g_FishingRodRow = 0;
 
 /* 0x801E3210 */
-FishingTarget *D_801E3210 = 0;
+FishingTarget *g_FishingLureRow = 0;

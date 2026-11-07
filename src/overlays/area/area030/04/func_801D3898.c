@@ -6,7 +6,7 @@ MATCH void func_801D3898(void) {
     FishingState* record;
     s32           index;
 
-    func_801D3938();
+    Fishing_PromptSlideOut();
     record = FISHING_STATE;
     index  = (record->row_4B * 3) << 2;
     UI_DrawText(0x1D, (record->origin_y_30 + 2), 0, D_801E1E78[index], (u8*)(*(u32*)((u8*)D_801E1E7C + index)));
