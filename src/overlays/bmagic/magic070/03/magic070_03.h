@@ -3,7 +3,10 @@
 
 /* The bmagic/magic070/03 overlay. Only this image includes the file. */
 
-#include "overlays/bmagic/bmagic.h"
+/* The sparkle kind this image spawns: it picks the count, delay, rise and colours. */
+#define EFFECT_SPARKLE_KIND 0
+
+#include "overlays/bmagic/sparkle.h"
 
 /* The effect ticker value below which Effect_NextStep advances the step. */
 #define EFFECT_STEP_LIMIT 5
