@@ -31,7 +31,6 @@ MATCH void func_801EEE34(void) {
     }
 }
 
-
 INCLUDE_ASM(func_801EEEEC);
 
 INCLUDE_ASM(func_801EF148);

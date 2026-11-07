@@ -103,7 +103,6 @@ MATCH void func_801EF4B4(void) {
     }
 }
 
-
 #include "overlays/bmagic/Effect_SetDuration.h"
 
 MATCH void func_801EF58C(void) {

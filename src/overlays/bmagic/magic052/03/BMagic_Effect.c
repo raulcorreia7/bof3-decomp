@@ -43,7 +43,6 @@ MATCH void func_801EEEE0(void) {
     g_ScriptBank = AREA_SCRIPT_BANK;
 }
 
-
 MATCH void func_801EEF84(void) {
     PartyBattler* work;
     s32           var_a0;

@@ -28,7 +28,6 @@ MATCH void func_801EEE28(void) {
     }
 }
 
-
 MATCH void func_801EEEC8(void) {
     PartyBattler* src;
     PartyBattler* dst;
