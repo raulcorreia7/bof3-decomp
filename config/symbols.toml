@@ -3366,6 +3366,7 @@ Actor_MoveByVelocity = { addr = 0x801F4558, type = "func", source = "Adds vx and
 Area_StepStreamSetDrawMode = { addr = 0x801F4770, type = "func", source = "Calls func_8014D978, which counts the work record's delay byte down and advances its stream at zero, then Area_SetDrawMode, which stages g_AreaDrawMode into the work record." }
 
 ["emi/world02/area088/13"]
+g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 AngleAverage12 = { addr = 0x801F35B0, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 Message_ClearOnCancel = { addr = 0x801F3764, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }

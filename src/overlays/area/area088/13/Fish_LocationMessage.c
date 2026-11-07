@@ -80,7 +80,7 @@ MATCH void Fish_LocationMessage(void) {
                 Message_StartAreaMessage((s16)(index + 22));
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            (*(u8*)&g_SceneEventStep)++;
+            g_SceneEventStep_u8[0]++;
             break;
 
         case 1:
