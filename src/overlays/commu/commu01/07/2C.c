@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The commu01 overlay entry: the shared commu step byte selects the handler. */
 MATCH void func_801D0C2C(void) {
-    SYS_DISPATCH_BYTE(D_801D4BCC, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu01StepFuncs, D_801F294C);
 }
 
 MATCH void func_801D0C68(void) {
@@ -20,7 +20,7 @@ MATCH void func_801D0C68(void) {
 INCLUDE_ASM(func_801D0CAC);
 
 MATCH void func_801D0E44(void) {
-    SYS_DISPATCH_BYTE(D_801D4BD8, D_801D4E08);
+    SYS_DISPATCH_BYTE(g_Commu01Step2Funcs, D_801D4E08);
 }
 
 MATCH void func_801D0E80(void) {
@@ -32,7 +32,7 @@ INCLUDE_ASM(func_801D0EBC);
 INCLUDE_ASM(func_801D1158);
 
 MATCH void func_801D1328(void) {
-    SYS_DISPATCH_BYTE(D_801D4BEC, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu01Step2Sub1Funcs, D_801F294D);
 }
 
 INCLUDE_ASM(func_801D1364);

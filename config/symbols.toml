@@ -1385,6 +1385,9 @@ g_FairyExploreRewards = { addr = 0x801F2618, source = "Fairy_RollExploreReward r
 g_Fairies = { addr = 0x801F2700, source = "Fairy_JoinVillage copies the 5-byte name of a 9-byte roster row" }
 ["emi/etc/commu01/07"]
 func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "overlay entry loads D_801F294C and calls D_801D4BCC[step]" }
+g_Commu01StepFuncs = { addr = 0x801D4BCC, source = "the step handlers of the overlay, indexed by the COMMU step byte D_801F294C" }
+g_Commu01Step2Funcs = { addr = 0x801D4BD8, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu01Step2Sub1Funcs = { addr = 0x801D4BEC, source = "handler table: dispatched through the table position of its owning step function" }
 
 ["emi/etc/commu02/08"]
 func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "overlay entry loads D_801F294C and calls D_801DABCC[step]" }
@@ -1394,18 +1397,44 @@ Fairy_VillageCountFairies = { addr = 0x801D7E64, type = "func", source = "counts
 Menu_DrawHeaderBar = { addr = 0x801D8A40, type = "func", source = "draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952); byte-equal copy in the start, sisyou, Bate, Shisu, shop, commu02, scena12 and area008 images" }
 Menu_DrawPortrait = { addr = 0x801D8F8C, type = "func", source = "draws a 40x48 portrait from the image's 4-byte atlas records with the requested shade, one body shared with the shop, start, Bate and Shisu overlays" }
 Menu_DrawPanelIcon = { addr = 0x801D9AC8, type = "func", source = "draws one MenuIconPrim from uv/clut" }
+g_Commu02Event0StepFuncs = { addr = 0x801DABCC, source = "the step handlers of the overlay, indexed by the COMMU step byte D_801F294C" }
+g_Commu02Event0Step0Funcs = { addr = 0x801DABD8, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event0Step1Funcs = { addr = 0x801DABE0, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event0Step1Sub2Funcs = { addr = 0x801DAC14, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event0Step1Sub3Funcs = { addr = 0x801DAC20, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event1StepFuncs = { addr = 0x801DACB8, source = "the step handlers of the overlay, indexed by the COMMU step byte D_801F294C" }
+g_Commu02Event1Step0Funcs = { addr = 0x801DACC4, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event1Step1Funcs = { addr = 0x801DACD4, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event1Step1Sub0Funcs = { addr = 0x801DACF8, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event2StepFuncs = { addr = 0x801DAD68, source = "the step handlers of the overlay, indexed by the COMMU step byte D_801F294C" }
+g_Commu02Event2Step0Funcs = { addr = 0x801DAD74, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event2Step1Funcs = { addr = 0x801DAD7C, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event3StepFuncs = { addr = 0x801DADEC, source = "the step handlers of the overlay, indexed by the COMMU step byte D_801F294C" }
+g_Commu02Event3Step1Funcs = { addr = 0x801DAE00, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event3Step1Sub6Funcs = { addr = 0x801DAE24, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event3Step1Sub7Funcs = { addr = 0x801DAE30, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event3Step2Funcs = { addr = 0x801DAE44, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event3Step2Sub6Funcs = { addr = 0x801DAE68, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu02Event3Step2Sub7Funcs = { addr = 0x801DAE74, source = "handler table: dispatched through the table position of its owning step function" }
 g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "the 4-byte portrait atlas records walked by Menu_DrawPortrait.h (twin rule, decomp/layout#shared-bodies)" }
 
 ["emi/etc/commu03/06"]
 func_801D0C44 = { addr = 0x801D0C44, type = "func", source = "overlay entry loads D_801F294C and calls D_801D18C8[step]" }
 Commu_AdvanceStep = { addr = 0x801D121C, type = "func", source = "adds one to D_801448EC unless g_GameStateIndex is 2" }
+g_Commu03StepFuncs = { addr = 0x801D18C8, source = "the step handlers of the overlay, indexed by the COMMU step byte D_801F294C" }
+g_Commu03Step0Funcs = { addr = 0x801D18D4, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu03Step1Funcs = { addr = 0x801D18DC, source = "handler table: dispatched through the table position of its owning step function" }
+g_Commu03Step2Funcs = { addr = 0x801D18E4, source = "handler table: dispatched through the table position of its owning step function" }
 
 ["emi/etc/commu04/06"]
 func_801D0C04 = { addr = 0x801D0C04, type = "func", source = "overlay entry loads D_801F294C, calls D_801D1750[step], then refreshes the panels when the game state is zero" }
 Commu_AdvanceStep = { addr = 0x801D1670, type = "func", source = "adds one to D_801448EC unless g_GameStateIndex is 2" }
+g_Commu04StepFuncs = { addr = 0x801D1750, source = "the step handlers of the overlay, indexed by the COMMU step byte D_801F294C" }
+g_Commu04Step0Funcs = { addr = 0x801D1758, source = "handler table: dispatched through the table position of its owning step function" }
 
 ["emi/etc/commu05/07"]
 func_801D0C10 = { addr = 0x801D0C10, type = "func", source = "overlay entry loads D_801F294C and calls D_801D1950[step]" }
+g_Commu05StepFuncs = { addr = 0x801D1950, source = "the step handlers of the overlay, indexed by the COMMU step byte D_801F294C" }
 
 ["emi/etc/game/00"]
 # Readable names live in the owning headers
