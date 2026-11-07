@@ -7,7 +7,7 @@ MATCH void func_801D96D4(void) {
     D_80148504.active           = 0;
     g_MenuPanelTasks[14].active = 0;
     D_8014854C                  = 0;
-    g_BattleChoicePanel[0]      = 0;
+    g_MenuPanelTasks[16].active = 0;
     g_MenuPanelTasks[17].active = 0;
     D_801485B8                  = 0;
 }
