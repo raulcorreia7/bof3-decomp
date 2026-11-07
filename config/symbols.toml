@@ -1167,6 +1167,7 @@ Effect_SetActiveActorMatrix = { addr = 0x801EF664, type = "func", source = "Sets
 BMagic_AllocEffect = { addr = 0x801EF934, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic219 (Magma Breath)." }
 Actor_Clear = { addr = 0x801EF998, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801EFA00, source = "Handlers of magic219 (Magma Breath), run by header.mode (byte 0x01)." }
+D_801EFA04 = { addr = 0x801EFA04, source = "Step handlers of magic219, run by header.step (byte 0x02) from func_801EF068." }
 
 ["emi/bmagic/magic220/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -1178,6 +1179,7 @@ Effect_SetActorMatrix = { addr = 0x801F0284, type = "func", source = "Sets the a
 BMagic_AllocEffect = { addr = 0x801F0628, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 64 slots are in use in magic220 (Geo Breath)." }
 Actor_Clear = { addr = 0x801F068C, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F06DC, source = "Handlers of magic220 (Geo Breath), run by header.mode (byte 0x01)." }
+D_801F06E0 = { addr = 0x801F06E0, source = "Step handlers of magic220 (Disembowel family), run by header.step (byte 0x02) from func_801EEFBC." }
 
 ["emi/bmagic/magic222/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -1211,6 +1213,7 @@ Effect_CountUpAndStep = { addr = 0x801EF5D8, type = "func", source = "Counts the
 BMagic_AllocEffect = { addr = 0x801F02D4, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic225 (Temptation)." }
 Actor_Clear = { addr = 0x801F0338, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0388, source = "Handlers of magic225 (Temptation), run by header.mode (byte 0x01)." }
+D_801F0398 = { addr = 0x801F0398, source = "Step handlers of magic225, run by header.step (byte 0x02) from func_801EF31C." }
 D_801F03AC = { addr = 0x801F03AC, source = "Mode handlers of the magic225 effect, run by header.mode (byte 0x01) from func_801EFE0C; func_801EFE50 reads the same table one entry further along by header.step." }
 D_801F03BC = { addr = 0x801F03BC, source = "Effect slot table of the magic225 effect, scanned by BMagic_AllocEffect." }
 
@@ -1225,6 +1228,7 @@ Effect_SetActorMatrix = { addr = 0x801F0724, type = "func", source = "Sets the a
 BMagic_AllocEffect = { addr = 0x801F0B8C, type = "func", source = "Claims the first free slot of the 48-entry effect table (bit 0 of header.flags) and returns its index, or 0xFF when every slot is in use in magic226 (MeteorStrike)." }
 Actor_Clear = { addr = 0x801F0BF0, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0C40, source = "Handlers of magic226 (MeteorStrike), run by header.mode (byte 0x01)." }
+D_801F0C44 = { addr = 0x801F0C44, source = "Step handlers of magic226, run by header.step (byte 0x02) from func_801EF048." }
 D_801F0C60 = { addr = 0x801F0C60, source = "Mode handlers of the bmagic/magic226/03 effect, run by header.mode from func_801EFD84." }
 D_801F0C78 = { addr = 0x801F0C78, source = "Step handlers of the bmagic/magic226/03 effect, run by header.step from func_801EFDC8." }
 D_801F0C84 = { addr = 0x801F0C84, source = "Step handlers of the bmagic/magic226/03 effect, run by header.step from func_801F04D4." }
