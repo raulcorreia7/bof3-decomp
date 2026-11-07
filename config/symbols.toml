@@ -866,9 +866,11 @@ D_801EFCD4 = { addr = 0x801EFCD4, source = "Mode handlers of the bmagic/magic118
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic120 (Whelp Breath)." }
 Effect_PlayOnIdleTick = { addr = 0x801EEFB0, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic120 (Whelp Breath)." }
-Effect_CountUpTimerCallSelector = { addr = 0x801EF2EC, type = "func", source = "Lowers the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) up; at 24 asks the target selector for targets (func_800A9610 with 0x10) and advances header.step (byte 0x02) in magic120 (Whelp Breath)." }
+BMagic_UpdateWhelpBreath = { addr = 0x801EF054, type = "func", source = "Runs the Whelp Breath handlers selected by header.step and draws the breath while the battler ticker is active." }
+Effect_CountUpTimerCallSelector = { addr = 0x801EF2EC, type = "func", source = "Lowers the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) up; at 24 marks the selected battlers pending with flag 0x10 and advances header.step (byte 0x02) in magic120 (Whelp Breath)." }
 Effect_CountUpAndStepAt120 = { addr = 0x801EF374, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 120 in magic120 (Whelp Breath)." }
 Effect_CountUpAndFinishAt136 = { addr = 0x801EF3C4, type = "func", source = "Raises the effect ticker (byte 0x0B), lowers byte 0x04 and counts the effect timer (byte 0x09) up; at 136 sets the active battler's ticker to 0xFF and clears the effect in magic120 (Whelp Breath)." }
+BMagic_DrawWhelpBreath = { addr = 0x801EF44C, type = "func", source = "Draws the Whelp Breath effect while its active mode runs." }
 Effect_SetActorMatrix = { addr = 0x801F0BF8, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic120 (Whelp Breath)." }
 g_BMagicEffectModes = { addr = 0x801F0CA8, source = "Handlers of magic120 (Whelp Breath), run by header.mode (byte 0x01)." }
 D_801F0CB0 = { addr = 0x801F0CB0, source = "Step handlers of the effect, run by header.step (byte 0x02) through SYS_DISPATCH_BYTE." }
@@ -882,7 +884,7 @@ g_BMagicEffectModes = { addr = 0x801F0C38, source = "Handlers of magic121 (Drago
 ["emi/bmagic/magic122/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_PlayOnIdleTick = { addr = 0x801EEDFC, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic122 (Flame Breath)." }
-Effect_CountUpTimerCallSelector = { addr = 0x801EF1C4, type = "func", source = "Lowers the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) up; at 24 asks the target selector for targets (func_800A9610 with 0x10) and advances header.step (byte 0x02) in magic122 (Flame Breath)." }
+Effect_CountUpTimerCallSelector = { addr = 0x801EF1C4, type = "func", source = "Lowers the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) up; at 24 marks the selected battlers pending with flag 0x10 and advances header.step (byte 0x02) in magic122 (Flame Breath)." }
 Effect_CountUpAndStepAt120 = { addr = 0x801EF24C, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 120 in magic122 (Flame Breath)." }
 Effect_CountUpAndFinishAt136 = { addr = 0x801EF29C, type = "func", source = "Raises the effect ticker (byte 0x0B), lowers byte 0x04 and counts the effect timer (byte 0x09) up; at 136 sets the active battler's ticker to 0xFF and clears the effect in magic122 (Flame Breath)." }
 g_BMagicEffectModes = { addr = 0x801F02CC, source = "Handlers of magic122 (Flame Breath), run by header.mode (byte 0x01)." }
