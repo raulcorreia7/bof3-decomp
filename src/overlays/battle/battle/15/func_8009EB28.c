@@ -21,7 +21,7 @@ MATCH void func_8009EB28(void) {
     battler = (*(u8*)&g_BattleActiveBattler);
     *flagp  = flag | BATTLE_STATE_DAMAGE_APPLIED;
     if (BATTLER_IS_PLAYER(battler)) {
-        base = D_80145F18[battler][6];
+        base = g_BattlePartyBattlers[battler].chr.stats.power;
     } else {
         /* FAKE: retail computes the enemy row index in v0, the row offset in v1. */
         MATCH_REG(u32, enemy, "v0") = battler - 3;
