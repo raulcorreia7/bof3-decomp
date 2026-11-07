@@ -1,9 +1,5 @@
 #include "area141_13.h"
 
-extern u8 D_801F4E0C[];
-
-void func_801A65A0(u8* script);
-
 MATCH void func_801F4584(void) {
     s32 first;
     s32 second;
