@@ -109,7 +109,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
                 ((u8*)&D_80010000 + D_80010000[D_801E2114[health]]));
     func_801D7784((u16)panel_x, (u16)panel_y);
     text = (u8*)g_UiFormatBuffer;
-    sprintf((s8*)text, &D_801D0C08, health + 1);
+    TEXT_Format(text, D_801D0C08, health + 1);
     UI_DrawGlyphString((s16)(panel_x + 0xCA), (s16)(panel_y + 0x92), 0U, text);
 }
 #else

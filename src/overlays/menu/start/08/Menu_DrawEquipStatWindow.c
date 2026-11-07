@@ -74,7 +74,7 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s3
         do {
             val9 = val10 & BYTE_MASK;
             val10 += 1;
-            sprintf((char*)val6, g_MenuStatFormat, stack_20[val9]);
+            TEXT_Format(val6, g_MenuStatFormat, stack_20[val9]);
             tmp0 = val0 + (val9 * 0xF) + 8;
             UI_DrawGlyphString(val7 >> 16, tmp0, byte_buffer[val9], val6);
         } while ((u32)(val10 & BYTE_MASK) < 3U);
@@ -83,12 +83,12 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s3
         val4   = 7;
         val12  = g_UiFormatBuffer;
         format = g_MenuStatFormat;
-        sprintf((char*)val12, format, character->stats.power);
+        TEXT_Format(val12, format, character->stats.power);
         tmp2 = val1 + 0x2C;
         UI_DrawGlyphString(tmp2, (s16)(val0 + 8), 7U, val12);
-        sprintf((char*)val12, format, character->stats.defense);
+        TEXT_Format(val12, format, character->stats.defense);
         UI_DrawGlyphString(tmp2, (s16)(val0 + 23), 7U, val12);
-        sprintf((char*)val12, format, character->stats.agility);
+        TEXT_Format(val12, format, character->stats.agility);
         UI_DrawGlyphString(tmp2, (s16)(val0 + 38), 7U, val12);
         val2 = val1 + 0x46;
     }

@@ -49,7 +49,7 @@ MATCH void func_800B1728(void) {
             UI_DrawTextString(
                 (g_MenuCurrentPanel->pos.x + 16), (g_MenuCurrentPanel->pos.y + line_y), clut, 0xFF,
                 Resource_GetText(((u8*)&D_800B4C90)[D_80145518[(s16)g_MenuCurrentPanel->unk_12 + row].gate_03 & 0x1F]));
-            sprintf((s8*)g_UiFormatBuffer, &D_80096A2C, sum & BYTE_MASK);
+            TEXT_Format(g_UiFormatBuffer, D_80096A2C, sum & BYTE_MASK);
             UI_DrawGlyphString((g_MenuCurrentPanel->pos.x + 88), (g_MenuCurrentPanel->pos.y + line_y), clut,
                                g_UiFormatBuffer);
         }

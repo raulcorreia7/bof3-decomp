@@ -22,7 +22,7 @@ MATCH void Fishing_DrawHud(s16 panel_x, s16 panel_y) {
     }
 
     CLAMP_MIN(value, 0);
-    sprintf((char*)g_UiFormatBuffer, (const char*)D_801D0C04, value);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C04, value);
 
     if (value >= 0x32 && D_80145E92[0] == 4 && (g_FrameCount & 4) != 0) {
         UI_DrawAsciiString((panel_x + 0xF0), (panel_y + 0x1A), 2, g_UiFormatBuffer);

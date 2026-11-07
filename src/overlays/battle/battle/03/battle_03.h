@@ -683,7 +683,7 @@ u32           func_801DCD50(u32 unused, u8 battler_index, s32 damage_value);
 void          func_801DCEF8(u32 battler_index);
 void          func_801DD08C(void);
 void          func_801DD29C(void);
-void          func_801DD3CC(s32 arg0);
+void          func_801DD3CC(void* work);
 u8            func_801DD448(void);
 extern u8     func_801DD704(u8 battler_index);
 void          func_801DD800(void);

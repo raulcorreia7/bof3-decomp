@@ -110,7 +110,7 @@ MATCH void func_801EFEB8(void) {
     pos.vx = (work->pos.x.fixed >> 9) - 0x4000;
     pos.vy = (work->pos.y.fixed >> 9) - 0x4000;
     pos.vz = -COORD_INT(work->pos.z) / 2;
-    RotTrans(&pos, &matrix.t, &flags);
+    RotTransMatrix(&pos, matrix, &flags);
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);

@@ -21,7 +21,7 @@ void  Actor_Create(u8* request);
 /* func_8019625C */
 void  func_8019625C(void);
 /* func_8019651C */
-s32   GFX_AllocPaletteFade(u8* color_data, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
+s32   GFX_AllocPaletteFade(void* target, s32 palette_base, s32 palette_count, s32 palette_index, s32 flag_value);
 /* func_80196670 */
 void  GFX_FreePaletteFade(u8 index);
 /* func_80196718 */
@@ -133,7 +133,7 @@ s32   func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* positi
 /* func_801AFE18 */
 void* Area_SetCameraMatrix(void* out_matrix);
 /* func_801AFF04 */
-void  Area_ProjectPoint(s32* pos, long* screen_xy);
+void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 /* func_801AFF64 */
 void  Matrix_SetIdentity(MATRIX* matrix);
 /* func_801AFFD8 */

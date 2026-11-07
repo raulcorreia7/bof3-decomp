@@ -844,14 +844,14 @@ MATCH void func_801F89F0(void) {
 }
 
 MATCH void func_801F8AB8(void) {
-    u16*         screen;
+    DVECTOR*     screen;
     SceneEffect* work;
     SceneEffect* tail;
     SceneEffect* current;
     s8           shade;
     s32          point[3];
 
-    screen = D_1F800034;
+    screen = (DVECTOR*)D_1F800034;
     work   = SCN_EFFECT;
     work->pos.z.parts.height += 0x20;
     point[0] = work->pos.x;
@@ -860,7 +860,7 @@ MATCH void func_801F8AB8(void) {
     Area_ProjectPoint(point, screen);
 
     current                     = SCN_EFFECT;
-    VOL(u16, current->origin.x) = screen[0];
+    VOL(u16, current->origin.x) = (u16)screen->vx;
     current->origin.y           = SP_REF(u16, 0x36u);
     shade                       = *(s8*)&current->color_r;
 

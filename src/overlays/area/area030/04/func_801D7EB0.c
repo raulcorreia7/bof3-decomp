@@ -45,7 +45,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
             UI_DrawText(x + 5, y + 0x17 + icon_y - (y + 0x19), 0, 0xC, (u8*)&g_Accessories[id]);
             qty = g_InventoryCounts[3][slot];
             if (qty >= 2) {
-                sprintf((char*)buffer, D_801D0C14, qty);
+                TEXT_Format(buffer, D_801D0C14, qty);
                 UI_DrawGlyphString(x + 0x68, y + 0x1D + icon_y - (y + 0x19), 7, buffer);
                 UI_DrawGlyphString(x + 0x68, y + 0x1B + icon_y - (y + 0x19), 0, buffer);
             }
@@ -53,7 +53,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
             UI_DrawText(x + 5, (s16)icon_y, 0, 0xC, (u8*)&g_Accessories[id]);
             qty = g_InventoryCounts[3][slot];
             if (qty >= 2) {
-                sprintf((char*)buffer, D_801D0C14, qty);
+                TEXT_Format(buffer, D_801D0C14, qty);
                 UI_DrawGlyphString(x + 0x68, y + 0x1D + icon_y - (y + 0x19), 0, buffer);
             }
         }

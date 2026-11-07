@@ -396,29 +396,29 @@ MATCH void func_801F2DD8(void) {
 }
 
 MATCH void func_801F2DF8(const void* sprite) {
-    s16               screen[2];
+    DVECTOR           screen;
     u16               size[2];
     volatile s16      buf[8];
     const AreaSprite* work;
-    const void*       object;
+    s32*              object;
     POLY_FT4*         primitive;
 
     work      = (const AreaSprite*)sprite;
-    object    = (const void*)((const u8*)sprite + 4u);
+    object    = (s32*)((const u8*)sprite + 4u);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
 
-    Area_ProjectPoint(object, screen);
+    Area_ProjectPoint(object, &screen);
     size[0] = VOL(u16, work->half_size);
     size[1] = VOL(u16, work->half_size);
     func_801AFFD8(object, size, size);
 
-    setXY4(primitive, screen[0] - ((s16)size[0] >> 1), screen[1] - ((s16)size[1] >> 1),
-           (screen[0] - ((s16)size[0] >> 1)) + size[0], screen[1] - ((s16)size[1] >> 1),
-           screen[0] - ((s16)size[0] >> 1), (screen[1] - ((s16)size[1] >> 1)) + size[1],
-           (screen[0] - ((s16)size[0] >> 1)) + size[0], (screen[1] - ((s16)size[1] >> 1)) + size[1]);
+    setXY4(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1),
+           (screen.vx - ((s16)size[0] >> 1)) + size[0], screen.vy - ((s16)size[1] >> 1),
+           screen.vx - ((s16)size[0] >> 1), (screen.vy - ((s16)size[1] >> 1)) + size[1],
+           (screen.vx - ((s16)size[0] >> 1)) + size[0], (screen.vy - ((s16)size[1] >> 1)) + size[1]);
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     primitive->clut  = GetClut(160, 483);
     primitive->tpage = GetTPage(0, 1, 704, 256);
@@ -686,7 +686,7 @@ MATCH void func_801F3944(const void* spin) {
 
     SetPolyG3(primitive);
     SetSemiTrans(primitive, 1);
-    Area_ProjectPoint(work, &primitive->x0);
+    Area_ProjectPoint(&work->origin.x, POLY_XY(primitive, 0));
 
     point[0] =
         ((rcos(work->spin_angle) * work->vertex_a.vx - rsin(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;
@@ -696,7 +696,7 @@ MATCH void func_801F3944(const void* spin) {
     point[0] += work->origin.x;
     point[1] += work->origin.y;
     point[2] += work->origin.z;
-    Area_ProjectPoint(point, &primitive->x1);
+    Area_ProjectPoint(point, POLY_XY(primitive, 1));
 
     point[0] =
         ((rcos(work->spin_angle) * work->vertex_b.vx - rsin(work->spin_angle) * work->vertex_b.vy) >> 8) * work->scale;
@@ -706,7 +706,7 @@ MATCH void func_801F3944(const void* spin) {
     point[0] += work->origin.x;
     point[1] += work->origin.y;
     point[2] += work->origin.z;
-    Area_ProjectPoint(point, &primitive->x2);
+    Area_ProjectPoint(point, POLY_XY(primitive, 2));
 
     fade = work->fade;
     tmp  = fade;

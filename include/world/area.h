@@ -33,6 +33,7 @@
 #include "types.h"
 #include "common/fixed.h"
 #include "common/vector.h"
+#include "psx/psyq.h"
 
 /* The world overlays' own records. Every area program keeps its scratch in
  * the `0x800E4800` window (@source: wiki:formats/area#neighboring-buffers):
@@ -342,7 +343,7 @@ typedef struct AreaTrail {
     s32      radius;                  /* 0x10 - the ring radius */
     u16      angle;                   /* 0x14 - the rotation angle */
     u16      pad_16;                  /* 0x16 */
-    Point2D  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
+    DVECTOR  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
 } AreaTrail;
 
 ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);

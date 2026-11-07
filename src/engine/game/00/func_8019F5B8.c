@@ -8,7 +8,7 @@ MATCH void func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette) {
     u8    ch;
 
     index = 0;
-    sprintf((s8*)g_UiFormatBuffer, &D_80195860, g_Task->unk_06);
+    TEXT_Format(g_UiFormatBuffer, D_80195860, g_Task->unk_06);
     if (GetGraphType() != 1) {
         GetGraphType();
     }

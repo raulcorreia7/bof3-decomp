@@ -16,7 +16,7 @@ MATCH void Menu_DrawZennyWindow(s32 panel_x, s32 panel_y, s32 panel_kind, s32 ca
     base_y   = y;
     scaled_y = y << 16;
     UI_DrawWindow(panel_x + 3, y + 3, 101, 16, 0, g_WindowStyle);
-    sprintf((char*)g_UiFormatBuffer, g_MenuZennyFormat, caption_value);
+    TEXT_Format(g_UiFormatBuffer, g_MenuZennyFormat, caption_value);
     y += 4;
     UI_DrawAsciiString((s16)(panel_x + 20), y, 0, g_UiFormatBuffer);
     UI_DrawText(panel_x + 76, y, 0, 0xFF, MENU_CAPTION_ICON);
