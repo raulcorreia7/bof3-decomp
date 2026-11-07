@@ -3,5 +3,5 @@
  * member. */
 /* func_801F2C04 */
 MATCH void Area_RunEvent(void) {
-    SYS_DISPATCH_BYTE(D_801F3418, TASK_BYTES[0x2]);
+    SYS_DISPATCH_BYTE(D_801F3418, g_Task->header.step);
 }
