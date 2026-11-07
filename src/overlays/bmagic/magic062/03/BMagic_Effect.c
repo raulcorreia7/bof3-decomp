@@ -67,6 +67,7 @@ INCLUDE_ASM(func_801EFC4C);
 
 INCLUDE_ASM(func_801EFD80);
 
+/* hint: m2c draft is 4 insns short; retail loads timer, unk_14, unk_20, pos.z before the timer store from one g_Task load. */
 INCLUDE_ASM(func_801EFE74);
 
 MATCH void func_801EFF68(void) {
