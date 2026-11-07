@@ -29,7 +29,7 @@ NON_MATCHING void func_800AB910(void) {
         if (flags & 2) {
             state = 7;
         } else {
-            state = D_801EB721[(target - 3) * 0x118];
+            state = ENEMY_COMBATANT(target).unk_F1;
         }
     }
     g_BattleEffects[(u8)slot].unk_07 = state;
@@ -51,9 +51,9 @@ NON_MATCHING void func_800AB910(void) {
         off_z                            = FIELD(u16, work, 0x32u);
         flags                            = g_GameState->leader_id;
         g_BattleEffects[(u8)slot].unk_32 = off_z;
-        g_BattleEffects[(u8)slot].unk_2E = off_y + (s8)g_BattleCurrentEnemy->unk_E2;
-        g_BattleEffects[(u8)slot].unk_30 = off_x + (s8)g_BattleCurrentEnemy->unk_E3;
-        g_BattleEffects[(u8)slot].unk_08 = D_801EB638[(unit - 3) * 0x118];
+        g_BattleEffects[(u8)slot].unk_2E = off_y + g_BattleCurrentEnemy->panel_offset_x;
+        g_BattleEffects[(u8)slot].unk_30 = off_x + g_BattleCurrentEnemy->panel_offset_y;
+        g_BattleEffects[(u8)slot].unk_08 = ENEMY_COMBATANT(unit).unk_08;
     }
 }
 #else

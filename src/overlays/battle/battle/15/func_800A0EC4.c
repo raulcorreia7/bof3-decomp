@@ -1,7 +1,6 @@
 #include "battle_15.h"
 
 extern u8 D_80145F20[];
-extern u8 D_801EB6D0[];
 
 /* Advances the battle party: bumps the active battler's timer, copies
  * the character cells into the battle rows and drains the enemy rows.
@@ -78,19 +77,17 @@ NON_MATCHING void func_800A0EC4(void) {
             } while ((u32)(index & BYTE_MASK) < (u8)g_BattlePartyCount);
         }
     } else {
-        cell_offset = (*state - 3) * 0x118;
-        value       = D_801EB6D0[cell_offset];
+        member = *state - 3;
+        value  = g_BattleEnemyBattlers[member].stats.max_hp;
         if (value != 0xFFFF) {
-            rate = ((u16*)&D_800E4068)[D_801EB710[cell_offset] * 68] / 10;
+            rate = ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].kind * 68] / 10;
             if ((u32)(rate & HALF_MASK) < value) {
-                D_801EB6D0[cell_offset] = value - rate;
-                row_offset              = (*state - 3) * 0x118;
-                D_801EB6F0[row_offset] =
-                    D_801EB6F0[row_offset] - (((u16*)&D_800E4068)[D_801EB710[row_offset] * 68] / 10);
-                member = *state - 3;
-                value  = D_801EB6D0[member * 0x118];
-                if (value < D_801EB6C4[member][0]) {
-                    D_801EB6C4[member][0] = value;
+                g_BattleEnemyBattlers[member].stats.max_hp = value - rate;
+                g_BattleEnemyBattlers[member].base.max_hp -=
+                    ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].kind * 68] / 10;
+                value = g_BattleEnemyBattlers[member].stats.max_hp;
+                if (value < g_BattleEnemyBattlers[member].hp) {
+                    g_BattleEnemyBattlers[member].hp = value;
                 }
             }
         }
@@ -99,7 +96,7 @@ NON_MATCHING void func_800A0EC4(void) {
         if ((u8)g_BattleTarget < 3U) {
             value = g_BattlePartyBattlers[g_BattleTarget].chr.hp;
         } else {
-            value = D_801EB6C4[g_BattleTarget - 3][0];
+            value = ENEMY_COMBATANT(g_BattleTarget).hp;
         }
         g_BattleTargetRecord->hp_change = (s16)(value - 1);
     }

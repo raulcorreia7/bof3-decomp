@@ -247,7 +247,7 @@ typedef union EnemyIdCode {
 typedef struct EnemyDrop {
     u16 item;
     u8  rate;
-    u8  pad_03;
+    u8  flags; /* battle only: bit 0 is set once an ability has raised the rate */
 } EnemyDrop;
 
 ASSERT_SIZE(EnemyDrop, 0x4);

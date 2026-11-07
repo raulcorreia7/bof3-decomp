@@ -15,13 +15,13 @@ MATCH void func_801E99AC(void) {
 
     panel         = BATTLE_PANEL_TASK;
     row           = panel->cell_0A.slot - 3;
-    base          = D_801EB65E[row][0] + D_801EB712[row * 280];
-    kind          = D_801EB638[row][0];
+    base          = g_BattleEnemyBattlers[row].unk_2E + g_BattleEnemyBattlers[row].panel_offset_x;
+    kind          = g_BattleEnemyBattlers[row].unk_08;
     adj           = ((kind == 0) || (kind == 3)) ? D_801EAEA4[0] : D_801EAEA4[2];
     panel->x.half = base + adj;
     /* FAKE: retail keeps the second row scan after the x store. */
     MATCH_BARRIER();
-    y                         = D_801EB660[row][0] + D_801EB713[row * 280] + 0xC;
+    y                         = g_BattleEnemyBattlers[row].unk_30 + g_BattleEnemyBattlers[row].panel_offset_y + 0xC;
     BATTLE_PANEL_TASK->y.half = y;
     func_801D8690((s16)BATTLE_PANEL_TASK->x.half, (s16)y, BATTLE_PANEL_TASK->cell_0A.slot);
     if (g_BattleSelectionLatch != 0) {
