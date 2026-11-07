@@ -505,7 +505,7 @@ MATCH void func_801D5F7C(void) {
     func_801D812C();
     func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
     func_801D8058(0x4A, 0x64);
-    func_801D88A4(((s8) D_801DB0B4 * 8) + 0x55, 0x6D, 0);
+    func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 0);
 }
 
 MATCH void func_801D6124(void) {
@@ -523,7 +523,7 @@ MATCH void func_801D6124(void) {
         D_801F294D += 1;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         cue = 0x106;
-play_cue:
+    play_cue:
         D_801DB0C8 = 0xF0;
         SND_PlayCue(cue);
         D_801F294D -= 1;
@@ -537,7 +537,7 @@ play_cue:
             Menu_DrawCursorSprite(((s32)D_801DB0B8 * 32 + 0xF4) & 0xFFFC, 0x15, 0);
         }
         func_801D8058(0x4A, 0x64);
-        func_801D88A4(((s8) D_801DB0B4 * 8) + 0x55, 0x6D, 1);
+        func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 1);
     }
     func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & 0xFF, 0);
 }
@@ -677,7 +677,7 @@ MATCH void func_801D708C(void) {
         D_801F294D += 1;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         cue = 0x106;
-play_cue:
+    play_cue:
         D_801DB0C8 = 0xF0;
         SND_PlayCue(cue);
         D_801F294D -= 1;
@@ -692,7 +692,8 @@ play_cue:
         }
     }
     func_801D9210();
-    func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32) (D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & 0xFFFF, 0, 6);
+    func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32)(D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & 0xFFFF, 0,
+                  6);
 }
 
 INCLUDE_ASM(func_801D7234);

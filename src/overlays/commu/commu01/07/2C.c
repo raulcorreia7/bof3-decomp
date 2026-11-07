@@ -62,7 +62,7 @@ MATCH void func_801D1630(void) {
     func_801D36FC(D_801D4E28, 0);
     if (!(result & 0xFF)) {
         func_801D4694(&x, &y, *selection, D_801D4E24);
-        func_801D3984((s16) (x + 4), y, 1);
+        func_801D3984((s16)(x + 4), y, 1);
         func_801D28A4(0xA0, 0x3E, func_801D3AA0(*selection, (D_801D4E24 - 1) & 0xFF) & 0xFF, 1);
     }
 }

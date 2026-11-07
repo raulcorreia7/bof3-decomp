@@ -270,42 +270,42 @@ MATCH void func_801FCBDC(s32 arg0) {
     u8* state;
     s32 amount;
     s32 amount_2;
-    u8 frame;
-    u8 frame_2;
+    u8  frame;
+    u8  frame_2;
 
     state = &D_80146865;
     switch (*state) {
-    case 0:
-        amount = arg0 & 0xFF;
-        g_AreaCameraRefreshCount = 2;
-        frame = D_80146867 + 1;
-        D_80146867 = frame;
-        g_AreaCameraOffsetY = g_AreaCameraOffsetY + amount;
-        g_AreaCameraOffsetY = g_AreaCameraOffsetX + amount;
-        if (frame == 2) {
-            g_AreaCameraOffsetY = 0;
-            g_AreaCameraOffsetX = 0;
+        case 0:
+            amount                   = arg0 & 0xFF;
             g_AreaCameraRefreshCount = 2;
-            *state = 1;
-            D_80146867 = 0;
+            frame                    = D_80146867 + 1;
+            D_80146867               = frame;
+            g_AreaCameraOffsetY      = g_AreaCameraOffsetY + amount;
+            g_AreaCameraOffsetY      = g_AreaCameraOffsetX + amount;
+            if (frame == 2) {
+                g_AreaCameraOffsetY      = 0;
+                g_AreaCameraOffsetX      = 0;
+                g_AreaCameraRefreshCount = 2;
+                *state                   = 1;
+                D_80146867               = 0;
+                return;
+            }
             return;
-        }
-        return;
-    case 1:
-        amount_2 = arg0 & 0xFF;
-        g_AreaCameraRefreshCount = 2;
-        frame_2 = D_80146867 + 1;
-        D_80146867 = frame_2;
-        g_AreaCameraOffsetY = g_AreaCameraOffsetY - amount_2;
-        g_AreaCameraOffsetY = g_AreaCameraOffsetX + amount_2;
-        if (frame_2 == 2) {
-            g_AreaCameraOffsetY = 0;
-            g_AreaCameraOffsetX = 0;
+        case 1:
+            amount_2                 = arg0 & 0xFF;
             g_AreaCameraRefreshCount = 2;
-            D_80146867 = 0;
-            *state = 0;
-        }
-        break;
+            frame_2                  = D_80146867 + 1;
+            D_80146867               = frame_2;
+            g_AreaCameraOffsetY      = g_AreaCameraOffsetY - amount_2;
+            g_AreaCameraOffsetY      = g_AreaCameraOffsetX + amount_2;
+            if (frame_2 == 2) {
+                g_AreaCameraOffsetY      = 0;
+                g_AreaCameraOffsetX      = 0;
+                g_AreaCameraRefreshCount = 2;
+                D_80146867               = 0;
+                *state                   = 0;
+            }
+            break;
     }
 }
 

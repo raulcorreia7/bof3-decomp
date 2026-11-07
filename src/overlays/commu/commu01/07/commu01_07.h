@@ -28,8 +28,8 @@ extern u8  D_801D4E04;
 extern u8  D_801D4E08;
 extern u16 D_801D4E0C;
 
-extern u8  D_801D4E24;
-extern u8  D_801D4E28;
+extern u8 D_801D4E24;
+extern u8 D_801D4E28;
 
 void func_801D3038(void);
 void func_801D36FC(s32 arg0, s32 arg1);
