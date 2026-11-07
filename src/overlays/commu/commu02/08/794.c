@@ -74,6 +74,7 @@ MATCH void func_801D1938(void) {
 INCLUDE_ASM(func_801D1A50);
 
 /* blocker: loop register allocation; first diff: +0x44 index load before the counter. */
+/* hint: the slot-counter loop (x kept as a 16.16 running value, D_801DB0C4 as u8) is 8 bytes over (0x138 against 0x130); first differing instruction: sw ra,28(sp) at +0xC, because the 0x200000 step is hoisted into s2 where retail reloads it inside the loop. */
 INCLUDE_ASM(func_801D1D68);
 
 INCLUDE_ASM(func_801D1E98);
