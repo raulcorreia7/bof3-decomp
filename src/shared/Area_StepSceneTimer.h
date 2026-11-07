@@ -8,11 +8,11 @@ MATCH void Area_StepSceneTimer(void) {
     u8     timer;
 
     work  = g_Task;
-    timer = work->unk_09;
+    timer = work->timer;
     if (timer == 0) {
         Area_ResetScene();
         return;
     }
-    work->unk_09 = timer - 1;
+    work->timer = timer - 1;
     func_801B0DFC();
 }

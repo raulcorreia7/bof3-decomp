@@ -177,7 +177,7 @@ typedef struct Actor {
                                 *        stamp, 10 calls func_8015A944 (func_80167E00) */
     u8             option_flags;      /* 0x07 - ActorOptionFlags */
     u8             direction_08;      /* 0x08 - commu00 calls it the cue resource */
-    u8             unk_09;            /* 0x09 - area032 calls it the marker mode byte */
+    u8             timer;             /* 0x09 - counted up or down by the area step handlers */
     u8             unk_0A;            /* 0x0A */
     ActorParam     param;             /* 0x0B */
     s32            vx;                /* 0x0C added to x each step */
@@ -195,8 +195,8 @@ typedef struct Actor {
     u8             unk_2A;            /* 0x2A */
     u8             unk_2B;            /* 0x2B */
     u16            unk_2C;            /* 0x2C */
-    u16            unk_2E;            /* 0x2E - area032 calls it the marker's screen x */
-    u16            unk_30;            /* 0x30 - area032 calls it the marker's screen y */
+    u16            screen_x;          /* 0x2E - HUD banner and marker screen x */
+    u16            screen_y;          /* 0x30 - HUD banner and marker screen y */
     u16            unk_32;            /* 0x32 */
     WorldPos       pos;               /* 0x34; z integer is ground height */
     SpriteScale    scale;             /* 0x40 16.16; 0x10000 is full size */

@@ -12,8 +12,8 @@ MATCH void func_801F5020(void) {
         g_Task->header.flags = 0;
         g_Task->unk_04       = 0;
     } else {
-        g_Task->unk_09 = g_Task->unk_0A;
+        g_Task->timer = g_Task->unk_0A;
         func_8019F818(work);
-        g_Task->unk_09 = 0;
+        g_Task->timer = 0;
     }
 }

@@ -3,14 +3,14 @@
 MATCH void func_801F478C(void) {
     s32 beat;
 
-    beat = g_Task->unk_09 / 5;
+    beat = g_Task->timer / 5;
     if (beat == 4) {
         Area_ClearCellPalette(0x43, 0x1A);
         Actor_Clear();
         return;
     }
-    if (g_Task->unk_09 % 5 == 0) {
+    if (g_Task->timer % 5 == 0) {
         func_801F4E70(7 - beat);
     }
-    g_Task->unk_09++;
+    g_Task->timer++;
 }

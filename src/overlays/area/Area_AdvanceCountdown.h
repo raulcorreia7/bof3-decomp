@@ -9,8 +9,8 @@
 MATCH void Area_AdvanceCountdown(void) {
     u16 count;
 
-    count                    = ((Actor*)g_Task)->unk_30 - 0x10;
-    ((Actor*)g_Task)->unk_30 = count;
+    count                      = ((Actor*)g_Task)->screen_y - 0x10;
+    ((Actor*)g_Task)->screen_y = count;
     if ((s16)count <= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(0x201U);

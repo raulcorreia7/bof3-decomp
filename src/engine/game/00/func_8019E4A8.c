@@ -4,11 +4,11 @@ MATCH void func_8019E4A8(void) {
     Actor* work;
     u8     index;
 
-    g_Task->unk_09 += 1;
+    g_Task->timer += 1;
     work = g_Task;
-    if (work->unk_09 == 4) {
-        work->unk_09 = 0;
-        index        = Actor_FindFreeSlot();
+    if (work->timer == 4) {
+        work->timer = 0;
+        index       = Actor_FindFreeSlot();
         if (index != GAME_NONE) {
             g_ActorSlots[index].header.flags = 1;
             g_ActorSlots[index].type         = ACCESSORY_COUNT;

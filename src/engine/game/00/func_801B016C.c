@@ -7,7 +7,7 @@ MATCH void func_801B016C(void) {
 
     Actor_ClearVelocity();
     work          = g_Task;
-    work->unk_09  = 0;
+    work->timer   = 0;
     work2         = g_Task;
     work->unk_18  = 0;
     work->unk_1C  = 0;

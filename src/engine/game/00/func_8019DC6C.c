@@ -29,7 +29,7 @@ MATCH void func_8019DC6C(void) {
     i     = 0;
     do {
         func_8019DAA0((s32*)rec, state->offset_02, state->count_00);
-        if (g_Task->unk_09 >= 12u) {
+        if (g_Task->timer >= 12u) {
             rec->x_00 += rec->vx_10 * 2;
             rec->y_04 += rec->vy_14 * 2;
             rec->z_08 += rec->vz_18 * 2;
@@ -41,7 +41,7 @@ MATCH void func_8019DC6C(void) {
         rec += 1;
         i++;
     } while ((i & BYTE_MASK) < 8u);
-    if (g_Task->unk_09 >= 12u) {
+    if (g_Task->timer >= 12u) {
         state->offset_02 += 0x80;
     } else {
         state->count_00 -= 5;
