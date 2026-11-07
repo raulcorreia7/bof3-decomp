@@ -36,25 +36,34 @@ INCLUDE_ASM(func_801F70C0);
 
 INCLUDE_ASM(func_801F7164);
 
+/* Hint: reads D_801492DA as lhu for the scroll argument and as lh for the compare, so one signed type fails either way. */
 INCLUDE_ASM(func_801F7200);
 
 INCLUDE_ASM(func_801F7268);
 
 INCLUDE_ASM(func_801F7320);
 
-/* Hint: reads screen_x and screen_y as signed halves (lh); the draft with u16 members loads lhu. The call to func_801F85F0 also lands 4 bytes off. */
+/* Hint: reads screen_x and screen_y as signed halves (lh); the Actor members are u16, so the draft loads lhu. */
 INCLUDE_ASM(func_801F73D4);
 
 INCLUDE_ASM(func_801F743C);
 
 INCLUDE_ASM(func_801F74E0);
 
-INCLUDE_ASM(func_801F757C);
+MATCH void func_801F757C(void) {
+    func_801F8534();
+    g_Task->script_pc += rand() & 0xFF;
+    if (g_ScriptVars[0] == 0xB) {
+        g_Task->unk_5A = 0x20;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F75E4);
 
 INCLUDE_ASM(func_801F7688);
 
+/* Hint: same shape as func_801F73D4 (lh of screen_x and screen_y, u16 members); here the 0x32 update is -0x10. */
 INCLUDE_ASM(func_801F774C);
 
 INCLUDE_ASM(func_801F77B4);
@@ -259,6 +268,7 @@ MATCH void func_801F8CDC(Actor* actor) {
 #include "overlays/scenario/Actor_Wait.h"
 
 /* blocker: row load order; first diff: +0x10 lw v1,20(a2) (candidate) against lbu v1,3(a2) (retail). */
+/* Hint: steps a 3-byte-header record: byte 0x02 counts down, 0x03 adds 6, word 0x08 adds 0x40000, word 0x14 accumulates 0x08; the record type with word 0x08 and 0x14 is not named yet. */
 INCLUDE_ASM(func_801F8D4C);
 
 INCLUDE_ASM(func_801F8D98);
