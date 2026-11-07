@@ -706,6 +706,7 @@ D_801F08C4 = { addr = 0x801F08C4, source = "Step handlers of the magic093 effect
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 
+D_801EF988 = { addr = 0x801EF988, source = "Mode handlers of magic094, run by header.mode (byte 0x01) from func_801EEE4C." }
 ["emi/bmagic/magic095/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
@@ -951,6 +952,7 @@ Effect_CountUpTimerByTwoAndStep = { addr = 0x801EF38C, type = "func", source = "
 BMagic_AllocEffect = { addr = 0x801F0500, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 64 slots are in use in magic129 (Holocaust)." }
 Actor_Clear = { addr = 0x801F0564, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F05B4, source = "Handlers of magic129 (Holocaust), run by header.mode (byte 0x01)." }
+D_801F05B8 = { addr = 0x801F05B8, source = "Step handlers of magic129, run by header.step (byte 0x02) from func_801EEFC4." }
 D_801F05D8 = { addr = 0x801F05D8, source = "Effect slot table of the magic129 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic130/03"]
@@ -963,6 +965,7 @@ Effect_CountDownTimerStep_801EF42C = { addr = 0x801EF42C, type = "func", source 
 Effect_CountDownAndFinish = { addr = 0x801EF478, type = "func", source = "Counts the effect counter (byte 0x0A) down; at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic130 (Venom)." }
 g_BMagicEffectModes = { addr = 0x801EFA44, source = "Handlers of magic130 (Venom), run by header.mode (byte 0x01)." }
 
+D_801EFA6C = { addr = 0x801EFA6C, source = "Halfword table of magic130, indexed by the battler param byte 0x0B; added to the effect position unk_30 when the effect is set up." }
 ["emi/bmagic/magic131/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_StartOnZeroTick = { addr = 0x801EF61C, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic131 (KaiserBreath)." }
