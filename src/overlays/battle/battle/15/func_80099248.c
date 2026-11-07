@@ -15,7 +15,9 @@ MATCH void func_80099248(void) {
     if ((INPUT_REPEATED(held, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) == 0) {
         return;
     }
-    if ((Item_GetFlags(D_8014857A, D_801C893C[D_8014857A][D_8014857C]) & 0x80u) != 0u) {
+    if ((Item_GetFlags(g_MenuPanelTasks[16].unk_0A,
+                       D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) &
+         0x80u) != 0u) {
         g_BattleActorTurn->command.target ^= BATTLE_TARGET_BOTH_SIDES;
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }

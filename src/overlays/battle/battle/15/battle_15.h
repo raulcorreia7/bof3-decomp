@@ -505,7 +505,6 @@ extern s32                   D_80145EC4;
 /* Byte-addressed player rows: the first byte of each 0x140-byte work row holds
  * the battler's stored character id. */
 extern u8                    D_80145F09[];
-extern u8                    D_80145F12[];
 /* Battler base halfwords, one u16 per 0x140-byte player row. */
 extern u16                   D_80145FAA[];
 extern u8                    D_80145FB2;

@@ -8,7 +8,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC78);
 
-INCLUDE_ASM(func_801EEDE4);
+MATCH void func_801EEDE4(void) {
+    if (D_801EC2E0->target.party->unk_09 >= 0x28) {
+        g_Task->header.mode++;
+    }
+}
 
 #include "shared/Effect_StartPlaying.h"
 

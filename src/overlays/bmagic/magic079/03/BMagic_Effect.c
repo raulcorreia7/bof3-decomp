@@ -46,6 +46,7 @@ MATCH void func_801EEDDC(void) {
 
 INCLUDE_ASM(func_801EEE64);
 
+/* blocker: timer and z halfword take v1 and v0 in retail; first diff: lbu base register a0 against v0 at 0x801EEEF0. */
 INCLUDE_ASM(func_801EEEE4);
 
 MATCH void func_801EEF34(void) {

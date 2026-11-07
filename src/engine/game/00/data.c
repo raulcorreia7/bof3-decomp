@@ -2140,7 +2140,7 @@ s8 s_EntityPlacementOffsets[32] = {
 
 Callback D_801CD0AC[15] = {(Callback)func_801B016C, (Callback)func_801B0320, (Callback)func_801B69C0,
                            (Callback)func_801B1AE8, (Callback)func_801B29BC, (Callback)func_801B2A70,
-                           (Callback)func_801B2C38, (Callback)func_801B2D90, (Callback)func_801B3260,
+                           (Callback)func_801B2C38, (Callback)func_801B2D90, (Callback)Field_Climb,
                            (Callback)func_801D9B14, (Callback)func_801B3690, (Callback)func_801B371C,
                            (Callback)func_801B3BFC, (Callback)func_801F4D9C, (Callback)func_801C22D8};
 
@@ -2158,13 +2158,13 @@ Callback D_801CD118[2] = {(Callback)func_801B2AB4, (Callback)func_801B2B6C};
 Callback D_801CD120[4] = {(Callback)func_801B2DDC, (Callback)func_801B2FC8, (Callback)func_801B315C,
                           (Callback)func_801B31F0};
 
-Callback D_801CD130[4] = {(Callback)func_801B32A4, (Callback)func_801B32D0, (Callback)func_801B3488,
-                          (Callback)func_801B3540};
+Callback g_FieldClimbSteps[4] = {(Callback)func_801B32A4, (Callback)Field_ClimbMount, (Callback)func_801B3488,
+                          (Callback)Field_ClimbDismount};
 
-Callback D_801CD140[5] = {(Callback)func_801B3314, (Callback)func_801B3388, (Callback)func_801B33C4,
+Callback g_FieldClimbMountSteps[5] = {(Callback)func_801B3314, (Callback)func_801B3388, (Callback)func_801B33C4,
                           (Callback)func_801B3400, (Callback)func_801B343C};
 
-Callback D_801CD154[4] = {(Callback)func_801B3584, (Callback)func_801B35B0, (Callback)func_801B35EC,
+Callback g_FieldClimbDismountSteps[4] = {(Callback)func_801B3584, (Callback)func_801B35B0, (Callback)func_801B35EC,
                           (Callback)func_801B3670};
 
 Callback g_PersonalActions[19] = {
@@ -2266,8 +2266,8 @@ Callback D_801CD404[15] = {(Callback)func_801BBE98,
 
 Callback D_801CD440[2] = {(Callback)func_801BC000, (Callback)Area_StepSceneTimer};
 
-Callback D_801CD448[4] = {(Callback)func_801B32A4, (Callback)func_801B32D0, (Callback)func_801BD83C,
-                          (Callback)func_801B3540};
+Callback D_801CD448[4] = {(Callback)func_801B32A4, (Callback)Field_ClimbMount, (Callback)func_801BD83C,
+                          (Callback)Field_ClimbDismount};
 
 Offset2DB s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
     {-CAMERA_SCROLL_STEP, 0},
