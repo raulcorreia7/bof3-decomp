@@ -247,7 +247,7 @@ ASSERT_OFFSET(MenuState, cue_timer, 0x0E);
  * and EMI_DecodeStep (the decoder), which carried identical file-local copies.
  * The spill offsets and the 0x40 extent are retail reads: the decoder stores
  * s0-s7 with `sw s0..s7, 0x20..0x3C($t0)` on the context base. */
-typedef struct EmiDecodeContext {
+typedef struct EMIDecodeContext {
     u8* dst;        /* 0x00 decompressed output cursor */
     u32 unk04;      /* 0x04 not referenced by the decoder */
     u8* src;        /* 0x08 input cursor; match source while state is 12 */
@@ -257,10 +257,10 @@ typedef struct EmiDecodeContext {
     u8* limit;      /* 0x18 end of the scratchpad input window */
     u8* copy_entry; /* 0x1C copy-kernel resume entry (0x8016432C) */
     u32 spill[8];   /* 0x20-0x3C outer caller s0-s7, reloaded by func_801642CC */
-} EmiDecodeContext;
+} EMIDecodeContext;
 
-ASSERT_SIZE(EmiDecodeContext, 0x40);
-ASSERT_OFFSET(EmiDecodeContext, spill, 0x20);
+ASSERT_SIZE(EMIDecodeContext, 0x40);
+ASSERT_OFFSET(EMIDecodeContext, spill, 0x20);
 
 /* One status sprite cell: the size index selects a width and height row from D_8017F53C. */
 typedef struct SpriteCell {
@@ -404,13 +404,13 @@ ASSERT_SIZE(EncounterZone, MAP_ZONE_SIZE);
 /* The bank record table at D_8014677C seen from its second symbol, 0x80146780 (EMIBank + 4):
  * EMI_LoaderLoadVabHeader and SND_SetBankLayout reach it through this symbol and a typed
  * EMIBank access moves their register allocation. */
-typedef struct EmiAudioLink {
+typedef struct EMIAudioLink {
     u32 word;
     u8  unk_04[8];
     u16 index;
     u16 state;
     u8  unk_10[4];
-} EmiAudioLink;
+} EMIAudioLink;
 
 /* The selected record byte at 0x80146870/0x80146874: the equality and order
  * tests read it unsigned, the getter returns it sign-extended. */
@@ -451,7 +451,7 @@ typedef struct PanelRowWindow {
  * transfer path indexes it by the 0x10-byte slot. */
 typedef union OverlaySlotCursor {
     u8*          bytes; /* 0x00 */
-    EmiTocEntry* slots; /* 0x00 */
+    EMITocEntry* slots; /* 0x00 */
 } OverlaySlotCursor;
 
 typedef s8 (*GameFunc)(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags);
@@ -473,7 +473,7 @@ extern u8               D_80000307;
 extern u8               D_800013B5;
 /* Retail data below D_80145000 (one declaration each). */
 extern s32              D_80010004;
-extern EmiDecodeContext D_800327A0[];
+extern EMIDecodeContext D_800327A0[];
 extern u8               D_800E3800;
 
 /* One cell of the 56 x 28 screen grid: the tile it shows (the grid-wrapped panel position that
@@ -564,7 +564,7 @@ extern volatile u8                 g_EmiRingStates[];
 extern s32                         D_80146518[];
 extern u32                         g_EmiSlotSectors[];
 extern EMIBank                     D_8014677C[];
-extern volatile EmiAudioLink       D_80146780[];
+extern volatile EMIAudioLink       D_80146780[];
 extern s32                         D_80146784;
 extern u32                         D_80146788[];
 extern s16                         D_8014678C;
