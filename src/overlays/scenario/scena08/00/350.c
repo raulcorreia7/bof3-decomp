@@ -255,7 +255,7 @@ MATCH void func_801F8CDC(Actor* actor) {
     }
 }
 
-#include "overlays/scenario/Actor_WaitAndStep.h"
+#include "overlays/scenario/Actor_Wait.h"
 
 /* blocker: row load order; first diff: +0x10 lw v1,20(a2) (candidate) against lbu v1,3(a2) (retail). */
 INCLUDE_ASM(func_801F8D4C);

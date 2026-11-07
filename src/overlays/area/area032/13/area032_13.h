@@ -13,14 +13,14 @@ extern s32      D_80145EC4;
 extern u8       D_801468E4[];
 extern Callback D_801F3F80[];
 
-void Actor_ProjectFocusAndStep(void);
+void Actor_TrackFocus(void);
 void func_801F2DAC(void);
 void func_801F2E64(void);
 void func_801F2EE4(void);
 void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_shade);
 void func_801F30A8(void);
 void func_801F30EC(void);
-void Actor_UnhideAndFinishAtZero(void);
+void Actor_Reveal(void);
 /* func_801F35B4 */
 void Actor_FreePaletteFades(void);
 void func_801F363C(void);

@@ -5,8 +5,8 @@ u32 D_801F2C00 = 0x54;
 
 /* Work-state handlers; func_801F30A8 enters the same table at its sixth entry (D_801F3F80). */
 static const Callback s_WorkStates[8] = {
-    Actor_ProjectFocusAndStep,   func_801F2D18,          func_801F2DAC, func_801F2E64, func_801F2EE4, func_801F30EC,
-    Actor_UnhideAndFinishAtZero, Actor_FreePaletteFades,
+    Actor_TrackFocus, func_801F2D18, func_801F2DAC, func_801F2E64,
+    func_801F2EE4,    func_801F30EC, Actor_Reveal,  Actor_FreePaletteFades,
 };
 
 /* Variable-length script records; no reader names a field, so the block stays a byte array. */
@@ -155,7 +155,7 @@ MATCH s32 func_801F2C04(void) {
     SYS_DISPATCH_BYTE(s_WorkStates, g_Task->header.mode);
 }
 
-#include "shared/Actor_ProjectFocusAndStep.h"
+#include "shared/Actor_TrackFocus.h"
 
 MATCH void func_801F2D18(void) {
     u8**   slots;
@@ -289,7 +289,7 @@ MATCH void func_801F30EC(void) {
     slots[0x11][1] = 1;
 }
 
-#include "shared/Actor_UnhideAndFinishAtZero.h"
+#include "shared/Actor_Reveal.h"
 
 #include "shared/Actor_FreePaletteFades.h"
 

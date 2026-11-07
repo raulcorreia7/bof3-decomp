@@ -23,7 +23,7 @@ segments:
       - [0x4EC, c, func_801F30EC]
       - [0x624, c, func_801F3224]
       - [0x6A0, c, func_801F32A0]
-      - [0x760, c, Actor_ShrinkAndFinish]
+      - [0x760, c, Actor_ZoomOut]
       - [0x800, c, Actor_CenterOnScreen]
       - [0x81C, c, func_801F341C]
       - [0x860, c, Actor_NextStep]

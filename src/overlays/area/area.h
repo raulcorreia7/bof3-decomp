@@ -85,7 +85,7 @@ void            func_801F3264(void);
 /* func_801F3400 */
 void            Actor_CenterOnScreen(void);
 /* func_801F3360 */
-void            Actor_ShrinkAndFinish(void);
+void            Actor_ZoomOut(void);
 void            func_801F33A8(void);
 void            func_801F341C(void);
 extern u8       D_801F2DD4[];

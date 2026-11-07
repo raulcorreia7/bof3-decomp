@@ -3,7 +3,7 @@
  * change here must verify every member. */
 /* func_801F3360 , func_801F3294 (area033), func_801F32D0 (area151), func_801F3394 (area087), func_801F3398 (area065),
    func_801F3424 (area104), func_801F3EC4 (area088) */
-MATCH void Actor_ShrinkAndFinish(void) {
+MATCH void Actor_ZoomOut(void) {
     u8*  scratch;
     u8*  check;
     u8** slots;
