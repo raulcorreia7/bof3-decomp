@@ -42,7 +42,7 @@ MATCH void func_801D1058(void) {
 MATCH void func_801D1094(void) {
     s32 temp_v0;
 
-    if (g_SndBGMId != 0xFF) {
+    if (g_SndBGMId != BGM_NONE) {
         if (g_SndBGMId != D_801D1944) {
             temp_v0 = g_SndBGMId * 4;
             SND_StopSequence(*(g_SelectionCues + temp_v0), *(D_80181EBB + temp_v0));
@@ -55,7 +55,7 @@ MATCH void func_801D1094(void) {
 
 MATCH void func_801D1124(void) {
     if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBGM(D_801D1944, 0x64, 8);
+        SND_PlayBGM(D_801D1944, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         D_801D1948 = 0;
         D_801F294D += 1;
     }

@@ -18,7 +18,7 @@ INCLUDE_ASM(func_801D0CC8);
 
 MATCH void func_801D0D54(void) {
     if (EMI_LoaderIsReady() != 0) {
-        SND_PlayBGM(0x94, 0x64, 8);
+        SND_PlayBGM(BGM_COMMU02, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         D_801F294D = 0;
         D_801F294C += 1;
     }

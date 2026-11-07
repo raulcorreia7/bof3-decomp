@@ -26,7 +26,7 @@ MATCH void func_801F23A4(void) {
             break;
         case 2:
             if (g_GameStateIndex != *variant) {
-                SND_PlayBGM(D_801F2945, 100, 8);
+                SND_PlayBGM(D_801F2945, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
                 g_AreaWalkFlags &= ~AREA_WALK_BUSY_ALL;
                 func_801F1684();
                 func_801F1638();
