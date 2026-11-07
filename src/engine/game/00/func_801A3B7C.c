@@ -28,7 +28,7 @@ MATCH void func_801A3B7C(Actor* entity) {
         func_801ABBA8((u8*)entity + 0x74, g_Task->direction_08);
         g_Task->direction_08 |= 8u;
         entity->interaction_flags |= ACTOR_FLAG_MOVING;
-        g_Task->unk_0A = g_Task->unk_09 >> 1;
+        g_Task->unk_0A = g_Task->timer >> 1;
         return;
     }
 

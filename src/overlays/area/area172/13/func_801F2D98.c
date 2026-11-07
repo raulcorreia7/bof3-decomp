@@ -5,7 +5,7 @@ MATCH void func_801F2D98(void) {
 
     work         = g_Task;
     work->unk_09 = work->unk_09 - 1;
-    if (g_Task->unk_09 == 0) {
+    if (g_Task->timer == 0) {
         Actor_Clear();
     }
     func_801F2DF4(1);

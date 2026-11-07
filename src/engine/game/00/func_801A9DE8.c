@@ -67,7 +67,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
 
                     func_801ABBA8(state, value);
                     work     = g_Task;
-                    den      = work->unk_09 * state->unk_07;
+                    den      = work->timer * state->unk_07;
                     work->vz = ((s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4)) -
                                 (s16)COORD_INT(work->pos.z)) /
                                den;
@@ -92,13 +92,13 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             Actor* work;
 
             state->flags |= GAME_CURSOR_FLAG_MOVING;
-            g_Task->unk_09 = *(table + state->index_0A + 3);
-            if (g_Task->unk_09 == 0)
-                g_Task->unk_09 = 1;
+            g_Task->timer = *(table + state->index_0A + 3);
+            if (g_Task->timer == 0)
+                g_Task->timer = 1;
             work     = g_Task;
             work->vz = ((s16)((*(table + state->index_0A + 1) << 8) | *(table + state->index_0A + 2)) -
                         (s16)COORD_INT(work->pos.z)) /
-                       work->unk_09;
+                       work->timer;
             work->vx = 0;
             work->vy = 0;
             state->index_0A += 3;

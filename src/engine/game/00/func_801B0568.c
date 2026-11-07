@@ -30,7 +30,7 @@ MATCH void func_801B0568(void) {
             g_GameState->mode_12B.s8_value    = 0;
             Actor_ClearVelocity();
             g_Task->option_flags   = 0;
-            g_Task->unk_09         = 0U;
+            g_Task->timer          = 0U;
             g_Task->param.unk_0B   = 0;
             g_AreaCameraStep       = 0;
             g_AreaCameraHeightStep = 0;
@@ -81,7 +81,7 @@ MATCH void func_801B0568(void) {
             if (g_GameRequestFlags & 1) {
                 if (g_AreaWalkFlags & (AREA_WALK_TRANSITION | 0x2000)) {
                     tmp5         = g_Task;
-                    tmp1         = tmp5->unk_09;
+                    tmp1         = tmp5->timer;
                     tmp2         = tmp5->pos.x.fixed + (tmp5->vx * tmp1);
                     tmp10        = tmp5->pos.y.fixed + (tmp5->vy * tmp1);
                     tmp5->unk_06 = (tmp5->unk_06 - 1);
@@ -100,8 +100,8 @@ MATCH void func_801B0568(void) {
                 }
             }
             func_801B5BDC((g_Task->direction_08 + 8) & BYTE_MASK);
-            tmp6         = g_Task;
-            tmp6->unk_09 = (tmp6->unk_09 - 1);
+            tmp6        = g_Task;
+            tmp6->timer = (tmp6->timer - 1);
             func_801B0DFC();
             g_GameState->mode_12B.s8_value = 1;
             g_Task->header.step            = 2;
@@ -112,7 +112,7 @@ MATCH void func_801B0568(void) {
             }
             g_GameState->mode_12B.s8_value    = 0;
             g_GameState->counter_11C.u8_value = 3U;
-            g_Task->unk_09                    = 0U;
+            g_Task->timer                     = 0U;
             func_801B5BDC(g_Task->direction_08);
             g_GameState->mode_12B.s8_value = 0;
         block_35:
@@ -170,7 +170,7 @@ MATCH void func_801B0568(void) {
         case_255:
             g_GameState->mode_12B.s8_value    = 0;
             g_GameState->counter_11C.u8_value = 3U;
-            g_Task->unk_09                    = 0U;
+            g_Task->timer                     = 0U;
             g_Task->param.unk_0B              = 0;
             func_801B5BDC(g_Task->direction_08);
             g_GameState->mode_12B.s8_value = 0;

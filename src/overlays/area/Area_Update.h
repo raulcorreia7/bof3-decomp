@@ -11,5 +11,5 @@ MATCH void Area_Update(void) {
     }
 
     scratch = g_Task;
-    AREA_UPDATE_STEP(0x10, scratch->unk_2E);
+    AREA_UPDATE_STEP(0x10, scratch->screen_x);
 }

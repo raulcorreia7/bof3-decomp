@@ -4,8 +4,8 @@ MATCH void func_801F36C0(void) {
     Actor* scratch;
 
     scratch = (Actor*)g_Task;
-    scratch->unk_30 -= 0xA;
-    if ((s16)scratch->unk_30 < 0xC9) {
+    scratch->screen_y -= 0xA;
+    if ((s16)scratch->screen_y < 0xC9) {
         scratch->unk_03++;
     }
 
@@ -21,5 +21,5 @@ MATCH void func_801F36C0(void) {
 force:
     TASK_BYTES[0x03] = 3;
 done:
-    Area_DrawHudBanner(0x5C, ((Actor*)g_Task)->unk_30);
+    Area_DrawHudBanner(0x5C, ((Actor*)g_Task)->screen_y);
 }
