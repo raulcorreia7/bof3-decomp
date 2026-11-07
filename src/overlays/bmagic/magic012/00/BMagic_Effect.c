@@ -42,6 +42,7 @@ MATCH void func_801EF080(void) {
 
 INCLUDE_ASM(func_801EF188);
 
+/* exact body (magic045 func_801EF2B0 shape + func_800AF764(); func_801EF79C(param.unk_0B, 1)) blocked: bmagic.h declares func_801EF79C(void), this image's takes (u8, s32) */
 INCLUDE_ASM(func_801EF3C4);
 
 MATCH void func_801EF4B8(void) {
