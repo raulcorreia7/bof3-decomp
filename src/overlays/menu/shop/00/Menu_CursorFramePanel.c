@@ -3,7 +3,8 @@
 /* File-local declaration: the u16 lookup table at 0x801E5DD8 is owned by
  * this translation unit. */
 
-MATCH void func_801E2BC4(void) {
+/* func_801E2BC4 */
+MATCH void Menu_CursorFramePanel(void) {
     MenuPanelTask* panel = g_MenuCurrentPanel;
     u8*            bytes = (u8*)panel;
 
