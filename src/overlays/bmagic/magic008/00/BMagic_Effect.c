@@ -144,7 +144,19 @@ MATCH void func_801F0330(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801F037C);
+MATCH void func_801F037C(void) {
+    PartyBattler* work = g_Task;
+    u8            timer;
+
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    work->scale.x += 0x400;
+    work->scale.y += 0x800;
+    if (timer == 0) {
+        g_Task->unk_09 = func_800AFF98();
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801F03FC(void) {
     u8 counter;
