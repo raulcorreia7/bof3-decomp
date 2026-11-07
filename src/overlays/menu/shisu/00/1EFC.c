@@ -111,7 +111,7 @@ MATCH void func_801D3124(void) {
 }
 
 MATCH void func_801D3164(void) {
-    D_801D9768[g_MenuCurrentPanel->state]();
+    g_MenuStatusTask2StateFuncs[g_MenuCurrentPanel->state]();
     Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A,
                         g_MenuCurrentPanel->unk_0B, 0);
 }
@@ -132,7 +132,7 @@ MATCH void func_801D320C(void) {
 }
 
 MATCH void func_801D324C(void) {
-    D_801D9774[g_MenuCurrentPanel->state]();
+    g_MenuStatusTask3StateFuncs[g_MenuCurrentPanel->state]();
     func_801D3320(g_MenuCurrentPanel);
 }
 

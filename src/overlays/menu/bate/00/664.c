@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 INCLUDE_ASM(func_801D1264);
 
 MATCH void func_801D153C(void) {
-    SYS_DISPATCH_BYTE(D_801D8720, D_80148652);
+    SYS_DISPATCH_BYTE(g_MenuBateStep2Sub2Funcs, D_80148652);
 }
 
 MATCH void func_801D1578(void) {
@@ -62,11 +62,11 @@ MATCH void func_801D1FA0(void) {
 }
 
 MATCH void func_801D2070(void) {
-    SYS_DISPATCH_BYTE(D_801D8764, D_80148651);
+    SYS_DISPATCH_BYTE(g_MenuBateStep3Funcs, D_80148651);
 }
 
 MATCH void func_801D20AC(void) {
-    SYS_DISPATCH_BYTE(D_801D8770, D_80148652);
+    SYS_DISPATCH_BYTE(g_MenuBateStep3Sub0Funcs, D_80148652);
 }
 
 MATCH void func_801D20E8(void) {
