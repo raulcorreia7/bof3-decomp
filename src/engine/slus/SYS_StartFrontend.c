@@ -40,7 +40,7 @@ MATCH void SYS_StartFrontend(void) {
     D_80144953                = 0;
     D_80144954                = 0;
     D_80144955                = 0;
-    D_80144956                = 0;
+    g_AutoRun                 = 0;
     for (; j < 9U; j++) {
         word = *src;
         src += 1;

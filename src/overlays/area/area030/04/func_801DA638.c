@@ -11,7 +11,7 @@ MATCH void func_801DA638(void) {
     FishingState* state;
     FishingState* next;
 
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0) {
+    if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
         D_801440C8 = 0;
         SND_PlayCue(EMI_CUE_ID(2, 0));
         D_801E31FC = 0xFF;
@@ -24,7 +24,7 @@ MATCH void func_801DA638(void) {
 
         tail               = FISHING_STATE;
         tail->sub_index_03 = 2;
-    } else if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0 && D_80144125 == 0) {
+    } else if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0 && D_80144125 == 0) {
         state                = FISHING_STATE;
         D_801440B1           = 0;
         state->mode_index_02 = 1;

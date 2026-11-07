@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH bool func_801B55C0(void) {
+/* func_801B55C0 */
+MATCH bool Party_CanSwitchLeader(void) {
     s32 count;
     u16 limit;
     s32 index;

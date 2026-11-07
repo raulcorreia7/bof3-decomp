@@ -46,7 +46,7 @@ MATCH void func_801E5C68(void) {
     }
     UI_DrawText(28, 21, 0, 0xFFU, Resource_GetText(D_801ED7FC + 0xA6));
     /* The retail code reaches the countdown byte through its address. */
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0 ||
+    if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0 ||
         (g_MenuStartReturnStep == 0xF && --*(timer = &D_80148654) == 0)) {
         if (g_MenuStartReturnStep != 0xF) {
             SND_PlayCue(EMI_CUE_ID(1, 4));

@@ -42,7 +42,7 @@ MATCH void func_80117610(void) {
 }
 
 MATCH void func_8011765C(void) {
-    g_GameFlags |= GAME_FLAG_RUN_LOCK;
+    g_GameFlags |= GAME_FLAG_MENU_LOCK;
     func_801172D0();
     ((Actor*)g_Task)->unk_09 = 0xB4;
     ((Actor*)g_Task)->header.mode += 1;

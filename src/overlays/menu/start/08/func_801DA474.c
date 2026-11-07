@@ -89,7 +89,7 @@ NON_MATCHING void func_801DA474(void) {
     if (((u8)D_80148658 != (u8)D_80148658) || ((u8)D_80148659 != (u8)D_80148659)) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    if (g_InputMasks[INPUT_SLOT_CONFIRM] & g_InputPressed) {
+    if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
         val4 = &D_8014865A;
         val4 = &D_8014865A;
         if ((s8)D_8014865A == 0x7F) {
@@ -109,7 +109,7 @@ NON_MATCHING void func_801DA474(void) {
         D_8014865D = 0x7F;
         return;
     }
-    if (g_InputMasks[INPUT_SLOT_CANCEL] & g_InputPressed) {
+    if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         if ((s8)D_8014865A != 0x7F) {
             D_8014865A = 0x7F;
