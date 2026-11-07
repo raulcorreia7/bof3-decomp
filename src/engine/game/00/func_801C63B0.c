@@ -33,7 +33,7 @@ MATCH s32 func_801C63B0(void) {
         for (j = 0; j < count - i - 1; j++) {
             a = s_PartySlotOrder[j];
             b = s_PartySlotOrder[j + 1];
-            if (D_801CD945[a << 2] < D_801CD945[b << 2]) {
+            if (D_801CD944[a].key < D_801CD944[b].key) {
                 swapped                 = 1;
                 s_PartySlotOrder[j]     = b;
                 s_PartySlotOrder[j + 1] = a;
@@ -53,8 +53,7 @@ MATCH s32 func_801C63B0(void) {
         D_80143F28 = y;
     }
     for (i = 0; i < count; i++) {
-        if ((((s32 (*)(u8, u8, u8, u8))func_801C6658)(mode, s_PartySlotOrder[i], count - 1, D_801CD8C8) & BYTE_MASK) ==
-            0) {
+        if ((func_801C6658(mode, s_PartySlotOrder[i], (u8)(count - 1), D_801CD8C8) & BYTE_MASK) == 0) {
             return 0;
         }
     }
