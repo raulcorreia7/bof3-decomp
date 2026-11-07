@@ -29,7 +29,18 @@ MATCH void func_801EEF64(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EEFA8);
+MATCH void func_801EEFA8(void) {
+    BMagicEffectFuncs handlers;
+
+    handlers = D_801EEC10;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if ((g_Task->header.flags & 1) && g_Task->header.step != 0) {
+        Effect_SetActorMatrix();
+        func_801EFAA4();
+        func_801F0054();
+        PopMatrix();
+    }
+}
 
 MATCH void func_801EF070(void) {
     PartyBattler* src;

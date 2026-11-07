@@ -10,8 +10,8 @@ char g_MenuExperienceBlank[12] = "--------";
 char g_MenuZennyFormat[4] = "%7d";
 char g_MenuNextExpBlank[8] = "-------";
 
-/* The ten formation layouts of the party formation menu (the shop image holds the reader). */
-FormationLayout g_StartFormations[FORMATION_COUNT] = {
+/* The ten formation layouts of the party formation menu (Menu_DrawFormationPreview copies them to the stack). */
+FormationLayout g_MenuFormations[FORMATION_COUNT] = {
     {"Normal", 6, {{0, 0}, {0, 0}, {0, 0}}},
     {"Normal", 6, {{-8, -8}, {8, -8}, {0, 0}}},
     {"Attack", 6, {{0, -8}, {0, 8}, {0, 0}}},
@@ -24,7 +24,7 @@ FormationLayout g_StartFormations[FORMATION_COUNT] = {
     {"Refuge", 6, {{0, -12}, {-8, 0}, {8, 12}}},
 };
 
-u8 D_801D0D44[4] = {0, 1, 2};
+FormationOrder g_MenuFormationOrder = {{0, 1, 2}};
 
 char g_MenuClockFormat[12] = "%02d";
 

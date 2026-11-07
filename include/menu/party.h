@@ -50,6 +50,11 @@ ASSERT_SIZE(FormationLayout, 0x14);
 ASSERT_OFFSET(FormationLayout, name_length, 0x07);
 ASSERT_OFFSET(FormationLayout, offsets, 0x08);
 
+/* The party members of a formation preview in drawing order, back to front. */
+typedef struct FormationOrder {
+    u8 members[PARTY_SLOT_COUNT];
+} FormationOrder;
+
 /* D_80144F50 */
 extern u32 g_Zenny;
 /* Stored character id -> character-record slot (Observed:

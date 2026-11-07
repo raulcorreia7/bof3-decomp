@@ -10,7 +10,7 @@ MATCH s32 Char_GetAbilityElement(s32 ability_id) {
     u16 result;
 
     flags = (&D_801CA71C)[(ability_id & BYTE_MASK) * 0xA];
-    if ((flags & 0x1FF) == 0) {
+    if ((flags & ELEM_ALL) == 0) {
         return 0;
     }
     mask  = 1;

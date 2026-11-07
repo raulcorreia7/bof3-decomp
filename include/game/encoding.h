@@ -10,9 +10,7 @@
 #define PTR_SLOT_EMPTY_LOW   0x00000
 #define PTR_SLOT_EMPTY_HIGH  0xFFFFF
 
-/* Element bits as the battle code tests them against the resistance bytes, and
- * the empty-slot sentinels the record tables store in one-byte and two-byte
- * fields. Readers: battle/battle/03, battle/battle/15 and the menu/record loaders. */
+/* Element bits in the battle ability and weapon masks. */
 typedef enum ElementFlags {
     ELEM_FIRE     = 1 << 0,
     ELEM_FROST    = 1 << 1,
@@ -22,6 +20,8 @@ typedef enum ElementFlags {
     ELEM_HOLY     = 1 << 5,
     ELEM_PSIONIC  = 1 << 6,
     ELEM_STATUS   = 1 << 7,
+    ELEM_DEATH    = 1 << 8,
+    ELEM_ALL      = (1 << 9) - 1,
 } ElementFlags;
 
 #endif

@@ -55,8 +55,6 @@ MATCH void func_801EF430(void) {
 }
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
-extern Callback D_801F0B90[];
-void            func_801F0908(void);
 
 MATCH void func_801EF518(void) {
     D_801F0B90[g_Task->header.step]();

@@ -16,7 +16,20 @@ MATCH void func_801EEE04(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EEE48);
+MATCH void func_801EEE48(void) {
+    BMagicEffectFuncs handlers;
+
+    handlers = D_801EEC04;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_800AF764();
+        if (g_Task->param.unk_0B != 0) {
+            func_801EFB6C();
+        } else {
+            func_801EF478();
+        }
+    }
+}
 
 MATCH void func_801EEF28(void) {
     PartyBattler* battler;
@@ -88,7 +101,28 @@ MATCH void func_801F0064(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0100);
+MATCH void func_801F0100(void) {
+    PartyBattler* actor;
+    PartyBattler* work;
+    s16*          angle_cell;
+    u8            count;
+    u8            phase;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        phase                        = g_Task->param.unk_0B;
+        angle_cell                   = &D_1F800008;
+        *angle_cell                  = phase << 9;
+        actor                        = g_BattleSelectedActor;
+        g_Task->pos.x.fixed          = actor->pos.x.fixed + ((rcos((s16)(phase << 9)) * 0xC000) >> 12);
+        (work = g_Task)->pos.y.fixed = actor->pos.y.fixed + ((rsin(*angle_cell) * 0xC000) >> 12);
+        work->pos.z.fixed            = actor->pos.z.fixed;
+        work->unk_09                 = 0;
+        g_Task->timer                = 4;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F020C(void) {
     u8 counter;

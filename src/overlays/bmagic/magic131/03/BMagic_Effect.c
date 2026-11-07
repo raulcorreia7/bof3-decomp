@@ -19,7 +19,38 @@ INCLUDE_ASM(func_801EF1C0);
 
 INCLUDE_ASM(func_801EF3D0);
 
-INCLUDE_ASM(func_801EF488);
+MATCH void func_801EF488(void) {
+    PartyBattler* prev;
+    PartyBattler* battler;
+    s32           i;
+    s32           slot;
+
+    if (EMI_LoaderIsReady() != 0) {
+        i = 0;
+        if (g_PartySize != 0) {
+            do {
+                slot                                     = i & BYTE_MASK;
+                g_BattlePartyBattlers[slot].header.flags = 1;
+                prev                                     = g_Task;
+                battler                                  = &g_BattlePartyBattlers[slot];
+                g_Task                                   = battler;
+                Actor_SelectScript((battler->facing + 4) & BYTE_MASK);
+                if (g_BattlePartyBattlers[slot].chr.status & 0x2080) {
+                    Actor_SelectScript((g_Task->facing + 0x18) & BYTE_MASK);
+                }
+                if (g_BattlePartyBattlers[slot].chr.status & 0x800) {
+                    Actor_SelectScript((g_Task->facing + 0x30) & BYTE_MASK);
+                }
+                if (func_801DB524(slot) & BYTE_MASK) {
+                    Actor_SelectScript((g_Task->facing + 0x1C) & BYTE_MASK);
+                }
+                i++;
+                g_Task = prev;
+            } while ((u32)(i & BYTE_MASK) < g_PartySize);
+        }
+        g_Task->header.mode++;
+    }
+}
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 

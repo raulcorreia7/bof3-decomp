@@ -164,7 +164,46 @@ INCLUDE_ASM(func_801F8CAC);
 
 INCLUDE_ASM(func_801F8EB0);
 
-INCLUDE_ASM(func_801F9148);
+MATCH void func_801F9148(void) {
+    u8* step = &D_80146875;
+
+    switch (*step) {
+        case 0:
+            if (*g_ScriptVars == 0x23) {
+                *step = 1;
+            }
+            break;
+        case 1:
+            if (*g_ScriptVars == 0x23) {
+                *step = 4;
+                SYS_SetFlag(g_SceneFlags, 0x18);
+                if (SYS_TestFlag(g_SceneFlags, 0x17) == 0) {
+                    D_80146866 = 4;
+                    Game_RequestAreaChange(0x4E, 0x270000, 0xAD0000, 3);
+                    g_GamePrevSelection = 0xFF;
+                }
+                if (SYS_TestFlag(g_SceneFlags, 0x16) == 0) {
+                    D_80146866 = 1;
+                    Game_RequestAreaChange(0x4E, 0x270000, 0xAD0000, 0x83);
+                    g_GamePrevSelection = 0xFF;
+                }
+            }
+            break;
+        case 4:
+            if (*g_ScriptVars == 3) {
+                SYS_SetFlag(g_SceneFlags, 0x19);
+                SYS_SetFlag(g_SceneFlags, 0x14);
+                SYS_SetFlag(g_SceneFlags, 0x1A);
+                D_80146865 = 0;
+                D_80146866 = 0;
+                D_80146867 = 0;
+                Game_ClearScriptActive();
+                *step      = 0;
+                D_80146874 = 0;
+            }
+            break;
+    }
+}
 
 MATCH void func_801F92EC(void) {
     u8* state;
