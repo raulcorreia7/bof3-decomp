@@ -7,6 +7,7 @@
 MATCH s32 UI_UpdateLayout(void) {
     u16 confirm;
 
+    /* D_80148334/D_80148336 stay address symbols: a g_MenuPanelTasks[0].pos view changes the code. */
     g_MessageWindow.origin.x = (D_80148334 >> 4) + 10;
     g_MessageWindow.origin.y = ((s16)D_80148336 >> 4) + 6;
     func_801507BC();
