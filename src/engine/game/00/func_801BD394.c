@@ -12,7 +12,8 @@ MATCH void func_801BD394(void) {
     u8     flag;
 
     flag = 0;
-    if (((D_80145F09 == 3) || (D_80145F09 == 6)) && ((*(u32*)g_BattlePartyBattlers & 0xFFFF00) == 0x10A00)) {
+    if (((g_BattlePartyBattlers[0].chr.character_id == 3) || (g_BattlePartyBattlers[0].chr.character_id == 6)) &&
+        ((*(u32*)g_BattlePartyBattlers & 0xFFFF00) == 0x10A00)) {
         flag = 1;
     }
     if (g_GameStateIndex != GAME_REQUEST_IDLE) {
