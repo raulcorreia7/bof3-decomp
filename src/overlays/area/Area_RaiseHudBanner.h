@@ -15,7 +15,7 @@ MATCH void Area_RaiseHudBanner(void) {
         work->unk_03++;
     }
 
-    if (D_801454F2 != 0 && g_Task->unk_0B != 0) {
+    if (D_801454F2 != 0 && g_Task->param.unk_0B != 0) {
         goto force;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

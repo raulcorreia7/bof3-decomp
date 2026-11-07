@@ -50,7 +50,7 @@ MATCH u8 func_8019EEE4(void) {
     if (found) {
         roll = RANDOM_MASK(0xF);
         if (roll >= 0xD) {
-            g_Task->unk_0B = 2;
+            g_Task->param.unk_0B = 2;
             if (roll == 0xF) {
                 func_801B5E58(0xA);
             } else {
@@ -69,7 +69,7 @@ MATCH u8 func_8019EEE4(void) {
             }
             g_BattlePartyBattlers[0].unk_07 = 1;
         } else {
-            g_Task->unk_0B = 0;
+            g_Task->param.unk_0B = 0;
         }
         return true;
     }

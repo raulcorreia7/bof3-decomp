@@ -4,16 +4,16 @@ MATCH void Char_AdvancePaletteScript(void) {
     u8 state;
 
     done = 0;
-    if (g_Task->unk_0B == 1) {
+    if (g_Task->param.unk_0B == 1) {
         GFX_StagePalette((g_Task->unk_05 << 6) + 0x80035600, 0);
-        g_Task->unk_0B = 2;
+        g_Task->param.unk_0B = 2;
     }
-    state = g_Task->unk_0B;
+    state = g_Task->param.unk_0B;
     if (state != 0) {
         if (state == 2) {
             if (func_8014DAEC() & 0xFF) {
                 Actor_SelectScript(g_Task->direction_08);
-                g_Task->unk_0B = 3;
+                g_Task->param.unk_0B = 3;
             }
         } else {
             func_8014D978();

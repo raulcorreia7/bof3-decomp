@@ -11,7 +11,7 @@ MATCH void Area_RequestRestartOnContextChange(void) {
     Actor_CenterOnScreen();
     if (g_GameEntryState != 1) {
         work = g_Task;
-        step = work->unk_0B;
+        step = work->param.unk_0B;
         if (step == work->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
                 goto tail;
