@@ -746,6 +746,9 @@ Effect_PlayOnZeroTick = { addr = 0x801EEF6C, type = "func", source = "When the e
 Effect_SetActorMatrix = { addr = 0x801EEFCC, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic101 (Typhoon)." }
 g_BMagicEffectModes = { addr = 0x801EFCBC, source = "Handlers of magic101 (Typhoon), run by header.mode (byte 0x01)." }
 
+["emi/bmagic/magic102/03"]
+Area_DrawGroundSceneSprite = { addr = 0x801F0778, type = "func", source = "Draws one sprite of a scene record as an FT4 primitive like Area_DrawSceneSprite, with its depth from Area_SampleHeight under its origin, so the sprite stands on the ground." }
+
 ["emi/bmagic/magic103/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 BMagic_RunStep = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic103 (Simoon)." }
