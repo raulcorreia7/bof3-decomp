@@ -629,7 +629,38 @@ INCLUDE_ASM(func_801D6D18);
 
 INCLUDE_ASM(func_801D6E70);
 
-INCLUDE_ASM(func_801D708C);
+MATCH void func_801D708C(void) {
+    u16 cue;
+
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (D_801DB0B8 == 1) {
+            cue = 0x104;
+            goto play_cue;
+        }
+        D_801DB0C8 = -1;
+        SND_PlayCue(0x104);
+        SND_PlayCue(0x102);
+        D_801DB0C4 = 0;
+        D_801F294D += 1;
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        cue = 0x106;
+play_cue:
+        D_801DB0C8 = 0xF0;
+        SND_PlayCue(cue);
+        D_801F294D -= 1;
+    } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & 0xFFFF) {
+        D_801DB0B8 ^= 1;
+        SND_PlayCue(0x100);
+    }
+    if (D_801DB0C8 != 0xFFFF) {
+        func_801D812C();
+        if (D_801DB0C8 == 0xF1) {
+            Menu_DrawCursorSprite(((s32)D_801DB0B8 * 32 + 0xF4) & 0xFFFC, 0x15, 0);
+        }
+    }
+    func_801D9210();
+    func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32) (D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & 0xFFFF, 0, 6);
+}
 
 INCLUDE_ASM(func_801D7234);
 
