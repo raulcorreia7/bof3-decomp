@@ -103,7 +103,6 @@ enum {
 extern u8          g_SaveBuffer[];
 extern u8          D_80143BB4;
 extern u16         D_80144948;
-extern u8          D_80145F09[];
 extern u8          D_80145FCC[][BATTLE_PARTY_STRIDE];
 extern u8          D_80148331;
 extern u8          D_80148332;
@@ -273,6 +272,10 @@ extern u8          MENU_COMMAND_FRAME_SELECTED[];
 extern u8          g_MenuListTab2OffSprites[0xC];
 /* D_801E5650 */
 extern u8          g_MenuListTab2OnSprites[0xC];
+extern u8*         g_MenuInventoryTitles[5];
+extern char        g_MenuInventoryCountFormat[];
+extern u8          g_MenuInventoryTab1OffSprites[];
+extern u8          g_MenuInventoryTab1OnSprites[];
 /* D_801E5668 */
 extern u8          g_MenuListTab1OffSprites[0xC];
 /* D_801E5674 */
@@ -432,6 +435,8 @@ void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
 void func_801AF930(s16 x, s16 y, u8 palette_index, u8 icon_index, volatile Ability* ability, u8 stat_value,
                    u8 sprite_flag);
+void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
+                   s32 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 void func_801C1254(u8 ability_id, u8 party_slot);
 void Shop_DispatchStep(void);
@@ -557,7 +562,8 @@ void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style);
 void Menu_DrawRowIcons(u8* row_record, s32 palette_index);
 void Menu_DrawEquipStatWindow(s32 x, s32 y, u8 character_index, s32 equip_slot, u8 item_id);
 void Menu_DrawWindowFrame(s16 x, s16 y, s32 width, s32 height);
-void func_801DC6FC(MenuPanelTask* arg0);
+/* func_801DC6FC */
+void Menu_DrawInventoryWindow(MenuPanelTask* arg0);
 void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);
 void func_801DDFB0(s16 x, s16 y, u32 flags, u8 row, u8 variant);
 void func_801DE188(void);

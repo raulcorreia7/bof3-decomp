@@ -9,22 +9,22 @@ NON_MATCHING void func_801D1A90(void) {
     panel = &g_MenuPanelTasks[9];
     /* FAKE: the panel store stays above the pad-state read, as retail orders them. */
     MATCH_FAKE_BARRIER();
-    panel->unk_00[0] = 1;
-    D_80148475       = 7;
-    D_80148476       = 8;
-    D_80148478       = panel[-1].pos.x.raw;
-    D_8014845A       = 1;
-    buttons          = panel[-1].pos.y.raw + 0x2D;
-    D_8014847F       = g_ShopStockIndex;
-    D_80148480       = g_ShopItemCount;
-    D_80148494       = D_8018E7CC;
-    D_8014847A       = buttons;
-    D_8014847E       = g_ShopPricePercent;
-    D_80148628       = panel[-1].pos.x.raw + 4;
-    D_8014862A       = panel[-1].pos.y.raw + 0x33;
-    D_80148340       = g_ShopItemCount != 0 ? 0x48 : 0x4E;
-    buttons          = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
-    cursor           = g_ShopItemCount;
+    panel->active = 1;
+    D_80148475    = 7;
+    D_80148476    = 8;
+    D_80148478    = panel[-1].pos.x;
+    D_8014845A    = 1;
+    buttons       = panel[-1].pos.y + 0x2D;
+    D_8014847F    = g_ShopStockIndex;
+    D_80148480    = g_ShopItemCount;
+    D_80148494    = D_8018E7CC;
+    D_8014847A    = buttons;
+    D_8014847E    = g_ShopPricePercent;
+    D_80148628    = panel[-1].pos.x + 4;
+    D_8014862A    = panel[-1].pos.y + 0x33;
+    D_80148340    = g_ShopItemCount != 0 ? 0x48 : 0x4E;
+    buttons       = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    cursor        = g_ShopItemCount;
     if (buttons & PADLleft) {
         g_ShopItemCount = cursor - 1;
     } else if (buttons & PADLright) {
@@ -67,6 +67,8 @@ NON_MATCHING void func_801D1A90(void) {
     }
 }
 #else
-/* first difference +0x4: retail keeps the panel pointer in v1 and stores the active flag after the frame setup. */
+/* first difference +0x4: retail keeps &g_MenuPanelTasks[9] in v1 and reads slot 8's pos at -0x20/-0x1E twice; the
+ * draft folds both reads to one absolute load. Tried: pointer local, constant indexes, ORDER_FENCE after each setup
+ * store, a pinned v1. */
 INCLUDE_ASM(func_801D1A90);
 #endif

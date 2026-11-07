@@ -19,14 +19,14 @@ MATCH void Fairy_GrantGift(void) {
     }
     i -= 1;
     if (i < 0) {
-        Message_StartAreaMessage(0x98);
+        Message_StartAreaMessage(FAIRY_MESSAGE_NO_GIFT_YET);
     } else {
         src = Item_GetRecord(buf[i].item_type, buf[i].item_index);
         for (j = 0; j < 12; j++) {
             g_TextVariables[0][j] = src[j];
         }
         D_801490E4[0] = 0;
-        Message_StartAreaMessage(0x96);
+        Message_StartAreaMessage(FAIRY_MESSAGE_GIFT_RECEIVED);
         if (!(Item_Add(buf[i].item_type, buf[i].item_index, 1, 0) & BYTE_MASK)) {
             FAIRY_EVENT_STEP = FAIRY_EVENT_STEP + 1;
         } else {

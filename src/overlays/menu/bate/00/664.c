@@ -171,8 +171,7 @@ INCLUDE_ASM(Menu_DrawEquipStatWindow);
 /* blocker: per-band draw-mode setup; first diff: stack frame, 0x88 bytes against 0x80. */
 INCLUDE_ASM(Menu_DrawWindowFrame);
 
-/* blocker: per-row (unk_12 >> 4) == 15 test; first diff: +0x138 lhu v1,18(s1) (template andi v1,s0,0xff). */
-INCLUDE_ASM(func_801D6C54);
+#include "overlays/menu/Menu_DrawInventoryWindow.h"
 
 /* func_801D73B4 */
 #include "overlays/menu/Menu_DrawAbilityList.h"

@@ -9,7 +9,7 @@ MATCH s32 func_801F13B8(void) {
     TEXT_Format(dest, fmt, D_80145034);
     TEXT_Format(dest + 0x20, fmt, D_80145038);
     TEXT_Format(dest + 0x40, fmt, D_8014503C);
-    Message_StartAreaMessage(0x56);
+    Message_StartAreaMessage(FAIRY_MESSAGE_PLAY_RECORD_COUNTS);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     return 0;
 }

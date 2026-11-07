@@ -1,7 +1,7 @@
 #include "area067_14.h"
 
 MATCH void func_801F451C(void) {
-    if (D_80145F09[0][0] == 6) {
+    if (g_BattlePartyBattlers[0].chr.character_id == 6) {
         ((Actor*)g_CurrentActor)->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
         Game_SetScriptActive();
         g_ScriptVars[0] = 0;
