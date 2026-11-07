@@ -245,7 +245,6 @@ extern s32            D_80147C38;
 extern s32            D_80147C3C;
 extern s32            D_80147C54;
 extern s32            D_80147C58;
-extern s16            g_AreaTileOriginY;
 extern SceneLineColor D_801F6C04;
 extern Callback       D_801FC980[];
 extern Callback       D_801FC988[];
