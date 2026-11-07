@@ -34,7 +34,27 @@ MATCH void func_801EEF1C(void) {
     g_Task->header.mode++;
 }
 
-INCLUDE_ASM(func_801EEF7C);
+MATCH void func_801EEF7C(void) {
+    u32           slot;
+    u8            step;
+    PartyBattler* battler;
+
+    g_Task->timer++;
+    step = g_Task->unk_09 + 1;
+    g_Task->unk_09 = step;
+    if (step == 0x10) {
+        slot = LOBU(g_BattleTargetSelector);
+        if (slot < BATTLE_PARTY_SLOT_COUNT) {
+            battler = &g_BattlePartyBattlers[slot];
+        } else {
+            battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
+        }
+        func_80196718(battler);
+        func_8019651C(battler, 6, 4, 8, 0);
+        g_Task->unk_09 = 0;
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801EF078(void) {
     u8 temp_v1;
