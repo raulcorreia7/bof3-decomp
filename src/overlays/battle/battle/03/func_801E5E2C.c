@@ -1,9 +1,5 @@
 #include "battle_03.h"
 
-/* +1 columns of the panel tables at g_BattlePanelOffsets and D_801EB712: the byte after
- * each row stride's first entry, as the retail relocations name them. */
-extern s8 D_801EB713[];
-
 /* nonmatching unmeasured: tried cached slot pointer; kind-3 hoisted to a local; unsigned index casts; else-scoped row
  * local. resume: a source shape that materializes kind-3 before the branch (retail fills the beqz delay slot with
  * addiu). */

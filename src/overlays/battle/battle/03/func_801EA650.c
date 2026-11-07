@@ -1,8 +1,5 @@
 #include "battle_03.h"
 
-extern u32 D_801EB4F4[][3];
-extern u8  D_801EB4FA[][12];
-
 MATCH void func_801EA650(void) {
     BattleHandlerTable3 handlers;
     u8                  index;

@@ -1,7 +1,5 @@
 #include "battle_03.h"
 
-extern u8 D_801EC308[];
-
 /* Restarts the battle: clears the pending step, swaps the battle
  * state with the saved one and refreshes the actors' status rows.
  */

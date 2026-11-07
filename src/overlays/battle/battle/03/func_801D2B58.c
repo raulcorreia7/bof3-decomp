@@ -1,8 +1,5 @@
 #include "battle_03.h"
 
-extern u8  D_801EB713[];
-extern s32 D_801EC308;
-
 /* The actor record the panel rows are measured against. */
 typedef struct BattleActorRecord {
     u8  pad_00[8];
@@ -97,20 +94,20 @@ NON_MATCHING void func_801D2B58(void) {
                 row->work_0C  = (void*)(eb3dc + state_offset);
                 row->state_08 = (void*)(eb3dc - 0xF4 + state_offset);
                 row->step     = (s16)(actor->unk_2E + (s8)D_801EB712[(kind - 3) * 0x118]);
-                row->unk_04   = (s16)(actor->unk_30 + (s8)D_801EB713[(kind - 3) * 0x118]);
+                row->unk_04   = (s16)(actor->unk_30 + D_801EB713[(kind - 3) * 0x118]);
                 depth         = actor->unk_32;
                 state         = eb3dc_2f4 + (kind - 3) * 0x118;
             }
-            row->unk_06                 = depth;
-            *(s32*)&D_801EC308          = *(s32*)state;
-            *(s32*)(&D_801EC308 + 4)    = *(s32*)(state + 4);
-            *(s32*)(&D_801EC308 + 8)    = *(s32*)(state + 8);
-            *(s32*)(&D_801EC308 + 0xC)  = *(s32*)(state + 0xC);
-            *(s32*)(&D_801EC308 + 0x10) = *(s32*)(state + 0x10);
-            *(s32*)(&D_801EC308 + 0x14) = *(s32*)(state + 0x14);
-            *(s32*)(&D_801EC308 + 0x18) = *(s32*)(state + 0x18);
-            *(s32*)(&D_801EC308 + 0x1C) = *(s32*)(state + 0x1C);
-            row                         = row2;
+            row->unk_06                = depth;
+            *(s32*)D_801EC308          = *(s32*)state;
+            *(s32*)(D_801EC308 + 4)    = *(s32*)(state + 4);
+            *(s32*)(D_801EC308 + 8)    = *(s32*)(state + 8);
+            *(s32*)(D_801EC308 + 0xC)  = *(s32*)(state + 0xC);
+            *(s32*)(D_801EC308 + 0x10) = *(s32*)(state + 0x10);
+            *(s32*)(D_801EC308 + 0x14) = *(s32*)(state + 0x14);
+            *(s32*)(D_801EC308 + 0x18) = *(s32*)(state + 0x18);
+            *(s32*)(D_801EC308 + 0x1C) = *(s32*)(state + 0x1C);
+            row                        = row2;
             if (cursor[0] < 3U) {
                 actor         = (BattleActorRecord*)g_BattleSelectedActor;
                 offset        = cursor[0] * BATTLE_PARTY_STRIDE;

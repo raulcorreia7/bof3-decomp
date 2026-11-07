@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-extern u16 D_80145F26[][160];
-
 /* Rescales the active battler's panel values: blends the four stat
  * quotes and the four element gauges toward their row tables, mirrors the
  * panel bytes and applies the element and status modifiers.

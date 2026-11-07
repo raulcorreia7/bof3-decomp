@@ -7,7 +7,6 @@
 /* FAKE: _nv weak views avoid the andi and hoist the loads out of the prologue. */
 /* FAKE: a second symbol forces the separate %hi/%lo load retail has. */
 extern u8           D_801CA71B[];
-extern volatile u16 D_80145F26[][160];
 
 MATCH void func_800A0D64(void) {
     s32         index;
