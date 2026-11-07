@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC10);
+#include "overlays/bmagic/Effect_DispatchModeAndDrawActor.h"
 
 MATCH void func_801EECCC(void) {
     u32           i;
