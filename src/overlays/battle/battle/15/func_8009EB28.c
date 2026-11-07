@@ -25,7 +25,7 @@ MATCH void func_8009EB28(void) {
     } else {
         /* FAKE: retail computes the enemy row index in v0, the row offset in v1. */
         MATCH_REG(u32, enemy, "v0") = battler - 3;
-        base                        = D_801EB6C4[enemy][8];
+        base                        = g_BattleEnemyBattlers[enemy].stats.power;
     }
     D_801EC30C = base;
     /* FAKE: retail stores the scaled base before materialising the next addresses. */

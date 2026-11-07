@@ -43,7 +43,7 @@ MATCH void func_801D4B38(void) {
         D_80145FB8[i][0] &= 0xFFFF7FFF;
     }
     for (slot = 3; slot < 10; slot++) {
-        D_801EB734[slot - 3][0] &= 0xFFFF7FFF;
+        ENEMY_COMBATANT(slot).turn.action_flags.volatile_value &= ~COMBATANT_FLAG_PREEMPTIVE_TURN;
     }
     D_801463BA = 0;
     D_801463D0 += 1;

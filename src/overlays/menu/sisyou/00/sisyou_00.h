@@ -27,30 +27,49 @@
 #define MASTER_MENU_LABEL_SIZE        4
 #define MASTER_MENU_LABEL_LONG_SIZE   8
 #define MASTER_MENU_MESSAGE_ID_COUNT  18
-#define MASTER_MENU_STEP_COUNT        7
-#define MASTER_MENU_SUBSTEP_COUNT     2
-#define SISYOU_SUB2_HANDLER_COUNT     6
-#define SISYOU_SUB3_HANDLER_COUNT     9
-#define SISYOU_SUB4_HANDLER_COUNT     9
-#define SISYOU_SUB5_HANDLER_COUNT     3
-#define MASTER_ACTOR_MODE_COUNT       20
-#define MASTER_MENU_STATE_COUNT       4
+
+/* The messages of one master, as offsets from the master's entry of g_MasterMessageIds. */
+enum MasterMessage {
+    MASTER_MESSAGE_GREETING = 0,
+    MASTER_MESSAGE_FAREWELL = 4,
+    MASTER_MESSAGE_OFFER,
+    MASTER_MESSAGE_OFFER_REPLY,
+    MASTER_MESSAGE_ALL_ENROLLED,
+    MASTER_MESSAGE_ALL_ENROLLED_QUERY,
+    MASTER_MESSAGE_NO_PUPILS,
+    MASTER_MESSAGE_ENROLLED,
+    MASTER_MESSAGE_ENROLLED_MORE_QUERY,
+    MASTER_MESSAGE_DISMISSED,
+    MASTER_MESSAGE_DISMISSED_MORE_QUERY,
+    MASTER_MESSAGE_SKILL_LEARNED,
+};
+
+/* The absolute message Deis answers with while the party cannot meet her yet. */
+#define MASTER_MESSAGE_DEIS_UNAVAILABLE 0x2E
+#define MASTER_MENU_STEP_COUNT          7
+#define MASTER_MENU_SUBSTEP_COUNT       2
+#define SISYOU_SUB2_HANDLER_COUNT       6
+#define SISYOU_SUB3_HANDLER_COUNT       9
+#define SISYOU_SUB4_HANDLER_COUNT       9
+#define SISYOU_SUB5_HANDLER_COUNT       3
+#define MASTER_ACTOR_MODE_COUNT         20
+#define MASTER_MENU_STATE_COUNT         4
 
 /* The party screen layout, in pixels: the party rows, the stat panel, the
  * selection box, the header frame and the header text. The four drawers
  * (func_801D10AC, func_801D0DD4, func_801D12FC, func_801D0C88) place them. */
-#define MASTER_MENU_ROW_X             17
-#define MASTER_MENU_ROW_TOP           62
-#define MASTER_MENU_ROW_PITCH         54
-#define MASTER_MENU_STAT_PANEL_X      137
-#define MASTER_MENU_SELECT_WIDTH      272
-#define MASTER_MENU_SELECT_HEIGHT     52
-#define MASTER_MENU_FRAME_X           20
-#define MASTER_MENU_FRAME_Y           16
-#define MASTER_MENU_FRAME_WIDTH       280
-#define MASTER_MENU_FRAME_HEIGHT      19
-#define MASTER_MENU_TEXT_X            27
-#define MASTER_MENU_TEXT_Y            19
+#define MASTER_MENU_ROW_X               17
+#define MASTER_MENU_ROW_TOP             62
+#define MASTER_MENU_ROW_PITCH           54
+#define MASTER_MENU_STAT_PANEL_X        137
+#define MASTER_MENU_SELECT_WIDTH        272
+#define MASTER_MENU_SELECT_HEIGHT       52
+#define MASTER_MENU_FRAME_X             20
+#define MASTER_MENU_FRAME_Y             16
+#define MASTER_MENU_FRAME_WIDTH         280
+#define MASTER_MENU_FRAME_HEIGHT        19
+#define MASTER_MENU_TEXT_X              27
+#define MASTER_MENU_TEXT_Y              19
 
 /* The payload prologue at 0x801D0C00: the type-0 EMI loader compares the
  * first word with the archive TOC's cached first word; the rest are the three
@@ -198,7 +217,7 @@ static inline void MasterMenuRunActivePanelMessage(u8* state) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;
     }
-    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + 4));
+    Message_StartAreaMessage((s16)(g_MasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_FAREWELL));
     *state       = 2;
     g_MasterStep = 6;
 }
