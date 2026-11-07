@@ -4,11 +4,11 @@ MATCH void func_801D334C(void) {
     u8* p;
     u8* counter;
 
-    p             = (u8*)g_MenuPanelTasks;
-    D_80148331    = 7;
-    D_80148332    = 0;
-    D_80148333[0] = 2;
-    *p            = 1;
+    p                         = (u8*)g_MenuPanelTasks;
+    D_80148331                = 7;
+    D_80148332                = 0;
+    g_MenuPanelTasks[0].state = 2;
+    *p                        = 1;
     p += 0x24;
     D_80148334           = 0x14;
     /* FAKE: retail reads D_80148336 as s16. */

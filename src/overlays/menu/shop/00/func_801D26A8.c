@@ -13,9 +13,9 @@ MATCH void func_801D26A8(void) {
         i = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
             if (i == LOB(D_80148656)) {
-                D_80148333[((i + 3) * 9) << 2] = 4;
+                g_MenuPanelTasks[i + 3].state = 4;
             } else {
-                D_80148333[((i + 3) * 9) << 2] = 2;
+                g_MenuPanelTasks[i + 3].state = 2;
             }
             i++;
         }

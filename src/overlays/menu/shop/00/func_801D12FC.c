@@ -25,12 +25,12 @@ MATCH void func_801D12FC(void) {
         D_80148652 = 0;
     } else if (*pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
-        D_80148333[0] = 1;
-        D_8014837B    = 1;
-        D_80148357    = 1;
-        D_80148624    = 0;
-        D_80148600    = 0;
-        D_80148654    = 5;
+        g_MenuPanelTasks[0].state = 1;
+        D_8014837B                = 1;
+        D_80148357                = 1;
+        D_80148624                = 0;
+        D_80148600                = 0;
+        D_80148654                = 5;
         D_80148651 += 3;
     }
 }
