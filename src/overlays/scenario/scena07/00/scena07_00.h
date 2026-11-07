@@ -30,6 +30,7 @@ extern u8        D_801FDE88[4];
 extern SceneFunc D_801FDF8C[];
 extern u8        D_801FDFC4;
 
+u8*       func_801F8394(void);
 void      func_801F83D0(u8* row);
 void      func_801F88B8(void* table);
 void      func_801F8BE8(void* table);
