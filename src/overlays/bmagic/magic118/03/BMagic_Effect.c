@@ -51,6 +51,7 @@ MATCH void BMagic_UpdateBurnSprites(void) {
 INCLUDE_ASM(func_801EEFF4);
 
 /* blocker: sum register; first diff: lw a0,0x20($v1) (retail) against lw v0,0x20($v1). */
+/* blocker: timer and unk_20 load order; first diff: lbu a1 against v0 at 0x801EF0B0. */
 INCLUDE_ASM(func_801EF0A4);
 
 INCLUDE_ASM(func_801EF108);
