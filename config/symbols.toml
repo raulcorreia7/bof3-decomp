@@ -3661,18 +3661,18 @@ Message_ShowParty = { addr = 0x801F48C4, type = "func", source = "Looks through 
 g_PartyMemberMessages = { addr = 0x801F5914, size = 0x18, source = "Tag and message id pairs of the party member talk: WORLD_ShowAreaSlotMessage matches tags[i] against byte 0 of a battle party row and shows messages[i] through func_80150224." }
 
 ["emi/world04/area174/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F363C, type = "func", source = "advances the work state when the party position is inside the work cell" }
-Actor_SlideScreenX = { addr = 0x801F377C, type = "func", source = "advances the scratch work origin one step and its state counter past the image threshold" }
-Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "advances the work state when the party position is outside the work cell" }
-Actor_SlideScreenDown16 = { addr = 0x801F38E8, type = "func", source = "scrolls the actor screen origin down by 0x10 and cues 0x201 when it reaches zero (area174)" }
-Area_Update = { addr = 0x801F3958, type = "func", source = "the area frame update the origin step and bounds checks run after advancing" }
-Actor_BeginScriptFromAreaTable = { addr = 0x801F4100, type = "func", source = "one body shared through overlays/area/Actor_BeginScriptFromAreaTable.h" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F363C, type = "func", source = "Runs Area_Update after World_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_SlideScreenX = { addr = 0x801F377C, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
+Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
+Actor_SlideScreenDown16 = { addr = 0x801F38E8, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
+Area_Update = { addr = 0x801F3958, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
+Actor_BeginScriptFromAreaTable = { addr = 0x801F4100, type = "func", source = "Reads the script row of the loaded area at the script state row and cursor, begins the actor script of that step at the saved script_pc - 2, stores the row argument in byte 0x2A and advances the cursor by 2." }
 
 ["emi/world04/area175/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Area_DrawSpinTriangle = { addr = 0x801F2E2C, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
-Area_InitSpin = { addr = 0x801F30CC, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_DrawSpinTriangle = { addr = 0x801F2E2C, type = "func", source = "Draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin." }
+Area_InitSpin = { addr = 0x801F30CC, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F386C, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F389C, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F38E8, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -3700,12 +3700,12 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3D94, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3DB8, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3DDC, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F3E28, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3EB4, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area176/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F2C94, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -3733,12 +3733,12 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3140, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3164, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area177/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F2C94, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -3766,12 +3766,12 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3140, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3164, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area178/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F2C94, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -3799,12 +3799,12 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3140, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3164, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area179/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F2C94, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -3832,12 +3832,12 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3140, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3164, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area180/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F2C94, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -3865,12 +3865,12 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3140, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3164, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area181/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F2C94, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -3898,12 +3898,12 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3140, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3164, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area182/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F2C94, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -3931,12 +3931,12 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3140, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3164, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area183/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F2C94, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -3964,12 +3964,12 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3140, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3164, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area184/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F2C94, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -3997,12 +3997,12 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3140, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3164, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area185/13"]
 Fairy_VillageInit = { addr = 0x801EECA4, alias = true }
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
 Fairy_AnswerReplayScene = { addr = 0x801F2C48, type = "func", source = "the answer to do you want to replay the scene (message 0x1F): clears the request, then for the first choice sets script variable 0 to 0x28 and step_05 to 0x15, for the second 0x32 and 0x19" }
 FairyMusician_AnswerPlaySongs = { addr = 0x801F2C94, type = "func", source = "the answer to the musician fairy asking to play songs (message 0x59): the second choice requests the farewell 0x5A and ends the callback, the first clears the request" }
@@ -4030,50 +4030,50 @@ FairyNickname_AnswerThinkNewNickname = { addr = 0x801F3140, type = "func", sourc
 FairyNickname_AnswerLikeNickname = { addr = 0x801F3164, type = "func", source = "the answer to do you really like it after a proposed nickname (messages 0xF3 and 0xF4): clears the request and stores the choice in the answer byte 0x801F2945" }
 FairyNickname_AnswerKeepMakingNicknames = { addr = 0x801F3188, type = "func", source = "the answer to shall we keep making nicknames (message 0xF6): the first choice clears the request and the nickname state, otherwise requests the farewell 0xF7 and sets the state to 4" }
 Fairy_AnswerKnowsWhatToDo = { addr = 0x801F31D4, type = "func", source = "the answer to the village fairy asking whether the party already knows what to do (messages 0xCF and 0x29C to 0x29F): requests 0xF9 for the first choice, the topic menu 0xF8 otherwise" }
-Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4" }
+Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores the message id the menu choice g_MessageChoice selects in g_MessageRequest: 0xFA to 0xFD for choices 0 to 3, 0xF9 for 4." }
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area186/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world04/area187/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "clears the message request and sets the game overlay state byte when the menu choice is zero" }
-Scene_ClearEventState = { addr = 0x801F2CA4, type = "func", source = "clears the script-active flag and the three scene event state bytes at D_801448EB" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
+Scene_ClearEventState = { addr = 0x801F2CA4, type = "func", source = "Ends the scene event: clears the script-active flag, sets g_SceneEventMode to SCENE_EVENT_NONE and zeroes g_SceneEventStep and g_SceneEventSelection." }
 
 ["emi/world04/area188/13"]
-Area_AdvanceSpawnTimer = { addr = 0x801F3598, type = "func", source = "runs one frame of the spawn work: claims a slot every fourth frame of g_Task +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_Task +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)" }
-Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "clears one byte of each row in the actor window" }
-Area_ClaimSpawnSlot = { addr = 0x801F3DE0, type = "func", source = "claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots; one body shared with the other area overlays" }
-Area_StepSpawnSlots = { addr = 0x801F3E7C, type = "func", source = "ages every active spawn slot: counts the life byte down, shrinks the radius halfword the draw reads as the disc radius, frees the slot at zero and calls Area_DrawSpawnSlot; returns whether any slot was active, the scene steps ignore it; one body shared with the other area overlays" }
-Area_DrawSpawnSlot = { addr = 0x801F3F30, type = "func", source = "draws one spawn slot as a 32-segment fan of semi-transparent Gouraud triangles around the projected slot position (its +0x14 halfword is the radius, +0x16 the centre shade, +0x17 the rim shade); Area_StepSpawnSlots calls it for every active slot" }
-Area_DrawSpinTriangle = { addr = 0x801F40F4, type = "func", source = "draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin" }
-Area_InitSpin = { addr = 0x801F4394, type = "func", source = "starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields" }
-Actor_WalkWhileWithinLimit = { addr = 0x801F4840, type = "func", source = "walks the script actor one step along facing 5 and rewinds the script cursor while its y position plus the facing-5 y step is at most the per-scene limit table entry D_801448ED selects (func_801F2D68 in area136, func_801F4840 in area188)" }
-Area_AddCameraOffsetY2 = { addr = 0x801F48E0, type = "func", source = "adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_SubCameraOffsetY2 = { addr = 0x801F4908, type = "func", source = "subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames; one body shared with the other area overlays" }
-Area_ResetCameraOffsetY = { addr = 0x801F4930, type = "func", source = "zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames" }
+Area_AdvanceSpawnTimer = { addr = 0x801F3598, type = "func", source = "Runs one frame of the spawn work: claims a slot every fourth frame (unk_06 & 3 is 0), runs AREA_SPAWN_TICK and Area_StepSpawnSlots, counts the timer down and, at 0, copies the coordinates at +0x64, +0x68 and +0x6C into +0x18, +0x1C and gravity, sets vx to -0x1000 and vy to -0x400 and adds 1 to header.mode (byte 0x01)." }
+Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
+Area_ClaimSpawnSlot = { addr = 0x801F3DE0, type = "func", source = "Claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_StepSpawnSlots." }
+Area_StepSpawnSlots = { addr = 0x801F3E7C, type = "func", source = "Ages every active spawn slot: counts the life byte down, shrinks the radius halfword the draw reads as the disc radius, frees the slot at zero and calls Area_DrawSpawnSlot; returns whether any slot was active, the scene steps ignore it." }
+Area_DrawSpawnSlot = { addr = 0x801F3F30, type = "func", source = "Draws one spawn slot as a 32-segment fan of semi-transparent Gouraud triangles around the projected slot position (its +0x14 halfword is the radius, +0x16 the centre shade, +0x17 the rim shade); Area_StepSpawnSlots calls it for every active slot." }
+Area_DrawSpinTriangle = { addr = 0x801F40F4, type = "func", source = "Draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade; the sibling of Area_InitSpin." }
+Area_InitSpin = { addr = 0x801F4394, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }
+Actor_WalkWhileWithinLimit = { addr = 0x801F4840, type = "func", source = "While the actor y plus the y step of its facing is at most AREA_WALK_LIMIT_TABLE[g_SceneEventSelection] << 16, sets script unk_07 to 1, starts the script walk toward facing 5 with func_801ABBA8 and backs the script cursor up by 2." }
+Area_AddCameraOffsetY2 = { addr = 0x801F48E0, type = "func", source = "Adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_SubCameraOffsetY2 = { addr = 0x801F4908, type = "func", source = "Subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetY = { addr = 0x801F4930, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 
 ["emi/world04/area189/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Actor_ClearVelocity = { addr = 0x801F5F20, type = "func", source = "byte-identical to Actor_ClearVelocity at emi/etc/game/00@0x801C5798; the caller func_801F5D20 clears the spad actor velocity members before it steps" }
-Char_DrainFatigue = { addr = 0x801F6024, type = "func", source = "the drain pass area189_13.h names: walks g_Characters, steps the fatigue field toward 9 and calls Char_RebuildStats (area030 wiki:data/records)" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Actor_ClearVelocity = { addr = 0x801F5F20, type = "func", source = "Zeroes the velocity members of the current g_Task (+0x0C, +0x10 and vz) that Actor_ApplyVelocity integrates into x and y." }
+Char_DrainFatigue = { addr = 0x801F6024, type = "func", source = "Adds 1 to the fatigue of each of the seven g_Characters while it is below 9 and rebuilds that character's stats with Char_RebuildStats." }
 
 ["emi/world04/area191/13"]
-Area_ResumeSceneAfterMessage = { addr = 0x801F2F40, type = "func", source = "one body shared through overlays/area/Area_ResumeSceneAfterMessage.h" }
-Area_ResumeScriptAndStopInteraction = { addr = 0x801F30DC, type = "func", source = "reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E; one body shared with the other area overlays" }
+Area_ResumeSceneAfterMessage = { addr = 0x801F2F40, type = "func", source = "Clears the message request; when the menu selection is idle sets the script-active flag, g_SceneState.state_04 to 1 and step_05 to 0x14." }
+Area_ResumeScriptAndStopInteraction = { addr = 0x801F30DC, type = "func", source = "Reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E." }
 
 ["emi/world04/area192/13"]
-Area_ResumeSceneAfterMessage = { addr = 0x801F2CA8, type = "func", source = "one body shared through overlays/area/Area_ResumeSceneAfterMessage.h" }
-Area_ResumeScriptAndStopInteraction = { addr = 0x801F2E44, type = "func", source = "reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E; one body shared with the other area overlays" }
+Area_ResumeSceneAfterMessage = { addr = 0x801F2CA8, type = "func", source = "Clears the message request; when the menu selection is idle sets the script-active flag, g_SceneState.state_04 to 1 and step_05 to 0x14." }
+Area_ResumeScriptAndStopInteraction = { addr = 0x801F2E44, type = "func", source = "Reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E." }
 
 ["emi/world04/area193/13"]
-Message_SetAnswerMessage = { addr = 0x801F2C70, type = "func", source = "stores the message id the answer table D_801F39FC holds for the menu choice g_MessageChoice in g_MessageRequest" }
+Message_SetAnswerMessage = { addr = 0x801F2C70, type = "func", source = "Stores the message id the answer table D_801F39FC holds for the menu choice g_MessageChoice in g_MessageRequest." }
 
 ["emi/world04/area196/13"]
-g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
-Message_ShowParty = { addr = 0x801F3F90, type = "func", source = "shows the tagged area slot message and enters game state 2" }
-g_PartyMemberMessages = { addr = 0x801F42F4, size = 0x18, source = "WORLD_ShowAreaSlotMessage matches tags[i] against a battle record row byte 0 and shows messages[i] through func_80150224" }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_ShowParty = { addr = 0x801F3F90, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
+g_PartyMemberMessages = { addr = 0x801F42F4, size = 0x18, source = "Tag and message id pairs of the party member talk: WORLD_ShowAreaSlotMessage matches tags[i] against byte 0 of a battle party row and shows messages[i] through func_80150224." }
 
 ["emi/world04/area197/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "wiki:formats/emi#code-overlays: first payload word, 52 + area" }
