@@ -1,0 +1,6 @@
+#include "area068_13.h"
+
+/* func_801F2E68 */
+MATCH void Well_LowerReady(void) {
+    WELL_TICK_LOWER(WELL_CUE_LOWER_END_READY, WELL_MODE_LOWER_COUNT, WELL_MODE_LOWER_READY);
+}

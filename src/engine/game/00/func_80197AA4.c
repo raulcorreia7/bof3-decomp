@@ -21,8 +21,8 @@ MATCH void func_80197AA4(void) {
         if ((*flags & 1) == 0) {
             coord_a  = (volatile u16*)&g_AreaTargetCellX;
             index    = g_BattleScrollDir;
-            *coord_a = *coord_a + D_801C7B74[index].dx;
-            dy       = D_801C7B74[index].dy;
+            *coord_a = *coord_a + s_BattleScrollCellSteps[index].dx;
+            dy       = s_BattleScrollCellSteps[index].dy;
             MATCH_BARRIER(); /* FAKE: keeps the delta load before the span math. */
             span                   = D_801CD954;
             g_AreaCameraStep       = 0x40;

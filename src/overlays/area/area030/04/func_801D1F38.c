@@ -9,14 +9,14 @@ MATCH void func_801D1F38(void) {
     s8 elapsed;
 
     if (g_FrameCount & 0x40) {
-        label = D_80145028;
+        label = g_FishingRod;
         UI_DrawText(0x8A, 0xC8, 0, 0xC, (u8*)((label * ACCESSORY_STRIDE) + (u32)g_Accessories));
     } else {
-        label = D_80145026;
+        label = g_FishingLure;
         UI_DrawText(0x8A, 0xC8, 0, 0xC, (u8*)((label * ACCESSORY_STRIDE) + (u32)g_Accessories));
     }
 
-    count = (g_ActorSlots[0].unk_07 - D_801E3210->unk_0F);
+    count = (g_ActorSlots[0].unk_07 - g_FishingLureRow->unk_0F);
     if (count >= 0) {
         elapsed = count;
         if (count >= 5) {

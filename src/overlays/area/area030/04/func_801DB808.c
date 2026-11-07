@@ -10,9 +10,9 @@ MATCH void func_801DB808(void) {
     FISHING_STATE->step_timer_09 = (FISHING_STATE->step_timer_09 - 1);
 
     func_801E0ED0(0, 0x4E);
-    func_801E0F4C(0x80, 0x5B, D_8014688E[D_801E3208 * 0x98]);
+    func_801E0F4C(0x80, 0x5B, D_8014688E[g_FishingHookedFish * 0x98]);
 
-    offset = D_801E3208 * 0x98;
+    offset = g_FishingHookedFish * 0x98;
     func_801E1004(D_8014688E[offset], 0, FISHING_STATE->step_timer_09);
 
     if (FISHING_STATE->step_timer_09 == 0) {
