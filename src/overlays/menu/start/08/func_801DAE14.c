@@ -6,7 +6,7 @@
  * (85.21), 15 min of rewrite search (type hacks). resume: j must be a preheader-initialised biv with addiu v1,v1,2 in
  * the branch delay slot and i++ after the volatile load. */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801DAE14(void) {
+NON_MATCHING void func_801DAE14(u16 buttons) {
     s32 count;
     /* FAKE: pin keeps the row offset in the retail a3 home. */
     MATCH_REG(s32, offset, "a3");
@@ -23,12 +23,12 @@ NON_MATCHING void func_801DAE14(void) {
     for (i = 0; i < 8; i++) {
         if (((u8*)&g_Characters[0].unk_07)[offset] & 1) {
             for (index = 0; index < (count & BYTE_MASK); index++) {
-                if (g_Characters[i].character_index == g_PartyFieldOrder[index]) {
+                if (g_Characters[i].character_id == g_PartyFieldOrder[index]) {
                     break;
                 }
             }
             if (index == (count & BYTE_MASK)) {
-                D_801ED690[(*flags)++] = g_Characters[i].character_index;
+                D_801ED690[(*flags)++] = g_Characters[i].character_id;
             }
         }
         offset += 0xA4;
