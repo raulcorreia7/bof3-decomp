@@ -62,7 +62,7 @@
     } while (0)
 
 ASSERT_OFFSET(MenuListPanel, pos, 0x04);
-ASSERT_OFFSET(MenuListPanel, unk_08, 0x08);
+ASSERT_OFFSET(MenuListPanel, use_context, 0x08);
 ASSERT_OFFSET(MenuListPanel, flags, 0x09);
 ASSERT_OFFSET(MenuListPanel, source, 0x0A);
 ASSERT_OFFSET(MenuListPanel, unk_0C, 0x0C);
@@ -269,10 +269,14 @@ extern u8          MENU_CAPTION_GLYPH_2[];
 extern u8          MENU_CLOCK_CAPTION[];
 extern u8          MENU_COMMAND_FRAME[];
 extern u8          MENU_COMMAND_FRAME_SELECTED[];
-extern u8          D_801E5638[0xC];
-extern u8          D_801E5650[0xC];
-extern u8          D_801E5668[0xC];
-extern u8          D_801E5674[0xC];
+/* D_801E5638 */
+extern u8          g_MenuListTab2OffSprites[0xC];
+/* D_801E5650 */
+extern u8          g_MenuListTab2OnSprites[0xC];
+/* D_801E5668 */
+extern u8          g_MenuListTab1OffSprites[0xC];
+/* D_801E5674 */
+extern u8          g_MenuListTab1OnSprites[0xC];
 extern u8          D_801E5680[];
 extern u8          D_801E56DC[];
 extern u8          D_801E5738[];
@@ -292,7 +296,8 @@ extern u8          MENU_CLOCK_COLON[];
 extern u8*         g_MenuCommandLabels[];
 extern u8          g_MenuCommandRows[][5];
 extern u8          D_801E5A10[];
-extern const char* D_801E5B7C[4];
+/* D_801E5B7C */
+extern u8*         g_MenuAbilityListNames[4];
 extern u8          D_801E5BC8[];
 /* D_801E5BEC */
 extern Callback    g_ShopStep6Funcs[SHOP_STEP6_COUNT];
@@ -319,7 +324,8 @@ extern Callback    g_ShopStep7Sub2Funcs[SHOP_STEP7_SUB2_COUNT];
 /* D_801E5D10 */
 extern Callback    g_ShopStep7Sub3Funcs[SHOP_STEP7_SUB3_COUNT];
 extern u8          D_801E5D1C[];
-extern Callback    D_801E5D2C[];
+/* D_801E5D2C */
+extern Callback    g_AbilityStockSortFuncs[];
 extern u8          D_801E5D38[];
 /* D_801E5D3C */
 extern Callback    g_ShopStep9Funcs[SHOP_STEP9_COUNT];
@@ -424,7 +430,8 @@ s32  Item_Count(u8 category, u8 item, u8 mode);
 s32  Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
-void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+void func_801AF930(s16 x, s16 y, u8 palette_index, u8 icon_index, volatile Ability* ability, u8 stat_value,
+                   u8 sprite_flag);
 void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 void func_801C1254(u8 ability_id, u8 party_slot);
 void Shop_DispatchStep(void);
@@ -588,11 +595,15 @@ void func_801E0F28(void);
 void func_801E0F78(void);
 void func_801E112C(MenuPanelTask* task);
 void func_801E1710(MenuPanelTask* task);
-void func_801E1B80(s32 handler_index);
+/* func_801E1B80 */
+void Menu_RunAbilityStockSort(s32 cursor_row);
 void Menu_SwapBytes_801E1BB8(u8* first, u8* second);
-void func_801E1BCC(void);
-void func_801E1C88(void);
-void func_801E1D84(void);
+/* func_801E1BCC */
+void Menu_PackAbilityStock(void);
+/* func_801E1C88 */
+void Menu_SortAbilityStockByCostDescending(void);
+/* func_801E1D84 */
+void Menu_SortAbilityStockByCostAscending(void);
 void func_801E1E80(s16 panel_x, s16 panel_y);
 void func_801E200C(void);
 void func_801E2048(void);

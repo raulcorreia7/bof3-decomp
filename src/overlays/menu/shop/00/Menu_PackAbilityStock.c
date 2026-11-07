@@ -1,6 +1,7 @@
 #include "shop_00.h"
 
-MATCH void func_801E1BCC(void) {
+/* func_801E1BCC */
+MATCH void Menu_PackAbilityStock(void) {
     u8* row;
     u8  i;
     u8  j;

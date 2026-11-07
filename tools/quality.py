@@ -5,7 +5,8 @@
     tools/quality.py --queue [-n 30]  files worst first, with the score and the metrics
     tools/quality.py --diff BASE      compare BASE with ``--to`` (default HEAD); exit 1 when a
                                       touched file got worse in a gated metric
-    tools/quality.py --markdown       rewrite the debt table of docs/subsystems.md in place
+    tools/quality.py --markdown       write docs/subsystems.md with a fresh debt table to build/subsystems.md
+    tools/quality.py --markdown --update   rewrite the table of docs/subsystems.md itself (the scheduled action)
 
 Metrics, counted inside ``MATCH`` function bodies unless noted:
 
@@ -383,18 +384,18 @@ def markdown_table(rows: dict[str, dict[str, int]]) -> str:
     return "\n".join(lines)
 
 
-def write_markdown(path: Path, rows: dict[str, dict[str, int]]) -> bool:
-    """Replace the table between the markers of ``path``; return True when the file changed."""
-    text = path.read_text()
+def write_markdown(source: Path, target: Path, rows: dict[str, dict[str, int]]) -> bool:
+    """Write ``source`` with a fresh table between its markers to ``target``; return True when it differs."""
+    text = source.read_text()
     head, _, rest = text.partition(TABLE_BEGIN)
     _, _, tail = rest.partition(TABLE_END)
     if not rest or not tail:
         raise SystemExit(
-            f"quality: {path} lacks the {TABLE_BEGIN} / {TABLE_END} markers"
+            f"quality: {source} lacks the {TABLE_BEGIN} / {TABLE_END} markers"
         )
     new = f"{head}{TABLE_BEGIN}\n\n{markdown_table(rows)}\n\n{TABLE_END}{tail}"
-    if new != text:
-        path.write_text(new)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(new)
     return new != text
 
 
@@ -426,7 +427,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--markdown",
         action="store_true",
-        help="rewrite the table of docs/subsystems.md",
+        help="write docs/subsystems.md with a fresh table to build/subsystems.md",
+    )
+    parser.add_argument(
+        "--update",
+        action="store_true",
+        help="with --markdown: rewrite docs/subsystems.md",
     )
     parser.add_argument("-n", type=int, default=30, help="rows to show (30)")
     parser.add_argument(
@@ -457,9 +463,11 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     rows = scan(rev_files("WORK"))
     if args.markdown:
-        changed = write_markdown(SUBSYSTEMS_DOC, rows)
+        target = SUBSYSTEMS_DOC if args.update else ROOT / "build" / "subsystems.md"
+        changed = write_markdown(SUBSYSTEMS_DOC, target, rows)
         print(
-            f"quality: {SUBSYSTEMS_DOC.name} {'updated' if changed else 'is current'}"
+            f"quality: {target.relative_to(ROOT)} written, "
+            f"docs/subsystems.md {'is stale' if changed else 'is current'}"
         )
         return 0
     if args.queue:
