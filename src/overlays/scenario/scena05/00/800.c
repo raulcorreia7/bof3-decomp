@@ -84,7 +84,37 @@ MATCH void func_801F83EC(void) {
 MATCH void func_801F8428(void) {
 }
 
-INCLUDE_ASM(func_801F8430);
+MATCH void func_801F8430(void) {
+    u8* step;
+
+    step = &D_80146875;
+    switch (*step) {
+    case 0:
+        Message_StartAreaMessage(5);
+        g_GameStateIndex = 2;
+        *step = 1;
+        break;
+    case 1:
+        if (g_GameStateIndex != 2) {
+            D_80146866 = 1;
+            *step = 2;
+            SYS_SetFlag(g_SceneFlags, 0);
+            func_8019FA28(0x44, 0x1D0000, 0x1E0000, 0x80);
+        }
+        break;
+    case 2:
+        if (*g_ScriptVars == 0x2D) {
+            SYS_SetFlag(g_SceneFlags, 1);
+            Game_ClearScriptActive();
+            D_80146865 = 0;
+            D_80146866 = 0;
+            D_80146867 = 0;
+            *step = 0;
+            D_80146874 = 0;
+        }
+        break;
+    }
+}
 
 MATCH void func_801F8554(void) {
 }
