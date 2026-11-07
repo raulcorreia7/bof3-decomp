@@ -29,6 +29,7 @@ INCLUDE_ASM(func_801EF11C);
 
 INCLUDE_ASM(func_801EF248);
 
+/* blocker: y store; first diff: +0x34 sw v0,0x10(v1) shared after the branches (retail) against the constant hoisted to a2 across the call (candidate). */
 INCLUDE_ASM(func_801EF300);
 
 MATCH void func_801EF460(void) {
