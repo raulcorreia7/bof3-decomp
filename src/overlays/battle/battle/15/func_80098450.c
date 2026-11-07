@@ -6,7 +6,7 @@
  * the commit group are read through the global, not the panel pointer, because the original reloads them by
  * absolute address after the pointer is dead.
  */
-/* D_8014857x stay address views here: a g_MenuPanelTasks[16] view changes the register allocation. */
+/* D_8014857A stays an address symbol at the cursor steps: a g_MenuPanelTasks[16] view changes the code. */
 MATCH void func_80098450(void) {
     volatile u8*     phase;
     MenuChoicePanel* panel;
@@ -25,24 +25,24 @@ MATCH void func_80098450(void) {
     if (*phase == 0u) {
         D_801485DC = 1u;
         D_801485E0 = (g_MenuPanelTasks[16].pos.x + 7);
-        D_801485E2 = (g_MenuPanelTasks[16].pos.y + ((D_8014857C - g_MenuPanelTasks[16].unk_0B) * 0xD + 0x1A));
+        D_801485E2 =
+            (g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - g_MenuPanelTasks[16].unk_0B) * 0xD + 0x1A));
     }
     panel   = (MenuChoicePanel*)g_BattleChoicePanel;
     trigger = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if ((trigger & PADLleft) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
         g_MenuPanelTasks[16].unk_10 = 0x32;
-        /* D_8014857A and D_8014857C stay address symbols: a g_MenuPanelTasks[16] view changes the code. */
         D_8014857A -= 1;
         if ((s8)D_8014857A < 0) {
-            D_8014857A = 3;
+            g_MenuPanelTasks[16].unk_0A = 3;
         }
     } else if ((trigger & PADLright) != 0) {
         g_MenuPanelTasks[16].unk_10 = 0x31;
         SND_PlayCue(EMI_CUE_ID(1, 1));
         D_8014857A += 1;
         if (D_8014857A >= 4u) {
-            D_8014857A = 0;
+            g_MenuPanelTasks[16].unk_0A = 0;
         }
     }
     old_cursor = panel->group_cursor;
@@ -84,7 +84,10 @@ MATCH void func_80098450(void) {
     if (old_cursor != panel->group_cursor) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
     }
-    handle = Resource_GetText(Item_GetDescription(D_8014857A, D_801C893C[D_8014857A][D_8014857C]) & HALF_MASK);
+    handle =
+        Resource_GetText(Item_GetDescription(g_MenuPanelTasks[16].unk_0A,
+                                             D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) &
+                         HALF_MASK);
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = handle;
     if (((MenuChoicePanel*)g_BattleChoicePanel)->confirm_gate != 0) {
         return;
@@ -106,16 +109,17 @@ MATCH void func_80098450(void) {
         g_BattleChoicePhase                      = 1u;
         D_801485DC                               = 0u;
         D_801EB5B1[((D_801EC328 - 1) & 0xF) * 8] = 1u;
-        D_801454FD                               = D_8014857A;
+        D_801454FD                               = g_MenuPanelTasks[16].unk_0A;
         D_801454FE                               = g_MenuPanelTasks[16].unk_0B;
-        D_801454FF                               = D_8014857C;
+        D_801454FF                               = g_MenuPanelTasks[16].unk_0C;
         g_BattleMessageSlot[0x119]               = 0u;
         SND_PlayCue(EMI_CUE_ID(1, 6));
         *(u8*)&g_BattleUIStep += 1u;
         return;
     }
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
-        value                                 = D_801C893C[D_8014857A][D_8014857C] + (D_8014857A << 8);
+        value =
+            D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C] + (g_MenuPanelTasks[16].unk_0A << 8);
         *(u16*)((char*)g_BattleActorTurn + 2) = value;
         if ((func_801AF494(g_MenuPanelTasks[16].unk_08, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) &
              BYTE_MASK) == 0) {
@@ -124,7 +128,7 @@ MATCH void func_80098450(void) {
         }
         D_801454FD = D_8014857A;
         D_801454FE = g_MenuPanelTasks[16].unk_0B;
-        D_801454FF = D_8014857C;
+        D_801454FF = g_MenuPanelTasks[16].unk_0C;
         SND_PlayCue(EMI_CUE_ID(1, 3));
         g_BattleChoicePhase = 1u;
         D_801485DC          = 0u;
