@@ -272,9 +272,12 @@ extern Callback  D_801CD0FC[5];
 extern Callback  D_801CD110[2];
 extern Callback  D_801CD118[2];
 extern Callback  D_801CD120[4];
-extern Callback  D_801CD130[4];
-extern Callback  D_801CD140[5];
-extern Callback  D_801CD154[4];
+/* D_801CD130 */
+extern Callback  g_FieldClimbSteps[4];
+/* D_801CD140 */
+extern Callback  g_FieldClimbMountSteps[5];
+/* D_801CD154 */
+extern Callback  g_FieldClimbDismountSteps[4];
 /* D_801CD164 */
 extern Callback  g_PersonalActions[19];
 extern Callback  D_801CD1B0[2];
