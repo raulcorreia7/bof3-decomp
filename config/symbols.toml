@@ -4865,6 +4865,13 @@ SND_QueueSelectionFx = { addr = 0x8015D71C, type = "func", source = "Marks the f
 SND_QueueCueVolume = { addr = 0x8015D7C8, type = "func", source = "Queues a sound cue with its volume." }
 SND_QueueProximityCue = { addr = 0x8015DC08, type = "func", source = "Plays the proximity cue of the area." }
 SND_PlayCue = { addr = 0x8015DF18, type = "func", source = "Dispatches a cue's bank and record, updates the interpolated channel values and keys the requested voices." }
+SND_ReadCueBank0 = { addr = 0x8015E994, type = "func", source = "Reads a cue of sound bank 0 into voice slots (entry 0 of g_SndCueReaders)." }
+SND_ReadCueBank1 = { addr = 0x8015EFAC, type = "func", source = "Reads a cue of sound bank 1 into voice slots (entry 1 of g_SndCueReaders)." }
+SND_ReadCueBank2 = { addr = 0x8015F5C8, type = "func", source = "Reads a cue of sound bank 2 into voice slots (entry 2 of g_SndCueReaders)." }
+SND_ReadCueBank3 = { addr = 0x8015FBE4, type = "func", source = "Reads a cue of sound bank 3 into voice slots (entry 3 of g_SndCueReaders)." }
+SND_ReadCueBank4 = { addr = 0x80160200, type = "func", source = "Reads a cue of sound bank 4 into voice slots (entry 4 of g_SndCueReaders)." }
+SND_ReadCueBank5 = { addr = 0x8016081C, type = "func", source = "Reads a cue of sound bank 5 into voice slots (entry 5 of g_SndCueReaders)." }
+SND_ReadCueBank6 = { addr = 0x80160E38, type = "func", source = "Reads a cue of sound bank 6 into voice slots (entry 6 of g_SndCueReaders)." }
 SND_SetBankLayout = { addr = 0x80161808, type = "func", source = "Sets the sound bank layout." }
 SND_StartBGM = { addr = 0x80161B24, type = "func", source = "Waits for the loader then starts the requested BGM's cue." }
 SND_RequestBGM = { addr = 0x80161BBC, type = "func", source = "Starts the background music if it changed." }
@@ -5236,6 +5243,7 @@ CD_newmedia = { addr = 0x80177634, type = "func", source = "LIBCD.LIB 2496 bytes
 CD_searchdir = { addr = 0x80177914, type = "func", source = "LIBCD.LIB 2496 bytes" }
 CD_cachefile = { addr = 0x801779BC, type = "func", source = "LIBCD.LIB 2496 bytes" }
 cd_read = { addr = 0x80177C68, type = "func", source = "LIBCD.LIB 2496 bytes" }
+Mem_CopyBytes = { addr = 0x80177CD4, type = "func", source = "Copies count bytes from src to dst, front to back." }
 cb_read = { addr = 0x80177D08, type = "func", source = "LIBCD.LIB 1524 bytes" }
 cd_read_retry = { addr = 0x80177F1C, type = "func", source = "LIBCD.LIB 1524 bytes" }
 CdReadBreak = { addr = 0x801780E8, type = "func", source = "LIBCD.LIB 1524 bytes" }
