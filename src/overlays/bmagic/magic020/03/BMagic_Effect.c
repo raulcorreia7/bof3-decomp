@@ -40,7 +40,14 @@ MATCH void func_801EF398(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EF3DC);
+MATCH void func_801EF3DC(void) {
+    BattleHandlerTable8 handlers = D_801EEC1C;
+
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_8014D290();
+    }
+}
 
 MATCH void func_801EF498(void) {
     PartyBattler* work;
@@ -184,6 +191,7 @@ MATCH void func_801EFAD4(void) {
     func_801E5988();
 }
 
+/* hint: a local Callback[2] of func_801EFBA0 and func_801EFD10 fails to compile at the first function-pointer store (handlers[0] = func_801EFBA0); not byte-compared. */
 INCLUDE_ASM(func_801EFAF4);
 
 INCLUDE_ASM(func_801EFBA0);

@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC10);
+#include "overlays/bmagic/Effect_DispatchModeAndDrawActor.h"
 
 /* blocker: call setup order; first diff: +0xF0 lui a0,0x8014 (retail loads the selector before li s0,1 and fills the delay slot with li a1,16) against li a1,16 first (candidate); body is magic055 func_801EECCC with handler 0x16 and func_800A9610 before the sound. */
 INCLUDE_ASM(func_801EECCC);

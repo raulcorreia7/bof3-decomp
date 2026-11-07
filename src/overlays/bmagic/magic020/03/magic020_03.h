@@ -8,6 +8,7 @@
 extern BMagicEffectFuncs D_801EEC04;
 
 extern BattleHandlerTable3 D_801EEC3C;
+extern BattleHandlerTable8 D_801EEC1C;
 
 void func_801EFD88(void);
 

@@ -11,6 +11,7 @@
 #define BATTLE_HANDLER_TABLE3_SIZE 0x0c
 #define BATTLE_HANDLER_TABLE4_SIZE 0x10
 #define BATTLE_HANDLER_TABLE5_SIZE 0x14
+#define BATTLE_HANDLER_TABLE8_SIZE 0x20
 
 /* func_801D656C treats 0xFF as pending; battle/battle/03 passes modes 0-6. */
 typedef u8 (*BossBattleEventFunc)(u32 mode);
@@ -29,9 +30,14 @@ typedef struct BattleHandlerTable5 {
     Callback handlers[5];
 } BattleHandlerTable5;
 
+typedef struct BattleHandlerTable8 {
+    Callback handlers[8];
+} BattleHandlerTable8;
+
 ASSERT_SIZE(BattleHandlerTable3, BATTLE_HANDLER_TABLE3_SIZE);
 ASSERT_SIZE(BattleHandlerTable4, BATTLE_HANDLER_TABLE4_SIZE);
 ASSERT_SIZE(BattleHandlerTable5, BATTLE_HANDLER_TABLE5_SIZE);
+ASSERT_SIZE(BattleHandlerTable8, BATTLE_HANDLER_TABLE8_SIZE);
 
 void        func_800AC844(u8 entry_id);
 void        func_800AC934(u8 entry_id);
