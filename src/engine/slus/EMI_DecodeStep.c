@@ -50,7 +50,7 @@ typedef enum DecoderState {
  * destination. The original takes count/src/dst in $s4/$s5/$t3. */
 
 s32 EMI_DecodeStep(void) {
-    EmiDecodeContext* ctx;
+    EMIDecodeContext* ctx;
     u8*               dst;
     u8*               src;
     u8*               limit;

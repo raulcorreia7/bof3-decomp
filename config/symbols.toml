@@ -3590,9 +3590,9 @@ g_BattleActionLock = { addr = 0x801463CE, type = "u8", source = "action-lock cou
 g_BattlePendingStatus = { addr = 0x801463D8, type = "u16", source = "pending status bits OR'd once into the battler status word and then cleared (func_800A31E0.c 19-88, func_801DFCB4.c 85, func_801E3C14.c 72)" }
 g_EmiPayloadSector = { addr = 0x80146450, source = "EMI_LoaderNextRead loads it from g_EmiSlotSectors[slot]; EMI_OnCDReady checks it against g_EmiSectorCursor on the first sector" }
 g_EmiBytesLeft = { addr = 0x80146454, source = "EMI_LoaderNextRead sets it to the slot size (0x800 for the archive header); EMI_OnCDReady takes 0x800 off per sector and asks for the next read at 0" }
-g_EmiLoadArg = { addr = 0x80146458, source = "EMI_LoaderNextRead copies EmiTocEntry.load_arg; the VAB, sequence and graphics loaders read it" }
-g_EmiFirstWord = { addr = 0x8014645C, source = "EMI_LoaderNextRead copies EmiTocEntry.first_word; EMI_OnCDReady compares it with the first word of the first sector" }
-g_EmiEntryType = { addr = 0x80146460, source = "EMI_LoaderNextRead copies EmiTocEntry.type; EMI_OnCDReady indexes g_EmiEntryHandlers with it" }
+g_EmiLoadArg = { addr = 0x80146458, source = "EMI_LoaderNextRead copies EMITocEntry.load_arg; the VAB, sequence and graphics loaders read it" }
+g_EmiFirstWord = { addr = 0x8014645C, source = "EMI_LoaderNextRead copies EMITocEntry.first_word; EMI_OnCDReady compares it with the first word of the first sector" }
+g_EmiEntryType = { addr = 0x80146460, source = "EMI_LoaderNextRead copies EMITocEntry.type; EMI_OnCDReady indexes g_EmiEntryHandlers with it" }
 g_EmiRingBase = { addr = 0x80146464, source = "EMI_LoaderStreamInitSlot stores the CD base and EMI_LoaderCopySector, StageSector and UploadSector index it by sector" }
 g_EmiRequestedSlotId = { addr = 0x80146468, source = "slot id stored by EMI_LoaderStreamInitSlot before stream dispatch" }
 g_EmiStep = { addr = 0x8014646C, source = "EMI_LoaderNextRead clears it; the payload loaders count sectors in it and EMI_OnCDReady checks the first sector at 0" }
