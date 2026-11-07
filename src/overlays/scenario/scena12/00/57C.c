@@ -298,6 +298,7 @@ MATCH s32 func_801FCD38(void) {
     return -1;
 }
 
+/* Hint: a draft drops the stores of D_80146865 and D_80146867 to zero before the step store; the retail order is ScriptVars, 865, 867, 875, 874. */
 INCLUDE_ASM(func_801FCD58);
 
 #include "overlays/scenario/Scene_JoinAdultNinaAndMomo.h"

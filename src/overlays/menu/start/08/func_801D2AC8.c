@@ -8,11 +8,11 @@ MATCH void func_801D2AC8(void) {
 
     for (i = 0; i < (Party_CountOrder(PARTY_ORDER_FIELD)); i++) {
         if (i == D_80148656) {
-            D_80148333[((i + 4) * 9) << 2]   = 5;
-            D_80148333[((i + 0xC) * 9) << 2] = 3;
+            g_MenuPanelTasks[i + 4].state   = 5;
+            g_MenuPanelTasks[i + 0xC].state = 3;
         } else {
-            D_80148333[((i + 4) * 9) << 2]   = 7;
-            D_80148333[((i + 0xC) * 9) << 2] = 5;
+            g_MenuPanelTasks[i + 4].state   = 7;
+            g_MenuPanelTasks[i + 0xC].state = 5;
         }
     }
     panel                        = &D_8014854C;

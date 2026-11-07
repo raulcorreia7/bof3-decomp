@@ -51,7 +51,13 @@ MATCH void func_801D0D7C(void) {
     work[1]++;
 }
 
-INCLUDE_ASM(func_801D0DAC);
+MATCH void func_801D0DAC(void) {
+    Scene_DrawRedGradient(-(g_Task->timer << 5) & 0xFF);
+    if (--g_Task->timer == 0) {
+        g_Task->timer = 8;
+        g_Task->header.mode += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D0E38);
 

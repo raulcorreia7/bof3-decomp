@@ -10,10 +10,10 @@ MATCH void UI_HandleChoiceInput(void) {
     if ((g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         u8* step;
 
-        D_80148357    = 3;
-        D_80148333[0] = 1;
-        step          = &g_UiWindowStep;
-        *step         = *step + 1;
+        D_80148357                = 3;
+        g_MenuPanelTasks[0].state = 1;
+        step                      = &g_UiWindowStep;
+        *step                     = *step + 1;
         return;
     }
     if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {

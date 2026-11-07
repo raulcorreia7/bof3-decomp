@@ -31,7 +31,37 @@ INCLUDE_ASM(func_801EF248);
 
 INCLUDE_ASM(func_801EF300);
 
-INCLUDE_ASM(func_801EF460);
+MATCH void func_801EF460(void) {
+    PartyBattler* task;
+    u8            timer;
+
+    task = g_Task;
+    task->pos.x.fixed += task->unk_0C;
+    task->unk_5D += 4;
+    task->pos.y.fixed += task->unk_10;
+    g_Task->unk_5E += 4;
+    g_Task->unk_5F += 4;
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        if (g_Task->param.unk_0B == 0) {
+            g_Task->header.flags &= 0xDF;
+            g_Task->unk_5C = 0;
+            g_Task->unk_2B = 0;
+            g_Task->unk_5D = 0;
+            g_Task->unk_5E = 0;
+            g_Task->unk_5F = 0;
+            if (g_BattleActiveBattler >= 3) {
+                func_801E257C(g_BattleActiveBattler, 2);
+            }
+            g_Task->unk_09 = func_800AFF98();
+            g_Task->header.step += 1;
+            return;
+        }
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF5FC(void) {
     u8 counter;
