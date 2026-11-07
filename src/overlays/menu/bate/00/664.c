@@ -189,7 +189,7 @@ MATCH void func_801D73B4(MenuListPanel* panel) {
     UI_DrawWindow((panel->pos.x + 3) & HALF_MASK, (panel->pos.y + 3) & HALF_MASK, 154, 160, 0,
                   CHARACTER_BLOCK->window_style);
     n    = 0;
-    list = Party_GetAbilities(panel->unk_0A, panel->unk_0B, 0);
+    list = Party_GetAbilities(panel->source.abilities.member, panel->source.abilities.type, 0);
     y    = panel->pos.y;
     do {
         if (*list != 0) {
@@ -215,14 +215,15 @@ MATCH void func_801D73B4(MenuListPanel* panel) {
         list++;
     } while (n < 10);
     x = panel->pos.x + 0x4E;
-    UI_DrawText((x - strlen(D_801D8E80[panel->unk_0B]) * 4), (panel->pos.y + 7), 0, 0x10, D_801D8E80[panel->unk_0B]);
-    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (panel->flags & 2) ? D_801D8954 : D_801D893C, 1);
-    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (panel->flags & 1) ? D_801D8978 : D_801D896C, 1);
+    UI_DrawText((x - strlen(D_801D8E80[panel->source.abilities.type]) * 4), (panel->pos.y + 7), 0, 0x10,
+                D_801D8E80[panel->source.abilities.type]);
+    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (panel->flags & MENU_LIST_FLAG_TAB_2) ? D_801D8954 : D_801D893C, 1);
+    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (panel->flags & MENU_LIST_FLAG_TAB_1) ? D_801D8978 : D_801D896C, 1);
     flags = panel->flags;
-    if (!(flags & 0xF0)) {
+    if (!(flags & MENU_LIST_FRAME_MASK)) {
         panel->flags = 0;
     } else {
-        panel->flags = flags - 0x10;
+        panel->flags = flags - MENU_LIST_FRAME_STEP;
     }
     for (n = 0; n < 10; n++) {
         UI_DrawSprite(panel->pos.x + (n + 5) * 8, panel->pos.y, 1, 1);

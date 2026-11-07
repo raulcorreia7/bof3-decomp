@@ -9,12 +9,12 @@ MATCH void func_800A493C(void) {
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Resource_GetText(*state + 0x42);
     trigger                                  = INPUT_REPEATED(*pad_state, (PADLright | PADLdown | PADLleft));
     held                                     = *pad_state;
-    if (held & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (held & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         g_BattleUIState += 2;
         return;
     }
-    if (held & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (held & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
         g_BattleUIState += 1;
         return;

@@ -11,7 +11,7 @@ MATCH void func_801D27CC(void) {
     TEXT_SetVariable(0, 5, g_CharSlot[g_PartyFieldOrder[D_80148656]] * 0xA4 + records);
     g_MenuPanelTasks[11].unk_10 = 0x12;
     if (D_80148654 == 0) {
-        if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+        if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlayCue(EMI_CUE_ID(1, 6));
             SND_PlayCue(EMI_CUE_ID(1, 2));
             func_801D2C7C();

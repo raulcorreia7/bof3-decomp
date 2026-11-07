@@ -141,7 +141,7 @@ static u8 D_801F34B4[2380] = {
 static AreaSlotWork* D_801F3E00 = 0;
 
 MATCH s32 func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(s_WorkStates, TASK_BYTES[0x1]);
+    SYS_DISPATCH_BYTE(s_WorkStates, g_Task->header.mode);
 }
 
 MATCH void func_801F2C48(void) {

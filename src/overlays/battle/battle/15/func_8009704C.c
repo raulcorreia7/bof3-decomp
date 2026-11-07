@@ -117,7 +117,7 @@ NON_MATCHING void func_8009704C(void) {
     if (D_80148582 != 0) {
         return;
     }
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0u) {
+    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_BattleChoicePhase               = 1u;
         D_801485DC                        = 0u;
         D_801EB5B1[ring_index * 8]        = 1u;
@@ -128,7 +128,7 @@ NON_MATCHING void func_8009704C(void) {
         *(volatile u8*)&g_BattleUIStep += 1;
         return;
     }
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0u) {
+    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         u8* slot;
 
         if ((func_80097574() & BYTE_MASK) != 0) {

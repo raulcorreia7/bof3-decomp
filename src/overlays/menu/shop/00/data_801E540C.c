@@ -33,7 +33,7 @@ const char *D_801E5434[10] = {
     D_801E5430,
 };
 
-Callback D_801E545C[8] = {
+Callback g_ShopStep5Funcs[SHOP_STEP5_COUNT] = {
     func_801D7380,
     func_801D7444,
     func_801D76B8,

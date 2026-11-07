@@ -28,5 +28,5 @@ MATCH void func_801F2DB0(void) {
         TASK_BYTES[0x0B] = 0;
     }
 
-    ((void (**)(void))(D_801F4C3C + 0x11C))[TASK_BYTES[0x01]]();
+    ((void (**)(void))(D_801F4C3C + 0x11C))[g_Task->header.mode]();
 }

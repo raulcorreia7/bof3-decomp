@@ -21,14 +21,14 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     /* Retail reads the status halfword and the next one as a word. */
     if ((LOWU(record->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
-            UI_DrawTextString((x + 46), (y + 23), 1, 0x10, D_801D4048);
+            UI_DrawTextString((x + 46), (y + 23), 1, 0x10, g_MenuLabelPoison);
         } else {
-            UI_DrawTextString((x + 46), (y + 23), 1, 0x10, D_801D4050);
+            UI_DrawTextString((x + 46), (y + 23), 1, 0x10, g_MenuLabelConfusion);
         }
     } else if (record->status & STATUS_POISONED) {
-        UI_DrawTextString((x + 46), (y + 23), 1, 0x10, D_801D4048);
+        UI_DrawTextString((x + 46), (y + 23), 1, 0x10, g_MenuLabelPoison);
     } else if (record->status & STATUS_CONFUSED) {
-        UI_DrawTextString((x + 46), (y + 23), 1, 0x10, D_801D4050);
+        UI_DrawTextString((x + 46), (y + 23), 1, 0x10, g_MenuLabelConfusion);
     }
 
     value = record->hp;

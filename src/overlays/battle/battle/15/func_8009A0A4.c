@@ -7,11 +7,11 @@ MATCH void func_8009A0A4(void) {
     u8           value;
 
     kind_index = D_80145FAA[BATTLE_ACTIVE_ROW->slot * (BATTLE_PARTY_STRIDE / 2)];
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         g_BattleUIState = 4;
         return;
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         g_BattleUIState = 3;
         return;
     }

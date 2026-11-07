@@ -100,7 +100,7 @@ MATCH void func_80098450(void) {
         D_8014862A     = (D_80148576 - 0x16);
         return;
     }
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0u) {
+    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_BattleChoicePhase                      = 1u;
         D_801485DC                               = 0u;
         D_801EB5B1[((D_801EC328 - 1) & 0xF) * 8] = 1u;
@@ -112,7 +112,7 @@ MATCH void func_80098450(void) {
         *(u8*)&g_BattleUIStep += 1u;
         return;
     }
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0u) {
+    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         value                                   = D_801C893C[D_8014857A][D_8014857C] + (D_8014857A << 8);
         *(u16*)((char*)g_BattleMessageTurn + 2) = value;
         if ((func_801AF494(D_80148578, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {

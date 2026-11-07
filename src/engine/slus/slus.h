@@ -699,7 +699,6 @@ extern s16                         D_801492E4;
 extern s32                         D_801492FC;
 extern s32                         D_80149300;
 extern s32                         D_80149304;
-extern s16                         g_AreaTileOriginY;
 extern s16                         g_AreaGridColCursor;
 extern s16                         g_AreaGridRowCursor;
 extern u16                         g_AreaCellPrimFreeIndex;

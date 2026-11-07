@@ -27,7 +27,8 @@ extern u8          g_SceneFlagWords[]; /* 0x80144E88 */
 extern s8          D_80144950;
 extern u8          D_80144953;
 extern u8          D_80144954;
-extern u8          D_80144956;
+/* D_80144956 */
+extern u8          g_AutoRun;
 /* D_80144F28 */
 extern u8          g_SceneEventFlags[];
 /* D_80144F58 */
@@ -134,6 +135,7 @@ extern s32         g_AreaCameraX;
 extern s32         g_AreaCameraHeight;
 /* D_80149320 */
 extern s16         g_AreaTileOriginX;
+extern s16         g_AreaTileOriginY;
 /* D_80149328 */
 extern s16         g_AreaCameraOffsetX;
 /* D_8014932A */
