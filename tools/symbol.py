@@ -11,7 +11,7 @@
 
 `rename` changes a function or global in every tracked file of the scope: the definition, each
 prototype and use, `config/` references, and the unit file `OLD.c` (`git mv`). It writes the
-row of config/symbols.toml: a new row for an address name (`--source` is the evidence), or the
+row of config/symbols.toml: a new row for an address name (`--source` describes the symbol), or the
 renamed key of an existing row. An address name (`func_<ADDR>`, `D_<ADDR>`) stays in a comment
 above its definition and declaration. A named symbol is one name in every image: with no
 `--image` its row is renamed in every table that has it. An address name is unique only per
@@ -166,7 +166,7 @@ def rename(args: argparse.Namespace) -> int:
     if address:
         if not args.source:
             raise SystemExit(
-                f"symbol: naming {old} needs --source, the evidence for the name"
+                f"symbol: naming {old} needs --source, a description of the symbol"
             )
         addr = int(address[2], 16)
         kind = args.type or ("func" if old.startswith("func_") else None)
@@ -250,7 +250,7 @@ def main(argv: list[str] | None = None) -> int:
     one.add_argument("image")
     one.add_argument("name")
     one.add_argument("addr")
-    one.add_argument("--source", help="the evidence for the name")
+    one.add_argument("--source", help="a description of the symbol")
     one.add_argument("--type")
     one.add_argument("--size")
     one.add_argument("--alias", action="store_true")
@@ -270,7 +270,7 @@ def main(argv: list[str] | None = None) -> int:
         help="only this image's src/ and config/ folders",
     )
     two.add_argument("--scope", nargs="+", help="only these paths")
-    two.add_argument("--source", help="the evidence (required for an address name)")
+    two.add_argument("--source", help="a description (required for an address name)")
     two.add_argument("--type")
     two.add_argument("--size")
     two.add_argument(
@@ -286,7 +286,7 @@ def main(argv: list[str] | None = None) -> int:
     four.set_defaults(run=refs)
     args = parser.parse_args(argv)
     if args.verb == "add" and not args.source and not args.alias:
-        parser.error("add needs --source (the evidence) or --alias")
+        parser.error("add needs --source (a description) or --alias")
     try:
         return args.run(args)
     except symtab.SymtabError as error:

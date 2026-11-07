@@ -15,8 +15,8 @@ Rules: [names](../../../../docs/conventions.md#names).
    [verb](../../../../docs/conventions.md#functions), [selector](../../../../docs/conventions.md#variables-parameters-and-members),
    [table](../../../../docs/conventions.md#tables). Adjacent symbols read through one base are one record:
    name the record once, then its members by role.
-5. Record the evidence where the name lives: the `config/symbols.toml` row's `source`, or a short comment beside
-   a member, type or constant. Rename every tracked user in one commit with
+5. Record the evidence in the commit body. Describe a symbol in its `config/symbols.toml` row's
+   `source`. Rename every tracked user in one commit with
    `tools/symbol.py rename` ([recipe](../../../../docs/conventions.md#rename-steps)); it writes the row. A function name goes to every copy with
    equal bytes ([shared bodies](../../../../docs/conventions.md#shared-bodies)); a parameter name goes to
    the definition and every prototype.
