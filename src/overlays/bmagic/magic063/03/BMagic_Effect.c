@@ -120,6 +120,7 @@ MATCH void func_801EFD7C(void) {
     }
 }
 
+// hint: matches except retail loads D_801F1054 for the unk_09 store before the 0xE halfword store (ours stores the halfword first, then reloads and waits a nop).
 INCLUDE_ASM(func_801EFE04);
 
 INCLUDE_ASM(func_801EFF18);

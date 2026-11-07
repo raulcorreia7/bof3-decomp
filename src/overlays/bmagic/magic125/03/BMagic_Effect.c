@@ -32,7 +32,20 @@ MATCH void func_801EEEC0(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK_BYTES[1]);
 }
 
-INCLUDE_ASM(func_801EEF04);
+MATCH void func_801EEF04(void) {
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 2), 2, g_Task);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        if ((g_FrameCount & 1) == 0) {
+            g_Task->unk_5D = (rand() & 3) + 4;
+            g_Task->unk_5E = (rand() & 3) + 4;
+            g_Task->unk_5F = (rand() & 3) + 4;
+        }
+        Effect_SetActorMatrix();
+        func_801EF258();
+        func_801EF508();
+        PopMatrix();
+    }
+}
 
 MATCH void func_801EEFF8(void) {
     u8 count;
@@ -140,6 +153,7 @@ INCLUDE_ASM(func_801EFB8C);
 
 INCLUDE_ASM(func_801EFCE4);
 
+/* hint: matches the plain draft except the angle sum (unk_09 + (unk_0B & 7) * 8) << 6 adds with the operands swapped and the z add loads the work pointer into a1. */
 INCLUDE_ASM(func_801EFE8C);
 
 INCLUDE_ASM(func_801EFFC8);
