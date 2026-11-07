@@ -192,10 +192,7 @@ MATCH void func_801D8208(u8 index, s32 left, s32 top, MenuListRow* row) {
     y = top;
     UI_DrawWindow(left + 8, y, 200, 48, 0, g_WindowStyle);
     if (row != NULL) {
-        if (GetGraphType() != 1) {
-            GetGraphType();
-        }
-        GFX_AddDrawMode(0xF);
+        GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
         Menu_DrawPanelIcon((left + 9), (top + 5), (u8)(index + 3), 0x1E, GetClut(16, 480), 128);
         for (i = 0; i < BATTLE_PARTY_SLOT_COUNT; i++) {
             icon = *(row->unk_00 + i + 5);

@@ -55,9 +55,6 @@ MATCH void Master_DrawPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
 
     UI_DrawSpriteRun(x, y, D_801D3F58, 0);
     Menu_DrawExperienceLine((x + 0x14), (y + 0x12), entry, record->level, record->exp);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    GFX_AddDrawMode(0xF);
+    GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     Menu_DrawPanelIcon((x + 9), (y + 5), (u8)(icon + 3), 0x1E, GetClut(16, 480), 128);
 }
