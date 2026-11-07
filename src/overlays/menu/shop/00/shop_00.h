@@ -57,7 +57,7 @@
         if ((SND_IsXAIdle() & BYTE_MASK) != 0) {     \
             count         = (cue_counter);           \
             (cue_counter) = count + 1;               \
-            UI_SetMode(1);                           \
+            UI_SetMode(UI_MODE_FADE_IN);             \
         }                                            \
     } while (0)
 

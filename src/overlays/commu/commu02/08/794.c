@@ -195,7 +195,7 @@ INCLUDE_ASM(func_801D2AC4);
 INCLUDE_ASM(func_801D2CF8);
 
 MATCH void func_801D2E10(void) {
-    SND_PlayCue(262);
+    SND_PlayCue(EMI_CUE_ID(1, 6));
     Message_StartAreaMessage(114);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     D_801F294D       = 0;
@@ -359,7 +359,7 @@ MATCH void func_801D5070(void) {
 }
 
 MATCH void func_801D50AC(void) {
-    UI_SetMode(0);
+    UI_SetMode(UI_MODE_FADE_OUT);
     D_801F294D += 1;
 }
 
@@ -449,7 +449,7 @@ MATCH void func_801D5DF4(void) {
 
 MATCH void func_801D5E30(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        SND_PlayCue(0x102);
+        SND_PlayCue(EMI_CUE_ID(1, 2));
         D_801DB0C4 = 4;
         D_801DB0B4 = 0;
         D_801DB0C8 = 0xF0;
