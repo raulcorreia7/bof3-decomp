@@ -4,13 +4,13 @@ MATCH void func_801F35A0(void) {
     PartyBattler* battler;
     PartyBattler* battler2;
 
-    if (g_Task->unk_09 != 0) {
+    if (g_Task->timer != 0) {
         battler = &D_801469B8;
         if (g_Task->param.unk_0B != 0) {
             battler = g_BattlePartyBattlers;
         }
         battler->header.flags |= PARTY_BATTLER_FLAG_HANDLER_BUSY;
-        g_Task->unk_09 -= 1;
+        g_Task->timer -= 1;
         return;
     }
     battler2 = &D_801469B8;

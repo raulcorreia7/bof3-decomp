@@ -4,7 +4,7 @@ MATCH void func_801B85C0(void) {
     u8  delay;
     u8* record;
 
-    if (g_Task->unk_09 == 0) {
+    if (g_Task->timer == 0) {
         delay          = g_Task->unk_0A - 1;
         g_Task->unk_0A = delay;
         if ((delay & BYTE_MASK) == 0) {
@@ -19,14 +19,14 @@ MATCH void func_801B85C0(void) {
             g_Task->header.mode               = 1;
             ACTOR_CLEAR_STEP();
             g_Task->unk_03 = 0;
-            g_Task->unk_09 = 0;
+            g_Task->timer  = 0;
             g_Task->unk_0A = 0;
             Actor_RequestScript(g_Task->direction_08);
             return;
         }
         func_801C24D0();
     }
-    g_Task->unk_09 = (g_Task->unk_09 - 1);
+    g_Task->timer = (g_Task->timer - 1);
     func_801B0DFC();
     func_8014D978();
 }

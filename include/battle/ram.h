@@ -237,6 +237,7 @@ extern u8            D_801484E0;
 extern u16           D_801485A4;
 extern s16           D_801485D6;
 /* D_801EAF3C */
+extern u16           g_BattlePendingStatus;
 extern volatile u16  g_BattleTurnPriorityMultipliers[6];
 /* D_801EAF88 */
 extern volatile u8   g_BattleLevelThresholds[12];
@@ -254,5 +255,7 @@ extern PartyBattler* D_801EB4E0;
 /* D_801EB4E8 */
 extern EnemyBattler* g_BattleCurrentEnemy;
 extern u8            D_801EB6B2[];
+/* Enemy battler work record (stride 0x118, indexed by slot - 3). */
+extern EnemyBattler  g_BattleEnemyBattlers[];
 
 #endif

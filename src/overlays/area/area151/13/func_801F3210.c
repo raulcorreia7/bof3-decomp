@@ -17,7 +17,7 @@ MATCH s32 func_801F3210(void) {
             }
         }
         ((Actor*)g_Task)->unk_48      = 2;
-        ((Actor*)g_Task)->unk_09      = 8;
+        ((Actor*)g_Task)->timer       = 8;
         ((Actor*)g_Task)->header.mode = 4;
     }
 tail:

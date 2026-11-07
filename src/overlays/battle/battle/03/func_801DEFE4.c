@@ -49,7 +49,7 @@ MATCH void func_801DEFE4(void) {
         }
         return;
     }
-    if (work->turn.damage_flags.value & 2) {
+    if (work->turn.damage_flags.value & COMBATANT_FLAG_DEFENDING) {
         Actor_RequestScript(g_Task->facing + 0x14);
         return;
     }
@@ -71,7 +71,7 @@ MATCH void func_801DEFE4(void) {
             return;
         case 4:
             battler = g_GameState;
-            if (battler->turn.action_flags.value & 4) {
+            if (battler->turn.action_flags.value & COMBATANT_FLAG_ABILITY_ALT_POSE) {
                 Actor_RequestScript(g_Task->facing + 0x38);
             } else if (D_801CA71C[battler->turn.command.id].mask & 0x800) {
                 Actor_RequestScript(g_Task->facing + 0x8);

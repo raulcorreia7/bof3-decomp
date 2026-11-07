@@ -13,13 +13,13 @@ MATCH void func_800A632C(void) {
     pad_state                                = &g_InputPressed;
     decoded                                  = INPUT_REPEATED(*pad_state, (PADLright | PADLleft));
     pad                                      = *pad_state;
-    if ((pad & g_InputMasks[INPUT_SLOT_CANCEL]) != 0) {
+    if ((pad & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         page_counter = (u8*)&g_BattleUIState;
         *page_counter -= 1;
         return;
     }
-    if ((pad & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0) {
+    if ((pad & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0) {
         if (D_801463B4 == 0) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             g_BattleUIState += 1;

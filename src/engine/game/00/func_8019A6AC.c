@@ -3,8 +3,8 @@
 MATCH void func_8019A6AC(void) {
     Actor* work;
 
-    g_Task->unk_09--;
-    if (g_Task->unk_09 == 0) {
+    g_Task->timer--;
+    if (g_Task->timer == 0) {
         g_Task->header.mode++;
         return;
     }
@@ -14,12 +14,12 @@ MATCH void func_8019A6AC(void) {
     func_8014D978();
     work = g_Task;
     if (work->unk_05 == 6) {
-        if ((work->unk_09 & 1) != 0) {
-            work->unk_30++;
+        if ((work->timer & 1) != 0) {
+            work->screen_y++;
         }
         Area_AddActor();
     } else {
-        if ((work->unk_09 & 1) != 0) {
+        if ((work->timer & 1) != 0) {
             work->vy--;
         }
         func_8014D290();

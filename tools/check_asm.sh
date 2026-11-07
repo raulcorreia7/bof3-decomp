@@ -6,8 +6,8 @@
 #
 #   tools/check_asm.sh [BASE_REF]
 #
-# The baseline is the count at the merge base of HEAD and BASE_REF. BASE_REF defaults to the newer
-# of origin/main and main (a local main that was never updated falls behind); the output names the
+# The baseline is the count at the merge base of HEAD and BASE_REF. BASE_REF defaults to the newest
+# of public/main, origin/main and main (a local main that was never updated falls behind); the output names the
 # ref and commit it used. With no such ref the check fails, because it cannot compare.
 set -eu
 cd "$(dirname "$0")/.."
@@ -17,12 +17,8 @@ now_lines=$(grep -rF INCLUDE_ASM src | cut -d: -f1)
 now=$(printf '%s\n' "$now_lines" | grep -c .) || now=0
 ref=${1:-}
 if [ -z "$ref" ]; then
-	for candidate in refs/remotes/origin/main main; do
-		git rev-parse --verify --quiet "$candidate^{commit}" >/dev/null || continue
-		if [ -z "$ref" ] || git merge-base --is-ancestor "$ref" "$candidate"; then
-			ref=$candidate
-		fi
-	done
+	. tools/lib/baseref.sh
+	ref=$(newest_base_ref)
 fi
 if [ -z "$ref" ] || ! git rev-parse --verify --quiet "$ref^{commit}" >/dev/null; then
 	echo "include-asm: cannot compare with ${1:-main}: no such ref (INCLUDE_ASM now: $now)" >&2

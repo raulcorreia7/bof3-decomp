@@ -38,7 +38,7 @@ NON_MATCHING void func_80099B74(void) {
     pad_state                                                  = &g_InputPressed;
     pad                                                        = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
     keys                                                       = *pad_state;
-    if (keys & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (keys & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         g_BattlePanelMode   = 1;
         g_BattleChoicePhase = 3;
@@ -49,7 +49,7 @@ NON_MATCHING void func_80099B74(void) {
         g_BattleUIState     = 0;
         return;
     }
-    if (keys & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (keys & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if (g_BattleTargetCursorCol != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             slot = FIELD(u8, g_BattleMessageSlot, 0x5u);
@@ -57,8 +57,8 @@ NON_MATCHING void func_80099B74(void) {
                 g_BattlePartyBattlers[slot].turn.damage_flags.volatile_value | 0x4000;
             *(u16*)((u8*)D_80145FAA + FIELD(u8, g_BattleMessageSlot, 0x5u) * BATTLE_PARTY_STRIDE) =
                 *(volatile u16*)&g_BattleTargetCursorCol;
-            choice                 = *(volatile u16*)&g_BattleTargetCursorCol;
-            D_801EB4D8->command.id = choice;
+            choice                        = *(volatile u16*)&g_BattleTargetCursorCol;
+            g_BattleActorTurn->command.id = choice;
             resource_id = Resource_GetText(Item_GetDescription((s32)(choice >> 8), choice & BYTE_MASK) & HALF_MASK);
             BATTLE_SELECTION_RECORD_HANDLE((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK) = resource_id;
             D_80148597                                                               = 2;

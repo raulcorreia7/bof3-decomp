@@ -72,12 +72,14 @@ jobs:
       # Warnings and errors fail; the info notes flag intended word splitting and A && B || C chains.
       - name: Shell lint
         run: git ls-files 'tools/*.sh' | xargs shellcheck --severity=warning
-      # dprint/check above covers Markdown, TOML and JSON; DPRINT=true skips the second run.
+      # dprint/check above covers Markdown, TOML and JSON; DPRINT=true makes format-check skip the second run.
       # format.sh --check also runs `ruff check` on tools/ (ruff is pinned in pyproject.toml).
       # check-headers, check-tree, include-asm, format-check (ruff included), meson test, typeloss.
       - if: steps.changes.outputs.code == 'true'
         run: meson setup build/meson
       - if: steps.changes.outputs.code == 'true'
+        env:
+          DPRINT: "true"
         run: tools/pre_push.sh refs/remotes/origin/main
       # A failure before pre-push (for example shell lint) leaves no logs to print.
       - name: Failed check logs

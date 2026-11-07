@@ -172,8 +172,8 @@ MATCH void func_801F04DC(void) {
     u8     timer;
 
     work          = g_Task;
-    timer         = work->unk_09 - 1;
-    work->unk_09  = timer;
+    timer         = work->timer - 1;
+    work->timer   = timer;
     work->scale.x = work->scale.x - 0x800;
     work->scale.y = work->scale.y - 0x1000;
     if (timer == 0) {

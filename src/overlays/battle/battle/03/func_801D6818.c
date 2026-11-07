@@ -11,9 +11,12 @@ MATCH void func_801D6818(void) {
     if (BATTLE_PARTY_CURSOR < g_BattlePartyCount) {
         do {
             if (Battle_SlotIsBlocked(BATTLE_PARTY_CURSOR) == 0u) {
-                if (((g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].turn.action_flags.value & 1u) != 0u) ||
-                    ((g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].turn.action_flags.value & 2u) != 0u)) {
-                    g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].turn.damage_flags.value |= 0x2000u;
+                if (((g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].turn.action_flags.value &
+                      COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) ||
+                    ((g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].turn.action_flags.value &
+                      COMBATANT_FLAG_DRAGON_FORM) != 0u)) {
+                    g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].turn.damage_flags.value |=
+                        COMBATANT_FLAG_FORM_EFFECT_PLAYING;
                     if (g_BattlePartyBattlers[BATTLE_PARTY_CURSOR].chr.character_id == CHAR_ID_REI) {
                         slot                               = (u8)Battle_AllocEffect(0u, 0xBu);
                         g_BattleEffects[slot].target.party = &g_BattlePartyBattlers[BATTLE_PARTY_CURSOR];

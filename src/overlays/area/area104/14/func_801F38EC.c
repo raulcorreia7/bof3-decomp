@@ -2,8 +2,8 @@
 
 MATCH void func_801F38EC(void) {
     if (g_Task->param.unk_0B == 0) {
-        g_Task->unk_09++;
-        if (g_Task->unk_09 >= 0x5A) {
+        g_Task->timer++;
+        if (g_Task->timer >= 0x5A) {
             g_Task->param.unk_0B++;
         }
     }
@@ -20,5 +20,5 @@ MATCH void func_801F38EC(void) {
 bump:
     g_Task->unk_03++;
 done:
-    Area_DrawHudBanner(0x5C, g_Task->unk_30);
+    Area_DrawHudBanner(0x5C, g_Task->screen_y);
 }

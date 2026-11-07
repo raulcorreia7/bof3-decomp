@@ -19,15 +19,22 @@ extern volatile u8 D_80140000[];
 extern u8          D_80143BB0;
 extern u16         D_80143F04;
 /* D_80143F7C */
+extern u32         g_UiPopupRequest;
+extern u16         g_GameAreaId;
 extern s32         g_PartyX; /* 0x80143F7C */
 /* D_80143F80 */
 extern s32         g_PartyY; /* 0x80143F80 */
 /* D_80144E88 */
+extern u16         g_SaveAreaId;
+extern u8          g_SaveEntryFacing;
+extern u32         g_SaveEntryX;
+extern u32         g_SaveEntryY;
 extern u8          g_SceneFlagWords[]; /* 0x80144E88 */
 extern s8          D_80144950;
 extern u8          D_80144953;
 extern u8          D_80144954;
-extern u8          D_80144956;
+/* D_80144956 */
+extern u8          g_AutoRun;
 /* D_80144F28 */
 extern u8          g_SceneEventFlags[];
 /* D_80144F58 */
@@ -58,6 +65,8 @@ extern s16 D_80145ECE;
 extern u8  D_80145ED8;
 extern u8  D_80145EDB;
 /* Player battle-record copies (stride 0x140), selected by g_BattleActiveBattler. */
+extern u16 g_InputRepeatDelay;
+extern u16 g_InputRepeatButtons;
 extern u8  D_80145F04[];
 extern u8  D_80145F10[];
 extern u16 D_80145F1A[];
@@ -153,6 +162,7 @@ extern u8          D_8014933A;
 /* D_8014933B */
 extern u8          g_AreaSceneMode;
 /* D_8017F974 */
+extern u8          g_AreaHeightOffsetEnabled;
 extern void* const g_AreaLoads[200]; /* 0x8017F974 */
 extern u8          D_8014933C;
 /* D_80181B10 */

@@ -15,7 +15,7 @@ NON_MATCHING void func_801E206C(void) {
     func_801E2668(D_80148655, 0x70, 0x26);
     if ((s8)D_80148655 != 9) {
         WinDrawCueText(28, 19, ((s8)D_80148655 + 0xBC) & HALF_MASK);
-    } else if (D_80144956 != 0) {
+    } else if (g_AutoRun != 0) {
         WinDrawCueText(28, 19, 0xCA);
     } else {
         WinDrawCueText(28, 19, 0xC5);
@@ -25,8 +25,8 @@ NON_MATCHING void func_801E206C(void) {
     sel = g_InputPressed & (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADR1);
     if (sel != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
-        g_InputMasks[INPUT_SLOT_ACTION] &= 0xFFFC;
-        g_InputMasks[INPUT_SLOT_CONFIRM] &= 0xFFFC;
+        g_InputMasks[INPUT_SLOT_SPEAK] &= ~(PADL2 | PADR2);
+        g_InputMasks[INPUT_SLOT_CONFIRM] &= ~(PADL2 | PADR2);
         i = 0;
         while (!((sel >> i) & 1)) {
             i++;
@@ -49,8 +49,8 @@ NON_MATCHING void func_801E206C(void) {
             g_InputMasks[D_801ECD14[i]] = g_InputMasks[D_801ECD0C[(s8)D_80148655]];
         }
         g_InputMasks[D_801ECD0C[(s8)D_80148655]] = sel;
-        g_InputMasks[INPUT_SLOT_ACTION] |= 3;
-        g_InputMasks[INPUT_SLOT_CONFIRM] |= 3;
+        g_InputMasks[INPUT_SLOT_SPEAK] |= PADL2 | PADR2;
+        g_InputMasks[INPUT_SLOT_CONFIRM] |= PADL2 | PADR2;
     }
     bits = g_InputPressed;
     keys = INPUT_GetRepeatedButtons(bits & INPUT_DIRECTIONAL);

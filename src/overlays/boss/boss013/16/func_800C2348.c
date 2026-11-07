@@ -3,7 +3,7 @@
 MATCH void func_800C2348(void) {
     if (g_BattleResult & BATTLE_RESULT_VICTORY) {
         *g_ScriptVars     = 0x14;
-        g_BattleSpoilsExp = D_801EB6B6 + D_801EB7CE;
+        g_BattleSpoilsExp = ENEMY_COMBATANT(3).exp + ENEMY_COMBATANT(4).exp;
         func_801DDED8();
     } else {
         if (g_BattleBossFlags & 0x40) {

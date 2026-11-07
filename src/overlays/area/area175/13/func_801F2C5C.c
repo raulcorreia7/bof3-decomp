@@ -11,6 +11,6 @@ MATCH void func_801F2C5C(void) {
         i += 1;
         spin += 0x2C;
     } while ((i & 0xFF) < 0x20U);
-    g_Task->unk_09 = 0;
+    g_Task->timer = 0;
     g_Task->header.mode += 1;
 }

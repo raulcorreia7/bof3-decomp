@@ -71,7 +71,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     SetSprt(sprite);
     setWH(sprite, g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][0],
           g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][1]);
-    sprite->y0 = SPAD_CURSOR->unk_30 + (s8)sprite_cell->y;
+    sprite->y0 = SPAD_CURSOR->screen_y + (s8)sprite_cell->y;
     setUV0(sprite, sprite_cell->u, SPAD_CURSOR->unk_26 + sprite_cell->v);
     delta        = SPAD_CURSOR->tint.bytes.unk_5D - 0x80;
     sprite->r0   = delta;
@@ -82,9 +82,9 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     sprite->clut = sprite_clut;
     delta        = sprite_mirror & BYTE_MASK;
     if (!delta) {
-        sprite->x0 = SPAD_CURSOR->unk_2E + (s8)sprite_cell->x;
+        sprite->x0 = SPAD_CURSOR->screen_x + (s8)sprite_cell->x;
     } else {
-        sprite->x0 = (SPAD_CURSOR->unk_2E - (s8)sprite_cell->x) - sprite->w;
+        sprite->x0 = (SPAD_CURSOR->screen_x - (s8)sprite_cell->x) - sprite->w;
     }
     SetSemiTrans(sprite, (SPAD_CURSOR->header.flags >> 5) & 1);
     GFX_AddPrim(SPAD_CURSOR->unk_29, 0x14U);

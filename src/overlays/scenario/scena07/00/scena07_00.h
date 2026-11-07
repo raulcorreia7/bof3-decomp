@@ -43,13 +43,12 @@ extern u8 D_801FDFC8;
     func_801F88B8(MEM_PTR(void, 0x800E48E0u)); \
     func_801F8BE8(MEM_PTR(void, 0x800E48E0u)); \
     D_800E4C1E -= 0xC;                         \
-    if (--g_Task->unk_09 == 0) {               \
+    if (--g_Task->timer == 0) {                \
         g_Task->header.step++;                 \
     }
 s32 func_801F85D8(void);
 s32 func_801F9EFC(void);
 
-extern u16      g_GameAreaId;
 extern s8       D_80146874;
 extern u8       D_80146875;
 extern Callback D_801FDD14[];

@@ -4,11 +4,11 @@ MATCH void func_80099248(void) {
     u16 held;
 
     held = g_InputPressed;
-    if ((held & g_InputMasks[INPUT_SLOT_CANCEL]) != 0u) {
+    if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_BattleUIState = 3u;
         return;
     }
-    if ((held & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0u) {
+    if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         g_BattleUIState = 2u;
         return;
     }
@@ -16,7 +16,7 @@ MATCH void func_80099248(void) {
         return;
     }
     if ((Item_GetFlags(D_8014857A, D_801C893C[D_8014857A][D_8014857C]) & 0x80u) != 0u) {
-        D_801EB4D8->command.target ^= 0xC0u;
+        g_BattleActorTurn->command.target ^= BATTLE_TARGET_BOTH_SIDES;
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

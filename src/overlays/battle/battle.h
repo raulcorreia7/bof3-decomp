@@ -56,7 +56,8 @@ typedef struct BattleScrollDelta {
 ASSERT_SIZE(BattleScrollDelta, 0x02);
 
 extern BattleScrollDelta            D_800B44C0[4];
-extern u8                           D_800B6510[232];
+/* D_800B6510 */
+extern u8                           g_BattleActionSelection[232];
 extern u8*                          D_800B6AB0[];
 /* One-field views of the same rows: the local rows (stride 0x140) and the
  * enemy rows (stride 0x118), each anchored at the field the retail symbol
@@ -82,14 +83,11 @@ extern u8                           D_801463CB;
 extern volatile BattleSelectionType D_801CA71C[];
 /* D_801EB0B0 */
 extern s8                           g_BattlePanelOffsets[];
-extern BattleTurn*                  D_801EB4D8;
+extern BattleTurn*                  g_BattleActorTurn;
 extern u8                           g_BattleEventSlots[];
 extern u8                           D_801EB5A8;
 extern u8                           D_801EB5B1[];
 extern u8*                          D_801EB5B4[];
-/* Enemy battler work record (stride 0x118 at g_BattleEnemyBattlers, indexed by slot - 3). */
-/* D_801EB630 */
-extern EnemyBattler                 g_BattleEnemyBattlers[];
 extern u8                           D_801EB631[];
 extern u8                           D_801EB710[];
 extern volatile u16                 D_801EB726[][140];

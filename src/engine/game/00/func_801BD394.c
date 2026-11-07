@@ -20,7 +20,7 @@ MATCH void func_801BD394(void) {
     }
     work  = g_Task;
     slot  = (Actor*)((u8*)g_BattlePartyBattlers + work->unk_06 * BATTLE_PARTY_STRIDE);
-    count = slot->unk_09;
+    count = slot->timer;
     x     = slot->pos.x.fixed + slot->vx * count;
     y     = slot->pos.y.fixed + slot->vy * count;
     range = TO_COORD(1) + COORD_HALF;
@@ -38,14 +38,14 @@ MATCH void func_801BD394(void) {
             flag = 1;
         }
     }
-    if ((g_AreaWalkFlags & (AREA_WALK_STEP_ACTIVE | AREA_WALK_RUN_ACTIVE | AREA_WALK_TRANSITION)) || flag) {
+    if ((g_AreaWalkFlags & (AREA_WALK_LEADER_SWITCH_ACTIVE | AREA_WALK_MENU_ACTIVE | AREA_WALK_TRANSITION)) || flag) {
         g_GameState->mode_12B.u8_value = 0;
     } else {
         D_801CD1D8[g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK]();
     }
     if (g_GameState->mode_12B.u8_value == 0) {
         Actor_RequestScript(g_Task->direction_08);
-        g_Task->unk_09 = 0;
+        g_Task->timer = 0;
         Party_ClearBattlerState(g_Task->unk_05);
         g_Task->header.mode  = 1;
         g_Task->param.unk_0B = 0;

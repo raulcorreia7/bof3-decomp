@@ -43,7 +43,7 @@ MATCH s32 Area_CanStartEncounter(void) {
         g_Task = work;
         if (ok != 0) {
             for (i = 0; i < g_PartySize; i++) {
-                ok = func_801C472C(FIELD(s32, D_80143F2C, i << 3), FIELD(s32, D_80143F30, i << 3),
+                ok = func_801C472C(g_EncounterParty[i].x.fixed, g_EncounterParty[i].y.fixed,
                                    D_80181B1C[g_PartyBattleOrder[i]], 0x10, 1);
                 if (ok == 0) {
                     break;
@@ -55,7 +55,7 @@ MATCH s32 Area_CanStartEncounter(void) {
     rec   = g_Task;
     value = rec->pos.y.fixed;
     /* x holds the step count, then the x sum */
-    x     = rec->unk_09;
+    x     = rec->timer;
     dy    = rec->vy * x;
     x     = rec->pos.x.fixed + rec->vx * x;
     return (AREA_CELL_CODE_S16(x >> 16, (value + dy) >> 16) & BYTE_MASK) == 0;

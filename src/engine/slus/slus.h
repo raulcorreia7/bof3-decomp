@@ -508,7 +508,6 @@ extern u32                         D_80143E70[];
 extern s32                         D_80143E8C;
 extern u32                         D_80143EA0;
 extern u32                         D_80143EA4;
-extern u16                         g_GameAreaId;
 extern u8                          D_80143F48[];
 extern s16                         g_ScrollHeight[]; /* low half (+2) of the big-endian 0x80143F84 scroll word */
 extern volatile u8                 g_SndMono;
@@ -523,8 +522,6 @@ extern u16                         D_80145A54[];
 extern u16                         D_80145AA6;
 extern u16                         D_80145AAE;
 /* Pad repeat decoder state words; shop also reads them (func_801D5D98). */
-extern u16                         g_InputRepeatDelay;
-extern u16                         g_InputRepeatButtons;
 /* Text cursor cells: the draw-text entry seeds them and the line printer
  * computes with them. */
 extern u16                         D_80145ACA;
@@ -705,7 +702,6 @@ extern u16                         g_AreaCellPrimFreeIndex;
 extern u16                         D_80149336;
 extern u8                          D_8014933D;
 /* D_80149340 */
-extern u8                          g_AreaHeightOffsetEnabled;
 extern u8                          D_80149341;
 extern const char                  D_80149990[];
 extern const u32                   g_UiLocalModeFuncs[];

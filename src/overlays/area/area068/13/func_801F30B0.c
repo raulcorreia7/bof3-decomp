@@ -46,6 +46,6 @@ MATCH void func_801F30B0(void) {
                 break;
         }
         g_Task->header.mode = 0xC;
-        g_Task->unk_09      = 0xC;
+        g_Task->timer       = 0xC;
     }
 }

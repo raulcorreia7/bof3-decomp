@@ -6,7 +6,6 @@ extern u8  D_801484BF;
 extern s16 D_801484C0;
 extern s16 D_801484C2;
 extern s16 D_801484CC;
-extern u8  D_801485B8;
 extern u8  D_801485B9;
 extern u8  D_801485BA;
 extern s16 D_801485BC;
