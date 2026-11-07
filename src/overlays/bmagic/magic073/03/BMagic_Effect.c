@@ -4,7 +4,22 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC28);
+MATCH void func_801EEC28(void) {
+    PartyBattler* saved;
+    u8            i;
+
+    BMagic_DispatchTaskPair(func_801EED18, func_801EEF50);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved                 = g_BattleEffectBattler;
+            D_801F21F0            = &BMAGIC_EFFECT_SLOTS[i];
+            g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].battler;
+            func_801EF724();
+            g_BattleEffectBattler = saved;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED18);
 
