@@ -4026,7 +4026,10 @@ D_80148650 = { addr = 0x80148650, source = "font-state index" }
 D_80148651 = { addr = 0x80148651, source = "font-state substep" }
 D_80148652 = { addr = 0x80148652, source = "font-state substep" }
 D_8014865C = { addr = 0x8014865C, source = "font-state param" }
+g_SndVabIds = { addr = 0x80148FB0, type = "s8", size = 0x7, source = "SND_Init seeds slot i with i and SND_Exit passes each to SsVabClose" }
 g_SelectionFxVoices = { addr = 0x80148FC0, type = "s8", source = "SND_Init (SND_Init.c 22-28) initializes the seven entries to -1, one per SEP/VAB slot SND_Exit (func_8015CEBC) closes each non-(-1) entry func_8015D438 calls" }
+g_SndVoiceVolume = { addr = 0x80148FC8, type = "s8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] to SsUtAutoVol as the start level and stores the target back" }
+g_SndVoiceTargetVolume = { addr = 0x80148FF8, type = "u8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] as the end level; func_8015D104 lowers it clamped at zero" }
 g_MessageState = { addr = 0x801490A0, source = "wiki systems/ui.md: the message state byte (0 to 7) that func_801507BC dispatches its handler table on; UI_TickChoiceTimer clears it" }
 g_UiWindowStep = { addr = 0x801490A1, type = "u8", source = "the window script step index func_801510DC/80150F3C/80151538 dispatch through handler tables on it Message_DispatchAnswerStep/80151710 advance it" }
 g_MessageChoiceMode = { addr = 0x801490A2, source = "wiki systems/ui.md: the selection state; func_801518F4 dispatches its handler table on it, UI_ResetMessage and func_80151B50 clear it when the choice ends" }
@@ -4262,7 +4265,7 @@ SND_Exit = { addr = 0x8015CEBC, type = "func", source = "SYS_Main calls it - sto
 SND_UpdateVoiceStatus = { addr = 0x8015D044, type = "func", source = "SYS_Main calls it - polls SpuGetKeyStatus for voices 0..0x17 into g_SndVoiceStatus" }
 SND_LowerVoiceLevel = { addr = 0x8015D148, type = "func", source = "subtracts from the D_80149070 accumulator and derives the D_80149040 level" }
 SND_RaiseVoiceLevel = { addr = 0x8015D1BC, type = "func", source = "adds to the D_80149070 accumulator and derives the D_80149040 level" }
-SND_StartVolumeSweep = { addr = 0x8015D228, type = "func", source = "starts a volume sweep from D_80148FC8 to D_80148FF8 on the voice" }
+SND_StartVolumeSweep = { addr = 0x8015D228, type = "func", source = "starts a volume sweep from g_SndVoiceVolume to g_SndVoiceTargetVolume on the voice" }
 SND_StartPanSweep = { addr = 0x8015D290, type = "func", source = "starts a pan sweep from D_80149010 to D_80149040 on the voice" }
 SND_PlaySequence = { addr = 0x8015D300, type = "func", source = "starts the BGM's effect voice through SsSepPlay after the volume/duck setup" }
 SND_StopSequence = { addr = 0x8015D404, type = "func", source = "resolves the effect group's entry in the s8 table at g_SelectionFxVoices and forwards it with the caller's effect id to SsSepStop" }
