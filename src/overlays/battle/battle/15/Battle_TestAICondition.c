@@ -1,8 +1,5 @@
 #include "battle_15.h"
 
-extern void Battle_Unk0E1BitModify(u8* record, s32 bit, u8 set);
-extern u8   Battle_Unk0E1BitTest(volatile u8* entry, s32 bit_index);
-
 /* walks the four battle event packets of the current enemy kind and
  * applies the ones whose trigger test passes, then hands the frame to the
  * event dispatcher.

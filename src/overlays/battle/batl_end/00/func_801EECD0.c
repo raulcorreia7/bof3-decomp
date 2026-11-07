@@ -9,7 +9,7 @@ MATCH void func_801EECD0(void) {
     } else {
         *pool = 0;
     }
-    sprintf(g_TextVariables, D_801EEC04, g_BattleSpoilsExp);
+    TEXT_Format(g_TextVariables, D_801EEC04, g_BattleSpoilsExp);
     D_801EB4F4 = Resource_GetText(5);
     EMI_StreamFamilyArchive(g_EmiLoadedCharacterIndex & 0x7F, 0);
     g_BattleUIState += 1;

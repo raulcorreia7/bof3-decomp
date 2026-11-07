@@ -320,9 +320,9 @@ MATCH void func_801D91B0(u8 index, s32 left, s32 top, MenuListRow* row) {
             }
         }
         UI_DrawText((x + 21), (y + 3), 0, 5, (u8*)row);
-        sprintf((char*)g_UiFormatBuffer, D_801D0D64, row->unk_00[8]);
+        TEXT_Format(g_UiFormatBuffer, D_801D0D64, row->unk_00[8]);
         UI_DrawGlyphString((x + 31), (y + 24), 0, g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, D_801D0D68, row->unk_00[0xC], row->unk_00[0xD]);
+        TEXT_Format(g_UiFormatBuffer, D_801D0D68, row->unk_00[0xC], row->unk_00[0xD]);
         label_x = x + 0x27;
         UI_DrawGlyphString(label_x, (y + 37), 0, g_UiFormatBuffer);
         UI_DrawGlyphString(label_x, (y + 36), 0, (u8*)&D_801D0D74);

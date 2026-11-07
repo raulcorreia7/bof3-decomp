@@ -30,9 +30,9 @@ NON_MATCHING void func_801D8C58(s16 x, s16 y, u8 index, u8 flag) {
         value = Char_GetExpForLevel(index, (FIELD(u8, slot, 0x6) + 1) & BYTE_MASK);
     }
     if (value != -1) {
-        sprintf((s8*)g_UiFormatBuffer, &D_801D0CF8, value);
+        TEXT_Format(g_UiFormatBuffer, D_801D0CF8, value);
     } else {
-        sprintf((s8*)g_UiFormatBuffer, &D_801D0CFC);
+        TEXT_FormatLiteral(g_UiFormatBuffer, D_801D0CFC);
     }
     UI_DrawAsciiString(x + 21, y + 26, 0, g_UiFormatBuffer);
     UI_DrawSpriteRun(x, y, D_801E5680, 1);

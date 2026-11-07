@@ -22,7 +22,7 @@ MATCH void SAVE_RunLoadVerify(void) {
         for (i = 0; i < 1792; i++) {
             *clear++ = 0;
         }
-        sprintf((char*)g_UiFormatBuffer, g_SaveFileNameFormat, g_SaveSlotFirst);
+        TEXT_Format(g_UiFormatBuffer, g_SaveFileNameFormat, g_SaveSlotFirst);
         if (CardAccessFile(1, g_UiFormatBuffer, 1, SAVE_FILE_SIZE, 0) != -1) {
             stored     = D_800C1A70;
             D_800C1A70 = 0;
