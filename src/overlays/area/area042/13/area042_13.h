@@ -9,7 +9,6 @@
 
 void func_801F37A8(s32 arg0, s32 arg1);
 
-extern u8 D_80145F09;
 extern u8 D_801F52D0[];
 extern u8 D_801F52E8[];
 extern u8 D_801F532C[];

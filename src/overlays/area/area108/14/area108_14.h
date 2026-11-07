@@ -21,7 +21,6 @@ typedef struct Area108Scratch {
 ASSERT_SIZE(Area108Scratch, 0x40);
 ASSERT_OFFSET(Area108Scratch, pos, 0x34);
 
-extern u8       D_80145F09;
 /* The game-overlay state bytes the cancel path resets. */
 extern u8       D_80147AF0;
 extern u8       D_801F56E8[];

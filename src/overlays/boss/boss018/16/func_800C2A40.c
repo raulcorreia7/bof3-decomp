@@ -1,7 +1,7 @@
 #include "boss018_16.h"
 
 MATCH void func_800C2A40(void) {
-    switch (D_80145F09[0]) {
+    switch (g_BattlePartyBattlers[0].chr.character_id) {
         case 0:
             g_BattlePartyOrder = 0x2C;
             break;

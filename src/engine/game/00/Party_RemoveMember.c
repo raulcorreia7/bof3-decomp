@@ -90,7 +90,7 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
                 g_Task->unk_26  = (u8)frac;
                 g_Task->unk_27  = (u8)code;
                 g_Task->unk_4B  = 0xFF;
-                D_80145FCC[off] = g_CharSlot[(&D_80145F09)[off]];
+                D_80145FCC[off] = g_CharSlot[FIELD(u8, &g_BattlePartyBattlers[0].chr.character_id, off)];
             }
             off += BATTLE_PARTY_STRIDE;
             code++;

@@ -8,7 +8,6 @@
 
 #define g_CurrentActor ((u8*)g_CurrentActor)
 
-extern u8 D_80145F09;
 extern u8 D_801F3EAC[];
 
 void func_801F2F38(s32, s32);
