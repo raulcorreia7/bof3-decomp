@@ -34,8 +34,8 @@ u8 g_MenuLabelPower[MASTER_MENU_LABEL_SIZE]      = "Pwr";
 u8 g_MenuLabelDefense[MASTER_MENU_LABEL_SIZE]      = "Def";
 u8 g_MenuLabelIntellect[MASTER_MENU_LABEL_SIZE]      = "Int";
 u8 g_MenuLabelAgility[MASTER_MENU_LABEL_SIZE]      = "Agl";
-char D_801D4048[MASTER_MENU_LABEL_LONG_SIZE] = "Pois";
-char D_801D4050[MASTER_MENU_LABEL_LONG_SIZE] = "Conf";
+char g_MenuLabelPoison[MASTER_MENU_LABEL_LONG_SIZE] = "Pois";
+char g_MenuLabelConfusion[MASTER_MENU_LABEL_LONG_SIZE] = "Conf";
 
 /* Panel atlas records. */
 // clang-format off
@@ -127,21 +127,21 @@ Callback g_MasterMenuSubFuncs[MASTER_MENU_SUBSTEP_COUNT] = {
     func_801D2738,
 };
 
-Callback D_801D4204[SISYOU_SUB2_HANDLER_COUNT] = {
+Callback g_MasterStep2Funcs[SISYOU_SUB2_HANDLER_COUNT] = {
     func_801D27C8, func_801D282C, func_801D28B0, func_801D29C8, func_801D2A4C, func_801D2B64,
 };
 
-Callback D_801D421C[SISYOU_SUB3_HANDLER_COUNT] = {
+Callback g_MasterStep3Funcs[SISYOU_SUB3_HANDLER_COUNT] = {
     func_801D0C48, func_801D0C88, func_801D2C24, func_801D2C64, func_801D12FC,
     func_801D2CA4, func_801D30C4, func_801D3148, func_801D3258,
 };
 
-Callback D_801D4240[SISYOU_SUB4_HANDLER_COUNT] = {
+Callback g_MasterStep4Funcs[SISYOU_SUB4_HANDLER_COUNT] = {
     func_801D0C48, func_801D0C88, func_801D3310, func_801D3350, func_801D12FC,
     func_801D3390, func_801D3714, func_801D3798, func_801D38A8,
 };
 
-Callback D_801D4264[SISYOU_SUB5_HANDLER_COUNT] = {
+Callback g_MasterStep5Funcs[SISYOU_SUB5_HANDLER_COUNT] = {
     func_801D3960,
     func_801D3A24,
     func_801D3E70,

@@ -105,8 +105,10 @@ extern u8                 D_801D4014[MASTER_MENU_SPRITE_0BC_SIZE];
 extern u8                 D_801D4020[MASTER_MENU_SPRITE_0C8_SIZE];
 /* D_801D4044 */
 extern u8                 g_MenuLabelAgility[MASTER_MENU_LABEL_SIZE];
-extern char               D_801D4048[MASTER_MENU_LABEL_LONG_SIZE]; /* "Pois" */
-extern char               D_801D4050[MASTER_MENU_LABEL_LONG_SIZE]; /* "Conf" */
+/* D_801D4048 */
+extern char               g_MenuLabelPoison[MASTER_MENU_LABEL_LONG_SIZE]; /* "Pois" */
+/* D_801D4050 */
+extern char               g_MenuLabelConfusion[MASTER_MENU_LABEL_LONG_SIZE]; /* "Conf" */
 extern MenuPortraitSprite D_801D4058[MASTER_MENU_ATLAS_COUNT];
 /* D_801D4088 */
 extern MasterSkill        g_MasterSkills[MASTER_COUNT][MASTER_SKILL_COUNT];
@@ -116,10 +118,14 @@ extern u8                 D_801D41BA;
 extern u8                 D_801D41BB;
 /* D_801D41BC */
 extern s16                g_MasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT];
-extern Callback           D_801D4204[SISYOU_SUB2_HANDLER_COUNT];
-extern Callback           D_801D421C[SISYOU_SUB3_HANDLER_COUNT];
-extern Callback           D_801D4240[SISYOU_SUB4_HANDLER_COUNT];
-extern Callback           D_801D4264[SISYOU_SUB5_HANDLER_COUNT];
+/* D_801D4204 */
+extern Callback           g_MasterStep2Funcs[SISYOU_SUB2_HANDLER_COUNT];
+/* D_801D421C */
+extern Callback           g_MasterStep3Funcs[SISYOU_SUB3_HANDLER_COUNT];
+/* D_801D4240 */
+extern Callback           g_MasterStep4Funcs[SISYOU_SUB4_HANDLER_COUNT];
+/* D_801D4264 */
+extern Callback           g_MasterStep5Funcs[SISYOU_SUB5_HANDLER_COUNT];
 extern u8                 D_801D4270[MASTER_MENU_VALUE_COUNT];
 extern u8                 g_MasterBannerLock;
 extern u8                 g_MasterStep;
