@@ -1,22 +1,6 @@
-#include "shared/etc.h"
+#include "start_08.h"
 
-extern s8  D_8014854C;
-extern s8  D_8014854D;
-extern s8  D_8014854E;
-extern s8  D_8014854F;
-extern s16 D_80148550;
-extern s16 D_80148552;
-extern u8  D_80148556;
-extern s8  D_80148571;
-extern s8  D_80148572;
-extern s16 D_80148576;
-extern s8  D_80148595;
-extern s8  D_80148596;
-extern s16 D_80148598;
-extern s16 D_8014859A;
-extern s8  D_80148656;
-
-u8 Party_CountOrder(u8 mode);
+extern s8 D_80148656; /* local: s8 read; a sibling copy is u8 */
 
 MATCH void func_801D2AC8(void) {
     u8  i;

@@ -1,22 +1,5 @@
 /* best score 90.14 */
-#include "shared/etc.h"
-
-/* start_08.h declares Party_CountOrder as u8(u8); this unit reads the count as a full register. */
-u8 Party_CountOrder(u8 mode);
-
-extern s8  D_801484E1;
-extern s8  D_801484E2;
-extern s8  D_801484E3;
-extern s16 D_801484E4;
-extern s16 D_801484E6;
-extern u8* D_80148500;
-extern u8  D_80148658;
-extern u8  D_80148659;
-extern u8  D_8014865A;
-extern u8  D_801ED690[];
-extern u8  D_801ED694[][2];
-extern u8  D_801ED695[][2];
-extern u8  D_801ED69C;
+#include "start_08.h"
 
 /* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to
  * g_MenuPanelTasks[12].unk_0A, for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv
@@ -74,11 +57,11 @@ NON_MATCHING void func_801DAE14(void) {
         D_801ED695[i][0] = 0;
     }
 
-    D_8014865A = 0x7F;
-    D_8014865D = 0x7F;
-    D_80148658 = 0;
-    D_80148659 = 0;
-    D_801ED69C = 0xFF;
+    D_8014865A    = 0x7F;
+    D_8014865D    = 0x7F;
+    D_80148658[0] = 0;
+    D_80148659    = 0;
+    D_801ED69C    = 0xFF;
 }
 #else
 INCLUDE_ASM(func_801DAE14);

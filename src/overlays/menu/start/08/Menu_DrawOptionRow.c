@@ -1,32 +1,6 @@
 #include "start_08.h"
 
 typedef struct {
-    s32 unk_00;
-    s32 unk_04;
-    s8  unk_08;
-    s8  unk_09;
-} __attribute__((packed)) Record10;
-
-typedef struct {
-    s32 unk_00;
-    s32 unk_04;
-    s8  unk_08;
-    s8  unk_09;
-    s8  unk_0A;
-} __attribute__((packed)) Record11;
-
-typedef struct {
-    s32 unk_00;
-    s8  unk_04;
-    s8  unk_05;
-} __attribute__((packed)) Record6;
-
-typedef struct {
-    s32 unk_00;
-    s32 unk_04;
-} __attribute__((packed)) Record8;
-
-typedef struct {
     Record10 unk_00;
     u8       pad_0A[6];
     Record11 unk_10;
@@ -45,13 +19,6 @@ typedef union {
     WorkFields fields;
     s32        words[32];
 } WorkArea;
-
-extern Record10 D_801D0DE0;
-extern Record11 D_801D0DEC;
-extern Record11 D_801D0DF8;
-extern Record6  D_801D0E04;
-extern Record8  D_801D0E0C;
-extern Record11 D_801D0E14;
 
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 49.08%. resume: a lever or header
  * fix that closes the first mismatch. */
