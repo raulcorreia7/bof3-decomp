@@ -4,5 +4,5 @@
  * shop-state byte D_80148652. */
 
 MATCH void SAVE_DispatchState(void) {
-    SYS_DISPATCH_BYTE(D_801E530C, D_80148652);
+    SYS_DISPATCH_BYTE(g_SaveStateFuncs, D_80148652);
 }
