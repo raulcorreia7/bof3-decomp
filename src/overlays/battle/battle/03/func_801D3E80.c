@@ -11,7 +11,7 @@ MATCH void func_801D3E80(void) {
     }
 
     if (LOBU(g_BattleActionType) == BATTLE_ACTION_ABILITY) {
-        entry_index = D_800B6510[LOHU(g_BattleActionId)];
+        entry_index = g_BattleActionSelection[LOHU(g_BattleActionId)];
         /* mode 4 shares the stream-entry test below */
         goto check_entry;
     }

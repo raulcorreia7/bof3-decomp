@@ -4,6 +4,8 @@
 
 ["emi/battle/battle/03"]
 Battle_TestAICondition = { addr = 0x8009BBE8, type = "func", source = "Tests an enemy AI condition." }
+g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, alias = true }
+Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", alias = true }
 g_BattleSelections = { addr = 0x800B65F8, alias = true }
 g_BattleActionType_nv = { addr = 0x80146375, alias = true }
 g_BattlePhases = { addr = 0x801D0C04, source = "Battle mode handlers, one per battle mode." }
@@ -99,6 +101,7 @@ Battle_LoadEncounterEnemies = { addr = 0x800ABF5C, type = "func", source = "Adds
 Battle_AddEnemy = { addr = 0x800AC01C, type = "func", source = "Adds an enemy to the battle." }
 Battle_LoadEnemyBattler = { addr = 0x800AC218, type = "func", source = "Loads an area enemy's stats into its battler." }
 Actor_Clear = { addr = 0x800ACFF4, type = "func", source = "Clears an actor record." }
+Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", source = "Loads the effect module of a battle selection: the row of g_BattleSelections that the action selects gives the EMI slot, which the loader streams in." }
 Battle_DrawTitledFrame = { addr = 0x800B1A74, type = "func", source = "Draws a bordered battle panel with a title." }
 Menu_DrawPanelCursor = { addr = 0x800B20D4, type = "func", source = "Draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite." }
 Menu_SlidePanelLeft = { addr = 0x800B254C, type = "func", source = "Slides the menu panel to the left." }
@@ -109,6 +112,7 @@ D_800B50B0 = { addr = 0x800B50B0, size = 0x1C, source = "Mode handlers of queued
 D_800B50CC = { addr = 0x800B50CC, size = 0x8, source = "Mode handlers of queued battle effect handler 0x10: select the facing script, then run the active effect until its mode 5 releases it." }
 D_800B50D4 = { addr = 0x800B50D4, source = "Mode handlers of queued battle effect handler 0x12: a semi-transparent tint set from the parameter, then Effect_ShakeScreen." }
 D_800B50DC = { addr = 0x800B50DC, size = 0x8, source = "func_800AA5F4 rolls rand() % entry == 0 with the entry the ability high nibble selects (D_800B50E4 for char 6); needs: what the roll decides" }
+g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, source = "Battle action row selector: the action id (the ability index, low byte of g_BattleActionId) picks a row of g_BattleSelections." }
 g_BattleSelections = { addr = 0x800B65F8, source = "Battle selection rows." }
 g_BattlePanelUV = { addr = 0x800B6C04, type = "BattlePanelTexture", source = "Texture coordinates of the battle panel quads." }
 s_BattleCellRowCount = { addr = 0x800B6C28, source = "func_800AF8F0, func_800AF9D4 and func_800AFB48 bound the sprite-cell row copy at this byte times 16" }
@@ -3861,7 +3865,7 @@ g_BattleTargetRecord = { addr = 0x801463A0, type = "BattleTurn", source = "point
 g_BattleChooseEndingHook = { addr = 0x801463A4, type = "Callback", source = "called once by func_801D6A14 after setup to choose the battle ending, default func_801E5768, boss modules install Boss_ChooseBattleEnding (src/overlays/boss/Boss_InstallBattleHooks.h 5)" }
 g_BattleEndHook = { addr = 0x801463A8, type = "Callback", source = "runs at the end of battle from the selection result path func_801D7234, default func_801E57C8, boss modules install Boss_EndBattle (src/overlays/boss/Boss_InstallBattleHooks.h 6)" }
 g_BossBattleEventHook = { addr = 0x801463AC, type = "BossBattleEventFunc", source = "boss battle-event hook run with the event id 0..6 by func_801D112C, func_801D1228 and func_801D2FC0 when g_BattleEncounter != 0, installed in src/overlays/boss/Boss_InstallBattleHooks.h 7" }
-g_BattleActionId = { addr = 0x801463C0, type = "u16", source = "selected action/command id indexes D_801CA71C (src/overlays/battle/Battle_RollHitChance.h 22) and D_800B6510 (func_801D3E80.c 14) written with the command id (func_8009F278.c 5)" }
+g_BattleActionId = { addr = 0x801463C0, type = "u16", source = "selected action/command id indexes D_801CA71C (src/overlays/battle/Battle_RollHitChance.h 22) and g_BattleActionSelection (func_801D3E80.c 14) written with the command id (func_8009F278.c 5)" }
 g_BattleGenes = { addr = 0x801463C4, type = "u8", size = 0x3, source = "the three selected gene ids the Accession command stores (func_800A5164, func_800A5E98); g_BattleGeneCount at 0x801463C7 is their count" }
 g_BattleGeneCount = { addr = 0x801463C7, type = "u8", source = "length of the selected gene list at 0x801463C4 (loop bound func_800A68A4.c 53, func_800A82F8.c 8) community map number of genes used for Accession" }
 g_DragonForm = { addr = 0x801463C9, type = "u8", source = "selected dragon form id index into the per-form step/selection tables (func_800B0118.c 8, func_801E16B4.c 30) stored from the form row (func_800A68A4.c 60) community map dragon" }
