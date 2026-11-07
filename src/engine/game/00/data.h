@@ -14,10 +14,6 @@
 #define ENTITY_SPAWN_OFFSET_COUNT 50
 #define ENTITY_SPAWN_SEARCH_COUNT (ENTITY_SPAWN_OFFSET_COUNT - 1)
 
-/* Data-table row initializer: no function body, so not a fragment. */
-#define GAME_INDEX_HANDLER(h00, h04, h08, h0C, h10, selector, key)    \
-    {(h00), (h04), (h08), (h0C), (h10), (selector), (key), {0, 0, 0}}
-
 /* Eight-byte area entry: the area id it applies to, then the map id and the
  * x and y that func_801B6470 stages for the transition. */
 typedef struct WorldMapDestination {
@@ -100,7 +96,7 @@ typedef struct AreaHandler {
     Callback handler_10;
     u8*      map_points_14;
     u8       area_id;
-    u8       unk_19[3];
+    u8       pad_19[3];
 } AreaHandler;
 
 /* D_801C7F5C[11] spans 0x134 bytes up to D_801C8090. */
