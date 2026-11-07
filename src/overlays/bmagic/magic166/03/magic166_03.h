@@ -12,5 +12,7 @@ extern BattleEffect D_801EF724[];
 #define BMAGIC_EFFECT_COUNT 64
 void func_801EF284(void);
 void func_801EF380(void);
+void func_801EED04(void);
+void func_801EEEF0(void);
 
 #endif
