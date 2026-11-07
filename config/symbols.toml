@@ -3483,7 +3483,7 @@ World_AdvanceAreaWhenPartyNear = { addr = 0x801F2E64, type = "func", source = "R
 Actor_AdvanceOutsidePartyCell = { addr = 0x801F3020, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08)." }
 Area_AdvanceCountdown = { addr = 0x801F311C, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue 0x201 when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update(0), or Area_Update(-1) when byte 0x32 is zero." }
 Area_Update = { addr = 0x801F31AC, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
-Area_ResetSceneMode = { addr = 0x801F39A4, type = "func", source = "Clears scene event flag 0x46 (g_SceneEventFlags) and returns g_AreaSceneMode to 0." }
+Area_EndCutscene = { addr = 0x801F39A4, type = "func", source = "Clears scene event flag 0x46 (g_SceneEventFlags) and returns g_AreaSceneMode to 0." }
 Actor_PlaceAtFocus = { addr = 0x801F39D4, type = "func", source = "Copies D_80147A8C, g_AreaFocusY and D_80147A94 into the actor position at bytes 0x34, 0x38 and 0x3C." }
 Message_ShowParty = { addr = 0x801F3A20, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Message_SelectAnswer = { addr = 0x801F3BA8, type = "func", source = "Sets g_MessageRequest to 6 when g_MessageChoice is nonzero, otherwise to 4." }
@@ -3633,7 +3633,7 @@ Actor_SlideScreenX = { addr = 0x801F2FE0, type = "func", source = "Adds ACTOR_SC
 Actor_AdvanceWhenPartyAway = { addr = 0x801F303C, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenDown16 = { addr = 0x801F314C, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
 Area_Update = { addr = 0x801F31BC, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
-Area_ResetSceneMode = { addr = 0x801F3F28, type = "func", source = "Clears scene event flag 0x46 (g_SceneEventFlags) and returns g_AreaSceneMode to 0." }
+Area_EndCutscene = { addr = 0x801F3F28, type = "func", source = "Clears scene event flag 0x46 (g_SceneEventFlags) and returns g_AreaSceneMode to 0." }
 Actor_PlaceAtFocus = { addr = 0x801F4434, type = "func", source = "Copies D_80147A8C, g_AreaFocusY and D_80147A94 into the actor position at bytes 0x34, 0x38 and 0x3C." }
 
 ["emi/world04/area168/13"]
@@ -4076,11 +4076,11 @@ Char_DrainFatigue = { addr = 0x801F6024, type = "func", source = "Adds 1 to the 
 
 ["emi/world04/area191/13"]
 Area_ResumeSceneAfterMessage = { addr = 0x801F2F40, type = "func", source = "Clears the message request; when the menu selection is idle sets the script-active flag, g_SceneState.state_04 to 1 and step_05 to 0x14." }
-Area_EndInteraction = { addr = 0x801F30DC, type = "func", source = "Reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E." }
+Area_CloseTalk = { addr = 0x801F30DC, type = "func", source = "Reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E." }
 
 ["emi/world04/area192/13"]
 Area_ResumeSceneAfterMessage = { addr = 0x801F2CA8, type = "func", source = "Clears the message request; when the menu selection is idle sets the script-active flag, g_SceneState.state_04 to 1 and step_05 to 0x14." }
-Area_EndInteraction = { addr = 0x801F2E44, type = "func", source = "Reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E." }
+Area_CloseTalk = { addr = 0x801F2E44, type = "func", source = "Reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E." }
 
 ["emi/world04/area193/13"]
 Message_SetAnswerMessage = { addr = 0x801F2C70, type = "func", source = "Stores the message id the answer table D_801F39FC holds for the menu choice g_MessageChoice in g_MessageRequest." }
