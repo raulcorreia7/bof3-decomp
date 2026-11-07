@@ -4,7 +4,7 @@ MATCH void Effect_NextStepOnWorkLastTick(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->unk_0B == 1) {
+    if (work->param.unk_0B == 1) {
         work->header.mode = work->header.mode + 1;
     }
 }

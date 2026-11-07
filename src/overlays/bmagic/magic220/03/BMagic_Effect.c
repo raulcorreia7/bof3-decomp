@@ -22,13 +22,13 @@ INCLUDE_ASM(func_801EEFBC);
 INCLUDE_ASM(func_801EF078);
 
 MATCH void func_801EF1F4(void) {
-    u8 temp_v0;
+    u8 count;
 
     func_8014DAEC();
-    g_Task->unk_0B += 0xC;
-    temp_v0        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = temp_v0;
-    if (!(temp_v0 & 0xFF)) {
+    g_Task->param.unk_0B += 0xC;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
         g_Task->unk_09 = 0x1E;
         g_Task->timer  = 3;
         g_Task->header.step += 1;
@@ -47,14 +47,14 @@ INCLUDE_ASM(func_801EF6B8);
 #include "overlays/bmagic/Effect_StepWhileTickUnderThree.h"
 
 MATCH void func_801EF8CC(void) {
-    s8 temp_v0;
+    s8 count;
 
-    temp_v0 = g_Task->unk_5D;
-    if (temp_v0 != 0) {
-        g_Task->unk_5D = temp_v0 - 2;
+    count = g_Task->unk_5D;
+    if (count != 0) {
+        g_Task->unk_5D = count - 2;
     }
-    if (func_8014DAEC() & 0xFF) {
-        D_801EB4E0->unk_0B -= 1;
+    if (func_8014DAEC() & BYTE_MASK) {
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }

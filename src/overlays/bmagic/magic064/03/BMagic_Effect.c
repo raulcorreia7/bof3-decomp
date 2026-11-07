@@ -19,16 +19,16 @@ MATCH void func_801EECFC(void) {
 }
 
 MATCH void func_801EED7C(void) {
-    PartyBattler* temp_s0;
-    PartyBattler* temp_v0;
+    PartyBattler* saved;
+    PartyBattler* battler;
 
-    temp_s0 = g_Task;
-    temp_v0 = &g_BattlePartyBattlers[g_BattleActiveBattler];
-    g_Task  = temp_v0;
-    Actor_RequestScript((temp_v0->facing + 0x38) & 0xFF);
-    g_Task = temp_s0;
+    saved   = g_Task;
+    battler = &g_BattlePartyBattlers[g_BattleActiveBattler];
+    g_Task  = battler;
+    Actor_RequestScript((battler->facing + 0x38) & BYTE_MASK);
+    g_Task = saved;
     SND_PlayCue(0x100U);
-    g_Task->unk_0B = 0;
+    g_Task->param.unk_0B = 0;
     g_Task->header.step += 1;
 }
 
@@ -117,7 +117,7 @@ MATCH void func_801EF5FC(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (!(work->unk_0B & 1)) {
+    if (!(work->param.unk_0B & 1)) {
         g_AreaScrollTargetX = work->pos.x.fixed;
         MATCH_FAKE_BARRIER(); /* FAKE: retail reads each field after storing the previous target */
         g_AreaScrollTargetY = work->pos.y.fixed;
@@ -176,8 +176,8 @@ MATCH void func_801F007C(void) {
 INCLUDE_ASM(func_801F009C);
 
 MATCH void func_801F01C4(void) {
-    g_Task->unk_0B = 0;
-    g_Task->unk_09 = 64;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 64;
     func_801F03D8();
     g_Task->header.step++;
 }
@@ -194,17 +194,17 @@ MATCH void func_801F0214(void) {
 }
 
 MATCH void func_801F0278(void) {
-    u8 temp_v1;
+    u8 ticks;
 
     func_801F03D8();
     if (!(g_FrameCount & 1)) {
-        temp_v1 = g_Task->unk_0B;
-        if (temp_v1 >= 0x18U) {
+        ticks = g_Task->param.unk_0B;
+        if (ticks >= 0x18U) {
             D_801EB4E0->header.step += 1;
             g_Task->header.step += 1;
             return;
         }
-        g_Task->unk_0B = temp_v1 + 1;
+        g_Task->param.unk_0B = ticks + 1;
     }
 }
 
@@ -242,7 +242,7 @@ MATCH void func_801F0C38(void) {
 }
 
 MATCH void func_801F0CBC(void) {
-    Actor_RequestScript(g_Task->unk_0B);
+    Actor_RequestScript(g_Task->param.unk_0B);
     do {
     } while (!(func_8014DAEC() & 0xFF));
     g_Task->header.step += 1;

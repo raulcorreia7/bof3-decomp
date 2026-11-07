@@ -14,7 +14,7 @@ static inline void Effect_CountUpTimer(void) {
     next        = work->timer + 1;
     work->timer = next;
     if (next == 0xC) {
-        BATTLE_ACTIVE_WORK->unk_0B--;
+        BATTLE_ACTIVE_WORK->param.unk_0B--;
         func_801E5988();
     }
 }

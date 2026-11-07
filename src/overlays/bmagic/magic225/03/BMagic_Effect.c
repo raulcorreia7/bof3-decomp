@@ -23,12 +23,12 @@ INCLUDE_ASM(func_801EF31C);
 INCLUDE_ASM(func_801EF404);
 
 MATCH void func_801EF578(void) {
-    u8 temp_v1;
+    u8 timer_next;
 
-    temp_v1       = g_Task->timer + 2;
-    g_Task->timer = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x10) {
-        g_Task->unk_0B = 0;
+    timer_next    = g_Task->timer + 2;
+    g_Task->timer = timer_next;
+    if ((timer_next & BYTE_MASK) == 0x10) {
+        g_Task->param.unk_0B = 0;
         g_Task->header.step += 1;
     }
 }
@@ -36,8 +36,8 @@ MATCH void func_801EF578(void) {
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
 
 MATCH void func_801EF628(void) {
-    if (D_801EB4E0->unk_0B < 2U) {
-        g_Task->unk_0B = 1;
+    if (D_801EB4E0->param.unk_0B < 2U) {
+        g_Task->param.unk_0B = 1;
         g_Task->header.step += 1;
     }
 }

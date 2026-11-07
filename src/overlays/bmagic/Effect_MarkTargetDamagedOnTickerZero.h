@@ -4,7 +4,7 @@
  */
 /* func_801EF05C (magic054), func_801EEE38 (magic103) */
 MATCH void Effect_MarkTargetDamagedOnTickerZero(void) {
-    if (g_Task->unk_0B == 0) {
+    if (g_Task->param.unk_0B == 0) {
         func_800A9820(g_BattleTargetSelector);
         g_Task->header.mode += 1;
     }

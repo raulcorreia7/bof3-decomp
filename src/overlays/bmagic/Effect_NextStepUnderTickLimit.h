@@ -6,7 +6,7 @@ MATCH void Effect_NextStepUnderTickLimit(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->unk_0B < 5) {
+    if (work->param.unk_0B < 5) {
         work->unk_09      = 8;
         work              = g_Task;
         work->header.step = work->header.step + 1;

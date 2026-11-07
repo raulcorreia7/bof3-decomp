@@ -14,7 +14,7 @@ MATCH void func_801EEF98(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->unk_0B != 0) {
+    if (work->param.unk_0B != 0) {
         work->unk_09      = 8;
         work              = g_Task;
         work->header.mode = work->header.mode + 1;
@@ -24,7 +24,7 @@ MATCH void func_801EEF98(void) {
 #include "overlays/bmagic/Effect_BrightenPalette.h"
 
 MATCH void func_801EF0EC(void) {
-    if (g_Task->unk_0B == 9) {
+    if (g_Task->param.unk_0B == 9) {
         GFX_FreePaletteFadeTarget(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
         func_800A9820(g_BattleTargetSelector);
@@ -50,12 +50,12 @@ MATCH void func_801EF264(void) {
 }
 
 MATCH void func_801EF2EC(void) {
-    g_Task->unk_0B      = RANDOM_MASK(0xF);
-    g_Task->unk_09      = 0;
-    g_Task->timer       = 0;
-    g_Task->pos.x.fixed = D_801EB4E0->pos.x.fixed;
-    g_Task->pos.y.fixed = D_801EB4E0->pos.y.fixed;
-    g_Task->pos.z.fixed = D_801EB4E0->pos.z.fixed;
+    g_Task->param.unk_0B = RANDOM_MASK(0xF);
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 0;
+    g_Task->pos.x.fixed  = D_801EB4E0->pos.x.fixed;
+    g_Task->pos.y.fixed  = D_801EB4E0->pos.y.fixed;
+    g_Task->pos.z.fixed  = D_801EB4E0->pos.z.fixed;
     g_Task->header.step += 1;
 }
 
@@ -71,13 +71,13 @@ MATCH void func_801EF44C(void) {
     u8            count;
 
     work = g_Task;
-    work->unk_0B++;
+    work->param.unk_0B++;
     work        = g_Task;
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->unk_0B++;
+        active->param.unk_0B++;
         func_801E5988();
     }
 }
@@ -113,7 +113,7 @@ MATCH void func_801EF7D8(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_Task->unk_0B++;
+    g_Task->param.unk_0B++;
 
     work                   = g_Task;
     counter                = work->unk_0C + 1;
@@ -131,7 +131,7 @@ MATCH void func_801EF7D8(void) {
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     if (--g_Task->timer == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B++;
+        BATTLE_ACTIVE_WORK->param.unk_0B++;
         func_801E5988();
     }
 }
@@ -156,9 +156,9 @@ MATCH void func_801F0090(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_Task->unk_0B = (rand() & 0xF);
-    g_Task->unk_09 = 0;
-    g_Task->timer  = 0;
+    g_Task->param.unk_0B = RANDOM_MASK(0xF);
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 0;
 
     work                   = g_Task;
     counter                = (work->unk_03 << 5) + 0x10;
@@ -203,7 +203,7 @@ MATCH void func_801F0314(void) {
     s32*          angle_cell;
     s32           velocity;
 
-    g_Task->unk_0B++;
+    g_Task->param.unk_0B++;
 
     work                   = g_Task;
     counter                = work->unk_0C + 1;
@@ -223,7 +223,7 @@ MATCH void func_801F0314(void) {
     scratch->timer -= 2;
 
     if (g_Task->timer == 0) {
-        BATTLE_ACTIVE_WORK->unk_0B++;
+        BATTLE_ACTIVE_WORK->param.unk_0B++;
         func_801E5988();
     }
 }

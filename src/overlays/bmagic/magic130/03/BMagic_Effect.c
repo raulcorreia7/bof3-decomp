@@ -37,7 +37,7 @@ MATCH void func_801EF1E0(void) {
     g_Task->unk_5E -= 8;
     g_Task->unk_5F -= 8;
     if ((s8)g_Task->unk_5D == -0x80) {
-        BATTLE_ACTIVE_WORK->unk_0B -= 1;
+        BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         func_801E5988();
     }
 }

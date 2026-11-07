@@ -44,7 +44,7 @@ MATCH void func_801EF4F0(void) {
     g_Task->unk_5F -= 0x10;
     g_Task->scale.x += 0x1800;
     if ((s8)g_Task->unk_5D == -0x80) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }
@@ -147,7 +147,7 @@ MATCH void func_801F06C8(void) {
     PartyBattler* work;
 
     work = g_Task;
-    work->unk_0B += 4;
+    work->param.unk_0B += 4;
     work = g_Task;
     work->timer--;
     if (work->timer == 0) {
@@ -162,13 +162,13 @@ MATCH void func_801F0730(void) {
     u8            count;
 
     work = g_Task;
-    work->unk_0B += 4;
+    work->param.unk_0B += 4;
     work         = g_Task;
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
-        active->unk_0B--;
+        active->param.unk_0B--;
         func_801E5988();
     }
 }

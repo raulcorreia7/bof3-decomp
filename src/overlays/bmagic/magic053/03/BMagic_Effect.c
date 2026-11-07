@@ -60,8 +60,8 @@ MATCH void func_801EF6D8(void) {
     PartyBattler* work;
 
     if (g_Task->unk_04 == 0) {
-        work         = (PartyBattler*)D_801EB4E0;
-        work->unk_0B = work->unk_0B - 1;
+        work               = (PartyBattler*)D_801EB4E0;
+        work->param.unk_0B = work->param.unk_0B - 1;
         func_801E5988();
     }
 }

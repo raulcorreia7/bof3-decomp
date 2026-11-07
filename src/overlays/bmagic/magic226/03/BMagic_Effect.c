@@ -29,17 +29,17 @@ INCLUDE_ASM(func_801EF310);
 #include "../../Effect_CountDownAndSetTint.h"
 
 MATCH void func_801EF698(void) {
-    u8 temp_v0;
+    u8 timer_next;
 
-    temp_v0 = g_Task->timer;
-    if (temp_v0 != 0) {
-        g_Task->timer = temp_v0 - 2;
+    timer_next = g_Task->timer;
+    if (timer_next != 0) {
+        g_Task->timer = timer_next - 2;
     }
     g_Task->unk_5D -= 8;
     g_Task->unk_5E -= 8;
     g_Task->unk_5F -= 8;
     if ((s8)g_Task->unk_5D == -0x80) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }

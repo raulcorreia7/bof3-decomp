@@ -17,7 +17,7 @@ MATCH void func_801EED68(void) {
     u32           slot;
     PartyBattler* work;
 
-    if (g_Task->unk_0B == 2) {
+    if (g_Task->param.unk_0B == 2) {
         slot                               = Battle_AllocEffect(1, 0x12) & BYTE_MASK;
         work                               = g_Task;
         g_BattleEffects[slot].header.mode  = 2;
@@ -49,7 +49,7 @@ MATCH void func_801EEE84(void) {
         func_801EF2DC();
     }
     if (g_InputPressed != 0) {
-        g_Task->unk_0B = 0x83;
+        g_Task->param.unk_0B = 0x83;
         g_Task->header.mode++;
     }
 }
@@ -57,7 +57,7 @@ MATCH void func_801EEE84(void) {
 MATCH void func_801EEF04(void) {
     u16* flags;
 
-    if (g_Task->unk_0B == 0x80) {
+    if (g_Task->param.unk_0B == 0x80) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         func_801E5988();
     }
@@ -99,12 +99,12 @@ MATCH void func_801EFF88(void) {
 #include "overlays/bmagic/Effect_ClearTimerNextStep.h"
 
 MATCH void func_801F0030(void) {
-    u8 temp_v1;
+    u8 count;
 
-    temp_v1        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x10) {
-        D_801EB4E0->unk_0B = 1;
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x10) {
+        D_801EB4E0->param.unk_0B = 1;
         g_Task->header.step += 1;
     }
 }
@@ -113,7 +113,7 @@ MATCH void func_801F0090(void) {
     PartyBattler* work;
 
     work = (PartyBattler*)D_801EB4E0;
-    if (work->unk_0B == 0x83) {
+    if (work->param.unk_0B == 0x83) {
         g_Task->header.step++;
     }
 }
@@ -130,19 +130,19 @@ MATCH void func_801F0254(void) {
 }
 
 MATCH void func_801F02CC(void) {
-    if (D_801EB4E0->unk_0B == 1) {
+    if (D_801EB4E0->param.unk_0B == 1) {
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801F031C(void) {
-    u8 temp_v1;
+    u8 count;
 
-    temp_v1        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = temp_v1;
-    if ((temp_v1 & 0xFF) == 0x1E) {
-        D_801EB4E0->unk_0B = 2;
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) == 0x1E) {
+        D_801EB4E0->param.unk_0B = 2;
         g_Task->header.step += 1;
     }
 }
@@ -151,7 +151,7 @@ MATCH void func_801F037C(void) {
     PartyBattler* work;
 
     work = (PartyBattler*)D_801EB4E0;
-    if (work->unk_0B == 0x83) {
+    if (work->param.unk_0B == 0x83) {
         g_Task->header.step++;
     }
 }
@@ -161,8 +161,8 @@ MATCH void func_801F03BC(void) {
 
     g_Task->unk_09 = g_Task->unk_09 - 2;
     if (g_Task->unk_09 == 0) {
-        active         = BATTLE_ACTIVE_WORK;
-        active->unk_0B = active->unk_0B - 1;
+        active               = BATTLE_ACTIVE_WORK;
+        active->param.unk_0B = active->param.unk_0B - 1;
         func_801E5988();
     }
 }
@@ -178,8 +178,8 @@ MATCH void func_801F082C(void) {
 
     actor = &g_BattleSelectedActor;
     GFX_FreePaletteFadeTarget(*actor);
-    g_Task->unk_0B = GFX_AllocPaletteFade(*actor, 0, 0, 0, 1);
-    g_Task->unk_09 = 0;
+    g_Task->param.unk_0B = GFX_AllocPaletteFade(*actor, 0, 0, 0, 1);
+    g_Task->unk_09       = 0;
     g_Task->header.step += 1;
 }
 

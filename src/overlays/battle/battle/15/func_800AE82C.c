@@ -13,15 +13,15 @@ MATCH void func_800AE82C(void) {
     work->unk_09 = count;
     if (count == 0) {
         row_work = BATTLE_WORK;
-        slot     = row_work->unk_0B;
+        slot     = row_work->param.unk_0B;
         if (slot < BATTLE_PARTY_SLOT_COUNT) {
             row_work->pos.x.fixed = g_BattlePartyBattlers[slot].pos.x.fixed;
-            row_work->pos.y.fixed = g_BattlePartyBattlers[row_work->unk_0B].pos.y.fixed;
-            value                 = g_BattlePartyBattlers[row_work->unk_0B].pos.z.fixed;
+            row_work->pos.y.fixed = g_BattlePartyBattlers[row_work->param.unk_0B].pos.y.fixed;
+            value                 = g_BattlePartyBattlers[row_work->param.unk_0B].pos.z.fixed;
         } else {
-            row_work->pos.x.fixed = ENEMY_COMBATANT(row_work->unk_0B).pos.x.fixed;
-            row_work->pos.y.fixed = ENEMY_COMBATANT(row_work->unk_0B).pos.y.fixed;
-            value                 = ENEMY_COMBATANT(row_work->unk_0B).pos.z.fixed;
+            row_work->pos.x.fixed = ENEMY_COMBATANT(row_work->param.unk_0B).pos.x.fixed;
+            row_work->pos.y.fixed = ENEMY_COMBATANT(row_work->param.unk_0B).pos.y.fixed;
+            value                 = ENEMY_COMBATANT(row_work->param.unk_0B).pos.z.fixed;
         }
         row_work->pos.z.fixed = value;
         func_800AF764();

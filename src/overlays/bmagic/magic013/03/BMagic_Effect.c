@@ -23,7 +23,7 @@ MATCH void func_801EEEA0(void) {
         g_BattleEffects[slot].unk_09       = 0x18;
         g_BattleEffects[slot].unk_0A       = 4;
         g_BattleEffects[slot].target.party = work;
-        g_Task->unk_0B += 1;
+        g_Task->param.unk_0B += 1;
     }
     g_Task->header.mode += 1;
 }
@@ -59,11 +59,11 @@ MATCH void func_801EF484(void) {
     PartyBattler* active;
 
     work = g_Task;
-    if (work->unk_0B == 0) {
+    if (work->param.unk_0B == 0) {
         work->unk_04 = work->unk_04 - 1;
         if (work->unk_04 == 0) {
-            active         = BATTLE_ACTIVE_WORK;
-            active->unk_0B = active->unk_0B - 1;
+            active               = BATTLE_ACTIVE_WORK;
+            active->param.unk_0B = active->param.unk_0B - 1;
             func_801E5988();
         }
     }

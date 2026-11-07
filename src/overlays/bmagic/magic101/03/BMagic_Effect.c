@@ -40,9 +40,9 @@ NON_MATCHING void func_801EECCC(void) {
 have_facing:
     g_Task->facing = facing;
     func_800AFD9C();
-    g_Task->unk_0B = 0;
-    g_Task->unk_09 = 0x30;
-    g_Task->timer  = 0;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0x30;
+    g_Task->timer        = 0;
     g_Task->header.mode += 1;
     counter = 0;
     do {
@@ -53,7 +53,7 @@ have_facing:
         FIELD(u8, D_801EC334, offset)            = (u8)counter;
         FIELD(u8, D_801EC339, offset)            = (u8)wave;
         FIELD(PartyBattler*, D_801EC3A4, offset) = g_Task;
-        g_Task->unk_0B += 1;
+        g_Task->param.unk_0B += 1;
         counter += 1;
     } while (counter < 0x10);
     SND_QueueSelectionFx(0x100);
@@ -113,20 +113,20 @@ NON_MATCHING void func_801EF3DC(void) {
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & 0xFF)) {
-        g_Task->facing      = D_801EB4E0->facing;
-        g_Task->pos.x.raw   = D_801EB4E0->pos.x.raw;
-        angle               = g_Task->unk_04;
-        g_Task->pos.y.raw   = D_801EB4E0->pos.y.raw;
-        g_Task->unk_0B      = angle * 4 & 0x3F;
-        g_Task->pos.z.raw   = D_801EB4E0->pos.z.raw + 0x01800000;
-        value               = D_801EFCC0[g_Task->unk_04];
-        g_Task->unk_10      = 0x60;
-        angle               = g_Task->unk_04;
-        g_Task->unk_14      = 0x20;
-        g_Task->unk_09      = angle * 4 + 1;
-        g_Task->unk_0C      = value << 8;
-        g_Task->timer       = 0;
-        g_Task->header.step = g_Task->header.step + 1;
+        g_Task->facing       = D_801EB4E0->facing;
+        g_Task->pos.x.raw    = D_801EB4E0->pos.x.raw;
+        angle                = g_Task->unk_04;
+        g_Task->pos.y.raw    = D_801EB4E0->pos.y.raw;
+        g_Task->param.unk_0B = angle * 4 & 0x3F;
+        g_Task->pos.z.raw    = D_801EB4E0->pos.z.raw + 0x01800000;
+        value                = D_801EFCC0[g_Task->unk_04];
+        g_Task->unk_10       = 0x60;
+        angle                = g_Task->unk_04;
+        g_Task->unk_14       = 0x20;
+        g_Task->unk_09       = angle * 4 + 1;
+        g_Task->unk_0C       = value << 8;
+        g_Task->timer        = 0;
+        g_Task->header.step  = g_Task->header.step + 1;
     }
 }
 #else
@@ -141,7 +141,7 @@ MATCH void func_801EF690(void) {
     u8            counter;
     PartyBattler* work;
 
-    g_Task->unk_0B += 4;
+    g_Task->param.unk_0B += 4;
     work = g_Task;
     work->unk_10 += work->unk_1C;
     counter      = work->unk_09 - 1;
@@ -156,7 +156,7 @@ MATCH void func_801EF700(void) {
     s32           value;
     PartyBattler* work;
 
-    g_Task->unk_0B += g_Task->timer >> 1;
+    g_Task->param.unk_0B += g_Task->timer >> 1;
     work         = g_Task;
     counter      = work->timer - 1;
     value        = work->unk_1C - 2;
@@ -164,7 +164,7 @@ MATCH void func_801EF700(void) {
     work->unk_1C = value;
     work->unk_10 += value;
     if (!(counter & 0xFF)) {
-        D_801EB4E0->unk_0B -= 1;
+        D_801EB4E0->param.unk_0B -= 1;
         func_801E5988();
     }
 }

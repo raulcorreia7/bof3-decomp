@@ -8,7 +8,7 @@ MATCH void Effect_NextStep(void) {
     PartyBattler* work;
 
     work = g_Task;
-    if (work->unk_0B < EFFECT_STEP_LIMIT) {
+    if (work->param.unk_0B < EFFECT_STEP_LIMIT) {
         work->unk_09      = 8;
         work              = g_Task;
         work->header.mode = work->header.mode + 1;
