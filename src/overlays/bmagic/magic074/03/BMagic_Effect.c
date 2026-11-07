@@ -68,7 +68,8 @@ INCLUDE_ASM(func_801EFE18);
 
 INCLUDE_ASM(func_801F00B0);
 
-INCLUDE_ASM(func_801F03D4);
+/* func_801F03D4 */
+#include "overlays/bmagic/BMagic_AllocEffect.h"
 
 MATCH void func_801F0440(void) {
     D_801F20DC->header.flags = 0;

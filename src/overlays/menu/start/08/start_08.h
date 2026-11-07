@@ -690,7 +690,7 @@ void             func_801D71EC(void);
 void             func_801D9664(void);
 void             func_801D96D4(void);
 void             Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
-s32              func_801DAE14(u16);
+void             func_801DAE14(u16 buttons);
 void             Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 void             func_801DE5D4(u8, u16, u16, s32, s32, MenuPanelTask*);
 extern void      func_801E30FC(u16 row_x, u16 row_y, s32 row_flags);
