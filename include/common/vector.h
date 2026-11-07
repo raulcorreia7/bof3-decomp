@@ -20,6 +20,12 @@ typedef struct Point2DL {
     s32 y;
 } Point2DL;
 
+/* A signed step on each axis, one byte wide. */
+typedef struct Offset2DB {
+    s8 dx;
+    s8 dy;
+} Offset2DB;
+
 typedef struct Point3D {
     s16 x;
     s16 y;
@@ -57,6 +63,7 @@ ASSERT_SIZE(UPoint2D, 0x04);
 ASSERT_OFFSET(UPoint2D, y, 0x02);
 ASSERT_SIZE(Point2DL, 0x08);
 ASSERT_OFFSET(Point2DL, y, 0x04);
+ASSERT_SIZE(Offset2DB, 0x02);
 ASSERT_SIZE(Point3D, 0x06);
 ASSERT_SIZE(Point3DL, 0x0C);
 ASSERT_OFFSET(Point3DL, y, 0x04);

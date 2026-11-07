@@ -42,8 +42,8 @@ MATCH s32 func_801C63B0(void) {
     }
     if (swapped) {
         for (i = 0; i < 6; i++) {
-            x = D_80143F24 + D_801CD740[i].x;
-            y = D_80143F28 + D_801CD740[i].y;
+            x = D_80143F24 + s_EncounterOriginNudges[i].x;
+            y = D_80143F28 + s_EncounterOriginNudges[i].y;
             if (((func_801C7518(x, y, 1) & BYTE_MASK) != 0) &&
                 ((func_801C7824(D_80143F2A, D_80143F2A, x >> 16, y >> 16) & BYTE_MASK) != 0)) {
                 break;
