@@ -46,7 +46,7 @@ INCLUDE_ASM(func_801EF3C4);
 
 MATCH void func_801EF4B8(void) {
     s32 mode;
-    u8 ready;
+    u8  ready;
 
     ready = 0;
     if (func_801DB524(g_Task->unk_03) & 0xFF) {
