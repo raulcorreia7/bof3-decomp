@@ -63,9 +63,10 @@ extern u8       g_MenuListTab2OnSprites[];
 extern u8*      D_801C893C[];
 extern u8*      D_801C8950[];
 extern u8*      g_MenuInventoryTitles[5];
-extern char     g_MenuInventoryCountFormat[];
 extern u8       g_MenuInventoryTab1OffSprites[];
 extern u8*      g_MenuEquipTitles[5];
+extern u8       g_MenuEquipStatLabels[];
+extern u8       g_MenuEquipStatSprites[];
 extern u8       g_MenuEquipChoiceIds[];
 extern u8       g_MenuEquipChoiceCounts[];
 extern u8       g_MenuInventoryTab1OnSprites[];
@@ -88,6 +89,8 @@ extern u8       D_801DA049;
 extern s32      D_801DA0B4;
 extern u8       D_801DA0C1;
 extern s32      D_801DA12C;
+
+extern const char g_MenuInventoryCountFormat[];
 
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 
