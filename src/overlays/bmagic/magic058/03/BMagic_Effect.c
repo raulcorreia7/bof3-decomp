@@ -97,6 +97,7 @@ INCLUDE_ASM(func_801EF74C);
 
 INCLUDE_ASM(func_801EFA78);
 
+/* blocker: the radius is a halfword at D_1F800000 (lh) but spawn.h types it s32; needs: type (same as magic218 func_801EF70C). */
 INCLUDE_ASM(func_801EFDD4);
 
 /* func_801EFE38 */
