@@ -8,8 +8,15 @@
 #include <stdio.h>
 
 /* The save-image buffer the card writer clears and then checksums. */
-#define SAVE_IMAGE_ADDR 0x800C1A00u
-#define g_SceneFlags    ((void*)g_SceneFlags)
+#define SAVE_IMAGE_ADDR               0x800C1A00u
+
+/* Panel slots of the start menu, by the role the modes assigned to them give. */
+#define MENU_START_PANEL_DESCRIPTION  11 /* header bar with the selected entry's description */
+#define MENU_START_PANEL_COMMANDS     12 /* command row */
+#define MENU_START_PANEL_ITEMS        13 /* item list */
+#define MENU_START_PANEL_CURSOR_FRAME 19 /* frame drawn around the cursor */
+#define MENU_START_PANEL_CURSOR       21 /* pointing-hand cursor */
+#define g_SceneFlags                  ((void*)g_SceneFlags)
 
 /* Draw the scene timer sprite and count down; on zero advance the cue counter.
  * A bare statement macro: the member declares `timer` and `count`. Kept: tested

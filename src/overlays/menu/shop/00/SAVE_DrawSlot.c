@@ -11,7 +11,7 @@ MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row) {
 
     x = left;
     y = top;
-    UI_DrawWindow(left + 8, y, 200, 48, 0, g_WindowStyle);
+    UI_DrawWindow(left + 8, y, MENU_SAVE_SLOT_WINDOW_WIDTH, MENU_SAVE_SLOT_WINDOW_HEIGHT, 0, g_WindowStyle);
     if (row != NULL) {
         if (GetGraphType() != 1) {
             GetGraphType();

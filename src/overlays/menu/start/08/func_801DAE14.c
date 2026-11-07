@@ -2,7 +2,7 @@
 #include "start_08.h"
 
 /* nonmatching unmeasured: tried 88.03%: signed s32 loops over 8 records of stride 0xA4, volatile pointer to
- * g_MenuPanelTasks[12].unk_0A, for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv
+ * g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A, for-loop blez guards, offset pinned a3, stack padding dropped; falsified: explicit j biv
  * (85.21), 15 min of rewrite search (type hacks). resume: j must be a preheader-initialised biv with addiu v1,v1,2 in
  * the branch delay slot and i++ after the volatile load. */
 #ifdef NON_MATCHING
@@ -34,13 +34,13 @@ NON_MATCHING void func_801DAE14(u16 buttons) {
         offset += 0xA4;
     }
 
-    g_MenuPanelTasks[12].active  = 1;
-    g_MenuPanelTasks[12].handler = 6;
-    g_MenuPanelTasks[12].mode    = 0x13;
-    g_MenuPanelTasks[12].state   = 2;
-    g_MenuPanelTasks[12].pos.x   = BATTLE_PARTY_STRIDE;
-    g_MenuPanelTasks[12].pos.y   = 0x3B;
-    D_80148500                   = D_801ED690;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].active  = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].handler = 6;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].mode    = 0x13;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state   = 2;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x   = BATTLE_PARTY_STRIDE;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y   = 0x3B;
+    D_80148500                                          = D_801ED690;
 
     for (i = 0; i < (count & BYTE_MASK); i++) {
         D_801ED694[i][0] = 1;

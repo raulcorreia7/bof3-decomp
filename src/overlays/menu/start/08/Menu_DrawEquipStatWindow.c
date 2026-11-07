@@ -59,7 +59,8 @@ NON_MATCHING void Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s3
     val10    = val9 & BYTE_MASK;
     stack_28 = (((s32)(Item_GetEquipability(val8, val11) & BYTE_MASK) >> val10) ^ 1) & 1;
     val9     = stack_28;
-    UI_DrawWindow((val1 + 3) & HALF_MASK, (val0 + 3) & HALF_MASK, 108, 48, (s32)val9, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow((val1 + 3) & HALF_MASK, (val0 + 3) & HALF_MASK, MENU_EQUIP_STAT_WINDOW_WIDTH,
+                  MENU_EQUIP_STAT_WINDOW_HEIGHT, (s32)val9, CHARACTER_BLOCK->window_style);
     if (val9 == 0) {
         Char_PreviewEquip(val10, (val5 - 1) & BYTE_MASK, val11, &stack_18[0], &stack_20[0]);
         val10       = 0;
