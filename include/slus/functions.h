@@ -311,7 +311,7 @@ void        EMI_LoaderInit(void);
 /* func_80161FDC */
 void        EMI_LoaderStreamInitSlot(u32 emi_id);
 /* func_80162160 */
-DiscLba     EMI_LoaderSlotLba(EmiSlotId emi_id);
+DiscLba     EMI_LoaderSlotLba(EMISlotId emi_id);
 /* func_80162178 */
 void        EMI_LoaderBeginRead(void);
 /* func_801621E8 */

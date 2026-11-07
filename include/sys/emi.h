@@ -56,8 +56,8 @@
 #define EMI_PLCHAR_BANK             1
 
 /* Entry type ids (@source: wiki:formats/emi#entry-types): what the loader does with a payload.
- * EmiLoaderState holds the two internal loader states. */
-typedef enum EmiEntryType {
+ * EMILoaderState holds the two internal loader states. */
+typedef enum EMIEntryType {
     EMI_ENTRY_COPY          = 0,  /* RAM payload copied to load_arg; may hold code or data */
     EMI_ENTRY_PACKED        = 1,  /* LZ77 payload (include/sys/lz77.h) decoded to load_arg */
     EMI_ENTRY_QUEUED        = 2,  /* queued for the streaming ring with type 1 (EMI_LoaderQueuePayload) */
@@ -68,7 +68,7 @@ typedef enum EmiEntryType {
                                    * (@source: wiki:formats/audio#emi-type-8-cue-records) */
     EMI_ENTRY_SEQUENCE_COPY = 9,  /* sequence-side copy with type 10 (EMI_LoaderLoadSequence) */
     EMI_ENTRY_SEQUENCE      = 10, /* SEP sequence package (include/audio/sep.h) */
-} EmiEntryType;
+} EMIEntryType;
 
 /* The leading word of every loaded module payload: the id the type-0 loader
  * compares with the archive TOC's cached first word (@source: wiki:formats/emi). The
@@ -76,36 +76,36 @@ typedef enum EmiEntryType {
  * 0x12-0x20 plus 0x141, scenario 0x105-0x11D, boss 0x11E-0x140, battle-effect
  * 0x142-0x143, battle-effect module (bmagic) 0x144-0x1BF. A copy payload keeps
  * its source's id. */
-typedef u32 EmiModuleId;
+typedef u32 EMIModuleId;
 
 /* States the loader keeps in the type cell besides the entry types. EMI_LoaderNextRead sets
  * EMI_LOADER_STATE_ARCHIVE_HEADER while it reads the archive's first sector; EMI_LoaderReadToc
  * handles it. */
-typedef enum EmiLoaderState {
+typedef enum EMILoaderState {
     EMI_LOADER_STATE_ARCHIVE_HEADER = 5,
-} EmiLoaderState;
+} EMILoaderState;
 
 /* Never executable: EMI is a sector-aligned data container, so an entry is classified by type alone
  * (@source: wiki:formats/emi#entry-types). */
-typedef struct EmiArchiveHeader {
+typedef struct EMIArchiveHeader {
     u32 entry_count;           /* 0x00 */
     u32 version;               /* 0x04; 1 in all 880 US Breath of Fire III (USA) archives */
     u8  magic[EMI_MAGIC_SIZE]; /* 0x08; EMI_MAGIC_STR */
-} EmiArchiveHeader;
+} EMIArchiveHeader;
 
-ASSERT_SIZE(EmiArchiveHeader, EMI_ARCHIVE_HEADER_SIZE);
+ASSERT_SIZE(EMIArchiveHeader, EMI_ARCHIVE_HEADER_SIZE);
 
 /* TOC rows start at 0x10, one per entry, and each payload starts on an EMI_SECTOR_SIZE
  * boundary: `next = current + ((size + 0x7ff) & ~0x7ff)`. `load_arg` is not always a CPU
  * pointer - it is a destination or a selector per type (@source: wiki:formats/emi#load-argument). */
-typedef struct EmiTocEntry {
+typedef struct EMITocEntry {
     u32 size;       /* 0x00 payload byte size */
     u32 load_arg;   /* 0x04 type-dependent load argument */
     u32 first_word; /* 0x08 cached first payload word */
-    u16 type;       /* 0x0c EmiEntryType id */
+    u16 type;       /* 0x0c EMIEntryType id */
     u16 padding;    /* 0x0e EMI_TOC_ENTRY_PAD */
-} EmiTocEntry;
+} EMITocEntry;
 
-ASSERT_SIZE(EmiTocEntry, EMI_TOC_ENTRY_SIZE);
+ASSERT_SIZE(EMITocEntry, EMI_TOC_ENTRY_SIZE);
 
 #endif

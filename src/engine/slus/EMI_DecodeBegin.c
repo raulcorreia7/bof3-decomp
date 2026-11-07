@@ -27,7 +27,7 @@ MATCH INCLUDE_ASM(EMI_DecodeBegin);
  * register across the stores.
  */
 void EMI_DecodeBegin(u8* dst) {
-    EmiDecodeContext* ctx;
+    EMIDecodeContext* ctx;
 
     ctx             = D_800327A0;
     ctx->dst        = dst;
