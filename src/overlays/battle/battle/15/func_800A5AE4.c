@@ -33,13 +33,13 @@ MATCH void func_800A5AE4(void) {
     input     = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));
     pad_bits  = *pad_state;
 
-    if (pad_bits & D_80145AC4) {
+    if (pad_bits & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         cue_counter  = (u8*)&g_BattleUIState;
         *cue_counter = *cue_counter + 1;
         return;
     }
-    if (pad_bits & D_80145AC2) {
+    if (pad_bits & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (func_800A5D00() & BYTE_MASK) {
             SND_PlayCue(EMI_CUE_ID(1, 4));
             g_BattleUIState = 5;

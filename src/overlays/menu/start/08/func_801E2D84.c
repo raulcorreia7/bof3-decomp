@@ -12,7 +12,7 @@ MATCH void func_801E2D84(s16 x, s32 y) {
     Menu_DrawWindowFrame(x, y, 0xC, 0xF);
     i          = 0;
     row_y      = y + 6;
-    flag_table = &g_InputMasks;
+    flag_table = g_InputMasks;
     do {
         u8  cell;
         s32 cell_y;

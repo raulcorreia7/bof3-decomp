@@ -37,7 +37,7 @@ MATCH void func_801D3884(void) {
         /* Shared tail of both step directions. */
         g_MenuPanelTasks[13].unk_0B = s_ChoiceMenuValues[g_MenuPanelTasks[13].unk_0A];
     }
-    if (g_InputPressed & D_80145AC2) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         g_MenuPanelTasks[14].handler = 6;
         g_MenuPanelTasks[14].mode    = 0xF;
@@ -53,7 +53,7 @@ MATCH void func_801D3884(void) {
         *state += 1;
         return;
     }
-    if (g_InputPressed & D_80145AC4) {
+    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         counter = &D_80148651;
         *counter -= 3;

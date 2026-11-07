@@ -1,5 +1,5 @@
 /* Steps the press-and-hold gauge at g_Task +0x0B, 0 to 0x40, while the
- * re-arm timer at +0x0A is spent: the masked input D_80145AB6 held against
+ * re-arm timer at +0x0A is spent: the masked input g_InputMasks[INPUT_SLOT_INTERACT] held against
  * g_InputHeld raises the gauge by 1 per frame (a full 0x40 re-arms the timer to
  * 0x1E), releasing lowers it by a level step of 1, 2 or 3, halved per parity
  * when the state byte at +0x02 is set; the stored value is clamped to the
@@ -21,7 +21,7 @@ MATCH void Area_StepChargeGauge(void) {
         g_Task->unk_0A = timer - 1;
     }
     if (g_Task->unk_0A == 0) {
-        if (g_InputHeld & D_80145AB6) {
+        if (g_InputHeld & g_InputMasks[INPUT_SLOT_INTERACT]) {
             held = g_Task->unk_0B;
             if (held < 0x40U) {
                 g_Task->unk_0B = held + 1;

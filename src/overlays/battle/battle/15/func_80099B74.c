@@ -38,7 +38,7 @@ NON_MATCHING void func_80099B74(void) {
     pad_state                                                  = &g_InputPressed;
     pad                                                        = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
     keys                                                       = *pad_state;
-    if (keys & D_80145AC4) {
+    if (keys & g_InputMasks[INPUT_SLOT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         g_BattlePanelMode   = 1;
         g_BattleChoicePhase = 3;
@@ -49,7 +49,7 @@ NON_MATCHING void func_80099B74(void) {
         g_BattleUIState     = 0;
         return;
     }
-    if (keys & D_80145AC2) {
+    if (keys & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         if (g_BattleTargetCursorCol != 0) {
             SND_PlayCue(EMI_CUE_ID(1, 3));
             slot = FIELD(u8, g_BattleMessageSlot, 0x5u);

@@ -25,7 +25,7 @@ MATCH void func_801E441C(void) {
                 D_801ED868 = 0x80;
             }
         }
-        if ((g_InputPressed & D_80145AC2) || (g_InputPressed & PADstart)) {
+        if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) || (g_InputPressed & PADstart)) {
             UI_SetMode(0);
             g_MenuStartStep += 1;
             SND_PlayCue(EMI_CUE_ID(1, 5));

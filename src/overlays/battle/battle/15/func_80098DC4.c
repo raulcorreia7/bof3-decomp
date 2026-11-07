@@ -8,11 +8,11 @@ MATCH void func_80098DC4(void) {
     s32 trigger;
 
     held = g_InputPressed;
-    if ((held & D_80145AC4) != 0u) {
+    if ((held & g_InputMasks[INPUT_SLOT_CANCEL]) != 0u) {
         g_BattleUIState = 4u;
         return;
     }
-    if ((held & D_80145AC2) != 0u) {
+    if ((held & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0u) {
         g_BattleUIState = 3u;
         return;
     }
