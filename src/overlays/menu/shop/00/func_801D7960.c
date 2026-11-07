@@ -14,7 +14,7 @@ MATCH void func_801D7960(void) {
             u8 turns;
 
             turns_left = &g_Zenny;
-            turns      = g_Characters[D_80145FCC[(s8)state[0]][0]].level;
+            turns      = g_Characters[g_BattlePartyBattlers[(s8)state[0]].character_index].level;
             D_8014865B = 0xC;
             D_80148654 = 0x3C;
             D_80148651 += 2;

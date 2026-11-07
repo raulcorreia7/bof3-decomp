@@ -42,7 +42,7 @@ MATCH void Area_RollEncounterThreshold(u32 keep_armed) {
         bound_a = limit;
         off     = 0;
         do {
-            if ((func_801C38F4(D_80145FCC[off], 3, 0x15) & BYTE_MASK) != 0)
+            if ((func_801C38F4((&g_BattlePartyBattlers[0].character_index)[off], 3, 0x15) & BYTE_MASK) != 0)
                 break;
             match++;
             off += BATTLE_PARTY_STRIDE;
@@ -56,7 +56,7 @@ MATCH void Area_RollEncounterThreshold(u32 keep_armed) {
         bound_b = limit;
         off     = 0;
         do {
-            if ((func_801C38F4(D_80145FCC[off], 3, 0x14) & BYTE_MASK) != 0)
+            if ((func_801C38F4((&g_BattlePartyBattlers[0].character_index)[off], 3, 0x14) & BYTE_MASK) != 0)
                 break;
             match++;
             off += BATTLE_PARTY_STRIDE;

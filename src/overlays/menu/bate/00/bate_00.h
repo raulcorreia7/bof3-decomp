@@ -23,7 +23,6 @@ extern char          g_MenuClockFormat[];
 extern u8            D_80144DF5;
 extern u8            D_80144DF6;
 extern u8            D_80144DF7;
-extern u8            D_80145FCC[][BATTLE_PARTY_STRIDE];
 extern u8            D_80148338;
 extern s8            D_80148511;
 extern u8            D_80148656;

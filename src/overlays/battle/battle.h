@@ -65,7 +65,6 @@ extern u8*                          D_800B6AB0[];
 extern u8                           D_801454F5[];
 extern u8                           D_801454F6[];
 extern u8                           D_80145FA8[];
-extern u8                           D_80145FCC[];
 /* D_801462E4 */
 extern volatile u8                  g_BattleUIState;
 /* D_801462E6 */

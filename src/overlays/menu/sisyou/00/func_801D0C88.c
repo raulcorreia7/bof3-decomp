@@ -16,7 +16,7 @@ MATCH void func_801D0C88(void) {
     row   = 0;
     count = g_PartySize;
     if (count > 0) {
-        entryp = D_80145FCC.bytes;
+        entryp = &g_BattlePartyBattlers[0].character_index;
         y      = MASTER_MENU_ROW_TOP;
         do {
             Master_DrawPartyRow((MASTER_MENU_ROW_X - (g_MasterScrollOffset * 36)) & HALF_MASK, y, *entryp, row);

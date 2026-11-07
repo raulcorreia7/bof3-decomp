@@ -41,7 +41,7 @@ MATCH void func_801D10AC(u32 message_id) {
     count = g_PartySize;
     i     = 0;
     if (count > 0) {
-        entryp = D_80145FCC.bytes;
+        entryp = &g_BattlePartyBattlers[0].character_index;
         y      = MASTER_MENU_ROW_TOP;
         do {
             Master_DrawPartyRow(MASTER_MENU_ROW_X, y, *entryp, i);

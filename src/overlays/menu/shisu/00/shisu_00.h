@@ -9,7 +9,6 @@
 
 #define g_SceneState (*(struct SceneState*)&g_SceneState)
 
-extern u8            D_80145FCC[][BATTLE_PARTY_STRIDE];
 extern u8            D_80148656;
 extern OverlayHeader D_801D0C00;
 extern char          g_MenuStatFormat[];
