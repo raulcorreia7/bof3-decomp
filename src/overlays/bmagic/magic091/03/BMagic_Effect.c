@@ -18,7 +18,6 @@ MATCH void func_801EEC10(void) {
     }
 }
 
-
 INCLUDE_ASM(func_801EECCC);
 
 #include "overlays/bmagic/func_801EEE3C.h"

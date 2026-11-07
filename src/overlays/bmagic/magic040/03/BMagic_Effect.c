@@ -29,7 +29,6 @@ MATCH void func_801EEF8C(void) {
     }
 }
 
-
 MATCH void func_801EF074(void) {
     g_Task->facing      = BATTLE_ACTIVE_WORK->facing;
     g_Task->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed;

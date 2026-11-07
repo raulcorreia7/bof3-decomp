@@ -76,7 +76,6 @@ MATCH void func_801EFA28(void) {
     }
 }
 
-
 MATCH void func_801EFAE4(void) {
     if (g_BattleActiveBattler < BATTLE_PARTY_SLOT_COUNT) {
         g_Task->header.step += 1;
