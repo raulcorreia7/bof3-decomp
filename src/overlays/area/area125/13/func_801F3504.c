@@ -7,7 +7,6 @@
 extern u8  D_801F37D8[];
 extern u8  D_801F37D9[];
 extern u8  D_801F37E8[];
-extern s16 D_80143F22;
 extern u16 D_80145FB8;
 
 MATCH void Area_SpawnWeightedActor(void) {
