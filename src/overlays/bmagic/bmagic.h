@@ -20,7 +20,7 @@
     pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000; \
     pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000; \
     pos.vz = -COORD_INT((SPAN_WORK)->pos.z) / 2;  \
-    RotTrans(&pos, &matrix.t, &flags);            \
+    RotTrans(&pos, (VECTOR*)matrix.t, &flags);    \
     RotMatrix(&rot, &matrix);                     \
     MulMatrix2(&g_CameraMatrix, &matrix);         \
     SetRotMatrix(&matrix);                        \
@@ -236,6 +236,8 @@ void func_801F006C(void);
 
 /* Defined in Effect_SetActorMatrix.h, which a member includes after its first call. */
 void Effect_SetActorMatrix(void);
+/* Defined in Effect_DrawScreenFade.h, which a member includes after its first call. */
+void Effect_DrawScreenFade(void);
 
 #define EFFECT_ADVANCE_AT_COUNT(increment, limit) \
     do {                                          \

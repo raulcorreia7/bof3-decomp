@@ -82,7 +82,20 @@ extern SceneFunc D_801FE304[66];
         }                                                                 \
     }
 
+void func_801FBF94(u8 actor_id);
+void func_801FC044(u8 actor_id);
+void func_801FC0F4(u8 actor_id);
+void func_801FC1A4(u8 actor_id);
+void func_801FC25C(u8 actor_id);
+void func_801FC308(u8 actor_id);
+void func_801FC3B4(s32 actor_id);
+void func_801FC46C(u8 actor_id);
+void func_801FC518(s32 actor_id);
+void func_801FC5D0(s32 actor_id);
+void func_801FC688(u8 actor_id);
+void func_801FC734(u8 actor_id);
 void func_801FC7E4(void);
 void func_801FC9CC(void);
+void func_801FCB54(void);
 
 #endif
