@@ -18,7 +18,16 @@ MATCH void func_801EEDE4(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EEE28);
+MATCH void func_801EEE28(void) {
+    SYS_DISPATCH_BYTE(D_801EF424, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_800AF764();
+        g_Task->unk_2E.half += 8;
+        g_Task->unk_30.half -= 0x10;
+        func_801EF08C();
+    }
+}
+
 
 MATCH void func_801EEEC8(void) {
     PartyBattler* src;

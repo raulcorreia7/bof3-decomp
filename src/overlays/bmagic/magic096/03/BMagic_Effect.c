@@ -25,7 +25,21 @@ MATCH void func_801EEEA0(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EEEE4);
+MATCH void func_801EEEE4(void) {
+    BattleHandlerTable5 handlers = D_801EEC10;
+
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_801EF43C();
+        func_801EF4FC();
+        PopMatrix();
+        Effect_SetActorMatrix();
+        func_801EFB3C();
+        func_801EFDF4();
+        PopMatrix();
+    }
+}
+
 
 INCLUDE_ASM(func_801EEFB8);
 

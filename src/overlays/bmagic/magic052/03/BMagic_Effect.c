@@ -32,7 +32,17 @@ MATCH void func_801EEE94(void) {
     handlers[TASK_BYTES[1]]();
 }
 
-INCLUDE_ASM(func_801EEEE0);
+MATCH void func_801EEEE0(void) {
+    BattleHandlerTable3 handlers = D_801EEC10;
+
+    g_ScriptBank = 0x800F0800;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0) {
+        func_8014D290();
+    }
+    g_ScriptBank = AREA_SCRIPT_BANK;
+}
+
 
 MATCH void func_801EEF84(void) {
     PartyBattler* work;
