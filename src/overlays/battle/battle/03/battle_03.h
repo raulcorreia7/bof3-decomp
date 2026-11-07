@@ -123,7 +123,7 @@ typedef struct BattleStatBlock {
     u8 bytes[0x20];
 } BattleStatBlock;
 
-/* Drop chance per EnemyBattlerDrop.rate_02, out of 256: 0, 0, 1, 3, 7, 31, 127, 255. */
+/* Drop chance per EnemyDrop.rate, out of 256: 0, 0, 1, 3, 7, 31, 127, 255. */
 typedef struct DropChances {
     u8 chance[8];
 } DropChances;
