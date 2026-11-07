@@ -201,7 +201,7 @@ segments:
       - [0xB318, c, Menu_DrawFilledPanel]
       - [0xB5F4, c, Menu_DrawWindowFrame]
       - [0xBAFC, c, func_801DC6FC]
-      - [0xC25C, c, Shop_DrawAbilities]
+      - [0xC25C, c, Menu_DrawAbilityList]
       - [0xC750, c, Menu_DrawPanelFrame]
       - [0xC978, c, func_801DD578]
       - [0xD0B0, c, SAVE_DrawSlot]

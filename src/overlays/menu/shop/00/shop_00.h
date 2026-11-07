@@ -269,10 +269,14 @@ extern u8          MENU_CAPTION_GLYPH_2[];
 extern u8          MENU_CLOCK_CAPTION[];
 extern u8          MENU_COMMAND_FRAME[];
 extern u8          MENU_COMMAND_FRAME_SELECTED[];
-extern u8          D_801E5638[0xC];
-extern u8          D_801E5650[0xC];
-extern u8          D_801E5668[0xC];
-extern u8          D_801E5674[0xC];
+/* D_801E5638 */
+extern u8          g_MenuListTab2OffSprites[0xC];
+/* D_801E5650 */
+extern u8          g_MenuListTab2OnSprites[0xC];
+/* D_801E5668 */
+extern u8          g_MenuListTab1OffSprites[0xC];
+/* D_801E5674 */
+extern u8          g_MenuListTab1OnSprites[0xC];
 extern u8          D_801E5680[];
 extern u8          D_801E56DC[];
 extern u8          D_801E5738[];
@@ -292,7 +296,8 @@ extern u8          MENU_CLOCK_COLON[];
 extern u8*         g_MenuCommandLabels[];
 extern u8          g_MenuCommandRows[][5];
 extern u8          D_801E5A10[];
-extern const char* D_801E5B7C[4];
+/* D_801E5B7C */
+extern const char* g_MenuAbilityListNames[4];
 extern u8          D_801E5BC8[];
 /* D_801E5BEC */
 extern Callback    g_ShopStep6Funcs[SHOP_STEP6_COUNT];

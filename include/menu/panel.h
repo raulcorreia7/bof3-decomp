@@ -118,6 +118,11 @@ typedef union MenuListSource {
 
 ASSERT_SIZE(MenuListSource, 2);
 
+/* The text shade a menu row is drawn with (UI_DrawText and func_801AF930). */
+#define MENU_SHADE_NORMAL    0
+#define MENU_SHADE_SELECTED  2
+#define MENU_SHADE_DIM       7
+
 /* MenuListPanel.flags: two cursor-tab bits, and a frame countdown in the high
  * nibble that the drawer steps down once per draw. */
 #define MENU_LIST_FLAG_TAB_1 0x01

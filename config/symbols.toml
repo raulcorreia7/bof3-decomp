@@ -1336,6 +1336,7 @@ Menu_DrawEquipStatWindow = { addr = 0x801D5F48, type = "func", source = "draws t
 Menu_DrawClutStrip = { addr = 0x801D627C, type = "func", source = "draws the five-row CLUT strip; its bytes equal the body shared by the shop and start overlays and the Bate scene timer passes it D_80144953 as the start one does" }
 Menu_DrawFilledPanel = { addr = 0x801D6470, type = "func", source = "fills a menu panel and draws its tiled border" }
 Menu_DrawWindowFrame = { addr = 0x801D674C, type = "func", source = "draws a window frame of width x height cells of 8 pixels from stretched border sprites and four corner sprites; the option, shop and start panel callers pass the cell counts" }
+Menu_DrawAbilityList = { addr = 0x801D73B4, type = "func", source = "draws the ability list panel of the shop and bate overlays: ten abilities with cost and level, the list name and the frame" }
 Menu_DrawPanelFrame = { addr = 0x801D78A8, type = "func", source = "draws the tiled border of a menu panel, called by Shop_DrawItems in emi/etc/shop/00" }
 g_MenuBateStepFuncs = { addr = 0x801D86E0, source = "the bate overlay step handlers, indexed by the menu step byte" }
 g_MenuBateStep2Funcs = { addr = 0x801D8700, source = "handler table: dispatched through the table position of its owning step function" }
@@ -1353,6 +1354,10 @@ MENU_CAPTION_GLYPH_2 = { addr = 0x801D8878, source = "a caption row glyph run dr
 MENU_CLOCK_CAPTION = { addr = 0x801D8884, source = "the sprite run drawn at the play time window's left edge by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 MENU_COMMAND_FRAME = { addr = 0x801D88E0, source = "the sprite run drawn over every unselected button by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801D88F8, source = "the sprite run drawn over the selected button by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
+g_MenuListTab2OffSprites = { addr = 0x801D893C, source = "the sprite run of the list panel's second tab while its flag is clear" }
+g_MenuListTab2OnSprites = { addr = 0x801D8954, source = "the sprite run of the list panel's second tab while its flag is set" }
+g_MenuListTab1OffSprites = { addr = 0x801D896C, source = "the sprite run of the list panel's first tab while its flag is clear" }
+g_MenuListTab1OnSprites = { addr = 0x801D8978, source = "the sprite run of the list panel's first tab while its flag is set" }
 g_MenuLabelPower = { addr = 0x801D8B28, source = "Menu_DrawStatPanel.h binds g_MenuLabelPower in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelDefense = { addr = 0x801D8B2C, source = "Menu_DrawStatPanel.h binds g_MenuLabelDefense in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelIntellect = { addr = 0x801D8B30, source = "Menu_DrawStatPanel.h binds g_MenuLabelIntellect in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
@@ -1367,6 +1372,7 @@ g_MenuCommandRows = { addr = 0x801D8CC4, source = "5-byte rows (button count, fo
 MENU_CLUT_STRIP_CELLS = { addr = 0x801D8D28, source = "Menu_DrawClutStrip.h binds MENU_CLUT_STRIP_CELLS in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D8DD4, source = "Menu_DrawClutStrip.h binds MENU_CLUT_STRIP_ENTRIES in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D8E20, source = "Menu_DrawClutStrip.h binds MENU_CLUT_STRIP_PALETTES in emi/etc/bate/00 (twin rule, decomp/layout#shared-bodies)" }
+g_MenuAbilityListNames = { addr = 0x801D8E80, source = "the list names indexed by the ability type, drawn above the ability list" }
 
 ["emi/etc/commu00/00"]
 # Fairy table extents; the types are in include/game/fairy.h.
@@ -1821,7 +1827,7 @@ Menu_DrawEquipStatWindow = { addr = 0x801DB9F0, type = "func", source = "draws t
 Menu_DrawClutStrip = { addr = 0x801DBD24, type = "func", source = "draws the five-row CLUT strip with two 0x20-wide columns per row, one body shared with the start overlay" }
 Menu_DrawFilledPanel = { addr = 0x801DBF18, type = "func", source = "fills a menu panel and draws its tiled border" }
 Menu_DrawWindowFrame = { addr = 0x801DC1F4, type = "func", source = "draws a window frame of width x height cells of 8 pixels from stretched border sprites and four corner sprites; the option, shop and start panel callers pass the cell counts" }
-Shop_DrawAbilities = { addr = 0x801DCE5C, type = "func", source = "draws the shop's ten-row ability list with level, count, cursor tabs and window frame" }
+Menu_DrawAbilityList = { addr = 0x801DCE5C, type = "func", source = "draws the ability list panel of the shop and bate overlays: ten abilities with cost and level, the list name and the frame" }
 Menu_DrawPanelFrame = { addr = 0x801DD350, type = "func", source = "draws the tiled border of a menu panel, called by Shop_DrawItems in emi/etc/shop/00" }
 SAVE_DrawSlot = { addr = 0x801DDCB0, type = "func", source = "draws one stock row window, icons, name and formatted values, shared name with the start overlay" }
 Menu_SwapBytes_801DF464 = { addr = 0x801DF464, type = "func", source = "byte-identical to Menu_SwapBytes at emi/etc/shop/00@0x801D7E08" }
@@ -1852,6 +1858,10 @@ MENU_CAPTION_GLYPH_2 = { addr = 0x801E5574, source = "a caption row glyph run dr
 MENU_CLOCK_CAPTION = { addr = 0x801E5580, source = "the sprite run drawn at the play time window's left edge by Menu_DrawPlayTimeWindow.h (twin rule, decomp/layout#shared-bodies)" }
 MENU_COMMAND_FRAME = { addr = 0x801E55DC, source = "the sprite run drawn over every unselected button by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801E55F4, source = "the sprite run drawn over the selected button by Menu_DrawCommandRow.h (twin rule, decomp/layout#shared-bodies)" }
+g_MenuListTab2OffSprites = { addr = 0x801E5638, source = "the sprite run of the list panel's second tab while its flag is clear" }
+g_MenuListTab2OnSprites = { addr = 0x801E5650, source = "the sprite run of the list panel's second tab while its flag is set" }
+g_MenuListTab1OffSprites = { addr = 0x801E5668, source = "the sprite run of the list panel's first tab while its flag is clear" }
+g_MenuListTab1OnSprites = { addr = 0x801E5674, source = "the sprite run of the list panel's first tab while its flag is set" }
 g_MenuLabelPower = { addr = 0x801E5824, source = "Menu_DrawStatPanel.h binds g_MenuLabelPower in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelDefense = { addr = 0x801E5828, source = "Menu_DrawStatPanel.h binds g_MenuLabelDefense in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelIntellect = { addr = 0x801E582C, source = "Menu_DrawStatPanel.h binds g_MenuLabelIntellect in emi/etc/shop/00 (twin rule, decomp/layout#shared-bodies)" }
@@ -1866,6 +1876,7 @@ g_MenuCommandRows = { addr = 0x801E59C0, source = "5-byte rows (button count, fo
 MENU_CLUT_STRIP_CELLS = { addr = 0x801E5A24, source = "the 4-byte sprite cells the CLUT strip body walks, shared name with emi/etc/start/08" }
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801E5AD0, source = "the sprite-cell indices the CLUT strip body walks, shared name with emi/etc/start/08" }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801E5B1C, source = "the four per-clut entry offsets the CLUT strip body reads, shared name with emi/etc/start/08" }
+g_MenuAbilityListNames = { addr = 0x801E5B7C, source = "the list names indexed by the ability type, drawn above the ability list" }
 g_ShopStep6Funcs = { addr = 0x801E5BEC, source = "handler table: dispatched through the table position of its owning step function" }
 g_ShopStep6Sub0Funcs = { addr = 0x801E5BFC, source = "handler table: dispatched through the table position of its owning step function" }
 g_ShopStep6Sub3Funcs = { addr = 0x801E5C08, source = "handler table: dispatched through the table position of its owning step function" }

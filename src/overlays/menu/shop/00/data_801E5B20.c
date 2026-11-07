@@ -19,7 +19,7 @@ char D_801E5B64[8] = "ASSIST";
 char D_801E5B6C[8] = "ATTACK";
 char D_801E5B74[8] = "SKILL";
 
-const char *D_801E5B7C[4] = {
+const char *g_MenuAbilityListNames[4] = {
     D_801E5B5C,
     D_801E5B64,
     D_801E5B6C,
