@@ -1471,6 +1471,8 @@ Area_RoundSpriteCoordinate = { addr = 0x800C3254, type = "func", source = "Round
 g_MenuStatFormat = { addr = 0x801D0C20, source = "Format string of the four stat values of the Bate menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuZennyFormat = { addr = 0x801D0C44, source = "Format string of the Bate menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C48, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
+g_MenuFormations = { addr = 0x801D0C50, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
+g_MenuFormationOrder = { addr = 0x801D0D18, source = "Starting member order of the formation preview: Menu_DrawFormationPreview copies it and sorts it with the member icons back to front." }
 g_MenuClockFormat = { addr = 0x801D0D1C, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D5C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "Entry of the Bate menu: dispatches on the menu step byte (D_80148650) through g_MenuBateStates." }
@@ -1483,6 +1485,7 @@ Menu_DrawCharacterPortrait = { addr = 0x801D3664, type = "func", source = "Draws
 Menu_DrawTintedLine = { addr = 0x801D36B8, type = "func", source = "Draws one semi-transparent LINE_F2 from (line_x0, line_y0) to (line_x1, line_y1) in the colour given by color_r, color_g and color_b, with the draw mode tpage in the font page." }
 Menu_DrawItemRow = { addr = 0x801D37AC, type = "func", source = "Draws the party row of character item: HP and AP values with their labels, the experience icon with the experience, and the next-level experience, or dashes from level 99; the palette is 7 when selection is nonzero." }
 Menu_DrawEquipment = { addr = 0x801D3B4C, type = "func", source = "Draws the equipment list of g_Characters[index]: the weapon, shield, helmet, armor and two accessory names with their row icons; the palette is 7 when selection is nonzero." }
+Menu_DrawFormationPreview = { addr = 0x801D3E18, type = "func", source = "Draws the formation preview of the party formation menu: the formation's name, its ground arrow and its members' icons, turned by angle, sorted back to front, members whose blink bit is set pulsing." }
 Menu_DrawIcon = { addr = 0x801D4564, type = "func", source = "Draws a 16x8 menu icon from column icon_column of row 216 of the icon atlas at sprite_x, sprite_y, dark (0x10) when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801D4678, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
 Menu_DrawExperienceLine = { addr = 0x801D4730, type = "func", source = "Draws the red experience line of a character from x, y: its length is the experience gained since level, scaled by 57 over the span to the next level, and is zero when both levels need the same experience." }
@@ -1516,6 +1519,9 @@ MENU_CAPTION_GLYPH_0 = { addr = 0x801D8860, source = "Sprite run of the left end
 MENU_CAPTION_GLYPH_1 = { addr = 0x801D886C, source = "Sprite run repeated along a caption row, drawn by Menu_DrawZennyWindow 11 times and by Menu_DrawPlayTimeWindow 6 times." }
 MENU_CAPTION_GLYPH_2 = { addr = 0x801D8878, source = "Sprite run of the right end of a caption row, drawn by Menu_DrawZennyWindow and Menu_DrawPlayTimeWindow." }
 MENU_CLOCK_CAPTION = { addr = 0x801D8884, source = "Sprite run of the play time caption, drawn at the left edge of the play time window by Menu_DrawPlayTimeWindow." }
+g_MenuFormationFrameLeft = { addr = 0x801D8898, source = "Sprite run of the formation preview frame's left edge." }
+g_MenuFormationFrameMiddle = { addr = 0x801D88BC, source = "Sprite run of one column of the formation preview frame's top and bottom edges; Menu_DrawFormationPreview draws it six times, 8 pixels apart." }
+g_MenuFormationFrameRight = { addr = 0x801D88C8, source = "Sprite run of the formation preview frame's right edge." }
 MENU_COMMAND_FRAME = { addr = 0x801D88E0, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801D88F8, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
 g_MenuListTab2OffSprites = { addr = 0x801D893C, source = "the sprite run of the list panel's second tab while its flag is clear" }
@@ -1531,6 +1537,7 @@ g_MenuLabelAgility = { addr = 0x801D8B34, source = "Text of the agility label, d
 g_MenuEquipRowIcons = { addr = 0x801D8B38, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
 g_MenuLabelEquip = { addr = 0x801D8B40, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }
 g_MenuPortraitAtlas = { addr = 0x801D8B54, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index; Menu_DrawItemRow also draws its HP and AP label texts from offsets 0x30, 0x36, 0x3C and 0x42." }
+g_MenuFormationArrow = { addr = 0x801D8B9C, source = "The three corners of the formation preview's ground arrow, x and y." }
 MENU_CAPTION_ICON = { addr = 0x801D8BB4, source = "Icon and label record drawn at the right of the zenny caption by Menu_DrawZennyWindow." }
 MENU_CLOCK_COLON = { addr = 0x801D8BB8, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801D8C68, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
@@ -1540,6 +1547,8 @@ MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D8DD4, source = "Cell ids that Menu_Draw
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D8E20, source = "Start of the run in MENU_CLUT_STRIP_ENTRIES for each of the four strip palettes." }
 g_MenuInventoryTitles = { addr = 0x801D8E4C, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_MenuAbilityListNames = { addr = 0x801D8E80, source = "the list names indexed by the ability type, drawn above the ability list" }
+g_MenuFormationArrowTurned = { addr = 0x801D8F18, source = "The ground arrow corners turned by the preview angle, x at twice the scale of y." }
+g_MenuFormationSpots = { addr = 0x801D8F30, source = "Each party member's formation offset turned by the preview angle; Menu_DrawFormationPreview sorts them back to front with the member order." }
 
 ["emi/etc/commu00/00"]
 # Fairy table extents; the types are in include/game/fairy.h.
@@ -1908,6 +1917,8 @@ UI_UpdateWindowFade = { addr = 0x801D1B00, type = "func", source = "Advances the
 g_MenuStatFormat = { addr = 0x801D0C04, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuZennyFormat = { addr = 0x801D0C28, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C2C, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
+g_MenuFormations = { addr = 0x801D0C34, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
+g_MenuFormationOrder = { addr = 0x801D0CFC, source = "Starting member order of the formation preview: Menu_DrawFormationPreview copies it and sorts it with the member icons back to front." }
 g_MenuClockFormat = { addr = 0x801D0D00, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D40, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "Entry of the Shisu menu: dispatches on the menu step byte D_80148650 through the D_801D96DC handlers." }
@@ -1921,6 +1932,7 @@ Menu_DrawCharacterPortrait = { addr = 0x801D460C, type = "func", source = "Draws
 Menu_DrawTintedLine = { addr = 0x801D4660, type = "func", source = "Draws one semi-transparent LINE_F2 from (line_x0, line_y0) to (line_x1, line_y1) in the colour given by color_r, color_g and color_b, with the draw mode tpage in the font page." }
 Menu_DrawItemRow = { addr = 0x801D4754, type = "func", source = "Draws the party row of character item: HP and AP values with their labels, the experience icon with the experience, and the next-level experience, or dashes from level 99; the palette is 7 when selection is nonzero." }
 Menu_DrawEquipment = { addr = 0x801D4AF4, type = "func", source = "Draws the equipment list of g_Characters[index]: the weapon, shield, helmet, armor and two accessory names with their row icons; the palette is 7 when selection is nonzero." }
+Menu_DrawFormationPreview = { addr = 0x801D4DC0, type = "func", source = "Draws the formation preview of the party formation menu: the formation's name, its ground arrow and its members' icons, turned by angle, sorted back to front, members whose blink bit is set pulsing." }
 Menu_DrawIcon = { addr = 0x801D550C, type = "func", source = "Draws a 16x8 menu icon from column icon_column of row 216 of the icon atlas at sprite_x, sprite_y, dark (0x10) when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801D5620, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
 Menu_DrawExperienceLine = { addr = 0x801D56D8, type = "func", source = "Draws the red experience line of a character from x, y: its length is the experience gained since level, scaled by 57 over the span to the next level, and is zero when both levels need the same experience." }
@@ -1954,6 +1966,9 @@ MENU_CAPTION_GLYPH_0 = { addr = 0x801D9884, source = "Sprite run of the left end
 MENU_CAPTION_GLYPH_1 = { addr = 0x801D9890, source = "Sprite run repeated along a caption row, drawn by Menu_DrawZennyWindow 11 times and by Menu_DrawPlayTimeWindow 6 times." }
 MENU_CAPTION_GLYPH_2 = { addr = 0x801D989C, source = "Sprite run of the right end of a caption row, drawn by Menu_DrawZennyWindow and Menu_DrawPlayTimeWindow." }
 MENU_CLOCK_CAPTION = { addr = 0x801D98A8, source = "Sprite run of the play time caption, drawn at the left edge of the play time window by Menu_DrawPlayTimeWindow." }
+g_MenuFormationFrameLeft = { addr = 0x801D98BC, source = "Sprite run of the formation preview frame's left edge." }
+g_MenuFormationFrameMiddle = { addr = 0x801D98E0, source = "Sprite run of one column of the formation preview frame's top and bottom edges; Menu_DrawFormationPreview draws it six times, 8 pixels apart." }
+g_MenuFormationFrameRight = { addr = 0x801D98EC, source = "Sprite run of the formation preview frame's right edge." }
 MENU_COMMAND_FRAME = { addr = 0x801D9904, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801D991C, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
 g_MenuListTab2OffSprites = { addr = 0x801D9960, source = "the sprite run of the list panel's second tab while its flag is clear" }
@@ -1967,6 +1982,7 @@ g_MenuLabelAgility = { addr = 0x801D9B58, source = "Text of the agility label, d
 g_MenuEquipRowIcons = { addr = 0x801D9B5C, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
 g_MenuLabelEquip = { addr = 0x801D9B64, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }
 g_MenuPortraitAtlas = { addr = 0x801D9B78, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index; Menu_DrawItemRow also draws its HP and AP label texts from offsets 0x30, 0x36, 0x3C and 0x42." }
+g_MenuFormationArrow = { addr = 0x801D9BC0, source = "The three corners of the formation preview's ground arrow, x and y." }
 MENU_CAPTION_ICON = { addr = 0x801D9BD8, source = "Icon and label record drawn at the right of the zenny caption by Menu_DrawZennyWindow." }
 MENU_CLOCK_COLON = { addr = 0x801D9BDC, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801D9C8C, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
@@ -1975,6 +1991,8 @@ MENU_CLUT_STRIP_CELLS = { addr = 0x801D9D4C, source = "Cell rectangles that Menu
 MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D9DF8, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
 MENU_CLUT_STRIP_PALETTES = { addr = 0x801D9E44, source = "Entry offset of each clut strip palette, indexed by the clut index." }
 g_MenuInventoryTitles = { addr = 0x801D9E70, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+g_MenuFormationArrowTurned = { addr = 0x801D9EF8, source = "The ground arrow corners turned by the preview angle, x at twice the scale of y." }
+g_MenuFormationSpots = { addr = 0x801D9F10, source = "Each party member's formation offset turned by the preview angle; Menu_DrawFormationPreview sorts them back to front with the member order." }
 g_MenuStatusItems = { addr = 0x801DA028, type = "MenuStatusItems", size = 0xC, source = "Item ids the status menu counts into held[] (four items) and passes to Item_Remove when one is used." }
 D_801DA0B4 = { addr = 0x801DA0B4, source = "12-bit turn angle of a status menu display: each frame adds 0x20, and a stop snaps it to a multiple of 0x40." }
 D_801DA12C = { addr = 0x801DA12C, source = "12-bit turn angle of a status menu display: each frame adds or subtracts 0x20, and a stop snaps it to a multiple of 0x40." }
@@ -1988,7 +2006,8 @@ g_MenuExperienceFormat = { addr = 0x801D0CF8, source = "Format of the experience
 g_MenuExperienceBlank = { addr = 0x801D0CFC, source = "Dashes the experience panel prints in place of the value when it is -1." }
 g_MenuZennyFormat = { addr = 0x801D0D08, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0D0C, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
-g_ShopFormations = { addr = 0x801D0D14, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
+g_MenuFormations = { addr = 0x801D0D14, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
+g_MenuFormationOrder = { addr = 0x801D0DDC, source = "Starting member order of the formation preview: Menu_DrawFormationPreview copies it and sorts it with the member icons back to front." }
 g_MenuClockFormat = { addr = 0x801D0DE0, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0E20, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "Entry of the shop: dispatches on the menu step byte D_80148650 through the D_801E5144 handlers." }
@@ -2008,6 +2027,7 @@ Menu_DrawCharacterPortrait = { addr = 0x801D910C, type = "func", source = "Draws
 Menu_DrawTintedLine = { addr = 0x801D9160, type = "func", source = "Draws one semi-transparent LINE_F2 from (line_x0, line_y0) to (line_x1, line_y1) in the colour given by color_r, color_g and color_b, with the draw mode tpage in the font page." }
 Menu_DrawItemRow = { addr = 0x801D9254, type = "func", source = "Draws the party row of character item: HP and AP values with their labels, the experience icon with the experience, and the next-level experience, or dashes from level 99; the palette is 7 when selection is nonzero." }
 Menu_DrawEquipment = { addr = 0x801D95F4, type = "func", source = "Draws the equipment list of g_Characters[index]: the weapon, shield, helmet, armor and two accessory names with their row icons; the palette is 7 when selection is nonzero." }
+Menu_DrawFormationPreview = { addr = 0x801D98C0, type = "func", source = "Draws the formation preview of the party formation menu: the formation's name, its ground arrow and its members' icons, turned by angle, sorted back to front, members whose blink bit is set pulsing." }
 Menu_DrawIcon = { addr = 0x801DA00C, type = "func", source = "Draws a 16x8 menu icon from column icon_column of row 216 of the icon atlas at sprite_x, sprite_y, dark (0x10) when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801DA120, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
 Menu_DrawExperienceLine = { addr = 0x801DA1D8, type = "func", source = "Draws the red experience line of a character from x, y: its length is the experience gained since level, scaled by 57 over the span to the next level, and is zero when both levels need the same experience." }
@@ -2068,6 +2088,9 @@ MENU_CAPTION_GLYPH_0 = { addr = 0x801E555C, source = "Sprite run of the left end
 MENU_CAPTION_GLYPH_1 = { addr = 0x801E5568, source = "Sprite run repeated along a caption row, drawn by Menu_DrawZennyWindow 11 times and by Menu_DrawPlayTimeWindow 6 times." }
 MENU_CAPTION_GLYPH_2 = { addr = 0x801E5574, source = "Sprite run of the right end of a caption row, drawn by Menu_DrawZennyWindow and Menu_DrawPlayTimeWindow." }
 MENU_CLOCK_CAPTION = { addr = 0x801E5580, source = "Sprite run of the play time caption, drawn at the left edge of the play time window by Menu_DrawPlayTimeWindow." }
+g_MenuFormationFrameLeft = { addr = 0x801E5594, source = "Sprite run of the formation preview frame's left edge." }
+g_MenuFormationFrameMiddle = { addr = 0x801E55B8, source = "Sprite run of one column of the formation preview frame's top and bottom edges; Menu_DrawFormationPreview draws it six times, 8 pixels apart." }
+g_MenuFormationFrameRight = { addr = 0x801E55C4, source = "Sprite run of the formation preview frame's right edge." }
 MENU_COMMAND_FRAME = { addr = 0x801E55DC, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801E55F4, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
 g_MenuListTab2OffSprites = { addr = 0x801E5638, source = "the sprite run of the list panel's second tab while its flag is clear" }
@@ -2083,6 +2106,7 @@ g_MenuLabelAgility = { addr = 0x801E5830, source = "Text of the agility label, d
 g_MenuEquipRowIcons = { addr = 0x801E5834, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
 g_MenuLabelEquip = { addr = 0x801E583C, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }
 g_MenuPortraitAtlas = { addr = 0x801E5850, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index; Menu_DrawItemRow also draws its HP and AP label texts from offsets 0x30, 0x36, 0x3C and 0x42." }
+g_MenuFormationArrow = { addr = 0x801E5898, source = "The three corners of the formation preview's ground arrow, x and y." }
 MENU_CAPTION_ICON = { addr = 0x801E58B0, source = "Icon and label record drawn at the right of the zenny caption by Menu_DrawZennyWindow." }
 MENU_CLOCK_COLON = { addr = 0x801E58B4, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801E5964, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
@@ -2132,6 +2156,8 @@ g_ShopPricePercent = { addr = 0x801E6064, source = "Price percentage of the shop
 g_SaveSlotFirst = { addr = 0x801E6074, source = "Index of the first visible row of the shop stock list." }
 g_SaveSlotCount = { addr = 0x801E6078, source = "Number of visible rows of the shop stock list." }
 g_SaveSlots = { addr = 0x801E6098, size = 0x54, source = "The three visible rows of the shop stock list." }
+g_MenuFormationArrowTurned = { addr = 0x801E6114, source = "The ground arrow corners turned by the preview angle, x at twice the scale of y." }
+g_MenuFormationSpots = { addr = 0x801E612C, source = "Each party member's formation offset turned by the preview angle; Menu_DrawFormationPreview sorts them back to front with the member order." }
 g_MenuEquipChoiceIds = { addr = 0x801E6144, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
 g_MenuEquipChoiceCounts = { addr = 0x801E61C4, source = "the held counts of the g_MenuEquipChoiceIds rows" }
 CardAccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes the save file on the memory card: waits out the card status, loads the directory, opens the save file and transfers it through CardTransferFile (body in start/09)." }
@@ -2182,7 +2208,8 @@ g_MenuExperienceFormat = { addr = 0x801D0C60, source = "Format of the experience
 g_MenuExperienceBlank = { addr = 0x801D0C64, source = "Dashes the experience panel prints in place of the value when it is -1." }
 g_MenuZennyFormat = { addr = 0x801D0C70, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
 g_MenuNextExpBlank = { addr = 0x801D0C74, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
-g_StartFormations = { addr = 0x801D0C7C, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
+g_MenuFormations = { addr = 0x801D0C7C, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
+g_MenuFormationOrder = { addr = 0x801D0D44, source = "Starting member order of the formation preview: Menu_DrawFormationPreview copies it and sorts it with the member icons back to front." }
 g_MenuClockFormat = { addr = 0x801D0D48, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
 g_MenuInventoryCountFormat = { addr = 0x801D0D88, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
 s_RowCaptionTags = { addr = 0x801D0EB0, source = "Eight three-byte caption tags; func_801E30FC copies them and hands one to the text draws." }
@@ -2203,6 +2230,7 @@ Menu_DrawCharacterPortrait = { addr = 0x801DC604, type = "func", source = "Draws
 Menu_DrawTintedLine = { addr = 0x801DC658, type = "func", source = "Draws one semi-transparent LINE_F2 from (line_x0, line_y0) to (line_x1, line_y1) in the colour given by color_r, color_g and color_b, with the draw mode tpage in the font page." }
 Menu_DrawItemRow = { addr = 0x801DC74C, type = "func", source = "Draws the party row of character item: HP and AP values with their labels, the experience icon with the experience, and the next-level experience, or dashes from level 99; the palette is 7 when selection is nonzero." }
 Menu_DrawEquipment = { addr = 0x801DCAEC, type = "func", source = "Draws the equipment list of g_Characters[index]: the weapon, shield, helmet, armor and two accessory names with their row icons; the palette is 7 when selection is nonzero." }
+Menu_DrawFormationPreview = { addr = 0x801DCDB8, type = "func", source = "Draws the formation preview of the party formation menu: the formation's name, its ground arrow and its members' icons, turned by angle, sorted back to front, members whose blink bit is set pulsing." }
 Menu_DrawIcon = { addr = 0x801DD504, type = "func", source = "Draws a 16x8 menu icon from column icon_column of row 216 of the icon atlas at sprite_x, sprite_y, dark (0x10) when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801DD618, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
 Menu_DrawZennyWindow = { addr = 0x801DD7EC, type = "func", source = "Draws the zenny window at panel_x, panel_y: the caption_value printed through g_MenuZennyFormat, the zenny icon and the caption glyph runs." }
@@ -2263,6 +2291,9 @@ MENU_CAPTION_GLYPH_0 = { addr = 0x801EC678, source = "Sprite run of the left end
 MENU_CAPTION_GLYPH_1 = { addr = 0x801EC684, source = "Sprite run repeated along a caption row, drawn by Menu_DrawZennyWindow 11 times and by Menu_DrawPlayTimeWindow 6 times." }
 MENU_CAPTION_GLYPH_2 = { addr = 0x801EC690, source = "Sprite run of the right end of a caption row, drawn by Menu_DrawZennyWindow and Menu_DrawPlayTimeWindow." }
 MENU_CLOCK_CAPTION = { addr = 0x801EC69C, source = "Sprite run of the play time caption, drawn at the left edge of the play time window by Menu_DrawPlayTimeWindow." }
+g_MenuFormationFrameLeft = { addr = 0x801EC6B0, source = "Sprite run of the formation preview frame's left edge." }
+g_MenuFormationFrameMiddle = { addr = 0x801EC6D4, source = "Sprite run of one column of the formation preview frame's top and bottom edges; Menu_DrawFormationPreview draws it six times, 8 pixels apart." }
+g_MenuFormationFrameRight = { addr = 0x801EC6E0, source = "Sprite run of the formation preview frame's right edge." }
 MENU_COMMAND_FRAME = { addr = 0x801EC6F8, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
 MENU_COMMAND_FRAME_SELECTED = { addr = 0x801EC710, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
 g_MenuListTab2OffSprites = { addr = 0x801EC754, source = "the sprite run of the list panel's second tab while its flag is clear" }
@@ -2278,6 +2309,7 @@ g_MenuLabelAgility = { addr = 0x801EC94C, source = "Text of the agility label, d
 g_MenuEquipRowIcons = { addr = 0x801EC950, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
 g_MenuLabelEquip = { addr = 0x801EC958, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }
 g_MenuPortraitAtlas = { addr = 0x801EC96C, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index; Menu_DrawItemRow also draws its HP and AP label texts from offsets 0x30, 0x36, 0x3C and 0x42." }
+g_MenuFormationArrow = { addr = 0x801EC9B4, source = "The three corners of the formation preview's ground arrow, x and y." }
 MENU_CAPTION_ICON = { addr = 0x801EC9CC, source = "Icon and label record drawn at the right of the zenny caption by Menu_DrawZennyWindow." }
 MENU_CLOCK_COLON = { addr = 0x801EC9D0, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801ECA80, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
@@ -2315,6 +2347,8 @@ g_MenuStartPanel19StateFuncs = { addr = 0x801ED5C8, source = "the state handlers
 g_MenuStartPanel20StateFuncs = { addr = 0x801ED5E4, source = "the state handlers of panel mode 20, indexed by the panel task state" }
 s_PartyCharacterIds = { addr = 0x801ED610, source = "The three party character ids that func_801D177C and func_801D21F4 keep." }
 g_EquipPreview = { addr = 0x801ED63C, source = "Six equipment ids of the character being tried on: func_801D6FBC copies them here and replaces the slot being tried, func_801D6E6C commits them." }
+g_MenuFormationArrowTurned = { addr = 0x801ED6A8, source = "The ground arrow corners turned by the preview angle, x at twice the scale of y." }
+g_MenuFormationSpots = { addr = 0x801ED6C0, source = "Each party member's formation offset turned by the preview angle; Menu_DrawFormationPreview sorts them back to front with the member order." }
 g_MenuEquipChoiceIds = { addr = 0x801ED6D8, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
 g_MenuEquipChoiceCounts = { addr = 0x801ED758, source = "the held counts of the g_MenuEquipChoiceIds rows" }
 g_MenuStartTimer = { addr = 0x801ED7F0, source = "Slide timer of the start menu: func_801E5BCC counts it up to 4 as the slide offset of SAVE_DrawSlots, func_801E5E30 counts it down to 0 and then restores the step." }

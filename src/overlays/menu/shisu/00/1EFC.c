@@ -181,7 +181,7 @@ INCLUDE_ASM(func_801D4158);
 
 #include "overlays/menu/Menu_DrawEquipment.h"
 
-INCLUDE_ASM(func_801D4DC0);
+#include "overlays/menu/Menu_DrawFormationPreview.h"
 
 #include "overlays/menu/Menu_DrawIcon.h"
 

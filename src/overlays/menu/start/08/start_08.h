@@ -2,6 +2,7 @@
 #define OVERLAY_ETC_START_08_H
 
 #include "game/character.h"
+#include "menu/party.h"
 #include "shared/etc.h"
 #include "work/save.h"
 #include <string.h>
@@ -521,7 +522,8 @@ void        func_801DB5AC(void);
 /* func_801DBF04 */
 extern void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);
 extern void func_801DC150(s16 x, s16 y, u8 character_index, s32 layout);
-extern s32  func_801DCDB8(u16, u16, u8, u8, s32);
+/* func_801DCDB8 */
+void        Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 void        Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused);
 void        Menu_DrawEquipStatWindow(s16 x, s16 y, s32 character_index, s32 equip_slot, u8 item_id);
@@ -818,6 +820,15 @@ static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_i
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
+
+extern FormationLayout g_MenuFormations[FORMATION_COUNT];
+extern FormationOrder  g_MenuFormationOrder;
+extern s32             g_MenuFormationArrow[3][2];
+extern s32             g_MenuFormationArrowTurned[3][2];
+extern s32             g_MenuFormationSpots[PARTY_SLOT_COUNT][2];
+extern u8              g_MenuFormationFrameLeft[];
+extern u8              g_MenuFormationFrameMiddle[];
+extern u8              g_MenuFormationFrameRight[];
 
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
