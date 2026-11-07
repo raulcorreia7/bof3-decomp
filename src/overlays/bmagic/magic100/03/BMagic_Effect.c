@@ -73,7 +73,29 @@ MATCH void func_801EEE9C(void) {
 
 INCLUDE_ASM(func_801EEF3C);
 
-INCLUDE_ASM(func_801EF0D8);
+MATCH void func_801EF0D8(void) {
+    u32           slot;
+    PartyBattler* battler;
+    u8            timer;
+
+    slot = LOBU(g_BattleTargetSelector);
+    if (slot < BATTLE_PARTY_SLOT_COUNT) {
+        battler = &g_BattlePartyBattlers[slot];
+    } else {
+        battler = (PartyBattler*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
+    }
+    if (g_Task->param.unk_0B & 1) {
+        g_Task->unk_20 = (g_Task->unk_20 + 0x200) & 0xFFF;
+    } else {
+        g_Task->unk_20 = (g_Task->unk_20 - 0x200) & 0xFFF;
+    }
+    g_Task->unk_14 = func_800AF4A0(battler, 0xC000, g_Task->unk_18 << 6);
+    timer          = g_Task->timer + 4;
+    g_Task->timer  = timer;
+    if (timer == 0x10) {
+        g_Task->header.step++;
+    }
+}
 
 INCLUDE_ASM(func_801EF1DC);
 
