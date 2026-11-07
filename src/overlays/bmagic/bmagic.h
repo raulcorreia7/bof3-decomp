@@ -230,7 +230,6 @@ void Effect_PlayOnZeroTick(void);
 void func_801EEEC8(void);
 void func_801EEF38(void);
 void func_801EF240(void);
-void func_801EF79C(void);
 void func_801EF970(void);
 void func_801EFA48(void);
 void func_801F0068(void);

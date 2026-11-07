@@ -13,5 +13,6 @@ extern BattleEffect D_801F0578[];
 #define BMAGIC_EFFECT_SLOTS D_801F0578
 #define BMAGIC_EFFECT_COUNT 32
 void func_801F01C0(void);
+void Actor_Clear(void);
 
 #endif

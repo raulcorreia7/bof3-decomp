@@ -14,6 +14,7 @@ extern BattleEffect D_801F03E4[];
 s32  func_800AED5C(s32 arg0, u32 battler_index);
 /* Defined by the battle overlay. */
 void func_801EF4F0(void);
+void func_801EF79C(void);
 void func_801EF648(void);
 void func_801EFAA8(void);
 void func_801F00A8(void);

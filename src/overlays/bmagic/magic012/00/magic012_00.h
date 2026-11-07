@@ -8,5 +8,6 @@
 #define g_Task ((PartyBattler*)g_Task)
 
 void func_801EEEAC(void);
+void func_801EF79C(u8 arg0, s32 arg1);
 
 #endif

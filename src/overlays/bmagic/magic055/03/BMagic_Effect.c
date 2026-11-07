@@ -6,7 +6,45 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC10);
 
-INCLUDE_ASM(func_801EECCC);
+MATCH void func_801EECCC(void) {
+    u32           i;
+    u8            slot;
+    s8            anchor;
+    PartyBattler* actor;
+    PartyBattler* task;
+    PartyBattler* work;
+    u16*          src;
+    u16*          dst;
+
+    actor              = g_BattleSelectedActor;
+    g_Task->facing     = actor->facing;
+    task               = g_Task;
+    task->pos.x.fixed  = actor->pos.x.fixed;
+    task->pos.y.fixed  = actor->pos.y.fixed;
+    task->pos.z.fixed  = actor->pos.z.fixed;
+    task->param.unk_0B = 0;
+    for (i = 0, anchor = 1; i < 6; i++) {
+        slot                               = Battle_AllocEffect(1, 0x34);
+        work                               = g_Task;
+        g_BattleEffects[slot].unk_09       = anchor;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B += 1;
+        anchor += 6;
+    }
+    i   = 1;
+    dst = MEM_PTR(u16, 0x8003AC02u);
+    src = MEM_PTR(u16, 0x80036C02u);
+    for (; i < 0x10; i++) {
+        *dst++ = *src++ | 0x8000;
+    }
+    *MEM_PTR(u16, 0x8003AC00u) = 0;
+    g_GfxPalettePending        = 1;
+    SND_QueueSelectionFx(0x100);
+    func_800A9610(g_BattleTargetSelector, 0x10);
+    g_Task->unk_09 = 1;
+    g_Task->timer  = 1;
+    g_Task->header.mode += 1;
+}
 
 #include "overlays/bmagic/func_801EEE3C.h"
 

@@ -11,6 +11,7 @@ extern Callback            D_801F04C8[];
 extern Callback            D_801F04D8[];
 
 void func_801EF688(void);
+void func_801EF79C(void);
 void func_801F00C4(void);
 
 #endif
