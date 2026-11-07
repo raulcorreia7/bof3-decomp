@@ -88,6 +88,7 @@ MATCH void func_801EFB90(void) {
     }
 }
 
+/* hint: first differing instruction is the beqz at +0x2C (candidate one instruction short); retail reloads the g_Task pointer (lui/lw 0x1F800044) at +0xB8 before the header.step byte, and the candidate reuses it. A MATCH_FAKE_BARRIER before the step line makes it longer. */
 INCLUDE_ASM(func_801EFBD8);
 
 /* Blocker: the z halfword at +0x3E is loaded unsigned (lhu) and summed with the 0x14 cell; COORD_INT is s16, so it gives lh. Same blocker as func_801F0DB4. */
@@ -164,8 +165,10 @@ MATCH void func_801F014C(void) {
     }
 }
 
+/* hint: cached &g_BattleSelectedActor (s0) matches the prologue; first differing instruction at +0x2C (beqz): retail reloads g_Task (lui/lw 0x1F800044) for the header.step byte after the unk_20 store, and the candidate does not. */
 INCLUDE_ASM(func_801F0194);
 
+/* hint: blocker is the z halfword at +0x3E, read and stored unsigned (lhu/sh) by this function; COORD_INT is s16 (lh). Needs an unsigned view of pos.z. */
 INCLUDE_ASM(func_801F0248);
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
