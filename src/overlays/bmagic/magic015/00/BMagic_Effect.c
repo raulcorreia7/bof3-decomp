@@ -93,7 +93,19 @@ MATCH void func_801EFD7C(void) {
 
 INCLUDE_ASM(func_801EFDE8);
 
-INCLUDE_ASM(func_801EFE84);
+MATCH void func_801EFE84(void) {
+    PartyBattler* work = g_Task;
+    u8            timer;
+
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    work->scale.x += 0x2000;
+    work->scale.y -= 0x3000;
+    if (timer == 0) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFEFC(void) {
     func_801E5988();

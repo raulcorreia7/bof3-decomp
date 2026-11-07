@@ -153,6 +153,7 @@ MATCH void func_801F01D0(void) {
     }
 }
 
+/* blocker: unk_4C is an s32 in PartyBattler, but retail dereferences it as a battler (byte 0xB); first diff: lw s0 0x4C is typed s32 at 0x801F024C. */
 INCLUDE_ASM(func_801F0230);
 
 MATCH void func_801F02B4(void) {

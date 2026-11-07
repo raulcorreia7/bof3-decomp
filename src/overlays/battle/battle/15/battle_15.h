@@ -65,7 +65,7 @@
             if ((g_BattlePartyBattlers[battler].turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) { \
                 result = flagged[g_DragonForm];                                                                \
             } else {                                                                                           \
-                result = player[D_80145F09[battler * BATTLE_PARTY_STRIDE]];                                    \
+                result = player[g_BattlePartyBattlers[battler].chr.character_id];                              \
             }                                                                                                  \
         } else {                                                                                               \
             row    = (u32)battler - 3u;                                                                        \
@@ -504,7 +504,6 @@ extern u8                    D_8014551B;
 extern s32                   D_80145EC4;
 /* Byte-addressed player rows: the first byte of each 0x140-byte work row holds
  * the battler's stored character id. */
-extern u8                    D_80145F09[];
 /* Battler base halfwords, one u16 per 0x140-byte player row. */
 extern u16                   D_80145FAA[];
 extern u8                    D_80145FB2;

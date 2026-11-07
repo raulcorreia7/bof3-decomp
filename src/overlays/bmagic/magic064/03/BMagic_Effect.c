@@ -217,6 +217,7 @@ MATCH void func_801F0310(void) {
 
 INCLUDE_ASM(func_801F0364);
 
+/* blocker: the loop keeps the constants 1 and 6 in registers; first diff: addiu a3 against the table address at 0x801F03E0. */
 INCLUDE_ASM(func_801F03D8);
 
 MATCH void func_801F0448(void) {
