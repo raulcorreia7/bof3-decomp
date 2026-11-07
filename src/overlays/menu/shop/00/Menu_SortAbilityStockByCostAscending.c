@@ -4,13 +4,14 @@
  * so the symbol address rematerializes per access (no held base pointer).
  */
 
-MATCH void func_801E1D84(void) {
+/* func_801E1D84 */
+MATCH void Menu_SortAbilityStockByCostAscending(void) {
     u8* row;
     u8  i;
     u8  j;
     u8  cur;
 
-    func_801E1BCC();
+    Menu_PackAbilityStock();
     for (i = 0; i < 127; i++) {
         row = D_8014546C;
         for (j = 0; j < 127 - i; j++) {
