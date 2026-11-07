@@ -22,9 +22,9 @@ MATCH u32 Battle_ApplyDamage(u8 attacker, u8 target) {
                 g_BattlePartyBattlers[target].chr.hp -= damage;
             } else {
                 if (damage - g_BattlePartyBattlers[target].chr.hp < g_BattlePartyBattlers[target].chr.willpower) {
-                    if (!(g_BattlePartyBattlers[target].turn.action_flags.value & 1) &&
-                        !(g_BattlePartyBattlers[target].turn.action_flags.value & 2)) {
-                        g_BattlePartyBattlers[target].turn.damage_flags.value |= 4;
+                    if (!(g_BattlePartyBattlers[target].turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) &&
+                        !(g_BattlePartyBattlers[target].turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+                        g_BattlePartyBattlers[target].turn.damage_flags.value |= COMBATANT_FLAG_WILLPOWER_SURVIVED;
                     }
                 }
                 g_BattlePartyBattlers[target].chr.hp = 0;

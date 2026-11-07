@@ -18,7 +18,7 @@ MATCH void func_801E8558(void) {
     }
     stage->unk_48 = 0;
     work          = D_801EB4E0;
-    g_BattlePartyBattlers[work->slot].turn.damage_flags.value &= ~0x2000u;
+    g_BattlePartyBattlers[work->slot].turn.damage_flags.value &= ~COMBATANT_FLAG_FORM_EFFECT_PLAYING;
     g_BattlePartyBattlers[work->slot].turn.action_flags.value &= 0xFFFCFFF9u;
     func_801E5988();
 }

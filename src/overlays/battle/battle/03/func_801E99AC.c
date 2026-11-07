@@ -29,7 +29,7 @@ MATCH void func_801E99AC(void) {
     BATTLE_PANEL_TASK->y.half = y;
     func_801D8690((s16)BATTLE_PANEL_TASK->x.half, (s16)y, BATTLE_PANEL_TASK->cell_0A.slot);
     if (g_BattleSelectionLatch != 0) {
-        slot = g_BattleMessageTurn->command.target;
+        slot = g_BattleActorTurn->command.target;
         if ((slot & 0xC0) == 0) {
             if (slot == BATTLE_PANEL_TASK->cell_0A.slot) {
                 return;

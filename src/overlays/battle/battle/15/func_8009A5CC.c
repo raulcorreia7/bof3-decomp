@@ -7,9 +7,9 @@ MATCH void func_8009A5CC(void) {
     packed = D_80145FAA[(g_BattleMessageSlot[5] & BYTE_MASK) * 0xA0];
     flags  = Item_GetFlags(packed >> 8, packed & BYTE_MASK);
     if ((flags & 0x20) != 0) {
-        g_BattleMessageTurn->command.target = 0x40;
+        g_BattleActorTurn->command.target = BATTLE_TARGET_ENEMY_SIDE;
     } else {
-        g_BattleMessageTurn->command.target = 0x80;
+        g_BattleActorTurn->command.target = BATTLE_TARGET_PARTY_SIDE;
     }
     g_BattleUIState        = 1;
     g_InputRepeatButtons   = 0;

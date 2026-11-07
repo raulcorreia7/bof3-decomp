@@ -2,9 +2,9 @@
 
 MATCH void func_800991B4(void) {
     if (Item_GetFlags(D_8014857A, D_801C893C[D_8014857A][D_8014857C]) & 0x20u) {
-        g_BattleMessageTurn->command.target = 0x40;
+        g_BattleActorTurn->command.target = BATTLE_TARGET_ENEMY_SIDE;
     } else {
-        g_BattleMessageTurn->command.target = 0x80;
+        g_BattleActorTurn->command.target = BATTLE_TARGET_PARTY_SIDE;
     }
     g_BattleUIState        = 1;
     g_InputRepeatButtons   = 0;

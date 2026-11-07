@@ -25,6 +25,9 @@
  * named in the prototypes below. */
 /* Typed view of the scratchpad work area; each use reloads the cell. */
 #define BATTLE_WORK                    ((PartyBattler*)g_Task)
+
+/* The actor's target slot, signed, moved by one step before the wrap helper clamps it. */
+#define ACTOR_TARGET_STEP(delta)       ((s8)g_BattleActorTurn->command.target + (delta))
 #define BATTLE_ACTIVE_MESSAGE_SLOT_PTR (*(volatile void**)&g_BattleMessageSlot)
 #define BATTLE_ACTIVE_ROW              ((PartyBattler*)g_BattleMessageSlot)
 /* Fixed-address bases, tables, and rodata pointers. The raw literals live only
@@ -52,23 +55,23 @@
 /* Pick the battler's step rule row from the flagged, player and enemy tables.
  * Kept: as an inline the enemy table pointer loads into $a0 before the branch
  * (first instruction differs in both members). */
-#define BATTLE_BATTLER_STEP_RULE(flagged, player, enemy)                               \
-    do {                                                                               \
-        u32 row;                                                                       \
-        u8  battler;                                                                   \
-        u8  result;                                                                    \
-        battler = *(u8*)&g_BattleActiveBattler;                                        \
-        if (battler < 3u) {                                                            \
-            if ((g_BattlePartyBattlers[battler].turn.action_flags.value & 2u) != 0u) { \
-                result = flagged[g_DragonForm];                                        \
-            } else {                                                                   \
-                result = player[D_80145F09[battler * BATTLE_PARTY_STRIDE]];            \
-            }                                                                          \
-        } else {                                                                       \
-            row    = (u32)battler - 3u;                                                \
-            result = enemy[(u32)D_801EB710[row * BATTLE_ENEMY_STRIDE] * 0x88u];        \
-        }                                                                              \
-        return result;                                                                 \
+#define BATTLE_BATTLER_STEP_RULE(flagged, player, enemy)                                                       \
+    do {                                                                                                       \
+        u32 row;                                                                                               \
+        u8  battler;                                                                                           \
+        u8  result;                                                                                            \
+        battler = *(u8*)&g_BattleActiveBattler;                                                                \
+        if (battler < 3u) {                                                                                    \
+            if ((g_BattlePartyBattlers[battler].turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) { \
+                result = flagged[g_DragonForm];                                                                \
+            } else {                                                                                           \
+                result = player[D_80145F09[battler * BATTLE_PARTY_STRIDE]];                                    \
+            }                                                                                                  \
+        } else {                                                                                               \
+            row    = (u32)battler - 3u;                                                                        \
+            result = enemy[(u32)D_801EB710[row * BATTLE_ENEMY_STRIDE] * 0x88u];                                \
+        }                                                                                                      \
+        return result;                                                                                         \
     } while (0)
 
 /* The party formation g_PartyFormation (0x80144F58): func_800AAA74 applies its stat changes. */

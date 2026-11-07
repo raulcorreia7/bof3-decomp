@@ -15,13 +15,13 @@ MATCH void func_80098144(void) {
     }
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     if ((trigger & PADLright) != 0) {
-        g_BattleMessageTurn->command.target = Battle_FindSelectableSlotForward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)g_BattleMessageTurn->command.target + 1) & BYTE_MASK);
+        g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(
+            func_801DD7D8(g_BattleEnemyCount + 2, 3, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
     if ((trigger & PADLleft) != 0) {
-        g_BattleMessageTurn->command.target = Battle_FindSelectableSlotBackward(
-            func_801DD7D8(g_BattleEnemyCount + 2, 3, (s8)g_BattleMessageTurn->command.target - 1) & BYTE_MASK);
+        g_BattleActorTurn->command.target = Battle_FindSelectableSlotBackward(
+            func_801DD7D8(g_BattleEnemyCount + 2, 3, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

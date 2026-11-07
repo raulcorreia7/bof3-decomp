@@ -74,7 +74,7 @@ g_BattleEnemies = { addr = 0x801EB2E8, alias = true }
 s_BattlePartialPartyTargetWeights = { addr = 0x801EB394, source = "Target weights for a party with two active members." }
 s_BattleFullPartyTargetWeights = { addr = 0x801EB39C, source = "Target weights for a party with three active members." }
 s_BattleBattlerStepIds = { addr = 0x801EB494, source = "Step ids of the battlers." }
-g_BattleMessageTurn = { addr = 0x801EB4D8, source = "command turn of the battler whose message g_BattleMessageSlot shows; set with it in func_801D1D10, read for the target and action flags" }
+g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's BattleTurn, set with g_BattleMessageSlot in func_801D1D10 (emi/battle/battle/03 owns the cell); the target pickers write command.target, command.type and command.id, func_801D251C sets the defending damage flag" }
 g_BattleCurrentEnemy = { addr = 0x801EB4E8, size = 0x4, source = "Enemy whose battle script is running." }
 g_BattleEventSlots = { addr = 0x801EB4F0, source = "Active battle event slots." }
 D_801EB4F0 = { addr = 0x801EB4F0, alias = true, source = "Battle event slots." }
@@ -145,7 +145,7 @@ D_801485DD = { addr = 0x801485DD, size = 0x1, source = "Work byte, the selection
 D_80148656 = { addr = 0x80148656, size = 0x1, source = "Message slot byte, func_80096FBC stores the slot and func_80097574 reads it" }
 D_801C893C = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five item categories." }
 g_BattleEnemies = { addr = 0x801EB2E8, source = "The enemy battlers." }
-g_BattleMessageTurn = { addr = 0x801EB4D8, source = "command turn of the battler whose message g_BattleMessageSlot shows; set with it in func_801D1D10, read for the target and action flags" }
+g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's BattleTurn; the emi/battle/battle/15 target-selection handlers read it for command.target and the action and damage flags (set by emi/battle/battle/03)" }
 D_801EB6DA = { addr = 0x801EB6DA, size = 0x2, source = "Halfword cell written by func_800A9BD8 and read by func_8009F010" }
 D_801EB72C_rows = { addr = 0x801EB72C }
 g_BattleTemplateStats = { addr = 0x801EC364, source = "Template stat rows of the battlers." }

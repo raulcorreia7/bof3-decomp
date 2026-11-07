@@ -14,7 +14,7 @@ MATCH void func_8009A664(void) {
     }
     if ((INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) &&
         (Item_GetFlags(entry >> 8, entry & BYTE_MASK) & 0x80)) {
-        g_BattleMessageTurn->command.target ^= 0xC0;
+        g_BattleActorTurn->command.target ^= BATTLE_TARGET_BOTH_SIDES;
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

@@ -4,13 +4,14 @@ MATCH void func_80096E14(void) {
     u8 counter;
 
     SND_PlayCue(EMI_CUE_ID(1, 4));
-    g_BattleSelectionLatch            = 0;
-    g_BattleMessageTurn->command.type = BATTLE_COMMAND_ATTACK;
-    BATTLE_ACTIVE_ROW->header.mode    = 2;
-    counter                           = g_BattleCommandCount;
-    g_BattleStep                      = 1;
-    g_BattleSubStep                   = 0;
-    g_BattleUIStep                    = 0;
-    g_BattleUIState                   = 0;
-    g_BattleCommandCount              = counter + 1;
+    g_BattleSelectionLatch          = 0;
+    g_BattleActorTurn->command.type = BATTLE_COMMAND_ATTACK;
+
+    BATTLE_ACTIVE_ROW->header.mode = 2;
+    counter                        = g_BattleCommandCount;
+    g_BattleStep                   = 1;
+    g_BattleSubStep                = 0;
+    g_BattleUIStep                 = 0;
+    g_BattleUIState                = 0;
+    g_BattleCommandCount           = counter + 1;
 }

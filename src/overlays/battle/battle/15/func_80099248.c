@@ -16,7 +16,7 @@ MATCH void func_80099248(void) {
         return;
     }
     if ((Item_GetFlags(D_8014857A, D_801C893C[D_8014857A][D_8014857C]) & 0x80u) != 0u) {
-        g_BattleMessageTurn->command.target ^= 0xC0u;
+        g_BattleActorTurn->command.target ^= BATTLE_TARGET_BOTH_SIDES;
         SND_PlayCue(EMI_CUE_ID(1, 1));
     }
 }

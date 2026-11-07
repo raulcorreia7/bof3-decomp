@@ -113,8 +113,8 @@ MATCH void func_80098450(void) {
         return;
     }
     if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
-        value                                   = D_801C893C[D_8014857A][D_8014857C] + (D_8014857A << 8);
-        *(u16*)((char*)g_BattleMessageTurn + 2) = value;
+        value                                 = D_801C893C[D_8014857A][D_8014857C] + (D_8014857A << 8);
+        *(u16*)((char*)g_BattleActorTurn + 2) = value;
         if ((func_801AF494(D_80148578, 0, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {
             SND_PlayCue(EMI_CUE_ID(1, 7));
             return;

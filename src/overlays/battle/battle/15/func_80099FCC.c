@@ -7,13 +7,13 @@ MATCH void func_80099FCC(void) {
     packed = D_80145FAA[(g_BattleMessageSlot[5] & BYTE_MASK) * 0xA0];
     flags  = Item_GetFlags(packed >> 8, packed & BYTE_MASK);
     if ((flags & 0x20) != 0) {
-        g_BattleMessageTurn->command.target = Battle_FindSelectableSlotForward(3);
-        g_BattleUIState                     = 1;
+        g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(3);
+        g_BattleUIState                   = 1;
     } else {
         if (func_8009AF7C() != 0u) {
-            g_BattleMessageTurn->command.target = 0u;
+            g_BattleActorTurn->command.target = 0u;
         } else {
-            g_BattleMessageTurn->command.target = Battle_FindSelectableSlotForward(0);
+            g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(0);
         }
         g_BattleUIState = 2;
     }

@@ -5,14 +5,14 @@ MATCH void func_80098B44(void) {
 
     flags = Item_GetFlags(D_8014857A, D_801C893C[D_8014857A][D_8014857C]);
     if ((flags & 0x20u) != 0u) {
-        g_BattleMessageTurn->command.target = Battle_FindSelectableSlotForward(3);
-        g_BattleUIState                     = 1u;
+        g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(3);
+        g_BattleUIState                   = 1u;
     } else if (func_8009AF7C() != 0u) {
-        g_BattleMessageTurn->command.target = 0u;
-        g_BattleUIState                     = 2u;
+        g_BattleActorTurn->command.target = 0u;
+        g_BattleUIState                   = 2u;
     } else {
-        g_BattleMessageTurn->command.target = Battle_FindSelectableSlotForward(0);
-        g_BattleUIState                     = 2u;
+        g_BattleActorTurn->command.target = Battle_FindSelectableSlotForward(0);
+        g_BattleUIState                   = 2u;
     }
     g_InputRepeatButtons   = 0;
     g_BattleSelectionLatch = 1u;

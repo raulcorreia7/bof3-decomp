@@ -25,7 +25,7 @@ MATCH void func_800A68A4(void) {
     flags      = g_BattlePartyBattlers[index].turn.action_flags.volatile_value;
     D_800B6F58 = 0;
     D_800B6F5C = 0;
-    g_BattlePartyBattlers[index].turn.action_flags.volatile_value = flags | 2;
+    g_BattlePartyBattlers[index].turn.action_flags.volatile_value = flags | COMBATANT_FLAG_DRAGON_FORM;
     slot                                                          = func_800A6C2C();
     if (slot != GAME_NONE) {
         func_800A7C14(slot);
