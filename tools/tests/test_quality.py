@@ -171,3 +171,17 @@ def test_a_byte_view_turned_into_an_unk_member_keeps_the_names_count() -> None:
     old = {"src/a/x.c": "MATCH void F(void) {\n    ((u8*)panel)[0x0A] = 1;\n}\n"}
     new = {"src/a/x.c": "MATCH void F(void) {\n    panel->unk_0A = 1;\n}\n"}
     assert quality.ratchet(old, new, {"src/a/x.c"}) == []
+
+
+def test_subsystem_table_groups_files_by_path_prefix() -> None:
+    rows = {
+        "src/engine/slus/a.c": row(BODY.format(name="func_801EEC10")),
+        "src/overlays/area/area001/00/b.c": row(BODY.format(name="Named")),
+    }
+    lines = quality.markdown_table(rows).splitlines()
+    assert [line.split("|")[1].strip() for line in lines[2:]] == [
+        "Executable",
+        "Area",
+        "Total",
+    ]
+    assert lines[-1].split("|")[2].strip() == "2"
