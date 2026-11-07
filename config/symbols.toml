@@ -187,6 +187,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 BMagic_AllocEffect = { addr = 0x801F09C4, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic003 (Super Combo)." }
 Actor_Clear = { addr = 0x801F0A28, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0B00, source = "Handlers of magic003 (Super Combo), run by header.mode (byte 0x01)." }
+D_801F0B38 = { addr = 0x801F0B38, source = "Effect slot table of the magic003 effect, scanned by BMagic_AllocEffect and cleared by a loop over its 0x78-byte records." }
 
 ["emi/bmagic/magic004/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -194,6 +195,7 @@ Effect_DrawScreenFade = { addr = 0x801EF6E0, type = "func", source = "Draws the 
 Effect_SetDuration = { addr = 0x801EF9A0, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic004 (ThundrStrike)." }
 Effect_LowerTickerStepOnReady = { addr = 0x801EFA70, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) once the script stream reports ready (func_8014DAEC) in magic004 (ThundrStrike)." }
 Effect_StepWhileTickUnderTwo = { addr = 0x801EFBA8, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 2 in magic004 (ThundrStrike)." }
+D_801EFE40 = { addr = 0x801EFE40, source = "Sound cue id per effect index of the magic004 effect, read by func_801EF158 with the effect's unk_04 index." }
 g_BMagicEffectModes = { addr = 0x801EFE58, source = "Handlers of magic004 (ThundrStrike), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic006/03"]
@@ -594,6 +596,7 @@ CardAccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes t
 Effect_TickOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of g_BattleEffectBattler and clears the effect in magic081 (RottenBreath)." }
 BMagic_AllocEffect = { addr = 0x801EFA20, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all effect slots are in use in magic081 (RottenBreath)." }
 g_BMagicEffectModes = { addr = 0x801EFA84, source = "Handlers of magic081 (RottenBreath), run by header.mode (byte 0x01)." }
+D_801EFA8C = { addr = 0x801EFA8C, source = "Effect slot table of the magic081 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic082/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -700,6 +703,7 @@ Effect_CountDownTickerAndStep = { addr = 0x801EF348, type = "func", source = "Co
 Effect_CountDownTimerStep = { addr = 0x801EF394, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.step (byte 0x02) at zero in magic096 (Blizzard)." }
 Effect_CountDownAndFinish = { addr = 0x801EF3E0, type = "func", source = "Counts the effect counter (byte 0x0A) down; at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic096 (Blizzard)." }
 Effect_SetActorMatrix = { addr = 0x801EFA8C, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic096 (Blizzard)." }
+D_801F0488 = { addr = 0x801F0488, source = "Per-index byte of the magic096 effect, compared with the effect's unk_09 timer in func_801EF2CC and indexed by unk_04." }
 g_BMagicEffectModes = { addr = 0x801F04A8, source = "Handlers of magic096 (Blizzard), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic097/03"]
@@ -918,6 +922,7 @@ Effect_CountUpTimerByTwoAndStep = { addr = 0x801EF38C, type = "func", source = "
 BMagic_AllocEffect = { addr = 0x801F0500, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 64 slots are in use in magic129 (Holocaust)." }
 Actor_Clear = { addr = 0x801F0564, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F05B4, source = "Handlers of magic129 (Holocaust), run by header.mode (byte 0x01)." }
+D_801F05D8 = { addr = 0x801F05D8, source = "Effect slot table of the magic129 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic130/03"]
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
