@@ -67,5 +67,6 @@ NON_MATCHING void func_801D1A90(void) {
     }
 }
 #else
+/* first difference +0x4: retail keeps the panel pointer in v1 and stores the active flag after the frame setup. */
 INCLUDE_ASM(func_801D1A90);
 #endif
