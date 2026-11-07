@@ -12,7 +12,7 @@ MATCH void func_80096FBC(void) {
     flags = g_BattleActorTurn->action_flags.value;
     if (flags & COMBATANT_FLAG_DRAGON_FORM) {
         if (!(flags & COMBATANT_FLAG_DRAGON_FORM_CONTROLLED)) {
-            D_8014857B = 2u;
+            g_MenuPanelTasks[16].unk_0B = 2u;
         }
     }
     stage           = g_BattleUIStep;
