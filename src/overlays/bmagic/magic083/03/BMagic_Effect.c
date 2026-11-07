@@ -76,6 +76,7 @@ INCLUDE_ASM(func_801EFEDC);
 
 INCLUDE_ASM(func_801F0010);
 
+/* blocker: pos halfword load order; first diff: +0x6C lhu a0,62(v0) hoisted above the timer store (retail) against after it (candidate). */
 INCLUDE_ASM(func_801F0104);
 
 MATCH void func_801F01F8(void) {
