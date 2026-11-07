@@ -1,14 +1,13 @@
-/* Dispatch the effect step by header.mode, then while the effect is flagged
- * move the actor's screen height and draw it, and release the effect. One
- * definition shared by the bmagic overlays that hold the three-entry table at
+/* Draws the effect's actor while the effect is flagged; the step handler for
+ * header.mode runs first. Shared by the bmagic overlays that hold the table at
  * D_801EEC04; every change here must verify every member.
  */
-/* func_801EEC10 (magic055, magic091) */
+/* Effect_DrawActor (magic055, magic091) */
 void func_801EF7B0(void);
 void Effect_SetActorMatrix(void);
 void func_801EF9E4(void);
 
-MATCH void func_801EEC10(void) {
+MATCH void Effect_DrawActor(void) {
     BattleHandlerTable3 handlers = D_801EEC04;
 
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.mode);

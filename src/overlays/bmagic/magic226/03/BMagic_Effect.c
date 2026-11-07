@@ -98,7 +98,22 @@ INCLUDE_ASM(func_801F055C);
 /* blocker: source pointer register; first diff: lui a2 (retail) against lui a3 (candidate). */
 INCLUDE_ASM(func_801F061C);
 
-INCLUDE_ASM(func_801F068C);
+MATCH void func_801F068C(void) {
+    PartyBattler* battler;
+    PartyBattler* task;
+
+    g_Task->unk_09 += 1;
+    g_Task->timer -= 2;
+    battler           = g_BattleEffectBattler;
+    task              = g_Task;
+    task->pos.x.fixed = battler->pos.x.fixed;
+    task->pos.y.fixed = battler->pos.y.fixed;
+    task->pos.z.fixed -= task->unk_14;
+    if (task->timer == 0) {
+        battler->unk_04 -= 1;
+        Actor_Clear();
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
