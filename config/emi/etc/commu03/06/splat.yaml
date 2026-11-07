@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, D_801D0C00]
-      - [0x4, bin, D_801D0C04]
+      - [0x4, .data, D_801D0C04]
       - [0x44, c, 44]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
@@ -17,5 +17,5 @@ segments:
     vram: 0x801D18C8
     align: 4
     subsegments:
-      - [0xCC8, bin, g_Commu03States]
+      - [0xCC8, .data, g_Commu03States]
   - [0xD4C]
