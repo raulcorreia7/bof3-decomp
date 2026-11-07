@@ -12,7 +12,7 @@ MATCH u8 func_801D64C4(u8 battler_index) {
         }
     } else {
         if (g_BattleActionLock != 0u) {
-            flags = D_801EB734[battler_index - 3u][0];
+            flags = ENEMY_COMBATANT(battler_index).turn.action_flags.volatile_value;
             if ((flags & 0x10u) == 0u) {
                 return 1u;
             }

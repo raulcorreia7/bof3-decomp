@@ -299,7 +299,6 @@ extern u32                D_80145EDC; /* 0x80145EDC */
 extern u8                 D_80145F00; /* 0x80145F00 */
 extern u8                 D_80145F09; /* 0x80145F09 */
 extern u8                 D_80145FA8; /* 0x80145FA8 */
-extern u8                 D_80145FAC;
 extern u8                 D_80145FB4[];
 extern u16                D_80145FB8; /* 0x80145FB8 */
 extern u8                 D_80145FD1;
@@ -910,13 +909,16 @@ s32     Game_RequestLeaderSwitch(void);
 s32     func_801B5758(void);
 s32     func_801B5884(void);
 s32     func_801B5910(void);
-s8      func_801B5AE4(s32 route_index, s32 route_flags);
+/* func_801B5AE4 */
+s8      Game_FindRockAhead(s32 route_index, s32 route_flags);
 void    func_801B5BDC(u8 route_index);
 void*   func_801B5C54(void);
 /* func_801B5EBC */
 s32     Game_RequestPersonalAction(void);
-bool    func_801B5F68(s32 selection_kind);
-s32     func_801B6044(void);
+/* func_801B5F68 */
+bool    Game_RequestRockKick(s32 walk_speed);
+/* func_801B6044 */
+s32     Game_RequestGarrPush(void);
 void    func_801B60DC(s32 actor_index);
 s32     func_801B6258(void);
 void    func_801B6418(void);

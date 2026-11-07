@@ -29,10 +29,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     texture_window->pos.y.raw = 240;
     texture_window->pos.x.raw = 0;
     setWH(texture_window, 16, 16);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, texture_window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1, 0xC);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -62,10 +59,8 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->v2 -= 3;
     primitive->clut = GetClut(clut_x, 481);
     width_plus_1    = width + 1;
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    primitive->tpage = 0xF;
+
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, 0x28);
     half_width = (s16)((((u16)width_plus_1) - 4) >> 1);
     half_inner = half_width;
@@ -78,10 +73,8 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setUV4(primitive, 0, 0, (u8)half_inner, 0, 0, bottom_v, (u8)half_inner, bottom_v);
     setRGB0(primitive, 0xAC, 0xAC, 0xAC);
     primitive->clut = GetClut(clut_x, 481);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    primitive->tpage = 0xF;
+
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, 0x28);
     odd_width_u16 = (u16)odd_width;
     primitive     = (POLY_FT4*)g_GfxPrimCursor;
@@ -100,10 +93,8 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
            bottom_v);
     setRGB0(primitive, 0xAC, 0xAC, 0xAC);
     primitive->clut = GetClut(clut_x, 481);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    primitive->tpage = 0xF;
+
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, 0x28);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -132,20 +123,15 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->v2--;
     primitive->v3 -= 3;
     primitive->clut = GetClut(clut_x, 481);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    primitive->tpage = 0xF;
+
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, 0x28);
     texture_window            = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor           = (u8*)(texture_window + 1);
     texture_window->pos.x.raw = 0;
     texture_window->pos.y.raw = 0;
     setWH(texture_window, 256, 256);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, texture_window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1, 0xC);
     func_801AEBA0((s16)(x + 2), (s16)(y + 2), (s16)(width - 4), (s16)(height - 4), 0);
 }

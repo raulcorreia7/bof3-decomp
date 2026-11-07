@@ -34,7 +34,7 @@ INCLUDE_ASM(func_801EEFA8);
 MATCH void func_801EF070(void) {
     PartyBattler* src;
 
-    src                 = (PartyBattler*)D_801EB4E0;
+    src                 = (PartyBattler*)g_BattleEffectBattler;
     g_Task->pos.x.fixed = src->pos.x.fixed;
     g_Task->pos.y.fixed = src->pos.y.fixed;
     g_Task->pos.z       = src->pos.z;
@@ -82,7 +82,7 @@ MATCH void func_801EF44C(void) {
     if (!(timer_next & BYTE_MASK)) {
         GFX_FreePaletteFadeTarget(g_BattleSelectedActor);
         func_800AF814(g_BattleTargetSelector);
-        D_801EB4E0->param.unk_0B -= 1;
+        g_BattleEffectBattler->param.unk_0B -= 1;
         func_801E5988();
     }
 }

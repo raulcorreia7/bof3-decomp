@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH s8 func_801B5AE4(s32 route_index, s32 route_flags) {
+/* func_801B5AE4 */
+MATCH s8 Game_FindRockAhead(s32 route_index, s32 route_flags) {
     s32 index;
     s32 route;
     s32 pos_x;

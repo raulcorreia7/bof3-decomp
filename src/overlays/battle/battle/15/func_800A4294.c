@@ -12,7 +12,7 @@ MATCH s16 func_800A4294(s32 input_kind) {
     if (mode < 3u) {
         base = D_80145F18[mode][0];
     } else {
-        base = D_801EB6C4[mode - 3u][0];
+        base = ENEMY_COMBATANT(mode).hp;
     }
     kind_mask    = D_801CA71C[g_BattleActionId].mask;
     mod          = 100;

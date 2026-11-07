@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-extern u8 D_8014854C; /* local: u8 read; a sibling copy is s8 */
-
 MATCH void func_801DB510(void) {
     g_MenuPanelTasks[12].active = 0;
     D_80148504.active           = 0;

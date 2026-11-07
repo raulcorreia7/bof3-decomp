@@ -74,7 +74,7 @@
     timer            = (WORK)->timer_05 - 1;                                \
     (WORK)->timer_05 = timer;                                               \
     if (timer == 0) {                                                       \
-        D_801EB4E0->param.unk_0B -= 1;                                      \
+        g_BattleEffectBattler->param.unk_0B -= 1;                           \
         CLEAR();                                                            \
     }
 

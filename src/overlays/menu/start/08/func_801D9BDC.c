@@ -1,13 +1,5 @@
 #include "start_08.h"
 
-typedef struct Start08Rotation {
-    u16 unk_00;
-    u16 unk_02;
-    s32 unk_04;
-} Start08Rotation;
-
-extern Start08Rotation D_801EC4D0[];
-
 /* nonmatching unmeasured: tried the first draft cleaned to compiling C; best score 82.70%. resume: a lever or header
  * fix that closes the first mismatch. */
 #ifdef NON_MATCHING

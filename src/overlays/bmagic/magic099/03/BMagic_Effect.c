@@ -53,9 +53,9 @@ MATCH void func_801EF2EC(void) {
     g_Task->param.unk_0B = RANDOM_MASK(0xF);
     g_Task->unk_09       = 0;
     g_Task->timer        = 0;
-    g_Task->pos.x.fixed  = D_801EB4E0->pos.x.fixed;
-    g_Task->pos.y.fixed  = D_801EB4E0->pos.y.fixed;
-    g_Task->pos.z.fixed  = D_801EB4E0->pos.z.fixed;
+    g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
     g_Task->header.step += 1;
 }
 

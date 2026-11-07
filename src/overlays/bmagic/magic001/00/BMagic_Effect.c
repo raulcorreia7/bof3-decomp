@@ -22,7 +22,7 @@ INCLUDE_ASM(func_801EF01C);
 
 MATCH void func_801EF0E8(void) {
     func_801E257C(g_BattleActiveBattler, 0xAU);
-    g_Task->unk_27 = D_801EB4E0->unk_27;
+    g_Task->unk_27 = g_BattleEffectBattler->unk_27;
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
     g_Task->header.step += 1;
@@ -158,7 +158,7 @@ MATCH void func_801EFAB8(void) {
 INCLUDE_ASM(func_801EFAFC);
 
 MATCH void func_801EFBEC(void) {
-    g_Task->unk_27 = D_801EB4E0->unk_27;
+    g_Task->unk_27 = g_BattleEffectBattler->unk_27;
     g_Task->unk_14 = 0x100;
     g_Task->unk_20 = -0x10;
     g_Task->unk_09 = 0;
@@ -188,8 +188,8 @@ MATCH void func_801EFD28(void) {
         SND_QueueSelectionFx(0x203);
         g_Task->unk_14 = 0x40;
         g_Task->unk_20 = -8;
-        g_Task->unk_0C =
-            ratan2(D_801EB4E0->pos.x.fixed - g_Task->pos.x.fixed, D_801EB4E0->pos.y.fixed - g_Task->pos.y.fixed);
+        g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed,
+                                g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
         /* FAKE: Without the barrier, the scheduler sinks the angle store into the call's delay slot. */
         MATCH_FAKE_BARRIER();
         func_800A9820(g_BattleTargetSelector);

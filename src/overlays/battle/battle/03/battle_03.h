@@ -448,7 +448,6 @@ extern u8           D_801EB6BC[];
 extern u8           D_801EB6D0[];
 extern s8           D_801EB712[];
 extern u8           D_801EB730[];
-extern volatile u32 D_801EB734[][70];
 extern u8           D_801EBF04;
 extern s32          D_801EBFA0;
 extern BattleEffect* volatile D_801EC2E0;
@@ -963,7 +962,7 @@ void               func_801EEEC8(void);
 static inline void BattleDrainWorkCounter(void) {
     PartyBattler* work;
 
-    work = D_801EB4E0;
+    work = g_BattleEffectBattler;
     if (work->scale.x != 0) {
         work->scale.x -= 0x2000;
     } else {

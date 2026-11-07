@@ -1,14 +1,5 @@
 #include "start_08.h"
 
-/* One 8-byte label row: glyph count, signed x nudge (read through (s8)), then
- * the text. */
-typedef struct StartLabel {
-    u8 length;
-    u8 offset_x;
-    u8 text[6];
-} StartLabel;
-
-extern StartLabel D_801ECD24[];
 /* Per-group first label row and label count. */
 
 MATCH void func_801E2C00(u16 x, s32 y, s32 group, s32 selected, s32 mode) {
