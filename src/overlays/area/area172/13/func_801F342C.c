@@ -13,14 +13,14 @@ MATCH void func_801F342C(void) {
      * in one register. */
     cell_1  = g_Task;
     scratch = (Actor*)cell_1;
-    scratch->unk_09--;
-    if (scratch->unk_09 != 0) {
+    scratch->timer--;
+    if (scratch->timer != 0) {
         return;
     }
     cell_2          = g_Task;
     scratch         = (Actor*)cell_2;
     scratch->unk_32 = 0x140;
-    scratch->unk_09 = 0x10;
+    scratch->timer  = 0x10;
     check           = (Actor*)g_Task;
     scratch->vx     = 0x100;
     scratch->vy     = 0x100;

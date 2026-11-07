@@ -10,7 +10,7 @@ MATCH void func_801B8394(void) {
         g_Task->pos.y.fixed -= g_FacingOffsets[g_Task->direction_08].y * 0x40;
         g_Task->unk_0A = 5;
     }
-    g_Task->unk_09                    = 0;
+    g_Task->timer                     = 0;
     COORD_INT(g_Task->pos.z)          = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     g_GameState->counter_11C.u8_value = 2;
     Actor_RequestScript(g_Task->direction_08 + 8);

@@ -3,8 +3,8 @@
 MATCH void func_801F3024(void) {
     u16 position;
 
-    position       = g_Task->unk_30 + 0x20;
-    g_Task->unk_30 = position;
+    position         = g_Task->screen_y + 0x20;
+    g_Task->screen_y = position;
     if ((s16)position >= 0) {
         func_801F2E08();
         if (g_Task->header.step == 2) {

@@ -25,7 +25,7 @@ MATCH void Char_StartNearestFacingTurn(void) {
             g_Task->param.turn_step = func_801B2D00(FACING_RIGHT);
             g_Task->unk_03          = FACING_RIGHT;
         }
-        g_Task->unk_09 = 2;
+        g_Task->timer = 2;
         g_Task->header.step++;
     }
 }

@@ -15,6 +15,6 @@ MATCH bool func_801C4EC4(void) {
     } else {
         Actor_RequestScript((count + 1));
     }
-    g_Task->unk_09 = 1;
+    g_Task->timer = 1;
     return false;
 }

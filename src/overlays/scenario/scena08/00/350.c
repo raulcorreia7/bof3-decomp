@@ -92,11 +92,11 @@ MATCH void func_801F7BA8(void) {
     u8     timer;
 
     work  = g_Task;
-    timer = work->unk_09 - 1;
+    timer = work->timer - 1;
     work->pos.y.fixed += TO_COORD(1);
-    work->unk_09 = timer;
+    work->timer = timer;
     if (timer == 0) {
-        g_Task->unk_09      = 0x10;
+        g_Task->timer       = 0x10;
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -108,11 +108,11 @@ MATCH void func_801F7C98(void) {
     u8     timer;
 
     work  = g_Task;
-    timer = work->unk_09 - 1;
+    timer = work->timer - 1;
     work->pos.y.fixed -= TO_COORD(1);
-    work->unk_09 = timer;
+    work->timer = timer;
     if (timer == 0) {
-        g_Task->unk_09      = 0x80;
+        g_Task->timer       = 0x80;
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -120,10 +120,10 @@ MATCH void func_801F7C98(void) {
 MATCH void func_801F7CF8(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
     if (timer == 0) {
-        g_Task->unk_09      = 8;
+        g_Task->timer       = 8;
         g_Task->header.step = g_Task->header.step + 1;
     }
 }
@@ -132,8 +132,8 @@ MATCH void func_801F7D54(void) {
     u8 timer;
 
     D_800E4C1E -= 0x18;
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
     if (timer == 0) {
         Actor_Clear();
     }

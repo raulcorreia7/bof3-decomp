@@ -9,9 +9,9 @@ MATCH void Area_StepHudBannerDown(void) {
     Actor* work;
     s16    origin_y;
 
-    work         = g_Task;
-    origin_y     = work->unk_30 + 0xA;
-    work->unk_30 = origin_y;
+    work           = g_Task;
+    origin_y       = work->screen_y + 0xA;
+    work->screen_y = origin_y;
     if (origin_y >= 240) {
         work->unk_03 = 0;
     }
@@ -21,5 +21,5 @@ MATCH void Area_StepHudBannerDown(void) {
         work->unk_03 = 1;
     }
 
-    Area_DrawHudBanner(0x5C, g_Task->unk_30);
+    Area_DrawHudBanner(0x5C, g_Task->screen_y);
 }

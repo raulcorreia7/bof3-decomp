@@ -3,8 +3,8 @@
 MATCH void func_801F35B8(void) {
     u16 screen_y;
 
-    screen_y       = g_Task->unk_30 + 16;
-    g_Task->unk_30 = screen_y;
+    screen_y         = g_Task->screen_y + 16;
+    g_Task->screen_y = screen_y;
     if ((screen_y << 0x10) >= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlayCue(EMI_CUE_ID(2, 1));

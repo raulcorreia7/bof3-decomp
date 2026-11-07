@@ -9,7 +9,7 @@ MATCH void func_801F431C(void) {
         slot               = &g_ActorSlots[index];
         slot->header.flags = 1;
         slot->type         = 0x39;
-        slot->unk_2E       = g_Task->unk_2E;
-        slot->unk_30       = g_Task->unk_30;
+        slot->unk_2E       = g_Task->screen_x;
+        slot->unk_30       = g_Task->screen_y;
     }
 }

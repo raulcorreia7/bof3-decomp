@@ -14,7 +14,7 @@ MATCH void func_801A1384(void* entity) {
     savedRoute = g_Task->direction_08;
     savedState = LOHU(rec[0x7E]);
     savedFlag  = rec[0x76];
-    if (g_Task->unk_09 != 0) {
+    if (g_Task->timer != 0) {
         goto only_update; /* the pending entity update runs alone */
     }
     mode = rec[0x78];
@@ -45,7 +45,7 @@ MATCH void func_801A1384(void* entity) {
                     rec[0x74] |= ACTOR_FLAG_MOVING | ACTOR_FLAG_SCRIPT_REQUEST;
                     spad            = g_Task;
                     LOHU(rec[0x7E]) = savedState;
-                    spad->unk_09    = 0;
+                    spad->timer     = 0;
                     return;
                 }
             } else if ((g_Task->unk_06 == 0x0A) && ((LOW(rec[0x74]) & 0x88) == 8)) {
@@ -68,8 +68,8 @@ MATCH void func_801A1384(void* entity) {
     } else {
         if (((g_Task->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
             g_Task->direction_08 &= 7;
-            rec[0x74]      = rec[0x74] | ACTOR_FLAG_MOVING | ACTOR_FLAG_SCRIPT_REQUEST;
-            g_Task->unk_09 = 0;
+            rec[0x74]     = rec[0x74] | ACTOR_FLAG_MOVING | ACTOR_FLAG_SCRIPT_REQUEST;
+            g_Task->timer = 0;
             return;
         }
         g_Task->unk_0A = (0x10 / rate);

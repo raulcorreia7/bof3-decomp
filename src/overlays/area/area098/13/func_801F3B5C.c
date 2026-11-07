@@ -10,6 +10,6 @@ MATCH void func_801F3B5C(void) {
     }
     func_801F5940();
     Area_StepSpawnSlots();
-    g_Task->unk_09 = 0x20;
+    g_Task->timer = 0x20;
     g_Task->header.mode += 1;
 }
