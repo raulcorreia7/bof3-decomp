@@ -1853,7 +1853,7 @@ Menu_DrawHeaderBar = { addr = 0x801D1E54, type = "func", source = "four callers 
 Menu_DrawPortrait = { addr = 0x801D23A0, type = "func", source = "draws a 40x48 portrait from the panel atlas record D_801D4058[sprite_id]" }
 Menu_DrawPanelIcon = { addr = 0x801D2520, type = "func", source = "draws one MenuIconPrim from uv/clut" }
 Master_DispatchMenu = { addr = 0x801D25D8, type = "func", source = "dispatches g_MasterMenuFuncs by the panel step byte D_801D4285, etc/game/00 runs it each frame" }
-Master_ApplyMaster = { addr = 0x801D3ED0, type = "func", source = "writes the master value D_801D4270[D_801448ED] into the party record at D_80146889 + slot * 0x98 and closes the panel" }
+Master_ApplyMaster = { addr = 0x801D3ED0, type = "func", source = "writes the actor mode g_MasterActorModes[g_SceneEventSelection] into the header of g_Actors[g_ScriptVars[3]] and closes the panel" }
 g_MenuLabelPower = { addr = 0x801D4038, source = "retail text Pwr, drawn beside the power stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelDefense = { addr = 0x801D403C, source = "retail text Def, drawn beside the defense stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
 g_MenuLabelIntellect = { addr = 0x801D4040, source = "retail text Int, drawn beside the intellect stat by Menu_DrawStatPanel (twin rule, decomp/layout#shared-bodies)" }
@@ -1867,6 +1867,7 @@ g_MasterStep2Funcs = { addr = 0x801D4204, source = "sub-handler table dispatched
 g_MasterStep3Funcs = { addr = 0x801D421C, source = "sub-handler table dispatched by func_801D2BE8, entry 3 of g_MasterMenuFuncs" }
 g_MasterStep4Funcs = { addr = 0x801D4240, source = "sub-handler table dispatched by func_801D32D4, entry 4 of g_MasterMenuFuncs" }
 g_MasterStep5Funcs = { addr = 0x801D4264, source = "sub-handler table dispatched by func_801D3924, entry 5 of g_MasterMenuFuncs" }
+g_MasterActorModes = { addr = 0x801D4270, type = "u8", size = 0x14, source = "the actor mode Master_ApplyMaster writes for each MasterId; GAME_NONE leaves it" }
 g_MasterBannerLock = { addr = 0x801D4284, source = "set when the info banner owns the panel" }
 g_MasterStep = { addr = 0x801D4285, source = "the Masters menu step (SisyouApplyMaster, retail text Master)" }
 g_MasterSubStep = { addr = 0x801D4286, source = "the Masters menu sub-step the handlers advance (SisyouApplyMaster)" }
