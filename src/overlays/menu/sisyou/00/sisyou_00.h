@@ -12,21 +12,20 @@
 
 /* The main-executable text bank at 0x80010000: the message id indexes its u16
  * record offsets and func_8014F800 draws the record. */
-#define MASTER_MENU_TEXT_BANK         0x80010000
+#define MASTER_MENU_TEXT_BANK        0x80010000
 
-#define MASTER_MENU_HEAD_SIZE         0x18
-#define MASTER_MENU_FMT_A_SIZE        4
-#define MASTER_MENU_FMT_BC_SIZE       8
-#define MASTER_MENU_ATLAS_RECORD_SIZE 4
-#define MASTER_MENU_ATLAS_COUNT       12
-#define MASTER_SKILL_SIZE             2
-#define MASTER_MENU_SPRITE_BANK_SIZE  0x90
-#define MASTER_MENU_SPRITE_090_SIZE   0x2C
-#define MASTER_MENU_SPRITE_0BC_SIZE   0x0C
-#define MASTER_MENU_SPRITE_0C8_SIZE   0x18
-#define MASTER_MENU_LABEL_SIZE        4
-#define MASTER_MENU_LABEL_LONG_SIZE   8
-#define MASTER_MENU_MESSAGE_ID_COUNT  18
+#define MASTER_MENU_HEAD_SIZE        0x18
+#define MASTER_MENU_FMT_A_SIZE       4
+#define MASTER_MENU_FMT_BC_SIZE      8
+#define MASTER_MENU_ATLAS_COUNT      12
+#define MASTER_SKILL_SIZE            2
+#define MASTER_MENU_SPRITE_BANK_SIZE 0x90
+#define MASTER_MENU_SPRITE_090_SIZE  0x2C
+#define MASTER_MENU_SPRITE_0BC_SIZE  0x0C
+#define MASTER_MENU_SPRITE_0C8_SIZE  0x18
+#define MASTER_MENU_LABEL_SIZE       4
+#define MASTER_MENU_LABEL_LONG_SIZE  8
+#define MASTER_MENU_MESSAGE_ID_COUNT 18
 
 /* The messages of one master, as offsets from the master's entry of g_MasterMessageIds. */
 enum MasterMessage {
@@ -73,7 +72,7 @@ enum MasterMessage {
 
 /* The payload prologue at 0x801D0C00: the type-0 EMI loader compares the
  * first word with the archive TOC's cached first word; the rest are the three
- * sprintf formats the shop panels pass as D_801D0C04/D_801D0C08/D_801D0C10. */
+ * sprintf formats the shop panels pass as D_801D0C04/g_MenuCurrentValueFormat/g_MenuMaxValueFormat. */
 typedef struct MasterMenuHead {
     u32  id;                             /* 0x00; TOC cached first word, 0x1F */
     char fmt_a[MASTER_MENU_FMT_A_SIZE];  /* 0x04 "%3d" */
@@ -82,18 +81,6 @@ typedef struct MasterMenuHead {
 } MasterMenuHead;
 
 ASSERT_SIZE(MasterMenuHead, MASTER_MENU_HEAD_SIZE);
-
-/* Panel atlas record: u, v, clut x, clut y (Menu_DrawPortrait, 4-byte stride). */
-typedef struct MenuPortraitSprite {
-    u8 u;
-    u8 v;
-    u8 clut_x;
-    u8 clut_y;
-} MenuPortraitSprite;
-
-ASSERT_SIZE(MenuPortraitSprite, MASTER_MENU_ATLAS_RECORD_SIZE);
-ASSERT_OFFSET(MenuPortraitSprite, clut_x, 0x02);
-ASSERT_OFFSET(MenuPortraitSprite, clut_y, 0x03);
 
 /* Master skill record: one level and the ability it teaches. */
 typedef struct MasterSkill {
@@ -108,8 +95,10 @@ ASSERT_OFFSET(MasterSkill, ability, 0x01);
 
 /* Data, in address order. */
 extern u8                 D_801D0C04[];
-extern u8                 D_801D0C08[];
-extern u8                 D_801D0C10[];
+/* D_801D0C08 */
+extern u8                 g_MenuCurrentValueFormat[];
+/* D_801D0C10 */
+extern u8                 g_MenuMaxValueFormat[];
 extern u8                 D_801D3F58[MASTER_MENU_SPRITE_BANK_SIZE];
 extern u8                 D_801D3FE8[MASTER_MENU_SPRITE_090_SIZE];
 extern u8                 D_801D4014[MASTER_MENU_SPRITE_0BC_SIZE];
@@ -120,7 +109,8 @@ extern u8                 g_MenuLabelAgility[MASTER_MENU_LABEL_SIZE];
 extern char               g_MenuLabelPoison[MASTER_MENU_LABEL_LONG_SIZE]; /* "Pois" */
 /* D_801D4050 */
 extern char               g_MenuLabelConfusion[MASTER_MENU_LABEL_LONG_SIZE]; /* "Conf" */
-extern MenuPortraitSprite D_801D4058[MASTER_MENU_ATLAS_COUNT];
+/* D_801D4058 */
+extern MenuPortraitSprite g_MenuPortraitAtlas[MASTER_MENU_ATLAS_COUNT];
 /* D_801D4088 */
 extern MasterSkill        g_MasterSkills[MASTER_COUNT][MASTER_SKILL_COUNT];
 /* D_801D4154 */

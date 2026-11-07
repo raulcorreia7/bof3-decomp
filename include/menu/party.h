@@ -1,6 +1,7 @@
 #ifndef MENU_PARTY_H
 #define MENU_PARTY_H
 
+#include "common/vector.h"
 #include "types.h"
 
 #define PARTY_FORMATION         0x80144F58u
@@ -11,6 +12,7 @@
 #define PARTY_STANDBY           0x801E6244u
 
 #define PARTY_SLOT_COUNT        3
+#define FORMATION_COUNT         10
 
 /*
  * Party ordering, formation, standby, and zenny.
@@ -35,6 +37,18 @@
         *(first)  = *(second);         \
         *(second) = temp;              \
     } while (0)
+
+/* One party formation: its name as the formation menu prints it (the length is what centres it) and the screen
+ * offset of each party member from the formation origin. */
+typedef struct FormationLayout {
+    char    name[7];
+    u8      name_length;
+    Point2D offsets[PARTY_SLOT_COUNT];
+} FormationLayout;
+
+ASSERT_SIZE(FormationLayout, 0x14);
+ASSERT_OFFSET(FormationLayout, name_length, 0x07);
+ASSERT_OFFSET(FormationLayout, offsets, 0x08);
 
 /* D_80144F50 */
 extern u32 g_Zenny;

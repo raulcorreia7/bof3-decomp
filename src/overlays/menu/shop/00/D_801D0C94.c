@@ -1,17 +1,5 @@
 #include "shop_00.h"
 
-/* A shop action's name, its horizontal tile offset and six signed corner
- * offsets; func_801D98C0 copies the ten rows to the stack at a 0x14 stride. */
-typedef struct ShopActionLayout {
-    char name[7];
-    u8   unk_07;
-    s16  unk_08[6];
-} ShopActionLayout;
-ASSERT_SIZE(ShopActionLayout, 0x14);
-ASSERT_OFFSET(ShopActionLayout, name, 0x00);
-ASSERT_OFFSET(ShopActionLayout, unk_07, 0x07);
-ASSERT_OFFSET(ShopActionLayout, unk_08, 0x08);
-
 char D_801D0C94[4] = "*";
 
 char D_801D0C98[0x44] = {
@@ -25,24 +13,25 @@ char D_801D0C98[0x44] = {
 char D_801D0CDC[4] = "%3dZ";
 u8   D_801D0CE0[4] = {0x00, 0x94, 0x08, 0x00};
 char g_MenuStatFormat[4] = "%3d";
-char D_801D0CE8[8] = "%3d/   ";
-char D_801D0CF0[8] = "   /%3d";
-char D_801D0CF8[4] = "%8d";
-char D_801D0CFC[12] = "--------";
+char g_MenuCurrentValueFormat[8] = "%3d/   ";
+char g_MenuMaxValueFormat[8] = "   /%3d";
+char g_MenuExperienceFormat[4] = "%8d";
+char g_MenuExperienceBlank[12] = "--------";
 char g_MenuZennyFormat[4] = "%7d";
 char g_MenuNextExpBlank[8] = "-------";
 
-ShopActionLayout D_801D0D14[10] = {
-    {{'N', 'o', 'r', 'm', 'a', 'l', '\0'}, 6, {0, 0, 0, 0, 0, 0}},
-    {{'N', 'o', 'r', 'm', 'a', 'l', '\0'}, 6, {-8, -8, 8, -8, 0, 0}},
-    {{'A', 't', 't', 'a', 'c', 'k', '\0'}, 6, {0, -8, 0, 8, 0, 0}},
-    {{'D', 'e', 'f', 'e', 'n', 's', 'e'}, 7, {-4, 0, 4, 0, 0, 0}},
-    {{'N', 'o', 'r', 'm', 'a', 'l', '\0'}, 6, {-8, -8, 8, -8, 0, 8}},
-    {{'A', 't', 't', 'a', 'c', 'k', '\0'}, 6, {0, -8, -8, 8, 8, 8}},
-    {{'D', 'e', 'f', 'e', 'n', 's', 'e'}, 7, {0, 0, -8, 0, 8, 0}},
-    {{'C', 'h', 'a', 'i', 'n', '\0', '\0'}, 5, {-4, -12, 0, 0, 4, 12}},
-    {{'M', 'a', 'g', 'i', 'c', '\0', '\0'}, 5, {-12, -4, 12, -4, 0, 4}},
-    {{'R', 'e', 'f', 'u', 'g', 'e', '\0'}, 6, {0, -12, -8, 0, 8, 12}},
+/* The ten formation layouts the party formation menu offers (func_801D98C0 copies them to the stack). */
+FormationLayout g_ShopFormations[FORMATION_COUNT] = {
+    {"Normal", 6, {{0, 0}, {0, 0}, {0, 0}}},
+    {"Normal", 6, {{-8, -8}, {8, -8}, {0, 0}}},
+    {"Attack", 6, {{0, -8}, {0, 8}, {0, 0}}},
+    {"Defense", 7, {{-4, 0}, {4, 0}, {0, 0}}},
+    {"Normal", 6, {{-8, -8}, {8, -8}, {0, 8}}},
+    {"Attack", 6, {{0, -8}, {-8, 8}, {8, 8}}},
+    {"Defense", 7, {{0, 0}, {-8, 0}, {8, 0}}},
+    {"Chain", 5, {{-4, -12}, {0, 0}, {4, 12}}},
+    {"Magic", 5, {{-12, -4}, {12, -4}, {0, 4}}},
+    {"Refuge", 6, {{0, -12}, {-8, 0}, {8, 12}}},
 };
 
 u8 D_801D0DDC[4] = {0x00, 0x01, 0x02, 0x00};

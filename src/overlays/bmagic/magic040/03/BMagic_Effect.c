@@ -35,7 +35,18 @@ MATCH void func_801EF074(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimer.h"
 
-INCLUDE_ASM(func_801EF248);
+void func_801EF388(void);
+
+MATCH void func_801EF248(void) {
+    Callback handlers[2] = {func_801EF2D8, func_801EF388};
+
+    handlers[g_Task->header.step]();
+    if (g_Task->header.flags & 1) {
+        if (g_Task->header.step != 0) {
+            func_801EFA3C();
+        }
+    }
+}
 
 MATCH void func_801EF2D8(void) {
     g_Task->facing      = g_BattleEffectBattler->facing;
