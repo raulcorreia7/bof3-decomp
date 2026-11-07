@@ -12,7 +12,8 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     s32        y;
 
     clut = (u8)shaded ? 7 : 0;
-    UI_DrawWindow((px + 3) & HALF_MASK, (py + 3) & HALF_MASK, 125, 48, (u8)shaded, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow((px + 3) & HALF_MASK, (py + 3) & HALF_MASK, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT,
+                  (u8)shaded, CHARACTER_BLOCK->window_style);
     x = px;
     /* AID: a the order lock steers the register homes of x, y and stats. */
     ORDER_LOCK_BEGIN

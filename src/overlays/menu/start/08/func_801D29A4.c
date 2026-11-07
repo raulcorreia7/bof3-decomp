@@ -27,16 +27,16 @@ MATCH void func_801D29A4(void) {
         panel->unk_0A  = i;
         i += 1;
     }
-    panel                        = &g_MenuPanelTasks[11];
-    panel->handler               = 6;
-    panel->mode                  = 9;
-    panel->state                 = 2;
-    panel->active                = 1;
-    panel->pos.x                 = 0x14;
-    D_801484C2                   = -0x14;
-    panel->unk_10                = 0;
-    g_MenuPanelTasks[19].handler = 6;
-    g_MenuPanelTasks[19].mode    = 0xA;
+    panel                                                   = &g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION];
+    panel->handler                                          = 6;
+    panel->mode                                             = 9;
+    panel->state                                            = 2;
+    panel->active                                           = 1;
+    panel->pos.x                                            = 0x14;
+    D_801484C2                                              = -0x14;
+    panel->unk_10                                           = 0;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].handler = 6;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].mode    = 0xA;
     panel += 8;
     panel->active = 0;
     panel->unk_0A = 0;
