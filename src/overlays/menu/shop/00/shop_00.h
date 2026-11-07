@@ -324,7 +324,8 @@ extern Callback    g_ShopStep7Sub2Funcs[SHOP_STEP7_SUB2_COUNT];
 /* D_801E5D10 */
 extern Callback    g_ShopStep7Sub3Funcs[SHOP_STEP7_SUB3_COUNT];
 extern u8          D_801E5D1C[];
-extern Callback    D_801E5D2C[];
+/* D_801E5D2C */
+extern Callback    g_AbilityStockSortFuncs[];
 extern u8          D_801E5D38[];
 /* D_801E5D3C */
 extern Callback    g_ShopStep9Funcs[SHOP_STEP9_COUNT];
@@ -594,11 +595,15 @@ void func_801E0F28(void);
 void func_801E0F78(void);
 void func_801E112C(MenuPanelTask* task);
 void func_801E1710(MenuPanelTask* task);
-void func_801E1B80(s32 handler_index);
+/* func_801E1B80 */
+void Menu_RunAbilityStockSort(s32 cursor_row);
 void Menu_SwapBytes_801E1BB8(u8* first, u8* second);
-void func_801E1BCC(void);
-void func_801E1C88(void);
-void func_801E1D84(void);
+/* func_801E1BCC */
+void Menu_PackAbilityStock(void);
+/* func_801E1C88 */
+void Menu_SortAbilityStockByCostDescending(void);
+/* func_801E1D84 */
+void Menu_SortAbilityStockByCostAscending(void);
 void func_801E1E80(s16 panel_x, s16 panel_y);
 void func_801E200C(void);
 void func_801E2048(void);

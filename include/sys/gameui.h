@@ -275,21 +275,13 @@ extern u8           D_8014840B;
 extern u16          D_8014840C;
 extern u16          D_8014840E;
 extern u8           D_8014842C;
-extern s8           D_80148FB0;
-extern s8           D_80148FB1;
-extern s8           D_80148FB2;
-extern s8           D_80148FB3;
-extern s8           D_80148FB4;
-extern s8           D_80148FB5;
-extern s8           D_80148FB6;
-extern s8           D_80148FC1;
-extern s8           D_80148FC2;
-extern s8           D_80148FC3;
-extern s8           D_80148FC4;
-extern s8           D_80148FC5;
-extern s8           D_80148FC6;
-extern s8           D_80148FC8;
-extern u8           D_80148FE0;
+/* The SPU has 24 voices; the sound system has 7 SEP/VAB slots. */
+#define SND_VOICE_COUNT 24
+#define SND_SLOT_COUNT  7
+
+extern s8           g_SndVabIds[SND_SLOT_COUNT];
+extern s8           g_SndVoiceVolume[SND_VOICE_COUNT];
+extern u8           D_80148FE0[SND_VOICE_COUNT];
 /* D_801490A2 */
 extern u8           g_MessageChoiceMode;
 /* Shared selection counter read by etc/game/00 and etc/shop/00. */
