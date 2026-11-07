@@ -686,6 +686,7 @@ extern void      func_801D2C7C(void);
 void             func_801D2D74(void);
 void             func_801D4884(void);
 void             func_801D667C(void);
+void             Menu_PreviewStrongestEquipment(u8 character);
 void             func_801D71EC(void);
 void             func_801D9664(void);
 void             func_801D96D4(void);

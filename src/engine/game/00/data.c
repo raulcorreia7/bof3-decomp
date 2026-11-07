@@ -514,7 +514,7 @@ volatile VitalItem g_VitalItems[VITAL_ITEM_COUNT] = {{"Nothing", 0x4000, 0},
                                                      {"Old" T_SP "Passport", 0x41C2, 0},
                                                      {"Fountain" T_SP "Pen", 0x41C5, 0}};
 
-volatile Weapon g_Weapons[WEAPON_COUNT] = {
+Weapon g_Weapons[WEAPON_COUNT] = {
     {{"Nothing", 0, 0x00}, 0, 0, 0, 0, 0, 0, 0x4000, 0},
     {{"Dagger", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, 1, 0, 1, 1, 4, 0, 0x4033, 50},
     {{"BallockKnife", EQUIP_REI | EQUIP_TEEPO | EQUIP_RYU, 0x00}, 1, 0, 1, 1, 6, 0, 0x4034, 100},
@@ -599,7 +599,7 @@ volatile Weapon g_Weapons[WEAPON_COUNT] = {
     {{"Ghostbuster", EQUIP_MOMO, 0x00}, 1, ELEM_HOLY, 1, 5, 155, 0, 0x40C4, 22000},
     {{"Beast" T_SP "Spear", EQUIP_GARR, 0x00}, 1, 0, 15, 6, 150, 0, 0x40C5, 20000}};
 
-volatile Armor g_Armors[ARMOR_COUNT] = {
+Armor g_Armors[ARMOR_COUNT] = {
     {{"Nothing", 0, 0x00}, ARMOR_TYPE_NOTHING, 0, 0, 0, 0x4000, 0},
     {{"Clothing", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 3, 2, 0, 0x4077, 50},
     {{"LeatherArmor", EQUIP_MOMO | EQUIP_REI | EQUIP_TEEPO | EQUIP_GARR | EQUIP_NINA | EQUIP_RYU, 0x00}, ARMOR_TYPE_BODY, 4, 4, 0, 0x4078, 180},
