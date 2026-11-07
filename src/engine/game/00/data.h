@@ -7,6 +7,10 @@
 #define GAME_AREA_HANDLER_COUNT  11
 
 /* Cells in the square-spiral search order around a formation: the centre, then rings one to three, and a closing centre. */
+/* Camera directions and the scroll step of one cell quarter. */
+#define CAMERA_DIR_COUNT          4
+#define CAMERA_SCROLL_STEP        4
+
 #define ENTITY_SPAWN_OFFSET_COUNT 50
 #define ENTITY_SPAWN_SEARCH_COUNT (ENTITY_SPAWN_OFFSET_COUNT - 1)
 
@@ -133,6 +137,7 @@ extern UvRect               D_801CCF7C[53];
 extern WorldMapBattlefields D_801CD224;
 extern WorldMapDestination  D_801CD24C[10];
 extern SlotSource           D_801CD4AC[5];
+extern GameDelta            s_CameraScrollDeltas[CAMERA_DIR_COUNT];
 extern GameDelta            s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT];
 extern Point2DL             D_801CD620[36];
 extern Point2DL             D_801CD740[6];

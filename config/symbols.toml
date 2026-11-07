@@ -1617,7 +1617,6 @@ D_801CD404 = { addr = 0x801CD404, size = 0x3C }
 D_801CD440 = { addr = 0x801CD440, size = 0x8 }
 D_801CD448 = { addr = 0x801CD448, size = 0x10 }
 s_CameraScrollDeltas = { addr = 0x801CD458, size = 0x8, source = "func_801BF11C and func_801BF5A8 add an x, y pair to the camera work record for g_BattleScrollDir" }
-D_801CD459 = { addr = 0x801CD459, size = 0x1, alias = true }
 s_BattleStartOffsets = { addr = 0x801CD460, size = 0x18, source = "func_801BEBB0 stores the x, y pair for the battle record's row id" }
 D_801CD461 = { addr = 0x801CD461, size = 0x1, alias = true }
 s_RouteIndexByMode = { addr = 0x801CD478, size = 0x4, source = "func_801BFE34 takes the battler route step for g_BattleScrollDir" }

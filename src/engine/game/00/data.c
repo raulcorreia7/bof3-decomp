@@ -2488,10 +2488,11 @@ Callback D_801CD440[2] = {(Callback)func_801BC000, (Callback)Area_StepSceneTimer
 Callback D_801CD448[4] = {(Callback)func_801B32A4, (Callback)func_801B32D0, (Callback)func_801BD83C,
                           (Callback)func_801B3540};
 
-/* Stride 2: the x and y scroll step of a direction, read as [dir * 2] and [dir * 2 + 1] by func_801BF11C
- * and func_801BF5A8. needs: type. */
-s8 s_CameraScrollDeltas[8] = {
-    0xFC, 0x00, 0x00, 0xFC, 0x04, 0x00, 0x00, 0x04,
+GameDelta s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
+    GAME_PAIR(-CAMERA_SCROLL_STEP, 0),
+    GAME_PAIR(0, -CAMERA_SCROLL_STEP),
+    GAME_PAIR(CAMERA_SCROLL_STEP, 0),
+    GAME_PAIR(0, CAMERA_SCROLL_STEP),
 };
 
 u8 s_BattleStartOffsets[12][2] = {
