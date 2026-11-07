@@ -670,7 +670,7 @@ extern s32                         D_80148A40;
 extern s32                         D_80148A44;
 extern s32                         D_80148A48;
 extern s32                         D_80148A4C;
-extern u8                          D_80148FF8[];
+extern u8                          g_SndVoiceTargetVolume[SND_VOICE_COUNT];
 extern u16                         D_80149010[];
 extern u16                         D_80149040[];
 extern u16                         D_80149070[];
