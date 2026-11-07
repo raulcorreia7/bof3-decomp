@@ -1,8 +1,8 @@
 /* Draw the five-row CLUT strip, two 0x20-wide columns per row. One definition
- * shared by the shop and start overlays; each image binds the entry, index and
+ * shared by the shop, start and shisu overlays; each image binds the entry, index and
  * 4-byte cell tables in its table in config/symbols.toml and the image header declares them.
  */
-/* func_801DBD24 (shop), func_801DF21C (start) */
+/* func_801DBD24 (shop), func_801DF21C (start), func_801D7224 (shisu) */
 MATCH void Menu_DrawClutStrip(u8 clut_index) {
     u16     cluts[4];
     u16*    clut;

@@ -199,7 +199,16 @@ INCLUDE_ASM(func_801FDB14);
 
 INCLUDE_ASM(func_801FE00C);
 
-INCLUDE_ASM(func_801FE2B0);
+MATCH s32 func_801FE2B0(void) {
+    u8 i;
+
+    for (i = 0; i < g_PartySize; i++) {
+        if (D_80145F09[i].character_id == CHAR_ID_GARR) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 MATCH void Scene_JoinPartyRyuAdultGarrNinaAdult(void) {
     SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_NINA_ADULT);
