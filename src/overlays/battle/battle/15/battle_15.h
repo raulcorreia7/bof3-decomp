@@ -454,7 +454,8 @@ extern volatile u8                       g_BattleUIStep;
 extern volatile u8                       D_801462E7;
 /* D_801462F0 */
 extern volatile u8                       g_BattlePartyCount; /* u8 active-battler count at 0x801462F0. */
-extern u8                                D_8014630C[];
+/* D_8014630C */
+extern u8                                g_BattleTurnOrder[];
 extern BattleSelectionState              D_801462F0_state;
 /* D_80146374 */
 extern volatile u8                       g_BattleActiveBattler;

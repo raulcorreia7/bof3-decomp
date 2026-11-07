@@ -14,7 +14,7 @@ MATCH void func_801D3304(void) {
         battle_half  = (u16*)&g_BattleActionId;
         *battle_half = g_BattleAction->unk_02;
         if (func_800A9A84() & BYTE_MASK) {
-            func_801DD14C(g_BattleActiveBattler);
+            Battle_CancelTurn(g_BattleActiveBattler);
             BATTLE_ACTIVE_PARTY.header.mode = 2;
             BATTLE_ACTIVE_PARTY.header.step = 0;
             g_BattleMode                    = 3;

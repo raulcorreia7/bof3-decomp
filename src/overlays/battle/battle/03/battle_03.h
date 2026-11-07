@@ -21,31 +21,30 @@
 /* The damage chain. */
 /* The queued battle panel slots, and the size a drawn panel gets: its row
  * width g_BattlePanelWidths plus this margin, or this margin alone for an empty row. */
-#define BATTLE_PANEL_SLOT_COUNT        5
-#define BATTLE_PANEL_SIZE              0x10
-#define BATTLE_GLOBAL_BYTE_630C(index) MEM(volatile u8, 0x8014630Cu + (u32)(index))
+#define BATTLE_PANEL_SLOT_COUNT     5
+#define BATTLE_PANEL_SIZE           0x10
 /* Current enemy-work pointer cell (fixed RAM, not scratchpad). */
-#define BATTLE_CURRENT_ENEMY_PTR       (*(volatile EnemyBattler**)&g_BattleCurrentEnemy)
-#define BATTLE_LOCAL_BYTE_79(work)     MEM(volatile u8, (u32)(work) + 0x79u)
-#define BATTLE_LOCAL_BYTE_119(work)    MEM(volatile u8, (u32)(work) + 0x119u)
-#define BATTLE_LOCAL_WORD_124(work)    MEM(volatile u32, (u32)(work) + 0x124u)
-#define BATTLE_ENEMY_BYTE_F5(work)     MEM(volatile u8, (u32)(work) + 0xF5u)
-#define BATTLE_ENEMY_WORD_100(work)    MEM(volatile u32, (u32)(work) + 0x100u)
+#define BATTLE_CURRENT_ENEMY_PTR    (*(volatile EnemyBattler**)&g_BattleCurrentEnemy)
+#define BATTLE_LOCAL_BYTE_79(work)  MEM(volatile u8, (u32)(work) + 0x79u)
+#define BATTLE_LOCAL_BYTE_119(work) MEM(volatile u8, (u32)(work) + 0x119u)
+#define BATTLE_LOCAL_WORD_124(work) MEM(volatile u32, (u32)(work) + 0x124u)
+#define BATTLE_ENEMY_BYTE_F5(work)  MEM(volatile u8, (u32)(work) + 0xF5u)
+#define BATTLE_ENEMY_WORD_100(work) MEM(volatile u32, (u32)(work) + 0x100u)
 /* Panel-task root pointer cell at 0x801485C8 (u8* volatile). */
-#define BATTLE_PANEL_ROOT_BASE         D_80150000
+#define BATTLE_PANEL_ROOT_BASE      D_80150000
 /* Base-pointer accessors for fixed RAM regions (preserve lui+offset codegen).
  */
 /* FAKE: retail reads D_80140000 as volatile u16[]. */
-#define BATTLE_GLOBAL_RAM_U16          ((volatile u16*)D_80140000)
+#define BATTLE_GLOBAL_RAM_U16       ((volatile u16*)D_80140000)
 /* Additional fixed-base tables and dispatch helpers. */
-#define BATTLE_ENDING_BYTES            ((volatile u8*)&g_BattlePhase)
+#define BATTLE_ENDING_BYTES         ((volatile u8*)&g_BattlePhase)
 /* Single fixed-address globals (inline; no symbol binding required). */
-#define BATTLE_GLOBAL_WORD_598C        (*(u32*)&g_GfxPrimCursor)
+#define BATTLE_GLOBAL_WORD_598C     (*(u32*)&g_GfxPrimCursor)
 /* Party slot the entrance pass is on, and the entrance sub-step byte 0x801462E2. */
-#define BATTLE_PARTY_CURSOR            (((u8*)&D_80140000)[0x62E5])
-#define BATTLE_ENTRANCE_STEP           (((u8*)&D_80140000)[0x62E2])
-#define g_GameState                    ((PartyBattler* volatile)g_GameState)
-#define g_Task                         ((PartyBattler*)g_Task)
+#define BATTLE_PARTY_CURSOR         (((u8*)&D_80140000)[0x62E5])
+#define BATTLE_ENTRANCE_STEP        (((u8*)&D_80140000)[0x62E2])
+#define g_GameState                 ((PartyBattler* volatile)g_GameState)
+#define g_Task                      ((PartyBattler*)g_Task)
 
 /* The fixed panel-task argument table preserves the caller's whole argument
  * block for the selected entry; no lifted caller names those seven words yet,
@@ -225,7 +224,8 @@ extern u8              g_BattlePartyCount;
 extern u8              D_801462F6[];
 extern u8              D_80146304; /* oscillation direction latch */
 extern u8              D_80146308; /* UI oscillator byte */
-extern u8              D_8014630C;
+/* D_8014630C */
+extern u8              g_BattleTurnOrder[];
 extern u8              D_80146327;
 extern u8              D_80146364[];
 /* D_80146374 */

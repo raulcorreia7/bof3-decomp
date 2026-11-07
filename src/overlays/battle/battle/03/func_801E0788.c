@@ -9,7 +9,7 @@ MATCH void func_801E0788(void) {
     u16*          half2;
 
     func_801DDFEC(g_Task->slot);
-    func_801DD14C(g_Task->slot);
+    Battle_CancelTurn(g_Task->slot);
     w = g_GameState;
     if (w->turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) {
         g_Task->unk_09 = 30;
