@@ -9,7 +9,7 @@ segments:
     subsegments:
       - [0x0, .data, D_801D0C00]
       - [0x4, .data, D_801D0C04]
-      - [0x14C, .rodata, 1EFC]
+      - [0x10C, .rodata, 1EFC]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_0b
     type: code

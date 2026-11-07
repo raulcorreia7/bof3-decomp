@@ -19,6 +19,16 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x4C, .data, D_801D0C4C]
+      - [0x154, .rodata, Menu_DrawEquipStatWindow]
+  # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
+  - name: data_2a
+    type: code
+    start: 0x188
+    vram: 0x801D0D88
+    align: 4
+    section_order: [.data, .rodata]
+    subsegments:
+      - [0x188, .data, D_801D0D88]
       - [0x194, .rodata, Menu_DrawEquipChoiceWindow]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_2b
