@@ -4,5 +4,5 @@
  * shop-state byte D_80148651. */
 
 MATCH void func_801D39BC(void) {
-    SYS_DISPATCH_BYTE(D_801E52C4, D_80148651);
+    SYS_DISPATCH_BYTE(g_ShopStep3Funcs, D_80148651);
 }
