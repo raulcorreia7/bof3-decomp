@@ -20,7 +20,16 @@ MATCH void func_801F6F8C(void) {
     work->header.mode += 1;
 }
 
-INCLUDE_ASM(func_801F6FC4);
+MATCH void func_801F6FC4(void) {
+    if ((g_FrameCount & 3) == 0) {
+        func_801F802C();
+    }
+    func_801F7E14();
+    g_Task->vx = (g_Task->vx + 0x80) & 0xFFF;
+    if (--g_Task->timer == 0) {
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801F7048(void) {
     if (func_801F7E14() & BYTE_MASK) {
