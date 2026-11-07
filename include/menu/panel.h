@@ -101,23 +101,46 @@ ASSERT_OFFSET(MenuChoicePanel, group_cursor, 0x0C);
 ASSERT_OFFSET(MenuChoicePanel, drawn_cursor, 0x0D);
 ASSERT_OFFSET(MenuChoicePanel, confirm_gate, 0x12);
 
+/* What a list panel lists: the shop's item list reads a price discount (and
+ * dims the whole list when it is set), the ability lists read whose abilities
+ * and which kind (Party_GetAbilities' arguments). */
+typedef union MenuListSource {
+    struct {
+        u8 dimmed;        /* non-zero draws every row greyed out */
+        u8 price_percent; /* Shop_ApplyPercent's percent */
+    } items;
+
+    struct {
+        u8 member; /* the party formation index */
+        u8 type;   /* AbilityType: also the index of the list name */
+    } abilities;
+} MenuListSource;
+
+ASSERT_SIZE(MenuListSource, 2);
+
+/* MenuListPanel.flags: two cursor-tab bits, and a frame countdown in the high
+ * nibble that the drawer steps down once per draw. */
+#define MENU_LIST_FLAG_TAB_1 0x01
+#define MENU_LIST_FLAG_TAB_2 0x02
+#define MENU_LIST_FRAME_MASK 0xF0
+#define MENU_LIST_FRAME_STEP 0x10
+
 /* The list panel record, handed to the panel drawers as a pointer: the
  * shop's ability and item lists (Shop_DrawAbilities, Shop_DrawItems) and the
  * ability list of the bate overlay read the same cells. The record's extent
  * is not proven; 0x24 is the last proven cell, the names pointer. */
 typedef struct MenuListPanel {
-    u8       pad_00[4];
-    UPoint2D pos;      /* 0x04 */
-    u8       unk_08;   /* 0x08 the ability list passes it to func_801AF5B0 */
-    u8       flags;    /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
-    u8       unk_0A;   /* 0x0A the list selector, passed to func_80166AE4 */
-    u8       unk_0B;   /* 0x0B the stock row; it indexes the name table at a 4-byte stride */
-    u8       unk_0C;   /* 0x0C a row the drawer draws an icon for */
-    u8       selected; /* 0x0D the selected row; the drawer shades it 2 */
-    u8       pad_0E[2];
-    s16      unk_10; /* 0x10 tested against zero for the extra frame marks */
-    u8       pad_12[0xE];
-    u8*      names; /* 0x20 the name table: a row count, then 2-byte rows */
+    u8             pad_00[4];
+    UPoint2D       pos;      /* 0x04 */
+    u8             unk_08;   /* 0x08 the ability list passes it to func_801AF5B0 */
+    u8             flags;    /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
+    MenuListSource source;   /* 0x0A */
+    u8             unk_0C;   /* 0x0C a row the drawer draws an icon for */
+    u8             selected; /* 0x0D the selected row; the drawer shades it 2 */
+    u8             pad_0E[2];
+    s16            unk_10; /* 0x10 tested against zero for the extra frame marks */
+    u8             pad_12[0xE];
+    u8*            names; /* 0x20 the name table: a row count, then 2-byte rows */
 } MenuListPanel;
 
 ASSERT_SIZE(MenuListPanel, 0x24);

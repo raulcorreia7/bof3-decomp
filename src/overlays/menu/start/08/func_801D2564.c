@@ -47,7 +47,7 @@ MATCH void func_801D2564(void) {
     }
     pad_state   = &g_InputPressed;
     pad_buttons = *pad_state;
-    if (pad_buttons & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (pad_buttons & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(1, 3));
         SND_PlayCue(EMI_CUE_ID(1, 2));
         func_801D2AC8();
@@ -58,7 +58,7 @@ MATCH void func_801D2564(void) {
         MATCH_FAKE_BARRIER();
         pad_buttons = *pad_state;
     }
-    if (pad_buttons & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (pad_buttons & g_InputMasks[MENU_INPUT_CANCEL]) {
         s32 i;
 
         SND_PlayCue(EMI_CUE_ID(1, 6));

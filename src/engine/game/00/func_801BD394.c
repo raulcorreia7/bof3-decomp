@@ -38,7 +38,7 @@ MATCH void func_801BD394(void) {
             flag = 1;
         }
     }
-    if ((g_AreaWalkFlags & (AREA_WALK_STEP_ACTIVE | AREA_WALK_RUN_ACTIVE | AREA_WALK_TRANSITION)) || flag) {
+    if ((g_AreaWalkFlags & (AREA_WALK_LEADER_SWITCH_ACTIVE | AREA_WALK_MENU_ACTIVE | AREA_WALK_TRANSITION)) || flag) {
         g_GameState->mode_12B.u8_value = 0;
     } else {
         D_801CD1D8[g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK]();

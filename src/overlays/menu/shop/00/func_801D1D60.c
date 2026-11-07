@@ -16,7 +16,7 @@ MATCH void func_801D1D60(void) {
         SND_PlayCue(EMI_CUE_ID(1, 0));
         *toggle ^= 1;
     }
-    if (*pad & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (*pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
             u32* zenny;
 
@@ -40,7 +40,7 @@ MATCH void func_801D1D60(void) {
         D_80148652 -= 2;
         return;
     }
-    if (*pad & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    if (*pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         D_80148652 -= 2;
     }

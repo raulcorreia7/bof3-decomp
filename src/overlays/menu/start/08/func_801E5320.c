@@ -26,14 +26,14 @@ MATCH void func_801E5320(void) {
         }
     }
     pad = &g_InputPressed;
-    if ((*pad & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0) {
+    if ((*pad & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
         g_MenuStartTimer      = 2;
         D_801ED7FC            = 5;
         count                 = g_MenuStartStep;
         g_MenuStartStep       = 0xE;
         g_MenuStartReturnStep = count + 1;
-    } else if ((*pad & g_InputMasks[INPUT_SLOT_CANCEL]) != 0) {
+    } else if ((*pad & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 6));
         g_MenuStartStep     = 0;
         g_GameEntrySubstate = 1;
