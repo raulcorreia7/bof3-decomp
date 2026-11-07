@@ -8,8 +8,23 @@
 
 #include "overlays/bmagic/bmagic.h"
 #include "overlays/battle/battle/15/battle_15.h"
+#include "slus/functions.h"
 
-extern s32                 D_1F800004;
+extern s32 D_1F800004;
+
+/* The bolt's first segment length, and the flicker of the later ones: base plus or minus a random part. */
+#define BOLT_RADIUS       0x40
+#define BOLT_FLICKER_MASK 0x3F
+#define BOLT_FLICKER_BASE 0x80
+
+/* The bolt point D_1F800014, also read as halfwords, and the scratch words of the bolt: the segment length, the
+ * swing angle, the flicker and the segment count. */
+extern SVECTOR             D_1F800014[];
+extern s16                 D_1F800014_HALF[];
+extern s16                 D_1F800016;
+extern s16                 D_1F800018;
+extern s32                 D_1F800008;
+extern s32                 D_1F80000C;
 extern BattleHandlerTable5 D_801EEC04;
 extern Callback            D_801F09A0[4];
 extern Callback            D_801F09B0[4];
@@ -69,7 +84,8 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
 }
 
 void func_801EF8F0(s32 arg0, s32 arg1, s16 arg2);
-void func_801F043C(void);
+/* func_801F043C */
+void Effect_DrawBolt(void);
 void func_801F070C(void);
 
 #endif

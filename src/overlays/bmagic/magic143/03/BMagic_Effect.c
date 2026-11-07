@@ -37,7 +37,6 @@ INCLUDE_ASM(func_801EF054);
 
 INCLUDE_ASM(func_801EF23C);
 
-/* blocker: base length 128 against 64; first diff: li v0,64 against li v0,128 at +0x18. */
-INCLUDE_ASM(func_801EF9A4);
+#include "overlays/bmagic/Effect_DrawBolt.h"
 
 INCLUDE_ASM(func_801EFC74);

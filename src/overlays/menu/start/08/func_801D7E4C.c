@@ -51,7 +51,7 @@ MATCH void func_801D7E4C(void) {
     TEXT_SetVariable(0, 0xC,
                      (const u8*)&g_Abilities[Party_GetAbilities(
                          g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0)[g_MenuPanelTasks[16].unk_0C]]);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0x30;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x30;
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         /* D_8014857A stays its own symbol: a g_MenuPanelTasks[16] view shifts the base registers */
         result = func_801E7D20(

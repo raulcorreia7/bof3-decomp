@@ -143,7 +143,7 @@ MATCH void func_801F0008(void) {
     func_800AF764();
     if (g_Task->header.step != 0) {
         Effect_SetActorMatrixRolled();
-        func_801F043C();
+        Effect_DrawBolt();
         func_801F070C();
         PopMatrix();
     }
@@ -228,7 +228,6 @@ MATCH void func_801F0314(void) {
     }
 }
 
-/* blocker: frame 64 bytes against 56; first diff: addiu sp at +0x0. */
-INCLUDE_ASM(func_801F043C);
+#include "overlays/bmagic/Effect_DrawBolt.h"
 
 INCLUDE_ASM(func_801F070C);

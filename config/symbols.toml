@@ -714,12 +714,15 @@ D_801F0488 = { addr = 0x801F0488, source = "Per-index byte of the magic096 effec
 g_BMagicEffectModes = { addr = 0x801F04A8, source = "Handlers of magic096 (Blizzard), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic097/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
+D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_SLOT_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 Effect_StartOnZeroTick = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic097 (Jolt)." }
 Effect_CountDownAndPickRandom = { addr = 0x801EF114, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero picks a random ticker (byte 0x0B) below 16, clears the timer and counter (byte 0x0A) and advances header.step (byte 0x02) in magic097 (Jolt)." }
 Effect_CountDownByTwoAndFinish = { addr = 0x801EF488, type = "func", source = "Raises the effect ticker (byte 0x0B) and counts the effect counter (byte 0x0A) down by two; at zero lowers the active battler's ticker and clears the effect in magic097 (Jolt)." }
 Effect_SetActorMatrixRolled = { addr = 0x801EF510, type = "func", source = "Sets the actor's GTE matrix like Effect_SetActorMatrix, rolled by 512 (an eighth of a turn) in magic097 (Jolt)." }
+Effect_DrawBolt = { addr = 0x801F0568, type = "func", source = "Draws the lightning bolt of the effect as LINE_G2 segments: each segment swings by the effect ticker, its length and brightness flicker at random, and it goes into the depth cell of the effect's position." }
 g_BMagicEffectModes = { addr = 0x801F0AC0, source = "Handlers of magic097 (Jolt), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic098/03"]
@@ -732,10 +735,12 @@ Effect_SetActorMatrixRolled = { addr = 0x801EF520, type = "func", source = "Sets
 g_BMagicEffectModes = { addr = 0x801F0340, source = "Handlers of magic098 (Lightning), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic099/03"]
+D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_BrightenPalette = { addr = 0x801EEFDC, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic099 (Myollnir)." }
 Effect_SetActorMatrixRolled = { addr = 0x801EF1B0, type = "func", source = "Sets the actor's GTE matrix like Effect_SetActorMatrix, rolled by 512 (an eighth of a turn) in magic099 (Myollnir)." }
 Effect_Wait = { addr = 0x801EF3E4, type = "func", source = "Raises the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) down; advances header.step (byte 0x02) at zero in magic099 (Myollnir)." }
+Effect_DrawBolt = { addr = 0x801F043C, type = "func", source = "Draws the lightning bolt of the effect as LINE_G2 segments: each segment swings by the effect ticker, its length and brightness flicker at random, and it goes into the depth cell of the effect's position." }
 g_BMagicEffectModes = { addr = 0x801F0994, source = "Handlers of magic099 (Myollnir), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic100/03"]
@@ -984,10 +989,12 @@ Effect_TickDownAndClear = { addr = 0x801EF6F8, type = "func", source = "Lowers t
 g_BMagicEffectModes = { addr = 0x801EF72C, source = "Handlers of magic138 (Main Cannon), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic143/03"]
+D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_StartOnZeroTick = { addr = 0x801EED24, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic143 (Thunder Clap)." }
 Effect_CountDownByTwoAndFinish = { addr = 0x801EF100, type = "func", source = "Raises the effect ticker (byte 0x0B) and counts the effect counter (byte 0x0A) down by two; at zero lowers the active battler's ticker and clears the effect in magic143 (Thunder Clap)." }
 Effect_SetActorMatrixRolled = { addr = 0x801EF188, type = "func", source = "Sets the actor's GTE matrix like Effect_SetActorMatrix, rolled by 512 (an eighth of a turn) in magic143 (Thunder Clap)." }
+Effect_DrawBolt = { addr = 0x801EF9A4, type = "func", source = "Draws the lightning bolt of the effect as LINE_G2 segments: each segment swings by the effect ticker, its length and brightness flicker at random, and it goes into the depth cell of the effect's position." }
 g_BMagicEffectModes = { addr = 0x801EFEE8, source = "Handlers of magic143 (Thunder Clap), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic144/03"]

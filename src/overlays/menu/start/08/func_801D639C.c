@@ -41,10 +41,10 @@ MATCH void func_801D639C(void) {
             choice      = record + 0x13;
             break;
     }
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = Item_GetDescription(group_index, *choice);
-    one                                                   = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active      = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x       = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(group_index, *choice);
+    one                                                         = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y =
         (u16)(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y +
               (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A * 0xD + 0x57));

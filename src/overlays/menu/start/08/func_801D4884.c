@@ -4,13 +4,13 @@ MATCH void func_801D4884(void) {
     u8* ptr = &D_801484BC;
     u8  value;
 
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].handler = 6;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode    = MENU_START_MODE_MESSAGE;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state   = 2;
-    *ptr                                                   = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x   = 0x14;
-    D_801484C2                                             = -0x14;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10  = 0;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].handler      = 6;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode         = MENU_START_MODE_MESSAGE;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state        = 2;
+    *ptr                                                        = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 0x14;
+    D_801484C2                                                  = -0x14;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     ptr += 0x24;
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].handler = 6;
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].mode    = MENU_START_MODE_COMMANDS;
@@ -41,8 +41,8 @@ MATCH void func_801D4884(void) {
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A         = 0;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_08         = 0;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_09         = 0;
-    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_10         = 0;
-    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_12         = 0;
+    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs    = 0;
+    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll  = 0;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].handler = 6;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B         = value;
     *ptr                                                    = 0;

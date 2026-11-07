@@ -63,7 +63,7 @@ NON_MATCHING void func_801D9BDC(void) {
     } else {
         val0 = 0x3B;
     }
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = val0;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = val0;
     if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
         *(u8*)(&D_801485DC) = 0;
         if (D_801ED668 != 0) {

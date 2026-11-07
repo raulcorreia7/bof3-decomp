@@ -25,10 +25,10 @@ MATCH void func_801D2564(void) {
     MATCH_FAKE_BARRIER();
     D_801485E2 = g_MenuPanelTasks[selection_index + 4].pos.y;
     TEXT_SetVariable(0U, 5U, g_CharSlot[g_PartyFieldOrder[selection_index]] * 0xA4 + panel_data);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0x12;
-    input                                                 = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
-    count                                                 = Party_CountOrder(PARTY_ORDER_FIELD);
-    old_selection                                         = *selection;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
+    input                                                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    count                                                       = Party_CountOrder(PARTY_ORDER_FIELD);
+    old_selection                                               = *selection;
     if ((input & PADLup) != 0) {
         new_selection = old_selection - 1;
         *selection    = new_selection;

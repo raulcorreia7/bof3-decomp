@@ -834,8 +834,8 @@ extern u8                          D_8018B4A4;
 extern u8                          D_8018B4A8;
 extern u8                          D_8018B4AC;
 extern u32                         D_8018B4B0;
-extern void (*D_8018E7D4)();
-extern void (*D_8018E988)();
+extern void (*D_8018E7D4)(s16 voice);
+extern void (*D_8018E988)(s16 voice);
 extern s8 D_8018E98C;
 extern u8 D_801C839C[];
 extern u8 D_801C839D[];
@@ -1266,7 +1266,8 @@ static inline void Slus_DrawPanelBox(void) {
     MenuPanelTask* panel;
 
     panel = g_MenuCurrentPanel;
-    func_80159B9C((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->unk_10 >> 4), (u8)(panel->unk_12 >> 4));
+    func_80159B9C((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->u.grow.width >> 4),
+                  (u8)(panel->u.grow.height >> 4));
 }
 
 void SYS_Main(void);
