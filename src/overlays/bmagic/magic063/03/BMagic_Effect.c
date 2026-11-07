@@ -46,7 +46,20 @@ MATCH void func_801EEF74(void) {
 
 INCLUDE_ASM(func_801EEFE4);
 
-INCLUDE_ASM(func_801EF110);
+MATCH void func_801EF110(void) {
+    u8 timer;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        if (g_BattleEffectBattler->param.unk_0B == 1) {
+            g_Task->header.step = 3;
+        } else {
+            g_BattleEffectBattler->param.unk_0B -= 1;
+            g_Task->header.step += 1;
+        }
+    }
+}
 
 MATCH void func_801EF190(void) {
     if (g_Task->param.unk_0B == 0) {

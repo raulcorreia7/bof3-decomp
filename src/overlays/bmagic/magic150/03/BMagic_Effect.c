@@ -45,6 +45,7 @@ MATCH void func_801EEEC4(void) {
     }
 }
 
+/* blocker: D_801EFAAC and D_801EFAAE are one base-register pair in retail (a0 +0, +2); first diff: lui v0 against addiu a0 at 0x801EEF84. */
 INCLUDE_ASM(func_801EEF80);
 
 #include "shared/Effect_StartPlaying.h"

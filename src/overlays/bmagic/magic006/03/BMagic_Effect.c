@@ -42,7 +42,19 @@ MATCH void func_801EEF28(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF04C);
+MATCH void func_801EF04C(void) {
+    PartyBattler* work = g_Task;
+    u8            timer;
+
+    work->unk_14 += 0x80;
+
+    timer        = work->unk_09 - 1;
+    work->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->unk_09 = g_Task->param.unk_0B + 0xC;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF0B8(void) {
     PartyBattler* work;
