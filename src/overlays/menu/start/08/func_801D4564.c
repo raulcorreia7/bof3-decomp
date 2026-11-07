@@ -10,7 +10,7 @@ NON_MATCHING void func_801D4564(void) {
     u8  val1;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 =
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id =
         Item_GetDescription(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A,
                             D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
@@ -25,7 +25,7 @@ NON_MATCHING void func_801D4564(void) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C -= 1;
         }
         if ((u8)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C < (u8)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_12 = 0xF0;
+            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0xF0;
         }
     } else if (tmp0 & PADLdown) {
         if ((u8)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C < 0x1FU) {
@@ -33,7 +33,7 @@ NON_MATCHING void func_801D4564(void) {
         }
         if ((s32)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C >=
             (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9)) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_12 = 0x10;
+            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
         }
     } else if (tmp0 & 4) {
         tmp1 = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B & BYTE_MASK;

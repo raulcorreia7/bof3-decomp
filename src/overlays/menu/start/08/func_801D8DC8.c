@@ -23,9 +23,9 @@ MATCH void func_801D8DC8(void) {
     Menu_DrawClutStrip(D_80144953);
     panel = &g_MenuPanelTasks[17];
     if (D_801485A0 != 0) {
-        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = D_801485A0 + START_LIST_DESCRIPTION_ID;
+        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801485A0 + START_LIST_DESCRIPTION_ID;
     } else {
-        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0;
+        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     }
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = panel->pos.x + START_LIST_CURSOR_X;

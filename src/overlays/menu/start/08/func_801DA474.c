@@ -44,7 +44,7 @@ NON_MATCHING void func_801DA474(void) {
         TEXT_SetVariable(0U, 5U, (g_CharSlot[D_801ED69C] * 0xA4) + (&D_80144953 + 0x15));
         val1 = 0x61;
     }
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = val1;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = val1;
     input_bits = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
     tmp4       = Party_CountOrder(PARTY_ORDER_FIELD);
     if ((input_bits & (PADLright | PADLleft)) && (g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A != 0)) {

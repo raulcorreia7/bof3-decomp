@@ -63,7 +63,7 @@ MATCH void func_801E0354(MenuPanelTask* task) {
     }
     UI_DrawSprite(task->pos.x, task->pos.y + 160, 5, 1);
     UI_DrawSprite(task->pos.x + 144, task->pos.y + 152, 0x22, 1);
-    if ((s16)task->unk_10 != 0) {
+    if ((s16)task->u.list.tabs != 0) {
         UI_DrawSprite(task->pos.x + 8, task->pos.y, 0x32, 1);
         UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x34, 1);
     }

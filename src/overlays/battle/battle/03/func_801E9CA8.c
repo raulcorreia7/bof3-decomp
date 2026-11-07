@@ -21,11 +21,11 @@ MATCH void func_801E9CA8(void) {
             slot       = p2->unk_0A;
         }
     }
-    p2->unk_14 = g_BattlePartyBattlers[slot].chr.hp;
-    p2->unk_1C = g_BattlePartyBattlers[p2->unk_0A].chr.stats.max_hp;
-    p2->flags  = 0;
-    p3         = g_MenuCurrentPanel;
-    slot       = p3->unk_0A;
+    p2->u.battle.hp     = g_BattlePartyBattlers[slot].chr.hp;
+    p2->u.battle.max_hp = g_BattlePartyBattlers[p2->unk_0A].chr.stats.max_hp;
+    p2->flags           = 0;
+    p3                  = g_MenuCurrentPanel;
+    slot                = p3->unk_0A;
     if (g_BattlePartyBattlers[slot].chr.stats.max_ap != 0) {
         p3->unk_0C = (g_BattlePartyBattlers[slot].chr.ap * 0x37) / g_BattlePartyBattlers[slot].chr.stats.max_ap;
         p4         = g_MenuCurrentPanel;
@@ -38,10 +38,10 @@ MATCH void func_801E9CA8(void) {
     } else {
         p3->unk_0C = 0;
     }
-    p4         = g_MenuCurrentPanel;
-    slot       = p4->unk_0A;
-    p4->unk_16 = g_BattlePartyBattlers[slot].chr.ap;
-    p4->unk_1E = g_BattlePartyBattlers[p4->unk_0A].chr.stats.max_ap;
-    p4->unk_0E = 0;
+    p4                  = g_MenuCurrentPanel;
+    slot                = p4->unk_0A;
+    p4->u.battle.ap     = g_BattlePartyBattlers[slot].chr.ap;
+    p4->u.battle.max_ap = g_BattlePartyBattlers[p4->unk_0A].chr.stats.max_ap;
+    p4->unk_0E          = 0;
     g_MenuCurrentPanel->state += 1;
 }

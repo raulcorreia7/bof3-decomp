@@ -29,7 +29,7 @@ MATCH void func_801D3174(void) {
     *step = mode;
     base  = step;
     base -= 8;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 =
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id =
         Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
     pad = g_InputPressed;
     /* FAKE: keeps the pad load ahead of the panel stores. */
@@ -41,7 +41,7 @@ MATCH void func_801D3174(void) {
     trigger                                         = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (trigger & PADLleft) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_10                      = 0x32;
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs                 = 0x32;
         s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = D_80148510;
         s_ChoiceMenuValues[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] =
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
@@ -54,7 +54,7 @@ MATCH void func_801D3174(void) {
         goto store_selection;
     }
     if (trigger & PADLright) {
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_10 = 0x31;
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs = 0x31;
         SND_PlayCue(EMI_CUE_ID(1, 1));
         s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = D_80148510;
         s_ChoiceMenuValues[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] =
@@ -76,14 +76,14 @@ MATCH void func_801D3174(void) {
             D_80148510 = old_cursor - 1;
         }
         if (D_80148510 < g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_12 = 0xF0;
+            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0xF0;
         }
     } else if (trigger & PADLdown) {
         if (old_cursor < 0x7F) {
             D_80148510 = old_cursor + 1;
         }
         if (D_80148510 >= g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_12 = 0x10;
+            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
         }
     } else if (trigger & 4) {
         u8 group = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;

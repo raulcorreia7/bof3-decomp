@@ -7,11 +7,11 @@ MATCH void func_801D2EAC(void) {
     u8  cursor;
 
     Menu_DrawClutStrip(D_80144953);
-    D_80148504.kind                                       = 0;
-    D_80148504.group_cursor                               = 0xFF;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active      = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B    = 0xFF;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = D_801ED618 + 0x13;
+    D_80148504.kind                                             = 0;
+    D_80148504.group_cursor                                     = 0xFF;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B          = 0xFF;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801ED618 + 0x13;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x =
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + D_801ED618 * 0x30;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y = g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;

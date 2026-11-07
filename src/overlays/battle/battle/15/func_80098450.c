@@ -32,13 +32,13 @@ MATCH void func_80098450(void) {
     trigger = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if ((trigger & PADLleft) != 0) {
         SND_PlayCue(EMI_CUE_ID(1, 1));
-        g_MenuPanelTasks[16].unk_10 = 0x32;
+        g_MenuPanelTasks[16].u.message.id = 0x32;
         D_8014857A -= 1;
         if ((s8)D_8014857A < 0) {
             g_MenuPanelTasks[16].unk_0A = 3;
         }
     } else if ((trigger & PADLright) != 0) {
-        g_MenuPanelTasks[16].unk_10 = 0x31;
+        g_MenuPanelTasks[16].u.message.id = 0x31;
         SND_PlayCue(EMI_CUE_ID(1, 1));
         D_8014857A += 1;
         if (D_8014857A >= 4u) {

@@ -9,7 +9,7 @@ MATCH void func_801D27CC(void) {
     Menu_DrawClutStrip(*panel_data);
     records = panel_data + 0x15;
     TEXT_SetVariable(0, 5, g_CharSlot[g_PartyFieldOrder[D_80148656]] * 0xA4 + records);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0x12;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
     if (D_80148654 == 0) {
         if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlayCue(EMI_CUE_ID(1, 6));
