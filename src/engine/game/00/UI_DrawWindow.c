@@ -18,10 +18,7 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
     texture_window->y = 240;
     texture_window->x = 0;
     setWH(texture_window, 16, 16);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, texture_window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1, 0xC);
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -47,11 +44,8 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
         primitive->y2 -= 4;
         primitive->v2 -= 4;
     }
-    primitive->clut = GetClut(clut_x, clut_y);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    primitive->tpage = 0xF;
+    primitive->clut  = GetClut(clut_x, clut_y);
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, 0x28);
     primitive++;
     if (width < 256) {
@@ -91,9 +85,6 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 style_flags, u
     texture_window->y = 0;
     texture_window->h = 256;
     texture_window->w = 256;
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0xF, texture_window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1, 0xC);
 }

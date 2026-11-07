@@ -4,11 +4,7 @@ MATCH void func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shad
     SPRT_8* sprite;
     s16     clut;
 
-    /* GetGraphType() is probed twice; the second result is unused. */
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    GFX_AddDrawMode(0xF);
+    GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     sprite = (SPRT_8*)g_GfxPrimCursor;
     SetSprt8(sprite);
     if ((shade_mode & BYTE_MASK) == 0) {
