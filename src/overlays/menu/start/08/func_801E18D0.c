@@ -52,19 +52,19 @@ MATCH void func_801E18D0(void) {
         SND_PlayCue(EMI_CUE_ID(1, 4));
         func_801E2668((u8)*mode, 0x70, 0x26);
         Menu_DrawCursorSprite(((*mode * 0x30) + 0x76) & 0xFFFE, 0x2A, 0);
-        D_80144950                        = 1;
-        g_InputMasks[INPUT_SLOT_ACTION]   = 0x43;
-        g_InputMasks[INPUT_SLOT_INTERACT] = 0x20;
-        g_InputMasks[INPUT_SLOT_6]        = 0x10;
-        g_InputMasks[INPUT_SLOT_MENU]     = 0x80;
-        g_InputMasks[INPUT_SLOT_LOOK]     = 8;
-        g_WindowStyle                     = 0;
-        D_80144953                        = 0;
-        g_SndMono                         = 0;
-        D_80144954                        = 0;
-        D_80144955                        = 0;
-        D_80144956                        = 0;
-        g_InputMasks[INPUT_SLOT_4]        = 4;
+        D_80144950                             = 1;
+        g_InputMasks[INPUT_SLOT_ACTION]        = PADRdown | PADL2 | PADR2;
+        g_InputMasks[INPUT_SLOT_INTERACT]      = PADRright;
+        g_InputMasks[INPUT_SLOT_FIELD_SKILL]   = PADRup;
+        g_InputMasks[INPUT_SLOT_MENU]          = PADRleft;
+        g_InputMasks[INPUT_SLOT_LOOK]          = PADR1;
+        g_WindowStyle                          = 0;
+        D_80144953                             = 0;
+        g_SndMono                              = 0;
+        D_80144954                             = 0;
+        D_80144955                             = 0;
+        D_80144956                             = 0;
+        g_InputMasks[INPUT_SLOT_SWITCH_LEADER] = PADL1;
         return;
     }
     if (g_GameEntryState == 2) {

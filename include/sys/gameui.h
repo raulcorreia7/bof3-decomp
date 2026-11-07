@@ -166,9 +166,9 @@ typedef enum InputSlot {
     INPUT_SLOT_INTERACT,
     INPUT_SLOT_MENU,
     INPUT_SLOT_LOOK,
-    INPUT_SLOT_4,
-    INPUT_SLOT_5,
-    INPUT_SLOT_6,
+    INPUT_SLOT_SWITCH_LEADER,
+    INPUT_SLOT_UNUSED, /* only the config screen touches it */
+    INPUT_SLOT_FIELD_SKILL,
     INPUT_SLOT_CONFIRM,
     INPUT_SLOT_CANCEL,
     INPUT_SLOT_COUNT
