@@ -82,6 +82,7 @@ MATCH void func_801F04D4(void) {
 INCLUDE_ASM(func_801F055C);
 
 /* blocker: source pointer register; first diff: lui a2 (retail) against lui a3 (candidate). */
+/* blocker: source pointer register; first diff: lui a2 (retail) against lui a3 (candidate). */
 INCLUDE_ASM(func_801F061C);
 
 INCLUDE_ASM(func_801F068C);

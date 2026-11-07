@@ -88,6 +88,7 @@ MATCH void func_801EF5D4(void) {
     }
 }
 
+/* blocker: the timer and battler branch layout differs; first diff: beqz v1 against the frame-parity branch at 0x801EF644. */
 INCLUDE_ASM(func_801EF61C);
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
