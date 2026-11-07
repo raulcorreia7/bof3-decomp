@@ -87,9 +87,6 @@ extern u8                           g_BattleEventSlots[];
 extern u8                           D_801EB5A8;
 extern u8                           D_801EB5B1[];
 extern u8*                          D_801EB5B4[];
-extern u8                           D_801EB631[];
-extern u8                           D_801EB710[];
-extern volatile u16                 D_801EB726[][140];
 /* D_801EBF08 */
 extern u8*                          g_BattleMessageSlot;
 extern u8                           D_801EC324;

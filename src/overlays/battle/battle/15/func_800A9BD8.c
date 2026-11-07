@@ -1,68 +1,72 @@
 #include "battle_15.h"
 
-/* Rescales one battler's panel: player slots defer to the player
- * panel routine; enemy slots scale their quotes and element gauges into the
- * enemy panel, mirror the panel bytes and apply the row's doubling and zeroing
- * flags.
+/* Rescales one battler's stats: player slots defer to the player
+ * stat routine; enemy slots scale their power, defense, agility and intellect and their
+ * reprisal, critical, evasion and accuracy from the base stats by the stat modifier bytes,
+ * copy the resistances and apply the row's doubling and zeroing flags.
  */
 MATCH void func_800A9BD8(u8 slot) {
     if (slot < BATTLE_PARTY_SLOT_COUNT) {
         func_800A9FC4((BattlePanelRecord*)&D_80145F04[slot * BATTLE_PARTY_STRIDE], slot);
     } else {
-        s32 row_offset;
-
         slot -= BATTLE_PARTY_SLOT_COUNT;
-        row_offset = slot * BATTLE_ENEMY_STRIDE;
 
-        /* Retail addresses every panel field from its own symbol plus the row
-         * offset; a typed row pointer moves the base into a register and does
-         * not reproduce the code. */
-        FIELD(u16, D_801EB6D4, row_offset + 0x00) = func_801DE0AC(
-            FIELD(u16, D_801EB6D4, row_offset + 0x20), (FIELD(s8, D_801EB6D4, row_offset + 0x64) * 2) + 0x64);
-        FIELD(u16, D_801EB6D4, row_offset + 0x02) = func_801DE0AC(
-            FIELD(u16, D_801EB6D4, row_offset + 0x22), (FIELD(s8, D_801EB6D4, row_offset + 0x65) * 2) + 0x64);
-        FIELD(u16, D_801EB6D4, row_offset + 0x04) = func_801DE0AC(
-            FIELD(u16, D_801EB6D4, row_offset + 0x24), (FIELD(s8, D_801EB6D4, row_offset + 0x66) * 2) + 0x64);
-        FIELD(u16, D_801EB6D4, row_offset + 0x06) = func_801DE0AC(
-            FIELD(u16, D_801EB6D4, row_offset + 0x26), (FIELD(s8, D_801EB6D4, row_offset + 0x67) * 2) + 0x64);
-        FIELD(u8, D_801EB6D4, row_offset + 0x15) = func_801DE144(FIELD(u8, D_801EB6D4, row_offset + 0x35),
-                                                                 (FIELD(s8, D_801EB6D4, row_offset + 0x68) * 2) + 0x64);
-        FIELD(u8, D_801EB6D4, row_offset + 0x16) = func_801DE144(FIELD(u8, D_801EB6D4, row_offset + 0x36),
-                                                                 (FIELD(s8, D_801EB6D4, row_offset + 0x69) * 2) + 0x64);
-        FIELD(u8, D_801EB6D4, row_offset + 0x17) = func_801DE144(FIELD(u8, D_801EB6D4, row_offset + 0x37),
-                                                                 (FIELD(s8, D_801EB6D4, row_offset + 0x6A) * 2) + 0x64);
-        FIELD(u8, D_801EB6D4, row_offset + 0x18) = func_801DE144(FIELD(u8, D_801EB6D4, row_offset + 0x38),
-                                                                 (FIELD(s8, D_801EB6D4, row_offset + 0x6B) * 2) + 0x64);
+        g_BattleEnemyBattlers[slot].stats.power = func_801DE0AC(
+            g_BattleEnemyBattlers[slot].base.power, (g_BattleEnemyBattlers[slot].stat_multipliers[0] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.defense = func_801DE0AC(
+            g_BattleEnemyBattlers[slot].base.defense, (g_BattleEnemyBattlers[slot].stat_multipliers[1] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.agility = func_801DE0AC(
+            g_BattleEnemyBattlers[slot].base.agility, (g_BattleEnemyBattlers[slot].stat_multipliers[2] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.intellect = func_801DE0AC(
+            g_BattleEnemyBattlers[slot].base.intellect, (g_BattleEnemyBattlers[slot].stat_multipliers[3] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.reprisal_chance =
+            func_801DE144(g_BattleEnemyBattlers[slot].base.reprisal_chance,
+                          (g_BattleEnemyBattlers[slot].stat_multipliers[4] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.critical_chance =
+            func_801DE144(g_BattleEnemyBattlers[slot].base.critical_chance,
+                          (g_BattleEnemyBattlers[slot].stat_multipliers[5] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.evasion = func_801DE144(
+            g_BattleEnemyBattlers[slot].base.evasion, (g_BattleEnemyBattlers[slot].stat_multipliers[6] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.accuracy = func_801DE144(
+            g_BattleEnemyBattlers[slot].base.accuracy, (g_BattleEnemyBattlers[slot].stat_multipliers[7] * 2) + 100);
 
-        FIELD(u8, D_801EB6D4, row_offset + 0x0B) = FIELD(u8, D_801EB6D4, row_offset + 0x2B);
-        FIELD(u8, D_801EB6D4, row_offset + 0x0C) = FIELD(u8, D_801EB6D4, row_offset + 0x2C);
-        FIELD(u8, D_801EB6D4, row_offset + 0x0D) = FIELD(u8, D_801EB6D4, row_offset + 0x2D);
-        FIELD(u8, D_801EB6D4, row_offset + 0x0E) = FIELD(u8, D_801EB6D4, row_offset + 0x2E);
-        FIELD(u8, D_801EB6D4, row_offset + 0x0F) = FIELD(u8, D_801EB6D4, row_offset + 0x2F);
-        FIELD(u8, D_801EB6D4, row_offset + 0x10) = FIELD(u8, D_801EB6D4, row_offset + 0x30);
-        FIELD(u8, D_801EB6D4, row_offset + 0x11) = FIELD(u8, D_801EB6D4, row_offset + 0x31);
-        FIELD(u8, D_801EB6D4, row_offset + 0x13) = FIELD(u8, D_801EB6D4, row_offset + 0x33);
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_FIRE] =
+            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FIRE];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_FROST] =
+            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FROST];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_ELECTRIC] =
+            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_ELECTRIC];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_EARTH] =
+            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_EARTH];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_WIND] =
+            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_WIND];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_HOLY] =
+            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_HOLY];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_PSIONIC] =
+            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_PSIONIC];
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_DEATH] =
+            g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_DEATH];
 
-        if (FIELD(u32, D_801EB6D4, row_offset + 0x60) & 0x4000) {
-            FIELD(u16, D_801EB6D4, row_offset + 0x00) = FIELD(u16, D_801EB6D4, row_offset + 0x00) * 3;
+        if (g_BattleEnemyBattlers[slot].turn.action_flags.value & 0x4000) {
+            g_BattleEnemyBattlers[slot].stats.power = g_BattleEnemyBattlers[slot].stats.power * 3;
         }
-        if (FIELD(u32, D_801EB6D4, row_offset + 0x60) & COMBATANT_FLAG_SELECTION_BONUS) {
+        if (g_BattleEnemyBattlers[slot].turn.action_flags.value & COMBATANT_FLAG_SELECTION_BONUS) {
             u16 total;
             u16 bonus;
 
-            total                                     = FIELD(u16, D_801EB6D4, row_offset + 0x00);
-            bonus                                     = FIELD(u16, D_801EB6D4, row_offset + 0x02);
-            FIELD(u16, D_801EB6D4, row_offset + 0x02) = 0;
-            FIELD(u16, D_801EB6D4, row_offset + 0x00) = total + bonus;
+            total                                     = g_BattleEnemyBattlers[slot].stats.power;
+            bonus                                     = g_BattleEnemyBattlers[slot].stats.defense;
+            g_BattleEnemyBattlers[slot].stats.defense = 0;
+            g_BattleEnemyBattlers[slot].stats.power   = total + bonus;
         }
-        FIELD(u16, D_801EB6D4, row_offset + 0x00) = func_801DE0AC(FIELD(u16, D_801EB6D4, row_offset + 0x00), 0x64);
-        FIELD(u16, D_801EB6D4, row_offset + 0x02) = func_801DE0AC(FIELD(u16, D_801EB6D4, row_offset + 0x02), 0x64);
+        g_BattleEnemyBattlers[slot].stats.power   = func_801DE0AC(g_BattleEnemyBattlers[slot].stats.power, 100);
+        g_BattleEnemyBattlers[slot].stats.defense = func_801DE0AC(g_BattleEnemyBattlers[slot].stats.defense, 100);
     }
 
     if (g_BattleEnemyBattlers[slot].turn.action_flags.value & COMBATANT_FLAG_HOLY_RESIST_ZERO) {
         g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_HOLY] = 0;
     }
     if (g_BattleEnemyBattlers[slot].turn.action_flags.value & COMBATANT_FLAG_FIRE_RESIST_ZERO) {
-        FIELD(u8, D_801EB6D4, slot * BATTLE_ENEMY_STRIDE + 0x0B) = 0;
+        g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_FIRE] = 0;
     }
 }

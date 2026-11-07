@@ -240,15 +240,75 @@ INCLUDE_ASM(func_801FD6F8);
 
 INCLUDE_ASM(func_801FD7F4);
 
-INCLUDE_ASM(func_801FD8F0);
+MATCH s32 func_801FD8F0(void) {
+    if (SYS_TestFlag(g_SceneFlags, 0x3D) == 0) {
+        Game_SetScriptActive();
+        g_SceneState.step_05  = 5;
+        g_SceneState.state_04 = 8;
+        return 1;
+    }
+    Game_SetScriptActive();
+    g_SceneState.step_05  = 0;
+    g_SceneState.state_04 = 8;
+    SYS_SetFlag(g_SceneFlags, 0x18);
+    return 1;
+}
 
-INCLUDE_ASM(func_801FD978);
+MATCH s32 func_801FD978(void) {
+    if (SYS_TestFlag(g_SceneFlags, 0x3D) == 0) {
+        Game_SetScriptActive();
+        g_SceneState.step_05  = 5;
+        g_SceneState.state_04 = 8;
+        return 1;
+    }
+    Game_SetScriptActive();
+    g_SceneState.step_05  = 1;
+    g_SceneState.state_04 = 8;
+    SYS_SetFlag(g_SceneFlags, 0x19);
+    return 1;
+}
 
-INCLUDE_ASM(func_801FDA04);
+MATCH s32 func_801FDA04(void) {
+    if (SYS_TestFlag(g_SceneFlags, 0x3D) == 0) {
+        Game_SetScriptActive();
+        g_SceneState.step_05  = 5;
+        g_SceneState.state_04 = 8;
+        return 1;
+    }
+    Game_SetScriptActive();
+    g_SceneState.step_05  = 2;
+    g_SceneState.state_04 = 8;
+    SYS_SetFlag(g_SceneFlags, 0x1A);
+    return 1;
+}
 
-INCLUDE_ASM(func_801FDA90);
+MATCH s32 func_801FDA90(void) {
+    if (SYS_TestFlag(g_SceneFlags, 0x3D) == 0) {
+        Game_SetScriptActive();
+        g_SceneState.step_05  = 5;
+        g_SceneState.state_04 = 8;
+        return 1;
+    }
+    Game_SetScriptActive();
+    g_SceneState.step_05  = 3;
+    g_SceneState.state_04 = 8;
+    SYS_SetFlag(g_SceneFlags, 0x1B);
+    return 1;
+}
 
-INCLUDE_ASM(func_801FDB1C);
+MATCH s32 func_801FDB1C(void) {
+    if (SYS_TestFlag(g_SceneFlags, 0x3D) == 0) {
+        Game_SetScriptActive();
+        g_SceneState.step_05  = 5;
+        g_SceneState.state_04 = 8;
+        return 1;
+    }
+    Game_SetScriptActive();
+    g_SceneState.step_05  = 4;
+    g_SceneState.state_04 = 8;
+    SYS_SetFlag(g_SceneFlags, 0x1C);
+    return 1;
+}
 
 MATCH s32 func_801FDBA8(void) {
     if (SYS_TestFlag(g_SceneFlags, 0x3D) == 0) {

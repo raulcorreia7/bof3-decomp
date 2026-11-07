@@ -30,7 +30,7 @@ MATCH void func_8009F0A4(void) {
                          (g_CharSlot[g_BattlePartyBattlers[slot].chr.character_id] * 0xA4));
     } else {
         row    = slot - 3;
-        action = *(u16*)((u8*)D_801EB6F4 + row * BATTLE_ENEMY_STRIDE);
+        action = g_BattleEnemyBattlers[row].base.power;
     }
     raw     = D_801EC310;
     shifted = raw >> 1;

@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-extern u16 D_801EB6D0[][0x8C];
-
 /* Shows the selected battler's damage step and adjusts the HP bar.
  */
 /* nonmatching unmeasured: tried the first draft rewritten with typed HP record views and flag checks. resume: close the
@@ -27,7 +25,7 @@ NON_MATCHING void func_8009E248(void) {
             if (g_BattleEnemyBattlers[enemy].turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
                 hp = 0;
             } else {
-                hp = D_801EB6C4[enemy][0];
+                hp = g_BattleEnemyBattlers[enemy].hp;
             }
         }
         hp_bar                          = hp / 5;
@@ -42,10 +40,12 @@ NON_MATCHING void func_8009E248(void) {
                           id);
         } else {
             enemy = id - 3;
-            if (D_801EB6D0[enemy][0] < D_801EB6C4[enemy][0] + hp_bar) {
+            if (g_BattleEnemyBattlers[enemy].stats.max_hp < g_BattleEnemyBattlers[enemy].hp + hp_bar) {
                 g_BattleAction->unk_08 |= 4;
             }
-            func_800AAC88((s16)-Char_AddPoints(&D_801EB37C[id][0], D_801EB6D0[enemy][0], hp_bar), id);
+            func_800AAC88((s16)-Char_AddPoints(&g_BattleEnemyBattlers[enemy].hp,
+                                               g_BattleEnemyBattlers[enemy].stats.max_hp, hp_bar),
+                          id);
         }
         g_BattleAction->unk_08 = 0;
         return;

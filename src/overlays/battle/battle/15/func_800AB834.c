@@ -20,6 +20,6 @@ MATCH void func_800AB834(void) {
          * stops fold from distributing (battler - 3) * 0x118, so the index is
          * subtracted before the multiply as in retail; found by trying rewrites; pure-C
          * best 94.55% (slot local), plain spelling 67.27%. */
-        SND_PlayCue(D_800B50EC[row][D_801EB721[((battler - 3) & 0xFFFFFFFFFFFFFFFFu) * 0x118]]);
+        SND_PlayCue(D_800B50EC[row][ENEMY_COMBATANT(battler).unk_F1]);
     }
 }
