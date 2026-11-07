@@ -89,8 +89,8 @@ MATCH void func_801DF3F8(void) {
     } else if ((g_BattleState & BATTLE_STATE_RELOAD_PARTY) && (g_GameState->turn.action_flags.value & 2)) {
         PartyBattler* work = g_Task;
 
-        s32 x = g_EncounterOriginX.fixed;
-        s32 y = g_EncounterOriginY.fixed;
+        s32 x = g_EncounterOriginX;
+        s32 y = g_EncounterOriginY;
 
         work->pos.x.fixed = x;
         work->pos.y.fixed = y;

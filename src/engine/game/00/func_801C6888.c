@@ -26,8 +26,7 @@ loop:
     if ((count & BYTE_MASK) < 3u) {
         goto loop;
     }
-    return (func_801C7824(COORD_INT(g_EncounterOriginX), COORD_INT(g_EncounterOriginY),
-                          COORD_INT(g_EncounterParty[entity_index & BYTE_MASK].x),
+    return (func_801C7824(D_80143F26, D_80143F2A, COORD_INT(g_EncounterParty[entity_index & BYTE_MASK].x),
                           COORD_INT(g_EncounterParty[entity_index & BYTE_MASK].y)) &
             0xFF) != 0;
 }

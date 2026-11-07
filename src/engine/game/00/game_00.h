@@ -263,6 +263,7 @@ extern s16                D_80143F16; /* 0x80143F16; signed high halfword of the
 extern s16                D_80143F1A; /* 0x80143F1A */
 extern volatile u8        g_GameRequestKind;
 extern s16                D_80143F22;
+extern s16                D_80143F26; /* integer half of g_EncounterOriginX */
 extern s16                D_80143F2A; /* integer half of g_EncounterOriginY */
 /* Scene step byte, countdown halfword and the slot index cached in the
  * scratchpad byte at 0x1F800000. The read-modify-write sites go through a

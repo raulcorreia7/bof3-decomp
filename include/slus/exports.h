@@ -84,8 +84,8 @@ typedef struct FormationPos {
     Coord y;
 } FormationPos;
 
-extern Coord          g_EncounterOriginX;
-extern Coord          g_EncounterOriginY;
+extern s32            g_EncounterOriginX;
+extern s32            g_EncounterOriginY;
 extern FormationPos   g_EncounterParty[3];
 /* D_80143F44 */
 extern u8             g_SysResetHoldFrames;

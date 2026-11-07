@@ -3815,8 +3815,8 @@ g_GameContextKind = { addr = 0x80143F1C, source = "func_801B6470 writes entry ki
 g_GameRequestKind = { addr = 0x80143F1D, source = "func_801A02E8 writes request kind, func_801971E8 reads it" }
 g_GameEntryMode = { addr = 0x80143F1E, source = "func_801971E8 selects the entry mode and func_80197378 passes it to UI_SetMode" }
 g_GamePrevSelection = { addr = 0x80143F1F, source = "func_80197378 compares the previous selection, func_801A0380 writes it" }
-g_EncounterOriginX = { addr = 0x80143F24, type = "Coord", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin x; func_801C6BB4 and func_801C6658 offset party start positions from it" }
-g_EncounterOriginY = { addr = 0x80143F28, type = "Coord", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin y; func_801C6BB4 and func_801C6658 offset party start positions from it" }
+g_EncounterOriginX = { addr = 0x80143F24, type = "s32", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin x; func_801C6BB4 and func_801C6658 offset party start positions from it" }
+g_EncounterOriginY = { addr = 0x80143F28, type = "s32", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin y; func_801C6BB4 and func_801C6658 offset party start positions from it" }
 g_EncounterParty = { addr = 0x80143F2C, type = "FormationPos", size = 0x18, source = "func_801BFE34 and func_801C6658 store one field-battle start position per party order slot; func_801C6888 and func_801C69C8 test them for overlap and height" }
 g_SysResetHoldFrames = { addr = 0x80143F44, source = "SYS_Main counts held reset-key frames until EMI_LoaderIsReady" }
 g_PartyX = { addr = 0x80143F7C, type = "s32", source = "func_8015C2D4 seeds the scene scroll from it game/00 func_801A8F94 writes it and func_801C5874 moves the player with it" }
