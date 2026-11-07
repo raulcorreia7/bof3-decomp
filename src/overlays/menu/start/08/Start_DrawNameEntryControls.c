@@ -1,5 +1,7 @@
 #include "start_08.h"
 
+void Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
+
 /* The commands the name entry screen labels, in D_801ED1B8 order. */
 #define NAME_ENTRY_COMMAND_COUNT 4
 

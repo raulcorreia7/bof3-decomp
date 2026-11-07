@@ -468,7 +468,6 @@ extern void func_801E6388(s32 overlay_x, s32 overlay_y);
 extern void Start_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y);
 /* func_801E6784 */
 extern s32  Start_DrawNameEntryControls(u8 page, s32 x, s32 y);
-void        Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 extern u8   func_801E715C(s32 range_low, s32 range_high, s32 draw_count);
 extern void func_801E7210(u32 panel_index);
 s32         func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record);
