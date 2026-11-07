@@ -195,6 +195,7 @@ typedef enum AreaWalkFlags {
 typedef enum FieldTaskMode {
     FIELD_TASK_MODE_LEADER_SWITCH   = 3,
     FIELD_TASK_MODE_MENU            = 4,
+    FIELD_TASK_MODE_CLIMB           = 8,
     FIELD_TASK_MODE_PERSONAL_ACTION = 0x0A,
 } FieldTaskMode;
 

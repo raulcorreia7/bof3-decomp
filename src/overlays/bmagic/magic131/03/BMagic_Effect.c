@@ -250,7 +250,17 @@ INCLUDE_ASM(func_801F1748);
 
 INCLUDE_ASM(func_801F1844);
 
-INCLUDE_ASM(func_801F1A58);
+MATCH u8 func_801F1A58(void) {
+    u8 i;
+
+    for (i = 0; i < 48; i++) {
+        if (!(D_801F1CA0[i].header.flags & 1)) {
+            D_801F1CA0[i].header.flags |= 1;
+            return i;
+        }
+    }
+    return GAME_NONE;
+}
 
 MATCH void func_801F1AC4(void) {
     D_801F24E0->header.flags = 0;
