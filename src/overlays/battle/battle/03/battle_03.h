@@ -555,11 +555,13 @@ extern void   func_801D2480(void);
 extern void   func_801D24D4(void);
 extern void   func_801D251C(void);
 extern void   func_801D25A0(void);
-extern void   func_801D2740(void);
+/* func_801D2740 */
+extern void   Battle_RunTurnSetup(void);
 extern void   func_801D277C(void);
 extern void   func_801D28E8(void);
 extern void   func_801D2A24(void);
-extern void   func_801D2AA8(void);
+/* func_801D2AA8 */
+extern void   Battle_RunTurns(void);
 extern void   func_801D2B1C(void);
 extern void   func_801D2B58(void);
 extern void   func_801D2FC0(void);
@@ -589,7 +591,8 @@ extern void   func_801D409C(void);
 extern void   func_801D42B4(void);
 extern void   func_801D43EC(void);
 void          func_801D4850(void);
-extern void   func_801D4AC0(void);
+/* func_801D4AC0 */
+extern void   Battle_RunRoundEnd(void);
 extern void   func_801D4AFC(void);
 extern void   func_801D4B38(void);
 void          func_801D4D44(void);
@@ -604,7 +607,8 @@ u8            func_801D5BC0(void);
 u8            func_801D5DCC(void);
 u8            func_801D64C4(u8 battler_index);
 extern void   func_801D656C(void);
-extern void   func_801D6774(void);
+/* func_801D6774 */
+extern void   Battle_RunResult(void);
 extern void   func_801D67B0(void);
 extern void   func_801D67EC(void);
 extern void   func_801D6818(void);
