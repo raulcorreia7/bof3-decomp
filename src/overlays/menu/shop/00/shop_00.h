@@ -103,7 +103,6 @@ enum {
 extern u8          g_SaveBuffer[];
 extern u8          D_80143BB4;
 extern u16         D_80144948;
-extern u8          D_80145F09[];
 extern u8          D_80145FCC[][BATTLE_PARTY_STRIDE];
 extern u8          D_80148331;
 extern u8          D_80148332;
