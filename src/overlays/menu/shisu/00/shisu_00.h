@@ -55,8 +55,16 @@ extern u8       MENU_CAPTION_GLYPH_2[];
 extern u8       MENU_CLOCK_CAPTION[];
 extern u8       MENU_COMMAND_FRAME[];
 extern u8       MENU_COMMAND_FRAME_SELECTED[];
-extern u8       D_801D9960[];
-extern u8       D_801D9978[];
+/* D_801D9960 */
+extern u8       g_MenuListTab2OffSprites[];
+/* D_801D9978 */
+extern u8       g_MenuListTab2OnSprites[];
+extern u8*      D_801C893C[];
+extern u8*      D_801C8950[];
+extern u8*      g_MenuInventoryTitles[5];
+extern char     g_MenuInventoryCountFormat[];
+extern u8       g_MenuInventoryTab1OffSprites[];
+extern u8       g_MenuInventoryTab1OnSprites[];
 extern u8       D_801D9990[];
 extern u8       D_801D999C[];
 extern u8       D_801D9A60[];
@@ -79,6 +87,10 @@ extern s32      D_801DA12C;
 
 void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+bool func_801AF494(u8 predicate_kind, u8 record_bit, u8 record_kind, u8 record_index);
+void func_801AF800(s16 record_x, s32 record_y, u8 record_kind, u8 record_mode, s32 record_index, s32 record_shade,
+                   s32 sprite_flag);
+void func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 extern void func_801D1D1C(void);
 extern void func_801D1E34(void);
 extern s32  func_801D2978(void);
