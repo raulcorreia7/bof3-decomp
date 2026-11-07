@@ -424,6 +424,7 @@ MATCH void func_801F9330(void) {
 
 INCLUDE_ASM(func_801F9338);
 
+/* m2c draft: 13 differing, size 0x84 against 0x88; the first difference is lui v1 at entry. */
 INCLUDE_ASM(func_801F97F8);
 
 INCLUDE_ASM(func_801F9880);
