@@ -1,22 +1,23 @@
 #include "game_00.h"
 
-MATCH bool func_801B5F68(s32 selection_kind) {
+/* func_801B5F68 */
+MATCH bool Game_RequestRockKick(s32 walk_speed) {
     s32 kind;
     s8  result;
 
     kind = g_GameState->leader_id;
-    if (kind != 3 && kind != 6)
+    if (kind != CHAR_ID_TEEPO && kind != CHAR_ID_PECO)
         return false;
     if (!(g_Task->direction_08 & 1))
         return false;
-    if ((selection_kind & BYTE_MASK) != 4)
+    if ((walk_speed & BYTE_MASK) != FIELD_SPEED_RUN)
         return false;
-    result = func_801B5AE4(selection_kind, kind);
+    result = Game_FindRockAhead(walk_speed, kind);
     if (result == -1)
         return false;
-    g_GameState->mode_12B.u8_value = 8;
+    g_GameState->mode_12B.u8_value = GAME_PANEL_MODE_PERSONAL_ACTION;
     g_Task->param.unk_0B           = result;
-    g_Task->header.mode            = 0x0A;
+    g_Task->header.mode            = FIELD_TASK_MODE_PERSONAL_ACTION;
     g_Task->header.step            = 1;
     g_Task->unk_03                 = 0;
     return true;
