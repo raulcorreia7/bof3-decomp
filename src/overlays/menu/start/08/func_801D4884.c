@@ -5,7 +5,7 @@ MATCH void func_801D4884(void) {
     u8  value;
 
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].handler = 6;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode    = 9;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode    = MENU_START_MODE_MESSAGE;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state   = 2;
     *ptr                                                   = 1;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x   = 0x14;
@@ -13,7 +13,7 @@ MATCH void func_801D4884(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10  = 0;
     ptr += 0x24;
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].handler = 6;
-    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].mode    = 0xD;
+    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].mode    = MENU_START_MODE_COMMANDS;
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state   = 2;
     *ptr                                                = 1;
     D_801484E6                                          = -0x14;
@@ -26,7 +26,7 @@ MATCH void func_801D4884(void) {
         byte                                               = 0xFF;
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B = byte;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].handler   = 6;
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].mode      = 0xC;
+        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].mode      = MENU_START_MODE_INVENTORY;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].state     = 2;
         ptr += 0x24;
         *ptr = 1;
@@ -37,7 +37,7 @@ MATCH void func_801D4884(void) {
     value                                                   = *s_ChoiceMenuValues;
     D_80148508                                              = -0xC8;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y          = 0x3E;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].mode    = 0xA;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].mode    = MENU_START_MODE_CURSOR_FRAME;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A         = 0;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_08         = 0;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_09         = 0;
@@ -49,7 +49,7 @@ MATCH void func_801D4884(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A  = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B  = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].handler       = 6;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].mode          = 0xE;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].mode          = MENU_START_MODE_CURSOR;
     D_80148627                                              = 0;
     /* FAKE: keep the updated record pointer for the final store. */
     MATCH_FAKE_OPAQUE(ptr);

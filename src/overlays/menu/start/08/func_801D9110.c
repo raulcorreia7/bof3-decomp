@@ -5,7 +5,7 @@ MATCH void func_801D9110(void) {
 
     panel          = &g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION];
     panel->handler = 6;
-    panel->mode    = 9;
+    panel->mode    = MENU_START_MODE_MESSAGE;
     panel->state   = 2;
     panel->active  = 1;
     panel++;
@@ -13,7 +13,7 @@ MATCH void func_801D9110(void) {
     D_801484C2                                            = -0x14;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10 = 0;
     panel->handler                                        = 6;
-    panel->mode                                           = 0xD;
+    panel->mode                                           = MENU_START_MODE_COMMANDS;
     panel->state                                          = 2;
     panel->active                                         = 1;
     panel += 4;
@@ -22,14 +22,14 @@ MATCH void func_801D9110(void) {
     D_801484EA          = 2;
     D_801484EB          = 0xFF;
     panel->handler      = 6;
-    panel->mode         = 0x11;
+    panel->mode         = MENU_START_MODE_ABILITIES;
     g_BattleChoicePhase = 2;
     panel->active       = 1;
     panel += 3;
     /* the slide x and the skill-order cells keep their own symbols: retail schedules each store separately */
     D_80148574     = 0x140;
     D_80148576     = 0x3E;
-    panel->mode    = 0xA;
+    panel->mode    = MENU_START_MODE_CURSOR_FRAME;
     D_8014857B     = 0;
     D_8014857A     = 0;
     D_8014857C     = 0xFF;

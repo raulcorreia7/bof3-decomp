@@ -12,7 +12,7 @@ NON_MATCHING void func_801D9748(void) {
     i                                                      = 0;
     rows                                                   = (MenuPanelTask*)(record + 0x120);
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].handler = 6;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode    = 9;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode    = MENU_START_MODE_MESSAGE;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state   = 2;
     record[0]                                              = 1;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x   = 0x14;
@@ -20,12 +20,12 @@ NON_MATCHING void func_801D9748(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].unk_10  = 0;
     while (i < 2) {
         rows[i].handler = 6;
-        rows[i].mode    = 0xA;
+        rows[i].mode    = MENU_START_MODE_CURSOR_FRAME;
         rows[i].active  = 0;
         rows[i].unk_0A  = 0;
         i++;
     }
-    g_MenuPanelTasks[18].mode                         = 0xD;
+    g_MenuPanelTasks[18].mode                         = MENU_START_MODE_COMMANDS;
     g_BattlePanelMode                                 = 2;
     D_801485B8                                        = 1;
     g_BattleItemRow                                   = 7;
@@ -34,7 +34,7 @@ NON_MATCHING void func_801D9748(void) {
     g_MenuPanelTasks[18].pos.y                        = -0x14;
     g_MenuPanelTasks[18].handler                      = 6;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].handler = 6;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].mode    = 0xE;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].mode    = MENU_START_MODE_CURSOR;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active  = 0;
     Menu_DrawClutStrip(D_80144953);
     D_801ED68C = 0;
