@@ -79,7 +79,7 @@
  * advances and its low six bits set the wave (also stored in the scratchpad
  * halfword at 0x1F800006), which moves unk_20 around unk_08 by 0x18 * sin;
  * unk_22 grows by unk_0A; unk_06 counts up and the step advances whenever the
- * count reaches pad_07. A statement macro: the member declares s32 wave, u16
+ * count reaches unk_07. A statement macro: the member declares s32 wave, u16
  * phase and u8 tick. The rsin argument keeps its (s16) truncation: the wave is
  * passed twice and the second, recomputed shift lands in the call's delay slot. */
 #define BMAGIC_SWAY_ADVANCE_WORK(WORK)                                                 \
@@ -91,7 +91,7 @@
     tick             = (WORK)->unk_06 + 1;                                             \
     (WORK)->unk_22   = (WORK)->unk_22 + (WORK)->unk_0A;                                \
     (WORK)->unk_06   = tick;                                                           \
-    if ((tick & 0xFF) == (WORK)->pad_07) {                                             \
+    if ((tick & 0xFF) == (WORK)->unk_07) {                                             \
         (WORK)->header.step += 1;                                                      \
     }
 
@@ -153,33 +153,40 @@ ASSERT_SIZE(BMagicEffectFuncs, 0x18);
 ASSERT_OFFSET(BMagicEffectFuncs, handlers, 0x00);
 
 /* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
- * func_801EF33C dispatches on mode. */
+ * func_801EF33C dispatches on mode. magic070-072 keep a pool of them, one
+ * record per sparkle. */
 typedef struct BMagicEffectWork {
-    /* 0x00 */ TaskHeader header;
-    /* 0x03 */ u8         unk_03;
-    /* 0x04 */ u8         unk_04;
-    /* 0x05 */ u8         timer_05;
-    /* 0x06 */ u8         unk_06;
-    /* 0x07 */ u8         pad_07;
-    /* 0x08 */ u16        unk_08;
-    /* 0x0A */ u16        unk_0A;
-    /* 0x0C */ u16        phase_0C;
-    /* 0x0E */ u8         pad_0E[0x12];
-    /* 0x20 */ s16        unk_20;
-    /* 0x22 */ u16        unk_22;
+    /* 0x00 */ TaskHeader    header;
+    /* 0x03 */ u8            unk_03;
+    /* 0x04 */ u8            unk_04;
+    /* 0x05 */ u8            timer_05;
+    /* 0x06 */ u8            unk_06;
+    /* 0x07 */ u8            unk_07;
+    /* 0x08 */ u16           unk_08;
+    /* 0x0A */ u16           unk_0A;
+    /* 0x0C */ u16           phase_0C;
+    /* 0x0E */ u8            pad_0E[6];
+    /* 0x14 */ WorldPos      pos;
+    /* 0x20 */ s16           unk_20;
+    /* 0x22 */ u16           unk_22;
+    /* 0x24 */ u8            pad_24[4];
+    /* 0x28 */ PartyBattler* battler;
 } BMagicEffectWork;
 
-ASSERT_SIZE(BMagicEffectWork, 0x24);
+ASSERT_SIZE(BMagicEffectWork, 0x2C);
 
 ASSERT_OFFSET(BMagicEffectWork, unk_03, 0x03);
 ASSERT_OFFSET(BMagicEffectWork, unk_04, 0x04);
 ASSERT_OFFSET(BMagicEffectWork, timer_05, 0x05);
 ASSERT_OFFSET(BMagicEffectWork, unk_06, 0x06);
+ASSERT_OFFSET(BMagicEffectWork, unk_07, 0x07);
 ASSERT_OFFSET(BMagicEffectWork, unk_08, 0x08);
 ASSERT_OFFSET(BMagicEffectWork, unk_0A, 0x0A);
 ASSERT_OFFSET(BMagicEffectWork, phase_0C, 0x0C);
+ASSERT_OFFSET(BMagicEffectWork, pos, 0x14);
 ASSERT_OFFSET(BMagicEffectWork, unk_20, 0x20);
 ASSERT_OFFSET(BMagicEffectWork, unk_22, 0x22);
+ASSERT_OFFSET(BMagicEffectWork, battler, 0x28);
 
 extern MagicModule       D_801EEC00;
 /* D_801EF3E8 (magic161), D_801EF414 (magic145), D_801EF420 (magic159), D_801EF510 (magic065), D_801EF658 (magic054),
