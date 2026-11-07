@@ -8,7 +8,7 @@ MATCH bool Char_RestoreHP(s32 character_index, s32 amount, s32 use_battle_copy) 
     if ((use_battle_copy & BYTE_MASK) == 0) {
         rec = &g_Characters[character_index & BYTE_MASK];
     } else {
-        rec = (Character*)&D_80145F04[(character_index & BYTE_MASK) * 0x140];
+        rec = &g_BattlePartyBattlers[character_index & BYTE_MASK].chr;
     }
     cur = rec->hp;
     if (cur == rec->stats.max_hp) {

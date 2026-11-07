@@ -23,6 +23,7 @@ MATCH void func_801DD8AC(u32 battler_index) {
         *MATCH_VOLATILE_PTR(u8, ((u8*)&g_Characters[0].willpower + character_offset)) =
             g_BattlePartyBattlers[battler_index].chr.willpower;
         /* FAKE: volatile-drop keeps the original load and store order. */
+        /* The chr.status view changes the schedule and size, so the flags keep the D_80145F10 address view. */
         flags                       = *MATCH_VOLATILE_PTR(u16, (D_80145F10 + off)) & 0x60A0u;
         *(u16*)((D_80145F10 + off)) = flags;
         *(u16*)((u8*)&g_Characters[0].status + character_offset) = flags;
