@@ -324,7 +324,28 @@ MATCH void func_801F1230(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801F1250);
+MATCH void func_801F1250(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+    s16     height;
+
+    PushMatrix();
+    rot.vz = 0;
+    rot.vy = 0;
+    rot.vx = 0;
+    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
+    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    height = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    pos.vz = -height / 2;
+    RotTransMatrix(&pos, matrix, &flags);
+    RotMatrix(&rot, &matrix);
+    MulMatrix2(&g_CameraMatrix, &matrix);
+    SetRotMatrix(&matrix);
+    SetTransMatrix(&matrix);
+}
+
 
 MATCH void func_801F131C(void) {
     SVECTOR pos;
