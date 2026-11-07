@@ -17,7 +17,6 @@ PSX_GCC=<path> picks the compiler binary. Run it as a script: `python -m` would 
 working directory, a build directory that changes with every object, on the import path.
 """
 
-import glob
 import os
 import re
 import shutil
@@ -89,6 +88,8 @@ def asm_dir(source, root=ROOT):
     elif parts[1] == "logo":
         target = "exe/logo"
     elif len(parts) >= 5:
+        import glob
+
         found = glob.glob(f"{root}/config/emi/*/{parts[-3]}/{parts[-2]}/splat.yaml")
         if len(found) != 1:
             return None
@@ -102,6 +103,32 @@ def asm_dir(source, root=ROOT):
 
 def run(argv, **kw):
     return subprocess.run(argv, check=False, **kw)
+
+
+def maspsx(args, text):
+    """Run maspsx's command line in this process; return its output, or None when it fails.
+
+    A second interpreter start costs more than maspsx's own work on a small source.
+    """
+    import importlib.util
+    import io
+
+    sys.path.insert(0, os.path.dirname(MASPSX))
+    spec = importlib.util.spec_from_file_location("maspsx_cli", MASPSX)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    saved = sys.argv, sys.stdin, sys.stdout
+    sys.argv = [MASPSX, *args]
+    sys.stdin = io.StringIO(text)
+    sys.stdout = out = io.StringIO()
+    try:
+        module.main()
+    except SystemExit as exc:
+        if exc.code:
+            return None
+    finally:
+        sys.argv, sys.stdin, sys.stdout = saved
+    return out.getvalue()
 
 
 def compile_one(plan, env, tmp, build_dir):
@@ -119,14 +146,13 @@ def compile_one(plan, env, tmp, build_dir):
     asm = f"{tmp}/cc1.s"
     if run([GCC, *gcc_args, "-S", "-o", asm, source], env=env).returncode:
         return 1
-    masp = [sys.executable, MASPSX, f"--aspsx-version={plan['version']}"]
+    masp = [f"--aspsx-version={plan['version']}"]
     if plan["div"]:
         masp.append("--expand-div")
     with open(asm, "rb") as fin:
-        done = run(masp, stdin=fin, stdout=subprocess.PIPE)
-    if done.returncode:
+        text = maspsx(masp, fin.read().decode("utf-8"))
+    if text is None:
         return 1
-    text = done.stdout.decode("utf-8")
     from psxdecomp.dmpsx import UnknownPlaceholder, rewrite_text
 
     try:
