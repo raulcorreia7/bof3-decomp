@@ -12,21 +12,7 @@
 #include "types.h"
 #include "game/records.h"
 
-#define SHOP_ITEM_REF_SIZE                           0x02
-
-/* Static record constructors, in field order. */
-#define SHOP_ITEM_REF(item_type, item_index)         {(item_type), (item_index)}
-
-/* Zero bytes are fixed shipped values, not constructor parameters.
- * Resource IDs are read as u16 by Item_GetDescription. */
-#define ITEM_OBJECT(name, flags, description, price) {name, (flags), 0, (description), (price)}
-#define VITAL_ITEM_OBJECT(name, description)         {name, (description), 0}
-#define WEAPON_OBJECT(name, equipability, flags, kind, element, weight, sound, power, description, price)     \
-    {name, (equipability), (flags), (kind), (element), (weight), (sound), (power), 0, (description), (price)}
-#define ARMOR_OBJECT(name, equipability, flags, equip_type, weight, power, description, price)  \
-    {name, (equipability), (flags), (equip_type), (weight), (power), 0, (description), (price)}
-#define ACCESSORY_OBJECT(name, equipability, flags, kind, weight, description, price) \
-    {name, (equipability), (flags), (kind), (weight), (description), (price)}
+#define SHOP_ITEM_REF_SIZE 0x02
 
 /* Item flags: what the menu offers and how the battle selector targets the
  * item. */
@@ -62,7 +48,7 @@ typedef enum ItemCategory {
 typedef struct VitalItem {
     u8  name[ITEM_NAME_LENGTH];
     u16 description; /* Item_GetDescription, category ITEM_CAT_VITAL */
-    u16 unk_0E;
+    u16 pad_0E;
 } VitalItem;
 
 ASSERT_OFFSET(VitalItem, description, 0x0C);
@@ -99,7 +85,7 @@ typedef struct Weapon {
     u8         weight;
     u8         sound; /* cue-table index in battle/battle/15 func_800AB834 and func_800AB910 */
     u8         power;
-    u8         unk_13;
+    u8         pad_13;
     u16        description; /* Item_GetDescription, category ITEM_CAT_WEAPON */
     u16        price;
 } Weapon;
@@ -117,7 +103,7 @@ typedef struct Armor {
     u8         equip_type; /* ArmorType */
     u8         weight;
     u8         power;
-    u8         unk_11;
+    u8         pad_11;
     u16        description; /* Item_GetDescription, category ITEM_CAT_ARMOR */
     u16        price;
 } Armor;

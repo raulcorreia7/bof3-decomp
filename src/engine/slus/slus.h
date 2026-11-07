@@ -47,10 +47,9 @@
 /* The tone a cue reader looked up last: D_8018B40C is the tone's offset inside
  * the VAB header at `vab_header` (one of the words D_80148A18-D_80148A30). */
 #define CUE_TONE(vab_header)  ((VagAtr*)(D_8018B40C + (vab_header)))
-#define ENCOUNTER_ZONE(x0, y0, x1, y1, rate, kind, seed, pick) {(x0), (y0), (x1), (y1), (rate), (kind), (seed), (pick)}
-#define g_GameState                                            ((PartyBattler*)g_GameState)
-#define g_SceneRecord                                          (*(RecordKey*)&g_SceneState)
-#define g_CurrentActor                                         ((u8*)g_CurrentActor)
+#define g_GameState           ((PartyBattler*)g_GameState)
+#define g_SceneRecord         (*(RecordKey*)&g_SceneState)
+#define g_CurrentActor        ((u8*)g_CurrentActor)
 
 /* Store the row entry the menu selection picks and latch the delay it selects.
  * Kept: as an inline the row literal folds into `addiu` where retail shifts
