@@ -9,8 +9,6 @@
 /* The four script variable bytes read as one word. */
 #define g_ScriptVarsWord (*(s32*)&g_ScriptVars)
 
-extern u16 g_GameAreaId;
-
 extern s32 D_80145EC4;
 
 extern u8 D_80146865;
