@@ -129,7 +129,7 @@ s32   func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* positi
 /* func_801AFE18 */
 void* Area_SetCameraMatrix(void* out_matrix);
 /* func_801AFF04 */
-void  Area_ProjectPoint(s32* pos, s16* screen_xy);
+void  Area_ProjectPoint(s32* pos, long* screen_xy);
 /* func_801AFF64 */
 void  Matrix_SetIdentity(MATRIX* matrix);
 /* func_801AFFD8 */

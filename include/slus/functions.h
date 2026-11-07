@@ -447,8 +447,9 @@ s32         Item_GetDescription(s32 category, s32 item_id);
 u8*         Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
 u8*         Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
-#define GAME_PALETTE_STAGE  0x80035600u /* 0x40-byte palette staging entries; GFX_StagePalette copies them out */
-#define GAME_PALETTE_MIRROR 0x80039600u /* GAME_PALETTE_STAGE + 0x4000, GFX_StagePalette's second copy */
+#define GAME_PALETTE_STAGE                                                                             \
+    MEM_PTR(u8, 0x80035600u) /* 0x40-byte palette staging entries; GFX_StagePalette copies them out */
+#define GAME_PALETTE_MIRROR MEM_PTR(u8, 0x80039600u) /* GAME_PALETTE_STAGE + 0x4000, GFX_StagePalette's second copy */
 /* func_80166C48 */
 void       GFX_StagePalette(u32 address, s32 field);
 /* func_80166CB0 */
