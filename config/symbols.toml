@@ -1896,6 +1896,7 @@ Char_GetExpProgress = { addr = 0x801D5FF4, type = "func", source = "Returns how 
 Menu_DrawHeaderBar = { addr = 0x801D6090, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
 Menu_DrawRowIcons = { addr = 0x801D6E38, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
 Menu_DrawEquipStatWindow = { addr = 0x801D6EF0, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
+Menu_DrawClutStrip = { addr = 0x801D7224, type = "func", source = "Draws the five-row CLUT strip of 0x20-wide sprite cells; the shared body with the shop and start overlays, bound to the shisu tables." }
 Menu_DrawFilledPanel = { addr = 0x801D7418, type = "func", source = "Draws a filled menu panel at x, y of width and height cells: the window body and its tiled 8-pixel border sprites." }
 Menu_DrawWindowFrame = { addr = 0x801D76F4, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
 Menu_DrawPanelFrame = { addr = 0x801D8850, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
@@ -1927,6 +1928,9 @@ MENU_CAPTION_ICON = { addr = 0x801D9BD8, source = "Icon and label record drawn a
 MENU_CLOCK_COLON = { addr = 0x801D9BDC, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
 g_MenuCommandLabels = { addr = 0x801D9C8C, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
 g_MenuCommandRows = { addr = 0x801D9CE8, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+MENU_CLUT_STRIP_CELLS = { addr = 0x801D9D4C, source = "Cell rectangles that Menu_DrawClutStrip draws, indexed by the strip entry." }
+MENU_CLUT_STRIP_ENTRIES = { addr = 0x801D9DF8, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
+MENU_CLUT_STRIP_PALETTES = { addr = 0x801D9E44, source = "Entry offset of each clut strip palette, indexed by the clut index." }
 g_MenuStatusItems = { addr = 0x801DA028, type = "MenuStatusItems", size = 0xC, source = "Item ids the status menu counts into held[] (four items) and passes to Item_Remove when one is used." }
 D_801DA0B4 = { addr = 0x801DA0B4, source = "func_801D2C50 increments this word by 0x20" }
 D_801DA12C = { addr = 0x801DA12C, source = "func_801D2DEC decrements and func_801D2F68 increments this word by 0x20" }
