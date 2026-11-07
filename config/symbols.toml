@@ -3,6 +3,10 @@
 # reads. Every other symbol file is generated from this file.
 
 ["emi/battle/battle/03"]
+Battle_RunTurnSetup = { addr = 0x801D2740, type = "func", source = "Battle mode 2: runs the g_BattleStep handler of the turn setup (builds the turn order, announces the enemies, waits for the loader and enters mode 3)." }
+Battle_RunTurns = { addr = 0x801D2AA8, type = "func", source = "Battle mode 3: runs the g_BattleStep handler of the battlers' turns, and clears BATTLE_STATE_COMMAND_ARMED while the cancel button is held." }
+Battle_RunRoundEnd = { addr = 0x801D4AC0, type = "func", source = "Battle mode 4: runs the g_BattleStep handler that closes a round; the last one enters mode 5 once g_BattleResult is set and otherwise returns to mode 1." }
+Battle_RunResult = { addr = 0x801D6774, type = "func", source = "Battle mode 5: runs the g_BattleStep handler of the battle result." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_RunEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Battle_TestAICondition = { addr = 0x8009BBE8, type = "func", source = "Tests an enemy AI condition." }
 g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, alias = true }
