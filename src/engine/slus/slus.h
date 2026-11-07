@@ -887,6 +887,7 @@ extern u8                    D_801C9E88[];
 extern u8                    D_801C9E8C;
 extern BattleAbilityCategory D_801CA719[];
 extern u8                    D_801CA71A[];
+/* Ability elements and flags share a 16-bit mask in this image. */
 extern u16                   D_801CA71C;
 /* The scratchpad work cell. Not volatile: 37 matched SLUS readers keep the
  * pointer in a register across a block (func_8015AD00 at +0xBC), and a volatile
