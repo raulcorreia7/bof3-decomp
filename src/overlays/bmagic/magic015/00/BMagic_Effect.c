@@ -91,6 +91,7 @@ MATCH void func_801EFD7C(void) {
     }
 }
 
+/* blocker: the halfword at +0x3E (the z-span halfword, upper half of pos.z) has no PartyBattler member; needs: type. */
 INCLUDE_ASM(func_801EFDE8);
 
 MATCH void func_801EFE84(void) {
