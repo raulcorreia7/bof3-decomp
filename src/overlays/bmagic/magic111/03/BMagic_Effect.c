@@ -58,8 +58,6 @@ MATCH void func_801EF138(void) {
     func_801E5988();
 }
 
-<<<<<<< HEAD
-
 MATCH void func_801EF158(void) {
     SYS_DISPATCH_BYTE(D_801EFAA8, g_Task->header.step);
     if (g_Task->header.flags != 0) {
@@ -69,14 +67,6 @@ MATCH void func_801EF158(void) {
     }
 }
 
-||||||| 835a05a70
-
-INCLUDE_ASM(func_801EF158);
-=======
-
-/* blocker: the step table D_801EFAA8 (Callback per header.step) has no symbol row in this image; needs: type. */
-INCLUDE_ASM(func_801EF158);
->>>>>>> public/main
 
 MATCH void func_801EF1D4(void) {
     s32 start;
