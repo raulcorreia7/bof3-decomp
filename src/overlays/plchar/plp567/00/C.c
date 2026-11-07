@@ -48,13 +48,13 @@ MATCH void func_801CEC70(void) {
     SYS_DISPATCH_TASK(D_801D07B8, 3, g_Task);
 }
 
-#include "overlays/plchar/Char_TurnAndRequestScript.h"
+#include "overlays/plchar/Char_FaceFreeDirection.h"
 
 INCLUDE_ASM(func_801CEDB4);
 
 #include "overlays/plchar/Char_AdvancePaletteScript.h"
 
-#include "overlays/plchar/Char_SelectScriptAndStep.h"
+#include "overlays/plchar/Char_StartFacingScript.h"
 
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
