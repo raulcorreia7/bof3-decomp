@@ -1,10 +1,5 @@
 #include "area141_13.h"
 
-extern u8 D_801F4DDC[];
-
-void func_801A65A0(u8* script);
-void Actor_BeginScript(s32 raw_selector, s32 raw_code);
-
 MATCH void func_801F4400(void) {
     s32 first;
     s32 second;

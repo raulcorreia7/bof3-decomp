@@ -8,6 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC70);
 
+/* blocker: four byte stores to D_80145BD6..D_80145BD8 at a stride of 12 indexed by byte 0x0A, and those game-side tables have no declared record type. */
 INCLUDE_ASM(func_801EEDE0);
 
 INCLUDE_ASM(func_801EEEB0);

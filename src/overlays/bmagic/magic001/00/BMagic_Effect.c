@@ -18,6 +18,7 @@ MATCH void func_801EEFD8(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
+/* blocker: copies 0x2C bytes from D_801EEC10 as an unrolled 16-byte loop plus a 12-byte tail, and no struct of that size is typed for it yet. */
 INCLUDE_ASM(func_801EF01C);
 
 MATCH void func_801EF0E8(void) {

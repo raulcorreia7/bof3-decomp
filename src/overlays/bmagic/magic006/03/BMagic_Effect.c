@@ -16,7 +16,20 @@ MATCH void func_801EEE04(void) {
     SYS_DISPATCH_BYTE(g_BMagicEffectModes, g_Task->header.mode);
 }
 
-INCLUDE_ASM(func_801EEE48);
+MATCH void func_801EEE48(void) {
+    BMagicEffectFuncs handlers;
+
+    handlers = D_801EEC04;
+    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        func_800AF764();
+        if (g_Task->param.unk_0B != 0) {
+            func_801EFB6C();
+        } else {
+            func_801EF478();
+        }
+    }
+}
 
 MATCH void func_801EEF28(void) {
     PartyBattler* battler;
