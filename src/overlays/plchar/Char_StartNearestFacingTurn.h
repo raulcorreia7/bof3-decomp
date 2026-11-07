@@ -19,11 +19,11 @@ MATCH void Char_StartNearestFacingTurn(void) {
         to_away = g_Task->direction_08 - 5;
         to_away = ABS(to_away);
         if (to_away < to_back) {
-            g_Task->param.unk_0B = func_801B2D00(5);
-            g_Task->unk_03       = 5;
+            g_Task->param.turn_step = func_801B2D00(5);
+            g_Task->unk_03          = 5;
         } else {
-            g_Task->param.unk_0B = func_801B2D00(3);
-            g_Task->unk_03       = 3;
+            g_Task->param.turn_step = func_801B2D00(3);
+            g_Task->unk_03          = 3;
         }
         g_Task->unk_09 = 2;
         g_Task->header.step++;
