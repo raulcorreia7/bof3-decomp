@@ -3,13 +3,13 @@
 MATCH void func_801F2D68(void) {
     s32 result;
 
-    if (!(g_Task->unk_09 & 7)) {
+    if (!(g_Task->timer & 7)) {
         result = func_801F2E88();
         if (result != 0) {
             func_801F3378(result);
         }
     }
-    g_Task->unk_09 += 1;
+    g_Task->timer += 1;
     if (g_Task->unk_06 != 0) {
         func_801F2EC4();
     }

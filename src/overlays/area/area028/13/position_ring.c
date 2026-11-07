@@ -162,12 +162,12 @@ MATCH void func_801F2C80(void) {
         g_Task->header.mode += 1u;
         return;
     }
-    func_801F318C(g_Task->unk_2E);
+    func_801F318C(g_Task->screen_x);
     func_801F3060();
-    next           = (g_Task->unk_2E + 0x40u);
-    g_Task->unk_2E = next;
+    next             = (g_Task->screen_x + 0x40u);
+    g_Task->screen_x = next;
     if ((s16)next >= 0x400) {
-        g_Task->unk_2E = 0x400;
+        g_Task->screen_x = 0x400;
     }
 }
 

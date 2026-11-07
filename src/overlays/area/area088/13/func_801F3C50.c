@@ -51,7 +51,7 @@ found:
     scratch->scale.y = window_span;
     scratch->unk_48  = window;
     scratch          = g_Task;
-    scratch->unk_09  = 8;
+    scratch->timer   = 8;
     mode             = D_801F5902[i];
     goto tail;
 
@@ -69,7 +69,7 @@ arm:
     window           = 2;
     scratch->unk_48  = window;
     scratch          = g_Task;
-    scratch->unk_09  = 8;
+    scratch->timer   = 8;
 tail:
     Actor_SelectScript(mode);
 

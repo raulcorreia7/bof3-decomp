@@ -13,23 +13,23 @@ MATCH void func_801F6F40(void) {
 MATCH void func_801F6F7C(void) {
     Actor* work;
 
-    work         = (Actor*)g_Task;
-    work->unk_2E = 640;
-    work->unk_30 = 1536;
-    work->unk_09 = 0;
+    work           = (Actor*)g_Task;
+    work->screen_x = 640;
+    work->screen_y = 1536;
+    work->timer    = 0;
     Area_ClearWorkColumn();
     ((Actor*)g_Task)->header.mode = ((Actor*)g_Task)->header.mode + 1;
 }
 
 MATCH void func_801F6FCC(void) {
-    func_801F71B0(g_Task->unk_09);
+    func_801F71B0(g_Task->timer);
     if (g_FrameCount & 1) {
         func_801F75D8();
     }
     func_801F7748();
-    g_Task->unk_09 = ((Actor*)g_Task)->unk_09 + 4;
-    if (g_Task->unk_09 == 0) {
-        g_Task->unk_09      = 0x20;
+    g_Task->timer = ((Actor*)g_Task)->timer + 4;
+    if (g_Task->timer == 0) {
+        g_Task->timer       = 0x20;
         g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
     }
 }
@@ -41,16 +41,16 @@ MATCH void func_801F7078(void) {
     }
     func_801F7748();
     if (g_ScriptVars[0] == 0x1F) {
-        g_Task->unk_09      = 0xFC;
+        g_Task->timer       = 0xFC;
         g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
     }
 }
 
 MATCH void func_801F7100(void) {
-    func_801F71B0(g_Task->unk_09);
+    func_801F71B0(g_Task->timer);
     func_801F7748();
-    g_Task->unk_09 = ((Actor*)g_Task)->unk_09 - 4;
-    if (g_Task->unk_09 == 0) {
+    g_Task->timer = ((Actor*)g_Task)->timer - 4;
+    if (g_Task->timer == 0) {
         g_Task->header.mode = ((Actor*)g_Task)->header.mode + 1;
     }
 }
@@ -250,7 +250,7 @@ MATCH void func_801F8EA8(void) {
     Area_SetCameraMatrix(&matrix);
     work = g_Task;
     func_801F92F0(&work->pos.x, &work->vx);
-    g_Task->unk_09      = 8;
+    g_Task->timer       = 8;
     g_Task->header.mode = g_Task->header.mode + 1;
     if (!(g_Task->param.unk_0B & 2)) {
         cue = 0x203;

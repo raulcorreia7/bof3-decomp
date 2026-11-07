@@ -96,8 +96,8 @@ MATCH void func_801B146C(void) {
         if (world_flags & 0x20) {
             g_AreaWalkFlags = world_flags ^ 0x20;
             func_801C24D0();
-            work_j         = g_Task;
-            work_j->unk_09 = (work_j->unk_09 - 1);
+            work_j        = g_Task;
+            work_j->timer = (work_j->timer - 1);
             func_801B0DFC();
             g_Task->header.step = 2;
             goto block_end; /* leave the frame flags alone */

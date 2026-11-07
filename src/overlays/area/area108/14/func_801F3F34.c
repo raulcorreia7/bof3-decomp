@@ -3,16 +3,16 @@
 MATCH void func_801F3F34(void) {
     Actor* actor;
 
-    g_Task->unk_09++;
+    g_Task->timer++;
     actor = g_Task;
-    if (actor->unk_09 == 1) {
+    if (actor->timer == 1) {
         Area_SetCellPalette((s16)(COORD_INT(actor->pos.x) + 1), COORD_INT(actor->pos.y));
     }
     actor = g_Task;
-    if (actor->unk_09 == 5) {
+    if (actor->timer == 5) {
         Area_SetCellPalette(COORD_INT(actor->pos.x), COORD_INT(actor->pos.y));
     }
-    if (g_Task->unk_09 == 0xF) {
+    if (g_Task->timer == 0xF) {
         SYS_ClearFlag(g_SceneEventFlags, 0x1C);
         Actor_Clear();
     }

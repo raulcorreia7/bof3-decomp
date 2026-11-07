@@ -18,7 +18,7 @@ MATCH u32 func_801A06D8(void) {
                 continue;
             }
             SP_REF(s8, 0x3) = 0;
-            if (row->unk_09 == 0 && (g_Actors[i].interaction_flags & ACTOR_FLAG_SCRIPT_PENDING)) {
+            if (row->timer == 0 && (g_Actors[i].interaction_flags & ACTOR_FLAG_SCRIPT_PENDING)) {
                 if (g_Actors[i].interaction_flags & ACTOR_FLAG_SCRIPT_REQUEST) {
                     if ((s8)func_801A17A0(&g_Actors[i].interaction_flags) &&
                         !(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
@@ -39,7 +39,7 @@ MATCH u32 func_801A06D8(void) {
             } else if (g_CurrentActor->interaction_flags & ACTOR_FLAG_INTERACTION_PENDING) {
                 func_801A3A08();
                 continue;
-            } else if (g_Actors[i].roll_90 >= 0x1F && g_Task->unk_09 == 0) {
+            } else if (g_Actors[i].roll_90 >= 0x1F && g_Task->timer == 0) {
                 func_801A27C4(&g_Actors[i]);
             } else {
                 D_801C83D8[g_Task->header.mode](&g_Actors[i]);

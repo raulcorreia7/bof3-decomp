@@ -2,9 +2,9 @@
 #include "work/area_spad.h"
 
 MATCH void func_801F2D38(void) {
-    g_Task->unk_09++;
+    g_Task->timer++;
     if (g_AreaSceneMode == 0) {
         Actor_Clear();
     }
-    func_801F2D9C(g_Task->unk_09);
+    func_801F2D9C(g_Task->timer);
 }

@@ -23,8 +23,8 @@ MATCH void func_801BD5A4(void) {
                 ids                                             = (u8*)g_GameState;
                 g_ActorSlots[tail->param.unk_0B].scene_step     = 0;
                 g_ActorSlots[tail->param.unk_0B].selection      = D_80181B28[ids[0x79]];
-                g_ActorSlots[tail->param.unk_0B].unk_2E         = tail->unk_2E;
-                g_ActorSlots[tail->param.unk_0B].unk_30         = tail->unk_30;
+                g_ActorSlots[tail->param.unk_0B].unk_2E         = tail->screen_x;
+                g_ActorSlots[tail->param.unk_0B].unk_30         = tail->screen_y;
                 tail->header.step                               = 2;
             } else {
                 ACTOR_CLEAR_STEP();

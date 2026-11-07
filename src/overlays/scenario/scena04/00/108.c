@@ -26,7 +26,7 @@ MATCH void func_801F6D44(void) {
     work->pos.x.fixed      = 0x4000;
     work->pos.y.fixed      = 0x2200000;
     func_801F747C();
-    g_Task->unk_09 = 8;
+    g_Task->timer = 8;
     g_Task->header.mode += 1;
 }
 
@@ -41,11 +41,11 @@ MATCH void func_801F6EA4(void) {
     work = g_Task;
     func_801F7084(&work->vx);
     func_801F75BC(0x10, 0xFF);
-    actor         = g_Task;
-    mode          = actor->unk_09 - 1;
-    actor->unk_09 = mode;
+    actor        = g_Task;
+    mode         = actor->timer - 1;
+    actor->timer = mode;
     if (mode == 0) {
-        g_Task->unk_09 = 4;
+        g_Task->timer = 4;
         g_Task->header.mode += 1;
     }
 }
@@ -58,8 +58,8 @@ MATCH void func_801F6FF8(void) {
 
     func_801F7084(&g_Task->vx);
     work = g_Task;
-    work->unk_09--;
-    if (work->unk_09 == 0) {
+    work->timer--;
+    if (work->timer == 0) {
         g_Task->header.mode++;
     }
 }

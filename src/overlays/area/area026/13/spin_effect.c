@@ -370,7 +370,7 @@ MATCH void func_801F2C48(void) {
     v0           = work->pos.x.fixed;
     v1           = work->pos.y.fixed;
     v2           = work->pos.z.fixed;
-    work->unk_09 = 0xA;
+    work->timer  = 0xA;
     work2        = (Actor*)g_Task;
     work->unk_1C = 0;
     work->vx     = v0;
@@ -391,8 +391,8 @@ MATCH void func_801F2C94(void) {
     func_801F2D5C(&work->vx, work->unk_1C);
     work2 = (Actor*)g_Task;
     work->unk_1C += 0x1199;
-    count         = (work2->unk_09 - 1);
-    work2->unk_09 = count;
+    count        = (work2->timer - 1);
+    work2->timer = count;
     if (count == 0) {
         SND_PlayCue(EMI_CUE_ID(2, 13));
         work3 = (Actor*)g_Task;
